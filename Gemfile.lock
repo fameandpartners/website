@@ -40,15 +40,15 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: b344986bc3d94ca7821fc5e0eef1874882ac6cbb
+  revision: d94d77c55c59f861201ac42f991ede0ff31481d5
   branch: 3-2-stable
   specs:
-    actionmailer (3.2.21)
-      actionpack (= 3.2.21)
+    actionmailer (3.2.22)
+      actionpack (= 3.2.22)
       mail (~> 2.5.4)
-    actionpack (3.2.21)
-      activemodel (= 3.2.21)
-      activesupport (= 3.2.21)
+    actionpack (3.2.22)
+      activemodel (= 3.2.22)
+      activesupport (= 3.2.22)
       builder (~> 3.0.0)
       erubis (~> 2.7.0)
       journey (~> 1.0.4)
@@ -56,31 +56,31 @@ GIT
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
-    activemodel (3.2.21)
-      activesupport (= 3.2.21)
+    activemodel (3.2.22)
+      activesupport (= 3.2.22)
       builder (~> 3.0.0)
-    activerecord (3.2.21)
-      activemodel (= 3.2.21)
-      activesupport (= 3.2.21)
+    activerecord (3.2.22)
+      activemodel (= 3.2.22)
+      activesupport (= 3.2.22)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activeresource (3.2.21)
-      activemodel (= 3.2.21)
-      activesupport (= 3.2.21)
-    activesupport (3.2.21)
+    activeresource (3.2.22)
+      activemodel (= 3.2.22)
+      activesupport (= 3.2.22)
+    activesupport (3.2.22)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
-    rails (3.2.21)
-      actionmailer (= 3.2.21)
-      actionpack (= 3.2.21)
-      activerecord (= 3.2.21)
-      activeresource (= 3.2.21)
-      activesupport (= 3.2.21)
+    rails (3.2.22)
+      actionmailer (= 3.2.22)
+      actionpack (= 3.2.22)
+      activerecord (= 3.2.22)
+      activeresource (= 3.2.22)
+      activesupport (= 3.2.22)
       bundler (~> 1.0)
-      railties (= 3.2.21)
-    railties (3.2.21)
-      actionpack (= 3.2.21)
-      activesupport (= 3.2.21)
+      railties (= 3.2.22)
+    railties (3.2.22)
+      actionpack (= 3.2.22)
+      activesupport (= 3.2.22)
       rack-ssl (~> 1.3.2)
       rake (>= 0.8.7)
       rdoc (~> 3.4)
@@ -171,6 +171,15 @@ GIT
       tilt
 
 PATH
+  remote: ./spree_masterpass
+  specs:
+    spree_masterpass (0.1.0)
+      mastercard_api
+      mastercard_masterpass_api
+      mumboe-soap4r
+      spree_core (~> 1.3.6.beta)
+
+PATH
   remote: engines
   specs:
     admin_ui (0.0.1)
@@ -200,7 +209,7 @@ GEM
       actionpack
     active_model_serializers (0.9.3)
       activemodel (>= 3.2)
-    activemerchant (1.49.0)
+    activemerchant (1.52.0)
       activesupport (>= 3.2.14, < 5.0.0)
       builder (>= 2.1.2, < 4.0.0)
       i18n (>= 0.6.9)
@@ -226,9 +235,9 @@ GEM
     awesome_nested_set (2.1.5)
       activerecord (>= 3.0.0)
     awesome_print (1.6.1)
-    aws-sdk (1.11.2)
+    aws-sdk (1.11.1)
       json (~> 1.4)
-      nokogiri (< 1.6.0)
+      nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
     bcrypt (3.1.10)
     bcrypt-ruby (3.1.5)
@@ -282,6 +291,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    colorize (0.7.7)
     columnize (0.9.0)
     compass (1.0.3)
       chunky_png (~> 1.2)
@@ -305,9 +315,11 @@ GEM
       httparty (>= 0.5, < 1.0)
     daemons (1.2.2)
     database_cleaner (0.9.1)
-    deface (0.9.1)
-      nokogiri (~> 1.5.0)
-      rails (~> 3.1)
+    deface (1.0.1)
+      colorize (>= 0.5.8)
+      nokogiri (~> 1.6.0)
+      polyglot
+      rails (>= 3.1)
     default_value_for (3.0.1)
       activerecord (>= 3.2.0, < 5.0)
     descendants_tracker (0.0.4)
@@ -476,6 +488,7 @@ GEM
     httparty (0.13.3)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
+    httpclient (2.6.0.1)
     httpi (1.1.1)
       rack
     i18n (0.6.11)
@@ -495,7 +508,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
-    json (1.8.2)
+    json (1.8.3)
     jwt (1.4.1)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
@@ -507,15 +520,20 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mastercard_api (0.0.1)
+    mastercard_masterpass_api (0.0.1)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_portile (0.6.2)
     money (5.1.1)
       i18n (~> 0.6.0)
-    multi_json (1.11.0)
+    multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    mumboe-soap4r (1.5.8.7)
+      httpclient (>= 2.1.1)
     naught (1.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -526,7 +544,8 @@ GEM
       net-ssh (>= 2.6.5)
     netrc (0.10.3)
     newrelic_rpm (3.12.0.288)
-    nokogiri (1.5.11)
+    nokogiri (1.6.6.2)
+      mini_portile (~> 0.6.0)
     nori (1.1.5)
     oa-core (0.3.2)
     oauth (0.4.7)
@@ -590,7 +609,7 @@ GEM
     rabl (0.7.2)
       activesupport (>= 2.3.14)
       multi_json (~> 1.0)
-    rack (1.4.5)
+    rack (1.4.7)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-cors (0.4.0)
@@ -879,6 +898,7 @@ DEPENDENCIES
   spree_banner (~> 1.3.0)
   spree_essentials!
   spree_gateway!
+  spree_masterpass!
   spree_paypal_express!
   spree_social!
   spring
@@ -895,4 +915,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   1.10.3
+   1.10.6

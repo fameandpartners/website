@@ -16,19 +16,22 @@ h2.checkout-section-title 3. Payment Details
         |by making this purchase you are agreeing to the Fame &amp; Partners &nbsp;
         a href="/terms.html" Term of Service
       - if @credit_card_gateway
-        .col-sm-4
+        .col-sm-3
           .btn-group-radio
             input#optionsRadios1 name="optionsRadios" type="radio" value="option1"
             button.btn.btn-block.btn-md
               label.credit for="optionsRadios1"
                 | Credit Card
 
-      - if @credit_card_gateway && @pay_pal_method
-        .col-sm-4.text-center
-          .btn.btn-text.btn-md or
-
       - if @pay_pal_method
-        .col-sm-4.text-center = paypal_express_button
+        .col-sm-3.text-center = paypal_express_button
+
+      - if @masterpass_method
+        .col-sm-3.text-center
+          #checkoutButtonDiv
+            = img src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_147x034px.png" alt="Buy with MasterPass"
+          p
+            a< href='http://www.mastercard.com/mc_us/wallet/learnmore/en' Learn More
 
   - if @credit_card_gateway
     = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global checkout-form', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|

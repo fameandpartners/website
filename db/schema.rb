@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150721041443) do
+ActiveRecord::Schema.define(:version => 20150724193721) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -396,12 +396,6 @@ ActiveRecord::Schema.define(:version => 20150721041443) do
   end
 
   add_index "customisation_values", ["product_id"], :name => "index_customisation_values_on_product_id"
-
-  create_table "data_migrations", :id => false, :force => true do |t|
-    t.string "version", :null => false
-  end
-
-  add_index "data_migrations", ["version"], :name => "unique_data_migrations", :unique => true
 
   create_table "discounts", :force => true do |t|
     t.integer  "amount"

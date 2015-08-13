@@ -116,6 +116,7 @@ group :assets, :development, :test do
 end
 
 group :development, :test do
+  gem 'spree_masterpass', :path => './spree_masterpass'
   gem 'awesome_print'
   gem 'capistrano', '2.15.4', require: false
   gem 'capistrano-rbenv', '0.0.10', require: false
