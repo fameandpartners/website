@@ -13,7 +13,10 @@ doctype html
     = render 'layouts/redesign/head'
 
   body#top class=('locale-warning-active' if @locale_warning.show?)
-    = render 'layouts/redesign/google_tag_manager'
+
+    - if Rails.env.production? || Rails.env.preproduction?
+      = render 'layouts/redesign/google_tag_manager'
+
     = render 'layouts/redesign/header'
 
     #content-container
