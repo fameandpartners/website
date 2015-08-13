@@ -4,7 +4,7 @@
     = raw "$('.img-product').hoverable();"
 
   .page-content.bridesmaids
-    ul.rslides
+    ul.rslides.hidden-xs
       - (1..7).each do |n|
         li
           = image_tag "http://assets.fameandpartners.com/lookbook/bridesmaids/#{n}.jpg", alt: "Bridesmaids #{n}", class: 'img-responsive portrait-img'
