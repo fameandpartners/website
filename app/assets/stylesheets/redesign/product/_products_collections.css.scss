@@ -1,5 +1,7 @@
 .products-collections {
-	padding-top: 45px;
+	@media (min-width: 768px){
+		padding-top: 45px;
+	}
 
 	.select2-container--default {
 		width: 100% !important;
