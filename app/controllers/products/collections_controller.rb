@@ -144,7 +144,7 @@ class Products::CollectionsController < Products::BaseController
 
       # Jackets
       if permalink == 'jackets_collection'
-        return { collection: 'jackets' }
+        return { show_jackets: true }
       end
 
       # Didn't find any collection associated with the permalink
