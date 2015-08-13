@@ -12,7 +12,7 @@ class CreateJacketsTaxonomy < ActiveRecord::Migration
     jackets_taxon.publish!
 
     # Pages
-    jackets_page = Revolution::Page.new(path: '/jackets', template_path: '/products/collections/jackets.html.slim')
+    jackets_page = Revolution::Page.new(path: '/jackets', template_path: '/products/jackets/collection.html.slim')
     jackets_page.save
     jackets_page.publish!
   end
@@ -22,7 +22,7 @@ class CreateJacketsTaxonomy < ActiveRecord::Migration
       jackets.destroy
     end
 
-    if jackets_page = Revolution::Page.where(path: '/jackets', template_path: '/products/collections/jackets.html.slim').first
+    if jackets_page = Revolution::Page.where(path: '/jackets', template_path: '/products/jackets/collection.html.slim').first
       jackets_page.destroy
     end
   end
