@@ -47,19 +47,25 @@ $checkout-info-peach: #ddb099;
     .support-options {
       margin:0;
       float:right !important;
+      line-height: 60px;
 
       li {
-        line-height: 60px;
+        line-height: 1em;
+
+        .live-chat, .support-telephone {
+          @extend .icon;
+          font-size: 35px;
+          vertical-align: middle;
+        }
+
+        .support-telephone {
+          @extend .icon-phone-chat;
+        }
+        .live-chat {
+          @extend .icon-chat-bubbles;
+        }
+
       }
-
-      .live-chat, .support-telephone {
-        @extend .icon;
-        // TODO - Fix size
-      }
-
-      .support-telephone { @extend .icon-phone-chat; }
-      .live-chat {  @extend .icon-chat-bubbles;  }
-
       li + li {
         border-left: 1px solid #000000;
       }
