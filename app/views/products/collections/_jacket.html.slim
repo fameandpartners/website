@@ -1,0 +1,17 @@
+.col-md-3.col-xs-6.col-xxs-12.category--item data-id=(product.id) data-color-id=(product.color.try(:id))
+  = link_to collection_jacket_path(product, color: product.color.try(:name)) do
+    = image_tag product.images.first, :alt => product.name, :class => "img-product img-responsive", 'data-hover' => product.images.last
+  .details.text-center
+    span.name = product.name
+    span.price = product_price_with_discount(product.price, product.discount)
+    - if Features.active?(:moodboard)
+      - if current_user_moodboard.contains(product_id: product.id, color_id: product.color.try(:id))
+        = link_to 'Added to Moodboard', wishlist_path
+      - else
+        span.moodboard
+          sup +
+          | moodboard
+  - if product.fast_making
+	 = image_tag src='express_making.png', class: 'express-delivery', alt: "Express Making"
+  - if product.fast_delivery
+	 = image_tag src='express_delivery.png', class: 'express-delivery', alt: "Express Delivery"
