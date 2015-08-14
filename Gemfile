@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', :github => 'rails/rails', :branch => '3-2-stable'
+gem 'rails', '~> 3.2.22'
 gem 'pg'
 gem 'slim'
 gem 'slim-rails'
