@@ -21,13 +21,39 @@ Spree::OrderMailer.class_eval do
     subject += "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
 
     user = @order.user
+    line_items = []
+    @order.line_items.each do |item|
+      line_item = {}
+      line_item[:sku]                    = item.variant.sku
+      line_item[:name]                   = item.variant.product.name
+      line_item[:making_options_text]    = item.making_options_text
+      line_item[:options_text]           = item.options_text
+      line_item[:quantity]               = item.quantity
+      line_item[:variant_display_amount] = item.variant.display_amount
+      line_item[:display_amount]         = item.display_amount
+      line_items << line_item
+    end
+
+    adjustments = []
+    @order.adjustments.eligible.each do |adjustments_item|
+      adjustment = {}
+      adjustment[:label]          = adjustments_item.label
+      adjustment[:display_amount] = adjustments_item.display_amount
+      adjustments << adjustment
+    end
+
     Marketing::CustomerIOEventTracker.new.track(
       user,
-      'order confirmation email',
-      email_to:             @order.email,
-       subject:             subject
+      'order_confirmation_email',
+      email_to:           @order.email,
+      subject:            subject,
+      order_number:       @order.number,
+      line_items:         line_items,
+      display_item_total: @order.display_item_total,
+      adjustments:        adjustments,
+      display_total:      @order.display_total,
+      auto_account:       @order.user && @order.user.automagically_registered?
     )
-    #mail(:to => @order.email, :from => from_address, :subject => subject)
   end
 
   def team_confirm_email(order)
