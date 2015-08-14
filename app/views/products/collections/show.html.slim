@@ -4,7 +4,7 @@
   .container
     .page-title--details
       h1.no-padding-bottom = @collection.details.banner.title
-      p= raw @collection.details.banner.subtitle
+      p.hidden-xs.hidden-sm= raw @collection.details.banner.subtitle
 
 .page-content.products-collections.category
   = render :partial => 'filters'

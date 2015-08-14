@@ -10170,7 +10170,7 @@ p {
   /* line 31, ../sass/_media.scss */
   .nav-menu {
     background: white !important;
-    position: absolute;
+    position: fixed;
   }
   /* line 35, ../sass/_media.scss */
   .margin-top-100-mobile {
