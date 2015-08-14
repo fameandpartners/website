@@ -180,7 +180,8 @@ Spree::OrderMailer.class_eval do
       customer_note_data:  @order.customer_notes,
       customer:            @order.name,
       phone:               @order.phone_number,
-      shipping_address:    @order.shipping_address
+      shipping_address:    @order.shipping_address,
+      factory:             factory
     )
   end
 
