@@ -15,12 +15,7 @@ Spree::OrderMailer.class_eval do
   attr_reader   :order
   helper_method :order
 
-  def confirm_email(order, resend = false)
-    find_order(order)
-    subject = (resend ? "[#{t(:resend).upcase}] " : '')
-    subject += "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
-
-    user = @order.user
+  def build_line_items
     line_items = []
     @order.line_items.each do |item|
       line_item = {}
@@ -33,7 +28,10 @@ Spree::OrderMailer.class_eval do
       line_item[:display_amount]         = item.display_amount
       line_items << line_item
     end
+    line_items
+  end
 
+  def build_adjustments
     adjustments = []
     @order.adjustments.eligible.each do |adjustments_item|
       adjustment = {}
@@ -41,6 +39,32 @@ Spree::OrderMailer.class_eval do
       adjustment[:display_amount] = adjustments_item.display_amount
       adjustments << adjustment
     end
+    adjustments
+  end
+
+  def build_additional_products_info
+    additional_products_info = []
+    if @additional_products_info.present?
+      info = {}
+      @additional_products_info.each do |info_item|
+        info[:product] = info_item.product
+        info[:email] = info_item.email
+        info[:phone] = info_item.phone
+        info[:state] = info_item.state
+      end
+      additional_products_info << info
+    end
+    additional_products_info
+  end
+
+  def confirm_email(order, resend = false)
+    find_order(order)
+    subject = (resend ? "[#{t(:resend).upcase}] " : '')
+    subject += "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
+
+    user = @order.user
+    line_items = build_line_items
+    adjustments = build_adjustments
 
     Marketing::CustomerIOEventTracker.new.track(
       user,
@@ -68,13 +92,31 @@ Spree::OrderMailer.class_eval do
     subject = "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
 
     user = @order.user
+    line_items = build_line_items
+    adjustments = build_adjustments
+    additional_products_info = build_additional_products_info
+
     Marketing::CustomerIOEventTracker.new.track(
       user,
-      'order team confirmation email',
-      email_to:             "team@fameandpartners.com",
-       subject:             subject
+      'order_team_confirmation_email',
+      email_to:                       "team@fameandpartners.com",
+      subject:                        subject,
+      line_items:                     line_items,
+      display_item_total:             @order.display_item_total,
+      promotion:                      @order_presenter.promotion?,
+      promocode:                      @order_presenter.promo_codes.join(', '),
+      adjustments:                    adjustments,
+      display_total:                  @order.display_total,
+      additional_products_info:       @additional_products_info.present?,
+      additional_products_info_data:  additional_products_info,
+      phone_present:                  @order.billing_address.phone.present?,
+      phone:                          @order.billing_address.phone,
+      billing_address:                @order.billing_address.to_s,
+      shipping_address:               @order.shipping_address.to_s,
+      required_to_present:            @order.required_to.present?,
+      required_to:                    @order.required_to
     )
-    #mail(to: to, from: from, subject: subject)
+    mail(to: to, from: from, subject: subject)
   end
 
   def production_order_email(order, factory, items)
