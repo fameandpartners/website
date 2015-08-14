@@ -139,20 +139,4 @@ input.form-control {
   }
 }
 
-.checkout .slash {
-  margin-top: 60px;
-  float: left;
-  margin-left: -5px;
-  margin-right: -5px;
-}
 
-.checkout .card_code {
-  @media(max-width: 480px){
-    clear: both;
-  }
-}
-
-.checkout .shipAddress{
-  text-transform: none;
-  margin-left: 10px;
-}

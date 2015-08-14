@@ -127,6 +127,9 @@ $order-summary-bg: #f7f7f9;
         @include border-radius(3px);
         border: 1px solid $checkout-form-border-color-inactive;
         .panel-heading {}
+        h4.panel-title {
+          font-size: 22px;
+        }
         .panel-body {
           background-color: $payment-selector-bg;
           input {
@@ -136,4 +139,22 @@ $order-summary-bg: #f7f7f9;
       }
     }
   }
+}
+
+.checkout .slash {
+  line-height:105px;
+  float: left;
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.checkout .card_code {
+  @media(max-width: 480px){
+    clear: both;
+  }
+}
+
+.checkout .shipAddress{
+  text-transform: none;
+  margin-left: 10px;
 }
