@@ -55,17 +55,22 @@ $order-summary-bg: #f7f7f9;
 
       li {
         line-height: 1em;
+        padding-left: 15px;
+        padding-right: 15px;
+        &.live-chat {
+          a { color: #000000; font-weight:bold; }
+        }
 
-        .live-chat, .support-telephone {
+        .icon-live-chat, .icon-support-telephone {
           @extend .icon;
           font-size: 35px;
           vertical-align: middle;
         }
 
-        .support-telephone {
+        .icon-support-telephone {
           @extend .icon-phone-chat;
         }
-        .live-chat {
+        .icon-live-chat {
           @extend .icon-chat-bubbles;
         }
 
