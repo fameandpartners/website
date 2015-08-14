@@ -1,6 +1,6 @@
 module AdminUi
   module Content
-    class PagesController < AdminUi::ApplicationController
+    class PagesController < ::AdminUi::ApplicationController
 
       def index
       end
