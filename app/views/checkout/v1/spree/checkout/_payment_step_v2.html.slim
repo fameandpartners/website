@@ -1,0 +1,35 @@
+h2.checkout-section-title 3. Choose your payment method
+/ TODO - Rewrite as react component with new button layout and behaviour
+p All transactions are secure and encrypted. Credit card information is never stored.
+
+p
+  ' By making this purchase you are agreeing to the Fame & Partners
+  a href="/terms.html" Term & Conditions.
+
+#payment-selection.panel-group aria-multiselectable="false" role="tablist"
+  - if @credit_card_gateway
+    #credit_card_choice.panel
+      .panel-heading
+        h4.panel-title
+          ' Credit card
+          .pull-right
+            = image_tag 'checkout/visa_mc_logos.png', height: '19px'
+      .panel-collapse.in
+        .panel-body
+          = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global checkout-form', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
+            = render 'shared/error_messages', :target => @order, :view => "payment"
+
+            = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
+            = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
+  - if @pay_pal_method
+    #paypal_choice.panel
+      .panel-heading
+        h4.panel-title PayPal
+      .panel-collapse.in
+        .panel-body
+          = paypal_express_button
+
+.row
+  .col-md-12
+    = link_to '< Return to your information', checkout_state_path('address'), :remote => false, class: 'edit'
+

@@ -17,10 +17,14 @@
 // Vars
 $checkout-form-border-color-inactive: #acacac;
 $checkout-form-border-color-active:   #000000;
+$checkout-form-error-color: #ff2e2e;
 
 $checkout-breadcrumbs-color-inactive: #000000;
 $checkout-info-peach: #ddb099;
 
+
+$payment-selector-bg: #f2f2f2;
+$order-summary-bg: #f7f7f9;
 
 .checkout.page-content {
   .checkout-masthead {
@@ -104,6 +108,27 @@ $checkout-info-peach: #ddb099;
       }
     }
 
+    .errorExplanation, .has-warning label {
+      color: $checkout-form-error-color;
+    }
 
+    // Style the default bootstrap panel classes.
+    // TODO - use semantic classes and extend the BS ones.
+    #payment-selection {
+      .panel {
+
+        .row:last-child .form-group { margin-bottom: 0; }
+
+        @include border-radius(3px);
+        border: 1px solid $checkout-form-border-color-inactive;
+        .panel-heading {}
+        .panel-body {
+          background-color: $payment-selector-bg;
+          input {
+            background-color: #ffffff;
+          }
+        }
+      }
+    }
   }
 }

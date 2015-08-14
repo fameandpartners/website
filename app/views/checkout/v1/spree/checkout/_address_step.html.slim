@@ -39,28 +39,3 @@
         button.btn.btn-block.btn-md.btn-black data-loading='Saving...'
           i.icon.icon-lock
           ' Pay Securely
-
-
-- else
-  h2.checkout-section-title  Billing and shipping Address
-  / br
-  .row
-    .col-md-6
-      - if (address = @order.bill_address).present?
-        h3 Billing Address
-        p = address.full_name
-        p = address.address1
-        p = address.address2
-        p = address.city
-        p = address.country
-    .col-md-6
-      - if (address = @order.ship_address).present?
-        h3 Shipping Address
-        p = address.full_name
-        p = address.address1
-        p = address.address2
-        p = address.city
-        p = address.country
-  .row
-    .col-md-12
-      = link_to 'Edit your Billing or Shipping Details', checkout_state_path('address'), :remote => false, class: 'edit'
