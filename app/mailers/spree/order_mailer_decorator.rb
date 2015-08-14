@@ -31,6 +31,41 @@ Spree::OrderMailer.class_eval do
     line_items
   end
 
+  def build_line_items_for_production
+    line_items = []
+    @order.line_items.each do |item|
+      line_item = {}
+      line_item[:style_num]                   = item.style_number
+      line_item[:size]                        = item.country_size
+      line_item[:adjusted_size]               = item.make_size
+      line_item[:color]                       = item.colour_name
+      line_item[:quantity]                    = item.quantity
+      line_item[:factory]                     = item.factory
+      line_item[:deliver_date]                = @order.projected_delivery_date
+      if item.making_options.present?
+        line_item[:express_making] = item.making_options.map{|option| option.name.upcase }.join(', ')
+      end
+
+      customizations = []
+
+      item.customisations.each do |name, image_url|
+        item_customization = {}
+        item_customization[:name] = name
+        item_customization[:url]  = image_url
+        customizations << item_customization
+      end
+
+      line_item[:customizations] = customizations
+
+      if item.image?
+        line_item[:image_url] = item.image_url
+      end
+
+      line_items << line_item
+    end
+    line_items
+  end
+
   def build_adjustments
     adjustments = []
     @order.adjustments.eligible.each do |adjustments_item|
@@ -116,7 +151,6 @@ Spree::OrderMailer.class_eval do
       required_to_present:            @order.required_to.present?,
       required_to:                    @order.required_to
     )
-    mail(to: to, from: from, subject: subject)
   end
 
   def production_order_email(order, factory, items)
@@ -127,15 +161,27 @@ Spree::OrderMailer.class_eval do
     subject = "Order Confirmation (订单号码）(#{factory}) ##{@order.number}"
 
     user = @order.user
+    customer_notes = @order.customer_notes?
     @order = Orders::OrderPresenter.new(@order, items)
+    line_items = build_line_items_for_production
 
     Marketing::CustomerIOEventTracker.new.track(
       user,
-      'order production order email',
-      email_to:             configatron.order_production_emails,
-       subject:             subject
+      'order_production_order_email',
+      email_to:            configatron.order_production_emails,
+      subject:             subject,
+      number:              @order.number,
+      site:                @order.site_version,
+      total_items:         @order.total_items,
+      promotion:           @order.promotion?,
+      promocode:           @order.promo_codes.join(', '),
+      line_items:          line_items,
+      customer_notes:       customer_notes,
+      customer_note_data:  @order.customer_notes,
+      customer:            @order.name,
+      phone:               @order.phone_number,
+      shipping_address:    @order.shipping_address
     )
-    #mail(to: to, from: from, subject: subject)
   end
 
 
