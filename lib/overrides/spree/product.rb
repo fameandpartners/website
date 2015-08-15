@@ -32,7 +32,6 @@ module Overrides
 
           indexes :taxons, :as => 'taxons.map(&:name)'
           indexes :taxon_ids, :as => 'taxons.map(&:id)'
-          indexes :is_jacket, :type => :boolean, :as => "taxons.any? { |t| t.permalink == 'jackets' }"
 
           indexes :featured, :type => :boolean, :as => 'featured'
           indexes :hidden,   :type => :boolean, :as => 'hidden'

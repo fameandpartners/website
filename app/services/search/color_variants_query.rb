@@ -44,7 +44,7 @@ module Search
         end
 
         # Jackets filter
-        # filter :bool, :must => { :term => { 'product.is_jacket' => show_jackets } }
+        filter :bool, :must => { :term => { 'product.is_jacket' => show_jackets } }
 
         # only available items
         filter :bool, :must => { :term => { 'product.in_stock' => true } }
