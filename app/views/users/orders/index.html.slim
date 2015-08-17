@@ -3,6 +3,7 @@
 .page-content.user.order.show
   = render 'users/shared/tabs', active_tab: 'orders'
   .container.relative
+    = render :partial =>'shared/redesign/flash_messages'
     .row
       .col-md-12
         - if @orders.empty?

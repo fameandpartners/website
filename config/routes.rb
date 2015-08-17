@@ -69,6 +69,10 @@ FameAndPartners::Application.routes.draw do
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
+    get '/instagram/1' => 'statics#landing_page_mobile', :variant => '1'
+    get '/instagram/2' => 'statics#landing_page_mobile', :variant => '2'
+    get '/instagram/3' => 'statics#landing_page_mobile', :variant => '3'
+
     get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
     get '/fashionitgirlau2015'  => 'statics#fashion_it_girl_au_2015'
     get '/fashionitgirlau2015/terms-and-conditions' => 'statics#fashion_it_girl_au_tc'
@@ -138,6 +142,12 @@ FameAndPartners::Application.routes.draw do
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
     end
 
+    # Jackets
+    scope '/jackets' do
+      get '/', to: 'products/collections#show', as: :jackets, defaults: { permalink: 'jackets_collection' }
+      get '/jacket-:product_slug', to: 'products/details#show', as: :jacket_details
+    end
+
     scope '/dresses' do
       root to: 'products/collections#show', as: :dresses
       get '/', to: 'products/collections#show', as: :collection
@@ -158,7 +168,6 @@ FameAndPartners::Application.routes.draw do
       get '/event/:taxon', to: redirect('/dresses/%{taxon}')
       get '/sale-(:sale)' => 'products/collections#show', as: "dresses_on_sale"
       get '/*permalink' => 'products/collections#show', as: 'taxon'
-      get 't/*id', :to => 'taxons#show', :as => :dress_nested_taxons
     end
 
     # Custom Dresses
@@ -198,10 +207,10 @@ FameAndPartners::Application.routes.draw do
     # eo account settings
 
     resources :product_reservations, only: [:create]
-  end
 
-  # Old Blog Redirection (30/06/2015)
-  get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
+    # Old Blog Redirection (30/06/2015)
+    get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
+  end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     # Static pages
@@ -296,6 +305,8 @@ FameAndPartners::Application.routes.draw do
       #  resource :style_profile, :controller => 'product_style_profile', :only => [:edit, :update]
       #end
 
+      post 'shipping_methods/update_positions' => "shipping_methods#update_positions"
+
       scope 'taxonomies/:taxonomy_id/taxons/:id' do
         resource :banner, only: [:update], as: :update_taxon_banner, controller: 'taxon_banners'
       end
@@ -358,6 +369,7 @@ FameAndPartners::Application.routes.draw do
 
       get 'modals' => 'modals#index'
 
+      get "search/order_owners" => 'search#order_owners'
 
       resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
         scope module: :celebrity do
@@ -402,7 +414,7 @@ FameAndPartners::Application.routes.draw do
     # Redirecting all bridesmaid party URLs
     get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')
 
-    resources :site_versions, only: [:show]
+    resources :site_versions, only: [:show], as: :site_version
   end
 
   if Rails.env.development?

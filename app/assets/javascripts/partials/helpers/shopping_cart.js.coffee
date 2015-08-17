@@ -64,6 +64,7 @@ window.helpers.ShoppingCart = class ShoppingCart
       added_product = _.find((data.products || []), (product) ->
         product.variant_id == product_data.variant_id
       )
+
       @trackAddToCart(added_product)
     ).error( () =>
       @trigger('error')
@@ -137,6 +138,8 @@ window.helpers.ShoppingCart = class ShoppingCart
           _cio.track("addedToCart", {
             sku: product.sku,
             name: product.name,
+            color: product.color.name,
+            size: product.size.presentation,
             value: product.price.amount,
             currency: product.price.currency
           });
@@ -145,9 +148,14 @@ window.helpers.ShoppingCart = class ShoppingCart
         ids = ['6021815151134','6026191677496','6027615548326','6027496563226']
         _.each(ids, (id) ->
           window._fbq.push(['track', id, {
-            'value': product.price.amount,
-            'currency':product.price.currency
+            sku: product.sku,
+            name: product.name,
+            color: product.color.name,
+            size: product.size.presentation,
+            value: product.price.amount,
+            currency: product.price.currency
           }])
         )
+
     catch
       # do nothing

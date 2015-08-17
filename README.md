@@ -53,74 +53,61 @@ script.disable_dynamic: false
 
 ### Database
 
+There is a script to automate a few local database tasks.
+
+See `./script/db`
+
+```
+ ./script/db
+ >> FAME - Fully Awesome Menu Engine
+ 1) load_production_db        Restore the most recent production        backup file to development
+ 2) load_development_db       Restore the most recent development       backup file to development
+ 3) restore_env_menu          Restore the most recent any environment's backup file to development
+ 4) restore_file_menu         Restore any selected                      backup file to development
+ 5) dump_production_db        Backup production        database to a file
+ 6) dump_development_db       Backup development       database to a file
+ 7) dump_menu                 Backup any environment's database to a file
+ 8) sanitise_dev_db           Delete sensitive information from development db. Also shrinks size massively
+ >> Select a command to run or Control+C to cancel:
+```
+
+It allows you to backup local development databases, and restore backups from local copies of production.
+
+Note that you will still need to manually download production backups right now. The script will prompt you on how to do it.
+
+#### EngineYard Databases
 
 **For more information on EngineYard database management, see `doc/howto_backup_restore_engineyard_databases.md` **
 
-It is generally easiest to have working development application with loading database dump from production/preprod site, and restoring them locally.
-
-* download latest dump from production ( through web interface from engine yard )
-* clean database with `$bundle exec rake db:schema:load`
-* restore data
-  `pg_restore -d fame_website_development --clean --if-exists --verbose --jobs 8 --no-acl --no-owner -U postgres`
-
-after it, remove valuable data & update settings
-
-* delete users `Spree::User.delete_all`
-* delete orders `Spree::Order.delete_all`
-* update shipping settings
-* create user, and assign him admin rights `Spree::User.find(id).spree_roles << Spree::Role.find_by_name('admin')`
-* update payment method settings with test env
-* update facebook provider settings
-* To view S3 images, set `config.use_s3 = true` in the `development.rb` file, without changing the `0_config.rb` file. Image uploads wont work, but for just viewing prod images, it’s perfect.
-* refresh all local elastic search indexes
-
 #### Sanitised Database
 
-To remove almost everything **except** products and a few test users, you can instead run the following SQL,
-this gets you a working site, with no customer data loaded.
+To remove almost everything **except** products and a few test users, you can run the following command,
+this gets you a working site, with no customer data.
 
-```
-delete from spree_users where email not like '%fameandpartners.com%';
+Run `./script/db` and Choose 8 `sanitise_dev_db` to clean the current dev DB.
+See the source to see exactly what is removed.
 
-truncate table activities;
-truncate table blog_posts;
-truncate table bridesmaid_party_events;
-truncate table competition_entries;
-truncate table competition_invitations;
-truncate table email_notifications;
-truncate table facebook_data;
-truncate table line_item_personalizations;
-truncate table marketing_user_visits;
-truncate table product_accessories;
-truncate table spree_addresses;
-truncate table spree_adjustments;
-truncate table spree_credit_cards;
-truncate table spree_line_items;
-truncate table spree_log_entries;
-truncate table spree_orders;
-truncate table spree_payments;
-truncate table spree_paypal_express_checkouts;
-truncate table spree_shipments;
-truncate table spree_state_changes;
-truncate table spree_tokenized_permissions;
-truncate table spree_user_authentications;
-truncate table user_style_profile_taxons;
-truncate table user_style_profiles;
-truncate table wishlist_items;
-```
+#### Legacy Process
 
-After Running this SQL you can capture the clean dump with a command like;
+**NOTE :: This section is preserved for posterity, but I intend to rewrite / remove**
 
-```
-pg_dump --format=custom fame_website_development > ~/tmp/fame_website_development_clean.pgdump
-```
+> It is generally easiest to have working development application with loading database dump from production/preprod site, and restoring them locally.
 
-After which you can restore it using;
+> * download latest dump from production ( through web interface from engine yard )
+> * clean database with `$bundle exec rake db:schema:load`
+> * restore data
+  `pg_restore -d fame_website_development --clean --if-exists --verbose --jobs 8 --no-acl --no-owner -U postgres`
 
-```
-pg_restore -d fame_website_development --clean --if-exists --verbose --jobs 8 --no-acl -U postgres ~/tmp/fame_website_development_clean.pgdump`
-```
+> after it, remove valuable data & update settings
 
+> * delete users `Spree::User.delete_all`
+> * delete orders `Spree::Order.delete_all`
+> * update shipping settings
+> * create user, and assign him admin rights `Spree::User.find(id).spree_roles << Spree::Role.find_by_name('admin')`
+> * update payment method settings with test env
+> * update facebook provider settings
+> * To view S3 images, set `config.use_s3 = true` in the `development.rb` file, without changing the `0_config.rb` file. Image uploads wont work, but for just viewing prod images, it’s perfect.
+> * refresh all local elastic search indexes
 
 ### Elasticsearch
 
@@ -272,7 +259,9 @@ Test CC is `5520000000000000`
 
 You can use any other details.
 
+## Testing
 
+To run every test, including engines', use the `bundle exec rake spec` command
 
 ## Useful Pages
 

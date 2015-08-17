@@ -22,14 +22,6 @@ describe FindUsersSiteVersion, type: :service, memoization_support: true do
       expect(service.get).to eq(sv)
     end
 
-    it "returns site version chosen by remote ip" do
-      sv = create(:site_version, permalink: 'au')
-      australian_ip = '202.138.0.0'
-
-      service = described_class.new(request_ip: australian_ip)
-      expect(service.get).to eq(sv)
-    end
-
     it "returns site version chosen by passing a param (site version permalink)" do
       sv = create(:site_version)
 
@@ -42,6 +34,26 @@ describe FindUsersSiteVersion, type: :service, memoization_support: true do
 
       service = described_class.new({})
       expect(service.get).to eq(sv)
+    end
+
+
+    describe 'order of precedence' do
+      it 'prefers url params over ip address' do
+        user         = nil
+        url_param    = 'au'
+        cookie_param = nil
+
+        service = FindUsersSiteVersion.new(
+          user:         user,
+          url_param:    url_param,
+          cookie_param: cookie_param
+        )
+
+        dummy_site_version = instance_spy('SiteVersion')
+
+        expect(service).to receive(:find_by_permalink).with('au').and_return(dummy_site_version)
+        expect(service.get).to eq dummy_site_version
+      end
     end
   end
 end

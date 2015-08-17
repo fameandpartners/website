@@ -71,6 +71,17 @@ module PathBuildersHelper
     build_url(path_parts, options)
   end
 
+  def collection_jacket_path(product, options = {})
+    site_version_prefix = options.delete(:site_version) || self.url_options[:site_version]
+    path_parts          = [site_version_prefix, 'jackets', "jacket-#{descriptive_url(product)}"]
+
+    if options[:color].nil? && product.respond_to?(:color) && product.color.try(:name)
+      options.merge!({ color: product.color.name })
+    end
+
+    build_url(path_parts, options)
+  end
+
   def collection_product_url(product, options = {})
     url_without_double_slashes(root_url(site_version: nil) + collection_product_path(product, options))
   end

@@ -14,6 +14,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if authentication.present?
       flash[:notice] = "Signed in successfully"
+      flash[:track_fb_signin] = "true"
       sign_in :spree_user, authentication.user
 
       run_after_sign_in_callbacks(authentication.user, auth_hash)
@@ -27,6 +28,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       run_after_sign_in_callbacks(current_spree_user, auth_hash)
 
       flash[:notice] = "Authentication successful."
+      flash[:track_fb_signup] = "true"
       redirect_back_or_default(account_url)
     else
       user = Spree::User.find_by_email(auth_hash['info']['email']) || Spree::User.new
@@ -46,7 +48,6 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         flash[:notice] = "Signed in successfully."
 
         sign_in :spree_user, user
-        sign_up_reason = session[:sign_up_reason]
 
         run_after_sign_in_callbacks(user, auth_hash)
 
@@ -58,8 +59,21 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
     end
 
+    user ||= (spree_current_user || authentication.try(:user))
+
+    if session[:email_reminder_promo].present? && session[:email_reminder_promo] !=  'scheduled_for_delivery'
+      tracker = Marketing::CustomerIOEventTracker.new
+      tracker.identify_user(user, current_site_version)
+      tracker.track(
+        user,
+        'email_reminder_promo',
+        promo: session[:email_reminder_promo]
+      )
+      session[:email_reminder_promo] = 'scheduled_for_delivery'
+      flash[:track_fb_reminder_promo] = "true"
+    end
+
     if current_order
-      user ||= (spree_current_user || authentication.try(:user))
       current_order.associate_user!(user) if user.present?
       session[:guest_token] = nil
     end

@@ -1,0 +1,28 @@
+- page_title = 'Order Totals Report'
+= content_for :page_title do
+  = page_title
+
+.ibox
+  .ibox-title
+    = page_title
+  .ibox-content
+    p The impetus for this report is for a quick way to get order totals/paid data into the Master Returns Spreadsheet.
+
+    p
+      ' See
+      a href="https://docs.google.com/spreadsheets/d/1bhNF248Z3u2k4vcf1kf9un63jTBIC2MbZgHh-1DQU1g/edit#gid=0" Master Returns Spreadsheet
+
+    p
+      ' Full documentation is here
+      a href="https://docs.google.com/a/fameandpartners.com/document/d/1uyrcYDdPxZ96KO1cywyn14p5wKNm2MNuDWYgHBz6IfM/edit?usp=sharing" Doc - Spree Order Totals in Master Returns Spreadsheet
+
+  .ibox-content
+
+    = form_tag admin_ui.reports_order_totals_path, method: 'post', class: 'form-horizontal'
+      .form-group
+        .col-lg-12
+          button type='submit' Generate
+
+h2 Sample
+
+= render partial: 'admin_ui/reports/report_rows_preview', locals: { rows: @rows }

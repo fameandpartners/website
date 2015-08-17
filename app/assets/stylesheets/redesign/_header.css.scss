@@ -1,6 +1,19 @@
+@import 'mixins';
+
+/////////// locale warn //////////
+
+@import 'redesign/header/locale_warn';
+
+/////////// locale selector //////////
+
+@import 'redesign/header/locale_selector';
+
+/////////// mega menu //////////
+
 .nav-menu {
   text-transform: uppercase;
   font-size: 1.4rem;
+  z-index: 102;
 }
 
 .all-dresses {
@@ -85,13 +98,14 @@
 }
 
 .account {
-  position: absolute;
-  top: 0;
-  border: 1px solid #040505;
   background-color: white;
-  padding-right: 0;
-  padding-left: 0;
+  border: 1px solid #040505;
   line-height: 35px;
+  padding-left: 0;
+  padding-right: 0;
+  position: absolute;
+  right: 10px;
+  top: -35px;
 }
 
 .search-bar {
@@ -99,11 +113,53 @@
   border-bottom: none;
   border-left: none;
   border-right: none;
+
+  &:after, &:before {
+    bottom: 100%;
+    right: 168px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  &:after {
+    border-color: rgba(213, 209, 209, 0);
+    border-bottom-color: #f5f5f5;
+    border-width: 6px;
+    margin-right: -10px;
+  }
+
+  &:before {
+    border-color: rgba(4, 5, 5, 0);
+    border-bottom-color: #040505;
+    border-width: 7px;
+    margin-right: -11px;
+  }
+
+  button {
+    margin-top: 6px;
+    font-family: forum;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 991px) {
+  .search-bar {
+    top: 65px;
+
+    &:before, &:after {
+      right: 92px;
+    }
+  }
 }
 
 .mega-menu--main:after, .mega-menu--main:before {
   bottom: 100%;
-  left: 338px;
+  left: 318px;
   border: solid transparent;
   content: " ";
   height: 0;
@@ -114,7 +170,7 @@
 
 .stories:after, .stories:before {
   bottom: 100%;
-  left: 418px;
+  left: 412px;
   border: solid transparent;
   content: " ";
   height: 0;
@@ -126,17 +182,6 @@
 .account:after, .account:before {
   bottom: 100%;
   left: 75px;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-
-.search-bar:after, .search-bar:before {
-  bottom: 100%;
-  right: 132px;
   border: solid transparent;
   content: " ";
   height: 0;
@@ -170,13 +215,6 @@
   margin-left: -10px;
 }
 
-.search-bar:after {
-  border-color: rgba(213, 209, 209, 0);
-  border-bottom-color: #f5f5f5;
-  border-width: 6px;
-  margin-right: -10px;
-}
-
 .mega-menu--main:before {
   border-color: rgba(4, 5, 5, 0);
   border-bottom-color: #040505;
@@ -196,13 +234,6 @@
   border-bottom-color: #040505;
   border-width: 7px;
   margin-left: -11px;
-}
-
-.search-bar:before {
-  border-color: rgba(4, 5, 5, 0);
-  border-bottom-color: #040505;
-  border-width: 7px;
-  margin-right: -11px;
 }
 
 .menu-icon {
@@ -257,8 +288,20 @@ li.shop {
   }
 }
 
-.masthead {
-  padding-top: 26px;
+
+#masthead-container {
+  ul {
+    margin-bottom: 0;
+  }
+
+  .masthead {
+    padding-top: 26px;
+
+    @media(max-width: 480px) {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
 }
 
 .nav-menu .primary li.menu-item .menu-item--link, .nav-menu .secondary li.menu-item .menu-item--link {
@@ -283,13 +326,6 @@ li.shop {
   .input-group{
     margin-top: 90px;
   }
-}
-
-.search-bar button {
-  margin-top: 6px;
-  font-family: forum;
-  font-size: 2rem;
-  font-weight: 600;
 }
 
 .search-form .form-control {
@@ -338,13 +374,6 @@ li.shop {
 
   &:hover{
     color: #355e6d;
-  }
-}
-
-.masthead {
-  @media(max-width: 480px) {
-    padding-right: 0;
-    padding-left: 0;
   }
 }
 
@@ -430,11 +459,9 @@ ul.secondary.pull-right {
 li#cart-trigger {
   span#cart-item-count {
     color: white;
-    @media (max-width: 991px) {
-      top: 0.7rem;
-      left: -1.7rem;
-      position: relative;
-    }
+    top: 0.7rem;
+    left: -1.6rem;
+    position: relative;
   }
   a {
     @media (max-width: 320px) {
@@ -505,6 +532,8 @@ li#cart-trigger {
   }
 }
 
+/////////// side menu (hamburger) //////////
+
 #sideMenu {
   display: block;
   height: 100%;
@@ -545,8 +574,7 @@ li#cart-trigger {
 
   z-index: 2000;
   background-color: #f8f8f8;
-  -webkit-transition: margin-left 0.7s; /* Safari */
-  transition: margin-left 0.7s;
+  @include transition(margin-left 0.4s);
 
   .navbar-header {
     background-color: #e7e7e7;
@@ -559,7 +587,7 @@ li#cart-trigger {
     }
   }
   nav{
-    height:100%;
+    height:1000px;
     ul{
       width:100%;
       li{
@@ -651,9 +679,5 @@ li#cart-trigger {
 }
 
 .mobileAnimation{
-  -webkit-transition: height 0.5s;
-  -moz-transition: height 0.5s;
-  -ms-transition: height 0.5s;
-  -o-transition: height 0.5s;
-  transition: height 0.5s;
+  @include transition(height 0.4s);
 }

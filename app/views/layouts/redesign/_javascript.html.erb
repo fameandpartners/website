@@ -10,6 +10,7 @@
     user:   { id: <%= current_spree_user.present? ? current_spree_user.id : 'null' %> },
     user_signed_in: <%= signed_in? %>,
     site_version: {  name: '<%= current_site_version.try(:name) %>' },
+    current_site_version: <%= raw SiteVersionSerializer.new(current_site_version).to_json %>,
     shopping_cart: new helpers.ShoppingCart({track: <%= Rails.env.production? %>}),
     user_moodboard: new helpers.UserMoodboard({})
   };

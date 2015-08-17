@@ -189,6 +189,10 @@
       padding-right: 0;
     }
   }
+
+  .btn{
+    background-color: #C0C0C0;
+  }
 }
 // @end Account
 // ---------------
@@ -243,7 +247,7 @@
 
 .ordered-item-image {
   width: 120px;
-  margin: auto;
+  margin-left: 0px;
 }
 
 h2.order-number {
@@ -371,14 +375,6 @@ h3.phone span {
 h1.order {
   color: black;
 }
-
-// @media only screen and (max-width: 800px) {
-
-//   .page-content.order {
-//     padding-left: 1rem;
-//     padding-right: 1rem;
-//   }
-// }
 
 a.btn.return {
   color: #FFFFFF;

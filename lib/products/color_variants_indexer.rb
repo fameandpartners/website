@@ -72,6 +72,7 @@ module Products
             product: {
               id:           product.id,
               name:         product.name,
+              sku:          product.sku,
               description:  product.description,
               created_at:   product.created_at,
               available_on: product.available_on,
@@ -92,9 +93,11 @@ module Products
               can_be_customized:  product.can_be_customized?,
               fast_delivery:      product.fast_delivery,
               fast_making:        product.fast_making,
-              is_surryhills:      helpers.is_surryhills?(product),
               taxon_ids:          product.taxons.map(&:id),
               price:              product.price.to_f,
+
+              # Jackets
+              is_jacket:          product.taxons.any? { |t| t.permalink == 'jackets' },
 
               # bodyshape sorting
               apple:              product.style_profile.try(:apple),

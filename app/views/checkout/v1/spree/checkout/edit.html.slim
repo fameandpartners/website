@@ -1,0 +1,38 @@
+= content_for :inline_javascript do
+  | page.initCheckoutEditPage();
+
+- support_telephone = {'us' => '866 527 7797', 'au' => '1300 924 860'}[current_site_version.code]
+= render 'shared/zopim'
+.checkout.page-content
+  .container
+    .row
+      .col-md-8
+        .checkout-masthead
+          h1
+            = link_to root_path
+              = image_tag 'logo/logo-mobile.svg', alt: 'Fame & Partners', width: '78', height: '59'
+            ' Secure checkout
+          ul.support-options.list-inline
+            li.live-chat
+              a href='javascript:$zopim.livechat.window.show()'
+                i.icon-live-chat
+                ' Live Chat
+            li.support-telephone
+              i.icon-support-telephone
+              = support_telephone
+
+        .checkout-breadcrumbs
+          ol.breadcrumb
+            li class=('active' if current_step.eql?('address')) Your information
+            li class=('active' if current_step.eql?('payment')) Payment Method
+
+        .checkout-step data-name="address"
+          = render 'address_step', current_step: current_step
+
+        .checkout-step data-name="payment"
+          - if current_step.eql?('payment')
+            = render 'payment_step_v2', current_step: current_step
+
+      .col-md-4
+        - cart = UserCart::UserCartResource.new(order: current_order).read
+        = render 'spree/checkout/order_summary', cart: cart
