@@ -1,3 +1,13 @@
+- if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
+  - content_for :head do
+    - if Rails.env.production? && !@credit_card_gateway.prefers_test_mode?
+      = javascript_include_tag 'https://api.pin.net.au/pin.js'
+    - else
+      = javascript_include_tag 'https://test-api.pin.net.au/pin.js'
+
+  - content_for :inline_javascript do
+    | Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
+
 h2.checkout-section-title 3. Choose your payment method
 / TODO - Rewrite as react component with new button layout and behaviour
 p All transactions are secure and encrypted. Credit card information is never stored.
