@@ -49,6 +49,10 @@ $order-summary-bg: #f7f7f9;
     }
 
     .support-options {
+      @include mobile {
+        // TODO - Put on bottom on screen as in design.
+        display: none;
+      }
       margin:0;
       float:right !important;
       line-height: 60px;
