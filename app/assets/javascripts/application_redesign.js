@@ -8,6 +8,7 @@
 //= require jquery-fileupload/jquery.fileupload
 
 //= require libs/underscore-min
+//= require bootstrap
 
 //---------------------------
 // Spree have this by default

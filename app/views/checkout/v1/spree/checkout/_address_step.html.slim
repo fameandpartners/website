@@ -2,46 +2,21 @@
   | window.bill_address = #{ raw ::AddressSerializer.new(current_order.bill_address).to_json };
 
 - if current_step.eql?('address')
-
-  - if signed_in?
-    h2.checkout-section-title 1. Log In
-    p
-      ' Currently logged in as
-      strong= current_spree_user.email
-  - else
-    h2.checkout-section-title 1. Log In if you have an account
-    .auth-alert.alert-dismissible.fade.in.alert-danger
-      button type="button" class="close" data-dismiss="alert" aria-label="Close" x
-      h3.alert-danger
-        | Invalid email or password
-    .row
-      .col-md-6.form-group
-        label
-          | Email address *
-        = text_field_tag 'email', nil, class: 'form-control form-control-md'
-      .col-md-6.form-group
-        label
-          | Password *
-        = text_field_tag 'password', nil, class: 'form-control form-control-md', type: 'password'
-    .row
-      .col-md-6.form-group
-        = link_to 'log in', login_path, class: 'btn btn-block btn-black btn-md open-login-popup'
-      .col-md-6.form-group
-        = link_to 'Sign in with Facebook', fb_auth_path, class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
+  = render partial: 'email_login'
   = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global checkout-form'}, remote: false do |form|
     = render :partial => 'shared/error_messages', locals: { target: @order }
 
     = hidden_field_tag :create_account, :value => true
 
-    h2.checkout-section-title 2. Billing Address
-    / br
+    h2.checkout-section-title 2. Address Details
+    p Where should we send your receipt and tracking details?
     .form-wrapper data-hook='billing_inner'
       = form.fields_for :bill_address do |bill_form|
         = render partial: 'spree/checkout/address_form', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
 
     .row
       .col-md-12.form-group
-        = form.label :customer_notes
+        = form.label :customer_notes, 'Comments or special instructions'
         = form.text_field :customer_notes, class: 'required form-control form-control-md'
 
     .row
@@ -62,28 +37,6 @@
 
     .row
       .col-md-6.form-group
-        = form.submit 'Next', data: { loading: 'Saving...' }, class: 'btn btn-block btn-md btn-black'
-
-- else
-  h2.checkout-section-title  Billing and shipping Address
-  / br
-  .row
-    .col-md-6
-      - if (address = @order.bill_address).present?
-        h3 Billing Address
-        p = address.full_name
-        p = address.address1
-        p = address.address2
-        p = address.city
-        p = address.country
-    .col-md-6
-      - if (address = @order.ship_address).present?
-        h3 Shipping Address
-        p = address.full_name
-        p = address.address1
-        p = address.address2
-        p = address.city
-        p = address.country
-  .row
-    .col-md-12
-      = link_to 'Edit your Billing or Shipping Details', checkout_state_path('address'), :remote => false, class: 'edit'
+        button.btn.btn-block.btn-md.btn-black data-loading='Saving...'
+          i.icon.icon-lock
+          ' Pay Securely

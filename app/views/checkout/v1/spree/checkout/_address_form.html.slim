@@ -22,22 +22,17 @@ ruby:
     | });
 
 .row
+  .col-md-12.form-group
+    = form.label :email, with_required_mark(t(:email))
+    = form.text_field :email, class: 'required form-control form-control-md', value: form.object.email, required: 'required'
+
+.row
   .col-md-6.form-group
     = form.label :firstname, with_required_mark(t(:first_name))
     = form.text_field :firstname, class: 'required form-control form-control-md', value: first_name, required: 'required'
   .col-md-6.form-group
     = form.label :lastname, with_required_mark(t(:last_name))
     = form.text_field :lastname, class: 'required form-control form-control-md', value: last_name, required: 'required'
-
-.row
-  .col-md-12.form-group
-    = form.label :email, with_required_mark(t(:email))
-    = form.text_field :email, class: 'required form-control form-control-md', value: form.object.email, required: 'required'
-
-  - if Spree::Config[:company]
-    .col-md-12.form-group
-      = form.label :company, t(:company)
-      = form.text_field :company, class: 'form-control form-control-md'
 
 .row
   .col-md-12.form-group
@@ -55,14 +50,6 @@ ruby:
     = form.label :city, with_required_mark(t(:city))
     = form.text_field :city, class: 'required form-control form-control-md', required: 'required'
 
-  .col-md-4.form-group
-    = form.label :country_id, with_required_mark(t(:country))
-    select id=(country_field_id) name="#{form.object_name}[country_id]" class="form-control form-control-md selectbox"
-      - available_countries_for_current_zone.each do |country|
-        option selected=(address.country_id == country.id) value=(country.id) data-states-required=(country.states_required ? 'required' : nil)
-          = country.name
-    /= form.select :country_id, available_countries_for_current_zone, :id, :name, {}, {:class => 'required form-control form-control-md selectbox'}
-
   .col-md-4.form-group class=(address.country.states_required ? '' : 'hidden')
     = form.label :state, with_required_mark(t(:state))
     span.states_selector_container  class=(have_states ? 'required' : 'hidden')
@@ -75,9 +62,16 @@ ruby:
                       :class => !have_states ? 'required  form-control form-control-md' : 'hidden  form-control form-control-md',
                       :disabled => have_states)
 
+  .col-md-4.form-group
+    = form.label :country_id, with_required_mark(t(:country))
+    select id=(country_field_id) name="#{form.object_name}[country_id]" class="form-control form-control-md selectbox"
+      - available_countries_for_current_zone.each do |country|
+        option selected=(address.country_id == country.id) value=(country.id) data-states-required=(country.states_required ? 'required' : nil)
+          = country.name
+
 .row
   .col-md-6.form-group
-    = form.label :phone, with_required_mark(t(:phone))
+    = form.label :phone, with_required_mark(t(:phone_number))
     = form.phone_field :phone, class: 'required form-control form-control-md', required: 'required'
 
   .col-md-6.form-group
