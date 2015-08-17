@@ -148,7 +148,6 @@ class Products::CollectionResource
       result = query.results.map do |color_variant|
         discount = Repositories::Discount.get_product_discount(color_variant.product.id)
         price    = Spree::Price.new(amount: color_variant.prices[current_currency], currency: current_currency)
-        #color    = Repositories::ProductColors.read(color_variant.color.id)
 
         Products::Collection::Dress.from_hash(
           id:             color_variant.product.id,

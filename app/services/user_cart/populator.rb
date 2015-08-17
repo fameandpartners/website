@@ -42,19 +42,19 @@ class  UserCart::Populator
       product: product,
       cart_product: Repositories::CartProduct.new(line_item: line_item).read
     })
-#  rescue Errors::ProductOptionsNotCompatible, Errors::ProductOptionNotAvailable, StandardError => e
-#    begin
-#      err_attrs = {
-#        :order              => @order.to_h,
-#        :site_version       => @site_version.to_h,
-#        :product_attributes => @product_attributes
-#      }
-#
-#      NewRelic::Agent.notice_error(e, err_attrs)
-#    rescue StandardError
-#      #turtles
-#    end
-#    OpenStruct.new({ success: false, message: e.message, attrs: err_attrs })
+  rescue Errors::ProductOptionsNotCompatible, Errors::ProductOptionNotAvailable, StandardError => e
+    begin
+      err_attrs = {
+        :order              => @order.to_h,
+        :site_version       => @site_version.to_h,
+        :product_attributes => @product_attributes
+      }
+
+      NewRelic::Agent.notice_error(e, err_attrs)
+    rescue StandardError
+      #turtles
+    end
+    OpenStruct.new({ success: false, message: e.message, attrs: err_attrs })
   end
 
   private
@@ -87,7 +87,7 @@ class  UserCart::Populator
       personalization = build_personalization
       if personalization.valid?
         if line_item.blank? # user already have customized dress [ we can't have more than one personalization per dress ]
-          add_product_to_cart(ignore_stock_level = true)
+          add_product_to_cart(true)
         end
 
         if line_item.present?
