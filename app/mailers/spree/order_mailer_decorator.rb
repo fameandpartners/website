@@ -111,7 +111,8 @@ Spree::OrderMailer.class_eval do
       display_item_total: @order.display_item_total,
       adjustments:        adjustments,
       display_total:      @order.display_total,
-      auto_account:       @order.user && @order.user.automagically_registered?
+      auto_account:       @order.user && @order.user.automagically_registered?,
+      today:              Date.today.to_formatted_s(:long)
     )
   end
 
