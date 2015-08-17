@@ -8,7 +8,7 @@
 
     = hidden_field_tag :create_account, :value => true
 
-    h2.checkout-section-title 2. Shipping Details
+    h2.checkout-section-title 2. Address Details
     p Where should we send your receipt and tracking details?
     .form-wrapper data-hook='billing_inner'
       = form.fields_for :bill_address do |bill_form|
