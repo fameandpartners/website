@@ -88,7 +88,10 @@ module StyleQuiz
         if answers[:birthday].present?
           profile.birthday = Date.strptime(answers[:birthday], I18n.t('date_format.backend'))
         end
-        profile.events = (answers[:events] || []).map{|d| StyleQuiz::UserProfileEvent.new(d) }
+        events = (answers[:events] || []).map{|d| StyleQuiz::UserProfileEvent.new(d) }
+        profile.events = events.select(&:valid?)
+        profile
+      rescue
         profile
       end
   end

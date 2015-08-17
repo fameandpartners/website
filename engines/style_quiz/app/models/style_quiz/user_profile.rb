@@ -32,12 +32,13 @@ class StyleQuiz::UserProfile < ActiveRecord::Base
       self.assign_attributes(answer_values)
       self.answer_ids = answer_ids
       self.events = events.map do |event_data|
-        ::StyleQuiz::UserProfileEvent.new(
+        event = ::StyleQuiz::UserProfileEvent.new(
           name: event_data[:name],
           event_type: event_data[:event_type],
           date: Date.strptime(event_data[:date], I18n.t('date_format.backend'))
         )
-      end
+        event.save ? event : nil
+      end.compact
       self.tags = HashWithIndifferentAccess.new(StyleQuiz::Answer.get_weighted_tags(ids: answer_ids))
       self.completed_at = Time.now
 
