@@ -225,6 +225,11 @@ Spree::CheckoutController.class_eval do
     end
   end
 
+  # At the payment step, initialize the request token for MasterPass
+  def masterpass_request_token
+
+  end
+
   helper_method :completion_route
 
   def set_order_site_version
