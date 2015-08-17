@@ -97,6 +97,14 @@ $order-summary-bg: #f7f7f9;
         color: $checkout-info-peach;
       }
     }
+    #comodo{
+      margin-top: -10px;
+      margin-right: 12px;
+      @media (max-width: 375px){
+        margin-top: -20px;
+        margin-right: 5px;
+      }
+    }
   }
 
   .help-block {

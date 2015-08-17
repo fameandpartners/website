@@ -25,6 +25,11 @@
           ol.breadcrumb
             li class=('active' if current_step.eql?('address')) Your information
             li class=('active' if current_step.eql?('payment')) Payment Method
+            a#comodo href="https://www.instantssl.com/ssl.html"  style="text-decoration:none;float:right"
+              img alt="SSL" src="https://www.instantssl.com/ssl-certificate-images/support/comodo_secure_100x85_transp.png" style="border: 0px;"
+              br
+              span style="font-weight:bold;font-size:15px; padding-left:40px; color:#86BEE0;"
+                | SSL
 
         .checkout-step data-name="address"
           = render 'address_step', current_step: current_step
