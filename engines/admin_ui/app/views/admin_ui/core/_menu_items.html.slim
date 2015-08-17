@@ -7,6 +7,14 @@ li class=active_link_to_class(caches_path)
     = active_link_to 'Caches', caches_path, wrap_tag: :li
     = active_link_to 'Sidekiq', sidekiq_web_path, wrap_tag: :li
 
+li class=active_link_to_class('', active: /content/)
+  a href="#"
+    i.fa.fa-file-o
+    span.nav-label Content
+    span.fa.arrow
+  ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
+    = active_link_to 'Pages', content_pages_path, wrap_tag: :li
+
 = menu_item root_path, 'Dashboard', icon: 'dashboard', exact: true
 = menu_item preferences_path, 'Preferences', icon: 'cog', exact: true
 
