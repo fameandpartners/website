@@ -42,6 +42,7 @@ Spree::OrderMailer.class_eval do
       line_item[:quantity]                    = item.quantity
       line_item[:factory]                     = item.factory
       line_item[:deliver_date]                = @order.projected_delivery_date
+      line_item[:express_making]              = ""
       if item.making_options.present?
         line_item[:express_making] = item.making_options.map{|option| option.name.upcase }.join(', ')
       end
