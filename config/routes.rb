@@ -142,6 +142,12 @@ FameAndPartners::Application.routes.draw do
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
     end
 
+    # Jackets
+    scope '/jackets' do
+      get '/', to: 'products/collections#show', as: :jackets, defaults: { permalink: 'jackets_collection' }
+      get '/jacket-:product_slug', to: 'products/details#show', as: :jacket_details
+    end
+
     scope '/dresses' do
       root to: 'products/collections#show', as: :dresses
       get '/', to: 'products/collections#show', as: :collection
@@ -162,7 +168,6 @@ FameAndPartners::Application.routes.draw do
       get '/event/:taxon', to: redirect('/dresses/%{taxon}')
       get '/sale-(:sale)' => 'products/collections#show', as: "dresses_on_sale"
       get '/*permalink' => 'products/collections#show', as: 'taxon'
-      get 't/*id', :to => 'taxons#show', :as => :dress_nested_taxons
     end
 
     # Custom Dresses

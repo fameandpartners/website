@@ -30,6 +30,26 @@ describe PathBuildersHelper, :type => :helper do
     end
   end
 
+  describe '#collection_jacket_path' do
+    let(:jacket) { build_stubbed(:jacket, id: 101, name: 'Super Jacket') }
+
+    context 'product has a color' do
+      let(:color_double) { double('Color', name: 'pastel') }
+
+      before(:each) { allow(jacket).to receive(:color).and_return(color_double) }
+
+      it 'returns the path of a jacket with the given color' do
+        result = helper.collection_jacket_path(jacket)
+        expect(result).to eq('/jackets/jacket-super-jacket-101?color=pastel')
+      end
+    end
+
+    it 'returns the path of a jacket' do
+      result = helper.collection_jacket_path(jacket)
+      expect(result).to eq('/jackets/jacket-super-jacket-101')
+    end
+  end
+
   describe '#build_url' do
     context 'given an array of strings as parts of a path' do
       it 'builds a path without a query string' do
