@@ -12,9 +12,9 @@ class CreateJacketsTaxonomy < ActiveRecord::Migration
     jackets_taxon.publish!
 
     # Pages
-    jackets_page = Revolution::Page.new(path: '/jackets', template_path: '/products/jackets/collection.html.slim')
-    jackets_page.save
+    jackets_page = Revolution::Page.create!(path: '/jackets', template_path: '/products/jackets/collection.html.slim')
     jackets_page.publish!
+    jackets_page.translations.create!(locale: 'en-US', title: 'Jackets', meta_description: 'Jackets')
   end
 
   def down
