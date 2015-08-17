@@ -9,6 +9,7 @@
     = hidden_field_tag :create_account, :value => true
 
     h2.checkout-section-title 2. Shipping Details
+    p Where should we send your receipt and tracking details?
     .form-wrapper data-hook='billing_inner'
       = form.fields_for :bill_address do |bill_form|
         = render partial: 'spree/checkout/address_form', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}

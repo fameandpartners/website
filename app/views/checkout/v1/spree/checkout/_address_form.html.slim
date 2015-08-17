@@ -22,17 +22,17 @@ ruby:
     | });
 
 .row
+  .col-md-12.form-group
+    = form.label :email, with_required_mark(t(:email))
+    = form.text_field :email, class: 'required form-control form-control-md', value: form.object.email, required: 'required'
+
+.row
   .col-md-6.form-group
     = form.label :firstname, with_required_mark(t(:first_name))
     = form.text_field :firstname, class: 'required form-control form-control-md', value: first_name, required: 'required'
   .col-md-6.form-group
     = form.label :lastname, with_required_mark(t(:last_name))
     = form.text_field :lastname, class: 'required form-control form-control-md', value: last_name, required: 'required'
-
-.row
-  .col-md-12.form-group
-    = form.label :email, with_required_mark(t(:email))
-    = form.text_field :email, class: 'required form-control form-control-md', value: form.object.email, required: 'required'
 
 .row
   .col-md-12.form-group

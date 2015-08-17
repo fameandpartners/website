@@ -1,10 +1,12 @@
-h2.checkout-section-title 1. Your information
-p Where should we send your receipt and tracking details?
+
 - if signed_in?
+  h2.checkout-section-title 1. Your information
   p
-    ' Currently logged in as
+    ' We've got you at
     strong= current_spree_user.email
 - else
+  h2.checkout-section-title 1. Your information
+  p Login if you have an account
   .auth-alert.alert-dismissible.fade.in.alert-danger
     button type="button" class="close" data-dismiss="alert" aria-label="Close" x
     h3.alert-danger
