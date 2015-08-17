@@ -98,10 +98,16 @@ $order-summary-bg: #f7f7f9;
       }
     }
     #comodo{
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
       margin-top: -10px;
       margin-right: 12px;
       @media (max-width: 375px){
         margin-top: -20px;
+        margin-right: 5px;
+      }
+      @media (max-width: 320px){
+        margin-top: 25px;
         margin-right: 5px;
       }
     }
