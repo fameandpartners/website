@@ -27,6 +27,7 @@ class Products::CollectionResource
   attr_reader :style
   attr_reader :edits
   attr_reader :event
+  attr_reader :show_jackets
   attr_reader :bodyshape
   attr_reader :color, :color_group
   attr_reader :discount
@@ -46,6 +47,7 @@ class Products::CollectionResource
     @color_group  = Repositories::ProductColors.get_group_by_name(options[:color_group])
     @color        = Repositories::ProductColors.get_by_name(options[:color])
     @discount     = prepare_discount(options[:discount])
+    @show_jackets = options[:show_jackets]
     @fast_making  = options[:fast_making]
     @query_string = options[:query_string]
     @order        = options[:order]
@@ -126,11 +128,14 @@ class Products::CollectionResource
       end
 
       result[:discount] = discount if discount.present?
-      result[:fast_making] = fast_making if !fast_making.nil?
+      result[:fast_making] = fast_making unless fast_making.nil?
       result[:query_string] = query_string if query_string.present?
       result[:order] = order if order.present?
       result[:limit] = limit if limit.present?
       result[:offset] = offset if offset.present?
+
+      # Jackets
+      result[:show_jackets] = show_jackets
 
       result
     end

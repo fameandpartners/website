@@ -13,9 +13,7 @@ Spree::UserRegistrationsController.class_eval do
   end
 
   def new
-    if params[:prom]
-      session[:spree_user_return_to] = main_app.step1_custom_dresses_path
-    elsif params[:quiz]
+    if params[:quiz]
       session[:show_quiz] = true
     elsif params[:personalization]
       session[:personalization] = true

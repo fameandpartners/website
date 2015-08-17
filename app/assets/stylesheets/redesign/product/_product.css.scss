@@ -9,7 +9,7 @@
 .product-content {
 	position: absolute;
 	z-index: 50;
-	top: 8rem;
+	top: 15rem;
 
 	.row {
 		padding-top: 1.45rem;
@@ -148,11 +148,6 @@
 	background-color: transparent;
 }
 
-
-.select2-container .select2-selection--single {
-	height:4.5rem !important ;
-}
-
 .remove-selection {
 	float:right;
 	padding-right: 1rem;
@@ -270,10 +265,12 @@
     font-family: $font-family-secondary !important;
   }
 
-.vex.vex-theme-flat-attack .vex-content h6, span {
-  text-transform: uppercase;
-  font-weight: 500 !important;
-  margin-bottom: 0;
+.vex.vex-theme-flat-attack .vex-content {
+  h6, span {
+    text-transform: uppercase;
+    font-weight:    500 !important;
+    margin-bottom:  0;
+  }
 }
 
 @media (max-width: 768px) {

@@ -5,7 +5,7 @@ describe 'Seo Helpers' do
   include CommonHelper
   let(:au)                    { false }
   let(:current_site_version)  { double(SiteVersion, :is_australia? => au) }
-  let(:request)               { double('Request', :fullpath => '/blah/vtha') }
+  let(:request)               { double('Request', :url => 'http://fameandpartners.test/blah/vtha', :fullpath => '/blah/vtha') }
 
   before do
     allow(self).to receive(:get_host).and_return('fameandpartners.test')
@@ -14,12 +14,25 @@ describe 'Seo Helpers' do
   describe '#get_href_lang' do
     let(:lang)     { :us }
     subject(:href) { get_hreflang(lang) }
+
     it 'generates default path' do
       expect(href).to eq 'http://fameandpartners.test/blah/vtha'
     end
 
-    context 'austrlian site' do
-      let(:au)   { true }
+    context 'homepage' do
+      let(:request) { double('Request', :url => 'http://fameandpartners.test/', :fullpath => '/') }
+
+      context 'australian site' do
+        let(:lang) { :au }
+
+        it 'generates path with trailing slash' do
+          expect(href).to eq 'http://fameandpartners.test/au/'
+        end
+      end
+    end
+
+    context 'australian site' do
+      let(:au) { true }
 
       context 'us lang' do
         it 'generates default path' do
@@ -29,6 +42,7 @@ describe 'Seo Helpers' do
 
       context 'au lang' do
         let(:lang) { :au }
+
         it 'generates au path' do
           expect(href).to eq 'http://fameandpartners.test/au/blah/vtha'
         end
@@ -37,13 +51,13 @@ describe 'Seo Helpers' do
   end
 
   describe '#get_canonical_href' do
-
     it 'should generate path' do
       expect(get_canonical_href).to eq 'http://fameandpartners.test/blah/vtha'
     end
 
     context 'is_australian?' do
-      let(:au) { true}
+      let(:request) { double('Request', :url => 'http://fameandpartners.test/au/blah/vtha') }
+
       it 'should generate au path' do
         expect(get_canonical_href).to eq 'http://fameandpartners.test/au/blah/vtha'
       end

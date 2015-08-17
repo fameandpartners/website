@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', :github => 'rails/rails', :branch => '3-2-stable'
+gem 'rails', '~> 3.2.22'
 gem 'pg'
 gem 'slim'
 gem 'slim-rails'
@@ -129,17 +129,16 @@ group :development, :test do
   # gem 'minitest'
   gem 'net-ssh', '~> 2.7.0'
   gem 'oink'
-  # gem 'pry'
-  # gem 'pry-debugger'
   gem 'pry-byebug'
   gem 'quiet_assets'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-collection_matchers'
   gem 'rspec-rails', '~> 3.2'
   gem 'shoulda-matchers'
+  gem 'timecop'
   gem 'spring'
   gem 'thin'
-
+  gem 'meta_request'
 end
 
 group :staging, :development do

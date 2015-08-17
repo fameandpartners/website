@@ -44,6 +44,7 @@ module Reports
           li.price                  as sale_price,
           li.old_price              as original_price,
           (li.old_price - li.price) as discount,
+          o.currency                as currency,
           v.product_id              as product_id,
           p.name                    as product_name,
           mv.sku                    as sku,

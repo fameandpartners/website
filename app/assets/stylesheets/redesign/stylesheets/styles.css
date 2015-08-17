@@ -5113,7 +5113,7 @@ tbody.collapse.in {
 .navbar {
   position: relative;
   min-height: 50px;
-  margin-bottom: 25px;
+  margin-bottom: 0;
   border: 1px solid transparent;
 }
 /* line 14, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_clearfix.scss */
@@ -8526,7 +8526,7 @@ h1 {
 /* line 48, ../sass/_typography.scss */
 h1 {
   padding-bottom: 40px;
-  font-size: 48px !important;
+  font-size: 48px;
 }
 
 /* line 53, ../sass/_typography.scss */
@@ -8748,8 +8748,14 @@ p {
   width: 100%;
   z-index: 100;
   background: white;
-  height: 70px;
   border-bottom: 1px solid #eeeeee;
+}
+
+
+@media only screen and (max-width: 992px) {
+  .nav-menu {
+    height: 70px;
+  }
 }
 
 /* line 14, ../sass/_nav.scss */
@@ -8798,15 +8804,10 @@ p {
   color: #f8dadf;
 }
 
-/* line 64, ../sass/_nav.scss */
-.nav-menu-container {
-  height: 70px;
-}
-
 /* line 71, ../sass/_nav.scss */
 .mega-menu-menu, .search-bar, .mega-menu {
   position: absolute;
-  top: 70px;
+  top: 105px;
   padding: 0px;
   background: #f4f4f4;
   width: 100%;
@@ -9522,7 +9523,6 @@ p {
 
 /* line 272, ../sass/styles.scss */
 .page-content {
-  padding-top: 70px;
   padding-bottom: 60px;
 }
 
@@ -9711,11 +9711,6 @@ p {
 }
 
 /* line 525, ../sass/styles.scss */
-#slides {
-  margin-top: 70px;
-}
-
-/* line 529, ../sass/styles.scss */
 #slides {
   position: relative;
 }
@@ -10175,8 +10170,8 @@ p {
   /* line 31, ../sass/_media.scss */
   .nav-menu {
     background: white !important;
+    position: absolute;
   }
-
   /* line 35, ../sass/_media.scss */
   .margin-top-100-mobile {
     margin-top: 100px;
@@ -10190,11 +10185,6 @@ p {
   /* line 43, ../sass/_media.scss */
   .btn {
     font-size: 1em !important;
-  }
-
-  /* line 51, ../sass/_media.scss */
-  .nav-menu {
-    position: absolute;
   }
 }
 @media screen and (max-width: 768px) {
@@ -10287,9 +10277,9 @@ p {
 /* line 44, ../sass/_category.scss */
 .page-title {
   background-size: cover;
-  margin-top: 70px;
   position: relative;
 }
+
 /* line 50, ../sass/_category.scss */
 .page-title:after {
   content: "";
@@ -10574,13 +10564,6 @@ div.cs-active {
   cursor: default;
 }
 
-@font-face {
-  font-family: 'icomoon';
-  src: url("../fonts/icomoon/icomoon.eot?-rdnm34");
-  src: url("../fonts/icomoon/icomoon.eot?#iefix-rdnm34") format("embedded-opentype"), url("../fonts/icomoon/icomoon.woff?-rdnm34") format("woff"), url("../fonts/icomoon/icomoon.ttf?-rdnm34") format("truetype"), url("../fonts/icomoon/icomoon.svg?-rdnm34#icomoon") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
 /* line 123, ../sass/_dropdowns.scss */
 .cs-options span {
   color: #ccc;

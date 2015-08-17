@@ -32,7 +32,10 @@ class Products::CollectionsController < Products::BaseController
   attr_reader :page
   helper_method :page
 
-  before_filter :load_page, :set_collection_resource, :set_collection_seo_meta_data
+  before_filter :redirect_undefined,
+                :load_page,
+                :set_collection_resource,
+                :set_collection_seo_meta_data
 
   def show
     @filter = Products::CollectionFilter.read
@@ -49,6 +52,12 @@ class Products::CollectionsController < Products::BaseController
 
   private
 
+    def redirect_undefined
+      if params[:permalink] =~ /undefined\Z/
+        redirect_to '/undefined', status: :moved_permanently
+      end
+    end
+
     def load_page
       current_path = LocalizeUrlService.remove_version_from_url(request.path)
       @page = Revolution::Page.find_for(current_path, '/dresses/*')
@@ -58,13 +67,12 @@ class Products::CollectionsController < Products::BaseController
     def set_collection_resource
       @collection_options = parse_permalink(params[:permalink])
       @collection = collection_resource(@collection_options)
-      if params[:pids]
-        punch_products
-      end
+
+      punch_products if product_ids
     end
 
     def punch_products
-      products = Revolution::ProductService.new(params[:pids], current_site_version).products
+      products = Revolution::ProductService.new(product_ids, current_site_version).products
       @collection.products = products + @collection.products
     end
 
@@ -87,9 +95,12 @@ class Products::CollectionsController < Products::BaseController
       end
     end
 
+    def product_ids
+      params[:pids] || page.get(:pids)
+    end
+
     def limit
-      default = page_is_lookbook? ? 99 : 20
-      params[:limit] || default
+      params[:limit] || page.get(:limit) || 20
     end
 
     def page_is_lookbook?
@@ -113,6 +124,7 @@ class Products::CollectionsController < Products::BaseController
       Products::CollectionResource.new(@resource_args).read
     end
 
+
     def parse_permalink(permalink)
       return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
 
@@ -130,8 +142,9 @@ class Products::CollectionsController < Products::BaseController
         end
       end
 
-      if permalink =~ /undefined\Z/
-        redirect_to '/undefined'
+      # Jackets
+      if permalink == 'jackets_collection'
+        return { show_jackets: true }
       end
 
       # Didn't find any collection associated with the permalink

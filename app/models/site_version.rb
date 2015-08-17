@@ -132,20 +132,6 @@ class SiteVersion < ActiveRecord::Base
       find_by_permalink(permalink) || default
     end
 
-    def by_country_code_or_default(country_code)
-      country_code ||= 'us'
-      country = Spree::Country.where(iso: country_code.upcase).first
-      site_version = nil
-      if country.present?
-        zones_ids = Spree::ZoneMember.where(
-          zoneable_id: country.id, zoneable_type: "Spree::Country"
-        ).select(:zone_id).map(&:zone_id)
-        site_version = SiteVersion.where(zone_id: zones_ids).first
-      end
-
-      site_version || SiteVersion.default
-    end
-
     def by_currency_or_default(currency)
       SiteVersion.where(currency: currency).first || SiteVersion.default
     end

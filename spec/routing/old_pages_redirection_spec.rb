@@ -19,6 +19,9 @@ describe 'Old Pages Redirection', type: :request do
   context 'blog' do
     it_will :redirect, '/blog', 'http://blog.fameandpartners.com'
     it_will :redirect, '/blog/anything/else?really=true', 'http://blog.fameandpartners.com'
+
+    it_will :redirect, '/au/blog', 'http://blog.fameandpartners.com'
+    it_will :redirect, '/au/blog/anything/else?really=true', 'http://blog.fameandpartners.com'
   end
 
   context 'celebrities redirects to /dresses' do

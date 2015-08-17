@@ -24,14 +24,14 @@ module AdminUi
 
       # lol programming
       def from_date
-        date(params[:from], default: 1.week.ago)
+        date(params[:from], default: 1.month.ago)
       end
 
       def to_date
         date(params[:to], default: Date.today)
       end
 
-      def date(parameter, default: default)
+      def date(parameter, default: )
         if parameter.present?
           Date.parse(parameter.to_s).to_date
         else
