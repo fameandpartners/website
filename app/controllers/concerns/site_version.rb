@@ -5,7 +5,7 @@ module Concerns::SiteVersion
     attr_writer :current_site_version
 
     before_filter :show_locale_warning
-    before_filter :check_site_version
+    before_filter :check_site_version, unless: [:on_checkout_path, :request_not_get_or_ajax]
 
     helper_method :current_site_version, :site_versions_enabled?
   end
@@ -20,9 +20,6 @@ module Concerns::SiteVersion
   end
 
   def check_site_version
-    # Add to cart and submitting forms should not change site version
-    return :no_change if (!request.get? || request.xhr? || request.path == '/checkout')
-
     if site_version_param != current_site_version.code
       @current_site_version = ::SiteVersion.by_permalink_or_default(site_version_param)
     end
@@ -50,5 +47,15 @@ module Concerns::SiteVersion
 
   def site_version_param
     params[:site_version] || SiteVersion.default.code
+  end
+
+  private
+
+  def on_checkout_path
+    request.path.match('/checkout$')
+  end
+
+  def request_not_get_or_ajax
+    !request.get? || request.xhr?
   end
 end
