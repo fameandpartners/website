@@ -93,8 +93,10 @@ FameAndPartners::Application.routes.draw do
 
     get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
 
-    #lookbooks
-    get '/lookbook' => redirect('/lookbook/the-luxe-collection', :status => 302)
+    # Lookbooks
+    # # Note: this 302 redirection is used on widgets, and it can change in the future. This should stay as a temporary redirection.
+    # # Widgets are iframes, and every href have no follows.
+    get '/lookbook' => redirect('/lookbook/the-luxe-collection', :status => 302), as: :lookbook
 
     get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
 
