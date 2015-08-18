@@ -11,10 +11,10 @@ describe Spree::Admin::GeneralSettingsController, :type => :controller do
   end
 
   describe 'GET /admin/general_settings/edit' do
-    it 'adds homepage_title to @preferences_general' do
+    it 'removes default_seo_title of @preferences_general array' do
       get :edit
       expect(assigns(:preferences_general)).not_to be_nil
-      expect(assigns[:preferences_general]).to include(:homepage_title)
+      expect(assigns[:preferences_general]).not_to include(:default_seo_title)
     end
   end
 end

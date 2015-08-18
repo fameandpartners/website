@@ -18,14 +18,6 @@ ruby:
   .price
     - discount = product_discount(Spree::Product.where(id: variant.product.id).first)
     = product_price_with_discount(variant.price, discount)
-    /- if show_prices_with_applied_promocode?
-      span.price-old = variant.price.display_price
-      = current_promotion.calculate_price_with_discount(variant.price).display_price
-    /- elsif current_sale.is_active?
-      span.price-old = variant.price.display_price_without_discount
-      = variant.price.display_price_with_discount(variant.product.is_surryhills).to_s
-    /- else
-      = variant.price.display_price.to_s.html_safe
   .buttons
     .buy-button
       = link_to "Buy", colored_variant_path(variant, :cf => 'collection'), class: 'btn black small', title: "Buy this dress"

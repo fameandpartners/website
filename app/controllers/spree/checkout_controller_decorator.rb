@@ -4,7 +4,11 @@ Spree::CheckoutController.class_eval do
   before_filter :find_payment_methods, only: [:edit, :update]
   skip_before_filter :check_registration
 
-  layout 'redesign/application_simple'
+  before_filter def switch_views_version
+    prepend_view_path Rails.root.join('app/views/checkout/v1')
+  end
+
+  layout 'redesign/checkout'
 
   # update - address/payment
   def update

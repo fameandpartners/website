@@ -43,11 +43,7 @@ module CommonHelper
   end
 
   def get_base_href
-    if current_site_version.is_australia? && !request.fullpath.include?('/au')
-      return "http://#{get_host}/au#{request.fullpath}"
-    end
-
-    "http://#{get_host}#{request.fullpath}"
+    LocalizeUrlService.localize_url(request.url, current_site_version)
   end
 
   # social links helper

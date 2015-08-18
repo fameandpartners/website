@@ -16,6 +16,8 @@ meta property="og:description" content=truncate(get_meta_description, length:140
 
 meta property="og:site_name" content="Fame &amp; Partners"
 
+meta name="p:domain_verify" content="bca305b234684f817b52dc0131747eb6"
+
 script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"
 
 = render :partial => 'shared/sharethis'
@@ -27,7 +29,7 @@ script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1
 - if Rails.env.production? || Features.active?(:test_analytics, current_spree_user)
   = render '/shared/customerio'
   = render '/shared/mixpanel'
-  = render '/spree/shared/google_analytics'
+  = render '/shared/tracking/google_analytics'
   = render '/shared/zopim'
   = render '/shared/hotjar'
 

@@ -7,26 +7,21 @@
 
 module Revolution
   class Page < ActiveRecord::Base
-    attr_accessible :path, :template_path, :canonical, :redirect, :parent, :parent_id, :publish_from, :publish_to, :variables
+    attr_accessible :translations_attributes, :path, :template_path, :canonical, :redirect, :parent, :parent_id, :publish_from, :publish_to, :variables
 
     validates :path, :presence => true
     validate :path_has_not_changed, :on => :update #read only attributes
 
     has_many :translations
+    accepts_nested_attributes_for :translations, :reject_if => :all_blank
 
     acts_as_nested_set :counter_cache => :children_count
 
-    serialize :variables
+    serialize :variables, Hash
 
     delegate :title, :meta_description, :heading, :sub_heading, :description, :to => :translation
 
-    after_initialize :set_defaults
-
     attr_accessor :locale
-
-    def set_defaults
-      self.variables ||= {}
-    end
 
     def translation
       @translation ||= translations.find_for_locale(locale)

@@ -1,3 +1,5 @@
+/////////// Linear Gradient ///////////
+
 @mixin linear-gradient($pos, $G1, $G2: null,
                        $G3: null, $G4: null,
                        $G5: null, $G6: null,
@@ -35,4 +37,22 @@
   background-color: $fallback-color;
   background-image: -webkit-linear-gradient($pos-degree $full); // Safari 5.1+, Chrome
   background-image: unquote("linear-gradient(#{$pos-spec}#{$full})");
+}
+
+//////// CSS3 Transitions ////////////
+
+@mixin transition($transition) {
+  -moz-transition:    $transition;
+  -ms-transition:     $transition;
+  -o-transition:      $transition;
+  -webkit-transition: $transition;
+  transition:         $transition;
+}
+
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
 }

@@ -4,12 +4,14 @@
 @import 'redesign/vars';
 @import 'redesign/mixins';
 @import 'redesign/extras/helpers';
+@import 'media_queries';
 
 @import 'redesign/libs/chosen';
 @import 'redesign/extras/chosen_override';
 @import 'redesign/extras/tabs';
 
 @import 'redesign/icons';
+@import 'libs/icomoon_fame_2015/icons';
 
 @import 'redesign/layout';
 @import 'redesign/header';
@@ -42,6 +44,7 @@
 @import 'redesign/tables';
 
 @import 'redesign/checkout';
+@import 'redesign/checkout_v2';
 @import 'redesign/cart';
 
 // Time specific content
@@ -137,20 +140,4 @@ input.form-control {
   }
 }
 
-.checkout .slash {
-  margin-top: 60px;
-  float: left;
-  margin-left: -5px;
-  margin-right: -5px;
-}
 
-.checkout .card_code {
-  @media(max-width: 480px){
-    clear: both;
-  }
-}
-
-.checkout .shipAddress{
-  text-transform: none;
-  margin-left: 10px;
-}

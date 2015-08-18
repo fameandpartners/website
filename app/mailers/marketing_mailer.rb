@@ -22,18 +22,27 @@ class MarketingMailer < ActionMailer::Base
 
     # Template Scope
     @resume_shop_url   = root_url(site_version: site_version.to_param)
-    @product_url       = collection_product_url(product, site_version: site_version.to_param)
+    @product_url       = collection_product_url(product, site_version: site_version.to_param, faadc: 'buyit10', skip_reminder:'true')
     @product_image_url = image_urls.sample
     @product_name      = product.name
     @original_price    = base_price.display_price
     @discounted_price  = Spree::Money.new(base_price.amount - base_price.amount * 0.1)
 
-    Slim::Engine.with_options(:pretty => true) do
-      mail(
-        to: user.email,
-        subject: t('emails.subjects.marketing.abandoned_cart')
-      )
-    end
+    subject = t('emails.subjects.marketing.abandoned_cart')
+
+    Marketing::CustomerIOEventTracker.new.track(
+      user,
+      'abandoned_cart',
+      email:             user.email,
+      subject:           subject,
+      resume_shop_url:   @resume_shop_url,
+      product_url:       @product_url,
+      product_image_url: @product_image_url,
+      product_name:      @product_name,
+      original_price:    @original_price,
+      discounted_price:  @discounted_price
+    )
+
   end
 
   def added_to_wishlist(user, site_version = nil)

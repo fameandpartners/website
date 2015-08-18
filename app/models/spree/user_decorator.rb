@@ -150,9 +150,14 @@ Spree::User.class_eval do
   end
 
   def send_welcome_email
-    return true if Rails.application.config.skip_mail_delivery
-    unless skip_welcome_email
-      ::Spree::UserMailer.welcome(self).deliver
-    end
+    tracker = Marketing::CustomerIOEventTracker.new
+    tracker.identify_user(self, recent_site_version)
+    tracker.track(
+      self,
+      'account_created',
+      first_name: self.first_name,
+      last_name: self.last_name,
+      email: self.email
+    )
   end
 end

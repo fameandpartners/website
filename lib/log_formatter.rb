@@ -1,4 +1,8 @@
+require 'term/ansicolor'
+
 module LogFormatter
+  include Term::ANSIColor
+
   module_function
   def terminal_formatter
     -> (severity, datetime, _progname, msg) do

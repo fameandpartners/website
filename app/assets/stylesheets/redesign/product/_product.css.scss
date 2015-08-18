@@ -265,10 +265,12 @@
     font-family: $font-family-secondary !important;
   }
 
-.vex.vex-theme-flat-attack .vex-content h6, span {
-  text-transform: uppercase;
-  font-weight: 500 !important;
-  margin-bottom: 0;
+.vex.vex-theme-flat-attack .vex-content {
+  h6, span {
+    text-transform: uppercase;
+    font-weight:    500 !important;
+    margin-bottom:  0;
+  }
 }
 
 @media (max-width: 768px) {

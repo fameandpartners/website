@@ -10,13 +10,8 @@ Spree::BannerBox.class_eval do
                   :custom => "#{a.instance.attachment_width}x#{a.instance.attachment_height}#"
                 }},
                 :convert_options => { :all => '-strip -auto-orient' }
-                
-  def self.big_banner
-    self.where('is_small =? and enabled =?',false,true).order('position ASC')
-  end  
 
-  def self.small_banner
-    self.where('is_small =? and enabled =?',true, true).order('position ASC')
-  end
-  
+  scope :big_banner      , -> { where('is_small = ? and enabled = ?', false, true).order('position ASC') }
+  scope :small_banner    , -> { where('is_small = ? and enabled = ?', true, true).order('position ASC') }
+  scope :for_site_version, -> (site_version) { where("css_class IS NULL OR css_class = '' OR css_class = ?", site_version.code) }
 end
