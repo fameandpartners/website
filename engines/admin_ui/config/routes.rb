@@ -18,8 +18,6 @@ AdminUi::Engine.routes.draw do
     delete :expire, :on => :collection
   end
 
-  resource :content_preview, only: :show
-
   namespace :content do
     resources :pages
   end

@@ -1,8 +1,8 @@
 html = '<%=j  render(template: 'users/orders/index.html') %>';
 
-$('body > .user-account-page-title').remove();
-$('body > .page-title').remove();
-$('body > .page-content').replaceWith(html);
+$('body .user-account-page-title').remove();
+$('body .page-title').remove();
+$('body .page-content').replaceWith(html);
 
 window.setCurrentPath('<%= user_orders_path %>')
 $(window).off('popstate').one('popstate', function() {
