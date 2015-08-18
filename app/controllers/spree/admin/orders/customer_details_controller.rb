@@ -24,8 +24,12 @@ module Spree
               #@order.shipping_method = shipping_method
 
             if @order.available_shipping_methods(:back_end).present?
-              if new_user_id && new_user_id != @order.user_id
-                update_order_owner(@order, new_user_id)
+              if new_user_id
+                ::Admin::ChangeOrderOwner.new(
+                  site_version: current_site_version,
+                  new_owner_id: new_user_id,
+                  order: @order
+                ).process
               end
 
               while @order.next; end
@@ -55,32 +59,6 @@ module Spree
             @order = Order.find_by_number!(params[:order_id], :include => :adjustments)
           end
 
-          # only update, will not delete owner
-          def update_order_owner(order, owner_id)
-            previous_user = order.user
-            owner = Spree::User.find_by_id(owner_id)
-            return false if owner.blank?
-
-            order.user_id = owner.id
-            order.user
-
-            # update user-related details
-            order.user_first_name = owner.first_name
-            order.user_last_name  = owner.first_name
-            order.email           = owner.email
-
-            if order.save
-              tracker = Marketing::CustomerIOEventTracker.new
-              tracker.identify_user(owner, current_site_version)
-              tracker.track(owner, 'order:new_owner', {
-                order_number: order.number,
-                original_customer_email: previous_user.try(:email),
-                updated_customer_email: owner.try(:email)
-              })
-            end
-
-            owner
-          end
       end
     end
   end
