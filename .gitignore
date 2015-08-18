@@ -16,6 +16,7 @@
 
 config/database.yml
 config/redis.yml
+config/elasticsearch.yml
 .DS_Store
 
 # Ignore RubyMine config files
