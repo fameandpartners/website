@@ -93,7 +93,9 @@ FameAndPartners::Application.routes.draw do
 
     get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
 
-    #edits
+    #lookbooks
+    get '/lookbook' => redirect('/lookbook/the-luxe-collection', :status => 302)
+
     get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
 
     get '/lookbook/garden-weeding' => redirect('/lookbook/garden-wedding')
