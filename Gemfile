@@ -117,8 +117,6 @@ end
 
 group :development, :test do
   gem 'awesome_print'
-  gem 'capistrano', '2.15.4', require: false
-  gem 'capistrano-rbenv', '0.0.10', require: false
   gem 'capybara'
   gem 'compass'
   gem 'database_cleaner', '0.9.1'
