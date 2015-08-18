@@ -13,7 +13,7 @@ window.StyleQuiz ||= {}
 window.StyleQuiz.BaseQuestion = class BaseQuestion
   constructor: (opts = {}) ->
     @$container = $("##{ opts.name }-question")
-    @$container.find('.quiz-section-window').height($(window).height() - 70)
+    @$container.find('.quiz-section-window').height($(window).height() - 110)
     @$container.on('click', '*[data-action=next]', @submitQuestion)
     @$container.on('click', '*[data-action=previous]', @previousQuestion)
     @name   = opts.name
