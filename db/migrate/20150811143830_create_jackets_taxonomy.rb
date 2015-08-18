@@ -2,8 +2,10 @@ class CreateJacketsTaxonomy < ActiveRecord::Migration
   class Spree::Taxonomy < ActiveRecord::Base
   end
 
-  class Revolution::Page < ActiveRecord::Base
-  end
+  # Instead of being a good migration practice, declaring Revolution::Page on this migration
+  # removes its acts_as_nested_set callbacks, raising errors on environments that cache classes
+  # # class Revolution::Page < ActiveRecord::Base
+  # # end
 
   def up
     # Taxonomy and Taxon
@@ -12,9 +14,9 @@ class CreateJacketsTaxonomy < ActiveRecord::Migration
     jackets_taxon.publish!
 
     # Pages
-    jackets_page = Revolution::Page.new(path: '/jackets', template_path: '/products/jackets/collection.html.slim')
-    jackets_page.save
+    jackets_page = Revolution::Page.create!(path: '/jackets', template_path: '/products/jackets/collection.html.slim')
     jackets_page.publish!
+    jackets_page.translations.create!(locale: 'en-US', title: 'Jackets', meta_description: 'Jackets')
   end
 
   def down
