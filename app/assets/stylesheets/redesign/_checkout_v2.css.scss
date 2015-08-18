@@ -103,6 +103,9 @@ $order-summary-bg: #f7f7f9;
       img{
         width: 175px;
       }
+      @media (min-width: 375px) and (max-width: 414px){
+        margin-top:25px;
+      }
       @media (max-width: 375px){
         margin-top: 25px;
         margin-right: 5px;
