@@ -2,6 +2,7 @@ window.style_profile ||= {}
 window.style_profile.EventsForm = class EventsForm
   constructor: (opts = {}) ->
     @$container = $(opts.container)
+    @events_path = opts.events_path || urlWithSitePrefix('/style-quiz/user_profile/events')
 
     @$container.on("click", '*[data-action=add-event]', @addEventHandler)
     @$container.on("click", '*[data-action=delete-event]', @deleteEventHandler)
@@ -23,12 +24,12 @@ window.style_profile.EventsForm = class EventsForm
     }
     @addEvent(event)
 
-  addEvent: (event) ->
+  addEvent: (event) =>
     $container = @$container
     dateFormat = @$container.find('input[name=date]').datepicker('option', 'dateFormat')
 
     $.ajax(
-      url: '/style-quiz/user_profile/events',
+      url: @events_path
       type: "POST"
       data: { event: event }
       dataType: "json"
@@ -54,7 +55,7 @@ window.style_profile.EventsForm = class EventsForm
     return unless event_id
 
     $.ajax(
-      url: "/style-quiz/user_profile/events/#{ event_id }",
+      url: "#{ @events_path }/#{ event_id }",
       type: "DELETE"
       dataType: "json"
     ).success(() =>

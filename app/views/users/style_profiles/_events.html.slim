@@ -6,6 +6,7 @@ ruby:
     var form = new window.style_profile.EventsForm({ 
       container:  '#events.style-profile-tab-panel.tab-pane',
       dateFormat: '#{ raw I18n.t('date_format.frontend', default: "dd/mm/yy") }',
+      events_path: '#{ style_quiz.user_profile_events_path(site_version: current_site_version.permalink) }',
       fb_user:    (new StyleQuiz.FbUser())
     });
   "
