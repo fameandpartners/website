@@ -15,92 +15,14 @@ Spree::OrderMailer.class_eval do
   attr_reader   :order
   helper_method :order
 
-  def build_line_items
-    line_items = []
-    @order.line_items.each do |item|
-      line_item = {}
-      line_item[:sku]                    = item.variant.sku
-      line_item[:name]                   = item.variant.product.name
-      line_item[:making_options_text]    = item.making_options_text
-      line_item[:options_text]           = item.options_text
-      line_item[:quantity]               = item.quantity
-      line_item[:variant_display_amount] = item.variant.display_amount
-      line_item[:display_amount]         = item.display_amount
-      line_items << line_item
-    end
-    line_items
-  end
-
-  def build_line_items_for_production
-    line_items = []
-    @order.line_items.each do |item|
-      line_item = {}
-      line_item[:style_num]                   = item.style_number
-      line_item[:size]                        = item.country_size
-      line_item[:adjusted_size]               = item.make_size
-      line_item[:color]                       = item.colour_name
-      line_item[:quantity]                    = item.quantity
-      line_item[:factory]                     = item.factory
-      line_item[:deliver_date]                = @order.projected_delivery_date
-      line_item[:express_making]              = ""
-      if item.making_options.present?
-        line_item[:express_making] = item.making_options.map{|option| option.name.upcase }.join(', ')
-      end
-
-      customizations = []
-
-      item.customisations.each do |name, image_url|
-        item_customization = {}
-        item_customization[:name] = name
-        item_customization[:url]  = image_url
-        customizations << item_customization
-      end
-
-      line_item[:customizations] = customizations
-
-      if item.image?
-        line_item[:image_url] = item.image_url
-      end
-
-      line_items << line_item
-    end
-    line_items
-  end
-
-  def build_adjustments
-    adjustments = []
-    @order.adjustments.eligible.each do |adjustments_item|
-      adjustment = {}
-      adjustment[:label]          = adjustments_item.label
-      adjustment[:display_amount] = adjustments_item.display_amount
-      adjustments << adjustment
-    end
-    adjustments
-  end
-
-  def build_additional_products_info
-    additional_products_info = []
-    if @additional_products_info.present?
-      info = {}
-      @additional_products_info.each do |info_item|
-        info[:product] = info_item.product
-        info[:email] = info_item.email
-        info[:phone] = info_item.phone
-        info[:state] = info_item.state
-      end
-      additional_products_info << info
-    end
-    additional_products_info
-  end
-
   def confirm_email(order, resend = false)
     find_order(order)
     subject = (resend ? "[#{t(:resend).upcase}] " : '')
     subject += "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
 
     user = @order.user
-    line_items = build_line_items
-    adjustments = build_adjustments
+    line_items = Marketing::OrderPresenter.build_line_items(@order)
+    adjustments = Marketing::OrderPresenter.build_adjustments(@order)
 
     Marketing::CustomerIOEventTracker.new.track(
       user,
@@ -129,9 +51,9 @@ Spree::OrderMailer.class_eval do
     subject = "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
 
     user = @order.user
-    line_items = build_line_items
-    adjustments = build_adjustments
-    additional_products_info = build_additional_products_info
+    line_items = Marketing::OrderPresenter.build_line_items(@order)
+    adjustments = Marketing::OrderPresenter.build_adjustments(@order)
+    additional_products_info = Marketing::OrderPresenter.build_additional_products_info(@additional_products_info)
 
     Marketing::CustomerIOEventTracker.new.track(
       user,
@@ -165,7 +87,7 @@ Spree::OrderMailer.class_eval do
     user = @order.user
     customer_notes = @order.customer_notes?
     @order = Orders::OrderPresenter.new(@order, items)
-    line_items = build_line_items_for_production
+    line_items = Marketing::OrderPresenter.build_line_items_for_production(@order)
 
     Marketing::CustomerIOEventTracker.new.track(
       user,
