@@ -3,22 +3,15 @@ module StyleQuiz
     respond_to :json
 
     def create
-      event = style_profile.events.new(
-        name: params[:event][:name],
-        event_type: params[:event][:event_type],
-        date: Date.strptime(params[:event][:date], I18n.t('date_format.backend'))
-      )
+      service = ::StyleQuiz::Events::EventBuilder.new(site_version: current_site_version, style_profile: style_profile)
+      event = service.create(params[:event])
 
-      if event.save
-        render json: { 
-          id: event.id,
-          name: event.name,
-          date: event.date.strftime(I18n.t('date_format.backend')),
-          event_type: event.event_type
-        }, status: :ok
-      else
-        render json: {}, status: :error
-      end
+      render json: {
+        id: event.id,
+        name: event.name,
+        date: event.date.strftime(service.date_format),
+        event_type: event.event_type
+      }, status: :ok
     rescue
       render json: {}, status: :error
     end

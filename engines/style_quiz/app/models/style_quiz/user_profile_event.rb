@@ -1,5 +1,5 @@
 class StyleQuiz::UserProfileEvent < ActiveRecord::Base
-  belongs_to :user_profile, class_name: 'StyleQuiz::UserProfileEvent', foreign_key: 'user_profile_id'
+  belongs_to :user_profile, class_name: 'StyleQuiz::UserProfile', foreign_key: 'user_profile_id'
 
   attr_accessible :name, :event_type, :date
 

@@ -3,11 +3,11 @@ module StyleQuiz
     isolate_namespace StyleQuiz
 
     config.to_prepare do
-      Dir.glob(::StyleQuiz::Engine.root + "app/models/**/*_decorator*.rb").each do |c|
-        require_dependency(c)
-      end
-      Dir.glob(::StyleQuiz::Engine.root + "app/services/**/*.rb").each do |c|
-        require_dependency(c)
+      [
+        "app/models/**/*_decorator*.rb",
+        "app/services/**/*.rb"
+      ].each do |path|
+        Dir.glob(::StyleQuiz::Engine.root + path).each{ |c| require_dependency(c) }
       end
     end
   end
