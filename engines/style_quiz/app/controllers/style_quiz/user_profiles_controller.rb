@@ -25,11 +25,7 @@ module StyleQuiz
         answer_values:  answer_values
       )
 
-      if current_spree_user.blank?
-        unless create_user_automagically(user_style_profile)
-          session[:user_style_profile_token] = user_style_profile.token
-        end
-      end
+      create_user_automagically(user_style_profile) if current_spree_user.blank?
 
       # delete intermediate results
       cookies.delete('style_quiz:answers')
@@ -58,26 +54,17 @@ module StyleQuiz
       end
 
       def create_user_automagically(style_profile)
-        first_name, last_name = style_profile.fullname.split(' ', 2)
-        user = Spree::User.new(
-          first_name: first_name,
-          last_name: last_name,
-          email: style_profile.email,
-          skip_welcome_email: true,
-          automagically_registered: true
+        service = StyleQuiz::AutomagicUserRegistrator.new(
+          style_profile: style_profile
         )
-        user.birthday = style_profile.birthday
-
-        if user.save
-          sign_in :spree_user, user
-          user_style_profile.assign_to_user(user)
-          return true
+        user = service.create
+        if user
+          sign_in(:spree_user, user)
         else
-          return false
+          session[:user_style_profile_token] = style_profile.token
         end
-
       rescue
-        return false
+        nil
       end
 
       def apply_stored_results(profile, raw_answers)
