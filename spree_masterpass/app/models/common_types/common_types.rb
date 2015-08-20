@@ -817,11 +817,11 @@ class PersonalGreeting
   end
 end
 
-# {}Preferences
+# {}MasterpassPreferences
 #   receiveEmailNotification - SOAP::SOAPBoolean
 #   receiveMobileNotification - SOAP::SOAPBoolean
 #   personalizationOptIn - SOAP::SOAPBoolean
-class Preferences
+class MasterpassPreferences
   attr_accessor :receiveEmailNotification
   attr_accessor :receiveMobileNotification
   attr_accessor :personalizationOptIn
@@ -839,7 +839,7 @@ end
 #   emailAddress - (any)
 #   mobilePhone - MobilePhone
 #   name - ProfileName
-#   preferences - Preferences
+#   preferences - MasterpassPreferences
 #   securityChallenge - SecurityChallenge
 #   termsOfUseAccepted - SOAP::SOAPBoolean
 #   privacyPolicyAccepted - SOAP::SOAPBoolean

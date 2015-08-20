@@ -494,7 +494,7 @@ module CommonTypesMappingRegistry
   )
 
   Registry.register(
-    :class => Preferences,
+    :class => MasterpassPreferences,
     :schema_type => XSD::QName.new(nil, "Preferences"),
     :schema_element => [
       ["receiveEmailNotification", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "ReceiveEmailNotification")]],
@@ -1402,7 +1402,7 @@ module CommonTypesMappingRegistry
   )
 
   Registry.register(
-    :class => Preferences,
+    :class => MasterpassPreferences,
     :schema_name => XSD::QName.new(nil, "Preferences"),
     :schema_element => [
       ["receiveEmailNotification", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "ReceiveEmailNotification")]],
