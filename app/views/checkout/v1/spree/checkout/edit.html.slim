@@ -25,6 +25,8 @@
           ol.breadcrumb
             li class=('active' if current_step.eql?('address')) Your information
             li class=('active' if current_step.eql?('payment')) Payment Method
+            a#comodo.hidden-xs href="#" style="text-decoration:none;float:right"
+              img alt="SSL" src="assets/comodo-ssl.png" style="border: 0px;"
 
         .checkout-step data-name="address"
           = render 'address_step', current_step: current_step
