@@ -12,9 +12,18 @@
   label {
     text-transform: none; // RESET
   }
+
+  .input-group-addon {
+    // Reset our `styleguide` overrides
+    border-bottom:  0 !important;
+    padding:        0;
+    vertical-align: bottom;
+  }
 }
 
 // Vars
+$checkout-masthead-top-margin: 40px;
+
 $checkout-form-border-color-inactive: #acacac;
 $checkout-form-border-color-active:   #000000;
 $checkout-form-error-color: #ff2e2e;
@@ -28,7 +37,7 @@ $order-summary-bg: #f7f7f9;
 
 .checkout.page-content {
   .checkout-masthead {
-    margin: 40px 0;
+    margin: $checkout-masthead-top-margin 0;
     vertical-align: middle;
     line-height: 60px;
 
