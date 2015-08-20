@@ -84,7 +84,7 @@ Spree::OrderMailer.class_eval do
     line_items = Marketing::OrderPresenter.build_line_items_for_production(@order)
 
     Marketing::CustomerIOEventTracker.new.track(
-      @order.user,
+      user,
       'order_production_order_email',
       email_to:            configatron.order_production_emails,
       subject:             subject,

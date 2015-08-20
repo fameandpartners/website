@@ -74,39 +74,20 @@ module Marketing
     end
 
     def self.build_line_items_for_production(order)
-      line_items = []
-      order.line_items.each do |item|
-        line_item = {}
-        line_item[:style_num]                   = item.style_number
-        line_item[:size]                        = item.country_size
-        line_item[:adjusted_size]               = item.make_size
-        line_item[:color]                       = item.colour_name
-        line_item[:quantity]                    = item.quantity
-        line_item[:factory]                     = item.factory
-        line_item[:deliver_date]                = order.projected_delivery_date
-        line_item[:express_making]              = ""
-        if item.making_options.present?
-          line_item[:express_making] = item.making_options.map{|option| option.name.upcase }.join(', ')
-        end
-
-        customizations = []
-
-        item.customisations.each do |name, image_url|
-          item_customization = {}
-          item_customization[:name] = name
-          item_customization[:url]  = image_url
-          customizations << item_customization
-        end
-
-        line_item[:customizations] = customizations
-
-        if item.image?
-          line_item[:image_url] = item.image_url
-        end
-
-        line_items << line_item
+      order.line_items.collect do |item|
+        {
+          style_num:        item.style_number,
+          size:             item.country_size,
+          adjusted_size:    item.make_size,
+          color:            item.colour_name,
+          quantity:         item.quantity,
+          factory:          item.factory,
+          deliver_date:     order.projected_delivery_date,
+          express_making:   item.making_options.present? ? item.making_options.map{|option| option.name.upcase }.join(', ') : "",
+          customizations:   item.customisations.collect do |name, image_url| {name: name,url: image_url} end,
+          image_url:        item.image? ? item.image_url : ''
+        }
       end
-      line_items
     end
 
   end
