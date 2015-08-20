@@ -180,13 +180,7 @@
       <%= f.error_message_on :fabric_card %>
   <% end %>
 
-  <!-- <h2><%= t(:metadata) %></h2> -->
   <div data-hook="admin_product_form_meta" class="alpha omega twelve columns">
-    <%= f.field_container :meta_keywords do %>
-      <%= f.label :meta_keywords, t(:meta_keywords) %>
-      <%= f.text_field :meta_keywords, :class => 'fullwidth' %>
-    <% end %>
-
     <%= f.field_container :meta_description do %>
       <%= f.label :meta_description, t(:meta_description) %>
       <%= f.text_field :meta_description, :class => 'fullwidth' %>
