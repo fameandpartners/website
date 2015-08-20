@@ -41,7 +41,7 @@
 <form class="promo-code" action="#">
   <label for="#promo-code" class="invisible">Promo Code</label>
   <div class="input-group">
-    <input class="form-control form-control-md" id="promo-code" type="text" placeholder="Discount code"><span class="input-group-addon"><button class="btn btn-block btn-black btn-md promo-code-apply">Apply</button></span>
+    <input class="form-control form-control-md" id="promo-code" type="text" placeholder="Discount code"><span class="input-group-btn"><button class="btn btn-block btn-black btn-md promo-code-apply">Apply</button></span>
   </div>
 </form>
 
