@@ -49,16 +49,3 @@ window.modals.FitGuideModal = class FitGuideModal extends BaseModal
     @opts.title     ||= 'Size Guide'
     @opts.className ||= 'fit-guide-dialog'
     @opts.container ||= '#fit-guide-content'
-
-  afterOpen: () ->
-    windowWidth = $(window).width()
-    fitGuideMinWidth = 640
-    fitGuideMinHeight = 547
-    scale = windowWidth / fitGuideMinWidth
-    if scale < 1
-      $('.fit-guide-schema').css
-        marginBottom: (fitGuideMinHeight * scale) - fitGuideMinHeight
-        '-webkit-transform': 'scale('+scale+')'
-        '-ms-transform': 'scale('+scale+')'
-        '-o-transform': 'scale('+scale+')'
-        'transform': 'scale('+scale+')'

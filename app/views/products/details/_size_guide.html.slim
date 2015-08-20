@@ -1,46 +1,19 @@
-.fit-guide-corner
-  - if size_chart == '2015'
-    .fit-guide-corner-text
-      h2
-        ' We have
-        br
-        ' updated our sizing!
-      p This dress follows our new size chart.
-  - elsif size_chart == '2014'
-    .fit-guide-corner-text
-      h2
-        ' This
-        br
-        ' dress follows
-        br
-        ' our old measurements.
+- if size_chart == '2015'
+  / .fit-guide-corner-text
+  /   h2
+  /     ' We have
+  /     br
+  /     ' updated our sizing!
+  /   p This dress follows our new size chart.
+- elsif size_chart == '2014'
+  .fit-guide-corner-img
+  .fit-guide-corner-text
+    h2 We have updated our sizing!  
+    p This dress follows our new size chart.
+
 .row
   .col
-    .fit-guide-schema
-      .line-bust-text.fit-guide-schema-text
-        h2 BUST
-        p 
-          ' Measure around the fullest part of your bust.
-      
-      .line-waist-text.fit-guide-schema-text
-        h2 WAIST
-        p 
-          ' Measure around your natural waistline.
-
-      .line-hips-text.fit-guide-schema-text
-        h2 Hips
-        p 
-          ' Measure 20cm below your waistline at the fullest part of your hips.
-
-      .line-dress-text.fit-guide-schema-text
-        h2 DRESS LENGTH
-        p 
-          ' Stand with your heels together, keep the tape straight and perpendicular to the floor. Measure from your shoulders.
-
-      .line-skirt-text.fit-guide-schema-text
-        h2 SKIRT LENGTH
-        p 
-          ' Stand with your heels together, keep the tape straight and perpendicular to the floor. Measure from your natural waistline.
+    .square
       
   .col
     .fit-guide-text
