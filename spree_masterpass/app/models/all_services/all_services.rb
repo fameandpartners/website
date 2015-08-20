@@ -388,7 +388,7 @@ class AuthorizeExpressCheckoutResponse
   end
 end
 
-# {}Checkout
+# {}MasterpassCheckout
 #   card - Card
 #   transactionId - SOAP::SOAPString
 #   contact - Contact
@@ -398,7 +398,7 @@ end
 #   walletID - SOAP::SOAPString
 #   preCheckoutTransactionId - SOAP::SOAPString
 #   extensionPoint - ExtensionPoint
-class Checkout
+class MasterpassCheckout
   include MasterpassMappable
   attr_accessor :card
   attr_accessor :transactionId
@@ -707,7 +707,7 @@ class ExpressCheckoutRequest
 end
 
 # {}ExpressCheckoutResponse
-#   checkout - Checkout
+#   checkout - MasterpassCheckout
 #   longAccessToken - SOAP::SOAPString
 #   errors - Errors
 #   extensionPoint - ExtensionPoint

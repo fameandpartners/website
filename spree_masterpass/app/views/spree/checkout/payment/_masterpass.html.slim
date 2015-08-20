@@ -8,11 +8,11 @@
         $.getJSON("/masterpass/cart?payment_method_id=#{payment_method.id}").done(
           function(data) {
             if (data.hasOwnProperty('request_token') && data.hasOwnProperty('callback_domain')
-              && data.hasOwnProperty('checkout_identifier') && data.hasOwnProperty('shipping_supression')
-              && data.hasOwnProperty('accepted_cards')) {
+              && data.hasOwnProperty('checkout_identifier') && data.hasOwnProperty('shipping_suppression')
+              && data.hasOwnProperty('accepted_cards') && data.hasOwnProperty('cart_callback_path')) {
                 MasterPass.client.checkout({
                   "requestToken": data.request_token,
-                  "callbackUrl": data.callback_domain + "/cartcallback",
+                  "callbackUrl": data.cart_callback_path,
                   "merchantCheckoutId": data.checkout_identifier,
                   "allowedCardTypes": data.accepted_cards,
                   "cancelCallback": data.callback_domain,
@@ -26,6 +26,5 @@
       });
 
 #buyWithMasterPassDiv
-  a[href="#"]: img src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_147x034px.png" alt="Buy with MasterPass"
+  a[href="javascript: void(0);"]: img src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_147x034px.png" alt="Buy with MasterPass"
 p: a[href='http://www.mastercard.com/mc_us/wallet/learnmore/en'] Learn More
-

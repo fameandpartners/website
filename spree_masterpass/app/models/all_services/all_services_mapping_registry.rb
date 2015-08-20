@@ -1,5 +1,4 @@
 require 'xsd/mapping'
-require 'all_services.rb'
 
 module AllServicesMappingRegistry
   NsXMLSchema = "http://www.w3.org/2001/XMLSchema"
@@ -179,8 +178,8 @@ module AllServicesMappingRegistry
   )
 
   Registry.register(
-    :class => Checkout,
-    :schema_type => XSD::QName.new(nil, "Checkout"),
+    :class => MasterpassCheckout,
+    :schema_type => XSD::QName.new(nil, "MasterpassCheckout"),
     :schema_element => [
       ["card", ["Card", XSD::QName.new(nil, "Card")]],
       ["transactionId", ["SOAP::SOAPString", XSD::QName.new(nil, "TransactionId")]],
@@ -384,7 +383,7 @@ module AllServicesMappingRegistry
     :class => ExpressCheckoutResponse,
     :schema_type => XSD::QName.new(nil, "ExpressCheckoutResponse"),
     :schema_element => [
-      ["checkout", ["Checkout", XSD::QName.new(nil, "Checkout")], [0, 1]],
+      ["checkout", ["MasterpassCheckout", XSD::QName.new(nil, "MasterpassCheckout")], [0, 1]],
       ["longAccessToken", ["SOAP::SOAPString", XSD::QName.new(nil, "LongAccessToken")]],
       ["errors", ["Errors", XSD::QName.new(nil, "Errors")], [0, 1]],
       ["extensionPoint", ["ExtensionPoint", XSD::QName.new(nil, "ExtensionPoint")], [0, 1]]
@@ -607,8 +606,8 @@ module AllServicesMappingRegistry
   )
 
   Registry.register(
-    :class => Checkout,
-    :schema_name => XSD::QName.new(nil, "Checkout"),
+    :class => MasterpassCheckout,
+    :schema_name => XSD::QName.new(nil, "MasterpassCheckout"),
     :schema_element => [
       ["card", ["Card", XSD::QName.new(nil, "Card")]],
       ["transactionId", ["SOAP::SOAPString", XSD::QName.new(nil, "TransactionId")]],
@@ -707,7 +706,7 @@ module AllServicesMappingRegistry
     :class => ExpressCheckoutResponse,
     :schema_name => XSD::QName.new(nil, "ExpressCheckoutResponse"),
     :schema_element => [
-      ["checkout", ["Checkout", XSD::QName.new(nil, "Checkout")], [0, 1]],
+      ["checkout", ["MasterpassCheckout", XSD::QName.new(nil, "MasterpassCheckout")], [0, 1]],
       ["longAccessToken", ["SOAP::SOAPString", XSD::QName.new(nil, "LongAccessToken")]],
       ["errors", ["Errors", XSD::QName.new(nil, "Errors")], [0, 1]],
       ["extensionPoint", ["ExtensionPoint", XSD::QName.new(nil, "ExtensionPoint")], [0, 1]]

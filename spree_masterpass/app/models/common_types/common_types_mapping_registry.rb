@@ -70,8 +70,8 @@ module CommonTypesMappingRegistry
   )
 
   Registry.register(
-    :class => Checkout,
-    :schema_type => XSD::QName.new(nil, "Checkout"),
+    :class => MasterpassCheckout,
+    :schema_type => XSD::QName.new(nil, "MasterpassCheckout"),
     :schema_element => [
       ["id", ["SOAP::SOAPLong", XSD::QName.new(nil, "Id")]],
       ["ref", ["SOAP::SOAPString", XSD::QName.new(nil, "Ref")]],
@@ -495,7 +495,7 @@ module CommonTypesMappingRegistry
 
   Registry.register(
     :class => MasterpassPreferences,
-    :schema_type => XSD::QName.new(nil, "Preferences"),
+    :schema_type => XSD::QName.new(nil, "MasterpassPreferences"),
     :schema_element => [
       ["receiveEmailNotification", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "ReceiveEmailNotification")]],
       ["receiveMobileNotification", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "ReceiveMobileNotification")]],
@@ -524,7 +524,7 @@ module CommonTypesMappingRegistry
       ["emailAddress", [nil, XSD::QName.new(nil, "EmailAddress")]],
       ["mobilePhone", ["MobilePhone", XSD::QName.new(nil, "MobilePhone")]],
       ["name", ["ProfileName", XSD::QName.new(nil, "Name")]],
-      ["preferences", ["Preferences", XSD::QName.new(nil, "Preferences")]],
+      ["preferences", ["MasterpassPreferences", XSD::QName.new(nil, "MasterpassPreferences")]],
       ["securityChallenge", ["SecurityChallenge[]", XSD::QName.new(nil, "SecurityChallenge")], [0, nil]],
       ["termsOfUseAccepted", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "TermsOfUseAccepted")]],
       ["privacyPolicyAccepted", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "PrivacyPolicyAccepted")]],
@@ -720,7 +720,7 @@ module CommonTypesMappingRegistry
     :class => CheckoutWrapper,
     :schema_type => XSD::QName.new(nil, "CheckoutWrapper"),
     :schema_element => [
-      ["checkout", ["Checkout", XSD::QName.new(nil, "Checkout")]]
+      ["checkout", ["MasterpassCheckout", XSD::QName.new(nil, "MasterpassCheckout")]]
     ]
   )
 
@@ -979,8 +979,8 @@ module CommonTypesMappingRegistry
   )
 
   Registry.register(
-    :class => Checkout,
-    :schema_name => XSD::QName.new(nil, "Checkout"),
+    :class => MasterpassCheckout,
+    :schema_name => XSD::QName.new(nil, "MasterpassCheckout"),
     :schema_element => [
       ["id", ["SOAP::SOAPLong", XSD::QName.new(nil, "Id")]],
       ["ref", ["SOAP::SOAPString", XSD::QName.new(nil, "Ref")]],
@@ -1403,7 +1403,7 @@ module CommonTypesMappingRegistry
 
   Registry.register(
     :class => MasterpassPreferences,
-    :schema_name => XSD::QName.new(nil, "Preferences"),
+    :schema_name => XSD::QName.new(nil, "MasterpassPreferences"),
     :schema_element => [
       ["receiveEmailNotification", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "ReceiveEmailNotification")]],
       ["receiveMobileNotification", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "ReceiveMobileNotification")]],
@@ -1431,7 +1431,7 @@ module CommonTypesMappingRegistry
       ["emailAddress", [nil, XSD::QName.new(nil, "EmailAddress")]],
       ["mobilePhone", ["MobilePhone", XSD::QName.new(nil, "MobilePhone")]],
       ["name", ["ProfileName", XSD::QName.new(nil, "Name")]],
-      ["preferences", ["Preferences", XSD::QName.new(nil, "Preferences")]],
+      ["preferences", ["MasterpassPreferences", XSD::QName.new(nil, "MasterpassPreferences")]],
       ["securityChallenge", ["SecurityChallenge[]", XSD::QName.new(nil, "SecurityChallenge")], [0, nil]],
       ["termsOfUseAccepted", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "TermsOfUseAccepted")]],
       ["privacyPolicyAccepted", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "PrivacyPolicyAccepted")]],
@@ -1625,7 +1625,7 @@ module CommonTypesMappingRegistry
     :class => CheckoutWrapper,
     :schema_name => XSD::QName.new(nil, "CheckoutWrapper"),
     :schema_element => [
-      ["checkout", ["Checkout", XSD::QName.new(nil, "Checkout")]]
+      ["checkout", ["MasterpassCheckout", XSD::QName.new(nil, "MasterpassCheckout")]]
     ]
   )
 

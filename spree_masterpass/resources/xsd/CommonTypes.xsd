@@ -105,8 +105,8 @@
 			<xs:element name="ExtensionPoint" type="ExtensionPoint" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="Checkout" type="Checkout"/>
-	<xs:complexType name="Checkout">
+	<xs:element name="MasterpassCheckout" type="MasterpassCheckout"/>
+	<xs:complexType name="MasterpassCheckout">
 		<xs:sequence>
 			<xs:element name="Id" type="xs:long" />
 			<xs:element name="Ref" type="xs:string" />
@@ -564,8 +564,8 @@
 			<xs:element name="ExtensionPoint" type="ExtensionPoint" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="Preferences" type="Preferences"/>
-	<xs:complexType name="Preferences">
+	<xs:element name="MasterpassPreferences" type="MasterpassPreferences"/>
+	<xs:complexType name="MasterpassPreferences">
 		<xs:sequence>
 			<xs:element name="ReceiveEmailNotification" type="xs:boolean"/>
 			<xs:element name="ReceiveMobileNotification" type="xs:boolean"/>
@@ -588,7 +588,7 @@
 			<xs:element name="EmailAddress" type="EmailAddress"/>
 			<xs:element name="MobilePhone" type="MobilePhone"/>
 			<xs:element name="Name" type="ProfileName"/>
-			<xs:element name="Preferences" type="Preferences"/>
+			<xs:element name="MasterpassPreferences" type="MasterpassPreferences"/>
 			<xs:element name="SecurityChallenge" type="SecurityChallenge" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="TermsOfUseAccepted" type="xs:boolean"/>
 			<xs:element name="PrivacyPolicyAccepted" type="xs:boolean"/>
@@ -762,7 +762,7 @@
 	<xs:element name="CheckoutWrapper" type="CheckoutWrapper"/>
 	<xs:complexType name="CheckoutWrapper">
 		<xs:sequence>
-			<xs:element name="Checkout" type="Checkout"></xs:element>
+			<xs:element name="MasterpassCheckout" type="MasterpassCheckout"></xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	

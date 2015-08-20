@@ -109,7 +109,7 @@ class CartItem
   end
 end
 
-# {}Checkout
+# {}MasterpassCheckout
 #   id - SOAP::SOAPLong
 #   ref - SOAP::SOAPString
 #   name - Name
@@ -121,7 +121,7 @@ end
 #   merchantCallbackUrl - SOAP::SOAPString
 #   checkoutPairingCallbackUrl - SOAP::SOAPString
 #   verifierToken - SOAP::SOAPString
-class Checkout
+class MasterpassCheckout
   attr_accessor :id
   attr_accessor :ref
   attr_accessor :name
@@ -1183,7 +1183,7 @@ class CheckoutSelection
 end
 
 # {}CheckoutWrapper
-#   checkout - Checkout
+#   checkout - MasterpassCheckout
 class CheckoutWrapper
   attr_accessor :checkout
 

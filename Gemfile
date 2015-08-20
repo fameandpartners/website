@@ -130,7 +130,7 @@ group :development, :test do
   # gem 'minitest'
   gem 'net-ssh', '~> 2.7.0'
   gem 'oink'
-  #gem 'pry-byebug'
+  gem 'pry-byebug'
   gem 'quiet_assets'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-collection_matchers'
