@@ -8,11 +8,17 @@
 
 .page-content.products-collections.category
   = render :partial => 'filters'
+  .container-fluid
+    .row-fluid
+      .col-md-3
+        div style="padding-top:20px;padding-left: 15px;width: 65%;margin-left: 10%;"
+          = render :partial => 'filters2'
 
-  .container.relative.products-collection
-    - if Features.active?(:collection_content)
-      = render partial: 'products_with_content'
-    - else
-      = render partial: 'products_without_content'
+      .col-md-9
+        .container.relative.products-collection20px style='width:100%'
+          - if Features.active?(:collection_content)
+            = render partial: 'products_with_content'
+          - else
+            = render partial: 'products_without_content'
 
-    = render partial: 'pagination'
+          = render partial: 'pagination'
