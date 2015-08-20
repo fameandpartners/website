@@ -5,8 +5,9 @@ module StyleQuiz
     def edit
       @title = "Style Quiz " + default_seo_title
 
+      apply_stored_results
+
       @user_style_profile = user_style_profile
-      @user_style_profile = apply_stored_results(@user_style_profile, cookies['style_quiz:answers'])
 
       @questions = StyleQuiz::Question.active.ordered.includes(:answers).to_a
 
@@ -14,21 +15,13 @@ module StyleQuiz
     end
 
     def update
-      answer_values = {
-        fullname: params[:answers][:fullname],
-        email:    params[:answers][:email],
-        birthday: Date.strptime(params[:answers][:birthday], I18n.t('date_format.backend'))
-      }
-      user_style_profile.update_answers(
-        answer_ids:     params[:answers][:ids],
-        events:         (params[:answers][:events] || {}).values,
-        answer_values:  answer_values
-      )
+      if style_profile_answers_updater.apply(params[:answers])
+        # create user
+        create_user_automagically(user_style_profile) if current_spree_user.blank?
 
-      create_user_automagically(user_style_profile) if current_spree_user.blank?
-
-      # delete intermediate results
-      cookies.delete('style_quiz:answers')
+        # delete intermediate results
+        reset_stored_results
+      end
 
       respond_to do |format|
         format.html { redirect_to main_app.user_style_profile_path }
@@ -46,8 +39,17 @@ module StyleQuiz
 
     private
 
+      def style_profile_answers_updater
+        @style_profile_answers_updater ||= begin 
+            StyleQuiz::UserStyleProfiles::UserAnswers.new(
+            site_version: current_site_version,
+            style_profile: user_style_profile
+          )
+        end
+      end
+
       def user_style_profile 
-        @user_style_profile ||= StyleQuiz::UserProfile.read(
+        @_user_style_profile ||= StyleQuiz::UserProfile.read(
           user: current_spree_user,
           token: session[:user_style_profile_token]
         )
@@ -67,19 +69,13 @@ module StyleQuiz
         nil
       end
 
-      def apply_stored_results(profile, raw_answers)
+      def reset_stored_results
+        cookies.delete('style_quiz:answers')
+      end
+
+      def apply_stored_results
         answers = HashWithIndifferentAccess.new(JSON.parse(raw_answers)) rescue {}
-        profile.fullname = answers[:fullname] if answers[:fullname].present?
-        profile.email    = answers[:email]    if answers[:email].present?
-        profile.answer_ids = answers[:ids] || []
-        if answers[:birthday].present?
-          profile.birthday = Date.strptime(answers[:birthday], I18n.t('date_format.backend'))
-        end
-        events = (answers[:events] || []).map{|d| StyleQuiz::UserProfileEvent.new(d) }
-        profile.events = events.select(&:valid?)
-        profile
-      rescue
-        profile
+        style_profile_answers_updater.apply(answers)
       end
   end
 end

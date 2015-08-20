@@ -3,7 +3,10 @@ module StyleQuiz
     respond_to :json
 
     def create
-      service = ::StyleQuiz::Events::EventBuilder.new(site_version: current_site_version, style_profile: style_profile)
+      service = ::StyleQuiz::Events::EventBuilder.new(
+        site_version: current_site_version,
+        style_profile: style_profile
+      )
       event = service.create(params[:event])
 
       render json: {
