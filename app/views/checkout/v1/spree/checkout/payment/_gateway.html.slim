@@ -5,7 +5,7 @@ ruby:
   options_hash[:autocomplete] = 'off' if Rails.env.production?
 
 = content_for :inline_javascript do
-  | $('.checkout-section-title:last').scrollView()
+  | $('.checkout-section-title:last').scrollView();
 
 .row
   .col-md-12.form-group

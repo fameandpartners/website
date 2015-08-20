@@ -678,7 +678,7 @@ end
 #   extensionPoint - ExtensionPoint
 class ExpressCheckoutRequest
   include MasterpassMappable
-  
+
   attr_accessor :merchantCheckoutId
   attr_accessor :precheckoutTransactionId
   attr_accessor :currencyCode
@@ -713,7 +713,7 @@ end
 #   extensionPoint - ExtensionPoint
 class ExpressCheckoutResponse
   include MasterpassMappable
-  
+
   attr_accessor :checkout
   attr_accessor :longAccessToken
   attr_accessor :errors

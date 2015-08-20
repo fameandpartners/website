@@ -1,14 +1,17 @@
 Spree::Core::Engine.routes.draw do
   resources :masterpass do
-    post :merchantinitialization
-    post :oauthpostback
-    post :cart
-    get :cartcallback
-    post :cartpostback
-    post :expresscheckout
-    get :expresscheckout
-    post :pairingconfiguration
-    get :pairingcallback
+    collection do
+      get 'cart'
+      get 'cartcallback'
+
+      post 'merchantinitialization'
+      post 'oauthpostback'
+      post 'cartpostback'
+      post 'expresscheckout'
+      get 'expresscheckout'
+      post 'pairingconfiguration'
+      get 'pairingcallback'
+    end
   end
 
   # TODO : To implement refund across the masterpass

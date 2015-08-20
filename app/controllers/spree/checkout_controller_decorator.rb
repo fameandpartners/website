@@ -220,14 +220,6 @@ Spree::CheckoutController.class_eval do
     @pay_pal_method = @order.available_payment_methods.detect do |method|
       method.method_type.eql?('paypalexpress') || method.type == 'Spree::Gateway::PayPalExpress'
     end
-    @masterpass_method = @order.available_payment_methods.detect do |method|
-      method.method_type.eql?('masterpass') || method.type == 'Spree::Gateway::MasterPass'
-    end
-  end
-
-  # At the payment step, initialize the request token for MasterPass
-  def masterpass_request_token
-
   end
 
   helper_method :completion_route

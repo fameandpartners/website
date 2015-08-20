@@ -5,6 +5,7 @@ module SpreeMasterpass
     engine_name 'spree_masterpass'
 
     config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += Dir[config.root.join('app', 'models', '{**/*}')]
 
     # use rspec for tests
     config.generators do |g|
@@ -20,7 +21,7 @@ module SpreeMasterpass
     config.to_prepare &method(:activate).to_proc
 
     initializer "spree.masterpass.payment_methods", :after => "spree.register.payment_methods" do |app|
-      app.config.spree.payment_methods << Spree::Gateway::MasterPass
+      app.config.spree.payment_methods << Spree::Gateway::Masterpass
     end
   end
 end

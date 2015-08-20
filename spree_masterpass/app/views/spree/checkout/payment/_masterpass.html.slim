@@ -1,0 +1,31 @@
+- content_for :head do
+  = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/integration/MasterPass.client.js'
+  = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
+
+- content_for :inline_javascript do
+  | $('#buyWithMasterPassDiv').click(
+      function() {
+        $.getJSON("/masterpass/cart?payment_method_id=#{payment_method.id}").done(
+          function(data) {
+            if (data.hasOwnProperty('request_token') && data.hasOwnProperty('callback_domain')
+              && data.hasOwnProperty('checkout_identifier') && data.hasOwnProperty('shipping_supression')
+              && data.hasOwnProperty('accepted_cards')) {
+                MasterPass.client.checkout({
+                  "requestToken": data.request_token,
+                  "callbackUrl": data.callback_domain + "/cartcallback",
+                  "merchantCheckoutId": data.checkout_identifier,
+                  "allowedCardTypes": data.accepted_cards,
+                  "cancelCallback": data.callback_domain,
+                  "suppressShippingAddressEnable": data.shipping_suppression,
+                  "loyaltyEnabled": "false",
+                  "requestBasicCheckout": false,
+                  "version":"v6"
+                });
+              }
+          });
+      });
+
+#buyWithMasterPassDiv
+  a[href="#"]: img src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_147x034px.png" alt="Buy with MasterPass"
+p: a[href='http://www.mastercard.com/mc_us/wallet/learnmore/en'] Learn More
+
