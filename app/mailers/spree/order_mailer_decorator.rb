@@ -20,12 +20,11 @@ Spree::OrderMailer.class_eval do
     subject = (resend ? "[#{t(:resend).upcase}] " : '')
     subject += "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
 
-    user = @order.user
     line_items = Marketing::OrderPresenter.build_line_items(@order)
     adjustments = Marketing::OrderPresenter.build_adjustments(@order)
 
     Marketing::CustomerIOEventTracker.new.track(
-      user,
+      @order.user,
       'order_confirmation_email',
       email_to:           @order.email,
       subject:            subject,
@@ -46,17 +45,14 @@ Spree::OrderMailer.class_eval do
 
     @order_presenter = Orders::OrderPresenter.new(@order)
 
-    to = 'team@fameandpartners.com'
-    from = "#{@order.full_name} <#{@order.email}>"
     subject = "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
 
-    user = @order.user
     line_items = Marketing::OrderPresenter.build_line_items(@order)
     adjustments = Marketing::OrderPresenter.build_adjustments(@order)
     additional_products_info = Marketing::OrderPresenter.build_additional_products_info(@additional_products_info)
 
     Marketing::CustomerIOEventTracker.new.track(
-      user,
+      @order.user,
       'order_team_confirmation_email',
       email_to:                       "team@fameandpartners.com",
       subject:                        subject,
@@ -80,8 +76,6 @@ Spree::OrderMailer.class_eval do
   def production_order_email(order, factory, items)
     find_order(order)
 
-    to = configatron.order_production_emails
-    from = configatron.noreply
     subject = "Order Confirmation (订单号码）(#{factory}) ##{@order.number}"
 
     user = @order.user
@@ -90,7 +84,7 @@ Spree::OrderMailer.class_eval do
     line_items = Marketing::OrderPresenter.build_line_items_for_production(@order)
 
     Marketing::CustomerIOEventTracker.new.track(
-      user,
+      @order.user,
       'order_production_order_email',
       email_to:            configatron.order_production_emails,
       subject:             subject,

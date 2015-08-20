@@ -32,45 +32,45 @@ module Marketing
     end
 
     def self.build_line_items(order)
-      line_items = []
-      order.line_items.each do |item|
-        line_item = {}
-        line_item[:sku]                    = item.variant.sku
-        line_item[:name]                   = item.variant.product.name
-        line_item[:making_options_text]    = item.making_options_text
-        line_item[:options_text]           = item.options_text
-        line_item[:quantity]               = item.quantity
-        line_item[:variant_display_amount] = item.variant.display_amount
-        line_item[:display_amount]         = item.display_amount
-        line_items << line_item
+      order.line_items.collect do |item|
+        {
+          sku:                    item.variant.sku,
+          name:                   item.variant.product.name,
+          making_options_text:    item.making_options_text,
+          options_text:           item.options_text,
+          quantity:               item.quantity,
+          variant_display_amount: item.variant.display_amount,
+          display_amount:         item.display_amount
+        }
       end
-      line_items
     end
 
     def self.build_adjustments(order)
-      adjustments = []
-      order.adjustments.eligible.each do |adjustments_item|
-        adjustment = {}
-        adjustment[:label]          = adjustments_item.label
-        adjustment[:display_amount] = adjustments_item.display_amount
-        adjustments << adjustment
+      if order.adjustments.present?
+        order.adjustments.eligible.collect do |adjustments_item|
+          {
+            label:          adjustments_item.label,
+            display_amount: adjustments_item.display_amount
+          }
+        end
+      else
+        []
       end
-      adjustments
     end
 
     def self.build_additional_products_info(additional_products_info)
-      additional_products_info_result = []
-      if @additional_products_info.present?
-        info = {}
-        @additional_products_info.each do |info_item|
-          info[:product] = info_item.product
-          info[:email] = info_item.email
-          info[:phone] = info_item.phone
-          info[:state] = info_item.state
+      if additional_products_info.present?
+        additional_products_info.collect do |info_item|
+          {
+            product: info_item.product,
+            email:   info_item.email,
+            phone:   info_item.phone,
+            state:   info_item.state
+          }
         end
-        additional_products_info_result << info
+      else
+        []
       end
-      additional_products_info_result
     end
 
     def self.build_line_items_for_production(order)
