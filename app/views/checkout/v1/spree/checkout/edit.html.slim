@@ -21,12 +21,13 @@
               i.icon-support-telephone
               = support_telephone
 
+        .comodo.hidden-xs.pull-right
+          = image_tag "comodo-ssl.png", alt: "SSL", height: '35px', width: '112px'
+
         .checkout-breadcrumbs
           ol.breadcrumb
             li class=('active' if current_step.eql?('address')) Your information
             li class=('active' if current_step.eql?('payment')) Payment Method
-            a#comodo.hidden-xs href="#" style="text-decoration:none;float:right"
-              img alt="SSL" src="assets/comodo-ssl.png" style="border: 0px;"
 
         .checkout-step data-name="address"
           = render 'address_step', current_step: current_step
@@ -34,6 +35,9 @@
         .checkout-step data-name="payment"
           - if current_step.eql?('payment')
             = render 'payment_step_v2', current_step: current_step
+
+        .row : .comodo.visible-xs.text-center : p
+          = image_tag "comodo-ssl.png", alt: "SSL", height: '35px', width: '112px'
 
       .col-md-4
         - cart = UserCart::UserCartResource.new(order: current_order).read
