@@ -37,7 +37,7 @@
             = render 'payment_step_v2', current_step: current_step
 
         .row : .comodo.visible-xs.text-center : p
-          = image_tag "comodo-ssl.png", alt: "SSL", height: '35px', width: '112px', style: 'margin-top:15px;margin-bottom:25px'
+          = image_tag "comodo-ssl.png", alt: "SSL", height: '35px', width: '112px', style: 'margin-top:25px;margin-bottom:25px'
 
       .col-md-4
         - cart = UserCart::UserCartResource.new(order: current_order).read
