@@ -1,25 +1,9 @@
-require 'enumerable_csv'
-
 module Reports
   class OrderTotals
-    include EnumerableCSV
+    include RawSqlCsvReport
 
     def description
       'OrderTotals'
-    end
-
-    def each
-      return to_enum(__callee__) unless block_given?
-
-      report_query.each do |row|
-        yield row
-      end
-    end
-
-    private
-
-    def report_query
-      ActiveRecord::Base.connection.execute(to_sql)
     end
 
     def to_sql
