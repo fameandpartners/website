@@ -85,6 +85,11 @@
 // campaigns
 //= require partials/fitgau_reminder
 
+// React
+//= require react
+//= require react_ujs
+//= require components
+
 jQuery(document).ready(function($){
   $('#forgot-password').on('click', function(e) {
     e.preventDefault();

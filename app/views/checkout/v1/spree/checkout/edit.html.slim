@@ -41,4 +41,9 @@
 
       .col-md-4
         - cart = UserCart::UserCartResource.new(order: current_order).read
+        - cart_react = cart.serialize
+        - prerender = true
+
+
+        = react_component('OrderSummary', {cart: cart_react}.to_json , { prerender: prerender })
         = render 'spree/checkout/order_summary', cart: cart

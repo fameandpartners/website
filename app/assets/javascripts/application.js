@@ -26,9 +26,6 @@
 //= require libs/soundcloud/sc-player
 
 //= require helpers
-//= require react
-//= require react_ujs
-//= require components
 //= require_tree ./partials
 //= require_tree ./popups
 //= require_tree ./templates
