@@ -180,6 +180,11 @@
       <%= f.error_message_on :fabric_card %>
   <% end %>
 
+  <%= f.field_container :related_jackets do %>
+      <%= f.label :related_jackets, t(:related_jackets) %>
+      <%= f.hidden_field :related_jacket_ids, :id => 'related_jackets_select2', :value => @product.related_jacket_ids.join(',') %>
+  <% end %>
+
   <div data-hook="admin_product_form_meta" class="alpha omega twelve columns">
     <%= f.field_container :meta_description do %>
       <%= f.label :meta_description, t(:meta_description) %>

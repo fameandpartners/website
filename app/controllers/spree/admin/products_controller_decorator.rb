@@ -1,6 +1,28 @@
 Spree::Admin::ProductsController.class_eval do
   before_filter :set_default_prototype, :only => [:new]
 
+  def search_jackets
+    scope = Spree::Product.jackets
+
+    if params[:ids]
+      product_ids = params[:ids].split(',')
+      @products   = scope.where(id: product_ids)
+    else
+      search_params = { name_cont: params[:q], sku_cont: params[:q] }
+      @products     = scope.ransack(search_params.merge(:m => 'or')).result
+    end
+
+    render 'spree/admin/products/search'
+  end
+
+  def update
+    if params[:product][:related_jacket_ids].present?
+      params[:product][:related_jacket_ids] = params[:product][:related_jacket_ids].split(',')
+    end
+
+    super
+  end
+
   protected
 
   def location_after_save

@@ -359,9 +359,6 @@ FameAndPartners::Application.routes.draw do
 
       resources :products do
         resources :customisation_values
-      end
-
-      resources :products do
         resources :moodboard_items do
           collection do
             post :update_positions, as: :update_positions
@@ -379,7 +376,8 @@ FameAndPartners::Application.routes.draw do
 
       get 'modals' => 'modals#index'
 
-      get "search/order_owners" => 'search#order_owners'
+      get 'search/order_owners' => 'search#order_owners'
+      get 'search/jackets' => 'products#search_jackets', as: :search_jackets
 
       resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
         scope module: :celebrity do
