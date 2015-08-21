@@ -15,10 +15,10 @@
           = render :partial => 'filters2'
 
       .col-md-9
-        .container.relative.products-collection20px style='width:100%'
+        .container.relative.products-collection style='width:100%'
           - if Features.active?(:collection_content)
             = render partial: 'products_with_content'
           - else
-            = render partial: 'products_without_content'
+            = render partial: 'products_without_content', locals: {col: 3}
 
           = render partial: 'pagination'

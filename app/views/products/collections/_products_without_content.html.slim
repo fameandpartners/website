@@ -1,5 +1,6 @@
-- @collection.products.each_slice(3) do |products|
+- col = col.present? ? 3 : 4
+- @collection.products.each_slice(col) do |products|
   /! [][][][]
   .row.relative
-    = render partial: '/products/collections/product', collection: products, as: :product
+    = render partial: '/products/collections/product', collection: products, as: :product, locals: {col: col}
   .clearfix.visible-sm-block.visible-xs-block

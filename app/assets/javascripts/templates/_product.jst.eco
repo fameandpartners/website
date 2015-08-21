@@ -1,4 +1,5 @@
-<div data-color-id="<%= (@product.color || {}).id %>" data-id="<%= @product.id %>" class="col-md-3 col-xs-6 col-xxs-12 category--item">
+<% if @col==3 then @col="col-md-4" else @col="col-md-3" %>
+<div data-color-id="<%= (@product.color || {}).id %>" data-id="<%= @product.id %>" class="<%= @col %> col-xs-6 col-xxs-12 category--item">
   <a href="<%= @product.collection_path %>">
     <img class="img-product img-responsive" src='<%= @product.images[0] %>' alt='<%= @product.name %>' data-hover='<%= @product.images[1] || '' %>'></>
   </a>
@@ -18,7 +19,8 @@
     <% end %>
   </div>
   <% if @product.fast_making: %>
-    <img src="/assets/express_making.png" class="express-delivery" alt="Express Making">
+    <% if @col=="col-md-4" then @top="20px" else @top="0px" %>
+    <img src="/assets/express_making.png" class="express-delivery" alt="Express Making" style="top: <%= @top %>" >
   <% end %>
   <% if @product.fast_delivery: %>
     <img src="/assets/express_delivery.png" class="express-delivery" alt="Express Delivery">

@@ -111,7 +111,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         dataType: 'json',
         data: $.param(_.extend(updateRequestParams, { limit: @page_size, offset: @products_on_page })),
         success: (collection) =>
-          content_html = @collectionMoreTemplate(collection: collection)
+          content_html = @collectionMoreTemplate(collection: collection, col: 3)
           @content.find(@showMoreSelector).closest('.row.relative').before(content_html)
           @content.find('.img-product').hoverable()
           # @updatePagination(collection.products.length, collection.total_products)
