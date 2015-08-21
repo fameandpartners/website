@@ -56,5 +56,8 @@ FameAndPartners::Application.configure do
   config.sass.debug_info = true
   config.sass.line_comments = false # source maps don't get output if this is true
 
+  # Force React-Rails components to be reloaded on Dev mode.
+  config.watchable_dirs.merge!( { Rails.root.join("/app/assets/javascripts/**/*.jsx.*") => ['jsx']})
+
   Rails.application.middleware.use( Oink::Middleware, :logger => Rails.logger )
 end
