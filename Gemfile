@@ -44,6 +44,7 @@ gem 'active_link_to'
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'droidcss'
+gem 'react-rails', '~> 1.0'
 
 # Data
 gem 'event_sourced_record'
