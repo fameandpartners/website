@@ -27,12 +27,7 @@ script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1
   meta name="robots" content="noindex, nofollow"
 
 - if Rails.env.production? || Features.active?(:test_analytics, current_spree_user)
-  = render '/shared/customerio'
-  = render '/shared/mixpanel'
-  = render '/shared/tracking/google_analytics'
-  = render '/shared/zopim'
-  = render '/shared/hotjar'
-  = render '/shared/optimizely'
+  = render 'marketing/sync_trackers'
 
 /[if lt IE 9]
   = javascript_include_tag 'html5.js'

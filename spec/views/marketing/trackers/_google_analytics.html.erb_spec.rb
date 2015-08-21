@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe 'shared/tracking/_google_analytics.html.erb', type: :view do
+RSpec.describe 'marketing/trackers/_google_analytics.html.erb', type: :view do
 
   it 'renders nothing without an active Spree Tracker' do
     render
