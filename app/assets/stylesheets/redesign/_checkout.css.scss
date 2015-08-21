@@ -107,6 +107,10 @@
         padding: 0 1rem;
         @include transition(background-color 0.15s);
         background-color: $order-summary-form-inactive;
+        // Firefox seems to require specific widths,
+        // or shrinks the button to very narrow.
+        width:     5em; // Firefox
+        min-width: 5em; // Firefox
       }
       input#promo-code:focus + span > .promo-code-apply {
         background: $order-summary-form-active;
