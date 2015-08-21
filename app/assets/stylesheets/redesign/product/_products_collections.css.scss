@@ -183,3 +183,23 @@ li.select2-results__option {
 .category-header, .category-header:after {
 	background-color: #eeddf0;
 }
+
+.filterArea{
+	margin-top: 10px;
+	input {
+		margin-right: 5px;
+	}
+
+}
+
+.filterRect{
+	background-color: #E8E8E8;
+	margin-top: 10px;
+	.filterText{
+		margin-left:25px;
+	}
+	.clearAll{
+		float:right;
+		margin-right: 10px;
+	}
+}
