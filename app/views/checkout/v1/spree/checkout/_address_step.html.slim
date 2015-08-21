@@ -22,12 +22,13 @@
     .row
       .col-md-6
         .form-group
-          = radio_button_tag 'ship_to_address', 'Ship to this address', ((@order.bill_address.empty? && @order.ship_address.empty?) || @order.bill_address.same_as?(@order.ship_address))
-          span.shipAddress
+          - ship_to_billing_address = ((@order.bill_address.empty? && @order.ship_address.empty?) || @order.bill_address.same_as?(@order.ship_address))
+          label.shipAddress
+            = radio_button_tag 'ship_to_address', 'Ship to this address', ship_to_billing_address
             | Ship to this address
           .clearfix
-          = radio_button_tag 'ship_to_address', 'Ship to different address', !((@order.bill_address.empty? && @order.ship_address.empty?) || @order.bill_address.same_as?(@order.ship_address))
-          span.shipAddress
+          label.shipAddress
+            = radio_button_tag 'ship_to_address', 'Ship to a different address', !ship_to_billing_address
             | Ship to different address
           = form.hidden_field :use_billing
 
