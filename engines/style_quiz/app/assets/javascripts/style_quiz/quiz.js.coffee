@@ -63,7 +63,11 @@ window.StyleQuiz.Quiz = class Quiz
       @showCurrentQuestion()
 
   storeQuizStep: () ->
-    stepUrl = "#{ @quiz_path }?current=#{ @current }"
+    if @current && @current > 0
+      stepUrl = "#{ @quiz_path }?current=#{ @current }"
+    else
+      stepUrl =  @quiz_path
+
     window.history.pushState({ path: stepUrl }, '', stepUrl)
 
   storeIntermediateResults: () =>

@@ -41,7 +41,7 @@ module StyleQuiz
 
       def style_profile_answers_updater
         @style_profile_answers_updater ||= begin 
-            StyleQuiz::UserStyleProfiles::UserAnswers.new(
+            StyleQuiz::UserStyleProfiles::UserAnswersUpdater.new(
             site_version: current_site_version,
             style_profile: user_style_profile
           )
