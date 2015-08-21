@@ -73,5 +73,16 @@ module Spree
       service.post_shopping_cart_data(shopping_cart_url, shopping_cart_request.to_xml_s)
     end
 
+    def get_access_token(request_token, verifier)
+      service.get_access_token(access_url, request_token, verifier)
+    end
+
+    def get_payment_shipping_resource(checkout_resource_url, access_token)
+      service.get_payment_shipping_resource(checkout_resource_url, access_token)
+    end
+
+    def get_long_access_token(pairing_token, pairing_verifier)
+      service.get_long_access_token(access_url, pairing_token, pairing_verifier)
+    end
   end
 end

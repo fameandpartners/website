@@ -5,7 +5,7 @@
     <xs:element name="AuthorizeExpressCheckoutRequest" type="AuthorizeExpressCheckoutRequest"/>
     <xs:element name="AuthorizeExpressCheckoutResponse" type="AuthorizeExpressCheckoutResponse"/>
     <xs:element name="Response" type="Response"/>
-	<xs:element name="MasterpassCheckout" type="MasterpassCheckout"/>
+	<xs:element name="Checkout" type="Checkout"/>
 	<xs:element name="Errors" type="Errors"/>
 	<xs:element name="MerchantTransactions" type="MerchantTransactions"/>
 	<xs:element name="ShippingAddressVerificationRequest" type="ShippingAddressVerificationRequest"/>
@@ -231,7 +231,7 @@
             <xs:element name="Status" type="xs:string" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
-	<xs:complexType name="MasterpassCheckout">
+	<xs:complexType name="Checkout">
 		<xs:sequence>
 			<xs:element name="Card" type="Card"/>
 			<xs:element name="TransactionId" type="xs:string"/>
@@ -387,7 +387,7 @@
     <xs:element name="ExpressCheckoutResponse" type="ExpressCheckoutResponse"/>
     <xs:complexType name="ExpressCheckoutResponse">
         <xs:sequence>
-            <xs:element name="MasterpassCheckout" type="MasterpassCheckout" minOccurs="0"/>
+            <xs:element name="Checkout" type="Checkout" minOccurs="0"/>
             <xs:element name="LongAccessToken" type="xs:string"/>
             <xs:element name="Errors" type="Errors" minOccurs="0"/>
             <xs:element name="ExtensionPoint" type="ExtensionPoint" minOccurs="0"/>

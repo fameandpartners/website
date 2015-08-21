@@ -105,8 +105,8 @@
 			<xs:element name="ExtensionPoint" type="ExtensionPoint" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="MasterpassCheckout" type="MasterpassCheckout"/>
-	<xs:complexType name="MasterpassCheckout">
+	<xs:element name="Checkout" type="Checkout"/>
+	<xs:complexType name="Checkout">
 		<xs:sequence>
 			<xs:element name="Id" type="xs:long" />
 			<xs:element name="Ref" type="xs:string" />
@@ -762,7 +762,7 @@
 	<xs:element name="CheckoutWrapper" type="CheckoutWrapper"/>
 	<xs:complexType name="CheckoutWrapper">
 		<xs:sequence>
-			<xs:element name="MasterpassCheckout" type="MasterpassCheckout"></xs:element>
+			<xs:element name="Checkout" type="Checkout"></xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	

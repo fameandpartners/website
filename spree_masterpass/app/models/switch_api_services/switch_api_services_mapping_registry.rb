@@ -323,8 +323,8 @@ module SwitchApiServicesMappingRegistry
   )
 
   Registry.register(
-    :class => MasterpassCheckout,
-    :schema_type => XSD::QName.new(nil, "MasterpassCheckout"),
+    :class => Checkout,
+    :schema_type => XSD::QName.new(nil, "Checkout"),
     :schema_element => [
       ["id", ["SOAP::SOAPLong", XSD::QName.new(nil, "Id")]],
       ["ref", ["SOAP::SOAPString", XSD::QName.new(nil, "Ref")]],
@@ -973,7 +973,7 @@ module SwitchApiServicesMappingRegistry
     :class => CheckoutWrapper,
     :schema_type => XSD::QName.new(nil, "CheckoutWrapper"),
     :schema_element => [
-      ["checkout", ["MasterpassCheckout", XSD::QName.new(nil, "MasterpassCheckout")]]
+      ["checkout", ["Checkout", XSD::QName.new(nil, "Checkout")]]
     ]
   )
 
@@ -1158,12 +1158,12 @@ module SwitchApiServicesMappingRegistry
   )
 
   Registry.register(
-    :class => Gender,
+    :class => AllServicesMappingRegistry::Gender,
     :schema_type => XSD::QName.new(nil, "Gender")
   )
 
   Registry.register(
-    :class => TransactionStatus,
+    :class => AllServicesMappingRegistry::TransactionStatus,
     :schema_type => XSD::QName.new(nil, "TransactionStatus")
   )
 
@@ -1485,8 +1485,8 @@ module SwitchApiServicesMappingRegistry
   )
 
   Registry.register(
-    :class => MasterpassCheckout,
-    :schema_name => XSD::QName.new(nil, "MasterpassCheckout"),
+    :class => Checkout,
+    :schema_name => XSD::QName.new(nil, "Checkout"),
     :schema_element => [
       ["id", ["SOAP::SOAPLong", XSD::QName.new(nil, "Id")]],
       ["ref", ["SOAP::SOAPString", XSD::QName.new(nil, "Ref")]],
@@ -2131,7 +2131,7 @@ module SwitchApiServicesMappingRegistry
     :class => CheckoutWrapper,
     :schema_name => XSD::QName.new(nil, "CheckoutWrapper"),
     :schema_element => [
-      ["checkout", ["MasterpassCheckout", XSD::QName.new(nil, "MasterpassCheckout")]]
+      ["checkout", ["Checkout", XSD::QName.new(nil, "Checkout")]]
     ]
   )
 
