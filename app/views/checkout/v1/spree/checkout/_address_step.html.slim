@@ -36,7 +36,7 @@
         = render partial: 'spree/checkout/address_form', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
 
     .row
-      .col-md-6.form-group
+      .col-md-6.form-group style='margin-bottom:0'
         button.btn.btn-block.btn-md.btn-black name='pay_securely' data-loading='Saving...'
           i.icon.icon-lock
           ' Pay Securely
