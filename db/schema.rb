@@ -1203,6 +1203,14 @@ ActiveRecord::Schema.define(:version => 20150826030111) do
 
   add_index "spree_product_properties", ["product_id"], :name => "index_product_properties_on_product_id"
 
+  create_table "spree_product_related_jackets", :force => true do |t|
+    t.integer "jacket_id"
+    t.integer "product_id"
+  end
+
+  add_index "spree_product_related_jackets", ["jacket_id", "product_id"], :name => "index_spree_product_related_jackets_on_jacket_id_and_product_id", :unique => true
+  add_index "spree_product_related_jackets", ["product_id"], :name => "index_spree_product_related_jackets_on_product_id"
+
   create_table "spree_products", :force => true do |t|
     t.string   "name",                 :default => "",     :null => false
     t.text     "description"
