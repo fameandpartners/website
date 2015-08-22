@@ -21,6 +21,9 @@
     <colgroup>
       <col style="width: 20%">
       <col style="width: 10%">
+      <col style="width: 5%">
+      <col style="width: 5%">
+      <col style="width: 5%">
       <col style="width: 35%">
       <col style="width: 10%">
       <col style="width: 15%">
@@ -30,6 +33,9 @@
       <tr>
         <th><%= t(:name) %></th>
         <th><%= t(:code) %></th>
+        <th>eligible for sale order</th>
+        <th>eligible for custom order</th>
+        <th>require shipping charge</th>
         <th><%= t(:description) %></th>
         <th><%= t(:usage_limit) %></th>
         <th><%= t(:expiration) %></th>
@@ -41,6 +47,9 @@
         <tr id="<%= spree_dom_id promotion %>" class="<%= cycle('odd', 'even')%>">
           <td><%= promotion.name %></td>
           <td class="align-center"><%= promotion.code %></td>
+          <td><%= promotion.eligible_to_sale_order? ?   'yes' : 'no' %></td>
+          <td><%= promotion.eligible_to_custom_order? ? 'yes' : 'no' %></td>
+          <td><%= promotion.require_shipping_charge? ?  'yes' : 'no' %></td>
           <td><%= promotion.description %></td>
           <td class="align-center"><%= promotion.usage_limit %></td>
           <td class="align-center"><%= promotion.expires_at.to_date.to_s(:short_date) if promotion.expires_at %></td>
