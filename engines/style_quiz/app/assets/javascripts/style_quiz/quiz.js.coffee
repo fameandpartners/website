@@ -15,7 +15,6 @@ window.StyleQuiz.Quiz = class Quiz
     settings = opts.settings
 
     user = new StyleQuiz.FbUser()
-    window.user = user
 
     _.each(opts.questions_data, (data, index) ->
       # factory?

@@ -20,8 +20,6 @@ window.StyleQuiz.BaseQuestion = class BaseQuestion
     @user   = opts.user
     @shown  = false
 
-    # console.log 'section', @$container
-
   hide: () ->
     @$container.hide()
 
@@ -162,7 +160,10 @@ window.StyleQuiz.SignupQuestion = class SignupQuestion extends window.StyleQuiz.
     @user.getUserProfile( (user_profile) =>
       @$fullnameInput.val(user_profile.name)
       @$emailInput.val(user_profile.email)
-      @$birthdayInput.datepicker('setDate', new Date(user_profile.birthday))
+
+      birthday =  new Date(user_profile.birthday)
+      if birthday && !isNaN(birthday.getTime())
+        @$birthdayInput.datepicker('setDate', birthday)
 
       @onValueChanged()
     )
