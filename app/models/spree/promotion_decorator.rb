@@ -11,6 +11,15 @@ Spree::Promotion.class_eval do
     rules_are_eligible?(order, {})
   end
 
+  def discount
+    @discount ||= begin
+      action = self.actions.find{|a| a.calculator_type == 'Spree::Calculator::FlatPercentItemTotal' }
+      amount = action.present?  ? action.calculator.preferred_flat_percent : BigDecimal.new(0)
+
+      OpenStruct.new(amount: amount, size: amount)
+    end
+  end
+
   class << self
 
     def find_by_code(code)
@@ -18,15 +27,4 @@ Spree::Promotion.class_eval do
     end
 
   end
-
-#  # is dead code?
-#  def discount
-#    @discount ||= begin
-#      action = self.actions.find{|a| a.calculator_type == 'Spree::Calculator::FlatPercentItemTotal' }
-#      amount = action.present?  ? action.calculator.preferred_flat_percent : BigDecimal.new(0)
-#
-#      OpenStruct.new(amount: amount, size: amount)
-#    end
-#  end
-
 end
