@@ -12,7 +12,7 @@ module Spree
           return false if user.blank?
 
           event = user.bridesmaid_party_events.last
-          event ||= user.bridesmaid_party_members.last.event
+          event ||= user.bridesmaid_party_members.last.try(:event)
 
           return false if event.blank?
 
