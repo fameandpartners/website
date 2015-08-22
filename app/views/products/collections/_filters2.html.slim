@@ -3,55 +3,6 @@
     style_options = options_from_collection_for_select(@filter.styles, :permalink, :name, @collection.style.try(:permalink))
     shape_options = options_from_collection_for_select(@filter.shapes, :to_s, :humanize, @collection.bodyshape.try(:downcase))
     color_options = color_options_for_select_from_options_values(@filter.colors, @collection.color.try(:name))
-/
-/#filter
-  /.row style="background-color:#E8E8E8; font-weight:500"
-    /span style='padding-left:10px'
-      /| Filter
-    /span style='float:right;padding-right:15px'
-      /| Clear all
-/
-/#style.clearfix style='margin-top:30px'
-  /div style="font-weight:500"
-    /| STYLES
-  /div.clearfix
-    /= check_box_tag 'View all styles'
-    /span style='margin-left:10px'
-      /| View all styles
-  /- @filter.styles.first(7).each do |style|
-    /div.clearfix
-      /= check_box_tag style.name
-      /span style='margin-left:10px'
-        /= style.name
-/
-/#color.clearfix style='margin-top:30px'
-  /div style="font-weight:500"
-    /| COLORS
-  /div.clearfix
-    /= check_box_tag 'View all colors'
-    /span style='margin-left:10px'
-      /| View all colors
-  /- @filter.colors.first(7).each do |color|
-    /div.clearfix
-      /= check_box_tag color.presentation
-      /span style='margin-left:10px'
-        /= color.presentation
-/
-/#shape.clearfix style='margin-top:30px'
-  /div style="font-weight:500"
-    /| BODYSHAPE
-  /div.clearfix
-    /= check_box_tag 'View all styles'
-    /span style='margin-left:10px'
-      /| View all styles
-  /- @filter.shapes.first(7).each do |shape|
-    /div.clearfix
-      /= check_box_tag shape.capitalize
-      /span style='margin-left:10px'
-        /= shape.capitalize
-
-
-
 
 - prerender = true
 = react_component('CollectionFilter', {styles: @filter.styles, shapes: @filter.shapes, colors: @filter.colors}.to_json , { prerender: prerender })
