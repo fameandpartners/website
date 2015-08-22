@@ -18,5 +18,25 @@ describe Spree::Calculator::SaleShipping, type: :model do
       expect(order).to receive(:in_sale?).and_return(false)
       expect(subject.compute(order)).to eql(BigDecimal.new('9.9'))
     end
+
+    it "returns sale amount if applied promotion requires charge" do
+      expect(order).to receive(:coupon_code_added_promotion).and_return(
+        double('promo', require_shipping_charge?: true)
+      )
+
+      expect(subject.compute(order)).to eql(BigDecimal.new('15.5'))
+    end
+  end
+
+  context "has_items_in_sale?" do
+    it "returns false for empty order" do
+      expect(subject.has_items_in_sale?(order)).to be false
+    end
+  end
+
+  context "#promotion_require_shipping_charge" do
+    it "returns false for empty order" do
+      expect(subject.promotion_require_shipping_charge?(order)).to be false
+    end
   end
 end
