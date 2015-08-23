@@ -42,6 +42,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @colorInput         = new inputs.ProductColorNameSelector(container: @filter.find('#color'))
     @productOrderInput  = new inputs.ProductOrderSelector(container: @filter.find('#product_order'))
 
+    @allCheckboxes = $(".filterArea input")
+    @allCheckboxes.on('change', @update)
+
     @styleInput.on('change', @update)
     @bodyShapeInput.on('change', @update)
     @colorInput.on('change', @update)
@@ -79,7 +82,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   update: () =>
     @source_path = '/dresses' if @reset_source
-    updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
+    #updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
+    updateRequestParams = _.extend({}, @updateParams, @getSelectedValues2())
     pageUrl = @updatePageLocation(updateRequestParams)
 
     @updatePaginationLink('inactive')
@@ -129,6 +133,21 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     propertyValue = @filter.find(elementSelector).val()
     object[propertyName] = propertyValue unless _.isEmpty(propertyValue)
     object
+
+  getSelectedValues2: () ->
+    bodyshape = ''
+    colour = ''
+    style = ''
+
+    bodyshape = $(".filterAreaShapes input:checked")[0].name if $(".filterAreaShapes input:checked")[0]?
+    colour    = $(".filterAreaColors input:checked")[0].name if $(".filterAreaColors input:checked")[0]?
+    style     = $(".filterAreaStyles input:checked")[0].name if $(".filterAreaStyles input:checked")[0]?
+    {
+      bodyshape: bodyshape,
+      colour:    colour,
+      style:     style,
+      order:     @productOrderInput.val()
+    }
 
   getSelectedValues: () ->
     {
