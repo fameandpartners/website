@@ -1,81 +1,81 @@
-DOM = React.DOM
+{div,span,b,label,input} = React.DOM
 @CollectionFilter = React.createClass
 
   topMenu: ->
-    DOM.div
+    div
       className: ''
-      DOM.div
+      div
         className: ''
         "Home / "
-        DOM.b
+        b
           className: ''
           "Dresses"
 
   filterRect: ->
-    DOM.div
+    div
       className: 'filterRect'
-      DOM.span
+      span
         className: 'filterText'
         "Filter"
-      DOM.span
+      span
         className: 'clearAll'
-        DOM.b
+        b
           className: ''
           "Clear all"
 
   filterStyle: ->
-    DOM.div
+    div
       className: ''
-      DOM.b
+      b
         className: 'filterHead'
         "STYLES"
-      DOM.div
+      div
         className: 'filterArea'
         for i in [0..Math.min(6,@props.styles.length)]
-          DOM.div
+          div
             className: 'filterOption'
-            DOM.label
+            label
               className: ''
-              DOM.input
+              input
                 type: 'checkbox'
               @props.styles[i].table.name
 
   filterColor: ->
-    DOM.div
+    div
       className: ''
-      DOM.b
+      b
         className: 'filterHead'
         "COLORS"
-      DOM.div
+      div
         className: 'filterArea'
         for i in [0..Math.min(6,@props.colors.length)]
-          DOM.div
+          div
             className: 'filterOption'
-            DOM.label
+            label
               className: ''
-              DOM.input
+              input
                 type: 'checkbox'
               @props.colors[i].table.presentation
 
   filterShape: ->
-    DOM.div
+    div
       className: ''
-      DOM.b
+      b
         className: ''
         "SHAPES"
-      DOM.div
+      div
         className: 'filterArea'
         for i in [0..Math.min(6,@props.shapes.length)]
-          DOM.div
+          div
             className: 'filterOption'
-            DOM.label
+            label
               className: ''
-              DOM.input
+              input
                 type: 'checkbox'
               @props.shapes[i]
 
   render: ->
-    DOM.div
+    div
       className: ''
       @topMenu()
       @filterRect()
