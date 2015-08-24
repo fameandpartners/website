@@ -45,7 +45,11 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @allCheckboxes = $(".filterArea input")
     @allCheckboxes.on 'change', (e) =>
       @handleCheckboxes(e)
-
+      @update()
+    @selectColor = $(".selectColor select")
+    @selectColor.on 'change', (e) =>
+      @handleCheckboxes(e)
+      @update()
 
     @styleInput.on('change', @update)
     @bodyShapeInput.on('change', @update)
@@ -62,19 +66,24 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     isColorCheckbox = area.hasClass("filterAreaColors")
     isShapeCheckbox = area.hasClass("filterAreaShapes")
     isStyleCheckbox = area.hasClass("filterAreaStyles")
+    isSelect = $(e.target).parent().hasClass("selectColor")
+
+    if isSelect
+      name = $($('.filterAreaColors select option:selected')[0]).attr("name")
+      return if name=="none"
+      if $(".filterAreaColors input[name='"+ name+"']:checked").size() == 0
+        $(".filterAreaColors input[name='"+ name+"']").click()
+      $(".filterAreaColors input[name!='" + name + "']:checked").click()
 
     if isColorCheckbox
-      return if $(".filterAreaColors input[name=" + name + "]:checked").size() == 0
-      $(".filterAreaColors input[name!=" + name + "]:checked").click()
+      return if $(".filterAreaColors input[name='" + name + "']:checked").size() == 0
+      $(".filterAreaColors input[name!='" + name + "']:checked").click()
     if isShapeCheckbox
-      return if $(".filterAreaShapes input[name=" + name + "]:checked").size() == 0
-      $(".filterAreaShapes input[name!=" + name + "]:checked").click()
+      return if $(".filterAreaShapes input[name='" + name + "']:checked").size() == 0
+      $(".filterAreaShapes input[name!='" + name + "']:checked").click()
     if isStyleCheckbox
-      return if $(".filterAreaStyles input[name=" + name + "]:checked").size() == 0
-      $(".filterAreaStyles input[name!=" + name + "]:checked").click()
-
-    @update()
-
+      return if $(".filterAreaStyles input[name='" + name + "']:checked").size() == 0
+      $(".filterAreaStyles input[name!='" + name + "']:checked").click()
 
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
@@ -161,8 +170,14 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     colour = ''
     style = ''
 
+    if $(".filterAreaColors input:checked").size() == 0
+      colour = $($(".filterAreaColors select option:selected")[0]).attr("name")
+      if colour == "none"
+        colour = ''
+    else
+      $(".filterAreaColors input:checked")[0].name
+
     bodyshape = $(".filterAreaShapes input:checked")[0].name if $(".filterAreaShapes input:checked")[0]?
-    colour    = $(".filterAreaColors input:checked")[0].name if $(".filterAreaColors input:checked")[0]?
     style     = $(".filterAreaStyles input:checked")[0].name if $(".filterAreaStyles input:checked")[0]?
     {
       bodyshape: bodyshape,

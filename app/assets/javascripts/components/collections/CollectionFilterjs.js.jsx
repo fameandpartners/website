@@ -44,6 +44,17 @@ var FilterOption = React.createClass({
 });
 
 
+var SelectColor = React.createClass({
+
+  render: function() {
+    return (
+      <option name={this.props.name} value={this.props.name}>
+        {this.props.name}
+      </option>
+    )
+  }
+});
+
 
 var CollectionFilter = React.createClass({
 
@@ -54,6 +65,10 @@ var CollectionFilter = React.createClass({
 
     colors = this.props.colors.map(function(color){
       return (<FilterOption name={color.table.presentation} label={color.table.presentation} />)
+    });
+
+    selectColors = this.props.selectColors.map(function(color){
+      return (<SelectColor name={color.table.presentation} />)
     });
 
     styles = this.props.styles.map(function(style){
@@ -84,8 +99,17 @@ var CollectionFilter = React.createClass({
           <div className='filterArea filterAreaColors'>
             <FilterAllOption name='all' label='View all colors' />
             {colors}
+            Other colours
+            <div className='selectColor'>
+              <select>
+                <option name="none" value="none" selected>Please select one</option>
+                {selectColors}
+              </select>
+            </div>
+            <br/>
           </div>
-          <br/>
+
+
 
           <b>BODYSHAPE</b>
           <div className='filterArea filterAreaShapes'>
