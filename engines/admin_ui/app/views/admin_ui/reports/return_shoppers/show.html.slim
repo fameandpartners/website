@@ -1,0 +1,15 @@
+= content_for :page_title do
+  ' Return Shoppers
+
+.ibox
+  .ibox-title
+    ' Return Shoppers
+  .ibox-content
+    = form_tag admin_ui.reports_return_shoppers_path, method: 'post', class: 'form-horizontal'
+      .form-group
+        .col-lg-12
+          button type='submit' Generate
+
+h2 10 Row Sample
+
+= render partial: 'admin_ui/reports/report_rows_preview', locals: { rows: @rows }
