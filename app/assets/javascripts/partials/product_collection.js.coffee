@@ -13,7 +13,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
   constructor: (options = {}) ->
     options = $.extend({
       reset_source: true,
-      page_size: 20,
+      page_size: 21,
       showMoreSelector: "*[data-action=show-more-collection-products]"
 		}, options)
 
