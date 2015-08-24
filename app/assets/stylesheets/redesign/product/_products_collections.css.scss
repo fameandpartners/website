@@ -190,6 +190,9 @@ li.select2-results__option {
 	input {
 		margin-right: 5px;
 	}
+	input[type=checkbox] {
+		zoom:1.5;
+	}
 
 }
 
