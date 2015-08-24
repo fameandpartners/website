@@ -16,10 +16,11 @@ describe Products::CollectionsController, :type => :controller do
     describe 'returns a 404 status' do
       before(:each) do
         allow(controller).to receive(:parse_permalink).and_return(nil)
-        allow(Repositories::ProductColors).to receive(:colors_map).and return(nil)
       end
 
       it 'when querying a inexistent permalink' do
+        color_option_type = create(:option_type, :color)
+        red   = create(:option_values_group, name: 'Red'  , option_type: color_option_type)
         get :show, permalink: 'nothing'
         expect(response).to render_template(file: 'public/404', layout: false)
         expect(response).to have_http_status(:not_found)
@@ -29,10 +30,11 @@ describe Products::CollectionsController, :type => :controller do
     describe 'returns 200 a status code' do
       before(:each) do
         allow(controller).to receive(:parse_permalink).and_return({})
-        allow(Repositories::ProductColors).to receive(:colors_map).and return(nil)
       end
 
       it 'when querying a valid collection resource' do
+        color_option_type = create(:option_type, :color)
+        red   = create(:option_values_group, name: 'Red'  , option_type: color_option_type)
         get :show, permalink: 'brown'
         expect(response).to render_template(:show)
         expect(response).to have_http_status(:ok)
