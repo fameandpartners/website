@@ -23,7 +23,7 @@ describe Spree::Product, :type => :model do
     describe '.jackets' do
       let!(:jacket)  { create(:jacket) }
       let!(:dress)   { create(:dress) }
-      let!(:jackets) { create(:taxon, permalink: 'jackets', products: [jacket]) }
+      let!(:jackets) { create(:taxon, :jackets, products: [jacket]) }
 
       it 'returns all products that belongs to jackets taxon' do
         expect(described_class.jackets).to eq([jacket])
