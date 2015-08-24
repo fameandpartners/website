@@ -26,6 +26,14 @@ describe Spree::Calculator::SaleShipping, type: :model do
 
       expect(subject.compute(order)).to eql(BigDecimal.new('15.5'))
     end
+
+    it "returns default amount if applied promotion requires charge" do
+      expect(order).to receive(:coupon_code_added_promotion).and_return(
+        double('promo', require_shipping_charge?: false)
+      )
+
+      expect(subject.compute(order)).to eql(BigDecimal.new('9.9'))
+    end
   end
 
   context "has_items_in_sale?" do
