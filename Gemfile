@@ -44,6 +44,7 @@ gem 'active_link_to'
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'droidcss'
+gem 'react-rails', '~> 1.2'
 
 # Data
 gem 'event_sourced_record'
@@ -104,7 +105,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'coffee-script-source', "~> 1.8.0"
   gem 'uglifier', '1.3.0'
-  gem 'execjs', '1.4.0'
+  gem 'execjs', "~> 2"
   gem 'jquery-ui-rails'
   gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
