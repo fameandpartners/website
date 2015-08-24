@@ -16,6 +16,7 @@ describe Products::CollectionsController, :type => :controller do
     describe 'returns a 404 status' do
       before(:each) do
         allow(controller).to receive(:parse_permalink).and_return(nil)
+        allow(Repositories::ProductColors).to receive(:colors_map).and return(nil)
       end
 
       it 'when querying a inexistent permalink' do
@@ -28,6 +29,7 @@ describe Products::CollectionsController, :type => :controller do
     describe 'returns 200 a status code' do
       before(:each) do
         allow(controller).to receive(:parse_permalink).and_return({})
+        allow(Repositories::ProductColors).to receive(:colors_map).and return(nil)
       end
 
       it 'when querying a valid collection resource' do
