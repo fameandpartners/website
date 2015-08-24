@@ -43,7 +43,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @productOrderInput  = new inputs.ProductOrderSelector(container: @filter.find('#product_order'))
 
     @allCheckboxes = $(".filterArea input")
-    @allCheckboxes.on('change', @update)
+    @allCheckboxes.on 'change', (e) =>
+      @handleCheckboxes(e)
+
 
     @styleInput.on('change', @update)
     @bodyShapeInput.on('change', @update)
@@ -53,6 +55,26 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @$banner = $(options.banner)
     @setBannerTextClass()
     @content.find('.img-product').hoverable()
+
+  handleCheckboxes: (e) =>
+    name = e.target.name
+    area = $(e.target.closest(".filterArea"))
+    isColorCheckbox = area.hasClass("filterAreaColors")
+    isShapeCheckbox = area.hasClass("filterAreaShapes")
+    isStyleCheckbox = area.hasClass("filterAreaStyles")
+
+    if isColorCheckbox
+      return if $(".filterAreaColors input[name=" + name + "]:checked").size() == 0
+      $(".filterAreaColors input[name!=" + name + "]:checked").click()
+    if isShapeCheckbox
+      return if $(".filterAreaShapes input[name=" + name + "]:checked").size() == 0
+      $(".filterAreaShapes input[name!=" + name + "]:checked").click()
+    if isStyleCheckbox
+      return if $(".filterAreaStyles input[name=" + name + "]:checked").size() == 0
+      $(".filterAreaStyles input[name!=" + name + "]:checked").click()
+
+    @update()
+
 
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
