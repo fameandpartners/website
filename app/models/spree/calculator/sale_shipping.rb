@@ -14,9 +14,8 @@ module Spree
       'Flat rate dependent on having sale/not sale products'
     end
 
-    # as object we always get line items, as calculable we have Coupon, ShippingMethod
     def compute(object)
-      if has_items_in_sale?(object)
+      if has_items_in_sale?(object) || promotion_require_shipping_charge?(object)
         self.preferred_sale_products_shipping_amount
       else
         self.preferred_normal_products_shipping_amount
@@ -26,6 +25,12 @@ module Spree
     def has_items_in_sale?(object)
       return false if object.blank? || !object.respond_to?(:in_sale?)
       object.in_sale?
+    end
+
+    def promotion_require_shipping_charge?(object)
+      return false if object.blank? || !object.respond_to?(:coupon_code_added_promotion)
+      promotion = object.coupon_code_added_promotion
+      promotion.present? && promotion.require_shipping_charge?
     end
   end
 end

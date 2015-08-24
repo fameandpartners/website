@@ -840,6 +840,9 @@ ActiveRecord::Schema.define(:version => 20150812004018) do
     t.string   "path"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
+    t.boolean  "eligible_to_custom_order", :default => false
+    t.boolean  "eligible_to_sale_order",   :default => false
+    t.boolean  "require_shipping_charge",  :default => false
   end
 
   create_table "spree_addresses", :force => true do |t|

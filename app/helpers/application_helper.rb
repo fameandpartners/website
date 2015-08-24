@@ -159,9 +159,6 @@ module ApplicationHelper
   def product_discount(product)
     if product.present? && (discount = product.discount).present?
       discount
-    # elsif show_prices_with_applied_promocode?
-    #  current_promotion.discount
-    #  current_promotion.calculate_price_with_discount(variant.price).display_price
     else
       nil
     end
