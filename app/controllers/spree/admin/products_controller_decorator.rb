@@ -16,9 +16,7 @@ Spree::Admin::ProductsController.class_eval do
   end
 
   def update
-    if params[:product][:related_jacket_ids].present?
-      params[:product][:related_jacket_ids] = params[:product][:related_jacket_ids].split(',')
-    end
+    split_related_jackets_ids
 
     super
   end
@@ -39,5 +37,11 @@ Spree::Admin::ProductsController.class_eval do
 
   def create_before
     set_default_prototype
+  end
+
+  def split_related_jackets_ids
+    if ids = params[:product][:related_jacket_ids]
+      params[:product][:related_jacket_ids] = ids.split(',')
+    end
   end
 end
