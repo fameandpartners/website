@@ -19,17 +19,18 @@ module Search
     def self.build(options = {})
       options = HashWithIndifferentAccess.new(options)
 
-      # some kind of documentations
-      colors              = options[:color_ids]
-      body_shapes         = options[:body_shapes]
-      taxons              = options[:taxon_ids]
-      exclude_products    = options[:exclude_products]
-      discount            = options[:discount]
-      query_string        = options[:query_string]
-      order               = options[:order]
-      fast_making         = options[:fast_making]
-      limit               = options[:limit].present? ? options[:limit].to_i : 1000
-      offset              = options[:offset].present? ? options[:offset].to_i : 0
+      # some kind of documentation
+      colors           = options[:color_ids]
+      body_shapes      = options[:body_shapes]
+      taxons           = options[:taxon_ids]
+      exclude_products = options[:exclude_products]
+      discount         = options[:discount]
+      query_string     = options[:query_string]
+      order            = options[:order]
+      fast_making      = options[:fast_making]
+      limit            = options[:limit].present? ? options[:limit].to_i : 1000
+      offset           = options[:offset].present? ? options[:offset].to_i : 0
+      show_jackets     = !!options[:show_jackets]
 
       Tire.search(configatron.elasticsearch.indices.color_variants, size: limit, from: offset) do
         filter :bool, :must => { :term => { 'product.is_deleted' => false } }
@@ -41,6 +42,9 @@ module Search
         if colors.present?
           filter :terms, 'color.id' => colors
         end
+
+        # Jackets filter
+        filter :bool, :must => { :term => { 'product.is_jacket' => show_jackets } }
 
         # only available items
         filter :bool, :must => { :term => { 'product.in_stock' => true } }

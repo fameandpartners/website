@@ -19,11 +19,11 @@ doctype html
         .container-fluid.nav-menu-container
           .masthead.pull-left.hidden-xs
             = link_to '/', rel: 'nofollow' do
-              = image_tag src='new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
+              = image_tag src='logo/new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
 
           .masthead.pull-left.visible-xs
             = link_to '/', rel: 'nofollow' do
-              = image_tag src='logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
+              = image_tag src='logo/logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
 
           ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
             li.shop.menu-item
@@ -47,7 +47,7 @@ doctype html
             li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs.hide-item
               = link_to 'my account', profile_path, class: "menu-item--link active-hover", rel: 'nofollow'
 
-            li.shop.menu-item.account-btn.visible-sm.visible-xs.visible-xxs.hide-item
+            li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs.hidden-md.hidden-lg.hide-item
               = link_to profile_path, class: "menu-item--link active-hover", rel: 'nofollow' do
                 = image_tag "_icons/my-account.svg", class: 'nav-mobile-logo', alt: 'my account'
 
@@ -63,19 +63,22 @@ doctype html
 
             li#cart-trigger.menu-item
               = link_to root_path(open_cart: true), class: 'menu-item--link', rel: 'nofollow' do
-                span.visible-sm.visible-xs.visible-xxs = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
-                span.hidden-sm.hidden-xs.hidden-xxs cart
+                span = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
 
 coffee:
   window.initPage = ->
     searchLink  = document.getElementById('search')
     searchInput = document.getElementsByClassName('search-input')[0]
     hideItems   = document.getElementsByClassName('hide-item')
+    hideItemsArray = new Array()
+    for e in hideItems
+      hideItemsArray.push(e)
+    hideItemsArray.push(document.getElementById('cart-trigger'))
 
     searchLink.onclick = ->
       searchInput.classList.remove('hidden')
       searchLink.classList.add('hidden')
-      for e in hideItems
+      for e in hideItemsArray
         e.classList.add('hidden')
       false
 
@@ -84,7 +87,7 @@ coffee:
     closeSearch.onclick = ->
       searchInput.classList.add('hidden')
       searchLink.classList.remove('hidden')
-      for e in hideItems
+      for e in hideItemsArray
         e.classList.remove('hidden')
       false
 

@@ -39,6 +39,14 @@ module Reports
         created_at.try(:to_date).to_s
       end
 
+      def timestamp
+        created_at
+      end
+
+      def ident
+        identifier
+      end
+
       def token
         response_code
       end
@@ -75,6 +83,7 @@ module Reports
       def to_h
         {
           payment_date:              payment_date,
+          ident:                     ident,
           payment_type:              payment_type,
           token:                     token,
           payer_id:                  payer_id,
@@ -88,7 +97,8 @@ module Reports
           order_email:               order_email,
           order_state:               order_state,
           order_shipped:             order_shipped?,
-          shipment_tracking_numbers: shipment_tracking_numbers
+          shipment_tracking_numbers: shipment_tracking_numbers,
+          timestamp:                 timestamp,
         }
       end
 

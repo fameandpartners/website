@@ -18,6 +18,10 @@
 			background: url('_reg/avatar-empty.png') no-repeat center center #e1e1e1;
 		}
 	}
+
+  .btn{
+    background-color: #C0C0C0;
+  }
 }
 // @end Account
 // ---------------
@@ -163,14 +167,6 @@ h3.phone span {
 
 h1.order {
   color: black;
-}
-
-@media only screen and (max-width: 800px) {
-
-  .page-content.order {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
 }
 
 a.btn.return {

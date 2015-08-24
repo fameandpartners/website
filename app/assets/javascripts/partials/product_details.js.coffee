@@ -58,7 +58,6 @@ page.initProductDetailsPage = (options = {}) ->
           variant_id: (selected.variant || {})['id']
         }
         app.shopping_cart.one('change', () ->
-          window.helpers.showAlert(title: 'We\'ve got you!', message: 'Added to Cart', type: 'success')
           window.app.shopping_bag.open()
         )
         app.shopping_cart.addProduct(product_data)

@@ -1,0 +1,43 @@
+- content_for :inline_javascript do
+  | window.bill_address = #{ raw ::AddressSerializer.new(current_order.bill_address).to_json };
+
+- if current_step.eql?('address')
+  = render partial: 'email_login'
+  = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global checkout-form'}, remote: false do |form|
+    = render :partial => 'shared/error_messages', locals: { target: @order }
+
+    = hidden_field_tag :create_account, :value => true
+
+    h2.checkout-section-title 2. Address Details
+    p Where should we send your receipt and tracking details?
+    .form-wrapper data-hook='billing_inner'
+      = form.fields_for :bill_address do |bill_form|
+        = render partial: 'spree/checkout/address_form', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
+
+    .row
+      .col-md-12.form-group
+        = form.label :customer_notes, 'Comments or special instructions'
+        = form.text_field :customer_notes, class: 'required form-control form-control-md'
+
+    .row
+      .col-md-6
+        .form-group
+          - ship_to_billing_address = ((@order.bill_address.empty? && @order.ship_address.empty?) || @order.bill_address.same_as?(@order.ship_address))
+          label.shipAddress
+            = radio_button_tag 'ship_to_address', 'Ship to this address', ship_to_billing_address
+            | Ship to this address
+          .clearfix
+          label.shipAddress
+            = radio_button_tag 'ship_to_address', 'Ship to a different address', !ship_to_billing_address
+            | Ship to different address
+          = form.hidden_field :use_billing
+
+    .form-wrapper data-hook='shipping_inner'
+      = form.fields_for :ship_address do |ship_form|
+        = render partial: 'spree/checkout/address_form', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
+
+    .row
+      .col-md-6.form-group style='margin-bottom:0'
+        button.btn.btn-block.btn-md.btn-black name='pay_securely' data-loading='Saving...'
+          i.icon.icon-lock
+          ' Pay Securely

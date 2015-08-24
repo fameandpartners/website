@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', :github => 'rails/rails', :branch => '3-2-stable'
+gem 'rails', '~> 3.2.22'
 gem 'pg'
 gem 'slim'
 gem 'slim-rails'
@@ -45,6 +45,7 @@ gem 'active_link_to'
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'droidcss'
+gem 'react-rails', '~> 1.2'
 
 # Data
 gem 'event_sourced_record'
@@ -105,7 +106,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'coffee-script-source', "~> 1.8.0"
   gem 'uglifier', '1.3.0'
-  gem 'execjs', '1.4.0'
+  gem 'execjs', "~> 2"
   gem 'jquery-ui-rails'
   gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
@@ -118,8 +119,6 @@ end
 
 group :development, :test do
   gem 'awesome_print'
-  gem 'capistrano', '2.15.4', require: false
-  gem 'capistrano-rbenv', '0.0.10', require: false
   gem 'capybara'
   gem 'compass'
   gem 'database_cleaner', '0.9.1'
@@ -136,9 +135,10 @@ group :development, :test do
   gem 'rspec-collection_matchers'
   gem 'rspec-rails', '~> 3.2'
   gem 'shoulda-matchers'
+  gem 'timecop'
   gem 'spring'
   gem 'thin'
-
+  gem 'meta_request'
 end
 
 group :staging, :development do

@@ -1,0 +1,15 @@
+- if rows.empty?
+  p No rows in report.
+- else
+  div.pre-scrollable style='max-height:100%;'
+    table.table.table-condensed
+      thead
+        tr
+          - head = rows.first
+          - head.keys.each do |k|
+            th = k
+      tbody
+        - rows.each do |row|
+          tr
+            - row.values.each do |v|
+              td = v

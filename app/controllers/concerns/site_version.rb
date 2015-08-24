@@ -4,7 +4,25 @@ module Concerns::SiteVersion
   included do
     attr_writer :current_site_version
 
+    before_filter :show_locale_warning
+    before_filter :check_site_version, unless: [:on_checkout_path, :request_not_get_or_ajax]
+
     helper_method :current_site_version, :site_versions_enabled?
+  end
+
+  def show_locale_warning
+    geo_site_version = FindUsersSiteVersion.new(request_ip: request.ip).sv_chosen_by_ip || ::SiteVersion.default
+    @locale_warning = Preferences::LocaleWarnPresenter.new(
+      geo_site_version: geo_site_version,
+      current_site_version: current_site_version,
+      session_site_version_code: session[:site_version]
+    )
+  end
+
+  def check_site_version
+    if site_version_param != current_site_version.code
+      @current_site_version = ::SiteVersion.by_permalink_or_default(site_version_param)
+    end
   end
 
   def site_versions_enabled?
@@ -16,7 +34,7 @@ module Concerns::SiteVersion
       service = FindUsersSiteVersion.new(
         user: current_spree_user,
         url_param: params[:site_version],
-        cookie_param: cookies[:site_version]
+        cookie_param: session[:site_version]
       )
 
       service.get.tap do |site_version|
@@ -31,7 +49,13 @@ module Concerns::SiteVersion
     params[:site_version] || SiteVersion.default.code
   end
 
-  def set_site_version_cookie(site_version_code)
-    cookies.permanent[:site_version] = site_version_code
+  private
+
+  def on_checkout_path
+    request.path.match('/checkout$')
+  end
+
+  def request_not_get_or_ajax
+    !request.get? || request.xhr?
   end
 end

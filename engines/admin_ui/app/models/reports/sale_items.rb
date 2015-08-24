@@ -1,8 +1,6 @@
-require 'enumerable_csv'
-
 module Reports
   class SaleItems
-    include EnumerableCSV
+    include RawSqlCsvReport
 
     def initialize(from:, to:)
       raise ArgumentError unless from.respond_to?(:to_date)
@@ -24,26 +22,13 @@ module Reports
       'ItemsSoldOnSale'
     end
 
-    def each
-      return to_enum(__callee__) unless block_given?
-
-      report_query.each do |row|
-        yield row
-      end
-    end
-
-    private
-
-    def report_query
-      ActiveRecord::Base.connection.execute(to_sql)
-    end
-
     def to_sql
       <<-SQL
         select
           li.price                  as sale_price,
           li.old_price              as original_price,
           (li.old_price - li.price) as discount,
+          o.currency                as currency,
           v.product_id              as product_id,
           p.name                    as product_name,
           mv.sku                    as sku,

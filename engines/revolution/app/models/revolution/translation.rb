@@ -3,13 +3,14 @@ module Revolution
 
     DEFAULT_LOCALE = 'en-US'
 
-    attr_accessible :locale, :title, :meta_description
+    attr_accessible :locale, :title, :meta_description, :heading, :sub_heading, :description
 
-    validates :page, :locale, :title, :meta_description, :presence => true
+    validates :locale, :title, :meta_description, :presence => true
 
     belongs_to :page
 
-    def self.find_for_locale(locale)
+    def self.find_for_locale(locale = nil)
+      locale ||= Translation::DEFAULT_LOCALE
       find_by_locale(locale) || find_for_default_locale
     end
 

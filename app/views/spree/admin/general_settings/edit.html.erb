@@ -17,31 +17,6 @@
           </div>
       <% end %>
 
-
-      <div class="row">
-        <div class="alpha twelve columns">
-          <fieldset class="no-border-bottom">
-            <legend align="center">Gray Top Banner (above the menu)</legend>
-
-            <% @site_versions.each do |site_version| %>
-              <% top_banner = Preferences::TopBanner.new(site_version) %>
-
-              <legend align="left"><%= site_version.name %></legend>
-              <div class="field">
-                <label>Center Text</label>
-                <%= preference_field_tag top_banner.center_text_key, top_banner.center_text, type: :string %>
-              </div>
-
-              <div class="field">
-                <label>Right Text</label>
-                <%= preference_field_tag top_banner.right_text_key, top_banner.right_text, type: :string %>
-              </div>
-            <% end %>
-          </fieldset>
-        </div>
-      </div>
-
-
       <div class="row">
         <div class="alpha six columns">
           <fieldset class="security no-border-bottom">

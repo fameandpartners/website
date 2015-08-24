@@ -93,7 +93,11 @@ FameAndPartners::Application.routes.draw do
 
     get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
 
-    #edits
+    # Lookbooks
+    # # Note: this 302 redirection is used on widgets, and it can change in the future. This should stay as a temporary redirection.
+    # # Widgets are iframes, and every href have no follows.
+    get '/lookbook' => redirect('/lookbook/the-luxe-collection', :status => 302), as: :lookbook
+
     get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
 
     get '/lookbook/garden-weeding' => redirect('/lookbook/garden-wedding')
@@ -142,6 +146,12 @@ FameAndPartners::Application.routes.draw do
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
     end
 
+    # Jackets
+    scope '/jackets' do
+      get '/', to: 'products/collections#show', as: :jackets, defaults: { permalink: 'jackets_collection' }
+      get '/jacket-:product_slug', to: 'products/details#show', as: :jacket_details
+    end
+
     scope '/dresses' do
       root to: 'products/collections#show', as: :dresses
       get '/', to: 'products/collections#show', as: :collection
@@ -162,7 +172,6 @@ FameAndPartners::Application.routes.draw do
       get '/event/:taxon', to: redirect('/dresses/%{taxon}')
       get '/sale-(:sale)' => 'products/collections#show', as: "dresses_on_sale"
       get '/*permalink' => 'products/collections#show', as: 'taxon'
-      get 't/*id', :to => 'taxons#show', :as => :dress_nested_taxons
     end
 
     # Custom Dresses
@@ -202,10 +211,10 @@ FameAndPartners::Application.routes.draw do
     # eo account settings
 
     resources :product_reservations, only: [:create]
-  end
 
-  # Old Blog Redirection (30/06/2015)
-  get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
+    # Old Blog Redirection (30/06/2015)
+    get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
+  end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     # Static pages

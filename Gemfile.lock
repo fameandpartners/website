@@ -39,54 +39,6 @@ GIT
       rails (>= 3.1, < 5.0)
 
 GIT
-  remote: git://github.com/rails/rails.git
-  revision: b344986bc3d94ca7821fc5e0eef1874882ac6cbb
-  branch: 3-2-stable
-  specs:
-    actionmailer (3.2.21)
-      actionpack (= 3.2.21)
-      mail (~> 2.5.4)
-    actionpack (3.2.21)
-      activemodel (= 3.2.21)
-      activesupport (= 3.2.21)
-      builder (~> 3.0.0)
-      erubis (~> 2.7.0)
-      journey (~> 1.0.4)
-      rack (~> 1.4.5)
-      rack-cache (~> 1.2)
-      rack-test (~> 0.6.1)
-      sprockets (~> 2.2.1)
-    activemodel (3.2.21)
-      activesupport (= 3.2.21)
-      builder (~> 3.0.0)
-    activerecord (3.2.21)
-      activemodel (= 3.2.21)
-      activesupport (= 3.2.21)
-      arel (~> 3.0.2)
-      tzinfo (~> 0.3.29)
-    activeresource (3.2.21)
-      activemodel (= 3.2.21)
-      activesupport (= 3.2.21)
-    activesupport (3.2.21)
-      i18n (~> 0.6, >= 0.6.4)
-      multi_json (~> 1.0)
-    rails (3.2.21)
-      actionmailer (= 3.2.21)
-      actionpack (= 3.2.21)
-      activerecord (= 3.2.21)
-      activeresource (= 3.2.21)
-      activesupport (= 3.2.21)
-      bundler (~> 1.0)
-      railties (= 3.2.21)
-    railties (3.2.21)
-      actionpack (= 3.2.21)
-      activesupport (= 3.2.21)
-      rack-ssl (~> 1.3.2)
-      rake (>= 0.8.7)
-      rdoc (~> 3.4)
-      thor (>= 0.14.6, < 2.0)
-
-GIT
   remote: git://github.com/spree/spree.git
   revision: 7d19c8933042cec667634c8cffedcbe6084abf1d
   branch: 1-3-stable
@@ -196,6 +148,19 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.1)
+    actionmailer (3.2.22)
+      actionpack (= 3.2.22)
+      mail (~> 2.5.4)
+    actionpack (3.2.22)
+      activemodel (= 3.2.22)
+      activesupport (= 3.2.22)
+      builder (~> 3.0.0)
+      erubis (~> 2.7.0)
+      journey (~> 1.0.4)
+      rack (~> 1.4.5)
+      rack-cache (~> 1.2)
+      rack-test (~> 0.6.1)
+      sprockets (~> 2.2.1)
     active_link_to (1.0.3)
       actionpack
     active_model_serializers (0.9.3)
@@ -205,8 +170,22 @@ GEM
       builder (>= 2.1.2, < 4.0.0)
       i18n (>= 0.6.9)
       nokogiri (~> 1.4)
+    activemodel (3.2.22)
+      activesupport (= 3.2.22)
+      builder (~> 3.0.0)
+    activerecord (3.2.22)
+      activemodel (= 3.2.22)
+      activesupport (= 3.2.22)
+      arel (~> 3.0.2)
+      tzinfo (~> 0.3.29)
     activerecord-immutable (0.0.3)
       activerecord (>= 3.2)
+    activeresource (3.2.22)
+      activemodel (= 3.2.22)
+      activesupport (= 3.2.22)
+    activesupport (3.2.22)
+      i18n (~> 0.6, >= 0.6.4)
+      multi_json (~> 1.0)
     acts-as-taggable-on (3.5.0)
       activerecord (>= 3.2, < 5)
     acts_as_list (0.1.4)
@@ -230,6 +209,10 @@ GEM
       json (~> 1.4)
       nokogiri (< 1.6.0)
       uuidtools (~> 2.1)
+    babel-source (5.8.19)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bcrypt (3.1.10)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
@@ -246,15 +229,8 @@ GEM
       tzinfo
     byebug (4.0.5)
       columnize (= 0.9.0)
+    callsite (0.0.11)
     cancan (1.6.8)
-    capistrano (2.15.4)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.1.0)
-    capistrano-rbenv (0.0.10)
-      capistrano
     capybara (2.4.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -336,8 +312,7 @@ GEM
       activerecord-immutable (~> 0.0.3)
     eventmachine (1.0.7)
     excon (0.45.3)
-    execjs (1.4.0)
-      multi_json (~> 1.0)
+    execjs (2.6.0)
     extlib (0.9.16)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
@@ -445,6 +420,7 @@ GEM
       railties (>= 3.2, < 5.0)
     formatador (0.2.5)
     geoip (1.5.0)
+    git-version-bump (0.15.1)
     google-api-client (0.7.1)
       addressable (>= 2.3.2)
       autoparse (>= 0.3.3)
@@ -495,7 +471,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
-    json (1.8.2)
+    json (1.8.3)
     jwt (1.4.1)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
@@ -509,21 +485,21 @@ GEM
       treetop (~> 1.4.8)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
+    meta_request (0.3.4)
+      callsite (~> 0.0, >= 0.0.11)
+      rack-contrib (~> 1.1)
+      railties (>= 3.0.0, < 5.0.0)
     method_source (0.8.2)
     mime-types (1.25.1)
     money (5.1.1)
       i18n (~> 0.6.0)
-    multi_json (1.11.0)
+    multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     naught (1.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-sftp (2.1.2)
-      net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
-    net-ssh-gateway (1.2.0)
-      net-ssh (>= 2.6.5)
     netrc (0.10.3)
     newrelic_rpm (3.12.0.288)
     nokogiri (1.5.11)
@@ -590,9 +566,12 @@ GEM
     rabl (0.7.2)
       activesupport (>= 2.3.14)
       multi_json (~> 1.0)
-    rack (1.4.5)
+    rack (1.4.7)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-contrib (1.4.0)
+      git-version-bump (~> 0.15)
+      rack (~> 1.4)
     rack-cors (0.4.0)
     rack-protection (1.5.3)
       rack
@@ -600,6 +579,21 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rails (3.2.22)
+      actionmailer (= 3.2.22)
+      actionpack (= 3.2.22)
+      activerecord (= 3.2.22)
+      activeresource (= 3.2.22)
+      activesupport (= 3.2.22)
+      bundler (~> 1.0)
+      railties (= 3.2.22)
+    railties (3.2.22)
+      actionpack (= 3.2.22)
+      activesupport (= 3.2.22)
+      rack-ssl (~> 1.3.2)
+      rake (>= 0.8.7)
+      rdoc (~> 3.4)
+      thor (>= 0.14.6, < 2.0)
     raindrops (0.13.0)
     rake (10.4.2)
     ransack (0.7.2)
@@ -612,6 +606,13 @@ GEM
     rdiscount (1.6.8)
     rdoc (3.12.2)
       json (~> 1.4)
+    react-rails (1.2.0)
+      babel-transpiler (>= 0.7.0)
+      coffee-script-source (~> 1.8)
+      connection_pool
+      execjs
+      rails (>= 3.2)
+      tilt
     redis (3.2.1)
     redis-actionpack (3.2.4)
       actionpack (~> 3.2.0)
@@ -744,6 +745,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
+    timecop (0.8.0)
     timers (1.1.0)
     tins (1.5.1)
     tire (0.6.2)
@@ -813,8 +815,6 @@ DEPENDENCIES
   bourbon
   business_time
   canonical-rails!
-  capistrano (= 2.15.4)
-  capistrano-rbenv (= 0.0.10)
   capybara
   ckeditor
   coercible
@@ -830,7 +830,7 @@ DEPENDENCIES
   droidcss
   eco
   event_sourced_record
-  execjs (= 1.4.0)
+  execjs (~> 2)
   factory_girl_rails (= 4.2.1)
   fame_favicon!
   fog
@@ -847,6 +847,7 @@ DEPENDENCIES
   letter_opener (= 0.0.2)!
   libv8 (~> 3.16)
   mail_view!
+  meta_request
   net-ssh (~> 2.7.0)
   newrelic_rpm
   oink
@@ -857,7 +858,8 @@ DEPENDENCIES
   psych (~> 2.0.13)
   quiet_assets
   rack-cors
-  rails!
+  rails (~> 3.2.22)
+  react-rails (~> 1.2)
   redis-rails
   revolution!
   rmagick
@@ -887,6 +889,7 @@ DEPENDENCIES
   test-unit
   therubyracer
   thin
+  timecop
   timers (= 1.1.0)
   tire
   titleize

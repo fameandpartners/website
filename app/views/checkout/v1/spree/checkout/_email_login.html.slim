@@ -1,0 +1,28 @@
+
+- if signed_in?
+  h2.checkout-section-title 1. Your information
+  p
+    ' We've got you at
+    strong= current_spree_user.email
+- else
+  h2.checkout-section-title 1. Your information
+  p Login if you have an account
+  .auth-alert.alert-dismissible.fade.in.alert-danger
+    button type="button" class="close" data-dismiss="alert" aria-label="Close" x
+    h3.alert-danger
+      | Invalid email or password
+  .row
+    .col-md-6.form-group
+      label
+        | Email address *
+      = text_field_tag 'email', nil, class: 'form-control form-control-md'
+      label Password
+      .input-group
+        = text_field_tag 'password', nil, class: 'form-control form-control-md', type: 'password'
+        span.input-group-addon
+          = link_to 'log in', login_path, class: 'btn btn-block btn-black btn-md open-login-popup'
+
+    .col-md-6.form-group
+      ' or
+      label.invisible Facebook
+      = link_to 'Sign in with Facebook', fb_auth_path, class: 'btn btn-facebook btn-block btn-md fb-login'

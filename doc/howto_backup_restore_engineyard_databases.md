@@ -18,12 +18,14 @@ Here you can either download most recent backup, or take a new backup, then down
 sudo -i eybackup -e postgresql --new-backup
 ```
 
-##### Download most recent backup
+
+##### (Optional) List recent backups
 
 ```shell
 sudo -i eybackup -e postgresql --list-backup fame_and_partners
 ```
 
+##### Download most recent backup
 Given we are currently configured to keep 30 backups, you can always just get the most recent downloaded onto the box you are on by running this command. (note backup file list is `0` indexed, hence the `29`)
 
 ```shell

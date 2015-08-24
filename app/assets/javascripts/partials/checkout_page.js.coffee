@@ -1,10 +1,5 @@
 window.page ||= {}
 
-$.fn.scrollView = ->
-  @each ->
-    $('html, body').animate { scrollTop: $(this).offset().top - 20 }, 1000
-    return
-
 page.initCheckoutEditPage = () ->
   page = {
     ajax_callbacks: {}

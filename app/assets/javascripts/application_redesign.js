@@ -8,6 +8,12 @@
 //= require jquery-fileupload/jquery.fileupload
 
 //= require libs/underscore-min
+//= require bootstrap
+
+// React
+//= require react
+//= require react_ujs
+//= require components
 
 //---------------------------
 // Spree have this by default

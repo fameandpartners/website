@@ -22,7 +22,16 @@ window.SideMenu = class SideMenu
       @xUp = e2.originalEvent.changedTouches[0].screenX
       if @xDown > @xUp
         @close()
+      @blockScroll()
 
+    $('#sideMenu').on 'mousewheel', (e) =>
+      @blockScroll()
+
+  blockScroll: =>
+    sideMenuScrollTop = @$container.scrollTop()
+    allDressesPosition = $(".all-dresses",@$container).position().top
+    if sideMenuScrollTop > allDressesPosition - 50
+      @$container.scrollTop(allDressesPosition - 50)
 
   slide: (e) =>
     $this = $(e.target)

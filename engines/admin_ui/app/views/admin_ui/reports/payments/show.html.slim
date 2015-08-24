@@ -1,22 +1,15 @@
 = content_for :page_title do
   ' Payments Report
 
-h2 Report
-
-= form_tag admin_ui.reports_payments_path, method: 'post' do
-  button type='submit' Generate
+.ibox
+  .ibox-title
+    ' Payments Report
+  .ibox-content
+    = form_tag admin_ui.reports_payments_path, method: 'post', class: 'form-horizontal'
+      .form-group
+        .col-lg-12
+          button type='submit' Generate
 
 h2 Sample
 
-div.pre-scrollable style='max-height:100%;'
-  table.table.table-condensed
-    thead
-      tr
-        - head = @rows.first
-        - head.keys.each do |k|
-          th = k
-    tbody
-      - @rows.each do |row|
-        tr
-          - row.values.each do |v|
-            td = v
+= render partial: 'admin_ui/reports/report_rows_preview', locals: { rows: @rows }
