@@ -1,7 +1,29 @@
+var FilterAllOption = React.createClass({
+  getInitialState: function() {
+    return {checked: true};
+  },
+
+  check: function(){
+    this.setState({checked: !this.state.checked});
+  },
+
+  render: function() {
+    return (
+      <div className='filterOption'>
+        <label>
+          <input type="checkbox" checked={this.state.checked} name={this.props.name} onChange={this.check}>
+          </input>
+          {this.props.label}
+        </label>
+      </div>
+    )
+  }
+});
+
 var FilterOption = React.createClass({
 
   getInitialState: function() {
-    return {checked: this.props.name == ''};
+    return {checked: false};
   },
 
   check: function(){
@@ -53,21 +75,21 @@ var CollectionFilter = React.createClass({
         <div>
           <b>STYLES</b>
           <div className='filterArea filterAreaStyles'>
-            <FilterOption name='' label='View all styles' />
+            <FilterAllOption name='' label='View all styles' />
             {styles}
           </div>
           <br/>
 
           <b>COLORS</b>
           <div className='filterArea filterAreaColors'>
-            <FilterOption name='' label='View all colors' />
+            <FilterAllOption name='' label='View all colors' />
             {colors}
           </div>
           <br/>
 
           <b>BODYSHAPE</b>
           <div className='filterArea filterAreaShapes'>
-            <FilterOption name='' label='View all shapes' />
+            <FilterAllOption name='' label='View all shapes' />
             {shapes}
           </div>
         </div>
