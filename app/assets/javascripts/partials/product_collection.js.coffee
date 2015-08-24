@@ -175,7 +175,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       if colour == "none"
         colour = ''
     else
-      $(".filterAreaColors input:checked")[0].name
+      colour = $(".filterAreaColors input:checked")[0].name
 
     bodyshape = $(".filterAreaShapes input:checked")[0].name if $(".filterAreaShapes input:checked")[0]?
     style     = $(".filterAreaStyles input:checked")[0].name if $(".filterAreaStyles input:checked")[0]?
