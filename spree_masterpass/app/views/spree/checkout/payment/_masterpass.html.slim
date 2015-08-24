@@ -1,12 +1,31 @@
 - content_for :head do
   = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/integration/MasterPass.client.js'
   = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
+  = javascript_include_tag 'http://fgnass.github.io/spin.js/spin.min.js'
 
 - content_for :inline_javascript do
   | $('#buyWithMasterPassDiv').click(
       function() {
+        var masterpass_overlay = $('#buyWithMasterPassOverlayDiv');
+        masterpass_overlay.css({
+          "position": "fixed",
+          "width": "100%",
+          "height": "100%",
+          "background-color": "rgba(0,0,0,.7)",
+          "top": 0,
+          "left": 0,
+          "z-index": 1000000,
+          "overflow": "auto"
+        });
+
+        var spinner = new Spinner().spin();
+        masterpass_overlay.append(spinner.el);
+
         $.getJSON("/masterpass/cart?payment_method_id=#{payment_method.id}").done(
           function(data) {
+            spinner.stop();
+            masterpass_overlay.css({"width": 0, "height": 0});
+
             if (data.hasOwnProperty('request_token') && data.hasOwnProperty('callback_domain')
               && data.hasOwnProperty('checkout_identifier') && data.hasOwnProperty('shipping_suppression')
               && data.hasOwnProperty('accepted_cards') && data.hasOwnProperty('cart_callback_path')) {
@@ -20,11 +39,12 @@
                   "loyaltyEnabled": "false",
                   "requestBasicCheckout": false,
                   "version":"v6"
-                });rails s
-
+                });
               }
           });
       });
+
+#buyWithMasterPassOverlayDiv
 
 #buyWithMasterPassDiv
   a[href="javascript: void(0);"]: img src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_147x034px.png" alt="Buy with MasterPass"
