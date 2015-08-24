@@ -9,30 +9,34 @@ describe Spree::Calculator::SaleShipping, type: :model do
   )}
 
   context "#compute" do
-    it "returns default shipping for standard orders" do
-      expect(order).to receive(:in_sale?).and_return(false)
-      expect(subject.compute(order)).to eql(BigDecimal.new('9.9'))
+    context 'orders' do
+      it "returns default shipping for standard orders" do
+        expect(order).to receive(:in_sale?).and_return(false)
+        expect(subject.compute(order)).to eql(BigDecimal.new('9.9'))
+      end
+
+      it "returns sale amount for orders with sale items" do
+        expect(order).to receive(:in_sale?).and_return(true)
+        expect(subject.compute(order)).to eql(BigDecimal.new('15.5'))
+      end
     end
 
-    it "returns sale amount for orders with sale items" do
-      expect(order).to receive(:in_sale?).and_return(true)
-      expect(subject.compute(order)).to eql(BigDecimal.new('15.5'))
-    end
+    context 'promotions' do
+      it "returns sale amount if applied promotion requires charge" do
+        expect(order).to receive(:coupon_code_added_promotion).and_return(
+          double('promo', require_shipping_charge?: true)
+        )
 
-    it "returns sale amount if applied promotion requires charge" do
-      expect(order).to receive(:coupon_code_added_promotion).and_return(
-        double('promo', require_shipping_charge?: true)
-      )
+        expect(subject.compute(order)).to eql(BigDecimal.new('15.5'))
+      end
 
-      expect(subject.compute(order)).to eql(BigDecimal.new('15.5'))
-    end
+      it "returns default amount if applied promotion requires charge" do
+        expect(order).to receive(:coupon_code_added_promotion).and_return(
+          double('promo', require_shipping_charge?: false)
+        )
 
-    it "returns default amount if applied promotion requires charge" do
-      expect(order).to receive(:coupon_code_added_promotion).and_return(
-        double('promo', require_shipping_charge?: false)
-      )
-
-      expect(subject.compute(order)).to eql(BigDecimal.new('9.9'))
+        expect(subject.compute(order)).to eql(BigDecimal.new('9.9'))
+      end
     end
   end
 
