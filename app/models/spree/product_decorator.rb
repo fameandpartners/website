@@ -26,10 +26,10 @@ Spree::Product.class_eval do
   belongs_to :fabric_card, inverse_of: :spree_products
 
   has_and_belongs_to_many :related_jackets,
-                          association_foreign_key: 'jacket_id',
+                          association_foreign_key: :jacket_id,
                           class_name: 'Spree::Product',
-                          foreign_key: 'product_id',
-                          join_table: 'spree_product_related_jackets'
+                          foreign_key: :product_id,
+                          join_table: :spree_product_related_jackets
 
   attr_accessible :customisation_value_ids,
                   :discounts_attributes,
