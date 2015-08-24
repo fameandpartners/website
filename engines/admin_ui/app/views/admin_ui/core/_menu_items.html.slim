@@ -1,3 +1,5 @@
+= menu_item root_path, 'Dashboard', icon: 'dashboard', exact: true
+
 li class=active_link_to_class(caches_path)
   a href="#"
     i.fa.fa-database
@@ -15,7 +17,6 @@ li class=active_link_to_class('', active: /content/)
   ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
     = active_link_to 'Pages', content_pages_path, wrap_tag: :li
 
-= menu_item root_path, 'Dashboard', icon: 'dashboard', exact: true
 = menu_item preferences_path, 'Preferences', icon: 'cog', exact: true
 
 li class=active_link_to_class('', active: /reports/)
