@@ -5,8 +5,6 @@ describe Products::CollectionsController, :type => :controller do
     let(:collection_details) { double('Collection Details', meta_title: 'My Title', seo_description: 'My Description') }
     let(:collection_double)  { double('Collection', details: collection_details) }
     let(:page)               { double(Revolution::Page, :get => false, :template_path => '/products/collections/show.html.slim', :locale= => true)}
-    let!(:color_option_type) { create(:option_type, :color) }
-    let!(:red)               { create(:option_values_group, name: 'Red'  , option_type: color_option_type)}
 
     before(:each) do
       # Repositories and Resources should be tested elsewhere
