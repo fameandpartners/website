@@ -40,6 +40,7 @@ class Products::CollectionsController < Products::BaseController
   def show
     @filter = Products::CollectionFilter.read
 
+    @color_groups =  Repositories::ProductColors.color_groups
     @collection.use_auto_discount!(current_promotion.discount) if current_promotion
 
     respond_to do |format|
