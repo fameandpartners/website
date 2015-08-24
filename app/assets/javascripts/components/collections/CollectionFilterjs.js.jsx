@@ -1,18 +1,38 @@
-var _CollectionFilter = React.createClass({
+var ReactCheckbox = React.createClass({
+
+  getInitialState: function(){
+    checked: this.props.name = ''
+  }
+
+  check: function(){
+    this.setState({checked: !this.state.checked})
+  }
+
+  render: function(){
+    return(
+      <input type="checkbox" checked={this.state.checked} onChange={this.check() name={this.props.name} }>
+      </input>
+    )
+  }
+});
+
+
+
+var CollectionFilter = React.createClass({
 
   render: function() {
     shapes = [];
-    for (var i=0; i < Math.min(7,this.props.shapes.length); i++){
+    for (var i=0; i < this.props.shapes.length; i++){
       shapes.push(<div className="filterOption"> <label><input type="checkbox"></input>{this.props.shapes[i]}</label> </div>)
     }
 
     colors = [];
-    for (var i=0; i < Math.min(7,this.props.colors.length); i++){
+    for (var i=0; i < this.props.colors.length; i++){
       colors.push(<div className="filterOption">  <label><input type="checkbox"></input>{this.props.colors[i].table.presentation}</label> </div>)
     }
 
     styles = [];
-    for (var i=0; i < Math.min(7,this.props.styles.length); i++){
+    for (var i=0; i < this.props.styles.length; i++){
       styles.push(<div className="filterOption">  <label><input type="checkbox"></input>{this.props.styles[i].table.name}</label> </div>)
     }
     return (
@@ -30,7 +50,7 @@ var _CollectionFilter = React.createClass({
         <div>
           <b>STYLES</b>
           <div className='filterArea'>
-            {styles}
+            <ReactCheckbox value='View all styles' />
           </div>
           <br/>
 
