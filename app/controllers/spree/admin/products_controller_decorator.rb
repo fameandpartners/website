@@ -8,8 +8,8 @@ Spree::Admin::ProductsController.class_eval do
       product_ids = params[:ids].split(',')
       @products   = scope.where(id: product_ids)
     else
-      search_params = { name_cont: params[:q], sku_cont: params[:q] }
-      @products     = scope.ransack(search_params.merge(:m => 'or')).result
+      search_params = { name_cont: params[:q], m: 'or' }
+      @products     = scope.ransack(search_params).result
     end
 
     render 'spree/admin/products/search'
