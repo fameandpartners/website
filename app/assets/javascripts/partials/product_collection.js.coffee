@@ -73,7 +73,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       return if name=="none"
       if $(".filterAreaColors input[name='"+ name+"']:checked").size() == 0
         $(".filterAreaColors input[name='"+ name+"']").click()
-      $(".filterAreaColors input[name!='" + name + "']:checked").click()
 
     if isColorCheckbox
       return if $(".filterAreaColors input[name='" + name + "']:checked").size() == 0
@@ -176,15 +175,16 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     colourArray = []
     style = ''
 
-    colorInputs = $(".filterAreaColors input:checked")
-    for colorInput in colorInputs
-      colourArray.push(colorInput.name)
-    colour = $($(".filterAreaColors select option:selected")[0]).attr("name")
-    if colour != "none"
-      colourArray.push(colour)
+    if $(".filterAreaColors input[name='all']:checked").size() == 0
+      colorInputs = $(".filterAreaColors input[name!='all']:checked")
+      for colorInput in colorInputs
+        colourArray.push(colorInput.name)
+      colour = $($(".filterAreaColors select option:selected")[0]).attr("name")
+      if colour != "none"
+        colourArray.push(colour)
 
-    bodyshape = $(".filterAreaShapes input:checked")[0].name if $(".filterAreaShapes input:checked")[0]?
-    style     = $(".filterAreaStyles input:checked")[0].name if $(".filterAreaStyles input:checked")[0]?
+    bodyshape = $(".filterAreaShapes input[name!='all']:checked")[0].name if $(".filterAreaShapes input[name!='all']:checked")[0]?
+    style     = $(".filterAreaStyles input[name!='all']:checked")[0].name if $(".filterAreaStyles input[name!='all']:checked")[0]?
     {
       bodyshape: bodyshape,
       colour:    colourArray,
