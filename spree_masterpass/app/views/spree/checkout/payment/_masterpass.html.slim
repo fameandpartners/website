@@ -3,9 +3,9 @@
   = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
   = javascript_include_tag 'http://fgnass.github.io/spin.js/spin.min.js'
 
+/ "inline_javascript" should be removed, but in my case, the site was messed up so
 - content_for :inline_javascript do
-  | $('#buyWithMasterPassDiv').click(
-      function() {
+  | $('#buyWithMasterPassDiv').click(function() {
         var masterpass_overlay = $('#buyWithMasterPassOverlayDiv');
         masterpass_overlay.css({
           "position": "fixed",
@@ -29,6 +29,7 @@
             if (data.hasOwnProperty('request_token') && data.hasOwnProperty('callback_domain')
               && data.hasOwnProperty('checkout_identifier') && data.hasOwnProperty('shipping_suppression')
               && data.hasOwnProperty('accepted_cards') && data.hasOwnProperty('cart_callback_path')) {
+
                 MasterPass.client.checkout({
                   "requestToken": data.request_token,
                   "callbackUrl": data.cart_callback_path,
@@ -40,6 +41,7 @@
                   "requestBasicCheckout": false,
                   "version":"v6"
                 });
+
               }
           });
       });

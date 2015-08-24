@@ -1,3 +1,10 @@
-/*
- *= require store/spree_core
-*/
+#buyWithMasterPassOverlayDiv {
+    background-color: rgba(0,0,0,.7);
+    position: fixed;
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+    z-index: 1000001;
+    overflow: auto;
+}
