@@ -5,6 +5,18 @@
   .ibox-title
     ' Return Shoppers
   .ibox-content
+    p
+      ' Excludes the following dev / test emails from the report;
+      pre
+        | elton.stewart+admin@gmail.com
+          tobyh@fameandpartners.com
+          ilnur.yakupov@gmail.com
+          malleus.petrov@gmail.com
+          ts-sid.vamshi@linkshare.com
+          nycorby@gmail.com
+      ' and any email like
+      code @fameandpartners.com
+
     = form_tag admin_ui.reports_return_shoppers_path, method: 'post', class: 'form-horizontal'
       .form-group
         .col-lg-12
