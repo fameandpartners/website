@@ -1,4 +1,4 @@
-var ReactCheckbox = React.createClass({
+var FilterOption = React.createClass({
 
   getInitialState: function() {
     return {checked: this.props.name == ''};
@@ -27,15 +27,15 @@ var CollectionFilter = React.createClass({
 
   render: function() {
     shapes = this.props.shapes.map(function(shape){
-      return (<ReactCheckbox name={shape} label={shape} />)
+      return (<FilterOption name={shape} label={shape} />)
     });
 
     colors = this.props.colors.map(function(color){
-      return (<ReactCheckbox name={color.table.presentation} label={color.table.presentation} />)
+      return (<FilterOption name={color.table.presentation} label={color.table.presentation} />)
     });
 
     styles = this.props.styles.map(function(style){
-      return (<ReactCheckbox name={style.table.name} label={style.table.name} />)
+      return (<FilterOption name={style.table.name} label={style.table.name} />)
     });
 
     return (
@@ -53,21 +53,21 @@ var CollectionFilter = React.createClass({
         <div>
           <b>STYLES</b>
           <div className='filterArea filterAreaStyles'>
-            <ReactCheckbox name='' label='View all styles' />
+            <FilterOption name='' label='View all styles' />
             {styles}
           </div>
           <br/>
 
           <b>COLORS</b>
           <div className='filterArea filterAreaColors'>
-            <ReactCheckbox name='' label='View all colors' />
+            <FilterOption name='' label='View all colors' />
             {colors}
           </div>
           <br/>
 
           <b>BODYSHAPE</b>
           <div className='filterArea filterAreaShapes'>
-            <ReactCheckbox name='' label='View all shapes' />
+            <FilterOption name='' label='View all shapes' />
             {shapes}
           </div>
         </div>
