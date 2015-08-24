@@ -24,7 +24,7 @@ module AdminUi
 
       # lol programming
       def from_date
-        date(params[:from], default: 1.week.ago)
+        date(params[:from], default: 6.weeks.ago)
       end
 
       def to_date
