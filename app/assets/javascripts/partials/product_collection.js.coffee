@@ -77,7 +77,12 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     if isColorCheckbox
       return if $(".filterAreaColors input[name='" + name + "']:checked").size() == 0
-      $(".filterAreaColors input[name!='" + name + "']:checked").click()
+      if name == 'all'
+        $(".filterAreaColors input[name!='" + name + "']:checked").click()
+      else
+        if $(".filterAreaColors input[name='all']:checked").size() == 1
+          $(".filterAreaColors input[name='all']:checked").click()
+
     if isShapeCheckbox
       return if $(".filterAreaShapes input[name='" + name + "']:checked").size() == 0
       $(".filterAreaShapes input[name!='" + name + "']:checked").click()
@@ -139,7 +144,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     e.preventDefault()
     if @loading != true
       @loading = true
-      updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
+      #updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
+      updateRequestParams = _.extend({}, @updateParams, @getSelectedValues2())
       @updatePaginationLink('loading')
       $.ajax(urlWithSitePrefix(@source_path),
         type: "GET",
@@ -167,21 +173,21 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   getSelectedValues2: () ->
     bodyshape = ''
-    colour = ''
+    colourArray = []
     style = ''
 
-    if $(".filterAreaColors input:checked").size() == 0
-      colour = $($(".filterAreaColors select option:selected")[0]).attr("name")
-      if colour == "none"
-        colour = ''
-    else
-      colour = $(".filterAreaColors input:checked")[0].name
+    colorInputs = $(".filterAreaColors input:checked")
+    for colorInput in colorInputs
+      colourArray.push(colorInput.name)
+    colour = $($(".filterAreaColors select option:selected")[0]).attr("name")
+    if colour != "none"
+      colourArray.push(colour)
 
     bodyshape = $(".filterAreaShapes input:checked")[0].name if $(".filterAreaShapes input:checked")[0]?
     style     = $(".filterAreaStyles input:checked")[0].name if $(".filterAreaStyles input:checked")[0]?
     {
       bodyshape: bodyshape,
-      colour:    colour,
+      colour:    colourArray,
       style:     style,
       order:     @productOrderInput.val()
     }

@@ -57,6 +57,7 @@ class Products::CollectionResource
 
   # what about ProductCollection class
   def read
+    color = color.first if color.is_a? Array
     Products::CollectionPresenter.from_hash(
       products:   products,
       total_products: total_products,
@@ -123,8 +124,15 @@ class Products::CollectionResource
       if color_group.present?
         result[:color_ids] += color_group.color_ids
       elsif color.present?
-        result[:color_ids] << color.id
-        result[:color_ids] += Repositories::ProductColors.get_similar(color.id, Similarity::Range::DEFAULT)
+        if color.is_a? Array
+          color.each do |c|
+            result[:color_ids] << c.id
+            result[:color_ids] += Repositories::ProductColors.get_similar(c.id, Similarity::Range::DEFAULT)
+          end
+        else
+          result[:color_ids] << color.id
+          result[:color_ids] += Repositories::ProductColors.get_similar(color.id, Similarity::Range::DEFAULT)
+        end
       end
 
       result[:discount] = discount if discount.present?

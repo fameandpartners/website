@@ -59,9 +59,18 @@ module Repositories
       end
 
       def get_by_name(color_name = nil)
-        return nil if color_name.blank?
-        color_name = color_name.to_s.downcase
-        read_all.find{|color| color.name.downcase == color_name || color.presentation.downcase == color_name}
+        if color_name.is_a? Array
+          result = []
+          color_name.each do |c|
+            color_name = c.to_s.downcase
+            result << read_all.find{|color| color.name.downcase == color_name || color.presentation.downcase == color_name}
+          end
+          result
+        else
+          return nil if color_name.blank?
+          color_name = color_name.to_s.downcase
+          read_all.find{|color| color.name.downcase == color_name || color.presentation.downcase == color_name}
+        end
       end
 
       def get_similar(color_ids, range = nil)
