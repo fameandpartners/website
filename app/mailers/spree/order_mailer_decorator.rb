@@ -24,7 +24,7 @@ Spree::OrderMailer.class_eval do
     adjustments = Marketing::OrderPresenter.build_adjustments(@order)
 
     user = @order.user
-    user = Spree::User.where(email: @order.email).first if user.nil?
+    user ||= Spree::User.where(email: @order.email).first
 
     Marketing::CustomerIOEventTracker.new.track(
       user,
@@ -55,7 +55,7 @@ Spree::OrderMailer.class_eval do
     additional_products_info = Marketing::OrderPresenter.build_additional_products_info(@additional_products_info)
 
     user = @order.user
-    user = Spree::User.where(email: @order.email).first if user.nil?
+    user ||= Spree::User.where(email: @order.email).first
 
     Marketing::CustomerIOEventTracker.new.track(
       user,
@@ -85,7 +85,7 @@ Spree::OrderMailer.class_eval do
     subject = "Order Confirmation (订单号码）(#{factory}) ##{@order.number}"
 
     user = @order.user
-    user = Spree::User.where(email: @order.email).first if user.nil?
+    user ||= Spree::User.where(email: @order.email).first
 
     customer_notes = @order.customer_notes?
     @order = Orders::OrderPresenter.new(@order, items)
