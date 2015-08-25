@@ -223,7 +223,8 @@ hr
           span.name  = recommended_product.name
           span.price = product_price_with_discount(recommended_product.price, recommended_product.discount)
 
-= render :partial => 'data'
+
+= render partial: 'micro_data'
 
 #fit-guide-content.hidden
   = render :partial => 'size_guide', :locals => { data: @product.size_chart_data, explanation: @product.size_chart_explanation }
