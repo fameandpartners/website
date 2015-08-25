@@ -131,6 +131,7 @@ class Products::DetailsResource
     end
 
     # TODO: #recommended_products and #related_jackets are too similar. Also, they use OpenStructs, instead of being some kind of presenters. Refactor this
+    # TODO: suggestion: Related Products presenter?
     def recommended_products
       Products::RecommendedProducts.new(product: product, limit: RECOMMENDED_PRODUCTS_LIMIT).read.map do |recommended_product|
         image = Repositories::ProductImages.new(product: recommended_product).read(cropped: true)

@@ -1,3 +1,5 @@
+@import 'media_queries';
+
 .list-group-item.customization-option  {
 
 	img {
@@ -318,3 +320,19 @@
 }
 
 .sc-player { display: none; }
+
+// Related Products
+
+.dress-more {
+  .border-left-divider {
+    border-left: 1px solid #EEEEEE;
+
+    @include mobile {
+      border-left: none;
+    }
+
+    @include tablet {
+      border-left: none;
+    }
+  }
+}
