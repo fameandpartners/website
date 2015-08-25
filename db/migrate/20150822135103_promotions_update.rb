@@ -31,7 +31,9 @@ class PromotionsUpdate < ActiveRecord::Migration
     Spree::Promotion.update_all(eligible_to_custom_order: false)
 
     Spree::Promotion.find_each(batch_size: 100) do |promotion|
-      calculators = promotion.actions.map{|action| action.calculator.try(:type) }.compact.uniq
+      calculators = promotion.actions
+                      .select {|a| a.respond_to?(:calculator)}
+                      .map{|action| action.calculator.try(:type) }.compact.uniq
       if calculators.include?('Spree::Calculator::PersonalizationDiscount')
         promotion.update_column(:eligible_to_custom_order, true)
       end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150812004018) do
+ActiveRecord::Schema.define(:version => 20150822135103) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -834,12 +834,12 @@ ActiveRecord::Schema.define(:version => 20150812004018) do
     t.string   "event_name"
     t.string   "type"
     t.integer  "usage_limit"
-    t.string   "match_policy", :default => "all"
+    t.string   "match_policy",             :default => "all"
     t.string   "code"
-    t.boolean  "advertise",    :default => false
+    t.boolean  "advertise",                :default => false
     t.string   "path"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.boolean  "eligible_to_custom_order", :default => false
     t.boolean  "eligible_to_sale_order",   :default => false
     t.boolean  "require_shipping_charge",  :default => false
