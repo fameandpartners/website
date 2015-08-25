@@ -5,14 +5,36 @@ ruby:
   )
 
 .dress-more.container.page-content
+  - unless related.jackets.empty?
+    .col-md-12
+      h2.text-center Pair With
+      .divider
+
+      .row.text-center
+        - related.jackets.each do |jacket|
+          .col-md-3.col-xs-6.col-xxs-12.col-centered.category--item data-id=(jacket.id)
+            - if Features.active?(:moodboard)
+              = link_to collection_jacket_path(jacket) do
+                - if current_user_moodboard.contains(product_id: jacket.id)
+                  span.fa.fa-heart.add-to-moodboard
+                - else
+                  span.fa.fa-heart-o.add-to-moodboard
+
+            = link_to collection_jacket_path(jacket) do
+              = image_tag jacket.image.try(:large), class: 'img-responsive'
+
+            .details
+              span.name = jacket.name
+              span.price = product_price_with_discount(jacket.price, jacket.discount)
+
   .row
-    .col-md-6
+    .col-md-12
       h2.text-center More Cute Dresses
       .divider
 
       .row
       - related.recommended.each do |recommended_product|
-        .col-md-6.col-xs-6.col-xxs-12.category--item data-id=(recommended_product.id)
+        .col-md-3.col-xs-6.col-xxs-12.category--item data-id=(recommended_product.id)
           - if Features.active?(:moodboard)
             = link_to collection_product_path(recommended_product) do
               - if current_user_moodboard.contains(product_id: recommended_product.id)
@@ -26,26 +48,3 @@ ruby:
           .details
             span.name = recommended_product.name
             span.price = product_price_with_discount(recommended_product.price, recommended_product.discount)
-
-
-    - unless related.jackets.empty?
-      .col-md-6.border-left-divider
-        h2.text-center Pair With
-        .divider
-
-        .row
-        - related.jackets.each do |jacket|
-          .col-md-6.col-xs-6.col-xxs-12.category--item data-id=(jacket.id)
-            - if Features.active?(:moodboard)
-              = link_to collection_jacket_path(jacket) do
-                - if current_user_moodboard.contains(product_id: jacket.id)
-                  span.fa.fa-heart.add-to-moodboard
-                - else
-                  span.fa.fa-heart-o.add-to-moodboard
-
-            = link_to collection_jacket_path(jacket) do
-              = image_tag jacket.image.try(:large), class: 'img-responsive'
-
-            .details
-              span.name  = jacket.name
-              span.price = product_price_with_discount(jacket.price, jacket.discount)

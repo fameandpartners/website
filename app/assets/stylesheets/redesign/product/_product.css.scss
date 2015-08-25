@@ -321,18 +321,20 @@
 
 .sc-player { display: none; }
 
-// Related Products
-
 .dress-more {
-  .border-left-divider {
-    border-left: 1px solid #EEEEEE;
+  .col-centered {
+    display: inline-block;
+    float: none;
+    // reset the text-align
+    text-align: left;
 
+    // Restore float left on mobile devices, due to bootstrap grid stacking
     @include mobile {
-      border-left: none;
+      float: left;
     }
 
     @include tablet {
-      border-left: none;
+      float: left;
     }
   }
 }
