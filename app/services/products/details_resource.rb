@@ -8,7 +8,7 @@
 class Products::DetailsResource
   META_DESCRIPTION_MAX_SIZE = 160
   RECOMMENDED_PRODUCTS_LIMIT = 4
-  RELATED_JACKETS_LIMIT = 2
+  RELATED_JACKETS_LIMIT = 4
 
   attr_reader :site_version, :product
 
