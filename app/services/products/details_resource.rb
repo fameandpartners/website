@@ -7,6 +7,8 @@
 #
 class Products::DetailsResource
   META_DESCRIPTION_MAX_SIZE = 160
+  RECOMMENDED_PRODUCTS_LIMIT = 4
+  RELATED_JACKETS_LIMIT = 2
 
   attr_reader :site_version, :product
 
@@ -44,6 +46,7 @@ class Products::DetailsResource
         discount:           product_discount,
         # page#show specific details
         recommended_products: recommended_products,
+        related_jackets:    related_jackets,
         available_options:  product_selection_options,
         moodboard:          product_moodboard,
         fabric:             product_fabric,
@@ -127,8 +130,9 @@ class Products::DetailsResource
       Repositories::ProductMoodboard.new(product: product).read
     end
 
+    # TODO: #recommended_products and #related_jackets are too similar. Also, they use OpenStructs, instead of being some kind of presenters. Refactor this
     def recommended_products
-      Products::RecommendedProducts.new(product: product, limit: 4).read.map do |recommended_product|
+      Products::RecommendedProducts.new(product: product, limit: RECOMMENDED_PRODUCTS_LIMIT).read.map do |recommended_product|
         image = Repositories::ProductImages.new(product: recommended_product).read(cropped: true)
         color = Repositories::ProductColors.read(image.try(:color_id))
 
@@ -139,6 +143,22 @@ class Products::DetailsResource
           discount: Repositories::Discount.get_product_discount(recommended_product.id),
           image: image,
           color: color
+        )
+      end
+    end
+
+    def related_jackets
+      product.related_jackets.first(RELATED_JACKETS_LIMIT).map do |jacket|
+        image = Repositories::ProductImages.new(product: jacket).read(cropped: true)
+        color = Repositories::ProductColors.read(image.try(:color_id))
+
+        OpenStruct.new(
+            id: jacket.id,
+            name: jacket.name,
+            price: Repositories::ProductPrice.new(site_version: site_version, product: jacket).read,
+            discount: Repositories::Discount.get_product_discount(jacket.id),
+            image: image,
+            color: color
         )
       end
     end

@@ -1,9 +1,8 @@
 module Products
-
   class Presenter
     attr_accessor :id, :master_id, :sku, :name, :short_description, :description,
                   :permalink, :is_active, :images, :default_image, :price,
-                  :discount, :recommended_products, :available_options, :preorder,
+                  :discount, :recommended_products, :related_jackets, :available_options, :preorder,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
                   :size_chart, :making_option_id, :fit, :size, :fast_making
 
