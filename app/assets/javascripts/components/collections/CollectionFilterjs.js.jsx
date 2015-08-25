@@ -77,9 +77,6 @@ var CollectionFilter = React.createClass({
 
     return (
       <div>
-        <div>
-          Home / <b>Dresses</b>
-        </div>
 
         <div className='filterRect'>
           <span className='filterText'>Filter</span>

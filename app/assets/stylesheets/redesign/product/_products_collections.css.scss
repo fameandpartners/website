@@ -1,5 +1,5 @@
 .products-collections {
-	padding-top: 45px;
+	padding-top: 40px;
 
 	.select2-container--default {
 		width: 100% !important;
@@ -9,11 +9,14 @@
 		vertical-align: middle;
 	}
 
-	.select2-container--default .select2-selection--single .select2-selection__rendered {
+	.sort{
 		line-height: 45px;
 		text-transform: uppercase;
 		font-size: 1.2rem;
 		font-weight: 600;
+		float:right;
+		width:20%;
+		margin-right:5px;
 	}
 
 	.select2-container--default .select2-selection--single {
@@ -32,6 +35,10 @@
 	.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b{
 		border-color: transparent transparent #fff transparent;
 		border-width: 0 8px 10px 8px;
+	}
+
+	#select2-product_order-container{
+		margin-top: 7px;
 	}
 
 	.name {
@@ -73,6 +80,14 @@
 	.more-products {
 		margin-bottom:100px;
 		text-align:center;
+	}
+	.leftPath {
+		float:left;
+		padding-left:60px;
+		margin-top:10px
+	}
+	.category-controls {
+		width:100%;
 	}
 }
 
@@ -198,7 +213,6 @@ li.select2-results__option {
 
 .filterRect{
 	background-color: #E8E8E8;
-	margin-top: 10px;
 	margin-bottom: 15px;
 	.filterText{
 		margin-left:25px;

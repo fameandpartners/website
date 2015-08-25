@@ -1,3 +1,7 @@
+- if local_assigns[:hidden].blank?
+  ruby:
+    sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase))
+
 = render :partial => 'javascript'
 
 .page-title.default.category-header style="background-image: url('#{@collection.details.banner.image}')"
@@ -16,6 +20,7 @@
 
       .col-md-9
         .container.relative.products-collection style='width:100%'
+
           - if Features.active?(:collection_content)
             = render partial: 'products_with_content'
           - else
