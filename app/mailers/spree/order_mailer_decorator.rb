@@ -23,8 +23,11 @@ Spree::OrderMailer.class_eval do
     line_items = Marketing::OrderPresenter.build_line_items(@order)
     adjustments = Marketing::OrderPresenter.build_adjustments(@order)
 
+    user = @order.user
+    user ||= Spree::User.where(email: @order.email).first
+
     Marketing::CustomerIOEventTracker.new.track(
-      @order.user,
+      user,
       'order_confirmation_email',
       email_to:           @order.email,
       subject:            subject,
@@ -33,7 +36,7 @@ Spree::OrderMailer.class_eval do
       display_item_total: @order.display_item_total,
       adjustments:        adjustments,
       display_total:      @order.display_total,
-      auto_account:       @order.user && @order.user.automagically_registered?,
+      auto_account:       user && user.automagically_registered?,
       today:              Date.today.to_formatted_s(:long)
     )
   end
@@ -51,8 +54,11 @@ Spree::OrderMailer.class_eval do
     adjustments = Marketing::OrderPresenter.build_adjustments(@order)
     additional_products_info = Marketing::OrderPresenter.build_additional_products_info(@additional_products_info)
 
+    user = @order.user
+    user ||= Spree::User.where(email: @order.email).first
+
     Marketing::CustomerIOEventTracker.new.track(
-      @order.user,
+      user,
       'order_team_confirmation_email',
       email_to:                       "team@fameandpartners.com",
       subject:                        subject,
@@ -79,9 +85,12 @@ Spree::OrderMailer.class_eval do
     subject = "Order Confirmation (订单号码）(#{factory}) ##{@order.number}"
 
     user = @order.user
+    user ||= Spree::User.where(email: @order.email).first
+
     customer_notes = @order.customer_notes?
     @order = Orders::OrderPresenter.new(@order, items)
     line_items = Marketing::OrderPresenter.build_line_items_for_production(@order)
+
 
     Marketing::CustomerIOEventTracker.new.track(
       user,
