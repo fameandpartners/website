@@ -37,9 +37,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @content.on('click', @showMoreSelector, @showMoreProductsClickHandler)
     $(window).on('scroll', @scrollHandler)
 
-    @styleInput         = new inputs.ProductStyleNameSelector(container: @filter.find('#style'))
-    @bodyShapeInput     = new inputs.ProductBodyShapeSelector(container: @filter.find('#bodyshape'))
-    @colorInput         = new inputs.ProductColorNameSelector(container: @filter.find('#color'))
     @productOrderInput  = new inputs.ProductOrderSelector(container: @filter.find('#product_order'))
 
     @allCheckboxes = $(".filterArea input")
@@ -51,9 +48,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       @handleCheckboxes(e)
       @update()
 
-    @styleInput.on('change', @update)
-    @bodyShapeInput.on('change', @update)
-    @colorInput.on('change', @update)
     @productOrderInput.on('change', @update)
 
     @$banner = $(options.banner)
