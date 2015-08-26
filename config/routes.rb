@@ -148,7 +148,6 @@ FameAndPartners::Application.routes.draw do
 
     # Jackets
     scope '/jackets' do
-      get '/', to: 'products/collections#show', as: :jackets, defaults: { permalink: 'jackets_collection' }
       get '/jacket-:product_slug', to: 'products/details#show', as: :jacket_details
     end
 
