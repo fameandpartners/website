@@ -7,6 +7,15 @@ describe PathBuildersHelper, :type => :helper do
     let(:color_double) { double('Color', name: 'pastel') }
     let(:dress) { build_stubbed(:dress, id: 101, name: 'Super Dress') }
 
+    context 'given a product type string' do
+      let(:outerwear) { build_stubbed(:spree_product, id: 102, name: 'Super Jacket') }
+
+      it 'returns the path of a product with the given type' do
+        result = helper.collection_product_path(outerwear, { :product_type => 'outerwear', :color => 'burgundy' })
+        expect(result).to eq('/dresses/outerwear-super-jacket-102?color=burgundy')
+      end
+    end
+
     context 'given a color in the options hash' do
       it 'returns the path of a product with the given color' do
         result = helper.collection_product_path(dress, { :color => 'burgundy' })
@@ -27,26 +36,6 @@ describe PathBuildersHelper, :type => :helper do
         result = helper.collection_product_path(dress)
         expect(result).to eq('/dresses/dress-super-dress-101?color=pastel')
       end
-    end
-  end
-
-  describe '#collection_jacket_path' do
-    let(:jacket) { build_stubbed(:jacket, id: 101, name: 'Super Jacket') }
-
-    context 'product has a color' do
-      let(:color_double) { double('Color', name: 'pastel') }
-
-      before(:each) { allow(jacket).to receive(:color).and_return(color_double) }
-
-      it 'returns the path of a jacket with the given color' do
-        result = helper.collection_jacket_path(jacket)
-        expect(result).to eq('/jackets/jacket-super-jacket-101?color=pastel')
-      end
-    end
-
-    it 'returns the path of a jacket' do
-      result = helper.collection_jacket_path(jacket)
-      expect(result).to eq('/jackets/jacket-super-jacket-101')
     end
   end
 
