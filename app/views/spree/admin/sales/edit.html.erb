@@ -51,6 +51,17 @@
         </div>
       </fieldset>
       <fieldset>
+        <legend>Mega Menu Tile</legend>
+        <p>Place a JPG of the same name as the current sale (lowercase) in the Marketing S3 bucket under <code>sale/</code></p>
+        <p>
+          <strong>e.g.</strong>
+          <%= @object.mega_menu_image_url %>
+        </p>
+        <p>
+        <%= image_tag @object.mega_menu_image_url, class: 'img-responsive' %>
+        </p>
+      </fieldset>
+      <fieldset>
         <legend><%= t(:default_discount_settings) %></legend>
         <div class="clearfix">
           <div class="four columns">

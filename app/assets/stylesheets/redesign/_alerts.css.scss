@@ -1,6 +1,6 @@
 .alert-sale {
   position: absolute;
-  top: 70px;
+  top: $mega-menu-desktop-height;
   left: 0;
   right: 0;
   z-index: 4;
@@ -60,6 +60,12 @@
   // Fix for product page
   &:not(.hidden) ~ .product-content {
     top: 15rem;
+  }
+}
+
+@media (max-width: $bootstrap-md-width) {
+  .alert-sale {
+    top: $mega-menu-mobile-height;
   }
 }
 
