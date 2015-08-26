@@ -89,6 +89,69 @@
 	.category-controls {
 		width:100%;
 	}
+
+	.thumb{
+		background-color: #E0E0E0;
+	    width: 20px;
+	    height: 20px;
+	    float: left;
+	    margin-right: 10px;
+	}
+	.thumbtrue{
+		background-color: black;
+		background-image: url(check.png);
+		background-size: contain;
+	}
+	.thumbfalse{
+		background-color: #E0E0E0;
+	}
+
+	.colorCheckboxes{
+		.Green{
+			background-color: green !important;
+			background-image: url(check.png);
+		}
+		.Silver{
+			background-color: silver !important;
+			background-image: url(check.png);
+		}
+		.Purple{
+			background-color: purple !important;
+			background-image: url(check.png);
+		}
+		.Yellow{
+			background-color: yellow !important;
+			background-image: url(check.png);
+		}
+		.Nude{
+			background-color: #EBCAB7 !important;
+			background-image: url(check.png);
+		}
+		.Black{
+			background-color: black !important;
+			background-image: url(check.png);
+		}
+		.White{
+			background-color: #EFEEEE !important;
+			background-image: url(check.png);
+		}
+		.Blue{
+			background-color: blue !important;
+			background-image: url(check.png);
+		}
+		.Pink{
+			background-color: pink !important;
+			background-image: url(check.png);
+		}
+		.Red{
+			background-color: red !important;
+			background-image: url(check.png);
+		}
+		.Pastel{
+			background-color: #FFB7B7 !important;
+			background-image: url(check.png);
+		}
+	}
 }
 
 .on-sale * {

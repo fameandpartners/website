@@ -39,8 +39,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     @productOrderInput  = new inputs.ProductOrderSelector(container: @filter.find('#product_order'))
 
-    @allCheckboxes = $(".filterArea input")
-    @allCheckboxes.on 'change', (e) =>
+    @allCheckboxes = $(".filterArea .thumb")
+    @allCheckboxes.on 'click', (e) =>
       @handleCheckboxes(e)
       @update()
     @selectColor = $(".selectColor select")
@@ -55,7 +55,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @content.find('.img-product').hoverable()
 
   handleCheckboxes: (e) =>
-    name = e.target.name
+    name = $(e.target).attr("name")
     area = $(e.target.closest(".filterArea"))
     isColorCheckbox = area.hasClass("filterAreaColors")
     isShapeCheckbox = area.hasClass("filterAreaShapes")
@@ -65,23 +65,48 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     if isSelect
       name = $($('.filterAreaColors select option:selected')[0]).attr("name")
       return if name=="none"
-      if $(".filterAreaColors input[name='"+ name+"']:checked").size() == 0
-        $(".filterAreaColors input[name='"+ name+"']").click()
+      if $(".filterAreaColors .thumbtrue[name='"+ name+"']").size() == 0
+        $(".filterAreaColors .thumb[name='"+ name+"']").click()
+      if $(".filterAreaColors .thumbtrue[name='all']").size() == 1
+          $(".filterAreaColors .thumbtrue[name='all']").click()
 
-    if isColorCheckbox
-      return if $(".filterAreaColors input[name='" + name + "']:checked").size() == 0
-      if name == 'all'
-        $(".filterAreaColors input[name!='" + name + "']:checked").click()
+    if (isColorCheckbox && !isSelect) || isShapeCheckbox || isStyleCheckbox
+      checked = $(e.target).hasClass("thumbtrue")
+      if checked
+        $(e.target).removeClass("thumbtrue")
+        $(e.target).addClass("thumbfalse")
       else
-        if $(".filterAreaColors input[name='all']:checked").size() == 1
-          $(".filterAreaColors input[name='all']:checked").click()
+        $(e.target).removeClass("thumbfalse")
+        $(e.target).addClass("thumbtrue")
+
+    if isColorCheckbox && !isSelect
+      if name == 'all'
+        return if $(".filterAreaColors .thumbfalse[name='all']").size() == 1
+        $(".filterAreaColors .thumbtrue[name!='all']").click()
+      else
+        if $(".filterAreaColors .thumbtrue[name='all']").size() == 1 && !checked
+          $(".filterAreaColors .thumbtrue[name='all']").click()
 
     if isShapeCheckbox
-      return if $(".filterAreaShapes input[name='" + name + "']:checked").size() == 0
-      $(".filterAreaShapes input[name!='" + name + "']:checked").click()
+      if name == 'all'
+        return if $(".filterAreaShapes .thumbfalse[name='all']").size() == 1
+        $(".filterAreaShapes .thumbtrue[name!='all']").click()
+      else
+        if $(".filterAreaShapes .thumbtrue[name='all']").size() == 1 && !checked
+          $(".filterAreaShapes .thumbtrue[name='all']").click()
+        if !checked
+          $(".filterAreaShapes .thumbtrue[name!='" + name + "']").click()
+
     if isStyleCheckbox
-      return if $(".filterAreaStyles input[name='" + name + "']:checked").size() == 0
-      $(".filterAreaStyles input[name!='" + name + "']:checked").click()
+      if name == 'all'
+        return if $(".filterAreaStyles .thumbfalse[name='all']").size() == 1
+        $(".filterAreaStyles .thumbtrue[name!='all']").click()
+      else
+        if $(".filterAreaStyles .thumbtrue[name='all']").size() == 1 && !checked
+          $(".filterAreaStyles .thumbtrue[name='all']").click()
+        if !checked
+          $(".filterAreaStyles .thumbtrue[name!='" + name + "']").click()
+
 
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
@@ -169,16 +194,21 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     colourArray = []
     style = ''
 
-    if $(".filterAreaColors input[name='all']:checked").size() == 0
-      colorInputs = $(".filterAreaColors input[name!='all']:checked")
+    if $(".filterAreaColors .thumbtrue[name='all']").size() == 0
+      colorInputs = $(".filterAreaColors .thumbtrue[name!='all']")
       for colorInput in colorInputs
-        colourArray.push(colorInput.name)
+        colourArray.push($(colorInput).attr("name"))
       colour = $($(".filterAreaColors select option:selected")[0]).attr("name")
       if colour != "none"
         colourArray.push(colour)
 
-    bodyshape = $(".filterAreaShapes input[name!='all']:checked")[0].name if $(".filterAreaShapes input[name!='all']:checked")[0]?
-    style     = $(".filterAreaStyles input[name!='all']:checked")[0].name if $(".filterAreaStyles input[name!='all']:checked")[0]?
+    if $(".filterAreaShapes .thumbtrue[name!='all']")[0]?
+      bodyshape = $(".filterAreaShapes .thumbtrue[name!='all']")[0]
+      bodyshape = $(bodyshape).attr("name")
+    if $(".filterAreaStyles .thumbtrue[name!='all']")[0]?
+      style = $(".filterAreaStyles .thumbtrue[name!='all']")[0]
+      style = $(style).attr("name")
+
     {
       bodyshape: bodyshape,
       colour:    colourArray,

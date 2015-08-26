@@ -1,18 +1,11 @@
 var FilterAllOption = React.createClass({
-  getInitialState: function() {
-    return {checked: true};
-  },
-
-  check: function(){
-    this.setState({checked: !this.state.checked});
-  },
 
   render: function() {
     return (
       <div className='filterOption'>
         <label>
-          <input type="checkbox" checked={this.state.checked} name={this.props.name} onChange={this.check}>
-          </input>
+          <div className={"thumb thumbtrue "+this.props.name} name={this.props.name} >
+          </div>
           {this.props.label}
         </label>
       </div>
@@ -22,20 +15,12 @@ var FilterAllOption = React.createClass({
 
 var FilterOption = React.createClass({
 
-  getInitialState: function() {
-    return {checked: false};
-  },
-
-  check: function(){
-    this.setState({checked: !this.state.checked});
-  },
-
   render: function() {
     return (
       <div className='filterOption'>
         <label>
-          <input type="checkbox" checked={this.state.checked} name={this.props.name} onChange={this.check}>
-          </input>
+          <div className={"thumb thumbfalse "+this.props.name} name={this.props.name}>
+          </div>
           {this.props.label}
         </label>
       </div>
@@ -94,8 +79,10 @@ var CollectionFilter = React.createClass({
 
           <b>COLORS</b>
           <div className='filterArea filterAreaColors'>
-            <FilterAllOption name='all' label='View all colors' />
-            {colors}
+            <div className='colorCheckboxes'>
+              <FilterAllOption name='all' label='View all colors' />
+              {colors}
+            </div>
             Other colours
             <div className='selectColor'>
               <select>
