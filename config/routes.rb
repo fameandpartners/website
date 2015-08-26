@@ -146,11 +146,6 @@ FameAndPartners::Application.routes.draw do
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
     end
 
-    # Jackets
-    scope '/jackets' do
-      get '/jacket-:product_slug', to: 'products/details#show', as: :jacket_details
-    end
-
     scope '/dresses' do
       root to: 'products/collections#show', as: :dresses
       get '/', to: 'products/collections#show', as: :collection
@@ -163,13 +158,14 @@ FameAndPartners::Application.routes.draw do
       # Colors should behave like query strings, and not paths
       get '/dress-:product_slug/:color' => redirect { |params, req| "/dresses/dress-#{params[:product_slug]}?#{req.params.except(:product_slug, :site_version).to_query}" }
       get '/dress-:product_slug' => 'products/details#show'
+      get '/outerwear-:product_slug', to: 'products/details#show', as: :outerwear_details
 
       #roots categories
       get '/style',  to: redirect('/dresses')
       get '/style/:taxon', to: redirect('/dresses/%{taxon}')
       get '/event',  to: redirect('/dresses')
       get '/event/:taxon', to: redirect('/dresses/%{taxon}')
-      get '/sale-(:sale)' => 'products/collections#show', as: "dresses_on_sale"
+      get '/sale-(:sale)' => 'products/collections#show', as: 'dresses_on_sale'
       get '/*permalink' => 'products/collections#show', as: 'taxon'
     end
 
@@ -376,7 +372,7 @@ FameAndPartners::Application.routes.draw do
       get 'modals' => 'modals#index'
 
       get 'search/order_owners' => 'search#order_owners'
-      get 'search/jackets' => 'products#search_jackets', as: :search_jackets
+      get 'search/outerwear' => 'products#search_outerwear', as: :search_outerwear
 
       resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
         scope module: :celebrity do
