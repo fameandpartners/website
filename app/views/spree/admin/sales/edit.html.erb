@@ -52,7 +52,14 @@
       </fieldset>
       <fieldset>
         <legend>Mega Menu Tile</legend>
+        <p>Place a JPG of the same name as the current sale (lowercase) in the Marketing S3 bucket under <code>sale/</code></p>
+        <p>
+          <strong>e.g.</strong>
+          <%= "//#{configatron.asset_host}/sale/#{current_sale.name.downcase}.jpg"%>
+        </p>
+        <p>
         <%= image_tag "//#{configatron.asset_host}/sale/#{current_sale.name.downcase}.jpg", class: 'img-responsive' %>
+        </p>
       </fieldset>
       <fieldset>
         <legend><%= t(:default_discount_settings) %></legend>
