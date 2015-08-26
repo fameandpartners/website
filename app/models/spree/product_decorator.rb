@@ -25,11 +25,11 @@ Spree::Product.class_eval do
   belongs_to :factory
   belongs_to :fabric_card, inverse_of: :spree_products
 
-  has_and_belongs_to_many :related_jackets,
-                          association_foreign_key: :jacket_id,
+  has_and_belongs_to_many :related_outerwear,
+                          association_foreign_key: :outerwear_id,
                           class_name: 'Spree::Product',
                           foreign_key: :product_id,
-                          join_table: :spree_product_related_jackets
+                          join_table: :spree_product_related_outerwear
 
   attr_accessible :customisation_value_ids,
                   :discounts_attributes,
@@ -40,7 +40,7 @@ Spree::Product.class_eval do
                   :is_service,
                   :size_chart,
                   :zone_prices_hash,
-                  :related_jacket_ids
+                  :related_outerwear_ids
 
 
   scope :has_options, lambda { |option_type, value_ids|

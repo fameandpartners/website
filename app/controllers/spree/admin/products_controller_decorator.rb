@@ -16,7 +16,7 @@ Spree::Admin::ProductsController.class_eval do
   end
 
   def update
-    split_related_jackets_ids
+    split_related_outerwear_ids
 
     super
   end
@@ -39,9 +39,9 @@ Spree::Admin::ProductsController.class_eval do
     set_default_prototype
   end
 
-  def split_related_jackets_ids
-    if ids = params[:product][:related_jacket_ids]
-      params[:product][:related_jacket_ids] = ids.split(',')
+  def split_related_outerwear_ids
+    if ids = params[:product][:related_outerwear_ids]
+      params[:product][:related_outerwear_ids] = ids.split(',')
     end
   end
 end

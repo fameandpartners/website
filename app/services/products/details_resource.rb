@@ -8,7 +8,7 @@
 class Products::DetailsResource
   META_DESCRIPTION_MAX_SIZE = 160
   RECOMMENDED_PRODUCTS_LIMIT = 4
-  RELATED_JACKETS_LIMIT = 4
+  RELATED_OUTERWEAR_LIMIT = 4
 
   attr_reader :site_version, :product
 
@@ -46,7 +46,7 @@ class Products::DetailsResource
         discount:           product_discount,
         # page#show specific details
         recommended_products: recommended_products,
-        related_jackets:    related_jackets,
+        related_outerwear:    related_outerwear,
         available_options:  product_selection_options,
         moodboard:          product_moodboard,
         fabric:             product_fabric,
@@ -130,7 +130,7 @@ class Products::DetailsResource
       Repositories::ProductMoodboard.new(product: product).read
     end
 
-    # TODO: #recommended_products and #related_jackets are too similar. Also, they use OpenStructs, instead of being some kind of presenters. Refactor this
+    # TODO: #recommended_products and #related_outerwear are too similar. Also, they use OpenStructs, instead of being some kind of presenters. Refactor this
     # TODO: suggestion: Related Products presenter?
     def recommended_products
       Products::RecommendedProducts.new(product: product, limit: RECOMMENDED_PRODUCTS_LIMIT).read.map do |recommended_product|
@@ -148,8 +148,8 @@ class Products::DetailsResource
       end
     end
 
-    def related_jackets
-      product.related_jackets.first(RELATED_JACKETS_LIMIT).map do |jacket|
+    def related_outerwear
+      product.related_outerwear.first(RELATED_OUTERWEAR_LIMIT).map do |jacket|
         image = Repositories::ProductImages.new(product: jacket).read(cropped: true)
         color = Repositories::ProductColors.read(image.try(:color_id))
 

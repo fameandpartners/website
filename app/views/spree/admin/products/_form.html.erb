@@ -180,9 +180,9 @@
       <%= f.error_message_on :fabric_card %>
   <% end %>
 
-  <%= f.field_container :related_jackets do %>
-      <%= f.label :related_jackets, t(:related_jackets) %>
-      <%= f.hidden_field :related_jacket_ids, :id => 'related_jackets_select2', :value => @product.related_jacket_ids.join(',') %>
+  <%= f.field_container :related_outerwear do %>
+      <%= f.label :related_outerwear, t(:related_outerwear) %>
+      <%= f.hidden_field :related_outerwear_ids, :id => 'related_outerwear_select2', :value => @product.related_outerwear_ids.join(',') %>
   <% end %>
 
   <div data-hook="admin_product_form_meta" class="alpha omega twelve columns">

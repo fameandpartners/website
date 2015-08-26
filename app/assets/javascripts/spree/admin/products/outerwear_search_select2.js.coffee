@@ -1,6 +1,6 @@
 $ ->
-  $('#related_jackets_select2').select2
-    placeholder: 'Associate Jackets (can only search for jackets)'
+  $('#related_outerwear_select2').select2
+    placeholder: 'Associate Outerwear (can only search for outerwear products)'
     minimumInputLength: 1
     multiple: true
     initSelection: (element, callback) ->

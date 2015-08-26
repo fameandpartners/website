@@ -1,10 +1,10 @@
 module Products
   class RelatedPresenter
-    attr_reader :recommended_products, :related_jackets
+    attr_reader :recommended_products, :related_outerwear
 
-    def initialize(recommended_products: [], related_jackets: [])
+    def initialize(recommended_products: [], related_outerwear: [])
       @recommended_products = recommended_products
-      @related_jackets      = related_jackets
+      @related_outerwear      = related_outerwear
     end
 
     def recommended
@@ -12,7 +12,7 @@ module Products
     end
 
     def jackets
-      related_jackets.first(Products::DetailsResource::RELATED_JACKETS_LIMIT)
+      related_outerwear.first(Products::DetailsResource::RELATED_OUTERWEAR_LIMIT)
     end
   end
 end

@@ -17,7 +17,7 @@ describe Spree::Product, :type => :model do
   it { is_expected.to belong_to(:factory) }
   it { is_expected.to belong_to(:fabric_card).inverse_of(:spree_products) }
 
-  it { is_expected.to have_and_belong_to_many(:related_jackets).with_foreign_key(:product_id).class_name('Spree::Product') }
+  it { is_expected.to have_and_belong_to_many(:related_outerwear).with_foreign_key(:product_id).class_name('Spree::Product') }
 
   describe 'scopes' do
     describe '.outerwear' do
