@@ -22,7 +22,7 @@ li.shop.menu-item
     .mega-menu--secondary
       - if sale_active?
         = link_to dresses_path, class: 'mega-menu-banner' do
-          = image_tag "//#{configatron.asset_host}/sale/#{current_sale.name.downcase}.jpg", class: 'img-responsive'
+          = image_tag current_sale.mega_menu_image_url, class: 'img-responsive'
 
       .container-fluid.max-width-100
         .row
