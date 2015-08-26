@@ -1,5 +1,7 @@
 class MasterpassData
-  attr_accessor :request_token,
+  attr_accessor :payment_method_id,
+
+                :request_token,
 
                 :verifier,
                 :checkout_resource_url,
@@ -11,6 +13,8 @@ class MasterpassData
 
                 :access_token,
                 :access_token_response,
+
+                :checkout,
 
                 :error_message
 
