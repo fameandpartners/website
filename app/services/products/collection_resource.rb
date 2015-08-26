@@ -58,6 +58,7 @@ class Products::CollectionResource
   # what about ProductCollection class
   def read
     color = color.first if color.is_a? Array
+    style = style.first if style.is_a? Array
     Products::CollectionPresenter.from_hash(
       products:   products,
       total_products: total_products,
@@ -110,7 +111,13 @@ class Products::CollectionResource
       result = { taxon_ids: [] }
 
       result[:taxon_ids].push(collection.id) if collection.present?
-      result[:taxon_ids].push(style.id) if style.present?
+      if style.is_a? Array
+        style.each do |s|
+          result[:taxon_ids].push(s.id) if s.present?
+        end
+      else
+        result[:taxon_ids].push(style.id) if style.present?
+      end
       result[:taxon_ids].push(edits.id) if edits.present?
       result[:taxon_ids].push(event.id) if event.present?
 

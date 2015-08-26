@@ -58,11 +58,7 @@ module Search
         end
 
         if taxons.present?
-          taxons.each do |ids|
-            if ids.present?
-              filter :terms, 'product.taxon_ids' => Array.wrap(ids)
-            end
-          end
+          filter :terms, 'product.taxon_ids' => taxons
         end
 
         # select only products with given discount

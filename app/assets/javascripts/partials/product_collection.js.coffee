@@ -116,9 +116,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       else
         if $(".filterAreaStyles .thumbtrue[name='all']").size() == 1 && !checked
           $(".filterAreaStyles .thumbtrue[name='all']").click()
-        if !checked
-          $(".filterAreaStyles .thumbtrue[name!='" + name + "']").click()
-
 
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
@@ -204,7 +201,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
   getSelectedValues2: () ->
     bodyshape = ''
     colourArray = []
-    style = ''
+    styleArray = []
 
     if $(".filterAreaColors .thumbtrue[name='all']").size() == 0
       colorInputs = $(".filterAreaColors .thumbtrue[name!='all']")
@@ -217,14 +214,16 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     if $(".filterAreaShapes .thumbtrue[name!='all']")[0]?
       bodyshape = $(".filterAreaShapes .thumbtrue[name!='all']")[0]
       bodyshape = $(bodyshape).attr("name")
+
     if $(".filterAreaStyles .thumbtrue[name!='all']")[0]?
-      style = $(".filterAreaStyles .thumbtrue[name!='all']")[0]
-      style = $(style).attr("name")
+      styleInputs = $(".filterAreaStyles .thumbtrue[name!='all']")
+      for styleInput in styleInputs
+        styleArray.push($(styleInput).attr("name"))
 
     {
       bodyshape: bodyshape,
       colour:    colourArray,
-      style:     style,
+      style:     styleArray,
       order:     @productOrderInput.val()
     }
 

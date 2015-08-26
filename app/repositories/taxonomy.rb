@@ -12,16 +12,31 @@ module Repositories; end
 class Repositories::Taxonomy
   class << self
     def get_taxon_by_name(taxon_name)
-      return nil if taxon_name.blank?
+      if taxon_name.is_a? Array
+        result = []
+        taxon_name.each do |tn|
+          next if taxon_name.nil?
+          tn = tn.downcase
+          taxon = taxons.find{|t| t.name.downcase == tn }
+          if taxon.nil? && tn.match(/-/)
+            tn = tn.gsub('-', ' ')
+            taxon = taxons.find{|t| t.name.downcase == tn }
+          end
+          result.push(taxon)
+        end
+        result
+      else
+        return nil if taxon_name.blank?
 
-      taxon_name = taxon_name.downcase
-      taxon = taxons.find{|t| t.name.downcase == taxon_name }
-      if taxon.nil? && taxon_name.match(/-/)
-        taxon_name = taxon_name.gsub('-', ' ')
+        taxon_name = taxon_name.downcase
         taxon = taxons.find{|t| t.name.downcase == taxon_name }
-      end
+        if taxon.nil? && taxon_name.match(/-/)
+          taxon_name = taxon_name.gsub('-', ' ')
+          taxon = taxons.find{|t| t.name.downcase == taxon_name }
+        end
 
-      taxon
+        taxon
+      end
     end
 
     def collection_root_taxon
