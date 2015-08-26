@@ -14,13 +14,13 @@ ruby:
         - related.jackets.each do |jacket|
           .col-md-3.col-xs-6.col-xxs-12.col-centered.category--item data-id=(jacket.id)
             - if Features.active?(:moodboard)
-              = link_to collection_jacket_path(jacket) do
+              = link_to collection_product_path(jacket, product_type: 'outerwear') do
                 - if current_user_moodboard.contains(product_id: jacket.id)
                   span.fa.fa-heart.add-to-moodboard
                 - else
                   span.fa.fa-heart-o.add-to-moodboard
 
-            = link_to collection_jacket_path(jacket) do
+            = link_to collection_product_path(jacket, product_type: 'outerwear') do
               = image_tag jacket.image.try(:large), class: 'img-responsive'
 
             .details

@@ -51,7 +51,7 @@ Spree::Product.class_eval do
   }
 
   scope :not_hidden, lambda { where(hidden: false) }
-  scope :jackets, lambda { includes(:taxons).where(spree_taxons: { permalink: Spree::Taxon::JACKETS_PERMALINK }) }
+  scope :outerwear, lambda { includes(taxons: :taxonomy).where(spree_taxonomies: { name: Spree::Taxonomy::OUTERWEAR_NAME }) }
 
   has_many :zone_prices, :through => :variants, :order => 'spree_variants.position, spree_variants.id, currency'
 

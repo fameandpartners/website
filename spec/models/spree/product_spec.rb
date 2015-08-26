@@ -20,13 +20,15 @@ describe Spree::Product, :type => :model do
   it { is_expected.to have_and_belong_to_many(:related_jackets).with_foreign_key(:product_id).class_name('Spree::Product') }
 
   describe 'scopes' do
-    describe '.jackets' do
-      let!(:jacket)  { create(:jacket) }
-      let!(:dress)   { create(:dress) }
-      let!(:jackets) { create(:taxon, :jackets, products: [jacket]) }
+    describe '.outerwear' do
+      let!(:outerwear)          { create(:spree_product) }
+      let!(:dress)              { create(:spree_product) }
+      let!(:outerwear_taxonomy) { create(:taxonomy, :outerwear) }
 
-      it 'returns all products that belongs to jackets taxon' do
-        expect(described_class.jackets).to eq([jacket])
+      before(:each) { outerwear_taxonomy.root.products = [outerwear] }
+
+      it 'returns all products that belongs to outerwear taxonomy' do
+        expect(described_class.outerwear).to eq([outerwear])
       end
     end
   end

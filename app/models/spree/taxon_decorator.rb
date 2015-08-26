@@ -1,8 +1,6 @@
 require_relative 'taxonomy_decorator'
 
 Spree::Taxon.class_eval do
-  JACKETS_PERMALINK = 'jackets'
-
   include Concerns::Publishable
 
   has_one :banner,

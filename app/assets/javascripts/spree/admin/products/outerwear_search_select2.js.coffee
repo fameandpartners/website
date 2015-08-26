@@ -4,12 +4,12 @@ $ ->
     minimumInputLength: 1
     multiple: true
     initSelection: (element, callback) ->
-      url = Spree.url(Spree.routes.jacket_search, ids: element.val())
+      url = Spree.url(Spree.routes.outerwear_search, ids: element.val())
       $.getJSON url, null, (data) ->
         jackets = $.map data, (result) -> result
         callback jackets
     ajax:
-      url: Spree.routes.jacket_search
+      url: Spree.routes.outerwear_search
       datatype: 'json'
       quietMillis: 200
       data: (term, page) -> { q: term }

@@ -1,8 +1,8 @@
 Spree::Admin::ProductsController.class_eval do
   before_filter :set_default_prototype, :only => [:new]
 
-  def search_jackets
-    scope = Spree::Product.jackets
+  def search_outerwear
+    scope = Spree::Product.outerwear
 
     if params[:ids]
       product_ids = params[:ids].split(',')
