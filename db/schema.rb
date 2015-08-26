@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150825014510) do
+ActiveRecord::Schema.define(:version => 20150826030111) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -413,6 +413,7 @@ ActiveRecord::Schema.define(:version => 20150825014510) do
   end
 
   add_index "discounts", ["discountable_id", "discountable_type"], :name => "index_discounts_on_discountable_id_and_discountable_type"
+  add_index "discounts", ["discountable_type", "discountable_id", "sale_id"], :name => "index_discounts_on_discountable_and_sale_id", :unique => true
   add_index "discounts", ["sale_id"], :name => "index_discounts_on_sale_id"
 
   create_table "email_notifications", :force => true do |t|
