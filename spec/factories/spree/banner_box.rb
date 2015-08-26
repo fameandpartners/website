@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :banner_box, class: Spree::BannerBox do
+    url        { Faker::Internet.uri(%w(http https).sample) }
     category   { Faker::Lorem.word }
     css_class  { Faker::Lorem.word }
     is_small   true
