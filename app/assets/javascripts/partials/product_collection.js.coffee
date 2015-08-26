@@ -39,6 +39,14 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     @productOrderInput  = new inputs.ProductOrderSelector(container: @filter.find('#product_order'))
 
+    @setUpFilterElements()
+    @productOrderInput.on('change', @update)
+
+    @$banner = $(options.banner)
+    @setBannerTextClass()
+    @content.find('.img-product').hoverable()
+
+  setUpFilterElements: =>
     @allCheckboxes = $(".filterArea .thumb")
     @allCheckboxes.on 'click', (e) =>
       @handleCheckboxes(e)
@@ -48,11 +56,15 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       @handleCheckboxes(e)
       @update()
 
-    @productOrderInput.on('change', @update)
+    @clearAll = $(".filterRect .clearAll")
+    @clearAll.on('click',@clearAllOptions)
 
-    @$banner = $(options.banner)
-    @setBannerTextClass()
-    @content.find('.img-product').hoverable()
+  clearAllOptions: =>
+    $(".thumb").removeClass("thumbtrue").addClass("thumbfalse")
+    $(".filterAreaColors .thumbfalse[name='all']").removeClass("thumbfalse").addClass("thumbtrue")
+    $(".filterAreaStyles .thumbfalse[name='all']").removeClass("thumbfalse").addClass("thumbtrue")
+    $(".filterAreaShapes .thumbfalse[name='all']").removeClass("thumbfalse").addClass("thumbtrue")
+    @update()
 
   handleCheckboxes: (e) =>
     name = $(e.target).attr("name")
