@@ -7,6 +7,8 @@
 #
 class Products::DetailsResource
   META_DESCRIPTION_MAX_SIZE = 160
+  RECOMMENDED_PRODUCTS_LIMIT = 4
+  RELATED_OUTERWEAR_LIMIT = 4
 
   attr_reader :site_version, :product
 
@@ -44,6 +46,7 @@ class Products::DetailsResource
         discount:           product_discount,
         # page#show specific details
         recommended_products: recommended_products,
+        related_outerwear:    related_outerwear,
         available_options:  product_selection_options,
         moodboard:          product_moodboard,
         fabric:             product_fabric,
@@ -128,18 +131,14 @@ class Products::DetailsResource
     end
 
     def recommended_products
-      Products::RecommendedProducts.new(product: product, limit: 4).read.map do |recommended_product|
-        image = Repositories::ProductImages.new(product: recommended_product).read(cropped: true)
-        color = Repositories::ProductColors.read(image.try(:color_id))
+      Products::RecommendedProducts.new(product: product, limit: RECOMMENDED_PRODUCTS_LIMIT).read.map do |recommended_product|
+        Products::Related.new(product: recommended_product, site_version: site_version)
+      end
+    end
 
-        OpenStruct.new(
-          id: recommended_product.id,
-          name: recommended_product.name,
-          price: Repositories::ProductPrice.new(site_version: site_version, product: recommended_product).read,
-          discount: Repositories::Discount.get_product_discount(recommended_product.id),
-          image: image,
-          color: color
-        )
+    def related_outerwear
+      product.related_outerwear.first(RELATED_OUTERWEAR_LIMIT).map do |recommended_product|
+        Products::Related.new(product: recommended_product, site_version: site_version)
       end
     end
 

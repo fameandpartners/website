@@ -27,32 +27,32 @@ class Products::CollectionResource
   attr_reader :style
   attr_reader :edits
   attr_reader :event
-  attr_reader :show_jackets
   attr_reader :bodyshape
   attr_reader :color, :color_group
   attr_reader :discount
   attr_reader :fast_making
   attr_reader :query_string
+  attr_reader :show_outerwear
   attr_reader :order
   attr_reader :limit
   attr_reader :offset
 
   def initialize(options = {})
-    @site_version = options[:site_version] || SiteVersion.default
-    @collection   = Repositories::Taxonomy.get_taxon_by_name(options[:collection])
-    @style        = Repositories::Taxonomy.get_taxon_by_name(options[:style])
-    @edits        = Repositories::Taxonomy.get_taxon_by_name(options[:edits])
-    @event        = Repositories::Taxonomy.get_taxon_by_name(options[:event])
-    @bodyshape    = Repositories::ProductBodyshape.get_by_name(options[:bodyshape])
-    @color_group  = Repositories::ProductColors.get_group_by_name(options[:color_group])
-    @color        = Repositories::ProductColors.get_by_name(options[:color])
-    @discount     = prepare_discount(options[:discount])
-    @show_jackets = options[:show_jackets]
-    @fast_making  = options[:fast_making]
-    @query_string = options[:query_string]
-    @order        = options[:order]
-    @limit        = options[:limit]
-    @offset       = options[:offset]
+    @site_version   = options[:site_version] || SiteVersion.default
+    @collection     = Repositories::Taxonomy.get_taxon_by_name(options[:collection])
+    @style          = Repositories::Taxonomy.get_taxon_by_name(options[:style])
+    @edits          = Repositories::Taxonomy.get_taxon_by_name(options[:edits])
+    @event          = Repositories::Taxonomy.get_taxon_by_name(options[:event])
+    @bodyshape      = Repositories::ProductBodyshape.get_by_name(options[:bodyshape])
+    @color_group    = Repositories::ProductColors.get_group_by_name(options[:color_group])
+    @color          = Repositories::ProductColors.get_by_name(options[:color])
+    @discount       = prepare_discount(options[:discount])
+    @fast_making    = options[:fast_making]
+    @show_outerwear = options[:show_outerwear]
+    @query_string   = options[:query_string]
+    @order          = options[:order]
+    @limit          = options[:limit]
+    @offset         = options[:offset]
   end
 
   # what about ProductCollection class
@@ -134,8 +134,8 @@ class Products::CollectionResource
       result[:limit] = limit if limit.present?
       result[:offset] = offset if offset.present?
 
-      # Jackets
-      result[:show_jackets] = show_jackets
+      # Outerwear
+      result[:show_outerwear] = show_outerwear
 
       result
     end

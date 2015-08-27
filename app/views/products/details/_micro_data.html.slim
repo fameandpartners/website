@@ -1,0 +1,12 @@
+div itemscope='' itemtype="http://data-vocabulary.org/Product"
+  meta itemprop="name" content=@product.name
+  meta itemprop="brand" content="Fame & Partners" 
+  meta itemprop="identifier" content="sku:#{@product.sku}"
+  meta itemprop="category" content="Apparel & Accessories > Clothing > Dresses"
+  meta itemprop="description" content=@product.description
+  div itemprop="offerDetails" itemscope='' itemtype="http://data-vocabulary.org/Offer"    
+    meta itemprop="condition" content="new"
+    meta itemprop="availability" content="in_stock"
+    meta itemprop="price" content=@product.price.amount
+    meta itemprop="currency" content=@product.price.currency
+    meta itemprop="identifier" content="sku:#{@product.sku}"

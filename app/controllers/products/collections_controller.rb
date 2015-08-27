@@ -139,12 +139,9 @@ class Products::CollectionsController < Products::BaseController
           return { taxonomy.to_sym => permalink }
         when 'range'
           return { collection: permalink }
+        when 'outerwear'
+          return { show_outerwear: true }
         end
-      end
-
-      # Jackets
-      if permalink == 'jackets_collection'
-        return { show_jackets: true }
       end
 
       # Didn't find any collection associated with the permalink

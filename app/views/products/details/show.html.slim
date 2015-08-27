@@ -199,31 +199,9 @@ ruby:
 
 hr
 
-/! More Dresses
-- if @product.recommended_products.present?
-  .dress-more.container.page-content
-    h2.text-center More Cute Dresses
-    .divider
-    br
-    .row.relative
-    - @product.recommended_products.each do |recommended_product|
-      .clearfix.visible-sm-block.visible-xs-block
-      .col-md-3.col-xs-6.col-xxs-12.category--item data-id=(recommended_product.id)
-        - if Features.active?(:moodboard)
-          = link_to collection_product_path(recommended_product) do
-            - if current_user_moodboard.contains(product_id: recommended_product.id)
-              span.fa.fa-heart.add-to-moodboard
-            - else
-              span.fa.fa-heart-o.add-to-moodboard
+= render partial: 'related_products', locals: { product: @product }
 
-        = link_to collection_product_path(recommended_product) do
-          = image_tag recommended_product.image.try(:large), class: 'img-responsive'
-
-        .details
-          span.name  = recommended_product.name
-          span.price = product_price_with_discount(recommended_product.price, recommended_product.discount)
-
-= render :partial => 'data'
+= render partial: 'micro_data'
 
 #fit-guide-content.hidden
   = render :partial => 'size_guide', :locals => { data: @product.size_chart_data, explanation: @product.size_chart_explanation }
