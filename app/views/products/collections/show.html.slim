@@ -11,12 +11,12 @@
       p= raw @collection.details.banner.subtitle
 
 .page-content.products-collections.category
-  = render :partial => 'filters'
+  = render :partial => 'filters_sort'
   .container-fluid
     .row-fluid
       .col-md-3
         div style="padding-top:20px;padding-left: 15px;width: 65%;margin-left: 10%;"
-          = render :partial => 'filters2'
+          = render :partial => 'filters_color_shape_style'
 
       .col-md-9
         .container.relative.products-collection style='width:100%'
