@@ -75,6 +75,21 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     $(".filterRect .close").on 'click', ->
       $('.filterCol').toggleClass("slideIn")
 
+    $(document).on 'click', (e) ->
+      close = $('.filterCol .close')
+      closeX = close.position().left + close.width() + 20
+      $('.filterCol').removeClass("slideIn") if e.clientX > closeX and $('.filterCol').hasClass("slideIn")
+
+   $(document).on('mousedown touchstart', (e) =>
+      if e.originalEvent.changedTouches?
+        @xDown = e.originalEvent.changedTouches[0].screenX
+    ).on 'mouseup touchend', (e2) =>
+      if e2.originalEvent.changedTouches?
+        @xUp = e2.originalEvent.changedTouches[0].screenX
+        if @xDown > @xUp and $('.filterCol').hasClass("slideIn")
+          $('.filterCol').removeClass("slideIn")
+
+
   clearAllOptions: =>
     $(".thumb").removeClass("thumbtrue").addClass("thumbfalse")
     $(".filterAreaColors .thumbfalse[name='all']").removeClass("thumbfalse").addClass("thumbtrue")

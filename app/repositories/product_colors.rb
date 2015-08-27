@@ -63,12 +63,7 @@ module Repositories
           color_name = c.to_s.downcase
           read_all.find{|color| color.name.downcase == color_name || color.presentation.downcase == color_name}
         end
-
-        if result.size == 0
-          nil
-        else
-          result.size < 2 ? result.first : result
-        end
+        result.size < 2 ? result.first : result
       end
 
       def get_similar(color_ids, range = nil)

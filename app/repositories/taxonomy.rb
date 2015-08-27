@@ -21,12 +21,7 @@ class Repositories::Taxonomy
           end
         taxon
       end
-
-      if result.size == 0
-        nil
-      else
-        result.size < 2 ? result.first : result
-      end
+      result.size < 2 ? result.first : result
     end
 
     def collection_root_taxon

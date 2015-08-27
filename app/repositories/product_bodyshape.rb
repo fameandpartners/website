@@ -11,11 +11,7 @@ class Repositories::ProductBodyshape
         n = n.to_s.downcase
         read_all.find{|shape| shape.downcase == n}
       end
-      if result.size == 0
-        nil
-      else
-        result.size < 2 ? result.first : result
-      end
+      result.size < 2 ? result.first : result
     end
   end
 end

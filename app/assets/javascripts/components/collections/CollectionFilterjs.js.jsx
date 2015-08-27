@@ -64,9 +64,9 @@ var CollectionFilter = React.createClass({
       <div>
 
         <div className='filterRect'>
-          <div className='filterText'>Filter</div>
+          <span className='filterText'>Filter</span>
           <div className='close visible-xs'>Close</div>
-          <div className='clearAll'><b>Clear all</b></div>
+          <span className='clearAll'><b>Clear all</b></span>
 
         </div>
         <br/>
