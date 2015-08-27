@@ -16,6 +16,7 @@
 # )
 module Search
   class ColorVariantsQuery
+
     def self.build(options = {})
       options = HashWithIndifferentAccess.new(options)
 
@@ -97,20 +98,11 @@ module Search
                           }
                         }
           else
-            filter :or,
-                   *body_shapes.map do |body_shape|
-                     {
-                       :bool => {
-                         :should => {
-                           :range => {
-                             "product.#{body_shape}" => {
-                               :gte => 4
-                             }
-                           }
-                         }
-                       }
-                     }
-                   end
+            or_query = []
+            body_shapes.each do |bs|
+              or_query.push({ :range => {"product.#{bs}" => {:gte => 4} }})
+            end
+            filter :bool, :should =>[ or_query ]
           end
         end
 

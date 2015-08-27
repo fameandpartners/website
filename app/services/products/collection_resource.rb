@@ -57,8 +57,9 @@ class Products::CollectionResource
 
   # what about ProductCollection class
   def read
-    color = color.first if color.is_a? Array
-    style = style.first if style.is_a? Array
+    color     = color.first if color.is_a? Array
+    style     = style.first if style.is_a? Array
+    bodyshape = bodyshape.first if bodyshape.is_a? Array
     Products::CollectionPresenter.from_hash(
       products:   products,
       total_products: total_products,

@@ -106,8 +106,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       else
         if $(".filterAreaShapes .thumbtrue[name='all']").size() == 1 && !checked
           $(".filterAreaShapes .thumbtrue[name='all']").click()
-        if !checked
-          $(".filterAreaShapes .thumbtrue[name!='" + name + "']").click()
 
     if isStyleCheckbox
       if name == 'all'
@@ -199,7 +197,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     object
 
   getSelectedValues2: () ->
-    bodyshape = ''
+    bodyshapeArray = []
     colourArray = []
     styleArray = []
 
@@ -212,8 +210,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         colourArray.push(colour)
 
     if $(".filterAreaShapes .thumbtrue[name!='all']")[0]?
-      bodyshape = $(".filterAreaShapes .thumbtrue[name!='all']")[0]
-      bodyshape = $(bodyshape).attr("name")
+      bodyshapeInputs = $(".filterAreaShapes .thumbtrue[name!='all']")
+      for bodyshapeInput in bodyshapeInputs
+        bodyshapeArray.push($(bodyshapeInput).attr("name"))
 
     if $(".filterAreaStyles .thumbtrue[name!='all']")[0]?
       styleInputs = $(".filterAreaStyles .thumbtrue[name!='all']")
@@ -221,7 +220,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         styleArray.push($(styleInput).attr("name"))
 
     {
-      bodyshape: bodyshape,
+      bodyshape: bodyshapeArray,
       colour:    colourArray,
       style:     styleArray,
       order:     @productOrderInput.val()
