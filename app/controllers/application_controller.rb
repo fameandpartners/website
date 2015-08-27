@@ -147,11 +147,11 @@ class ApplicationController < ActionController::Base
   end
 
   def default_seo_title
-    Preferences::Titles.new(current_site_version).default_seo_title
+    Preferences::SEO.new(current_site_version).default_seo_title
   end
 
   def default_meta_description
-    Spree::Config[:default_meta_description]
+    Preferences::SEO.new(current_site_version).default_meta_description
   end
 
   def get_user_type
