@@ -1,11 +1,5 @@
 module Preferences
   class Titles < Base
-    attr_reader :site_version
-
-    def initialize(site_version)
-      @site_version = site_version
-    end
-
     def homepage_title_key
       "#{site_version.code}_homepage_title"
     end
