@@ -45,7 +45,7 @@
         - @cache_keys.each do |key|
           - url_key = Base64.urlsafe_encode64(key)
           tr
-            td = key
+            td = link_to key, {controller: :caches, action: :show, id: url_key }
             td
               = form_tag( {controller: :caches, action: :destroy, id: url_key }, {method: :delete, data: {confirm: "Are you sure?"}}) do
                 = hidden_field_tag :id, url_key

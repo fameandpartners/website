@@ -26,6 +26,13 @@ module AdminUi
       redirect_to caches_path, flash: {notice: message}
     end
 
+    def show
+      if params[:id].present?
+        @key  = Base64.urlsafe_decode64(params[:id])
+        @data = cache_client.get(@key)
+      end
+    end
+
     def expire
       message = if params[:really_expire] == 'EXPIRE'
         deleted = Rails.cache.clear

@@ -1,0 +1,27 @@
+- content_for :page_title
+  ' Cache:
+  = @key
+
+.ibox
+  .ibox-title
+    h5 = @key
+  .ibox-content
+    table.table.table-condensed
+      tbody
+        tr
+          th Key
+          td = @key
+        tr
+          th Compressed
+          td = @data.compressed?
+        tr
+          th Expires In
+          td = @data.expires_in
+        tr
+          th Created At
+          td
+            => Time.at(@data.created_at)
+            code = @data.created_at
+        tr
+          th Value
+          td : pre = @data.value
