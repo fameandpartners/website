@@ -133,6 +133,7 @@ class Products::CollectionResource
       elsif color.present?
         if color.is_a? Array
           color.each do |c|
+            next if c.nil?
             result[:color_ids] << c.id
             result[:color_ids] += Repositories::ProductColors.get_similar(c.id, Similarity::Range::DEFAULT)
           end
