@@ -54,7 +54,7 @@ module Spree
       # file = File.read(File.join('spree_masterpass', 'resources', 'shoppingCart.xml'))
       # shopping_cart_request = AllServicesMappingRegistry::ShoppingCartRequest.from_xml(file)
       # shopping_cart_request.oAuthToken = @data.request_token
-      # shopping_cart_request.originUrl = provider.callback_domain
+        # shopping_cart_request.originUrl = provider.callback_domain
 
       render json: {
                  request_token: @data.request_token,
@@ -74,9 +74,10 @@ module Spree
       handle_pairing_callback if params['pairing_token'] && params['pairing_verifier']
 
       # get access token
-      @service.get_access_token(
+      access_token_response = @service.get_access_token(
           payment_method.access_url,
           @data.request_token, @data.verifier)
+      @data.access_token = access_token_response.oauth_token
 
       # get the checkout data
       @data.checkout = AllServicesMappingRegistry::Checkout.from_xml(
@@ -85,7 +86,7 @@ module Spree
           ));
 
       order = current_order || raise(ActiveRecord::RecordNotFound)
-      if @data.checkout.mpstatus == 'success'
+      if @data.params[:mpstatus] == 'success'
         if current_order.confirmation_required?
           # TODO : Redirect to the confirmation page
           # redirect_to checkout_state_path(order.state)

@@ -88,7 +88,7 @@ module Spree
     end
 
     def purchase(amount, express_checkout, gateway_options={})
-
+      test = 'test'
     end
 
     def refund(payment, amount)

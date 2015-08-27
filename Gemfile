@@ -93,6 +93,9 @@ gem 'addressable', require: false
 
 gem 'rollout'
 
+# masterpass gateway
+gem 'spree_masterpass', :path => './spree_masterpass'
+
 # Command line tools
 gem 'term-ansicolor',   :require => false
 gem 'ruby-progressbar', :require => false
@@ -116,7 +119,6 @@ group :assets, :development, :test do
 end
 
 group :development, :test do
-  gem 'spree_masterpass', :path => './spree_masterpass'
   gem 'awesome_print'
   gem 'capistrano', '2.15.4', require: false
   gem 'capistrano-rbenv', '0.0.10', require: false
