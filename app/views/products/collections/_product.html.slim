@@ -12,6 +12,6 @@ col-xs-6.col-xxs-12.category--item data-id=(product.id) data-color-id=(product.c
           sup +
           | moodboard
   - if product.fast_making
-	 = image_tag src='express_making.png', class: 'express-delivery', alt: "Express Making", style: "#{col==3 ? 'top:20px' : ''}"
+	 = image_tag src='express_making.png', class: 'express-delivery', alt: "Express Making"
   - if product.fast_delivery
 	 = image_tag src='express_delivery.png', class: 'express-delivery', alt: "Express Delivery"

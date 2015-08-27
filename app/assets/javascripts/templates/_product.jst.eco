@@ -19,8 +19,7 @@
     <% end %>
   </div>
   <% if @product.fast_making: %>
-    <% if @col=="col-md-4" then @top="20px" else @top="0px" %>
-    <img src="/assets/express_making.png" class="express-delivery" alt="Express Making" style="top: <%= @top %>" >
+    <img src="/assets/express_making.png" class="express-delivery" alt="Express Making">
   <% end %>
   <% if @product.fast_delivery: %>
     <img src="/assets/express_delivery.png" class="express-delivery" alt="Express Delivery">

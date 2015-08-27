@@ -59,17 +59,15 @@ module Repositories
       end
 
       def get_by_name(color_name = nil)
-        if color_name.is_a? Array
-          result = []
-          color_name.each do |c|
-            color_name = c.to_s.downcase
-            result << read_all.find{|color| color.name.downcase == color_name || color.presentation.downcase == color_name}
-          end
-          result
-        else
-          return nil if color_name.blank?
-          color_name = color_name.to_s.downcase
+        result = Array.wrap(color_name).compact.map do |c|
+          color_name = c.to_s.downcase
           read_all.find{|color| color.name.downcase == color_name || color.presentation.downcase == color_name}
+        end
+
+        if result.size == 0
+          nil
+        else
+          result.size < 2 ? result.first : result
         end
       end
 

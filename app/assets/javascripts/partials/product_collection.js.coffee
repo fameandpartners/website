@@ -61,6 +61,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     $(".showMoreStyles").on 'click', ->
       $(this).css('display','none')
       $('.filterAreaStyles').css('height','auto')
+    $('.selectColor select').select2();
+    $('.filterAreaColors .select2-selection--single').css('padding-top','7px')
 
   clearAllOptions: =>
     $(".thumb").removeClass("thumbtrue").addClass("thumbfalse")

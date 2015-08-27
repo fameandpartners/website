@@ -7,18 +7,14 @@ class Repositories::ProductBodyshape
 
     # find by name or return nil
     def get_by_name(name)
-      if name.is_a? Array
-        result = []
-        name.each do |n|
-          next if n.nil?
-          n = n.to_s.downcase
-          result.push read_all.find{|shape| shape.downcase == n}
-        end
-        result
+      result = Array.wrap(name).compact.map do |n|
+        n = n.to_s.downcase
+        read_all.find{|shape| shape.downcase == n}
+      end
+      if result.size == 0
+        nil
       else
-        return nil if name.blank?
-        name = name.to_s.downcase
-        read_all.find{|shape| shape.downcase == name}
+        result.size < 2 ? result.first : result
       end
     end
   end
