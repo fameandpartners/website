@@ -71,7 +71,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   handleCheckboxes: (e) =>
     name = $(e.target).attr("name")
-    area = $(e.target.closest(".filterArea"))
+    area = $(e.target).closest(".filterArea")
     isColorCheckbox = area.hasClass("filterAreaColors")
     isShapeCheckbox = area.hasClass("filterAreaShapes")
     isStyleCheckbox = area.hasClass("filterAreaStyles")
