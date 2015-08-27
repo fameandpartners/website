@@ -1,5 +1,5 @@
 <% if @col==3 then @col="col-md-4" else @col="col-md-3" %>
-<div data-color-id="<%= (@product.color || {}).id %>" data-id="<%= @product.id %>" class="<%= @col %> col-xs-6 col-xxs-12 category--item">
+<div data-color-id="<%= (@product.color || {}).id %>" data-id="<%= @product.id %>" class="<%= @col %> col-xs-6 col-xxs-6 category--item">
   <a href="<%= @product.collection_path %>">
     <img class="img-product img-responsive" src='<%= @product.images[0] %>' alt='<%= @product.name %>' data-hover='<%= @product.images[1] || '' %>'></>
   </a>

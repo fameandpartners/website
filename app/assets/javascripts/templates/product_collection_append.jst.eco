@@ -3,11 +3,8 @@
 <% rows = Math.ceil(products.length / @col) %>
 <% for i in [0...rows]: %>
   <% products_for_row = _.first(products, @col) %>
-  <div class="row relative">
-    <% for product in _.first(products, @col): %>
-      <%- JST['templates/_product'](product: product, col: @col) %>
-    <% end %>
-    <% products = _.rest(products, @col) %>
-    <div class="clearfix visible-sm-block visible-xs-block"></div>
-  </div>
+  <% for product in _.first(products, @col): %>
+    <%- JST['templates/_product'](product: product, col: @col) %>
+  <% end %>
+  <% products = _.rest(products, @col) %>
 <% end %>

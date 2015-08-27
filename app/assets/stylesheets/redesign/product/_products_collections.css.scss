@@ -80,6 +80,7 @@
 	.more-products {
 		margin-bottom:100px;
 		text-align:center;
+		clear: both;
 	}
 	.leftPath {
 		float:left;
@@ -88,6 +89,12 @@
 	}
 	.category-controls {
 		width:100%;
+	}
+
+	.category--item{
+		@media(max-width: 415px){
+			min-height: 380px;
+		}
 	}
 
 	.thumb{
@@ -311,3 +318,5 @@ li.select2-results__option {
 		cursor: pointer;
 	}
 }
+
+
