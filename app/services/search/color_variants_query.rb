@@ -43,8 +43,11 @@ module Search
           filter :terms, 'color.id' => colors
         end
 
-        # Jackets filter
-        filter :bool, :must => { :term => { 'product.is_outerwear' => show_outerwear } }
+        # Outerwear filter
+        # TODO: 27/08/2015 remove this after CreateSpreeProductRelatedOuterwear migration was execute in production.
+        if ActiveRecord::Base.connection.table_exists?(:spree_product_related_outerwear)
+          filter :bool, :must => { :term => { 'product.is_outerwear' => show_outerwear } }
+        end
 
         # only available items
         filter :bool, :must => { :term => { 'product.in_stock' => true } }
