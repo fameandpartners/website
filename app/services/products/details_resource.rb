@@ -130,37 +130,15 @@ class Products::DetailsResource
       Repositories::ProductMoodboard.new(product: product).read
     end
 
-    # TODO: #recommended_products and #related_outerwear are too similar. Also, they use OpenStructs, instead of being some kind of presenters. Refactor this
-    # TODO: suggestion: Related Products presenter?
     def recommended_products
       Products::RecommendedProducts.new(product: product, limit: RECOMMENDED_PRODUCTS_LIMIT).read.map do |recommended_product|
-        image = Repositories::ProductImages.new(product: recommended_product).read(cropped: true)
-        color = Repositories::ProductColors.read(image.try(:color_id))
-
-        OpenStruct.new(
-          id: recommended_product.id,
-          name: recommended_product.name,
-          price: Repositories::ProductPrice.new(site_version: site_version, product: recommended_product).read,
-          discount: Repositories::Discount.get_product_discount(recommended_product.id),
-          image: image,
-          color: color
-        )
+        Products::Related.new(product: recommended_product, site_version: site_version)
       end
     end
 
     def related_outerwear
-      product.related_outerwear.first(RELATED_OUTERWEAR_LIMIT).map do |jacket|
-        image = Repositories::ProductImages.new(product: jacket).read(cropped: true)
-        color = Repositories::ProductColors.read(image.try(:color_id))
-
-        OpenStruct.new(
-            id: jacket.id,
-            name: jacket.name,
-            price: Repositories::ProductPrice.new(site_version: site_version, product: jacket).read,
-            discount: Repositories::Discount.get_product_discount(jacket.id),
-            image: image,
-            color: color
-        )
+      product.related_outerwear.first(RELATED_OUTERWEAR_LIMIT).map do |recommended_product|
+        Products::Related.new(product: recommended_product, site_version: site_version)
       end
     end
 
