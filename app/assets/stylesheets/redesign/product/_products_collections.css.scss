@@ -107,7 +107,7 @@
 	}
 	.thumbtrue{
 		background-color: black;
-		background-image: url(check.png);
+		background-image: url(product-collections/check.png);
 		background-size: contain;
 	}
 	.thumbfalse{
@@ -117,47 +117,47 @@
 	.colorCheckboxes{
 		.Green{
 			background-color: green !important;
-			background-image: url(check.png);
+			background-image: url(product-collections/check.png);
 		}
 		.Silver{
 			background-color: silver !important;
-			background-image: url(check.png);
+			background-image: url(product-collections/check.png);
 		}
 		.Purple{
 			background-color: purple !important;
-			background-image: url(check.png);
+			background-image: url(product-collections/check.png);
 		}
 		.Yellow{
 			background-color: #F5F504 !important;
-			background-image: url(check.png);
+			background-image: url(product-collections/check.png);
 		}
 		.Nude{
 			background-color: #EBCAB7 !important;
-			background-image: url(check.png);
+			background-image: url(product-collections/check.png);
 		}
 		.Black{
 			background-color: black !important;
-			background-image: url(check.png);
+			background-image: url(product-collections/check.png);
 		}
 		.White{
 			background-color: #EFEEEE !important;
-			background-image: url(check.png);
+			background-image: url(product-collections/check.png);
 		}
 		.Blue{
 			background-color: blue !important;
-			background-image: url(check.png);
+			background-image: url(product-collections/check.png);
 		}
 		.Pink{
 			background-color: pink !important;
-			background-image: url(check.png);
+			background-image: url(product-collections/check.png);
 		}
 		.Red{
 			background-color: red !important;
-			background-image: url(check.png);
+			background-image: url(product-collections/check.png);
 		}
 		.Pastel{
 			background-color: #FFB7B7 !important;
-			background-image: url(check.png);
+			background-image: url(product-collections/check.png);
 		}
 	}
 
@@ -180,6 +180,19 @@
 	@media(max-width: 415px){
 		.container-fluid{
 			padding:0;
+
+			.filterIconMobile{
+			    background-image: url(product-collections/filter_icon.png);
+			    background-size: contain;
+			    width: 15px;
+			    height: 13px;
+			    float: left;
+			    position: absolute;
+			    margin-top: 6px;
+			}
+			.filterMobileText{
+				margin-left: 20px;
+			}
 			.filterCol{
 				background-color: white;
 			    z-index: 102;
@@ -204,6 +217,7 @@
 			    		.filterText{
 			    			float: left;
 			    			margin-top: 12px;
+			    			margin-left: 40px;
 			    		}
 			    		.clearAll{
 			    			margin-top: 12px;
@@ -222,6 +236,17 @@
 						    -webkit-font-smoothing: antialiased;
 						    cursor: pointer;
 			    		}
+			    		.filterIcon{
+						    background-image: url(product-collections/filter_icon.png);
+						    background-size: contain;
+						    width: 15px;
+						    height: 13px;
+						    margin-top: 18px;
+						    margin-left: 20px;
+						    float: left;
+						    position: absolute;
+						}
+
 			    	}
 			    }
 			    -webkit-transition: margin-left 1s;
@@ -251,10 +276,13 @@
 				padding: 0;
 				.sort{
 					width: 55%;
+					margin-right: -15px;
 				}
 			}
 
 		}
+
+
 	}
 
 }
@@ -406,6 +434,15 @@ li.select2-results__option {
 		float:right;
 		margin-right: 10px;
 		cursor: pointer;
+	}
+	.filterIcon{
+		background-image: url(product-collections/filter_icon.png);
+		width: 15px;
+	    height: 13px;
+	    margin-left: 5px;
+	    position: absolute;
+	    margin-top: 7px;
+	    background-size: contain;
 	}
 }
 
