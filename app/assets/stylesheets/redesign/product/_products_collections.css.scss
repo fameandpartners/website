@@ -185,7 +185,7 @@
 			    background-image: url(product-collections/filter_icon.png);
 			    background-size: contain;
 			    width: 15px;
-			    height: 13px;
+			    height: 12px;
 			    float: left;
 			    position: absolute;
 			    margin-top: 6px;
@@ -235,12 +235,13 @@
 						    line-height: 1.6;
 						    -webkit-font-smoothing: antialiased;
 						    cursor: pointer;
+						    margin-right: -1px;
 			    		}
 			    		.filterIcon{
 						    background-image: url(product-collections/filter_icon.png);
 						    background-size: contain;
 						    width: 15px;
-						    height: 13px;
+						    height: 12px;
 						    margin-top: 18px;
 						    margin-left: 20px;
 						    float: left;
@@ -437,7 +438,7 @@ li.select2-results__option {
 	.filterIcon{
 		background-image: url(product-collections/filter_icon.png);
 		width: 15px;
-	    height: 13px;
+	    height: 12px;
 	    margin-left: 5px;
 	    position: absolute;
 	    margin-top: 7px;
