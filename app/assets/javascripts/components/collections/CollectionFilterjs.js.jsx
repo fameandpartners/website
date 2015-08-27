@@ -71,7 +71,7 @@ var CollectionFilter = React.createClass({
 
         <div>
           <b>STYLES</b>
-          <div className='filterArea filterAreaStyles'>
+          <div className='filterArea filterAreaStyles shortHeight'>
             <FilterAllOption name='all' label='View all styles' />
             {styles}
           </div>

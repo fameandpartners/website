@@ -284,12 +284,22 @@ li.select2-results__option {
 	}
 }
 
-.filterAreaStyles{
-	height:270px;
+.filterAreaStyles {
+	-webkit-transition: height 2s;
+	-moz-transition: height 2s;
+	transition: height 2s;
 	overflow: hidden;
 }
 
-.filterRect{
+.shortHeight {
+	height: 270px;
+}
+
+.fullHeight {
+	height: 1100px;
+}
+
+.filterRect {
 	background-color: #E8E8E8;
 	margin-bottom: 15px;
 	.filterText{

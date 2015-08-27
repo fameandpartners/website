@@ -59,8 +59,15 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @clearAll = $(".filterRect .clearAll")
     @clearAll.on('click',@clearAllOptions)
     $(".showMoreStyles").on 'click', ->
-      $(this).css('display','none')
-      $('.filterAreaStyles').css('height','auto')
+      if $(this).text() == "More"
+        $(this).text("Less")
+        $('.filterAreaStyles').removeClass('shortHeight')
+        $('.filterAreaStyles').addClass('fullHeight')
+      else
+        $(this).text("More")
+        $('.filterAreaStyles').removeClass('fullHeight')
+        $('.filterAreaStyles').addClass('shortHeight')
+
     $('.selectColor select').select2();
     $('.filterAreaColors .select2-selection--single').css('padding-top','7px')
 
