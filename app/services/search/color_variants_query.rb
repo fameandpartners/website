@@ -30,6 +30,7 @@ module Search
       fast_making      = options[:fast_making]
       limit            = options[:limit].present? ? options[:limit].to_i : 1000
       offset           = options[:offset].present? ? options[:offset].to_i : 0
+      show_outerwear   = !!options[:show_outerwear]
 
       Tire.search(configatron.elasticsearch.indices.color_variants, size: limit, from: offset) do
         filter :bool, :must => { :term => { 'product.is_deleted' => false } }
@@ -41,6 +42,9 @@ module Search
         if colors.present?
           filter :terms, 'color.id' => colors
         end
+
+        # Jackets filter
+        filter :bool, :must => { :term => { 'product.is_outerwear' => show_outerwear } }
 
         # only available items
         filter :bool, :must => { :term => { 'product.in_stock' => true } }
