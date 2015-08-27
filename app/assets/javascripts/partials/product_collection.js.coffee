@@ -58,6 +58,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     @clearAll = $(".filterRect .clearAll")
     @clearAll.on('click',@clearAllOptions)
+    $(".showMoreStyles").on 'click', ->
+      $(this).css('display','none')
+      $('.filterAreaStyles').css('height','auto')
 
   clearAllOptions: =>
     $(".thumb").removeClass("thumbtrue").addClass("thumbfalse")

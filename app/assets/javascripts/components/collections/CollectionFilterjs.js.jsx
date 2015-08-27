@@ -75,6 +75,9 @@ var CollectionFilter = React.createClass({
             <FilterAllOption name='all' label='View all styles' />
             {styles}
           </div>
+          <div className='showMoreStyles'>
+            More
+          </div>
           <br/>
 
           <b>COLORS</b>

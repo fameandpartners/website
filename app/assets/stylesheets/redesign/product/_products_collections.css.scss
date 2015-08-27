@@ -153,6 +153,12 @@
 			background-image: url(check.png);
 		}
 	}
+
+	.showMoreStyles{
+		text-align: center;
+    	background-color: #E8E8E8;
+    	cursor: pointer;
+	}
 }
 
 .on-sale * {
@@ -269,6 +275,11 @@ li.select2-results__option {
 	input {
 		margin-right: 5px;
 	}
+}
+
+.filterAreaStyles{
+	height:270px;
+	overflow: hidden;
 }
 
 .filterRect{
