@@ -64,12 +64,14 @@ var CollectionFilter = React.createClass({
       <div>
 
         <div className='filterRect'>
-          <span className='filterText'>Filter</span>
-          <span className='clearAll'><b>Clear all</b></span>
+          <div className='filterText'>Filter</div>
+          <div className='close visible-xs'>Close</div>
+          <div className='clearAll'><b>Clear all</b></div>
+
         </div>
         <br/>
 
-        <div>
+        <div className='threeFilters'>
           <b>STYLES</b>
           <div className='filterArea filterAreaStyles shortHeight'>
             <FilterAllOption name='all' label='View all styles' />

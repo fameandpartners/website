@@ -70,6 +70,10 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     $('.selectColor select').select2();
     $('.filterAreaColors .select2-selection--single').css('padding-top','7px')
+    $("#filterMobile").on 'click', ->
+      $('.filterCol').toggleClass("slideIn")
+    $(".filterRect .close").on 'click', ->
+      $('.filterCol').toggleClass("slideIn")
 
   clearAllOptions: =>
     $(".thumb").removeClass("thumbtrue").addClass("thumbfalse")

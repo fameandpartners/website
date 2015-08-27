@@ -4,14 +4,18 @@
 
   .container-fluid.category-controls
     .row-fluid
-      .col-md-3
-        .leftPath
+      .col-md-3.col-xs-4
+        .leftPath.hidden-xs
           span
             | Home /
           span style="margin-left:5px"
             b
               | Dresses
-      .col-md-9
+        .leftPath.visible-xs#filterMobile
+          span
+            b
+              | Filter
+      .col-md-9.col-xs-8
         .container style='width:100%'
           .row style='width:100%'
             .sort
