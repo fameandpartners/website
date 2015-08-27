@@ -98,11 +98,7 @@ module Search
                           }
                         }
           else
-            or_query = []
-            body_shapes.each do |bs|
-              or_query.push({ :range => {"product.#{bs}" => {:gte => 4} }})
-            end
-            filter :bool, :should =>[ or_query ]
+            filter :bool, :should =>[ body_shapes.map do |bs| { :range => {"product.#{bs}" => {:gte => 4} }} end ]
           end
         end
 
