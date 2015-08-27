@@ -49,7 +49,7 @@ li.shop.menu-item
 
             - if Features.active?(:sales)
               - if sale_active?
-                h4.link-header Sale - Up to 30% Off
+                /h4.link-header Sale - Up to 30% Off
                 /ul.mega-menu-list
                   /li.mega-menu-list--item= link_to 'All Sale Dresses', sales_collection_path
                   /li.mega-menu-list--item= link_to '15 Percent Off',   dresses_path(sale: 15)
