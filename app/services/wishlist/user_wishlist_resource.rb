@@ -1,6 +1,8 @@
 # this is not user wishlist, but bride wishlist
 # we have to split it. later. it will be never, though
 class Wishlist::UserWishlistResource
+  include PathBuildersHelper
+
   attr_reader :site_version, :moodboard_owner
 
   def initialize(options = {})
@@ -35,26 +37,12 @@ class Wishlist::UserWishlistResource
     end
 
     def moodboard_products
-      load_bridesmaides = bridesmaid_party_event.present?
-
       moodboard_owner_moodboard.items.map do |item|
-        item.path = product_path(item)
+        item.path         = collection_product_path(item, site_version: site_version.to_param)
         item.bridesmaides = get_bridesmaides_for_item(item.product_id, item.variant_id, item.color.try(:id))
-        item.discount = Repositories::Discount.get_product_discount(item.product_id)
+        item.discount     = Repositories::Discount.get_product_discount(item.product_id)
         item
       end
-    end
-
-    def product_path(item)
-      path_parts = [site_version.permalink, 'dresses']
-      path_parts.push(
-        ['dress', item.name.parameterize, item.product_id].reject(&:blank?).join('-')
-      )
-      if item.color.present?
-        path_parts.push(item.color.name)
-      end
-
-      "/" + path_parts.compact.join('/')
     end
 
     # module-specific code.
