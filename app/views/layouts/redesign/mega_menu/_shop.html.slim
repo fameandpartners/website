@@ -26,22 +26,22 @@ li.shop.menu-item
 
       .container-fluid.max-width-100
         .row
-          .col-md-3.col-lg-2.col-md-offset-4
+          .col-md-2.col-lg-2.col-md-offset-4
             h4.link-header Events
             ul.mega-menu-list
               = render :partial => '/layouts/redesign/event'
 
-          .col-md-3.col-lg-2
+          .col-md-2.col-lg-2
             h4.link-header Style
             ul.mega-menu-list
               = render :partial => '/layouts/redesign/style'
 
-          .col-md-3.col-lg-2
+          .col-md-2.col-lg-2
             h4.link-header= t('color')
             ul.mega-menu-list
               = render :partial => '/layouts/redesign/color'
 
-          .col-md-3.col-lg-2
+          .col-md-2.col-lg-2
             - if Features.active?(:express_making)
               h4.link-header Express Making
               ul.mega-menu-list
