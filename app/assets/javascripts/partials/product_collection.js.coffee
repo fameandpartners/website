@@ -174,8 +174,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   update: () =>
     @source_path = '/dresses' if @reset_source
-    #updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
-    updateRequestParams = _.extend({}, @updateParams, @getSelectedValues2())
+    updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
     pageUrl = @updatePageLocation(updateRequestParams)
 
     @updatePaginationLink('inactive')
@@ -200,8 +199,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     e.preventDefault()
     if @loading != true
       @loading = true
-      #updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
-      updateRequestParams = _.extend({}, @updateParams, @getSelectedValues2())
+      updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
       @updatePaginationLink('loading')
       $.ajax(urlWithSitePrefix(@source_path),
         type: "GET",
@@ -227,7 +225,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     object[propertyName] = propertyValue unless _.isEmpty(propertyValue)
     object
 
-  getSelectedValues2: () ->
+  getSelectedValues: () ->
     bodyshapeArray = []
     colourArray = []
     styleArray = []
@@ -255,14 +253,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       colour:    colourArray,
       style:     styleArray,
       order:     @productOrderInput.val()
-    }
-
-  getSelectedValues: () ->
-    {
-      bodyshape: @bodyShapeInput.val(),
-      colour: @colorInput.val(),
-      style: @styleInput.val(),
-      order: @productOrderInput.val()
     }
 
   updatePageLocation: (filter) ->
