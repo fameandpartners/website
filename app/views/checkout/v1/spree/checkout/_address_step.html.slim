@@ -2,13 +2,14 @@
   | window.bill_address = #{ raw ::AddressSerializer.new(current_order.bill_address).to_json };
 
 - if current_step.eql?('address')
-  = render partial: 'email_login'
+  h2.checkout-section-title 1. Your information
+  / TODO - Temporarily turned off - CRO Optimisation
+  /= render partial: 'email_login'
   = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global checkout-form'}, remote: false do |form|
     = render :partial => 'shared/error_messages', locals: { target: @order }
 
     = hidden_field_tag :create_account, :value => true
 
-    h2.checkout-section-title 2. Address Details
     p Where should we send your receipt and tracking details?
     .form-wrapper data-hook='billing_inner'
       = form.fields_for :bill_address do |bill_form|
@@ -34,7 +35,7 @@
 
     .form-wrapper data-hook='shipping_inner'
       = form.fields_for :ship_address do |ship_form|
-        = render partial: 'spree/checkout/address_form', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
+        = render partial: 'address_form', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
 
     .row
       .col-md-6.form-group style='margin-bottom:0'
