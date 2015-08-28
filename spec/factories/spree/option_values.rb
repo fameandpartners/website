@@ -9,11 +9,8 @@ FactoryGirl.define do
         size_template { (0..26).step(2).to_a.sample }
       end
 
-      # name         { "US#{size_template}/AU#{size_template + 4}" }
-      # presentation { "US #{size_template}/AU #{size_template + 4}" }
-
-      name         { size_template }
-      presentation { size_template }
+      name         { "US#{size_template}/AU#{size_template + 4}" }
+      presentation { "US #{size_template}/AU #{size_template + 4}" }
 
       option_type { create :option_type, :size }
     end
