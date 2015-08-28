@@ -204,7 +204,7 @@ hr
 = render partial: 'micro_data'
 
 #fit-guide-content.hidden
-  = render :partial => 'size_guide', :locals => { data: @product.size_chart_data, explanation: @product.size_chart_explanation }
+  = render :partial => 'size_guide', :locals => { data: @product.size_chart_data, explanation: @product.size_chart_explanation, size_chart: @product.size_chart }
 
 #product-overlay
 
