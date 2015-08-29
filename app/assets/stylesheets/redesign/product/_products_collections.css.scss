@@ -117,47 +117,36 @@
 	.colorCheckboxes{
 		.Green{
 			background-color: green !important;
-			background-image: url(product-collections/check.png);
 		}
 		.Silver{
 			background-color: silver !important;
-			background-image: url(product-collections/check.png);
 		}
 		.Purple{
 			background-color: purple !important;
-			background-image: url(product-collections/check.png);
 		}
 		.Yellow{
 			background-color: #F5F504 !important;
-			background-image: url(product-collections/check.png);
 		}
 		.Nude{
 			background-color: #EBCAB7 !important;
-			background-image: url(product-collections/check.png);
 		}
 		.Black{
 			background-color: black !important;
-			background-image: url(product-collections/check.png);
 		}
 		.White{
 			background-color: #EFEEEE !important;
-			background-image: url(product-collections/check.png);
 		}
 		.Blue{
 			background-color: blue !important;
-			background-image: url(product-collections/check.png);
 		}
 		.Pink{
 			background-color: pink !important;
-			background-image: url(product-collections/check.png);
 		}
 		.Red{
 			background-color: red !important;
-			background-image: url(product-collections/check.png);
 		}
 		.Pastel{
 			background-color: #FFB7B7 !important;
-			background-image: url(product-collections/check.png);
 		}
 	}
 
@@ -227,7 +216,7 @@
 						    height: 100%;
 						    padding-top: 9px;
 						    color: white;
-						    font-family: "brandon-grotesque", sans-serif;
+						    font-family: $font-family-secondary;
 						    font-weight: 100;
 						    font-size: 14pt;
 						    padding-left: 10px;
