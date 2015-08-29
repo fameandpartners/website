@@ -21,7 +21,7 @@ module Spree
         }
     }
     REQUEST_URL = {
-        :sandbox => 'https://sandbox.api.mastercard.com/oauth/consumer/v1/request_token',
+                :sandbox => 'https://sandbox.api.mastercard.com/oauth/consumer/v1/request_token',
         :live => 'https://api.mastercard.com/oauth/consumer/v1/request_token'
     }
     ACCESS_URL = {
@@ -84,11 +84,61 @@ module Spree
     end
 
     def payment_profiles_supported?
-      true
+      # true
+      false
     end
 
-    def purchase(amount, express_checkout, gateway_options={})
-      test = 'test'
+    def purchase(amount, masterpass_checkout, gateway_options={})
+      approval_code = "sample"
+      if (!approval_code)
+        approval_code = "UNAVBL"
+      end
+      merchant_transactions = AllServicesMappingRegistry::MerchantTransactions.new
+      merchant_transaction = AllServicesMappingRegistry::MerchantTransaction.new(
+          masterpass_checkout.transaction_id,
+          preferred_consumer_key,
+          gateway_options[:currency],
+          amount,
+          Time.now,
+          "Success",
+          approval_code,
+          masterpass_checkout.precheckout_transaction_id)
+      merchant_transactions << merchant_transaction
+      xml = merchant_transactions.to_xml
+      # we need to pluralize the child MerchantTransaction node name to adhere to the XML schema
+      REXML::XPath.first(xml, "//MerchantTransaction").name = "MerchantTransactions"
+      post_transaction_sent_xml = xml.to_s
+      response_xml = ""
+      service = Mastercard::Masterpass::MasterpassService.new(
+          preferred_consumer_key,
+          OpenSSL::PKCS12.new(File.open(keystore[:path]), keystore[:password]).key,
+          callback_domain,
+          Mastercard::Common::SANDBOX)
+      response_xml = Document.new(service.post_checkout_transaction(postback_url, xml), {:compress_whitespace => :all})
+
+      # and change the child MerchantTransaction node name back to singular for proper xml mapping if we want to get a Ruby object back from the xml
+      REXML::XPath.first(response_xml, "//MerchantTransactions/*[not(root)]").name = "MerchantTransaction"
+      # AllServicesMappingRegistry::MerchantInitializationResponse.from_xml(response_xml.to_s)
+
+      transaction_response = AllServicesMappingRegistry::MerchantTransactions.from_xml(response_xml.to_s)
+      if transaction_response.first.transactionStatus == "Success"
+        # We need to store the transaction id for the future.
+        # This is mainly so we can use it later on to refund the payment if the user wishes.
+        masterpass_checkout.update_column(:transaction_id, transaction_response.first.transactionId)
+        masterpass_checkout.update_column(:order_id, gateway_options[:order_id])
+        # This is rather hackish, required for payment/processing handle_response code.
+        Class.new do
+          def success?; true; end
+          def authorization; nil; end
+        end.new
+      else
+        class << transaction_response
+          def to_s
+            errors.map(&:long_message).join(" ")
+          end
+        end
+        transaction_response
+      end
     end
 
     def refund(payment, amount)

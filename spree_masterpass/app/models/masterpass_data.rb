@@ -15,6 +15,7 @@ class MasterpassData
                 :access_token_response,
 
                 :checkout,
+                :precheckout_transaction_id,
 
                 :error_message
 

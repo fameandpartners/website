@@ -4,17 +4,13 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *
 
- *= require admin/spree_core
- *= require admin/spree_promo
- *= require store/spree_banner
-
 *= require_tree ../spree
 *= require_self
 *= require_tree .
-*= require admin/spree_social
+*= require store/spree_social
 *= require jquery.fileupload-ui
-*= require admin/spree_paypal_express
+*= require store/spree_paypal_express
 *= require jquery-ui/tabs
-*= require admin/spree_masterpass
- *= require admin/spree_masterpass
+*= require store/spree_masterpass
+ *= require store/spree_masterpass
 */

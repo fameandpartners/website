@@ -23,3 +23,4 @@
 //= require admin/spree_paypal_express
 //= require jquery-ui/tabs
 //= require admin/spree_banner
+//= require admin/spree_masterpass

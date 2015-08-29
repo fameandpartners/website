@@ -1,11 +1,10 @@
 require 'uri'
-include REXML
+require 'mastercard_masterpass_api'
 
 module Spree
   class MasterpassController < StoreController
 
     before_filter :setup
-    after_filter :save_session_data
     rescue_from RuntimeError, with: :set_error_message
 
     def cart
@@ -18,10 +17,10 @@ module Spree
       # Post shopping cart
       items = current_order.line_items.map do |item|
         AllServicesMappingRegistry::ShoppingCartItem.new(
-            item.product.name + ' ' + item.variant.sku,
+            item.variant.product.name + ' ' + item.variant.sku,
             item.quantity,
-            (item.price * 100).to_i,
-            item.image.mini_url)
+            (item.price * 100).round,
+            item.image.attachment.url(:product))
       end
 
       tax_adjustments = current_order.adjustments.tax
@@ -38,7 +37,7 @@ module Spree
       end
       shopping_cart = AllServicesMappingRegistry::ShoppingCart.new(
           current_order.currency,
-          (current_order.total * 100).to_i,
+          (current_order.total * 100).round,
           items,
           nil)
       shopping_cart_request = AllServicesMappingRegistry::ShoppingCartRequest.new(
@@ -50,19 +49,22 @@ module Spree
               payment_method.shopping_cart_url,
               shopping_cart_request.to_xml_s)
       )
+      save_session_data
 
       # file = File.read(File.join('spree_masterpass', 'resources', 'shoppingCart.xml'))
       # shopping_cart_request = AllServicesMappingRegistry::ShoppingCartRequest.from_xml(file)
       # shopping_cart_request.oAuthToken = @data.request_token
         # shopping_cart_request.originUrl = provider.callback_domain
 
+      # flash[:commerce_tracking] = 'masterpass_initialized';
       render json: {
                  request_token: @data.request_token,
                  callback_domain: provider.callback_domain,
                  cart_callback_path: provider.callback_domain + '/masterpass/cartcallback?payment_method_id=' + params[:payment_method_id],
                  accepted_cards: payment_method.preferred_accepted_cards,
                  checkout_identifier: payment_method.preferred_checkout_identifier,
-                 shipping_suppression: payment_method.preferred_shipping_suppression
+                 shipping_suppression: payment_method.preferred_shipping_suppression,
+                 commerce_tracking: true
              }
     end
 
@@ -86,12 +88,11 @@ module Spree
           ));
 
       order = current_order || raise(ActiveRecord::RecordNotFound)
-      if @data.params[:mpstatus] == 'success'
+      if params[:mpstatus] == 'success'
         if current_order.confirmation_required?
           # TODO : Redirect to the confirmation page
           # redirect_to checkout_state_path(order.state)
         else
-          log_transaction
           confirm
           # render :complete
         end
@@ -102,20 +103,37 @@ module Spree
     end
 
     def confirm
-      order = current_order || raise(ActiveRecord::RecordNotFound)
+      order = current_order
       order.payments.create!({
-                                 source: Spree::MasterPassCheckout.create({
-                                                                              token: @data.access_token,
-                                                                              transaction_id: @data.checkout.transactionId,
-                                                                          }),
-                                 amount: order.total,
-                                 payment_method: payment_method
-                             })
+                                 :source => Spree::MasterpassCheckout.create({
+                                                :access_token => @data.access_token,
+                                                :transaction_id => @data.checkout.transactionId,
+                                                :precheckout_transaction_id => @data.precheckout_transaction_id,
+                                                :cardholder_name => @data.checkout.card.cardHolderName,
+                                                :account_number => @data.checkout.card.accountNumber,
+                                                :billing_address => @data.checkout.card.billingAddress.line1 + '<br/>' + @data.checkout.card.billingAddress.line2,
+                                                :exp_date => @data.checkout.card.expiryMonth + '/' + @data.checkout.card.expiryYear,
+                                                :brand_id => @data.checkout.card.brandId,
+                                                :contact_name => @data.checkout.contact.firstName + ' ' + @data.checkout.contact.lastName,
+                                                :gender => @data.checkout.contact.respond_to?(:gender) ? @data.checkout.contact.gender : nil,
+                                                :birthday => @data.checkout.contact.respond_to?(:dateOfBirth) ? @data.checkout.contact.dateOfBirth.month + '/' +  @data.checkout.contact.dateOfBirth.day + '/' + @data.checkout.contact.dateOfBirth.year : nil,
+                                                :national_id => @data.checkout.contact.respond_to?(:nationalID) ? @data.checkout.contact.nationalID : nil,
+                                                :phone => @data.checkout.contact.phoneNumber,
+                                                :email => @data.checkout.contact.emailAddress
+                                              }, :without_protection => true),
+                                 :amount => order.total,
+                                 :payment_method => payment_method
+                             }, :without_protection => true)
       order.next
       if order.complete?
         flash.notice = Spree.t(:order_processed_successfully)
+        flash[:commerce_tracking] = 'masterpass_ordered'
+        session[:successfully_ordered] = true
+        session[:masterpass_data] = nil
+
         flash[:order_completed] = true
         session[:order_id] = nil
+
         redirect_to order_path(order)
       else
         redirect_to checkout_state_path(order.state)
@@ -125,6 +143,7 @@ module Spree
     def cancel
       flash[:notice] = Spree.t('flash.cancel', scope: 'masterpass')
       order = current_order || raise(ActiveRecord::RecordNotFound)
+      session[:masterpass_data] = nil
       redirect_to checkout_state_path(order.state, masterpass_cancel_token: params[:token])
     end
 
@@ -145,7 +164,7 @@ module Spree
     private
 
     def setup
-      session['masterpass_data'] == nil ? @data = session['masterpass_data'] = MasterpassData.new : @data = session['masterpass_data']
+      session[:masterpass_data] == nil ? @data = session[:masterpass_data] = MasterpassData.new : @data = session[:masterpass_data]
       @data.error_message = nil
       @service = Mastercard::Masterpass::MasterpassService.new(
           payment_method.preferred_consumer_key,
@@ -160,8 +179,8 @@ module Spree
     end
 
     def save_session_data
-      session['masterpass_data'] = nil
-      session['masterpass_data'] = @data
+      session[:masterpass_data] = nil
+      session[:masterpass_data] = @data
     end
 
     def handle_pairing_callback
@@ -177,31 +196,5 @@ module Spree
     end
 
 
-
-    def log_transaction
-      approval_code = "sample"
-      if (!approval_code)
-        approval_code = "UNAVBL"
-      end
-      merchant_transactions = AllServicesMappingRegistry::MerchantTransactions.new
-      merchant_transaction = AllServicesMappingRegistry::MerchantTransaction.new(
-          @data.checkout.transactionId,
-          payment_method.consumer_key,
-          item.order.currency,
-          (current_order.total * 100).to_i,
-          Time.now,
-          "Success",
-          approval_code,
-          @data.precheckout_transaction_id)
-      merchant_transactions << merchant_transaction
-      xml = merchant_transactions.to_xml
-      # we need to pluralize the child MerchantTransaction node name to adhere to the XML schema
-      XPath.first(xml, "//MerchantTransaction").name = "MerchantTransactions"
-      @data.post_transaction_sent_xml = xml.to_s
-      response_xml = ""
-      Document.new(service.post_checkout_transaction(payment_method.postback_url, xml), {:compress_whitespace => :all}).write(response_xml, 2)
-
-      # and change the child MerchantTransaction node name back to singular for proper xml mapping if we want to get a Ruby object back from the xml
-    end
   end
 end

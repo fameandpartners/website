@@ -24,6 +24,12 @@ $('#buyWithMasterPassDiv').click(function() {
                     "requestBasicCheckout": false,
                     "version":"v6"
                 });
+
+                if (data.hasOwnProperty('commerce_tracking') && data.commerce_tracking == true) {
+                    var axel = Math.random() + "";
+                    var a = axel * 10000000000000;
+                    document.write('<iframe src="https://4754606.fls.doubleclick.net/activityi;src=4754606;type=mpau;cat=famep00;ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+                }
             }
         });
 });

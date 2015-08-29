@@ -42,6 +42,17 @@
                   "version":"v6"
                 });
 
+                if (data.hasOwnProperty('commerce_tracking') && data.commerce_tracking == true) {
+                  var axel = Math.random() + "";
+                  var a = axel * 10000000000000;
+                  var ifrm = document.createElement("IFRAME");
+                  ifrm.setAttribute("src", "https://4754606.fls.doubleclick.net/activityi;src=4754606;type=mpau;cat=famep00;ord=' + a + '?");
+                  ifrm.style.width = 1 + 'px';
+                  ifrm.style.height = 1 + 'px';
+                  ifrm.style.frameborder = 0;
+                  ifrm.style.display = 'none';
+                  document.body.appendChild(ifrm);
+                }
               }
           });
       });
