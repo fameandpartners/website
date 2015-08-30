@@ -15,5 +15,5 @@
 *= require jquery.fileupload-ui
 *= require admin/spree_paypal_express
 *= require jquery-ui/tabs
-*= require admin/spree_masterpass
- */
+  *= require admin/spree_masterpass
+*/

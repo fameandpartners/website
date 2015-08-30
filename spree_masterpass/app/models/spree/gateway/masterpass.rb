@@ -125,7 +125,7 @@ module Spree
         # We need to store the transaction id for the future.
         # This is mainly so we can use it later on to refund the payment if the user wishes.
         masterpass_checkout.update_column(:transaction_id, transaction_response.first.transactionId)
-        masterpass_checkout.update_column(:order_id, gateway_options[:order_id])
+        # masterpass_checkout.update_column(:order_id, gateway_options[:order_id])
         # This is rather hackish, required for payment/processing handle_response code.
         Class.new do
           def success?; true; end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150829165760) do
+ActiveRecord::Schema.define(:version => 20150830020807) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1043,7 +1043,7 @@ ActiveRecord::Schema.define(:version => 20150829165760) do
     t.string   "email"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
-    t.string   "order_id"
+    t.integer  "order_id"
   end
 
   create_table "spree_option_types", :force => true do |t|

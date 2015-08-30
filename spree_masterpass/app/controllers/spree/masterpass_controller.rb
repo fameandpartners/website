@@ -119,7 +119,8 @@ module Spree
                                                 :birthday => @data.checkout.contact.respond_to?(:dateOfBirth) ? @data.checkout.contact.dateOfBirth.month + '/' +  @data.checkout.contact.dateOfBirth.day + '/' + @data.checkout.contact.dateOfBirth.year : nil,
                                                 :national_id => @data.checkout.contact.respond_to?(:nationalID) ? @data.checkout.contact.nationalID : nil,
                                                 :phone => @data.checkout.contact.phoneNumber,
-                                                :email => @data.checkout.contact.emailAddress
+                                                :email => @data.checkout.contact.emailAddress,
+                                                :order_id => order.id
                                               }, :without_protection => true),
                                  :amount => order.total,
                                  :payment_method => payment_method
