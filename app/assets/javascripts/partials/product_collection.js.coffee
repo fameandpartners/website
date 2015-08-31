@@ -231,7 +231,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       colorInputs = $(".filter-area-colors .thumb-true[name!='all']")
       for colorInput in colorInputs
         colourArray.push($(colorInput).attr("name"))
-      colour = $($(".filter-area-colors select option:selected")[0]).attr("name")
+      colour = $(".filter-area-colors select option:selected").attr("name")
       if colour != "none"
         colourArray.push(colour)
 
