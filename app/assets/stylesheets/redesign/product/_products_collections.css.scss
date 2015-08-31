@@ -210,7 +210,9 @@
 	@media(max-width: $bootstrap-md-width){
 		.container-fluid{
 			padding:0;
-
+			.left-path{
+				margin-left: 12px;
+			}
 			.filter-mobile-text{
 				margin-left: 20px;
 			}
