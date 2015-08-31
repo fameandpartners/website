@@ -49,7 +49,7 @@ var CollectionFilter = React.createClass({
       <div>
 
         <div className='filter-rect'>
-          <div className='filter-icon'></div>
+          <i className="fa fa-filter"></i>
           <span className='filter-text'>Filter</span>
           <div className='close visible-xs visible-sm'>Close</div>
           <span className='clear-all'><b>Clear all</b></span>

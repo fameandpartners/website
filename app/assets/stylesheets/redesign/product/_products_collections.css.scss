@@ -200,14 +200,8 @@
 				margin-right: 10px;
 				cursor: pointer;
 			}
-			.filter-icon{
-				background-image: url(product-collections/filter_icon.png);
-				width: 15px;
-			    height: 12px;
-			    margin-left: 5px;
-			    position: absolute;
-			    margin-top: 7px;
-			    background-size: contain;
+			i {
+				padding-left: 10px;
 			}
 		}
 
@@ -217,15 +211,6 @@
 		.container-fluid{
 			padding:0;
 
-			.filter-icon-mobile{
-			    background-image: url(product-collections/filter_icon.png);
-			    background-size: contain;
-			    width: 15px;
-			    height: 12px;
-			    float: left;
-			    position: absolute;
-			    margin-top: 6px;
-			}
 			.filter-mobile-text{
 				margin-left: 20px;
 			}
@@ -250,10 +235,14 @@
 			    	}
 			    	.filter-rect{
 			    		height: 50px;
+			    		i {
+		    			    float: left;
+						    margin-top: 15px;
+						    padding-left: 20px;
+			    		}
 			    		.filter-text{
 			    			float: left;
 			    			margin-top: 12px;
-			    			margin-left: 40px;
 			    		}
 			    		.clear-all{
 			    			margin-top: 12px;
@@ -273,17 +262,6 @@
 						    cursor: pointer;
 						    margin-right: -1px;
 			    		}
-			    		.filter-icon{
-						    background-image: url(product-collections/filter_icon.png);
-						    background-size: contain;
-						    width: 15px;
-						    height: 12px;
-						    margin-top: 18px;
-						    margin-left: 20px;
-						    float: left;
-						    position: absolute;
-						}
-
 			    	}
 			    }
 			    -webkit-transition: margin-left 1s;
