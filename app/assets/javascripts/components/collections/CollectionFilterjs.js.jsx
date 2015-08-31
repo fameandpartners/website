@@ -1,25 +1,10 @@
-var FilterAllOption = React.createClass({
-
-  render: function() {
-    return (
-      <div className='filter-option'>
-        <label>
-          <div className={"thumb thumb-true "+this.props.name} name={this.props.name} >
-          </div>
-          {this.props.label}
-        </label>
-      </div>
-    )
-  }
-});
-
 var FilterOption = React.createClass({
 
   render: function() {
     return (
       <div className='filter-option'>
         <label>
-          <div className={"thumb thumb-false "+this.props.name} name={this.props.name}>
+          <div className={"thumb thumb-"+this.props.select+" "+this.props.name} name={this.props.name}>
           </div>
           {this.props.label}
         </label>
@@ -75,7 +60,7 @@ var CollectionFilter = React.createClass({
         <div className='three-filters'>
           <b>STYLES</b>
           <div className='filter-area filter-area-styles short-height'>
-            <FilterAllOption name='all' label='View all styles' />
+            <FilterOption name='all' label='View all styles' select='true'/>
             {styles}
           </div>
           <div className='show-more-styles'>
@@ -86,7 +71,7 @@ var CollectionFilter = React.createClass({
           <b>COLORS</b>
           <div className='filter-area filter-area-colors'>
             <div className='color-checkboxes'>
-              <FilterAllOption name='all' label='View all colors' />
+              <FilterOption name='all' label='View all colors' select='true'/>
               {colors}
             </div>
             Other colours
@@ -103,7 +88,7 @@ var CollectionFilter = React.createClass({
 
           <b>BODYSHAPE</b>
           <div className='filter-area filter-area-shapes'>
-            <FilterAllOption name='all' label='View all shapes' />
+            <FilterOption name='all' label='View all shapes' select='true'/>
             {shapes}
           </div>
         </div>
