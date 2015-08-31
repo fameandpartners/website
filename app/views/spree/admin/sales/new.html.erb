@@ -33,7 +33,16 @@
             <%= f.error_message_on :sitewide %>
           </label>
         <% end %>
+
+        <%= f.field_container :customisation_allowed, :class => ['checkbox'] do %>
+          <label>
+            <%= f.check_box :customisation_allowed %>
+            customisation allowed?
+            <%= f.error_message_on :customisation_allowed %>
+          </label>
+        <% end %>
       </div>
+
       <div class="four columns">
         <%= f.field_container :discount_size do %>
           <%= f.label :discount_size, t(:discount_size) %> <span class="required">*</span><br />

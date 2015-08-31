@@ -24,7 +24,6 @@ class Repositories::Discount
     end
 
     def read_all(discountable_class, discountable_ids)
-      key = type_to_key(discountable_class)
       Array.wrap(discountable_ids).map do |discountable_id|
         discount = read(discountable_class, discountable_id)
         if discount
@@ -72,10 +71,17 @@ class Repositories::Discount
             if existing_discount.present? && (existing_discount.amount > discount.amount)
               # we already have saved better discount
             elsif discount.amount.to_i > 0
-              all_discounts[key][discount.discountable_id] = OpenStruct.new(
+              result = OpenStruct.new(
                 amount: discount.amount,
                 size:   discount.size
               )
+
+              # probably, this logic should be hidden inside discount presenter ( product_discount_presenter )
+              if discountable_class == 'Spree::Product' && discount.sale.customisation_allowed?
+                result.customisation_allowed = true
+              end
+
+              all_discounts[key][discount.discountable_id] = result
             end
           end
         end

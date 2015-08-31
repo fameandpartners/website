@@ -3,7 +3,8 @@ require 'spec_helper'
 module Products
   describe Presenter do
     describe 'customisations' do
-      let(:a_discount)  { 999 }
+      let(:default_discount)  { double('discount', customisation_allowed: false) }
+      let(:customiseble_discount)  { double('discount', customisation_allowed: true) }
       let(:no_discount) { nil }
       let(:customizations) { double('customizations', :all => [:some]) }
       let(:colors)         { double('custom_colours', :extra => [:some]) }
@@ -15,7 +16,7 @@ module Products
       end
 
       context 'when discounted' do
-        let(:discount) { a_discount }
+        let(:discount) { default_discount }
 
         it('disallows customisation') do
           expect(product.customizable?).to be_falsy
@@ -23,6 +24,19 @@ module Products
 
         it('disallows custom colours') do
           expect(product.custom_colors?).to be_falsy
+        end
+
+      end
+
+      context 'when discounted by sales with allowed customisations discount' do
+        let(:discount) { customiseble_discount }
+
+        it('disallows customisation') do
+          expect(product.customizable?).to be_truthy
+        end
+
+        it('disallows custom colours') do
+          expect(product.custom_colors?).to be_truthy
         end
 
       end

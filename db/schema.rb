@@ -1336,6 +1336,7 @@ ActiveRecord::Schema.define(:version => 20150826171400) do
     t.datetime "updated_at",                       :null => false
     t.string   "name"
     t.boolean  "sitewide",      :default => false
+    t.boolean  "customisation_allowed", :default => false
   end
 
   create_table "spree_shipments", :force => true do |t|

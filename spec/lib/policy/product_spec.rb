@@ -4,7 +4,8 @@ module Policy
   describe Product do
     describe '#customisation_allowed?' do
 
-      let(:a_discount)  { 999 }
+      let(:default_discount)  { double('discount', customisation_allowed: false) }
+      let(:customiseble_discount)  { double('discount', customisation_allowed: true) }
       let(:no_discount) { nil }
 
       let(:product) { double('product', :discount => discount) }
@@ -14,13 +15,20 @@ module Policy
       end
 
       context 'when discounted' do
-        let(:discount) { a_discount }
+        let(:discount) { default_discount }
         it do
           expect(policy.customisation_allowed?).to be_falsy
         end
       end
 
-      context 'when discounted' do
+      context 'when discounted by customisation allowing sale' do
+        let(:discount) { customiseble_discount }
+        it do
+          expect(policy.customisation_allowed?).to be_truthy
+        end
+      end
+
+      context 'when not discounted' do
         let(:discount) { no_discount }
         it do
           expect(policy.customisation_allowed?).to be_truthy

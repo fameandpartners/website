@@ -48,6 +48,15 @@
               </label>
             <% end %>
           </div>
+          <div class="four columns">
+            <%= f.field_container :customisation_allowed, :class => ['checkbox'] do %>
+              <label>
+                <%= f.check_box :customisation_allowed %>
+                customisation allowed?
+                <%= f.error_message_on :customisation_allowed %>
+              </label>
+            <% end %>
+          </div>
         </div>
       </fieldset>
       <fieldset>
