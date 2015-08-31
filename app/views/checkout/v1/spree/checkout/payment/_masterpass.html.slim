@@ -1,73 +1,74 @@
-#masterpass_choice.panel
-  .panel-heading
-    h4.panel-title MasterPass
-  .panel-collapse.in
-    .panel-body
-      - content_for :head do
-        = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js'
-        - if !payment_method.prefers_test_mode? && payment_method.server_mode == Mastercard::Common::PRODUCTION
-          = javascript_include_tag 'https://masterpass.com/lightbox/Switch/integration/MasterPass.client.js'
-          / = javascript_include_tag 'https://masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
-        - else
-          = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/integration/MasterPass.client.js'
-          / = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
+- if masterpass_active?
+  #masterpass_choice.panel
+    .panel-heading
+      h4.panel-title MasterPass
+    .panel-collapse.in
+      .panel-body
+        - content_for :head do
+          = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js'
+          - if !payment_method.prefers_test_mode? && payment_method.server_mode == Mastercard::Common::PRODUCTION
+            = javascript_include_tag 'https://masterpass.com/lightbox/Switch/integration/MasterPass.client.js'
+            / = javascript_include_tag 'https://masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
+          - else
+            = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/integration/MasterPass.client.js'
+            / = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
 
-      / "inline_javascript" should be removed, but in my case, the site was messed up so
-      - content_for :inline_javascript do
-        | $('#buyWithMasterPassDiv').click(function() {
-              var masterpass_overlay = $('#buyWithMasterPassOverlayDiv');
-              masterpass_overlay.css({
-                "position": "fixed",
-                "width": "100%",
-                "height": "100%",
-                "background-color": "rgba(0,0,0,.7)",
-                "top": 0,
-                "left": 0,
-                "z-index": 1000000,
-                "overflow": "auto"
-              });
+        / "inline_javascript" should be removed, but in my case, the site was messed up so
+        - content_for :inline_javascript do
+          | $('#buyWithMasterPassDiv').click(function() {
+                var masterpass_overlay = $('#buyWithMasterPassOverlayDiv');
+                masterpass_overlay.css({
+                  "position": "fixed",
+                  "width": "100%",
+                  "height": "100%",
+                  "background-color": "rgba(0,0,0,.7)",
+                  "top": 0,
+                  "left": 0,
+                  "z-index": 1000000,
+                  "overflow": "auto"
+                });
 
-          var spinner = new Spinner().spin();
-          masterpass_overlay.append(spinner.el);
+            var spinner = new Spinner().spin();
+            masterpass_overlay.append(spinner.el);
 
-          $.getJSON("/masterpass/cart?payment_method_id=#{payment_method.id}").done(
-            function(data) {
-              spinner.stop();
-              masterpass_overlay.css({"width": 0, "height": 0});
+            $.getJSON("/masterpass/cart?payment_method_id=#{payment_method.id}").done(
+              function(data) {
+                spinner.stop();
+                masterpass_overlay.css({"width": 0, "height": 0});
 
-              if (data.hasOwnProperty('request_token') && data.hasOwnProperty('callback_domain')
-                && data.hasOwnProperty('checkout_identifier') && data.hasOwnProperty('shipping_suppression')
-                && data.hasOwnProperty('accepted_cards') && data.hasOwnProperty('cart_callback_path')) {
+                if (data.hasOwnProperty('request_token') && data.hasOwnProperty('callback_domain')
+                  && data.hasOwnProperty('checkout_identifier') && data.hasOwnProperty('shipping_suppression')
+                  && data.hasOwnProperty('accepted_cards') && data.hasOwnProperty('cart_callback_path')) {
 
-                  MasterPass.client.checkout({
-                    "requestToken": data.request_token,
-                    "callbackUrl": data.cart_callback_path,
-                    "merchantCheckoutId": data.checkout_identifier,
-                    "allowedCardTypes": data.accepted_cards,
-                    "cancelCallback": data.callback_domain,
-                    "suppressShippingAddressEnable": data.shipping_suppression,
-                    "loyaltyEnabled": "false",
-                    "requestBasicCheckout": false,
-                    "version":"v6"
-                  });
+                    MasterPass.client.checkout({
+                      "requestToken": data.request_token,
+                      "callbackUrl": data.cart_callback_path,
+                      "merchantCheckoutId": data.checkout_identifier,
+                      "allowedCardTypes": data.accepted_cards,
+                      "cancelCallback": data.callback_domain,
+                      "suppressShippingAddressEnable": data.shipping_suppression,
+                      "loyaltyEnabled": "false",
+                      "requestBasicCheckout": false,
+                      "version":"v6"
+                    });
 
-                  if (data.hasOwnProperty('commerce_tracking') && data.commerce_tracking == true) {
-                    var axel = Math.random() + "";
-                    var a = axel * 10000000000000;
-                    var ifrm = document.createElement("IFRAME");
-                    ifrm.setAttribute("src", "https://4754606.fls.doubleclick.net/activityi;src=4754606;type=mpau;cat=famep00;ord=' + a + '?");
-                    ifrm.style.width = 1 + 'px';
-                    ifrm.style.height = 1 + 'px';
-                    ifrm.style.frameborder = 0;
-                    ifrm.style.display = 'none';
-                    document.body.appendChild(ifrm);
+                    if (data.hasOwnProperty('commerce_tracking') && data.commerce_tracking == true) {
+                      var axel = Math.random() + "";
+                      var a = axel * 10000000000000;
+                      var ifrm = document.createElement("IFRAME");
+                      ifrm.setAttribute("src", "https://4754606.fls.doubleclick.net/activityi;src=4754606;type=mpau;cat=famep00;ord=' + a + '?");
+                      ifrm.style.width = 1 + 'px';
+                      ifrm.style.height = 1 + 'px';
+                      ifrm.style.frameborder = 0;
+                      ifrm.style.display = 'none';
+                      document.body.appendChild(ifrm);
+                    }
                   }
-                }
+              });
             });
-          });
 
-      #buyWithMasterPassOverlayDiv
+        #buyWithMasterPassOverlayDiv
 
-      #buyWithMasterPassDiv
-        a[href="javascript: void(0);"]: img src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_147x034px.png" alt="Buy with MasterPass"
-      p: a[href='http://www.mastercard.com/mc_us/wallet/learnmore/en'] Learn More
+        #buyWithMasterPassDiv
+          a[href="javascript: void(0);"]: img src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_147x034px.png" alt="Buy with MasterPass"
+        / p: a[href='http://www.mastercard.com/mc_us/wallet/learnmore/en'] Learn More
