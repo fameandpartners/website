@@ -21,7 +21,7 @@ module Spree
         }
     }
     REQUEST_URL = {
-                :sandbox => 'https://sandbox.api.mastercard.com/oauth/consumer/v1/request_token',
+        :sandbox => 'https://sandbox.api.mastercard.com/oauth/consumer/v1/request_token',
         :live => 'https://api.mastercard.com/oauth/consumer/v1/request_token'
     }
     ACCESS_URL = {
@@ -57,6 +57,10 @@ module Spree
 
     def postback_url
       preferred_server.present? && preferred_server == 'live' ? POSTBACK_URL[:live] : POSTBACK_URL[:sandbox]
+    end
+
+    def server_mode
+      preferred_server.present? && preferred_server == 'live' ? Mastercard::Common::PRODUCTION : Mastercard::Common::SANDBOX
     end
 
     def callback_domain
@@ -113,7 +117,7 @@ module Spree
           preferred_consumer_key,
           OpenSSL::PKCS12.new(File.open(keystore[:path]), keystore[:password]).key,
           callback_domain,
-          Mastercard::Common::SANDBOX)
+          server_mode)
       response_xml = Document.new(service.post_checkout_transaction(postback_url, xml), {:compress_whitespace => :all})
 
       # and change the child MerchantTransaction node name back to singular for proper xml mapping if we want to get a Ruby object back from the xml

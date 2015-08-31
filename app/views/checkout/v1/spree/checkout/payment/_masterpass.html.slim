@@ -4,9 +4,13 @@
   .panel-collapse.in
     .panel-body
       - content_for :head do
-        = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/integration/MasterPass.client.js'
-        / = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
         = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js'
+        - if !payment_method.prefers_test_mode? && payment_method.server_mode == Mastercard::Common::PRODUCTION
+          = javascript_include_tag 'https://masterpass.com/lightbox/Switch/integration/MasterPass.client.js'
+          / = javascript_include_tag 'https://masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
+        - else
+          = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/integration/MasterPass.client.js'
+          / = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
 
       / "inline_javascript" should be removed, but in my case, the site was messed up so
       - content_for :inline_javascript do

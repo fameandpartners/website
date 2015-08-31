@@ -173,7 +173,7 @@ module Spree
               File.open(payment_method.keystore[:path]), payment_method.keystore[:password]
           ).key,
           payment_method.callback_domain,
-          Mastercard::Common::SANDBOX)
+          payment_method.server_mode)
 
       # create an unreferenced MasterpassDataMapper to include the mapping namespaces of our DTO's
       MasterpassDataMapper.new
