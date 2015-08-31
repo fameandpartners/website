@@ -30,11 +30,11 @@ var CollectionFilter = React.createClass({
 
   render: function() {
     shapes = this.props.shapes.map(function(shape){
-      return (<FilterOption name={shape} label={shape.replace("_"," ")} />)
+      return (<FilterOption name={shape} label={shape.replace("_"," ")} select='true' />)
     });
 
     colors = this.props.colors.map(function(color){
-      return (<FilterOption name={color.table.presentation} label={color.table.presentation} />)
+      return (<FilterOption name={color.table.presentation} label={color.table.presentation} select='true' />)
     });
 
     selectColors = this.props.selectColors.map(function(color){
@@ -42,7 +42,7 @@ var CollectionFilter = React.createClass({
     });
 
     styles = this.props.styles.map(function(style){
-      return (<FilterOption name={style.table.name} label={style.table.name} />)
+      return (<FilterOption name={style.table.name} label={style.table.name} select='true'/>)
     });
 
     return (
