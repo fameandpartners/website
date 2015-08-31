@@ -2,7 +2,6 @@
 <% products = @collection.products %>
 <% rows = Math.ceil(products.length / @col) %>
 <% for i in [0...rows]: %>
-  <% products_for_row = _.first(products, @col) %>
   <% for product in _.first(products, @col): %>
     <%- JST['templates/_product'](product: product, col: @col) %>
   <% end %>
