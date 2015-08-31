@@ -16,7 +16,7 @@
 		font-weight: 600;
 		float:right;
 		width:20%;
-		margin-right:5px;
+		margin-right:12px;
 	}
 
 	.select2-container--default .select2-selection--single {
@@ -175,9 +175,9 @@
 		}
 
 		.filter-area-styles {
-			-webkit-transition: height 2s;
-			-moz-transition: height 2s;
-			transition: height 2s;
+			-webkit-transition: height 1s;
+			-moz-transition: height 1s;
+			transition: height 1s;
 			overflow: hidden;
 		}
 
@@ -279,11 +279,7 @@
 			.slide-in{
 				margin-left: 0;
 			}
-			.left-path{
-				padding-left: 0;
-				margin-top: 25px;
-				margin-left: 15px;
-			}
+
 		}
 		.col-md-9{
 			padding:15px;
@@ -291,6 +287,7 @@
 				padding: 0;
 				.sort{
 					width: 55%;
+					margin-right: 0;
 				}
 			}
 
@@ -304,6 +301,11 @@
 	  }
 	}
 
+	.left-path{
+		padding-left: 0;
+		margin-top: 25px;
+		margin-left: 60px;
+	}
 }
 
 .on-sale * {
