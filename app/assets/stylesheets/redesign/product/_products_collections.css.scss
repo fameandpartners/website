@@ -105,16 +105,16 @@
 	    margin-right: 10px;
 	    cursor: pointer;
 	}
-	.thumbtrue{
+	.thumb-true{
 		background-color: black;
 		background-image: url(product-collections/check.png);
 		background-size: contain;
 	}
-	.thumbfalse{
+	.thumb-false{
 		background-color: #E0E0E0;
 	}
 
-	.colorCheckboxes{
+	.color-checkboxes{
 		.Green{
 			background-color: green !important;
 		}
@@ -150,27 +150,74 @@
 		}
 	}
 
-	.showMoreStyles{
+	.show-more-styles{
 		text-align: center;
     	background-color: #E8E8E8;
     	cursor: pointer;
     	font-weight: 600;
 	}
 
-	.filterCol{
+	.filter-col{
 		.inner{
 			padding-top:20px;
 			padding-left: 15px;
 			width: 65%;
 			margin-left: 10%;
 		}
+
+
+		.filter-area {
+			margin-top: 10px;
+			padding-bottom:10px;
+			input {
+				margin-right: 5px;
+			}
+		}
+
+		.filter-area-styles {
+			-webkit-transition: height 2s;
+			-moz-transition: height 2s;
+			transition: height 2s;
+			overflow: hidden;
+		}
+
+		.short-height {
+			height: 270px;
+		}
+
+		.full-height {
+			height: 1100px;
+		}
+
+		.filter-rect {
+			background-color: #E8E8E8;
+			margin-bottom: 15px;
+			.filter-text{
+				margin-left:25px;
+			}
+			.clear-all{
+				float:right;
+				margin-right: 10px;
+				cursor: pointer;
+			}
+			.filter-icon{
+				background-image: url(product-collections/filter_icon.png);
+				width: 15px;
+			    height: 12px;
+			    margin-left: 5px;
+			    position: absolute;
+			    margin-top: 7px;
+			    background-size: contain;
+			}
+		}
+
 	}
 
 	@media(max-width: $bootstrap-md-width){
 		.container-fluid{
 			padding:0;
 
-			.filterIconMobile{
+			.filter-icon-mobile{
 			    background-image: url(product-collections/filter_icon.png);
 			    background-size: contain;
 			    width: 15px;
@@ -179,10 +226,10 @@
 			    position: absolute;
 			    margin-top: 6px;
 			}
-			.filterMobileText{
+			.filter-mobile-text{
 				margin-left: 20px;
 			}
-			.filterCol{
+			.filter-col{
 				background-color: white;
 			    z-index: 102;
 			    position: fixed;
@@ -197,18 +244,18 @@
 			    	padding-left: 0;
 			    	width: 100%;
 			    	margin-left: 0;
-			    	.threeFilters{
+			    	.three-filters{
 			    		margin-left: 20px;
 			    		padding-right: 20px;
 			    	}
-			    	.filterRect{
+			    	.filter-rect{
 			    		height: 50px;
-			    		.filterText{
+			    		.filter-text{
 			    			float: left;
 			    			margin-top: 12px;
 			    			margin-left: 40px;
 			    		}
-			    		.clearAll{
+			    		.clear-all{
 			    			margin-top: 12px;
 			    		}
 			    		.close{
@@ -226,7 +273,7 @@
 						    cursor: pointer;
 						    margin-right: -1px;
 			    		}
-			    		.filterIcon{
+			    		.filter-icon{
 						    background-image: url(product-collections/filter_icon.png);
 						    background-size: contain;
 						    width: 15px;
@@ -251,10 +298,10 @@
 			    border-color: #B4B4B4;
 			    border-style: solid;
 			}
-			.slideIn{
+			.slide-in{
 				margin-left: 0;
 			}
-			.leftPath{
+			.left-path{
 				padding-left: 0;
 				margin-top: 25px;
 				margin-left: 15px;
@@ -272,6 +319,11 @@
 		}
 
 
+	}
+	.col-md-4 {
+	  .express-delivery {
+	  	top:20px;
+	  }
 	}
 
 }
@@ -368,11 +420,7 @@
 	left: 15px;
 }
 
-.col-md-4 {
-  .express-delivery {
-  	top:20px;
-  }
-}
+
 
 li.select2-results__option {
 	background-color: #f5f5f5 ;
@@ -388,51 +436,6 @@ li.select2-results__option {
 
 .category-header, .category-header:after {
 	background-color: #eeddf0;
-}
-
-.filterArea {
-	margin-top: 10px;
-	padding-bottom:10px;
-	input {
-		margin-right: 5px;
-	}
-}
-
-.filterAreaStyles {
-	-webkit-transition: height 2s;
-	-moz-transition: height 2s;
-	transition: height 2s;
-	overflow: hidden;
-}
-
-.shortHeight {
-	height: 270px;
-}
-
-.fullHeight {
-	height: 1100px;
-}
-
-.filterRect {
-	background-color: #E8E8E8;
-	margin-bottom: 15px;
-	.filterText{
-		margin-left:25px;
-	}
-	.clearAll{
-		float:right;
-		margin-right: 10px;
-		cursor: pointer;
-	}
-	.filterIcon{
-		background-image: url(product-collections/filter_icon.png);
-		width: 15px;
-	    height: 12px;
-	    margin-left: 5px;
-	    position: absolute;
-	    margin-top: 7px;
-	    background-size: contain;
-	}
 }
 
 
