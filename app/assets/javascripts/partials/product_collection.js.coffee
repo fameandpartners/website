@@ -116,12 +116,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     if (isColorCheckbox && !isSelect) || isShapeCheckbox || isStyleCheckbox
       checked = $(e.target).hasClass("thumb-true")
-      if checked
-        $(e.target).removeClass("thumb-true")
-        $(e.target).addClass("thumb-false")
-      else
-        $(e.target).removeClass("thumb-false")
-        $(e.target).addClass("thumb-true")
+      $(e.target).toggleClass("thumb-true thumb-false")
 
     if isColorCheckbox && !isSelect
       if name == 'all'
