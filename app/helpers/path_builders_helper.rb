@@ -55,13 +55,14 @@ module PathBuildersHelper
   #  name - id
   def collection_product_path(product, options = {})
     site_version_prefix = options.delete(:site_version) || self.url_options[:site_version]
-    path_parts = [site_version_prefix, 'dresses']
-    locale = I18n.locale.to_s.downcase.underscore.to_sym
+    product_type        = options.delete(:product_type) || 'dress'
+    path_parts          = [site_version_prefix, 'dresses']
+    locale              = I18n.locale.to_s.downcase.underscore.to_sym
 
     if product.is_a?(Tire::Results::Item) && product[:urls][locale].present?
-      path_parts << "dress-#{product[:urls][locale]}"
+      path_parts << "#{product_type}-#{product[:urls][locale]}"
     else
-      path_parts << "dress-#{descriptive_url(product)}"
+      path_parts << "#{product_type}-#{descriptive_url(product)}"
     end
 
     if options[:color].nil? && product.respond_to?(:color) && product.color.try(:name)

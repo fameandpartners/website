@@ -93,7 +93,11 @@ FameAndPartners::Application.routes.draw do
 
     get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
 
-    #edits
+    # Lookbooks
+    # # Note: this 302 redirection is used on widgets, and it can change in the future. This should stay as a temporary redirection.
+    # # Widgets are iframes, and every href have no follows.
+    get '/lookbook' => redirect('/lookbook/the-luxe-collection', :status => 302), as: :lookbook
+
     get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
 
     get '/lookbook/garden-weeding' => redirect('/lookbook/garden-wedding')
@@ -154,15 +158,15 @@ FameAndPartners::Application.routes.draw do
       # Colors should behave like query strings, and not paths
       get '/dress-:product_slug/:color' => redirect { |params, req| "/dresses/dress-#{params[:product_slug]}?#{req.params.except(:product_slug, :site_version).to_query}" }
       get '/dress-:product_slug' => 'products/details#show'
+      get '/outerwear-:product_slug', to: 'products/details#show', as: :outerwear_details
 
       #roots categories
       get '/style',  to: redirect('/dresses')
       get '/style/:taxon', to: redirect('/dresses/%{taxon}')
       get '/event',  to: redirect('/dresses')
       get '/event/:taxon', to: redirect('/dresses/%{taxon}')
-      get '/sale-(:sale)' => 'products/collections#show', as: "dresses_on_sale"
+      get '/sale-(:sale)' => 'products/collections#show', as: 'dresses_on_sale'
       get '/*permalink' => 'products/collections#show', as: 'taxon'
-      get 't/*id', :to => 'taxons#show', :as => :dress_nested_taxons
     end
 
     # Custom Dresses
@@ -202,10 +206,10 @@ FameAndPartners::Application.routes.draw do
     # eo account settings
 
     resources :product_reservations, only: [:create]
-  end
 
-  # Old Blog Redirection (30/06/2015)
-  get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
+    # Old Blog Redirection (30/06/2015)
+    get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
+  end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
     # Static pages
@@ -350,9 +354,6 @@ FameAndPartners::Application.routes.draw do
 
       resources :products do
         resources :customisation_values
-      end
-
-      resources :products do
         resources :moodboard_items do
           collection do
             post :update_positions, as: :update_positions
@@ -370,7 +371,8 @@ FameAndPartners::Application.routes.draw do
 
       get 'modals' => 'modals#index'
 
-      get "search/order_owners" => 'search#order_owners'
+      get 'search/order_owners' => 'search#order_owners'
+      get 'search/outerwear' => 'products#search_outerwear', as: :search_outerwear
 
       resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
         scope module: :celebrity do

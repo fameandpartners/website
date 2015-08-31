@@ -8,7 +8,7 @@ Spree::CheckoutController.class_eval do
     prepend_view_path Rails.root.join('app/views/checkout/v1')
   end
 
-  layout 'redesign/application_simple'
+  layout 'redesign/checkout'
 
   # update - address/payment
   def update

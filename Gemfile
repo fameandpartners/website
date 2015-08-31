@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', :github => 'rails/rails', :branch => '3-2-stable'
+gem 'rails', '~> 3.2.22'
 gem 'pg'
 gem 'slim'
 gem 'slim-rails'
@@ -44,6 +44,7 @@ gem 'active_link_to'
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'droidcss'
+gem 'react-rails', '~> 1.2'
 
 # Data
 gem 'event_sourced_record'
@@ -71,9 +72,9 @@ gem 'spree_banner', '~> 1.3.0'
 
 # spree extensions for authentication
 gem 'spree_auth_devise',
-  :github => 'spree/spree_auth_devise',
-  :branch => '1-3-stable',
-  :ref => 'c4466de3748618971dc401e6e30c0d87f2b9c143'
+    :github => 'spree/spree_auth_devise',
+    :branch => '1-3-stable',
+    :ref => 'c4466de3748618971dc401e6e30c0d87f2b9c143'
 
 gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
 
@@ -81,9 +82,9 @@ gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
 # spree extensions for payments
 gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
 gem 'spree_paypal_express',
-  github: 'evgeniypetrov/better_spree_paypal_express',
-  branch: '1-3-stable',
-  ref: '478b27281f7ed806df5ae86a41f9890595f8d242'
+    github: 'evgeniypetrov/better_spree_paypal_express',
+    branch: '1-3-stable',
+    ref: '478b27281f7ed806df5ae86a41f9890595f8d242'
 
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 
@@ -107,7 +108,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'coffee-script-source', "~> 1.8.0"
   gem 'uglifier', '1.3.0'
-  gem 'execjs', '1.4.0'
+  gem 'execjs', "~> 2"
   gem 'jquery-ui-rails'
   gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
@@ -115,13 +116,11 @@ group :assets do
 end
 
 group :assets, :development, :test do
-  gem 'test-unit'  
+  gem 'test-unit'
 end
 
 group :development, :test do
   gem 'awesome_print'
-  gem 'capistrano', '2.15.4', require: false
-  gem 'capistrano-rbenv', '0.0.10', require: false
   gem 'capybara'
   gem 'compass'
   gem 'database_cleaner', '0.9.1'
@@ -138,9 +137,10 @@ group :development, :test do
   gem 'rspec-collection_matchers'
   gem 'rspec-rails', '~> 3.2'
   gem 'shoulda-matchers'
+  gem 'timecop'
   gem 'spring'
   gem 'thin'
-
+  gem 'meta_request'
 end
 
 group :staging, :development do

@@ -21,6 +21,18 @@ ruby:
     |   checkout_page.updateStatesVisibility('##{ country_field_id }', '##{ field_id }', '##{state_text_field_id}');
     | });
 
+/ TODO - Temporary workaround to show the 'Address Details heading inside the form
+/ until we move the shipping form first and change the JS to copy billing address from shipping instead.
+/  - Note that Pin requires the billing address data, so we can't just drop the billing form.
+
+- if address_type == 'billing'
+  .row
+    .col-md-12.form-group
+      = form.label :email, with_required_mark(t(:email))
+      = form.text_field :email, class: 'required form-control form-control-md', value: form.object.email, required: 'required'
+  / Temporary location for heading.
+  h2.checkout-section-title 2. Address Details
+
 .row
   .col-md-6.form-group
     = form.label :firstname, with_required_mark(t(:first_name))
@@ -28,16 +40,6 @@ ruby:
   .col-md-6.form-group
     = form.label :lastname, with_required_mark(t(:last_name))
     = form.text_field :lastname, class: 'required form-control form-control-md', value: last_name, required: 'required'
-
-.row
-  .col-md-12.form-group
-    = form.label :email, with_required_mark(t(:email))
-    = form.text_field :email, class: 'required form-control form-control-md', value: form.object.email, required: 'required'
-
-  - if Spree::Config[:company]
-    .col-md-12.form-group
-      = form.label :company, t(:company)
-      = form.text_field :company, class: 'form-control form-control-md'
 
 .row
   .col-md-12.form-group
@@ -55,14 +57,6 @@ ruby:
     = form.label :city, with_required_mark(t(:city))
     = form.text_field :city, class: 'required form-control form-control-md', required: 'required'
 
-  .col-md-4.form-group
-    = form.label :country_id, with_required_mark(t(:country))
-    select id=(country_field_id) name="#{form.object_name}[country_id]" class="form-control form-control-md selectbox"
-      - available_countries_for_current_zone.each do |country|
-        option selected=(address.country_id == country.id) value=(country.id) data-states-required=(country.states_required ? 'required' : nil)
-          = country.name
-    /= form.select :country_id, available_countries_for_current_zone, :id, :name, {}, {:class => 'required form-control form-control-md selectbox'}
-
   .col-md-4.form-group class=(address.country.states_required ? '' : 'hidden')
     = form.label :state, with_required_mark(t(:state))
     span.states_selector_container  class=(have_states ? 'required' : 'hidden')
@@ -75,9 +69,16 @@ ruby:
                       :class => !have_states ? 'required  form-control form-control-md' : 'hidden  form-control form-control-md',
                       :disabled => have_states)
 
+  .col-md-4.form-group
+    = form.label :country_id, with_required_mark(t(:country))
+    select id=(country_field_id) name="#{form.object_name}[country_id]" class="form-control form-control-md selectbox"
+      - available_countries_for_current_zone.each do |country|
+        option selected=(address.country_id == country.id) value=(country.id) data-states-required=(country.states_required ? 'required' : nil)
+          = country.name
+
 .row
   .col-md-6.form-group
-    = form.label :phone, with_required_mark(t(:phone))
+    = form.label :phone, with_required_mark(t(:phone_number))
     = form.phone_field :phone, class: 'required form-control form-control-md', required: 'required'
 
   .col-md-6.form-group

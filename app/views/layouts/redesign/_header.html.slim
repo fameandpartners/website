@@ -79,12 +79,12 @@ ruby:
 
           .masthead.pull-left.hidden-xs
             = link_to root_path
-              = image_tag src='new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
+              = image_tag src='logo/new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
 
 
           .masthead.pull-left.visible-xs
             = link_to root_path do
-              = image_tag src='logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
+              = image_tag src='logo/logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
 
           ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
             = render partial: 'layouts/redesign/mega_menu/shop'
@@ -120,7 +120,7 @@ ruby:
                             button.invis-fix Enter
 
             li#cart-trigger.menu-item
-              = link_to spree.checkout_path, class: 'menu-item--link' do
+              = link_to '#', class: 'menu-item--link' do
                 span
                   = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
                   span#cart-item-count 0
@@ -130,51 +130,64 @@ ruby:
     - unless disable_notices?
       = render 'layouts/redesign/notices'
 
-#sideMenu
-  nav.navbar.navbar-default.visible-xs.visible-sm
-    .navbar-header
-      a.navbar-brand href="#"  SHOP
-      a#close
-        = image_tag('Hamburger.svg', height: '25px')
-    .main-menu
-      ul.nav.navbar-nav
-        li
-          a
-            | EVENTS
-            span.arrow
-              = image_tag('icon-arrow-right.png')
-          ul.dropdown-menu.mobileAnimation
-            = render :partial => '/layouts/redesign/event'
-        li
-          a
-            | STYLES
-            span.arrow
-              = image_tag('icon-arrow-right.png')
-          ul.dropdown-menu.mobileAnimation
-            = render :partial => '/layouts/redesign/style'
-        li
-          a
-            | COLORS
-            span.arrow
-              = image_tag('icon-arrow-right.png')
-          ul.dropdown-menu.mobileAnimation
-            = render :partial => '/layouts/redesign/color'
-        li
-          a
-            | EXPRESS MAKING
-            span.arrow
-              = image_tag('icon-arrow-right.png')
-          ul.dropdown-menu.mobileAnimation
-            li = link_to 'Dresses made in 48 hours', fast_making_dresses_path
-      .all-dresses
-        center
-          = button_to 'View all dresses', dresses_path, class: 'btn btn-block btn-black', method: :get
-      .clearfix
-      .account-login
-        = link_to profile_path, class: "menu-item--link active-hover", rel: 'nofollow' do
-          = image_tag "_icons/my-account.svg", class: 'nav-mobile-logo', alt: 'my account'
-          span
-            | Account login
+- cache [:layout, :side_menu, spree_user_signed_in?, @locale_warning.cache_key], expires_in: configatron.cache.expire.long do
+  #sideMenu
+    nav.navbar.navbar-default.visible-xs.visible-sm
+      .navbar-header
+        a.navbar-brand href="#"  SHOP
+        a#close
+          = image_tag('Hamburger.svg', height: '25px')
+      .main-menu
+        ul.nav.navbar-nav
+          li
+            a
+              | EVENTS
+              span.arrow
+                = image_tag('icon-arrow-right.png')
+            ul.dropdown-menu.mobileAnimation
+              = render :partial => '/layouts/redesign/event'
+          li
+            a
+              | STYLES
+              span.arrow
+                = image_tag('icon-arrow-right.png')
+            ul.dropdown-menu.mobileAnimation
+              = render :partial => '/layouts/redesign/style'
+          li
+            a
+              | COLORS
+              span.arrow
+                = image_tag('icon-arrow-right.png')
+            ul.dropdown-menu.mobileAnimation
+              = render :partial => '/layouts/redesign/color'
+          li
+            a
+              | EXPRESS MAKING
+              span.arrow
+                = image_tag('icon-arrow-right.png')
+            ul.dropdown-menu.mobileAnimation
+              li = link_to 'Dresses made in 48 hours', fast_making_dresses_path
+          li
+            a
+              | LOOKBOOK
+              span.arrow
+                = image_tag('icon-arrow-right.png')
+            ul.dropdown-menu.mobileAnimation
+              li = link_to 'The Luxe Collection', luxe_collection_path
+              li = link_to 'Bohemian Summer', bohemian_summer_collection_path
+              li = link_to 'Besties and Bridesmaids Collection', bridesmaid_collection_path
+              li = link_to "I'll Have What She's Having", all_size_collection_path
+              li = link_to 'Here Comes The Sun', here_comes_the_sun_collection_path
+
+        .all-dresses
+          center
+            = button_to 'View all dresses', dresses_path, class: 'btn btn-block btn-black', method: :get
+        .clearfix
+        .account-login
+          = link_to profile_path, class: "menu-item--link active-hover", rel: 'nofollow' do
+            = image_tag "_icons/my-account.svg", class: 'nav-mobile-logo', alt: 'my account'
+            span
+              | Account login
 
 
 

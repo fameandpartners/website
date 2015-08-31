@@ -1,3 +1,5 @@
+@import 'media_queries';
+
 .list-group-item.customization-option  {
 
 	img {
@@ -318,3 +320,21 @@
 }
 
 .sc-player { display: none; }
+
+.dress-more {
+  .col-centered {
+    display: inline-block;
+    float: none;
+    // reset the text-align
+    text-align: left;
+
+    // Restore float left on mobile devices, due to bootstrap grid stacking
+    @include mobile {
+      float: left;
+    }
+
+    @include tablet {
+      float: left;
+    }
+  }
+}

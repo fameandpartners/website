@@ -1,5 +1,10 @@
 AdminUi::Engine.routes.draw do
   resources :return_requests
+  resources :preferences, only: :index do
+    collection do
+      put 'update'
+    end
+  end
 
   namespace :reports do
     root to: 'dashboard#index'
@@ -7,10 +12,15 @@ AdminUi::Engine.routes.draw do
     resource :sale_items,             :only => [:show, :create]
     resource :coupon_adjusted_orders, :only => [:show, :create]
     resource :order_totals,           :only => [:show, :create]
+    resource :return_shoppers,        :only => [:show, :create]
   end
 
-  resources :caches, only: [:index, :destroy] do
+  resources :caches, only: [:index, :destroy, :show] do
     delete :expire, :on => :collection
+  end
+
+  namespace :content do
+    resources :pages
   end
 
   require 'sidekiq/web'

@@ -441,6 +441,9 @@
   display: inline;
   float: none;
   margin-right: 1px;
+  a {
+    color: lightgrey;
+  }
 }
 
 .rslides_tabs a {
@@ -459,9 +462,5 @@
 .rslides_tabs .rslides_here a {
   color: grey;
   font-weight: bold;
-}
-
-a {
-  color: grey;
   text-decoration: none;
 }

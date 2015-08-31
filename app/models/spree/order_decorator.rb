@@ -240,10 +240,6 @@ Spree::Order.class_eval do
         else
           current_item.price = price.amount
         end
-        #current_item.price       = price.final_amount(is_surryhills?(variant))
-        #if variant.in_sale?
-        #  current_item.old_price = price.amount_without_discount
-        #end
       else
         if variant.in_sale?
           current_item.price = price.apply(variant.discount).amount
@@ -251,10 +247,6 @@ Spree::Order.class_eval do
         else
           current_item.price = price.amount
         end
-        #current_item.price       = price.final_amount(is_surryhills?(variant))
-        #if variant.in_sale?
-        #  current_item.old_price = price.price_without_discount
-        #end
       end
       self.line_items << current_item
     end
@@ -376,14 +368,6 @@ Spree::Order.class_eval do
       return 18
     else
       return 14
-    end
-  end
-
-  def is_surryhills?(item)
-    if item.product_factory_name == "surryhills"
-      return true
-    else
-      return false
     end
   end
 

@@ -1,6 +1,4 @@
-<h3 class="text-center">
-  Cart: <%= @cart.item_count %>
-</h3>
+<h3><i class="icon icon-shopping-bag-check"></i>Order summary</h3>
 <ul class="cart-items">
   <% for product in @cart.products: %>
     <li class="cart-item" data-id="<%= product.line_item_id %>">
@@ -12,11 +10,11 @@
       </div>
       <div class="cart-item-info">
         <div class="heading">
-          <span class="qty"><%= product.quantity %> x </span>
+          <span class="qty"><%= product.quantity %> &times; </span>
           <a href="<%= product.path %>" class="cart-item-title"><%= product.name %></a>
         </div>
       </div>
-      <div class="clearfi">
+      <div class="clearfix">
         <div class="pull-left small">
           Size: <span><%= product.size.presentation %>,</span>
           Color: <span class="color"><%= product.color.presentation %></span>
@@ -39,6 +37,14 @@
     </li>
   <% end %>
 </ul>
+
+<form class="promo-code" action="#">
+  <label for="#promo-code" class="invisible">Promo Code</label>
+  <div class="input-group">
+    <input class="form-control form-control-md" id="promo-code" type="text" placeholder="Discount code"><span class="input-group-btn"><button class="btn btn-block btn-black btn-md promo-code-apply">Apply</button></span>
+  </div>
+</form>
+
 <p>
   Sub Total<span class="pull-right"><%= @cart.display_item_total %></span>
 </p>

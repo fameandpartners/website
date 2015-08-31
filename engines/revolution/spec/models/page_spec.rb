@@ -9,6 +9,24 @@ describe Revolution::Page do
 
   it { is_expected.to validate_presence_of :path }
 
+  describe '.find_for' do
+    context 'published' do
+      before do
+        page.publish!(1.day.ago)
+      end
+      it 'should handle multiple paths' do
+        found = Revolution::Page.find_for('/aguirre','/blah/vtha')
+        expect(found).to eq page
+      end
+    end
+
+    context 'not published' do
+      it 'should find no thing' do
+        expect(Revolution::Page.find_for('/blah/vtha')).to be_blank
+      end
+    end
+  end
+
   describe 'Publishing' do
 
     context 'when published' do
@@ -76,36 +94,14 @@ describe Revolution::Page do
     end
   end
 
-  describe 'find_for' do
-    context 'published' do
-      before do
-        page.publish!(1.day.ago)
-      end
-      it 'should handle multiple paths' do
-        found = Revolution::Page.find_for('/aguirre','/blah/vtha')
-        expect(found).to eq page
-      end
-    end
-
-    context 'not published' do
-      it 'should find no thing' do
-        expect(Revolution::Page.find_for('/blah/vtha')).to be_blank
-      end
-    end
-  end
-
   describe 'Parent/Childs' do
+    let!(:child_page) { Revolution::Page.create!(:parent => page, :path => "#{path}/vtha") }
 
-    let(:child_page)  { Revolution::Page.create!(:parent => page, :path => "#{path}/vtha") }
-
-    before do
-      page.reload
-    end
+    before { page.reload }
 
     it { expect(child_page.parent).to eq page }
     it { expect(page.children_count).to eq 1 }
     it { expect(child_page.depth).to eq 1 }
-
   end
 
   describe 'translations' do
@@ -131,5 +127,4 @@ describe Revolution::Page do
       end
     end
   end
-
 end

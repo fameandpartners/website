@@ -413,6 +413,7 @@ ActiveRecord::Schema.define(:version => 20150830020807) do
   end
 
   add_index "discounts", ["discountable_id", "discountable_type"], :name => "index_discounts_on_discountable_id_and_discountable_type"
+  add_index "discounts", ["discountable_type", "discountable_id", "sale_id"], :name => "index_discounts_on_discountable_and_sale_id", :unique => true
   add_index "discounts", ["sale_id"], :name => "index_discounts_on_sale_id"
 
   create_table "email_notifications", :force => true do |t|
@@ -834,12 +835,15 @@ ActiveRecord::Schema.define(:version => 20150830020807) do
     t.string   "event_name"
     t.string   "type"
     t.integer  "usage_limit"
-    t.string   "match_policy", :default => "all"
+    t.string   "match_policy",             :default => "all"
     t.string   "code"
-    t.boolean  "advertise",    :default => false
+    t.boolean  "advertise",                :default => false
     t.string   "path"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "eligible_to_custom_order", :default => false
+    t.boolean  "eligible_to_sale_order",   :default => false
+    t.boolean  "require_shipping_charge",  :default => false
   end
 
   create_table "spree_addresses", :force => true do |t|
@@ -1218,6 +1222,14 @@ ActiveRecord::Schema.define(:version => 20150830020807) do
   end
 
   add_index "spree_product_properties", ["product_id"], :name => "index_product_properties_on_product_id"
+
+  create_table "spree_product_related_outerwear", :force => true do |t|
+    t.integer "outerwear_id"
+    t.integer "product_id"
+  end
+
+  add_index "spree_product_related_outerwear", ["outerwear_id", "product_id"], :name => "spree_product_related_outerwear_unique_index", :unique => true
+  add_index "spree_product_related_outerwear", ["product_id"], :name => "index_spree_product_related_outerwear_on_product_id"
 
   create_table "spree_products", :force => true do |t|
     t.string   "name",                 :default => "",     :null => false

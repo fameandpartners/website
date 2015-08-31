@@ -1,0 +1,16 @@
+h2.checkout-section-title 3. Choose your payment method
+/ TODO - Rewrite as react component with new button layout and behaviour
+p All transactions are secure and encrypted. Credit card information is never stored.
+
+#payment-selection.panel-group aria-multiselectable="false" role="tablist"
+  - @order.available_payment_methods.each do |method|
+    = render :partial => "spree/checkout/payment/#{method.method_type}", :locals => { :payment_method => method }
+
+p
+    ' By making this purchase you are agreeing to the Fame & Partners
+    a href="/terms.html" Term & Conditions.
+
+.row
+  .col-md-12
+    = link_to '< Return to your information', checkout_state_path('address'), :remote => false, class: 'edit'
+

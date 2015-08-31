@@ -3,7 +3,7 @@ doctype html
   head
     = render 'layouts/head'
     = csrf_meta_tags
-    = render 'shared/tracking/google_analytics'
+    = render 'marketing/trackers/google_analytics'
 
     - if content_for?(:payment_gateway)
       = yield :payment_gateway

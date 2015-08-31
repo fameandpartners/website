@@ -26,6 +26,17 @@ class ApplicationController < ActionController::Base
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
   before_filter :set_locale
 
+
+  helper_method :analytics_label,
+                :current_user_moodboard,
+                :current_wished_product_ids,
+                :custom_dresses_path,
+                :default_meta_description,
+                :default_seo_title,
+                :get_user_type,
+                :serialize_user,
+                :serialized_current_user
+
   def count_competition_participants
     cpt = params[:cpt]
     session[:cpts] ||= []
@@ -111,10 +122,6 @@ class ApplicationController < ActionController::Base
     )
   end
 
-  helper_method :default_seo_title, :default_meta_description
-
-  helper_method :analytics_label, :get_user_type
-
   def url_options
     version = current_site_version
 
@@ -140,7 +147,7 @@ class ApplicationController < ActionController::Base
   end
 
   def default_seo_title
-    Spree::Config[:default_seo_title]
+    Preferences::Titles.new(current_site_version).default_seo_title
   end
 
   def default_meta_description
@@ -174,22 +181,6 @@ class ApplicationController < ActionController::Base
   rescue Exception => e
     return ''
   end
-
-  def step1_custom_dresses_path(options = {})
-    main_app.step1_custom_dresses_path(options.merge(user_addition_params))
-  end
-
-  def step2_custom_dress_path(object, options = {})
-    main_app.step2_custom_dress_path(object, options.merge(user_addition_params))
-  end
-
-  def success_custom_dress_path(object, options = {})
-    main_app.success_custom_dress_path(object, options.merge(user_addition_params))
-  end
-
-  helper_method :step1_custom_dresses_path,
-                :step2_custom_dress_path,
-                :success_custom_dress_path
 
   def user_addition_params
     addition_params = {}
@@ -225,8 +216,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :current_wished_product_ids
-
   def serialized_current_user
     if spree_user_signed_in?
       serialize_user(spree_current_user)
@@ -234,8 +223,6 @@ class ApplicationController < ActionController::Base
       {}
     end
   end
-
-  helper_method :serialized_current_user, :serialize_user
 
   def serialize_user(user)
     {
@@ -274,7 +261,6 @@ class ApplicationController < ActionController::Base
   def custom_dresses_path
     main_app.personalization_path
   end
-  helper_method :custom_dresses_path
 
   def set_product_show_page_title(product, info = "")
     prefix = "#{product.short_description} #{info} #{product.name}"
@@ -297,7 +283,6 @@ class ApplicationController < ActionController::Base
   def current_user_moodboard
     @user_moodboard ||= UserMoodboard::BaseResource.new(user: current_spree_user).read
   end
-  helper_method :current_user_moodboard
 
   # todo: remove this method from global scope
   def get_recommended_products(product, options = {})

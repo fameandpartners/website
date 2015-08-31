@@ -7,7 +7,7 @@ class FameChainMailer < ActionMailer::Base
     @fame_chain = model
 
     mail(
-      to: 'team@fameandpartners.com',
+      to: 'famechain@fameandpartners.com',
       from: @fame_chain.email,
       subject: 'Fame Chain'
     )

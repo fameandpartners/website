@@ -5,6 +5,11 @@ Spree::AppConfiguration.class_eval do
 
   # Site Version preferences
   SiteVersion.find_each do |site_version|
+    # Titles
+    titles = Preferences::Titles.new(site_version)
+    preference titles.default_seo_title_key, :string, default: ''
+    preference titles.homepage_title_key, :string, default: ''
+
     # Locale Warn
     warning = Preferences::LocaleWarn.new(site_version)
     preference warning.long_text_key, :string, default: ''
