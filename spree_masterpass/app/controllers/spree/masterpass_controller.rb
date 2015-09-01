@@ -20,17 +20,24 @@ module Spree
             item.variant.product.name + ' ' + item.variant.sku,
             item.quantity,
             (item.price * 100).round,
-            item.image.attachment.url(:product))
+            Orders::LineItemPresenter.new(item, current_order).image.attachment.url)
       end
 
       tax_adjustments = current_order.adjustments.tax
       shipping_adjustments = current_order.adjustments.shipping
 
+      subadjustments = 0
       current_order.adjustments.eligible.each do |adjustment|
-        next if tax_adjustments.include?(adjustment) || shipping_adjustments.include?(adjustment)
+        next if tax_adjustments.include?(adjustment)
+        next if !payment_method.preferred_shipping_suppression && shipping_adjustments.include?(adjustment)
 
-        items << AllServicesMappingRegistry::ShoppingCartItem.new(adjustment.label, 1, (adjustment.amount * 100).round)
+        subadjustments += adjustment.amount
+        # items << AllServicesMappingRegistry::ShoppingCartItem.new(adjustment.label, 1, (adjustment.amount * 100).round)
       end
+      if subadjustments != 0
+        items << AllServicesMappingRegistry::ShoppingCartItem.new("Adjustments", 1, (subadjustments * 100).round)
+      end
+
       items.each do |i|
         i.description = i.description[0..99] if i.description.length > 100
         i.description = i.description[0..98] if i.description.last == "&"
