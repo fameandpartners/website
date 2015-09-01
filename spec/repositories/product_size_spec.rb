@@ -8,6 +8,7 @@ module Repositories
       # Sigh
       ProductSize.instance_variable_set(:@sizes_map, nil)
       Spree::Variant.instance_variable_set(:@size_option_type, nil)
+      Spree::OptionType.instance_variable_set(:@size, nil)
     end
 
     context 'characterisation' do
@@ -39,10 +40,15 @@ module Repositories
 
         let(:expected_size) {
           OpenStruct.new(
-                      id:           existing_size.id,
-                      name:         "8",
-                      presentation: "8",
-                      value:        8)
+            id:              existing_size.id,
+            name:            "US8/AU12",
+            value:           "US8/AU12",
+            presentation:    "US 8/AU 12",
+            presentation_au: "AU 12",
+            presentation_us: "US 8",
+            sort_key:        8,
+            extra_price:     nil
+          )
         }
 
         it "class method allows access to raw OpenStruct" do
@@ -70,7 +76,7 @@ module Repositories
         end
 
         let!(:existing_size) do
-          create :product_size, size_template: 8
+          create :product_size, size_template: 7
         end
 
         describe "class /instance #read_all behaves differently" do
@@ -80,10 +86,15 @@ module Repositories
 
         it "class method allows access to raw OpenStruct" do
           size_struct = OpenStruct.new(
-            id:           existing_size.id,
-            name:         "8",
-            presentation: "8",
-            value:        8)
+            id:              existing_size.id,
+            name:            "US7/AU11",
+            value:           "US7/AU11",
+            presentation:    "US 7/AU 11",
+            presentation_au: "AU 11",
+            presentation_us: "US 7",
+            sort_key:        7,
+            extra_price:     nil
+          )
 
           expect(size_repo.class.read_all).to eq [size_struct]
         end
