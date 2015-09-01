@@ -233,9 +233,9 @@ window.inputs.ProductMakingOptionIdSelector = class ProductMakingOptionIdSelecto
 
     if @disabled
       @$action.html("Standard making 2-5 days")
-    else if data.id == 'original'
+    else if data? and data.id == 'original'
       @$action.html("Standard Making 2-5 days")
-    else if data.name
+    else if data? and data.name
       @$action.html("#{data.name} +#{data.price}")
     else
       @$action.html("Express Making")
