@@ -88,12 +88,15 @@ module Orders
     end
 
     def country_size
-      "#{order.site_version}-#{size}"
+      if size.present? 
+        size.presentation_for(site_version: (wrapped_order.order.get_site_version || SiteVersion.default))
+      else
+        'Unknown Size'
+      end
     end
 
     def make_size
-      make_size = order.site_version == 'us' ? size.to_i + 4: size
-      "au-#{make_size}"
+      size.present? ? size.au_presentation : 'Unknown Size'
     end
 
     def display_price
@@ -119,7 +122,7 @@ module Orders
     end
 
     def customisations_without_images
-      customisations.collect &:first
+      customisations.collect(&:first)
     end
 
     def personalizations?
@@ -205,9 +208,9 @@ module Orders
 
     def size
       if personalization.present?
-        personalization.size.try(:name) || 'Unknown Size'
+        personalization.size
       else
-        variant.dress_size.try(:name) || 'Unknown Size'
+        variant.dress_size
       end
     end
 

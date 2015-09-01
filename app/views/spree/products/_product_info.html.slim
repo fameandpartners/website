@@ -46,14 +46,14 @@ ruby:
       - sizes.take(6).each do |size|
         .button data-size="#{size}" data-plussize=(is_plus_size?(product).to_s) title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) ) 
           span = size
-          - if (attributes = locale_size_attributes(size)).present?
+          /- if (attributes = locale_size_attributes(size)).present?
             = render 'spree/products/size_popup', attributes: attributes, link: true, locale_code: locale_code, unit_code: locale_unit_code, unit_symbol: locale_unit_symbol
       - if dropdown_sizes(product, sizes).present?
         .dropdown-button data-open="-" data-close="+" +
         - dropdown_sizes(product, sizes).each do |size|
           .button.dropdown-size data-size="#{size}" title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) ) 
             span = size
-            - if (attributes = locale_size_attributes(size)).present?
+            /- if (attributes = locale_size_attributes(size)).present?
               = render 'spree/products/size_popup', attributes: attributes, link: true, locale_code: locale_code, unit_code: locale_unit_code, unit_symbol: locale_unit_symbol
   .section.buy-button-section
     .btn.empty.border.striped.error.message style="display: none;" PLEASE SELECT A SIZE

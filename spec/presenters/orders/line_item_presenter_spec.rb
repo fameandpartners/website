@@ -53,30 +53,20 @@ module Orders
     describe '#size' do
       it 'reverts to unknown for missing dress sizes' do
         item      = double 'item', personalization: nil, variant: double(dress_size: nil)
-        order     = double 'order', site_version: 'SITE'
+        order     = double 'order'
         presenter = described_class.new(item, order)
-        expect(presenter.country_size).to eq 'SITE-Unknown Size'
+        expect(presenter.country_size).to eq 'Unknown Size'
       end
     end
 
-    describe '#make_size' do
-      let(:size)      { double(:size, name: '8')}
-      let(:item)      { double 'item', personalization: nil, variant: double(:dress_size => size) }
-      let(:order)     { double 'order', site_version: site_version }
+    describe "#make_size" do
+      let(:size)      { double('size', name: '8', au_presentation: 'au-8') }
+      let(:item)      { double 'item', personalization: nil, variant: double(dress_size: size) }
+      let(:order)     { double 'order' }
       let(:presenter) { described_class.new(item, order) }
 
-      context 'us' do
-        let(:site_version) { 'us' }
-        it 'maps to correct au size' do
-          expect(presenter.make_size).to eq 'au-12'
-        end
-      end
-
-      context 'au' do
-        let(:site_version) { 'au' }
-        it 'maps to correct au size' do
-          expect(presenter.make_size).to eq 'au-8'
-        end
+      it "renders au presenation of size" do
+        expect(presenter.make_size).to eq 'au-8'
       end
     end
 

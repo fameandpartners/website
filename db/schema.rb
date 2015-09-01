@@ -1054,6 +1054,7 @@ ActiveRecord::Schema.define(:version => 20150826171400) do
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
+    t.string   "type"
     t.boolean  "use_in_customisation", :default => false
   end
 

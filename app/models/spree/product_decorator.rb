@@ -351,6 +351,15 @@ Spree::Product.class_eval do
     @discount = Repositories::Discount.get_product_discount(self.id)
   end
 
+  def has_free_extra_sizes?
+    return @has_free_extra_sizes if instance_variable_defined?('@has_free_extra_sizes')
+
+    @has_free_extra_sizes = begin
+      taxon = Repositories::Taxonomy.get_taxon_by_name('Plus Size')
+      Spree::Classification.where(product_id: self.id, taxon_id: taxon.id ).exists?
+    end
+  end
+
   private
 
   def build_variants_from_option_values_hash
@@ -362,7 +371,7 @@ Spree::Product.class_eval do
       values = colors.product(sizes.map(&:id))
 
       values.each do |ids|
-        variant = variants.create({
+        variants.create({
           :option_value_ids => ids,
           :price => master.price,
           :on_demand => true

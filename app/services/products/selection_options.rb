@@ -65,20 +65,24 @@ class Products::SelectionOptions
     def product_sizes
       @product_sizes ||= begin
         Repositories::ProductSize.new(
-          site_version: site_version,
           product: product,
           product_variants: product_variants
-        ).read_all
+        ).read_all.collect do |option_value|
+          OptionValues::ProductSizePresenter.new(
+            option_value: option_value,
+            product: product,
+            site_version: site_version
+          )
+        end
       end
     end
 
     def default_product_sizes
-      product_sizes.select{|size| size.extra_price.blank? }
+      product_sizes.select(&:default_price?)
     end
 
     def extra_product_sizes
-      return [] unless extra_sizes_available?
-      product_sizes.select{|size| size.extra_price.present? }
+      extra_sizes_available? ? product_sizes.select(&:extra_price?) : []
     end
     # end
 

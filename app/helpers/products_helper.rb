@@ -1,16 +1,4 @@
 module ProductsHelper
-=begin
-  def product_style_and_event(product)
-    result = []
-    style_taxon = Spree::Taxonomy.where(name: "Style").first.root
-    event_taxon = Spree::Taxonomy.where(name: "Event").first.root
-    
-    result << product.taxons.where(parent_id: event_taxon.id).last
-    result << product.taxons.where(parent_id: style_taxon.id).last if result.empty?
-
-    return result
-  end
-=end
 
   def range_taxonomy
     @range_taxonomy ||= Spree::Taxonomy.where(name: 'Range').first
@@ -18,7 +6,7 @@ module ProductsHelper
 
   def range_taxon_for(product)
     return nil if range_taxonomy.blank?
-    taxon = product.taxons.first
+    product.taxons.first
   end
 
   def range_taxon_name_for(product)
@@ -448,87 +436,4 @@ module ProductsHelper
       ''
     end
   end
-
-
-  # SIZES
-  # Should be 0 2 4 6 8 10 12 14 16 18 20 22 24 26
-  # AU should be 4 6 8 10 12 14 16 18 20 22 24 26
-  # US should be 0 2 4 6 8 10 12 14 16 18 20 22
-  # AU Plus Size should be 18 20 22 24 26
-  # US Plus Size should be 14 16 18 20 22
-
-
-  def locale_sizes(product, sizes)
-    if current_site_version.is_australia?
-      if is_plus_size?(product)
-        return sizes && [18, 20, 22, 24, 26]
-      else
-        return sizes && [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
-      end
-    else
-      if is_plus_size?(product)
-        return sizes && [14, 16, 18, 20, 22]
-      else
-        return sizes && [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22]
-      end
-    end
-  end
-
-  def locale_size_attributes(size)
-    if current_site_version.is_australia?
-      SIZE_ATTRIBUTES.find_by_au_name(size.to_s)
-    else
-      SIZE_ATTRIBUTES.find_by_us_name(size.to_s)
-    end
-  end
-
-  def locale_measurement_unit
-    if current_site_version.is_australia?
-      :cm
-    else
-      :in
-    end
-  end
-
-  def dropdown_sizes(product, sizes)
-    if sizes.size < 7
-      return []
-    else
-      return sizes.from(6)
-    end
-  end
-
-  def is_plus_size?(product)
-    is_plus = product.taxons.where(:name =>"Plus Size").first
-    return true if is_plus
-  end
-=begin
-  def activity_description(activity, user)
-    if activity.info[:school_name]
-      actor_description = "Someone from #{activity.info[:school_name]}"
-    elsif (actor = activity.actor).present?
-      actor_description = actor.first_name
-    else
-      actor_description = "Someone"
-    end
-
-    action_description, action_class = case activity.action
-    when "purchased"
-      [ "purchased this item", "icon-purchase" ]
-    when "added_to_cart"
-      [ "added this item to their cart", "icon-bag" ]
-    when "added_to_wishlist"
-      [ "added this item to their moodboard", "icon-heart" ]
-    else # when 'viewed' & by default
-      [ "viewed this item", "icon-eye" ]
-    end
-
-    raw("#{content_tag(:i, '', class: 'icon ' + action_class)} #{actor_description} #{action_description} #{timeago(activity.updated_at)}")
-  end
-
-  def timeago(time, options = {})
-    options[:class] ||= "timeago"
-    content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
-  end
-=end
 end

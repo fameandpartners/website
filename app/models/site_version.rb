@@ -89,6 +89,10 @@ class SiteVersion < ActiveRecord::Base
     Spree::Country.where("lower(iso) = ?", self.code).first
   end
 
+  def default_currency
+    Spree::Config.currency
+  end
+
   def update_exchange_rate(rate = nil, options = {})
     if self.currency == Spree::Config.currency 
       puts "site version uses default currency"
@@ -145,22 +149,30 @@ class SiteVersion < ActiveRecord::Base
     #   get_exchange_rate(EUR, USD) => is EUR -> AUD -> USD
     #   base / rate_to_default_currency * rate_to_required_currency
     def get_exchange_rate(from, to)
-      rate_to_default_currency = (from == Spree::Config.currency) ? 1.0 : currency_rates[from]
+      rate_to_default_currency = (from == Spree::Config.currency) ? BigDecimal.new(1) : currency_rates[from]
       rate_to_required_currency = currency_rates[to]
 
-      return (1.0 / rate_to_default_currency) * rate_to_required_currency
-    rescue Exception => e
-      1.0
+      return (BigDecimal.new(1) / rate_to_default_currency) * rate_to_required_currency
+    rescue StandardError
+      BigDecimal.new(1)
     end
 
     def currency_rates
       @exchange_rates ||= begin
-        result = HashWithIndifferentAccess.new(){ 1.0 }
+        result = HashWithIndifferentAccess.new(){ BigDecimal.new(1) }
         SiteVersion.all.each do |site_version|
           result[site_version.currency] = site_version.exchange_rate.to_f
         end
         result
       end
+    end
+
+    def australia
+      @australia ||= SiteVersion.find_by_permalink('au')
+    end
+
+    def usa
+      @usa ||= SiteVersion.find_by_permalink('us')
     end
   end
 end

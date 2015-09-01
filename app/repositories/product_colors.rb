@@ -13,7 +13,7 @@ module Repositories
       def colors_map
         @colors_map ||= begin
           result = {}
-          Spree::OptionType.color.option_values.each do |option_value|
+          Spree::OptionValue::ProductColor.all.each do |option_value|
             result[option_value.id] = OpenStruct.new(
               id: option_value.id,
               name: option_value.name,

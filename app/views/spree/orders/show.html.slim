@@ -47,7 +47,7 @@ ruby:
                       = line_item.style_name
                     br
 
-                    ="Size:#{line_item.size}, Color: #{line_item.colour_name}"
+                    ="Size:#{line_item.size.presentation}, Color: #{line_item.colour_name}"
 
                 td data-title="status" = line_item_status(line_item)
                 td data-title="sku" = line_item.style_number

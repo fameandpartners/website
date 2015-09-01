@@ -87,7 +87,7 @@ class  UserCart::Populator
       personalization = build_personalization
       if personalization.valid?
         if line_item.blank? # user already have customized dress [ we can't have more than one personalization per dress ]
-          add_product_to_cart(ignore_stock_level = true)
+          add_product_to_cart(true)
         end
 
         if line_item.present?
@@ -112,7 +112,7 @@ class  UserCart::Populator
     def build_personalization
       LineItemPersonalization.new.tap do |item|
         item.size_id  = product_size.id
-        item['size']  = product_size.value
+        item['size']  = product_size.presentation
         item.color_id = product_color.id
         item['color'] = product_color.name
         item.customization_value_ids = product_customizations.map(&:id)
@@ -121,7 +121,7 @@ class  UserCart::Populator
     end
 
     def personalized_product?
-      product_variant.is_master? || product_color.custom || product_size.custom || product_customizations.present?
+      product_variant.is_master? || product_color.custom || product_size.extra_size? || product_customizations.present?
     end
 
     def product
@@ -143,24 +143,23 @@ class  UserCart::Populator
     def product_size
       @product_size ||= begin
         product_size_id = product_attributes[:size_id].to_i
-        if (size = product_options.sizes.default.detect{|size| size.id == product_size_id}).present?
-          size.custom = false
-        elsif (size = product_options.sizes.extra.detect{|size| size.id == product_size_id}).present?
-          size.custom = true
-        else
-          raise Errors::ProductOptionNotAvailable.new("product size ##{ product_size_id } not available")
-        end
+        size = product_options.sizes.default.detect{|s| s.id == product_size_id}
+        size ||= product_options.sizes.extra.detect{|s| s.id == product_size_id}
 
-        size
+        if size.present?
+          size
+        else
+          raise Errors::ProductOptionNotAvailable.new("product size id ##{ product_size_id } not available")
+        end
       end
     end
 
     def product_color
       @product_color ||= begin
         product_color_id = product_attributes[:color_id].to_i
-        if (color = product_options.colors.default.detect{|color| color.id == product_color_id }).present?
+        if (color = product_options.colors.default.detect{|c| c.id == product_color_id }).present?
           color.custom = false
-        elsif (color = product_options.colors.extra.detect{|color| color.id == product_color_id }).present?
+        elsif (color = product_options.colors.extra.detect{|c| c.id == product_color_id }).present?
           color.custom = true
         else
           raise Errors::ProductOptionNotAvailable.new("product color ##{ product_color_id } not available")

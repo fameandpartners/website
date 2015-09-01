@@ -3,8 +3,8 @@ class  UserCart::UserCartResource
   attr_reader :site_version, :order
 
   def initialize(options = {})
-    @site_version = options[:site_version] || SiteVersion.default
     @order        = options[:order]
+    @site_version = options[:site_version] || @order.get_site_version
   end
 
   def read
@@ -32,7 +32,7 @@ class  UserCart::UserCartResource
     def cart_products
       @cart_products ||= begin
         Spree::LineItem.includes(:personalization, :making_options, :variant => :product).where(order_id: order.id).map do |line_item|
-          Repositories::CartProduct.new(line_item: line_item).read
+          Repositories::CartProduct.new(line_item: line_item, site_version: site_version).read
         end
       end
     end

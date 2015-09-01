@@ -21,6 +21,7 @@ module FameAndPartners
       [
         "../app/**/*_decorator*.rb",
         "../app/overrides/*.rb",
+        "../app/presenters/**/*.rb",
         "../app/services/**/*.rb",
         "../app/repositories/**/*.rb",
         "../app/policies/**/*.rb"

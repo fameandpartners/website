@@ -3,15 +3,17 @@
 #
 #
 require File.join(Rails.root, 'app', 'presenters', 'user_cart', 'cart_product_presenter.rb')
+require File.join(Rails.root, 'app', 'presenters', 'option_values', 'product_size_presenter.rb')
 require File.join(Rails.root, 'app', 'models', 'customisation_value.rb')
 
 module Repositories; end
 class Repositories::CartProduct
   include Repositories::CachingSystem
-  attr_reader :line_item, :product
+  attr_reader :line_item, :product, :site_version
 
   def initialize(options = {})
     @line_item  = options[:line_item]
+    @site_version = options[:site_version] || SiteVersion.default
 
     @product = @line_item.variant.product
   end
@@ -33,7 +35,10 @@ class Repositories::CartProduct
       )
 
       if product_has_option_values?
-        result.size   = Repositories::ProductSize.read(size_id)
+        size = Repositories::ProductSize.new(product: product).read(size_id)
+        result.size = OptionValues::ProductSizePresenter.new(
+          option_value: size, product: product, site_version: site_version
+        )
         result.color  = Repositories::ProductColors.read(color_id)
         result.customizations = product_customizations.to_a
         result.making_options = product_making_options
@@ -41,10 +46,8 @@ class Repositories::CartProduct
 
       result
     end
-  #rescue
-  #  OpenStruct.new({})
   end
-  cache_results :read
+  #cache_results :read
 
   private
 
