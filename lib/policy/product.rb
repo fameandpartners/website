@@ -8,7 +8,7 @@ module Policy
     end
 
     def customisation_allowed?
-      product.discount.blank? || product.discount.customisation_allowed
+      product.discount.blank? || product.discount.customisation_allowed?
     end
   end
 end

@@ -4,7 +4,6 @@ class AddCustomisationAllowedToSale < ActiveRecord::Migration
   end
 
   def down
-    #remove_column :spree_sales, :customisation_allowed
-    remove_column :spree_sales, :allow_customisation
+    remove_column :spree_sales, :customisation_allowed
   end
 end
