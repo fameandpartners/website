@@ -1,61 +1,63 @@
 window.StyleQuiz ||= {}
 window.StyleQuiz.FbUser = class FbUser
   constructor: (opts = {}) ->
-    # init
+    @initialized = false
+    @connected = false
+    @granted_permissions = []
+    _.delay(@init, 500)
+
+  init: (opts = {}) =>
+    if typeof(FB) == 'object'
+      @getLoginStatus() unless @initialized
+    else
+      _.delay(@init, 500)
 
   getEvents: (callback) ->
     @callFacebookApi('/me/events', ['user_events'], callback)
 
   getUserProfile: (callback) ->
-    @callFacebookApi('/me', ['email,user_birthday'], callback)
+    @callFacebookApi('/me', ['email','user_birthday'], callback)
 
-  checkUserGrantedPermissions: (opts = {}) ->
-    permissions = opts.permissions
-    success_callback = opts.success
-    failure_callback = opts.failure
+  getLoginStatus: () =>
+    FB.getLoginStatus( (response) =>
+      @initialized = true
+      if (response && response.status == 'connected')
+        @connected = true
+        @loadGivenPermissions()
+    )
 
-    FB.api('/me/permissions', (data) ->
-      granted_permissions = _.chain(data.data).
+  loadGivenPermissions: () =>
+    FB.api('/me/permissions', (data) =>
+      @connected = true
+      @granted_permissions = _.chain(data.data).
         where({status: 'granted' }).
         map((i) -> i.permission).
         value()
-
-      missing_permissions = _.without.apply(@,  [permissions[0].split(',')].concat(granted_permissions))
-      if missing_permissions.length == 0
-        success_callback()
-      else
-        failure_callback(missing_permissions)
     )
 
   callFacebookApi: (endpoint, required_permissions, callback) ->
-    that = @
-    # check permissions & call func
-    userLoggedInFunc = () ->
-      that.checkUserGrantedPermissions(
-        permissions : required_permissions,
-        success: () ->
-          FB.api(endpoint, callback)
-        failure: (missing_permissions) ->
-          FB.login( (response) ->
-            if (response.authResponse && response.status == 'connected')
-              FB.api(endpoint, callback)
-          , {
-            scope: missing_permissions.join(),
-            auth_type: 'rerequest'
-          })
-      )
+    missing_permissions = _.without.apply(@,  [required_permissions].concat(@granted_permissions))
 
-    # trying to receive all permissions & call func
-    userNotLoggedInFunc = () ->
-      FB.login( (response) ->
-        if (response.authResponse && response.status == 'connected')
-          FB.api(endpoint, callback)
-      , scope: 'email,user_birthday,user_events,user_friends'
-      )
-
-    FB.getLoginStatus( (response) ->
-      if (response && response.status == 'connected')
-        userLoggedInFunc()
+    if @connected
+      if missing_permissions.length == 0
+        # call api
+        FB.api(endpoint, callback)
       else
-        userNotLoggedInFunc()
-    )
+        # re-request missing permissions
+        FB.login( (response) =>
+          if (response.authResponse && response.status == 'connected')
+            @loadGivenPermissions()
+            FB.api(endpoint, callback)
+        , {
+          scope: missing_permissions.join(),
+          auth_type: 'rerequest'
+        })
+    else
+      # login with all permissions
+      FB.login( (response) =>
+        if (response.authResponse && response.status == 'connected')
+          @loadGivenPermissions()
+          FB.api(endpoint, callback)
+      , {
+        scope: 'email,user_birthday,user_events,user_friends',
+      })
