@@ -29,7 +29,7 @@ module Spree
       current_order.adjustments.eligible.each do |adjustment|
         next if tax_adjustments.include?(adjustment) || shipping_adjustments.include?(adjustment)
 
-        items << AllServicesMappingRegistry::ShoppingCartItem.new(adjustment.label, 1, adjustment.amount)
+        items << AllServicesMappingRegistry::ShoppingCartItem.new(adjustment.label, 1, (adjustment.amount * 100).round)
       end
       items.each do |i|
         i.description = i.description[0..99] if i.description.length > 100
