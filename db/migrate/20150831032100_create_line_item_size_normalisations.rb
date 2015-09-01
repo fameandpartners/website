@@ -2,6 +2,8 @@ class CreateLineItemSizeNormalisations < ActiveRecord::Migration
   def change
     create_table :line_item_size_normalisations do |t|
       t.references :line_item
+      t.references :line_item_personalization
+      t.string :order_number
       t.string :currency
       t.string :site_version
       t.string :old_size_value
