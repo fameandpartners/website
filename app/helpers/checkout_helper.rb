@@ -16,13 +16,17 @@ module CheckoutHelper
   end
 
   def available_states_for_current_zone
-    checkout_zone = current_site_version.try(:zone) || Zone.find_by_name(Spree::Config[:checkout_zone])    
+    checkout_zone = current_site_version.try(:zone) || Zone.find_by_name(Spree::Config[:checkout_zone])
     if checkout_zone && checkout_zone.kind == 'country'
       countries = checkout_zone.country_list.map(&:id)
       states = Spree::State.where(country_id: countries).sort_by{|state| state.name }
     else
       states = Spree::State.order('name asc').all
     end
+  end
+
+  def masterpass_active?
+    Features.active?(:masterpass, current_spree_user) || session[:auto_applied_promo_code] == 'masterpass25'
   end
 
   def payment_failed_messages(error)

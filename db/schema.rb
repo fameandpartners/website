@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150826171400) do
+ActiveRecord::Schema.define(:version => 20150830020807) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1028,6 +1028,26 @@ ActiveRecord::Schema.define(:version => 20150826171400) do
     t.boolean  "active",      :default => true
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "spree_masterpass_checkouts", :force => true do |t|
+    t.string   "access_token"
+    t.string   "transaction_id"
+    t.string   "precheckout_transaction_id"
+    t.string   "cardholder_name"
+    t.string   "account_number"
+    t.string   "billing_address"
+    t.date     "exp_date"
+    t.string   "brand_id"
+    t.string   "contact_name"
+    t.string   "gender"
+    t.date     "birthday"
+    t.string   "national_id"
+    t.string   "phone"
+    t.string   "email"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "order_id"
   end
 
   create_table "spree_option_types", :force => true do |t|

@@ -1,0 +1,40 @@
+<%# tracking pixel %>
+<% if flash[:commerce_tracking] || params[:force_tracking] %>
+    <%# thankyou page %>
+    <% if flash[:commerce_tracking] == 'masterpass_ordered' %>
+        <!--
+    Start of DoubleClick Floodlight Tag: Please do not remove
+    Activity name of this tag: Fame & Partners Thankyou Page
+    URL of the webpage where the tag is expected to be placed: http://www.shopstyle.com.au/
+    This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+    Creation Date: 08/19/2015
+    -->
+        <script type="text/javascript">
+            var axel = Math.random() + "";
+            var a = axel * 10000000000000;
+            document.write('<iframe src="https://4754606.fls.doubleclick.net/activityi;src=4754606;type=mpau;cat=famep0;ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+        </script>
+        <noscript><iframe src="https://4754606.fls.doubleclick.net/activityi;src=4754606;type=mpau;cat=famep0;ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe></noscript>
+        <!-- End of DoubleClick Floodlight Tag: Please do not remove -->
+    <% end %>
+
+    <%# masterpass button tracking %>
+    <% if flash[:commerce_tracking] == 'masterpass_initialized' %>
+        <!--
+Start of DoubleClick Floodlight Tag: Please do not remove
+Activity name of this tag: Fame & Partners MasterPass Button
+URL of the webpage where the tag is expected to be placed: http://www.shopstyle.com.au/
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 08/19/2015
+-->
+        <script type="text/javascript">
+            var axel = Math.random() + "";
+            var a = axel * 10000000000000;
+            document.write('<iframe src="https://4754606.fls.doubleclick.net/activityi;src=4754606;type=mpau;cat=famep00;ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+        </script>
+        <noscript>
+          <iframe src="https://4754606.fls.doubleclick.net/activityi;src=4754606;type=mpau;cat=famep00;ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+        </noscript>
+        <!-- End of DoubleClick Floodlight Tag: Please do not remove -->
+    <% end %>
+<% end %>

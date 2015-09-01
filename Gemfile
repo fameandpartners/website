@@ -72,9 +72,9 @@ gem 'spree_banner', '~> 1.3.0'
 
 # spree extensions for authentication
 gem 'spree_auth_devise',
-  :github => 'spree/spree_auth_devise',
-  :branch => '1-3-stable',
-  :ref => 'c4466de3748618971dc401e6e30c0d87f2b9c143'
+    :github => 'spree/spree_auth_devise',
+    :branch => '1-3-stable',
+    :ref => 'c4466de3748618971dc401e6e30c0d87f2b9c143'
 
 gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
 
@@ -82,9 +82,9 @@ gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
 # spree extensions for payments
 gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
 gem 'spree_paypal_express',
-  github: 'evgeniypetrov/better_spree_paypal_express',
-  branch: '1-3-stable',
-  ref: '478b27281f7ed806df5ae86a41f9890595f8d242'
+    github: 'evgeniypetrov/better_spree_paypal_express',
+    branch: '1-3-stable',
+    ref: '478b27281f7ed806df5ae86a41f9890595f8d242'
 
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 
@@ -93,6 +93,9 @@ gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :
 gem 'addressable', require: false
 
 gem 'rollout'
+
+# masterpass gateway
+gem 'spree_masterpass', :path => './spree_masterpass'
 
 # Command line tools
 gem 'term-ansicolor',   :require => false

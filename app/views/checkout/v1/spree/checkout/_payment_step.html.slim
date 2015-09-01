@@ -19,20 +19,23 @@ h2.checkout-section-title 3. Payment Details
       p.text-center
         |by making this purchase you are agreeing to the Fame &amp; Partners &nbsp;
         a href="/terms.html" Term of Service
-      - if @credit_card_gateway
-        .col-sm-4
-          .btn-group-radio
-            input#optionsRadios1 name="optionsRadios" type="radio" value="option1"
-            button.btn.btn-block.btn-md
-              label.credit for="optionsRadios1"
-                | Credit Card
 
-      - if @credit_card_gateway && @pay_pal_method
-        .col-sm-4.text-center
-          .btn.btn-text.btn-md or
+      - @order.available_payment_methods.each do |method|
+        - if method.method_type.eql?('gateway')
+          .col-sm-4
+            .btn-group-radio
+              input#optionsRadios1 name="optionsRadios" type="radio" value="option1"
+              button.btn.btn-block.btn-md
+                label.credit for="optionsRadios1"
+                  | Credit Card
 
-      - if @pay_pal_method
-        .col-sm-4.text-center = paypal_express_button
+        - else
+          - if method.method_type.eql?('paypalexpress') || method.type == 'Spree::Gateway::PayPalExpress'
+            .col-sm-4.text-center = paypal_express_button
+
+          - else
+            .col-sm-4.text-center
+              = render :partial => "spree/checkout/payment/#{method.method_type}", :locals => { :payment_method => method }
 
   - if @credit_card_gateway
     = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global checkout-form', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
