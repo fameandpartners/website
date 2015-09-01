@@ -1,0 +1,23 @@
+- if local_assigns[:hidden].blank?
+  ruby:
+    sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase))
+
+  .container-fluid.category-controls
+    .row-fluid
+      .col-md-3.col-xs-4
+        .left-path.hidden-xs.hidden-sm
+          span
+            | Home /
+          span style="margin-left:5px"
+            b
+              | Dresses
+        .left-path.visible-xs.visible-sm#filter-mobile
+          span
+            i.fa.fa-filter
+            b.filter-mobile-text
+              | Filter
+      .col-md-9.col-xs-8
+        .container style='width:100%'
+          .row style='width:100%'
+            .sort
+              = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'

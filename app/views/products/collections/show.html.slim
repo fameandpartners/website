@@ -1,3 +1,7 @@
+- if local_assigns[:hidden].blank?
+  ruby:
+    sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase))
+
 = render :partial => 'javascript'
 
 .page-title.default.category-header style="background-image: url('#{@collection.details.banner.image}')"
@@ -7,12 +11,19 @@
       p= raw @collection.details.banner.subtitle
 
 .page-content.products-collections.category
-  = render :partial => 'filters'
+  = render :partial => 'filters_sort'
+  .container-fluid
+    .row-fluid
+      .col-md-3.filter-col
+        div.inner
+          = render :partial => 'filters_color_shape_style'
 
-  .container.relative.products-collection
-    - if Features.active?(:collection_content)
-      = render partial: 'products_with_content'
-    - else
-      = render partial: 'products_without_content'
+      .col-md-9
+        .container.relative.products-collection style='width:100%'
 
-    = render partial: 'pagination'
+          - if Features.active?(:collection_content)
+            = render partial: 'products_with_content'
+          - else
+            = render partial: 'products_without_content', locals: {col: 3}
+
+          = render partial: 'pagination'

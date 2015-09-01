@@ -113,7 +113,7 @@ group :assets do
 end
 
 group :assets, :development, :test do
-  gem 'test-unit'  
+  gem 'test-unit'
 end
 
 group :development, :test do

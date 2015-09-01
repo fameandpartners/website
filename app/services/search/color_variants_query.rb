@@ -16,6 +16,7 @@
 # )
 module Search
   class ColorVariantsQuery
+
     def self.build(options = {})
       options = HashWithIndifferentAccess.new(options)
 
@@ -58,11 +59,7 @@ module Search
         end
 
         if taxons.present?
-          taxons.each do |ids|
-            if ids.present?
-              filter :terms, 'product.taxon_ids' => Array.wrap(ids)
-            end
-          end
+          filter :terms, 'product.taxon_ids' => taxons
         end
 
         # select only products with given discount
@@ -101,20 +98,7 @@ module Search
                           }
                         }
           else
-            filter :or,
-                   *body_shapes.map do |body_shape|
-                     {
-                       :bool => {
-                         :should => {
-                           :range => {
-                             "product.#{body_shape}" => {
-                               :gte => 4
-                             }
-                           }
-                         }
-                       }
-                     }
-                   end
+            filter :bool, :should =>[ body_shapes.map do |bs| { :range => {"product.#{bs}" => {:gte => 4} }} end ]
           end
         end
 

@@ -100,7 +100,8 @@ class Products::CollectionsController < Products::BaseController
     end
 
     def limit
-      params[:limit] || page.get(:limit) || 20
+      return page.get(:limit) || 20 if page_is_lookbook?
+      params[:limit] || page.get(:limit) || 21
     end
 
     def page_is_lookbook?

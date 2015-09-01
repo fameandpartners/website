@@ -1,0 +1,7 @@
+- cache [:layout, :filter_menu, @filter.to_s], expires_in: configatron.cache.expire.long do
+  - prerender = true
+  - colors  = Repositories::ProductColors.color_groups
+  - selectColors = @filter.colors
+  - shapes = @filter.shapes
+  - styles = @filter.styles
+  = react_component('CollectionFilter', {styles: styles, shapes: shapes, colors: colors, selectColors: selectColors} , { prerender: prerender })

@@ -1,6 +1,6 @@
 <div class="row relative">
   <% for product in @collection.products: %>
-    <%- JST['templates/_product'](product: product) %>
+    <%- JST['templates/_product'](product: product, col: 3) %>
   <% end %>
   <div class="clearfix visible-sm-block visible-xs-block"></div>
 </div>
