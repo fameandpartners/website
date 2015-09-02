@@ -22,10 +22,10 @@ ruby:
     /= banner.right_text
 
   .col-md-8.heart-and-suitcase
-    span.num 2
+    span.num#moodboard-counter 0
     i.fa.fa-heart
     span.pipe |
-    span.num 0
+    span.num#cart-item-count 0
     = image_tag 'homepage/shopping_bag.png', class: 'shopping-bag'
 .row
   .col-md-4.col-md-offset-4
@@ -153,7 +153,11 @@ coffee:
       $("#search-area").css("display","none")
   )
 
-  $("#home-menu span[id!='search']").on('mouseover', ->
-    $(".rect").css("display","none")
+  $("#home-menu span[id!='search']").on('mouseenter', ->
+    $(".rect").hide();
     $("#rect-"+this.className).css("display","block")
+  )
+
+  $(".rect").on('mouseleave', ->
+    $(".rect").hide()
   )

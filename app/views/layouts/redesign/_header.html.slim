@@ -13,7 +13,7 @@ ruby:
     (function(){
       var updateMoodboardCounter = function() {
         var $counter = $('#moodboard-counter');
-        $counter.html('Moodboard: ' + window.app.user_moodboard.data.item_count);
+        $counter.html(window.app.user_moodboard.data.item_count);
       };
       window.app.user_moodboard.on('change', updateMoodboardCounter);
       updateMoodboardCounter();
