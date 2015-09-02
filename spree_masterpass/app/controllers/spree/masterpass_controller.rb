@@ -11,7 +11,7 @@ module Spree
       # Get request token
       @request_token_response = @service.get_request_token(
           payment_method.request_url,
-          payment_method.callback_domain)
+          payment_method.preferred_callback_domain)
       @data.request_token = @request_token_response.oauth_token
 
       # Post shopping cart
@@ -50,7 +50,7 @@ module Spree
       shopping_cart_request = AllServicesMappingRegistry::ShoppingCartRequest.new(
           @data.request_token,
           shopping_cart,
-          payment_method.callback_domain)
+          payment_method.preferred_callback_domain)
       shopping_cart_response = AllServicesMappingRegistry::ShoppingCartResponse.from_xml(
           @service.post_shopping_cart_data(
               payment_method.shopping_cart_url,
@@ -61,13 +61,13 @@ module Spree
       # file = File.read(File.join('spree_masterpass', 'resources', 'shoppingCart.xml'))
       # shopping_cart_request = AllServicesMappingRegistry::ShoppingCartRequest.from_xml(file)
       # shopping_cart_request.oAuthToken = @data.request_token
-        # shopping_cart_request.originUrl = provider.callback_domain
+        # shopping_cart_request.originUrl = payment_method.preferred_callback_domain
 
       # flash[:commerce_tracking] = 'masterpass_initialized';
       render json: {
                  request_token: @data.request_token,
-                 callback_domain: provider.callback_domain,
-                 cart_callback_path: provider.callback_domain + '/masterpass/cartcallback?payment_method_id=' + params[:payment_method_id],
+                 callback_domain: payment_method.preferred_callback_domain,
+                 cart_callback_path: payment_method.preferred_callback_domain + '/masterpass/cartcallback?payment_method_id=' + params[:payment_method_id],
                  accepted_cards: payment_method.preferred_accepted_cards,
                  checkout_identifier: payment_method.preferred_checkout_identifier,
                  shipping_suppression: payment_method.preferred_shipping_suppression,
@@ -179,7 +179,7 @@ module Spree
           OpenSSL::PKCS12.new(
               File.open(payment_method.keystore[:path]), payment_method.keystore[:password]
           ).key,
-          payment_method.callback_domain,
+          payment_method.preferred_callback_domain,
           payment_method.server_mode)
 
       # create an unreferenced MasterpassDataMapper to include the mapping namespaces of our DTO's
