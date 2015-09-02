@@ -1,55 +1,33 @@
-- if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
-  - content_for :head do
-    - if Rails.env.production? && !@credit_card_gateway.prefers_test_mode?
-      = javascript_include_tag 'https://api.pin.net.au/pin.js'
-    - else
-      = javascript_include_tag 'https://test-api.pin.net.au/pin.js'
-
-  - content_for :inline_javascript do
-    | Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
-
 ruby:
   param_prefix = "payment_source[#{payment_method.id}]"
   options_hash = { class: 'form-control form-control-md' }
   options_hash_select = { class: 'form-control form-control-md selectbox' }
   options_hash[:autocomplete] = 'off' if Rails.env.production?
 
-#credit_card_choice.panel
-  .panel-heading
-    h4.panel-title
-      ' Credit card
-      .pull-right
-        = image_tag 'checkout/visa_mc_logos.png', height: '22px'
-  .panel-collapse.in
-    .panel-body
-      = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global checkout-form', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
-        = render 'shared/error_messages', :target => @order, :view => "payment"
 
-        = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
+.row
+  .col-md-12.form-group
+    label for="number"  Card number
+    = text_field_tag "#{param_prefix}[number]", '', options_hash.merge(id: 'number')
+.row
+  .col-md-12.form-group
+    label for="name"  Name on card
+    = text_field_tag "#{param_prefix}[full_name]", '', options_hash.merge(id: 'name')
+.row
+  .col-md-6.form-group
+    .row
+      .col-xs-4.col-md-4.form-group
+        label for=""  Expiry
+        = text_field_tag "#{param_prefix}[month]", '', id: 'month', placeholder: 'MM', maxlength: 2, class: "month #{ options_hash[:class]}"
+      .slash
+        | /
+      .col-xs-4.col-md-4.form-group
+        label &nbsp;
+        = text_field_tag "#{param_prefix}[year]", '', id: 'year', placeholder: 'YYYY', maxlength: 4, class: "year #{ options_hash[:class]}"
+      .col-xs-4.col-md-4.form-group.card_code
+        label CVC
+        = text_field_tag "#{param_prefix}[verification_value]", '', id: 'card_code', class: "cvv #{ options_hash[:class]}", :size => 5, maxlength: 3
 
-        .row
-          .col-md-12.form-group
-            label for="number"  Card number
-            = text_field_tag "#{param_prefix}[number]", '', options_hash.merge(id: 'number')
-        .row
-          .col-md-12.form-group
-            label for="name"  Name on card
-            = text_field_tag "#{param_prefix}[full_name]", '', options_hash.merge(id: 'name')
-        .row
-          .col-md-6.form-group
-            .row
-              .col-xs-4.col-md-4.form-group
-                label for=""  Expiry
-                = text_field_tag "#{param_prefix}[month]", '', id: 'month', placeholder: 'MM', maxlength: 2, class: "month #{ options_hash[:class]}"
-              .slash
-                | /
-              .col-xs-4.col-md-4.form-group
-                label &nbsp;
-                = text_field_tag "#{param_prefix}[year]", '', id: 'year', placeholder: 'YYYY', maxlength: 4, class: "year #{ options_hash[:class]}"
-              .col-xs-4.col-md-4.form-group.card_code
-                label CVC
-                = text_field_tag "#{param_prefix}[verification_value]", '', id: 'card_code', class: "cvv #{ options_hash[:class]}", :size => 5, maxlength: 3
-
-          .col-md-6.form-group.place-order
-            label &nbsp;
-            button.btn.btn-black.btn-block.btn-md data-loading="Placing..." Place My Order
+  .col-md-6.form-group.place-order
+    label &nbsp;
+    button.btn.btn-black.btn-block.btn-md data-loading="Placing..." Place My Order
