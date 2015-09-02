@@ -140,9 +140,10 @@
         <tr>
           <td><%= link_to sale.name, edit_admin_sale_path(sale) %></td>
           <td>
+            <input type="hidden" name="<%= discount_field %>[id]" value="<%= discount.id %>" />
             <input type="hidden" name="<%= discount_field %>[sale_id]" value="<%= discount.sale_id %>" />
             <input type="hidden" name="<%= discount_field %>[discountable_type]" value="<%= discount.discountable_type %>" />
-            <input type="hidden" name="<%= discount_field %>[discountable_id]" value="<%= discount.id %>" />
+            <input type="hidden" name="<%= discount_field %>[discountable_id]" value="<%= discount.discountable_id %>" />
             <input type="number" min="0" max="100" name="<%= discount_field %>[amount]" value="<%= discount.amount %>" />
           </td>
         </tr>
