@@ -1,6 +1,35 @@
 .footer.container
+  .row.social-row
+    .col-md-10.col-md-offset-1
+      .stay-social STAY SOCIAL
+      .stay-social-images
+        = image_tag 'footer/fb.jpg'
+        = image_tag 'footer/instagram.jpg'
+        = image_tag 'footer/twitter.jpg'
+        = image_tag 'footer/pinterest.jpg'
+        = image_tag 'footer/tumble.jpg'
+        = image_tag 'footer/snap.jpg'
+        = image_tag 'footer/polyvore.jpg'
+
+      .register-email
+        = text_field_tag 'email', "REGISTER YOUR EMAIL FOR THIS XX OFFER"
+      .submit SUBMIT
+  .row.buttons
+    .col
+      = image_tag 'footer/refer.png'
+      .text REFER A FRIEND
+    .col
+      = image_tag 'footer/48.png'
+      .text 48 HR EXPRESS MAKING
+    .col
+      = image_tag 'footer/chain.png'
+      .text JOIN
+      br
+      .text THE FAME CHAIN
+
   .footer-navigation
     .col-md-3.col-sm-6
+      = image_tag 'logo/logo-mobile.png', class: 'footer-logo'
       = render 'layouts/redesign/address'
 
     .col-md-2.col-md-offset-5.col-sm-3

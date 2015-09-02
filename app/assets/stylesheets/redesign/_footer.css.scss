@@ -102,6 +102,7 @@
 	}
 
 	.address {
+		float: left;
 		p {
 			span a{
 				color: black;
@@ -134,6 +135,157 @@
 			color: black;
 		}
 	}
+	.footer-logo{
+	    float: left;
+	    margin-top: 3px;
+	    margin-right: 30px;
+	}
+
+
+    .stay-social{
+    	padding-left: 40px;
+    	padding-right: 50px;
+    }
+    .stay-social-images{
+    	float: left;
+    	margin-top: -10px;
+	    background-color: black;
+	    padding-left: 15px;
+	    padding-right: 20px;
+    }
+    .social-row{
+    	padding-top: 40px;
+
+
+
+	    .submit{
+		    background-color: black;
+		    color: white;
+		    font-weight: 700;
+		    float: left;
+		    padding-left: 50px;
+		    padding-right: 50px;
+		    padding-top: 10px;
+		    padding-bottom: 10px;
+		    margin-top: -10px;
+	    }
+
+	    .stay-social, .register-email, .stay-social-images{
+	    	float: left;
+	    	color: black;
+	    	font-weight: 700;
+	    }
+	    .register-email{
+		    margin-left: 400px;
+		    background-color: white;
+		    padding-top: 10px;
+		    padding-bottom: 10px;
+		    margin-top: -10px;
+		    padding-left: 20px;
+		    padding-right: 20px;
+		    input{
+		    	border: none;
+		    	width: 330px;
+		    }
+
+		    @media(min-width: 1601px)and(max-width: 1800px){
+		    	margin-left:220px;
+		    }
+	        @media(min-width: 1401px)and(max-width: 1600px){
+		    	margin-left:30px;
+		    }
+  	  	}
+
+    	@media(min-width: 1201px)and(max-width: 1400px){
+	    	font-size: 10pt;
+	    	.stay-social{
+	    		padding-left: 0;
+	    		padding-right: 10px;
+	    	}
+	    	.register-email{
+	    		margin-left: 20px;
+		    	input{
+		    		width: 295px;
+		    		padding-left: 10px;
+			   	    padding-right: 10px;
+		    	}
+	    	}
+	    }
+
+	    @media(max-width: 1200px){
+	    	font-size: 7pt;
+	    	.stay-social{
+	    		padding-left: 0;
+	    		padding-right: 10px;
+	    	}
+	    	.register-email{
+	    		margin-left: 180px;
+		    	input{
+		    		font-size: 7pt;
+		    		width: 190px;
+		    		padding-left: 0px;
+			   	    padding-right: 0px;
+		    	}
+	    	}
+	    	.stay-social-images{
+	    		margin-top: -5px;
+	    		img{
+	    	 		width: 25px;
+	    	 	}
+	    	 }
+	    	.submit{
+	    		padding-left: 5px;
+	    		padding-right: 5px;
+	    	}
+	    }
+
+
+    }
+
+    .buttons{
+    	padding-bottom: 20px;
+    	img{
+    		float: left;
+    		padding-left: 20%;
+    	}
+    	.text{
+    		float: left;
+    		margin-left: 10px;
+    		font-weight: 600;
+    		margin-top: 5px;
+    	}
+    	.col{
+		    height: 80px;
+		    border-color: #B5B5B5;
+		    border-width: 1px;
+		    border-style: solid;
+		    width: 25%;
+		    float: left;
+		    padding-top: 20px;
+		    margin-left: 6%;
+		    margin-top: 35px;
+    	}
+    	.col:last-child{
+    		.text{
+    			margin-top: 0;
+    		}
+    	}
+    	@media(min-width: 1101px)and(max-width: 1400px){
+  	  		.text{
+  	  			font-size: 7pt;
+  	  			margin-top: 12px;
+  	  		}
+  	  	}
+  	  	@media(min-width: 900px)and(max-width: 1100px){
+  	  		.text{
+  	  			font-size: 4.5pt;
+  	  			margin-left: 5px;
+  	  			margin-top: 15px;
+  	  		}
+  	  	}
+
+    }
+
 }
 
 .copyright {

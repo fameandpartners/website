@@ -2,10 +2,154 @@ ruby:
   banner = Preferences::TopBannerPresenter.new(current_site_version)
 
 #gray-top-banner.row.visible-md-block.visible-lg-block
+
+  #customer-service.col-md-4
+    | 24/7 CUSTOMER SERVICE 1300 222 222
+  #free-shipping.col-md-4.text-center
+    | FREE SHIPPING WITHIN AUSTRALIA AND NEW ZEALAND
+  #account-area.col-md-4.text-right
+    span.register-area REGISTER NOW
+    span.pipe |
+    span.my-acount MY ACCOUNT
+
+#top-banner.row.visible-md-block.visible-lg-block
   = render 'layouts/redesign/header/locale_selector/desktop'
 
-  #ad-text.col-md-4.text-center
-    = banner.center_text
+  /#ad-text.col-md-4.text-center
+    /= banner.center_text
 
-  #customer-service.col-md-4.text-right
-    = banner.right_text
+  /#customer-service.col-md-4.text-right
+    /= banner.right_text
+
+  .col-md-8.heart-and-suitcase
+    span.num 2
+    i.fa.fa-heart
+    span.pipe |
+    span.num 0
+    i.fa.fa-suitcase
+.row
+  .col-md-4.col-md-offset-4
+    center
+      = image_tag 'logo/new-logo.svg'
+
+.row#home-menu.text-center
+  span.new-this-week NEW THIS WEEK
+  span.dresses DRESSES
+  span.events EVENTS
+  span.lookbook LOOKBOOK
+  span.magazine MAGAZINE
+  span.sale SALE
+  span.made-for-you MADE FOR YOU
+  span.join-us JOIN US
+  span#search
+    a href="#"
+      = image_tag "_icons/search.svg", class: "nav-mobile-logo"
+
+.row.rect#rect-new-this-week
+  .black-bar SHOP ALL NEW THIS WEEK
+  .slide
+    img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+    img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+    img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+    img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+    img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+
+
+.row.rect#rect-dresses
+  .left-area
+    .col1
+      div.head SHOP BY
+      div View all dresses
+      div What's new
+      div Made in 48 hours
+      div Instagram
+    .col2
+      div.head STYLE
+      div Plus size
+      div Two-piece
+      div One shoulder
+      div Strapless
+      div V-neck
+      div Split
+      div Backless
+      div Lace
+    .col3
+      div.head COLOUR
+      div Black
+      div White / Ivory
+      div Blue
+      div Pink
+      div Red
+      div Pastle
+    .col4
+      div.head SEPARATES
+      div Outerwear
+  .right-area
+    div.girl-image
+      = image_tag "homepage/dress-girl.jpg"
+    div.girl-text
+      .contain
+        div BAMBI X FAME.
+        div SHOP BAMBI'S PICKS
+
+.row.rect#rect-lookbook
+  .col.col-md-4
+    div.head
+      .text BAMBI X FAME.
+    div.image
+      = image_tag "homepage/lookbook/1.jpg"
+  .col.col-md-4
+    div.head
+      .text LUXE COLLECTION
+    div.image
+      = image_tag "homepage/lookbook/2.jpg"
+  .col.col-md-4
+    div.head
+      .text HERE COMES THE SUN
+    div.image
+      = image_tag "homepage/lookbook/3.jpg"
+
+.row.rect#rect-magazine
+  .col-md-7.left-col
+    .row.head STEAL HER STYLE
+    .row.images
+      .col-md-4
+        = image_tag "homepage/magazine/1.jpg"
+        div.text TAYLOR
+      .col-md-4
+        = image_tag "homepage/magazine/2.jpg"
+        div.text BEYONCE
+      .col-md-4
+        = image_tag "homepage/magazine/3.jpg"
+        div.text GIGI
+  .col-md-5.right-col
+    .row
+      .col-md-6.col1
+        .row.head BACKSTAGE PASS
+        .row.image
+          = image_tag "homepage/magazine/2.jpg", class: "left-img"
+          div.text Blah blah blah
+      .col-md-6.col2
+        .row.head BLOG
+        .row.image
+          = image_tag "homepage/magazine/3.jpg", class: "right-img"
+          div.text Blah blah blah
+#search-area
+  input type="text" id="searchValue" value="SEARCH FOR"
+  .mag-glass
+    = image_tag "_icons/search.svg"
+
+
+coffee:
+  $("#search").on('click' , ->
+    $("#search-area").css("display","block")
+  )
+
+  $(".mag-glass").on('click' , ->
+    $("#search-area").css("display","none")
+  )
+
+  $("#home-menu span[id!='search']").on('mouseover', ->
+    $(".rect").css("display","none")
+    $("#rect-"+this.className).css("display","block")
+  )
