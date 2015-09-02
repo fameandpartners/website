@@ -11,5 +11,5 @@
     - @collection.products.each_slice(4) do |products|
       /! [][][][]
       .row.relative
-        = render partial: '/products/outerwear/outerwear', collection: products, as: :product
+        = render partial: '/products/outerwear/single', collection: products, as: :product
       .clearfix.visible-sm-block.visible-xs-block
