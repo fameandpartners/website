@@ -135,9 +135,10 @@ ruby:
           = image_tag "homepage/magazine/3.jpg", class: "right-img"
           div.text Blah blah blah
 #search-area
-  input type="text" id="searchValue" value="SEARCH FOR"
-  .mag-glass
-    = image_tag "_icons/search.svg"
+  form accept-charset="UTF-8" action="/search" method="get" id="searchForm"
+    input type="text" id="searchValue" placeholder="SEARCH FOR" name="q"
+    .mag-glass
+      = image_tag "_icons/search.svg"
 
 
 coffee:
@@ -146,7 +147,10 @@ coffee:
   )
 
   $(".mag-glass").on('click' , ->
-    $("#search-area").css("display","none")
+    if $("#searchForm #searchValue").val() != ''
+      $("#searchForm").submit()
+    else
+      $("#search-area").css("display","none")
   )
 
   $("#home-menu span[id!='search']").on('mouseover', ->
