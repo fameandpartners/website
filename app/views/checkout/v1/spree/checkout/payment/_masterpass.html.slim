@@ -14,7 +14,6 @@
             / = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
 
         / "inline_javascript" should be removed, but in my case, the site was messed up so
-        - masterpass_cart_callback_uri = cart_masterpass_url(payment_method_id: payment_method.id, protocol: request.protocol)
         - content_for :inline_javascript do
           | $('#buyWithMasterPassDiv').click(function() {
                 var masterpass_overlay = $('#buyWithMasterPassOverlayDiv');
@@ -32,7 +31,7 @@
             var spinner = new Spinner().spin();
             masterpass_overlay.append(spinner.el);
 
-            $.getJSON("#{masterpass_cart_callback_uri}").done(
+            $.getJSON("#{masterpass_cart_callback_uri(payment_method)}").done(
               function(data) {
                 spinner.stop();
                 masterpass_overlay.css({"width": 0, "height": 0});
