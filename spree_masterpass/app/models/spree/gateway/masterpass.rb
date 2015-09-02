@@ -3,7 +3,7 @@ module Spree
   class Gateway::Masterpass < Gateway
     preference :consumer_key, :string
     preference :checkout_identifier, :string
-    preference :callback_domain, :string, default: 'www.fameandpartners.com'
+    preference :callback_domain, :string, default: 'http://www.fameandpartners.com'
     preference :accepted_cards, :string, default: 'master,amex,diners,discover,maestro,visa'
     preference :shipping_suppression, :boolean, default: true
     preference :server, :string, default: 'sandbox'
