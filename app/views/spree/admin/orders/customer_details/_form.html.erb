@@ -90,7 +90,6 @@
     });
 
     $('fieldset.user-search-form table').on('click', 'tr[data-action=choose]', function(e) {
-      e.preventDefault();
       var $row = $(e.currentTarget);
       $row.addClass('even').siblings('.even').removeClass('even');
       $row.find('input[type=radio]').prop('checked', true);

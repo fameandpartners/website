@@ -11,6 +11,8 @@ Spree::BannerBox.class_eval do
                 }},
                 :convert_options => { :all => '-strip -auto-orient' }
 
+  validates_format_of :url, :with => URI::regexp(%w(http https)), message: 'Link must start with http or https'
+
   scope :big_banner      , -> { where('is_small = ? and enabled = ?', false, true).order('position ASC') }
   scope :small_banner    , -> { where('is_small = ? and enabled = ?', true, true).order('position ASC') }
   scope :for_site_version, -> (site_version) { where("css_class IS NULL OR css_class = '' OR css_class = ?", site_version.code) }

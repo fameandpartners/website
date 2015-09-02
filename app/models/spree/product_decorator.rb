@@ -25,6 +25,12 @@ Spree::Product.class_eval do
   belongs_to :factory
   belongs_to :fabric_card, inverse_of: :spree_products
 
+  has_and_belongs_to_many :related_outerwear,
+                          association_foreign_key: :outerwear_id,
+                          class_name: 'Spree::Product',
+                          foreign_key: :product_id,
+                          join_table: :spree_product_related_outerwear
+
   attr_accessible :customisation_value_ids,
                   :discounts_attributes,
                   :factory_id,
@@ -33,7 +39,8 @@ Spree::Product.class_eval do
                   :hidden,
                   :is_service,
                   :size_chart,
-                  :zone_prices_hash
+                  :zone_prices_hash,
+                  :related_outerwear_ids
 
 
   scope :has_options, lambda { |option_type, value_ids|
@@ -44,6 +51,7 @@ Spree::Product.class_eval do
   }
 
   scope :not_hidden, lambda { where(hidden: false) }
+  scope :outerwear, lambda { includes(taxons: :taxonomy).where(spree_taxonomies: { name: Spree::Taxonomy::OUTERWEAR_NAME }) }
 
   has_many :zone_prices, :through => :variants, :order => 'spree_variants.position, spree_variants.id, currency'
 

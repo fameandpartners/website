@@ -100,7 +100,8 @@ class Products::CollectionsController < Products::BaseController
     end
 
     def limit
-      params[:limit] || page.get(:limit) || 20
+      return page.get(:limit) || 20 if page_is_lookbook?
+      params[:limit] || page.get(:limit) || 21
     end
 
     def page_is_lookbook?
@@ -139,12 +140,9 @@ class Products::CollectionsController < Products::BaseController
           return { taxonomy.to_sym => permalink }
         when 'range'
           return { collection: permalink }
+        when 'outerwear'
+          return { show_outerwear: true }
         end
-      end
-
-      # Jackets
-      if permalink == 'jackets_collection'
-        return { show_jackets: true }
       end
 
       # Didn't find any collection associated with the permalink

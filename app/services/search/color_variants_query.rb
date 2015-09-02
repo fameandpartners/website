@@ -16,6 +16,7 @@
 # )
 module Search
   class ColorVariantsQuery
+
     def self.build(options = {})
       options = HashWithIndifferentAccess.new(options)
 
@@ -30,7 +31,7 @@ module Search
       fast_making      = options[:fast_making]
       limit            = options[:limit].present? ? options[:limit].to_i : 1000
       offset           = options[:offset].present? ? options[:offset].to_i : 0
-      show_jackets     = !!options[:show_jackets]
+      show_outerwear   = !!options[:show_outerwear]
 
       Tire.search(configatron.elasticsearch.indices.color_variants, size: limit, from: offset) do
         filter :bool, :must => { :term => { 'product.is_deleted' => false } }
@@ -43,8 +44,11 @@ module Search
           filter :terms, 'color.id' => colors
         end
 
-        # Jackets filter
-        filter :bool, :must => { :term => { 'product.is_jacket' => show_jackets } }
+        # Outerwear filter
+        # TODO: 27/08/2015 remove this after CreateSpreeProductRelatedOuterwear migration was execute in production.
+        if ActiveRecord::Base.connection.table_exists?(:spree_product_related_outerwear)
+          filter :bool, :must => { :term => { 'product.is_outerwear' => show_outerwear } }
+        end
 
         # only available items
         filter :bool, :must => { :term => { 'product.in_stock' => true } }
@@ -55,11 +59,7 @@ module Search
         end
 
         if taxons.present?
-          taxons.each do |ids|
-            if ids.present?
-              filter :terms, 'product.taxon_ids' => Array.wrap(ids)
-            end
-          end
+          filter :terms, 'product.taxon_ids' => taxons
         end
 
         # select only products with given discount
@@ -98,20 +98,7 @@ module Search
                           }
                         }
           else
-            filter :or,
-                   *body_shapes.map do |body_shape|
-                     {
-                       :bool => {
-                         :should => {
-                           :range => {
-                             "product.#{body_shape}" => {
-                               :gte => 4
-                             }
-                           }
-                         }
-                       }
-                     }
-                   end
+            filter :bool, :should =>[ body_shapes.map do |bs| { :range => {"product.#{bs}" => {:gte => 4} }} end ]
           end
         end
 

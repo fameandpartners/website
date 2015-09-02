@@ -1,8 +1,10 @@
 if Rails.env.production?
+  Features.activate(:masterpass)
 end
 
 if Rails.env.development?
   Features.activate(:content_revolution)
+  Features.activate(:masterpass)
 end
 
 Features.deactivate(:style_quiz)

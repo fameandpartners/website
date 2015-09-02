@@ -59,9 +59,15 @@
 
   // Fix for product page
   &:not(.hidden) ~ .product-content {
-    top: 15rem;
+    top: 25rem;
   }
 }
+
+// @media (max-width: $screen-desktop) {
+//   .alert-sale {
+//     top: $mega-menu-mobile-height;
+//   }
+// }
 
 .auto-discount-applied {
   @extend .alert-sale;

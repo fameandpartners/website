@@ -48,7 +48,27 @@
               </label>
             <% end %>
           </div>
+          <div class="four columns">
+            <%= f.field_container :customisation_allowed, :class => ['checkbox'] do %>
+              <label>
+                <%= f.check_box :customisation_allowed %>
+                customisation allowed?
+                <%= f.error_message_on :customisation_allowed %>
+              </label>
+            <% end %>
+          </div>
         </div>
+      </fieldset>
+      <fieldset>
+        <legend>Mega Menu Tile</legend>
+        <p>Place a JPG of the same name as the current sale (lowercase) in the Marketing S3 bucket under <code>sale/</code></p>
+        <p>
+          <strong>e.g.</strong>
+          <%= @object.mega_menu_image_url %>
+        </p>
+        <p>
+        <%= image_tag "http:#{@object.mega_menu_image_url}", class: 'img-responsive' %>
+        </p>
       </fieldset>
       <fieldset>
         <legend><%= t(:default_discount_settings) %></legend>

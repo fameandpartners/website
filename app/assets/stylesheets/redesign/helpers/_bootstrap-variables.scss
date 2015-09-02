@@ -113,6 +113,12 @@ $fp-menu-padding-top:  20px;
 $fp-menu-height-full: ($fp-menu-height + $fp-locates-height);
 $fp-menu-zindex: 2000;
 $fp-menu-link-hover: #355e6d;
+
+// Locale Warn
+$locale-warn-desktop-height: 48px;
+$locale-warn-mobile-height: 68px;
+// @end Locale Warn
+
 //== Scaffolding
 //
 //## Settings for some of the most global stylaes.

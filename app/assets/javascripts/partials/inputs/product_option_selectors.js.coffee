@@ -59,7 +59,7 @@ window.inputs.ProductSizeIdSelector = class ProductSizeIdSelector extends BasePr
 
   showFitGuide: =>
     @selector.close()
-    window.helpers.showModal(title: 'Size Guide', className: 'fit-guide', container: '#fit-guide-content')
+    (new window.modals.FitGuideModal()).show()
 
   getValue: () ->
     @$container.find('.active').data('id')
@@ -233,9 +233,9 @@ window.inputs.ProductMakingOptionIdSelector = class ProductMakingOptionIdSelecto
 
     if @disabled
       @$action.html("Standard making 2-5 days")
-    else if data.id == 'original'
+    else if data? and data.id == 'original'
       @$action.html("Standard Making 2-5 days")
-    else if data.name
+    else if data? and data.name
       @$action.html("#{data.name} +#{data.price}")
     else
       @$action.html("Express Making")

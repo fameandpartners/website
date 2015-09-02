@@ -1,25 +1,22 @@
-h2.text-center Easy Size &amp; Measurement Guide
-.size-alert
-  .row
-    .col-xs-12
-      h6= explanation
-      p Please check the size chart below.
+- if size_chart == '2015'
+  / .fit-guide-corner-text
+  /   h2
+  /     ' We have
+  /     br
+  /     ' updated our sizing!
+  /   p This dress follows our new size chart.
+- elsif size_chart == '2014'
+  .fit-guide-corner-img
+  .fit-guide-corner-text
+    h2 We have updated our sizing!
+    p This dress follows our old sizing chart.
 
-.container-fluid
-  .row
-    .col-xs-12
-      h6 How to Measure Yourself
-      p.no-padding Please use a cloth tape measure. Keep the tape measure parallel to the floor and don’t wrap it too tight. We recommend measuring yourself in your underwear, not over clothing and wearing the same bra (or no bra) that you intend to wear with the dress. We suggest getting a friend to help you if possible &amp; remember to stand with your feet together.
-
-      p BUST Measure around the fullest part of your bust
-
-      p WAIST Measure around your natural waistline.
-
-      p HIPS Measure 20cm below your waistline at the fullest part of your hips.
-
-      p SKIRT LENGTH Stand with your heels together,<br>keep the tape straight and perpendicular to the floor. Measure from your natural waistline.
-
-      = image_tag 'where-to-measure.png'
-
-  .row
-    = render partial: 'size_chart_table', locals: { data: data }
+.row
+  .col
+    .square
+      
+  .col
+    .fit-guide-text
+      h2 How to Measure Yourself
+      p Please use a cloth tape measure. Keep the tape measure parallel to the floor and don’t wrap it too tight. We recommend measuring yourself in your underwear, not over clothing and wearing the same bra (or no bra) that you intend to wear with the dress. We suggest getting a friend to help you if possible & remember to stand with your feet together.
+      = render partial: 'size_chart_table', locals: { data: data }

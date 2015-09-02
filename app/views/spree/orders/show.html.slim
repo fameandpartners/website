@@ -94,3 +94,4 @@ ruby:
 
 - if successfully_ordered || params[:force_tracking]
   = render 'shared/sales_conversion_pixels', locals: { order: @order }
+  = render 'shared/tracking/masterpass_analytics'

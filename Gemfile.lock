@@ -123,6 +123,15 @@ GIT
       tilt
 
 PATH
+  remote: ./spree_masterpass
+  specs:
+    spree_masterpass (0.1.0)
+      mastercard_api
+      mastercard_masterpass_api
+      mumboe-soap4r
+      spree_core (~> 1.3.6.beta)
+
+PATH
   remote: engines
   specs:
     admin_ui (0.0.1)
@@ -209,7 +218,7 @@ GEM
       json (~> 1.4)
       nokogiri (< 1.6.0)
       uuidtools (~> 2.1)
-    babel-source (5.8.19)
+    babel-source (5.8.23)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
@@ -452,6 +461,7 @@ GEM
     httparty (0.13.3)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
+    httpclient (2.6.0.1)
     httpi (1.1.1)
       rack
     i18n (0.6.11)
@@ -471,7 +481,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
-    json (1.8.3)
+    json (1.8.2)
     jwt (1.4.1)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
@@ -483,6 +493,8 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mastercard_api (0.0.1)
+    mastercard_masterpass_api (0.0.1)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     meta_request (0.3.4)
@@ -496,6 +508,8 @@ GEM
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    mumboe-soap4r (1.5.8.7)
+      httpclient (>= 2.1.1)
     naught (1.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -566,7 +580,7 @@ GEM
     rabl (0.7.2)
       activesupport (>= 2.3.14)
       multi_json (~> 1.0)
-    rack (1.4.7)
+    rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-contrib (1.4.0)
@@ -834,7 +848,6 @@ DEPENDENCIES
   factory_girl_rails (= 4.2.1)
   fame_favicon!
   fog
-  font-awesome-rails
   geoip
   google_drive (= 1.0.0)
   inspinia-rails!
@@ -882,6 +895,7 @@ DEPENDENCIES
   spree_banner (~> 1.3.0)
   spree_essentials!
   spree_gateway!
+  spree_masterpass!
   spree_paypal_express!
   spree_social!
   spring
@@ -897,3 +911,6 @@ DEPENDENCIES
   uglifier (= 1.3.0)
   unicorn
   whenever
+
+BUNDLED WITH
+   1.10.6

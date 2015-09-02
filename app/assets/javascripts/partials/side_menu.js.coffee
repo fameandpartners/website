@@ -17,12 +17,14 @@ window.SideMenu = class SideMenu
       @slide(e)
 
     $(@$container).on('mousedown touchstart', (e) =>
-      @xDown = e.originalEvent.changedTouches[0].screenX
+      if e.originalEvent.changedTouches?
+        @xDown = e.originalEvent.changedTouches[0].screenX
     ).on 'mouseup touchend', (e2) =>
-      @xUp = e2.originalEvent.changedTouches[0].screenX
-      if @xDown > @xUp
-        @close()
-      @blockScroll()
+      if e2.originalEvent.changedTouches?
+        @xUp = e2.originalEvent.changedTouches[0].screenX
+        if @xDown > @xUp
+          @close()
+        @blockScroll()
 
     $('#sideMenu').on 'mousewheel', (e) =>
       @blockScroll()

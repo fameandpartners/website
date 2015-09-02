@@ -1,17 +1,6 @@
 - if target && target.errors.any?
-  - unless payment_failed_messages(target.errors.full_messages.first)
-    #errorExplanation.errorExplanation
-      h3 The following errors appeared
-      ul
-        - target.errors.full_messages.each do |msg|
-          li = msg
-  - else
-    .payment-failed
-      .content
-        .title Try a different payment method?
-        .sub We'd love to make this happen for you, but there was a problem with your credit card.
-        .error = target.errors.full_messages.first
-        .options
-          = image_tag('checkout/payment_options.png')
-        .invite
-          a href='#' class="btn mid empty border ask-parent-to-pay-button" Invite someone to pay
+  #errorExplanation.errorExplanation
+    h3 The following errors appeared:
+    ul
+      - target.errors.full_messages.each do |msg|
+        li = msg

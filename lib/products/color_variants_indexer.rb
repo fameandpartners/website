@@ -96,8 +96,8 @@ module Products
               taxon_ids:          product.taxons.map(&:id),
               price:              product.price.to_f,
 
-              # Jackets
-              is_jacket:          product.taxons.any? { |t| t.permalink == 'jackets' },
+              # Outerwear
+              is_outerwear:       Spree::Product.outerwear.exists?(product.id),
 
               # bodyshape sorting
               apple:              product.style_profile.try(:apple),

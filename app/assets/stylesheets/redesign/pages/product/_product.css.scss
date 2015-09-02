@@ -61,15 +61,14 @@
 }
 
 .dress-about {
-    h4 {
-      font-family: $font-family-secondary;
-      font-size: 1em;
-      font-weight:600;
-      margin-top:1.333333em;
-    }
+  h4 {
+    font-family: $font-family-secondary;
+    font-size: 1em;
+    font-weight:600;
+    margin-top:1.333333em;
+  }
 
   @media(max-width: $screen-phone){
-
     h2 {
       padding-top: 30px
     }
@@ -291,3 +290,24 @@
 }
 
 .sc-player { display: none; }
+
+.dress-more {
+  .col-centered {
+    display: inline-block;
+    float: none;
+    // reset the text-align
+    text-align: left;
+
+    // Restore float left on mobile devices, due to bootstrap grid stacking
+    // @include mobile {
+    //   float: left;
+    // }
+
+    // @include tablet {
+    //   float: left;
+    // }
+    @media (max-width: $screen-tablet) {
+      float: left;
+    }
+  }
+}

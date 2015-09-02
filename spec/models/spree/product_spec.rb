@@ -3,6 +3,36 @@ require 'spec_helper'
 describe Spree::Product, :type => :model do
   subject(:product) { FactoryGirl.build :dress }
 
+  it { is_expected.to have_one(:celebrity_inspiration).with_foreign_key(:spree_product_id).class_name('Spree::CelebrityInspiration').dependent(:destroy) }
+  it { is_expected.to have_one(:style_profile).with_foreign_key(:product_id).class_name('ProductStyleProfile').dependent(:destroy) }
+  it { is_expected.to have_many(:customisation_values).order('customisation_values.position ASC') }
+  it { is_expected.to have_many(:product_color_values).dependent(:destroy) }
+
+  it { is_expected.to have_many(:moodboard_items).with_foreign_key(:spree_product_id) }
+  it { is_expected.to have_many(:accessories).with_foreign_key(:spree_product_id).class_name('ProductAccessory') }
+  it { is_expected.to have_many(:videos).with_foreign_key(:spree_product_id).class_name('ProductVideo') }
+
+  it { is_expected.to have_many(:making_options).with_foreign_key(:product_id).class_name('ProductMakingOption') }
+
+  it { is_expected.to belong_to(:factory) }
+  it { is_expected.to belong_to(:fabric_card).inverse_of(:spree_products) }
+
+  it { is_expected.to have_and_belong_to_many(:related_outerwear).with_foreign_key(:product_id).class_name('Spree::Product') }
+
+  describe 'scopes' do
+    describe '.outerwear' do
+      let!(:outerwear)          { create(:spree_product) }
+      let!(:dress)              { create(:spree_product) }
+      let!(:outerwear_taxonomy) { create(:taxonomy, :outerwear) }
+
+      before(:each) { outerwear_taxonomy.root.products = [outerwear] }
+
+      it 'returns all products that belongs to outerwear taxonomy' do
+        expect(described_class.outerwear).to eq([outerwear])
+      end
+    end
+  end
+
   context "new product" do
     it "should be on demand" do
       expect(subject.on_demand).to be true

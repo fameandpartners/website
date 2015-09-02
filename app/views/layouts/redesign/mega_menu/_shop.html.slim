@@ -20,28 +20,28 @@ li.shop.menu-item
           /     span.fit-guarantee.menu-icon
           /     | Fit Guarantee
     .mega-menu--secondary
-      - if sale_active? && current_site_version.is_usa?
+      - if sale_active?
         = link_to dresses_path, class: 'mega-menu-banner' do
-          = image_tag 'mega-menu/sale.jpg', alt: '50% Off Sale', class: 'img-responsive'
+          = image_tag current_sale.mega_menu_image_url, class: 'img-responsive'
 
       .container-fluid.max-width-100
         .row
-          .col-md-3.col-lg-2.col-md-offset-4
+          .col-md-2.col-lg-2.col-md-offset-4
             h4.link-header Events
             ul.mega-menu-list
               = render :partial => '/layouts/redesign/event'
 
-          .col-md-3.col-lg-2
+          .col-md-2.col-lg-2
             h4.link-header Style
             ul.mega-menu-list
               = render :partial => '/layouts/redesign/style'
 
-          .col-md-3.col-lg-2
+          .col-md-2.col-lg-2
             h4.link-header= t('color')
             ul.mega-menu-list
               = render :partial => '/layouts/redesign/color'
 
-          .col-md-3.col-lg-2
+          .col-md-2.col-lg-2
             - if Features.active?(:express_making)
               h4.link-header Express Making
               ul.mega-menu-list
@@ -49,13 +49,13 @@ li.shop.menu-item
 
             - if Features.active?(:sales)
               - if sale_active?
-                h4.link-header Sale - Up to 50% Off
-                ul.mega-menu-list
-                  li.mega-menu-list--item= link_to 'All Sale Dresses', sales_collection_path
-                  li.mega-menu-list--item= link_to '15 Percent Off',   dresses_path(sale: 15)
-                  li.mega-menu-list--item= link_to '30 Percent Off',   dresses_path(sale: 30)
-                  li.mega-menu-list--item= link_to '40 Percent Off',   dresses_path(sale: 40)
-                  li.mega-menu-list--item= link_to '50 Percent Off',   dresses_path(sale: 50)
+                /h4.link-header Sale - Up to 30% Off
+                /ul.mega-menu-list
+                  /li.mega-menu-list--item= link_to 'All Sale Dresses', sales_collection_path
+                  /li.mega-menu-list--item= link_to '15 Percent Off',   dresses_path(sale: 15)
+                  /li.mega-menu-list--item= link_to '30 Percent Off',   dresses_path(sale: 30)
+                  /li.mega-menu-list--item= link_to '40 Percent Off',   dresses_path(sale: 40)
+                  /li.mega-menu-list--item= link_to '50 Percent Off',   dresses_path(sale: 50)
 
 - if Features.active?(:style_quiz)
   li.menu-item

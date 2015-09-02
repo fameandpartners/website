@@ -16,16 +16,22 @@ module Spree
         end
 
         def update
+          new_user_id = params[:order].delete(:user_id)
+
           if @order.update_attributes(params[:order])
             #shipping_method = @order.available_shipping_methods(:front_end).first
             #if @order.shipping_method
               #@order.shipping_method = shipping_method
 
             if @order.available_shipping_methods(:back_end).present?
-              if params[:user_id].present?
-                @order.user_id = params[:user_id]
-                @order.user true
+              if new_user_id
+                ::Admin::ChangeOrderOwner.new(
+                  site_version: current_site_version,
+                  new_owner_id: new_user_id,
+                  order: @order
+                ).process
               end
+
               while @order.next; end
 
               flash[:success] = t('customer_details_updated')

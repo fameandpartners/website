@@ -60,6 +60,10 @@ class Spree::Sale < ActiveRecord::Base
     end
   end
 
+  def mega_menu_image_url
+    "//#{configatron.asset_host}/sale/#{name.downcase}.jpg"
+  end
+
   class << self
     def active_sales_ids
       Spree::Sale.active.pluck(:id)

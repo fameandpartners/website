@@ -15,7 +15,7 @@ AdminUi::Engine.routes.draw do
     resource :return_shoppers,        :only => [:show, :create]
   end
 
-  resources :caches, only: [:index, :destroy] do
+  resources :caches, only: [:index, :destroy, :show] do
     delete :expire, :on => :collection
   end
 

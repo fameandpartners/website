@@ -80,3 +80,6 @@ ruby:
       span.pull-right = cart.display_total.to_s
       - if current_site_version.is_australia?
         .taxes Including GST
+
+  p.order-number
+    = @order.try(:number)
