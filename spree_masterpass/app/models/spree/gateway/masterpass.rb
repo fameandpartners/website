@@ -3,12 +3,13 @@ module Spree
   class Gateway::Masterpass < Gateway
     preference :consumer_key, :string
     preference :checkout_identifier, :string
+    preference :callback_domain, :string, default: 'www.fameandpartners.com'
     preference :accepted_cards, :string, default: 'master,amex,diners,discover,maestro,visa'
     preference :shipping_suppression, :boolean, default: true
     preference :server, :string, default: 'sandbox'
 
     attr_accessible :preferred_consumer_key, :preferred_checkout_identifier, :preferred_accepted_cards,
-                    :preferred_shipping_suppression, :preferred_server
+                    :preferred_shipping_suppression, :preferred_server, :preferred_callback_domain
 
     KEYSTORE_INFO = {
         :sandbox => {
@@ -64,7 +65,7 @@ module Spree
     end
 
     def callback_domain
-      Spree::Config[:site_url]
+      preferred_callback_domain
     end
 
     def supports?(source)
