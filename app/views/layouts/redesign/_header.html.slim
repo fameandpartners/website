@@ -136,45 +136,83 @@ ruby:
             div id='side-search-area' class='row'
               input type='text' id='side-search' placeholder='SEARCH'
               = image_tag "_icons/search.svg", class: "side-search-icon"
-          li
-            a
-              | EVENTS
-              span.arrow
-                = image_tag('icon-arrow-right.png')
-            ul.dropdown-menu.mobileAnimation
-              = render :partial => '/layouts/redesign/event'
-          li
-            a
-              | STYLES
-              span.arrow
-                = image_tag('icon-arrow-right.png')
-            ul.dropdown-menu.mobileAnimation
-              = render :partial => '/layouts/redesign/style'
-          li
-            a
-              | COLORS
-              span.arrow
-                = image_tag('icon-arrow-right.png')
-            ul.dropdown-menu.mobileAnimation
-              = render :partial => '/layouts/redesign/color'
-          li
-            a
-              | EXPRESS MAKING
-              span.arrow
-                = image_tag('icon-arrow-right.png')
-            ul.dropdown-menu.mobileAnimation
-              li = link_to 'Dresses made in 48 hours', fast_making_dresses_path
-          li
-            a
-              | LOOKBOOK
-              span.arrow
-                = image_tag('icon-arrow-right.png')
-            ul.dropdown-menu.mobileAnimation
-              li = link_to 'The Luxe Collection', luxe_collection_path
-              li = link_to 'Bohemian Summer', bohemian_summer_collection_path
-              li = link_to 'Besties and Bridesmaids Collection', bridesmaid_collection_path
-              li = link_to "I'll Have What She's Having", all_size_collection_path
-              li = link_to 'Here Comes The Sun', here_comes_the_sun_collection_path
+          li.normal-item
+            div
+              .text NEW THIS WEEK
+              .arrow
+                i.fa.fa-chevron-right
+          li.normal-item
+            div
+              .text DRESSES
+              .arrow
+                i.fa.fa-chevron-right
+          li.normal-item
+            div
+              .text EVENTS
+          li.normal-item
+            div
+              .text LOOKBOOK
+              .arrow
+                i.fa.fa-chevron-right
+          li.normal-item
+            div
+              .text MAGAZINE
+              .arrow
+                i.fa.fa-chevron-right
+          li.normal-item
+            div
+              .text SALE
+          li.normal-item
+            div
+              .text MADE FOR YOU
+          li.normal-item
+            div
+              .text JOIN US
+          li.normal-item
+            div
+              .text ACCOUNT LOGIN
+          li.normal-item
+            div
+              .text REGISTER NOW
+          /li
+            /a
+              /| EVENTS
+              /span.arrow
+                /= image_tag('icon-arrow-right.png')
+            /ul.dropdown-menu.mobileAnimation
+              /= render :partial => '/layouts/redesign/event'
+          /li
+            /a
+              /| STYLES
+              /span.arrow
+                /= image_tag('icon-arrow-right.png')
+            /ul.dropdown-menu.mobileAnimation
+              /= render :partial => '/layouts/redesign/style'
+          /li
+            /a
+              /| COLORS
+              /span.arrow
+                /= image_tag('icon-arrow-right.png')
+            /ul.dropdown-menu.mobileAnimation
+              /= render :partial => '/layouts/redesign/color'
+          /li
+            /a
+              /| EXPRESS MAKING
+              /span.arrow
+                /= image_tag('icon-arrow-right.png')
+            /ul.dropdown-menu.mobileAnimation
+              /li = link_to 'Dresses made in 48 hours', fast_making_dresses_path
+          /li
+            /a
+              /| LOOKBOOK
+              /span.arrow
+                /= image_tag('icon-arrow-right.png')
+            /ul.dropdown-menu.mobileAnimation
+              /li = link_to 'The Luxe Collection', luxe_collection_path
+              /li = link_to 'Bohemian Summer', bohemian_summer_collection_path
+              /li = link_to 'Besties and Bridesmaids Collection', bridesmaid_collection_path
+              /li = link_to "I'll Have What She's Having", all_size_collection_path
+              /li = link_to 'Here Comes The Sun', here_comes_the_sun_collection_path
 
           li.bottom-area
             .bottom-area-text Why Shop With Us

@@ -795,6 +795,31 @@ li#cart-trigger {
     padding-bottom: 7px;
     padding-left: 15px;
   }
+
+  .normal-item:last-child{
+    border: none;
+  }
+  .normal-item{
+    font-size: 10pt;
+    padding-top: 15px;
+    padding-bottom: 25px;
+    font-weight: 600;
+    padding-left: 10px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #D0D0D0;
+    .text{
+      width: 90%;
+      float: left;
+    }
+    .arrow{
+      float: left;
+      width: initial;
+    }
+    div{
+      padding-bottom: 10px;
+    }
+  }
 }
 
 .mobileAnimation{
