@@ -3,6 +3,7 @@ ruby:
     (function(){
       var updateShoppingBagCounter = function() {
         $('#cart-item-count').html(window.app.shopping_cart.data.item_count);
+        $('#cart-trigger .num').text(window.app.shopping_cart.data.item_count);
       };
       window.app.shopping_cart.on('change', updateShoppingBagCounter);
       updateShoppingBagCounter();
@@ -14,6 +15,7 @@ ruby:
       var updateMoodboardCounter = function() {
         var $counter = $('#moodboard-counter');
         $counter.html(window.app.user_moodboard.data.item_count);
+        $('.masthead:last .num').text(window.app.user_moodboard.data.item_count);
       };
       window.app.user_moodboard.on('change', updateMoodboardCounter);
       updateMoodboardCounter();
@@ -66,6 +68,7 @@ ruby:
   header
 
     .nav-menu.nav-alert-top
+      = render 'layouts/redesign/header/locale_selector/mobile'
       .container-fluid.nav-menu-container
         = render 'layouts/redesign/header/locale_warn/base', warning: @locale_warning
         = render 'layouts/redesign/header/gray_top_banner/base'
@@ -104,28 +107,18 @@ ruby:
             li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
               = render "layouts/redesign/header/my_account_dropdown"
 
-            li.menu-item
-              a.menu-item--link.search href="#"
-                = image_tag "_icons/search.svg", class: "nav-mobile-logo"
-              .search-bar.invis
-                a.close-search href="#"
-                  = image_tag "close.svg", alt: 'Close'
-                .container-fluid.search-form
-                  .col-md-6.col-md-offset-3
-                    .col-md-10
-                      .input-group.margin-bottom-sm
-                        = form_tag search_path, method: :get do
-                          input.form-control id='input-search' name='q' placeholder=("Search here...") type="text"
-                          span
-                            button.invis-fix Enter
+          .masthead.pull-right.visible-xs
+            #cart-trigger.menu-item
+              span.num#cart-item-count 0
+              = image_tag 'homepage/shopping_bag.png', class: 'shopping-bag'
 
-            li#cart-trigger.menu-item
-              = link_to '#', class: 'menu-item--link' do
-                span
-                  = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
-                  span#cart-item-count 0
+          .masthead.pull-right.visible-xs
+            .menu-item
+              span.num#moodboard-counter 0
+              i.fa.fa-heart
+              span.pipe |
 
-      = render 'layouts/redesign/header/locale_selector/mobile'
+
 
     - unless disable_notices?
       = render 'layouts/redesign/notices'
