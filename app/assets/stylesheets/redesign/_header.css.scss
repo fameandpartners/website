@@ -626,7 +626,7 @@ li#cart-trigger {
   nav.navbar{
     border: none;
     .navbar-brand{
-      left: 40%;
+      left: 35%;
       position: absolute;
     }
   }
@@ -644,10 +644,6 @@ li#cart-trigger {
   @media(min-width: 400px)and(max-width:599px){
     width: 390px;
     left: -390px;
-
-    nav .navbar-header .navbar-brand{
-      margin-left: 140px;
-    }
   }
 
   @media(min-width: 599px)and(max-width:759px){
@@ -767,6 +763,37 @@ li#cart-trigger {
     .clicked{
       transform: rotate(-90deg);
     }
+  }
+
+  #side-search-area{
+    width: 97%;
+    border-style: solid;
+    border-width: 1px;
+    margin-left: 0px;
+    margin-right: 0;
+    background-color: white;
+    #side-search{
+      border: none;
+      margin-left: 10px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      width: 85%;
+      text-align: center;
+    }
+    .side-search-icon{
+      width: 19px;
+      float: right;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+  }
+  .bottom-area{
+    background-color: black;
+    color: white;
+    margin-left: 15px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 15px;
   }
 }
 

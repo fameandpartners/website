@@ -133,6 +133,10 @@ ruby:
       .main-menu
         ul.nav.navbar-nav
           li
+            div id='side-search-area' class='row'
+              input type='text' id='side-search' placeholder='SEARCH'
+              = image_tag "_icons/search.svg", class: "side-search-icon"
+          li
             a
               | EVENTS
               span.arrow
@@ -172,16 +176,22 @@ ruby:
               li = link_to "I'll Have What She's Having", all_size_collection_path
               li = link_to 'Here Comes The Sun', here_comes_the_sun_collection_path
 
-        .all-dresses
-          center
-            = button_to 'View all dresses', dresses_path, class: 'btn btn-block btn-black', method: :get
-        .clearfix
-        .account-login
-          = link_to profile_path, class: "menu-item--link active-hover", rel: 'nofollow' do
-            = image_tag "_icons/my-account.svg", class: 'nav-mobile-logo', alt: 'my account'
-            span
-              | Account login
-
+          li.bottom-area
+            .bottom-area-text Why Shop With Us
+          li.bottom-area
+            .bottom-area-text About Us
+          li.bottom-area
+            .bottom-area-text FAQs & Shipping
+          li.bottom-area
+            .bottom-area-text New Sizing
+          li.bottom-area
+            .bottom-area-text Terms
+          li.bottom-area
+            .bottom-area-text Get styling advice
+          li.bottom-area
+            .bottom-area-text Fame Chain
+          li.bottom-area
+            .bottom-area-text Contact Us
 
 
 = render 'layouts/redesign/campaigns/auto_apply_promo_code'
