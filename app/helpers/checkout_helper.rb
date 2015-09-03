@@ -26,7 +26,7 @@ module CheckoutHelper
   end
 
   def masterpass_active?
-    Features.active?(:masterpass, current_spree_user) || session[:auto_applied_promo_code] == 'masterpass25'
+    false || Features.active?(:masterpass, current_spree_user) || session[:auto_applied_promo_code] == 'masterpass25'
   end
 
   def masterpass_cart_callback_uri(payment_method)
