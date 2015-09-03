@@ -37,7 +37,6 @@ Spree::Product.class_eval do
                   :featured,
                   :hidden,
                   :size_chart,
-                  :zone_prices_hash,
                   :related_outerwear_ids
 
 
@@ -53,8 +52,6 @@ Spree::Product.class_eval do
 
   has_many :zone_prices, :through => :variants, :order => 'spree_variants.position, spree_variants.id, currency'
 
-  attr_accessor :zone_prices_hash
-
   scope :featured, lambda { where(featured: true) }
   scope :ordered, lambda { order('position asc') }
 
@@ -65,7 +62,6 @@ Spree::Product.class_eval do
   before_create :set_default_prototype
 
   before_save :update_price_conversions
-  after_save :update_zone_prices, if: :zone_prices_hash
 
   after_initialize :set_default_values
 
@@ -335,12 +331,6 @@ Spree::Product.class_eval do
         }, :without_protection => true)
       end
       save
-    end
-  end
-
-  def update_zone_prices
-    self.variants_including_master.each do |variant|
-      variant.update_zone_prices(self.zone_prices_hash)
     end
   end
 

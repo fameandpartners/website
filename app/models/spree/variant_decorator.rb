@@ -6,10 +6,8 @@ Spree::Variant.class_eval do
 
   accepts_nested_attributes_for :prices
 
-  attr_accessible :zone_prices_hash, :product_factory_name, :prices_attributes
-  attr_accessor :zone_prices_hash
+  attr_accessible :product_factory_name, :prices_attributes
 
-  #after_save :update_zone_prices
   after_initialize :set_default_values
 
   before_validation :set_default_sku
@@ -21,14 +19,11 @@ Spree::Variant.class_eval do
   end
 
   def save_default_price
-    # store price dependendent
-    #self.price = Services::VariantPriceCalculator.new(self).get
-
+    # default spree codebase
     if default_price && (default_price.changed? || default_price.new_record?)
       default_price.save
     end
-
-    update_zone_prices
+    # of default spree codebase
   end
 
   def discount
@@ -108,25 +103,6 @@ Spree::Variant.class_eval do
   def generate_sku!
     if (sku = generate_sku).present?
       update_column(:sku, sku)
-    end
-  end
-
-
-  #{"3"=>{"amount"=>"", "currency"=>""}, "2"=>{"amount"=>"62.0", "currency"=>"AUD"}}
-  # or take from self.zone_prices_hash
-  def update_zone_prices(zone_prices_attrs = {})
-    zone_prices_attrs ||= self.zone_prices_hash
-    if zone_prices_attrs.present?
-      SiteVersion.where("currency != ?", Spree::Config.currency).each do |site_version|
-        price = self.zone_prices.where(zone_id: site_version.zone_id).first_or_initialize
-        attrs = (zone_prices_attrs[site_version.zone_id.to_s] || {}).merge(currency: site_version.currency)
-        if attrs[:amount].blank?
-          price.try(:destroy)
-        else
-          price.assign_attributes(attrs)
-          price.save
-        end
-      end
     end
   end
 
