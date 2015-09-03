@@ -625,6 +625,10 @@ li#cart-trigger {
 
   nav.navbar{
     border: none;
+    .navbar-brand{
+      left: 40%;
+      position: absolute;
+    }
   }
 
   @media(max-width: 320px){
