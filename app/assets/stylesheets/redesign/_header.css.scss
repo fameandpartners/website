@@ -616,13 +616,19 @@ li#cart-trigger {
 /////////// side menu (hamburger) //////////
 
 #sideMenu {
+  overflow-x: hidden;
   display: block;
   height: 100%;
   overflow: auto;
   position: fixed;
   font-size: 15px;
   top: 0;
-
+  .main-menu{
+    background-color: white;
+  }
+  nav{
+    background-color: white;
+  }
   nav.navbar{
     border: none;
     .navbar-brand{
@@ -634,31 +640,37 @@ li#cart-trigger {
   @media(max-width: 320px){
     width: 300px;
     left: -300px;
+    overflow-x: hidden;
   }
 
   @media(min-width: 321px)and(max-width:400px){
     width: 350px;
     left: -350px;
+    overflow-x: hidden;
   }
 
   @media(min-width: 400px)and(max-width:599px){
     width: 390px;
     left: -390px;
+    overflow-x: hidden;
   }
 
   @media(min-width: 599px)and(max-width:759px){
     width: 575px;
     left: -575px;
+    overflow-x: hidden;
   }
 
   @media(min-width: 760px)and(max-width:799px){
     width: 745px;
     left: -745px;
+    overflow-x: hidden;
   }
 
   @media(min-width: 800px){
     width: 775px;
     left: -775px;
+    overflow-x: hidden;
   }
 
   z-index: 2000;
@@ -794,9 +806,13 @@ li#cart-trigger {
     padding-top: 7px;
     padding-bottom: 7px;
     padding-left: 15px;
+    -webkit-transition: margin-left 0.5s;
+    -moz-transition: margin-left 0.5s;
+    transition: margin-left 0.5s;
+
   }
 
-  .normal-item:last-child{
+  #inner-main-menu .normal-item:last-child{
     border: none;
   }
   .normal-item{
@@ -825,11 +841,134 @@ li#cart-trigger {
   }
 
   .inner-main-menu-slide-left{
-    margin-left: -350px;
+    @media(max-width: 320px){
+      margin-left: -300px;
+    }
+
+    @media(min-width: 321px)and(max-width:400px){
+      margin-left: -350px;
+    }
+
+    @media(min-width: 400px)and(max-width:599px){
+      margin-left: -390px;
+    }
+
+    @media(min-width: 599px)and(max-width:759px){
+      margin-left: -575px;
+    }
+
+    @media(min-width: 760px)and(max-width:799px){
+      margin-left: -745px !important;
+    }
+
+    @media(min-width: 800px){
+      margin-left: -775px !important;
+    }
   }
 
   .sub-menu-slide-left{
     margin-left: 0px !important;
+  }
+
+  .back{
+      float: right;
+      margin-left: 10px;
+  }
+
+
+  @media(min-width: 760px)and(max-width:799px){
+    .navbar-brand{
+      left: 43% !important;
+    }
+    #side-search{
+      width: 93% !important;
+    }
+    #side-search-area{
+      margin-left: 10px;
+      margin-top: 10px;
+    }
+    .normal-item{
+      padding-bottom: 15px;
+      .text{
+        width: 95%;
+      }
+    }
+    .normal-item div{
+      padding-bottom: 0;
+    }
+    .bottom-area{
+      margin-left: 0;
+    }
+    #new-this-week-menu{
+      .normal-item{
+        margin-top: 70px !important;
+      }
+    }
+    .grey-item{
+      margin-left: 0px !important;
+    }
+    #dresses-menu, #lookbook-menu, #magazine-menu{
+      margin-top: 125px !important;
+      .text{
+        width: 90% !important;
+      }
+    }
+    #new-this-week-menu{
+      .text{
+        width: 89% !important;
+      }
+    }
+  }
+
+  @media(min-width: 800px){
+    .navbar-brand{
+      left: 42% !important;
+    }
+    #side-search-area{
+      margin-left: 10px !important;
+      margin-top: 10px !important;
+    }
+    .normal-item{
+      padding-bottom: 5px !important;
+      .text{
+        padding-left: 10px;
+        width: 95%;
+      }
+    }
+    #side-search-area{
+      #side-search{
+        width: 93% !important;
+      }
+    }
+    .bottom-area{
+      margin-left: 0;
+    }
+    #new-this-week-menu{
+      .normal-item{
+        margin-top: 70px !important;
+        .text{
+          width: 89% !important;
+        }
+      }
+
+    }
+    #dresses-menu{
+      margin-top: 125px !important;
+      .normal-item:first-child{
+        .text{
+          width: 90% !important;
+        }
+      }
+      .grey-item{
+        margin-left: 0px !important;
+      }
+    }
+    #lookbook-menu, #magazine-menu{
+      margin-top: 125px !important;
+      .text{
+        width: 90% !important;
+      }
+    }
   }
 
   #new-this-week-menu{
@@ -837,11 +976,32 @@ li#cart-trigger {
     z-index: 10;
     width: 100%;
     height: 90px;
-    margin-left: 350px;
     margin-top: 45px;
     -webkit-transition: margin-left 0.5s;
     -moz-transition: margin-left 0.5s;
     transition: margin-left 0.5s;
+
+    @media(max-width: 320px){
+      margin-left: 300px;
+    }
+
+    @media(min-width: 321px)and(max-width:400px){
+      margin-left: 350px;
+    }
+
+    @media(min-width: 400px)and(max-width:599px){
+      margin-left: 390px;
+    }
+
+    @media(min-width: 599px)and(max-width:759px){
+      margin-left: 575px;
+    }
+    @media(min-width: 760px)and(max-width:799px){
+      margin-left: 745px;
+    }
+    @media(min-width: 800px){
+      margin-left: 775px;
+    }
 
     ul{
       margin-left: 0;
@@ -855,10 +1015,7 @@ li#cart-trigger {
     .text{
       width: 75%;
     }
-    .back{
-      float: right;
-      margin-left: 10px;
-    }
+
     .images-content{
       padding-bottom: 9%;
       .row{
@@ -882,6 +1039,73 @@ li#cart-trigger {
       img:last-child{
         margin-left: 9%;
       }
+    }
+  }
+  #dresses-menu, #lookbook-menu, #magazine-menu{
+    height: 100%;
+    background-color: white;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    margin-top: 45px;
+    -webkit-transition: margin-left 0.5s;
+    transition: margin-left 0.5s;
+
+    @media(max-width: 320px){
+      margin-left: 300px;
+    }
+
+    @media(min-width: 321px)and(max-width:400px){
+      margin-left: 350px;
+    }
+
+    @media(min-width: 400px)and(max-width:599px){
+      margin-left: 390px;
+    }
+
+    @media(min-width: 599px)and(max-width:759px){
+      margin-left: 575px;
+    }
+    @media(min-width: 760px)and(max-width:799px){
+      margin-left: 745px;
+    }
+    @media(min-width: 800px){
+      margin-left: 775px;
+    }
+    .text{
+      width: 75%;
+    }
+    .normal-item:first-child{
+      padding-top: 10px;
+      border: none;
+    }
+    .grey-item{
+      background-color: #f5f5f5;
+      margin-left: 15px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 15px;
+      font-weight: 600;
+    }
+
+    .gray-bg {
+      clear: both;
+      background-color: #f5f5f5;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      text-align: center;
+      font-weight: 500;
+    }
+    .mag-image{
+      float: left;
+      width: 50%;
+      img{
+        width: 100%;
+      }
+    }
+    .image-text{
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
   }
 }

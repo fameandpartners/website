@@ -34,14 +34,37 @@ window.SideMenu = class SideMenu
       $("#new-this-week-menu").toggleClass("sub-menu-slide-left")
       @slideMainMenu()
 
+    $("#dress-menu-open").on 'click', =>
+      @slideMainMenu()
+      $("#dresses-menu").toggleClass("sub-menu-slide-left")
+    $("#dresses-menu .arrow").on 'click', =>
+      @slideMainMenu()
+      $("#dresses-menu").toggleClass("sub-menu-slide-left")
+
+
+    $("#lookbook-menu-open").on 'click', =>
+      @slideMainMenu()
+      $("#lookbook-menu").toggleClass("sub-menu-slide-left")
+    $("#lookbook-menu .arrow").on 'click', =>
+      @slideMainMenu()
+      $("#lookbook-menu").toggleClass("sub-menu-slide-left")
+
+    $("#magazine-menu-open").on 'click', =>
+      @slideMainMenu()
+      $("#magazine-menu").toggleClass("sub-menu-slide-left")
+    $("#magazine-menu .arrow").on 'click', =>
+      @slideMainMenu()
+      $("#magazine-menu").toggleClass("sub-menu-slide-left")
+
   slideMainMenu: =>
     $("#inner-main-menu li[class*='normal-item']").toggleClass('inner-main-menu-slide-left')
+    $("#inner-main-menu li[class*='bottom-area']").toggleClass('inner-main-menu-slide-left')
 
   blockScroll: =>
     sideMenuScrollTop = @$container.scrollTop()
-    allDressesPosition = $("#contact-us",@$container).position().top
-    if sideMenuScrollTop > allDressesPosition - 50
-      @$container.scrollTop(allDressesPosition - 50)
+    contactUsPosition = $("#contact-us",@$container).position().top
+    if sideMenuScrollTop > contactUsPosition - 50
+      @$container.scrollTop(contactUsPosition - 50)
 
   slide: (e) =>
     t = $(e.target)
@@ -66,7 +89,18 @@ window.SideMenu = class SideMenu
   open: () =>
     @$container.css("margin-left", @$container.width())
     @$overlay.addClass('is-visible')
+    $("#new-this-week-menu").show()
+    $("#dresses-menu").show()
+    $("#lookbook-menu").show()
+    $("#magazine-menu").show()
 
   close: () =>
+    $("#new-this-week-menu").hide().removeClass("sub-menu-slide-left")
+    $("#dresses-menu").hide().removeClass("sub-menu-slide-left")
+    $("#lookbook-menu").hide().removeClass("sub-menu-slide-left")
+    $("#magazine-menu").hide().removeClass("sub-menu-slide-left")
+    $("#inner-main-menu li[class*='normal-item']").removeClass('inner-main-menu-slide-left')
+    $("#inner-main-menu li[class*='bottom-area']").removeClass('inner-main-menu-slide-left')
     @$container.css("margin-left", -@$container.width())
     @$overlay.removeClass('is-visible')
+

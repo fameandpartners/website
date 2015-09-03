@@ -138,7 +138,7 @@ ruby:
                 .text NEW THIS WEEK
                 .arrow
                   i.fa.fa-chevron-left
-                  .back Back
+                  .back BACK
             li.images-content
               .row
                 img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
@@ -146,17 +146,112 @@ ruby:
               .row
                 img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
                 img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+
+        div#dresses-menu
+          ul.nav.navbar-nav
+            li.normal-item
+              div
+                .text DRESSES
+                .arrow
+                  i.fa.fa-chevron-left
+                  .back BACK
+            li.grey-item
+              div
+                .text SHOP BY
+            li.normal-item
+              div
+                .text View all dresses
+            li.normal-item
+              div
+                .text What's new
+            li.normal-item
+              div
+                .text Made in 48 hours
+            li.normal-item
+              div
+                .text Instagram
+            li.grey-item
+              div
+                .text EVENTS
+            li.normal-item
+              div
+                .text Formal
+            li.normal-item
+              div
+                .text Wedding
+            li.normal-item
+              div
+                .text Birthday
+            li.normal-item
+              div
+                .text Special event
+            li.normal-item
+              div
+                .text Ball gowns
+            li.normal-item
+              div
+                .text Bridesmaid
+            li.normal-item
+              div
+                .text Graduation
+            li.normal-item
+              div
+                .text Prom
+            li.normal-item
+              div
+                .text Homecoming
+            li.normal-item
+              div
+                .text Sweet 16
+            li.normal-item
+              div
+                .text Debutance
+
+        div#lookbook-menu
+          ul.nav.navbar-nav
+            li.normal-item
+              div
+                .text LOOKBOOK
+                .arrow
+                  i.fa.fa-chevron-left
+                  .back BACK
+
+        div#magazine-menu
+          ul.nav.navbar-nav
+            li.normal-item
+              div
+                .text MAGAZINE
+                .arrow
+                  i.fa.fa-chevron-left
+                  .back BACK
+          .div.gray-bg STEAL HER STYLE
+          .mag-image
+            = image_tag "homepage/magazine/1.jpg"
+            .image-text.text-center TAYLOR
+          .mag-image
+            = image_tag "homepage/magazine/2.jpg"
+            .image-text.text-center BEYONCE
+
+          .div.gray-bg BACKSTAGE PASS
+          .mag-image
+            = image_tag "homepage/magazine/2.jpg"
+            .image-text.text-center Blah blah blah
+          .mag-image
+            = image_tag "homepage/magazine/3.jpg"
+            .image-text.text-center Blah blah blah
+
+
         ul.nav.navbar-nav#inner-main-menu
           li
             div id='side-search-area' class='row'
               input type='text' id='side-search' placeholder='SEARCH'
               = image_tag "_icons/search.svg", class: "side-search-icon"
-          li.normal-item
+          li.normal-item#new-this-week-open
             div
               .text NEW THIS WEEK
               .arrow
-                i.fa.fa-chevron-right#new-this-week-open
-          li.normal-item
+                i.fa.fa-chevron-right
+          li.normal-item#dress-menu-open
             div
               .text DRESSES
               .arrow
@@ -164,12 +259,12 @@ ruby:
           li.normal-item
             div
               .text EVENTS
-          li.normal-item
+          li.normal-item#lookbook-menu-open
             div
               .text LOOKBOOK
               .arrow
                 i.fa.fa-chevron-right
-          li.normal-item
+          li.normal-item#magazine-menu-open
             div
               .text MAGAZINE
               .arrow
