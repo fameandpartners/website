@@ -101,8 +101,8 @@ Spree::Variant.class_eval do
     end
 
     sku_chunks.reject(&:blank?).join('-')
-  rescue Exception
-    return nil
+  rescue
+    nil
   end
 
   def generate_sku!
