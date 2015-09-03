@@ -248,6 +248,55 @@
     }
 
     .buttons{
+
+    	.col-xs-12{
+    		border-style: solid;
+		    padding-top: 5px;
+		    padding-bottom: 5px;
+		    border-color: #E6E6E6;
+		    border-width: 1px;
+		    margin-top: 10px;
+		    margin-bottom: 10px;
+		    @media(max-width: 320px){
+		    	font-size:9pt;
+		    	margin-bottom: 0;
+	    	}
+		    .refer {
+		    	padding-left: 24%;
+		    	@media(min-width: 600px)and(max-width:767px){
+		    		padding-left:33%;
+		    	}
+		    	@media(min-width: 768px){
+					padding-left:37%;
+		    	}
+
+		    }
+		    .hr48 {
+		    	padding-left: 8%;
+		    	@media(min-width: 600px)and(max-width:767px){
+		    		padding-left:23%;
+		    	}
+		    	@media(min-width: 768px){
+					padding-left:30%;
+		    	}
+		    }
+		    .chain {
+		    	padding-left: 5%;
+		    	@media(min-width: 414px)and(max-width: 599px)
+		    	{
+		    		padding-left: 8%;
+		    	}
+		    	@media(max-width: 320px){
+		    		padding-left: 2%;
+		    	}
+		    	@media(min-width: 600px)and(max-width:767px){
+		    		padding-left:23%;
+		    	}
+		    	@media(min-width: 768px){
+					padding-left:29%;
+		    	}
+		    }
+    	}
     	padding-bottom: 20px;
     	img{
     		float: left;

@@ -1,5 +1,5 @@
 .footer.container
-  .row.social-row
+  .row.social-row.hidden-xs.hidden-sm
     .col-md-10.col-md-offset-1
       .stay-social STAY SOCIAL
       .stay-social-images
@@ -11,10 +11,10 @@
         = image_tag '_icons/snap.jpg'
         = image_tag '_icons/polyvore.jpg'
 
-      .register-email.hidden-xs
+      .register-email
         = text_field_tag 'email', nil, placeholder: 'REGISTER YOUR EMAIL FOR THIS XX OFFER'
       .submit SUBMIT
-  .row.buttons.hidden-xs
+  .row.buttons.hidden-xs.hidden-sm
     .col
       = image_tag 'footer/refer.png'
       .text REFER A FRIEND
@@ -26,6 +26,17 @@
       .text JOIN
       br
       .text THE FAME CHAIN
+
+  .row.buttons.visible-xs.visible-sm
+    .col-xs-12
+      = image_tag 'footer/refer.png', class: 'refer'
+      .text REFER A FRIEND
+    .col-xs-12
+      = image_tag 'footer/48.png', class: 'hr48'
+      .text 48 HR EXPRESS MAKING
+    .col-xs-12
+      = image_tag 'footer/chain.png', class: 'chain'
+      .text JOIN THE FAME CHAIN
 
   .footer-navigation
     .col-md-3.col-sm-6

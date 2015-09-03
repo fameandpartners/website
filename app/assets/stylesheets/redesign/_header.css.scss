@@ -19,6 +19,9 @@ header{
   }
   .nav-menu:first-child{
     border: none;
+    .nav-menu-container{
+      background-color: white;
+    }
   }
 }
 .nav-menu {
