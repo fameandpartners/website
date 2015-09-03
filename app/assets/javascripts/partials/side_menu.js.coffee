@@ -27,9 +27,19 @@ window.SideMenu = class SideMenu
     $('#sideMenu').on 'mousewheel', (e) =>
       @blockScroll()
 
+    $("#new-this-week-open").on 'click', =>
+      @slideMainMenu()
+      $("#new-this-week-menu").toggleClass("sub-menu-slide-left")
+    $("#new-this-week-menu .arrow").on 'click', =>
+      $("#new-this-week-menu").toggleClass("sub-menu-slide-left")
+      @slideMainMenu()
+
+  slideMainMenu: =>
+    $("#inner-main-menu li[class*='normal-item']").toggleClass('inner-main-menu-slide-left')
+
   blockScroll: =>
     sideMenuScrollTop = @$container.scrollTop()
-    allDressesPosition = $(".all-dresses",@$container).position().top
+    allDressesPosition = $("#contact-us",@$container).position().top
     if sideMenuScrollTop > allDressesPosition - 50
       @$container.scrollTop(allDressesPosition - 50)
 

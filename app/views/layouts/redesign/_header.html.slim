@@ -131,7 +131,22 @@ ruby:
         a#close
           = image_tag('Hamburger_white.png', height: '25px')
       .main-menu
-        ul.nav.navbar-nav
+        div#new-this-week-menu
+          ul.nav.navbar-nav
+            li.normal-item
+              div
+                .text NEW THIS WEEK
+                .arrow
+                  i.fa.fa-chevron-left
+                  .back Back
+            li.images-content
+              .row
+                img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+                img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+              .row
+                img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+                img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+        ul.nav.navbar-nav#inner-main-menu
           li
             div id='side-search-area' class='row'
               input type='text' id='side-search' placeholder='SEARCH'
@@ -140,7 +155,7 @@ ruby:
             div
               .text NEW THIS WEEK
               .arrow
-                i.fa.fa-chevron-right
+                i.fa.fa-chevron-right#new-this-week-open
           li.normal-item
             div
               .text DRESSES
@@ -228,8 +243,9 @@ ruby:
             .bottom-area-text Get styling advice
           li.bottom-area
             .bottom-area-text Fame Chain
-          li.bottom-area
+          li.bottom-area#contact-us
             .bottom-area-text Contact Us
 
 
 = render 'layouts/redesign/campaigns/auto_apply_promo_code'
+
