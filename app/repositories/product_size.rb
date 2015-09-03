@@ -93,7 +93,7 @@ class Repositories::ProductSize
             id: option_value.id,
             name: option_value.name,
             presentation: option_value.presentation,
-            value: value
+            value: value.to_i
           )
         end
         result
