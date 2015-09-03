@@ -19,7 +19,7 @@
 	}
 
 	.footer-navigation {
-		margin-top: 30px;
+		margin-top: 10px;
 		font-size: 1.3rem;
 		@media(max-width: 800px){
 			text-align:center;
@@ -386,6 +386,10 @@
     		font-weight: 500;
     		border: none;
     		max-height: 10px;
+    		@media(min-width: 414px)and(max-width: 992px){
+    			font-size: 9pt;
+    		}
+
     		@media(min-width: 321px)and(max-width: 413px)
 			{
 				font-size:6.5pt;
@@ -414,6 +418,7 @@
     		padding-bottom: 5px;
     		width: 100%;
     		img{
+    			cursor: pointer;
     			margin-left: 20px;
     			@media(min-width: 321px)and(max-width: 413px)
     			{
