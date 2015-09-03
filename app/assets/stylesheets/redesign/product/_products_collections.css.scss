@@ -16,7 +16,9 @@
 		font-weight: 600;
 		float:right;
 		width:20%;
-		margin-right:12px;
+		@media(min-width: 1890px){
+			margin-right:9px;
+		}
 	}
 
 	.select2-container--default .select2-selection--single {
