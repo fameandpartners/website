@@ -80,12 +80,12 @@ ruby:
                 button.navbar-toggle.visible-xs.visible-sm#side-menu-trigger type="button"
                   = image_tag('Hamburger.svg', height: '25px')
 
-          .masthead.pull-left.hidden-xs
+          .masthead.pull-left.hidden-xs.hidden-sm
             = link_to root_path
               = image_tag src='logo/new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
 
 
-          .masthead.pull-left.visible-xs
+          .masthead.pull-left.visible-xs.visible-sm
             = link_to root_path do
               = image_tag src='logo/logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
 
@@ -107,12 +107,12 @@ ruby:
             li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
               = render "layouts/redesign/header/my_account_dropdown"
 
-          .masthead.pull-right.visible-xs
+          .masthead.cart.pull-right.visible-xs.visible-sm
             #cart-trigger.menu-item
               span.num#cart-item-count 0
               = image_tag 'homepage/shopping_bag.png', class: 'shopping-bag'
 
-          .masthead.pull-right.visible-xs
+          .masthead.pull-right.visible-xs.visible-sm
             .menu-item
               span.num#moodboard-counter 0
               i.fa.fa-heart

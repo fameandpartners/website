@@ -342,12 +342,42 @@ li.shop {
       }
     }
   }
+
   @media(max-width: 320px){
     .shopping-bag{
       margin-left: 18px;
     }
     i{
       margin-left: 15px;
+    }
+  }
+
+  @media(min-width: 415px)and(max-width: 800px)
+  {
+    .masthead.pull-right{
+      padding-right: 0;
+    }
+    .masthead.cart{
+      padding-left: 15px;
+    }
+    #cart-trigger{
+      margin-top: 1px;
+    }
+    .masthead:last-child{
+      i{
+        margin-right: 15px;
+      }
+    }
+  }
+
+  @media(width: 768px){
+    .mobile-logo{
+      margin-left: 220px;
+    }
+  }
+  @media(width: 800px){
+    .mobile-logo{
+      margin-left: 230px;
     }
   }
 }
