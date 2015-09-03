@@ -15,7 +15,7 @@ doctype html
   body#top class=('locale-warning-active' if @locale_warning.show?)
 
     - if Features.active?(:google_tag_manager)
-      = render 'layouts/redesign/google_tag_manager'
+      = render 'google_tag_manager/base'
 
     = render 'layouts/redesign/header'
 
