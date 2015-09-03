@@ -14,7 +14,7 @@ doctype html
 
   body#top class=('locale-warning-active' if @locale_warning.show?)
 
-    - if Rails.env.production? || Rails.env.preproduction?
+    - if Features.active?(:google_tag_manager)
       = render 'layouts/redesign/google_tag_manager'
 
     = render 'layouts/redesign/header'
