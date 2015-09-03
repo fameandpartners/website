@@ -1,87 +1,192 @@
 require 'spec_helper'
+require 'capybara/poltergeist'
 
-describe 'browse and purchase process', :type => :feature do
+# data helpers
+def update_elastic_index
+  # two steps for easier debug
+  Products::ColorVariantsIndexer.new.tap do |indexer|
+    indexer.collect_variants
+    indexer.push_to_index
+  end
+end
 
-  let(:taxonomy)              { Spree::Taxonomy.create!(:name => 'Style') }
-  let(:taxon)                 { create(:taxon, :name => 'Style') }
-  let(:styles)                { %w{Strapless Lace V-Neck} }
-  let(:sizes)                 { (6..10).step(2) }
-  let(:colours)               { %w{black white green} }
+def clean_old_test_data
+  Spree::Image.delete_all
+  Spree::Product.destroy_all
+  Spree::Taxon.delete_all
+  Spree::Taxonomy.delete_all
+end
 
-  let(:color_type)  { Spree::OptionType.create!(:name => 'dress-color', :presentation => 'Color') }
-  let(:size_type)   { Spree::OptionType.create!(:name => 'dress-size', :presentation => 'Size') }
+# behaviour tests
+# don't forgot to clear traffic before
+#   page.driver.clear_network_traffic
+def show_network_traffic(page)
+  page.driver.network_traffic.each do |request|
+    request.response_parts.uniq(&:url).each do |response|
+      puts "\n Responce URL #{response.url}: \n Status #{response.status}"
+    end
+  end
+end
 
-  def create_option_value(option_type, values)
-    values.each_with_index.collect do |v, i|
-      option_type.option_values.create(:name => v)
+def wait_ajax_completion(page)
+  Timeout.timeout(Capybara.default_wait_time) do
+    while !page.evaluate_script('jQuery.active').zero? do
+      sleep(0.1)
+    end
+    sleep(0.5) # additional time to process & render
+  end
+end
+
+# debug tools
+# page.driver.debug # if inspector true
+# save_and_open_screenshot
+# save_and_open_page
+# save_screenshot('screenshot.png', full: true)
+# ..
+
+describe 'user', type: :feature, js: true do
+  include PathBuildersHelper
+
+  before :all do
+    Capybara.javascript_driver = :poltergeist
+
+    clean_old_test_data
+
+    create(:taxonomy, :collection)
+    create(:taxonomy, :style)
+    Repositories::Taxonomy.read_all(force: true)
+
+    create(:option_type, :size, :with_values)
+    create(:option_type, :color, :with_values_groups)
+
+    create(:shipping_method)
+
+    product = create(:spree_product, :with_size_color_variants, position: 1)
+    product.reload
+  end
+
+  before :each do
+    Spree::Order.destroy_all
+    Rails.cache.clear
+  end
+
+  context "robots" do
+    # simpliest request ever
+    it 'shows robots txt' do
+      visit '/robots.txt'
+      expect(page).to have_text('User-Agent')
+      expect(page.status_code).to eq(200) # 200 OK
     end
   end
 
-  def create_data
-    Spree::Taxonomy.create!(:name => 'Range')
-
-    size_options   = create_option_value(size_type, sizes)
-    colour_options = create_option_value(color_type, colours)
-
-    taxons = styles.collect do |style|
-      create(:taxon, :name => style, :parent => taxon, :taxonomy => taxonomy)
-    end
-
-    taxons.each do |taxon|
-      dresses = create_list(:dress, 3, :taxons => [taxon])
-      dresses.each do |dress|
-        colour_options.each do | colour_option |        
-          dress.product_color_values << ProductColorValue.new(:option_value => colour_option)          
-        end
-        # size_options.each do | size_option |
-          # ProductColorValue.create!(:option_value => size_option, :product => dress)
-        # end
-        # dress.variants << variants
-        dress.option_types = [color_type, size_type]
-        dress.save!
-        # dress.reload
-        size_options.each do | size_option |        
-          colour_options.each do | colour_option |        
-            Spree::Variant.create(product_id: dress.id).tap do |variant|
-              variant.option_values = [size_option, colour_option]
-              variant.save!
-            end
-          end
-        end
+  context "#landing_page" do
+    before :each do
+      begin
+        visit '/'
+      rescue Capybara::Poltergeist::JavascriptError
       end
     end
 
-    # dresses.each_with_index do |dress, i|
-    #   dress.taxons << taxons
-    #   dress.save!
-    # end    
+    it "contains menu links" do
+      expect(page).to have_content 'Shop'
+    end
 
-    Utility::Reindexer.reindex
-  end
+    it "contains banner box"
 
-  before do      
-    image = double(Spree::Image)
-    allow(image).to receive_message_chain(:attachment, :url).and_return('/images/missing.png')
-    allow_any_instance_of(ProductColorValue).to receive(:images).and_return([image])
+    it "contains email registration" do
+      expect(page).to have_content(/Become Famous/i)
 
-    create_data 
-  end
+      # TODO : check email capturing
+    end
 
-  context "authenticated" do
-    include_context 'authenticated_user'
-    
-    describe 'browse' do
+    it "shows empty shopping bag" do
+      find('#cart-trigger a').click
+      wait_ajax_completion(page)
+      #save_screenshot('screenshot.png', full: true) # save screenshot
 
-      # TODO - Actually make this a test. :)
-      xit 'should add a product to cart' do
-        visit '/us/'     
-        p = Spree::Product.all.shuffle.first
-        find('.nav-menu').click_link("Lace")
+      expect(page).to have_selector('#cart', visible: true)
+      expect(page).to have_selector('#cart .cart--call-to-actions', visible: true)
 
-        # visit "dresses/#{p.permalink}/"
+      # TODO check not empty dress
+    end
+
+    it "allows redirect to /dresses page" do
+      first('.shop.menu-item').hover
+
+      begin
+        find('.nav-menu ul.primary .all-dresses').click_button('View all dresses')
+      rescue Capybara::Poltergeist::JavascriptError
       end
 
+      expect(page.status_code).to eq(200) # 200 OK
+      save_screenshot('screenshot.png', full: true) # save screenshot
+    end
+  end
 
+  context 'products list' do
+    before :all do
+      update_elastic_index
+    end
+
+    before :each do
+      begin
+        visit '/dresses'
+      rescue Capybara::Poltergeist::JavascriptError
+      end
+    end
+
+    it "allow user to view products" do
+      expect(page).to have_css('.products-collection .category--item')
+    end
+
+    it "allow user to move to dress details" do
+      save_screenshot('screenshot.png', full: true)
+
+      begin
+        find('.products-collection .category--item a img').click
+      rescue Capybara::Poltergeist::JavascriptError
+      end
+
+      expect(page).to have_css('#slides')
+      expect(page).to have_css('.product-content')
+    end
+  end
+
+  context "product details" do
+    let(:product) { Spree::Product.first }
+
+    before :each do
+      Spree::Order.destroy_all
+
+      begin
+        visit collection_product_path(product)
+      rescue Capybara::Poltergeist::JavascriptError
+      end
+    end
+
+    it "can add dress to cart" do
+      # select color. color will be select by default.. we can omit
+      find('#product-colorize-action').click()
+      first('#product-color-content .color-option').click()
+
+      # select size
+      find("#product-size-action").click
+      first('#product-size-content .size-option.product-option').click
+
+      # close panel
+      find('#product-overlay').trigger('click')
+
+      # press 'add'
+      find('.buy-button').click
+
+      wait_ajax_completion(page)
+
+      # item should be
+      expect(page.find('#cart-item-count').text).to eq('1')
+      expect(page).to have_selector('#cart .cart-items .cart-item', visible: true)
+order = Spree::Order.last
+      expect(order).not_to be_blank
+      expect(order.item_count).to eq(1)
     end
   end
 end

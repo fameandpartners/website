@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe Spree::OptionValue, type: :model do
+  before :each do
+    Spree::OptionValue.delete_all
+    Spree::OptionType.delete_all
+    Spree::OptionValuesGroup.delete_all
+  end
+
   context "#colors" do
     it 'returns options values for color option type' do
       color_option_type = create(:option_type, :color)
