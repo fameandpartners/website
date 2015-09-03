@@ -25,8 +25,9 @@ module CheckoutHelper
     end
   end
 
+  # Not a payment gateway
   def masterpass_active?
-    false || Features.active?(:masterpass, current_spree_user) || session[:auto_applied_promo_code] == 'masterpass25'
+    false #|| Features.active?(:masterpass, current_spree_user) || session[:auto_applied_promo_code] == 'masterpass25'
   end
 
   def masterpass_cart_callback_uri(payment_method)
