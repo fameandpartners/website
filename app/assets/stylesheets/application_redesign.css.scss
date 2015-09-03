@@ -58,14 +58,14 @@
 // @end Include bootstrap
 // -----------------
 
-// Setup 
+// Setup
 @import 'redesign/helpers/mixins';
 @import 'redesign/helpers/helpers';
 @import 'redesign/helpers/icons';
 // @end Setup
 // -----------------
 
-// Libs 
+// Libs
 @import 'libs/vex/*';
 @import 'redesign/libs/chosen';
 @import 'redesign/libs/chosen-override';
@@ -74,7 +74,7 @@
 // @end Libs
 // -----------------
 
-// Components 
+// Components
 @import 'redesign/components/page-title';
 @import 'redesign/components/tabs';
 @import 'redesign/components/modal';
@@ -100,7 +100,7 @@
 // @end Layout
 // -----------------
 
-// Pages 
+// Pages
 @import 'redesign/pages/product/*';
 @import 'redesign/pages/about';
 @import 'redesign/pages/cart';
@@ -119,4 +119,9 @@
 @import 'redesign/pages/fashion-it-girl-winner';
 @import 'redesign/pages/style_session';
 // @end Pages
+// -----------------
+
+// Campaigns - transient marketing related css
+@import 'transient_content';
+// @end Campaigns
 // -----------------
