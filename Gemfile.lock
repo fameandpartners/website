@@ -427,6 +427,8 @@ GEM
       nokogiri (~> 1.5, >= 1.5.11)
     font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
+    font-awesome-sass (4.4.0)
+      sass (>= 3.2)
     formatador (0.2.5)
     geoip (1.5.0)
     git-version-bump (0.15.1)
@@ -848,6 +850,7 @@ DEPENDENCIES
   factory_girl_rails (= 4.2.1)
   fame_favicon!
   fog
+  font-awesome-sass (~> 4.4.0)
   geoip
   google_drive (= 1.0.0)
   inspinia-rails!
