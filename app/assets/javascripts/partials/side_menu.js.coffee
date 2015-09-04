@@ -64,7 +64,7 @@ window.SideMenu = class SideMenu
     sideMenuScrollTop = @$container.scrollTop()
     contactUsPosition = $("#contact-us",@$container).position().top
     if sideMenuScrollTop > contactUsPosition - 50
-      @$container.scrollTop(contactUsPosition - 50)
+      @$container.scrollTop(contactUsPosition - 30)
 
   slide: (e) =>
     t = $(e.target)
