@@ -3,3 +3,14 @@
 <%# http://www.simoahava.com/gtm-tips/datalayer-declaration-vs-push/ %>
 
 <script>window.dataLayer = window.dataLayer || [];</script>
+
+<%
+   # TODO: probably better not having this here, and putting it properly on a before_filter
+   user_piece = Marketing::GTM::Pieces::User.new(spree_user: spree_current_user, request_ip: request.ip)
+   container = Marketing::GTM::Container.new(pieces: [user_piece])
+%>
+
+<script>
+    dataLayer.push(<%= container.to_json.html_safe %>);
+</script>
+
