@@ -1269,6 +1269,10 @@ li#cart-trigger {
   }
   #rect-dresses{
     .left-area{
+      .no-style-text{
+        color: black;
+        text-decoration: none;
+      }
       padding-right: 10px;
       background-color: #f5f5f5;
       width: 70%;
@@ -1285,6 +1289,15 @@ li#cart-trigger {
         div{
           clear: both;
           margin-top:10px;
+        }
+      }
+      .col2, .col3{
+        li{
+          padding-top: 10px;
+          a{
+            font-size: 1.4rem;
+            text-transform: uppercase;
+          }
         }
       }
     }

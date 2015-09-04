@@ -56,28 +56,18 @@ ruby:
   .left-area
     .col1
       div.head SHOP BY
-      div View all dresses
+      div
+        = link_to 'View all dresses', '/dresses' , class: 'no-style-text'
       div What's new
-      div Made in 48 hours
+      div
+        = link_to 'Made in 48 hours', fast_making_dresses_path, class: 'no-style-text'
       div Instagram
     .col2
       div.head STYLE
-      div Plus size
-      div Two-piece
-      div One shoulder
-      div Strapless
-      div V-neck
-      div Split
-      div Backless
-      div Lace
+      = render partial: 'layouts/redesign/style'
     .col3
       div.head COLOUR
-      div Black
-      div White / Ivory
-      div Blue
-      div Pink
-      div Red
-      div Pastle
+      = render partial: 'layouts/redesign/color'
     .col4
       div.head SEPARATES
       div Outerwear

@@ -80,32 +80,11 @@ ruby:
                 button.navbar-toggle.visible-xs.visible-sm#side-menu-trigger type="button"
                   = image_tag('Hamburger.svg', height: '25px')
 
-          .masthead.pull-left.hidden-xs.hidden-sm
-            = link_to root_path
-              = image_tag src='logo/new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
-
 
           .masthead.pull-left.visible-xs.visible-sm
             = link_to root_path do
               = image_tag src='logo/logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
 
-          ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
-            = render partial: 'layouts/redesign/mega_menu/shop'
-            = render partial: 'layouts/redesign/mega_menu/lookbook'
-            li.menu-item
-              = link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link'
-
-          ul.secondary.pull-right
-            - if Features.active?(:moodboard)
-              li.menu-item.hidden-xs.hidden-sm
-                = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
-                  span.visible-sm
-                    = image_tag "Heart.svg"
-                  span.hidden-sm.hidden-xs#moodboard-counter
-                    | Moodboard &nbsp;
-
-            li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
-              = render "layouts/redesign/header/my_account_dropdown"
 
           .masthead.cart.pull-right.visible-xs.visible-sm
             #cart-trigger.menu-item
