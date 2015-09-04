@@ -807,9 +807,9 @@ li#cart-trigger {
     padding-top: 7px;
     padding-bottom: 7px;
     padding-left: 15px;
-    -webkit-transition: margin-left 0.5s;
-    -moz-transition: margin-left 0.5s;
-    transition: margin-left 0.5s;
+    -webkit-transition: margin-left 0.25s;
+    -moz-transition: margin-left 0.25s;
+    transition: margin-left 0.25s;
     a{
       padding: 0;
     }
@@ -830,9 +830,9 @@ li#cart-trigger {
     border-bottom-style: solid;
     border-bottom-width: 1px;
     border-bottom-color: #D0D0D0;
-    -webkit-transition: margin-left 0.5s;
-    -moz-transition: margin-left 0.5s;
-    transition: margin-left 0.5s;
+    -webkit-transition: margin-left 0.25s;
+    -moz-transition: margin-left 0.25s;
+    transition: margin-left 0.25s;
     .text{
       width: 90%;
       float: left;
@@ -987,9 +987,9 @@ li#cart-trigger {
     width: 100%;
     height: 90px;
     margin-top: 45px;
-    -webkit-transition: margin-left 0.5s;
-    -moz-transition: margin-left 0.5s;
-    transition: margin-left 0.5s;
+    -webkit-transition: margin-left 0.25s;
+    -moz-transition: margin-left 0.25s;
+    transition: margin-left 0.25s;
 
     @media(max-width: 320px){
       margin-left: 300px;
@@ -1059,8 +1059,8 @@ li#cart-trigger {
     z-index: 10;
     width: 100%;
     margin-top: 45px;
-    -webkit-transition: margin-left 0.5s;
-    transition: margin-left 0.5s;
+    -webkit-transition: margin-left 0.25s;
+    transition: margin-left 0.25s;
 
     @media(max-width: 320px){
       margin-left: 300px;
