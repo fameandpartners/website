@@ -1112,6 +1112,16 @@ li#cart-trigger {
       padding-top: 10px;
       padding-bottom: 10px;
     }
+    .images-content{
+      .row{
+        width: 100%;
+        margin-left: -5px;
+        img{
+          float: left;
+          width: 50%;
+        }
+      }
+    }
   }
 }
 
