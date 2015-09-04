@@ -33,6 +33,7 @@ class Products::CollectionsController < Products::BaseController
   helper_method :page
 
   before_filter :redirect_undefined,
+                :canonicalize_sales,
                 :load_page,
                 :set_collection_resource,
                 :set_collection_seo_meta_data
@@ -56,6 +57,12 @@ class Products::CollectionsController < Products::BaseController
       if params[:permalink] =~ /undefined\Z/
         redirect_to '/undefined', status: :moved_permanently
       end
+    end
+
+    def canonicalize_sales
+      # `/dresses`, `/dresses/sale-all` and `/dresses?sale=number` have the same content as /dresses
+      # Until they have different content, we should point canonical to `/dresses` page
+      @canonical = dresses_path if params[:sale]
     end
 
     def load_page

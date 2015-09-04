@@ -13,6 +13,24 @@ describe Products::CollectionsController, :type => :controller do
       allow(controller).to receive(:collection_resource).and_return(collection_double)
     end
 
+    describe 'before filters' do
+      describe '#canonicalize_sales' do
+        context 'params have sales' do
+          it 'sets @canonical with dresses_path' do
+            get :show, sale: 'all'
+            expect(controller.instance_variable_get(:@canonical)).to eq('/dresses')
+          end
+        end
+
+        context 'params does not have sales' do
+          it '@canonical is kept nil' do
+            get :show
+            expect(controller.instance_variable_get(:@canonical)).to be_nil
+          end
+        end
+      end
+    end
+
     describe 'returns a 404 status' do
       before(:each) do
         allow(controller).to receive(:parse_permalink).and_return(nil)
