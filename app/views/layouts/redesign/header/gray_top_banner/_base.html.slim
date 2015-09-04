@@ -8,9 +8,11 @@ ruby:
   #free-shipping.col-md-4.text-center
     | FREE SHIPPING WITHIN AUSTRALIA AND NEW ZEALAND
   #account-area.col-md-4.text-right
-    span.register-area REGISTER NOW
+    a href='/signup?cl=login-form'
+      span.register-area REGISTER NOW
     span.pipe |
-    span.my-acount MY ACCOUNT
+    a href='/profile'
+      span.my-account MY ACCOUNT
 
 #top-banner.row.visible-md-block.visible-lg-block
   = render 'layouts/redesign/header/locale_selector/desktop'
@@ -20,7 +22,7 @@ ruby:
     i.fa.fa-heart
     span.pipe |
     span.num#cart-item-count 0
-    = image_tag 'homepage/shopping_bag.png', class: 'shopping-bag'
+    = image_tag 'homepage/shopping_bag.png', class: 'shopping-bag' , id:"cart-trigger"
 .row.hidden-xs.hidden-sm
   .col-md-4.col-md-offset-4
     center
