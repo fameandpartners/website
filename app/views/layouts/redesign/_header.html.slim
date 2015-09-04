@@ -274,12 +274,12 @@ ruby:
             = image_tag "homepage/magazine/3.jpg"
             .image-text.text-center Blah blah blah
 
-
         ul.nav.navbar-nav#inner-main-menu
           li
             div id='side-search-area' class='row'
-              input type='text' id='side-search' placeholder='SEARCH'
-              = image_tag "_icons/search.svg", class: "side-search-icon"
+              form accept-charset="UTF-8" action="/search" method="get" id="searchForm"
+                input type='text' id='side-search' placeholder='SEARCH' name='q'
+                = image_tag "_icons/search.svg", class: "side-search-icon", id: "side-search-icon"
           li.normal-item#new-this-week-open
             div
               .text NEW THIS WEEK
@@ -339,3 +339,7 @@ ruby:
 
 = render 'layouts/redesign/campaigns/auto_apply_promo_code'
 
+coffee:
+  $("#side-search-area #side-search-icon").on 'click', ->
+    if $("#side-search-area #searchForm input").val() != ""
+      $("#side-search-area #searchForm").submit()
