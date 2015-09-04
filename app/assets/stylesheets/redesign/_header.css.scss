@@ -810,7 +810,12 @@ li#cart-trigger {
     -webkit-transition: margin-left 0.5s;
     -moz-transition: margin-left 0.5s;
     transition: margin-left 0.5s;
-
+    a{
+      padding: 0;
+    }
+    .bottom-area-text{
+      color: white;
+    }
   }
 
   .no-border{

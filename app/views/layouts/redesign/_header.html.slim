@@ -318,62 +318,23 @@ ruby:
           li.normal-item.no-border
             div
               = link_to 'REGISTER NOW', '/signup?cl=login-form', class: 'text'
-          /li
-            /a
-              /| EVENTS
-              /span.arrow
-                /= image_tag('icon-arrow-right.png')
-            /ul.dropdown-menu.mobileAnimation
-              /= render :partial => '/layouts/redesign/event'
-          /li
-            /a
-              /| STYLES
-              /span.arrow
-                /= image_tag('icon-arrow-right.png')
-            /ul.dropdown-menu.mobileAnimation
-              /= render :partial => '/layouts/redesign/style'
-          /li
-            /a
-              /| COLORS
-              /span.arrow
-                /= image_tag('icon-arrow-right.png')
-            /ul.dropdown-menu.mobileAnimation
-              /= render :partial => '/layouts/redesign/color'
-          /li
-            /a
-              /| EXPRESS MAKING
-              /span.arrow
-                /= image_tag('icon-arrow-right.png')
-            /ul.dropdown-menu.mobileAnimation
-              /li = link_to 'Dresses made in 48 hours', fast_making_dresses_path
-          /li
-            /a
-              /| LOOKBOOK
-              /span.arrow
-                /= image_tag('icon-arrow-right.png')
-            /ul.dropdown-menu.mobileAnimation
-              /li = link_to 'The Luxe Collection', luxe_collection_path
-              /li = link_to 'Bohemian Summer', bohemian_summer_collection_path
-              /li = link_to 'Besties and Bridesmaids Collection', bridesmaid_collection_path
-              /li = link_to "I'll Have What She's Having", all_size_collection_path
-              /li = link_to 'Here Comes The Sun', here_comes_the_sun_collection_path
 
           li.bottom-area
-            .bottom-area-text Why Shop With Us
+            = link_to 'Why Shop With Us', '/why-us', class: 'bottom-area-text'
           li.bottom-area
-            .bottom-area-text About Us
+            = link_to 'About Us', '/about', class: 'bottom-area-text'
           li.bottom-area
-            .bottom-area-text FAQs & Shipping
+            = link_to 'FAQs & Shipping', '/faqs', class: 'bottom-area-text'
           li.bottom-area
-            .bottom-area-text New Sizing
+            = link_to 'New Sizing', '/size-guide', class: 'bottom-area-text'
           li.bottom-area
-            .bottom-area-text Terms
+            = link_to 'Terms', '/terms', class: 'bottom-area-text'
           li.bottom-area
-            .bottom-area-text Get styling advice
+            = link_to 'Get styling advice', '/style-consultation', class: 'bottom-area-text'
           li.bottom-area
-            .bottom-area-text Fame Chain
+            = link_to 'Fame Chain', '/fame-chain', class: 'bottom-area-text'
           li.bottom-area#contact-us
-            .bottom-area-text Contact Us
+            = link_to 'Contact US', '/contact/new', class: 'bottom-area-text'
 
 
 = render 'layouts/redesign/campaigns/auto_apply_promo_code'
