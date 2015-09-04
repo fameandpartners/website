@@ -1138,6 +1138,10 @@ li#cart-trigger {
 .nav-menu-container{
   .heart-and-suitcase{
     text-align: right;
+    a{
+      text-decoration: none;
+      color: black;
+    }
     .num {
       padding-right: 5px;
     }
