@@ -67,7 +67,7 @@ window.SideMenu = class SideMenu
     else if $("#new-this-week-menu").css("margin-left") == "0px"
       lowestItemPosition = $("#new-this-week-menu .nav").height()
     else if $("#dresses-menu").css("margin-left") == "0px"
-      lowestItemPosition = $("#dresses-menu .nav").height()
+      lowestItemPosition = $("#dresses-menu .nav").height() - 150
     else if $("#lookbook-menu").css("margin-left") == "0px"
       lowestItemPosition = $("#lookbook-menu .nav").height()
     else if $("#magazine-menu").css("margin-left") == "0px"
