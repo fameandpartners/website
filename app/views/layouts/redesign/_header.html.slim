@@ -122,7 +122,7 @@ ruby:
               - ids = [615,616,617,618]
               - for id in ids do
                 - product = Spree::Product.find(id)
-                .col-xxs-6.category--item
+                .col-xxs-6.col-xs-6.category--item
                   = link_to collection_product_path(product) do
                     = cropped_product_hoverable_image_tag(product)
                   .details.text-center
@@ -243,21 +243,22 @@ ruby:
                 .arrow
                   i.fa.fa-chevron-left
                   .back BACK
-          .div.gray-bg STEAL HER STYLE
-          .mag-image
-            = image_tag "homepage/magazine/1.jpg"
-            .image-text.text-center TAYLOR
-          .mag-image
-            = image_tag "homepage/magazine/2.jpg"
-            .image-text.text-center BEYONCE
+            li
+              .div.gray-bg STEAL HER STYLE
+              .mag-image
+                = image_tag "homepage/magazine/1.jpg"
+                .image-text.text-center TAYLOR
+              .mag-image
+                = image_tag "homepage/magazine/2.jpg"
+                .image-text.text-center BEYONCE
 
-          .div.gray-bg BACKSTAGE PASS
-          .mag-image
-            = image_tag "homepage/magazine/2.jpg"
-            .image-text.text-center Blah blah blah
-          .mag-image
-            = image_tag "homepage/magazine/3.jpg"
-            .image-text.text-center Blah blah blah
+              .div.gray-bg BACKSTAGE PASS
+              .mag-image
+                = image_tag "homepage/magazine/2.jpg"
+                .image-text.text-center Blah blah blah
+              .mag-image
+                = image_tag "homepage/magazine/3.jpg"
+                .image-text.text-center Blah blah blah
 
         ul.nav.navbar-nav#inner-main-menu
           li
@@ -318,7 +319,7 @@ ruby:
             = link_to 'Get styling advice', '/style-consultation', class: 'bottom-area-text'
           li.bottom-area
             = link_to 'Fame Chain', '/fame-chain', class: 'bottom-area-text'
-          li.bottom-area#contact-us
+          li.bottom-area
             = link_to 'Contact US', '/contact/new', class: 'bottom-area-text'
 
 

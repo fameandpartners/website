@@ -62,9 +62,19 @@ window.SideMenu = class SideMenu
 
   blockScroll: =>
     sideMenuScrollTop = @$container.scrollTop()
-    contactUsPosition = $("#contact-us",@$container).position().top
-    if sideMenuScrollTop > contactUsPosition - 50
-      @$container.scrollTop(contactUsPosition - 30)
+    if $("#inner-main-menu .normal-item:first").css("margin-left") == "20px"
+      lowestItemPosition = $("#inner-main-menu").height()
+    else if $("#new-this-week-menu").css("margin-left") == "0px"
+      lowestItemPosition = $("#new-this-week-menu .nav").height()
+    else if $("#dresses-menu").css("margin-left") == "0px"
+      lowestItemPosition = $("#dresses-menu .nav").height()
+    else if $("#lookbook-menu").css("margin-left") == "0px"
+      lowestItemPosition = $("#lookbook-menu .nav").height()
+    else if $("#magazine-menu").css("margin-left") == "0px"
+      lowestItemPosition = $("#magazine-menu .nav").height()
+
+    if sideMenuScrollTop > lowestItemPosition - 200
+      @$container.scrollTop(lowestItemPosition - 200)
 
   slide: (e) =>
     t = $(e.target)
