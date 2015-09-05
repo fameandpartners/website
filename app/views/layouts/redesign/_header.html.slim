@@ -119,12 +119,18 @@ ruby:
                   i.fa.fa-chevron-left
                   .back BACK
             li.images-content
-              .row
-                img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
-                img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
-              .row
-                img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
-                img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+              - ids = [615,616,617,618]
+              - for id in ids do
+                - product = Spree::Product.find(id)
+                .col-xxs-6.category--item
+                  = link_to collection_product_path(product) do
+                    = cropped_product_hoverable_image_tag(product)
+                  .details.text-center
+                    span.name = product.name
+                    span.price = price_for_product(product)
+
+                  - if product.fast_delivery?
+                   = image_tag src='express_delivery.png', class: 'express-delivery'
 
         div#dresses-menu
           ul.nav.navbar-nav
