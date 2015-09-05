@@ -121,7 +121,7 @@ ruby:
             li.images-content
               - ids = [615,616,617,618]
               - for id in ids do
-                - product = Spree::Product.find(id)
+                - product = Spree::Product.where(id: id).first
                 - if product.present?
                   .col-xxs-6.col-xs-6.category--item
                     = link_to collection_product_path(product) do
