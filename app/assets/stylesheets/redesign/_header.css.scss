@@ -24,6 +24,9 @@ header{
     }
   }
 }
+.logo{
+  width: 100%;
+}
 .nav-menu {
   text-transform: uppercase;
   font-size: 1.4rem;
@@ -324,13 +327,17 @@ li.shop {
     }
     .shopping-bag{
       cursor: pointer;
-      margin-left: 23px;
+      margin-left: 15px;
       width: 24px;
       margin-top: 4px;
     }
   }
+  .masthead.pull-right{
+    padding-right: 0;
+  }
   .masthead.pull-right:last-child{
     margin-top: 3px;
+    padding-left: 0;
     .menu-item{
       #moodboard-counter{
         margin-top: -1px;
@@ -362,14 +369,15 @@ li.shop {
       padding-right: 0;
     }
     .masthead.cart{
-      padding-left: 15px;
+      padding-left: 10px;
     }
     #cart-trigger{
       margin-top: 1px;
     }
     .masthead:last-child{
       i{
-        margin-right: 15px;
+        margin-right: 10px;
+        margin-left: 15px;
       }
     }
   }
