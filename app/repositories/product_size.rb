@@ -63,17 +63,18 @@ class Repositories::ProductSize
       end
     end
 
+  EXTRA_SIZES = %w[
+          US14/AU18
+          US16/AU20
+          US18/AU22
+          US20/AU24
+          US22/AU26
+          US24/AU28
+          US26/AU30
+        ].freeze
   private def extra_sizes
-      @extra_sizes ||= [
-       "US14/AU18",
-       "US16/AU20",
-       "US18/AU22",
-       "US20/AU24",
-       "US22/AU26",
-       "US24/AU28",
-       "US26/AU30"
-      ]
-    end
+    EXTRA_SIZES
+  end
 
     def self.sizes_map
       @sizes_map ||= fetch_sizes_map
