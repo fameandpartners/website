@@ -1,16 +1,22 @@
 module Marketing
   module Gtm
     class Container
-      attr_reader :presenters
+      attr_reader :base_hash, :presenters
 
       def initialize(presenters: [])
         @presenters = presenters
+        @base_hash  = {}
+      end
+
+      def append(presenter)
+        base_hash[presenter.key] = presenter.body
       end
 
       def to_json
-        base_hash = {}
-        presenters.each { |presenter| base_hash[presenter.key] = presenter.body }
+        presenters.each { |presenter| append(presenter) }
         base_hash.to_json
+      rescue StandardError => e
+        NewRelic::Agent.notice_error(e)
       end
     end
   end
