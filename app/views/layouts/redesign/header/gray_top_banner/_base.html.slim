@@ -46,11 +46,19 @@ ruby:
 .row.rect#rect-new-this-week
   .black-bar SHOP ALL NEW THIS WEEK
   .slideArea
-    img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
-    img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
-    img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
-    img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
-    img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+    ul.rslides
+      li
+        img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+        img src="http://images.fameandpartners.com/spree/products/13195/large/4B418-WATERCOLOUR-CROP.jpg"
+        img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+        img src="http://images.fameandpartners.com/spree/products/13195/large/4B418-WATERCOLOUR-CROP.jpg"
+        img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+      li
+        img src="http://images.fameandpartners.com/spree/products/13195/large/4B418-WATERCOLOUR-CROP.jpg"
+        img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+        img src="http://images.fameandpartners.com/spree/products/13195/large/4B418-WATERCOLOUR-CROP.jpg"
+        img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
+        img src="http://images.fameandpartners.com/spree/products/13195/large/4B418-WATERCOLOUR-CROP.jpg"
 
 .row.rect#rect-dresses
   .left-area
@@ -150,3 +158,8 @@ coffee:
     $(".rect").on('mouseleave', ->
       $(".rect").hide()
     )
+
+    $('.slideArea .rslides').responsiveSlides({
+      auto: false,
+      nav: true,
+    })

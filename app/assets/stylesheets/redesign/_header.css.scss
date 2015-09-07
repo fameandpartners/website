@@ -1248,6 +1248,63 @@ li#cart-trigger {
       font-size: 8pt;
     }
     .slideArea{
+
+      .rslides {
+        position: relative;
+        list-style: none;
+        overflow: hidden;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+
+        li {
+          -webkit-backface-visibility: hidden;
+          position: absolute;
+          display: none;
+          width: 100%;
+          left: 0;
+          top: 0;
+        }
+
+        li:first-child {
+          position: relative;
+          display: block;
+          float: left;
+        }
+
+        img {
+          display: block;
+          height: auto;
+          float: left;
+          width: 15%;
+          border: 0;
+        }
+
+      }
+
+      .rslides_tabs{
+        display: none;
+      }
+      .prev{
+        top: 50%;
+        position: absolute;
+        background-image: url('icon-arrow-left.png');
+        opacity: 1;
+        background-size: contain;
+        z-index: 2;
+        text-indent: -9999px;
+      }
+      .next{
+        right: 0;
+        top: 50%;
+        position: absolute;
+        background-image: url('icon-arrow-right.png');
+        opacity: 1;
+        background-size: contain;
+        z-index: 2;
+        text-indent: -9999px;
+      }
+
       img{
         margin-top: 50px;
         width: 15%;
