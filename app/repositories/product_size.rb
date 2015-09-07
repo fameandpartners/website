@@ -49,14 +49,12 @@ class Repositories::ProductSize
     size
   end
 
-  private
-
-    def size_have_extra_price?(size)
+  private def size_have_extra_price?(size)
       return nil if product_has_free_extra_sizes?
       extra_sizes.include?(size.name)
     end
 
-    def product_has_free_extra_sizes?
+  private def product_has_free_extra_sizes?
       return @product_has_free_extra_sizes if instance_variable_defined?('@product_has_free_extra_sizes')
 
       @product_has_free_extra_sizes = begin
@@ -65,7 +63,7 @@ class Repositories::ProductSize
       end
     end
 
-    def extra_sizes
+  private def extra_sizes
       @extra_sizes ||= [
        "US14/AU18",
        "US16/AU20",
@@ -77,12 +75,11 @@ class Repositories::ProductSize
       ]
     end
 
-  class << self
-    def sizes_map
+    def self.sizes_map
       @sizes_map ||= fetch_sizes_map
     end
 
-    def fetch_sizes_map
+    def self.fetch_sizes_map
       result = {}
       Array.wrap(Spree::OptionType.size.try(:option_values)).each do |option_value|
         # TODO - Remove value
@@ -104,12 +101,11 @@ class Repositories::ProductSize
       result
     end
 
-    def read_all
+    def self.read_all
       sizes_map.values
     end
 
-    def read(size_id)
+    def self.read(size_id)
       sizes_map[size_id].clone
     end
-  end
 end
