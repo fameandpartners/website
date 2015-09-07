@@ -17,6 +17,8 @@ module Marketing
         base_hash.to_json
       rescue StandardError => e
         NewRelic::Agent.notice_error(e)
+
+        return ''
       end
     end
   end
