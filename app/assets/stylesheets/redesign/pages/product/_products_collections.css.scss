@@ -70,6 +70,7 @@
 .products-collections {
 	padding-top: 40px;
 
+
 	.select2-container--default {
 		width: 100% !important;
 	}
@@ -85,25 +86,32 @@
 		font-weight: 600;
 		float:right;
 		width:20%;
-		margin-right:12px;
+		@media(min-width: 1890px){
+			margin-right:9px;
+		}
 	}
 
 	.select2-container--default .select2-selection--single {
-		background-color:#eeddf0;
-		border: 1px solid #ebe3ed;
-		padding-left: 0.6rem
+		/* background-color: #eeddf0 ; */
+	   border: 1px solid #666666 ;
+	   border-radius: 2px !important;
+	   padding-left: 0.6rem;
 	}
 
 	.select2-container--default .select2-selection--single .select2-selection__arrow b {
-		border-color: #fff transparent transparent transparent;
-		border-width: 10px 8px 0 8px;
-		left: -5px;
-		margin-top: 0.4rem;
+	   border-color: #333333  transparent transparent transparent;
+	   border-width: 10px 8px 0 8px;
+	   left: -5px;
+	   margin-top: 0.4rem;
 	}
 
 	.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b{
-		border-color: transparent transparent #fff transparent;
-		border-width: 0 8px 10px 8px;
+	   border-color: #333333  transparent transparent transparent;
+	   border-width: 10px 8px 0 8px;
+	   left: -5px;
+	   margin-top: 0.4rem;
+       -webkit-transform: rotate(180deg);
+       transform: rotate(180deg);
 	}
 
 	#select2-product_order-container{
@@ -173,11 +181,12 @@
 	    float: left;
 	    margin-right: 10px;
 	    cursor: pointer;
+	    box-shadow: inset 0px 1px 2px 0px #969696;
 	}
 	.thumb-true{
 		background-color: black;
-		background-image: url(product-collections/check.png);
-		background-size: contain;
+		background-image: url(product-collections/tick.svg);
+		background-size: cover;
 	}
 	.thumb-false{
 		background-color: #E0E0E0;
@@ -220,6 +229,13 @@
 	}
 
 	.show-more-styles{
+		@media(min-width: 992px){
+			padding-left:10px;
+			padding-right:10px;
+			width: 140%;
+		}
+		padding-top:10px;
+		padding-bottom:10px;
 		text-align: center;
     	background-color: #E8E8E8;
     	cursor: pointer;
@@ -259,10 +275,14 @@
 		}
 
 		.filter-rect {
+			@media(min-width: 992px){
+				padding:10px;
+				width: 140%;
+			}
 			background-color: #E8E8E8;
 			margin-bottom: 15px;
 			.filter-text{
-				margin-left:25px;
+				margin-left:10px;
 			}
 			.clear-all{
 				float:right;
@@ -274,6 +294,14 @@
 			}
 		}
 
+		.filter-option span{
+			font-weight: normal;
+			font-family: "brandon-grotesque", sans-serif;
+			text-transform: lowercase;
+			font-size: 14px;
+			color: #777777;
+		}
+
 	}
 
 	@media(max-width: $screen-desktop){
@@ -281,6 +309,11 @@
 			padding:0;
 			.left-path{
 				margin-left: 12px;
+			}
+			#filter-mobile{
+				span{
+					cursor: pointer;
+				}
 			}
 			.filter-mobile-text{
 				margin-left: 20px;
