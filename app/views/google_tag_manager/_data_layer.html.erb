@@ -12,6 +12,11 @@
    page      = Marketing::Gtm::PagePresenter.new(type: 'product', meta_description: get_meta_description, title: get_title, url: request.url)
 
    container = Marketing::Gtm::Container.new(presenters: [user, device, site, page])
+
+   if @product
+     product   = Marketing::Gtm::ProductPresenter.new(product_presenter: @product)
+     container = Marketing::Gtm::Container.new(presenters: [product])
+   end
 %>
 
 <script>
