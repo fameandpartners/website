@@ -64,10 +64,12 @@ class ReturnRequestItem < ActiveRecord::Base
 
   class ReturnRequestItemMapping
 
-    attr_reader :rri
+    attr_reader :rri, :logger
 
-    def initialize(return_request_item:)
+    def initialize(return_request_item:, logdev: $stdout)
       @rri = return_request_item
+      @logger = Logger.new(logdev)
+      @logger.formatter = LogFormatter.terminal_formatter
     end
 
     def call
@@ -77,7 +79,7 @@ class ReturnRequestItem < ActiveRecord::Base
 
       existing_event = item_return.events.return_requested.first
       if existing_event.present?
-        puts "SKIPPING return_requested - #{rri.line_item_id}"
+        logger.warn "SKIPPING return_requested - #{rri.line_item_id}, Event Exists"
         return
       end
 
