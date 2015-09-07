@@ -398,7 +398,7 @@ ActiveRecord::Schema.define(:version => 20151029003230) do
   create_table "line_item_personalizations", :force => true do |t|
     t.integer  "line_item_id"
     t.integer  "product_id"
-    t.integer  "size"
+    t.string   "size"
     t.string   "customization_value_ids"
     t.datetime "created_at",                                                             :null => false
     t.datetime "updated_at",                                                             :null => false
@@ -409,6 +409,31 @@ ActiveRecord::Schema.define(:version => 20151029003230) do
   end
 
   add_index "line_item_personalizations", ["line_item_id"], :name => "index_line_item_personalizations_on_line_item_id"
+
+  create_table "line_item_size_normalisations", :force => true do |t|
+    t.integer  "line_item_id"
+    t.integer  "line_item_personalization_id"
+    t.string   "order_number"
+    t.string   "currency"
+    t.string   "site_version"
+    t.string   "old_size_value"
+    t.integer  "old_size_id"
+    t.integer  "old_variant_id"
+    t.string   "new_size_value"
+    t.integer  "new_size_id"
+    t.integer  "new_variant_id"
+    t.string   "messages"
+    t.string   "state"
+    t.datetime "processed_at"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  add_index "line_item_size_normalisations", ["line_item_id"], :name => "index_line_item_size_normalisations_on_line_item_id"
+  add_index "line_item_size_normalisations", ["new_size_id"], :name => "index_line_item_size_normalisations_on_new_size_id"
+  add_index "line_item_size_normalisations", ["new_variant_id"], :name => "index_line_item_size_normalisations_on_new_variant_id"
+  add_index "line_item_size_normalisations", ["old_size_id"], :name => "index_line_item_size_normalisations_on_old_size_id"
+  add_index "line_item_size_normalisations", ["old_variant_id"], :name => "index_line_item_size_normalisations_on_old_variant_id"
 
   create_table "line_item_updates", :force => true do |t|
     t.integer  "row_number"
