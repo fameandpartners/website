@@ -33,6 +33,7 @@ class Products::CollectionsController < Products::BaseController
   helper_method :page
 
   before_filter :redirect_undefined,
+                :canonicalize_sales,
                 :load_page,
                 :set_collection_resource,
                 :set_collection_seo_meta_data
@@ -56,6 +57,10 @@ class Products::CollectionsController < Products::BaseController
       if params[:permalink] =~ /undefined\Z/
         redirect_to '/undefined', status: :moved_permanently
       end
+    end
+
+    def canonicalize_sales
+      @canonical = dresses_path if params[:sale]
     end
 
     def load_page
@@ -109,7 +114,7 @@ class Products::CollectionsController < Products::BaseController
     end
 
     def collection_resource(collection_options)
-      @resource_args = {
+      resource_args = {
         site_version:   current_site_version,
         collection:     params[:collection],
         style:          params[:style],
@@ -122,7 +127,7 @@ class Products::CollectionsController < Products::BaseController
         limit:          limit, # page size
         offset:         params[:offset] || 0
       }.merge(collection_options || {})
-      Products::CollectionResource.new(@resource_args).read
+      Products::CollectionResource.new(resource_args).read
     end
 
 
