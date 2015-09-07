@@ -9,7 +9,9 @@
    user      = Marketing::Gtm::UserPresenter.new(spree_user: spree_current_user, request_ip: request.ip)
    device    = Marketing::Gtm::DevicePresenter.new(user_agent: request.user_agent)
    site      = Marketing::Gtm::SitePresenter.new(current_site_version: current_site_version)
-   container = Marketing::Gtm::Container.new(presenters: [user, device, site])
+   page      = Marketing::Gtm::PagePresenter.new(type: 'product', meta_description: get_meta_description, title: get_title, url: request.url)
+
+   container = Marketing::Gtm::Container.new(presenters: [user, device, site, page])
 %>
 
 <script>
