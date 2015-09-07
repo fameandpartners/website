@@ -45,13 +45,12 @@ ruby:
 
 .row.rect#rect-new-this-week
   .black-bar SHOP ALL NEW THIS WEEK
-  .slide
+  .slideArea
     img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
     img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
     img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
     img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
     img src="http://images.fameandpartners.com/spree/products/14165/large/4B320-BLACK-CROP.jpg?1438069638"
-
 
 .row.rect#rect-dresses
   .left-area
@@ -130,23 +129,24 @@ ruby:
 
 
 coffee:
-  $("#search").on('click' , ->
-    $("#search-area").css("left",$(document).width()/2)
-    $("#search-area").css("display","block")
-  )
+  $(document).ready ->
+    $("#search").on('click' , ->
+      $("#search-area").css("left",$(document).width()/2)
+      $("#search-area").css("display","block")
+    )
 
-  $(".mag-glass").on('click' , ->
-    if $("#searchForm #searchValue").val() != ''
-      $("#searchForm").submit()
-    else
-      $("#search-area").css("display","none")
-  )
+    $(".mag-glass").on('click' , ->
+      if $("#searchForm #searchValue").val() != ''
+        $("#searchForm").submit()
+      else
+        $("#search-area").css("display","none")
+    )
 
-  $("#home-menu span[id!='search']").on('mouseenter', ->
-    $(".rect").hide();
-    $("#rect-"+this.className).css("display","block")
-  )
+    $("#home-menu span[id!='search']").on('mouseenter', ->
+      $(".rect").hide();
+      $("#rect-"+this.className).css("display","block")
+    )
 
-  $(".rect").on('mouseleave', ->
-    $(".rect").hide()
-  )
+    $(".rect").on('mouseleave', ->
+      $(".rect").hide()
+    )
