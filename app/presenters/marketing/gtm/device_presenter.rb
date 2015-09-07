@@ -20,7 +20,7 @@ module Marketing
       end
 
       def key
-        'device'
+        'device'.freeze
       end
 
       def body

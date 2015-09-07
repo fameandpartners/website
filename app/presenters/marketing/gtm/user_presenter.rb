@@ -33,7 +33,7 @@ module Marketing
       end
 
       def key
-        'user'
+        'user'.freeze
       end
 
       def body
