@@ -832,7 +832,7 @@ li#cart-trigger {
   .normal-item{
     font-size: 10pt;
     padding-top: 15px;
-    padding-bottom: 25px;
+    padding-bottom: 40px;
     font-weight: 600;
     padding-left: 10px;
     border-bottom-style: solid;
@@ -841,13 +841,20 @@ li#cart-trigger {
     -webkit-transition: margin-left 0.25s;
     -moz-transition: margin-left 0.25s;
     transition: margin-left 0.25s;
+    a{
+      padding-left: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
     .text{
       width: 90%;
       float: left;
+      margin-top: 3px;
     }
     .arrow{
       float: left;
       width: initial;
+      margin-top: 3px;
     }
     div{
       padding-bottom: 10px;
@@ -1115,6 +1122,10 @@ li#cart-trigger {
         }
       }
     }
+  }
+
+  #magazine-menu ul li{
+    margin-left: 15px;
   }
 }
 
