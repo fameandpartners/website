@@ -1,9 +1,11 @@
-@import 'redesign/vars';
+//@import 'redesign/vars';
+//@import 'redesign/header';
 
-@import 'redesign/header';
+//@import 'redesign/stylesheets/bootstrap';
+//@import 'redesign/stylesheets/styles';
 
-@import 'redesign/stylesheets/bootstrap';
-@import 'redesign/stylesheets/styles';
+@import 'bootstrap/variables';
+@import 'redesign/helpers/bootstrap-variables';
 
 .nav-menu-container {
   font-family: $font-family-secondary;
