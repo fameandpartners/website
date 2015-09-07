@@ -113,11 +113,10 @@ ruby:
         div#new-this-week-menu
           ul.nav.navbar-nav
             li.normal-item
-              div
-                .text.text-back NEW THIS WEEK
-                .arrow
-                  i.fa.fa-chevron-left
-                  .back BACK
+              .text.text-back NEW THIS WEEK
+              .arrow
+                i.fa.fa-chevron-left
+                .back BACK
             li.images-content
               - ids = [615,616,617,618]
               - for id in ids do
@@ -136,14 +135,12 @@ ruby:
         div#dresses-menu
           ul.nav.navbar-nav
             li.normal-item
-              div
-                .text.text-back DRESSES
-                .arrow
-                  i.fa.fa-chevron-left
-                  .back BACK
+              .text.text-back DRESSES
+              .arrow
+                i.fa.fa-chevron-left
+                .back BACK
             li.grey-item
-              div
-                .text SHOP BY
+              .text SHOP BY
             li.normal-item
               div
                 a href='/dresses'
@@ -158,8 +155,7 @@ ruby:
               div
                 .text Instagram
             li.grey-item
-              div
-                .text EVENTS
+              .text EVENTS
             li.normal-item
               div
                 = link_to 'Formal', build_taxon_path('Formal'), class: 'text'
@@ -194,8 +190,7 @@ ruby:
               div
                 = link_to 'Debutante', build_taxon_path('Debutante'), class: 'text'
             li.grey-item
-              div
-                .text STYLES
+              .text STYLES
             li.normal-item
               div
                 = link_to 'Plus Size', build_taxon_path('Plus Size'), class: 'text'
@@ -224,11 +219,10 @@ ruby:
         div#lookbook-menu
           ul.nav.navbar-nav
             li.normal-item
-              div
-                .text.text-back LOOKBOOK
-                .arrow
-                  i.fa.fa-chevron-left
-                  .back BACK
+              .text.text-back LOOKBOOK
+              .arrow
+                i.fa.fa-chevron-left
+                .back BACK
             li.images-content
               .row
                 = image_tag 'mobile-sidebar/lookbook/1.png'
@@ -239,11 +233,10 @@ ruby:
         div#magazine-menu
           ul.nav.navbar-nav
             li.normal-item
-              div
-                .text.text-back MAGAZINE
-                .arrow
-                  i.fa.fa-chevron-left
-                  .back BACK
+              .text.text-back MAGAZINE
+              .arrow
+                i.fa.fa-chevron-left
+                .back BACK
             li
               .div.gray-bg STEAL HER STYLE
               .mag-image
@@ -268,37 +261,29 @@ ruby:
                 input type='text' id='side-search' placeholder='SEARCH' name='q'
                 = image_tag "_icons/search.svg", class: "side-search-icon", id: "side-search-icon"
           li.normal-item#new-this-week-open
-            div
-              .text NEW THIS WEEK
-              .arrow
-                i.fa.fa-chevron-right
+            .text NEW THIS WEEK
+            .arrow
+              i.fa.fa-chevron-right
           li.normal-item#dress-menu-open
-            div
-              .text DRESSES
-              .arrow
-                i.fa.fa-chevron-right
+            .text DRESSES
+            .arrow
+              i.fa.fa-chevron-right
           li.normal-item
-            div
-              .text EVENTS
+            .text EVENTS
           li.normal-item#lookbook-menu-open
-            div
-              .text LOOKBOOK
-              .arrow
-                i.fa.fa-chevron-right
+            .text LOOKBOOK
+            .arrow
+              i.fa.fa-chevron-right
           li.normal-item#magazine-menu-open
-            div
-              .text MAGAZINE
-              .arrow
-                i.fa.fa-chevron-right
+            .text MAGAZINE
+            .arrow
+              i.fa.fa-chevron-right
           li.normal-item
-            div
-              .text SALE
+            .text SALE
           li.normal-item
-            div
-              .text MADE FOR YOU
+            .text MADE FOR YOU
           li.normal-item
-            div
-              .text JOIN US
+            .text JOIN US
           li.normal-item
             div
               = link_to 'ACCOUNT LOGIN', '/profile', class: 'text'
