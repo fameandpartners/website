@@ -15,9 +15,11 @@ ENVIRONMENTS=("production" "development" "uat" "preproduction" "staging")
 
 function __todo_env
 {
-  error TODO - Actually automate this
-  error "In the meantime, see $(yellow)doc/howto_backup_restore_engineyard_databases.md$(normal)"
-  echo "Then, SCP the file to the '${DUMPS_DIR}' directory"
+  error "TODO - Actually automate this"
+  echo "In the meantime, see $(yellow)doc/howto_backup_restore_engineyard_databases.md$(normal)"
+  echo "OR Download the file in your browser from $(green)https://cloud.engineyard.com/app_deployments/78304/backups$(normal)"
+  echo "Then, place the file into the $(magenta)'${DUMPS_DIR}'$(normal) directory"
+
 }
 
 
@@ -242,6 +244,7 @@ function sanitise_dev_db
   truncate table spree_log_entries;
   truncate table spree_orders;
   truncate table spree_payments;
+  truncate table spree_masterpass_checkouts;
   truncate table spree_paypal_express_checkouts;
   truncate table spree_shipments;
   truncate table spree_state_changes;
