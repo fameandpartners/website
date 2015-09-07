@@ -60,8 +60,6 @@ class Products::CollectionsController < Products::BaseController
     end
 
     def canonicalize_sales
-      # `/dresses`, `/dresses/sale-all` and `/dresses?sale=number` have the same content as /dresses
-      # Until they have different content, we should point canonical to `/dresses` page
       @canonical = dresses_path if params[:sale]
     end
 

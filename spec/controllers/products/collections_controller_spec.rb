@@ -15,17 +15,19 @@ describe Products::CollectionsController, :type => :controller do
 
     describe 'before filters' do
       describe '#canonicalize_sales' do
-        context 'params have sales' do
-          it 'sets @canonical with dresses_path' do
-            get :show, sale: 'all'
-            expect(controller.instance_variable_get(:@canonical)).to eq('/dresses')
+        describe '`/dresses`, `/dresses/sale-all` and `/dresses?sale=number` have the same content as /dresses. Until they have different content, we should point canonical to `/dresses` page' do
+          context 'params have sales' do
+            it 'sets @canonical with dresses_path' do
+              get :show, sale: 'all'
+              expect(controller.instance_variable_get(:@canonical)).to eq('/dresses')
+            end
           end
-        end
 
-        context 'params does not have sales' do
-          it '@canonical is kept nil' do
-            get :show
-            expect(controller.instance_variable_get(:@canonical)).to be_nil
+          context 'params does not have sales' do
+            it '@canonical is kept nil' do
+              get :show
+              expect(controller.instance_variable_get(:@canonical)).to be_nil
+            end
           end
         end
       end
