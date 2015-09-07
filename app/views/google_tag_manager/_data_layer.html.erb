@@ -6,8 +6,9 @@
 
 <%
    # TODO: probably better not having this here, and putting it properly on a before_filter
-   user       = Marketing::Gtm::UserPresenter.new(spree_user: spree_current_user, request_ip: request.ip)
-   container  = Marketing::Gtm::Container.new(presenters: [user])
+   user      = Marketing::Gtm::UserPresenter.new(spree_user: spree_current_user, request_ip: request.ip)
+   device    = Marketing::Gtm::DevicePresenter.new(user_agent: request.user_agent)
+   container = Marketing::Gtm::Container.new(presenters: [user, device])
 %>
 
 <script>
