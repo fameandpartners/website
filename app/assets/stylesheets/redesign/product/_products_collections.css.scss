@@ -213,7 +213,8 @@
 			background-color: #E8E8E8;
 			margin-bottom: 15px;
 			.filter-text{
-				margin-left:10px;
+				cursor: pointer;
+				margin-left:25px;
 			}
 			.clear-all{
 				float:right;
@@ -222,6 +223,7 @@
 			}
 			i {
 				padding-left: 10px;
+				cursor: pointer;
 			}
 		}
 
