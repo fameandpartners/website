@@ -128,7 +128,7 @@ ruby:
                       = cropped_product_hoverable_image_tag(product)
                     .details.text-center
                       span.name = product.name
-                      /span.price = price_for_product(product)
+                      span.price = price_for_product(product)
 
                     - if product.fast_delivery?
                      = image_tag src='express_delivery.png', class: 'express-delivery'
