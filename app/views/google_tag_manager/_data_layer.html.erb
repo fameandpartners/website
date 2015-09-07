@@ -6,8 +6,8 @@
 
 <%
    # TODO: probably better not having this here, and putting it properly on a before_filter
-   user_piece = Marketing::GTM::Pieces::User.new(spree_user: spree_current_user, request_ip: request.ip)
-   container = Marketing::GTM::Container.new(pieces: [user_piece])
+   user       = Marketing::Gtm::UserPresenter.new(spree_user: spree_current_user, request_ip: request.ip)
+   container  = Marketing::Gtm::Container.new(presenters: [user])
 %>
 
 <script>

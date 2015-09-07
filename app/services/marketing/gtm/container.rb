@@ -1,21 +1,17 @@
 module Marketing
-  module GTM
+  module Gtm
     class Container
-      attr_reader :pieces
+      attr_reader :presenters
 
-      def initialize(pieces: [])
-        @pieces = pieces
+      def initialize(presenters: [])
+        @presenters = presenters
       end
 
       def to_json
         base_hash = {}
-        pieces.each { |piece| base_hash[piece.key] = piece.body }
+        presenters.each { |presenter| base_hash[presenter.key] = presenter.body }
         base_hash.to_json
       end
     end
   end
 end
-
-# piece_a = OpenStruct.new(key: :a, body: { something: 'new' })
-# piece_b = OpenStruct.new(key: :b, body: { other: 'something' })
-# Marketing::GTM::Container.new(pieces: [piece_a, piece_b]).to_json
