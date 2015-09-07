@@ -28,18 +28,32 @@ module Marketing
         discount.to_s
       end
 
+      def currency
+        product.price.currency
+      end
+
+      def colors
+        default_colors = product.colors.default
+        extra_colors   = product.colors.extra
+        (default_colors + extra_colors).map(&:name)
+      end
+
+      def selected_color
+        product.color_name
+      end
+
       def body
         {
-            name: product.name,
-            brand: 'Fame & Partners', # Hardcoded for the moment
-            sku: product.sku,
-            price: price,
+            name:              product.name,
+            brand:             'Fame & Partners', # Hardcoded for the moment
+            sku:               product.sku,
+            price:             price,
             priceWithDiscount: price_with_discount,
-            discountPercent: discount_percent,
-            # type: 'dresses', # Hardcoded for the moment
-            # currency: currency,
-            # colors: colors,
-            # selectedColor: selected_color,
+            discountPercent:   discount_percent,
+            type:              'dresses', # Hardcoded for the moment
+            currency:          currency,
+            colors:            colors,
+            selectedColor:     selected_color,
             # categories: categories,
             # image: categories,
             # images: categories,
