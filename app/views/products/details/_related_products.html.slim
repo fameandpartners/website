@@ -5,13 +5,13 @@ ruby:
   )
 
 .dress-more.container.page-content
-  - unless related.jackets.empty?
+  - unless related.outerwear.empty?
     .col-md-12
       h2.text-center Pair With
       .divider
 
       .row.text-center
-        - related.jackets.each do |jacket|
+        - related.outerwear.each do |jacket|
           .col-md-3.col-xs-6.col-xxs-12.col-centered.category--item data-id=(jacket.id)
             - if Features.active?(:moodboard)
               = link_to collection_product_path(jacket, product_type: 'outerwear') do

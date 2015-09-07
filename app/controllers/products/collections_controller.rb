@@ -145,9 +145,13 @@ class Products::CollectionsController < Products::BaseController
           return { taxonomy.to_sym => permalink }
         when 'range'
           return { collection: permalink }
-        when 'outerwear'
-          return { show_outerwear: true }
         end
+      end
+
+      # Outerwear
+      outerwear_permalink = Spree::Taxonomy::OUTERWEAR_NAME.parameterize
+      if outerwear_permalink == permalink
+        return { outerwear: outerwear_permalink, show_outerwear: true }
       end
 
       # Didn't find any collection associated with the permalink
