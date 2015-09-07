@@ -18,12 +18,13 @@ ruby:
   = render 'layouts/redesign/header/locale_selector/desktop'
 
   .col-md-8.heart-and-suitcase
+    span.num#moodboard-counter 0
     a href='/wishlist'
-      span.num#moodboard-counter 0
       i.fa.fa-heart
     span.pipe |
     span.num#cart-item-count 0
-    = image_tag 'homepage/shopping_bag.png', class: 'shopping-bag' , id:"cart-trigger"
+    = image_tag 'homepage/shopping_bag.png', class: 'shopping-bag'
+
 .row.hidden-xs.hidden-sm
   .col-md-4.col-md-offset-4
     center
