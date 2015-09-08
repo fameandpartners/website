@@ -8,6 +8,7 @@ li class=active_link_to_class(caches_path)
   ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
     = active_link_to 'Caches', caches_path, wrap_tag: :li
     = active_link_to 'Sidekiq', sidekiq_web_path, wrap_tag: :li
+    = active_link_to 'Indexes', product_indexes_path, wrap_tag: :li
 
 li class=active_link_to_class('', active: /content/)
   a href="#"
