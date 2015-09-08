@@ -19,5 +19,10 @@ class FacebookDataFetchWorker
       user.facebook_data[:friends] = friends
       user.save
     end
+
+    if (gender = fetcher.fetch_gender)
+      user.facebook_data[:gender] = gender
+      user.save
+    end
   end
 end

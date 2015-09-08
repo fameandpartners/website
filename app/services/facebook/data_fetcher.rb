@@ -38,6 +38,11 @@ class Facebook::DataFetcher
     friends
   end
 
+  def fetch_gender
+    response = get('/', fields: 'gender')
+    response['gender']
+  end
+
   private
 
   def get(path = nil, params = {})
