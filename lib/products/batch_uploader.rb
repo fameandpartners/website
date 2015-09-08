@@ -414,9 +414,9 @@ module Products
       end
 
       new_product = product.persisted? ? 'Updated' : 'New'
-
-      product.save!
       puts "Saving: #{new_product} - #{product.sku} - #{product.id} - #{product.name}"
+      product.save!
+      puts "Saved!"
 
       if args[:price_in_aud].present? || args[:price_in_usd].present?
         add_product_prices(product, args[:price_in_aud], args[:price_in_usd])
