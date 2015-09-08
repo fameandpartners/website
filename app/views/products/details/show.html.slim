@@ -76,7 +76,8 @@ ruby:
 #slides
   .slides-container
     // note: we should crop images & update images preloading mechanics - too slow currently
-    = image_tag @product.featured_image.original, id: "product-image-slide-#{ @product.featured_image.id }", class: 'product-image-slide', data: { color_id: @product.featured_image.color_id }, alt: @product.name, style: 'width: 1280px; overflow: hidden;'
+    - if @product.featured_image
+      = image_tag @product.featured_image.original, id: "product-image-slide-#{ @product.featured_image.id }", class: 'product-image-slide', data: { color_id: @product.featured_image.color_id }, alt: @product.name, style: 'width: 1280px; overflow: hidden;'
 
   nav.slides-navigation
     a.next href="#"
