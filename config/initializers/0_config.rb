@@ -129,7 +129,7 @@ when :preproduction
     s3.bucket            = 'preprod-fameandpartners'
     s3.region            = 'us-west-2'
     s3.access_key_id     = 'AKIAJ7U3MBOEHSMUAOHQ'
-    s3.secret_access_key = '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'
+    s3.secret_access_key = 'WOFrd4zcT5btJyAaHZjsSgFAGriD/IJZQDVsQrOI'
   end
   configatron.aws.host = "s3-us-west-2.amazonaws.com/preprod-fameandpartners"
 
@@ -149,8 +149,8 @@ when :production
   configatron.aws.s3 do |s3|
     s3.bucket            = 'fameandpartners'
     s3.region            = 'ap-southeast-2'
-    s3.access_key_id     = 'AKIAJ7U3MBOEHSMUAOHQ'
-    s3.secret_access_key = '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'
+    s3.access_key_id     = 'AKIAI3BLE34YJ7NQUEPQ'
+    s3.secret_access_key = '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'
   end
 
   # Production Environment
