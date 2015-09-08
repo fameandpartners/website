@@ -1,6 +1,7 @@
 = menu_item root_path, 'Dashboard', icon: 'dashboard', exact: true
 
-li class=active_link_to_class(caches_path)
+- backend_links = [['admin_ui/caches', 'admin_ui/sidekiqs', 'admin_ui/product_indexes'], []]
+li class=active_link_to_class(root_path, active: backend_links)
   a href="#"
     i.fa.fa-database
     span.nav-label Backend
