@@ -1,4 +1,4 @@
-# If you provide an url param `faadc` (Fame Auto Apply Discount Code)
+  # If you provide an url param `faadc` (Fame Auto Apply Discount Code)
 # on any page load, this controller concern will attempt to add the coupon
 # specified in the param to the user's cart.
 #
@@ -35,11 +35,22 @@ module Concerns
       params[:skip_reminder] == 'true'
     end
 
+    #### ALERT ALERT WARNING
+    # Marketing campaign 'forgot' to add the correct parameters to URLs
+    # 2015-09-08
+    # TTL 30 days
+    def hack_masterpass_campaign!
+      if request.url && request.url.include?("4w9UJiJpWAc")
+        session[auto_apply_discount_retry_key] = "masterpass25"
+      end
+    end
+
     def automatic_discount_code
       @automatic_discount_code ||= begin
         if params[auto_apply_discount_param_key].present?
           session[auto_apply_discount_retry_key] = params[auto_apply_discount_param_key]
         end
+        hack_masterpass_campaign!
         session[auto_apply_discount_retry_key]
       end
     end
