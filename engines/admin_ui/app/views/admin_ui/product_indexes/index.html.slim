@@ -1,0 +1,43 @@
+- content_for :page_title
+  ' ColourVariant Index:
+
+.panel.panel-danger
+  .panel-heading
+    ' BIG RED BUTTON
+  .panel-body
+    p If you don't know what this does, don't touch it.
+    p This will cause performance degradation while things are rebuilt.
+
+    ul
+      li Wipes and reindexes colour variants
+      li Wipes and reindexes products
+      li Clears Cache
+      li Clears Product Discount Repository
+      li Clears Taxon Repository
+
+    p All actions are logged.
+
+    = form_tag( {controller: :product_indexes, action: :clear}, {method: :delete, class: 'form-inline'}) do
+      .form-group
+        label
+        = text_field_tag :really_really, nil, placeholder: 'Type REALLY', class: 'form-control', required: true
+      .form-group
+        button.btn.btn-danger BIG RED BUTTON
+
+table.table.admin-table-condensed
+  thead : tr
+    th id
+    th product_id
+    th product_name
+    th sku
+    th color
+  tbody
+    - @search.results.each do |res|
+      tr
+       td
+         = link_to res.id, {controller: :product_indexes, action: :show, id: res.id }
+       td = res.product.id
+       td = res.product.name
+       td = res.product.sku
+       td = res.color.try(:presentation)
+
