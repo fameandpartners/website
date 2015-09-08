@@ -1,5 +1,5 @@
 if Rails.env.production?
-  Features.activate(:masterpass)
+  Features.deactivate(:masterpass)
 end
 
 if Rails.env.development?

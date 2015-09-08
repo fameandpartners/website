@@ -25,8 +25,14 @@ module CheckoutHelper
     end
   end
 
+  # Not a payment gateway
   def masterpass_active?
-    Features.active?(:masterpass, current_spree_user) || session[:auto_applied_promo_code] == 'masterpass25'
+    false #|| Features.active?(:masterpass, current_spree_user) || session[:auto_applied_promo_code] == 'masterpass25'
+  end
+
+  def masterpass_cart_callback_uri(payment_method)
+    callback_protocol = Rails.env.production? ? 'https' : 'http'
+    cart_masterpass_url(payment_method_id: payment_method.id, protocol: callback_protocol)
   end
 
   def payment_failed_messages(error)

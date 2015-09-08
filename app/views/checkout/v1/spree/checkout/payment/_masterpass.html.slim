@@ -31,7 +31,7 @@
             var spinner = new Spinner().spin();
             masterpass_overlay.append(spinner.el);
 
-            $.getJSON("/masterpass/cart?payment_method_id=#{payment_method.id}").done(
+            $.getJSON("#{masterpass_cart_callback_uri(payment_method)}").done(
               function(data) {
                 spinner.stop();
                 masterpass_overlay.css({"width": 0, "height": 0});

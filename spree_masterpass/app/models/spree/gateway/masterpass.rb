@@ -3,12 +3,13 @@ module Spree
   class Gateway::Masterpass < Gateway
     preference :consumer_key, :string
     preference :checkout_identifier, :string
+    preference :callback_domain, :string, default: 'http://www.fameandpartners.com'
     preference :accepted_cards, :string, default: 'master,amex,diners,discover,maestro,visa'
     preference :shipping_suppression, :boolean, default: true
     preference :server, :string, default: 'sandbox'
 
     attr_accessible :preferred_consumer_key, :preferred_checkout_identifier, :preferred_accepted_cards,
-                    :preferred_shipping_suppression, :preferred_server
+                    :preferred_shipping_suppression, :preferred_server, :preferred_callback_domain
 
     KEYSTORE_INFO = {
         :sandbox => {
@@ -63,10 +64,6 @@ module Spree
       preferred_server.present? && preferred_server == 'live' ? Mastercard::Common::PRODUCTION : Mastercard::Common::SANDBOX
     end
 
-    def callback_domain
-      Spree::Config[:site_url]
-    end
-
     def supports?(source)
       true
     end
@@ -116,7 +113,7 @@ module Spree
       service = Mastercard::Masterpass::MasterpassService.new(
           preferred_consumer_key,
           OpenSSL::PKCS12.new(File.open(keystore[:path]), keystore[:password]).key,
-          callback_domain,
+          preferred_callback_domain,
           server_mode)
       response_xml = Document.new(service.post_checkout_transaction(postback_url, xml), {:compress_whitespace => :all})
 

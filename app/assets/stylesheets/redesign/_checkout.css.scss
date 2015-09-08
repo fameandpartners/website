@@ -307,5 +307,10 @@ $order-summary-bg: #f7f7f9;
       padding-top: 5px;
       border-top:  1px solid $order-summary-border-color;
     }
+    .order-number {
+      text-align: center;
+      font-size:  10px;
+      color:      darken($gray-light-bg, 20%);
+    }
   }
 }

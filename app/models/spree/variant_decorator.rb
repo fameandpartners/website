@@ -101,8 +101,8 @@ Spree::Variant.class_eval do
     end
 
     sku_chunks.reject(&:blank?).join('-')
-  rescue Exception => exception
-    return nil
+  rescue
+    nil
   end
 
   def generate_sku!
@@ -213,21 +213,20 @@ Spree::Variant.class_eval do
 
   def push_changed_prices_to_variants
     return true unless is_master
-    return true if prices.none? &:changed?
+    changed_prices = prices.select(&:changed?)
+    return true if changed_prices.empty?
 
-    changed_prices = prices.select &:changed?
+    product.variants.each do |v|
+      changed_prices.each do |master_price|
+        variant_price = v.prices.where(currency: master_price.currency).first_or_initialize
 
-    product.variants.reject(&:is_master).map do |v|
-      v.prices.map do |price|
-        new_price = changed_prices.detect { |cp| cp.currency == price.currency}
-        next unless new_price
-
-        if price.amount == new_price.amount_was
-          price.amount = new_price.amount
-          price.save
+        if variant_price.amount.nil? || variant_price.amount == master_price.amount_was
+          variant_price.amount = master_price.amount
+          variant_price.save
         end
       end
     end
+
     true
   end
 end
