@@ -42,6 +42,10 @@ module Marketing
         product.color_name
       end
 
+      def categories
+        product.taxons.map(&:permalink)
+      end
+
       def body
         {
             name:              product.name,
@@ -54,9 +58,9 @@ module Marketing
             currency:          currency,
             colors:            colors,
             selectedColor:     selected_color,
-            # categories: categories,
-            # image: categories,
-            # images: categories,
+            categories:        categories,
+            # image: 'Main images URLs',
+            # images: 'All product images',
             # description: product.description,
             # expressMaking: product.fast_making,
             # sizes: sizes
