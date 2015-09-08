@@ -146,7 +146,7 @@
 
 	.product-order {
 		.select2-container--default .select2-selection--single {
-			background-color:#023648;
+			background-color:#f5f5f5;
 		}
 
 		.select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -186,7 +186,9 @@
 	.thumb-true{
 		background-color: black;
 		background-image: url(product-collections/tick.svg);
-		background-size: cover;
+		background-size: 14px 14px;
+		background-repeat: no-repeat;
+		background-position: 4px 2px;
 	}
 	.thumb-false{
 		background-color: #E0E0E0;
@@ -282,6 +284,7 @@
 			background-color: #E8E8E8;
 			margin-bottom: 15px;
 			.filter-text{
+				cursor: pointer;
 				margin-left:10px;
 			}
 			.clear-all{
@@ -291,6 +294,7 @@
 			}
 			i {
 				padding-left: 10px;
+				cursor: pointer;
 			}
 		}
 
@@ -316,7 +320,7 @@
 				}
 			}
 			.filter-mobile-text{
-				margin-left: 20px;
+				margin-left: 10px;
 			}
 			.filter-col{
 				background-color: white;
@@ -486,8 +490,8 @@
 	}
 
 	.select2-results__option[aria-selected="false"] {
-		background-color: #023648;
-		color:#FFFFFF;
+		background-color: #f5f5f5;
+		color: black;
 	}
 }
 
@@ -514,7 +518,7 @@ li.select2-results__option {
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-	background-color: white;
+	background-color: white !important;
 	color: black;
 }
 

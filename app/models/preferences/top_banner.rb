@@ -1,11 +1,5 @@
 module Preferences
   class TopBanner < Base
-    attr_reader :site_version
-
-    def initialize(site_version)
-      @site_version = site_version
-    end
-
     # Not using meta programming until we have more positions
     def right_text_key
       "#{site_version.code}_top_banner_right_text"
