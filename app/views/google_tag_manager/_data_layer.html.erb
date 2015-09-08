@@ -5,7 +5,7 @@
 <script>window.dataLayer = window.dataLayer || [];</script>
 
 <%
-   # TODO: probably better not having this here, and putting it properly on a before_filter
+   # TODO: This is not going to stay here. This is going to a before action on a controller
    user      = Marketing::Gtm::UserPresenter.new(spree_user: spree_current_user, request_ip: request.ip)
    device    = Marketing::Gtm::DevicePresenter.new(user_agent: request.user_agent)
    site      = Marketing::Gtm::SitePresenter.new(current_site_version: current_site_version)
