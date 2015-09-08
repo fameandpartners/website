@@ -117,7 +117,9 @@
 	.thumb-true{
 		background-color: black;
 		background-image: url(product-collections/tick.svg);
-		background-size: cover;
+		background-size: 14px 14px;
+		background-repeat: no-repeat;
+		background-position: 4px 2px;
 	}
 	.thumb-false{
 		background-color: #E0E0E0;
