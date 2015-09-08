@@ -58,6 +58,27 @@ module Marketing
         (default_sizes + extra_sizes).map(&:presentation)
       end
 
+      def featured_image_urls
+        image = product.featured_image
+        {
+            original: image.original,
+            xlarge:   image.xlarge,
+            large:    image.large,
+            small:    image.small
+        }
+      end
+
+      def all_images
+        product.images.map do |image|
+          {
+              original: image.original,
+              xlarge:   image.xlarge,
+              large:    image.large,
+              small:    image.small,
+          }
+        end
+      end
+
       def body
         {
             name:              product.name,
@@ -71,8 +92,8 @@ module Marketing
             colors:            colors,
             selectedColor:     selected_color,
             categories:        categories,
-            # image: 'Main images URLs',
-            # images: 'All product images',
+            image:             featured_image_urls,
+            images:            all_images,
             description:       description,
             expressMaking:     product.fast_making,
             sizes:             sizes
