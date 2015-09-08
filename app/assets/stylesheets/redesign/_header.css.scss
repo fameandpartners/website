@@ -1177,7 +1177,7 @@ li#cart-trigger {
     span{
        padding-left: 15px;
        padding-right: 15px;
-       padding-top: 8px;
+       padding-top: 5px;
        padding-bottom: 7px;
        font-size: 1.2rem;
        cursor: pointer;
@@ -1270,6 +1270,8 @@ li#cart-trigger {
         cursor: pointer;
         display: table-cell;
         vertical-align: middle;
+        color: white;
+        text-decoration: none;
       }
     }
     .slideArea{
