@@ -52,6 +52,12 @@ module Marketing
         strip_tags(product.description)
       end
 
+      def sizes
+        default_sizes = product.sizes.default
+        extra_sizes   = product.sizes.extra
+        (default_sizes + extra_sizes).map(&:presentation)
+      end
+
       def body
         {
             name:              product.name,
@@ -69,7 +75,7 @@ module Marketing
             # images: 'All product images',
             description:       description,
             expressMaking:     product.fast_making,
-            # sizes: sizes
+            sizes:             sizes
         }
       end
     end
