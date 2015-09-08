@@ -213,6 +213,7 @@
 			background-color: #E8E8E8;
 			margin-bottom: 15px;
 			.filter-text{
+				cursor: pointer;
 				margin-left:10px;
 			}
 			.clear-all{
@@ -222,6 +223,7 @@
 			}
 			i {
 				padding-left: 10px;
+				cursor: pointer;
 			}
 		}
 
@@ -247,7 +249,7 @@
 				}
 			}
 			.filter-mobile-text{
-				margin-left: 20px;
+				margin-left: 10px;
 			}
 			.filter-col{
 				background-color: white;
