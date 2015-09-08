@@ -1,5 +1,6 @@
 class MigrateFacebookDataTableToSerializedAttribute < ActiveRecord::Migration
   def up
+    add_column :spree_users, :facebook_data, :text
     drop_table :facebook_data
   end
 
@@ -10,5 +11,7 @@ class MigrateFacebookDataTableToSerializedAttribute < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    remove_column :spree_users, :facebook_data, :text
   end
 end
