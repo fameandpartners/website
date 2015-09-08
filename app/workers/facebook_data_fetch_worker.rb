@@ -15,12 +15,9 @@ class FacebookDataFetchWorker
       user.update_column(:birthday, birthday)
     end
 
-    friends = fetcher.fetch_friends
-
-    if friends.present?
-      user.facebook_datas.create do |record|
-        record.value = friends
-      end
+    if (friends = fetcher.fetch_friends)
+      user.facebook_data[:friends] = friends
+      user.save
     end
   end
 end

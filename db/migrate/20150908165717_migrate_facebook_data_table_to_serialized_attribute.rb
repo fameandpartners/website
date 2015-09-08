@@ -1,4 +1,4 @@
-class DestroyFacebookDataTable < ActiveRecord::Migration
+class MigrateFacebookDataTableToSerializedAttribute < ActiveRecord::Migration
   def up
     drop_table :facebook_data
   end

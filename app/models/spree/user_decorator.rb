@@ -19,6 +19,8 @@ Spree::User.class_eval do
   attr_accessor :skip_welcome_email,
                 :validate_presence_of_phone
 
+  serialize :facebook_data, Hash
+
   attr_accessible :first_name, :last_name, :phone, :dob, :skip_welcome_email, :automagically_registered
 
   validates :first_name, :last_name, :presence => true
