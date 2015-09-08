@@ -1,6 +1,8 @@
 module Marketing
   module Gtm
     class ProductPresenter
+      include ActionView::Helpers::SanitizeHelper
+
       attr_reader :product
 
       def initialize(product_presenter:)
@@ -46,6 +48,10 @@ module Marketing
         product.taxons.map(&:permalink)
       end
 
+      def description
+        strip_tags(product.description)
+      end
+
       def body
         {
             name:              product.name,
@@ -54,15 +60,15 @@ module Marketing
             price:             price,
             priceWithDiscount: price_with_discount,
             discountPercent:   discount_percent,
-            type:              'dresses', # Hardcoded for the moment
+            type:              'dresses',         # Hardcoded for the moment
             currency:          currency,
             colors:            colors,
             selectedColor:     selected_color,
             categories:        categories,
             # image: 'Main images URLs',
             # images: 'All product images',
-            # description: product.description,
-            # expressMaking: product.fast_making,
+            description:       description,
+            expressMaking:     product.fast_making,
             # sizes: sizes
         }
       end
