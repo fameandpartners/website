@@ -315,7 +315,7 @@ ActiveRecord::Schema.define(:version => 20150921073046) do
     t.datetime "updated_at",    :null => false
   end
 
-  add_index "facebook_data", ["spree_user_id"], :name => "index_facebook_data_on_spree_user_id"
+  add_index "facebook_data", ["spree_user_id"], :name => "index_facebook_data_on_spree_user_id", :unique => true
 
   create_table "factories", :force => true do |t|
     t.text     "name"
