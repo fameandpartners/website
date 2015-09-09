@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe Spree::User, type: :model do
-  it { is_expected.to serialize(:facebook_data) }
-
   describe "#subscriptions" do
     context "#create" do
       it "runs for new record" do

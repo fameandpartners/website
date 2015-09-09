@@ -16,10 +16,10 @@ Spree::User.class_eval do
           :class_name => '::UserStyleProfile',
           :foreign_key => :user_id
 
+  has_one :facebook_data, foreign_key: 'spree_user_id'
+
   attr_accessor :skip_welcome_email,
                 :validate_presence_of_phone
-
-  serialize :facebook_data, Hash
 
   attr_accessible :first_name, :last_name, :phone, :dob, :skip_welcome_email, :automagically_registered
 
