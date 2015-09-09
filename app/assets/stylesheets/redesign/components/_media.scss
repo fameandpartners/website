@@ -1,0 +1,42 @@
+/* [Media]
+-------------------------------------------------------*/
+.media-wrap {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border: solid $c-neutral-2 1px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    background: $c-neutral-2;
+  }
+
+  img {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+  }
+
+  &.is-loaded {
+
+    img {
+      opacity: 1;
+      @include transition(opacity linear .6s);
+    }
+    
+  }
+
+}

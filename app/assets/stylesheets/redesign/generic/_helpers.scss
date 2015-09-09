@@ -1,0 +1,30 @@
+/* [Helpers]
+-------------------------------------------------------*/
+
+// truncates single line of text
+.txt-truncate-1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// You can extend the cfix class with SASS to avoid the `.cfix` class appearing over and over in your markup.
+.cfix {
+
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+
+}
+
+%cfix {
+
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+
+}
