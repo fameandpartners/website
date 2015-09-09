@@ -5,5 +5,4 @@ describe FacebookData, type: :model do
   it { is_expected.to serialize(:value) }
 
   it { is_expected.to validate_presence_of(:spree_user) }
-  it { is_expected.to validate_presence_of(:key) }
 end

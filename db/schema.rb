@@ -313,10 +313,8 @@ ActiveRecord::Schema.define(:version => 20150921073046) do
     t.text     "value"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.string   "key"
   end
 
-  add_index "facebook_data", ["key"], :name => "index_facebook_data_on_key"
   add_index "facebook_data", ["spree_user_id"], :name => "index_facebook_data_on_spree_user_id"
 
   create_table "factories", :force => true do |t|

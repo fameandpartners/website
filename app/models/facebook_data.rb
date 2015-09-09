@@ -3,5 +3,5 @@ class FacebookData < ActiveRecord::Base
 
   serialize :value, Hash
 
-  validates :spree_user, :key, presence: true
+  validates :spree_user, presence: true
 end
