@@ -141,7 +141,7 @@ when :preproduction
 when :production
   configatron.host      = 'www.fameandpartners.com'
 
-  configatron.order_production_emails = ['fameandpartners@hotmail.com']
+  configatron.order_production_emails = ['fameandpartners@hotmail.com', 'orders@fameandpartners.com.cn']
 
   configatron.aws.s3 do |s3|
     s3.bucket            = 'fameandpartners'
