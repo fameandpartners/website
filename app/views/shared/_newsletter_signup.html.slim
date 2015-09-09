@@ -23,7 +23,7 @@ ruby:
         input type="hidden" id="fielddkjuhj"  name="cm-f-dkjuhj" value=(details[:campaign])
         input type="hidden" id="fielddkjuht"  name="cm-f-dkjuht" value=(details[:ipaddress])
       span.submit.no-padding-right
-        button.invis-fix.btn.btn-default type="submit" Send
+        button.btn.btn-transparent type="submit" Send
 
 = content_for :inline_javascript do
   | new window.page.EmailNewsletterSubscriber({form: '#email-newsletter-signup form'});

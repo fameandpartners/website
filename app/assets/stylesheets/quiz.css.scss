@@ -6,14 +6,17 @@
 @import 'old_site/partials/icons';
 @import 'old_site/partials/global_elements';
 
-@import 'libs/jquery.jscrollpane';
+@import 'old_site/libs/jquery.jscrollpane';
 
-@import 'redesign/vars';
+//@import 'redesign/vars';
+@import 'bootstrap/variables';
+@import 'redesign/helpers/bootstrap-variables';
+
 @import 'libs/vex.css';
 @import 'libs/vex-theme-flat-attack.css';
 @import 'libs/vex-theme-bottom-right-corner.css';
-@import 'redesign/modal';
-@import 'redesign/icons';
+@import 'redesign/components/modal';
+@import 'redesign/helpers/icons';
 
 @import 'transient_content';
 

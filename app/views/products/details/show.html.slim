@@ -121,12 +121,11 @@ ruby:
       button.btn.btn-block.btn-black.buy-button Add to Cart
 
     .row.secondary-actions
-      .col-md-6.col-xs-6.col-xxs-12
-        button#fit-guide.btn.btn-block.btn-secondary Size Guide
-
-      .col-md-6.col-xs-6.col-xxs-12
+      .col-md-6.col-sm-6.col-xs-12
+        button#fit-guide.btn.btn-block.btn-blue Size Guide
+      .col-md-6.col-sm-6.col-xs-12
         - if Features.active?(:moodboard)
-          button#add-to-moodboard.btn.btn-block.btn-secondary data-user-present=current_spree_user.present?
+          button#add-to-moodboard.btn.btn-block.btn-blue data-user-present=current_spree_user.present?
             |+ Moodboard
 
 /! About The Dress

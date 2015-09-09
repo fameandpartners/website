@@ -10,7 +10,7 @@
   <% for product in _.first(products, 2): %>
     <%- JST['templates/_product'](product: product) %>
   <% end %>
-  <div class="col-md-6 col-xs-12 col-xxs-12">
+  <div class="col-md-6 col-xs-12">
     <div class="content">
       <p><%= @collection.details.description %></p>
     </div>
@@ -33,7 +33,7 @@
       <% last_footer_row_products = products.slice(2) %>
 
       <% if first_footer_row_products.length > 0: %>
-        <div class="col-md-6 col-xs-12 col-xxs-12">
+        <div class="col-md-6 col-xs-12">
           <div class="content">
             <h2><%= @collection.details.title %></h2>
             <p><%= @collection.details.footer %></p>
@@ -46,7 +46,7 @@
       <% end %>
 
       <% if last_footer_row_products.length > 0: %>
-        <div class="col-md-6 col-xs-12 col-xxs-12">
+        <div class="col-md-6 col-xs-12">
           <div class="content">
             <h2><%= @collection.details.title %></h2>
             <p><%= @collection.details.footer %></p>

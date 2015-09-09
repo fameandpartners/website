@@ -1,0 +1,174 @@
+%disabled-blur {
+  pointer-events: none;
+  filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='saturate' values='0'/></filter></svg>#grayscale");
+  -webkit-filter: grayscale(1) blur(1px);
+  filter: grayscale(1) blur(1px);
+  filter: gray;
+  opacity: 0.6;
+  .ie & {
+    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='1');
+  }
+}
+
+// Text helpers
+.font-forum {
+ font-family: $font-brand-serif;
+} 
+.text-light {
+  font-weight: 300;
+}
+.text-uppercase-xs {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+a.text-uppercase-xs {
+  color: $text-color;
+}
+// @end Text helpers
+// -----------------
+
+// Responsive Utility
+// - hidden
+@media (max-width: $screen-tablet) { .hidden-tablet-and-less { display: none !important;}}
+@media (max-width: $screen-phone)  { .hidden-phone           { display: none !important;}}
+// - visible
+@media (min-width: $screen-tablet + 1px) { .visible-tablet-and-less { display: none !important;}}
+@media (min-width: $screen-phone + 1px)  { .visible-phone           { display: none !important;}}
+// - reset float use with .pull-left/.pull-right
+// @end Responsive Utility
+// -----------------
+
+// Caret
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 6px solid;
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+  color: $fp-dropdown-border;
+} 
+// @end Caret
+// -----------------
+
+// Divider
+.divider {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100px;
+  height: 1px;
+  background: $gray-lighter;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+// @end Divider
+// -----------------
+
+// Overlay
+#shadow-layer {
+  position: fixed;
+  min-height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: $shadow-zindex;
+  display: none;
+  &.is-visible { display: block;}
+} 
+// @end Overlay
+// -----------------
+
+// Title with line
+.decorated {
+  overflow: hidden;
+  text-align: center;
+  > span {
+    position: relative;
+    display: inline-block;
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      border-bottom: 2px solid;
+      width: 591px; /* half of limiter*/
+      margin: 0 20px;
+    }
+    &:before { right: 100%;}
+    &:after { left: 100%;}
+  }
+}
+
+// @end Title with line
+// -----------------
+
+// Colors
+.pink {
+  background-color: #f6e1d5;
+}
+.text-pink { 
+  color: #DBB8C7;
+}
+.brand-pink {
+  background-color:#eeddf0;
+}
+.pink-light {
+  background-color: #f8ece9;
+} 
+// @end Colors
+// -----------------
+
+// Styleguide
+.no-padding {
+  padding: 0px !important;
+}
+.text-white {
+  color: white;
+}
+.text-highlight {
+  color: $fp-highlight;
+}
+.max-width-100 {
+  max-width: 100%;
+}
+.height-100 {
+  height: 100%;
+}
+.invis {
+  left: -999em !important;
+}
+.vis {
+  left: 0px !important;
+}
+.no-padding-right {
+  padding-right: 0px;
+}
+.no-padding-bottom {
+  padding-bottom: 0px;
+}
+.relative {
+  position: relative;
+}
+.no-scroll {
+  position: fixed !important;
+}
+.mobile-show {
+  top: 0;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.link-grey {
+  color: $gray-light;
+} 
+.zopim {
+  @media(max-width: 990px){
+    display: none;
+  }
+}
+// @end Styleguide
+// -----------------

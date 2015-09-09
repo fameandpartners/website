@@ -38,10 +38,10 @@ javascript:
 
 
 
-.user-account-page-title
+.page-title.page-title-peach
   .container
     .page-title--details
-      h1.user-account-title.no-padding-bottom.text-white = @moodboard.title
+      h1 = @moodboard.title
 
 .page-content.user.moodboard.index
   .container.relative
@@ -58,7 +58,7 @@ javascript:
             - @moodboard.products.each_slice(4).each do |row|
               .row.relative
                 - row.each do |product|
-                  .col-md-3.col-xs-6.col-xxs-12.category--item.product-item data-id=(product.id)
+                  .col-md-3.col-sm-6.col-xs-12.category--item.product-item data-id=(product.id)
                     = link_to product.path do
                       = image_tag product.image_url, :class => "img-responsive", alt: product.name
                       .details

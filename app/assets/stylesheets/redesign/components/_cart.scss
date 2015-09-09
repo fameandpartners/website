@@ -1,0 +1,153 @@
+#cart {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  height: 100%;
+  width: 260px;  
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: 0 0 20px rgba(#000, .2);
+  z-index: $sidebar-zindex;
+  background: #FFF;
+  transition: right .3s;
+  @media (min-width: $screen-tablet) {
+    width: 350px;
+  }
+  @media (min-width: $screen-lg-desktop) {
+    width: 30%;
+  }
+  &.speed-in {
+    right: 0;
+  }
+}
+
+.close-cart {
+  cursor: pointer;
+}
+
+.cart--top {
+  padding: 20px 30px;
+  background:  $gray-lighter;
+  .arrow-bag {
+    width: 20px;
+    transform: rotate(180deg);
+    height: 20px;
+  }
+  .cart {
+    position: relative;
+  }
+  .cart-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 2px;
+  }
+  .cart-amount {
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 12px;
+  }
+}
+
+.cart-title {
+  margin-top: 0;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.cart-items {
+  padding: 0;
+  li {
+    list-style: none;
+    position: relative;
+    padding: 1em;
+    border-top: 1px solid $gray-lighter;
+    overflow: hidden;
+
+    &:last-child {
+      border-bottom: 1px solid $gray-lighter;
+    }
+  }
+}
+.cart-item-title {
+  font-size: 1.1em;
+  color: #000;
+  font-weight: 300;
+}
+.cart-item-image {
+  width: 40px;
+  margin-right: 30px;
+}
+.cart-item-image-holder {
+  margin-right: 1em;
+  .cart-item-image {
+    margin-right: 0;
+    @media (min-width: 1200px) { width: 80px;}
+  }
+}
+.cart-item-info {
+  overflow: hidden;
+  text-transform: none;
+  span { text-transform: none;}
+  .heading {
+    color: #000;
+    font-size: 1.25em;
+  }
+  .color {
+    text-transform: capitalize;
+  }
+}
+
+.cart-prices {
+  .small {font-size: 0.9em;}
+  .total { color: #000;}
+  .price-remove {
+    text-transform: none;
+    cursor: pointer;
+    line-height: 1;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: dotted 1px currentColor;
+    opacity: 0.5;
+    &:hover {
+      border-bottom-style: solid;
+      opacity: 1;
+    }
+  }
+}
+
+.cart--call-to-actions {
+  padding: 1em;
+}
+
+.cart-total {
+  padding: 1em;
+
+  span {
+    float: right;
+  }
+
+  &::after { /* clearfix */
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+
+.price-express-making {
+  text-transform: none;
+  .price-express-making-remove {
+    text-transform: none;
+    cursor: pointer;
+    line-height: 1;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: dotted 1px currentColor;
+    &:hover {
+      border-bottom-style: solid;
+    }
+  }
+}

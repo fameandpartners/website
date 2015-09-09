@@ -110,6 +110,7 @@ group :assets do
   gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
   gem 'bootstrap-sass'
+  gem 'font-awesome-sass', '~> 4.4.0'
 end
 
 group :assets, :development, :test do

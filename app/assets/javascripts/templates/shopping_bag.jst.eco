@@ -1,6 +1,6 @@
 <div class="cart--top text-center">
   <div class="pull-left close-cart">
-    <img alt="Submit" class="line-arrow arrow-bag" src="/assets/line-arrow.svg">
+    <img alt="Submit" class="arrow-bag" src="/assets/line-arrow.svg">
   </div>
   <div class="pull-right close-cart">
     <span class="cart"><img alt="Cart" class="cart-icon" src="/assets/Cart.svg">
@@ -24,7 +24,7 @@
       </div>
       <div class="cart-item-info">
         <div class="heading">
-          <span class="qty"><%= product.quantity %> x </span>
+          <span class="text-muted"><%= product.quantity %> x </span>
           <a class="cart-item-title" href="<%= product.path %>"><%= product.name %></a>
         </div>
         <div class="clearfix">
@@ -72,15 +72,19 @@
   </p>
 </div>
 <!--cd-cart-total-->
-<div class="cart--call-to-actions row">
-  <div class="col-lg-6 no-padding-left close-cart no-padding-lg">
-    <button class="btn btn-charcoal btn-block">Shop More</button><br>
-  </div>
-  <div class="col-lg-6 no-padding-right no-padding-lg">
-    <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
-      <div>
-        <input type="submit" value="PAY NOW" class="btn btn-black btn-block">
-      </div>
-    </form>
+<div class="cart--call-to-actions">
+  <div class="row row-compact">
+    <div class="col-lg-6 col-compact close-cart">
+      <p>
+        <button class="btn btn-grey btn-block">Shop More</button>
+      </p>
+    </div>
+    <div class="col-lg-6 col-compact">
+      <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
+        <div>
+          <input type="submit" value="PAY NOW" class="btn btn-black btn-block">
+        </div>
+      </form>
+    </div>
   </div>
 </div>

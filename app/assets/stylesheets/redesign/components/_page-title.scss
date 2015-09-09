@@ -1,0 +1,105 @@
+// Page title 
+.page-title {
+  margin-top: $fp-menu-height-full;
+  background-color: $page-title-default-bg;
+  text-align: center;
+  .img-responsive { display: inline-block;}
+}
+
+.page-title-peach {
+  background-color: $page-title-peach-bg;
+}
+
+.page-title--details {
+  padding: 60px 0 55px;
+  position: relative;
+  z-index: 2;
+
+  h1 {
+    margin-top: 0px;
+    padding-bottom: 0;
+    text-transform: uppercase;
+    font-family: $font-brand-serif;
+    @media screen and (max-width: $screen-phone) {
+      font-size: 2.3em;
+    }
+  }
+}
+// @end Page title
+// -----------------
+
+// Categories page title
+.category-header {
+  height: 437px;
+  position: relative;
+  background-size: cover;
+  
+  &:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    width: 1px;
+    margin-left: -3px;
+  }
+
+  &:after {
+    content: "";
+    background: #000;
+    opacity: 0.1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  > .container {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 98%;
+  }
+
+  &.dark-bg {
+    color: #FFFFFF;
+  }
+
+  .page-title--details {
+    width: 100%;
+    max-width: 370px;
+    margin-left: auto;
+    margin-right: auto;
+    h1 {
+      text-transform: lowercase;
+      font-family: $font-family-sans-serif;
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
+} 
+// @end Categories page title
+// -----------------
+
+// Specific page titles
+.checkout-page-title {
+  margin-top: $fp-menu-height;
+  .page-title--details {
+    padding: 30px 0 25px;
+  }
+}
+
+.fame-page-title {
+  .img-responsive {max-width: 70%;}
+  .page-title--details {
+    padding: 20px 0;
+  }
+  p {
+    margin-top: 15px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}
+// @end Specific page titles
+// -----------------

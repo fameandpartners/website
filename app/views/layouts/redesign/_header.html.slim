@@ -52,7 +52,7 @@ ruby:
       sideMenuTrigger:        '#side-menu-trigger',
       close:                  '#sideMenu #close',
       arrowImg:               '.arrow img',
-      dropdownMenu:           '.dropdown-menu'
+      dropdownMenu:           '.responsive-nav-dropdown'
     });
   "
 
@@ -70,125 +70,100 @@ ruby:
         = render 'layouts/redesign/header/locale_warn/base', warning: @locale_warning
         = render 'layouts/redesign/header/gray_top_banner/base'
 
-        #masthead-container
-          .masthead.pull-left.visible-xs.visible-sm
-            nav.navbar.navbar-default.visible-xs.visible-sm.hamburger role="navigation"
-              .navbar-header
-                button.navbar-toggle.visible-xs.visible-sm#side-menu-trigger type="button"
-                  = image_tag('Hamburger.svg', height: '25px')
+        .masthead.pull-left.visible-xs.visible-sm
+          nav.navbar.navbar-default.visible-xs.visible-sm.hamburger role="navigation"
+            .navbar-header
+              button.navbar-toggle.visible-xs.visible-sm#side-menu-trigger type="button"
+                = image_tag('Hamburger.svg', height: '25px')
 
-          .masthead.pull-left.hidden-xs
-            = link_to root_path
-              = image_tag src='logo/new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
+        .masthead.pull-left.hidden-xs
+          = link_to root_path
+            = image_tag src='logo/new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
 
 
-          .masthead.pull-left.visible-xs
-            = link_to root_path do
-              = image_tag src='logo/logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
+        .masthead.pull-left.visible-xs
+          = link_to root_path do
+            = image_tag src='logo/logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
 
-          ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
-            = render partial: 'layouts/redesign/mega_menu/shop'
-            = render partial: 'layouts/redesign/mega_menu/lookbook'
-            li.menu-item
-              = link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link'
+        ul.nav-list.pull-left.hidden-sm.hidden-xs.hidden-xxs
+          = render partial: 'layouts/redesign/mega_menu/shop'
+          = render partial: 'layouts/redesign/mega_menu/lookbook'
+          li.menu-item
+            = link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link'
 
-          ul.secondary.pull-right
-            - if Features.active?(:moodboard)
-              li.menu-item.hidden-xs.hidden-sm
-                = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
-                  span.visible-sm
-                    = image_tag "Heart.svg"
-                  span.hidden-sm.hidden-xs#moodboard-counter
-                    | Moodboard &nbsp;
+        ul.nav-list.pull-right
+          - if Features.active?(:moodboard)
+            li.menu-item.hidden-xs.hidden-sm
+              = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
+                span.visible-sm
+                  = image_tag "Heart.svg"
+                span.hidden-sm.hidden-xs#moodboard-counter
+                  | Moodboard &nbsp;
 
-            li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
-              = render "layouts/redesign/header/my_account_dropdown"
+          li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
+            = render "layouts/redesign/header/my_account_dropdown"
 
-            li.menu-item
-              a.menu-item--link.search href="#"
-                = image_tag "_icons/search.svg", class: "nav-mobile-logo"
-              .search-bar.invis
-                a.close-search href="#"
-                  = image_tag "close.svg", alt: 'Close'
-                .container-fluid.search-form
-                  .col-md-6.col-md-offset-3
-                    .col-md-10
-                      .input-group.margin-bottom-sm
-                        = form_tag search_path, method: :get do
-                          input.form-control id='input-search' name='q' placeholder=("Search here...") type="text"
-                          span
-                            button.invis-fix Enter
+          li.menu-item
+            a.menu-item--link.search href="#"
+              = image_tag "_icons/search.svg", class: "nav-mobile-logo"
+            .search-bar.invis
+              a.close-search href="#"
+                = image_tag "close.svg", alt: 'Close'
+              .container-fluid.search-form
+                .col-md-6.col-md-offset-3
+                  .col-md-10
+                    .input-group.margin-bottom-sm
+                      = form_tag search_path, method: :get do
+                        input.form-control id='input-search' name='q' placeholder=("Search here...") type="text"
+                        span
+                          button.btn-transparent Enter
 
-            li#cart-trigger.menu-item
-              = link_to '#', class: 'menu-item--link' do
-                span
-                  = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
-                  span#cart-item-count 0
+          li#cart-trigger.menu-item
+            = link_to '#', class: 'menu-item--link' do
+              span
+                = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
+                span#cart-item-count 0
 
       = render 'layouts/redesign/header/locale_selector/mobile'
-
     - unless disable_notices?
       = render 'layouts/redesign/notices'
 
-- cache [:layout, :side_menu, spree_user_signed_in?, @locale_warning.cache_key], expires_in: configatron.cache.expire.long do
-  #sideMenu
-    nav.navbar.navbar-default.visible-xs.visible-sm
-      .navbar-header
-        a.navbar-brand href="#"  SHOP
-        a#close
-          = image_tag('Hamburger.svg', height: '25px')
-      .main-menu
-        ul.nav.navbar-nav
-          li
-            a
-              | EVENTS
-              span.arrow
-                = image_tag('icon-arrow-right.png')
-            ul.dropdown-menu.mobileAnimation
-              = render :partial => '/layouts/redesign/event'
-          li
-            a
-              | STYLES
-              span.arrow
-                = image_tag('icon-arrow-right.png')
-            ul.dropdown-menu.mobileAnimation
-              = render :partial => '/layouts/redesign/style'
-          li
-            a
-              | COLORS
-              span.arrow
-                = image_tag('icon-arrow-right.png')
-            ul.dropdown-menu.mobileAnimation
-              = render :partial => '/layouts/redesign/color'
-          li
-            a
-              | EXPRESS MAKING
-              span.arrow
-                = image_tag('icon-arrow-right.png')
-            ul.dropdown-menu.mobileAnimation
-              li = link_to 'Dresses made in 48 hours', fast_making_dresses_path
-          li
-            a
-              | LOOKBOOK
-              span.arrow
-                = image_tag('icon-arrow-right.png')
-            ul.dropdown-menu.mobileAnimation
-              li = link_to 'The Luxe Collection', luxe_collection_path
-              li = link_to 'Bohemian Summer', bohemian_summer_collection_path
-              li = link_to 'Besties and Bridesmaids Collection', bridesmaid_collection_path
-              li = link_to "I'll Have What She's Having", all_size_collection_path
-              li = link_to 'Here Comes The Sun', here_comes_the_sun_collection_path
+#sideMenu.responsive-nav-wrapper.visible-tablet-and-less
+  .responsive-nav-header.clearfix
+    h4.responsive-nav-title SHOP
+    a#close = image_tag('Hamburger.svg', height: '25px')
+  ul.responsive-nav
+    li
+      a.responsive-nav-link EVENTS
+      .responsive-nav-dropdown
+        ul = render :partial => '/layouts/redesign/event'
+    li
+      a.responsive-nav-link STYLES
+      .responsive-nav-dropdown
+        ul = render :partial => '/layouts/redesign/style'
+    li
+      a.responsive-nav-link COLORS
+      .responsive-nav-dropdown
+        ul = render :partial => '/layouts/redesign/color'
+    li
+      a.responsive-nav-link EXPRESS MAKING
+      .responsive-nav-dropdown
+        ul: li = link_to 'Dresses made in 48 hours', fast_making_dresses_path
+    li
+      a.responsive-nav-link LOOKBOOK
+      .responsive-nav-dropdown
+        ul
+          li = link_to 'The Luxe Collection', luxe_collection_path
+          li = link_to 'Bohemian Summer', bohemian_summer_collection_path
+          li = link_to 'Besties and Bridesmaids Collection', bridesmaid_collection_path
+          li = link_to "I'll Have What She's Having", all_size_collection_path
+          li = link_to 'Here Comes The Sun', here_comes_the_sun_collection_path
 
-        .all-dresses
-          center
-            = button_to 'View all dresses', dresses_path, class: 'btn btn-block btn-black', method: :get
-        .clearfix
-        .account-login
-          = link_to profile_path, class: "menu-item--link active-hover", rel: 'nofollow' do
-            = image_tag "_icons/my-account.svg", class: 'nav-mobile-logo', alt: 'my account'
-            span
-              | Account login
-
-
+    .text-center
+      = button_to 'View all dresses', dresses_path, class: 'btn btn-black responsive-nav-btn', method: :get
+      = link_to profile_path, class: "btn responsive-nav-btn", rel: 'nofollow' do
+        = image_tag "_icons/my-account.svg", class: 'nav-mobile-logo', alt: 'my account'
+        | &nbsp;
+        span Account login
 
 = render 'layouts/redesign/campaigns/auto_apply_promo_code'

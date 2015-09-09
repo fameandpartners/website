@@ -1,0 +1,25 @@
+// Bootstrap inline grid 
+.row-inline {
+  font-size: 0;
+}
+.col-inline {
+  display: inline-block;
+  vertical-align: top;
+  float: none;
+  font-size: $font-size-base;
+  .vex & { font-size: 1.5em;}
+}
+// @end Bootstrap inline grid
+// -----------------
+
+// Compact grid 
+.row-compact {
+  margin-left:  ($grid-gutter-width / -4);
+  margin-right: ($grid-gutter-width / -4);
+}
+.col-compact {
+  padding-left:  ($grid-gutter-width / 4);
+  padding-right: ($grid-gutter-width / 4);
+}
+// @end Compact grid
+// -----------------

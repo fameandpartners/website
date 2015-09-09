@@ -1,0 +1,81 @@
+.nav-menu.checkout {
+  height: $fp-menu-height;
+
+  .mobile-logo {
+    margin-left: 0;
+  }
+}
+
+.page-content.checkout {
+  // - Override form styles
+
+  .auth-alert {
+    padding: 15px 35px 15px 15px;
+    margin-bottom: 25px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    display: none;
+  }
+
+  .alert-danger {
+    margin-top: 12.5px;
+  }
+
+
+  // - Override Checkout items styles
+  .checkout-items {
+    padding: 10px 20px;
+    background-color: $gray-light-bg;
+
+    h3 {
+      text-transform: uppercase;
+      margin: 25px 0;
+    }
+    .price-express-making {
+      margin-top: 5px;
+    }
+    .cart-items li {
+      background-color: #fff;
+      border-top-color: $gray-light-bg;
+      font-size: 14px;
+    }
+    .cart-item-image {
+      width: 80px;
+    }
+  }
+  .col-md-4 { padding-top: 0;}
+
+  .promo-code {
+    margin: 20px 0;
+  }
+}
+// @end
+
+.checkout .slash {
+  margin-top: 60px;
+  float: left;
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.checkout .card_code {
+  @media(max-width: $screen-phone){
+    clear: both;
+  }
+}
+
+.checkout .shipAddress{
+  text-transform: none;
+  margin-left: 10px;
+}
+
+// Title
+.checkout-section-title {
+  text-transform: uppercase;
+  background-color: #f6e2d5;
+  padding: 15px;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+// @end

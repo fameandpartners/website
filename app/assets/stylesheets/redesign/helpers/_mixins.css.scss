@@ -1,0 +1,12 @@
+@mixin dropdown-triangle($color, $width, $height) {
+  $arrow-color:    $color;
+  $arrow-median:   $width / 2;
+  $arrow-width:    $width;
+  $arrow-height:   $height;
+  $arrow-triangle: $arrow-height $arrow-median 0 $arrow-median;
+
+  border-color: $arrow-color transparent transparent transparent;
+  border-style: solid;
+  border-width: $arrow-triangle;
+  width: $arrow-width;
+}
