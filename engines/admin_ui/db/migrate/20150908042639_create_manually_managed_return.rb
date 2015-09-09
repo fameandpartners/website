@@ -1,6 +1,7 @@
 class CreateManuallyManagedReturn < ActiveRecord::Migration
   def change
     create_table :manually_managed_returns do |t|
+      t.references :item_return
       t.string :row_number
       t.string :rj_ident
       t.string :column_b

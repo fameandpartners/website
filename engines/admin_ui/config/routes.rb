@@ -5,6 +5,7 @@ AdminUi::Engine.routes.draw do
     get ':event_type/new', :controller => 'item_returns/events', action: :new, as: :build_event
     resources :events, :controller => 'item_returns/events', except: [:update, :delete]
   end
+  resources :manually_managed_returns
 
   resources :preferences, only: :index do
     collection do

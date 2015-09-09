@@ -1,0 +1,10 @@
+= datagrid_form_for @collection, :method => :get, url: manually_managed_returns_path
+
+= paginate @collection.assets, theme: 'admin_ui'
+
+= link_to "Download CSV", url_for(format: 'csv')
+
+div
+  = datagrid_table @collection, html: {class: 'table table.condensed'}
+
+= paginate @collection.assets, theme: 'admin_ui'

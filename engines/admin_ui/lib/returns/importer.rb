@@ -10,7 +10,7 @@ module Returns
       ManuallyManagedReturn.transaction do
         csv.each_with_index do |row, index|
           # 0 Indexed rows + Header = 2
-          row_number = index + 2
+          row_number = (index + 2).to_s
 
           row_data = {
             :row_number                 => row_number,
@@ -53,8 +53,11 @@ module Returns
             :deleted_row                => row['Deleted']
           }
 
-          info [ row_data[:rj_ident], row_data[:spree_order_number] ].join(' ')
-          ManuallyManagedReturn.create(row_data)
+
+          info [row_data[:rj_ident], row_data[:spree_order_number] ].join(' ')
+          ManuallyManagedReturn.find_or_create_by_row_number(row_number) do |mmr|
+            mmr.assign_attributes(row_data)
+          end
         end
       end
       info "Done"
