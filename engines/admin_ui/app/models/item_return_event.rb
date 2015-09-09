@@ -25,8 +25,7 @@ class ItemReturnEvent < ActiveRecord::Base
 
   serialize :data
 
-  belongs_to :item_return,
-    foreign_key: 'item_return_uuid', primary_key: 'uuid'
+  belongs_to :item_return, foreign_key: 'item_return_uuid', primary_key: 'uuid'
 
   event_type :creation do
     attributes :line_item_id
