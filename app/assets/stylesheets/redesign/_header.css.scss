@@ -1371,6 +1371,8 @@ li#cart-trigger {
         div{
           clear: both;
           margin-top:10px;
+          font-size: 1.5rem;
+          text-transform: capitalize
         }
       }
       .col2, .col3{
@@ -1378,7 +1380,7 @@ li#cart-trigger {
           padding-top: 10px;
           a{
             font-size: 1.4rem;
-            text-transform: uppercase;
+            text-transform: capitalize;
           }
         }
       }
