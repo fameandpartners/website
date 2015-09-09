@@ -9,19 +9,17 @@ class FacebookDataFetchWorker
 
     fetcher = Facebook::DataFetcher.new(uid, token)
 
-    birthday = fetcher.fetch_birthday
-
-    if birthday.present?
+    if (birthday = birthday.present?)
       user.update_column(:birthday, birthday)
     end
 
     if (friends = fetcher.fetch_friends)
-      user.facebook_data[:friends] = friends
+      user.facebook_data_value[:friends] = friends
       user.save
     end
 
     if (gender = fetcher.fetch_gender)
-      user.facebook_data[:gender] = gender
+      user.facebook_data_value[:gender] = gender
       user.save
     end
   end
