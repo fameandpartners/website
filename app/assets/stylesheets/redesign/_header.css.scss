@@ -358,8 +358,8 @@ li.shop {
     .shopping-bag{
       margin-left: 18px;
     }
-    i{
-      margin-left: 15px;
+    i.fa-heart{
+      margin-left: 15px !important;
     }
   }
 
@@ -382,16 +382,6 @@ li.shop {
     }
   }
 
-  @media(width: 768px){
-    .mobile-logo{
-      margin-left: 220px;
-    }
-  }
-  @media(width: 800px){
-    .mobile-logo{
-      margin-left: 230px;
-    }
-  }
 }
 
 .nav-menu .primary li.menu-item .menu-item--link, .nav-menu .secondary li.menu-item .menu-item--link {
@@ -594,32 +584,16 @@ li#cart-trigger {
   }
 }
 
+.mobile-logo-area{
+  width: 93%;
+  position: absolute;
+  text-align: center;
+  @media(min-width: 600px){
+    width: 100%;
+  }
+}
 .mobile-logo{
   margin-top: -3px;
-
-  //iphone 4,5
-  @media(max-width: 325px){
-    margin-left: 60px;
-  }
-
-  //iphone 6
-  @media(min-width: 325px)and(max-width:385px){
-    margin-left: 90px;
-  }
-
-  //iphone 6plus
-  @media(min-width: 385px)and(max-width:430px){
-    margin-left: 110px;
-  }
-
-  //nexus 7
-  @media(min-width: 430px)and(max-width:610px){
-    margin-left: 140px;
-  }
-
-  @media(min-width: 480px)and(max-width:550px){
-    margin-left: 90px;
-  }
 }
 
 /////////// side menu (hamburger) //////////
