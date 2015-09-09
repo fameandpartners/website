@@ -49,6 +49,14 @@
 // Time specific content
 @import 'transient_content';
 
+// Components
+@import 'redesign/components/tabs';
+@import 'redesign/components/media';
+@import 'redesign/components/blog-posts';
+
+// Generic
+@import 'redesign/generic/helpers';
+
 .standard-form {
   height: 60px;
   padding: 0 5px;

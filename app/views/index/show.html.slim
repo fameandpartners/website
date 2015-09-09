@@ -5,6 +5,47 @@
         = link_to LocalizeUrlService.localize_url(banner.url, current_site_version), title: banner.title do
           = image_tag banner.attachment(:original), alt: banner.presentation, class: "img-responsive portrait-img #{banner.css_class}"
 
+/! Content Section
+section.container.home-main-content
+  .row
+    .main.col-md-7
+      .media-wrap.lrg
+      = render 'shared/tabs_collection'
+      .media-wrap
+      .media-wrap
+      .media-wrap
+
+    aside.col-md-5.blog-posts
+      .logo-wrap
+        = image_tag 'logo/logo-theclique.png'
+
+      ul.filter
+        li 
+          span SORT BY:
+        li
+          a href='javascript:;' All
+        li
+          a href='javascript:;' Filter 1
+        li
+          a href='javascript:;' Filter 2
+        li
+          a href='javascript:;' Filter 3
+        li
+          a href='javascript:;' class='is-active' Filter 4
+
+      .posts
+        .col
+          .post
+            .media-wrap.is-loaded
+              = image_tag '_demo/blog-post.jpg', alt: 'Something here'
+            h5.title.txt-truncate-1 Lorem ipsum dolor sit amet, consectetur adipiscing elit
+            p.txt-truncate-2 Lorem ipsum dolor sit amet, consectetur adipiscing elit
+
+        .col
+          .post
+
+      input.btn.btn-block.btn-black.btn-md type= 'submit' value='VIEW MORE...'
+
 /! Email Subscription
 #email-container.container-fluid.email-sub.text-center
   .row

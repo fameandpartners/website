@@ -464,3 +464,26 @@
   font-weight: bold;
   text-decoration: none;
 }
+
+// Main Content area V-2
+.home-main-content {
+
+  .media-wrap,
+  .tabs.vertical {
+    margin-bottom: 30px;
+  }
+
+  .main.media-wrap {
+    height: 240px;
+
+    &.lrg {
+      height: 426px;
+    }
+
+  }
+
+  .tabs.vertical .tab-wrap {
+    height: 360px;
+  }
+
+}
