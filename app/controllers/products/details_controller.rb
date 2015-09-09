@@ -36,8 +36,8 @@ class Products::DetailsController < Products::BaseController
     @title = "#{color_title} #{@product.name} #{default_seo_title}".strip
     @description = product_description
   end
-  
+
   def product_description
-    "#{@product.short_description} #{@product.price.display_price} #{current_site_version.currency}"
+    "#{@product.short_description} #{@product.price_with_currency}"
   end
 end
