@@ -63,22 +63,9 @@ ruby:
     a.inner-text href='/dresses/?order=newest' SHOP ALL NEW THIS WEEK
   .slideArea
     .containArea
-      ul.rslides
-        - product1 = Spree::Product.where(id: 615).first
-        - product2 = Spree::Product.where(id: 616).first
-        - if product1.present? && product2.present?
-          li
-            = cropped_product_hoverable_image_tag(product1)
-            = cropped_product_hoverable_image_tag(product2)
-            = cropped_product_hoverable_image_tag(product1)
-            = cropped_product_hoverable_image_tag(product2)
-            = cropped_product_hoverable_image_tag(product1)
-          li
-            = cropped_product_hoverable_image_tag(product2)
-            = cropped_product_hoverable_image_tag(product1)
-            = cropped_product_hoverable_image_tag(product2)
-            = cropped_product_hoverable_image_tag(product1)
-            = cropped_product_hoverable_image_tag(product2)
+      ul.new-this-week-rslides
+        li
+        li
 
 .row.rect#rect-dresses
   .left-area
@@ -179,15 +166,27 @@ coffee:
       $(".rect").hide()
     )
 
-    $('.slideArea .rslides').responsiveSlides({
-      auto: false,
-      nav: true
-    })
-
     $("#account-area .my-account").mouseover ->
       $("#account-area .account-menu").show()
 
     $("#account-area .account-menu").mouseleave ->
       $("#account-area .account-menu").hide()
 
+    $.ajax
+      url: '/mystyle'
+      type: "GET",
+      dataType: 'json',
+      data: { pids: ['592-red','247-black','504-purple','467-mint','469-peach','417-sand','412-magenta','490-black','438-navy','516-black'] },
+      success: (collection) =>
+        for i in [0..4]
+          product = collection.products[i]
+          $(".slideArea ul li:first").append("<a href='" + product.collection_path + "'> <img alt='" + product.name + "' class='img-product img-responsive' data-hover='" + product.images[0] + "' src='" +  product.images[1] + "'></a>")
 
+        for i in [5..9]
+          product = collection.products[i]
+          $(".slideArea ul li:last").append("<a href='" + product.collection_path + "'> <img alt='" + product.name + "' class='img-product img-responsive' data-hover='" + product.images[0] + "' src='" +  product.images[1] + "'> </a>")
+
+        $('.slideArea .new-this-week-rslides').responsiveSlides({
+          auto: false,
+          nav: true
+        })

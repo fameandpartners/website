@@ -118,19 +118,6 @@ ruby:
                 i.fa.fa-chevron-left
                 .back BACK
             li.images-content
-              - ids = [615,616,617,618]
-              - for id in ids do
-                - product = Spree::Product.where(id: id).first
-                - if product.present?
-                  .col-xxs-6.col-xs-6.category--item
-                    = link_to collection_product_path(product) do
-                      = cropped_product_hoverable_image_tag(product)
-                    .details.text-center
-                      span.name = product.name
-                      span.price = price_for_product(product)
-
-                    - if product.fast_delivery?
-                     = image_tag src='express_delivery.png', class: 'express-delivery'
 
         div#dresses-menu
           ul.nav.navbar-nav
@@ -241,8 +228,7 @@ ruby:
                 input type='text' id='side-search' placeholder='SEARCH' name='q'
                 = image_tag "_icons/search.svg", class: "side-search-icon", id: "side-search-icon"
           li.normal-item#new-this-week-open
-            a href='/mystyle?img=graduation-banner&pids[]=355-navy&pids[]=608-teal'
-              .text NEW THIS WEEK
+            .text NEW THIS WEEK
             .arrow
               i.fa.fa-chevron-right
           li.normal-item#dress-menu-open
@@ -293,6 +279,16 @@ ruby:
 = render 'layouts/redesign/campaigns/auto_apply_promo_code'
 
 coffee:
-  $("#side-search-area #side-search-icon").on 'click', ->
-    if $("#side-search-area #searchForm input").val() != ""
-      $("#side-search-area #searchForm").submit()
+  $(document).ready ->
+    $("#side-search-area #side-search-icon").on 'click', ->
+      if $("#side-search-area #searchForm input").val() != ""
+        $("#side-search-area #searchForm").submit()
+
+    $.ajax
+      url: '/mystyle'
+      type: "GET",
+      dataType: 'json',
+      data: { pids: ['592-red','247-black','504-purple','467-mint','469-peach','417-sand','412-magenta','490-black','438-navy','516-black'] },
+      success: (collection) =>
+        for product in collection.products
+          $("#new-this-week-menu .images-content").append("<div class='col-xxs-6 col-xs-6 category--item'> <a href='" + product.collection_path + "'> <img alt='" + product.name + "' class='img-product img-responsive' data-hover='" + product.images[0] + "' src='" +  product.images[1] + "'> <div class='details text-center'> <span class='name'>" + product.name + "</span><span class='price'>" + product.price + "</span> </div> </a></div>")

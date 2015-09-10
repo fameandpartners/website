@@ -78,7 +78,8 @@ class Products::CollectionsController < Products::BaseController
 
     def punch_products
       products = Revolution::ProductService.new(product_ids, current_site_version).products
-      @collection.products = products + @collection.products
+      #@collection.products = products + @collection.products
+      @collection.products = products
     end
 
     def set_collection_seo_meta_data
