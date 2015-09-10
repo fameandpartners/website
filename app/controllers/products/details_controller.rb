@@ -1,4 +1,6 @@
 class Products::DetailsController < Products::BaseController
+  include Products::Concerns::Gtm
+
   layout 'redesign/application'
 
   def show
@@ -36,12 +38,5 @@ class Products::DetailsController < Products::BaseController
     @title       = "#{color_title} #{@product.name} #{default_seo_title}".strip
     @description = @product.meta_description
     append_gtm_product(@product)
-  end
-
-  private
-
-  def append_gtm_product(product_presenter)
-    gtm_product = Marketing::Gtm::ProductPresenter.new(product_presenter: product_presenter)
-    @gtm_container.append(gtm_product)
   end
 end
