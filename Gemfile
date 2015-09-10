@@ -137,6 +137,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.2'
   gem 'shoulda-matchers'
   gem 'timecop'
+  gem 'vcr', '~> 2.9.3'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'thin'
