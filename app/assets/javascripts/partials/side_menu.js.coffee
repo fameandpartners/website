@@ -11,9 +11,6 @@ window.SideMenu = class SideMenu
     @$sideMenuTrigger.on('click', @open)
     @$close .on('click', @close)
 
-    $("a", "li", "ul", ".main-menu", @$container).on 'click', (e) =>
-      @slide(e)
-
     $(@$container).on('mousedown touchstart', (e) =>
       if e.originalEvent.changedTouches?
         @xDown = e.originalEvent.changedTouches[0].screenX
@@ -75,26 +72,6 @@ window.SideMenu = class SideMenu
 
     if sideMenuScrollTop > lowestItemPosition - 200
       @$container.scrollTop(lowestItemPosition - 200)
-
-  slide: (e) =>
-    t = $(e.target)
-    t = $('img',t) if $(t).is("a")
-
-    clicked = t.hasClass("clicked")
-    @$arrowImg.removeClass("clicked")
-    @$dropdownMenu.css('height','0')
-
-    if !clicked
-      t.toggleClass("clicked")
-
-      dropdown_li = $(t.closest('li'))
-      clone = $('ul',dropdown_li).clone()
-                    .css({'position':'absolute','visibility':'hidden','height':'auto'})
-                    .addClass('slideClone')
-                    .appendTo('body')
-      newHeight = $(".slideClone").height()
-      $(".slideClone").remove()
-      $('ul',dropdown_li).css('height',newHeight + 'px')
 
   open: () =>
     @$container.css("margin-left", @$container.width())
