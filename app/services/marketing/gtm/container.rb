@@ -10,6 +10,8 @@ module Marketing
 
       def append(presenter)
         base_hash[presenter.key] = presenter.body
+      rescue StandardError => e
+        NewRelic::Agent.notice_error(e)
       end
 
       def to_json
