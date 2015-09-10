@@ -825,6 +825,7 @@ li#cart-trigger {
       width: 90%;
       float: left;
       margin-top: 3px;
+      font-weight: 400;
     }
     .arrow{
       float: left;
@@ -835,7 +836,11 @@ li#cart-trigger {
       padding-bottom: 10px;
     }
   }
-
+  #inner-main-menu{
+    .text{
+      font-weight: 600 !important;
+    }
+  }
   .inner-main-menu-slide-left{
     @media(max-width: 320px){
       margin-left: -300px;
@@ -969,6 +974,7 @@ li#cart-trigger {
 
   .text-back{
     width: 75% !important;
+    font-weight: 600 !important;
   }
 
   #new-this-week-menu{

@@ -111,6 +111,7 @@
 		}
 		float: left;
 		p {
+			font-weight: 400;
 			span a{
 				color: black;
 			}
@@ -442,6 +443,9 @@
 }
 
 .copyright {
+	p{
+		font-weight: 400;
+	}
 	@media(max-width:992px){
 		text-align:center;
 	}
