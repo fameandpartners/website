@@ -73,7 +73,7 @@ module Search
 
         if query_string.present?
           query do
-            string "product.name:(#{query_string})^2 color.name:(#{query_string}) product.sku:(#{query_string})"
+            string "product.name:(#{query_string})^4 color.name:(#{query_string})^2 product.sku:(#{query_string})"
           end
         end
 
