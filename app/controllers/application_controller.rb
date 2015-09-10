@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
 
   # Google Tag Manager
   include Concerns::GtmContainer
+  include Concerns::GtmPageDetails
 
   if Rails.env.preproduction?
     http_basic_authenticate_with :name => 'fameandpartners', :password => 'pr0m!unicorn'
