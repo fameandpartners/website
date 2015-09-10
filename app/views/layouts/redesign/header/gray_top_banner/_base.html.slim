@@ -14,6 +14,18 @@ ruby:
     span.pipe |
     a href='/profile'
       span.my-account MY ACCOUNT
+      .account-menu.hidden-sm.account-list
+        - if spree_user_signed_in?
+          .account.container-fluid
+            ul
+              li
+                = link_to 'My Moodboard', wishlist_path, id: 'moodboard-trigger'
+              li
+                = link_to 'My Details', profile_path
+              li
+                = link_to 'My Orders', user_orders_path
+              li
+                a href="/logout" LOGOUT
 
 #top-banner.row.visible-md-block.visible-lg-block
   = render 'layouts/redesign/header/locale_selector/desktop'
@@ -171,3 +183,11 @@ coffee:
       auto: false,
       nav: true
     })
+
+    $("#account-area .my-account").mouseover ->
+      $("#account-area .account-menu").show()
+
+    $("#account-area .account-menu").mouseleave ->
+      $("#account-area .account-menu").hide()
+
+
