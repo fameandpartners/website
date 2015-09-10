@@ -35,13 +35,13 @@ class Products::DetailsController < Products::BaseController
     color_title  = params[:color].titleize if params[:color]
     @title       = "#{color_title} #{@product.name} #{default_seo_title}".strip
     @description = @product.meta_description
-    append_product_gtm_presenter(@product)
+    append_gtm_product(@product)
   end
 
   private
 
-  def append_product_gtm_presenter(product_presenter)
-    product = Marketing::Gtm::ProductPresenter.new(product_presenter: product_presenter)
-    @gtm_container.append(product)
+  def append_gtm_product(product_presenter)
+    gtm_product = Marketing::Gtm::ProductPresenter.new(product_presenter: product_presenter)
+    @gtm_container.append(gtm_product)
   end
 end
