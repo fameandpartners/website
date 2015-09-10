@@ -10,6 +10,13 @@ module Marketing
       def body
         raise NotImplementedError, '#body is not yet implemented'
       end
+
+      def rescuable_body
+        body
+      rescue StandardError => e
+        NewRelic::Agent.notice_error(e)
+        { error: e.message }
+      end
     end
   end
 end

@@ -9,7 +9,7 @@ module Marketing
       end
 
       def append(presenter)
-        base_hash[presenter.key] = presenter.body
+        base_hash[presenter.key] = presenter.rescuable_body
       end
 
       def to_json

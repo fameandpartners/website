@@ -1,6 +1,6 @@
 module Marketing
   module Gtm
-    class DevicePresenter
+    class DevicePresenter < BasePresenter
       attr_reader :user_agent
 
       def initialize(user_agent:)
@@ -29,9 +29,6 @@ module Marketing
             os:      operational_system,
             type:    device_type
         }
-      rescue StandardError => e
-        NewRelic::Agent.notice_error(e)
-        { error: e.message }
       end
 
       private

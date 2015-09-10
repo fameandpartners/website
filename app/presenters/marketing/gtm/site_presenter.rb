@@ -1,6 +1,6 @@
 module Marketing
   module Gtm
-    class SitePresenter
+    class SitePresenter < BasePresenter
       attr_reader :current_site_version
 
       def initialize(current_site_version: SiteVersion.default)
@@ -19,9 +19,6 @@ module Marketing
         {
             version: code
         }
-      rescue StandardError => e
-        NewRelic::Agent.notice_error(e)
-        { error: e.message }
       end
     end
   end

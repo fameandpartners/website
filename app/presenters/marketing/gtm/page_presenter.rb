@@ -1,6 +1,6 @@
 module Marketing
   module Gtm
-    class PagePresenter
+    class PagePresenter < BasePresenter
       attr_reader :type, :meta_description, :title, :url
 
       def initialize(type:, meta_description:, title:, url:)
@@ -22,9 +22,6 @@ module Marketing
             metaDescription: meta_description
             # adDescription: 'This is going to be the adDescription for remarketing', # Not going into V1
         }
-      rescue StandardError => e
-        NewRelic::Agent.notice_error(e)
-        { error: e.message }
       end
     end
   end
