@@ -22,4 +22,9 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.acceptance_status = :approved
     @item_return.comments = "#{@item_return.comments}#{event.comment}\n"
   end
+
+
+  def advance_legacy_data_import(event)
+    # pending
+  end
 end

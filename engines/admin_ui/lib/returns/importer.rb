@@ -2,10 +2,16 @@ module Returns
   class Importer < ::Importers::FileImporter
     def import
       preface
+      # create_or_update_records_from_sheet
+      associate_item_returns
 
-      csv = CSV.read(csv_file, headers: true, skip_blanks: true)
 
-      info "Parsing File"
+      info "Done"
+    end
+
+    def create_or_update_records_from_sheet
+      csv = CSV.read(csv_file, headers: true, skip_blanks: false)
+      info "Creating ManuallyManagedReturn Records"
 
       ManuallyManagedReturn.transaction do
         csv.each_with_index do |row, index|
@@ -17,7 +23,7 @@ module Returns
             :rj_ident                   => row['PK for RJMetrics'],
             :column_b                   => row.to_a[1].last, # No Key, direct idx
             :receive_state              => row['Received'],
-            :spree_order_number         => row['Spree Order Number'],
+            :spree_order_number         => row['Spree Order Number'].to_s.squish,
             :return_cancellation_credit => row['RETURN OR CANCELLATION OR STORE CREDIT'],
             :name                       => row['Name'],
             :order_date                 => row['ORDER DATE'],
@@ -56,11 +62,106 @@ module Returns
 
           info [row_data[:rj_ident], row_data[:spree_order_number] ].join(' ')
           ManuallyManagedReturn.find_or_create_by_row_number(row_number) do |mmr|
-            mmr.assign_attributes(row_data)
+            mmr.update_attributes(row_data)
+            mmr.save
           end
         end
       end
-      info "Done"
+    end
+
+    def associate_item_returns
+      ManuallyManagedReturn.find_each do |mmr|
+        begin
+          unless mmr.spree_order
+            error "(#{mmr.row_number}) No Order Found (#{mmr.spree_order_number})"
+            next
+          end
+
+          if mmr.spree_order.line_items.size == 1
+            matched_line_item = mmr.spree_order.line_items.first
+          else
+
+            unless mmr.product.present?
+              error "(#{mmr.row_number}) No PRODUCT Found (#{mmr.spree_order_number})"
+              next
+            end
+
+
+            product_matched_items = mmr.spree_order.line_items.select do |sli|
+              sli.product.present? && mmr.product.present? && sli.product.name.downcase == mmr.product.downcase
+            end
+
+            if product_matched_items.size == 1
+              matched_line_item = product_matched_items.first
+            else
+
+
+              # Attempt to detect the items
+              order_presenter = ::Orders::OrderPresenter.new(mmr.spree_order)
+
+              items_in_order = order_presenter.line_items.collect do |li|
+                {
+                  product:      li.style_name.downcase.strip,
+                  color:        li.colour_name.downcase.strip,
+                  country_size: li.country_size.downcase.strip,
+                  raw_size:     li.size.downcase.strip,
+                  item:         li.item
+                }
+              end
+
+              mmr_item          = {
+                product:      mmr.product.to_s.downcase.strip,
+                color:        mmr.colour.to_s.downcase.strip,
+                country_size: mmr.size.to_s.downcase.strip,
+                raw_size:     mmr.size.to_s.downcase.gsub(/us|au/, '').strip
+              }
+
+
+              similar_items     = items_in_order.map do |li|
+                similarity        = (li.to_a & mmr_item.to_a).size
+                product_weighting = (mmr_item[:product] == li[:product]) ? 1 : 0
+                [li, similarity + product_weighting]
+              end
+              most_similar_item = similar_items.max_by(&:last).first[:item]
+
+              matched_line_item = most_similar_item
+
+              binding.pry unless matched_line_item.present?
+
+              # binding.pry unless Date.parse(mmr.return_requested_on) < Date.parse('2014.07.01')
+              #
+              # # Date.parse(mmr.return_requested_on) < Date.parse('2014.07.01')
+              #
+              # warn "Couldnt find matching returnable for Order #{mmr.spree_order_number}}"
+              # next
+            end
+          end
+
+          if matched_line_item.present?
+            item_return = matched_line_item.item_return || ItemReturnEvent.creation.create(line_item_id: matched_line_item.id).item_return
+
+            info "(#{mmr.row_number}) Creating Event for row: #{mmr.row_number}"
+
+            existing_event = item_return.events.legacy_data_import.first
+            if existing_event.present?
+              warn "(#{mmr.row_number}) SKIPPING #{mmr.row_number} Event Exists"
+              next
+            end
+
+            item_return.events.legacy_data_import.create!(
+              mmr.attributes.symbolize_keys.slice(*ItemReturnEvent::LEGACY_DATA_IMPORT_ATTRIBUTES)
+            )
+
+          else
+            warn "(#{mmr.row_number}) No Matched Returnable for Order #{mmr.spree_order_number}}"
+          end
+        rescue StandardError => e
+          binding.pry
+        end
+
+        # binding.pry
+
+      end
     end
   end
 end

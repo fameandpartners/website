@@ -74,6 +74,52 @@ class ItemReturnEvent < ActiveRecord::Base
     attributes :user, :comment
   end
 
+  LEGACY_DATA_IMPORT_ATTRIBUTES = [
+    :row_number,
+    :rj_ident,
+    :column_b,
+    :receive_state,
+    :spree_order_number,
+    :return_cancellation_credit,
+    :name,
+    :order_date,
+    :order_month,
+    :return_requested_on,
+    :comments,
+    :product,
+    :size,
+    :colour,
+    :return_category,
+    :return_sub_category,
+    :return_office,
+    :received,
+    :in_inventory,
+    :notes,
+    :restocking,
+    :returned_to_factory,
+    :refund_status,
+    :payment_method,
+    :refund_method,
+    :currency,
+    :amount_paid,
+    :spree_amount_paid,
+    :refund_amount,
+    :date_refunded,
+    :email,
+    :account_name,
+    :account_number,
+    :account_bsb,
+    :account_swift,
+    :customers_notes,
+    :quantity,
+    :deleted_row
+  ]
+
+  attr_accessible *LEGACY_DATA_IMPORT_ATTRIBUTES
+
+  event_type :legacy_data_import do
+    attributes *LEGACY_DATA_IMPORT_ATTRIBUTES
+  end
 end
 
 

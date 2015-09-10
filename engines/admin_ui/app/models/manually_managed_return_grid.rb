@@ -16,6 +16,7 @@ class ManuallyManagedReturnGrid
   end
 
   filter(:spree_order_number, :string)
+  filter(:row_number, :string)
   filter(:receive_state, :enum, :select => values_for(:receive_state))
   filter(:return_cancellation_credit, :enum, :select => values_for(:return_cancellation_credit))
   filter(:refund_status, :enum, :select => values_for(:refund_status))
