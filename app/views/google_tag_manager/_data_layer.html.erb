@@ -11,8 +11,6 @@
    # @gtm_container.append(page)
 %>
 
-<% if @gtm_container %>
-    <script>
-        dataLayer.push(<%= @gtm_container.to_json.html_safe %>);
-    </script>
-<% end %>
+<script>
+    dataLayer.push(<%= @gtm_container.to_json.html_safe %>);
+</script>
