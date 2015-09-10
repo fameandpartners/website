@@ -139,11 +139,11 @@ class ApplicationController < ActionController::Base
   private
 
   def title(*args)
-    @title = args.flatten.join(' | ')
+    @title = args.flatten.delete_if(&:blank?).join(' | ')
   end
 
   def description(*args)
-    @description = args.flatten.join(' | ')
+    @description = args.flatten.delete_if(&:blank?).join(' | ')
   end
 
   def default_seo_title
