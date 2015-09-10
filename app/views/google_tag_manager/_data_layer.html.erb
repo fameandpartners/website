@@ -6,20 +6,13 @@
 
 <%
    # TODO: This is not going to stay here. This is going to a before action on a controller
-   user      = Marketing::Gtm::UserPresenter.new(spree_user: spree_current_user, request_ip: request.ip)
-   device    = Marketing::Gtm::DevicePresenter.new(user_agent: request.user_agent)
-   site      = Marketing::Gtm::SitePresenter.new(current_site_version: current_site_version)
-   page      = Marketing::Gtm::PagePresenter.new(type: 'product', meta_description: get_meta_description, title: get_title, url: request.url)
-
-   container = Marketing::Gtm::Container.new(presenters: [user, device, site, page])
-
-   if @product
-     product   = Marketing::Gtm::ProductPresenter.new(product_presenter: @product)
-     container = Marketing::Gtm::Container.new(presenters: [product])
-   end
+   # page = Marketing::Gtm::PagePresenter.new(type: 'product', meta_description: get_meta_description, title: get_title, url: request.url)
+   #
+   # @gtm_container.append(page)
 %>
 
-<script>
-    dataLayer.push(<%= container.to_json.html_safe %>);
-</script>
-
+<% if @gtm_container %>
+    <script>
+        dataLayer.push(<%= @gtm_container.to_json.html_safe %>);
+    </script>
+<% end %>
