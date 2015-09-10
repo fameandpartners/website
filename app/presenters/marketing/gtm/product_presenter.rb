@@ -98,6 +98,9 @@ module Marketing
             expressMaking:     product.fast_making,
             sizes:             sizes
         }
+      rescue StandardError => e
+        NewRelic::Agent.notice_error(e)
+        { error: e.message }
       end
     end
   end

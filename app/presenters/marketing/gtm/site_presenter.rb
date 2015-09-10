@@ -19,6 +19,9 @@ module Marketing
         {
             version: code
         }
+      rescue StandardError => e
+        NewRelic::Agent.notice_error(e)
+        { error: e.message }
       end
     end
   end

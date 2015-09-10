@@ -45,6 +45,9 @@ module Marketing
             # facebook: facebook?,
             country:  country
         }
+      rescue StandardError => e
+        NewRelic::Agent.notice_error(e)
+        { error: e.message }
       end
     end
   end

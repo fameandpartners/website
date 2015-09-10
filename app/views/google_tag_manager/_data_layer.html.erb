@@ -7,5 +7,5 @@
 <% append_gtm_page %>
 
 <script>
-    dataLayer.push(<%= @gtm_container.to_json.html_safe %>);
+    dataLayer.push(<%= @gtm_container.to_json %>);
 </script>

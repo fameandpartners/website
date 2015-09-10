@@ -22,6 +22,9 @@ module Marketing
             metaDescription: meta_description
             # adDescription: 'This is going to be the adDescription for remarketing', # Not going into V1
         }
+      rescue StandardError => e
+        NewRelic::Agent.notice_error(e)
+        { error: e.message }
       end
     end
   end
