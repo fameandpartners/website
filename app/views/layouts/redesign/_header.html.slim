@@ -288,7 +288,7 @@ coffee:
       url: '/mystyle'
       type: "GET",
       dataType: 'json',
-      data: { pids: ['592-red','247-black','504-purple','467-mint','469-peach','417-sand','412-magenta','490-black','438-navy','516-black'] },
+      data: { customized_collection: 'new_this_week' },
       success: (collection) =>
         for product in collection.products
           $("#new-this-week-menu .images-content").append("<div class='col-xxs-6 col-xs-6 category--item'> <a href='" + product.collection_path + "'> <img alt='" + product.name + "' class='img-product img-responsive' data-hover='" + product.images[0] + "' src='" +  product.images[1] + "'> <div class='details text-center'> <span class='name'>" + product.name + "</span><span class='price'>" + product.price + "</span> </div> </a></div>")

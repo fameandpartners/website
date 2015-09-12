@@ -176,7 +176,7 @@ coffee:
       url: '/mystyle'
       type: "GET",
       dataType: 'json',
-      data: { pids: ['592-red','247-black','504-purple','467-mint','469-peach','417-sand','412-magenta','490-black','438-navy','516-black'] },
+      data: { customized_collection: 'new_this_week' },
       success: (collection) =>
         for i in [0..4]
           product = collection.products[i]
