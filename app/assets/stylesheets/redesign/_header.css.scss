@@ -1183,12 +1183,12 @@ li#cart-trigger {
     border-style: solid;
     width: 410px;
     border-width: 1px;
-    height: 51px;
+    height: 30px;
     position: absolute;
-    top: 165px;
+    top: 181px;
     left: 945px;
     background-color: white;
-    padding-top: 10px;
+    padding-top: 5px;
     padding-left: 10px;
     display: none;
     input{
@@ -1202,8 +1202,9 @@ li#cart-trigger {
       float: right;
       cursor: pointer;
       img{
-        height: 30px;
+        height: 20px;
         margin-right: 25px;
+        margin-top: -2px;
       }
     }
   }

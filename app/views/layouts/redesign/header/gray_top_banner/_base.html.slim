@@ -146,9 +146,11 @@ ruby:
 coffee:
   $(document).ready ->
     $("#search").on('click' , ->
+      $("#search-area").css("top", $('.nav-menu-container').height() - $("#home-menu").height() - 2)
       $("#search-area").css("left",$(document).width()/2)
       $("#search-area").css("display","block")
     )
+
 
     $(".mag-glass").on('click' , ->
       if $("#searchForm #searchValue").val() != ''
