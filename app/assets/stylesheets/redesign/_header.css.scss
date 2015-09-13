@@ -1412,9 +1412,14 @@ li#cart-trigger {
   #rect-lookbook{
     background-color: transparent;
     .lookbook-container{
+      position: relative;
       .prev, .next{
-        top:47%;
+        top:50%;
       }
+      .rslides_tabs{
+        display: none;
+      }
+
       .lookbook-item:nth-child(odd){
         .head{
           background-color: black;
