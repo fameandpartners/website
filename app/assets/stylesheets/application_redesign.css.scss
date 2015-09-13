@@ -49,6 +49,9 @@
 // Time specific content
 @import 'transient_content';
 
+// Base
+@import 'redesign/base/containers';
+
 // Components
 @import 'redesign/components/tabs';
 @import 'redesign/components/media';

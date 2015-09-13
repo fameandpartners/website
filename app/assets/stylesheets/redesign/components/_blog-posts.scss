@@ -66,9 +66,64 @@
 
   }
 
+  .col {
+    float: left;
+    width: 50%;
+    min-height: 1px;
+    padding-left: 15px;
+
+    &:first-child {
+      padding-left: 0;
+      padding-right: 15px;
+    }
+
+  }
+
+  .post {
+    display: block;
+    margin-bottom: 30px;
+    color: $c-neutral-black;
+    background: $c-neutral-white;
+
+    .media-wrap {
+      height: 286px;
+    }
+
+    &.compact {
+
+      .media-wrap {
+        height: 160px;
+      }
+
+    }
+
+  }
+
   .media-wrap {
     height: auto;
-    padding-top: 132%;
+    margin-bottom: 10px;
+  }
+
+  .content-wrap {
+    height: 56px;
+    overflow: hidden;
+  }
+
+  .title {
+    margin: 0 0 5px 0;
+    font-size: 1em;
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  p {
+    height: 36px;
+    margin: 0;
+    overflow: hidden;
+    font-size: 0.875em;
+    font-style: italic;
+    font-weight: 400;
+    line-height: normal;
   }
 
   @media screen and (min-width: $bootstrap-sm-width) {

@@ -1,0 +1,23 @@
+.tabs.vertical.js-tabs-home-collection
+
+  ul
+    li.active
+      a href='#collection1' data-toggle="tab" collection 1 long long link
+    li
+      a href='#collection2' data-toggle="tab" collection 2
+    li
+      a href='#collection3' data-toggle="tab" collection 3
+
+  .tab-wrap
+    a.tab.active#collection1 href='javascript:;'
+      = image_tag 'home-page-tiles/collection-tab-1.jpg', alt: 'Something here'
+    a.tab#collection2 href='javascript:;'
+      = image_tag 'home-page-tiles/collection-tab-1.jpg', alt: 'Something here'
+    a.tab#collection3 href='javascript:;'
+      = image_tag 'home-page-tiles/collection-tab-1.jpg', alt: 'Something here'
+    a.navigator.btn-prev.js-navigator-prev href='javascript:void(0)'
+      .icon.icon-arrow-left
+      .hide-visually Previous tab
+    a.navigator.btn-next.js-navigator-next href='javascript:void(0)'
+      .icon.icon-arrow-right
+      .hide-visually Next tab

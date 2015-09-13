@@ -6,45 +6,30 @@
           = image_tag banner.attachment(:original), alt: banner.presentation, class: "img-responsive portrait-img #{banner.css_class}"
 
 /! Content Section
-section.container.home-main-content
+section.container.content-block.home-main-content
   .row
     .main.col-md-7
-      .media-wrap.lrg
-      = render 'shared/tabs_collection'
+      .media-wrap.lrg.skin-light
+        = image_tag 'home-page-tiles/tile-sale.jpg', alt: 'Something here'
+        .title-wrap
+          .title
+            h4 Lorem ipsum dolor sit amet
+      = render 'shared/redesign/tabs_collection'
+      .media-wrap.skin-light
+        = image_tag 'home-page-tiles/tile-bambi.jpg', alt: 'Something here'
+        .title-wrap
+          .title
+            h4 Bambi x Fame
       .media-wrap
-      .media-wrap
-      .media-wrap
+        = image_tag 'home-page-tiles/tile-free-shipping.jpg', alt: 'Something here'
+      .media-wrap.skin-light
+        = image_tag 'home-page-tiles/tile-category.jpg', alt: 'Something here'
+        .title-wrap
+          .title
+            h4 Lorem ipsum dolor sit amet
 
-    aside.col-md-5.blog-posts
-      .logo-wrap
-        = image_tag 'logo/logo-theclique.png'
-
-      ul.filter
-        li 
-          span SORT BY:
-        li
-          a href='javascript:;' All
-        li
-          a href='javascript:;' Filter 1
-        li
-          a href='javascript:;' Filter 2
-        li
-          a href='javascript:;' Filter 3
-        li
-          a href='javascript:;' class='is-active' Filter 4
-
-      .posts
-        .col
-          .post
-            .media-wrap.is-loaded
-              = image_tag '_demo/blog-post.jpg', alt: 'Something here'
-            h5.title.txt-truncate-1 Lorem ipsum dolor sit amet, consectetur adipiscing elit
-            p.txt-truncate-2 Lorem ipsum dolor sit amet, consectetur adipiscing elit
-
-        .col
-          .post
-
-      input.btn.btn-block.btn-black.btn-md type= 'submit' value='VIEW MORE...'
+    aside.col-md-5
+      = render 'shared/redesign/blog_posts'
 
 /! Email Subscription
 #email-container.container-fluid.email-sub.text-center
