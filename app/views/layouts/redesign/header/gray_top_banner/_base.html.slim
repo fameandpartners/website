@@ -95,21 +95,40 @@ ruby:
         div SHOP BAMBI'S PICKS
 
 .row.rect#rect-lookbook
-  .col.col-md-4
-    div.head
-      .text BAMBI X FAME.
-    div.image
-      = image_tag "homepage/lookbook/1.jpg"
-  .col.col-md-4
-    div.head
-      .text LUXE COLLECTION
-    div.image
-      = image_tag "homepage/lookbook/2.jpg"
-  .col.col-md-4
-    div.head
-      .text HERE COMES THE SUN
-    div.image
-      = image_tag "homepage/lookbook/3.jpg"
+  .lookbook-container
+    ul.lookbook-slide
+      li
+        .lookbook-item
+          .head
+            .text BAMBI X FAME.
+          .image
+            = image_tag "homepage/lookbook/1.jpg"
+        .lookbook-item
+          .head
+            .text LUXE COLLECTION
+          .image
+            = image_tag "homepage/lookbook/2.jpg"
+        .lookbook-item
+          .head
+            .text HERE COMES THE SUN
+          .image
+            = image_tag "homepage/lookbook/3.jpg"
+      li
+        .lookbook-item
+          .head
+            .text HERE COMES THE SUN
+          .image
+            = image_tag "homepage/lookbook/3.jpg"
+        .lookbook-item
+          .head
+            .text LUXE COLLECTION
+          .image
+            = image_tag "homepage/lookbook/2.jpg"
+        .lookbook-item
+          .head
+            .text BAMBI X FAME.
+          .image
+            = image_tag "homepage/lookbook/1.jpg"
 
 .row.rect#rect-magazine
   .col-md-7.left-col
@@ -192,3 +211,8 @@ coffee:
           auto: false,
           nav: true
         })
+
+    $("#rect-lookbook .lookbook-slide").responsiveSlides({
+      auto: false,
+      nav: true
+    })
