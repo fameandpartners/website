@@ -118,6 +118,7 @@ ruby:
                 i.fa.fa-chevron-left
                 .back BACK
             li.images-content
+              = react_component('NewThisWeekProducts',{device: 'mobile'}, { prerender: true })
 
         div#dresses-menu
           ul.nav.navbar-nav
@@ -283,11 +284,3 @@ coffee:
     $("#side-search-area #side-search-icon").on 'click', ->
       if $("#side-search-area #searchForm input").val() != ""
         $("#side-search-area #searchForm").submit()
-
-    $.ajax
-      url: '/dresses/new-this-week?limit=10'
-      type: "GET",
-      dataType: 'json',
-      success: (collection) =>
-        for product in collection.products
-          $("#new-this-week-menu .images-content").append("<div class='col-xxs-6 col-xs-6 category--item'> <a href='" + product.collection_path + "'> <img alt='" + product.name + "' class='img-product img-responsive' data-hover='" + product.images[0] + "' src='" +  product.images[1] + "'> <div class='details text-center'> <span class='name'>" + product.name + "</span><span class='price'>" + product.price + "</span> </div> </a></div>")

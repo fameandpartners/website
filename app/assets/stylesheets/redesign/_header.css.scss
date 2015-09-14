@@ -1184,7 +1184,7 @@ li#cart-trigger {
     }
 
     span:hover:not(.search-wrapper) {
-      
+
       &,
       & > a {
         background-color: #003647;
@@ -1382,6 +1382,10 @@ li#cart-trigger {
         vertical-align: middle;
         height: 100%;
       }
+      ul{
+        list-style: none;
+        padding-left: 0;
+      }
       .rslides {
         position: relative;
         list-style: none;
@@ -1422,6 +1426,7 @@ li#cart-trigger {
 
       img{
         width: 15%;
+        float: left;
       }
       a:not(:first-child){
         img{
