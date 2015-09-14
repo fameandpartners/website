@@ -193,10 +193,9 @@ coffee:
       $("#account-area .account-menu").hide()
 
     $.ajax
-      url: '/mystyle'
+      url: '/dresses/new-this-week?limit=10'
       type: "GET",
       dataType: 'json',
-      data: { customized_collection: 'new_this_week' },
       success: (collection) =>
         for i in [0..4]
           product = collection.products[i]
