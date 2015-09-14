@@ -11,13 +11,17 @@ window.SideMenu = class SideMenu
     @$sideMenuTrigger.on('click', @open)
     @$close .on('click', @close)
 
+    $(@$overlay).on 'click', =>
+      @close()
+
     $(@$container).on('mousedown touchstart', (e) =>
       if e.originalEvent.changedTouches?
         @xDown = e.originalEvent.changedTouches[0].screenX
+
     ).on 'mouseup touchend', (e2) =>
       if e2.originalEvent.changedTouches?
         @xUp = e2.originalEvent.changedTouches[0].screenX
-        if @xDown > @xUp
+        if @xDown > @xUp + 70
           @close()
         @blockScroll()
 
