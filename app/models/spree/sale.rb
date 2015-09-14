@@ -65,6 +65,22 @@ class Spree::Sale < ActiveRecord::Base
     "//#{configatron.asset_host}/sale/#{name.downcase}.jpg"
   end
 
+  def explanation
+    "Sale - Up to #{discount_string} Off"
+  end
+
+  def discount_string
+    if percentage?
+      "#{discount_size.to_i}%"
+    else
+      "$#{discount_size.to_i}"
+    end
+  end
+
+  def sitewide_message
+    "#{discount_string} OFF SITE WIDE. LIMITED TIME ONLY."
+  end
+
   class << self
     def active_sales_ids
       Spree::Sale.active.pluck(:id)
