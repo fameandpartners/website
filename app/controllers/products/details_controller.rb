@@ -32,12 +32,8 @@ class Products::DetailsController < Products::BaseController
 
     # set page title.
     # Drop anything after the first period(.) and newline
-    color_title = params[:color].titleize if params[:color]
-    @title = "#{color_title} #{@product.name} #{default_seo_title}".strip
-    @description = product_description
-  end
-
-  def product_description
-    "#{@product.short_description} #{@product.price_with_currency}"
+    color_title  = params[:color].titleize if params[:color]
+    @title       = "#{color_title} #{@product.name} #{default_seo_title}".strip
+    @description = @product.meta_description
   end
 end

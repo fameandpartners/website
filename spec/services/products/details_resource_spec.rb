@@ -8,19 +8,18 @@ describe Products::DetailsResource do
       context 'given a product with a meta description' do
         let(:product) { create(:dress, meta_description: 'My Meta Description') }
 
-        it 'it uses its meta description field' do
+        it 'uses its meta description field' do
           result = resource.send(:product_short_description)
           expect(result).to eq('My Meta Description')
         end
       end
 
       context 'given a product with a blank meta description' do
-        let(:product) { create(:dress, description: '<b>Huge</b>'*50) }
+        let(:product) { create(:dress, description: '<b>Description</b>') }
 
-        it 'uses the truncated and sanitized version of the product description' do
+        it 'uses its description field' do
           result = resource.send(:product_short_description)
-          expect(result).to eq('HugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeHugeH...')
-          expect(result.size).to eq(described_class::META_DESCRIPTION_MAX_SIZE)
+          expect(result).to eq('<b>Description</b>')
         end
       end
     end
