@@ -68,9 +68,7 @@ ruby:
     a.inner-text href='/dresses/?order=newest' SHOP ALL NEW THIS WEEK
   .slideArea
     .containArea
-      ul.new-this-week-rslides
-        li
-        li
+      = react_component('NewThisWeekProducts',{device: 'desktop'}, { prerender: true })
 
 .row.rect#rect-dresses
   .left-area
@@ -191,24 +189,6 @@ coffee:
 
     $("#account-area .account-menu").mouseleave ->
       $("#account-area .account-menu").hide()
-
-    $.ajax
-      url: '/dresses/new-this-week?limit=10'
-      type: "GET",
-      dataType: 'json',
-      success: (collection) =>
-        for i in [0..4]
-          product = collection.products[i]
-          $(".slideArea ul li:first").append("<a href='" + product.collection_path + "'> <img alt='" + product.name + "' class='img-product img-responsive' data-hover='" + product.images[0] + "' src='" +  product.images[1] + "'></a>")
-
-        for i in [5..9]
-          product = collection.products[i]
-          $(".slideArea ul li:last").append("<a href='" + product.collection_path + "'> <img alt='" + product.name + "' class='img-product img-responsive' data-hover='" + product.images[0] + "' src='" +  product.images[1] + "'> </a>")
-
-        $('.slideArea .new-this-week-rslides').responsiveSlides({
-          auto: false,
-          nav: true
-        })
 
     $(".lookbook-slide").responsiveSlides({
       auto: false,
