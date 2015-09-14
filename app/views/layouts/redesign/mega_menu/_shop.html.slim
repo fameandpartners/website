@@ -48,14 +48,8 @@ li.shop.menu-item
                 li.mega-menu-list--item= link_to 'Dresses made in 48 hours', fast_making_dresses_path
 
             - if Features.active?(:sales)
-              - if sale_active?
-                /h4.link-header Sale - Up to 30% Off
-                /ul.mega-menu-list
-                  /li.mega-menu-list--item= link_to 'All Sale Dresses', sales_collection_path
-                  /li.mega-menu-list--item= link_to '15 Percent Off',   dresses_path(sale: 15)
-                  /li.mega-menu-list--item= link_to '30 Percent Off',   dresses_path(sale: 30)
-                  /li.mega-menu-list--item= link_to '40 Percent Off',   dresses_path(sale: 40)
-                  /li.mega-menu-list--item= link_to '50 Percent Off',   dresses_path(sale: 50)
+              = render :partial => '/layouts/redesign/mega_menu/sale'
+
 
 - if Features.active?(:style_quiz)
   li.menu-item
