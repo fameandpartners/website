@@ -17,6 +17,7 @@ window.SideMenu = class SideMenu
     $(@$container).on('mousedown touchstart', (e) =>
       if e.originalEvent.changedTouches?
         @xDown = e.originalEvent.changedTouches[0].screenX
+        @blockScroll()
 
     ).on 'mouseup touchend', (e2) =>
       if e2.originalEvent.changedTouches?
