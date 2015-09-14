@@ -23,6 +23,9 @@ header{
       background-color: white;
     }
   }
+
+
+
 }
 .logo{
   width: 100%;
@@ -416,37 +419,42 @@ li.shop {
   padding: 30px 37px 0 0;
 }
 
-.search-form {
+.search-input {
 
   ::-webkit-input-placeholder { /* WebKit browsers */
     text-transform: none;
     padding-bottom: 0;
     margin-bottom: 0;
     bottom: 0;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333;
   }
 
   :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
     text-transform: none;
     opacity:  1;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333;
   }
 
   ::-moz-placeholder { /* Mozilla Firefox 19+ */
     text-transform: none;
     opacity:  1;
     font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
   }
 
   :-ms-input-placeholder { /* Internet Explorer 10+ */
     text-transform: none;
-    font-size: 1.5rem;
-    vertical-align: baseline
+    font-size: 1.2rem;
+    vertical-align: baseline;
+    font-weight: 700;
+    color: #333;
   }
 
-  input {
-    text-transform: none;
-  }
 }
 
 .edit-title a {
@@ -1179,36 +1187,61 @@ li#cart-trigger {
 
   }
 
-  #search-area {
-    border-style: solid;
-    width: 410px;
-    border-width: 1px;
-    height: 30px;
-    position: absolute;
-    top: 181px;
-    left: 945px;
-    background-color: white;
-    padding-top: 5px;
-    padding-left: 10px;
-    display: none;
-    input{
-      border: none;
-      width: 300px;
-    }
-    input:focus{
-      outline: 0;
-    }
-    .mag-glass{
-      float: right;
-      cursor: pointer;
-      img{
-        height: 20px;
-        margin-right: 25px;
-        margin-top: -2px;
-      }
-    }
-  }
+  .search-wrapper {
+    $search-input-height: 44px;
+    position: relative;
 
+    .search-input {
+      display: none;
+      position: absolute;
+      width: 410px;
+      top: -($search-input-height / 4);
+      right: 0;
+      background-color: #fff;
+      border: solid #000 1px;
+
+      input {
+        display: block;
+        width: 100%;
+        height: $search-input-height;
+        padding: 0 $search-input-height 0 10px;
+        line-height: $search-input-height;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #333;
+        border: none;
+
+        &:focus{
+          outline: 0;
+        }
+
+      }
+
+      .mag-glass {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: ($search-input-height - 20) / 2;
+
+        img {
+          display: block;
+          width: 20px;
+          height: 20px;
+        }
+
+      }
+
+    }
+
+    &.active {
+
+      .search-input {
+        display: block;
+      }
+
+    }
+
+  }
 
   .rect{
     background-color: white;

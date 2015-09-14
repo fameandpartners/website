@@ -54,9 +54,14 @@ ruby:
   span.sale SALE
   span.made-for-you MADE FOR YOU
   span.join-us JOIN US
-  span#search
+  span.search-wrapper#search
     a href="#"
       = image_tag "_icons/search.svg", class: "nav-mobile-logo"
+    .search-input#search-area
+      form accept-charset="UTF-8" action="/search" method="get" id="searchForm"
+        input type="text" id="searchValue" placeholder="SEARCH FOR..." name="q"
+        .mag-glass
+          = image_tag "_icons/search.svg"
 
 .row.rect#rect-new-this-week
   .black-bar
@@ -155,32 +160,26 @@ ruby:
         .row.image
           = image_tag "homepage/magazine/3.jpg", class: "right-img"
           div.text Blah blah blah
-#search-area
-  form accept-charset="UTF-8" action="/search" method="get" id="searchForm"
-    input type="text" id="searchValue" placeholder="SEARCH FOR" name="q"
-    .mag-glass
-      = image_tag "_icons/search.svg"
 
 
 coffee:
   $(document).ready ->
     $("#search").on('click' , ->
-      $("#search-area").css("top", $('.nav-menu-container').height() - $("#home-menu").height() - 2)
-      $("#search-area").css("left",$(document).width()/2)
-      $("#search-area").css("display","block")
+      $(this).addClass('active')
     )
 
-
-    $(".mag-glass").on('click' , ->
+    $(".mag-glass").on('click' , (e)->
       if $("#searchForm #searchValue").val() != ''
         $("#searchForm").submit()
       else
-        $("#search-area").css("display","none")
+        e.stopPropagation()
+        $("#search").removeClass('active')
     )
 
     $("#home-menu span[id!='search']").on('mouseenter', ->
       $(".rect").hide();
       $("#rect-"+this.className).css("display","block")
+      $("#search").removeClass('active')
     )
 
     $(".rect").on('mouseleave', ->
