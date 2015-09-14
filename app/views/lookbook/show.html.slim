@@ -10,7 +10,7 @@
         = image_tag "//#{configatron.asset_host}#{page.path}/#{n}.jpg", alt: "#{page.title} #{n}", class: 'img-responsive portrait-img'
 
   .page-content.products-collections.category
-    = render :partial => 'filters', :locals => { :hidden => true }
+    = render :partial => 'filters_sort', :locals => { :hidden => true }
 
     .container.relative.products-collection
       = render partial: 'products_without_content'

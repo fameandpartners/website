@@ -16,9 +16,9 @@ class UserCart::PromotionsService
   attr_reader :order, :code     # input
   attr_reader :status, :message # output
 
-  def initialize(options = {})
-    @order        = options[:order]
-    @code         = options[:code].to_s.downcase
+  def initialize(order:, code:)
+    @order        = order
+    @code         = code.to_s.downcase
   end
 
   def apply
@@ -35,7 +35,7 @@ class UserCart::PromotionsService
   private
 
     def promotion
-      @promotion ||= Spree::Promotion.find_by_code(code)
+      @promotion ||= code.present? ? Spree::Promotion.find_by_code(code) : nil
     end
 
     def apply_coupon_code

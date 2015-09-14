@@ -13,7 +13,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
   constructor: (options = {}) ->
     options = $.extend({
       reset_source: true,
-      page_size: 20,
+      page_size: 21,
       showMoreSelector: "*[data-action=show-more-collection-products]"
 		}, options)
 
@@ -37,19 +37,111 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @content.on('click', @showMoreSelector, @showMoreProductsClickHandler)
     $(window).on('scroll', @scrollHandler)
 
-    @styleInput         = new inputs.ProductStyleNameSelector(container: @filter.find('#style'))
-    @bodyShapeInput     = new inputs.ProductBodyShapeSelector(container: @filter.find('#bodyshape'))
-    @colorInput         = new inputs.ProductColorNameSelector(container: @filter.find('#color'))
     @productOrderInput  = new inputs.ProductOrderSelector(container: @filter.find('#product_order'))
 
-    @styleInput.on('change', @update)
-    @bodyShapeInput.on('change', @update)
-    @colorInput.on('change', @update)
+    @setUpFilterElements()
     @productOrderInput.on('change', @update)
 
     @$banner = $(options.banner)
     @setBannerTextClass()
     @content.find('.img-product').hoverable()
+
+  setUpFilterElements: =>
+    @allCheckboxes = $(".filter-area .thumb")
+    @allCheckboxes.on 'click', (e) =>
+      @handleCheckboxes(e)
+      @update()
+    @selectColor = $(".select-color select")
+    @selectColor.on 'change', (e) =>
+      @handleCheckboxes(e)
+      @update()
+
+    @clearAll = $(".filter-rect .clear-all")
+    @clearAll.on('click',@clearAllOptions)
+    $(".show-more-styles").on 'click', ->
+      if $(this).text() == "More"
+        $(this).text("Less")
+        $('.filter-area-styles').removeClass('short-height')
+        $('.filter-area-styles').addClass('full-height')
+      else
+        $(this).text("More")
+        $('.filter-area-styles').removeClass('full-height')
+        $('.filter-area-styles').addClass('short-height')
+
+    $('.select-color select').select2();
+    $('.filter-area-colors .select2-selection--single').css('padding-top','7px')
+    $("#filter-mobile").on 'click', ->
+      $('.filter-col').toggleClass("slide-in")
+    $(".filter-rect .close").on 'click', ->
+      $('.filter-col').toggleClass("slide-in")
+
+    $(document).on 'click', (e) ->
+      close = $('.filter-col .close')
+      closeX = close.position().left + close.width() + 20
+      $('.filter-col').removeClass("slide-in") if e.clientX > closeX and $('.filter-col').hasClass("slide-in")
+
+   $(document).on('mousedown touchstart', (e) =>
+      if e.originalEvent.changedTouches?
+        @xDown = e.originalEvent.changedTouches[0].screenX
+    ).on 'mouseup touchend', (e2) =>
+      if e2.originalEvent.changedTouches?
+        @xUp = e2.originalEvent.changedTouches[0].screenX
+        if @xDown > @xUp and $('.filter-col').hasClass("slide-in")
+          $('.filter-col').removeClass("slide-in")
+
+
+  clearAllOptions: =>
+    $(".thumb").removeClass("thumb-true").addClass("thumb-false")
+    $(".filter-area-colors .thumb-false[name='all']").removeClass("thumb-false").addClass("thumb-true")
+    $(".filter-area-styles .thumb-false[name='all']").removeClass("thumb-false").addClass("thumb-true")
+    $(".filter-area-shapes .thumb-false[name='all']").removeClass("thumb-false").addClass("thumb-true")
+    $('.select-color select').val("none").trigger("change")
+    @update()
+
+  handleCheckboxes: (e) =>
+    name = $(e.target).attr("name")
+    area = $(e.target).closest(".filter-area")
+    isColorCheckbox = area.hasClass("filter-area-colors")
+    isShapeCheckbox = area.hasClass("filter-area-shapes")
+    isStyleCheckbox = area.hasClass("filter-area-styles")
+    isSelect = $(e.target).parent().hasClass("select-color")
+
+    if isSelect
+      name = $($('.filter-area-colors select option:selected')[0]).attr("name")
+      return if name=="none"
+      if $(".filter-area-colors .thumb-true[name='"+ name+"']").size() == 0
+        $(".filter-area-colors .thumb[name='"+ name+"']").click()
+      if $(".filter-area-colors .thumb-true[name='all']").size() == 1
+          $(".filter-area-colors .thumb-true[name='all']").click()
+
+    if (isColorCheckbox && !isSelect) || isShapeCheckbox || isStyleCheckbox
+      checked = $(e.target).hasClass("thumb-true")
+      $(e.target).toggleClass("thumb-true thumb-false")
+
+    if isColorCheckbox && !isSelect
+      if name == 'all'
+        return if $(".filter-area-colors .thumb-false[name='all']").size() == 1
+        $(".filter-area-colors .thumb-true[name!='all']").click()
+        $('.select-color select').val("none").trigger("change")
+      else
+        if $(".filter-area-colors .thumb-true[name='all']").size() == 1 && !checked
+          $(".filter-area-colors .thumb-true[name='all']").click()
+
+    if isShapeCheckbox
+      if name == 'all'
+        return if $(".filter-area-shapes .thumb-false[name='all']").size() == 1
+        $(".filter-area-shapes .thumb-true[name!='all']").click()
+      else
+        if $(".filter-area-shapes .thumb-true[name='all']").size() == 1 && !checked
+          $(".filter-area-shapes .thumb-true[name='all']").click()
+
+    if isStyleCheckbox
+      if name == 'all'
+        return if $(".filter-area-styles .thumb-false[name='all']").size() == 1
+        $(".filter-area-styles .thumb-true[name!='all']").click()
+      else
+        if $(".filter-area-styles .thumb-true[name='all']").size() == 1 && !checked
+          $(".filter-area-styles .thumb-true[name='all']").click()
 
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
@@ -111,7 +203,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         dataType: 'json',
         data: $.param(_.extend(updateRequestParams, { limit: @page_size, offset: @products_on_page })),
         success: (collection) =>
-          content_html = @collectionMoreTemplate(collection: collection)
+          content_html = @collectionMoreTemplate(collection: collection, col: 3)
           @content.find(@showMoreSelector).closest('.row.relative').before(content_html)
           @content.find('.img-product').hoverable()
           # @updatePagination(collection.products.length, collection.total_products)
@@ -131,11 +223,33 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     object
 
   getSelectedValues: () ->
+    bodyshapeArray = []
+    colourArray = []
+    styleArray = []
+
+    if $(".filter-area-colors .thumb-true[name='all']").size() == 0
+      colorInputs = $(".filter-area-colors .thumb-true[name!='all']")
+      for colorInput in colorInputs
+        colourArray.push($(colorInput).attr("name"))
+      colour = $(".filter-area-colors select option:selected").attr("name")
+      if colour != "none"
+        colourArray.push(colour)
+
+    if $(".filter-area-shapes .thumb-true[name!='all']")[0]?
+      bodyshapeInputs = $(".filter-area-shapes .thumb-true[name!='all']")
+      for bodyshapeInput in bodyshapeInputs
+        bodyshapeArray.push($(bodyshapeInput).attr("name"))
+
+    if $(".filter-area-styles .thumb-true[name!='all']")[0]?
+      styleInputs = $(".filter-area-styles .thumb-true[name!='all']")
+      for styleInput in styleInputs
+        styleArray.push($(styleInput).attr("name"))
+
     {
-      bodyshape: @bodyShapeInput.val(),
-      colour: @colorInput.val(),
-      style: @styleInput.val(),
-      order: @productOrderInput.val()
+      bodyshape: bodyshapeArray,
+      colour:    colourArray,
+      style:     styleArray,
+      order:     @productOrderInput.val()
     }
 
   updatePageLocation: (filter) ->

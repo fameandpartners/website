@@ -34,9 +34,14 @@
             <span class="handle"></span>
           </td>
           <td><%= variant.options_text %></td>
-          <% variant.prices.sort_by(&:currency).each do |price| %>
-            <td class="align-center"><%= price.amount %> <%= price.currency %></td>
-          <%end%>
+          <% ['AUD', 'USD'].each do |currency| %>
+            <% price = variant.prices.find{|p| p.currency == currency } %>
+            <% if price.present? %>
+              <td class="align-center"><%= price.amount %> <%= price.currency %></td>
+            <% else %>
+              <td class="align-center" style="color: red;">none</td>
+            <% end %>
+          <% end %>
           <td class="align-center"><%= variant.sku %></td>
           <td class="align-center"><%= variant.on_hand %></td>
           <td class="actions">

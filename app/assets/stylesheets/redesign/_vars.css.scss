@@ -2,6 +2,9 @@
 $gray-light-bg: #f5f5f5;
 $peach-bg: #f6e2d5;
 $pink-bg: #eeddf0;
+
+$slides-bg: #ececf4;
+
 // @end Colors
 
 // Fonts
@@ -22,3 +25,9 @@ $mega-menu-mobile-height: 115px;
 $locale-warn-desktop-height: 48px;
 $locale-warn-mobile-height: 68px;
 // @end Locale Warn
+
+// Layout
+// Bootstrap uses these widths as breakpoints
+$bootstrap-sm-width: 768px;
+$bootstrap-md-width: 992px;
+$bootstrap-lg-width: 1200px;

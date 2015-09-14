@@ -94,6 +94,17 @@ $color-white: #FFF;
     }
   }
 
+  // TODO - refactor out this to use a proper page wrapper which auto adjusts.
+  .alert-sale {
+    top:      $mega-menu-desktop-height + $locale-warn-desktop-height;
+  }
+
+  @media (max-width: $bootstrap-md-width) {
+    .alert-sale {
+      top: $mega-menu-mobile-height + $locale-warn-mobile-height;
+    }
+  }
+
   // Search
   .search-bar {
     top: $mega-menu-desktop-height + $locale-warn-desktop-height;

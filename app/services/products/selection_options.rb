@@ -114,7 +114,7 @@ class Products::SelectionOptions
           name: value.presentation,
           image: value.image.present? ? value.image.url : 'logo_empty.png',
           display_price: value.display_price,
-          discount: Repositories::Discount.read(value.class, value.id)
+          discount: value.discount,
         })
       end
     end

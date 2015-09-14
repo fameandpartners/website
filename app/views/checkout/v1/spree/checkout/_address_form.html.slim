@@ -21,10 +21,17 @@ ruby:
     |   checkout_page.updateStatesVisibility('##{ country_field_id }', '##{ field_id }', '##{state_text_field_id}');
     | });
 
-.row
-  .col-md-12.form-group
-    = form.label :email, with_required_mark(t(:email))
-    = form.text_field :email, class: 'required form-control form-control-md', value: form.object.email, required: 'required'
+/ TODO - Temporary workaround to show the 'Address Details heading inside the form
+/ until we move the shipping form first and change the JS to copy billing address from shipping instead.
+/  - Note that Pin requires the billing address data, so we can't just drop the billing form.
+
+- if address_type == 'billing'
+  .row
+    .col-md-12.form-group
+      = form.label :email, with_required_mark(t(:email))
+      = form.text_field :email, class: 'required form-control form-control-md', value: form.object.email, required: 'required'
+  / Temporary location for heading.
+  h2.checkout-section-title 2. Address Details
 
 .row
   .col-md-6.form-group

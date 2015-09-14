@@ -139,19 +139,19 @@ class ApplicationController < ActionController::Base
   private
 
   def title(*args)
-    @title = args.flatten.join(' | ')
+    @title = args.flatten.delete_if(&:blank?).join(' | ')
   end
 
   def description(*args)
-    @description = args.flatten.join(' | ')
+    @description = args.flatten.delete_if(&:blank?).join(' | ')
   end
 
   def default_seo_title
-    Preferences::Titles.new(current_site_version).default_seo_title
+    Preferences::SEO.new(current_site_version).default_seo_title
   end
 
   def default_meta_description
-    Spree::Config[:default_meta_description]
+    Preferences::SEO.new(current_site_version).default_meta_description
   end
 
   def get_user_type

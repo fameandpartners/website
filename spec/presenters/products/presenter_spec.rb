@@ -3,7 +3,8 @@ require 'spec_helper'
 module Products
   describe Presenter do
     describe 'customisations' do
-      let(:a_discount)  { 999 }
+      let(:default_discount)  { double('discount', customisation_allowed?: false) }
+      let(:customisable_discount)  { double('discount', customisation_allowed?: true) }
       let(:no_discount) { nil }
       let(:customizations) { double('customizations', :all => [:some]) }
       let(:colors)         { double('custom_colours', :extra => [:some]) }
@@ -11,11 +12,12 @@ module Products
         double('available_options', :customizations => customizations, :colors => colors)
       end
       subject(:product) do
-        Presenter.new available_options: available_options, discount: discount
+        Presenter.new available_options: available_options, discount: discount, price: Spree::Price.new(amount: 99, currency: 'USD')
       end
 
+
       context 'when discounted' do
-        let(:discount) { a_discount }
+        let(:discount) { default_discount }
 
         it('disallows customisation') do
           expect(product.customizable?).to be_falsy
@@ -23,6 +25,19 @@ module Products
 
         it('disallows custom colours') do
           expect(product.custom_colors?).to be_falsy
+        end
+
+      end
+
+      context 'when discounted by sales with allowed customisations discount' do
+        let(:discount) { customisable_discount }
+
+        it('allows customisation') do
+          expect(product.customizable?).to be_truthy
+        end
+
+        it('allows custom colours') do
+          expect(product.custom_colors?).to be_truthy
         end
 
       end
@@ -36,6 +51,10 @@ module Products
 
         it('allows custom colours') do
           expect(product.custom_colors?).to be_truthy
+        end
+
+        it 'displays price with currency' do
+          expect(product.price_with_currency).to include('$99.00 USD')
         end
       end
     end

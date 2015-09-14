@@ -1,9 +1,8 @@
 module Products
-
   class Presenter
     attr_accessor :id, :master_id, :sku, :name, :short_description, :description,
                   :permalink, :is_active, :images, :default_image, :price,
-                  :discount, :recommended_products, :available_options, :preorder,
+                  :discount, :recommended_products, :related_outerwear, :available_options, :preorder,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
                   :size_chart, :making_option_id, :fit, :size, :fast_making
 
@@ -150,9 +149,14 @@ module Products
       end
     end
 
+    def price_with_currency
+      "#{price.display_price} #{price.currency}"
+    end
+
     def use_auto_discount!(auto_discount)
       self.discount = [self.discount, auto_discount].compact.max_by{|i| i.amount.to_i }
     end
+
 
     private
 

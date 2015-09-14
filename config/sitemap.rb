@@ -66,7 +66,7 @@ SitemapGenerator::Sitemap.create(sitemap_options) do
     '/about', '/why-us', '/privacy',
     '/style-consultation', '/fame-chain',
     '/fashionitgirl2015',
-    '/bridesmaid-dresses', '/dresses/sale',
+    '/bridesmaid-dresses',
     '/unidays'
   ]
 

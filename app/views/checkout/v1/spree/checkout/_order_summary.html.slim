@@ -16,20 +16,21 @@ ruby:
   = raw shopping_cart_summary_init
 
 .checkout-items
-  h3.text-center
-    ' Cart:
-    = cart.products.length
+  h3
+    i.icon.icon-shopping-bag-check
+    ' Order summary
   ul.cart-items
     - (cart.products || []).each do |product|
       li.cart-item data-id=(product.line_item_id)
         a.remove-product.fa.fa-close.pull-right.link-grey href="#0"
         .cart-item-image-holder.pull-left
           = link_to collection_product_path(product) do
-            = image_tag product.image.large, class: 'cart-item-image'
+            = image_tag product.image.large, class: 'cart-item-image', alt: product.name
         .cart-item-info
           .heading
             span.qty 
               => "#{product.quantity}"
+              ' &times;
             = link_to product.name, collection_product_path(product), class: 'cart-item-title'
           .clearfix
             .pull-left.small
@@ -51,11 +52,11 @@ ruby:
                 .small.text-pink
                   = "#{ customization.name } + #{ customization.display_price.to_s }"
   form.promo-code action="#"
-    label for=""  Promo Code
+    label.invisible for="#promo-code" Promo Code
     .input-group
-      input.form-control.form-control-md#promotion-code type="text"
-      span.input-group-addon
-        button.btn-submit.btn-reset Apply
+      input.form-control.form-control-md#promo-code type="text" placeholder="Discount code"
+      span.input-group-btn
+        button.btn.btn-block.btn-black.btn-md.promo-code-apply Apply
 
   p
     | Sub Total
@@ -76,3 +77,6 @@ ruby:
       span.pull-right = cart.display_total.to_s
       - if current_site_version.is_australia?
         .taxes Including GST
+
+  p.order-number
+    = @order.try(:number)

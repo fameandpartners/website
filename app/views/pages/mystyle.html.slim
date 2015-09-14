@@ -1,19 +1,17 @@
 = content_for :head do
   meta name="robots" content="noindex, follow"
-  
-- image = "//#{configatron.asset_host}/pages#{page.path}/#{params[:lpi] || 'default'}.jpg"
 
 = render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
 
-.page-title.default.category-header style="background-image: url('#{image}')"
-  .container
-    .page-title--details
-      h1.no-padding-bottom = params[:lpt]
-      p= params[:lps]
+- unless params[:lpi] == 'none'
+  - image = "//#{configatron.asset_host}/pages#{page.path}/#{params[:lpi] || 'default'}.jpg"
+  .page-title.default.category-header style="background-image: url('#{image}')"
+    .container
+      .page-title--details
+        h1.no-padding-bottom = params[:lpt]
+        p= params[:lps]
 
 .page-content.products-collections.category
-  = render :partial => '/products/collections/filters'
-
   .container.relative.products-collection
     = render partial: '/products/collections/products_without_content'
 

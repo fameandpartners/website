@@ -2,7 +2,7 @@
   | page.initCheckoutEditPage();
 
 - support_telephone = {'us' => '866 527 7797', 'au' => '1300 924 860'}[current_site_version.code]
-= render 'shared/zopim'
+= render 'marketing/trackers/zopim'
 .checkout.page-content
   .container
     .row
@@ -12,14 +12,10 @@
             = link_to root_path
               = image_tag 'logo/logo-mobile.svg', alt: 'Fame & Partners', width: '78', height: '59'
             ' Secure checkout
-          ul.support-options.list-inline
-            li.live-chat
-              a href='javascript:$zopim.livechat.window.show()'
-                i.icon-live-chat
-                ' Live Chat
-            li.support-telephone
-              i.icon-support-telephone
-              = support_telephone
+          = react_component('SupportOptions', { support_telephone: support_telephone }, prerender: true, class: 'support-options')
+
+        .comodo.hidden-xs.pull-right
+          = image_tag "comodo-ssl.png", alt: "SSL", height: '35px', width: '112px'
 
         .checkout-breadcrumbs
           ol.breadcrumb
@@ -31,7 +27,10 @@
 
         .checkout-step data-name="payment"
           - if current_step.eql?('payment')
-            = render 'payment_step_v2', current_step: current_step
+            = render 'payment_step', current_step: current_step
+
+        .row : .comodo.visible-xs.text-center : p
+          = image_tag "comodo-ssl.png", alt: "SSL", height: '35px', width: '112px', style: 'margin-top:25px;margin-bottom:25px'
 
       .col-md-4
         - cart = UserCart::UserCartResource.new(order: current_order).read

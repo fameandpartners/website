@@ -1,3 +1,5 @@
+@import 'media_queries';
+
 .list-group-item.customization-option  {
 
 	img {
@@ -9,7 +11,8 @@
 .product-content {
 	position: absolute;
 	z-index: 50;
-	top: 15rem;
+  height: 100%;
+	top: 0;
 
 	.row {
 		padding-top: 1.45rem;
@@ -40,8 +43,20 @@
       margin-top: 15px;
     }
   }
-}
 
+  @media (max-width: 767px) {
+
+    & {
+      position: relative;
+      height: auto;
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+
+  }
+
+}
+// TODO find out what is this for
 @media(max-width: 767px){
 	.screen-height {
     @media(max-height: 666px){
@@ -57,12 +72,25 @@
 }
 
 .product-details {
+
 	h1 {
 		text-transform: uppercase;
 		font-size: 2rem !important; // TODO: Remove important
     margin-top: 0;
     padding-bottom: 0;
 	}
+
+  .product-details-outer {
+    display: table;
+    width: 100%;
+    height: 100%;
+  }
+
+  .product-details-inner {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
 }
 
 #product-size, #product-color, #product-customizations {
@@ -241,8 +269,8 @@
 	padding-right: 3.5rem;
 
 		@media(max-width: 768px){
-			padding-right: 3rem;
-			padding-left: 4rem;
+			padding-right: 30px;
+			padding-left: 30px;
 	 	}
 }
 
@@ -253,8 +281,41 @@
 	 	}
 }
 
-#slides .slides-container {
-  display:block;
+.slides-outer-wrapper {
+  position: relative;
+  min-height: 600px;
+  height: 100vh;
+  padding-bottom: $mega-menu-desktop-height;
+
+  @media (max-width: 992px) {
+
+    & {
+      padding-bottom: $mega-menu-mobile-height;
+    }
+
+  }
+
+  @media(max-width: 768px) {
+
+    & {
+      min-height: auto;
+      margin-bottom: -$mega-menu-mobile-height;
+    }
+
+  }
+
+}
+
+.slides-inner-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: $slides-bg;
+
+  #slides {
+    height: 100% !important; // TODO: disable slider height resize
+  }
+
 }
 
 .vex.vex-theme-flat-attack .vex-content {
@@ -318,3 +379,21 @@
 }
 
 .sc-player { display: none; }
+
+.dress-more {
+  .col-centered {
+    display: inline-block;
+    float: none;
+    // reset the text-align
+    text-align: left;
+
+    // Restore float left on mobile devices, due to bootstrap grid stacking
+    @include mobile {
+      float: left;
+    }
+
+    @include tablet {
+      float: left;
+    }
+  }
+}

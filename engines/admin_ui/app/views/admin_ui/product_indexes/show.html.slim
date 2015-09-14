@@ -1,0 +1,5 @@
+- content_for :page_title
+  ' ColourVariant Index:
+  = @show_id
+
+pre = JSON.pretty_generate(@search.results.to_a.first.to_hash)

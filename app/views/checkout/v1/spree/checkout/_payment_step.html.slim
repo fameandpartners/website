@@ -1,43 +1,52 @@
-/ TODO - Remove - GB 2015.08.14
-/ YES, you see correctly that I am leaving dead code the codebase, naughty.
-/ Please See _payment_step_v2.html.slim
-/
-h2.checkout-section-title 3. Payment Details
-- if current_step.eql?('payment')
-  - if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
-    - content_for :head do
-      - if Rails.env.production? && !@credit_card_gateway.prefers_test_mode?
-        = javascript_include_tag 'https://api.pin.net.au/pin.js'
-      - else
-        = javascript_include_tag 'https://test-api.pin.net.au/pin.js'
+- if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
+  - content_for :head do
+    - if Rails.env.production? && !@credit_card_gateway.prefers_test_mode?
+      = javascript_include_tag 'https://api.pin.net.au/pin.js'
+    - else
+      = javascript_include_tag 'https://test-api.pin.net.au/pin.js'
 
-    - content_for :inline_javascript do
-      | Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
+  - content_for :inline_javascript do
+    | Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
 
-  .form-group
-    .row
-      p.text-center
-        |by making this purchase you are agreeing to the Fame &amp; Partners &nbsp;
-        a href="/terms.html" Term of Service
-      - if @credit_card_gateway
-        .col-sm-4
-          .btn-group-radio
-            input#optionsRadios1 name="optionsRadios" type="radio" value="option1"
-            button.btn.btn-block.btn-md
-              label.credit for="optionsRadios1"
-                | Credit Card
+h2.checkout-section-title 3. Choose your payment method
+/ TODO - Rewrite as react component with new button layout and behaviour
+p All transactions are secure and encrypted. Credit card information is never stored.
 
-      - if @credit_card_gateway && @pay_pal_method
-        .col-sm-4.text-center
-          .btn.btn-text.btn-md or
-
-      - if @pay_pal_method
-        .col-sm-4.text-center = paypal_express_button
-
+#payment-selection.panel-group aria-multiselectable="false" role="tablist"
   - if @credit_card_gateway
-    = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global checkout-form', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
-      = render 'shared/error_messages', :target => @order, :view => "payment"
+    #credit_card_choice.panel
+      .panel-heading
+        h4.panel-title
+          ' Credit card
+          .pull-right
+            = image_tag 'checkout/visa_mc_logos.png', height: '22px'
+      .panel-collapse.in
+        .panel-body
+          = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global checkout-form', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
+            - payment_failure = payment_failed_messages(@order.errors.full_messages.first.to_s)
+            - if payment_failure
+              .title Try a different payment method?
+              .sub We'd love to make this happen for you, but there was a problem with your credit card.
 
-      = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
-      = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
-    = image_tag 'checkout/payment_options_logos.png'
+            = render 'shared/error_messages', :target => @order, :view => "payment"
+
+            = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
+            = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
+  - if @pay_pal_method
+    #paypal_choice.panel
+      .panel-heading
+        h4.panel-title PayPal
+      .panel-collapse.in
+        .panel-body
+          = paypal_express_button
+
+  - if @masterpass_method
+    = render :partial => 'spree/checkout/payment/masterpass', :locals => { :payment_method => @masterpass_method }
+
+p
+    ' By making this purchase you are agreeing to the Fame & Partners
+    a href="/terms.html" Term & Conditions.
+
+.row
+  .col-md-12
+    = link_to '< Return to your information', checkout_state_path('address'), :remote => false, class: 'edit'

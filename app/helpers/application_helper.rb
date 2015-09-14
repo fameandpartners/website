@@ -54,30 +54,6 @@ module ApplicationHelper
     end
   end
 
-  def show_breadcrumbs
-    @breadcrumbs.map do |breadcrumb|
-      link_to breadcrumb.last, breadcrumb.first
-    end.join(' » ')
-  end
-
-  def red_carpet_posts_page?
-    params[:controller] == 'blog/posts' && params[:type] == 'red_carpet' &&
-    (params[:action] == 'show' || params[:action] == 'index')
-  end
-
-  def simple_posts_page?
-    params[:controller] == 'blog/posts' && params[:type].blank? &&
-    (params[:action] == 'show' || params[:action] == 'index')
-  end
-
-  def celebrities_page?
-    params[:controller] == 'blog/celebrities' && (params[:action] == 'show' || params[:action] == 'index')
-  end
-
-  def authors_page?
-    params[:controller] == 'blog/authors'
-  end
-
   def request_path?(path)
     request.path =~ Regexp.new(Regexp.escape(path))
   end
@@ -159,9 +135,6 @@ module ApplicationHelper
   def product_discount(product)
     if product.present? && (discount = product.discount).present?
       discount
-    # elsif show_prices_with_applied_promocode?
-    #  current_promotion.discount
-    #  current_promotion.calculate_price_with_discount(variant.price).display_price
     else
       nil
     end

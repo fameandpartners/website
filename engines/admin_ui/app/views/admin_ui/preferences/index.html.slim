@@ -23,12 +23,27 @@
                 label
                   | Homepage Title
                 = text_field :preferences, titles.homepage_title_key, value: titles.homepage_title, class: 'form-control'
+
+              / SEO fields
+
+              - seo_preferences = Preferences::SEO.new(site_version)
+
+              h3
+                | SEO Fields
+
               .form-group
                 label
                   | Default SEO Title
-                = text_field :preferences, titles.default_seo_title_key, value: titles.default_seo_title, class: 'form-control'
+                = text_field :preferences, seo_preferences.default_seo_title_key, value: seo_preferences.default_seo_title, class: 'form-control'
                 .help-block.m-b-none
                   | Text that will be appended on every page title
+
+              .form-group
+                label
+                  | Default Meta Description
+                = text_field :preferences, seo_preferences.default_meta_description_key, value: seo_preferences.default_meta_description, class: 'form-control'
+                .help-block.m-b-none
+                  | Default meta description used on some pages. E.g. Homepage meta description
 
               / Gray Top Banner
               - banner = Preferences::TopBanner.new(site_version)

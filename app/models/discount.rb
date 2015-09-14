@@ -15,6 +15,9 @@ class Discount < ActiveRecord::Base
               less_than_or_equal_to: 100
             }
 
+  validates_presence_of :discountable_type, :discountable_id
+  validates :discountable_id, uniqueness: { scope: [:discountable_type, :sale_id] }
+
   validates :sale_id, presence: true
 
   scope :for_products, where(discountable_type: "Spree::Product")

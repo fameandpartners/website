@@ -62,7 +62,11 @@ class CustomisationValue < ActiveRecord::Base
   end
 
   def display_price
-    Spree::Money.new(price)
+    if discount.blank? || discount.amount.to_i == 0
+      Spree::Money.new(price)
+    else
+      Spree::Price.new(amount: self.price).apply(self.discount).display_price
+    end
   end
 
   def is_compatible_with?(customisation_value)

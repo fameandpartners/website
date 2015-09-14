@@ -24,6 +24,8 @@ class Products::CollectionDetails
   attr_reader :collection, :style, :event, :edits, :bodyshape, :color, :discount, :site_version, :fast_delivery, :root_taxon, :fast_making
 
   def initialize(options = {})
+    options[:color] = options[:color].first if options[:color].is_a? Array
+    options[:style] = options[:style].first if options[:style].is_a? Array
     @collection     = options[:collection]
     @style          = options[:style]
     @event          = options[:event]

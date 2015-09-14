@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Preferences::Base, spree_config_support: true do
-  let(:base) { described_class.new }
+  let(:base) { described_class.new('Site Version') }
 
   describe '#preference_value' do
     context 'given a spree preference key' do
