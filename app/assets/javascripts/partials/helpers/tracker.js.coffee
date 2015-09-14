@@ -7,12 +7,6 @@ window.track = {
     if _gaq && _gaq.push
       _gaq.push(['_trackPageview', page_url])
 
-  quickView: (page_url) ->
-    window._gaq or= {}
-    if _gaq && _gaq.push
-      _gaq.push(['_trackPageview', page_url])
-
-
   remarketing_tag: () ->
     conversion_type = 'remarketing_tag'
     return false if _.contains(window.track.tracked, conversion_type)
@@ -67,9 +61,6 @@ window.track = {
 
   viewCelebrityInspiration: (label) ->
     track.event('Products', 'ViewCelebrityInspiration', label)
-
-  openedQuickView: (label) ->
-    track.event('Products', 'OpenedQuickView', label)
 
   quizOpened: (label) ->
     track.event('Style Quiz', 'Opened', label)

@@ -7,15 +7,6 @@ window.page = {
       window.page.variantsSelector = window.helpers.createProductVariantsSelector(parentContainer)
       window.page.variantsSelector.init(window.product_variants)
 
-  enableQuickView: (container, selector = '*[data-action="quick-view"]') ->
-    $(container).on('click', selector, (e) ->
-      e.preventDefault()
-      productId = $(e.currentTarget).data("id")
-      popup = new popups.ProductQuickView(productId)
-      popup.show()
-      return
-    )
-
   enableWhatSizeIam: (link) ->
     link.fancybox({
       width: '870', 

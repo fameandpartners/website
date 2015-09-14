@@ -234,6 +234,7 @@ Spree::Product.class_eval do
     Spree::Prototype.find_by_name('Dress')
   end
 
+  # NOTE: potentially dead code
   def images_json
     images.map do |image|
       size = color = nil

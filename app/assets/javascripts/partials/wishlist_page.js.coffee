@@ -8,8 +8,6 @@ $('.users_wishlists_items').ready ->
       wishlistPage.editPopup = window.helpers.createVariantsSelectorPopup()
       wishlistPage.container.append(wishlistPage.editPopup.init())
 
-      page.enableQuickView(wishlistPage.container)
-
     updateContentHandlers: () ->
       productWishlist.addWishlistButtonActions($("a[data-action='add-to-wishlist']"))
       window.initHoverableProductImages()
