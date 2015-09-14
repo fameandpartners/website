@@ -1161,20 +1161,26 @@ li#cart-trigger {
     border-right: 0;
     margin-top: 55px;
     font-weight: 700;
-    height: 30px;
+
     span{
-       padding-left: 15px;
-       padding-right: 15px;
-       padding-top: 5px;
-       padding-bottom: 7px;
-       font-size: 1.2rem;
-       cursor: pointer;
-       position: relative;
-       top: 5px;
+      display: inline-block;
+      padding: 8px 15px;
+      margin-top: -1px;
+      margin-bottom: -2px;
+      line-height: normal;
+      font-size: 1.2rem;
+      cursor: pointer;
+      position: relative;
     }
-    span:hover{
-      background-color:#003647;
-      color:white;
+
+    span:hover:not(.search-wrapper) {
+      
+      &,
+      a {
+        background-color:#003647;
+        color:white;
+      }
+
     }
     span:last-child:hover{
       background-color: transparent;
