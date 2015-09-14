@@ -74,6 +74,8 @@ module Returns
         begin
           unless mmr.spree_order
             error "(#{mmr.row_number}) No Order Found (#{mmr.spree_order_number})"
+            mmr.import_status = :no_order
+            mmr.save
             next
           end
 
@@ -83,6 +85,8 @@ module Returns
 
             unless mmr.product.present?
               error "(#{mmr.row_number}) No PRODUCT Found (#{mmr.spree_order_number})"
+              mmr.import_status = :no_product
+              mmr.save
               next
             end
 
@@ -140,17 +144,24 @@ module Returns
           if matched_line_item.present?
             item_return = matched_line_item.item_return || ItemReturnEvent.creation.create(line_item_id: matched_line_item.id).item_return
 
+            existing_event = item_return.events.legacy_data_import.first
+
             info "(#{mmr.row_number}) Creating Event for row: #{mmr.row_number}"
 
-            existing_event = item_return.events.legacy_data_import.first
-            if existing_event.present?
-              warn "(#{mmr.row_number}) SKIPPING #{mmr.row_number} Event Exists"
-              next
-            end
-
-            item_return.events.legacy_data_import.create!(
+            event = item_return.events.legacy_data_import.create!(
               mmr.attributes.symbolize_keys.slice(*ItemReturnEvent::LEGACY_DATA_IMPORT_ATTRIBUTES)
             )
+            mmr.item_return = item_return
+            mmr.item_return_event = event
+
+            if existing_event.present?
+              warn "(#{mmr.row_number}) #{mmr.row_number} Event Exists"
+              mmr.import_status = :multiple_events
+            else
+              mmr.import_status = :event_stored
+            end
+
+            mmr.save
 
           else
             warn "(#{mmr.row_number}) No Matched Returnable for Order #{mmr.spree_order_number}}"
