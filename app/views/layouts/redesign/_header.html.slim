@@ -141,7 +141,32 @@ ruby:
               a href='#'
                 .text Instagram
             li.grey-item
-              .text EVENTS
+              .text STYLES
+            li.normal-item
+              = link_to 'Plus Size', build_taxon_path('Plus Size'), class: 'text'
+            li.normal-item
+              = link_to 'Two-Piece', build_taxon_path('Tow Piece'), class: 'text'
+            li.normal-item
+              = link_to 'One Shoulder', build_taxon_path('One-Shoulder'), class: 'text'
+            li.normal-item
+              = link_to 'Strapless', build_taxon_path('Strapless'), class: 'text'
+            li.normal-item
+              = link_to 'V-Neck', build_taxon_path('V-Neck'), class: 'text'
+            li.normal-item
+              = link_to 'Split', build_taxon_path('Split'), class: 'text'
+            li.normal-item
+              = link_to 'Backless', build_taxon_path('Backless'), class: 'text'
+            li.normal-item.no-border
+              = link_to 'Lace', build_taxon_path('Lace'), class: 'text'
+
+
+        div#events-menu
+          ul.nav.navbar-nav
+            li.normal-item
+              .text.text-back EVENTS
+              .arrow
+                i.fa.fa-chevron-left
+                .back BACK
             li.normal-item
               = link_to 'Formal', build_taxon_path('Formal'), class: 'text'
             li.normal-item
@@ -164,24 +189,8 @@ ruby:
               = link_to 'Sweet 16', build_taxon_path('Sweet 16'), class: 'text'
             li.normal-item.no-border
               = link_to 'Debutante', build_taxon_path('Debutante'), class: 'text'
-            li.grey-item
-              .text STYLES
-            li.normal-item
-              = link_to 'Plus Size', build_taxon_path('Plus Size'), class: 'text'
-            li.normal-item
-              = link_to 'Two-Piece', build_taxon_path('Tow Piece'), class: 'text'
-            li.normal-item
-              = link_to 'One Shoulder', build_taxon_path('One-Shoulder'), class: 'text'
-            li.normal-item
-              = link_to 'Strapless', build_taxon_path('Strapless'), class: 'text'
-            li.normal-item
-              = link_to 'V-Neck', build_taxon_path('V-Neck'), class: 'text'
-            li.normal-item
-              = link_to 'Split', build_taxon_path('Split'), class: 'text'
-            li.normal-item
-              = link_to 'Backless', build_taxon_path('Backless'), class: 'text'
-            li.normal-item.no-border
-              = link_to 'Lace', build_taxon_path('Lace'), class: 'text'
+
+
 
         div#lookbook-menu
           ul.nav.navbar-nav
@@ -236,8 +245,10 @@ ruby:
             .text DRESSES
             .arrow
               i.fa.fa-chevron-right
-          li.normal-item
+          li.normal-item#event-menu-open
             .text EVENTS
+            .arrow
+              i.fa.fa-chevron-right
           li.normal-item#lookbook-menu-open
             .text LOOKBOOK
             .arrow

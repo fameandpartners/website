@@ -45,23 +45,14 @@ ruby:
         = image_tag 'logo/new-logo.svg', class: 'logo'
 
 .row#home-menu.hidden-xs.hidden-sm.text-center
-  span.new-this-week 
+  span.new-this-week
     em New this week
   span.dresses DRESSES
-  span.nested 
+  span.nested
     ' EVENTS
     ul
-      li = link_to 'Formal'       , build_taxon_path('Formal')
-      li = link_to 'Wedding'      , build_taxon_path('Wedding')
-      li = link_to 'Birthday'     , build_taxon_path('Birthday')
-      li = link_to 'Special Event', build_taxon_path('Special Event')
-      li = link_to 'Ball Gowns'   , build_taxon_path('Ball Gowns')
-      li = link_to 'Bridesmaid'   , bridesmaid_collection_path
-      li = link_to 'Graduation'   , build_taxon_path('Graduation')
-      li = link_to 'Prom'         , build_taxon_path('Prom')
-      li = link_to 'Homecoming'   , build_taxon_path('Homecoming')
-      li = link_to 'Sweet 16'     , build_taxon_path('Sweet 16')
-      li = link_to 'Debutante'    , build_taxon_path('Debutante')
+      = render partial: 'layouts/redesign/event'
+
   span.lookbook LOOKBOOK
   span.magazine
     a href='http://fameandpartners.tumblr.com/' MAGAZINE
@@ -180,7 +171,7 @@ coffee:
     )
 
     $('.js-search-trigger').on('click' , (e)->
-      if $(this).parent().hasClass('active')  
+      if $(this).parent().hasClass('active')
         if $("#searchForm #searchValue").val() != ''
           $("#searchForm").submit()
         else
