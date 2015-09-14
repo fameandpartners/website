@@ -53,7 +53,7 @@ module MarketingHelper
   def decode(p)
     return p if params[:raw]
     if p.present?
-      Base64.decode64(p)
+      Base64.decode64(p.gsub(/\s/, '+'))
     else
       ''
     end
