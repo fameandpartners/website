@@ -73,12 +73,12 @@ class Products::CollectionsController < Products::BaseController
       @collection_options = parse_permalink(params[:permalink])
       @collection = collection_resource(@collection_options)
 
-      punch_products if product_ids || params[:customized_collection].present?
+      punch_products if product_ids || params[:permalink].present?
     end
 
     def punch_products
-      if params[:customized_collection].present?
-        if params[:customized_collection] == 'new_this_week'
+      if params[:permalink].present?
+        if params[:permalink] == 'new-this-week'
           p_ids = ['592-red','247-black','504-purple','467-mint','469-peach','417-sand','412-magenta','490-black','438-navy','516-black']
           products = Revolution::ProductService.new(p_ids, current_site_version).products
           @collection.products = products

@@ -285,10 +285,9 @@ coffee:
         $("#side-search-area #searchForm").submit()
 
     $.ajax
-      url: '/mystyle'
+      url: '/dresses/new-this-week?limit=10'
       type: "GET",
       dataType: 'json',
-      data: { customized_collection: 'new_this_week' },
       success: (collection) =>
         for product in collection.products
           $("#new-this-week-menu .images-content").append("<div class='col-xxs-6 col-xs-6 category--item'> <a href='" + product.collection_path + "'> <img alt='" + product.name + "' class='img-product img-responsive' data-hover='" + product.images[0] + "' src='" +  product.images[1] + "'> <div class='details text-center'> <span class='name'>" + product.name + "</span><span class='price'>" + product.price + "</span> </div> </a></div>")
