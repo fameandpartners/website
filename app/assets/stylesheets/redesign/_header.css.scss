@@ -626,7 +626,24 @@ li#cart-trigger {
     .navbar-brand{
       left: 35%;
       position: absolute;
+      @media(max-width: 320px){
+        left: 32%;
+      }
+      @media(min-width: 321px)and(max-width:400px){
+        left: 33%;
+      }
+      @media(min-width: 400px)and(max-width:599px){
+        left: 34%;
+      }
+      @media(min-width: 599px)and(max-width:767px){
+        left: 36.5%;
+      }
+      @media(min-width: 768px)and(max-width:799px){
+        left: 42%;
+      }
     }
+
+
   }
 
   @media(max-width: 320px){
@@ -654,8 +671,8 @@ li#cart-trigger {
   }
 
   @media(min-width: 768px)and(max-width:799px){
-    width: 775px;
-    left: -775px;
+    width: 725px;
+    left: -725px;
     overflow-x: hidden;
   }
 
@@ -866,7 +883,7 @@ li#cart-trigger {
     }
 
     @media(min-width: 768px)and(max-width:799px){
-      margin-left: -775px !important;
+      margin-left: -725px !important;
     }
 
     @media(min-width: 800px){
@@ -892,9 +909,6 @@ li#cart-trigger {
   }
 
   @media(min-width: 768px)and(max-width:799px){
-    .navbar-brand{
-      left: 43% !important;
-    }
     #side-search{
       width: 93% !important;
     }
@@ -927,6 +941,9 @@ li#cart-trigger {
       .text{
         width: 90% !important;
       }
+    }
+    #lookbook-menu ul{
+      margin-left: 5px;
     }
     #new-this-week-menu{
       .text{
@@ -983,6 +1000,9 @@ li#cart-trigger {
       .text{
         width: 90% !important;
       }
+    }
+    #lookbook-menu ul{
+      margin-left: 5px;
     }
   }
 
