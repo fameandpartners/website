@@ -17,7 +17,8 @@ class Spree::Sale < ActiveRecord::Base
                   :name,
                   :discount_size,
                   :discount_type,
-                  :discounts_attributes
+                  :discounts_attributes,
+                  :customisation_allowed
 
   validates :is_active,
             :inclusion => {
