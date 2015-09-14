@@ -11,7 +11,7 @@ module LandingPagesHelper
 
   def decode(p)
     if p.present?
-      Base64.decode64(p)
+      Base64.decode64(p.gsub(/\s/, '+'))
     else
       ''
     end
