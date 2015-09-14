@@ -55,13 +55,11 @@ ruby:
   span.made-for-you MADE FOR YOU
   span.join-us JOIN US
   span.search-wrapper#search
-    a href="#"
+    a.icon-search.js-search-trigger href="#"
       = image_tag "_icons/search.svg", class: "nav-mobile-logo"
     .search-input#search-area
       form accept-charset="UTF-8" action="/search" method="get" id="searchForm"
         input type="text" id="searchValue" placeholder="SEARCH FOR..." name="q"
-        .mag-glass
-          = image_tag "_icons/search.svg"
 
 .row.rect#rect-new-this-week
   .black-bar
@@ -162,16 +160,18 @@ ruby:
 
 coffee:
   $(document).ready ->
+
     $("#search").on('click' , ->
       $(this).addClass('active')
     )
 
-    $(".mag-glass").on('click' , (e)->
-      if $("#searchForm #searchValue").val() != ''
-        $("#searchForm").submit()
-      else
-        e.stopPropagation()
-        $("#search").removeClass('active')
+    $('.js-search-trigger').on('click' , (e)->
+      if $(this).parent().hasClass('active')  
+        if $("#searchForm #searchValue").val() != ''
+          $("#searchForm").submit()
+        else
+          e.stopPropagation()
+          $("#search").removeClass('active')
     )
 
     $("#home-menu span[id!='search']").on('mouseenter', ->
