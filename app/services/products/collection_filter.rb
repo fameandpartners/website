@@ -2,7 +2,11 @@
 # possible, it should be done layer up or down from here
 class Products::CollectionFilter
 
-  Collection = Struct.new(:styles, :events, :shapes, :colors, :sort_orders)
+  Collection = Struct.new(:styles, :events, :shapes, :colors, :sort_orders) do
+    def cache_key
+      members.flat_map {|x| send(x).map {|i| i.respond_to?(:id) ? [i.id, i.try(:name)] : i } }.join(',')
+    end
+  end
 
   class << self
     def read
