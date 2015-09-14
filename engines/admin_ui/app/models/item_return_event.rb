@@ -65,7 +65,7 @@ class ItemReturnEvent < ActiveRecord::Base
     validates :location,    presence: true
     validates :received_on, presence: true
 
-    validate :location, inclusion: { in:  ['AU', 'US'] }
+    validate :location, inclusion: { in: ItemReturn::RECEIVE_LOCATIONS }
   end
 
   attr_accessible :user, :comment

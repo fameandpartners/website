@@ -8,6 +8,8 @@ class ItemReturn < ActiveRecord::Base
 
   STATES = %i( requested received in_negotiation in_dispute rejected approved refunded credit_note_issued )
 
+  RECEIVE_LOCATIONS = %w[AU US]
+
   attr_accessible :uuid
   validates :uuid, uniqueness: true
 end
