@@ -1,4 +1,4 @@
-- cache [:layout, :filter_menu, @filter.to_s], expires_in: configatron.cache.expire.long do
+- cache [:layout, :filter_menu, @filter.cache_key], expires_in: configatron.cache.expire.long do
   - prerender = true
   - colors  = Repositories::ProductColors.color_groups
   - selectColors = @filter.colors
