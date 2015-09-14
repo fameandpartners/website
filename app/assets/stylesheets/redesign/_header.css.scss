@@ -428,7 +428,7 @@ li.shop {
     bottom: 0;
     font-size: 1.2rem;
     font-weight: 700;
-    color: #333;
+    color: #999;
   }
 
   :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
@@ -436,7 +436,7 @@ li.shop {
     opacity:  1;
     font-size: 1.2rem;
     font-weight: 700;
-    color: #333;
+    color: #999;
   }
 
   ::-moz-placeholder { /* Mozilla Firefox 19+ */
@@ -444,7 +444,7 @@ li.shop {
     opacity:  1;
     font-size: 1.5rem;
     font-weight: 700;
-    color: #333;
+    color: #999;
   }
 
   :-ms-input-placeholder { /* Internet Explorer 10+ */
@@ -452,7 +452,7 @@ li.shop {
     font-size: 1.2rem;
     vertical-align: baseline;
     font-weight: 700;
-    color: #333;
+    color: #999;
   }
 
 }
@@ -1198,24 +1198,29 @@ li#cart-trigger {
     position: relative;
 
     .search-input {
-      display: none;
       position: absolute;
-      width: 410px;
-      top: -($search-input-height / 4);
+      width: 0;
+      height: 0;
+      top: 0;
       right: 0;
       background-color: #fff;
-      border: solid #000 1px;
+      border: solid #d7d7d7 1px;
+      border-top-color: transparent;
+      @include transition(all 0.3s linear);
 
       input {
         display: block;
         width: 100%;
-        height: $search-input-height;
+        height: 29px;
         padding: 0 $search-input-height 0 10px;
-        line-height: $search-input-height;
+        line-height: 29px;
         font-size: 1.2rem;
         font-weight: 700;
-        color: #333;
+        color: #999;
         border: none;
+        opacity: 0;
+        @include transition(opacity 0.15s linear);
+        @include transition-delay(0.4s);
 
         &:focus{
           outline: 0;
@@ -1223,26 +1228,23 @@ li#cart-trigger {
 
       }
 
-      .mag-glass {
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: ($search-input-height - 20) / 2;
+    }
 
-        img {
-          display: block;
-          width: 20px;
-          height: 20px;
-        }
-
-      }
-
+    .icon-search {
+      position: relative;
+      z-index: 1;
     }
 
     &.active {
 
       .search-input {
-        display: block;
+        width: 410px;
+        height: $search-input-height;
+
+        input {
+          opacity: 1;
+        }
+
       }
 
     }
