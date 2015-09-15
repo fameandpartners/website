@@ -746,7 +746,6 @@ GEM
       multi_json (~> 1.3)
       rake
       rest-client (~> 1.6)
-    titleize (1.3.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -868,7 +867,6 @@ DEPENDENCIES
   timecop
   timers (= 1.1.0)
   tire
-  titleize
   uglifier (= 1.3.0)
   unicorn
   whenever

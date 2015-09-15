@@ -20,7 +20,6 @@ gem 'ckeditor'
 gem 'default_value_for'
 gem 'tire'
 gem 'redis-rails'
-gem 'titleize'
 gem 'autoprefixer-rails'
 
 # Monitoring & Events
