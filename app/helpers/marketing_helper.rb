@@ -43,7 +43,7 @@ module MarketingHelper
     marketing_landing_page? && current_promotion.present?
   end
 
-  # TODO remove this after redesign merge
+  # it seems, rails loads this by default
   require "base64"
 
   def pop?
@@ -53,7 +53,10 @@ module MarketingHelper
   def decode(p)
     return p if params[:raw]
     if p.present?
-      Base64.decode64(p.gsub(/\s/, '+'))
+      # if someone forgot to escape base64 encoded param to url-safe
+      # then '+' => ' '
+      restored_string = p.gsub(/\s/, '+')
+      Base64.decode64(restored_string)
     else
       ''
     end
