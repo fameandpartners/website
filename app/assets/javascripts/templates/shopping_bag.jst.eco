@@ -83,7 +83,7 @@
       </div>
     </form>
   </div>
-  <div class="col-lg-12 no-padding-left no-padding-lg center">
+  <div class="col-lg-12 no-padding-left no-padding-lg text-center">
     <img id="buyWithMasterPass" src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_180x042px.png" alt="Buy with MasterPass" <% if @cart.item_count != 0: %>class="btn"<% end %>>
     <p><a href="http://www.mastercard.com/mc_us/wallet/learnmore/en">Learn More</a></p>
   </div>
