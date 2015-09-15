@@ -1,5 +1,0 @@
-if ($('#blog_post_photo_field').length > 0){
-  $('#blog_post_photo_field img').attr('src', '<%= post_photo.photo.url %>');
-} else {
-  $("form.edit_blog_post fieldset.no-border-top").prepend($("<div id='blog_post_photo_field' class='field'> <label for='blog_post_photo'>Primary Photo</label> <br> <img height='300' src='<%= post_photo.photo.url %>' alt='Blog-carousel'> </div> "));
-}

@@ -11,7 +11,7 @@ module Products
       recommended_products.first(Products::DetailsResource::RECOMMENDED_PRODUCTS_LIMIT)
     end
 
-    def jackets
+    def outerwear
       related_outerwear.first(Products::DetailsResource::RELATED_OUTERWEAR_LIMIT)
     end
   end

@@ -73,64 +73,66 @@ ruby:
   - @product.cropped_images.each_with_index do |image, index|
     = tag :meta, name: "crop_image_#{index}", content: image.original
 
-#slides
-  .slides-container
-    // note: we should crop images & update images preloading mechanics - too slow currently
-    = image_tag @product.featured_image.original, id: "product-image-slide-#{ @product.featured_image.id }", class: 'product-image-slide', data: { color_id: @product.featured_image.color_id }, alt: @product.name, style: 'width: 1280px; overflow: hidden;'
+.slides-outer-wrapper
+  .slides-inner-wrapper
+    #slides
+      .slides-container
+        / note: we should crop images & update images preloading mechanics - too slow currently
+        = image_tag @product.featured_image.original, id: "product-image-slide-#{ @product.featured_image.id }", class: 'product-image-slide', data: { color_id: @product.featured_image.color_id }, alt: @product.name, style: 'width: 1280px; overflow: hidden;'
 
-  nav.slides-navigation
-    a.next href="#"
-      span.fa.fa-angle-right.fa-4x
-    a.prev href="#"
-      span.fa.fa-angle-left.fa-4x
+      nav.slides-navigation
+        a.next href="#"
+          span.fa.fa-angle-right.fa-4x
+        a.prev href="#"
+          span.fa.fa-angle-left.fa-4x
 
 /! Product Section
 .container-fluid.product-content.text-center
-  .col-sm-12.screen-height
   .col-md-4.col-md-offset-8.col-sm-6.col-sm-offset-6.product-details.product-section--selection.no-padding
-    .row
-      h1 = @product.name
-      p.product-section-description
-      p#product-price
-        span.price = product_price_with_discount(@product.price, @product.discount)
+    .product-details-outer
+      .product-details-inner 
+        .row
+          h1 = @product.name
+          p.product-section-description
+          p#product-price
+            span.price = product_price_with_discount(@product.price, @product.discount)
 
-    .product-section--selection
-      /! size & color & customizations selectors
-      /! Size and Colour
+        .product-section--selection
+          /! size & color & customizations selectors
+          /! Size and Colour
 
-    .row
-      - if @product.default_sizes?
-        a#product-size-action.btn-customize Size
+        .row
+          - if @product.default_sizes?
+            a#product-size-action.btn-customize Size
 
-    - if @product.colors?
-      .row
-        a#product-colorize-action.btn-customize
-          | Color
+        - if @product.colors?
+          .row
+            a#product-colorize-action.btn-customize
+              | Color
 
-    - if @product.customizable?
-      .row
-        a#product-customize-action.btn-customize
-          | Customize
+        - if @product.customizable?
+          .row
+            a#product-customize-action.btn-customize
+              | Customize
 
-    - if @product.making_options.present?
-      .row
-        a#product-making-options-action.btn-customize
-          | Express Making
+        - if @product.making_options.present?
+          .row
+            a#product-making-options-action.btn-customize
+              | Express Making
 
-    .row
-      button.btn.btn-block.btn-black.buy-button Add to Cart
+        .row
+          button.btn.btn-block.btn-black.buy-button Add to Cart
 
-    .row.secondary-actions
-      .col-md-6.col-xs-6.col-xxs-12
-        button#fit-guide.btn.btn-block.btn-secondary Size Guide
+        .row.secondary-actions
+          .col-md-6.col-xs-6.col-xxs-12
+            button#fit-guide.btn.btn-block.btn-secondary Size Guide
 
-      .col-md-6.col-xs-6.col-xxs-12
-        - if Features.active?(:moodboard)
-          button#add-to-moodboard.btn.btn-block.btn-secondary data-user-present=current_spree_user.present?
-            |+ Moodboard
+          .col-md-6.col-xs-6.col-xxs-12
+            - if Features.active?(:moodboard)
+              button#add-to-moodboard.btn.btn-block.btn-secondary data-user-present=current_spree_user.present?
+                |+ Moodboard
 
 /! About The Dress
-.col-sm-12.screen-height
 .dress-about.container.page-content
   h2.text-center About The Dress
   .divider

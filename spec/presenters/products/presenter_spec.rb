@@ -12,8 +12,9 @@ module Products
         double('available_options', :customizations => customizations, :colors => colors)
       end
       subject(:product) do
-        Presenter.new available_options: available_options, discount: discount
+        Presenter.new available_options: available_options, discount: discount, price: Spree::Price.new(amount: 99, currency: 'USD')
       end
+
 
       context 'when discounted' do
         let(:discount) { default_discount }
@@ -50,6 +51,10 @@ module Products
 
         it('allows custom colours') do
           expect(product.custom_colors?).to be_truthy
+        end
+
+        it 'displays price with currency' do
+          expect(product.price_with_currency).to include('$99.00 USD')
         end
       end
     end

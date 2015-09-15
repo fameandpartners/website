@@ -149,9 +149,14 @@ module Products
       end
     end
 
+    def price_with_currency
+      "#{price.display_price} #{price.currency}"
+    end
+
     def use_auto_discount!(auto_discount)
       self.discount = [self.discount, auto_discount].compact.max_by{|i| i.amount.to_i }
     end
+
 
     private
 

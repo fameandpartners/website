@@ -17,7 +17,8 @@ class Spree::Sale < ActiveRecord::Base
                   :name,
                   :discount_size,
                   :discount_type,
-                  :discounts_attributes
+                  :discounts_attributes,
+                  :customisation_allowed
 
   validates :is_active,
             :inclusion => {
@@ -62,6 +63,22 @@ class Spree::Sale < ActiveRecord::Base
 
   def mega_menu_image_url
     "//#{configatron.asset_host}/sale/#{name.downcase}.jpg"
+  end
+
+  def explanation
+    "Sale - Up to #{discount_string} Off"
+  end
+
+  def discount_string
+    if percentage?
+      "#{discount_size.to_i}%"
+    else
+      "$#{discount_size.to_i}"
+    end
+  end
+
+  def sitewide_message
+    "#{discount_string} OFF SITE WIDE. LIMITED TIME ONLY."
   end
 
   class << self

@@ -91,11 +91,6 @@ en:
       points_number:
         invalid: 'Basic style`s points sum should be 10'
         should_be_100: 'Basic style`s points sum should be 100'
-  page:
-    blog:
-      default:
-        title: 'Chain by Fame & Partners - Formal Dresses, Fashion and Girl Power'
-        description: 'Formal Dresses, Celebrity Fashion and Style Inspiration. Follow the Fame & Partners blog to stay in touch with the latest trends for your next formal event.'
   zip: 'Postcode'
   color: 'Colour'
   required_to: 'When do you need the dress by?'

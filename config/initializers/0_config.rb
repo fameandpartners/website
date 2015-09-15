@@ -4,6 +4,7 @@ configatron.noreply     = 'Fame & Partners<noreply@fameandpartners.com>'
 configatron.admin       = 'team@fameandpartners.com'
 configatron.app_name    = 'Fame And Partners'
 configatron.sitemap_url = 'http://images.fameandpartners.com/sitemap/sitemap.xml.gz'
+configatron.blog_host   = 'fameandpartners.tumblr.com'
 
 # assets
 configatron.aws.enabled    = false
@@ -80,7 +81,6 @@ configatron.pin_payments.usd_gateways = %W{pk_NxLgEbIIaWwjKEqUnTd6oA pk_FJWiUA3r
 case Rails.env.to_sym
 when :development
   configatron.host = 'localhost.localdomain'
-  configatron.blog_host = 'blog.localdomain'
 
   configatron.cache.expire do |expire|
     expire.quickly  = 1.second
@@ -113,7 +113,6 @@ when :development
 
 when :staging
   configatron.host      = 'stage.fameandpartners.com'
-  configatron.blog_host = 'stage.fameandpartners.com'
 
   configatron.mailgun.mailbox do |mailbox|
     mailbox.domain   = '23st2ages.com'
@@ -123,7 +122,6 @@ when :staging
 
 when :preproduction
   configatron.host      = 'preprod.fameandpartners.com'
-  configatron.blog_host = 'blog.fameandpartners.com'
 
   configatron.aws.s3 do |s3|
     s3.bucket            = 'preprod-fameandpartners'
@@ -136,17 +134,14 @@ when :preproduction
   configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
 
-  # configatron.es_url = 'https://z9h24eavpg:6cygbrjpmh@preproduction-1404693529.us-east-1.bonsai.io'
-  # configatron.es_url = 'https://c019a72e2bcb614a3809da7bf7d583c0.us-east-1.aws.found.io:9243'
-  configatron.es_url = YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
+  configatron.es_url = 'https://21b09bd2aadd9ba50c9d2a9658dc99e7.us-west-1.aws.found.io:9243'
 
   configatron.asset_host = "assets.fameandpartners.com/preprod"
 
 when :production
   configatron.host      = 'www.fameandpartners.com'
-  configatron.blog_host = 'blog.fameandpartners.com'
 
-  configatron.order_production_emails = ['fameandpartners@hotmail.com']
+  configatron.order_production_emails = ['fameandpartners@hotmail.com', 'orders@fameandpartners.com.cn']
 
   configatron.aws.s3 do |s3|
     s3.bucket            = 'fameandpartners'

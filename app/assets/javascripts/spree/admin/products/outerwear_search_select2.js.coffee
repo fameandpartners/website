@@ -6,8 +6,8 @@ $ ->
     initSelection: (element, callback) ->
       url = Spree.url(Spree.routes.outerwear_search, ids: element.val())
       $.getJSON url, null, (data) ->
-        jackets = $.map data, (result) -> result
-        callback jackets
+        outerwear = $.map data, (result) -> result
+        callback outerwear
     ajax:
       url: Spree.routes.outerwear_search
       datatype: 'json'

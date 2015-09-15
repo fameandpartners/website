@@ -1,15 +1,6 @@
 $ ->
   $('.product-batch-upload').tabs()
 
-
-  $('.blog-menu li').on 'click', ->
-    $('.selected').removeClass 'selected'
-    $(@).addClass 'selected'
-    $('.blog-posts-list').hide()
-    $("#blog_list_#{@.id}").show()
-
-  $('#blog_list_celebrity_photos').show()
-
   $('.add_fields').off('click')
   $(document).delegate '.add_fields', 'click', (e) ->
     e.preventDefault()

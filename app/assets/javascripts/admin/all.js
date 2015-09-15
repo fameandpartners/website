@@ -11,8 +11,6 @@
 //= require admin/spree_promo
 
 //= require_tree .
-//= require ../spree/admin/blog
-//= require ../spree/admin/blog/posts
 //= require ../spree/admin/admin
 //= require_tree ../spree/admin/products
 //= require_tree ../spree/admin/partials

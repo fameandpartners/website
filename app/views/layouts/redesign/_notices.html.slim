@@ -3,8 +3,7 @@
     #sale-banner.alert-sale.alert-relative role="alert"
       span.medium.banner-title
         .center-block
-          span  30% OFF SITE WIDE.
-          span  LIMITED TIME ONLY.
+          span = current_sale.sitewide_message
         .center-block
           span = link_to 'Shop now!', dresses_path, class: 'text-highlight',  style: 'color:white;text-decoration:underline'
 

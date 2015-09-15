@@ -15,7 +15,6 @@ gem 'active_model_serializers'
 gem 'data_migrate', git: 'git://github.com/droidlabs/data-migrate.git'
 gem 'rack-cors'
 gem 'business_time'
-gem 'acts-as-taggable-on'
 gem 'rmagick'
 gem 'ckeditor'
 gem 'default_value_for'
@@ -55,8 +54,6 @@ gem 'geoip', require: false
 gem 'rubyzip', '< 0.9.9', require: false
 gem 'roo', require: false
 
-gem 'twitter'
-gem 'instagram'
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
 
 gem 'sitemap_generator'

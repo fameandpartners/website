@@ -57,7 +57,6 @@ end
 
 Spree::Ability.register_ability(OrderProcessingAbility)
 Spree::Ability.register_ability(CustomerServiceAbility)
-Spree::Ability.register_ability(Blog::Ability)
 
 Devise::RegistrationsController.layout "redesign/application"
 
