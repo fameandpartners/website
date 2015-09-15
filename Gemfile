@@ -61,8 +61,6 @@ gem 'fog'
 
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
-gem 'pry-rails'
-
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_banner', '~> 1.3.0'
 
@@ -117,6 +115,7 @@ group :assets, :development, :test do
 end
 
 group :development, :test do
+  gem 'pry-rails'
   gem 'awesome_print'
   gem 'capybara'
   gem 'compass'
