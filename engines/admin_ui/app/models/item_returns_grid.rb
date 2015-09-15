@@ -72,11 +72,10 @@ class ItemReturnsGrid
   column :received_location
   column :order_payment_method, header: 'Paid'
   column :order_paid_amount,    header: 'Amount' do |item_return|
-    #
-    # Money.new(
-    #   item_return.order_paid_amount,
-    #   item_return.order_paid_currency
-    # ).format
+    Money.new(
+      item_return.order_paid_amount,
+      item_return.order_paid_currency
+    ).format if item_return.order_paid_amount.present?
   end
   column :order_paid_currency, header: 'Currency'
   # column :order_payment_ref
@@ -84,16 +83,10 @@ class ItemReturnsGrid
   column :refund_ref
   column :refund_method
   column :refund_amount do |item_return|
-    Money.new(item_return.refund_amount, item_return.order_paid_currency).to_s if item_return.refund_amount.present?
+    Money.new(item_return.refund_amount, item_return.order_paid_currency).format if item_return.refund_amount.present?
   end
   column :refunded_at do |item_return|
     item_return.refunded_at.try(:to_date).try(:iso8601)
   end
-
-
-
-
-
-
 
 end
