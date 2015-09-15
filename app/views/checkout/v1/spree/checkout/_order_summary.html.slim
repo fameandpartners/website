@@ -28,24 +28,24 @@ ruby:
             = image_tag product.image.large, class: 'cart-item-image', alt: product.name
         .cart-item-info
           .heading
-            span.qty 
+            span.qty
               => "#{product.quantity}"
               ' &times;
             = link_to product.name, collection_product_path(product), class: 'cart-item-title'
           .clearfix
             .pull-left.small
-              ' Size: 
+              ' Size:
               span
                 ' #{ product.size.presentation },
-              ' Color: 
+              ' Color:
               span.color
                 ' #{ product.color.presentation}
             .pull-right.text-muted = product.price.display_price
           .cart-prices
-            
+
             - if product.making_options.present?
               - product.making_options.each do |option|
-                .small 
+                .small
                   = "#{ option.name } + #{ option.display_price.to_s }"
             - if product.customizations.present?
               - product.customizations.each do |customization|
@@ -66,7 +66,7 @@ ruby:
     span.pull-right = cart.display_shipment_total.present? ? cart.display_shipment_total.to_s : 'Free Shipping'
   p
     - if cart.promocode.present?
-      => "Promotion (#{ cart.promocode })"
+      => "Promotion (#{ truncate(cart.promocode, length: 10) })"
       span.pull-right = cart.display_promotion_total.to_s
     - else
       | Promotion
