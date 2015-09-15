@@ -4,6 +4,11 @@
     padding: 10px 12px 6px 12px;
     font-family: $font-family-secondary;
   }
+
+  #buyWithMasterPass {
+    padding: 0;
+    margin-top: 5px;
+  }
 }
 
 
@@ -86,10 +91,6 @@
   }
 }
 
-#buyWithMasterPass {
-  padding: 0;
-  margin-top: 5px;
-}
 .center {
   text-align: center;
 }

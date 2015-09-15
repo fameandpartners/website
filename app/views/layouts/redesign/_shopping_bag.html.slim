@@ -11,9 +11,9 @@ ruby:
     });
   "
 
-- if masterpass_active?
-  - content_for :head do
-    - if !payment_method.prefers_test_mode? && payment_method.server_mode == Mastercard::Common::PRODUCTION
+- if masterpass_available?
+  / = content_for :head do
+    - if !masterpass_payment_method.prefers_test_mode? && masterpass_payment_method.server_mode == Mastercard::Common::PRODUCTION
       = javascript_include_tag 'https://masterpass.com/lightbox/Switch/integration/MasterPass.client.js'
       / = javascript_include_tag 'https://masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
     - else
