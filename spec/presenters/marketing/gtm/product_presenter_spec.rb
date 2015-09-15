@@ -1,0 +1,101 @@
+require 'spec_helper'
+
+describe Marketing::Gtm::ProductPresenter, type: :presenter do
+  let(:product_price) { build_stubbed(:price, amount: 12.34, currency: 'AUD') }
+  let(:product) { build_stubbed(:spree_product, name: 'Super Dress') }
+  let(:taxon) { build_stubbed(:taxon, name: 'Jeans') }
+
+  # Fake product data. Not going to reinvent resources, services and OpenStructs inside OpenStructs here
+  let(:fake_image) do
+    OpenStruct.new(
+        position: 1,
+        original: 'http://images.fameandpartners.com/original.png',
+        large:    'http://images.fameandpartners.com/large.png',
+        xlarge:   'http://images.fameandpartners.com/xlarge.png',
+        small:    'http://images.fameandpartners.com/small.png',
+        color:    'pink',
+        color_id: 29
+    )
+  end
+
+  let(:fake_available_options) do
+    OpenStruct.new(
+        colors: OpenStruct.new(
+            default: [
+                         OpenStruct.new(
+                             name:         'Ivory',
+                             presentation: 'Ivory'
+                         )
+                     ],
+            extra:   []
+        ),
+        sizes:  OpenStruct.new(
+            default: [
+                         OpenStruct.new(presentation: 'US 2')
+                     ],
+            extra:   []
+        )
+    )
+  end
+
+  let(:discount) { OpenStruct.new(amount: 30, size: 30) }
+  let(:product_images) { [fake_image] }
+
+  let(:taxon_presenter) { Taxons::Presenter.new(spree_taxon: taxon) }
+  let(:product_presenter) do
+    Products::Presenter.new(
+        id:                123,
+        master_id:         456,
+        sku:               'ABC123',
+        name:              'Super Dress',
+        short_description: 'Super Dress Short Description',
+        description:       'Super Dress Long Description',
+        permalink:         'super-dress-permalink',
+        is_active:         true,
+        images:            product_images,
+        default_image:     fake_image,
+        price:             product_price,
+        discount:          discount,
+        taxons:            [taxon_presenter],
+        # Not used by GTM. Yet.
+        # recommended_products: [],
+        # related_outerwear:    [],
+        # moodboard:            {},
+        color_name:        'Red',
+        available_options: fake_available_options,
+        fabric:            'Product Fabric',
+        fit:               'Eloise wears a size AU10/US6',
+        size:              'Top length: 40.5cm Skirt Length: 50cm',
+        style_notes:       'Product Style Notes',
+        size_chart:        '2015',
+        fast_making:       true
+    )
+  end
+
+  subject(:presenter) { described_class.new(product_presenter: product_presenter) }
+
+  it_behaves_like 'a Marketing::Gtm::BasePresenter'
+
+  describe '#body' do
+    it 'returns hash with product info' do
+      expect(subject.body).to eq({
+                                     brand:             'Fame & Partners',
+                                     categories:        ['jeans'],
+                                     colors:            ['Ivory'],
+                                     currency:          'AUD',
+                                     description:       'Super Dress Long Description',
+                                     discountPercent:   '30',
+                                     expressMaking:     true,
+                                     image:             { original: 'http://images.fameandpartners.com/original.png', xlarge: 'http://images.fameandpartners.com/xlarge.png', large: 'http://images.fameandpartners.com/large.png', small: 'http://images.fameandpartners.com/small.png' },
+                                     images:            [{ original: 'http://images.fameandpartners.com/original.png', xlarge: 'http://images.fameandpartners.com/xlarge.png', large: 'http://images.fameandpartners.com/large.png', small: 'http://images.fameandpartners.com/small.png' }],
+                                     name:              'Super Dress',
+                                     price:             12.34,
+                                     priceWithDiscount: 8.638,
+                                     selectedColor:     'Red',
+                                     sizes:             ['US 2'],
+                                     sku:               'ABC123',
+                                     type:              'dresses'
+                                 })
+    end
+  end
+end
