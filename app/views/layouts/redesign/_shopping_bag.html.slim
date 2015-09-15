@@ -6,9 +6,20 @@ ruby:
       container:    '#cart',
       toggle_link:  '#cart-trigger',
       auto_open:    /open_cart=true/.test(window.location.search),
-      country_code: '#{session[:country_code]}'
+      country_code: '#{session[:country_code]}',
+      masterpass_link: '#buyWithMasterPass'
     });
   "
+
+- if masterpass_active?
+  - content_for :head do
+    - if !payment_method.prefers_test_mode? && payment_method.server_mode == Mastercard::Common::PRODUCTION
+      = javascript_include_tag 'https://masterpass.com/lightbox/Switch/integration/MasterPass.client.js'
+      / = javascript_include_tag 'https://masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
+    - else
+      = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/integration/MasterPass.client.js'
+      / = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
+
 = content_for :inline_javascript do
   = raw shopping_bag_init
 

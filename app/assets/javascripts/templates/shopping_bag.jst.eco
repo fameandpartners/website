@@ -74,7 +74,7 @@
 <!--cd-cart-total-->
 <div class="cart--call-to-actions row">
   <div class="col-lg-6 no-padding-left close-cart no-padding-lg">
-    <button class="btn btn-charcoal btn-block">Shop More</button><br>
+    <button class="btn btn-charcoal btn-block">Shop More</button>
   </div>
   <div class="col-lg-6 no-padding-right no-padding-lg">
     <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
@@ -83,4 +83,11 @@
       </div>
     </form>
   </div>
+  <% if masterpass_active?: %>
+  <div class="col-lg-12 no-padding-left no-padding-lg center">
+    <img id="buyWithMasterPass" src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_180x042
+px.png" alt="Buy with MasterPass" class="btn">
+    <p><a href="http://www.mastercard.com/mc_us/wallet/learnmore/en">Learn More</a></p>
+  </div>
+  <% end %>
 </div>

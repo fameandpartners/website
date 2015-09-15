@@ -14,9 +14,10 @@ window.ShoppingBag = class ShoppingBag
     @$overlay   = $(options.overlay || '#shadow-layer')
     @$container = $(options.container || '#cart')
 
-    _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler', 'couponFormSubmitHandler', 'removeProductCustomizationHandler', 'removeProductMakingOptionHandler')
+    _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler', 'couponFormSubmitHandler', 'removeProductCustomizationHandler', 'removeProductMakingOptionHandler', 'masterpassOpenHandler')
 
     $(options.toggle_link || '#cart-trigger').on('click', @openHandler)
+    $(options.masterpass_link || '#buyWithMasterPass').on('click', @masterpassOpenHandler)
 
     @$container.on('click', '.close-cart', @closeHandler)
     @$overlay.on('click', @closeHandler)
@@ -83,3 +84,6 @@ window.ShoppingBag = class ShoppingBag
     $input = @$container.find('#promotion-code')
     @cart.one('complete', (event, result) -> $input.val(''))
     @cart.applyPromotionCode($input.val())
+
+  masterpassOpenHandler: (e) ->
+    e.preventDefault() if e
