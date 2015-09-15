@@ -8201,8 +8201,7 @@ main {
   left: 0;
   background: rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  z-index: 999 !important;
-  z-index: 2;
+  z-index: 999;
   display: none;
 }
 /* line 253, ../sass/_cart.scss */

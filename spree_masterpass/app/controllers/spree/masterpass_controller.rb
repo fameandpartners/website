@@ -61,11 +61,6 @@ module Spree
       )
       save_session_data
 
-      # file = File.read(File.join('spree_masterpass', 'resources', 'shoppingCart.xml'))
-      # shopping_cart_request = AllServicesMappingRegistry::ShoppingCartRequest.from_xml(file)
-      # shopping_cart_request.oAuthToken = @data.request_token
-        # shopping_cart_request.originUrl = payment_method.preferred_callback_domain
-
       # flash[:commerce_tracking] = 'masterpass_initialized';
       render json: {
                  request_token: @data.request_token,
@@ -84,7 +79,9 @@ module Spree
       @data.verifier = params['oauth_verifier']
       @data.checkout_resource_url = params['checkout_resource_url']
       handle_pairing_callback if params['pairing_token'] && params['pairing_verifier']
+    end
 
+    def cartpostback
       # get access token
       access_token_response = @service.get_access_token(
           payment_method.access_url,

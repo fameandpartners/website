@@ -11,6 +11,7 @@ window.ShoppingBag = class ShoppingBag
     @masterpass_clicked = false
     @auto_open  = options.auto_open
     @country_code = options.country_code
+    @masterpass_cart_callback_uri = options.masterpass_cart_callback_uri
 
     @$overlay   = $(options.overlay || '#shadow-layer')
     @$container = $(options.container || '#cart')
@@ -18,7 +19,6 @@ window.ShoppingBag = class ShoppingBag
     _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler', 'couponFormSubmitHandler', 'removeProductCustomizationHandler', 'removeProductMakingOptionHandler', 'masterpassOpenHandler')
 
     $(options.toggle_link || '#cart-trigger').on('click', @openHandler)
-    $(options.masterpass_link || '#buyWithMasterPass').on('click', @masterpassOpenHandler)
 
     @$container.on('click', '.close-cart', @closeHandler)
     @$overlay.on('click', @closeHandler)
@@ -57,7 +57,11 @@ window.ShoppingBag = class ShoppingBag
       @open()
     else
       @cart.one('load', @open)
-      @cart.load()
+      self = this
+      @cart.load(false, () ->
+        $('#buyWithMasterPass').on('click', self.masterpassOpenHandler)
+      )
+
 
   closeHandler: (e) ->
     e.preventDefault() if e
@@ -88,19 +92,18 @@ window.ShoppingBag = class ShoppingBag
 
   masterpassOpenHandler: (e) ->
     e.preventDefault() if e
+    return if @cart.item_count == 0
 
-    @$container.addClass('speed-in').one(transition_end_events, () ->
-      $('body').addClass('overflow-hidden')
-    )
-    @$overlay.addClass('is-visible')
     @masterpass_clicked = true
     spinner = (new Spinner).spin()
     @$overlay.append spinner.el;
+    @$overlay.addClass('most-front');
 
-    $.getJSON('#{masterpass_cart_callback_uri(payment_method)}').done (data) ->
+    overlay = @$overlay;
+    $.getJSON(@masterpass_cart_callback_uri).done (data) ->
       @masterpass_clicked = false
       spinner.stop()
-      @close()
+      overlay.removeClass('most-front');
 
       if data.hasOwnProperty('request_token') and data.hasOwnProperty('callback_domain') and data.hasOwnProperty('checkout_identifier') and data.hasOwnProperty('shipping_suppression') and data.hasOwnProperty('accepted_cards') and data.hasOwnProperty('cart_callback_path')
         MasterPass.client.checkout
