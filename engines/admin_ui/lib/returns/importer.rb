@@ -23,7 +23,7 @@ module Returns
             :rj_ident                   => row['PK for RJMetrics'],
             :column_b                   => row.to_a[1].last, # No Key, direct idx
             :receive_state              => row['Received'],
-            :spree_order_number         => row['Spree Order Number'].to_s.squish,
+            :spree_order_number         => row['Spree Order Number'].to_s.squish.strip,
             :return_cancellation_credit => row['RETURN OR CANCELLATION OR STORE CREDIT'],
             :name                       => row['Name'],
             :order_date                 => row['ORDER DATE'],
@@ -148,9 +148,35 @@ module Returns
 
             info "(#{mmr.row_number}) Creating Event for row: #{mmr.row_number}"
 
-            event = item_return.events.legacy_data_import.create!(
-              mmr.attributes.symbolize_keys.slice(*ItemReturnEvent::LEGACY_DATA_IMPORT_ATTRIBUTES)
-            )
+            calculated_attributes = {}
+            calculated_attributes[:refund_amount_in_cents] = Money.parse(
+                          mmr.refund_amount.to_s.gsub('$','').tr(',','').gsub(/[a-z]+/i,'').strip,
+                          matched_line_item.order.currency.to_s).fractional
+
+            potential_state = mmr.receive_state.to_s.downcase.strip.tr(' ','_').to_sym
+            potential_comment_state = mmr.comments.to_s.downcase.strip.tr(' ','_').to_sym
+            calculated_attributes[:acceptance_status]      = if ItemReturn::STATES.include?(potential_state)
+              potential_state
+            elsif ItemReturn::STATES.include?(potential_comment_state)
+              potential_comment_state
+            elsif /app?rr?o[cv]ed/i.match(mmr.comments)
+              :approved
+            else
+              :unknown
+            end
+
+            calculated_attributes[:requested_at]           = Chronic.parse(mmr.return_requested_on).try(:to_date).try(:iso8601)
+            calculated_attributes[:refunded_at]            = Chronic.parse(mmr.date_refunded).try(:to_date).try(:iso8601)
+            if mmr.product.present?
+              calculated_attributes[:product_style_number] = Spree::Product.where(name: mmr.product.to_s.strip).map(&:sku).first
+            end
+            calculated_attributes[:product_customisations] = !!matched_line_item.personalization.present?
+            calculated_attributes[:order_paid_currency]    = matched_line_item.order.currency.to_s
+
+            whitelisted_attributes = mmr.attributes.symbolize_keys.slice(*ItemReturnEvent::LEGACY_DATA_IMPORT_ATTRIBUTES)
+
+            event = item_return.events.legacy_data_import.create!(calculated_attributes.merge(whitelisted_attributes))
+
             mmr.item_return = item_return
             mmr.item_return_event = event
 
@@ -169,9 +195,6 @@ module Returns
         rescue StandardError => e
           binding.pry
         end
-
-        # binding.pry
-
       end
     end
   end

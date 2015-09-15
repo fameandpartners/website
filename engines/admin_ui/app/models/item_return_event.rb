@@ -112,7 +112,15 @@ class ItemReturnEvent < ActiveRecord::Base
     :account_swift,
     :customers_notes,
     :quantity,
-    :deleted_row
+    :deleted_row,
+    # Calculated Attributes
+    :refund_amount_in_cents,
+    :refunded_at,
+    :requested_at,
+    :acceptance_status,
+    :product_style_number,
+    :product_customisations,
+    :order_paid_currency,
   ]
 
   attr_accessible *LEGACY_DATA_IMPORT_ATTRIBUTES
