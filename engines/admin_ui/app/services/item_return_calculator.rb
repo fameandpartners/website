@@ -58,7 +58,7 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.contact_email        = event.email
     @item_return.comments             = "#{event.comments}\n#{event.notes}"
     @item_return.order_payment_method = event.payment_method
-    @item_return.order_paid_amount    = event.spree_amount_paid.presence || event.amount_paid
+    @item_return.order_paid_amount    = Money.parse(event.spree_amount_paid.presence || event.amount_paid).fractional
     @item_return.order_paid_currency  = @item_return.line_item.order.currency.to_s
     # @item_return.order_payment_ref    = nil
     @item_return.refund_method        = event.refund_method
@@ -73,6 +73,7 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.product_style_number = Spree::Product.where(name: event.product).map(&:sku).first
     @item_return.product_size         = event.size
     @item_return.product_colour       = event.colour
+    @item_return.product_customisations = !! @item_return.line_item.personalization.present?
     @item_return.qty                  = event.quantity
     @item_return.received_location    = event.return_office
 
