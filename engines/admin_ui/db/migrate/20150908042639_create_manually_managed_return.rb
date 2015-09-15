@@ -3,6 +3,7 @@ class CreateManuallyManagedReturn < ActiveRecord::Migration
     create_table :manually_managed_returns do |t|
       t.references :item_return
       t.references :item_return_event
+      t.references :line_item
       t.string :import_status
       t.string :row_number
       t.string :rj_ident
