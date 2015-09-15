@@ -83,8 +83,12 @@ class ItemReturnsGrid
   column :refund_status
   column :refund_ref
   column :refund_method
-  column :refund_amount
-  column :refunded_at
+  column :refund_amount do |item_return|
+    Money.new(item_return.refund_amount, item_return.order_paid_currency).to_s if item_return.refund_amount.present?
+  end
+  column :refunded_at do |item_return|
+    item_return.refunded_at.try(:to_date).try(:iso8601)
+  end
 
 
 
