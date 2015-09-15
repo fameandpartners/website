@@ -1,0 +1,139 @@
+/* [SEO Content]
+-------------------------------------------------------*/
+.seo-content {
+  text-align: center;
+
+  .title {
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-family: Forum;
+    font-size: 1.875em;
+    font-style: italic;
+  }
+
+  .sub-title {
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-size: 0.750em;
+    font-weight: 500;
+  }
+
+  p {
+    font-family: Serif;
+    font-size: 0.750em;
+    font-weight: 400;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: block;
+      float: left;
+      width: 48%;
+      text-transform: uppercase;
+      text-align: right;
+      font-size: 0.625em;
+      font-weight: 500;
+
+      &:nth-child(3n) {
+        text-align: left;
+      }
+
+      &.separator {
+        width: 4%;
+        text-align: center;
+      }
+
+    }
+
+    a {
+      color: $c-neutral-black;
+
+      &:hover {
+        text-decoration: underline;
+        color: $c-neutral-black;
+      }
+
+    }
+
+  }
+
+  .row {
+    
+    > div {
+      display: table;
+      padding: 0 20px;
+      border-right: solid $c-neutral-4 1px;
+
+      .inner-wrap {
+        display: table-cell;
+        height: 110px;
+        vertical-align: middle;
+      }
+
+    }
+
+  }
+
+  @include desktop {
+
+    .row {
+      
+      > div {
+
+        &:nth-child(n+4) {
+          border-top: solid $c-neutral-4 1px;
+        }
+
+        &:nth-child(3n) {
+          border-right: 0;
+        }
+
+      }
+
+    }
+
+  }
+
+  @include tablet {
+
+    .row {
+      
+      > div {
+
+        &:nth-child(n+3) {
+          border-top: solid $c-neutral-4 1px;
+        }
+
+        &:nth-child(2n) {
+          border-right: 0;
+        }
+
+      }
+
+    }
+
+  }
+
+  @include mobile {
+
+    .row {
+      
+      > div {
+        border-top: solid $c-neutral-4 1px;
+        border-right: 0;
+
+        &:first-child {
+          border-top: 0;
+        }
+
+      }
+
+    }
+
+  }
+
+}
