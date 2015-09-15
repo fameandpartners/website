@@ -6,7 +6,6 @@
 #   product   - obsoleted! support legacy only
 #
 class Products::DetailsResource
-  META_DESCRIPTION_MAX_SIZE = 160
   RECOMMENDED_PRODUCTS_LIMIT = 4
   RELATED_OUTERWEAR_LIMIT = 4
 
@@ -94,12 +93,7 @@ class Products::DetailsResource
     end
 
     def product_short_description
-      if !product.meta_description.blank?
-        product.meta_description
-      else
-        sanitized_description = ActionView::Base.full_sanitizer.sanitize(product.description)
-        sanitized_description.truncate(META_DESCRIPTION_MAX_SIZE)
-      end
+      product.meta_description.blank? ? product.description : product.meta_description
     end
 
     def product_fabric
