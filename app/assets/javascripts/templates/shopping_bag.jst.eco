@@ -95,3 +95,22 @@
     </div>
   <% end %>
 </div>
+
+<div class="row">
+  <div class='shopping-bag-text-wrapper'>
+    <div class="row shopping-bag-text" >
+      <%= @free_styling %>
+    </div>
+    <div class="row shopping-bag-text" >
+      <%= @free_delivery %>
+    </div>
+    <div class="row shopping-bag-text" >
+      <%= @customer_service %>
+    </div>
+  </div>
+</div>
+
+<div class="row shopping-bag-payment-methods" >
+  <img src="/assets/checkout/visa-mastercard-paypal.jpg" >
+  <img src="/assets/comodo-ssl.png" >
+</div>

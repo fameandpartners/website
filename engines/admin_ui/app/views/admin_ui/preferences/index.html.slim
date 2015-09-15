@@ -71,4 +71,21 @@
                 .help-block.m-b-none
                   | Warn text that will be shown to users when they first visit the unrecommended site version
 
+              / ShoppingBag
+              - shopping_bag = Preferences::ShoppingBag.new(site_version)
+              h3
+                | Shopping Bag
+              .form-group
+                label
+                  | Free Styling
+                = text_field :preferences, shopping_bag.free_styling_key, value: shopping_bag.free_styling, class: 'form-control'
+              .form-group
+                label
+                  | Free Delivery
+                = text_field :preferences, shopping_bag.free_delivery_key, value: shopping_bag.free_delivery, class: 'form-control'
+              .form-group
+                label
+                  | Customer Service
+                = text_field :preferences, shopping_bag.customer_service_key, value: shopping_bag.customer_service, class: 'form-control'
+
             button.btn.btn-primary type="submit" Save changes
