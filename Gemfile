@@ -115,6 +115,7 @@ end
 
 group :development, :test do
   gem 'pry-rails'
+  gem 'byebug'
   gem 'awesome_print'
   gem 'capybara'
   gem 'compass'
