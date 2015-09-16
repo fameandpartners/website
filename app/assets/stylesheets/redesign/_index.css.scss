@@ -352,10 +352,31 @@
     height: 360px;
   }
 
+  // START - tablet
+  @include tablet {
+
+    & .main {
+      margin-bottom: 30px;
+    }
+
+  }
+  // END - tablet
+
   // START - mobile
   @include mobile {
 
     & {
+      margin-top: 20px;
+
+      .main {
+        margin-bottom: 20px;
+
+        .media-wrap,
+        .tabs.vertical {
+          margin-bottom: 20px;
+        }
+
+      }
 
       .tabs.vertical .tab-wrap {
         width: 100%;

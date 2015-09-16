@@ -120,6 +120,11 @@
 
   @include mobile {
 
+    .title {
+      margin: 0;
+      font-size: 1.375em;
+    }
+
     .row {
       
       > div {

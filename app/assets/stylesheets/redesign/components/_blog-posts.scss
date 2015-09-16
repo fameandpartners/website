@@ -79,6 +79,10 @@
 
   }
 
+  .posts {
+    @extend %cfix;
+  }
+
   .post {
     display: block;
     margin-bottom: 30px;
@@ -86,13 +90,25 @@
     background: $c-neutral-white;
 
     .media-wrap {
-      height: 286px;
+      position: relative;
+      width: 100%;
+      height: auto;
+      padding-bottom: 129%;
+
+      .inner-wrap {
+        position: absolute;
+        top: 0; 
+        bottom: 0; 
+        left: 0; 
+        right: 0;
+      }
+
     }
 
     &.compact {
 
       .media-wrap {
-        height: 160px;
+        padding-bottom: 97.5%;
       }
 
     }
@@ -126,12 +142,20 @@
     line-height: normal;
   }
 
-  @media screen and (min-width: $bootstrap-sm-width) {
+  // START - desktop
+  @include desktop {
 
     .col {
       width: 50%;
     }
 
   }
+  // END - desktop
+
+  // START - mobile
+  @include mobile {
+    //TODO: carousel styling
+  }
+  // END - mobile
 
 }
