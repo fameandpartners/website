@@ -15,7 +15,7 @@ namespace :item_return do
     require 'returns/importer'
 
     # TODO - Remove hardcoded path
-    ENV['FILE_PATH'] ||= '/Users/garrow/fame/content/returns/140709_F&P_ReturnsCancellationsRefunds - Returns.csv'
+    # ENV['FILE_PATH'] ||= '/Users/garrow/fame/content/returns/140709_F&P_ReturnsCancellationsRefunds - Returns.csv'
     raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
     Returns::Importer.new(ENV['FILE_PATH']).import
   end

@@ -5,7 +5,6 @@ module Returns
       create_or_update_records_from_sheet
       associate_item_returns
 
-
       info "Done"
     end
 
@@ -79,6 +78,13 @@ module Returns
             next
           end
 
+          if mmr.spree_order.line_items.empty?
+            error "(#{mmr.row_number}) No Line Items on Order (#{mmr.spree_order_number})"
+            mmr.import_status = :no_line_items
+            mmr.save
+            next
+          end
+
           if mmr.spree_order.line_items.size == 1
             matched_line_item = mmr.spree_order.line_items.first
           else
@@ -89,7 +95,6 @@ module Returns
               mmr.save
               next
             end
-
 
             product_matched_items = mmr.spree_order.line_items.select do |sli|
               sli.product.present? && mmr.product.present? && sli.product.name.downcase == mmr.product.downcase
