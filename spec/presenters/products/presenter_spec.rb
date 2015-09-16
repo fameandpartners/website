@@ -115,5 +115,26 @@ module Products
         expect(result.size).to eq(Products::Presenter::META_DESCRIPTION_MAX_SIZE)
       end
     end
+
+    describe '#price_amount' do
+      let(:price)   { Spree::Price.new(amount: 15.0, currency: 'AUD') }
+      let(:product) { described_class.new price: price, discount: discount }
+
+      context 'product has discount' do
+        let(:discount) { OpenStruct.new(amount: 10, size: 10) }
+
+        it 'returns the amount of the product price with the discount' do
+          expect(product.price_amount).to eq(13.5)
+        end
+      end
+
+      context 'product does not have a discount' do
+        let(:discount) { nil }
+
+        it 'returns the full amount of the product price' do
+          expect(product.price_amount).to eq(15)
+        end
+      end
+    end
   end
 end

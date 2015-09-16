@@ -155,6 +155,11 @@ module Products
       "#{price.display_price} #{price.currency}"
     end
 
+    def price_amount
+      display_price = discount ? price.apply(discount) : price
+      display_price.amount
+    end
+
     def use_auto_discount!(auto_discount)
       self.discount = [self.discount, auto_discount].compact.max_by{|i| i.amount.to_i }
     end
