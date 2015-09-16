@@ -1,5 +1,5 @@
 class Products::DetailsController < Products::BaseController
-  include Products::Concerns::Gtm
+  include Marketing::Gtm::Controller::Product
 
   layout 'redesign/application'
 
