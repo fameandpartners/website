@@ -24,6 +24,8 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
   end
 
   def advance_legacy_data_import(event)
+    return if event.deleted_row.present?
+
     @item_return.order_number      = event.spree_order_number
     @item_return.acceptance_status = event.acceptance_status
 

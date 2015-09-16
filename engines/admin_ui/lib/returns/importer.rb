@@ -71,6 +71,13 @@ module Returns
     def associate_item_returns
       ManuallyManagedReturn.find_each do |mmr|
         begin
+          if mmr.deleted_row.present?
+            warn "(#{mmr.row_number}) Deleted Row (#{mmr.spree_order_number})"
+            mmr.import_status = :deleted_row
+            mmr.save
+            next
+          end
+
           unless mmr.spree_order
             error "(#{mmr.row_number}) No Order Found (#{mmr.spree_order_number})"
             mmr.import_status = :no_order
