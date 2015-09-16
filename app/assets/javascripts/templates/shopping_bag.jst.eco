@@ -99,13 +99,7 @@
 <div class="row">
   <div class='shopping-bag-text-wrapper'>
     <div class="row shopping-bag-text" >
-      <%= @free_styling %>
-    </div>
-    <div class="row shopping-bag-text" >
-      <%= @free_delivery %>
-    </div>
-    <div class="row shopping-bag-text" >
-      <%= @customer_service %>
+      <%- @value_proposition %>
     </div>
   </div>
 </div>

@@ -19,6 +19,7 @@ window.ShoppingBag = class ShoppingBag
     @freeStyling     = options.free_styling
     @freeDelivery    = options.free_delivery
     @customerService = options.customer_service
+    @value_proposition  = options.value_proposition
 
 
     _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler', 'couponFormSubmitHandler', 'removeProductCustomizationHandler', 'removeProductMakingOptionHandler', 'masterpassOpenHandler')
@@ -40,7 +41,7 @@ window.ShoppingBag = class ShoppingBag
     @
 
   render: () ->
-    @$container.html(@template(cart: @cart.data, country_code: @country_code, free_styling: @freeStyling, free_delivery: @freeDelivery, customer_service: @customerService))
+    @$container.html(@template(cart: @cart.data, country_code: @country_code, value_proposition: @value_proposition))
     @rendered = true
 
   close: () ->
