@@ -30,6 +30,10 @@ ruby:
     .col-md-12.form-group
       = form.label :email, with_required_mark(t(:email))
       = form.text_field :email, class: 'required form-control form-control-md', value: form.object.email, required: 'required'
+
+- if !signed_in?
+  = link_to 'Sign in with Facebook', fb_auth_path(site_version: current_site_version.code), class: 'btn btn-facebook btn-black btn-md'
+
   / Temporary location for heading.
   h2.checkout-section-title 2. Address Details
 
