@@ -1,6 +1,5 @@
 module Preferences
   class ShoppingBag < Base
-    # Not using meta programming until we have more positions
     def free_styling_key
       "#{site_version.code}_free_styling_key"
     end
