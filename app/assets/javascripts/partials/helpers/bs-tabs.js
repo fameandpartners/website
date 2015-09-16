@@ -4,7 +4,7 @@
 
   var $tabs = $('.js-tabs-home-collection li');
 
-  $('.js-tabs-home-collection a').on('click', function(e) {
+  $('.js-tabs-home-collection ul a').on('click', function(e) {
     e.preventDefault();
     $(this).tab('show');
   });

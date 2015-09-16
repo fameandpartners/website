@@ -332,19 +332,16 @@
 
 // Main Content area V-2
 .home-main-content {
+  margin-top: 30px;
 
   .main {
 
     .media-wrap,
     .tabs.vertical {
       margin-bottom: 30px;
-    }
 
-    .media-wrap {
-      height: 240px;
-
-      &.lrg {
-        height: 426px;
+      &:last-child {
+        margin-bottom: 0;
       }
 
     }

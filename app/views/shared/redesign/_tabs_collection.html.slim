@@ -2,19 +2,19 @@
 
   ul
     li.active
-      a href='#collection1' data-toggle="tab" collection 1 long long link
+      a href='#collection1' data-toggle="tab" Make a Statement Collection
     li
-      a href='#collection2' data-toggle="tab" collection 2
+      a href='#collection2' data-toggle="tab" Luxe Collection
     li
-      a href='#collection3' data-toggle="tab" collection 3
+      a href='#collection3' data-toggle="tab" Here comes the Sun Collection
 
   .tab-wrap
-    a.tab.active#collection1 href='javascript:;'
-      = image_tag 'home-page-tiles/collection-tab-1.jpg', alt: 'Something here'
-    a.tab#collection2 href='javascript:;'
-      = image_tag 'home-page-tiles/collection-tab-1.jpg', alt: 'Something here'
-    a.tab#collection3 href='javascript:;'
-      = image_tag 'home-page-tiles/collection-tab-1.jpg', alt: 'Something here'
+    = link_to '/', id: 'collection1', class: 'tab active'
+      = image_tag 'home-page-tiles/tab-collectionbox-1.jpg', alt: 'Make a Statement Collection'
+    = link_to '/lookbook/the-luxe-collection', id: 'collection2', class: 'tab'
+      = image_tag 'home-page-tiles/tab-collectionbox-2.jpg', alt: 'Luxe Collection'
+    = link_to '/lookbook/here-comes-the-sun', id: 'collection3', class: 'tab'
+      = image_tag 'home-page-tiles/tab-collectionbox-3.jpg', alt: 'Here comes the Sun Collection'
     a.navigator.btn-prev.js-navigator-prev href='javascript:void(0)'
       .icon.icon-arrow-left
       .hide-visually Previous tab

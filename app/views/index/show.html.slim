@@ -1,32 +1,21 @@
 .page-content.index
-  ul.rslides
-    - @banner.each do |banner|
-      li
-        = link_to LocalizeUrlService.localize_url(banner.url, current_site_version), title: banner.title do
-          = image_tag banner.attachment(:original), alt: banner.presentation, class: "img-responsive portrait-img #{banner.css_class}"
+  .media-wrap
+    // TODO: create helper for multisource images
+    img src='/assets/home-page-tiles/hero-sml.jpg' srcset='/assets/home-page-tiles/hero-med.jpg 768w, /assets/home-page-tiles/hero-full.jpg 1024w' alt='Bambi'
 
 /! Content Section
 section.container.content-block.home-main-content
   .row
     .main.col-md-7
-      .media-wrap.lrg.skin-light
-        = image_tag 'home-page-tiles/tile-sale.jpg', alt: 'Something here'
-        .title-wrap
-          .title
-            h4 Lorem ipsum dolor sit amet
+      = link_to '/dresses/lace', class: 'media-wrap'
+        = image_tag 'home-page-tiles/tile-amazing-lace.jpg', alt: 'AMAZING LACE - Shop our lace dress edit'
       = render 'shared/redesign/tabs_collection'
-      .media-wrap.skin-light
-        = image_tag 'home-page-tiles/tile-bambi.jpg', alt: 'Something here'
-        .title-wrap
-          .title
-            h4 Bambi x Fame
-      .media-wrap
-        = image_tag 'home-page-tiles/tile-free-shipping.jpg', alt: 'Something here'
-      .media-wrap.skin-light
-        = image_tag 'home-page-tiles/tile-category.jpg', alt: 'Something here'
-        .title-wrap
-          .title
-            h4 Lorem ipsum dolor sit amet
+      = link_to '/dresses/two-piece', class: 'media-wrap'
+        = image_tag 'home-page-tiles/tile-double-or-nothing.jpg', alt: 'DOUBLE OR NOTHING - Discover our best two-piece styles'
+      = link_to '/getitquick', class: 'media-wrap'
+        = image_tag 'home-page-tiles/tile-express-making.png', alt: 'Express making - Dresses made in 48 hours.'
+      = link_to '/bridesmaid-dresses', class: 'media-wrap'
+        = image_tag 'home-page-tiles/tile-bridesmaid-chic.jpg', alt: 'BRIDESMAID CHIC - Getting it right for your #girlsquad'
 
     aside.col-md-5
       = render 'shared/redesign/blog_posts'
