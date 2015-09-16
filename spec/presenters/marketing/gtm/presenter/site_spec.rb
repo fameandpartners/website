@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Marketing::Gtm::SitePresenter, type: :presenter do
+describe Marketing::Gtm::Presenter::Site, type: :presenter do
   let(:site_version) { build_stubbed(:site_version, permalink: 'au') }
 
   subject(:presenter) { described_class.new(current_site_version: site_version) }
 
-  it_behaves_like 'a Marketing::Gtm::BasePresenter'
+  it_behaves_like 'a Marketing::Gtm::Presenter::Base'
 
   describe '#body' do
     context 'given a current_site_version' do

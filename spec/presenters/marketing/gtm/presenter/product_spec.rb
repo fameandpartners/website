@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Marketing::Gtm::ProductPresenter, type: :presenter do
+describe Marketing::Gtm::Presenter::Product, type: :presenter do
   let(:product_price) { build_stubbed(:price, amount: 12.34, currency: 'AUD') }
   let(:product) { build_stubbed(:spree_product, name: 'Super Dress') }
   let(:taxon) { build_stubbed(:taxon, name: 'Jeans') }
@@ -74,7 +74,7 @@ describe Marketing::Gtm::ProductPresenter, type: :presenter do
 
   subject(:presenter) { described_class.new(product_presenter: product_presenter) }
 
-  it_behaves_like 'a Marketing::Gtm::BasePresenter'
+  it_behaves_like 'a Marketing::Gtm::Presenter::Base'
 
   describe '#body' do
     it 'returns hash with product info' do
