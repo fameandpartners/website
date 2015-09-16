@@ -1,11 +1,3 @@
-- if masterpass_available?
-  - if !masterpass_payment_method.prefers_test_mode? && masterpass_payment_method.server_mode == Mastercard::Common::PRODUCTION
-    = javascript_include_tag 'https://masterpass.com/lightbox/Switch/integration/MasterPass.client.js'
-  / = javascript_include_tag 'https://masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
-  - else
-    = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/integration/MasterPass.client.js'
-    / = javascript_include_tag 'https://sandbox.masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js'
-
 ruby:
   shopping_bag_init = "
     window.app.shopping_bag = new ShoppingBag({

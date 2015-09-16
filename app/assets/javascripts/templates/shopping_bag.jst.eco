@@ -83,8 +83,17 @@
       </div>
     </form>
   </div>
-  <div class="col-lg-12 no-padding-left no-padding-lg text-center">
-    <img id="buyWithMasterPass" src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_180x042px.png" alt="Buy with MasterPass" <% if @cart.item_count != 0: %>class="btn"<% end %>>
-    <p><a href="http://www.mastercard.com/mc_us/wallet/learnmore/en">Learn More</a></p>
-  </div>
+
+  <% if @cart.masterpass_available: %>
+    <% if @cart.masterpass_is_production: %>
+        <script src="https://masterpass.com/lightbox/Switch/integration/MasterPass.client.js" type="text/javascript"></script>
+    <% else: %>
+      <script src="https://sandbox.masterpass.com/lightbox/Switch/integration/MasterPass.client.js" type="text/javascript"></script>
+    <% end %>
+
+    <div class="col-lg-12 no-padding-left no-padding-lg text-center">
+      <img id="buyWithMasterPass" src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_180x042px.png" alt="Buy with MasterPass" <% if @cart.item_count != 0: %>class="btn"<% end %>>
+      <p><a href="http://www.mastercard.com/mc_us/wallet/learnmore/en">Learn More</a></p>
+    </div>
+  <% end %>
 </div>

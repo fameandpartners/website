@@ -4,6 +4,7 @@ require 'mastercard_masterpass_api'
 module Spree
   class MasterpassController < StoreController
     include SslRequirement
+    include CheckoutHelper
 
     ssl_required :cart, :cartcallback, :confirm, :cancel
 
@@ -79,9 +80,7 @@ module Spree
       @data.verifier = params['oauth_verifier']
       @data.checkout_resource_url = params['checkout_resource_url']
       handle_pairing_callback if params['pairing_token'] && params['pairing_verifier']
-    end
 
-    def cartpostback
       # get access token
       access_token_response = @service.get_access_token(
           payment_method.access_url,
@@ -94,6 +93,94 @@ module Spree
               @data.checkout_resource_url, @data.access_token
           ));
 
+      # edit() from checkout_controller_decorator (address step)
+      unless signed_in?
+        @user = Spree::User.new(
+            email: current_order.email,
+            first_name: current_order.user_first_name,
+            last_name: current_order.user_last_name
+        )
+      end
+
+      # update first/last names, email,...
+      # Need to get country_id, state_id, ship_address validation
+      billing_country = available_countries_for_current_zone.any?{|country| country.name == @data.checkout.card.billingAddress.country}
+      billing_country_id = !billing_country.nil? ? billing_country.id : ''
+      billing_state = available_states_for_current_zone.any?{|state| state.name == @data.checkout.card.billingAddress.countrySubdivision}
+      billing_state_id = !billing_state.nil? ? billing_state.id : ''
+
+      shipping_country = available_countries_for_current_zone.any?{|country| country.name == @data.checkout.card.shippingAddress.country}
+      shipping_country_id = !shipping_country.nil? ? shipping_country.id : ''
+      shipping_state = available_states_for_current_zone.any?{|state| state.name == @data.checkout.card.shippingAddress.countrySubdivision}
+      shipping_state_id = !shipping_state.nil? ? shipping_state.id : ''
+
+      object_params = {
+          :order => {
+            :bill_address_attributes => {
+                :email => @data.checkout.contact.emailAddress,
+                :firstname => @data.checkout.contact.firstName,
+                :lastname => @data.checkout.contact.lastName,
+                :address1 => @data.checkout.card.billingAddress.line1,
+                :address2 => @data.checkout.card.billingAddress.line2,
+                :city => @data.checkout.card.billingAddress.city,
+                :state_id => billing_state_id,
+                :country_id => billing_country_id,
+                :phone => @data.checkout.contact.phoneNumber,
+                :zipcode => @data.checkout.card.billingAddress.postalCode
+            },
+            :ship_address_attributes => {
+                :firstname => @data.checkout.shippingAddress.recipientName,
+                :lastname => @data.checkout.shippingAddress.recipientName,
+                :address1 => @data.checkout.shippingAddress.line1,
+                :address2 => @data.checkout.shippingAddress.line2,
+                :city => @data.checkout.shippingAddress.city,
+                :state_id => shipping_state_id,
+                :country_id => shipping_country_id,
+                :phone => @data.checkout.shippingAddress.recipientPhoneNumber,
+                :zipcode => @data.checkout.shippingAddress.postalCode
+            }
+          }
+        }
+      registration = Services::UpdateUserRegistrationForOrder.new(current_order, try_spree_current_user, object_params)
+      registration.update
+      if registration.new_user_created?
+        fire_event("spree.user.signup", order: current_order)
+        sign_in :spree_user, registration.user
+      end
+      if !registration.successfull?
+        # respond_with(current_order) do |format|
+        #   format.html { redirect_to checkout_state_path(current_order.state) }
+        # end
+        return
+      end
+
+      if current_order.update_attributes(object_params[:order])
+        fire_event('spree.checkout.update')
+
+        if current_order.next
+          state_callback(:after)
+        else
+          flash[:error] = t(:payment_processing_failed)
+          respond_with(current_order) do |format|
+            format.html{ redirect_to checkout_state_path(current_order.state) }
+            format.js{ render 'spree/checkout/update/failed' }
+          end
+          return
+        end
+
+        respond_with(current_order) do |format|
+          format.html{ redirect_to checkout_state_path(@order.state) }
+          format.js{ render 'spree/checkout/update/success' }
+        end
+      else
+        respond_with(current_order) do |format|
+          format.html { render 'spree/checkout/edit' }
+          format.js { render 'spree/checkout/update/failed' }
+        end
+      end
+    end
+
+    def cartpostback
       order = current_order || raise(ActiveRecord::RecordNotFound)
       if params[:mpstatus] == 'success'
         if current_order.confirmation_required?
