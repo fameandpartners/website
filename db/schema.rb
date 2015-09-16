@@ -55,145 +55,6 @@ ActiveRecord::Schema.define(:version => 20150902182659) do
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
 
-  create_table "blog_categories", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "user_id"
-    t.integer  "posts_count"
-    t.string   "slug"
-  end
-
-  add_index "blog_categories", ["slug"], :name => "index_blog_categories_on_slug"
-  add_index "blog_categories", ["user_id"], :name => "index_blog_categories_on_user_id"
-
-  create_table "blog_celebrities", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "user_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-    t.datetime "featured_at"
-    t.string   "slug"
-    t.integer  "celebrity_photo_votes_count"
-    t.integer  "primary_photo_id"
-  end
-
-  add_index "blog_celebrities", ["featured_at"], :name => "index_blog_celebrities_on_featured_at"
-  add_index "blog_celebrities", ["primary_photo_id"], :name => "index_blog_celebrities_on_primary_photo_id"
-  add_index "blog_celebrities", ["slug"], :name => "index_blog_celebrities_on_slug"
-  add_index "blog_celebrities", ["user_id"], :name => "index_blog_celebrities_on_user_id"
-
-  create_table "blog_celebrity_photo_votes", :force => true do |t|
-    t.integer  "vote_type"
-    t.integer  "user_id"
-    t.integer  "celebrity_photo_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
-  add_index "blog_celebrity_photo_votes", ["celebrity_photo_id"], :name => "index_blog_celebrity_photo_votes_on_celebrity_photo_id"
-  add_index "blog_celebrity_photo_votes", ["user_id"], :name => "index_blog_celebrity_photo_votes_on_user_id"
-
-  create_table "blog_celebrity_photos", :force => true do |t|
-    t.integer  "celebrity_id"
-    t.integer  "post_id"
-    t.integer  "user_id"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.integer  "likes_count"
-    t.integer  "dislikes_count"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.datetime "published_at"
-  end
-
-  add_index "blog_celebrity_photos", ["celebrity_id"], :name => "index_blog_celebrity_photos_on_celebrity_id"
-  add_index "blog_celebrity_photos", ["post_id"], :name => "index_blog_celebrity_photos_on_post_id"
-  add_index "blog_celebrity_photos", ["published_at"], :name => "index_blog_celebrity_photos_on_published_at"
-  add_index "blog_celebrity_photos", ["user_id"], :name => "index_blog_celebrity_photos_on_user_id"
-
-  create_table "blog_events", :force => true do |t|
-    t.string   "name"
-    t.string   "slug"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "blog_events", ["slug"], :name => "index_blog_events_on_slug"
-  add_index "blog_events", ["user_id"], :name => "index_blog_events_on_user_id"
-
-  create_table "blog_post_photos", :force => true do |t|
-    t.integer  "post_id"
-    t.integer  "user_id"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
-  add_index "blog_post_photos", ["post_id"], :name => "index_blog_post_photos_on_post_id"
-  add_index "blog_post_photos", ["user_id"], :name => "index_blog_post_photos_on_user_id"
-
-  create_table "blog_posts", :force => true do |t|
-    t.string   "title"
-    t.text     "body"
-    t.integer  "user_id"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.datetime "published_at"
-    t.datetime "occured_at"
-    t.integer  "category_id"
-    t.string   "slug"
-    t.integer  "post_type_id"
-    t.integer  "post_photos_count"
-    t.integer  "primary_photo_id"
-    t.integer  "event_id"
-    t.datetime "featured_at"
-    t.string   "description"
-    t.string   "video_url",         :limit => 512
-    t.string   "primary_type"
-  end
-
-  add_index "blog_posts", ["category_id", "published_at"], :name => "index_blog_posts_on_category_id_and_published_at"
-  add_index "blog_posts", ["event_id"], :name => "index_blog_posts_on_event_id"
-  add_index "blog_posts", ["post_type_id"], :name => "index_blog_posts_on_post_type_id"
-  add_index "blog_posts", ["slug"], :name => "index_blog_posts_on_slug"
-  add_index "blog_posts", ["user_id"], :name => "index_blog_posts_on_user_id"
-
-  create_table "blog_preferences", :force => true do |t|
-    t.string   "key"
-    t.text     "value"
-    t.string   "value_type"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "blog_preferences", ["key"], :name => "index_blog_preferences_on_key"
-
-  create_table "blog_promo_banners", :force => true do |t|
-    t.string   "url"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.integer  "user_id"
-    t.string   "title"
-    t.integer  "position"
-    t.boolean  "published"
-    t.text     "description"
-  end
-
-  add_index "blog_promo_banners", ["published"], :name => "index_blog_promo_banners_on_published"
-  add_index "blog_promo_banners", ["user_id"], :name => "index_blog_promo_banners_on_user_id"
-
   create_table "bridesmaid_party_events", :force => true do |t|
     t.integer  "spree_user_id"
     t.datetime "wedding_date"
@@ -1352,10 +1213,10 @@ ActiveRecord::Schema.define(:version => 20150902182659) do
     t.boolean  "is_active"
     t.decimal  "discount_size"
     t.integer  "discount_type"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "name"
-    t.boolean  "sitewide",              :default => false
+    t.boolean  "sitewide",      :default => false
     t.boolean  "customisation_allowed", :default => false
   end
 
@@ -1392,7 +1253,6 @@ ActiveRecord::Schema.define(:version => 20150902182659) do
     t.datetime "deleted_at"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
-    t.integer  "position",             :default => 0
   end
 
   create_table "spree_skrill_transactions", :force => true do |t|
@@ -1615,23 +1475,6 @@ ActiveRecord::Schema.define(:version => 20150902182659) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "title"
-  end
-
-  create_table "taggings", :force => true do |t|
-    t.integer  "tag_id"
-    t.integer  "taggable_id"
-    t.string   "taggable_type"
-    t.integer  "tagger_id"
-    t.string   "tagger_type"
-    t.string   "context"
-    t.datetime "created_at"
-  end
-
-  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
-
-  create_table "tags", :force => true do |t|
-    t.string "name"
   end
 
   create_table "user_style_profile_taxons", :force => true do |t|
