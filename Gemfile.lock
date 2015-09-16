@@ -552,9 +552,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-byebug (3.1.0)
-      byebug (~> 4.0)
-      pry (~> 0.10)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
     psych (2.0.13)
@@ -752,7 +749,6 @@ GEM
       multi_json (~> 1.3)
       rake
       rest-client (~> 1.6)
-    titleize (1.3.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -798,6 +794,7 @@ DEPENDENCIES
   bootstrap-sass
   bourbon
   business_time
+  byebug
   canonical-rails!
   capybara
   ckeditor
@@ -835,7 +832,6 @@ DEPENDENCIES
   oink
   paperclip
   pg
-  pry-byebug
   pry-rails
   psych (~> 2.0.13)
   quiet_assets
@@ -875,7 +871,6 @@ DEPENDENCIES
   timecop
   timers (= 1.1.0)
   tire
-  titleize
   uglifier (= 1.3.0)
   unicorn
   whenever

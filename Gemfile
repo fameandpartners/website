@@ -20,7 +20,6 @@ gem 'ckeditor'
 gem 'default_value_for'
 gem 'tire'
 gem 'redis-rails'
-gem 'titleize'
 gem 'autoprefixer-rails'
 
 # Monitoring & Events
@@ -60,8 +59,6 @@ gem 'sitemap_generator'
 gem 'fog'
 
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
-
-gem 'pry-rails'
 
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_banner', '~> 1.3.0'
@@ -117,6 +114,8 @@ group :assets, :development, :test do
 end
 
 group :development, :test do
+  gem 'pry-rails'
+  gem 'byebug'
   gem 'awesome_print'
   gem 'capybara'
   gem 'compass'
@@ -128,7 +127,6 @@ group :development, :test do
   # gem 'minitest'
   gem 'net-ssh', '~> 2.7.0'
   gem 'oink'
-  gem 'pry-byebug'
   gem 'quiet_assets'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-collection_matchers'
