@@ -15,6 +15,8 @@ window.ShoppingBag = class ShoppingBag
 
     @$overlay   = $(options.overlay || '#shadow-layer')
     @$container = $(options.container || '#cart')
+    @masterpass_link = options.masterpass_link
+
 
     _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler', 'couponFormSubmitHandler', 'removeProductCustomizationHandler', 'removeProductMakingOptionHandler', 'masterpassOpenHandler')
 
@@ -51,17 +53,18 @@ window.ShoppingBag = class ShoppingBag
     )
     @$overlay.addClass('is-visible')
 
+#    Add event listener to MasterPass button
+    $(@masterpass_link || '#buyWithMasterPass').unbind('click');
+    $(@masterpass_link || '#buyWithMasterPass').on('click', @masterpassOpenHandler)
+    return
+
   openHandler: (e) ->
     e.preventDefault() if e
     if @cart.isLoaded()
       @open()
     else
       @cart.one('load', @open)
-      self = this
-      @cart.load(false, () ->
-        $('#buyWithMasterPass').on('click', self.masterpassOpenHandler)
-      )
-
+      @cart.load()
 
   closeHandler: (e) ->
     e.preventDefault() if e
@@ -95,7 +98,7 @@ window.ShoppingBag = class ShoppingBag
     return if @cart.item_count == 0
 
     @masterpass_clicked = true
-    spinner = (new Spinner).spin()
+    spinner = new Spinner().spin();
     @$overlay.append spinner.el;
     @$overlay.addClass('most-front');
 

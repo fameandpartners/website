@@ -26,7 +26,7 @@ window.helpers.ShoppingCart = class ShoppingCart
 
   # request to force data requesting from server
   # if already loaded, do nothing. it should be done by other methods
-  load: (force = false, callback=null) ->
+  load: (force = false) ->
     if @isLoaded() && !force
       @trigger('load')
     else
@@ -38,7 +38,6 @@ window.helpers.ShoppingCart = class ShoppingCart
       ).success((data) =>
         @updateData(data)
         @trigger('load')
-        callback() if (callback)
       ).error( () =>
         @loaded = false
       )
