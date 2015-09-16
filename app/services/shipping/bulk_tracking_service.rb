@@ -17,10 +17,21 @@ module Shipping
       bulk_update.line_item_updates.each do |liu|
         next unless liu.line_item && liu.make_state.present?
 
-        valid_new_state = Fabrication::STATES.fetch(liu.make_state) { |state| Fabrication::STATES.key(state) }
+        valid_new_state = Fabrication::STATES.fetch(liu.make_state) do |provided_state|
+          matched_state_value = Fabrication::STATES.values.detect do |v|
+            v.downcase == provided_state.downcase.strip
+          end
+          [
+            Fabrication::STATES.key(provided_state),
+            Fabrication::STATES.key(matched_state_value),
+          ].compact.first
+        end
 
         if valid_new_state
           UpdateFabrication.state_change(liu.line_item, user, valid_new_state)
+        else
+          liu.match_errors = liu.match_errors | [:invalid_make_state]
+          liu.save
         end
       end
     end
