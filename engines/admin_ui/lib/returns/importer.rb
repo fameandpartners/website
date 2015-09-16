@@ -2,7 +2,7 @@ module Returns
   class Importer < ::Importers::FileImporter
     def import
       preface
-      # create_or_update_records_from_sheet
+      create_or_update_records_from_sheet
       associate_item_returns
 
 
@@ -167,9 +167,7 @@ module Returns
 
             calculated_attributes[:requested_at]           = Chronic.parse(mmr.return_requested_on).try(:to_date).try(:iso8601)
             calculated_attributes[:refunded_at]            = Chronic.parse(mmr.date_refunded).try(:to_date).try(:iso8601)
-            if mmr.product.present?
-              calculated_attributes[:product_style_number] = Spree::Product.where(name: mmr.product.to_s.strip).map(&:sku).first
-            end
+            calculated_attributes[:product_style_number]   = matched_line_item.product.sku
             calculated_attributes[:product_customisations] = !!matched_line_item.personalization.present?
             calculated_attributes[:order_paid_currency]    = matched_line_item.order.currency.to_s
 
