@@ -37,7 +37,7 @@ table
       = form_for bulk_update do |f|
         = f.hidden_field :mark_valid_shipped, value: 'true'
         = f.button '4. Ship Now!', confirm: 'Cannot be undone! Are you sure?'
-table
+table.bulk_update_table
   thead
     tr
       th colspan=11 CSV
@@ -46,18 +46,18 @@ table
       th colspan=10 Update Process
     tr
       th #
-      th order_date
-      th order_number
-      th line_item
-      th style_name
+      th order date
+      th order number
+      th line item
+      th style name
       th size
-      th quantity
+      th qty
       th colour
       th make_state
-      th tracking_number
-      th dispatch_date
+      th tracking number
+      th dispatch date
       /th delivery_method
-      th match_errors
+      th match errors
       th order
       th line_item
       th make state
@@ -73,17 +73,17 @@ table
 
   - bulk_update.line_item_updates.each do |liu|
     tr
-      td = liu.row_number
-      td = liu.order_date
-      td = liu.order_number
-      td = liu.raw_line_item
-      td = liu.style_name
-      td = liu.size
-      td = liu.quantity
-      td = liu.colour
-      td = liu.make_state
-      td = liu.tracking_number
-      td = liu.dispatch_date
+      td.csv = liu.row_number
+      td.csv = liu.order_date
+      td.csv = liu.order_number
+      td.csv = liu.raw_line_item
+      td.csv = liu.style_name
+      td.csv = liu.size
+      td.csv = liu.quantity
+      td.csv = liu.colour
+      td.csv = liu.make_state
+      td.csv = liu.tracking_number
+      td.csv = liu.dispatch_date
       /td = liu.delivery_method
       td = liu.match_errors.to_sentence
       td = link_to(liu.order_number, admin_order_path(liu.order_number)) if liu.order_id
