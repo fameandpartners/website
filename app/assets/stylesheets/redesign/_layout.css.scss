@@ -9,7 +9,7 @@ body {
 }
 
 @media (max-width: 992px) {
-  .sticky-header #content-container {
+  #content-container {
     margin-top: $mega-menu-mobile-height;
   }
 }

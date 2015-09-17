@@ -12,6 +12,8 @@
 
 header {
   position: relative;
+  width: 100%;
+  z-index: 102;
 
   #locale-selector-mobile-container{
     position: initial;
@@ -33,6 +35,15 @@ header {
   top: 0;
 }
 
+@media (max-width: 992px) {
+
+  header {
+    position: fixed;
+    top: 0;
+  }
+
+}
+
 .logo{
   width: 100%;
 }
@@ -41,7 +52,6 @@ header {
   position: relative;
   text-transform: uppercase;
   font-size: 1.2rem;
-  z-index: 102;
 }
 
 .all-dresses {
@@ -1353,7 +1363,7 @@ li#cart-trigger {
     margin-left: 15%;
     position: absolute;
     height: 450px;
-    z-index: 102;
+    z-index: 101;
     display: none;
   }
 

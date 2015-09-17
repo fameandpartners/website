@@ -90,7 +90,7 @@ $color-white: #FFF;
   }
 
   @media (max-width: 992px) {
-    &.sticky-header #content-container {
+    #content-container {
       margin-top: $mega-menu-mobile-height + $locale-warn-mobile-height;
     }
   }
@@ -101,7 +101,7 @@ $color-white: #FFF;
   }
 
   @media (max-width: $bootstrap-md-width) {
-    &.sticky-header .alert-sale {
+    .alert-sale {
       top: $mega-menu-mobile-height + $locale-warn-mobile-height;
     }
   }
@@ -112,7 +112,7 @@ $color-white: #FFF;
   }
 
   @media (max-width: 992px) {
-    &.sticky-header .search-bar {
+    .search-bar {
       top: $mega-menu-mobile-height + 20px; // Locale selector doesn't have a fixed height
     }
   }
