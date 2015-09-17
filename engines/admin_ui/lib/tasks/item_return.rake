@@ -10,7 +10,7 @@ namespace :item_return do
     ReturnRequestItem.find_each { |rri| rri.push_return_event }
   end
 
-  desc 'import from spreadsheet'
+  desc 'import from spreadsheet, set FILE_PATH env var'
   task :import_from_returns_sheet => :environment do
     require 'returns/importer'
 
@@ -19,5 +19,8 @@ namespace :item_return do
     raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
     Returns::Importer.new(ENV['FILE_PATH']).import
   end
+
+  desc 'import all, set FILE_PATH env var'
+  task :import_all => [:import_from_requests, :import_from_returns_sheet]
 end
 
