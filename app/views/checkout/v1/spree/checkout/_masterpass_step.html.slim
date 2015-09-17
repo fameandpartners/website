@@ -5,17 +5,13 @@
 
   h2.checkout-section-title Billing Address Details
   .form-wrapper data-hook='billing'
-    .row
-      .col-md-12.form-group
-        = form.label :email, with_required_mark(t(:email))
-        = form.text_field :email, class: 'required form-control form-control-md', value: @masterpass_data.contact.emailAddress, required: 'required', readonly: true
     = form.fields_for :bill_address do |bill_form|
-      = render partial: 'masterpass_address', locals: {form: bill_form, address_type: 'billing'}
+      = render partial: 'masterpass_address', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
 
   h2.checkout-section-title Delivery Address Details
   .form-wrapper data-hook='shipping'
     = form.fields_for :ship_address do |ship_form|
-      = render partial: 'masterpass_address', locals: {form: ship_form, address_type: 'shipping'}
+      = render partial: 'masterpass_address', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
 
 
   - if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
