@@ -121,6 +121,7 @@ class ItemReturnEvent < ActiveRecord::Base
     :product_style_number,
     :product_customisations,
     :order_paid_currency,
+    :order_paid_amount
   ]
 
   attr_accessible *LEGACY_DATA_IMPORT_ATTRIBUTES

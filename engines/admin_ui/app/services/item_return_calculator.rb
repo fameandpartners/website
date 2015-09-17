@@ -52,12 +52,12 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.contact_email        = event.email
     @item_return.comments             = "#{event.comments}\n#{event.notes}"
     @item_return.order_payment_method = event.payment_method
-    @item_return.order_paid_amount    = Money.parse(event.spree_amount_paid.presence || event.amount_paid).fractional
+    @item_return.order_paid_amount    = event.order_paid_amount
     @item_return.order_paid_currency  = event.order_paid_currency
     # @item_return.order_payment_ref    = nil
     @item_return.refund_method        = event.refund_method
-    @item_return.refund_status        = event.refund_status.to_s.downcase.strip.gsub('yes', 'complete').titleize
-    @item_return.refund_amount        = event.refund_amount_in_cents
+    @item_return.refund_status        = event.refund_status.to_s.downcase.gsub('yes', 'complete').titleize.strip.presence
+    @item_return.refund_amount        = event.refund_amount_in_cents if event.refund_amount_in_cents > 0
     @item_return.refunded_at          = event.refunded_at
     @item_return.product_name         = event.product
     @item_return.product_style_number = event.product_style_number

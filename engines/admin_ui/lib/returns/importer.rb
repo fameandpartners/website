@@ -58,7 +58,7 @@ module Returns
             :deleted_row                => row['Deleted']
           }.map{ |k,v| [k,v.to_s.strip.presence] }.to_h
 
-          info [row_data[:rj_ident], row_data[:spree_order_number] ].join(' ')
+          info ['create_mmr', row_data[:rj_ident].to_s.ljust(5), row_data[:spree_order_number].to_s.ljust(10) ].join(' ')
           ManuallyManagedReturn.find_or_create_by_row_number(row_number) do |mmr|
             mmr.update_attributes(row_data)
             mmr.save
@@ -181,12 +181,13 @@ module Returns
             calculated_attributes[:product_style_number]   = matched_line_item.product.sku
             calculated_attributes[:product_customisations] = !!matched_line_item.personalization.present?
             calculated_attributes[:order_paid_currency]    = matched_line_item.order.currency.to_s
+            calculated_attributes[:order_paid_amount]      = Money.parse(matched_line_item.order.total.to_s).fractional
 
             whitelisted_attributes = mmr.attributes.symbolize_keys.slice(*ItemReturnEvent::LEGACY_DATA_IMPORT_ATTRIBUTES)
 
             event = item_return.events.legacy_data_import.create!(calculated_attributes.merge(whitelisted_attributes))
 
-            mmr.item_return = item_return
+            mmr.item_return       = item_return
             mmr.item_return_event = event
 
             if existing_event.present?
