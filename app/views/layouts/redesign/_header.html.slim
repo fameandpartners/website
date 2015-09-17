@@ -3,6 +3,7 @@ ruby:
     (function(){
       var updateShoppingBagCounter = function() {
         $('#cart-item-count').html(window.app.shopping_cart.data.item_count);
+        $('#cart-trigger .num').text(window.app.shopping_cart.data.item_count);
       };
       window.app.shopping_cart.on('change', updateShoppingBagCounter);
       updateShoppingBagCounter();
@@ -13,7 +14,8 @@ ruby:
     (function(){
       var updateMoodboardCounter = function() {
         var $counter = $('#moodboard-counter');
-        $counter.html('Moodboard: ' + window.app.user_moodboard.data.item_count);
+        $counter.html(window.app.user_moodboard.data.item_count);
+        $('.masthead:last .num').text(window.app.user_moodboard.data.item_count);
       };
       window.app.user_moodboard.on('change', updateMoodboardCounter);
       updateMoodboardCounter();
@@ -66,6 +68,7 @@ ruby:
   header
 
     .nav-menu.nav-alert-top
+      = render 'layouts/redesign/header/locale_selector/mobile'
       .container-fluid.nav-menu-container
         = render 'layouts/redesign/header/locale_warn/base', warning: @locale_warning
         = render 'layouts/redesign/header/gray_top_banner/base'
@@ -77,55 +80,25 @@ ruby:
                 button.navbar-toggle.visible-xs.visible-sm#side-menu-trigger type="button"
                   = image_tag('Hamburger.svg', height: '25px')
 
-          .masthead.pull-left.hidden-xs
-            = link_to root_path
-              = image_tag src='logo/new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
 
-
-          .masthead.pull-left.visible-xs
+          .masthead.pull-left.visible-xs.visible-sm.mobile-logo-area
             = link_to root_path do
               = image_tag src='logo/logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
 
-          ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
-            = render partial: 'layouts/redesign/mega_menu/shop'
-            = render partial: 'layouts/redesign/mega_menu/lookbook'
-            li.menu-item
-              = link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link'
 
-          ul.secondary.pull-right
-            - if Features.active?(:moodboard)
-              li.menu-item.hidden-xs.hidden-sm
-                = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger' do
-                  span.visible-sm
-                    = image_tag "Heart.svg"
-                  span.hidden-sm.hidden-xs#moodboard-counter
-                    | Moodboard &nbsp;
+          .masthead.cart.pull-right.visible-xs.visible-sm
+            #cart-trigger.menu-item
+              span.num#cart-item-count 0
+              = image_tag 'homepage/shopping_bag.png', class: 'shopping-bag'
 
-            li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs
-              = render "layouts/redesign/header/my_account_dropdown"
+          .masthead.pull-right.visible-xs.visible-sm
+            .menu-item
+              span.num#moodboard-counter 0
+              a href='/wishlist'
+                i.fa.fa-heart
+              span.pipe |
 
-            li.menu-item
-              a.menu-item--link.search href="#"
-                = image_tag "_icons/search.svg", class: "nav-mobile-logo"
-              .search-bar.invis
-                a.close-search href="#"
-                  = image_tag "close.svg", alt: 'Close'
-                .container-fluid.search-form
-                  .col-md-6.col-md-offset-3
-                    .col-md-10
-                      .input-group.margin-bottom-sm
-                        = form_tag search_path, method: :get do
-                          input.form-control id='input-search' name='q' placeholder=("Search here...") type="text"
-                          span
-                            button.invis-fix Enter
 
-            li#cart-trigger.menu-item
-              = link_to '#', class: 'menu-item--link' do
-                span
-                  = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
-                  span#cart-item-count 0
-
-      = render 'layouts/redesign/header/locale_selector/mobile'
 
     - unless disable_notices?
       = render 'layouts/redesign/notices'
@@ -134,61 +107,190 @@ ruby:
   #sideMenu
     nav.navbar.navbar-default.visible-xs.visible-sm
       .navbar-header
-        a.navbar-brand href="#"  SHOP
+        a.navbar-brand href="#"  MENU
         a#close
-          = image_tag('Hamburger.svg', height: '25px')
+          = image_tag('Hamburger_white.png', height: '25px')
       .main-menu
-        ul.nav.navbar-nav
-          li
-            a
-              | EVENTS
-              span.arrow
-                = image_tag('icon-arrow-right.png')
-            ul.dropdown-menu.mobileAnimation
-              = render :partial => '/layouts/redesign/event'
-          li
-            a
-              | STYLES
-              span.arrow
-                = image_tag('icon-arrow-right.png')
-            ul.dropdown-menu.mobileAnimation
-              = render :partial => '/layouts/redesign/style'
-          li
-            a
-              | COLORS
-              span.arrow
-                = image_tag('icon-arrow-right.png')
-            ul.dropdown-menu.mobileAnimation
-              = render :partial => '/layouts/redesign/color'
-          li
-            a
-              | EXPRESS MAKING
-              span.arrow
-                = image_tag('icon-arrow-right.png')
-            ul.dropdown-menu.mobileAnimation
-              li = link_to 'Dresses made in 48 hours', fast_making_dresses_path
-          li
-            a
-              | LOOKBOOK
-              span.arrow
-                = image_tag('icon-arrow-right.png')
-            ul.dropdown-menu.mobileAnimation
-              li = link_to 'The Luxe Collection', luxe_collection_path
-              li = link_to 'Bohemian Summer', bohemian_summer_collection_path
-              li = link_to 'Besties and Bridesmaids Collection', bridesmaid_collection_path
-              li = link_to "I'll Have What She's Having", all_size_collection_path
-              li = link_to 'Here Comes The Sun', here_comes_the_sun_collection_path
+        div#new-this-week-menu
+          ul.nav.navbar-nav
+            li.normal-item
+              .text.text-back NEW THIS WEEK
+              .arrow
+                i.fa.fa-chevron-left
+                .back BACK
+            li.images-content
+              = react_component('NewThisWeekProducts',{device: 'mobile'}, { prerender: true })
 
-        .all-dresses
-          center
-            = button_to 'View all dresses', dresses_path, class: 'btn btn-block btn-black', method: :get
-        .clearfix
-        .account-login
-          = link_to profile_path, class: "menu-item--link active-hover", rel: 'nofollow' do
-            = image_tag "_icons/my-account.svg", class: 'nav-mobile-logo', alt: 'my account'
-            span
-              | Account login
+        div#dresses-menu
+          ul.nav.navbar-nav
+            li.normal-item
+              .text.text-back DRESSES
+              .arrow
+                i.fa.fa-chevron-left
+                .back BACK
+            li.grey-item
+              .text SHOP BY
+            li.normal-item
+              a href='/dresses'
+                .text View all dresses
+            li.normal-item
+              a href='#'
+                .text What's new
+            li.normal-item
+              = link_to 'Made in 48 hours', fast_making_dresses_path, class: 'text'
+            li.normal-item.no-border
+              a href='#'
+                .text Instagram
+            li.grey-item
+              .text STYLES
+            li.normal-item
+              = link_to 'Plus Size', build_taxon_path('Plus Size'), class: 'text'
+            li.normal-item
+              = link_to 'Two-Piece', build_taxon_path('Tow Piece'), class: 'text'
+            li.normal-item
+              = link_to 'One Shoulder', build_taxon_path('One-Shoulder'), class: 'text'
+            li.normal-item
+              = link_to 'Strapless', build_taxon_path('Strapless'), class: 'text'
+            li.normal-item
+              = link_to 'V-Neck', build_taxon_path('V-Neck'), class: 'text'
+            li.normal-item
+              = link_to 'Split', build_taxon_path('Split'), class: 'text'
+            li.normal-item
+              = link_to 'Backless', build_taxon_path('Backless'), class: 'text'
+            li.normal-item.no-border
+              = link_to 'Lace', build_taxon_path('Lace'), class: 'text'
 
+
+        div#events-menu
+          ul.nav.navbar-nav
+            li.normal-item
+              .text.text-back EVENTS
+              .arrow
+                i.fa.fa-chevron-left
+                .back BACK
+            li.normal-item
+              = link_to 'Formal', build_taxon_path('Formal'), class: 'text'
+            li.normal-item
+              = link_to 'Wedding', build_taxon_path('Wedding'), class: 'text'
+            li.normal-item
+              = link_to 'Birthday', build_taxon_path('Birthday'), class: 'text'
+            li.normal-item
+              = link_to 'Special Event', build_taxon_path('Special Event'), class: 'text'
+            li.normal-item
+              = link_to 'Ball Gowns', build_taxon_path('Ball Gowns'), class: 'text'
+            li.normal-item
+              = link_to 'Bridsmaid', bridesmaid_collection_path, class: 'text'
+            li.normal-item
+              = link_to 'Graduation', build_taxon_path('Graduation'), class: 'text'
+            li.normal-item
+              = link_to 'Prom', build_taxon_path('Prom'), class: 'text'
+            li.normal-item
+              = link_to 'Homecoming', build_taxon_path('Homecoming'), class: 'text'
+            li.normal-item
+              = link_to 'Sweet 16', build_taxon_path('Sweet 16'), class: 'text'
+            li.normal-item.no-border
+              = link_to 'Debutante', build_taxon_path('Debutante'), class: 'text'
+
+
+
+        div#lookbook-menu
+          ul.nav.navbar-nav
+            li.normal-item
+              .text.text-back LOOKBOOK
+              .arrow
+                i.fa.fa-chevron-left
+                .back BACK
+            li.images-content
+              .row
+                = image_tag 'mobile-sidebar/lookbook/1.png'
+                = image_tag 'mobile-sidebar/lookbook/2.png'
+              .row
+                = image_tag 'mobile-sidebar/lookbook/3.png'
+
+        div#magazine-menu
+          ul.nav.navbar-nav
+            li.normal-item
+              .text.text-back MAGAZINE
+              .arrow
+                i.fa.fa-chevron-left
+                .back BACK
+            li
+              a href='http://fameandpartners.tumblr.com/'
+                .gray-bg STEAL HER STYLE
+                .mag-image
+                  = image_tag "homepage/magazine/1.jpg"
+                  .image-text.text-center TAYLOR
+                .mag-image
+                  = image_tag "homepage/magazine/2.jpg"
+                  .image-text.text-center BEYONCE
+
+                .gray-bg BACKSTAGE PASS
+                .mag-image
+                  = image_tag "homepage/magazine/2.jpg"
+                  .image-text.text-center Blah blah blah
+                .mag-image
+                  = image_tag "homepage/magazine/3.jpg"
+                  .image-text.text-center Blah blah blah
+
+        ul.nav.navbar-nav#inner-main-menu
+          li
+            div id='side-search-area' class='row'
+              form accept-charset="UTF-8" action="/search" method="get" id="searchForm"
+                input type='text' id='side-search' placeholder='SEARCH' name='q'
+                = image_tag "_icons/search.svg", class: "side-search-icon", id: "side-search-icon"
+          li.normal-item#new-this-week-open
+            .text NEW THIS WEEK
+            .arrow
+              i.fa.fa-chevron-right
+          li.normal-item#dress-menu-open
+            .text DRESSES
+            .arrow
+              i.fa.fa-chevron-right
+          li.normal-item#event-menu-open
+            .text EVENTS
+            .arrow
+              i.fa.fa-chevron-right
+          li.normal-item#lookbook-menu-open
+            .text LOOKBOOK
+            .arrow
+              i.fa.fa-chevron-right
+          li.normal-item
+            a.text href='http://fameandpartners.tumblr.com/' MAGAZINE
+          li.normal-item
+            .text SALE
+          li.normal-item
+            .text MADE FOR YOU
+          li.normal-item
+            .text JOIN US
+          li.normal-item
+            div
+              = link_to 'ACCOUNT LOGIN', '/profile', class: 'text'
+          li.normal-item.no-border
+            div
+              = link_to 'REGISTER NOW', '/signup?cl=login-form', class: 'text'
+
+          li.bottom-area
+            = link_to 'Why Shop With Us', '/why-us', class: 'bottom-area-text'
+          li.bottom-area
+            = link_to 'About Us', '/about', class: 'bottom-area-text'
+          li.bottom-area
+            = link_to 'FAQs & Shipping', '/faqs', class: 'bottom-area-text'
+          li.bottom-area
+            = link_to 'New Sizing', '/size-guide', class: 'bottom-area-text'
+          li.bottom-area
+            = link_to 'Terms', '/terms', class: 'bottom-area-text'
+          li.bottom-area
+            = link_to 'Get styling advice', '/style-consultation', class: 'bottom-area-text'
+          li.bottom-area
+            = link_to 'Fame Chain', '/fame-chain', class: 'bottom-area-text'
+          li.bottom-area
+            = link_to 'Contact US', '/contact/new', class: 'bottom-area-text'
 
 
 = render 'layouts/redesign/campaigns/auto_apply_promo_code'
+
+coffee:
+  $(document).ready ->
+    $("#side-search-area #side-search-icon").on 'click', ->
+      if $("#side-search-area #searchForm input").val() != ""
+        $("#side-search-area #searchForm").submit()
