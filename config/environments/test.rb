@@ -40,4 +40,9 @@ FameAndPartners::Application.configure do
 
   config.action_mailer.asset_host = 'http://fameandpartners.test'
 
+  # it's much easier to debug with uncompressed js
+  config.assets.debug = true
+
+  # allows to set session inside capybara
+  config.middleware.use RackSessionAccess::Middleware
 end

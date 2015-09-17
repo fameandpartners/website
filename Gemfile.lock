@@ -591,6 +591,9 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rack_session_access (0.1.1)
+      builder (>= 2.0.0)
+      rack (>= 1.0.0)
     rails (3.2.22)
       actionmailer (= 3.2.22)
       actionpack (= 3.2.22)
@@ -878,6 +881,7 @@ DEPENDENCIES
   psych (~> 2.0.13)
   quiet_assets
   rack-cors
+  rack_session_access
   rails (~> 3.2.22)
   react-rails (~> 1.2)
   redis-rails

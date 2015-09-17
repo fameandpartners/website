@@ -102,7 +102,6 @@ describe 'user', type: :feature, js: true do
     it "shows empty shopping bag" do
       find('#cart-trigger a').click
       wait_ajax_completion(page)
-      #save_screenshot('screenshot.png', full: true) # save screenshot
 
       expect(page).to have_selector('#cart', visible: true)
       expect(page).to have_selector('#cart .cart--call-to-actions', visible: true)
@@ -119,7 +118,6 @@ describe 'user', type: :feature, js: true do
       end
 
       expect(page.status_code).to eq(200) # 200 OK
-      save_screenshot('screenshot.png', full: true) # save screenshot
     end
   end
 
@@ -140,10 +138,8 @@ describe 'user', type: :feature, js: true do
     end
 
     it "allow user to move to dress details" do
-      save_screenshot('screenshot.png', full: true)
-
       begin
-        find('.products-collection .category--item a img').click
+        first('.products-collection .category--item a img').click
       rescue Capybara::Poltergeist::JavascriptError
       end
 
@@ -187,6 +183,48 @@ describe 'user', type: :feature, js: true do
 order = Spree::Order.last
       expect(order).not_to be_blank
       expect(order.item_count).to eq(1)
+    end
+  end
+
+  context "#checkout" do
+    # otherwise, items created inside :each loop, will be not available in request processing
+    before :all do
+      DatabaseCleaner.strategy = DatabaseCleaner::NullStrategy
+    end
+
+    after :all do
+      DatabaseCleaner.strategy = :transaction
+    end
+
+    before :each do
+      Spree::Order.destroy_all
+
+    end
+
+    let(:currency)  { SiteVersion.default.currency }
+    let(:product)   { Spree::Product.first }
+    let(:order)     { create(:spree_order, currency: currency) }
+
+    # create user
+    # create order with user
+    # create payment methods
+    #
+    #
+    it 'works' do
+      order.line_items = [ create(:dress_item, variant_id: product.variants.first.id) ]
+
+      page.set_rack_session(
+        order_id: order.id,
+        access_token: order.token,
+        country_code: SiteVersion.default.zone.members.first.zoneable.iso
+      )
+
+      begin
+        visit '/checkout'
+      rescue Capybara::Poltergeist::JavascriptError
+      end
+
+      save_screenshot('screenshot.png', full: true)
     end
   end
 end

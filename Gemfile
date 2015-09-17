@@ -123,6 +123,7 @@ group :development, :test do
   gem 'awesome_print'
   gem 'capybara'
   gem 'poltergeist'
+  gem 'rack_session_access'
   gem 'compass'
   gem 'launchy', '2.2.0'
   gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
