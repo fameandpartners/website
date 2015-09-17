@@ -89,6 +89,7 @@ class ReturnRequestItem < ActiveRecord::Base
         qty:                    rri.quantity,
         requested_action:       rri.action,
         requested_at:           rri.created_at,
+        request_id:             rri.id,
         customer_name:          rri.order.full_name,
         reason_category:        rri.reason_category,
         reason_sub_category:    rri.reason,
@@ -103,7 +104,7 @@ class ReturnRequestItem < ActiveRecord::Base
       }
 
       # TODO PICK THE SUCCESSFUL ONE
-      if rri.order.payments.last
+      if rri.order.payments.completed.last
         payment = ::Reports::Payments::PaymentReportPresenter.from_payment(rri.order.payments.last)
         attrs.merge!(
           order_payment_method: payment.payment_type,

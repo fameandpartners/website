@@ -1,6 +1,8 @@
 class ItemReturnEvent < ActiveRecord::Base
   include EventSourcedRecord::Event
 
+  # Use the top attr accessible for attributes which are shared,
+  # and use specific ones just above each event.
 
   attr_accessible :order_number,
                   :line_item_id,
@@ -32,6 +34,7 @@ class ItemReturnEvent < ActiveRecord::Base
     validates  :line_item_id, presence: true
   end
 
+  attr_accessible :request_id
   event_type :return_requested do
     attributes :order_number,
           :line_item_id,
@@ -40,6 +43,7 @@ class ItemReturnEvent < ActiveRecord::Base
           :reason_category,
           :reason_sub_category,
           :request_notes,
+          :request_id,
           :contact_email,
           :product_name,
           :product_style_number,

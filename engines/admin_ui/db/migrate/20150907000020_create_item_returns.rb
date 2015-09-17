@@ -6,6 +6,7 @@ class CreateItemReturns < ActiveRecord::Migration
       t.integer  :qty
       t.string   :requested_action
       t.datetime :requested_at
+      t.references :request
       t.string   :reason_category
       t.string   :reason_sub_category
       t.text     :request_notes
