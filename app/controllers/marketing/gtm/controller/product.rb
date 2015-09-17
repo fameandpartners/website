@@ -4,11 +4,11 @@ module Marketing
       module Product
         extend ActiveSupport::Concern
 
-        included do
-          before_filter { self.gtm_page_type = 'product'.freeze }
-        end
-
         private
+
+        def gtm_page_type
+          'product'
+        end
 
         def append_gtm_product(product_presenter)
           gtm_product = Marketing::Gtm::Presenter::Product.new(product_presenter: product_presenter)

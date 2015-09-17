@@ -13,15 +13,11 @@ module Marketing
           helper_method :append_gtm_page
         end
 
-        def gtm_page_type
-          @gtm_page_type || DEFAULT_PAGE_TYPE
-        end
-
-        def gtm_page_type=(type = DEFAULT_PAGE_TYPE)
-          @gtm_page_type = type
-        end
-
         private
+
+        def gtm_page_type
+          DEFAULT_PAGE_TYPE
+        end
 
         def include_gtm_container
           user_presenter   = Presenter::User.new(spree_user: spree_current_user, request_ip: request.ip)
