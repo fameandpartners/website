@@ -8027,6 +8027,47 @@ xheader
   padding-top:10px;
   padding-left:35px
 }
+#cart .shopping-bag-text span{
+  float: left;
+}
+#cart .shopping-bag-text span:not(:nth-child(2)){
+  float: left;
+  margin-top: 5px;
+}
+#cart .shopping-bag-text i:nth-child(1){
+  background-image: url('../../cart/coathanger.svg');
+  width: 20px;
+  height: 15px;
+  margin-top: 2px;
+  margin-right: 5px;
+  display: block;
+  float: left;
+  background-size: contain;
+  clear: both;
+}
+#cart .shopping-bag-text i:nth-child(3){
+  background-image: url('../../cart/plane.svg');
+  width: 20px;
+  height: 21px;
+  margin-top: 3px;
+  margin-right: 5px;
+  display: block;
+  float: left;
+  background-size: contain;
+  clear: both;
+}
+#cart .shopping-bag-text i:nth-child(5){
+  background-image: url('../../cart/mobile.svg');
+  width: 22px;
+  height: 19px;
+  margin-top: 5px;
+  margin-right: 3px;
+  margin-left: 1px;
+  display: block;
+  float: left;
+  background-size: contain;
+  clear: both;
+}
 #cart .shopping-bag-payment-methods {
   text-align:center;
   margin-top:20px;
