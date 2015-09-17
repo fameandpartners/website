@@ -1,6 +1,11 @@
 ENV["RAILS_ENV"] ||= 'test'
 
-require File.expand_path("../../config/environment", __FILE__)
+# Tire tries to connect Elasticsearch on boot, and webmock blocks it.
+# Source: https://github.com/karmi/retire/issues/136
+require 'webmock'
+WebMock.allow_net_connect!
+
+require File.expand_path('../../config/environment', __FILE__)
 
 require 'rspec/rails'
 require 'capybara/rails'
