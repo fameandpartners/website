@@ -138,6 +138,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'timecop'
   gem 'vcr', '~> 2.9.3'
+  gem 'webmock', '~> 1.21.0'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'thin'
