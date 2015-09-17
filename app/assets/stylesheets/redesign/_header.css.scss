@@ -10,7 +10,9 @@
 
 /////////// mega menu //////////
 
-header{
+header {
+  position: relative;
+
   #locale-selector-mobile-container{
     position: initial;
     ul{
@@ -24,13 +26,19 @@ header{
     }
   }
 
-
-
 }
+
+.sticky-header header {
+  position: fixed;
+  top: 0;
+}
+
 .logo{
   width: 100%;
 }
+
 .nav-menu {
+  position: relative;
   text-transform: uppercase;
   font-size: 1.2rem;
   z-index: 102;
@@ -1345,7 +1353,7 @@ li#cart-trigger {
     margin-left: 15%;
     position: absolute;
     height: 450px;
-    z-index: 2;
+    z-index: 102;
     display: none;
   }
 

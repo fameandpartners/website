@@ -84,45 +84,46 @@ $color-white: #FFF;
 
 .locale-warning-active {
   // Content Container
-  #content-container {
+
+  &.sticky-header #content-container {
     margin-top: $mega-menu-desktop-height + $locale-warn-desktop-height;
   }
 
   @media (max-width: 992px) {
-    #content-container {
+    &.sticky-header #content-container {
       margin-top: $mega-menu-mobile-height + $locale-warn-mobile-height;
     }
   }
 
   // TODO - refactor out this to use a proper page wrapper which auto adjusts.
-  .alert-sale {
+  &.sticky-header .alert-sale {
     top:      $mega-menu-desktop-height + $locale-warn-desktop-height;
   }
 
   @media (max-width: $bootstrap-md-width) {
-    .alert-sale {
+    &.sticky-header .alert-sale {
       top: $mega-menu-mobile-height + $locale-warn-mobile-height;
     }
   }
 
   // Search
-  .search-bar {
+  &.sticky-header .search-bar {
     top: $mega-menu-desktop-height + $locale-warn-desktop-height;
   }
 
   @media (max-width: 992px) {
-    .search-bar {
+    &.sticky-header .search-bar {
       top: $mega-menu-mobile-height + 20px; // Locale selector doesn't have a fixed height
     }
   }
 
   // Mega menu drop down
-  .mega-menu {
+  &.sticky-header .mega-menu {
     top: $mega-menu-desktop-height + $locale-warn-desktop-height;
   }
 
   // Account drop-down
-  .account {
+  &.sticky-header .account {
     top: -83px;
   }
 }
