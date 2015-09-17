@@ -4,7 +4,6 @@ require 'mastercard_masterpass_api'
 module Spree
   class MasterpassController < StoreController
     include SslRequirement
-    include CheckoutHelper
 
     ssl_required :cart, :cartcallback, :confirm, :cancel
 
@@ -76,23 +75,29 @@ module Spree
 
     def cartcallback
       # handle oauth callback
-      @data.request_token = params['oauth_token']
-      @data.verifier = params['oauth_verifier']
-      @data.checkout_resource_url = params['checkout_resource_url']
-      handle_pairing_callback if params['pairing_token'] && params['pairing_verifier']
+      # @data.request_token = params['oauth_token']
+      # @data.verifier = params['oauth_verifier']
+      # @data.checkout_resource_url = params['checkout_resource_url']
+      # handle_pairing_callback if params['pairing_token'] && params['pairing_verifier']
+      #
+      # # get access token
+      # access_token_response = @service.get_access_token(
+      #     payment_method.access_url,
+      #     @data.request_token, @data.verifier)
+      # @data.access_token = access_token_response.oauth_token
+      #
+      # # get the checkout data
+      # @data.checkout = AllServicesMappingRegistry::Checkout.from_xml(
+      #     @service.get_payment_shipping_resource(
+      #         @data.checkout_resource_url, @data.access_token
+      #     ));
 
-      # get access token
-      access_token_response = @service.get_access_token(
-          payment_method.access_url,
-          @data.request_token, @data.verifier)
-      @data.access_token = access_token_response.oauth_token
+      save_session_data
 
-      # get the checkout data
-      @data.checkout = AllServicesMappingRegistry::Checkout.from_xml(
-          @service.get_payment_shipping_resource(
-              @data.checkout_resource_url, @data.access_token
-          ));
+      redirect_to :controller => 'spree/checkout', :action => 'edit', :state => 'masterpass'
+    end
 
+    def test
       # edit() from checkout_controller_decorator (address step)
       unless signed_in?
         @user = Spree::User.new(
@@ -104,14 +109,18 @@ module Spree
 
       # update first/last names, email,...
       # Need to get country_id, state_id, ship_address validation
-      billing_country = available_countries_for_current_zone.any?{|country| country.name == @data.checkout.card.billingAddress.country}
+      billing_country = Spree::Country.where("iso=? or iso_name=? or name=?",
+                                             @data.checkout.card.billingAddress.country, @data.checkout.card.billingAddress.country, @data.checkout.card.billingAddress.country).first
       billing_country_id = !billing_country.nil? ? billing_country.id : ''
-      billing_state = available_states_for_current_zone.any?{|state| state.name == @data.checkout.card.billingAddress.countrySubdivision}
+      billing_state = Spree::State.where("(abbr=? or name=?) and country_id=?",
+                                         @data.checkout.card.billingAddress[:countrySubdivision], @data.checkout.card.billingAddress[:countrySubdivision], billing_country_id).first
       billing_state_id = !billing_state.nil? ? billing_state.id : ''
 
-      shipping_country = available_countries_for_current_zone.any?{|country| country.name == @data.checkout.card.shippingAddress.country}
+      shipping_country = Spree::Country.where("iso=? or iso_name=? or name=?",
+                                              @data.checkout.shippingAddress.country, @data.checkout.shippingAddress.country, @data.checkout.shippingAddress.country).first
       shipping_country_id = !shipping_country.nil? ? shipping_country.id : ''
-      shipping_state = available_states_for_current_zone.any?{|state| state.name == @data.checkout.card.shippingAddress.countrySubdivision}
+      shipping_state = Spree::State.where("(abbr=? or name=?) and country_id=?",
+                                          @data.checkout.shippingAddress[:countrySubdivision], @data.checkout.shippingAddress[:countrySubdivision], shipping_country_id).first
       shipping_state_id = !shipping_state.nil? ? shipping_state.id : ''
 
       object_params = {
@@ -122,18 +131,18 @@ module Spree
                 :lastname => @data.checkout.contact.lastName,
                 :address1 => @data.checkout.card.billingAddress.line1,
                 :address2 => @data.checkout.card.billingAddress.line2,
-                :city => @data.checkout.card.billingAddress.city,
+                :city => @data.checkout.card.billingAddress[:city],
                 :state_id => billing_state_id,
                 :country_id => billing_country_id,
-                :phone => @data.checkout.contact.phoneNumber,
-                :zipcode => @data.checkout.card.billingAddress.postalCode
+                :phone => @data.checkout.contact[:phoneNumber],
+                :zipcode => @data.checkout.card.billingAddress[:postalCode]
             },
             :ship_address_attributes => {
                 :firstname => @data.checkout.shippingAddress.recipientName,
                 :lastname => @data.checkout.shippingAddress.recipientName,
                 :address1 => @data.checkout.shippingAddress.line1,
                 :address2 => @data.checkout.shippingAddress.line2,
-                :city => @data.checkout.shippingAddress.city,
+                :city => @data.checkout.shippingAddress[:city],
                 :state_id => shipping_state_id,
                 :country_id => shipping_country_id,
                 :phone => @data.checkout.shippingAddress.recipientPhoneNumber,

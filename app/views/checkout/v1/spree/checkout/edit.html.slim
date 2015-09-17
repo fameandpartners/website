@@ -19,15 +19,23 @@
 
         .checkout-breadcrumbs
           ol.breadcrumb
-            li class=('active' if current_step.eql?('address')) Your information
-            li class=('active' if current_step.eql?('payment')) Payment Method
+            - if current_step.eql?('masterpass')
+              li class='active' MasterPass
+            - else
+              li class=('active' if current_step.eql?('address')) Your information
+              li class=('active' if current_step.eql?('payment')) Payment Method
 
-        .checkout-step data-name="address"
-          = render 'address_step', current_step: current_step
+        - if current_step.eql?('address')
+          .checkout-step data-name="address"
+            = render 'address_step', current_step: current_step
 
-        .checkout-step data-name="payment"
-          - if current_step.eql?('payment')
+        - if current_step.eql?('payment')
+          .checkout-step data-name="payment"
             = render 'payment_step', current_step: current_step
+
+        - if current_step.eql?('masterpass')
+          .checkout-step data-name="masterpass"
+            = render 'masterpass_step', current_step: current_step
 
         .row : .comodo.visible-xs.text-center : p
           = image_tag "comodo-ssl.png", alt: "SSL", height: '35px', width: '112px', style: 'margin-top:25px;margin-bottom:25px'
