@@ -1,11 +1,12 @@
 - content_for :page_title do
   'Item Returns
-
-= datagrid_form_for @collection, :method => :get, url: item_returns_path
+.ibox
+  .ibox-content
+    = datagrid_form_for @collection, :method => :get, url: item_returns_path
+  .ibox-footer
+    = link_to "Download CSV", url_for(format: 'csv')
 
 = paginate @collection.assets, theme: 'admin_ui'
-
-= link_to "Download CSV", url_for(format: 'csv')
 
 div
   = datagrid_table @collection, html: {class: 'table table.condensed'}

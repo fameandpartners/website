@@ -7,7 +7,12 @@ class ItemReturnsGrid
     ItemReturn
   end
 
-  filter(:acceptance_status, :enum, :select => ItemReturn::STATES)
+  filter(:acceptance_status, :enum,
+         checkboxes: true,
+         allow_blank: true,
+         select: ItemReturn::STATES.map { |x| [x.to_s.humanize, x] },
+         default: -> { ItemReturn::STATES - [:refunded, :credit_note_issued] })
+  filter(:refund_status, :enum, select: -> { ItemReturn.pluck(:refund_status).uniq })
   filter(:order_number, :string) {|value| where("order_number ilike ?", "%#{value}%")}
   filter(:contact_email, :string) {|value| where("contact_email ilike ?", "%#{value}%")}
   filter(:product_style_number, :string, header: 'Style')
@@ -15,6 +20,8 @@ class ItemReturnsGrid
   filter(:customer_name, :string) {|value| where("customer_name ilike ?", "%#{value}%")}
 
   filter(:product_customisations, :xboolean)
+  filter(:custom1, :dynamic)
+  filter(:custom2, :dynamic)
 
   column :actions, :html => true do |item_return|
      link_to "manage", item_return_path(item_return)
@@ -23,7 +30,9 @@ class ItemReturnsGrid
 
   column :acceptance_status,      header: 'Status'
   column :customer_name
-  column :order_number,           header: 'Order', order: 'item_returns.order_number'
+  column :order_number,           header: 'Order', order: 'item_returns.order_number', html: true do |item_return|
+    link_to item_return.order_number, spree.admin_order_path(id: item_return.order_number)
+  end
   column :product_style_number,   header: 'Style'
   column :product_name,           header: 'Product'
   column :product_colour,         header: 'Colour'
