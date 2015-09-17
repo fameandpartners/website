@@ -121,8 +121,8 @@ module Products
             end,
             cropped_images: cropped_images_for(product_color_value),
             prices: {
-              aud: product.zone_price_for(au_site_version).amount,
-              usd: product.zone_price_for(us_site_version).amount
+              aud: product.price_in(au_site_version.currency).amount,
+              usd: product.price_in(us_site_version.currency).amount
             }
          }
 
