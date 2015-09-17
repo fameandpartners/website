@@ -1,0 +1,12 @@
+/* [Containers]
+-------------------------------------------------------*/
+.content-block {
+  margin-bottom: 30px;
+
+  // START - tablet
+  @include tablet {
+    width: 100%;
+  }
+  // END - tablet
+
+}
