@@ -1,0 +1,48 @@
+/ Question 10/11
+.quiz-section id="#{ question.name }-question"
+  .quiz-section-window
+    .quiz-section-title.quiz-section-title-pink
+      .grid-container
+        h4.quiz-section-number Question #{ question_position }/#{ question_total }
+        h2 
+          | Tell us about your upcoming events
+          br
+          | where you’ll need a dress.
+    .grid-container
+      .row.event-form
+        .col-2
+          label event name
+          input.form-control type="text" name='name'
+        .col-2
+          label event type
+          input.form-control type="text" name='event_type'
+        .col-2
+          label event date
+          input.form-control type="text" name='date'
+        .col-2
+          label &nbsp;
+          = link_to 'Add', '#', class: 'btn btn-primary btn-block', data: { action: 'add-event' }
+        .col-4
+          .row
+            .col-2.text-center
+              .btn.btn-text or
+            .col-10
+              = link_to 'import from facebook', '#', class: 'btn btn-facebook btn-block', data: { action: 'import-from-fb' }
+      
+      .row.events-list
+        = @user_style_profile.events.each do |event|
+          .event.col-4 data-id=(event.id) data-date=(event.date.strftime(I18n.t('date_format.backend'))) data-name=(event.name)
+            .event-tag
+              span = "#{ event.date.strftime(I18n.t('date_format.backend')) } - #{ event.name }"
+              .icon-cross data-action='delete-event'
+
+      .row
+        .col-6.col-next
+          - if question_position < question_total
+            = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
+          - else
+            = link_to 'Finish', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
+        .col-6.col-prev.text-right
+          = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
+/ @end Question 10/11
+/ ------------------

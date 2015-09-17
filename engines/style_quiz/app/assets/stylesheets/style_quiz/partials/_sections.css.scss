@@ -1,0 +1,286 @@
+// Question 1 
+.quiz-user-info {
+  padding: $quiz-grid-gutter 0;
+  position: relative;
+  @include background-image(linear-gradient(90deg, $peach-bg 0, $peach-bg 50%, $blue-bg 50%, $blue-bg 100%));
+
+  @media (max-width: $quiz-screen-phone) {
+    @include background-image(linear-gradient($peach-bg 0, $peach-bg 420px, $blue-bg 421px, $blue-bg 100%));
+  }
+  
+  // - or
+  &:before, &:after {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: $quiz-form-control-height;
+    height: $quiz-form-control-height;
+    margin: ($quiz-form-control-height / -2) 0 0 ($quiz-form-control-height / -2);
+    @media (max-width: $quiz-screen-phone) { top: 418px;}
+  }
+  &:before {
+    content: '';
+    background-color: #fff;
+    @include transform(rotate(45deg));
+  }
+  &:after {
+    content: 'OR';
+    font-weight: 500;
+    letter-spacing: 0.125em;
+    text-align: center;
+    line-height: $quiz-form-control-height;
+  }
+  
+  .form-control:focus {
+    background-color: $quiz-form-control-bg-focus;
+  }
+
+  // - facebook
+  .facebook-box {
+    color: #fff;
+    @media (max-width: $quiz-screen-phone) {
+      margin-top: 50px;
+      padding-top: 30px;
+    }
+    h2 { color: inherit;}
+    .btn + .btn { margin-left: 5px;}
+    .btn-facebook {
+      padding: 0;
+      width: $quiz-form-control-height;
+      color: $blue-bg;
+      background-color: #fff;
+      // height: 45px;
+      font-size: 30px;
+      letter-spacing: 0;
+      &:before {
+        background-color: #fff;
+      }
+    }
+    .btn-login {
+      color: $blue-bg;
+      background-color: #fff;
+    }
+    .or {
+      display: block;
+      text-align: center;
+      font-style: normal;
+      margin: 8px 0 12px;
+    }
+  }
+}
+// @end Question 1
+// -----------------
+
+// Question 4
+.size-picker {
+  margin: 20px 0;
+  font-size: 0;
+  text-align: center;
+  .size {
+    display: inline-block;
+    vertical-align: top;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    line-height: 60px;
+    text-align: center;
+    font-family: $font-family-secondary;
+    font-size: 45px;
+    margin: 0 15px;
+    cursor: pointer;
+
+    &.selected {
+      background-color: $pink-bg;
+    }
+  }
+}
+// @end Question 4
+// -----------------
+
+// Question 8 
+.rank-fasion {
+  margin: -40px 0 50px -10px;
+  @media (max-width: $quiz-screen-tablet) { 
+    margin-top: 0;
+    padding-top: 40px;
+  }
+  .rank-cell { 
+    max-width: 112px;
+  }
+}
+.rank-fasion-item-0 {
+  background: url('questions/fashion_importance/rank-fasion-0.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((57 / 112));
+  margin-bottom: -26px;
+}
+.rank-fasion-item-1 {
+  background: url('questions/fashion_importance/rank-fasion-1.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((19 / 112));
+}
+.rank-fasion-item-2 {
+  background: url('questions/fashion_importance/rank-fasion-2.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((35 / 112));
+}
+.rank-fasion-item-3 {
+  background: url('questions/fashion_importance/rank-fasion-3.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((56 / 112));
+}
+.rank-fasion-item-4 {
+  background: url('questions/fashion_importance/rank-fasion-4.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((84 / 112));
+}
+.rank-fasion-item-5 {
+  background: url('questions/fashion_importance/rank-fasion-5.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((119 / 112));
+  // padding-bottom: 106.3%; // fix
+}
+.rank-fasion-item-6 {
+  background: url('questions/fashion_importance/rank-fasion-6.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((164 / 112));
+}
+.rank-fasion-item-7 {
+  background: url('questions/fashion_importance/rank-fasion-7.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((220 / 112));
+}
+.rank-fasion-item-8 {
+  background: url('questions/fashion_importance/rank-fasion-8.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((293 / 112));
+}
+.rank-fasion-item-9 {
+  background: url('questions/fashion_importance/rank-fasion-9.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((387 / 112));
+  position: relative;
+  &:after {
+    content: '';
+    width: 102px;
+    height: 79px;
+    bottom: 100%;
+    right: -47px;
+    margin-bottom: -1px;
+    position: absolute;
+    background: url('questions/fashion_importance/rank-fasion-arrow.png') no-repeat;
+    background-size: cover;
+    z-index: 2;
+  }
+  &:hover:after,
+  .active &:after {
+    background-position: 0 100%;
+  }
+}
+// @end Question 8
+// -----------------
+
+// Question 9
+.rank-sexy .rank-cell { 
+  max-width: 117px;
+}
+.rank-sexy-item-0 {
+  background: url('questions/sexyness_importance/rank-sexy-0.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((61 / 117));
+}
+.rank-sexy-item-1 {
+  background: url('questions/sexyness_importance/rank-sexy-1.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((61 / 117));
+}
+.rank-sexy-item-2 {
+  background: url('questions/sexyness_importance/rank-sexy-2.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((123 / 117));
+}
+.rank-sexy-item-3 {
+  background: url('questions/sexyness_importance/rank-sexy-3.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((123 / 117));
+}
+.rank-sexy-item-4 {
+  background: url('questions/sexyness_importance/rank-sexy-4.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((184 / 117));
+}
+.rank-sexy-item-5 {
+  background: url('questions/sexyness_importance/rank-sexy-5.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((184 / 117));
+}
+.rank-sexy-item-6 {
+  background: url('questions/sexyness_importance/rank-sexy-6.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((245 / 117));
+}
+.rank-sexy-item-7 {
+  background: url('questions/sexyness_importance/rank-sexy-7.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((245 / 117));
+}
+.rank-sexy-item-8 {
+  background: url('questions/sexyness_importance/rank-sexy-8.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((307 / 117));
+}
+.rank-sexy-item-9 {
+  background: url('questions/sexyness_importance/rank-sexy-9.png') no-repeat;
+  background-size: cover;
+  padding-bottom: percentage((307 / 117));
+}
+// @end Question 9
+// -----------------
+
+// Question 10 
+.event-tag {
+  position: relative;
+  display: inline-block;
+  padding: $quiz-grid-gutter ($quiz-grid-gutter + 23px) $quiz-grid-gutter ($quiz-grid-gutter / 2);
+  text-transform: uppercase;
+  width: 100%;
+  background-color: $peach-bg;
+  .icon-cross {
+    position: absolute;
+    right: ($quiz-grid-gutter / 2);
+    top: 50%;
+    margin-top: -12px;
+  }
+}
+.event-form {
+  .col-2 {
+    @media (max-width: $quiz-screen-tablet) { width: (100% / 3);}
+  }
+  .col-4, .col-10 {
+    @media (max-width: $quiz-screen-tablet) { width: 2 * (100% / 3);}
+  }
+  .col-2, .col-4, .col-10 {
+    @media (max-width: $quiz-screen-phone) { width: 100%;}
+  }
+}
+// @end Question 10
+// -----------------
+
+// Question 11
+.prevent-someone-box {
+  margin-top: ($quiz-grid-gutter / -2);
+  background-color: $peach-bg;
+  img { display: block;}
+  .twin-dress {
+    margin-bottom: 20px;
+    width: 177px;
+    height: 51px;
+    display: inline-block;
+    background: url('quiz-twin.png') no-repeat;
+    background-size: cover;
+  }
+  .col-compact { padding: 0;}
+} 
+// @end Question 11
+// -----------------

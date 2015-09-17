@@ -1,0 +1,39 @@
+- content_for :head do
+  = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Forum'
+  = stylesheet_link_tag 'style_quiz/application'
+  = javascript_include_tag 'style_quiz/application'
+
+/ css:
+  / .quiz-section { display: none; }
+
+ruby:
+  current = params[:current]
+  current ||= @questions.index{|q| q.id == params[:question_id].to_i} if params[:question_id]
+
+  quiz_init_code = "
+    var questions_data  = #{ raw @questions.to_json(root: false) };
+    window.quiz = new StyleQuiz.Quiz({
+      questions_data: questions_data,
+      current: #{ current.to_i },
+      action: '#{ style_quiz.user_profile_path }',
+      quiz_path: '#{ style_quiz.root_path }',
+      show_mode: '#{ current.present? ? "unfinished" : "all" }',
+      settings: {
+        dateFormat: '#{ raw I18n.t('date_format.frontend', default: "dd/mm/yy") }',
+        locale: '#{ raw I18n.locale }'
+      }
+    });
+  "
+
+= content_for :inline_javascript do
+  = raw quiz_init_code
+
+// don't forget to add some placeholder / loading indicator
+
+- total_questions = @questions.size
+.quiz-sections-cutter.quiz-preloading
+  .quiz-sections-scroller
+    - @questions.each_with_index do |question, index|
+      = render template: question.template, locals: { question: question, question_position: index + 1, question_total: total_questions}
+
+= render 'style_quiz/shared/facebook'

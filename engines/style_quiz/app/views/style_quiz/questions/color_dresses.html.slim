@@ -1,0 +1,24 @@
+/ Question 3/11
+.quiz-section id="#{ question.name }-question"
+  .quiz-section-window
+    .quiz-section-title.quiz-section-title-peach
+      .grid-container
+        h4.quiz-section-number Question #{ question_position }/#{ question_total }
+        h2 
+          | What colour dresses do you
+          br
+          | like to wear?
+    .grid-container
+      .quiz-catalog.text-center
+        - question.answers.each do |answer|
+          .quiz-catalog-item class=(@user_style_profile.selected?(answer) ? 'selected' : '') data-value=(answer.id)
+            .quiz-catalog-picture
+              .model-mask style="background-color: #{ answer.value }"
+            .quiz-catalog-title
+              => answer.name.capitalize
+              .checkmark
+      .row
+        .col-6.col-next = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
+        .col-6.col-prev.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
+/ @end Question 3/11
+/ ------------------

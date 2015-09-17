@@ -1,0 +1,16 @@
+.new-style-quiz-tag
+  = f.field_container :name do  
+    = f.label :name do
+      = t(:name, default: 'Name')
+      span.required *
+      br
+    = f.text_field :name, class: 'name'
+    = f.error_message_on :name
+
+  = f.field_container :group do  
+    = f.label :group do
+      = t(:group, default: 'Group')
+      span.required *
+      br
+    = f.select :group, options_from_collection_for_select(::StyleQuiz::Tag::GROUPS, :to_s, :humanize)
+    = f.error_message_on :group

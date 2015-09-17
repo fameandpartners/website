@@ -32,6 +32,7 @@ path 'engines' do
   gem 'admin_ui'
   gem 'fame_favicon'
   gem 'inspinia-rails'
+  gem 'style_quiz'
 end
 
 # TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it,
@@ -62,7 +63,6 @@ gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_banner', '~> 1.3.0'
-
 
 # spree extensions for authentication
 gem 'spree_auth_devise',

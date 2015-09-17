@@ -1,0 +1,43 @@
+---
+- :name: black
+  :value: black
+  :group: hair
+- :name: brunette
+  :value: brunette
+  :group: hair
+- :name: auburn
+  :value: auburn
+  :group: hair
+- :name: red
+  :value: red
+  :group: hair
+- :name: strawberry blonde
+  :value: strawberry blonde
+  :group: hair
+- :name: blonde
+  :value: blonde
+  :group: hair
+- :name: platinum
+  :value: platinum
+  :group: hair
+- :name: coloured
+  :value: coloured
+  :group: hair
+- :name: brown
+  :value: brown
+  :group: eyes
+- :name: hazel
+  :value: hazel
+  :group: eyes
+- :name: green
+  :value: green
+  :group: eyes
+- :name: blue
+  :value: blue
+  :group: eyes
+- :name: grey
+  :value: grey
+  :group: eyes
+- :name: amber
+  :value: amber
+  :group: eyes

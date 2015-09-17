@@ -142,5 +142,16 @@ module FameAndPartners
         end
       end
     end
+
+    if Rails.env.development?
+      reload_gems = %w(style_quiz) # names of gems which should autoreload
+
+      require 'active_support/dependencies'
+      config.autoload_paths += Gem.loaded_specs.values.inject([]) do |a,gem|
+        a += gem.load_paths if reload_gems.include? gem.name;
+        a
+      end
+      ActiveSupport::Dependencies.explicitly_unloadable_constants += reload_gems.map { |gem| gem.classify }
+    end
   end
 end

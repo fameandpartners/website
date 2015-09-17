@@ -1,0 +1,20 @@
+/ Question 8/11
+.quiz-section id="#{ question.name }-question"
+  .quiz-section-window
+    .quiz-section-title.quiz-section-title-grey
+      .grid-container
+        h4.quiz-section-number Question #{ question_position }/#{ question_total }
+        h2 How important is fashion to you?
+        h4.font-family-secondary.text-uppercase - CLICK ON THE SCALE, FROM LEAST IMPORTANT TO VERY IMPORTANT
+    .grid-container
+      .rank-box-wrapper
+        .rank-fasion.rank-box
+          - question.answers.each do |answer|
+            .rank-cell data-value=(answer.id) class=( @user_style_profile.selected?(answer) ? 'selected' : '' )
+              / .checkmark.checkmark-lg
+              .rank-item class="rank-fasion-item-#{ answer.value } "
+      .row
+        .col-6.col-next = link_to 'Next', '#', class: 'btn btn-primary btn-block', data: { action: 'next' }
+        .col-6.col-prev.text-right = link_to 'Back', '#', class: 'btn btn-default btn-block', data: { action: 'previous' }
+/ @end Question 8/11
+/ ------------------

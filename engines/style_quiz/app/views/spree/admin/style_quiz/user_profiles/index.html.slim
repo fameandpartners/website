@@ -1,0 +1,50 @@
+= render partial: 'spree/admin/style_quiz/shared/sub_menu'
+
+- content_for :page_title do
+  = t(:listing_style_quiz_products)
+
+- content_for :sidebar_title do
+  = t(:search)
+
+- content_for :sidebar do
+  .box.align-center 
+    = search_form_for [:admin, :style_quiz, @search] do |f|
+      .field
+        = f.label t(:email)
+        = f.text_field :email_cont, class: 'fullwidth'
+      div
+        = button t(:search), 'icon-search'
+
+- if @user_profiles.blank?
+  .no-objects-found = t(:no_results) 
+- else
+
+  table.index.compact#style-quiz-user-profiles
+    colgroup
+      col style="width: 10%;"
+      col style="width: 20%;"
+      col style="width: 10%;"
+
+    thead
+      tr
+        th user
+        th answers
+        th Tools
+
+    tbody
+      - @user_profiles.each do |user_profile|
+        tr
+          td 
+            - if user_profile.user.present?
+              = link_to user_profile.user.fullname, admin_user_path(user_profile.user)
+            - else
+              = "#{ user_profile.fullname } (#{ user_profile.email })"
+          td 
+            ul
+              - user_profile.answers.group_by(&:question_id).each do |question_id, answers|
+                li 
+                  = answers.first.question.code
+                  | :
+                  = answers.map{|answer| link_to answer.name, edit_admin_style_quiz_question_answer_path(answer.question, answer.id) }.join(', ').html_safe
+          td 
+            = link_to 'View', admin_style_quiz_user_profile_path(user_profile)

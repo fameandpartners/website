@@ -40,7 +40,7 @@ class Spree::OmniauthFacebookAuthorizationsController < Spree::StoreController
     session[:email_reminder_promo] = params[:email_reminder_promo] if params.key?(:email_reminder_promo)
 
 
-    redirect_to spree.spree_user_omniauth_authorize_url(provider: :facebook, scope: 'email,public_profile,user_friends')
+    redirect_to spree.spree_user_omniauth_authorize_url(provider: :facebook, scope: 'email,public_profile,user_birthday,user_friends, user_events')
   end
 
   # can be used by application_controller filters to set proper redirects

@@ -32,6 +32,7 @@
 // Styleguide code
 //----------------
 //= require "styleguide/js/functions.js"
+//= require "styleguide/js/tab.js"
 //  require js/jquery.skippr.min.js # copied non-min version, to debug&patch
 // require js/main.js
 
@@ -52,6 +53,7 @@
 // Show old quiz in popup with iframe
 //-----------------------------------
 // require partials/style/popup
+//= require popups/login
 
 //= require partials/product_collection.js
 //require partials/product_customisation.js
@@ -89,6 +91,10 @@
 
 // campaigns
 //= require partials/fitgau_reminder
+
+// style profile
+//= require partials/style_profile/base.js.coffee
+//= require partials/style_profile/events_form.js.coffee
 
 jQuery(document).ready(function($){
   $('#forgot-password').on('click', function(e) {

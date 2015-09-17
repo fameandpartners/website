@@ -1,0 +1,21 @@
+.clearfix {
+  @include clearfix;
+}
+// Text helpers 
+.text-uppercase {
+  text-transform: uppercase;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.font-family-secondary {
+  font-family: $font-family-secondary;
+}
+// @end Text helpers
+// -----------------

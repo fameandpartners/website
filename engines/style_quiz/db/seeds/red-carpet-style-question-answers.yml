@@ -1,0 +1,291 @@
+---
+- :name: 1
+  :value: 1
+  :image: style_quiz/questions/red_carpet_style/81.jpg
+  :tags:
+  - Black
+  - Chiffon
+- :name: 2
+  :value: 2
+  :image: style_quiz/questions/red_carpet_style/82.jpg
+  :tags:
+  - Olive
+  - Taffeta
+- :name: 3
+  :value: 3
+  :image: style_quiz/questions/red_carpet_style/83.jpg
+  :tags:
+  - Black
+  - Mesh
+  - Lace
+- :name: 4
+  :value: 4
+  :image: style_quiz/questions/red_carpet_style/84.jpg
+  :tags:
+  - Sky Blue
+  - Ombre
+  - Tulle
+- :name: 5
+  :value: 5
+  :image: style_quiz/questions/red_carpet_style/85.jpg
+  :tags:
+  - Pale Blue
+  - Georgette
+- :name: 6
+  :value: 6
+  :image: style_quiz/questions/red_carpet_style/86.jpg
+  :tags:
+  - Red
+  - Tie Dye
+  - Georgette
+- :name: 7
+  :value: 7
+  :image: style_quiz/questions/red_carpet_style/87.jpg
+  :tags:
+  - Gold
+  - Lurex
+- :name: 8
+  :value: 8
+  :image: style_quiz/questions/red_carpet_style/88.jpg
+  :tags:
+  - Black
+  - Lace
+- :name: 9
+  :value: 9
+  :image: style_quiz/questions/red_carpet_style/89.jpg
+  :tags:
+  - Red
+  - Chiffon
+- :name: 10
+  :value: 10
+  :image: style_quiz/questions/red_carpet_style/90.jpg
+  :tags:
+  - Nude
+  - Beige
+  - Silk
+- :name: 11
+  :value: 11
+  :image: style_quiz/questions/red_carpet_style/91.jpg
+  :tags:
+  - Black
+  - Purple
+  - Stripes
+  - Chiffon
+  - Velvet
+- :name: 12
+  :value: 12
+  :image: style_quiz/questions/red_carpet_style/92.jpg
+  :tags:
+  - Cobalt Blue
+  - Jersey
+  - Stretch
+- :name: 13
+  :value: 13
+  :image: style_quiz/questions/red_carpet_style/93.jpg
+  :tags:
+  - Red
+  - Velvet
+  - Chiffon
+- :name: 14
+  :value: 14
+  :image: style_quiz/questions/red_carpet_style/94.jpg
+  :tags:
+  - Black
+  - White
+  - Cotton
+- :name: 15
+  :value: 15
+  :image: style_quiz/questions/red_carpet_style/95.jpg
+  :tags:
+  - Pale Blue
+  - Red
+  - Floral
+  - Taffeta
+- :name: 16
+  :value: 16
+  :image: style_quiz/questions/red_carpet_style/96.jpg
+  :tags:
+  - Black
+  - Silver
+  - Sequin
+- :name: 17
+  :value: 17
+  :image: style_quiz/questions/red_carpet_style/97.jpg
+  :tags:
+  - Silver
+  - Duchess Satin
+  - Chiffon
+- :name: 18
+  :value: 18
+  :image: style_quiz/questions/red_carpet_style/98.jpg
+  :tags:
+  - Black
+  - Lace
+  - Organza
+- :name: 19
+  :value: 19
+  :image: style_quiz/questions/red_carpet_style/99.jpg
+  :tags:
+  - Red
+  - Duchess Satin
+- :name: 20
+  :value: 20
+  :image: style_quiz/questions/red_carpet_style/100.jpg
+  :tags:
+  - Ivory
+  - Tulle
+  - Organza
+- :name: 21
+  :value: 21
+  :image: style_quiz/questions/red_carpet_style/101.jpg
+  :tags:
+  - Silver
+  - Grey
+  - Chiffon
+  - Duchess Satin
+- :name: 22
+  :value: 22
+  :image: style_quiz/questions/red_carpet_style/102.jpg
+  :tags:
+  - Multi
+  - White
+  - Digital
+  - Satin
+- :name: 23
+  :value: 23
+  :image: style_quiz/questions/red_carpet_style/103.jpg
+  :tags:
+  - Red
+  - Lace
+  - Chiffon
+- :name: 24
+  :value: 24
+  :image: style_quiz/questions/red_carpet_style/104.jpg
+  :tags:
+  - Cobalt Blue
+  - Mesh
+  - Jersey
+- :name: 25
+  :value: 25
+  :image: style_quiz/questions/red_carpet_style/105.jpg
+  :tags:
+  - Yellow
+  - Duchess Satin
+- :name: 26
+  :value: 26
+  :image: style_quiz/questions/red_carpet_style/106.jpg
+  :tags:
+  - Black
+  - Nude
+  - Tulle
+- :name: 27
+  :value: 27
+  :image: style_quiz/questions/red_carpet_style/107.jpg
+  :tags:
+  - White
+  - Ponti
+- :name: 28
+  :value: 28
+  :image: style_quiz/questions/red_carpet_style/108.jpg
+  :tags:
+  - White
+  - Sequin
+- :name: 29
+  :value: 29
+  :image: style_quiz/questions/red_carpet_style/109.jpg
+  :tags:
+  - Ivory
+  - Off White
+  - Chiffon
+- :name: 30
+  :value: 30
+  :image: style_quiz/questions/red_carpet_style/110.jpg
+  :tags:
+  - Black
+  - Tulle
+  - Organza
+- :name: 31
+  :value: 31
+  :image: style_quiz/questions/red_carpet_style/111.jpg
+  :tags:
+  - Blue
+  - Green
+  - Watercolour
+  - Chiffon
+- :name: 32
+  :value: 32
+  :image: style_quiz/questions/red_carpet_style/112.jpg
+  :tags:
+  - Black
+  - White
+  - Jersey
+- :name: 33
+  :value: 33
+  :image: style_quiz/questions/red_carpet_style/113.jpg
+  :tags:
+  - Blue
+  - Satin
+  - Crepe
+- :name: 34
+  :value: 34
+  :image: style_quiz/questions/red_carpet_style/114.jpg
+  :tags:
+  - Navy
+  - Teal
+  - Silk
+  - Satin
+- :name: 35
+  :value: 35
+  :image: style_quiz/questions/red_carpet_style/115.jpg
+  :tags:
+  - White
+  - Mint
+  - Georgette
+- :name: 36
+  :value: 36
+  :image: style_quiz/questions/red_carpet_style/116.jpg
+  :tags:
+  - Marine Blue
+  - Chiffon
+  - Georgette
+- :name: 37
+  :value: 37
+  :image: style_quiz/questions/red_carpet_style/117.jpg
+  :tags:
+  - White
+  - Blue
+  - Digital
+  - Satin
+  - Cotton
+- :name: 38
+  :value: 38
+  :image: style_quiz/questions/red_carpet_style/118.jpg
+  :tags:
+  - Multi
+  - Apricot
+  - Ikat
+  - Georgette
+- :name: 39
+  :value: 39
+  :image: style_quiz/questions/red_carpet_style/119.jpg
+  :tags:
+  - Red
+  - Cotton
+- :name: 40
+  :value: 40
+  :image: style_quiz/questions/red_carpet_style/120.jpg
+  :tags:
+  - Black
+  - Cream
+  - Satin
+  - Silk
+- :name: 41
+  :value: 41
+  :image: style_quiz/questions/red_carpet_style/125.jpg
+  :tags:
+    - none
+- :name: 42
+  :value: 42
+  :image: style_quiz/questions/red_carpet_style/126.jpg
+  :tags: 
+    - none

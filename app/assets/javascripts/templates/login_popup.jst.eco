@@ -1,0 +1,16 @@
+<div id="login-popup-form" style="width: 300px;">
+  <h4 class="text-center">Sign In</h4>
+  <div class="form-group">
+    <label for="email_address">Email address<span class="required">*</span></label>
+    <input class="form-control" type="text" size="30" name="email_address" id="email_address" required placeholder="email.address@example.com" tabindex='1' />
+  </div>
+  <div class="form-group">
+    <label for="password">Password<span class="required">*</span></label>
+    <input class="form-control" type="password" size="30" name="password" id="password" required tabindex='2' />
+  </div>
+  <p class="text-danger" style="display: none;">Invalid Login or Password</p>
+  <div class="form-group">
+    <p><input type="submit" value="Login" class="btn btn-block btn-black"></p>
+    <p><a class="btn btn-block btn-facebook" href='<%= @fb_auth_path %>'>Sign in with Facebook</a></p>
+  </div>
+</div>

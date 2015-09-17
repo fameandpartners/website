@@ -1,0 +1,131 @@
+// Form layout
+.form-group {
+  margin-bottom: $quiz-grid-gutter;
+} 
+.form-centered {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  max-width: $quiz-form-width;
+}
+// @end Form layout
+// -----------------
+
+// Form controls 
+.form-control {
+  display: block;
+  width: 100%;
+  height: $quiz-form-control-height;
+  padding: 0 10px;
+  font-size: 14px;
+  color: inherit;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid #000;
+
+  &:focus { outline: none;}
+}
+textarea.form-control {
+  height: auto;
+}
+// @end Form controls
+// -----------------
+
+// Buttons
+.btn {
+  font-size: 14px;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 0 $quiz-form-control-height;
+  line-height: $quiz-form-control-height;
+  margin-bottom: 0; 
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  white-space: nowrap;
+  border: 0;
+  letter-spacing: 0.125em;
+  text-decoration: none;
+}
+.btn-block {
+  width: 100%;
+  @media (min-width: $quiz-form-width) {
+    max-width: $quiz-form-width;
+  }
+}
+.btn-text {
+  padding-left: 0px;
+  padding-right: 0px;
+  cursor: default;
+}
+// - colors
+.btn-default {
+  color: #000;
+  background-color: $grey-bg;
+  &:hover, &:active, &:focus {
+    background-color: darken($grey-bg, 5%);
+    color: inherit;
+  }
+}
+.btn-primary {
+  color: #fff;
+  background-color: #000;
+  &:hover, &:active, &:focus {
+    background-color: #333;
+  }
+}
+.btn-facebook {
+  background-color: #3b5998;
+  position: relative;
+  color: #fff;
+  padding-left: (2 * $quiz-form-control-height);
+  &:before {
+    content: '\f09a';
+    font: normal normal normal 25px 'FontAwesome';
+    background-color: #354f88;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: $quiz-form-control-height;
+    line-height: $quiz-form-control-height + 5px;
+    text-align: center;
+  }
+  &.btn-block {
+    padding-right: 0;
+    padding-left: $quiz-form-control-height;
+  }
+}
+// @end Buttons
+// -----------------
+
+// Error message
+.quiz-error {
+  position: absolute;
+  // position: fixed;
+  z-index: 9;
+  text-align: center;
+  font-size: 18px;
+  // margin-top: -20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  left: 0;
+  // top: 50%;
+  // bottom: 0;
+  right: 0;
+  padding: 10px;
+  color: #fff;
+  background-color: red;
+} 
+.quiz-error-close {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  cursor: pointer;
+  margin-top: -12px;
+  &:before, &:after { background-color: #fff;}
+}
+// @end Error message
+// -----------------

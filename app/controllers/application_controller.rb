@@ -254,7 +254,15 @@ class ApplicationController < ActionController::Base
   def try_reveal_guest_activity
     if spree_user_signed_in? && session[:temporary_user_key].present?
       Activity.replace_temporary_keys(session[:temporary_user_key], try_spree_current_user)
-      session[:temporary_user_key] = nil
+      session.delete(:temporary_user_key)
+    end
+
+    if spree_user_signed_in? && session[:user_style_profile_token].present?
+      profile = StyleQuiz::UserProfile.find_by_token(session[:user_style_profile_token])
+      if profile && profile.user.blank?
+        profile.assign_to_user(current_spree_user)
+      end
+      session.delete(:user_style_profile_token)
     end
   end
 

@@ -36,17 +36,11 @@ javascript:
     $('a.buy').on('click', remove_and_link_to_product_page);
   });
 
-
-
-.user-account-page-title
-  .container
-    .page-title--details
-      h1.user-account-title.no-padding-bottom.text-white = @moodboard.title
+= render 'users/shared/style_profile'
 
 .page-content.user.moodboard.index
+  = render 'users/shared/tabs', active_tab: 'wishlist'
   .container.relative
-
-    = render 'users/shared/tabs', active_tab: 'wishlist'
     .row
       .col-md-12
         - if @moodboard.products.empty?

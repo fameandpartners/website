@@ -1,0 +1,14 @@
+
+= render partial: 'spree/shared/error_messages', locals: { target: @making_option }
+
+= form_for [:admin, :style_quiz, @tag] do |f|
+  fieldset data-hook="edit_style_quiz_tag"
+    legend align="center"
+      = t(:edit_style_quiz_tag)
+
+    = render partial: 'form', locals: { f: f }
+
+  div.form-buttons.filter-actions.actions data-hook="buttons"
+    = button t('actions.update'), 'icon-ok'
+      span.or = t(:or)
+    = link_to_with_icon 'icon-remove', t('actions.cancel'), admin_style_quiz_tag_path, class: 'button'

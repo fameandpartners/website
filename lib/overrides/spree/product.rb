@@ -7,9 +7,9 @@ module Overrides
         include Tire::Model::Search
         include Tire::Model::Callbacks
 
-        has_one :style_profile,
-                :class_name => '::ProductStyleProfile',
-                :foreign_key => :product_id
+        #has_one :style_profile,
+        #        :class_name => '::ProductStyleProfile',
+        #        :foreign_key => :product_id
 
         mapping do
           indexes :id, :index => :not_analyzed

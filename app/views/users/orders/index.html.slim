@@ -1,15 +1,9 @@
-.user-account-page-title
-  .container
-    .page-title--details
-      h1.user-account-title.no-padding-bottom.text-white My Orders
+= render 'users/shared/style_profile'
 
 .page-content.user.order.show
+  = render 'users/shared/tabs', active_tab: 'orders'
   .container.relative
-
-    = render 'users/shared/tabs', active_tab: 'orders'
-
     = render :partial =>'shared/redesign/flash_messages'
-
     .row
       .col-md-12
         - if @orders.empty?
