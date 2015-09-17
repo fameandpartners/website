@@ -7,6 +7,7 @@ require 'capybara/rails'
 require 'shoulda/matchers'
 require 'database_cleaner'
 require 'ffaker'
+require "rack_session_access/capybara"
 
 # Rails.application.railties.all { |r| r.eager_load! }
 
@@ -15,7 +16,16 @@ require 'ffaker'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 def seed_site_zone
-  zone = Spree::Zone.create(name: 'us')
+  country = Spree::Country.where({
+    iso_name: "UNITED STATES",
+    iso: "US", iso3: "USA",
+    name: "United States",
+    numcode: 840,
+    states_required: true
+  }).first_or_create
+  zone = Spree::Zone.where(name: 'us').first_or_create
+  zone.members.create(zoneable_id: country.id, zoneable_type: country.class.to_s)
+
   args = {
     permalink: 'us',
     name: 'us',
@@ -60,6 +70,11 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  config.before(:each, :js => true) do
+    #DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = DatabaseCleaner::NullStrategy
+  end
+
   Capybara.register_driver :poltergeist do |app|
     driver_options = {
       js_errors: true,
@@ -83,4 +98,8 @@ RSpec.configure do |config|
   Capybara.current_driver = :poltergeist
   Capybara.javascript_driver = :poltergeist
   Capybara.default_wait_time = 10
+end
+
+Rails.application.config do
+  config.middleware.use RackSessionAccess::Middleware
 end

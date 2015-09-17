@@ -122,6 +122,7 @@ group :development, :test do
   gem 'awesome_print'
   gem 'capybara'
   gem 'poltergeist'
+  gem 'rack_session_access'
   gem 'compass'
   gem 'database_cleaner', '0.9.1'
   gem 'factory_girl_rails', '4.2.1'
