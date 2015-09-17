@@ -56,8 +56,7 @@ module Returns
             :customers_notes            => row['CUSTOMER NOTES'],
             :quantity                   => row['QTY'],
             :deleted_row                => row['Deleted']
-          }
-
+          }.map{ |k,v| [k,v.to_s.strip.presence] }.to_h
 
           info [row_data[:rj_ident], row_data[:spree_order_number] ].join(' ')
           ManuallyManagedReturn.find_or_create_by_row_number(row_number) do |mmr|
