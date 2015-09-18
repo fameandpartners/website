@@ -15,6 +15,7 @@ def clean_old_test_data
   Spree::Product.destroy_all
   Spree::Taxon.delete_all
   Spree::Taxonomy.delete_all
+  Spree::PaymentMethod.destroy_all
 end
 
 # behaviour tests
@@ -35,6 +36,12 @@ def wait_ajax_completion(page)
     end
     sleep(0.5) # additional time to process & render
   end
+end
+
+def select_from_chosen(option_value, options)
+  field = find_field(options[:from], visible: false)
+  page.execute_script("$('##{field[:id]}').val('#{option_value}')")
+  page.execute_script("$('##{field[:id]}').trigger('chosen:updated').trigger('change')")
 end
 
 # debug tools
@@ -61,12 +68,16 @@ describe 'user', type: :feature, js: true do
 
     create(:shipping_method)
 
+    create(:state) # spree#state, us country will be created automatically
+
+    create(:pin_gateway) # we need to recreate
+
     product = create(:spree_product, :with_size_color_variants, position: 1)
     product.reload
   end
 
   before :each do
-    Spree::Order.destroy_all
+    Spree::Order.delete_all
     Rails.cache.clear
   end
 
@@ -198,19 +209,22 @@ order = Spree::Order.last
 
     before :each do
       Spree::Order.destroy_all
-
     end
 
     let(:currency)  { SiteVersion.default.currency }
     let(:product)   { Spree::Product.first }
     let(:order)     { create(:spree_order, currency: currency) }
 
+    let(:user)      { build(:spree_user) }
+    let(:address)   { build(:address) }
+
+    let(:state)     { Spree::State.find_by_abbr('AL') }
+    let(:country)   { state.try(:country) }
+
     # create user
     # create order with user
     # create payment methods
-    #
-    #
-    it 'works' do
+    it 'allows user to purchase item' do
       order.line_items = [ create(:dress_item, variant_id: product.variants.first.id) ]
 
       page.set_rack_session(
@@ -224,7 +238,50 @@ order = Spree::Order.last
       rescue Capybara::Poltergeist::JavascriptError
       end
 
-      save_screenshot('screenshot.png', full: true)
+      # fill address step
+
+      within('.checkout-form') do
+        fill_in 'order_bill_address_attributes_email',     with: user.email
+        fill_in 'order_bill_address_attributes_firstname', with: address.firstname
+        fill_in 'order_bill_address_attributes_lastname',  with: address.lastname
+        fill_in 'order_bill_address_attributes_address1',  with: address.address1
+        fill_in 'order_bill_address_attributes_city',      with: address.city
+        fill_in 'order_bill_address_attributes_phone',     with: address.phone
+        fill_in 'order_bill_address_attributes_zipcode',   with: address.zipcode
+
+        choose 'ship_to_address_Ship_to_this_address'
+      end
+
+      select_from_chosen(country.id, from: 'order_bill_address_attributes_country_id')
+      select_from_chosen(state.id, from: 'order_bill_address_attributes_state_id')
+
+      begin
+        find('button[name=pay_securely]').click
+      rescue Capybara::Poltergeist::JavascriptError
+      end
+
+      within('.checkout-form.credit_card') do
+        fill_in 'number',     with: 5520000000000000
+        fill_in 'name',       with: 'John Smith'
+        fill_in 'month',      with: Time.current.month
+        fill_in 'year',       with: Time.current.year
+        fill_in 'card_code',  with: '123'
+      end
+
+      begin
+        find('.checkout-form button.btn').click
+        wait_ajax_completion(page)
+      rescue Capybara::Poltergeist::JavascriptError
+      end
+
+      sleep(10)
+
+      order.reload
+      expect(order.state).to eq('complete')
+      expect(order.payment_state).to eq('paid')
+
+      # fill payment step
+      #save_screenshot('screenshot.png', full: true)
     end
   end
 end
