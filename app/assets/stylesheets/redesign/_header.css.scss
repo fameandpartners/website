@@ -1558,29 +1558,13 @@ li#cart-trigger {
       }
       .girl-text{
         position: relative;
+        width: 100%;
         .contain{
+          padding-top: 20px;
           color: white;
           font-weight: 600;
           text-align: center;
-          position: absolute;
           width: 100%;
-          top: 45px;
-          @media(max-width: 1300px)
-          {
-            top:105px;
-          }
-          @media(min-width: 1301px)and(max-width: 1500px)
-          {
-            top:75px;
-          }
-          @media(min-width: 1501px)and(max-width: 1800px)
-          {
-            top:60px;
-          }
-          @media(min-width: 1801px)
-          {
-            top:50px;
-          }
         }
       }
     }
