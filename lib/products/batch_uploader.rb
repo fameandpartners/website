@@ -49,6 +49,7 @@ module Products
         raw[:price_in_usd]        = book.cell(row_num, columns[:price_in_usd])
         raw[:taxons]              = Array.wrap(columns[:taxons]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
         raw[:colors]              = Array.wrap(columns[:colors]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
+        puts "Read XLS: #{raw[:sku]}"
 
         # Style
         raw[:glam]                = book.cell(row_num, columns[:glam])
