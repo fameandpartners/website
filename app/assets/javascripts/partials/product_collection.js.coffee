@@ -77,7 +77,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     $(document).on 'click', (e) ->
       close = $('.filter-col .close')
-      closeX = close.position().left + close.width() + 20
+      closeX = close.position()?.left + close.width() + 20
       $('.filter-col').removeClass("slide-in") if e.clientX > closeX and $('.filter-col').hasClass("slide-in")
 
    $(document).on('mousedown touchstart', (e) =>

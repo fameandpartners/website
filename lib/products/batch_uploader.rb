@@ -390,7 +390,7 @@ module Products
 
       #FUCK YEAH HACKING
       if keep_taxons
-        taxon_ids | product.taxons.collect(&:id)
+        taxon_ids = taxon_ids | product.taxons.collect(&:id)
       end
 
       attributes = {

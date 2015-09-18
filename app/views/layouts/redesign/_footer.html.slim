@@ -1,9 +1,54 @@
 .footer.container
+  .row.social-row.hidden-xs.hidden-sm.desktop-social
+    .col-md-10.col-md-offset-1
+      .stay-social STAY SOCIAL
+      .stay-social-images
+        = render 'layouts/redesign/social_links'
+
+      /.register-email
+      /  = text_field_tag 'email', nil, placeholder: 'REGISTER YOUR EMAIL FOR THIS XX OFFER'
+      /.submit SUBMIT
+  .row.buttons.hidden-xs.hidden-sm
+    a.col href="/style-consultation"
+      = image_tag 'footer/refer.png'
+      .text FREE STYLING SESSION
+    a.col href="/getitquick"
+      = image_tag 'footer/48.png'
+      .text 48 HR EXPRESS MAKING
+    a.col href="/fame-chain"
+      = image_tag 'footer/chain.png'
+      .text JOIN THE FAME CHAIN
+
+  .mobile-footer.hidden-md.hidden-lg
+    .row.buttons.visible-xs.visible-sm
+      a.col-xs-12 href="/style-consultation"
+        = image_tag 'footer/refer.png', class: 'refer'
+        .text FREE STYLING SESSION
+      a.col-xs-12 href="/getitquick"
+        = image_tag 'footer/48.png', class: 'hr48'
+        .text 48 HR EXPRESS MAKING
+      a.col-xs-12 href="/fame-chain"
+        = image_tag 'footer/chain.png', class: 'chain'
+        .text JOIN THE FAME CHAIN
+
+    /.row.email-row
+      /.col-xs-12.col-sm-12
+        /.input-group
+          /input type="text" class="form-control email" placeholder="REGISTER YOUR EMAIL FOR THIS XX OFFER" aria-/describedby="basic-addon2"
+          /span.input-group-addon#basic-addon2 SUBMIT
+    .row
+      .stay-social
+        center STAY SOCIAL
+    .row
+      .stay-social-images
+        = render 'layouts/redesign/social_links'
+
   .footer-navigation
-    .col-md-3.col-sm-6
+    .col-md-4.col-sm-12
+      = image_tag 'logo/logo-mobile.png', class: 'footer-logo hidden-xs hidden-sm'
       = render 'layouts/redesign/address'
 
-    .col-md-2.col-md-offset-5.col-sm-3
+    .col-md-2.col-md-offset-3.col-sm-3.hidden-xs.hidden-sm.second-col
       ul.footer-nav
         li.footer-nav--item
           = link_to 'Why Shop With Us', why_us_path
@@ -19,7 +64,7 @@
         li.footer-nav--item
           = link_to 'New Sizing', size_guide_path, :style => 'color:red'
 
-    .col-md-2.col-sm-3
+    .col-md-2.col-sm-3.hidden-xs.hidden-sm.last-col
       ul.footer-nav
         li.footer-nav--item
           = link_to 'Terms', terms_path
@@ -31,7 +76,7 @@
           = link_to 'Contact Us', new_contact_path
 
   .lower-row
-    .col-md-6.col-sm-4.copyright
+    .col-md-6.col-sm-12.copyright
       p
         | &copy;&nbsp;
         = Time.now.year

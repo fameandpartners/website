@@ -7725,8 +7725,6 @@ p {
 
 /* line 2, ../sass/_nav.scss */
 .nav-menu {
-  position: fixed;
-  top: 0;
   width: 100%;
   z-index: 100;
   background: white;
@@ -8506,13 +8504,6 @@ p {
 /* line 272, ../sass/styles.scss */
 .page-content {
   padding-bottom: 60px;
-}
-
-/* line 278, ../sass/styles.scss */
-.email-subscription {
-  display: block;
-  max-width: 400px;
-  margin: 0 auto;
 }
 
 /* line 284, ../sass/styles.scss */

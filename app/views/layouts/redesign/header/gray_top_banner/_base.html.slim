@@ -2,10 +2,201 @@ ruby:
   banner = Preferences::TopBannerPresenter.new(current_site_version)
 
 #gray-top-banner.row.visible-md-block.visible-lg-block
+
+  #customer-service.col-md-4
+    = banner.right_text
+
+  #free-shipping.col-md-4.text-center
+    = banner.center_text
+  #account-area.col-md-4.text-right
+    a href='/signup?cl=login-form'
+      span.register-area REGISTER NOW
+    span.pipe |
+    a href='/profile'
+      span.my-account MY ACCOUNT
+      .account-menu.hidden-sm.account-list
+        - if spree_user_signed_in?
+          .account.container-fluid
+            ul
+              li
+                = link_to 'My Moodboard', wishlist_path, id: 'moodboard-trigger'
+              li
+                = link_to 'My Details', profile_path
+              li
+                = link_to 'My Orders', user_orders_path
+              li
+                a href="/logout" LOGOUT
+
+#top-banner.row.visible-md-block.visible-lg-block
   = render 'layouts/redesign/header/locale_selector/desktop'
 
-  #ad-text.col-md-4.text-center
-    = banner.center_text
+  .col-md-8.heart-and-suitcase
+    span.num#moodboard-counter 0
+    a href='/wishlist'
+      i.fa.fa-heart
+    span.pipe |
+    span.num#cart-item-count 0
+    = image_tag 'homepage/shopping_bag.png', class: 'shopping-bag'
 
-  #customer-service.col-md-4.text-right
-    = banner.right_text
+.row.hidden-xs.hidden-sm
+  a.h-logo-wrap href='/'
+    .logo
+      = image_tag 'logo/new-logo.svg'
+      .tagline Bespoke Fashion. Premium Style. Made for You
+
+.row#home-menu.hidden-xs.hidden-sm.text-center
+  span.new-this-week
+    em New this week
+  span.dresses DRESSES
+  span.nested
+    ' EVENTS
+    ul
+      = render partial: 'layouts/redesign/event'
+
+  span.lookbook LOOKBOOK
+  span.magazine
+    a href='http://blog.fameandpartners.com' MAGAZINE
+  span.sale
+    = link_to 'SALE', '/mystyle?lpi=formal&sale='
+  /span.made-for-you MADE FOR YOU
+  /span.join-us JOIN US
+  span.search-wrapper#search
+    a.icon-search.js-search-trigger href="#"
+      = image_tag "_icons/search.svg", class: "nav-mobile-logo"
+    .search-input#search-area
+      form accept-charset="UTF-8" action="/search" method="get" id="searchForm"
+        input type="text" id="searchValue" placeholder="SEARCH FOR..." name="q"
+
+.row.rect#rect-new-this-week
+  .black-bar
+    a.inner-text href='/dresses/?order=newest' SHOP ALL NEW THIS WEEK
+  .slideArea
+    .containArea
+      = react_component('NewThisWeekProducts',{device: 'desktop'}, { prerender: true })
+
+.row.rect#rect-dresses
+  .left-area
+    .col1
+      div.head SHOP BY
+      div
+        = link_to 'View all dresses', '/dresses' , class: 'no-style-text'
+      div
+        = link_to "What's new", '/dresses/?order=newest', class: 'no-style-text'
+      div
+        = link_to 'Made in 48 hours', fast_making_dresses_path, class: 'no-style-text'
+    .col2
+      div.head STYLE
+      = render partial: 'layouts/redesign/style'
+    .col3
+      div.head COLOUR
+      = render partial: 'layouts/redesign/color'
+    /.col4
+      /div.head SEPARATES
+      /div Outerwear
+  a.right-area href="/mystyle?lpi=none&pids%5B0%5D=670-forrest-green&pids%5B1%5D=670-black&pids%5B2%5D=673-black&pids%5B3%5D=678-black&pids%5B4%5D=679-black&limit=0"
+    div.girl-image
+      = image_tag "homepage/dress-girl.jpg"
+    div.girl-text
+      .contain
+        div BAMBI X FAME.
+        div SHOP BAMBI'S PICKS
+
+.row.rect#rect-lookbook
+  .lookbook-container
+    ul.lookbook-slide
+      li
+        a.lookbook-item href="/lookbook/make-a-statement"
+          .head
+            .text BAMBI X FAME.
+          .image
+            = image_tag "homepage/lookbook/1.jpg"
+        a.lookbook-item href="/lookbook/the-luxe-collection"
+          .head
+            .text LUXE COLLECTION
+          .image
+            = image_tag "homepage/lookbook/2.jpg"
+        a.lookbook-item href="/lookbook/here-comes-the-sun"
+          .head
+            .text HERE COMES THE SUN
+          .image
+            = image_tag "homepage/lookbook/3.jpg"
+      li
+        a.lookbook-item href="/lookbook/here-comes-the-sun"
+          .head
+            .text HERE COMES THE SUN
+          .image
+            = image_tag "homepage/lookbook/3.jpg"
+        a.lookbook-item href="/lookbook/the-luxe-collection"
+          .head
+            .text LUXE COLLECTION
+          .image
+            = image_tag "homepage/lookbook/2.jpg"
+        a.lookbook-item href="/lookbook/make-a-statement"
+          .head
+            .text BAMBI X FAME.
+          .image
+            = image_tag "homepage/lookbook/1.jpg"
+/!
+  .row.rect#rect-magazine
+    .col-md-7.left-col
+      .row.head STEAL HER STYLE
+      .row.images
+        .col-md-4
+          = image_tag "homepage/magazine/1.jpg"
+          div.text TAYLOR
+        .col-md-4
+          = image_tag "homepage/magazine/2.jpg"
+          div.text BEYONCE
+        .col-md-4
+          = image_tag "homepage/magazine/3.jpg"
+          div.text GIGI
+    .col-md-5.right-col
+      .row
+        .col-md-6.col1
+          .row.head BACKSTAGE PASS
+          .row.image
+            = image_tag "homepage/magazine/2.jpg", class: "left-img"
+            div.text Blah blah blah
+        .col-md-6.col2
+          .row.head BLOG
+          .row.image
+            = image_tag "homepage/magazine/3.jpg", class: "right-img"
+            div.text Blah blah blah
+
+
+coffee:
+  $(document).ready ->
+
+    $("#search").on('click' , ->
+      $(this).addClass('active')
+    )
+
+    $('.js-search-trigger').on('click' , (e)->
+      if $(this).parent().hasClass('active')
+        if $("#searchForm #searchValue").val() != ''
+          $("#searchForm").submit()
+        else
+          e.stopPropagation()
+          $("#search").removeClass('active')
+    )
+
+    $("#home-menu span[id!='search']").on('mouseenter', ->
+      $(".rect").hide();
+      $("#rect-"+this.className).css("display","block")
+      $("#search").removeClass('active')
+    )
+
+    $(".rect").on('mouseleave', ->
+      $(".rect").hide()
+    )
+
+    $("#account-area .my-account").mouseover ->
+      $("#account-area .account-menu").show()
+
+    $("#account-area .account-menu").mouseleave ->
+      $("#account-area .account-menu").hide()
+
+    $(".lookbook-slide").responsiveSlides({
+      auto: false,
+      nav: true
+    })
