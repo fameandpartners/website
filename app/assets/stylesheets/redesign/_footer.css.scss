@@ -345,6 +345,13 @@
 		    padding-top: 20px;
 		    margin-left: 6%;
 		    margin-top: 35px;
+		    color: $c-neutral-black;
+
+		    &:hover {
+		    	opacity: .8;
+		    	color: $c-neutral-black;
+		    }
+
     	}
     	.col:last-child{
     		.text{

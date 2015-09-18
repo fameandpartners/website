@@ -1,8 +1,11 @@
-.alert-sale {
+.sticky-header .alert-sale {
   position: absolute;
   top: $mega-menu-desktop-height;
   left: 0;
   right: 0;
+}
+
+.alert-sale {
   z-index: 4;
   background: #fbe1f2;
   text-align: center;
@@ -65,13 +68,21 @@
 
 @media (max-width: $bootstrap-md-width) {
   .alert-sale {
+    position: absolute;
+    left: 0;
+    right: 0;
     top: $mega-menu-mobile-height;
+    padding: 5px;
+
+    .banner-title {
+      font-size: 13px;
+    }
+
   }
 }
 
 .auto-discount-applied {
   @extend .alert-sale;
-  top: 110px;
   width:100%;
   background-color: #000000;
   padding: 5px 0 15px;
@@ -80,4 +91,13 @@
     color: #ffffff;
     margin-bottom: 5px;
   }
+
+  @media (max-width: $bootstrap-md-width) {
+
+    & {
+      top: 110px;
+    }
+    
+  }
+
 }
