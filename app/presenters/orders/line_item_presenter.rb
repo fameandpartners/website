@@ -119,7 +119,7 @@ module Orders
     end
 
     def customisations_without_images
-      customisations.collect &:first
+      customisations.collect(&:first)
     end
 
     def personalizations?
@@ -131,7 +131,7 @@ module Orders
     end
 
     def image_url
-      image.attachment.url(:large)
+      image? ? image.attachment.url(:large) : nil
     end
 
     def as_report

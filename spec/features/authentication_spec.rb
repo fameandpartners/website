@@ -8,7 +8,11 @@ describe 'authentication process', :type => :feature do
 
     context 'with valid credentials' do
       it 'should authenticate' do
-        visit '/login'
+        begin
+          visit '/login'
+        rescue Capybara::Poltergeist::JavascriptError
+        end
+
         within('#password-credentials') do
           fill_in 'Email', :with => user.email
           fill_in 'Password', :with => user.password
@@ -20,7 +24,11 @@ describe 'authentication process', :type => :feature do
 
     context 'with invalid credentials' do
       it 'should authenticate' do
-        visit '/login'
+        begin
+          visit '/login'
+        rescue Capybara::Poltergeist::JavascriptError
+        end
+
         within('#password-credentials') do
           fill_in 'Email', :with => user.email
           fill_in 'Password', :with => 'adaljshdljhefih'
@@ -29,7 +37,5 @@ describe 'authentication process', :type => :feature do
         expect(page).to have_content 'Invalid email or password.'
       end
     end
-
   end
-
 end
