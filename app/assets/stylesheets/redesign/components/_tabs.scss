@@ -50,6 +50,7 @@
 
         &:after {
           content: '';
+          display: block;
           position: absolute;
           top: 0;
           right: -($tab-nav-height / 5);

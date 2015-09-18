@@ -44,8 +44,33 @@ header {
 
 }
 
-.logo{
-  width: 100%;
+.h-logo-wrap {
+  position: relative;
+  display: block;
+  width: 390px;
+  height: 64px;
+  margin: 15px auto 38px auto;
+
+  .logo{
+    
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+  }
+
+  .tagline {
+    width: 100%;
+    margin-top: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: Forum;
+    font-size: 1em;
+    color: $c-neutral-black;
+  }
+
 }
 
 .nav-menu {
@@ -1208,7 +1233,6 @@ li#cart-trigger {
     background-color: white;
     border-left: 0;
     border-right: 0;
-    margin-top: 55px;
     font-weight: 700;
 
     span{

@@ -39,10 +39,10 @@ ruby:
     = image_tag 'homepage/shopping_bag.png', class: 'shopping-bag'
 
 .row.hidden-xs.hidden-sm
-  .col-md-4.col-md-offset-4
-    center
-      a href='/'
-        = image_tag 'logo/new-logo.svg', class: 'logo'
+  a.h-logo-wrap href='/'
+    .logo
+      = image_tag 'logo/new-logo.svg'
+      .tagline Bespoke Fashion. Premium Style. Made for You
 
 .row#home-menu.hidden-xs.hidden-sm.text-center
   span.new-this-week
