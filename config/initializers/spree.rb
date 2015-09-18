@@ -53,6 +53,9 @@ Spree.config do |config|
     config.attachment_url = '/spree/products/:id/:style/:basename.:extension'
     config.attachment_path = ':rails_root/public/spree/products/:id/:style/:basename.:extension'
   end
+
+  config.us_value_proposition_key = "<i class='coathanger'></i><span>Free Styling Session</span><i class='plane'></i><span>Free delivery in US, CANADA & UK </span><i class='mobile'></i><span>24/7 Customer Service</span>"
+  config.au_value_proposition_key = "<i class='coathanger'></i><span>Free Styling Session</span><i class='plane'></i><span>Free delivery in AU & NEW ZEALAND </span><i class='mobile'></i><span>24/7 Customer Service</span>"
 end
 
 Spree::Ability.register_ability(OrderProcessingAbility)
