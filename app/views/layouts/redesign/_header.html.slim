@@ -257,11 +257,11 @@ ruby:
           li.normal-item
             a.text href='http://fameandpartners.tumblr.com/' MAGAZINE
           li.normal-item
-            .text SALE
-          li.normal-item
-            .text MADE FOR YOU
-          li.normal-item
-            .text JOIN US
+            = link_to 'SALE', '/mystyle?lpi=formal&sale=', class: 'text'
+          /li.normal-item
+            /.text MADE FOR YOU
+          /li.normal-item
+            /.text JOIN US
           li.normal-item
             div
               = link_to 'ACCOUNT LOGIN', '/profile', class: 'text'
