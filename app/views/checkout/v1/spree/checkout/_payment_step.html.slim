@@ -40,9 +40,6 @@ p All transactions are secure and encrypted. Credit card information is never st
         .panel-body
           = paypal_express_button
 
-  - if @masterpass_method
-    = render :partial => 'spree/checkout/payment/masterpass', :locals => { :payment_method => @masterpass_method }
-
 p
     ' By making this purchase you are agreeing to the Fame & Partners
     a href="/terms.html" Term & Conditions.

@@ -148,12 +148,16 @@ Spree::CheckoutController.class_eval do
   end
 
   def edit
-    unless signed_in?
-      @user = Spree::User.new(
-        email: @order.email,
-        first_name: @order.user_first_name,
-        last_name: @order.user_last_name
-      )
+    if params[:state] == 'masterpass'
+      @masterpass_data = session[:masterpass_data] == nil ? session[:masterpass_data] : {}
+    else
+      unless signed_in?
+        @user = Spree::User.new(
+          email: @order.email,
+          first_name: @order.user_first_name,
+          last_name: @order.user_last_name
+        )
+      end
     end
 
     respond_with(@order) do |format|
@@ -220,10 +224,6 @@ Spree::CheckoutController.class_eval do
 
     @pay_pal_method = @order.available_payment_methods.detect do |method|
       method.method_type.eql?('paypalexpress') || method.type == 'Spree::Gateway::PayPalExpress'
-    end
-
-    @masterpass_method = @order.available_payment_methods.detect do |method|
-      method.method_type.eql?('masterpass') || method.type == 'Spree::Gateway::Masterpass'
     end
   end
 

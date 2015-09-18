@@ -40,6 +40,11 @@
 //  require js/superslides.js # copied to libs/superslides for easier monkey-patching
 //= require functions_redesign.js
 
+//----------------
+// Masterpass libs
+//----------------
+//= require libs/spin.min.js
+
 //--------------------------
 // Helpers
 //--------------------------
