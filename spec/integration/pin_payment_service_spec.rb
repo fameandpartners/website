@@ -23,15 +23,15 @@ describe PinPaymentService do
     let(:opts)        {
       {
       email:       "blah@vtha.com",
-      amount:      1000,
+      amount:      1000, #CENTS
       currency:    'USD',
-      description: 'R29386234086',
-      ip_address:  "10.10.10.10",
+      description: 'Order #R851637568-[RANDOM]',
+      ip_address:  "10.10.10.10", # OPTIONAL
       card:        {
         number:           5520000000000000,
         expiry_month:     1,
         expiry_year:      2020,
-        cvc:              123,
+        # cvc:              123, #OPTIONAL FOR MASTERPASS
         name:             'Blah Vtha',
         address_line1:    'Address',
         address_city:     'City',
