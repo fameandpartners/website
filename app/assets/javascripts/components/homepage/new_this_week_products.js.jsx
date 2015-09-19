@@ -32,7 +32,7 @@ var NewThisWeekProducts = React.createClass({
 
   componentDidMount: function() {
     $.ajax({
-      url: '/dresses/new-this-week?limit=10',
+      url: '/dresses/?order=newest&limit=10',
       type: "GET",
       dataType: 'json',
       success: function(collection) {
