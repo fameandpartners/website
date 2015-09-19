@@ -25,7 +25,7 @@ Spree::AppConfiguration.class_eval do
 
     #Shopping Bag
     shopping_bag = Preferences::ShoppingBag.new(site_version)
-    preference shopping_bag.value_proposition_key, :string, default: ''
+    preference shopping_bag.value_proposition_key, :string, default: "<i class='coathanger'></i><span>Free Styling Session</span><i class='plane'></i><span>Free delivery in US, CANADA & UK </span><i class='mobile'></i><span>24/7 Customer Service</span>"
 
   end if SiteVersion.table_exists?
 
