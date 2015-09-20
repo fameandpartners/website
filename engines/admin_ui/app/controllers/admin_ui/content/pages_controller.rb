@@ -16,7 +16,7 @@ module AdminUi
           else
             render action: :edit
           end
-        rescue Exception => e
+        rescue StandardError => e
           NewRelic::Agent.notice_error(e)
           flash[:error] = "Variables are not a correct form"
           render action: :edit
