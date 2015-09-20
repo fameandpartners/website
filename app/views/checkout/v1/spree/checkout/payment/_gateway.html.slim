@@ -4,31 +4,44 @@ ruby:
   options_hash_select = { class: 'form-control form-control-md selectbox' }
   options_hash[:autocomplete] = 'off' if Rails.env.production?
   is_masterpass = current_step.eql?('masterpass')
+  if is_masterpass
+    realAccountNumber = @masterpass_data[:card][:accountNumber]
+    accountNumber = '5520000000000000' #realAccountNumber
+    # TODO show only last 4 lettters with *
+  end
 
 .row
   .col-md-12.form-group
     label for="number"  Card number
     = text_field_tag "#{param_prefix}[number]", '',
-                     options_hash.merge(id: 'number', readonly: is_masterpass, value: is_masterpass ? '' : '')
+                     options_hash.merge(id: 'number', readonly: is_masterpass, value: is_masterpass ? accountNumber : '')
 .row
   .col-md-12.form-group
     label for="name"  Name on card
-    = text_field_tag "#{param_prefix}[full_name]", '',
-                     options_hash.merge(id: 'name', readonly: is_masterpass, value: is_masterpass ? '' : '')
+    = text_field_tag "#{param_prefix}[full_name]",
+                     '', options_hash.merge(id: 'name', readonly: is_masterpass,
+                     value: is_masterpass ? @masterpass_data[:card][:cardHolderName] : '')
 .row
   .col-md-6.form-group
     .row
       .col-xs-4.col-md-4.form-group
         label for=""  Expiry
-        = text_field_tag "#{param_prefix}[month]", '', id: 'month', placeholder: 'MM', maxlength: 2, class: "month #{ options_hash[:class]}", readonly: is_masterpass
+        = text_field_tag "#{param_prefix}[month]", '', id: 'month', placeholder: 'MM',
+                         maxlength: 2, class: "month #{ options_hash[:class]}",
+                         readonly: is_masterpass,
+                         value: is_masterpass ? @masterpass_data[:card][:expiryMonth] : ''
       .slash
         | /
       .col-xs-4.col-md-4.form-group
         label &nbsp;
-        = text_field_tag "#{param_prefix}[year]", '', id: 'year', placeholder: 'YYYY', maxlength: 4, class: "year #{ options_hash[:class]}", readonly: is_masterpass
-      .col-xs-4.col-md-4.form-group.card_code
-        label CVC
-        = text_field_tag "#{param_prefix}[verification_value]", '', id: 'card_code', class: "cvv #{ options_hash[:class]}", :size => 5, maxlength: 3, readonly: is_masterpass
+        = text_field_tag "#{param_prefix}[year]", '', id: 'year', placeholder: 'YYYY',
+                         maxlength: 4, class: "year #{ options_hash[:class]}",
+                         readonly: is_masterpass,
+                         value: is_masterpass ? @masterpass_data[:card][:expiryYear] : ''
+      - if !is_masterpass
+        .col-xs-4.col-md-4.form-group.card_code
+          label CVC
+          = text_field_tag "#{param_prefix}[verification_value]", '', id: 'card_code', class: "cvv #{ options_hash[:class]}", :size => 5, maxlength: 3
 
   .col-md-6.form-group.place-order
     label &nbsp;

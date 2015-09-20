@@ -75,117 +75,71 @@ module Spree
 
     def cartcallback
       # handle oauth callback
-      # @data.request_token = params['oauth_token']
-      # @data.verifier = params['oauth_verifier']
-      # @data.checkout_resource_url = params['checkout_resource_url']
-      # handle_pairing_callback if params['pairing_token'] && params['pairing_verifier']
-      #
-      # # get access token
-      # access_token_response = @service.get_access_token(
-      #     payment_method.access_url,
-      #     @data.request_token, @data.verifier)
-      # @data.access_token = access_token_response.oauth_token
-      #
-      # # get the checkout data
-      # @data.checkout = AllServicesMappingRegistry::Checkout.from_xml(
-      #     @service.get_payment_shipping_resource(
-      #         @data.checkout_resource_url, @data.access_token
-      #     ));
+      @data.request_token = params['oauth_token']
+      @data.verifier = params['oauth_verifier']
+      @data.checkout_resource_url = params['checkout_resource_url']
+      handle_pairing_callback if params['pairing_token'] && params['pairing_verifier']
 
-      save_session_data
+      # get access token
+      access_token_response = @service.get_access_token(
+          payment_method.access_url,
+          @data.request_token, @data.verifier)
+      @data.access_token = access_token_response.oauth_token
 
-      redirect_to :controller => 'spree/checkout', :action => 'edit', :state => 'masterpass'
-    end
+      # get the checkout data
+      checkout = AllServicesMappingRegistry::Checkout.from_xml(
+          @service.get_payment_shipping_resource(
+              @data.checkout_resource_url, @data.access_token
+          ))
 
-    def test
-      # edit() from checkout_controller_decorator (address step)
-      unless signed_in?
-        @user = Spree::User.new(
-            email: current_order.email,
-            first_name: current_order.user_first_name,
-            last_name: current_order.user_last_name
-        )
-      end
-
-      # update first/last names, email,...
-      # Need to get country_id, state_id, ship_address validation
-      billing_country = Spree::Country.where("iso=? or iso_name=? or name=?",
-                                             @data.checkout.card.billingAddress.country, @data.checkout.card.billingAddress.country, @data.checkout.card.billingAddress.country).first
-      billing_country_id = !billing_country.nil? ? billing_country.id : ''
-      billing_state = Spree::State.where("(abbr=? or name=?) and country_id=?",
-                                         @data.checkout.card.billingAddress[:countrySubdivision], @data.checkout.card.billingAddress[:countrySubdivision], billing_country_id).first
-      billing_state_id = !billing_state.nil? ? billing_state.id : ''
-
-      shipping_country = Spree::Country.where("iso=? or iso_name=? or name=?",
-                                              @data.checkout.shippingAddress.country, @data.checkout.shippingAddress.country, @data.checkout.shippingAddress.country).first
-      shipping_country_id = !shipping_country.nil? ? shipping_country.id : ''
-      shipping_state = Spree::State.where("(abbr=? or name=?) and country_id=?",
-                                          @data.checkout.shippingAddress[:countrySubdivision], @data.checkout.shippingAddress[:countrySubdivision], shipping_country_id).first
-      shipping_state_id = !shipping_state.nil? ? shipping_state.id : ''
-
-      object_params = {
-          :order => {
-            :bill_address_attributes => {
-                :email => @data.checkout.contact.emailAddress,
-                :firstname => @data.checkout.contact.firstName,
-                :lastname => @data.checkout.contact.lastName,
-                :address1 => @data.checkout.card.billingAddress.line1,
-                :address2 => @data.checkout.card.billingAddress.line2,
-                :city => @data.checkout.card.billingAddress[:city],
-                :state_id => billing_state_id,
-                :country_id => billing_country_id,
-                :phone => @data.checkout.contact[:phoneNumber],
-                :zipcode => @data.checkout.card.billingAddress[:postalCode]
+      if checkout.card && checkout.contact && checkout.shippingAddress
+        # To resolve the error - "Singleton can't be dumped"
+        @data.checkout = {
+            :card => {
+                :brandId => checkout.card.brandId,
+                :brandName => checkout.card.brandName,
+                :accountNumber => checkout.card.accountNumber,
+                :cardHolderName => checkout.card.cardHolderName,
+                :expiryMonth => checkout.card.expiryMonth,
+                :expiryYear => checkout.card.expiryYear,
+                :billingAddress => {
+                    :city => checkout.card.billingAddress.city,
+                    :country => checkout.card.billingAddress.country,
+                    :countrySubdivision => checkout.card.billingAddress.countrySubdivision,
+                    :line1 => checkout.card.billingAddress.line1,
+                    :line2 => checkout.card.billingAddress.line2,
+                    :postalCode => checkout.card.billingAddress.postalCode
+                },
             },
-            :ship_address_attributes => {
-                :firstname => @data.checkout.shippingAddress.recipientName,
-                :lastname => @data.checkout.shippingAddress.recipientName,
-                :address1 => @data.checkout.shippingAddress.line1,
-                :address2 => @data.checkout.shippingAddress.line2,
-                :city => @data.checkout.shippingAddress[:city],
-                :state_id => shipping_state_id,
-                :country_id => shipping_country_id,
-                :phone => @data.checkout.shippingAddress.recipientPhoneNumber,
-                :zipcode => @data.checkout.shippingAddress.postalCode
+            :contact => {
+                :firstName => checkout.contact.firstName,
+                :lastName => checkout.contact.lastName,
+                :country => checkout.contact.country,
+                :emailAddress => checkout.contact.emailAddress,
+                :phoneNumber => checkout.contact.phoneNumber
+            },
+            :preCheckoutTransactionId => checkout.preCheckoutTransactionId,
+            :transactionId => checkout.transactionId,
+            :walletID => checkout.walletID,
+            :shippingAddress => {
+                :city => checkout.shippingAddress.city,
+                :country => checkout.shippingAddress.country,
+                :countrySubdivision => checkout.shippingAddress.countrySubdivision,
+                :line1 => checkout.shippingAddress.line1,
+                :line2 => checkout.shippingAddress.line2,
+                :postalCode => checkout.shippingAddress.postalCode,
+                :recipientName => checkout.shippingAddress.recipientName,
+                :recipientPhoneNumber => checkout.shippingAddress.recipientPhoneNumber
             }
-          }
         }
-      registration = Services::UpdateUserRegistrationForOrder.new(current_order, try_spree_current_user, object_params)
-      registration.update
-      if registration.new_user_created?
-        fire_event("spree.user.signup", order: current_order)
-        sign_in :spree_user, registration.user
-      end
-      if !registration.successfull?
-        # respond_with(current_order) do |format|
-        #   format.html { redirect_to checkout_state_path(current_order.state) }
-        # end
-        return
-      end
 
-      if current_order.update_attributes(object_params[:order])
-        fire_event('spree.checkout.update')
+        save_session_data
 
-        if current_order.next
-          state_callback(:after)
-        else
-          flash[:error] = t(:payment_processing_failed)
-          respond_with(current_order) do |format|
-            format.html{ redirect_to checkout_state_path(current_order.state) }
-            format.js{ render 'spree/checkout/update/failed' }
-          end
-          return
-        end
-
-        respond_with(current_order) do |format|
-          format.html{ redirect_to checkout_state_path(@order.state) }
-          format.js{ render 'spree/checkout/update/success' }
-        end
+        redirect_to checkout_state_path('masterpass')
       else
-        respond_with(current_order) do |format|
-          format.html { render 'spree/checkout/edit' }
-          format.js { render 'spree/checkout/update/failed' }
-        end
+        flash[:error] = t(:masterpass_processing_failed)
+
+        redirect_to checkout_state_path('address')
       end
     end
 

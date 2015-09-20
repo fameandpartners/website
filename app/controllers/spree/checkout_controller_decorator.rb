@@ -2,6 +2,7 @@ Spree::CheckoutController.class_eval do
   before_filter :prepare_order, only: :edit
   before_filter :set_order_site_version, :only => :update
   before_filter :find_payment_methods, only: [:edit, :update]
+  before_filter :prepare_masterpass, only: [:edit, :update]
   skip_before_filter :check_registration
 
   before_filter def switch_views_version
@@ -14,7 +15,7 @@ Spree::CheckoutController.class_eval do
   def update
     move_order_from_cart_state(@order)
 
-    if @order.state == 'address'
+    if @order.state == 'address' || @order.state == 'masterpass'
       # update first/last names, email
       registration = Services::UpdateUserRegistrationForOrder.new(@order, try_spree_current_user, params)
       registration.update
@@ -148,16 +149,15 @@ Spree::CheckoutController.class_eval do
   end
 
   def edit
-    if params[:state] == 'masterpass'
-      @masterpass_data = session[:masterpass_data] == nil ? session[:masterpass_data] : {}
-    else
-      unless signed_in?
-        @user = Spree::User.new(
-          email: @order.email,
-          first_name: @order.user_first_name,
-          last_name: @order.user_last_name
-        )
-      end
+    if @order.state.to_s == 'masterpass' && params[:state] != nil && params[:state] != 'masterpass'
+      @order.state = params[:state]
+    end
+    unless signed_in?
+      @user = Spree::User.new(
+        email: @order.email,
+        first_name: @order.user_first_name,
+        last_name: @order.user_last_name
+      )
     end
 
     respond_with(@order) do |format|
@@ -190,6 +190,57 @@ Spree::CheckoutController.class_eval do
   # run callback - preparations to order states
   def prepare_order
     before_address
+  end
+
+  def prepare_masterpass
+    if params[:state] == 'masterpass'
+      if session[:masterpass_data].blank?
+        redirect_to checkout_state_path('address')
+        return
+      end
+
+      before_address
+
+      @masterpass_data = session[:masterpass_data].checkout
+      @order.email = @masterpass_data[:contact][:emailAddress]
+      @order.user_first_name = @masterpass_data[:contact][:firstName]
+      @order.user_last_name = @masterpass_data[:contact][:lastName]
+
+      # Initialize the bulling details
+      @order.bill_address.firstname = @order.user_first_name
+      @order.bill_address.lastname = @order.user_last_name
+      @order.bill_address.email = @order.email
+      @order.bill_address.address1 = @masterpass_data[:card][:billingAddress][:line1]
+      @order.bill_address.address2 = @masterpass_data[:card][:billingAddress][:line2]
+      @order.bill_address.city = @masterpass_data[:card][:billingAddress][:city]
+      @order.bill_address.country = Spree::Country.where("iso=?", @masterpass_data[:card][:billingAddress][:country]).first
+      country_id = @order.bill_address.country.id
+      state_name = @masterpass_data[:card][:billingAddress][:countrySubdivision].sub(
+          @masterpass_data[:card][:billingAddress][:country] + '-', '')
+      @order.bill_address.state = Spree::State.where("abbr=? and country_id=?",
+                                                     state_name,
+                                                     country_id).first
+      @order.bill_address.phone = @masterpass_data[:contact][:phoneNumber]
+      @order.bill_address.zipcode = @masterpass_data[:card][:billingAddress][:postalCode]
+
+      # Initialize the shipping details
+      recipientName = @masterpass_data[:shippingAddress][:recipientName].split(' ', 2)
+      @order.ship_address.firstname = recipientName[0]
+      @order.ship_address.lastname = recipientName[1]
+      @order.ship_address.email =@masterpass_data[:contact][:emailAddress]
+      @order.ship_address.address1 = @masterpass_data[:shippingAddress][:line1]
+      @order.ship_address.address2 = @masterpass_data[:shippingAddress][:line2]
+      @order.ship_address.city = @masterpass_data[:shippingAddress][:city]
+      @order.ship_address.country = Spree::Country.where("iso=?", @masterpass_data[:shippingAddress][:country]).first
+      country_id = @order.ship_address.country.id
+      state_name = @masterpass_data[:shippingAddress][:countrySubdivision].sub(
+          @masterpass_data[:shippingAddress][:country] + '-', '')
+      @order.ship_address.state = Spree::State.where("abbr=? and country_id=?",
+                                                     state_name,
+                                                     country_id).first
+      @order.ship_address.phone = @masterpass_data[:shippingAddress][:recipientPhoneNumber]
+      @order.ship_address.zipcode = @masterpass_data[:shippingAddress][:postalCode]
+    end
   end
 
   def build_default_address
@@ -239,6 +290,7 @@ Spree::CheckoutController.class_eval do
 
     @current_step = @order.state.to_s
     @current_step = 'address' if @current_step.eql?('cart')
+    @current_step = 'masterpass' if params[:state] == 'masterpass' && (@current_step.eql?('address') || @current_step.eql?('payment'))
     @current_step
   end
   helper_method :current_step
