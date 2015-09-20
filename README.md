@@ -164,7 +164,7 @@ rake cache:expire
 Images & assets by default in dev mode are served to you from the production S3 bucket.
 
 If you wish to test or do image uploading, you will need to either switch to local mode, or switch to another S3 bucket.
-By default the AWS access credentials are not loaded in dev mode, so these features will fail.
+By default the AWS access credentials are *not loaded in dev mode*, so these features will fail.
 
 `config/environments/development.rb`
 
