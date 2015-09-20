@@ -9,6 +9,7 @@ module AdminUi
       end
 
       def update
+        params[:page][:variables] = eval(params[:page][:variables])
         if page.update_attributes(params[:page])
           redirect_to action: :index
         else
