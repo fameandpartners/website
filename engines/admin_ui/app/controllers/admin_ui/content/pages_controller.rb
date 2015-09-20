@@ -9,10 +9,16 @@ module AdminUi
       end
 
       def update
-        params[:page][:variables] = eval(params[:page][:variables])
-        if page.update_attributes(params[:page])
-          redirect_to action: :index
-        else
+        begin
+          params[:page][:variables] = eval(params[:page][:variables])
+          if page.update_attributes(params[:page])
+            redirect_to action: :index
+          else
+            render action: :edit
+          end
+        rescue Exception => e
+          NewRelic::Agent.notice_error(e)
+          flash[:error] = "Variables are not a correct form"
           render action: :edit
         end
       end
