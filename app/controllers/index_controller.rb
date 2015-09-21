@@ -19,5 +19,4 @@ class IndexController < ApplicationController
   def homepage_title
     Preferences::Titles.new(current_site_version).homepage_title
   end
-
 end
