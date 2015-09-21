@@ -9,10 +9,10 @@ ruby:
   #free-shipping.col-md-4.text-center
     = banner.center_text
   #account-area.col-md-4.text-right
-    a href='/signup?cl=login-form'
+    = link_to spree_signup_path do
       span.register-area REGISTER NOW
     span.pipe |
-    a href='/profile'
+    = link_to profile_path do
       span.my-account MY ACCOUNT
       .account-menu.hidden-sm.account-list
         - if spree_user_signed_in?
@@ -39,7 +39,7 @@ ruby:
     = image_tag 'homepage/shopping_bag.png', class: 'shopping-bag'
 
 .row.hidden-xs.hidden-sm
-  a.h-logo-wrap href='/'
+  = link_to root_path, class: 'h-logo-wrap' do
     .logo
       = image_tag 'logo/new-logo.svg'
       .tagline Bespoke Fashion. Premium Style. Made for You
