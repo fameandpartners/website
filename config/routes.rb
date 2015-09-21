@@ -99,7 +99,7 @@ FameAndPartners::Application.routes.draw do
     get '/lookbook' => redirect('/lookbook/the-luxe-collection', :status => 302), as: :lookbook
 
     get '/lookbook/jedi-cosplay' => 'products/collections#show', :permalink => 'make-a-statement', :as => :make_a_statement
-    get '/lookbook/make-a-statement' => 'products/collections#show', :permalink => 'make-a-statement', :as => :make_a_statement
+    get '/lookbook/make-a-statement' => 'products/collections#show', :permalink => 'make-a-statement', :as => :make_a_statement_collection
     get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
 
     get '/lookbook/garden-weeding' => redirect('/lookbook/garden-wedding')
