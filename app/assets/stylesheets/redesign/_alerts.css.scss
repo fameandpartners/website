@@ -7,11 +7,11 @@
 
 .alert-sale {
   z-index: 4;
-  background: #fbe1f2;
+  background: #000000;
   text-align: center;
   text-transform: uppercase;
+  padding: 6px 0px 8px 0px;
   font-size: 18px;
-  padding: 10px 0;
   &.alert-relative {
     position: relative;
   }
@@ -25,11 +25,11 @@
   }
   .banner-title {
     display: inline-block;
-    vertical-align: -20%;
-    font-size: 20px;
+    font-size: 14px;
   }
   .medium {
-    font-weight: 600;
+    font-weight: 400;
+    color: white;
   }
   .spacer {
     width: 24px;
@@ -83,10 +83,11 @@
 
 .auto-discount-applied {
   @extend .alert-sale;
-  width:100%;
-  background-color: #000000;
-  padding: 5px 0 15px;
-  z-index: 101;
+  z-index: 4;
+  background: #000000;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 6px 0px 8px 0px;
   p {
     color: #ffffff;
     margin-bottom: 5px;
@@ -97,7 +98,7 @@
     & {
       top: 110px;
     }
-    
+
   }
 
 }

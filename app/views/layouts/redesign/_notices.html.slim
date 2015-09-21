@@ -3,9 +3,10 @@
     #sale-banner.alert-sale role="alert"
       span.medium.banner-title
         .center-block
-          span = current_sale.sitewide_message
-        .center-block
-          span = link_to 'Shop now!', dresses_path, class: 'text-highlight',  style: 'color:white;text-decoration:underline'
+          = current_sale.sitewide_message
+          '
+          = link_to 'Shop now!', dresses_path, class: 'text-highlight',  style: 'color:white;text-decoration:underline'
+
 
   / TODO - Refactor how we apply email reminders
   - if automatic_discount_code.present? && session[:email_reminder_promo] != 'scheduled_for_delivery'
