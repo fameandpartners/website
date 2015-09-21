@@ -57,7 +57,7 @@ ruby:
   span.magazine
     a href='http://blog.fameandpartners.com' MAGAZINE
   span.sale
-    = link_to 'SALE', '/mystyle?lpi=formal&sale=20'
+    = link_to 'SALE', mystyle_landing_page_path(:lpi => 'formal', :sale => 20)
   /span.made-for-you MADE FOR YOU
   /span.join-us JOIN US
   span.search-wrapper#search
@@ -93,8 +93,7 @@ ruby:
     /.col4
       /div.head SEPARATES
       /div Outerwear
-  a.right-area href="/mystyle?lpi=none&pids[]=640-forrest-green&pids[]=643-black&pids[]=648-black&pids[]=656-black&pids[]=649-black&pids[]=640-black&limit=0
-"
+  = link_to mystyle_landing_page_path(:lpi => 'none', :pids => ['640-forrest-green','643-black','648-black','656-black','649-black','640-black'],:limit => 0), class: 'right-area'
     div.girl-image
       = image_tag "homepage/dress-girl.jpg"
     div.girl-text
@@ -106,17 +105,17 @@ ruby:
   .lookbook-container
     ul.lookbook-slide
       li
-        a.lookbook-item href="/lookbook/make-a-statement"
+        = link_to make_a_statement_collection_path, class: "lookbook-item"
           .head
             .text BAMBI X FAME.
           .image
             = image_tag "homepage/lookbook/1.jpg"
-        a.lookbook-item href="/lookbook/the-luxe-collection"
+        = link_to luxe_collection_path, class: "lookbook-item"
           .head
             .text LUXE COLLECTION
           .image
             = image_tag "homepage/lookbook/2.jpg"
-        a.lookbook-item href="/lookbook/here-comes-the-sun"
+        = link_to here_comes_the_sun_collection_path, class: "lookbook-item"
           .head
             .text HERE COMES THE SUN
           .image
@@ -180,7 +179,7 @@ coffee:
 
     $("#account-area .account-menu").mouseleave ->
       $("#account-area .account-menu").hide()
-    
+
     $(".lookbook-slide").responsiveSlides({
       auto: false,
       nav: true
