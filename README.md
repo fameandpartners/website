@@ -24,7 +24,14 @@ Migrations that have been designed for zero-downtime deployment are excepted and
 * ElasticSearch
 * Redis
 * `imagemagick`
-* [foreman](https://github.com/ddollar/foreman) - Development
+
+#### Ruby Installation
+
+Use rbenv and the ruby-build plugin
+
+* [rbenv](https://github.com/sstephenson/rbenv/)
+* [ruby-build](https://github.com/sstephenson/ruby-build)
+
 
 #### Quick installation
 
@@ -41,7 +48,7 @@ $ brew install redis elasticsearch imagemagick postgresql
 If you are using homebrew and it's default settings, the supplied Procfile may work out-of-the-box
 
 ```shell
-$ foreman start
+$ bundle exec thin start -p 3000
 ```
 
 It's also important to configure your Elasticsearch to enable dynamic scripting
