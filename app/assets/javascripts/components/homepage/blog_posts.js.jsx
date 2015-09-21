@@ -25,7 +25,7 @@ var BlogPosts = React.createClass({
     return {blogs: []}
   },
   componentDidMount: function() {
-    $.get("/api/blog_posts", function(result) {1
+    $.get("/api/blog_posts", function(result) {
       this.setState({blogs: result.slice(0,9)})
     }.bind(this));
   },
