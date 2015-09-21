@@ -14,6 +14,8 @@
   .ibox-title
     h3 Return Request
   .ibox-content
+    h3 Order
+    = link_to @item_return.order_number, spree.admin_order_path(id: @item_return.order_number)
     = render :partial => 'payment_info'
 
 .ibox
