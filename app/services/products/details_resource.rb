@@ -39,6 +39,7 @@ class Products::DetailsResource
         description:        product.description,
         permalink:          product.permalink,
         is_active:          product.is_active?,
+        is_deleted:         product.deleted?,
         images:             product_images.read_all,
         default_image:      product_images.default,
         price:              product_price,
