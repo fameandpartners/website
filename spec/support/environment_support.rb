@@ -28,9 +28,10 @@ module EnvironmentHelpers
   end
 
   def ensure_environment_set(options = {})
+    Rails.cache.clear
     clean_old_test_data if options[:force]
 
-    models = %w{taxonomy product_options shipping countries payments}
+    models = %w{site_versions taxonomy product_options shipping countries payments}
 
     unless options[:all]
       if options[:only]
@@ -40,6 +41,11 @@ module EnvironmentHelpers
       if options[:except]
         models = models - options[:only]
       end
+    end
+
+    if models.include?('site_versions')
+      create(:site_version, :au) unless SiteVersion.where(permalink: 'au').exists? 
+      create(:site_version, :us) unless SiteVersion.where(permalink: 'us').exists? 
     end
 
     if models.include?('taxonomy')

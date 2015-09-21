@@ -2,11 +2,12 @@ require 'spec_helper'
 require 'capybara/poltergeist'
 
 describe 'authentication process', :type => :feature do
-  before :each do
+  before :all do
     Spree::User.destroy_all
+    create(:spree_user, :skip_welcome_email => true)
   end
 
-  let(:user) { create(:spree_user, :skip_welcome_email => true) }
+  let(:user) { Spree::User.first || create(:spree_user, :skip_welcome_email => true) }
   let(:password) { 'my-secure-password-#2' }
 
   describe 'login' do
@@ -17,6 +18,7 @@ describe 'authentication process', :type => :feature do
 
         user.password = user.password_confirmation = password
         user.save
+        user.reload
 
         within('#password-credentials') do
           fill_in 'Email', :with => user.email
@@ -25,6 +27,7 @@ describe 'authentication process', :type => :feature do
         ignore_js_errors { click_button('Login') }
 
         expect(page).to_not have_content 'Invalid email or password.'
+        expect(page.status_code).to eq(200)
       end
     end
 
@@ -40,6 +43,7 @@ describe 'authentication process', :type => :feature do
         ignore_js_errors { click_button('Login') }
 
         expect(page).to have_content 'Invalid email or password.'
+        expect(page.status_code).to eq(200)
       end
     end
   end

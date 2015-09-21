@@ -24,14 +24,7 @@ describe 'user', type: :feature, js: true do
 
     it "contains menu links" do
       expect(page).to have_content 'Shop'
-    end
-
-    it "contains banner box"
-
-    it "contains email registration" do
       expect(page).to have_content(/Become Famous/i)
-
-      # TODO : check email capturing
     end
 
     it "shows empty shopping bag" do

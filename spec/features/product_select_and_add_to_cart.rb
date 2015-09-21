@@ -8,11 +8,13 @@ describe 'user', type: :feature, js: true do
     ensure_environment_set(force: true)
 
     create(:spree_product, :with_size_color_variants, position: 1)
-
-    update_elastic_index
   end
 
   context 'products list' do
+    before :all do
+      update_elastic_index
+    end
+
     before :each do
       ignore_js_errors { visit('/dresses') }
     end
@@ -35,6 +37,7 @@ describe 'user', type: :feature, js: true do
     let(:product) { Spree::Product.first }
 
     before :each do
+      Rails.cache.clear # side panels cache doesn't reload automatically, btw
       Spree::Order.delete_all
 
       ignore_js_errors do
@@ -43,31 +46,30 @@ describe 'user', type: :feature, js: true do
     end
 
     it "can add dress to cart" do
-      # select color. color will be select by default.. we can omit
-      find('#product-colorize-action').click()
-      first('#product-color-content .color-option').click()
-
       # select size
       find("#product-size-action").click
       first('#product-size-content .size-option.product-option').click
 
+      sleep(0.5) # wait animation
+
+      # select color. color will be select by default.. we can omit
+      find('#product-colorize-action').click()
+      first('#product-color-content .color-option').click()
+
       # close panel
-      find('#product-overlay').trigger('click')
+      #find('#product-overlay').trigger('click')
 
       # press 'add'
-      find('.buy-button').click
+      find('.buy-button', visible: false).trigger("click")
 
       wait_ajax_completion(page)
-
-      save_screenshot('screenshot.png', full: true)
 
       # item should be
       expect(page.find('#cart-item-count').text).to eq('1')
       expect(page).to have_selector('#cart .cart-items .cart-item', visible: true)
 
       # internally, we should have items in order too
-      binding.pry
-      order_id = page.get_rack_session[:order_id]
+      order_id = page.get_rack_session["order_id"]
       order = Spree::Order.find(order_id)
 
       expect(order).not_to be_blank
