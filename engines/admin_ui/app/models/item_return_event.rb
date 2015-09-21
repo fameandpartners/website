@@ -80,6 +80,23 @@ class ItemReturnEvent < ActiveRecord::Base
     attributes :user, :comment
   end
 
+  event_type :record_refund do
+    # Refund status
+    # Refund ref
+    # Refund method
+    # Refund amount
+    # Refunded at
+
+    attributes :user, :refund_method, :refund_amount,
+               :refund_reference, :refunded_at, :comment
+
+    validates :user, presence: true
+    validates :refund_method, presence: true
+    validates :refund_amount, presence: true
+    validates :refunded_at, presence: true
+  end
+
+
   LEGACY_DATA_IMPORT_ATTRIBUTES = [
     :row_number,
     :rj_ident,

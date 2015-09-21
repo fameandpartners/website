@@ -46,10 +46,12 @@ module AdminUi
         end
       end
 
+      # TODO - DRY up with ItemReturnsController#possible_events
       def form_class(event_type)
         case event_type
-          when :receive_item then ::Forms::ReceiveItemForm
-          when :approve then ::Forms::ApproveForm
+          when :receive_item  then ::Forms::ReceiveItemForm
+          when :approve       then ::Forms::ApproveForm
+          when :record_refund then ::Forms::RecordRefundForm
         end
       end
 

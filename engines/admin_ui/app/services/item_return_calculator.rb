@@ -23,6 +23,14 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.comments = "#{@item_return.comments}#{event.comment}\n"
   end
 
+  def advance_record_refund(event)
+    @item_return.refund_status = :completed
+    @item_return.refund_method = event.refund_method
+    @item_return.refund_amount = Money.parse(event.refund_amount).amount * 100
+    @item_return.refund_ref    = event.refund_reference
+    @item_return.refunded_at   = event.refunded_at
+  end
+
   def advance_legacy_data_import(event)
     return if event.deleted_row.present?
 
