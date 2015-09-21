@@ -121,22 +121,6 @@ ruby:
             .text HERE COMES THE SUN
           .image
             = image_tag "homepage/lookbook/3.jpg"
-      li
-        a.lookbook-item href="/lookbook/here-comes-the-sun"
-          .head
-            .text HERE COMES THE SUN
-          .image
-            = image_tag "homepage/lookbook/3.jpg"
-        a.lookbook-item href="/lookbook/the-luxe-collection"
-          .head
-            .text LUXE COLLECTION
-          .image
-            = image_tag "homepage/lookbook/2.jpg"
-        a.lookbook-item href="/lookbook/make-a-statement"
-          .head
-            .text BAMBI X FAME.
-          .image
-            = image_tag "homepage/lookbook/1.jpg"
 /!
   .row.rect#rect-magazine
     .col-md-7.left-col
@@ -196,7 +180,7 @@ coffee:
 
     $("#account-area .account-menu").mouseleave ->
       $("#account-area .account-menu").hide()
-
+    
     $(".lookbook-slide").responsiveSlides({
       auto: false,
       nav: true
