@@ -10,8 +10,8 @@ class Products::DetailsController < Products::BaseController
       permalink:    params[:id]
     ).read
 
-    # only admins can view inactive/hidden products
-    if !@product.is_active && !spree_current_user.try(:has_spree_role?, "admin")
+    # only admins can view deleted products
+    if @product.is_deleted && !spree_current_user.try(:has_spree_role?, "admin")
       raise Errors::ProductInactive
     end
 

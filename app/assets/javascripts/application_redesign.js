@@ -104,7 +104,7 @@ jQuery(document).ready(function($){
   //home page slider
   $(function() {
     $(".rslides").responsiveSlides({
-    auto: true,             // Boolean: Animate automatically, true or false
+    auto: false,             // Boolean: Animate automatically, true or false
     pager: true,           // Boolean: Show pager, true or false
     speed: 3000,            // Integer: Speed of the transition, in milliseconds
     timeout: 6000,          // Integer: Time between slide transitions, in milliseconds

@@ -1,0 +1,34 @@
+.product-section--selection
+  /! size & color & customizations selectors
+  /! Size and Colour
+
+.row
+  - if @product.default_sizes?
+    a#product-size-action.btn-customize Size
+
+- if @product.colors?
+  .row
+    a#product-colorize-action.btn-customize
+      | Color
+
+- if @product.customizable?
+  .row
+    a#product-customize-action.btn-customize
+      | Customize
+
+- if @product.making_options.present?
+  .row
+    a#product-making-options-action.btn-customize
+      | Express Making
+
+.row
+    button.btn.btn-block.btn-black.buy-button Add to Cart
+
+.row.secondary-actions
+  .col-md-6.col-xs-6.col-xxs-12
+    button#fit-guide.btn.btn-block.btn-secondary Size Guide
+
+  .col-md-6.col-xs-6.col-xxs-12
+    - if Features.active?(:moodboard)
+      button#add-to-moodboard.btn.btn-block.btn-secondary data-user-present=current_spree_user.present?
+        |+ Moodboard
