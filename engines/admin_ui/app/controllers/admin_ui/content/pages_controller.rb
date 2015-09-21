@@ -18,7 +18,7 @@ module AdminUi
           end
         rescue StandardError => e
           NewRelic::Agent.notice_error(e)
-          flash[:error] = "Variables are not a correct form"
+          flash[:error] = "An error occured, please check the variable definition"
           render action: :edit
         end
       end
