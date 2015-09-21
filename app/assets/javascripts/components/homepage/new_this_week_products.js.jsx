@@ -32,10 +32,16 @@ var NewThisWeekProducts = React.createClass({
 
   componentDidMount: function() {
     $.ajax({
-      url: '/dresses/?order=newest&limit=10',
+      url: urlWithSitePrefix('/dresses/?order=newest&limit=10'),
       type: "GET",
       dataType: 'json',
       success: function(collection) {
+        if (urlWithSitePrefix('/dresses/?order=newest&limit=10').indexOf("/au/") > -1) {
+          for (i=0; i<collection.products.length;i++)
+          {
+            collection.products[i].collection_path = "/au" + collection.products[i].collection_path
+          }
+        }
         this.setState({products: collection.products});
       }.bind(this)
     });

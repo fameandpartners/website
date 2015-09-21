@@ -9,25 +9,25 @@
       /  = text_field_tag 'email', nil, placeholder: 'REGISTER YOUR EMAIL FOR THIS XX OFFER'
       /.submit SUBMIT
   .row.buttons.hidden-xs.hidden-sm
-    a.col href="/style-consultation"
+    = link_to style_consultation_path, class: "col"
       = image_tag 'footer/refer.png'
       .text FREE STYLING SESSION
-    a.col href="/getitquick"
+    = link_to fast_making_dresses_path, class: "col"
       = image_tag 'footer/48.png'
       .text 48 HR EXPRESS MAKING
-    a.col href="/fame-chain"
+    = link_to fame_chain_path, class: "col"
       = image_tag 'footer/chain.png'
       .text JOIN THE FAME CHAIN
 
   .mobile-footer.hidden-md.hidden-lg
     .row.buttons.visible-xs.visible-sm
-      a.col-xs-12 href="/style-consultation"
+      = link_to style_consultation_path, class: "col-xs-12"
         = image_tag 'footer/refer.png', class: 'refer'
         .text FREE STYLING SESSION
-      a.col-xs-12 href="/getitquick"
+      = link_to fast_making_dresses_path, class: "col-xs-12"
         = image_tag 'footer/48.png', class: 'hr48'
         .text 48 HR EXPRESS MAKING
-      a.col-xs-12 href="/fame-chain"
+      = link_to fame_chain_path, class: "col-xs-12"
         = image_tag 'footer/chain.png', class: 'chain'
         .text JOIN THE FAME CHAIN
 
