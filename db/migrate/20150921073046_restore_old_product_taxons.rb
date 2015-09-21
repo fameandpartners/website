@@ -16,14 +16,13 @@ class RestoreOldProductTaxons < ActiveRecord::Migration
     execute <<-SQL
       CREATE TEMPORARY TABLE broken_spree_products_taxons AS
         SELECT * FROM spree_products_taxons;
-
-      DROP TABLE spree_products_taxons;
-      CREATE TABLE spree_products_taxons AS
-        SELECT *
-        FROM pre_sep_deploy_spree_products_taxons
-        UNION
-        SELECT *
-        FROM broken_spree_products_taxons;
+      TRUNCATE TABLE spree_products_taxons;
+      INSERT INTO spree_products_taxons
+        SELECT * FROM (
+          SELECT * FROM pre_sep_deploy_spree_products_taxons
+          UNION
+          SELECT * FROM broken_spree_products_taxons
+        ) combined;
       DROP TABLE pre_sep_deploy_spree_products_taxons;
     SQL
   end
