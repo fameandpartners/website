@@ -1,4 +1,8 @@
 FameAndPartners::Application.routes.draw do
+  scope '/api', defaults: {format: :json} do
+    resources :blog_posts, :only => [:index], controller: 'api/blogposts'
+  end
+
   get '/robots', to: 'robots#show', constraints: { format: /txt/ }
 
   scope '(:site_version)' do
