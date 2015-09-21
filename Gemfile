@@ -50,6 +50,7 @@ gem 'coercible'
 
 gem 'ipaddress'
 gem 'geoip', require: false
+gem 'device_detector', '~> 0.8.1'
 gem 'rubyzip', '< 0.9.9', require: false
 gem 'roo', require: false
 

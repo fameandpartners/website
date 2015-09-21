@@ -1,4 +1,6 @@
 class Products::DetailsController < Products::BaseController
+  include Marketing::Gtm::Controller::Product
+
   layout 'redesign/application'
 
   def show
@@ -30,10 +32,11 @@ class Products::DetailsController < Products::BaseController
 
     @product.use_auto_discount!(current_promotion.discount) if current_promotion
 
-    # set page title.
+    # Set SEO properties
     # Drop anything after the first period(.) and newline
     color_title  = params[:color].titleize if params[:color]
     @title       = "#{color_title} #{@product.name} #{default_seo_title}".strip
     @description = @product.meta_description
+    append_gtm_product(@product)
   end
 end

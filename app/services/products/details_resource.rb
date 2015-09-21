@@ -16,8 +16,8 @@ class Products::DetailsResource
       raise ArgumentError.new('have no product identificators')
     end
 
-    @site_version     = options[:site_version] || SiteVersion.default
-    @product          = find_product!(options[:slug], options[:permalink], options[:product])
+    @site_version = options[:site_version] || SiteVersion.default
+    @product      = find_product!(options[:slug], options[:permalink], options[:product])
   end
 
   def cache_key
@@ -43,6 +43,7 @@ class Products::DetailsResource
         default_image:      product_images.default,
         price:              product_price,
         discount:           product_discount,
+        taxons:             product_taxons,
         # page#show specific details
         recommended_products: recommended_products,
         related_outerwear:    related_outerwear,
@@ -141,5 +142,9 @@ class Products::DetailsResource
 
     def product_selection_options
       Products::SelectionOptions.new(site_version: site_version, product: product).read
+    end
+
+    def product_taxons
+      product.taxons.collect { |taxon| Taxons::Presenter.new(spree_taxon: taxon) }
     end
 end

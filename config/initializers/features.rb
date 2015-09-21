@@ -1,10 +1,16 @@
 if Rails.env.production?
   Features.deactivate(:masterpass)
+  Features.activate(:google_tag_manager)
+end
+
+if Rails.env.preproduction?
+  Features.activate(:google_tag_manager)
 end
 
 if Rails.env.development?
   Features.activate(:content_revolution)
   Features.activate(:masterpass)
+  Features.deactivate(:google_tag_manager)
 end
 
 Features.deactivate(:style_quiz)

@@ -1,5 +1,4 @@
 Spree::Price.class_eval do
-
   attr_accessible :price
 
   def apply(discount)
@@ -26,44 +25,4 @@ Spree::Price.class_eval do
       self
     end
   end
-=begin
-  def amount_without_discount
-    self[:amount]
-  end
-
-  def amount_with_discount(surryhills = false)
-    if current_sale.active?
-      current_sale.apply(amount_without_discount, surryhills)
-    else
-      amount_without_discount
-    end
-  end
-
-  def display_amount_with_discount(surryhills = false)
-    money_with_discount(surryhills)
-  end
-
-  alias :display_price_with_discount :display_amount_with_discount
-
-  alias :display_amount_without_discount :display_amount
-  alias :display_price_without_discount :display_amount_without_discount
-
-  def money_with_discount(surryhills = false)
-    Spree::Money.new(amount_with_discount(surryhills) || 0, { :currency => currency })
-  end
-
-  def with_discount?
-    current_sale.active? && current_sale != 0
-  end
-
-  def final_amount(surryhills = false)
-    with_discount? ? amount_with_discount(surryhills) : amount_without_discount
-  end
-
-  private
-
-  def current_sale
-    @current_sale ||= Spree::Sale.first_or_initialize
-  end
-=end
 end
