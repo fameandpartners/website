@@ -4,6 +4,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     @template   = JST['templates/shopping_cart_summary']
     @cart       = options.cart # window.shopping_cart
     @$container = $(options.container || '#cart')
+    @value_proposition  = options.value_proposition
 
     _.bindAll(@, 'render', 'removeProductHandler', 'removeProductCustomizationHandler', 'removeProductMakingOptionHandler', 'couponFormSubmitHandler')
 
@@ -16,7 +17,7 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     @
 
   render: () ->
-    @$container.html(@template(cart: @cart.data))
+    @$container.html(@template(cart: @cart.data, value_proposition: @value_proposition ))
 
   removeProductHandler: (e) ->
     e.preventDefault()

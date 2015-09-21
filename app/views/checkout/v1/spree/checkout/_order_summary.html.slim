@@ -4,7 +4,8 @@ ruby:
   shopping_cart_summary_init = "
     window.app.shopping_cart_summary = new ShoppingCartSummary({
       cart: window.app.shopping_cart,
-      container: '.checkout-items'
+      container: '.checkout-items',
+      value_proposition: \"#{shopping_bag_texts.value_proposition}\"
     });
   "
   preload_cart_data = "

@@ -59,3 +59,15 @@
 <p>
   <strong>Total<span class="pull-right"><%= @cart.display_total %></span></strong>
 </p>
+
+<div class='shopping-bag-text-wrapper'>
+  <div class="row shopping-bag-text" >
+    <%- @value_proposition %>
+  </div>
+</div>
+
+<div class="row shopping-bag-payment-methods" >
+  <img src="/assets/checkout/visa-mastercard-paypal.jpg" >
+  <img src="/assets/comodo-ssl.png" >
+</div>
+
