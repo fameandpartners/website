@@ -48,7 +48,7 @@
 
   .col-md-4.form-group
     = form.label :country_name, with_required_mark(t(:country))
-    = text_field_tag "#{form.object_name}[country_id]", form.object.country.name,
+    = text_field_tag "#{form.object_name}[country_name]", form.object.country.name,
                      class: 'required form-control form-control-md',
                      required: 'required', readonly: true
     = form.hidden_field :country_id

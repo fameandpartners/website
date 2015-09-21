@@ -2,7 +2,6 @@ Spree::CheckoutController.class_eval do
   before_filter :prepare_order, only: :edit
   before_filter :set_order_site_version, :only => :update
   before_filter :find_payment_methods, only: [:edit, :update]
-  before_filter :prepare_masterpass, only: [:edit, :update]
   skip_before_filter :check_registration
 
   before_filter def switch_views_version
@@ -190,6 +189,8 @@ Spree::CheckoutController.class_eval do
   # run callback - preparations to order states
   def prepare_order
     before_address
+
+    prepare_masterpass
   end
 
   def prepare_masterpass
@@ -198,8 +199,6 @@ Spree::CheckoutController.class_eval do
         redirect_to checkout_state_path('address')
         return
       end
-
-      before_address
 
       @masterpass_data = session[:masterpass_data].checkout
       @order.email = @masterpass_data[:contact][:emailAddress]

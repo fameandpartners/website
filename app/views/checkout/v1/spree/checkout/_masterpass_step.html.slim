@@ -1,7 +1,10 @@
-= form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global checkout-form'}, remote: false do |form|
+- content_for :inline_javascript do
+  | window.is_masterpass = true;
+
+= form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global checkout-form payment_details credit_card pin'}, remote: false do |form|
   = render :partial => 'shared/error_messages', locals: {target: @order}
 
-  = hidden_field_tag :create_account, :value => true
+  = hidden_field_tag :create_account, true
 
   h2.checkout-section-title Your information
   .form-wrapper data-hook='billing'

@@ -274,6 +274,9 @@ page.initCheckoutEditPage = () ->
           address_city: $('#order_bill_address_attributes_city').val()
           address_line1: $('#order_bill_address_attributes_address1').val()
 
+        if window.is_masterpass
+          credit_card_data.address_country ||=  $('#order_bill_address_attributes_country_name').val()
+
         if window.bill_address
           credit_card_data.address_country  ||= window.bill_address.country
           credit_card_data.address_city     ||= window.bill_address.city
