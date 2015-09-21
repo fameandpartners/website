@@ -11,9 +11,9 @@
   .row
     .col-md-12.form-group
       = form.label :email, with_required_mark(t(:email))
-      = form.text_field :email, class: 'required form-control form-control-md', value: form.object.email, required: 'required'
+      = form.text_field :email, class: 'required form-control form-control-md', value: form.object.email, required: 'required', readonly: true
   / Temporary location for heading.
-  h2.checkout-section-title Delivery Address Details
+  h2.checkout-section-title Billing Address Details
 
 .row
   .col-md-6.form-group
@@ -42,14 +42,14 @@
   .col-md-4.form-group class=(address.country.states_required ? '' : 'hidden')
     = form.label :state_name, with_required_mark(t(:state))
     = text_field_tag "#{form.object_name}[state_name]", form.object.state.name,
-                     class: 'required form-control form-control-md',
+                     class: 'required form-control form-control-md no-post',
                      required: 'required', disabled: (!have_states), readonly: true
     = form.hidden_field :state_id
 
   .col-md-4.form-group
     = form.label :country_name, with_required_mark(t(:country))
     = text_field_tag "#{form.object_name}[country_name]", form.object.country.name,
-                     class: 'required form-control form-control-md',
+                     class: 'required form-control form-control-md no-post',
                      required: 'required', readonly: true
     = form.hidden_field :country_id
 
