@@ -39,6 +39,15 @@ Use rbenv and the ruby-build plugin
 $ brew install redis elasticsearch imagemagick postgresql
 ```
 
+To have ElasticSearch start on login:
+```
+ln -sfv /usr/local/opt/elasticsearch/*.plist ~/Library/LaunchAgents
+```
+Then to load ElasticSearch now:
+```
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist
+```
+
 ### Getting started
 
 * `$ git clone git@github.com:fameandpartners/website.git`
