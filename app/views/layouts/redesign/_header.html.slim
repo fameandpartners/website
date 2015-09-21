@@ -256,8 +256,9 @@ ruby:
               i.fa.fa-chevron-right
           li.normal-item
             a.text href='http://blog.fameandpartners.com' MAGAZINE
-          li.normal-item
-            = link_to 'SALE', '/mystyle?lpi=formal&sale=', class: 'text'
+          - if sale_active?
+            li.normal-item
+              = link_to 'SALE', '/mystyle?lpi=formal&sale=', class: 'text'
           /li.normal-item
             /.text MADE FOR YOU
           /li.normal-item
