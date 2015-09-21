@@ -97,9 +97,9 @@
 
       .inner-wrap {
         position: absolute;
-        top: 0; 
-        bottom: 0; 
-        left: 0; 
+        top: 0;
+        bottom: 0;
+        left: 0;
         right: 0;
       }
 
@@ -123,6 +123,9 @@
   .content-wrap {
     height: 56px;
     overflow: hidden;
+    .txt-truncate-block{
+      word-wrap: break-word;
+    }
   }
 
   .title {
