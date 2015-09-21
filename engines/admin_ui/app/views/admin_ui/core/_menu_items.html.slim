@@ -1,14 +1,6 @@
 = menu_item root_path, 'Dashboard', icon: 'dashboard', exact: true
 
-li class="#{active_link_to_class(return_requests_path)} #{active_link_to_class(item_returns_path)}"
-  a href="#"
-    i.fa.fa-thumbs-down
-    span.nav-label Returns Management
-    span.fa.arrow
-  ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
-    li = active_link_to 'Approvals', item_returns_path
-    li = active_link_to 'Requests', return_requests_path
-    li = active_link_to 'Old Data', manually_managed_returns_path
+= menu_item item_returns_path, 'Returns', icon: 'thumbs-down', exact: true
 
 - backend_links = [['admin_ui/caches', 'admin_ui/sidekiqs', 'admin_ui/product_indexes'], []]
 li class=active_link_to_class(root_path, active: backend_links)
@@ -20,6 +12,8 @@ li class=active_link_to_class(root_path, active: backend_links)
     = active_link_to 'Caches', caches_path, wrap_tag: :li
     = active_link_to 'Sidekiq', sidekiq_path, wrap_tag: :li
     = active_link_to 'Indexes', product_indexes_path, wrap_tag: :li
+    li = active_link_to 'Return Requests', return_requests_path
+    li = active_link_to 'Manual Returns Spreadsheet', manually_managed_returns_path
 
 li class=active_link_to_class('', active: /content/)
   a href="#"
