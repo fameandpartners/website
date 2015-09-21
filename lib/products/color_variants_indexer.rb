@@ -44,7 +44,6 @@ module Products
 
       variants = []
       product_scope.find_each do |product|
-        logger.info("PRODUCT #{product_index}/#{product_count} #{product.name}")
 
         active_color_ids = product.variants.active.map do |variant|
           variant.option_values.colors.map(&:id)
@@ -56,16 +55,18 @@ module Products
         product.product_color_values.each do |product_color_value|
           color = product_color_value.option_value
 
+          log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.name.ljust(14)} |"
+
           unless active_color_ids.include?(color.id)
-            logger.warn "#{color.name} Not in active Colours"
+            logger.warn "id  -  | #{log_prefix} Not in active Colours"
             next
           end
           unless product_color_value.images.present?
-            logger.warn "#{color.name} NO IMAGES"
+            logger.error "id  -  | #{log_prefix} No Images!"
             next
           end
 
-          logger.info("PRODUCT #{product_index}/#{product_count} #{product.name} | #{color_variant_id} Colour #{color.name}")
+          logger.info("id #{color_variant_id.to_s.ljust(3)} | #{log_prefix} Indexing")
 
           variants << {
             id: color_variant_id,
