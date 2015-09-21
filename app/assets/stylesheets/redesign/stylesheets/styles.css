@@ -8010,31 +8010,31 @@ xheader
   transition: right 0.3s;
 }
 
-#cart,.checkout-items .shopping-bag-text-wrapper{
+#cart .shopping-bag-text-wrapper{
     background-color: #EEEEEE;
     padding-bottom:10px;
     font-weight:500;
 }
 @media(max-width:600px){
-  #cart,.checkout-items .shopping-bag-text-wrapper{
+  #cart .shopping-bag-text-wrapper{
     margin-top: 30px;
     margin-left: 15px;
     margin-right: 15px;
   }
 }
-#cart,.checkout-items .shopping-bag-text{
+#cart .shopping-bag-text{
   margin-right:0;
   padding-top:10px;
   padding-left:35px
 }
-#cart,.checkout-items .shopping-bag-text span{
+#cart .shopping-bag-text span{
   float: left;
 }
-#cart,.checkout-items .shopping-bag-text span:not(:nth-child(2)){
+#cart .shopping-bag-text span:not(:nth-child(2)){
   float: left;
   margin-top: 5px;
 }
-#cart,.checkout-items .shopping-bag-text i.coathanger{
+#cart .shopping-bag-text i.coathanger{
   background-image: url('../../cart/coathanger.svg');
   width: 20px;
   height: 15px;
@@ -8045,7 +8045,7 @@ xheader
   background-size: contain;
   clear: both;
 }
-#cart,.checkout-items .shopping-bag-text i.plane{
+#cart .shopping-bag-text i.plane{
   background-image: url('../../cart/plane.svg');
   width: 20px;
   height: 21px;
@@ -8056,7 +8056,7 @@ xheader
   background-size: contain;
   clear: both;
 }
-#cart,.checkout-items .shopping-bag-text i.mobile{
+#cart .shopping-bag-text i.mobile{
   background-image: url('../../cart/mobile.svg');
   width: 22px;
   height: 19px;
@@ -8068,7 +8068,7 @@ xheader
   background-size: contain;
   clear: both;
 }
-#cart,.checkout-items .shopping-bag-payment-methods {
+#cart .shopping-bag-payment-methods {
   text-align:center;
   margin-top:20px;
 
@@ -8076,11 +8076,8 @@ xheader
 #cart .shopping-bag-payment-methods img{
   width: 20%;
 }
-.checkout-items .shopping-bag-payment-methods img{
-  width: 35%;
-}
 
-#cart,.checkout-items .shopping-bag-payment-methods img:last-child{
+#cart .shopping-bag-payment-methods img:last-child{
   margin-left: 20px;
 }
 
