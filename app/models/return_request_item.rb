@@ -107,9 +107,10 @@ class ReturnRequestItem < ActiveRecord::Base
         payment = ::Reports::Payments::PaymentReportPresenter.from_payment(rri.order.payments.last)
         attrs.merge!(
           order_payment_method: payment.payment_type,
+          order_payment_date:   payment.payment_date,
           order_paid_amount:    payment.amount_in_cents,
           order_paid_currency:  payment.currency,
-          order_payment_ref:    payment.token
+          order_payment_ref:    payment.transaction_id,
         )
       end
 

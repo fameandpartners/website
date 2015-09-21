@@ -22,6 +22,7 @@ class CreateItemReturns < ActiveRecord::Migration
       t.date     :received_on
       t.string   :received_location
       t.string   :order_payment_method
+      t.date     :order_payment_date
       t.integer  :order_paid_amount
       t.string   :order_paid_currency
       t.string   :order_payment_ref

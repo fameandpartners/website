@@ -143,7 +143,7 @@ module Reports
           end
 
           def transaction_id
-            '-'
+            token
           end
         end
 

@@ -13,6 +13,7 @@ class ItemReturnsGrid
          select: ItemReturn::STATES.map { |x| [x.to_s.humanize, x] },
          default: -> { ItemReturn::STATES - [:refunded, :credit_note_issued] })
   filter(:refund_status, :enum, select: -> { ItemReturn.pluck(:refund_status).uniq })
+  filter(:order_payment_method, :enum, select: -> { ItemReturn.pluck(:order_payment_method).uniq })
   filter(:order_number, :string) {|value| where("order_number ilike ?", "%#{value}%")}
   filter(:contact_email, :string) {|value| where("contact_email ilike ?", "%#{value}%")}
   filter(:product_style_number, :string, header: 'Style')
@@ -53,7 +54,7 @@ class ItemReturnsGrid
       ra.to_s.first.upcase
     end
   end
-  column :reason_category
+  # column :reason_category
   # column :reason_sub_category
   column :contact_email
 
