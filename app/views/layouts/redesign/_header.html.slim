@@ -198,19 +198,19 @@ ruby:
                 i.fa.fa-chevron-left
                 .back BACK
             li.manu-content
-                a href='/lookbook/make-a-statement'
+                = link_to make_a_statement_collection_path
                   .heading
                     .inner-wrap
                       span bambi x fame.
                   .media-wrap
                     = image_tag 'homepage/lookbook/1.jpg'
-                a href='/lookbook/the-luxe-collection'
+                = link_to luxe_collection_path
                   .heading.alt
                     .inner-wrap
                       span the luxe collection
                   .media-wrap
                     = image_tag 'homepage/lookbook/2.jpg'
-                a href='/lookbook/here-comes-the-sun'
+                = link_to here_comes_the_sun_collection_path
                   .heading.alt
                     .inner-wrap
                       span here comes the sun
@@ -228,26 +228,26 @@ ruby:
               a href='http://fameandpartners.tumblr.com/'
                 .gray-bg STEAL HER STYLE
                 .mag-image
-                  = image_tag "homepage/magazine/1.jpg"
+                  = image_tag 'homepage/magazine/1.jpg'
                   .image-text.text-center TAYLOR
                 .mag-image
-                  = image_tag "homepage/magazine/2.jpg"
+                  = image_tag 'homepage/magazine/2.jpg'
                   .image-text.text-center BEYONCE
 
                 .gray-bg BACKSTAGE PASS
                 .mag-image
-                  = image_tag "homepage/magazine/2.jpg"
+                  = image_tag 'homepage/magazine/2.jpg'
                   .image-text.text-center Blah blah blah
                 .mag-image
-                  = image_tag "homepage/magazine/3.jpg"
+                  = image_tag 'homepage/magazine/3.jpg'
                   .image-text.text-center Blah blah blah
 
         ul.nav.navbar-nav#inner-main-menu
           li
             div id='side-search-area' class='row'
-              form accept-charset="UTF-8" action="/search" method="get" id="searchForm"
+              = form_tag search_path, method: :get, id: 'searchForm'
                 input type='text' id='side-search' placeholder='SEARCH' name='q'
-                = image_tag "_icons/search.svg", class: "side-search-icon", id: "side-search-icon"
+                = image_tag '_icons/search.svg', class: 'side-search-icon', id: 'side-search-icon'
           li.normal-item#new-this-week-open
             .text NEW THIS WEEK
             .arrow
@@ -268,34 +268,34 @@ ruby:
             a.text href='http://blog.fameandpartners.com' MAGAZINE
           - if sale_active?
             li.normal-item
-              = link_to 'SALE', '/mystyle?lpi=formal&sale=', class: 'text'
+              = link_to 'SALE', mystyle_landing_page_path(lpi: 'formal', sale: ''), class: 'text'
           /li.normal-item
             /.text MADE FOR YOU
           /li.normal-item
             /.text JOIN US
           li.normal-item
             div
-              = link_to 'ACCOUNT LOGIN', '/profile', class: 'text'
+              = link_to 'ACCOUNT LOGIN', profile_path, class: 'text'
           li.normal-item.no-border
             div
-              = link_to 'REGISTER NOW', '/signup?cl=login-form', class: 'text'
+              = link_to 'REGISTER NOW', spree.signup_path(cl: 'login-form'), class: 'text'
 
           li.bottom-area
-            = link_to 'Why Shop With Us', '/why-us', class: 'bottom-area-text'
+            = link_to 'Why Shop With Us', why_us_path, class: 'bottom-area-text'
           li.bottom-area
-            = link_to 'About Us', '/about', class: 'bottom-area-text'
+            = link_to 'About Us', about_us_path, class: 'bottom-area-text'
           li.bottom-area
-            = link_to 'FAQs & Shipping', '/faqs', class: 'bottom-area-text'
+            = link_to 'FAQs & Shipping', faqs_path, class: 'bottom-area-text'
           li.bottom-area
-            = link_to 'New Sizing', '/size-guide', class: 'bottom-area-text'
+            = link_to 'New Sizing', size_guide_path, class: 'bottom-area-text'
           li.bottom-area
-            = link_to 'Terms', '/terms', class: 'bottom-area-text'
+            = link_to 'Terms', terms_path, class: 'bottom-area-text'
           li.bottom-area
-            = link_to 'Get styling advice', '/style-consultation', class: 'bottom-area-text'
+            = link_to 'Get styling advice', style_consultation_path, class: 'bottom-area-text'
           li.bottom-area
-            = link_to 'Fame Chain', '/fame-chain', class: 'bottom-area-text'
+            = link_to 'Fame Chain', fame_chain_path, class: 'bottom-area-text'
           li.bottom-area
-            = link_to 'Contact US', '/contact/new', class: 'bottom-area-text'
+            = link_to 'Contact US', new_contact_path, class: 'bottom-area-text'
 
 
 = render 'layouts/redesign/campaigns/auto_apply_promo_code'

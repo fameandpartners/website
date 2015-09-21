@@ -64,7 +64,7 @@ ruby:
     a.icon-search.js-search-trigger href="#"
       = image_tag "_icons/search.svg", class: "nav-mobile-logo"
     .search-input#search-area
-      form accept-charset="UTF-8" action="/search" method="get" id="searchForm"
+      = form_tag search_path, method: :get, id: 'searchForm'
         input type="text" id="searchValue" placeholder="SEARCH FOR..." name="q"
 
 .row.rect#rect-new-this-week
