@@ -20,6 +20,38 @@
     h3 Order
     = link_to @item_return.order_number, spree.admin_order_path(id: @item_return.order_number)
     = render :partial => 'payment_info'
+    table.table
+      thead : tr
+        th Action
+        th SKU
+        th Style Name
+        th Order Size
+        th Make Size
+        th Colour
+        th Customisations
+        th Category
+        th Reason
+      tbody
+        - if @item_return.return_request.present?
+          - item = @item_return.return_request
+          - line_item = Orders::LineItemPresenter.new(@item_return.line_item, Orders::OrderPresenter.new(@item_return.line_item.order))
+          tr
+            td
+              p class=action_alert_class(item.action)
+                i class=action_icon_class(item.action)
+                = item.action
+            td = line_item.style_number
+            td = line_item.style_name
+            td = line_item.country_size
+            td = line_item.make_size
+            td = line_item.colour_name
+            td
+              ul.list-unstyled
+                - line_item.customisations_without_images.each do |c|
+                  li = c
+            td = item.reason_category
+            td = item.reason
+            td = image_tag(line_item.image_url, height: '100')
 
 .ibox
   .ibox-title
