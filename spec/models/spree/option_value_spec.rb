@@ -1,17 +1,20 @@
 require 'spec_helper'
 
-describe Spree::OptionValue, type: :model do
+describe Spree::OptionValue, type: :model, memoization_support: true do
   before :each do
     Spree::OptionValue.delete_all
     Spree::OptionType.delete_all
     Spree::OptionValuesGroup.delete_all
+
+    rememoize(Spree::OptionType, :@color)
+    rememoize(Spree::OptionType, :@size)
   end
 
   context "#colors" do
     it 'returns options values for color option type' do
       color_option_type = create(:option_type, :color)
       color_option_type.option_values.create(name: 'foo-red', presentation: 'foo-red')
-      
+
       expect(Spree::OptionValue.colors.size).to eq(1)
       expect(Spree::OptionValue.colors.first.name).to eq('foo-red')
     end

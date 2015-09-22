@@ -31,6 +31,8 @@ describe 'user', type: :feature, js: true do
 
     let(:state)     { Spree::State.find_by_abbr('AL') }
 
+    let(:card)      { build(:credit_card, :master) }
+
     # create user
     # create order with user
     # create payment methods
@@ -65,17 +67,29 @@ describe 'user', type: :feature, js: true do
       ignore_js_errors { find('button[name=pay_securely]').click }
 
       within('.checkout-form.credit_card') do
-        fill_in 'number',     with: 5520000000000000
-        fill_in 'name',       with: 'John Smith'
-        fill_in 'month',      with: Time.current.month
-        fill_in 'year',       with: Time.current.year
-        fill_in 'card_code',  with: '123'
+        fill_in 'number',     with: card.number
+        fill_in 'name',       with: card.name
+        fill_in 'month',      with: card.month
+        fill_in 'year',       with: card.year
+        fill_in 'card_code',  with: card.verification_value
       end
 
       ignore_js_errors { find('.checkout-form button.btn').click }
 
       wait_ajax_completion(page)
-      sleep(5) # i'm sorry, have no idea how to stop execution until payment process finished
+      #sleep(10) # i'm sorry, have no idea how to stop execution until payment process finished
+
+      # i'm sorry, have no idea how to stop execution until payment process finished
+      # no more fast payments, 'pay with pain'
+      begin
+        Timeout.timeout(Capybara.default_wait_time) do
+          while order.state != 'complete'
+            sleep(0.1)
+            order.reload
+          end
+        end
+      rescue Timeout::Error
+      end
 
       order.reload
       expect(order.state).to eq('complete')

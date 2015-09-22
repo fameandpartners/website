@@ -100,6 +100,9 @@ module EnvironmentHelpers
 
     if models.include?('payments')
       create(:pin_gateway)
+      create(:masterpass_gateway)
+
+
     end
   end
 
