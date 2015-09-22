@@ -5,7 +5,7 @@ module Spree
     preference :checkout_identifier, :string
     preference :callback_domain, :string, default: 'http://www.fameandpartners.com'
     preference :accepted_cards, :string, default: 'master,amex,diners,discover,maestro,visa'
-    preference :shipping_suppression, :boolean, default: true
+    preference :shipping_suppression, :boolean, default: false
     preference :server, :string, default: 'sandbox'
 
     attr_accessible :preferred_consumer_key, :preferred_checkout_identifier, :preferred_accepted_cards,
@@ -89,7 +89,7 @@ module Spree
       false
     end
 
-    def purchase(amount, masterpass_checkout, gateway_options={})
+    def log_transaction
       approval_code = "sample"
       if (!approval_code)
         approval_code = "UNAVBL"
@@ -121,7 +121,12 @@ module Spree
       REXML::XPath.first(response_xml, "//MerchantTransactions/*[not(root)]").name = "MerchantTransaction"
       # AllServicesMappingRegistry::MerchantInitializationResponse.from_xml(response_xml.to_s)
 
-      transaction_response = AllServicesMappingRegistry::MerchantTransactions.from_xml(response_xml.to_s)
+      # transaction_response = AllServicesMappingRegistry::MerchantTransactions.from_xml(response_xml.to_s)
+    end
+
+    def purchase(amount, masterpass_checkout, gateway_options={})
+
+
       if transaction_response.first.transactionStatus == "Success"
         # We need to store the transaction id for the future.
         # This is mainly so we can use it later on to refund the payment if the user wishes.

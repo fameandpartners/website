@@ -61,16 +61,13 @@ module Spree
       )
       save_session_data
 
-      # file = File.read(File.join('spree_masterpass', 'resources', 'shoppingCart.xml'))
-      # shopping_cart_request = AllServicesMappingRegistry::ShoppingCartRequest.from_xml(file)
-      # shopping_cart_request.oAuthToken = @data.request_token
-        # shopping_cart_request.originUrl = payment_method.preferred_callback_domain
-
       # flash[:commerce_tracking] = 'masterpass_initialized';
       render json: {
                  request_token: @data.request_token,
                  callback_domain: payment_method.preferred_callback_domain,
-                 cart_callback_path: payment_method.preferred_callback_domain + '/masterpass/cartcallback?payment_method_id=' + params[:payment_method_id],
+                 cart_callback_path: payment_method.preferred_callback_domain +
+                     '/' + current_site_version.code +
+                     '/masterpass/cartcallback?payment_method_id=' + params[:payment_method_id],
                  accepted_cards: payment_method.preferred_accepted_cards,
                  checkout_identifier: payment_method.preferred_checkout_identifier,
                  shipping_suppression: payment_method.preferred_shipping_suppression,
@@ -92,11 +89,63 @@ module Spree
       @data.access_token = access_token_response.oauth_token
 
       # get the checkout data
-      @data.checkout = AllServicesMappingRegistry::Checkout.from_xml(
+      checkout = AllServicesMappingRegistry::Checkout.from_xml(
           @service.get_payment_shipping_resource(
               @data.checkout_resource_url, @data.access_token
-          ));
+          ))
 
+      if checkout.card && checkout.contact && checkout.shippingAddress
+        # To resolve the error - "Singleton can't be dumped"
+        @data.checkout = {
+            :card => {
+                :brandId => checkout.card.brandId,
+                :brandName => checkout.card.brandName,
+                :accountNumber => checkout.card.accountNumber,
+                :cardHolderName => checkout.card.cardHolderName,
+                :expiryMonth => checkout.card.expiryMonth,
+                :expiryYear => checkout.card.expiryYear,
+                :billingAddress => {
+                    :city => checkout.card.billingAddress.city,
+                    :country => checkout.card.billingAddress.country,
+                    :countrySubdivision => checkout.card.billingAddress.countrySubdivision,
+                    :line1 => checkout.card.billingAddress.line1,
+                    :line2 => checkout.card.billingAddress.line2,
+                    :postalCode => checkout.card.billingAddress.postalCode
+                },
+            },
+            :contact => {
+                :firstName => checkout.contact.firstName,
+                :lastName => checkout.contact.lastName,
+                :country => checkout.contact.country,
+                :emailAddress => checkout.contact.emailAddress,
+                :phoneNumber => checkout.contact.phoneNumber
+            },
+            :preCheckoutTransactionId => checkout.preCheckoutTransactionId,
+            :transactionId => checkout.transactionId,
+            :walletID => checkout.walletID,
+            :shippingAddress => {
+                :city => checkout.shippingAddress.city,
+                :country => checkout.shippingAddress.country,
+                :countrySubdivision => checkout.shippingAddress.countrySubdivision,
+                :line1 => checkout.shippingAddress.line1,
+                :line2 => checkout.shippingAddress.line2,
+                :postalCode => checkout.shippingAddress.postalCode,
+                :recipientName => checkout.shippingAddress.recipientName,
+                :recipientPhoneNumber => checkout.shippingAddress.recipientPhoneNumber
+            }
+        }
+
+        save_session_data
+
+        redirect_to checkout_state_path('masterpass')
+      else
+        flash[:error] = t(:masterpass_processing_failed)
+
+        redirect_to checkout_state_path('address')
+      end
+    end
+
+    def cartpostback
       order = current_order || raise(ActiveRecord::RecordNotFound)
       if params[:mpstatus] == 'success'
         if current_order.confirmation_required?

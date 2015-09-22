@@ -6,9 +6,15 @@ ruby:
       container:    '#cart',
       toggle_link:  '#cart-trigger',
       auto_open:    /open_cart=true/.test(window.location.search),
-      country_code: '#{session[:country_code]}'
-    });
-  "
+      country_code: '#{session[:country_code]}'"
+  if masterpass_available?
+      shopping_bag_init = shopping_bag_init + ",
+        masterpass_link: '#buyWithMasterPass',
+        masterpass_cart_callback_uri: urlWithSitePrefix('/masterpass/cart?payment_method_id=" + masterpass_payment_method.id.to_s + "')
+        "
+  end
+  shopping_bag_init = shopping_bag_init + "});"
+
 = content_for :inline_javascript do
   = raw shopping_bag_init
 

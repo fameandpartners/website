@@ -8,13 +8,17 @@ window.ShoppingBag = class ShoppingBag
     @template   = JST['templates/shopping_bag']
     @cart       = options.cart # window.shopping_cart
     @rendered   = false
+    @masterpass_clicked = false
     @auto_open  = options.auto_open
     @country_code = options.country_code
+    @masterpass_cart_callback_uri = options.masterpass_cart_callback_uri
 
     @$overlay   = $(options.overlay || '#shadow-layer')
     @$container = $(options.container || '#cart')
+    @masterpass_link = options.masterpass_link
 
-    _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler', 'couponFormSubmitHandler', 'removeProductCustomizationHandler', 'removeProductMakingOptionHandler')
+
+    _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler', 'couponFormSubmitHandler', 'removeProductCustomizationHandler', 'removeProductMakingOptionHandler', 'masterpassOpenHandler')
 
     $(options.toggle_link || '#masthead-container #cart-trigger').add('.heart-and-suitcase .shopping-bag').on('click', @openHandler)
 
@@ -49,6 +53,11 @@ window.ShoppingBag = class ShoppingBag
     )
     @$overlay.addClass('is-visible')
 
+#    Add event listener to MasterPass button
+    $(@masterpass_link || '#buyWithMasterPass').unbind('click');
+    $(@masterpass_link || '#buyWithMasterPass').on('click', @masterpassOpenHandler)
+    return
+
   openHandler: (e) ->
     e.preventDefault() if e
     if @cart.isLoaded()
@@ -59,7 +68,7 @@ window.ShoppingBag = class ShoppingBag
 
   closeHandler: (e) ->
     e.preventDefault() if e
-    @close()
+    @close() if !@masterpass_clicked
 
   removeProductHandler: (e) ->
     e.preventDefault()
@@ -83,3 +92,41 @@ window.ShoppingBag = class ShoppingBag
     $input = @$container.find('#promotion-code')
     @cart.one('complete', (event, result) -> $input.val(''))
     @cart.applyPromotionCode($input.val())
+
+  masterpassOpenHandler: (e) ->
+    e.preventDefault() if e
+    return if @cart.item_count == 0
+
+    @masterpass_clicked = true
+    spinner = new Spinner().spin();
+    @$overlay.append spinner.el;
+    @$overlay.addClass('most-front');
+
+    overlay = @$overlay;
+    $.getJSON(@masterpass_cart_callback_uri).done (data) ->
+      @masterpass_clicked = false
+      spinner.stop()
+      overlay.removeClass('most-front');
+
+      if data.hasOwnProperty('request_token') and data.hasOwnProperty('callback_domain') and data.hasOwnProperty('checkout_identifier') and data.hasOwnProperty('shipping_suppression') and data.hasOwnProperty('accepted_cards') and data.hasOwnProperty('cart_callback_path')
+        MasterPass.client.checkout
+          requestToken: data.request_token
+          callbackUrl: data.cart_callback_path
+          merchantCheckoutId: data.checkout_identifier
+          allowedCardTypes: data.accepted_cards
+          cancelCallback: data.callback_domain
+          suppressShippingAddressEnable: data.shipping_suppression
+          loyaltyEnabled: 'false'
+          requestBasicCheckout: false,
+          version: 'v6'
+
+        if data.hasOwnProperty('commerce_tracking') and data.commerce_tracking == true
+          axel = Math.random() + ''
+          a = axel * 10000000000000
+          ifrm = document.createElement('IFRAME')
+          ifrm.setAttribute 'src', 'https://4754606.fls.doubleclick.net/activityi;src=4754606;type=mpau;cat=famep00;ord=\' + a + \'?'
+          ifrm.style.width = 1 + 'px'
+          ifrm.style.height = 1 + 'px'
+          ifrm.style.frameborder = 0
+          ifrm.style.display = 'none'
+          document.body.appendChild ifrm

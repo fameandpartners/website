@@ -64,6 +64,8 @@ gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 gem 'spree_banner', '~> 1.3.0'
 
+#payments
+gem 'pin_payment'
 
 # spree extensions for authentication
 gem 'spree_auth_devise',
@@ -135,6 +137,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'timecop'
   gem 'spring'
+  gem 'spring-commands-rspec'
   gem 'thin'
   gem 'meta_request'
 end

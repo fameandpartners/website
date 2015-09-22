@@ -4,6 +4,11 @@
     padding: 10px 12px 6px 12px;
     font-family: $font-family-secondary;
   }
+
+  #buyWithMasterPass {
+    padding: 0;
+    margin-top: 5px;
+  }
 }
 
 
@@ -84,4 +89,8 @@
       border-bottom-style: solid;
     }
   }
+}
+
+.most-front {
+  z-index: 10000 !important;
 }

@@ -25,14 +25,22 @@ module CheckoutHelper
     end
   end
 
-  # Not a payment gateway
-  def masterpass_active?
-    false #|| Features.active?(:masterpass, current_spree_user) || session[:auto_applied_promo_code] == 'masterpass25'
-  end
-
   def masterpass_cart_callback_uri(payment_method)
     callback_protocol = Rails.env.production? ? 'https' : 'http'
-    cart_masterpass_url(payment_method_id: payment_method.id, protocol: callback_protocol)
+    masterpass_cart_url(payment_method_id: payment_method.id, protocol: callback_protocol)
+  end
+
+  def masterpass_payment_method
+    @masterpass_payment_method ||= Spree::PaymentMethod.where(
+        type: "Spree::Gateway::Masterpass",
+        # environment: Rails.env,
+        active: true,
+        deleted_at: nil
+    ).first
+  end
+
+  def masterpass_available?
+    masterpass_payment_method.present?
   end
 
   def payment_failed_messages(error)

@@ -1,0 +1,36 @@
+- content_for :inline_javascript do
+  | window.is_masterpass = true;
+
+= form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global checkout-form payment_details credit_card pin'}, remote: false do |form|
+  = render :partial => 'shared/error_messages', locals: {target: @order}
+
+  = hidden_field_tag :create_account, true
+
+  h2.checkout-section-title Your information
+  .form-wrapper data-hook='billing'
+    = form.fields_for :bill_address do |bill_form|
+      = render partial: 'masterpass_address', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
+
+  h2.checkout-section-title Delivery Address Details
+  .form-wrapper data-hook='shipping'
+    = form.fields_for :ship_address do |ship_form|
+      = render partial: 'masterpass_address', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
+
+
+  - if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
+    - content_for :head do
+      - if Rails.env.production? && !@credit_card_gateway.prefers_test_mode?
+        = javascript_include_tag 'https://api.pin.net.au/pin.js'
+      - else
+        = javascript_include_tag 'https://test-api.pin.net.au/pin.js'
+
+    - content_for :inline_javascript do
+      | Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
+
+  h2.checkout-section-title Payment Details from Masterpass
+  / TODO - Rewrite as react component with new button layout and behaviour
+  p All transactions are secure and encrypted. Credit card information is never stored.
+  #payment-selection.panel-group aria-multiselectable="false" role="tablist"
+    - if @credit_card_gateway
+      = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
+      = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
