@@ -103,6 +103,14 @@ this gets you a working site, with no customer data.
 Run `./script/db` and Choose 8 `sanitise_dev_db` to clean the current dev DB.
 See the source to see exactly what is removed.
 
+#### Creating an Admin User
+
+Steps to create an admin user:
+
+* If you do not already have an existing user in mind, create one through the existing web site process.
+* To assign admin rights in the Rails console, first find the user: `Spree::User.where(email: 'user@email').first`
+* Then using the id of the user found: `Spree::User.find(id).spree_roles << Spree::Role.find_by_name('admin')`
+
 #### Legacy Process
 
 **NOTE :: This section is preserved for posterity, but I intend to rewrite / remove**
