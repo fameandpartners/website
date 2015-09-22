@@ -15,6 +15,23 @@
 
 .ibox
   .ibox-title
+    h3 History
+  .ibox-content.inspinia-timeline
+    .vertical-container.dark-timeline
+      - @item_return.events.order('created_at DESC').each do |event|
+        .timeline-item
+          .row
+            .col-xs-3.date
+              i.fa.fa-calendar
+              span class="vertical-date"
+                => time_ago_in_words(event.occurred_at)
+                | ago
+                small =<> event.occurred_at.to_s
+            .col-xs-7.content.no-top-border
+              p.m-b-xs : strong = event.event_type.to_s.titleize
+
+.ibox
+  .ibox-title
     h3 Return Request
   .ibox-content
     h3 Order
@@ -53,15 +70,22 @@
             td = item.reason
             td = image_tag(line_item.image_url, height: '100')
 
-.ibox
+
+.ibox.collapsed
   .ibox-title
-    h3 Raw Attributes
+    a.collapse-link
+      h5 Raw Attributes
+      .ibox-tools
+        i.fa.fa-chevron-up
   .ibox-content
     = render 'attributes_list', attributes: @item_return.attributes
 
 .ibox
   .ibox-title
-    h3 History
+    a.collapse-link
+      h5 Full History
+      .ibox-tools
+        i.fa.fa-chevron-up
   .ibox-content
     .vertical-container.dark-timeline
       - @item_return.events.order('created_at DESC').each do |event|
