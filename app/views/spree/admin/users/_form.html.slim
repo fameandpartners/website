@@ -12,14 +12,6 @@
       = f.label :last_name, 'Last Name'
       = f.text_field :last_name, :class => 'fullwidth'
       = error_message_on :user, :last_name
-    = f.field_container :slug do
-      = f.label :slug, 'Slug'
-      = f.text_field :slug, :class => 'fullwidth'
-      = error_message_on :user, :slug
-    = f.field_container :description do
-      = f.label :description, 'Description'
-      = f.text_area :description, :class => 'fullwidth'
-      = error_message_on :user, :description
     = f.field_container :avatar do
       = f.label :avatar, 'Avatar'
       - if f.object.avatar.present?
