@@ -9,11 +9,11 @@
       a href='#collection3' data-toggle="tab" Here comes the Sun Collection
 
   .tab-wrap
-    = link_to '/lookbook/make-a-statement', id: 'collection1', class: 'tab active'
+    = link_to make_a_statement_collection_path, id: 'collection1', class: 'tab active'
       = image_tag 'home-page-tiles/tab-collectionbox-1.jpg', alt: 'Make a Statement Collection'
-    = link_to '/lookbook/the-luxe-collection', id: 'collection2', class: 'tab'
+    = link_to luxe_collection_path, id: 'collection2', class: 'tab'
       = image_tag 'home-page-tiles/tab-collectionbox-2.jpg', alt: 'Luxe Collection'
-    = link_to '/lookbook/here-comes-the-sun', id: 'collection3', class: 'tab'
+    = link_to here_comes_the_sun_collection_path, id: 'collection3', class: 'tab'
       = image_tag 'home-page-tiles/tab-collectionbox-3.jpg', alt: 'Here comes the Sun Collection'
     a.navigator.btn-prev.js-navigator-prev href='javascript:void(0)'
       .icon.icon-arrow-left

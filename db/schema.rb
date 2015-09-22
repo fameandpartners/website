@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150902182659) do
+ActiveRecord::Schema.define(:version => 20150921073046) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1253,6 +1253,7 @@ ActiveRecord::Schema.define(:version => 20150902182659) do
     t.datetime "deleted_at"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
+    t.integer  "position",             :default => 0
   end
 
   create_table "spree_skrill_transactions", :force => true do |t|

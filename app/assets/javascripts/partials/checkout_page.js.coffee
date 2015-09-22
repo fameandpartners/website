@@ -274,6 +274,9 @@ page.initCheckoutEditPage = () ->
           address_city: $('#order_bill_address_attributes_city').val()
           address_line1: $('#order_bill_address_attributes_address1').val()
 
+        if window.is_masterpass
+          credit_card_data.address_country ||=  $('#order_bill_address_attributes_country_name').val()
+
         if window.bill_address
           credit_card_data.address_country  ||= window.bill_address.country
           credit_card_data.address_city     ||= window.bill_address.city
@@ -295,21 +298,30 @@ page.initCheckoutEditPage = () ->
 
 
         payment_method_id = $form.find('[name$="[payment_method_id]"]:first').val()
-        authenticity_token = $form.find('[name="authenticity_token"]').val()
-        _method = $form.find('[name="_method"]').val()
 
-        params = {}
-        params['authenticity_token'] = authenticity_token
-        params['_method'] = _method
-        params['order'] = {}
-        params['payment_source'] = {}
-        params['payment_source'][payment_method_id] = {}
-        params['payment_source'][payment_method_id]['cc_type'] = data.scheme
-        params['payment_source'][payment_method_id]['gateway_payment_profile_id'] = data.token
+        if window.is_masterpass
+          disabled = $form.find(':input:disabled:not(.no-post)').removeAttr('disabled')
+          params = $form.serialize()
+          disabled.attr('disabled','disabled')
 
-        params = $.param(params)
+          params += ('&' + encodeURIComponent('payment_source[' + payment_method_id + '][cc_type]') + '=' + data.scheme + '&' + encodeURIComponent('payment_source[' + payment_method_id + '][gateway_payment_profile_id]') + '=' + data.token)
 
-        params += ('&' + encodeURIComponent('order[payments_attributes][][payment_method_id]') + '=' + payment_method_id)
+        else
+          authenticity_token = $form.find('[name="authenticity_token"]').val()
+          _method = $form.find('[name="_method"]').val()
+
+          params = {}
+          params['authenticity_token'] = authenticity_token
+          params['_method'] = _method
+          params['order'] = {}
+          params['payment_source'] = {}
+          params['payment_source'][payment_method_id] = {}
+          params['payment_source'][payment_method_id]['cc_type'] = data.scheme
+          params['payment_source'][payment_method_id]['gateway_payment_profile_id'] = data.token
+
+          params = $.param(params)
+
+          params += ('&' + encodeURIComponent('order[payments_attributes][][payment_method_id]') + '=' + payment_method_id)
 
         $.ajax
           type: 'POST'

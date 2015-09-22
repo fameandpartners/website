@@ -1,6 +1,3 @@
-- content_for :inline_javascript do
-  | window.bill_address = #{ raw ::AddressSerializer.new(current_order.bill_address).to_json };
-
 - if current_step.eql?('address')
   h2.checkout-section-title 1. Your information
   / TODO - Temporarily turned off - CRO Optimisation

@@ -1,0 +1,76 @@
+- if Spree::Config[:address_requires_state]
+  ruby:
+    have_states = address.country.states.present?
+    # copied from instance_tag#tag_id helper method
+    sanitized_object_name = form.object_name.gsub(/\]\[|[^-a-zA-Z0-9:.]/, "_").sub(/_$/, "")
+    field_id = "#{ sanitized_object_name }_state_id"
+    state_text_field_id = "#{ sanitized_object_name }_state_name"
+    country_field_id = "#{ sanitized_object_name }_country_id"
+
+= content_for :inline_javascript do
+  | $('##{ field_id }').val('#{ address.state_id }');
+  | checkout_page.updateStatesVisibility('##{ country_field_id }', '##{ field_id }', '##{state_text_field_id}');
+
+  | $('##{ country_field_id }').on('change', function() {
+  |   checkout_page.updateStatesVisibility('##{ country_field_id }', '##{ field_id }', '##{state_text_field_id}');
+  | });
+
+- if address_type == 'billing'
+  .row
+    .col-md-12.form-group
+      = form.label :email, with_required_mark(t(:email))
+      = form.text_field :email, class: 'required form-control form-control-md', value: form.object.email, required: 'required'
+  / Temporary location for heading.
+  h2.checkout-section-title Billing Address Details
+
+.row
+  .col-md-6.form-group
+    = form.label :firstname, with_required_mark(t(:first_name))
+    = form.text_field :firstname, class: 'required form-control form-control-md', value: form.object.firstname, required: 'required'
+  .col-md-6.form-group
+    = form.label :lastname, with_required_mark(t(:last_name))
+    = form.text_field :lastname, class: 'required form-control form-control-md', value: form.object.lastname, required: 'required'
+
+.row
+  .col-md-12.form-group
+    = form.label :address1, with_required_mark(t(:street_address))
+    = form.text_field :address1, class: 'required form-control form-control-md', required: 'required'
+    p.help-block Must be a physical address, not a P.O. Box
+
+.row
+  .col-md-12.form-group
+    = form.label :address2, t(:street_address_2)
+    = form.text_field :address2, class: 'required form-control form-control-md'
+
+.row
+  .col-md-4.form-group
+    = form.label :city, with_required_mark(t(:city))
+    = form.text_field :city, class: 'required form-control form-control-md', required: 'required'
+
+  .col-md-4.form-group class=(address.country.states_required ? '' : 'hidden')
+    = form.label :state, with_required_mark(t(:state))
+    span.states_selector_container class=(have_states ? 'required' : 'hidden')
+      select id=(field_id) name="#{form.object_name}[state_id]" class="form-control form-control-md selectbox" disabled=(!have_states)
+        option value='' data-country=''
+        - available_states_for_current_zone.each do |state|
+          option selected=(address.state_id == state.id) style=(state.country_id == address.country_id ? '' : 'display: none;') value=(state.id) data-country=(state.country_id) = state.name
+
+    = form.text_field(:state_name,
+                      :class => !have_states ? 'required  form-control form-control-md no-post' : 'hidden  form-control form-control-md no-post',
+                      :disabled => have_states)
+
+  .col-md-4.form-group
+    = form.label :country_id, with_required_mark(t(:country))
+    select id=(country_field_id) name="#{form.object_name}[country_id]" class="form-control form-control-md selectbox"
+      - available_countries_for_current_zone.each do |country|
+        option selected=(address.country_id == country.id) value=(country.id) data-states-required=(country.states_required ? 'required' : nil)
+          = country.name
+
+.row
+  .col-md-6.form-group
+    = form.label :phone, with_required_mark(t(:phone_number))
+    = form.phone_field :phone, class: 'required form-control form-control-md', required: 'required'
+
+  .col-md-6.form-group
+    = form.label :zipcode, with_required_mark(t(:zip))
+    = form.text_field :zipcode, class: 'required form-control form-control-md', required: 'required'
