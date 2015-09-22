@@ -16,6 +16,9 @@ Spree::Admin::ProductsController.class_eval do
   end
 
   def update
+    if params[:product][:taxon_ids].present?
+      params[:product][:taxon_ids] = params[:product][:taxon_ids].split(',')
+    end
     split_related_outerwear_ids
 
     super
