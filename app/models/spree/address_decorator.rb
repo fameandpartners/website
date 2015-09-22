@@ -28,7 +28,7 @@ Spree::Address.class_eval do
 
   def set_last(user, try_spree, current_order)
     if try_spree
-      last_order = Spree::Order.where(user_id: user.id, state: 'complete').last
+      last_order = Spree::Order.where(user_id: user.id, state: 'complete').order(:created_at).last
       order = last_order.bill_address if last_order.present? && last_order.bill_address.present?
     end
     order = current_order.bill_address if current_order.present? && current_order.bill_address.present?
