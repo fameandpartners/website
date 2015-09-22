@@ -9,7 +9,7 @@ var Post = React.createClass({
         </div>
         <div className="content-wrap">
           <h5 className="title txt-truncate-1">
-            {this.props.post.title}
+            {this.props.title != null ? this.props.title : this.props.post.title}
           </h5>
           <p className="txt-truncate-block">
             {this.props.des}
@@ -25,8 +25,8 @@ var BlogPosts = React.createClass({
     return {blogs: []}
   },
   componentDidMount: function() {
-    $.get("/api/blog_posts", function(result) {
-      this.setState({blogs: result.slice(0,9)})
+    $.get("http://blog.fameandpartners.com/?json=1", function(result) {
+      this.setState({blogs: result.posts.slice(0,9)})
     }.bind(this));
   },
   render: function() {
@@ -36,14 +36,14 @@ var BlogPosts = React.createClass({
       );
     } else {
 
-      post_0 = (<Post post={this.state.blogs[0]} des="We chat style with the NY fashionista" img_url="/assets/homepage/blog/blog-1.jpg"/>)
-      post_1 = (<Post post={this.state.blogs[5]} compact="true" des="We're obsessed with this florist's Instagram feed" img_url="assets/homepage/blog/blog-5.jpg"/>)
-      post_2 = (<Post post={this.state.blogs[8]} des="Fashion's new favourite shade" img_url="/assets/homepage/blog/blog-2.jpg"/>)
-      post_3 = (<Post post={this.state.blogs[7]} des="This weeks old school style muse" img_url="/assets/homepage/blog/blog-3.jpg"/>)
-      post_4 = (<Post post={this.state.blogs[6]} des="Our campaign star spills on how she does formal chic" img_url="/assets/homepage/blog/blog-4.jpg"/>)
-      post_5 = (<Post post={this.state.blogs[1]} des="That’s a Maxi Black Dress, people" img_url="/assets/homepage/blog/blog-7.jpg"/>)
-      post_6 = (<Post post={this.state.blogs[3]} compact="true" des="It's her job to know what you want before you do." img_url="/assets/homepage/blog/blog-6.jpg"/>)
-      post_7 = (<Post post={this.state.blogs[4]} des="Because sometimes it's okay to outshine the bride" img_url="/assets/homepage/blog/blog-8.jpg"/>)
+      post_0 = (<Post post={this.state.blogs[0]} des="We chat style with the NY fashionista" img_url={this.state.blogs[0].attachments[1].url}/>)
+      post_1 = (<Post post={this.state.blogs[5]} compact="true" title="Follow Friday @flura_" des="We're obsessed with this florist's Instagram feed" img_url={this.state.blogs[5].attachments[1].url} />)
+      post_2 = (<Post post={this.state.blogs[8]} des="Fashion's new favourite shade" img_url={this.state.blogs[8].attachments[1].url}/>)
+      post_3 = (<Post post={this.state.blogs[7]} des="This weeks old school style muse" img_url={this.state.blogs[7].attachments[0].url}/>)
+      post_4 = (<Post post={this.state.blogs[6]} des="Our campaign star spills on how she does formal chic" title="Bambi's Guide to Black Tie" img_url="/assets/homepage/blog/blog-4.jpg"/>)
+      post_5 = (<Post post={this.state.blogs[1]} des="That’s a Maxi Black Dress, people" img_url={this.state.blogs[1].attachments[14].url}/>)
+      post_6 = (<Post post={this.state.blogs[3]} compact="true" des="It's her job to know what you want before you do." img_url={this.state.blogs[3].attachments[0].url}/>)
+      post_7 = (<Post post={this.state.blogs[4]} des="Because sometimes it's okay to outshine the bride" img_url={this.state.blogs[4].attachments[0].url}/>)
       return(
         <div className="blog-posts">
 
