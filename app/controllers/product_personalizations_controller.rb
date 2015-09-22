@@ -20,8 +20,6 @@ class ProductPersonalizationsController < ApplicationController
       @personalization.save
 
       product = Spree::Variant.where(id: @personalization.variant_id).first.try(:product)
-
-      Activity.log_product_added_to_cart(product, temporary_user_key, try_spree_current_user, current_order) rescue nil
     end
   end
 end

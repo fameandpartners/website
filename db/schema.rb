@@ -11,24 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150921073046) do
-
-  create_table "activities", :force => true do |t|
-    t.string   "action"
-    t.integer  "number"
-    t.string   "owner_type"
-    t.integer  "owner_id"
-    t.string   "actor_type"
-    t.integer  "actor_id"
-    t.string   "item_type"
-    t.integer  "item_id"
-    t.text     "info"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.string   "session_key"
-  end
-
-  add_index "activities", ["action", "owner_type", "owner_id"], :name => "index_activities_on_action_and_owner_type_and_owner_id"
+ActiveRecord::Schema.define(:version => 20150922143531) do
 
   create_table "answer_taxons", :force => true do |t|
     t.integer  "answer_id"
@@ -1213,10 +1196,10 @@ ActiveRecord::Schema.define(:version => 20150921073046) do
     t.boolean  "is_active"
     t.decimal  "discount_size"
     t.integer  "discount_type"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "name"
-    t.boolean  "sitewide",      :default => false
+    t.boolean  "sitewide",              :default => false
     t.boolean  "customisation_allowed", :default => false
   end
 

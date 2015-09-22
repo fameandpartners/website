@@ -52,7 +52,6 @@ module FameAndPartners
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
     config.active_record.observers ||= []
     config.active_record.observers << :fabrication_event_observer
-    config.active_record.observers << :activity_observer
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
