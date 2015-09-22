@@ -12,6 +12,10 @@ class IndexController < ApplicationController
 
   private
 
+  def gtm_page_type
+    'homepage'
+  end
+
   def homepage_title
     Preferences::Titles.new(current_site_version).homepage_title
   end

@@ -294,6 +294,7 @@ GEM
       activerecord (>= 3.2.0, < 5.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
+    device_detector (0.8.1)
     devise (2.2.8)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -544,7 +545,6 @@ GEM
     paypal-sdk-merchant (1.103.0)
       paypal-sdk-core (~> 0.2.3)
     pg (0.18.1)
-    pin_payment (0.5.1)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.5)
@@ -553,9 +553,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-byebug (3.1.0)
-      byebug (~> 4.0)
-      pry (~> 0.10)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
     psych (2.0.13)
@@ -720,8 +717,6 @@ GEM
       paperclip
       spree_core (>= 1.3.0)
     spring (1.3.6)
-    spring-commands-rspec (1.0.4)
-      spring (>= 0.9.1)
     sprockets (2.2.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -755,7 +750,6 @@ GEM
       multi_json (~> 1.3)
       rake
       rest-client (~> 1.6)
-    titleize (1.3.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -801,6 +795,7 @@ DEPENDENCIES
   bootstrap-sass
   bourbon
   business_time
+  byebug
   canonical-rails!
   capybara
   ckeditor
@@ -814,6 +809,7 @@ DEPENDENCIES
   data_migrate!
   database_cleaner (= 0.9.1)
   default_value_for
+  device_detector (~> 0.8.1)
   droidcss
   eco
   event_sourced_record
@@ -838,8 +834,6 @@ DEPENDENCIES
   oink
   paperclip
   pg
-  pin_payment
-  pry-byebug
   pry-rails
   psych (~> 2.0.13)
   quiet_assets
@@ -872,7 +866,6 @@ DEPENDENCIES
   spree_paypal_express!
   spree_social!
   spring
-  spring-commands-rspec
   term-ansicolor
   test-unit
   therubyracer
@@ -880,7 +873,6 @@ DEPENDENCIES
   timecop
   timers (= 1.1.0)
   tire
-  titleize
   uglifier (= 1.3.0)
   unicorn
   whenever

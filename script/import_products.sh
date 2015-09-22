@@ -18,14 +18,31 @@
 # 5. Renamed missing product SKU directories
 #     - 'Drop1-USProm/4B290B-Emma Kate' => "Drop1-USProm/4B290-Emma Kate"
 #     - 'Drop2-GlamorousRebel/4B283-Glam Lace' => 'Drop2-GlamorousRebel/4B283B-Glam Lace'
+#
+# Skip execution of the actual rake tasks, pass 'dryrun' as the first argument.
+# $ scripts/import_products.sh dryrun
+#
+# Details
+#
+# 1. Extracting directories
+# Place collection directories in a single container directory.
+# The container is where the tool will look for each sub
+# directory, and each product directory inside that.
+# i.e.
+# /BASE_DIRECTORY/content/00_COLLECTION_NAME/4b-0000-PRODUCT_NAME
+# e.g.
+# /home/deploy/product_upload_18_sep/content/00_collection_name/4b-0000-product_name
+
+# Unzip using the -LL and -d flags. `-LL` will convert all filenames to lowercase
+# unzip -x -LL FILE_NAME -d DESTINATION_DIRECTORY
+# i.e. unzip -x -LL  ~/gb_00_reshoot.zip -d gb_00_reshoot
 
 # TODO Before running
 # 1. Shrink the images using Toby's cool script.case
 # 2. Catch errors a bit better, at the moment we need to trawl the entire log file!
 # 3. Lots
 
-# Skip execution of the actual rake tasks, pass 'dryrun' as the first argument.
-# $ scripts/import_products.sh dryrun
+
 
 # Fail on missing variables.
 set -u
@@ -35,15 +52,16 @@ set -o pipefail
 dryrun=${1:-}
 
 # Init
+import_base_directory='/home/deploy/product_upload_18_sep/'
 import_start_time=$(date '+%Y-%m-%d_%H.%M.%S')
-logfile="log/product_import_${import_start_time}.log"
+logfile="${import_base_directory}/log/${dryrun}product_import_${import_start_time}.log"
 log_date_format='%Y-%m-%d %H:%M:%S'
 
-content_directory='/home/deploy/IMAGES/'
+content_directory="${import_base_directory}/content"
 
 # For easier local testing
 if [ $(whoami) = "garrow" ] ; then
-  content_directory='/Users/garrow/fame/content/ProductUpload'
+  content_directory='/home/deploy/product_upload_18_sep'
 fi
 
 # For easier local testing
@@ -164,6 +182,11 @@ function yellow  { tput setaf 3; }
 function blue    { tput setaf 4; }
 
 head -n 28 $0
+if [ "${dryrun}" = "dryrun" ]; then 
+  echo "$(green)-- Dry Run Only --$(normal)"
+else
+  echo "$(red)WARNING -- Live Run -- WARNING$(normal)"
+fi
 read -p "Enter to continue, or Ctrl-C to cancel!"
 
 time main | tee $logfile

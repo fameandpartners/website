@@ -3,18 +3,19 @@ require 'spec_helper'
 module Products
   describe Presenter do
     describe 'customisations' do
-      let(:default_discount)  { double('discount', customisation_allowed?: false) }
-      let(:customisable_discount)  { double('discount', customisation_allowed?: true) }
-      let(:no_discount) { nil }
-      let(:customizations) { double('customizations', :all => [:some]) }
-      let(:colors)         { double('custom_colours', :extra => [:some]) }
+      let(:spree_price)           { Spree::Price.new(amount: 99, currency: 'USD') }
+      let(:default_discount)      { double('discount', customisation_allowed?: false) }
+      let(:customisable_discount) { double('discount', customisation_allowed?: true) }
+      let(:no_discount)           { nil }
+      let(:customizations)        { double('customizations', :all => [:some]) }
+      let(:colors)                { double('custom_colours', :extra => [:some]) }
       let(:available_options) do
         double('available_options', :customizations => customizations, :colors => colors)
       end
-      subject(:product) do
-        Presenter.new available_options: available_options, discount: discount, price: Spree::Price.new(amount: 99, currency: 'USD')
-      end
 
+      subject(:product) do
+        described_class.new available_options: available_options, discount: discount, price: spree_price
+      end
 
       context 'when discounted' do
         let(:discount) { default_discount }
@@ -60,7 +61,7 @@ module Products
     end
 
     describe 'sizing chart' do
-      subject(:product) { Presenter.new size_chart: size_chart }
+      subject(:product) { described_class.new size_chart: size_chart }
 
       describe '#size_chart' do
         let(:size_chart)  { 'TEENYTINY' }
@@ -98,6 +99,20 @@ module Products
           it { expect(product.size_chart_explanation).to eq '' }
           it { expect(product.size_chart_data).to eq SizeChart::DEFAULT_CHART }
         end
+      end
+    end
+
+    describe '#meta_description' do
+      let(:spree_price) { Spree::Price.new(amount: 12.34, currency: 'AUD') }
+
+      subject(:product) do
+        described_class.new short_description: '<b>My Long Short Description</b>'*50, price: spree_price
+      end
+
+      it 'returns truncated and HTML sanitized version of given short description with price and currency' do
+        result = product.meta_description
+        expect(result).to eq('$12.34 AUD My Long Short DescriptionMy Long Short DescriptionMy Long Short DescriptionMy Long Short DescriptionMy Long Short DescriptionMy Long Short Descrip...')
+        expect(result.size).to eq(Products::Presenter::META_DESCRIPTION_MAX_SIZE)
       end
     end
   end

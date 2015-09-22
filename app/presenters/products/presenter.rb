@@ -1,8 +1,10 @@
 module Products
   class Presenter
+    META_DESCRIPTION_MAX_SIZE = 160
+
     attr_accessor :id, :master_id, :sku, :name, :short_description, :description,
-                  :permalink, :is_active, :images, :default_image, :price,
-                  :discount, :recommended_products, :related_outerwear, :available_options, :preorder,
+                  :permalink, :is_active, :is_deleted, :images, :default_image, :price,
+                  :discount, :recommended_products, :related_outerwear, :available_options, :preorder, :taxons,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
                   :size_chart, :making_option_id, :fit, :size, :fast_making
 
@@ -157,6 +159,11 @@ module Products
       self.discount = [self.discount, auto_discount].compact.max_by{|i| i.amount.to_i }
     end
 
+    def meta_description
+      sanitized_description = "#{price_with_currency} #{short_description}"
+      sanitized_description = ActionView::Base.full_sanitizer.sanitize(sanitized_description)
+      sanitized_description.truncate(META_DESCRIPTION_MAX_SIZE)
+    end
 
     private
 

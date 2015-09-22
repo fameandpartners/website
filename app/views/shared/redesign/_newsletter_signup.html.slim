@@ -1,0 +1,27 @@
+ruby:
+  details = Marketing::Subscriber.new(
+    user: current_spree_user,
+    token: cookies['utm_guest_token'],
+    promocode: decode(params[:pc]),
+    ipaddress: request.remote_ip
+  ).details
+  details[:campaign] = 'home' if details[:campaign].blank?
+
+section#email-container.content-block.email-subscription
+  #email-newsletter-signup.container
+    .row
+      .col-md-6
+        h2.title Get a taste of fame with $20 OFF your first purchase, free styling sessions & VIP treatment.
+      .col-md-6
+        form.input-btn action="https://fameandpartners.createsend.com/t/t/s/urikx/" method="post"
+          input#fieldEmail name="cm-urikx-urikx" type="email" placeholder="Register your email for this $20 offer" /
+          input type="hidden" id="fieldName"    name="cm-name" value=(current_spree_user.try(:full_name))
+          input type="hidden" id="fielddkjudk"  name="cm-f-dkjudk" value=(details[:country])
+          input type="hidden" id="fielddkjuhy"  name="cm-f-dkjuhy" value=(details[:promocode])
+          input type="hidden" id="fielddkjuhr"  name="cm-f-dkjuhr" value=(details[:source] || cookies[:referrer])
+          input type="hidden" id="fielddkjuhj"  name="cm-f-dkjuhj" value=(details[:campaign])
+          input type="hidden" id="fielddkjuht"  name="cm-f-dkjuht" value=(details[:ipaddress])
+          button.btn.btn-black.btn-md type="submit" Submit
+
+  = content_for :inline_javascript do
+    | new window.page.EmailNewsletterSubscriber({form: '#email-newsletter-signup form'});

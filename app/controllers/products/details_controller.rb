@@ -1,4 +1,6 @@
 class Products::DetailsController < Products::BaseController
+  include Marketing::Gtm::Controller::Product
+
   layout 'redesign/application'
 
   def show
@@ -8,8 +10,8 @@ class Products::DetailsController < Products::BaseController
       permalink:    params[:id]
     ).read
 
-    # only admins can view inactive/hidden products
-    if !@product.is_active && !spree_current_user.try(:has_spree_role?, "admin")
+    # only admins can view deleted products
+    if @product.is_deleted && !spree_current_user.try(:has_spree_role?, "admin")
       raise Errors::ProductInactive
     end
 
@@ -30,14 +32,11 @@ class Products::DetailsController < Products::BaseController
 
     @product.use_auto_discount!(current_promotion.discount) if current_promotion
 
-    # set page title.
+    # Set SEO properties
     # Drop anything after the first period(.) and newline
-    color_title = params[:color].titleize if params[:color]
-    @title = "#{color_title} #{@product.name} #{default_seo_title}".strip
-    @description = product_description
-  end
-
-  def product_description
-    "#{@product.short_description} #{@product.price_with_currency}"
+    color_title  = params[:color].titleize if params[:color]
+    @title       = "#{color_title} #{@product.name} #{default_seo_title}".strip
+    @description = @product.meta_description
+    append_gtm_product(@product)
   end
 end

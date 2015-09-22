@@ -84,7 +84,8 @@ $color-white: #FFF;
 
 .locale-warning-active {
   // Content Container
-  #content-container {
+
+  &.sticky-header #content-container {
     margin-top: $mega-menu-desktop-height + $locale-warn-desktop-height;
   }
 
@@ -95,7 +96,7 @@ $color-white: #FFF;
   }
 
   // TODO - refactor out this to use a proper page wrapper which auto adjusts.
-  .alert-sale {
+  &.sticky-header .alert-sale {
     top:      $mega-menu-desktop-height + $locale-warn-desktop-height;
   }
 
@@ -106,7 +107,7 @@ $color-white: #FFF;
   }
 
   // Search
-  .search-bar {
+  &.sticky-header .search-bar {
     top: $mega-menu-desktop-height + $locale-warn-desktop-height;
   }
 
@@ -117,12 +118,12 @@ $color-white: #FFF;
   }
 
   // Mega menu drop down
-  .mega-menu {
+  &.sticky-header .mega-menu {
     top: $mega-menu-desktop-height + $locale-warn-desktop-height;
   }
 
   // Account drop-down
-  .account {
+  &.sticky-header .account {
     top: -83px;
   }
 }

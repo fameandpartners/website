@@ -24,12 +24,28 @@ Migrations that have been designed for zero-downtime deployment are excepted and
 * ElasticSearch
 * Redis
 * `imagemagick`
-* [foreman](https://github.com/ddollar/foreman) - Development
+
+#### Ruby Installation
+
+Use rbenv and the ruby-build plugin
+
+* [rbenv](https://github.com/sstephenson/rbenv/)
+* [ruby-build](https://github.com/sstephenson/ruby-build)
+
 
 #### Quick installation
 
 ```shell
 $ brew install redis elasticsearch imagemagick postgresql
+```
+
+To have ElasticSearch start on login:
+```
+ln -sfv /usr/local/opt/elasticsearch/*.plist ~/Library/LaunchAgents
+```
+Then to load ElasticSearch now:
+```
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist
 ```
 
 ### Getting started
@@ -41,7 +57,7 @@ $ brew install redis elasticsearch imagemagick postgresql
 If you are using homebrew and it's default settings, the supplied Procfile may work out-of-the-box
 
 ```shell
-$ foreman start
+$ bundle exec thin start -p 3000
 ```
 
 It's also important to configure your Elasticsearch to enable dynamic scripting
@@ -86,6 +102,14 @@ this gets you a working site, with no customer data.
 
 Run `./script/db` and Choose 8 `sanitise_dev_db` to clean the current dev DB.
 See the source to see exactly what is removed.
+
+#### Creating an Admin User
+
+Steps to create an admin user:
+
+* If you do not already have an existing user in mind, create one through the existing web site process.
+* To assign admin rights in the Rails console, first find the user: `Spree::User.where(email: 'user@email').first`
+* Then using the id of the user found: `Spree::User.find(id).spree_roles << Spree::Role.find_by_name('admin')`
 
 #### Legacy Process
 
@@ -164,7 +188,7 @@ rake cache:expire
 Images & assets by default in dev mode are served to you from the production S3 bucket.
 
 If you wish to test or do image uploading, you will need to either switch to local mode, or switch to another S3 bucket.
-By default the AWS access credentials are not loaded in dev mode, so these features will fail.
+By default the AWS access credentials are *not loaded in dev mode*, so these features will fail.
 
 `config/environments/development.rb`
 

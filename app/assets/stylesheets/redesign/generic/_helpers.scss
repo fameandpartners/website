@@ -1,0 +1,55 @@
+/* [Helpers]
+-------------------------------------------------------*/
+
+/*
+    This is the only chapter where the '!important' keyword should be used as these rules
+    have to over-ride everything they're being appended to.
+*/
+
+// Hide from both screenreaders and browsers
+.hide-fully {
+  display: none!important; 
+  visibility: hidden!important;
+}
+
+// Hide visually and from screenreaders, but maintain layout
+.hide-partially {
+  visibility: hidden!important;
+}
+
+// Hide only visually, but have it available for screenreaders
+.hide-visually {
+  position: absolute!important;
+  height: 1px!important;
+  width: 1px!important;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+// truncates single line of text
+.txt-truncate-1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// You can extend the cfix class with SASS to avoid the `.cfix` class appearing over and over in your markup.
+.cfix {
+
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+
+}
+
+%cfix {
+
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+
+}

@@ -10,6 +10,8 @@
 //= require libs/underscore-min
 //= require bootstrap
 
+//= require libs/jquery.dotdotdot.min
+
 // React
 //= require react
 //= require react_ujs
@@ -52,6 +54,8 @@
 //= require partials/helpers/product_side_selector_panel
 //= require partials/helpers/modal
 //= require partials/helpers/facebook_tracking_hook
+//= require partials/helpers/truncate
+//= require partials/helpers/bs-tabs
 
 //-----------------------------------
 // Show old quiz in popup with iframe
@@ -105,10 +109,11 @@ jQuery(document).ready(function($){
   //home page slider
   $(function() {
     $(".rslides").responsiveSlides({
-    auto: true,             // Boolean: Animate automatically, true or false
+    auto: false,             // Boolean: Animate automatically, true or false
     pager: true,           // Boolean: Show pager, true or false
     speed: 3000,            // Integer: Speed of the transition, in milliseconds
     timeout: 6000,          // Integer: Time between slide transitions, in milliseconds
     });
   });
+
 })

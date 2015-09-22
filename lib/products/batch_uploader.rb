@@ -5,7 +5,7 @@ require 'ostruct'
 
 module Products
   class BatchUploader
-    attr_reader :parsed_data
+    attr_reader :parsed_data, :keep_taxons, :available_on
 
     include ActionView::Helpers::TextHelper # for truncate
 
@@ -13,6 +13,7 @@ module Products
       @@titles_row_numbers = [8, 10, 11, 12]
       @@first_content_row_number = 13
       @available_on = available_on
+      @keep_taxons = true
     end
 
     def parse_file(file_path)
@@ -48,6 +49,7 @@ module Products
         raw[:price_in_usd]        = book.cell(row_num, columns[:price_in_usd])
         raw[:taxons]              = Array.wrap(columns[:taxons]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
         raw[:colors]              = Array.wrap(columns[:colors]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
+        puts "Read XLS: #{raw[:sku]}"
 
         # Style
         raw[:glam]                = book.cell(row_num, columns[:glam])
@@ -384,11 +386,18 @@ module Products
         product = Spree::Product.new(sku: sku, featured: false, on_demand: true, available_on: @available_on)
       end
 
+      taxon_ids = args[:taxon_ids] || []
+
+      #FUCK YEAH HACKING
+      if keep_taxons
+        taxon_ids = taxon_ids | product.taxons.collect(&:id)
+      end
+
       attributes = {
         name: args[:name],
         price: args[:price_in_aud],
         description: args[:description],
-        taxon_ids: args[:taxon_ids] || [],
+        taxon_ids: taxon_ids,
         available_on: @available_on || product.available_on
       }
 

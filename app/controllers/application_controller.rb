@@ -10,6 +10,9 @@ class ApplicationController < ActionController::Base
   include Concerns::UserCampaignable
   include Concerns::AutomaticDiscount
 
+  # Google Tag Manager
+  include Marketing::Gtm::Controller::Container
+
   if Rails.env.preproduction?
     http_basic_authenticate_with :name => 'fameandpartners', :password => 'pr0m!unicorn'
   end

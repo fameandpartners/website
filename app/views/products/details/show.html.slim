@@ -90,47 +90,17 @@ ruby:
 .container-fluid.product-content.text-center
   .col-md-4.col-md-offset-8.col-sm-6.col-sm-offset-6.product-details.product-section--selection.no-padding
     .product-details-outer
-      .product-details-inner 
+      .product-details-inner
         .row
           h1 = @product.name
           p.product-section-description
           p#product-price
             span.price = product_price_with_discount(@product.price, @product.discount)
 
-        .product-section--selection
-          /! size & color & customizations selectors
-          /! Size and Colour
-
-        .row
-          - if @product.default_sizes?
-            a#product-size-action.btn-customize Size
-
-        - if @product.colors?
-          .row
-            a#product-colorize-action.btn-customize
-              | Color
-
-        - if @product.customizable?
-          .row
-            a#product-customize-action.btn-customize
-              | Customize
-
-        - if @product.making_options.present?
-          .row
-            a#product-making-options-action.btn-customize
-              | Express Making
-
-        .row
-          button.btn.btn-block.btn-black.buy-button Add to Cart
-
-        .row.secondary-actions
-          .col-md-6.col-xs-6.col-xxs-12
-            button#fit-guide.btn.btn-block.btn-secondary Size Guide
-
-          .col-md-6.col-xs-6.col-xxs-12
-            - if Features.active?(:moodboard)
-              button#add-to-moodboard.btn.btn-block.btn-secondary data-user-present=current_spree_user.present?
-                |+ Moodboard
+        - if @product.is_active
+          = render 'product_selection_options'
+        - else
+          = render 'inactive_product_selection'
 
 /! About The Dress
 .dress-about.container.page-content
