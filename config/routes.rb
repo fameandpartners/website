@@ -328,10 +328,6 @@ FameAndPartners::Application.routes.draw do
         resource :inspiration, :only => [:edit, :update]
 
         resource :colors, only: [:new, :create], controller: 'product_colors'
-
-        resources :videos, except: [:show], controller: 'product_videos' do
-          post :update_positions, on: :collection
-        end
       end
 
       resource :product_uploads, only: [:new, :create, :show] do

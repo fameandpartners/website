@@ -130,9 +130,7 @@ Spree::ProductsController.class_eval do
       variants: @product_variants,
       analytics_label: analytics_label(:product, @product),
       activities: @activites,
-      images: @product.images_json,
-      videos: @product.videos_json,
-      default_video_url: @product.video_url
+      images: @product.images_json
     }
   end
 

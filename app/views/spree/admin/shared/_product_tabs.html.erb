@@ -18,9 +18,6 @@
       <li<%== ' class="active"' if current == 'Images' %>>
         <%= link_to_with_icon 'icon-picture', t(:images), admin_product_images_url(@product) %>
       </li>
-      <li<%== ' class="active"' if current == 'Videos' %>>
-        <%= link_to_with_icon 'icon-picture', t(:videos), admin_product_videos_url(@product) %>
-      </li>
       <li<%== ' class="active"' if current == 'Variants' %>>
         <%= link_to_with_icon 'icon-th-large', t(:variants),  admin_product_variants_url(@product) %>
       </li>

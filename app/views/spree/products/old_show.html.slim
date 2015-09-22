@@ -6,7 +6,6 @@ javascript:
 - cache [:pages, ( is_directed_from?(my_boutique_path) ? :boutique : :collection ), :product, @product.id, @color.try(:name)].compact, expires_in: configatron.cache.expire.long do
   ruby:
     images = @product.images_json
-    videos = @product.videos_json
     sku = @product.sku
     category = range_taxon_name_for(@product)
     default_color = nil
@@ -23,9 +22,6 @@ javascript:
       default_images = images.select{|image| image[:color] == default_color}
     end
 
-    video = videos.find{|i| i[:default]} || videos.find{|i| i[:color] == default_color } || videos.first
-    default_video_url = video.present? ? video[:video_url] : nil
-
     colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
     sizes = @product_variants.map{|t| t[:size].to_i}.uniq.sort
     sizes = locale_sizes(@product, sizes)
@@ -36,7 +32,7 @@ javascript:
       site_version = 'us'
     end
 
-    images_limit = default_video_url.present? ? 6 : 7
+    images_limit = 7
     if images.present?
       product_image_url = absolute_image_url(images.first[:large], 'http')
     else
@@ -51,8 +47,6 @@ javascript:
     window.product_variants = #{{ @product_variants.to_json }};
     window.productImagesData = #{{images.to_json}};
     window.product_default_color = #{{ default_color.to_json }};
-    window.productDefaultVideoUrl = #{{default_video_url.to_json}};
-    window.productVideosData = #{{videos.to_json}};
     window.product_images_limit = #{{ images_limit}};
 
   css:
@@ -79,10 +73,7 @@ javascript:
                           span.icon-expand
 
             .row
-              - if default_video_url.present?
-                = render 'has_video_layout', product: @product, moodboard_pics: moodboard_pics, share_url: share_url, product_image_url: product_image_url, video_url: default_video_url
-              - else
-                = render 'no_video_layout', product: @product, moodboard_pics: moodboard_pics, share_url: share_url, product_image_url: product_image_url
+              = render 'no_video_layout', product: @product, moodboard_pics: moodboard_pics, share_url: share_url, product_image_url: product_image_url
       .grid-4
         = render 'product_info', { product: @product, sizes: sizes, colors: colors, selected_color: @color.try(:name), products: @recommended_products, site_version: site_version }
 

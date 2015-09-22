@@ -77,23 +77,6 @@ module ProductsHelper
     I18n.t('product_has_no_description')
   end
 
-  def product_video(product, options = {})
-    #return '' if Rails.env.development?
-    return '' if product.video_url.blank?
-
-    width   = options[:width] || 300
-    height  = options[:height] || 533
-
-    "<iframe width='#{width}' height='#{height}' src='#{product.video_url}' frameborder='0' allowfullscreen></iframe>"
-  end
-
-  def embed_video_player(video_url, options = {})
-    width   = options[:width] || 300
-    height  = options[:height] || 533
-
-    "<iframe width='#{width}' height='#{height}' src='#{video_url}' frameborder='0' allowfullscreen></iframe>"
-  end
-
   def hoverable_image_tag(sources = [], options = {})
     blank   = 'assets/noimage/product.png'
     sources = Array(sources)
