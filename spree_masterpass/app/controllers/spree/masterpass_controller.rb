@@ -66,7 +66,7 @@ module Spree
                  request_token: @data.request_token,
                  callback_domain: payment_method.preferred_callback_domain,
                  cart_callback_path: payment_method.preferred_callback_domain +
-                     '/' + current_site_version.permalink +
+                     '/' + current_site_version.code +
                      '/masterpass/cartcallback?payment_method_id=' + params[:payment_method_id],
                  accepted_cards: payment_method.preferred_accepted_cards,
                  checkout_identifier: payment_method.preferred_checkout_identifier,
