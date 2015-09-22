@@ -1,5 +1,6 @@
 Spree::Admin::ProductsController.class_eval do
   before_filter :set_default_prototype, :only => [:new]
+  before_filter :split_related_outerwear_ids, :only => [:update]
 
   def search_outerwear
     scope = Spree::Product.outerwear
@@ -13,12 +14,6 @@ Spree::Admin::ProductsController.class_eval do
     end
 
     render 'spree/admin/products/search'
-  end
-
-  def update
-    split_related_outerwear_ids
-
-    super
   end
 
   protected
