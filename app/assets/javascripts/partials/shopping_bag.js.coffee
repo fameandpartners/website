@@ -16,7 +16,7 @@ window.ShoppingBag = class ShoppingBag
 
     _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler', 'couponFormSubmitHandler', 'removeProductCustomizationHandler', 'removeProductMakingOptionHandler')
 
-    $(options.toggle_link || '#masthead-container #cart-trigger').add('.heart-and-suitcase .shopping-bag').on('click', @openHandler)
+    $(options.toggle_link || '.js-header-toolbar .shopping-bag').add('.js-header-toolbar .shopping-bag').on('click', @openHandler)
 
     @$container.on('click', '.close-cart', @closeHandler)
     @$overlay.on('click', @closeHandler)
