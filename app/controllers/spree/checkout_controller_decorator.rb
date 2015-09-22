@@ -262,33 +262,16 @@ Spree::CheckoutController.class_eval do
       address.firstname ||= user.first_name
       address.lastname ||= user.last_name
       address.email ||= user.email
-      last_order = Spree::Order.where(user_id: user.id, state: 'complete').last.bill_address
-      if !last_order.blank?
-        address.address1 = last_order.address1
-        address.address2 = last_order.address2
-        address.city = last_order.city
-        address.state_id = last_order.state_id
-        address.country_id = last_order.country_id
-        address.zipcode = last_order.zipcode
-        address.phone = last_order.phone
-      end
     end
 
     if @order.present?
       address.firstname ||= @order.user_first_name
       address.lastname ||= @order.user_last_name
       address.email ||= @order.email
-      this_order = Spree::Order.find(@order.id).bill_address
-      if !this_order.blank?
-        address.address1 = last_order.address1
-        address.address2 = last_order.address2
-        address.city = last_order.city
-        address.state_id = last_order.state_id
-        address.country_id = last_order.country_id
-        address.zipcode = last_order.zipcode
-        address.phone = last_order.phone
-      end
     end
+    address.set_last(user, (user = try_spree_current_user).present?, @order)
+
+    logger.debug "Here: #{address.inspect}"
 
     address
   end
