@@ -7,6 +7,7 @@ class UserCart::CartPresenter < OpenStruct
         result[:path] = ApplicationController.helpers.collection_product_path(product)
         result
       end,
+      site_version: site_version,
       item_count: item_count,
       promocode: promocode,
       display_item_total: display_item_total.to_s,
@@ -28,7 +29,7 @@ class UserCart::CartPresenter < OpenStruct
   end
 
   def masterpass_available?
-    if Features.active?(:masterpass)
+    if Features.active?(:masterpass) && site_version.is_australia?
       masterpass_payment_method.present?
     end
   end
