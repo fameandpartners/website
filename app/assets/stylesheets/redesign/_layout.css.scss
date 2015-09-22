@@ -4,7 +4,7 @@ body {
 
 /////////// content container //////////
 
-#content-container {
+.sticky-header #content-container {
   margin-top: $mega-menu-desktop-height;
 }
 

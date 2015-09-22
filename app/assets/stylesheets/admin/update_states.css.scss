@@ -29,3 +29,13 @@ span.bulk_update {
 .bulk_update.skip     { background-color: #5bc0de; }
 .bulk_update.process  { background-color: #5cb85c; }
 .bulk_update.pending  { background-color: #337ab7; }
+
+table.bulk_update_table {
+  th, td { padding :4px; }
+  td.csv {
+    background-color: #f3f3f3;
+  }
+  tr:hover td.csv {
+    background-color: #ebf3fb
+  }
+}

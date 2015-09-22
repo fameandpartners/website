@@ -9,9 +9,16 @@ module AdminUi
       end
 
       def update
-        if page.update_attributes(params[:page])
-          redirect_to action: :index
-        else
+        begin
+          params[:page][:variables] = eval(params[:page][:variables])
+          if page.update_attributes(params[:page])
+            redirect_to action: :index
+          else
+            render action: :edit
+          end
+        rescue StandardError => e
+          NewRelic::Agent.notice_error(e)
+          flash[:error] = "An error occured, please check the variable definition"
           render action: :edit
         end
       end

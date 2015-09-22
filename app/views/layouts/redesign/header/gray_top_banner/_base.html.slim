@@ -2,10 +2,185 @@ ruby:
   banner = Preferences::TopBannerPresenter.new(current_site_version)
 
 #gray-top-banner.row.visible-md-block.visible-lg-block
+
+  #customer-service.col-md-4
+    = banner.right_text
+
+  #free-shipping.col-md-4.text-center
+    = banner.center_text
+  #account-area.col-md-4.text-right
+    = link_to spree_signup_path do
+      span.register-area REGISTER NOW
+    span.pipe |
+    = link_to profile_path do
+      span.my-account MY ACCOUNT
+      .account-menu.hidden-sm.account-list
+        - if spree_user_signed_in?
+          .account.container-fluid
+            ul
+              li
+                = link_to 'My Moodboard', wishlist_path, id: 'moodboard-trigger'
+              li
+                = link_to 'My Details', profile_path
+              li
+                = link_to 'My Orders', user_orders_path
+              li
+                a href="/logout" LOGOUT
+
+#top-banner.row.visible-md-block.visible-lg-block
   = render 'layouts/redesign/header/locale_selector/desktop'
 
-  #ad-text.col-md-4.text-center
-    = banner.center_text
+  .col-md-8.heart-and-suitcase
+    span.num#moodboard-counter 0
+    a href='/wishlist'
+      i.fa.fa-heart
+    span.pipe |
+    span.num#cart-item-count 0
+    = image_tag 'homepage/shopping_bag.png', class: 'shopping-bag'
 
-  #customer-service.col-md-4.text-right
-    = banner.right_text
+.row.hidden-xs.hidden-sm
+  = link_to root_path, class: 'h-logo-wrap' do
+    .logo
+      = image_tag 'logo/new-logo.svg'
+      .tagline Bespoke Fashion. Premium Style. Made for You.
+
+.row#home-menu.hidden-xs.hidden-sm.text-center
+  span.new-this-week
+    em New this week
+  span.dresses CUSTOM MADE DRESSES
+  span.nested
+    ' EVENTS
+    ul
+      = render partial: 'layouts/redesign/event'
+
+  span.lookbook LOOKBOOK
+  span.magazine
+    a href='http://blog.fameandpartners.com' MAGAZINE
+  span.sale
+    = link_to 'SALE', mystyle_landing_page_path(:lpi => 'formal', :sale => 20)
+  /span.made-for-you MADE FOR YOU
+  /span.join-us JOIN US
+  span.search-wrapper#search
+    a.icon-search.js-search-trigger href="#"
+      = image_tag "_icons/search.svg", class: "nav-mobile-logo"
+    .search-input#search-area
+      = form_tag search_path, method: :get, id: 'searchForm'
+        input type="text" id="searchValue" placeholder="SEARCH FOR..." name="q"
+
+.row.rect#rect-new-this-week
+  .black-bar
+    = link_to 'SHOP ALL NEW THIS WEEK', dresses_path(:order => 'newest'), class: "inner-text"
+  .slideArea
+    .containArea
+      = react_component('NewThisWeekProducts',{device: 'desktop'}, { prerender: true })
+
+.row.rect#rect-dresses
+  .left-area
+    .col1
+      div.head SHOP BY
+      div
+        = link_to 'View all dresses', dresses_path , class: 'no-style-text'
+      div
+        = link_to "What's new", dresses_path(:order => 'newest'), class: 'no-style-text'
+      div
+        = link_to 'Made in 48 hours', fast_making_dresses_path, class: 'no-style-text'
+    .col2
+      div.head STYLE
+      = render partial: 'layouts/redesign/style'
+    .col3
+      div.head COLOUR
+      = render partial: 'layouts/redesign/color'
+    /.col4
+      /div.head SEPARATES
+      /div Outerwear
+  = link_to mystyle_landing_page_path(:lpi => 'none', :pids => ['640-forrest-green','643-black','648-black','656-black','649-black','640-black'],:limit => 0), class: 'right-area'
+    div.girl-image
+      = image_tag "homepage/dress-girl.jpg"
+    div.girl-text
+      .contain
+        div BAMBI X FAME.
+        div SHOP BAMBI'S PICKS
+
+.row.rect#rect-lookbook
+  .lookbook-container
+    ul.lookbook-slide
+      li
+        = link_to make_a_statement_collection_path, class: "lookbook-item"
+          .head
+            .text BAMBI X FAME.
+          .image
+            = image_tag "homepage/lookbook/1.jpg"
+        = link_to luxe_collection_path, class: "lookbook-item"
+          .head
+            .text LUXE COLLECTION
+          .image
+            = image_tag "homepage/lookbook/2.jpg"
+        = link_to here_comes_the_sun_collection_path, class: "lookbook-item"
+          .head
+            .text HERE COMES THE SUN
+          .image
+            = image_tag "homepage/lookbook/3.jpg"
+/!
+  .row.rect#rect-magazine
+    .col-md-7.left-col
+      .row.head STEAL HER STYLE
+      .row.images
+        .col-md-4
+          = image_tag "homepage/magazine/1.jpg"
+          div.text TAYLOR
+        .col-md-4
+          = image_tag "homepage/magazine/2.jpg"
+          div.text BEYONCE
+        .col-md-4
+          = image_tag "homepage/magazine/3.jpg"
+          div.text GIGI
+    .col-md-5.right-col
+      .row
+        .col-md-6.col1
+          .row.head BACKSTAGE PASS
+          .row.image
+            = image_tag "homepage/magazine/2.jpg", class: "left-img"
+            div.text Blah blah blah
+        .col-md-6.col2
+          .row.head BLOG
+          .row.image
+            = image_tag "homepage/magazine/3.jpg", class: "right-img"
+            div.text Blah blah blah
+
+
+coffee:
+  $(document).ready ->
+
+    $("#search").on('click' , ->
+      $(this).addClass('active')
+    )
+
+    $('.js-search-trigger').on('click' , (e)->
+      if $(this).parent().hasClass('active')
+        if $("#searchForm #searchValue").val() != ''
+          $("#searchForm").submit()
+        else
+          e.stopPropagation()
+          $("#search").removeClass('active')
+    )
+
+    $("#home-menu span[id!='search']").on('mouseenter', ->
+      $(".rect").hide();
+      $("#rect-"+this.className).css("display","block")
+      $("#search").removeClass('active')
+    )
+
+    $(".rect").on('mouseleave', ->
+      $(".rect").hide()
+    )
+
+    $("#account-area .my-account").mouseover ->
+      $("#account-area .account-menu").show()
+
+    $("#account-area .account-menu").mouseleave ->
+      $("#account-area .account-menu").hide()
+
+    $(".lookbook-slide").responsiveSlides({
+      auto: false,
+      nav: true
+    })

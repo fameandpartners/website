@@ -294,6 +294,7 @@ GEM
       activerecord (>= 3.2.0, < 5.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
+    device_detector (0.8.1)
     devise (2.2.8)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -553,9 +554,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-byebug (3.1.0)
-      byebug (~> 4.0)
-      pry (~> 0.10)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
     psych (2.0.13)
@@ -755,7 +753,6 @@ GEM
       multi_json (~> 1.3)
       rake
       rest-client (~> 1.6)
-    titleize (1.3.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -801,6 +798,7 @@ DEPENDENCIES
   bootstrap-sass
   bourbon
   business_time
+  byebug
   canonical-rails!
   capybara
   ckeditor
@@ -814,6 +812,7 @@ DEPENDENCIES
   data_migrate!
   database_cleaner (= 0.9.1)
   default_value_for
+  device_detector (~> 0.8.1)
   droidcss
   eco
   event_sourced_record
@@ -839,7 +838,6 @@ DEPENDENCIES
   paperclip
   pg
   pin_payment
-  pry-byebug
   pry-rails
   psych (~> 2.0.13)
   quiet_assets
@@ -880,7 +878,6 @@ DEPENDENCIES
   timecop
   timers (= 1.1.0)
   tire
-  titleize
   uglifier (= 1.3.0)
   unicorn
   whenever

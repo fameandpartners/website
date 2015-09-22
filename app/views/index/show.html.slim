@@ -1,61 +1,29 @@
 .page-content.index
-  ul.rslides
-    - @banner.each do |banner|
-      li
-        = link_to LocalizeUrlService.localize_url(banner.url, current_site_version), title: banner.title do
-          = image_tag banner.attachment(:original), alt: banner.presentation, class: "img-responsive portrait-img #{banner.css_class}"
+  .media-wrap
+    // TODO: create helper for multisource images
+    = link_to make_a_statement_collection_path
+      img src='/assets/home-page-tiles/hero-full.jpg' srcset='/assets/home-page-tiles/hero-sml.jpg 768w, /assets/home-page-tiles/hero-med.jpg 1024w, /assets/home-page-tiles/hero-full.jpg 1200w' alt='Bambi'
+
+/! Content Section
+section.container.content-block.home-main-content
+  .row
+    .main.col-md-7
+      = link_to build_taxon_path('Lace'), class: 'media-wrap'
+        = image_tag 'home-page-tiles/tile-amazing-lace.jpg', alt: 'AMAZING LACE - Shop our lace dress edit'
+      = render 'shared/redesign/tabs_collection'
+      = link_to build_taxon_path('Two Piece'), class: 'media-wrap'
+        = image_tag 'home-page-tiles/tile-double-or-nothing.jpg', alt: 'DOUBLE OR NOTHING - Discover our best two-piece styles'
+        fast_making_dresses
+      = link_to fast_making_dresses_path, class: 'media-wrap'
+        = image_tag 'home-page-tiles/tile-express-making.png', alt: 'Express making - Dresses made in 48 hours.'
+      = link_to bridesmaid_collection_path, class: 'media-wrap'
+        = image_tag 'home-page-tiles/tile-bridesmaid-chic.jpg', alt: 'BRIDESMAID CHIC - Getting it right for your #girlsquad'
+
+    aside.col-md-5
+      = render 'shared/redesign/blog_posts'
 
 /! Email Subscription
-#email-container.container-fluid.email-sub.text-center
-  .row
-    = render 'shared/newsletter_signup'
+= render 'shared/redesign/newsletter_signup'
 
-.row-same-height
-  .col-md-4.brand-pink.text-center.shop-with-us
-    h4 No middle-men
-    p Our sample room direct to you model means no middle men, higher quality formal dresses &amp; lower costs.
-
-    h4 Internal sourcing &amp; design
-    p Dedicated sourcing &amp; design team to discover the best fabrics and create the most beautiful dress designs based on what's trending right now.
-
-    = image_tag "glam-rebel.jpg", alt: 'Something here', class: 'img-responsive'
-
-    h4 Hem lengths that suit you
-    p Long formal dresses, short prom dresses, midi, knee-length; we can change your dress length to whatever suits you.
-
-    h4 All online
-    p We deliver you beautiful dresses, customised for you, at the prices we do because we keep it all online.
-  .col-md-4.text-center.shop-with-us.middle
-    h2 Fame &amp; Partners delivers a high quality, bespoke dress making  service without the  traditional cost
-    = image_tag "bride.jpg", alt: 'Something here', class: 'img-responsive'
-    h1
-      small formal dresses<br>
-      | for every event
-    ul.list-inline
-      li
-        = link_to 'grad dresses', build_taxon_path('Graduation')
-      li
-        = link_to 'prom dresses', build_taxon_path('Prom')
-      li
-        = link_to 'formal dresses', build_taxon_path('Formal')
-      li
-        = link_to 'bridesmaids dresses', bridesmaid_collection_path
-      li
-        = link_to 'cocktail dresses', build_taxon_path('Cocktail')
-      li
-        = link_to 'ball gowns', build_taxon_path('Ball Gowns')
-
-  .col-md-4.brand-pink.text-center.shop-with-us
-    h4 Dedicated, specialist sample<br>rooms &amp; dress makers
-    p Our workers are highly skilled; each individual formal dress is crafted by one artisan seamstress.
-
-    = image_tag "new-years-eve.jpg", alt: 'Something here', class: 'img-responsive portrait-img'
-
-    h4 Dresses customised for you
-    p Customise to your perfect colour and change design features to make your formal dress uniquely yours.
-
-    h4 Free stylists
-    p Special events like prom are so important so we offer free stylists to complete the full look, free of charge.
-
-    h4 beautiful, luxe finish dress fabrics
-    p Metallics, sequins, taffeta, satin, chiffon, lace all available in extensive colour palettes you can choose.
+/! SEO content
+= render 'shared/redesign/seo_content'

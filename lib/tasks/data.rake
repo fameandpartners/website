@@ -7,6 +7,7 @@ namespace :import do
 
     file_path = ENV['FILE_PATH']
     available = ENV['AVAILABLE'] || 1.days.ago
+    STDOUT.sync = true
     puts "#{DateTime.now} START XLS IMPORTER"
 
 

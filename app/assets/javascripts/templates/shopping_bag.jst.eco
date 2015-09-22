@@ -64,7 +64,7 @@
   </p>
   <p>
     <% if @cart.promocode: %>
-      Promotion (<%= @cart.promocode %>)<span><%= @cart.display_promotion_total %></span>
+      Promotion (<%= @cart.promocode.substring(0,10) %>)<span><%= @cart.display_promotion_total %></span>
     <% end %>
   </p>
   <p>

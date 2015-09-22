@@ -2,8 +2,8 @@
   #locale-selector-label
     | You're shopping in:
   #locale-selector-current
-    = render 'layouts/redesign/header/locale_selector/item', site_version: current_site_version
     .arrow
+    = render 'layouts/redesign/header/locale_selector/item', site_version: current_site_version
     ul
       - SiteVersion.all.each do |site_version|
         li class=('active' if site_version == current_site_version)

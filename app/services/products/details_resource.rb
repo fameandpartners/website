@@ -6,7 +6,6 @@
 #   product   - obsoleted! support legacy only
 #
 class Products::DetailsResource
-  META_DESCRIPTION_MAX_SIZE = 160
   RECOMMENDED_PRODUCTS_LIMIT = 4
   RELATED_OUTERWEAR_LIMIT = 4
 
@@ -17,8 +16,8 @@ class Products::DetailsResource
       raise ArgumentError.new('have no product identificators')
     end
 
-    @site_version     = options[:site_version] || SiteVersion.default
-    @product          = find_product!(options[:slug], options[:permalink], options[:product])
+    @site_version = options[:site_version] || SiteVersion.default
+    @product      = find_product!(options[:slug], options[:permalink], options[:product])
   end
 
   def cache_key
@@ -40,10 +39,12 @@ class Products::DetailsResource
         description:        product.description,
         permalink:          product.permalink,
         is_active:          product.is_active?,
+        is_deleted:         product.deleted?,
         images:             product_images.read_all,
         default_image:      product_images.default,
         price:              product_price,
         discount:           product_discount,
+        taxons:             product_taxons,
         # page#show specific details
         recommended_products: recommended_products,
         related_outerwear:    related_outerwear,
@@ -94,12 +95,7 @@ class Products::DetailsResource
     end
 
     def product_short_description
-      if !product.meta_description.blank?
-        product.meta_description
-      else
-        sanitized_description = ActionView::Base.full_sanitizer.sanitize(product.description)
-        sanitized_description.truncate(META_DESCRIPTION_MAX_SIZE)
-      end
+      product.meta_description.blank? ? product.description : product.meta_description
     end
 
     def product_fabric
@@ -147,5 +143,9 @@ class Products::DetailsResource
 
     def product_selection_options
       Products::SelectionOptions.new(site_version: site_version, product: product).read
+    end
+
+    def product_taxons
+      product.taxons.collect { |taxon| Taxons::Presenter.new(spree_taxon: taxon) }
     end
 end
