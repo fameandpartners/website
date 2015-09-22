@@ -29,8 +29,8 @@ class UserCart::CartPresenter < OpenStruct
   end
 
   def masterpass_available?
-    if Features.active?(:masterpass) && site_version.is_australia?
-      masterpass_payment_method.present?
+    if Features.active?(:masterpass)
+      masterpass_payment_method.present?      
     end
   end
 end
