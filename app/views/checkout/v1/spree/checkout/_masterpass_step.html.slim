@@ -27,10 +27,9 @@
     - content_for :inline_javascript do
       | Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
 
-  h2.checkout-section-title Payment Details
+  h2.checkout-section-title Payment Details from Masterpass
   / TODO - Rewrite as react component with new button layout and behaviour
   p All transactions are secure and encrypted. Credit card information is never stored.
-
   #payment-selection.panel-group aria-multiselectable="false" role="tablist"
     - if @credit_card_gateway
       = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
