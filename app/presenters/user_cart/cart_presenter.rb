@@ -28,6 +28,8 @@ class UserCart::CartPresenter < OpenStruct
   end
 
   def masterpass_available?
-    masterpass_payment_method.present?
+    if Features.active?(:masterpass)
+      masterpass_payment_method.present?
+    end
   end
 end
