@@ -2,7 +2,7 @@ var ProductImageMobile = React.createClass({
   render: function(){
     return(
       <div className='col-xxs-6 col-xs-6 category--item'>
-        <a href={this.props.product.collection_path}>
+        <a href={urlWithSitePrefix(this.props.product.collection_path)}>
           <img alt={this.props.product.name} className='img-product img-responsive' data-hover={this.props.product.images[0]} src={this.props.product.images[1]}></img>
           <div className='details text-center'>
             <span className='name'> {this.props.product.name} </span>
@@ -17,7 +17,7 @@ var ProductImageMobile = React.createClass({
 var ProductImageDesktop = React.createClass({
   render: function(){
     return(
-      <a href={this.props.product.collection_path}>
+      <a href={urlWithSitePrefix(this.props.product.collection_path)}>
         <img alt={this.props.product.name} className='img-product img-responsive' data-hover={this.props.product.images[0]} src={this.props.product.images[1]}></img>
       </a>
     )
@@ -36,12 +36,6 @@ var NewThisWeekProducts = React.createClass({
       type: "GET",
       dataType: 'json',
       success: function(collection) {
-        if (urlWithSitePrefix('/dresses/?order=newest&limit=10').indexOf("/au/") > -1) {
-          for (i=0; i<collection.products.length;i++)
-          {
-            collection.products[i].collection_path = "/au" + collection.products[i].collection_path
-          }
-        }
         this.setState({products: collection.products});
       }.bind(this)
     });
@@ -55,6 +49,7 @@ var NewThisWeekProducts = React.createClass({
   },
 
   render: function() {
+
     if (this.state.products.length == 0){
       return (
         <div></div>
