@@ -27,9 +27,7 @@ var ProductImageDesktop = React.createClass({
 var NewThisWeekProducts = React.createClass({
 
   getInitialState: function() {
-    urlPrefix = '';
-    if (this.props.site_version == 'au') { urlPrefix = '/au'}
-    return {products: [], urlPrefix: urlPrefix}
+    return {products: []}
   },
 
   componentDidMount: function() {
@@ -57,7 +55,7 @@ var NewThisWeekProducts = React.createClass({
         <div></div>
       );
     } else {
-      urlPrefix = this.state.urlPrefix;
+      urlPrefix = this.props.site_version;
       if (this.props.device == 'mobile') {
         products = this.state.products.map(function(product){
           return (<ProductImageMobile product={product} urlPrefix={urlPrefix} />)

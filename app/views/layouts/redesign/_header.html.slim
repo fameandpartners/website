@@ -119,7 +119,7 @@ ruby:
                 i.fa.fa-chevron-left
                 .back BACK
             li.images-content
-              = react_component('NewThisWeekProducts',{device: 'mobile', site_version: @current_site_version.permalink}, { prerender: true })
+              = react_component('NewThisWeekProducts',{device: 'mobile', site_version: @current_site_version.to_param}, { prerender: true })
 
         div#dresses-menu
           ul.nav.navbar-nav
