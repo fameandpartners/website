@@ -24,24 +24,22 @@ describe 'user', type: :feature, js: true do
 
     it "contains menu links" do
       expect(page).to have_content 'Shop'
-      expect(page).to have_content(/Become Famous/i)
+      expect(page).to have_content(/Formal dresses for every event/i)
     end
 
     it "shows empty shopping bag" do
-      find('#cart-trigger a').click
+      first('.js-trigger-shopping-bag')
       wait_ajax_completion(page)
 
       expect(page).to have_selector('#cart', visible: true)
       expect(page).to have_selector('#cart .cart--call-to-actions', visible: true)
-
-      # TODO check not empty dress
     end
 
     it "allows redirect to /dresses page" do
-      first('.shop.menu-item').hover
+      first('#home-menu .dresses').hover
 
       ignore_js_errors do
-        find('.nav-menu ul.primary .all-dresses').click_button('View all dresses')
+        find('#rect-dresses').click_link('View all dresses')
       end
 
       expect(page.status_code).to eq(200) # 200 OK

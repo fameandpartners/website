@@ -46,18 +46,20 @@ describe 'user', type: :feature, js: true do
     end
 
     it "can add dress to cart" do
-      # select size
-      find("#product-size-action").click
-      first('#product-size-content .size-option.product-option').click
-
-      sleep(0.5) # wait animation
-
+      sleep(0.5)
       # select color. color will be select by default.. we can omit
       find('#product-colorize-action').click()
       first('#product-color-content .color-option').click()
 
-      # close panel
-      #find('#product-overlay').trigger('click')
+      # ensure panel closed
+      find('#product-overlay', visible: false).trigger('click')
+
+      # select size
+      find("#product-size-action").click
+      first('#product-size-content .size-option.product-option').click
+
+      # ensure panel closed
+      find('#product-overlay', visible: false).trigger('click')
 
       # press 'add'
       find('.buy-button', visible: false).trigger("click")
@@ -65,7 +67,7 @@ describe 'user', type: :feature, js: true do
       wait_ajax_completion(page)
 
       # item should be
-      expect(page.find('#cart-item-count').text).to eq('1')
+      expect(page.first('.js-cart-item-count').text).to eq('1')
       expect(page).to have_selector('#cart .cart-items .cart-item', visible: true)
 
       # internally, we should have items in order too
