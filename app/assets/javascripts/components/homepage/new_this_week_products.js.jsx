@@ -2,7 +2,7 @@ var ProductImageMobile = React.createClass({
   render: function(){
     return(
       <div className='col-xxs-6 col-xs-6 category--item'>
-        <a href={this.props.urlPrefix + this.props.product.collection_path}>
+        <a href={urlWithSitePrefix(this.props.product.collection_path)}>
           <img alt={this.props.product.name} className='img-product img-responsive' data-hover={this.props.product.images[0]} src={this.props.product.images[1]}></img>
           <div className='details text-center'>
             <span className='name'> {this.props.product.name} </span>
@@ -17,7 +17,7 @@ var ProductImageMobile = React.createClass({
 var ProductImageDesktop = React.createClass({
   render: function(){
     return(
-      <a href={this.props.urlPrefix + this.props.product.collection_path}>
+      <a href={urlWithSitePrefix(this.props.product.collection_path)}>
         <img alt={this.props.product.name} className='img-product img-responsive' data-hover={this.props.product.images[0]} src={this.props.product.images[1]}></img>
       </a>
     )
@@ -55,20 +55,19 @@ var NewThisWeekProducts = React.createClass({
         <div></div>
       );
     } else {
-      urlPrefix = this.props.site_version;
       if (this.props.device == 'mobile') {
         products = this.state.products.map(function(product){
-          return (<ProductImageMobile product={product} urlPrefix={urlPrefix} />)
+          return (<ProductImageMobile product={product} />)
         });
       } else if (this.props.device == 'desktop'){
         products_first_slide = this.state.products.slice(0,5);
         products_first_slide = products_first_slide.map(function(product){
-          return (<ProductImageDesktop product={product} urlPrefix={urlPrefix} />)
+          return (<ProductImageDesktop product={product} />)
         });
 
         products_second_slide = this.state.products.slice(5,11);
         products_second_slide = products_second_slide.map(function(product){
-          return (<ProductImageDesktop product={product} urlPrefix={urlPrefix} />)
+          return (<ProductImageDesktop product={product} />)
         });
 
         products = (
