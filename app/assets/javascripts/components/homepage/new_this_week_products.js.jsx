@@ -2,7 +2,7 @@ var ProductImageMobile = React.createClass({
   render: function(){
     return(
       <div className='col-xxs-6 col-xs-6 category--item'>
-        <a href={this.props.product.collection_path}>
+        <a href={this.props.urlPrefix + this.props.product.collection_path}>
           <img alt={this.props.product.name} className='img-product img-responsive' data-hover={this.props.product.images[0]} src={this.props.product.images[1]}></img>
           <div className='details text-center'>
             <span className='name'> {this.props.product.name} </span>
@@ -17,7 +17,7 @@ var ProductImageMobile = React.createClass({
 var ProductImageDesktop = React.createClass({
   render: function(){
     return(
-      <a href={this.props.product.collection_path}>
+      <a href={this.props.urlPrefix + this.props.product.collection_path}>
         <img alt={this.props.product.name} className='img-product img-responsive' data-hover={this.props.product.images[0]} src={this.props.product.images[1]}></img>
       </a>
     )
@@ -27,7 +27,9 @@ var ProductImageDesktop = React.createClass({
 var NewThisWeekProducts = React.createClass({
 
   getInitialState: function() {
-    return {products: []}
+    urlPrefix = '';
+    if (this.props.site_version == 'au') { urlPrefix = '/au'}
+    return {products: [], urlPrefix: urlPrefix}
   },
 
   componentDidMount: function() {
@@ -36,12 +38,6 @@ var NewThisWeekProducts = React.createClass({
       type: "GET",
       dataType: 'json',
       success: function(collection) {
-        if (urlWithSitePrefix('/dresses/?order=newest&limit=10').indexOf("/au/") > -1) {
-          for (i=0; i<collection.products.length;i++)
-          {
-            collection.products[i].collection_path = "/au" + collection.products[i].collection_path
-          }
-        }
         this.setState({products: collection.products});
       }.bind(this)
     });
@@ -55,24 +51,26 @@ var NewThisWeekProducts = React.createClass({
   },
 
   render: function() {
+
     if (this.state.products.length == 0){
       return (
         <div></div>
       );
     } else {
+      urlPrefix = this.state.urlPrefix;
       if (this.props.device == 'mobile') {
         products = this.state.products.map(function(product){
-          return (<ProductImageMobile product={product} />)
+          return (<ProductImageMobile product={product} urlPrefix={urlPrefix} />)
         });
       } else if (this.props.device == 'desktop'){
         products_first_slide = this.state.products.slice(0,5);
         products_first_slide = products_first_slide.map(function(product){
-          return (<ProductImageDesktop product={product} />)
+          return (<ProductImageDesktop product={product} urlPrefix={urlPrefix} />)
         });
 
         products_second_slide = this.state.products.slice(5,11);
         products_second_slide = products_second_slide.map(function(product){
-          return (<ProductImageDesktop product={product} />)
+          return (<ProductImageDesktop product={product} urlPrefix={urlPrefix} />)
         });
 
         products = (

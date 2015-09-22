@@ -72,7 +72,7 @@ ruby:
     = link_to 'SHOP ALL NEW THIS WEEK', dresses_path(:order => 'newest'), class: "inner-text"
   .slideArea
     .containArea
-      = react_component('NewThisWeekProducts',{device: 'desktop'}, { prerender: true })
+      = react_component('NewThisWeekProducts',{device: 'desktop', site_version: @current_site_version.permalink}, { prerender: true })
 
 .row.rect#rect-dresses
   .left-area
