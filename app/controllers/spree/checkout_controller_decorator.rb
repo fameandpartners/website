@@ -219,39 +219,39 @@ Spree::CheckoutController.class_eval do
       before_address
 
       # Initialize the bulling details
-      @order.bill_address.firstname ||= @order.user_first_name
-      @order.bill_address.lastname ||= @order.user_last_name
-      @order.bill_address.email ||= @order.email
-      @order.bill_address.address1 ||= @masterpass_data[:card][:billingAddress][:line1]
-      @order.bill_address.address2 ||= @masterpass_data[:card][:billingAddress][:line2]
-      @order.bill_address.city ||= @masterpass_data[:card][:billingAddress][:city]
-      @order.bill_address.country ||= Spree::Country.where("iso=?", @masterpass_data[:card][:billingAddress][:country]).first
+      @order.bill_address.firstname = @order.user_first_name
+      @order.bill_address.lastname = @order.user_last_name
+      @order.bill_address.email = @order.email
+      @order.bill_address.address1 = @masterpass_data[:card][:billingAddress][:line1]
+      @order.bill_address.address2 = @masterpass_data[:card][:billingAddress][:line2]
+      @order.bill_address.city = @masterpass_data[:card][:billingAddress][:city]
+      @order.bill_address.country = Spree::Country.where("iso=?", @masterpass_data[:card][:billingAddress][:country]).first
       country_id = @order.bill_address.country.id
       state_name = @masterpass_data[:card][:billingAddress][:countrySubdivision].sub(
           @masterpass_data[:card][:billingAddress][:country] + '-', '')
-      @order.bill_address.state ||= Spree::State.where("abbr=? and country_id=?",
+      @order.bill_address.state = Spree::State.where("abbr=? and country_id=?",
                                                      state_name,
                                                      country_id).first
-      @order.bill_address.phone ||= @masterpass_data[:contact][:phoneNumber]
-      @order.bill_address.zipcode ||= @masterpass_data[:card][:billingAddress][:postalCode]
+      @order.bill_address.phone = @masterpass_data[:contact][:phoneNumber]
+      @order.bill_address.zipcode = @masterpass_data[:card][:billingAddress][:postalCode]
 
       # Initialize the shipping details
       recipientName = @masterpass_data[:shippingAddress][:recipientName].split(' ', 2)
-      @order.ship_address.firstname ||= recipientName[0]
-      @order.ship_address.lastname ||= recipientName[1]
-      @order.ship_address.email ||= @masterpass_data[:contact][:emailAddress]
-      @order.ship_address.address1 ||= @masterpass_data[:shippingAddress][:line1]
-      @order.ship_address.address2 ||= @masterpass_data[:shippingAddress][:line2]
-      @order.ship_address.city ||= @masterpass_data[:shippingAddress][:city]
-      @order.ship_address.country ||= Spree::Country.where("iso=?", @masterpass_data[:shippingAddress][:country]).first
+      @order.ship_address.firstname = recipientName[0]
+      @order.ship_address.lastname = recipientName[1]
+      @order.ship_address.email = @masterpass_data[:contact][:emailAddress]
+      @order.ship_address.address1 = @masterpass_data[:shippingAddress][:line1]
+      @order.ship_address.address2 = @masterpass_data[:shippingAddress][:line2]
+      @order.ship_address.city = @masterpass_data[:shippingAddress][:city]
+      @order.ship_address.country = Spree::Country.where("iso=?", @masterpass_data[:shippingAddress][:country]).first
       country_id = @order.ship_address.country.id
       state_name = @masterpass_data[:shippingAddress][:countrySubdivision].sub(
           @masterpass_data[:shippingAddress][:country] + '-', '')
-      @order.ship_address.state ||= Spree::State.where("abbr=? and country_id=?",
+      @order.ship_address.state = Spree::State.where("abbr=? and country_id=?",
                                                      state_name,
                                                      country_id).first
-      @order.ship_address.phone ||= @masterpass_data[:shippingAddress][:recipientPhoneNumber]
-      @order.ship_address.zipcode ||= @masterpass_data[:shippingAddress][:postalCode]
+      @order.ship_address.phone = @masterpass_data[:shippingAddress][:recipientPhoneNumber]
+      @order.ship_address.zipcode = @masterpass_data[:shippingAddress][:postalCode]
     end
   end
 
