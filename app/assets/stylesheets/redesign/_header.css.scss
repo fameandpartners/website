@@ -333,26 +333,15 @@ li.shop {
   .masthead {
     padding-top: 26px;
 
-    @media(max-width: 480px) {
-      padding-right: 0;
-      padding-left: 0;
-    }
     a {
       color: black;
       cursor: pointer;
     }
+
   }
 
   .masthead.pull-right {
-    padding-left: 0;
     padding-top: 17px;
-  }
-
-  @media(min-width: 415px)and(max-width: 800px)
-  {
-    .masthead.pull-right{
-      padding-right: 0;
-    }
   }
 
 }
@@ -526,12 +515,6 @@ ul.secondary.pull-right {
       width:30px;
       opacity: 0.7;
       margin-top: -15px;
-      @media(max-width:450px) {
-        margin-left: -5px;
-      }
-      @media(min-width:550px){
-        margin-left: -20px;
-      }
     }
   }
 }
@@ -539,7 +522,7 @@ ul.secondary.pull-right {
 .mobile-logo-area{
   position: absolute;
   width: 50px;
-  top: 14px;
+  top: 18px;
   left: 50%;
   margin-left: -25px;
 
