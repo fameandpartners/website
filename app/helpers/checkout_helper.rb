@@ -25,6 +25,22 @@ module CheckoutHelper
     end
   end
 
+  def set_us_default(address)
+    if current_site_version.try(:zone).name == 'usa'
+      fnd = false
+      available_countries_for_current_zone.each do |country|
+        fnd = true if address.country_id == country.id
+      end
+      address.country_id = 49 if !fnd
+    end
+    address
+  end
+
+  # Not a payment gateway
+  def masterpass_active?
+    false #|| Features.active?(:masterpass, current_spree_user) || session[:auto_applied_promo_code] == 'masterpass25'
+  end
+
   def masterpass_cart_callback_uri(payment_method)
     callback_protocol = Rails.env.production? ? 'https' : 'http'
     masterpass_cart_url(payment_method_id: payment_method.id, protocol: callback_protocol)
