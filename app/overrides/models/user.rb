@@ -28,4 +28,3 @@ Spree::User.class_eval do
     self.avatar.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
   end
 end
-
