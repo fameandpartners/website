@@ -1,7 +1,7 @@
 module Products
   class Presenter
-    SCHEMA_ORG_IN_STOCK = 'http://schema.org/InStock'
-    SCHEMA_ORG_DISCONTINUED = 'http://schema.org/Discontinued'
+    SCHEMA_ORG_IN_STOCK       = 'http://schema.org/InStock'
+    SCHEMA_ORG_DISCONTINUED   = 'http://schema.org/Discontinued'
     META_DESCRIPTION_MAX_SIZE = 160
 
     attr_accessor :id, :master_id, :sku, :name, :short_description, :description,
@@ -162,6 +162,10 @@ module Products
       display_price.amount
     end
 
+    # Until we have a more complex logic to invalidate sales and prices, it'll always be valid for one week
+    def price_valid_until
+      (Date.today + 1.week)
+    end
 
     def schema_availability
       is_active ? SCHEMA_ORG_IN_STOCK : SCHEMA_ORG_DISCONTINUED
