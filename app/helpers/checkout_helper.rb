@@ -26,8 +26,7 @@ module CheckoutHelper
   end
 
   def set_us_default(address)
-    if current_site_version.try(:zone).name == 'usa'
-
+    if current_site_version.is_usa?
       address.country_id = Spree::Country.where(name: "United States").first.id if
           !available_countries_for_current_zone.detect{|a| a.id == address.country_id}.present?
     end
