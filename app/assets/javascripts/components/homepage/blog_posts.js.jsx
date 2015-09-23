@@ -26,7 +26,28 @@ var BlogPosts = React.createClass({
   },
   componentDidMount: function() {
     $.get("http://blog.fameandpartners.com/?json=1", function(result) {
-      this.setState({blogs: result.posts.slice(0,9)})
+
+      // Pushing the blogs which will be display on homepage
+      blogs = [];
+      for (i=0;i< result.posts.length;i++){
+        if (result.posts[i].custom_fields.home_page_display == "true"){
+          blogs.push(result.posts[i]);
+        }
+      }
+      // Bubble sort those blogs by display order
+      for (i=0;i< blogs.length-1;i++){
+        for (j=i+1;j< blogs.length;j++){
+          if (parseInt(blogs[i].custom_fields.home_page_display_order) > parseInt(blogs[j].custom_fields.home_page_display_order)) {
+            temp = blogs[i];
+            blogs[i] = blogs[j];
+            blogs[j] = temp;
+          }
+        }
+      }
+
+      //Only display first 8 blogs
+      blogs = blogs.slice(0,9);
+      this.setState({blogs: blogs})
     }.bind(this));
   },
   render: function() {
@@ -35,15 +56,6 @@ var BlogPosts = React.createClass({
         <div></div>
       );
     } else {
-
-      post_0 = (<Post post={this.state.blogs[0]} />)
-      post_1 = (<Post post={this.state.blogs[5]} />)
-      post_2 = (<Post post={this.state.blogs[8]} />)
-      post_3 = (<Post post={this.state.blogs[7]} />)
-      post_4 = (<Post post={this.state.blogs[6]} />)
-      post_5 = (<Post post={this.state.blogs[1]} />)
-      post_6 = (<Post post={this.state.blogs[3]} />)
-      post_7 = (<Post post={this.state.blogs[4]} />)
       return(
         <div className="blog-posts">
 
@@ -54,17 +66,17 @@ var BlogPosts = React.createClass({
           <div className="posts">
 
             <div className="col">
-              {post_0}
-              {post_1}
-              {post_2}
-              {post_3}
+              <Post post={this.state.blogs[0]} />
+              <Post post={this.state.blogs[1]} />
+              <Post post={this.state.blogs[2]} />
+              <Post post={this.state.blogs[3]} />
             </div>
 
             <div className="col">
-              {post_4}
-              {post_5}
-              {post_6}
-              {post_7}
+              <Post post={this.state.blogs[4]} />
+              <Post post={this.state.blogs[5]} />
+              <Post post={this.state.blogs[6]} />
+              <Post post={this.state.blogs[7]} />
             </div>
 
           </div>
