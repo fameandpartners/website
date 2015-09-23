@@ -207,9 +207,6 @@ The nuclear approach can get your environment (elasticsearch, redis, assets) to 
 rake dev:clean_slate
 ```
 
-### Locating the Index Page
-The index landing page can be found in the views/index/show.html
-
 ## Manage colours pages
 
 1. update `lib/tasks/populate/colors_groups.rake` file
@@ -223,6 +220,7 @@ The index landing page can be found in the views/index/show.html
 5. exit from console end run Rake task "db:populate:colors_groups"
 
 ## Generate Shopping Feeds
+
 * $ `ey ssh -e production_new`
 * $ `cd /data/fame_and_partners/current`
 * $ `bundle exec rake feed:export:all`
@@ -231,7 +229,8 @@ The index landing page can be found in the views/index/show.html
 
 
 #### Populating db with test data
-Note: This commands can be run manually or throught `bin/prepare_app`
+
+Note: This commands can be run manually or through `bin/prepare_app`
 
 * `$ bundle exec rake db:populate:dresses`
 * `$ bundle exec rake db:populate:taxonomy`
@@ -293,7 +292,5 @@ To run every test, including engines', use the `bundle exec rake spec` command
  - **Category/Collection** - `Products::CollectionsController#show`
  - **Product** - `Products::DetailsController#show`
 
-
-### Thanks for using FameAndPartners!
-
-Cheers, [Droid Labs](http://droidlabs.pro).
+Cheers and Unicorns, 
+F&P Dev Team
