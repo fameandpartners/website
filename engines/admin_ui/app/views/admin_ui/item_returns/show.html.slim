@@ -1,0 +1,83 @@
+- content_for :page_title do
+  = page_title
+
+.ibox
+  .ibox-title
+    h3 Actions
+  .ibox-content
+    .btn-toolbar
+      / TODO - Having all these items reuse the same jQuery ajax modal means you can only click
+      / on one of the items before the content is loaded.
+      / New buttons *don't* load new content via XHR.
+      - possible_events.each do |event_type|
+        .btn-group
+          a.btn.btn-primary data-toggle="modal" href=item_return_build_event_path(item_return_id: @item_return.id, event_type: event_type) data-target="#ajax-modal" = event_type.to_s.titleize
+
+/.ibox
+/  .ibox-title
+/    h3 History
+/  .ibox-content.inspinia-timeline
+/    .vertical-container.dark-timeline
+/      - @item_return.events.order('created_at DESC').each do |event|
+/        .timeline-item
+/          .row
+/            .col-xs-3.date
+/              i.fa.fa-calendar
+/              span class="vertical-date"
+/                => time_ago_in_words(event.occurred_at)
+/                | ago
+/                small =<> event.occurred_at.to_s
+/            .col-xs-7.content.no-top-border
+/              p.m-b-xs : strong = event.event_type.to_s.titleize
+
+.ibox
+  .ibox-title
+    h3 Return Request
+  .ibox-content
+    h3 Order
+    = link_to @item_return.order_number, spree.admin_order_path(id: @item_return.order_number)
+    = render :partial => 'payment_info'
+    = render :partial => 'order_return_request'
+
+
+
+.ibox.collapsed
+  .ibox-title
+    a.collapse-link
+      h5 Raw Attributes
+      .ibox-tools
+        i.fa.fa-chevron-up
+  .ibox-content
+    = render 'attributes_list', attributes: @item_return.attributes
+
+.ibox
+  .ibox-title
+    a.collapse-link
+      h5 History
+      .ibox-tools
+        i.fa.fa-chevron-up
+  .ibox-content
+    .vertical-container.dark-timeline
+      - @item_return.events.order('created_at DESC').each do |event|
+        .vertical-timeline-block
+          .vertical-timeline-icon
+            i.fa.fa-calendar
+          .vertical-timeline-content
+            h2 = event.event_type.to_s.titleize
+
+            = render 'attributes_list', attributes: event.data
+
+            span class="vertical-date"
+              => time_ago_in_words(event.occurred_at)
+              | ago
+              small =<> event.occurred_at.to_s
+
+
+.ibox.collapsed
+  .ibox-title
+    a.collapse-link
+      h5 Debug
+      .ibox-tools
+        i.fa.fa-chevron-up
+  .ibox-content
+    pre = @item_return.inspect

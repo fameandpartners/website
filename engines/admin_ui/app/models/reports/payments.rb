@@ -33,6 +33,13 @@ module Reports
 
       def self.from_payment(payment)
         Types.const_get(payment.payment_method.type.demodulize, false).new(payment)
+      rescue NoMethodError
+        payment.payment_method = Spree::PaymentMethod.unscoped.find(payment.payment_method_id)
+        from_payment(payment)
+      end
+
+      def amount_in_cents
+        (amount * 100).to_i
       end
 
       def payment_date
@@ -136,7 +143,7 @@ module Reports
           end
 
           def transaction_id
-            '-'
+            token
           end
         end
 

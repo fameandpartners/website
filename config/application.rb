@@ -15,6 +15,8 @@ module FameAndPartners
   end
 
   class Application < Rails::Application
+    config.active_record.observers ||= []
+    config.active_record.observers << :item_return_event_observer
 
     config.to_prepare do
       # manually load some paths

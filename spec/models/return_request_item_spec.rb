@@ -49,5 +49,4 @@ describe ReturnRequestItem do
     end
 
   end
-
 end
