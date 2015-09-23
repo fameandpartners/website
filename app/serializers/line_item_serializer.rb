@@ -16,14 +16,9 @@ class LineItemSerializer < ActiveModel::Serializer
     :product_description,
     :product_color,
     :product_size,
-    :product_delivery_time,
-    :service_product
+    :product_delivery_time
 
   has_one :personalization, serializer: LineItemPersonalizationSerializer
-
-  def service_product
-    object.variant.product.is_service?
-  end
 
   def price
     object.price.to_s

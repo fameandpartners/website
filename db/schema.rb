@@ -1206,7 +1206,6 @@ ActiveRecord::Schema.define(:version => 20150921073046) do
     t.boolean  "featured",             :default => false
     t.integer  "position",             :default => 0
     t.boolean  "hidden",               :default => false
-    t.boolean  "is_service",           :default => false
     t.integer  "factory_id"
     t.string   "size_chart",           :default => "2014", :null => false
     t.integer  "fabric_card_id"
