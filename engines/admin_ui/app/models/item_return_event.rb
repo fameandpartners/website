@@ -71,22 +71,18 @@ class ItemReturnEvent < ActiveRecord::Base
     validates :location,    presence: true
     validates :received_on, presence: true
 
-    validate :location, inclusion: { in: ItemReturn::RECEIVE_LOCATIONS }
+    validates :location, inclusion: { in: ItemReturn::RECEIVE_LOCATIONS }
   end
 
   attr_accessible :user, :comment
 
   event_type :approve do
     attributes :user, :comment
+
+    validates :user, presence: true
   end
 
   event_type :record_refund do
-    # Refund status
-    # Refund ref
-    # Refund method
-    # Refund amount
-    # Refunded at
-
     attributes :user, :refund_method, :refund_amount,
                :refund_reference, :refunded_at, :comment
 
