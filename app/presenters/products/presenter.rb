@@ -1,5 +1,7 @@
 module Products
   class Presenter
+    SCHEMA_ORG_IN_STOCK = 'http://schema.org/InStock'
+    SCHEMA_ORG_DISCONTINUED = 'http://schema.org/Discontinued'
     META_DESCRIPTION_MAX_SIZE = 160
 
     attr_accessor :id, :master_id, :sku, :name, :short_description, :description,
@@ -158,6 +160,11 @@ module Products
     def price_amount
       display_price = discount ? price.apply(discount) : price
       display_price.amount
+    end
+
+
+    def schema_availability
+      is_active ? SCHEMA_ORG_IN_STOCK : SCHEMA_ORG_DISCONTINUED
     end
 
     def use_auto_discount!(auto_discount)

@@ -136,5 +136,23 @@ module Products
         end
       end
     end
+
+    describe '#schema_availability' do
+      context 'product is not available' do
+        let(:product) { described_class.new is_active: false }
+
+        it 'returns schema.org discontinued enumerator' do
+          expect(product.schema_availability).to eq(Products::Presenter::SCHEMA_ORG_DISCONTINUED)
+        end
+      end
+
+      context 'product is availalbe' do
+        let(:product) { described_class.new is_active: true }
+
+        it 'returns schema.org in stock enumerator' do
+          expect(product.schema_availability).to eq(Products::Presenter::SCHEMA_ORG_IN_STOCK)
+        end
+      end
+    end
   end
 end
