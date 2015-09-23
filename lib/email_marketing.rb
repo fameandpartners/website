@@ -148,9 +148,7 @@ class EmailMarketing
       items_scope = items_scope.where("spree_user_id not in (?)", already_received)
     end
     items_scope.each do |item|
-      if item.user.can_receive_email_marketing_notification?(code)
-        WishlistItemAddedEmailWorker.perform_async(item.id)
-      end
+      WishlistItemAddedEmailWorker.perform_async(item.id)
     end
   end
 

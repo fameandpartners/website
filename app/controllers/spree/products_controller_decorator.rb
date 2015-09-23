@@ -113,8 +113,6 @@ Spree::ProductsController.class_eval do
       color_name: params[:color_name]
     ).read
 
-    @is_bride = current_spree_user && current_spree_user.is_bride?
-
     set_product_show_page_title(@product, @product.selected_color.presentation)
     display_marketing_banner
 

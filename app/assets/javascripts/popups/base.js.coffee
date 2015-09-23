@@ -10,15 +10,6 @@ window.popups.getModalContainer = (title = null, button = null) ->
 
   return container
 
-window.popups.getVanillaModalContainer = (template, options) ->
-  container = $(JST['templates/'+template](options)).hide()
-  if $('.modal.popup-placeholder').length == 0
-    $('body #wrap #content').append(container)
-  else
-    $('.modal.popup-placeholder').replaceWith(container)
-
-  return container
-
 window.popups.getQuickViewModalContainer = () ->
   container = window.popups.getModalContainer()
   container.addClass('quick-view-mode')

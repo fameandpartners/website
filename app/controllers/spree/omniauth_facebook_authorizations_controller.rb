@@ -6,21 +6,7 @@ class Spree::OmniauthFacebookAuthorizationsController < Spree::StoreController
   def fb_auth
     session[:sign_up_reason] = nil
 
-    # code for bridesmaid party should be managed with bridesmaid-party module,
-    # and don't pollute main app
-    if params[:bridesmaid_party]
-      session[:sign_up_reason] = 'bridesmaid_party'
-
-      if session[:bridesmaid_party_event_id]
-        event = BridesmaidParty::Event.find(session[:bridesmaid_party_event_id])
-        set_after_sign_in_location(
-          main_app.bridesmaid_party_moodboard_path( user_slug: event.spree_user.slug)
-        )
-        session[:show_successfull_login_popup] = true
-      else
-        set_after_sign_in_location(main_app.bridesmaid_party_info_path)
-      end
-    elsif params[:return_to]
+    if params[:return_to]
       set_after_sign_in_location(params[:return_to])
     elsif params[:spree_user_return_to]
       set_after_sign_in_location(params[:spree_user_return_to])

@@ -1,7 +1,0 @@
-<div style="display: none;" class="modal popup-placeholder">
-  <div class="overlay"></div>
-  <div class="modal-container">
-    <div class="close-lightbox"></div>
-    <div class="item"></div>
-  </div>
-</div>
