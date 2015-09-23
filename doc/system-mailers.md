@@ -1,24 +1,30 @@
 # MarketingMailer
+
 app/views/marketing_mailer/
 
-# abandoned cart
+# Abandoned Cart
+
 order = Spree::Order.joins(:line_items).where("user_id is not null").first
 MarketingMailer.abandoned_cart(order, order.user).deliver
 
-# added wishlist
+# Added Wishlist
+
 user = WishlistItem.last.user
 MarketingMailer.added_to_wishlist(user).deliver
 
-#style_quiz_completed
+# style_quiz_completed
+
 user = UserStyleProfile.last.user
 MarketingMailer.style_quiz_completed(user).deliver
 
-# style quiz not completed
+# Style Quiz Not Completed
+
 user = Spree::User.last
 MarketingMailer.style_quiz_not_completed(user).deliver
 
 
-# Product reservations
+# Product Reservations
+
 app/views/product_reservations_mailer/new_reservation.html.slim (and .erb)
 reservation = ProductReservation.new(
   user_id: Spree::User.last.id,
@@ -44,14 +50,15 @@ Spree::CompetitionsMailer.invite(invite).deliver
 Spree::CompetitionsMailer.marketing_email('mail@example.com').deliver
 
 
-# Send to friend
+# Send to Friend
 app/views/spree/product_mailer/send_to_friend.html.slim
 product = Spree::Product.last
 info = { sender_name: 'Hogwarts', sender_email: 'sender_email@example.com', email: 'email@example.com'}
 Spree::ProductMailer.send_to_friend(product, info).deliver
 
 
-# User mailer
+# User Mailer
+
 app/views/spree/user_mailer/
 
 Spree::UserMailer.welcome(Spree::User.first).deliver
@@ -70,10 +77,11 @@ Spree::UserMailer.style_call_welcome(Spree::User.first).deliver
 
 
 
-# not used, but still in codebase
-#Spree::UserMailer.confirmation_instructions(Spree::User.first).deliver
-#Spree::UserMailer.custom_dress_created(CustomDress.new).deliver
-# custom dress requests
+# Not Used, but Still in Codebase
+# Spree::UserMailer.confirmation_instructions(Spree::User.first).deliver
+# Spree::UserMailer.custom_dress_created(CustomDress.new).deliver
+# Custom Dress Requests
+
 app/views/custom_dresses_mailer/request_custom_dress.text.erb
 dress_request = CustomDressRequest.new(
   email: 'some@example.com',
