@@ -34,16 +34,11 @@ var BlogPosts = React.createClass({
           blogs.push(result.posts[i]);
         }
       }
-      // Bubble sort those blogs by display order
-      for (i=0;i< blogs.length-1;i++){
-        for (j=i+1;j< blogs.length;j++){
-          if (parseInt(blogs[i].custom_fields.home_page_display_order) > parseInt(blogs[j].custom_fields.home_page_display_order)) {
-            temp = blogs[i];
-            blogs[i] = blogs[j];
-            blogs[j] = temp;
-          }
-        }
-      }
+
+      //Sort those blogs by display order
+      blogs.sort(function(a,b){
+        return parseInt(a.custom_fields.home_page_display_order) - parseInt(b.custom_fields.home_page_display_order);
+      });
 
       //Only display first 8 blogs
       blogs = blogs.slice(0,9);
