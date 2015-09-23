@@ -217,6 +217,12 @@ $order-summary-bg: #f7f7f9;
         background-color: #EEEEEE;
         padding-bottom:10px;
         font-weight:500;
+        @media(min-width:$bootstrap-md-width)and(max-width: $bootstrap-lg-width) {
+          font-size: 1rem;
+        }
+        @media(min-width: $bootstrap-lg-width) {
+          font-size: 1.3rem;
+        }
     }
     @media(max-width:600px){
       .shopping-bag-text-wrapper{
