@@ -4,10 +4,11 @@ ruby:
 #gray-top-banner.row.visible-md-block.visible-lg-block
 
   #customer-service.col-md-4
-    = banner.right_text
+    = banner.right_text.try(:html_safe)
 
   #free-shipping.col-md-4.text-center
-    = banner.center_text
+    = banner.center_text.try(:html_safe)
+
   #account-area.col-md-4.text-right
     = link_to spree_signup_path do
       span.register-area REGISTER NOW
