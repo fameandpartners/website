@@ -137,12 +137,15 @@ class ItemReturnEvent < ActiveRecord::Base
     :quantity,
     :deleted_row,
     # Calculated Attributes
+    :line_item_id,
     :refund_amount_in_cents,
     :refunded_at,
     :requested_at,
     :acceptance_status,
     :product_style_number,
     :product_customisations,
+    :order_payment_date,
+    :order_payment_ref,
     :order_paid_currency,
     :order_paid_amount
   ]

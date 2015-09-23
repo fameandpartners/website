@@ -52,6 +52,7 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
       "cancelation"      => :cancellation
     }.fetch(event.return_cancellation_credit.to_s.downcase.strip) { :unknown }
 
+    @item_return.line_item_id         = event.line_item_id
     @item_return.requested_at         = event.requested_at
     @item_return.reason_category      = event.return_category
     @item_return.reason_sub_category  = event.return_sub_category
@@ -60,9 +61,10 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.contact_email        = event.email
     @item_return.comments             = "#{event.comments}\n#{event.notes}"
     @item_return.order_payment_method = event.payment_method
+    @item_return.order_payment_date   = event.order_payment_date
     @item_return.order_paid_amount    = event.order_paid_amount
     @item_return.order_paid_currency  = event.order_paid_currency
-    # @item_return.order_payment_ref    = nil
+    @item_return.order_payment_ref    = event.order_payment_ref
     @item_return.refund_method        = event.refund_method
     @item_return.refund_status        = event.refund_status.to_s.downcase.gsub('yes', 'complete').titleize.strip.presence
     @item_return.refund_amount        = event.refund_amount_in_cents if event.refund_amount_in_cents > 0

@@ -183,9 +183,23 @@ module Returns
             calculated_attributes[:order_paid_currency]    = matched_line_item.order.currency.to_s
             calculated_attributes[:order_paid_amount]      = Money.parse(matched_line_item.order.total.to_s).fractional
 
+
+            calculated_attributes[:line_item_id]      = matched_line_item.id
+            calculated_attributes[:email]     = matched_line_item.order.email
+            if (completed_payment = matched_line_item.order.payments.completed.last)
+              payment = ::Reports::Payments::PaymentReportPresenter.from_payment(completed_payment)
+              calculated_attributes.merge!(
+                payment_method: payment.payment_type,
+                order_payment_date:   payment.payment_date,
+                order_paid_amount:    payment.amount_in_cents,
+                order_paid_currency:  payment.currency,
+                order_payment_ref:    payment.transaction_id,
+              )
+            end
+
             whitelisted_attributes = mmr.attributes.symbolize_keys.slice(*ItemReturnEvent::LEGACY_DATA_IMPORT_ATTRIBUTES)
 
-            event = item_return.events.legacy_data_import.create!(calculated_attributes.merge(whitelisted_attributes))
+            event = item_return.events.legacy_data_import.create!(whitelisted_attributes.merge(calculated_attributes))
 
             mmr.item_return       = item_return
             mmr.item_return_event = event

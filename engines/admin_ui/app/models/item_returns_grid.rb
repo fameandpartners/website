@@ -66,7 +66,7 @@ class ItemReturnsGrid
   # column :requested_at
   # column :reason_category
   # column :reason_sub_category
-  column :request_notes
+  # column :request_notes # long
   # column :customer_name
   # column :contact_email
 
