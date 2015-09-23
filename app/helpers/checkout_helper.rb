@@ -27,18 +27,11 @@ module CheckoutHelper
 
   def set_us_default(address)
     if current_site_version.try(:zone).name == 'usa'
-      fnd = false
-      available_countries_for_current_zone.each do |country|
-        fnd = true if address.country_id == country.id
-      end
-      address.country_id = 49 if !fnd
+
+      address.country_id = Spree::Country.where(name: "United States").first.id if
+          !available_countries_for_current_zone.detect{|a| a.id == address.country_id}.present?
     end
     address
-  end
-
-  # Not a payment gateway
-  def masterpass_active?
-    false #|| Features.active?(:masterpass, current_spree_user) || session[:auto_applied_promo_code] == 'masterpass25'
   end
 
   def masterpass_cart_callback_uri(payment_method)
