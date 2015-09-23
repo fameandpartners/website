@@ -162,9 +162,13 @@ module Products
       display_price.amount
     end
 
+    def price_currency
+      price.currency
+    end
+
     # Until we have a more complex logic to invalidate sales and prices, it'll always be valid for one week
     def price_valid_until
-      (Date.today + 1.week)
+      (Date.today + 1.week).iso8601
     end
 
     def schema_availability

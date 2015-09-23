@@ -5,9 +5,9 @@ div itemscope="" itemtype="http://schema.org/Product"
   meta itemprop="category" content="Apparel & Accessories > Clothing > Dresses"
   meta itemprop="description" content=strip_tags(@product.description)
   div itemprop="offers" itemscope='' itemtype="http://schema.org/Offer"
-    meta itemprop="priceValidUntil" content=@product.price_valid_until.iso8601
+    meta itemprop="priceValidUntil" content=@product.price_valid_until
     meta itemprop="itemCondition" itemtype="http://schema.org/OfferItemCondition" content="http://schema.org/NewCondition"
     meta itemprop="availability" itemtype="http://schema.org/ItemAvailability" content=@product.schema_availability
     meta itemprop="price" content=@product.price_amount
-    meta itemprop="priceCurrency" content=@product.price.currency
+    meta itemprop="priceCurrency" content=@product.price_currency
     meta itemprop="sku" content="sku:#{@product.sku}"
