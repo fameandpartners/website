@@ -1,5 +1,7 @@
 module Products
   class Presenter
+    SCHEMA_ORG_IN_STOCK       = 'http://schema.org/InStock'
+    SCHEMA_ORG_DISCONTINUED   = 'http://schema.org/Discontinued'
     META_DESCRIPTION_MAX_SIZE = 160
 
     attr_accessor :id, :master_id, :sku, :name, :short_description, :description,
@@ -153,6 +155,24 @@ module Products
 
     def price_with_currency
       "#{price.display_price} #{price.currency}"
+    end
+
+    def price_amount
+      display_price = discount ? price.apply(discount) : price
+      display_price.amount
+    end
+
+    def price_currency
+      price.currency
+    end
+
+    # Until we have a more complex logic to invalidate sales and prices, it'll always be valid for one week
+    def price_valid_until
+      (Date.today + 1.week).iso8601
+    end
+
+    def schema_availability
+      is_active ? SCHEMA_ORG_IN_STOCK : SCHEMA_ORG_DISCONTINUED
     end
 
     def use_auto_discount!(auto_discount)
