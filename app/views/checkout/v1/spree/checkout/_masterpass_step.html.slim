@@ -5,6 +5,7 @@
   = render :partial => 'shared/error_messages', locals: {target: @order}
 
   = hidden_field_tag :create_account, true
+  = hidden_field_tag :customer_notes, 'masterpass'
 
   h2.checkout-section-title Your information
   .form-wrapper data-hook='billing'
@@ -15,7 +16,6 @@
   .form-wrapper data-hook='shipping'
     = form.fields_for :ship_address do |ship_form|
       = render partial: 'masterpass_address', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
-
 
   - if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
     - content_for :head do
