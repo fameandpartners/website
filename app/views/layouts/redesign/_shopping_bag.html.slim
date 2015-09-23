@@ -4,7 +4,7 @@ ruby:
       cart:         window.app.shopping_cart,
       overlay:      '#shadow-layer',
       container:    '#cart',
-      toggle_link:  '#cart-trigger',
+      toggle_link:  '.js-header-toolbar .js-trigger-shopping-bag',
       auto_open:    /open_cart=true/.test(window.location.search),
       country_code: '#{session[:country_code]}'"
   if masterpass_available?

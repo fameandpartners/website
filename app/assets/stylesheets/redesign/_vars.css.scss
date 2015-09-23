@@ -7,11 +7,12 @@ $pink-bg: #eeddf0;
 $c-brand-blue: #003647;
 
 // Neutral Colors
-$c-neutral-black: #000;
+$c-neutral-white: #fff;
 $c-neutral-2: #F5F5F5;
 $c-neutral-4: #d7d7d7;
 $c-neutral-5: #e4e4e4;
-$c-neutral-white: #fff;
+$c-neutral-10: #666;
+$c-neutral-black: #000;
 
 $slides-bg: #ececf4;
 
@@ -27,7 +28,7 @@ $form-control-height-md: 45px;
 // @end Form
 
 // Mega Menu
-$mega-menu-desktop-height: 185px;
+$mega-menu-desktop-height: 155px;
 $mega-menu-mobile-height: 110px;
 // @end Mega Menu
 
@@ -37,6 +38,11 @@ $locale-warn-mobile-height: 68px;
 // @end Locale Warn
 
 // Layout
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+$mobile-header: 992px;
+
 // Bootstrap uses these widths as breakpoints
 $bootstrap-sm-width: 768px;
 $bootstrap-md-width: 992px;

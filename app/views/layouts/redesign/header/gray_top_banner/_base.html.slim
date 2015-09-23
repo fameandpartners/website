@@ -27,22 +27,25 @@ ruby:
               li
                 a href="/logout" LOGOUT
 
-#top-banner.row.visible-md-block.visible-lg-block
-  = render 'layouts/redesign/header/locale_selector/desktop'
-
-  .col-md-8.heart-and-suitcase
-    span.num#moodboard-counter 0
-    a href='/wishlist'
-      i.fa.fa-heart
-    span.pipe |
-    span.num#cart-item-count 0
-    = image_tag 'homepage/shopping_bag.png', class: 'shopping-bag'
-
-.row.hidden-xs.hidden-sm
-  = link_to root_path, class: 'h-logo-wrap' do
-    .logo
-      = image_tag 'logo/new-logo.svg'
-      .tagline Bespoke Fashion. Premium Style. Made for You.
+.banner-wrap
+  .inner-wrap
+    .left-wrap
+      = render 'layouts/redesign/header/locale_selector/desktop'
+    = link_to root_path, class: 'logo-wrap' do
+      .logo
+        = image_tag 'logo/new-logo.svg'
+        .tagline Bespoke Fashion. Premium Style. Made for You.
+    .right-wrap
+      ul.toolbar-moodboard-bag.js-header-toolbar
+        li
+          = link_to wishlist_path
+            span.copy.js-moodboard-counter 0
+            span.icon.icon-heart
+        li.separator
+        li
+          a.js-trigger-shopping-bag href='javascript:;'
+            span.copy.js-cart-item-count 0
+            span.icon.icon-shopping-bag
 
 .row#home-menu.hidden-xs.hidden-sm.text-center
   span.new-this-week

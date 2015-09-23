@@ -2,7 +2,7 @@ jQuery(document).ready(function($){
 	//if you change this breakpoint in the style.css file (or _layout.scss if you use SASS), don't forget to update this value as well
 	var $L = 1200,
 		$menu_navigation = $('#main-nav'),
-		$cart_trigger = $('#cart-trigger'),
+		$cart_trigger = $('.js-header-toolbar .js-trigger-shopping-bag'),
 		$hamburger_icon = $('#hamburger-menu'),
 		$lateral_cart = $('#cart'),
 		$shadow_layer = $('#shadow-layer');
