@@ -20,3 +20,4 @@ class IndexController < ApplicationController
     Preferences::Titles.new(current_site_version).homepage_title
   end
 end
+
