@@ -1,9 +1,6 @@
-## Welcome to Fame & Partners [ ![Status](https://circleci.com/gh/fameandpartners/website/tree/master.png?circle-token=ee3bbb5414da6e449d774074ecc31fec5a18dce0)](https://circleci.com/gh/fameandpartners/website)
+# Welcome to Fame & Partners [ ![Status](https://circleci.com/gh/fameandpartners/website/tree/master.png?circle-token=ee3bbb5414da6e449d774074ecc31fec5a18dce0)](https://circleci.com/gh/fameandpartners/website)
 
-### Development information
-
-* We are using Spree Ecommerce as base engine.
-[Guides](http://guides.spreecommerce.com)
+## Development
 
 ### Prerequisites
 
@@ -12,14 +9,6 @@
 * ElasticSearch
 * Redis
 * `imagemagick`
-
-#### Ruby Installation
-
-Use rbenv and the ruby-build plugin
-
-* [rbenv](https://github.com/sstephenson/rbenv/)
-* [ruby-build](https://github.com/sstephenson/ruby-build)
-
 
 #### Quick installation
 
@@ -35,6 +24,17 @@ Then to load ElasticSearch now:
 ```
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist
 ```
+
+### Ruby Installation
+
+Use rbenv and the ruby-build plugin
+
+* [rbenv](https://github.com/sstephenson/rbenv/)
+* [ruby-build](https://github.com/sstephenson/ruby-build)
+
+### Frameworks
+
+* We are using Spree Ecommerce base engine. See more details at the [Spree Guides website.](http://guides.spreecommerce.com)
 
 ### Getting started
 
@@ -54,6 +54,10 @@ It's also important to configure your Elasticsearch to enable dynamic scripting
 # Procfile assumes that this file is under /usr/local/opt/elasticsearch/config/elasticsearch.yml
 script.disable_dynamic: false
 ```
+
+## Documentation
+
+Documentation can be found in [the wiki](https://github.com/fameandpartners/website/wiki/) and in `/doc` folder, located on the root of this project.
 
 ### Database
 
@@ -191,9 +195,6 @@ rake dev:clean_slate
 * $ `cd /data/fame_and_partners/current`
 * $ `bundle exec rake feed:export:all`
 
-### Getting started
-
-
 #### Populating db with test data
 
 Note: This commands can be run manually or through `bin/prepare_app`
@@ -206,7 +207,7 @@ Note: This commands can be run manually or through `bin/prepare_app`
 
 ## Deployment
 
-Refer to the wiki for [more information about the deployment process](https://github.com/fameandpartners/website/wiki/Deployment)
+For more information, please refer to the [deployment docs](doc/ops/deployment.md).
 
 ### Testing Orders & Payments
 
