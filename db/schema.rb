@@ -414,6 +414,7 @@ ActiveRecord::Schema.define(:version => 20151029003230) do
     t.integer  "line_item_id"
     t.integer  "line_item_personalization_id"
     t.string   "order_number"
+    t.datetime "order_created_at"
     t.string   "currency"
     t.string   "site_version"
     t.string   "old_size_value"

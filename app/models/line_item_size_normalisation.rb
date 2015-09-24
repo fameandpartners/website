@@ -4,6 +4,7 @@ require 'log_formatter'
 
 class LineItemSizeNormalisation < ActiveRecord::Base
   belongs_to :line_item,                  class_name: 'Spree::LineItem'
+  belongs_to :spree_order,                class_name: 'Spree::Order', foreign_key: :order_number, primary_key: :number
   belongs_to :line_item_personalization,  class_name: 'LineItemPersonalization'
   belongs_to :old_size,                   class_name: 'Spree::OptionValue'
   belongs_to :old_variant,                class_name: 'Spree::Variant'
