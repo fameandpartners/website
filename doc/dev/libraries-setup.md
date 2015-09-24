@@ -22,6 +22,3 @@ Then to load ElasticSearch now:
 ```
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist
 ```
-
-
-

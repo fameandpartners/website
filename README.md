@@ -1,36 +1,16 @@
-# Welcome to Fame & Partners [ ![Status](https://circleci.com/gh/fameandpartners/website/tree/master.png?circle-token=ee3bbb5414da6e449d774074ecc31fec5a18dce0)](https://circleci.com/gh/fameandpartners/website)
+# Welcome to Fame & Partners [![Status](https://circleci.com/gh/fameandpartners/website/tree/master.png?circle-token=ee3bbb5414da6e449d774074ecc31fec5a18dce0)](https://circleci.com/gh/fameandpartners/website)
 
-## Development
-
-### Prerequisites
+## System Requirements
 
 * Ruby 2.1.5 (2.2.0 also works)
-* Postgres
-* ElasticSearch
-* Redis
-* `imagemagick`
+* Postgres 9.2
+* ElasticSearch 1.6.0
+* Redis 3.0.2
+* `imagemagick` 6.9.1
 
-#### Quick installation
+> Libraries versions can vary. Versions used above are suggestions. 
 
-```shell
-$ brew install redis elasticsearch imagemagick postgresql
-```
-
-To have ElasticSearch start on login:
-```
-ln -sfv /usr/local/opt/elasticsearch/*.plist ~/Library/LaunchAgents
-```
-Then to load ElasticSearch now:
-```
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist
-```
-
-### Ruby Installation
-
-Use rbenv and the ruby-build plugin
-
-* [rbenv](https://github.com/sstephenson/rbenv/)
-* [ruby-build](https://github.com/sstephenson/ruby-build)
+For more details on installing each library, check [doc/dev/libraries-setup.md](doc/dev/libraries-setup.md).
 
 ### Frameworks
 
@@ -55,11 +35,21 @@ It's also important to configure your Elasticsearch to enable dynamic scripting
 script.disable_dynamic: false
 ```
 
+### Creating an Admin User
+
+Steps to create an admin user:
+
+* If you do not already have an existing user in mind, create one through the existing web site process.
+* To assign admin rights in the Rails console, first find the user: `Spree::User.where(email: 'user@email').first`
+* Then using the id of the user found: `Spree::User.find(id).spree_roles << Spree::Role.find_by_name('admin')`
+
 ## Documentation
 
 Documentation can be found in [the wiki](https://github.com/fameandpartners/website/wiki/) and in `/doc` folder, located on the root of this project.
 
-### Database
+## Database
+
+### Local Database
 
 There is a script to automate a few local database tasks.
 
@@ -83,11 +73,7 @@ It allows you to backup local development databases, and restore backups from lo
 
 Note that you will still need to manually download production backups right now. The script will prompt you on how to do it.
 
-#### EngineYard Databases
-
-**For more information on EngineYard database management, see `doc/howto_backup_restore_engineyard_databases.md` **
-
-#### Sanitised Database
+### Sanitised Database
 
 To remove almost everything **except** products and a few test users, you can run the following command,
 this gets you a working site, with no customer data.
@@ -95,25 +81,22 @@ this gets you a working site, with no customer data.
 Run `./script/db` and Choose 8 `sanitise_dev_db` to clean the current dev DB.
 See the source to see exactly what is removed.
 
-#### Creating an Admin User
+### EngineYard Databases
 
-Steps to create an admin user:
+**For more information on EngineYard database management, see**
+[How To Backup/Restore Engine Yard Databases](doc/ops/howto-backup-restore-engineyard-databases.md).
 
-* If you do not already have an existing user in mind, create one through the existing web site process.
-* To assign admin rights in the Rails console, first find the user: `Spree::User.where(email: 'user@email').first`
-* Then using the id of the user found: `Spree::User.find(id).spree_roles << Spree::Role.find_by_name('admin')`
+## Elasticsearch
 
-### Elasticsearch
-
-#### Debugging requests
+### Debugging requests
 
 Set the `DEBUG_TIRE_REQUESTS` environment variable to enable verbose logging in development mode.
 
- ```shell
- $ export DEBUG_TIRE_REQUESTS=true
- ```
+```shell
+$ export DEBUG_TIRE_REQUESTS=true
+```
 
-#### Update indexes
+### Update indexes
 
 Re-index everything!
 
@@ -128,16 +111,15 @@ $ rails console
 Utility::Reindexer.reindex
 ```
 
-For dresses list pages ( show product with different colours as different )
+For dresses list pages (show product with different colours as different)
 
 ```ruby
 Products::ColorVariantsIndexer.index!
 ```
 
-For search page ( show product only once )
+For search page (show product only once)
 
 ```ruby
-
 Tire.index(configatron.elasticsearch.indices.spree_products) do
   delete
   import Spree::Product.all
@@ -203,7 +185,6 @@ Note: This commands can be run manually or through `bin/prepare_app`
 * `$ bundle exec rake db:populate:taxonomy`
 * `$ bundle exec rake db:populate:product_options`
 * `$ bundle exec rake db:populate:prototypes`
-
 
 ## Deployment
 

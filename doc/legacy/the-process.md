@@ -21,7 +21,7 @@
 > * refresh all local elastic search indexes
 
 
-## Old legacy process rake task 
+## Legacy Process Rake Task
  
 ```ruby
 # /doc/legacy/the-process.md
