@@ -51,7 +51,8 @@ ruby:
 .row#home-menu.hidden-xs.hidden-sm.text-center
   span.new-this-week
     em New this week
-  span.dresses DRESSES
+  span.dresses
+    = link_to 'DRESSES', dresses_path 
   span.nested
     ' EVENTS
     ul
