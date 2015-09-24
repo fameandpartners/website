@@ -253,5 +253,5 @@ To run every test, including engines', use the `bundle exec rake spec` command
  - **Category/Collection** - `Products::CollectionsController#show`
  - **Product** - `Products::DetailsController#show`
 
-Cheers and Unicorns, 
-F&P Dev Team
+Cheers, 
+Fame & Partners and Unicorns!
