@@ -94,6 +94,7 @@ module Orders
     def make_size
       size
     end
+    deprecate :make_size
 
     def display_price
       Spree::Price.new(amount: price).display_price.to_s

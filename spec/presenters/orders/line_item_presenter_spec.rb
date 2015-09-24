@@ -53,34 +53,41 @@ module Orders
       end
     end
 
-    describe '#size' do
-      let(:item)          { double 'item', personalization: nil, variant: double(dress_size: nil) }
-      let(:order)         { double 'order', site_version: 'SITE' }
+    # Normally I'm not a fan of digging into message chains, but the sort of deep
+    # nested fall-throughs that the presenter code uses to get around the fragile
+    # data model make this a much clearer way of testing, instead of lots of manually
+    # created intermediate mock objects.
+    describe '#size #country_size' do
+      let(:order) { double 'order', site_version: 'SITE' }
+      let(:item)  { double 'item' }
+
       subject(:presenter) { described_class.new(item, order) }
 
       it 'reverts to unknown for missing dress sizes' do
-        expect(presenter.country_size).to eq 'SITE-Unknown Size'
-      end
-    end
+        allow(item).to receive_message_chain('personalization')         { nil }
+        allow(item).to receive_message_chain('variant.dress_size.name') { nil }
 
-    describe '#make_size' do
-      let(:size)      { double(:size, name: '8') }
-      let(:item)      { double 'item', personalization: nil, variant: double(:dress_size => size) }
-      let(:order)     { double 'order', site_version: site_version }
-      let(:presenter) { described_class.new(item, order) }
-
-      context 'us' do
-        let(:site_version) { 'us' }
-        it 'maps to correct au size' do
-          expect(presenter.make_size).to eq 'au-12'
-        end
+        expect(presenter.size).to         eq 'Unknown Size'
+        expect(presenter.make_size).to    eq 'Unknown Size'
+        expect(presenter.country_size).to eq 'Unknown Size (SITE)'
       end
 
-      context 'au' do
-        let(:site_version) { 'au' }
-        it 'maps to correct au size' do
-          expect(presenter.make_size).to eq 'au-8'
-        end
+      it 'uses size from personalisation' do
+        allow(item).to receive_message_chain('personalization.size.name') { 'JustRight' }
+        allow(item).to receive_message_chain('variant')                   { nil }
+
+        expect(presenter.size).to eq         'JustRight'
+        expect(presenter.make_size).to    eq 'JustRight'
+        expect(presenter.country_size).to eq 'JustRight (SITE)'
+      end
+
+      it 'uses size from variant' do
+        allow(item).to receive_message_chain('personalization')         { nil }
+        allow(item).to receive_message_chain('variant.dress_size.name') { 'TeenyTiny' }
+
+        expect(presenter.size).to eq         'TeenyTiny'
+        expect(presenter.make_size).to    eq 'TeenyTiny'
+        expect(presenter.country_size).to eq 'TeenyTiny (SITE)'
       end
     end
 
