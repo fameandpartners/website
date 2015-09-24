@@ -16,6 +16,10 @@ module Products
       end
     end
 
+    def type
+      'Dress'
+    end
+
     def default_color_options
       if colors? && colors.default.any?
         colors.default
@@ -50,6 +54,10 @@ module Products
 
     def colors
       @colors = available_options.colors
+    end
+
+    def color_title
+      color_name.to_s.titleize
     end
 
     def default_sizes
@@ -177,6 +185,10 @@ module Products
 
     def use_auto_discount!(auto_discount)
       self.discount = [self.discount, auto_discount].compact.max_by{|i| i.amount.to_i }
+    end
+
+    def meta_title
+      "#{color_title} #{name} #{type}"
     end
 
     def meta_description
