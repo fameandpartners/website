@@ -10,7 +10,7 @@
   <nav class="menu">
     <ul data-hook="admin_product_tabs">
       <li>
-        <%= link_to_with_icon 'icon-eye-open', 'Preview on Site', @product, { target: '_blank' } %>
+        <%= link_to_with_icon 'icon-eye-open', 'Preview on Site', collection_product_path(@product), { target: '_blank' } %>
       </li>
       <li<%== ' class="active"' if current == 'Product Details' %>>
         <%= link_to_with_icon 'icon-edit', t(:product_details), edit_admin_product_url(@product) %>
