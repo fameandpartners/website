@@ -192,9 +192,11 @@ module Products
     end
 
     def meta_description
-      sanitized_description = "#{price_with_currency} #{short_description}"
-      sanitized_description = ActionView::Base.full_sanitizer.sanitize(sanitized_description)
-      sanitized_description.truncate(META_DESCRIPTION_MAX_SIZE)
+      [
+          meta_title,
+          price_with_currency,
+          fabric.to_s.squish
+      ].join('. ').truncate(META_DESCRIPTION_MAX_SIZE)
     end
 
     private
