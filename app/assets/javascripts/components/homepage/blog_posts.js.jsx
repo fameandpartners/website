@@ -22,31 +22,31 @@ var Post = React.createClass({
 
 var BlogPosts = React.createClass({
   getInitialState: function() {
-    return {blogs: []}
+    return {posts: []}
   },
   componentDidMount: function() {
     $.get("http://blog.fameandpartners.com/?json=1", function(result) {
 
-      // Pushing the blogs which will be display on homepage
-      blogs = [];
+      // Pushing the posts which will be display on homepage
+      posts = [];
       for (i=0;i< result.posts.length;i++){
         if (result.posts[i].custom_fields.home_page_display == "true"){
-          blogs.push(result.posts[i]);
+          posts.push(result.posts[i]);
         }
       }
 
-      //Sort those blogs by display order
-      blogs.sort(function(a,b){
+      //Sort those posts by display order
+      posts.sort(function(a,b){
         return parseInt(a.custom_fields.home_page_display_order) - parseInt(b.custom_fields.home_page_display_order);
       });
 
-      //Only display first 8 blogs
-      blogs = blogs.slice(0,9);
-      this.setState({blogs: blogs})
+      //Only display first 8 posts
+      posts = posts.slice(0,9);
+      this.setState({posts: posts})
     }.bind(this));
   },
   render: function() {
-    if (this.state.blogs.length == 0){
+    if (this.state.posts.length == 0){
       return (
         <div></div>
       );
@@ -61,17 +61,17 @@ var BlogPosts = React.createClass({
           <div className="posts">
 
             <div className="col">
-              <Post post={this.state.blogs[0]} />
-              <Post post={this.state.blogs[1]} />
-              <Post post={this.state.blogs[2]} />
-              <Post post={this.state.blogs[3]} />
+              <Post post={this.state.posts[0]} />
+              <Post post={this.state.posts[1]} />
+              <Post post={this.state.posts[2]} />
+              <Post post={this.state.posts[3]} />
             </div>
 
             <div className="col">
-              <Post post={this.state.blogs[4]} />
-              <Post post={this.state.blogs[5]} />
-              <Post post={this.state.blogs[6]} />
-              <Post post={this.state.blogs[7]} />
+              <Post post={this.state.posts[4]} />
+              <Post post={this.state.posts[5]} />
+              <Post post={this.state.posts[6]} />
+              <Post post={this.state.posts[7]} />
             </div>
 
           </div>
