@@ -177,6 +177,10 @@ rake dev:clean_slate
 * $ `cd /data/fame_and_partners/current`
 * $ `bundle exec rake feed:export:all`
 
+## Content / Quality Issues
+
+[Dealing with Content Quality Issues (doc/content_quality.md) ](doc/content_quality.md)
+
 ## Deployment
 
 For more information, please refer to the [deployment docs](doc/ops/deployment.md).
