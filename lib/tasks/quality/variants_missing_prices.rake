@@ -1,5 +1,5 @@
 namespace :quality do
-  desc 'Find Variants which are missing prices for currencies we support, and automagically fix them.'
+  desc 'Find Variants which are missing prices for currencies we support, and automagically fix them. Control logging with LOG_LEVEL='
   task :fix_variants_missing_prices => :environment do
     class VariantMissingPriceEnforcer
 
@@ -7,7 +7,7 @@ namespace :quality do
 
       def initialize(logdev: $stdout)
         @logger = Logger.new(logdev)
-        @logger.level = Logger::INFO
+        @logger.level = Logger.const_get(ENV.fetch("LOG_LEVEL", "INFO"))
         @logger.formatter = LogFormatter.terminal_formatter
       end
 
