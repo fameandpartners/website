@@ -1,7 +1,6 @@
 namespace :quality do
-  desc 'fix_variants_missing_prices'
+  desc 'Find Variants which are missing prices for currencies we support, and automagically fix them.'
   task :fix_variants_missing_prices => :environment do
-
     class VariantMissingPriceEnforcer
 
       attr_reader :logger
@@ -12,12 +11,14 @@ namespace :quality do
         @logger.formatter = LogFormatter.terminal_formatter
       end
 
+      def scope
+        Spree::Product.active.includes(:variants => [:prices])
+      end
+
       def call
         logger.info "Started"
-        prods = Spree::Product.active.includes(:variants => [:prices])
 
-        states = []
-        prods.each do |product|
+        scope.each do |product|
 
           prices_attributes = product.master.prices.collect {|p| [p.currency, p.amount] }.uniq.to_h
 
@@ -42,7 +43,7 @@ namespace :quality do
 
           unless prices_attributes.key? 'USD'
             prices_attributes['USD'] = prices_attributes['AUD']
-            logger.warn "#{product.name} - MASTER has (#{product.master.prices.count}) PRICES"
+            logger.warn "#{product.name} - MASTER has No USD Price"
           end
 
           product.variants_including_master.each do |variant|
