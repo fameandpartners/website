@@ -15,9 +15,6 @@ See: `lib/tasks/quality/variants_missing_prices.rake`
 
 The Spree::Product UI will update prices on all variants of a product when saving the product (which saves the master variant).
 
-The callback `push_changed_prices_to_variants` attempts to configure prices on all variants with the same price as the master variant. See: `app/models/spree/variant_decorator.rb`
+The callback `push_changed_prices_to_variants` attempts to configure the prices on all variants to be the same price as the master variant. 
 
-### Watch Out!
-> In case we move to having variants with different prices to the master e.g. variants with extra price for extra sizes or explicit variants for custom colours ) this code ensures that it only updates prices which are already the same as the master price.
-
-> To work around this, you can update the master (CURRENCY) price with the price of the other variants, then update the master to the new price. This will get all variant prices in-sync, then set the prices correctly.
+See: `app/models/spree/variant_decorator.rb`
