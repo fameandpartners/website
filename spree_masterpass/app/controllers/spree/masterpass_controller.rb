@@ -18,19 +18,19 @@ module Spree
       @data.request_token = @request_token_response.oauth_token
 
       # Post shopping cart
-      items = current_order.line_items.map do |item|
+      order = current_order || raise(ActiveRecord::RecordNotFound)
+      items = order.line_items.map do |item|
         AllServicesMappingRegistry::ShoppingCartItem.new(
             item.variant.product.name + ' ' + item.variant.sku,
             item.quantity,
             (item.price * 100).round,
-            Orders::LineItemPresenter.new(item, current_order).image.attachment.url)
+            Orders::LineItemPresenter.new(item, order).image.attachment.url)
       end
 
-      tax_adjustments = current_order.adjustments.tax
-      shipping_adjustments = current_order.adjustments.shipping
+      tax_adjustments = order.adjustments.tax
+      shipping_adjustments = order.adjustments.shipping
 
       subadjustments = 0
-      order = current_order || raise(ActiveRecord::RecordNotFound)
       order.adjustments.eligible.each do |adjustment|
         next if tax_adjustments.include?(adjustment)
         next if !payment_method.preferred_shipping_suppression && shipping_adjustments.include?(adjustment)
@@ -63,7 +63,8 @@ module Spree
       save_session_data
 
       if session[:order_id]
-        order = Spree::Order.find_by_id_and_currency(session[:order_id], current_currency, :include => :adjustments)
+        session_order = Spree::Order.find_by_id_and_currency(session[:order_id], current_currency, :include => :adjustments)
+        session_order = current_order.try(:completed?) ? 'completed' : session_order
       end
 
       # flash[:commerce_tracking] = 'masterpass_initialized';
@@ -77,8 +78,10 @@ module Spree
                  checkout_identifier: payment_method.preferred_checkout_identifier,
                  shipping_suppression: payment_method.preferred_shipping_suppression,
                  commerce_tracking: true,
-                 session_order_id: session[:order_id],
-                 order: order.attributes
+                 session_order: session_order.attributes,
+                 order: order.attributes,
+                 try_spree_current_user: try_spree_current_user ? try_spree_current_user.id : nil,
+                 last_incomplete_order: try_spree_current_user && try_spree_current_user.last_incomplete_spree_order ? try_spree_current_user.last_incomplete_spree_order.attributes : nil,
              }
     end
 
