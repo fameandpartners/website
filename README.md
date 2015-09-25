@@ -177,15 +177,6 @@ rake dev:clean_slate
 * $ `cd /data/fame_and_partners/current`
 * $ `bundle exec rake feed:export:all`
 
-#### Populating db with test data
-
-Note: This commands can be run manually or through `bin/prepare_app`
-
-* `$ bundle exec rake db:populate:dresses`
-* `$ bundle exec rake db:populate:taxonomy`
-* `$ bundle exec rake db:populate:product_options`
-* `$ bundle exec rake db:populate:prototypes`
-
 ## Deployment
 
 For more information, please refer to the [deployment docs](doc/ops/deployment.md).
