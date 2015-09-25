@@ -6,11 +6,13 @@
     .row-fluid
       .col-md-3.col-xs-4
         .left-path.hidden-xs.hidden-sm
-          span
-            | Home /
-          span style="margin-left:5px"
-            b
-              | Dresses
+          = link_to root_path
+            span
+              | Home /
+          = link_to dresses_path
+            span style="margin-left:5px"
+              b
+                | Dresses
         .left-path.visible-xs.visible-sm#filter-mobile
           span
             i.fa.fa-filter
