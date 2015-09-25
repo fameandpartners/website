@@ -14,11 +14,7 @@ var SupportOptions = React.createClass({
               <i className="icon-live-chat" />
               Live Chat
             </a>
-          </li>
-          <li className="support-telephone">
-            <i className="icon-support-telephone" />
-            <a href={ "tel:" + this.props.support_telephone }>{ this.props.support_telephone }</a>
-            </li>
+          </li>          
         </ul>
     );
   }
