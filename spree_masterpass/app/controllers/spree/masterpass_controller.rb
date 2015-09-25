@@ -72,7 +72,7 @@ module Spree
                  checkout_identifier: payment_method.preferred_checkout_identifier,
                  shipping_suppression: payment_method.preferred_shipping_suppression,
                  commerce_tracking: true,
-                 line_items: current_order.line_items.to_s
+                 current_order: current_order.to_s
              }
     end
 
