@@ -16,7 +16,7 @@ namespace :quality do
         logger.info "Started"
         prods = Spree::Product.active.includes(:variants => [:prices])
 
-        errors = []
+        states = []
         prods.each do |product|
 
           prices_attributes = product.master.prices.collect {|p| [p.currency, p.amount] }.uniq.to_h
@@ -28,23 +28,26 @@ namespace :quality do
                            product.name.to_s.ljust(20),
                            prices_attributes.map {|c,a| "#{c}=#{a}"}.join(', ')
                          ].join (' | ')
+            states << :skip_product
             next
           end
+
+          states << :update_product
 
           logger.warn "#{product.name} - Setting Prices"
 
           unless product.master.prices.count == 2
             logger.warn "#{product.name} - MASTER has (#{product.master.prices.count}) PRICES"
-            errors << "#{product.name} - MASTER has (#{product.master.prices.count}) PRICES"
           end
 
           unless prices_attributes.key? 'USD'
             prices_attributes['USD'] = prices_attributes['AUD']
-            errors << "#{product.name} - Falling back to AUD for a USD for #{product.name}"
+            logger.warn "#{product.name} - MASTER has (#{product.master.prices.count}) PRICES"
           end
 
           product.variants_including_master.each do |variant|
             next if variant.prices.count == 2
+            states << :update_variant
 
             log_prefix = "#{product.name} #{variant.sku.to_s.ljust(30)}"
 
@@ -63,8 +66,10 @@ namespace :quality do
           end
         end
 
-        logger.info "Errors:"
-        logger.info errors.join("\n")
+        states.group_by {|x| x}.map { |k,v| [k,v.count]}.map { |state, count |
+          logger.info "Action | #{state}: #{count}"
+        }
+
         logger.info "Done"
       end
     end
