@@ -95,6 +95,7 @@ window.ShoppingBag = class ShoppingBag
 
   masterpassOpenHandler: (e) ->
     e.preventDefault() if e
+    console.log(@cart.item_count)
     return if @cart.item_count == 0
 
     @masterpass_clicked = true
