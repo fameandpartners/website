@@ -205,8 +205,12 @@ module Returns
             mmr.item_return_event = event
 
             if existing_event.present?
-              warn "(#{mmr.row_number}) #{mmr.row_number} Event Exists"
-              mmr.import_status = :multiple_events
+              if existing_event.row_number.to_s == mmr.row_number.to_s
+                mmr.import_status = :event_stored
+              else
+                warn "(#{mmr.row_number}) #{mmr.row_number} Event Exists"
+                mmr.import_status = :multiple_events
+              end
             else
               mmr.import_status = :event_stored
             end
