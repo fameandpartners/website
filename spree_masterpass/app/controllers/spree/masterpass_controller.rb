@@ -71,8 +71,7 @@ module Spree
                  accepted_cards: payment_method.preferred_accepted_cards,
                  checkout_identifier: payment_method.preferred_checkout_identifier,
                  shipping_suppression: payment_method.preferred_shipping_suppression,
-                 commerce_tracking: true,
-                 current_order: current_order.attributes
+                 commerce_tracking: true
              }
     end
 
