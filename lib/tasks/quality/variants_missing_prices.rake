@@ -25,9 +25,8 @@ namespace :quality do
         errors << "#{product.name} - Falling back to AUD for a USD for #{product.name}"
       end
 
-      product.variants.each do |variant|
+      product.variants_including_master.each do |variant|
         next if variant.prices.count == 2
-        next if variant.is_master
 
         puts variant.sku
 
