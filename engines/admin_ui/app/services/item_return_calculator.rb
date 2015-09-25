@@ -78,7 +78,6 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.received_location    = event.return_office
 
   rescue ArgumentError => e
-    #whatevers
-    binding.pry
+    NewRelic::Agent.notice_error(e)
   end
 end
