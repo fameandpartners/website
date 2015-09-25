@@ -30,7 +30,8 @@ module Spree
       shipping_adjustments = current_order.adjustments.shipping
 
       subadjustments = 0
-      current_order.adjustments.eligible.each do |adjustment|
+      order = current_order || raise(ActiveRecord::RecordNotFound)
+      order.adjustments.eligible.each do |adjustment|
         next if tax_adjustments.include?(adjustment)
         next if !payment_method.preferred_shipping_suppression && shipping_adjustments.include?(adjustment)
 
@@ -46,8 +47,8 @@ module Spree
         i.description = i.description[0..98] if i.description.last == "&"
       end
       shopping_cart = AllServicesMappingRegistry::ShoppingCart.new(
-          current_order.currency,
-          (current_order.total * 100).round,
+          order.currency,
+          (order.total * 100).round,
           items,
           nil)
       shopping_cart_request = AllServicesMappingRegistry::ShoppingCartRequest.new(
@@ -61,6 +62,10 @@ module Spree
       )
       save_session_data
 
+      if session[:order_id]
+        order = Spree::Order.find_by_id_and_currency(session[:order_id], current_currency, :include => :adjustments)
+      end
+
       # flash[:commerce_tracking] = 'masterpass_initialized';
       render json: {
                  request_token: @data.request_token,
@@ -71,7 +76,9 @@ module Spree
                  accepted_cards: payment_method.preferred_accepted_cards,
                  checkout_identifier: payment_method.preferred_checkout_identifier,
                  shipping_suppression: payment_method.preferred_shipping_suppression,
-                 commerce_tracking: true
+                 commerce_tracking: true,
+                 session_order_id: session[:order_id],
+                 order: order.attributes
              }
     end
 
@@ -146,7 +153,6 @@ module Spree
     end
 
     def cartpostback
-      order = current_order || raise(ActiveRecord::RecordNotFound)
       if params[:mpstatus] == 'success'
         if current_order.confirmation_required?
           # TODO : Redirect to the confirmation page
@@ -162,7 +168,7 @@ module Spree
     end
 
     def confirm
-      order = current_order
+      order = current_order || raise(ActiveRecord::RecordNotFound)
       order.payments.create!({
                                  :source => Spree::MasterpassCheckout.create({
                                                 :access_token => @data.access_token,
