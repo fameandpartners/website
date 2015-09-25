@@ -8034,7 +8034,7 @@ xheader
   margin-top: 5px;
 }
 #cart .shopping-bag-text i.coathanger{
-  background-image: url('../../cart/coathanger.svg');
+  background-image: url('../../../assets/cart/coathanger.svg');
   width: 20px;
   height: 15px;
   margin-top: 2px;
@@ -8045,7 +8045,7 @@ xheader
   clear: both;
 }
 #cart .shopping-bag-text i.plane{
-  background-image: url('../../cart/plane.svg');
+  background-image: url('../../../assets/cart/plane.svg');
   width: 20px;
   height: 21px;
   margin-top: 3px;
@@ -8056,7 +8056,7 @@ xheader
   clear: both;
 }
 #cart .shopping-bag-text i.mobile{
-  background-image: url('../../cart/mobile.svg');
+  background-image: url('../../../assets/cart/mobile.svg');
   width: 22px;
   height: 19px;
   margin-top: 5px;
