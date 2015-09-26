@@ -24,6 +24,7 @@ Migrations that have been designed for zero-downtime deployment are excepted and
 * ElasticSearch
 * Redis
 * `imagemagick`
+* Node
 
 #### Ruby Installation
 
@@ -32,10 +33,13 @@ Use rbenv and the ruby-build plugin
 * [rbenv](https://github.com/sstephenson/rbenv/)
 * [ruby-build](https://github.com/sstephenson/ruby-build)
 
+#### Node Installation
+* [node](https://nodejs.org/en/download/)
 
 #### Quick installation
 
 ```shell
+$ npm install
 $ brew install redis elasticsearch imagemagick postgresql
 ```
 
@@ -297,3 +301,5 @@ To run every test, including engines', use the `bundle exec rake spec` command
 ### Thanks for using FameAndPartners!
 
 Cheers, [Droid Labs](http://droidlabs.pro).
+
+

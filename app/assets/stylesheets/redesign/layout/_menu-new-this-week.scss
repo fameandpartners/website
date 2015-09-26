@@ -1,0 +1,87 @@
+/* [Menu New This Week]
+-------------------------------------------------------*/
+.menu-new-this-week {
+  padding: 30px 0;
+
+  .slider-wrap {
+    margin-bottom: 40px;
+    padding: 0 40px;
+  }
+
+  .slick-list {
+    margin: 0 15px;
+  }
+
+  .item-wrap {
+    padding: 0 15px;
+
+    > a {
+      display: block;
+      color: $c-neutral-black;
+
+      &:hover,
+      &:focus {
+        opacity: .8;
+      }
+
+    }
+
+    .details-wrap {
+      margin-top: 10px;
+      text-align: center;
+
+      > span {
+        display: block;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 1em;
+      }
+
+      .original-price {
+        text-decoration: line-through;
+      }
+
+      .sale-price {
+        color: $c-brand-red;
+      }
+
+    }
+
+  }
+
+  .slick-prev {
+    left: -25px;
+  }
+
+  .slick-next {
+    right: -25px;
+  }
+
+  .btn-wrap {
+    text-align: center;
+  }
+
+  @media (max-width: 1200px){
+    width: 100%;
+    margin: 0;
+    left: 0;
+    right: 0;
+    border-left-color: transparent;
+    border-right-color: transparent;
+  }
+
+}
+
+.main-menu .menu-new-this-week {
+
+  .item-wrap {
+    width: 50%;
+    float: left;
+  }
+
+  .details-wrap {
+    height: 80px;
+    font-size: 0.875em;
+  }
+
+}

@@ -70,12 +70,11 @@ ruby:
       = form_tag search_path, method: :get, id: 'searchForm'
         input type="text" id="searchValue" placeholder="SEARCH FOR..." name="q"
 
-.row.rect#rect-new-this-week
-  .black-bar
-    = link_to 'SHOP ALL NEW THIS WEEK', dresses_path(:order => 'newest'), class: "inner-text"
-  .slideArea
-    .containArea
-      = react_component('NewThisWeekProducts',{device: 'desktop'})
+.row.rect#rect-new-this-week.menu-new-this-week
+  .slider-wrap
+    = react_component('NewThisWeekProducts',{device: 'desktop'})
+  .btn-wrap
+    = link_to 'SHOP ALL NEW THIS WEEK', dresses_path(:order => 'newest'), class: "btn btn-black btn-md"
 
 .row.rect#rect-dresses
   .left-area
@@ -168,13 +167,13 @@ coffee:
     )
 
     $("#home-menu span[id!='search']").on('mouseenter', ->
-      $(".rect").hide();
-      $("#rect-"+this.className).css("display","block")
+      $(".rect").removeClass('active');
+      $("#rect-"+this.className).addClass('active');
       $("#search").removeClass('active')
     )
 
     $(".rect").on('mouseleave', ->
-      $(".rect").hide()
+      $(".rect").removeClass('active');
     )
 
     $("#account-area .my-account").mouseover ->

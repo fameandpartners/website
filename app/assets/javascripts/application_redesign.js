@@ -17,6 +17,9 @@
 //= require react_ujs
 //= require components
 
+// node modules
+//= require slick-carousel/slick/slick.min.js
+
 //---------------------------
 // Spree have this by default
 //---------------------------

@@ -48,6 +48,9 @@ config/elasticsearch.yml
 /public/au
 /public/us
 
+# Ignore bower modules
+/app/assets/vendor/bower_components
+
 # Backup Files
 *.swp
 *.orig

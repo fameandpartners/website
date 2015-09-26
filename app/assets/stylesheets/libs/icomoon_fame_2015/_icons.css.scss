@@ -19,11 +19,11 @@
 
 @font-face {
 	font-family: 'icomoon_fame_2015';
-	src:font-url('icomoon_fame_2015.eot?gr6zd4');
-	src:font-url('icomoon_fame_2015.eot?#iefixgr6zd4') format('embedded-opentype'),
-		font-url('icomoon_fame_2015.ttf?gr6zd4') format('truetype'),
-		font-url('icomoon_fame_2015.woff?gr6zd4') format('woff'),
-		font-url('icomoon_fame_2015.svg?gr6zd4#icomoon_fame_2015') format('svg');
+	src:url('icomoon_fame_2015.eot?svxzt1');
+	src:url('icomoon_fame_2015.eot?#iefixsvxzt1') format('embedded-opentype'),
+		url('icomoon_fame_2015.ttf?svxzt1') format('truetype'),
+		url('icomoon_fame_2015.woff?svxzt1') format('woff'),
+		url('icomoon_fame_2015.svg?svxzt1#icomoon_fame_2015') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -98,6 +98,12 @@
 }
 .icon-dollar:before {
 	content: "\e60d";
+}
+.icon-arrow-square-left:before {
+	content: "\e630";
+}
+.icon-arrow-square-right:before {
+	content: "\e631";
 }
 .icon-close:before {
 	content: "\e611";

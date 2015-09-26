@@ -49,11 +49,17 @@
 // Time specific content
 @import 'transient_content';
 
+// Plugins
+@import '../vendor/bower_components/slick-carousel/slick/slick';
+@import 'redesign/vendor/slick-carousel';
+
 // Base
+@import 'redesign/base/buttons';
 @import 'redesign/base/containers';
 
 // Layout
 @import 'redesign/layout/header';
+@import 'redesign/layout/menu-new-this-week';
 
 // Components
 @import 'redesign/components/tabs';
