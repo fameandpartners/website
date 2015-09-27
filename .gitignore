@@ -59,3 +59,6 @@ config/elasticsearch.yml
 bin/rails
 bin/rake
 bin/spring
+
+# Cached bash Autocompletion of rake tasks
+.rake_tasks~

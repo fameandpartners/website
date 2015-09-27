@@ -362,6 +362,56 @@ ActiveRecord::Schema.define(:version => 20150921073046) do
   add_index "incompatibilities", ["incompatible_id"], :name => "index_incompatibilities_on_incompatible_id"
   add_index "incompatibilities", ["original_id"], :name => "index_incompatibilities_on_original_id"
 
+  create_table "item_return_events", :force => true do |t|
+    t.string   "item_return_uuid"
+    t.string   "event_type"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "occurred_at"
+  end
+
+  add_index "item_return_events", ["item_return_uuid"], :name => "index_item_return_events_on_item_return_uuid"
+
+  create_table "item_returns", :force => true do |t|
+    t.string   "order_number"
+    t.integer  "line_item_id"
+    t.integer  "qty"
+    t.string   "requested_action"
+    t.datetime "requested_at"
+    t.integer  "request_id"
+    t.string   "reason_category"
+    t.string   "reason_sub_category"
+    t.text     "request_notes"
+    t.string   "customer_name"
+    t.string   "contact_email"
+    t.string   "acceptance_status"
+    t.text     "comments"
+    t.string   "product_name"
+    t.string   "product_style_number"
+    t.string   "product_colour"
+    t.string   "product_size"
+    t.boolean  "product_customisations"
+    t.date     "received_on"
+    t.string   "received_location"
+    t.string   "order_payment_method"
+    t.date     "order_payment_date"
+    t.integer  "order_paid_amount"
+    t.string   "order_paid_currency"
+    t.string   "order_payment_ref"
+    t.string   "refund_status"
+    t.string   "refund_ref"
+    t.string   "refund_method"
+    t.integer  "refund_amount"
+    t.datetime "refunded_at"
+    t.string   "uuid"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  add_index "item_returns", ["line_item_id"], :name => "index_item_returns_on_line_item_id", :unique => true
+  add_index "item_returns", ["order_number"], :name => "index_item_returns_on_order_number"
+  add_index "item_returns", ["uuid"], :name => "index_item_returns_on_uuid", :unique => true
+
   create_table "line_item_making_options", :force => true do |t|
     t.integer  "product_id"
     t.integer  "variant_id"
@@ -418,6 +468,53 @@ ActiveRecord::Schema.define(:version => 20150921073046) do
   end
 
   add_index "line_item_updates", ["bulk_order_update_id"], :name => "index_line_item_updates_on_bulk_order_update_id"
+
+  create_table "manually_managed_returns", :force => true do |t|
+    t.integer  "item_return_id"
+    t.integer  "item_return_event_id"
+    t.integer  "line_item_id"
+    t.string   "import_status"
+    t.string   "row_number"
+    t.string   "rj_ident"
+    t.string   "column_b"
+    t.string   "receive_state"
+    t.string   "spree_order_number"
+    t.string   "return_cancellation_credit"
+    t.string   "name"
+    t.string   "order_date"
+    t.string   "order_month"
+    t.string   "return_requested_on"
+    t.text     "comments"
+    t.string   "product"
+    t.string   "size"
+    t.string   "colour"
+    t.string   "return_category"
+    t.string   "return_sub_category"
+    t.string   "return_office"
+    t.string   "received"
+    t.string   "in_inventory"
+    t.text     "notes"
+    t.string   "restocking"
+    t.string   "returned_to_factory"
+    t.string   "refund_status"
+    t.string   "payment_method"
+    t.string   "refund_method"
+    t.string   "currency"
+    t.string   "amount_paid"
+    t.string   "spree_amount_paid"
+    t.string   "refund_amount"
+    t.string   "date_refunded"
+    t.string   "email"
+    t.string   "account_name"
+    t.string   "account_number"
+    t.string   "account_bsb"
+    t.string   "account_swift"
+    t.text     "customers_notes"
+    t.string   "quantity"
+    t.string   "deleted_row"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
 
   create_table "marketing_user_visits", :force => true do |t|
     t.integer "spree_user_id"
@@ -1213,10 +1310,10 @@ ActiveRecord::Schema.define(:version => 20150921073046) do
     t.boolean  "is_active"
     t.decimal  "discount_size"
     t.integer  "discount_type"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "name"
-    t.boolean  "sitewide",      :default => false
+    t.boolean  "sitewide",              :default => false
     t.boolean  "customisation_allowed", :default => false
   end
 

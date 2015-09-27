@@ -17,6 +17,9 @@ module FameAndPartners
   class Application < Rails::Application
     require "#{Rails.root}/config/initializers/bower_rails.rb"
 
+    config.active_record.observers ||= []
+    config.active_record.observers << :item_return_event_observer
+
     config.to_prepare do
       # manually load some paths
       [

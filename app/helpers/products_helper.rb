@@ -54,6 +54,11 @@ module ProductsHelper
     color_option.present? ? color_option.option_values : []
   end
 
+  # Temporarily allow order of otherwise unavailable garments
+  def custom_order?
+    params[:custom_order] == '2015-09' || params[:custom_order] == '2015-10'
+  end
+
   def seo_taxonomy
     @seo_taxonomy ||= Spree::Taxonomy.where("lower(name) = ?", 'SeoCollection'.downcase).first
   end

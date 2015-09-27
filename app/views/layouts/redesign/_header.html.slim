@@ -118,7 +118,7 @@ ruby:
         div#dresses-menu
           ul.nav.navbar-nav
             li.normal-item
-              .text.text-back CUSTOM MADE DRESSES
+              .text.text-back DRESSES
               .arrow
                 i.fa.fa-chevron-left
                 .back BACK
@@ -247,7 +247,7 @@ ruby:
             .arrow
               i.fa.fa-chevron-right
           li.normal-item#dress-menu-open
-            .text CUSTOM MADE DRESSES
+            .text DRESSES
             .arrow
               i.fa.fa-chevron-right
           li.normal-item#event-menu-open
@@ -262,7 +262,8 @@ ruby:
             a.text href='http://blog.fameandpartners.com' MAGAZINE
           - if sale_active?
             li.normal-item
-              = link_to 'SALE', mystyle_landing_page_path(lpi: 'formal', sale: ''), class: 'text'
+              = link_to 'SALE', mystyle_landing_page_path(lpi: 'none', sale: 'all'), class: 'text'
+
           /li.normal-item
             /.text MADE FOR YOU
           /li.normal-item

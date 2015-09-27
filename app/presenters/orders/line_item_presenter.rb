@@ -79,7 +79,7 @@ module Orders
       if personalization.present?
         personalization.color
       else
-        variant.dress_color
+        variant.try(:dress_color)
       end
     end
 
@@ -207,7 +207,7 @@ module Orders
       if personalization.present?
         personalization.size.try(:name) || 'Unknown Size'
       else
-        variant.dress_size.try(:name) || 'Unknown Size'
+        variant.try(:dress_size).try(:name) || 'Unknown Size'
       end
     end
 

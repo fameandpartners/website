@@ -10,7 +10,9 @@
 ## Steps
 #### 1. SSH into Source Environment
 
-Here you can either download most recent backup, or take a new backup, then download
+Here you can either 
+- download most recent backup from the central EngineYard backup store ​*to*​ the DB server, 
+- *or* take a new backup, then re-download from the store back to the DB server.
 
 ##### (Optional) Take a new backup
 

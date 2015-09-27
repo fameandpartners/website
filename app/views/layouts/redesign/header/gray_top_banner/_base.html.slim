@@ -4,10 +4,11 @@ ruby:
 #gray-top-banner.row.visible-md-block.visible-lg-block
 
   #customer-service.col-md-4
-    = banner.right_text
+    = banner.right_text.to_s.html_safe
 
   #free-shipping.col-md-4.text-center
-    = banner.center_text
+    = banner.center_text.to_s.html_safe
+
   #account-area.col-md-4.text-right
     = link_to spree_signup_path do
       span.register-area REGISTER NOW
@@ -50,7 +51,8 @@ ruby:
 .row#home-menu.hidden-xs.hidden-sm.text-center
   span.new-this-week
     em New this week
-  span.dresses CUSTOM MADE DRESSES
+  span.dresses
+    = link_to 'DRESSES', dresses_path
   span.nested
     ' EVENTS
     ul
@@ -60,7 +62,7 @@ ruby:
   span.magazine
     a href='http://blog.fameandpartners.com' MAGAZINE
   span.sale
-    = link_to 'SALE', mystyle_landing_page_path(:lpi => 'formal', :sale => 20)
+    = link_to 'SALE', mystyle_landing_page_path(:lpi => 'none', :sale => 'all')
   /span.made-for-you MADE FOR YOU
   /span.join-us JOIN US
   span.search-wrapper#search
