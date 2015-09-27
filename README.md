@@ -39,7 +39,8 @@ Use rbenv and the ruby-build plugin
 #### Quick installation
 
 ```shell
-$ npm install
+$ npm install -g bower
+$ bower install
 $ brew install redis elasticsearch imagemagick postgresql
 ```
 
