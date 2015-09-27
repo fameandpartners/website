@@ -400,7 +400,6 @@ Spree::Order.class_eval do
   def after_cancel
     restock_items!
     #TODO: make_shipments_pending
-    Spree::OrderMailer.cancel_email(self.id).deliver
     begin
       Marketing::CustomerIOEventTracker.new.track(
         user,
