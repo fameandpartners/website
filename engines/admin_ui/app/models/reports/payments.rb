@@ -4,6 +4,14 @@ module Reports
   class Payments
     include EnumerableCSV
 
+    def initialize(from:, to:)
+      raise ArgumentError unless from.respond_to?(:to_date)
+      raise ArgumentError unless to.respond_to?(:to_date)
+
+      @from = from.to_datetime.beginning_of_day
+      @to   = to.to_datetime.end_of_day
+    end
+
     def each
       return to_enum(__callee__) unless block_given?
 
@@ -26,7 +34,7 @@ module Reports
     def report_query
       Spree::Order.unscoped
         .completed
-        .includes(:payments => [:payment_method, :source]).includes(:shipments)
+        .includes(:payments => [:payment_method, :source]).includes(:shipments).where('completed_at between  ? and ?', @from, @to)
     end
 
     class PaymentReportPresenter < SimpleDelegator
