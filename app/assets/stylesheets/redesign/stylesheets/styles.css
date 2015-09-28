@@ -8115,6 +8115,10 @@ xheader
   }
 }
 
+#cart button#buyWithMasterPass {
+    width: initial;
+}
+
 /* --------------------------------
 
 xgallery
