@@ -1,2 +1,0 @@
-# add admin privilegies to user with user_id
-Spree::User.find(user_id).roles << Spree::Role.where(name: 'admin').first

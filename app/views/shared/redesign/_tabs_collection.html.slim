@@ -2,11 +2,14 @@
 
   ul
     li.active
-      a href='#collection1' data-toggle="tab" Make a Statement Collection
+      .inner-wrap
+        a href='#collection1' data-toggle="tab" Make a Statement Collection
     li
-      a href='#collection2' data-toggle="tab" Luxe Collection
+      .inner-wrap
+        a href='#collection2' data-toggle="tab" Luxe Collection
     li
-      a href='#collection3' data-toggle="tab" Here comes the Sun Collection
+      .inner-wrap
+        a href='#collection3' data-toggle="tab" Here comes the Sun Collection
 
   .tab-wrap
     = link_to make_a_statement_collection_path, id: 'collection1', class: 'tab active'

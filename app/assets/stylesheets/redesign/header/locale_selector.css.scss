@@ -27,7 +27,7 @@
   height: 25px;
   padding-top: 4px;
   font-weight: 500;
-  font-size: 0.875em;
+  
   div{
     padding-top: 0;
   }
@@ -55,11 +55,21 @@
       }
     }
   }
+
+  @media (max-width: 1100px) {
+
+    & {
+      font-size: 10px;
+    }
+
+  }
+
 }
 
 #locale-selector-container {
   position: relative;
   text-transform: initial;
+  font-size: 14px;
 
   a {
     color: inherit;
