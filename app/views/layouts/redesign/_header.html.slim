@@ -128,8 +128,9 @@ ruby:
               = link_to "View all dresses", dresses_path, class: 'text'
             li.normal-item
               = link_to "What's new", dresses_path(:order => 'newest'), class: 'text'
-            li.normal-item
-              = link_to 'Made in 48 hours', fast_making_dresses_path, class: 'text'
+            - unless Features.active?(:getitquick_unavailable)
+              li.normal-item
+                = link_to 'Made in 48 hours', fast_making_dresses_path, class: 'text'
             li.grey-item
               .text STYLES
             li.normal-item
