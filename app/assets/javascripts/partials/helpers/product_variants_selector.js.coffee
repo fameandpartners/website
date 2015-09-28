@@ -57,7 +57,7 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
     # if user don't selected size & color, then do nothing.
     return selected if (!selected.size_id || !selected.color_id)
 
-    if @colorInput.customValue() || @customizationsInput.customValue()
+    if @colorInput.customValue()
       selected.variant = @custom
     else
       selected.variant = _.findWhere(@variants, { size_id: selected.size_id, color_id: selected.color_id })
