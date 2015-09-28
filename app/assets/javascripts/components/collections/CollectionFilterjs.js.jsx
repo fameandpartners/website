@@ -45,6 +45,11 @@ var CollectionFilter = React.createClass({
       return (<FilterOption name={style.table.name} label={style.table.name} select='false'/>)
     });
 
+    priceList = ["$0 - $100", "$100 - $300", "$300 - $500", "$500+"]
+    prices = priceList.map(function(price){
+      return (<FilterOption name={price} label={price} select='false'/>)
+    });
+
     return (
       <div>
 
@@ -86,13 +91,18 @@ var CollectionFilter = React.createClass({
             <br/>
           </div>
 
-
-
           <b>BODYSHAPE</b>
           <div className='filter-area filter-area-shapes'>
             <FilterOption name='all' label='View all shapes' select='true'/>
             {shapes}
           </div>
+
+          <b>PRICE</b>
+          <div className='filter-area filter-area-prices'>
+            <FilterOption name='all' label='View all prices' select='true'/>
+            {prices}
+          </div>
+
         </div>
       </div>
     );

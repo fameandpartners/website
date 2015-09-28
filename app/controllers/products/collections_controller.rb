@@ -117,7 +117,6 @@ class Products::CollectionsController < Products::BaseController
     Products::CollectionResource.new(resource_args).read
   end
 
-
   def parse_permalink(permalink)
     return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
 

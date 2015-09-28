@@ -36,6 +36,9 @@ class Products::CollectionResource
   attr_reader :order
   attr_reader :limit
   attr_reader :offset
+  attr_reader :price_min
+  attr_reader :price_max
+  attr_reader :currency
 
   def initialize(options = {})
     @site_version   = options[:site_version] || SiteVersion.default
@@ -53,6 +56,9 @@ class Products::CollectionResource
     @order          = options[:order]
     @limit          = options[:limit]
     @offset         = options[:offset]
+    @price_min      = options[:price_min]
+    @price_max      = options[:price_max]
+    @currency       = options[:currency]
   end
 
   # what about ProductCollection class
@@ -150,6 +156,9 @@ class Products::CollectionResource
       result[:order] = order if order.present?
       result[:limit] = limit if limit.present?
       result[:offset] = offset if offset.present?
+      result[:price_min]  = price_min if price_min.present?
+      result[:price_max]  = price_max if price_max.present?
+      result[:currency]   = currency if currency.present?
 
       # Outerwear
       result[:show_outerwear] = show_outerwear
