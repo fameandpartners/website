@@ -77,12 +77,13 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       closeX = close.position()?.left + close.width() + 20
       $('.filter-col').removeClass("slide-in") if e.clientX > closeX and $('.filter-col').hasClass("slide-in")
 
-   $(document).on('mousedown touchstart', (e) =>
-      @xDown = e.originalEvent.x
-    ).on 'mouseup touchend', (e2) =>
-      @xUp = e2.originalEvent.x
-      if @xDown > @xUp and $('.filter-col').hasClass("slide-in")
-        $('.filter-col').removeClass("slide-in")
+    slideDistance = 70
+    $(document).on('mousedown touchstart', (e) =>
+       @xDown = e.originalEvent.x
+     ).on 'mouseup touchend', (e2) =>
+       @xUp = e2.originalEvent.x
+       if @xDown > @xUp + slideDistance and $('.filter-col').hasClass("slide-in")
+         $('.filter-col').removeClass("slide-in")
 
   clearAllOptions: =>
     $(".thumb").removeClass("thumb-true").addClass("thumb-false")
