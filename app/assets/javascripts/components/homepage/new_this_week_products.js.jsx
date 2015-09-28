@@ -1,27 +1,33 @@
-var ProductImageMobile = React.createClass({
+var ProductImage = React.createClass({
   render: function(){
+
+    var price;
+
+    if (this.props.product.sale_price !== null || this.props.product.discount !== null) {
+      price = <span>
+              <span className='original-price'>{this.props.product.price} </span>
+              <span className='sale-price'>{this.props.product.sale_price} </span>
+              <span className='discount'>SAVE {this.props.product.discount} </span>
+              </span>;
+    } else {
+      price = <span>{this.props.product.price}</span>;
+    }
+
     return(
-      <div className='col-xxs-6 col-xs-6 category--item'>
+      <div className='item-wrap'>
         <a href={urlWithSitePrefix(this.props.product.collection_path)}>
-          <img alt={this.props.product.name} className='img-product img-responsive' data-hover={this.props.product.images[0]} src={this.props.product.images[1]}></img>
-          <div className='details text-center'>
-            <span className='name'> {this.props.product.name} </span>
-            <span className='price'> {this.props.product.price} </span>
+          <div className='media-wrap'>
+            <img alt={this.props.product.name} data-hover={this.props.product.images[0]} src={this.props.product.images[1]}></img>
+          </div>
+          <div className='details-wrap'>
+            <span> {this.props.product.name} </span>
+            <span className='price-wrap'>{price}</span>
           </div>
         </a>
       </div>
     )
   }
-});
 
-var ProductImageDesktop = React.createClass({
-  render: function(){
-    return(
-      <a href={urlWithSitePrefix(this.props.product.collection_path)}>
-        <img alt={this.props.product.name} className='img-product img-responsive' data-hover={this.props.product.images[0]} src={this.props.product.images[1]}></img>
-      </a>
-    )
-  }
 });
 
 var NewThisWeekProducts = React.createClass({
@@ -42,45 +48,33 @@ var NewThisWeekProducts = React.createClass({
   },
 
   componentDidUpdate: function() {
-    $('.slideArea .new-this-week-rslides').responsiveSlides({
-      auto: false,
-      nav: true
-    })
+    if (this.props.device === 'desktop') {
+      $('.js-carousel-new-this-week').slick({
+        speed: 800
+      });
+    }
   },
 
   render: function() {
-
+    var container;
     if (this.state.products.length == 0){
       return (
         <div></div>
       );
     } else {
-      if (this.props.device == 'mobile') {
-        products = this.state.products.map(function(product){
-          return (<ProductImageMobile product={product} />)
-        });
-      } else if (this.props.device == 'desktop'){
-        products_first_slide = this.state.products.slice(0,5);
-        products_first_slide = products_first_slide.map(function(product){
-          return (<ProductImageDesktop product={product} />)
-        });
+      products = this.state.products.map(function(product){
+        return (<ProductImage product={product} />)
+      });
 
-        products_second_slide = this.state.products.slice(5,11);
-        products_second_slide = products_second_slide.map(function(product){
-          return (<ProductImageDesktop product={product} />)
-        });
-
-        products = (
-          <ul className='new-this-week-rslides'>
-            <li>{products_first_slide}</li>
-            <li>{products_second_slide}</li>
-          </ul>
-        )
+      if (this.props.device === 'desktop') {
+        container = <div className="js-carousel-new-this-week" data-slick='{"slidesToShow": 5, "slidesToScroll": 5}'>
+                    {products}
+                    </div>
+      } else {
+        container = <div>{products}</div>
       }
 
-      return (
-        <div>{products}</div>
-      )
+      return (<div>{container}</div>)
     }
   }
 });

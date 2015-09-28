@@ -1,0 +1,73 @@
+/* [slick-carousel]
+-------------------------------------------------------*/
+.slick-loading .slick-list {
+  background: $c-neutral-white url('ajax-loader.gif') center center no-repeat;
+}
+
+.slick-slider .item-wrap:focus {
+  outline: 0;
+}
+
+.slick-prev,
+.slick-next {
+    position: absolute;
+    display: block;
+    height: 32px;
+    width: 32px;
+    top: 50%;
+    margin-top: -16px;
+    padding: 0;
+    line-height: 0px;
+    font-size: 0px;
+    font-family: 'icomoon_fame_2015';
+    color: transparent;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    z-index: 1;
+
+    &:hover, 
+    &:focus {
+        color: transparent;
+        background: transparent;
+        outline: none;
+
+        &:before {
+            color: $c-neutral-10;
+        }
+
+    }
+
+    &.slick-disabled:before {
+        color: $c-neutral-5;
+    }
+
+}
+
+.slick-prev:before, 
+.slick-next:before {
+  line-height: 1;
+  font-size: 32px;
+  color: $c-neutral-black;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.slick-prev {
+  left: 0;
+
+  &:before {
+    content: '\e630';
+  }
+
+}
+
+.slick-next {
+  right: 0;
+
+  &:before {
+    content: '\e631';
+  }
+
+}

@@ -231,6 +231,7 @@ GEM
     bourbon (4.2.2)
       sass (~> 3.4)
       thor
+    bower-rails (0.10.0)
     builder (3.0.4)
     business_time (0.7.4)
       activesupport (>= 3.1.0)
@@ -814,6 +815,7 @@ DEPENDENCIES
   aws-sdk
   bootstrap-sass
   bourbon
+  bower-rails (~> 0.10.0)
   business_time
   byebug
   canonical-rails!

@@ -15,6 +15,8 @@ module FameAndPartners
   end
 
   class Application < Rails::Application
+    require "#{Rails.root}/config/initializers/bower_rails.rb"
+
     config.active_record.observers ||= []
     config.active_record.observers << :item_return_event_observer
 
@@ -93,6 +95,7 @@ module FameAndPartners
 
     # Component Style Modal Content
     config.assets.paths << Rails.root.join("app", "assets", 'transient_content')
+    config.assets.paths << Rails.root.join("app", "assets", "vendor", "bower_components")
 
     # Production and Preproduction use an Engineyard deployed `redis.yml` file
     # Having this file in the repo conflicts with the EY managed deployment,

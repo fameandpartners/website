@@ -1117,6 +1117,29 @@ ul.secondary.pull-right {
   @include transition(height 0.4s);
 }
 
+.rect{
+  background-color: white;
+  width: 70%;
+  margin-left: 15%;
+  position: absolute;
+  z-index: 101;
+  
+  visibility: hidden;
+  opacity: 0;
+  left: -9999em;
+
+  margin-top: -1px;
+  border: solid $c-neutral-10 1px;
+  border-top-color: $c-neutral-4;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    left: auto;
+  }
+
+}
+
 .nav-menu-container{
   .register-area, .my-account{
     text-decoration: none;
@@ -1187,6 +1210,9 @@ ul.secondary.pull-right {
         display: none;
         list-style: none;
         text-align: left;
+        margin-top: -1px;
+        border: solid $c-neutral-10 1px;
+        border-top-color: $c-neutral-4;
         background-color: #f5f5f5;
 
         li {
@@ -1281,16 +1307,6 @@ ul.secondary.pull-right {
 
   }
 
-  .rect{
-    background-color: white;
-    width: 70%;
-    margin-left: 15%;
-    position: absolute;
-    height: 450px;
-    z-index: 101;
-    display: none;
-  }
-
   .prev{
     top: 55%;
     position: absolute;
@@ -1311,112 +1327,15 @@ ul.secondary.pull-right {
     text-indent: -9999px;
   }
 
-  #rect-new-this-week{
-    background-color: transparent;
-    @media(max-width: 1000px)
-    {
-      height:300px;
-    }
-    @media(min-width: 1001px)and(max-width: 1200px)
-    {
-      height:360px;
-    }
-    @media(min-width: 1201px)and(max-width: 1400px)
-    {
-      height:390px;
-    }
-    @media(min-width: 1401px)and(max-width: 1600px)
-    {
-      height:420px;
-    }
-    .black-bar{
-      background-color: black;
-      height: 20%;
-      color: white;
-      text-align: center;
-      font-weight: 600;
-      font-size: 12pt;
-      display: table;
-      width: 100%;
-      .inner-text{
-        cursor: pointer;
-        display: table-cell;
-        vertical-align: middle;
-        color: white;
-        text-decoration: none;
-      }
-    }
-    .slideArea{
-      background-color: white;
-      height: 80%;
-      display: table;
-      .containArea{
-        display: table-cell;
-        vertical-align: middle;
-        height: 100%;
-      }
-      ul{
-        list-style: none;
-        padding-left: 0;
-      }
-      .rslides {
-        position: relative;
-        list-style: none;
-        overflow: hidden;
-        width: 100%;
-        padding: 0;
-        margin: 0;
-
-        li {
-          -webkit-backface-visibility: hidden;
-          position: absolute;
-          display: none;
-          width: 100%;
-          left: 0;
-          top: 0;
-        }
-
-        li:first-child {
-          position: relative;
-          display: block;
-          float: left;
-        }
-
-        img {
-          display: block;
-          height: auto;
-          float: left;
-          width: 15%;
-          border: 0;
-        }
-
-      }
-
-      .rslides_tabs{
-        display: none;
-      }
-
-
-      img{
-        width: 15%;
-        float: left;
-      }
-      a:not(:first-child){
-        img{
-          margin-left: 6.25%;
-        }
-      }
-    }
-
-  }
   #rect-dresses{
+    padding-bottom: 30px;
+    background-color: #f5f5f5;
     .left-area{
       .no-style-text{
         color: black;
         text-decoration: none;
       }
       padding-right: 10px;
-      background-color: #f5f5f5;
       width: 70%;
       float: left;
       height: 100%;
@@ -1456,11 +1375,12 @@ ul.secondary.pull-right {
           width: 100%;
         }
       }
+
       .girl-text{
         position: relative;
         width: 100%;
         .contain{
-          padding-top: 20px;
+          padding: 20px;
           color: white;
           font-weight: 600;
           text-align: center;
