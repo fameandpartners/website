@@ -9,7 +9,7 @@ module Reports
       raise ArgumentError unless to.respond_to?(:to_date)
 
       @from = from.to_datetime.beginning_of_day
-      @to   = to.to_datetime.end_of_day
+      @to = to.to_datetime.end_of_day
     end
 
     def each
@@ -33,8 +33,8 @@ module Reports
 
     def report_query
       Spree::Order.unscoped
-        .completed
-        .includes(:payments => [:payment_method, :source]).includes(:shipments).where('completed_at between  ? and ?', @from, @to)
+          .completed
+          .includes(:payments => [:payment_method, :source]).includes(:shipments).where('completed_at between ? and ?', @from, @to)
     end
 
     class PaymentReportPresenter < SimpleDelegator
@@ -95,25 +95,35 @@ module Reports
         order.shipments.collect(&:tracking).join(',')
       end
 
+      def first_shipment
+        order.shipments.order(:shipped_at).first.shipped_at.to_s if order.shipments.present?
+      end
+
+      def last_shipment
+        order.shipments.order(:shipped_at).last.shipped_at.to_s if order.shipments.present?
+      end
+
       def to_h
         {
-          payment_date:              payment_date,
-          ident:                     ident,
-          payment_type:              payment_type,
-          token:                     token,
-          payer_id:                  payer_id,
-          transaction_id:            transaction_id,
-          card_type:                 card_type,
-          payment_state:             state,
-          amount:                    amount,
-          currency:                  currency,
-          order_number:              order_number,
-          order_created:             order_created,
-          order_email:               order_email,
-          order_state:               order_state,
-          order_shipped:             order_shipped?,
-          shipment_tracking_numbers: shipment_tracking_numbers,
-          timestamp:                 timestamp,
+            payment_date: payment_date,
+            ident: ident,
+            payment_type: payment_type,
+            token: token,
+            payer_id: payer_id,
+            transaction_id: transaction_id,
+            card_type: card_type,
+            payment_state: state,
+            amount: amount,
+            currency: currency,
+            order_number: order_number,
+            order_created: order_created,
+            order_email: order_email,
+            order_state: order_state,
+            order_shipped: order_shipped?,
+            shipment_tracking_numbers: shipment_tracking_numbers,
+            first_shipment: first_shipment,
+            last_shipment: last_shipment,
+            timestamp: timestamp,
         }
       end
 
