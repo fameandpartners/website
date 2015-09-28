@@ -84,7 +84,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       if @xDown > @xUp and $('.filter-col').hasClass("slide-in")
         $('.filter-col').removeClass("slide-in")
 
-
   clearAllOptions: =>
     $(".thumb").removeClass("thumb-true").addClass("thumb-false")
     $(".filter-area-colors .thumb-false[name='all']").removeClass("thumb-false").addClass("thumb-true")
