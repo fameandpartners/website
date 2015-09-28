@@ -58,7 +58,7 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
     return selected if (!selected.size_id || !selected.color_id)
 
     if @colorInput.customValue()
-      selected.variant = @custom
+      selected.variant = _.findWhere(@variants, { size_id: selected.size_id })
     else
       selected.variant = _.findWhere(@variants, { size_id: selected.size_id, color_id: selected.color_id })
 
