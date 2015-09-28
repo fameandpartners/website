@@ -45,7 +45,13 @@ var CollectionFilter = React.createClass({
       return (<FilterOption name={style.table.name} label={style.table.name} select='false'/>)
     });
 
-    priceList = ["$0 - $100", "$100 - $300", "$300 - $500", "$500+"]
+    currency = this.props.currency
+    if (currency == 'usd') {
+      priceList = ["$0 - $100", "$100 - $300", "$300 - $500", "$500+"]
+    } else {
+      priceList = ["$0 - $100", "$100 - $300", "$300 - $500", "$500+"]
+    }
+
     prices = priceList.map(function(price){
       return (<FilterOption name={price} label={price} select='false'/>)
     });

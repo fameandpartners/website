@@ -4,4 +4,4 @@
   - selectColors = @filter.colors
   - shapes = @filter.shapes
   - styles = @filter.styles
-  = react_component('CollectionFilter', {styles: styles, shapes: shapes, colors: colors, selectColors: selectColors} , { prerender: prerender })
+  = react_component('CollectionFilter', {styles: styles, shapes: shapes, colors: colors, selectColors: selectColors, currency: current_site_version.currency.downcase} , { prerender: prerender })
