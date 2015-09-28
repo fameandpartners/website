@@ -256,20 +256,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     priceHash = {}
     if $(".filter-area-prices .thumb-true[name!='all']")[0]?
-      name = $($(".filter-area-prices .thumb-true[name!='all']")[0]).attr("name")
-      switch name
-        when "$0 - $100"
-          priceMin = 0
-          priceMax = 100
-        when "$100 - $300"
-          priceMin = 100
-          priceMax = 300
-        when "$300 - $500"
-          priceMin = 300
-          priceMax = 500
-        when "$500+"
-          priceMin = 500
-
+      priceMin = $(".filter-area-prices .thumb-true[name!='all']:first").data("pricemin")
+      priceMax = $(".filter-area-prices .thumb-true[name!='all']:first").data("pricemax")
       priceHash["priceMin"] = priceMin
       priceHash["priceMax"] = priceMax if priceMax?
       priceHash["currency"] = window.app.current_site_version.currency.toLowerCase()

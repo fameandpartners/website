@@ -4,7 +4,7 @@ var FilterOption = React.createClass({
     return (
       <div className='filter-option'>
         <label>
-          <div className={"thumb thumb-"+this.props.select+" "+this.props.name} name={this.props.name}>
+          <div className={"thumb thumb-"+this.props.select+" "+this.props.name} name={this.props.name} data-pricemin={this.props.priceMin} data-pricemax={this.props.priceMax} >
           </div>
           {this.props.label}
         </label>
@@ -53,7 +53,15 @@ var CollectionFilter = React.createClass({
     }
 
     prices = priceList.map(function(price){
-      return (<FilterOption name={price} label={price} select='false'/>)
+      pricePair = price.replace(/\s/g, '').split("-")
+      if (pricePair.length == 2) {
+        priceMin  = pricePair[0].replace("$","")
+        priceMax  = pricePair[1].replace("$","")
+      } else {
+        priceMin  = pricePair[0].replace("$","").replace("+","")
+        priceMax  = null
+      }
+      return (<FilterOption name={price} label={price} priceMin={priceMin} priceMax={priceMax} select='false'/>)
     });
 
     return (
