@@ -29,18 +29,18 @@ Spree::Address.class_eval do
   def set_last(current_user=nil, try_spree, current_order)
     if try_spree && !current_order.try(:bill_address)
       last_order = Spree::Order.with_state(:complete).where(user_id: current_user).order(:created_at).last
-      order = last_order.bill_address if last_order.try(:bill_address)
+      order_bill_address = last_order.bill_address if last_order.try(:bill_address)
     end
-    order = current_order.bill_address if current_order.try(:bill_address)
+    order_bill_address = current_order.bill_address if current_order.try(:bill_address)
 
-    if order.present?
-      self.address1 = order.address1
-      self.address2 = order.address2
-      self.city = order.city
-      self.state_id = order.state_id
-      self.country_id = order.country_id
-      self.zipcode = order.zipcode
-      self.phone = order.phone
+    if order_bill_address.present?
+      self.address1 = order_bill_address.address1
+      self.address2 = order_bill_address.address2
+      self.city = order_bill_address.city
+      self.state_id = order_bill_address.state_id
+      self.country_id = order_bill_address.country_id
+      self.zipcode = order_bill_address.zipcode
+      self.phone = order_bill_address.phone
     end
   end
 end
