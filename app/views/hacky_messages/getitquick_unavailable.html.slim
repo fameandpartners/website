@@ -1,12 +1,15 @@
 .page-title.default.category-header style="background-image: url('#{@collection.details.banner.image}')"
   .container
     .page-title--details
-      h1.no-padding-bottom = @collection.details.banner.title
-      p= raw @collection.details.banner.subtitle
-
+      /h1.no-padding-bottom = @collection.details.banner.title
+      /p= raw @collection.details.banner.subtitle
+      h1.no-padding-bottom Oh Snap!
+      /p We can't do express making right now
 
 .text-center
-  h1 Sorry Babe!
+  h2 We can't do express making right now!
   p
-    ' Check out
-    = link_to "what's new this week", dresses_path(:order => 'newest')
+    ' In the meantime, check out
+    = link_to "what's new this week.", dresses_path(:order => 'newest')
+  p
+    = link_to 'More Dresses', dresses_path, class: 'btn btn-black'
