@@ -400,23 +400,7 @@ Spree::Order.class_eval do
   def after_cancel
     restock_items!
     #TODO: make_shipments_pending
-    begin
-      Marketing::CustomerIOEventTracker.new.track(
-        user,
-        'order_cancel_email',
-        email_to:           self.email,
-        subject:            "Your order has been canceled",
-        order_number:       self.number,
-        today:              Date.today.to_formatted_s(:long),
-        line_items:         Marketing::OrderPresenter.build_line_items(self),
-        adjustments:        Marketing::OrderPresenter.build_adjustments(self),
-        display_item_total: self.display_item_total,
-        display_total:      self.display_total
-      )
-    rescue StandardError => e
-      NewRelic::Agent.notice_error(e)
-    end
-
+    Marketing::CancelOrderTracker.new(self).send_customerio_event
     unless %w(partial shipped).include?(shipment_state)
       self.payment_state = 'credit_owed'
     end
