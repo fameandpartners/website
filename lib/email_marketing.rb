@@ -1,7 +1,7 @@
 class EmailMarketing
   def self.send_emails
     send_abandoned_cart_emails
-    send_style_quiz_not_completed_emails
+    #send_style_quiz_not_completed_emails
 
     # Added to Wishlist: Send email to a user who added something
     # to their wishlist 12 hours after the last addition.
@@ -15,7 +15,7 @@ class EmailMarketing
     # send_wishlist_item_added_reminder
 
     #Email: Goes out 1 week after style profile complete
-    send_style_quiz_completed_reminder_emails
+    #send_style_quiz_completed_reminder_emails
 
     # clear information about old email notifications, sent month ago or later
     remove_old_notifications
@@ -91,22 +91,26 @@ class EmailMarketing
   # Send email 12 hours after last Style Quiz interaction when they did not complete it.
   # Only send the email once to user. Display html content and link to website.
   def self.send_style_quiz_not_completed_emails
-    # Initiate date time variables
-    now = Time.now
-    created_before = (configatron.email_marketing.delay_time.quiz_unfinished || 12.hours).ago
+    # not working, due to absent of style quiz.
+    # if this will be needed, update style_profile model to track start/end
+    return
 
-    activities = Activity.
-      joins(%q(INNER JOIN spree_users ON spree_users.id = activities.actor_id AND activities.actor_type = 'Spree::User')).
-      where(activities: { action: 'quiz_started' }).
-      where('activities.created_at < ?', created_before).
-      where('activities.created_at > spree_users.last_quiz_notification_sent_at OR spree_users.last_quiz_notification_sent_at IS NULL')
+#    # Initiate date time variables
+#    now = Time.now
+#    created_before = (configatron.email_marketing.delay_time.quiz_unfinished || 12.hours).ago
+#
+#    activities = Activity.
+#      joins(%q(INNER JOIN spree_users ON spree_users.id = activities.actor_id AND activities.actor_type = 'Spree::User')).
+#      where(activities: { action: 'quiz_started' }).
+#      where('activities.created_at < ?', created_before).
+#      where('activities.created_at > spree_users.last_quiz_notification_sent_at OR spree_users.last_quiz_notification_sent_at IS NULL')
 
     actor_ids = []
-    activities.each do |activity|
-      next if activity.actor.blank? || activity.actor.style_profile.blank?
-      next if activity.actor.style_profile.created_at > activity.created_at
-      actor_ids.push(activity.actor_id)
-    end
+#    activities.each do |activity|
+#      next if activity.actor.blank? || activity.actor.style_profile.blank?
+#      next if activity.actor.style_profile.created_at > activity.created_at
+#      actor_ids.push(activity.actor_id)
+#    end
 
     actor_ids.compact.uniq.each do |user_id|
       StyleQuizNotCompletedEmailWorker.perform_async(user_id)

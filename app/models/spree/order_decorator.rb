@@ -183,7 +183,6 @@ Spree::Order.class_eval do
       Spree::OrderMailer.confirm_email(self.id).deliver
       Spree::OrderMailer.team_confirm_email(self.id).deliver
       ProductionOrderEmailService.new(self.id).deliver
-      log_products_purchased
       if user && user.newsletter?
         Marketing::Subscriber.new(user: user).set_purchase_date(Date.today)
       end
@@ -264,12 +263,6 @@ Spree::Order.class_eval do
 
     current_item.save
     self.reload
-  end
-
-  def log_products_purchased
-    line_items.each do |line_item|
-      Activity.log_product_purchased(line_item.product, self.user, self)
-    end
   end
 
   def log_confirm_email_error(error = nil)

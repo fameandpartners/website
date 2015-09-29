@@ -10,8 +10,6 @@ namespace :data do
         "FROM spree_line_items WHERE order_id IN (SELECT order_id FROM spree_line_items EXCEPT SELECT id AS order_id FROM spree_orders);",
       :orphan_line_item_personalizations =>
         "FROM line_item_personalizations WHERE line_item_id IN ( SELECT line_item_id FROM line_item_personalizations EXCEPT SELECT id AS line_item_id FROM spree_line_items)",
-      :old_activities =>
-        "FROM activities WHERE created_at < '#{6.months.ago}'",
       :old_permissions =>
         "FROM spree_tokenized_permissions WHERE created_at < '#{7.days.ago}'"
     }

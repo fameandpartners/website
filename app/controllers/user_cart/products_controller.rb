@@ -36,10 +36,6 @@ class UserCart::ProductsController < UserCart::BaseController
         end
       end
 
-      Activity.log_product_added_to_cart(
-        result.product, temporary_user_key, try_spree_current_user, current_order
-      )
-
       @user_cart = user_cart_resource.read
 
       data = add_analytics_labels(@user_cart.serialize)

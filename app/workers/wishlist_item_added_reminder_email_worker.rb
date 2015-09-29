@@ -27,11 +27,10 @@ class WishlistItemAddedReminderEmailWorker < BaseEmailMarketingWorker
 
   # helper methods
   def user_purchased_product?(user_id, product_id)
-    base_scope = Activity.where(
-      actor_id: user_id, actor_type: 'Spree::User',
-      owner_id: product_id, owner_type: 'Spree::Product',
-      action: 'purchased'
-    )
+    base_scope = Spree::Order.
+      includes(line_items: :variant).
+      where(user_id: user_id, state: 'complete').
+      where('spree_variants.product_id = ?', product_id)
     base_scope.exists?
   end
 end

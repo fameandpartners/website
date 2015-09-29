@@ -507,33 +507,4 @@ module ProductsHelper
     is_plus = product.taxons.where(:name =>"Plus Size").first
     return true if is_plus
   end
-=begin
-  def activity_description(activity, user)
-    if activity.info[:school_name]
-      actor_description = "Someone from #{activity.info[:school_name]}"
-    elsif (actor = activity.actor).present?
-      actor_description = actor.first_name
-    else
-      actor_description = "Someone"
-    end
-
-    action_description, action_class = case activity.action
-    when "purchased"
-      [ "purchased this item", "icon-purchase" ]
-    when "added_to_cart"
-      [ "added this item to their cart", "icon-bag" ]
-    when "added_to_wishlist"
-      [ "added this item to their moodboard", "icon-heart" ]
-    else # when 'viewed' & by default
-      [ "viewed this item", "icon-eye" ]
-    end
-
-    raw("#{content_tag(:i, '', class: 'icon ' + action_class)} #{actor_description} #{action_description} #{timeago(activity.updated_at)}")
-  end
-
-  def timeago(time, options = {})
-    options[:class] ||= "timeago"
-    content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
-  end
-=end
 end
