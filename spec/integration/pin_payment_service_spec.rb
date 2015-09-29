@@ -1,31 +1,32 @@
 require 'spec_helper'
 
-describe PinPaymentService do
+describe PinPaymentService, type: :service, vcr: { record: :new_episodes } do
 
-  let(:opts)        {
+  let(:opts) {
     {
-    email:       "blah@vtha.com",
-    amount:      1000, #CENTS
-    currency:    'USD',
-    description: 'Order #R851637568-[RANDOM]',
-    ip_address:  "10.10.10.10", # OPTIONAL
-    card:        {
-      number:           card_number,
-      expiry_month:     1,
-      expiry_year:      2020,
-      # cvc:              123, #OPTIONAL FOR MASTERPASS
-      name:             'Blah Vtha',
-      address_line1:    'Address',
-      address_city:     'City',
-      # address_postcode: '123456', #OPTIONAL
-      # address_state:    'NSW', #OPTIONAL
-      address_country:  'Australia'
-    }}
+        email:       'blah@vtha.com',
+        amount:      1000, #CENTS
+        currency:    'USD',
+        description: 'Order #R851637568-[RANDOM]',
+        ip_address:  '10.10.10.10', # OPTIONAL
+        card:        {
+            number:          card_number,
+            expiry_month:    1,
+            expiry_year:     2020,
+            # cvc:              123, #OPTIONAL FOR MASTERPASS
+            name:            'Blah Vtha',
+            address_line1:   'Address',
+            address_city:    'City',
+            # address_postcode: '123456', #OPTIONAL
+            # address_state:    'NSW', #OPTIONAL
+            address_country: 'Australia'
+        }
+    }
   }
 
-  let(:pin_api_key) { "LElcjB_z4BItXJQPYlw43g" }
+  let(:pin_api_key) { 'LElcjB_z4BItXJQPYlw43g' }
   let(:service)     { PinPaymentService.new(pin_api_key, opts) }
-  let(:card_number) { ' 5520000000000000'}
+  let(:card_number) { '5520000000000000'}
 
   before do
     service.create_charge

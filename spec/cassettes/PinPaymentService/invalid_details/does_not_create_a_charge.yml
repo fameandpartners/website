@@ -1,0 +1,118 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://LElcjB_z4BItXJQPYlw43g:@test-api.pin.net.au/1/charges
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - PinPayment::Charge/0.5.1
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 422
+      message: Unprocessable Entity
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 23 Sep 2015 15:07:09 GMT
+      Server:
+      - Apache
+      Status:
+      - 422 Unprocessable Entity
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - User-Agent
+      X-Rack-Cache:
+      - invalidate, pass
+      X-Request-Id:
+      - 493021a8a6dc4e0e527571fc391fe3aa
+      X-Runtime:
+      - '0.036687'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '1168'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"error":"invalid_resource","error_description":"One or more parameters
+        were missing or invalid","messages":[{"param":"card.number","code":"card_number_invalid","message":"Card
+        number can''t be blank"},{"param":"card.expiry_month","code":"card_expiry_month_invalid","message":"Card
+        expiry month can''t be blank"},{"param":"card.expiry_year","code":"card_expiry_year_invalid","message":"Card
+        expiry year can''t be blank"},{"param":"card.name","code":"card_name_invalid","message":"Card
+        name can''t be blank"},{"param":"card.address_line1","code":"card_address_line1_invalid","message":"Card
+        address line1 can''t be blank"},{"param":"card.address_city","code":"card_address_city_invalid","message":"Card
+        address city can''t be blank"},{"param":"card.address_country","code":"card_address_country_invalid","message":"Card
+        address country can''t be blank"},{"param":"description","code":"description_invalid","message":"Description
+        can''t be blank"},{"param":"email","code":"email_invalid","message":"Email
+        can''t be blank"},{"param":"amount","code":"amount_invalid","message":"Amount
+        can''t be blank"},{"param":"amount","code":"amount_invalid","message":"Amount
+        is not a number"}]}'
+    http_version: 
+  recorded_at: Wed, 23 Sep 2015 15:07:10 GMT
+- request:
+    method: post
+    uri: https://LElcjB_z4BItXJQPYlw43:@test-api.pin.net.au/1/charges
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - PinPayment::Charge/0.5.1
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 23 Sep 2015 15:08:48 GMT
+      Server:
+      - Apache
+      Status:
+      - 401 Unauthorized
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - User-Agent
+      X-Rack-Cache:
+      - invalidate, pass
+      X-Request-Id:
+      - 5f0c3abf1c93e48e321e11efe63e40cd
+      X-Runtime:
+      - '0.034640'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '81'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"error":"unauthenticated","error_description":"Not authorised. (Check
+        API Key)"}'
+    http_version: 
+  recorded_at: Wed, 23 Sep 2015 15:08:49 GMT
+recorded_with: VCR 2.9.3

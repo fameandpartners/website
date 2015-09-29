@@ -282,6 +282,8 @@ GEM
       sass (>= 3.2, < 3.5)
     configatron (4.5.0)
     connection_pool (2.2.0)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
     createsend (2.5.1)
       hashie (~> 1.0)
       httparty (~> 0.10)
@@ -683,6 +685,7 @@ GEM
     ruby-ole (1.2.11.8)
     ruby-progressbar (1.7.5)
     rubyzip (0.9.8)
+    safe_yaml (1.0.4)
     sass (3.4.13)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -787,6 +790,7 @@ GEM
       rack
       raindrops (~> 0.7)
     uuidtools (2.1.5)
+    vcr (2.9.3)
     versioncake (0.4.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -796,6 +800,9 @@ GEM
     wasabi (2.5.1)
       httpi (~> 1.0)
       nokogiri (>= 1.4.0)
+    webmock (1.21.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
     whenever (0.9.4)
       chronic (>= 0.6.3)
     xml-simple (1.1.5)
@@ -899,6 +906,8 @@ DEPENDENCIES
   tire
   uglifier (= 1.3.0)
   unicorn
+  vcr (~> 2.9.3)
+  webmock (~> 1.21.0)
   whenever
 
 BUNDLED WITH

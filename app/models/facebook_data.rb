@@ -1,6 +1,7 @@
 class FacebookData < ActiveRecord::Base
-  belongs_to :spree_user,
-             class_name: Spree::User
+  belongs_to :spree_user, class_name: 'Spree::User'
 
-  serialize :value
+  serialize :value, Hash
+
+  validates :spree_user, presence: true
 end
