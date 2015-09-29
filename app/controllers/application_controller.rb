@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   append_before_filter :handle_marketing_campaigns
 
   before_filter :set_session_country
-  before_filter :add_debugging_infomation
+  before_filter :add_debugging_information
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
   before_filter :set_locale
 
@@ -98,7 +98,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def add_debugging_infomation
+  def add_debugging_information
     ::NewRelic::Agent.add_custom_attributes({
       user_id:      current_spree_user.try(:id),
       user_email:   current_spree_user.try(:email),
@@ -106,7 +106,7 @@ class ApplicationController < ActionController::Base
       order_number: current_order.try(:number),
       referrer:     request.referrer
     })
-  rescue Exception => e
+  rescue Exception => _
     true
   end
 
