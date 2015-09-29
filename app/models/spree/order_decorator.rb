@@ -194,7 +194,7 @@ Spree::Order.class_eval do
     end
   end
 
-  def get_price_for_line_item(variant: , _zone_id:, currency:)
+  def get_price_for_line_item(variant:, currency:)
     currency ||= self.currency
     price = variant.price_in(currency)
 
@@ -214,7 +214,7 @@ Spree::Order.class_eval do
       current_item.currency = currency unless currency.nil?
       current_item.save
     else
-      price = get_price_for_line_item(variant: variant, _zone_id: @zone_id, currency: currency)
+      price = get_price_for_line_item(variant: variant, currency: currency)
       current_item = Spree::LineItem.new(:quantity => quantity)
       current_item.variant = variant
       if currency
@@ -242,7 +242,7 @@ Spree::Order.class_eval do
   end
 
   def update_line_item(current_item, variant, quantity, currency)
-    price = get_price_for_line_item(variant: variant, _zone_id: @zone_id, currency: currency)
+    price = get_price_for_line_item(variant: variant, currency: currency)
 
 
     current_item.currency    = currency
