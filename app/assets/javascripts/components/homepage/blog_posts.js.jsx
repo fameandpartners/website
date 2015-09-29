@@ -25,7 +25,7 @@ var BlogPosts = React.createClass({
     return {posts: []}
   },
   componentDidMount: function() {
-    $.get("http://blog.fameandpartners.com/?json=1", function(result) {
+    $.get("http://blog.fameandpartners.com/?json=1&count=100", function(result) {
 
       // Pushing the posts which will be display on homepage
       posts = [];
