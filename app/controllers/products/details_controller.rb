@@ -34,8 +34,7 @@ class Products::DetailsController < Products::BaseController
 
     # Set SEO properties
     # Drop anything after the first period(.) and newline
-    color_title  = params[:color].titleize if params[:color]
-    @title       = "#{color_title} #{@product.name} #{default_seo_title}".strip
+    @title       = "#{@product.meta_title} #{default_seo_title}".strip
     @description = @product.meta_description
     append_gtm_product(@product)
   end
