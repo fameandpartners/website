@@ -25,6 +25,13 @@ RSpec.describe ItemReturnEvent, :type => :model do
     it { is_expected.to validate_presence_of :user }
   end
 
+  describe 'rejection' do
+    subject(:event) { ItemReturnEvent.rejection.new }
+
+    it { is_expected.to validate_presence_of :user }
+    it { is_expected.to validate_presence_of :comment }
+  end
+
   describe 'record refund' do
     subject(:event) { ItemReturnEvent.record_refund.new }
 

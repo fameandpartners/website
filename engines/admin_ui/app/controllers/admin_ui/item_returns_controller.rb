@@ -23,7 +23,7 @@ module AdminUi
     private
 
     helper_method def possible_events
-      [:receive_item, :approve, :record_refund]
+      ::AdminUi::ItemReturns::EventsController.event_forms.keys
     end
   end
 end
