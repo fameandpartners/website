@@ -45,8 +45,6 @@ module Spree
     end
 
     def order_total_without_shipment(order)
-      #free_shipping_items_cost = get_order_free_shipping_items_cost(order)
-
       if order.shipment.present?
         order.total - order.shipment.amount
       else
@@ -61,20 +59,5 @@ module Spree
       object.in_sale?
     end
 
-=begin
-    def get_order_free_shipping_items_cost(order)
-      result = 0
-      order.line_items.includes(variant: :product).each do |line_item|
-        if line_item.product.free_shipping?
-          result += line_item.total
-        end
-      end
-      result
-    end
-
-    def order_have_only_free_shipping_items?(order)
-      order.line_items.includes(variant: :product).all?{|line_item| line_item.product.free_shipping?}
-    end
-=end
   end
 end

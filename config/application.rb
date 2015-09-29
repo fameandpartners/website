@@ -134,8 +134,6 @@ module FameAndPartners
       Rails.application.config.spree.calculators.promotion_actions_create_adjustments << Spree::Calculator::PersonalizationDiscount
       Rails.application.config.spree.calculators.promotion_actions_create_adjustments << Spree::Calculator::ProgressivePercents
       Rails.application.config.spree.promotions.rules << Spree::Promotion::Rules::ItemCount
-      Rails.application.config.spree.promotions.rules << Spree::Promotion::Rules::BridesmaidsCount
-      Rails.application.config.spree.promotions.rules << Spree::Promotion::Rules::BridesmaidPartyMember
     end
 
     config.allow_cors = true

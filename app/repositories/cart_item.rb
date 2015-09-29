@@ -35,20 +35,14 @@ class CartItem
   private
 
     def product_type
-      return 'service' if product.service?
       customized_product? ? 'customized' : 'default'
     end
 
-    def product_has_option_values?
-      !product.service?
-    end
-
     def customized_product?
-      !product.service? && line_item.personalization.present?
+      line_item.personalization.present?
     end
 
     def line_item_color
-      return nil if !product_has_option_values?
       @line_item_color ||= begin
         if customized_product?
           line_item.personalization.color
@@ -59,7 +53,6 @@ class CartItem
     end
 
     def line_item_size
-      return nil if !product_has_option_values?
       @line_item_size ||= begin
         if customized_product?
           line_item.personalization.size

@@ -55,37 +55,6 @@ ActiveRecord::Schema.define(:version => 20150921073046) do
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
 
-  create_table "bridesmaid_party_events", :force => true do |t|
-    t.integer  "spree_user_id"
-    t.datetime "wedding_date"
-    t.integer  "status"
-    t.integer  "bridesmaids_count"
-    t.boolean  "special_suggestions"
-    t.text     "colors"
-    t.text     "additional_products"
-    t.boolean  "paying_for_bridesmaids", :default => false
-  end
-
-  add_index "bridesmaid_party_events", ["spree_user_id"], :name => "index_bridesmaid_party_events_on_spree_user_id"
-
-  create_table "bridesmaid_party_members", :force => true do |t|
-    t.integer "event_id"
-    t.string  "first_name"
-    t.string  "last_name"
-    t.string  "email"
-    t.integer "variant_id"
-    t.integer "size"
-    t.integer "color_id"
-    t.integer "spree_user_id"
-    t.string  "token"
-    t.string  "customization_value_ids"
-    t.string  "selected_product_status"
-    t.integer "wishlist_item_id"
-  end
-
-  add_index "bridesmaid_party_members", ["event_id"], :name => "index_bridesmaid_party_members_on_event_id"
-  add_index "bridesmaid_party_members", ["spree_user_id"], :name => "index_bridesmaid_party_members_on_spree_user_id"
-
   create_table "bulk_order_updates", :force => true do |t|
     t.text     "user"
     t.text     "filename"
@@ -1206,7 +1175,6 @@ ActiveRecord::Schema.define(:version => 20150921073046) do
     t.boolean  "featured",             :default => false
     t.integer  "position",             :default => 0
     t.boolean  "hidden",               :default => false
-    t.boolean  "is_service",           :default => false
     t.integer  "factory_id"
     t.string   "size_chart",           :default => "2014", :null => false
     t.integer  "fabric_card_id"

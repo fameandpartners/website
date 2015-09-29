@@ -228,7 +228,6 @@ function sanitise_dev_db
   SCRIPT_SQL="delete from spree_users where email not like '%fameandpartners.com%';
 
   truncate table activities;
-  truncate table bridesmaid_party_events;
   truncate table competition_entries;
   truncate table competition_invitations;
   truncate table email_notifications;

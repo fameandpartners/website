@@ -32,12 +32,10 @@ class Repositories::CartProduct
         image: product_image
       )
 
-      if product_has_option_values?
-        result.size   = Repositories::ProductSize.read(size_id)
-        result.color  = Repositories::ProductColors.read(color_id)
-        result.customizations = product_customizations.to_a
-        result.making_options = product_making_options
-      end
+      result.size   = Repositories::ProductSize.read(size_id)
+      result.color  = Repositories::ProductColors.read(color_id)
+      result.customizations = product_customizations.to_a
+      result.making_options = product_making_options
 
       result
     end
@@ -53,16 +51,11 @@ class Repositories::CartProduct
     end
 
     def product_type
-      return 'service' if product.service?
       customized_product? ? 'customized' : 'default'
     end
 
-    def product_has_option_values?
-      !product.service?
-    end
-
     def customized_product?
-      !product.service? && line_item.personalization.present?
+      line_item.personalization.present?
     end
 
     def variant

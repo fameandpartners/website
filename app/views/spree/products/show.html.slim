@@ -44,23 +44,6 @@ javascript:
     meta itemprop="currency" content="#{@product.price.currency}" /
     meta itemprop="identifier" content="sku:#{@product.sku}" /
 
-  .bride-instructions
-    / -- DISPLAY IF USER IS BRIDE
-    - if @is_bride
-      .bride-header
-        = image_tag('_bridesmaid/product_instructions.jpg')
-        = render 'bridesmaid/shared/sub_nav'
-
-  / .product-alert
-    / -- DONT IMPLEMENT THIS FOR NOW
-    span.title.old share to get a $20 voucher
-    /= link_to '#' do
-      span.icon-facebook
-    /= link_to '#' do
-      span.icon-pinterest
-    = facebook_share_button(@product.path)
-    = pin_share_button(@product.path, absolute_image_url(@product.default_image), @product.name)
-
   .row
     .grid-8
       .product-slider
