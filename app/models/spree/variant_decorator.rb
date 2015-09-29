@@ -18,14 +18,6 @@ Spree::Variant.class_eval do
     product.update_index
   end
 
-  def save_default_price
-    # default spree codebase
-    if default_price && (default_price.changed? || default_price.new_record?)
-      default_price.save
-    end
-    # of default spree codebase
-  end
-
   def discount
     self.product.try(:discount)
   end
