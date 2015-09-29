@@ -1,8 +1,7 @@
 .page-content.index
-  .media-wrap
-    // TODO: create helper for multisource images
-    = link_to make_a_statement_collection_path
-      img src='/assets/home-page-tiles/hero-full.jpg' srcset='/assets/home-page-tiles/hero-sml.jpg 768w, /assets/home-page-tiles/hero-med.jpg 1024w, /assets/home-page-tiles/hero-full.jpg 1200w' alt='Bambi'
+  // TODO: create helper for multisource images
+  = react_component('HeroCarousel', skin: 'skin-light', 
+    assets: [{link: lookbook_path + '/photo-finish', src: '/assets/home-page-tiles/hero-1', alt: 'Photo FINISH - Shop Now'}, {link: lookbook_path + '/make-a-statement', src: '/assets/home-page-tiles/hero-2', alt: 'Bambi - Shop the Collection'}])
 
 /! Content Section
 section.container.content-block.home-main-content
