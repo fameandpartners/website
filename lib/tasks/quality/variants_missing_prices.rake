@@ -5,6 +5,8 @@ namespace :quality do
 
       attr_reader :logger
 
+      JUST_ENOUGH_PRICES = 2
+
       def initialize(logdev: $stdout)
         @logger = Logger.new(logdev)
         @logger.level = Logger.const_get(ENV.fetch("LOG_LEVEL", "INFO"))
@@ -22,7 +24,7 @@ namespace :quality do
 
           prices_attributes = product.master.prices.collect {|p| [p.currency, p.amount] }.uniq.to_h
 
-          if product.variants.all? { |v| v.prices.count == 2 }
+          if product.variants.all? { |v| v.prices.count == JUST_ENOUGH_PRICES }
             logger.debug [
                            'OK',
                            product.sku.to_s.ljust(10),
@@ -37,7 +39,7 @@ namespace :quality do
 
           logger.warn "#{product.name} - Setting Prices"
 
-          unless product.master.prices.count == 2
+          unless product.master.prices.count == JUST_ENOUGH_PRICES
             logger.warn "#{product.name} - MASTER has (#{product.master.prices.count}) PRICES"
           end
 
@@ -47,7 +49,7 @@ namespace :quality do
           end
 
           product.variants_including_master.each do |variant|
-            next if variant.prices.count == 2
+            next if variant.prices.count == JUST_ENOUGH_PRICES
             states << :update_variant
 
             log_prefix = "#{product.name} #{variant.sku.to_s.ljust(30)}"
