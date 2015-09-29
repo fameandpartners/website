@@ -12,9 +12,16 @@
     = link_to style_consultation_path, class: "col"
       = image_tag 'footer/refer.png'
       .text FREE STYLING SESSION
-    = link_to fast_making_dresses_path, class: "col"
-      = image_tag 'footer/48.png'
-      .text 48 HR EXPRESS MAKING
+    / Totes hacky messaging
+    - unless Features.active?(:getitquick_unavailable)
+      = link_to fast_making_dresses_path, class: "col"
+        = image_tag 'footer/48.png'
+        .text 48 HR EXPRESS MAKING
+    - else
+      = link_to dresses_path(:order => 'newest'), class: "col"
+        = image_tag 'footer/48.png'
+        .text NEW THIS WEEK
+    / End totes hacky messaging.
     = link_to fame_chain_path, class: "col"
       = image_tag 'footer/chain.png'
       .text JOIN THE FAME CHAIN
@@ -24,9 +31,10 @@
       = link_to style_consultation_path, class: "col-xs-12"
         = image_tag 'footer/refer.png', class: 'refer'
         .text FREE STYLING SESSION
-      = link_to fast_making_dresses_path, class: "col-xs-12"
-        = image_tag 'footer/48.png', class: 'hr48'
-        .text 48 HR EXPRESS MAKING
+      - unless Features.active?(:getitquick_unavailable)
+        = link_to fast_making_dresses_path, class: "col-xs-12"
+          = image_tag 'footer/48.png', class: 'hr48'
+          .text 48 HR EXPRESS MAKING
       = link_to fame_chain_path, class: "col-xs-12"
         = image_tag 'footer/chain.png', class: 'chain'
         .text JOIN THE FAME CHAIN
