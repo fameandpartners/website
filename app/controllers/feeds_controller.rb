@@ -28,7 +28,7 @@ class FeedsController < ApplicationController
       :product_color_values,
       {
         variants: [
-          :images, :zone_prices, :prices, {option_values: :option_type}
+          :images, :prices, {option_values: :option_type}
         ]
       }
     )

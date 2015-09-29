@@ -50,8 +50,6 @@ Spree::Product.class_eval do
   scope :not_hidden, lambda { where(hidden: false) }
   scope :outerwear, lambda { includes(taxons: :taxonomy).where(spree_taxonomies: { name: Spree::Taxonomy::OUTERWEAR_NAME }) }
 
-  has_many :zone_prices, :through => :variants, :order => 'spree_variants.position, spree_variants.id, currency'
-
   scope :featured, lambda { where(featured: true) }
   scope :ordered, lambda { order('position asc') }
 
@@ -252,11 +250,7 @@ Spree::Product.class_eval do
   end
 
   def zone_price_for(site_version = nil)
-    if site_version.blank?
-      self.price_in(Spree::Config.currency)
-    else
-      self.master.zone_price_for(site_version)
-    end
+    self.master.zone_price_for(site_version)
   end
 
   def update_price_conversions
