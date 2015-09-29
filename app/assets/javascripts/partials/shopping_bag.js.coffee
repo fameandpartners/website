@@ -105,10 +105,6 @@ window.ShoppingBag = class ShoppingBag
     self = this
     overlay = @$overlay
     $.getJSON(@masterpass_cart_callback_uri).done (data) ->
-      self.masterpass_clicked = false
-      spinner.stop()
-      overlay.removeClass('most-front')
-
       if data.hasOwnProperty('request_token') and data.hasOwnProperty('callback_domain') and data.hasOwnProperty('checkout_identifier') and data.hasOwnProperty('shipping_suppression') and data.hasOwnProperty('accepted_cards') and data.hasOwnProperty('cart_callback_path')
         MasterPass.client.checkout
           requestToken: data.request_token
@@ -131,3 +127,7 @@ window.ShoppingBag = class ShoppingBag
           ifrm.style.frameborder = 0
           ifrm.style.display = 'none'
           document.body.appendChild ifrm
+    .always ->
+      self.masterpass_clicked = false
+      spinner.stop()
+      overlay.removeClass('most-front')
