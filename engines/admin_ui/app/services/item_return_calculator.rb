@@ -23,6 +23,11 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.comments = "#{@item_return.comments}#{event.comment}\n"
   end
 
+  def advance_rejection(event)
+    @item_return.acceptance_status = :rejected
+    @item_return.comments = "#{@item_return.comments}#{event.comment}\n"
+  end
+
   def advance_record_refund(event)
     @item_return.refund_status = :completed
     @item_return.refund_method = event.refund_method

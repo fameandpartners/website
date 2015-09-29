@@ -2,6 +2,15 @@ module AdminUi
   module ItemReturns
     class EventsController < AdminUi::ApplicationController
 
+      def self.event_forms
+        {
+          :receive_item  => ::Forms::ReceiveItemForm,
+          :approve       => ::Forms::ApproveForm,
+          :rejection     => ::Forms::RejectionForm,
+          :record_refund => ::Forms::RecordRefundForm
+        }
+      end
+
       respond_to :html
 
       helper_method :event_type
@@ -46,13 +55,8 @@ module AdminUi
         end
       end
 
-      # TODO - DRY up with ItemReturnsController#possible_events
       def form_class(event_type)
-        case event_type
-          when :receive_item  then ::Forms::ReceiveItemForm
-          when :approve       then ::Forms::ApproveForm
-          when :record_refund then ::Forms::RecordRefundForm
-        end
+        self.class.event_forms.fetch(event_type)
       end
 
       private

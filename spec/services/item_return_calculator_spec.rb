@@ -58,5 +58,23 @@ RSpec.describe ItemReturnCalculator do
       expect(created_item_return.acceptance_status).to eq 'approved'
     end
   end
+
+  describe '#advance_rejection' do
+    let(:user)          { Faker::Internet.email }
+
+    before do
+      creation_event
+      created_item_return.events.rejection.create!({user: user, comment: "NOPE"})
+      described_class.new(created_item_return).run.save!
+      created_item_return.reload
+    end
+
+    it('updates the comment') do
+      expect(created_item_return.comments).to eq "NOPE\n"
+    end
+    it('sets the status to "approved"') do
+      expect(created_item_return.acceptance_status).to eq 'rejected'
+    end
+  end
 end
 
