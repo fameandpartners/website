@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
 
   append_before_filter :store_marketing_params
   append_before_filter :check_marketing_traffic
-  append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
   append_before_filter :count_competition_participants,     if: proc {|c| params[:cpt].present? }
   append_before_filter :handle_marketing_campaigns
@@ -109,13 +108,6 @@ class ApplicationController < ActionController::Base
     })
   rescue Exception => e
     true
-  end
-
-  def check_cart
-    # if can't find order, create it ( true )
-    # current order calls current currency which calls current site version
-    # and convert current order to current currency
-    current_order(true) if current_order.blank?
   end
 
   def add_site_version_to_mailer
