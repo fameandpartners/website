@@ -249,8 +249,8 @@ Spree::Product.class_eval do
     end
   end
 
-  def zone_price_for(site_version = nil)
-    self.master.zone_price_for(site_version)
+  def site_price_for(site_version = nil)
+    self.master.site_price_for(site_version)
   end
 
   def update_price_conversions

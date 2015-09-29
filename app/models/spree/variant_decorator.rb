@@ -100,14 +100,17 @@ Spree::Variant.class_eval do
   # logic
   # Find a price in the site's currency
   def zone_price_for(zone_or_site_version)
-    currency = if zone_or_site_version.is_a?(Spree::Zone)
-      zone_or_site_version.site_version.currency
-     else
-      zone_or_site_version.currency
+    if zone_or_site_version.is_a?(Spree::Zone)
+      site_price_for(zone_or_site_version.site_version)
+    else
+      site_price_for(zone_or_site_version)
     end
-    default_currency = Spree::Config.currency
+  end
+  deprecate :zone_price_for
 
-    get_price_in(currency) || get_price_in(default_currency) || default_price
+  def site_price_for(site_version)
+    default_currency = Spree::Config.currency
+    get_price_in(site_version.currency) || get_price_in(default_currency) || default_price
   end
 
   # NOTE: this differs from spree version by '|| prices.first'

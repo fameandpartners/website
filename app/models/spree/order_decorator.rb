@@ -366,7 +366,7 @@ Spree::Order.class_eval do
 
     self.line_items.each do |current_item|
       variant = current_item.variant
-      price = variant.zone_price_for(site_version.zone)
+      price = variant.site_price_for(site_version)
 
       current_item.currency = price.currency
 

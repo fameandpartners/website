@@ -27,19 +27,19 @@ table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
                 td width="40%" style="padding-bottom: 50px;"
                   ruby:
                     dress = group.first.product
-                    display_price = dress.zone_price_for(@site_version).display_price
+                    display_price = dress.site_price_for(@site_version).display_price
                   = render 'marketing_mailer/wishlist/product', dress: dress, display_price: display_price
                 td width="15"
                 td width="40%" style="padding-bottom: 50px;"
                   ruby:
                     dress = group.second.product
-                    display_price = dress.zone_price_for(@site_version).display_price
+                    display_price = dress.site_price_for(@site_version).display_price
                   = render 'marketing_mailer/wishlist/product', dress: dress, display_price: display_price
               - else
                 td width="40%" style="padding-bottom: 50px;"
                   ruby:
                     dress = group.first.product
-                    display_price = dress.zone_price_for(@site_version).display_price
+                    display_price = dress.site_price_for(@site_version).display_price
                   = render 'marketing_mailer/wishlist/product', dress: dress, display_price: display_price
                 td
                 td

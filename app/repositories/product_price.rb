@@ -24,7 +24,7 @@ class Repositories::ProductPrice
   end
 
   def read
-    product.zone_price_for(site_version)
+    product.site_price_for(site_version)
   end
 
   cache_results :read
