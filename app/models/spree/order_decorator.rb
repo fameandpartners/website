@@ -194,13 +194,9 @@ Spree::Order.class_eval do
     end
   end
 
-  def get_price_for_line_item(variant, zone_id, currency)
-    if zone_id
-      price = variant.zone_price_for(Spree::Zone.find(zone_id))
-    else
-      currency ||= self.currency
-      price = variant.price_in(currency)
-    end
+  def get_price_for_line_item(variant, _zone_id, currency)
+    currency ||= self.currency
+    price = variant.price_in(currency)
 
     # Plus Size Pricing
     if add_plus_size_cost?(variant)

@@ -116,7 +116,6 @@ class ApplicationController < ActionController::Base
     # current order calls current currency which calls current site version
     # and convert current order to current currency
     current_order(true) if current_order.blank?
-    current_order.zone_id = current_site_version.zone_id
   end
 
   def add_site_version_to_mailer
