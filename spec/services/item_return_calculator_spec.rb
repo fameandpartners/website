@@ -72,7 +72,7 @@ RSpec.describe ItemReturnCalculator do
     it('updates the comment') do
       expect(created_item_return.comments).to eq "NOPE\n"
     end
-    it('sets the status to "approved"') do
+    it('sets the status to "rejected"') do
       expect(created_item_return.acceptance_status).to eq 'rejected'
     end
   end
