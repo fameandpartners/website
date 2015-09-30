@@ -30,7 +30,7 @@ class ItemReturnsGrid
    end
 
   column :requested_action, header: 'Request', html: true do |item_return|
-    content_tag(:i, item_return.requested_action.to_s.upcase, class: action_icon_class(item_return.requested_action))
+    content_tag(:i, item_return.requested_action.to_s.upcase.first, class: action_icon_class(item_return.requested_action))
   end
 
   column :acceptance_status,      header: 'Status'
