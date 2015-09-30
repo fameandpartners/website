@@ -26,9 +26,12 @@ class ItemReturnsGrid
   filter(:custom2, :dynamic)
 
   column :actions, :html => true do |item_return|
-     link_to "manage", item_return_path(item_return)
+     link_to "manage", item_return_path(item_return), class: 'btn btn-xs btn-info'
    end
 
+  column :requested_action, header: 'Request', html: true do |item_return|
+    content_tag(:i, item_return.requested_action.to_s.upcase, class: action_icon_class(item_return.requested_action))
+  end
 
   column :acceptance_status,      header: 'Status'
   column :customer_name
@@ -50,11 +53,7 @@ class ItemReturnsGrid
   column :requested_at do |ir|
     ir.requested_at.try :to_date
   end
-  column :requested_action,       header: 'Request' do |item_return|
-    format(item_return.requested_action) do |ra|
-      ra.to_s.first.upcase
-    end
-  end
+
   # column :reason_category
   # column :reason_sub_category
   # column :contact_email
