@@ -51,13 +51,10 @@
 }
 
 
-
-body{
-  font-family: "brandon-grotesque", sans-serif;
-}
 /* [Header]
 -------------------------------------------------------*/
 #top {
+  font-family: "brandon-grotesque", sans-serif;
   $logo-width: 325px;
 
   .banner-wrap {
@@ -67,23 +64,6 @@ body{
     .inner-wrap {
       position: relative;
       padding: 0 ($mobile-header - $logo-width) / 2;
-    }
-
-    .left-wrap,
-    .right-wrap {
-      $mobile-header: 992px;
-      position: absolute;
-      max-width: ($mobile-header - $logo-width) / 2;
-    }
-
-    .left-wrap {
-      left: 0;
-      top: 15px;
-    }
-
-    .right-wrap {
-      right: 0;
-      top: 5px;
     }
 
     @include mobile-header {
@@ -123,80 +103,13 @@ body{
       font-size: 0.7em;
       color: $c-neutral-black;
     }
-
-  }
-
-  .toolbar-moodboard-bag {
-    display: block;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-
-    li {
-      display: block;
-      float: left;
-      height: 40px;
-      margin: 0 0 0 15px;
-      padding: 0;
-      line-height: 40px;
-
-      &:first-child {
-        margin-left: 0;
-      }
-
-      &.separator {
-        width: 1px;
-        height: 20px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        background: $c-neutral-10;
-      }
-
-    }
-
-    a {
-      float: left;
-      display: block;
-      color: $c-neutral-black;
-
-      &:hover,
-      &:focus {
-        color: $c-neutral-10;
-      }
-
-      .copy,
-      .icon {
-        float: left;
-        display: block;
-        height: 40px;
-        line-height: 40px;
-        vertical-align: middle;
-      }
-
-      .copy {
-        font-size: 15px;
-        margin-right: 5px;
-      }
-
-      .icon {
-        font-size: 17px;
-
-        &:after {
-          line-height: 40px;
-        }
-
-      }
-
+    .tagline:hover{
+      text-decoration: underline;
     }
 
   }
 
 }
-
-
-
-
-
 
 #home-menu{
     .new-this-week a:hover{
