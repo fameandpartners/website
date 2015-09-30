@@ -1,8 +1,11 @@
 ruby:
+  shopping_bag_texts = Preferences::ShoppingBag.new(current_site_version)
+
   shopping_cart_summary_init = "
     window.app.shopping_cart_summary = new ShoppingCartSummary({
       cart: window.app.shopping_cart,
-      container: '.checkout-items'
+      container: '.checkout-items',
+      value_proposition: \"#{shopping_bag_texts.value_proposition}\"
     });
   "
   preload_cart_data = "
@@ -80,3 +83,12 @@ ruby:
 
   p.order-number
     = @order.try(:number)
+
+  .shopping-bag-text-wrapper
+    .row.shopping-bag-text
+      = raw shopping_bag_texts.value_proposition
+
+  .row.shopping-bag-payment-methods
+    img src="/assets/checkout/visa-mastercard-paypal.jpg"
+    img src="/assets/comodo-ssl.png"
+
