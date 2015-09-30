@@ -111,6 +111,12 @@
 
 }
 
+#content-container{
+  img{
+    width: 100%;
+  }
+}
+
 #home-menu{
     .new-this-week a:hover{
       color:white;
@@ -297,7 +303,6 @@
   }
 
   #rect-dresses{
-    z-index: 20;
     padding-bottom: 30px;
     background-color: #f5f5f5;
     .left-area{
