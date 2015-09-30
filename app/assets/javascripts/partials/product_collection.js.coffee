@@ -260,7 +260,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       priceMax = $(".filter-area-prices .thumb-true[name!='all']:first").data("pricemax")
       priceHash["priceMin"] = priceMin
       priceHash["priceMax"] = priceMax if priceMax?
-      priceHash["currency"] = window.app.current_site_version.currency.toLowerCase()
       filter = $.extend(filter,priceHash)
 
     filter
