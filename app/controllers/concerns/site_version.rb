@@ -49,6 +49,10 @@ module Concerns::SiteVersion
     params[:site_version] || SiteVersion.default.code
   end
 
+  def current_currency
+    current_site_version.try(:currency) || Spree::Config[:currency]
+  end
+
   private
 
   def on_checkout_path

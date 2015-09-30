@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   append_before_filter :store_marketing_params
   append_before_filter :check_marketing_traffic
   append_before_filter :add_site_version_to_mailer
-  append_before_filter :count_competition_participants,     if: proc {|c| params[:cpt].present? }
+  append_before_filter :count_competition_participants, if: proc { |_| params[:cpt].present? }
   append_before_filter :handle_marketing_campaigns
 
   before_filter :set_session_country
@@ -260,10 +260,6 @@ class ApplicationController < ActionController::Base
     prefix = "#{product.short_description} #{info} #{product.name}"
     self.title = [prefix, default_seo_title].join(' - ')
     description([prefix, default_meta_description].join(' - '))
-  end
-
-  def current_currency
-    current_site_version.try(:currency) || Spree::Config[:currency]
   end
 
   def default_locale
