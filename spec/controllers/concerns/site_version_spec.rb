@@ -17,17 +17,17 @@ describe Concerns::SiteVersion, type: :controller do
     describe '#check_site_version' do
       before { rememoize(SiteVersion, :@default) }
 
-      let(:australian_site_verison) { create(:site_version, permalink: 'au') }
+      let(:australian_site_version) { create(:site_version, permalink: 'au') }
       let(:brazilian_site_version)  { create(:site_version, permalink: 'br') }
 
       context 'site version param is different than current site version code' do
         before(:each) { controller.instance_variable_set(:@current_site_version, brazilian_site_version) }
 
         it 'sets the requested version as the current site version' do
-          get :index, { site_version: australian_site_verison }
+          get :index, { site_version: australian_site_version }
 
           current_site_version = controller.instance_variable_get(:@current_site_version)
-          expect(current_site_version).to eq(australian_site_verison)
+          expect(current_site_version).to eq(australian_site_version)
         end
 
         describe 'does not change the current site version' do
@@ -37,16 +37,16 @@ describe Concerns::SiteVersion, type: :controller do
           end
 
           it 'when it is a non GET request' do
-            post :create, { site_version: australian_site_verison }
+            post :create, { site_version: australian_site_version }
           end
 
           it 'when it is a AJAX request' do
-            xhr :post, :create, { site_version: australian_site_verison }
+            xhr :post, :create, { site_version: australian_site_version }
           end
 
           it 'when it is a request to /checkout path' do
             allow(request).to receive(:path).and_return('/checkout')
-            get :index, { site_version: australian_site_verison }
+            get :index, { site_version: australian_site_version }
           end
         end
       end
@@ -79,9 +79,9 @@ describe Concerns::SiteVersion, type: :controller do
     end
 
     context 'params site version is not set' do
-      let(:australian_site_verison) { create(:site_version, permalink: 'au', default: true) }
+      let(:australian_site_version) { create(:site_version, permalink: 'au', default: true) }
 
-      before(:each) { expect(SiteVersion).to receive(:default).and_return(australian_site_verison) }
+      before(:each) { expect(SiteVersion).to receive(:default).and_return(australian_site_version) }
 
       it 'returns the default site version code' do
         expect(controller.site_version_param).to eq('au')
