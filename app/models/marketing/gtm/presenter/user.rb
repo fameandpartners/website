@@ -22,11 +22,15 @@ module Marketing
         end
 
         def gender
-          raise NotImplementedError, '#gender is not yet implemented'
+          if logged_in?
+            user.facebook_data_value[:gender] || UNKNOWN_STRING
+          else
+            UNKNOWN_STRING
+          end
         end
 
-        def facebook?
-          raise NotImplementedError, '#facebook? is not yet implemented'
+        def from_facebook?
+          gender != UNKNOWN_STRING
         end
 
         def country
@@ -40,10 +44,10 @@ module Marketing
         def body
           {
               name:     name,
-              # gender: gender,
+              gender:   gender,
               email:    email,
               loggedIn: logged_in?,
-              # facebook: facebook?,
+              facebook: from_facebook?,
               country:  country
           }
         end

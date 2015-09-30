@@ -20,6 +20,8 @@ module Marketing
                 expect(subject.body).to eq({
                                                name:     'unknown',
                                                email:    'unknown',
+                                               facebook: false,
+                                               gender:   'unknown',
                                                loggedIn: false,
                                                country:  'Brazil'
                                            })
@@ -31,9 +33,26 @@ module Marketing
                 expect(subject.body).to eq({
                                                name:     'Loroteiro Silvestre',
                                                email:    'loroteiro@silvestre.com',
+                                               facebook: false,
+                                               gender:   'unknown',
                                                loggedIn: true,
                                                country:  'Brazil'
                                            })
+              end
+
+              context 'user comes from facebook' do
+                before(:each) { user.facebook_data_value[:gender] = 'male' }
+
+                it 'returns hash with user gender and a truthy facebook key' do
+                  expect(subject.body).to eq({
+                                                 name:     'Loroteiro Silvestre',
+                                                 gender:   'male',
+                                                 email:    'loroteiro@silvestre.com',
+                                                 loggedIn: true,
+                                                 facebook: true,
+                                                 country:  'Brazil'
+                                             })
+                end
               end
             end
           end
