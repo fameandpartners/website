@@ -64,6 +64,7 @@ FameAndPartners::Application.routes.draw do
 
   namespace :widgets do
     get 'main_nav' => 'site_navigations#main_nav'
+    get 'footer'   => 'site_navigations#footer'
   end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
