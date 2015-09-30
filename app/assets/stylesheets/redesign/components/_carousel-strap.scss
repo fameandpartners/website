@@ -1,0 +1,98 @@
+/* [Carousel Strap]
+-------------------------------------------------------*/
+.carousel-strap {
+  background: $c-neutral-white;
+
+  .title {
+    position: relative;
+    text-align: center;
+    font-family: Forum;
+    font-size: 1.25em;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0;
+
+    .inner-wrap {
+      position: relative;
+      padding: 0 20px;
+      display: inline-block;
+      background: $c-neutral-white;
+    }
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      width: 100%;
+      height: 1px;
+      margin-top: -1px;
+      background: $c-neutral-4;
+    }
+
+  }
+
+  .outer-wrap {
+    margin-top: 20px;
+  }
+
+  .btn {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+
+  .slick-slider {
+    padding: 0 40px;
+  }
+
+  .slick-list {
+    margin: 20px 0;
+  }
+
+  .item-wrap {
+    padding: 0 10px;
+
+    > a {
+      display: block;
+      color: $c-neutral-black;
+
+      &:hover,
+      &:focus {
+        opacity: .8;
+      }
+
+    }
+
+    .details-wrap {
+      margin-top: 10px;
+      text-align: center;
+
+      > span {
+        display: block;
+        font-weight: 500;
+        font-size: 0.75em;
+      }
+
+      .original-price {
+        text-decoration: line-through;
+      }
+
+      .sale-price {
+        color: $c-brand-red;
+      }
+
+    }
+
+  }
+
+  .slick-prev {
+    left: 10px;
+  }
+
+  .slick-next {
+    right: 10px;
+  }
+
+}

@@ -3,6 +3,14 @@
   = react_component('HeroCarousel', skin: 'skin-light', 
     assets: [{link: lookbook_path + '/photo-finish', src: '/assets/home-page-tiles/hero-1', alt: 'Photo FINISH - Shop Now'}, {link: lookbook_path + '/make-a-statement', src: '/assets/home-page-tiles/hero-2', alt: 'Bambi - Shop the Collection'}])
 
+section.carousel-strap
+  .container
+    .outer-wrap
+      h2.title
+        .inner-wrap LATEST TRENDS
+      = react_component('LatestTrendsCarousel')
+      a.btn.btn-block.btn-black.btn-md View more dresses
+
 /! Content Section
 section.container.content-block.home-main-content
   .row
