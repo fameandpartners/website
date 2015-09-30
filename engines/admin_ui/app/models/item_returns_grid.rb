@@ -13,6 +13,7 @@ class ItemReturnsGrid
          select: ItemReturn::STATES.map { |x| [x.to_s.humanize, x] },
          default: -> { ItemReturn::STATES - [:refunded, :credit_note_issued] })
   filter(:refund_status, :enum, select: -> { ItemReturn.pluck(:refund_status).uniq })
+  filter(:requested_action, :enum, select: -> { ItemReturn.pluck(:requested_action).uniq })
   filter(:order_payment_method, :enum, select: -> { ItemReturn.pluck(:order_payment_method).uniq })
   filter(:order_number, :string) {|value| where("order_number ilike ?", "%#{value}%")}
   filter(:contact_email, :string) {|value| where("contact_email ilike ?", "%#{value}%")}
@@ -56,7 +57,7 @@ class ItemReturnsGrid
   end
   # column :reason_category
   # column :reason_sub_category
-  column :contact_email
+  # column :contact_email
 
 
   # column :order_number
@@ -70,31 +71,31 @@ class ItemReturnsGrid
   # column :customer_name
   # column :contact_email
 
-  column :comments
+  # column :comments
   # column :product_name
   # column :product_style_number
   # column :product_colour
   # column :product_size
   # column :product_customisations
-  column :received_on
-  column :received_location
-  column :order_payment_method, header: 'Paid'
-  column :order_paid_amount,    header: 'Amount' do |item_return|
-    Money.new(
-      item_return.order_paid_amount,
-      item_return.order_paid_currency
-    ).format if item_return.order_paid_amount.present?
-  end
-  column :order_paid_currency, header: 'Currency'
-  # column :order_payment_ref
-  column :refund_status
-  column :refund_ref
-  column :refund_method
-  column :refund_amount do |item_return|
-    Money.new(item_return.refund_amount, item_return.order_paid_currency).format if item_return.refund_amount.present?
-  end
-  column :refunded_at do |item_return|
-    item_return.refunded_at.try(:to_date).try(:iso8601)
-  end
+  # column :received_on
+  # column :received_location
+  # column :order_payment_method, header: 'Paid'
+  # column :order_paid_amount,    header: 'Amount' do |item_return|
+  #   Money.new(
+  #     item_return.order_paid_amount,
+  #     item_return.order_paid_currency
+  #   ).format if item_return.order_paid_amount.present?
+  # end
+  # column :order_paid_currency, header: 'Currency'
+  # # column :order_payment_ref
+  # column :refund_status
+  # column :refund_ref
+  # column :refund_method
+  # column :refund_amount do |item_return|
+  #   Money.new(item_return.refund_amount, item_return.order_paid_currency).format if item_return.refund_amount.present?
+  # end
+  # column :refunded_at do |item_return|
+  #   item_return.refunded_at.try(:to_date).try(:iso8601)
+  # end
 
 end
