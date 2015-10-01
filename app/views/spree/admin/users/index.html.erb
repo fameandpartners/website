@@ -48,7 +48,7 @@
 
       <div class="field">
         <%= f.label t(:roles) %> <br>
-        <%= f.select :spree_roles_name_eq, options_for_select( Spree::Role.pluck(:name).uniq ), {:include_blank => true} , :class => 'select2 fullwidth' %>
+        <%= f.select :spree_roles_name_eq, options_for_select( Spree::Role.pluck(:name).uniq, params[:q][:spree_roles_name_eq] ), {:include_blank => true} , :class => 'select2 fullwidth' %>
       </div>
 
       <div data-hook="admin_users_index_search_buttons">
