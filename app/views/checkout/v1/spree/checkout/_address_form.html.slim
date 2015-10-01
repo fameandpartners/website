@@ -35,8 +35,13 @@ ruby:
   = link_to 'Sign in with Facebook', fb_auth_path(site_version: current_site_version.code), class: 'btn btn-facebook btn-black btn-md'
 
   / Temporary location for heading.
-  h2.checkout-section-title 2. Address Details
+h2.checkout-section-title 2. Address Details
 
+- if Features.active?(:shipping_message)
+  p
+    | Please note there will be no shipping between the 1st-10th October due to international public holidays.
+    br
+    | 'We apologise for any inconvenience.
 .row
   .col-md-6.form-group
     = form.label :firstname, with_required_mark(t(:first_name))
