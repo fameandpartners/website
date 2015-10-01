@@ -43,9 +43,6 @@ module MarketingHelper
     marketing_landing_page? && current_promotion.present?
   end
 
-  # it seems, rails loads this by default
-  require "base64"
-
   def pop?
     params[:pop].present? && params[:pop] == 'true'
   end
