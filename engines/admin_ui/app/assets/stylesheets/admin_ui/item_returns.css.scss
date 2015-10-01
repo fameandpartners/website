@@ -1,0 +1,16 @@
+label[for=item_returns_grid_acceptance_status] {
+    display: block;
+}
+
+.enum_checkboxes.item_returns_grid_acceptance_status {
+    display: flex;
+    flex-wrap: wrap;
+}
+.enum_checkboxes.item_returns_grid_acceptance_status label.checkboxes {
+    min-width: 10rem;
+    flex-grow: 1;
+    margin-right: 0.5rem;
+}
+.enum_checkboxes.item_returns_grid_acceptance_status label.checkboxes input {
+    margin-right: 0.5rem;
+}

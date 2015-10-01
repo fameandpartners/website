@@ -2,6 +2,7 @@
 Indent in this file may cause extra space to appear.
 You can add indent if whitespace doesn't matter for you
 %>
+<div class="enum_checkboxes <%= [form.object_name, filter.name].join('_').underscore -%>">
 <%- elements.each do |value, text, checked| -%>
 <%- id = [form.object_name, filter.name, value].join('_').underscore -%>
 <%= form.label filter.name, options.merge(:for => id) do -%>
@@ -9,3 +10,4 @@ You can add indent if whitespace doesn't matter for you
 <%= text -%>
 <%- end -%>
 <%- end -%>
+</div>
