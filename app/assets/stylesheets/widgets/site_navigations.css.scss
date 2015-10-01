@@ -56,8 +56,8 @@
 body{
   background-color: transparent;
 }
-#top {
-  font-family: "brandon-grotesque", sans-serif;
+
+#header-widget{
   $logo-width: 325px;
 
   .banner-wrap {
@@ -67,6 +67,22 @@ body{
     .inner-wrap {
       position: relative;
       padding: 0 ($mobile-header - $logo-width) / 2;
+    }
+
+    .left-wrap,
+    .right-wrap {
+      position: absolute;
+      max-width: ($mobile-header - $logo-width) / 2;
+    }
+
+    .left-wrap {
+      left: 0;
+      top: 15px;
+    }
+
+    .right-wrap {
+      right: 0;
+      top: 5px;
     }
 
     @include mobile-header {
@@ -103,21 +119,17 @@ body{
       text-align: center;
       text-transform: uppercase;
       font-family: Forum;
-      font-size: 0.7em;
+      font-size: 1em;
       color: $c-neutral-black;
-    }
-    .tagline:hover{
-      text-decoration: underline;
     }
 
   }
 
-}
 
-#home-menu{
-    .new-this-week a:hover{
-      color:white;
-    }
+
+
+
+  #home-menu{
     a{
       color: black;
       text-decoration: none;
@@ -176,31 +188,33 @@ body{
         position: absolute;
         left: 0;
         top: 29px;
-        width: 400px;
-        margin: 0;
-        padding: 30px;
+        min-width: 220px;
+        margin: -1px 0 0;
+        padding: 20px 60px 20px 20px;
         display: none;
         list-style: none;
         text-align: left;
-        margin-top: -1px;
-        border: solid $c-neutral-10 1px;
+        text-transform: none;
+        border: solid $c-neutral-black 1px;
         border-top-color: $c-neutral-4;
-        background-color: #f5f5f5;
+        background: $c-neutral-white;
 
         li {
-          float: left;
-          width: 50%;
-          padding-right: 30px;
+          display: block;
+          margin-bottom: 8px;
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 25px;
 
           a {
-            text-transform: capitalize;
-            font-weight: 400;
-            font-size: 1.6rem;
-            color: #333;
-            background: transparent;
+            display: inline-block;
+            color: $c-neutral-black;
+            border-bottom: solid transparent 1px;
 
-            &:hover {
-              color: #355e6d;
+            &:hover,
+            &:focus {
+              color: $c-neutral-black;
+              border-color: $c-neutral-black;
             }
 
           }
@@ -220,6 +234,14 @@ body{
     }
 
   }
+
+
+
+
+
+
+
+
 
   .search-wrapper {
     $search-input-height: 44px;
@@ -299,74 +321,9 @@ body{
     text-indent: -9999px;
   }
 
-  #rect-dresses{
-    padding-bottom: 30px;
-    background-color: #f5f5f5;
-    .left-area{
-      .no-style-text{
-        color: black;
-        text-decoration: none;
-      }
-      padding-right: 10px;
-      width: 70%;
-      float: left;
-      height: 100%;
-      .col1 , .col2 , .col3 , .col4 {
-        width: 25%;
-        float: left;
-        padding-left: 30px;
-        .head{
-          margin-top: 30px;
-          font-weight: 600;
-          font-size: 1.7rem;
-        }
-        div{
-          clear: both;
-          margin-top:10px;
-          font-size: 1.6rem;
-          text-transform: capitalize
-        }
-      }
-      .col2, .col3{
-        li{
-          padding-top: 10px;
-          a{
-            font-size: 1.6rem;
-            text-transform: capitalize;
-          }
-        }
-      }
-    }
-    .right-area{
-      width: 30%;
-      float: left;
-      height: 100%;
-      background-color: #003647;
-      .girl-image{
-        img{
-          width: 100%;
-        }
-      }
-
-      .girl-text{
-        position: relative;
-        width: 100%;
-        .contain{
-          padding: 20px;
-          color: white;
-          font-weight: 600;
-          text-align: center;
-          width: 100%;
-        }
-      }
-    }
-  }
   #rect-lookbook{
     background-color: transparent;
     .lookbook-container{
-      .lookbook-slide{
-        padding-left: 0;
-      }
       position: relative;
       .prev, .next{
         top:50%;
@@ -410,9 +367,6 @@ body{
         width: 100%;
         float: left;
         clear: both;
-        img{
-          width: 100%;
-        }
       }
     }
   }
@@ -494,26 +448,204 @@ body{
 
   }
 
-.rect{
-  background-color: white;
-  width: 70%;
-  margin-left: 15%;
-  position: absolute;
-  z-index: 101;
 
-  visibility: hidden;
-  opacity: 0;
-  left: -9999em;
 
-  margin-top: -1px;
-  border: solid $c-neutral-10 1px;
-  border-top-color: $c-neutral-4;
 
-  &.active {
-    visibility: visible;
-    opacity: 1;
-    left: auto;
+
+
+
+
+
+    /* [Menu New This Week]
+  -------------------------------------------------------*/
+  .menu-new-this-week {
+    padding: 30px 0;
+
+    .slider-wrap {
+      margin-bottom: 40px;
+      padding: 0 40px;
+    }
+
+    .slick-list {
+      margin: 0 15px;
+    }
+
+    .item-wrap {
+      padding: 0 15px;
+
+      > a {
+        display: block;
+        color: $c-neutral-black;
+
+        &:hover,
+        &:focus {
+          opacity: .8;
+        }
+
+      }
+
+      .details-wrap {
+        margin-top: 10px;
+        text-align: center;
+
+        > span {
+          display: block;
+          text-transform: uppercase;
+          font-weight: 600;
+          font-size: 1em;
+        }
+
+        .original-price {
+          text-decoration: line-through;
+        }
+
+        .sale-price {
+          color: $c-brand-red;
+        }
+
+      }
+
+    }
+
+    .slick-prev {
+      left: -25px;
+    }
+
+    .slick-next {
+      right: -25px;
+    }
+
+    .btn-wrap {
+      text-align: center;
+    }
+
   }
 
-}
+  .main-menu .menu-new-this-week {
 
+    .item-wrap {
+      width: 50%;
+      float: left;
+    }
+
+    .details-wrap {
+      height: 80px;
+      font-size: 0.875em;
+    }
+
+  }
+
+
+
+
+
+  /* [Menu Dresses]
+  -------------------------------------------------------*/
+  .menu-dresses {
+    padding: 20px 20px 20px 30px;
+    text-transform: none;
+    background: $c-neutral-white;
+
+    ul {
+      float: left;
+      margin: 10px 60px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+
+      a {
+        display: inline-block;
+        color: $c-neutral-black;
+        border-bottom: solid transparent 1px;
+
+        &:hover,
+        &:focus {
+          color: $c-neutral-black;
+          border-color: $c-neutral-black;
+        }
+
+      }
+
+    }
+
+    .title {
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    .highlight-wrap {
+      float: right;
+      display: block;
+      width: 400px;
+      color: $c-neutral-white;
+      background: $c-brand-blue;
+
+      .copy-wrap {
+        padding: 20px;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+    }
+
+  }
+
+
+
+
+
+    /* [Nav Menu]
+  -------------------------------------------------------*/
+  .nav-menu-wrap {
+
+    @media (max-width: 1500px){
+      width: 80%;
+      margin-left: 10%;
+    }
+
+    @media (max-width: 1200px){
+      width: 100%;
+      margin: 0;
+      left: 0;
+      right: 0;
+      border-left-color: transparent;
+      border-right-color: transparent;
+    }
+
+  }
+
+
+
+
+
+  .rect{
+    background-color: white;
+    width: 70%;
+    margin-left: 15%;
+    position: absolute;
+    z-index: 101;
+
+    visibility: hidden;
+    opacity: 0;
+    left: -9999em;
+
+    margin-top: -1px;
+    border: solid $c-neutral-10 1px;
+    border-top-color: $c-neutral-4;
+
+    &.active {
+      visibility: visible;
+      opacity: 1;
+      left: auto;
+    }
+
+  }
+
+
+
+}
