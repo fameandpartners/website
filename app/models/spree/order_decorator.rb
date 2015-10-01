@@ -385,4 +385,13 @@ Spree::Order.class_eval do
 
     self.reload
   end
+
+  def after_cancel
+    restock_items!
+    #TODO: make_shipments_pending
+    Marketing::CancelOrderTracker.new(self).send_customerio_event
+    unless %w(partial shipped).include?(shipment_state)
+      self.payment_state = 'credit_owed'
+    end
+  end
 end
