@@ -78,7 +78,7 @@
               .form-group
                 label
                   | Value Proposition Text
-                = text_field :preferences, shopping_bag.value_proposition_key, value: shopping_bag.value_proposition, class: 'form-control'
+                = text_area :preferences, shopping_bag.value_proposition_key, value: shopping_bag.value_proposition, class: 'form-control'
                 .help-block.m-b-none
                   | Value proposition text that will be shown on shopping bag, right under the payment button.
 
