@@ -23,6 +23,8 @@ Spree::Order.class_eval do
   end
 
   state_machine do
+    before_transition :to => :complete, :do => :guard_order_with_no_items
+
     after_transition :to => :complete, :do => :project_delivery_date
   end
 
@@ -37,6 +39,12 @@ Spree::Order.class_eval do
     if complete?
       delivery_date = Policies::OrderProjectedDeliveryDatePolicy.new(self).delivery_date
       update_attribute(:projected_delivery_date, delivery_date)
+    end
+  end
+
+  def guard_order_with_no_items
+    if line_items.empty?
+      raise Errors::Orders::NoLineItems, "Cannot complete order #{number} with no line items"
     end
   end
 
