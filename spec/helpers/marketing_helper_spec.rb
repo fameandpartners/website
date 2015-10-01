@@ -29,6 +29,12 @@ RSpec.describe MarketingHelper, :type => :helper do
           expect(helper.decode(param_with_spaces)).to        eq original_input
           expect(helper.decode(parsed_param_with_spaces)).to eq original_input
         end
+
+        describe 'handling blank input' do
+          it { expect{ helper.decode('blagblagsdf') }.not_to raise_error }
+          it { expect(helper.decode(nil)).to eq '' }
+          it { expect(helper.decode(false)).to eq '' }
+        end
       end
 
       context 'raw mode' do

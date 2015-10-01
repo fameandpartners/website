@@ -49,14 +49,12 @@ module MarketingHelper
 
   def decode(p)
     return p if params[:raw]
-    if p.present?
-      # if someone forgot to escape base64 encoded param to url-safe
-      # then '+' => ' '
-      restored_string = p.gsub(/\s/, '+')
-      Base64.decode64(restored_string)
-    else
-      ''
-    end
+    return '' unless p.present?
+
+    # if someone forgot to escape base64 encoded param to url-safe
+    # then '+' => ' '
+    restored_string = p.to_s.gsub(/\s/, '+')
+    Base64.decode64(restored_string)
   end
 
   def encode(p)
