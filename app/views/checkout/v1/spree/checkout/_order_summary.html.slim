@@ -44,6 +44,8 @@ ruby:
               span.color
                 ' #{ product.color.presentation}
             .pull-right.text-muted = product.price.display_price
+            - if product.discount.present?
+              .pull-right.text-muted.sale-percentage = "#{product.discount}% off"
           .cart-prices
 
             - if product.making_options.present?
