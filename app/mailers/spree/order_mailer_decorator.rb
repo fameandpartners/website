@@ -48,15 +48,12 @@ Spree::OrderMailer.class_eval do
   def team_confirm_email(order)
     find_order(order)
 
-    @additional_products_info = Bridesmaid::BoughtAdditionalProductsResource.new(order: @order).read
-
     @order_presenter = Orders::OrderPresenter.new(@order)
 
     subject = "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
 
     line_items = Marketing::OrderPresenter.build_line_items(@order)
     adjustments = Marketing::OrderPresenter.build_adjustments(@order)
-    additional_products_info = Marketing::OrderPresenter.build_additional_products_info(@additional_products_info)
 
     user = @order.user
     user ||= Spree::User.where(email: @order.email).first
@@ -73,8 +70,9 @@ Spree::OrderMailer.class_eval do
         promocode:                      @order_presenter.promo_codes.join(', '),
         adjustments:                    adjustments,
         display_total:                  @order.display_total,
-        additional_products_info:       @additional_products_info.present?,
-        additional_products_info_data:  additional_products_info,
+        # TODO: additional products info was a bridesmaid reference.
+        additional_products_info:       false,
+        additional_products_info_data:  [],
         phone_present:                  @order.billing_address.present? ? @order.billing_address.phone.present? : false,
         phone:                          @order.billing_address.present? ? @order.billing_address.phone : '',
         billing_address:                @order.billing_address.to_s,
