@@ -48,53 +48,7 @@ class ItemReturnsGrid
     end
   end
 
-
-  # column :item_id
   column :requested_at do |ir|
     ir.requested_at.try :to_date
   end
-
-  # column :reason_category
-  # column :reason_sub_category
-  # column :contact_email
-
-
-  # column :order_number
-  # column :item_id
-# column :qty
-  # column :requested_action
-  # column :requested_at
-  # column :reason_category
-  # column :reason_sub_category
-  # column :request_notes # long
-  # column :customer_name
-  # column :contact_email
-
-  # column :comments
-  # column :product_name
-  # column :product_style_number
-  # column :product_colour
-  # column :product_size
-  # column :product_customisations
-  # column :received_on
-  # column :received_location
-  # column :order_payment_method, header: 'Paid'
-  # column :order_paid_amount,    header: 'Amount' do |item_return|
-  #   Money.new(
-  #     item_return.order_paid_amount,
-  #     item_return.order_paid_currency
-  #   ).format if item_return.order_paid_amount.present?
-  # end
-  # column :order_paid_currency, header: 'Currency'
-  # # column :order_payment_ref
-  # column :refund_status
-  # column :refund_ref
-  # column :refund_method
-  # column :refund_amount do |item_return|
-  #   Money.new(item_return.refund_amount, item_return.order_paid_currency).format if item_return.refund_amount.present?
-  # end
-  # column :refunded_at do |item_return|
-  #   item_return.refunded_at.try(:to_date).try(:iso8601)
-  # end
-
 end
