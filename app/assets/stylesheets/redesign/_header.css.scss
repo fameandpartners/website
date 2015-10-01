@@ -1327,68 +1327,6 @@ ul.secondary.pull-right {
     text-indent: -9999px;
   }
 
-  #rect-dresses{
-    padding-bottom: 30px;
-    background-color: #f5f5f5;
-    .left-area{
-      .no-style-text{
-        color: black;
-        text-decoration: none;
-      }
-      padding-right: 10px;
-      width: 70%;
-      float: left;
-      height: 100%;
-      .col1 , .col2 , .col3 , .col4 {
-        width: 25%;
-        float: left;
-        padding-left: 30px;
-        .head{
-          margin-top: 30px;
-          font-weight :500;
-          font-size: 1.7rem;
-        }
-        div{
-          clear: both;
-          margin-top:10px;
-          font-size: 1.6rem;
-          text-transform: capitalize
-        }
-      }
-      .col2, .col3{
-        li{
-          padding-top: 10px;
-          a{
-            font-size: 1.6rem;
-            text-transform: capitalize;
-          }
-        }
-      }
-    }
-    .right-area{
-      width: 30%;
-      float: left;
-      height: 100%;
-      background-color: #003647;
-      .girl-image{
-        img{
-          width: 100%;
-        }
-      }
-
-      .girl-text{
-        position: relative;
-        width: 100%;
-        .contain{
-          padding: 20px;
-          color: white;
-          font-weight: 600;
-          text-align: center;
-          width: 100%;
-        }
-      }
-    }
-  }
   #rect-lookbook{
     background-color: transparent;
     .lookbook-container{
