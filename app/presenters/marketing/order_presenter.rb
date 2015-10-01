@@ -58,21 +58,6 @@ module Marketing
       end
     end
 
-    def self.build_additional_products_info(additional_products_info)
-      if additional_products_info.present?
-        additional_products_info.collect do |info_item|
-          {
-            product: info_item.product,
-            email:   info_item.email,
-            phone:   info_item.phone,
-            state:   info_item.state
-          }
-        end
-      else
-        []
-      end
-    end
-
     def self.build_line_items_for_production(order)
       order.line_items.collect do |item|
         {
