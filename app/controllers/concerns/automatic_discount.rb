@@ -77,6 +77,18 @@ module Concerns
         fire_event('spree.checkout.coupon_code_added')
         session.delete(auto_apply_discount_retry_key)
         session[:auto_applied_promo_code] = automatic_discount_code
+
+        begin
+          Marketing::CustomerIOEventTracker.new.track(
+            current_spree_user,
+            'auto apply modal',
+            email:            current_order.email,
+            code:             automatic_discount_code.to_s
+          )
+        rescue StandardError => e
+          NewRelic::Agent.notice_error(e)
+        end
+
       end
 
     rescue StandardError => e

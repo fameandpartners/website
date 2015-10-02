@@ -1,4 +1,17 @@
 class Campaigns::EmailCaptureController < ApplicationController
+  def send_customerio_event
+    begin
+      Marketing::CustomerIOEventTracker.new.track(
+        current_spree_user,
+        'email capture modal',
+        email:            params[:email],
+        promocode:        params[:promocode]
+      )
+    rescue StandardError => e
+      NewRelic::Agent.notice_error(e)
+    end
+  end
+
   def create
     Marketing::Subscriber.new(
       token:          cookies['utm_guest_token'],
@@ -19,6 +32,8 @@ class Campaigns::EmailCaptureController < ApplicationController
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)
     end
+
+    send_customerio_event
 
     render :json => { status: 'ok' }, status: :ok
 
