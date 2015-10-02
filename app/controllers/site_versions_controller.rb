@@ -16,6 +16,11 @@ class SiteVersionsController < ApplicationController
     redirect_to previous_or_root_url(@current_site_version)
   end
 
+  def close_country_warning
+    session[:close_country_warning] = true
+    redirect_to previous_or_root_url(current_site_version)
+  end
+
   private
 
   def previous_or_root_url(site_version)
