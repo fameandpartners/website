@@ -1,39 +1,53 @@
 /* [Menu Magazine]
 -------------------------------------------------------*/
 .menu-magazine {
+  text-align: center;
   background: $c-neutral-white;
-
-  visibility: visible;
-  opacity: 1;
-  left: auto;
 
   .slider-wrap,
   .aside-wrap {
     float: left;
     padding-top: 30px;
     padding-bottom: 80px;
-
-    .title {
-      margin-bottom: 40px;
-      text-transform: uppercase;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .media-wrap {
-      margin-bottom: 15px;
-    }
-
-    .copy {
-      height: 44px;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
   }
 
   .slider-wrap {
     width: 58%;
+  }
+
+  .title {
+    height: 60px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .media-wrap {
+    margin-bottom: 15px;
+  }
+
+  .copy {
+    height: 44px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .slick-slider {
+    padding-left: 64px;
+    padding-right: 64px;
+
+    .item-wrap {
+      padding: 0 5px;
+    }
+
+    .slick-prev {
+      left: 15px;
+    }
+
+    .slick-next {
+      right: 15px;
+    }
+
   }
 
   .aside-wrap {
@@ -46,7 +60,6 @@
       float: left;
       width: 50%;
       padding: 0 15px;
-      text-align: center;
     }
 
     .copy {
