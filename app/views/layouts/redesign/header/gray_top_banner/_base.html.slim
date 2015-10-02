@@ -58,8 +58,8 @@ ruby:
       = render partial: 'layouts/redesign/event'
 
   span.lookbook LOOKBOOK
-  span.magazine
-    a href='http://blog.fameandpartners.com' BLOG
+  span.magazine MAGAZINE
+  /! a href='http://blog.fameandpartners.com' BLOG
   - if sale_active?
     span.sale
       = link_to 'SALE', mystyle_landing_page_path(lpi: 'none', sale: 'all', limit: 99)
@@ -104,32 +104,46 @@ ruby:
   .slider-wrap
     = react_component('MenuLookbook', skin: 'skin-light', assets: [{link: make_a_statement_collection_path, src: '/assets/homepage/lookbook/1.jpg', title: 'BAMBI X FAME'}, {link: photo_finish_collection_path, src: '/assets/homepage/lookbook/2.jpg', title: 'PHOTO FINISH'}, {link: luxe_collection_path, src: '/assets/homepage/lookbook/3.jpg', title: 'THE LUXE COLLECTION'}])
 
-/!
-  .row.rect#rect-magazine
-    .col-md-7.left-col
-      .row.head STEAL HER STYLE
-      .row.images
-        .col-md-4
-          = image_tag "homepage/magazine/1.jpg"
-          div.text TAYLOR
-        .col-md-4
-          = image_tag "homepage/magazine/2.jpg"
-          div.text BEYONCE
-        .col-md-4
-          = image_tag "homepage/magazine/3.jpg"
-          div.text GIGI
-    .col-md-5.right-col
-      .row
-        .col-md-6.col1
-          .row.head BACKSTAGE PASS
-          .row.image
-            = image_tag "homepage/magazine/2.jpg", class: "left-img"
-            div.text Blah blah blah
-        .col-md-6.col2
-          .row.head BLOG
-          .row.image
-            = image_tag "homepage/magazine/3.jpg", class: "right-img"
-            div.text Blah blah blah
+
+.row.rect#rect-magazine.nav-menu-wrap.menu-magazine
+  .slider-wrap
+    .title STEAL HER STYLE
+  .aside-wrap
+    a.item-wrap
+      .title BACKSTAGE PASS
+      .media-wrap
+        = image_tag "homepage/magazine/2.jpg"
+      .copy.txt-truncate-block Blah blah blah blah blah blah blah blah blah blah
+    a.item-wrap
+      .title BLOG
+      .media-wrap
+        = image_tag "homepage/magazine/3.jpg"
+      .copy.txt-truncate-block Blah blah blah blah blah blah blah blah blah blah blah 
+
+  .col-md-7.left-col
+    .row.head STEAL HER STYLE
+    .row.images
+      .col-md-4
+        = image_tag "homepage/magazine/1.jpg"
+        div.text TAYLOR
+      .col-md-4
+        = image_tag "homepage/magazine/2.jpg"
+        div.text BEYONCE
+      .col-md-4
+        = image_tag "homepage/magazine/3.jpg"
+        div.text GIGI
+  .col-md-5.right-col
+    .row
+      .col-md-6.col1
+        .row.head BACKSTAGE PASS
+        .row.image
+          = image_tag "homepage/magazine/2.jpg", class: "left-img"
+          div.text Blah blah blah
+      .col-md-6.col2
+        .row.head BLOG
+        .row.image
+          = image_tag "homepage/magazine/3.jpg", class: "right-img"
+          div.text Blah blah blah
 
 
 coffee:

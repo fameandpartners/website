@@ -33,6 +33,12 @@
   text-overflow: ellipsis;
 }
 
+// truncates block of text, NOTE: height must be set
+.txt-truncate-block {
+  display: block;
+  overflow: hidden;
+}
+
 // You can extend the cfix class with SASS to avoid the `.cfix` class appearing over and over in your markup.
 .cfix {
 
