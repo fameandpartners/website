@@ -100,25 +100,10 @@ ruby:
       = image_tag "homepage/dress-girl.jpg"
     .copy-wrap BAMBI X FAME.<br>SHOP BAMBI'S PICKS
 
-.row.rect#rect-lookbook
-  .lookbook-container
-    ul.lookbook-slide
-      li
-        = link_to make_a_statement_collection_path, class: "lookbook-item"
-          .head
-            .text BAMBI X FAME.
-          .image
-            = image_tag "homepage/lookbook/1.jpg"
-        = link_to photo_finish_collection_path, class: "lookbook-item"
-          .head
-            .text PHOTO FINISH
-          .image
-            = image_tag "homepage/lookbook/2.jpg"
-        = link_to luxe_collection_path, class: "lookbook-item"
-          .head
-            .text THE LUXE COLLECTION
-          .image
-            = image_tag "homepage/lookbook/3.jpg"
+.row.rect#rect-lookbook.nav-menu-wrap.menu-lookbook
+  .slider-wrap
+    = react_component('MenuLookbook', skin: 'skin-light', assets: [{link: make_a_statement_collection_path, src: '/assets/homepage/lookbook/1.jpg', title: 'BAMBI X FAME'}, {link: photo_finish_collection_path, src: '/assets/homepage/lookbook/2.jpg', title: 'PHOTO FINISH'}, {link: luxe_collection_path, src: '/assets/homepage/lookbook/3.jpg', title: 'THE LUXE COLLECTION'}])
+
 /!
   .row.rect#rect-magazine
     .col-md-7.left-col
