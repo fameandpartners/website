@@ -1,5 +1,4 @@
 if Rails.env.production?
-  Features.deactivate(:masterpass)
   Features.activate(:google_tag_manager)
   Features.activate(:masterpass)
 end
@@ -23,4 +22,4 @@ Features.activate(:express_making)
 Features.activate(:moodboard)
 Features.activate(:order_returns)
 Features.deactivate(:send_promotion_email_reminder)
-Features.activate(:shipping_message)
+Features.deactivate(:shipping_message)
