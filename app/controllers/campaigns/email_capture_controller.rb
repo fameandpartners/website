@@ -2,13 +2,13 @@ class Campaigns::EmailCaptureController < ApplicationController
   def send_customerio_event
     begin
       Marketing::CustomerIOEventTracker.new.track(
-        current_spree_user,
+         current_spree_user || params[:email],
         'email_capture_modal',
         email:            params[:email],
         promocode:        params[:promocode]
       )
     rescue StandardError => e
-      Rails.logger.error('ERROR: customer.io event tracker: email_capture_modal')
+      Rails.logger.error('[customer.io] Failed to send event: email_capture_modal')
       Rails.logger.error(e)
       NewRelic::Agent.notice_error(e)
     end

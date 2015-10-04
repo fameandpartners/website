@@ -13,7 +13,10 @@ module Marketing
     end
 
     def track(user, event_type, attrs)
-      client.track(user.id, event_type, attrs)
+      user_id = user.respond_to?(:id) ? user.id : user 
+      client.track(user_id, event_type, attrs)
+      Rails.logger.info("[customer.io] #{user_id}, #{event_type}")
+      Rails.logger.info("[customer.io] #{user_id}, #{attrs}")
     end
 
     # @api internal
