@@ -63,17 +63,17 @@
       input type="hidden" name="promocode" value=promocode
       .vex-footer
         .row.row-inline.text-center
-          .col-sm-5.col-inline.full-form
-            - if promocode == 'birthdaybabe'
-              = link_to 'Redeem via Facebook', fb_auth_path(show_promocode_modal: encode(promocode)), class: 'btn btn-facebook btn-block btn-md'
-            - elsif campaign_uuid == 'auto_apply_promo'
-              = link_to 'Redeem via Facebook', fb_auth_path(auto_apply: true), class: 'btn btn-facebook btn-block btn-md'
-            - else
-              = link_to 'Redeem via Facebook', fb_auth_path, class: 'btn btn-facebook btn-block btn-md'
-
-          .col-sm-2.col-inline.full-form
-            .or-rhombus: .rhombus: .rhombus-text-holder: .rhombus-text or
-          .col-sm-5.col-inline
+          / .col-sm-5.col-inline.full-form
+          /   - if promocode == 'birthdaybabe'
+          /     = link_to 'Redeem via Facebook', fb_auth_path(show_promocode_modal: encode(promocode)), class: 'btn btn-facebook btn-block btn-md'
+          /   - elsif campaign_uuid == 'auto_apply_promo'
+          /     = link_to 'Redeem via Facebook', fb_auth_path(auto_apply: true), class: 'btn btn-facebook btn-block btn-md'
+          /   - else
+          /     = link_to 'Redeem via Facebook', fb_auth_path, class: 'btn btn-facebook btn-block btn-md'
+          /
+          / .col-sm-2.col-inline.full-form
+          /   .or-rhombus: .rhombus: .rhombus-text-holder: .rhombus-text or
+          .col-sm-8.col-inline
             .input-group
               input.form-control.form-control-md.form-control-transparent name="email" type="text" placeholder="Redeem via e-mail"
               span.input-group-addon
