@@ -371,6 +371,7 @@
 	h1 {
 		text-transform: lowercase;
 		font-family: $font-family-secondary;
+   	font-weight: 400;
 
 		&:first-letter {
 			text-transform: uppercase;
@@ -463,5 +464,3 @@ li.select2-results__option {
 .category-header, .category-header:after {
 	background-color: #eeddf0;
 }
-
-
