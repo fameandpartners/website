@@ -86,6 +86,8 @@ module Concerns
             code:             automatic_discount_code.to_s
           )
         rescue StandardError => e
+          Rails.logger.error('ERROR: customer.io event tracker: auto_apply_coupon')
+          Rails.logger.error(e)
           NewRelic::Agent.notice_error(e)
         end
 

@@ -8,6 +8,8 @@ class Campaigns::EmailCaptureController < ApplicationController
         promocode:        params[:promocode]
       )
     rescue StandardError => e
+      Rails.logger.error('ERROR: customer.io event tracker: email_capture_modal')
+      Rails.logger.error(e)
       NewRelic::Agent.notice_error(e)
     end
   end
