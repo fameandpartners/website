@@ -26,7 +26,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           promocode:        session[:show_promocode_modal]
         )
       rescue StandardError => e
-        Rails.logger.error('[customer.io] Failed to send event: email_capture_modal')
+        Rails.logger.error('[customer.io] Failed to send event: #{event_type}')
         Rails.logger.error(e)
         NewRelic::Agent.notice_error(e)
       end
