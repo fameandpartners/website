@@ -3,7 +3,7 @@ class Campaigns::EmailCaptureController < ApplicationController
     begin
       Marketing::CustomerIOEventTracker.new.track(
         current_spree_user,
-        'email capture modal',
+        'email_capture_modal',
         email:            params[:email],
         promocode:        params[:promocode]
       )

@@ -81,7 +81,7 @@ module Concerns
         begin
           Marketing::CustomerIOEventTracker.new.track(
             current_spree_user,
-            'auto apply modal',
+            'auto_apply_coupon',
             email:            current_order.email,
             code:             automatic_discount_code.to_s
           )
