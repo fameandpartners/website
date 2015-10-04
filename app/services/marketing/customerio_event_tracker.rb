@@ -4,6 +4,13 @@ require 'customerio'
 # Automatically extracts spree user details & id
 module Marketing
   class CustomerIOEventTracker
+
+    def identify_user_by_email(email, site_version)
+      client.identify(id:           email,
+                      email:        email,
+                      site_version: site_version.code)
+    end
+
     def identify_user(user, site_version)
       client.identify(customer_ident_hash(user, site_version))
     end
@@ -13,7 +20,7 @@ module Marketing
     end
 
     def track(user, event_type, attrs)
-      user_id = user.respond_to?(:id) ? user.id : user 
+      user_id = user.respond_to?(:id) ? user.id : user
       client.track(user_id, event_type, attrs)
       Rails.logger.info("[customer.io] #{user_id}, #{event_type}")
       Rails.logger.info("[customer.io] #{user_id}, #{attrs}")

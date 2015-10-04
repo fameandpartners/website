@@ -1,7 +1,11 @@
 class Campaigns::EmailCaptureController < ApplicationController
   def send_customerio_event
     begin
-      Marketing::CustomerIOEventTracker.new.track(
+      tracker = Marketing::CustomerIOEventTracker.new
+      unless current_spree_user
+        tracker.identify_user_by_email(params[:email], current_site_version)
+      end
+      tracker.track(
          current_spree_user || params[:email],
         'email_capture_modal',
         email:            params[:email],
