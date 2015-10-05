@@ -133,7 +133,11 @@ module Orders
         }.merge(
            # Convert each element of the customisations array
            # to an explicit hash key and child hash.
-           # <INSERT Customer.io COMMENTS>
+           #
+           # Customizations is an array , currently customerio does not support nested array in json properly and they are working on it
+           # that's why the json receive on customerio is not formatted correctly which lead to failed emails
+           # a hacking solution is pull out all elements in customizations array to seperate elements so customerio can read correctly
+           # Current output will be line_items[{... customizations: []....customizations_0: [], customizations_1: [], customizations_2: []...}, {}]
            #
            # e.g. Where we would like to use an array;
            # :customizations=>[{:name=>"N/A", :url=>nil}, {:name=>"Cool", :url=>nil} ]
