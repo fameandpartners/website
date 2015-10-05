@@ -104,6 +104,23 @@ describe Revolution::Page do
     it { expect(child_page.depth).to eq 1 }
   end
 
+  describe 'with a collection' do
+    let(:heading)     { 'BLAH!' }
+    let(:sub_heading) { 'VTHA!' }
+    let(:collection)  { double('Collection') }
+
+    before do
+      allow(page).to receive(:collection).and_return(collection)
+      allow(collection).to receive_message_chain(:details, :banner, :title => heading)
+      allow(collection).to receive_message_chain(:details, :banner, :subtitle => sub_heading)
+    end
+
+    context 'with collection and no translation' do
+      it { expect(page.heading).to eq heading }
+      it { expect(page.sub_heading).to eq sub_heading }
+    end
+  end
+
   describe 'translations' do
     let!(:translation)  { page.translations.create!(:locale => locale, :title => title, :meta_description => title) }
 
