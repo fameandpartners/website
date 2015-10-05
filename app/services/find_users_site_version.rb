@@ -39,7 +39,7 @@ class FindUsersSiteVersion
   end
 
   def fetch_ip_country_code
-    UserCountryFromIP.new(request_ip).country_code
+    FindCountryFromIP.new(request_ip).country_code
   end
 
   def default_site_version

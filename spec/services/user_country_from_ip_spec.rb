@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UserCountryFromIP, type: :service do
+describe FindCountryFromIP, type: :service do
   let(:service) { described_class.new(ip) }
 
   describe '#country_code' do

@@ -320,7 +320,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_session_country
-    session[:country_code] ||= UserCountryFromIP.new(request.remote_ip).country_code
+    session[:country_code] ||= FindCountryFromIP.new(request.remote_ip).country_code
   end
 
 end

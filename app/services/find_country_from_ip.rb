@@ -1,6 +1,6 @@
 require 'geoip'
 
-class UserCountryFromIP
+class FindCountryFromIP
   attr_reader :ip
 
   def initialize(ip)
