@@ -7,11 +7,11 @@
 section.container.content-block.home-main-content
   .row
     .main.col-md-7
-      = link_to build_taxon_path('Lace'), class: 'media-wrap'
-        = image_tag 'home-page-tiles/tile-amazing-lace.jpg', alt: 'AMAZING LACE - Shop our lace dress edit'
-      = render 'shared/redesign/tabs_collection'
       = link_to build_taxon_path('Two Piece'), class: 'media-wrap'
-        = image_tag 'home-page-tiles/tile-double-or-nothing.jpg', alt: 'DOUBLE OR NOTHING - Discover our best two-piece styles'
+        = image_tag 'home-page-tiles/tile-double-or-nothing.jpg', alt: 'Double or nothing - Discover our best two-piece styles'
+      = render 'shared/redesign/tabs_collection'
+      = link_to 'Red Dresses', colour_path('Red'), class: 'media-wrap'
+        = image_tag 'home-page-tiles/tile-red-dresses.jpg', alt: 'The only color you need this spring - Shop red'
         fast_making_dresses
       = link_to fast_making_dresses_path, class: 'media-wrap'
         = image_tag 'home-page-tiles/tile-express-making.png', alt: 'Express making - Dresses made in 48 hours.'
