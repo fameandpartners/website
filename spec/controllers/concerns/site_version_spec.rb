@@ -53,18 +53,6 @@ describe Concerns::SiteVersion, type: :controller do
     end
   end
 
-  describe '#site_versions_enabled?' do
-    before(:each) { SiteVersion.delete_all }
-
-    it 'tells if there is more than one site version available' do
-      create(:site_version, :us)
-      expect(controller.site_versions_enabled?).to be_falsy
-
-      create(:site_version, :au)
-      expect(controller.site_versions_enabled?).to be_truthy
-    end
-  end
-
   describe '#current_site_version' do
     pending 'This method needs refactoring'
   end
