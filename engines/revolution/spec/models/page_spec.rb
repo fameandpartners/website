@@ -135,6 +135,21 @@ describe Revolution::Page do
         page.locale = locale
         expect(page.title).to eq translation.title
       end
+
+      context 'with a collection' do
+        let(:heading)     { 'BLAH!' }
+        let(:collection)  { double('Collection') }
+
+        before do
+          allow(page).to receive(:collection).and_return(collection)
+          allow(collection).to receive_message_chain(:details, :banner, :title => heading)
+        end
+
+        it 'should still delegate to translation' do
+          page.locale = locale
+          expect(page.title).to eq translation.title
+        end
+      end
     end
 
     context 'without locale translation' do
