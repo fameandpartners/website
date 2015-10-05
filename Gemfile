@@ -125,7 +125,6 @@ group :development, :test do
   gem 'compass'
   gem 'launchy', '2.2.0'
   gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
-  gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
   # gem 'minitest'
   gem 'net-ssh', '~> 2.7.0'
   gem 'oink'

@@ -426,10 +426,6 @@ FameAndPartners::Application.routes.draw do
     resources :site_versions, only: [:show], as: :site_version
   end
 
-  if Rails.env.development?
-    mount MailPreview => 'mail_view'
-  end
-
   mount AdminUi::Engine, at: '/fame_admin'
 
   if Features.active?(:content_revolution)
