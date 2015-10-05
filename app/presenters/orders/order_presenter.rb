@@ -142,8 +142,8 @@ module Orders
            # e.g. Where we would like to use an array;
            # :customizations=>[{:name=>"N/A", :url=>nil}, {:name=>"Cool", :url=>nil} ]
            # we must use merge a hash to the original result
-           # :customisation_0=>{:name=>"N/A", :url=>nil},
-           # :customisation_1=>{:name=>"Cool", :url=>nil},
+           # :customizations_0=>{:name=>"N/A", :url=>nil},
+           # :customizations_1=>{:name=>"Cool", :url=>nil},
           item.customisations.each_with_index.map do |(name, image_url), idx|
             ["customizations_#{idx}".to_sym, {name: name, url: image_url}]
           end.to_h
