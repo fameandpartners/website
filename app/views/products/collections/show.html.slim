@@ -4,11 +4,16 @@
 
 = render :partial => 'javascript'
 
-.page-title.default.category-header style="background-image: url('#{page.banner_image}')"
-  .container
-    .page-title--details
-      h1.no-padding-bottom = raw page.heading
-      p= raw page.sub_heading
+
+- unless params[:lpi] == 'none'
+  - if params[:lpi]
+    - image = "//#{configatron.asset_host}/pages#{page.path}/#{params[:lpi]}.jpg"
+
+  .page-title.default.category-header style="background-image: url('#{image || page.banner_image}')"
+    .container
+      .page-title--details
+        h1.no-padding-bottom = raw page.heading
+        p= raw page.sub_heading
 
 .page-content.products-collections.category
   = render :partial => 'filters_sort'
