@@ -12,7 +12,8 @@ module AdminUi
         begin
           params[:page][:variables] = eval(params[:page][:variables])
           if page.update_attributes(params[:page])
-            redirect_to action: :index
+            flash[:success] = "Page updated"
+            redirect_to action: :edit
           else
             render action: :edit
           end
