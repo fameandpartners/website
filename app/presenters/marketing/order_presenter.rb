@@ -59,7 +59,7 @@ module Marketing
     end
 
     def self.build_line_items_for_production(order)
-      order.line_items.collect do |item|
+      result = order.line_items.collect do |item|
         {
           style_num:        item.style_number,
           size:             item.country_size,
@@ -73,6 +73,25 @@ module Marketing
           image_url:        item.image? ? item.image_url : ''
         }
       end
+
+      #HACKING CUSTOMERIO
+      result.each_with_index do |line_item, index|
+        if line_item[:customizations][0].present?
+          customizations_0 = {name: line_item[:customizations][0][:name], url: line_item[:customizations][0][:url]}
+          result[index][:customizations_0] = customizations_0
+        end
+        if line_item[:customizations][1].present?
+          customizations_1 = {name: line_item[:customizations][1][:name], url: line_item[:customizations][1][:url]}
+          result[index][:customizations_1] = customizations_1
+        end
+        if line_item[:customizations][2].present?
+          customizations_2 = {name: line_item[:customizations][2][:name], url: line_item[:customizations][2][:url]}
+          result[index][:customizations_2] = customizations_2
+        end
+      end
+
+      result
+
     end
 
   end
