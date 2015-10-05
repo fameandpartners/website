@@ -73,6 +73,8 @@ var CollectionFilter = React.createClass({
             <div className='color-checkboxes'>
               <FilterOption name='all' label='View all colors' select='true'/>
               {colors}
+              <FilterOption name='Cheetah' label='Cheetah' select='false'/>
+              <FilterOption name='Rosebud' label='Rosebud' select='false'/>
             </div>
             Other colours
             <div className='select-color'>
