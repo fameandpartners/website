@@ -74,6 +74,11 @@ module Marketing
         }
       end
 
+      # customizations is an array , currently customerio does not support nested array in json properly and they are working on it
+      # that's why the json receive on customerio is not formatted correctly which lead to failed emails
+      # a hacking solution is pull out all elements in customizations array to seperate elements so customerio can read correctly
+      # Current output will be line_items[{... customizations: []....customizations_0: [], customizations_1: [], customizations_2: []...}, {}]
+
       #HACKING CUSTOMERIO
       result.each_with_index do |line_item, index|
         if line_item[:customizations][0].present?
