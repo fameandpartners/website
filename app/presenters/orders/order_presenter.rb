@@ -130,28 +130,20 @@ module Orders
           express_making:   item.making_options.present? ? item.making_options.map{|option| option.name.upcase }.join(', ') : "",
           customizations:   item.customisations.collect do |name, image_url| {name: name,url: image_url} end,
           image_url:        item.image? ? item.image_url : ''
-        }
-      end
-
-      # customizations is an array , currently customerio does not support nested array in json properly and they are working on it
-      # that's why the json received on customerio is not formatted correctly which lead to failed emails
-      # a hacking solution is pull out all elements in customizations array to seperate elements so customerio can read correctly
-      # Current output will be line_items[{... customizations: []....customizations_0: {}, customizations_1: {}, customizations_2: {}...}, {}]
-
-      #HACKING CUSTOMERIO
-      result.each_with_index do |line_item, index|
-        if line_item[:customizations][0].present?
-          customizations_0 = {name: line_item[:customizations][0][:name], url: line_item[:customizations][0][:url]}
-          result[index][:customizations_0] = customizations_0
-        end
-        if line_item[:customizations][1].present?
-          customizations_1 = {name: line_item[:customizations][1][:name], url: line_item[:customizations][1][:url]}
-          result[index][:customizations_1] = customizations_1
-        end
-        if line_item[:customizations][2].present?
-          customizations_2 = {name: line_item[:customizations][2][:name], url: line_item[:customizations][2][:url]}
-          result[index][:customizations_2] = customizations_2
-        end
+        }.merge(
+           # Convert each element of the customisations array
+           # to an explicit hash key and child hash.
+           # <INSERT Customer.io COMMENTS>
+           #
+           # e.g. Where we would like to use an array;
+           # :customizations=>[{:name=>"N/A", :url=>nil}, {:name=>"Cool", :url=>nil} ]
+           # we must use merge a hash to the original result
+           # :customisation_0=>{:name=>"N/A", :url=>nil},
+           # :customisation_1=>{:name=>"Cool", :url=>nil},
+          item.customisations.each_with_index.map do |(name, image_url), idx|
+            ["customizations_#{idx}".to_sym, {name: name, url: image_url}]
+          end.to_h
+        )
       end
 
       result
