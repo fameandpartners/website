@@ -14,17 +14,15 @@ window.SideMenu = class SideMenu
     $(@$overlay).on 'click', =>
       @close()
 
-    $(@$container).on('mousedown touchstart', (e) =>
-      if e.originalEvent.changedTouches?
-        @xDown = e.originalEvent.changedTouches[0].screenX
-        @blockScroll()
+    $(document).on('mousedown touchstart', (e) =>
+      @xDown = e.originalEvent.x
+      @blockScroll()
 
     ).on 'mouseup touchend', (e2) =>
-      if e2.originalEvent.changedTouches?
-        @xUp = e2.originalEvent.changedTouches[0].screenX
-        if @xDown > @xUp + 70
-          @close()
-        @blockScroll()
+      @xUp = e2.originalEvent.x
+      if @xDown > @xUp + 70
+        @close()
+      @blockScroll()
 
     $('#sideMenu').on 'mousewheel', (e) =>
       @blockScroll()
