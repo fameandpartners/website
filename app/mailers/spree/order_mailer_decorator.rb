@@ -20,8 +20,8 @@ Spree::OrderMailer.class_eval do
     subject = (resend ? "[#{t(:resend).upcase}] " : '')
     subject += "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
 
-    line_items = Orders::OrderPresenter.build_line_items(@order)
-    adjustments = Orders::OrderPresenter.build_adjustments(@order)
+    line_items = Marketing::OrderPresenter.build_line_items(@order)
+    adjustments = Marketing::OrderPresenter.build_adjustments(@order)
 
     user = @order.user
     user ||= Spree::User.where(email: @order.email).first
@@ -52,8 +52,8 @@ Spree::OrderMailer.class_eval do
 
     subject = "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
 
-    line_items = Orders::OrderPresenter.build_line_items(@order)
-    adjustments = Orders::OrderPresenter.build_adjustments(@order)
+    line_items = Marketing::OrderPresenter.build_line_items(@order)
+    adjustments = Marketing::OrderPresenter.build_adjustments(@order)
 
     user = @order.user
     user ||= Spree::User.where(email: @order.email).first
