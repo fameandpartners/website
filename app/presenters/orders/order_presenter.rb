@@ -89,5 +89,70 @@ module Orders
     def return_request
       @return_request ||= OrderReturnRequest.where(:order_id => order.id).first
     end
+
+    def self.build_line_items(order)
+      order.line_items.collect do |item|
+        {
+          sku:                    item.variant.sku,
+          name:                   item.variant.product.name,
+          making_options_text:    item.making_options_text,
+          options_text:           item.options_text,
+          quantity:               item.quantity,
+          variant_display_amount: item.variant.display_amount,
+          display_amount:         item.display_amount
+        }
+      end
+    end
+
+    def self.build_adjustments(order)
+      if order.adjustments.present?
+        order.adjustments.eligible.collect do |adjustments_item|
+          {
+            label:          adjustments_item.label,
+            display_amount: adjustments_item.display_amount
+          }
+        end
+      else
+        []
+      end
+    end
+
+    def self.build_line_items_for_production(order)
+      result = order.line_items.collect do |item|
+        {
+          style_num:        item.style_number,
+          size:             item.country_size,
+          adjusted_size:    item.make_size,
+          color:            item.colour_name,
+          quantity:         item.quantity,
+          factory:          item.factory,
+          deliver_date:     order.projected_delivery_date,
+          express_making:   item.making_options.present? ? item.making_options.map{|option| option.name.upcase }.join(', ') : "",
+          customizations:   item.customisations.collect do |name, image_url| {name: name,url: image_url} end,
+          image_url:        item.image? ? item.image_url : ''
+        }.merge(
+           # Convert each element of the customisations array
+           # to an explicit hash key and child hash.
+           #
+           # Customizations is an array , currently customerio does not support nested array in json properly and they are working on it
+           # that's why the json receive on customerio is not formatted correctly which lead to failed emails
+           # a hacking solution is pull out all elements in customizations array to seperate elements so customerio can read correctly
+           # Current output will be line_items[{... customizations: []....customizations_0: [], customizations_1: [], customizations_2: []...}, {}]
+           #
+           # e.g. Where we would like to use an array;
+           # :customizations=>[{:name=>"N/A", :url=>nil}, {:name=>"Cool", :url=>nil} ]
+           # we must use merge a hash to the original result
+           # :customizations_0=>{:name=>"N/A", :url=>nil},
+           # :customizations_1=>{:name=>"Cool", :url=>nil},
+          item.customisations.each_with_index.map do |(name, image_url), idx|
+            ["customizations_#{idx}".to_sym, {name: name, url: image_url}]
+          end.to_h
+        )
+      end
+
+      result
+
+    end
+
   end
 end
