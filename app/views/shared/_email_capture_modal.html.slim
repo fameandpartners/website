@@ -76,10 +76,8 @@
           .col-sm-5.col-inline.full-form
             - if promocode == 'birthdaybabe'
               = link_to 'Redeem via Facebook', fb_auth_path(show_promocode_modal: encode(promocode), redeem_via_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
-            - elsif campaign_uuid == 'auto_apply_promo'
-              = link_to 'Redeem via Facebook', fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
             - else
-              = link_to 'Redeem via Facebook', fb_auth_path(redeem_via_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
+              = link_to 'Redeem via Facebook', fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
           .col-sm-2.col-inline.full-form
             .or-rhombus: .rhombus: .rhombus-text-holder: .rhombus-text or
           .col-sm-8.col-inline
