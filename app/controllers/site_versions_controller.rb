@@ -4,14 +4,7 @@ class SiteVersionsController < ApplicationController
   def show
     @current_site_version = SiteVersion.by_permalink_or_default(params[:id])
 
-    session[:site_version] = @current_site_version.code
-
-    if user = try_spree_current_user
-      user.update_site_version(@current_site_version)
-    end
-
-    # note. after this method we should transfer directly to new page, otherwise current order will be lost
-    current_order.use_prices_from(@current_site_version)
+    set_site_version(site_version_code: @current_site_version.code)
 
     redirect_to previous_or_root_url(@current_site_version)
   end
