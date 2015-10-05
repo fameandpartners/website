@@ -8,6 +8,7 @@
 <style type="text/css">
   #modal_generator input[type=text] {
     width:100%!important;
+    min-width:10rem!important;
   }
   #modal_generator label {
     margin-bottom:1rem!important;
@@ -142,6 +143,8 @@
 
       var colSpan = extraInput ? 1 : 2;
 
+      var helpText = <span>{this.props.help}</span>;
+
       var textInput = <td colSpan={colSpan}>
           <input
               type="text"
@@ -149,6 +152,7 @@
               placeholder={placeholder}
               defaultValue={this.props.defaultValue}
               onChange={this.handleChange} />
+              {helpText}
         </td>;
 
       return (
@@ -199,7 +203,7 @@
       defaultValue: decodedDefaultParam('pc')
     }, {
       label: "template name",param: "tn", required: false, encoded: true,  type: 'string',
-      defaultValue: decodedDefaultParam('tn')
+      defaultValue: decodedDefaultParam('tn'), help: '"signup" for email and facebook, "default" for email capture form, "blank" for empty html'
     }, {
       label: "heading",    param: "h",   required: false, encoded: true,  type: 'string',
       defaultValue: decodedDefaultParam('h')

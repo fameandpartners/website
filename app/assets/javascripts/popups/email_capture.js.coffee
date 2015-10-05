@@ -1,3 +1,7 @@
+# Deprecated in favour of `app/assets/javascripts/partials/email_capture_modal.js.coffee`
+# Still used in a couple of landing pages and statics via the
+# intermediate shared partial `app/views/shared/_marketing_pop_js.html.slim`
+# TODO - DELETE
 window.popups or= {}
 
 window.popups.EmailCaptureModalPopup = class EmailCaptureModalPopup
@@ -56,4 +60,3 @@ window.popups.EmailCaptureModalPopup = class EmailCaptureModalPopup
 
     window.onresize = (event) =>
       @container.find('.modal-container').center()      
-      

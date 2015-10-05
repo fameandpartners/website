@@ -34,6 +34,21 @@ class Campaigns::EmailCaptureController < ApplicationController
           order: current_order,
           code: params[:promocode]
         ).apply
+
+        # A simpler test for "did the promocode apply?"
+        #
+        # Note that promocodes apply to a cart, but are not
+        # considered 'eligible' unless there are items
+        # in the cart for them to be applied to.
+        unless current_order.normalized_coupon_code == params[:promocode]
+          NewRelic::Agent.notice_error(
+            "Failed to apply modal promocode to cart",
+            email:        params[:email],
+            promocode:    params[:promocode],
+            order_number: current_order.number,
+            reason:       service.message
+          )
+        end
       end
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)
