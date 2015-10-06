@@ -18,7 +18,6 @@ Spree::Product.class_eval do
 
   has_many :moodboard_items, foreign_key: :spree_product_id
   has_many :accessories, class_name: 'ProductAccessory', foreign_key: :spree_product_id
-  has_many :videos, class_name: 'ProductVideo', foreign_key: :spree_product_id
 
   has_many :making_options, foreign_key: :product_id, class_name: 'ProductMakingOption'
 
@@ -141,30 +140,6 @@ Spree::Product.class_eval do
       end
       true
     end
-  end
-
-  def video_url
-    @video_url ||= begin
-      videos = self.videos_json
-      video = videos.find{|i| i[:default]} || videos.first
-      video.present? ? video[:video_url] : video_url_from_property
-   end
-  end
-
-  def videos_json
-    @videos_json ||= self.videos.includes(:color).map do |product_video|
-      {
-        default: product_video.is_master?,
-        color: (product_video.color.present? ? product_video.color.name : nil),
-        video_url: product_video.video_url
-      }
-    end
-  end
-
-  def video_url_from_property
-    video_id = self.property('video_id')
-    return nil if video_id.blank?
-    "http://player.vimeo.com/video/#{video_id}?title=0&byline=0&portrait=0&autoplay=0&loop=1"
   end
 
   def colors

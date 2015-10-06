@@ -4,15 +4,12 @@ ruby:
  colors  = @product_variants.map{|t| t[:color].to_s}.uniq.sort
  enabled_tabs = ['photos']
  enabled_tabs.push('inspiration') if @product.celebrity_inspiration
- enabled_tabs.push('video') if @product.video_url.present?
 
 .product-page.grid-container
   .grid-7
     .tabs
       ul.tabs-links
         li.active = link_to 'Photos', '#photos'
-        - if enabled_tabs.include?('video')
-          li = link_to 'Video', '#videos'
       #photos.tab-content
         .tab-content-inner
           .photos-carousel
@@ -28,9 +25,6 @@ ruby:
               span.icon-zoom-in
             / = image_tag 'noimage/large.png', alt: ''
             = image_tag '_sample/category-grey-2.jpg'
-      - if enabled_tabs.include?('video')
-        #videos.tab-content
-          == product_video(@product, width: 518, height: 330)
 
   .grid-5
     .product-info
