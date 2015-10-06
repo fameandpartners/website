@@ -30,10 +30,11 @@ class Campaigns::EmailCaptureController < ApplicationController
 
     begin
       if params[:promocode].present?
-        UserCart::PromotionsService.new(
+        service = UserCart::PromotionsService.new(
           order: current_order,
           code: params[:promocode]
-        ).apply
+        )
+        service.apply
 
         # A simpler test for "did the promocode apply?"
         #
