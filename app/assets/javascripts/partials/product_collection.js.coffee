@@ -81,13 +81,11 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       $('.filter-col').removeClass("slide-in") if e.clientX > closeX and $('.filter-col').hasClass("slide-in")
 
    $(document).on('mousedown touchstart', (e) =>
-      if e.originalEvent.changedTouches?
-        @xDown = e.originalEvent.changedTouches[0].screenX
+      @xDown = e.originalEvent.x
     ).on 'mouseup touchend', (e2) =>
-      if e2.originalEvent.changedTouches?
-        @xUp = e2.originalEvent.changedTouches[0].screenX
-        if @xDown > @xUp and $('.filter-col').hasClass("slide-in")
-          $('.filter-col').removeClass("slide-in")
+      @xUp = e2.originalEvent.x
+      if @xDown > @xUp and $('.filter-col').hasClass("slide-in")
+        $('.filter-col').removeClass("slide-in")
 
 
   clearAllOptions: =>
