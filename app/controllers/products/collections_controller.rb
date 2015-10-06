@@ -29,8 +29,8 @@
 
 class Products::CollectionsController < Products::BaseController
   layout 'redesign/application'
-  attr_reader :page, :page_presenter
-  helper_method :page_presenter
+  attr_reader :page, :banner
+  helper_method :page, :banner
 
   before_filter :redirect_undefined,
                 :canonicalize_sales,
@@ -74,7 +74,7 @@ class Products::CollectionsController < Products::BaseController
       current_path = LocalizeUrlService.remove_version_from_url(request.path)
       @page = Revolution::Page.find_for(current_path, '/dresses/*')
       page.locale = current_site_version.locale
-      @page_presenter = Revolution::PagePresenter.new(page, params)
+      @banner = Revolution::PageBannerDecorator.new(page, params)
     end
 
     def punch_products

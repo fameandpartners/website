@@ -3,8 +3,8 @@
 
 = render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
 
-- if page_presenter.display_banner?
-  .page-title.default.category-header style="background-image: url('#{page_presenter.banner_image}')"
+- if banner.display?
+  .page-title.default.category-header style="background-image: url('#{banner.image}')"
     .container
       .page-title--details
         h1.no-padding-bottom = params[:lpt]

@@ -1,26 +1,25 @@
 module Revolution
-  class PagePresenter
+  class PageBannerDecorator
     attr_accessor :page, :params
-    delegate :heading, :sub_heading, :get, :path, :to => :page
 
     def initialize(page, params)
       @page = page
       @params = params
     end
 
-    def banner_image
-      if custom_banner?
+    def image
+      if custom?
         "//#{configatron.asset_host}/pages#{page.path}/#{custom_banner}.jpg"
       else
         page.banner_image
       end
     end
 
-    def display_banner?
+    def display?
       custom_banner != 'none'
     end
 
-    def custom_banner?
+    def custom?
       custom_banner.present?
     end
 

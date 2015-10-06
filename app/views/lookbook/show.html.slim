@@ -5,9 +5,9 @@
 
 .page-content
   ul.rslides
-    - (1..page_presenter.get(:image_count)).each do |n|
+    - (1..page.get(:image_count)).each do |n|
       li
-        = image_tag "//#{configatron.asset_host}#{page_presenter.path}/#{n}.jpg", alt: "#{page_presenter.heading} #{n}", class: 'img-responsive portrait-img'
+        = image_tag "//#{configatron.asset_host}#{page.path}/#{n}.jpg", alt: "#{page.heading} #{n}", class: 'img-responsive portrait-img'
 
   .page-content.products-collections.category
     = render :partial => 'filters_sort', :locals => { :hidden => true }
