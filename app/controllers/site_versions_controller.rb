@@ -1,5 +1,5 @@
 class SiteVersionsController < ApplicationController
-  skip_before_filter :check_site_version
+  skip_before_filter :enforce_param_site_version
 
   def show
     @current_site_version = SiteVersion.by_permalink_or_default(params[:id])

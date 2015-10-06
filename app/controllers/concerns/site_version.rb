@@ -6,7 +6,7 @@ module Concerns
       attr_writer :current_site_version
 
       before_filter :show_locale_warning
-      prepend_before_filter :check_site_version, unless: [:on_checkout_path, :request_not_get_or_ajax]
+      prepend_before_filter :enforce_param_site_version, unless: [:on_checkout_path, :request_not_get_or_ajax]
 
       helper_method :current_site_version
     end
@@ -20,7 +20,7 @@ module Concerns
       )
     end
 
-    def check_site_version
+    def enforce_param_site_version
       if site_version_param != current_site_version.code
         param_site_version = ::SiteVersion.by_permalink_or_default(site_version_param)
         set_site_version(site_version_code: param_site_version.code)
