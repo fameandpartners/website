@@ -7,5 +7,13 @@ module Preferences
     def value_proposition
       preference_value(value_proposition_key)
     end
+
+    def shipping_message_key
+      "#{site_version.code}_shipping_message_key"
+    end
+
+    def shipping_message
+      preference_value(shipping_message_key)
+    end
   end
 end

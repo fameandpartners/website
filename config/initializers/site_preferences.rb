@@ -27,6 +27,8 @@ Spree::AppConfiguration.class_eval do
     shopping_bag = Preferences::ShoppingBag.new(site_version)
     preference shopping_bag.value_proposition_key, :string, default: "<i class='coathanger'></i><span>Free Styling Session</span><i class='plane'></i><span>Free delivery in US, CANADA & UK </span><i class='mobile'></i><span>24/7 Customer Service</span>"
 
+    preference shopping_bag.shipping_message_key, :string, default: "Please note there will be no shipping between the 1st-10th October due to international public holidays."
+
   end if SiteVersion.table_exists?
 end
 
