@@ -86,6 +86,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
       @fbPushTracking()
       window.track.event('LandingPageModal', 'Submitted', @opts.promocode)
+      window.location.reload()
 
   fbPushTracking: =>
     if @opts.fb
