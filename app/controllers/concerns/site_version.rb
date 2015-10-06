@@ -22,8 +22,8 @@ module Concerns
 
     def enforce_param_site_version
       if site_version_param != current_site_version.code
-        param_site_version = ::SiteVersion.by_permalink_or_default(site_version_param)
-        set_site_version(site_version_code: param_site_version.code)
+        new_site_version = ::SiteVersion.by_permalink_or_default(site_version_param)
+        set_site_version(new_site_version)
       end
     end
 
@@ -46,16 +46,18 @@ module Concerns
     end
 
     # TODO: This site version concern and `#set_site_version` method is doing too much. Time to extract this...
-    def set_site_version(site_version_code:)
-      @current_site_version  = ::SiteVersion.by_permalink_or_default(site_version_code)
-      session[:site_version] = @current_site_version.code
+    def set_site_version(new_site_version = nil)
+      raise ArgumentError unless new_site_version
+
+      @current_site_version  = new_site_version
+      session[:site_version] = new_site_version.code
 
       if (user = current_spree_user)
-        user.update_attribute(:site_version_id, @current_site_version.id)
+        user.update_attribute(:site_version_id, new_site_version.id)
       end
 
       if (order = session_order)
-        order.use_prices_from(@current_site_version)
+        order.use_prices_from(new_site_version)
       end
     end
 
