@@ -121,11 +121,9 @@ group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
   gem 'awesome_print'
-  gem 'capybara'
   gem 'compass'
   gem 'launchy', '2.2.0'
   gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
-  gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
   # gem 'minitest'
   gem 'net-ssh', '~> 2.7.0'
   gem 'oink'
@@ -138,6 +136,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'capybara', '~> 2.5.0'
   gem 'database_cleaner', '0.9.1'
   gem 'factory_girl_rails', '4.2.1'
   gem 'rspec-activemodel-mocks'
