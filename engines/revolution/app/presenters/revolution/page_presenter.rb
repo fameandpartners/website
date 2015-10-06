@@ -1,7 +1,7 @@
 module Revolution
   class PagePresenter
     attr_accessor :page, :params
-    delegate :heading, :sub_heading, :to => :page
+    delegate :heading, :sub_heading, :get, :path, :to => :page
 
     def initialize(page, params)
       @page = page
