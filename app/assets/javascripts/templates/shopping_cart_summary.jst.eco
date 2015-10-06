@@ -66,6 +66,10 @@
 
 <div class='shopping-bag-text-wrapper'>
   <div class="row shopping-bag-text" >
+    <%- @shipping_message %>
+  </div>
+
+  <div class="row shopping-bag-text" >
     <%- @value_proposition %>
   </div>
 </div>
