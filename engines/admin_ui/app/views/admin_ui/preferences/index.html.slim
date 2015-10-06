@@ -82,4 +82,12 @@
                 .help-block.m-b-none
                   | Value proposition text that will be shown on shopping bag, right under the payment button.
 
+              / ShippingMessage
+              .form-group
+                label
+                  | Shipping Message
+                = text_field :preferences, shopping_bag.shipping_message_key, value: shopping_bag.shipping_message, class: 'form-control'
+                .help-block.m-b-none
+                  | Shipping message text that will be shown on the shopping bag as well as the checkout page.
+
             button.btn.btn-primary type="submit" Save changes
