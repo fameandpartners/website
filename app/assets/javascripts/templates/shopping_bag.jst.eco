@@ -92,6 +92,7 @@
     <% end %>
     <div class="col-lg-12 no-padding-left no-padding-lg text-center" style="margin-top:10px;margin-bottom:15px">
       <img id="buyWithMasterPass" src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_180x042px.png" alt="Buy with MasterPass" <% if @cart.item_count != 0: %>class="btn"<% end %>>
+      <p><a href="http://www.mastercard.com/mc_us/wallet/learnmore/en" target="_blank">Learn More</a></p>
     </div>
   <% end %>
 </div>
