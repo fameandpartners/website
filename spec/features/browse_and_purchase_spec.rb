@@ -67,9 +67,7 @@ describe 'browse and purchase process', :type => :feature do
   end
 
   context 'authenticated' do
-    before(:each) do
-      login_user
-    end
+    before(:each) { login_user }
 
     describe 'browse' do
       # TODO - Actually make this a test. :)

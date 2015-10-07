@@ -6,6 +6,7 @@ module Concerns
       attr_writer :current_site_version
 
       before_filter :show_locale_warning
+      before_filter :guarantee_session_site_version
       prepend_before_filter :enforce_param_site_version, unless: [:on_checkout_path, :request_not_get_or_ajax]
 
       helper_method :current_site_version
@@ -18,6 +19,10 @@ module Concerns
           current_site_version:      current_site_version,
           session_site_version_code: session[:site_version]
       )
+    end
+
+    def guarantee_session_site_version
+      session[:site_version] = current_site_version.code
     end
 
     def enforce_param_site_version
