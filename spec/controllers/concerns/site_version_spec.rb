@@ -68,7 +68,17 @@ describe Concerns::SiteVersion, type: :controller do
   end
 
   describe '#current_site_version' do
-    pending 'This method needs refactoring'
+    let(:au_site_version) { build_stubbed(:site_version, permalink: 'au') }
+    let(:finder_double) { double('FindUsersSiteVersion instance', get: au_site_version) }
+
+    it 'calls FindUsersSiteVersion service object' do
+      expect(FindUsersSiteVersion).to receive(:new).with(user: nil, url_param: 'au', cookie_param: 'us').and_return(finder_double)
+
+      controller.params[:site_version]  = 'au'
+      controller.session[:site_version] = 'us'
+
+      expect(controller.current_site_version).to eq(au_site_version)
+    end
   end
 
   describe '#site_version_param' do
