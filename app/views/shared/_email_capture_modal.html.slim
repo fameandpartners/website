@@ -102,6 +102,37 @@
           .col-sm-12.col-inline.full-form.fb-form
             = link_to fb_text, fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
 
+  - elsif template_name == 'new-modal-thank-you'
+    #modal-popup-content-template
+      .vex-footer
+        .six-icons
+          .row
+            .popup-icon
+              .container
+                .icon.icon-design
+                | DESIGN INPUT
+            .popup-icon
+              .container
+                .icon.icon-styles
+                | CUSTOM STYLES
+            .popup-icon
+              .container
+                .icon.icon-less
+                | LESS WASTAGE
+          .row
+            .popup-icon
+              .container
+                .icon.icon-fit
+                | FIT GUARANTEE
+            .popup-icon
+              .container
+                .icon.icon-colours
+                | CUSTOM COLOURS
+            .popup-icon
+              .container
+                .icon.icon-trends
+                | NEW TRENDS EACH WEEK
+
   - else # default, support legacy
     #modal-popup-content-template.hidden
       .vex-footer.vex-footer-email
