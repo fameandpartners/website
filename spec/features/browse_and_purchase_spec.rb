@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'browse and purchase process', :type => :feature do
-
   let(:taxonomy)              { Spree::Taxonomy.create!(:name => 'Style') }
   let(:taxon)                 { create(:taxon, :name => 'Style') }
   let(:styles)                { %w{Strapless Lace V-Neck} }
@@ -67,11 +66,12 @@ describe 'browse and purchase process', :type => :feature do
     create_data 
   end
 
-  context "authenticated" do
-    include_context 'authenticated_user'
-    
-    describe 'browse' do
+  context 'authenticated' do
+    before(:each) do
+      login_user
+    end
 
+    describe 'browse' do
       # TODO - Actually make this a test. :)
       xit 'should add a product to cart' do
         visit '/us/'     
@@ -80,8 +80,6 @@ describe 'browse and purchase process', :type => :feature do
 
         # visit "dresses/#{p.permalink}/"
       end
-
-
     end
   end
 end
