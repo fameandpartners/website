@@ -1,0 +1,1 @@
+Spree::Taxon.where(name: 'Print').first.update_attributes(taxonomy_id: Spree::Taxonomy.where(name: 'Style').first.id)
