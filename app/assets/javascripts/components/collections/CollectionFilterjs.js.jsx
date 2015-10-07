@@ -47,21 +47,14 @@ var CollectionFilter = React.createClass({
 
     currency = this.props.currency
     if (currency == 'usd') {
-      priceList = ["$0 - $199", "$200 - $299", "$300 - $399", "$400+"]
+      priceList = [{min: 0,max :199}, {min:200, max:299}, {min: 300, max: 399}, {min: 400, max: null}]
     } else {
-      priceList = ["$0 - $199", "$200 - $299", "$300 - $399", "$400+"]
+      priceList = [{min: 0,max :199}, {min:200, max:299}, {min: 300, max: 399}, {min: 400, max: null}]
     }
 
     prices = priceList.map(function(price){
-      pricePair = price.replace(/\s/g, '').split("-")
-      if (pricePair.length == 2) {
-        priceMin  = pricePair[0].replace("$","")
-        priceMax  = pricePair[1].replace("$","")
-      } else {
-        priceMin  = pricePair[0].replace("$","").replace("+","")
-        priceMax  = null
-      }
-      return (<FilterOption name={price} label={price} priceMin={priceMin} priceMax={priceMax} select='false'/>)
+      if (price.max != null) return (<FilterOption name={price} label={"$"+price.min+" - $"+price.max} priceMin={price.min} priceMax={price.max} select='false'/>)
+      else return (<FilterOption name={price} label={"$"+price.min+"+"} priceMin={price.min} select='false'/>)
     });
 
     return (
