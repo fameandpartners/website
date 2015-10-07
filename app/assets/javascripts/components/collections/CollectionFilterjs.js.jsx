@@ -53,8 +53,8 @@ var CollectionFilter = React.createClass({
     }
 
     prices = priceList.map(function(price){
-      if (price.max != null) return (<FilterOption name={price} label={"$"+price.min+" - $"+price.max} priceMin={price.min} priceMax={price.max} select='false'/>)
-      else return (<FilterOption name={price} label={"$"+price.min+"+"} priceMin={price.min} select='false'/>)
+      if (price.max != null) return (<FilterOption name={"$"+price.min+" - $"+price.max} label={"$"+price.min+" - $"+price.max} priceMin={price.min} priceMax={price.max} select='false'/>)
+      else return (<FilterOption name={"$"+price.min+"+"} label={"$"+price.min+"+"} priceMin={price.min} select='false'/>)
     });
 
     return (
