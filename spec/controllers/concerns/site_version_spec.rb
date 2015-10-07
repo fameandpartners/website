@@ -14,6 +14,20 @@ describe Concerns::SiteVersion, type: :controller do
   end
 
   describe 'before filters' do
+    describe '#guarantee_session_site_version' do
+      let(:au_site_version) { build_stubbed(:site_version, permalink: 'au') }
+
+      before(:each) do
+        allow(controller).to receive(:current_site_version).and_return(au_site_version)
+      end
+
+      it 'sets site version session variable to current site version code' do
+        expect(session[:site_version]).to be_nil
+        get :index
+        expect(session[:site_version]).to eq 'au'
+      end
+    end
+
     describe '#enforce_param_site_version' do
       before { rememoize(SiteVersion, :@default) }
 
