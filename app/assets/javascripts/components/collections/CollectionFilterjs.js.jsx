@@ -47,9 +47,9 @@ var CollectionFilter = React.createClass({
 
     currency = this.props.currency
     if (currency == 'usd') {
-      priceList = ["$0 - $100", "$100 - $300", "$300 - $500", "$500+"]
+      priceList = ["$0 - $199", "$200 - $299", "$300 - $399", "$400+"]
     } else {
-      priceList = ["$0 - $100", "$100 - $300", "$300 - $500", "$500+"]
+      priceList = ["$0 - $199", "$200 - $299", "$300 - $399", "$400+"]
     }
 
     prices = priceList.map(function(price){
@@ -77,6 +77,12 @@ var CollectionFilter = React.createClass({
         <br/>
 
         <div className='three-filters'>
+          <b>PRICE</b>
+          <div className='filter-area filter-area-prices'>
+            <FilterOption name='all' label='View all prices' select='true'/>
+            {prices}
+          </div>
+
           <b>STYLES</b>
           <div className='filter-area filter-area-styles short-height'>
             <FilterOption name='all' label='View all styles' select='true'/>
@@ -109,12 +115,6 @@ var CollectionFilter = React.createClass({
           <div className='filter-area filter-area-shapes'>
             <FilterOption name='all' label='View all shapes' select='true'/>
             {shapes}
-          </div>
-
-          <b>PRICE</b>
-          <div className='filter-area filter-area-prices'>
-            <FilterOption name='all' label='View all prices' select='true'/>
-            {prices}
           </div>
 
         </div>
