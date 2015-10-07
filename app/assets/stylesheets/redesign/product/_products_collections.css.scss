@@ -373,6 +373,15 @@
 			margin-left: 5px;
 		}
 	}
+
+	@include mobile {
+
+		& {
+			padding-top: 5px;
+		}
+
+	}
+
 }
 
 .on-sale * {
@@ -418,6 +427,42 @@
 			color:#FFFFFF;
 		}
 	}
+
+	@include mobile {
+
+		& {
+			height: auto;
+			padding: 20px 0;
+			background-image: none !important;
+
+			&,
+			&.category-header {
+				background: $c-neutral-6;
+			}
+
+			h1, 
+			p {
+				color: $c-neutral-white;
+			}
+
+			h1 {
+				margin-bottom: 0;
+				font-size: 2.4rem;
+			}
+
+			p {
+				display: none;
+			}
+
+			.page-title--details {
+				width: auto;
+				padding: 0;
+			}
+
+		}
+
+	}
+
 }
 
 .details {
