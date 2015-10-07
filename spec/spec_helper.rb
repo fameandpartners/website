@@ -19,10 +19,19 @@ require 'ffaker'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
-RSpec.configure do |config|
-  config.include(FactoryGirl::Syntax::Methods)
-  config.include(Rails.application.routes.url_helpers)
+def seed_site_zone
+  zone = Spree::Zone.create(name: 'us')
+  SiteVersion.create(
+      permalink: 'us',
+      name:      'us',
+      zone_id:   zone.id,
+      currency:  'USD',
+      locale:    'en-US',
+      default:   true
+  )
+end
 
+RSpec.configure do |config|
   config.alias_it_should_behave_like_to :it_will, 'it will'
 
   # == Mock Framework
@@ -38,4 +47,8 @@ RSpec.configure do |config|
 
   # Use DatabaseCleaner instead of ActiveRecord transactional
   config.use_transactional_fixtures = false
+
+  config.before(:suite) do
+    seed_site_zone
+  end
 end
