@@ -1,0 +1,79 @@
+/* [slick-carousel]
+-------------------------------------------------------*/
+.slick-loading .slick-list {
+  background: $c-neutral-white url('ajax-loader.gif') center center no-repeat;
+}
+
+.slick-slider .item-wrap:focus {
+  outline: 0;
+}
+
+.slick-arrow {
+  position: absolute;
+  display: block;
+  height: 32px;
+  width: 32px;
+  top: 50%;
+  margin-top: -16px;
+  padding: 0;
+  line-height: 0px;
+  font-size: 0px;
+  font-family: 'icomoon_fame_2015';
+  color: transparent;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  z-index: 1;
+
+  &:before {
+    line-height: 1;
+    font-size: 32px;
+    color: $c-neutral-black;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  &:hover, 
+  &:focus {
+      color: transparent;
+      background: transparent;
+      outline: none;
+
+      &:before {
+          opacity: .8;
+      }
+
+  }
+
+  &.slick-disabled:before {
+      opacity: .4;
+  }
+
+}
+
+.slick-prev {
+  left: 0;
+
+  &:before {
+    content: '\e630';
+  }
+
+}
+
+.slick-next {
+  right: 0;
+
+  &:before {
+    content: '\e631';
+  }
+
+}
+
+.slick-slider.skin-light {
+
+  .slick-arrow:before {
+    color: $c-neutral-white;
+  }
+
+}

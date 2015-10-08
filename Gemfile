@@ -21,6 +21,7 @@ gem 'default_value_for'
 gem 'tire'
 gem 'redis-rails'
 gem 'autoprefixer-rails'
+gem "bower-rails", "~> 0.10.0"
 
 # Monitoring & Events
 gem 'newrelic_rpm'
@@ -124,8 +125,6 @@ group :development, :test do
   gem 'poltergeist'
   gem 'rack_session_access'
   gem 'compass'
-  gem 'database_cleaner', '0.9.1'
-  gem 'factory_girl_rails', '4.2.1'
   gem 'launchy', '2.2.0'
   gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
   gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
@@ -133,15 +132,22 @@ group :development, :test do
   gem 'net-ssh', '~> 2.7.0'
   gem 'oink'
   gem 'quiet_assets'
-  gem 'rspec-activemodel-mocks'
-  gem 'rspec-collection_matchers'
   gem 'rspec-rails', '~> 3.2'
-  gem 'shoulda-matchers'
-  gem 'timecop'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'thin'
   gem 'meta_request'
+end
+
+group :test do
+  gem 'database_cleaner', '0.9.1'
+  gem 'factory_girl_rails', '4.2.1'
+  gem 'rspec-activemodel-mocks'
+  gem 'rspec-collection_matchers'
+  gem 'shoulda-matchers'
+  gem 'timecop'
+  gem 'vcr', '~> 2.9.3'
+  gem 'webmock', '~> 1.21.0'
 end
 
 group :staging, :development do

@@ -15,8 +15,6 @@ Spree::User.class_eval do
   validates_attachment_content_type :avatar, content_type: ALLOWED_AVATAR_FILE_TYPES
   validates_attachment_size :avatar, in: ALLOWED_AVATAR_FILE_SIZE
 
-  has_many :facebook_datas,
-           foreign_key: :spree_user_id
   before_post_process :randomize_file_name
 
   def fullname

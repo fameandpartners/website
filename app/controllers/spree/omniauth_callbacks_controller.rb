@@ -57,9 +57,6 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         sign_in :spree_user, user
 
         sign_up_reason = session.delete(:sign_up_reason)
-        if sign_up_reason.eql?('bridesmaid_party')
-          try_apply_bridesmaid_party_callback(user)
-        end
 
         redirect_to after_sign_in_path_for(user), flash: { just_signed_up: true }
       else
@@ -105,19 +102,4 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def after_omniauth_failure_path_for(scope)
     new_spree_user_session_path()
   end
-
-  private
-
-  def try_apply_bridesmaid_party_callback(user)
-    if session[:bridesmaid_party_membership_id]
-      membership = BridesmaidParty::Member.find(session[:bridesmaid_party_membership_id])
-      if membership
-        membership.update_column(:spree_user_id, user.id)
-        session[:spree_user_return_to] = main_app.bridesmaid_party_moodboard_path(user_slug: membership.event.spree_user.slug)
-      end
-    else
-      session[:spree_user_return_to] = main_app.bridesmaid_party_info_path
-    end
-  end
-
 end

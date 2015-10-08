@@ -141,7 +141,7 @@ module Returns
 
               matched_line_item = most_similar_item
 
-              binding.pry unless matched_line_item.present?
+              # binding.pry unless matched_line_item.present?
 
               # binding.pry unless Date.parse(mmr.return_requested_on) < Date.parse('2014.07.01')
               #
@@ -221,7 +221,7 @@ module Returns
             warn "(#{mmr.row_number}) No Matched Returnable for Order #{mmr.spree_order_number}}"
           end
         rescue StandardError => e
-          binding.pry
+          NewRelic::Agent.notice_error(e)
         end
       end
     end

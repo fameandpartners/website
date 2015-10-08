@@ -23,7 +23,7 @@ module Spree
       end
 
       def destroy
-        @product.making_options.where(id: params[:id]).destroy_all
+        @product.making_options.where(id: params[:id]).update_all(active: false)
       end
 
         private

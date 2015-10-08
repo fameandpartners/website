@@ -1,7 +1,7 @@
 //---------
 // Our code
 //---------
-//= require jquery_ujs
+//  require jquery_ujs
 //= require jquery-ui/datepicker
 //= require jquery-fileupload/vendor/jquery.ui.widget
 //= require jquery-fileupload/jquery.iframe-transport
@@ -16,6 +16,9 @@
 //= require react
 //= require react_ujs
 //= require components
+
+// node modules
+//= require slick-carousel/slick/slick.min.js
 
 //---------------------------
 // Spree have this by default

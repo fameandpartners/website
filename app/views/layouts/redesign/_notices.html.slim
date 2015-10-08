@@ -4,9 +4,8 @@
       span.medium.banner-title
         .center-block
           = current_sale.sitewide_message
-          '
-          = link_to 'Shop now!', dresses_path, class: 'text-highlight',  style: 'color:white;text-decoration:underline'
-
+          '          
+          = link_to 'Shop now!', mystyle_landing_page_path(lpi: 'none', sale: 'all', limit: 99), class: 'text-highlight',  style: 'color:white;text-decoration:underline'
 
   / TODO - Refactor how we apply email reminders
   - if Features.active?(:send_promotion_email_reminder)

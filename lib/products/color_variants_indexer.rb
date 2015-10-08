@@ -93,7 +93,7 @@ module Products
               },
               can_be_customized:  product.can_be_customized?,
               fast_delivery:      product.fast_delivery,
-              fast_making:        product.fast_making,
+              fast_making:        product.fast_making?,
               taxon_ids:          product.taxons.map(&:id),
               taxons:             product.taxons.map{ |tx| {id: tx.id, name: tx.name, permalink: tx.permalink} },
               price:              product.price.to_f,

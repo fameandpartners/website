@@ -105,7 +105,7 @@ ruby:
         a#close
           = image_tag('Hamburger_white.png', height: '25px')
       .main-menu
-        div#new-this-week-menu
+        div#new-this-week-menu.menu-new-this-week
           ul.nav.navbar-nav
             li.normal-item
               .text.text-back NEW THIS WEEK
@@ -125,13 +125,12 @@ ruby:
             li.grey-item
               .text SHOP BY
             li.normal-item
-              = link_to dresses_path
-                .text View all dresses
+              = link_to "View all dresses", dresses_path, class: 'text'
             li.normal-item
-              a href='#'
-                .text What's new
-            li.normal-item
-              = link_to 'Made in 48 hours', fast_making_dresses_path, class: 'text'
+              = link_to "What's new", dresses_path(:order => 'newest'), class: 'text'
+            - unless Features.active?(:getitquick_unavailable)
+              li.normal-item
+                = link_to 'Made in 48 hours', fast_making_dresses_path, class: 'text'
             li.grey-item
               .text STYLES
             li.normal-item
@@ -198,16 +197,16 @@ ruby:
                       span bambi x fame.
                   .media-wrap
                     = image_tag 'homepage/lookbook/1.jpg'
+                = link_to photo_finish_collection_path
+                  .heading.alt
+                    .inner-wrap
+                      span photo finish
+                  .media-wrap
+                    = image_tag 'homepage/lookbook/2.jpg'
                 = link_to luxe_collection_path
                   .heading.alt
                     .inner-wrap
                       span the luxe collection
-                  .media-wrap
-                    = image_tag 'homepage/lookbook/2.jpg'
-                = link_to here_comes_the_sun_collection_path
-                  .heading.alt
-                    .inner-wrap
-                      span here comes the sun
                   .media-wrap
                     = image_tag 'homepage/lookbook/3.jpg'
 
@@ -251,7 +250,7 @@ ruby:
             .arrow
               i.fa.fa-chevron-right
           li.normal-item#event-menu-open
-            .text EVENTS
+            .text SHOP BY EVENT
             .arrow
               i.fa.fa-chevron-right
           li.normal-item#lookbook-menu-open
@@ -259,10 +258,10 @@ ruby:
             .arrow
               i.fa.fa-chevron-right
           li.normal-item
-            a.text href='http://blog.fameandpartners.com' MAGAZINE
+            a.text href='http://blog.fameandpartners.com' BLOG
           - if sale_active?
             li.normal-item
-              = link_to 'SALE', mystyle_landing_page_path(lpi: 'none', sale: 'all'), class: 'text'
+              = link_to 'SALE', mystyle_landing_page_path(lpi: 'none', sale: 'all', limit: 99), class: 'text'
 
           /li.normal-item
             /.text MADE FOR YOU

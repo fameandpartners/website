@@ -23,7 +23,6 @@ Spree::Order.class_eval do
   end
 
   state_machine do
-    after_transition :to => :complete, :do => :track_user_bought_dress
     after_transition :to => :complete, :do => :project_delivery_date
   end
 
@@ -57,16 +56,6 @@ Spree::Order.class_eval do
     fabrication_states = line_items.collect {|i| i.fabrication.state if i.fabrication }.uniq
     return :processing if fabrication_states.include?(nil)
     fabrication_states.sort_by {|i| Fabrication::STATE_ORDER.index(i) }.first
-  end
-
-  # todo: this should be done in some service, order has no relation to this func
-  def track_user_bought_dress
-    # TODO: check this works
-    if self.user.bridesmaid_party_members.present?
-      Bridesmaid::CheckIsDressBoughtByMember.new(order: self).process
-    end
-  rescue Exception => e
-    # do nothing, tracking/notifying shouldn't have any issues
   end
 
   def create_shipment!

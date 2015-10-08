@@ -37,7 +37,6 @@ Spree::Product.class_eval do
                   :fabric_card_id,
                   :featured,
                   :hidden,
-                  :is_service,
                   :size_chart,
                   :zone_prices_hash,
                   :related_outerwear_ids
@@ -87,14 +86,6 @@ Spree::Product.class_eval do
 
   def cache_key
     "products/#{id}-#{updated_at.to_s(:number)}"
-  end
-
-  def service?
-    is_service?
-  end
-
-  def free_shipping?
-    is_service?
   end
 
   def images

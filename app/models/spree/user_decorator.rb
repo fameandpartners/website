@@ -9,15 +9,15 @@ Spree::User.class_eval do
 
   has_one :personalization_settings
 
-  has_many :bridesmaid_party_events, foreign_key: :spree_user_id, class_name: 'BridesmaidParty::Event', order: 'id desc'
-  has_many :bridesmaid_party_members, foreign_key: :spree_user_id, class_name: 'BridesmaidParty::Member', order: 'id desc'
-
   has_many :email_notifications, foreign_key: :spree_user_id
 
   has_attached_file :avatar
   has_one :style_profile,
           :class_name => '::UserStyleProfile',
           :foreign_key => :user_id
+
+  has_one :facebook_data, autosave: true, foreign_key: 'spree_user_id'
+  delegate :value, to: :facebook_data, prefix: true
 
   attr_accessor :skip_welcome_email,
                 :validate_presence_of_phone
@@ -126,21 +126,6 @@ Spree::User.class_eval do
     SiteVersion.where(id: self.site_version_id).first || SiteVersion.default
   end
 
-  # this logic should placed in bridesmaid module, without pollution user model
-  def is_bride?
-    bridesmaid_party_events.exists?
-  end
-
-  def can_receive_email_marketing_notification?(notification_code)
-    case notification_code
-    when 'wishlist_item_added', 'wishlist_item_added_reminder'
-      self.is_bride? ? false : true
-    else
-      # may be we should check EmailNotification here
-      true
-    end
-  end
-
   def full_name
     [first_name, last_name].reject(&:blank?).join(' ')
   end
@@ -159,5 +144,10 @@ Spree::User.class_eval do
       last_name: self.last_name,
       email: self.email
     )
+  end
+
+  def facebook_data_value
+    create_facebook_data if facebook_data.nil?
+    facebook_data.value
   end
 end

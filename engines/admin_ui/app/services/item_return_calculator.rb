@@ -23,6 +23,11 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.comments = "#{@item_return.comments}#{event.comment}\n"
   end
 
+  def advance_rejection(event)
+    @item_return.acceptance_status = :rejected
+    @item_return.comments = "#{@item_return.comments}#{event.comment}\n"
+  end
+
   def advance_record_refund(event)
     @item_return.refund_status = :completed
     @item_return.refund_method = event.refund_method
@@ -78,7 +83,6 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.received_location    = event.return_office
 
   rescue ArgumentError => e
-    #whatevers
-    binding.pry
+    NewRelic::Agent.notice_error(e)
   end
 end

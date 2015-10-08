@@ -61,13 +61,6 @@ en:
         style_quiz_completed_reminder: 'More Dresses! Plus a FREE STYLING SESSION'
         wishlist_item_added: 'We totally heart that dress too!'
         wishlist_item_added_reminder: "Here's 20% OFF the dress in your wishlist!"
-      bridesmaid_marketing:
-        share_completed_bridesmaid_profile: "It's time to reveal your secret!"
-        bridesmaid_member_not_purchased: "Forgetting something? Tick 'Bridesmaids dresses' off your list & purchase with 15% OFF!"
-        concierge_service_offer: "Help us, help you! For just $99 we can take the stress & organise bridesmaids dresses"
-        reminder_to_brides: "Now you have the ring, it's time for a dress! 15% OFF your engagement dress!"
-        promo_for_bride_with_bridesmaids: "Help has arrived. Take %{discount}% OFF your bridesmaids' dresses & take away the stress!"
-        free_styling_lesson_for_maid_of_honour: "Maid of Honour duties taking a toll? Here's a FREE styling session to kick start the Bridal Party!"
       admins:
         custom_dress: 'Custom Dress | %{full_name} %{id}'
   activerecord:
@@ -116,12 +109,6 @@ en:
     item_count:
       name: 'Item count'
       description: "Order's items count should be greater than"
-    bridesmaids_count:
-      name: 'Bridesmaids Count'
-      description: "Registered bridesmaids number should be greater than"
-    bridesmaid_party_member:
-      name: 'Bridesmaid Party'
-      description: "User is bride or bridesmaid"
   shipment_states:
     pending: Your dress is with a seamstress
     ready: Your dress is with a seamstress

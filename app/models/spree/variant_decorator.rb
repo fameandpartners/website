@@ -211,6 +211,7 @@ Spree::Variant.class_eval do
     end
   end
 
+  # Used as a callback, so must return a truthy value to avoid breaking the save
   def push_changed_prices_to_variants
     return true unless is_master
     changed_prices = prices.select(&:changed?)
@@ -220,10 +221,12 @@ Spree::Variant.class_eval do
       changed_prices.each do |master_price|
         variant_price = v.prices.where(currency: master_price.currency).first_or_initialize
 
-        if variant_price.amount.nil? || variant_price.amount == master_price.amount_was
-          variant_price.amount = master_price.amount
-          variant_price.save
-        end
+        # TODO - If we ever move to variants with different prices to the master
+        #        ( e.g. variants with extra price for extra sizes or explicit variants
+        #        for custom colours ) then this code will need to be cleverer about not
+        #        assuming all prices on all variants should be the same. (See diff)
+        variant_price.amount = master_price.amount
+        variant_price.save
       end
     end
 

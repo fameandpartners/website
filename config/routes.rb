@@ -100,6 +100,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/lookbook/jedi-cosplay' => redirect('/lookbook/make-a-statement')
     get '/lookbook/make-a-statement' => 'products/collections#show', :permalink => 'make-a-statement', :as => :make_a_statement_collection
+    get '/lookbook/photo-finish' => 'products/collections#show', :permalink => 'photo-finish', :as => :photo_finish_collection
     get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
 
     get '/lookbook/garden-weeding' => redirect('/lookbook/garden-wedding')
@@ -132,7 +133,12 @@ FameAndPartners::Application.routes.draw do
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
 
 
-    get '/getitquick' => 'products/collections#show', defaults: { fast_making: true }, as: 'fast_making_dresses'
+    # A long tradition of hacking shit in.
+    if Features.active?(:getitquick_unavailable)
+      get '/getitquick' => 'hacky_messages#getitquick_unavailable', :as => :fast_making_dresses
+    else
+      get '/getitquick' => 'products/collections#show', defaults: { fast_making: true }, as: 'fast_making_dresses'
+    end
 
     post '/shared/facebook' => 'competition/events#share'
 

@@ -1,0 +1,67 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/10204225122802197/friends?access_token=CAACEdEose0cBAFZAeqc2JqR1zc2SbNfcjrEPFc5TlZC5TSF7ScsXAyHBdEuZC96cYAdF82ZAeILxF631RGzr6uZAkn2gLZCZBiAmq4t5mVzxIXjZAV84wKR3sF5RqdoLNlygYmZASfrlsexqRup8dMmVc1EsQG6sRTKy8DfhD5lGLZCK4BwDF47dXAPVciXOXhZBurF6dYuI3oG8kN0N95eVW1L7IRWHlBspAQZD&limit=1000&offset=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Fb-Trace-Id:
+      - G+2CmbmRbNx
+      X-Fb-Rev:
+      - '1939973'
+      Etag:
+      - '"aec0116d8d83fb9344ef4473210c83dee09e0601"'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Facebook-Api-Version:
+      - v2.0
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Vary:
+      - Accept-Encoding
+      X-Fb-Debug:
+      - tmE6IBVPOmLY0/IFERqwojlHxcFPw0SoCpr0uJTvZ3+Mj6RkJ2wh1Sc9bcCGqXklpJ2z9ic+J1MtkYDVzUeg/w==
+      Date:
+      - Thu, 17 Sep 2015 01:13:28 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1057'
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"name":"Gui Porto","id":"528597901"},{"name":"Henrique Bastos","id":"562073097"},{"name":"Philippe
+        Rosa","id":"605325441"},{"name":"Giulio Dariano Bottari","id":"646503417"},{"name":"Gustavo
+        Lima","id":"682086625"},{"name":"Magno Mathias","id":"10203005152306501"},{"name":"Cleber
+        Web","id":"10205741309029560"},{"name":"Gustavo Hingel Morada","id":"1206836370"},{"name":"Bruno
+        Antunes","id":"1418678785"},{"name":"Ricardo Goldstein","id":"10201879337255366"},{"name":"Jo\u00e3o
+        Paulo Lethier","id":"1705340857"},{"name":"Andr\u00e9 Mattos","id":"100000034040387"},{"name":"Rafael
+        Grillo","id":"780864248600935"},{"name":"Hugo Tamaki","id":"100000326291231"},{"name":"Pablo
+        Ribeiro","id":"100000399294185"},{"name":"Carolina Zamith Cunha","id":"772944042729308"},{"name":"Eduardo
+        Alencar","id":"720140671366365"},{"name":"Felipe Ribeiro","id":"882980341753541"},{"name":"Luis
+        Vasconcellos","id":"100001449814694"},{"name":"Carlos Eduardo Penna","id":"100001557061767"},{"name":"Carlos
+        Henrique Sant'' Ana","id":"782877135108614"},{"name":"Rafael R\u00eago Drumond","id":"100001730876765"},{"name":"Jo\u00e3o
+        Felipe Nicolaci Pimentel","id":"100001891377345"},{"name":"Eduarosemel Ribeiro","id":"916701648403548"},{"name":"Gustavo
+        Honorato","id":"100002182470868"},{"name":"Leonardo Preuss","id":"623080164444223"},{"name":"Robson
+        Morais","id":"100002523742601"},{"name":"Leonardo Picciani","id":"100007124167949"}],"paging":{"next":"https:\/\/graph.facebook.com\/v2.0\/10204225122802197\/friends?limit=1000&offset=1000&access_token=CAACEdEose0cBAFZAeqc2JqR1zc2SbNfcjrEPFc5TlZC5TSF7ScsXAyHBdEuZC96cYAdF82ZAeILxF631RGzr6uZAkn2gLZCZBiAmq4t5mVzxIXjZAV84wKR3sF5RqdoLNlygYmZASfrlsexqRup8dMmVc1EsQG6sRTKy8DfhD5lGLZCK4BwDF47dXAPVciXOXhZBurF6dYuI3oG8kN0N95eVW1L7IRWHlBspAQZD&__after_id=enc_AdDeZBoow9fPcVghJmKVVKIZBAcHJVfEWpTrZA1mRQ6ZCNdVdxUZCl9pcOtVC5DzoZBaU17ZA3r8P1mZAODZA4mPMbJ4iHvKL"},"summary":{"total_count":372}}'
+    http_version: 
+  recorded_at: Thu, 17 Sep 2015 01:13:28 GMT
+recorded_with: VCR 2.9.3
