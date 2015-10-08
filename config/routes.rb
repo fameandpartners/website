@@ -33,7 +33,6 @@ FameAndPartners::Application.routes.draw do
 
   resources :user_campaigns, only: [:create] do
     collection do
-      post :tell_mom
       get  :check_state
     end
   end

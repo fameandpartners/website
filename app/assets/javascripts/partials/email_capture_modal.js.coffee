@@ -251,28 +251,3 @@ window.page.CountdownTimer = class CountdownTimer
       else if @closeCallback
         @closeCallback()
     , 1000
-
-
-window.page.showTellMomModal = ->
-  vex.dialog.buttons.NO.text = 'X'
-
-  updateHtml = (modal) ->
-    modal.find('.vex-dialog-buttons button').addClass('btn btn-black')
-    $form = modal.find('form')
-    $email = $form.find('input[name=email]')
-
-    $form.on 'submit', (e) ->
-      $.post('/user_campaigns/tell_mom', {email: $email.val()}).done ->
-        vex.close()
-      e.preventDefault()
-      e.stopPropagation()
-      false
-
-
-  vex.dialog.open
-    message: '<h2>Nice picks! How would mom say no?</h2><p>SEND HER YOUR SELECTION NOW:</p>',
-    className: 'vex-dialog-bottom vex-dialog-pink vex-text vex-dialog-pink-reverse',
-    popup: true,
-    input: $('#tell-mom-popup-content-template').html()
-    timeout: 0,
-    afterOpen: updateHtml
