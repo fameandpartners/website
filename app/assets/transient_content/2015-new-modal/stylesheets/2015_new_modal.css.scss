@@ -25,11 +25,13 @@
         h2 {
           background-color: transparent;
           color:            #000;
-          font-family:      $font-family-secondary!important;
+          font-family:      "OldStandardTT-Italic" !important;
           font-size:        3rem;
           font-weight:      200;
           line-height:      4.8rem;
           max-width:        28em;
+          font-style: italic;
+          text-transform: none;
         }
         p {
           color:       black;
@@ -51,6 +53,7 @@
             text-align: left;
             font-weight: 500;
             font-size: 0.7em;
+            margin: 0;
           }
           .input-group-addon{
             border: none !important;
