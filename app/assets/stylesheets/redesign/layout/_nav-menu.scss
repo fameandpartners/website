@@ -1,0 +1,19 @@
+/* [Nav Menu]
+-------------------------------------------------------*/
+.nav-menu-wrap {
+
+  @media (max-width: 1500px){
+    width: 80%;
+    margin-left: 10%;
+  }
+
+  @media (max-width: 1200px){
+    width: 100%;
+    margin: 0;
+    left: 0;
+    right: 0;
+    border-left-color: transparent;
+    border-right-color: transparent;
+  }
+
+}

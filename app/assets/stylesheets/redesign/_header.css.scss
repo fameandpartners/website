@@ -1204,31 +1204,33 @@ ul.secondary.pull-right {
         position: absolute;
         left: 0;
         top: 29px;
-        width: 400px;
-        margin: 0;
-        padding: 30px;
+        min-width: 220px;
+        margin: -1px 0 0;
+        padding: 20px 60px 20px 20px;
         display: none;
         list-style: none;
         text-align: left;
-        margin-top: -1px;
-        border: solid $c-neutral-10 1px;
+        text-transform: none;
+        border: solid $c-neutral-black 1px;
         border-top-color: $c-neutral-4;
-        background-color: #f5f5f5;
+        background: $c-neutral-white;
 
         li {
-          float: left;
-          width: 50%;
-          padding-right: 30px;
+          display: block;
+          margin-bottom: 8px;
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 25px;
 
           a {
-            text-transform: capitalize;
-            font-weight: 400;
-            font-size: 1.6rem;
-            color: #333;
-            background: transparent;
+            display: inline-block;
+            color: $c-neutral-black;
+            border-bottom: solid transparent 1px;
 
-            &:hover {
-              color: #355e6d;
+            &:hover,
+            &:focus {
+              color: $c-neutral-black;
+              border-color: $c-neutral-black;
             }
 
           }
@@ -1303,215 +1305,6 @@ ul.secondary.pull-right {
 
       }
 
-    }
-
-  }
-
-  .prev{
-    top: 55%;
-    position: absolute;
-    background-image: url('icon-arrow-left.png');
-    opacity: 1;
-    background-size: contain;
-    z-index: 2;
-    text-indent: -9999px;
-  }
-  .next{
-    right: 0;
-    top: 55%;
-    position: absolute;
-    background-image: url('icon-arrow-right.png');
-    opacity: 1;
-    background-size: contain;
-    z-index: 2;
-    text-indent: -9999px;
-  }
-
-  #rect-dresses{
-    padding-bottom: 30px;
-    background-color: #f5f5f5;
-    .left-area{
-      .no-style-text{
-        color: black;
-        text-decoration: none;
-      }
-      padding-right: 10px;
-      width: 70%;
-      float: left;
-      height: 100%;
-      .col1 , .col2 , .col3 , .col4 {
-        width: 25%;
-        float: left;
-        padding-left: 30px;
-        .head{
-          margin-top: 30px;
-          font-weight :500;
-          font-size: 1.7rem;
-        }
-        div{
-          clear: both;
-          margin-top:10px;
-          font-size: 1.6rem;
-          text-transform: capitalize
-        }
-      }
-      .col2, .col3{
-        li{
-          padding-top: 10px;
-          a{
-            font-size: 1.6rem;
-            text-transform: capitalize;
-          }
-        }
-      }
-    }
-    .right-area{
-      width: 30%;
-      float: left;
-      height: 100%;
-      background-color: #003647;
-      .girl-image{
-        img{
-          width: 100%;
-        }
-      }
-
-      .girl-text{
-        position: relative;
-        width: 100%;
-        .contain{
-          padding: 20px;
-          color: white;
-          font-weight: 600;
-          text-align: center;
-          width: 100%;
-        }
-      }
-    }
-  }
-  #rect-lookbook{
-    background-color: transparent;
-    .lookbook-container{
-      position: relative;
-      .prev, .next{
-        top:50%;
-      }
-      .rslides_tabs{
-        display: none;
-      }
-
-      .lookbook-item:nth-child(odd){
-        .head{
-          background-color: black;
-        }
-      }
-      .lookbook-item:nth-child(even){
-        .head{
-          background-color: #003647;
-        }
-      }
-      .lookbook-item{
-        width: 33.3%;
-        float: left;
-      }
-      .head{
-        width: 100.3%;
-        cursor: pointer;
-        text-align: center;
-        float: left;
-        background-color: black;
-        height: 80px;
-        font-size: 1.4rem;
-        display: table;
-        .text{
-          display: table-cell;
-          vertical-align: middle;
-          font-weight: 700;
-          color: white;
-        }
-      }
-      .image{
-        cursor: pointer;
-        width: 100%;
-        float: left;
-        clear: both;
-      }
-    }
-  }
-
-  #rect-magazine{
-    @media(max-width: 1100px)
-    {
-      height: 370px;
-    }
-    @media(min-width: 1101px)and(max-width: 1400px)
-    {
-      height: 430px;
-    }
-    @media(min-width: 1401px)and(max-width: 1600px)
-    {
-      height: 470px;
-    }
-    @media(min-width: 1601px)and(max-width: 1800px)
-    {
-      height: 520px;
-    }
-    @media(min-width: 1801px)
-    {
-      height: 540px;
-    }
-    .left-col{
-      height: 100%;
-      background-color: #f5f5f5;
-      .head{
-        text-align: center;
-        font-weight: 500;
-        padding-top: 30px;
-        padding-bottom: 30px;
-      };
-      .images{
-        div{
-          margin: 0;
-          padding: 0;
-          img{
-            width: 100%;
-          }
-        }
-        .text{
-          padding-top: 30px;
-          padding-bottom: 30px;
-          text-align: center;
-          font-weight: 400;
-        }
-      }
-    }
-    .right-col{
-      height: 100%;
-      background-color: #f6e2d5;
-      .head{
-        text-align: center;
-        font-weight: 500;
-        padding-top: 30px;
-        padding-bottom: 30px;
-      }
-      .image{
-        img{
-          width: 100%;
-        }
-        .left-img{
-          padding-left: 30px;
-          padding-right: 15px;
-        }
-        .right-img{
-          padding-left: 15px;
-          padding-right: 30px;
-        }
-        .text{
-          padding-top: 30px;
-          padding-bottom: 30px;
-          text-align: center;
-        }
-      }
     }
 
   }

@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/10204225122802197//?access_token=CAACEdEose0cBAFZAeqc2JqR1zc2SbNfcjrEPFc5TlZC5TSF7ScsXAyHBdEuZC96cYAdF82ZAeILxF631RGzr6uZAkn2gLZCZBiAmq4t5mVzxIXjZAV84wKR3sF5RqdoLNlygYmZASfrlsexqRup8dMmVc1EsQG6sRTKy8DfhD5lGLZCK4BwDF47dXAPVciXOXhZBurF6dYuI3oG8kN0N95eVW1L7IRWHlBspAQZD&fields=gender
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Fb-Trace-Id:
+      - FA21EzdJuIM
+      X-Fb-Rev:
+      - '1939973'
+      Etag:
+      - '"6e4a5d1f69d8b9c9a80585af3f3df3c00936e4a7"'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Facebook-Api-Version:
+      - v2.0
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Debug:
+      - Y6djOiHvE4rn6VyH3W65jBsdpo4QN0S77IRN74n7FPANQs3o9oJqAEgg+4GIZoL8A5JBcjk2MtDlCpEDDfsmrQ==
+      Date:
+      - Thu, 17 Sep 2015 01:16:34 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '42'
+    body:
+      encoding: UTF-8
+      string: '{"gender":"male","id":"10204225122802197"}'
+    http_version: 
+  recorded_at: Thu, 17 Sep 2015 01:16:35 GMT
+recorded_with: VCR 2.9.3

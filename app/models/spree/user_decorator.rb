@@ -16,6 +16,9 @@ Spree::User.class_eval do
           :class_name => '::UserStyleProfile',
           :foreign_key => :user_id
 
+  has_one :facebook_data, autosave: true, foreign_key: 'spree_user_id'
+  delegate :value, to: :facebook_data, prefix: true
+
   attr_accessor :skip_welcome_email,
                 :validate_presence_of_phone
 
@@ -141,5 +144,10 @@ Spree::User.class_eval do
       last_name: self.last_name,
       email: self.email
     )
+  end
+
+  def facebook_data_value
+    create_facebook_data if facebook_data.nil?
+    facebook_data.value
   end
 end

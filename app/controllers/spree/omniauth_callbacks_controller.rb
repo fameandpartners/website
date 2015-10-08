@@ -8,6 +8,30 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 #    provides_callback_for provider[1].to_sym
 #  end
 
+  def mark_and_track_promo_redemption(email)
+    return unless session[:redeem_via_fb_state] == 'clicked'
+    session[:redeem_via_fb_state] = 'signed_in'
+    event_type = 'email_capture_modal'
+    event_type = 'auto_apply_coupon' if session[:auto_apply].present?
+
+    begin
+      tracker = Marketing::CustomerIOEventTracker.new
+      unless current_spree_user
+        tracker.identify_user_by_email(email, current_site_version)
+      end
+      tracker.track(
+        current_spree_user || email,
+        event_type,
+        email:            email,
+        promocode:        session[:show_promocode_modal]
+      )
+    rescue StandardError => e
+      Rails.logger.error('[customer.io] Failed to send event: #{event_type}')
+      Rails.logger.error(e)
+      NewRelic::Agent.notice_error(e)
+    end
+  end
+
   def facebook
     if request.env["omniauth.error"].present?
       flash[:error] = t("devise.omniauth_callbacks.failure", :kind => auth_hash['provider'], :reason => t(:user_was_not_valid))
@@ -24,6 +48,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       FacebookDataFetchWorker.perform_async(authentication.user.id, auth_hash['uid'], auth_hash['credentials']['token'])
 
+      mark_and_track_promo_redemption(authentication.user.email)
       redirect_to after_sign_in_path_for(authentication.user), flash: { just_signed_up: true }
 
     elsif spree_current_user
@@ -34,6 +59,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       flash[:notice] = "Authentication successful."
       flash[:track_fb_signup] = "true"
+      mark_and_track_promo_redemption(spree_current_user.email)
       redirect_back_or_default(account_url)
     else
       user = Spree::User.find_by_email(auth_hash['info']['email']) || Spree::User.new
@@ -58,6 +84,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
         sign_up_reason = session.delete(:sign_up_reason)
 
+        mark_and_track_promo_redemption(user.email)
         redirect_to after_sign_in_path_for(user), flash: { just_signed_up: true }
       else
         session[:omniauth] = auth_hash.except('extra')

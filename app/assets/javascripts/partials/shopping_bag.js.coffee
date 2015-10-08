@@ -16,6 +16,11 @@ window.ShoppingBag = class ShoppingBag
     @$overlay   = $(options.overlay || '#shadow-layer')
     @$container = $(options.container || '#cart')
     @masterpass_link = options.masterpass_link
+    @freeStyling     = options.free_styling
+    @freeDelivery    = options.free_delivery
+    @customerService = options.customer_service
+    @value_proposition  = options.value_proposition
+    @shipping_message  = options.shipping_message
 
 
     _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler', 'couponFormSubmitHandler', 'removeProductCustomizationHandler', 'removeProductMakingOptionHandler', 'masterpassOpenHandler')
@@ -37,7 +42,7 @@ window.ShoppingBag = class ShoppingBag
     @
 
   render: () ->
-    @$container.html(@template(cart: @cart.data, country_code: @country_code))
+    @$container.html(@template(cart: @cart.data, country_code: @country_code, value_proposition: @value_proposition, shipping_message: @shipping_message))
     @rendered = true
 
   close: () ->

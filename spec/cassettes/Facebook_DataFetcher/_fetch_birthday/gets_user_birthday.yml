@@ -1,0 +1,150 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/10204225122802197?access_token=CAACEdEose0cBAFZAeqc2JqR1zc2SbNfcjrEPFc5TlZC5TSF7ScsXAyHBdEuZC96cYAdF82ZAeILxF631RGzr6uZAkn2gLZCZBiAmq4t5mVzxIXjZAV84wKR3sF5RqdoLNlygYmZASfrlsexqRup8dMmVc1EsQG6sRTKy8DfhD5lGLZCK4BwDF47dXAPVciXOXhZBurF6dYuI3oG8kN0N95eVW1L7IRWHlBspAQZD&fields=birthday
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Fb-Trace-Id:
+      - CsPbjgiJA/v
+      X-Fb-Rev:
+      - '1939973'
+      Etag:
+      - '"3a5147cbd40bf9c37be329cf1b45aa086812d5ee"'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Facebook-Api-Version:
+      - v2.0
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Debug:
+      - Aev+a+rRNwVqLwms1HMIyK5BupOuW6z2UA0GzY6xl7iYQ6YNUNe67Vu8q17Wg2P6keZiET0Q4/7wDo+qxwR25Q==
+      Date:
+      - Thu, 17 Sep 2015 01:08:56 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '52'
+    body:
+      encoding: UTF-8
+      string: '{"birthday":"08\/11\/1989","id":"10204225122802197"}'
+    http_version: 
+  recorded_at: Thu, 17 Sep 2015 01:08:56 GMT
+- request:
+    method: get
+    uri: https://graph.facebook.com/156072248070089?access_token=CAAMn78HwtWkBANC1GZAmNZCZBVFV5mmmjcTwGyLZA9IlMZBW4HeroEWuKlYMMByW1QgPe2ZB57SKqVj4ZANuDul2CJbzcM2wjdP6wgQSUzZB1JmBuIFwZAZCxRtz2YQ4Bw0eBnnp5MM4P6c1Gqn29KqkQFJFTcg1mVOTjIQLZCEbcaIswdSABglEV3LrZAUdWAAo9ja8JZBCJsXCDiQZDZD&fields=birthday
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Fb-Trace-Id:
+      - CNq+J5dH1b0
+      X-Fb-Rev:
+      - '1939973'
+      Etag:
+      - '"e37db046136f0f0428e55f2202d9ed148673677c"'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Facebook-Api-Version:
+      - v2.4
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Debug:
+      - wjjohNlVjI+4CbwKFVIby/pveHmECm6iQSL9EBAdAU9ZuvRjx8Xm9RA89ZEItiqlu/C2P+iYsJ9Dm7+ShbCMLg==
+      Date:
+      - Thu, 17 Sep 2015 00:52:51 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '24'
+    body:
+      encoding: UTF-8
+      string: '{"id":"156072248070089"}'
+    http_version: 
+  recorded_at: Thu, 17 Sep 2015 00:52:51 GMT
+- request:
+    method: get
+    uri: https://graph.facebook.com/156072248070089?access_token=CAAMn78HwtWkBANC1GZAmNZCZBVFV5mmmjcTwGyLZA9IlMZBW4HeroEWuKlYMMByW1QgPe2ZB57SKqVj4ZANuDul2CJbzcM2wjdP6wgQSUzZB1JmBuIFwZAZCxRtz2YQ4Bw0eBnnp5MM4P6c1Gqn29KqkQFJFTcg1mVOTjIQLZCEbcaIswdSABglEV3LrZAUdWAAo9ja8JZBCJsXCDiQZDZD&fields=birthday
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Www-Authenticate:
+      - 'OAuth "Facebook Platform" "invalid_token" "Error validating access token:
+        This may be because the user logged out or may be due to a system error."'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Fb-Trace-Id:
+      - FS4QtP953XE
+      X-Fb-Rev:
+      - '1939973'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Debug:
+      - MZwJnovifVpNspUNhnTVw9hX99A3O5IEiBvk66ufK5Q1OM7808RUGAcIeMwkSaZa0/ISUhdJp+CvaeiZTusOrw==
+      Date:
+      - Thu, 17 Sep 2015 01:11:28 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '182'
+    body:
+      encoding: UTF-8
+      string: '{"error":{"message":"Error validating access token: This may be because
+        the user logged out or may be due to a system error.","type":"OAuthException","code":190,"error_subcode":467}}'
+    http_version: 
+  recorded_at: Thu, 17 Sep 2015 01:11:28 GMT
+recorded_with: VCR 2.9.3

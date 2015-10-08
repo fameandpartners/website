@@ -37,7 +37,7 @@ module Feeds
       end
 
       %w(title image_link product_description).each do |method_name|
-        define_method(method_name) do |argument|
+        define_method(method_name) do |_|
           raise NotImplementedError, "#{self.class} does not implement private method ##{method_name}"
         end
       end

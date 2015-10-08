@@ -8009,14 +8009,71 @@ xheader
   -o-transition: right 0.3s;
   transition: right 0.3s;
 }
+
+#cart .shopping-bag-text{
+  margin-right:0;
+  padding-top:10px;
+  padding-left:35px
+}
+#cart .shopping-bag-text span{
+  float: left;
+}
+#cart .shopping-bag-text span:not(:nth-child(2)){
+  float: left;
+  margin-top: 5px;
+}
+#cart .shopping-bag-text i.coathanger{
+  background-image: url('../../../assets/cart/coathanger.svg');
+  width: 20px;
+  height: 15px;
+  margin-top: 2px;
+  margin-right: 10px;
+  display: block;
+  float: left;
+  background-size: contain;
+  clear: both;
+}
+#cart .shopping-bag-text i.plane{
+  background-image: url('../../../assets/cart/plane.svg');
+  width: 20px;
+  height: 21px;
+  margin-top: 3px;
+  margin-right: 10px;
+  display: block;
+  float: left;
+  background-size: contain;
+  clear: both;
+}
+#cart .shopping-bag-text i.mobile{
+  background-image: url('../../../assets/cart/mobile.svg');
+  width: 22px;
+  height: 19px;
+  margin-top: 5px;
+  margin-right: 8px;
+  margin-left: 1px;
+  display: block;
+  float: left;
+  background-size: contain;
+  clear: both;
+}
+#cart .shopping-bag-payment-methods {
+  text-align:center;
+  margin-top:20px;
+
+}
+#cart .shopping-bag-payment-methods img{
+  width: 20%;
+}
+
+#cart .shopping-bag-payment-methods img:last-child{
+  margin-left: 20px;
+}
+
 /* line 77, ../sass/_cart.scss */
 #cart.speed-in {
   right: 0;
 }
-/* line 81, ../sass/_cart.scss */
-#cart > * {
-  padding: 0 1em;
-}
+
 /* line 85, ../sass/_cart.scss */
 #cart .cart-items {
   padding: 0;
@@ -8101,10 +8158,6 @@ xheader
   text-decoration: underline;
 }
 @media only screen and (min-width: 1200px) {
-  /* line 163, ../sass/_cart.scss */
-  #cart > * {
-    padding: 0 2em;
-  }
   /* line 167, ../sass/_cart.scss */
   #cart .cart-items li {
     padding: 1em 2em;

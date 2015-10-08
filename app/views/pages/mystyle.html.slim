@@ -3,9 +3,8 @@
 
 = render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
 
-- unless params[:lpi] == 'none'
-  - image = "//#{configatron.asset_host}/pages#{page.path}/#{params[:lpi] || 'default'}.jpg"
-  .page-title.default.category-header style="background-image: url('#{image}')"
+- if banner.display?
+  .page-title.default.category-header style="background-image: url('#{banner.image}')"
     .container
       .page-title--details
         h1.no-padding-bottom = params[:lpt]

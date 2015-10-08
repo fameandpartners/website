@@ -14,7 +14,7 @@ class Facebook::DataFetcher
     response = get(nil, fields: 'birthday')
 
     if response['birthday'].present?
-      Date.strptime(response['birthday'], "%m/%d/%Y")
+      Date.strptime(response['birthday'], '%m/%d/%Y')
     else
       nil
     end
@@ -36,6 +36,11 @@ class Facebook::DataFetcher
     end
 
     friends
+  end
+
+  def fetch_gender
+    response = get('/', fields: 'gender')
+    response['gender']
   end
 
   private

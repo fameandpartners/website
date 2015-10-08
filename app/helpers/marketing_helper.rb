@@ -43,20 +43,18 @@ module MarketingHelper
     marketing_landing_page? && current_promotion.present?
   end
 
-  # TODO remove this after redesign merge
-  require "base64"
-
   def pop?
     params[:pop].present? && params[:pop] == 'true'
   end
 
   def decode(p)
     return p if params[:raw]
-    if p.present?
-      Base64.decode64(p.gsub(/\s/, '+'))
-    else
-      ''
-    end
+    return '' unless p.present?
+
+    # if someone forgot to escape base64 encoded param to url-safe
+    # then '+' => ' '
+    restored_string = p.to_s.gsub(/\s/, '+')
+    Base64.decode64(restored_string)
   end
 
   def encode(p)

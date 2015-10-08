@@ -19,9 +19,21 @@ module Revolution
 
     serialize :variables, Hash
 
-    delegate :title, :meta_description, :heading, :sub_heading, :description, :to => :translation
+    delegate :title, :meta_description, :description, :to => :translation
 
-    attr_accessor :locale
+    attr_accessor :locale, :collection
+
+    def heading
+      (translation && translation.heading) || collection.details.banner.title
+    end
+
+    def sub_heading
+      (translation && translation.sub_heading) || collection.details.banner.subtitle
+    end
+
+    def banner_image
+      collection.details.banner.image
+    end
 
     def translation
       @translation ||= translations.find_for_locale(locale)
@@ -68,5 +80,6 @@ module Revolution
         errors.add(:path, 'path cannot be edited')
       end
     end
+
   end
 end

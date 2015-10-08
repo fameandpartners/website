@@ -1,0 +1,71 @@
+/* [Menu Dresses]
+-------------------------------------------------------*/
+.menu-dresses {
+  padding: 20px 20px 20px 30px;
+  text-transform: none;
+  background: $c-neutral-white;
+
+  ul {
+    float: left;
+    margin: 10px 60px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+
+    a {
+      display: inline-block;
+      color: $c-neutral-black;
+      border-bottom: solid transparent 1px;
+
+      &:hover,
+      &:focus {
+        color: $c-neutral-black;
+        border-color: $c-neutral-black;
+      }
+
+    }
+
+  }
+
+  .title {
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+
+  .highlight-wrap {
+    float: right;
+    display: block;
+    width: 400px;
+    color: $c-neutral-white;
+    background: $c-brand-blue;
+
+    .copy-wrap {
+      padding: 20px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+  }
+
+  @media (max-width: 1400px) {
+
+    & {
+
+      ul {
+        margin-right: 40px;
+      }
+
+      .highlight-wrap {
+        width: 300px;
+      }
+
+    }
+
+  }
+
+}

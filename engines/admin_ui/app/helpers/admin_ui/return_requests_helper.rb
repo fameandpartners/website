@@ -5,9 +5,13 @@ module AdminUi
         keep:     { icon: 'fa-smile-o',     alert: 'success'},
         exchange: { icon: 'fa-exchange',    alert: 'warning'},
         return:   { icon: 'fa-thumbs-down', alert: 'danger' },
+        cancellation: { icon: 'fa-ban',      alert: 'danger' },
+        refund:       { icon: 'fa-dollar',   alert: 'danger' },
+        unknown:      { icon: 'fa-question', alert: 'warning' },
+        store_credit: { icon: 'fa-ticket',   alert: 'warning' },
         delete:   { icon: 'fa-gears' },
         edit:     { icon: 'fa-pencil-square-o' }
-      }[action.to_sym]
+      }.fetch(action.to_sym) { { icon: 'fa-gears' } }
     end
 
     def action_icon_class(action)

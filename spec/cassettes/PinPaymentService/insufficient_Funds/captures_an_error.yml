@@ -1,0 +1,107 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://LElcjB_z4BItXJQPYlw43g:@test-api.pin.net.au/1/charges
+    body:
+      encoding: US-ASCII
+      string: email=blah%40vtha.com&amount=1000&currency=USD&description=Order+%23R851637568-%5BRANDOM%5D&ip_address=10.10.10.10&card%5Baddress_line1%5D=Address&card%5Baddress_city%5D=City&card%5Baddress_country%5D=Australia&card%5Bnumber%5D=5510000000000002&card%5Bexpiry_month%5D=1&card%5Bexpiry_year%5D=2020&card%5Bname%5D=Blah+Vtha
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - PinPayment::Charge/0.5.1
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 23 Sep 2015 15:07:18 GMT
+      Server:
+      - Apache
+      Status:
+      - 400 Bad Request
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - User-Agent
+      X-Rack-Cache:
+      - invalidate, pass
+      X-Request-Id:
+      - 2537923058d5236c884e8a68d6af287c
+      X-Runtime:
+      - '0.101450'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '164'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"error":"insufficient_funds","error_description":"There are not enough
+        funds available to process the requested amount","charge_token":"ch_tmAiQIuB5S1nfS92pIMT9A"}'
+    http_version: 
+  recorded_at: Wed, 23 Sep 2015 15:07:18 GMT
+- request:
+    method: post
+    uri: https://LElcjB_z4BItXJQPYlw43:@test-api.pin.net.au/1/charges
+    body:
+      encoding: US-ASCII
+      string: email=blah%40vtha.com&amount=1000&currency=USD&description=Order+%23R851637568-%5BRANDOM%5D&ip_address=10.10.10.10&card%5Baddress_line1%5D=Address&card%5Baddress_city%5D=City&card%5Baddress_country%5D=Australia&card%5Bnumber%5D=5510000000000002&card%5Bexpiry_month%5D=1&card%5Bexpiry_year%5D=2020&card%5Bname%5D=Blah+Vtha
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - PinPayment::Charge/0.5.1
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 23 Sep 2015 15:08:57 GMT
+      Server:
+      - Apache
+      Status:
+      - 401 Unauthorized
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - User-Agent
+      X-Rack-Cache:
+      - invalidate, pass
+      X-Request-Id:
+      - 0029f22e107e93369a9fbde6e0516cf6
+      X-Runtime:
+      - '0.035276'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '81'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"error":"unauthenticated","error_description":"Not authorised. (Check
+        API Key)"}'
+    http_version: 
+  recorded_at: Wed, 23 Sep 2015 15:08:57 GMT
+recorded_with: VCR 2.9.3

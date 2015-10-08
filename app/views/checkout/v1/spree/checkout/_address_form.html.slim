@@ -2,6 +2,7 @@ ruby:
   address_id = address_type.chars.first
   first_name = form.object.firstname.present? ? form.object.firstname : (@order.try(:first_name) || @user.try(:first_name))
   last_name = form.object.lastname.present? ? form.object.lastname : (@order.try(:last_name) || @user.try(:last_name))
+  shopping_bag_texts = Preferences::ShoppingBag.new(current_site_version)
 
 - if Spree::Config[:address_requires_state]
   ruby:
@@ -35,8 +36,13 @@ ruby:
   = link_to 'Sign in with Facebook', fb_auth_path(site_version: current_site_version.code), class: 'btn btn-facebook btn-black btn-md'
 
   / Temporary location for heading.
-  h2.checkout-section-title 2. Address Details
+h2.checkout-section-title 2. Address Details
 
+- if Features.active?(:shipping_message)
+  p
+    = shopping_bag_texts.shipping_message
+    br
+    | We apologise for any inconvenience.
 .row
   .col-md-6.form-group
     = form.label :firstname, with_required_mark(t(:first_name))

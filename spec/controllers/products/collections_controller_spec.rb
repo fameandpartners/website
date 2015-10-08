@@ -8,6 +8,7 @@ describe Products::CollectionsController, :type => :controller do
 
     before(:each) do
       # Repositories and Resources should be tested elsewhere
+      allow(page).to receive(:collection=).with(collection_double)
       allow(Revolution::Page).to receive(:find_for).and_return(page)
       allow(Products::CollectionFilter).to receive(:read)
       allow(controller).to receive(:collection_resource).and_return(collection_double)

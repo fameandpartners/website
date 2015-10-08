@@ -13,27 +13,31 @@
           <span class="qty"><%= product.quantity %> &times; </span>
           <a href="<%= product.path %>" class="cart-item-title"><%= product.name %></a>
         </div>
-      </div>
-      <div class="clearfix">
-        <div class="pull-left small">
-          Size: <span><%= product.size.presentation %>,</span>
-          Color: <span class="color"><%= product.color.presentation %></span>
+        <div class="clearfix">
+          <div class="pull-left small">
+            Size: <span><%= product.size.presentation %>,</span>
+            Color: <span class="color"><%= product.color.presentation %></span>
+          </div>
+          <div class="pull-right text-muted"><%= product.price.display_price %></div>
+          <% if (product.discount != null) : %>
+            <div class="pull-right text-muted sale-percentage"><%= product.discount %>% off</div>
+          <% end %>
         </div>
-        <div class="pull-right text-muted"><%= product.price.display_price %></div>
+        <div class="cart-prices">
+          <% for making_option in product.making_options: %>
+            <div class="small">
+              <%= making_option.name %> + <%= making_option.display_price %>
+              <!-- <a href="#" class="fa fa-close making-option-remove" data-id="<%= making_option.id %>"></a> -->
+            </div>
+          <% end %>
+          <% for customization in product.customizations: %>
+            <div class="small text-pink">
+              <%= customization.name %> + <%= customization.display_price %>
+              <!-- <a href="#" class="fa fa-close customization-remove" data-id="<%= customization.id %>"></a> -->
+            </div>
+          <% end %>
+        </div>
       </div>
-      <div class="cart-prices">
-        <% for making_option in product.making_options: %>
-          <div class="small">
-            <%= making_option.name %> + <%= making_option.display_price %>
-            <!-- <a href="#" class="fa fa-close making-option-remove" data-id="<%= making_option.id %>"></a> -->
-          </div>
-        <% end %>
-        <% for customization in product.customizations: %>
-          <div class="small text-pink">
-            <%= customization.name %> + <%= customization.display_price %>
-            <!-- <a href="#" class="fa fa-close customization-remove" data-id="<%= customization.id %>"></a> -->
-          </div>
-        <% end %>
     </li>
   <% end %>
 </ul>
@@ -59,3 +63,19 @@
 <p>
   <strong>Total<span class="pull-right"><%= @cart.display_total %></span></strong>
 </p>
+
+<div class='shopping-bag-text-wrapper'>
+  <div class="row shopping-bag-text" >
+    <%- @shipping_message %>
+  </div>
+
+  <div class="row shopping-bag-text" >
+    <%- @value_proposition %>
+  </div>
+</div>
+
+<div class="row shopping-bag-payment-methods" >
+  <img src="/assets/checkout/visa-mastercard-paypal-masterpass.jpg" >
+  <img src="/assets/comodo-ssl.png" >
+</div>
+

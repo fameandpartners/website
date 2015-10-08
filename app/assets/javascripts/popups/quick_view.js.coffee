@@ -5,19 +5,15 @@ window.popups.ProductQuickView = class ProductQuickView
   analytics_label: null
   productVariants: []
   productImages: []
-  productVideos:  []
-  productVideoUrl: null
 
   constructor: (@productId) ->
     _.bindAll(@, 'hide', 'show', 'showModalWindow', 'renderImages')
     _.bindAll(@, 'track', 'trackPopupOpened')
     _.bindAll(@, 'closeButtonClickHandler')
-    _.bindAll(@, 'showProductVideoFor')
 
     @container = window.popups.getQuickViewModalContainer(null, null)
     @container.on('click', '.close-lightbox, .overlay', @closeButtonClickHandler)
 
-    @container.on('click', ".tabs .tabs-links a[href='#videos']", @track('viewVideo'))
     @container.on('click', ".tabs .tabs-links a[href='#inspiration']", @track('viewCelebrityInspiration'))
     @container.on('click', ".buy-wishlist a.btn-layby", @track('laybyButtonClick'))
     @container.on('click', ".product-info .customize a", @track('customDressClick'))
@@ -50,8 +46,6 @@ window.popups.ProductQuickView = class ProductQuickView
   showModalWindow: (response) ->
     @productVariants = response.variants
     @productImages = response.images
-    @productVideos = response.videos
-    @productVideoUrl = response.default_video_url
     @container.find('.product-page').replaceWith(response.popup_html)
     @container.show()
     @container.find('.quick-view').css({width: '900px'}).center()
@@ -102,11 +96,6 @@ window.popups.ProductQuickView = class ProductQuickView
     selector.target = @container.find('.buy-wishlist .btn.buy-now')
     selector.init(@productVariants)
 
-    @container.on('selection_changed', (e, filter) =>
-      if window.current_product_color != filter.color
-        @showProductVideoFor(filter.color)
-    )
-
     window.helpers.initProductReserver(
       @container.find('.twin-alert a.twin-alert-link'),
       @analytics_label,
@@ -117,13 +106,3 @@ window.popups.ProductQuickView = class ProductQuickView
         else
           return selected.color
     )
-
-  showProductVideoFor: (color) ->
-    $player = @container.find('#videos iframe')
-    return if $player.length == 0 # for non-video layout..
-    new_video = _.findWhere(@productVideos, { color: color })
-    if _.isEmpty(new_video)
-      new_video_url = @productVideoUrl
-    else
-      new_video_url = new_video.video_url
-    $player.attr('src', new_video_url) if $player.attr('src') != new_video_url

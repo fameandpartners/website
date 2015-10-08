@@ -1,7 +1,7 @@
 .page-content.index
   // TODO: create helper for multisource images
   = react_component('HeroCarousel', skin: 'skin-light', 
-    assets: [{link: lookbook_path + '/photo-finish', src: '/assets/home-page-tiles/hero-1', alt: 'Photo FINISH - Shop Now'}, {link: lookbook_path + '/make-a-statement', src: '/assets/home-page-tiles/hero-2', alt: 'Bambi - Shop the Collection'}])
+    assets: [{link: build_taxon_path('Formal'), src: '/assets/home-page-tiles/hero-1', alt: 'Why so formal? - Shop all formal dresses'}, {link: lookbook_path + '/photo-finish', src: '/assets/home-page-tiles/hero-2', alt: 'Photo FINISH - Shop Now'}, {link: lookbook_path + '/make-a-statement', src: '/assets/home-page-tiles/hero-3', alt: 'Bambi - Shop the Collection'}])
 
 section.carousel-strap
   .container
@@ -15,12 +15,11 @@ section.carousel-strap
 section.container.content-block.home-main-content
   .row
     .main.col-md-7
-      = link_to build_taxon_path('Lace'), class: 'media-wrap'
-        = image_tag 'home-page-tiles/tile-amazing-lace.jpg', alt: 'AMAZING LACE - Shop our lace dress edit'
-      = render 'shared/redesign/tabs_collection'
       = link_to build_taxon_path('Two Piece'), class: 'media-wrap'
-        = image_tag 'home-page-tiles/tile-double-or-nothing.jpg', alt: 'DOUBLE OR NOTHING - Discover our best two-piece styles'
-        fast_making_dresses
+        = image_tag 'home-page-tiles/tile-double-or-nothing.jpg', alt: 'Double or nothing - Discover our best two-piece styles'
+      = render 'shared/redesign/tabs_collection'
+      = link_to 'dresses/red', class: 'media-wrap'
+        = image_tag 'home-page-tiles/tile-red-dresses.jpg', alt: 'The only color you need this spring - Shop red'
       = link_to fast_making_dresses_path, class: 'media-wrap'
         = image_tag 'home-page-tiles/tile-express-making.png', alt: 'Express making - Dresses made in 48 hours.'
       = link_to bridesmaid_collection_path, class: 'media-wrap'

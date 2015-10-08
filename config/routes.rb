@@ -100,6 +100,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/lookbook/jedi-cosplay' => redirect('/lookbook/make-a-statement')
     get '/lookbook/make-a-statement' => 'products/collections#show', :permalink => 'make-a-statement', :as => :make_a_statement_collection
+    get '/lookbook/photo-finish' => 'products/collections#show', :permalink => 'photo-finish', :as => :photo_finish_collection
     get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
 
     get '/lookbook/garden-weeding' => redirect('/lookbook/garden-wedding')
@@ -327,10 +328,6 @@ FameAndPartners::Application.routes.draw do
         resource :inspiration, :only => [:edit, :update]
 
         resource :colors, only: [:new, :create], controller: 'product_colors'
-
-        resources :videos, except: [:show], controller: 'product_videos' do
-          post :update_positions, on: :collection
-        end
       end
 
       resource :product_uploads, only: [:new, :create, :show] do
@@ -423,10 +420,6 @@ FameAndPartners::Application.routes.draw do
     get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')
 
     resources :site_versions, only: [:show], as: :site_version
-  end
-
-  if Rails.env.development?
-    mount MailPreview => 'mail_view'
   end
 
   mount AdminUi::Engine, at: '/fame_admin'

@@ -12,7 +12,8 @@ module AdminUi
         begin
           params[:page][:variables] = eval(params[:page][:variables])
           if page.update_attributes(params[:page])
-            redirect_to action: :index
+            flash[:success] = "Page updated"
+            redirect_to action: :edit
           else
             render action: :edit
           end
@@ -28,10 +29,17 @@ module AdminUi
       end
 
       def create
-        @page = Revolution::Page.new(params[:page])
-        if @page.save
-          redirect_to action: :index
-        else
+        begin
+          params[:page][:variables] = eval(params[:page][:variables])
+          @page = Revolution::Page.new(params[:page])
+          if @page.save
+            redirect_to action: :index
+          else
+            render action: :new
+        end
+        rescue StandardError => e
+          NewRelic::Agent.notice_error(e)
+          flash[:error] = "An error occured, please check the variable definition"
           render action: :new
         end
       end

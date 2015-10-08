@@ -80,8 +80,6 @@ javascript:
       .tabs
         ul.tabs-links
           li.active = link_to 'Photos', '#photos'
-          - if enabled_tabs.include?('video')
-            li = link_to 'Video', '#videos'
           - if enabled_tabs.include?('inspiration')
             li = link_to 'Celebrity Inspiration', '#inspiration'
         #photos.tab-content
@@ -95,10 +93,6 @@ javascript:
               .zoom
                 = link_to 'Zoom', '#'
               = image_tag 'noimage/large.png', alt: '', height: 590, width: 460
-        - if enabled_tabs.include?('video')
-          #videos.tab-content style="display: none;"
-            == product_video(@product)
-            .initials = image_tag 'video-initials.png', width: 420, height: 54, alt: ''
 
         - if enabled_tabs.include?('inspiration')
           - celebrity = @product.celebrity_inspiration

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150921073046) do
+ActiveRecord::Schema.define(:version => 20151006052307) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -315,7 +315,7 @@ ActiveRecord::Schema.define(:version => 20150921073046) do
     t.datetime "updated_at",    :null => false
   end
 
-  add_index "facebook_data", ["spree_user_id"], :name => "index_facebook_data_on_spree_user_id"
+  add_index "facebook_data", ["spree_user_id"], :name => "index_facebook_data_on_spree_user_id", :unique => true
 
   create_table "factories", :force => true do |t|
     t.text     "name"
@@ -644,20 +644,6 @@ ActiveRecord::Schema.define(:version => 20150921073046) do
   end
 
   add_index "product_style_profiles", ["product_id"], :name => "index_product_style_profiles_on_product_id"
-
-  create_table "product_videos", :force => true do |t|
-    t.integer  "spree_product_id"
-    t.integer  "spree_option_value_id"
-    t.boolean  "is_master",                            :default => false
-    t.string   "color"
-    t.string   "url",                   :limit => 512
-    t.string   "video_id"
-    t.integer  "position"
-    t.datetime "created_at",                                              :null => false
-    t.datetime "updated_at",                                              :null => false
-  end
-
-  add_index "product_videos", ["spree_product_id"], :name => "index_product_videos_on_spree_product_id"
 
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"
