@@ -6,7 +6,7 @@
     ' Coupon Adjusted Items
   .ibox-content
     = form_tag admin_ui.reports_coupon_adjusted_orders_path, method: 'post', class: 'form-horizontal'
-      = render partial: 'admin_ui/reports/form_fields'
+      = render partial: 'admin_ui/reports/date_range_form'
       .form-group
         .col-lg-12
           button type='submit' Generate
