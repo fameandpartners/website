@@ -46,6 +46,9 @@
         .six-icons{
           margin-top:5rem;
           height: 180px;
+          @media(max-width: 992px){
+              height: 360px;
+          }
           .popup-icon{
             font-size: 1rem;
             font-weight: 700;
@@ -60,7 +63,7 @@
             display: table;
             cursor: pointer;
             @media(max-width: 992px){
-              width: 44%;
+              width: 92%;
             }
           }
           .container{
