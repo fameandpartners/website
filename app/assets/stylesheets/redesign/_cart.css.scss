@@ -1,4 +1,9 @@
 .cart--call-to-actions {
+  padding: 0;
+
+  > div {
+    padding: 0 1em 1em 1em;
+  }
 
   .btn {
     padding: 10px 12px 6px 12px;
@@ -11,6 +16,28 @@
   }
 }
 
+#cart {
+
+  > div {
+    @extend %cfix;
+  }
+
+  .cart-total {
+    padding: 1em;
+  }
+
+  .shopping-bag-text-wrapper {
+    padding: 1em;
+    font-weight: 500;
+
+    .inner-wrap {
+      padding: 1em;
+      background-color: #EEEEEE;
+    }
+
+  }
+
+}
 
 #cart .cart-items li {
   @media (min-width: 1200px) {
