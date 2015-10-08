@@ -3,8 +3,8 @@
     background-color:      $c-neutral-white;
     background-position-y: 0;
     background-repeat:     no-repeat;
-    border:                1px solid #d7d7d7;
-    text-transform:        uppercase;
+    border:                1px solid #d7d7d7 !important;
+    text-transform:        initial !important;
     width: 650px;
 
     .vex-dialog-form {
@@ -26,7 +26,9 @@
           line-height:      4.8rem;
           font-family: "old-standard",serif !important;
           font-style: italic;
-          font-weight: 400;
+          font-weight: 500;
+          font-size: 2.5rem;
+          text-transform: initial;
         }
         p {
           color:       black;

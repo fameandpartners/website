@@ -14,6 +14,7 @@
   ruby:
     promocode     = decode(params[:pc])
     template_name = params[:tn].present? ? decode(params[:tn]) : 'default'
+    ty            = params[:ty]
     heading       = decode(params[:h])
     message       = decode(params[:m])
     content       = decode(params[:c]) || promocode
@@ -24,6 +25,11 @@
     timeout       = params[:t] || 3
     timer         = decode(params[:ti])
     campaign_uuid = decode(params[:cu])
+    if ty == 'Thanks'
+      class_name    = 'new-modal-thank-you'
+      heading       = 'Thanks! Did you know our dresses are made <br> bespoke by artisan seamstresses?'
+      message       = "THIS MEANS WE CAN GIVE YOU A BUNCH OF PERKS THAT OTHERS SIMPLY CAN'T:"
+    end
 
     if spree_user_signed_in?
       auto_apply    = session[:auto_apply]
@@ -88,7 +94,7 @@
               span.input-group-addon
                 input.btn-plain.btn-reset type="submit" value=submit_text
 
-  - elsif template_name == 'new-modal'
+  - elsif template_name == 'new-modal' && ty.nil?
     #modal-popup-content-template
       input type="hidden" name="content" value=content
       input type="hidden" name="promocode" value=promocode
@@ -102,7 +108,7 @@
           .col-sm-12.col-inline.full-form.fb-form
             = link_to fb_text, fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
 
-  - elsif template_name == 'new-modal-thank-you'
+  - elsif ty == 'Thanks'
     #modal-popup-content-template
       .vex-footer
         .six-icons
