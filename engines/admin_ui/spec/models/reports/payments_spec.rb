@@ -20,7 +20,7 @@ module Reports
     end
 
     describe '#description' do
-      it { expect(report.description).to eq 'ItemsSoldOnSale'  }
+      it { expect(report.description).to eq 'payments'  }
     end
 
     describe 'date coercion' do
