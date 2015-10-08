@@ -8,9 +8,17 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 #    provides_callback_for provider[1].to_sym
 #  end
 
+  def track_new_modal_fb
+    session[:new_modal_fb_state]  = 'signed_in'
+    session[:ty_heading]          = 'Thanks! Did you know our dresses are made <br> bespoke by artisan seamstresses?'
+    session[:ty_message]          = 'This means we can give you a bunch of perks that others simply can’t:'
+    session[:ty]                  = 'Thanks'
+  end
+
   def mark_and_track_promo_redemption(email)
     return unless session[:redeem_via_fb_state] == 'clicked'
     session[:redeem_via_fb_state] = 'signed_in'
+    track_new_modal_fb
     event_type = 'email_capture_modal'
     event_type = 'auto_apply_coupon' if session[:auto_apply].present?
 
@@ -50,7 +58,6 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       mark_and_track_promo_redemption(authentication.user.email)
       redirect_to after_sign_in_path_for(authentication.user), flash: { just_signed_up: true }
-
     elsif spree_current_user
       spree_current_user.apply_omniauth(auth_hash)
       spree_current_user.save

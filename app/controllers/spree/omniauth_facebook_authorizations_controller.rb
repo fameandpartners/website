@@ -18,6 +18,10 @@ class Spree::OmniauthFacebookAuthorizationsController < Spree::StoreController
       session[:redeem_via_fb_state] = params[:redeem_via_fb_state]
     end
 
+    if params[:new_modal_fb_state]
+      session[:new_modal_fb_statee] = params[:new_modal_fb_state]
+    end
+
     if params[:show_promocode_modal]
       session[:show_promocode_modal] = params[:show_promocode_modal]
       # reset current modal popup
