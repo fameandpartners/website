@@ -1,7 +1,7 @@
 //---------
 // Our code
 //---------
-//  require jquery_ujs
+//= require jquery_ujs
 //= require jquery-ui/datepicker
 //= require jquery-fileupload/vendor/jquery.ui.widget
 //= require jquery-fileupload/jquery.iframe-transport
