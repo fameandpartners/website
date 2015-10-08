@@ -149,15 +149,8 @@ ruby:
               = link_to 'Backless', build_taxon_path('Backless'), class: 'text'
             li.normal-item.no-border
               = link_to 'Lace', build_taxon_path('Lace'), class: 'text'
-
-
-        div#events-menu
-          ul.nav.navbar-nav
-            li.normal-item
-              .text.text-back EVENTS
-              .arrow
-                i.fa.fa-chevron-left
-                .back BACK
+            li.grey-item
+              .text EVENTS
             li.normal-item
               = link_to 'Formal', build_taxon_path('Formal'), class: 'text'
             li.normal-item
@@ -180,6 +173,37 @@ ruby:
               = link_to 'Sweet 16', build_taxon_path('Sweet 16'), class: 'text'
             li.normal-item.no-border
               = link_to 'Debutante', build_taxon_path('Debutante'), class: 'text'
+
+        /!        
+          div#events-menu
+            ul.nav.navbar-nav
+              li.normal-item
+                .text.text-back EVENTS
+                .arrow
+                  i.fa.fa-chevron-left
+                  .back BACK
+              li.normal-item
+                = link_to 'Formal', build_taxon_path('Formal'), class: 'text'
+              li.normal-item
+                = link_to 'Wedding', build_taxon_path('Wedding'), class: 'text'
+              li.normal-item
+                = link_to 'Birthday', build_taxon_path('Birthday'), class: 'text'
+              li.normal-item
+                = link_to 'Special Event', build_taxon_path('Special Event'), class: 'text'
+              li.normal-item
+                = link_to 'Ball Gowns', build_taxon_path('Ball Gowns'), class: 'text'
+              li.normal-item
+                = link_to 'Bridsmaid', bridesmaid_collection_path, class: 'text'
+              li.normal-item
+                = link_to 'Graduation', build_taxon_path('Graduation'), class: 'text'
+              li.normal-item
+                = link_to 'Prom', build_taxon_path('Prom'), class: 'text'
+              li.normal-item
+                = link_to 'Homecoming', build_taxon_path('Homecoming'), class: 'text'
+              li.normal-item
+                = link_to 'Sweet 16', build_taxon_path('Sweet 16'), class: 'text'
+              li.normal-item.no-border
+                = link_to 'Debutante', build_taxon_path('Debutante'), class: 'text'
 
 
 
@@ -249,16 +273,17 @@ ruby:
             .text DRESSES
             .arrow
               i.fa.fa-chevron-right
-          li.normal-item#event-menu-open
-            .text SHOP BY EVENT
-            .arrow
-              i.fa.fa-chevron-right
+          /!
+            li.normal-item#event-menu-open
+              .text SHOP BY EVENT
+              .arrow
+                i.fa.fa-chevron-right
           li.normal-item#lookbook-menu-open
             .text LOOKBOOK
             .arrow
               i.fa.fa-chevron-right
           li.normal-item
-            a.text href='http://blog.fameandpartners.com' BLOG
+            a.text href='http://blog.fameandpartners.com' target='_blank' BLOG
           - if sale_active?
             li.normal-item
               = link_to 'SALE', mystyle_landing_page_path(lpi: 'none', sale: 'all', limit: 99), class: 'text'

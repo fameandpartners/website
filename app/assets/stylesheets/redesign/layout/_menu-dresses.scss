@@ -52,4 +52,20 @@
 
   }
 
+  @media (max-width: 1400px) {
+
+    & {
+
+      ul {
+        margin-right: 40px;
+      }
+
+      .highlight-wrap {
+        width: 300px;
+      }
+
+    }
+
+  }
+
 }

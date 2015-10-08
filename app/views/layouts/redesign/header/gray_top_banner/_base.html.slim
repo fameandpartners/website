@@ -53,15 +53,16 @@ ruby:
     em New this week
   span.dresses
     = link_to 'DRESSES', dresses_path
-  span.nested
-    ' SHOP BY EVENT
-    ul
-      = render partial: 'layouts/redesign/event'
+  /!
+    span.nested
+      ' SHOP BY EVENT
+      ul
+        = render partial: 'layouts/redesign/event'
 
   span.lookbook LOOKBOOK
   /! span.magazine MAGAZINE
   span
-    a href='http://blog.fameandpartners.com' BLOG
+    a href='http://blog.fameandpartners.com' target='_blank' BLOG
   - if sale_active?
     span.sale
       = link_to 'SALE', mystyle_landing_page_path(lpi: 'none', sale: 'all', limit: 99)
@@ -96,6 +97,9 @@ ruby:
   ul
     li.title colour
     = render partial: 'layouts/redesign/color'
+  ul
+    li.title events
+    = render partial: 'layouts/redesign/event'
 
   = link_to mystyle_landing_page_path(:lpi => 'none', :pids => ['640-forrest-green','643-black','648-black','656-black','649-black','640-black'],:limit => 0), class: 'highlight-wrap'
     .media-wrap
