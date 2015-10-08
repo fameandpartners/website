@@ -67,12 +67,14 @@
     #modal-popup-content-template.hidden
       input type="hidden" name="content" value=content
       input type="hidden" name="promocode" value=promocode
+      input type="hidden" name="timer" value=timer
         / no content, avoid hiding all with css
 
   - elsif template_name == 'signup'
     #modal-popup-content-template.hidden
       input type="hidden" name="content" value=content
       input type="hidden" name="promocode" value=promocode
+      input type="hidden" name="timer" value=timer
       .vex-footer
         .row.row-inline.text-center
           .col-sm-5.col-inline.full-form
@@ -92,6 +94,7 @@
     #modal-popup-content-template
       input type="hidden" name="content" value=content
       input type="hidden" name="promocode" value=promocode
+      input type="hidden" name="timer" value=timer
       .vex-footer
         .row.row-inline.text-center
           .col-sm-12.col-inline.email-form
@@ -107,6 +110,7 @@
       .vex-footer.vex-footer-email
         input type="hidden" name="content" value=content
         input type="hidden" name="promocode" value=promocode
+        input type="hidden" name="timer" value=timer
         .row
           .col-md-8.col-md-offset-2.text-center.wrap-email
             input.form-control.standard-form type="email" name="email" placeholder='email address'
