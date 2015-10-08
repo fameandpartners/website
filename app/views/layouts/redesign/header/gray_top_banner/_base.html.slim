@@ -62,7 +62,7 @@ ruby:
   span.lookbook LOOKBOOK
   /! span.magazine MAGAZINE
   span
-    a href='http://blog.fameandpartners.com' BLOG
+    a href='http://blog.fameandpartners.com' target='_blank' BLOG
   - if sale_active?
     span.sale
       = link_to 'SALE', mystyle_landing_page_path(lpi: 'none', sale: 'all', limit: 99)
