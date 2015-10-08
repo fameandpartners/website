@@ -19,7 +19,7 @@ class Spree::OmniauthFacebookAuthorizationsController < Spree::StoreController
     end
 
     if params[:new_modal_fb_state]
-      session[:new_modal_fb_statee] = params[:new_modal_fb_state]
+      session[:new_modal_fb_state] = params[:new_modal_fb_state]
     end
 
     if params[:show_promocode_modal]
