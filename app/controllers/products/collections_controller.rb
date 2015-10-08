@@ -78,11 +78,7 @@ class Products::CollectionsController < Products::BaseController
     end
 
     def default_page
-      Revolution::Page.new(
-        path: '/dresses/*',
-        template_path: '/products/collections/show',
-        variables: { 'limit' => 21 }
-      )
+      Revolution::Page.new(template_path: '/products/collections/show')
     end
 
     def punch_products
