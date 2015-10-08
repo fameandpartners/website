@@ -1,6 +1,8 @@
 class DeleteMasterpass < ActiveRecord::Migration
   def up
-    execute "delete from spree_payments where source_type like '%Masterpass%';"
+    Spree::Payment.where(source_type: 'Spree::MasterpassCheckout').each do |payment|
+      Spree::Order.find(payment.order_id).destroy
+    end
   end
 
   def down
