@@ -27,8 +27,8 @@
     campaign_uuid = decode(params[:cu])
     if ty == 'Thanks'
       class_name    = 'new-modal-thank-you'
-      heading       = 'Thanks! Did you know our dresses are made <br> bespoke by artisan seamstresses?'
-      message       = "THIS MEANS WE CAN GIVE YOU A BUNCH OF PERKS THAT OTHERS SIMPLY CAN'T:"
+      heading       = params[:ty_heading]
+      message       = params[:ty_message]
     end
 
     if spree_user_signed_in?
@@ -118,8 +118,8 @@
               | DESIGN INPUT
           .popup-icon
             .container
-              .icon.icon-styles
-              | CUSTOM STYLES
+              .icon.icon-trends
+              | NEW TRENDS EACH WEEK
           .popup-icon
             .container
               .icon.icon-less
@@ -132,10 +132,10 @@
             .container
               .icon.icon-colours
               | CUSTOM COLOURS
-          .popup-icon
+          .popup-icon.black-bg
             .container
-              .icon.icon-trends
-              | NEW TRENDS EACH WEEK
+              | SHOP NOW
+
 
   - else # default, support legacy
     #modal-popup-content-template.hidden
