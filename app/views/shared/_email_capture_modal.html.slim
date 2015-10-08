@@ -96,18 +96,19 @@
                 input.btn-plain.btn-reset type="submit" value=submit_text
 
   - elsif template_name == 'new-modal' && ty.nil?
-    #modal-popup-content-template
-      input type="hidden" name="content" value=content
-      input type="hidden" name="promocode" value=promocode
-      .vex-footer
-        .row.row-inline.text-center
-          .col-sm-12.col-inline.email-form
-            .input-group
-              input.form-control.form-control-md.form-control-transparent name="email" type="text" placeholder="EMAIL"
-              span.input-group-addon
-                input.btn-plain.btn-reset type="submit" value=submit_text
-          .col-sm-12.col-inline.full-form.fb-form
-            = link_to fb_text, fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked', new_modal_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
+    .hidden
+      #modal-popup-content-template
+        input type="hidden" name="content" value=content
+        input type="hidden" name="promocode" value=promocode
+        .vex-footer
+          .row.row-inline.text-center
+            .col-sm-12.col-inline.email-form
+              .input-group
+                input.form-control.form-control-md.form-control-transparent name="email" type="text" placeholder="EMAIL"
+                span.input-group-addon
+                  input.btn-plain.btn-reset type="submit" value=submit_text
+            .col-sm-12.col-inline.full-form.fb-form
+              = link_to fb_text, fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked', new_modal_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
 
   - elsif ty == 'Thanks' || session[:new_modal_fb_state] == 'signed_in'
     ruby:
