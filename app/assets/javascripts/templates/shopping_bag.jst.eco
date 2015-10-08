@@ -92,6 +92,7 @@
     <% end %>
     <div class="col-lg-12 text-center">
       <img id="buyWithMasterPass" src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_180x042px.png" alt="Buy with MasterPass" <% if @cart.item_count != 0: %>class="btn"<% end %>>
+      <p><a href="http://www.mastercard.com/mc_us/wallet/learnmore/en" target="_blank">Learn More</a></p>
     </div>
   <% end %>
 </div>
@@ -107,7 +108,7 @@
   </div>
 </div>
 
-<div class="shopping-bag-payment-methods" >
-  <img src="/assets/checkout/visa-mastercard-paypal.jpg" >
+<div class="row shopping-bag-payment-methods" >
+  <img src="/assets/checkout/visa-mastercard-paypal-masterpass.jpg" >
   <img src="/assets/comodo-ssl.png" >
 </div>
