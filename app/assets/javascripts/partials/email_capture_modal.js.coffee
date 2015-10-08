@@ -32,13 +32,6 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       today = +new Date()
       @promoStartedAt = today
 
-    if @opts.submitText
-      $("#email-capture-submit-button").val(@opts.submitText)
-
-    if @opts.fbText
-      $("#email-capture-fb-button").text(@opts.fbText)
-
-
     @checkState @opts.uuid, =>
       setTimeout(@open, timeout) if @pop
 

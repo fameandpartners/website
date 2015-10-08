@@ -18,8 +18,8 @@
     message       = decode(params[:m])
     content       = decode(params[:c]) || promocode
     class_name    = decode(params[:s]) || class_name
-    submit_text   = decode(params[:st])
-    fb_text       = decode(params[:fbt])
+    submit_text   = decode(params[:st]).present? || 'Submit'
+    fb_text       = decode(params[:fbt]).present? || 'Redeem via Facebook'
     fb_id         = decode(params[:fb])
     timeout       = params[:t] || 3
     timer         = decode(params[:ti])
@@ -39,8 +39,6 @@
         heading:    \"#{heading}\",
         message:    \"#{message}\",
         className:  \"#{class_name}\",
-        submitText: \"#{submit_text}\",
-        fbText:     \"#{fb_text}\",
         fb:         \"#{fb_id}\",
         action:     \"#{campaigns_email_capture_path}\",
         container:  \"#modal-popup-content-template\",
@@ -79,16 +77,16 @@
         .row.row-inline.text-center
           .col-sm-5.col-inline.full-form
             - if promocode == 'birthdaybabe'
-              = link_to 'Redeem via Facebook', fb_auth_path(show_promocode_modal: encode(promocode), redeem_via_fb_state: 'clicked'), id: 'email-capture-fb-button', class: 'btn btn-facebook btn-block btn-md'
+              = link_to fb_text, fb_auth_path(show_promocode_modal: encode(promocode), redeem_via_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
             - else
-              = link_to 'Redeem via Facebook', fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked'), id: 'email-capture-fb-button', class: 'btn btn-facebook btn-block btn-md'
+              = link_to fb_text, fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
           .col-sm-2.col-inline.full-form
             .or-rhombus: .rhombus: .rhombus-text-holder: .rhombus-text or
           .col-sm-5.col-inline
             .input-group
               input.form-control.form-control-md.form-control-transparent name="email" type="text" placeholder="Redeem via e-mail"
               span.input-group-addon
-                input.btn-plain.btn-reset#email-capture-submit-button type="submit" value="Send"
+                input.btn-plain.btn-reset type="submit" value=submit_text
 
   - elsif template_name == 'new-modal'
     #modal-popup-content-template
@@ -100,9 +98,9 @@
             .input-group
               input.form-control.form-control-md.form-control-transparent name="email" type="text" placeholder="EMAIL"
               span.input-group-addon
-                input.btn-plain.btn-reset#email-capture-submit-button type="submit" value="Send"
+                input.btn-plain.btn-reset type="submit" value=submit_text
           .col-sm-12.col-inline.full-form.fb-form
-            = link_to 'Redeem via Facebook', fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked'), id: 'email-capture-fb-button', class: 'btn btn-facebook btn-block btn-md'
+            = link_to fb_text, fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
 
   - else # default, support legacy
     #modal-popup-content-template.hidden
@@ -113,5 +111,4 @@
           .col-md-8.col-md-offset-2.text-center.wrap-email
             input.form-control.standard-form type="email" name="email" placeholder='email address'
           .col-xs-12.text-center.wrap-button
-            button.btn-plain.btn.submit#email-capture-submit-button type="submit" value="submit"
-              | Submit
+            button.btn-plain.btn.submit type="submit" value=submit_text
