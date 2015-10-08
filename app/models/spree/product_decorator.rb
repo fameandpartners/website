@@ -236,6 +236,8 @@ Spree::Product.class_eval do
 
   # NOTE: potentially dead code
   def images_json
+    ::NewRelic::Agent.record_custom_event('spree_product_deprecated_images_json_method_called', product_id: self.id)
+
     images.map do |image|
       size = color = nil
       case image.viewable_type
