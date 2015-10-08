@@ -1,7 +1,6 @@
-.new-modal-thank-you.email-capture-modal {
+.new-modal-thank-you {
   .vex-content {
     background-color:      $c-neutral-white;
-    //background-image:      url('modals/basic-pink-modal.png');
     background-position-y: 0;
     background-repeat:     no-repeat;
     border:                1px solid #d7d7d7;
@@ -24,10 +23,10 @@
         h2 {
           background-color: transparent;
           color:            #000;
-          font-family:      $font-family-secondary!important;
-          font-size:        2rem;
-          font-weight:      200;
           line-height:      4.8rem;
+          font-family: "old-standard",serif !important;
+          font-style: italic;
+          font-weight: 400;
         }
         p {
           color:       black;
@@ -46,6 +45,7 @@
         font-size: 2rem;
         .six-icons{
           margin-top:5rem;
+          height: 180px;
           .popup-icon{
             font-size: 1rem;
             font-weight: 700;
@@ -59,6 +59,9 @@
             float: left;
             display: table;
             cursor: pointer;
+            @media(max-width: 992px){
+              width: 44%;
+            }
           }
           .container{
             display: table-cell;
