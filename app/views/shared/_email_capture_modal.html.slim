@@ -18,8 +18,8 @@
     message       = decode(params[:m])
     content       = decode(params[:c]) || promocode
     class_name    = decode(params[:s]) || class_name
-    submit_text   = decode(params[:st]).present? || 'Submit'
-    fb_text       = decode(params[:fbt]).present? || 'Redeem via Facebook'
+    submit_text   = params[:st].present? ? decode(params[:st]) : 'Submit'
+    fb_text       = params[:fbt].present? ? decode(params[:fbt]) : 'Redeem via Facebook'
     fb_id         = decode(params[:fb])
     timeout       = params[:t] || 3
     timer         = decode(params[:ti])
