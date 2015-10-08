@@ -22,11 +22,11 @@ module AdminUi
 
       def date(parameter, default:)
         if parameter.present?
-          Date.parse(parameter.to_s).to_date
+          Date.parse(parameter.to_s)
         else
           default
         end
-      rescue StandardError => e
+      rescue ArgumentError
         default
       end
 
