@@ -96,51 +96,49 @@
                 input.btn-plain.btn-reset type="submit" value=submit_text
 
   - elsif template_name == 'new-modal' && ty.nil?
-    .hidden
-      #modal-popup-content-template
-        input type="hidden" name="content" value=content
-        input type="hidden" name="promocode" value=promocode
-        .vex-footer
-          .row.row-inline.text-center
-            .col-sm-12.col-inline.email-form
-              .input-group
-                input.form-control.form-control-md.form-control-transparent name="email" type="text" placeholder="EMAIL"
-                span.input-group-addon
-                  input.btn-plain.btn-reset type="submit" value=submit_text
-            .col-sm-12.col-inline.full-form.fb-form
-              = link_to fb_text, fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked', new_modal_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
+    #modal-popup-content-template.hidden
+      input type="hidden" name="content" value=content
+      input type="hidden" name="promocode" value=promocode
+      .vex-footer
+        .row.row-inline.text-center
+          .col-sm-12.col-inline.email-form
+            .input-group
+              input.form-control.form-control-md.form-control-transparent name="email" type="text" placeholder="EMAIL"
+              span.input-group-addon
+                input.btn-plain.btn-reset type="submit" value=submit_text
+          .col-sm-12.col-inline.full-form.fb-form
+            = link_to fb_text, fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked', new_modal_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
 
   - elsif ty == 'Thanks' || session[:new_modal_fb_state] == 'signed_in'
     ruby:
       session[:new_modal_fb_state] = 'displayed_thanks' if session[:new_modal_fb_state] == 'signed_in'
       session[:ty] = 'already Thanks'
-    .hidden
-      #modal-popup-content-template
-        .vex-footer
-          .six-icons
-            .popup-icon
-              .container
-                .icon.icon-design
-                | DESIGN INPUT
-            .popup-icon
-              .container
-                .icon.icon-trends
-                | NEW TRENDS EACH WEEK
-            .popup-icon
-              .container
-                .icon.icon-less
-                | LESS WASTAGE
-            .popup-icon
-              .container
-                .icon.icon-fit
-                | FIT GUARANTEE
-            .popup-icon
-              .container
-                .icon.icon-colours
-                | CUSTOM COLOURS
-            .popup-icon.black-bg
-              .container
-                | SHOP NOW
+    #modal-popup-content-template.hidden
+      .vex-footer
+        .six-icons
+          .popup-icon
+            .container
+              .icon.icon-design
+              | DESIGN INPUT
+          .popup-icon
+            .container
+              .icon.icon-trends
+              | NEW TRENDS EACH WEEK
+          .popup-icon
+            .container
+              .icon.icon-less
+              | LESS WASTAGE
+          .popup-icon
+            .container
+              .icon.icon-fit
+              | FIT GUARANTEE
+          .popup-icon
+            .container
+              .icon.icon-colours
+              | CUSTOM COLOURS
+          .popup-icon.black-bg
+            .container
+              | SHOP NOW
 
 
   - else # default, support legacy
