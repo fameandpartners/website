@@ -7,7 +7,7 @@ class ItemReturn < ActiveRecord::Base
   belongs_to :line_item, class_name: 'Spree::LineItem', inverse_of: :item_return
   belongs_to :return_request, foreign_key: :request_id, class_name: 'ReturnRequestItem'
 
-  STATES = %i( requested received in_negotiation in_dispute rejected approved refunded credit_note_issued )
+  STATES = %i( requested received in_negotiation in_dispute rejected approved refunded credit_note_issued unknown )
 
   RECEIVE_LOCATIONS = %w[AU US]
 
