@@ -72,9 +72,13 @@ class Products::CollectionsController < Products::BaseController
 
     def load_page
       current_path = LocalizeUrlService.remove_version_from_url(request.path)
-      @page = Revolution::Page.find_for(current_path, '/dresses/*')
+      @page = Revolution::Page.find_for(current_path, '/dresses/*') || default_page
       page.locale = current_site_version.locale
       @banner = Revolution::PageBannerDecorator.new(page, params)
+    end
+
+    def default_page
+      Revolution::Page.new(template_path: '/products/collections/show')
     end
 
     def punch_products
