@@ -49,6 +49,20 @@ window.helpers.ShoppingCart = class ShoppingCart
   data: () ->
     @data
 
+  showAddToCartModal: () ->
+    addToCartModal = new window.page.EmailCaptureModal({
+      promocode: "",
+      content: "",
+      heading: "Purchase dresses right now to win a lottery !!!",
+      message: "Purchase dresses right now to win a lottery !!!",
+      className: "new-modal add-to-cart",
+      action: "",
+      container: "",
+      timeout: 3,
+      timer: false,
+      force: false
+    });
+
   # options:
   #   variant_id
   #   size_id
@@ -65,7 +79,7 @@ window.helpers.ShoppingCart = class ShoppingCart
       added_product = _.find((data.products || []), (product) ->
         product.variant_id == product_data.variant_id
       )
-
+      @showAddToCartModal()
       @trackAddToCart(added_product)
     ).error( () =>
       @trigger('error')
