@@ -8,13 +8,6 @@ GIT
       spree_core (~> 1.3.0)
 
 GIT
-  remote: git://github.com/droidlabs/data-migrate.git
-  revision: 6722faf2256e46b63442776a735b86ee1a50e3b1
-  specs:
-    data_migrate (1.2.0)
-      rails (>= 3.1.0)
-
-GIT
   remote: git://github.com/droidlabs/letter_opener.git
   revision: 7e5793ccff0771861e46704821b86d6628fc3f35
   specs:
@@ -828,7 +821,6 @@ DEPENDENCIES
   configatron
   createsend (~> 2.5.0)
   customerio
-  data_migrate!
   database_cleaner (= 0.9.1)
   default_value_for
   device_detector (~> 0.8.1)
