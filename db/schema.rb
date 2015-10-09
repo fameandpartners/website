@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151006210716) do
+ActiveRecord::Schema.define(:version => 20151009061040) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -486,15 +486,18 @@ ActiveRecord::Schema.define(:version => 20151006210716) do
   end
 
   create_table "marketing_user_visits", :force => true do |t|
-    t.integer "spree_user_id"
-    t.string  "user_token",    :limit => 64
-    t.integer "visits",                      :default => 0
-    t.string  "utm_campaign"
-    t.string  "utm_source"
-    t.string  "utm_medium"
-    t.string  "utm_term"
-    t.string  "utm_content"
-    t.string  "referrer"
+    t.integer  "spree_user_id"
+    t.string   "user_token",    :limit => 64
+    t.integer  "visits",                      :default => 0
+    t.string   "utm_campaign"
+    t.string   "utm_source"
+    t.string   "utm_medium"
+    t.string   "utm_term"
+    t.string   "utm_content"
+    t.string   "referrer"
+    t.string   "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "marketing_user_visits", ["spree_user_id", "utm_campaign"], :name => "index_marketing_user_visits_on_spree_user_id_and_utm_campaign"
