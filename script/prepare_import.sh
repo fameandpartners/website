@@ -1,9 +1,9 @@
+#!/bin/bash
 
 function prepare
 {
   SOURCE_FILE=$1
   echo $SOURCE_FILE
-  rm -R import
   mkdir import
   mkdir -p 'import/content'
   mkdir -p 'import/log'
