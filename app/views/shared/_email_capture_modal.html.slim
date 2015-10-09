@@ -10,7 +10,7 @@
   = content_for :inline_javascript do
     = raw show_promocode_modal
 
-- if pop?
+- if pop? || session[:new_modal_fb_state] == 'signed_in'
   ruby:
     promocode     = decode(params[:pc])
     template_name = params[:tn].present? ? decode(params[:tn]) : 'default'

@@ -1,10 +1,10 @@
 ruby:
-  promocode     = decode(params[:pc])
+  promocode     = decode(params[:pc]) || "newgirl25"
   template_name = params[:tn].present? ? decode(params[:tn]) : 'default'
-  heading       = "WANT US TO BE YOUR <br> PERSONAL DRESSMAKER?"
-  message       = "SIGN UP FOR ACCESS <br> + <br> $25 OFF YOUR FIRST PURCHASE."
+  heading       = if decode(params[:h]) != '' then decode(params[:h]) else "WANT US TO BE YOUR <br> PERSONAL DRESSMAKER?" end
+  message       = if decode(params[:m]) != '' then decode(params[:m]) else "SIGN UP FOR ACCESS <br> + <br> $25 OFF YOUR FIRST PURCHASE." end
   content       = decode(params[:c]) || promocode
-  class_name    = "new-modal"
+  class_name    = "new-modal welcome-modal"
   submit_text   = params[:st].present? ? decode(params[:st]) : 'Submit'
   timeout       = params[:t] || 3
   timer         = decode(params[:ti])
@@ -21,6 +21,7 @@ ruby:
         timeout:    #{timeout},
         timer:      #{timer.present? ? timer : 0},
         container:  \"#modal-popup-content-template.welcome\",
+        action:     \"#{campaigns_email_capture_path}\",
         force:      true,
       });
       $.cookie('modal_site_visit','true')
@@ -41,4 +42,4 @@ ruby:
           span.input-group-addon
             input.btn-plain.btn-reset type="submit" value=submit_text
       .col-sm-12.col-inline.full-form.fb-form
-        = link_to fb_text, fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
+        = link_to fb_text, fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked', new_modal_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
