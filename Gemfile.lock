@@ -8,9 +8,8 @@ GIT
       spree_core (~> 1.3.0)
 
 GIT
-  remote: git://github.com/evgeniypetrov/better_spree_paypal_express.git
+  remote: git://github.com/fameandpartners/better_spree_paypal_express.git
   revision: 478b27281f7ed806df5ae86a41f9890595f8d242
-  ref: 478b27281f7ed806df5ae86a41f9890595f8d242
   branch: 1-3-stable
   specs:
     spree_paypal_express (2.0.3)

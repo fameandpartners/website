@@ -77,10 +77,7 @@ gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
 
 # spree extensions for payments
 gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
-gem 'spree_paypal_express',
-    github: 'evgeniypetrov/better_spree_paypal_express',
-    branch: '1-3-stable',
-    ref: '478b27281f7ed806df5ae86a41f9890595f8d242'
+gem 'spree_paypal_express', github: 'fameandpartners/better_spree_paypal_express', branch: '1-3-stable'
 
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 
@@ -102,9 +99,9 @@ gem 'sinatra',          :require => false
 group :assets do
   gem 'bourbon'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'coffee-script-source', "~> 1.8.0"
+  gem 'coffee-script-source', '~> 1.8.0'
   gem 'uglifier', '1.3.0'
-  gem 'execjs', "~> 2"
+  gem 'execjs', '~> 2'
   gem 'jquery-ui-rails'
   gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
