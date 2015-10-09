@@ -6,7 +6,7 @@
     ' Sale Items Report
   .ibox-content
     = form_tag admin_ui.reports_sale_items_path, method: 'post', class: 'form-horizontal'
-      = render partial: 'form_fields'
+      = render partial: 'admin_ui/reports/date_range_form'
       .form-group
         .col-lg-12
           button type='submit' Generate
