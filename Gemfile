@@ -20,7 +20,7 @@ gem 'default_value_for'
 gem 'tire'
 gem 'redis-rails'
 gem 'autoprefixer-rails'
-gem "bower-rails", "~> 0.10.0"
+gem 'bower-rails', '~> 0.10.0'
 
 # Monitoring & Events
 gem 'newrelic_rpm'
@@ -41,7 +41,6 @@ gem 'active_link_to'
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
-gem 'droidcss'
 gem 'react-rails', '~> 1.2'
 
 # Data

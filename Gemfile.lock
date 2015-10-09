@@ -301,8 +301,6 @@ GEM
       uber
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
-    droidcss (2.0.4)
-      sass (>= 3.2.0)
     eco (1.0.0)
       coffee-script
       eco-source
@@ -824,7 +822,6 @@ DEPENDENCIES
   database_cleaner (= 0.9.1)
   default_value_for
   device_detector (~> 0.8.1)
-  droidcss
   eco
   event_sourced_record
   execjs (~> 2)
