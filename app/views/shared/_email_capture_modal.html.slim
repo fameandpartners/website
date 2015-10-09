@@ -14,6 +14,7 @@
   ruby:
     promocode     = decode(params[:pc])
     template_name = params[:tn].present? ? decode(params[:tn]) : 'default'
+    ty            = params[:ty] || session[:ty]
     heading       = decode(params[:h])
     message       = decode(params[:m])
     content       = decode(params[:c]) || promocode
@@ -24,6 +25,12 @@
     timeout       = params[:t] || 3
     timer         = decode(params[:ti])
     campaign_uuid = decode(params[:cu])
+    if ty == 'Thanks' || session[:new_modal_fb_state] == 'signed_in'
+      class_name    = 'new-modal-thank-you'
+      template_name = 'new-modal-thank-you'
+      heading       = params[:ty_heading] || session[:ty_heading]
+      message       = params[:ty_message] || session[:ty_message]
+    end
 
     if spree_user_signed_in?
       auto_apply    = session[:auto_apply]
@@ -42,7 +49,7 @@
         fb:         \"#{fb_id}\",
         action:     \"#{campaigns_email_capture_path}\",
         container:  \"#modal-popup-content-template\",
-        timeout:    #{auto_apply ? 100000 : timeout},
+        timeout:    3,
         timer:      #{timer.present? ? timer : 0},
         force:      true,
         uuid:       \"#{campaign_uuid}\"
@@ -51,10 +58,10 @@
     email_capture_modal += "modal_popup.enableAutoApplyPromoCampaign();" if auto_apply
 
   = content_for :inline_javascript do
-    - if session[:redeem_via_fb_state] != 'displayed_thanks'
+    - if session[:redeem_via_fb_state] != 'displayed_thanks' && session[:new_modal_fb_state] != 'displayed_thanks' && session[:ty] != 'already Thanks'
       = raw email_capture_modal
 
-- if session[:redeem_via_fb_state] == 'signed_in'
+- if session[:redeem_via_fb_state] == 'signed_in' && class_name != 'new-modal-thank-you'
   ruby:
     session[:redeem_via_fb_state] = 'displayed_thanks'
   #modal-popup-content-template.hidden
@@ -90,8 +97,8 @@
               span.input-group-addon
                 input.btn-plain.btn-reset type="submit" value=submit_text
 
-  - elsif template_name == 'new-modal'
-    #modal-popup-content-template
+  - elsif template_name == 'new-modal' && ty.nil?
+    #modal-popup-content-template.hidden
       input type="hidden" name="content" value=content
       input type="hidden" name="promocode" value=promocode
       input type="hidden" name="timer" value=timer
@@ -103,7 +110,39 @@
               span.input-group-addon
                 input.btn-plain.btn-reset type="submit" value=submit_text
           .col-sm-12.col-inline.full-form.fb-form
-            = link_to fb_text, fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
+            = link_to fb_text, fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked', new_modal_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
+
+  - elsif ty == 'Thanks' || session[:new_modal_fb_state] == 'signed_in'
+    ruby:
+      session[:new_modal_fb_state] = 'displayed_thanks' if session[:new_modal_fb_state] == 'signed_in'
+      session[:ty] = 'already Thanks'
+    #modal-popup-content-template.hidden
+      .vex-footer
+        .six-icons
+          .popup-icon
+            .container
+              .icon.icon-design
+              | DESIGN INPUT
+          .popup-icon
+            .container
+              .icon.icon-trends
+              | NEW TRENDS EACH WEEK
+          .popup-icon
+            .container
+              .icon.icon-less
+              | LESS WASTAGE
+          .popup-icon
+            .container
+              .icon.icon-fit
+              | FIT GUARANTEE
+          .popup-icon
+            .container
+              .icon.icon-colours
+              | CUSTOM COLOURS
+          .popup-icon.black-bg onclick="$('.new-modal-thank-you .vex-dialog-button-secondary').click()"
+            .container
+              | SHOP NOW
+
 
   - else # default, support legacy
     #modal-popup-content-template.hidden

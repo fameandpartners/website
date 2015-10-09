@@ -82,10 +82,16 @@ window.page.EmailCaptureModal = class EmailCaptureModal
           message = "Use this promocode for your next killer dress: #{@opts.promocode}."
         else
           message = "Thanks for joining!"
-        window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 999999)
+        if @opts.className != 'new-modal'
+          window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 999999)
 
       @fbPushTracking()
       window.track.event('LandingPageModal', 'Submitted', @opts.promocode)
+      if @opts.className == 'new-modal'
+        ty_heading = 'Thanks! Did you know our dresses are made <br> bespoke by artisan seamstresses?'
+        ty_message = 'This means we can give you a bunch of perks that others simply can’t:'
+        window.location.replace(window.location.href + "&ty=Thanks&ty_heading="+ty_heading+"&ty_message="+ty_message)
+        return
       window.location.reload()
 
   fbPushTracking: =>
