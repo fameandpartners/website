@@ -1,6 +1,6 @@
 .page-content.index
   // TODO: create helper for multisource images
-  = react_component('HeroCarousel', skin: 'skin-light', 
+  = react_component('HeroCarousel', skin: 'skin-light',
     assets: [{link: build_taxon_path('Formal'), src: '/assets/home-page-tiles/hero-1', alt: 'Why so formal? - Shop all formal dresses'}, {link: lookbook_path + '/photo-finish', src: '/assets/home-page-tiles/hero-2', alt: 'Photo FINISH - Shop Now'}, {link: lookbook_path + '/make-a-statement', src: '/assets/home-page-tiles/hero-3', alt: 'Bambi - Shop the Collection'}])
 
 /! Content Section
@@ -19,6 +19,20 @@ section.container.content-block.home-main-content
 
     aside.col-md-5
       = react_component('BlogPosts')
+  .row.as-seen-in
+    hr
+    .as-seen-in-text AS SEEN IN
+  .row.as-seen-in-partners
+    img.refinery29 src='assets/footer/partners/refinery29.png'
+    img.elle src='assets/footer/partners/elle.png'
+    img.marie src='assets/footer/partners/marie.png'
+    img.russh src='assets/footer/partners/russh.png'
+    img.glamour src='assets/footer/partners/glamour.png'
+    img.wwd src='assets/footer/partners/wwd.png'
+    img.teen src='assets/footer/partners/teen.png'
+    img.popsugar src='assets/footer/partners/popsugar.png'
+    img.nylon src='assets/footer/partners/nylon.png'
+    img.cosmo src='assets/footer/partners/cosmo.png'
 
 /! Email Subscription
 = render 'shared/redesign/newsletter_signup'
