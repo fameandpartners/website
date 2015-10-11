@@ -3,16 +3,35 @@
 
 = render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
 
-- if banner.display?
-  .page-title.default.category-header style="background-image: url('#{banner.image}')"
-    .container
-      .page-title--details
-        h1.no-padding-bottom = params[:lpt]
-        p= params[:lps]
+.hidden
+  - if banner.display?
+    .page-title.default.category-header style="background-image: url('#{banner.image}')"
+      .container
+        .page-title--details
+          h1.no-padding-bottom = params[:lpt]
+          p= params[:lps]
+
+.row.text-center.mystyle-bespoke-dresses
+  | BESPOKE DRESSES. MADE FOR YOU.
+.row.text-center.mystyle-numline.hidden-xs
+  span.num
+    img src='assets/mystyle/1.png'
+    | STYLE
+  span.num
+    img src='assets/mystyle/2.png'
+    | COLOUR
+  span.mid-text
+    | SHOP YOUR DRESS AND CUSTOMISE:
+  span.num
+    img src='assets/mystyle/3.png'
+    | FIT
+  span.num
+    img src='assets/mystyle/4.png'
+    | DELIVERY
 
 .page-content.products-collections.category
   .container.relative.products-collection
-    = render partial: '/products/collections/products_without_content'
+    = render partial: '/products/collections/products_without_content_mystyle'
 
-  .row.relative.more-products
+  .row.relative.more-products.hidden
     = link_to 'More Dresses', dresses_path, class: 'btn btn-black'
