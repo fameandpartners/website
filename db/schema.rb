@@ -375,6 +375,7 @@ ActiveRecord::Schema.define(:version => 20151013020610) do
     t.string   "uuid"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+    t.boolean  "factory_fault"
   end
 
   add_index "item_returns", ["line_item_id"], :name => "index_item_returns_on_line_item_id", :unique => true
