@@ -22,7 +22,19 @@ var HeroCarousel = React.createClass({
       autoplay: true,
       autoplaySpeed: 8000,
       speed: 1500,
-      fade: true
+      fade: true,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            speed: 800,
+            fade: false,
+            arrows: false,
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
     });
   },
 

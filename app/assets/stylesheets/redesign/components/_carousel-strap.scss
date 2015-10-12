@@ -3,36 +3,6 @@
 .carousel-strap {
   background: $c-neutral-white;
 
-  .title {
-    position: relative;
-    text-align: center;
-    font-family: Forum;
-    font-size: 1.5em;
-    padding: 0;
-    margin: 15px 0;
-
-    .inner-wrap {
-      position: relative;
-      padding: 0 20px;
-      display: inline-block;
-      background: $c-neutral-white;
-    }
-
-    &:before {
-      content: '';
-      display: block;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 50%;
-      width: 100%;
-      height: 1px;
-      margin-top: -1px;
-      background: $c-neutral-4;
-    }
-
-  }
-
   .outer-wrap {
     margin-top: 20px;
   }
@@ -119,7 +89,7 @@
       color: $c-neutral-white;
       background: rgba($c-neutral-13, 0.9);
       opacity: 0;
-      @include transition(opacity 0.4s linear);
+      @include transition(opacity 0.2s linear);
 
       .overlay-outer-wrap {
         display: table;
@@ -192,6 +162,25 @@
           opacity: 1;
         }
         
+      }
+
+    }
+
+  }
+
+  @include mobile {
+
+    & {
+
+      .slick-slider {
+        margin-left: -15px;
+        margin-right: -15px;
+        padding: 0;
+      }
+
+      .CTA {
+        font-size: 0.625em;
+        font-weight: 400;
       }
 
     }

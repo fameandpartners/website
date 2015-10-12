@@ -43,6 +43,9 @@ var InstagramCarousel = React.createClass({
         {
           breakpoint: 768,
           settings: {
+            arrows: false,
+            centerMode: true,
+            centerPadding: '30px',
             slidesToShow: 2,
             slidesToScroll: 2
           }
@@ -50,8 +53,11 @@ var InstagramCarousel = React.createClass({
         {
           breakpoint: 480,
           settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
+            arrows: false,
+            centerMode: true,
+            centerPadding: '20px',
+            slidesToShow: 2,
+            slidesToScroll: 2
           }
         }
       ]

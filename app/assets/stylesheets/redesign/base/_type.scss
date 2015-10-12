@@ -1,0 +1,39 @@
+/* [Type]
+-------------------------------------------------------*/
+.title-line-on-sides {
+  position: relative;
+  text-align: center;
+  font-family: Forum;
+  font-size: 1.5em;
+  padding: 0;
+  margin: 15px 0;
+
+  .inner-wrap {
+    position: relative;
+    padding: 0 20px;
+    display: inline-block;
+    background: $c-neutral-white;
+  }
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    margin-top: -1px;
+    background: $c-neutral-black;
+  }
+
+  @include mobile {
+
+    & {
+      font-size: 1.25em;
+    }
+
+  }
+
+}
