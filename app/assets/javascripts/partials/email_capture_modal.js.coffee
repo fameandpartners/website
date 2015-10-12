@@ -87,15 +87,8 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
       @fbPushTracking()
       window.track.event('LandingPageModal', 'Submitted', @opts.promocode)
-      if @opts.className == 'new-modal'
-        ty_heading = 'Thanks! Did you know our dresses are made <br> bespoke by artisan seamstresses?'
-        ty_message = 'This means we can give you a bunch of perks that others simply can’t:'
-        window.location.replace(window.location.href + "&ty=Thanks&ty_heading="+ty_heading+"&ty_message="+ty_message)
-        return
-      if @opts.className == 'new-modal welcome-modal'
-        ty_heading = 'Thanks! Did you know our dresses are made <br> bespoke by artisan seamstresses?'
-        ty_message = 'This means we can give you a bunch of perks that others simply can’t:'
-        window.location.replace(window.location.href + "?pop=true&ty=Thanks&ty_heading="+ty_heading+"&ty_message="+ty_message)
+      if @opts.className == 'new-modal' || @opts.className == 'new-modal welcome-modal'
+        window.location.replace(window.location.href + "?pop_thanks=true")
         return
       window.location.reload()
 
