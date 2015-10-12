@@ -135,6 +135,14 @@ module Products
           expect(product.price_amount).to eq(15)
         end
       end
+
+      context 'product has a discount with 0 amount' do
+        let(:discount) { OpenStruct.new(amount: 0, size: 0) }
+
+        it 'returns the full amount of the product price' do
+          expect(product.price_amount).to eq(15)
+        end
+      end
     end
 
     describe '#schema_availability' do
