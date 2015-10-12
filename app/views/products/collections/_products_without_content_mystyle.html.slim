@@ -15,4 +15,5 @@
     = render partial: '/products/collections/product', collection: products, as: :product
 
 coffee:
-  $('.mystyle-first-row .camp1').css('height',$('.img-responsive:first').height())
+  $(window).load ->
+    $('.mystyle-first-row .camp1').css('height',$('.img-responsive:first').height())
