@@ -1,25 +1,14 @@
 ruby:
-  promocode     = params[:pc].present? ? decode(params[:pc]) : "newgirl25"
-  template_name = params[:tn].present? ? decode(params[:tn]) : 'default'
-  heading       = if decode(params[:h]) != '' then decode(params[:h]) else "WANT US TO BE YOUR <br> PERSONAL DRESSMAKER?" end
-  message       = if decode(params[:m]) != '' then decode(params[:m]) else "SIGN UP FOR ACCESS <br> + <br> $25 OFF YOUR FIRST PURCHASE." end
-  content       = decode(params[:c]) || promocode
-  class_name    = "new-modal welcome-modal"
-  submit_text   = params[:st].present? ? decode(params[:st]) : 'CLICK TO REDEEM'
-  timeout       = params[:t] || 3
-  timer         = decode(params[:ti])
-  fb_text       = params[:fbt].present? ? decode(params[:fbt]) : 'Redeem via Facebook'
-
   email_capture_modal = "
     if ($.cookie('modal_site_visit') != 'true') {
       var modal_popup = new window.page.EmailCaptureModal({
-        promocode:  \"#{promocode}\",
-        content:    \"#{content}\",
-        heading:    \"#{heading}\",
-        message:    \"#{message}\",
-        className:  \"#{class_name}\",
-        timeout:    #{timeout},
-        timer:      #{timer.present? ? timer : 0},
+        promocode:  \"newgirl25\",
+        content:    \"newgirl25\",
+        heading:    \"WANT US TO BE YOUR <br> PERSONAL DRESSMAKER?\",
+        message:    \"SIGN UP FOR ACCESS <br> + <br> $25 OFF YOUR FIRST PURCHASE.\",
+        className:  \"new-modal welcome-modal\",
+        timeout:    3,
+        timer:      0,
         container:  \"#modal-popup-content-template.welcome\",
         action:     \"#{campaigns_email_capture_path}\",
         force:      true,
@@ -32,14 +21,14 @@ ruby:
   = raw email_capture_modal
 
 #modal-popup-content-template.welcome.hidden
-  input type="hidden" name="content" value=content
-  input type="hidden" name="promocode" value=promocode
+  input type="hidden" name="content" value="newgirl25"
+  input type="hidden" name="promocode" value="newgirl25"
   .vex-footer
     .row.row-inline.text-center
       .col-sm-12.col-inline.email-form
         .input-group
           input.form-control.form-control-md.form-control-transparent name="email" type="text" placeholder="EMAIL"
           span.input-group-addon
-            input.btn-plain.btn-reset type="submit" value=submit_text
+            input.btn-plain.btn-reset type="submit" value="CLICK TO REDEEM"
       .col-sm-12.col-inline.full-form.fb-form
-        = link_to fb_text, fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked', new_modal_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
+        = link_to "Redeem via Facebook", fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked', new_modal_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
