@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151009061040) do
+ActiveRecord::Schema.define(:version => 20151011225607) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -375,6 +375,7 @@ ActiveRecord::Schema.define(:version => 20151009061040) do
     t.string   "uuid"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+    t.boolean  "factory_fault"
   end
 
   add_index "item_returns", ["line_item_id"], :name => "index_item_returns_on_line_item_id", :unique => true

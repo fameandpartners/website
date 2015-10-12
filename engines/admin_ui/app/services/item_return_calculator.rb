@@ -36,6 +36,10 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.refunded_at   = event.refunded_at
   end
 
+  def advance_factory_fault(event)
+    @item_return.factory_fault = event.factory_fault
+  end
+
   def advance_legacy_data_import(event)
     return if event.deleted_row.present?
 
