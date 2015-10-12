@@ -811,7 +811,7 @@ DEPENDENCIES
   coercible
   coffee-rails (~> 3.2.1)
   coffee-script-source (~> 1.8.0)
-  compass
+  compass (~> 1.0.3)
   configatron
   createsend (~> 2.5.0)
   customerio
