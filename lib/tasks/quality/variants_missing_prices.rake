@@ -81,7 +81,7 @@ namespace :quality do
   end
 
   desc 'Push all prices on all products to all variants. Control logging with LOG_LEVEL=INFO/DEBUG/WARN'
-  task :push_all_variant_prices => :environment do
+  task :reset_variants_to_master_price => :environment do
     class PricePusher
       attr_reader :logger
 
