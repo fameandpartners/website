@@ -41,30 +41,51 @@ describe Spree::Variant, :type => :model do
 
     # if master variant update it's prices, then all default (inherited from master) prices
     # should be accordingly updated
-    context '#push_changed_prices_to_variants' do
+    context '#push_prices_to_variants' do
       let(:product) { create(:dress) }
       let(:master)  { product.master }
       let(:variant) { create(:spree_variant, product: product, price: master_price.amount) }
-      let(:master_price)  { product.master.prices.first }
-      let(:variant_price) { variant.prices.first }
-      let(:amount)        { master_price.amount + 10 }
+      let(:master_price)    { product.master.prices.first }
+      let(:variant_price)   { variant.prices.first }
+      let(:original_amount) { master_price.amount }
+      let(:new_amount)      { original_amount + 10 }
 
-      it 'creates variant prices if not exists' do
+      it 'creates new variant prices' do
         variant_price.destroy
+        master_price.update_attributes(amount:  new_amount)
         master.reload
-        master.update_attributes(prices_attributes: { '0' => { price: amount, id: master_price.id }})
-        expect(Spree::Price.where(variant_id: variant.id).first.amount).to eq(amount)
+
+        master.save
+
+        expect(variant.reload.prices.first.amount).to eq new_amount
       end
 
-      it 'updates variant price' do
-        master.update_attributes(prices_attributes: { '0' => { price: amount, id: master_price.id }})
-        expect(variant_price.amount).to eq(amount)
+      it 'normalises incorrect variant prices' do
+        variant_price.update_attributes(amount:  555)
+        master_price.update_attributes(amount:  new_amount)
+        master.reload
+
+        master.save
+
+        expect(variant.prices.first.amount).to eq new_amount
+        expect(master.prices.first.amount).to  eq new_amount
+      end
+
+      it 'updates existing variant prices' do
+        master_price.update_attributes(amount:  new_amount)
+        master.reload
+
+        master.save
+        expect(variant_price.amount).to eq new_amount
       end
 
       it 'doesnt touch master prices' do
-        variant.update_attributes(prices_attributes: { '0' => { price: amount, id: variant_price.id }})
-        expect(variant.prices.first.amount).to  eq(amount)
-        expect(master.prices.first.amount).not_to eq(amount)
+        variant_price.update_attributes(amount:  new_amount)
+
+        variant.save
+
+        expect(variant.prices.first.amount).to eq new_amount
+        expect(master.prices.first.amount).to  eq original_amount
       end
     end
   end
