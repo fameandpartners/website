@@ -214,8 +214,12 @@ Spree::Variant.class_eval do
   # Used as a callback, so must return a truthy value to avoid breaking the save
   def push_prices_to_variants
     return :not_master unless is_master
+    master_price_data = prices.collect {|p| [p.currency, p.amount] }.sort
 
     product.variants.each do |v|
+      variant_price_data = v.prices.collect {|p| [p.currency, p.amount] }.sort
+      next if variant_price_data == master_price_data
+
       prices.each do |master_price|
         variant_price = v.prices.where(currency: master_price.currency).first_or_initialize
 

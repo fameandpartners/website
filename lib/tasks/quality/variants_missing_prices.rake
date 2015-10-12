@@ -79,4 +79,52 @@ namespace :quality do
     end
     VariantMissingPriceEnforcer.new.call
   end
+
+  desc 'Push all prices on all products to all variants. Control logging with LOG_LEVEL=INFO/DEBUG/WARN'
+  task :push_all_variant_prices => :environment do
+    class PricePusher
+      attr_reader :logger
+
+      def initialize(logdev: $stdout)
+        @logger = Logger.new(logdev)
+        @logger.level = Logger.const_get(ENV.fetch("LOG_LEVEL", "INFO"))
+        @logger.formatter = LogFormatter.terminal_formatter
+      end
+
+      def product_scope
+        Spree::Product.active.includes(:variants => [:prices])
+      end
+
+      def extract_price_data(spree_variant)
+        spree_variant.prices.collect {|p| [p.currency, p.amount] }.sort
+      end
+
+      def call
+        logger.info "#{self.class.name} Started"
+
+        product_scope.each do |product|
+          product_log = [product.id.to_s.ljust(6),
+                         product.sku.to_s.ljust(10),
+                         product.name.to_s.ljust(20),
+          ].join (' | ')
+
+          master_price_data = extract_price_data(product.master)
+
+          has_broken_variants = product.variants.detect do |variant|
+            master_price_data != extract_price_data(variant)
+          end
+
+          if has_broken_variants
+            logger.warn "UPDATING #{product_log}"
+            product.master.save
+          else
+            logger.info "Skipping #{product_log}"
+          end
+        end
+
+        logger.info "#{self.class.name} Done"
+      end
+    end
+    PricePusher.new.call
+  end
 end
