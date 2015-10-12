@@ -390,29 +390,3 @@
   // END - mobile
 
 }
-
-.as-seen-in{
-  margin-top: 50px;
-  hr{
-    border-top: 1px solid black;
-  }
-  .as-seen-in-text{
-    width: 20rem;
-    background-color: white;
-    text-align: center;
-    margin: 0 auto;
-    margin-top: -4.5rem;
-    font-family: Forum;
-    font-size: 2.5rem;
-  }
-}
-.as-seen-in-partners{
-  img{
-    float:left;
-    width: 10%;
-    @media(max-width: 992px){
-      width: 20%;
-    }
-  }
-
-}
