@@ -1,5 +1,5 @@
 ruby:
-  promocode     = decode(params[:pc]) || "newgirl25"
+  promocode     = params[:pc].present? ? decode(params[:pc]) : "newgirl25"
   template_name = params[:tn].present? ? decode(params[:tn]) : 'default'
   heading       = if decode(params[:h]) != '' then decode(params[:h]) else "WANT US TO BE YOUR <br> PERSONAL DRESSMAKER?" end
   message       = if decode(params[:m]) != '' then decode(params[:m]) else "SIGN UP FOR ACCESS <br> + <br> $25 OFF YOUR FIRST PURCHASE." end
