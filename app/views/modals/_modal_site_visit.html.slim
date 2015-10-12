@@ -5,7 +5,7 @@ ruby:
   message       = if decode(params[:m]) != '' then decode(params[:m]) else "SIGN UP FOR ACCESS <br> + <br> $25 OFF YOUR FIRST PURCHASE." end
   content       = decode(params[:c]) || promocode
   class_name    = "new-modal welcome-modal"
-  submit_text   = params[:st].present? ? decode(params[:st]) : 'Submit'
+  submit_text   = params[:st].present? ? decode(params[:st]) : 'CLICK TO REDEEM'
   timeout       = params[:t] || 3
   timer         = decode(params[:ti])
   fb_text       = params[:fbt].present? ? decode(params[:fbt]) : 'Redeem via Facebook'
