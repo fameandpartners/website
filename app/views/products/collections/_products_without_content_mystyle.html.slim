@@ -1,5 +1,5 @@
 .row.mystyle-first-row
-  = render partial: '/products/collections/product', collection: [@collection.products[0], @collection.products[1]], as: :product, locals: {col: 4}
+  = render partial: '/products/collections/product', collection: @collection.products[0..1], as: :product, locals: {col: 4}
   .col-md-6
     img src='assets/mystyle/camp1.jpg' class='camp1'
 .row.mystyle-second-row
@@ -7,9 +7,9 @@
     img src='assets/mystyle/camp2.jpg'
   .col-md-9.right-col
     .row
-      = render partial: '/products/collections/product', collection: [@collection.products[2], @collection.products[3], @collection.products[4]], as: :product, locals: {col: 3}
+      = render partial: '/products/collections/product', collection: @collection.products[2..4], as: :product, locals: {col: 3}
     .row
-      = render partial: '/products/collections/product', collection: [@collection.products[5], @collection.products[6], @collection.products[7]], as: :product, locals: {col: 3}
+      = render partial: '/products/collections/product', collection: @collection.products[5..7], as: :product, locals: {col: 3}
 .row
   - @collection.products.drop(8).each_slice(4) do |products|
     = render partial: '/products/collections/product', collection: products, as: :product
