@@ -166,7 +166,7 @@ module Products
     end
 
     def price_amount
-      display_price = discount ? price.apply(discount) : price
+      display_price = price.apply(discount) || price
       display_price.amount
     end
 
