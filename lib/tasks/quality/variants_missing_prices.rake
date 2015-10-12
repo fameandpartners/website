@@ -19,6 +19,7 @@ namespace :quality do
 
       def call
         logger.info "Started"
+        states = []
 
         scope.each do |product|
 
