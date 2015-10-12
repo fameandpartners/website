@@ -143,11 +143,6 @@ group :test do
   gem 'webmock', '~> 1.21.0'
 end
 
-group :staging, :development do
-  gem 'libv8', '~> 3.16'
-  gem 'therubyracer'
-end
-
 group :production do
   gem 'unicorn'
   gem 'aws-sdk'
