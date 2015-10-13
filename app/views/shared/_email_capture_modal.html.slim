@@ -10,11 +10,11 @@
   = content_for :inline_javascript do
     = raw show_promocode_modal
 
-- if pop?
+- if pop? || pop_thanks? || session[:new_modal_fb_state] == 'signed_in'
   ruby:
     promocode     = decode(params[:pc])
     template_name = params[:tn].present? ? decode(params[:tn]) : 'default'
-    ty            = params[:ty] || session[:ty]
+    ty            = session[:ty]
     heading       = decode(params[:h])
     message       = decode(params[:m])
     content       = decode(params[:c]) || promocode
@@ -25,11 +25,13 @@
     timeout       = params[:t] || 3
     timer         = decode(params[:ti])
     campaign_uuid = decode(params[:cu])
-    if ty == 'Thanks' || session[:new_modal_fb_state] == 'signed_in'
+    if session[:new_modal_fb_state] == 'signed_in' || pop_thanks?
       class_name    = 'new-modal-thank-you'
       template_name = 'new-modal-thank-you'
-      heading       = params[:ty_heading] || session[:ty_heading]
-      message       = params[:ty_message] || session[:ty_message]
+      ty_heading = 'Thanks! Did you know our dresses are made <br> bespoke by artisan seamstresses?'
+      ty_message = 'This means we can give you a bunch of perks that others simply can’t:'
+      heading       = params[:ty_heading] || session[:ty_heading] || ty_heading
+      message       = params[:ty_message] || session[:ty_message] || ty_message
     end
 
     if spree_user_signed_in?
@@ -112,7 +114,7 @@
           .col-sm-12.col-inline.full-form.fb-form
             = link_to fb_text, fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked', new_modal_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
 
-  - elsif ty == 'Thanks' || session[:new_modal_fb_state] == 'signed_in'
+  - elsif session[:new_modal_fb_state] == 'signed_in' || pop_thanks?
     ruby:
       session[:new_modal_fb_state] = 'displayed_thanks' if session[:new_modal_fb_state] == 'signed_in'
       session[:ty] = 'already Thanks'
