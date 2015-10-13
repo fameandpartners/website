@@ -88,9 +88,9 @@ ruby:
     = @order.try(:number)
 
   .shopping-bag-text-wrapper
-    .row.shopping-bag-text
-      = raw shopping_bag_texts.shipping_message
-
+    - if !shopping_bag_texts.shipping_message.blank?
+      .row.shopping-bag-text
+        = raw shopping_bag_texts.shipping_message
     .row.shopping-bag-text
       = raw shopping_bag_texts.value_proposition
 
