@@ -62,12 +62,15 @@ module Feeds
       items = []
       Spree::Product.active.includes(:variants).find_each(batch_size: 10) do |product|
         logger.info "Product: #{product.name}"
+
+        available_sizes = available_product_sizes(current_site_version, product)
         product.variants.each do |variant|
           begin
             item = get_item_properties(product, variant)
-            if item['image'].present?
-              items.push(item)
-            end
+
+            has_images = item['image'].present?
+            has_size   = available_sizes.include?(item['size'])
+            items.push(item) if has_images && has_size
           rescue StandardError => ex
             puts ex
           end
@@ -77,6 +80,7 @@ module Feeds
       items
     end
 
+    # TODO: Feed item is so important, that should be extracted to a separate class...
     def get_item_properties(product, variant)
       size  = variant.dress_size.try(:presentation)
       color = variant.dress_color.try(:presentation)
@@ -116,6 +120,12 @@ module Feeds
 
       # Images
       item.update get_images(product, variant)
+    end
+
+    # TODO: https://github.com/fameandpartners/website/pull/662 This PR fixes variants + dresses sizes mappings. Remove this method when this is merged
+    def available_product_sizes(site_version, spree_product)
+      sizes = Products::SelectionOptions.new(site_version: site_version, product: spree_product).read.sizes
+      sizes.default.map(&:name) + sizes.extra.map(&:name)
     end
 
     # TH: on-demand means never having to say you're out-of-stock
