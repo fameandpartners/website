@@ -108,7 +108,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/lookbook/here-comes-the-sun' => 'products/collections#show', :permalink => 'here-comes-the-sun', :as => :here_comes_the_sun_collection
 
-    get '/lookbook/dance-hall-days' => 'products/collections#show', :permalink => '', :as => :dance_hall_days_collection
+    get '/lookbook/dance-hall-days' => 'products/collections#show', :permalink => 'dance-hall', :as => :dance_hall_days_collection
 
     get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
