@@ -5,7 +5,10 @@
 
 .page-content
 
-  = image_tag "//#{configatron.asset_host}#{page.path}/1.jpg", alt: "Dance Hall Days", class: 'img-responsive portrait-img'
+  ul.rslides
+    - (1..2).each do |n|
+      li
+        = image_tag "//#{configatron.asset_host}#{page.path}/#{n}.jpg", alt: "#{page.heading} #{n}", class: 'img-responsive portrait-img'
 
   .page-content.products-collections.category
     = render :partial => 'filters_sort', :locals => { :hidden => true }
