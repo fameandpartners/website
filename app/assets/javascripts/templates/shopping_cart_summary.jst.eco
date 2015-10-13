@@ -65,10 +65,11 @@
 </p>
 
 <div class='shopping-bag-text-wrapper'>
-  <div class="row shopping-bag-text" >
-    <%- @shipping_message %>
-  </div>
-
+  <% if @shipping_message != "" :%>
+    <div class="row shopping-bag-text" >
+      <%- @shipping_message %>
+    </div>
+  <% end %>
   <div class="row shopping-bag-text" >
     <%- @value_proposition %>
   </div>
