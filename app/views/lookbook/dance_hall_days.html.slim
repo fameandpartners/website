@@ -5,9 +5,7 @@
 
 .page-content
 
-  - if banner.display?
-    - if banner.custom?
-      = image_tag "#{banner.image}", alt: "#{page.heading}", class: 'img-responsive portrait-img'
+  = image_tag "//#{configatron.asset_host}#{page.path}/1.jpg", alt: "Dance Hall Days", class: 'img-responsive portrait-img'
 
   .page-content.products-collections.category
     = render :partial => 'filters_sort', :locals => { :hidden => true }
