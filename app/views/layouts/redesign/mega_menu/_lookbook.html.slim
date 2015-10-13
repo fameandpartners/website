@@ -5,6 +5,12 @@ li.shop.menu-item
     .stories.container-fluid.center
 
       .col-md-2
+        = link_to dance_hall_days_collection do
+          .image-container
+            = image_tag src="http://#{configatron.asset_host}/lookbook/dance-hall-days/nav.jpg", :class => 'img-responsive', :alt => 'Dance Hall Days'
+          p.text-center.edit-title Dance Hall Days
+
+      .col-md-2
         = link_to luxe_collection_path do
           .image-container
             = image_tag src="http://#{configatron.asset_host}/lookbook/the-luxe-collection/nav.jpg", :class => 'img-responsive', :alt => 'The Luxe Collection'
