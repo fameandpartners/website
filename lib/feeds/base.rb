@@ -124,8 +124,8 @@ module Feeds
 
     # TODO: https://github.com/fameandpartners/website/pull/662 This PR fixes variants + dresses sizes mappings. Remove this method when this is merged
     def available_product_sizes(site_version, spree_product)
-      sizes = Products::SelectionOptions.new(site_version: site_version, product: spree_product).read.sizes
-      sizes.default.map(&:name) + sizes.extra.map(&:name)
+      sizes = Repositories::ProductSize.new(site_version: site_version, product: spree_product).read_all
+      sizes.map(&:name)
     end
 
     # TH: on-demand means never having to say you're out-of-stock
