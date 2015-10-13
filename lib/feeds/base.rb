@@ -63,13 +63,13 @@ module Feeds
       Spree::Product.active.includes(:variants).find_each(batch_size: 10) do |product|
         logger.info "Product: #{product.name}"
 
-        available_sizes = available_product_sizes(current_site_version, product)
+        size_mapping = product_size_mapping(current_site_version, product)
         product.variants.each do |variant|
           begin
-            item = get_item_properties(product, variant)
+            item = get_item_properties(product, variant, size_mapping)
 
             has_images = item['image'].present?
-            has_size   = available_sizes.include?(item['size'])
+            has_size   = size_mapping.find { |size| size.name == item['size'] }
             items.push(item) if has_images && has_size
           rescue StandardError => ex
             puts ex
@@ -81,10 +81,16 @@ module Feeds
     end
 
     # TODO: Feed item is so important, that should be extracted to a separate class...
-    def get_item_properties(product, variant)
+    def get_item_properties(product, variant, size_mapping)
       size  = variant.dress_size.try(:presentation)
       color = variant.dress_color.try(:presentation)
       price = variant.zone_price_for(current_site_version)
+
+      # Extra size dresses should cost more than regular ones
+      mapped_size = size_mapping.find { |mapped_size| mapped_size.name == size }
+      if mapped_size.try(:extra_price)
+        price.amount += LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE
+      end
 
       # are we ever on sale?
       original_price = price.display_price.to_html(symbol: false) #.display_price_without_discount
@@ -106,7 +112,7 @@ module Feeds
         description:             helpers.strip_tags(product.description),
         price:                   original_price,
         sale_price:              sale_price,
-        google_product_category: "Apparel & Accessories > Clothing > Dresses > Formal Gowns",
+        google_product_category: 'Apparel & Accessories > Clothing > Dresses > Formal Gowns',
         id:                      "#{product.id.to_s}-#{variant.id.to_s}",
         group_id:                product.id.to_s,
         color:                   color,
@@ -123,9 +129,8 @@ module Feeds
     end
 
     # TODO: https://github.com/fameandpartners/website/pull/662 This PR fixes variants + dresses sizes mappings. Remove this method when this is merged
-    def available_product_sizes(site_version, spree_product)
-      sizes = Repositories::ProductSize.new(site_version: site_version, product: spree_product).read_all
-      sizes.map(&:name)
+    def product_size_mapping(site_version, spree_product)
+      Repositories::ProductSize.new(site_version: site_version, product: spree_product).read_all
     end
 
     # TH: on-demand means never having to say you're out-of-stock
