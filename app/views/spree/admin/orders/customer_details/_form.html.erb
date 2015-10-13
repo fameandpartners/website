@@ -10,7 +10,7 @@
   $( document ).ready(function() {
     var user, row;
 
-    var currentOwner = <%=raw @order.user.present? ? @order.user.to_json : { user: {}} %>;
+    var currentOwner = <%=raw @order.user.present? ? @order.user.to_json : { user: {} }.to_json %>;
 
     var containsUser = function(users, user_id){
       if (users.length == 0 || !user_id){
