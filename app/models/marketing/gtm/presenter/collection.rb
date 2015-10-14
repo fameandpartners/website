@@ -15,10 +15,8 @@ module Marketing
         def body
           collection.products.map do |product|
             {
-                product: {
-                    id:   product.id,
-                    name: product.name
-                }
+                id:   product.id,
+                name: product.name
             }
           end
         end

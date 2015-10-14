@@ -17,16 +17,12 @@ module Marketing
           it 'returns a hash with product collection info' do
             expect(subject.body).to eq([
                                            {
-                                               product: {
-                                                   id:   123,
-                                                   name: 'Super Dress'
-                                               }
+                                               id:   123,
+                                               name: 'Super Dress'
                                            },
                                            {
-                                               product: {
-                                                   id:   456,
-                                                   name: 'Jedi Cosplay'
-                                               }
+                                               id:   456,
+                                               name: 'Jedi Cosplay'
                                            },
                                        ])
           end
