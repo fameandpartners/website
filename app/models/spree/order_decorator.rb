@@ -2,6 +2,8 @@ Spree::Order.class_eval do
 
   extend Spree::Order::Scopes
   attr_accessible :required_to, :email, :customer_notes, :projected_delivery_date, :user_id
+  belongs_to :gift
+
   self.include_root_in_json = false
 
   after_save :clean_cache!
