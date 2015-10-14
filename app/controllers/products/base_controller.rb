@@ -1,4 +1,6 @@
 class Products::BaseController < ApplicationController
+  include Marketing::Gtm::Controller::Collection
+
   rescue_from Errors::ProductInactive, with: :search_for_product_not_found
   rescue_from Errors::ProductNotFound, with: :search_for_product_not_found
 
@@ -7,6 +9,9 @@ class Products::BaseController < ApplicationController
   def search
     title("Search results for \"#{params[:q]}\"", default_seo_title)
     @results = search_results
+
+    append_gtm_collection(@results)
+
     render :search
   end
 
