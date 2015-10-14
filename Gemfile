@@ -101,6 +101,7 @@ group :assets do
   gem 'bourbon'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'coffee-script-source', '~> 1.8.0'
+  gem 'compass', '~> 1.0.3'
   gem 'uglifier', '1.3.0'
   gem 'execjs', '~> 2'
   gem 'jquery-ui-rails'
@@ -117,7 +118,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
   gem 'awesome_print'
-  gem 'compass'
   gem 'launchy', '2.2.0'
   gem 'letter_opener', '~> 1.4.1'
   # gem 'minitest'
@@ -141,11 +141,6 @@ group :test do
   gem 'timecop'
   gem 'vcr', '~> 2.9.3'
   gem 'webmock', '~> 1.21.0'
-end
-
-group :staging, :development do
-  gem 'libv8', '~> 3.16'
-  gem 'therubyracer'
 end
 
 group :production do
