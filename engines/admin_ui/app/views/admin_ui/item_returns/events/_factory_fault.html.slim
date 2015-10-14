@@ -1,0 +1,14 @@
+= form_for @form, :as => :event_data, :url => { controller: 'item_returns/events' } do |f|
+  = hidden_field_tag :event_type, event_type
+  .form-group
+    = f.label :factory_fault, 'Is this a Factory Fault?', class: 'control-label'
+    br
+    = f.radio_button :factory_fault, false, checked: @event.item_return.factory_fault ? false : true
+    |&nbsp;
+    = f.label :factory_fault, 'No', value: false
+    br
+    = f.radio_button :factory_fault, true, checked: @event.item_return.factory_fault
+    |&nbsp;
+    = f.label :factory_fault, 'Yes', value: true
+  .form-group
+    = f.button 'Submit'

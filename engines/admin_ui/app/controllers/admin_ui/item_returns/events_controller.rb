@@ -7,7 +7,8 @@ module AdminUi
           :receive_item  => ::Forms::ReceiveItemForm,
           :approve       => ::Forms::ApproveForm,
           :rejection     => ::Forms::RejectionForm,
-          :record_refund => ::Forms::RecordRefundForm
+          :record_refund => ::Forms::RecordRefundForm,
+          :factory_fault => ::Forms::FactoryFaultForm
         }
       end
 
