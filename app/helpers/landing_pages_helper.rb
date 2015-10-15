@@ -1,20 +1,6 @@
 module LandingPagesHelper
-  require "base64"
-
   def disable_notices?
     @disable_notices.present? && @disable_notices == true
-  end
-
-  def pop?
-    params[:pop].present? && params[:pop] == 'true'
-  end
-
-  def decode(p)
-    if p.present?
-      Base64.decode64(p.gsub(/\s/, '+'))
-    else
-      ''
-    end
   end
 
   def cropped_product_hoverable_image_tag(product)

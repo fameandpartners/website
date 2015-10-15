@@ -33,7 +33,6 @@ FameAndPartners::Application.routes.draw do
 
   resources :user_campaigns, only: [:create] do
     collection do
-      post :tell_mom
       get  :check_state
     end
   end
@@ -108,6 +107,8 @@ FameAndPartners::Application.routes.draw do
     get '/here-comes-the-sun-collection' => redirect('/lookbook/here-comes-the-sun')
 
     get '/lookbook/here-comes-the-sun' => 'products/collections#show', :permalink => 'here-comes-the-sun', :as => :here_comes_the_sun_collection
+
+    get '/lookbook/dance-hall-days' => 'products/collections#show', :permalink => 'dance-hall', :as => :dance_hall_days_collection
 
     get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
@@ -328,10 +329,6 @@ FameAndPartners::Application.routes.draw do
         resource :inspiration, :only => [:edit, :update]
 
         resource :colors, only: [:new, :create], controller: 'product_colors'
-
-        resources :videos, except: [:show], controller: 'product_videos' do
-          post :update_positions, on: :collection
-        end
       end
 
       resource :product_uploads, only: [:new, :create, :show] do
@@ -424,10 +421,6 @@ FameAndPartners::Application.routes.draw do
     get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')
 
     resources :site_versions, only: [:show], as: :site_version
-  end
-
-  if Rails.env.development?
-    mount MailPreview => 'mail_view'
   end
 
   mount AdminUi::Engine, at: '/fame_admin'

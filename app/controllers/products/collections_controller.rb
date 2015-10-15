@@ -29,8 +29,8 @@
 
 class Products::CollectionsController < Products::BaseController
   layout 'redesign/application'
-  attr_reader :page
-  helper_method :page
+  attr_reader :page, :banner
+  helper_method :page, :banner
 
   before_filter :redirect_undefined,
                 :canonicalize_sales,
@@ -63,25 +63,22 @@ class Products::CollectionsController < Products::BaseController
       @canonical = dresses_path if params[:sale]
     end
 
-    def load_page
-      current_path = LocalizeUrlService.remove_version_from_url(request.path)
-      @page = Revolution::Page.find_for(current_path, '/dresses/*') || default_page
-      @page.locale = current_site_version.locale
-    end
-
-    def default_page
-      Revolution::Page.new(
-        path: '/dresses/*',
-        template_path: '/products/collections/show',
-        variables: { 'limit' => 21 }
-      )
-    end
-
     def set_collection_resource
       @collection_options = parse_permalink(params[:permalink])
       @collection = collection_resource(@collection_options)
-
+      page.collection = @collection
       punch_products if product_ids
+    end
+
+    def load_page
+      current_path = LocalizeUrlService.remove_version_from_url(request.path)
+      @page = Revolution::Page.find_for(current_path, '/dresses/*') || default_page
+      page.locale = current_site_version.locale
+      @banner = Revolution::PageBannerDecorator.new(page, params)
+    end
+
+    def default_page
+      Revolution::Page.new(template_path: '/products/collections/show')
     end
 
     def punch_products

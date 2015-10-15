@@ -54,6 +54,7 @@ $product-color-hot-pink: #ff3399;
       .color-candy-pink              { background-color: #ff99ff; }
       .color-champagne               { background-color: #f0debb; }
       .color-charcoal                { background-color: #3c3c3c; }
+      .color-cheetah                 { background-image: url("product-collections/Cheetah.png"); }
       .color-cherry-red              { background-color: #ba0e0e; }
       .color-cobalt-blue             { background-color: #0000e5; }
       .color-coral                   { background-color: #ff6262; }
@@ -127,6 +128,7 @@ $product-color-hot-pink: #ff3399;
       .color-purple-metal            { background-color: #776385; }
       .color-red                     { background-color: $product_color-red; }
       .color-red-and-white           { @include split-color-selector($product-color-red, #fffff0); }
+      .color-rosebud                 { background-image: url("product-collections/Rosebud.png"); }
       .color-rose-gold               { background-color: #d6aa85; }
       .color-royal-blue              { background-color: #3f34b2; }
       .color-royal-purple            { background-color: #77539c; }

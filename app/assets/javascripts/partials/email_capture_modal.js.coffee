@@ -82,10 +82,15 @@ window.page.EmailCaptureModal = class EmailCaptureModal
           message = "Use this promocode for your next killer dress: #{@opts.promocode}."
         else
           message = "Thanks for joining!"
-        window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 999999)
+        if @opts.className != 'new-modal' && @opts.className != 'new-modal welcome-modal'
+          window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 999999)
 
       @fbPushTracking()
       window.track.event('LandingPageModal', 'Submitted', @opts.promocode)
+      if @opts.className == 'new-modal' || @opts.className == 'new-modal welcome-modal'
+        window.location.replace(window.location.href + "?pop_thanks=true")
+        return
+      window.location.reload()
 
   fbPushTracking: =>
     if @opts.fb
@@ -250,28 +255,3 @@ window.page.CountdownTimer = class CountdownTimer
       else if @closeCallback
         @closeCallback()
     , 1000
-
-
-window.page.showTellMomModal = ->
-  vex.dialog.buttons.NO.text = 'X'
-
-  updateHtml = (modal) ->
-    modal.find('.vex-dialog-buttons button').addClass('btn btn-black')
-    $form = modal.find('form')
-    $email = $form.find('input[name=email]')
-
-    $form.on 'submit', (e) ->
-      $.post('/user_campaigns/tell_mom', {email: $email.val()}).done ->
-        vex.close()
-      e.preventDefault()
-      e.stopPropagation()
-      false
-
-
-  vex.dialog.open
-    message: '<h2>Nice picks! How would mom say no?</h2><p>SEND HER YOUR SELECTION NOW:</p>',
-    className: 'vex-dialog-bottom vex-dialog-pink vex-text vex-dialog-pink-reverse',
-    popup: true,
-    input: $('#tell-mom-popup-content-template').html()
-    timeout: 0,
-    afterOpen: updateHtml

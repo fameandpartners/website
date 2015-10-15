@@ -45,6 +45,12 @@
         <%= f.label t(:email) %> <br>
         <%= f.text_field :email_cont, :class => 'fullwidth' %>
       </div>
+
+      <div class="field">
+        <%= f.label t(:roles) %> <br>
+        <%= f.select :spree_roles_name_eq, options_for_select( Spree::Role.pluck(:name).uniq, f.object.spree_roles_name_eq ), {:include_blank => true} , :class => 'select2 fullwidth' %>
+      </div>
+
       <div data-hook="admin_users_index_search_buttons">
         <%= button t(:search), 'icon-search' %>
       </div>

@@ -40,4 +40,28 @@ RSpec.describe ItemReturnEvent, :type => :model do
     it { is_expected.to validate_presence_of :refund_amount }
     it { is_expected.to validate_presence_of :refunded_at }
   end
+
+  describe 'factory fault' do
+
+    subject(:event) { ItemReturnEvent.factory_fault.new }
+    let!(:item_return) { create(:item_return, uuid: event.item_return_uuid) }
+
+    it { is_expected.to validate_presence_of :user }
+    it { is_expected.to validate_presence_of :factory_fault }
+    it 'updates item_returns.factory_fault to true if true' do
+      event.user = Faker::Internet.email
+      event.factory_fault = true
+      event.save!
+      item_returns = ItemReturn.find(item_return.id)
+      expect(item_returns.factory_fault).to be true
+    end
+
+    it 'updates item_returns.factory_fault to false if false' do
+      event.user = Faker::Internet.email
+      event.factory_fault = 'false'
+      event.save!
+      item_returns = ItemReturn.find(item_return.id)
+      expect(item_returns.factory_fault).to be false
+    end
+  end
 end

@@ -61,18 +61,19 @@ class Products::CollectionResource
     style     = style.first if style.is_a? Array
     bodyshape = bodyshape.first if bodyshape.is_a? Array
     Products::CollectionPresenter.from_hash(
-      products:   products,
+      products:       products,
       total_products: total_products,
-      collection: collection,
-      style:      style,
-      event:      event,
-      bodyshape:  bodyshape,
-      color:      color_group.try(:representative) || color,
-      sale:       discount,
-      fast_making: fast_making,
-      query_string: query_string,
-      order:      order,
-      details:    details
+      collection:     collection,
+      style:          style,
+      event:          event,
+      bodyshape:      bodyshape,
+      color:          color_group.try(:representative) || color,
+      sale:           discount,
+      fast_making:    fast_making,
+      query_string:   query_string,
+      order:          order,
+      details:        details,
+      site_version:   site_version
     )
   end
 

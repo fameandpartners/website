@@ -71,4 +71,23 @@
                 .help-block.m-b-none
                   | Warn text that will be shown to users when they first visit the unrecommended site version
 
+              / ShoppingBag
+              - shopping_bag = Preferences::ShoppingBag.new(site_version)
+              h3
+                | Shopping Bag
+              .form-group
+                label
+                  | Value Proposition Text
+                = text_area :preferences, shopping_bag.value_proposition_key, value: shopping_bag.value_proposition, class: 'form-control'
+                .help-block.m-b-none
+                  | Value proposition text that will be shown on shopping bag, right under the payment button.
+
+              / ShippingMessage
+              .form-group
+                label
+                  | Shipping Message
+                = text_field :preferences, shopping_bag.shipping_message_key, value: shopping_bag.shipping_message, class: 'form-control'
+                .help-block.m-b-none
+                  | Shipping message text that will be shown on the shopping bag as well as the checkout page.
+
             button.btn.btn-primary type="submit" Save changes

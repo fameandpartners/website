@@ -159,6 +159,27 @@
 		.Pastel{
 			background-color: #FFB7B7 !important;
 		}
+		.Cheetah{
+			background-image: url("product-collections/Cheetah.png");
+			background-size: 140px 40px;
+			background-position: 0px 0px;
+		}
+		.Cheetah.thumb-true{
+			background-image: url("product-collections/tick.svg"), url("product-collections/Cheetah.png");
+			background-size: 14px 14px, 140px 40px ;
+			background-repeat: no-repeat, no-repeat;
+			background-position: 4px 2px, 0px 0px;
+		}
+		.Rosebud{
+			background-image: url("product-collections/Rosebud.png");
+			background-size: 200px 65px;
+		}
+		.Rosebud.thumb-true{
+			background-image: url("product-collections/tick.svg"), url("product-collections/Rosebud.png");
+			background-size: 14px 14px, 200px 65px ;
+			background-repeat: no-repeat, no-repeat;
+			background-position: 4px 2px, 0px 0px;
+		}
 	}
 
 	.show-more-styles{
@@ -352,6 +373,15 @@
 			margin-left: 5px;
 		}
 	}
+
+	@include mobile {
+
+		& {
+			padding-top: 5px;
+		}
+
+	}
+
 }
 
 .on-sale * {
@@ -371,6 +401,7 @@
 	h1 {
 		text-transform: lowercase;
 		font-family: $font-family-secondary;
+   	font-weight: 400;
 
 		&:first-letter {
 			text-transform: uppercase;
@@ -396,6 +427,42 @@
 			color:#FFFFFF;
 		}
 	}
+
+	@include mobile {
+
+		& {
+			height: auto;
+			padding: 20px 0;
+			background-image: none !important;
+
+			&,
+			&.category-header {
+				background: $c-neutral-6;
+			}
+
+			h1, 
+			p {
+				color: $c-neutral-white;
+			}
+
+			h1 {
+				margin-bottom: 0;
+				font-size: 2.4rem;
+			}
+
+			p {
+				display: none;
+			}
+
+			.page-title--details {
+				width: auto;
+				padding: 0;
+			}
+
+		}
+
+	}
+
 }
 
 .details {
@@ -463,5 +530,3 @@ li.select2-results__option {
 .category-header, .category-header:after {
 	background-color: #eeddf0;
 }
-
-

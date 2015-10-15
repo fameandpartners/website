@@ -65,9 +65,6 @@ window.track = {
     track.event('Products', 'AddedToCart', label)  
     track.pageView('/cart/add');
 
-  viewVideo: (label) ->
-    track.event('Products', 'ViewVideo', label)
-
   viewCelebrityInspiration: (label) ->
     track.event('Products', 'ViewCelebrityInspiration', label)
 

@@ -57,38 +57,5 @@ module Marketing
         []
       end
     end
-
-    def self.build_additional_products_info(additional_products_info)
-      if additional_products_info.present?
-        additional_products_info.collect do |info_item|
-          {
-            product: info_item.product,
-            email:   info_item.email,
-            phone:   info_item.phone,
-            state:   info_item.state
-          }
-        end
-      else
-        []
-      end
-    end
-
-    def self.build_line_items_for_production(order)
-      order.line_items.collect do |item|
-        {
-          style_num:        item.style_number,
-          size:             item.country_size,
-          adjusted_size:    item.make_size,
-          color:            item.colour_name,
-          quantity:         item.quantity,
-          factory:          item.factory,
-          deliver_date:     order.projected_delivery_date,
-          express_making:   item.making_options.present? ? item.making_options.map{|option| option.name.upcase }.join(', ') : "",
-          customizations:   item.customisations.collect do |name, image_url| {name: name,url: image_url} end,
-          image_url:        item.image? ? item.image_url : ''
-        }
-      end
-    end
-
   end
 end

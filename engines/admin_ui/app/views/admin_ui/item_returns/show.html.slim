@@ -36,6 +36,8 @@
   .ibox-content
     h3 Order
     = link_to @item_return.order_number, spree.admin_order_path(id: @item_return.order_number)
+    H3 Factory Fault?
+    = @item_return.factory_fault ? 'Yes' : 'No'
     = render :partial => 'payment_info'
     - if @item_return.return_request.present?
       = render :partial => 'order_return_request'

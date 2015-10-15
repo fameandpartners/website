@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150921073046) do
+ActiveRecord::Schema.define(:version => 20151013020610) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -375,6 +375,7 @@ ActiveRecord::Schema.define(:version => 20150921073046) do
     t.string   "uuid"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+    t.boolean  "factory_fault"
   end
 
   add_index "item_returns", ["line_item_id"], :name => "index_item_returns_on_line_item_id", :unique => true
@@ -486,15 +487,18 @@ ActiveRecord::Schema.define(:version => 20150921073046) do
   end
 
   create_table "marketing_user_visits", :force => true do |t|
-    t.integer "spree_user_id"
-    t.string  "user_token",    :limit => 64
-    t.integer "visits",                      :default => 0
-    t.string  "utm_campaign"
-    t.string  "utm_source"
-    t.string  "utm_medium"
-    t.string  "utm_term"
-    t.string  "utm_content"
-    t.string  "referrer"
+    t.integer  "spree_user_id"
+    t.string   "user_token",    :limit => 64
+    t.integer  "visits",                      :default => 0
+    t.string   "utm_campaign"
+    t.string   "utm_source"
+    t.string   "utm_medium"
+    t.string   "utm_term"
+    t.string   "utm_content"
+    t.string   "referrer"
+    t.string   "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "marketing_user_visits", ["spree_user_id", "utm_campaign"], :name => "index_marketing_user_visits_on_spree_user_id_and_utm_campaign"
@@ -644,20 +648,6 @@ ActiveRecord::Schema.define(:version => 20150921073046) do
   end
 
   add_index "product_style_profiles", ["product_id"], :name => "index_product_style_profiles_on_product_id"
-
-  create_table "product_videos", :force => true do |t|
-    t.integer  "spree_product_id"
-    t.integer  "spree_option_value_id"
-    t.boolean  "is_master",                            :default => false
-    t.string   "color"
-    t.string   "url",                   :limit => 512
-    t.string   "video_id"
-    t.integer  "position"
-    t.datetime "created_at",                                              :null => false
-    t.datetime "updated_at",                                              :null => false
-  end
-
-  add_index "product_videos", ["spree_product_id"], :name => "index_product_videos_on_spree_product_id"
 
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"

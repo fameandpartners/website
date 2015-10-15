@@ -29,6 +29,7 @@ class Repositories::CartProduct
         product_type: product_type.to_sym,
         quantity: line_item.quantity,
         price: line_item_price,
+        discount: product.discount.try(:amount),
         image: product_image
       )
 

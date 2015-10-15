@@ -54,12 +54,17 @@
 @import 'redesign/vendor/slick-carousel';
 
 // Base
+@import 'redesign/base/type';
 @import 'redesign/base/buttons';
 @import 'redesign/base/containers';
 
 // Layout
 @import 'redesign/layout/header';
+@import 'redesign/layout/nav-menu';
 @import 'redesign/layout/menu-new-this-week';
+@import 'redesign/layout/menu-dresses';
+@import 'redesign/layout/menu-lookbook';
+@import 'redesign/layout/menu-magazine';
 
 // Components
 @import 'redesign/components/tabs';
@@ -68,6 +73,7 @@
 @import 'redesign/components/blog-posts';
 @import 'redesign/components/email-subscription';
 @import 'redesign/components/seo-content';
+@import 'redesign/components/carousel-strap';
 
 // Generic
 @import 'redesign/generic/helpers';

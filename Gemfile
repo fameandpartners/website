@@ -12,7 +12,6 @@ gem 'timers', '1.1.0'
 gem 'whenever'
 gem 'psych', '~> 2.0.13'
 gem 'active_model_serializers'
-gem 'data_migrate', git: 'git://github.com/droidlabs/data-migrate.git'
 gem 'rack-cors'
 gem 'business_time'
 gem 'rmagick'
@@ -21,7 +20,7 @@ gem 'default_value_for'
 gem 'tire'
 gem 'redis-rails'
 gem 'autoprefixer-rails'
-gem "bower-rails", "~> 0.10.0"
+gem 'bower-rails', '~> 0.10.0'
 
 # Monitoring & Events
 gem 'newrelic_rpm'
@@ -42,8 +41,8 @@ gem 'active_link_to'
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
-gem 'droidcss'
 gem 'react-rails', '~> 1.2'
+gem 'droidcss', '~> 2.0.4'
 
 # Data
 gem 'event_sourced_record'
@@ -79,10 +78,7 @@ gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
 
 # spree extensions for payments
 gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
-gem 'spree_paypal_express',
-    github: 'evgeniypetrov/better_spree_paypal_express',
-    branch: '1-3-stable',
-    ref: '478b27281f7ed806df5ae86a41f9890595f8d242'
+gem 'spree_paypal_express', github: 'fameandpartners/better_spree_paypal_express', branch: '1-3-stable'
 
 gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 
@@ -104,9 +100,10 @@ gem 'sinatra',          :require => false
 group :assets do
   gem 'bourbon'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'coffee-script-source', "~> 1.8.0"
+  gem 'coffee-script-source', '~> 1.8.0'
+  gem 'compass', '~> 1.0.3'
   gem 'uglifier', '1.3.0'
-  gem 'execjs', "~> 2"
+  gem 'execjs', '~> 2'
   gem 'jquery-ui-rails'
   gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
@@ -121,13 +118,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
   gem 'awesome_print'
-  gem 'capybara'
-  gem 'poltergeist'
-  gem 'rack_session_access'
-  gem 'compass'
   gem 'launchy', '2.2.0'
-  gem 'letter_opener', '0.0.2', git: 'git://github.com/droidlabs/letter_opener.git'
-  gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
+  gem 'letter_opener', '~> 1.4.1'
   # gem 'minitest'
   gem 'net-ssh', '~> 2.7.0'
   gem 'oink'
@@ -140,6 +132,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'capybara', '~> 2.5.0'
   gem 'database_cleaner', '0.9.1'
   gem 'factory_girl_rails', '4.2.1'
   gem 'rspec-activemodel-mocks'
@@ -148,11 +141,6 @@ group :test do
   gem 'timecop'
   gem 'vcr', '~> 2.9.3'
   gem 'webmock', '~> 1.21.0'
-end
-
-group :staging, :development do
-  gem 'libv8', '~> 3.16'
-  gem 'therubyracer'
 end
 
 group :production do

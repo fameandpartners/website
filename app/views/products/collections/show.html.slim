@@ -4,11 +4,12 @@
 
 = render :partial => 'javascript'
 
-.page-title.default.category-header style="background-image: url('#{@collection.details.banner.image}')"
-  .container
-    .page-title--details
-      h1.no-padding-bottom = @collection.details.banner.title
-      p= raw @collection.details.banner.subtitle
+- if banner.display?
+  .page-title.default.category-header style="background-image: url('#{banner.image}')"
+    .container
+      .page-title--details
+        h1.no-padding-bottom = raw params[:lpt] || page.heading
+        p= raw params[:lps] || page.sub_heading
 
 .page-content.products-collections.category
   = render :partial => 'filters_sort'

@@ -53,14 +53,16 @@ ruby:
     em New this week
   span.dresses
     = link_to 'DRESSES', dresses_path
-  span.nested
-    ' SHOP BY EVENT
-    ul
-      = render partial: 'layouts/redesign/event'
+  /!
+    span.nested
+      ' SHOP BY EVENT
+      ul
+        = render partial: 'layouts/redesign/event'
 
   span.lookbook LOOKBOOK
-  span.magazine
-    a href='http://blog.fameandpartners.com' BLOG
+  /! span.magazine MAGAZINE
+  span
+    a href='http://blog.fameandpartners.com' target='_blank' BLOG
   - if sale_active?
     span.sale
       = link_to 'SALE', mystyle_landing_page_path(lpi: 'none', sale: 'all', limit: 99)
@@ -73,86 +75,57 @@ ruby:
       = form_tag search_path, method: :get, id: 'searchForm'
         input type="text" id="searchValue" placeholder="SEARCH FOR..." name="q"
 
-.row.rect#rect-new-this-week.menu-new-this-week
+.row.rect#rect-new-this-week.nav-menu-wrap.menu-new-this-week
   .slider-wrap
     = react_component('NewThisWeekProducts',{device: 'desktop'})
   .btn-wrap
     = link_to 'SHOP ALL NEW THIS WEEK', dresses_path(:order => 'newest'), class: "btn btn-black btn-md"
 
-.row.rect#rect-dresses
-  .left-area
-    .col1
-      div.head SHOP BY
-      div
-        = link_to 'View all dresses', dresses_path , class: 'no-style-text'
-      div
-        = link_to "What's new", dresses_path(:order => 'newest'), class: 'no-style-text'
-      - unless Features.active?(:getitquick_unavailable)
-        div
-          = link_to 'Made in 48 hours', fast_making_dresses_path, class: 'no-style-text'
-    .col2
-      div.head STYLE
-      = render partial: 'layouts/redesign/style'
-    .col3
-      div.head COLOUR
-      = render partial: 'layouts/redesign/color'
-    /.col4
-      /div.head SEPARATES
-      /div Outerwear
-  = link_to mystyle_landing_page_path(:lpi => 'none', :pids => ['640-forrest-green','643-black','648-black','656-black','649-black','640-black'],:limit => 0), class: 'right-area'
-    div.girl-image
-      = image_tag "homepage/dress-girl.jpg"
-    div.girl-text
-      .contain
-        div BAMBI X FAME.
-        div SHOP BAMBI'S PICKS
-
-.row.rect#rect-lookbook
-  .lookbook-container
-    ul.lookbook-slide
+.row.rect#rect-dresses.nav-menu-wrap.menu-dresses
+  ul
+    li.title shop by
+    li
+      = link_to 'View all dresses', dresses_path
+    li
+      = link_to "What's new", dresses_path(:order => 'newest')
+    - unless Features.active?(:getitquick_unavailable)
       li
-        = link_to make_a_statement_collection_path, class: "lookbook-item"
-          .head
-            .text BAMBI X FAME.
-          .image
-            = image_tag "homepage/lookbook/1.jpg"
-        = link_to photo_finish_collection_path, class: "lookbook-item"
-          .head
-            .text PHOTO FINISH
-          .image
-            = image_tag "homepage/lookbook/2.jpg"
-        = link_to luxe_collection_path, class: "lookbook-item"
-          .head
-            .text THE LUXE COLLECTION
-          .image
-            = image_tag "homepage/lookbook/3.jpg"
-/!
-  .row.rect#rect-magazine
-    .col-md-7.left-col
-      .row.head STEAL HER STYLE
-      .row.images
-        .col-md-4
-          = image_tag "homepage/magazine/1.jpg"
-          div.text TAYLOR
-        .col-md-4
-          = image_tag "homepage/magazine/2.jpg"
-          div.text BEYONCE
-        .col-md-4
-          = image_tag "homepage/magazine/3.jpg"
-          div.text GIGI
-    .col-md-5.right-col
-      .row
-        .col-md-6.col1
-          .row.head BACKSTAGE PASS
-          .row.image
-            = image_tag "homepage/magazine/2.jpg", class: "left-img"
-            div.text Blah blah blah
-        .col-md-6.col2
-          .row.head BLOG
-          .row.image
-            = image_tag "homepage/magazine/3.jpg", class: "right-img"
-            div.text Blah blah blah
+        = link_to 'Made in 48 hours', fast_making_dresses_path
+  ul
+    li.title style
+    = render partial: 'layouts/redesign/style'
+  ul
+    li.title colour
+    = render partial: 'layouts/redesign/color'
+  ul
+    li.title events
+    = render partial: 'layouts/redesign/event'
 
+  = link_to mystyle_landing_page_path(:lpi => 'none', :pids => ['640-forrest-green','643-black','648-black','656-black','649-black','640-black'],:limit => 0), class: 'highlight-wrap'
+    .media-wrap
+      = image_tag "homepage/dress-girl.jpg"
+    .copy-wrap BAMBI X FAME.<br>SHOP BAMBI'S PICKS
+
+.row.rect#rect-lookbook.nav-menu-wrap.menu-lookbook
+  .slider-wrap
+    = react_component('MenuLookbook', skin: 'skin-light', assets: [{link: make_a_statement_collection_path, src: '/assets/homepage/lookbook/1.jpg', title: 'BAMBI X FAME'}, {link: dance_hall_days_collection_path, src: '/assets/homepage/lookbook/dance-hall-days.jpg', title: 'DANCE HALL DAYS'},{link: photo_finish_collection_path, src: '/assets/homepage/lookbook/2.jpg', title: 'PHOTO FINISH'}])
+
+/!
+  .row.rect#rect-magazine.nav-menu-wrap.menu-magazine
+    .slider-wrap
+      .title STEAL HER STYLE
+      = react_component('MagazineCarousel', skin: '', assets: [{link: '', src: '/assets/homepage/magazine/1.jpg', copy: 'TAYLOR'}, {link: '', src: '/assets/homepage/magazine/2.jpg', copy: 'BEYONCE'}, {link: '', src: '/assets/homepage/magazine/3.jpg', copy: 'GIGI'}])
+    .aside-wrap
+      a.item-wrap
+        .title BACKSTAGE PASS
+        .media-wrap
+          = image_tag "homepage/magazine/2.jpg"
+        .copy.txt-truncate-block Blah blah blah blah blah blah blah blah blah blah
+      a.item-wrap
+        .title BLOG
+        .media-wrap
+          = image_tag "homepage/magazine/3.jpg"
+        .copy.txt-truncate-block Blah blah blah blah blah blah blah blah blah blah blah
 
 coffee:
   $(document).ready ->

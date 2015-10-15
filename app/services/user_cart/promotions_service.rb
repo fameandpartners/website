@@ -11,8 +11,8 @@
 # note: some eligible/not eligible rules placed here
 # app/models/spree/promotion_decorator.rb
 # possible, we should extract logic from there
-module UserCart; end
-class UserCart::PromotionsService
+module UserCart
+class PromotionsService
   attr_reader :order, :code     # input
   attr_reader :status, :message # output
 
@@ -84,4 +84,5 @@ class UserCart::PromotionsService
         false
       end
     end
+end
 end
