@@ -154,7 +154,7 @@ window.helpers.ShoppingCart = class ShoppingCart
             sku: product.sku,
             name: product.name,
             color: product.color.name,
-            size: product.size.presentation,
+            size: product.size?.presentation,
             value: product.price.amount,
             currency: product.price.currency
           });
@@ -166,7 +166,7 @@ window.helpers.ShoppingCart = class ShoppingCart
             sku: product.sku,
             name: product.name,
             color: product.color.name,
-            size: product.size.presentation,
+            size: product.size?.presentation,
             value: product.price.amount,
             currency: product.price.currency
           }])

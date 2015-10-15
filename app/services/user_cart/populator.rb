@@ -26,6 +26,22 @@ class  UserCart::Populator
     @is_gift          = options[:is_gift]
   end
 
+  def track_gift_to_customerio
+    return unless @is_gift
+    begin
+      Marketing::CustomerIOEventTracker.new.track(
+        order.user,
+        'gift_selected',
+        email:          order.email,
+        variant_id:     @product_attributes[:variant_id]
+      )
+    rescue StandardError => e
+      Rails.logger.error('ERROR: customer.io event tracker: auto_apply_coupon')
+      Rails.logger.error(e)
+      NewRelic::Agent.notice_error(e)
+    end
+  end
+
   def populate
     validate!
 
@@ -37,6 +53,8 @@ class  UserCart::Populator
 
     order.update!
     order.reload
+
+    track_gift_to_customerio
 
     return OpenStruct.new({success: true, product: product}) if @is_gift
     return OpenStruct.new({
