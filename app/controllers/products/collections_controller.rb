@@ -48,7 +48,7 @@ class Products::CollectionsController < Products::BaseController
     respond_to do |format|
       format.html { render collection_template }
       format.json do
-        render json: @collection.serialize
+        render json: @collection
       end
     end
   end
