@@ -80,6 +80,7 @@
 }
 
 .new-modal.add-to-cart{
+  padding-bottom: 0;
   .vex-content {
     min-height: 0;
     width: 750px;
@@ -97,7 +98,7 @@
       width: 37%;
       height: 463px;
       @media(max-width: 992px){
-        height: 400px;
+        height: 420px;
       }
       .heading{
         font-size: 3.5rem;
@@ -159,7 +160,7 @@
         margin-top: 40px;
         margin-bottom: 40px;
         @media(max-width: 992px){
-          width: 15%;
+          width: 5rem;
         }
       }
       @media(max-width: 992px){
@@ -171,6 +172,9 @@
       width: 63%;
       height: 463px;
       background-color: white;
+      @media(max-width: 992px){
+        height: 520px;
+      }
       .mess{
         font-size: 1.5rem;
         font-weight: 400;
