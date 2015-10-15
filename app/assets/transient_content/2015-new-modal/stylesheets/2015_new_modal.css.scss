@@ -83,6 +83,7 @@
   .vex-content {
     min-height: 0;
     width: 750px;
+    border: none !important;
     .vex-dialog-input{
       padding-left: 0 !important;
       padding-right: 0 !important;
@@ -94,17 +95,50 @@
       float: left;
       background-color: #ebebeb;
       width: 37%;
-      margin-top: -12px;
-      height: 475px;
+      height: 463px;
+      @media(max-width: 992px){
+        height: 400px;
+      }
       .heading{
         font-size: 3.5rem;
         font-weight: 500;
         font-family: Formal;
+        @media(min-width: 992px){
+          br{
+            display:none;
+          }
+        }
         .you{
           font-style: italic;
+          display: inline-block;
+          @media(min-width: 992px){
+            width: 100%;
+          }
         }
         .vip{
-          font-weight: 700;
+          font-weight: 700 !important;
+          display: inline-block;
+          @media(min-width: 992px){
+            width: 100%;
+          }
+        }
+        .deserve{
+          display: inline-block;
+          @media(min-width: 992px){
+            width: 100%;
+          }
+          @media(max-width: 992px){
+            margin-left: 10px;
+          }
+        }
+        .treatment{
+          display: inline-block;
+          @media(min-width: 992px){
+            width: 100%;
+          }
+          @media(max-width: 992px){
+            margin-left: 10px;
+          }
         }
       }
       .mess{
@@ -121,9 +155,15 @@
         margin-top: 20px;
       }
       .logo{
-        width: 20%;
+        width: 18%;
         margin-top: 40px;
         margin-bottom: 40px;
+        @media(max-width: 992px){
+          width: 15%;
+        }
+      }
+      @media(max-width: 992px){
+        width:100%;
       }
     }
     .right-panel{
@@ -155,6 +195,9 @@
         img{
           cursor: pointer;
         }
+      }
+      @media(max-width: 992px){
+        width:100%;
       }
     }
   }
