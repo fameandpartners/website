@@ -13,12 +13,15 @@ module Marketing
         end
 
         def body
-          collection.products.map do |product|
-            {
-                id:   product.id,
-                name: product.name
-            }
-          end
+          { not_used_yet: true }
+
+          # TODO: This collection mapping is useful for Criteo. It's EXTREMELY important for Criteo that Products' IDs match feed IDs
+          # collection.products.map do |product|
+          #   {
+          #       id:   product.id,
+          #       name: product.name
+          #   }
+          # end
         end
       end
     end

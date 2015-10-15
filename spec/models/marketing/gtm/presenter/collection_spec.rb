@@ -15,16 +15,17 @@ module Marketing
 
         describe '#body' do
           it 'returns a hash with product collection info' do
-            expect(subject.body).to eq([
-                                           {
-                                               id:   123,
-                                               name: 'Super Dress'
-                                           },
-                                           {
-                                               id:   456,
-                                               name: 'Jedi Cosplay'
-                                           },
-                                       ])
+            expect(subject.body).to eq({ not_used_yet: true })
+            # expect(subject.body).to eq([
+            #                                {
+            #                                    id:   123,
+            #                                    name: 'Super Dress'
+            #                                },
+            #                                {
+            #                                    id:   456,
+            #                                    name: 'Jedi Cosplay'
+            #                                },
+            #                            ])
           end
         end
       end
