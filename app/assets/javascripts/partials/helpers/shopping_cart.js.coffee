@@ -63,7 +63,6 @@ window.helpers.ShoppingCart = class ShoppingCart
       force: false
     });
 
-
   # options:
   #   variant_id
   #   size_id

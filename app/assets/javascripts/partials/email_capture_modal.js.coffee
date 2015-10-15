@@ -171,6 +171,23 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       callback: @callback
       overlayClosesOnClick: @opts.instagram_campaign?
 
+    if @opts.className == "new-modal add-to-cart"
+      $(".add-to-cart .four-lipsticks img").click (e) ->
+        sku = $(e.target).data('sku')
+        $.ajax(
+          url: urlWithSitePrefix("/user_cart/products")
+          type: "POST"
+          dataType: "json"
+          data: {gift_sku: sku}
+        ).success(
+          console.log 'add gift to order ok'
+        ).error( () =>
+          console.log 'add gift to order error'
+        )
+
+      $(".add-to-cart .checkout-btn").click (e) ->
+        window.location.href = urlWithSitePrefix("/checkout")
+
 window.page.PromocodeModal = class PromocodeModal extends EmailCaptureModal
   constructor: (opts = {}) ->
     vex.dialog.buttons.NO.text = 'X'

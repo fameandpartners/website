@@ -91,13 +91,13 @@ ruby:
   .right-panel
     center
       .four-lipsticks
-        img.casablanca alt='casablanca' src='/assets/gift/casablanca.jpg'
-        img.socialize  alt='socialize'  src='/assets/gift/socialize.jpg'
-        img.morocco    alt='morocco'    src='/assets/gift/morocco.jpg'
-        img.firered    alt='firedred'   src='/assets/gift/firered.jpg'
+        img.casablanca alt='casablanca' src='/assets/gift/casablanca.jpg' data-sku='gift-Color:Casablanca'
+        img.socialize  alt='socialize'  src='/assets/gift/socialize.jpg'  data-sku='gift-Color:Socialize'
+        img.morocco    alt='morocco'    src='/assets/gift/morocco.jpg'    data-sku='gift-Color:Morocco'
+        img.firered    alt='firedred'   src='/assets/gift/firered.jpg'    data-sku='gift-Color:FireRed'
       .mess
         | Select* your <b>FREE</b> ModalCo gift <b>VALUED AT $24</b> & make your dress pop.
-      input type="submit" value="CHECK OUT"
+      input.checkout-btn value="CHECK OUT"
       .tc
         | *If your selected colour in unavailable, we'll send you the closest colour match. While stocks last.
 
@@ -235,10 +235,14 @@ hr
 
 
 coffee:
-  fbModalHeight = $('.auto-discount-applied').height()
-  if fbModalHeight > 0
-    $('#slides').css("marginTop", 209)
-    $('.product-content').css("top", "23rem")
+  $(window).load ->
+    fbModalHeight = $('.auto-discount-applied').height()
+    if fbModalHeight > 0
+      $('#slides').css("marginTop", 209)
+      $('.product-content').css("top", "23rem")
 
-  if $("#sale-banner").height() > 0
-    $('.product-details').css('margin-top','30px')
+    if $("#sale-banner").height() > 0
+      $('.product-details').css('margin-top','30px')
+
+
+

@@ -23,6 +23,7 @@ class  UserCart::Populator
     @site_version     = options[:site_version] || SiteVersion.default
     @currency         = options[:currency]  || site_version.try(:currency)
     @product_attributes = HashWithIndifferentAccess.new(options[:product] || {})
+    @is_gift          = options[:is_gift]
   end
 
   def populate
@@ -37,6 +38,7 @@ class  UserCart::Populator
     order.update!
     order.reload
 
+    return OpenStruct.new({success: true, product: product}) if @is_gift
     return OpenStruct.new({
       success: true,
       product: product,
@@ -60,6 +62,7 @@ class  UserCart::Populator
   private
 
     def validate!
+      return if @is_gift
       if product_color.custom && product_making_options.present?
         raise Errors::ProductOptionsNotCompatible.new("Custom colors and fast delivery can't be selected at the same time")
       end
@@ -121,6 +124,7 @@ class  UserCart::Populator
     end
 
     def personalized_product?
+      return if @is_gift
       product_variant.is_master? || product_color.custom || product_size.custom || product_customizations.present?
     end
 
