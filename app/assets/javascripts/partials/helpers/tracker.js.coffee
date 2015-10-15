@@ -1,7 +1,6 @@
 # helper methods to track via ga/etc
 window.track = {
   tracked: []
-
   dataLayer: window.dataLayer || []
 
   pageView: (page_url, page_params) ->
