@@ -2,6 +2,8 @@
 window.track = {
   tracked: []
 
+  dataLayer: window.dataLayer || []
+
   pageView: (page_url, page_params) ->
     window._gaq or= {}
     if _gaq && _gaq.push
@@ -62,7 +64,8 @@ window.track = {
     track.event('Wishlist', 'RemovedFromWishlist', label)
 
   addedToCart: (label) ->
-    track.event('Products', 'AddedToCart', label)  
+    @dataLayer.push({"event": "addToCart"})
+    track.event('Products', 'AddedToCart', label)
     track.pageView('/cart/add');
 
   viewCelebrityInspiration: (label) ->
