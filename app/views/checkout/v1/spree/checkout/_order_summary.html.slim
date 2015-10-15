@@ -40,10 +40,10 @@ ruby:
             .pull-left.small
               ' Size:
               span
-                ' #{ product.size.presentation },
+                ' #{ product.size.presentation if product.size.present?},
               ' Color:
               span.color
-                ' #{ product.color.presentation}
+                ' #{ product.color.presentation if product.color.present?}
             .pull-right.text-muted = product.price.display_price
             - if product.discount.present?
               .pull-right.text-muted.sale-percentage = "#{product.discount}% off"
