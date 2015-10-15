@@ -49,6 +49,21 @@ window.helpers.ShoppingCart = class ShoppingCart
   data: () ->
     @data
 
+  showGiftModal: () ->
+    addToCartModal = new window.page.EmailCaptureModal({
+      promocode: "",
+      content: "",
+      heading: "YOU DESERVE VIP TREATMENT",
+      message: "SO WE WANT TO GIVE YOU SOMETHING SPECIAL",
+      className: "new-modal add-to-cart",
+      action: "",
+      container: "",
+      timeout: 3,
+      timer: false,
+      force: false
+    });
+
+
   # options:
   #   variant_id
   #   size_id
@@ -65,7 +80,7 @@ window.helpers.ShoppingCart = class ShoppingCart
       added_product = _.find((data.products || []), (product) ->
         product.variant_id == product_data.variant_id
       )
-
+      @showGiftModal()
       @trackAddToCart(added_product)
     ).error( () =>
       @trigger('error')

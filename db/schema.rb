@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151014070613) do
+ActiveRecord::Schema.define(:version => 20151013020610) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -319,12 +319,6 @@ ActiveRecord::Schema.define(:version => 20151014070613) do
 
   create_table "factories", :force => true do |t|
     t.text     "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "gifts", :force => true do |t|
-    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -1047,7 +1041,6 @@ ActiveRecord::Schema.define(:version => 20151014070613) do
     t.text     "customer_notes"
     t.datetime "projected_delivery_date"
     t.text     "site_version"
-    t.integer  "gift_id"
   end
 
   add_index "spree_orders", ["completed_at"], :name => "index_spree_orders_on_completed_at"
