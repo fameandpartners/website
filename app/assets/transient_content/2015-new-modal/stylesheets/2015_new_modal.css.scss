@@ -82,5 +82,82 @@
 .new-modal.add-to-cart{
   .vex-content {
     min-height: 0;
+    width: 750px;
+    .vex-dialog-input{
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    .vex-dialog-message{
+      padding-top: 0 !important;
+    }
+    .left-panel{
+      float: left;
+      background-color: #ebebeb;
+      width: 37%;
+      margin-top: -12px;
+      height: 475px;
+      .heading{
+        font-size: 3.5rem;
+        font-weight: 500;
+        font-family: Formal;
+        .you{
+          font-style: italic;
+        }
+        .vip{
+          font-weight: 700;
+        }
+      }
+      .mess{
+        font-size: 1.5rem;
+        margin-top: 20px;
+        font-weight: 500;
+        .something{
+          margin-top: -15px;
+        }
+      }
+      hr{
+        border-top-color: black;
+        width: 30%;
+        margin-top: 20px;
+      }
+      .logo{
+        width: 20%;
+        margin-top: 40px;
+        margin-bottom: 40px;
+      }
+    }
+    .right-panel{
+      float: left;
+      width: 63%;
+      height: 463px;
+      background-color: white;
+      .mess{
+        font-size: 1.5rem;
+        font-weight: 400;
+        text-transform: none;
+      }
+      .tc{
+        font-size: 1rem;
+        text-transform: none;
+        font-weight: 600;
+      }
+      input{
+        background-color: black;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 700;
+        padding-left: 40px;
+        padding-right: 40px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .four-lipsticks{
+        img{
+          cursor: pointer;
+        }
+      }
+    }
   }
 }
+
+

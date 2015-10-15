@@ -73,6 +73,33 @@ ruby:
   - @product.cropped_images.each_with_index do |image, index|
     = tag :meta, name: "crop_image_#{index}", content: image.original
 
+#gift-modal.hidden
+  .left-panel
+    center
+      img.logo alt='mobilelogo' src='/assets/logo/logo-mobile.svg'
+      .heading
+        .you YOU
+        | DESERVE
+        .vip VIP
+        | TREATMENT
+      .mess
+        .so-we-want SO WE WANT TO GIVE YOU
+        .something SOMETHING SPECIAL.
+      hr
+      img.modelco alt='modelco' src='/assets/gift/modelco.jpg'
+  .right-panel
+    center
+      .four-lipsticks
+        img.casablanca alt='casablanca' src='/assets/gift/casablanca.jpg'
+        img.socialize  alt='socialize'  src='/assets/gift/socialize.jpg'
+        img.morocco    alt='morocco'    src='/assets/gift/morocco.jpg'
+        img.firered    alt='firedred'   src='/assets/gift/firered.jpg'
+      .mess
+        | Select* your <b>FREE</b> ModalCo gift <b>VALUED AT $24</b> & make your dress pop.
+      input type="submit" value="CHECK OUT"
+      .tc
+        | *If your selected colour in unavailable, we'll send you the closest colour match. While stocks last.
+
 .slides-outer-wrapper
   .slides-inner-wrapper
     #slides

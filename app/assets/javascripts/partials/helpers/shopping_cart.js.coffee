@@ -53,11 +53,11 @@ window.helpers.ShoppingCart = class ShoppingCart
     addToCartModal = new window.page.EmailCaptureModal({
       promocode: "",
       content: "",
-      heading: "YOU DESERVE VIP TREATMENT",
-      message: "SO WE WANT TO GIVE YOU SOMETHING SPECIAL",
+      heading: "",
+      message: "",
       className: "new-modal add-to-cart",
       action: "",
-      container: "",
+      container: "#gift-modal",
       timeout: 3,
       timer: false,
       force: false
