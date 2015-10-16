@@ -155,6 +155,8 @@ FameAndPartners::Application.routes.draw do
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
     end
 
+    get '/skirts' => 'products/collections#show', :permalink => 'skirts', :as => :skirts_collection
+    
     scope '/dresses' do
       root to: 'products/collections#show', as: :dresses
       get '/', to: 'products/collections#show', as: :collection
