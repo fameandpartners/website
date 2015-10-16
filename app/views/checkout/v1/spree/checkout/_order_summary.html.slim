@@ -38,12 +38,13 @@ ruby:
             = link_to product.name, collection_product_path(product), class: 'cart-item-title'
           .clearfix
             .pull-left.small
-              ' Size:
-              span
-                ' #{ product.size.presentation if product.size.present?},
+              - if product.size.present?
+                ' Size:
+                span
+                  ' #{ product.size.presentation },
               ' Color:
               span.color
-                ' #{ product.color.presentation if product.color.present?}
+                ' #{ product.color.presentation }
             .pull-right.text-muted = product.price.display_price
             - if product.discount.present?
               .pull-right.text-muted.sale-percentage = "#{product.discount}% off"

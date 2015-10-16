@@ -29,8 +29,10 @@
         </div>
         <div class="clearfix">
           <div class="pull-left small">
-            Size: <span><%= product.size.presentation if product.size != null %>, </span>
-            Color: <span class="color"><%= product.color.name if product.color != null%></span>
+            <% if product.size != null : %>
+              Size: <span><%= product.size.presentation %>, </span>
+            <% end %>
+            Color: <span class="color"><%= product.color.name %></span>
           </div>
           <div class="text-muted pull-right"><%= product.price.display_price %></div>
         </div>
