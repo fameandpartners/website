@@ -155,6 +155,8 @@ window.page.EmailCaptureModal = class EmailCaptureModal
     })
 
   open: () =>
+    window.track.event("LandingPageModal", "#{@opts.uuid} - #{@opts.promocode}")
+
     vex.dialog.buttons.NO.text = 'X'
     vex.dialog.open
       className: "vex vex-theme-flat-attack email-capture-modal #{@opts.className || ''}"
