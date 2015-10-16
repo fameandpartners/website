@@ -57,6 +57,13 @@
 		font-weight: 600;
 	}
 
+	.skirt-alert {
+		font-weight: normal;
+		text-transform: none;
+		font-style: italic;
+	}
+
+
 	.sale-price {
 		color: #eb6ffa;
 		text-transform: uppercase;
@@ -440,7 +447,7 @@
 				background: $c-neutral-6;
 			}
 
-			h1, 
+			h1,
 			p {
 				color: $c-neutral-white;
 			}
