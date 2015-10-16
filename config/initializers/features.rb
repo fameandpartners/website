@@ -10,16 +10,17 @@ end
 
 if Rails.env.development?
   Features.activate(:content_revolution)
-  Features.activate(:masterpass)
   Features.deactivate(:google_tag_manager)
 end
 
-Features.deactivate(:style_quiz)
 Features.deactivate(:collection_content)
 Features.deactivate(:maintenance)
-Features.activate(:sales)
+Features.deactivate(:shipping_message)
+Features.deactivate(:send_promotion_email_reminder)
+
 Features.activate(:express_making)
+Features.activate(:masterpass)
 Features.activate(:moodboard)
 Features.activate(:order_returns)
-Features.deactivate(:send_promotion_email_reminder)
-Features.deactivate(:shipping_message)
+Features.activate(:sales)
+Features.activate(:style_quiz)
