@@ -130,6 +130,7 @@ $product-color-hot-pink: #ff3399;
       .color-pink-red                { @include split-color-selector(#ff3399, #dd0000); }
       .color-pink-and-blush          { @include split-color-selector(#f9d9e1, #ffabbc); }
       .color-plum                    { background-color: #8d4585; }
+      .color-polka-dot               { background-image: url("product-collections/Polka-dot.png"); }
       .color-purple                  { background-color: #622b6f; }
       .color-purple-metal            { background-color: #776385; }
       .color-red                     { background-color: $product_color-red; }
