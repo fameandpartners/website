@@ -56,7 +56,6 @@ class  UserCart::Populator
 
     track_gift_to_customerio
 
-    return OpenStruct.new({success: true, product: product}) if @is_gift
     return OpenStruct.new({
       success: true,
       product: product,
