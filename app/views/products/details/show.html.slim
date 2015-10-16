@@ -107,7 +107,11 @@ ruby:
 
 /! About The Dress
 .dress-about.container.page-content
-  h2.text-center About The Dress
+  - if @product.name.downcase.include?('skirt')
+      h2.text-center About The Skirt
+  - else
+    h2.text-center About The Dress
+
   .divider
   .row
     .col-md-6.col-sm-12.hidden-xs
