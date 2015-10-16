@@ -214,10 +214,10 @@ Spree::Variant.class_eval do
   # Used as a callback, so must return a truthy value to avoid breaking the save
   def push_prices_to_variants
     return :not_master unless is_master
-    master_price_data = prices.collect {|p| [p.currency, p.amount] }.sort
+    master_price_data = extract_price_data
 
     product.variants.each do |v|
-      variant_price_data = v.prices.collect {|p| [p.currency, p.amount] }.sort
+      variant_price_data = v.extract_price_data
       next if variant_price_data == master_price_data
 
       prices.each do |master_price|
@@ -233,5 +233,9 @@ Spree::Variant.class_eval do
     end
 
     :completed
+  end
+
+  protected def extract_price_data
+    prices.collect {|p| [p.currency, p.amount] }.sort_by(&:first)
   end
 end
