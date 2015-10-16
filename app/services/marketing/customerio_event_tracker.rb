@@ -35,7 +35,7 @@ module Marketing
     def customer_ident_hash(user, site_version)
       {
         id:           user.id,
-        email:        user.email,
+        email:        user.email.strip,
         created_at:   user.created_at.to_i,
         first_name:   user.first_name,
         last_name:    user.last_name,
