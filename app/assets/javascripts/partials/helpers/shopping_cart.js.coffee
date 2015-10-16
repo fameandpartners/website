@@ -50,18 +50,29 @@ window.helpers.ShoppingCart = class ShoppingCart
     @data
 
   showGiftModal: () ->
-    addToCartModal = new window.page.EmailCaptureModal({
-      promocode: "",
-      content: "",
-      heading: "",
-      message: "",
-      className: "new-modal add-to-cart",
-      action: "",
-      container: "#gift-modal",
-      timeout: 3,
-      timer: false,
-      force: false
-    });
+    $.ajax(
+      url: urlWithSitePrefix("/user_cart/products/check_gift_in_cart")
+      type: "GET"
+      dataType: "json"
+    ).success((data) =>
+      if !data.has_gift
+        addToCartModal = new window.page.EmailCaptureModal({
+          promocode: "",
+          content: "",
+          heading: "",
+          message: "",
+          className: "new-modal add-to-cart",
+          action: "",
+          container: "#gift-modal",
+          timeout: 3,
+          timer: false,
+          force: false
+        });
+    ).error( () =>
+      @trigger('error')
+    )
+
+
 
   # options:
   #   variant_id

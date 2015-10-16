@@ -150,6 +150,7 @@ FameAndPartners::Application.routes.draw do
       post '/promotion'   => 'promotions#create'
 
       post 'products' => 'products#create'
+      get 'products/check_gift_in_cart' => 'products#check_gift_in_cart'
       delete 'products/:line_item_id' => 'products#destroy'
       delete 'products/:line_item_id/customizations/:customization_id' => 'products#destroy_customization'
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'

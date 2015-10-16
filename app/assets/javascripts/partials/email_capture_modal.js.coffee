@@ -181,6 +181,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
           data: {gift_sku: sku}
         ).success(
           console.log 'add gift to order ok'
+          $(".add-to-cart .vex-dialog-button-secondary").click()
           window.location.href = urlWithSitePrefix("/checkout")
         ).error( () =>
           console.log 'add gift to order error'

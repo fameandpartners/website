@@ -2,6 +2,11 @@ class UserCart::ProductsController < UserCart::BaseController
   respond_to :json
 
   # {"size_id"=>"34", "color_id"=>"89", "customizations_ids"=>"", "variant_id"=>"19565"}
+
+  def check_gift_in_cart
+    render json: {has_gift: current_order.line_items.any?{|i| i.product.name == 'Gift'}}
+  end
+
   def create
     if params[:gift_sku].present?
       params[:variant_id] = Spree::Variant.where(sku: params[:gift_sku]).first.id
