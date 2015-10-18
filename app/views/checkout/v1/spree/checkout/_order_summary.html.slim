@@ -27,15 +27,19 @@ ruby:
     - (cart.products || []).each do |product|
       li.cart-item data-id=(product.line_item_id)
         a.remove-product.fa.fa-close.pull-right.link-grey href="#0"
-        .cart-item-image-holder.pull-left
-          = link_to collection_product_path(product) do
-            = image_tag product.image.large, class: 'cart-item-image', alt: product.name
+        - if product.name != "Gift"
+          .cart-item-image-holder.pull-left
+            = link_to collection_product_path(product) do
+              = image_tag product.image.large, class: 'cart-item-image', alt: product.name
         .cart-item-info
           .heading
             span.qty
               => "#{product.quantity}"
               ' &times;
-            = link_to product.name, collection_product_path(product), class: 'cart-item-title'
+            - if product.name != "Gift"
+              = link_to product.name, collection_product_path(product), class: 'cart-item-title'
+            - else
+              = link_to product.name, "#", class: 'cart-item-title'
           .clearfix
             .pull-left.small
               - if product.size.present?

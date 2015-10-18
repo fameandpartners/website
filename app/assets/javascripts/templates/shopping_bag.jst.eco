@@ -19,13 +19,19 @@
       <a class="fa fa-close pull-right link-grey remove-product" href="#0"></a>
       <div class="cart-item-image-holder pull-left">
         <a href="<%= product.path %>">
-          <img class="img-responsive pull-left cart-item-image" src="<%= product.image.large %>" />
+          <% if product.name != "Gift" : %>
+            <img class="img-responsive pull-left cart-item-image" src="<%= product.image.large %>" />
+          <% end %>
         </a>
       </div>
       <div class="cart-item-info">
         <div class="heading">
           <span class="qty"><%= product.quantity %> x </span>
-          <a class="cart-item-title" href="<%= product.path %>"><%= product.name %></a>
+          <% if product.name != "Gift" : %>
+            <a class="cart-item-title" href="<%= product.path %>"><%= product.name %></a>
+          <% else :%>
+            <a class="cart-item-title" href="#"><%= product.name %></a>
+          <% end %>
         </div>
         <div class="clearfix">
           <div class="pull-left small">
