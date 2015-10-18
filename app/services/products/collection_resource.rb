@@ -135,6 +135,12 @@ class Products::CollectionResource
         end
       end
 
+      # If a taxon is NOT specified, exlucde anything marked not-a-dress
+      not_a_dress_taxon_id ||= Spree::Taxon.select(:id).where(:name => 'not-a-dress').first.id    
+      if result[:taxon_ids].empty?
+        result[:exclude_taxon_ids] = [not_a_dress_taxon_id]
+      end
+
       result[:discount] = discount if discount.present?
       result[:fast_making] = fast_making unless fast_making.nil?
       result[:query_string] = query_string if query_string.present?
