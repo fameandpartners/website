@@ -18,6 +18,6 @@ table.table
             = link_to page.translation.title, edit_content_page_path(page)
         td
           = button_to 'Edit', edit_content_page_path(page), :action => "edit", :method => "get", class: "btn btn-primary", :id => "edit_form"
-          = button_to 'Delete', content_page_path(page), :action => "destroy", :method => "delete", class: "btn btn-primary", :id => "delete_form"
+          = button_to 'Delete', content_page_path(page), action: "destroy", method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary", id: "delete_form"
 
 = link_to 'Create a Page', new_content_page_path, class: "btn btn-primary"

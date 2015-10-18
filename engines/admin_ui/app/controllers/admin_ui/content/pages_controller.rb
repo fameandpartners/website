@@ -50,9 +50,10 @@ module AdminUi
       def destroy
         @page = Revolution::Page.find(params[:id])
         if @page.translation.present?
-          @page.translation.delete
+          @page.translations.destroy_all
         end
         @page.delete
+        flash[:success] = "Page deleted"
         redirect_to action: :index
       end
 
