@@ -115,6 +115,7 @@ group :assets, :development, :test do
 end
 
 group :development, :test do
+  gem 'zeus'
   gem 'pry-rails'
   gem 'byebug'
   gem 'awesome_print'
