@@ -132,6 +132,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'poltergeist', '~> 1.7.0'
   gem 'capybara', '~> 2.5.0'
   gem 'database_cleaner', '0.9.1'
   gem 'factory_girl_rails', '4.2.1'
@@ -141,6 +142,7 @@ group :test do
   gem 'timecop'
   gem 'vcr', '~> 2.9.3'
   gem 'webmock', '~> 1.21.0'
+  gem 'rack_session_access', '~> 0.1.1'
 end
 
 group :production do
