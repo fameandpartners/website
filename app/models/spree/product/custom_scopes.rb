@@ -5,8 +5,8 @@ module Spree
         unscoped.hydrated.where(id: Array(ids))
       end
       def hydrated
-        includes(:variants             => [:zone_prices, :prices],
-                 :master               => [:zone_prices, :prices],
+        includes(:variants             => [:prices],
+                 :master               => [:prices],
                  :product_color_values => {:images => []})
       end
     end

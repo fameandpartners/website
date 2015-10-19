@@ -16,7 +16,7 @@ module Revolution
         images = p.images.find_all{|i| i.attachment_file_name.downcase.include?(colour_name.gsub('-', '_')) && i.attachment_file_name.downcase.include?('crop') }
         images = images.sort_by{ |i| i.position }.collect{ |i| i.attachment.url(:large) }
 
-        price = p.zone_price_for(site_version)
+        price = p.site_price_for(site_version)
         color = Spree::OptionValue.where(:name => colour_name).first
 
         OpenStruct.new(

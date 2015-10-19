@@ -6,6 +6,7 @@
 #   Repositories::ProductPrice.new(site_version: current_site_version, product: product).read
 #   Repositories::ProductPrice.new(product: product).read
 #
+# TODO - BURN THIS WITH FIRE
 class Repositories::ProductPrice
   include Repositories::CachingSystem
 
@@ -23,8 +24,7 @@ class Repositories::ProductPrice
   end
 
   def read
-    # product.master.zone_price_for(site_version) ?
-    product.zone_price_for(site_version)
+    product.site_price_for(site_version)
   end
 
   cache_results :read

@@ -84,7 +84,7 @@ module Feeds
     def get_item_properties(product, variant, size_mapping)
       size  = variant.dress_size.try(:presentation)
       color = variant.dress_color.try(:presentation)
-      price = variant.zone_price_for(current_site_version)
+      price = variant.site_price_for(current_site_version)
 
       # Extra size dresses should cost more than regular ones
       mapped_size = size_mapping.find { |mapped_size| mapped_size.name == size }

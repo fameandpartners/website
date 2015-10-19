@@ -1507,16 +1507,6 @@ ActiveRecord::Schema.define(:version => 20151013020610) do
     t.datetime "updated_at",    :null => false
   end
 
-  create_table "spree_zone_prices", :force => true do |t|
-    t.integer "variant_id"
-    t.integer "zone_id"
-    t.decimal "amount",     :precision => 8, :scale => 2
-    t.string  "currency"
-  end
-
-  add_index "spree_zone_prices", ["variant_id"], :name => "index_spree_zone_prices_on_variant_id"
-  add_index "spree_zone_prices", ["zone_id"], :name => "index_spree_zone_prices_on_zone_id"
-
   create_table "spree_zones", :force => true do |t|
     t.string   "name"
     t.string   "description"
