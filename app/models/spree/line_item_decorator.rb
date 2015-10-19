@@ -6,6 +6,8 @@ Spree::LineItem.class_eval do
 
   has_one :item_return, inverse_of: :line_item
 
+  has_one :size_normalisation, inverse_of: :line_item, class_name: 'LineItemSizeNormalisation'
+
   has_many :making_options, foreign_key: :line_item_id, class_name: '::LineItemMakingOption', dependent: :destroy
 
   after_save do

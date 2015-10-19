@@ -3,7 +3,7 @@ require 'log_formatter'
 # A migration creates the Normalisation object, and then a rake task actually converts the data afterwards.
 
 class LineItemSizeNormalisation < ActiveRecord::Base
-  belongs_to :line_item,                  class_name: 'Spree::LineItem'
+  belongs_to :line_item,                  class_name: 'Spree::LineItem', inverse_of: :size_normalisation
   belongs_to :spree_order,                class_name: 'Spree::Order', foreign_key: :order_number, primary_key: :number
   belongs_to :line_item_personalization,  class_name: 'LineItemPersonalization'
   belongs_to :old_size,                   class_name: 'Spree::OptionValue'
@@ -13,7 +13,8 @@ class LineItemSizeNormalisation < ActiveRecord::Base
   attr_accessible :currency, :messages, :new_size, :old_size_value, :site_version
 
   def self.fully_hydrated
-    includes(:line_item => { :variant => { :product => { :variants => :option_values} }}, :old_size => [], :new_size => [], :line_item_personalization => [])
+    includes(:line_item => { :variant => { :product => { :variants => :option_values} }})
+    .includes(:old_size, :new_size, :old_variant, :new_variant, :line_item_personalization)
   end
 
   def to_s
@@ -24,14 +25,13 @@ class LineItemSizeNormalisation < ActiveRecord::Base
     return unless old_variant.present?
     return unless new_size_value.present?
     if old_variant.product.deleted?
+      logger.warn "#{self.to_s} DELETED PRODUCT"
       self.state = :deleted_product
       save
       return
     end
     return if old_variant.is_master
     return if line_item_personalization.present?
-
-    logger.info self.to_s
 
     if old_variant.dress_color.present? && old_variant.dress_size.present?
       if old_variant.product.variants.present?
@@ -40,11 +40,15 @@ class LineItemSizeNormalisation < ActiveRecord::Base
 
         if new_variant_candidate.present?
           self.new_variant = new_variant_candidate
-
-          logger.info "Found new variant #{new_variant.id}"
+          logger.info "#{self.to_s} Found New Variant #{new_variant.id}"
           save
+        else
+          logger.warn "#{self.to_s} NO NEW VARIANT"
         end
+
       end
+    else
+      logger.error "#{self.to_s} Unknown state"
     end
   end
 
@@ -52,8 +56,13 @@ class LineItemSizeNormalisation < ActiveRecord::Base
     !! self.processed_at.present?
   end
 
+  def unprocessable?
+    self.state == 'unprocessable'
+  end
+
   def convert_size!
     return if proccessed?
+    return if unprocessable?
 
     self.processed_at = DateTime.current
 
@@ -69,8 +78,6 @@ class LineItemSizeNormalisation < ActiveRecord::Base
       self.state = :no_variant_or_personalisation
     end
 
-    logger.info self.state
-
     self.save!
   end
 
@@ -78,7 +85,7 @@ class LineItemSizeNormalisation < ActiveRecord::Base
   def logger
     @logger ||= begin
       new_logger = Logger.new($stdout)
-      new_logger.level     = Logger::INFO
+      new_logger.level     = Logger::WARN
       new_logger.formatter = LogFormatter.terminal_formatter
       new_logger
     end
@@ -117,12 +124,13 @@ class LineItemSizeNormalisation < ActiveRecord::Base
         begin
           normalisation = LineItemSizeNormalisation.new
           normalisation.order_number              = line_item.order.number
+          normalisation.order_created_at          = line_item.order.created_at
           normalisation.line_item                 = line_item
           normalisation.line_item_personalization = line_item.personalization
           normalisation.old_variant               = line_item.variant
           normalisation.currency                  = line_item.order.currency
           normalisation.site_version              = line_item.order.site_version
-          normalisation.state = :new
+          normalisation.state = :unconverted
 
           if line_item.personalization
             # info  "PERSONALISED #{line_item.id}"
@@ -131,7 +139,6 @@ class LineItemSizeNormalisation < ActiveRecord::Base
 
           elsif line_item.variant && line_item.variant.dress_size.present?
 
-            # binding.pry
             normalisation.old_size_id    = line_item.variant.dress_size.id
             normalisation.old_size_value = line_item.variant.dress_size.name
 
@@ -148,7 +155,7 @@ class LineItemSizeNormalisation < ActiveRecord::Base
             warn  "No Variant Found #{line_item.id}"
 
           else
-            binding.pry
+            error "Unknown & unsupported condition #{line_item.id}"
           end
 
           if normalisation.old_size_value
@@ -157,7 +164,7 @@ class LineItemSizeNormalisation < ActiveRecord::Base
               normalisation.new_size_id    = size_id(new_size_value)
               normalisation.new_size_value = new_size_value
             else
-              normalisation.messages = "Unchangeable size"
+              normalisation.messages = "Unchangeable size (#{normalisation.old_size_value})-(#{new_size_value})"
               normalisation.state = :unprocessable
             end
           end
@@ -166,7 +173,7 @@ class LineItemSizeNormalisation < ActiveRecord::Base
           normalisation.save
 
         rescue StandardError => e
-          binding.pry
+          error e.message
         end
       end
     end
@@ -175,7 +182,7 @@ class LineItemSizeNormalisation < ActiveRecord::Base
       Spree::LineItem
         .includes(variant: :option_values)
         .joins(:order => { :ship_address => :country })
-        .where("spree_countries.name = 'Australia' OR spree_orders.currency = 'AUD' or spree_orders.site_version = 'au'")
+        .where("spree_orders.site_version = 'au'")
     end
   end
 end

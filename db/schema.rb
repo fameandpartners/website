@@ -562,6 +562,21 @@ ActiveRecord::Schema.define(:version => 20151029003230) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "order_shipments_factories_concrete", :id => false, :force => true do |t|
+    t.integer  "id",                                    :null => false
+    t.string   "number",                  :limit => 15
+    t.string   "state"
+    t.date     "completed_at"
+    t.date     "projected_delivery_date"
+    t.date     "shipped_at"
+    t.text     "array_to_string"
+    t.float    "days_to_ship"
+    t.integer  "num_items",               :limit => 8
+    t.boolean  "shipped_in_7"
+    t.boolean  "shipped_before_delivery"
+    t.datetime "updated_at"
+  end
+
   create_table "payment_requests", :force => true do |t|
     t.integer  "order_id"
     t.string   "recipient_full_name"

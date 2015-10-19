@@ -4,15 +4,17 @@ class SizeNormalisationsGrid
   include Datagrid
 
   scope do
-    LineItemSizeNormalisation.joins(:spree_order).order('spree_orders.created_at DESC')
+    LineItemSizeNormalisation.fully_hydrated.joins(:spree_order).order('spree_orders.created_at DESC')
   end
 
   filter(:state, :enum,
      select: -> { LineItemSizeNormalisation.pluck(:state).uniq }
   )
+  filter(:order_created_at, :datetime)
+  filter(:id, :string)
   filter(:custom1, :dynamic)
   filter(:custom2, :dynamic)
-  filter(:custom3, :dynamic)
+
 
   column :id
   column :line_item_id, html: true do |normalisation|
@@ -21,6 +23,7 @@ class SizeNormalisationsGrid
 
   column :line_item_personalization_id, header: 'Personalisation'
 
+  column :order_created_at
   column :order_number, html: true do |normalisation|
     link_to normalisation.order_number, spree.admin_order_path(id: normalisation.order_number)
   end

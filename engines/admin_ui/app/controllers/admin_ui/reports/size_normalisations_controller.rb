@@ -2,7 +2,7 @@ module AdminUi
   module Reports
     class SizeNormalisationsController < AdminUi::ApplicationController
       def show
-        @collection = SizeNormalisationsGrid.new(params[:item_returns_grid])
+        @collection = SizeNormalisationsGrid.new(params[:size_normalisations_grid])
         respond_to do |f|
           f.html do
             @collection.scope { |scope| scope.page(params[:page]).per(100) }

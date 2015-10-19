@@ -1,0 +1,17 @@
+- if @order.line_items.any? {|li| li.size_normalisation.present? }
+  .size_normalisation_warnings.errorExplanation
+    h2 Items on this order have changed size after ordering.
+    ul
+      - @order.line_items.map(&:size_normalisation).each do |norm|
+        li
+          - if norm.state.inquiry.unprocessable?
+            strong = norm.messages
+          - else
+            ' Originally ordered in size
+            strong : code => norm.old_size_value
+            ' becomes size
+            strong : code => norm.new_size.present? ? norm.new_size.name : norm.new_size_value
+            ' Status
+            strong : code  => norm.state
+          =<> link_to 'Details', admin_ui.reports_size_normalisations_path(:size_normalisations_grid => {id: norm.id })
+

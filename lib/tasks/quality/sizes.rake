@@ -1,8 +1,8 @@
 require 'log_formatter'
 
-namespace :sizes do
+namespace :quality do
   desc 'Move to explicit sizes'
-  task :normalise => :environment do
+  task :normalise_sizes => :environment do
 
     new_logger = Logger.new($stdout)
     new_logger.level     = Logger::INFO
