@@ -2,65 +2,69 @@ require 'spec_helper'
 
 module Orders
   RSpec.describe LineItemPresenter do
+    let(:item) do
+      FactoryGirl.build(
+          :line_item,
+          id:       300,
+          price:    999,
+          quantity: 3,
+      )
+    end
+
+    let(:order)         { instance_spy 'Spree::Order' }
+    subject(:presenter) { described_class.new(item, order) }
 
     describe 'delegates to LineItem' do
-
-      let(:item) do
-        FactoryGirl.build(:line_item,
-                          :id       => 300,
-                          :price    => 999,
-                          :quantity => 3,
-        )
-      end
-
-      let(:order)         { instance_spy 'Spree::Order' }
-      subject(:presenter) { described_class.new(item, order) }
-
-      it('#id')            { expect(subject.id).to eq 300     }
-      it('#display_price') { expect(subject.price).to eq 999  }
+      it('#id')            { expect(subject.id).to eq 300 }
+      it('#display_price') { expect(subject.price).to eq 999 }
       it('#quantity')      { expect(subject.quantity).to eq 3 }
     end
 
     describe '#shipment' do
-      it 'exposes properties of @shipment' do
-        item       = double 'item'
-        shipment   = double 'shipment',
-                            :line_items => [item],
-                            :shipped?   => 'am_shipped?',
-                            :shipped_at => 'shipped_yesterday',
-                            :tracking   => 'tracking_44'
-        order      = double 'order', :shipments => [shipment]
-        presenter  = described_class.new(item, order)
+      let(:shipment) do
+        double('shipment',
+               line_items: [item],
+               shipped?:   'am_shipped?',
+               shipped_at: 'shipped_yesterday',
+               tracking:   'tracking_44'
+        )
+      end
+      let(:order)         { double('order', shipments: [shipment]) }
 
-        expect(presenter.shipped_at).to      eq 'shipped_yesterday'
-        expect(presenter.shipped?).to        eq 'am_shipped?'
+      subject(:presenter) { described_class.new(item, order) }
+
+      it 'exposes properties of @shipment' do
+        expect(presenter.shipped_at).to eq 'shipped_yesterday'
+        expect(presenter.shipped?).to eq 'am_shipped?'
         expect(presenter.tracking_number).to eq 'tracking_44'
       end
 
       context 'when missing' do
-        it 'provides safe null values' do
-          item       = double 'item'
-          order      = double 'order', :shipments => []
-          presenter  = described_class.new(item, order)
+        let(:item)          { double('item') }
+        let(:order)         { double('order', shipments: []) }
 
-          expect(presenter.shipped_at).to      be_nil
-          expect(presenter.shipped?).to        be_falsey
+        subject(:presenter) { described_class.new(item, order) }
+
+        it 'provides safe null values' do
+          expect(presenter.shipped_at).to be_nil
+          expect(presenter.shipped?).to be_falsey
           expect(presenter.tracking_number).to eq 'NoShipment'
         end
       end
     end
 
     describe '#size' do
+      let(:item)          { double 'item', personalization: nil, variant: double(dress_size: nil) }
+      let(:order)         { double 'order', site_version: 'SITE' }
+      subject(:presenter) { described_class.new(item, order) }
+
       it 'reverts to unknown for missing dress sizes' do
-        item      = double 'item', personalization: nil, variant: double(dress_size: nil)
-        order     = double 'order', site_version: 'SITE'
-        presenter = described_class.new(item, order)
         expect(presenter.country_size).to eq 'SITE-Unknown Size'
       end
     end
 
     describe '#make_size' do
-      let(:size)      { double(:size, name: '8')}
+      let(:size)      { double(:size, name: '8') }
       let(:item)      { double 'item', personalization: nil, variant: double(:dress_size => size) }
       let(:order)     { double 'order', site_version: site_version }
       let(:presenter) { described_class.new(item, order) }
@@ -103,20 +107,42 @@ module Orders
     describe '#fabrication_status' do
       let(:item)  { FactoryGirl.build(:line_item, fabrication: fabrication) }
       let(:order) { FactoryGirl.build(:complete_order) }
+
       subject     { described_class.new(item, order).fabrication_status }
 
       context 'delegates state to fabrication' do
         let(:fabrication) { Fabrication.new.tap { |f| f.state = :some_state } }
 
-        it do
-          is_expected.to eq :some_state
-        end
+        it { is_expected.to eq :some_state }
       end
 
       context 'fallback' do
         let(:fabrication) { nil }
-        it do
-          is_expected.to eq :processing
+
+        it { is_expected.to eq :processing }
+      end
+    end
+
+    describe '#image_url' do
+      context 'presenter has an image' do
+        let(:attachment) { double('attachment') }
+        let(:image)      { double('image', attachment: attachment) }
+
+        before(:each) do
+          allow(presenter).to receive_messages(image?: true, image: image)
+          allow(attachment).to receive(:url).with(:large).and_return('http://example.com/image_url.jpg')
+        end
+
+        it 'returns image url' do
+          expect(subject.image_url).to eq('http://example.com/image_url.jpg')
+        end
+      end
+
+      context 'presenter does not have an image' do
+        before(:each) { allow(presenter).to receive(:image?).and_return(false) }
+
+        it 'returns nil' do
+          expect(subject.image_url).to be_nil
         end
       end
     end
