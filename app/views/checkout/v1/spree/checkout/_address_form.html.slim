@@ -7,7 +7,6 @@ ruby:
 - if Spree::Config[:address_requires_state]
   ruby:
     states = available_states_for_current_zone
-    address = set_us_default(address)
     have_states = address.country.states.present?
     # copied from instance_tag#tag_id helper method
     sanitized_object_name = form.object_name.gsub(/\]\[|[^-a-zA-Z0-9:.]/, "_").sub(/_$/, "")

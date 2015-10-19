@@ -26,8 +26,8 @@ Spree::Address.class_eval do
     ].reject(&:blank?).join(', ')
   end
 
-  def set_last(current_user=nil, try_spree, current_order)
-    if try_spree && !current_order.try(:bill_address)
+  def set_last(current_user=nil, current_order)
+    if current_user && !current_order.try(:bill_address)
       last_order = Spree::Order.with_state(:complete).where(user_id: current_user).order(:created_at).last
       order_bill_address = last_order.bill_address if last_order.try(:bill_address)
     end
