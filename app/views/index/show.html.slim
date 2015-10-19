@@ -5,7 +5,7 @@ ruby:
 .page-content.index
   // TODO: create helper for multisource images
   = react_component('HeroCarousel', skin: 'skin-light',
-    assets: [{link: dance_hall_days_collection_path, src: '/assets/home-page-tiles/hero-4', alt: 'Dance Hall Days - Shop the Collection'}, {link: lookbook_path + '/photo-finish', src: '/assets/home-page-tiles/hero-2', alt: 'Photo FINISH - Shop Now'}, {link: lookbook_path + '/make-a-statement', src: '/assets/home-page-tiles/hero-3', alt: 'Bambi - Shop the Collection'}])
+    assets: [{link: dance_hall_days_collection_path, src: '/assets/home-page-tiles/hero-4', alt: 'Dance Hall Days - Shop all formal dresses'}, {link: lookbook_path + '/photo-finish', src: '/assets/home-page-tiles/hero-2', alt: 'Photo FINISH - Shop Now'}, {link: lookbook_path + '/make-a-statement', src: '/assets/home-page-tiles/hero-3', alt: 'Bambi - Shop the Collection'}])
 
 section.carousel-strap.instagram
   .container
@@ -33,11 +33,11 @@ section.carousel-strap.instagram
 section.container.content-block.home-main-content
   .row
     .main.col-md-7
-      = link_to build_taxon_path('Two Piece'), class: 'media-wrap'
-        = image_tag 'home-page-tiles/tile-double-or-nothing.jpg', alt: 'Double or nothing - Discover our best two-piece styles'
+      = link_to skirts_collection_path, class: 'media-wrap'
+        = image_tag 'home-page-tiles/tile-skirting.jpg', alt: 'New! Skirting the issue - Shop our separates'
       = render 'shared/redesign/tabs_collection'
-      = link_to 'dresses/red', class: 'media-wrap'
-        = image_tag 'home-page-tiles/tile-red-dresses.jpg', alt: 'The only color you need this spring - Shop red'
+      = link_to build_taxon_path('Two Piece'), class: 'media-wrap'
+        = image_tag 'home-page-tiles/tile-double-or-nothing-sml.jpg', alt: 'Double or nothing - Shop our best 2-piece styles'
       = link_to fast_making_dresses_path, class: 'media-wrap'
         = image_tag 'home-page-tiles/tile-express-making.png', alt: 'Express making - Dresses made in 48 hours.'
       = link_to bridesmaid_collection_path, class: 'media-wrap'

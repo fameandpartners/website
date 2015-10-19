@@ -1,17 +1,4 @@
 module ProductsHelper
-=begin
-  def product_style_and_event(product)
-    result = []
-    style_taxon = Spree::Taxonomy.where(name: "Style").first.root
-    event_taxon = Spree::Taxonomy.where(name: "Event").first.root
-    
-    result << product.taxons.where(parent_id: event_taxon.id).last
-    result << product.taxons.where(parent_id: style_taxon.id).last if result.empty?
-
-    return result
-  end
-=end
-
   def range_taxonomy
     @range_taxonomy ||= Spree::Taxonomy.where(name: 'Range').first
   end
@@ -193,11 +180,6 @@ module ProductsHelper
     end
   end
 
-
-
-
-
-
   def line_item_image_url(line_item, size = :small)
     image = line_item.image
     if image.present? && image.attachment.present?
@@ -206,21 +188,6 @@ module ProductsHelper
       'noimage/product.png'
     end
   end
-
-  def quick_view_link(product)
-    link_to 'Quick view', collection_product_path(product), data: { action: 'quick-view', id: product.permalink }
-  end
-
-=begin
-  def add_to_bag_link(product_or_variant)
-    if product_or_variant.is_a?(Spree::Product)
-      # don't use master variant as default
-      link_to 'Add to bag', '#', class: 'buy-now btn'
-    else
-      link_to 'Add to bag', '#', class: 'buy-now btn', data: { id: product_or_variant.id }
-    end
-  end
-=end
 
   # old, not cacheable variant
   def add_to_wishlist_link(product_or_variant, options = {})

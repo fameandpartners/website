@@ -16,22 +16,22 @@
 # )
 module Search
   class ColorVariantsQuery
-
     def self.build(options = {})
       options = HashWithIndifferentAccess.new(options)
 
       # some kind of documentation
-      colors           = options[:color_ids]
-      body_shapes      = options[:body_shapes]
-      taxons           = options[:taxon_ids]
-      exclude_products = options[:exclude_products]
-      discount         = options[:discount]
-      query_string     = options[:query_string]
-      order            = options[:order]
-      fast_making      = options[:fast_making]
-      limit            = options[:limit].present? ? options[:limit].to_i : 1000
-      offset           = options[:offset].present? ? options[:offset].to_i : 0
-      show_outerwear   = !!options[:show_outerwear]
+      colors            = options[:color_ids]
+      body_shapes       = options[:body_shapes]
+      taxons            = options[:taxon_ids]
+      exclude_products  = options[:exclude_products]
+      discount          = options[:discount]
+      query_string      = options[:query_string]
+      order             = options[:order]
+      fast_making       = options[:fast_making]
+      limit             = options[:limit].present? ? options[:limit].to_i : 1000
+      offset            = options[:offset].present? ? options[:offset].to_i : 0
+      show_outerwear    = !!options[:show_outerwear]
+      exclude_taxon_ids = options[:exclude_taxon_ids]
 
       Tire.search(configatron.elasticsearch.indices.color_variants, size: limit, from: offset) do
         filter :bool, :must => { :term => { 'product.is_deleted' => false } }
@@ -60,6 +60,17 @@ module Search
 
         if taxons.present?
           filter :terms, 'product.taxon_ids' => taxons
+        end
+
+        # exclude items marked not-a-dress
+        if exclude_taxon_ids.present?
+          filter :bool, :must => {
+            :not => {
+              :terms => {
+                'product.taxon_ids' => exclude_taxon_ids
+              }
+            }
+          }
         end
 
         # select only products with given discount

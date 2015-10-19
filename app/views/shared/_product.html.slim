@@ -4,9 +4,6 @@
       = hoverable_product_image_tag product, itemprop: "image", alt: product.name
     .actions
       .like.fright = add_to_wishlist_link(product)
-      - cache ['shared', 'product', product.id, 'thumbnail_and_quick_view'], :expires_in => configatron.cache.expire.normally do
-        .quick-view.fleft = quick_view_link(product)
-        
   - cache ['shared', 'product', product.id, 'main_info'], :expires_in => configatron.cache.expire.normally do
     .name = link_to product.name, collection_product_path(product), :title => product.name
     /.description = product_short_description(product)
@@ -21,7 +18,6 @@
       = hoverable_product_image_tag product, itemprop: "image", alt: product.name
     .popup.striped
       - cache ['shared', 'product', product.id, 'thumbnail_and_quick_view'], :expires_in => configatron.cache.expire.normally do
-        .fleft.quick-view = quick_view_link(product)
       .fright.like = add_to_wishlist_link(product)
       
         

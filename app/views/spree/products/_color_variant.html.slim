@@ -9,8 +9,6 @@ ruby:
     = link_to colored_variant_path(variant), :title => variant.product.name do
       = hoverable_image_tag variant.images.map(&:large), alt: variant.product.name
     .popup.striped
-      .fleft.quick-view
-        = quick_view_link(variant.product)
       .fright.like
         - color_id = variant.color.id rescue nil
         = cached_add_to_wishlist_link(variant.product, color_id: color_id, class: 'wish-list-link')

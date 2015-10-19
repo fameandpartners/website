@@ -11,7 +11,7 @@
             checked = !has_checked && (v.in_stock || Spree::Config[:allow_backorders])
             has_checked = true if checked %>
             <li>
-              <%= radio_button_tag "products[#{@product.id}]", v.id, checked, :disabled => !v.in_stock && !Spree::Config[:allow_backorders], 'data-price' => v.zone_price_for(current_site_version).display_price %>
+              <%= radio_button_tag "products[#{@product.id}]", v.id, checked, :disabled => !v.in_stock && !Spree::Config[:allow_backorders], 'data-price' => v.site_price_for(current_site_version).display_price %>
               <label for="<%= ['products', @product.id, v.id].join('_') %>">
                 <span class="variant-description">
                   <%= variant_options v %>
@@ -26,12 +26,12 @@
       </div>
     <% end%>
 
-    <% if @product.zone_price_for(current_site_version) and !@product.price.nil? %>
+    <% if @product.site_price_for(current_site_version) and !@product.price.nil? %>
       <div data-hook="product_price" class="columns five <% if !@product.has_variants? %> alpha <% else %> omega <% end %>">
         
         <div id="product-price">
           <h6 class="product-section-title"><%= t(:price) %></h6>
-          <div><span class="price selling" itemprop="price"><%= @product.zone_price_for(current_site_version).display_price %></span></div>
+          <div><span class="price selling" itemprop="price"><%= @product.site_price_for(current_site_version).display_price %></span></div>
         </div>
 
         <div class="add-to-cart">

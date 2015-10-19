@@ -36,6 +36,8 @@ $product-color-hot-pink: #ff3399;
       }
 
       .color-aqua                    { background-color: #21cddb; }
+      .color-apple-green             { background-color: #25d291; }
+      .color-apricot                 { background-color: #ffad80; }
       .color-baby-pink               { background-color: #fde2f0; }
       .color-beige                   { background-color: #efdecd; }
       .color-berry                   { background-color: #873c44; }
@@ -54,8 +56,10 @@ $product-color-hot-pink: #ff3399;
       .color-candy-pink              { background-color: #ff99ff; }
       .color-champagne               { background-color: #f0debb; }
       .color-charcoal                { background-color: #3c3c3c; }
-      .color-cheetah                 { background-image: url("product-collections/Cheetah.png"); }
+      .color-chartreuse              { background-color: #bed405; }
+      .color-cheetah                 { @include image-color-selector('Cheetah.png'); }
       .color-cherry-red              { background-color: #ba0e0e; }
+      .color-chocolate               { background-color: #5a2b0c; }
       .color-cobalt-blue             { background-color: #0000e5; }
       .color-coral                   { background-color: #ff6262; }
       .color-cotton-candy            { background-color: #fbbfe9; }
@@ -66,12 +70,14 @@ $product-color-hot-pink: #ff3399;
       .color-emerald-green           { background-color: #1b9975; }
       .color-floral-dreamer          { @include image-color-selector('FloralDreamer.png'); }
       .color-fluoro-orange           { background-color: #ff9933; }
+      .color-forest-green            { background-color: #246b5b; }
       .color-fuschia                 { background-color: #ff77e8; }
       .color-garden-floral           { @include image-color-selector('GardenFloral.png'); }
       .color-geo-sage                { @include image-color-selector('GeoSage.png'); }
       .color-gold                    { background-color: #bf9541; }
-      .color-green                   { background-color: #00ff00; }
+      .color-green                   { background-color: #10a522; }
       .color-grey                    { background-color: #bcbebb; }
+      .color-gunmetal                { background-color: #444544; }
       .color-gypsy-queen             { @include image-color-selector('GypsyQueen.png'); }
       .color-gypsy-scarf             { @include image-color-selector('GypsyScarf.png'); }
       .color-hot-pink                { background-color: #ff3399; }
@@ -106,7 +112,7 @@ $product-color-hot-pink: #ff3399;
       .color-mint                    { background-color: #91ffdb; }
       .color-moss-green              { background-color: #8ea578; }
       .color-mushroom                { background-color: #d2bec4; }
-      .color-navy                    { background-color: #00004c; }
+      .color-navy                    { background-color: #1d2f6f; }
       .color-neon-mint               { background-color: #33ffc6; }
       .color-nude                    { background-color: #fdd5b1; }
       .color-off-white               { background-color: #fffef6; }
@@ -124,11 +130,12 @@ $product-color-hot-pink: #ff3399;
       .color-pink-red                { @include split-color-selector(#ff3399, #dd0000); }
       .color-pink-and-blush          { @include split-color-selector(#f9d9e1, #ffabbc); }
       .color-plum                    { background-color: #8d4585; }
+      .color-polka-dot               { @include image-color-selector('Polka-dot.png'); }
       .color-purple                  { background-color: #622b6f; }
       .color-purple-metal            { background-color: #776385; }
       .color-red                     { background-color: $product_color-red; }
       .color-red-and-white           { @include split-color-selector($product-color-red, #fffff0); }
-      .color-rosebud                 { background-image: url("product-collections/Rosebud.png"); }
+      .color-rosebud                 { @include image-color-selector('Rosebud.png'); }
       .color-rose-gold               { background-color: #d6aa85; }
       .color-royal-blue              { background-color: #3f34b2; }
       .color-royal-purple            { background-color: #77539c; }

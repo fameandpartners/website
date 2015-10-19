@@ -3,7 +3,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "#{%w{Two-Piece Split Strapless Lace V-Neck Lace}.sample} #{n}" }
     sequence(:sku)  { |n| "sku-#{n}"}
 
-    price         { rand(100) + 99 } 
+    price         { rand(100) + 99 }
     featured      false
     available_on  { rand(100).days.ago.utc }
     permalink     { name.downcase.gsub(/\s/, '_') }

@@ -82,6 +82,7 @@ module Marketing
 
         def body
           {
+              id:                product.id,
               name:              product.name,
               brand:             'Fame & Partners', # Hardcoded for the moment
               sku:               product.sku,

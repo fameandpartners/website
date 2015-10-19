@@ -4,8 +4,6 @@ Spree::Order.class_eval do
   attr_accessible :required_to, :email, :customer_notes, :projected_delivery_date, :user_id
   self.include_root_in_json = false
 
-  attr_accessor :zone_id
-
   after_save :clean_cache!
 
   checkout_flow do
@@ -194,14 +192,11 @@ Spree::Order.class_eval do
     end
   end
 
-  def get_price_for_line_item(variant, zone_id, currency)
-    if zone_id
-      price = variant.zone_price_for(Spree::Zone.find(zone_id))
-    else
-      currency ||= self.currency
-      price = variant.price_in(currency)
-    end
+  def get_price_for_line_item(variant:, currency:)
+    currency ||= self.currency
+    price = variant.price_in(currency)
 
+    # TODO - OMG MAGIC NUMBERS
     # Plus Size Pricing
     if add_plus_size_cost?(variant)
       price.amount += 20
@@ -217,7 +212,7 @@ Spree::Order.class_eval do
       current_item.currency = currency unless currency.nil?
       current_item.save
     else
-      price = get_price_for_line_item(variant, @zone_id, currency)
+      price = get_price_for_line_item(variant: variant, currency: currency)
       current_item = Spree::LineItem.new(:quantity => quantity)
       current_item.variant = variant
       if currency
@@ -245,7 +240,8 @@ Spree::Order.class_eval do
   end
 
   def update_line_item(current_item, variant, quantity, currency)
-    price = get_price_for_line_item(variant, @zone_id, currency)
+    price = get_price_for_line_item(variant: variant, currency: currency)
+
 
     current_item.currency    = currency
     current_item.variant     = variant
@@ -370,7 +366,7 @@ Spree::Order.class_eval do
 
     self.line_items.each do |current_item|
       variant = current_item.variant
-      price = variant.zone_price_for(site_version.zone)
+      price = variant.site_price_for(site_version)
 
       current_item.currency = price.currency
 

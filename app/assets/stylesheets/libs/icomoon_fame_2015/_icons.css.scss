@@ -19,11 +19,11 @@
 
 @font-face {
 	font-family: 'icomoon_fame_2015';
-	src:url('icomoon_fame_2015.eot?svxzt1');
-	src:url('icomoon_fame_2015.eot?#iefixsvxzt1') format('embedded-opentype'),
-		url('icomoon_fame_2015.ttf?svxzt1') format('truetype'),
-		url('icomoon_fame_2015.woff?svxzt1') format('woff'),
-		url('icomoon_fame_2015.svg?svxzt1#icomoon_fame_2015') format('svg');
+	src:url('icomoon_fame_2015.eot?j3evig');
+	src:url('icomoon_fame_2015.eot?j3evig#iefix') format('embedded-opentype'),
+		url('icomoon_fame_2015.ttf?j3evig') format('truetype'),
+		url('icomoon_fame_2015.woff?j3evig') format('woff'),
+		url('icomoon_fame_2015.svg?j3evig#icomoon_fame_2015') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -215,4 +215,13 @@
 }
 .icon-zoom-in:before {
 	content: "\e62f";
+}
+.icon-eyedrop:before {
+	content: "\e632";
+}
+.icon-parcel_returns:before {
+	content: "\e800";
+}
+.icon-fit:before {
+	content: "\e801";
 }

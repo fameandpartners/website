@@ -23,7 +23,7 @@ class Wishlist::UserWishlistResource
 
     def moodboard_owner_moodboard
       @moodboard_owner_moodboard ||= begin
-        items = moodboard_owner.wishlist_items.includes(:variant, :color, product: {master: :zone_prices}).map do |item|
+        items = moodboard_owner.wishlist_items.includes(:variant, :color, product: [:master] ).map do |item|
           Repositories::UserMoodboardItem.new(item: item).read
         end
 

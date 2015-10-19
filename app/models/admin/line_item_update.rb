@@ -109,7 +109,7 @@ module Admin
             elsif size_matches.count == 1
               lit.line_item = size_matches.first.item
             else
-              errors << :multiple_of_size
+              match_errors << :multiple_of_size
             end
           end
         end

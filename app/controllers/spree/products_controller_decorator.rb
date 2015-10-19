@@ -4,8 +4,8 @@ Spree::ProductsController.class_eval do
   include ProductsHelper
 
   respond_to :html, :json
-  before_filter :load_product, :only => [:show, :quick_view, :send_to_friend]
-  #before_filter :load_activities, :only => [:show, :quick_view]
+  before_filter :load_product, :only => [:show, :send_to_friend]
+  #before_filter :load_activities, :only => [:show]
 
   after_filter :log_product_viewed
 
@@ -117,21 +117,6 @@ Spree::ProductsController.class_eval do
     display_marketing_banner
 
     respond_with(@product)
-  end
-
-
-  def quick_view
-    @product_variants = Products::VariantsReceiver.new(@product).available_options
-
-    popup_html = render_to_string(template: 'spree/products/quick_view.html.slim', product: @product, layout: false)
-
-    render json: {
-      popup_html: popup_html,
-      variants: @product_variants,
-      analytics_label: analytics_label(:product, @product),
-      activities: @activites,
-      images: @product.images_json
-    }
   end
 
   def send_to_friend

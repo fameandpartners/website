@@ -28,7 +28,7 @@ class FeedsController < ApplicationController
       :product_color_values,
       {
         variants: [
-          :images, :zone_prices, :prices, {option_values: :option_type}
+          :images, :prices, {option_values: :option_type}
         ]
       }
     )
@@ -69,7 +69,7 @@ class FeedsController < ApplicationController
       availability:            variant.in_stock? ? IN_STOCK : OUT_OF_STOCK,
       title:                   "#{product.name} - Size #{size} - Colour #{color}",
       description:             product.description,
-      price:                   "#{current_currency} #{variant.zone_price_for(current_site_version).display_price}",
+      price:                   "#{current_currency} #{variant.site_price_for(current_site_version).display_price}",
       google_product_category: GOOGLE_PRODUCT_CATEGORY,
       id:                      "#{product.id.to_s}-#{variant.id.to_s}",
       group_id:                product.id.to_s,
