@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :item_return do
     order_number "MyString"
-    item_id 1
+    line_item_id 1
     qty 1
     requested_action "MyString"
     requested_at "2015-06-23 13:49:32"

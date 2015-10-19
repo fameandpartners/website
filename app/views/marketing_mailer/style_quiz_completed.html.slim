@@ -55,7 +55,7 @@ html xmlns="http://www.w3.org/1999/xhtml"
                   p style="font-size: 13px; margin: 10px 0 5px 0; font-family: sans-serif; line-height: 14px;"
                     = dress.name
                   p style="font-size: 11px; margin: 0 0 10px 0; font-family: sans-serif; line-height: 14px;"
-                    = dress.zone_price_for(@site_version).display_price
+                    = dress.site_price_for(@site_version).display_price
           tr
             td colspan="3"
               - group.each_with_index do |dress, index|

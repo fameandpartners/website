@@ -82,15 +82,13 @@ window.page.EmailCaptureModal = class EmailCaptureModal
           message = "Use this promocode for your next killer dress: #{@opts.promocode}."
         else
           message = "Thanks for joining!"
-        if @opts.className != 'new-modal'
+        if @opts.className != 'new-modal' && @opts.className != 'new-modal welcome-modal'
           window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 999999)
 
       @fbPushTracking()
       window.track.event('LandingPageModal', 'Submitted', @opts.promocode)
-      if @opts.className == 'new-modal'
-        ty_heading = 'Thanks! Did you know our dresses are made <br> bespoke by artisan seamstresses?'
-        ty_message = 'This means we can give you a bunch of perks that others simply can’t:'
-        window.location.replace(window.location.href + "&ty=Thanks&ty_heading="+ty_heading+"&ty_message="+ty_message)
+      if @opts.className == 'new-modal' || @opts.className == 'new-modal welcome-modal'
+        window.location.replace(window.location.href + "?pop_thanks=true")
         return
       window.location.reload()
 
@@ -157,6 +155,8 @@ window.page.EmailCaptureModal = class EmailCaptureModal
     })
 
   open: () =>
+    window.track.event("LandingPageModal", "#{@opts.uuid} - #{@opts.promocode}")
+
     vex.dialog.buttons.NO.text = 'X'
     vex.dialog.open
       className: "vex vex-theme-flat-attack email-capture-modal #{@opts.className || ''}"

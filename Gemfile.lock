@@ -8,23 +8,8 @@ GIT
       spree_core (~> 1.3.0)
 
 GIT
-  remote: git://github.com/droidlabs/data-migrate.git
-  revision: 6722faf2256e46b63442776a735b86ee1a50e3b1
-  specs:
-    data_migrate (1.2.0)
-      rails (>= 3.1.0)
-
-GIT
-  remote: git://github.com/droidlabs/letter_opener.git
-  revision: 7e5793ccff0771861e46704821b86d6628fc3f35
-  specs:
-    letter_opener (0.0.2)
-      launchy
-
-GIT
-  remote: git://github.com/evgeniypetrov/better_spree_paypal_express.git
+  remote: git://github.com/fameandpartners/better_spree_paypal_express.git
   revision: 478b27281f7ed806df5ae86a41f9890595f8d242
-  ref: 478b27281f7ed806df5ae86a41f9890595f8d242
   branch: 1-3-stable
   specs:
     spree_paypal_express (2.0.3)
@@ -479,7 +464,8 @@ GEM
     kgio (2.9.3)
     launchy (2.2.0)
       addressable (~> 2.3)
-    libv8 (3.16.14.7)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -631,7 +617,6 @@ GEM
       redis-store (~> 1.1.4)
     redis-store (1.1.4)
       redis (>= 2.2)
-    ref (1.0.5)
     reform (1.2.6)
       activemodel
       disposable (~> 0.0.5)
@@ -745,9 +730,6 @@ GEM
       tins (~> 1.0)
     test-unit (3.0.9)
       power_assert
-    therubyracer (0.12.2)
-      libv8 (~> 3.16.14.0)
-      ref
     thin (1.6.3)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0)
@@ -801,6 +783,8 @@ GEM
     xml-simple (1.1.5)
     xpath (2.0.0)
       nokogiri (~> 1.3)
+    zeus (0.15.4)
+      method_source (>= 0.6.7)
 
 PLATFORMS
   ruby
@@ -824,15 +808,14 @@ DEPENDENCIES
   coercible
   coffee-rails (~> 3.2.1)
   coffee-script-source (~> 1.8.0)
-  compass
+  compass (~> 1.0.3)
   configatron
   createsend (~> 2.5.0)
   customerio
-  data_migrate!
   database_cleaner (= 0.9.1)
   default_value_for
   device_detector (~> 0.8.1)
-  droidcss
+  droidcss (~> 2.0.4)
   eco
   event_sourced_record
   execjs (~> 2)
@@ -847,8 +830,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   launchy (= 2.2.0)
-  letter_opener (= 0.0.2)!
-  libv8 (~> 3.16)
+  letter_opener (~> 1.4.1)
   meta_request
   net-ssh (~> 2.7.0)
   newrelic_rpm
@@ -891,7 +873,6 @@ DEPENDENCIES
   spring-commands-rspec
   term-ansicolor
   test-unit
-  therubyracer
   thin
   timecop
   timers (= 1.1.0)
@@ -901,6 +882,7 @@ DEPENDENCIES
   vcr (~> 2.9.3)
   webmock (~> 1.21.0)
   whenever
+  zeus
 
 BUNDLED WITH
    1.10.6

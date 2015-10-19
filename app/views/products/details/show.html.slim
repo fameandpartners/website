@@ -93,10 +93,21 @@ ruby:
         .product-details-inner
           .row
             h1 = @product.name
+            - if @product.name.downcase.include?('skirt')
+              p.product-section-skirt-alert
+                | (Skirt Only)
             p.product-section-description
             p#product-price
               span.price = product_price_with_discount(@product.price, @product.discount)
-
+            .icon-wrap
+              .icon-fit
+                .copy Guaranteed to fit
+              .icon-eyedrop
+                .copy Customize how you want
+              .icon-delivery-express
+                .copy Free, on time delivery
+              .icon-parcel_returns
+                .copy Return for free*
           - if @product.is_active || custom_order?
             = render 'product_selection_options'
           - else
@@ -104,7 +115,11 @@ ruby:
 
 /! About The Dress
 .dress-about.container.page-content
-  h2.text-center About The Dress
+  - if @product.name.downcase.include?('skirt')
+      h2.text-center About The Skirt
+  - else
+    h2.text-center About The Dress
+
   .divider
   .row
     .col-md-6.col-sm-12.hidden-xs

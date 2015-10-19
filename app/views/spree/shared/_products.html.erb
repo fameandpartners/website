@@ -17,7 +17,7 @@
           <%= link_to small_image(product, :itemprop => "image"), product, :itemprop => 'url' %>
         </div>
         <%= link_to truncate(product.name, :length => 50), product, :class => 'info', :itemprop => "name", :title => product.name %>
-        <span class="price selling" itemprop="price"><%= product.zone_price_for(current_site_version).display_price %></span>
+        <span class="price selling" itemprop="price"><%= product.site_price_for(current_site_version).display_price %></span>
       </li>
     <% end %>
   <% end %>

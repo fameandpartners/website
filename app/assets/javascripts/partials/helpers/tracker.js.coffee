@@ -1,17 +1,12 @@
 # helper methods to track via ga/etc
 window.track = {
   tracked: []
+  dataLayer: window.dataLayer || []
 
   pageView: (page_url, page_params) ->
     window._gaq or= {}
     if _gaq && _gaq.push
       _gaq.push(['_trackPageview', page_url])
-
-  quickView: (page_url) ->
-    window._gaq or= {}
-    if _gaq && _gaq.push
-      _gaq.push(['_trackPageview', page_url])
-
 
   remarketing_tag: () ->
     conversion_type = 'remarketing_tag'
@@ -62,14 +57,12 @@ window.track = {
     track.event('Wishlist', 'RemovedFromWishlist', label)
 
   addedToCart: (label) ->
-    track.event('Products', 'AddedToCart', label)  
+    @dataLayer.push({"event": "addToCart"})
+    track.event('Products', 'AddedToCart', label)
     track.pageView('/cart/add');
 
   viewCelebrityInspiration: (label) ->
     track.event('Products', 'ViewCelebrityInspiration', label)
-
-  openedQuickView: (label) ->
-    track.event('Products', 'OpenedQuickView', label)
 
   quizOpened: (label) ->
     track.event('Style Quiz', 'Opened', label)

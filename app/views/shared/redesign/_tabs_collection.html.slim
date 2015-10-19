@@ -3,21 +3,21 @@
   ul
     li.active
       .inner-wrap
-        a href='#collection1' data-toggle="tab" Photo Finish Collection
+        a href='#collection1' data-toggle="tab" Dance Hall Days Collection
     li
       .inner-wrap
-        a href='#collection2' data-toggle="tab" Make a Statement Collection
+        a href='#collection2' data-toggle="tab" Photo Finish Collection
     li
       .inner-wrap
-        a href='#collection3' data-toggle="tab" Luxe Collection
+        a href='#collection3' data-toggle="tab" Make a Statement Collection
 
   .tab-wrap
-    = link_to photo_finish_collection_path, id: 'collection1', class: 'tab active'
-      = image_tag 'home-page-tiles/tab-collectionbox-1.jpg', alt: 'Photo Finish Collection'
-    = link_to make_a_statement_collection_path, id: 'collection2', class: 'tab'
-      = image_tag 'home-page-tiles/tab-collectionbox-2.jpg', alt: 'Make a Statement Collection'
-    = link_to luxe_collection_path, id: 'collection3', class: 'tab'
-      = image_tag 'home-page-tiles/tab-collectionbox-3.jpg', alt: 'Luxe Collection'
+    = link_to dance_hall_days_collection_path, id: 'collection1', class: 'tab active'
+      = image_tag 'home-page-tiles/tab-collectionbox-1.jpg', alt: 'Dance Hall Days Collection'
+    = link_to photo_finish_collection_path, id: 'collection2', class: 'tab'
+      = image_tag 'home-page-tiles/tab-collectionbox-2.jpg', alt: 'Photo Finish Collection'
+    = link_to make_a_statement_collection_path, id: 'collection3', class: 'tab'
+      = image_tag 'home-page-tiles/tab-collectionbox-3.jpg', alt: 'Make a Statement Collection'
     a.navigator.btn-prev.js-navigator-prev href='javascript:void(0)'
       .icon.icon-arrow-left
       .hide-visually Previous tab

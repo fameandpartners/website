@@ -47,6 +47,10 @@ module MarketingHelper
     params[:pop].present? && params[:pop] == 'true'
   end
 
+  def pop_thanks?
+    params[:pop_thanks].present? && params[:pop_thanks] == 'true'
+  end
+
   def decode(p)
     return p if params[:raw]
     return '' unless p.present?

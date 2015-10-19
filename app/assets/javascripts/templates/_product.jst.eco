@@ -5,6 +5,9 @@
   </a>
   <div class="details text-center">
     <span class="name"><%= @product.name %></span>
+    <% if @product.name.toLowerCase().indexOf("skirt") > -1 : %>
+      <span class="skirt-alert"> (skirt only)</span>
+    <% end %>
     <span class="price">
       <% if @product.sale_price: %>
         <span class="price-original"><%= @product.price %></span>

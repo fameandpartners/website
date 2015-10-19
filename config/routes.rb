@@ -108,7 +108,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/lookbook/here-comes-the-sun' => 'products/collections#show', :permalink => 'here-comes-the-sun', :as => :here_comes_the_sun_collection
 
-    get '/lookbook/dance-hall-days' => 'products/collections#show', :permalink => '', :as => :dance_hall_days_collection
+    get '/lookbook/dance-hall-days' => 'products/collections#show', :permalink => 'dance-hall', :as => :dance_hall_days_collection
 
     get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
@@ -155,6 +155,8 @@ FameAndPartners::Application.routes.draw do
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
     end
 
+    get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
+
     scope '/dresses' do
       root to: 'products/collections#show', as: :dresses
       get '/', to: 'products/collections#show', as: :collection
@@ -189,7 +191,6 @@ FameAndPartners::Application.routes.draw do
 
     get '/lp/collection(/:collection)', to: redirect('/dresses')
 
-    get '/quick_view/:id' => 'spree/products#quick_view'
     post 'products/:id/send_to_friend' => 'spree/products#send_to_friend'
 
     get 'my-boutique' => 'boutique#show', :as => :my_boutique

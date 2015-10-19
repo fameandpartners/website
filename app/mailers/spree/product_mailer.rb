@@ -34,7 +34,7 @@ class Spree::ProductMailer < ActionMailer::Base
 
   def get_product_price(product, site_version = nil)
     if site_version.present?
-      @product.zone_price_for(site_version)
+      @product.site_price_for(site_version)
     else
       @product.price_in(Spree::Config[:currency])
     end

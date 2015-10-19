@@ -92,6 +92,7 @@ module Marketing
                                            expressMaking:     true,
                                            image:             { original: 'http://images.fameandpartners.com/original.png', xlarge: 'http://images.fameandpartners.com/xlarge.png', large: 'http://images.fameandpartners.com/large.png', small: 'http://images.fameandpartners.com/small.png' },
                                            images:            [{ original: 'http://images.fameandpartners.com/original.png', xlarge: 'http://images.fameandpartners.com/xlarge.png', large: 'http://images.fameandpartners.com/large.png', small: 'http://images.fameandpartners.com/small.png' }],
+                                           id:                123,
                                            name:              'Super Dress',
                                            price:             12.34,
                                            priceWithDiscount: 8.638,

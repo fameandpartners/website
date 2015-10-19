@@ -28,6 +28,8 @@
 #
 
 class Products::CollectionsController < Products::BaseController
+  include Marketing::Gtm::Controller::Collection
+
   layout 'redesign/application'
   attr_reader :page, :banner
   helper_method :page, :banner
@@ -68,6 +70,8 @@ class Products::CollectionsController < Products::BaseController
       @collection = collection_resource(@collection_options)
       page.collection = @collection
       punch_products if product_ids
+
+      append_gtm_collection(@collection)
     end
 
     def load_page

@@ -99,10 +99,12 @@
 
 <div class='shopping-bag-text-wrapper'>
   <div class='inner-wrap'>
-    <div>
-      <%- @shipping_message %>
-    </div>
-    <div>
+    <% if @shipping_message != "" : %>
+      <div>
+        <%- @shipping_message %>
+      </div>
+    <% end %>
+    <div class="shopping-bag-text">
       <%- @value_proposition %>
     </div>
   </div>

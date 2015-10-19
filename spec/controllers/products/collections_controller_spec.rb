@@ -11,7 +11,10 @@ describe Products::CollectionsController, :type => :controller do
       allow(page).to receive(:collection=).with(collection_double)
       allow(Revolution::Page).to receive(:find_for).and_return(page)
       allow(Products::CollectionFilter).to receive(:read)
-      allow(controller).to receive(:collection_resource).and_return(collection_double)
+      allow(controller).to receive_messages(
+                               collection_resource:   collection_double,
+                               append_gtm_collection: true
+                           )
     end
 
     describe 'before filters' do

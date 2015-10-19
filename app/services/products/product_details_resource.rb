@@ -80,7 +80,7 @@ class Products::ProductDetailsResource
     end
 
     def product_price
-      @product_price ||= product.zone_price_for(site_version)
+      @product_price ||= product.site_price_for(site_version)
     end
 
     def product_discount

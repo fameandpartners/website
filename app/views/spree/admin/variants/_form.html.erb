@@ -47,35 +47,6 @@
   </div>
 </div>
 
-<% if false %>
-<div class="right six columns omega label-block" data-hook="admin_variant_form_zone_prices">
-  <h4>Cost price for site versions:</h4>
-  <% SiteVersion.all.each do |site_version| %>
-    <div class="field">
-      <% zone_price = @variant.zone_prices.where(zone_id: site_version.zone_id).first %>
-      <% price = @variant.price_in(site_version.currency) %>
-      <% display_price = @variant.zone_price_for(site_version) %>
-
-      <p>
-        <%= site_version.name %> price:
-        <small>Will be shown <%= "#{display_price.amount} #{display_price.currency}" %></small>
-      </p>
-      <div class="alpha two columns">
-        <%= label_tag t(:cost_price) %>
-        <%= f.text_field "zone_prices_hash[#{site_version.zone.id}][amount]",
-              placeholder: '0.00', value: zone_price.try(:amount), disabled: site_version.default? %>
-      </div>
-      <div class="omega two columns">
-        <%= label_tag t(:cost_currency) %>
-        <%= f.text_field "zone_prices_hash[#{site_version.zone.id}][currency]", 
-              placeholder: site_version.currency, value: zone_price.try(:currency), disabled: true %>
-      </div>
-    </div>
-    <div class="clear"></div>
-    <% end %>
-</div>
-<% end %>
-
 <div class="right six columns omega label-block" data-hook="admin_variant_form_additional_fields">
   <% [:weight, :height, :width, :depth].each do |field| %>
     <div class="field" data-hook="<%= field %>"><%= f.label field, t(field) %>
