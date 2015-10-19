@@ -19,11 +19,7 @@ module Marketing
         end
 
         def price_with_discount
-          if (discount = product.discount)
-            product.price.apply(discount).amount
-          else
-            price
-          end
+          product.price_amount
         end
 
         def discount_percent
