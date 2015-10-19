@@ -99,15 +99,6 @@ en-US:
         hair_colors:
           answers:
             colored: 'Colored'
-    quick_view:
-      different_color:
-        question: 'Want a different color?'
-        email:
-          subject: 'I would like this dress (%{sku}) in a different color.'
-      labels:
-        color: 'Choose a color:'
-      notices:
-        color_images: 'Images of other colors <br/> are on their way'
   landing:
     bridesmaid:
       one:

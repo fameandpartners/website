@@ -3,7 +3,6 @@ div class=(element_class ||= 'grid-4')
     = link_to collection_product_path(product) do
       = hoverable_product_image_tag(product, colors: @current_colors, itemprop: 'image', alt: product.name)
     .popup.striped
-      .fleft.quick-view  = quick_view_link(product)
       .fright.like = add_to_wishlist_link(product)
   h6 = product.name
   .price = price_for_product(product)
