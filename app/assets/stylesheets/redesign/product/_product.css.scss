@@ -96,10 +96,52 @@
     vertical-align: middle;
   }
 
+  .icon-wrap {
+    @extend %cfix;
+    color: $c-neutral-9;
+
+    > div {
+      float: left;
+      width: 25%;
+      padding: 0 20px;
+
+      &:before {
+        display: block;
+        height: 32px;
+        line-height: 32px;
+      }
+
+    }
+
+    .icon-fit {
+      font-size: 30px;
+    }
+
+    .icon-eyedrop {
+      font-size: 28px;
+    }
+
+    .icon-delivery-express {
+      font-size: 16px;
+    }
+
+    .icon-parcel_returns {
+      font-size: 20px;
+    }
+
+    .copy {
+      display: block;
+      margin-top: 5px;
+      font-size: 10px;
+    }
+
+  }
+
 	.product-section-skirt-alert {
 		font-weight: normal;
 		margin-top: -10px;
 	}
+
 }
 
 #product-size, #product-color, #product-customizations {

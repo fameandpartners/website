@@ -99,7 +99,15 @@ ruby:
             p.product-section-description
             p#product-price
               span.price = product_price_with_discount(@product.price, @product.discount)
-
+            .icon-wrap
+              .icon-fit
+                .copy Guaranteed to fit
+              .icon-eyedrop
+                .copy Customize how you want
+              .icon-delivery-express
+                .copy Free, on time delivery
+              .icon-parcel_returns
+                .copy Return for free*
           - if @product.is_active || custom_order?
             = render 'product_selection_options'
           - else
