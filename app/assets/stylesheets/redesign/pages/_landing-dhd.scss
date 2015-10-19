@@ -1,0 +1,211 @@
+/* [Landing Page - Dance Hall days]
+-------------------------------------------------------*/
+.landing-dhd {
+  margin-bottom: 30px;
+
+  .hero-wrap {
+    margin-bottom: 30px;
+  }
+
+  .category--item .details {
+    margin: 15px 0 0 0;
+  }
+
+  .item-span-2 {
+    display: block;
+    float: left;
+    width: 100%;
+    margin-bottom: 30px;
+
+    .media-wrap {
+      padding-bottom: 323%;
+    }
+
+    .copy-wrap {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 47px;
+      line-height: 47px;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: $c-neutral-white;
+      background: $c-neutral-black;
+    }
+
+  }
+
+  .tile-lrg {
+    position: relative;
+    float: left;
+    height: 849px;
+    margin-bottom: 30px;
+
+    img {
+      float: right;
+      width: auto;
+      height: 100%;
+    }
+
+    .cta-square {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+    }
+
+  }
+
+  .footer-wrap {
+    margin-top: 40px;
+
+    .outer-wrap {
+      border-top: solid $c-neutral-black 1px;
+
+      > div {
+        padding: 0;
+      }
+
+    }
+
+    .inner-wrap {
+      float: left;
+      width: 100%;
+      padding: 50px 20% 20px 20%;
+    }
+
+    .title {
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    ul {
+      float: left;
+      width: 50%;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      display: block;
+    }
+
+    a {
+      font-size: 0.875em;
+      font-weight: 500;
+      color: $c-neutral-black;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-lg-width - 1) {
+
+    & {
+
+      .item-span-2 .media-wrap {
+        padding-bottom: 331.5%;
+      }
+
+      .how-it-works {
+
+        .testimonial {
+          min-height: 200px;
+          padding: 20px 70px;
+        }
+
+        .list-wrap {
+          min-height: 400px;
+        }
+
+        li {
+          width: 90%;
+          margin-top: 10px;
+        }
+
+      }
+
+      .tile-lrg {
+        height: 706px;
+      }
+
+      .footer-wrap {
+
+        .inner-wrap {
+          padding: 20px 10%;
+        }
+
+      }
+
+    }
+
+  }
+
+  @media (max-width: $desktop-width - 1) {
+
+    & {
+
+      .mobile-change-order {
+        display: -webkit-box;
+        display: -moz-box;
+        display: box;
+
+        -webkit-box-orient: vertical;
+        -moz-box-orient: vertical;
+        box-orient: vertical;
+      }
+
+      .position-1 {
+        -webkit-box-ordinal-group: 1;
+        -moz-box-ordinal-group: 1;
+        box-ordinal-group: 1;
+      }
+
+      .position-2 {
+        -webkit-box-ordinal-group: 2;
+        -moz-box-ordinal-group: 2;
+        box-ordinal-group: 2;
+      }
+
+      .tile-lrg {
+        height: auto;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+
+      }
+
+    }
+
+  }
+
+  @include mobile {
+
+    & {
+
+      .how-it-works {
+        margin-bottom: 30px;
+      }
+
+      .footer-wrap {
+
+        .inner-wrap {
+          padding: 0;
+          text-align: center;
+        }
+
+        ul {
+          width: 100%;
+          padding-top: 50px;
+        }
+
+      }
+
+    }
+
+  }
+
+}

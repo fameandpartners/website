@@ -1,0 +1,128 @@
+/* [Styling tips]
+-------------------------------------------------------*/
+.styling-tips {
+
+  .row {
+    position: relative;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: solid $c-neutral-2 1px;
+  }
+
+  .title {
+    padding: 25px 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: Forum;
+    font-size: 2.75em;
+    border-top: solid $c-neutral-black 1px;
+  }
+
+  .sub-title {
+    display: none;
+    visibility: hidden;
+    font-size: 2.25em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin-top: 20px;
+      counter-increment: item;
+      line-height: 1;
+      font-size: 1.5em;
+
+      &:before {
+        content: counter(item) '.';
+        display: block;
+        font-family: Forum;
+        font-size: 2.5em;
+      }
+
+    }
+
+  }
+
+  .cta-square {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  .media-wrap {
+
+    .cta-square {
+      top: 50%;
+      right: 5%;
+      margin-top: -65px;
+
+      &.left {
+        left: 5%;
+        right: auto;
+      }
+
+    }
+
+  }
+
+  .col-md-6 {
+
+    ol {
+      padding-bottom: 140px;
+    }
+
+  }
+
+  .col-md-9 {
+
+    ol {
+      padding-right: 140px;
+    }
+
+  }
+
+  @include mobile {
+
+    & {
+
+      .row {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .title {
+        margin-bottom: 30px;
+        border-bottom: solid $c-neutral-black 1px;
+      }
+
+      .sub-title {
+        display: block;
+        visibility: visible;
+      }
+
+      ol {
+        margin-bottom: 30px;
+
+        li:before {
+          display: inline-block;
+          margin-bottom: -7px;
+          vertical-align: bottom;
+        }
+
+      }
+
+      .col-md-6 ol,
+      .col-md-9 ol {
+        padding: 0;
+      }
+
+    }
+
+  }
+
+}
