@@ -11,6 +11,7 @@ end
 if Rails.env.development?
   Features.activate(:content_revolution)
   Features.deactivate(:google_tag_manager)
+  Features.deactivate(:test_analytics)
 end
 
 Features.deactivate(:checkout_fb_login)

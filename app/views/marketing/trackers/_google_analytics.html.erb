@@ -4,7 +4,12 @@
     _gaq.push(['_setAccount', '<%= tracker.analytics_id %>']);
     _gaq.push(['_trackPageview']);
 
-    <% if Rails.env.development? %>
+    <% if Features.active?(:test_analytics) %>
+      // Allow debugging GA on localhost. More details at:
+      // # Universal Google Analytics
+      // https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#cookieDomain
+      // # Legacy Google Analytics
+      // https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiDomainDirectory?hl=en#_setdomainname
       _gaq.push(['_setDomainName', 'none']);
     <% end %>
 
