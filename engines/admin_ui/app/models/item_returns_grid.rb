@@ -40,7 +40,7 @@ class ItemReturnsGrid
   end
   column :product_style_number,   header: 'Style'
   column :product_name,           header: 'Product'
-  column :product_colour,         header: 'Colour'Ø
+  column :product_colour,         header: 'Colour'
   column :product_size,           header: 'Size'
   column :product_customisations, header: 'Custom?' do |item_return|
     format(item_return.product_customisations) do |is_custom|
