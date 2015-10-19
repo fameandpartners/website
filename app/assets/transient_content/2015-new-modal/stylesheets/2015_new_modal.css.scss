@@ -206,8 +206,23 @@
         cursor: pointer;
       }
       .four-lipsticks{
-        img{
-          cursor: pointer;
+        @media(min-width: $bootstrap-md-width){
+          img{
+            cursor: pointer;
+            width: 15%;
+          }
+          img:hover{
+            width: 14%;
+          }
+        }
+        @media(max-width: $bootstrap-md-width){
+          img{
+            cursor: pointer;
+            width: 11%;
+          }
+          img:hover{
+            width: 10%;
+          }
         }
       }
       @media(max-width: $bootstrap-md-width){
