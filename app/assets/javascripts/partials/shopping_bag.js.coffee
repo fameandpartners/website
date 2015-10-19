@@ -74,6 +74,7 @@ window.ShoppingBag = class ShoppingBag
   closeHandler: (e) ->
     e.preventDefault() if e
     @close() if !@masterpass_clicked
+    return
 
   removeProductHandler: (e) ->
     e.preventDefault()
@@ -100,19 +101,15 @@ window.ShoppingBag = class ShoppingBag
 
   masterpassOpenHandler: (e) ->
     e.preventDefault() if e
-    return if @cart.item_count == 0
+    return if @cart.item_count == 0 || @masterpass_clicked
 
     @masterpass_clicked = true
-    spinner = new Spinner().spin();
-    @$overlay.append spinner.el;
-    @$overlay.addClass('most-front');
+    spinner = new Spinner().spin()
+    @$overlay.append spinner.el
+    @$overlay.addClass('most-front')
 
-    overlay = @$overlay;
+    self = this
     $.getJSON(@masterpass_cart_callback_uri).done (data) ->
-      @masterpass_clicked = false
-      spinner.stop()
-      overlay.removeClass('most-front');
-
       if data.hasOwnProperty('request_token') and data.hasOwnProperty('callback_domain') and data.hasOwnProperty('checkout_identifier') and data.hasOwnProperty('shipping_suppression') and data.hasOwnProperty('accepted_cards') and data.hasOwnProperty('cart_callback_path')
         MasterPass.client.checkout
           requestToken: data.request_token
@@ -135,3 +132,11 @@ window.ShoppingBag = class ShoppingBag
           ifrm.style.frameborder = 0
           ifrm.style.display = 'none'
           document.body.appendChild ifrm
+        return
+    .always ->
+      self.masterpass_clicked = false
+      spinner.stop()
+      self.$overlay.removeClass('most-front')
+      return
+    return
+
