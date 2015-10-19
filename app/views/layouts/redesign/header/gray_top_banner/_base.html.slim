@@ -79,7 +79,7 @@ ruby:
   .slider-wrap
     = react_component('NewThisWeekProducts',{device: 'desktop'})
   .btn-wrap
-    = link_to 'SHOP ALL NEW THIS WEEK', dresses_path(:order => 'newest'), class: "btn btn-black btn-md"
+    = link_to 'SHOP ALL NEW THIS WEEK', build_taxon_path('New This Week'), class: "btn btn-black btn-md"
 
 .row.rect#rect-dresses.nav-menu-wrap.menu-dresses
   ul
