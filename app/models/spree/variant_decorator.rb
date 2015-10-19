@@ -14,7 +14,7 @@ Spree::Variant.class_eval do
 
   before_validation :set_default_sku
 
-  before_save :push_changed_prices_to_variants
+  before_save :push_prices_to_variants
 
   after_save do
     product.update_index
@@ -212,13 +212,15 @@ Spree::Variant.class_eval do
   end
 
   # Used as a callback, so must return a truthy value to avoid breaking the save
-  def push_changed_prices_to_variants
-    return true unless is_master
-    changed_prices = prices.select(&:changed?)
-    return true if changed_prices.empty?
+  def push_prices_to_variants
+    return :not_master unless is_master
+    master_price_data = extract_price_data
 
     product.variants.each do |v|
-      changed_prices.each do |master_price|
+      variant_price_data = v.extract_price_data
+      next if variant_price_data == master_price_data
+
+      prices.each do |master_price|
         variant_price = v.prices.where(currency: master_price.currency).first_or_initialize
 
         # TODO - If we ever move to variants with different prices to the master
@@ -230,6 +232,10 @@ Spree::Variant.class_eval do
       end
     end
 
-    true
+    :completed
+  end
+
+  protected def extract_price_data
+    prices.collect {|p| [p.currency, p.amount] }.sort_by(&:first)
   end
 end
