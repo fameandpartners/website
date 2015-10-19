@@ -9,7 +9,7 @@ describe Spree::Address, type: :model do
       before do
         order.user_id = user.id
         @address = Spree::Address.new
-        @address.set_last(user, true, order)
+        @address.set_last(user, order)
       end
 
       it "does not set address1" do
@@ -47,7 +47,7 @@ describe Spree::Address, type: :model do
         order.save
         order2.save
         @address2 = Spree::Address.new
-        @address2.set_last(user, true, @order2)
+        @address2.set_last(user, @order2)
       end
 
       it "sets address1 the same as previous orders address1" do
@@ -90,7 +90,7 @@ describe Spree::Address, type: :model do
         order2.save
         order3.save
         @address3 = Spree::Address.new
-        @address3.set_last(user, true, order3)
+        @address3.set_last(user, order3)
       end
 
       it "sets address1 the same as last orders address1" do
