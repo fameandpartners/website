@@ -64,7 +64,11 @@ module AdminUi
       def collection
         page = (params[:page] || 1).to_i
         per_page = (params[:per_page] || 50).to_i
-        @collection ||= Revolution::Page.order('path ASC').page(page).per(per_page)
+        if params.has_key?(:search) && params[:search].present?
+          @collection ||= Revolution::Page.where("LOWER(path) like '%#{params[:search].downcase}%'").order('path ASC').page(page).per(per_page)
+        else
+          @collection ||= Revolution::Page.order('path ASC').page(page).per(per_page)
+        end
       end
 
       def page
