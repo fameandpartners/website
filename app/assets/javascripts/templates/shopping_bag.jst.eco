@@ -81,7 +81,7 @@
   <div class="col-lg-12">
     <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
       <div>
-        <input type="submit" value="PAY NOW" class="btn btn-black btn-block">
+        <input type="submit" value="CHECKOUT" class="btn btn-black btn-block">
       </div>
     </form>
   </div>
