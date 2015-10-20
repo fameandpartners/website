@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :spree_user, class: Spree::User do
-    first_name { generate(:first_name) }
-    last_name  { generate(:last_name) }
-    email      { generate(:email) }
+    first_name              { generate(:first_name) }
+    last_name               { generate(:last_name) }
+    sequence(:email)        { |n| "email#{n}@example.com" }
     password                'password!'
     password_confirmation   'password!'
     skip_welcome_email true

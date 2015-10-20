@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Spree::Admin::GeneralSettingsController, :type => :controller do
-  let(:user) { Spree::User.first || build_stubbed(:spree_user) }
+  let(:user) { build_stubbed(:spree_user) }
 
   before(:each) do
     allow(controller).to receive_messages(
