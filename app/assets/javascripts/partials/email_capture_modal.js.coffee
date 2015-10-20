@@ -118,6 +118,10 @@ window.page.EmailCaptureModal = class EmailCaptureModal
         @applyPromocode()
       $('.vex-overlay').on 'click', =>
         @applyPromocode()
+        $(".vex-content .vex-dialog-buttons .vex-dialog-button-secondary").click()
+    else
+      $('.vex-overlay').on 'click', =>
+        $(".vex-content .vex-dialog-buttons .vex-dialog-button-secondary").click()
 
   applyPromocode: () =>
     console.log 'we will apply promocode here by calling some controller and set session[:auto_apply_promo] = params[:auto_apply_promo].presence'
