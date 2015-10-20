@@ -15,7 +15,7 @@ class UserCart::CartPresenter < OpenStruct
       display_promotion_total: display_promotion_total.to_s,
       display_total: display_total.to_s,
       masterpass_available: masterpass_available?,
-      masterpass_is_production: !masterpass_payment_method.prefers_test_mode? && masterpass_payment_method.server_mode == Mastercard::Common::PRODUCTION
+      masterpass_is_production: masterpass_is_production?
     }
   end
 
@@ -26,6 +26,12 @@ class UserCart::CartPresenter < OpenStruct
         active: true,
         deleted_at: nil
     ).first
+  end
+
+  def masterpass_is_production?
+    if masterpass_payment_method.present?
+      !masterpass_payment_method.prefers_test_mode? && masterpass_payment_method.server_mode == Mastercard::Common::PRODUCTION
+    end
   end
 
   def masterpass_available?
