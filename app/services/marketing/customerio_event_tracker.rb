@@ -6,9 +6,7 @@ module Marketing
   class CustomerIOEventTracker
 
     def identify_user_by_email(email, site_version)
-      client.identify(id:           email,
-                      email:        email,
-                      site_version: site_version.code)
+      client.identify(email_ident_hash(email, site_version))
     end
 
     def identify_user(user, site_version)
@@ -20,6 +18,7 @@ module Marketing
     end
 
     def track(user, event_type, attrs)
+      # TODO - Convert to ALWAYS using email addresses instead of ids.
       user_id = user.respond_to?(:id) ? user.id : user
       client.track(user_id, event_type, attrs)
       Rails.logger.info("[customer.io] #{user_id}, #{event_type}")
@@ -40,6 +39,16 @@ module Marketing
         first_name:   user.first_name,
         last_name:    user.last_name,
         site_version: site_version.code,
+      }
+    end
+
+    # @api internal
+    def email_ident_hash(email, site_version)
+      clean_email = email.to_s.strip
+      {
+        id:           clean_email,
+        email:        clean_email,
+        site_version: site_version.code
       }
     end
 

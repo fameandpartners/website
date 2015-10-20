@@ -2,14 +2,15 @@ require 'spec_helper'
 
 
 module Marketing
-  RSpec.describe CustomerIOEventTracker do
+  describe CustomerIOEventTracker do
 
     let(:site_version) { instance_spy('SiteVersion', code: 'uk') }
     let(:dummy_client) { instance_spy('Customerio::Client') }
+    let(:email)        { 'penny-example@gmail.com' }
     let(:user) do
       instance_spy('Spree::User',
                    id:         999,
-                   email:      'penny-example@gmail.com',
+                   email:      email,
                    created_at: 1_437_746_159,
                    first_name: 'Penny',
                    last_name:  'Exemplar')
@@ -56,6 +57,40 @@ module Marketing
 
         tracker.delete_user(user)
       end
+    end
+
+    describe 'sanitising inputs' do
+      let(:bad_email)   { ' safe-email@example.com ' }
+      let(:clean_email) { 'safe-email@example.com' }
+      let(:email)     { bad_email }
+
+      it 'for #identify_user' do
+        expect(dummy_client)
+          .to receive(:identify)
+                .with(
+                  id:           999,
+                  email:        clean_email,
+                  created_at:   1_437_746_159,
+                  first_name:   'Penny',
+                  last_name:    'Exemplar',
+                  site_version: 'uk'
+                )
+
+        tracker.identify_user(user, site_version)
+      end
+
+      it 'for #identify_user_by_email' do
+        expect(dummy_client)
+          .to receive(:identify)
+                .with(
+                  id:           clean_email,
+                  email:        clean_email,
+                  site_version: 'uk'
+                )
+
+        tracker.identify_user_by_email(bad_email, site_version)
+      end
+
     end
   end
 end
