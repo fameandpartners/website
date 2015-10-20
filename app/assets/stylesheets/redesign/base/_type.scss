@@ -1,5 +1,20 @@
 /* [Type]
 -------------------------------------------------------*/
+blockquote {
+  margin: 0;
+
+  &:before {
+    content: "\201C";
+    margin-right: 2px;
+  }
+
+  &:after {
+    content: "\201D";
+    margin-left: 2px;
+  }
+
+}
+
 .title-line-on-sides {
   position: relative;
   text-align: center;

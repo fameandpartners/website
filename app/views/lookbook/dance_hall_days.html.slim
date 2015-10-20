@@ -3,20 +3,156 @@
 
 = render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
 
-.page-content
+.landing-dhd
 
-  ul.rslides
-    - (1..2).each do |n|
-      li
-        = image_tag "//#{configatron.asset_host}#{page.path}/#{n}.jpg", alt: "#{page.heading} #{n}", class: 'img-responsive portrait-img'
+  .hero-wrap.media-wrap
+    img src='#{image_path("landingpages/dance-hall-days/hero-full.jpg")}' srcset='
+      #{image_path("landingpages/dance-hall-days/hero-sml.jpg")} 768w, 
+      #{image_path("landingpages/dance-hall-days/hero-med.jpg")} 1024w, 
+      #{image_path("landingpages/dance-hall-days/hero-full.jpg")} 1200w' alt='The exclusive Miss. Ellen - #SARAH3LLEN4FAME'
 
-  .page-content.products-collections.category
-    = render :partial => 'filters_sort', :locals => { :hidden => true }
+  .container
+    .row
+      .col-md-6
+        .row
+          = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 1, customWrapper: 'col-md-6 col-xs-6'}
+          .col-md-12
+            .row 
+              .col-md-6.col-xs-6
+                = link_to dresses_path + '/dress-willow-686?color=black', class: 'item-span-2'
+                  .media-wrap.keep-ratio
+                    .inner-wrap
+                      = image_tag 'landingpages/dance-hall-days/tile-shop-this-tall.jpg'
+                    .copy-wrap Shop this look
+              .col-md-6.col-xs-6
+                .row
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 3, customWrapper: 'col-md-12'}
+        
+      .col-md-6
+        .how-it-works
+          .testimonial
+            .inner-wrap
+              blockquote Be happy in your own skin. Don't be afraid to stand out and be different.
+              span ~ Sarah Ellen
+          h2.title DIY DRESS
+          .list-wrap
+            ul
+              li
+                em
+                  span 1
+                .copy-wrap
+                  span Select your favourite style
+              li
+                em
+                 span 2
+                .copy-wrap
+                  span Choose the colour
+              li
+                em
+                  span 3
+                .copy-wrap
+                  span Customise the style features
+              li
+                em
+                  span 4
+                .copy-wrap
+                  span Fit it to your body shape
+              li
+                em
+                  span 5
+                .copy-wrap
+                  span Tell us when you want it delivered
+        .row
+          = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 5, customWrapper: 'col-md-6 col-xs-6'}
 
-    .container.relative.products-collection
-      = render partial: 'products_without_content'
+    .row
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 6, rangeTo: 9, customWrapper: 'col-md-3 col-xs-6'}
 
-    / = render partial: 'pagination'
+    .row.mobile-change-order
+      .col-md-3.position-2
+        .row
+          = render partial: 'pick_products_without_content', locals: {rangeFrom: 10, rangeTo: 11, customWrapper: 'col-md-12 col-xs-6'}
+      .col-md-9.position-1
+        = link_to dresses_path + '/dress-allegra-680?color=forest-green', class: 'media-wrap tile-lrg'
+          img src='#{image_path("landingpages/dance-hall-days/tile-shop-this-lrg.jpg")}' srcset='
+                  #{image_path("landingpages/dance-hall-days/tile-shop-this-lrg-mob.jpg")} 768w,
+                  #{image_path("landingpages/dance-hall-days/tile-shop-this-lrg.jpg")} 1024w'
+          .cta-square.skin-light
+            span Shop <br> this look
 
-    .row.relative.more-products
-      = link_to 'More Dresses', dresses_path, class: 'btn btn-black'
+    .styling-tips
+      .row
+        .col-md-12
+          h2.title Style it like Sarah
+        .mobile-change-order
+          .col-md-3.position-2
+            = link_to dresses_path + '/dress-allegra-680?color=forest-green', class: 'media-wrap'
+              img src='#{image_path("landingpages/dance-hall-days/tile-look-1.jpg")}' srcset='
+                  #{image_path("landingpages/dance-hall-days/tile-look-1-mob.jpg")} 768w,
+                  #{image_path("landingpages/dance-hall-days/tile-look-1.jpg")} 1024w'
+              .visible-xs
+                .cta-square.skin-light
+                  span Shop <br> this look
+          .col-md-9.position-1
+            .sub-title Look one
+            ol
+              li Keep grooming to a minimum: Natural make-up, beachy waves or a long, wavy ponytail. With so much skin on show, you won't need to up the sex-factor any other way.
+              li Add the season's must-have shoe, the lace-up heel – it's a powerful look that compliments the thigh-high split.
+              li Choose delicate jewellery to let your dress do the talking. A body chain or long line necklace or a subtle, drop chain earring add a touch of sparkle.
+            = link_to dresses_path + '/dress-allegra-680?color=forest-green', class: 'cta-square hidden-xs'
+              span Get <br> the look
+      .row
+        .mobile-change-order
+          .col-md-6.position-2
+            = link_to dresses_path + '/dress-mystic-velvet-728?color=navy', class: 'media-wrap'
+              = image_tag 'landingpages/dance-hall-days/tile-look-2.jpg'
+              .visible-xs
+                .cta-square.skin-light.left
+                  span Shop <br> this look
+          .col-md-6.position-1
+            .sub-title Look two
+            ol
+              li Slicked-back hair ensures the focus stays on your shoulders and décolletage. Try a straight-from-the-catwalk, wet-look, down do or a sleek ponytail for maximum impact.
+              li A statement cuff and doorknocker earrings compliment this dress perfectly. 10 points for matching crystal sandals.
+            = link_to dresses_path + '/dress-mystic-velvet-728?color=navy', class: 'cta-square hidden-xs'
+              span Get <br> the look
+      .row
+        .mobile-change-order
+          .col-md-3.position-2
+            = link_to dresses_path + '/dress-larissa-689?color=apple-green', class: 'media-wrap'
+              img src='#{image_path("landingpages/dance-hall-days/tile-look-3.jpg")}' srcset='
+                  #{image_path("landingpages/dance-hall-days/tile-look-3-mob.jpg")} 768w,
+                  #{image_path("landingpages/dance-hall-days/tile-look-3.jpg")} 1024w'
+              .visible-xs
+                .cta-square
+                  span Shop <br> this look
+          .col-md-9.position-1
+            .sub-title Look three
+            ol
+              li Tap into the seasons 70s trend with long, layered necklaces and cocktail rings.
+              li Straight, middle-parted hair speaks to hippie bohemia, as does false lashes and winged eyeliner.
+              li Add a metallic belt for gypsy luxe effect.
+            = link_to dresses_path + '/dress-larissa-689?color=apple-green', class: 'cta-square hidden-xs'
+              span Get <br> the look
+    .row
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 12, customWrapper: 'col-md-3 col-xs-6'}
+
+    .row.footer-wrap
+      .outer-wrap
+        .col-md-6.col-xs-12
+          = link_to dresses_path, class: 'media-wrap'
+            = image_tag 'landingpages/dance-hall-days/tile-footer.jpg', alt: 'Discover more dresses'
+        .col-md-6.col-xs-12
+          .inner-wrap
+            ul 
+              li.title Shop by style
+              li = link_to 'Two-Piece'   , build_taxon_path('Two Piece')
+              li = link_to 'One Shoulder', build_taxon_path('One-Shoulder')
+              li = link_to 'Strapless'   , build_taxon_path('Strapless')
+              li = link_to 'Backless'    , build_taxon_path('Backless')
+            ul
+              li.title Shop by colour
+              li = link_to 'Black'        , colour_path('Black')
+              li = link_to 'White'        , colour_path('White')
+              li = link_to 'Red'          , colour_path('Red')
+              li = link_to 'Pastel'       , colour_path('Pastel')

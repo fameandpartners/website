@@ -295,8 +295,7 @@ th {
   }
 
   /* line 38, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_print.scss */
-  pre,
-  blockquote {
+  pre {
     border: 1px solid #999;
     page-break-inside: avoid;
   }
@@ -883,70 +882,6 @@ abbr[data-original-title] {
 .initialism {
   font-size: 90%;
   text-transform: uppercase;
-}
-
-/* line 241, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
-blockquote {
-  padding: 12.5px 25px;
-  margin: 0 0 25px;
-  font-size: 20px;
-  border-left: 5px solid #eeeeee;
-}
-/* line 250, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
-blockquote p:last-child,
-blockquote ul:last-child,
-blockquote ol:last-child {
-  margin-bottom: 0;
-}
-/* line 257, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
-blockquote footer,
-blockquote small,
-blockquote .small {
-  display: block;
-  font-size: 80%;
-  line-height: 1.6;
-  color: #777777;
-}
-/* line 265, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
-blockquote footer:before,
-blockquote small:before,
-blockquote .small:before {
-  content: '\2014 \00A0';
-}
-
-/* line 274, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
-.blockquote-reverse,
-blockquote.pull-right,
-blockquote.caption-right {
-  padding-right: 15px;
-  padding-left: 0;
-  border-right: 5px solid #eeeeee;
-  border-left: 0;
-  text-align: right;
-}
-/* line 286, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
-.blockquote-reverse footer:before,
-.blockquote-reverse small:before,
-.blockquote-reverse .small:before,
-blockquote.pull-right footer:before,
-blockquote.caption-right footer:before,
-blockquote.pull-right small:before,
-blockquote.caption-right small:before,
-blockquote.pull-right .small:before,
-blockquote.caption-right .small:before {
-  content: '';
-}
-/* line 287, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
-.blockquote-reverse footer:after,
-.blockquote-reverse small:after,
-.blockquote-reverse .small:after,
-blockquote.pull-right footer:after,
-blockquote.caption-right footer:after,
-blockquote.pull-right small:after,
-blockquote.caption-right small:after,
-blockquote.pull-right .small:after,
-blockquote.caption-right .small:after {
-  content: '\00A0 \2014';
 }
 
 /* line 294, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
@@ -6057,11 +5992,6 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-}
-/* line 15, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_wells.scss */
-.well blockquote {
-  border-color: #ddd;
-  border-color: rgba(0, 0, 0, 0.15);
 }
 
 /* line 22, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_wells.scss */

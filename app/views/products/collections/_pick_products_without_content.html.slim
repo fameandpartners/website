@@ -1,0 +1,7 @@
+- col = col.present? ? 3 : 4
+
+- if defined?(rangeTo)
+  = render partial: '/products/collections/product', collection: @collection.products[rangeFrom..rangeTo], as: :product, locals: {customWrapper: customWrapper}
+- else
+  - @collection.products.drop(rangeFrom).each_slice(1) do |products|
+    = render partial: '/products/collections/product', collection: products, as: :product, locals: {customWrapper: customWrapper}
