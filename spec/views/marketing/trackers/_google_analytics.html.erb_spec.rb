@@ -49,6 +49,24 @@ describe 'marketing/trackers/_google_analytics.html.erb', type: :view do
       end
     end
 
+    describe 'user registration events' do
+      context 'user just signed up' do
+        before { flash.now[:signed_up_just_now] = true }
+
+        it 'pushes registration complete event to dataLayer' do
+          render
+          expect(rendered).to include("dataLayer.push({event: \"registrationCompleted\"});")
+        end
+      end
+
+      context 'user already signed up' do
+        it 'does not renders anything related to complete registration' do
+          render
+          expect(rendered).not_to include('registrationCompleted')
+        end
+      end
+    end
+
     describe 'commerce / order tracking' do
       let(:expected_order_number)   { 'O999888777' }
 
