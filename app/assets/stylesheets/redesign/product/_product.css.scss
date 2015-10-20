@@ -103,7 +103,7 @@
     > div {
       float: left;
       width: 25%;
-      padding: 0 20px;
+      padding: 0 15px;
 
       &:before {
         display: block;
@@ -133,6 +133,14 @@
       display: block;
       margin-top: 5px;
       font-size: 10px;
+    }
+
+    @include mobile {
+
+      & > div {
+        padding: 0 5px;
+      }
+
     }
 
   }
