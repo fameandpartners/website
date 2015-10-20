@@ -1,22 +1,18 @@
 require 'spec_helper'
 
 describe 'authentication process', :type => :feature do
-  before :all do
-    Spree::User.destroy_all
-    create(:spree_user, :skip_welcome_email => true, site_version_id: SiteVersion.default.id)
-  end
-
-  let(:user) { Spree::User.first }
-  let(:password) { 'my-secure-password-#2' }
-
   describe 'login' do
     context 'with valid credentials' do
+      let!(:user_password) { 'my-secure-password-#2' }
+      let!(:user_email)    { 'something@example.com' }
+      let!(:user)          { create(:spree_user, skip_welcome_email: true, email: user_email, password: user_password, password_confirmation: user_password) }
+
       it 'should authenticate' do
         visit '/login'
 
         within('#password-credentials') do
-          fill_in 'Email', :with => user.email
-          fill_in 'Password', :with => password
+          fill_in 'Email', with: user.email
+          fill_in 'Password', with: user.password
         end
 
         expect(page).to_not have_content 'Invalid email or password.'
@@ -29,8 +25,8 @@ describe 'authentication process', :type => :feature do
         visit '/login'
 
         within('#password-credentials') do
-          fill_in 'Email', :with => user.email
-          fill_in 'Password', :with => 'adaljshdljhefih'
+          fill_in 'Email', with: 'anything'
+          fill_in 'Password', with: 'nothing'
         end
 
         click_button('Login')
