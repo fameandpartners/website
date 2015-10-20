@@ -33,7 +33,8 @@ class  UserCart::Populator
         order.user,
         'gift_selected',
         email:          order.email,
-        variant_id:     @product_attributes[:variant_id]
+        variant_id:     @product_attributes[:variant_id],
+        color:          Spree::Variant.find(@product_attributes[:variant_id]).option_values.first.presentation
       )
     rescue StandardError => e
       Rails.logger.error('ERROR: customer.io event tracker: auto_apply_coupon')
