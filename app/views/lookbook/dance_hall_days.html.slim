@@ -6,10 +6,10 @@
 .landing-dhd
 
   .hero-wrap.media-wrap
-    img src='/assets/landingpages/dance-hall-days/hero-full.jpg' srcset='
-      /assets/landingpages/dance-hall-days/hero-sml.jpg 768w, 
-      /assets/landingpages/dance-hall-days/hero-med.jpg 1024w, 
-      /assets/landingpages/dance-hall-days/hero-full.jpg 1200w' alt='The exclusive Miss. Ellen - #SARAH3LLEN4FAME'
+    img src='#{image_path("landingpages/dance-hall-days/hero-full.jpg")}' srcset='
+      #{image_path("landingpages/dance-hall-days/hero-sml.jpg")} 768w, 
+      #{image_path("landingpages/dance-hall-days/hero-med.jpg")} 1024w, 
+      #{image_path("landingpages/dance-hall-days/hero-full.jpg")} 1200w' alt='The exclusive Miss. Ellen - #SARAH3LLEN4FAME'
 
   .container
     .row
@@ -74,9 +74,9 @@
           = render partial: 'pick_products_without_content', locals: {rangeFrom: 10, rangeTo: 11, customWrapper: 'col-md-12 col-xs-6'}
       .col-md-9.position-1
         = link_to dresses_path + '/dress-allegra-680?color=forest-green', class: 'media-wrap tile-lrg'
-          img src='/assets/landingpages/dance-hall-days/tile-shop-this-lrg.jpg' srcset='
-                  /assets/landingpages/dance-hall-days/tile-shop-this-lrg-mob.jpg 768w,
-                  /assets/landingpages/dance-hall-days/tile-shop-this-lrg.jpg 1024w'
+          img src='#{image_path("landingpages/dance-hall-days/tile-shop-this-lrg.jpg")}' srcset='
+                  #{image_path("landingpages/dance-hall-days/tile-shop-this-lrg-mob.jpg")} 768w,
+                  #{image_path("landingpages/dance-hall-days/tile-shop-this-lrg.jpg")} 1024w'
           .cta-square.skin-light
             span Shop <br> this look
 
@@ -87,9 +87,9 @@
         .mobile-change-order
           .col-md-3.position-2
             = link_to dresses_path + '/dress-allegra-680?color=forest-green', class: 'media-wrap'
-              img src='/assets/landingpages/dance-hall-days/tile-look-1.jpg' srcset='
-                  /assets/landingpages/dance-hall-days/tile-look-1-mob.jpg 768w,
-                  /assets/landingpages/dance-hall-days/tile-look-1.jpg 1024w'
+              img src='#{image_path("landingpages/dance-hall-days/tile-look-1.jpg")}' srcset='
+                  #{image_path("landingpages/dance-hall-days/tile-look-1-mob.jpg")} 768w,
+                  #{image_path("landingpages/dance-hall-days/tile-look-1.jpg")} 1024w'
               .visible-xs
                 .cta-square.skin-light
                   span Shop <br> this look
@@ -120,9 +120,9 @@
         .mobile-change-order
           .col-md-3.position-2
             = link_to dresses_path + '/dress-larissa-689?color=apple-green', class: 'media-wrap'
-              img src='/assets/landingpages/dance-hall-days/tile-look-3.jpg' srcset='
-                  /assets/landingpages/dance-hall-days/tile-look-3-mob.jpg 768w,
-                  /assets/landingpages/dance-hall-days/tile-look-3.jpg 1024w'
+              img src='#{image_path("landingpages/dance-hall-days/tile-look-3.jpg")}' srcset='
+                  #{image_path("landingpages/dance-hall-days/tile-look-3-mob.jpg")} 768w,
+                  #{image_path("landingpages/dance-hall-days/tile-look-3.jpg")} 1024w'
               .visible-xs
                 .cta-square
                   span Shop <br> this look
