@@ -44,7 +44,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     @$banner = $(options.banner)
     @setBannerTextClass()
-    @content.find('.img-product').hoverable()
 
   setUpFilterElements: =>
     @allCheckboxes = $(".filter-area .thumb")
@@ -180,7 +179,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       success: (collection) =>
         content_html = @collectionTemplate(collection: collection)
         @content.html(content_html)
-        @content.find('.img-product').hoverable()
 
         @resetPagination(collection.products.length, collection.total_products)
 
@@ -203,7 +201,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         success: (collection) =>
           content_html = @collectionMoreTemplate(collection: collection, col: 3)
           @content.find(@showMoreSelector).closest('.row.relative').before(content_html)
-          @content.find('.img-product').hoverable()
           # @updatePagination(collection.products.length, collection.total_products)
           @updatePagination(collection.products.length, collection.total_products)
 
