@@ -4,6 +4,10 @@
     _gaq.push(['_setAccount', '<%= tracker.analytics_id %>']);
     _gaq.push(['_trackPageview']);
 
+    <% if Features.active?(:test_analytics) %>
+      _gaq.push(['_setDomainName', 'none']);
+    <% end %>
+
     <% if flash[:track_fb_reminder_promo] %>
       _gaq.push(['_trackEvent', 'Facebook', 'Redeem']);
     <% end %>
