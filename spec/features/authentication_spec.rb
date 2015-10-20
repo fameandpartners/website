@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'capybara/poltergeist'
 
 describe 'authentication process', :type => :feature do
   before :all do

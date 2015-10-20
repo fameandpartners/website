@@ -1,13 +1,9 @@
+require 'capybara/poltergeist'
+
 Capybara.register_driver :poltergeist do |app|
   driver_options = {
-      js_errors:         true,
-      timeout:           10,
-      debug:             true,
-      extensions:        ['features/support/page_load.js'],
-      phantomjs_options: %w(--load-images=no --ignore-ssl-errors=yes),
-      phantomjs_logger:  Logger.new('/dev/null'),
-      logger:            Kernel,
-      inspector:         true
+      debug:             false,
+      phantomjs_options: ['--load-images=no'],
   }
   Capybara::Poltergeist::Driver.new(app, driver_options)
 end
