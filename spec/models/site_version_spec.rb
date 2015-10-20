@@ -5,7 +5,7 @@ describe SiteVersion, type: :model, memoization_support: true do
     before(:each) { rememoize(described_class, :@permalinks) }
 
     it 'returns all site versions permalinks' do
-      SiteVersion.find_by_permalink('au') || create(:site_version, :au)
+      create(:site_version, :au)
 
       # Notice that 'us' version was seeded in the spec_helper
       result = described_class.permalinks
@@ -15,7 +15,7 @@ describe SiteVersion, type: :model, memoization_support: true do
 
   describe '.by_permalink_or_default' do
     let!(:default_site_version) { described_class.default }
-    let!(:au_site_version) { SiteVersion.find_by_permalink('au') || create(:site_version, permalink: 'au') }
+    let!(:au_site_version)      { create(:site_version, permalink: 'au') }
 
     context 'given an existent locale permalink' do
       it 'returns the SiteVersion of the permalink' do

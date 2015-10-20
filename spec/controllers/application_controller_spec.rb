@@ -42,8 +42,8 @@ describe ApplicationController, :type => :controller do
     end
 
     describe '#check_site_version' do
-      let!(:australian_site_version) { SiteVersion.find_by_permalink('au') || create(:site_version, permalink: 'au') }
-      let!(:portuguese_site_version) { SiteVersion.find_by_permalink('pt') || create(:site_version, permalink: 'pt') }
+      let!(:australian_site_version) { create(:site_version, permalink: 'au') }
+      let!(:portuguese_site_version) { create(:site_version, permalink: 'pt') }
 
       before(:each) do
         controller.instance_variable_set(:@current_site_version, australian_site_version)

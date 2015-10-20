@@ -15,8 +15,8 @@ describe Concerns::SiteVersion, type: :controller do
 
   describe 'before filters' do
     describe '#check_site_version' do
-      let(:australian_site_verison) { SiteVersion.find_by_permalink('au') || create(:site_version, permalink: 'au') }
-      let(:brazilian_site_version)  { SiteVersion.find_by_permalink('br') || create(:site_version, permalink: 'br') }
+      let(:australian_site_verison) { create(:site_version, permalink: 'au') }
+      let(:brazilian_site_version)  { create(:site_version, permalink: 'br') }
 
       context 'site version param is different than current site version code' do
         before(:each) { controller.instance_variable_set(:@current_site_version, brazilian_site_version) }
@@ -77,7 +77,7 @@ describe Concerns::SiteVersion, type: :controller do
     end
 
     context 'params site version is not set' do
-      let(:australian_site_verison) { SiteVersion.find_by_permalink('au') || create(:site_version, :au) }
+      let(:australian_site_verison) { create(:site_version, :au) }
 
       before(:each) { expect(SiteVersion).to receive(:default).and_return(australian_site_verison) }
 
