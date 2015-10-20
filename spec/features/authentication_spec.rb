@@ -10,18 +10,14 @@ describe 'authentication process', :type => :feature do
   let(:password) { 'my-secure-password-#2' }
 
   describe 'login' do
-
     context 'with valid credentials' do
       it 'should authenticate' do
-        ignore_js_errors { visit '/login' }
+        visit '/login'
 
         within('#password-credentials') do
           fill_in 'Email', :with => user.email
           fill_in 'Password', :with => password
         end
-
-        # pending
-        #ignore_js_errors { click_button('Login') }
 
         expect(page).to_not have_content 'Invalid email or password.'
         expect(page.status_code).to eq(200)
@@ -30,14 +26,14 @@ describe 'authentication process', :type => :feature do
 
     context 'with invalid credentials' do
       it 'should authenticate' do
-        ignore_js_errors { visit '/login' }
+        visit '/login'
 
         within('#password-credentials') do
           fill_in 'Email', :with => user.email
           fill_in 'Password', :with => 'adaljshdljhefih'
         end
 
-        ignore_js_errors { click_button('Login') }
+        click_button('Login')
 
         expect(page).to have_content 'Invalid email or password.'
         expect(page.status_code).to eq(200)

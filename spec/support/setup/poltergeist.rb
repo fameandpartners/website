@@ -8,6 +8,5 @@ Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, driver_options)
 end
 
-Capybara.current_driver        = :poltergeist
 Capybara.javascript_driver     = :poltergeist
 Capybara.default_max_wait_time = 10
