@@ -13,7 +13,7 @@ module AcceptanceHelpers
 
   def wait_ajax_completion(page)
     Timeout.timeout(Capybara.default_wait_time) do
-      while !page.evaluate_script('jQuery.active').zero? do
+      until page.evaluate_script('jQuery.active').zero? do
         sleep(0.1)
       end
       sleep(0.5) # additional time to process & render
@@ -32,12 +32,12 @@ module AcceptanceHelpers
   def show_network_traffic(page)
     page.driver.network_traffic.each do |request|
       request.response_parts.uniq(&:url).each do |response|
-        puts "\n Responce URL #{response.url}: \n Status #{response.status}"
+        puts "\n Response URL #{response.url}: \n Status #{response.status}"
       end
     end
   end
 end
 
 RSpec.configure do |config|
-  config.include AcceptanceHelpers
+  config.include AcceptanceHelpers, type: :feature
 end
