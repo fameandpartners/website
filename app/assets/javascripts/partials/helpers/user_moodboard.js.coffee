@@ -11,6 +11,8 @@ window.helpers.UserMoodboard = class UserMoodboard
 
   # data: { color_id, variant_id, product_id }
   addItem: (data = {}) ->
+    @dataLayerTrackEvent('addedToWishlist')
+
     if @contains(data)
       trigger('change')
       return
@@ -33,3 +35,6 @@ window.helpers.UserMoodboard = class UserMoodboard
       !!_.findWhere(@data.items, { product_id: data.product_id })
     else
       !!_.findWhere(@data.items, { product_id: data.product_id, color_id: data.color_id })
+
+  dataLayerTrackEvent: (event_name) ->
+    window.track.dataLayer.push({event: event_name})

@@ -1,27 +1,38 @@
 require 'spec_helper'
 
-RSpec.describe 'marketing/trackers/_google_analytics.html.erb', type: :view do
-
+describe 'marketing/trackers/_google_analytics.html.erb', type: :view do
   it 'renders nothing without an active Spree Tracker' do
     render
     expect(rendered).to be_blank
   end
 
-
-  it 'sets GA account ID from Spree::Tracker' do
-    allow(Spree::Tracker)
-      .to receive(:current)
-            .and_return(Spree::Tracker.new(analytics_id: 'verylargenumber' ))
-
-    render
-    expect(rendered).to include "_gaq.push(['_setAccount', 'verylargenumber']);"
-  end
-
   context 'with valid tracker' do
     before do
-      allow(Spree::Tracker)
-        .to receive(:current)
-              .and_return(Spree::Tracker.new(analytics_id: 'whatever'))
+      allow(Spree::Tracker).to receive(:current).and_return(Spree::Tracker.new(analytics_id: 'whatever'))
+    end
+
+    it 'sets GA account ID from Spree::Tracker' do
+      render
+      expect(rendered).to include "_gaq.push(['_setAccount', 'whatever']);"
+    end
+
+    describe 'feature flags' do
+      context ':test_analytics' do
+        context 'is enabled' do
+          before { Features.activate(:test_analytics) }
+
+          it 'has setDomainName analytics configuration' do
+            render
+            expect(rendered).to include("_gaq.push(['_setDomainName', 'none']);")
+          end
+
+          context 'is disalbed' do
+            it 'does not have setDomainName' do
+              expect(rendered).not_to include('_setDomainName')
+            end
+          end
+        end
+      end
     end
 
     describe 'simple facebook events' do
@@ -34,6 +45,24 @@ RSpec.describe 'marketing/trackers/_google_analytics.html.erb', type: :view do
           flash[flash_key] = 'truthy'
           render
           expect(rendered).to include expected_output
+        end
+      end
+    end
+
+    describe 'user registration events' do
+      context 'user just signed up' do
+        before { flash.now[:signed_up_just_now] = true }
+
+        it 'pushes registration complete event to dataLayer' do
+          render
+          expect(rendered).to include("dataLayer.push({event: \"registrationCompleted\"});")
+        end
+      end
+
+      context 'user already signed up' do
+        it 'does not renders anything related to complete registration' do
+          render
+          expect(rendered).not_to include('registrationCompleted')
         end
       end
     end

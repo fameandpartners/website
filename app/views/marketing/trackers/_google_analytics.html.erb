@@ -4,6 +4,11 @@
     _gaq.push(['_setAccount', '<%= tracker.analytics_id %>']);
     _gaq.push(['_trackPageview']);
 
+    <% if flash[:signed_up_just_now] %>
+        var dataLayer = window.dataLayer || [];
+        dataLayer.push({event: "registrationCompleted"});
+    <% end %>
+
     <% if Features.active?(:test_analytics) %>
       _gaq.push(['_setDomainName', 'none']);
     <% end %>
