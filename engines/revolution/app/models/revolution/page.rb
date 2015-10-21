@@ -12,7 +12,7 @@ module Revolution
     validates :path, :presence => true
     validate :path_has_not_changed, :on => :update #read only attributes
 
-    has_many :translations
+    has_many :translations, :dependent => :destroy
     accepts_nested_attributes_for :translations, :reject_if => :all_blank
 
     acts_as_nested_set :counter_cache => :children_count
