@@ -13,5 +13,9 @@ FactoryGirl.define do
 
       line_items   { build_list :dress_item, 1 }
     end
+
+    trait :with_dress_items do
+      line_items { create_list :dress_item, 1 }
+    end
   end
 end

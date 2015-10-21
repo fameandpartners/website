@@ -77,7 +77,7 @@ describe Concerns::SiteVersion, type: :controller do
     end
 
     context 'params site version is not set' do
-      let(:australian_site_verison) { create(:site_version, permalink: 'au', default: true) }
+      let(:australian_site_verison) { create(:site_version, :au) }
 
       before(:each) { expect(SiteVersion).to receive(:default).and_return(australian_site_verison) }
 

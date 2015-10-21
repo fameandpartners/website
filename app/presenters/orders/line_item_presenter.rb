@@ -119,7 +119,7 @@ module Orders
     end
 
     def customisations_without_images
-      customisations.collect &:first
+      customisations.collect(&:first)
     end
 
     def personalizations?

@@ -19,7 +19,8 @@ FameAndPartners::Application.configure do
   config.action_controller.perform_caching = false
 
   # Raise exceptions instead of rendering exception templates
-  config.action_dispatch.show_exceptions = false
+  #config.action_dispatch.show_exceptions = false
+  config.action_dispatch.show_exceptions = true
 
   # Disable request forgery protection in test environment
   config.action_controller.allow_forgery_protection    = false
@@ -39,4 +40,9 @@ FameAndPartners::Application.configure do
 
   config.action_mailer.asset_host = 'http://fameandpartners.test'
 
+  # it's much easier to debug with uncompressed js
+  config.assets.debug = true
+
+  # allows to set session inside capybara
+  config.middleware.use RackSessionAccess::Middleware
 end

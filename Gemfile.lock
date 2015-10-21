@@ -233,6 +233,7 @@ GEM
       orm_adapter (~> 0.5.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
+    cliver (0.3.2)
     cocaine (0.5.7)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
@@ -535,6 +536,11 @@ GEM
       paypal-sdk-core (~> 0.2.3)
     pg (0.18.1)
     pin_payment (0.5.1)
+    poltergeist (1.7.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      multi_json (~> 1.0)
+      websocket-driver (>= 0.2.0)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.5)
@@ -564,6 +570,9 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rack_session_access (0.1.1)
+      builder (>= 2.0.0)
+      rack (>= 1.0.0)
     rails (3.2.22)
       actionmailer (= 3.2.22)
       actionpack (= 3.2.22)
@@ -778,6 +787,9 @@ GEM
     webmock (1.21.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
+    websocket-driver (0.6.2)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
     whenever (0.9.4)
       chronic (>= 0.6.3)
     xml-simple (1.1.5)
@@ -838,10 +850,12 @@ DEPENDENCIES
   paperclip
   pg
   pin_payment
+  poltergeist (~> 1.7.0)
   pry-rails
   psych (~> 2.0.13)
   quiet_assets
   rack-cors
+  rack_session_access (~> 0.1.1)
   rails (~> 3.2.22)
   react-rails (~> 1.2)
   redis-rails

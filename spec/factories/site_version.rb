@@ -7,21 +7,26 @@ FactoryGirl.define do
   factory :site_version, class: SiteVersion do
     name      { generate(:name) }
     permalink { generate(:permalink) }
+    active    true
     association :zone, factory: :spree_zone
     exchange_rate 1.0
   end
-end
 
-=begin
-    t.integer  "zone_id"
-    t.string   "name"
-    t.string   "permalink"
-    t.boolean  "default",                 :default => false
-    t.boolean  "active",                  :default => false
-    t.string   "currency"
-    t.string   "locale"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
-    t.date     "exchange_rate_timestamp"
-    t.decimal  "exchange_rate",           :default => 1.0
-=end
+  trait :us do
+    name 'USA'
+    permalink 'us'
+    default true
+    active true
+    currency 'USD'
+    locale 'en-US'
+  end
+
+  trait :au do
+    name 'Australia'
+    permalink 'au'
+    default false
+    active true
+    currency 'AUD'
+    locale 'en-AU'
+  end
+end
