@@ -19,6 +19,7 @@ Features.deactivate(:collection_content)
 Features.deactivate(:maintenance)
 Features.deactivate(:shipping_message)
 Features.deactivate(:send_promotion_email_reminder)
+Features.deactivate(:gift)
 
 Features.activate(:express_making)
 Features.activate(:masterpass)

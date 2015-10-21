@@ -50,6 +50,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     @data
 
   showGiftModal: () ->
+    return if $("#gift-modal").length == 0
     $.ajax(
       url: urlWithSitePrefix("/user_cart/products/check_gift_in_cart")
       type: "GET"
