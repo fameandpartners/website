@@ -4,16 +4,15 @@ ruby:
     filter = new ProductCollectionFilter({
       controls: '.category .category-controls',
       content: '.category .products-collection',
-      banner:  '.category-header',
       page_size: #{page_size},
       reset_source: true,
       size: #{ @collection.products.size.to_i },
       total_products: #{ @collection.total_products.to_i },
       details_elements: {
         banner: {
-          title: '.page-title.category-header .page-title--details h1',
-          description: '.page-title.category-header .page-title--details p',
-          image: '.page-title.category-header'
+          title: '.category-header .js-heading',
+          description: '.category-header .js-sub-heading',
+          image: '.category-header .media-wrap img'
         }
       }
     });

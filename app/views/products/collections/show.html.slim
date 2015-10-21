@@ -5,11 +5,14 @@
 = render :partial => 'javascript'
 
 - if banner.display?
-  .page-title.default.category-header style="background-image: url('#{banner.image}')"
-    .container
-      .page-title--details
-        h1.no-padding-bottom = raw params[:lpt] || page.heading
-        p= raw params[:lps] || page.sub_heading
+  .category-header
+    .media-wrap
+      img src='#{banner.image}'
+    .outer-wrap
+      .inner-wrap
+        h1.title
+          span.js-heading = raw params[:lpt] || page.heading
+          span.sub-heading.js-sub-heading = raw params[:lps] || page.sub_heading
 
 .page-content.products-collections.category
   = render :partial => 'filters_sort'
