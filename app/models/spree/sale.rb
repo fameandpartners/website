@@ -78,7 +78,7 @@ class Spree::Sale < ActiveRecord::Base
   end
 
   def sitewide_message
-    "UP TO #{discount_string} OFF SELECTED DRESSES. LIMITED TIME ONLY."
+    "#{discount_string} OFF SITEWIDE. LIMITED TIME ONLY."
   end
 
   class << self
