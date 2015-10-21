@@ -62,7 +62,13 @@ module AdminUi
       helper_method :collection, :page
 
       def collection
-        @collection = Revolution::Page.search(params)
+        page = (params[:page] || 1).to_i
+        per_page = (params[:per_page] || 50).to_i
+        if query = params[:search]
+          @collection ||= Revolution::Page.for_path(query).paging(page, per_page)
+        else
+          @collection ||= Revolution::Page.paging(page, per_page)
+        end
       end
 
       def page

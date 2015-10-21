@@ -85,15 +85,8 @@ module Revolution
       order('path ASC').page(page).per(per_page)
     end
 
-    def self.search(params = {})
-      page = (params[:page] || 1).to_i
-      per_page = (params[:per_page] || 50).to_i
-      if query = params[:search]
-        collection ||= Revolution::Page.where("LOWER(path) like '%#{query.downcase}%'").paging(page, per_page)
-      else
-        collection ||= Revolution::Page.paging(page, per_page)
-      end
-      collection
+    def self.for_path(query)
+      where("LOWER(path) like '%#{query.downcase}%'")
     end
 
   end
