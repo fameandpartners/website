@@ -8001,6 +8001,10 @@ xheader
   margin-left: 20px;
 }
 
+#cart .shopping-bag-masterpass {
+  margin-top:20px;
+}
+
 /* line 77, ../sass/_cart.scss */
 #cart.speed-in {
   right: 0;
