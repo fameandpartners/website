@@ -39,7 +39,7 @@ configatron.customerio.secret_key = 'f1fd531b4d1ac65ca86c'
 configatron.order_production_emails = ['production@fameandpartners.dev']
 
 configatron.email_marketing.delay_time do |delay_time|
-  delay_time.abandoned_cart                   = 1.hour
+  delay_time.abandoned_cart                   = 4.hours
   delay_time.quiz_unfinished                  = 12.hours
   delay_time.style_profile_completed          = 1.week
   delay_time.style_profile_completed_reminder = 1.week
