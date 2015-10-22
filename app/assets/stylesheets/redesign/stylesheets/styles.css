@@ -8048,7 +8048,6 @@ xheader
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: url("../img/cd-remove-item.svg") no-repeat center center;
 }
 /* line 119, ../sass/_cart.scss */
 .no-touch #cart .item-remove:hover {
@@ -8919,11 +8918,6 @@ p {
 /* line 31, ../sass/_helpers.scss */
 .no-margin-top {
   margin-top: 0px;
-}
-
-/* line 35, ../sass/_helpers.scss */
-.bg-grey {
-  background: url(../images/photography__2x.png) repeat;
 }
 
 /* line 40, ../sass/_helpers.scss */
