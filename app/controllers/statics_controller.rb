@@ -28,6 +28,11 @@ class StaticsController < ApplicationController
     @description = "Terms & Conditions"
   end
 
+  def yelp
+    @title = "Our Journey" + default_seo_title
+    @description = "Our Journey"
+  end
+
   def why_us
     @title = "Why Us " + default_seo_title
     @description = "Why Us"
