@@ -188,10 +188,9 @@ window.page.EmailCaptureModal = class EmailCaptureModal
             dataType: "json"
             data: {gift_sku: sku}
           ).success(
-            console.log 'add gift to order ok'
             window.location.href = urlWithSitePrefix("/checkout")
           ).error( () =>
-            console.log 'add gift to order error'
+            window.helpers.showAlert(message: 'Error while add gift to cart ! ')
           )
 
 window.page.PromocodeModal = class PromocodeModal extends EmailCaptureModal

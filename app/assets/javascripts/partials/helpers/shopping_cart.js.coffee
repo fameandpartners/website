@@ -70,7 +70,7 @@ window.helpers.ShoppingCart = class ShoppingCart
           timer: false,
           force: false
         });
-    ).error( () ->
+    ).error( () =>
       @trigger('error')
     )
 
