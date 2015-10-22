@@ -41,9 +41,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     @setUpFilterElements()
     @productOrderInput.on('change', @update)
-
     @$banner = $(options.banner)
-    @setBannerTextClass()
 
   setUpFilterElements: =>
     @allCheckboxes = $(".filter-area .thumb")
@@ -286,10 +284,5 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       if details.banner.image
         $banner_img = $(@details_elements.banner.image)
         image = new Image()
-        image.onload = () -> $banner_img.css('background-image', "url('#{ details.banner.image }')")
+        image.onload = () -> $banner_img.attr('src', '#{ details.banner.image }')
         image.src = details.banner.image
-
-  setBannerTextClass: () =>
-    bgImg = @$banner.css('background-image')
-    if bgImg && bgImg.indexOf('dark-bg.jpg') != -1
-      @$banner.addClass('dark-bg')

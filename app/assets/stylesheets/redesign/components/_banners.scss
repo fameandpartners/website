@@ -1,0 +1,88 @@
+/* [Banners]
+-------------------------------------------------------*/
+.category-header {
+  position: relative;
+  text-align: center;
+  background: $c-neutral-6;
+
+  .media-wrap {
+    background: transparent;
+  }
+
+  .outer-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .inner-wrap  {
+    display: table;
+    width: 100%;
+    max-width: $desktop-width;
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  .title {
+    display: table-cell;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    font-family: $font-brand-serif;
+    font-size: 2.75em;
+    font-weight: 400;
+    letter-spacing: 1.8px;
+    color: $c-neutral-white;
+
+    .sub-heading {
+      display: block;
+      padding: 0 15%;
+      text-transform: none;
+      font-size: 0.409em;
+      font-family: $font-family-secondary;
+      letter-spacing: normal;
+    }
+
+  }
+
+  @include tablet {
+
+    & {
+
+      .title .sub-heading {
+        display: none;
+      }
+
+    }
+
+  }
+
+  @include mobile {
+
+    & {
+
+      .media-wrap {
+        display: none;
+      }
+
+      .outer-wrap {
+        position: relative;
+      }
+
+      .title {
+        padding: 20px;
+        font-size: 1.75em;
+
+        .sub-heading {
+          display: none;
+        }
+
+      }
+
+    }
+
+  }
+
+}
