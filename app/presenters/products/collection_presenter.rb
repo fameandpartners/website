@@ -45,7 +45,6 @@ module Products
     def serialize
       result = self.to_h
       result[:details] = self.details.to_h
-      result[:details][:banner] = self.details.banner.to_h
 
       result[:products] = self.products.map do |product|
         sale_price = product.price.apply(product.discount)
