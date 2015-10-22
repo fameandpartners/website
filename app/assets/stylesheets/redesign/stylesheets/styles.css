@@ -8920,11 +8920,6 @@ p {
   margin-top: 0px;
 }
 
-/* line 35, ../sass/_helpers.scss */
-.bg-grey {
-  background: url(../images/photography__2x.png) repeat;
-}
-
 /* line 40, ../sass/_helpers.scss */
 .text-white {
   color: white;
