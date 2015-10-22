@@ -32,7 +32,7 @@ describe Revolution::PageBannerDecorator do
   end
 
   describe '#asset_safe_page_path' do
-    it 'leaves non normal values alone' do
+    it 'leaves normal values alone' do
       expect(presenter.asset_safe_page_path).to eq path
     end
   end
