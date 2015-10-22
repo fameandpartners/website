@@ -39,7 +39,7 @@ class EmailMarketing
   # Display contents of cart with link back to shopping cart page.
   def self.send_abandoned_cart_emails
     # Initiate date time variables
-    created_before = (configatron.email_marketing.delay_time.abandoned_cart || 1.hour).ago
+    created_before = (configatron.email_marketing.delay_time.abandoned_cart || 4.hours).ago
 
     excluded = Spree::Order.
       joins(:line_items).
