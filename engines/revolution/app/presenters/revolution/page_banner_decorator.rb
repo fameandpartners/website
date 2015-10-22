@@ -3,16 +3,22 @@ module Revolution
     attr_accessor :page, :params
 
     def initialize(page, params)
-      @page = page
+      @page   = page
       @params = params
     end
 
     def image
       if custom?
-        "//#{configatron.asset_host}/pages#{page.path}/#{custom_banner}.jpg"
+        "//#{configatron.asset_host}/pages#{asset_safe_page_path}/#{custom_banner}.jpg"
       else
         page.banner_image
       end
+    end
+
+    # The default Revolution Page Path is 'dresses/*'.
+    # The '*' doesnt work as a path on on S3, so remove it.
+    def asset_safe_page_path
+      page.path.to_s.gsub('/*', '')
     end
 
     def display?

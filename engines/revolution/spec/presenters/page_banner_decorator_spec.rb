@@ -30,4 +30,27 @@ describe Revolution::PageBannerDecorator do
     it { expect(presenter.custom?).to eq false }
     it { expect(presenter.image).to eq page.banner_image }
   end
+
+  describe '#asset_safe_page_path' do
+    it 'leaves normal values alone' do
+      expect(presenter.asset_safe_page_path).to eq path
+    end
+  end
+
+  context 'Root dresses/* style URLs' do
+    let(:path)   { '/dresses/*' }
+    let(:params) { {:lpi => 'wedontneednosteenkingtests'} }
+
+    describe '#asset_safe_page_path' do
+      it 'removes /* from paths' do
+        expect(presenter.asset_safe_page_path).to eq '/dresses'
+      end
+    end
+
+    describe 'can have custom banners too' do
+      it { expect(presenter.image).to_not include path }
+      it { expect(presenter.image).to_not include '*' }
+      it { expect(presenter.image).to eq '//assets.fameandpartners.com/pages/dresses/wedontneednosteenkingtests.jpg' }
+    end
+  end
 end
