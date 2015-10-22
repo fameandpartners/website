@@ -19,7 +19,7 @@ module Marketing
 
     def track(user, event_type, attrs)
       # TODO - Convert to ALWAYS using email addresses instead of ids.
-      user_id = user.respond_to?(:id) ? user.id : user
+      user_id = user.respond_to?(:id) ? user.id : user.to_s.strip
       client.track(user_id, event_type, attrs)
       Rails.logger.info("[customer.io] #{user_id}, #{event_type}")
       Rails.logger.info("[customer.io] #{user_id}, #{attrs}")
