@@ -61,6 +61,14 @@ module Spree
       )
       save_session_data
 
+      NewRelic::Agent.notify('PayWithMasterpass',
+                             current_order: current_order.to_json
+                             shopping_cart: shopping_cart.to_json,
+                             shopping_cart_request: shopping_cart_request.to_json,
+                             shopping_cart_response: shopping_cart_response.to_json,
+                             data: @data.to_json)
+
+
       # flash[:commerce_tracking] = 'masterpass_initialized';
       render json: {
                  request_token: @data.request_token,
