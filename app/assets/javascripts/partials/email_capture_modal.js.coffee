@@ -173,8 +173,8 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
     if @opts.className == "new-modal add-to-cart"
       $(".add-to-cart .four-lipsticks img").click (e) ->
-        $(".add-to-cart .four-lipsticks img").removeClass("selected").addClass("no-select")
-        $(this).addClass("selected").removeClass("no-select")
+        $(".add-to-cart .four-lipsticks img").removeClass("selected")
+        $(this).toggleClass("selected")
 
       checkoutBtn = $(".add-to-cart .checkout-btn")
       checkoutBtn.click (e) =>
