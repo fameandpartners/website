@@ -80,6 +80,7 @@ class  UserCart::Populator
   private
 
     def validate!
+      raise Errors::ProductOptionNotAvailable.new("Can't add a gift to an empty cart") if @is_gift && order.line_items.count == 0
       return if @is_gift
       if product_color.custom && product_making_options.present?
         raise Errors::ProductOptionsNotCompatible.new("Custom colors and fast delivery can't be selected at the same time")

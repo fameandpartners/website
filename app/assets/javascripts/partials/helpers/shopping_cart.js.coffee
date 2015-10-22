@@ -51,6 +51,7 @@ window.helpers.ShoppingCart = class ShoppingCart
 
   showGiftModal: () ->
     return if $("#gift-modal").length == 0
+
     $.ajax(
       url: urlWithSitePrefix("/user_cart/products/check_gift_in_cart")
       type: "GET"
@@ -65,15 +66,13 @@ window.helpers.ShoppingCart = class ShoppingCart
           className: "new-modal add-to-cart",
           action: "",
           container: "#gift-modal",
-          timeout: 3,
+          timeout: 0,
           timer: false,
           force: false
         });
-    ).error( () =>
+    ).error( () ->
       @trigger('error')
     )
-
-
 
   # options:
   #   variant_id
@@ -81,6 +80,8 @@ window.helpers.ShoppingCart = class ShoppingCart
   #   color_id
   #   customizations_ids
   addProduct: (product_data = {}) ->
+    @showGiftModal()
+
     $.ajax(
       url: urlWithSitePrefix("/user_cart/products")
       type: "POST"
@@ -91,7 +92,6 @@ window.helpers.ShoppingCart = class ShoppingCart
       added_product = _.find((data.products || []), (product) ->
         product.variant_id == product_data.variant_id
       )
-      @showGiftModal()
       @trackAddToCart(added_product)
     ).error( () =>
       @trigger('error')
