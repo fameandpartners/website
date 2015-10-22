@@ -49,6 +49,32 @@ window.helpers.ShoppingCart = class ShoppingCart
   data: () ->
     @data
 
+  showGiftModal: () ->
+    return if $("#gift-modal").length == 0
+    $.ajax(
+      url: urlWithSitePrefix("/user_cart/products/check_gift_in_cart")
+      type: "GET"
+      dataType: "json"
+    ).success((data) =>
+      if !data.has_gift
+        addToCartModal = new window.page.EmailCaptureModal({
+          promocode: "",
+          content: "",
+          heading: "",
+          message: "",
+          className: "new-modal add-to-cart",
+          action: "",
+          container: "#gift-modal",
+          timeout: 3,
+          timer: false,
+          force: false
+        });
+    ).error( () =>
+      @trigger('error')
+    )
+
+
+
   # options:
   #   variant_id
   #   size_id
@@ -65,7 +91,7 @@ window.helpers.ShoppingCart = class ShoppingCart
       added_product = _.find((data.products || []), (product) ->
         product.variant_id == product_data.variant_id
       )
-
+      @showGiftModal()
       @trackAddToCart(added_product)
     ).error( () =>
       @trigger('error')
@@ -140,7 +166,7 @@ window.helpers.ShoppingCart = class ShoppingCart
             sku: product.sku,
             name: product.name,
             color: product.color.name,
-            size: product.size.presentation,
+            size: product.size?.presentation,
             value: product.price.amount,
             currency: product.price.currency
           });
@@ -152,7 +178,7 @@ window.helpers.ShoppingCart = class ShoppingCart
             sku: product.sku,
             name: product.name,
             color: product.color.name,
-            size: product.size.presentation,
+            size: product.size?.presentation,
             value: product.price.amount,
             currency: product.price.currency
           }])

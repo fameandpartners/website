@@ -2,7 +2,16 @@ class UserCart::ProductsController < UserCart::BaseController
   respond_to :json
 
   # {"size_id"=>"34", "color_id"=>"89", "customizations_ids"=>"", "variant_id"=>"19565"}
+
+  def check_gift_in_cart
+    render json: {has_gift: current_order.line_items.any?{|i| i.product.name == 'Gift'}}
+  end
+
   def create
+    if params[:gift_sku].present?
+      params[:variant_id] = Spree::Variant.where(sku: params[:gift_sku]).first.id
+    end
+
     cart_populator = UserCart::Populator.new(
       order: current_order(true),
       site_version: current_site_version,
@@ -14,7 +23,8 @@ class UserCart::ProductsController < UserCart::BaseController
         customizations_ids: params[:customizations_ids],
         making_options_ids: params[:making_options_ids],
         quantity: 1
-      }
+      },
+      is_gift: params[:gift_sku].present?
     )
     result = cart_populator.populate
 

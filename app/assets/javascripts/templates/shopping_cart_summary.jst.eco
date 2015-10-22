@@ -3,19 +3,27 @@
   <% for product in @cart.products: %>
     <li class="cart-item" data-id="<%= product.line_item_id %>">
       <a class="remove-product fa fa-close pull-right link-grey" href="#0"></a>
-      <div class="cart-item-image-holder pull-left">
-        <a href="<%= product.path %>">
-          <img alt="<%= product.name %>" class="cart-item-image" src="<%= product.image.large %>">
-        </a>
-      </div>
+      <% if product.name != "Gift" : %>
+        <div class="cart-item-image-holder pull-left">
+          <a href="<%= product.path %>">
+            <img alt="<%= product.name %>" class="cart-item-image" src="<%= product.image.large %>">
+          </a>
+        </div>
+      <% end %>
       <div class="cart-item-info">
         <div class="heading">
           <span class="qty"><%= product.quantity %> &times; </span>
-          <a href="<%= product.path %>" class="cart-item-title"><%= product.name %></a>
+          <% if product.name != "Gift" :%>
+            <a href="<%= product.path %>" class="cart-item-title"><%= product.name %></a>
+          <% else :%>
+            <a href="#" class="cart-item-title"><%= product.name %></a>
+          <% end %>
         </div>
         <div class="clearfix">
           <div class="pull-left small">
-            Size: <span><%= product.size.presentation %>,</span>
+            <% if product.size != null :%>
+              Size: <span><%= product.size.presentation %>,</span>
+            <% end %>
             Color: <span class="color"><%= product.color.presentation %></span>
           </div>
           <div class="pull-right text-muted"><%= product.price.display_price %></div>

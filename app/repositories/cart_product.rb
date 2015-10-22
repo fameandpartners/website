@@ -32,8 +32,7 @@ class Repositories::CartProduct
         discount: product.discount.try(:amount),
         image: product_image
       )
-
-      result.size   = Repositories::ProductSize.read(size_id)
+      result.size   = size_id.present? ? Repositories::ProductSize.read(size_id) : nil
       result.color  = Repositories::ProductColors.read(color_id)
       result.customizations = product_customizations.to_a
       result.making_options = product_making_options
