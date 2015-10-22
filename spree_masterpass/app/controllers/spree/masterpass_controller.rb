@@ -102,6 +102,10 @@ module Spree
               @data.checkout_resource_url, @data.access_token
           ))
 
+      NewRelic::Agent.notify('MasterpassCallback',
+                       data: @data.to_json,
+                       checkout: checkout.to_json)
+
       if checkout.card && checkout.contact && checkout.shippingAddress
         # To resolve the error - "Singleton can't be dumped"
         @data.checkout = {
