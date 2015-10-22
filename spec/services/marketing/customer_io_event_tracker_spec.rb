@@ -64,6 +64,17 @@ module Marketing
       let(:clean_email) { 'safe-email@example.com' }
       let(:email)     { bad_email }
 
+      let(:dummy_event) { double('Event') }
+      let(:dummy_attrs) { double('Attrs') }
+
+      it 'for #track' do
+        expect(dummy_client)
+          .to receive(:track)
+                .with(clean_email, dummy_event , dummy_attrs)
+
+        tracker.track(bad_email, dummy_event, dummy_attrs)
+      end
+
       it 'for #identify_user' do
         expect(dummy_client)
           .to receive(:identify)
