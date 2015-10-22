@@ -61,7 +61,7 @@ module Spree
       )
       save_session_data
 
-      NewRelic::Agent.notify('PayWithMasterpass',
+      NewRelic::Agent.record_custom_event('PayWithMasterpass',
                              current_order: current_order.to_json,
                              shopping_cart: shopping_cart.to_json,
                              shopping_cart_request: shopping_cart_request.to_json,
@@ -102,7 +102,7 @@ module Spree
               @data.checkout_resource_url, @data.access_token
           ))
 
-      NewRelic::Agent.notify('MasterpassCallback',
+      NewRelic::Agent.record_custom_event('MasterpassCallback',
                        data: @data.to_json,
                        checkout: checkout.to_json)
 
