@@ -10,7 +10,6 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
 require 'shoulda/matchers'
-require 'database_cleaner'
 require 'ffaker'
 
 # Rails.application.railties.all { |r| r.eager_load! }
@@ -53,15 +52,6 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
     seed_site_zone
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
   end
 end

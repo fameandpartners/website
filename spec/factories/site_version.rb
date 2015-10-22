@@ -11,17 +11,3 @@ FactoryGirl.define do
     exchange_rate 1.0
   end
 end
-
-=begin
-    t.integer  "zone_id"
-    t.string   "name"
-    t.string   "permalink"
-    t.boolean  "default",                 :default => false
-    t.boolean  "active",                  :default => false
-    t.string   "currency"
-    t.string   "locale"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
-    t.date     "exchange_rate_timestamp"
-    t.decimal  "exchange_rate",           :default => 1.0
-=end

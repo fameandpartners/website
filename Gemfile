@@ -134,6 +134,8 @@ end
 
 group :test do
   gem 'capybara', '~> 2.5.0'
+  gem 'poltergeist', '~> 1.7.0'
+  gem 'turnip', '~> 1.3.1'
   gem 'database_cleaner', '0.9.1'
   gem 'factory_girl_rails', '4.2.1'
   gem 'rspec-activemodel-mocks'
