@@ -67,7 +67,7 @@ module Marketing
       let(:dummy_event) { double('Event') }
       let(:dummy_attrs) { double('Attrs') }
 
-      it 'for #identify_user' do
+      it 'for #track' do
         expect(dummy_client)
           .to receive(:track)
                 .with(clean_email, dummy_event , dummy_attrs)
