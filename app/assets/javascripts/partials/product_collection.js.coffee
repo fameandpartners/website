@@ -280,9 +280,3 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     if @details_elements.banner && details.banner
       $(@details_elements.banner.title).html(details.banner.title) if details.banner.title
       $(@details_elements.banner.description).html(details.banner.description) if details.banner.description
-
-      if details.banner.image
-        $banner_img = $(@details_elements.banner.image)
-        image = new Image()
-        image.onload = () -> $banner_img.attr('src', '#{ details.banner.image }')
-        image.src = details.banner.image
