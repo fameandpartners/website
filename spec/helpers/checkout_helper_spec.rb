@@ -7,6 +7,7 @@ RSpec.describe CheckoutHelper, :type => :helper do
   let(:zone) {  Spree::Zone.create(name: 'usa', description: 'united states of america', default_tax: false) }
   let(:usa) { Spree::Country.create(iso_name: "UNITED STATES",  name: "United States", states_required: false) }
   let(:canada) { Spree::Country.create(iso_name: "CANADA",  name: "Canada", states_required: false) }
+  let(:australia) { Spree::Country.create(iso_name: "AUSTRALIA",  name: "Australia", states_required: false) }
   let(:current_site_version) { create(:site_version) }
   let(:usa_id) { Spree::Country.where(name: "United States").first.id }
   let(:address1) { set_us_default(address) }
@@ -16,7 +17,6 @@ RSpec.describe CheckoutHelper, :type => :helper do
 
     context 'given the user is in the usa zone' do
       before do
-        Spree::Country.create(iso_name: "AUSTRALIA",  name: "Australia", states_required: false)
         zm = Spree::ZoneMember.create(zoneable_id: usa.id, zoneable_type: 'Spree::Country')
         zone.zone_members << zm
         zm = Spree::ZoneMember.create(zoneable_id: canada.id, zoneable_type: 'Spree::Country')
@@ -28,7 +28,7 @@ RSpec.describe CheckoutHelper, :type => :helper do
       end
 
       it 'has an address with a country not in the USA zone' do
-        address.country_id = Spree::Country.where(name: "Australia").first.id
+        address.country_id = australia.id
         expect(address1.country_id).to eq(usa_id)
       end
 
@@ -38,7 +38,7 @@ RSpec.describe CheckoutHelper, :type => :helper do
       end
 
       it 'has the country for address as not USA' do
-        address.country_id = Spree::Country.where(name: "Canada").first.id
+        address.country_id = canada.id
         expect(address1.country_id).to eq(address.country_id)
       end
 
