@@ -3,9 +3,9 @@ require 'mastercard_masterpass_api'
 
 module Spree
   class MasterpassController < StoreController
-    include SslRequirement
+    #include SslRequirement
 
-    ssl_required :cart, :cartcallback, :confirm, :cancel
+    #ssl_required :cart, :cartcallback, :confirm, :cancel
 
     before_filter :setup
     rescue_from RuntimeError, with: :set_error_message
