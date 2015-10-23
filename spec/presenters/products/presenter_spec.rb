@@ -4,8 +4,8 @@ module Products
   describe Presenter do
     describe 'customisations' do
       let(:spree_price)           { Spree::Price.new(amount: 99, currency: 'USD') }
-      let(:default_discount)      { double('discount', customisation_allowed?: false) }
-      let(:customisable_discount) { double('discount', customisation_allowed?: true) }
+      let(:default_discount)      { double('discount', customisation_allowed: false) }
+      let(:customisable_discount) { double('discount', customisation_allowed: true) }
       let(:no_discount)           { nil }
       let(:customizations)        { double('customizations', :all => [:some]) }
       let(:colors)                { double('custom_colours', :extra => [:some]) }
