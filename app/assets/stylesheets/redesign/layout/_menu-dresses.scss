@@ -38,7 +38,6 @@
   }
 
   .two-cols {
-    @extend %cfix;
     max-width: 250px;
 
     li {
