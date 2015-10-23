@@ -5,7 +5,9 @@ ruby:
 .page-content.index
   // TODO: create helper for multisource images
   = react_component('HeroCarousel', skin: 'skin-light',
-    assets: [{link: '/sarah-ellen', src: '/assets/home-page-tiles/hero-4', alt: 'Dance Hall Days - Shop all formal dresses'}, {link: lookbook_path + '/photo-finish', src: '/assets/home-page-tiles/hero-2', alt: 'Photo FINISH - Shop Now'}, {link: lookbook_path + '/make-a-statement', src: '/assets/home-page-tiles/hero-3', alt: 'Bambi - Shop the Collection'}])
+    assets: [{link: sarah_ellen_landing_page_path, src: '/assets/home-page-tiles/hero-4', alt: 'Dance Hall Days - Shop all formal dresses'},
+      {link: photo_finish_collection_path, src: '/assets/home-page-tiles/hero-2', alt: 'Photo FINISH - Shop Now'},
+      {link: make_a_statement_collection_path, src: '/assets/home-page-tiles/hero-3', alt: 'Bambi - Shop the Collection'}])
 
   section.banner-sale
     .container
