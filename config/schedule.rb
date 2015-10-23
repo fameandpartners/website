@@ -2,6 +2,9 @@ set :environment, ENV['RAILS_ENV']
 
 every 4.hours do
   runner 'EmailMarketing.send_emails'
+end
+
+every 1.hour do
   rake   'feed:export:all'
 
   runner 'StockInvent::Runner.run'
