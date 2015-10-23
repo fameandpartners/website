@@ -12,7 +12,7 @@
       = form.fields_for :bill_address do |bill_form|
         = render partial: 'spree/checkout/address_form', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
 
-    .row
+    .row.hidden
       .col-md-12.form-group
         = form.label :customer_notes, 'Comments or special instructions'
         = form.text_field :customer_notes, class: 'required form-control form-control-md'
