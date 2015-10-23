@@ -50,9 +50,10 @@ module AdminUi
       def destroy
         @page = Revolution::Page.find(params[:id])
         if @page.translation.present?
-          @page.translation.delete
+          @page.translations.destroy_all
         end
         @page.delete
+        flash[:success] = "Page deleted"
         redirect_to action: :index
       end
 
@@ -63,7 +64,11 @@ module AdminUi
       def collection
         page = (params[:page] || 1).to_i
         per_page = (params[:per_page] || 50).to_i
-        @collection ||= Revolution::Page.order('path ASC').page(page).per(per_page)
+        if query = params[:search]
+          @collection ||= Revolution::Page.for_path(query).paging(page, per_page)
+        else
+          @collection ||= Revolution::Page.paging(page, per_page)
+        end
       end
 
       def page

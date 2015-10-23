@@ -81,5 +81,13 @@ module Revolution
       end
     end
 
+    def self.paging(page, per_page)
+      order('path ASC').page(page).per(per_page)
+    end
+
+    def self.for_path(query)
+      where("LOWER(path) like '%#{query.downcase}%'")
+    end
+
   end
 end
