@@ -158,6 +158,9 @@ window.page.EmailCaptureModal = class EmailCaptureModal
         )
     })
 
+  onClose: () =>
+    $.cookie("new-modal-close-state", "closed") if @opts.className == "new-modal"
+
   open: () =>
     window.track.event("LandingPageModal", "#{@opts.uuid} - #{@opts.promocode}")
 

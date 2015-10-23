@@ -60,7 +60,7 @@
     email_capture_modal += "modal_popup.enableAutoApplyPromoCampaign();" if auto_apply
 
   = content_for :inline_javascript do
-    - if session[:redeem_via_fb_state] != 'displayed_thanks' && session[:new_modal_fb_state] != 'displayed_thanks' && session[:ty] != 'already Thanks'
+    - if session[:redeem_via_fb_state] != 'displayed_thanks' && session[:new_modal_fb_state] != 'displayed_thanks' && session[:ty] != 'already Thanks' && cookies["new-modal-close-state"] != "closed"
       = raw email_capture_modal
 
 - if session[:redeem_via_fb_state] == 'signed_in' && class_name != 'new-modal-thank-you'
