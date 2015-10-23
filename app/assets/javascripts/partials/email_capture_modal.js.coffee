@@ -176,22 +176,25 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
     if @opts.className == "new-modal add-to-cart"
       $(".add-to-cart .four-lipsticks img").click (e) ->
-        sku = $(e.target).data('sku')
-        $.ajax(
-          url: urlWithSitePrefix("/user_cart/products")
-          type: "POST"
-          dataType: "json"
-          data: {gift_sku: sku}
-        ).success(
-          console.log 'add gift to order ok'
-          $(".add-to-cart .vex-dialog-button-secondary").click()
-          window.location.href = urlWithSitePrefix("/checkout")
-        ).error( () =>
-          console.log 'add gift to order error'
-        )
+        $(".add-to-cart .four-lipsticks img").removeClass("selected")
+        $(this).toggleClass("selected")
 
-      $(".add-to-cart .checkout-btn").click (e) ->
-        window.location.href = urlWithSitePrefix("/checkout")
+      checkoutBtn = $(".add-to-cart .checkout-btn")
+      checkoutBtn.click (e) =>
+        if checkoutBtn.hasClass("before-click") && $(".add-to-cart .four-lipsticks img.selected").length > 0
+          checkoutBtn.removeClass("before-click").addClass("after-click")
+          sku = $(".add-to-cart .four-lipsticks img.selected").data("sku")
+
+          $.ajax(
+            url: urlWithSitePrefix("/user_cart/products")
+            type: "POST"
+            dataType: "json"
+            data: {gift_sku: sku}
+          ).success(
+            window.location.href = urlWithSitePrefix("/checkout")
+          ).error( () =>
+            window.helpers.showAlert(message: 'Error while add gift to cart ! ')
+          )
 
 window.page.PromocodeModal = class PromocodeModal extends EmailCaptureModal
   constructor: (opts = {}) ->

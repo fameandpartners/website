@@ -193,7 +193,7 @@
         }
         line-height:  20px;
       }
-      input{
+      input.checkout-btn{
         background-color: black;
         color: white;
         font-size: 1.5rem;
@@ -205,6 +205,10 @@
         width: 170px;
         cursor: pointer;
       }
+      input.checkout-btn.after-click{
+        background-color: #D0D0D0
+      }
+
       .four-lipsticks{
         @media(min-width: $bootstrap-md-width){
           img{
@@ -213,6 +217,11 @@
           }
           img:hover{
             width: 14%;
+          }
+          img.selected{
+            border-width: 1px;
+            border-color: black;
+            border-style: solid;
           }
         }
         @media(max-width: $bootstrap-md-width){
