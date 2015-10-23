@@ -383,7 +383,7 @@ $order-summary-bg: #f7f7f9;
       input#promo-code:focus + span > .promo-code-apply {
         background: $order-summary-form-active;
       }
-      @media(max-width: 375px){
+      @include iphone6 {
         span.input-group-btn{
           width: 125px;
           float: left;
@@ -396,7 +396,7 @@ $order-summary-bg: #f7f7f9;
           width: 180px;
         }
       }
-      @media(min-width: 376px)and(max-width: 414px){
+      @include iphone6p {
         span.input-group-btn{
           width: 150px;
           float: left;
