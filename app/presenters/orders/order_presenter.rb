@@ -99,7 +99,7 @@ module Orders
           color:            item.colour_name,
           quantity:         item.quantity,
           factory:          item.factory,
-          deliver_date:     order.projected_delivery_date,
+          deliver_date:     item.projected_delivery_date,
           express_making:   item.making_options.present? ? item.making_options.map{|option| option.name.upcase }.join(', ') : "",
           customizations:   item.customisations.collect do |name, image_url| {name: name,url: image_url} end,
           image_url:        item.image? ? item.image_url : ''
