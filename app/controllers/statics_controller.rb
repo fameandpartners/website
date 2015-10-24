@@ -29,8 +29,8 @@ class StaticsController < ApplicationController
   end
 
   def yelp
-    @title = "Our Journey" + default_seo_title
-    @description = "Our Journey"
+    @title = "Our Customer Service Improvments " + default_seo_title
+    @description = "Our Customer Service Improvments"
   end
 
   def why_us
