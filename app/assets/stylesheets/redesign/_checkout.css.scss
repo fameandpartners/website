@@ -383,6 +383,32 @@ $order-summary-bg: #f7f7f9;
       input#promo-code:focus + span > .promo-code-apply {
         background: $order-summary-form-active;
       }
+      @include iphone6 {
+        span.input-group-btn{
+          width: 125px;
+          float: left;
+        }
+        .promo-code-apply {
+          width: 125px;
+          font-size: 1.5rem !important;
+        }
+        #promo-code{
+          width: 180px;
+        }
+      }
+      @include iphone6p {
+        span.input-group-btn{
+          width: 150px;
+          float: left;
+        }
+        .promo-code-apply {
+          width: 155px;
+          font-size: 1.5rem !important;
+        }
+        #promo-code{
+          width: 190px;
+        }
+      }
     }
 
     // Total Items, currently p tags

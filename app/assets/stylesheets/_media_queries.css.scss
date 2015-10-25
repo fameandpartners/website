@@ -1,4 +1,17 @@
 // http://davidwalsh.name/write-media-queries-sass
+@mixin iphone6 {
+  @media (max-width: #{$iphone6-width}) {
+    @content;
+  }
+}
+
+@mixin iphone6p {
+  @media (min-width: #{$iphone6-width + 1}) and (max-width: #{$iphone6p-width}) {
+    @content;
+  }
+}
+
+
 @mixin mobile {
   @media (max-width: #{$tablet-width - 1px}) {
     @content;
