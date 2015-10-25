@@ -7661,13 +7661,6 @@ p {
   border-bottom: 1px solid #eeeeee;
 }
 
-
-@media only screen and (max-width: 992px) {
-  .nav-menu {
-    height: 70px;
-  }
-}
-
 /* line 14, ../sass/_nav.scss */
 .nav-menu:hover {
   background: white !important;

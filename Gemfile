@@ -41,6 +41,7 @@ gem 'active_link_to'
 # assets
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 3.2.3'
+gem 'compass-rails', '~> 2.0.5'
 gem 'react-rails', '~> 1.2'
 gem 'droidcss', '~> 2.0.4'
 

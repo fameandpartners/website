@@ -258,6 +258,10 @@ GEM
       sass (>= 3.3.0, < 3.5)
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
+    compass-rails (2.0.5)
+      compass (~> 1.0.0)
+      sass-rails (< 5.1)
+      sprockets (< 2.13)
     configatron (4.5.0)
     connection_pool (2.2.0)
     crack (0.4.2)
@@ -809,6 +813,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   coffee-script-source (~> 1.8.0)
   compass (~> 1.0.3)
+  compass-rails (~> 2.0.5)
   configatron
   createsend (~> 2.5.0)
   customerio

@@ -63,3 +63,11 @@
       -ms-border-radius: $radius;
           border-radius: $radius;
 }
+
+@mixin icon($image, $width: $icon-width, $height: $icon-height) {
+  width: $width;
+  height: $height;
+  background-image: inline-image($image);
+  background-repeat: no-repeat;
+  @include background-size(100% auto);
+}
