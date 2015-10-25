@@ -96,6 +96,7 @@ ruby:
 
     - unless disable_notices?
       = render 'layouts/redesign/notices'
+    = render 'layouts/redesign/campaigns/auto_apply_promo_code'
 
 - cache [:layout, :side_menu, spree_user_signed_in?, @locale_warning.cache_key], expires_in: configatron.cache.expire.long do
   #sideMenu
@@ -333,8 +334,6 @@ ruby:
             = link_to 'Terms', terms_path, class: 'bottom-area-text'
           li.bottom-area
             = link_to 'Privacy Policy', privacy_path, class: 'bottom-area-text'
-
-= render 'layouts/redesign/campaigns/auto_apply_promo_code'
 
 coffee:
   $(document).ready ->

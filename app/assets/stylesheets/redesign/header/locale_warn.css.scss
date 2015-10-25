@@ -89,21 +89,9 @@ $color-white: #FFF;
     margin-top: $mega-menu-desktop-height + $locale-warn-desktop-height;
   }
 
-  @media (max-width: 992px) {
-    #content-container {
-      margin-top: $mega-menu-mobile-height + $locale-warn-mobile-height;
-    }
-  }
-
   // TODO - refactor out this to use a proper page wrapper which auto adjusts.
   &.sticky-header .alert-sale {
     top:      $mega-menu-desktop-height + $locale-warn-desktop-height;
-  }
-
-  @media (max-width: $bootstrap-md-width) {
-    .alert-sale {
-      top: $mega-menu-mobile-height + $locale-warn-mobile-height;
-    }
   }
 
   // Search

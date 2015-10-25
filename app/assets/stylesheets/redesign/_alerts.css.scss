@@ -3,102 +3,168 @@
   top: $mega-menu-desktop-height;
   left: 0;
   right: 0;
+  z-index: 4;
 }
 
 .alert-sale {
-  z-index: 4;
-  background: #000000;
-  text-align: center;
+  position: relative;
+  padding: 0 15px;
   text-transform: uppercase;
-  padding: 6px 0px 8px 0px;
-  font-size: 18px;
-  &.alert-relative {
-    position: relative;
+  color: $c-neutral-black;
+  background: $c-neutral-2;
+
+  a {
+    text-decoration: underline;
+    color: $c-neutral-black;
   }
-  .close {
-    @extend .icon-cross;
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    width: 20px;
-    height: 20px;
+
+  .outer-wrap {
+    max-width: $bootstrap-lg-width;
+    margin: 0 auto;
+    text-align: center;
   }
-  .banner-title {
+
+  .inner-wrap {
     display: inline-block;
-    font-size: 14px;
+    margin-bottom: -7px;
   }
-  .medium {
-    font-weight: 400;
-    color: white;
+
+  .title-wrap {
+    display: table;
+    height: 42px;
   }
-  .spacer {
-    width: 24px;
-    height: 1px;
-    display: inline-block;
-  }
-  .timer-box {
-    margin-left: 36px;
-    display: inline-block;
+
+  .title {
+    display: table-cell;
+    max-width: 450px;
+    padding: 0 30px;
     vertical-align: middle;
-    font-size: 17px;
+    line-height: 1;
+    font-size: 0.938em;
   }
 
-  .banner-message {
-    display: inline-block;
-    vertical-align: -20%;
-    font-size: 20px;
-    font-weight: 300 !important;
+  .icon {
+    padding: 0 10px;
+    opacity: .8;
+    text-transform: uppercase;
 
-    h3 {
-      font-weight: 300;
-      margin: 0;
-      font-size: 20px;
+    [class^="svg-"] {
+      margin-top: 5px;
     }
-    strong {
-      font-weight: 500;
-      padding-right: 5px;
+
+    > div {
+      float: left;
     }
-  }
 
-  // Fix for product page
-  &:not(.hidden) ~ .product-content {
-    top: 25rem;
-  }
-}
-
-@media (max-width: $bootstrap-md-width) {
-  .alert-sale {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: $mega-menu-mobile-height;
-    padding: 5px;
-
-    .banner-title {
-      font-size: 13px;
+    .copy {
+      padding-left: 5px;
+      line-height: 42px;
+      font-size: 0.688em;
     }
 
   }
-}
 
-.auto-discount-applied {
-  @extend .alert-sale;
-  z-index: 4;
-  background: #000000;
-  text-align: center;
-  text-transform: uppercase;
-  padding: 6px 0px 8px 0px;
-  p {
-    color: #ffffff;
-    margin-bottom: 5px;
+  // START - promo code version
+  &.promo-code {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: $c-neutral-white;
+    background: $c-neutral-black;
+
+    .inner-wrap {
+      @extend %cfix;
+      vertical-align: text-bottom;
+
+      > span {
+        display: block;
+        float: left;
+        height: 34px;
+        line-height: 34px;
+      }
+
+    }
+
+    .spacer {
+      width: 24px;
+      height: 1px;
+      display: inline-block;
+    }
+
+    .timer-box {
+      margin-left: 36px;
+      display: inline-block;
+      font-size: 17px;
+
+      > span {
+        display: block;
+        float: left;
+      }
+
+    }
+
+    .close {
+      @extend .icon-cross;
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      margin-top: -8px;
+      width: 16px;
+      height: 16px;
+
+      &:before,
+      &:after {
+        background: $c-neutral-white;
+      }
+
+    }
+
   }
+  // END - promo code version
 
-  @media (max-width: $bootstrap-md-width) {
+  @media (max-width: 1150px) {
 
     & {
-      top: 110px;
+
+      .icon:first-child,
+      .icon:last-child {
+        display: none;
+      }
+
     }
 
   }
 
+  @media (max-width: 800px) {
+
+    & {
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      .inner-wrap {
+        display: block;
+        margin-bottom: 0;
+      }
+
+      .title-wrap {
+        width: 100%;
+        height: auto;
+      }
+
+      .title {
+        max-width: none;
+      }
+
+      .icon {
+        display: none;
+      }
+
+    }
+
+  }
+
+}
+
+// TO DO: refacto this
+.auto-discount-applied {
+  padding: 10px 0;
 }

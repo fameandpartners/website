@@ -31,3 +31,48 @@
 }
 // @end Cross icon
 // -----------------
+
+.svg-colour {
+  @extend %icon;
+  @include icon('_icons/colour.svg', 32px, 32px);
+}
+
+.svg-custom {
+  @extend %icon;
+  @include icon('_icons/custom.svg', 32px, 32px);
+}
+
+.svg-design {
+  @extend %icon;
+  @include icon('_icons/design.svg', 32px, 32px);
+}
+
+.svg-fit {
+  @extend %icon;
+  @include icon('_icons/fit.svg', 32px, 32px);
+}
+
+.svg-trend {
+  @extend %icon;
+  @include icon('_icons/trend.svg', 32px, 32px);
+}
+
+.svg-waste {
+  @extend %icon;
+  @include icon('_icons/waste.svg', 32px, 32px);
+}
+
+%icon {
+  display: inline-block;
+  overflow: hidden;
+  padding: 0;
+  text-align: center;
+  text-indent: -9999px;
+  text-shadow: none;
+  vertical-align: middle;
+  background-color: transparent;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+}
