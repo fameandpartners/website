@@ -110,6 +110,8 @@ FameAndPartners::Application.routes.draw do
 
     get '/lookbook/dance-hall-days' => 'products/collections#show', :permalink => 'dance-hall', :as => :dance_hall_days_collection
     get '/sarah-ellen' => 'products/collections#show', :permalink => 'dance-hall', :as => :sarah_ellen_landing_page
+    get '/lookbook/formal-night' => 'products/collections#show', :permalink => 'formal-night', :as => :formal_night_collection
+    get '/formal-night' => 'products/collections#show', :permalink => 'formal-night', :as => :formal_night_landing_page
 
     get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
