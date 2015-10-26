@@ -52,7 +52,7 @@ gem 'coercible'
 gem 'ipaddress'
 gem 'geoip', require: false
 gem 'device_detector', '~> 0.8.1'
-gem 'rubyzip', '< 0.9.9', require: false
+gem 'rubyzip', '~> 1.1.7', require: false
 gem 'roo', require: false
 
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
@@ -135,6 +135,7 @@ end
 group :test do
   gem 'capybara', '~> 2.5.0'
   gem 'poltergeist', '~> 1.7.0'
+  gem 'selenium-webdriver', '~> 2.48.1'
   gem 'turnip', '~> 1.3.1'
   gem 'database_cleaner', '0.9.1'
   gem 'factory_girl_rails', '4.2.1'
