@@ -1,4 +1,5 @@
 ruby:
+  promocode_by_url = decode(params[:pc])
   email_capture_modal = "
     if ($.cookie('modal_site_visit') != 'true') {
       var modal_popup = new window.page.EmailCaptureModal({
@@ -18,7 +19,8 @@ ruby:
   "
 
 = content_for :inline_javascript do
-  = raw email_capture_modal
+  - if promocode_by_url == ""
+    = raw email_capture_modal
 
 #modal-popup-content-template.welcome.hidden
   input type="hidden" name="content" value="newgirl25"
