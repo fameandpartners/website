@@ -388,6 +388,20 @@ $order-summary-bg: #f7f7f9;
       input#promo-code:focus + span > .promo-code-apply {
         background: $order-summary-form-active;
       }
+      @include iphone5 {
+        span.input-group-btn{
+          width: 100px;
+          float: left;
+        }
+        #promo-code{
+          width: 150px;
+        }
+        .promo-code-apply {
+          font-size: 1.5rem !important;
+          width: 100px;
+        }
+      }
+
       @include iphone6 {
         span.input-group-btn{
           width: 125px;
