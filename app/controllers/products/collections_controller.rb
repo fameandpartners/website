@@ -110,7 +110,9 @@ class Products::CollectionsController < Products::BaseController
 
     def limit
       return page.get(:limit) || 20 if page_is_lookbook?
-      params[:limit] || page.get(:limit) || 21
+      no_of_products = (product_ids.blank? ? 0 : product_ids.size)
+      no_of_products = 21 if no_of_products > 21
+      params[:limit] || page.get(:limit) || 21 - no_of_products
     end
 
     def page_is_lookbook?
