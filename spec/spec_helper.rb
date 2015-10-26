@@ -8,6 +8,7 @@ WebMock.allow_net_connect!(net_http_connect_on_start: true)
 require File.expand_path('../../config/environment', __FILE__)
 
 require 'rspec/rails'
+require 'turnip/capybara'
 require 'capybara/rails'
 require 'shoulda/matchers'
 require 'ffaker'
