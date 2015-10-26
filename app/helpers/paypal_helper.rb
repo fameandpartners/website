@@ -17,10 +17,10 @@ module PaypalHelper
 
     url = paypal_express_url(payment_method_id: paypal_payment_method.id, protocol: request.protocol)
     link_to(
-      image_tag('checkout/shopping_bag_paypal.png'),
+      image_tag('https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png'),
       url, method: :post, id: "paypal_button"
     )
-  end
+  end    
 
   def guest_paypal_express_button
     return if paypal_payment_method.blank?
