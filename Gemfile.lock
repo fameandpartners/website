@@ -830,7 +830,6 @@ DEPENDENCIES
   coercible
   coffee-rails (~> 3.2.1)
   coffee-script-source (~> 1.8.0)
-  compass (~> 1.0.3)
   compass-rails (~> 2.0.5)
   configatron
   createsend (~> 2.5.0)
