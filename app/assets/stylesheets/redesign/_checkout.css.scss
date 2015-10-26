@@ -46,6 +46,11 @@ $order-summary-bg: #f7f7f9;
   // Layout Tweaks
   .col-md-4 { padding-top: 0; }
 
+  // product-form
+  .product-form{
+    margin-bottom: 30px;
+  }
+
   // Masthead ( Logo, Heading, Support Options )
   .checkout-masthead {
     margin: $checkout-masthead-top-margin 0;

@@ -3,6 +3,7 @@
 
 - support_telephone = {'us' => '866 527 7797', 'au' => '1300 924 860'}[current_site_version.code]
 = render 'marketing/trackers/zopim'
+- cart = UserCart::UserCartResource.new(order: current_order).read
 .checkout.page-content
   .container
     .row
@@ -25,6 +26,9 @@
               li class=('active' if current_step.eql?('address')) Your information
               li class=('active' if current_step.eql?('payment')) Payment Method
 
+        .col-md-4.col-sm-12.product-form.visible-xs.visible-sm
+          = render 'spree/checkout/order_summary', cart: cart
+
         - if current_step.eql?('address')
           .checkout-step data-name="address"
             = render 'address_step', current_step: current_step
@@ -43,6 +47,5 @@
         .row : .comodo.visible-xs.text-center : p
           = image_tag "comodo-ssl.png", alt: "SSL", height: '35px', width: '112px', style: 'margin-top:25px;margin-bottom:25px'
 
-      .col-md-4
-        - cart = UserCart::UserCartResource.new(order: current_order).read
+      .col-md-4.col-sm-12.product-form.hidden-xs.hidden-sm
         = render 'spree/checkout/order_summary', cart: cart
