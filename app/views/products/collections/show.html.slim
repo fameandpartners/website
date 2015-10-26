@@ -23,11 +23,7 @@
           = render :partial => 'filters_color_shape_style'
 
       .col-md-9
-        .container.relative.products-collection style='width:100%'
-
-          - if Features.active?(:collection_content)
-            = render partial: 'products_with_content'
-          - else
-            = render partial: 'products_without_content', locals: {col: 3}
+        .container.relative.products-collection style='width:100%'          
+          = render partial: 'products_with_content', locals: {col: 3}
 
           = render partial: 'pagination'

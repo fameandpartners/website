@@ -1,35 +1,13 @@
 
-/! somewhat complex rendering logic - also have to copy this in js templates
-- products = @collection.products.first(6)
+- products = @collection.products.first(2)
+/! [][][content]
+= render partial: '/products/collections/product', collection: products, as: :product, locals: {col: col}
 
-/! First Row - [][][][] First four products
-.row.relative
-  = render partial: 'product', collection: products.shift(4), as: :product
-  .clearfix.visible-sm-block.visible-xs-block
+.col-xs-6.col-xxs-6.col-md-4.category--item
+  .details.text-center
+    span.name
+      | THIS IS CONTENT
 
-/! Second row - [][][ XX ]
-.row.relative
-  = render partial: 'product', collection: products.shift(2), as: :product
-  .col-md-6.col-xs-12.col-xxs-12
-    .content
-      p= raw @collection.details.description
-
-
-  .clearfix.visible-sm-block.visible-xs-block
-
-/! Rest rows
-- @collection.products.drop(6).each_slice(4) do |products|
-  - if products.size == 4
-    /! [][][][]
-    .row.relative
-      = render partial: 'product', collection: products, as: :product
-    .clearfix.visible-sm-block.visible-xs-block
-  - else
-    /! footer - one or two row [ X X ][][]
-    - products.each_slice(2) do |footer_products|
-      .row.relative
-        .col-md-6.col-xs-12.col-xxs-12
-          .content
-            p= raw @collection.details.footer
-        = render partial: 'product', collection: footer_products, as: :product
-        .clearfix.visible-sm-block.visible-xs-block
+- @collection.products.drop(2).each_slice(col) do |products|
+  /! [][][]
+  = render partial: '/products/collections/product', collection: products, as: :product, locals: {col: col}
