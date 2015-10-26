@@ -101,7 +101,6 @@ module Orders
           factory:          item.factory,
           deliver_date:     item.projected_delivery_date,
           express_making:   item.making_options.present? ? item.making_options.map{|option| option.name.upcase }.join(', ') : "",
-          customizations:   item.customisations.collect do |name, image_url| {name: name,url: image_url} end,
           image_url:        item.image? ? item.image_url : ''
         }.merge(
            # Convert each element of the customisations array
