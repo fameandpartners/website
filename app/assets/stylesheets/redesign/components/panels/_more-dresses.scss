@@ -1,0 +1,74 @@
+/* [More Dresses]
+-------------------------------------------------------*/
+.panel-more-dresses {
+  margin-top: 40px;
+
+  .outer-wrap {
+    border-top: solid $c-neutral-black 1px;
+
+    > div {
+      padding: 0;
+    }
+
+  }
+
+  .inner-wrap {
+    float: left;
+    width: 100%;
+    padding: 50px 20% 20px 20%;
+  }
+
+  .title {
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  ul {
+    float: left;
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: block;
+  }
+
+  a {
+    font-size: 0.875em;
+    font-weight: 500;
+    color: $c-neutral-black;
+  }
+
+  @media (max-width: $bootstrap-lg-width - 1) {
+
+    & {
+
+      .inner-wrap {
+        padding: 20px 10%;
+      }
+
+    }
+
+  }
+
+  @include mobile {
+
+    & {
+
+      .inner-wrap {
+        padding: 0;
+        text-align: center;
+      }
+
+      ul {
+        width: 100%;
+        padding-top: 50px;
+      }
+
+    }
+
+  }
+
+}

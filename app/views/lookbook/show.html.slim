@@ -20,7 +20,7 @@
     .container.relative.products-collection
       = render partial: 'products_without_content'
 
-    / = render partial: 'pagination'
-
-    .row.relative.more-products
-      = link_to 'More Dresses', dresses_path, class: 'btn btn-black'
+  .row
+    .container
+      .col-md-12
+        = render partial: 'shared/redesign/more_dresses'
