@@ -91,4 +91,20 @@
 
   }
 
+  @media (max-width: 1200px) {
+
+    & {
+
+      ul {
+        margin-left: 60px;
+      }
+
+      .highlight-wrap {
+        display: none;
+      }
+
+    }
+
+  }
+
 }
