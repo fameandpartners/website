@@ -1,11 +1,10 @@
 require 'spec_helper'
 
 describe Revolution::Page do
+  let(:path)     { '/blah/vtha' }
+  let(:title)    { 'Blah Vtha' }
 
-  let(:path)      { '/blah/vtha' }
-  let(:title)     { 'Blah Vtha' }
-
-  subject!(:page)  { Revolution::Page.create!(:path => path) }
+  subject(:page) { Revolution::Page.create!(:path => path) }
 
   it { is_expected.to validate_presence_of :path }
 

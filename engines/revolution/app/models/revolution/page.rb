@@ -101,9 +101,9 @@ module Revolution
 
     def robots
       [].tap do |a|
-        a << "noindex" if noindex?
-        a << "noindex" if nofollow?
-      end.join(",")
+        a << 'noindex' if noindex?
+        a << 'nofollow' if nofollow?
+      end.join(',')
     end
   end
 end
