@@ -3,10 +3,13 @@
 /! [][][content]
 = render partial: '/products/collections/product', collection: products, as: :product, locals: {col: col}
 
-.col-xs-6.col-xxs-6.col-md-4.category--item
-  .details.text-center
-    span.name
-      | THIS IS CONTENT
+- if defined?(seo)
+  .col-xs-6.col-xxs-6.col-md-4.category--item
+    .panel-seo
+      .outer-wrap.txt-truncate-block
+        .inner-wrap
+          .content-wrap.js-sub-heading
+            = seo
 
 - @collection.products.drop(2).each_slice(col) do |products|
   /! [][][]
