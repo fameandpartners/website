@@ -11,8 +11,8 @@ module Acceptance
     end
 
     step 'Data is setup correctly' do
-      Utility::Reindexer.reindex
       ClearCacheWorker.new.perform
+      Utility::Reindexer.reindex
     end
   end
 end
