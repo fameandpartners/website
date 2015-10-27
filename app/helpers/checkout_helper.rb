@@ -25,6 +25,14 @@ module CheckoutHelper
     end
   end
 
+  def set_us_default(address)
+    if current_site_version.is_usa?
+      address.country_id = Spree::Country.where(name: "United States").first.id if
+          !available_countries_for_current_zone.detect{|a| a.id == address.country_id}.present?
+    end
+    address
+  end
+
   def masterpass_cart_callback_uri(payment_method)
     callback_protocol = Rails.env.production? ? 'https' : 'http'
     masterpass_cart_url(payment_method_id: payment_method.id, protocol: callback_protocol)
