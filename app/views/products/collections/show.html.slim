@@ -24,7 +24,7 @@
       .col-md-9
         .container-fluid.relative.products-collection
           // UI NOTE: if title used, string should be formatted as follow 
-          //<div class="title"><span>This is SEO title</span>This is SEO copy</div>
+          //<div class="title"><span>This is SEO title</span></div>This is SEO copy
           - seo = raw(params[:lps] || page.sub_heading)
           = render partial: 'products_with_content', locals: {col: 3, seo: seo}
 
