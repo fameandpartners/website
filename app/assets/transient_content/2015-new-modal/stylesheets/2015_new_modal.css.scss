@@ -210,6 +210,12 @@
       }
 
       .four-lipsticks{
+        img.selected{
+          border-width: 1px;
+          border-color: black;
+          border-style: solid;
+        }
+
         @media(min-width: $bootstrap-md-width){
           img{
             cursor: pointer;
@@ -221,11 +227,7 @@
             border-color: #e2e2e2;
             border-style: solid;
           }
-          img.selected{
-            border-width: 1px;
-            border-color: black;
-            border-style: solid;
-          }
+
         }
         @media(max-width: $bootstrap-md-width){
           img{
