@@ -86,8 +86,8 @@ class Products::CollectionsController < Products::BaseController
     end
 
     def punch_products
-      products = Revolution::ProductService.new(product_ids, current_site_version).products
-      @collection.products = ( params[:offset].present? ? @collection.products : products + @collection.products )
+      products = Revolution::ProductService.new(product_ids, current_site_version).products(params)
+      @collection.products = ( products.first.blank? ? @collection.products : products + @collection.products )
     end
 
   def set_collection_seo_meta_data
@@ -110,9 +110,23 @@ class Products::CollectionsController < Products::BaseController
 
     def limit
       return page.get(:limit) || 20 if page_is_lookbook?
+      offset = (params[:offset].present? ? params[:offset].to_i + 21 : 21 )
       no_of_products = (product_ids.blank? ? 0 : product_ids.size)
-      no_of_products = 21 if no_of_products > 21
-      params[:limit] || page.get(:limit) || 21 - no_of_products
+      if no_of_products >= offset
+        no_of_products = 21
+      else
+        no_of_products = no_of_products - (offset - 21)
+        no_of_products = 0 if no_of_products < 0
+      end
+      case
+        when params[:limit].present?
+          return_limit = params[:limit].to_i - no_of_products
+        when page.get(:limit)
+          return_limit = page.get(:limit).to_i - no_of_products
+        else
+          return_limit = 21 - no_of_products
+      end
+      return_limit
     end
 
     def page_is_lookbook?
