@@ -3,13 +3,20 @@
 /! [][][content]
 = render partial: '/products/collections/product', collection: products, as: :product, locals: {col: col}
 
-- if defined?(seo)
-  .col-xs-6.col-xxs-6.col-md-4.category--item
-    .panel-seo
-      .outer-wrap.txt-truncate-block
-        .inner-wrap
-          .content-wrap.js-sub-heading
-            = seo
+- # THIS IS A HACK HACK HACK 27th October, late, with no dinner
+- # Remove by 1st November, talk to TOBY and yell at him
+- sub_heading = (params[:lps] || page.sub_heading)
+- sub_heading = 'MADE FOR YOU.' if sub_heading.blank?
+- description = page.description.blank? ? '*In as little as 48 hours.' : page.description
+
+.col-xs-6.col-xxs-6.col-md-4.category--item
+  .panel-seo
+    .outer-wrap.txt-truncate-block
+      .inner-wrap
+        .content-wrap.js-sub-heading
+          .title
+            span= raw(sub_heading)
+          = raw(description)
 
 - @collection.products.drop(2).each_slice(col) do |products|
   /! [][][]

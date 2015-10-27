@@ -11,7 +11,7 @@
     .outer-wrap
       .inner-wrap
         h1.title
-          span.js-heading = raw params[:lpt] || page.heading
+          span.js-heading = raw(params[:lpt] || page.heading)
 
 .page-content.products-collections.category
   = render :partial => 'filters_sort'
@@ -23,14 +23,6 @@
 
       .col-md-9
         .container-fluid.relative.products-collection
-          // UI NOTE: if title used, string should be formatted as follow
-          //<div class="title"><span>This is SEO title</span></div>This is SEO copy
-          - # THIS IS A HACK HACK HACK 27th October, late, with no dinner
-          - # Remove by 1st November, talk to TOBY and yell at him
-          - default = raw '<div class="title"><span>MADE FOR YOU.</span></div>*In as little as 48 hours'
-          - seo = raw(params[:lps] || page.sub_heading)
-          - seo = default if seo.blank?
-
-          = render partial: 'products_with_content', locals: {col: 3, seo: seo}
+          = render partial: 'products_with_content', locals: {col: 3}
 
           = render partial: 'pagination'
