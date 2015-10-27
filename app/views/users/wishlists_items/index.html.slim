@@ -60,7 +60,7 @@ javascript:
                 - row.each do |product|
                   .col-md-3.col-xs-6.col-xxs-12.category--item.product-item data-id=(product.id)
                     = link_to product.path do
-                      = image_tag product.image_url, :class => "img-responsive", alt: product.name
+                      = image_tag product.image_url, alt: product.name, :class => 'img-responsive'
                       .details
                         .name= product.name
                         span.price = product_price_with_discount(product.price, product.discount)

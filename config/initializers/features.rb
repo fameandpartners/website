@@ -15,7 +15,6 @@ if Rails.env.development?
 end
 
 Features.deactivate(:checkout_fb_login)
-Features.deactivate(:collection_content)
 Features.deactivate(:maintenance)
 Features.deactivate(:shipping_message)
 Features.deactivate(:send_promotion_email_reminder)

@@ -12,7 +12,6 @@
       .inner-wrap
         h1.title
           span.js-heading = raw params[:lpt] || page.heading
-          span.sub-heading.js-sub-heading = raw params[:lps] || page.sub_heading
 
 .page-content.products-collections.category
   = render :partial => 'filters_sort'
@@ -23,11 +22,10 @@
           = render :partial => 'filters_color_shape_style'
 
       .col-md-9
-        .container.relative.products-collection style='width:100%'
-
-          - if Features.active?(:collection_content)
-            = render partial: 'products_with_content'
-          - else
-            = render partial: 'products_without_content', locals: {col: 3}
+        .container-fluid.relative.products-collection
+          // UI NOTE: if title used, string should be formatted as follow 
+          //<div class="title"><span>This is SEO title</span></div>This is SEO copy
+          - seo = raw(params[:lps] || page.sub_heading)
+          = render partial: 'products_with_content', locals: {col: 3, seo: seo}
 
           = render partial: 'pagination'
