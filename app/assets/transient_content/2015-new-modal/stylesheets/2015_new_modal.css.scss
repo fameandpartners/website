@@ -216,7 +216,9 @@
             width: 15%;
           }
           img:hover{
-            width: 14%;
+            border-width: 1px;
+            border-color: #e2e2e2;
+            border-style: solid;
           }
           img.selected{
             border-width: 1px;
@@ -230,7 +232,9 @@
             width: 11%;
           }
           img:hover{
-            width: 10%;
+            border-width: 1px;
+            border-color: #e2e2e2;
+            border-style: solid;
           }
         }
       }
