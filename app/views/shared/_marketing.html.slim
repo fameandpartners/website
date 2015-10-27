@@ -1,3 +1,4 @@
 = render :partial => '/shared/email_capture_modal'
 = render :partial => 'modals/modal_20150715_polyvore'
-= render :partial => 'modals/modal_site_visit'
+- unless request.path.include?('/checkout')
+  = render :partial => 'modals/modal_site_visit'
