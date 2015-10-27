@@ -11,6 +11,9 @@ FameAndPartners::Application.configure do
   config.serve_static_assets = true
   config.static_cache_control = "public, max-age=3600"
 
+  # Use S3 for storing attachments
+  config.use_s3 = true
+
   # Log error messages when you accidentally call methods on nil
   config.whiny_nils = true
 
