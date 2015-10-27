@@ -8,13 +8,13 @@ module Revolution
       @site_version = site_version
     end
 
-    def products(params)
+    def products(params, page_limit)
       start = (params[:offset].present? ? params[:offset].to_i : 0 )
-      end_calc = (params[:offset].present? ? params[:offset].to_i + 21 : 21)
+      end_calc = (params[:offset].present? ? params[:offset].to_i + page_limit : page_limit)
       if ids.size >= end_calc
-        id_end = 20
+        id_end = page_limit - 1
       else
-        id_end = (ids.size % 21) - 1
+        id_end = (ids.size % page_limit) - 1
       end
       temp_ids = []
       (start..start+id_end).each do |i|
