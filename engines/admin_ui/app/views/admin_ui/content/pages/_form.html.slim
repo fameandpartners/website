@@ -15,16 +15,6 @@
 
     .hr-line-dashed
     .form-group
-      label.col-sm-2.control-label Canonical
-      .col-sm-10= f.text_field :canonical, :class => 'form-control'
-
-    .hr-line-dashed
-    .form-group
-      label.col-sm-2.control-label Redirect
-      .col-sm-10= f.text_field :redirect, :class => 'form-control'
-
-    .hr-line-dashed
-    .form-group
       label.col-sm-2.control-label Variables
       .col-sm-10= f.text_field :variables, :class => 'form-control'
 
@@ -35,6 +25,33 @@
 
       label.col-sm-2.control-label Publish To
       .col-sm-10= f.text_field :publish_to, :class => 'form-control'
+
+.ibox.float-e-margins
+  .ibox-title
+    h5 SEO
+
+  .ibox-content
+
+    .hr-line-dashed
+    .form-group
+      label.col-sm-2.control-label Canonical
+      .col-sm-10= f.text_field :canonical, :class => 'form-control'
+
+    .hr-line-dashed
+    .form-group
+      label.col-sm-2.control-label Redirect
+      .col-sm-10= f.text_field :redirect, :class => 'form-control'
+
+    .hr-line-dashed
+    .form-group
+      label.col-sm-2.control-label nofollow
+      .col-sm-10= f.check_box :nofollow
+
+    .hr-line-dashed
+    .form-group
+      label.col-sm-2.control-label noindex
+      .col-sm-10= f.check_box :noindex
+
 
 
 .ibox.float-e-margins

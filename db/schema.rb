@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151021014658) do
+ActiveRecord::Schema.define(:version => 20151027024828) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -691,12 +691,14 @@ ActiveRecord::Schema.define(:version => 20151021014658) do
     t.datetime "publish_from"
     t.datetime "publish_to"
     t.integer  "parent_id"
-    t.integer  "lft",                           :null => false
-    t.integer  "rgt",                           :null => false
-    t.integer  "depth",          :default => 0, :null => false
-    t.integer  "children_count", :default => 0, :null => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.integer  "lft",                               :null => false
+    t.integer  "rgt",                               :null => false
+    t.integer  "depth",          :default => 0,     :null => false
+    t.integer  "children_count", :default => 0,     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.boolean  "noindex",        :default => false
+    t.boolean  "nofollow",       :default => false
   end
 
   add_index "revolution_pages", ["parent_id"], :name => "index_revolution_pages_on_parent_id"

@@ -9,6 +9,31 @@ describe Revolution::Page do
 
   it { is_expected.to validate_presence_of :path }
 
+  describe 'robots' do
+    context 'no noindex, nofollow' do
+      it { expect(page).to_not be_robots }
+      it { expect(page.robots).to be_empty }
+    end
+
+    context 'noindex' do
+      before do
+        page.noindex = true
+      end
+      it { expect(page).to be_robots }
+      it { expect(page.robots).to eq 'noindex' }
+    end
+
+    context 'noindex, nofollow' do
+      before do
+        page.noindex = true
+        page.nofollow = true
+      end
+      it { expect(page).to be_robots }
+      it { expect(page.robots).to eq 'noindex,nofollow' }
+    end
+
+  end
+
   describe '.find_for' do
     context 'published' do
       before do
