@@ -7,9 +7,9 @@ Feature: Full checkout
   @javascript @selenium
   Scenario: Buy a Dress
     When I am on Connie dress page
-#    And I select "US 10" size
-#    And I add product to cart
-#    And I click on "Checkout" button
+    And I select "US 10" size
+    And I click on "Add to Cart" button
+    And I click on "CHECKOUT" button
 #    And Input personal information
 #    And I click on "Pay Securely" button
 #    And I input my credit card information
