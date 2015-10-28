@@ -199,6 +199,10 @@ module Products
       ].join('. ').truncate(META_DESCRIPTION_MAX_SIZE)
     end
 
+    def delivery_date
+      Policies::ProjectDeliveryDatePolicy.new(self).delivery_date
+    end
+
     private
 
     def customisation_allowed?
