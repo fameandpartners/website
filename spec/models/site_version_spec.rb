@@ -9,7 +9,7 @@ describe SiteVersion, type: :model, memoization_support: true do
 
       # Notice that 'us' version was seeded in the spec_helper
       result = described_class.permalinks
-      expect(result).to match(['us', 'au'])
+      expect(result).to match_array %w(us au)
     end
   end
 
