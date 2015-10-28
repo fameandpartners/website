@@ -76,28 +76,25 @@ class Products::CollectionsController < Products::BaseController
 
     def load_page
       current_path = LocalizeUrlService.remove_version_from_url(request.path)
-      @page = Revolution::Page.find_for(current_path, '/dresses/*') || default_page
+      @page = Revolution::Page.find_for(current_path, '/dresses/*') || Revolution::Page.default_page
+      page.params = params
       page.locale = current_site_version.locale
       @banner = Revolution::PageBannerDecorator.new(page, params)
     end
 
-    def default_page
-      Revolution::Page.new(template_path: '/products/collections/show')
-    end
-
     def punch_products
-      products = Revolution::ProductService.new(product_ids, current_site_version).products(params, no_of_products)
+      products = Revolution::ProductService.new(product_ids, current_site_version).products(params, page.no_of_products)
       @collection.products = ( products.first.blank? ? @collection.products : products + @collection.products )
     end
 
-  def set_collection_seo_meta_data
-    # set title / meta description for the page
-    @title       = "#{page.title} #{default_seo_title}"
-    @description = page.meta_description
-  end
+    def set_collection_seo_meta_data
+      # set title / meta description for the page
+      @title = "#{page.title} #{default_seo_title}"
+      @description  = page.meta_description
+    end
 
     def collection_template
-      if page_is_lookbook? || @collection_options
+      if page.page_is_lookbook? || @collection_options
         page.template_path
       else
         { file: 'public/404', layout: false, status: :not_found }
@@ -106,36 +103,6 @@ class Products::CollectionsController < Products::BaseController
 
     def product_ids
       params[:pids] || page.get(:pids)
-    end
-
-    def limit
-      return page.get(:limit) || 20 if page_is_lookbook?
-      page_limit = no_of_products
-      offset = (params[:offset].present? ? params[:offset].to_i + page_limit : page_limit )
-      no_of_products = (product_ids.blank? ? 0 : product_ids.size)
-      if no_of_products >= offset
-        no_of_products = page_limit
-      else
-        no_of_products = no_of_products - (offset - page_limit)
-        no_of_products = 0 if no_of_products < 0
-      end
-      case
-        when params[:limit].present?
-          return_limit = params[:limit].to_i - no_of_products
-        when page.get(:limit)
-          return_limit = page.get(:limit).to_i - no_of_products
-        else
-          return_limit = page_limit - no_of_products
-      end
-      return_limit
-    end
-
-  def no_of_products
-    (params[:limit] || page.get(:limit) || 21).to_i
-  end
-
-    def page_is_lookbook?
-      page && page.get(:lookbook)
     end
 
     def collection_resource(collection_options)
@@ -149,7 +116,7 @@ class Products::CollectionsController < Products::BaseController
         discount:       params[:sale] || params[:discount],
         fast_making:    params[:fast_making],
         order:          params[:order],
-        limit:          limit, # page size
+        limit:          page.limit(product_ids), # page size
         offset:         params[:offset] || 0
       }.merge(collection_options || {})
       Products::CollectionResource.new(resource_args).read

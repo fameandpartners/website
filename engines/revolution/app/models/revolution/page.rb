@@ -7,9 +7,11 @@
 
 module Revolution
   class Page < ActiveRecord::Base
+
     attr_accessible :translations_attributes, :path, :template_path, :variables,
                     :canonical, :redirect, :parent, :parent_id, :nofollow, :noindex,
                     :publish_from, :publish_to
+    attr_accessor :params
 
     validates :path, :presence => true
     validate :path_has_not_changed, :on => :update #read only attributes
@@ -105,5 +107,6 @@ module Revolution
         a << 'nofollow' if nofollow?
       end.join(',')
     end
+
   end
 end
