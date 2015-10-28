@@ -134,6 +134,7 @@ end
 
 group :test do
   gem 'capybara', '~> 2.5.0'
+  gem 'capybara-screenshot', '~> 1.0.11'
   gem 'poltergeist', '~> 1.7.0'
   gem 'selenium-webdriver', '~> 2.48.1'
   gem 'turnip', '~> 1.3.1'

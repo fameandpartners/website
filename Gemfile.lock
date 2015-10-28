@@ -224,6 +224,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-screenshot (1.0.11)
+      capybara (>= 1.0, < 3)
+      launchy
     celluloid (0.15.2)
       timers (~> 1.1.0)
     childprocess (0.5.7)
@@ -834,6 +837,7 @@ DEPENDENCIES
   byebug
   canonical-rails!
   capybara (~> 2.5.0)
+  capybara-screenshot (~> 1.0.11)
   ckeditor
   coercible
   coffee-rails (~> 3.2.1)
