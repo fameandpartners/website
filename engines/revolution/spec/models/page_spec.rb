@@ -40,7 +40,20 @@ describe Revolution::Page do
       it { expect(page).to be_robots }
       it { expect(page.robots).to eq 'noindex,nofollow' }
     end
+  end
 
+  let(:path) { '/blah/vtha' }
+  let(:title) { 'Blah Vtha' }
+
+  subject!(:page) { Revolution::Page.create!(:path => path) }
+
+  it { is_expected.to validate_presence_of :path }
+
+  describe '.default_page' do
+    it 'should set the default path' do
+      found = Revolution::Page.default_page
+      expect(found.template_path).to be
+    end
   end
 
   describe '.find_for' do
@@ -190,6 +203,106 @@ describe Revolution::Page do
       let(:locale) { 'en-US' }
       it 'should have a translation' do
         expect(page.translations.find_for_locale('en-VTHA')).to eq translation
+      end
+    end
+  end
+
+  describe 'parameters' do
+    it 'should return the parameters if it is set' do
+      found        = Revolution::Page.default_page
+      found.params = 'params1'
+      expect(found.params).to be
+    end
+  end
+
+  describe '.limit' do
+
+    context 'given no parameter limit and no variable limit' do
+      before do
+        page.params = {}
+      end
+      it 'returns 21 when given 0 product_ids' do
+        product_ids = []
+        expect(page.limit(product_ids)).to eq 21
+      end
+      it 'returns 20 when given 1 product_ids' do
+        product_ids = ["451"]
+        expect(page.limit(product_ids)).to eq 20
+      end
+      it 'returns 0 when given 22 product_ids and no offset' do
+        product_ids = ["451", '1', '2', '3', '4', '5', '6', '7', '8','9','10',
+                       '11', '12', '13',' 14', '15', '16', '17', '18', '19', '20','21']
+        expect(page.limit(product_ids)).to eq 0
+      end
+      it 'returns 20 when given 22 product_ids and an offset of 21' do
+        product_ids = ['451', '1', '2', '3', '4', '5', '6', '7', '8','9','10',
+                       '11', '12', '13',' 14', '15', '16', '17', '18', '19', '20','21']
+        page.params = {offset: 21}
+        expect(page.limit(product_ids)).to eq 20
+      end
+    end
+
+    context 'given no variable limit' do
+      before do
+        page.params = {limit: 22}
+      end
+      it 'returns 22 when given 0 product_ids and a parameter limit of 22' do
+        product_ids  = []
+        expect(page.limit(product_ids)).to eq 22
+      end
+      it 'returns 20 when given 2 product_ids and a parameter limit of 22' do
+        product_ids  = ['457', '2']
+        expect(page.limit(product_ids)).to eq 20
+      end
+      it 'returns 20 when given 22 product_ids and an offset of 21 and a limit of 21' do
+        product_ids = ['451', '1', '2', '3', '4', '5', '6', '7', '8','9','10',
+                       '11', '12', '13',' 14', '15', '16', '17', '18', '19', '20','21']
+        page.params = {offset: 21, limit: 21}
+        expect(page.limit(product_ids)).to eq 20
+      end
+    end
+
+    context 'given a variable limit of 23' do
+      before do
+        page.variables = {:limit => '23'}
+        page.params    = {}
+      end
+      it 'returns 22 when given 0 product_ids and a parameter limit of 22' do
+        page.params = {limit: 22}
+        product_ids = []
+        expect(page.limit(product_ids)).to eq 22
+      end
+      it 'returns 23 when given 0 product_ids and no parameter limit' do
+        product_ids = []
+        expect(page.limit(product_ids)).to eq 23
+      end
+      it 'returns 21 when given 2 product_ids and no parameter limit' do
+        product_ids = ['457', '2']
+        expect(page.limit(product_ids)).to eq 21
+      end
+    end
+    context 'page is a lookbook' do
+      before do
+        page.variables = {:lookbook=>true}
+        page.params = {}
+      end
+      it 'given no variable limit, it return a limit of 20' do
+        product_ids = []
+        expect(page.limit(product_ids)).to eq 20
+      end
+      it 'given a variable limit, it returns a limit of the variable' do
+        product_ids = []
+        page.variables = {:lookbook=>true,:limit=>30}
+        expect(page.limit(product_ids)).to eq 30
+      end
+      it 'given no variable limit, it returns 20, even with product ids' do
+        product_ids = ['45', '2']
+        expect(page.limit(product_ids)).to eq 20
+      end
+      it 'given a variable limit, it returns a limit of the variable, even with product ids' do
+        product_ids = ['45', '2']
+        page.variables = {:lookbook=>true,:limit=>30}
+        expect(page.limit(product_ids)).to eq 30
       end
     end
   end
