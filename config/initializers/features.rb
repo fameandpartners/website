@@ -15,7 +15,9 @@ if Rails.env.development?
 end
 
 if Rails.env.test?
+  Features.deactivate(:google_tag_manager)
   Features.deactivate(:marketing_modals)
+  Features.deactivate(:test_analytics)
 end
 
 Features.deactivate(:checkout_fb_login)

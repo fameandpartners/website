@@ -19,7 +19,7 @@ module Acceptance
     end
 
     step 'I should see my order placed, with :dress_name dress, :size_number size' do |dress_name, size_number|
-      expect(page).to have_content('Order Confirmation')
+      expect(page).to have_content('ORDER CONFIRMATION')
       expect(page).to have_content(dress_name)
       expect(page).to have_content("Size:#{size_number}")
     end
