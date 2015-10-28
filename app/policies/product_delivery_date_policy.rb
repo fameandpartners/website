@@ -4,10 +4,10 @@ module Policies
 
   class ProjectDeliveryDatePolicy
 
-    EXPRESS_MAKING    = "2 days for making, up to 4 days for delivery"
-    FAST_MAKING       = "5 days making, 4 days delivery"
-    STANDARD_DELIVERY = "7 days making, 4 days delivery"
-    SPECIAL_ORDER     = "9 days making, 4 days delivery"
+    EXPRESS_MAKING    = {:days_for_making => 2, :days_for_delivery => 4}
+    FAST_MAKING       = {:days_for_making => 5, :days_for_delivery => 4}
+    STANDARD_DELIVERY = {:days_for_making => 7, :days_for_delivery => 4}
+    SPECIAL_ORDER     = {:days_for_making => 9, :days_for_delivery => 4}
 
     attr_reader :order
 
