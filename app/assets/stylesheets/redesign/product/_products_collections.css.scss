@@ -5,6 +5,33 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
 .products-collections {
 	padding-top: 40px;
 
+	.col-md-3:nth-child(4n+1){
+		clear: left;
+	}
+
+	.col-md-4:nth-child(3n+1){
+		clear: left;
+	}
+
+	@media (max-width: $bootstrap-md-width) {
+
+		& {
+
+			.col-md-3:nth-child(4n+1){
+				clear: none;
+			}
+
+			.col-md-4:nth-child(3n+1){
+				clear: none;
+			}
+
+			.col-xs-6:nth-child(2n+1){
+				clear: left;
+			}
+
+		}
+
+	}
 
 	.select2-container--default {
 		width: 100% !important;
@@ -45,8 +72,8 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
 	   border-width: 10px 8px 0 8px;
 	   left: -5px;
 	   margin-top: 0.4rem;
-       -webkit-transform: rotate(180deg);
-       transform: rotate(180deg);
+	   -webkit-transform: rotate(180deg);
+	   transform: rotate(180deg);
 	}
 
 	#select2-product_order-container{
@@ -86,6 +113,16 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
 		cursor: pointer;
 	}
 
+	.message-box {
+		margin: 10px 10% 0 10%;
+		padding: 5px 10px;
+		text-transform: uppercase;
+		font-size: 0.813em;
+		font-weight: 500;
+		color: $c-neutral-black;
+		border: solid $c-neutral-black 1px;
+	}
+
 	.product-order {
 		.select2-container--default .select2-selection--single {
 			background-color:#f5f5f5;
@@ -118,12 +155,12 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
 
 	.thumb{
 		background-color: #E0E0E0;
-	    width: 20px;
-	    height: 20px;
-	    float: left;
-	    margin-right: 10px;
-	    cursor: pointer;
-	    box-shadow: inset 0px 1px 2px 0px #969696;
+		width: 20px;
+		height: 20px;
+		float: left;
+		margin-right: 10px;
+		cursor: pointer;
+		box-shadow: inset 0px 1px 2px 0px #969696;
 	}
 	.thumb-true{
 		background-color: black;
@@ -202,9 +239,9 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
 		padding-top:10px;
 		padding-bottom:10px;
 		text-align: center;
-    	background-color: #E8E8E8;
-    	cursor: pointer;
-    	font-weight: 600;
+		background-color: #E8E8E8;
+		cursor: pointer;
+		font-weight: 600;
 	}
 
 	.filter-col{
@@ -287,65 +324,65 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
 			}
 			.filter-col{
 				background-color: white;
-			    z-index: 102;
-			    position: fixed;
-			    opacity: 1;
-			    top: 0;
-			    width: 85%;
-			    padding-left: 0;
-			    padding-right: 0;
-			    margin-left: -1000px;
-			    .inner{
-			    	padding-top: 0;
-			    	padding-left: 0;
-			    	width: 100%;
-			    	margin-left: 0;
-			    	.three-filters{
-			    		margin-left: 20px;
-			    		padding-right: 20px;
-			    	}
-			    	.filter-rect{
-			    		height: 50px;
-			    		i {
-		    			    float: left;
-						    margin-top: 15px;
-						    padding-left: 20px;
-			    		}
-			    		.filter-text{
-			    			float: left;
-			    			margin-top: 12px;
-			    		}
-			    		.clear-all{
-			    			margin-top: 12px;
-			    		}
-			    		.close{
-			    			background-color: black;
-						    height: 100%;
-						    padding-top: 9px;
-						    color: white;
-						    font-family: $font-family-secondary;
-						    font-weight: 100;
-						    font-size: 14pt;
-						    padding-left: 10px;
-						    padding-right: 10px;
-						    line-height: 1.6;
-						    -webkit-font-smoothing: antialiased;
-						    cursor: pointer;
-						    margin-right: -1px;
-			    		}
-			    	}
-			    }
-			    -webkit-transition: margin-left 1s;
+				z-index: 102;
+				position: fixed;
+				opacity: 1;
+				top: 0;
+				width: 85%;
+				padding-left: 0;
+				padding-right: 0;
+				margin-left: -1000px;
+				.inner{
+					padding-top: 0;
+					padding-left: 0;
+					width: 100%;
+					margin-left: 0;
+					.three-filters{
+						margin-left: 20px;
+						padding-right: 20px;
+					}
+					.filter-rect{
+						height: 50px;
+						i {
+							float: left;
+							margin-top: 15px;
+							padding-left: 20px;
+						}
+						.filter-text{
+							float: left;
+							margin-top: 12px;
+						}
+						.clear-all{
+							margin-top: 12px;
+						}
+						.close{
+							background-color: black;
+							height: 100%;
+							padding-top: 9px;
+							color: white;
+							font-family: $font-family-secondary;
+							font-weight: 100;
+							font-size: 14pt;
+							padding-left: 10px;
+							padding-right: 10px;
+							line-height: 1.6;
+							-webkit-font-smoothing: antialiased;
+							cursor: pointer;
+							margin-right: -1px;
+						}
+					}
+				}
+				-webkit-transition: margin-left 1s;
 				-moz-transition: margin-left 1s;
 				transition: margin-left 1s;
 				height: 100%;
 				overflow: auto;
-			    border-bottom: 0px;
-			    border-top: 0px;
-			    border-right: 1px;
-			    border-left: 0px;
-			    border-color: #B4B4B4;
-			    border-style: solid;
+				border-bottom: 0px;
+				border-top: 0px;
+				border-right: 1px;
+				border-left: 0px;
+				border-color: #B4B4B4;
+				border-style: solid;
 			}
 			.slide-in{
 				margin-left: 0;
@@ -368,7 +405,7 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
 	}
 	.col-md-4 {
 	  .express-delivery {
-	  	top:20px;
+		top:20px;
 	  }
 	}
 
