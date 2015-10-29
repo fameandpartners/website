@@ -8,7 +8,7 @@ var InstagramItem = React.createClass({
     return (
       <a href={link} className='item-wrap'>
         <div className='media-wrap'>
-          <img src={src} />
+          <img data-lazy={src} />
           <div className='overlay'>
             <div className='overlay-outer-wrap'>
               <div className='overlay-inner-wrap'>
@@ -29,6 +29,7 @@ var InstagramCarousel = React.createClass({
 
   componentDidMount: function() {
     $('.js-carousel-instagram').slick({
+      lazyLoad: 'ondemand',
       speed: 800,
       slidesToShow: 5,
       slidesToScroll: 5,
