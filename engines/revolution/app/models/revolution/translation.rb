@@ -3,9 +3,9 @@ module Revolution
 
     DEFAULT_LOCALE = 'en-US'
 
-    attr_accessible :locale, :title, :meta_description, :heading, :sub_heading, :description
+    attr_accessible :locale, :title, :meta_description, :heading, :sub_heading, :description, :page
 
-    validates :locale, :title, :meta_description, :presence => true
+    validates :page, :locale, :title, :meta_description, presence: true
 
     belongs_to :page
 

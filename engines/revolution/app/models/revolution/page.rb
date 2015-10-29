@@ -7,7 +7,9 @@
 
 module Revolution
   class Page < ActiveRecord::Base
-    attr_accessible :translations_attributes, :path, :template_path, :canonical, :redirect, :parent, :parent_id, :publish_from, :publish_to, :variables
+    attr_accessible :translations_attributes, :path, :template_path, :variables,
+                    :canonical, :redirect, :parent, :parent_id, :nofollow, :noindex,
+                    :publish_from, :publish_to
 
     validates :path, :presence => true
     validate :path_has_not_changed, :on => :update #read only attributes
@@ -93,5 +95,15 @@ module Revolution
       where("LOWER(path) like '%#{query.downcase}%'")
     end
 
+    def robots?
+      noindex? || nofollow?
+    end
+
+    def robots
+      [].tap do |a|
+        a << 'noindex' if noindex?
+        a << 'nofollow' if nofollow?
+      end.join(',')
+    end
   end
 end

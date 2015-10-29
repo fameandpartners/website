@@ -13,7 +13,5 @@ describe Revolution::ProductService do
 
   it 'should parse the colours' do
     expect(service.colours).to eq ["coral", "light-pink", "burgundy", "white", "black", "lavender", "forest-green"]
-    puts service.colours
   end
-
 end

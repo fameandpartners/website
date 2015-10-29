@@ -1,3 +1,5 @@
+= render :partial => '/pages/robots'
+
 - if local_assigns[:hidden].blank?
   ruby:
     sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase))

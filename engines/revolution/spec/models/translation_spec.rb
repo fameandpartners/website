@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Revolution::Translation do
-
   let(:path)      { '/blah/vtha' }
   let(:locale)    { 'en-AU' }
   let(:title)     { 'Blah Vtha' }
@@ -14,5 +13,4 @@ describe Revolution::Translation do
   it { is_expected.to validate_presence_of :locale }
   it { is_expected.to validate_presence_of :page }
   it { is_expected.to validate_presence_of :meta_description }
-
 end

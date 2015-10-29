@@ -1,5 +1,4 @@
-= content_for :head do
-  meta name="robots" content="noindex, follow"
+= render :partial => '/pages/robots'
 
 = render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
 
@@ -7,8 +6,8 @@
 
   .hero-wrap.media-wrap
     img src='#{image_path("landingpages/dance-hall-days/hero-full.jpg")}' srcset='
-      #{image_path("landingpages/dance-hall-days/hero-sml.jpg")} 768w 2x, 
-      #{image_path("landingpages/dance-hall-days/hero-med.jpg")} 1024w, 
+      #{image_path("landingpages/dance-hall-days/hero-sml.jpg")} 768w 2x,
+      #{image_path("landingpages/dance-hall-days/hero-med.jpg")} 1024w,
       #{image_path("landingpages/dance-hall-days/hero-full.jpg")} 1200w' alt='The exclusive Miss. Ellen - #SARAH3LLEN4FAME'
 
   .container
@@ -17,7 +16,7 @@
         .row
           = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 1, customWrapper: 'col-md-6 col-xs-6'}
           .col-md-12
-            .row 
+            .row
               .col-md-6.col-xs-6
                 = link_to dresses_path + '/dress-willow-686?color=black', class: 'item-span-2'
                   .media-wrap.keep-ratio
@@ -27,7 +26,7 @@
               .col-md-6.col-xs-6
                 .row
                   = render partial: 'pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 3, customWrapper: 'col-md-12'}
-        
+
       .col-md-6
         .how-it-works
           .testimonial
