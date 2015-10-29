@@ -104,11 +104,6 @@ ruby:
     li.title separates
     li = link_to 'Skirts', skirts_collection_path
 
-  = link_to mystyle_landing_page_path(:lpi => 'none', :pids => ['640-forrest-green','643-black','648-black','656-black','649-black','640-black'],:limit => 0), class: 'highlight-wrap'
-    .media-wrap
-      = image_tag "homepage/dress-girl.jpg"
-    .copy-wrap BAMBI X FAME.<br>SHOP BAMBI'S PICKS
-
 .row.rect#rect-lookbook.nav-menu-wrap.menu-lookbook
   .slider-wrap
     = react_component('MenuLookbook', skin: 'skin-light', assets: [{link: make_a_statement_collection_path, src: '/assets/homepage/lookbook/1.jpg', title: 'BAMBI X FAME'}, {link: dance_hall_days_collection_path, src: '/assets/homepage/lookbook/dance-hall-days.jpg', title: 'DANCE HALL DAYS'},{link: photo_finish_collection_path, src: '/assets/homepage/lookbook/2.jpg', title: 'PHOTO FINISH'}])
