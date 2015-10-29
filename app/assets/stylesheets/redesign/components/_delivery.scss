@@ -37,17 +37,18 @@
       .terms{
         display: block !important;
       }
+      .clock{
+        display: block !important;
+        background: url('checkout/clock.png');
+        background-size: contain;
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        margin-left: -60px;
+        margin-top: 15px;
+      }
     }
-    .clock{
-      display: block !important;
-      background: url('checkout/clock.png');
-      background-size: contain;
-      width: 35px;
-      height: 35px;
-      position: absolute;
-      margin-left: -60px;
-      margin-top: 15px;
-    }
+
     @media(max-width: 1250px){
       .triangle{
         width: 34px;
@@ -71,6 +72,17 @@
         height: 20px;
         margin-left: -30px;
         margin-top: 15px;
+      }
+    }
+    @include iphone5{
+      .right-col{
+        padding-left: 5px;
+        padding-right: 5px;
+        .clock{
+          width: 15px;
+          height: 15px;
+          margin-left: -25px;
+        }
       }
     }
   }
@@ -123,6 +135,12 @@
       }
 
     }
+    @include iphone5{
+      .right-col{
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
   }
   .delivery-time{
     padding: 0;
@@ -132,6 +150,17 @@
       padding-right: 0;
       text-align: left;
       width: 12%;
+    }
+    @include iphone5{
+      .left-col{
+        padding-left: 5px !important;
+        .tail{
+          .time-bold{
+            float: left;
+            margin: 0;
+          }
+        }
+      }
     }
     .left-col{
       padding: 0;
