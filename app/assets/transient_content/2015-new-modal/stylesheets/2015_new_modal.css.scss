@@ -179,6 +179,7 @@
         font-size: 1.5rem;
         font-weight: 400;
         text-transform: none;
+        margin-top: 30px;
       }
       .tc{
         font-size: 1.2rem;
@@ -210,27 +211,35 @@
       }
 
       .four-lipsticks{
+        img.selected{
+          border-width: 1px;
+          border-color: black;
+          border-style: solid;
+        }
+        img{
+          cursor: pointer;
+          margin-right: 4%;
+          width: 15%;
+        }
         @media(min-width: $bootstrap-md-width){
           img{
-            cursor: pointer;
-            width: 15%;
-          }
-          img:hover{
             width: 14%;
           }
-          img.selected{
+          img:hover{
             border-width: 1px;
-            border-color: black;
+            border-color: #e2e2e2;
             border-style: solid;
           }
+
         }
-        @media(max-width: $bootstrap-md-width){
+        @media(min-width: #{$iphone6p-width+1}) and (max-width: $bootstrap-md-width){
           img{
-            cursor: pointer;
-            width: 11%;
+            width: 10%;
           }
           img:hover{
-            width: 10%;
+            border-width: 1px;
+            border-color: #e2e2e2;
+            border-style: solid;
           }
         }
       }
