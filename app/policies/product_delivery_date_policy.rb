@@ -9,6 +9,10 @@ module Policies
     STANDARD_DELIVERY = {:days_for_making => 7, :days_for_delivery => 4}
     SPECIAL_ORDER     = {:days_for_making => 9, :days_for_delivery => 4}
 
+    PRINTED_MATCH   = /Print|Animal|Aztec|Baroque|Brocade|Check|Checkered|Conversational|Digital|Floral|Geometric|Gingham|Ikat|Leopard|Monochrome|Ombre|Paisley|Patchwork|Photographic|Plaid|Polka Dot|Psychedelic|Scarf|Spots|Stripes|Tie Dye|Tribal|Tropical|Victorian|Watercolour|Zebra/i
+    BEADING_MATCH   = /Beading|Embellishment|Sequin/i
+    EMBROIDER_MATCH = /Embroid/i
+
     attr_reader :order
 
     def initialize(product)
@@ -16,23 +20,19 @@ module Policies
     end
 
     def printed?
-      /Print|Animal|Aztec|Baroque|Brocade|Check|Checkered|Conversational|Digital|Floral|Geometric|Gingham|Ikat|Leopard|Monochrome|Ombre|Paisley|Patchwork|Photographic|Plaid|Polka Dot|Psychedelic|Scarf|Spots|Stripes|Tie Dye|Tribal|Tropical|Victorian|Watercolour|Zebra/i
+      @product.description =~ PRINTED_MATCH
     end
 
     def beading?
-      /Beading|Embellishment|Sequin/i
+      @product.description =~ BEADING_MATCH
     end
 
     def embroidered?
-      /Embroid/i
+      @product.description =~ EMBROIDER_MATCH
     end
 
     def special_order?
-      beaded = @product.description =~ beading?
-      printed = @product.description =~ printed?
-      embroidered = @product.description =~ embroidered?
-
-      return beaded.present? || printed.present? || embroidered.present?
+       beading? || printed? || embroidered?
     end
 
     def standard_delivery?
