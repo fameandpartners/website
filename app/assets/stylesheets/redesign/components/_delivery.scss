@@ -1,0 +1,152 @@
+.delivered-row{
+
+  font-size: 1.4rem;
+  margin-top: 15px !important;
+  border-style: solid;
+  border-left: 0;
+  border-right: 0;
+  margin-top: 5px;
+  border-width: 1px;
+  padding-bottom: 1.45rem;
+  padding-top: 1.45rem !important;
+  border-color: #C8C8C8;
+
+  @media(max-width: 1250px){
+    font-size: 1rem;
+  }
+
+  .delivery-time-text.pink-bg{
+    .text , .right-col{
+      background-color: #f6e1d5;
+    }
+    .triangle{
+      background: url('pink-triangle.png');
+    }
+
+  }
+
+  .delivery-time-text.show-terms{
+    .triangle{
+      width: 43px;
+      height: 86px;
+    }
+    .right-col{
+      float: right;
+      padding-left: 60px;
+      padding-right: 60px;
+      .terms{
+        display: block !important;
+      }
+    }
+    .clock{
+      display: block !important;
+      background: url('checkout/clock.png');
+      background-size: contain;
+      width: 35px;
+      height: 35px;
+      position: absolute;
+      margin-left: -60px;
+      margin-top: 15px;
+    }
+    @media(max-width: 1250px){
+      .triangle{
+        width: 34px;
+        height: 68px;
+      }
+      .clock{
+        width: 30px;
+        height: 30px;
+        margin-left: -60px;
+        margin-top: 10px;
+      }
+    }
+    @media(max-width: #{$tablet-width}){
+      .right-col{
+        float: right;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      .clock{
+        width: 20px;
+        height: 20px;
+        margin-left: -30px;
+        margin-top: 15px;
+      }
+    }
+  }
+
+  .delivery-time-text{
+    padding: 0;
+    .bold-text{
+      margin-left: 0.2em;
+      font-weight: 700;
+    }
+    .triangle{
+      background: url('white-triangle.png');
+      float: right;
+      width: 32px;
+      height: 64px;
+      background-size: contain !important;
+      display: block;
+      @media(max-width: 1250px){
+        width: 26px;
+        height: 52px;
+      }
+      @media(max-width: #{$tablet-width}){
+        background: url('E4-triangle.png');
+      }
+    }
+    .text{
+      background-color: white;
+      font-weight: 500;
+      @media(max-width: #{$tablet-width}){
+        background-color: #E4E4E4;
+      }
+    }
+    .right-col{
+      .clock{
+        display: none;
+      }
+      float: right;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: white;
+      @media(max-width: #{$tablet-width}){
+        background-color: #E4E4E4;
+      }
+      .terms{
+        display: none;
+        color: grey;
+        margin: 0;
+      }
+
+    }
+  }
+  .delivery-time{
+    padding: 0;
+    .icon-delivery-express{
+      padding-top: 5px;
+      padding-left: 0;
+      padding-right: 0;
+      text-align: left;
+      width: 12%;
+    }
+    .left-col{
+      padding: 0;
+      .head{
+        font-weight: 800;
+        float: left;
+      }
+      .tail{
+        clear: both;
+        text-align: left;
+        .time-bold{
+          font-weight: 800;
+          margin-left: 0.5em;
+        }
+      }
+    }
+  }
+}
