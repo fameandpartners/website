@@ -44,6 +44,8 @@ p
     ' By making this purchase you are agreeing to the Fame & Partners
     = link_to 'Term & Conditions.', terms_path
 
+= react_component('Delivery', {color: "pink-bg", terms: "show-terms"})
+
 .row
   .col-md-12
     = link_to '< Return to your information', checkout_state_path('address'), :remote => false, class: 'edit'
