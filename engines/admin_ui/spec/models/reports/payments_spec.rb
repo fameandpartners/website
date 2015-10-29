@@ -19,10 +19,6 @@ module Reports
       end
     end
 
-    # describe '#description' do
-    #   it { expect(report.description).to eq 'payments'  }
-    # end
-
     describe 'date coercion' do
       let(:date)         { Date.parse('2015-01-01') }
       let(:start_of_day) { '2015-01-01T00:00:00+00:00' }
