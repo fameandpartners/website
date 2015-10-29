@@ -26,6 +26,23 @@
     padding: 1em;
   }
 
+  .delivery-date-wrapper{
+    padding: 1em;
+    .inner{
+      padding: 1em;
+      background-color: #EEEEEE;
+      .delivery-text{
+        font-family: Formal;
+        font-size: 1.3rem;
+        .icon-delivery-express{
+          margin-right: 10px;
+        }
+      }
+      .delivery-date-text{
+        font-weight: 700;
+      }
+    }
+  }
   .shopping-bag-text-wrapper {
     padding: 1em;
     font-weight: 500;
