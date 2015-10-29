@@ -42,7 +42,13 @@ window.ShoppingBag = class ShoppingBag
     @
 
   render: () ->
-    @$container.html(@template(cart: @cart.data, country_code: @country_code, value_proposition: @value_proposition, shipping_message: @shipping_message))
+    $.ajax(
+      url: urlWithSitePrefix("/user_cart/order_delivery_date")
+      type: 'GET'
+      success: (data) =>
+        @delivery_date = data.date
+    )
+    @$container.html(@template(cart: @cart.data, country_code: @country_code, value_proposition: @value_proposition, shipping_message: @shipping_message, delivery_date: @delivery_date))
     @rendered = true
 
   close: () ->
