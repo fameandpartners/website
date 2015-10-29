@@ -17,7 +17,8 @@ var ProductImage = React.createClass({
       <div className='item-wrap'>
         <a href={urlWithSitePrefix(this.props.product.collection_path)}>
           <div className='media-wrap'>
-            <img alt={this.props.product.name} data-hover={this.props.product.images[0]} src={this.props.product.images[1]}></img>
+            <img alt={this.props.product.name} 
+              data-lazy={this.props.product.images[0].replace(/\/large\//, '/product/')}></img>
           </div>
           <div className='details-wrap'>
             <span> {this.props.product.name} </span>
@@ -50,6 +51,7 @@ var NewThisWeekProducts = React.createClass({
   componentDidUpdate: function() {
     if (this.props.device === 'desktop') {
       $('.js-carousel-new-this-week').slick({
+        lazyLoad: 'ondemand',
         speed: 800
       });
     }
