@@ -22,12 +22,11 @@ Feature: Full checkout
     And I select "California" state
     And I select "United States" country
     And I click on "Pay Securely" button
-    And I fill in form fields with:
-      | Card number  | 5520000000000000  |
-      | Name on card | Zaphod Beeblebrox |
-    And I fill in expiry and CVC credit card fields:
-      | CVC              | 123  |
-      | Expiration Month | 10   |
-      | Expiration Year  | 2050 |
+    And I fill in credit card information:
+      | Card number      | 5520000000000000  |
+      | Name on card     | Zaphod Beeblebrox |
+      | CVC              | 123               |
+      | Expiration Month | 10                |
+      | Expiration Year  | 2050              |
     And I click on "Place My Order" button
     Then I should see my order placed, with "Connie" dress, "10" size

@@ -10,11 +10,13 @@ module Acceptance
       find('li.active-result', text: country_name).click
     end
 
-    step 'I fill in expiry and CVC credit card fields:' do |cc_info|
+    step 'I fill in credit card information:' do |cc_info|
       cc_info = cc_info.to_h
 
-      fill_in 'month'    , with: cc_info['Expiration Month']
-      fill_in 'year'     , with: cc_info['Expiration Year']
+      fill_in 'Name on card', with: cc_info['Name on card']
+      fill_in 'Card number', with: cc_info['Card number']
+      fill_in 'month', with: cc_info['Expiration Month']
+      fill_in 'year', with: cc_info['Expiration Year']
       fill_in 'card_code', with: cc_info['CVC']
     end
 
