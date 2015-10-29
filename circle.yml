@@ -6,7 +6,7 @@ machine:
 
 test:
   override:
-    - bundle exec rake spec
+    - bundle exec rspec spec engines --color spec --format progress
 
 # database:
 #  pre:
