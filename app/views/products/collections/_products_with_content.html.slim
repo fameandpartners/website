@@ -6,8 +6,11 @@
 - # THIS IS A HACK HACK HACK 27th October, late, with no dinner
 - # Remove by 1st November, talk to TOBY and yell at him
 - sub_heading = (params[:lps] || page.sub_heading)
-- sub_heading = 'MADE FOR YOU.' if sub_heading.blank?
-- description = page.description.blank? ? '*In as little as 48 hours.' : page.description
+- description = page.description
+
+- if sub_heading.blank? && description.blank?
+  - sub_heading = 'MADE FOR YOU.'
+  - description = '*In as little as 48 hours.'
 
 .col-xs-6.col-xxs-6.col-md-4.category--item
   .panel-seo
