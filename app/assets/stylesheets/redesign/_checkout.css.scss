@@ -218,6 +218,10 @@ $order-summary-bg: #f7f7f9;
         }
       }
     }
+
+    button[name='pay_securely']{
+      margin-top: 20px;
+    }
   }
 
   // Order / Cart Summary
