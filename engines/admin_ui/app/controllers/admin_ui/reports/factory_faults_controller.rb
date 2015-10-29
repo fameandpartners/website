@@ -4,8 +4,6 @@ module AdminUi
 
       private
 
-      private
-
       def report
         ::Reports::FactoryFaults.new(from: from_date, to: to_date)
       end
