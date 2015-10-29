@@ -150,6 +150,7 @@ FameAndPartners::Application.routes.draw do
       root to: 'details#show', as: :user_cart_details
 
       get '/details'      => 'details#show'
+      get '/order_delivery_date' => 'details#order_delivery_date'
       post '/promotion'   => 'promotions#create'
 
       post 'products' => 'products#create'

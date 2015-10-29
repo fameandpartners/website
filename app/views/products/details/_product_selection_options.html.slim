@@ -22,10 +22,30 @@
       | Express Making
 
 .row
-  = @product.delivery_date
-
-.row
     button.btn.btn-block.btn-black.buy-button Add to Cart
+
+.row.delivered-row
+  .col-xs-6.col-sm-6.col-md-6.delivery-time
+    .col-xs-2.col-sm-2.col-md-2.icon-delivery-express
+    .col-xs-10.col-sm-10.col-md-10.left-col
+      div.head
+        | Delivery time
+      div.tail
+        span
+          | Get your dress by the
+        span.time-bold
+          = @product.delivery_date
+
+  .col-xs-6.col-sm-6.col-md-6.delivery-time-text
+    span.right-col
+      .text
+        | Delivery time guaranteed
+      .text
+        span
+          | or receive a
+        span.bold-text
+          | 25% cashback
+    span.triangle
 
 .row.secondary-actions
   .col-md-6.col-xs-6.col-xxs-12
