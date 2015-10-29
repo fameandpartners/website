@@ -35,11 +35,12 @@
     display: block;
     margin-bottom: 20px;
     text-transform: uppercase;
+    font-family: $font-brand-serif;
     font-size: 28px;
 
     > span {
       display: inline-block;
-      padding-bottom: 10px;
+      padding-bottom: 6px;
       border-bottom: solid $c-neutral-black 1px;
     }
 
