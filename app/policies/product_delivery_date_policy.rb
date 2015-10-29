@@ -32,8 +32,7 @@ module Policies
       printed = @product.description =~ printed?
       embroidered = @product.description =~ embroidered?
 
-      return true if beaded.present? || printed.present? || embroidered.present?
-      return false
+      return beaded.present? || printed.present? || embroidered.present?
     end
 
     def standard_delivery?
