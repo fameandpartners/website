@@ -245,6 +245,31 @@ $order-summary-bg: #f7f7f9;
         margin-right: 15px;
       }
     }
+    @include iphone5{
+      .shopping-bag-text-wrapper{
+        margin-top: 30px;
+        margin-left: 0;
+        margin-right: 0;
+        .shopping-bag-text{
+          margin-right: 0;
+          padding-top: 15px;
+          padding-left: 30px;
+          height: 90px;
+          font-size: 1.1rem;
+        }
+      }
+    }
+    @include iphone6{
+      .shopping-bag-text-wrapper{
+        .shopping-bag-text{
+          margin-right: 0;
+          padding-top: 15px;
+          padding-left: 25px;
+          height: 90px;
+          font-size: 1.3rem;
+        }
+      }
+    }
     .shopping-bag-text{
       margin-right:0;
       padding-top:10px;
@@ -403,7 +428,7 @@ $order-summary-bg: #f7f7f9;
           float: left;
         }
         .promo-code-value{
-          width: 150px;
+          width: 120px;
         }
         .promo-code-apply {
           font-size: 1.5rem !important;
@@ -421,7 +446,7 @@ $order-summary-bg: #f7f7f9;
           font-size: 1.5rem !important;
         }
         .promo-code-value{
-          width: 180px;
+          width: 150px;
         }
       }
       @include iphone6p {
@@ -434,7 +459,7 @@ $order-summary-bg: #f7f7f9;
           font-size: 1.5rem !important;
         }
         .promo-code-value{
-          width: 190px;
+          width: 160px;
         }
       }
     }
