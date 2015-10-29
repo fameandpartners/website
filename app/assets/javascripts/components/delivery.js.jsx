@@ -1,4 +1,12 @@
 var Delivery = React.createClass({
+  getInitialState: function() {
+    return {date: ""}
+  },
+  componentDidMount: function() {
+    $.get(urlWithSitePrefix("/user_cart/order_delivery_date"), function(result) {
+      this.setState({date: result.date})
+    }.bind(this));
+  },
   render: function() {
     return(
       <div className="row delivered-row">
@@ -14,7 +22,7 @@ var Delivery = React.createClass({
                 Get your dress by the
               </span>
               <span className="time-bold">
-                {this.props.date}
+                {this.state.date}
               </span>
             </div>
 
