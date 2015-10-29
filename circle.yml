@@ -4,6 +4,10 @@ machine:
   services:
     - elasticsearch
 
+test:
+  override:
+    - bundle exec rake spec
+
 # database:
 #  pre:
 #    - bundle exec rake db:create db:schema:load
