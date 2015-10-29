@@ -95,6 +95,15 @@
   </div>
 </div>
 
+<div class='delivery-date-wrapper'>
+  <div class="inner">
+    <div class="delivery-text text-center">
+      <span class="icon-delivery-express"></span>DELIVERY DATE IF YOU ORDER TODAY
+    </div>
+    <div class="delivery-date-text text-center">By <%= @delivery_date %></div>
+  </div>
+</div>
+
 <div class='shopping-bag-text-wrapper'>
   <div class='inner-wrap'>
     <% if @shipping_message != "" : %>

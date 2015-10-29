@@ -140,8 +140,9 @@ FameAndPartners::Application.routes.draw do
     scope '/user_cart', module: 'user_cart' do
       root to: 'details#show', as: :user_cart_details
 
-      get '/details' => 'details#show'
-      post '/promotion' => 'promotions#create'
+      get '/details'      => 'details#show'
+      get '/order_delivery_date' => 'details#order_delivery_date'
+      post '/promotion'   => 'promotions#create'
 
       post 'products' => 'products#create'
       get 'products/check_gift_in_cart' => 'products#check_gift_in_cart'
