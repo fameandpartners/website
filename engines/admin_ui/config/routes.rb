@@ -20,6 +20,7 @@ AdminUi::Engine.routes.draw do
     resource :coupon_adjusted_orders, :only => [:show, :create]
     resource :order_totals,           :only => [:show, :create]
     resource :return_shoppers,        :only => [:show, :create]
+    resource :factory_faults,        :only => [:show, :create]
   end
 
   resources :caches, only: [:index, :destroy, :show] do
