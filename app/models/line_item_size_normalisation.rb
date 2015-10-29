@@ -132,7 +132,10 @@ class LineItemSizeNormalisation < ActiveRecord::Base
           normalisation.site_version              = line_item.order.site_version
           normalisation.state = :unconverted
 
-          if line_item.personalization
+          if line_item.variant.product.name == "Gift"
+            warn "GIFT #{line_item.id}"
+
+          elsif line_item.personalization
             # info  "PERSONALISED #{line_item.id}"
             normalisation.old_size_id    = line_item.personalization.size_id
             normalisation.old_size_value = line_item.personalization.attributes['size']
