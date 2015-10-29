@@ -19,7 +19,7 @@ module Revolution
 
     serialize :variables, Hash
 
-    delegate :title, :meta_description, :description, :to => :translation
+    delegate :title, :meta_description, :to => :translation
 
     attr_accessor :locale, :collection
 
@@ -29,6 +29,10 @@ module Revolution
 
     def sub_heading
       (translation && translation.sub_heading) || collection.details.banner.subtitle
+    end
+
+    def description
+      (translation && translation.description)
     end
 
     def banner_image
