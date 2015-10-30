@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Policies::ProjectDeliveryDatePolicy do
-  let(:print_dress)            { create(:spree_product, name:"print", description:" test Print test", price: 0) }
-  let(:beading_dress)          { create(:spree_product, name:"bead", description:" test Beading test", price: 0) }
-  let(:embroid_dress)          { create(:spree_product, name:"embroid", description:" test Embroid test", price: 0) }
+  let(:print_dress)            { create(:spree_product, name:"print", description:"Print", price: 0) }
+  let(:beading_dress)          { create(:spree_product, name:"bead", description:"Beading", price: 0) }
+  let(:embroid_dress)          { create(:spree_product, name:"embroid", description:"Embroid", price: 0) }
   let(:fast_making_dress)      { create(:spree_product, name:"test fast making", price: 0) }
   let(:standard_dress)         { create(:spree_product, name:"test standard dress", price: 0) }
 
