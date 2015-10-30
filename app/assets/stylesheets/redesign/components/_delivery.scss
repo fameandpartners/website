@@ -34,6 +34,7 @@
       float: right;
       padding-left: 60px;
       padding-right: 60px;
+      height: 87px;
       .terms{
         display: block !important;
       }
@@ -50,15 +51,21 @@
     }
 
     @media(max-width: 1250px){
-      .triangle{
-        width: 34px;
-        height: 68px;
-      }
-      .clock{
-        width: 30px;
-        height: 30px;
-        margin-left: -60px;
-        margin-top: 10px;
+      .right-col{
+        height: 86px;
+        .triangle{
+          width: 34px;
+          height: 68px;
+        }
+        .clock{
+          width: 30px;
+          height: 30px;
+          margin-left: -60px;
+          margin-top: 17px;
+        }
+        .guaranteed{
+          margin-top: 16px;
+        }
       }
     }
     @media(max-width: #{$tablet-width}){
@@ -66,12 +73,12 @@
         float: right;
         padding-left: 15px;
         padding-right: 15px;
-      }
-      .clock{
-        width: 20px;
-        height: 20px;
-        margin-left: -30px;
-        margin-top: 15px;
+        .clock{
+          width: 25px;
+          height: 25px;
+          margin-left: -35px;
+          margin-top: 20px;
+        }
       }
     }
     @include iphone5{
@@ -89,10 +96,6 @@
 
   .delivery-time-text{
     padding: 0;
-    .bold-text{
-      margin-left: 0.2em;
-      font-weight: 700;
-    }
     .triangle{
       background: url('white-triangle.png');
       float: right;
@@ -119,6 +122,10 @@
       .clock{
         display: none;
       }
+      .guaranteed{
+        margin-top: 10px;
+      }
+      height: 64px;
       float: right;
       padding-left: 20px;
       padding-right: 20px;
@@ -133,7 +140,9 @@
         color: grey;
         margin: 0;
       }
-
+      @media(max-width: 1250px){
+        height:53px;
+      }
     }
     @include iphone5{
       .right-col{
@@ -151,13 +160,16 @@
       text-align: left;
       width: 12%;
     }
+    .get-your{
+      float: left;
+    }
     @include iphone5{
       .left-col{
         padding-left: 5px !important;
         .tail{
           .time-bold{
             float: left;
-            margin: 0;
+            margin: 0 !important;
           }
         }
       }
@@ -174,6 +186,11 @@
         .time-bold{
           font-weight: 800;
           margin-left: 0.5em;
+          @include iphone6{
+            margin-left: 0;
+            float: left;
+            clear: both;
+          }
         }
       }
     }
