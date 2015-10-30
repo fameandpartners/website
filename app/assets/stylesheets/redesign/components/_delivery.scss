@@ -215,6 +215,10 @@
       .head{
         font-weight: 800;
         float: left;
+        font-size: 2.5rem;
+        @include mobile{
+          font-size: 1.5rem;
+        }
       }
       .tail{
         clear: both;
