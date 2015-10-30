@@ -32,11 +32,11 @@ module Policies
     end
 
     def special_order?
-       beading? || printed? || embroidered?
+       !!(beading? || printed? || embroidered?)
     end
 
     def standard_delivery?
-      !special_order? && !fast_making
+      !special_order? && !fast_making?
     end
 
     def fast_making?
