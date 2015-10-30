@@ -183,6 +183,11 @@
     .icon-delivery-express{
       display: none;
     }
+    .left-col{
+      .head{
+        font-size: 2.5rem;
+      }
+    }
   }
   .delivery-time{
     padding: 0;
@@ -215,9 +220,9 @@
       .head{
         font-weight: 800;
         float: left;
-        font-size: 2.5rem;
+        font-size: 2.0rem;
         @include mobile{
-          font-size: 1.5rem;
+          font-size: 1.5rem !important;
         }
       }
       .tail{
