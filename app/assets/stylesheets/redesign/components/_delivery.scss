@@ -71,8 +71,8 @@
     @media(max-width: #{$tablet-width}){
       .right-col{
         float: right;
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 7px;
+        padding-right: 7px;
         .clock{
           width: 25px;
           height: 25px;
@@ -151,8 +151,44 @@
       }
     }
   }
+  .delivery-time.show-terms{
+    .truck{
+      display: block !important;
+      background: url("checkout/truck.png");
+      background-size: contain;
+      width: 40px;
+      height: 40px;
+      float: left;
+      margin-right: 10px;
+      @media(max-width: #{$tablet-width}){
+        width: 30px;
+        height: 30px;
+      }
+      @include iphone5{
+        width: 20px;
+        height: 20px;
+        margin-right: 3px;
+      }
+      @include iphone6{
+        width: 25px;
+        height: 25px;
+        margin-right: 5px;
+      }
+      @include iphone6p{
+        width: 25px;
+        height: 25px;
+        margin-right: 7px;
+      }
+    }
+    .icon-delivery-express{
+      display: none;
+    }
+  }
   .delivery-time{
     padding: 0;
+    .truck{
+      display: none;
+    }
     .icon-delivery-express{
       padding-top: 5px;
       padding-left: 0;

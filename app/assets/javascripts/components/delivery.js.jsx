@@ -34,9 +34,10 @@ var Delivery = React.createClass({
   render: function() {
     return(
       <div className="row delivered-row">
-        <div className="col-xs-6 col-sm-6 col-md-6 delivery-time">
+        <div className={this.props.terms + " col-xs-6 col-sm-6 col-md-6 delivery-time"}>
           <div className="col-xs-2 col-sm-2 col-md-2 icon-delivery-express">
           </div>
+          <div className="truck"></div>
           <div className="col-xs-10 col-sm-10 col-md-10 left-col">
             <div className="head">
               Delivery time
@@ -54,12 +55,12 @@ var Delivery = React.createClass({
         </div>
         <div className={this.props.color +" "+ this.props.terms+ " col-xs-6 col-sm-6 col-md-6 delivery-time-text"}>
           <span className="right-col">
-            <div className={this.props.color+ " clock" }></div>
+            <div className="clock"></div>
             <div className="text guaranteed">
               Delivery time guaranteed
             </div>
             <div className="text">
-              <div className={this.props.terms+" terms"}>Terms and conditions apply</div>
+              <div className="terms">Terms and conditions apply</div>
             </div>
           </span>
           <span className="triangle"></span>
