@@ -42,7 +42,7 @@ var Delivery = React.createClass({
               Delivery time
             </div>
             <div className="tail">
-              <span>
+              <span className="get-your">
                 Get your dress by the
               </span>
               <span className="time-bold">
@@ -55,12 +55,10 @@ var Delivery = React.createClass({
         <div className={this.props.color +" "+ this.props.terms+ " col-xs-6 col-sm-6 col-md-6 delivery-time-text"}>
           <span className="right-col">
             <div className={this.props.color+ " clock" }></div>
-            <div className="text">
+            <div className="text guaranteed">
               Delivery time guaranteed
             </div>
             <div className="text">
-              <span>or receive a </span>
-              <span className="bold-text">25% cashback</span>
               <div className={this.props.terms+" terms"}>Terms and conditions apply</div>
             </div>
           </span>
