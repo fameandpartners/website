@@ -3,16 +3,15 @@
 .menu-new-this-week {
   padding: 30px 0;
 
-  .slider-wrap {
+  .inner-wrap {
+    @extend %cfix;
     margin-bottom: 40px;
-    padding: 0 40px;
-  }
-
-  .slick-list {
-    margin: 0 15px;
+    padding: 0 15px;
   }
 
   .item-wrap {
+    float: left;
+    width: 20%;
     padding: 0 15px;
 
     > a {
@@ -49,14 +48,6 @@
 
   }
 
-  .slick-prev {
-    left: -25px;
-  }
-
-  .slick-next {
-    right: -25px;
-  }
-
   .btn-wrap {
     text-align: center;
   }
@@ -67,7 +58,6 @@
 
   .item-wrap {
     width: 50%;
-    float: left;
   }
 
   .details-wrap {
