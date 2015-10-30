@@ -76,8 +76,8 @@ ruby:
         input type="text" id="searchValue" placeholder="SEARCH FOR..." name="q"
 
 .row.rect#rect-new-this-week.nav-menu-wrap.menu-new-this-week
-  .slider-wrap
-    = react_component('NewThisWeekProducts',{device: 'desktop'})
+  .inner-wrap
+    = react_component('NewThisWeekProducts', {show: 5})
   .btn-wrap
     = link_to 'SHOP ALL NEW THIS WEEK', build_taxon_path('New This Week'), class: "btn btn-black btn-md"
 

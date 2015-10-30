@@ -18,7 +18,7 @@ var ProductImage = React.createClass({
         <a href={urlWithSitePrefix(this.props.product.collection_path)}>
           <div className='media-wrap'>
             <img alt={this.props.product.name} 
-              data-lazy={this.props.product.images[0].replace(/\/large\//, '/product/')}></img>
+              src={this.props.product.images[0].replace(/\/large\//, '/product/')}></img>
           </div>
           <div className='details-wrap'>
             <span> {this.props.product.name} </span>
@@ -48,35 +48,20 @@ var NewThisWeekProducts = React.createClass({
     });
   },
 
-  componentDidUpdate: function() {
-    if (this.props.device === 'desktop') {
-      $('.js-carousel-new-this-week').slick({
-        lazyLoad: 'ondemand',
-        speed: 800
-      });
-    }
-  },
-
   render: function() {
-    var container;
+    var show = this.props.show ? this.props.show : 4;
+
     if (this.state.products.length == 0){
       return (
         <div></div>
       );
     } else {
-      products = this.state.products.map(function(product){
+      products = this.state.products.slice(0, show);
+      products = products.map(function(product){
         return (<ProductImage product={product} />)
       });
 
-      if (this.props.device === 'desktop') {
-        container = <div className="js-carousel-new-this-week" data-slick='{"slidesToShow": 5, "slidesToScroll": 5}'>
-                    {products}
-                    </div>
-      } else {
-        container = <div>{products}</div>
-      }
-
-      return (<div>{container}</div>)
+      return (<div>{products}</div>)
     }
   }
 });

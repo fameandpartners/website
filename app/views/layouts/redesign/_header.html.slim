@@ -114,7 +114,9 @@ ruby:
                 i.fa.fa-chevron-left
                 .back BACK
             li.images-content
-              = react_component('NewThisWeekProducts',{device: 'mobile'})
+              = react_component('NewThisWeekProducts', {show: 6})
+          .btn-wrap
+            = link_to 'SHOP ALL NEW THIS WEEK', build_taxon_path('New This Week'), class: "btn btn-black btn-md"
 
         div#dresses-menu
           ul.nav.navbar-nav

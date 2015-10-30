@@ -692,7 +692,7 @@ ul.secondary.pull-right {
     }
   }
 
-  a{
+  a:not(.btn) {
     color:black;
     font-weight: 500;
   }
