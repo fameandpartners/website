@@ -97,6 +97,36 @@ module Revolution
       where("LOWER(path) like '%#{query.downcase}%'")
     end
 
+    def limit(product_ids)
+      return self.get(:limit) || 20 if page_is_lookbook?
+      page_limit = no_of_products
+      offset = (params[:offset].present? ? params[:offset].to_i + page_limit : page_limit ).to_i
+      no_of_products = (product_ids.blank? ? 0 : product_ids.size)
+      if no_of_products >= offset
+        no_of_products = page_limit
+      else
+        no_of_products = no_of_products - (offset - page_limit)
+        no_of_products = 0 if no_of_products < 0
+      end
+      case
+        when params[:limit].present?
+          return_limit = params[:limit].to_i - no_of_products
+        when self.get(:limit)
+          return_limit = self.get(:limit).to_i - no_of_products
+        else
+          return_limit = page_limit - no_of_products
+      end
+      return_limit
+    end
+
+    def page_is_lookbook?
+      self && self.get(:lookbook)
+    end
+
+    def no_of_products
+      (params[:limit] || self.get(:limit) || 21).to_i
+    end
+
     def robots?
       noindex? || nofollow?
     end
