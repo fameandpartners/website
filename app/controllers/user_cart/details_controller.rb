@@ -13,7 +13,7 @@ class UserCart::DetailsController < UserCart::BaseController
         date_num = date_num[:days_for_making] + date_num[:days_for_delivery] + configatron.days_delivery_emergency
         max = date_num if date_num > max
       end
-      date = (Date.new + max).strftime("%d %B")
+      date = (Date.today + max).strftime("%d %B")
       render json: {date: date}
       return
     end
@@ -30,8 +30,8 @@ class UserCart::DetailsController < UserCart::BaseController
           max_non_express = date_num if date_num > max_non_express
         end
       end
-      date_express     = (Date.new + max_express).strftime("%d %B")
-      date_non_express = (Date.new + max_non_express).strftime("%d %B")
+      date_express     = (Date.today + max_express).strftime("%d %B")
+      date_non_express = (Date.today + max_non_express).strftime("%d %B")
       render json: {date_express: date_express, date_non_express: date_non_express}
     end
   end
