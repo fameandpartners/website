@@ -63,7 +63,7 @@ describe Spree::Variant, :type => :model do
       let(:new_aud_amount)   { 43 }
       let(:new_usd_amount)   { 177 }
 
-      let(:product)          { create(:spree_product) }
+      let(:product)          { create(:spree_product, price: original_amount) }
       let(:master)           { product.master }
       let(:variant)          { create(:spree_variant, product: product, price: aud_master_price.amount) }
 
@@ -71,8 +71,8 @@ describe Spree::Variant, :type => :model do
       let(:usd_master_price) { create(:price, variant: master, amount: original_amount, currency: 'USD') }
 
       before(:each) do
-        master.prices = [usd_master_price, aud_master_price]
-        master.save
+        # Guarantee that only aud_master_price and usd_master_price are the master prices
+        master.prices = [aud_master_price, usd_master_price]
       end
 
       it 'creates new variant prices' do
@@ -106,8 +106,6 @@ describe Spree::Variant, :type => :model do
       it 'saving non master variants does not touch master prices' do
         variant.prices.each { |price| price.update_attributes(amount: 555) }
         variant.save
-
-        expect(variant.prices).to include_price('USD', 555)
 
         expect(master.prices).to include_price('AUD', original_amount)
         expect(master.prices).to include_price('USD', original_amount)
