@@ -9,13 +9,6 @@ ruby:
       {link: photo_finish_collection_path, src: '/assets/home-page-tiles/hero-2', alt: 'Photo FINISH - Shop Now'},
       {link: make_a_statement_collection_path, src: '/assets/home-page-tiles/hero-3', alt: 'Bambi - Shop the Collection'}])
 
-  section.banner-sale
-    .container
-      = link_to dresses_path, class: 'media-wrap'
-        img src='#{image_path("home-page-tiles/tile-sale-full.jpg")}' srcset='
-        #{image_path("home-page-tiles/tile-sale-sml.jpg")} 768w, 
-        #{image_path("home-page-tiles/tile-sale-full.jpg")} 1024w' alt='SALE 20% off sitewide - Shop the Sale'
-
   section.carousel-strap.instagram
     .container
       .outer-wrap
