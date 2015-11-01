@@ -1,24 +1,25 @@
-- if sale_active?
-  #sale-banner.alert-sale role="alert"
-    .outer-wrap
-      .inner-wrap.icon
-        .svg-fit
-        .copy Fit guarantee
-      .inner-wrap.icon
-        .svg-waste
-        .copy Anti-wastage
+
+#sale-banner.alert-sale role="alert"
+  .outer-wrap
+    .inner-wrap.icon
+      .svg-fit
+      .copy Fit guarantee
+    .inner-wrap.icon
+      .svg-waste
+      .copy Anti-wastage
+    - if sale_active?
       .inner-wrap
         .title-wrap
           .title
             = current_sale.sitewide_message
-            '          
+            '
             = link_to 'Shop now!', mystyle_landing_page_path(lpi: 'none', sale: 'all', limit: 99)
-      .inner-wrap.icon
-        .svg-custom
-        .copy Custom styles
-      .inner-wrap.icon
-        .svg-colour
-        .copy Custom colours
+    .inner-wrap.icon
+      .svg-custom
+      .copy Custom styles
+    .inner-wrap.icon
+      .svg-colour
+      .copy Custom colours
 
 / TODO - Refactor how we apply email reminders
 - if Features.active?(:send_promotion_email_reminder)
