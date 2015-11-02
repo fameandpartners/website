@@ -15,9 +15,11 @@ ruby:
       window.app.shopping_cart.updateData(cart_data);
     })();
   "
-= content_for :inline_javascript do
-  = raw preload_cart_data
-  = raw shopping_cart_summary_init
+
+- if run_setup_script
+  = content_for :inline_javascript do
+    = raw preload_cart_data
+    = raw shopping_cart_summary_init
 
 .checkout-items
   h3
@@ -63,9 +65,9 @@ ruby:
                 .small.text-pink
                   = "#{ customization.name } + #{ customization.display_price.to_s }"
   form.promo-code action="#"
-    label.invisible for="#promo-code" Promo Code
+    label.invisible for=".promo-code-value" Promo Code
     .input-group
-      input.form-control.form-control-md#promo-code type="text" placeholder="Discount code"
+      input.form-control.form-control-md.promo-code-value type="text" placeholder="Discount code"
       span.input-group-btn
         button.btn.btn-block.btn-black.btn-md.promo-code-apply Apply
 
