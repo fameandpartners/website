@@ -52,7 +52,7 @@ class LineItemPersonalization < ActiveRecord::Base
 
   def options_hash
     values = {}
-    values['Size'] = size.presentation.to_i if size.present?
+    values['Size'] = size.presentation if size.present?
     values['Color'] = color.presentation if color.present?
 
     customization_values.each do |value|
@@ -90,7 +90,7 @@ class LineItemPersonalization < ActiveRecord::Base
 
   # Size Pricing
   def calculate_size_cost(default_extra_size_cost = LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE)
-    if add_plus_size_cost? 
+    if add_plus_size_cost?
       if (discount = size.discount).present?
         Spree::Price.new(amount: default_extra_size_cost).apply(discount).price
       else
@@ -102,23 +102,10 @@ class LineItemPersonalization < ActiveRecord::Base
   end
 
   def add_plus_size_cost?
-    # dress without small sizes
-    return false if plus_size?
-
-    # extra size
-    size && size.presentation.to_i >= locale_plus_sizes
+    # Ideally we could just ask the size for this information, one day, refactor away the "Repository"
+    product_size = Repositories::ProductSize.new( product: product ).read(size_id)
+    !! product_size.extra_price
   end
-
-  def locale_plus_sizes
-    order.get_site_version.size_settings.size_charge_start
-  rescue
-    14
-  end
-
-  def plus_size?
-    product.present? && product.taxons.where(name: "Plus Size").exists?
-  end
-  # eo size pricing
 
   # Color pricing
   def calculate_color_cost(default_custom_color_cost = LineItemPersonalization::DEFAULT_CUSTOM_COLOR_PRICE)

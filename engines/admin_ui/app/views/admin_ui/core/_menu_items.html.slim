@@ -37,6 +37,8 @@ li class=active_link_to_class('', active: /reports/)
     = active_link_to 'Sale Items', reports_sale_items_path, wrap_tag: :li
     = active_link_to 'Return Shoppers', reports_return_shoppers_path, wrap_tag: :li
     = active_link_to 'Factory Fault Returns', reports_factory_faults_path, wrap_tag: :li
+    = active_link_to 'Size Normalisations', reports_size_normalisations_path, wrap_tag: :li
+
 
 = menu_item spree.admin_path, 'Spree Admin', icon: 'shopping-cart'
 = menu_item main_app.root_path, 'Website', icon: 'globe', exact: true

@@ -348,12 +348,16 @@ module Products
         args = attrs.symbolize_keys
 
         begin
-          product = create_or_update_product(args.merge!(
-            sizes: %W{0 2 4 6 8 10 12 14 16 18 20 22 24 26}
-          ))
+          product = create_or_update_product(args)
+
+          # Not quite - Spree::OptionType.size.option_values.collect(&:name)
+          sizes = %w(
+            US0/AU4   US2/AU6   US4/AU8   US6/AU10  US8/AU12  US10/AU14
+            US12/AU16 US14/AU18 US16/AU20 US18/AU22 US20/AU24 US22/AU26
+          )
 
           add_product_properties(product, args[:properties].symbolize_keys)
-          add_product_variants(product, args[:sizes], args[:colors] || [], args[:price_in_aud], args[:price_in_usd])
+          add_product_variants(product, sizes, args[:colors] || [], args[:price_in_aud], args[:price_in_usd])
           add_product_style_profile(product, args[:style_profile].symbolize_keys)
           add_product_customizations(product, args[:customizations] || [])
           add_product_song(product, args[:song].symbolize_keys || {})

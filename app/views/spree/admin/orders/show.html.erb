@@ -12,6 +12,9 @@
 
 <%= render :partial => 'spree/admin/shared/order_tabs', :locals => { :current => 'Order Details' } %>
 
+<%= render 'size_normalisation' %>
+
+
 <div data-hook="admin_order_show_addresses" class="row">
   <fieldset class="alpha twelve columns no-border-bottom">
     <legend align="center">Details</legend>

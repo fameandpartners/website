@@ -15,7 +15,6 @@
 #   au: [4 <- free sizes -> 16, 18 <- extra price -> 26 ]
 #   us: [0 <- free sizes -> 12, 14 <- extra price -> 22 ]
 #   plus size+ dresses have free prices for extra size
-#   also, size value should be even
 #
 module Repositories; end
 class Repositories::ProductSize
@@ -33,35 +32,29 @@ class Repositories::ProductSize
   end
 
   def read_all
-    product_sizes_ids.map{|size_id| read(size_id) }.compact.sort_by{|size| size.value.to_i }
+    product_sizes_ids.map{|size_id| read(size_id) }.compact.sort_by{|size| size.sort_key }
   end
 
   def read(size_id)
     size = Repositories::ProductSize.read(size_id)
-    return nil if !valid_for_site_version?(size)
 
     if size_have_extra_price?(size)
       size.extra_price  = true
     end
 
-    size.presentation = "#{ site_version.size_settings.locale_code.upcase } #{ size.presentation }"
+    # Possibly remove this and swap on the presentation in UI layer.
+    # Shim for existing mutated behaviour
+    size.presentation = size.send("presentation_#{site_version.code.downcase}")
 
     size
   end
 
-  private
-
-    def size_have_extra_price?(size)
+  private def size_have_extra_price?(size)
       return nil if product_has_free_extra_sizes?
-      size.value >= extra_size_start
+      extra_sizes.include?(size.name)
     end
 
-    # size should have even value between 0..22 or 4...26
-    def valid_for_site_version?(size)
-      size.present? && size.value.even? && size.value >= site_version.size_settings.size_start && size.value <= site_version.size_settings.size_end
-    end
-
-    def product_has_free_extra_sizes?
+  private def product_has_free_extra_sizes?
       return @product_has_free_extra_sizes if instance_variable_defined?('@product_has_free_extra_sizes')
 
       @product_has_free_extra_sizes = begin
@@ -70,58 +63,50 @@ class Repositories::ProductSize
       end
     end
 
-    def extra_size_start
-      site_version.size_settings.size_charge_start rescue 18
+  EXTRA_SIZES = %w[
+          US14/AU18
+          US16/AU20
+          US18/AU22
+          US20/AU24
+          US22/AU26
+          US24/AU28
+          US26/AU30
+        ].freeze
+  private def extra_sizes
+    EXTRA_SIZES
+  end
+
+    def self.sizes_map
+      @sizes_map ||= fetch_sizes_map
     end
 
-    def default_size_start
-      site_version.size_settings.size_start rescue 4
-    end
+    def self.fetch_sizes_map
+      result = {}
+      Array.wrap(Spree::OptionType.size.try(:option_values)).each do |option_value|
+        # TODO - Remove value
+        value = option_value.name
 
-    def default_size_end
-      site_version.size_settings.size_end rescue 26
-    end
+        size_us, size_au = option_value.presentation.split('/')
 
-  class << self
-    def sizes_map
-      @sizes_map ||= begin
-        result = {}
-        Array.wrap(Spree::Variant.size_option_type.try(:option_values)).each do |option_value|
-          value = Integer(option_value.name) rescue option_value.name
-
-          result[option_value.id] = OpenStruct.new(
-            id: option_value.id,
-            name: option_value.name,
-            presentation: option_value.presentation,
-            value: value
-          )
-        end
-        result
+        result[option_value.id] = OpenStruct.new(
+          id:              option_value.id,
+          name:            option_value.name,
+          presentation:    option_value.presentation,
+          presentation_au: size_au,
+          presentation_us: size_us,
+          value:           value,
+          sort_key:        size_us.tr('US', '').to_i,
+          extra_price:     nil,
+        )
       end
+      result
     end
 
-    def read_all
+    def self.read_all
       sizes_map.values
     end
 
-    def read(size_id)
+    def self.read(size_id)
       sizes_map[size_id].clone
     end
-
-    def size_attributes
-      SIZE_ATTRIBUTES
-    end
-
-    def attributes_by_us_name(us_name)
-      size_attributes.detect do |attributes|
-        attributes[:name][:us].eql?(us_name.to_s)
-      end
-    end
-
-    def attributes_by_au_name(au_name)
-      size_attributes.detect do |attributes|
-        attributes[:name][:au].eql?(au_name.to_s)
-      end
-    end
-  end
 end

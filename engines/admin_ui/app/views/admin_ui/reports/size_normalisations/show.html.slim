@@ -1,0 +1,14 @@
+- content_for :page_title do
+  ' Size Normalisations
+.ibox
+  .ibox-content
+    = datagrid_form_for @collection, :method => :get, url: admin_ui.reports_size_normalisations_path
+  .ibox-footer
+    = link_to "Download CSV", url_for(format: 'csv')
+
+= paginate @collection.assets, theme: 'admin_ui'
+
+div
+  = datagrid_table @collection, html: {class: 'table table.condensed'}
+
+= paginate @collection.assets, theme: 'admin_ui'

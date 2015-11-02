@@ -88,13 +88,13 @@ module Orders
     end
 
     def country_size
-      "#{order.site_version}-#{size}"
+      "#{size} (#{order.site_version})"
     end
 
     def make_size
-      make_size = order.site_version == 'us' ? size.to_i + 4: size
-      "au-#{make_size}"
+      size
     end
+    deprecate :make_size
 
     def display_price
       Spree::Price.new(amount: price).display_price.to_s
@@ -150,7 +150,6 @@ module Orders
         :factory                 => factory,
         :color                   => colour_name,
         :size                    => country_size,
-        :make_size               => make_size,
         :customisations          => customisations.collect(&:first).join('|'),
         :promo_codes             => promo_codes.join('|'),
         :customer_notes          => order.customer_notes,
@@ -193,7 +192,6 @@ module Orders
         factory:                 '(工厂)',
         color:                   '(颜色)',
         size:                    '(尺寸)',
-        make_size:               '(尺寸)',
         customisations:          '(特殊要求)',
         customer_name:           '(客人名字)',
         customer_phone_number:   '(客人电话)',

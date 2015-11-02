@@ -7,5 +7,9 @@ FactoryGirl.define do
     featured      false
     available_on  { rand(100).days.ago.utc }
     permalink     { name.downcase.gsub(/\s/, '_') }
+
+    factory :dress_with_variants do
+      variants { create_list :dress_variant, 3 }
+    end
   end
 end

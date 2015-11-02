@@ -4,6 +4,7 @@ class Products::ProductDetailsResource
   attr_reader :site_version, :product, :color_name
 
   def initialize(options = {})
+    warn 'DEPRECATED, Invalid use of (Products::ProductDetailsResource) use Products::DetailsResource.'
     @site_version     = options[:site_version]
     @product          = options[:product]
     @color_name       = options[:color_name]

@@ -10,7 +10,7 @@ FactoryGirl.define do
       sku           { generate_sku }
 
       product       { |p| p.association(:dress) }
-      option_values { [FactoryGirl.create(:option_value)] }
+      option_values { [FactoryGirl.create(:product_size)] }
     end
   end
 end
