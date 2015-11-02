@@ -373,7 +373,7 @@ $order-summary-bg: #f7f7f9;
 
       margin-bottom: 2rem;
 
-      input.promo-code-value {
+      .promo-code-value {
         background-color: white;
         border: 1px solid $order-summary-form-inactive;
         &:focus {
