@@ -28,7 +28,7 @@ class Repositories::ProductSize
   end
 
   def product_sizes_ids
-    @product_sizes_ids ||= product_variants.map{|variant| variant.size_id}.uniq
+    @product_sizes_ids ||= product_variants.map{|variant| variant.size_id}.compact.uniq
   end
 
   def read_all
@@ -107,6 +107,7 @@ class Repositories::ProductSize
     end
 
     def self.read(size_id)
-      sizes_map[size_id].clone
+      size = sizes_map.fetch(size_id) { raise ArgumentError.new("Unknown_size_id #{size_id}") }
+      size.clone
     end
 end
