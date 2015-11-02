@@ -24,7 +24,10 @@
 .row
     button.btn.btn-block.btn-black.buy-button Add to Cart
 
-= react_component('Delivery', {date: @product.delivery_date, color: "", terms: ""})
+.row.delivered-row.simple
+  span.icon-delivery-express
+  span <b>Delivery time guaranteed</b> Get your dress by the &nbsp;
+  span.time-bold = @product.delivery_date
 
 .row.secondary-actions
   .col-md-6.col-xs-6.col-xxs-12
