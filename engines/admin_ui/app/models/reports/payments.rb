@@ -4,6 +4,8 @@ module Reports
   class Payments
     include EnumerableCSV
 
+    attr_accessor :from, :to
+
     def initialize(from:, to:)
       raise ArgumentError unless from.respond_to?(:to_date)
       raise ArgumentError unless to.respond_to?(:to_date)

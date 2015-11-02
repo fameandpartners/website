@@ -59,63 +59,56 @@ describe Spree::Variant, :type => :model do
         end
       end
 
-      let(:product) { create(:dress, price: 33) }
-      let(:master)  { product.master }
-      let(:variant) { create(:spree_variant, product: product, price: aud_master_price.amount) }
-      let(:aud_master_price)    { product.master.prices.where(currency: 'AUD').first }
-      let(:usd_master_price)    { create(:price, variant: master, amount: original_amount, currency: 'USD' ) }
-      let(:variant_price)       { variant.prices.first }
-      let(:original_amount)     { 33 }
+      let(:original_amount)  { 33 }
+      let(:new_aud_amount)   { 43 }
+      let(:new_usd_amount)   { 177 }
 
-      let(:new_aud_amount)      { 43 }
-      let(:new_usd_amount)      { 177 }
+      let(:product)          { create(:spree_product, price: original_amount) }
+      let(:master)           { product.master }
+      let(:variant)          { create(:spree_variant, product: product, price: aud_master_price.amount) }
 
+      let(:aud_master_price) { create(:price, variant: master, amount: original_amount, currency: 'AUD') }
+      let(:usd_master_price) { create(:price, variant: master, amount: original_amount, currency: 'USD') }
 
       before(:each) do
-        master.prices << usd_master_price
-        master.save
+        # Guarantee that only aud_master_price and usd_master_price are the master prices
+        master.prices = [aud_master_price, usd_master_price]
       end
 
       it 'creates new variant prices' do
         variant.prices.map(&:destroy)
 
-        aud_master_price.update_attributes(amount:  new_aud_amount)
-        usd_master_price.update_attributes(amount:  new_usd_amount)
+        aud_master_price.update_attributes(amount: new_aud_amount)
+        usd_master_price.update_attributes(amount: new_usd_amount)
 
         master.reload
         master.save
         variant.reload
 
-        expect(variant.prices).to  include_price('AUD', new_aud_amount)
-        expect(variant.prices).to  include_price('USD', new_usd_amount)
+        expect(variant.prices).to include_price('AUD', new_aud_amount)
+        expect(variant.prices).to include_price('USD', new_usd_amount)
       end
 
       it 'normalises incorrect variant prices' do
-        variant.prices.each do |v_price|
-          v_price.update_attributes(amount:  0)
-        end
+        variant.prices.each { |price| price.update_attributes(amount: 0) }
 
-        aud_master_price.update_attributes(amount:  new_aud_amount)
-        usd_master_price.update_attributes(amount:  new_usd_amount)
+        aud_master_price.update_attributes(amount: new_aud_amount)
+        usd_master_price.update_attributes(amount: new_usd_amount)
 
         master.reload
         master.save
         variant.reload
 
-        expect(variant.prices).to  include_price('AUD', new_aud_amount)
-        expect(variant.prices).to  include_price('USD', new_usd_amount)
+        expect(variant.prices).to include_price('AUD', new_aud_amount)
+        expect(variant.prices).to include_price('USD', new_usd_amount)
       end
 
-      it "saving non master variants doesn't touch master prices" do
-        variant.prices.each do |v_price|
-          v_price.update_attributes(amount:  555)
-        end
+      it 'saving non master variants does not touch master prices' do
+        variant.prices.each { |price| price.update_attributes(amount: 555) }
         variant.save
 
-        expect(variant.prices).to  include_price('AUD', 555)
-
-        expect(master.prices).to  include_price('AUD', original_amount)
-        expect(master.prices).to  include_price('USD', original_amount)
+        expect(master.prices).to include_price('AUD', original_amount)
+        expect(master.prices).to include_price('USD', original_amount)
       end
     end
   end

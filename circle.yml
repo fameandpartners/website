@@ -4,15 +4,6 @@ machine:
   services:
     - elasticsearch
 
-# database:
-#  pre:
-#    - bundle exec rake db:create db:schema:load
-# # dependencies:
-#   override:
-#     # - 'rvm-exec 2.1.5 bundle install'
-#     # - 'rvm-exec 2.2.2 bundle install'
-#
-# test:
-#   override:
-#     - 'rvm-exec 2.1.5 bundle exec rake'
-#     # - 'rvm-exec 2.2.2 bundle exec rake'
+test:
+  override:
+    - bundle exec rspec spec engines --color spec --format progress # Default: `bundle exec rspec --color spec --format progress`
