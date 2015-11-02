@@ -9,8 +9,7 @@ script type="text/javascript" src="/assets/modernizr-custom.js"
 
 link rel="canonical" href=get_canonical_href
 
-link rel="alternate" hreflang="en-US" href=get_hreflang(:us)
-link rel="alternate" hreflang="en-AU" href=get_hreflang(:au)
+= render :partial => '/layouts/redesign/hreflang'
 
 meta property="og:title" content=get_title
 meta property="og:url" content=get_canonical_href
