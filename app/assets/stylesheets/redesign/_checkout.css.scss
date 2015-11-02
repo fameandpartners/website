@@ -373,7 +373,7 @@ $order-summary-bg: #f7f7f9;
 
       margin-bottom: 2rem;
 
-      input#promo-code {
+      input.promo-code-value {
         background-color: #ffffff;
         border: 1px solid $order-summary-form-inactive;
         &:focus {
@@ -390,7 +390,7 @@ $order-summary-bg: #f7f7f9;
         width:     5em; // Firefox
         min-width: 5em; // Firefox
       }
-      input#promo-code:focus + span > .promo-code-apply {
+      input.promo-code-value:focus + span > .promo-code-apply {
         background: $order-summary-form-active;
       }
       @include iphone5 {
@@ -398,7 +398,7 @@ $order-summary-bg: #f7f7f9;
           width: 100px;
           float: left;
         }
-        #promo-code{
+        .promo-code-value{
           width: 150px;
         }
         .promo-code-apply {
@@ -416,7 +416,7 @@ $order-summary-bg: #f7f7f9;
           width: 125px;
           font-size: 1.5rem !important;
         }
-        #promo-code{
+        .promo-code-value{
           width: 180px;
         }
       }
@@ -429,7 +429,7 @@ $order-summary-bg: #f7f7f9;
           width: 155px;
           font-size: 1.5rem !important;
         }
-        #promo-code{
+        .promo-code-value{
           width: 190px;
         }
       }
