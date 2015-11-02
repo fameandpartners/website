@@ -40,7 +40,11 @@ module Policies
     end
 
     def fast_making?
-      @product.try(:fast_making) || @product.try(:making_options).any?{|mo| mo.name="Express Making"}
+      return true if @product.try(:fast_making)
+      if @product.making_options.present?
+        return true if @product.try(:making_options).any?{|mo| mo.name=="Express Making"}
+      end
+      return false
     end
 
     def delivery_date
