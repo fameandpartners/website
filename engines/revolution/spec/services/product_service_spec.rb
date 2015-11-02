@@ -2,26 +2,19 @@ require 'spec_helper'
 
 describe Revolution::ProductService do
 
-  let(:product_ids)  {
+  let(:product_ids) {
     ["471-coral", "680-light-pink", "683-burgundy", "262-white", "704-black", "504-lavender", "680-forest-green"]
   }
-  let(:fake_image) do
-    OpenStruct.new(
-        position: 1,
-        original: 'http://images.fameandpartners.com/original.png',
-        large:    'http://images.fameandpartners.com/large.png',
-        xlarge:   'http://images.fameandpartners.com/xlarge.png',
-        small:    'http://images.fameandpartners.com/small.png',
-        color:    'coral',
-        color_id: 29
-    )
-  end
-  let(:product_images) { [fake_image] }
+
   let!(:dress) { create(:dress, id: 471) }
-  let(:service)     { described_class.new(product_ids, 'au') }
+  let(:service) { described_class.new(product_ids, 'au') }
   let!(:current_site_version) { create(:site_version) }
-  let(:params) { { controller:"products/collections", action:"show", permalink:"formal", limit: 21 } }
-  subject!(:page) { Revolution::Page.create!(path: '/dresses/formal') }
+  let(:params) { {controller: "products/collections", action: "show", permalink: "formal", limit: 21} }
+  let(:limit) { 10 }
+  let(:variables) { {pids: product_ids} }
+
+  subject!(:page) { Revolution::Page.create!(path: '/dresses/formal', variables: variables) }
+
 
   it 'should parse the ids' do
     expect(service.ids).to eq ["471", "680", "683", "262", "704", "504", "680"]
@@ -32,17 +25,75 @@ describe Revolution::ProductService do
   end
 
   describe '.products' do
-    it 'given an offset greater than the number of products o products are returned' do
-      page.variables = { pids: product_ids }
-      params[:offset] = 8
-      expect(Revolution::ProductService.new(service.ids, current_site_version).products(params, 7).size).to be nil
+
+    context 'when limit is greater than the products' do
+      let(:limit) { 7 }
+      it 'given an offset greater than the number of products 0 products are returned' do
+        page.variables  = {pids: product_ids}
+        params[:offset] = 8
+        expect(Revolution::ProductService.new(service.ids, current_site_version).products(params, limit).size).to be nil
+      end
     end
 
-    it 'something' do
-      page.variables = { pids: product_ids }
-      p dress
-      p double(Spree::Image)
-      expect(Revolution::ProductService.new(service.ids, current_site_version).products(params, 7).size).to be nil
+  end
+
+  describe '.id_end' do
+    context "given 7 products" do
+      it 'returns position of 6 if limit > ids' do
+        expect(service.id_end(params, limit)).to eq 6
+      end
+
+      it 'returns position of 6 if limit = ids' do
+        limit = 7
+        expect(service.id_end(params, limit)).to eq 6
+      end
+
+      it 'returns position of 5 if limit = 6' do
+        limit = 6
+        expect(service.id_end(params, limit)).to eq 5
+      end
+
+      it 'returns position of 0 if limit = 6 and offset = 6' do
+        limit           = 6
+        params[:offset] = 6
+        expect(service.id_end(params, limit)).to eq 0
+      end
+
+      it 'returns position of -1 if limit = 7 and offset = 7' do
+        limit           = 7
+        params[:offset] = 7
+        expect(service.id_end(params, limit)).to eq -1
+      end
+    end
+  end
+
+  describe '.get_revolution_ids' do
+    context "given 7 products" do
+      it 'returns 7 ids if limit > ids' do
+        expect(service.get_revolution_ids(params, limit).size).to eq 7
+      end
+
+      it 'returns 7 ids if limit = ids' do
+        limit = 7
+        expect(service.get_revolution_ids(params, limit).size).to eq 7
+      end
+
+      it 'returns 6 ids if limit = 6' do
+        limit = 6
+        expect(service.get_revolution_ids(params, limit).size).to eq 6
+      end
+
+      it 'returns 1 ids if limit = 6 and offset = 6' do
+        limit           = 6
+        params[:offset] = 6
+        expect(service.get_revolution_ids(params, limit).size).to eq 1
+      end
+
+      it 'returns 0 ids if limit = 7 and offset = 7' do
+        limit           = 7
+        params[:offset] = 7
+        expect(service.get_revolution_ids(params, limit).size).to eq 0
+      end
     end
   end
 end
