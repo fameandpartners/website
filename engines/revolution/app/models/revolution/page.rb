@@ -127,6 +127,10 @@ module Revolution
       (params[:limit] || self.get(:limit) || 21).to_i
     end
 
+    def self.default_page
+      Revolution::Page.new(template_path: '/products/collections/show')
+    end
+
     def robots?
       noindex? || nofollow?
     end
