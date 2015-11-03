@@ -46,10 +46,13 @@ window.ShoppingBag = class ShoppingBag
       url: urlWithSitePrefix("/user_cart/order_delivery_date")
       type: 'GET'
       success: (data) =>
-        @delivery_date             = data.date
-        @delivery_date_express     = data.date_express
-        @delivery_date_non_express = data.date_non_express
-        @$container.html(@template(cart: @cart.data, country_code: @country_code, value_proposition: @value_proposition, shipping_message: @shipping_message, delivery_date: @delivery_date, delivery_date_express: @delivery_date_express, delivery_date_non_express: @delivery_date_non_express))
+        @start_date                = data.start_date
+        @end_date                  = data.end_date
+        @start_date_express        = data.start_date_express
+        @end_date_express          = data.end_date_express
+        @start_date_non_express    = data.start_date_non_express
+        @end_date_non_express      = data.end_date_non_express
+        @$container.html(@template(cart: @cart.data, country_code: @country_code, value_proposition: @value_proposition, shipping_message: @shipping_message, start_date: @start_date, end_date: @end_date, start_date_express: @start_date_express, end_date_express: @end_date_express, start_date_non_express: @start_date_non_express, end_date_non_express: @end_date_non_express))
         @rendered = true
     )
 

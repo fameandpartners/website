@@ -1,16 +1,16 @@
 var DeliveryTime = React.createClass({
   render: function(){
-    if (this.props.date != null){
+    if (this.props.start_date != null){
       return (
         <span className="time-bold">
-          {this.props.date}
+          {this.props.start_date} - {this.props.end_date}
         </span>
       )
     } else {
       return(
         <span className="time-bold">
-          <div className="clearfix">{this.props.date_express} for express making dresses</div>
-          <div className="clearfix">{this.props.date_non_express} for express standard making dresses</div>
+          <div className="clearfix">{this.props.start_date_express} - {this.props.end_date_express} for express making dresses</div>
+          <div className="clearfix">{this.props.start_date_non_express} - {this.props.end_date_non_express} for express standard making dresses</div>
         </span>
       )
     }
@@ -23,9 +23,12 @@ var Delivery = React.createClass({
   componentDidMount: function() {
     if (this.props.date == null){
       $.get(urlWithSitePrefix("/user_cart/order_delivery_date"), function(result) {
-        this.setState({date:             result.date})
-        this.setState({date_express:     result.date_express})
-        this.setState({date_non_express: result.date_non_express})
+        this.setState({start_date:               result.start_date})
+        this.setState({end_date:                 result.end_date})
+        this.setState({start_date_express:       result.start_date_express})
+        this.setState({end_date_express:         result.end_date_express})
+        this.setState({start_date_non_express:   result.start_date_non_express})
+        this.setState({end_date_non_express:     result.end_date_non_express})
       }.bind(this));
     } else {
       this.setState({date: this.props.date});
@@ -47,7 +50,7 @@ var Delivery = React.createClass({
                 Get your dress by the
               </span>
               <span className="time-bold">
-                <DeliveryTime date={this.state.date} date_express={this.state.date_express} date_non_express={this.state.date_non_express}/>
+                <DeliveryTime start_date={this.state.start_date} end_date={this.state.end_date} start_date_express={this.state.start_date_express} end_date_express={this.state.end_date_express} start_date_non_express={this.state.start_date_non_express} end_date_non_express={this.state.end_date_non_express}/>
               </span>
             </div>
 
