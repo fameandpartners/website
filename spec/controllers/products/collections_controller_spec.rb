@@ -4,7 +4,8 @@ describe Products::CollectionsController, :type => :controller do
   describe 'GET show' do
     let(:collection_details) { double('Collection Details', meta_title: 'My Title', seo_description: 'My Description') }
     let(:collection_double)  { double('Collection', details: collection_details) }
-    let(:page)               { double(Revolution::Page, :get => false, :template_path => '/products/collections/show.html.slim', :locale= => true)}
+    let(:page)               { double(Revolution::Page, :get => false, :template_path => '/products/collections/show.html.slim',
+                                      :locale= => true, title: "Test", meta_description: "Test Meta Description")}
 
     before(:each) do
       # Repositories and Resources should be tested elsewhere
