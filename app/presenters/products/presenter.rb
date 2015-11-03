@@ -201,7 +201,8 @@ module Products
 
     def delivery_date
       policy = Policies::ProjectDeliveryDatePolicy.new(self).delivery_date
-      (Date.today + policy[:days_for_making] + policy[:days_for_delivery] + configatron.days_delivery_emergency).strftime("%d %B")
+      start_date = Date.today + policy[:days_for_making] + configatron.days_delivery_emergency
+      (start_date + 1).strftime("%d %B") + " - " + (start_date + policy[:days_for_delivery]).strftime("%d %B")
     end
 
     private
