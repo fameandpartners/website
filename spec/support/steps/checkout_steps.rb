@@ -1,5 +1,9 @@
 module Acceptance
   module CheckoutSteps
+    step 'I should see the cart sidebar with the checkout button' do
+      expect(page).to have_selector('#cart', visible: true)
+    end
+
     step 'I select :state_name state' do |state_name|
       find('#order_bill_address_attributes_state_id_chosen').click
       find('li.active-result', text: state_name).click
@@ -20,10 +24,13 @@ module Acceptance
       fill_in 'card_code', with: cc_info['CVC']
     end
 
-    step 'I should see my order placed, with :dress_name dress, :size_number size' do |dress_name, size_number|
+    step 'I should see my order placed, with :dress_name dress, :size_number size and :dress_price price' do |dress_name, dress_size, dress_price|
+      dress_size_without_spaces = dress_size.delete(' ') # e.g. US10
+
       expect(page).to have_content('ORDER CONFIRMATION')
       expect(page).to have_content(dress_name)
-      expect(page).to have_content("Size:#{size_number}")
+      expect(page).to have_content(dress_price)
+      expect(page).to have_content(dress_size_without_spaces)
     end
   end
 end
