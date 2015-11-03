@@ -34,7 +34,7 @@ module Feeds
         [
             [
                 item[:product_sku],
-                item[:product_name],
+                item[:color],
                 'FRONT'
             ].join('-').parameterize.upcase,
             '.jpg'
