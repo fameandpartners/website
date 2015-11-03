@@ -55,98 +55,103 @@ class Products::CollectionsController < Products::BaseController
 
   private
 
-    def redirect_undefined
-      if params[:permalink] =~ /undefined\Z/
-        redirect_to '/undefined', status: :moved_permanently
-      end
+  def redirect_undefined
+    if params[:permalink] =~ /undefined\Z/
+      redirect_to '/undefined', status: :moved_permanently
+    end
+  end
+
+  def canonicalize_sales
+    @canonical = dresses_path if params[:sale]
+  end
+
+  def set_collection_resource
+    @collection_options = parse_permalink(params[:permalink])
+    @collection         = collection_resource(@collection_options)
+    page.collection     = @collection
+    punch_products if product_ids
+
+    append_gtm_collection(@collection)
+  end
+
+  def load_page
+    current_path = LocalizeUrlService.remove_version_from_url(request.path)
+    @page        = Revolution::Page.find_for(current_path, '/dresses/*') || Revolution::Page.default_page
+    page.params  = params
+    page.locale  = current_site_version.locale
+    @banner      = Revolution::PageBannerDecorator.new(page, params)
+  end
+
+  def punch_products
+    products             = Revolution::ProductService.new(product_ids, current_site_version).products(params, page.no_of_products)
+    @collection.products = if page.get(:curated) && product_ids.size > 0
+                             @collection.total_products = product_ids.size
+                             products
+                           else
+                             (products.first.blank? ? @collection.products : products + @collection.products)
+                           end
+  end
+
+  def set_collection_seo_meta_data
+    # set title / meta description for the page
+    @title       = "#{page.title} #{default_seo_title}"
+    @description = page.meta_description
+  end
+
+  def collection_template
+    if page.page_is_lookbook? || @collection_options
+      page.template_path
+    else
+      {file: 'public/404', layout: false, status: :not_found}
+    end
+  end
+
+  def product_ids
+    params[:pids] || page.get(:pids)
+  end
+
+  def collection_resource(collection_options)
+    resource_args = {
+        site_version: current_site_version,
+        collection:   params[:collection],
+        style:        params[:style],
+        event:        params[:event],
+        color:        params[:colour] || params[:color],
+        bodyshape:    params[:bodyshape],
+        discount:     params[:sale] || params[:discount],
+        fast_making:  params[:fast_making],
+        order:        params[:order],
+        limit:        page.limit(product_ids), # page size
+        offset:       params[:offset] || 0
+    }.merge(collection_options || {})
+    Products::CollectionResource.new(resource_args).read
+  end
+
+
+  def parse_permalink(permalink)
+    return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
+
+    available_color_groups = Spree::OptionValuesGroup.for_colors.available_as_taxon
+    if color_group = available_color_groups.find_by_name(permalink.downcase)
+      return {color_group: color_group.name}
     end
 
-    def canonicalize_sales
-      @canonical = dresses_path if params[:sale]
-    end
-
-    def set_collection_resource
-      @collection_options = parse_permalink(params[:permalink])
-      @collection = collection_resource(@collection_options)
-      page.collection = @collection
-      punch_products if product_ids
-
-      append_gtm_collection(@collection)
-    end
-
-    def load_page
-      current_path = LocalizeUrlService.remove_version_from_url(request.path)
-      @page = Revolution::Page.find_for(current_path, '/dresses/*') || Revolution::Page.default_page
-      page.params = params
-      page.locale = current_site_version.locale
-      @banner = Revolution::PageBannerDecorator.new(page, params)
-    end
-
-    def punch_products
-      products = Revolution::ProductService.new(product_ids, current_site_version).products(params, page.no_of_products)
-      @collection.products = ( products.first.blank? ? @collection.products : products + @collection.products )
-    end
-
-    def set_collection_seo_meta_data
-      # set title / meta description for the page
-      @title = "#{page.title} #{default_seo_title}"
-      @description  = page.meta_description
-    end
-
-    def collection_template
-      if page.page_is_lookbook? || @collection_options
-        page.template_path
-      else
-        { file: 'public/404', layout: false, status: :not_found }
-      end
-    end
-
-    def product_ids
-      params[:pids] || page.get(:pids)
-    end
-
-    def collection_resource(collection_options)
-      resource_args = {
-        site_version:   current_site_version,
-        collection:     params[:collection],
-        style:          params[:style],
-        event:          params[:event],
-        color:          params[:colour] || params[:color],
-        bodyshape:      params[:bodyshape],
-        discount:       params[:sale] || params[:discount],
-        fast_making:    params[:fast_making],
-        order:          params[:order],
-        limit:          page.limit(product_ids), # page size
-        offset:         params[:offset] || 0
-      }.merge(collection_options || {})
-      Products::CollectionResource.new(resource_args).read
-    end
-
-
-    def parse_permalink(permalink)
-      return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
-
-      available_color_groups = Spree::OptionValuesGroup.for_colors.available_as_taxon
-      if color_group = available_color_groups.find_by_name(permalink.downcase)
-        return { color_group: color_group.name }
-      end
-
-      if taxon = Spree::Taxon.published.find_child_taxons_by_permalink(permalink)
-        case taxonomy = taxon.taxonomy.name.downcase
+    if taxon = Spree::Taxon.published.find_child_taxons_by_permalink(permalink)
+      case taxonomy = taxon.taxonomy.name.downcase
         when 'style', 'edits', 'event'
-          return { taxonomy.to_sym => permalink }
+          return {taxonomy.to_sym => permalink}
         when 'range'
-          return { collection: permalink }
-        end
+          return {collection: permalink}
       end
-
-      # Outerwear
-      outerwear_permalink = Spree::Taxonomy::OUTERWEAR_NAME.parameterize
-      if outerwear_permalink == permalink
-        return { outerwear: outerwear_permalink, show_outerwear: true }
-      end
-
-      # Didn't find any collection associated with the permalink
-      return nil
     end
+
+    # Outerwear
+    outerwear_permalink = Spree::Taxonomy::OUTERWEAR_NAME.parameterize
+    if outerwear_permalink == permalink
+      return {outerwear: outerwear_permalink, show_outerwear: true}
+    end
+
+    # Didn't find any collection associated with the permalink
+    return nil
+  end
 end

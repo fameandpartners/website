@@ -83,10 +83,10 @@ describe Products::CollectionsController, :type => :controller do
         end
 
         context 'page is a collection' do
-          let(:collection_details_double) { double('Collection Details', meta_title: 'Collection Title', seo_description: 'Collection Meta Description') }
-          let(:collection_double) { double('Collection Double', details: collection_details_double) }
+          let!(:collection_page)        { create(:revolution_page) }
+          let!(:collection_translation) { create(:revolution_translation, page: collection_page, title: 'Collection Title', meta_description: 'Collection Meta Description', locale: 'en-US') }
 
-          before(:each) { controller.instance_variable_set(:@collection, collection_double) }
+          before(:each) { controller.instance_variable_set(:@page, collection_page) }
 
           it 'uses the collection details and meta_description' do
             controller.send(:set_collection_seo_meta_data)
