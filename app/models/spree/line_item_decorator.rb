@@ -81,4 +81,8 @@ Spree::LineItem.class_eval do
   def factory
     Factory.for_product(product)
   end
+
+  def promotional_gift?
+    product.try(:name) == "Gift"
+  end
 end
