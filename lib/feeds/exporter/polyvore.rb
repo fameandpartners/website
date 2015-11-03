@@ -1,5 +1,3 @@
-require "net/http"
-
 module Feeds
   module Exporter
     class Polyvore < CPC
