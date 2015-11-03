@@ -100,11 +100,11 @@
     <div class="delivery-text text-center">
       <span class="icon-delivery-express"></span>DELIVERY DATE IF YOU ORDER TODAY
     </div>
-    <% if @delivery_date :%>
-      <div class="delivery-date-text text-center">By <%= @delivery_date %></div>
+    <% if @start_date :%>
+      <div class="delivery-date-text text-center">By <%= @start_date %> - <%= @end_date %> </div>
     <% else: %>
-      <div class="delivery-date-text text-center">By <%= @delivery_date_express %> for fast making dresses</div>
-      <div class="delivery-date-text text-center">By <%= @delivery_date_non_express %> for standard making dresses</div>
+      <div class="delivery-date-text text-center">By <%= @start_date_express %> - <%= @end_date_express %> for fast making dresses</div>
+      <div class="delivery-date-text text-center">By <%= @start_date_non_express %> - <%= @end_date_non_express %> for standard making dresses</div>
     <% end %>
   </div>
 </div>
