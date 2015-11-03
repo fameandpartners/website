@@ -36,6 +36,16 @@
       background: $c-neutral-black;
     }
 
+    @include mobile {
+
+      & .copy-wrap {
+        height: 35px;
+        line-height: 35px;
+        font-size: 0.75em;
+      }
+
+    }
+
   }
 
   .item-span-2 {
@@ -43,6 +53,23 @@
 
     .media-wrap {
       padding-bottom: 323%;
+    }
+
+    @media (max-width: $bootstrap-md-width - 1px) {
+
+      &.mobile-1 {
+        
+        .media-wrap {
+          padding-bottom: 143%;
+
+          img {
+            margin-top: -30px;
+          }
+
+        }
+
+      }
+
     }
     
   }
