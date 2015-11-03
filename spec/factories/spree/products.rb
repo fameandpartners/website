@@ -8,8 +8,12 @@ FactoryGirl.define do
     available_on  { rand(100).days.ago.utc }
     permalink     { name.downcase.gsub(/\s/, '_') }
 
-    factory :dress_with_variants do
-      variants { create_list :dress_variant, 3 }
+    factory :dress_with_variants do |f|
+      after(:create) do |dress, _evaluator|
+        3.times do
+          dress.variants << create(:dress_variant, product: dress)
+        end
+      end
     end
   end
 end

@@ -92,7 +92,7 @@ module Repositories
             extra_price:     nil
           )
 
-          expect(size_repo.class.read_all).to eq [size_struct]
+          expect(size_repo.class.read_all).to include size_struct
         end
       end
 

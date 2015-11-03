@@ -14,5 +14,15 @@ FactoryGirl.define do
 
       option_type { create :option_type, :size }
     end
+
+    factory :product_colour do
+
+      name         { "red" }
+      presentation { "Red" }
+
+      option_type { create :option_type, :color }
+    end
+
+
   end
 end
