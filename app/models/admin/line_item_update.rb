@@ -136,7 +136,7 @@ module Admin
 
     def items_matching_style(order, style)
       order.line_items.select do |i|
-        i.variant.sku.to_s.start_with? style
+        i.variant.sku.to_s.downcase.start_with?(style.to_s.downcase)
       end.collect { |item|
         ::Orders::LineItemPresenter.new(item, order)
       }
