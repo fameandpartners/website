@@ -90,16 +90,11 @@ class Products::CollectionsController < Products::BaseController
       @collection.products = products + @collection.products
     end
 
-    def set_collection_seo_meta_data
-      # set title / meta description for the page
-      if page.present?
-        @title = "#{page.title} #{default_seo_title}"
-        @description  = page.meta_description
-      else
-        @title = "#{@collection.details.meta_title} #{default_seo_title}"
-        @description  = @collection.details.seo_description
-      end
-    end
+  def set_collection_seo_meta_data
+    # set title / meta description for the page
+    @title       = "#{page.title} #{default_seo_title}"
+    @description = page.meta_description
+  end
 
     def collection_template
       if page_is_lookbook? || @collection_options

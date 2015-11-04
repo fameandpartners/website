@@ -4,8 +4,8 @@ describe Products::CollectionsController, :type => :controller do
   describe 'GET show' do
     let(:collection_details) { double('Collection Details', meta_title: 'My Title', seo_description: 'My Description') }
     let(:collection_double)  { double('Collection', details: collection_details) }
-    let(:page)               { double(Revolution::Page, :get => false, :template_path => '/products/collections/show.html.slim',
-                                      :locale= => true, title: "Test", meta_description: "Test Meta Description")}
+    let(:page)               { Revolution::Page.create!(path: '/dresses', :template_path => '/products/collections/show.html.slim') }
+    let!(:translation) { page.translations.create!(:locale => 'en-US', :title => 'Collection Title', :meta_description => "Collection Meta Description") }
 
     before(:each) do
       # Repositories and Resources should be tested elsewhere
@@ -81,10 +81,10 @@ describe Products::CollectionsController, :type => :controller do
         end
 
         context 'page is a collection' do
-          let(:collection_details_double) { double('Collection Details', meta_title: 'Collection Title', seo_description: 'Collection Meta Description') }
-          let(:collection_double) { double('Collection Double', details: collection_details_double) }
 
-          before(:each) { controller.instance_variable_set(:@collection, collection_double) }
+          let(:translation) { build(:revolution_translation, :locale => 'en-US', :title => 'Collection Title', :meta_description => 'Collection Meta Description') }
+
+          before(:each) { controller.instance_variable_set(:@page, translation) }
 
           it 'uses the collection details and meta_description' do
             controller.send(:set_collection_seo_meta_data)

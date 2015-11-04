@@ -1,12 +1,22 @@
 require 'spec_helper'
 
 describe Revolution::Page do
-  let(:path)     { '/blah/vtha' }
-  let(:title)    { 'Blah Vtha' }
+  let(:path) { '/blah/vtha' }
+  let(:title) { 'Blah Vtha' }
 
   subject(:page) { Revolution::Page.create!(:path => path) }
 
   it { is_expected.to validate_presence_of :path }
+
+  it { is_expected.to delegate_method(:title).to(:translation) }
+  it { is_expected.to delegate_method(:meta_description).to(:translation) }
+
+  context 'an empty translation' do
+    describe 'has empty values' do
+      it { expect(page.title).to be_nil }
+      it { expect(page.meta_description).to be_nil }
+    end
+  end
 
   describe 'robots' do
     context 'no noindex, nofollow' do
@@ -24,7 +34,7 @@ describe Revolution::Page do
 
     context 'noindex, nofollow' do
       before do
-        page.noindex = true
+        page.noindex  = true
         page.nofollow = true
       end
       it { expect(page).to be_robots }
@@ -39,7 +49,7 @@ describe Revolution::Page do
         page.publish!(1.day.ago)
       end
       it 'should handle multiple paths' do
-        found = Revolution::Page.find_for('/aguirre','/blah/vtha')
+        found = Revolution::Page.find_for('/aguirre', '/blah/vtha')
         expect(found).to eq page
       end
     end
@@ -129,9 +139,9 @@ describe Revolution::Page do
   end
 
   describe 'with a collection' do
-    let(:heading)     { 'BLAH!' }
+    let(:heading) { 'BLAH!' }
     let(:sub_heading) { 'VTHA!' }
-    let(:collection)  { double('Collection') }
+    let(:collection) { double('Collection') }
 
     before do
       allow(page).to receive(:collection).and_return(collection)
@@ -146,10 +156,10 @@ describe Revolution::Page do
   end
 
   describe 'translations' do
-    let!(:translation)  { page.translations.create!(:locale => locale, :title => title, :meta_description => title) }
+    let!(:translation) { page.translations.create!(:locale => locale, :title => title, :meta_description => title) }
 
     context 'with locale translation' do
-      let(:locale)    { 'en-AU' }
+      let(:locale) { 'en-AU' }
 
       it 'should have a translation' do
         expect(page.translations.find_for_locale(locale)).to eq translation
@@ -161,8 +171,8 @@ describe Revolution::Page do
       end
 
       context 'with a collection' do
-        let(:heading)     { 'BLAH!' }
-        let(:collection)  { double('Collection') }
+        let(:heading) { 'BLAH!' }
+        let(:collection) { double('Collection') }
 
         before do
           allow(page).to receive(:collection).and_return(collection)
@@ -177,7 +187,7 @@ describe Revolution::Page do
     end
 
     context 'without locale translation' do
-      let(:locale)    { 'en-US' }
+      let(:locale) { 'en-US' }
       it 'should have a translation' do
         expect(page.translations.find_for_locale('en-VTHA')).to eq translation
       end

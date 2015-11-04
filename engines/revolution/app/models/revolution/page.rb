@@ -21,7 +21,7 @@ module Revolution
 
     serialize :variables, Hash
 
-    delegate :title, :meta_description, :to => :translation
+    delegate :title, :meta_description, :to => :translation, allow_nil: true
 
     attr_accessor :locale, :collection
 
