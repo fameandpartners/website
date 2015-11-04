@@ -57,7 +57,7 @@ module Shipping
 
 
         # Simple case
-        if lit.order.line_items.count == 1
+        if lit.order.line_items.reject(&:promotional_gift?).count == 1
           unless lit.shipment.shipped?
             if lit.shipment.tracking != lit.tracking_number
               lit.shipment.tracking = lit.tracking_number
@@ -132,18 +132,24 @@ module Shipping
           next :already_shipped
         end
 
-        if shipment.line_items.count == 1 && possible_to_ship
+        # Gifts shouldn't stop the marking of a shipment as shipped.
+        shipment_item_count = shipment.line_items.reject(&:promotional_gift?).count
+
+        if shipment_item_count == 1 && possible_to_ship
           shipper = Admin::ReallyShipTheShipment.new(shipment, shipment.tracking)
 
-          if shipper.valid? && shipper.ship! && ! shipper.error?
-            shipment.line_items.map do |li|
-              UpdateFabrication.state_change(li, user, 'shipped')
+          if shipper.valid?
+            shipper.ship! do
+              shipment.line_items.map do |li|
+                UpdateFabrication.state_change(li, user, 'shipped')
+              end
+              tracking_items.map do |ti|
+                ti.process(:shipped)
+              end
             end
+          end
 
-            tracking_items.map do |ti|
-              ti.process(:shipped)
-            end
-          else
+          if shipper.error?
             tracking_items.map do |ti|
               ti.fail(:failed_to_ship!)
               ti.shipment_errors = shipper.errors.full_messages.uniq
@@ -151,7 +157,7 @@ module Shipping
           end
         end
 
-        if shipment.line_items.count > 1 && !shipment.shipped?
+        if shipment_item_count > 1 && !shipment.shipped?
           tracking_items.map do |ti|
             ti.pending(:multiple_items)
           end
