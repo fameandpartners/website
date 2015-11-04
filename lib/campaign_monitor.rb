@@ -44,13 +44,20 @@ class CampaignMonitor
     subscriber = CreateSend::Subscriber.new(list_id, email)
 
     subscriber.update(attributes[:email], attributes[:full_name], formatted_custom_fields, false)
-  rescue StandardError => _error
-    NewRelic::Agent.notice_error(_error)
+
+  rescue CreateSend::BadRequest => _e
     begin
-    # Yea, lets maybe 500 the app on login.
+      # Trying to update a subscriber often fails with an error,
+      # which we seem to workaround by adding the user.
+      #
+      #   CreateSend::BadRequest:
+      #     The CreateSend API responded with the following error -
+      #     203: Subscriber not in list or has already been removed.
     CreateSend::Subscriber.add(list_id, attributes[:email], attributes[:full_name], formatted_custom_fields, false)
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)
     end
+  rescue StandardError => error
+    NewRelic::Agent.notice_error(error)
   end
 end
