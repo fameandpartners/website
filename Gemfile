@@ -153,3 +153,5 @@ group :production do
   gem 'unicorn'
   gem 'aws-sdk'
 end
+
+gem 'mailchimp-api', require: 'mailchimp'

@@ -490,6 +490,9 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mailchimp-api (2.0.6)
+      excon (>= 0.16.0)
+      json (>= 1.7.7)
     mastercard_api (0.0.1)
     mastercard_masterpass_api (0.0.1)
     meta_request (0.3.4)
@@ -657,7 +660,7 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     retriable (2.0.2)
-    rmagick (2.15.0)
+    rmagick (2.15.4)
     rollout (2.1.0)
     roo (1.13.2)
       nokogiri
@@ -875,6 +878,7 @@ DEPENDENCIES
   jquery-ui-rails
   launchy (= 2.2.0)
   letter_opener (~> 1.4.1)
+  mailchimp-api
   meta_request
   net-ssh (~> 2.7.0)
   newrelic_rpm

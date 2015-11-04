@@ -65,6 +65,11 @@ configatron.campaign_monitor do |campaign_monitor|
   campaign_monitor.list_id = 'dafc8802250a7fb08c840d9c4ffadc9f'
 end
 
+configatron.mailchimp do |mailchimp|
+  mailchimp.api_key = '0340ea09d6c21efd808cce3d9c9440f6-us7'
+  mailchimp.list_id = '48f8d360f7'
+end
+
 configatron.redis_host = ::FameAndPartners.yaml_config("redis.local.yml")[Rails.env][:hosts]
 configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
 
