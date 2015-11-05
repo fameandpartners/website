@@ -61,6 +61,25 @@
           <div class="total"><%#= product.price.display_price %></div>
           -->
         </div>
+
+        <% if product.name != "Gift" : %>
+        <div class="delivery-wrap-compact">
+          <div class="inner-wrap">
+            <span class="icon icon-delivery-express"></span>
+            <p>
+              <em>Delivery Guaranteed*</em> between
+              <% if @start_date :%>
+                <%= @start_date %> and <%= @end_date %>
+              <% else if @start_date_express : %>
+                <%= @start_date_express %> and <%= @end_date_express %>
+              <% else if @start_date_non_express : %>
+                <%= @start_date_non_express %> and <%= @end_date_non_express %>
+              <% end %>
+            </p>
+          </div>
+        </div>
+        <% end %>
+
       </div>
     </li>
   <% end %>
@@ -92,20 +111,6 @@
         <input type="submit" value="CHECKOUT" class="btn btn-black btn-block">
       </div>
     </form>
-  </div>
-</div>
-
-<div class='delivery-date-wrapper'>
-  <div class="inner">
-    <div class="delivery-text text-center">
-      <span class="icon-delivery-express"></span>DELIVERY DATE IF YOU ORDER TODAY
-    </div>
-    <% if @start_date :%>
-      <div class="delivery-date-text text-center">By <%= @start_date %> - <%= @end_date %> </div>
-    <% else: %>
-      <div class="delivery-date-text text-center">By <%= @start_date_express %> - <%= @end_date_express %> for fast making dresses</div>
-      <div class="delivery-date-text text-center">By <%= @start_date_non_express %> - <%= @end_date_non_express %> for standard making dresses</div>
-    <% end %>
   </div>
 </div>
 
