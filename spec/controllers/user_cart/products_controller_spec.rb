@@ -2,13 +2,13 @@ require 'spec_helper'
 
 module UserCart
   describe ProductsController, :type => :controller do
-    let(:order) { create(:spree_order) }
-    before(:each) { allow(controller).to receive(:current_order).and_return(order) }
+    let(:order)                        { create(:spree_order) }
+    before(:each)                      { allow(controller).to receive(:current_order).and_return(order) }
 
     describe 'user add a dress to cart ' do
-      let!(:product) { create(:dress) }
-      let!(:variant) { create(:spree_variant, product_id: product.id, sku: 'my-test-sku') }
-      let!(:variant2) { create(:spree_variant, product_id: product.id, sku: 'my-test-sku2') }
+      let!(:product)                   { create(:dress) }
+      let!(:variant)                   { create(:spree_variant, product_id: product.id, sku: 'my-test-sku') }
+      let!(:variant2)                  { create(:spree_variant, product_id: product.id, sku: 'my-test-sku2') }
       let!(:line_item_personalization) { LineItemPersonalization.new }
 
       before(:each) do
@@ -41,8 +41,8 @@ module UserCart
     end
 
     describe 'add gift to cart via ajax' do
-      let!(:gift) { create(:spree_product, name: 'Gift', price: 0) }
-      let!(:gift_variant) { create(:spree_variant, product_id: gift.id, sku: 'gift-Color:Casablanca') }
+      let!(:gift)                      { create(:spree_product, name: 'Gift', price: 0) }
+      let!(:gift_variant)              { create(:spree_variant, product_id: gift.id, sku: 'gift-Color:Casablanca') }
 
       context 'somehow, adds a gift to an empty cart' do
 
@@ -60,7 +60,7 @@ module UserCart
       end
 
       context 'adds a gift to a non empty cart' do
-        let!(:order) { create(:complete_order_with_items) }
+        let!(:order)                   { create(:complete_order_with_items) }
 
         it 'adds gift to the cart' do
           expect(order.line_items.size).to eq(1)
