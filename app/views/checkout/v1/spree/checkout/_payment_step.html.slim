@@ -12,6 +12,8 @@ h2.checkout-section-title 3. Choose your payment method
 / TODO - Rewrite as react component with new button layout and behaviour
 p All transactions are secure and encrypted. Credit card information is never stored.
 
+= react_component('Delivery')
+
 #payment-selection.panel-group aria-multiselectable="false" role="tablist"
   - if @credit_card_gateway
     #credit_card_choice.panel
@@ -43,8 +45,6 @@ p All transactions are secure and encrypted. Credit card information is never st
 p
     ' By making this purchase you are agreeing to the Fame & Partners
     a href="/terms.html" Term & Conditions.
-
-= react_component('Delivery', {color: "pink-bg", terms: "show-terms"})
 
 .row
   .col-md-12
