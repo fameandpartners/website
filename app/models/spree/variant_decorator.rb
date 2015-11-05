@@ -22,7 +22,6 @@ Spree::Variant.class_eval do
   end
 
   def in_sale?
-    #current_sale.active?
     discount.present?
   end
 
