@@ -108,16 +108,10 @@ class  UserCart::Populator
     def add_personalized_product
       personalization = build_personalization
       if personalization.valid?
-        if line_item.blank? # user already have customized dress [ we can't have more than one personalization per dress ]
-          add_product_to_cart(ignore_stock_level = true)
-        end
-
-        if line_item.present?
-          line_item.personalization.try(:destroy)
-          personalization.line_item = line_item
-          line_item.personalization = personalization
-          personalization.save
-        end
+        add_product_to_cart(ignore_stock_level = true)
+        personalization.line_item = line_item
+        line_item.personalization = personalization
+        personalization.save
       end
 
       true

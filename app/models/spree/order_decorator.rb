@@ -206,34 +206,28 @@ Spree::Order.class_eval do
   end
 
   def add_variant(variant, quantity = 1, currency = nil)
-    current_item = find_line_item_by_variant(variant)
-    if current_item
-      current_item.quantity += quantity
-      current_item.currency = currency unless currency.nil?
-      current_item.save
-    else
-      price = get_price_for_line_item(variant: variant, currency: currency)
-      current_item = Spree::LineItem.new(:quantity => quantity)
-      current_item.variant = variant
-      if currency
-        current_item.currency    = currency
+    price = get_price_for_line_item(variant: variant, currency: currency)
+    current_item = Spree::LineItem.new(:quantity => quantity)
+    current_item.variant = variant
+    if currency
+      current_item.currency    = currency
 
-        if variant.in_sale?
-          current_item.price = price.apply(variant.discount).amount
-          current_item.old_price = price.amount
-        else
-          current_item.price = price.amount
-        end
+      if variant.in_sale?
+        current_item.price = price.apply(variant.discount).amount
+        current_item.old_price = price.amount
       else
-        if variant.in_sale?
-          current_item.price = price.apply(variant.discount).amount
-          current_item.old_price = price.amount
-        else
-          current_item.price = price.amount
-        end
+        current_item.price = price.amount
       end
-      self.line_items << current_item
+    else
+      if variant.in_sale?
+        current_item.price = price.apply(variant.discount).amount
+        current_item.old_price = price.amount
+      else
+        current_item.price = price.amount
+      end
     end
+    self.line_items << current_item
+    #end
 
     self.reload
     current_item
