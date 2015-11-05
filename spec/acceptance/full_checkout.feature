@@ -4,6 +4,7 @@ Feature: Full checkout
     Given A sample database with valid data
     And Data is setup correctly
 
+  # TODO: Payment step require connection to PIN payment method. This should be recorded by VCR, not ignored.
   @javascript @no_vcr
   Scenario Outline: Buy a Dress
     When I am on Connie dress page

@@ -3,6 +3,7 @@ module Acceptance
     DUMP_FILE     = Rails.root.join('spec', 'fixtures', 'database_snapshots', 'minified_production_data.dump')
     TEST_DATABASE = Rails.configuration.database_configuration['test']
 
+    # TODO: Specs should be factory based, not database restored.
     # User           => email: spree@example.com, password: 123456
     # Product        => name: Connie, id: 681
     # Payment Method => PIN test
