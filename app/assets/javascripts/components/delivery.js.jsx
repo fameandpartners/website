@@ -39,12 +39,14 @@ var Delivery = React.createClass({
   render: function() {
     return(
       <div className="row">
-        <div className="delivery-wrap">
-          <div className="inner-wrap">
-            <span className="icon icon-delivery-express"></span>
-            <div>
-              <div className="title">Delivery Guaranteed*</div>
-              <DeliveryTime start_date={this.state.start_date} end_date={this.state.end_date} start_date_express={this.state.start_date_express} end_date_express={this.state.end_date_express} start_date_non_express={this.state.start_date_non_express} end_date_non_express={this.state.end_date_non_express}/>
+        <div className="col-md-12">
+          <div className="delivery-wrap">
+            <div className="inner-wrap">
+              <span className="icon icon-delivery-express"></span>
+              <div>
+                <div className="title">Delivery Guaranteed*</div>
+                <DeliveryTime start_date={this.state.start_date} end_date={this.state.end_date} start_date_express={this.state.start_date_express} end_date_express={this.state.end_date_express} start_date_non_express={this.state.start_date_non_express} end_date_non_express={this.state.end_date_non_express}/>
+              </div>
             </div>
           </div>
         </div>
