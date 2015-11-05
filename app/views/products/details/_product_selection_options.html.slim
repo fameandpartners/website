@@ -24,10 +24,13 @@
 .row
     button.btn.btn-block.btn-black.buy-button Add to Cart
 
-.row.delivered-row.simple
-  span.icon-delivery-express
-  span <b>Delivery time guaranteed</b> Get your dress by the &nbsp;
-  span.time-bold = @product.delivery_date
+.row
+  .delivery-wrap-compact
+    .inner-wrap
+      .icon.icon-delivery-express
+      p
+        em Delivery Guaranteed* 
+        span = ' between ' + @product.delivery_date
 
 .row.secondary-actions
   .col-md-6.col-xs-6.col-xxs-12
