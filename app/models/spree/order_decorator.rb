@@ -199,7 +199,7 @@ Spree::Order.class_eval do
     # TODO - OMG MAGIC NUMBERS
     # Plus Size Pricing
     if add_plus_size_cost?(variant)
-      price.amount += 20
+      price.amount += LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE
     end
 
     price
