@@ -204,6 +204,10 @@ Spree::Order.class_eval do
     price
   end
 
+  # CURRENTLY , WE ARE ADDING NEW LINE_ITEM PER REQUEST IN ORDER TO ALLOW MULTIPLE CUSTOMIZED DRESSES TO BE ADDED TO CART
+  # ( THE OLD LOGIC OF PULLING LINE_ITEM BASED ON VARIANT_ID IS GOT RID OF )
+  # WITH THIS SOLUTION , WE ARE NOW HAVING AN SMALL ISSUE WITH MULTIPLE SAME ITEM WITH QUANTITY = 1
+  # SINCE THIS SMALL ISSUE IS NOT REALLY DAMAGING , WE WANT TO LEAVE IT LIKE THAT FOR NOW
   def add_variant(variant, quantity = 1, currency = nil)
     price = get_price_for_line_item(variant: variant, currency: currency)
     current_item = Spree::LineItem.new(:quantity => quantity)
