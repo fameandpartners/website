@@ -13,7 +13,7 @@ describe Spree::Taxon, :type => :model do
 
         it 'it returns taxons from the taxonomy' do
           result = described_class.from_taxonomy('Clothes')
-          expect(result).to match([jeans_taxon, material_taxon])
+          expect(result).to match_array([jeans_taxon, material_taxon])
         end
       end
     end

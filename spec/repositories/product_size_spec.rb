@@ -2,19 +2,19 @@ require 'spec_helper'
 require 'ostruct'
 
 module Repositories
-  RSpec.describe ProductSize do
+  RSpec.describe ProductSize, memoization_support: true do
+
+    let(:site_version) { build_stubbed(:site_version) }
 
     before :each do
       # Sigh
-      ProductSize.instance_variable_set(:@sizes_map, nil)
-      Spree::Variant.instance_variable_set(:@size_option_type, nil)
-      Spree::OptionType.instance_variable_set(:@size, nil)
+      rememoize(ProductSize, :@sizes_map)
+      rememoize(Spree::Variant, :@size_option_type)
+      rememoize(Spree::OptionType, :@size)
     end
 
     context 'characterisation' do
       context 'without sizes / variants' do
-        let(:site_version) { seed_site_zone }
-
         let(:product) { create :dress }
         subject(:size_repo) { described_class.new(site_version: site_version, product: product) }
 
@@ -23,8 +23,6 @@ module Repositories
       end
 
       context 'with sizes, but no products' do
-        let(:site_version) { seed_site_zone }
-
         let(:product) { create :dress }
         subject(:size_repo) { described_class.new(site_version: site_version, product: product) }
 
@@ -63,8 +61,6 @@ module Repositories
 
       context 'with sizes, and products' do
         let(:product_variants) { Repositories::ProductVariants.new(product_id: product.id).read_all }
-
-        let(:site_version) { seed_site_zone }
 
         let(:product) { create :dress_with_variants }
         subject(:size_repo) do

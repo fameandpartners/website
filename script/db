@@ -50,7 +50,7 @@ function dump_uat_db
 function dump_development_db
 {
   _setup_dump 'development'
-  pg_dump --format=custom --dbname=${DEV_DB} > $EXPORT_FILE &
+  pg_dump --format=custom --no-acl --no-owner --dbname=${DEV_DB} > $EXPORT_FILE &
   _spinner $!
 }
 

@@ -1,31 +1,44 @@
 require 'spec_helper'
 
-describe Spree::OptionValue, type: :model do
-  context "#colors" do
-    it 'returns options values for color option type' do
-      color_option_type = create(:option_type, :color)
-      color_option_type.option_values.create(name: 'foo-red', presentation: 'foo-red')
-      
-      expect(Spree::OptionValue.colors.size).to eq(1)
-      expect(Spree::OptionValue.colors.first.name).to eq('foo-red')
+describe Spree::OptionValue, type: :model, memoization_support: true do
+  describe 'scopes' do
+    before(:each) do
+      rememoize(Spree::OptionType, :@color)
+      rememoize(Spree::OptionType, :@size)
     end
 
-    it 'returns empty relation if no color option type' do
-      expect(Spree::OptionValue.colors).to be_empty
-    end
-  end
+    describe '.colors' do
+      context 'No color option type created' do
+        it 'returns empty relation if no color option type' do
+          expect(described_class.colors).to be_empty
+        end
+      end
 
-  context "#sizes" do
-    it 'returns options values for size option type' do
-      size_option_type = create(:option_type, :size)
-      size_option_type.option_values.create(name: 'x-foo-size', presentation: 'x-foo-size')
-      
-      expect(Spree::OptionValue.sizes.size).to eq(1)
-      expect(Spree::OptionValue.sizes.first.name).to eq('x-foo-size')
+      context 'Color option type created' do
+        let!(:color_option_type) { create(:option_type, :color) }
+        let!(:color_option_value) { create(:option_value, presentation: 'foo-red', name: 'foo-red', option_type: color_option_type) }
+
+        it 'returns options values for color option type' do
+          expect(described_class.colors).to eq([color_option_value])
+        end
+      end
     end
 
-    it 'returns empty relation if no size option type' do
-      expect(Spree::OptionValue.sizes).to be_empty
+    describe '.sizes' do
+      context 'No size option type created' do
+        it 'returns empty relation if no size option type' do
+          expect(described_class.sizes).to be_empty
+        end
+      end
+
+      context 'Size option type created' do
+        let!(:size_option_type) { create(:option_type, :size) }
+        let!(:size_option_value) { create(:option_value, name: 'foo-size', presentation: 'foo-size', option_type: size_option_type) }
+
+        it 'returns options values for size option type' do
+          expect(described_class.sizes).to eq([size_option_value])
+        end
+      end
     end
   end
 end
