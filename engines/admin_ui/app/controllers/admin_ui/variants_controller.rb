@@ -8,12 +8,22 @@ module AdminUi
 
       scope do
         Spree::Variant
+          .active
           .includes(:option_values, :option_values, :product)
           .where(product_id: Spree::Product.active)
       end
 
-      column :sku
-      column :generate_sku
+
+      column :name
+      column :dress_color do |x|
+        x.dress_color.try(:name)
+      end
+      column :dress_size do |x|
+        x.dress_size.try(:name)
+      end
+
+      column :sku, label: 'Old Sku'
+      column :generate_sku, label: 'New SKU'
 
     end
 
