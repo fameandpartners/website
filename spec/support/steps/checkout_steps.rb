@@ -1,7 +1,8 @@
 module Acceptance
   module CheckoutSteps
     step 'I should see the cart sidebar with the checkout button' do
-      expect(page).to have_selector('#cart', visible: true)
+      expect(page).to have_content('Shopping Bag')
+      find(:button, 'CHECKOUT')
     end
 
     step 'I select :state_name state' do |state_name|
