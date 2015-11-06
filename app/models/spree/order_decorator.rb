@@ -196,7 +196,6 @@ Spree::Order.class_eval do
     currency ||= self.currency
     price = variant.price_in(currency)
 
-    # TODO - OMG MAGIC NUMBERS
     # Plus Size Pricing
     if add_plus_size_cost?(variant)
       price.amount += LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE
