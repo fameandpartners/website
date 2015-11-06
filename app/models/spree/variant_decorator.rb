@@ -62,32 +62,7 @@ Spree::Variant.class_eval do
   end
 
   def generate_sku
-    return sku if is_master?
-
-    sku_chunks = []
-    master = nil
-
-    if product.master.present?
-      master = product.master
-    elsif product.variants.present?
-      master = product.variants.first
-    end
-
-    if master && master.sku.present?
-      sku_chunks.push(master.sku)
-    else
-      sku_chunks.push(product.permalink)
-    end
-
-    self.option_values.sort_by(&:id).each do |value|
-      name = value.option_type.name.sub(/^dress-/, '').try(:capitalize)
-      chunk = "#{name}:#{value.presentation}"
-      sku_chunks.push(chunk)
-    end
-
-    sku_chunks.reject(&:blank?).join('-')
-  rescue
-    nil
+    ::VariantSku.new(self).call
   end
 
   def generate_sku!

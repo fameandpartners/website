@@ -15,5 +15,16 @@ FactoryGirl.define do
         end
       end
     end
+
+    factory :dress_with_magenta_size_10 do |f|
+      after(:create) do |dress, _evaluator|
+
+        magenta = create(:product_colour, name: 'magenta', presentation: 'Magenta')
+        ten     = create(:product_size, size_template: 10)
+
+
+        dress.variants << create(:dress_variant, product: dress, option_values: [magenta, ten] )
+      end
+    end
   end
 end
