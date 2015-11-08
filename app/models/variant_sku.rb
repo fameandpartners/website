@@ -16,7 +16,7 @@ class VariantSku
     end
 
     if variant.dress_color
-      parts << variant.dress_color.id
+      parts << "C#{variant.dress_color.id}"
     end
 
     parts.join('-')
