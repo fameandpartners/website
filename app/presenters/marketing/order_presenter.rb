@@ -89,5 +89,10 @@ module Marketing
         }
       end
     end
+    # I'm pretty sure this method is deprecated in favor of the same method in
+    # app/presenters/orders/order_presenter.rb
+    class << self
+      deprecate :build_line_items_for_production
+    end
   end
 end
