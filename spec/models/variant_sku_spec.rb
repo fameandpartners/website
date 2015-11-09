@@ -28,16 +28,12 @@ RSpec.describe VariantSku do
         Spree::Variant.instance_variable_set(:@color_option_type, nil)
       end
 
-      it 'smoke' do
-        expect(sku).to eq "OMGWTFBBQ-US10AU14-C#{colour_id}"
+      it 'contains a complete SKU' do
+        expect(sku).to eq "OMGWTFBBQUS10AU14C#{colour_id}"
       end
 
       it 'includes the style number' do
         expect(sku).to include(style_number)
-      end
-
-      it do
-        expect(sku).to start_with 'OMGWTFBBQ-US10AU14'
       end
 
       it 'includes the colour id' do

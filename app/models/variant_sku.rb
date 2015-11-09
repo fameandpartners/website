@@ -19,7 +19,7 @@ class VariantSku
       parts << "C#{variant.dress_color.id}"
     end
 
-    parts.join('-')
+    parts.join('')
   rescue
     variant.sku.to_s.upcase
   end
