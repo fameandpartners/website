@@ -1,47 +1,22 @@
 FameAndPartners::Application.routes.draw do
-  get '/robots', to: 'robots#show', constraints: { format: /txt/ }
+  get '/us/*whatevs' => redirect(path: "/%{whatevs}")
+  get '/us' => redirect("/")
+
+  match '/:site_version', to: 'index#show', constraints: { site_version: /(au)/ }
 
   scope '(:site_version)' do
     get 'sitemap_index', to: 'sitemaps#index', format: true, constraints: { format: /xml|xml.gz/ }
     get 'sitemap', to: 'sitemaps#show', format: true, constraints: { format: /xml|xml.gz/ }
   end
 
-  match '/:site_version', to: 'index#show', constraints: { site_version: /(au)/ }
-
-  get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
-  get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
-  get 'simple_products.xml' => 'spree/products#index', :defaults => { :format => 'xml' }
-
-  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
+  scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
     devise_for :user, class_name: Spree::User, skip: [:unlocks, :registrations, :passwords, :sessions, :omniauth_callbacks]
     devise_scope :user do
       get '/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
     end
   end
 
-  get '/us/*whatevs' => redirect(path: "/%{whatevs}")
-  get '/us' => redirect("/")
-
-  get '/prom/thanksbabe' => redirect('http://prom.fameandpartners.com?snapchat=true')
-  get '/prom', :to => redirect { |params, request|
-    if request.params.any?
-      "http://prom.fameandpartners.com?#{request.params.to_query}"
-    else
-      "http://prom.fameandpartners.com"
-    end
-  }
-
-  resources :user_campaigns, only: [:create] do
-    collection do
-      get  :check_state
-    end
-  end
-
-  get '/undefined',    to: 'mysterious_route#undefined'
-  get '/au/undefined', to: 'mysterious_route#undefined'
-  get '/1000668',      to: 'mysterious_route#undefined'
-
-  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
+  scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
     devise_for :spree_user,
                :class_name => 'Spree::User',
                :controllers => { :sessions => 'spree/user_sessions',
@@ -62,12 +37,8 @@ FameAndPartners::Application.routes.draw do
     get '/fb_auth' => 'spree/omniauth_facebook_authorizations#fb_auth'
   end
 
-  namespace :widgets do
-    get 'main_nav' => 'site_navigations#main_nav'
+  scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
     get 'footer'   => 'site_navigations#footer'
-  end
-
-  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
 
     get '/instagram/1' => 'statics#landing_page_mobile', :variant => '1'
     get '/instagram/2' => 'statics#landing_page_mobile', :variant => '2'
@@ -227,7 +198,7 @@ FameAndPartners::Application.routes.draw do
     get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
   end
 
-  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
+  scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
     # Static pages
     get '/about'   => 'statics#about', :as => :about_us
     get '/why-us'  => 'statics#why_us', :as => :why_us
@@ -307,6 +278,85 @@ FameAndPartners::Application.routes.draw do
 
     mount Spree::Core::Engine, at: '/'
   end
+
+  scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
+
+    get 'search' => 'products/base#search'
+
+    # Guest checkout routes
+    resources :payment_requests, only: [:new, :create]
+    namespace :guest do
+      put '/checkout/update/:state', :to => 'spree/checkout#update', :as => :update_checkout
+      get '/checkout/thanks', :to => 'spree/checkout#show' , :as => :checkout_thanks
+      get '/checkout/:state', :to => 'spree/checkout#edit', :as => :checkout_state
+      get '/checkout/', :to => 'spree/checkout#edit' , :as => :checkout
+
+      post '/paypal', :to => 'paypal#express', :as => :paypal_express
+      get '/paypal/confirm', :to => 'paypal#confirm', :as => :confirm_paypal
+      get '/paypal/cancel', :to => 'paypal#cancel', :as => :cancel_paypal
+      get '/paypal/notify', :to => 'paypal#notify', :as => :notify_paypal
+    end
+
+    get '/express-delivery'  => 'products/collections#show', as: 'express_delivery', defaults: { order: 'fast_delivery' }
+
+    # Redirecting all bridesmaid party URLs
+    get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')
+
+    resources :site_versions, only: [:show], as: :site_version
+  end
+
+  ##################
+  # Robots and Feeds
+  ##################
+  get '/robots', to: 'robots#show', constraints: { format: /txt/ }
+
+  # TODO: 2015/11/09 TTL 1 month
+  # TODO: This seems to be dead. No one knows who is using this feed. If no one complains in a month, this is going to be deleted with its controller
+  # get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
+  # get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
+  # get 'simple_products.xml' => 'spree/products#index', :defaults => { :format => 'xml' }
+
+  ######
+  # Prom
+  ######
+
+  get '/prom/thanksbabe' => redirect('http://prom.fameandpartners.com?snapchat=true')
+  get '/prom', :to => redirect { |params, request|
+    if request.params.any?
+      "http://prom.fameandpartners.com?#{request.params.to_query}"
+    else
+      'http://prom.fameandpartners.com'
+    end
+  }
+
+  ################
+  # User Campaigns
+  ################
+  resources :user_campaigns, only: [:create] do
+    collection do
+      get  :check_state
+    end
+  end
+
+  #################
+  # Mysterious URLs
+  #################
+
+  get '/undefined',    to: 'mysterious_route#undefined'
+  get '/au/undefined', to: 'mysterious_route#undefined'
+  get '/1000668',      to: 'mysterious_route#undefined'
+
+  #########
+  # Widgets
+  #########
+
+  namespace :widgets do
+    get 'main_nav' => 'site_navigations#main_nav'
+  end
+
+  ##############
+  # Admin routes
+  ##############
 
   namespace :admin do
     resources :bulk_order_updates, :except => [:edit]
@@ -388,35 +438,9 @@ FameAndPartners::Application.routes.draw do
     end
   end
 
-  scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
-
-    get 'search' => 'products/base#search'
-
-    # Guest checkout routes
-    resources :payment_requests, only: [:new, :create]
-    namespace :guest do
-      put '/checkout/update/:state', :to => 'spree/checkout#update', :as => :update_checkout
-      get '/checkout/thanks', :to => 'spree/checkout#show' , :as => :checkout_thanks
-      get '/checkout/:state', :to => 'spree/checkout#edit', :as => :checkout_state
-      get '/checkout/', :to => 'spree/checkout#edit' , :as => :checkout
-
-      post '/paypal', :to => 'paypal#express', :as => :paypal_express
-      get '/paypal/confirm', :to => 'paypal#confirm', :as => :confirm_paypal
-      get '/paypal/cancel', :to => 'paypal#cancel', :as => :cancel_paypal
-      get '/paypal/notify', :to => 'paypal#notify', :as => :notify_paypal
-    end
-
-    get '/express-delivery'  => 'products/collections#show', as: 'express_delivery', defaults: { order: 'fast_delivery' }
-
-    # Redirecting all bridesmaid party URLs
-    get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')
-
-    resources :site_versions, only: [:show], as: :site_version
-  end
-
   mount AdminUi::Engine, at: '/fame_admin'
 
   if Features.active?(:content_revolution)
-    mount Revolution::Engine => "/"
+    mount Revolution::Engine => '/'
   end
 end
