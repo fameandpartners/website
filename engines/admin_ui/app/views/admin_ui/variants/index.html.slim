@@ -1,3 +1,16 @@
-= paginate @collection.assets, theme: 'admin_ui'
+- content_for :page_title do
+  ' Variants & SKUs
+.ibox
+  .ibox-title
+    a.collapse-link
+      h5 Filter
+      .ibox-tools
+        i.fa.fa-chevron-up
+  .ibox-content
+    = datagrid_form_for @collection, :method => :get, url: variants_path
+  .ibox-footer
+    = link_to "Download CSV", url_for(format: 'csv')
 
+= paginate @collection.assets, theme: 'admin_ui'
 = datagrid_table @collection, html: {class: 'table table.condensed'}
+= paginate @collection.assets, theme: 'admin_ui'

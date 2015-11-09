@@ -15,6 +15,5 @@ namespace :quality do
     end
 
     progressbar.finish
-
   end
 end
