@@ -5,6 +5,7 @@ class CustomItemSku
     @line_item = line_item
   end
 
+  # Note that this is somewhat duplicated with VariantSku
   def call
     return line_item.variant.sku unless line_item.personalization.present?
     "#{style_number}#{size}#{colour}#{custom}"

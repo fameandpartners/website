@@ -6,8 +6,7 @@ RSpec.describe VariantSku do
 
   describe 'new SKUs' do
     let(:sku_generator) { described_class.new(variant) }
-
-    subject(:sku)       { sku_generator.call  }
+    subject(:sku)       { sku_generator.call }
 
     context 'master variant' do
       let(:variant)       { dress.master }
