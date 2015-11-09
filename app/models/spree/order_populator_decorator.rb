@@ -6,7 +6,7 @@ Spree::OrderPopulator.class_eval do
     if quantity > Spree::Config[:max_quantity]
       errors.add(:base, I18n.t(:please_enter_reasonable_quantity, :scope => :order_populator))
       return false
-    end 
+    end
 
     variant = Spree::Variant.find(variant_id)
 
@@ -16,10 +16,10 @@ Spree::OrderPopulator.class_eval do
       variant.save
     end
 
-    if quantity > 0 
+    if quantity > 0
       if check_stock_levels(variant, quantity)
         @order.add_variant(variant, quantity, currency)
-      end 
-    end 
-  end 
+      end
+    end
+  end
 end
