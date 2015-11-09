@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 RSpec.describe VariantSku do
-  let(:style_number)  { 'OMGWTFBBQ' }
-  let(:dress)         { create :dress, sku: style_number }
+  let(:style_number)     { 'OMGWTFBBQ' }
+  let(:dress)            { create :dress, sku: style_number }
 
   describe 'new SKUs' do
     let(:sku_generator) { described_class.new(variant) }
@@ -26,6 +26,10 @@ RSpec.describe VariantSku do
         # I am so sick of these class variables causing stupid test failures.
         Spree::Variant.instance_variable_set(:@size_option_type, nil)
         Spree::Variant.instance_variable_set(:@color_option_type, nil)
+      end
+
+      it 'smoke' do
+        expect(sku).to eq "OMGWTFBBQ-US10AU14-C#{colour_id}"
       end
 
       it 'includes the style number' do

@@ -6,10 +6,10 @@ class VariantSku
   end
 
   def call
-    return variant.sku if variant.is_master
+    return variant.sku.to_s.upcase if variant.is_master
 
     parts = []
-    parts << variant.product.master.sku.to_s
+    parts << variant.product.master.sku.to_s.upcase
 
     if variant.dress_size
       parts << variant.dress_size.name.to_s.gsub('/', '')
@@ -21,6 +21,6 @@ class VariantSku
 
     parts.join('-')
   rescue
-    variant.sku
+    variant.sku.to_s.upcase
   end
 end
