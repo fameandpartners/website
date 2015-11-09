@@ -18,11 +18,9 @@ FactoryGirl.define do
     factory :product_colour do
 
       name         { "red" }
-      presentation { "Red" }
+      presentation { name.capitalize }
 
       option_type { create :option_type, :color }
     end
-
-
   end
 end
