@@ -2,21 +2,22 @@ FameAndPartners::Application.routes.draw do
   get '/us/*whatevs' => redirect(path: "/%{whatevs}")
   get '/us' => redirect("/")
 
-  match '/:site_version', to: 'index#show', constraints: { site_version: /(au)/ }
-
-  scope '(:site_version)' do
-    get 'sitemap_index', to: 'sitemaps#index', format: true, constraints: { format: /xml|xml.gz/ }
-    get 'sitemap', to: 'sitemaps#show', format: true, constraints: { format: /xml|xml.gz/ }
-  end
 
   scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
+    ##########
+    # Sitemaps
+    ##########
+    get 'sitemap_index', to: 'sitemaps#index', format: true, constraints: { format: /xml|xml.gz/ }
+    get 'sitemap', to: 'sitemaps#show', format: true, constraints: { format: /xml|xml.gz/ }
+
+    ##############################
+    # Devise & User authentication
+    ##############################
     devise_for :user, class_name: Spree::User, skip: [:unlocks, :registrations, :passwords, :sessions, :omniauth_callbacks]
     devise_scope :user do
       get '/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
     end
-  end
 
-  scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
     devise_for :spree_user,
                :class_name => 'Spree::User',
                :controllers => { :sessions => 'spree/user_sessions',
