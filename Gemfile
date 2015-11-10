@@ -24,6 +24,7 @@ gem 'bower-rails', '~> 0.10.0'
 
 # Monitoring & Events
 gem 'newrelic_rpm'
+gem 'bugsnag'
 gem 'customerio'
 
 # Engines
