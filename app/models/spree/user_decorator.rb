@@ -1,4 +1,5 @@
 Spree::User.class_eval do
+
   has_one :profile_image, as: :viewable, dependent: :destroy, class_name: "Spree::Image"
   has_many :wishlist_items, dependent: :destroy, class_name: "WishlistItem", foreign_key: :spree_user_id
 
@@ -22,7 +23,8 @@ Spree::User.class_eval do
   delegate :value, to: :facebook_data, prefix: true
 
   attr_accessor :skip_welcome_email,
-                :validate_presence_of_phone
+                :validate_presence_of_phone,
+                :previous_email
 
   attr_accessible :first_name, :last_name, :phone, :dob, :skip_welcome_email, :automagically_registered
 
@@ -35,7 +37,14 @@ Spree::User.class_eval do
 
   after_create :send_welcome_email,           unless: Proc.new { |a| a.skip_welcome_email }
   after_create :create_marketing_subscriber,  if: :newsletter?
+  after_update :initiate_mailchimp
   after_update :update_marketing_subsriber,   if: :newsletter?
+
+
+  def initiate_mailchimp
+    email = EmailCapture.new({ service: 'mailchimp' })
+    email.capture(self)
+  end
 
   def create_marketing_subscriber
     Marketing::Subscriber.new(user: self).create
