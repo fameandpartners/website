@@ -1,61 +1,197 @@
-.login .container .row .checkout-section-title{
-  background-color: #f6e2d5;
-  padding: 15px;
-  text-transform: uppercase;
-  font-size: 14px;
-  margin-bottom: 30px;
-}
-.login-header, .sign-up-header, .password-new-header {
+.membership {
+  width: 100%;
+  height: 100vh;
+  min-height: 750px;
+  margin-bottom: -$mega-menu-desktop-height;
+  padding-bottom: $mega-menu-desktop-height;
+  background: url('membership/bg-gaussion-blur-1.jpg') $c-neutral-10 no-repeat;
+  background-size: cover;
 
-  h1 {
-    text-transform: uppercase;
-    font-family: forum;
-    font-size: 7rem;
-  }
-}
-
-.login-header.page-title:after, .login-header, .sign-up-header.page-title:after, .sign-up-header, .password-new-header.page-title:after, .password-new-header {
-  background-color: #eeddf0;
-}
-
-.facebook-button {
-  margin-top: 3rem;
-}
-
-.btn-facebook.btn-md {
-  @media(max-width: 768px) {
-    font-size: 12px !important;
-    padding-left: 50px;
+  .outer-wrap {
+    width: 100%;
+    height: 100%;
+    display: table;
   }
 
-  &:hover {
-    background-color: #627AAD;
+  .inner-wrap {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 30px 0;
   }
-}
 
-.login.new, .sign-up.new, .password-new {
+  .form-group {
+    margin-bottom: 20px;
+  }
 
-  .low-btn {
-    font-size: 1rem;
-    line-height: 1rem;
-    padding: 0;
-    background-color: white;
-    color: black;
+  .checkbox {
+    margin: 0;
+  }
+
+  .heading {
+    margin: 0;
+    padding-bottom: 60px;
+    text-align: center;
+    text-transform: none;
+    font-size: 2.25em;
+    font-weight: 500;
+    color: $c-neutral-white;
+
+    span {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.611em;
+      font-weight: 400;
+    }
+
+  }
+
+  .footnote {
+    margin-top: 20px;
+  }
+
+  a:not(.btn) {
+    text-decoration: underline;
+    font-weight: 500;
+    color: $c-neutral-white;
   }
 
   label {
-    color: black;
+    font-weight: 500;
+    color: $c-neutral-white;
   }
 
-  .form-control {
-    border-color: black;
+  p {
+    line-height: normal;
+    text-align: center;
+    font-size: 1.125em;
+    font-weight: 400;
+    color: $c-neutral-white;
   }
 
-  .extra-margin {
-    margin-top: 6px;
+  .btn {
+    padding-top: 9px;
+    padding-bottom: 9px;
+    border-radius: 3px;
   }
 
-  .col-md-12.form-group {
-    padding-right: 0;
+  .btn-facebook {
+    margin-top: 120px;
   }
+
+  .separator {
+    position: relative;
+    display: table;
+    width: 100%;
+    height: 200px;
+    margin-top: 40px;
+    text-align: center;
+
+    span {
+      display: table-cell;
+      vertical-align: middle;
+      height: 40px;
+      line-height: 40px;
+      font-size: 1.75em;
+      color: $c-neutral-white;
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        display: block;
+        left: 50%;
+        margin-left: -1px;
+        width: 1px;
+        height: 80px;
+        background: $c-neutral-white;
+      }
+
+      &:before {
+        top: 0;
+      }
+
+      &:after {
+        bottom: 0;
+      }
+
+    }
+
+  }
+
+  .multiple-links a {
+    padding: 0 10px;
+  }
+
+  .alert {
+    color: $c-neutral-white;
+    background: transparent;
+    border-color: $c-neutral-white;
+
+    h3 {
+      margin: 0;
+      font-weight: 500;
+      color: $c-neutral-white;
+      background: transparent;
+    }
+
+  }
+
+  // START - mobile
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    & {
+      height: auto;
+      min-height: initial;
+      margin-bottom: 0;
+      padding: 0;
+
+      .heading {
+        padding-bottom: 40px;
+        font-size: 1.75em;
+      }
+
+      .btn-facebook {
+        margin-top: 0;
+      }
+
+      .separator {
+        height: auto;
+        margin: 20px 0;
+
+        span {
+
+          &:before,
+          &:after {
+            top: 50%;
+            width: 44%;
+            height: 1px;
+            bottom: auto;
+            margin-top: 1px;
+            margin-left: 0;
+          }
+
+          &:before {
+            left: 0;
+            right: auto;
+          }
+
+          &:after {
+            left: auto;
+            right: 0;
+          }
+
+        }
+
+      }
+
+      .multiple-links a {
+        display: block;
+        margin-top: 10px;
+      }
+
+    }
+
+  }
+  // END - mobile
+
 }

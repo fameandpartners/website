@@ -1,28 +1,25 @@
 .form data-hook="login"
   - login_path = spree.spree_user_session_path(site_version: current_site_version.try(:code))
   = form_for :spree_user, :url => login_path do |f|
-    #password-credentials
-
-      = render :partial =>'shared/redesign/flash_messages', flash: flash
-
-      .form-group
+    #password-credentials.row
+      .col-md-12
+        = render :partial =>'shared/redesign/flash_messages', flash: flash
+      .col-md-12.form-group
         = f.label :email
         = f.email_field :email, class: 'title', tabindex: 1, :class => 'form-control form-control-md'
-      .form-group
+      .col-md-12.form-group
         = f.label :password
         = f.password_field :password, class: 'title', tabindex: 2, :class => 'form-control form-control-md'
-      .form-group
+      .col-md-12.form-group
         .checkbox
           label for="spree_user_remember_me"
             = f.check_box :remember_me
             span= t(:remember_me)
-      .form-group
-        = f.submit 'Login', class: 'btn btn-block btn-black btn-md', tabindex: 3
-
-      .row
-        .col-md-3.col-sm-3.col-xs-12
-          = link_to t(:create_a_new_account), spree.signup_path(cl: 'login-form'), class: 'btn btn-block btn-black btn-md low-btn'
-        .col-md-3.col-sm-3.col-xs-12
-          = link_to t(:forgot_password), main_app.new_spree_user_password_path, :id=> 'forgot-password', class: 'btn btn-block btn-black btn-md low-btn'
+      .col-md-12.form-group
+        = f.submit 'Login', class: 'btn btn-block btn-black', tabindex: 3
+      .col-md-12
+        p.multiple-links
+          = link_to t(:create_a_new_account), spree.signup_path(cl: 'login-form')
+          = link_to t(:forgot_password), main_app.new_spree_user_password_path, :id=> 'forgot-password'
 
 div data-hook="login_extras"
