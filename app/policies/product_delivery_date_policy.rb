@@ -7,8 +7,7 @@ module Policies
     DAYS_FOR_DELIVERY = 4
     EXPRESS_MAKING    = {:days_for_making => 2, :days_for_delivery => DAYS_FOR_DELIVERY}
     FAST_MAKING       = {:days_for_making => 5, :days_for_delivery => DAYS_FOR_DELIVERY}
-    STANDARD_DELIVERY = {:days_for_making => 7, :days_for_delivery => DAYS_FOR_DELIVERY}
-    SPECIAL_ORDER     = {:days_for_making => 9, :days_for_delivery => DAYS_FOR_DELIVERY}
+    SPECIAL_ORDER     = {:days_for_making => 11, :days_for_delivery => DAYS_FOR_DELIVERY}
 
     PRINTED_MATCH   = /Print|Animal|Aztec|Baroque|Brocade|Check|Checkered|Conversational|Digital|Floral|Geometric|Gingham|Ikat|Leopard|Monochrome|Ombre|Paisley|Patchwork|Photographic|Plaid|Polka Dot|Psychedelic|Scarf|Spots|Stripes|Tie Dye|Tribal|Tropical|Victorian|Watercolour|Zebra/i
     BEADING_MATCH   = /Beading|Embellishment|Sequin/i
@@ -51,7 +50,6 @@ module Policies
 
     def delivery_date
       return FAST_MAKING if fast_making?
-      #return STANDARD_DELIVERY if standard_delivery?
       return SPECIAL_ORDER if special_order?
       return {days_for_making: @product.standard_days_for_making,   days_for_delivery: @product.standard_days_for_making} if !@customized
       return {days_for_making: @product.customised_days_for_making, days_for_delivery: @product.customised_days_for_making}
