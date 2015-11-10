@@ -8,7 +8,7 @@ describe Policies::ProjectDeliveryDatePolicy do
 
     it "return correct delivery date for a printed dress" do
       service.printed?.should_not be_nil
-      expect(service.delivery_date).to eq({:days_for_making => 9, :days_for_delivery => 4})
+      expect(service.delivery_date).to eq({:days_for_making => 11, :days_for_delivery => 4})
     end
 
     it "is a special order" do
@@ -22,7 +22,7 @@ describe Policies::ProjectDeliveryDatePolicy do
 
     it "return correct delivery date for a beading dress" do
       service.beading?.should_not be_nil
-      expect(service.delivery_date).to eq({:days_for_making => 9, :days_for_delivery => 4})
+      expect(service.delivery_date).to eq({:days_for_making => 11, :days_for_delivery => 4})
     end
 
     it "is a special order" do
@@ -36,7 +36,7 @@ describe Policies::ProjectDeliveryDatePolicy do
 
     it "return correct delivery date for a embroid dress" do
       service.embroidered?.should_not be_nil
-      expect(service.delivery_date).to eq({:days_for_making => 9, :days_for_delivery => 4})
+      expect(service.delivery_date).to eq({:days_for_making => 11, :days_for_delivery => 4})
     end
 
     it "is a special order" do
@@ -60,7 +60,7 @@ describe Policies::ProjectDeliveryDatePolicy do
 
     it "return correct delivery date for a standard dress" do
       allow(service).to receive(:fast_making?).and_return(false)
-      expect(service.delivery_date).to eq({:days_for_making => 7, :days_for_delivery => 4})
+      expect(service.delivery_date).to eq({:days_for_making => 6, :days_for_delivery => 6})
     end
   end
 
