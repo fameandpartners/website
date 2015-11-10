@@ -11,55 +11,32 @@ class EmailCapture
   end
 
   def capture(data_object)
-    p "Here: #{data_object.inspect}"
-    if service == 'mailchimp'
 
+    if service == 'mailchimp'
       current_email = return_email_object(data_object)
-      p "Here: 4 #{current_email.class}"
-      merge_variables = {}
 
       get_email = email_changed?(current_email) ? current_email.email_was : current_email.email
 
-      subscriber = mailchimp.lists.members(configatron.mailchimp.list_id)['data'].select {|subscriber| subscriber['email'] == get_email }
-      p "Here: EMAIL - #{email_changed?(current_email)} - #{subscriber}"
+      subscriber = mailchimp.lists.members(configatron.mailchimp.list_id)['data'].select { |subscriber| subscriber['email'] == get_email }
 
-      first_name = retrieve_first_name(current_email)
-      last_name = retrieve_last_name(current_email)
+      merge_variables = set_merge(current_email, subscriber)
 
-      if email_changed?(current_email)
-        #Making an assumption here: The only place where the email changes is on "Account Settings"
-        mailchimp.lists.update_member(configatron.mailchimp.list_id, { "leid" => subscriber[0]['leid'] },
-                                      { email: current_email.email,
-                                        fname: first_name,
-                                        lname: last_name } )
-      else
-        if subscriber.size > 0
-          merge_variables[:fname] = first_name if subscriber[0]['merges'].key?('FNAME') &&
-              first_name &&
-              subscriber[0]['merges']['FNAME'] != first_name
-          merge_variables[:lname] = last_name if subscriber[0]['merges'].key?('LNAME') &&
-              last_name.present? &&
-              subscriber[0]['merges']['FNAME'] != last_name
-        else
-          merge_variables[:fname] = first_name if first_name.present?
-          merge_variables[:lname] = last_name if last_name.present?
-          merge_variables[:ip_address] = '101.0.79.50' #data_object.current_sign_in_ip
-          merge_variables[:country] = UserCountryFromIP.new('101.0.79.50').country.country_name
+      begin
+        if email_changed?(current_email)
+          #Making an assumption here: The only place where the email changes is on "Account Settings"
+          mailchimp.lists.update_member(configatron.mailchimp.list_id, {"leid" => subscriber[0]['leid']},
+                                        {email: current_email.email,
+                                         fname: retrieve_first_name(current_email),
+                                         lname: retrieve_last_name(current_email)})
+          else
+        mailchimp.lists.subscribe(configatron.mailchimp.list_id, {"email" => current_email.email},
+                                  merge_variables, 'html', false, true, true, false)
         end
-
-        merge_variables[:n_letter] = set_newsletter(current_email, subscriber)
-
-        begin
-          mailchimp.lists.subscribe(configatron.mailchimp.list_id, { "email" => current_email.email },
-                                    merge_variables, 'html', false, true, true, false)
-        rescue Mailchimp::ValidationError
-          p "Here: Error"
-        end
+      rescue Mailchimp::ValidationError => e
+        
       end
-
-      p mailchimp.lists
-      p "Here: #{mailchimp.lists.members(configatron.mailchimp.list_id)}"
     end
+
   end
 
   def return_email_object(data_object)
@@ -73,22 +50,28 @@ class EmailCapture
 
   def retrieve_first_name(c_email)
     first_name = nil
-    if c_email.class.to_s == 'Contact'
-      first_name = c_email.first_name
-    else
-      first_name = c_email.first_name if c_email.attributes.key?('first_name')
-      first_name = c_email.firstname if c_email.attributes.key?('firstname')
+    case
+      when c_email.class.to_s == 'Contact'
+        first_name = c_email.first_name
+      when c_email.class.to_s == 'OpenStruct'
+        first_name = nil
+      else
+        first_name = c_email.first_name if c_email.attributes.key?('first_name')
+        first_name = c_email.firstname if c_email.attributes.key?('firstname')
     end
     first_name
   end
 
   def retrieve_last_name(c_email)
     last_name = nil
-    if c_email.class.to_s == 'Contact'
-      last_name = c_email.last_name
-    else
-      last_name = c_email.last_name if c_email.attributes.key?('last_name')
-      last_name = c_email.lastname if c_email.attributes.key?('lastname')
+    case
+      when c_email.class.to_s == 'Contact'
+        last_name = c_email.last_name
+      when c_email.class.to_s == 'OpenStruct'
+        last_name = nil
+      else
+        last_name = c_email.last_name if c_email.attributes.key?('last_name')
+        last_name = c_email.lastname if c_email.attributes.key?('lastname')
     end
     last_name
   end
@@ -101,6 +84,35 @@ class EmailCapture
 
   def activerecord?(d_object)
     d_object.class.ancestors.include?(ActiveRecord::Base)
+  end
+
+  def set_merge(current_email, subscriber)
+    first_name = retrieve_first_name(current_email)
+    last_name  = retrieve_last_name(current_email)
+
+    merge_variables = {}
+
+    if email_changed?(current_email)
+      #Making an assumption here: The only place where the email changes is on "Account Settings"
+    else
+      if subscriber.size > 0
+        merge_variables[:fname] = first_name if subscriber[0]['merges'].key?('FNAME') &&
+            first_name &&
+            subscriber[0]['merges']['FNAME'] != first_name
+        merge_variables[:lname] = last_name if subscriber[0]['merges'].key?('LNAME') &&
+            last_name.present? &&
+            subscriber[0]['merges']['FNAME'] != last_name
+      else
+        merge_variables[:fname]      = first_name if first_name.present?
+        merge_variables[:lname]      = last_name if last_name.present?
+        merge_variables[:ip_address] = '101.0.79.50' #data_object.current_sign_in_ip
+        merge_variables[:country]    = UserCountryFromIP.new('101.0.79.50').country.country_name
+      end
+
+      merge_variables[:n_letter] = set_newsletter(current_email, subscriber)
+    end
+
+    merge_variables
   end
 
 end

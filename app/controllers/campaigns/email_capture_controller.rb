@@ -33,6 +33,9 @@ class Campaigns::EmailCaptureController < ApplicationController
       user:           current_spree_user
     ).create
 
+    EmailCapture.new({ service: 'mailchimp' }).capture(OpenStruct.new(email: params[:email],
+                                                                      current_sign_in_ip: request.remote_ip))
+
     begin
       if params[:promocode].present?
         service = UserCart::PromotionsService.new(
@@ -75,5 +78,12 @@ class Campaigns::EmailCaptureController < ApplicationController
   rescue StandardError => e
     NewRelic::Agent.notice_error(e)
     render :json => { status: 'invalid' }, status: :error
+  end
+
+  def mailchimp
+    EmailCapture.new({ service: 'mailchimp' }).capture(OpenStruct.new(email: params[:email],
+                                                                      current_sign_in_ip: request.remote_ip))
+
+    render nothing: true
   end
 end
