@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'ostruct'
 
 module Repositories
-  RSpec.describe ProductSize, memoization_support: true do
+  RSpec.describe ProductSize do
 
     let(:site_version) { build_stubbed(:site_version) }
 

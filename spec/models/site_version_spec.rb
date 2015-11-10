@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SiteVersion, type: :model, memoization_support: true do
+describe SiteVersion, type: :model do
   describe '.permalinks' do
     before(:each) { rememoize(described_class, :@permalinks) }
 

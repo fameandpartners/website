@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Sitemap', type: :request, memoization_support: true do
+describe 'Sitemap', type: :request do
 
   before do
     rememoize(SiteVersion, :@default)

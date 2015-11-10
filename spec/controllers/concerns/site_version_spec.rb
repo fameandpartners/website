@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Concerns::SiteVersion, type: :controller, memoization_support: true do
+describe Concerns::SiteVersion, type: :controller do
   controller do
     include Concerns::SiteVersion
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Spree::OptionValue, type: :model, memoization_support: true do
+describe Spree::OptionValue, type: :model do
   describe 'scopes' do
     before(:each) do
       rememoize(Spree::OptionType, :@color)
