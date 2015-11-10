@@ -1,6 +1,13 @@
 require 'spec_helper'
 
-describe SitemapsController, :type => :controller do
+describe SitemapsController, :type => :controller,  memoization_support: true  do
+
+  before do
+    rememoize(SiteVersion, :@default)
+    create :site_version, :us, :default
+    create :site_version, :au
+  end
+
   describe 'GET /sitemap_index.xml' do
     subject { get :index, site_version: 'au', format: 'xml' }
 
