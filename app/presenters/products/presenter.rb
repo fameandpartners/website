@@ -8,7 +8,7 @@ module Products
                   :permalink, :is_active, :is_deleted, :images, :default_image, :price,
                   :discount, :recommended_products, :related_outerwear, :available_options, :preorder, :taxons,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
-                  :size_chart, :making_option_id, :fit, :size, :fast_making
+                  :size_chart, :making_option_id, :fit, :size, :fast_making, :standard_days_for_making, :customised_days_for_making
 
     def initialize(opts)
       opts.each do |k, v|
@@ -201,8 +201,8 @@ module Products
 
     def delivery_date
       policy = Policies::ProjectDeliveryDatePolicy.new(self).delivery_date
-      start_date = Date.today + policy[:days_for_making] + configatron.days_delivery_emergency
-      (start_date + 1).strftime("%d %B") + " and " + (start_date + policy[:days_for_delivery]).strftime("%d %B")
+      start_date = Date.today + policy[:days_for_making] + 1 + configatron.days_delivery_emergency
+      (start_date).strftime("%d %B") + " and " + (start_date + policy[:days_for_delivery]).strftime("%d %B")
     end
 
     private

@@ -4,10 +4,11 @@ module Policies
 
   class ProjectDeliveryDatePolicy
 
-    EXPRESS_MAKING    = {:days_for_making => 2, :days_for_delivery => 4}
-    FAST_MAKING       = {:days_for_making => 5, :days_for_delivery => 4}
-    STANDARD_DELIVERY = {:days_for_making => 7, :days_for_delivery => 4}
-    SPECIAL_ORDER     = {:days_for_making => 9, :days_for_delivery => 4}
+    DAYS_FOR_DELIVERY = 4
+    EXPRESS_MAKING    = {:days_for_making => 2, :days_for_delivery => DAYS_FOR_DELIVERY}
+    FAST_MAKING       = {:days_for_making => 5, :days_for_delivery => DAYS_FOR_DELIVERY}
+    STANDARD_DELIVERY = {:days_for_making => 7, :days_for_delivery => DAYS_FOR_DELIVERY}
+    SPECIAL_ORDER     = {:days_for_making => 9, :days_for_delivery => DAYS_FOR_DELIVERY}
 
     PRINTED_MATCH   = /Print|Animal|Aztec|Baroque|Brocade|Check|Checkered|Conversational|Digital|Floral|Geometric|Gingham|Ikat|Leopard|Monochrome|Ombre|Paisley|Patchwork|Photographic|Plaid|Polka Dot|Psychedelic|Scarf|Spots|Stripes|Tie Dye|Tribal|Tropical|Victorian|Watercolour|Zebra/i
     BEADING_MATCH   = /Beading|Embellishment|Sequin/i
@@ -15,8 +16,9 @@ module Policies
 
     attr_reader :order
 
-    def initialize(product)
-      @product = product
+    def initialize(product, customized = false)
+      @product    = product
+      @customized = customized
     end
 
     def printed?
@@ -42,15 +44,17 @@ module Policies
     def fast_making?
       return true if @product.try(:fast_making)
       if @product.making_options.present?
-        return true if @product.try(:making_options).any?{|mo| mo.name=="Express Making"}
+        return true if @product.try(:making_options).any?{|mo| mo.name == "Express Making"}
       end
       return false
     end
 
     def delivery_date
       return FAST_MAKING if fast_making?
-      return STANDARD_DELIVERY if standard_delivery?
+      #return STANDARD_DELIVERY if standard_delivery?
       return SPECIAL_ORDER if special_order?
+      return {days_for_making: @product.standard_days_for_making,   days_for_delivery: @product.standard_days_for_making} if !@customized
+      return {days_for_making: @product.customised_days_for_making, days_for_delivery: @product.customised_days_for_making}
     end
 
     def self.order_delivery_date(user_cart)
@@ -61,7 +65,8 @@ module Policies
         max_start_date = 0
         dates_product_takes_longest = nil
         user_cart.products.each do |p|
-          date_num = Policies::ProjectDeliveryDatePolicy.new(p).delivery_date
+          customized = p.customizations.size > 0
+          date_num = Policies::ProjectDeliveryDatePolicy.new(p, customized).delivery_date
           if date_num[:days_for_making] > max_start_date
             max_start_date = date_num[:days_for_making] + configatron.days_delivery_emergency
             dates_product_takes_longest = date_num
@@ -78,7 +83,8 @@ module Policies
         dates_express_product_takes_longest     = nil
         dates_non_express_product_takes_longest = nil
         user_cart.products.each do |p|
-          date_num = Policies::ProjectDeliveryDatePolicy.new(p).delivery_date
+          customized = p.customizations.size > 0
+          date_num = Policies::ProjectDeliveryDatePolicy.new(p, customized).delivery_date
           if p.making_options.any?{|mo| mo.name == 'Express Making'}
             if date_num[:days_for_making] > max_start_date_express
               max_start_date_express = date_num[:days_for_making] + configatron.days_delivery_emergency
