@@ -9,8 +9,6 @@
             = t(:forgot_password)
             span = t(:instructions_to_reset_password)
           = form_for Spree::User.new, :as => :spree_user, :url => main_app.spree_user_password_path do |f|
-            .col-md-6.col-md-offset-3
-              = render 'shared/redesign/error_messages', :target => @spree_user
             .col-md-6.col-md-offset-3.form-group
               = f.label :email
               = f.email_field :email, :value => params[:email], :class => 'form-control form-control-md'
