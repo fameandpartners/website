@@ -71,7 +71,7 @@
   .btn {
     padding-top: 9px;
     padding-bottom: 9px;
-    border-radius: 3px;
+    border-radius: 2px;
   }
 
   .btn-facebook {
@@ -126,6 +126,7 @@
     color: $c-neutral-white;
     background: transparent;
     border-color: $c-neutral-white;
+    border-radius: 2px;
 
     h3 {
       margin: 0;
