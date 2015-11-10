@@ -52,23 +52,14 @@ Spree::Variant.class_eval do
     end
   end
 
-  # Master SKU + VarientValue1 + VarientValue2
   def set_default_sku
     return if self.sku.present?
 
-    if (sku = generate_sku).present?
-      self.sku = sku
-    end
+    self.sku = generate_sku
   end
 
   def generate_sku
     ::VariantSku.new(self).call
-  end
-
-  def generate_sku!
-    if (sku = generate_sku).present?
-      update_column(:sku, sku)
-    end
   end
 
   # logic
