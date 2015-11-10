@@ -56,6 +56,7 @@
 
 // Base
 @import 'redesign/base/type';
+@import 'redesign/base/forms';
 @import 'redesign/base/buttons';
 @import 'redesign/base/containers';
 
@@ -165,10 +166,6 @@ h1.edit-title {
 
 .page-title {
   background-color: #eeddf0;
-}
-
-input.form-control {
-  text-transform: none;
 }
 
 .select2, .select2-container, .select2-container--default, .selection, .select2-selection, .select2-selection--single ,.select2-selection__rendered, .select2-selection__arrow, .select2-selection__rendered, .select2-search__field, button, .btn{

@@ -1,36 +1,29 @@
 div data-hook="signup"
-  div data-hook="signup_inside_form"
-    .row
-      .col-md-6.form-group
-        = f.label :first_name
-        = f.text_field :first_name, :class => 'form-control form-control-md'
-      .col-md-6.form-group
-        = f.label :last_name
-        = f.text_field :last_name, :class => 'form-control form-control-md'
-    .form-group
-      = f.label :email
-      = f.email_field :email, autocomplete: :off, :class => 'form-control form-control-md'
+  .row
+    .col-md-6.form-group
+      = f.text_field :first_name, :class => 'form-control form-control-md', :placeholder => t(:first_name)
+    .col-md-6.form-group
+      = f.text_field :last_name, :class => 'form-control form-control-md', :placeholder => t(:last_name)
+    .col-md-12.form-group
+      = f.email_field :email, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:email)
 
-    #password-credentials
-      .form-group
-        = f.label :password
-        = f.password_field :password, autocomplete: :off, :class => 'form-control form-control-md'
-      .form-group
-        = f.label :password_confirmation
-        = f.password_field :password_confirmation, autocomplete: :off, :class => 'form-control form-control-md'
-    .form-group
+  #password-credentials
+  .row
+    .col-md-6.form-group
+      = f.password_field :password, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password)
+    .col-md-6.form-group
+      = f.password_field :password_confirmation, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password_confirmation)
+    .col-md-12.form-group
       .checkbox
         label for="spree_user_newsletter"
-          = f.check_box :newsletter
+          = f.check_box :newsletter, :checked => 'checked'
           span
-            ' Subscribe to our Newsletter
-
-    .form-group data-hook="signup_below_password_fields"
-      = f.submit 'Create an account', class: 'btn btn-black'
-
-    .row
-      .col-sm-5
-        p.text-center Already have an account?
-        = link_to 'Sign in', spree.login_path, class: 'btn btn-block btn-black btn-md low-btn'
+            ' Receive new styles in my inbox each week + $25 off
+    .col-md-12.form-group data-hook="signup_below_password_fields"
+      = f.submit 'Create an account', class: 'btn btn-block btn-black'
+    .col-md-12
+      p
+        span Already have an account? 
+        = link_to 'Sign in', spree.login_path
 
 div data-hook="login_extras"
