@@ -51,8 +51,8 @@ module Policies
     def delivery_date
       return FAST_MAKING if fast_making?
       return SPECIAL_ORDER if special_order?
-      return {days_for_making: @product.standard_days_for_making,   days_for_delivery: @product.standard_days_for_making} if !@customized
-      return {days_for_making: @product.customised_days_for_making, days_for_delivery: @product.customised_days_for_making}
+      return {days_for_making: @product.standard_days_for_making,   days_for_delivery: DAYS_FOR_DELIVERY} if !@customized
+      return {days_for_making: @product.customised_days_for_making, days_for_delivery: DAYS_FOR_DELIVERY}
     end
 
     def self.order_delivery_date(user_cart)
