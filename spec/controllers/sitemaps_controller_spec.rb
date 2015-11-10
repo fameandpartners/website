@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-describe SitemapsController, :type => :controller,  memoization_support: true  do
-
+describe SitemapsController, type: :controller do
   before do
     rememoize(SiteVersion, :@default)
     create :site_version, :us, :default
@@ -23,7 +22,7 @@ describe SitemapsController, :type => :controller,  memoization_support: true  d
 
       it 'redirects to the requested sitemap version' do
         expect(subject).to redirect_to('http://images.fameandpartners.com/sitemap/au.xml.gz')
-      expect(subject).to have_http_status(:moved_permanently)
+        expect(subject).to have_http_status(:moved_permanently)
       end
     end
 
