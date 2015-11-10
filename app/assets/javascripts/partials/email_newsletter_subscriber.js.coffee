@@ -18,6 +18,8 @@ window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
   submit: (e) =>
     e.preventDefault()
     $.getJSON(@url(), @$form.serialize(), @handler)
+    $.ajax url: document.getElementById("mailchimp").value + '?email=' + document.getElementById("fieldEmail").value,
+      type: 'GET'
 
   handler: (data) =>
     if (data.Status == 400)
