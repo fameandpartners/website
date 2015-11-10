@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Repositories::ProductColors, memoization_support: true do
+describe Repositories::ProductColors do
   let!(:color_option_type) { create(:option_type, :color) }
 
   # Invalidating memoizations that concern Repositories::ProductColors

@@ -15,6 +15,8 @@ describe Concerns::SiteVersion, type: :controller do
 
   describe 'before filters' do
     describe '#check_site_version' do
+      before { rememoize(SiteVersion, :@default) }
+
       let(:australian_site_verison) { create(:site_version, permalink: 'au') }
       let(:brazilian_site_version)  { create(:site_version, permalink: 'br') }
 
@@ -55,10 +57,10 @@ describe Concerns::SiteVersion, type: :controller do
     before(:each) { SiteVersion.delete_all }
 
     it 'tells if there is more than one site version available' do
-      create(:site_version)
+      create(:site_version, :us)
       expect(controller.site_versions_enabled?).to be_falsy
 
-      create(:site_version)
+      create(:site_version, :au)
       expect(controller.site_versions_enabled?).to be_truthy
     end
   end

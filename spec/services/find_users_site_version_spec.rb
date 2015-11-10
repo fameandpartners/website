@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe FindUsersSiteVersion, type: :service, memoization_support: true do
+describe FindUsersSiteVersion, type: :service do
   describe "#get" do
     before(:each) do
       SiteVersion.delete_all

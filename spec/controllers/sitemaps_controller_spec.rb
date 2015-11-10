@@ -1,6 +1,12 @@
 require 'spec_helper'
 
-describe SitemapsController, :type => :controller do
+describe SitemapsController, type: :controller do
+  before do
+    rememoize(SiteVersion, :@default)
+    create :site_version, :us, :default
+    create :site_version, :au
+  end
+
   describe 'GET /sitemap_index.xml' do
     subject { get :index, site_version: 'au', format: 'xml' }
 
@@ -16,7 +22,7 @@ describe SitemapsController, :type => :controller do
 
       it 'redirects to the requested sitemap version' do
         expect(subject).to redirect_to('http://images.fameandpartners.com/sitemap/au.xml.gz')
-      expect(subject).to have_http_status(:moved_permanently)
+        expect(subject).to have_http_status(:moved_permanently)
       end
     end
 

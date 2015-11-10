@@ -5,5 +5,5 @@ module MemoizationSupport
 end
 
 RSpec.configure do |config|
-  config.include MemoizationSupport, memoization_support: true
+  config.include MemoizationSupport
 end
