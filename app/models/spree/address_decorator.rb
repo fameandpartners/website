@@ -1,6 +1,8 @@
 Spree::Address.class_eval do
   attr_accessible :email
 
+  after_create :initiate_mailchimp
+
   def self.default(site_version = nil, country_code = nil)
 
     if site_version.present?
@@ -43,4 +45,10 @@ Spree::Address.class_eval do
       self.phone = order_bill_address.phone
     end
   end
+
+  def initiate_mailchimp
+    email = EmailCapture.new({ service: 'mailchimp' })
+    email.capture(self)
+  end
+
 end

@@ -11,6 +11,7 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(params[:contact])
     if @contact.valid?
+      email = EmailCapture.new({ service: 'mailchimp' }).capture(@contact)
       ContactMailer.email(@contact).deliver
       flash[:notice] = "We're on it!"
       redirect_to success_contact_path
