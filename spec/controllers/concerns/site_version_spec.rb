@@ -15,10 +15,7 @@ describe Concerns::SiteVersion, type: :controller do
 
   describe 'before filters' do
     describe '#check_site_version' do
-      before do
-        SiteVersion.delete_all
-        rememoize(SiteVersion, :@default)
-      end
+      before { rememoize(SiteVersion, :@default) }
 
       let(:australian_site_verison) { create(:site_version, permalink: 'au') }
       let(:brazilian_site_version)  { create(:site_version, permalink: 'br') }
