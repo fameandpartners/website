@@ -269,6 +269,7 @@ Spree::CheckoutController.class_eval do
       address.lastname ||= @order.user_last_name
       address.email ||= @order.email
     end
+    address.set_last(user, @order)
 
     address
   end
