@@ -57,10 +57,16 @@ describe Policies::ProjectDeliveryDatePolicy do
   context "get delivery date for standard dress" do
     let(:standard_dress)         { create(:spree_product, name:"test standard dress", price: 0) }
     let(:service)                { described_class.new(standard_dress) }
+    let(:service_customized)     { described_class.new(standard_dress, true)}
 
     it "return correct delivery date for a standard dress" do
       allow(service).to receive(:fast_making?).and_return(false)
-      expect(service.delivery_date).to eq({:days_for_making => 6, :days_for_delivery => 6})
+      expect(service.delivery_date).to eq({:days_for_making => 6, :days_for_delivery => 4})
+    end
+
+    it "return correct delivery date for a customized dress" do
+      allow(service_customized).to receive(:fast_making?).and_return(false)
+      expect(service_customized.delivery_date).to eq({:days_for_making => 11, :days_for_delivery => 4})
     end
   end
 
