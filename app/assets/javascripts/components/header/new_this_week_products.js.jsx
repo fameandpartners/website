@@ -38,14 +38,7 @@ var NewThisWeekProducts = React.createClass({
   },
 
   componentDidMount: function() {
-    $.ajax({
-      url: urlWithSitePrefix('/dresses/new-this-week'),
-      type: "GET",
-      dataType: 'json',
-      success: function(collection) {
-        this.setState({products: collection.products});
-      }.bind(this)
-    });
+    this.setState({products: newThisWeekProducts});
   },
 
   render: function() {
