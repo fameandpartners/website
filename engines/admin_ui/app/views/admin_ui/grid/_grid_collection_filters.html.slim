@@ -1,5 +1,3 @@
-- content_for :page_title do
-  ' Variants & SKUs
 .ibox
   .ibox-title
     a.collapse-link
@@ -7,8 +5,6 @@
       .ibox-tools
         i.fa.fa-chevron-up
   .ibox-content
-    = datagrid_form_for @collection, :method => :get, url: variants_path
+    = datagrid_form_for @collection, :method => :get, url: collection_url
   .ibox-footer
     = link_to "Download CSV", url_for(format: 'csv')
-
-= render 'admin_ui/grid/paginated_collection_grid'

@@ -25,6 +25,7 @@ AdminUi::Engine.routes.draw do
   end
 
   resources :variants
+  resources :product_colors
 
   resources :caches, only: [:index, :destroy, :show] do
     delete :expire, :on => :collection
