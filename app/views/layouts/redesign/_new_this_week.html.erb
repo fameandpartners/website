@@ -4,5 +4,5 @@
    end
 %>
 <script type='text/javascript'>
-  var newThisWeekProducts = <%= raw new_this_week_products.to_json %>;
+  var newThisWeekProducts = <%= raw new_this_week_products.shuffle.to_json %>;
 </script>
