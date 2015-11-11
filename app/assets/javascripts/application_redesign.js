@@ -13,6 +13,11 @@
 //= require libs/jquery.dotdotdot.min
 
 // React
+
+// Adding es5-shim due to PhantomJS
+// https://github.com/reactjs/react-rails/issues/10#issuecomment-41210548
+
+//= require es5-shim/es5-shim.js
 //= require react
 //= require react_ujs
 //= require components
