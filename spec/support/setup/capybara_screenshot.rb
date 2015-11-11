@@ -1,2 +1,4 @@
-Capybara::Screenshot.autosave_on_failure = false
-Capybara::Screenshot.prune_strategy      = { keep: 5 } # Keep only 5 screenshots. No need for more than that
+require 'capybara-screenshot/rspec'
+
+Capybara::Screenshot.autosave_on_failure = true
+Capybara::Screenshot.prune_strategy      = :keep_last_run

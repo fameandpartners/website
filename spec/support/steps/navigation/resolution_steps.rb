@@ -6,10 +6,13 @@ module Acceptance
       }
 
       step 'I use a :device resolution' do |device|
-        width, height = DEVICES_RESOLUTIONS[device]
+        pending 'needs poltergeist implementation'
 
-        window = Capybara.current_session.driver.browser.manage.window
-        window.resize_to(width, height)
+        # TODO: This is valid for a selenium implementation. This won't work for poltergeist
+        # width, height = DEVICES_RESOLUTIONS[device]
+        #
+        # window = page.driver.browser.manage.window
+        # window.resize_to(width, height)
       end
     end
   end

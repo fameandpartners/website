@@ -13,6 +13,11 @@
 //= require libs/jquery.dotdotdot.min
 
 // React
+
+// Adding es5-shim due to PhantomJS
+// https://github.com/reactjs/react-rails/issues/10#issuecomment-41210548
+
+//= require es5-shim/es5-shim.js
 //= require react
 //= require react_ujs
 //= require components
@@ -27,11 +32,16 @@
 //= require libs/vex.combined.min.js
 //= require libs/jquery.cookie
 //= require libs/jquery.chosen.min
-//= require libs/soundcloud/sc-player
 //= require libs/jquery.hoverable.js
 //= require libs/superslides.js
 //= require libs/responsiveslides.min.js
 //= require libs/jquery.skippr.js
+
+//----------------------
+// SoundCloud
+//----------------------
+//= require libs/soundcloud/soundcloud.player.api
+//= require libs/soundcloud/sc-player
 
 //----------------
 // Styleguide code

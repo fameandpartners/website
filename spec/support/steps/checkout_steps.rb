@@ -12,7 +12,7 @@ module Acceptance
 
     step 'I select :country_name country' do |country_name|
       find('#order_bill_address_attributes_country_id_chosen').click
-      find('li.active-result', text: country_name).click
+      find('li.active-result', text: country_name).trigger('click')
     end
 
     step 'I fill in credit card information:' do |cc_info|
