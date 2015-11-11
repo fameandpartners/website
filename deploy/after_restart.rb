@@ -1,9 +1,10 @@
 on_app_master do
   sudo "monit restart sidekiq_#{config.app}_0"
+  is_production = config.framework_env == 'production'
 
   begin
-    nr_config     = YAML.load(File.read(File.join(config.release_path, 'config', 'newrelic.yml')))
-    is_production = config.framework_env == 'production'
+    nr_config = YAML.load(File.read(File.join(config.release_path, 'config', 'newrelic.yml')))
+
 
     if nr_config && is_production
       newrelic_api_key = nr_config['common']['license_key']
@@ -12,6 +13,18 @@ on_app_master do
       revision         = config.active_revision
       run("cd #{config.release_path} && bundle exec newrelic deployment --license-key=#{newrelic_api_key} --appname='#{app_name}' --user=#{user}  --revision=#{revision} ")
     end
+  rescue StandardError => e
+    puts e.message
+  end
+
+  begin
+    revision        = config.active_revision
+    release_stage   = config.framework_env
+    # TODO - Duplicated with config/initializers/bugsnag.rb
+    bugsnag_api_key = "997499c3e18822c6412e414ca82a86e4"
+
+    run("cd #{config.release_path} && curl -d \"apiKey=#{bugsnag_api_key}&revision=#{revision}&releaseStage=#{release_stage}\" http://notify.bugsnag.com/deploy" )
+
   rescue StandardError => e
     puts e.message
   end
