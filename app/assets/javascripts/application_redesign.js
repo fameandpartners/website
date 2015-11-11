@@ -32,11 +32,16 @@
 //= require libs/vex.combined.min.js
 //= require libs/jquery.cookie
 //= require libs/jquery.chosen.min
-//= require libs/soundcloud/sc-player
 //= require libs/jquery.hoverable.js
 //= require libs/superslides.js
 //= require libs/responsiveslides.min.js
 //= require libs/jquery.skippr.js
+
+//----------------------
+// SoundCloud
+//----------------------
+//= require libs/soundcloud/soundcloud.player.api
+//= require libs/soundcloud/sc-player
 
 //----------------
 // Styleguide code
