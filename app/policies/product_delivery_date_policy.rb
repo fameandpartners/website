@@ -64,6 +64,7 @@ module Policies
     end
 
     def self.order_delivery_date(user_cart)
+      user_cart.products = user_cart.products.reject{ |p| p.name == "Gift" }
       exist_express_making = user_cart.products.any?{ |p| p.making_options.any?{|mo| mo.name == 'Express Making'}}
       all_express_making   = user_cart.products.all?{ |p| p.making_options.any?{|mo| mo.name == 'Express Making'}}
 
