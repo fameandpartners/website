@@ -147,7 +147,6 @@ FameAndPartners::Application.routes.draw do
 
       get '/details'      => 'details#show'
       get '/order_delivery_date' => 'details#order_delivery_date'
-      get '/delivery_text'       => 'details#delivery_text'
       post '/promotion'   => 'promotions#create'
 
       post 'products' => 'products#create'
