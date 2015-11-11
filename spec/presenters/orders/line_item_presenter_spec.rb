@@ -68,7 +68,6 @@ module Orders
         allow(item).to receive_message_chain('variant.dress_size.name') { nil }
 
         expect(presenter.size).to         eq 'Unknown Size'
-        expect(presenter.make_size).to    eq 'Unknown Size'
         expect(presenter.country_size).to eq 'Unknown Size (SITE)'
       end
 
@@ -77,7 +76,6 @@ module Orders
         allow(item).to receive_message_chain('variant')                   { nil }
 
         expect(presenter.size).to eq         'JustRight'
-        expect(presenter.make_size).to    eq 'JustRight'
         expect(presenter.country_size).to eq 'JustRight (SITE)'
       end
 
@@ -86,7 +84,6 @@ module Orders
         allow(item).to receive_message_chain('variant.dress_size.name') { 'TeenyTiny' }
 
         expect(presenter.size).to eq         'TeenyTiny'
-        expect(presenter.make_size).to    eq 'TeenyTiny'
         expect(presenter.country_size).to eq 'TeenyTiny (SITE)'
       end
     end
