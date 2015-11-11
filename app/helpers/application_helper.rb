@@ -205,20 +205,6 @@ module ApplicationHelper
     spree_user_signed_in? && current_spree_user.style_profile.try(:active?)
   end
 
-  def soundcloud_widget(song_id = nil)
-    return '' if song_id.nil?
-
-    player_url_options = {
-      color: 'ff6600',
-      auto_play: false,
-      show_artwork: true,
-      url: "https://api.soundcloud.com/tracks/#{ song_id }"
-    }
-    media_player_url = "https://w.soundcloud.com/player/?#{ player_url_options.to_query }"
-    iframe_options = { width: "100%", height: '166', scrolling: 'no', frameborder: 'no' }
-    content_tag(:iframe, '', iframe_options.merge(src: media_player_url))
-  end
-
   def get_products_from_edit(edit, currency, user, count=9)
     searcher = Products::ProductsFilter.new(:edits => edit, per_page: count)
     searcher.current_user = user
