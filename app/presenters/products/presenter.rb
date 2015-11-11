@@ -200,9 +200,17 @@ module Products
     end
 
     def delivery_date
-      policy = Policies::ProjectDeliveryDatePolicy.new(self).delivery_date
-      start_date = Date.today + policy[:days_for_making] + configatron.days_delivery_emergency
-      (start_date + 1).strftime("%d %B") + " and " + (start_date + policy[:days_for_delivery]).strftime("%d %B")
+      delivery_date_obj_default               = Policies::ProjectDeliveryDatePolicy.new(self).delivery_date
+      delivery_date_obj_no_customize_standard = Policies::ProjectDeliveryDatePolicy.new(self,false,"standard").delivery_date
+      delivery_date_obj_no_customize_express  = Policies::ProjectDeliveryDatePolicy.new(self,false,"fast").delivery_date
+      delivery_date_obj_customize_standard    = Policies::ProjectDeliveryDatePolicy.new(self,true,"standard").delivery_date
+      delivery_date_obj_customize_express     = Policies::ProjectDeliveryDatePolicy.new(self,true,"fast").delivery_date
+      text_default                            = Policies::ProjectDeliveryDatePolicy.delivery_date_text(delivery_date_obj_default)
+      text_no_customize_standard              = Policies::ProjectDeliveryDatePolicy.delivery_date_text(delivery_date_obj_no_customize_standard)
+      text_no_customize_express               = Policies::ProjectDeliveryDatePolicy.delivery_date_text(delivery_date_obj_no_customize_express)
+      text_customize_standard                 = Policies::ProjectDeliveryDatePolicy.delivery_date_text(delivery_date_obj_customize_standard)
+      text_customize_express                  = Policies::ProjectDeliveryDatePolicy.delivery_date_text(delivery_date_obj_customize_express)
+      {text_default: text_default,text_no_customize_standard: text_no_customize_standard, text_no_customize_express: text_no_customize_express, text_customize_standard: text_customize_standard, text_customize_express: text_customize_express}
     end
 
     private

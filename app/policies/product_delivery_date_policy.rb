@@ -15,9 +15,10 @@ module Policies
 
     attr_reader :order
 
-    def initialize(product, customized = false)
-      @product    = product
-      @customized = customized
+    def initialize(product, customized = false, making_options = nil)
+      @product        = product
+      @customized     = customized
+      @making_options = making_options
     end
 
     def printed?
@@ -41,6 +42,7 @@ module Policies
     end
 
     def fast_making?
+      return false if @making_options == "standard"
       return true if @product.try(:fast_making)
       if @product.making_options.present?
         return true if @product.try(:making_options).any?{|mo| mo.name == "Express Making"}
@@ -55,6 +57,12 @@ module Policies
       return {days_for_making: @product.customised_days_for_making, days_for_delivery: DAYS_FOR_DELIVERY}
     end
 
+    def self.delivery_date_text(delivery_date_obj)
+      start_date = Date.today + delivery_date_obj[:days_for_making].to_i + configatron.days_delivery_emergency
+      end_date   = start_date + DAYS_FOR_DELIVERY
+      (start_date + 1).strftime("%d %B") + " and " + end_date.strftime("%d %B")
+    end
+
     def self.order_delivery_date(user_cart)
       exist_express_making = user_cart.products.any?{ |p| p.making_options.any?{|mo| mo.name == 'Express Making'}}
       all_express_making   = user_cart.products.all?{ |p| p.making_options.any?{|mo| mo.name == 'Express Making'}}
@@ -65,8 +73,8 @@ module Policies
         user_cart.products.each do |p|
           customized = p.customizations.size > 0
           date_num = Policies::ProjectDeliveryDatePolicy.new(p, customized).delivery_date
-          if date_num[:days_for_making] > max_start_date
-            max_start_date = date_num[:days_for_making] + configatron.days_delivery_emergency
+          if date_num[:days_for_making].to_i > max_start_date
+            max_start_date = date_num[:days_for_making].to_i + configatron.days_delivery_emergency
             dates_product_takes_longest = date_num
           end
         end
@@ -84,22 +92,22 @@ module Policies
           customized = p.customizations.size > 0
           date_num = Policies::ProjectDeliveryDatePolicy.new(p, customized).delivery_date
           if p.making_options.any?{|mo| mo.name == 'Express Making'}
-            if date_num[:days_for_making] > max_start_date_express
-              max_start_date_express = date_num[:days_for_making] + configatron.days_delivery_emergency
+            if date_num[:days_for_making].to_i > max_start_date_express
+              max_start_date_express = date_num[:days_for_making].to_i + configatron.days_delivery_emergency
               dates_express_product_takes_longest = date_num
             end
           else
-            if date_num[:days_for_making] > max_start_date_non_express
-              max_start_date_non_express = date_num[:days_for_making] + configatron.days_delivery_emergency
+            if date_num[:days_for_making].to_i > max_start_date_non_express
+              max_start_date_non_express = date_num[:days_for_making].to_i + configatron.days_delivery_emergency
               dates_non_express_product_takes_longest = date_num
             end
           end
         end
 
         start_date_express     = (Date.today + max_start_date_express + 1).strftime("%d %B")
-        end_date_express       = (Date.today + max_start_date_express + dates_express_product_takes_longest[:days_for_delivery]).strftime("%d %B")
+        end_date_express       = (Date.today + max_start_date_express + dates_express_product_takes_longest[:days_for_delivery].to_i).strftime("%d %B")
         start_date_non_express = (Date.today + max_start_date_non_express + 1).strftime("%d %B")
-        end_date_non_express   = (Date.today + max_start_date_non_express + dates_non_express_product_takes_longest[:days_for_delivery]).strftime("%d %B")
+        end_date_non_express   = (Date.today + max_start_date_non_express + dates_non_express_product_takes_longest[:days_for_delivery].to_i).strftime("%d %B")
 
         return {start_date_express: start_date_express, end_date_express: end_date_express, start_date_non_express: start_date_non_express, end_date_non_express: end_date_non_express}
       end

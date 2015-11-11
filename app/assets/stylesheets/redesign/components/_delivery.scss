@@ -72,7 +72,24 @@
       font-weight: 600;
       color: $c-neutral-black;
     }
+    #text-default{
+      display: inline;
+    }
+    #text_no_customize_standard{
+      display: none;
+    }
+    #text_no_customize_express{
+      display: none;
+    }
+    #text_customize_standard{
+      display: none;
+    }
+    #text_customize_express{
+      display: none;
+    }
 
   }
 
 }
+
+

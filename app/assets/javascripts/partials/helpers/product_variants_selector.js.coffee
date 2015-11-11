@@ -40,6 +40,16 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
     e.stopPropagation()
     @selected = null
     @trigger('change', @getValue())
+    @updateDeliveryDate()
+
+  updateDeliveryDate: () =>
+    express    = $("#product-making-options-action").text().indexOf("Standard") == -1
+    customized = $("#product-customize-action").text().indexOf("Customize") == -1
+    $(".delivery-wrap-compact .date-text").hide()
+    $(".delivery-wrap-compact #text_customize_express").show()     if express  and customized
+    $(".delivery-wrap-compact #text_customize_standard").show()    if !express and customized
+    $(".delivery-wrap-compact #text_no_customize_express").show()  if express  and !customized
+    $(".delivery-wrap-compact #text_no_customize_standard").show() if !express and !customized
 
   # returns current value
   getValue: () ->
