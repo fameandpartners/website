@@ -1,4 +1,4 @@
-require_relative 'taxonomy_decorator'
+require_dependency 'spree/taxonomy_decorator'
 
 Spree::Taxon.class_eval do
   include Concerns::Publishable
