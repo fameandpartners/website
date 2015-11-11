@@ -1,0 +1,8 @@
+<%
+   new_this_week_products = Rails.cache.fetch(['new_this_week_products', current_site_version.code]) do
+     Products::CollectionResource.new({:edits=>"new-this-week"}).read.serialize[:products]
+   end
+%>
+<script type='text/javascript'>
+  var newThisWeekProducts = <%= raw new_this_week_products.to_json %>;
+</script>
