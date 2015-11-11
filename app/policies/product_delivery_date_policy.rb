@@ -59,7 +59,7 @@ module Policies
       exist_express_making = user_cart.products.any?{ |p| p.making_options.any?{|mo| mo.name == 'Express Making'}}
       all_express_making   = user_cart.products.all?{ |p| p.making_options.any?{|mo| mo.name == 'Express Making'}}
 
-      if all_express_making || !exist_express_making
+      if (all_express_making || !exist_express_making) && user_cart.products.size > 0
         max_start_date = 0
         dates_product_takes_longest = nil
         user_cart.products.each do |p|
