@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151112070651) do
+ActiveRecord::Schema.define(:version => 20151112071721) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -601,16 +601,31 @@ ActiveRecord::Schema.define(:version => 20151112070651) do
   add_index "pinboard_item_events", ["pinboard_item_uuid"], :name => "index_pinboard_item_events_on_pinboard_item_uuid"
 
   create_table "pinboard_items", :force => true do |t|
-    t.integer  "pinboard_id"
+    t.integer  "pinboard_id",            :null => false
+    t.integer  "product_id",             :null => false
+    t.integer  "variant_id"
+    t.integer  "product_color_value_id"
     t.integer  "like_count"
     t.integer  "added_user_id"
     t.text     "comments"
     t.string   "uuid"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   add_index "pinboard_items", ["uuid"], :name => "index_pinboard_items_on_uuid", :unique => true
+
+  create_table "pinboards", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "purpose"
+    t.date     "event_date"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "pinboards", ["user_id"], :name => "index_pinboards_on_user_id"
 
   create_table "product_accessories", :force => true do |t|
     t.integer  "style_id"
