@@ -1,8 +1,8 @@
 module Acceptance
   module CheckoutSteps
     step 'I should see the cart sidebar with the checkout button' do
-      expect(page).to have_content('Shopping Bag')
-      find(:button, 'CHECKOUT')
+      expect(page).to have_text('Shopping Bag')
+      expect(page).to have_button('CHECKOUT')
     end
 
     step 'I select :state_name state' do |state_name|
@@ -12,7 +12,7 @@ module Acceptance
 
     step 'I select :country_name country' do |country_name|
       find('#order_bill_address_attributes_country_id_chosen').click
-      find('li.active-result', text: country_name).trigger('click')
+      click_layered_element(:css, 'li.active-result', text: country_name)
     end
 
     step 'I fill in credit card information:' do |cc_info|
