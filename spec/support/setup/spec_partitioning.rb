@@ -3,6 +3,6 @@
 RSpec.configure do |config|
    config.register_ordering :global do |examples|
      acceptance, unit = examples.partition { |ex| ex.metadata[:feature] }
-     unit.shuffle + acceptance.shuffle
+     unit + acceptance
   end
 end
