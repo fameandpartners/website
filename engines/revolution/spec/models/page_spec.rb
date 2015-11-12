@@ -20,16 +20,21 @@ describe Revolution::Page do
 
   describe 'robots' do
     context 'no noindex, nofollow' do
-      it { expect(page).to_not be_robots }
-      it { expect(page.robots).to be_empty }
+      it { expect(page.robots).to eq 'index,follow' }
     end
 
     context 'noindex' do
       before do
         page.noindex = true
       end
-      it { expect(page).to be_robots }
-      it { expect(page.robots).to eq 'noindex' }
+      it { expect(page.robots).to eq 'noindex,follow' }
+    end
+
+    context 'nofollow' do
+      before do
+        page.nofollow = true
+      end
+      it { expect(page.robots).to eq 'index,nofollow' }
     end
 
     context 'noindex, nofollow' do
@@ -37,7 +42,6 @@ describe Revolution::Page do
         page.noindex  = true
         page.nofollow = true
       end
-      it { expect(page).to be_robots }
       it { expect(page.robots).to eq 'noindex,nofollow' }
     end
   end
