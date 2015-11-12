@@ -62,15 +62,6 @@ class Products::DetailsResource
     end
   end
 
-  def standard_days_for_making
-    property("standard_days_for_making") || 6
-  end
-
-  def customised_days_for_making
-    property("customised_days_for_making") || 11
-  end
-
-
   private
 
     # options[:product_slug], options[:product_id], options[:product])
