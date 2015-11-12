@@ -131,14 +131,10 @@ module Revolution
       Revolution::Page.new(template_path: '/products/collections/show')
     end
 
-    def robots?
-      noindex? || nofollow?
-    end
-
     def robots
       [].tap do |a|
-        a << 'noindex' if noindex?
-        a << 'nofollow' if nofollow?
+        a << (noindex? ? 'noindex' : 'index')
+        a << (nofollow? ? 'nofollow' : 'follow')
       end.join(',')
     end
 
