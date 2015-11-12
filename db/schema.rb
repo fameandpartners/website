@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151110165722) do
+ActiveRecord::Schema.define(:version => 20151112070651) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -589,6 +589,28 @@ ActiveRecord::Schema.define(:version => 20151110165722) do
 
   add_index "payment_requests", ["order_id"], :name => "index_payment_requests_on_order_id"
   add_index "payment_requests", ["token"], :name => "index_payment_requests_on_token"
+
+  create_table "pinboard_item_events", :force => true do |t|
+    t.string   "pinboard_item_uuid"
+    t.string   "event_type"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "occurred_at"
+  end
+
+  add_index "pinboard_item_events", ["pinboard_item_uuid"], :name => "index_pinboard_item_events_on_pinboard_item_uuid"
+
+  create_table "pinboard_items", :force => true do |t|
+    t.integer  "pinboard_id"
+    t.integer  "like_count"
+    t.integer  "added_user_id"
+    t.text     "comments"
+    t.string   "uuid"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "pinboard_items", ["uuid"], :name => "index_pinboard_items_on_uuid", :unique => true
 
   create_table "product_accessories", :force => true do |t|
     t.integer  "style_id"
