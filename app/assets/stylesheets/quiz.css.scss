@@ -1,3 +1,4 @@
+@import "compass";
 @import 'droidcss/mixins';
 @import 'old_site/partials/mixins';
 
@@ -13,9 +14,10 @@
 @import 'libs/vex-theme-flat-attack.css';
 @import 'libs/vex-theme-bottom-right-corner.css';
 // @import 'redesign/modal';
+@import 'redesign/mixins';
 @import 'redesign/icons';
 
-@import 'transient_content';
-
 @import 'old_site/partials/quiz';
+
+@import 'transient_content';
 @import 'old_site/partials/quiz_iframe';
