@@ -95,8 +95,8 @@ module Orders
         {
           style_num:        item.style_number,
           sku:              item.sku,
-          size:             item.country_size,
-          adjusted_size:    item.make_size,
+          size:             item.size,
+          adjusted_size:    item.country_size,
           color:            item.colour_name,
           quantity:         item.quantity,
           factory:          item.factory,
