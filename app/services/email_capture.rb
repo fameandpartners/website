@@ -13,7 +13,7 @@ class EmailCapture
   def capture(data_object)
 
     if service == 'mailchimp'
-      current_email = return_email_object(data_object)
+      current_email = data_object
 
       get_email = email_changed?(current_email) ? current_email.email_was : current_email.email
 
@@ -37,10 +37,6 @@ class EmailCapture
       end
     end
 
-  end
-
-  def return_email_object(data_object)
-    data_object
   end
 
   def email_changed?(current_email)
