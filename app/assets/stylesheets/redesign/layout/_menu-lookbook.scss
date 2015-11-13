@@ -1,35 +1,10 @@
 /* [Menu Lookbook]
 -------------------------------------------------------*/
 .menu-lookbook {
-  background: $c-neutral-white;
+  padding: 20px 20px 20px 30px;
 
-  .item-wrap {
-    float: left;
-    display: block;
-    width: 33.33333333%;
-
-    &:nth-child(odd) .title {
-      background: $c-brand-blue;
-    }
-
-  }
-
-  .title {
-    padding: 20px;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 1em;
-    font-weight: 600;
-    color: $c-neutral-white;
-    background: $c-neutral-black;
-  }
-
-  .slick-prev {
-    left: 10px;
-  }
-
-  .slick-next {
-    right: 10px;
+  .panel-highlight {
+    margin: 0;
   }
 
 }
