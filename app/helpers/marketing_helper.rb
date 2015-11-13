@@ -58,7 +58,17 @@ module MarketingHelper
     # if someone forgot to escape base64 encoded param to url-safe
     # then '+' => ' '
     restored_string = p.to_s.gsub(/\s/, '+')
-    Base64.decode64(restored_string)
+    str = Base64.decode64(restored_string)
+
+    unless str.encoding.name == 'UTF-8'
+      begin
+        str = str.encode("UTF-8")
+      rescue Encoding::UndefinedConversionError => e
+        NewRelic::Agent.notice_error(e, bad_string: str)
+        str = ""
+      end
+    end
+    str
   end
 
   def encode(p)
