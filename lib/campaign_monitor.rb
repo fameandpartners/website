@@ -8,18 +8,18 @@ class CampaignMonitor
 
   def self.schedule(method, *args)
     if execute_immediately?
-      CampaignMonitor.send(*args.unshift(method))
+      #CampaignMonitor.send(*args.unshift(method))
     else
-      CampaignMonitor.delay.send(*args.unshift(method))
+      #CampaignMonitor.delay.send(*args.unshift(method))
     end
   end
 
   def self.set_purchase_date(user, purchase_date, custom_fields = {})
-    synchronize(
-      user.email,
-      user,
-      custom_fields.merge('note' => "Purchase_date: #{ purchase_date.to_date.to_s }")
-    )
+    #synchronize(
+    #  user.email,
+    #  user,
+    #  custom_fields.merge('note' => "Purchase_date: #{ purchase_date.to_date.to_s }")
+    #)
   end
 
   def self.synchronize(email, user = nil, custom_fields = {})
