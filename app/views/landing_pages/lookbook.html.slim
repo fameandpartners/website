@@ -1,0 +1,46 @@
+= render :partial => 'landing_pages/common'
+
+.container.content-block
+  .row
+    .col-md-12
+      .panel-hero
+        .media-wrap-outer
+          .media-wrap.keep-ratio
+            .inner-wrap
+              = image_tag "lookbook/bring-on-the-night.jpg"
+        .content-wrap
+          .outer-wrap
+            .inner-wrap
+              h1.heading Bring on the night
+              p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+              = link_to 'View this collection', lookbook_path, class: 'btn btn-md btn-black'
+
+    .col-md-6
+      = link_to dance_hall_days_collection_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/dance-hall-days.jpg"
+        .copy-wrap Dance Hall Days <em><span>View this collection</span></em>
+    .col-md-6
+      = link_to photo_finish_collection_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/photo-finish.jpg"
+        .copy-wrap Photo Finish <em><span>View this collection</span></em>
+    .col-md-6
+      = link_to make_a_statement_collection_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/make-a-statement.jpg"
+        .copy-wrap Make a Statement <em><span>View this collection</span></em>
+
+    .col-md-12
+      h2.title-line-on-sides
+        .inner-wrap PREVIOUS LOOKBOOKS
+
+    .col-md-3.col-xs-6
+      = link_to luxe_collection_path, class: 'panel-compact'
+        .media-wrap.keep-ratio
+          .inner-wrap
+            = image_tag "lookbook/luxe-collection.jpg"
+        .copy-wrap Luxe Collection
+    .col-md-3.col-xs-6
+      = link_to bridesmaid_collection_path, class: 'panel-compact'
+        .media-wrap.keep-ratio
+          .inner-wrap
+            = image_tag "lookbook/besties-bridesmaids.jpg"
+        .copy-wrap Besties & Bridesmaids

@@ -228,34 +228,26 @@ ruby:
               li.normal-item.no-border
                 = link_to 'Debutante', build_taxon_path('Debutante'), class: 'text'
 
-
-
         div#lookbook-menu
           ul.nav.navbar-nav
             li.normal-item
-              .text.text-back LOOKBOOK
+              .text.text-back LOOKBOOKS
               .arrow
                 i.fa.fa-chevron-left
                 .back BACK
             li.manu-content
-                = link_to make_a_statement_collection_path
-                  .heading
-                    .inner-wrap
-                      span bambi x fame.
-                  .media-wrap
-                    = image_tag 'homepage/lookbook/1.jpg'
-                = link_to dance_hall_days_collection_path
-                  .heading.alt
-                    .inner-wrap
-                      span dance hall days
-                  .media-wrap
-                    = image_tag 'homepage/lookbook/dance-hall-days.jpg'
-                = link_to photo_finish_collection_path
-                  .heading.alt
-                    .inner-wrap
-                      span photo finish
-                  .media-wrap
-                    = image_tag 'homepage/lookbook/2.jpg'
+              = link_to luxe_collection_path
+                .panel-highlight.media-wrap
+                  = image_tag "lookbook/bring-on-the-night.jpg"
+                  .copy-wrap Bring on the night <em><span>View this collection</span></em>
+            li.normal-item = link_to 'Bring On The Night', luxe_collection_path, class: 'text'
+            li.normal-item = link_to 'Dance Hall Days', dance_hall_days_collection_path, class: 'text'
+            li.normal-item = link_to 'Photo Finish', photo_finish_collection_path, class: 'text'
+            li.normal-item = link_to 'Make a Statement', make_a_statement_collection_path, class: 'text'
+            li.normal-item = link_to 'Luxe Collection', luxe_collection_path, class: 'text'
+            li.normal-item = link_to 'Besties & Bridesmaids', bridesmaid_collection_path, class: 'text'
+            li.normal-item.no-border = link_to 'View all lookbooks', lookbook_path, class: 'text'
+
         /!
           div#magazine-menu
             ul.nav.navbar-nav
@@ -302,7 +294,7 @@ ruby:
               .arrow
                 i.fa.fa-chevron-right
           li.normal-item#lookbook-menu-open
-            .text LOOKBOOK
+            .text LOOKBOOKS
             .arrow
               i.fa.fa-chevron-right
           li.normal-item
