@@ -7,7 +7,7 @@ describe Policies::ProjectDeliveryDatePolicy do
     let(:service)                { described_class.new(print_dress) }
 
     it "return correct delivery date for a printed dress" do
-      service.printed?.should_not be_nil
+      expect(service).to be_printed
       expect(service.delivery_date).to eq({:days_for_making => 11, :days_for_delivery => 4})
     end
 
@@ -21,7 +21,7 @@ describe Policies::ProjectDeliveryDatePolicy do
     let(:service)                { described_class.new(beading_dress) }
 
     it "return correct delivery date for a beading dress" do
-      service.beading?.should_not be_nil
+      expect(service).to be_beading
       expect(service.delivery_date).to eq({:days_for_making => 11, :days_for_delivery => 4})
     end
 
@@ -35,7 +35,7 @@ describe Policies::ProjectDeliveryDatePolicy do
     let(:service)                { described_class.new(embroid_dress) }
 
     it "return correct delivery date for a embroid dress" do
-      service.embroidered?.should_not be_nil
+      expect(service).to be_embroidered
       expect(service.delivery_date).to eq({:days_for_making => 11, :days_for_delivery => 4})
     end
 
