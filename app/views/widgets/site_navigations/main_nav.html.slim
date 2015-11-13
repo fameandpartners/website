@@ -7,88 +7,39 @@ doctype html
 
     = render :partial => 'shared/typekit'
 
+    script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"
     script type="text/javascript"
       | try{Typekit.load();}catch(e){}
 
     = stylesheet_link_tag 'widgets/site_navigations'
     = csrf_meta_tags
 
-  body#top[onload="initPage()"]
-    header
-      .nav-menu.nav-alert-top
-        .container-fluid.nav-menu-container
-          .masthead.pull-left.hidden-xs
-            = link_to '/', rel: 'nofollow' do
-              = image_tag src='logo/new-logo.svg', :class => 'nav-logo', :alt => 'Fame & Partners'
-
-          .masthead.pull-left.visible-xs
-            = link_to '/', rel: 'nofollow' do
-              = image_tag src='logo/logo-mobile.svg', :class => 'mobile-logo', :alt => 'Fame & Partners'
-
-          ul.primary.pull-left.hidden-sm.hidden-xs.hidden-xxs
-            li.shop.menu-item
-              = link_to dresses_path(site_version: current_site_version.code), class: 'menu-item--link active-hover', rel: 'nofollow' do
-                | Shop
-            li.shop.menu-item
-              = link_to lookbook_path, class: "menu-item--link active-hover", rel: 'nofollow' do
-                | Lookbook
-            li.menu-item
-              = link_to 'Blog', 'http://fameandpartners.tumblr.com/', class: 'menu-item--link', rel: 'nofollow'
-
-          ul.secondary.pull-right
-            - if Features.active?(:moodboard)
-                li.menu-item.hidden-xs.hidden-sm.hide-item
-                  = link_to wishlist_path, class: 'menu-item--link', id: 'moodboard-trigger', rel: 'nofollow' do
-                    span.visible-sm
-                      = image_tag "Heart.svg"
-                    span.hidden-sm.hidden-xs#moodboard-counter
-                      | Moodboard &nbsp;
-
-            li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs.hide-item
-              = link_to 'my account', profile_path, class: "menu-item--link active-hover", rel: 'nofollow'
-
-            li.shop.menu-item.account-btn.hidden-sm.hidden-xs.hidden-xxs.hidden-md.hidden-lg.hide-item
-              = link_to profile_path, class: "menu-item--link active-hover", rel: 'nofollow' do
-                = image_tag "_icons/my-account.svg", class: 'nav-mobile-logo', alt: 'my account'
-
-            li.menu-item
-              a.menu-item--link.search href="#" id="search"
-                = image_tag "_icons/search.svg", class: "nav-mobile-logo"
-
-              .search-input.hidden
-                form accept-charset="UTF-8" action="/search" method="get"
-                  input.form-control type="text" placeholder="type here..."
-                #close-search.close-search-btn
-                  = image_tag 'close.svg', width: 12, height: 12, alt: ''
-
-            li#cart-trigger.menu-item
-              = link_to root_path(open_cart: true), class: 'menu-item--link', rel: 'nofollow' do
-                span = image_tag "_icons/shopping-bag.svg", class: 'nav-mobile-logo', alt: 'Cart'
+  body
+    #header-widget
+      = render :partial => 'layouts/redesign/header/gray_top_banner/base'
 
 coffee:
-  window.initPage = ->
-    searchLink  = document.getElementById('search')
-    searchInput = document.getElementsByClassName('search-input')[0]
-    hideItems   = document.getElementsByClassName('hide-item')
-    hideItemsArray = new Array()
-    for e in hideItems
-      hideItemsArray.push(e)
-    hideItemsArray.push(document.getElementById('cart-trigger'))
+  $(document).ready ->
 
-    searchLink.onclick = ->
-      searchInput.classList.remove('hidden')
-      searchLink.classList.add('hidden')
-      for e in hideItemsArray
-        e.classList.add('hidden')
-      false
+    $("#search").on('click' , ->
+      $(this).addClass('active')
+    )
 
-    closeSearch = document.getElementById('close-search')
+    $('.js-search-trigger').on('click' , (e)->
+      if $(this).parent().hasClass('active')
+        if $("#searchForm #searchValue").val() != ''
+          $("#searchForm").submit()
+        else
+          e.stopPropagation()
+          $("#search").removeClass('active')
+    )
 
-    closeSearch.onclick = ->
-      searchInput.classList.add('hidden')
-      searchLink.classList.remove('hidden')
-      for e in hideItemsArray
-        e.classList.remove('hidden')
-      false
+    $("#home-menu span[id!='search']").on('mouseenter', ->
+      $(".rect").removeClass('active');
+      $("#rect-"+this.className).addClass('active');
+      $("#search").removeClass('active')
+    )
 
-
+    $(".rect").on('mouseleave', ->
+      $(".rect").removeClass('active');
+    )

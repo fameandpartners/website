@@ -7,5 +7,5 @@
     ul
       - SiteVersion.all.each do |site_version|
         li class=('active' if site_version == current_site_version)
-          = link_to site_version_path(site_version.code) do
+          = link_to "/"+site_version.to_param do
             = render 'layouts/redesign/header/locale_selector/item', site_version: site_version
