@@ -7,15 +7,6 @@ describe EmailCapture do
   it { expect(EmailCapture.new({service: 'mailchimp'}).service).to eq 'mailchimp' }
   it { expect(EmailCapture.new({service: 'Mailchimp'}).service).to eq 'mailchimp' }
 
-  describe 'call .capture' do
-    context 'when service is mailchimp' do
-
-      it 'something' do
-        # p mailchimp.service
-      end
-    end
-  end
-
   describe 'call .email_changed?' do
     it { expect(mailchimp.email_changed?(user)).to be_falsey }
     it 'returns true when email was changed' do
@@ -60,44 +51,42 @@ describe EmailCapture do
   end
 
   describe 'call .set_newsletter' do
-    let(:subscriber) { [] }
 
     it 'returns no when no newsletter is set and user is passed' do
-      expect(mailchimp.set_newsletter(user, subscriber)).to eq 'no'
+      expect(mailchimp.set_newsletter(user)).to eq 'no'
     end
     it 'returns yes when newsletter is set and user is passed' do
       user.newsletter = true
-      expect(mailchimp.set_newsletter(user, subscriber)).to eq 'yes'
+      expect(mailchimp.set_newsletter(user)).to eq 'yes'
     end
     it 'returns no when no newsletter is set and a non-activerecord object is passed' do
-      expect(mailchimp.set_newsletter(Contact.new(email: 'test@test.com'), subscriber)).to eq 'no'
+      expect(mailchimp.set_newsletter(Contact.new(email: 'test@test.com'))).to be_nil
     end
   end
 
   describe 'call .set_merge' do
-    let(:subscriber) { [] }
     context 'when passed the user' do
       before  {user.current_sign_in_ip = "101.0.79.50" }
-      it { expect(mailchimp.set_merge(user, subscriber).class.to_s).to eq 'Hash' }
-      it { expect(mailchimp.set_merge(user, subscriber)[:fname]).to eq user.first_name }
-      it { expect(mailchimp.set_merge(user, subscriber)[:lname]).to eq user.last_name }
-      it { expect(mailchimp.set_merge(user, subscriber)[:ip_address]).to eq user.current_sign_in_ip }
-      it { expect(mailchimp.set_merge(user, subscriber)[:country]).to be }
-      it { expect(mailchimp.set_merge(user, subscriber)[:n_letter]).to eq 'no' }
+      it { expect(mailchimp.set_merge(user).class.to_s).to eq 'Hash' }
+      it { expect(mailchimp.set_merge(user)[:fname]).to eq user.first_name }
+      it { expect(mailchimp.set_merge(user)[:lname]).to eq user.last_name }
+      it { expect(mailchimp.set_merge(user)[:ip_address]).to eq user.current_sign_in_ip }
+      it { expect(mailchimp.set_merge(user)[:country]).to be }
+      it { expect(mailchimp.set_merge(user)[:n_letter]).to eq 'no' }
     end
 
     context 'when passed a contact' do
       let(:contact) { Contact.new(email: 'test@test.com', first_name: "First", last_name: "Last" ) }
-      it { expect(mailchimp.set_merge(contact, subscriber)[:fname]).to eq contact.first_name }
-      it { expect(mailchimp.set_merge(contact, subscriber)[:lname]).to eq contact.last_name }
-      it { expect(mailchimp.set_merge(contact, subscriber)[:n_letter]).to eq 'no' }
+      it { expect(mailchimp.set_merge(contact)[:fname]).to eq contact.first_name }
+      it { expect(mailchimp.set_merge(contact)[:lname]).to eq contact.last_name }
+      it { expect(mailchimp.set_merge(contact)[:n_letter]).to be_nil }
     end
 
     context 'when passed a OpenStruct' do
       let(:os) { OpenStruct.new(email: 'test@test.com', current_sign_in_ip: "101.0.79.50") }
-      it { expect(mailchimp.set_merge(os, subscriber)[:ip_address]).to eq os.current_sign_in_ip }
-      it { expect(mailchimp.set_merge(os, subscriber)[:country]).to be }
-      it { expect(mailchimp.set_merge(os, subscriber)[:n_letter]).to eq 'no' }
+      it { expect(mailchimp.set_merge(os)[:ip_address]).to eq os.current_sign_in_ip }
+      it { expect(mailchimp.set_merge(os)[:country]).to be }
+      it { expect(mailchimp.set_merge(os)[:n_letter]).to be_nil }
     end
 
   end

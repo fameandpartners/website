@@ -9,6 +9,7 @@ class ContactsController < ApplicationController
   end
 
   def create
+    params[:contact][:current_sign_in_ip] = request.remote_ip
     @contact = Contact.new(params[:contact])
     if @contact.valid?
       email = EmailCapture.new({ service: 'mailchimp' }).capture(@contact)

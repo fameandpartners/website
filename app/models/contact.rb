@@ -27,7 +27,8 @@ class Contact
     ]
   ]
 
-  attr_accessor :first_name, :last_name, :email, :subject, :site_version, :message, :phone, :order_number
+  attr_accessor :first_name, :last_name, :email, :subject, :site_version, :message, :phone, :order_number,
+                :current_sign_in_ip
 
   validates :email, format: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i, presence: true
   validates :first_name, :last_name, :subject, :site_version, :message, presence: true
