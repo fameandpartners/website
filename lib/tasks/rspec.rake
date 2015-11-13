@@ -18,6 +18,7 @@ begin
       Rails.application.config.rspec_paths.each do |dir|
         if File.directory?(dir)
           extras << File.join(dir, 'spec', '**', '*_spec.rb').to_s
+          extras << File.join(dir, 'spec', '**', '*.feature').to_s
         end
       end
       [@pattern] | extras
