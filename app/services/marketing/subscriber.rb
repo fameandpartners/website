@@ -85,6 +85,6 @@ class Marketing::Subscriber
     end
 
     def country_name
-      UserCountryFromIP.new(ipaddress).country_name
+      FindCountryFromIP.new(ipaddress).country_name
     end
 end

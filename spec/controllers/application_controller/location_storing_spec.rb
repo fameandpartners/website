@@ -1,4 +1,5 @@
 require 'spec_helper'
+
 describe ApplicationController, :type => :controller do
   describe '#is_user_came_from_current_app' do
     it 'returns true if referrer has the same host' do
@@ -32,18 +33,3 @@ describe ApplicationController, :type => :controller do
     end
   end
 end
-=begin
-  def is_user_came_from_current_app
-    return false if request.referrer.blank?
-    URI.parse(request.referrer).host == request.host
-  rescue Exception => e
-    # built-in ruby uri known for parse/generate issues.
-    false
-  end
-
-  def set_after_sign_in_location(location, options = {})
-    return if location && location.match(/\b(login|logout|fb_auth|session|sign_in|sign_out)\b/)
-    session[:user_return_to] = location
-    session[:spree_user_return_to] = location
-  end
-=end

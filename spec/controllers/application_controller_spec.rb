@@ -40,40 +40,5 @@ describe ApplicationController, :type => :controller do
         end
       end
     end
-
-    describe '#check_site_version' do
-      let!(:australian_site_version) { create(:site_version, permalink: 'au') }
-      let!(:portuguese_site_version) { create(:site_version, permalink: 'pt') }
-
-      before(:each) do
-        controller.instance_variable_set(:@current_site_version, australian_site_version)
-      end
-
-      context 'request is a ajax or a non GET' do
-        it 'does not changes the site version' do
-          post :create, { site_version: 'pt' }
-          expect(controller.instance_variable_get(:@current_site_version)).to eq(australian_site_version)
-
-          xhr :get, :index, { site_version: 'pt' }
-          expect(controller.instance_variable_get(:@current_site_version)).to eq(australian_site_version)
-        end
-      end
-
-      context 'user request a different site version' do
-        it 'updates the current site version with the requested' do
-          get :index, { site_version: 'pt' }
-          controller_site_version = controller.instance_variable_get(:@current_site_version)
-          expect(controller_site_version).to eq(portuguese_site_version)
-        end
-      end
-
-      context 'user requests the same site version' do
-        it 'keep the current site version' do
-          get :index, { site_version: 'au' }
-          controller_site_version = controller.instance_variable_get(:@current_site_version)
-          expect(controller_site_version).to eq(australian_site_version)
-        end
-      end
-    end
   end
 end

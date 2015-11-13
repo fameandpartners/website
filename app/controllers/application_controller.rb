@@ -19,13 +19,12 @@ class ApplicationController < ActionController::Base
 
   append_before_filter :store_marketing_params
   append_before_filter :check_marketing_traffic
-  append_before_filter :check_cart
   append_before_filter :add_site_version_to_mailer
-  append_before_filter :count_competition_participants,     if: proc {|c| params[:cpt].present? }
+  append_before_filter :count_competition_participants, if: proc { |_| params[:cpt].present? }
   append_before_filter :handle_marketing_campaigns
 
   before_filter :set_session_country
-  before_filter :add_debugging_infomation
+  before_filter :add_debugging_information
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
   before_filter :set_locale
 
@@ -99,7 +98,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def add_debugging_infomation
+  def add_debugging_information
     ::NewRelic::Agent.add_custom_attributes({
       user_id:      current_spree_user.try(:id),
       user_email:   current_spree_user.try(:email),
@@ -107,15 +106,8 @@ class ApplicationController < ActionController::Base
       order_number: current_order.try(:number),
       referrer:     request.referrer
     })
-  rescue Exception => e
+  rescue Exception => _
     true
-  end
-
-  def check_cart
-    # if can't find order, create it ( true )
-    # current order calls current currency which calls current site version
-    # and convert current order to current currency
-    current_order(true) if current_order.blank?
   end
 
   def add_site_version_to_mailer
@@ -270,10 +262,6 @@ class ApplicationController < ActionController::Base
     description([prefix, default_meta_description].join(' - '))
   end
 
-  def current_currency
-    current_site_version.try(:currency) || Spree::Config[:currency]
-  end
-
   def default_locale
     'en-US'
   end
@@ -332,7 +320,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_session_country
-    session[:country_code] ||= UserCountryFromIP.new(request.remote_ip).country_code
+    session[:country_code] ||= FindCountryFromIP.new(request.remote_ip).country_code
   end
 
 end

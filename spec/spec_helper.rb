@@ -20,9 +20,6 @@ require 'ffaker'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
-  config.include(FactoryGirl::Syntax::Methods)
-  config.include(Rails.application.routes.url_helpers)
-
   config.alias_it_should_behave_like_to :it_will, 'it will'
 
   # == Mock Framework
