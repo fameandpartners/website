@@ -11,6 +11,7 @@ class Users::ProfilesController < Users::BaseController
   end
 
   def update
+    params[:profile][:landing_page] = session[:landing_page]
     if @user.update_profile(params[:profile])
       respond_with(@user) do |format|
         format.html { redirect_to profile_path }

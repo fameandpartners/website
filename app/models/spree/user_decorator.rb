@@ -24,9 +24,12 @@ Spree::User.class_eval do
 
   attr_accessor :skip_welcome_email,
                 :validate_presence_of_phone,
-                :previous_email
+                :previous_email,
+                :landing_page,
+                :utm_params
 
-  attr_accessible :first_name, :last_name, :phone, :dob, :skip_welcome_email, :automagically_registered
+  attr_accessible :first_name, :last_name, :phone, :dob, :skip_welcome_email, :automagically_registered,
+                  :landing_page, :utm_params
 
   validates :first_name, :last_name, :presence => true
 
