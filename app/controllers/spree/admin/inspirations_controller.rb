@@ -19,7 +19,7 @@ module Spree
       end
 
       def model_class
-        Spree::CelebrityInspiration
+        CelebrityInspiration
       end
     end
   end

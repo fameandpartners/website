@@ -3,8 +3,8 @@ Spree::Product.class_eval do
 
   has_one :celebrity_inspiration,
     dependent: :destroy,
-    class_name: 'Spree::CelebrityInspiration',
-    foreign_key: :spree_product_id
+    class_name: 'CelebrityInspiration',
+    foreign_key: :spree_product_id, inverse_of: :product
 
   has_one :style_profile,
     dependent: :destroy,
