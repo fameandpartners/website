@@ -34,7 +34,9 @@ class Campaigns::EmailCaptureController < ApplicationController
     ).create
 
     EmailCapture.new({ service: 'mailchimp' }).capture(OpenStruct.new(email: params[:email],
-                                                                      current_sign_in_ip: request.remote_ip))
+                                                                      current_sign_in_ip: request.remote_ip,
+                                                                      landing_page: session[:landing_page],
+                                                                      utm_params: session[:utm_params]))
 
     begin
       if params[:promocode].present?
@@ -82,7 +84,8 @@ class Campaigns::EmailCaptureController < ApplicationController
 
   def mailchimp
     EmailCapture.new({ service: 'mailchimp' }).capture(OpenStruct.new(email: params[:email],
-                                                                      current_sign_in_ip: request.remote_ip))
+                                                                      current_sign_in_ip: request.remote_ip,
+                                                                      landing_page: session[:landing_page]))
 
     render nothing: true
   end

@@ -65,6 +65,19 @@ class EmailCapture
     first_name
   end
 
+  def retrieve_landing_page(c_email)
+    landing_page = nil
+    case
+      when c_email.class.to_s == 'Contact'
+        landing_page = c_email.landing_page
+      when c_email.class.to_s == 'OpenStruct'
+        landing_page = c_email.landing_page
+      else
+        landing_page = c_email.landing_page if c_email.attributes.key?('landing_page')
+    end
+    landing_page
+  end
+
   def retrieve_last_name(c_email)
     last_name = nil
     case
@@ -90,8 +103,10 @@ class EmailCapture
   end
 
   def set_merge(current_email)
-    first_name = retrieve_first_name(current_email)
-    last_name  = retrieve_last_name(current_email)
+    utm_params   = get_utm(current_email)
+    first_name   = retrieve_first_name(current_email)
+    last_name    = retrieve_last_name(current_email)
+    landing_page = retrieve_landing_page(current_email)
 
     merge_variables = {}
 
@@ -101,12 +116,34 @@ class EmailCapture
       merge_variables[:fname]      = first_name if first_name.present?
       merge_variables[:lname]      = last_name if last_name.present?
       merge_variables[:ip_address] = '101.0.79.50' #data_object.current_sign_in_ip
-      merge_variables[:country]    = UserCountryFromIP.new('101.0.79.50').country.country_name
+      merge_variables[:country]    = FindCountryFromIP.new('101.0.79.50').country.country_name
+      merge_variables[:l_page]     = landing_page if landing_page.present?
+
+      if !utm_params.blank?
+        merge_variables[:u_campaign] = utm_params[:utm_campaign]
+        merge_variables[:u_source]   = utm_params[:utm_source]
+        merge_variables[:u_medium]   = utm_params[:utm_medium]
+        merge_variables[:u_term]     = utm_params[:utm_term]
+        merge_variables[:u_content]  = utm_params[:utm_content]
+      end
 
       merge_variables[:n_letter]   = set_newsletter(current_email) if set_newsletter(current_email).present?
     end
 
     merge_variables
+  end
+
+  def get_utm(d_o)
+    utm_params = nil
+    case
+      when d_o.class.to_s == 'Contact'
+        utm_params = d_o.utm_params
+      when d_o.class.to_s == 'OpenStruct'
+        utm_params = d_o.utm_params
+      else
+        d_o = d_o.utm_params if d_o.attributes.key?('utm_params')
+    end
+    utm_params
   end
 
 end
