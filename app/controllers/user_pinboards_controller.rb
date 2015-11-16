@@ -1,0 +1,2 @@
+class UserPinboardsController < ApplicationController
+end

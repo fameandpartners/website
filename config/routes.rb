@@ -210,6 +210,8 @@ FameAndPartners::Application.routes.draw do
     get 'user_orders/:id' => 'users/orders#show', as: 'user_order'
 
     resource 'users/returns', as: 'user_returns', only: [:new, :create]
+    resources :moodboards
+    get 'moodboard', to: 'moodboards#show'
 
     get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
 

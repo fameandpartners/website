@@ -56,13 +56,44 @@ class UserMoodboard::Populator
     end
 
     def add_color_variant(product, variant, color)
+      binding.pry if variant
+
+      product_id = product.try(:id) || variant.product_id
+      variant_id = variant.try(:id)
       item = user.wishlist_items.where(
         spree_product_id: product.try(:id) || variant.product_id,
         product_color_id: color_id
       ).first_or_initialize
       item.quantity = 1
       item.spree_variant_id = variant.try(:id) || product.master.id
-      item.save
+      # item.save
+# binding.pry
+
+
+# pcv = ProductColorValue.where(product_id: product_id, option_value_id: color_id).first
+      # ProductColorValue.where(product_id: product_id, option_value_id: color_id)
+
+      user.pinboards.default_or_create.add_item(product: product, color: color, user: user, variant: variant)
+      # pinboard = user.pinboards.default_or_create
+      # # binding.pry
+      # ev = PinboardItemEvent.creation.new(
+      #   pinboard_id:            pinboard.id,
+      #   product_id:             product_id,
+      #   product_color_value_id: pcv.id,
+      #   color_id:               color_id,
+      #   user_id:                user.id
+      # )
+      # ev.save!
+      # binding.pry
+      #
+      # user.pinboards.default_or_create.items.events.creation.create(
+      #
+      #   product_id: product_id,
+      #   product_color_value_id: pcv.id,
+      #   color_id: color_id,
+      #   # variant_id: variant_id,
+      #   user_id: user.id
+      # )
 
       item
     end
@@ -74,6 +105,9 @@ class UserMoodboard::Populator
         spree_product_id: variant.product_id,
         product_color_id: product_variant.try(:color_id)
       ).first_or_initialize
+
+      binding.pry
+      user.pinboards.default_or_create.items.where(product_id: variant.product_id, variant_id: variant.id).first_or_create
 
       item.quantity = 1
       item.spree_variant_id = variant.id

@@ -15,6 +15,8 @@ module FameAndPartners
   end
 
   class Application < Rails::Application
+    config.active_record.observers ||= []
+    config.active_record.observers << :pinboard_item_event_observer
     require "#{Rails.root}/config/initializers/bower_rails.rb"
 
     config.active_record.observers ||= []

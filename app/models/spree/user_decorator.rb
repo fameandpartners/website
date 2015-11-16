@@ -7,6 +7,8 @@ Spree::User.class_eval do
 
   has_many :reservations, class_name: 'ProductReservation', foreign_key: :user_id
 
+  has_many :pinboards, inverse_of: :user
+
   has_one :personalization_settings
 
   has_many :email_notifications, foreign_key: :spree_user_id

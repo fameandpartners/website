@@ -1,0 +1,3 @@
+ul
+  - @collection.each do |board|
+    li = link_to(board.name || 'Moodboard', moodboard_path(board))

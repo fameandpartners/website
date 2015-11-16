@@ -1,0 +1,21 @@
+ul.nav
+  - @collection.each do |board|
+    li = link_to(board.name || 'Moodboard', moodboard_path(board))
+
+
+h3 = @resource.name || 'Moodboard'
+h4 = @resource.event_date || "When's the big day?"
+h4 = @resource.purpose || "Wishlist"
+
+ul
+  - @resource.items.each do |item|
+    li
+      = item.inspect
+      /= cropped_product_hoverable_image_tag(item.product_color_value)
+      = cropped_product_hoverable_image_tag(item.product)
+      /img src=item.product_color_value.images.sample.attachment.url
+
+
+
+pre
+  = @resource.inspect
