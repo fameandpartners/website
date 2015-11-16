@@ -203,20 +203,10 @@ FameAndPartners::Application.routes.draw do
 
     # Old Blog Redirection (30/06/2015)
     get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
-  end
 
-
-
-
-
-
-
-
-
-
-
-  scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
-    # Static pages
+    #######################
+    # (Others) Static pages
+    #######################
     get '/about'   => 'statics#about', :as => :about_us
     get '/why-us'  => 'statics#why_us', :as => :why_us
     get '/team', to: redirect("http://www.fameandpartners.com/about")
@@ -235,7 +225,7 @@ FameAndPartners::Application.routes.draw do
     get '/compterms' => 'statics#comp_terms', :as => :competition_terms
     get '/plus-size',  to: redirect('/dresses/plus-size')
 
-    namespace "campaigns" do
+    namespace 'campaigns' do
       resource :email_capture, only: [:create], controller: :email_capture
     end
 
@@ -295,6 +285,17 @@ FameAndPartners::Application.routes.draw do
 
     mount Spree::Core::Engine, at: '/'
   end
+
+
+
+
+
+
+
+
+
+
+
 
   scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
 
