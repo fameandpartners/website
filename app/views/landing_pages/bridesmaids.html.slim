@@ -9,7 +9,7 @@
     .outer-wrap
       .inner-wrap
         h1.title
-          span  A collection for besties & bridesmaids
+          span  Besties & bridesmaids
 
   .container.products-collections
 
@@ -53,7 +53,7 @@
                   .title
                     span Customization and Delivery
                   p Need style help for the special day? We’re wedding experts.
-                  p We are the only online bridesmaid dress boutique that offers unique customization – you can change colours, prints, hem length, strap styles and more. 
+                  p We are the only online bridesmaid dress boutique that offers unique customization – you can change colours, prints, hem length, strap styles and more.
                   p Can't see the customization you are after? Anything is possible – simply contact our personal stylists.
                   p We work quick - our dresses can ship as quickly as within 48 hours.
 
@@ -82,7 +82,7 @@
                 p We would love to share your special day with you and your bridesmaids. Tag us in your wedding photos @FAMEweddings #FAMElovestories to be featured on our account.
                 p And follow us on Pinterest to see what inspires our collections.
 
-    .row           
+    .row
       - all_products.drop(12).each_slice(4) do |products|
         =render :partial => '/landing_pages/products_four', :locals => { :products => products }
 
