@@ -4,3 +4,4 @@ app/assets/javascripts/templates/shopping_cart.jst.eco
 app/services/products/product_details_resource.rb
 app/controllers/personalization/*
 app/controllers/boutique_controller.rb & Views etc.
+ProductAccessory
