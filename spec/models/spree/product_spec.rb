@@ -8,7 +8,7 @@ describe Spree::Product, :type => :model do
   it { is_expected.to have_many(:customisation_values).order('customisation_values.position ASC') }
   it { is_expected.to have_many(:product_color_values).dependent(:destroy) }
 
-  it { is_expected.to have_many(:celebrity_inspirations).with_foreign_key(:spree_product_id) }
+  it { is_expected.to have_many(:inspirations).with_foreign_key(:spree_product_id) }
   it { is_expected.to have_many(:accessories).with_foreign_key(:spree_product_id).class_name('ProductAccessory') }
 
   it { is_expected.to have_many(:making_options).with_foreign_key(:product_id).class_name('ProductMakingOption') }
