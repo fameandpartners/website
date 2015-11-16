@@ -284,21 +284,10 @@ FameAndPartners::Application.routes.draw do
     end
 
     mount Spree::Core::Engine, at: '/'
-  end
 
-
-
-
-
-
-
-
-
-
-
-
-  scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
-
+    ############################################
+    # Storefront (Search, Checkout and Payments)
+    ############################################
     get 'search' => 'products/base#search'
 
     # Guest checkout routes
