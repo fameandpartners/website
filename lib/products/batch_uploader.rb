@@ -599,7 +599,7 @@ module Products
 
     def add_product_song(product, raw_attrs)
       if raw_attrs[:link].present?
-        song = product.moodboard_items.song.first || product.moodboard_items.song.build
+        song = product.inspirations.song.first || product.inspirations.song.build
 
         song.update_attributes(content: raw_attrs[:link], name: raw_attrs[:name])
       end

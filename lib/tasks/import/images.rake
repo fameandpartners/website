@@ -37,7 +37,7 @@ namespace :import do
     task :images => :environment do
       validate_location!
 
-      uploader = BatchUpload::MoodboardImagesUploader.new(location)
+      uploader = BatchUpload::InspirationImagesUploader.new(location)
       uploader.process!
     end
   end

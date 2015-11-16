@@ -13,7 +13,7 @@ module BatchUpload
             begin
               file_name = File.basename file_path
 
-              perfume = product.moodboard_items.parfume.first
+              perfume = product.inspirations.parfume.first
 
               if perfume.blank?
                 error "Perfume image found for SKU: #{product.sku} but missing perfume item. (#{file_name})"
