@@ -263,10 +263,6 @@ FameAndPartners::Application.routes.draw do
     # External URLs
     get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
 
-    # Fallen Product URL
-    get '/thefallen', to: redirect("http://www.fameandpartners.com/%{site_version}/collection/Long-Dresses/the-fallen")
-    get '/thefallendress', to: redirect("http://www.fameandpartners.com/%{site_version}collection/Long-Dresses/the-fallen")
-
     root :to => 'index#show'
 
     # style quiz
