@@ -4,8 +4,14 @@ class AddTwoPropertyForDateForAllProducts < ActiveRecord::Migration
     property2_id = Spree::Property.where(name: "customised_days_for_making").first.id
 
     Spree::Product.all.each do |p|
+
+      policy = Policies::ProjectDeliveryDatePolicy.new(p)
       pp = Spree::ProductProperty.new
-      pp.value        = 6
+      if policy.special_order?
+        pp.value      = 11
+      else
+        pp.value      = 6
+      end
       pp.product_id   = p.id
       pp.property_id  = property1_id
       pp.save
