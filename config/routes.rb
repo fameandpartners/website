@@ -19,15 +19,15 @@ FameAndPartners::Application.routes.draw do
     end
 
     devise_for :spree_user,
-               :class_name => 'Spree::User',
-               :controllers => { :sessions => 'spree/user_sessions',
-                                 :registrations => 'spree/user_registrations',
-                                 :passwords => 'spree/user_passwords',
-                                 :confirmations => 'spree/user_confirmations',
-                                 :omniauth_callbacks => 'spree/omniauth_callbacks'
+               class_name:  'Spree::User',
+               controllers: { sessions:           'spree/user_sessions',
+                              registrations:      'spree/user_registrations',
+                              passwords:          'spree/user_passwords',
+                              confirmations:      'spree/user_confirmations',
+                              omniauth_callbacks: 'spree/omniauth_callbacks'
                },
-               :skip => [:unlocks, :omniauth_callbacks],
-               :path_names => { :sign_out => 'logout' }
+               skip:        [:unlocks, :omniauth_callbacks],
+               path_names:  { sign_out: 'logout' }
 
     devise_scope :spree_user do
       get '/spree_user/thanks' => 'spree/user_registrations#thanks'
@@ -36,24 +36,25 @@ FameAndPartners::Application.routes.draw do
 
     # MonkeyPatch for store params & redirect to custom page
     get '/fb_auth' => 'spree/omniauth_facebook_authorizations#fb_auth'
-  end
 
-  scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
-    get '/instagram/1' => 'statics#landing_page_mobile', :variant => '1'
-    get '/instagram/2' => 'statics#landing_page_mobile', :variant => '2'
-    get '/instagram/3' => 'statics#landing_page_mobile', :variant => '3'
+    ##############
+    # Static Pages
+    ##############
+    get '/instagram/1' => 'statics#landing_page_mobile', variant: '1'
+    get '/instagram/2' => 'statics#landing_page_mobile', variant: '2'
+    get '/instagram/3' => 'statics#landing_page_mobile', variant: '3'
 
-    get '/fashionitgirl2015'  => 'statics#fashion_it_girl'
-    get '/fashionitgirlau2015'  => 'statics#fashion_it_girl_au_2015'
+    get '/fashionitgirl2015' => 'statics#fashion_it_girl'
+    get '/fashionitgirlau2015' => 'statics#fashion_it_girl_au_2015'
     get '/fashionitgirlau2015/terms-and-conditions' => 'statics#fashion_it_girl_au_tc'
 
-    get '/fashionitgirl2015-terms-and-conditions',  to: redirect('/')
-    get '/nyfw-comp-terms-and-conditions',  to: redirect('/')
-    get '/fashionitgirl2015-competition',  to: redirect('/')
+    get '/fashionitgirl2015-terms-and-conditions', to: redirect('/')
+    get '/nyfw-comp-terms-and-conditions', to: redirect('/')
+    get '/fashionitgirl2015-competition', to: redirect('/')
 
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
-    get '/fame2015',  to: redirect('/')
+    get '/fame2015', to: redirect('/')
 
     # Redirecting collections (08/06/2015)
     get '/collection(/*anything)', to: redirect { |params, _| params[:site_version] ? "/#{params[:site_version]}/dresses" : '/dresses' }
@@ -63,9 +64,10 @@ FameAndPartners::Application.routes.draw do
 
     get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
 
+    ###########
     # Lookbooks
+    ###########
     get '/lookbook' => 'statics#lookbook', :as => :lookbook
-
     get '/lookbook/jedi-cosplay' => redirect('/lookbook/make-a-statement')
     get '/lookbook/make-a-statement' => 'products/collections#show', :permalink => 'make-a-statement', :as => :make_a_statement_collection
     get '/lookbook/photo-finish' => 'products/collections#show', :permalink => 'photo-finish', :as => :photo_finish_collection
@@ -104,8 +106,8 @@ FameAndPartners::Application.routes.draw do
 
     get '/lookbook/bohemian-summer' => 'products/collections#show', :permalink => 'bohemian-summer', :as => :bohemian_summer_collection
 
-    get '/amfam'                  => redirect('/wicked-game-collection')
-    get '/amfam-dresses'          => redirect('/wicked-game-collection')
+    get '/amfam' => redirect('/wicked-game-collection')
+    get '/amfam-dresses' => redirect('/wicked-game-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
 
 
@@ -118,11 +120,14 @@ FameAndPartners::Application.routes.draw do
 
     post '/shared/facebook' => 'competition/events#share'
 
+    ###########
+    # User Cart
+    ###########
     scope '/user_cart', module: 'user_cart' do
       root to: 'details#show', as: :user_cart_details
 
-      get '/details'      => 'details#show'
-      post '/promotion'   => 'promotions#create'
+      get '/details' => 'details#show'
+      post '/promotion' => 'promotions#create'
 
       post 'products' => 'products#create'
       get 'products/check_gift_in_cart' => 'products#check_gift_in_cart'
@@ -131,6 +136,9 @@ FameAndPartners::Application.routes.draw do
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
     end
 
+    ########################
+    # Dresses (and products)
+    ########################
     get '/skirts' => 'products/collections#show', :permalink => 'skirt', :as => :skirts_collection
 
     scope '/dresses' do
@@ -139,7 +147,7 @@ FameAndPartners::Application.routes.draw do
 
       # TODO - Remove? - 2015.04.11 - Redirecting old accessory and customisation style URLS to main product page.
       product_style_custom_redirect = -> path_params, _rq { ["/#{path_params[:site_version]}/dresses/dress-#{path_params[:product_slug]}", path_params[:color_name].presence].join('/') }
-      get '/custom-:product_slug(/:color_name)',  to: redirect(product_style_custom_redirect)
+      get '/custom-:product_slug(/:color_name)', to: redirect(product_style_custom_redirect)
       get '/styleit-:product_slug(/:color_name)', to: redirect(product_style_custom_redirect)
 
       # Colors should behave like query strings, and not paths
@@ -148,19 +156,19 @@ FameAndPartners::Application.routes.draw do
       get '/outerwear-:product_slug', to: 'products/details#show', as: :outerwear_details
 
       #roots categories
-      get '/style',  to: redirect('/dresses')
+      get '/style', to: redirect('/dresses')
       get '/style/:taxon', to: redirect('/dresses/%{taxon}')
-      get '/event',  to: redirect('/dresses')
+      get '/event', to: redirect('/dresses')
       get '/event/:taxon', to: redirect('/dresses/%{taxon}')
       get '/sale-(:sale)' => 'products/collections#show', as: 'dresses_on_sale'
       get '/*permalink' => 'products/collections#show', as: 'taxon'
     end
 
     # Custom Dresses
-    get '/custom-dresses(/*whatever)',  to: redirect('/dresses')
+    get '/custom-dresses(/*whatever)', to: redirect('/dresses')
 
-    get '/celebrities',           to: redirect('/dresses')
-    get '/celebrities/(:id)',     to: redirect('/dresses')
+    get '/celebrities', to: redirect('/dresses')
+    get '/celebrities/(:id)', to: redirect('/dresses')
     get '/featured-bloggers/:id', to: redirect('/dresses')
 
     resource :product_variants, only: [:show]
@@ -196,6 +204,16 @@ FameAndPartners::Application.routes.draw do
     # Old Blog Redirection (30/06/2015)
     get '/blog(/*anything)', to: redirect('http://blog.fameandpartners.com')
   end
+
+
+
+
+
+
+
+
+
+
 
   scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
     # Static pages
