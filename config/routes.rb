@@ -101,6 +101,8 @@ FameAndPartners::Application.routes.draw do
     get '/lookbook/photo-finish' => 'products/collections#show', :permalink => 'photo-finish', :as => :photo_finish_collection
     get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
 
+    get '/lookbook/bring-on-the-night' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :bring_on_the_night_collection
+
     get '/lookbook/garden-weeding' => redirect('/lookbook/garden-wedding')
     get '/lookbook/garden-wedding' => 'products/collections#show', :permalink => 'garden-party', :as => :garden_wedding_collection
     get '/here-comes-the-sun-collection' => redirect('/lookbook/here-comes-the-sun')
