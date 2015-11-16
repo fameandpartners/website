@@ -39,8 +39,6 @@ FameAndPartners::Application.routes.draw do
   end
 
   scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
-    get 'footer'   => 'site_navigations#footer'
-
     get '/instagram/1' => 'statics#landing_page_mobile', :variant => '1'
     get '/instagram/2' => 'statics#landing_page_mobile', :variant => '2'
     get '/instagram/3' => 'statics#landing_page_mobile', :variant => '3'
@@ -353,6 +351,7 @@ FameAndPartners::Application.routes.draw do
 
   namespace :widgets do
     get 'main_nav' => 'site_navigations#main_nav'
+    get 'footer'   => 'site_navigations#footer'
   end
 
   ##############
