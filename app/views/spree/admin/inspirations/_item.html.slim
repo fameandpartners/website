@@ -11,6 +11,6 @@ tr data-id="#{item.id}" id=( spree_dom_id item )
       'content:
       = truncate(item.content, length: 20)
   td
-    = link_to "Edit", edit_admin_product_moodboard_item_url(product, item), remote: true
+    = link_to "Edit", edit_admin_product_inspiration_url(product, item), remote: true
     br
-    = link_to 'Delete', admin_product_moodboard_item_url(product, item), remote: true, method: 'delete'
+    = link_to 'Delete', admin_product_inspiration_url(product, item), remote: true, method: 'delete'

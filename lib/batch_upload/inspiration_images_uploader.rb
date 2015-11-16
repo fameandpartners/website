@@ -1,13 +1,13 @@
 require 'batch_upload/images_uploader'
 
 module BatchUpload
-  class MoodboardImagesUploader < ImagesUploader
+  class InspirationImagesUploader < ImagesUploader
     def process!
       each_product do |product, path|
 
-        moodboard_items = product.moodboard_items.moodboard.where('created_at < ?', @_expiration.ago)
-        info "Deleting SKU: #{product.sku} moodboards where(age > #{@_expiration / 3600} hrs) - total #{moodboard_items.count}"
-        moodboard_items.destroy_all
+        inspirations = product.inspirations.moodboard.where('created_at < ?', @_expiration.ago)
+        info "Deleting SKU: #{product.sku} moodboards where(age > #{@_expiration / 3600} hrs) - total #{inspirations.count}"
+        inspirations.destroy_all
 
         get_list_of_directories(path).each do |directory_path|
           directory_name = File.basename directory_path
@@ -23,7 +23,7 @@ module BatchUpload
 
               next if test_run?
 
-              moodboard = product.moodboard_items.moodboard.build do |object|
+              moodboard = product.inspirations.moodboard.build do |object|
                 object.image = File.open(file_path)
                 object.position = position
               end

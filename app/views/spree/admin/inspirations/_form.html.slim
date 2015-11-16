@@ -1,10 +1,10 @@
 ruby:
   if item.new_record?
-    action_url = spree.admin_product_moodboard_items_path(product)
+    action_url = spree.admin_product_inspirations_path(product)
     http_method = :post
     submit_button_name = "Create"
   else
-    action_url = spree.admin_product_moodboard_item_path(product, item)
+    action_url = spree.admin_product_inspiration_path(product, item)
     http_method = :put
     submit_button_name = "Update"
   end
@@ -19,7 +19,7 @@ ruby:
 
     = form.field_container :item_type do
       = form.label :item_type, 'Item Type'
-      = form.select :item_type, options_from_collection_for_select(MoodboardItem::ITEM_TYPES, :to_s, :to_s, item.item_type)
+      = form.select :item_type, options_from_collection_for_select(Inspiration::ITEM_TYPES, :to_s, :to_s, item.item_type)
 
     = form.field_container :active do
       = form.check_box :active

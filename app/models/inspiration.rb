@@ -1,7 +1,15 @@
-class MoodboardItem < ActiveRecord::Base
+# Note that this class *used* to be called MoodboardItem,
+# which conflicted with the name we wanted for child objects of Moodboards (MoodboardItem)
+# This objects values are more properly the "inspirations" for a product, so are now named Inspiration
+# They include the following,
+#  - "moodboard" images
+#  - songs
+#  - perfumes
+# Also related are CelebrityInspiration
+class Inspiration < ActiveRecord::Base
   attr_accessible :spree_product_id, :image, :item_type, :content, :active, :name, :title
 
-  belongs_to :product, class_name: 'Spree::Product', foreign_key: :spree_product_id
+  belongs_to :product, class_name: 'Spree::Product', foreign_key: :spree_product_id, inverse_of: :inspirations
 
   has_attached_file :image,
     styles: { product: "375x480#", thumbnail: "187x240#" },

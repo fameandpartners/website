@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151115223341) do
+ActiveRecord::Schema.define(:version => 20151115233021) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -249,6 +249,24 @@ ActiveRecord::Schema.define(:version => 20151115223341) do
   add_index "incompatibilities", ["incompatible_id"], :name => "index_incompatibilities_on_incompatible_id"
   add_index "incompatibilities", ["original_id"], :name => "index_incompatibilities_on_original_id"
 
+  create_table "inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.boolean  "active",                            :default => true
+    t.string   "item_type",          :limit => 50
+    t.string   "content",            :limit => 512
+    t.integer  "position",                          :default => 0
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
+    t.string   "name"
+    t.string   "title"
+  end
+
+  add_index "inspirations", ["spree_product_id", "active"], :name => "index_inspirations_on_spree_product_id_and_active"
+
   create_table "item_return_events", :force => true do |t|
     t.string   "item_return_uuid"
     t.string   "event_type"
@@ -447,24 +465,6 @@ ActiveRecord::Schema.define(:version => 20151115223341) do
 
   add_index "marketing_user_visits", ["spree_user_id", "utm_campaign"], :name => "index_marketing_user_visits_on_spree_user_id_and_utm_campaign"
   add_index "marketing_user_visits", ["user_token", "utm_campaign"], :name => "index_marketing_user_visits_on_user_token_and_utm_campaign"
-
-  create_table "moodboard_items", :force => true do |t|
-    t.integer  "spree_product_id"
-    t.boolean  "active",                            :default => true
-    t.string   "item_type",          :limit => 50
-    t.string   "content",            :limit => 512
-    t.integer  "position",                          :default => 0
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
-    t.string   "name"
-    t.string   "title"
-  end
-
-  add_index "moodboard_items", ["spree_product_id", "active"], :name => "index_moodboard_items_on_spree_product_id_and_active"
 
   create_table "option_values_option_values_groups", :id => false, :force => true do |t|
     t.integer "option_value_id"
