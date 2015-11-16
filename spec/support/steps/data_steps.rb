@@ -13,7 +13,6 @@ module Acceptance
 
     step 'Data is setup correctly' do
       ClearCacheWorker.new.perform
-      Utility::Reindexer.reindex
     end
   end
 end
