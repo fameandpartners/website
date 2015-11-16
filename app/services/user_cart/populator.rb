@@ -87,12 +87,9 @@ class  UserCart::Populator
       end
     end
 
-    def add_product_to_cart(ignore_stock_level = false)
+    def add_product_to_cart
       spree_populator = Spree::OrderPopulator.new(order, currency)
 
-      if ignore_stock_level
-        spree_populator.populate_personalized = ignore_stock_level
-      end
 
       if spree_populator.populate(variants: { product_variant.id => product_quantity })
         add_making_options
@@ -108,7 +105,7 @@ class  UserCart::Populator
     def add_personalized_product
       personalization = build_personalization
       if personalization.valid?
-        add_product_to_cart(ignore_stock_level = true)
+        add_product_to_cart
         personalization.line_item = line_item
         line_item.personalization = personalization
         personalization.save
