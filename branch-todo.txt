@@ -1,0 +1,5 @@
+# TODO
+
+- Add deletion from moodboard events
+- Add comments to moodboard items
+- clean up UI
