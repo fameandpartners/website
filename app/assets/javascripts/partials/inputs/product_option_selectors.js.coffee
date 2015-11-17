@@ -232,9 +232,9 @@ window.inputs.ProductMakingOptionIdSelector = class ProductMakingOptionIdSelecto
     data ||= @$container.find('.active').data()
 
     if @disabled
-      @$action.html("Standard making 2-5 days")
+      @$action.html("Standard making 3-9 days")
     else if data? and data.id == 'original'
-      @$action.html("Standard Making 2-5 days")
+      @$action.html("Standard Making 3-9 days")
     else if data? and data.name
       @$action.html("#{data.name} +#{data.price}")
     else
