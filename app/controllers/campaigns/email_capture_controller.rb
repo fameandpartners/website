@@ -37,7 +37,8 @@ class Campaigns::EmailCaptureController < ApplicationController
                                                                     current_sign_in_ip: request.remote_ip,
                                                                     landing_page:       session[:landing_page],
                                                                     utm_params:         session[:utm_params],
-                                                                    site_version:       current_site_version.name))
+                                                                    site_version:       current_site_version.name,
+                                                                    form_name:          'Sitewide Modal Form'))
 
     begin
       if params[:promocode].present?
@@ -88,7 +89,8 @@ class Campaigns::EmailCaptureController < ApplicationController
                                                                     current_sign_in_ip: request.remote_ip,
                                                                     landing_page:       session[:landing_page],
                                                                     utm_params:         session[:utm_params],
-                                                                    site_version:       current_site_version.name))
+                                                                    site_version:       current_site_version.name,
+                                                                    form_name:          'Footer Contact'))
 
     render nothing: true
   end
