@@ -11,6 +11,5 @@ describe Revolution::Translation do
 
   it { is_expected.to validate_presence_of :title }
   it { is_expected.to validate_presence_of :locale }
-  it { is_expected.to validate_presence_of :page }
   it { is_expected.to validate_presence_of :meta_description }
 end
