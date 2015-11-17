@@ -24,12 +24,9 @@ Spree::User.class_eval do
 
   attr_accessor :skip_welcome_email,
                 :validate_presence_of_phone,
-                :previous_email,
-                :landing_page,
-                :utm_params
+                :previous_email
 
-  attr_accessible :first_name, :last_name, :phone, :dob, :skip_welcome_email, :automagically_registered,
-                  :landing_page, :utm_params
+  attr_accessible :first_name, :last_name, :phone, :dob, :skip_welcome_email, :automagically_registered
 
   validates :first_name, :last_name, :presence => true
 
@@ -40,14 +37,7 @@ Spree::User.class_eval do
 
   after_create :send_welcome_email,           unless: Proc.new { |a| a.skip_welcome_email }
   after_create :create_marketing_subscriber,  if: :newsletter?
-  after_update :initiate_mailchimp
   after_update :update_marketing_subsriber,   if: :newsletter?
-
-
-  def initiate_mailchimp
-    email = EmailCapture.new({ service: 'mailchimp' })
-    email.capture(self)
-  end
 
   def create_marketing_subscriber
     Marketing::Subscriber.new(user: self).create

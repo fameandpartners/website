@@ -11,8 +11,14 @@ class Users::ProfilesController < Users::BaseController
   end
 
   def update
-    params[:profile][:landing_page] = session[:landing_page]
     if @user.update_profile(params[:profile])
+      EmailCapture.new({service: 'mailchimp'}).capture(OpenStruct.new(email:              @user.email,
+                                                                      first_name:         @user.first_name,
+                                                                      last_name:          @user.last_name,
+                                                                      current_sign_in_ip: request.remote_ip,
+                                                                      landing_page:       session[:landing_page],
+                                                                      utm_params:         session[:utm_params],
+                                                                      site_version:       current_site_version.name))
       respond_with(@user) do |format|
         format.html { redirect_to profile_path }
         format.js   { render 'users/profiles/success_update' }

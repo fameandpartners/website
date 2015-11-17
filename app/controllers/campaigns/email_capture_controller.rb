@@ -33,10 +33,11 @@ class Campaigns::EmailCaptureController < ApplicationController
       user:           current_spree_user
     ).create
 
-    EmailCapture.new({ service: 'mailchimp' }).capture(OpenStruct.new(email: params[:email],
-                                                                      current_sign_in_ip: request.remote_ip,
-                                                                      landing_page: session[:landing_page],
-                                                                      utm_params: session[:utm_params]))
+    EmailCapture.new({service: 'mailchimp'}).capture(OpenStruct.new(email:              params[:email],
+                                                                    current_sign_in_ip: request.remote_ip,
+                                                                    landing_page:       session[:landing_page],
+                                                                    utm_params:         session[:utm_params],
+                                                                    site_version:       current_site_version.name))
 
     begin
       if params[:promocode].present?
@@ -83,9 +84,11 @@ class Campaigns::EmailCaptureController < ApplicationController
   end
 
   def mailchimp
-    EmailCapture.new({ service: 'mailchimp' }).capture(OpenStruct.new(email: params[:email],
-                                                                      current_sign_in_ip: request.remote_ip,
-                                                                      landing_page: session[:landing_page]))
+    EmailCapture.new({service: 'mailchimp'}).capture(OpenStruct.new(email:              params[:email],
+                                                                    current_sign_in_ip: request.remote_ip,
+                                                                    landing_page:       session[:landing_page],
+                                                                    utm_params:         session[:utm_params],
+                                                                    site_version:       current_site_version.name))
 
     render nothing: true
   end
