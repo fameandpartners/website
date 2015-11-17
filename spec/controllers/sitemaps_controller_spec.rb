@@ -18,7 +18,9 @@ describe SitemapsController, type: :controller do
 
   describe 'GET /sitemap.xml' do
     context 'request has a site version' do
-      subject { get :show, site_version: 'au', format: 'xml' }
+      subject { get :show, format: 'xml' }
+
+      before(:each) { request.env['site_version_code'] = 'au' }
 
       it 'redirects to the requested sitemap version' do
         expect(subject).to redirect_to('http://images.fameandpartners.com/sitemap/au.xml.gz')
