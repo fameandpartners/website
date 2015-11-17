@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151115233021) do
+ActiveRecord::Schema.define(:version => 20151117043124) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -465,6 +465,49 @@ ActiveRecord::Schema.define(:version => 20151115233021) do
 
   add_index "marketing_user_visits", ["spree_user_id", "utm_campaign"], :name => "index_marketing_user_visits_on_spree_user_id_and_utm_campaign"
   add_index "marketing_user_visits", ["user_token", "utm_campaign"], :name => "index_marketing_user_visits_on_user_token_and_utm_campaign"
+
+  create_table "moodboard_item_events", :force => true do |t|
+    t.string   "moodboard_item_uuid"
+    t.string   "event_type"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "occurred_at"
+  end
+
+  add_index "moodboard_item_events", ["moodboard_item_uuid"], :name => "index_moodboard_item_events_on_moodboard_item_uuid"
+
+  create_table "moodboard_items", :force => true do |t|
+    t.string   "uuid"
+    t.integer  "moodboard_id"
+    t.integer  "product_id",             :null => false
+    t.integer  "product_color_value_id"
+    t.integer  "color_id",               :null => false
+    t.integer  "variant_id"
+    t.integer  "user_id",                :null => false
+    t.integer  "likes"
+    t.text     "comments"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  add_index "moodboard_items", ["color_id"], :name => "index_moodboard_items_on_color_id"
+  add_index "moodboard_items", ["moodboard_id"], :name => "index_moodboard_items_on_moodboard_id"
+  add_index "moodboard_items", ["product_color_value_id"], :name => "index_moodboard_items_on_product_color_value_id"
+  add_index "moodboard_items", ["product_id"], :name => "index_moodboard_items_on_product_id"
+  add_index "moodboard_items", ["user_id"], :name => "index_moodboard_items_on_user_id"
+  add_index "moodboard_items", ["variant_id"], :name => "index_moodboard_items_on_variant_id"
+
+  create_table "moodboards", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "purpose",     :default => "default", :null => false
+    t.date     "event_date"
+    t.text     "description"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  add_index "moodboards", ["user_id"], :name => "index_moodboards_on_user_id"
 
   create_table "option_values_option_values_groups", :id => false, :force => true do |t|
     t.integer "option_value_id"

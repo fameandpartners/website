@@ -3,12 +3,12 @@ module LandingPagesHelper
     @disable_notices.present? && @disable_notices == true
   end
 
-  def cropped_product_hoverable_image_tag(product)
+  def cropped_product_hoverable_image_tag(product, css_class: "img-product img-responsive")
     front, hover = cropped_product_hoverable_images(product)
 
     image_tag front,
               :alt         => product.name,
-              :class       => "img-product img-responsive",
+              :class       => css_class,
               'data-hover' => hover
   end
 

@@ -1,0 +1,10 @@
+/ul.nav.nav-pills
+/  - @collection.each do |board|
+/    li = link_to(board.name || 'Moodboard', moodboard_path(board))
+
+h3 = @resource.name
+ul
+  - @resource.items.each do |item|
+    li
+      = item.attributes
+      = cropped_product_hoverable_image_tag(item.product, css_class: '')

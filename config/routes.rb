@@ -316,6 +316,9 @@ FameAndPartners::Application.routes.draw do
     resources :site_versions, only: [:show], as: :site_version
   end
 
+  resources :moodboards, only: [:show, :index]
+  get 'moodboard', to: 'moodboards#index'
+
   ##################
   # Robots and Feeds
   ##################

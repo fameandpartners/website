@@ -64,6 +64,8 @@ class UserMoodboard::Populator
       item.spree_variant_id = variant.try(:id) || product.master.id
       item.save
 
+      user.moodboards.default_or_create.add_item(product: product, color: color, user: user, variant: variant)
+
       item
     end
 
