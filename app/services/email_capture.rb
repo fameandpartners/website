@@ -121,6 +121,7 @@ class EmailCapture
       merge_variables[:l_page]     = landing_page if landing_page.present?
       merge_variables[:s_version]  = site_version if site_version.present?
       merge_variables[:fb_uid]     = current_email.facebook_uid if current_email.facebook_uid.present?
+      merge_variables[:form_name]     = current_email.form_name if current_email.form_name.present?
 
       if !utm_params.blank?
         merge_variables[:u_campaign] = utm_params[:utm_campaign]

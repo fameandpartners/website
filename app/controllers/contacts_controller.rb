@@ -17,7 +17,8 @@ class ContactsController < ApplicationController
                                                                       current_sign_in_ip: request.remote_ip,
                                                                       landing_page:       session[:landing_page],
                                                                       utm_params:         session[:utm_params],
-                                                                      site_version:       current_site_version.name))
+                                                                      site_version:       current_site_version.name,
+                                                                      form_name:          'contact'))
       ContactMailer.email(@contact).deliver
       flash[:notice] = "We're on it!"
       redirect_to success_contact_path
