@@ -2,7 +2,7 @@ class CreateBringOnTheNightLanding < ActiveRecord::Migration
   def up
     page = Revolution::Page.create!(
       :path => '/bring-on-the-night',
-      :template_path => '/lookbook/bring-on-the-night.html.slim',
+      :template_path => '/lookbook/bring_on_the_night.html.slim',
       :variables => {"limit"=>24}
     )
     page.publish!
