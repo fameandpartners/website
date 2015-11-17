@@ -51,6 +51,8 @@ module FameAndPartners
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
+    # NOTE - If you add or remove an observer during development,
+    #        you MUST restart your server, or they won't be loaded.
     config.active_record.observers ||= []
     config.active_record.observers << :fabrication_event_observer
     config.active_record.observers << :activity_observer
