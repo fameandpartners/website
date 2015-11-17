@@ -57,7 +57,7 @@ class EmailCapture
       when c_email.class.to_s == 'Contact'
         first_name = c_email.first_name
       when c_email.class.to_s == 'OpenStruct'
-        first_name = nil
+        first_name = c_email.first_name
       else
         first_name = c_email.first_name if c_email.attributes.key?('first_name')
         first_name = c_email.firstname if c_email.attributes.key?('firstname')
@@ -84,7 +84,7 @@ class EmailCapture
       when c_email.class.to_s == 'Contact'
         last_name = c_email.last_name
       when c_email.class.to_s == 'OpenStruct'
-        last_name = nil
+        last_name = c_email.last_name
       else
         last_name = c_email.last_name if c_email.attributes.key?('last_name')
         last_name = c_email.lastname if c_email.attributes.key?('lastname')
@@ -94,7 +94,7 @@ class EmailCapture
 
   def set_newsletter(c_email)
     newsletter = nil
-    newsletter = (c_email.newsletter ? 'yes' : 'no') if activerecord?(c_email) && c_email.attributes.key?('newsletter')
+    newsletter = (c_email.newsletter ? 'yes' : 'no') if c_email.newsletter || !c_email.newsletter
     newsletter
   end
 
@@ -107,6 +107,7 @@ class EmailCapture
     first_name   = retrieve_first_name(current_email)
     last_name    = retrieve_last_name(current_email)
     landing_page = retrieve_landing_page(current_email)
+    site_version = retrieve_site_version(current_email)
 
     merge_variables = {}
 
@@ -118,6 +119,8 @@ class EmailCapture
       merge_variables[:ip_address] = '101.0.79.50' #data_object.current_sign_in_ip
       merge_variables[:country]    = FindCountryFromIP.new('101.0.79.50').country.country_name
       merge_variables[:l_page]     = landing_page if landing_page.present?
+      merge_variables[:s_version]  = site_version if site_version.present?
+      merge_variables[:fb_uid]     = current_email.facebook_uid if current_email.facebook_uid.present?
 
       if !utm_params.blank?
         merge_variables[:u_campaign] = utm_params[:utm_campaign]
@@ -144,6 +147,19 @@ class EmailCapture
         d_o = d_o.utm_params if d_o.attributes.key?('utm_params')
     end
     utm_params
+  end
+
+  def retrieve_site_version(d_o)
+    site_version = nil
+    case
+      when d_o.class.to_s == 'Contact'
+        site_version = d_o.site_version
+      when d_o.class.to_s == 'OpenStruct'
+        site_version = d_o.site_version
+      else
+        site_version = d_o.site_version if d_o.attributes.key?('site_version')
+    end
+    site_version
   end
 
 end

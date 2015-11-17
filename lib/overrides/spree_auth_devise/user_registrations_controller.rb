@@ -38,13 +38,17 @@ Spree::UserRegistrationsController.class_eval do
   def create
     @user = build_resource(params[:spree_user])
 
-    mailchimp = Mailchimp::API.new(configatron.mailchimp.api_key)
-    mailchimp.lists.subscribe(configatron.mailchimp.list_id,{ "email" => @user.email }, '', 'html', false, true, true, false)
-    p "Here: #{mailchimp.lists.members(configatron.mailchimp.list_id)}"
-
     if resource.new_record?
-      resource.sign_up_via = Spree::User::SIGN_UP_VIA.index('Email')
+      resource.sign_up_via    = Spree::User::SIGN_UP_VIA.index('Email')
       resource.sign_up_reason = session[:sign_up_reason]
+      EmailCapture.new({service: 'mailchimp'}).capture(OpenStruct.new(email:              @user.email,
+                                                                      first_name:         @user.first_name,
+                                                                      last_name:          @user.last_name,
+                                                                      newsletter:         @user.newsletter,
+                                                                      current_sign_in_ip: request.remote_ip,
+                                                                      landing_page:       session[:landing_page],
+                                                                      utm_params:         session[:utm_params],
+                                                                      site_version:       current_site_version.name))
     end
 
     if resource.save
