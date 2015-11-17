@@ -36,14 +36,14 @@ module Concerns
       @current_site_version ||= begin
         ::FindUsersSiteVersion.new(
             user:         current_spree_user,
-            url_param:    params[:site_version],
+            url_param:    request.env['site_version_code'],
             cookie_param: session[:site_version]
         ).get
       end
     end
 
     def site_version_param
-      params[:site_version] || ::SiteVersion.default.code
+      request.env['site_version_code'] || ::SiteVersion.default.code
     end
 
     def current_currency
