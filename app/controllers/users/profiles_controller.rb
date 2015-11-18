@@ -11,8 +11,10 @@ class Users::ProfilesController < Users::BaseController
   end
 
   def update
+    old_email = @user.email
     if @user.update_profile(params[:profile])
       EmailCapture.new({service: 'mailchimp'}).capture(OpenStruct.new(email:              @user.email,
+                                                                      previous_email:     old_email,
                                                                       first_name:         @user.first_name,
                                                                       last_name:          @user.last_name,
                                                                       current_sign_in_ip: request.remote_ip,
