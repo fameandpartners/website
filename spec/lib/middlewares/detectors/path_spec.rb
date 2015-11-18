@@ -5,34 +5,31 @@ module Middleware
     module Detectors
       RSpec.describe Path do
         describe '#detect_site_version' do
-          subject { described_class.new }
-
-          shared_examples 'return code for path' do |sv_code, path|
-            let(:request) { double(Rack::Request, path: path) }
-
-            it do
-              result = subject.detect_site_version(request)
-              expect(result).to eq(sv_code)
+          matcher :be_detected_as do |sv_code|
+            match do |path|
+              request_double = double(Rack::Request, path: path)
+              result         = described_class.new.detect_site_version(request_double)
+              result == sv_code
             end
           end
 
           context 'given a rack request' do
             context 'with a path containing AU code' do
-              it_will 'return code for path', 'au', '/au'
-              it_will 'return code for path', 'au', '/au/'
-              it_will 'return code for path', 'au', '/au/something'
-              it_will 'return code for path', 'au', '/au/something/'
+              it { expect('/au').to be_detected_as('au') }
+              it { expect('/au/').to be_detected_as('au') }
+              it { expect('/au/something').to be_detected_as('au') }
+              it { expect('/au/something/').to be_detected_as('au') }
             end
 
             context 'with an empty path' do
-              it_will 'return code for path', 'us', '/'
-              it_will 'return code for path', 'us', '/something'
+              it { expect('/').to be_detected_as('us') }
+              it { expect('/something').to be_detected_as('us') }
             end
 
             context 'with an invalid code' do
-              it_will 'return code for path', 'us', '/br'
-              it_will 'return code for path', 'us', '/br/'
-              it_will 'return code for path', 'us', '/br/something'
+              it { expect('/br').to be_detected_as('us') }
+              it { expect('/br/').to be_detected_as('us') }
+              it { expect('/br/something').to be_detected_as('us') }
             end
           end
         end

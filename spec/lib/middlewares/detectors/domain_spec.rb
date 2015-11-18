@@ -5,31 +5,26 @@ module Middleware
     module Detectors
       RSpec.describe Domain do
         describe '#detect_site_version' do
-          subject { described_class.new }
-
-          shared_examples 'return code given domain' do |sv_code, host|
-            let(:request) { double(Rack::Request, host: host) }
-
-            it do
-              result = subject.detect_site_version(request)
-              expect(result).to eq(sv_code)
+          matcher :be_detected_as do |sv_code|
+            match do |host|
+              request_double = double(Rack::Request, host: host)
+              result         = described_class.new.detect_site_version(request_double)
+              result == sv_code
             end
           end
 
           context 'request has US domain' do
-            it_will 'return code given domain', 'us', 'fameandpartners.com'
-            it_will 'return code given domain', 'us', 'www.fameandpartners.com'
+            it { expect('www.fameandpartners.com').to be_detected_as('us') }
+            it { expect('fameandpartners.com').to be_detected_as('us') }
           end
 
           context 'request has AU domain' do
-            it_will 'return code given domain', 'au', 'fameandpartners.com.au'
-            it_will 'return code given domain', 'au', 'www.fameandpartners.com.au'
+            it { expect('www.fameandpartners.com.au').to be_detected_as('au') }
+            it { expect('fameandpartners.com.au').to be_detected_as('au') }
           end
 
           context 'request has invalid domain' do
-            describe 'returns default code' do
-              it_will 'return code given domain', 'us', 'fameandpartners.com.br'
-            end
+            it { expect('fameandpartners.com.br').to be_detected_as('us') }
           end
         end
       end

@@ -5,29 +5,24 @@ module Middleware
     module Detectors
       RSpec.describe Subdomain do
         describe '#detect_site_version' do
-          subject { described_class.new }
-
-          shared_examples 'return code given subdomain' do |sv_code, host|
-            let(:request) { double(Rack::Request, host: host) }
-
-            it do
-              result = subject.detect_site_version(request)
-              expect(result).to eq(sv_code)
+          matcher :be_detected_as do |sv_code|
+            match do |host|
+              request_double = double(Rack::Request, host: host)
+              result         = described_class.new.detect_site_version(request_double)
+              result == sv_code
             end
           end
 
           context 'request has US subdomain' do
-            it_will 'return code given subdomain', 'us', 'us.lvh.me'
+            it { expect('us.lvh.me').to be_detected_as('us') }
           end
 
           context 'request has AU subdomain' do
-            it_will 'return code given subdomain', 'au', 'au.lvh.me'
+            it { expect('au.lvh.me').to be_detected_as('au') }
           end
 
           context 'request has an invalid subdomain' do
-            describe 'return default code' do
-              it_will 'return code given subdomain', 'us', 'br.lvh.me'
-            end
+            it { expect('br.lvh.me').to be_detected_as('us') }
           end
         end
       end
