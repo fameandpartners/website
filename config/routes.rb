@@ -1,4 +1,16 @@
 FameAndPartners::Application.routes.draw do
+  ############################
+  # Devise Omniauth Workaround
+  ############################
+  # This is needed to make Facebook Login work.
+  # Since we're redirecting every /us/* URL, facebook callback is being redirected twice
+  devise_scope :spree_user do
+    get '/us/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
+  end
+
+  ########################
+  # US Redireciton to root
+  ########################
   get '/us/*whatevs' => redirect(path: "/%{whatevs}")
   get '/us' => redirect("/")
 
