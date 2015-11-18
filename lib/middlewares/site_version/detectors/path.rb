@@ -6,7 +6,7 @@ module Middleware
       class Path
         include VersionCodes
 
-        VALID_PATHS   = [AU_CODE].join('|')
+        VALID_PATHS   = Regexp.union(AU_CODE)
         SV_CODE_REGEX = /^\/(?<sv_code>#{VALID_PATHS})?.*$/
 
         def detect_site_version(rack_request)
