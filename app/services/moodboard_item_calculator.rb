@@ -8,5 +8,10 @@ class MoodboardItemCalculator < EventSourcedRecord::Calculator
     @moodboard_item.product_id             = event.product_id
     @moodboard_item.user_id                = event.user_id
     @moodboard_item.variant_id             = event.variant_id
+    @moodboard_item.deleted_at             = nil
+  end
+
+  def advance_removal(event)
+    @moodboard_item.deleted_at = event.created_at
   end
 end

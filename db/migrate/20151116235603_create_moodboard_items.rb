@@ -8,8 +8,9 @@ class CreateMoodboardItems < ActiveRecord::Migration
       t.references :color, null: false
       t.references :variant
       t.references :user, null: false
-      t.integer :likes
-      t.text :comments
+      t.integer    :likes
+      t.text       :comments
+      t.datetime   :deleted_at
 
       t.timestamps
     end

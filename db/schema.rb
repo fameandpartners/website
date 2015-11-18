@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151117043124) do
+ActiveRecord::Schema.define(:version => 20151116235603) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -486,6 +486,7 @@ ActiveRecord::Schema.define(:version => 20151117043124) do
     t.integer  "user_id",                :null => false
     t.integer  "likes"
     t.text     "comments"
+    t.datetime "deleted_at"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
   end

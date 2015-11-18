@@ -14,4 +14,9 @@ class MoodboardItemEvent < ActiveRecord::Base
     validates :product_id, presence: true
     validates :color_id,   presence: true
   end
+
+  event_type :removal do
+    attributes :user_id
+    validates :user_id, presence: true
+  end
 end
