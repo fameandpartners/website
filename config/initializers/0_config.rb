@@ -172,6 +172,11 @@ when :production
   configatron.customerio.site_id = 'a416731201185e0c6f5f'
   configatron.typekit_id = 'day0prb'
 
+  configatron.mailchimp do |mailchimp|
+    mailchimp.api_key = '0340ea09d6c21efd808cce3d9c9440f6-us7'
+    mailchimp.list_id = '48f8d360f7' #<----Massive TODO here.  Put in actual live mailchimp list when we know it.
+  end
+
 when :test
   configatron.elasticsearch.indices do |index|
     index.spree_products = :spree_products_test

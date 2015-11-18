@@ -15,7 +15,7 @@ class EmailCapture
     if service == 'mailchimp'
       current_email = data_object
 
-      get_email = email_changed?(current_email) ? current_email.email_was : current_email.email
+      get_email = email_changed?(current_email) ? current_email.previous_email : current_email.email
 
       merge_variables = set_merge(current_email)
 
@@ -47,59 +47,8 @@ class EmailCapture
   end
 
   def email_changed?(current_email)
-    return false if current_email.class.to_s == 'Contact'
-    current_email.email_changed? && !current_email.email_was.blank?
-  end
-
-  def retrieve_first_name(c_email)
-    first_name = nil
-    case
-      when c_email.class.to_s == 'Contact'
-        first_name = c_email.first_name
-      when c_email.class.to_s == 'OpenStruct'
-        first_name = c_email.first_name
-      else
-        first_name = c_email.first_name if c_email.attributes.key?('first_name')
-        first_name = c_email.firstname if c_email.attributes.key?('firstname')
-    end
-    first_name
-  end
-
-  def retrieve_landing_page(c_email)
-    landing_page = nil
-    case
-      when c_email.class.to_s == 'Contact'
-        landing_page = c_email.landing_page
-      when c_email.class.to_s == 'OpenStruct'
-        landing_page = c_email.landing_page
-      else
-        landing_page = c_email.landing_page if c_email.attributes.key?('landing_page')
-    end
-    landing_page
-  end
-
-  def retrieve_last_name(c_email)
-    last_name = nil
-    case
-      when c_email.class.to_s == 'Contact'
-        last_name = c_email.last_name
-      when c_email.class.to_s == 'OpenStruct'
-        last_name = c_email.last_name
-      else
-        last_name = c_email.last_name if c_email.attributes.key?('last_name')
-        last_name = c_email.lastname if c_email.attributes.key?('lastname')
-    end
-    last_name
-  end
-
-  def set_newsletter(c_email)
-    newsletter = nil
-    newsletter = (c_email.newsletter ? 'yes' : 'no') if c_email.newsletter || !c_email.newsletter
-    newsletter
-  end
-
-  def activerecord?(d_object)
-    d_object.class.ancestors.include?(ActiveRecord::Base)
+    return false if current_email.previous_email.blank?
+    return true if current_email.email != current_email.previous_email
   end
 
   def set_merge(current_email)
@@ -116,8 +65,8 @@ class EmailCapture
     else
       merge_variables[:fname]      = first_name if first_name.present?
       merge_variables[:lname]      = last_name if last_name.present?
-      merge_variables[:ip_address] = '101.0.79.50' #data_object.current_sign_in_ip
-      merge_variables[:country]    = FindCountryFromIP.new('101.0.79.50').country.country_name
+      merge_variables[:ip_address] = current_email.current_sign_in_ip
+      merge_variables[:country]    = FindCountryFromIP.new(current_email.current_sign_in_ip).country.country_name
       merge_variables[:l_page]     = landing_page if landing_page.present?
       merge_variables[:s_version]  = site_version if site_version.present?
       merge_variables[:fb_uid]     = current_email.facebook_uid if current_email.facebook_uid.present?
@@ -137,29 +86,49 @@ class EmailCapture
     merge_variables
   end
 
+  def retrieve_first_name(d_o)
+    first_name = nil
+
+    first_name = d_o.first_name if d_o.first_name.present?
+
+    first_name
+  end
+
+  def retrieve_landing_page(d_o)
+    landing_page = nil
+
+    landing_page = d_o.landing_page if d_o.landing_page.present?
+
+    landing_page
+  end
+
+  def retrieve_last_name(d_o)
+    last_name = nil
+
+    last_name = d_o.last_name if d_o.last_name.present?
+
+    last_name
+  end
+
+  def set_newsletter(d_o)
+    newsletter = nil
+    newsletter = (d_o.newsletter ? 'yes' : 'no') if d_o.newsletter || !d_o.newsletter
+    newsletter
+  end
+
   def get_utm(d_o)
     utm_params = nil
-    case
-      when d_o.class.to_s == 'Contact'
-        utm_params = d_o.utm_params
-      when d_o.class.to_s == 'OpenStruct'
-        utm_params = d_o.utm_params
-      else
-        d_o = d_o.utm_params if d_o.attributes.key?('utm_params')
-    end
+
+    utm_params = d_o.utm_params if d_o.utm_params.present?
+
     utm_params
   end
 
   def retrieve_site_version(d_o)
     site_version = nil
-    case
-      when d_o.class.to_s == 'Contact'
-        site_version = d_o.site_version
-      when d_o.class.to_s == 'OpenStruct'
-        site_version = d_o.site_version
-      else
-        site_version = d_o.site_version if d_o.attributes.key?('site_version')
-    end
+
+    site_version = d_o.site_version if d_o.site_version.present?
+
     site_version
   end
 
