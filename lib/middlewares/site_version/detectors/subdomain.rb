@@ -1,15 +1,16 @@
+require_relative '../detectors/version_codes'
+
 module Middleware
   module SiteVersion
     module Detectors
       class Subdomain
-        US_CODE = 'us'.freeze
-        AU_CODE = 'au'.freeze
+        include VersionCodes
 
         def detect_site_version(rack_request)
           if rack_request.host.start_with?('au.')
-            'au'
+            AU_CODE
           else
-            'us'
+            US_CODE
           end
         end
       end

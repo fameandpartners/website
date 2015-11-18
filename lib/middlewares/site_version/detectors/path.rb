@@ -1,9 +1,10 @@
+require_relative '../detectors/version_codes'
+
 module Middleware
   module SiteVersion
     module Detectors
       class Path
-        US_CODE = 'us'.freeze
-        AU_CODE = 'au'.freeze
+        include VersionCodes
 
         VALID_PATHS   = [AU_CODE].join('|')
         SV_CODE_REGEX = /^\/(?<sv_code>#{VALID_PATHS})?.*$/
