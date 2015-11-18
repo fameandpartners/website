@@ -38,6 +38,7 @@ $product-color-hot-pink: #ff3399;
       .color-aqua                    { background-color: #21cddb; }
       .color-apple-green             { background-color: #25d291; }
       .color-apricot                 { background-color: #ffad80; }
+      .color-art-soul                { @include image-color-selector('ArtSoul.png'); }
       .color-baby-pink               { background-color: #fde2f0; }
       .color-beige                   { background-color: #efdecd; }
       .color-berry                   { background-color: #873c44; }
@@ -100,8 +101,10 @@ $product-color-hot-pink: #ff3399;
       .color-light-blue              { background-color: #66ccff; }
       .color-light-pink              { background-color: #ffecef; }
       .color-light-pink-and-charcoal { @include split-color-selector(#ffecef, #3c3c3c); }
+      .color-micro-spot              { @include image-color-selector('BlackMicroSpot.png') }
       .color-midnight-floral         { @include image-color-selector('midnightfloral.jpg') }
       .color-monochrome              { @include image-color-selector('Monochrome.png'); }
+      .color-monochrome-code         { @include image-color-selector('MonochromeCoda.png'); }
       .color-pink-azalea-floral      { @include image-color-selector('PinkAzaleaFloral.png'); }
       .color-surreal-floral-black    { @include image-color-selector('SurrealFloralBlack.png'); }
       .color-surreal-floral-white    { @include image-color-selector('SurrealFloralWhite.png'); }
