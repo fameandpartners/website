@@ -7,9 +7,7 @@ class Moodboard < ActiveRecord::Base
   validates :user, presence: true
   validates_inclusion_of :purpose, in: %w( default wedding )
 
-  def self.weddings
-    where(purpose: 'wedding')
-  end
+  scope :weddings, -> { where(purpose: 'wedding') }
 
   # Intended for use as a chained scope off of a Spree::User object.
   # e.g. user.moodboards.default_or_create
