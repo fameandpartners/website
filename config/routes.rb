@@ -37,6 +37,7 @@ FameAndPartners::Application.routes.draw do
                path_names:  { sign_out: 'logout' }
 
     devise_scope :spree_user do
+      get '/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
       get '/spree_user/thanks' => 'spree/user_registrations#thanks'
       get '/account_settings' => 'spree/user_registrations#edit'
     end
