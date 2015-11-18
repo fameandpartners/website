@@ -47,7 +47,7 @@ class EmailCapture
   end
 
   def email_changed?(current_email)
-    return false if current_email.previous_email.blank?
+    return false if !defined?(current_email.previous_email) || current_email.previous_email.blank?
     return true if current_email.email != current_email.previous_email
   end
 
@@ -66,7 +66,7 @@ class EmailCapture
       merge_variables[:fname]      = first_name if first_name.present?
       merge_variables[:lname]      = last_name if last_name.present?
       merge_variables[:ip_address] = current_email.current_sign_in_ip
-      merge_variables[:country]    = FindCountryFromIP.new(current_email.current_sign_in_ip).country.country_name
+      merge_variables[:country]    = FindCountryFromIP.new(current_email.current_sign_in_ip).country.country_name if FindCountryFromIP.new(current_email.current_sign_in_ip).country.present?
       merge_variables[:l_page]     = landing_page if landing_page.present?
       merge_variables[:s_version]  = site_version if site_version.present?
       merge_variables[:fb_uid]     = current_email.facebook_uid if current_email.facebook_uid.present?
@@ -112,14 +112,14 @@ class EmailCapture
 
   def set_newsletter(d_o)
     newsletter = nil
-    newsletter = (d_o.newsletter ? 'yes' : 'no') if d_o.newsletter || !d_o.newsletter
+    newsletter = (d_o.newsletter ? 'yes' : 'no') if defined?(d_o.newsletter)
     newsletter
   end
 
   def get_utm(d_o)
     utm_params = nil
 
-    utm_params = d_o.utm_params if d_o.utm_params.present?
+    utm_params = d_o.utm_params if !defined?(d_o.utm_params)
 
     utm_params
   end

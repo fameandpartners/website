@@ -2,93 +2,64 @@ require 'spec_helper'
 
 describe EmailCapture do
   let(:user) { build(:spree_user) }
+  let(:os) { OpenStruct.new(email:              user.email,
+                            first_name:         user.first_name,
+                            last_name:          user.last_name,
+                            current_sign_in_ip: "101.0.79.50",
+                            landing_page:       "/dresses/formal",
+                            utm_params:         '',
+                            site_version:       'US',
+                            form_name:          'contact') }
   let(:mailchimp) { EmailCapture.new({service: 'mailchimp'}) }
 
   it { expect(EmailCapture.new({service: 'mailchimp'}).service).to eq 'mailchimp' }
   it { expect(EmailCapture.new({service: 'Mailchimp'}).service).to eq 'mailchimp' }
 
   describe 'call .email_changed?' do
-    it { expect(mailchimp.email_changed?(user)).to be_falsey }
+    it { expect(mailchimp.email_changed?(:os)).to be_falsey }
     it 'returns true when email was changed' do
-      user.save #Can I emulate this without writing to the database?
-      user.email = 'change@test.com'
-      expect(mailchimp.email_changed?(user)).to be_truthy
-    end
-    it 'returns false when a new contact is passed' do
-      contact = Contact.new(email: 'test@test.com')
-      expect(mailchimp.email_changed?(contact)).to be_falsey
+      os.previous_email  =  'email@changes.com'
+      expect(mailchimp.email_changed?(os)).to be_truthy
     end
   end
 
   describe 'call .retrieve_first_name' do
-    it { expect(mailchimp.retrieve_first_name(user)).to eq user.first_name }
-    it 'returns first name when a contact is passed' do
-      contact = Contact.new(email: 'test@test.com', first_name: "First")
-      expect(mailchimp.retrieve_first_name(contact)).to eq contact.first_name
-    end
-    it 'returns nil when a OpenStruct is passed' do
-      os = OpenStruct.new(email: 'test@test.com')
+    it { expect(mailchimp.retrieve_first_name(os)).to eq user.first_name }
+    it 'returns nil when an empty first name is passed' do
+      os.first_name = nil
       expect(mailchimp.retrieve_first_name(os)).to be_nil
     end
   end
 
   describe 'call .retrieve_last_name' do
-    it { expect(mailchimp.retrieve_last_name(user)).to eq user.last_name }
-    it 'returns last name when a contact is passed' do
-      contact = Contact.new(email: 'test@test.com', last_name: "Last")
-      expect(mailchimp.retrieve_last_name(contact)).to eq contact.last_name
-    end
-    it 'returns nil when a OpenStruct is passed' do
-      os = OpenStruct.new(email: 'test@test.com')
+    it { expect(mailchimp.retrieve_last_name(os)).to eq user.last_name }
+    it 'returns nil when an empty last name is passed' do
+      os.last_name = nil
       expect(mailchimp.retrieve_last_name(os)).to be_nil
     end
   end
 
-  describe 'call .activerecord?' do
-    it { expect(mailchimp.activerecord?(user)).to be_truthy }
-    it { expect(mailchimp.activerecord?(Contact.new(email: 'test@test.com', last_name: "Last"))).to be_falsey }
-    it { expect(mailchimp.activerecord?(OpenStruct.new(email: 'test@test.com'))).to be_falsey }
-  end
-
   describe 'call .set_newsletter' do
-
-    it 'returns no when no newsletter is set and user is passed' do
+    it 'returns no when newsletter is set false' do
+      os.newsletter = false
       expect(mailchimp.set_newsletter(user)).to eq 'no'
     end
-    it 'returns yes when newsletter is set and user is passed' do
-      user.newsletter = true
-      expect(mailchimp.set_newsletter(user)).to eq 'yes'
+    it 'returns yes when newsletter is set true' do
+      os.newsletter = true
+      expect(mailchimp.set_newsletter(os)).to eq 'yes'
     end
-    it 'returns no when no newsletter is set and a non-activerecord object is passed' do
-      expect(mailchimp.set_newsletter(Contact.new(email: 'test@test.com'))).to be_nil
+    it 'returns nil when no newsletter is set' do
+      expect(mailchimp.set_newsletter(os)).to be_nil
     end
   end
 
   describe 'call .set_merge' do
-    context 'when passed the user' do
-      before  {user.current_sign_in_ip = "101.0.79.50" }
-      it { expect(mailchimp.set_merge(user).class.to_s).to eq 'Hash' }
-      it { expect(mailchimp.set_merge(user)[:fname]).to eq user.first_name }
-      it { expect(mailchimp.set_merge(user)[:lname]).to eq user.last_name }
-      it { expect(mailchimp.set_merge(user)[:ip_address]).to eq user.current_sign_in_ip }
-      it { expect(mailchimp.set_merge(user)[:country]).to be }
-      it { expect(mailchimp.set_merge(user)[:n_letter]).to eq 'no' }
-    end
-
-    context 'when passed a contact' do
-      let(:contact) { Contact.new(email: 'test@test.com', first_name: "First", last_name: "Last" ) }
-      it { expect(mailchimp.set_merge(contact)[:fname]).to eq contact.first_name }
-      it { expect(mailchimp.set_merge(contact)[:lname]).to eq contact.last_name }
-      it { expect(mailchimp.set_merge(contact)[:n_letter]).to be_nil }
-    end
-
-    context 'when passed a OpenStruct' do
-      let(:os) { OpenStruct.new(email: 'test@test.com', current_sign_in_ip: "101.0.79.50") }
-      it { expect(mailchimp.set_merge(os)[:ip_address]).to eq os.current_sign_in_ip }
-      it { expect(mailchimp.set_merge(os)[:country]).to be }
-      it { expect(mailchimp.set_merge(os)[:n_letter]).to be_nil }
-    end
-
+    it { expect(mailchimp.set_merge(os).class.to_s).to eq 'Hash' }
+    it { expect(mailchimp.set_merge(os)[:fname]).to eq user.first_name }
+    it { expect(mailchimp.set_merge(os)[:lname]).to eq user.last_name }
+    it { expect(mailchimp.set_merge(os)[:ip_address]).to eq os.current_sign_in_ip }
+    it { expect(mailchimp.set_merge(os)[:country]).to be }
+    it { expect(mailchimp.set_merge(os)[:n_letter]).to be_nil }
   end
 
 end
