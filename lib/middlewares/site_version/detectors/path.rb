@@ -1,4 +1,4 @@
-require_relative '../detectors/version_codes'
+require_relative './version_codes'
 
 module Middleware
   module SiteVersion

@@ -1,5 +1,6 @@
 require_relative './detectors/path'
 require_relative './detectors/domain'
+require_relative './detectors/subdomain'
 
 module Middleware
   module SiteVersion
