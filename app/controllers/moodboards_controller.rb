@@ -6,7 +6,7 @@ class MoodboardsController < ApplicationController
   def index
     @collection = spree_current_user.moodboards
     @resource   = @collection.default_or_create
-
+    @title = @resource.name
     render :show
   end
 
@@ -18,5 +18,6 @@ class MoodboardsController < ApplicationController
                    else
                      @collection.default_or_create
                    end
+    @title = @resource.name
   end
 end

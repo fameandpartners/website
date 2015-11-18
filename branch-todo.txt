@@ -3,3 +3,6 @@
 - Add deletion from moodboard events
 - Add comments to moodboard items
 - clean up UI
+- clean up presenter and image helpers
+- FIX up N+1 queries on moodboards
+- Re-implement DIRECT add to cart in new moodboards

@@ -12,11 +12,11 @@ module UserMoodboard; end
 class UserMoodboard::Populator
   attr_reader :user, :product_id, :variant_id, :color_id
 
-  def initialize(options = {})
-    @user       = options[:user]
-    @product_id = options[:product_id]
-    @variant_id = options[:variant_id]
-    @color_id   = options[:color_id]
+  def initialize(user:, product_id:, color_id:, variant_id: nil)
+    @user       = user
+    @product_id = product_id
+    @variant_id = variant_id
+    @color_id   = color_id
   end
 
   # cases priority
@@ -56,21 +56,12 @@ class UserMoodboard::Populator
     end
 
     def add_color_variant(product, variant, color)
-      item = user.wishlist_items.where(
-        spree_product_id: product.try(:id) || variant.product_id,
-        product_color_id: color_id
-      ).first_or_initialize
-      item.quantity = 1
-      item.spree_variant_id = variant.try(:id) || product.master.id
-      item.save
-
       user.moodboards.default_or_create.add_item(product: product, color: color, user: user, variant: variant)
-
-      item
     end
 
     def add_variant(variant)
       product_variant = Repositories::ProductVariants.new(product_id: variant.product_id).read(variant.id)
+      NewRelic::Agent.notice_error('UNEXPECTED USE OF UserMoodboard::Populator#add_variant')
 
       item = user.wishlist_items.where(
         spree_product_id: variant.product_id,

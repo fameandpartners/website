@@ -1,11 +1,36 @@
-/ul.nav.nav-pills
-/  - @collection.each do |board|
-/    li = link_to(board.name || 'Moodboard', moodboard_path(board))
+/ h1  = @resource.name
+/ ALMOST LITERAL COPY PASTE / SEARCH REPLACE OF `app/views/users/wishlists_items/index.html.slim`
+.user-account-page-title
+  .container
+    .page-title--details
+      h1.user-account-title.no-padding-bottom.text-white = @resource.name
 
-h3 = @resource.name
-ul
-  - @resource.items.active.each do |item|
-    li
-      => link_to(item.product.name, moodboard_item_path(item.moodboard_id, item.id))
-      = item.attributes
-      = cropped_product_hoverable_image_tag(item.product, css_class: '')
+.page-content.user.moodboard.index
+  .container.relative
+
+    = render 'users/shared/tabs', active_tab: 'wishlist'
+    .row
+      .col-md-12
+        - if @resource.items.active.empty?
+          p Sorry, there are no items in your moodboard
+
+        - if @resource.items.active.any?
+          .container.relative
+
+            - @resource.items.active.each_slice(4).each do |row|
+              .row.relative
+                - row.each do |item|
+                  .col-md-3.col-xs-6.col-xxs-12.category--item.product-item data-id=(item.product_id)
+                    - url_path = "/dresses/dress-#{item.product.name.parameterize}-#{item.product_id}?color=#{item.color.name}"
+                    = link_to url_path do
+                      = cropped_product_color_variant_image_tag(item.product_color_value)
+                      .details
+                        .name= item.product.name
+                        span.price = item.product.price
+                        / TODO - Handle discounts
+                        / span.price = product_price_with_discount(product.price, product.discount)
+
+                    .actions.text-center
+                      = link_to 'Buy this Dress', url_path, class: 'buy btn btn-md btn-black'
+                      /#, data: { variant: product.variant_id, id: product.item_id }
+                      = link_to 'Remove', moodboard_item_path(item.moodboard_id, item.id),  method: :delete, data: { confirm: 'Are you sure?' }
