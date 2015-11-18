@@ -1,4 +1,16 @@
 FameAndPartners::Application.routes.draw do
+  ############################
+  # Devise Omniauth Workaround
+  ############################
+  # This is needed to make Facebook Login work.
+  # Since we're redirecting every /us/* URL, facebook callback is being redirected twice
+  devise_scope :spree_user do
+    get '/us/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
+  end
+
+  ########################
+  # US Redireciton to root
+  ########################
   get '/us/*whatevs' => redirect(path: "/%{whatevs}")
   get '/us' => redirect("/")
 
@@ -13,11 +25,6 @@ FameAndPartners::Application.routes.draw do
     ##############################
     # Devise & User authentication
     ##############################
-    devise_for :user, class_name: Spree::User, skip: [:unlocks, :registrations, :passwords, :sessions, :omniauth_callbacks]
-    devise_scope :user do
-      get '/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
-    end
-
     devise_for :spree_user,
                class_name:  'Spree::User',
                controllers: { sessions:           'spree/user_sessions',
@@ -30,6 +37,7 @@ FameAndPartners::Application.routes.draw do
                path_names:  { sign_out: 'logout' }
 
     devise_scope :spree_user do
+      get '/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
       get '/spree_user/thanks' => 'spree/user_registrations#thanks'
       get '/account_settings' => 'spree/user_registrations#edit'
     end
