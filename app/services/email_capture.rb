@@ -98,49 +98,29 @@ class EmailCapture
   end
 
   def retrieve_first_name(d_o)
-    first_name = nil
-
-    first_name = d_o.first_name if d_o.first_name.present?
-
-    first_name
+    d_o.try(:first_name)
   end
 
   def retrieve_landing_page(d_o)
-    landing_page = nil
-
-    landing_page = d_o.landing_page if d_o.landing_page.present?
-
-    landing_page
+    d_o.try(:landing_page)
   end
 
   def retrieve_last_name(d_o)
-    last_name = nil
-
-    last_name = d_o.last_name if d_o.last_name.present?
-
-    last_name
+    d_o.try(:last_name)
   end
 
   def set_newsletter(d_o)
-    newsletter = nil
-    newsletter = (d_o.newsletter ? 'yes' : 'no') if defined?(d_o.newsletter)
+    return nil if d_o.newsletter.to_s.blank?
+    newsletter = (d_o.newsletter ? 'yes' : 'no')
     newsletter
   end
 
   def get_utm(d_o)
-    utm_params = nil
-
-    utm_params = d_o.utm_params if !defined?(d_o.utm_params)
-
-    utm_params
+    d_o.try(:utm_params)
   end
 
   def retrieve_site_version(d_o)
-    site_version = nil
-
-    site_version = d_o.site_version if d_o.site_version.present?
-
-    site_version
+    d_o.try(:site_version)
   end
 
 end
