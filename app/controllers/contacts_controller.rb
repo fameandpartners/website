@@ -11,14 +11,13 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(params[:contact])
     if @contact.valid?
-      EmailCapture.new({service: 'mailchimp'}).capture(OpenStruct.new(email:              @contact.email,
-                                                                      first_name:         @contact.first_name,
-                                                                      last_name:          @contact.last_name,
-                                                                      current_sign_in_ip: request.remote_ip,
-                                                                      landing_page:       session[:landing_page],
-                                                                      utm_params:         session[:utm_params],
-                                                                      site_version:       current_site_version.name,
-                                                                      form_name:          'contact'))
+      mailchimp = EmailCapture.new({service: 'mailchimp'})
+      mailchimp.capture(mailchimp.mailchimp_struct.new(@contact.email, nil, nil,
+                                                       @contact.first_name,@contact.last_name,
+                                                       request.remote_ip, session[:landing_page],
+                                                       session[:utm_params],current_site_version.name,
+                                                       nil, 'contact'))
+
       ContactMailer.email(@contact).deliver
       flash[:notice] = "We're on it!"
       redirect_to success_contact_path

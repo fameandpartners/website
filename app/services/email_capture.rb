@@ -1,12 +1,23 @@
 class EmailCapture
 
-  attr_accessor :service, :mailchimp
+  attr_accessor :service, :mailchimp, :mailchimp_struct
 
   def initialize(options = {})
     @service = options[:service].downcase
     case service
       when 'mailchimp'
         @mailchimp = Mailchimp::API.new(configatron.mailchimp.api_key)
+        @mailchimp_struct = Struct.new("Mailchimp", :email,
+                                       :previous_email,
+                                       :newsletter,
+                                       :first_name,
+                                       :last_name,
+                                       :current_sign_in_ip,
+                                       :landing_page,
+                                       :utm_params,
+                                       :site_version,
+                                       :facebook_uid,
+                                       :form_name)
     end
   end
 
