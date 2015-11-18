@@ -192,56 +192,32 @@ Spree::Order.class_eval do
     end
   end
 
-  def get_price_for_line_item(variant:, currency:)
-    currency ||= self.currency
-    price = variant.price_in(currency)
-
-    # TODO - OMG MAGIC NUMBERS
-    # Plus Size Pricing
-    if add_plus_size_cost?(variant)
-      price.amount += 20
-    end
-
-    price
-  end
-
+  # CURRENTLY , WE ARE ADDING NEW LINE_ITEM PER REQUEST IN ORDER TO ALLOW MULTIPLE CUSTOMIZED DRESSES TO BE ADDED TO CART
+  # ( THE OLD LOGIC OF PULLING LINE_ITEM BASED ON VARIANT_ID IS GOT RID OF )
+  # WITH THIS SOLUTION , WE ARE NOW HAVING AN SMALL ISSUE WITH MULTIPLE SAME ITEM WITH QUANTITY = 1
+  # SINCE THIS SMALL ISSUE IS NOT REALLY DAMAGING , WE WANT TO LEAVE IT LIKE THAT FOR NOW
   def add_variant(variant, quantity = 1, currency = nil)
-    current_item = find_line_item_by_variant(variant)
-    if current_item
-      current_item.quantity += quantity
-      current_item.currency = currency unless currency.nil?
-      current_item.save
-    else
-      price = get_price_for_line_item(variant: variant, currency: currency)
-      current_item = Spree::LineItem.new(:quantity => quantity)
-      current_item.variant = variant
-      if currency
-        current_item.currency    = currency
-
-        if variant.in_sale?
-          current_item.price = price.apply(variant.discount).amount
-          current_item.old_price = price.amount
-        else
-          current_item.price = price.amount
-        end
-      else
-        if variant.in_sale?
-          current_item.price = price.apply(variant.discount).amount
-          current_item.old_price = price.amount
-        else
-          current_item.price = price.amount
-        end
-      end
-      self.line_items << current_item
+    price = variant.price_in(currency || self.currency)
+    current_item = Spree::LineItem.new(:quantity => quantity)
+    current_item.variant = variant
+    if currency
+      current_item.currency = currency
     end
+
+    if variant.in_sale?
+      current_item.price = price.apply(variant.discount).amount
+      current_item.old_price = price.amount
+    else
+      current_item.price = price.amount
+    end
+    self.line_items << current_item
 
     self.reload
     current_item
   end
 
   def update_line_item(current_item, variant, quantity, currency)
-    price = get_price_for_line_item(variant: variant, currency: currency)
-
+    price = variant.price_in(currency)
 
     current_item.currency    = currency
     current_item.variant     = variant
@@ -338,22 +314,6 @@ Spree::Order.class_eval do
 
   def get_site_version
     @site_version ||= SiteVersion.by_currency_or_default(self.currency)
-  end
-
-  def add_plus_size_cost?(variant)
-    unless variant.product_plus_size
-      if variant.dress_size && variant.dress_size.name.to_i >= locale_plus_sizes
-        return true
-      end
-    end
-  end
-
-  def locale_plus_sizes
-    if get_site_version.permalink == 'au'
-      return 18
-    else
-      return 14
-    end
   end
 
   def use_prices_from(site_version)

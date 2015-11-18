@@ -58,6 +58,14 @@ module Orders
       variant.try(:product).try(:sku) || 'Missing Product'
     end
 
+    def sku
+      if personalization.present?
+        CustomItemSku.new(item).call
+      else
+        variant.sku
+      end
+    end
+
     def style_name
       variant.try(:product).try(:name) || 'Missing Variant'
     end
@@ -90,11 +98,6 @@ module Orders
     def country_size
       "#{size} (#{order.site_version})"
     end
-
-    def make_size
-      size
-    end
-    deprecate :make_size
 
     def display_price
       Spree::Price.new(amount: price).display_price.to_s
@@ -146,6 +149,7 @@ module Orders
         :tracking_number         => tracking_number,
         :shipment_date           => shipped_at.try(:to_date),
         :fabrication_state       => fabrication_status,
+        :sku                     => sku,
         :style                   => style_number,
         :factory                 => factory,
         :color                   => colour_name,

@@ -90,12 +90,13 @@ module Orders
       @return_request ||= OrderReturnRequest.where(:order_id => order.id).first
     end
 
-    def self.build_line_items_for_production(order)
-      order.line_items.collect do |item|
+    def self.build_line_items_for_production(order_presenter)
+      order_presenter.line_items.collect do |item|
         {
           style_num:        item.style_number,
-          size:             item.country_size,
-          adjusted_size:    item.make_size,
+          sku:              item.sku,
+          size:             item.size,
+          adjusted_size:    item.country_size,
           color:            item.colour_name,
           quantity:         item.quantity,
           factory:          item.factory,

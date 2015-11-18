@@ -25,4 +25,22 @@ Spree::Address.class_eval do
       country.try(:name)
     ].reject(&:blank?).join(', ')
   end
+
+  def set_last(current_user=nil, current_order)
+    if current_user && !current_order.try(:bill_address)
+      last_order = Spree::Order.with_state(:complete).where(user_id: current_user).order(:created_at).last
+      order_bill_address = last_order.bill_address if last_order.try(:bill_address)
+    end
+    order_bill_address = current_order.bill_address if current_order.try(:bill_address)
+
+    if order_bill_address.present?
+      self.address1 = order_bill_address.address1
+      self.address2 = order_bill_address.address2
+      self.city = order_bill_address.city
+      self.state_id = order_bill_address.state_id
+      self.country_id = order_bill_address.country_id
+      self.zipcode = order_bill_address.zipcode
+      self.phone = order_bill_address.phone
+    end
+  end
 end

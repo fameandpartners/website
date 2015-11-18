@@ -3,8 +3,8 @@ Spree::Product.class_eval do
 
   has_one :celebrity_inspiration,
     dependent: :destroy,
-    class_name: 'Spree::CelebrityInspiration',
-    foreign_key: :spree_product_id
+    class_name: 'CelebrityInspiration',
+    foreign_key: :spree_product_id, inverse_of: :product
 
   has_one :style_profile,
     dependent: :destroy,
@@ -16,7 +16,7 @@ Spree::Product.class_eval do
   has_many :product_color_values,
            dependent: :destroy
 
-  has_many :moodboard_items, foreign_key: :spree_product_id
+  has_many :inspirations, foreign_key: :spree_product_id, inverse_of: :product
   has_many :accessories, class_name: 'ProductAccessory', foreign_key: :spree_product_id
 
   has_many :making_options, foreign_key: :product_id, class_name: 'ProductMakingOption'

@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe FindUsersSiteVersion, type: :service, memoization_support: true do
-  describe "#get" do
+describe FindUsersSiteVersion, type: :service do
+  describe '#get' do
     before(:each) do
       SiteVersion.delete_all
       rememoize(SiteVersion, :@default)
     end
 
-    it "returns site version chosen by user previously" do
+    it 'returns site version chosen by user previously' do
       sv = create(:site_version)
       user = create(:spree_user, site_version_id: sv.id)
 
@@ -15,21 +15,21 @@ describe FindUsersSiteVersion, type: :service, memoization_support: true do
       expect(service.get).to eq(sv)
     end
 
-    it "returns site version chosen by guest user (cookie based)" do
+    it 'returns site version chosen by guest user (cookie based)' do
       sv = create(:site_version)
 
       service = described_class.new(cookie_param: sv.permalink)
       expect(service.get).to eq(sv)
     end
 
-    it "returns site version chosen by passing a param (site version permalink)" do
+    it 'returns site version chosen by passing a param (site version permalink)' do
       sv = create(:site_version)
 
       service = described_class.new(url_param: sv.permalink)
       expect(service.get).to eq(sv)
     end
 
-    it "returns default site version" do
+    it 'returns default site version' do
       sv = create(:site_version, default: true)
 
       service = described_class.new({})
@@ -44,9 +44,9 @@ describe FindUsersSiteVersion, type: :service, memoization_support: true do
         cookie_param = nil
 
         service = FindUsersSiteVersion.new(
-          user:         user,
-          url_param:    url_param,
-          cookie_param: cookie_param
+            user:         user,
+            url_param:    url_param,
+            cookie_param: cookie_param
         )
 
         dummy_site_version = instance_spy('SiteVersion')

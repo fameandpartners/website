@@ -13,7 +13,7 @@ class FindUsersSiteVersion
   end
 
   def sv_chosen_by_ip
-    if request_ip.present? && country = fetch_user_country_code
+    if request_ip.present? && (country = fetch_ip_country_code)
       find_by_permalink(country.to_s.downcase)
     end
   end
@@ -38,8 +38,8 @@ class FindUsersSiteVersion
     end
   end
 
-  def fetch_user_country_code
-    UserCountryFromIP.new(request_ip).country_code
+  def fetch_ip_country_code
+    FindCountryFromIP.new(request_ip).country_code
   end
 
   def default_site_version

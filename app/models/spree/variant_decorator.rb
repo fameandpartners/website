@@ -22,7 +22,6 @@ Spree::Variant.class_eval do
   end
 
   def in_sale?
-    #current_sale.active?
     discount.present?
   end
 
@@ -53,48 +52,14 @@ Spree::Variant.class_eval do
     end
   end
 
-  # Master SKU + VarientValue1 + VarientValue2
   def set_default_sku
     return if self.sku.present?
 
-    if (sku = generate_sku).present?
-      self.sku = sku
-    end
+    self.sku = generate_sku
   end
 
   def generate_sku
-    return sku if is_master?
-
-    sku_chunks = []
-    master = nil
-
-    if product.master.present?
-      master = product.master
-    elsif product.variants.present?
-      master = product.variants.first
-    end
-
-    if master && master.sku.present?
-      sku_chunks.push(master.sku)
-    else
-      sku_chunks.push(product.permalink)
-    end
-
-    self.option_values.sort_by(&:id).each do |value|
-      name = value.option_type.name.sub(/^dress-/, '').try(:capitalize)
-      chunk = "#{name}:#{value.presentation}"
-      sku_chunks.push(chunk)
-    end
-
-    sku_chunks.reject(&:blank?).join('-')
-  rescue
-    nil
-  end
-
-  def generate_sku!
-    if (sku = generate_sku).present?
-      update_column(:sku, sku)
-    end
+    ::VariantSku.new(self).call
   end
 
   # logic

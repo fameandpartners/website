@@ -98,6 +98,8 @@ ruby:
       = render 'layouts/redesign/notices'
     = render 'layouts/redesign/campaigns/auto_apply_promo_code'
 
+= render 'layouts/redesign/new_this_week'
+
 - cache [:layout, :side_menu, spree_user_signed_in?, @locale_warning.cache_key], expires_in: configatron.cache.expire.long do
   #sideMenu
     nav.navbar.navbar-default.visible-xs.visible-sm

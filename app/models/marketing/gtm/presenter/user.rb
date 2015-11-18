@@ -34,7 +34,7 @@ module Marketing
         end
 
         def country
-          UserCountryFromIP.new(request_ip).country_name || UNKNOWN_STRING
+          FindCountryFromIP.new(request_ip).country_name || UNKNOWN_STRING
         end
 
         def key

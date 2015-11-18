@@ -113,7 +113,7 @@ module Feeds
 
       item = HashWithIndifferentAccess.new(
         variant:                 variant,
-        variant_sku:             product.sku + variant.id.to_s,
+        variant_sku:             variant.sku,
         product:                 product,
         product_name:            product.name,
         product_sku:             product.sku,

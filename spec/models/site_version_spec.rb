@@ -1,15 +1,15 @@
 require 'spec_helper'
 
-describe SiteVersion, type: :model, memoization_support: true do
+describe SiteVersion, type: :model do
   describe '.permalinks' do
     before(:each) { rememoize(described_class, :@permalinks) }
 
     it 'returns all site versions permalinks' do
       create(:site_version, permalink: 'au')
+      create(:site_version, permalink: 'us')
 
-      # Notice that 'us' version was seeded in the spec_helper
       result = described_class.permalinks
-      expect(result).to match(['us', 'au'])
+      expect(result).to match_array %w(us au)
     end
   end
 

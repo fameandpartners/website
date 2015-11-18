@@ -61,7 +61,7 @@ describe Marketing::Subscriber do
     it "returns valid ip address" do
       ip = 'test_ip_address'
 
-      allow(UserCountryFromIP).to receive(:new).and_return(double('Country', :country_name => 'blah'))
+      allow(FindCountryFromIP).to receive(:new).and_return(double('Country', :country_name => 'blah'))
 
       # by user last_sign_in_ip
       user.last_sign_in_ip = ip

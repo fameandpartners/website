@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Spree::OptionValuesGroup, type: :model, memoization_support: true do
+describe Spree::OptionValuesGroup, type: :model do
   it { is_expected.to belong_to(:option_type).class_name('Spree::OptionType') }
   it { is_expected.to have_and_belong_to_many(:option_values).class_name('Spree::OptionValue') }
 

@@ -64,6 +64,7 @@ FameAndPartners::Application.routes.draw do
 
   namespace :widgets do
     get 'main_nav' => 'site_navigations#main_nav'
+    get 'footer'   => 'site_navigations#footer'
   end
 
   scope "(:site_version)", constraints: { site_version: /(us|au)/ } do
@@ -334,7 +335,7 @@ FameAndPartners::Application.routes.draw do
       resources :site_versions, only: [:index, :edit, :update]
 
       scope 'products/:product_id', :as => 'product' do
-        resource :inspiration, :only => [:edit, :update]
+        resource :celebrity_inspiration, :only => [:edit, :update]
 
         resource :colors, only: [:new, :create], controller: 'product_colors'
       end
@@ -365,7 +366,7 @@ FameAndPartners::Application.routes.draw do
 
       resources :products do
         resources :customisation_values
-        resources :moodboard_items do
+        resources :inspirations do
           collection do
             post :update_positions, as: :update_positions
           end
@@ -384,24 +385,6 @@ FameAndPartners::Application.routes.draw do
 
       get 'search/order_owners' => 'search#order_owners'
       get 'search/outerwear' => 'products#search_outerwear', as: :search_outerwear
-
-      resources :celebrities, only: [:new, :create, :index, :edit, :update, :destroy] do
-        scope module: :celebrity do
-          resource :products, only: [:edit, :update]
-          resources :moodboard_items do
-            post :update_positions, as: :update_positions, on: :collection
-          end
-          resources :accessories, controller: 'product_accessories' do
-            post :update_positions, on: :collection
-          end
-
-          resources :images, only: [:index, :new, :create, :edit, :update, :destroy] do
-            collection do
-              post :update_positions
-            end
-          end
-        end
-      end
     end
   end
 

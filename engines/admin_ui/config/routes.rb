@@ -24,6 +24,8 @@ AdminUi::Engine.routes.draw do
     resource :size_normalisations,    :only => [:show]
   end
 
+  resources :variants
+
   resources :caches, only: [:index, :destroy, :show] do
     delete :expire, :on => :collection
   end

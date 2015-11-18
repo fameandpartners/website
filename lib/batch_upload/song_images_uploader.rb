@@ -13,10 +13,10 @@ module BatchUpload
             begin
               file_name = File.basename file_path
 
-              song = product.moodboard_items.song.first
+              song = product.inspirations.song.first
 
               if song.blank?
-                error "Song image found for SKU: #{product.sku} but missing moodboard item. (#{file_name})"
+                error "Song image found for SKU: #{product.sku} but missing inspiration item. (#{file_name})"
                 next
               end
 

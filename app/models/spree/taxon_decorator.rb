@@ -1,4 +1,4 @@
-require_relative 'taxonomy_decorator'
+require_dependency 'spree/taxonomy_decorator'
 
 Spree::Taxon.class_eval do
   include Concerns::Publishable
@@ -19,7 +19,7 @@ Spree::Taxon.class_eval do
       includes(:taxonomy).where(spree_taxonomies: { name: taxonomy_name })
     end
 
-    Spree::Taxonomy::CURRENT.each do |taxonomy_name|
+    ::Spree::Taxonomy::CURRENT.each do |taxonomy_name|
       define_method("from_#{taxonomy_name.downcase}_taxonomy") do
         from_taxonomy(taxonomy_name)
       end

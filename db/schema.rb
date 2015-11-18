@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151117011356) do
+ActiveRecord::Schema.define(:version => 20151115233021) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -63,41 +63,6 @@ ActiveRecord::Schema.define(:version => 20151117011356) do
     t.datetime "updated_at",   :null => false
   end
 
-  create_table "celebrities", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "slug"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
-    t.boolean  "is_published"
-    t.string   "title"
-    t.string   "quote",        :limit => 512
-    t.text     "body"
-    t.string   "kind",                        :default => "celebrity"
-  end
-
-  add_index "celebrities", ["slug"], :name => "index_celebrities_on_slug"
-
-  create_table "celebrities_products", :force => true do |t|
-    t.integer "celebrity_id"
-    t.integer "product_id"
-  end
-
-  add_index "celebrities_products", ["celebrity_id"], :name => "index_celebrities_products_on_celebrity_id"
-
-  create_table "celebrity_images", :force => true do |t|
-    t.integer  "celebrity_id"
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
-    t.boolean  "is_primary",        :default => false
-    t.integer  "position"
-  end
-
-  add_index "celebrity_images", ["celebrity_id"], :name => "index_celebrity_images_on_celebrity_id"
-  add_index "celebrity_images", ["is_primary"], :name => "index_celebrity_images_on_is_primary"
-
   create_table "celebrity_inspirations", :force => true do |t|
     t.integer  "spree_product_id"
     t.string   "celebrity_name"
@@ -111,53 +76,6 @@ ActiveRecord::Schema.define(:version => 20151117011356) do
   end
 
   add_index "celebrity_inspirations", ["spree_product_id"], :name => "index_celebrity_inspirations_on_spree_product_id"
-
-  create_table "celebrity_moodboard_items", :force => true do |t|
-    t.integer  "celebrity_id"
-    t.boolean  "active",             :default => true
-    t.string   "side"
-    t.integer  "position",           :default => 0
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
-  end
-
-  add_index "celebrity_moodboard_items", ["celebrity_id"], :name => "index_celebrity_moodboard_items_on_celebrity_id"
-  add_index "celebrity_moodboard_items", ["side"], :name => "index_celebrity_moodboard_items_on_side"
-
-  create_table "celebrity_product_accessories", :force => true do |t|
-    t.integer  "celebrity_id"
-    t.integer  "spree_product_id"
-    t.integer  "position"
-    t.boolean  "active",             :default => true
-    t.string   "title"
-    t.string   "source"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
-  end
-
-  add_index "celebrity_product_accessories", ["celebrity_id", "spree_product_id"], :name => "celebrity_product_accessories_main"
-
-  create_table "celebrity_style_profiles", :force => true do |t|
-    t.integer  "celebrity_id"
-    t.integer  "glam"
-    t.integer  "girly"
-    t.integer  "classic"
-    t.integer  "edgy"
-    t.integer  "bohemian"
-    t.text     "description"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "celebrity_style_profiles", ["celebrity_id"], :name => "index_celebrity_style_profiles_on_celebrity_id"
 
   create_table "competition_entries", :force => true do |t|
     t.integer  "user_id"
@@ -330,6 +248,24 @@ ActiveRecord::Schema.define(:version => 20151117011356) do
 
   add_index "incompatibilities", ["incompatible_id"], :name => "index_incompatibilities_on_incompatible_id"
   add_index "incompatibilities", ["original_id"], :name => "index_incompatibilities_on_original_id"
+
+  create_table "inspirations", :force => true do |t|
+    t.integer  "spree_product_id"
+    t.boolean  "active",                            :default => true
+    t.string   "item_type",          :limit => 50
+    t.string   "content",            :limit => 512
+    t.integer  "position",                          :default => 0
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
+    t.string   "name"
+    t.string   "title"
+  end
+
+  add_index "inspirations", ["spree_product_id", "active"], :name => "index_inspirations_on_spree_product_id_and_active"
 
   create_table "item_return_events", :force => true do |t|
     t.string   "item_return_uuid"
@@ -529,24 +465,6 @@ ActiveRecord::Schema.define(:version => 20151117011356) do
 
   add_index "marketing_user_visits", ["spree_user_id", "utm_campaign"], :name => "index_marketing_user_visits_on_spree_user_id_and_utm_campaign"
   add_index "marketing_user_visits", ["user_token", "utm_campaign"], :name => "index_marketing_user_visits_on_user_token_and_utm_campaign"
-
-  create_table "moodboard_items", :force => true do |t|
-    t.integer  "spree_product_id"
-    t.boolean  "active",                            :default => true
-    t.string   "item_type",          :limit => 50
-    t.string   "content",            :limit => 512
-    t.integer  "position",                          :default => 0
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
-    t.string   "name"
-    t.string   "title"
-  end
-
-  add_index "moodboard_items", ["spree_product_id", "active"], :name => "index_moodboard_items_on_spree_product_id_and_active"
 
   create_table "option_values_option_values_groups", :id => false, :force => true do |t|
     t.integer "option_value_id"

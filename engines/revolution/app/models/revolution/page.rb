@@ -7,9 +7,11 @@
 
 module Revolution
   class Page < ActiveRecord::Base
+
     attr_accessible :translations_attributes, :path, :template_path, :variables,
                     :canonical, :redirect, :parent, :parent_id, :nofollow, :noindex,
                     :publish_from, :publish_to
+    attr_accessor :params
 
     validates :path, :presence => true
     validate :path_has_not_changed, :on => :update #read only attributes
@@ -95,15 +97,46 @@ module Revolution
       where("LOWER(path) like '%#{query.downcase}%'")
     end
 
-    def robots?
-      noindex? || nofollow?
+    def limit(product_ids)
+      return self.get(:limit) || 20 if page_is_lookbook?
+      page_limit = no_of_products
+      offset = (params[:offset].present? ? params[:offset].to_i + page_limit : page_limit ).to_i
+      no_of_products = (product_ids.blank? ? 0 : product_ids.size)
+      if no_of_products >= offset
+        no_of_products = page_limit
+      else
+        no_of_products = no_of_products - (offset - page_limit)
+        no_of_products = 0 if no_of_products < 0
+      end
+      case
+        when params[:limit].present?
+          return_limit = params[:limit].to_i - no_of_products
+        when self.get(:limit)
+          return_limit = self.get(:limit).to_i - no_of_products
+        else
+          return_limit = page_limit - no_of_products
+      end
+      return_limit
+    end
+
+    def page_is_lookbook?
+      self && self.get(:lookbook)
+    end
+
+    def no_of_products
+      (params[:limit] || self.get(:limit) || 21).to_i
+    end
+
+    def self.default_page
+      Revolution::Page.new(template_path: '/products/collections/show')
     end
 
     def robots
       [].tap do |a|
-        a << 'noindex' if noindex?
-        a << 'nofollow' if nofollow?
+        a << (noindex? ? 'noindex' : 'index')
+        a << (nofollow? ? 'nofollow' : 'follow')
       end.join(',')
     end
+
   end
 end

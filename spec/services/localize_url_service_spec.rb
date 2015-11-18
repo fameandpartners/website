@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe LocalizeUrlService, memoization_support: true do
+describe LocalizeUrlService do
   before(:each) { rememoize(SiteVersion, :@permalinks) }
 
   describe '.localize_url' do

@@ -13,7 +13,7 @@ read -p "Enter to continue, or Ctrl-C to cancel!"
 
 set -x
 
-ssh ${PRODUCTION_RED_DB} 'pg_dump -U postgres -t customisation_values -t moodboard_items -t product_color_values -t product_style_profiles -t spree_assets -t spree_prices -t spree_product_option_types -t spree_product_properties -t spree_products -t spree_products_taxons -t spree_option_values -t spree_option_values_variants -t spree_taxons -t spree_variants --format=custom fame_and_partners > products.pgdump'
+ssh ${PRODUCTION_RED_DB} 'pg_dump -U postgres -t customisation_values -t inspirations -t product_color_values -t product_style_profiles -t spree_assets -t spree_prices -t spree_product_option_types -t spree_product_properties -t spree_products -t spree_products_taxons -t spree_option_values -t spree_option_values_variants -t spree_taxons -t spree_variants --format=custom fame_and_partners > products.pgdump'
 
 scp ${PRODUCTION_RED_DB}:~/products.pgdump .
 
