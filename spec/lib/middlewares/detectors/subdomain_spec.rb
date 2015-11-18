@@ -1,4 +1,4 @@
-require_relative '../../../../lib/middlewares/site_version/detectors/subdomain'
+require 'spec_helper'
 
 module Middleware
   module SiteVersion
@@ -7,7 +7,7 @@ module Middleware
         describe '#detect_site_version' do
           subject { described_class.new }
 
-          shared_examples 'it will return code given subdomain' do |sv_code, host|
+          shared_examples 'return code given subdomain' do |sv_code, host|
             let(:request) { double(Rack::Request, host: host) }
 
             it do
@@ -17,16 +17,16 @@ module Middleware
           end
 
           context 'request has US subdomain' do
-            it_behaves_like 'it will return code given subdomain', 'us', 'us.lvh.me'
+            it_will 'return code given subdomain', 'us', 'us.lvh.me'
           end
 
           context 'request has AU subdomain' do
-            it_behaves_like 'it will return code given subdomain', 'au', 'au.lvh.me'
+            it_will 'return code given subdomain', 'au', 'au.lvh.me'
           end
 
           context 'request has an invalid subdomain' do
             describe 'return default code' do
-              it_behaves_like 'it will return code given subdomain', 'us', 'br.lvh.me'
+              it_will 'return code given subdomain', 'us', 'br.lvh.me'
             end
           end
         end
