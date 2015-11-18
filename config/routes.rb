@@ -13,11 +13,6 @@ FameAndPartners::Application.routes.draw do
     ##############################
     # Devise & User authentication
     ##############################
-    devise_for :user, class_name: Spree::User, skip: [:unlocks, :registrations, :passwords, :sessions, :omniauth_callbacks]
-    devise_scope :user do
-      get '/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
-    end
-
     devise_for :spree_user,
                class_name:  'Spree::User',
                controllers: { sessions:           'spree/user_sessions',
