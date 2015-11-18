@@ -94,14 +94,15 @@ FameAndPartners::Application.routes.draw do
     get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
 
     # Lookbooks
-    # # Note: this 302 redirection is used on widgets, and it can change in the future. This should stay as a temporary redirection.
-    # # Widgets are iframes, and every href have no follows.
-    get '/lookbook' => redirect('/lookbook/the-luxe-collection', :status => 302), as: :lookbook
+    get '/lookbook' => 'statics#lookbook', :as => :lookbook
 
     get '/lookbook/jedi-cosplay' => redirect('/lookbook/make-a-statement')
     get '/lookbook/make-a-statement' => 'products/collections#show', :permalink => 'make-a-statement', :as => :make_a_statement_collection
     get '/lookbook/photo-finish' => 'products/collections#show', :permalink => 'photo-finish', :as => :photo_finish_collection
     get '/lookbook/the-luxe-collection' => 'products/collections#show', :permalink => 'luxe', :as => :luxe_collection
+
+    get '/bring-on-the-night' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :bring_on_the_night_landing_page
+    get '/lookbook/bring-on-the-night' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :bring_on_the_night_collection
 
     get '/lookbook/garden-weeding' => redirect('/lookbook/garden-wedding')
     get '/lookbook/garden-wedding' => 'products/collections#show', :permalink => 'garden-party', :as => :garden_wedding_collection

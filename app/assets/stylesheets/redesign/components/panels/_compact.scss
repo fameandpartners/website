@@ -1,0 +1,28 @@
+/* [Panel Compact]
+-------------------------------------------------------*/
+.panel-compact {
+  display: block;
+  margin-bottom: 30px;
+  line-height: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: $c-neutral-black;
+
+  &:hover {
+    color: $c-neutral-black;
+  }
+
+  .media-wrap {
+    padding-bottom: 100%;
+  }
+
+  .copy-wrap {
+    margin-top: 10px;
+  }
+
+  img {
+    width: auto;
+    height: 100%;
+  }
+
+}
