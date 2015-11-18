@@ -1,9 +1,13 @@
 module Middleware
   module SiteVersion
     module Detectors
-      module VersionCodes
+      class Base
         US_CODE = 'us'.freeze
         AU_CODE = 'au'.freeze
+
+        def default_code
+          US_CODE
+        end
       end
     end
   end

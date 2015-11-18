@@ -1,16 +1,14 @@
-require_relative './version_codes'
+require_relative './base'
 
 module Middleware
   module SiteVersion
     module Detectors
-      class Domain
-        include VersionCodes
-
+      class Domain < Base
         def detect_site_version(rack_request)
           if rack_request.host.end_with?('.com.au')
             AU_CODE
           else
-            US_CODE
+            default_code
           end
         end
       end
