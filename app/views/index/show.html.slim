@@ -4,10 +4,11 @@ ruby:
 
 .page-content.index
   // TODO: create helper for multisource images
+  /MUST CHANGE THE FIRST LINK TO bring_on_the_night_collection_path AFTER MERGING WITH OTHER BRANCH
   = react_component('HeroCarousel', skin: 'skin-light',
-    assets: [{link: sarah_ellen_landing_page_path, src: '/assets/home-page-tiles/hero-4', alt: 'Dance Hall Days - Shop all formal dresses'},
-      {link: photo_finish_collection_path, src: '/assets/home-page-tiles/hero-2', alt: 'Photo FINISH - Shop Now'},
-      {link: make_a_statement_collection_path, src: '/assets/home-page-tiles/hero-3', alt: 'Bambi - Shop the Collection'}])
+    assets: [{link: sarah_ellen_landing_page_path, src: '/assets/home-page-tiles/hero-5', alt: 'BRING ON THE NIGHT - SHOP NOW'},
+             {link: sarah_ellen_landing_page_path, src: '/assets/home-page-tiles/hero-6', alt: 'THE EXCLUSIVE MISS ELLEN - SHOP ALL FORMAL DRESSES'},
+             {link: make_a_statement_collection_path, src: '/assets/home-page-tiles/hero-7', alt: 'Bambi - Shop the Collection'}])
 
   section.carousel-strap.instagram
     .container
@@ -35,15 +36,15 @@ ruby:
   section.container.content-block.home-main-content
     .row
       .main.col-md-7
-        = link_to skirts_collection_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/tile-skirting.jpg', alt: 'New! Skirting the issue - Shop our separates'
+        = link_to build_taxon_path('Embellishment'), class: 'media-wrap'
+          = image_tag 'home-page-tiles/SequinSeduction-CategoryTile1.jpg', alt: 'ALL THAT GLITTERS - SHOP EMBELLISHMENT'
         = render 'shared/redesign/tabs_collection'
         = link_to build_taxon_path('Two Piece'), class: 'media-wrap'
-          = image_tag 'home-page-tiles/tile-double-or-nothing-sml.jpg', alt: 'Double or nothing - Shop our best 2-piece styles'
+          = image_tag 'home-page-tiles/TwoPiece-CategoryTile2.jpg', alt: 'TWO PIECE - SHOP OUR BEST 2-PIECE STYLES'
         = link_to dresses_path + '?lpi=modelco2&permalink=dance-hall&limit=72', class: 'media-wrap'
-          = image_tag 'home-page-tiles/tile-ModelCo.jpg', alt: 'You deserve VIP treatment so we want to give you something special.'
-        = link_to bridesmaid_collection_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/tile-bridesmaid-chic.jpg', alt: 'BRIDESMAID CHIC - Getting it right for your #girlsquad'
+          = image_tag 'home-page-tiles/ModelCoGift-CategoryTile3.jpg', alt: 'You deserve VIP treatment so we want to give you something special.'
+        = link_to build_taxon_path('Velvet'), class: 'media-wrap'
+          = image_tag 'home-page-tiles/VelvetUnderground-CategoryTile4.jpg', alt: 'VELVET UNDERGROUND - SHOP VELVET DRESSES'
 
       aside.col-md-5
         = react_component('BlogPosts')
