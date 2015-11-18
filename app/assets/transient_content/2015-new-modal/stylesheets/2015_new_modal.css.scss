@@ -71,6 +71,15 @@
           .btn-facebook{
             padding-left:55px;
             padding-right: 10px;
+            @include iphone6p{
+              font-size: 0.8em !important;
+            }
+            @include iphone6{
+              font-size: 0.7em !important;
+            }
+            @include iphone5{
+              font-size: 0.53em !important;
+            }
           }
         }
 
