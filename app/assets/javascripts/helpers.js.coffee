@@ -88,21 +88,9 @@ _.mixin(compactObject: (o) ->
 window.getUrlParameter = (sParam) ->
   sPageURL = decodeURIComponent(window.location.search.substring(1))
   sURLVariables = sPageURL.split('&')
-<<<<<<< HEAD
-=======
-  sParameterName = undefined
-<<<<<<< HEAD
-  i = undefined
->>>>>>> change layout for search
-=======
->>>>>>> fix nil
   i = 0
   while i < sURLVariables.length
     sParameterName = sURLVariables[i].split('=')
     if sParameterName[0] == sParam
-<<<<<<< HEAD
       return sParameterName[1]
-=======
-      return if sParameterName[1] == undefined then true else sParameterName[1]
->>>>>>> change layout for search
     i++
