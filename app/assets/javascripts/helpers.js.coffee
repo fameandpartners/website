@@ -89,7 +89,6 @@ window.getUrlParameter = (sParam) ->
   sPageURL = decodeURIComponent(window.location.search.substring(1))
   sURLVariables = sPageURL.split('&')
   sParameterName = undefined
-  i = undefined
   i = 0
   while i < sURLVariables.length
     sParameterName = sURLVariables[i].split('=')
