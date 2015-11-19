@@ -122,7 +122,8 @@ class Products::CollectionsController < Products::BaseController
         fast_making:  params[:fast_making],
         order:        params[:order],
         limit:        page.limit(product_ids), # page size
-        offset:       params[:offset] || 0
+        offset:       params[:offset] || 0,
+        query_string: params[:q]
     }.merge(collection_options || {})
     Products::CollectionResource.new(resource_args).read
   end

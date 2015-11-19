@@ -34,6 +34,7 @@ module Search
       exclude_taxon_ids = options[:exclude_taxon_ids]
 
       Tire.search(configatron.elasticsearch.indices.color_variants, size: limit, from: offset) do
+
         filter :bool, :must => { :term => { 'product.is_deleted' => false } }
         filter :bool, :must => { :term => { 'product.is_hidden' => false } }
         filter :exists, :field => :available_on
@@ -83,9 +84,11 @@ module Search
         end
 
         if query_string.present?
+          filter :terms, 'product.taxon_names' => query_string.split(" ")
           query do
-            string "product.name:(#{query_string})^4 color.name:(#{query_string})^2 product.sku:(#{query_string})"
+            string "product.name:(#{query_string})^4 OR color.name:(#{query_string})^2 OR product.sku:(#{query_string})^2 OR product.description:(#{query_string})"
           end
+
         end
 
         # exclude products found [ somethere else ]
