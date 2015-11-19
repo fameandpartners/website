@@ -114,10 +114,6 @@ group :assets do
   gem 'bootstrap-sass', '3.3.4.1'
 end
 
-group :assets, :development, :test do
-  gem 'test-unit'
-end
-
 group :development, :test do
   gem 'zeus'
   gem 'pry-rails'
