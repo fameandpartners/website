@@ -60,11 +60,6 @@ configatron.mailgun.mailbox do |mailgun|
   mailgun.password = '0mqgbkbz34n1'
 end
 
-configatron.campaign_monitor do |campaign_monitor|
-  campaign_monitor.api_key = '3f7e4ac86b143e32a5c7b46b83641143'
-  campaign_monitor.list_id = 'dafc8802250a7fb08c840d9c4ffadc9f'
-end
-
 configatron.mailchimp do |mailchimp|
   mailchimp.api_key = '0340ea09d6c21efd808cce3d9c9440f6-us7'
   mailchimp.list_id = '48f8d360f7'
@@ -103,11 +98,6 @@ when :development
     mailgun.domain   = ''
     mailgun.username = ''
     mailgun.password = ''
-  end
-
-  configatron.campaign_monitor do |campaign_monitor|
-    campaign_monitor.api_key = ''
-    campaign_monitor.list_id = ''
   end
 
   configatron.elasticsearch.indices do |index|
