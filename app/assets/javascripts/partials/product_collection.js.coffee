@@ -242,7 +242,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       bodyshape: bodyshapeArray,
       colour:    colourArray,
       style:     styleArray,
-      order:     @productOrderInput.val()
+      order:     @productOrderInput.val(),
+      q:         getUrlParameter("q").replace(/\+/g," ")
     }
 
   updatePageLocation: (filter) ->

@@ -5,8 +5,8 @@
 
 - # THIS IS A HACK HACK HACK 27th October, late, with no dinner
 - # Remove by 1st November, talk to TOBY and yell at him
-- sub_heading = (params[:lps] || page.sub_heading)
-- description = page.description
+- sub_heading = (params[:lps] || page.try(:sub_heading))
+- description = page.try(:description)
 
 - if sub_heading.blank? && description.blank?
   - sub_heading = 'MADE FOR YOU.'
