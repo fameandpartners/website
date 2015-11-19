@@ -14,7 +14,7 @@ module Acceptance
     step 'I remove ":dress_name" from my moodboard' do |dress_name|
       within('.product-item') do
         expect(page).to have_content(dress_name.upcase)
-        first('.remove').click
+        find('a', text: 'Remove').click
       end
     end
 

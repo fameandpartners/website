@@ -45,4 +45,17 @@ namespace :dev do
 
     EnablePaymentGateways.new(target_env: target_env).call
   end
+
+  desc 'Add Test Fixtures User'
+  task :add_test_fixture_user => :environment do
+    Spree::User.new.tap do |user|
+      user.first_name                 = 'Example'
+      user.last_name                  = 'User'
+      user.email                      = 'spree@example.com'
+      user.password                   = '123456'
+      user.password_confirmation      = '123456'
+      user.skip_welcome_email         = true
+      user.validate_presence_of_phone = false
+    end.save
+  end
 end
