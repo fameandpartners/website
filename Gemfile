@@ -114,9 +114,12 @@ group :assets do
   gem 'bootstrap-sass'
 end
 
+# For ruby 2.2.0
+group :assets, :development, :test do
+  gem 'test-unit'
+end
+
 group :development, :test do
-  gem 'better_errors'
-  gem 'binding_of_caller'
   gem 'zeus'
   gem 'pry-rails'
   gem 'byebug'
