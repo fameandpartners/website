@@ -46,7 +46,7 @@ var HeroCarousel = React.createClass({
       );
     } else {
       assets = this.props.assets.map(function(asset) {
-        return (<HeroCarouselImage asset={asset} />)
+        return (<HeroCarouselImage key={asset.src} asset={asset} />)
       });
       return (
         <div className={'hero-wrap js-carousel-hero ' + (this.props.skin ? this.props.skin : '')}>

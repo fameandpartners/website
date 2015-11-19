@@ -51,7 +51,7 @@ var NewThisWeekProducts = React.createClass({
     } else {
       products = this.state.products.slice(0, show);
       products = products.map(function(product){
-        return (<ProductImage product={product} />)
+        return (<ProductImage key={product.collection_path} product={product} />)
       });
 
       return (<div>{products}</div>)
