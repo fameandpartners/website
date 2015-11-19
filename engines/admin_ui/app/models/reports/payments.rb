@@ -89,6 +89,14 @@ module Reports
         order.email
       end
 
+      def order_name
+        order.name
+      end
+
+      def order_country
+        order.ship_address.try(:country)
+      end
+
       def order_created
         order.created_at.try(:to_date).to_s
       end
@@ -120,6 +128,8 @@ module Reports
             order_number:              order_number,
             order_created:             order_created,
             order_email:               order_email,
+            order_name:                order_name,
+            order_country:             order_country,
             order_state:               order_state,
             order_shipped:             order_shipped?,
             shipment_tracking_numbers: shipment_tracking_numbers,
