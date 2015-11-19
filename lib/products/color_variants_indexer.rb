@@ -13,8 +13,8 @@ module Products
 
     attr_reader :logger, :variants
 
-    def initialize
-      @logger = Logger.new($stdout)
+    def initialize(logdev = $stdout)
+      @logger = Logger.new(logdev)
       @logger.formatter = LogFormatter.terminal_formatter
     end
 
