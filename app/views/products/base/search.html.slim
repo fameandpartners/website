@@ -24,7 +24,8 @@ ruby:
         p We couldn't find the stuff you were looking for.
 
 .page-content.products-collections.category
-  = render :partial => 'products/collections/filters_sort'
+  - if !@results.none?
+    = render :partial => 'products/collections/filters_sort'
   .container-fluid
     - unless search_performed?
       .row.relative
@@ -33,7 +34,7 @@ ruby:
 
     - if @results.none?
       .row.relative
-        .col.col-md-12
+        .col.col-md-12.text-center
           p
           | Don't sweat it. #{link_to('Browse our dresses', dresses_path)}
 
