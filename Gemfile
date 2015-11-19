@@ -111,10 +111,6 @@ group :assets do
   gem 'bootstrap-sass'
 end
 
-group :assets, :development, :test do
-  gem 'test-unit'
-end
-
 group :development, :test do
   gem 'zeus'
   gem 'pry-rails'
@@ -122,7 +118,6 @@ group :development, :test do
   gem 'awesome_print'
   gem 'launchy', '2.2.0'
   gem 'letter_opener', '~> 1.4.1'
-  # gem 'minitest'
   gem 'net-ssh', '~> 2.7.0'
   gem 'oink'
   gem 'quiet_assets'
