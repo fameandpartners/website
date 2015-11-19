@@ -3,22 +3,19 @@ class EmailCapture
   attr_reader :service, :mailchimp, :mailchimp_struct
 
   def initialize(options = {})
-    @service = options[:service].downcase
-    case service
-      when 'mailchimp'
-        @mailchimp = Mailchimp::API.new(configatron.mailchimp.api_key)
-        @mailchimp_struct = Struct.new("Mailchimp", :email,
-                                       :previous_email,
-                                       :newsletter,
-                                       :first_name,
-                                       :last_name,
-                                       :current_sign_in_ip,
-                                       :landing_page,
-                                       :utm_params,
-                                       :site_version,
-                                       :facebook_uid,
-                                       :form_name)
-    end
+    @service          = options[:service].downcase
+    @mailchimp        = Mailchimp::API.new(configatron.mailchimp.api_key)
+    @mailchimp_struct = Struct.new("Mailchimp", :email,
+                                   :previous_email,
+                                   :newsletter,
+                                   :first_name,
+                                   :last_name,
+                                   :current_sign_in_ip,
+                                   :landing_page,
+                                   :utm_params,
+                                   :site_version,
+                                   :facebook_uid,
+                                   :form_name)
   end
 
   def capture(current_email)
@@ -80,7 +77,7 @@ class EmailCapture
       merge_variables[:l_page]     = landing_page if landing_page.present?
       merge_variables[:s_version]  = site_version if site_version.present?
       merge_variables[:fb_uid]     = current_email.facebook_uid if current_email.facebook_uid.present?
-      merge_variables[:form_name]     = current_email.form_name if current_email.form_name.present?
+      merge_variables[:form_name]  = current_email.form_name if current_email.form_name.present?
 
       if !utm_params.blank?
         merge_variables[:u_campaign] = utm_params[:utm_campaign]
@@ -90,7 +87,7 @@ class EmailCapture
         merge_variables[:u_content]  = utm_params[:utm_content]
       end
 
-      merge_variables[:n_letter]   = set_newsletter(current_email) if set_newsletter(current_email).present?
+      merge_variables[:n_letter] = set_newsletter(current_email) if set_newsletter(current_email).present?
     end
 
     merge_variables
