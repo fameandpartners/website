@@ -91,8 +91,11 @@ window.getUrlParameter = (sParam) ->
 <<<<<<< HEAD
 =======
   sParameterName = undefined
+<<<<<<< HEAD
   i = undefined
 >>>>>>> change layout for search
+=======
+>>>>>>> fix nil
   i = 0
   while i < sURLVariables.length
     sParameterName = sURLVariables[i].split('=')

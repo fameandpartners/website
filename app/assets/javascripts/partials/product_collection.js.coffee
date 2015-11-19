@@ -243,11 +243,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       colour:    colourArray,
       style:     styleArray,
       order:     @productOrderInput.val(),
-<<<<<<< HEAD
       q:         getUrlParameter("q")?.replace(/\+/g," ")
-=======
-      q:         getUrlParameter("q").replace(/\+/g," ")
->>>>>>> change layout for search
     }
 
   updatePageLocation: (filter) ->
