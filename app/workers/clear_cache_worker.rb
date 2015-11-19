@@ -7,8 +7,8 @@ class ClearCacheWorker
   include Sidekiq::Worker
   sidekiq_options retry: false
 
-  def perform(*args)
-    @silent = args.fetch(:silent){ false }
+  def perform(silent: false)
+    @silent = !! silent
     update_color_variants_elastic_index
     update_products_elastic_index
     reset_cache
@@ -31,7 +31,7 @@ class ClearCacheWorker
     end
 
     def update_color_variants_elastic_index
-      ::Products::ColorVariantsIndexer.new( silent? ? false : $stdout ).index!
+      ::Products::ColorVariantsIndexer.new( silent? ? false : $stdout ).call
     end
 
     def reset_cache

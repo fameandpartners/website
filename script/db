@@ -281,6 +281,9 @@ function create_test_fixture_dump
 
   psql --dbname ${DEV_DB} --echo-queries --command "${SCRIPT_SQL}"
 
+  echo "$(magenta)>> $(white)Enabling test gateways$(normal)"
+  bundle exec rake dev:enable_payment_gateways TARGET_ENV=test
+
   echo "$(magenta)>> $(white)Vacumming DEV DB$(normal)"
   vacuumdb -d ${DEV_DB} -e -f
 
