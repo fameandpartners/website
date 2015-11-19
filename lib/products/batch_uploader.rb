@@ -9,11 +9,17 @@ module Products
 
     include ActionView::Helpers::TextHelper # for truncate
 
-    def initialize(available_on)
+    def initialize(available_on, mark_new_this_week = false)
       @@titles_row_numbers = [8, 10, 11, 12]
       @@first_content_row_number = 13
       @available_on = available_on
       @keep_taxons = true
+      @mark_new_this_week = mark_new_this_week.downcase == "true"
+      set_old_new_this_week_products if @mark_new_this_week
+    end
+
+    def set_old_new_this_week_products
+      @old_new_this_week_products = Spree::Product.select{|p| p.taxons.to_a.any?{|t| t.name == "New This Week"}}
     end
 
     def parse_file(file_path)
@@ -143,6 +149,8 @@ module Products
 
           processed[:taxon_ids] << taxon.id
         end
+
+        processed[:taxon_ids] << Spree::Taxon.where(name: 'New This Week').first.id if @mark_new_this_week
 
         color_option = Spree::OptionType.color
 
@@ -373,6 +381,15 @@ module Products
         #   nil
         end
       end.compact
+      remove_new_this_week_taxons_for_old_products if @mark_new_this_week
+    end
+
+    def remove_new_this_week_taxons_for_old_products
+      new_this_week_taxon_id = Spree::Taxon.where(name: 'New This Week').first.id
+      @old_new_this_week_products.each do |p|
+        sql = "DELETE FROM spree_products_taxons WHERE product_id = #{p.id} AND taxon_id = #{new_this_week_taxon_id}"
+        ActiveRecord::Base.connection.execute(sql)
+      end
     end
 
     private
