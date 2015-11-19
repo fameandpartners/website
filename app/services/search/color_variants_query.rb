@@ -84,6 +84,7 @@ module Search
         end
 
         if query_string.present?
+          query_string = query_string.downcase.gsub("dress","")
           query do
             string "product.name:(#{query_string})^4 OR color.name:(#{query_string})^2 OR product.sku:(#{query_string})^2 OR product.taxon_names:(#{query_string})^2 OR product.description:(#{query_string})"
           end
