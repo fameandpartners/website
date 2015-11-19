@@ -240,6 +240,9 @@ FameAndPartners::Application.routes.draw do
 
     namespace 'campaigns' do
       resource :email_capture, only: [:create], controller: :email_capture
+      collection do
+        get :mailchimp
+      end
     end
 
     get '/fame-chain' => 'fame_chains#new'
