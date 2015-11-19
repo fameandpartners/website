@@ -15,7 +15,7 @@ describe EmailCapture do
   it { expect(EmailCapture.new({service: 'mailchimp'}).service).to eq 'mailchimp' }
   it { expect(EmailCapture.new({service: 'Mailchimp'}).service).to eq 'mailchimp' }
 
-  describe 'call .email_changed?' do
+  describe '#email_changed?' do
     it { expect(mailchimp.email_changed?(:os)).to be_falsey }
     it 'returns true when email was changed' do
       os.previous_email  =  'email@changes.com'
@@ -23,7 +23,7 @@ describe EmailCapture do
     end
   end
 
-  describe 'call .retrieve_first_name' do
+  describe '#retrieve_first_name' do
     it { expect(mailchimp.retrieve_first_name(os)).to eq user.first_name }
     it 'returns nil when an empty first name is passed' do
       os.first_name = nil
@@ -31,7 +31,7 @@ describe EmailCapture do
     end
   end
 
-  describe 'call .retrieve_last_name' do
+  describe '#retrieve_last_name' do
     it { expect(mailchimp.retrieve_last_name(os)).to eq user.last_name }
     it 'returns nil when an empty last name is passed' do
       os.last_name = nil
@@ -39,10 +39,10 @@ describe EmailCapture do
     end
   end
 
-  describe 'call .set_newsletter' do
+  describe '#set_newsletter' do
     it 'returns no when newsletter is set false' do
       os.newsletter = false
-      expect(mailchimp.set_newsletter(user)).to eq 'no'
+      expect(mailchimp.set_newsletter(os)).to eq 'no'
     end
     it 'returns yes when newsletter is set true' do
       os.newsletter = true
@@ -53,7 +53,7 @@ describe EmailCapture do
     end
   end
 
-  describe 'call .set_merge' do
+  describe '#set_merge' do
     it { expect(mailchimp.set_merge(os).class.to_s).to eq 'Hash' }
     it { expect(mailchimp.set_merge(os)[:fname]).to eq user.first_name }
     it { expect(mailchimp.set_merge(os)[:lname]).to eq user.last_name }
