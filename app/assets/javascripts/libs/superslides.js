@@ -458,7 +458,7 @@ Superslides.prototype = {
   _upcomingSlide: function(direction, from_hash_change) {
     if (from_hash_change && (!!direction)) {
       var index = this._findSlideById(direction);
-      if (index >= 0 && index < that.size()) {
+      if (index >= 0 && index < this.size()) {
         return index;
       } else {
         return 0;

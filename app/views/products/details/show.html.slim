@@ -15,7 +15,7 @@ ruby:
           images: #{ @product.all_images.to_json },
           options: {
             animation: 'fade',
-            play: 6000,
+            animation_speed: 200,
             preselected: '#{raw @product.color_id}'
           }
         },
