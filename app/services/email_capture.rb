@@ -1,6 +1,6 @@
 class EmailCapture
 
-  attr_accessor :service, :mailchimp, :mailchimp_struct
+  attr_reader :service, :mailchimp, :mailchimp_struct
 
   def initialize(options = {})
     @service = options[:service].downcase
@@ -21,10 +21,9 @@ class EmailCapture
     end
   end
 
-  def capture(data_object)
+  def capture(current_email)
 
     if service == 'mailchimp'
-      current_email = data_object
 
       get_email = email_changed?(current_email) ? current_email.previous_email : current_email.email
 
