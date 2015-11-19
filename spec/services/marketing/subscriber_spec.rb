@@ -11,12 +11,6 @@ describe Marketing::Subscriber do
       }.to raise_error(RuntimeError)
     end
 
-    it 'schedules subscriber sync' do
-      subject = Marketing::Subscriber.new(email: user.email)
-
-      expect(CampaignMonitor).to receive(:schedule).with(:synchronize, user.email, nil, subject.send(:custom_fields))
-      subject.create
-    end
   end
 
   context "#update" do
@@ -105,21 +99,6 @@ describe Marketing::Subscriber do
       subject = Marketing::Subscriber.new
       subject.stub(:marketing_user_visit){ user_visit }
       expect(subject.details['campaign']).to eq(user_visit.utm_campaign)
-    end
-  end
-
-  context "#set purchase date" do
-    it "works only for existing user" do
-      expect(CampaignMonitor).not_to receive(:schedule)
-      Marketing::Subscriber.new.set_purchase_date
-    end
-
-    it "schedules CampaignMonitor#set_purchase_date" do
-      subsriber = Marketing::Subscriber.new(user: user)
-      date = double('date')
-
-      expect(CampaignMonitor).to receive(:schedule).with(:set_purchase_date, user, date, subject.send(:custom_fields))
-      subsriber.set_purchase_date(date)
     end
   end
 
