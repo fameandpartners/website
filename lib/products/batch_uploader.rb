@@ -26,12 +26,8 @@ module Products
       end
     end
 
-    def new_this_week_taxon
-      Spree::Taxon.where(name: 'New This Week')
-    end
-
     def new_this_week_taxon_id
-      new_this_week_taxon.first.id # NOTE THAT THIS IS DANGEROUS, see @tiagoamaro comment below
+      Spree::Taxon.where(name: 'New This Week').first.try(:id)
     end
 
     def parse_file(file_path)
