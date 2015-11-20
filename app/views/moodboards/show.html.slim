@@ -23,7 +23,9 @@
                   .col-md-3.col-xs-6.col-xxs-12.category--item.product-item data-id=(item.product_id)
                     - url_path = "/dresses/dress-#{item.product.name.parameterize}-#{item.product_id}?color=#{item.color.name}"
                     = link_to url_path do
-                      = cropped_product_color_variant_image_tag(item.product_color_value)
+                      / TODO - Temporary workaround for missing `product_color_value` on about 700 wishlist items
+                      - if item.product_color_value.present?
+                        = cropped_product_color_variant_image_tag(item.product_color_value)
                       .details
                         .name= item.product.name
                         span.price = item.product.price
