@@ -3,16 +3,14 @@
 .how-it-works {
   margin-bottom: 96px;
   text-align: center;
-  text-transform: uppercase;
   background: $c-neutral-2;
 
   .testimonial {
     display: table;
     min-height: 230px;
-    padding: 20px 120px;
+    padding: 20px 0;
     line-height: normal;
     font-family: Forum;
-    font-style: italic;
     background: $c-neutral-white;
     border-top: solid $c-neutral-black 1px;
 
@@ -22,13 +20,32 @@
     }
 
     blockquote {
-      padding-bottom: 20px;
+      padding: 0 100px 20px 100px;
+      text-transform: uppercase;
       font-size: 1.625em;
+      font-style: italic;
     }
 
-    span {
-      text-transform: normal;
+    .inner-wrap > span {
       font-size: 1.125em;
+      font-style: italic;
+    }
+
+    p {
+      padding: 0 40px;
+      line-height: normal;
+      font-size: 0.875em;
+      font-weight: 300;
+    }
+
+    a {
+      text-decoration: underline;
+      font-weight: 400;
+      color: $c-neutral-black;
+    }
+
+    em {
+      font-weight: 400;
     }
 
   }
@@ -55,6 +72,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    text-transform: uppercase;
   }
 
   li {
@@ -68,51 +86,51 @@
       margin-top: 0;
     }
 
-  }
-
-  em {
-    position: absolute;
-    display: block;
-    top: 0;
-    left: 0;
-    width: 58px;
-    height: 58px;
-
-    &:before {
+    em {
       position: absolute;
-      top: 8px;
-      left: 8px;
-      content: '';
       display: block;
-      width: 40px;
-      height: 40px;
-      background: $c-neutral-black;
-      @include transform(rotate(-45deg));
+      top: 0;
+      left: 0;
+      width: 58px;
+      height: 58px;
+
+      &:before {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        content: '';
+        display: block;
+        width: 40px;
+        height: 40px;
+        background: $c-neutral-black;
+        @include transform(rotate(-45deg));
+      }
+
+      span {
+        position: relative;
+        display: block;
+        line-height: 58px;
+        text-align: center;
+        font-style: normal;
+        font-size: 1.125em;
+        font-weight: 600;
+        color: $c-neutral-white;
+      }
+
     }
 
-    span {
-      position: relative;
-      display: block;
-      line-height: 58px;
-      text-align: center;
-      font-style: normal;
-      font-size: 1.125em;
-      font-weight: 600;
-      color: $c-neutral-white;
-    }
+    .copy-wrap {
+      display: table;
+      height: 58px;
+      padding-left: 70px;
+      font-size: 0.875em;
+      font-weight: 500;
 
-  }
+      span {
+        display: table-cell;
+        vertical-align: middle;
+      }
 
-  .copy-wrap {
-    display: table;
-    height: 58px;
-    padding-left: 70px;
-    font-size: 0.875em;
-    font-weight: 500;
-
-    span {
-      display: table-cell;
-      vertical-align: middle;
     }
 
   }
