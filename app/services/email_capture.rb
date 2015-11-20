@@ -6,15 +6,9 @@ class EmailCapture
     @service          = options[:service].downcase
     @mailchimp        = Mailchimp::API.new(configatron.mailchimp.api_key)
     @mailchimp_struct = Struct.new("Mailchimp", :email,
-                                   :previous_email,
-                                   :newsletter,
-                                   :first_name,
-                                   :last_name,
-                                   :current_sign_in_ip,
-                                   :landing_page,
-                                   :utm_params,
-                                   :site_version,
-                                   :facebook_uid,
+                                   :previous_email, :newsletter, :first_name,
+                                   :last_name, :current_sign_in_ip, :landing_page,
+                                   :utm_params, :site_version, :facebook_uid,
                                    :form_name)
   end
 
