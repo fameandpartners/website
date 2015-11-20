@@ -33,11 +33,14 @@ namespace :moodboard_item do
         scope.find_each do |item|
           progressbar.increment
 
-          # TODO - ADD SKip
-
           product_id   = item.spree_product_id
           color_id     = item.product_color_id
           moodboard_id = item.user.moodboards.default_or_create.id
+
+          if MoodboardItem.where(product_id: product_id, color_id: color_id, moodboard_id: moodboard_id).exists?
+            next
+          end
+
           pcv_id       = ProductColorValue.where(product_id: product_id, option_value_id: color_id).first.try(:id)
 
           ev = MoodboardItemEvent.creation.new(
