@@ -4,11 +4,11 @@ namespace :import do
   desc 'Import product data from Excel file'
   task :data => :environment do
     raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
-    raise 'MARK_NEW_THIS_WEEK required (true/false) . True will remove all new this week taxons for old products and set new this week taxons for new products . False will leave them as they are .' if ENV['MARK_NEW_THIS_WEEK'].blank? || !(ENV['MARK_NEW_THIS_WEEK'].downcase.in?(["true","false"]))
+    raise 'MARK_NEW_THIS_WEEK required (true/false) . True will set new this week taxons for new products . False will not .' if ENV['MARK_NEW_THIS_WEEK'].blank? || !(ENV['MARK_NEW_THIS_WEEK'].downcase.in?(["true","false","yes","no"]))
 
     file_path = ENV['FILE_PATH']
     available = ENV['AVAILABLE'] || 1.days.ago
-    mark_new_this_week = ENV['MARK_NEW_THIS_WEEK']
+    mark_new_this_week = DataCoercion.string_to_boolean(ENV['MARK_NEW_THIS_WEEK'])
 
     STDOUT.sync = true
     puts "#{DateTime.now} START XLS IMPORTER"

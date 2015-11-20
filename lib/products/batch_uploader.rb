@@ -14,12 +14,24 @@ module Products
       @@first_content_row_number = 13
       @available_on = available_on
       @keep_taxons = true
-      @mark_new_this_week = mark_new_this_week.downcase == "true"
-      set_old_new_this_week_products if @mark_new_this_week
+      @mark_new_this_week = mark_new_this_week
+      show_warning
     end
 
-    def set_old_new_this_week_products
-      @old_new_this_week_products = Spree::Product.select{|p| p.taxons.to_a.any?{|t| t.name == "New This Week"}}
+    def show_warning
+      if @mark_new_this_week
+        p 'NEW PRODUCTS WILL HAVE NEW_THIS_WEEK TAXON'
+      else
+        p 'NEW PRODUCTS WILL NOT HAVE NEW_THIS_WEEK TAXON'
+      end
+    end
+
+    def new_this_week_taxon
+      Spree::Taxon.where(name: 'New This Week')
+    end
+
+    def new_this_week_taxon_id
+      new_this_week_taxon.first.id # NOTE THAT THIS IS DANGEROUS, see @tiagoamaro comment below
     end
 
     def parse_file(file_path)
@@ -150,7 +162,7 @@ module Products
           processed[:taxon_ids] << taxon.id
         end
 
-        processed[:taxon_ids] << Spree::Taxon.where(name: 'New This Week').first.id if @mark_new_this_week
+        processed[:taxon_ids] << new_this_week_taxon_id if @mark_new_this_week && new_this_week_taxon_id.present?
 
         color_option = Spree::OptionType.color
 
@@ -381,15 +393,6 @@ module Products
         #   nil
         end
       end.compact
-      remove_new_this_week_taxons_for_old_products if @mark_new_this_week
-    end
-
-    def remove_new_this_week_taxons_for_old_products
-      new_this_week_taxon_id = Spree::Taxon.where(name: 'New This Week').first.id
-      @old_new_this_week_products.each do |p|
-        sql = "DELETE FROM spree_products_taxons WHERE product_id = #{p.id} AND taxon_id = #{new_this_week_taxon_id}"
-        ActiveRecord::Base.connection.execute(sql)
-      end
     end
 
     private
