@@ -36,5 +36,5 @@ Feature: Full checkout
 
     Examples:
       | Site Version | Country       | State      | Zipcode Label | Dress Size | Dress Price |
-      | Australia    | Australia     | Queensland | Postcode      | AU 14      | 255.20      |
-      | USA          | United States | California | Zipcode       | US 10      | 231.20      |
+      | Australia    | Australia     | Queensland | Postcode      | AU 14      | 319.00      |
+      | USA          | United States | California | Zipcode       | US 10      | 289.00      |

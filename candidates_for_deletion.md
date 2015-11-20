@@ -5,3 +5,15 @@ app/services/products/product_details_resource.rb
 app/controllers/personalization/*
 app/controllers/boutique_controller.rb & Views etc.
 ProductAccessory
+
+# Contains 'add-to-wishlist'
+app/assets/javascripts/partials/homepage.js.coffee
+app/assets/javascripts/partials/page.js.coffee
+app/assets/javascripts/partials/pages_my_boutique.js.coffee
+app/assets/javascripts/partials/personalization_products_show.js.coffee
+app/assets/javascripts/partials/personalization_style_product.js.coffee
+app/assets/javascripts/partials/recommended_dreseses.js.coffee
+app/assets/javascripts/partials/wishlist_page.js.coffee
+app/helpers/products_helper.rb
+app/views/personalization/products/style.html.slim
+app/views/spree/products/show.html.slim

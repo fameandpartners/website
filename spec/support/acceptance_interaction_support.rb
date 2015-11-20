@@ -6,4 +6,8 @@ end
 
 RSpec.configure do |config|
   config.include AcceptanceInteractionSupport, type: :feature
+
+  config.before(:each, type: :feature) do
+    Features.deactivate(:test_analytics)
+  end
 end

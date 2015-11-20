@@ -200,10 +200,6 @@ FameAndPartners::Application.routes.draw do
 
     get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
 
-    resources :wishlists_items, only: [:index, :create, :destroy], controller: 'users/wishlists_items' do
-      get 'move_to_cart', on: :member
-    end
-    get 'wishlist' => 'users/wishlists_items#index', as: 'wishlist'
     get 'reviews' => 'users/reviews#index', as: 'reviews'
     # eo account settings
 
@@ -314,6 +310,17 @@ FameAndPartners::Application.routes.draw do
     get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')
 
     resources :site_versions, only: [:show], as: :site_version
+  end
+
+  resources :moodboards, only: [:show, :index] do
+    resources :items, controller: 'moodboard_items', only: [:show, :destroy]
+  end
+
+  get 'moodboard', to: 'moodboards#index'
+  get 'wishlist',  to: 'moodboards#index'
+
+  resources :wishlists_items, only: [:create], controller: 'users/wishlists_items' do
+    get 'move_to_cart', on: :member
   end
 
   ##################

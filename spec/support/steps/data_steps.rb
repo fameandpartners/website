@@ -12,7 +12,7 @@ module Acceptance
     end
 
     step 'Data is setup correctly' do
-      ClearCacheWorker.new.perform
+      ClearCacheWorker.new.perform(silent: true)
     end
   end
 end

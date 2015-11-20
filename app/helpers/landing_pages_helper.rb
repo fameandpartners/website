@@ -3,13 +3,23 @@ module LandingPagesHelper
     @disable_notices.present? && @disable_notices == true
   end
 
-  def cropped_product_hoverable_image_tag(product)
+  def cropped_product_hoverable_image_tag(product, css_class: "img-product img-responsive")
     front, hover = cropped_product_hoverable_images(product)
 
     image_tag front,
               :alt         => product.name,
-              :class       => "img-product img-responsive",
+              :class       => css_class,
               'data-hover' => hover
+  end
+
+  # TODO - Remove the need for this for displaying wishlist items.
+  def cropped_product_color_variant_image_tag(color_variant)
+    front, hover = Products::ColorVariantImageDetector.cropped_images_for(color_variant)
+    if front && hover
+      image_tag front, 'data-hover' => hover, class: "img-product img-responsive"
+    else
+      cropped_product_hoverable_image_tag(color_variant.product)
+    end
   end
 
   # Attempts to load "CROP" style images, falls back to
