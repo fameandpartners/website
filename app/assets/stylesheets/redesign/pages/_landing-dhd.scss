@@ -127,11 +127,15 @@
 
         .testimonial {
           min-height: 200px;
-          padding: 20px 70px;
         }
 
         .list-wrap {
           min-height: 400px;
+        }
+
+        blockquote {
+          padding-left: 70px;
+          padding-right: 70px;
         }
 
         li {
@@ -200,7 +204,8 @@
       .how-it-works {
         margin-bottom: 30px;
 
-        .testimonial {
+        blockquote,
+        p {
           padding-left: 0;
           padding-right: 0;
         }

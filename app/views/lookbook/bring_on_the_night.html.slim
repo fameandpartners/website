@@ -9,7 +9,8 @@
     img src='#{image_path("landingpages/bring-on-the-night/hero-full.jpg")}' srcset='
       #{image_path("landingpages/bring-on-the-night/hero-sml.jpg")} 768w,
       #{image_path("landingpages/bring-on-the-night/hero-med.jpg")} 1024w,
-      #{image_path("landingpages/bring-on-the-night/hero-full.jpg")} 1200w' alt='BRING ON THE NIGHT'
+      #{image_path("landingpages/bring-on-the-night/hero-full.jpg")} 1200w' alt='BRING ON THE NIGHT - 
+      Its time for a new dress or two. Promo code: HALFOFF50'
 
   .container
     .row
@@ -32,8 +33,16 @@
         .how-it-works
           .testimonial
             .inner-wrap
-              blockquote It’s very important to take risks. Be fearless.
-              span ~ Anna Wintour on style
+              p
+                = link_to 'Shop', bring_on_the_night_collection_path
+                span &nbsp;our collections and get your second dress at 50% off*.<br>48 hours only.
+              p &#42;Buy any two dresses and receive the cheaper one for half price. Choose your dress, add to cart and apply the code - simple.
+              p 
+                span Ring in 2016 in a new dress - or two.
+                br
+                em 
+                  span For full info see our&nbsp;
+                  = link_to "T&C's.", terms_path, target:'_blank'
           h2.title DIY DRESS
           .list-wrap
             ul
