@@ -32,7 +32,7 @@ class UserMoodboard::BaseResource
   #        Let's move away from nesting OpenStruct all the time.
   def wishlist_items
     @wishlist_items ||= begin
-      user.moodboards.default_or_create.items.map do |item|
+      user.moodboards.default_or_create.items.active.map do |item|
         OpenStruct.new(
           variant_id: item.variant_id,
           product_id: item.product_id,
