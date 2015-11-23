@@ -19,9 +19,13 @@
 
 
 .bride-page {
+  padding-bottom: 50px;
   font-family: Formal;
-  font-weight: 700;
-
+  font-weight: 400;
+  input[type='button']{
+    border: 0;
+    font-weight: 700;
+  }
   input, textarea, select{
     padding: 10px;
   }
@@ -37,7 +41,7 @@
   }
 
   .big-title{
-    background-color: white;  
+    background-color: white;
     margin-bottom: 30px;
     float: left;
     padding-left: 10px;
@@ -45,6 +49,18 @@
   }
 
   .container.invite{
+    .signup2-img-col{
+      padding-left: 5px;
+    }
+    .invite-col{
+      padding-left: 40px;
+    }
+    .invite-row{
+      margin-left: -15px !important;
+    }
+    .row{
+      margin-left: -5px;
+    }
     margin-top: 70px;
     .ashleigh{
       font-weight: 400;
@@ -53,10 +69,11 @@
       }
     }
     .big-title{
-      margin-top: -20px;
+      margin-top: -25px;
+      font-size: 1.3em;
     }
     .fb-area{
-      margin-top: 10%;
+      margin-top: 15%;
       .add-via-fb{
         color: white;
         background-color: black;
@@ -78,12 +95,18 @@
         }
       }
     }
+    .invite-sent{
+      margin-left: 5px;
+    }
+    .mess{
+      margin-top: 10px;
+    }
     .invitation{
       input[type='text']{
         width: 100%;
       }
       .send-invite{
-        margin-top: 20px;
+        margin-top: 40px;
         color: white;
         background-color: black;
       }
@@ -94,8 +117,15 @@
   }
 
   .container.wedding-info{
+    .wedding-col{
+      padding-left: 40px;
+    }
+    .signup1  {
+      margin-top: 30px;
+    }
     .big-title{
-      margin-top: -50px;
+      margin-top: -35px;
+      font-size: 1.3em;
     }
     .row{
       margin-top: 30px;
@@ -109,12 +139,13 @@
       float: left;
       font-size: 0.7em;
       input{
-        margin-left: 40%; 
+        margin-left: 40%;
       }
       label{
         margin-top: 20px;
         position: absolute;
         margin-left: -17%;
+        font-size: 1em;
       }
 
     }
@@ -129,7 +160,9 @@
       }
     }
 
-
+    .surname{
+      margin-top: 11px;
+    }
 
     #ready, #date, #brief, #fname, #sname, .bride{
       width: 100%;
