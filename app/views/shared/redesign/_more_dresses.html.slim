@@ -2,7 +2,12 @@
   .outer-wrap
     .col-md-6.col-xs-12
       = link_to dresses_path, class: 'media-wrap'
-        = image_tag 'landingpages/dance-hall-days/tile-footer.jpg', alt: 'Discover more dresses'
+        picture
+          source media='(max-width: 768px)' srcset='#{image_path("landingpages/tile-footer-mob.jpg")}'
+          source media='(min-width: 769px)' srcset='#{image_path("landingpages/tile-footer.jpg")}'
+          img src='#{image_path("landingpages/tile-footer.jpg")}' srcset='
+            #{image_path("landingpages/tile-footer-mob.jpg")} 768w,
+            #{image_path("landingpages/tile-footer.jpg")} 1024w' alt='Discover more dresses'
     .col-md-6.col-xs-12
       .inner-wrap
         ul

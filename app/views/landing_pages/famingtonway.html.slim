@@ -15,7 +15,95 @@
         together with your bridesmaids.'
     .copy-wrap
       h1.title Be inspired & shop together with your bridesmaids.
+      // TODO: update link
       a href='javascript:;' class='btn btn-lowlight btn-md' See how it works
 
   .container
     .row
+      .col-md-12.section-steps
+        .outer-wrap.mobile-change-order
+          .inner-left.position-2
+            h2.title-line-on-sides
+              .inner-wrap 6 SIMPLE STEPS
+            ul.list-decorated-square
+              li
+                em
+                  span 1
+                .copy-wrap
+                  span REGISTER YOUR EVENT
+              li
+                em
+                  span 2
+                .copy-wrap
+                  span INVITE YOUR BRIDESMAIDS
+              li
+                em
+                  span 3
+                .copy-wrap
+                  span CREATE A BRIDAL PARTY MOODBOARD
+              li
+                em
+                  span 4
+                .copy-wrap
+                  span COMMENT, VOTE AND PLAN
+              li
+                em
+                  span 5
+                .copy-wrap
+                  span PLACE YOUR ORDER
+              li
+                em
+                  span 6
+                .copy-wrap.highlight
+                  span CHOOSE YOUR FREE HONEYMOON DRESS*
+
+          .inner-right.position-1
+            .media-wrap
+              = image_tag 'landingpages/famingtonway/tile-free-honeymoon-dress.jpg', alt: 'GET A FREE HONEYMOON DRESS OF YOUR CHOICE WHEN YOU DRESS YOUR BRIDAL PARTY WITH US.'
+          .btn-wrap.position-3
+            // TODO: update link
+            a href='javascript:;' class='btn btn-lowlight btn-md' Get started
+
+      .col-md-12
+        h2.heading-secondary Bridesmaid dresses your girls will love...and wear again.
+        section.carousel-strap
+          .outer-wrap
+            // TODO: update path
+            = react_component('ProductsCarousel', path: '/dresses/?order=price_low&limit=16')
+
+      .col-md-12.section-register
+        .outer-wrap.mobile-change-order
+          .media-wrap.position-2
+            = image_tag 'landingpages/famingtonway/tile-register-1.jpg'
+          .media-wrap.position-1
+            = image_tag 'landingpages/famingtonway/tile-register-2.jpg'
+          .inner-wrap
+            .content-wrap-outer
+              .content-wrap-inner
+                .content-wrap
+                  h2.heading Get married<br>with fame
+                  // TODO: update link
+                  a href='javascript:;' class='btn btn-lowlight' Register now
+
+      .col-md-12
+        h2.heading-secondary Let us do the hard work for you. For $49 we will select the dresses, contact your maids and coordinate the bridal party story. Plus, the $49 comes off the cost of your dress!
+
+      .col-md-12.section-together
+        .content-wrap-outer
+          .content-wrap-inner
+            .content-wrap
+              h2.heading Those who <em>play </em>together STAY together!
+              // TODO: update link
+              a href='javascript:;' class='btn btn-lowlight' Shop dresses
+        picture.media-wrap
+          source media='(max-width: 768px)' srcset='#{image_path("landingpages/famingtonway/tile-stay-together-mob.jpg")}'
+          source media='(min-width: 769px)' srcset='#{image_path("landingpages/famingtonway/tile-stay-together.jpg")}'
+          img src='#{image_path("landingpages/famingtonway/tile-stay-together.jpg")}' srcset='
+            #{image_path("landingpages/famingtonway/tile-stay-together-mob.jpg")} 768w,
+            #{image_path("landingpages/famingtonway/tile-stay-together.jpg")} 1024w'
+
+      .col-md-12
+        h2.heading-secondary With love x
+
+    .row
+      = render partial: 'shared/redesign/more_dresses'
