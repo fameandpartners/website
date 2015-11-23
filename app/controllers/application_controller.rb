@@ -323,7 +323,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_landing_page
-    session[:landing_page] ||= URI.parse(url_for(controller: controller_name, action: action_name)).path
+    session[:landing_page] ||= request.path
   end
 
 end
