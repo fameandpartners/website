@@ -193,13 +193,6 @@ class ApplicationController < ActionController::Base
     Spree::User.campaign_monitor_sign_up_reason(session['sign_up_reason'])
   end
 
-#  def current_spree_user
-#    @current_spree_user ||= super && Spree::User.includes(:wishlist_items).find(@current_spree_user.id)
-#  end
-  def current_spree_user
-    super
-  end
-
   def current_wished_product_ids
     if @current_wished_product_ids
       @current_wished_product_ids
