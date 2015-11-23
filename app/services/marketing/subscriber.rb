@@ -31,10 +31,6 @@ class Marketing::Subscriber
     end
   end
 
-  def set_purchase_date(date = Date.today)
-    #Removed campaign_monitor code here
-  end
-
   def details
     HashWithIndifferentAccess.new(
       custom_fields.merge({
