@@ -1,10 +1,17 @@
 .bride-page
   .container.wedding-info
     .row
-      .col-md-4
+      .col-xs-12.col-sm-12.visible-xs.visible-sm
+        hr
+        row
+          .col-xs-6.col-sm-6.col-xs-push-3.col-sm-push-3.big-title.text-center.wedding-details
+            | WEDDING DETAILS
+      .col-xs-12.col-sm-12.visible-xs.visible-sm
+        img src="/assets/_bridesmaid/signup-mobile-1.jpg" class='mobile-img-1'
+      .col-md-4.hidden-xs.hidden-sm
         img src="/assets/_bridesmaid/signup1.jpg" class='signup1'
       .col-md-8.wedding-col
-        .row
+        .row.hidden-xs.hidden-sm
           .col-md-12
             hr
             .row
@@ -12,10 +19,11 @@
                 | TELL US ABOUT THE WEDDING
         .row
           .col-md-6
-            | How ready are you?
+            .how-ready
+              | How ready are you?
             br
             = select_tag "ready", options_for_select([ "Engaged", "Engaged1" ], "Engaged")
-          .col-md-6
+          .col-md-6.col-xs-12.col-sm-12.wedding-date-col
             | The Wedding Date:
             br
             = text_field_tag "date", "DD.MM.YYYY"
@@ -24,28 +32,32 @@
             | Are you the:
             br
             .row.radio-row
-              .col-md-3.radio.bride-radio
+              .col-xs-3.col-sm-3.col-md-3.radio.bride-radio
                 = radio_button_tag 'person_type', 'Bride'
                 = label 'person_type', 'Bride', :value  => 'Bride'
-              .col-md-3.radio.maid-radio
+              .col-xs-3.col-sm-3.col-md-3.radio.maid-radio
                 = radio_button_tag 'person_type', 'Maid of honour'
                 = label 'person_type', 'Maid of honour', :value  => 'Maid of honour'
-              .col-md-3.radio.bridesmaid-radio
+              .col-xs-3.col-sm-3.col-md-3.radio.bridesmaid-radio
                 = radio_button_tag 'person_type', 'Bridesmaid'
                 = label 'person_type', 'Bridesmaid', :value  => 'Bridesmaid'
-              .col-md-3.radio.other-radio
+              .col-xs-3.col-sm-3.col-md-3.radio.other-radio
                 = radio_button_tag 'person_type', 'Other'
                 = label 'person_type', 'Other', :value  => 'Other'
             br
             .bride
               | Bride's First Name:
               = text_field_tag "fname", "First Name"
-          .col-md-6
+            .col-xs-12.col-sm-12.surname.surname-mobile.visible-xs.visible-sm
+              | Bride's Surname:
+              br
+              = text_field_tag "sname", "Surname"
+          .col-md-6.col-xs-12-col-sm-12
             | The Bride's Brief:
             br
             = text_area_tag "brief", "Give a short overview on her preferences / parametres on the big day.", rows: 5
         .row
-          .col-md-6.surname
+          .col-md-6.surname.hidden-xs.hidden-sm
             | Bride's Surname:
             br
             = text_field_tag "sname", "Surname"

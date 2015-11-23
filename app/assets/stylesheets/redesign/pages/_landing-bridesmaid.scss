@@ -19,6 +19,12 @@
 
 
 .bride-page {
+  img{
+    width: 100%;
+  }
+  .wedding-details{
+    margin-top: -5px !important;
+  }
   padding-bottom: 50px;
   font-family: Formal;
   font-weight: 400;
@@ -117,6 +123,52 @@
   }
 
   .container.wedding-info{
+    @media(max-width: $bootstrap-md-width){
+      .how-ready{
+        margin-top: 20px;
+      }
+      .mobile-img-1{
+        margin-bottom: 20px;
+      }
+      .wedding-col{
+        padding-left: 15px !important;
+      }
+      .wedding-date-col{
+        margin-top: 15px;
+      }
+      #ready{
+        margin-top: -20px;
+      }
+    }
+
+    @media(max-width: $iphone6p-width){
+      .wedding-details{
+        font-size: 1em !important;
+        margin-top: 0 !important;
+      }
+    }
+    @media(min-width: $iphone6p-width)and(max-width: $bootstrap-md-width){
+      label{
+        margin-left: -9% !important;
+      }
+      .maid-radio{
+        label{
+          margin-left: -21% !important;
+        }
+      }
+      .bridesmaid-radio{
+        label{
+          margin-left: -16%;
+        }
+      }
+    }
+
+    .surname-mobile{
+      padding-left: 0;
+      margin-top: 20px !important;
+      margin-bottom: 20px;
+    }
+
     .wedding-col{
       padding-left: 40px;
     }
@@ -161,7 +213,7 @@
     }
 
     .surname{
-      margin-top: 11px;
+      margin-top: -12px;
     }
 
     #ready, #date, #brief, #fname, #sname, .bride{
