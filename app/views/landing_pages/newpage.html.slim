@@ -65,28 +65,30 @@
 
   .container.invite
     .row
-      .col-md-4.signup2-img-col
+      .col-md-4.signup2-img-col.hidden-xs.hidden-sm
         img src="/assets/_bridesmaid/signup2.jpg" class='signup2'
       .col-md-8.invite-col
         .row.invite-row
-          .col-md-12
+          .col-md-12.col-xs-12.col-sm-12
             hr
             .row
-              .col-md-4.col-md-push-4.big-title.text-center
+              .col-md-4.col-md-push-4.col-xs-6.col-sm-6.col-xs-push-3.col-sm-push-3.big-title.text-center
                 | INVITE BRIDESMAIDS
+          .col-xs-12.col-sm-12.visible-xs.visible-sm
+            img src="/assets/_bridesmaid/signup-mobile-2.jpg" class='mobile-img-2'
         .row
           .ashleigh.text-center
-            span
+            span.ash-label
               | Ashleigh Button -
             span.invite-sent
               | invite sent
-        .row
+        .row.personal
           | Personal Message:
-        .row
+        .row.personal-text-area
           = text_area_tag "mess", "Tailor a message specific to your bridesmaid here...", rows: 5
         .row
-          .col-md-6.fb-area
-            input type="button" value="ADD VIA FACEBOOK" class='add-via-fb'
+          .col-xs-12.col-sm-12.col-md-6.fb-area
+            input type="button" value="ADD VIA FACEBOOK" class='add-via-fb col-xs-6 col-xs-push-3 col-sm-6 col-sm-push-3'
             .or
               hr
               center
@@ -106,4 +108,4 @@
                 .bm-email
                   | Bridesmaid's Email:
                 = text_field_tag 'email', 'email@email.com'
-              input type="button" class="col-md-6 col-md-push-3 send-invite" value="SEND INVITE"
+              input type="button" class="col-md-6 col-md-push-3 col-xs-6 col-xs-push-3 col-sm-6 col-sm-push-3 send-invite" value="SEND INVITE"
