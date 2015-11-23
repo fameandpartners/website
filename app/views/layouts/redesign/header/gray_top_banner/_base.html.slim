@@ -38,10 +38,7 @@ ruby:
         .tagline Bespoke Fashion. Premium Style. Made for You.
     .right-wrap
       ul.toolbar-moodboard-bag.js-header-toolbar
-        li
-          = link_to wishlist_path
-            span.copy.js-moodboard-counter 0
-            span.icon.icon-heart
+        li = react_component('MoodboardItemCount', { moodboard_link: wishlist_path }, {prerender: true})
         li.separator
         li
           a.js-trigger-shopping-bag href='javascript:;'

@@ -1,3 +1,5 @@
+# TODO - 2015.11.23 - This existing functionality only allows for a single moodboard.
+# New Moodboards will require that the POST includes the moodboard ID.
 # object to store moodboard data
 window.helpers or= {}
 window.helpers.UserMoodboard = class UserMoodboard
@@ -23,6 +25,9 @@ window.helpers.UserMoodboard = class UserMoodboard
       data: data
       dataType: "json"
     ).success(@updateData)
+
+  itemCount: ->
+    @data.item_count
 
   updateData: (data = {}) =>
     @data = data
