@@ -930,6 +930,3 @@ DEPENDENCIES
   webmock (~> 1.21.0)
   whenever
   zeus
-
-BUNDLED WITH
-   1.10.6
