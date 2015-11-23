@@ -10,6 +10,7 @@ end
 
 if Rails.env.development?
   Features.activate(:content_revolution)
+  Features.activate(:enhanced_moodboards)
   Features.deactivate(:google_tag_manager)
   Features.deactivate(:test_analytics)
 end
@@ -18,12 +19,14 @@ if Rails.env.test?
   Features.deactivate(:google_tag_manager)
   Features.deactivate(:marketing_modals)
   Features.deactivate(:test_analytics)
+  Features.activate(:enhanced_moodboards)
 end
 
 Features.deactivate(:checkout_fb_login)
 Features.deactivate(:maintenance)
 Features.deactivate(:shipping_message)
 Features.deactivate(:send_promotion_email_reminder)
+Features.deactivate(:enhanced_moodboards)
 
 Features.activate(:marketing_modals)
 Features.activate(:express_making)

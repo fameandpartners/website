@@ -9,30 +9,6 @@
   .container.relative
 
     = render 'users/shared/tabs', active_tab: 'wishlist'
-    .row
-      .col-md-12
-        - if @resource.items.active.empty?
-          p Sorry, there are no items in your moodboard
-
-        - if @resource.items.active.any?
-          .container.relative
-
-            - @resource.items.active.each_slice(4).each do |row|
-              .row.relative
-                - row.each do |item|
-                  .col-md-3.col-xs-6.col-xxs-12.category--item.product-item data-id=(item.product_id)
-                    - url_path = "/dresses/dress-#{item.product.name.parameterize}-#{item.product_id}?color=#{item.color.name}"
-                    = link_to url_path do
-                      / TODO - Temporary workaround for missing `product_color_value` on about 700 wishlist items
-                      - if item.product_color_value.present?
-                        = cropped_product_color_variant_image_tag(item.product_color_value)
-                      .details
-                        .name= item.product.name
-                        span.price = item.product.price
-                        / TODO - Handle discounts
-                        / span.price = product_price_with_discount(product.price, product.discount)
-
-                    .actions.text-center
-                      = link_to 'Buy this Dress', url_path, class: 'buy btn btn-md btn-black'
-                      /#, data: { variant: product.variant_id, id: product.item_id }
-                      = link_to 'Remove', moodboard_item_path(item.moodboard_id, item.id),  method: :delete
+    = flash_messages
+    = render 'menu'
+    = render 'items'
