@@ -32,7 +32,6 @@ class ApplicationController < ActionController::Base
   helper_method :analytics_label,
                 :current_user_moodboard,
                 :current_wished_product_ids,
-                :custom_dresses_path,
                 :default_meta_description,
                 :default_seo_title,
                 :get_user_type,
@@ -250,10 +249,6 @@ class ApplicationController < ActionController::Base
       Activity.replace_temporary_keys(session[:temporary_user_key], try_spree_current_user)
       session[:temporary_user_key] = nil
     end
-  end
-
-  def custom_dresses_path
-    main_app.personalization_path
   end
 
   def set_product_show_page_title(product, info = "")
