@@ -10,7 +10,7 @@ ul.nav.nav-tabs-lg
   
   - if Features.active?(:moodboard) || current_user_moodboard.items.any?
     li.col-sm-3 class=( %w{wishlist wishlist_items}.include?(active_tab.to_s) ? 'active' : '')
-      = link_to wishlist_path, remote: true do
+      = link_to wishlist_path do
         span 
           ' My 
           br

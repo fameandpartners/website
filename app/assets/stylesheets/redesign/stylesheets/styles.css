@@ -7781,7 +7781,7 @@ p {
 /* line 569, ../sass/styles.scss */
 .slides-pagination {
   position: absolute;
-  z-index: 3;
+  z-index: 51;
   bottom: 10px;
   text-align: center;
   width: 100%;
@@ -7789,31 +7789,32 @@ p {
 
 /* line 576, ../sass/styles.scss */
 .slides-pagination a {
-  /*  border: 2px solid #222;*/
-  border-radius: 15px;
-  width: 10px;
-  height: 10px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
   display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
   zoom: 1;
   *display: inline;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #666;
   -webkit-transition: all .25s linear;
   transition: all .25s linear;
-  margin: 4px;
+  margin: 5px 10px;
   overflow: hidden;
   text-indent: -100%;
+  cursor: pointer;
 }
 /* line 594, ../sass/styles.scss */
 .slides-pagination a:hover {
-  background: white;
+  background: #000;
 }
 
 /* line 598, ../sass/styles.scss */
 .slides-pagination a.current {
-  background: white;
+  background: #000;
 }
 
 /* line 603, ../sass/styles.scss */

@@ -111,6 +111,8 @@ when :development
 
   configatron.es_url = 'http://localhost:9200'
 
+  configatron.redis_options = { namespace: "fame_and_partners_#{Rails.env}", url: "redis://#{configatron.redis_host}/0" }
+
 when :staging
   configatron.host      = 'stage.fameandpartners.com'
 
@@ -169,4 +171,5 @@ when :test
     index.spree_products = :spree_products_test
     index.color_variants = :color_variants_test
   end
+  configatron.redis_options = { namespace: "fame_and_partners_#{Rails.env}", url: "redis://#{configatron.redis_host}/0" }
 end

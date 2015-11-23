@@ -1,3 +1,10 @@
+# TODO: 2015/11/09 TTL 1 month
+# TODO: This seems to be dead. No one knows who is using this feed. If no one complains in a month, this is going to be deleted with its controller
+
+# Related routes:
+# get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
+# get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
+
 class FeedsController < ApplicationController
   PRODUCT_COLOR_VALUE     = 'ProductColorValue'
   SPREE_VARIANT           = 'Spree::Variant'

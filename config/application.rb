@@ -17,9 +17,6 @@ module FameAndPartners
   class Application < Rails::Application
     require "#{Rails.root}/config/initializers/bower_rails.rb"
 
-    config.active_record.observers ||= []
-    config.active_record.observers << :item_return_event_observer
-
     config.to_prepare do
       # manually load some paths
       [
@@ -54,9 +51,13 @@ module FameAndPartners
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
+    # NOTE - If you add or remove an observer during development,
+    #        you MUST restart your server, or they won't be loaded.
     config.active_record.observers ||= []
     config.active_record.observers << :fabrication_event_observer
     config.active_record.observers << :activity_observer
+    config.active_record.observers << :item_return_event_observer
+    config.active_record.observers << :moodboard_item_event_observer
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.

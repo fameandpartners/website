@@ -5,9 +5,16 @@ module Acceptance
     end
 
     step 'I add ":dress_name" to my moodboard' do |dress_name|
-      within('.details ') do
+      within('.details') do
         expect(page).to have_content(dress_name.upcase)
         first('.moodboard').click
+      end
+    end
+
+    step 'I remove ":dress_name" from my moodboard' do |dress_name|
+      within('.product-item') do
+        expect(page).to have_content(dress_name.upcase)
+        find('a', text: 'Remove').click
       end
     end
 

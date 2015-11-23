@@ -73,7 +73,7 @@ var InstagramCarousel = React.createClass({
       );
     } else {
       assets = this.props.assets.map(function(asset) {
-        return (<InstagramItem asset={asset} />)
+        return (<InstagramItem key={asset.src} asset={asset} />)
       });
       return (
         <div className={'js-carousel-instagram ' + (this.props.skin ? this.props.skin : '')}>

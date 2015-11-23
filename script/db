@@ -50,7 +50,7 @@ function dump_uat_db
 function dump_development_db
 {
   _setup_dump 'development'
-  pg_dump --format=custom --no-acl --no-owner --dbname=${DEV_DB} > $EXPORT_FILE &
+  pg_dump --format=custom --no-acl --no-owner --schema=public --dbname=${DEV_DB} --user=postgres > $EXPORT_FILE &
   _spinner $!
 }
 
@@ -70,6 +70,7 @@ function easy_database_management_menu()
         "dump_development_db       Backup $(blue)development$(normal)       database to a $(yellow)file$(normal)"
         "dump_menu                 Backup $(magenta)any environment's$(normal) database to a $(yellow)file$(normal)"
         "sanitise_dev_db           Delete sensitive information from $(blue)development$(normal) db. Also shrinks size massively"
+        "create_test_fixture_dump  Delete EVERYTHING from $(blue)development$(normal) db except Product 681 & dump into file."
      )
 
     select opt in "${commands[@]}"; do
@@ -225,24 +226,30 @@ function _load_db
 ## Sanitise ############################################################################################################
 function sanitise_dev_db
 {
-  SCRIPT_SQL="delete from spree_users where email not like '%fameandpartners.com%';
+  SCRIPT_SQL="  delete from spree_users where email not like '%fameandpartners.com%';
 
   truncate table activities;
   truncate table competition_entries;
   truncate table competition_invitations;
   truncate table email_notifications;
+  truncate table fabrication_events;
   truncate table facebook_data;
+  truncate table item_return_events;
+  truncate table item_returns;
   truncate table line_item_personalizations;
+  truncate table line_item_updates;
   truncate table marketing_user_visits;
+  truncate table moodboard_item_events;
+  truncate table moodboard_items;
   truncate table product_accessories;
   truncate table spree_addresses;
   truncate table spree_adjustments;
   truncate table spree_credit_cards;
   truncate table spree_line_items;
   truncate table spree_log_entries;
+  truncate table spree_masterpass_checkouts;
   truncate table spree_orders;
   truncate table spree_payments;
-  truncate table spree_masterpass_checkouts;
   truncate table spree_paypal_express_checkouts;
   truncate table spree_shipments;
   truncate table spree_state_changes;
@@ -250,11 +257,43 @@ function sanitise_dev_db
   truncate table spree_user_authentications;
   truncate table user_style_profile_taxons;
   truncate table user_style_profiles;
-  truncate table wishlist_items;"
+  truncate table wishlist_items;
+  "
 
   psql --dbname ${DEV_DB} --echo-queries --command "${SCRIPT_SQL}"
 }
 
+# Taken from doc/test/database-snapshot-prepare.md
+function create_test_fixture_dump
+{
+  echo "$(magenta)>> $(white)Sanitising DEV DB$(normal)"
+
+  sanitise_dev_db
+
+  SCRIPT_SQL="
+  DELETE FROM spree_products AS sp WHERE sp.id != 681;
+  DELETE FROM spree_product_properties AS spp WHERE spp.product_id != 681;
+  DELETE FROM spree_variants AS sv WHERE sv.id NOT IN ( SELECT v.id FROM spree_variants AS v WHERE v.product_id = 681 );
+  DELETE FROM spree_prices AS sp WHERE sp.variant_id NOT IN ( SELECT v.id FROM spree_variants AS v WHERE v.product_id = 681 );
+  DELETE FROM spree_option_values_variants AS sovv WHERE sovv.variant_id NOT IN ( SELECT v.id FROM spree_variants AS v WHERE v.product_id = 681 );"
+
+  echo "$(magenta)>> $(white)Deleting everything (product_id != 681)$(normal)"
+
+  psql --dbname ${DEV_DB} --echo-queries --command "${SCRIPT_SQL}"
+
+  echo "$(magenta)>> $(white)Enabling test gateways$(normal)"
+  bundle exec rake dev:enable_payment_gateways TARGET_ENV=test
+  echo "$(magenta)>> $(white)Adding Test User$(normal)"
+  bundle exec rake dev:add_test_fixture_user
+
+  echo "$(magenta)>> $(white)Vacumming DEV DB$(normal)"
+  vacuumdb -d ${DEV_DB} -e -f
+
+  dump_development_db
+  test_fixture_dump_file='spec/fixtures/database_snapshots/minified_production_data.dump'
+  echo "$(magenta)>> $(white)Copying to $(yellow)${test_fixture_dump_file}$(normal)"
+  cp ${EXPORT_FILE} ${test_fixture_dump_file}
+}
 
 
 ## Common ##############################################################################################################

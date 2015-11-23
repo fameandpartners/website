@@ -64,7 +64,7 @@
           border-width: ($tab-nav-height / 2) 0 ($tab-nav-height / 2) ($tab-nav-height / 5);
           border-color: transparent transparent transparent $c-brand-blue;
         }
-        
+
         a {
           color: $c-neutral-white;
         }
@@ -102,6 +102,14 @@
         opacity: 1;
         visibility: visible;
         @include transition(opacity linear .6s);
+      }
+
+      @media(min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width){
+        img{
+          width: auto;
+          height: 100%;
+          margin-left: -60px;
+        }
       }
 
     }
@@ -155,7 +163,7 @@
 
     }
     // END - mobile
-    
+
   }
 
 }

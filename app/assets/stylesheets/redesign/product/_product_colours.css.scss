@@ -38,6 +38,7 @@ $product-color-hot-pink: #ff3399;
       .color-aqua                    { background-color: #21cddb; }
       .color-apple-green             { background-color: #25d291; }
       .color-apricot                 { background-color: #ffad80; }
+      .color-art-soul                { @include image-color-selector('ArtSoul.png'); }
       .color-baby-pink               { background-color: #fde2f0; }
       .color-beige                   { background-color: #efdecd; }
       .color-berry                   { background-color: #873c44; }
@@ -64,9 +65,11 @@ $product-color-hot-pink: #ff3399;
       .color-coral                   { background-color: #ff6262; }
       .color-cotton-candy            { background-color: #fbbfe9; }
       .color-cream                   { background-color: #fcfbe3; }
+      .color-dark-burgundy           { background-color: #5e100b; }
       .color-dark-nude               { background-color: #D2AF99; }
       .color-dark-forest             { background-color: #173a22; }
       .color-dark-purple             { background-color: #330066; }
+      .color-dark-tan                { background-color: #b69368; }
       .color-deep-purple             { background-color: #370840; }
       .color-dusty-pink              { background-color: #dd83b9; }
       .color-emerald-green           { background-color: #1b9975; }
@@ -98,8 +101,10 @@ $product-color-hot-pink: #ff3399;
       .color-light-blue              { background-color: #66ccff; }
       .color-light-pink              { background-color: #ffecef; }
       .color-light-pink-and-charcoal { @include split-color-selector(#ffecef, #3c3c3c); }
+      .color-micro-spot              { @include image-color-selector('BlackMicroSpot.png') }
       .color-midnight-floral         { @include image-color-selector('midnightfloral.jpg') }
       .color-monochrome              { @include image-color-selector('Monochrome.png'); }
+      .color-monochrome-code         { @include image-color-selector('MonochromeCoda.png'); }
       .color-pink-azalea-floral      { @include image-color-selector('PinkAzaleaFloral.png'); }
       .color-surreal-floral-black    { @include image-color-selector('SurrealFloralBlack.png'); }
       .color-surreal-floral-white    { @include image-color-selector('SurrealFloralWhite.png'); }

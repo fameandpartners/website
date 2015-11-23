@@ -1,4 +1,6 @@
-class CreateMoodboardItems < ActiveRecord::Migration
+# Updated after the fact due to name clashes when trying to add
+# new migrations for new classes with the same name.
+class CreateMoodboardItemsNeeInspirations < ActiveRecord::Migration
   def change
     create_table :moodboard_items do |t|
       t.references :spree_product

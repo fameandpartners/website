@@ -7,16 +7,17 @@ namespace :dev do
     require 'log_formatter'
     class EnablePaymentGateways
 
-      attr_reader :logger
+      attr_reader :logger, :target_env
 
-      def initialize(logdev: $stdout)
+      def initialize(logdev: $stdout, target_env:)
+        @target_env = %w(test development).include?(target_env) ? target_env : 'development'
         @logger = Logger.new(logdev)
         @logger.formatter = LogFormatter.terminal_formatter
       end
 
       def call
         unless Rails.env.development?
-          logger.error "Only runs in development environment (#{Rails.env})"
+          logger.error "Only runs in development environment not (#{Rails.env})"
           return
         end
 
@@ -33,12 +34,28 @@ namespace :dev do
 
         Spree::PaymentMethod.where(:name => test_gateway_names).map do |gw|
           logger.info "Enabling #{gw.name.ljust(22)} (#{gw.provider.class.name})"
-          gw.active = true
-          gw.environment = Rails.env.to_s
+          gw.active      = true
+          gw.environment = target_env
           gw.save
         end
       end
     end
-    EnablePaymentGateways.new.call
+
+    target_env = ENV.fetch('TARGET_ENV') { nil }
+
+    EnablePaymentGateways.new(target_env: target_env).call
+  end
+
+  desc 'Add Test Fixtures User'
+  task :add_test_fixture_user => :environment do
+    Spree::User.new.tap do |user|
+      user.first_name                 = 'Example'
+      user.last_name                  = 'User'
+      user.email                      = 'spree@example.com'
+      user.password                   = '123456'
+      user.password_confirmation      = '123456'
+      user.skip_welcome_email         = true
+      user.validate_presence_of_phone = false
+    end.save
   end
 end

@@ -9,6 +9,7 @@ describe Revolution::Translation do
 
   subject(:translation)  { Revolution::Translation.new(:page => page, :locale => locale, :title => title) }
 
+  it { should belong_to(:page).inverse_of(:translations) }
   it { is_expected.to validate_presence_of :title }
   it { is_expected.to validate_presence_of :locale }
   it { is_expected.to validate_presence_of :page }

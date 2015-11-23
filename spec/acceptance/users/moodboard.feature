@@ -11,7 +11,16 @@ Feature: Add to Moodboard
      And I visit the dresses page
     Then I should see "+moodboard"
     When I add "Connie" to my moodboard
+    Then I should see "Added to Moodboard"
     Then I should have "Connie" on my moodboard
 
-  @skip
   Scenario: Remove from Moodboard
+    Given The example user is signed in
+      And I visit the dresses page
+      And I add "Connie" to my moodboard
+     Then I should have "Connie" on my moodboard
+     When I remove "Connie" from my moodboard
+     # The extra page view is required here, as the dummy text
+     # does not display after all ajax deletions.
+     When I view my moodboard
+     Then I should see "Sorry, there are no items in your moodboard"

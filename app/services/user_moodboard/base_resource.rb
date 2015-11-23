@@ -28,21 +28,17 @@ class UserMoodboard::BaseResource
     end
   end
 
-  private
-
-    #def cache_key
-    #  "user-moodboard-base-info-#{ user.id }"
-    #end
-
-    def wishlist_items
-      @wishlist_items ||= begin
-        user.wishlist_items.map do |item|
-          OpenStruct.new(
-            variant_id: item.spree_variant_id,
-            product_id: item.spree_product_id,
-            color_id: item.product_color_id
-          )
-        end
+  # TODO - I hate this level of indirection, but am leaving the API intact.
+  #        Let's move away from nesting OpenStruct all the time.
+  def wishlist_items
+    @wishlist_items ||= begin
+      user.moodboards.default_or_create.items.active.map do |item|
+        OpenStruct.new(
+          variant_id: item.variant_id,
+          product_id: item.product_id,
+          color_id:   item.color_id
+        )
       end
     end
+  end
 end
