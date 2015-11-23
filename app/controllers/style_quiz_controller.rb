@@ -134,7 +134,7 @@ class StyleQuizController < ActionController::Base
       @current_site_version ||= begin
         service = FindUsersSiteVersion.new(
           user: current_spree_user,
-          url_param: params[:site_version],
+          url_param: request.env['site_version_code'],
           cookie_param: session[:site_version]
         )
         service.get().tap do |site_version|
