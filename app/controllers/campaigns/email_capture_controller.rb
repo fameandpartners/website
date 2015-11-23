@@ -33,7 +33,7 @@ class Campaigns::EmailCaptureController < ApplicationController
       user:           current_spree_user
     ).create
 
-    mailchimp = EmailCapture.new({service: 'mailchimp'})
+    mailchimp = EmailCapture.new({ service: :mailchimp })
     mailchimp.capture(mailchimp.mailchimp_struct.new(params[:email], nil, true, nil, nil,
                                                      request.remote_ip, session[:landing_page],
                                                      session[:utm_params], current_site_version.name,
@@ -84,7 +84,7 @@ class Campaigns::EmailCaptureController < ApplicationController
   end
 
   def mailchimp
-    mailchimp = EmailCapture.new({service: 'mailchimp'})
+    mailchimp = EmailCapture.new({ service: :mailchimp })
     mailchimp.capture(mailchimp.mailchimp_struct.new(params[:email], nil, true, nil, nil,
                                                      request.remote_ip, session[:landing_page],
                                                      session[:utm_params], current_site_version.name,

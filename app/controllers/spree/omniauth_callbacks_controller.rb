@@ -104,7 +104,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     user ||= (spree_current_user || authentication.try(:user))
 
-    mailchimp = EmailCapture.new({service: 'mailchimp'})
+    mailchimp = EmailCapture.new({service: :mailchimp })
     mailchimp.capture(mailchimp.mailchimp_struct.new(user.email, nil, true, user.first_name, user.last_name,
                                                      request.remote_ip, session[:landing_page],
                                                      session[:utm_params],  current_site_version.name,

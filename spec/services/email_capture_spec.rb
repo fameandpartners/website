@@ -10,10 +10,10 @@ describe EmailCapture do
                             utm_params:         '',
                             site_version:       'US',
                             form_name:          'contact') }
-  let(:mailchimp) { EmailCapture.new({service: 'mailchimp'}) }
+  let(:mailchimp) { EmailCapture.new({ service: :mailchimp }) }
 
-  it { expect(EmailCapture.new({service: 'mailchimp'}).service).to eq 'mailchimp' }
-  it { expect(EmailCapture.new({service: 'Mailchimp'}).service).to eq 'mailchimp' }
+  it { expect(EmailCapture.new({service: :mailchimp}).service).to eq :mailchimp }
+  it { expect(EmailCapture.new({service: 'Mailchimp'}).service).to_not eq :mailchimp }
 
   describe '#email_changed?' do
     it { expect(mailchimp.email_changed?(:os)).to be_falsey }

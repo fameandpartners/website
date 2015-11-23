@@ -3,7 +3,7 @@ class EmailCapture
   attr_reader :service, :mailchimp, :mailchimp_struct
 
   def initialize(options = {})
-    @service          = options[:service].downcase
+    @service          = options[:service]
     @mailchimp        = Mailchimp::API.new(configatron.mailchimp.api_key)
     @mailchimp_struct = Struct.new("Mailchimp", :email,
                                    :previous_email, :newsletter, :first_name,
@@ -14,7 +14,7 @@ class EmailCapture
 
   def capture(current_email)
 
-    if service == 'mailchimp'
+    if service == :mailchimp
 
       get_email = email_changed?(current_email) ? current_email.previous_email : current_email.email
 
