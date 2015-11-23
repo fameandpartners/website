@@ -271,7 +271,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_moodboard
-    @user_moodboard ||= UserMoodboard::BaseResource.new(user: current_spree_user).read
+    @user_moodboard ||= MoodboardPresenter.new(current_spree_user)
   end
 
   # todo: remove this method from global scope
