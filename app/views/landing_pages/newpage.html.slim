@@ -1,45 +1,89 @@
-.container.wedding-info
-  .row
-    .col-md-12
-      hr
-      .tell-us.text-center
-        | TELL US ABOUT THE WEDDING
-  .row
-    .col-md-6
-      | How ready are you?
-      br
-      = select_tag "ready", options_for_select([ "Engaged", "Engaged1" ], "Engaged")
-    .col-md-6
-      | The Wedding Date: 
-      br
-      = text_field_tag "date", "DD.MM.YYYY"
-  .row
-    .col-md-6
-      | Are you the:
-      br 
-      .row.radio-row
-        .col-md-3.radio.bride-radio
-          = radio_button_tag 'person_type', 'Bride'
-          = label 'person_type', 'Bride', :value  => 'Bride'
-        .col-md-3.radio.maid-radio
-          = radio_button_tag 'person_type', 'Maid of honour'
-          = label 'person_type', 'Maid of honour', :value  => 'Maid of honour'
-        .col-md-3.radio.bridesmaid-radio
-          = radio_button_tag 'person_type', 'Bridesmaid'
-          = label 'person_type', 'Bridesmaid', :value  => 'Bridesmaid'
-        .col-md-3.radio.other-radio
-          = radio_button_tag 'person_type', 'Other'
-          = label 'person_type', 'Other', :value  => 'Other'
-      br
-      .bride
-        | Bride's First Name:
-        = text_field_tag "fname", "First Name"
-    .col-md-6
-      | The Bride's Brief: 
-      br
-      = text_area_tag "brief", "Give a short overview on her preferences / parametres on the big day.", rows: 5
-  .row
-    .col-md-6
-      | Bride's Surname:
-      br
-      = text_field_tag "sname", "Surname"
+.bride-page
+  .container.wedding-info
+    .row
+      .col-md-12
+        hr
+        .row
+          .col-md-4.col-md-push-4.big-title.text-center
+            | TELL US ABOUT THE WEDDING
+    .row
+      .col-md-6
+        | How ready are you?
+        br
+        = select_tag "ready", options_for_select([ "Engaged", "Engaged1" ], "Engaged")
+      .col-md-6
+        | The Wedding Date: 
+        br
+        = text_field_tag "date", "DD.MM.YYYY"
+    .row
+      .col-md-6
+        | Are you the:
+        br 
+        .row.radio-row
+          .col-md-3.radio.bride-radio
+            = radio_button_tag 'person_type', 'Bride'
+            = label 'person_type', 'Bride', :value  => 'Bride'
+          .col-md-3.radio.maid-radio
+            = radio_button_tag 'person_type', 'Maid of honour'
+            = label 'person_type', 'Maid of honour', :value  => 'Maid of honour'
+          .col-md-3.radio.bridesmaid-radio
+            = radio_button_tag 'person_type', 'Bridesmaid'
+            = label 'person_type', 'Bridesmaid', :value  => 'Bridesmaid'
+          .col-md-3.radio.other-radio
+            = radio_button_tag 'person_type', 'Other'
+            = label 'person_type', 'Other', :value  => 'Other'
+        br
+        .bride
+          | Bride's First Name:
+          = text_field_tag "fname", "First Name"
+      .col-md-6
+        | The Bride's Brief: 
+        br
+        = text_area_tag "brief", "Give a short overview on her preferences / parametres on the big day.", rows: 5
+    .row
+      .col-md-6
+        | Bride's Surname:
+        br
+        = text_field_tag "sname", "Surname"
+
+
+  .container.invite
+    .row
+      .col-md-12
+        hr
+        .row
+          .col-md-4.col-md-push-4.big-title.text-center
+            | INVITE BRIDESMAIDS
+    .row
+      .ashleigh.text-center
+        span 
+          | Ashleigh Button - 
+        span.invite-sent
+          | invite sent
+    .row
+      | Personal Message:
+    .row
+      = text_area_tag "mess", "Tailor a message specific to your bridesmaid here...", rows: 5
+    .row
+      .col-md-6.fb-area
+        input type="button" value="ADD VIA FACEBOOK" class='add-via-fb'
+        .or
+          hr
+          center
+            span.or-text.text-center
+              | OR
+      .col-md-6  
+        .invitation
+          .row
+            .bm-f-name
+              | Bridesmaid's First Name:
+            = text_field_tag "fname", "First Name"
+          .row
+            .bm-s-name
+              | Bridesmaid's Surname:
+            = text_field_tag 'sname', 'Surname'
+          .row
+            .bm-email
+              | Bridesmaid's Email:
+            = text_field_tag 'email', 'email@email.com'
+          input type="button" class="col-md-4 col-md-push-4 send-invite" value="SEND INVITE"

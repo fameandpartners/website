@@ -18,43 +18,15 @@
 }
 
 
-.wedding-info{
+.bride-page {
   font-family: Formal;
   font-weight: 700;
-  .row{
-    margin-top: 30px;
-  }
-  .radio-row{
-    margin-top: 0;
-    font-weight: 700 !important;
-  }
-  .radio{
-    margin-top: 10px;
-    float: left;
-    font-size: 0.7em;
-    input{
-      margin-left: 40%; 
-    }
-    label{
-      margin-top: 20px;
-      position: absolute;
-      margin-left: -17%;
-    }
-
-  }
-  .maid-radio{
-    label{
-      margin-left: -37%;
-    }
-  }
-  .bridesmaid-radio{
-    label{
-      margin-left: -30%;
-    }
-  }
 
   input, textarea, select{
     padding: 10px;
+  }
+  textarea{
+    width: 100%;
   }
   hr{
     margin-top: 25px;
@@ -63,21 +35,109 @@
     border-top: 1px solid #EEE;
     border-color: black;
   }
-  .tell-us{
+
+  .big-title{
     background-color: white;  
-    margin-left: 35%;
-    margin-right: 35%;
     margin-bottom: 30px;
     float: left;
     padding-left: 10px;
     padding-right: 10px;
   }
-  #ready, #date, #brief, #fname, #sname, .bride{
-    width: 100%;
-    float: left;
-  }
-  .bride{
-    padding: 0;
+
+  .container.invite{
+    margin-top: 70px;
+    .ashleigh{
+      font-weight: 400;
+      .invite-sent{
+        font-style: italic;
+      }
+    }
+    .big-title{
+      margin-top: -20px;
+    }
+    .fb-area{
+      margin-top: 10%;
+      .add-via-fb{
+        color: white;
+        background-color: black;
+        float: left;
+      }
+      .or{
+        float: left;
+        margin-left: 15px;
+        width: 40%;
+        margin-top: 0;
+        .or-text{
+          color: black;
+          font-weight: 200;
+          font-size: 0.6em;
+          background-color: white;
+          margin-top: -2px;
+          position: absolute;
+          margin-left: -15px;
+        }
+      }
+    }
+    .invitation{
+      input[type='text']{
+        width: 100%;
+      }
+      .send-invite{
+        margin-top: 20px;
+        color: white;
+        background-color: black;
+      }
+      .row{
+        margin-top: 15px;
+      }
+    }
   }
 
+  .container.wedding-info{
+    .big-title{
+      margin-top: -50px;
+    }
+    .row{
+      margin-top: 30px;
+    }
+    .radio-row{
+      margin-top: 0;
+      font-weight: 700 !important;
+    }
+    .radio{
+      margin-top: 10px;
+      float: left;
+      font-size: 0.7em;
+      input{
+        margin-left: 40%; 
+      }
+      label{
+        margin-top: 20px;
+        position: absolute;
+        margin-left: -17%;
+      }
+
+    }
+    .maid-radio{
+      label{
+        margin-left: -37%;
+      }
+    }
+    .bridesmaid-radio{
+      label{
+        margin-left: -30%;
+      }
+    }
+
+
+
+    #ready, #date, #brief, #fname, #sname, .bride{
+      width: 100%;
+      float: left;
+    }
+    .bride{
+      padding: 0;
+    }
+
+  }
 }
