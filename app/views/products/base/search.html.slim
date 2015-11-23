@@ -4,7 +4,7 @@ ruby:
       container: '.category .products-collection',
       buttons:   'span.moodboard'
     });"
-  sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase))
+  sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase)) if @collection.present?
 
 - content_for :head do
   meta name="robots" content="noindex, follow"
@@ -12,7 +12,7 @@ ruby:
 = content_for :inline_javascript do
   = raw init_product_collection_moodboard_links
 
-= render :partial => 'products/collections/javascript'
+= render :partial => 'products/collections/javascript' if @collection.present?
 
 .page-title.default style="background-color:#EDDCEF;"
   .container
