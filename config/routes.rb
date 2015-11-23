@@ -312,7 +312,7 @@ FameAndPartners::Application.routes.draw do
     resources :site_versions, only: [:show], as: :site_version
   end
 
-  resources :moodboards, only: [:show, :index] do
+  resources :moodboards, except: [:destroy] do
     resources :items, controller: 'moodboard_items', only: [:show, :destroy]
   end
 
