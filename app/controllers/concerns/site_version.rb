@@ -7,6 +7,7 @@ module Concerns
 
       before_filter :show_locale_warning
       before_filter :guarantee_session_site_version
+      append_before_filter :add_site_version_to_mailer
       prepend_before_filter :enforce_param_site_version, unless: [:on_checkout_path, :request_not_get_or_ajax]
 
       helper_method :current_site_version
@@ -64,6 +65,25 @@ module Concerns
       if (order = session_order)
         order.use_prices_from(new_site_version)
       end
+    end
+
+    def add_site_version_to_mailer
+      ActionMailer::Base.default_url_options.merge!(
+          site_version: self.url_options[:site_version]
+      )
+    end
+
+    def url_options
+      version = current_site_version
+
+      if version.permalink.present? && version.permalink != 'us'
+        site_version = version.permalink.html_safe
+      else
+        site_version = nil
+      end
+
+      result = { site_version: site_version }.merge(super)
+      result
     end
 
     private
