@@ -11,7 +11,7 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(params[:contact])
     if @contact.valid?
-      mailchimp = EmailCapture.new({service: 'mailchimp'})
+      mailchimp = EmailCapture.new({ service: :mailchimo })
       mailchimp.capture(mailchimp.mailchimp_struct.new(@contact.email, nil, nil,
                                                        @contact.first_name,@contact.last_name,
                                                        request.remote_ip, session[:landing_page],

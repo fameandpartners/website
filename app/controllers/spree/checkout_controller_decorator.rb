@@ -16,7 +16,7 @@ Spree::CheckoutController.class_eval do
     move_order_from_cart_state(@order)
 
     if @order.state == 'address' || @order.state == 'masterpass'
-      mailchimp = EmailCapture.new({service: 'mailchimp'})
+      mailchimp = EmailCapture.new({ service: :mailchimp })
       mailchimp.capture(mailchimp.mailchimp_struct.new(@order.email, nil, nil,
                                                        params[:order][:bill_address_attributes][:firstname],
                                                        params[:order][:bill_address_attributes][:lastname],

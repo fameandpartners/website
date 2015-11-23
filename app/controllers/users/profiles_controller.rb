@@ -13,7 +13,7 @@ class Users::ProfilesController < Users::BaseController
   def update
     old_email = @user.email
     if @user.update_profile(params[:profile])
-      mailchimp = EmailCapture.new({service: 'mailchimp'})
+      mailchimp = EmailCapture.new({ service: :mailchimp })
       mailchimp.capture(mailchimp.mailchimp_struct.new(@user.email, old_email, nil,
                                                        @user.first_name, @user.last_name,
                                                        request.remote_ip, session[:landing_page],

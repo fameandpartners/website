@@ -41,7 +41,7 @@ Spree::UserRegistrationsController.class_eval do
     if resource.new_record?
       resource.sign_up_via    = Spree::User::SIGN_UP_VIA.index('Email')
       resource.sign_up_reason = session[:sign_up_reason]
-      mailchimp = EmailCapture.new({service: 'mailchimp'})
+      mailchimp = EmailCapture.new({ service: :mailchimp })
       mailchimp.capture(mailchimp.mailchimp_struct.new(@user.email, nil, @user.newsletter, @user.first_name,
                                                        @user.last_name, request.remote_ip, session[:landing_page],
                                                        session[:utm_params], current_site_version.name,
