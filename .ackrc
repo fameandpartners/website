@@ -2,4 +2,6 @@
 --ignore-directory=is:.idea
 --ignore-directory=is:tmp/
 --ignore-directory=is:public/assets/
+--ignore-directory=is:engines/inspinia-rails/vendor/assets/
+--ignore-directory=is:app/assets/vendor/
 
