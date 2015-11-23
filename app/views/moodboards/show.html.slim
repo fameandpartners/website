@@ -11,4 +11,4 @@
     = render 'users/shared/tabs', active_tab: 'wishlist'
     = flash_messages
     = render 'menu'
-    = render 'items'
+    = render "#{@resource.purpose}_board"
