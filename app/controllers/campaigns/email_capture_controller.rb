@@ -33,11 +33,11 @@ class Campaigns::EmailCaptureController < ApplicationController
       user:           current_spree_user
     ).create
 
-    mailchimp = EmailCapture.new({ service: :mailchimp })
-    mailchimp.capture(mailchimp.mailchimp_struct.new(params[:email], nil, true, nil, nil,
-                                                     request.remote_ip, session[:landing_page],
-                                                     session[:utm_params], current_site_version.name,
-                                                      nil, 'Sitewide Modal Form'))
+    EmailCapture.new({ service: :mailchimp }, email: params[:email], newsletter: true,
+                                 current_sign_in_ip: request.remote_ip,
+                                 landing_page: session[:landing_page],
+                                 utm_params: session[:utm_params], site_version: current_site_version.name,
+                                 form_name: 'Sitewide Modal Form').capture
 
     begin
       if params[:promocode].present?
@@ -84,11 +84,11 @@ class Campaigns::EmailCaptureController < ApplicationController
   end
 
   def mailchimp
-    mailchimp = EmailCapture.new({ service: :mailchimp })
-    mailchimp.capture(mailchimp.mailchimp_struct.new(params[:email], nil, true, nil, nil,
-                                                     request.remote_ip, session[:landing_page],
-                                                     session[:utm_params], current_site_version.name,
-                                                     nil, 'Footer Contact'))
+    EmailCapture.new({ service: :mailchimp }, email: params[:email],
+                                 current_sign_in_ip: request.remote_ip,
+                                 landing_page: session[:landing_page],
+                                 utm_params: session[:utm_params], site_version: current_site_version.name,
+                                 form_name: 'Footer Contact').capture
 
     render nothing: true
   end
