@@ -66,6 +66,19 @@ describe Concerns::SiteVersion, type: :controller do
         end
       end
     end
+
+    describe '#add_site_version_to_mailer' do
+      let(:default_url_options) { { default: :hash } }
+
+      before(:each) do
+        allow(controller).to receive(:default_url_options).and_return(default_url_options)
+      end
+
+      it 'merges ActionMailer::Base.default_url_options with controller defaults' do
+        expect(ActionMailer::Base).to receive_message_chain(:default_url_options, :merge!).with(default_url_options)
+        get :index
+      end
+    end
   end
 
   describe '#current_site_version' do
@@ -123,6 +136,26 @@ describe Concerns::SiteVersion, type: :controller do
       it { expect(controller.instance_variable_get(:@current_site_version)).to eq au_site_version }
       it { expect(session[:site_version]).to eq 'au' }
       it { expect(user.site_version_id).to eq 101 }
+    end
+  end
+
+  describe '#default_url_options' do
+    before(:each) { allow(controller).to receive(:current_site_version).and_return(site_version) }
+
+    context 'current site version is default' do
+      let(:site_version) { build_stubbed(:site_version, default: true) }
+
+      it do
+        expect(controller.default_url_options).to eq({ site_version: nil })
+      end
+    end
+
+    context 'current site version is not default' do
+      let(:site_version) { build_stubbed(:site_version, permalink: 'au') }
+
+      it do
+        expect(controller.default_url_options).to eq({ site_version: 'au' })
+      end
     end
   end
 end

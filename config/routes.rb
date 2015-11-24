@@ -9,7 +9,7 @@ FameAndPartners::Application.routes.draw do
   end
 
   ########################
-  # US Redireciton to root
+  # US Redirection to root
   ########################
   get '/us/*whatevs' => redirect(path: "/%{whatevs}")
   get '/us' => redirect("/")
