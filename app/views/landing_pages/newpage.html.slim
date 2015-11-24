@@ -22,7 +22,7 @@
             .how-ready
               | How ready are you?
             br
-            = select_tag "ready", options_for_select([ "Engaged", "Engaged1" ], "Engaged")
+            = select_tag :ready, options_for_select(%w(Engaged Engaded1 Engaded2), "Engaged"), :class => 'select2'
           .col-md-6.col-xs-12.col-sm-12.wedding-date-col
             | The Wedding Date:
             br
@@ -109,3 +109,6 @@
                   | Bridesmaid's Email:
                 = text_field_tag 'email', 'email@email.com'
               input type="button" class="col-md-6 col-md-push-3 col-xs-6 col-xs-push-3 col-sm-6 col-sm-push-3 send-invite" value="SEND INVITE"
+coffee:
+  $(document).ready ->
+    $("#ready").select2()

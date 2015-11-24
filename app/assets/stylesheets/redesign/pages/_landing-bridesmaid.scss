@@ -19,6 +19,17 @@
 
 
 .bride-page {
+  .select2{
+    margin-top: -30px;
+    width: 100% !important;
+    b[role='presentation']{
+      margin-top: 7px;
+    }
+  }
+  .select2-container--default .select2-selection--single{
+    height: 4.85rem;
+    padding-top: 7px;
+  }
   img{
     width: 100%;
   }
