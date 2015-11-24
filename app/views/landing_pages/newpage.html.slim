@@ -33,16 +33,16 @@
             br
             .row.radio-row
               .col-xs-3.col-sm-3.col-md-3.radio.bride-radio
-                = radio_button_tag 'person_type', 'Bride'
+                = radio_button_tag 'person_type', 'Bride', true
                 = label 'person_type', 'Bride', :value  => 'Bride'
               .col-xs-3.col-sm-3.col-md-3.radio.maid-radio
-                = radio_button_tag 'person_type', 'Maid of honour'
+                = radio_button_tag 'person_type', 'Maid of honour', false
                 = label 'person_type', 'Maid of honour', :value  => 'Maid of honour'
               .col-xs-3.col-sm-3.col-md-3.radio.bridesmaid-radio
-                = radio_button_tag 'person_type', 'Bridesmaid'
+                = radio_button_tag 'person_type', 'Bridesmaid', false
                 = label 'person_type', 'Bridesmaid', :value  => 'Bridesmaid'
               .col-xs-3.col-sm-3.col-md-3.radio.other-radio
-                = radio_button_tag 'person_type', 'Other'
+                = radio_button_tag 'person_type', 'Other', false
                 = label 'person_type', 'Other', :value  => 'Other'
             br
             .bride
