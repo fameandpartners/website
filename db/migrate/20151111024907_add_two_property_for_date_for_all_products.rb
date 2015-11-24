@@ -4,7 +4,7 @@ class AddTwoPropertyForDateForAllProducts < ActiveRecord::Migration
     property2_id = Spree::Property.where(name: "customised_days_for_making").first.id
 
     Spree::Product.all.each do |p|
-      if p.properties.none?{|pro| pro.id == property1_id || pro.id == property2_id}
+      if Spree::ProductProperty.where(product_id: p.id, property_id: property1_id).blank? && Spree::ProductProperty.where(product_id: p.id, property_id: property2_id).blank?
         policy = Policies::ProjectDeliveryDatePolicy.new(p)
         pp = Spree::ProductProperty.new
         if policy.special_order?
