@@ -72,11 +72,8 @@ module Concerns
     end
 
     def default_url_options
-      if current_site_version.default?
-        { site_version: nil }
-      else
-        { site_version: current_site_version.code }
-      end
+      detector = configatron.site_version_detector.new
+      detector.default_url_options(current_site_version)
     end
 
     private

@@ -140,21 +140,18 @@ describe Concerns::SiteVersion, type: :controller do
   end
 
   describe '#default_url_options' do
-    before(:each) { allow(controller).to receive(:current_site_version).and_return(site_version) }
+    context 'given a site version detector' do
+      let(:site_version_detector) { double('Site Version Detector') }
+      let(:site_version) { double('Site Version') }
 
-    context 'current site version is default' do
-      let(:site_version) { build_stubbed(:site_version, default: true) }
-
-      it do
-        expect(controller.default_url_options).to eq({ site_version: nil })
+      before(:each) do
+        allow(controller).to receive_message_chain(:configatron, :site_version_detector, :new).and_return(site_version_detector)
+        allow(controller).to receive(:current_site_version).and_return(site_version)
       end
-    end
 
-    context 'current site version is not default' do
-      let(:site_version) { build_stubbed(:site_version, permalink: 'au') }
-
-      it do
-        expect(controller.default_url_options).to eq({ site_version: 'au' })
+      it 'delegates default_url_options to configured site version detector' do
+        expect(site_version_detector).to receive(:default_url_options).with(site_version)
+        controller.default_url_options
       end
     end
   end
