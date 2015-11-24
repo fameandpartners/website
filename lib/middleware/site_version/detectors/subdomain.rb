@@ -11,6 +11,10 @@ module Middleware
             default_code
           end
         end
+
+        def default_url_options(site_version)
+          { site_version: nil }
+        end
       end
     end
   end
