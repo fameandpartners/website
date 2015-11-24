@@ -23,8 +23,7 @@ Spree::User.class_eval do
   delegate :value, to: :facebook_data, prefix: true
 
   attr_accessor :skip_welcome_email,
-                :validate_presence_of_phone,
-                :previous_email
+                :validate_presence_of_phone
 
   attr_accessible :first_name, :last_name, :phone, :dob, :skip_welcome_email, :automagically_registered
 
