@@ -3,7 +3,8 @@ class CreateTermsPage < ActiveRecord::Migration
     page = Revolution::Page.create!(
       :path => '/terms',
       :template_path => '/pages/simple.html.slim',
-      :variables => {:markdown => true}
+      :variables => {:markdown => true},
+      :noindex => true
     )
     page.publish!
 
