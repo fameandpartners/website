@@ -15,6 +15,7 @@ FameAndPartners::Application.routes.draw do
   get '/us' => redirect("/")
 
 
+  # TODO: After .com.au migration, this scope can simply go away.
   scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
     ##########
     # Sitemaps
