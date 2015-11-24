@@ -7,12 +7,11 @@
     .inner-wrap.icon
       .svg-waste
       .copy Anti-wastage
-    - if true || sale_active?
+    - if sale_active?
       .inner-wrap
         .title-wrap
           .title
-            // = current_sale.sitewide_message
-            | 20% OFF SELECTED STYLES. LIMITED TIME ONLY
+             = current_sale.sitewide_message
             br
             = link_to 'Shop now!', mystyle_landing_page_path(lpi: 'none', sale: 'all', limit: 99)
     .inner-wrap.icon
