@@ -1,4 +1,4 @@
-class MoodboardPresenter
+class SingleLegacyMoodboardPresenter
   attr_reader :moodboard
   def initialize(user)
     if user
