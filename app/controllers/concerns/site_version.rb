@@ -68,22 +68,15 @@ module Concerns
     end
 
     def add_site_version_to_mailer
-      ActionMailer::Base.default_url_options.merge!(
-          site_version: self.url_options[:site_version]
-      )
+      ActionMailer::Base.default_url_options.merge!(default_url_options)
     end
 
-    def url_options
-      version = current_site_version
-
-      if version.permalink.present? && version.permalink != 'us'
-        site_version = version.permalink.html_safe
+    def default_url_options
+      if current_site_version.default?
+        { site_version: nil }
       else
-        site_version = nil
+        { site_version: current_site_version.code }
       end
-
-      result = { site_version: site_version }.merge(super)
-      result
     end
 
     private
