@@ -1,7 +1,7 @@
 class TagNewThisWeek < ActiveRecord::Migration
   def up
     if new_this_week_taxon
-      dresses.find_each { |product| product.taxons << new_this_week_taxon if !product.taxons.any?{|t| t.name == 'New This Week'}}
+      dresses.find_each { |product| product.taxons << new_this_week_taxon if product.taxons.none?{|t| t.name == 'New This Week'}}
     end
   end
 
