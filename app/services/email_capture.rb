@@ -102,15 +102,15 @@ class EmailCapture
   end
 
   def retrieve_first_name
-    first_name.presence || ''
+    first_name.presence || nil
   end
 
   def retrieve_landing_page
-    landing_page.presence || ''
+    landing_page.presence || nil
   end
 
   def retrieve_last_name
-    last_name.presence || ''
+    last_name.presence || nil
   end
 
   def set_newsletter
@@ -120,11 +120,11 @@ class EmailCapture
   end
 
   def get_utm
-    utm_params.presence || ''
+    utm_params.presence || nil
   end
 
   def retrieve_site_version
-    site_version.presence || ''
+    site_version.presence || nil
   end
 
 end
