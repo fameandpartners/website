@@ -29,7 +29,7 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
   end
 
   def advance_record_refund(event)
-    @item_return.refund_status = :completed
+    @item_return.refund_status = 'Complete'
     @item_return.refund_method = event.refund_method
     @item_return.refund_amount = Money.parse(event.refund_amount).amount * 100
     @item_return.refund_ref    = event.refund_reference
@@ -84,7 +84,15 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.product_colour       = event.colour
     @item_return.product_customisations = event.product_customisations
     @item_return.qty                  = event.quantity
-    @item_return.received_location    = event.return_office
+    received_location_map = {
+      'UK'                       => 'UK',
+      'USD'                      => 'US',
+      'US'                       => 'US',
+      'Return to sender (china)' => 'CN',
+      'AU'                       => 'AU',
+      'AUS'                      => 'AU',
+    }
+    @item_return.received_location    = received_location_map[event.return_office]
 
   rescue ArgumentError => e
     NewRelic::Agent.notice_error(e)
