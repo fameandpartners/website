@@ -237,7 +237,7 @@ GEM
       launchy
     celluloid (0.15.2)
       timers (~> 1.1.0)
-    childprocess (0.5.7)
+    childprocess (0.5.8)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
     chunky_png (1.3.4)
@@ -842,7 +842,7 @@ DEPENDENCIES
   aws-sdk
   better_errors
   binding_of_caller
-  bootstrap-sass
+  bootstrap-sass (= 3.3.4.1)
   bourbon
   bower-rails (~> 0.10.0)
   bugsnag
@@ -936,4 +936,4 @@ DEPENDENCIES
   zeus
 
 BUNDLED WITH
-   1.10.4
+   1.10.6
