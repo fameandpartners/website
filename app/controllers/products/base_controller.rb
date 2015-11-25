@@ -5,11 +5,14 @@ class Products::BaseController < ApplicationController
   rescue_from Errors::ProductNotFound, with: :search_for_product_not_found
 
   layout 'redesign/application'
+  attr_reader :page, :banner
+  helper_method :page, :banner
 
   def search
     title("Search results for \"#{params[:q]}\"", default_seo_title)
-    @results = search_results
-
+    @filter     = Products::CollectionFilter.read
+    @results    = search_results
+    @collection = @results
     append_gtm_collection(@results)
 
     render :search
