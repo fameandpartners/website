@@ -37,7 +37,7 @@ module Revolution
 
     def description
       if translation && translation.description
-        @description ||= markdown.render(translation.description)
+        @description ||= markdown? ? markdown.render(translation.description) : translation.description
       end
     end
 
