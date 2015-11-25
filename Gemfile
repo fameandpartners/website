@@ -21,6 +21,7 @@ gem 'tire'
 gem 'redis-rails'
 gem 'autoprefixer-rails'
 gem 'bower-rails', '~> 0.10.0'
+gem 'redcarpet', '~> 2.3.0'
 
 # Monitoring & Events
 gem 'newrelic_rpm'
