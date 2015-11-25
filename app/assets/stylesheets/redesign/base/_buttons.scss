@@ -1,5 +1,53 @@
 /* [Buttons]
 -------------------------------------------------------*/
+.btn-default {
+  color: $c-neutral-white;
+  background: $c-neutral-8;
+  border-color: transparent;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: $c-neutral-white;
+    background: $c-neutral-6;
+    border-color: transparent;
+  }
+
+}
+
+.btn-close {
+  position: relative;
+  width: 18px;
+  height: 18px;
+
+  &:before,
+  &:after {
+    position: absolute;
+    left: 7px;
+    content: ' ';
+    height: 19px;
+    width: 1px;
+    background: $c-neutral-black;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+  }
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    opacity: .6;
+  }
+
+}
+
 .cta-square {
   display: table;
   padding: 10px;

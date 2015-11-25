@@ -1,14 +1,84 @@
 / h1  = @resource.name
 / ALMOST LITERAL COPY PASTE / SEARCH REPLACE OF `app/views/users/wishlists_items/index.html.slim`
-.user-account-page-title
+/!
+  .page-content.user.moodboard.index
+    .container.relative
+
+      = render 'users/shared/tabs', active_tab: 'wishlist'
+      = flash_messages
+      = render 'menu'
+
+
+.moodboard-v2.js-tabs-moodboard-content-mobile
   .container
-    .page-title--details
-      h1.user-account-title.no-padding-bottom.text-white = @resource.name
+    .row
+      .col-md-12
+        .menu-wrap
+          h1.title-line-on-sides
+            .inner-wrap = @resource.name
+          .row.hidden-xs.hidden-sm
+            .col-md-3
+              .message
+                h2.heading MY MOODBOARDS
+                p Set up a moodboard for each of your events & share with your friends to get their thoughts.
+            .col-md-9
+              ul
+                li.active
+                  a href='javascript:;' class='tab'
+                    .inner-wrap
+                      span Moodboard one
+                li
+                  a href='javascript:;' class='tab'
+                    .inner-wrap
+                      span Moodboard two
+                li
+                  a href='javascript:;' class='tab'
+                    .inner-wrap
+                      span Moodboard three
+          .row.hidden-md.hidden-lg
+            .col-md-12
+              ul.tab-content-controls.js-tab-content-controls
+                li.active
+                  a href='#mob-tab-main' class='tab' DRESSES
+                li
+                  a href='#mob-tab-aside' class='tab' ABOUT
 
-.page-content.user.moodboard.index
-  .container.relative
+    .row
+      .col-md-8.tab-content.active#mob-tab-main
+        .row
+          = render "#{@resource.purpose}_board"
+      aside.col-md-4.tab-content#mob-tab-aside
 
-    = render 'users/shared/tabs', active_tab: 'wishlist'
-    = flash_messages
-    = render 'menu'
-    = render "#{@resource.purpose}_board"
+        .panel-aside
+          p 
+            span.highlight Wedding Date: 
+            em  &nbsp;03/04/16
+          p 
+            a href='javascript:;' Edit
+            span &nbsp;my settings
+
+        .panel-aside
+          h3.heading THE BRIDE’S BRIEF
+          p Here the bride can give a short overview on her preferences / parametres for the big day.
+
+        .panel-aside
+          h3.heading BRIDESMAIDS
+          ul
+            li PRUDENCE SMITH
+            li PRUDENCE SMITH
+            li PRUDENCE SMITH
+            li PRUDENCE SMITH
+            li PRUDENCE SMITH
+          p 
+            a href='javascript:;' Add
+            span &nbsp;another bridesmaid
+
+        .panel-aside
+          h3.heading SWATCHES
+
+        .panel-aside
+          h3.heading PERSONAL STYLIST
+          p 
+            span Need some help with ideas or finalising your order?&nbsp;
+            a href='javascript:;' Get in contact 
+            span &nbsp;with one of our personal stylists now.

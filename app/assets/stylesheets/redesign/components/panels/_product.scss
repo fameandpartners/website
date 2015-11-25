@@ -1,0 +1,116 @@
+/* [Panel Product]
+-------------------------------------------------------*/
+.panel-product {
+  position: relative;
+  margin-bottom: 30px;
+
+  .media-wrap {
+    padding-bottom: 144%;
+  }
+
+  .details-wrap {
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.938em;
+
+    .product-name {
+      font-weight: 500;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+    }
+
+    .sale-price {
+      color: $c-brand-red;
+    }
+
+  }
+
+  .actions-wrap {
+    margin-left: -5px;
+    margin-right: -5px;
+    @extend %cfix;
+
+    .inner-wrap {
+      float: left;
+      width: 50%;
+      padding: 0 5px;
+    }
+
+  }
+
+  .comments-wrap {
+    min-height: 220px;
+
+    a {
+      text-decoration: underline;
+      font-style: italic;
+      color: inherit;
+    }
+
+    p {
+      margin-bottom: 20px;
+      font-size: 0.875em;
+      font-weight: 400;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+    }
+
+    dl {
+      margin-bottom: 0;
+      font-size: 0.875em;
+      font-weight: 400;
+      @extend %cfix;
+    }
+
+    dt {
+      float: left;
+      width: 25%;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    dd {
+      float: left;
+      width: 75%;
+      max-height: 56px;
+      margin-bottom: 15px;
+      line-height: 1.3;
+    }
+
+    .alt {
+      font-style: italic;
+    }
+
+    .heading {
+      margin: 25px 0;
+      text-decoration: underline;
+      font-size: 0.875em;
+      font-weight: 500;
+    }
+
+    .separator {
+      margin: 0 5px;
+    }
+
+  }
+
+  .btn {
+    display: block;
+    padding: 8px 10px;
+    letter-spacing: normal;
+    font-size: 0.688em;
+  }
+
+  .btn-close {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    text-indent: -9999em;
+  }
+
+}

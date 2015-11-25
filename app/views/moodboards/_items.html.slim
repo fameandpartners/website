@@ -1,27 +1,49 @@
-.row
-  .col-md-12
-    - if @resource.items.active.empty?
-      p Sorry, there are no items in your moodboard
+- if @resource.items.active.empty?
+  p Sorry, there are no items in your moodboard
 
-    - if @resource.items.active.any?
-      .container.relative
+- if @resource.items.active.any?
 
-        - @resource.items.active.each_slice(4).each do |row|
-          .row.relative
-            - row.each do |item|
-              .col-md-3.col-xs-6.col-xxs-12.category--item.product-item data-id=(item.product_id)
-                - url_path = "/dresses/dress-#{item.product.name.parameterize}-#{item.product_id}?color=#{item.color.name}"
-                = link_to url_path do
-                  / TODO - Temporary workaround for missing `product_color_value` on about 700 wishlist items
-                  - if item.product_color_value.present?
-                    = cropped_product_color_variant_image_tag(item.product_color_value)
-                  .details
-                    .name= item.product.name
-                    span.price = item.product.price
-                    / TODO - Handle discounts
-                    / span.price = product_price_with_discount(product.price, product.discount)
+  - @resource.items.active.each_slice(4).each do |row|
+    - row.each do |item|
+      .col-md-4.col-xxs-12.panel-product data-id=(item.product_id)
+        - url_path = "/dresses/dress-#{item.product.name.parameterize}-#{item.product_id}?color=#{item.color.name}"
+        = link_to url_path do
+          .media-wrap.keep-ratio
+            .inner-wrap
+              / TODO - Temporary workaround for missing `product_color_value` on about 700 wishlist items
+              - if item.product_color_value.present?
+                = cropped_product_color_variant_image_tag(item.product_color_value)
+        .details-wrap
+          .product-name = item.product.name
+          div = item.product.price
+          / TODO - Handle discounts
+          / span.price = product_price_with_discount(product.price, product.discount)
 
-                .actions.text-center
-                  = link_to 'Buy this Dress', url_path, class: 'buy btn btn-md btn-black'
-                  /#, data: { variant: product.variant_id, id: product.item_id }
-                  = link_to 'Remove', moodboard_item_path(item.moodboard_id, item.id),  method: :delete
+        .actions-wrap
+          .inner-wrap
+            a href='javascript:;' class='btn btn-default btn-xs' Like (0)
+          .inner-wrap
+            = link_to 'Add to cart', url_path, class: 'btn btn-black btn-xs'
+          /#, data: { variant: product.variant_id, id: product.item_id }
+          = link_to 'Remove from moodboard', moodboard_item_path(item.moodboard_id, item.id), 
+            method: :delete, class: 'btn-close'
+
+        .comments-wrap
+          .heading COMMENTS:
+          /! no comments
+            p.alt Be the first to comment on this dress!
+            p
+              a href='javascript:;' Make
+              span &nbsp;a comment
+
+          dl
+            dt.txt-truncate-1 Jodie
+            dd.txt-truncate-block Here the bride can give a short overview on her preferences parametres for the big.
+            dt.txt-truncate-1 Tan
+            dd.txt-truncate-block Here the bride can give a short overview on her preferences parametres for the big.
+          p
+            a href='javascript:;' Show
+            span &nbsp;more comments
+            span.separator |
+            a href='javascript:;' Make
+            span &nbsp;a comment
