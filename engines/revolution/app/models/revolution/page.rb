@@ -36,7 +36,13 @@ module Revolution
     end
 
     def description
-      (translation && translation.description)
+      if translation && translation.description
+        @description ||= markdown? ? markdown.render(translation.description) : translation.description
+      end
+    end
+
+    def markdown
+      @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
     end
 
     def banner_image
@@ -122,6 +128,11 @@ module Revolution
     def page_is_lookbook?
       self && self.get(:lookbook)
     end
+
+    def markdown?
+      self && self.get(:markdown)
+    end
+
 
     def no_of_products
       (params[:limit] || self.get(:limit) || 21).to_i

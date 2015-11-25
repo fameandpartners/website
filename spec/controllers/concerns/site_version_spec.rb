@@ -38,7 +38,8 @@ describe Concerns::SiteVersion, type: :controller do
         before(:each) { controller.instance_variable_set(:@current_site_version, brazilian_site_version) }
 
         it 'sets the requested version as the current site version' do
-          get :index, { site_version: australian_site_version }
+          request.env['site_version_code'] = australian_site_version.code
+          get :index
 
           current_site_version = controller.instance_variable_get(:@current_site_version)
           expect(current_site_version).to eq(australian_site_version)
@@ -74,7 +75,7 @@ describe Concerns::SiteVersion, type: :controller do
     it 'calls FindUsersSiteVersion service object' do
       expect(FindUsersSiteVersion).to receive(:new).with(user: nil, url_param: 'au', cookie_param: 'us').and_return(finder_double)
 
-      controller.params[:site_version]  = 'au'
+      request.env['site_version_code']  = 'au'
       controller.session[:site_version] = 'us'
 
       expect(controller.current_site_version).to eq(au_site_version)
@@ -83,7 +84,7 @@ describe Concerns::SiteVersion, type: :controller do
 
   describe '#site_version_param' do
     context 'params site version is set' do
-      before(:each) { controller.params[:site_version] = 'pt' }
+      before(:each) { request.env['site_version_code'] = 'pt' }
 
       it 'returns the params site version' do
         expect(controller.site_version_param).to eq('pt')
