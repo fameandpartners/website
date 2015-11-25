@@ -232,25 +232,23 @@ By submitting your entry, you grant Fame the right and permission (except where 
 
 * * *
 
-## BUY ONE, GET 50% OFF YOUR SECOND DRESS TERMS AND CONDITIONS
+## MOST WANTED - 20% off sale
 
-1) If a customer buys two full priced dresses, the price of the cheaper dress will be discounted to 50% of its full price.
+1) Offer not valid on customisations, custom colours or express making fees. - Bring on the night collection styles are excluded from offer.
 
-2) If both dresses are the same price, only the price of one of the dresses will be discounted.
+2) The discount will only apply once the code PREGAME20 has been entered by the customer.
 
-3) The discount will only apply once the correct CODE has been entered by the customer.
+3) Offer valid on recommended colours only.
 
-4) The promotion only applies to customer purchases within a single credit card transaction.
+4) Offer valid 23rd - 26th November 2015 11.59pm AEDT only.
 
-5) The dresses included in this promotion are subject to change without notice.
+5) Orders to AU, US & UK incur a $11.70 USD dispatch fee. All other countries incur a $30 USD shipping fee. Shipping & handling timing approximately 7-10 days on all orders.
 
-6) This promotion is not in conjunction with any other Fame and Partners promotion
+6) A $14.95 restocking fee will be applied for each dress returned.
 
 7) Fame and Partners may vary, or cancel this promotion at any time without notice.
 
 8) This promotion is subject to the general terms and conditions of the website.
-
-9) A 14.95 restocking fee will be applied for each dress returned.
 
 [1]: /contact/new
 
