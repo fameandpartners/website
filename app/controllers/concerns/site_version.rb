@@ -7,6 +7,7 @@ module Concerns
 
       before_filter :show_locale_warning
       before_filter :guarantee_session_site_version
+      append_before_filter :add_site_version_to_mailer
       prepend_before_filter :enforce_param_site_version, unless: [:on_checkout_path, :request_not_get_or_ajax]
 
       helper_method :current_site_version
@@ -64,6 +65,15 @@ module Concerns
       if (order = session_order)
         order.use_prices_from(new_site_version)
       end
+    end
+
+    def add_site_version_to_mailer
+      ActionMailer::Base.default_url_options.merge!(default_url_options)
+    end
+
+    def default_url_options
+      detector = configatron.site_version_detector.new
+      detector.default_url_options(current_site_version)
     end
 
     private

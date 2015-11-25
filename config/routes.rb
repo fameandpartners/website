@@ -9,12 +9,13 @@ FameAndPartners::Application.routes.draw do
   end
 
   ########################
-  # US Redireciton to root
+  # US Redirection to root
   ########################
   get '/us/*whatevs' => redirect(path: "/%{whatevs}")
   get '/us' => redirect("/")
 
 
+  # TODO: After .com.au migration, this scope can simply go away.
   scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
     ##########
     # Sitemaps

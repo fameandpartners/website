@@ -20,7 +20,7 @@ module Middleware
       private
 
       def detector
-        Detectors::Path.new
+        configatron.site_version_detector.new
       end
     end
   end

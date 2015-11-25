@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
 
   append_before_filter :store_marketing_params
   append_before_filter :check_marketing_traffic
-  append_before_filter :add_site_version_to_mailer
   append_before_filter :count_competition_participants, if: proc { |_| params[:cpt].present? }
   append_before_filter :handle_marketing_campaigns
 
@@ -108,26 +107,6 @@ class ApplicationController < ActionController::Base
     })
   rescue Exception => _
     true
-  end
-
-  def add_site_version_to_mailer
-    ActionMailer::Base.default_url_options.merge!(
-      site_version: self.url_options[:site_version]
-    )
-  end
-
-  def url_options
-    version = current_site_version
-
-    if version.permalink.present? && version.permalink != 'us'
-      site_version = version.permalink.html_safe
-    else
-      site_version = nil
-    end
-
-    result = { site_version: site_version }.merge(super)
-    result.delete(:script_name)
-    result
   end
 
   private

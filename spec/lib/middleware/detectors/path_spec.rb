@@ -33,6 +33,28 @@ module Middleware
             end
           end
         end
+
+        describe '#default_url_options' do
+          let(:detector) { described_class.new }
+
+          context 'given a default site version' do
+            let(:site_version) { build_stubbed(:site_version, :default) }
+
+            it 'returns a hash with a nil site_version' do
+              result = detector.default_url_options(site_version)
+              expect(result).to eq({ site_version: nil })
+            end
+          end
+
+          context 'given a site version' do
+            let(:site_version) { build_stubbed(:site_version, :au) }
+
+            it 'returns a hash with the site version code' do
+              result = detector.default_url_options(site_version)
+              expect(result).to eq({ site_version: 'au' })
+            end
+          end
+        end
       end
     end
   end
