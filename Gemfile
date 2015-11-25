@@ -111,7 +111,7 @@ group :assets do
   gem 'jquery-ui-rails'
   gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
-  gem 'bootstrap-sass', '3.3.5.1'
+  gem 'bootstrap-sass', '3.3.4.1'
 end
 
 group :development, :test do
