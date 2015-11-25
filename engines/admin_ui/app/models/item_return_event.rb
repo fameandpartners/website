@@ -5,6 +5,8 @@ class ItemReturnEvent < ActiveRecord::Base
   # and use specific ones just above each event.
 
   attr_accessible :order_number,
+                  :item_price,
+                  :item_price_adjusted,
                   :line_item_id,
                   :qty,
                   :requested_action,
@@ -39,6 +41,8 @@ class ItemReturnEvent < ActiveRecord::Base
   event_type :return_requested do
     attributes :order_number,
           :line_item_id,
+          :item_price,
+          :item_price_adjusted,
           :qty,
           :requested_action,
           :reason_category,
@@ -165,6 +169,10 @@ class ItemReturnEvent < ActiveRecord::Base
 
   event_type :legacy_data_import do
     attributes *LEGACY_DATA_IMPORT_ATTRIBUTES
+  end
+
+  event_type :backfill_item_price do
+    attributes :item_price, :item_price_adjusted
   end
 end
 
