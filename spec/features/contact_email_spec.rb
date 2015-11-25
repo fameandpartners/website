@@ -4,11 +4,7 @@ describe 'sending a contact email', :type => :feature do
   describe 'smoke test' do
     it do
       contact = build :contact
-      allow(EmailCapture.new({service: :mailchimp}, email: contact.email,
-                             current_sign_in_ip:           "101.0.79.50",
-                             landing_page:                 "/dresses/formal",
-                             site_version:                 'US',
-                             form_name:                    'contact')).to receive(:capture) { true }
+
       visit '/'
       click_link 'Contact Us'
       within('#new_contact') do
