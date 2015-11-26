@@ -65,7 +65,7 @@ class Spree::Sale < ActiveRecord::Base
     "//#{configatron.asset_host}/sale/#{name.downcase}.jpg"
   end
 
-  def banner_image_prefix
+  def banner_images
     # TODO - HACK TTL 2015.11.30 - Remove this junk.
     sydney_now         = Time.now.in_time_zone("Sydney")
 
@@ -75,17 +75,24 @@ class Spree::Sale < ActiveRecord::Base
     cyber_monday_start = Time.parse("2015-11-30 09:00:00 +10:00")
     cyber_monday_end   = Time.parse("2015-11-30 00:00:00 -04:00")
 
-    banner_image_prefix = 'tile-sale'
+    banner_images = {
+      full:  'tile-sale-full.jpg',
+      small: 'tile-sale-sml.jpg'
+    }
 
     if (black_friday_start .. black_friday_end).cover?(sydney_now)
-      banner_image_prefix = 'tile-sale-black-friday'
+      banner_images = {
+        full:  'black-friday-tile-sale-full.gif',
+        small: 'black-friday-tile-sale-sml.gif'}
     end
 
     if (cyber_monday_start .. cyber_monday_end).cover?(sydney_now)
-      banner_image_prefix = 'tile-sale-cyber-monday'
+      banner_images = {
+        full:  'cyber-monday-tile-sale-full.gif',
+        small: 'cyber-monday-tile-sale-sml.gif'}
     end
 
-    banner_image_prefix
+    banner_images
   end
 
   def explanation
