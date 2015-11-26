@@ -1,8 +1,33 @@
-- if enhanced_moodboards_enabled?
-  ul
-    - collection.each do |mb|
-      li = link_to(mb.name, moodboard_path(mb))
-    li = link_to('Create New Moodboard', new_moodboard_path)
-
-  - if @resource.persisted? && ! @resource.default?
-    = link_to("Change #{@resource.name}", edit_moodboard_path(@resource))
+.menu-wrap
+  h1.title-line-on-sides
+    .inner-wrap = @resource.name
+  .row.hidden-xs.hidden-sm
+    .col-md-3
+      .message
+        h2.heading MY MOODBOARDS
+        p Set up a moodboard for each of your events & share with your friends to get their thoughts.
+    .col-md-9
+      ul
+        - collection.each do |mb|
+          - if moodboard_path(mb) === moodboard_path(@resource)
+            li.active
+              .tab
+                .inner-wrap
+                  span = mb.name
+          - else
+            li 
+              = link_to moodboard_path(mb), class:'tab'
+                .inner-wrap
+                  span = mb.name
+        / temporarily disabling more than 2 moodboard
+        - if enhanced_moodboards_enabled? && collection.count < 2
+          li 
+            = link_to '+', new_moodboard_path, class:'btn-add'
+            .hide-visually Create New Moodboard
+  .row.hidden-md.hidden-lg
+    .col-md-12
+      ul.tab-content-controls.js-tab-content-controls
+        li.active
+          a href='#mob-tab-main' class='tab' DRESSES
+        li
+          a href='#mob-tab-aside' class='tab' ABOUT
