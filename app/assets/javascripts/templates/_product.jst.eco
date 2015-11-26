@@ -1,5 +1,6 @@
 <% if @col==3 then @col="col-md-4" else @col="col-md-3" %>
-<div data-color-id="<%= (@product.color || {}).id %>" data-id="<%= @product.id %>" class="<%= @col %> col-xs-6 col-xxs-6 category--item">
+<% @colorId = (@product.color || {}).id %>
+<div data-color-id="<%= @colorId %>" data-id="<%= @product.id %>" class="<%= @col %> col-xs-6 col-xxs-6 category--item">
   <a href="<%= @product.collection_path %>">
     <img class="img-product img-responsive" src='<%= @product.images[0] %>' alt='<%= @product.name %>' data-hover='<%= @product.images[1] || '' %>' data-original='<%= @product.images[0] %>' ></>
   </a>
@@ -17,9 +18,9 @@
         <%= @product.price %>
       <% end %>
     </span>
-    <% if !window.app.user_moodboard.contains({ product_id: @product.id, color_id: (@product.color || {}).id  }): %>
-      <span class="moodboard"><sup>+</sup>moodboard</span>
-    <% end %>
+    <% @reactElementHookId = "wish_p" + @product.id + "_c" + @colorId %>
+    <div id="<%= @reactElementHookId %>"></div>
+    <% ajaxHookProductWishlistWidget(@reactElementHookId, {product_id: @product.id, color_id: @colorId }, 50) %>
   </div>
   <% if @product.fast_making: %>
     <img src="/assets/express_making.png" class="express-delivery" alt="Express Making">
