@@ -1,0 +1,55 @@
+/* [Lists]
+-------------------------------------------------------*/
+.list-decorated-square {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+    display: block;
+    margin-top: 10px;
+    text-align: left;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+  }
+
+  em {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border: solid $c-neutral-black 1px;
+
+    span {
+      position: relative;
+      display: block;
+      line-height: 30px;
+      text-align: center;
+      font-style: normal;
+    }
+
+  }
+
+  .copy-wrap {
+    display: table;
+    height: 30px;
+    padding-left: 45px;
+
+    span {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+  }
+
+  .highlight {
+    font-weight: 600;
+  }
+
+}

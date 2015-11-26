@@ -16,6 +16,22 @@
 
 }
 
+.btn-lowlight {
+  color: $c-neutral-black;
+  background: $c-neutral-white;
+  border-color: $c-neutral-black;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: $c-neutral-black;
+    background: $c-neutral-2;
+    border-color: $c-neutral-black;
+  }
+
+}
+
 .btn-close {
   position: relative;
   width: 18px;
