@@ -45,7 +45,8 @@ namespace :item_return do
               item_price_adjusted: splitter.item_price_adjusted_in_cents
             )
           rescue StandardError => e
-            binding.pry
+            $stderr.puts item_return.inspect
+            $stderr.puts e.message
           end
         end
         progressbar.finish
