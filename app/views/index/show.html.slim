@@ -1,7 +1,6 @@
 ruby:
   link_to_dresses = build_taxon_path('dresses')
 
-
 .page-content.index
   // TODO: create helper for multisource images
   = react_component('HeroCarousel', skin: 'skin-light',
@@ -13,9 +12,9 @@ ruby:
     section.banner-sale
       .container
         = link_to dresses_path, class: 'media-wrap'
-          img src='http://assets.fameandpartners.com/pages/home/sale/tile-sale-full.jpg' srcset='
-            http://assets.fameandpartners.com/pages/home/sale/tile-sale-sml.jpg 768w,
-            http://assets.fameandpartners.com/pages/home/sale/tile-sale-full.jpg 1024w' alt='Shop the Sale'
+          img src="http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_images[:full]}" alt='Shop the Sale' srcset="
+            http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_images[:small]} 768w,
+            http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_images[:full]} 1024w"
 
 
   section.carousel-strap.instagram
