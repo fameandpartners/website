@@ -70,11 +70,11 @@ class Spree::Sale < ActiveRecord::Base
     # S3 - http://mkt-fameandpartners.s3.amazonaws.com/pages/home/sale
     sydney_now         = Time.now.in_time_zone("Sydney")
 
-    black_friday_start = Time.parse("2015-11-27 09:00:00 +10:00")
-    black_friday_end   = Time.parse("2015-11-27 00:00:00 -04:00")
+    black_friday_start = Time.parse("2015-11-27 00:00:01 +10:00")
+    black_friday_end   = Time.parse("2015-11-29 16:00:00 +10:00")
 
     cyber_monday_start = Time.parse("2015-11-30 09:00:00 +10:00")
-    cyber_monday_end   = Time.parse("2015-11-30 00:00:00 -04:00")
+    cyber_monday_end   = Time.parse("2015-12-01 19:00:00 +10:00")
 
     banner_images = {
       full:  'tile-sale-full.jpg',
