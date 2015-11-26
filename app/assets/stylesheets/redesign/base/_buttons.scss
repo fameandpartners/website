@@ -1,5 +1,21 @@
 /* [Buttons]
 -------------------------------------------------------*/
+.btn-default {
+  color: $c-neutral-white;
+  background: $c-neutral-8;
+  border-color: transparent;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: $c-neutral-white;
+    background: $c-neutral-6;
+    border-color: transparent;
+  }
+
+}
+
 .btn-lowlight {
   color: $c-neutral-black;
   background: $c-neutral-white;
@@ -12,6 +28,58 @@
     color: $c-neutral-black;
     background: $c-neutral-2;
     border-color: $c-neutral-black;
+  }
+
+}
+
+.btn-close {
+  position: relative;
+  width: 18px;
+  height: 18px;
+
+  &:before,
+  &:after {
+    position: absolute;
+    left: 7px;
+    content: ' ';
+    height: 19px;
+    width: 1px;
+    background: $c-neutral-black;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+  }
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    opacity: .6;
+  }
+
+}
+
+.btn-add {
+  display: block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 1.688em;
+  font-weight: 300;
+  color: $c-neutral-black;
+  background: $c-neutral-white;
+  border: solid $c-neutral-black 1px;
+
+  &:hover,
+  &:focus {
+    color: $c-neutral-black;
+    background: $c-neutral-2;
   }
 
 }
