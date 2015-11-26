@@ -71,9 +71,9 @@ class Spree::Sale < ActiveRecord::Base
     sydney_now         = Time.now.in_time_zone("Sydney")
 
     black_friday_start = Time.parse("2015-11-27 00:00:01 +10:00")
-    black_friday_end   = Time.parse("2015-11-29 16:00:00 +10:00")
+    black_friday_end   = Time.parse("2015-11-30 14:30:00 +10:00")
 
-    cyber_monday_start = Time.parse("2015-11-30 09:00:00 +10:00")
+    cyber_monday_start = Time.parse("2015-11-30 15:00:00 +10:00")
     cyber_monday_end   = Time.parse("2015-12-01 19:00:00 +10:00")
 
     banner_images = {
