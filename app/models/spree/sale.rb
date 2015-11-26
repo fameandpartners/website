@@ -89,8 +89,8 @@ class Spree::Sale < ActiveRecord::Base
 
     if (cyber_monday_start .. cyber_monday_end).cover?(sydney_now)
       banner_images = {
-        full:  'cyber-monday-tile-sale-full.gif',
-        small: 'cyber-monday-tile-sale-sml.gif'}
+        full:  'cyber-monday-tile-sale-full.jpg',
+        small: 'cyber-monday-tile-sale-sml.jpg'}
     end
 
     banner_images
