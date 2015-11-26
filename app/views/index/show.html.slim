@@ -1,24 +1,6 @@
 ruby:
   link_to_dresses = build_taxon_path('dresses')
 
-  sydney_now = Time.now.in_time_zone("Sydney")
-
-  black_friday_start = Time.parse("2015-11-27 09:00:00 +10:00")
-  black_friday_end =Time.parse("2015-11-27 00:00:00 -04:00")
-
-  cyber_monday_start = Time.parse("2015-11-30 09:00:00 +10:00")
-  cyber_monday_end = Time.parse("2015-11-30 00:00:00 -04:00")
-
-  sale_tile = 'tile-sale'
-
-  if sydney_now >= black_friday_start && sydney_now <= black_friday_end
-    sale_tile = 'tile-sale-black-friday'
-  end
-
-  if sydney_now >= cyber_monday_start && sydney_now <= cyber_monday_end
-    sale_tile = 'tile-sale-cyber-monday'
-  end
-
 .page-content.index
   // TODO: create helper for multisource images
   = react_component('HeroCarousel', skin: 'skin-light',
@@ -26,13 +8,13 @@ ruby:
              {link: sarah_ellen_landing_page_path, src: '/assets/home-page-tiles/hero-6', alt: 'The exclusive Miss Ellen - Shop all formal dresses'},
              {link: make_a_statement_collection_path, src: '/assets/home-page-tiles/hero-7', alt: 'Bambi - Shop the Collection'}])
 
-  - if true || sale_active?
+  - if sale_active?
     section.banner-sale
       .container
         = link_to dresses_path, class: 'media-wrap'
-          img src="http://assets.fameandpartners.com/pages/home/sale/#{sale_tile}-full.jpg" srcset="
-            http://assets.fameandpartners.com/pages/home/sale/#{sale_tile}-sml.jpg 768w,
-            http://assets.fameandpartners.com/pages/home/sale/#{sale_tile}-full.jpg 1024w" alt='Shop the Sale'
+          img src="http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_image_prefix}-full.jpg" srcset="
+            http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_image_prefix}-sml.jpg 768w,
+            http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_image_prefix}-full.jpg 1024w" alt='Shop the Sale'
 
 
   section.carousel-strap.instagram
