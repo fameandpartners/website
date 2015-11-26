@@ -56,6 +56,9 @@
         ]);
 
       <% end %>
+
+      <%# More details at https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingEcommerce#localcurrencies %>
+      _gaq.push(['_set', 'currencyCode', '<%= @spree_order.currency %>']);
       _gaq.push(['_trackTrans']);
 
     <% end %>

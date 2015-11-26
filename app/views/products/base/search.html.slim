@@ -4,12 +4,15 @@ ruby:
       container: '.category .products-collection',
       buttons:   'span.moodboard'
     });"
+  sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase)) if @collection.present?
 
 - content_for :head do
   meta name="robots" content="noindex, follow"
 
 = content_for :inline_javascript do
   = raw init_product_collection_moodboard_links
+
+= render :partial => 'products/collections/javascript' if @collection.present?
 
 .page-title.default style="background-color:#EDDCEF;"
   .container
@@ -21,7 +24,9 @@ ruby:
         p We couldn't find the stuff you were looking for.
 
 .page-content.products-collections.category
-  .container.relative.products-collection
+  - if !@results.none?
+    = render :partial => 'products/collections/filters_sort'
+  .container-fluid
     - unless search_performed?
       .row.relative
         .col.col-md-12
@@ -29,12 +34,18 @@ ruby:
 
     - if @results.none?
       .row.relative
-        .col.col-md-12
+        .col.col-md-12.text-center
           p
           | Don't sweat it. #{link_to('Browse our dresses', dresses_path)}
 
     - else
-      - @results.products.each_slice(4) do |products|
-        .row.relative
-          = render partial: 'products/collections/product', collection: products, as: :product
-          .clearfix.visible-sm-block.visible-xs-block
+      .row-fluid
+        .col-md-3.filter-col
+          div.inner
+            = render :partial => 'products/collections/filters_color_shape_style'
+
+        .col-md-9
+          .container-fluid.relative.products-collection
+            = render partial: 'products/collections/products_with_content', locals: {col: 3}
+
+            = render partial: 'products/collections/pagination'

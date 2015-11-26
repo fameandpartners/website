@@ -1,0 +1,15 @@
+
+h1 Wedding
+
+ul.list-unstyled
+  = form_for(@resource) do |f|
+    li = f.label :name, "Who's getting Married?"
+    li = f.text_field :name
+    li = f.label :event_date, "Wedding Date"
+    li = f.text_field :event_date, :class => 'datepicker'
+    li
+      = f.label :description, "Bride's Brief"
+      p Write a small outline about what you would like, colour, styles, price etc.
+    li = f.text_area :description
+
+    li = f.button

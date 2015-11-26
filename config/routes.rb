@@ -9,12 +9,13 @@ FameAndPartners::Application.routes.draw do
   end
 
   ########################
-  # US Redireciton to root
+  # US Redirection to root
   ########################
   get '/us/*whatevs' => redirect(path: "/%{whatevs}")
   get '/us' => redirect("/")
 
 
+  # TODO: After .com.au migration, this scope can simply go away.
   scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
     ##########
     # Sitemaps
@@ -214,7 +215,9 @@ FameAndPartners::Application.routes.draw do
     get '/about'   => 'statics#about', :as => :about_us
     get '/why-us'  => 'statics#why_us', :as => :why_us
     get '/team', to: redirect("http://www.fameandpartners.com/about")
-    get '/terms'   => 'statics#ecom_terms'
+    scope :module => 'revolution' do
+      get '/terms'   => 'pages#show'
+    end
     get '/privacy' => 'statics#ecom_privacy'
     get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
@@ -312,7 +315,7 @@ FameAndPartners::Application.routes.draw do
     resources :site_versions, only: [:show], as: :site_version
   end
 
-  resources :moodboards, only: [:show, :index] do
+  resources :moodboards, except: [:destroy] do
     resources :items, controller: 'moodboard_items', only: [:show, :destroy]
   end
 

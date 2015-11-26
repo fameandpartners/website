@@ -38,7 +38,8 @@ describe Concerns::SiteVersion, type: :controller do
         before(:each) { controller.instance_variable_set(:@current_site_version, brazilian_site_version) }
 
         it 'sets the requested version as the current site version' do
-          get :index, { site_version: australian_site_version }
+          request.env['site_version_code'] = australian_site_version.code
+          get :index
 
           current_site_version = controller.instance_variable_get(:@current_site_version)
           expect(current_site_version).to eq(australian_site_version)
@@ -65,6 +66,19 @@ describe Concerns::SiteVersion, type: :controller do
         end
       end
     end
+
+    describe '#add_site_version_to_mailer' do
+      let(:default_url_options) { { default: :hash } }
+
+      before(:each) do
+        allow(controller).to receive(:default_url_options).and_return(default_url_options)
+      end
+
+      it 'merges ActionMailer::Base.default_url_options with controller defaults' do
+        expect(ActionMailer::Base).to receive_message_chain(:default_url_options, :merge!).with(default_url_options)
+        get :index
+      end
+    end
   end
 
   describe '#current_site_version' do
@@ -74,7 +88,7 @@ describe Concerns::SiteVersion, type: :controller do
     it 'calls FindUsersSiteVersion service object' do
       expect(FindUsersSiteVersion).to receive(:new).with(user: nil, url_param: 'au', cookie_param: 'us').and_return(finder_double)
 
-      controller.params[:site_version]  = 'au'
+      request.env['site_version_code']  = 'au'
       controller.session[:site_version] = 'us'
 
       expect(controller.current_site_version).to eq(au_site_version)
@@ -83,7 +97,7 @@ describe Concerns::SiteVersion, type: :controller do
 
   describe '#site_version_param' do
     context 'params site version is set' do
-      before(:each) { controller.params[:site_version] = 'pt' }
+      before(:each) { request.env['site_version_code'] = 'pt' }
 
       it 'returns the params site version' do
         expect(controller.site_version_param).to eq('pt')
@@ -122,6 +136,23 @@ describe Concerns::SiteVersion, type: :controller do
       it { expect(controller.instance_variable_get(:@current_site_version)).to eq au_site_version }
       it { expect(session[:site_version]).to eq 'au' }
       it { expect(user.site_version_id).to eq 101 }
+    end
+  end
+
+  describe '#default_url_options' do
+    context 'given a site version detector' do
+      let(:site_version_detector) { double('Site Version Detector') }
+      let(:site_version) { double('Site Version') }
+
+      before(:each) do
+        allow(controller).to receive_message_chain(:configatron, :site_version_detector, :new).and_return(site_version_detector)
+        allow(controller).to receive(:current_site_version).and_return(site_version)
+      end
+
+      it 'delegates default_url_options to configured site version detector' do
+        expect(site_version_detector).to receive(:default_url_options).with(site_version)
+        controller.default_url_options
+      end
     end
   end
 end

@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.1.6'
+
 gem 'rails', '~> 3.2.22'
 gem 'pg'
 gem 'slim'
@@ -21,6 +23,7 @@ gem 'tire'
 gem 'redis-rails'
 gem 'autoprefixer-rails'
 gem 'bower-rails', '~> 0.10.0'
+gem 'redcarpet', '~> 2.3.0'
 
 # Monitoring & Events
 gem 'newrelic_rpm'

@@ -1,9 +1,5 @@
 module Acceptance
   module MoodboardSteps
-    step 'the moodboard feature is enabled' do
-     Features.activate(:moodboard)
-    end
-
     step 'I add ":dress_name" to my moodboard' do |dress_name|
       within('.details') do
         expect(page).to have_content(dress_name.upcase)
@@ -24,7 +20,7 @@ module Acceptance
 
     step 'I should have ":dress_name" on my moodboard' do |dress_name|
       send 'I view my moodboard'
-        expect(page).to have_content(dress_name.upcase)
+      expect(page).to have_content(dress_name.upcase)
     end
   end
 end
