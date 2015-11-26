@@ -1,6 +1,7 @@
 class Moodboard < ActiveRecord::Base
   belongs_to :user, class_name: 'Spree::User', inverse_of: :moodboards
   has_many :items, class_name: 'MoodboardItem', inverse_of: :moodboard
+  has_many :collaborators, class_name: 'MoodboardCollaborator', inverse_of: :moodboard
 
   attr_accessible :description, :event_date, :name, :purpose
 
