@@ -119,6 +119,9 @@ FameAndPartners::Application.routes.draw do
     get '/amfam-dresses' => redirect('/wicked-game-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
 
+    # Landing pages
+    get '/famingtonway' => 'products/collections#show', :permalink => 'bohemian-summer', :as => :bohemian_summer_landing_page
+
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
