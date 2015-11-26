@@ -9,13 +9,7 @@
   span.price = product_price_with_discount(product.price, product.discount)
 
   - if Features.active?(:moodboard)
-    - if current_user_moodboard.contains(product_id: product.id, color_id: product.color.try(:id))
-      = link_to 'Added to Moodboard', wishlist_path
-    - else
-      span.moodboard
-        sup +
-        | moodboard
-  /.message-box 24 hours only
+    = react_component('AddToMoodboard', { moodboard: user_moodboards.default, product_id: product.id, color_id: product.color.try(:id) })
 - if product.fast_making
  = image_tag src='express_making.png', class: 'express-delivery', alt: "Express Making"
 - if product.fast_delivery

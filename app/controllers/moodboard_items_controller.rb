@@ -1,6 +1,20 @@
 class MoodboardItemsController < ApplicationController
   before_filter :authenticate_spree_user!
 
+  def create
+    moodboard_populator = UserMoodboard::Populator.new(
+      user:       current_spree_user,
+      product_id: params[:product_id],
+      variant_id: params[:variant_id],
+      color_id:   params[:color_id],
+      moodboard:  moodboard
+    )
+
+    moodboard_populator.populate
+
+    render json: user_moodboards
+  end
+
   def show
   end
 

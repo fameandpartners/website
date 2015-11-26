@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   include Concerns::SiteVersion
   include Concerns::UserCampaignable
   include Concerns::AutomaticDiscount
+  include Concerns::Moodboards
 
   # Google Tag Manager
   include Marketing::Gtm::Controller::Container
@@ -30,7 +31,6 @@ class ApplicationController < ActionController::Base
 
 
   helper_method :analytics_label,
-                :current_user_moodboard,
                 :current_wished_product_ids,
                 :default_meta_description,
                 :default_seo_title,
@@ -256,10 +256,6 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     session[:locale] = I18n.locale = current_site_version.try(:locale) || default_locale
-  end
-
-  def current_user_moodboard
-    @user_moodboard ||= MoodboardPresenter.new(current_spree_user)
   end
 
   # todo: remove this method from global scope

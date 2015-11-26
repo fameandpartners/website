@@ -313,7 +313,7 @@ FameAndPartners::Application.routes.draw do
   end
 
   resources :moodboards, except: [:destroy] do
-    resources :items, controller: 'moodboard_items', only: [:show, :destroy]
+    resources :items, controller: 'moodboard_items', only: [:create, :show, :destroy]
   end
 
   get 'moodboard', to: 'moodboards#index'
