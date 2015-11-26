@@ -165,6 +165,15 @@
     }
 
   }
+  
+  .align-left{
+    left: 0 !important;
+  }
+  
+  .align-right{
+    left: 50% !important;
+  }
+
   // END - section-together
 
   .panel-more-dresses {
@@ -281,6 +290,10 @@
 
         .heading {
           font-size: 3.75em;
+        }
+
+        .smaller{
+          font-size: 3.05em;
         }
 
       }

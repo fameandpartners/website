@@ -1,0 +1,51 @@
+= render :partial => '/pages/robots'
+
+= render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
+
+.landing-famingtonway
+
+  .hero-wrap
+    picture.media-wrap
+      source media='(max-width: 768px)' srcset='#{image_path("landingpages/guest/hero-full.jpg")}'
+      source media='(min-width: 769px)' srcset='#{image_path("landingpages/guest/hero-full.jpg")}'
+      img src='#{image_path("landingpages/guest/hero-full.jpg")}' srcset='
+        #{image_path("landingpages/guest/hero-full.jpg")} 768w,
+        #{image_path("landingpages/guest/hero-full.jpg")} 1024w' alt='Bridesmaids ARE LIFE’S TREASURES. 
+        THERE TO GUIDE & SUPPORT. SHARE LAUGHTER & TEARS. REMIND US THAT WE ARE NEVER ALONE. Be inspired & shop 
+        together with your bridesmaids.'
+
+  .container
+    .row
+      .col-md-12
+        h2.heading-secondary Enjoy your look long after the vows are spoken with a versatile, bespoke style.
+        section.carousel-strap
+          .outer-wrap
+            // TODO: update path
+            = react_component('ProductsCarousel', path: '/dresses/?order=price_low&limit=16')
+
+      .col-md-12.section-register
+        .outer-wrap.mobile-change-order
+          .media-wrap.position-2
+            = image_tag 'landingpages/guest/pic1.jpg'
+          .media-wrap.position-1
+            = image_tag 'landingpages/guest/pic2.jpg'
+
+      .col-md-12
+        h2.heading-secondary "Love does not consist in gazing at each other, but in looking outward together in the same direction." - Antoine de Saint Exupery -
+
+      .col-md-12.section-together
+        .picture.media-wrap.align-left  
+          img src='#{image_path("landingpages/guest/stone.jpg")}'
+        
+        .content-wrap-outer.align-right
+          .content-wrap-inner
+            .content-wrap
+              h2.heading.smaller LOVE isn't something you find, it's something that finds you <br><em>(Same goes for the dress!)</em>
+              // TODO: update link
+              a href='javascript:;' class='btn btn-lowlight' Shop dresses
+                         
+      .col-md-12
+        h2.heading-secondary With love x
+
+    .row
+      = render partial: 'shared/redesign/more_dresses_v2'
