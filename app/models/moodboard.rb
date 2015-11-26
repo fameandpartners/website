@@ -12,7 +12,16 @@ class Moodboard < ActiveRecord::Base
   # Intended for use as a chained scope off of a Spree::User object.
   # e.g. user.moodboards.default_or_create
   def self.default_or_create
-    where(name: 'Wishlist', purpose: 'default').first_or_create
+    where(default_wishlist_attrs).first_or_create
+  end
+
+  def self.default_wishlist_attrs
+    {name: 'Wishlist', purpose: 'default'}
+  end
+
+  def default?
+    defaults = self.class.default_wishlist_attrs
+    name == defaults[:name] && purpose == defaults[:purpose]
   end
 
   def add_item(product:, color:, user:, variant: nil)

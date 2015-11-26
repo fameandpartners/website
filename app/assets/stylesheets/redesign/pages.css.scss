@@ -1,0 +1,17 @@
+.pages  {
+  table {
+    td, th {
+      padding:5px 10px;
+      border-right: 1px dashed #ccc;
+    }
+
+    td {
+      border-top: 1px solid #ddd;
+    }
+
+    td:last-child, th:last-child {
+      border-right: none;
+      border-bottom: 1px solid #ddd;
+    }
+  }
+}

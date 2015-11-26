@@ -9,11 +9,25 @@ module Products
 
     include ActionView::Helpers::TextHelper # for truncate
 
-    def initialize(available_on)
+    def initialize(available_on, mark_new_this_week = false)
       @@titles_row_numbers = [8, 10, 11, 12]
       @@first_content_row_number = 13
       @available_on = available_on
       @keep_taxons = true
+      @mark_new_this_week = mark_new_this_week
+      show_warning
+    end
+
+    def show_warning
+      if @mark_new_this_week
+        p 'NEW PRODUCTS WILL HAVE NEW_THIS_WEEK TAXON'
+      else
+        p 'NEW PRODUCTS WILL NOT HAVE NEW_THIS_WEEK TAXON'
+      end
+    end
+
+    def new_this_week_taxon_id
+      Spree::Taxon.where(name: 'New This Week').first.try(:id)
     end
 
     def parse_file(file_path)
@@ -143,6 +157,8 @@ module Products
 
           processed[:taxon_ids] << taxon.id
         end
+
+        processed[:taxon_ids] << new_this_week_taxon_id if @mark_new_this_week && new_this_week_taxon_id.present?
 
         color_option = Spree::OptionType.color
 

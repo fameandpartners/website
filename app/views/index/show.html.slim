@@ -9,6 +9,15 @@ ruby:
              {link: sarah_ellen_landing_page_path, src: '/assets/home-page-tiles/hero-6', alt: 'The exclusive Miss Ellen - Shop all formal dresses'},
              {link: make_a_statement_collection_path, src: '/assets/home-page-tiles/hero-7', alt: 'Bambi - Shop the Collection'}])
 
+  - if sale_active?
+    section.banner-sale
+      .container
+        = link_to dresses_path, class: 'media-wrap'
+          img src='http://assets.fameandpartners.com/pages/home/sale/tile-sale-full.jpg' srcset='
+            http://assets.fameandpartners.com/pages/home/sale/tile-sale-sml.jpg 768w,
+            http://assets.fameandpartners.com/pages/home/sale/tile-sale-full.jpg 1024w' alt='Shop the Sale'
+
+
   section.carousel-strap.instagram
     .container
       .outer-wrap

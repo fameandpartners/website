@@ -14,6 +14,10 @@ module Acceptance
     step 'Data is setup correctly' do
       ClearCacheWorker.new.perform(silent: true)
     end
+
+    step 'the ":feature_name" feature is enabled' do |feature|
+      Features.activate(feature.to_s.to_sym)
+    end
   end
 end
 

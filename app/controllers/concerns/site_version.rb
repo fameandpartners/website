@@ -7,6 +7,7 @@ module Concerns
 
       before_filter :show_locale_warning
       before_filter :guarantee_session_site_version
+      append_before_filter :add_site_version_to_mailer
       prepend_before_filter :enforce_param_site_version, unless: [:on_checkout_path, :request_not_get_or_ajax]
 
       helper_method :current_site_version
@@ -36,14 +37,14 @@ module Concerns
       @current_site_version ||= begin
         ::FindUsersSiteVersion.new(
             user:         current_spree_user,
-            url_param:    params[:site_version],
+            url_param:    request.env['site_version_code'],
             cookie_param: session[:site_version]
         ).get
       end
     end
 
     def site_version_param
-      params[:site_version] || ::SiteVersion.default.code
+      request.env['site_version_code'] || ::SiteVersion.default.code
     end
 
     def current_currency
@@ -64,6 +65,15 @@ module Concerns
       if (order = session_order)
         order.use_prices_from(new_site_version)
       end
+    end
+
+    def add_site_version_to_mailer
+      ActionMailer::Base.default_url_options.merge!(default_url_options)
+    end
+
+    def default_url_options
+      detector = configatron.site_version_detector.new
+      detector.default_url_options(current_site_version)
     end
 
     private

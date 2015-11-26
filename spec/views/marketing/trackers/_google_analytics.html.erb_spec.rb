@@ -70,7 +70,7 @@ describe 'marketing/trackers/_google_analytics.html.erb', type: :view do
     describe 'commerce / order tracking' do
       let(:expected_order_number)   { 'O999888777' }
 
-      let(:spree_order) { build :complete_order_with_items, number: expected_order_number }
+      let(:spree_order) { build :complete_order_with_items, number: expected_order_number, currency: 'AUD' }
 
       before do
         allow(view).to receive(:current_site_version).and_return(SiteVersion.new)
@@ -88,6 +88,7 @@ describe 'marketing/trackers/_google_analytics.html.erb', type: :view do
         expect(rendered).to include spree_order.bill_address.city
         expect(rendered).to include "198.37"
         expect(rendered).to include "_gaq.push(['_trackTrans']);"
+        expect(rendered).to include "_gaq.push(['_set', 'currencyCode', 'AUD']);"
       end
 
       describe 'requires triggering' do

@@ -156,6 +156,8 @@ ruby:
               = link_to 'Lace', build_taxon_path('Lace'), class: 'text'
             li.normal-item.no-border
               = link_to 'Maxi', build_taxon_path('Maxi'), class: 'text'
+            li.normal-item.no-border
+              = link_to 'Short Dresses', build_taxon_path('Short'), class: 'text'
             li.grey-item
               .text EVENTS
             li.normal-item
@@ -279,7 +281,7 @@ ruby:
         ul.nav.navbar-nav#inner-main-menu
           li
             div id='side-search-area' class='row'
-              = form_tag search_path, method: :get, id: 'searchForm'
+              = form_tag dresses_path, method: :get, id: 'searchForm'
                 input type='text' id='side-search' placeholder='SEARCH' name='q'
                 = image_tag '_icons/search.svg', class: 'side-search-icon', id: 'side-search-icon'
           li.normal-item#new-this-week-open
@@ -301,14 +303,6 @@ ruby:
               i.fa.fa-chevron-right
           li.normal-item
             a.text href='http://blog.fameandpartners.com' target='_blank' BLOG
-          - if sale_active?
-            li.normal-item
-              = link_to 'SALE', mystyle_landing_page_path(lpi: 'none', sale: 'all', limit: 99), class: 'text'
-
-          /li.normal-item
-            /.text MADE FOR YOU
-          /li.normal-item
-            /.text JOIN US
           li.normal-item
             div
               = link_to 'ACCOUNT LOGIN', profile_path, class: 'text'
