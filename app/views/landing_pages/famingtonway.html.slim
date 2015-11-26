@@ -15,12 +15,11 @@
         together with your bridesmaids.'
     .copy-wrap
       h1.title Be inspired & shop together with your bridesmaids.
-      // TODO: update link
-      a href='javascript:;' class='btn btn-lowlight btn-md' See how it works
+      a href='#how-it-works' class='btn btn-lowlight btn-md' See how it works
 
   .container
     .row
-      .col-md-12.section-steps
+      .col-md-12.section-steps#how-it-works
         .outer-wrap.mobile-change-order
           .inner-left.position-2
             h2.title-line-on-sides
@@ -61,8 +60,7 @@
             .media-wrap
               = image_tag 'landingpages/famingtonway/tile-free-honeymoon-dress.jpg', alt: 'GET A FREE HONEYMOON DRESS OF YOUR CHOICE WHEN YOU DRESS YOUR BRIDAL PARTY WITH US.'
           .btn-wrap.position-3
-            // TODO: update link
-            a href='javascript:;' class='btn btn-lowlight btn-md' Get started
+            = link_to 'Get started', new_moodboard_path, class:'btn btn-lowlight btn-md'
 
       .col-md-12
         h2.heading-secondary Bridesmaid dresses your girls will love...and wear again.
@@ -82,8 +80,7 @@
               .content-wrap-inner
                 .content-wrap
                   h2.heading Get married<br>with fame
-                  // TODO: update link
-                  a href='javascript:;' class='btn btn-lowlight' Register now
+                  = link_to 'Register now', new_moodboard_path, class:'btn btn-lowlight'
 
       .col-md-12
         h2.heading-secondary Let us do the hard work for you. For $49 we will select the dresses, contact your maids and coordinate the bridal party story. Plus, the $49 comes off the cost of your dress!
