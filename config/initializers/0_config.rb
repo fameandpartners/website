@@ -164,7 +164,8 @@ when :production
 
   configatron.mailchimp do |mailchimp|
     mailchimp.api_key = '0340ea09d6c21efd808cce3d9c9440f6-us7'
-    mailchimp.list_id = '48f8d360f7' #<----Massive TODO here.  Put in actual live mailchimp list when we know it.
+    mailchimp.us_list_id = '77e91e8697'
+    mailchimp.au_list_id = '735d78adcc'
   end
 
 when :test
