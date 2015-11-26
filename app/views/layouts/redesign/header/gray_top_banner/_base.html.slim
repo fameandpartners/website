@@ -55,7 +55,7 @@ ruby:
       ' SHOP BY EVENT
       ul
         = render partial: 'layouts/redesign/event'
-
+  span.wedding FAMEweddings
   span.lookbook LOOKBOOKS
   /! span.magazine MAGAZINE
   span
@@ -96,6 +96,19 @@ ruby:
   ul
     li.title separates
     li = link_to 'Skirts', skirts_collection_path
+
+| TODO : CHANGE ALL THE LINKS BEFORE RELEASE
+.rect#rect-wedding.nav-menu-wrap.menu-wedding
+  .row
+    .col-md-5
+      ul
+        li.title WEDDINGS
+        li = link_to 'The Bride', bring_on_the_night_collection_path
+        li = link_to 'The Bridesmaids', dance_hall_days_collection_path
+        li = link_to 'The Guests', photo_finish_collection_path
+    .col-md-7
+      = link_to bring_on_the_night_collection_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/brides.jpg"
 
 .rect#rect-lookbook.nav-menu-wrap.menu-lookbook
   .row
