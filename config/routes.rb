@@ -316,8 +316,6 @@ FameAndPartners::Application.routes.draw do
 
     # Redirecting all bridesmaid party URLs
     get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')
-
-    resources :site_versions, only: [:show], as: :site_version
   end
 
   resources :moodboards, except: [:destroy] do
