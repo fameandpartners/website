@@ -31,7 +31,6 @@ class ApplicationController < ActionController::Base
   helper_method :analytics_label,
                 :current_user_moodboard,
                 :current_wished_product_ids,
-                :custom_dresses_path,
                 :default_meta_description,
                 :default_seo_title,
                 :get_user_type,
@@ -173,13 +172,6 @@ class ApplicationController < ActionController::Base
     Spree::User.campaign_monitor_sign_up_reason(session['sign_up_reason'])
   end
 
-#  def current_spree_user
-#    @current_spree_user ||= super && Spree::User.includes(:wishlist_items).find(@current_spree_user.id)
-#  end
-  def current_spree_user
-    super
-  end
-
   def current_wished_product_ids
     if @current_wished_product_ids
       @current_wished_product_ids
@@ -231,10 +223,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def custom_dresses_path
-    main_app.personalization_path
-  end
-
   def set_product_show_page_title(product, info = "")
     prefix = "#{product.short_description} #{info} #{product.name}"
     self.title = [prefix, default_seo_title].join(' - ')
@@ -250,7 +238,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_moodboard
-    @user_moodboard ||= UserMoodboard::BaseResource.new(user: current_spree_user).read
+    @user_moodboard ||= MoodboardPresenter.new(current_spree_user)
   end
 
   # todo: remove this method from global scope
