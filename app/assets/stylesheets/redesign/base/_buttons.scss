@@ -48,6 +48,26 @@
 
 }
 
+.btn-add {
+  display: block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 1.688em;
+  font-weight: 300;
+  color: $c-neutral-black;
+  background: $c-neutral-white;
+  border: solid $c-neutral-black 1px;
+
+  &:hover,
+  &:focus {
+    color: $c-neutral-black;
+    background: $c-neutral-2;
+  }
+
+}
+
 .cta-square {
   display: table;
   padding: 10px;

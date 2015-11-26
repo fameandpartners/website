@@ -39,7 +39,7 @@
 
     }
 
-    a:not(.btn):not(.tab) {
+    a:not(.btn):not(.tab):not(.btn-add) {
       text-decoration: underline;
       font-style: italic;
       color: inherit;
@@ -131,6 +131,11 @@
 
       }
 
+    }
+
+    .btn-add {
+      float: left;
+      margin: 58px 0;
     }
 
     .tab-content-controls {
