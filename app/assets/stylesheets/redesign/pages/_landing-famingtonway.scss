@@ -1,0 +1,292 @@
+/* [Landing Page - Famingtonway]
+-------------------------------------------------------*/
+.landing-famingtonway {
+  margin-bottom: 30px;
+
+  .heading-secondary {
+    margin: 60px 0;
+    text-align: center;
+    line-height: 1.3;
+    font-family: $font-brand-serif;
+    font-size: 1.25em;
+    font-weight: 300;
+  }
+
+  // START - hero-wrap
+  .hero-wrap {
+
+    .copy-wrap {
+      position: relative;
+      padding: 50px 0;
+      text-align: center;
+    }
+
+    .title {
+      width: 80%;
+      max-width: 280px;
+      margin: 0 auto 40px auto;
+      padding: 0;
+      text-transform: none;
+      font-size: 1.375em;
+      font-weight: 300;
+    }
+
+  }
+  // END - hero-wrap
+
+  // START - section-steps
+  .section-steps {
+    position: relative;
+    margin-bottom: 30px;
+
+    .outer-wrap {
+      @extend %cfix;
+    }
+
+    .inner-left {
+      margin-top: 30px;
+    }
+
+    .btn-wrap {
+      position: relative;
+      text-align: center;
+
+      .btn {
+        position: relative;
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: $c-neutral-black;
+      }
+
+    }
+
+    ul {
+      padding-bottom: 30px;
+    }
+
+    li {
+      margin-top: 30px;
+    }
+
+    em {
+      font-size: 0.75em;
+    }
+
+    .copy-wrap {
+      font-size: 0.875em;
+    }
+
+  }
+  // END - section-steps
+
+   // START - section-register
+  .section-register {
+
+    .outer-wrap {
+      position: relative;
+      min-height: 270px;
+      @extend %cfix;
+    }
+
+    .inner-wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .content-wrap-outer {
+      display: table;
+      width: 100%;
+      height: 100%;
+    }
+
+    .content-wrap-inner {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    .content-wrap {
+      display: inline-block;
+      max-width: 290px;
+      padding: 60px 40px;
+      background: rgba($c-neutral-white, .9);
+    }
+
+    .heading {
+      margin: 0 0 20px 0;
+      text-transform: uppercase;
+      font-family: $font-brand-serif;
+      font-size: 1.625em;
+      font-weight: 300;
+    }
+
+    .btn {
+      padding: 5px 20px;
+      line-height: normal;
+      font-size: 0.75em;
+    }
+
+  }
+  // END - section-register
+
+  // START - section-together
+  .section-together {
+    position: relative;
+    background: $c-neutral-3;
+    @extend %cfix;
+
+    .content-wrap {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .heading {
+      margin: 0 0 40px 0;
+      font-family: $font-brand-serif;
+      font-size: 3.125em;
+      font-weight: 300;
+    }
+
+    .btn {
+      padding: 5px 20px;
+      line-height: normal;
+      font-size: 0.75em;
+    }
+
+  }
+  // END - section-together
+
+  .panel-more-dresses {
+    margin-top: 0;
+  }
+
+  .carousel-strap {
+    margin-bottom: 50px;
+  }
+
+  @include desktop {
+
+    & {
+
+      .heading-secondary {
+        margin: 60px 280px;
+      }
+
+      .hero-wrap {
+
+        .copy-wrap {
+          margin-top: -22px;
+          padding: 0 0 30px 0;
+        }
+
+        .title {
+          display: none;
+          visibility: hidden;
+        }
+
+      }
+
+      .section-steps {
+
+        .outer-wrap {
+          border-bottom: solid $c-neutral-black 1px;
+        }
+
+        .media-wrap {
+          border-top: solid $c-neutral-black 1px;
+        }
+
+        .inner-left,
+        .inner-right {
+          float: left;
+          width: 50%;
+          min-height: 1px;
+        }
+
+        .inner-left {
+          margin-top: 0;
+        }
+
+        .inner-right {
+          padding-top: 27px;
+        }
+
+        .btn-wrap {
+          position: absolute;
+          bottom: -23px;
+          left: 0;
+          right: 0;
+
+          &:before {
+            display: none;
+          }
+
+        }
+
+        ul {
+          padding-left: 12%;
+          padding-right: 12%;
+        }
+
+      }
+
+      .section-register {
+
+        .media-wrap {
+          float: left;
+          width: 50%;
+        }
+
+      }
+
+      .section-together {
+        min-height: 400px;
+
+        .content-wrap-outer {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 50%;
+          height: 100%;
+        }
+
+        .content-wrap-inner {
+          display: table;
+          width: 100%;
+          height: 100%;
+        }
+
+        .content-wrap {
+          display: table-cell;
+          vertical-align: middle;
+          padding: 0 40px;
+        }
+
+        .media-wrap {
+          width: 50%;
+          float: left;
+          left: 50%;
+        }
+
+        .heading {
+          font-size: 3.75em;
+        }
+
+      }
+
+    }
+
+  }
+
+}

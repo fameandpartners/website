@@ -5,6 +5,7 @@
 
   .outer-wrap {
     border-top: solid $c-neutral-black 1px;
+    @extend %cfix;
 
     > div {
       padding: 0;

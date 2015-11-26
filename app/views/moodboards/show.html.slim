@@ -1,14 +1,1 @@
-/ h1  = @resource.name
-/ ALMOST LITERAL COPY PASTE / SEARCH REPLACE OF `app/views/users/wishlists_items/index.html.slim`
-.user-account-page-title
-  .container
-    .page-title--details
-      h1.user-account-title.no-padding-bottom.text-white = @resource.name
-
-.page-content.user.moodboard.index
-  .container.relative
-
-    = render 'users/shared/tabs', active_tab: 'wishlist'
-    = flash_messages
-    = render 'menu'
-    = render "#{@resource.purpose}_board"
+= render "#{@resource.purpose}_board"
