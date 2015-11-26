@@ -1,8 +1,11 @@
 module Preferences
   class LocaleWarnPresenter
-    attr_reader :current_site_version, :geo_site_version, :session_site_version_code
+    include SiteVersionRoutingHelper
+
+    attr_reader :current_site_version, :geo_site_version, :session_site_version_code, :request_url
 
     def initialize(opts = {})
+      @request_url               = opts[:request_url]
       @geo_site_version          = opts[:geo_site_version]
       @current_site_version      = opts[:current_site_version]
       @session_site_version_code = opts[:session_site_version_code]
@@ -16,8 +19,8 @@ module Preferences
       "Visit our #{geo_site_version.code} Store"
     end
 
-    def site_version_path
-      Rails.application.routes.url_helpers.site_version_path(id: geo_site_version.code)
+    def geo_site_version_url
+      site_version_url(request_url, geo_site_version)
     end
 
     def long_text
