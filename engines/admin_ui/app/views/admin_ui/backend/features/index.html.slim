@@ -1,0 +1,16 @@
+- content_for :page_title, "Site Features"
+h2 Features
+- feature_states.each do |state, features|
+  h3 = state
+  ul
+    - features.each do |feature|
+      li : tt = feature
+
+h2
+  ' User Overrides
+  = overriding_user.email
+- user_overridden_features.each do |state, features|
+  h3 = state
+  ul
+    - features.each do |feature|
+      li : tt = feature
