@@ -1,8 +1,25 @@
 namespace :item_return do
   task :recalculate => :environment do
-    ItemReturn.all.each do |item_return|
-      ItemReturnCalculator.new(item_return).run.save!
+    require 'ruby-progressbar'
+    class RecalculateItemReturns
+      def scope
+        ItemReturn
+      end
+
+      def call
+        progressbar = ProgressBar.create(
+              :total => scope.count,
+              :format => '%a %e | item_return %c/%C |%w%i|'
+            )
+        scope.find_each do |item_return|
+          progressbar.increment
+          ItemReturnCalculator.new(item_return).run.save!
+        end
+
+        progressbar.finish
+      end
     end
+    RecalculateItemReturns.new.call
   end
 
   desc 'migrate from return_requests'
