@@ -27,7 +27,7 @@ class UpdateStockQuantites
     end
 
     # schedule cache cleaning
-    ClearCacheWorker.perform_async(Time.now) if (Rails.env.staging? || Rails.env.production?)
+    ClearCacheWorker.perform_async if (Rails.env.staging? || Rails.env.production?)
 
     true
   end
