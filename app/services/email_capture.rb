@@ -50,14 +50,14 @@ class EmailCapture
 
   def update_list(get_email, current_email, first_name, last_name)
     subscriber = mailchimp.lists.members(configatron.mailchimp.list_id)['data'].select { |subscriber| subscriber['email'] == get_email }
-    mailchimp.lists.update_member(configatron.mailchimp.list_id, {"leid" => subscriber[0]['leid']},
+    mailchimp.lists.update_member(set_list_id, {"leid" => subscriber[0]['leid']},
                                   {email: current_email,
                                    fname: first_name,
                                    lname: last_name})
   end
 
   def subscribe_list(current_email, merge_variables)
-    mailchimp.lists.subscribe(configatron.mailchimp.list_id, {"email" => current_email},
+    mailchimp.lists.subscribe(set_list_id, {"email" => current_email},
                               merge_variables, 'html', false, true, true, false)
   end
 
@@ -125,6 +125,16 @@ class EmailCapture
 
   def retrieve_site_version
     site_version.presence || nil
+  end
+
+  def set_list_id
+    if Rails.env.production?
+      list_id = (site_version == 'Australia' ? configatron.mailchimp.au_list_id : configatron.mailchimp.us_list_id)
+    else
+      list_id = configatron.mailchimp.list_id
+    end
+
+    list_id
   end
 
 end
