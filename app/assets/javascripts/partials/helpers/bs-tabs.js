@@ -17,4 +17,10 @@
       $tabs.filter('.active').next('li').find('a[data-toggle="tab"]').tab('show');
   });
 
+  // moodboard tabs
+  $('.js-tabs-moodboard-content-mobile .js-tab-content-controls a').on('click', function(e) {
+    e.preventDefault();
+    $(this).tab('show');
+  });
+
 }(jQuery));

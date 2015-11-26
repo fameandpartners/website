@@ -26,7 +26,7 @@ Features.deactivate(:checkout_fb_login)
 Features.deactivate(:maintenance)
 Features.deactivate(:shipping_message)
 Features.deactivate(:send_promotion_email_reminder)
-Features.deactivate(:enhanced_moodboards)
+Features.activate(:enhanced_moodboards)
 
 Features.activate(:marketing_modals)
 Features.activate(:express_making)

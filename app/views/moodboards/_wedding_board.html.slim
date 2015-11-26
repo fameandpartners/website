@@ -1,4 +1,76 @@
-h3 = @resource.name
-h4 = @resource.event_date
-p = @resource.description
-= render 'items'
+.moodboard-v2.js-tabs-moodboard-content-mobile
+  .container
+    .row
+      .col-md-12
+        .menu-wrap
+          h1.title-line-on-sides
+            .inner-wrap = @resource.name
+          .row.hidden-xs.hidden-sm
+            .col-md-3
+              .message
+                h2.heading MY MOODBOARDS
+                p Set up a moodboard for each of your events & share with your friends to get their thoughts.
+            .col-md-9
+              ul
+                - collection.each do |mb|
+                  - if moodboard_path(mb) === moodboard_path(@resource)
+                    li.active
+                      .tab
+                        .inner-wrap
+                          span = mb.name
+                  - else
+                    li 
+                      = link_to moodboard_path(mb), class:'tab'
+                        .inner-wrap
+                          span = mb.name
+          .row.hidden-md.hidden-lg
+            .col-md-12
+              ul.tab-content-controls.js-tab-content-controls
+                li.active
+                  a href='#mob-tab-main' class='tab' DRESSES
+                li
+                  a href='#mob-tab-aside' class='tab' ABOUT
+
+    .row
+      .col-md-8.tab-content.active#mob-tab-main
+        .row
+          = render 'items'
+      aside.col-md-4.tab-content#mob-tab-aside
+
+        .panel-aside
+          - if @resource.event_date?
+            p 
+              span.highlight Wedding Date:&nbsp;
+              em  = @resource.event_date
+          - if @resource.persisted?
+            p
+              = link_to("Edit", edit_moodboard_path(@resource))
+              span &nbsp;my settings
+
+        - if @resource.description?
+          .panel-aside
+            h3.heading THE BRIDE’S BRIEF
+            p = @resource.description
+
+        .panel-aside
+          h3.heading BRIDESMAIDS
+          ul
+            li PRUDENCE SMITH
+            li PRUDENCE SMITH
+            li PRUDENCE SMITH
+            li PRUDENCE SMITH
+            li PRUDENCE SMITH
+          - if @resource.persisted?
+            p 
+              = link_to("Add", edit_moodboard_path(@resource))
+              span &nbsp;another bridesmaid
+
+        .panel-aside
+          h3.heading SWATCHES
+
+        .panel-aside
+          h3.heading PERSONAL STYLIST
+          p 
+            span Need some help with ideas or finalising your order?&nbsp;
+            = link_to 'Get in contact', style_consultation_path 
+            span &nbsp;with one of our personal stylists now.
