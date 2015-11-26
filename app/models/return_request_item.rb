@@ -83,9 +83,13 @@ class ReturnRequestItem < ActiveRecord::Base
         return
       end
 
+      item_price_adjuster = ItemPriceAdjustmentSplit.new(rri.line_item)
+
       attrs = {
         order_number:           rri.order.number,
         line_item_id:           rri.line_item.id,
+        item_price:             item_price_adjuster.item_price_in_cents,
+        item_price_adjusted:    item_price_adjuster.item_price_adjusted_in_cents,
         qty:                    rri.quantity,
         requested_action:       rri.action,
         requested_at:           rri.created_at,

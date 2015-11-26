@@ -22,5 +22,37 @@ namespace :item_return do
 
   desc 'import all, set FILE_PATH env var'
   task :import_all => [:import_from_requests, :import_from_returns_sheet]
+
+  desc 'Backfill missing item_prices'
+  task :backfill_item_prices => :environment do
+    require 'ruby-progressbar'
+
+    class BackfillItemPrices
+      def call
+        scope = ItemReturn.where('item_price is null')
+
+        progressbar = ProgressBar.create(
+        :total => scope.count,
+        :format => '%a %e | ItemReturn %c/%C |%w%i|')
+
+        scope.find_each do |item_return|
+          progressbar.increment
+          begin
+            splitter = ItemPriceAdjustmentSplit.new(item_return.line_item)
+
+            item_return.events.backfill_item_price.create!(
+              item_price:          splitter.item_price_in_cents,
+              item_price_adjusted: splitter.item_price_adjusted_in_cents
+            )
+          rescue StandardError => e
+            $stderr.puts item_return.inspect
+            $stderr.puts e.message
+          end
+        end
+        progressbar.finish
+      end
+    end
+    BackfillItemPrices.new.call
+  end
 end
 

@@ -97,4 +97,9 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
   rescue ArgumentError => e
     NewRelic::Agent.notice_error(e)
   end
+
+  def advance_backfill_item_price(event)
+    @item_return.item_price          = event.item_price
+    @item_return.item_price_adjusted = event.item_price_adjusted
+  end
 end
