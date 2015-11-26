@@ -17,7 +17,7 @@ class Spree::Admin::SalesController < Spree::Admin::ResourceController
 
   def reset_cache
     ::NewRelic::Agent.record_custom_event('ClearCacheWorker_web', user: spree_current_user.email)
-    ClearCacheWorker.perform_async(Time.now)
+    ClearCacheWorker.perform_async
     render json: { success: :ok }
   end
 end
