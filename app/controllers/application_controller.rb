@@ -238,7 +238,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_moodboard
-    @user_moodboard ||= MoodboardPresenter.new(current_spree_user)
+    @user_moodboard ||= SingleLegacyMoodboardPresenter.new(current_spree_user)
   end
 
   # todo: remove this method from global scope
