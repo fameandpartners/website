@@ -67,6 +67,7 @@ class Spree::Sale < ActiveRecord::Base
 
   def banner_images
     # TODO - HACK TTL 2015.11.30 - Remove this junk.
+    # S3 - http://mkt-fameandpartners.s3.amazonaws.com/pages/home/sale
     sydney_now         = Time.now.in_time_zone("Sydney")
 
     black_friday_start = Time.parse("2015-11-27 09:00:00 +10:00")
