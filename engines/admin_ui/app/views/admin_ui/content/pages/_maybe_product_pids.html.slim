@@ -1,6 +1,5 @@
 - begin
   - if (pids = variables.try(:[], 'pids'))
-    /- pids = f.object.variables.try(:[], 'pids')
     - serv = Revolution::ProductService.new(pids, SiteVersion.default)
     - prods = serv.collect_products(serv.ids)
     .ibox
@@ -26,7 +25,7 @@
                 tr
                   td = product.id
                   td = product.color.try(:name) || 'ERROR'
-                  td = product.name
+                  td = link_to(product.name, ApplicationController.helpers.collection_product_path(product))
                   td
                     - unless errors.empty?
                       p.text-warning
