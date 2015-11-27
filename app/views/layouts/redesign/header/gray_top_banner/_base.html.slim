@@ -103,9 +103,12 @@ ruby:
     .col-md-5
       ul
         li.title WEDDINGS
+        /THIS SHOULD BE brides_landing_page_oath
         li = link_to 'The Bride', bring_on_the_night_collection_path
+        /THIS SHOULD GO TO famitonway 
         li = link_to 'The Bridesmaids', dance_hall_days_collection_path
-        li = link_to 'The Guests', photo_finish_collection_path
+        /THIS SHOULD BE guest_bride_page_path
+        li = link_to 'The Guests', photo_finish_collection_path 
     .col-md-7
       = link_to bring_on_the_night_collection_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/brides.jpg"
