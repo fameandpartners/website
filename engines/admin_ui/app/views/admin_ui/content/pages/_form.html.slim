@@ -16,7 +16,7 @@
     .hr-line-dashed
     .form-group
       label.col-sm-2.control-label Variables
-      .col-sm-10= f.text_field :variables, :class => 'form-control'
+      .col-sm-10= f.text_area :variables, :class => 'form-control', rows: 5
 
     .hr-line-dashed
     .form-group
@@ -25,6 +25,8 @@
 
       label.col-sm-2.control-label Publish To
       .col-sm-10= f.text_field :publish_to, :class => 'form-control'
+
+= render 'maybe_product_pids', variables: f.object.variables
 
 .ibox.float-e-margins
   .ibox-title

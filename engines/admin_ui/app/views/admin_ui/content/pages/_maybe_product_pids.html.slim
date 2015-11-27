@@ -1,0 +1,43 @@
+- begin
+  - if (pids = variables.try(:[], 'pids'))
+    /- pids = f.object.variables.try(:[], 'pids')
+    - serv = Revolution::ProductService.new(pids, SiteVersion.default)
+    - prods = serv.collect_products(serv.ids)
+    .ibox
+      .ibox-title
+        a.collapse-link
+          h5 PIDS Products
+          .ibox-tools
+            i.fa.fa-chevron-up
+      .ibox-content
+        table.table.table-condensed
+          thead : tr
+            th Product ID
+            th Color
+            th Product Name
+            th Errors?
+            th Preview
+          tbody
+            - prods.each do |product|
+              - begin
+                - errors = []
+                - errors << 'NO COLOR' unless product.color.present?
+                - errors << 'NO IMAGES' if product.images.empty?
+                tr
+                  td = product.id
+                  td = product.color.try(:name) || 'ERROR'
+                  td = product.name
+                  td
+                    - unless errors.empty?
+                      p.text-warning
+                        i.fa.fa-warning.fa-lg
+                        = errors.join(', ')
+                  td = image_tag(product.images.first, height: '120px', width: '80px')
+              - rescue StandardError => e
+                tr
+                  td = e.message
+                  td = product.inspect
+- rescue StandardError => e
+  p
+    ' Product PIDs Error
+    = e.message
