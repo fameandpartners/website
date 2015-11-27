@@ -1,0 +1,85 @@
+= render :partial => '/pages/robots'
+
+= render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
+
+.landing-famingtonway
+
+  .hero-wrap
+    picture.media-wrap
+      img src='#{image_path("landingpages/brides/hero-full.jpg")}'  alt='Bridesmaids ARE LIFE’S TREASURES. 
+        THERE TO GUIDE & SUPPORT. SHARE LAUGHTER & TEARS. REMIND US THAT WE ARE NEVER ALONE. Be inspired & shop 
+        together with your bridesmaids.'
+
+  .container
+    .row
+      .col-md-12.section-steps#how-it-works
+        .outer-wrap.mobile-change-order
+          .inner-left.position-2
+            h2.title-line-on-sides
+              .inner-wrap 6 SIMPLE STEPS
+            ul.list-decorated-square
+              li
+                em
+                  span 1
+                .copy-wrap
+                  span REGISTER YOUR EVENT
+              li
+                em
+                  span 2
+                .copy-wrap
+                  span INVITE YOUR BRIDESMAIDS
+              li
+                em
+                  span 3
+                .copy-wrap
+                  span CREATE A BRIDAL PARTY MOODBOARD
+              li
+                em
+                  span 4
+                .copy-wrap
+                  span COMMENT, VOTE AND PLAN
+              li
+                em
+                  span 5
+                .copy-wrap
+                  span PLACE YOUR ORDER
+              li
+                em
+                  span 6
+                .copy-wrap.highlight
+                  span CHOOSE YOUR FREE HONEYMOON DRESS*
+
+          .inner-right.position-1
+            .media-wrap
+              = image_tag 'landingpages/brides/honeymoon.jpg', alt: 'GET A FREE HONEYMOON DRESS OF YOUR CHOICE WHEN YOU DRESS YOUR BRIDAL PARTY WITH US.'
+          .btn-wrap.position-3
+            = link_to 'Get started', new_moodboard_path, class:'btn btn-lowlight btn-md'
+
+      .col-md-12
+        h2.heading-secondary Your wedding dress doesn't need to cost the earth to be beautiful, memorable & completely unique to you
+        section.carousel-strap
+          .outer-wrap
+            // TODO: update path
+            = react_component('ProductsCarousel', path: '/dresses/?order=price_low&limit=16')
+
+      .col-md-12.section-register
+        .outer-wrap.mobile-change-order
+          .media-wrap.position-2
+            = image_tag 'landingpages/brides/pic1.jpg'
+          .media-wrap.position-1
+            = image_tag 'landingpages/brides/pic2.jpg'
+
+      .col-md-12
+        h2.heading-secondary You found the hidden spots of my soul, and I am forever grateful. - <em> S. M. Pastpre </em> -
+
+      .col-md-12.section-together
+        picture.media-wrap.align-left
+          img src='#{image_path("landingpages/brides/pic3.jpg")}'
+        picture.media-wrap.align-left
+          img src='#{image_path("landingpages/brides/pic4.jpg")}'
+
+      .col-md-12
+        h2.heading-secondary With love x
+
+    .row
+      = render partial: 'shared/redesign/more_dresses_v3'
