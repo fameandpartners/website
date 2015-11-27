@@ -18,7 +18,6 @@
     text-align: left; // RESET
     text-transform: none; // RESET
     background: none; // Remove image background for Select2 components.
-    color: #343434;
   }
 
   .input-group-addon {
@@ -445,5 +444,11 @@ $order-summary-bg: #f7f7f9;
       font-size:  10px;
       color:      darken($gray-light-bg, 20%);
     }
+  }
+}
+
+.checkout.page-content {
+  .form-control {
+    color: #343434;
   }
 }
