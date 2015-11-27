@@ -27,7 +27,7 @@ module AdminUi
     def clear
       message = if params[:really_really] == 'REALLY'
         ::NewRelic::Agent.record_custom_event('ClearCacheWorker_web', user: current_admin_user.email)
-        ClearCacheWorker.perform_async(Time.now)
+        ClearCacheWorker.perform_async
         { notice: "Working... " }
       else
         { error: "Hold your horses!" }
