@@ -3,7 +3,7 @@
 = menu_item item_returns_path, 'Returns', icon: 'thumbs-down', exact: true
 = menu_item variants_path, 'Variants', icon: 'cube'
 
-- backend_links = [['admin_ui/caches', 'admin_ui/sidekiqs', 'admin_ui/product_indexes'], []]
+- backend_links = [['admin_ui/caches', 'admin_ui/sidekiqs', 'admin_ui/product_indexes', 'admin_ui/backend/features'], []]
 li class=active_link_to_class(root_path, active: backend_links)
   a href="#"
     i.fa.fa-database
@@ -13,6 +13,7 @@ li class=active_link_to_class(root_path, active: backend_links)
     = active_link_to 'Caches', caches_path, wrap_tag: :li
     = active_link_to 'Sidekiq', sidekiq_path, wrap_tag: :li
     = active_link_to 'Indexes', product_indexes_path, wrap_tag: :li
+    = active_link_to 'Feature Flags', backend_features_path, wrap_tag: :li
     li = active_link_to 'Return Requests', return_requests_path
     li = active_link_to 'Manual Returns Spreadsheet', manually_managed_returns_path
 

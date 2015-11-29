@@ -13,6 +13,10 @@ AdminUi::Engine.routes.draw do
     end
   end
 
+  namespace :backend do
+    resources :features, only: [:index]
+  end
+
   namespace :reports do
     root to: 'dashboard#index'
     resource :payments,               :only => [:show, :create]
