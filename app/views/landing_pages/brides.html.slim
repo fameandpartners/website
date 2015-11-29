@@ -20,7 +20,7 @@
         .outer-wrap.mobile-change-order
           .inner-left.position-2
             h2.title-line-on-sides
-              .inner-wrap 6 SIMPLE STEPS
+              .inner-wrap PLANNING MADE SIMPLE
             ul.list-decorated-square
               li
                 em
@@ -67,24 +67,23 @@
             = react_component('ProductsCarousel', path: '/dresses/?order=price_low&limit=16')
 
       .col-md-12.section-register
-        .outer-wrap.mobile-change-order
-          .media-wrap.position-2
-            = image_tag 'landingpages/brides/pic1.jpg'
-          .media-wrap.position-1
-            = image_tag 'landingpages/brides/pic2.jpg'
+        .media-wrap
+          = image_tag 'landingpages/brides/tile-secondary-1.jpg'
+        .media-wrap
+          = image_tag 'landingpages/brides/tile-secondary-2.jpg'
 
       .col-md-12
-        h2.heading-secondary You found the hidden spots of my soul, and I am forever grateful. - <em> S. M. Pastpre </em> -
+        h2.heading-secondary You found the hidden spots of my soul, and I am forever grateful.<em>- S. M. Pastpre -</em>
 
-      .col-md-12.section-together
-        picture.media-wrap.align-left
-          = image_tag "landingpages/brides/pic3.jpg"
-        picture.media-wrap.align-left
-          = image_tag "landingpages/brides/pic4.jpg"
+      .col-md-12.section-register
+        .media-wrap
+          = image_tag "landingpages/brides/tile-shop.jpg"
+        .media-wrap
+          = image_tag "landingpages/brides/tile-fameweddings.jpg"
 
       .col-md-12
         h2.heading-secondary With love x
 
     .row
-      = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/brides/footer.jpg"}
+      = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/brides/tile-footer.jpg"}
 

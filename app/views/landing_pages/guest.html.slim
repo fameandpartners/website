@@ -22,11 +22,10 @@
             = react_component('ProductsCarousel', path: '/dresses/?order=price_low&limit=16')
 
       .col-md-12.section-register
-        .outer-wrap.mobile-change-order
-          .media-wrap.position-2
-            = image_tag 'landingpages/guest/tile-secondary-1.jpg'
-          .media-wrap.position-1
-            = image_tag 'landingpages/guest/tile-secondary-2.jpg'
+        .media-wrap
+          = image_tag 'landingpages/guest/tile-secondary-1.jpg'
+        .media-wrap
+          = image_tag 'landingpages/guest/tile-secondary-2.jpg'
 
       .col-md-12
         h2.heading-secondary "Love does not consist in gazing at each other, but in looking outward together in the same direction." <em>- Antoine de Saint Exupery -</em>
@@ -47,4 +46,4 @@
         h2.heading-secondary With love x
 
     .row
-      = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/tile-footer2.jpg"}
+      = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/guest/tile-footer.jpg"}
