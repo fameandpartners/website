@@ -127,10 +127,8 @@ module Revolution
 
     def offset(product_ids, offset)
       offset = offset.to_i
-      offset = 0 if offset.blank?
-      product_ids = [] if product_ids.blank?
-      product_size = product_ids.size
-      return offset if product_size == 0
+      product_size = Array.wrap(product_ids).size
+      return offset if product_size.zero?
       if offset > 0
         offset = offset - product_size
         offset = 0 if offset < 0
