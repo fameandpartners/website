@@ -1,7 +1,11 @@
+/ This is some pretty terrible in-view biz logic code.
+/ I left it all in one file, mostly because the PIDs concept is a hack on top of Pages.
+/ If and when we provide a nice UI for adding and removing products
+/ from the Page this whole file can be deleted.
 - begin
-  - if (pids = variables.try(:[], 'pids'))
-    - serv = Revolution::ProductService.new(pids, SiteVersion.default)
-    - prods = serv.collect_products(serv.ids)
+  - if (pids = variables.fetch('pids') {nil} )
+    - service = Revolution::ProductService.new(pids, SiteVersion.default)
+    - products = service.collect_products(service.ids)
     .ibox
       .ibox-title
         a.collapse-link
@@ -17,7 +21,7 @@
             th Errors?
             th Preview
           tbody
-            - prods.each do |product|
+            - products.each do |product|
               - begin
                 - errors = []
                 - errors << 'NO COLOR' unless product.color.present?
