@@ -122,6 +122,7 @@ FameAndPartners::Application.routes.draw do
     # Landing pages
     get '/famingtonway' => 'products/collections#show', :permalink => 'bohemian-summer', :as => :bohemian_summer_landing_page
     get '/brides' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
+    get '/guest' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :guest_bride_page
 
 
     # A long tradition of hacking shit in.

@@ -10,6 +10,11 @@
     font-family: $font-brand-serif;
     font-size: 1.25em;
     font-weight: 300;
+
+    em {
+      display: block;
+    }
+
   }
 
   // START - hero-wrap
@@ -156,6 +161,12 @@
       font-family: $font-brand-serif;
       font-size: 3.125em;
       font-weight: 300;
+
+      em {
+        display: block;
+        font-size: 0.64em;
+      }
+
     }
 
     .btn {
@@ -284,8 +295,25 @@
           left: 50%;
         }
 
+        &.image-left {
+
+          .media-wrap {
+            left: 0;
+          }
+
+          .content-wrap-outer {
+            left: 50%;
+          }
+
+        }
+
         .heading {
           font-size: 3.75em;
+
+          &.alt-size {
+            font-size: 3.125em;
+          }
+
         }
 
       }
