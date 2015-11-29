@@ -10,6 +10,11 @@
     font-family: $font-brand-serif;
     font-size: 1.25em;
     font-weight: 300;
+
+    em {
+      display: block;
+    }
+
   }
 
   // START - hero-wrap
