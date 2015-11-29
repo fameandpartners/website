@@ -6711,7 +6711,7 @@ p {
 
 /* line 576, ../sass/styles.scss */
 .slides-pagination a {
-  border: 2px solid #fff;
+  border: 0px solid #fff;
   border-radius: 50%;
   width: 15px;
   height: 15px;
