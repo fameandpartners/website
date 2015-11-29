@@ -85,23 +85,24 @@
       .col-md-12
         h2.heading-secondary Let us do the hard work for you. For $49 we will select the dresses, contact your maids and coordinate the bridal party story. Plus, the $49 comes off the cost of your dress!
 
-      .col-md-12.section-together
-        .content-wrap-outer
-          .content-wrap-inner
-            .content-wrap
-              h2.heading Those who <em>play </em>together STAY together!
-              // TODO: update link
-              a href='javascript:;' class='btn btn-lowlight' Shop dresses
-        picture.media-wrap
-          source media='(max-width: 768px)' srcset='#{image_path("landingpages/famingtonway/tile-stay-together-mob.jpg")}'
-          source media='(min-width: 769px)' srcset='#{image_path("landingpages/famingtonway/tile-stay-together.jpg")}'
-          img src='#{image_path("landingpages/famingtonway/tile-stay-together.jpg")}' srcset='
-            #{image_path("landingpages/famingtonway/tile-stay-together-mob.jpg")} 768w,
-            #{image_path("landingpages/famingtonway/tile-stay-together.jpg")} 1024w'
+      .col-md-12
+        .section-together
+          .content-wrap-outer
+            .content-wrap-inner
+              .content-wrap
+                h2.heading Those who <em>play </em>together STAY together!
+                // TODO: update link
+                a href='javascript:;' class='btn btn-lowlight' Shop dresses
+          picture.media-wrap
+            source media='(max-width: 768px)' srcset='#{image_path("landingpages/famingtonway/tile-stay-together-mob.jpg")}'
+            source media='(min-width: 769px)' srcset='#{image_path("landingpages/famingtonway/tile-stay-together.jpg")}'
+            img src='#{image_path("landingpages/famingtonway/tile-stay-together.jpg")}' srcset='
+              #{image_path("landingpages/famingtonway/tile-stay-together-mob.jpg")} 768w,
+              #{image_path("landingpages/famingtonway/tile-stay-together.jpg")} 1024w'
 
       .col-md-12
         h2.heading-secondary With love x
 
     .row
-      = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/tile-footer-mob.jpg"}
+      = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/tile-footer.jpg"}
 

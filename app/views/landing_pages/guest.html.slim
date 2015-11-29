@@ -6,13 +6,11 @@
 
   .hero-wrap
     picture.media-wrap
-      source media='(max-width: 768px)' srcset='#{image_path("landingpages/guest/hero-full.jpg")}'
+      source media='(max-width: 768px)' srcset='#{image_path("landingpages/guest/hero-sml.jpg")}'
       source media='(min-width: 769px)' srcset='#{image_path("landingpages/guest/hero-full.jpg")}'
       img src='#{image_path("landingpages/guest/hero-full.jpg")}' srcset='
-        #{image_path("landingpages/guest/hero-full.jpg")} 768w,
-        #{image_path("landingpages/guest/hero-full.jpg")} 1024w' alt='Bridesmaids ARE LIFE’S TREASURES. 
-        THERE TO GUIDE & SUPPORT. SHARE LAUGHTER & TEARS. REMIND US THAT WE ARE NEVER ALONE. Be inspired & shop 
-        together with your bridesmaids.'
+        #{image_path("landingpages/guest/hero-sml.jpg")} 768w,
+        #{image_path("landingpages/guest/hero-full.jpg")} 1024w' alt='The Guests - A familiar flock, encircling love with love. Because celebrations are best made in style.'
 
   .container
     .row
@@ -24,11 +22,10 @@
             = react_component('ProductsCarousel', path: '/dresses/?order=price_low&limit=16')
 
       .col-md-12.section-register
-        .outer-wrap.mobile-change-order
-          .media-wrap.position-2
-            = image_tag 'landingpages/guest/tile-secondary-1.jpg'
-          .media-wrap.position-1
-            = image_tag 'landingpages/guest/tile-secondary-2.jpg'
+        .media-wrap
+          = image_tag 'landingpages/guest/tile-secondary-1.jpg'
+        .media-wrap
+          = image_tag 'landingpages/guest/tile-secondary-2.jpg'
 
       .col-md-12
         h2.heading-secondary "Love does not consist in gazing at each other, but in looking outward together in the same direction." <em>- Antoine de Saint Exupery -</em>
@@ -41,7 +38,7 @@
           .content-wrap-outer
             .content-wrap-inner
               .content-wrap
-                h2.heading.alt-size LOVE isn't something you find, it's something that finds you<em>(Same goes for the dress!)</em>
+                h2.heading.alt-size LOVE isn't something you find, it's something that finds you<em><span>(Same goes for the dress!)</span></em>
                 // TODO: update link
                 a href='javascript:;' class='btn btn-lowlight' Shop dresses
                          
@@ -49,4 +46,4 @@
         h2.heading-secondary With love x
 
     .row
-      = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/tile-footer2.jpg"}
+      = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/guest/tile-footer.jpg"}
