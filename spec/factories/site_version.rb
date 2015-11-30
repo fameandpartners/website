@@ -13,6 +13,7 @@ FactoryGirl.define do
 
     name        { iso_name }
     permalink   { name.to_s.downcase }
+    domain      { "#{name.to_s.downcase}.lvh.me" }
     currency    { countries_currencies.fetch(name) { currencies.sample } }
 
     locale      { "en-#{name}" }
