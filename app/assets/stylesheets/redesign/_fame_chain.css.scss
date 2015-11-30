@@ -28,9 +28,7 @@
 		}
 
 		h2 {
-			text-transform: uppercase;
 			color: white;
-			font-family: forum;
 			font-size: 8rem;
 
 			@media screen and (max-width: 768px) {
@@ -57,12 +55,6 @@
 
 	form {
 		padding-top: 4rem;
-
-		@media screen and (max-width: 768px) {
-			input {
-
-			}
- 		}
 	}
 
 	.form {
@@ -178,9 +170,7 @@
 
 	h3 {
 		padding-top: 2rem;
-		font-family: forum;
 		font-size: 4.5rem;
-		text-transform: uppercase;
 	}
 
 	.row {
@@ -195,7 +185,6 @@
 	}
 
 	h4 {
-		text-transform: uppercase;
 		font-size: 1.5rem;
 		margin-bottom: 2rem;
 	}

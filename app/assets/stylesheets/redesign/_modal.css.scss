@@ -272,7 +272,7 @@
       line-height: 1.1;
       color: #fff;
       font-weight: 400;
-      font-family: Forum !important;
+      font-family: $font-heading !important;
     }
     h3 {
       font-size: 2.8rem;
@@ -472,7 +472,7 @@
         font-size: 28px;
         font-weight: 300;
         color: #000;
-        font-family: forum;
+        font-family: $font-heading;
         background: transparent;
         line-height: 1.5;
         padding: 28px 0 8px;
@@ -504,7 +504,7 @@
         color: #000;
       }
       .font-forum {
-        font-family: forum, serif !important;
+        font-family: $font-heading !important;
       }
       .single {
         padding-bottom: 28px;

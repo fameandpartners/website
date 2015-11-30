@@ -5,7 +5,8 @@
     font-weight: normal; // RESET
   }
 
-  h1, h2 {
+  h1, h2, h3 {
+    font-family: $font-family-secondary;
     text-transform: none; // RESET
   }
 
@@ -149,6 +150,7 @@ $order-summary-bg: #f7f7f9;
     }
 
     .checkout-section-title {
+      font-family: $font-family-secondary;
       font-size:   30px;
       font-weight: normal;
     }
