@@ -310,4 +310,33 @@ describe Revolution::Page do
       end
     end
   end
+
+  describe ".offset" do
+    let(:product_ids) { (1..product_ids_size).to_a }
+    context "given an empty or blank product_ids" do
+      let(:product_ids) { nil }
+      it { expect(page.offset(product_ids, 0)).to eq 0 }
+      it { expect(page.offset(product_ids, 21)).to eq 21 }
+      it { expect(page.offset([], 0)).to eq 0 }
+      it { expect(page.offset([], 21)).to eq 21 }
+    end
+    context "given a product_ids.size < 21" do
+      let(:product_ids_size) { 11 }
+      it { expect(page.offset(product_ids, 0)).to eq 0 }
+      it { expect(page.offset(product_ids, 21)).to eq 10 }
+      it { expect(page.offset(product_ids, 42)).to eq 31 }
+    end
+    context "given a product_ids.size == 21" do
+      let(:product_ids_size) { 21 }
+      it { expect(page.offset(product_ids, 0)).to eq 0 }
+      it { expect(page.offset(product_ids, 21)).to eq 0 }
+      it { expect(page.offset(product_ids, 42)).to eq 21 }
+    end
+    context "given a product_ids.size > 21" do
+      let(:product_ids_size) { 22 }
+      it { expect(page.offset(product_ids, 0)).to eq 0 }
+      it { expect(page.offset(product_ids, 21)).to eq 0 }
+      it { expect(page.offset(product_ids, 42)).to eq 20 }
+    end
+  end
 end

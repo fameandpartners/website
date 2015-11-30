@@ -125,6 +125,17 @@ module Revolution
       return_limit
     end
 
+    def offset(product_ids, offset)
+      offset = offset.to_i
+      product_size = Array.wrap(product_ids).size
+      return offset if product_size.zero?
+      if offset > 0
+        offset = offset - product_size
+        offset = 0 if offset < 0
+      end
+      offset
+    end
+
     def page_is_lookbook?
       self && self.get(:lookbook)
     end

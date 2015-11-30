@@ -88,6 +88,7 @@ class Products::CollectionsController < Products::BaseController
                              @collection.total_products = product_ids.size
                              products
                            else
+                             @collection.total_products += product_ids.size
                              (products.first.blank? ? @collection.products : products + @collection.products)
                            end
   end
@@ -122,7 +123,7 @@ class Products::CollectionsController < Products::BaseController
         fast_making:  params[:fast_making],
         order:        params[:order],
         limit:        page.limit(product_ids), # page size
-        offset:       params[:offset] || 0,
+        offset:       page.offset(product_ids, params[:offset]),
         query_string: params[:q]
     }.merge(collection_options || {})
     Products::CollectionResource.new(resource_args).read
