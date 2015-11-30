@@ -15,13 +15,8 @@ class MoodboardsPresenter
 
   def as_json(*opts)
     {
-      moodboards: moodboards.map { |mb| MoodboardPresenter.new(mb) },
-      default:    default
+      moodboards: moodboards.map { |mb| MoodboardPresenter.new(mb) }
     }
-  end
-
-  def default
-    MoodboardPresenter.new(moodboards.detect {|m| m.default? })
   end
 
   class MoodboardPresenter < SimpleDelegator
