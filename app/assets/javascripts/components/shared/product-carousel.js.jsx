@@ -1,4 +1,4 @@
-var ProductImage = React.createClass({
+var ProductsCarouselElement = React.createClass({
   render: function(){
 
     var price;
@@ -7,7 +7,7 @@ var ProductImage = React.createClass({
       price = <span>
               <span className='original-price'>{this.props.product.price} </span>
               <span className='sale-price'>{this.props.product.sale_price} </span>
-              <span className='discount'>SAVE {this.props.product.discount} </span>
+              <span className='discount'>SAVE {this.props.product.discount.table.amount}% </span>
               </span>;
     } else {
       price = <span>{this.props.product.price}</span>;
@@ -90,7 +90,7 @@ var ProductsCarousel = React.createClass({
       );
     } else {
       products = this.state.products.map(function(product){
-        return (<ProductImage product={product} />)
+        return (<ProductsCarouselElement product={product} />)
       });
 
       container = <div className="js-carousel-products">
