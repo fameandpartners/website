@@ -97,7 +97,6 @@
     margin-top: 0;
     padding-bottom: 0;
     margin-bottom: 0;
-    font-family: forum;
     font-size: 65px !important;
     line-height: 70px;
 
@@ -138,7 +137,6 @@
   }
 
   h2.name {
-    font-family: forum;
     text-align: left;
     font-weight: 300;
     margin-bottom: 0;
@@ -236,10 +234,6 @@
   }
 }
 
-h2 span {
-  font-family: forum;
-}
-
 .maven {
   height: 260px;
 }
@@ -283,7 +277,7 @@ h2 span {
   }
 
   p.register-now {
-    font-family: forum;
+    font-family: $font-heading;
     text-transform: uppercase;
     font-size: 45px;
     margin-top: -20px;
@@ -367,16 +361,12 @@ h2 span {
 
   h4 {
     color: white !important;
-    text-transform: uppercase;
-    font-weight: 300;
     margin-top: 16px;
     margin-bottom: 16px;
   }
 
   h3.aus {
-    font-family: forum;
     color: white !important;
-    text-transform: uppercase;
     line-height: 6rem;
   }
 }
@@ -470,9 +460,8 @@ h2 span {
     text-align: center;
 
     h5 {
-      text-transform: uppercase;
       font-size: 2.6rem;
-      font-weight: 600;
+      font-weight: 500;
     }
 
     p {
@@ -503,28 +492,28 @@ h2 span {
 
     ::-webkit-input-placeholder {
       color: white;
-      font-family: forum;
+      font-family: $font-heading;
       font-size: 3rem;
       line-height: 3.3rem;
     }
 
     :-moz-placeholder { /* Firefox 18- */
        color: white;
-       font-family: forum;
+       font-family: $font-heading;
        font-size: 3rem;
        line-height: 3.3rem;
     }
 
     ::-moz-placeholder {  /* Firefox 19+ */
        color: white;
-       font-family: forum;
+       font-family: $font-heading;
        font-size: 3rem;
        line-height: 3.3rem;
     }
 
     :-ms-input-placeholder {
        color: white;
-       font-family: forum;
+       font-family: $font-heading;
        font-size: 3rem;
        line-height: 3.3rem;
     }

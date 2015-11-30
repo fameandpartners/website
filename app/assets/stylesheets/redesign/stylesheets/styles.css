@@ -77,12 +77,6 @@ dfn {
   font-style: italic;
 }
 
-/* line 135, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_normalize.scss */
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
-
 /* line 144, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_normalize.scss */
 mark {
   background: #ff0;
@@ -402,16 +396,6 @@ hr {
   overflow: visible;
   clip: auto;
 }
-
-/* line 9, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
-h1, h2, h3, h4, h5, h6,
-.h1,
-.caption-title, .h2, .h2-title, .h3, .h4, .h5, .h6 {
-  font-family: "brandon-grotesque", sans-serif;
-  font-weight: 500;
-  line-height: 1.1;
-  color: black;
-}
 /* line 16, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
 h1 small,
 h1 .small, h2 small,
@@ -421,11 +405,10 @@ h4 .small, h5 small,
 h5 .small, h6 small,
 h6 .small,
 .h1 small,
-.caption-title small,
 .h1 .small,
-.caption-title .small, .h2 small, .h2-title small,
+.h2 small,
 .h2 .small,
-.h2-title .small, .h3 small,
+.h3 small,
 .h3 .small, .h4 small,
 .h4 .small, .h5 small,
 .h5 .small, .h6 small,
@@ -436,21 +419,19 @@ h6 .small,
 }
 
 /* line 24, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
-h1, .h1, .caption-title,
-h2, .h2, .h2-title,
+h1, .h1,
+h2, .h2,
 h3, .h3 {
   margin-top: 25px;
   margin-bottom: 12.5px;
 }
 /* line 30, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
 h1 small,
-h1 .small, .h1 small, .caption-title small,
+h1 .small, .h1 small,
 .h1 .small,
-.caption-title .small,
 h2 small,
-h2 .small, .h2 small, .h2-title small,
+h2 .small, .h2 small,
 .h2 .small,
-.h2-title .small,
 h3 small,
 h3 .small, .h3 small,
 .h3 .small {
@@ -475,36 +456,6 @@ h6 small,
 h6 .small, .h6 small,
 .h6 .small {
   font-size: 75%;
-}
-
-/* line 47, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
-h1, .h1, .caption-title {
-  font-size: 41px;
-}
-
-/* line 48, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
-h2, .h2, .h2-title {
-  font-size: 34px;
-}
-
-/* line 49, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
-h3, .h3 {
-  font-size: 28px;
-}
-
-/* line 50, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
-h4, .h4 {
-  font-size: 20px;
-}
-
-/* line 51, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
-h5, .h5 {
-  font-size: 16px;
-}
-
-/* line 52, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
-h6, .h6 {
-  font-size: 14px;
 }
 
 /* line 58, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_type.scss */
@@ -3079,8 +3030,7 @@ a.badge:hover, a.badge:focus {
 }
 /* line 12, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_jumbotron.scss */
 .jumbotron h1,
-.jumbotron .h1,
-.jumbotron .caption-title {
+.jumbotron .h1 {
   color: inherit;
 }
 /* line 16, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_jumbotron.scss */
@@ -3113,8 +3063,7 @@ a.badge:hover, a.badge:focus {
   }
   /* line 44, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_jumbotron.scss */
   .jumbotron h1,
-  .jumbotron .h1,
-  .jumbotron .caption-title {
+  .jumbotron .h1 {
     font-size: 72px;
   }
 }
@@ -5482,32 +5431,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* line 27, ../sass/_typography.scss */
-.caption-title {
-  color: white;
-  font-size: 58px;
-}
-
-/* line 33, ../sass/_typography.scss */
-.h2-title {
-  font-size: 48px;
-}
-
 /* line 39, ../sass/_typography.scss */
 .lighter-text {
   color: #777777 !important;
-}
-
-/* line 43, ../sass/_typography.scss */
-h1 {
-  font-family: 'Forum', cursive;
-  text-transform: uppercase;
-}
-
-/* line 48, ../sass/_typography.scss */
-h1 {
-  padding-bottom: 40px;
-  font-size: 48px;
 }
 
 /* line 53, ../sass/_typography.scss */

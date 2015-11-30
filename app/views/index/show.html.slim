@@ -55,20 +55,24 @@ ruby:
 
       aside.col-md-5
         = react_component('BlogPosts')
-    .row.as-seen-in
-      hr
-      .as-seen-in-text AS SEEN IN
-    .row.as-seen-in-partners
-      img.refinery29 alt='Refinery29'    src='/assets/footer/publisher/refinery29.png'
-      img.elle       alt='Elle'          src='/assets/footer/publisher/elle.png'
-      img.marie      alt='Marie'         src='/assets/footer/publisher/marie.png'
-      img.russh      alt='Russh'         src='/assets/footer/publisher/russh.png'
-      img.glamour    alt='Glamour'       src='/assets/footer/publisher/glamour.png'
-      img.wwd        alt='WWD'           src='/assets/footer/publisher/wwd.png'
-      img.teen       alt='Teenvogue'     src='/assets/footer/publisher/teen.png'
-      img.popsugar   alt='Popsugar'      src='/assets/footer/publisher/popsugar.png'
-      img.nylon      alt='Nylon'         src='/assets/footer/publisher/nylon.png'
-      img.cosmo      alit='Cosmopolitan' src='/assets/footer/publisher/cosmo.png'
+
+  section.container
+    .row
+      .col-md-12
+        .h2.title-line-on-sides
+          .inner-wrap AS SEEN IN
+      .col-md-12
+        .as-seen-in-partners
+          img.refinery29 alt='Refinery29'    src='/assets/footer/publisher/refinery29.png'
+          img.elle       alt='Elle'          src='/assets/footer/publisher/elle.png'
+          img.marie      alt='Marie'         src='/assets/footer/publisher/marie.png'
+          img.russh      alt='Russh'         src='/assets/footer/publisher/russh.png'
+          img.glamour    alt='Glamour'       src='/assets/footer/publisher/glamour.png'
+          img.wwd        alt='WWD'           src='/assets/footer/publisher/wwd.png'
+          img.teen       alt='Teenvogue'     src='/assets/footer/publisher/teen.png'
+          img.popsugar   alt='Popsugar'      src='/assets/footer/publisher/popsugar.png'
+          img.nylon      alt='Nylon'         src='/assets/footer/publisher/nylon.png'
+          img.cosmo      alit='Cosmopolitan' src='/assets/footer/publisher/cosmo.png'
 
   /! Email Subscription
   = render 'shared/redesign/newsletter_signup'
