@@ -21,9 +21,16 @@
   }
 
   h2 {
-    text-align:center;
-    font-size:1.222222em;
-    text-transform: uppercase;
+    text-align: center;
+    font-family: $font-family-secondary;
+    font-size: 1.222222em;
+    font-weight: 500;
+  }
+
+  h3 {
+    text-transform: none;
+    font-family: $font-family-secondary;
+    font-size: 1.111111em;
   }
 
   a.product-option {

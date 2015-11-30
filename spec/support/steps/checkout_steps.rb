@@ -1,7 +1,7 @@
 module Acceptance
   module CheckoutSteps
     step 'I should see the cart sidebar with the checkout button' do
-      expect(page).to have_text('Shopping Bag')
+      expect(page).to have_text('SHOPPING BAG')
       expect(page).to have_button('CHECKOUT')
     end
 

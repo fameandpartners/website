@@ -10,7 +10,8 @@
     min-height: 230px;
     padding: 20px 0;
     line-height: normal;
-    font-family: Forum;
+    font-family: $font-heading;
+    font-weight: 300;
     background: $c-neutral-white;
     border-top: solid $c-neutral-black 1px;
 
@@ -54,9 +55,9 @@
     margin: 0;
     padding: 30px 20px;
     line-height: normal;
-    font-family: Forum;
+    font-family: $font-heading;
     font-size: 2.5em;
-    font-weight: 600;
+    font-weight: 500;
     border-top: solid $c-neutral-black 1px;
     border-bottom: solid $c-neutral-black 1px;
   }
