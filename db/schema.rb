@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151130024414) do
+ActiveRecord::Schema.define(:version => 20151130082753) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -498,6 +498,7 @@ ActiveRecord::Schema.define(:version => 20151130024414) do
   add_index "moodboard_items", ["product_color_value_id"], :name => "index_moodboard_items_on_product_color_value_id"
   add_index "moodboard_items", ["product_id"], :name => "index_moodboard_items_on_product_id"
   add_index "moodboard_items", ["user_id"], :name => "index_moodboard_items_on_user_id"
+  add_index "moodboard_items", ["uuid"], :name => "index_moodboard_items_on_uuid"
   add_index "moodboard_items", ["variant_id"], :name => "index_moodboard_items_on_variant_id"
 
   create_table "moodboards", :force => true do |t|
