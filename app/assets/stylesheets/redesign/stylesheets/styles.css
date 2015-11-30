@@ -6722,6 +6722,7 @@ p {
   zoom: 1;
   *display: inline;
   background-color: #666;
+  color: transparent;
   -webkit-transition: all .25s linear;
   transition: all .25s linear;
   margin: 5px 10px;
