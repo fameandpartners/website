@@ -1,4 +1,4 @@
-var ProductImage = React.createClass({
+var NewThisWeekProduct = React.createClass({
   render: function(){
 
     var price;
@@ -17,7 +17,7 @@ var ProductImage = React.createClass({
       <div className='item-wrap'>
         <a href={urlWithSitePrefix(this.props.product.collection_path)}>
           <div className='media-wrap'>
-            <img alt={this.props.product.name} 
+            <img alt={this.props.product.name}
               src={this.props.product.images[0].replace(/\/large\//, '/product/')}></img>
           </div>
           <div className='details-wrap'>
@@ -51,7 +51,7 @@ var NewThisWeekProducts = React.createClass({
     } else {
       products = this.state.products.slice(0, show);
       products = products.map(function(product){
-        return (<ProductImage key={product.collection_path} product={product} />)
+        return (<NewThisWeekProduct key={product.collection_path} product={product} />)
       });
 
       return (<div>{products}</div>)
