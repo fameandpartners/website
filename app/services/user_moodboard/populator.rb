@@ -12,11 +12,16 @@ module UserMoodboard; end
 class UserMoodboard::Populator
   attr_reader :user, :product_id, :variant_id, :color_id
 
-  def initialize(user:, product_id:, color_id:, variant_id: nil)
+  def initialize(user:, product_id:, color_id:, variant_id: nil, moodboard: nil)
     @user       = user
     @product_id = product_id
     @variant_id = variant_id
     @color_id   = color_id
+    @moodboard  = moodboard
+  end
+
+  def moodboard
+    @moodboard ||= user.moodboards.default_or_create
   end
 
   # cases priority
@@ -56,7 +61,7 @@ class UserMoodboard::Populator
     end
 
     def add_color_variant(product, variant, color)
-      user.moodboards.default_or_create.add_item(product: product, color: color, user: user, variant: variant)
+      moodboard.add_item(product: product, color: color, user: user, variant: variant)
     end
 
     def add_variant(variant)

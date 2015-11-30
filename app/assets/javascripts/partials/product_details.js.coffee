@@ -39,6 +39,8 @@ page.initProductDetailsPage = (options = {}) ->
   selector.on('change', (event, data) ->
     slider.showImagesWithColor(data.color_id)
     changeUrlToSelectedColor(data.color_id)
+    # Push Generic change event with updated selection options.
+    window.app.events.trigger('productSelectionOptionsChange', data)
   )
 
   # init buy button
