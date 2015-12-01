@@ -16,6 +16,13 @@ Spree::CheckoutController.class_eval do
     move_order_from_cart_state(@order)
 
     if @order.state == 'address' || @order.state == 'masterpass'
+      EmailCapture.new({ service: :mailchimp }, email: @order.email,
+                                   first_name: params[:order][:bill_address_attributes][:firstname],
+                                   last_name: params[:order][:bill_address_attributes][:lastname],
+                                   current_sign_in_ip: request.remote_ip, landing_page: session[:landing_page],
+                                   utm_params: session[:utm_params], site_version: current_site_version.name,
+                                   form_name: "checkout/address").capture
+
       # update first/last names, email
       registration = Services::UpdateUserRegistrationForOrder.new(@order, try_spree_current_user, params)
       registration.update
@@ -98,6 +105,7 @@ Spree::CheckoutController.class_eval do
           format.js{ render 'spree/checkout/update/failed' }
         end
       end
+
     else
       @order.state = 'masterpass' if params[:state] == 'masterpass'
       respond_with(@order) do |format|

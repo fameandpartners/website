@@ -33,6 +33,12 @@ class Campaigns::EmailCaptureController < ApplicationController
       user:           current_spree_user
     ).create
 
+    EmailCapture.new({ service: :mailchimp }, email: params[:email], newsletter: true,
+                                 current_sign_in_ip: request.remote_ip,
+                                 landing_page: session[:landing_page],
+                                 utm_params: session[:utm_params], site_version: current_site_version.name,
+                                 form_name: 'Sitewide Modal Form').capture
+
     begin
       if params[:promocode].present?
         service = UserCart::PromotionsService.new(
@@ -75,5 +81,15 @@ class Campaigns::EmailCaptureController < ApplicationController
   rescue StandardError => e
     NewRelic::Agent.notice_error(e)
     render :json => { status: 'invalid' }, status: :error
+  end
+
+  def mailchimp
+    EmailCapture.new({ service: :mailchimp }, email: params[:email],
+                                 current_sign_in_ip: request.remote_ip,
+                                 landing_page: session[:landing_page],
+                                 utm_params: session[:utm_params], site_version: current_site_version.name,
+                                 form_name: 'Footer Contact').capture
+
+    render nothing: true
   end
 end

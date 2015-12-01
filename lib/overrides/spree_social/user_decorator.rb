@@ -9,10 +9,14 @@ Spree::User.class_eval do
       self.first_name = omniauth['info']['first_name'] if first_name.blank?
       self.last_name  = omniauth['info']['last_name'] if last_name.blank?
 
+      if Rails.env.development?
+        logger.warn "Facebook: not using avatar"
+      else
       response    = Net::HTTP.get_response(
         URI.parse("http://graph.facebook.com/#{omniauth['uid']}/picture?width=1024&height=1024")
       )
       self.avatar = open(response.header['location'])
+      end
     end
   rescue StandardError => e
     NewRelic::Agent.notice_error(e)
