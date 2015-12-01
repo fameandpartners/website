@@ -12,7 +12,7 @@
         #{image_path("landingpages/brides/hero-sml.jpg")} 768w,
         #{image_path("landingpages/brides/hero-full.jpg")} 1024w' alt='The Bride - Is a flower, blooming eternal, through love that abounds. Enter the garden. Be moved. Find the dress and say yes.'
     .copy-wrap
-      a href='#how-it-works' class='btn btn-lowlight btn-md' See how it works
+      a href='#how-it-works' class='btn btn-lowlight' See how it works
 
   .container
     .row
@@ -51,16 +51,21 @@
                 em
                   span 6
                 .copy-wrap.highlight
-                  span CHOOSE YOUR FREE HONEYMOON DRESS*
+                  span BRIDE TO CHOOSE FREE HONEYMOON DRESS
 
           .inner-right.position-1
-            .media-wrap
-              = image_tag 'landingpages/brides/honeymoon.jpg', alt: 'GET A FREE HONEYMOON DRESS OF YOUR CHOICE WHEN YOU DRESS YOUR BRIDAL PARTY WITH US.'
+            picture.media-wrap
+              source media='(max-width: 1023px)' srcset='#{image_path("landingpages/brides/honeymoon-mob.jpg")}'
+              source media='(min-width: 1024px)' srcset='#{image_path("landingpages/brides/honeymoon.jpg")}'
+              img src='#{image_path("landingpages/brides/honeymoon.jpg")}' srcset='
+                #{image_path("landingpages/brides/honeymoon-mob.jpg")} 1023w,
+                #{image_path("landingpages/brides/honeymoon.jpg")} 1024w' alt='
+                GET A FREE HONEYMOON DRESS OF YOUR CHOICE WHEN YOU DRESS YOUR BRIDAL PARTY WITH US.'
           .btn-wrap.position-3
-            = link_to 'Get started', new_moodboard_path, class:'btn btn-lowlight btn-md'
+            = link_to 'Get started', new_moodboard_path, class:'btn btn-lowlight'
 
       .col-md-12
-        h2.heading-secondary Your wedding dress doesn't need to cost the earth to be beautiful, memorable & completely unique to you
+        h2.heading-secondary Your wedding dress doesn't need to cost the earth to be beautiful, memorable & completely unique to you.
         section.carousel-strap
           .outer-wrap
             // TODO: update path
@@ -73,7 +78,7 @@
           = image_tag 'landingpages/brides/tile-secondary-2.jpg'
 
       .col-md-12
-        h2.heading-secondary You found the hidden spots of my soul, and I am forever grateful.<em>- S. M. Pastpre -</em>
+        h2.heading-secondary.heading-width-sml You found the hidden spots of my soul, and I am forever grateful.<em>- S. M. Pastpre -</em>
 
       .col-md-12.section-register
         .media-wrap
