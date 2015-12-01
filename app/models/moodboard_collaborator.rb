@@ -11,8 +11,6 @@ class MoodboardCollaborator < ActiveRecord::Base
 
   attr_accessible :deleted_at, :deleted_by, :email, :mute_notifications, :name
 
-
-
   def set_user_from_email
     return if self.user.present?
 
@@ -27,7 +25,6 @@ class MoodboardCollaborator < ActiveRecord::Base
       name:       name,
       email:      email,
       created_at: created_at,
-      raw: super
     }
   end
 end
