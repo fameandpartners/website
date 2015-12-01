@@ -1,0 +1,10 @@
+# Adding a Site Version
+
+This file will list steps that you must go through when adding a new site version.
+
+1. Don't forget to add the new site version domain on the cookie session store configuration, otherwise, cookies will not be shared between domains.
+    - See `COOKIE_STORE_DOMAINS` at `/config/initializers/session_store.rb`
+
+## Legacy
+
+Site versions were detected as paths on the URL (e.g. `/au`, `/`), and they changed this behaviour.
