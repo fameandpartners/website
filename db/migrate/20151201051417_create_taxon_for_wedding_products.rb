@@ -42,31 +42,30 @@ class CreateTaxonForWeddingProducts < ActiveRecord::Migration
   end
 
   def up
-    taxonomy_id = Spree::Taxonomy.where(name: 'Style').first.try(:id)
-    parent_id   = Spree::Taxon.where(name: 'Style').first.try(:id)
-    if taxonomy_id.present?
+    style_taxonomy = Spree::Taxonomy.where(name: 'Style').first
+    if style_taxonomy.present?
       tx              = Spree::Taxon.new
       tx.name         = 'guest_carousel'
-      tx.taxonomy_id  = taxonomy_id
+      tx.taxonomy     = style_taxonomy
       tx.permalink    = 'style/guest_carousel'
       tx.published_at = Date.today
-      tx.parent_id    = parent_id
+      tx.parent       = style_taxonomy.root
       tx.save!
 
       tx              = Spree::Taxon.new
       tx.name         = 'bride_carousel'
-      tx.taxonomy_id  = taxonomy_id
+      tx.taxonomy     = style_taxonomy
       tx.permalink    = 'style/bride_carousel'
       tx.published_at = Date.today
-      tx.parent_id    = parent_id
+      tx.parent       = style_taxonomy.root
       tx.save!
 
       tx              = Spree::Taxon.new
       tx.name         = 'bridesmaid_carousel'
-      tx.taxonomy_id  = taxonomy_id
+      tx.taxonomy     = style_taxonomy
       tx.permalink    = 'style/bridesmaid_carousel'
       tx.published_at = Date.today
-      tx.parent_id    = parent_id
+      tx.parent       = style_taxonomy.root
       tx.save!
     end
 
