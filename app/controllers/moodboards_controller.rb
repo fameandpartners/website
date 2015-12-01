@@ -67,6 +67,6 @@ class MoodboardsController < ApplicationController
     @collection ||= spree_current_user.moodboards
   end
   helper_method def enhanced_moodboards_enabled?
-    @enhanced_moodboards_enabled ||= Features.active?(:enhanced_moodboards, current_spree_user)
+    Features.active?(:enhanced_moodboards)
   end
 end
