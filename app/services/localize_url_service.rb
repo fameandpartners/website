@@ -13,7 +13,7 @@ class LocalizeUrlService
       url
     end
 
-    def remove_version_from_url(url)
+    def remove_version_from_path(url)
       locales_paths = SiteVersion.permalinks.map { |sv| "/#{sv}/" }
       locales_regex = Regexp.union(locales_paths)
       url.to_s.gsub(locales_regex, '/')

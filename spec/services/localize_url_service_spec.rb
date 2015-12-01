@@ -49,12 +49,12 @@ describe LocalizeUrlService do
     end
   end
 
-  describe '.remove_version_from_url' do
+  describe '.remove_version_from_path' do
     context 'given an URL with a site version' do
       before(:each) { create(:site_version, permalink: 'pt') }
 
       it 'remove any known site version from it' do
-        result = described_class.remove_version_from_url('/pt/something?query=cool')
+        result = described_class.remove_version_from_path('/pt/something?query=cool')
         expect(result).to eq('/something?query=cool')
       end
     end
@@ -62,13 +62,13 @@ describe LocalizeUrlService do
     context 'given an URL/path without a site version' do
       it 'does nothing on URLs' do
         given_url = 'http://example.com/pt/something?query=cool'
-        result = described_class.remove_version_from_url(given_url)
+        result = described_class.remove_version_from_path(given_url)
         expect(result).to eq(given_url)
       end
 
       it 'does nothing on paths' do
         given_path = '/something?query=cool'
-        result = described_class.remove_version_from_url(given_path)
+        result = described_class.remove_version_from_path(given_path)
         expect(result).to eq(given_path)
       end
     end
