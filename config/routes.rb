@@ -84,6 +84,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/bring-on-the-night' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :bring_on_the_night_landing_page
     get '/lookbook/bring-on-the-night' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :bring_on_the_night_collection
+    get '/lookbook/this-modern-romance' => 'products/collections#show', :permalink => 'this-modern-romance', :as => :this_modern_romance_collection
 
     get '/lookbook/garden-weeding' => redirect('/lookbook/garden-wedding')
     get '/lookbook/garden-wedding' => 'products/collections#show', :permalink => 'garden-party', :as => :garden_wedding_collection
