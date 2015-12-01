@@ -4,17 +4,15 @@ describe 'orders', type: :feature do
   context 'user changes site version' do
 
     shared_examples 'does not drop current order' do
-      let!(:us_site_version) { create(:site_version, permalink: 'us', currency: 'USD', default: true) }
-      let!(:au_site_version) { create(:site_version, permalink: 'au', currency: 'AUD', default: false) }
+      let!(:us_site_version) { create(:site_version, :us, :default) }
+      let!(:au_site_version) { create(:site_version, :au) }
 
       it 'user navigates to a different site version' do
-        with_capybara_host('us.fameandpartners.test') do
-          visit '/'
-        end
+        switch_to_subdomain 'us'
+        visit '/'
 
-        with_capybara_host('au.fameandpartners.test') do
-          visit '/'
-        end
+        switch_to_subdomain 'au'
+        visit '/'
 
         au_order = Spree::Order.first
         expect(au_order.currency).to eq 'AUD'
