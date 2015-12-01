@@ -9,7 +9,7 @@ class LocalizeUrlService
       new_uri = URI.join("#{uri.scheme}://#{uri.host}:#{uri.port}", "./#{site_version.to_param}/", "./#{uri.path}")
       new_uri.query = uri.query
       new_uri.to_s
-    rescue URI::InvalidURIError => e
+    rescue URI::InvalidURIError => _
       url
     end
 
