@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151126055038) do
+ActiveRecord::Schema.define(:version => 20151127025348) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -747,6 +747,7 @@ ActiveRecord::Schema.define(:version => 20151126055038) do
     t.datetime "updated_at",                                 :null => false
     t.date     "exchange_rate_timestamp"
     t.decimal  "exchange_rate",           :default => 1.0
+    t.string   "domain",                  :default => "",    :null => false
   end
 
   add_index "site_versions", ["zone_id"], :name => "index_site_versions_on_zone_id"
