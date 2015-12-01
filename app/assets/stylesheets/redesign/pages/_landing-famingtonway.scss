@@ -17,6 +17,12 @@
 
   }
 
+  .btn {
+    padding: 5px 20px;
+    line-height: normal;
+    font-size: 0.75em;
+  }
+
   // START - hero-wrap
   .hero-wrap {
 
@@ -133,12 +139,6 @@
       font-size: 1.625em;
     }
 
-    .btn {
-      padding: 5px 20px;
-      line-height: normal;
-      font-size: 0.75em;
-    }
-
   }
   // END - section-register
 
@@ -155,6 +155,7 @@
 
     .heading {
       margin: 0 0 40px 0;
+      text-transform: none;
       font-family: $font-heading;
       font-size: 3.125em;
 
@@ -163,12 +164,6 @@
         font-size: 0.64em;
       }
 
-    }
-
-    .btn {
-      padding: 5px 20px;
-      line-height: normal;
-      font-size: 0.75em;
     }
 
   }
@@ -192,13 +187,24 @@
     & {
 
       .heading-secondary {
-        margin: 60px 280px;
+        margin: 60px 0;
+
+        &.heading-width-md {
+          margin-left: 28%;
+          margin-right: 28%;
+        }
+
+        &.heading-width-sml {
+          margin-left: 36%;
+          margin-right: 36%;
+        }
+
       }
 
       .hero-wrap {
 
         .copy-wrap {
-          margin-top: -22px;
+          margin-top: -15px;
           padding: 0 0 30px 0;
         }
 
@@ -235,15 +241,8 @@
         }
 
         .btn-wrap {
-          position: absolute;
-          bottom: -23px;
-          left: 0;
-          right: 0;
-
-          &:before {
-            display: none;
-          }
-
+          display: none;
+          visibility: hidden;
         }
 
         ul {
@@ -314,6 +313,14 @@
 
       }
 
+    }
+
+  }
+
+  @media (min-width: $bootstrap-lg-width) {
+    
+    & .section-steps ul {
+      padding-top: 30px;
     }
 
   }
