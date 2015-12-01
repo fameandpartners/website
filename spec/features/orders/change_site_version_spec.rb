@@ -8,8 +8,8 @@ describe 'orders', type: :feature do
       let!(:au_site_version) { create(:site_version, permalink: 'au', currency: 'AUD', default: false) }
 
       it 'user navigates to a different site version' do
-        visit '/'
-        visit '/au'
+        visit 'us.fameandpartners.test'
+        visit 'au.fameandpartners.test'
 
         au_order = Spree::Order.first
         expect(au_order.currency).to eq 'AUD'
