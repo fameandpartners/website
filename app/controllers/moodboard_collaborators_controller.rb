@@ -11,9 +11,7 @@ class MoodboardCollaboratorsController < ApplicationController
 
     if existing
       message = { notice: "#{new_collaborator.email} is already on this moodboard!" }
-    elsif new_collaborator.valid?
-      new_collaborator.set_user
-      new_collaborator.save
+    elsif new_collaborator.save
       message = { notice: "#{new_collaborator.name} added!" }
     else
       message = { error: new_collaborator.errors.full_messages }
