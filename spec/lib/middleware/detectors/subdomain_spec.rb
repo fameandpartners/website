@@ -4,6 +4,8 @@ module Middleware
   module SiteVersion
     module Detectors
       RSpec.describe Subdomain do
+        let(:detector) { described_class.new }
+
         describe '#detect_site_version' do
           matcher :be_detected_as do |sv_code|
             match do |host|
@@ -27,7 +29,6 @@ module Middleware
         end
 
         describe '#default_url_options' do
-          let(:detector) { described_class.new }
           let(:au_site_version) { build_stubbed(:site_version, :au, :default) }
           let(:br_site_version) { build_stubbed(:site_version, :us) }
 
@@ -37,6 +38,18 @@ module Middleware
 
             result = detector.default_url_options(br_site_version)
             expect(result).to eq({ site_version: nil })
+          end
+        end
+
+        describe '#site_version_url' do
+          let(:url) { 'http://www.example.com/something?in-the=way' }
+          let(:br_site_version) { build_stubbed(:site_version, permalink: 'br') }
+
+          context 'given a URL and a site version' do
+            it 'replaces the URL with a subdomain and lvh.me host' do
+              result = detector.site_version_url(url, br_site_version)
+              expect(result).to eq('http://br.lvh.me/something?in-the=way')
+            end
           end
         end
       end
