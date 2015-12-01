@@ -23,7 +23,7 @@ table.table
     - collection.each do |rr|
       - items = rr.return_request_items.group_by(&:action).map { |action, items| [action.to_sym, items.count] }.to_h
       tr
-        td = link_to rr.created_at.to_date, return_request_path(rr)
+        td = link_to rr.created_at.to_date, backend_return_request_path(rr)
         td = link_to rr.order.number, spree.admin_order_path(rr.order)
         td = rr.order.completed_at.to_date
         td = rr.order.shipments.detect(&:shipped?).try(:shipped_at).try(:to_date)
@@ -32,4 +32,4 @@ table.table
         td = items[:keep]
 
 
-    /li = return_request.inspect
+    li = return_request.inspect

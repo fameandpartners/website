@@ -1,11 +1,8 @@
 AdminUi::Engine.routes.draw do
-  resources :return_requests
   resources :item_returns do
-
     get ':event_type/new', :controller => 'item_returns/events', action: :new, as: :build_event
     resources :events, :controller => 'item_returns/events', except: [:update, :delete]
   end
-  resources :manually_managed_returns
 
   resources :preferences, only: :index do
     collection do
@@ -14,7 +11,23 @@ AdminUi::Engine.routes.draw do
   end
 
   namespace :backend do
+    resources :caches, only: [:index, :destroy, :show] do
+      delete :expire, :on => :collection
+    end
+
     resources :features, only: [:index]
+
+    resources :product_indexes, only: [:index, :show] do
+      delete :clear, :on => :collection
+    end
+
+    resources :manually_managed_returns
+    resources :return_requests
+
+    resource :sidekiq, only: :show do
+      require 'sidekiq/web'
+      mount Sidekiq::Web => 'd0ec826a2968a7079f0bdd8f1116811f'
+    end
   end
 
   namespace :reports do
@@ -30,21 +43,8 @@ AdminUi::Engine.routes.draw do
 
   resources :variants
 
-  resources :caches, only: [:index, :destroy, :show] do
-    delete :expire, :on => :collection
-  end
-
-  resources :product_indexes, only: [:index, :show] do
-    delete :clear, :on => :collection
-  end
-
   namespace :content do
     resources :pages
-  end
-
-  resource :sidekiq, :only => :show do
-    require 'sidekiq/web'
-    mount Sidekiq::Web => 'd0ec826a2968a7079f0bdd8f1116811f'
   end
 
   root to: 'dashboard#index'
