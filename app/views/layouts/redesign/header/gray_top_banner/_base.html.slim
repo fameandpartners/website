@@ -102,12 +102,12 @@ ruby:
     .col-md-5
       ul
         li.title lookbooks
+        li = link_to 'Mordern Romance', modern_romance_collection_path
         li = link_to 'Bring On The Night', bring_on_the_night_collection_path
         li = link_to 'Dance Hall Days', dance_hall_days_collection_path
         li = link_to 'Photo Finish', photo_finish_collection_path
         li = link_to 'Make a Statement', make_a_statement_collection_path
         li = link_to 'Luxe Collection', luxe_collection_path
-        li = link_to 'Besties & Bridesmaids', bridesmaid_collection_path
         li = link_to 'View all lookbooks', lookbook_path
     .col-md-7
       = link_to bring_on_the_night_collection_path, class: 'panel-highlight media-wrap'
