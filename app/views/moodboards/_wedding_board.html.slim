@@ -27,17 +27,8 @@
 
         .panel-aside
           h3.heading BRIDESMAIDS
-          ul
-            li PRUDENCE SMITH
-            li PRUDENCE SMITH
-            li PRUDENCE SMITH
-            li PRUDENCE SMITH
-            li PRUDENCE SMITH
-          - if @resource.persisted?
-            p 
-              = link_to("Add", edit_moodboard_path(@resource))
-              span &nbsp;another bridesmaid
-        .panel-aside.panel-swatches
+            = render 'collaborators', moodboard: @resource
+
           h3.heading SWATCHES
           = render 'color_swatches', colors: @resource.items.active.map(&:color)
 

@@ -11,7 +11,7 @@
       .col-md-9
         ul
           - collection.each do |mb|
-            - if moodboard_path(mb) === moodboard_path(@resource)
+            - if is_active_link?(moodboard_path(mb))
               li.active
                 .tab
                   .inner-wrap

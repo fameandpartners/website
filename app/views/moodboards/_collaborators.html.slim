@@ -1,0 +1,10 @@
+ul
+  - moodboard.collaborators.each do |member|
+    li
+      => member.name.to_s.upcase
+      => member.email
+
+= form_for moodboard.collaborators.build, url: moodboard_collaborators_path(moodboard) do |f|
+  = f.text_field :name, placeholder: 'Name'
+  = f.text_field :email, placeholder: 'Email'
+  = f.button 'Add another bridesmaid'
