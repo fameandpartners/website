@@ -67,6 +67,11 @@
       .heading {
         font-size: 2em;
         color: $c-neutral-white;
+
+        &.skin-dark {
+          color: $c-neutral-black;
+        }
+
       }
 
       p {
