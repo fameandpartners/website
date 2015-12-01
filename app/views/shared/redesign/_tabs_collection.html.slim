@@ -3,21 +3,21 @@
   ul
     li.active
       .inner-wrap
-        a href='#collection1' data-toggle="tab" Bring On The Night Collection
+        a href='#collection1' data-toggle="tab" This Modern Romance Collection
     li
       .inner-wrap
-        a href='#collection2' data-toggle="tab" Dance Hall Days Collection
+        a href='#collection2' data-toggle="tab" Bring On The Night Collection
     li
       .inner-wrap
-        a href='#collection3' data-toggle="tab" Photo Finish Collection
+        a href='#collection3' data-toggle="tab" Dance Hall Days Collection
 
   .tab-wrap
-    = link_to bring_on_the_night_collection_path, id: 'collection1', class: 'tab active'
+    = link_to this_modern_romance_collection_path, id: 'collection1', class: 'tab active'
+      = image_tag 'home-page-tiles/tab-collectionbox-4.jpg', alt: 'This Modern Romance Collection'
+    = link_to bring_on_the_night_collection_path, id: 'collection2', class: 'tab'
       = image_tag 'home-page-tiles/tab-collectionbox-1.jpg', alt: 'Bring On The Night Collection'
-    = link_to dance_hall_days_collection_path, id: 'collection2', class: 'tab'
+    = link_to dance_hall_days_collection_path, id: 'collection3', class: 'tab'
       = image_tag 'home-page-tiles/tab-collectionbox-2.jpg', alt: 'Dance Hall Days Collection'
-    = link_to photo_finish_collection_path, id: 'collection3', class: 'tab'
-      = image_tag 'home-page-tiles/tab-collectionbox-3.jpg', alt: 'Photo Finish Collection'
     a.navigator.btn-prev.js-navigator-prev href='javascript:void(0)'
       .icon.icon-arrow-left
       .hide-visually Previous tab
