@@ -153,7 +153,9 @@ module Search
             when 'fast_delivery'
               by 'product.fast_delivery', 'desc'
             else
-              by 'product.position', 'asc'
+              # Don't have an order here, so this will show any queried dress first in the result,
+              # eg, search for 'last Kiss' will show 'last kiss' then 'studded kiss' instead of
+              # 'studded kiss' then 'last kiss' which was happening prior.
           end
         end
       end
