@@ -43,3 +43,55 @@ window.helpers.UserMoodboard = class UserMoodboard
 
   dataLayerTrackEvent: (event_name) ->
     window.track.dataLayer.push({event: event_name})
+
+
+# A shameless copypasta from the UserMoodboard.
+# TODO - Refactor into vanillajs
+window.helpers.UserMoodboardStore = class UserMoodboardStore
+  constructor: (moodboards = {}) ->
+    @$eventBus = $({})
+
+    @trigger =  delegateTo(@$eventBus, 'trigger')
+    @on      =  delegateTo(@$eventBus, 'on')
+    @one     =  delegateTo(@$eventBus, 'one')
+
+    @updateMoodboards(moodboards)
+
+  addItem: (item = {}) ->
+    @dataLayerTrackEvent()
+
+    if @hasItem(item)
+      @trigger('change')
+      return
+
+    moodboard = @getMoodboard(item.moodboard_id)
+    unless moodboard
+      return
+
+    $.ajax(
+      url: moodboard.add_item_path,
+      type: "POST",
+      data: item,
+      dataType: "json",
+    ).success(@updateMoodboards)
+
+
+  hasItem: (item = {}) ->
+    moodboard = @getMoodboard(item.moodboard_id)
+    unless moodboard
+      return false
+
+    if !item.color_id
+      !!_.findWhere(moodboard.items, { product_id: item.product_id })
+    else
+      !!_.findWhere(moodboard.items, { product_id: item.product_id, color_id: item.color_id })
+
+  getMoodboard: (moodboard_id) ->
+    (@moodboards.moodboards.filter (m) -> m.id is moodboard_id)[0]
+
+  updateMoodboards: (moodboards = {}) =>
+    @moodboards = moodboards
+    @trigger('change')
+
+  dataLayerTrackEvent: ->
+    window.track.dataLayer.push({event: 'addedToWishlist'})

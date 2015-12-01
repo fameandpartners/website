@@ -26,8 +26,10 @@ class Moodboard < ActiveRecord::Base
 
   def add_item(product:, color:, user:, variant: nil)
     product_id = product.id
+    color_id   = color.id
+    return if items.active.where(product_id: product_id, color_id: color_id ).exists?
 
-    pcv_id = ProductColorValue.where(product_id: product_id, option_value_id: color.id).first.try(:id)
+    pcv_id = ProductColorValue.where(product_id: product_id, option_value_id: color_id).first.try(:id)
 
     ev = MoodboardItemEvent.creation.new(
       moodboard_id:           self.id,

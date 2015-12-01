@@ -32,3 +32,8 @@
     - if Features.active?(:moodboard)
       button#add-to-moodboard.btn.btn-block.btn-secondary data-user-present=current_spree_user.present?
         |+ Moodboard
+
+- if Features.active?(:enhanced_moodboards)
+  .row.secondary-actions
+    / TODO - Support for dynamic colours.
+    = react_component('AddProductToAnyMoodboard', moodboards: user_moodboards, product_id: @product.id, color_id: @product.color_id)
