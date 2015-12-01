@@ -128,11 +128,7 @@ class EmailCapture
   end
 
   def set_list_id
-    if Rails.env.production?
-      list_id = (site_version == 'Australia' ? configatron.mailchimp.au_list_id : configatron.mailchimp.us_list_id)
-    else
-      list_id = configatron.mailchimp.list_id
-    end
+    list_id = configatron.mailchimp.list_id
 
     list_id
   end
