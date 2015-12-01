@@ -43,5 +43,4 @@ Spree::Address.class_eval do
       self.phone = order_bill_address.phone
     end
   end
-
 end
