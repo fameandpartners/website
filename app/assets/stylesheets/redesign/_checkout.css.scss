@@ -448,3 +448,9 @@ $order-summary-bg: #f7f7f9;
     }
   }
 }
+
+.checkout.page-content {
+  .form-control {
+    color: $black-checkout-input;
+  }
+}
