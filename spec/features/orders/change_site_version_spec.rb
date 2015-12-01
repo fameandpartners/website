@@ -8,8 +8,13 @@ describe 'orders', type: :feature do
       let!(:au_site_version) { create(:site_version, permalink: 'au', currency: 'AUD', default: false) }
 
       it 'user navigates to a different site version' do
-        visit 'us.fameandpartners.test'
-        visit 'au.fameandpartners.test'
+        with_capybara_host('us.fameandpartners.test') do
+          visit '/'
+        end
+
+        with_capybara_host('au.fameandpartners.test') do
+          visit '/'
+        end
 
         au_order = Spree::Order.first
         expect(au_order.currency).to eq 'AUD'
