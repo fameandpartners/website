@@ -23,12 +23,17 @@ class Marketing::Subscriber
 
   def create
     validate!
+    CampaignMonitor.schedule(:synchronize, email, user, custom_fields)
   end
 
   def update
     if user_changed?
       create
     end
+  end
+
+  def set_purchase_date(date = Date.today)
+    CampaignMonitor.schedule(:set_purchase_date, user, date, custom_fields) if user.present?
   end
 
   def details

@@ -1,5 +1,4 @@
 Spree::User.class_eval do
-
   has_one :profile_image, as: :viewable, dependent: :destroy, class_name: "Spree::Image"
   has_many :wishlist_items, dependent: :destroy, class_name: "WishlistItem", foreign_key: :spree_user_id
 

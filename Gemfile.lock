@@ -237,7 +237,7 @@ GEM
       launchy
     celluloid (0.15.2)
       timers (~> 1.1.0)
-    childprocess (0.5.8)
+    childprocess (0.5.7)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
     chunky_png (1.3.4)
@@ -490,9 +490,6 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mailchimp-api (2.0.6)
-      excon (>= 0.16.0)
-      json (>= 1.7.7)
     mastercard_api (0.0.1)
     mastercard_masterpass_api (0.0.1)
     meta_request (0.3.4)
@@ -660,7 +657,7 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     retriable (2.0.2)
-    rmagick (2.15.4)
+    rmagick (2.15.0)
     rollout (2.1.0)
     roo (1.13.2)
       nokogiri
@@ -842,7 +839,7 @@ DEPENDENCIES
   aws-sdk
   better_errors
   binding_of_caller
-  bootstrap-sass (= 3.3.4.1)
+  bootstrap-sass
   bourbon
   bower-rails (~> 0.10.0)
   bugsnag
@@ -878,7 +875,6 @@ DEPENDENCIES
   jquery-ui-rails
   launchy (= 2.2.0)
   letter_opener (~> 1.4.1)
-  mailchimp-api
   meta_request
   net-ssh (~> 2.7.0)
   newrelic_rpm
@@ -936,4 +932,4 @@ DEPENDENCIES
   zeus
 
 BUNDLED WITH
-   1.10.6
+   1.10.4
