@@ -155,6 +155,7 @@
 
     .heading {
       margin: 0 0 40px 0;
+      text-transform: none;
       font-family: $font-heading;
       font-size: 3.125em;
 
@@ -235,15 +236,8 @@
         }
 
         .btn-wrap {
-          position: absolute;
-          bottom: -23px;
-          left: 0;
-          right: 0;
-
-          &:before {
-            display: none;
-          }
-
+          display: none;
+          visibility: hidden;
         }
 
         ul {
