@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe ApplicationController, :type => :controller do
+describe ApplicationController, type: :controller do
   describe '#is_user_came_from_current_app' do
     it 'returns true if referrer has the same host' do
-      request.env["HTTP_REFERER"] = "http://test.host/somewhere"
+      request.env['HTTP_REFERER'] = 'http://us.lvh.me/somewhere'
       expect(controller.send(:is_user_came_from_current_app)).to eq(true)
     end
 
@@ -12,7 +12,7 @@ describe ApplicationController, :type => :controller do
     end
 
     it 'returns false for external referrer' do
-      request.env["HTTP_REFERER"] = "http://external.host/somewhere"
+      request.env['HTTP_REFERER'] = 'http://external.host/somewhere'
       expect(controller.send(:is_user_came_from_current_app)).to eq(false)
     end
   end
