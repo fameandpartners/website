@@ -20,6 +20,7 @@ module Middleware
           end
         end
 
+        # TODO: current LocalizeUrlService.localize_url logic should go here
         def site_version_url(current_url, site_version)
           LocalizeUrlService.localize_url(current_url, site_version)
         end

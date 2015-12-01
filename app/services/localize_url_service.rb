@@ -1,5 +1,7 @@
 class LocalizeUrlService
   class << self
+    # TODO: This method must get out of here, since it no longer makes sense with other site version detectors strategy.
+    # This will be replaced by [Subdomain, Domain, Path]#site_version_url
     def localize_url(url, site_version)
       locales_paths = SiteVersion.permalinks.map { |sv| "/#{sv}" }
       locales_regex = Regexp.union(locales_paths)
