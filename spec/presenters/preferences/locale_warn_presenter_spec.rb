@@ -59,8 +59,8 @@ describe Preferences::LocaleWarnPresenter, type: :presenter do
 
   describe '#cache_key' do
     it 'returns the cache key composed by geo and current site version codes, and show boolean' do
-      presenter = described_class.new(geo_site_version: br_site_version, current_site_version: au_site_version, session_site_version_code: nil)
-      expect(presenter.cache_key).to eq('br-au-true')
+      presenter = described_class.new(request_url: 'http://us.lvh.me/something', geo_site_version: br_site_version, current_site_version: au_site_version, session_site_version_code: nil)
+      expect(presenter.cache_key).to eq('fa187f996c56fac64149be62ea937262-br-au-true')
     end
   end
 end

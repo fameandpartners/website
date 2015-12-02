@@ -36,7 +36,8 @@ module Preferences
     end
 
     def cache_key
-      [geo_site_version.code, current_site_version.code, show?].join('-')
+      request_url_digest = Digest::MD5.hexdigest(request_url)
+      [request_url_digest, geo_site_version.code, current_site_version.code, show?].join('-')
     end
 
     private
