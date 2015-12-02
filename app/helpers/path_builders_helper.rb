@@ -77,11 +77,12 @@ module PathBuildersHelper
   end
 
   # /dresses/dress-eva-456/black?params
+  # TODO 02-12-2015 this method is not used anywhere. It's used by a legacy controller
   def colored_variant_path(variant, options = {})
     parts = []
     parts << self.url_options[:site_version]
     parts << 'dresses'
-   
+
     parts << "dress-#{variant.product[:urls][I18n.locale.to_s.downcase.underscore.to_sym]}"
     parts << variant.color.name
 
@@ -89,6 +90,7 @@ module PathBuildersHelper
   end
 
   # TODO - Remove legacy URL
+  # TODO 02-12-2015 this method is not used anywhere. It's used by a legacy controller
   # /dresses/styleit-eva-456
   def style_it_path(product, options={})
     path_parts = [
