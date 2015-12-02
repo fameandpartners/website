@@ -43,11 +43,13 @@ $product-color-hot-pink: #ff3399;
       .color-beige                   { background-color: #efdecd; }
       .color-berry                   { background-color: #873c44; }
       .color-black                   { background-color: $product-color-black; }
+      .color-black-and-chartreuse    { @include split-color-selector(#000000, #c3ea56); }
       .color-black-and-peacock       { @include split-color-selector($product-color-black, #134b7d); }
       .color-black-and-vintage-gold  { @include split-color-selector($product-color-black, #d8ba00); }
       .color-blue                    { background-color: #0000ff; }
       .color-blue-azalea-floral      { @include image-color-selector('BlueAzaleaFloral.png'); }
       .color-blush                   { background-color: #eec6c6; }
+      .color-blush-and-black         { @include split-color-selector(#e1c2c1, #000000); }
       .color-brick                   { background-color: #993333; }
       .color-bright-red              { background-color: #ff3333; }
       .color-bright-lavender         { background-color: #ddb6f9; }
