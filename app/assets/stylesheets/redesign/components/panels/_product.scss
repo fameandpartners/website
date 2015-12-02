@@ -32,6 +32,10 @@
     margin-right: -5px;
     @extend %cfix;
 
+    .inner-wrap-full {
+      padding: 0 5px;
+    }
+
     .inner-wrap {
       float: left;
       width: 50%;
