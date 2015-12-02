@@ -159,6 +159,9 @@ class Products::CollectionResource
 
     def total_products
       query.json["hits"]["total"]
+    rescue Tire::Search::SearchRequestFailed => nope
+      NewRelic::Agent.notice_error(nope, query: query.to_json)
+      0
     end
 
     def products
@@ -185,6 +188,9 @@ class Products::CollectionResource
       end
 
       result
+    rescue Tire::Search::SearchRequestFailed => nope
+      NewRelic::Agent.notice_error(nope, query: query.to_json)
+      []
     end
 
     # TODO - Consolidate with behaviour on app/helpers/landing_pages_helper.rb:24 #cropped_product_hoverable_images
