@@ -99,21 +99,6 @@ module PathBuildersHelper
     build_url(path_parts, options)
   end
 
-  # custom_collection_product_url('Long-Dresses', 'the-fallen', cf: 'homefeature')
-  # "http://www.fameandpartners.com/collection/Long-Dresses/the-fallen?cf=homefeature" 
-  def build_collection_product_path(collection_id, product_id, options = {})
-    site_version_prefix = self.url_options[:site_version]
-    path_parts = [site_version_prefix, 'collection', collection_id, product_id]
-
-    build_url(path_parts, options)
-  end
-
-  def build_collection_product_url(collection_id, product_id, options = {})
-    url_without_double_slashes(
-      root_url(site_version: nil) + build_collection_product_path(collection_id, product_id, options)
-    )
-  end
-
   # /dresses/long
   def build_taxon_path(taxon_name, options={})
     path_parts = [
