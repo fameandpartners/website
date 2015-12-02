@@ -104,7 +104,7 @@ module PathBuildersHelper
   # /dresses/long
   def build_taxon_path(taxon_name, options={})
     path_parts = [
-      options.delete(:site_version) || self.url_options[:site_version],
+      self.url_options[:site_version],
       'dresses'
     ]
     taxon = Repositories::Taxonomy.get_taxon_by_name(taxon_name)
