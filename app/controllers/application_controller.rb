@@ -111,21 +111,6 @@ class ApplicationController < ActionController::Base
     true
   end
 
-
-  def url_options
-    version = current_site_version
-
-    if version.permalink.present? && version.permalink != 'us'
-      site_version = version.permalink.html_safe
-    else
-      site_version = nil
-    end
-
-    result = { site_version: site_version }.merge(super)
-    result.delete(:script_name)
-    result
-  end
-
   def landing_page
     session[:landing_page]
   end
@@ -188,14 +173,6 @@ class ApplicationController < ActionController::Base
     end
 
     addition_params
-  end
-
-
-#  def current_spree_user
-#    @current_spree_user ||= super && Spree::User.includes(:wishlist_items).find(@current_spree_user.id)
-#  end
-  def current_spree_user
-    super
   end
 
   def current_wished_product_ids
