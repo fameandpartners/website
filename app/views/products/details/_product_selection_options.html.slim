@@ -29,11 +29,13 @@
     button#fit-guide.btn.btn-block.btn-secondary Size Guide
 
   .col-md-6.col-xs-6.col-xxs-12
-    - if Features.active?(:moodboard)
-      button#add-to-moodboard.btn.btn-block.btn-secondary data-user-present=current_spree_user.present?
-        |+ Moodboard
-
-- if Features.active?(:enhanced_moodboards)
-  .row.secondary-actions
-    / TODO - Support for dynamic colours.
-    = react_component('AddProductToAnyMoodboard', moodboards: user_moodboards, product_id: @product.id, color_id: @product.color_id)
+    - if Features.active?(:moodboard) && !Features.active?(:enhanced_moodboards)
+        button#add-to-moodboard.btn.btn-block.btn-secondary data-user-present=current_spree_user.present?
+          |+ Moodboard
+    - if Features.active?(:moodboard) && Features.active?(:enhanced_moodboards)
+      .btn-group.dropdown-moodboard
+        button.btn.btn-block.btn-secondary.dropdown-toggle data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' data-user-present=current_spree_user.present?
+          |+ Moodboard
+        .dropdown-menu
+          / TODO - Support for dynamic colours.
+          = react_component('AddProductToAnyMoodboard', moodboards: user_moodboards, product_id: @product.id, color_id: @product.color_id)

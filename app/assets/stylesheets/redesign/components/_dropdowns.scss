@@ -1,0 +1,41 @@
+/* [Dropdowns]
+-------------------------------------------------------*/
+.dropdown-moodboard {
+  width: 100%;
+
+  .dropdown-menu {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: solid $c-brand-blue 1px;
+    border-top-color: transparent;
+  }
+
+  ul {
+    margin: 0;
+  }
+
+  a {
+    display: block;
+    padding: 8px 20px;
+    font-size: 1.4rem;
+    color: $c-neutral-black;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      color: $c-neutral-black;
+      background: $c-neutral-2;
+    }
+
+    em {
+      margin-left: 4px;
+      text-transform: uppercase;
+      font-style: normal;
+      font-size: 1.5rem;
+    }
+
+  }
+
+}
