@@ -21,6 +21,7 @@ section#email-container.content-block.email-subscription
           input type="hidden" id="fielddkjuhr"  name="cm-f-dkjuhr" value=(details[:source] || cookies[:referrer])
           input type="hidden" id="fielddkjuhj"  name="cm-f-dkjuhj" value=(details[:campaign])
           input type="hidden" id="fielddkjuht"  name="cm-f-dkjuht" value=(details[:ipaddress])
+          input type='hidden' id='mailchimp'    name='mailchimp'   value=(mailchimp_campaigns_email_capture_path)
           button.btn.btn-black.btn-md type="submit" Submit
 
   = content_for :inline_javascript do

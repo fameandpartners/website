@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
   before_filter :add_debugging_information
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
   before_filter :set_locale
+  before_filter :set_landing_page
 
 
   helper_method :analytics_label,
@@ -35,7 +36,8 @@ class ApplicationController < ActionController::Base
                 :default_seo_title,
                 :get_user_type,
                 :serialize_user,
-                :serialized_current_user
+                :serialized_current_user,
+                :landing_page
 
   def count_competition_participants
     cpt = params[:cpt]
@@ -79,6 +81,7 @@ class ApplicationController < ActionController::Base
       utm_params.merge(referrer: request.referrer)
     )
     service.record_visit!
+    session[:utm_params] = utm_params
 
     if service.user_token_created?
       cookies.permanent[:utm_guest_token] = service.user_token
@@ -106,6 +109,10 @@ class ApplicationController < ActionController::Base
     })
   rescue Exception => _
     true
+  end
+
+  def landing_page
+    session[:landing_page]
   end
 
   private
@@ -166,10 +173,6 @@ class ApplicationController < ActionController::Base
     end
 
     addition_params
-  end
-
-  def sign_up_reason_for_campaign_monitor
-    Spree::User.campaign_monitor_sign_up_reason(session['sign_up_reason'])
   end
 
   def current_wished_product_ids
@@ -284,6 +287,10 @@ class ApplicationController < ActionController::Base
 
   def set_session_country
     session[:country_code] ||= FindCountryFromIP.new(request.remote_ip).country_code
+  end
+
+  def set_landing_page
+    session[:landing_page] ||= request.path
   end
 
 end

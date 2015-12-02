@@ -239,7 +239,11 @@ FameAndPartners::Application.routes.draw do
     get '/plus-size',  to: redirect('/dresses/plus-size')
 
     namespace 'campaigns' do
-      resource :email_capture, only: [:create], controller: :email_capture
+      resource :email_capture, only: [:create], controller: :email_capture do
+        collection do
+          get :mailchimp
+        end
+      end
     end
 
     get '/fame-chain' => 'fame_chains#new'
