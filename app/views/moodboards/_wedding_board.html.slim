@@ -37,7 +37,7 @@
             p 
               = link_to("Add", edit_moodboard_path(@resource))
               span &nbsp;another bridesmaid
-        .panel-aside
+        .panel-aside.panel-swatches
           h3.heading SWATCHES
           = render 'color_swatches', colors: @resource.items.active.map(&:color)
 
