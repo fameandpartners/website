@@ -174,7 +174,28 @@
     border-bottom: solid $c-neutral-black 1px;
   }
 
-  @include mobile {
+  .panel-swatches {
+
+    ul {
+      text-align: center;
+    }
+
+    li {
+      display: inline-block;
+      margin: 10px 5px;
+      border: solid $c-neutral-black 1px;
+    }
+
+    a {
+      display: block;
+      width: 35px;
+      height: 35px;
+      text-indent: -9999em;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
 
     & {
 
@@ -185,6 +206,21 @@
         &.active {
           display: block;
           visibility: visible;
+        }
+
+      }
+
+      .panel-swatches {
+        padding-left: 0;
+        padding-right: 0;
+
+        li {
+          margin: 10px;
+        }
+
+        a {
+          width: 60px;
+          height: 60px;
         }
 
       }
