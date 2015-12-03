@@ -11,6 +11,10 @@ class MoodboardCollaborator < ActiveRecord::Base
 
   attr_accessible :deleted_at, :deleted_by, :email, :mute_notifications, :name
 
+  scope :active,       -> { where(deleted_at: nil) }
+  scope :unassociated, -> { where(user_id: nil) }
+  scope :for_email,    -> (email) { where(email: email) }
+
   def set_user_from_email
     return if self.user.present?
 
