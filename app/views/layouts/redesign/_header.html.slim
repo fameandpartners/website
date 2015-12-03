@@ -264,8 +264,9 @@ ruby:
               .arrow
                 i.fa.fa-chevron-left
                 .back BACK
-            - spree_current_user.moodboards.each do |mb|
-              li.normal-item = link_to mb.name, moodboard_path(mb), class: 'text'
+            - if spree_current_user
+              - spree_current_user.moodboards.each do |mb|
+                li.normal-item = link_to mb.name, moodboard_path(mb), class: 'text'
 
         /!
           div#magazine-menu
@@ -328,7 +329,7 @@ ruby:
           li.normal-item.no-border#moodboards-menu-open
             .text
               = link_to 'MOODBOARD', moodboards_path, class: 'text'
-            - if spree_current_user.moodboards.size > 1
+            - if spree_current_user && spree_current_user.moodboards.size > 1
               .arrow
                 i.fa.fa-chevron-right
 

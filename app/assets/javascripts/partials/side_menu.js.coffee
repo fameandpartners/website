@@ -81,8 +81,11 @@ window.SideMenu = class SideMenu
       $("#magazine-menu").toggleClass("sub-menu-slide-left")
 
     $("#moodboards-menu-open").on 'click', =>
-      @slideMainMenu()
-      $("#moodboards-menu").toggleClass("sub-menu-slide-left")
+      if $("#moodboards-menu .normal-item").size() == 2
+        window.location.href = urlWithSitePrefix("/moodboards")
+      else
+        @slideMainMenu()
+        $("#moodboards-menu").toggleClass("sub-menu-slide-left")
     $("#moodboards-menu .arrow").on 'click', =>
       @slideMainMenu()
       $("#moodboards-menu").toggleClass("sub-menu-slide-left")
