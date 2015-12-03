@@ -35,7 +35,8 @@ class MoodboardItemsController < ApplicationController
     @moodboard ||= begin
       spree_current_user.moodboards.where(id: candidate_id).first ||
         spree_current_user.shared_moodboards.where(id: candidate_id).first
-      raise ActiveRecord::RecordNotFound unless @moodboard.present?
     end
+    raise ActiveRecord::RecordNotFound unless @moodboard.present?
+    @moodboard
   end
 end
