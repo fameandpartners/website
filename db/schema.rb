@@ -468,6 +468,23 @@ ActiveRecord::Schema.define(:version => 20151201070911) do
   add_index "marketing_user_visits", ["spree_user_id", "utm_campaign"], :name => "index_marketing_user_visits_on_spree_user_id_and_utm_campaign"
   add_index "marketing_user_visits", ["user_token", "utm_campaign"], :name => "index_marketing_user_visits_on_user_token_and_utm_campaign"
 
+  create_table "moodboard_collaborators", :force => true do |t|
+    t.integer  "moodboard_id"
+    t.integer  "user_id"
+    t.string   "email"
+    t.string   "name"
+    t.datetime "accepted_at"
+    t.datetime "deleted_at"
+    t.string   "deleted_by"
+    t.boolean  "mute_notifications"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "moodboard_collaborators", ["email"], :name => "index_moodboard_collaborators_on_email"
+  add_index "moodboard_collaborators", ["moodboard_id"], :name => "index_moodboard_collaborators_on_moodboard_id"
+  add_index "moodboard_collaborators", ["user_id"], :name => "index_moodboard_collaborators_on_user_id"
+
   create_table "moodboard_item_events", :force => true do |t|
     t.string   "moodboard_item_uuid"
     t.string   "event_type"

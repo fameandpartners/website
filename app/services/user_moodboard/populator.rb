@@ -32,7 +32,7 @@ class UserMoodboard::Populator
     validate!
 
     if color.present?
-      add_color_variant(product, variant, color)
+      add_color_variant(product: product, variant: variant, color: color)
     elsif variant.present?
       add_variant(variant)
     else
@@ -60,7 +60,7 @@ class UserMoodboard::Populator
       @color ||= (color_id.present? ? Repositories::ProductColors.read(color_id) : nil)
     end
 
-    def add_color_variant(product, variant, color)
+    def add_color_variant(product:, variant:, color:)
       moodboard.add_item(product: product, color: color, user: user, variant: variant)
     end
 
