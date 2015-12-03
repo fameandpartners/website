@@ -17,4 +17,4 @@ Domain        | "www.fameandpartners.com.au" (String)
 
 ## Legacy
 
-Site versions were detected as paths on the URL (e.g. `/au`, `/`), and they changed this behaviour.
+Site versions were detected as paths on the URL (e.g. `/au`, `/`), and now they are detected using subdomains (dev/test) and domains (production).
