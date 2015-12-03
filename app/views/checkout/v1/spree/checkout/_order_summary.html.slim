@@ -66,10 +66,13 @@ ruby:
                   = "#{ customization.name } + #{ customization.display_price.to_s }"
   form.promo-code action="#"
     .input-group
-      input.form-control.form-control-md.promo-code-value type="text" placeholder="Discount code"
+      input.form-control.form-control-md.promo-code-value type="text" placeholder="Discount code" value=current_sale.try(:sale_promo)
       span.input-group-btn
         button.btn.btn-block.btn-black.btn-md.promo-code-apply Apply
 
+    - if sale_active?
+      - if current_sale.try(:sale_promo)
+        p style="font-size:0.8em;" = current_sale.sitewide_message
   p
     | Sub Total
     span.pull-right = cart.display_item_total.to_s
@@ -103,4 +106,3 @@ ruby:
   .row.shopping-bag-payment-methods
     img src="/assets/checkout/visa-mastercard-paypal-masterpass.jpg"
     img src="/assets/comodo-ssl.png"
-
