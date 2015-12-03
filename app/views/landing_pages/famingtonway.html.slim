@@ -75,7 +75,7 @@
         section.carousel-strap
           .outer-wrap
             // TODO: update path
-            = react_component('ProductsCarousel', path: page.variables["dresses_carousel_link"])
+            = react_component('ProductsCarousel', path: "/dresses?pids[]=" + page.variables["caroulsel_pids"].split(",").join("&pids[]=") + "&limit=" + page.variables["limit"].to_s)
 
       .col-md-12.section-register
         .outer-wrap.mobile-change-order

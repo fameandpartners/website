@@ -2,20 +2,21 @@ class AddVariableLinkToBridePage < ActiveRecord::Migration
   def up
     page = Revolution::Page.where(path: "/fameweddings/guest").first
     if page.present?
-      page.variables = {"dresses_carousel_link" => "/dresses/?pids[]=796-blush-and-black&pids[]=795-coral&pids[]=811-sage-fallen-leaves&pids[]=797-mint&pids[]=792-aqua&pids[]=789-nautical-stripe&pids[]=794-ice-grey&pids[]=810-lilac&pids[]=802-ice-grey&pids[]=806-teal&pids[]=801-sage-fallen-leaves&pids[]=670-apricot&pids[]=575-surreal-floral-black&pids[]=515-light-pink&pids[]=674-rosebud&pids[]=666-bright-lavender&limit=16"}
+      page.variables = {"limit" => 16, "caroulsel_pids" => "796-blush-and-black,795-coral,811-sage-fallen-leaves,797-mint,792-aqua,789-nautical-stripe,794-ice-grey,810-lilac,802-ice-grey,806-teal,801-sage-fallen-leaves,670-apricot,575-surreal-floral-black,515-light-pink,674-rosebud,666-bright-lavender"}
       page.save!
     end
 
     page = Revolution::Page.where(path: "/fameweddings/bride").first
     if page.present?
-      page.variables = {"dresses_carousel_link" => "/dresses?pids[]=345-white&pids[]=262-white&pids[]=853-white&pids[]=703-white&pids[]=846-white&pids[]=805-white&pids[]=185-white&pids[]=474-white&pids[]=838-white&pids[]=847-white&pids[]=854-white&pids[]=845-white&pids[]=850-white&pids[]=517-white&pids[]=852-white&pids[]=851-white&limit=16"}
+      page.variables = {"limit" => 16, "caroulsel_pids" => "345-white,262-white,853-white,703-white,846-white,805-white,185-white,474-white,838-white,847-white,854-white,845-white,850-white,517-white,852-white,851-white"}
       page.save!
     end
 
     page = Revolution::Page.where(path: "/fameweddings/bridesmaid").first
     if page.present?
-      page.variables = {"dresses_carousel_link" => "/dresses?pids[]=800-pale-blue&pids[]=793-ice-grey&pids[]=803-blue-fallen-leaves&pids[]=791-indigo&pids[]=823-pale-pink&pids[]=809-blue-fallen-leaves&pids[]=813-navy&pids[]=799-ice-blue&pids[]=444-lilac&pids[]=441-steel&pids[]=697-blush&pids[]=97-navy&pids[]=607-lavender&pids[]=570-pink&pids[]=414-ice-grey&pids[]=185-blush&pids[]=430-pale-pink&pids[]=493-pale-blue&pids[]=445-ivory&pids[]=340-cherry-red&limit=20"}
+      page.variables = {"limit" => 20, "caroulsel_pids" => "800-pale-blue,793-ice-grey,803-blue-fallen-leaves,791-indigo,823-pale-pink,809-blue-fallen-leaves,813-navy,799-ice-blue,444-lilac,441-steel,697-blush,97-navy,607-lavender,570-pink,414-ice-grey,185-blush,430-pale-pink,493-pale-blue,445-ivory,340-cherry-red"}
       page.save!
     end
   end
 end
+
