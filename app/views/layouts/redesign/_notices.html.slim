@@ -11,7 +11,7 @@
       .inner-wrap
         .title-wrap
           .title
-            = current_sale.sitewide_message
+            = current_sale.try(:sitewide_message)
             br
             = link_to 'Shop now!', sale_path
     .inner-wrap.icon
