@@ -4,6 +4,7 @@
 / from the Page this whole file can be deleted.
 - begin
   - if (pids = variables.fetch('pids') {nil} )
+    - pids = Revolution::Page.default_page.expand_colours(pids)
     - service = Revolution::ProductService.new(pids, SiteVersion.default)
     - products = service.collect_products(service.ids, { offset: 0 })
     .ibox

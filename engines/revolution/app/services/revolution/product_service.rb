@@ -47,7 +47,7 @@ module Revolution
 
       revolution_ids.each_with_index.collect do |id, i|
         p           = spree_products[id]
-        colour_name = colours[params[:offset].to_i + i]
+        colour_name = colours[i]
 
         images = collection_images(p, colour_name)
 
@@ -66,8 +66,11 @@ module Revolution
     end
 
     def collection_images(product, colour_name)
-      images = product.images.find_all { |i| i.attachment_file_name.downcase.include?(colour_name.gsub('-', '_')) && i.attachment_file_name.downcase.include?('crop') }
-
+      if colour_name.present?
+        images = product.images.find_all { |i| i.attachment_file_name.downcase.include?(colour_name.gsub('-', '_')) && i.attachment_file_name.downcase.include?('crop') }
+      else
+        images = product.images.find_all { |i| i.attachment_file_name.downcase.include?('crop') }
+      end
       images.sort_by { |i| i.position }.collect { |i| i.attachment.url(:large) }
     end
 

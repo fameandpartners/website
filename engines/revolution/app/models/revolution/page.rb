@@ -105,15 +105,11 @@ module Revolution
 
     def limit(product_ids)
       return self.get(:limit) || 20 if page_is_lookbook?
-
-      page_limit     = effective_page_limit
-      base_offset    = params[:offset].to_i
-      total_offset   = base_offset + page_limit
-      no_of_products = Array.wrap(product_ids).size
-
-      if no_of_products < total_offset
-        products_on_page = no_of_products - base_offset
-        page_limit - [products_on_page, 0].max
+      page_limit = no_of_products
+      offset = (params[:offset].present? ? params[:offset].to_i + page_limit : page_limit ).to_i
+      no_of_products = (product_ids.blank? ? 0 : product_ids.size)
+      if no_of_products >= offset
+        no_of_products = page_limit
       else
         0
       end
@@ -152,6 +148,44 @@ module Revolution
         a << (noindex? ? 'noindex' : 'index')
         a << (nofollow? ? 'nofollow' : 'follow')
       end.join(',')
+    end
+
+    def expand_colours(pid_array)
+      return pid_array if pid_array.blank?
+      pos = 0
+      pid_array.each do |pid|
+        prod_id, colour = pid.split('-', 2)
+        if colour.blank?
+          pid_array[pos] = insert_colours(prod_id)
+          pid_array.flatten!
+        end
+        pos += 1
+      end
+
+      pid_array
+    end
+
+    def insert_colours(prod_id)
+      Spree::Product.find(prod_id).basic_colors.collect { |colour| "#{ prod_id }-#{ colour.name }" }
+    end
+
+    def sort_pids(pid_array)
+      #Attempt to move same dress/different colour away from each other.
+      return pid_array if pid_array.blank?
+      (1..pid_array.size-2).each do |cnt|
+        if pid_array[cnt].split('-', 2)[0] == pid_array[cnt-1].split('-', 2)[0]
+          #Move it 4 away
+          temp_pid = pid_array[cnt]
+          pid_array.delete_at(cnt)
+          if cnt+3 > pid_array.size - 1
+            pid_array << temp_pid
+          else
+            pid_array.insert(cnt+3, temp_pid)
+          end
+        end
+      end
+
+      pid_array
     end
 
   end
