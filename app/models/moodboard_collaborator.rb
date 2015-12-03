@@ -3,6 +3,7 @@ class MoodboardCollaborator < ActiveRecord::Base
   belongs_to :user,  class_name: 'Spree::User', inverse_of: :moodboard_collaborations
 
   before_create :set_user_from_email
+  after_create :track_as_invited
 
   validates_presence_of :name
   validates_presence_of :email
@@ -24,8 +25,11 @@ class MoodboardCollaborator < ActiveRecord::Base
     true
   end
 
-  def send_invitation
-    # TODO
+  def track_as_invited
+    trackable = {id: email, email: email}
+    tracker = Marketing::CustomerIOEventTracker.new
+    tracker.client.identify(trackable)
+    tracker.track(email, 'invited_to_moodboard', {})
   end
 
   def as_json(*options)
