@@ -182,7 +182,7 @@ module ApplicationHelper
   #HACK EOL 2015-12-22 MORE HACKS
   #HACK EOL 2015-12-22 MORE HACKS
   def sale_active?
-    current_sale.present? && sale_promo? && current_sale.active?
+    current_sale.present? && sale_promo? || current_sale.active?
   end
 
   def sale_path
