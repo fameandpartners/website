@@ -833,8 +833,6 @@ DEPENDENCIES
   autoprefixer-rails
   awesome_print
   aws-sdk
-  better_errors
-  binding_of_caller
   bootstrap-sass (= 3.3.4.1)
   bourbon
   bower-rails (~> 0.10.0)
