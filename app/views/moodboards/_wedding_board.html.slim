@@ -37,9 +37,9 @@
             p 
               = link_to("Add", edit_moodboard_path(@resource))
               span &nbsp;another bridesmaid
-        /!
-          .panel-aside
-            h3.heading SWATCHES
+        .panel-aside.panel-swatches
+          h3.heading SWATCHES
+          = render 'color_swatches', colors: @resource.items.active.map(&:color)
 
         .panel-aside
           h3.heading PERSONAL STYLIST
