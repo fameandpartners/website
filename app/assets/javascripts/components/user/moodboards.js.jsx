@@ -92,7 +92,7 @@ var PerMoodboardProduct = React.createClass({
 
   render: function(){
     if (this.props.exists) {
-      return(<li><span>On <a href={this.props.moodboard.show_path}>{this.props.moodboard.name}</a></span></li>);
+      return(<li><a href={this.props.moodboard.show_path}>on<em>{this.props.moodboard.name}</em></a></li>);
     } else {
       return(<li>
         <AddToMoodboardTrigger moodboard_name={this.props.moodboard.name} addHandler={this.handleClick} />
@@ -112,11 +112,11 @@ var AddToMoodboardTrigger = React.createClass({
   },
 
   render: function(){
-    var action = "+ Add";
+    var action = "add to";
 
     if (this.state.clicked == true) {
-      action = "⟳ Adding";
+      action = "⟳ adding to";
     }
-    return (<span onClick={this.handleClick}>{action} to {this.props.moodboard_name}</span>);
+    return (<a href='javascript:;' onClick={this.handleClick}>{action}<em>{this.props.moodboard_name}</em></a>);
   }
 });
