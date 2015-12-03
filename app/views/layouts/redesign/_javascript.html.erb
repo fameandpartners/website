@@ -24,7 +24,7 @@
     // init here allows assigned listeners to update data
     window.app.user_moodboard.updateData(moodboard_data);
     window.app.user_moodboards.updateMoodboards(user_moodboards);
-    window.app.shopping_cart.setItemCount(<%= current_order.item_count %>);
+    window.app.shopping_cart.setItemCount(<%= current_order.try(:item_count).to_i %>);
   });
 
   $(document).ready(function () {
