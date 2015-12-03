@@ -15,6 +15,13 @@ module Middleware
         def default_url_options(site_version)
           { site_version: nil }
         end
+
+        # TODO: Notice that this is only viable for dev/test env, since it hardcode the `lvh.me` domain
+        def site_version_url(current_url, site_version)
+          versioned_uri      = URI.parse(current_url)
+          versioned_uri.host = "#{site_version.permalink}.lvh.me"
+          versioned_uri.to_s
+        end
       end
     end
   end

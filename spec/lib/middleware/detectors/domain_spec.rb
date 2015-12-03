@@ -4,6 +4,8 @@ module Middleware
   module SiteVersion
     module Detectors
       RSpec.describe Domain do
+        let(:detector) { described_class.new }
+
         describe '#detect_site_version' do
           matcher :be_detected_as do |sv_code|
             match do |host|
@@ -29,7 +31,6 @@ module Middleware
         end
 
         describe '#default_url_options' do
-          let(:detector) { described_class.new }
           let(:au_site_version) { build_stubbed(:site_version, :au, :default) }
           let(:br_site_version) { build_stubbed(:site_version, :us) }
 
@@ -39,6 +40,18 @@ module Middleware
 
             result = detector.default_url_options(br_site_version)
             expect(result).to eq({ site_version: nil })
+          end
+        end
+
+        describe '#site_version_url' do
+          let(:url) { 'http://example.com/something?in-the=way' }
+          let(:br_site_version) { build_stubbed(:site_version, domain: 'example.com.br') }
+
+          context 'given a URL and a site version' do
+            it 'replaces the URL domain with the site version\'s' do
+              result = detector.site_version_url(url, br_site_version)
+              expect(result).to eq('http://example.com.br/something?in-the=way')
+            end
           end
         end
       end

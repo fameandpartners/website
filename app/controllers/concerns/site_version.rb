@@ -73,8 +73,7 @@ module Concerns
     end
 
     def default_url_options
-      detector = configatron.site_version_detector.new
-      detector.default_url_options(current_site_version)
+      UrlHelpers::SiteVersion::Detector.detector.default_url_options(current_site_version)
     end
 
     private

@@ -75,7 +75,7 @@ class Products::CollectionsController < Products::BaseController
   end
 
   def load_page
-    current_path = LocalizeUrlService.remove_version_from_url(request.path)
+    current_path = LocalizeUrlService.remove_version_from_path(request.path)
     @page        = Revolution::Page.find_for(current_path, '/dresses/*') || Revolution::Page.default_page
     page.params  = params
     page.locale  = current_site_version.locale

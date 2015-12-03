@@ -19,9 +19,10 @@ describe Preferences::LocaleWarnPresenter, type: :presenter do
   end
 
   describe '#geo_site_version_url' do
-    it 'returns the site version path (Rails routing)' do
+    it 'calls up site_version_url helper method' do
       presenter = described_class.new(request_url: 'http://example.com', geo_site_version: au_site_version)
-      expect(presenter.geo_site_version_url).to eq('http://example.com/au/')
+      expect(presenter).to receive(:site_version_url).with('http://example.com', au_site_version)
+      presenter.geo_site_version_url
     end
   end
 
