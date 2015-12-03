@@ -115,13 +115,14 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'zeus'
   gem 'pry-rails'
   gem 'byebug'
   gem 'awesome_print'
   gem 'launchy', '2.2.0'
   gem 'letter_opener', '~> 1.4.1'
-  # gem 'minitest'
   gem 'net-ssh', '~> 2.7.0'
   gem 'oink'
   gem 'quiet_assets'
