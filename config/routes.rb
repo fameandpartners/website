@@ -11,13 +11,18 @@ FameAndPartners::Application.routes.draw do
   ########################
   # US Redirection to root
   ########################
-  get '/us/*whatevs' => redirect(path: "/%{whatevs}")
-  get '/us' => redirect("/")
+  get '/us/*whatevs' => redirect(path: '/%{whatevs}', host: 'www.fameandpartners.com')
+  get '/us' => redirect('/')
 
   #######################################################
   # Temporary redirection to fix wrong path sent to users
   #######################################################
-  get '/AU' => redirect(path: "/au/dresses")
+  get '/AU' => redirect(path: '/au/dresses')
+
+  if Features.active?(:redirect_to_com_au_domain)
+    get '/au/*whatevs' => redirect(path: '/%{whatevs}', host: 'www.fameandpartners.com.au')
+    get '/au' => redirect('/')
+  end
 
 
   # TODO: After .com.au migration, this scope can simply go away.

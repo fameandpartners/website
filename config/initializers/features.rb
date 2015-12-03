@@ -4,6 +4,7 @@
 Features.deactivate(:checkout_fb_login)
 Features.deactivate(:content_revolution)
 Features.deactivate(:maintenance)
+Features.deactivate(:redirect_to_com_au_domain)
 Features.deactivate(:send_promotion_email_reminder)
 Features.deactivate(:shipping_message)
 Features.deactivate(:test_analytics)
