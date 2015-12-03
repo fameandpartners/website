@@ -8,16 +8,16 @@ class AddTwoPropertyForDateForAllProducts < ActiveRecord::Migration
         policy = Policies::ProjectDeliveryDatePolicy.new(p)
         pp = Spree::ProductProperty.new
         if policy.special_order?
-          pp.value      = 11
+          pp.value      = 10
         else
-          pp.value      = 6
+          pp.value      = 5
         end
         pp.product_id   = p.id
         pp.property_id  = property1_id
         pp.save
 
         pp = Spree::ProductProperty.new
-        pp.value        = 11
+        pp.value        = 10
         pp.product_id   = p.id
         pp.property_id  = property2_id
         pp.save
