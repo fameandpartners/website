@@ -59,6 +59,12 @@ window.SideMenu = class SideMenu
       @slideMainMenu()
       $("#events-menu").toggleClass("sub-menu-slide-left")
 
+    $("#wedding-menu-open").on 'click', =>
+      @slideMainMenu()
+      $("#wedding-menu").toggleClass("sub-menu-slide-left")
+    $("#wedding-menu .arrow").on 'click', =>
+      @slideMainMenu()
+      $("#wedding-menu").toggleClass("sub-menu-slide-left")
 
     $("#lookbook-menu-open").on 'click', =>
       @slideMainMenu()

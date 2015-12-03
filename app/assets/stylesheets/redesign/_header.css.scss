@@ -823,7 +823,7 @@ ul.secondary.pull-right {
   }
 
   @media(min-width: 600px)and(max-width:767px){
-    #new-this-week-menu, #dresses-menu, #lookbook-menu, #magazine-menu, #events-menu{
+    #new-this-week-menu, #dresses-menu, #lookbook-menu, #wedding-menu, #magazine-menu, #events-menu{
       .text-back{
         width: 85% !important;
       }
@@ -858,7 +858,7 @@ ul.secondary.pull-right {
     .grey-item{
       margin-left: 0px !important;
     }
-    #dresses-menu, #lookbook-menu, #magazine-menu, #events-menu{
+    #dresses-menu, #lookbook-menu, #wedding-menu, #magazine-menu, #events-menu{
       margin-top: 125px !important;
       .text{
         width: 90% !important;
@@ -914,7 +914,7 @@ ul.secondary.pull-right {
         margin-left: 0px !important;
       }
     }
-    #lookbook-menu, #magazine-menu,#events-menu{
+    #lookbook-menu, #wedding-menu, #magazine-menu,#events-menu{
       margin-top: 125px !important;
       .text{
         width: 90% !important;
@@ -977,7 +977,7 @@ ul.secondary.pull-right {
       margin-left: 0;
     }
   }
-  #dresses-menu, #lookbook-menu, #magazine-menu, #events-menu{
+  #dresses-menu, #lookbook-menu, #wedding-menu, #magazine-menu, #events-menu{
     height: 100%;
     background-color: white;
     position: absolute;
@@ -1084,7 +1084,7 @@ ul.secondary.pull-right {
   margin-left: 15%;
   position: absolute;
   z-index: 101;
-  
+
   visibility: hidden;
   opacity: 0;
   left: -9999em;

@@ -221,6 +221,22 @@ ruby:
               li.normal-item.no-border
                 = link_to 'Debutante', build_taxon_path('Debutante'), class: 'text'
 
+        div#wedding-menu
+          ul.nav.navbar-nav
+            li.normal-item
+              .text.text-back FAMEWEDDINGS
+              .arrow
+                i.fa.fa-chevron-left
+                .back BACK
+            li.manu-content
+              = link_to bridesmaid_landing_page_path
+                .panel-highlight.media-wrap
+                  = image_tag "lookbook/brides.jpg"
+                  .copy-wrap BRIDESMAIDS <em><span>View this collection</span></em>
+            li.normal-item = link_to 'The Bride', brides_landing_page_path, class: 'text'
+            li.normal-item = link_to 'The Bridesmaids', bridesmaid_landing_page_path, class: 'text'
+            li.normal-item = link_to 'The Guests', guest_bride_page_path, class: 'text'
+
         div#lookbook-menu
           ul.nav.navbar-nav
             li.normal-item
@@ -240,6 +256,8 @@ ruby:
             li.normal-item = link_to 'Make a Statement', make_a_statement_collection_path, class: 'text'
             li.normal-item = link_to 'Luxe Collection', luxe_collection_path, class: 'text'
             li.normal-item.no-border = link_to 'View all lookbooks', lookbook_path, class: 'text'
+
+
 
         /!
           div#magazine-menu
@@ -279,6 +297,10 @@ ruby:
               i.fa.fa-chevron-right
           li.normal-item#dress-menu-open
             .text DRESSES
+            .arrow
+              i.fa.fa-chevron-right
+          li.normal-item#wedding-menu-open
+            .text FAMEWEDDINGS
             .arrow
               i.fa.fa-chevron-right
           /!
