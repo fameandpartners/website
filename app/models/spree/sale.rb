@@ -66,24 +66,10 @@ class Spree::Sale < ActiveRecord::Base
   end
 
   def banner_images
-    # TODO - HACK TTL 2015.11.30 - Remove this junk.
-    # S3 - http://mkt-fameandpartners.s3.amazonaws.com/pages/home/sale
-    sydney_now         = Time.now.in_time_zone("Sydney")
-
-    cyber_monday_start = Time.parse("2015-11-30 09:00:00 +10:00")
-    cyber_monday_end   = Time.parse("2015-12-01 19:00:00 +10:00")
-
     banner_images = {
       full:  'tile-sale-full.jpg',
       small: 'tile-sale-sml.jpg'
     }
-
-    if (cyber_monday_start .. cyber_monday_end).cover?(sydney_now)
-      banner_images = {
-        full:  'cyber-monday-tile-sale-full.jpg',
-        small: 'cyber-monday-tile-sale-sml.jpg'}
-    end
-
     banner_images
   end
 
@@ -100,7 +86,13 @@ class Spree::Sale < ActiveRecord::Base
   end
 
   def sitewide_message
-    "#{discount_string} OFF SITEWIDE. LIMITED TIME ONLY."
+    # "#{discount_string} OFF SITEWIDE. LIMITED TIME ONLY."
+    "Let's go halvies. 50% off your 2nd dress. LTO."
+  end
+
+  #HACK EOL 2015-12-22 MORE HACKS
+  def sale_promo
+    "HALFOFF"
   end
 
   class << self
