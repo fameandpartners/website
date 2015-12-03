@@ -1,6 +1,8 @@
 module Revolution
 
   class ProductService
+    #TODO - bring ids and colours into same data structure.
+    
     attr_reader :product_ids, :site_version
 
     def initialize(product_ids, site_version)
