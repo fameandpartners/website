@@ -33,6 +33,8 @@ module Search
       show_outerwear    = !!options[:show_outerwear]
       exclude_taxon_ids = options[:exclude_taxon_ids]
 
+      order = 'created' if order.blank? && query_string.blank?
+
       Tire.search(configatron.elasticsearch.indices.color_variants, size: limit, from: offset) do
 
         filter :bool, :must => { :term => { 'product.is_deleted' => false } }
@@ -152,6 +154,8 @@ module Search
               by 'product.created_at', 'desc'
             when 'fast_delivery'
               by 'product.fast_delivery', 'desc'
+            when 'created'
+              by 'product.created_at', 'desc'
             else
               # Don't have an order here, so this will show any queried dress first in the result,
               # eg, search for 'last Kiss' will show 'last kiss' then 'studded kiss' instead of
