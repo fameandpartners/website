@@ -145,7 +145,7 @@ describe Concerns::SiteVersion, type: :controller do
       let(:site_version) { double('Site Version') }
 
       before(:each) do
-        allow(controller).to receive_message_chain(:configatron, :site_version_detector, :new).and_return(site_version_detector)
+        allow(UrlHelpers::SiteVersion::Detector).to receive(:detector).and_return(site_version_detector)
         allow(controller).to receive(:current_site_version).and_return(site_version)
       end
 
