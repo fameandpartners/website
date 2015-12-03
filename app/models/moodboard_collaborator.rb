@@ -24,6 +24,10 @@ class MoodboardCollaborator < ActiveRecord::Base
     true
   end
 
+  def send_invitation
+    # TODO
+  end
+
   def as_json(*options)
     {
       name:       name,
