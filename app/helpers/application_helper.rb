@@ -182,15 +182,19 @@ module ApplicationHelper
   #HACK EOL 2015-12-22 MORE HACKS
   #HACK EOL 2015-12-22 MORE HACKS
   def sale_active?
-    true || current_sale.present? && current_sale.active?
+    current_sale.present? && sale_promo? && current_sale.active?
   end
 
   def sale_path
-    if current_sale.try(:sale_promo).present?
+    if sale_promo?
       dresses_path(:faadc => current_sale.sale_promo)
     else
       dresses_path
     end
+  end
+
+  def sale_promo?
+    current_sale.present? && current_sale.sale_promo.present?
   end
 
   def dynamic_colors

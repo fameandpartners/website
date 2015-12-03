@@ -67,8 +67,8 @@ class Spree::Sale < ActiveRecord::Base
 
   def banner_images
     banner_images = {
-      full:  'tile-sale-full.jpg',
-      small: 'tile-sale-sml.jpg'
+      full:  'tile-sale-full.gif',
+      small: 'tile-sale-sml.gif'
     }
     banner_images
   end
