@@ -10,7 +10,7 @@
           p Set up a moodboard for each of your events & share with your friends to get their thoughts.
       .col-md-9
         ul
-          - collection.each do |mb|
+          - all_moodboards.each do |mb|
             - if is_active_link?(moodboard_path(mb))
               li.active
                 .tab

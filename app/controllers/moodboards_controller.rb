@@ -4,7 +4,7 @@ class MoodboardsController < ApplicationController
   respond_to :js, :html
 
   rescue_from ActiveRecord::RecordNotFound do
-    redirect_to moodboards_url, alert: "Sorry babe, we couldn't find that, here's your regular wishlist."
+    redirect_to moodboards_url, alert: "Sorry babe, we couldn't find that, here's your regular moodboard."
   end
 
   def new
@@ -22,7 +22,7 @@ class MoodboardsController < ApplicationController
     if @resource.save
       render :show
     else
-      render :new
+      render :new, alert: @resource.errors.full_messages
     end
   end
 
@@ -31,7 +31,6 @@ class MoodboardsController < ApplicationController
     @resource    = collection.find(candidate_id)
     @title       = @resource.name
   end
-
 
   def update
     candidate_id = params[:id].to_i
@@ -53,11 +52,12 @@ class MoodboardsController < ApplicationController
 
   def show
     candidate_id = params[:id].to_i
-    @resource    = if candidate_id.nonzero?
-                     collection.find(candidate_id)
+    @resource = if candidate_id.nonzero?
+                     spree_current_user.all_moodboards.detect {|mb| mb.id == candidate_id }
                    else
                      collection.default_or_create
-                   end
+                end
+    raise ActiveRecord::RecordNotFound unless @resource.present?
     @title = @resource.name
   end
 
@@ -65,6 +65,14 @@ class MoodboardsController < ApplicationController
 
   helper_method def collection
     @collection ||= spree_current_user.moodboards
+  end
+
+  helper_method def all_moodboards
+    spree_current_user.all_moodboards
+  end
+
+  helper_method def moodboard_editable?
+    @resource.persisted? && @resource.user == current_spree_user
   end
 
   helper_method def enhanced_moodboards_enabled?

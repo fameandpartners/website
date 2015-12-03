@@ -2,12 +2,13 @@ require 'delegate'
 
 class MoodboardsPresenter
   attr_reader :moodboards
+
   def initialize(user)
     if user
       if user.moodboards.empty?
         user.moodboards.default_or_create
       end
-      @moodboards = user.moodboards
+      @moodboards = user.all_moodboards
     else
       @moodboards = []
     end

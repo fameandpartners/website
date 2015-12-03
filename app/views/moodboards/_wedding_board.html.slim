@@ -15,7 +15,7 @@
             p 
               span.highlight Wedding Date:&nbsp;
               em  = @resource.event_date
-          - if @resource.persisted?
+          - if moodboard_editable?
             p
               = link_to("Edit", edit_moodboard_path(@resource))
               span &nbsp;my settings
@@ -27,8 +27,9 @@
 
         .panel-aside
           h3.heading BRIDESMAIDS
-            = render 'collaborators', moodboard: @resource
+          = render 'collaborators', moodboard: @resource
 
+        .panel-aside.panel-swatches
           h3.heading SWATCHES
           = render 'color_swatches', colors: @resource.items.active.map(&:color)
 
