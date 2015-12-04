@@ -10,11 +10,23 @@
   .pic1{
     width: 100%;
   }
+  .mobile-pic1{
+    margin-top: 50px;
+  }
   .paragraph{
     .para-head{
       font-style: italic;
       font-family: serif;
       font-size: 4rem;
+      @include iphone5{
+        font-size: 3rem;
+      }
+      @include iphone6{
+        font-size: 3rem;
+      }
+      @include iphone6p{
+        font-size: 3.5rem;
+      }
     }
     .para-body{
       font-size: 2rem;
@@ -31,9 +43,14 @@
     }
   }
   .two-images{
-    margin-top: 10px;
+    margin-top: 30px;
     img{
       width: 100%;
+    }
+    @include mobile{
+      .pic3{
+        margin-top: 30px;
+      }
     }
   }
   .hr{
