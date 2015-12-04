@@ -15,11 +15,20 @@ class AddAdvertisingPage < ActiveRecord::Migration
     )
     page.publish!
     page.translations.create!(:locale => 'en-US', :title => 'Advertising 2', :meta_description => 'Advertising 2', :heading => 'Advertising 2')
+
+    page = Revolution::Page.create!(
+      :path => '/lp/1512/3',
+      :template_path => '/landing_pages/advertising3.html.slim',
+      :variables => {"limit"=>10 , "curated"=> true}
+    )
+    page.publish!
+    page.translations.create!(:locale => 'en-US', :title => 'Advertising 3', :meta_description => 'Advertising 3', :heading => 'Advertising 3')
   end
 
   def down
     Revolution::Page.where(:path => '/lp/1512/1').delete_all
     Revolution::Page.where(:path => '/lp/1512/2').delete_all
+    Revolution::Page.where(:path => '/lp/1512/3').delete_all
   end
 end
 
