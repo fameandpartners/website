@@ -36,7 +36,8 @@ class MoodboardCollaborator < ActiveRecord::Base
       invitee_name:          self.name,
       invited_by_name:       mb.owner_name,
       invited_by_first_name: mb.owner_first_name,
-      invited_by_email:      mb.owner_email
+      invited_by_email:      mb.owner_email,
+      invited_at:            self.created_at
     }
 
     tracker = Marketing::CustomerIOEventTracker.new
