@@ -81,8 +81,9 @@ window.SideMenu = class SideMenu
       $("#magazine-menu").toggleClass("sub-menu-slide-left")
 
     $("#moodboards-menu-open").on 'click', =>
-      if $("#moodboards-menu .normal-item").size() == 2
-        window.location.href = urlWithSitePrefix("/moodboards")
+      item_num = $("#moodboards-menu .normal-item").size()
+      if item_num < 3
+        window.location.href = urlWithSitePrefix("/wishlist")
       else
         @slideMainMenu()
         $("#moodboards-menu").toggleClass("sub-menu-slide-left")
