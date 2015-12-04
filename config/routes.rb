@@ -107,6 +107,7 @@ FameAndPartners::Application.routes.draw do
     get '/rss/collections' => 'rss#collections', format: :rss, as: :collections_rss
 
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
+    get 'newpage'             => 'statics#newpage',       :as => :newpage        
 
     get '/all-size' => redirect('/lookbook/all-size')
     get '/lookbook/all-size' => 'products/collections#show', :permalink => 'all-size', :as => :all_size_collection

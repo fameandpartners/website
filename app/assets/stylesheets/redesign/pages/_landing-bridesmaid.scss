@@ -16,3 +16,290 @@
   }
 
 }
+
+
+.bride-page {
+  input[type='text'], textarea{
+    padding-left: 20px !important;
+  }
+  .select2{
+    margin-top: -30px;
+    width: 100% !important;
+    b[role='presentation']{
+      margin-top: 7px;
+    }
+    #select2-ready-container{
+      padding-left: 20px;
+    }
+  }
+  .select2-container--default .select2-selection--single{
+    height: 4.85rem;
+    padding-top: 7px;
+  }
+
+  img{
+    width: 100%;
+  }
+  .wedding-details{
+    margin-top: -5px !important;
+  }
+  padding-bottom: 50px;
+  font-family: Formal;
+  font-weight: 400;
+  input[type='button']{
+    border: 0;
+    font-weight: 700;
+    font-family: sans-serif !important;
+  }
+  input, textarea, select{
+    padding: 10px;
+  }
+  textarea{
+    width: 100%;
+  }
+  hr{
+    margin-top: 25px;
+    margin-bottom: -12px;
+    border: 1px;
+    border-top: 1px solid #EEE;
+    border-color: black;
+  }
+
+  .big-title{
+    background-color: white;
+    margin-bottom: 30px;
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .container.invite{
+    @media(max-width: $bootstrap-md-width){
+      .invite-col{
+        padding-left: 5px !important;
+      }
+      .ashleigh{
+        margin-top: 30px;
+        margin-bottom: 30px;
+        .ash-label{
+          font-weight: 500;
+          font-size: 1.5em;
+        }
+        .invite-sent{
+          font-size: 1.5em;
+        }
+      }
+      .personal,.personal-text-area{
+        padding-left: 25px;
+        padding-right: 25px;
+      }
+      .or{
+        clear: both;
+        margin-left: 25% !important;
+        margin-top: 20px !important;
+        padding-left: 15%;
+        padding-right: 15%;
+        margin-bottom: 50px;
+      }
+      .add-via-fb{
+        font-size: 0.8em !important;
+      }
+
+      .invitation{
+        .row{
+          padding-left: 15px;
+          padding-right: 25px;
+        }
+        .send-invite{
+          font-size: 0.8em !important;
+        }
+      }
+      .fb-area{
+        margin-top: 8% !important;
+      }
+    }
+    @media(min-width: $bootstrap-md-width){
+      .add-via-fb{
+        left: 0;
+        width: 50%;
+      }
+    }
+    .signup2-img-col{
+      padding-left: 5px;
+    }
+    .invite-col{
+      padding-left: 40px;
+    }
+    .invite-row{
+      margin-left: -15px !important;
+    }
+    .row{
+      margin-left: -5px;
+    }
+    margin-top: 70px;
+    .ashleigh{
+      font-weight: 400;
+      .invite-sent{
+        font-style: italic;
+      }
+    }
+    .big-title{
+      margin-top: -25px;
+      font-size: 1.3em;
+    }
+    .fb-area{
+      margin-top: 15%;
+      .add-via-fb{
+        color: white;
+        background-color: black;
+        float: left;
+        font-size: 0.8em;
+      }
+      .or{
+        float: left;
+        margin-left: 0;
+        width: 50%;
+        margin-top: 0;
+        padding-left: 10%;
+        padding-right: 10%;
+        .or-text{
+          color: black;
+          font-weight: 200;
+          font-size: 0.6em;
+          background-color: white;
+          margin-top: -2px;
+          position: absolute;
+          margin-left: -15px;
+          &::after{
+            background-color:white;
+          }
+        }
+      }
+    }
+    .invite-sent{
+      margin-left: 5px;
+    }
+    .mess{
+      margin-top: 10px;
+    }
+    .invitation{
+      input[type='text']{
+        width: 100%;
+      }
+      .send-invite{
+        margin-top: 40px;
+        color: white;
+        background-color: black;
+        font-size: 0.8em;
+      }
+      .row{
+        margin-top: 15px;
+      }
+    }
+  }
+
+  .container.wedding-info{
+    @media(max-width: $bootstrap-md-width){
+      .how-ready{
+        margin-top: 20px;
+      }
+      .mobile-img-1{
+        margin-bottom: 20px;
+      }
+      .wedding-col{
+        padding-left: 15px !important;
+      }
+      .wedding-date-col{
+        margin-top: 15px;
+      }
+      #ready{
+        margin-top: -20px;
+      }
+    }
+
+    @media(max-width: $iphone6p-width){
+      .wedding-details{
+        font-size: 1em !important;
+        margin-top: 0 !important;
+      }
+    }
+    @media(min-width: $iphone6p-width)and(max-width: $bootstrap-md-width){
+      label{
+        margin-left: -9% !important;
+      }
+      .maid-radio{
+        label{
+          margin-left: -21% !important;
+        }
+      }
+      .bridesmaid-radio{
+        label{
+          margin-left: -16%;
+        }
+      }
+    }
+
+    .surname-mobile{
+      padding-left: 0;
+      margin-top: 20px !important;
+      margin-bottom: 20px;
+    }
+
+    .wedding-col{
+      padding-left: 40px;
+    }
+    .signup1  {
+      margin-top: 30px;
+    }
+    .big-title{
+      margin-top: -35px;
+      font-size: 1.3em;
+    }
+    .row{
+      margin-top: 30px;
+    }
+    .radio-row{
+      margin-top: 0;
+      font-weight: 700 !important;
+    }
+    .radio{
+      margin-top: 10px;
+      float: left;
+      font-size: 0.7em;
+      input{
+        margin-left: 40%;
+      }
+      label{
+        margin-top: 20px;
+        position: absolute;
+        margin-left: -17%;
+        font-size: 1em;
+      }
+
+    }
+    .maid-radio{
+      label{
+        margin-left: -37%;
+      }
+    }
+    .bridesmaid-radio{
+      label{
+        margin-left: -30%;
+      }
+    }
+
+    .surname{
+      margin-top: -12px;
+    }
+
+    #ready, #date, #brief, #fname, #sname, .bride{
+      width: 100%;
+      float: left;
+    }
+    .bride{
+      padding: 0;
+      margin-top: 10px;
+    }
+
+  }
+}
