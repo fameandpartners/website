@@ -52,9 +52,13 @@ module Policies
 
     def delivery_date
       return FAST_MAKING if fast_making?
+      if @product.standard_days_for_making.present? && @product.customised_days_for_making.present?
+        return {days_for_making: @product.standard_days_for_making,   days_for_delivery: DAYS_FOR_DELIVERY} if !@customized
+        return {days_for_making: @product.customised_days_for_making, days_for_delivery: DAYS_FOR_DELIVERY}
+      end
       return SPECIAL_ORDER if special_order?
-      return {days_for_making: @product.standard_days_for_making,   days_for_delivery: DAYS_FOR_DELIVERY} if !@customized
-      return {days_for_making: @product.customised_days_for_making, days_for_delivery: DAYS_FOR_DELIVERY}
+      return {days_for_making: @product.default_standard_days_for_making,   days_for_delivery: DAYS_FOR_DELIVERY} if !@customized
+      return {days_for_making: @product.default_customised_days_for_making, days_for_delivery: DAYS_FOR_DELIVERY}
     end
 
     def self.delivery_date_text(delivery_date_obj)
