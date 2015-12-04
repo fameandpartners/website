@@ -42,8 +42,28 @@ class MoodboardsPresenter
       end
     end
 
+    def owner_first_name
+      user.first_name
+    end
+
+    def owner_name
+      user.full_name
+    end
+
+    def owner_email
+      user.email
+    end
+
     def show_path
       Rails.application.routes.url_helpers.moodboard_path(self.__getobj__)
+    end
+
+    def show_url
+      Rails.application.routes.url_helpers.moodboard_url(self.__getobj__, url_options)
+    end
+
+    private def url_options
+      { host: SiteVersion.default.domain }
     end
 
     def add_item_path
