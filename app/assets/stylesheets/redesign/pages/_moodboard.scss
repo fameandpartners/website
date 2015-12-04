@@ -46,10 +46,6 @@
 
   }
 
-  .panel-aside ul {
-    margin: 0 0 15px 0;
-  }
-
   .flash {
     margin: 15px;
     text-align: center;
@@ -173,10 +169,26 @@
 
   .panel-aside {
     margin-bottom: 30px;
-    padding: 20px 40px;
+    padding: 20px 15px;
     text-align: center;
     border-top: solid $c-neutral-black 1px;
     border-bottom: solid $c-neutral-black 1px;
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    ul {
+      margin: 0 0 15px 0;
+    }
+
+    .btn {
+      display: block;
+      padding: 8px 10px;
+      letter-spacing: normal;
+      font-size: 0.688em;
+    }
+
   }
 
   .panel-swatches {

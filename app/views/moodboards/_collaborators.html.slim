@@ -3,8 +3,15 @@ ul
     li
       => member.name.to_s.upcase
 
-- if moodboard_editable?
-  = form_for moodboard.collaborators.build, url: moodboard_collaborators_path(moodboard) do |f|
-    = f.text_field :name, placeholder: 'Name'
-    = f.text_field :email, placeholder: 'Email'
-    = f.button 'Add another bridesmaid'
+- if moodboard_editable?      
+  p 
+    a href='#collapseBridesmaid' data-toggle="collapse" aria-expanded="false" aria-controls="collapseBridesmaid" Add
+    span &nbsp;another bridesmaid
+
+  #collapseBridesmaid.collapse
+    = form_for moodboard.collaborators.build, url: moodboard_collaborators_path(moodboard) do |f|
+      .form-group
+        = f.text_field :name, placeholder: 'Name', :class => "form-control input-sm"
+      .form-group
+        = f.text_field :email, placeholder: 'Email', :class => "form-control input-sm"
+      = f.button 'Add another bridesmaid', :class => "btn btn-black"
