@@ -10,6 +10,7 @@ class Moodboard < ActiveRecord::Base
   validates_inclusion_of :purpose, in: %w( default wedding )
 
   scope :weddings, -> { where(purpose: 'wedding') }
+  scope :by_recent, -> { order('created_at asc') }
 
   # Intended for use as a chained scope off of a Spree::User object.
   # e.g. user.moodboards.default_or_create
