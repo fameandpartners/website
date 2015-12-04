@@ -50,8 +50,7 @@ module Policies
       return false
     end
 
-    def delivery_date
-      binding.pry
+    def delivery_date    
       return FAST_MAKING if fast_making?
       if @product.standard_days_for_making.present? && @product.customised_days_for_making.present?
         return {days_for_making: @product.standard_days_for_making,   days_for_delivery: DAYS_FOR_DELIVERY} if !@customized
