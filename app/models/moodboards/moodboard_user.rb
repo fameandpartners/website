@@ -11,7 +11,7 @@ module Moodboards
     end
 
     def all_moodboards
-      moodboards + shared_moodboards
+      moodboards.by_recent + shared_moodboards.by_recent
     end
 
     def accept_moodboard_invitations

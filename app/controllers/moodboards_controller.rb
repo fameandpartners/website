@@ -64,7 +64,7 @@ class MoodboardsController < ApplicationController
   private
 
   helper_method def collection
-    @collection ||= spree_current_user.moodboards
+    @collection ||= spree_current_user.moodboards.by_recent
   end
 
   helper_method def all_moodboards
