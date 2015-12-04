@@ -54,13 +54,14 @@
                   span BRIDE TO CHOOSE FREE HONEYMOON DRESS
 
           .inner-right.position-1
-            picture.media-wrap
-              source media='(max-width: 1023px)' srcset='#{image_path("landingpages/brides/honeymoon-mob.jpg")}'
-              source media='(min-width: 1024px)' srcset='#{image_path("landingpages/brides/honeymoon.jpg")}'
-              img src='#{image_path("landingpages/brides/honeymoon.jpg")}' srcset='
-                #{image_path("landingpages/brides/honeymoon-mob.jpg")} 1023w,
-                #{image_path("landingpages/brides/honeymoon.jpg")} 1024w' alt='
-                GET A FREE HONEYMOON DRESS OF YOUR CHOICE WHEN YOU DRESS YOUR BRIDAL PARTY WITH US.'
+            = link_to new_moodboard_path
+              picture.media-wrap
+                source media='(max-width: 1023px)' srcset='#{image_path("landingpages/brides/honeymoon-mob.jpg")}'
+                source media='(min-width: 1024px)' srcset='#{image_path("landingpages/brides/honeymoon.jpg")}'
+                img src='#{image_path("landingpages/brides/honeymoon.jpg")}' srcset='
+                  #{image_path("landingpages/brides/honeymoon-mob.jpg")} 1023w,
+                  #{image_path("landingpages/brides/honeymoon.jpg")} 1024w' alt='
+                  GET A FREE HONEYMOON DRESS OF YOUR CHOICE WHEN YOU DRESS YOUR BRIDAL PARTY WITH US.'
           .btn-wrap.position-3
             = link_to 'Get started', new_moodboard_path, class:'btn btn-lowlight'
 
@@ -68,8 +69,7 @@
         h2.heading-secondary Your wedding dress doesn't need to cost the earth to be beautiful, memorable & completely unique to you.
         section.carousel-strap
           .outer-wrap
-            // TODO: update path
-            = react_component('ProductsCarousel', path: '/dresses/?order=price_low&limit=16')
+            = react_component('ProductsCarousel', path: '/dresses/wedding/?order=price_low')
 
       .col-md-12.section-register
         .media-wrap
@@ -81,7 +81,7 @@
         h2.heading-secondary.heading-width-sml You found the hidden spots of my soul, and I am forever grateful.<em>- S. M. Pastpre -</em>
 
       .col-md-12.section-register
-        .media-wrap
+        = link_to build_taxon_path('Wedding'), class:'media-wrap'
           = image_tag "landingpages/brides/tile-shop.jpg"
         .media-wrap
           = image_tag "landingpages/brides/tile-fameweddings.jpg"
