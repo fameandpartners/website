@@ -27,9 +27,23 @@ class MoodboardCollaborator < ActiveRecord::Base
 
   def track_as_invited
     trackable = {id: email, email: email}
+
+    mb = MoodboardsPresenter::MoodboardPresenter.new(moodboard)
+    extra_data = {
+      moodboard_path:        mb.show_path,
+      moodboard_url:         mb.show_url,
+      moodboard_name:        mb.name,
+      invitee_name:          self.name,
+      invited_by_name:       mb.owner_name,
+      invited_by_first_name: mb.owner_first_name,
+      invited_by_email:      mb.owner_email
+    }
+
     tracker = Marketing::CustomerIOEventTracker.new
     tracker.client.identify(trackable)
-    tracker.track(email, 'invited_to_moodboard', {})
+
+
+    tracker.track(email, 'invited_to_moodboard', extra_data)
   end
 
   def as_json(*options)
