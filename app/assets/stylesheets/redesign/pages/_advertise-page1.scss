@@ -1,0 +1,56 @@
+/* [Advertise Page 1]
+-------------------------------------------------------*/
+.advertise-page.advertise1{
+  .header-row{
+    font-family: Formal;
+    font-size: 2em;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .pic1{
+    width: 100%;
+  }
+  .paragraph{
+    .para-head{
+      font-style: italic;
+      font-family: serif;
+      font-size: 4rem;
+    }
+    .para-body{
+      font-size: 2rem;
+      margin-top: 10px;
+      br{
+        line-height: 40px;
+      }
+    }
+    .para-foot{
+      font-size: 2rem;
+      margin-top: 30px;
+      font-style: italic;
+      font-weight: 100;
+    }
+  }
+  .two-images{
+    margin-top: 10px;
+    img{
+      width: 100%;
+    }
+  }
+  .hr{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  hr{
+    border-top: 1px solid black ;
+  }
+  .fomular-header{
+    font-family: Formal;
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: 5px;
+  }
+  .fomular-body{
+    font-size: 3rem;
+    font-family: serif;
+  }
+}
