@@ -3,7 +3,8 @@ class AddAdvertisingPage < ActiveRecord::Migration
     page = Revolution::Page.create!(
       :path => '/lp/1512/1',
       :template_path => '/landing_pages/advertising1.html.slim',
-      :variables => {"limit"=>10 , "curated"=> true}
+      :variables => {"limit"=>10 , "curated"=> true},
+      :noindex => true
     )
     page.publish!
     page.translations.create!(:locale => 'en-US', :title => 'Advertising 1', :meta_description => 'Advertising 1', :heading => 'Advertising 1')
@@ -11,7 +12,8 @@ class AddAdvertisingPage < ActiveRecord::Migration
     page = Revolution::Page.create!(
       :path => '/lp/1512/2',
       :template_path => '/landing_pages/advertising2.html.slim',
-      :variables => {"limit"=>10 , "curated"=> true}
+      :variables => {"limit"=>10 , "curated"=> true},
+      :noindex => true
     )
     page.publish!
     page.translations.create!(:locale => 'en-US', :title => 'Advertising 2', :meta_description => 'Advertising 2', :heading => 'Advertising 2')
@@ -19,7 +21,8 @@ class AddAdvertisingPage < ActiveRecord::Migration
     page = Revolution::Page.create!(
       :path => '/lp/1512/3',
       :template_path => '/landing_pages/advertising3.html.slim',
-      :variables => {"limit"=>10 , "curated"=> true}
+      :variables => {"limit"=>10 , "curated"=> true},
+      :noindex => true
     )
     page.publish!
     page.translations.create!(:locale => 'en-US', :title => 'Advertising 3', :meta_description => 'Advertising 3', :heading => 'Advertising 3')
