@@ -3,7 +3,7 @@
     .col-md-12.justin.text-center THE DRESS THAT GOT JUSTIN BIEBER BACK
   .row
     .col-md-6.hidden-xs.hidden-sm
-      = image_tag "landingpages/adpic1.jpg" ,alt: 'pic1', class: 'pic1'
+      = image_tag "landingpages/ad1-pic1.jpg" ,alt: 'pic1', class: 'pic1'
     .col-md-6.paragraph
       .para-head Selena Gomez got style!
       .para-body
@@ -15,17 +15,25 @@
       .para-foot
         | Image credit: Tinseltown / Shutterstock.com
     .col-xs-12.col-sm-12.hidden-md.hidden-lg.mobile-pic1
-      = image_tag "landingpages/adpic1.jpg" ,alt: 'pic1', class: 'pic1'
+      = image_tag "landingpages/ad1-pic1.jpg" ,alt: 'pic1', class: 'pic1'
   .row.two-images
     .col-md-6
-      = image_tag "landingpages/adpic2.jpg" ,alt: 'pic2', class: 'pic2'
+      = image_tag "landingpages/ad1-pic2.jpg" ,alt: 'pic2', class: 'pic2'
     .col-md-6
-      = image_tag "landingpages/adpic3.jpg" ,alt: 'pic3', class: 'pic3'
+      = image_tag "landingpages/ad1-pic3.jpg" ,alt: 'pic3', class: 'pic3'
   .row.hr
     hr
   .row.fomular-header.text-center RED HAUTE
   .row.fomular-body.text-center Sultry Red + Sparkles + Skin = Party Chic
-
-
+  .row
+    = render partial: 'products/collections/pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+  .row
+    = render partial: 'products/collections/pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
+  .row
+    .col-md-3.hidden-sm.hidden-xs
+      = image_tag "landingpages/ad1-pic4.jpg" ,alt: 'pic4', class: 'pic4'
+    = render partial: 'products/collections/pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 9, customWrapper: 'col-md-3 col-xs-6'}
+    .col-md-3.hidden-sm.hidden-xs
+      = image_tag "landingpages/ad1-pic5.jpg" ,alt: 'pic5', class: 'pic5'
 
 

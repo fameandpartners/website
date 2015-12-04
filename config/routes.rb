@@ -81,6 +81,11 @@ FameAndPartners::Application.routes.draw do
     ###########
     # Lookbooks
     ###########
+
+    get '/lp/1512/1' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_1, :pids => ["339-burgundy", "431-cherry-red", "713-red", "191-burgundy" ,"439-red", "371-cherry-red", "546-burgundy", "619-cherry-red", "539-red", "355-burgundy"]
+    get '/lp/1512/2' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_2, :pids => ["680-forest-green", "648-black", "682-gunmetal", "191-black", "539-magenta", "99-black", "431-black", "428-navy", "630-white", "471-burgundy"]
+    get '/lp/1512/3' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_3
+    get '/lp/1512/4' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_4
     get '/lookbook' => 'statics#lookbook', :as => :lookbook
     get '/lookbook/jedi-cosplay' => redirect('/lookbook/make-a-statement')
     get '/lookbook/make-a-statement' => 'products/collections#show', :permalink => 'make-a-statement', :as => :make_a_statement_collection
@@ -224,10 +229,6 @@ FameAndPartners::Application.routes.draw do
     #######################
     # (Others) Static pages
     #######################
-    get '/advertise1'   => 'statics#advertise1', :as => :advertise1
-    get '/advertise2'   => 'statics#advertise2', :as => :advertise1
-    get '/advertise3'   => 'statics#advertise3', :as => :advertise1
-    get '/advertise4'   => 'statics#advertise4', :as => :advertise1
     get '/about'   => 'statics#about', :as => :about_us
     get '/why-us'  => 'statics#why_us', :as => :why_us
     get '/team', to: redirect("http://www.fameandpartners.com/about")

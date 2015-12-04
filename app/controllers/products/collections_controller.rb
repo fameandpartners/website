@@ -84,7 +84,7 @@ class Products::CollectionsController < Products::BaseController
 
   def punch_products
     products             = Revolution::ProductService.new(product_ids, current_site_version).products(params, page.no_of_products)
-    @collection.products = if page.get(:curated) && product_ids.size > 0
+    @collection.products = if page.get("curated") && product_ids.size > 0
                              @collection.total_products = product_ids.size
                              products
                            else
