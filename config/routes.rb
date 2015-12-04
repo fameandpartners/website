@@ -217,6 +217,10 @@ FameAndPartners::Application.routes.draw do
     #######################
     # (Others) Static pages
     #######################
+    get '/advertise1'   => 'statics#advertise1', :as => :advertise1
+    get '/advertise2'   => 'statics#advertise2', :as => :advertise1
+    get '/advertise3'   => 'statics#advertise3', :as => :advertise1
+    get '/advertise4'   => 'statics#advertise4', :as => :advertise1
     get '/about'   => 'statics#about', :as => :about_us
     get '/why-us'  => 'statics#why_us', :as => :why_us
     get '/team', to: redirect("http://www.fameandpartners.com/about")
