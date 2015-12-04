@@ -211,7 +211,7 @@ Spree::Product.class_eval do
   end
 
   def default_standard_days_for_making
-    6
+    5
   end
 
   def standard_days_for_making
@@ -219,7 +219,7 @@ Spree::Product.class_eval do
   end
 
   def default_customised_days_for_making
-    11
+    10
   end
 
   def customised_days_for_making
