@@ -1,9 +1,6 @@
 - if @resource.items.active.empty?
-  .col-md-12
-    h3.text-center Sorry, there are no items in your moodboard
-
-- if @resource.items.active.any?
-
+  = render "#{@resource.purpose}_empty"
+- else
   - @resource.items.active.each_slice(4).each do |row|
     - row.each do |item|
       .col-md-4.col-xxs-12.panel-product data-id=(item.product_id)
