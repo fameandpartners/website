@@ -4,12 +4,15 @@ describe 'orders', type: :feature do
   context 'user changes site version' do
 
     shared_examples 'does not drop current order' do
-      let!(:us_site_version) { create(:site_version, permalink: 'us', currency: 'USD', default: true) }
-      let!(:au_site_version) { create(:site_version, permalink: 'au', currency: 'AUD', default: false) }
+      let!(:us_site_version) { create(:site_version, :us, :default) }
+      let!(:au_site_version) { create(:site_version, :au) }
 
       it 'user navigates to a different site version' do
+        switch_to_subdomain 'us'
         visit '/'
-        visit '/au'
+
+        switch_to_subdomain 'au'
+        visit '/'
 
         au_order = Spree::Order.first
         expect(au_order.currency).to eq 'AUD'

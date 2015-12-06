@@ -4,6 +4,8 @@ module Middleware
   module SiteVersion
     module Detectors
       RSpec.describe Path do
+        let(:detector) { described_class.new }
+
         describe '#detect_site_version' do
           matcher :be_detected_as do |sv_code|
             match do |path|
@@ -35,8 +37,6 @@ module Middleware
         end
 
         describe '#default_url_options' do
-          let(:detector) { described_class.new }
-
           context 'given a default site version' do
             let(:site_version) { build_stubbed(:site_version, :default) }
 
@@ -54,6 +54,10 @@ module Middleware
               expect(result).to eq({ site_version: 'au' })
             end
           end
+        end
+
+        describe '#site_version_url' do
+          pending 'TODO: Currently, this is only calling LocalizeUrlService.localize_url. See its method TODO for more information'
         end
       end
     end

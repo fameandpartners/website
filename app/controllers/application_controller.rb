@@ -274,7 +274,7 @@ class ApplicationController < ActionController::Base
   def is_user_came_from_current_app
     return false if request.referrer.blank?
     URI.parse(request.referrer).host == request.host
-  rescue Exception => e
+  rescue Exception => _
     # built-in ruby uri known for parse/generate issues.
     false
   end

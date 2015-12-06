@@ -1,0 +1,4 @@
+ul
+  - colors.take(20).uniq.each do |color|
+    li class="color-#{color.name}"
+      = link_to color.presentation, dresses_path( color: [color.presentation])

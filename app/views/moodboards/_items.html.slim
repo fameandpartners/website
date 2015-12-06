@@ -1,9 +1,6 @@
 - if @resource.items.active.empty?
-  .col-md-12
-    h3.text-center Sorry, there are no items in your moodboard
-
-- if @resource.items.active.any?
-
+  = render "#{@resource.purpose}_empty"
+- else
   - @resource.items.active.each_slice(4).each do |row|
     - row.each do |item|
       .col-md-4.col-xxs-12.panel-product data-id=(item.product_id)
@@ -21,32 +18,37 @@
           / span.price = product_price_with_discount(product.price, product.discount)
 
         .actions-wrap
-          - if enhanced_moodboards_enabled?
+          /! if like button
             .inner-wrap
               a href='javascript:;' class='btn btn-default btn-xs' Like (0)
-          .inner-wrap
+            .inner-wrap
+              = link_to 'Add to cart', url_path, class: 'btn btn-black btn-xs'
+          /# else this
+          .inner-wrap-full
             = link_to 'Add to cart', url_path, class: 'btn btn-black btn-xs'
+
           /#, data: { variant: product.variant_id, id: product.item_id }
           = link_to 'Remove from moodboard', moodboard_item_path(item.moodboard_id, item.id), 
             method: :delete, class: 'btn-close'
 
-        - if enhanced_moodboards_enabled?
-          .comments-wrap
-            .heading COMMENTS:
-            /! no comments
-              p.alt Be the first to comment on this dress!
+        /!
+          - if enhanced_moodboards_enabled?
+            .comments-wrap
+              .heading COMMENTS:
+              /! no comments
+                p.alt Be the first to comment on this dress!
+                p
+                  a href='javascript:;' Make
+                  span &nbsp;a comment
+
+              dl
+                dt.txt-truncate-1 Jodie
+                dd.txt-truncate-block Here the bride can give a short overview on her preferences parametres for the big.
+                dt.txt-truncate-1 Tan
+                dd.txt-truncate-block Here the bride can give a short overview on her preferences parametres for the big.
               p
+                a href='javascript:;' Show
+                span &nbsp;more comments
+                span.separator |
                 a href='javascript:;' Make
                 span &nbsp;a comment
-
-            dl
-              dt.txt-truncate-1 Jodie
-              dd.txt-truncate-block Here the bride can give a short overview on her preferences parametres for the big.
-              dt.txt-truncate-1 Tan
-              dd.txt-truncate-block Here the bride can give a short overview on her preferences parametres for the big.
-            p
-              a href='javascript:;' Show
-              span &nbsp;more comments
-              span.separator |
-              a href='javascript:;' Make
-              span &nbsp;a comment

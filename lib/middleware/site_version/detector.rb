@@ -20,7 +20,7 @@ module Middleware
       private
 
       def detector
-        configatron.site_version_detector.new
+        UrlHelpers::SiteVersion::Detector.detector
       end
     end
   end

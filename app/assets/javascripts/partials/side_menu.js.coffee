@@ -59,6 +59,12 @@ window.SideMenu = class SideMenu
       @slideMainMenu()
       $("#events-menu").toggleClass("sub-menu-slide-left")
 
+    $("#wedding-menu-open").on 'click', =>
+      @slideMainMenu()
+      $("#wedding-menu").toggleClass("sub-menu-slide-left")
+    $("#wedding-menu .arrow").on 'click', =>
+      @slideMainMenu()
+      $("#wedding-menu").toggleClass("sub-menu-slide-left")
 
     $("#lookbook-menu-open").on 'click', =>
       @slideMainMenu()
@@ -73,6 +79,17 @@ window.SideMenu = class SideMenu
     $("#magazine-menu .arrow").on 'click', =>
       @slideMainMenu()
       $("#magazine-menu").toggleClass("sub-menu-slide-left")
+
+    $("#moodboards-menu-open").on 'click', =>
+      item_num = $("#moodboards-menu .normal-item").size()
+      if item_num < 3
+        window.location.href = urlWithSitePrefix("/wishlist")
+      else
+        @slideMainMenu()
+        $("#moodboards-menu").toggleClass("sub-menu-slide-left")
+    $("#moodboards-menu .arrow").on 'click', =>
+      @slideMainMenu()
+      $("#moodboards-menu").toggleClass("sub-menu-slide-left")
 
   slideMainMenu: =>
     $("#inner-main-menu li[class*='normal-item']").toggleClass('inner-main-menu-slide-left')

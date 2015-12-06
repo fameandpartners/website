@@ -1,13 +1,16 @@
 class Moodboard < ActiveRecord::Base
   belongs_to :user, class_name: 'Spree::User', inverse_of: :moodboards
   has_many :items, class_name: 'MoodboardItem', inverse_of: :moodboard
+  has_many :collaborators, class_name: 'MoodboardCollaborator', inverse_of: :moodboard
 
   attr_accessible :description, :event_date, :name, :purpose
 
   validates :user, presence: true
+  validates :name, presence: true
   validates_inclusion_of :purpose, in: %w( default wedding )
 
   scope :weddings, -> { where(purpose: 'wedding') }
+  scope :by_recent, -> { order('created_at asc') }
 
   # Intended for use as a chained scope off of a Spree::User object.
   # e.g. user.moodboards.default_or_create
@@ -24,9 +27,12 @@ class Moodboard < ActiveRecord::Base
     name == defaults[:name] && purpose == defaults[:purpose]
   end
 
+  # TODO ? Promote into a service?
   def add_item(product:, color:, user:, variant: nil)
     product_id = product.id
     color_id   = color.id
+
+    return unless user_member?(user)
     return if items.active.where(product_id: product_id, color_id: color_id ).exists?
 
     pcv_id = ProductColorValue.where(product_id: product_id, option_value_id: color_id).first.try(:id)
@@ -41,5 +47,9 @@ class Moodboard < ActiveRecord::Base
     ev.variant_id = variant.id if variant.present?
 
     ev.save!
+  end
+
+  def user_member?(candidate_user)
+    collaborators.map(&:user_id).compact.include?(candidate_user.id) || self.user_id == candidate_user.id
   end
 end

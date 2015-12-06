@@ -66,11 +66,13 @@
 @import 'redesign/layout/menu-new-this-week';
 @import 'redesign/layout/menu-dresses';
 @import 'redesign/layout/menu-lookbook';
+@import 'redesign/layout/menu-wedding';
 @import 'redesign/layout/menu-magazine';
 
 // Components
 @import 'redesign/components/lists';
 @import 'redesign/components/tabs';
+@import 'redesign/components/dropdowns';
 @import 'redesign/components/media';
 @import 'redesign/components/hero';
 @import 'redesign/components/blog-posts';
@@ -84,6 +86,7 @@
 
 // Pages
 @import 'redesign/pages/moodboard';
+@import 'redesign/pages/moodboard-edit';
 @import 'redesign/pages/landing-dhd';
 @import 'redesign/pages/landing-bridesmaid';
 @import 'redesign/pages/landing-famingtonway';

@@ -77,10 +77,12 @@ end
 
 configatron.pin_payments.usd_gateways = %W{pk_NxLgEbIIaWwjKEqUnTd6oA pk_FJWiUA3rQW1uXZIg3LwMKQ}
 
-configatron.site_version_detector = Middleware::SiteVersion::Detectors::Path
+configatron.site_version_detector_strategy = :path
 
 case Rails.env.to_sym
 when :development
+  configatron.site_version_detector_strategy = :subdomain
+
   configatron.host = 'localhost.localdomain'
 
   configatron.cache.expire do |expire|
@@ -168,6 +170,8 @@ when :production
   end
 
 when :test
+  configatron.site_version_detector_strategy = :subdomain
+
   configatron.elasticsearch.indices do |index|
     index.spree_products = :spree_products_test
     index.color_variants = :color_variants_test

@@ -14,6 +14,11 @@ FameAndPartners::Application.routes.draw do
   get '/us/*whatevs' => redirect(path: "/%{whatevs}")
   get '/us' => redirect("/")
 
+  #######################################################
+  # Temporary redirection to fix wrong path sent to users
+  #######################################################
+  get '/AU' => redirect(path: "/au/dresses")
+
 
   # TODO: After .com.au migration, this scope can simply go away.
   scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
@@ -121,10 +126,9 @@ FameAndPartners::Application.routes.draw do
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
 
     # Landing pages
-    get '/famingtonway' => 'products/collections#show', :permalink => 'bohemian-summer', :as => :bohemian_summer_landing_page
+    get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
     get '/fameweddings/guest' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :guest_bride_page
-
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
@@ -325,6 +329,7 @@ FameAndPartners::Application.routes.draw do
 
   resources :moodboards, except: [:destroy] do
     resources :items, controller: 'moodboard_items', only: [:create, :show, :destroy]
+    resources :collaborators, controller: 'moodboard_collaborators', only: [:create, :index]
   end
 
   get 'moodboard', to: 'moodboards#index'

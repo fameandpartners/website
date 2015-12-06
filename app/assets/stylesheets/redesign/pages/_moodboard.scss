@@ -46,10 +46,6 @@
 
   }
 
-  .panel-aside ul {
-    margin: 0 0 15px 0;
-  }
-
   .flash {
     margin: 15px;
     text-align: center;
@@ -74,6 +70,11 @@
     li {
       display: inline-block;
       margin-right: 20px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
     }
 
     .tab {
@@ -168,13 +169,50 @@
 
   .panel-aside {
     margin-bottom: 30px;
-    padding: 20px 40px;
+    padding: 20px 15px;
     text-align: center;
     border-top: solid $c-neutral-black 1px;
     border-bottom: solid $c-neutral-black 1px;
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    ul {
+      margin: 0 0 15px 0;
+    }
+
+    .btn {
+      display: block;
+      padding: 8px 10px;
+      letter-spacing: normal;
+      font-size: 0.688em;
+    }
+
   }
 
-  @include mobile {
+  .panel-swatches {
+
+    ul {
+      text-align: center;
+    }
+
+    li {
+      display: inline-block;
+      margin: 10px 5px;
+      border: solid $c-neutral-2 1px;
+    }
+
+    a {
+      display: block;
+      width: 35px;
+      height: 35px;
+      text-indent: -9999em;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
 
     & {
 
@@ -185,6 +223,21 @@
         &.active {
           display: block;
           visibility: visible;
+        }
+
+      }
+
+      .panel-swatches {
+        padding-left: 0;
+        padding-right: 0;
+
+        li {
+          margin: 10px;
+        }
+
+        a {
+          width: 60px;
+          height: 60px;
         }
 
       }

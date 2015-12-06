@@ -21,158 +21,152 @@ $product-color-hot-pink: #ff3399;
 
 
 #product-color-content {
-
   .explanation {
     text-align: center;
   }
-
-  .custom, .recommended {
-    .color-option {
-
-      .color-box {
-        background-color: #CCCCCC;
-        margin: 0;
-        padding: 0;
-      }
-
-      .color-aqua                    { background-color: #21cddb; }
-      .color-apple-green             { background-color: #25d291; }
-      .color-apricot                 { background-color: #ffad80; }
-      .color-art-soul                { @include image-color-selector('ArtSoul.png'); }
-      .color-baby-pink               { background-color: #fde2f0; }
-      .color-beige                   { background-color: #efdecd; }
-      .color-berry                   { background-color: #873c44; }
-      .color-black                   { background-color: $product-color-black; }
-      .color-black-and-chartreuse    { @include split-color-selector(#000000, #c3ea56); }
-      .color-black-and-peacock       { @include split-color-selector($product-color-black, #134b7d); }
-      .color-black-and-vintage-gold  { @include split-color-selector($product-color-black, #d8ba00); }
-      .color-blue                    { background-color: #0000ff; }
-      .color-blue-azalea-floral      { @include image-color-selector('BlueAzaleaFloral.png'); }
-      .color-blue-fallen-leaves      { @include image-color-selector('BlueFallenLeaves.png'); }
-      .color-blush                   { background-color: #eec6c6; }
-      .color-blush-and-black         { @include split-color-selector(#e1c2c1, #000000); }
-      .color-brick                   { background-color: #993333; }
-      .color-bright-red              { background-color: #ff3333; }
-      .color-bright-lavender         { background-color: #ddb6f9; }
-      .color-bronze                  { background-color: #cd7f32; }
-      .color-burgundy                { background-color: #690f0f; }
-      .color-burnt-orange            { background-color: #f07532; }
-      .color-candy-pink              { background-color: #ff99ff; }
-      .color-champagne               { background-color: #f0debb; }
-      .color-charcoal                { background-color: #3c3c3c; }
-      .color-chartreuse              { background-color: #bed405; }
-      .color-cheetah                 { @include image-color-selector('Cheetah.png'); }
-      .color-cherry-red              { background-color: #ba0e0e; }
-      .color-chocolate               { background-color: #5a2b0c; }
-      .color-cobalt-blue             { background-color: #0000e5; }
-      .color-coral                   { background-color: #ff6262; }
-      .color-cotton-candy            { background-color: #fbbfe9; }
-      .color-cream                   { background-color: #fcfbe3; }
-      .color-dark-burgundy           { background-color: #5e100b; }
-      .color-dark-nude               { background-color: #D2AF99; }
-      .color-dark-forest             { background-color: #173a22; }
-      .color-dark-purple             { background-color: #330066; }
-      .color-dark-tan                { background-color: #b69368; }
-      .color-deep-purple             { background-color: #370840; }
-      .color-dusty-pink              { background-color: #dd83b9; }
-      .color-emerald-green           { background-color: #1b9975; }
-      .color-floral-dreamer          { @include image-color-selector('FloralDreamer.png'); }
-      .color-fluoro-orange           { background-color: #ff9933; }
-      .color-forest-green            { background-color: #246b5b; }
-      .color-fuschia                 { background-color: #ff77e8; }
-      .color-garden-floral           { @include image-color-selector('GardenFloral.png'); }
-      .color-geo-sage                { @include image-color-selector('GeoSage.png'); }
-      .color-gold                    { background-color: #bf9541; }
-      .color-green                   { background-color: #10a522; }
-      .color-grey                    { background-color: #bcbebb; }
-      .color-gunmetal                { background-color: #444544; }
-      .color-gypsy-queen             { @include image-color-selector('GypsyQueen.png'); }
-      .color-gypsy-scarf             { @include image-color-selector('GypsyScarf.png'); }
-      .color-hot-pink                { background-color: #ff3399; }
-      .color-ice-blue                { background-color: $product-color-ice-blue; }
-      .color-indigo                  { background-color: #3366cc; }
-      .color-ivory                   { background-color: $product-color-ivory; }
-      .color-ivory-and-hot-pink      { @include split-color-selector($product-color-ivory, $product-color-hot-pink); }
-      .color-ivory-and-ice-blue      { @include split-color-selector($product-color-ivory, $product-color-ice-blue); }
-      .color-ivory-and-navy          { @include split-color-selector($product-color-ivory, #00004C); }
-      .color-ivory-and-pink          { @include split-color-selector($product-color-ivory, $product-color-hot-pink); }
-      .color-ivory-and-tan           { @include split-color-selector($product-color-ivory, #c3b58b); }
-      .color-lavender                { background-color: #d9c0e7; }
-      .color-lavender-grey           { background-color: #9999cc; }
-      .color-lemon                   { background-color: #FFFACD; }
-      .color-lemon-sorbet            { background-color: #ffff99; }
-      .color-light-blue              { background-color: #66ccff; }
-      .color-light-pink              { background-color: #ffecef; }
-      .color-light-pink-and-charcoal { @include split-color-selector(#ffecef, #3c3c3c); }
-      .color-micro-spot              { @include image-color-selector('BlackMicroSpot.png') }
-      .color-midnight-floral         { @include image-color-selector('midnightfloral.jpg') }
-      .color-monochrome              { @include image-color-selector('Monochrome.png'); }
-      .color-monochrome-code         { @include image-color-selector('MonochromeCoda.png'); }
-      .color-nautical-stripe         { @include image-color-selector('NauticalStripe.png'); }
-      .color-pink-azalea-floral      { @include image-color-selector('PinkAzaleaFloral.png'); }
-      .color-surreal-floral-black    { @include image-color-selector('SurrealFloralBlack.png'); }
-      .color-surreal-floral-white    { @include image-color-selector('SurrealFloralWhite.png'); }
-      .color-tribal-love             { @include image-color-selector('TribalLove.png'); }
-      .color-tropical-floral         { @include image-color-selector('TropicalFloral.png'); }
-      .color-watercolour             { @include image-color-selector('Watercolour.png'); }
-      .color-lilac                   { background-color: #ecddf4; }
-      .color-magenta                 { background-color: #e137b7; }
-      .color-marine-blue             { background-color: #055281; }
-      .color-mauve                   { background-color: #d4a8cc; }
-      .color-merlot                  { background-color: #8d2705; }
-      .color-mint                    { background-color: #91ffdb; }
-      .color-moss-green              { background-color: #8ea578; }
-      .color-mushroom                { background-color: #d2bec4; }
-      .color-navy                    { background-color: #1d2f6f; }
-      .color-neon-mint               { background-color: #33ffc6; }
-      .color-nude                    { background-color: #fdd5b1; }
-      .color-off-white               { background-color: #fffef6; }
-      .color-olive                   { background-color: #394d01; }
-      .color-orange                  { background-color: #ffae19; }
-      .color-pale-blue               { background-color: #cdf1f4; }
-      .color-pale-green              { background-color: #d1f6d7; }
-      .color-pale-grey               { background-color: #e0e1e1; }
-      .color-pale-pink               { background-color: #fff2f4; }
-      .color-pale-yellow             { background-color: #f0f0ca; }
-      .color-peach                   { background-color: #fde4d8; }
-      .color-persian-green           { background-color: #00a693; }
-      .color-pine                    { background-color: #128755; }
-      .color-pink                    { background-color: #ff93ca; }
-      .color-pink-red                { @include split-color-selector(#ff3399, #dd0000); }
-      .color-pink-and-blush          { @include split-color-selector(#f9d9e1, #ffabbc); }
-      .color-plum                    { background-color: #8d4585; }
-      .color-polka-dot               { @include image-color-selector('Polka-dot.png'); }
-      .color-purple                  { background-color: #622b6f; }
-      .color-purple-metal            { background-color: #776385; }
-      .color-red                     { background-color: $product_color-red; }
-      .color-red-and-white           { @include split-color-selector($product-color-red, #fffff0); }
-      .color-rosebud                 { @include image-color-selector('Rosebud.png'); }
-      .color-rose-gold               { background-color: #d6aa85; }
-      .color-royal-blue              { background-color: #3f34b2; }
-      .color-royal-purple            { background-color: #77539c; }
-      .color-sage                    { background-color: #826a77; }
-      .color-sage-fallen-leaves      { @include image-color-selector('SageFallenLeaves.png'); }
-      .color-sage-green              { background-color: #95c7bc; }
-      .color-salmon                  { background-color: #ff8c69; }
-      .color-sand                    { background-color: #efeadd; }
-      .color-seafoam                 { background-color: #52d2c8; }
-      .color-seashell                { background-color: #fffaef; }
-      .color-silver                  { background-color: #a4a5a7; }
-      .color-sky-blue                { background-color: #c2e4f4; }
-      .color-taupe                   { background-color: #c9bba4; }
-      .color-teal                    { background-color: #41a9ab; }
-      .color-turquoise               { background-color: #7deee5; }
-      .color-vibrant-purple          { background-color: #9f6ba9; }
-      .color-watermelon              { background-color: #ff3366; }
-      .color-wine                    { background-color: #831c2e; }
-
-      .color-white, .color-optic-white {
-        background-color: #FFFFFF;
-        border: 1px dashed #eeeeee;
-      }
-      .color-white-and-black {
-        @include split-color-selector(#FCF8F7, $product-color-black);
-        border: 1px dashed #eeeeee; }
-    }
-  }
 }
+
+.color-box {
+  background-color: #CCCCCC;
+  margin: 0;
+  padding: 0;
+}
+
+.color-aqua                    { background-color: #21cddb; }
+.color-apple-green             { background-color: #25d291; }
+.color-apricot                 { background-color: #ffad80; }
+.color-art-soul                { @include image-color-selector('ArtSoul.png'); }
+.color-baby-pink               { background-color: #fde2f0; }
+.color-beige                   { background-color: #efdecd; }
+.color-berry                   { background-color: #873c44; }
+.color-black                   { background-color: $product-color-black; }
+.color-black-and-chartreuse    { @include split-color-selector(#000000, #c3ea56); }
+.color-black-and-peacock       { @include split-color-selector($product-color-black, #134b7d); }
+.color-black-and-vintage-gold  { @include split-color-selector($product-color-black, #d8ba00); }
+.color-blue                    { background-color: #0000ff; }
+.color-blue-azalea-floral      { @include image-color-selector('BlueAzaleaFloral.png'); }
+.color-blue-fallen-leaves      { @include image-color-selector('BlueFallenLeaves.png'); }
+.color-blush                   { background-color: #eec6c6; }
+.color-blush-and-black         { @include split-color-selector(#e1c2c1, #000000); }
+.color-brick                   { background-color: #993333; }
+.color-bright-red              { background-color: #ff3333; }
+.color-bright-lavender         { background-color: #ddb6f9; }
+.color-bronze                  { background-color: #cd7f32; }
+.color-burgundy                { background-color: #690f0f; }
+.color-burnt-orange            { background-color: #f07532; }
+.color-candy-pink              { background-color: #ff99ff; }
+.color-champagne               { background-color: #f0debb; }
+.color-charcoal                { background-color: #3c3c3c; }
+.color-chartreuse              { background-color: #bed405; }
+.color-cheetah                 { @include image-color-selector('Cheetah.png'); }
+.color-cherry-red              { background-color: #ba0e0e; }
+.color-chocolate               { background-color: #5a2b0c; }
+.color-cobalt-blue             { background-color: #0000e5; }
+.color-coral                   { background-color: #ff6262; }
+.color-cotton-candy            { background-color: #fbbfe9; }
+.color-cream                   { background-color: #fcfbe3; }
+.color-dark-burgundy           { background-color: #5e100b; }
+.color-dark-nude               { background-color: #D2AF99; }
+.color-dark-forest             { background-color: #173a22; }
+.color-dark-purple             { background-color: #330066; }
+.color-dark-tan                { background-color: #b69368; }
+.color-deep-purple             { background-color: #370840; }
+.color-dusty-pink              { background-color: #dd83b9; }
+.color-emerald-green           { background-color: #1b9975; }
+.color-floral-dreamer          { @include image-color-selector('FloralDreamer.png'); }
+.color-fluoro-orange           { background-color: #ff9933; }
+.color-forest-green            { background-color: #246b5b; }
+.color-fuschia                 { background-color: #ff77e8; }
+.color-garden-floral           { @include image-color-selector('GardenFloral.png'); }
+.color-geo-sage                { @include image-color-selector('GeoSage.png'); }
+.color-gold                    { background-color: #bf9541; }
+.color-green                   { background-color: #10a522; }
+.color-grey                    { background-color: #bcbebb; }
+.color-gunmetal                { background-color: #444544; }
+.color-gypsy-queen             { @include image-color-selector('GypsyQueen.png'); }
+.color-gypsy-scarf             { @include image-color-selector('GypsyScarf.png'); }
+.color-hot-pink                { background-color: #ff3399; }
+.color-ice-blue                { background-color: $product-color-ice-blue; }
+.color-indigo                  { background-color: #3366cc; }
+.color-ivory                   { background-color: $product-color-ivory; }
+.color-ivory-and-hot-pink      { @include split-color-selector($product-color-ivory, $product-color-hot-pink); }
+.color-ivory-and-ice-blue      { @include split-color-selector($product-color-ivory, $product-color-ice-blue); }
+.color-ivory-and-navy          { @include split-color-selector($product-color-ivory, #00004C); }
+.color-ivory-and-pink          { @include split-color-selector($product-color-ivory, $product-color-hot-pink); }
+.color-ivory-and-tan           { @include split-color-selector($product-color-ivory, #c3b58b); }
+.color-lavender                { background-color: #d9c0e7; }
+.color-lavender-grey           { background-color: #9999cc; }
+.color-lemon                   { background-color: #FFFACD; }
+.color-lemon-sorbet            { background-color: #ffff99; }
+.color-light-blue              { background-color: #66ccff; }
+.color-light-pink              { background-color: #ffecef; }
+.color-light-pink-and-charcoal { @include split-color-selector(#ffecef, #3c3c3c); }
+.color-micro-spot              { @include image-color-selector('BlackMicroSpot.png') }
+.color-midnight-floral         { @include image-color-selector('midnightfloral.jpg') }
+.color-monochrome              { @include image-color-selector('Monochrome.png'); }
+.color-monochrome-code         { @include image-color-selector('MonochromeCoda.png'); }
+.color-nautical-stripe         { @include image-color-selector('NauticalStripe.png'); }
+.color-pink-azalea-floral      { @include image-color-selector('PinkAzaleaFloral.png'); }
+.color-surreal-floral-black    { @include image-color-selector('SurrealFloralBlack.png'); }
+.color-surreal-floral-white    { @include image-color-selector('SurrealFloralWhite.png'); }
+.color-tribal-love             { @include image-color-selector('TribalLove.png'); }
+.color-tropical-floral         { @include image-color-selector('TropicalFloral.png'); }
+.color-watercolour             { @include image-color-selector('Watercolour.png'); }
+.color-lilac                   { background-color: #ecddf4; }
+.color-magenta                 { background-color: #e137b7; }
+.color-marine-blue             { background-color: #055281; }
+.color-mauve                   { background-color: #d4a8cc; }
+.color-merlot                  { background-color: #8d2705; }
+.color-mint                    { background-color: #91ffdb; }
+.color-moss-green              { background-color: #8ea578; }
+.color-mushroom                { background-color: #d2bec4; }
+.color-navy                    { background-color: #1d2f6f; }
+.color-neon-mint               { background-color: #33ffc6; }
+.color-nude                    { background-color: #fdd5b1; }
+.color-off-white               { background-color: #fffef6; }
+.color-olive                   { background-color: #394d01; }
+.color-orange                  { background-color: #ffae19; }
+.color-pale-blue               { background-color: #cdf1f4; }
+.color-pale-green              { background-color: #d1f6d7; }
+.color-pale-grey               { background-color: #e0e1e1; }
+.color-pale-pink               { background-color: #fff2f4; }
+.color-pale-yellow             { background-color: #f0f0ca; }
+.color-peach                   { background-color: #fde4d8; }
+.color-persian-green           { background-color: #00a693; }
+.color-pine                    { background-color: #128755; }
+.color-pink                    { background-color: #ff93ca; }
+.color-pink-red                { @include split-color-selector(#ff3399, #dd0000); }
+.color-pink-and-blush          { @include split-color-selector(#f9d9e1, #ffabbc); }
+.color-plum                    { background-color: #8d4585; }
+.color-polka-dot               { @include image-color-selector('Polka-dot.png'); }
+.color-purple                  { background-color: #622b6f; }
+.color-purple-metal            { background-color: #776385; }
+.color-red                     { background-color: $product_color-red; }
+.color-red-and-white           { @include split-color-selector($product-color-red, #fffff0); }
+.color-rosebud                 { @include image-color-selector('Rosebud.png'); }
+.color-rose-gold               { background-color: #d6aa85; }
+.color-royal-blue              { background-color: #3f34b2; }
+.color-royal-purple            { background-color: #77539c; }
+.color-sage                    { background-color: #826a77; }
+.color-sage-fallen-leaves      { @include image-color-selector('SageFallenLeaves.png'); }
+.color-sage-green              { background-color: #95c7bc; }
+.color-salmon                  { background-color: #ff8c69; }
+.color-sand                    { background-color: #efeadd; }
+.color-seafoam                 { background-color: #52d2c8; }
+.color-seashell                { background-color: #fffaef; }
+.color-silver                  { background-color: #a4a5a7; }
+.color-sky-blue                { background-color: #c2e4f4; }
+.color-taupe                   { background-color: #c9bba4; }
+.color-teal                    { background-color: #41a9ab; }
+.color-turquoise               { background-color: #7deee5; }
+.color-vibrant-purple          { background-color: #9f6ba9; }
+.color-watermelon              { background-color: #ff3366; }
+.color-wine                    { background-color: #831c2e; }
+
+.color-white, .color-optic-white {
+  background-color: #FFFFFF;
+  border: 1px dashed #eeeeee;
+}
+.color-white-and-black {
+  @include split-color-selector(#FCF8F7, $product-color-black);
+  border: 1px dashed #eeeeee; }
