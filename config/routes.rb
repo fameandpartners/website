@@ -14,6 +14,11 @@ FameAndPartners::Application.routes.draw do
   get '/us/*whatevs' => redirect(path: "/%{whatevs}")
   get '/us' => redirect("/")
 
+  #######################################################
+  # Temporary redirection to fix wrong path sent to users
+  #######################################################
+  get '/AU' => redirect(path: "/au/dresses")
+
 
   # TODO: After .com.au migration, this scope can simply go away.
   scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
