@@ -34,10 +34,12 @@
     = render partial: 'products/collections/pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
   .row
     .col-md-3.hidden-sm.hidden-xs
-      = image_tag "landingpages/ad4-pic2.jpg" ,alt: 'pic2', class: 'pic2'
+      = link_to dresses_path + '/dress-margarite-two-piece-796?color=blush-and-black', class: 'media-wrap'
+        = image_tag 'landingpages/ad4-pic2.jpg', alt:'SHOP THIS LOOK'
     = render partial: 'products/collections/pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 9, customWrapper: 'col-md-3 col-xs-6'}
     .col-md-3.hidden-sm.hidden-xs
-      = image_tag "landingpages/ad4-pic3.jpg" ,alt: 'pic3', class: 'pic3'
+      = link_to dresses_path + '/dress-roxette-809?color=blue-fallen-leaves', class: 'media-wrap'
+        = image_tag 'landingpages/ad4-pic3.jpg', alt:'SHOP THIS LOOK'
 
 coffee:
   $(window).load ->
