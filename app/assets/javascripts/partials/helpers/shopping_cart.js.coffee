@@ -50,7 +50,9 @@ window.helpers.ShoppingCart = class ShoppingCart
     @data
 
   showModal: () ->
-    if @shouldShowGiftModal() then @showGiftModal() else @showAddToCartModal()
+    if $.cookie('add-to-cart-modal-displayed') != 'true'
+      if @shouldShowGiftModal() then @showGiftModal() else @showAddToCartModal()
+      $.cookie('add-to-cart-modal-displayed','true')
 
   showAddToCartModal: () ->
     addToCartModal = new window.page.EmailCaptureModal({
