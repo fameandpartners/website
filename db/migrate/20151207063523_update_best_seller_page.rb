@@ -6,6 +6,7 @@ class UpdateBestSellerPage < ActiveRecord::Migration
       page.variables["lookbook"] = true
       page.variables["image_count"] = 20
       page.save!
+      page.publish!
     end
   end
 end
