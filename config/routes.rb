@@ -14,6 +14,11 @@ FameAndPartners::Application.routes.draw do
   get '/us/*whatevs' => redirect(path: "/%{whatevs}")
   get '/us' => redirect("/")
 
+  #######################################################
+  # Temporary redirection to fix wrong path sent to users
+  #######################################################
+  get '/AU' => redirect(path: "/au/dresses")
+
 
   # TODO: After .com.au migration, this scope can simply go away.
   scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
@@ -80,7 +85,8 @@ FameAndPartners::Application.routes.draw do
     get '/lp/1512/1' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_1, :pids => ["339-burgundy", "431-cherry-red", "713-red", "191-burgundy" ,"439-red", "371-cherry-red", "546-burgundy", "619-cherry-red", "539-red", "355-burgundy"]
     get '/lp/1512/2' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_2, :pids => ["680-forest-green", "648-black", "682-gunmetal", "191-black", "539-magenta", "99-black", "431-black", "428-navy", "630-white", "471-burgundy"]
     get '/lp/1512/3' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_3, :pids => ["191-burgundy", "499-black", "582-white", "544-silver","514-black", "497-hot-pink", "612-gypsy-queen", "501-navy","620-white", "680-light-pink"]
-    get '/lp/1512/4' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_4
+    get '/lp/1512/4' => 'products/collections#show', :permalink => 'bring-on-the-night', :as => :advertising_landing_page_4, :pids => ["802-ice-grey", "809-blue-fallen-leaves", "800-pale-blue", "813-navy", "811-sage-fallen-leaves", "823-pale-pink", "793-ice-grey", "795-coral", "799-ice-blue", "804-mint"]
+
     get '/lookbook' => 'statics#lookbook', :as => :lookbook
     get '/lookbook/jedi-cosplay' => redirect('/lookbook/make-a-statement')
     get '/lookbook/make-a-statement' => 'products/collections#show', :permalink => 'make-a-statement', :as => :make_a_statement_collection
@@ -145,8 +151,9 @@ FameAndPartners::Application.routes.draw do
     scope '/user_cart', module: 'user_cart' do
       root to: 'details#show', as: :user_cart_details
 
-      get '/details' => 'details#show'
-      post '/promotion' => 'promotions#create'
+      get '/details'      => 'details#show'
+      get '/order_delivery_date' => 'details#order_delivery_date'
+      post '/promotion'   => 'promotions#create'
 
       post 'products' => 'products#create'
       get 'products/check_gift_in_cart' => 'products#check_gift_in_cart'
@@ -172,6 +179,7 @@ FameAndPartners::Application.routes.draw do
       # Colors should behave like query strings, and not paths
       get '/dress-:product_slug/:color' => redirect { |params, req| "/dresses/dress-#{params[:product_slug]}?#{req.params.except(:product_slug, :site_version).to_query}" }
       get '/dress-:product_slug' => 'products/details#show'
+
       get '/outerwear-:product_slug', to: 'products/details#show', as: :outerwear_details
 
       #roots categories
