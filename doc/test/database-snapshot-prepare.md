@@ -1,5 +1,11 @@
 # Preparing test database for acceptance tests
 
+## Current
+
+If you want to update the fixture database for acceptance tests, use the `create_test_fixture_dump` option from the `script/db` file.
+
+## Deprecated (19/11/2015)
+
 This will guide you to prepare a sample database for acceptance specs. The goal of this database is to have the simplest setup as possible.
  
 - Remember that database user/role should be postgres
