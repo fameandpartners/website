@@ -24,6 +24,7 @@ if Rails.env.test?
 end
 
 Features.deactivate(:checkout_fb_login)
+Features.deactivate(:delivery_date_messaging)
 Features.deactivate(:gift)
 Features.deactivate(:maintenance)
 Features.deactivate(:shipping_message)
