@@ -50,25 +50,31 @@ window.helpers.ShoppingCart = class ShoppingCart
     @data
 
   showModal: () ->
-    if $.cookie('add-to-cart-modal-displayed') != 'true'
-      if @shouldShowGiftModal() then @showGiftModal() else @showAddToCartModal()
-      $.cookie('add-to-cart-modal-displayed','true')
+    if @shouldShowGiftModal()
+      @showGiftModal()
+    else if @shouldShowAddToCartModal()
+      @showAddToCartModal()
 
   showAddToCartModal: () ->
-    addToCartModal = new window.page.EmailCaptureModal({
-      promocode: "HALFOFF",
-      content: "",
-      container: "#modal-add-to-cart-template",
-      heading: "Love two dresses?",
-      message: "<h3><strong>Buy both and we will give you 50% off the second dress</strong/><br/>Hurry, offer ends soon.</h3><div><a class=\"btn btn-black\" onclick=\"vex.closeAll();\">Add another dress</a/></div/>",
-      className: "new-modal welcome-modal",
-      timeout: 0,
-      timer: false,
-      force: false
-    });
+    if $.cookie('add-to-cart-modal-displayed') != 'true'
+      addToCartModal = new window.page.EmailCaptureModal({
+        promocode: "HALFOFF",
+        content: "",
+        container: "#modal-add-to-cart-template",
+        heading: "Love two dresses?",
+        message: "<h3><strong>Buy both and we will give you 50% off the second dress</strong/><br/>Hurry, offer ends soon.</h3><div><a class=\"btn btn-black\" onclick=\"vex.closeAll();\">Add another dress</a/></div/>",
+        className: "new-modal welcome-modal",
+        timeout: 0,
+        timer: false,
+        force: false
+      });
+      $.cookie('add-to-cart-modal-displayed','true')
 
   shouldShowGiftModal: () ->
     $("#gift-modal").length != 0
+
+  shouldShowAddToCartModal: () ->
+    $("#modal-add-to-cart-template").length != 0
 
   showGiftModal: () ->
     $.ajax(
