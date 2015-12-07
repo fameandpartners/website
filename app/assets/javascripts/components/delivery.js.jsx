@@ -9,10 +9,10 @@ var DeliveryTime = React.createClass({
     } else {
       return(
         <ul>
-          <li>Between {this.props.start_date_express} and {this.props.end_date_express} 
+          <li>Between {this.props.start_date_express} and {this.props.end_date_express}
             <em> for express making dresses</em></li>
-          <li>Between {this.props.start_date_non_express} and {this.props.end_date_non_express} 
-            <em> for express standard making dresses</em></li>
+          <li>Between {this.props.start_date_non_express} and {this.props.end_date_non_express}
+            <em> for standard making dresses</em></li>
         </ul>
       )
     }
