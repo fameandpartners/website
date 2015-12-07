@@ -259,8 +259,8 @@ describe Revolution::Page do
         expect(page.limit(product_ids)).to eq 20
       end
       it 'returns 20 when given 22 product_ids and an offset of 21 and a limit of 21' do
-        product_ids = ['451', '1', '2', '3', '4', '5', '6', '7', '8','9','10',
-                       '11', '12', '13',' 14', '15', '16', '17', '18', '19', '20','21']
+
+        product_ids = (1..22).to_a
         page.params = {offset: 21, limit: 21}
         expect(page.limit(product_ids)).to eq 20
       end
@@ -283,6 +283,11 @@ describe Revolution::Page do
       it 'returns 21 when given 2 product_ids and no parameter limit' do
         product_ids = ['457', '2']
         expect(page.limit(product_ids)).to eq 21
+      end
+
+      it 'more products than the limit' do
+        product_ids = (1..30).to_a
+        expect(page.limit(product_ids)).to eq 0
       end
     end
     context 'page is a lookbook' do
