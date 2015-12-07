@@ -126,14 +126,10 @@ module Revolution
     end
 
     def offset(product_ids, offset)
-      offset = offset.to_i
+      offset       = offset.to_i
       product_size = Array.wrap(product_ids).size
-      return offset if product_size.zero?
-      if offset > 0
-        offset = offset - product_size
-        offset = 0 if offset < 0
-      end
-      offset
+
+      [0, offset - product_size].max
     end
 
     def page_is_lookbook?
