@@ -146,6 +146,7 @@ class Products::CollectionsController < Products::BaseController
   end
 
   private def filter_options
+    custom_product_ids = filters_applied? ? [] : product_ids
     {
       site_version: current_site_version,
       collection:   params[:collection],
@@ -156,13 +157,13 @@ class Products::CollectionsController < Products::BaseController
       discount:     params[:sale] || params[:discount],
       fast_making:  params[:fast_making],
       order:        params[:order],
-      limit:        page.limit(product_ids), # page size
-      offset:       page.offset(product_ids, params[:offset]),
+      limit:        page.limit(custom_product_ids), # page size
+      offset:       page.offset(custom_product_ids, params[:offset]),
       query_string: params[:q]
     }
   end
 
-  private def filters_applied?
+  def filters_applied?
     params.slice(
       :collection, :style, :event, :color, :colour, :bodyshape, :order, :q
     ).values.any?(&:present?)
