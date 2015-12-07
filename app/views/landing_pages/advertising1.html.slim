@@ -19,15 +19,15 @@
         .row
           .col-md-6
             .media-wrap
-              = image_tag "landingpages/ad1-pic2.jpg" ,alt: 'pic2', class: 'pic2'
+              = image_tag "landingpages/ad1-pic2.jpg"
           .col-md-6
             .media-wrap
-              = image_tag "landingpages/ad1-pic3.jpg" ,alt: 'pic3', class: 'pic3'
+              = image_tag "landingpages/ad1-pic3.jpg"
   .row
     .col-md-12
       h2.fomular-header.text-center RED HAUTE
       h3.fomular-body.text-center Sultry Red + Sparkles + Skin = Party Chic
-      
+
   .row
     = render partial: 'products/collections/pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
   .row
