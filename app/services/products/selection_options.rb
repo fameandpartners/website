@@ -73,14 +73,12 @@ class Products::SelectionOptions
     end
 
     def default_product_sizes
-      product_sizes.select{|size| size.extra_price.blank? }
+      product_sizes
     end
 
     def extra_product_sizes
-      return [] unless extra_sizes_available?
-      product_sizes.select{|size| size.extra_price.present? }
+      return []
     end
-    # end
 
     # colors part
     def basic_product_color_ids
