@@ -79,8 +79,7 @@ ruby:
 
 #modal-add-to-cart-template.hidden
 
-
-- if false #Features.active?(:gift)
+- if Features.active?(:gift)
   #gift-modal.hidden
     .left-panel
       center

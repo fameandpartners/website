@@ -24,13 +24,14 @@ if Rails.env.test?
 end
 
 Features.deactivate(:checkout_fb_login)
+Features.deactivate(:gift)
 Features.deactivate(:maintenance)
 Features.deactivate(:shipping_message)
 Features.deactivate(:send_promotion_email_reminder)
 
 Features.activate(:marketing_modals)
 Features.activate(:express_making)
-Features.activate(:gift)
+
 Features.activate(:masterpass)
 Features.activate(:moodboard)
 Features.activate(:sales)
