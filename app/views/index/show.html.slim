@@ -19,6 +19,42 @@ ruby:
               http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_images[:full]} 1024w"
 
 
+  section.container
+    .row
+      .col-md-12
+        .h2.title-line-on-sides
+          .inner-wrap AS SEEN IN
+      .col-md-12
+        .as-seen-in-partners
+          img.refinery29 alt='Refinery29'    src='/assets/footer/publisher/refinery29.png'
+          img.elle       alt='Elle'          src='/assets/footer/publisher/elle.png'
+          img.marie      alt='Marie'         src='/assets/footer/publisher/marie.png'
+          img.russh      alt='Russh'         src='/assets/footer/publisher/russh.png'
+          img.glamour    alt='Glamour'       src='/assets/footer/publisher/glamour.png'
+          img.wwd        alt='WWD'           src='/assets/footer/publisher/wwd.png'
+          img.teen       alt='Teenvogue'     src='/assets/footer/publisher/teen.png'
+          img.popsugar   alt='Popsugar'      src='/assets/footer/publisher/popsugar.png'
+          img.nylon      alt='Nylon'         src='/assets/footer/publisher/nylon.png'
+          img.cosmo      alit='Cosmopolitan' src='/assets/footer/publisher/cosmo.png'
+
+  /! Content Section
+  section.container.content-block.home-main-content
+    .row
+      .main.col-md-7
+        = link_to bridesmaid_landing_page_path, class: 'media-wrap'
+          = image_tag 'home-page-tiles/tile-wedding-boutique.jpg', alt: 'WEDDING BOUTIQUE - explore BRIDESMAIDS'
+        = render 'shared/redesign/tabs_collection'
+        = link_to bring_on_the_night_collection_path, class: 'media-wrap'
+          = image_tag 'home-page-tiles/tile-TIS-the-season.jpg', alt: 'TIS THE SEASON - SHOP EVENT DRESSES'
+        = link_to dresses_path + '?lpi=modelco2&permalink=dance-hall&limit=72', class: 'media-wrap'
+          = image_tag 'home-page-tiles/ModelCoGift-CategoryTile3.jpg', alt: 'You deserve VIP treatment so we want to give you something special.'
+        = link_to build_taxon_path('Velvet'), class: 'media-wrap'
+          = image_tag 'home-page-tiles/VelvetUnderground-CategoryTile4.jpg', alt: 'VELVET UNDERGROUND - SHOP VELVET DRESSES'
+
+      aside.col-md-5
+        = react_component('BlogPosts')
+
+
   section.carousel-strap.instagram
     .container
       .outer-wrap
@@ -39,42 +75,6 @@ ruby:
                     {link: link_to_dresses + '/dress-brooke-jumpsuit-646?color=cobalt-blue', src: '/assets/homepage/instagram/No12_Hailee.jpg', user: '@haileebobailee', cta: "Shop the Brooke Look"},
                     {link: link_to_dresses + '/dress-royal-doll-685?color=gold', src: '/assets/homepage/instagram/No13_SarahEl.jpg', user: '@sarah3llen', cta: "Shop the Royal Doll Look"},
                     {link: link_to_dresses + '/dress-midnight-mist-750?color=green', src: '/assets/homepage/instagram/No14_Elle.jpg', user: '@elle_ferguson', cta: "Shop the Midnight Mist Look"}])
-
-  /! Content Section
-  section.container.content-block.home-main-content
-    .row
-      .main.col-md-7
-        = link_to bridesmaid_landing_page_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/tile-wedding-boutique.jpg', alt: 'WEDDING BOUTIQUE - explore BRIDESMAIDS'
-        = render 'shared/redesign/tabs_collection'
-        = link_to bring_on_the_night_collection_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/tile-TIS-the-season.jpg', alt: 'TIS THE SEASON - SHOP EVENT DRESSES'
-        = link_to dresses_path + '?lpi=modelco2&permalink=dance-hall&limit=72', class: 'media-wrap'
-          = image_tag 'home-page-tiles/ModelCoGift-CategoryTile3.jpg', alt: 'You deserve VIP treatment so we want to give you something special.'
-        = link_to build_taxon_path('Velvet'), class: 'media-wrap'
-          = image_tag 'home-page-tiles/VelvetUnderground-CategoryTile4.jpg', alt: 'VELVET UNDERGROUND - SHOP VELVET DRESSES'
-
-      aside.col-md-5
-        = react_component('BlogPosts')
-
-  section.container
-    .row
-      .col-md-12
-        .h2.title-line-on-sides
-          .inner-wrap AS SEEN IN
-      .col-md-12
-        .as-seen-in-partners
-          img.refinery29 alt='Refinery29'    src='/assets/footer/publisher/refinery29.png'
-          img.elle       alt='Elle'          src='/assets/footer/publisher/elle.png'
-          img.marie      alt='Marie'         src='/assets/footer/publisher/marie.png'
-          img.russh      alt='Russh'         src='/assets/footer/publisher/russh.png'
-          img.glamour    alt='Glamour'       src='/assets/footer/publisher/glamour.png'
-          img.wwd        alt='WWD'           src='/assets/footer/publisher/wwd.png'
-          img.teen       alt='Teenvogue'     src='/assets/footer/publisher/teen.png'
-          img.popsugar   alt='Popsugar'      src='/assets/footer/publisher/popsugar.png'
-          img.nylon      alt='Nylon'         src='/assets/footer/publisher/nylon.png'
-          img.cosmo      alit='Cosmopolitan' src='/assets/footer/publisher/cosmo.png'
-
   /! Email Subscription
   = render 'shared/redesign/newsletter_signup'
 
