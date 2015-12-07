@@ -210,6 +210,22 @@ Spree::Product.class_eval do
     property('short_description') || ''
   end
 
+  def default_standard_days_for_making
+    5
+  end
+
+  def standard_days_for_making
+    property("standard_days_for_making")
+  end
+
+  def default_customised_days_for_making
+    10
+  end
+
+  def customised_days_for_making
+    property("customised_days_for_making")
+  end
+
   def color_customization
     DataCoercion.string_to_boolean(property('color_customization'))
   end

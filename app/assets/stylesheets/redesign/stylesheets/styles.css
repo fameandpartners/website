@@ -5876,13 +5876,13 @@ xheader
 @media only screen and (min-width: 768px) {
   /* line 15, ../sass/_cart.scss */
   #main-nav, #cart {
-    width: 350px;
+    width: 450px;
   }
 }
 @media only screen and (min-width: 1200px) {
   /* line 15, ../sass/_cart.scss */
   #main-nav, #cart {
-    width: 30%;
+    width: 35%;
     /* header height has changed */
     padding-top: 0px;
   }

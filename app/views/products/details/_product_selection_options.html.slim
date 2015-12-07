@@ -24,6 +24,19 @@
 .row
     button.btn.btn-block.btn-black.buy-button Add to Cart
 
+- if delivery_date_messaging_enabled?
+  .row
+    .delivery-wrap-compact
+      .inner-wrap
+        .icon.icon-delivery-express
+        p
+          em Delivery Guaranteed*
+          span.date-text#text-default               = ' between ' + @product.delivery_date[:text_default]
+          span.date-text#text_no_customize_standard = ' between ' + @product.delivery_date[:text_no_customize_standard]
+          span.date-text#text_no_customize_express  = ' between ' + @product.delivery_date[:text_no_customize_express]
+          span.date-text#text_customize_standard    = ' between ' + @product.delivery_date[:text_customize_standard]
+          span.date-text#text_customize_express     = ' between ' + @product.delivery_date[:text_customize_express]
+
 .row.secondary-actions
   .col-md-6.col-xs-6.col-xxs-12
     button#fit-guide.btn.btn-block.btn-secondary Size Guide

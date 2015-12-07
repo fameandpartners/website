@@ -34,8 +34,11 @@
       = form.fields_for :ship_address do |ship_form|
         = render partial: 'address_form', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
 
+  - if delivery_date_messaging_enabled?
+    = react_component('Delivery')
+
     .row
-      .col-md-6.form-group style='margin-bottom:0'
+      .col-md-6.col-md-push-6.form-group style='margin-bottom:0'
         button.btn.btn-block.btn-md.btn-black name='pay_securely' data-loading='Saving...'
           i.icon.icon-lock
           ' Pay Securely
