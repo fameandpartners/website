@@ -83,12 +83,10 @@ module Feeds
       size_presentation = nil
       price             = spree_variant.site_price_for(current_site_version)
 
-      # Extra size dresses should cost more than regular ones
       if (size = spree_variant.dress_size)
         product_size = Repositories::ProductSize.new(site_version: current_site_version, product: spree_product).read(size.id)
 
         size_presentation = product_size.presentation
-        price.amount      += LineItemPersonalization::DEFAULT_CUSTOM_SIZE_PRICE if product_size.extra_price
       end
 
       { size_presentation: size_presentation, price: price }
