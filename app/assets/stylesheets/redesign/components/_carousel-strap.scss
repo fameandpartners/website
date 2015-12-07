@@ -2,6 +2,7 @@
 -------------------------------------------------------*/
 .carousel-strap {
   background: $c-neutral-white;
+  margin-bottom: 20px;
 
   .outer-wrap {
     margin-top: 20px;
@@ -74,10 +75,6 @@
   // variations
   &.instagram {
     text-align: center;
-
-    .outer-wrap {
-      border-bottom: solid $c-neutral-black 1px;
-    }
 
     .title:before {
       background: $c-neutral-black;
@@ -168,7 +165,7 @@
         .overlay {
           opacity: 1;
         }
-        
+
       }
 
     }

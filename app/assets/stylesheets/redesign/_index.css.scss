@@ -4,7 +4,9 @@
   .banner-sale{
     margin-top: 30px;
   }
-
+  hr {
+    border-top: 1px solid black;
+  }
 }
 
 .col-md-4{
@@ -322,7 +324,7 @@
 
 // Main Content area V-2
 .home-main-content {
-  margin-top: 30px;
+  margin-top: 70px;
 
   .main {
 
@@ -392,5 +394,4 @@
       width: 20%;
     }
   }
-
 }
