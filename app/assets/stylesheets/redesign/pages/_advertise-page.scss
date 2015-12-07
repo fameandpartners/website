@@ -1,0 +1,148 @@
+/* [Advertise Page]
+-------------------------------------------------------*/
+.advertise-page{
+  margin-bottom: 30px;
+
+  .ad-carousel{
+    margin-top: 30px;
+    img{
+      padding-left: 1%;
+      padding-right: 1%;
+    }
+  }
+  .header-row{
+    font-family: Formal;
+    font-size: 2em;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .head{
+      @include mobile{
+        font-size: 2.8rem;
+      }
+    }
+  }
+  .pic1{
+    width: 100%;
+  }
+
+  .paragraph {
+    padding: 0 25px;
+
+    .para-head {
+      margin: 0 0 40px 0;
+      text-transform: none;
+      font-style: italic;
+      font-size: 3.5rem;
+      letter-spacing: 1px;
+    }
+
+    p {
+      margin-bottom: 30px;
+      line-height: 1.3;
+      font-size: 2.4rem;
+      font-weight: 300;
+    }
+    .para-head.ad2{
+      @include iphone6{
+        font-size: 2.8rem;
+      }
+    }
+    .para-head.ad4{
+      font-size: 3.5rem;
+      @include iphone6{
+        font-size: 2.4rem;
+      }
+    }
+    .para-body{
+      font-size: 2rem;
+      margin-top: 10px;
+      br{
+        line-height: 70px;
+      }
+    }
+
+    .para-foot {
+      margin-top: 30px;
+      font-style: italic;
+      color: $c-neutral-9;
+    }
+
+  }
+
+  .three-images {
+    border-bottom: solid $c-neutral-black 1px;
+    @extend %cfix;
+
+    .media-wrap {
+      margin-bottom: 20px;
+    }
+
+    .text {
+      font-style: italic;
+
+      &:last-child {
+        margin-bottom: 30px;
+      }
+
+    }
+
+  }
+
+  .mobile-change-order .media-wrap,
+  .mobile-change-order .paragraph {
+    margin-bottom: 30px;
+  }
+
+  .two-images{
+    border-bottom: solid $c-neutral-black 1px;
+    @extend %cfix;
+
+    .media-wrap {
+      margin-bottom: 30px;
+    }
+
+  }
+
+  .fomular-header{
+    font-size: 3.8rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-top: 40px;
+    margin-bottom: 0;
+  }
+
+  .fomular-body{
+    text-transform: none;
+    font-size: 3.8rem;
+    letter-spacing: 1px;
+    margin-top: 0;
+    margin-bottom: 40px;
+  }
+
+  @include mobile {
+
+    & {
+
+      .header-row {
+        font-size: 3rem;
+      }
+
+      .paragraph {
+
+        .para-head {
+          font-size: 2.8rem;
+          margin-bottom: 30px;
+        }
+
+        p {
+          margin-bottom: 20px;
+          font-size: 2rem;
+        }
+
+      }
+
+    }
+
+  }
+
+}
