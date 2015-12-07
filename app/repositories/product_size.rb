@@ -38,30 +38,12 @@ class Repositories::ProductSize
   def read(size_id)
     size = Repositories::ProductSize.read(size_id)
 
-    if size_have_extra_price?(size)
-      size.extra_price  = true
-    end
-
     # Possibly remove this and swap on the presentation in UI layer.
     # Shim for existing mutated behaviour
     size.presentation = size.send("presentation_#{site_version.code.downcase}")
 
     size
   end
-
-  private def size_have_extra_price?(size)
-      return nil if product_has_free_extra_sizes?
-      extra_sizes.include?(size.name)
-    end
-
-  private def product_has_free_extra_sizes?
-      return @product_has_free_extra_sizes if instance_variable_defined?('@product_has_free_extra_sizes')
-
-      @product_has_free_extra_sizes = begin
-        taxon = Repositories::Taxonomy.get_taxon_by_name('Plus Size')
-        Spree::Classification.where(product_id: product.id, taxon_id: taxon.id ).exists?
-      end
-    end
 
   EXTRA_SIZES = %w[
           US14/AU18
