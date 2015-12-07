@@ -145,8 +145,9 @@ FameAndPartners::Application.routes.draw do
     scope '/user_cart', module: 'user_cart' do
       root to: 'details#show', as: :user_cart_details
 
-      get '/details' => 'details#show'
-      post '/promotion' => 'promotions#create'
+      get '/details'      => 'details#show'
+      get '/order_delivery_date' => 'details#order_delivery_date'
+      post '/promotion'   => 'promotions#create'
 
       post 'products' => 'products#create'
       get 'products/check_gift_in_cart' => 'products#check_gift_in_cart'
@@ -172,6 +173,7 @@ FameAndPartners::Application.routes.draw do
       # Colors should behave like query strings, and not paths
       get '/dress-:product_slug/:color' => redirect { |params, req| "/dresses/dress-#{params[:product_slug]}?#{req.params.except(:product_slug, :site_version).to_query}" }
       get '/dress-:product_slug' => 'products/details#show'
+
       get '/outerwear-:product_slug', to: 'products/details#show', as: :outerwear_details
 
       #roots categories
