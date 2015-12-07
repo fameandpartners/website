@@ -77,7 +77,10 @@ ruby:
   - if params[:color]
     = tag :meta, name: 'robots', content: 'noindex, follow'
 
-- if Features.active?(:gift)
+#modal-add-to-cart-template.hidden
+
+
+- if false #Features.active?(:gift)
   #gift-modal.hidden
     .left-panel
       center

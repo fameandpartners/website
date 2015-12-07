@@ -49,9 +49,26 @@ window.helpers.ShoppingCart = class ShoppingCart
   data: () ->
     @data
 
-  showGiftModal: () ->
-    return if $("#gift-modal").length == 0
+  showModal: () ->
+    if @shouldShowGiftModal() then @showGiftModal() else @showAddToCartModal()
 
+  showAddToCartModal: () ->
+    addToCartModal = new window.page.EmailCaptureModal({
+      promocode: "HALFOFF",
+      content: "",
+      container: "#modal-add-to-cart-template",
+      heading: "Love two dresses?",
+      message: "<h3><strong>Buy both and we will give you 50% off the second dress</strong/><br/>Hurry, offer ends soon.</h3><div><a class=\"btn btn-black\" onclick=\"vex.closeAll();\">Add another dress</a/></div/>",
+      className: "new-modal welcome-modal",
+      timeout: 0,
+      timer: false,
+      force: false
+    });
+
+  shouldShowGiftModal: () ->
+    $("#gift-modal").length != 0
+
+  showGiftModal: () ->
     $.ajax(
       url: urlWithSitePrefix("/user_cart/products/check_gift_in_cart")
       type: "GET"
@@ -70,6 +87,7 @@ window.helpers.ShoppingCart = class ShoppingCart
           timer: false,
           force: false
         });
+        return true
     ).error( () =>
       @trigger('error')
     )
@@ -80,7 +98,7 @@ window.helpers.ShoppingCart = class ShoppingCart
   #   color_id
   #   customizations_ids
   addProduct: (product_data = {}) ->
-    @showGiftModal()
+    @showModal()
 
     $.ajax(
       url: urlWithSitePrefix("/user_cart/products")
