@@ -1,31 +1,43 @@
 .container.advertise-page
   .row.header-row
-    .col-md-12.head.text-center THE 8 MOST AWKWARD BRIDESMAID PHOTOS OF ALL TIME
-  .row
+    .col-md-12
+      h1.text-center THE 8 MOST AWKWARD BRIDESMAID PHOTOS OF ALL TIME
+  .row.mobile-change-order
     .col-md-6.hidden-xs.hidden-sm
-      = image_tag "landingpages/ad4-pic1.jpg" ,alt: 'pic1', class: 'pic1'
+      .media-wrap
+        = image_tag "landingpages/ad4-pic1.jpg"
     .col-md-6.paragraph
-      h2.para-head.ad4 Seriously, what were they thinking?
-      .para-body
-        | Awkward conversations with male strippers, carrying around X-rated bachelorette party toys, puffy-sleeved, meringue dresses, bizarre fur trims, bridezillas and totally awkward poses – bridesmaids have a lot to put up with.
-        br
-        | Click through the worlds most uncomfortable slideshow of bridal party photos. You have been warned.
-        br
-        | PSA: Be kind to your bridesmaids. They love you. At least get ‘em a nice dress.
+      h2.para-head Seriously, what were they thinking?
+      p Awkward conversations with male strippers, carrying around X-rated bachelorette party toys, puffy-sleeved, meringue dresses, bizarre fur trims, bridezillas and totally awkward poses – bridesmaids have a lot to put up with.
+      p Click through the worlds most uncomfortable slideshow of bridal party photos. You have been warned.
+      p PSA: Be kind to your bridesmaids. They love you. At least get ‘em a nice dress.
+
   .row
-    .ad-carousel
-      = image_tag"landingpages/ad4-slide1.jpg", alt: 'i1'
-      = image_tag"landingpages/ad4-slide2.jpg", alt: 'i2'
-      = image_tag"landingpages/ad4-slide3.jpg", alt: 'i3'
-      = image_tag"landingpages/ad4-slide4.jpg", alt: 'i4'
-      = image_tag"landingpages/ad4-slide5.jpg", alt: 'i5'
-      = image_tag"landingpages/ad4-slide6.jpg", alt: 'i6'
-      = image_tag"landingpages/ad4-slide7.jpg", alt: 'i7'
-      = image_tag"landingpages/ad4-slide8.jpg", alt: 'i8'
-  .row.hr
-    hr
-  .row.fomular-header.text-center BRIDESMAID DRESSES
-  .row.fomular-body.text-center Make sure your #girlsquad doesn’t regret the photos. Shop hundreds of chic, customisable styles at Fame & Partners now.
+    .col-md-12
+      .carousel-wrap
+        .ad-carousel
+          .media-wrap
+            = image_tag"landingpages/ad4-slide1.jpg"
+          .media-wrap
+            = image_tag"landingpages/ad4-slide2.jpg"
+          .media-wrap
+            = image_tag"landingpages/ad4-slide3.jpg"
+          .media-wrap
+            = image_tag"landingpages/ad4-slide4.jpg"
+          .media-wrap
+            = image_tag"landingpages/ad4-slide5.jpg"
+          .media-wrap
+            = image_tag"landingpages/ad4-slide6.jpg"
+          .media-wrap
+            = image_tag"landingpages/ad4-slide7.jpg"
+          .media-wrap
+            = image_tag"landingpages/ad4-slide8.jpg"
+
+  .row
+    .col-md-12
+      h2.fomular-header.text-center BRIDESMAID DRESSES
+      h3.fomular-body.text-center Make sure your #girlsquad doesn’t regret the photos. Shop hundreds of chic, customisable styles at Fame & Partners now.
+
   .row
     = render partial: 'products/collections/pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
   .row
