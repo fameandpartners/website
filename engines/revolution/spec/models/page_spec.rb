@@ -219,6 +219,36 @@ describe Revolution::Page do
     end
   end
 
+  describe '#effective_page_limit' do
+    let(:page_params)    { {} }
+    let(:page_variables) { {} }
+    before do
+      page.variables = page_variables
+      page.params    = page_params
+    end
+
+    context 'params supersede variables' do
+      let(:page_params)    { {limit: 77} }
+      let(:page_variables) { {limit: 99} }
+
+      it  { expect(page.effective_page_limit).to eq 77 }
+    end
+
+    context 'variables supersede fallback' do
+      let(:page_variables) { {limit: 99} }
+
+      it  { expect(page.effective_page_limit).to eq 99 }
+    end
+
+    context 'falls back to default_page_limit' do
+      it { expect(page.effective_page_limit).to eq page.default_page_limit }
+    end
+  end
+
+  describe '#default_page_limit' do
+    it { expect(page.default_page_limit).to eq 21 }
+  end
+
   describe '.limit' do
 
     context 'given no parameter limit and no variable limit' do

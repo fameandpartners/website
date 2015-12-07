@@ -84,7 +84,7 @@ class Products::CollectionsController < Products::BaseController
 
   def punch_products
     return if filters_applied?
-    products             = Revolution::ProductService.new(product_ids, current_site_version).products(params, page.no_of_products)
+    products             = Revolution::ProductService.new(product_ids, current_site_version).products(params, page.effective_page_limit)
     @collection.products = if page.get("curated") && product_ids.size > 0
                              @collection.total_products = product_ids.size
                              products
@@ -163,8 +163,8 @@ class Products::CollectionsController < Products::BaseController
   end
 
   private def filters_applied?
-    filter_options.slice(
-      :collection, :style, :event, :color, :bodyshape, :order, :query_string
+    params.slice(
+      :collection, :style, :event, :color, :colour, :bodyshape, :order, :q
     ).values.any?(&:present?)
   end
 end
