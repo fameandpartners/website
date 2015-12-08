@@ -10,8 +10,8 @@
       source media='(min-width: 769px)' srcset='#{image_path("landingpages/famingtonway/hero-full.jpg")}'
       img src='#{image_path("landingpages/famingtonway/hero-full.jpg")}' srcset='
         #{image_path("landingpages/famingtonway/hero-sml.jpg")} 768w,
-        #{image_path("landingpages/famingtonway/hero-full.jpg")} 1024w' alt='Bridesmaids ARE LIFE’S TREASURES. 
-        THERE TO GUIDE & SUPPORT. SHARE LAUGHTER & TEARS. REMIND US THAT WE ARE NEVER ALONE. Be inspired & shop 
+        #{image_path("landingpages/famingtonway/hero-full.jpg")} 1024w' alt='Bridesmaids ARE LIFE’S TREASURES.
+        THERE TO GUIDE & SUPPORT. SHARE LAUGHTER & TEARS. REMIND US THAT WE ARE NEVER ALONE. Be inspired & shop
         together with your bridesmaids.'
     .copy-wrap
       h1.title Be inspired & shop together with your bridesmaids.
@@ -75,7 +75,7 @@
         section.carousel-strap
           .outer-wrap
             // TODO: update path
-            = react_component('ProductsCarousel', path: '/dresses/?order=price_low&limit=16')
+            = react_component('ProductsCarousel', path: dresses_path(pids: page.variables['caroulsel_pids'].split(','), limit: page.variables['limit']))
 
       .col-md-12.section-register
         .outer-wrap.mobile-change-order

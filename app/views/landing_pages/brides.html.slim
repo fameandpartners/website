@@ -69,7 +69,8 @@
         h2.heading-secondary Your wedding dress doesn't need to cost the earth to be beautiful, memorable & completely unique to you.
         section.carousel-strap
           .outer-wrap
-            = react_component('ProductsCarousel', path: '/dresses/wedding/?order=price_low')
+            // TODO: update path
+            = react_component('ProductsCarousel', path: dresses_path(pids: page.variables['caroulsel_pids'].split(','), limit: page.variables['limit']))
 
       .col-md-12.section-register
         .media-wrap
