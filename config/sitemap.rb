@@ -7,26 +7,32 @@
 
 unless Rails.env.development?
   SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(
-    :aws_access_key_id => configatron.aws.s3.access_key_id,
-    :aws_secret_access_key => configatron.aws.s3.secret_access_key,
-    :fog_provider => 'AWS',
-    :fog_directory => configatron.aws.s3.bucket,
-    :fog_region => configatron.aws.s3.region
+      aws_access_key_id:     configatron.aws.s3.access_key_id,
+      aws_secret_access_key: configatron.aws.s3.secret_access_key,
+      fog_provider:          'AWS',
+      fog_directory:         configatron.aws.s3.bucket,
+      fog_region:            configatron.aws.s3.region
   )
 end
 
 SitemapGenerator::Interpreter.send :include, PathBuildersHelper
 
 SitemapGenerator::Interpreter.class_eval do
+  def site_version_default_host(site_version)
+    if configatron.site_version_detector_strategy == :domain
+      "http://#{site_version.domain}"
+    else
+      "http://#{configatron.host}/#{site_version.to_param}"
+    end
   end
 end
 
 sitemap_options = {
-  compress: Rails.env.production?,
-  default_host: "http://#{configatron.host}",
-  sitemaps_host: "http://#{configatron.aws.host}",
-  include_root: false,
-  sitemaps_path: 'sitemap'
+    compress:      Rails.env.production?,
+    default_host:  "http://#{configatron.host}",
+    sitemaps_host: "http://#{configatron.aws.host}",
+    include_root:  false,
+    sitemaps_path: 'sitemap'
 }
 
 # XML Priorities:
@@ -53,10 +59,10 @@ SitemapGenerator::Sitemap.create(sitemap_options) do
   add '/assets/returnform.pdf', priority: 0.7
 
   # Creating sitemaps for each site version
-  SiteVersion.find_each do |site_version|
+  SiteVersion.all.each do |site_version|
     sitemap_group_options = {
       include_root: true,
-      default_host: "http://#{configatron.host}/#{site_version.to_param}",
+      default_host: site_version_default_host(site_version),
       filename: site_version.permalink
     }
 
