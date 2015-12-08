@@ -1,7 +1,10 @@
 .container.advertise-page.advertise1
   .row.header-row
     .col-md-12
-      h1.text-center THE DRESS THAT GOT JUSTIN BIEBER BACK
+      - if params[:text].present?
+        h1.text-center = params[:text]
+      - else
+        h1.text-center THE DRESS THAT GOT JUSTIN BIEBER BACK
   .row.mobile-change-order
     .col-md-6.position-2
       .media-wrap
