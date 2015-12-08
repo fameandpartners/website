@@ -1,7 +1,10 @@
 .container.advertise-page
   .row.header-row
     .col-md-12
-      h1.text-center THE 8 MOST AWKWARD BRIDESMAID PHOTOS OF ALL TIME
+      - if params[:text].present?
+        h1.text-center = params[:text]
+      - else
+        h1.text-center THE 8 MOST AWKWARD BRIDESMAID PHOTOS OF ALL TIME
   .row.mobile-change-order
     .col-md-4.hidden-xs.hidden-sm
       .media-wrap
