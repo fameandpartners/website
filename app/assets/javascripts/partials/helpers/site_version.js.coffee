@@ -10,6 +10,8 @@ window.getSiteVersionPrefix = () ->
     return defaultPrefix
 
 window.urlWithSitePrefix = (url) ->
+  return url unless window.app.current_site_version.use_paths?
+
   prefix = getSiteVersionPrefix()
   cleanedUrl = url.replace(/^\/au\b/, '').replace(/^\/us\b/, '')
   return (prefix + cleanedUrl)

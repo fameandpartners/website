@@ -4,8 +4,7 @@ RSpec.describe SiteVersionSerializer do
 
   subject(:serializer) { described_class.new(site_version) }
 
-  describe 'url_prefix' do
-
+  describe '#url_prefix' do
     let(:default_site) do
       FactoryGirl.build(:site_version, permalink: 'ds', name: 'Murica', currency: 'USD', default: true)
     end
@@ -46,6 +45,26 @@ RSpec.describe SiteVersionSerializer do
       it 'is the permalink' do
         expect(serializer.to_json).to eq(permalink_url_prefix)
       end
+    end
+  end
+
+  describe '#use_paths?' do
+    let(:site_version) { build_stubbed(:site_version) }
+
+    context 'site version detection is using path' do
+      before(:each) do
+        allow(serializer).to receive_message_chain(:configatron, :site_version_detector_strategy).and_return(:path)
+      end
+
+      it { expect(serializer.use_paths?).to be_truthy }
+    end
+
+    context 'site version detection is not using path' do
+      before(:each) do
+        allow(serializer).to receive_message_chain(:configatron, :site_version_detector_strategy).and_return(:not_path_strategy)
+      end
+
+      it { expect(serializer.use_paths?).to be_falsy }
     end
   end
 end

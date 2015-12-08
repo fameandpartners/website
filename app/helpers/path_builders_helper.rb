@@ -54,7 +54,7 @@ module PathBuildersHelper
   # or respond to
   #  name - id
   def collection_product_path(product, options = {})
-    site_version_prefix = options.delete(:site_version) || self.url_options[:site_version]
+    site_version_prefix = self.url_options[:site_version]
     product_type        = options.delete(:product_type) || 'dress'
     path_parts          = [site_version_prefix, 'dresses']
     locale              = I18n.locale.to_s.downcase.underscore.to_sym
@@ -77,18 +77,21 @@ module PathBuildersHelper
   end
 
   # /dresses/dress-eva-456/black?params
+  # TODO 02-12-2015 this method is not used anywhere. It's used by a legacy controller
   def colored_variant_path(variant, options = {})
     parts = []
     parts << self.url_options[:site_version]
     parts << 'dresses'
-   
+
     parts << "dress-#{variant.product[:urls][I18n.locale.to_s.downcase.underscore.to_sym]}"
     parts << variant.color.name
 
     build_url(parts, options)
   end
+  deprecate :colored_variant_path
 
   # TODO - Remove legacy URL
+  # TODO 02-12-2015 this method is not used anywhere. It's used by a legacy controller
   # /dresses/styleit-eva-456
   def style_it_path(product, options={})
     path_parts = [
@@ -98,26 +101,12 @@ module PathBuildersHelper
     ]
     build_url(path_parts, options)
   end
-
-  # custom_collection_product_url('Long-Dresses', 'the-fallen', cf: 'homefeature')
-  # "http://www.fameandpartners.com/collection/Long-Dresses/the-fallen?cf=homefeature" 
-  def build_collection_product_path(collection_id, product_id, options = {})
-    site_version_prefix = self.url_options[:site_version]
-    path_parts = [site_version_prefix, 'collection', collection_id, product_id]
-
-    build_url(path_parts, options)
-  end
-
-  def build_collection_product_url(collection_id, product_id, options = {})
-    url_without_double_slashes(
-      root_url(site_version: nil) + build_collection_product_path(collection_id, product_id, options)
-    )
-  end
+  deprecate :style_it_path
 
   # /dresses/long
   def build_taxon_path(taxon_name, options={})
     path_parts = [
-      options.delete(:site_version) || self.url_options[:site_version],
+      self.url_options[:site_version],
       'dresses'
     ]
     taxon = Repositories::Taxonomy.get_taxon_by_name(taxon_name)
