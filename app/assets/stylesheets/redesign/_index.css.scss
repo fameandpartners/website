@@ -324,7 +324,6 @@
 
 // Main Content area V-2
 .home-main-content {
-  margin-top: 30px;
 
   .main {
 
@@ -386,7 +385,7 @@
 .as-seen-in-partners {
   margin-bottom: 30px;
   @extend %cfix;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $c-neutral-black ;
   padding-bottom: 35px;
 
   img{
