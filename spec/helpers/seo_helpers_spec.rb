@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe 'Seo Helpers' do
-  include Rails.application.routes.url_helpers
+describe 'Seo Helpers', type: :helper do
   include CommonHelper
+
   let(:au)                    { false }
   let(:current_site_version)  { double(SiteVersion, :is_australia? => au) }
   let(:request)               { double('Request', :url => 'http://fameandpartners.test/blah/vtha', :fullpath => '/blah/vtha') }
@@ -55,23 +55,16 @@ describe 'Seo Helpers' do
       expect(get_canonical_href).to eq 'http://fameandpartners.test/blah/vtha'
     end
 
-    context 'is_australian?' do
-      let(:request) { double('Request', :url => 'http://fameandpartners.test/au/blah/vtha') }
-
-      it 'should generate au path' do
-        expect(get_canonical_href).to eq 'http://fameandpartners.test/au/blah/vtha'
-      end
-    end
-
     context 'product canonical' do
       let(:product) { double(Products::Presenter, :name => 'fancy-dress', :default_color => 'mauve') }
+
       before do
         @product = product
-        allow(self).to receive(:collection_product_path).with(product, :color => @product.default_color).and_return("/#{product.name}/#{@product.default_color}")
+        allow(self).to receive(:collection_product_path).with(product).and_return("/#{product.name}")
       end
 
       it 'should generate canonical product path' do
-        expect(get_canonical_href).to eq 'http://fameandpartners.test/fancy-dress/mauve'
+        expect(get_canonical_href).to eq 'http://fameandpartners.test/fancy-dress'
       end
 
     end
@@ -83,8 +76,5 @@ describe 'Seo Helpers' do
         expect(get_canonical_href).to eq 'http://fameandpartners.test/my-address'
       end
     end
-
   end
-
-
- end
+end
