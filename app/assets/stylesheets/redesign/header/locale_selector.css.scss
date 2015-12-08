@@ -27,11 +27,17 @@
   height: 25px;
   padding-top: 4px;
   font-weight: 500;
-  
+
   div{
     padding-top: 0;
   }
   #account-area{
+    .icon-heart{
+      color: $c-neutral-black;
+      position: absolute;
+      margin-top: 3px;
+      margin-left: -15px;
+    }
     .pipe{
       margin-left: 20px;
       margin-right: 20px;
