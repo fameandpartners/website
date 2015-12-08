@@ -5,9 +5,9 @@ $fg-screen-sm: 480px;
 
 .vex-theme-flat-attack.fit-guide-dialog {
   background-color: rgba(0, 0, 0, 0.4);
-  
+
   .vex-overlay { background: none;}
-  
+
   .vex-content {
     width: 96%;
     max-width: 1230px;
@@ -93,8 +93,8 @@ $fg-screen-sm: 480px;
     @media (min-width: $fg-screen-lg + 1) {
       display: none;
     }
-    
-    h2 { 
+
+    h2 {
       font-size: 14px;
       margin-bottom: 5px;
     }
@@ -105,12 +105,15 @@ $fg-screen-sm: 480px;
   }
 
   .fit-guide-text {
-    padding: 20px 20px 20px 50px; 
+    padding: 20px 20px 20px 50px;
     @media (max-width: $fg-screen-lg) {
       padding: 20px 10px 10px;
     }
+    .italic{
+      font-style: italic;
+    }
   }
-  
+
   .size-guide {
     font-size: 14px;
     text-align: center;

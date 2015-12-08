@@ -8,6 +8,24 @@
   .sizes-container {
     padding-right: 30px;
     padding-left: 30px;
+    .head-row{
+      border-bottom: 1px solid $c-neutral-black;
+      margin-bottom: 40px;
+      .head{
+        font-size: 3.2rem;
+        margin-top: 15px;
+        font-family: Formal;
+      }
+    }
+    .current-size{
+      margin-bottom: 30px;
+    }
+    .wrong-size{
+      font-weight: 300;
+    }
+    .choose{
+      padding-left: 15px;
+    }
   }
 
   .size-box {
