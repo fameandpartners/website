@@ -3,10 +3,10 @@
     .col-md-12
       h1.text-center THE 8 MOST AWKWARD BRIDESMAID PHOTOS OF ALL TIME
   .row.mobile-change-order
-    .col-md-6.hidden-xs.hidden-sm
+    .col-md-4.hidden-xs.hidden-sm
       .media-wrap
-        = image_tag "landingpages/ad4-pic1.jpg"
-    .col-md-6.paragraph
+        = image_tag "landingpages/advertising/ad4-pic1.jpg"
+    .col-md-8.paragraph
       h2.para-head Seriously, what were they thinking?
       p Awkward conversations with male strippers, carrying around X-rated bachelorette party toys, puffy-sleeved, meringue dresses, bizarre fur trims, bridezillas and totally awkward poses – bridesmaids have a lot to put up with.
       p Click through the worlds most uncomfortable slideshow of bridal party photos. You have been warned.
@@ -17,21 +17,21 @@
       .carousel-wrap
         .ad-carousel
           .media-wrap
-            = image_tag"landingpages/ad4-slide1.jpg"
+            = image_tag"landingpages/advertising/ad4-slide1.jpg"
           .media-wrap
-            = image_tag"landingpages/ad4-slide2.jpg"
+            = image_tag"landingpages/advertising/ad4-slide2.jpg"
           .media-wrap
-            = image_tag"landingpages/ad4-slide3.jpg"
+            = image_tag"landingpages/advertising/ad4-slide3.jpg"
           .media-wrap
-            = image_tag"landingpages/ad4-slide4.jpg"
+            = image_tag"landingpages/advertising/ad4-slide4.jpg"
           .media-wrap
-            = image_tag"landingpages/ad4-slide5.jpg"
+            = image_tag"landingpages/advertising/ad4-slide5.jpg"
           .media-wrap
-            = image_tag"landingpages/ad4-slide6.jpg"
+            = image_tag"landingpages/advertising/ad4-slide6.jpg"
           .media-wrap
-            = image_tag"landingpages/ad4-slide7.jpg"
+            = image_tag"landingpages/advertising/ad4-slide7.jpg"
           .media-wrap
-            = image_tag"landingpages/ad4-slide8.jpg"
+            = image_tag"landingpages/advertising/ad4-slide8.jpg"
 
   .row
     .col-md-12
@@ -45,11 +45,14 @@
   .row
     .col-md-3.hidden-sm.hidden-xs
       = link_to dresses_path + '/dress-margarite-two-piece-796?color=blush-and-black', class: 'media-wrap'
-        = image_tag 'landingpages/ad4-pic2.jpg', alt:'SHOP THIS LOOK'
+        = image_tag 'landingpages/advertising/ad4-pic2.jpg', alt:'SHOP THIS LOOK'
     = render partial: 'products/collections/pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 9, customWrapper: 'col-md-3 col-xs-6'}
     .col-md-3.hidden-sm.hidden-xs
       = link_to dresses_path + '/dress-roxette-809?color=blue-fallen-leaves', class: 'media-wrap'
-        = image_tag 'landingpages/ad4-pic3.jpg', alt:'SHOP THIS LOOK'
+        = image_tag 'landingpages/advertising/ad4-pic3.jpg', alt:'SHOP THIS LOOK'
+
+  .row
+    = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/advertising/ad4-tile-footer.jpg"}
 
 coffee:
   $(window).load ->

@@ -3,10 +3,10 @@
     .col-md-12
       h1.text-center THE NEW, CELEBRITY-APPROVED WAY TO SHOW SKIN
   .row.mobile-change-order
-    .col-md-6.position-2
+    .col-md-4.position-2
       .media-wrap
-        = image_tag "landingpages/ad2-pic1.jpg"
-    .col-md-6.position-1.paragraph
+        = image_tag "landingpages/advertising/ad2-pic1.jpg"
+    .col-md-8.position-1.paragraph
       h2.para-head If it’s good enough for J-Law, it’s good enough for us.
       p Sometimes sexy can be hard. So during party season, we’re thankful for celebs with style to show us how it’s done. And who better to learn from that supermodels and superstars?
       p Usually reserved for the décolletage and bust area, cut-outs and shows of skin have started to move around the body in unexpected places: swinging around the side of the waist and dipping below the ribcage.
@@ -21,19 +21,19 @@
         .row
           .col-md-4
             .media-wrap
-              = image_tag "landingpages/ad2-pic2.jpg"
+              = image_tag "landingpages/advertising/ad2-pic2.jpg"
             .text.text-center Karlie Kloss
             .text.text-center Image credit: Denis Makarenko /
             .text.text-center Shutterstock.com
           .col-md-4
             .media-wrap
-              = image_tag "landingpages/ad2-pic3.jpg"
+              = image_tag "landingpages/advertising/ad2-pic3.jpg"
             .text.text-center Emily Ratajkowski
             .text.text-center Image credit: Tinseltown /
             .text.text-center Shutterstock.com
           .col-md-4
             .media-wrap
-              = image_tag "landingpages/ad2-pic4.jpg"
+              = image_tag "landingpages/advertising/ad2-pic4.jpg"
             .text.text-center Kendall Jenner
             .text.text-center Image credit: Eastfjord Productions /
             .text.text-center Shutterstock.com
@@ -50,10 +50,11 @@
   .row
     .col-md-3.hidden-sm.hidden-xs
       = link_to dresses_path + '/dress-neo-velvet-two-piece-776?color=black', class: 'media-wrap'
-        = image_tag 'landingpages/ad2-pic5.jpg', alt:'SHOP THIS LOOK'
+        = image_tag 'landingpages/advertising/ad2-pic5.jpg', alt:'SHOP THIS LOOK'
     = render partial: 'products/collections/pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 9, customWrapper: 'col-md-3 col-xs-6'}
     .col-md-3.hidden-sm.hidden-xs
       = link_to dresses_path + '/dress-patrice-770?color=gold', class: 'media-wrap'
-        = image_tag 'landingpages/ad2-pic6.jpg', alt:'SHOP THIS LOOK'
+        = image_tag 'landingpages/advertising/ad2-pic6.jpg', alt:'SHOP THIS LOOK'
 
-
+  .row
+    = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/advertising/ad2-tile-footer.jpg"}
