@@ -18,27 +18,6 @@ end
 SitemapGenerator::Interpreter.send :include, PathBuildersHelper
 
 SitemapGenerator::Interpreter.class_eval do
-  def absolute_url(path = '/')
-    path = ('/' + path).gsub(/\/+/, '/')
-    url = "#{ SitemapGenerator::Sitemap.default_host }#{ path }"
-  end
-
-  def site_versions
-    @_site_version ||= SiteVersion.where(default: false).to_a
-  end
-
-  # make links for all site versions
-  # version for default - without prefix
-  # <xhtml:link rel="alternate" hreflang="en" href="http://example.com" />
-  # <xhtml:link rel="alternate" hreflang="en-AU" href="http://example.com/au" />
-  def build_alternates(path)
-    alternates = [{ href: absolute_url(path), lang: 'en-US', nofollow: false }]
-
-    alternates + site_versions.map { |site_version| alternate_href_hash(path, site_version) }
-  end
-
-  def alternate_href_hash(path, site_version)
-    { href: absolute_url('/' + site_version.permalink + path), lang: site_version.locale }
   end
 end
 
