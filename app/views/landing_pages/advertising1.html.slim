@@ -5,7 +5,7 @@
   .row.mobile-change-order
     .col-md-6.position-2
       .media-wrap
-        = image_tag "landingpages/ad1-pic1.jpg"
+        = image_tag "landingpages/advertising/ad1-pic1.jpg"
     .col-md-6.position-1.paragraph
       h2.para-head Selena Gomez got style!
       p The on-again, off-again couple, Justin Bieber and Selena Gomez, sent the twitterverse into a frenzy after Biebs was caught serenading Gomez with the class, ‘My Girl’ at a Beverly Hills spot in late November. A few days later, the two turned up at the American Music Award’s (separately) but partied together at Justin’s after party that night. Do we sense a reunion on the cards?
@@ -19,10 +19,10 @@
         .row
           .col-md-6
             .media-wrap
-              = image_tag "landingpages/ad1-pic2.jpg"
+              = image_tag "landingpages/advertising/ad1-pic2.jpg"
           .col-md-6
             .media-wrap
-              = image_tag "landingpages/ad1-pic3.jpg"
+              = image_tag "landingpages/advertising/ad1-pic3.jpg"
   .row
     .col-md-12
       h2.fomular-header.text-center RED HAUTE
@@ -34,9 +34,12 @@
     = render partial: 'products/collections/pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
   .row
     .col-md-3.hidden-sm.hidden-xs
-      = link_to dresses_path + '/dress-fire-eyes-774?color=burgundy', class: 'media-wrap'
-        = image_tag 'landingpages/ad1-pic4.jpg', alt:'SHOP THIS LOOK'
+      = link_to dresses_path + '/dress-velvet-valour-781?color=dark-burgundy', class: 'media-wrap'
+        = image_tag 'landingpages/advertising/ad1-pic4.jpg', alt:'SHOP THIS LOOK'
     = render partial: 'products/collections/pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 9, customWrapper: 'col-md-3 col-xs-6'}
     .col-md-3.hidden-sm.hidden-xs
-      = link_to dresses_path + '/dress-velvet-valour-781?color=dark-burgundy', class: 'media-wrap'
-        = image_tag 'landingpages/ad1-pic5.jpg', alt:'SHOP THIS LOOK'
+      = link_to dresses_path + '/dress-fire-eyes-774?color=burgundy', class: 'media-wrap'
+        = image_tag 'landingpages/advertising/ad1-pic5.jpg', alt:'SHOP THIS LOOK'
+
+  .row
+    = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/advertising/ad1-tile-footer.jpg"}

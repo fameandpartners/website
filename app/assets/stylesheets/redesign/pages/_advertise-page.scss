@@ -3,26 +3,11 @@
 .advertise-page{
   margin-bottom: 30px;
 
-  .ad-carousel{
-    margin-top: 30px;
-    img{
-      padding-left: 1%;
-      padding-right: 1%;
-    }
-  }
-  .header-row{
-    font-family: Formal;
-    font-size: 2em;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    .head{
-      @include mobile{
-        font-size: 2.8rem;
-      }
-    }
-  }
-  .pic1{
-    width: 100%;
+  .header-row h1 {
+    margin: 40px 0;
+    line-height: 1;
+    font-size: 3.8rem;
+    letter-spacing: 1px; 
   }
 
   .paragraph {
@@ -42,24 +27,6 @@
       font-size: 2.4rem;
       font-weight: 300;
     }
-    .para-head.ad2{
-      @include iphone6{
-        font-size: 2.8rem;
-      }
-    }
-    .para-head.ad4{
-      font-size: 3.5rem;
-      @include iphone6{
-        font-size: 2.4rem;
-      }
-    }
-    .para-body{
-      font-size: 2rem;
-      margin-top: 10px;
-      br{
-        line-height: 70px;
-      }
-    }
 
     .para-foot {
       margin-top: 30px;
@@ -67,6 +34,17 @@
       color: $c-neutral-9;
     }
 
+  }
+
+  .carousel-wrap {
+    padding-bottom: 30px;
+    border-bottom: solid $c-neutral-black 1px;
+  }
+
+  .ad-carousel {
+    width: 75%;
+    margin: 0 auto;
+    padding: 0 45px;
   }
 
   .three-images {
@@ -139,6 +117,10 @@
           font-size: 2rem;
         }
 
+      }
+
+      .ad-carousel {
+        width: 100%;
       }
 
     }
