@@ -25,13 +25,13 @@ end
 
 Features.deactivate(:checkout_fb_login)
 Features.deactivate(:maintenance)
-Features.deactivate(:marketing_modals)
 Features.deactivate(:shipping_message)
 Features.deactivate(:send_promotion_email_reminder)
 
 
 Features.activate(:express_making)
 Features.activate(:gift)
+Features.activate(:marketing_modals)
 Features.activate(:masterpass)
 Features.activate(:moodboard)
 Features.activate(:sales)
