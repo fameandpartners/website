@@ -49,12 +49,11 @@ RSpec.describe SiteVersionSerializer do
   end
 
   describe '#use_paths?' do
-    let(:site_version_detector_strategy) { :path }
-    let(:site_version)                   { build_stubbed(:site_version) }
+    let(:site_version) { build_stubbed(:site_version) }
 
     context 'site version detection is using path' do
       before(:each) do
-        allow(serializer).to receive_message_chain(:configatron, :site_version_detector_strategy).and_return(site_version_detector_strategy)
+        allow(serializer).to receive_message_chain(:configatron, :site_version_detector_strategy).and_return(:path)
       end
 
       it { expect(serializer.use_paths?).to be_truthy }
