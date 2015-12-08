@@ -11,15 +11,15 @@ module Feeds
         title  = item[:title]
         styles = available_in_styles(item)
         size   = in_size(item)
-        event  = perfect_for_event(item)
+        events = perfect_for_event(item)
 
-        [brand, title, event, styles, size].compact.join(' ')
+        [brand, title, events, styles, size].compact.join(' ')
       end
 
       private def perfect_for_event(item)
         unless item[:events].blank?
-          event = item[:events].first.titleize
-          "- Perfect for #{event}"
+          events = item[:events].map(&:titleize).join(', ')
+          "- Perfect for #{events}"
         end
       end
 
@@ -31,7 +31,7 @@ module Feeds
 
       private def available_in_styles(item)
         unless item[:styles].blank?
-          styles = item[:styles].join(', ')
+          styles = item[:styles].map(&:titleize).join(', ')
           "Available in #{styles}"
         end
       end
