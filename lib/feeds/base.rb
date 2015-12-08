@@ -4,7 +4,7 @@ require_relative './exporter/polyvore'
 
 module Feeds
   class Base
-    FEEDS =  %w(CPC Polyvore Stylight)
+    FEEDS =  %w(CPC Polyvore Stylight Shopstyle)
 
     attr_reader :config, :current_site_version, :logger
 
@@ -57,11 +57,21 @@ module Feeds
       current_site_version.currency
     end
 
+    def product_scope
+      Spree::Product.active.includes(:variants)
+    end
+
     def get_items
-      logger.info 'Fetching Items'
       items = []
-      Spree::Product.active.includes(:variants).find_each(batch_size: 10) do |product|
-        logger.info "Product: #{product.name}"
+      index = 0
+      total = product_scope.count
+      logger.info "Fetching Items. Total: #{total}"
+
+      product_scope.find_each(batch_size: 10) do |product|
+        index += 1
+        logger_product_name  = "Product: #{product.name}"
+        logger_product_count = "[#{index}/#{total}]"
+        logger.info "#{logger_product_count.ljust(10)} | #{logger_product_name}"
 
         product.variants.each do |variant|
           begin
