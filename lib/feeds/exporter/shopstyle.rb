@@ -37,7 +37,7 @@ module Feeds
       end
 
       private def brand
-        'Frame & Partners'.freeze
+        'Fame & Partners'.freeze
       end
     end
   end
