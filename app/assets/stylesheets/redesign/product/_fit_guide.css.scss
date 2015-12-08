@@ -111,6 +111,10 @@ $fg-screen-sm: 480px;
     }
     .italic{
       font-style: italic;
+      a {
+        color: inherit;
+        margin-left: 3px;
+      }
     }
   }
 
