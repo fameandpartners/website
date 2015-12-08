@@ -1,0 +1,38 @@
+.ibox.float-e-margins
+  .ibox-title
+    h5 New Manual Order Return
+  = simple_form_for @new_return_form, url: item_returns_path do |f|
+    .ibox-content
+      = f.input :manual_order_data, input_html: { onpaste: 'prefillPastedManualReturn(this, event)', placeholder: 'Paste entire row from SpecialOrders spreadsheet here' }
+      .hr-line-dashed
+      = f.input :order_number
+      = f.input :requested_action,    collection: ReturnRequestItem::ACTIONS.map(&:titleize).zip(ReturnRequestItem::ACTIONS)
+      = f.input :reason_category,     collection: ReturnRequestItem::REASON_CATEGORIES.sort
+      = f.input :reason_sub_category, label: 'Reason' do
+
+        = f.select :reason_sub_category, grouped_options_for_select(ReturnRequestItem::REASON_CATEGORY_MAP, f.object.reason_sub_category), include_blank: true
+      .hr-line-dashed
+      = f.input :request_notes
+      = f.input :customer_name
+      = f.input :contact_email
+      .hr-line-dashed
+      = f.input :product_name
+      = f.input :product_style_number
+      = f.input :product_colour
+      = f.input :product_size
+      = f.input :product_customisations
+      = f.input :qty, label: 'Quantity'
+      .hr-line-dashed
+      = f.input :item_price
+      = f.input :item_price_adjusted, label: 'Item Paid Price', input_html: { placeholder: '(inc. shipping/discounts)' }
+      = f.input :order_paid_amount, label: 'Total Paid for Order'
+      = f.input :order_payment_method, collection: %w{Pin PayPal NABTransact}
+      = f.input :order_payment_date
+      = f.input :order_payment_ref, label: 'Payment Reference #', input_html: { placeholder: 'e.g. Pin token or Paypal TXN ID' }
+      = f.input :order_paid_currency, collection: -> {SiteVersion.pluck(:currency)}
+      = f.input :requested_at
+
+      = f.input :comment, label: 'Additional Comments'
+
+    .ibox-footer
+      = f.submit
