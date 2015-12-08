@@ -1,7 +1,10 @@
 .container.advertise-page
   .row.header-row
     .col-md-12
-      h1.text-center THE MUST-DO CELEBRITY TREND FOR NYE
+      - if params[:text].present?
+        h1.text-center = params[:text]
+      - else
+        h1.text-center THE MUST-DO CELEBRITY TREND FOR NYE
   .row.mobile-change-order
     .col-md-4.position-2
       .media-wrap
