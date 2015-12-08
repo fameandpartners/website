@@ -88,6 +88,7 @@ module PathBuildersHelper
 
     build_url(parts, options)
   end
+  deprecate :colored_variant_path
 
   # TODO - Remove legacy URL
   # TODO 02-12-2015 this method is not used anywhere. It's used by a legacy controller
@@ -100,6 +101,7 @@ module PathBuildersHelper
     ]
     build_url(path_parts, options)
   end
+  deprecate :style_it_path
 
   # /dresses/long
   def build_taxon_path(taxon_name, options={})
