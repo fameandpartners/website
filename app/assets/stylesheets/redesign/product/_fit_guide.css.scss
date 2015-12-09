@@ -109,8 +109,7 @@ $fg-screen-sm: 480px;
     @media (max-width: $fg-screen-lg) {
       padding: 20px 10px 10px;
     }
-    .italic{
-      font-style: italic;
+    em{
       a {
         color: inherit;
         margin-left: 3px;

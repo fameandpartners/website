@@ -7,7 +7,6 @@
     .head{
       font-size: 3.5rem;
       margin-top: 30px;
-      font-family: Formal;
     }
     .wrong-size{
       font-weight: 300;
@@ -17,9 +16,8 @@
   }
   .measurement-row{
     .head{
-      font-weight: 600;
       font-size: 2.5rem;
-      font-family: Formal;
+      margin-top: 0;
     }
     padding-top: 40px;
     padding-bottom: 40px;
@@ -38,13 +36,11 @@
     padding-right: 20px;
     .head{
       font-size: 3rem;
-      font-weight: 600;
     }
 
     .geo{
       margin-top: 15px;
       .area, .cta{
-        font-weight: 600;
         font-size: 2.5rem;
       }
       .cta{
@@ -64,7 +60,6 @@
       padding-left: 40px;
     }
     .head{
-      font-weight: 500;
       font-size: 2.5rem;
     }
     .italic{
