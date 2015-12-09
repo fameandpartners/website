@@ -54,7 +54,8 @@ ruby:
       ' SHOP BY EVENT
       ul
         = render partial: 'layouts/redesign/event'
-  span.wedding FAMEweddings
+  - if Features.active?(:fameweddings)
+    span.wedding FAMEweddings
   span.lookbook LOOKBOOKS
   /! span.magazine MAGAZINE
   span
