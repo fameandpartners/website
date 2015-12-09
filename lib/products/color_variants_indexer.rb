@@ -129,8 +129,8 @@ module Products
               usd: product.price_in(us_site_version.currency).amount
             },
             sale_prices: {
-              aud: product.price_in(au_site_version.currency).apply(discount),
-              usd: product.price_in(us_site_version.currency).apply(discount)
+                aud: discount > 0 ? product.price_in(au_site_version.currency).apply(product.discount).amount : product.price_in(au_site_version.currency).amount,
+                usd: discount > 0 ? product.price_in(us_site_version.currency).apply(product.discount).amount : product.price_in(us_site_version.currency).amount
             }
          }
 

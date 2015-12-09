@@ -89,11 +89,11 @@ module Search
         end
 
         if price_min.present?
-          filter :bool, :should => { :range => { "prices.#{currency}" => { :gt => price_min } } }
+          filter :bool, :should => { :range => { "sale_prices.#{currency}" => { :gt => price_min } } }
         end
 
         if price_max.present?
-          filter :bool, :should => { :range => { "prices.#{currency}" => { :lt => price_max } } }
+          filter :bool, :should => { :range => { "sale_prices.#{currency}" => { :lt => price_max } } }
         end
 
         if query_string.present?
