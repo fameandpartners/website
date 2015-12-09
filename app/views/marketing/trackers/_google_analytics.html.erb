@@ -43,8 +43,7 @@
           # _addItem(transactionId, sku, name, category, price, quantity)
           range_taxon   = range_taxon_for(line_item.variant.product)
           category_name = range_taxon.present? ? range_taxon.name : ''
-          sku = line_item.variant.sku
-          sku = line_item.variant.product.sku if sku.blank?
+          sku           = CustomItemSku.new(line_item).call
         %>
         _gaq.push(['_addItem',
           "<%= j @spree_order.number %>",
