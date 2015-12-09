@@ -1,5 +1,3 @@
-# don't think what caching require here
-# possible, it should be done layer up or down from here
 class Products::CollectionFilter
 
   Collection = Struct.new(:styles, :events, :shapes, :colors, :sort_orders) do

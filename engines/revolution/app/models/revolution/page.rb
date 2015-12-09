@@ -105,35 +105,25 @@ module Revolution
 
     def limit(product_ids)
       return self.get(:limit) || 20 if page_is_lookbook?
-      page_limit = no_of_products
-      offset = (params[:offset].present? ? params[:offset].to_i + page_limit : page_limit ).to_i
-      no_of_products = (product_ids.blank? ? 0 : product_ids.size)
-      if no_of_products >= offset
-        no_of_products = page_limit
+
+      page_limit     = effective_page_limit
+      base_offset    = params[:offset].to_i
+      total_offset   = base_offset + page_limit
+      no_of_products = Array.wrap(product_ids).size
+
+      if no_of_products < total_offset
+        products_on_page = no_of_products - base_offset
+        page_limit - [products_on_page, 0].max
       else
-        no_of_products = no_of_products - (offset - page_limit)
-        no_of_products = 0 if no_of_products < 0
+        0
       end
-      case
-        when params[:limit].present?
-          return_limit = params[:limit].to_i - no_of_products
-        when self.get(:limit)
-          return_limit = self.get(:limit).to_i - no_of_products
-        else
-          return_limit = page_limit - no_of_products
-      end
-      return_limit
     end
 
     def offset(product_ids, offset)
-      offset = offset.to_i
+      offset       = offset.to_i
       product_size = Array.wrap(product_ids).size
-      return offset if product_size.zero?
-      if offset > 0
-        offset = offset - product_size
-        offset = 0 if offset < 0
-      end
-      offset
+
+      [0, offset - product_size].max
     end
 
     def page_is_lookbook?
@@ -145,8 +135,12 @@ module Revolution
     end
 
 
-    def no_of_products
-      (params[:limit] || self.get(:limit) || 21).to_i
+    def effective_page_limit
+      (params[:limit] || self.get(:limit) || default_page_limit).to_i
+    end
+
+    def default_page_limit
+      21
     end
 
     def self.default_page
