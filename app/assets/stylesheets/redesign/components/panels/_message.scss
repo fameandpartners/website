@@ -1,0 +1,17 @@
+/* [Message Panel]
+-------------------------------------------------------*/
+.panel-message {
+  width: 100%;
+  margin-bottom: 30px;
+  padding: 40px;
+  text-align: center;
+  background: $c-neutral-white;
+  border: solid $c-neutral-black 1px;
+
+  .heading {
+    margin: 0;
+    padding: 0;
+    text-transform: none;
+  }
+
+}
