@@ -122,6 +122,8 @@ when :staging
   end
 
 when :preproduction
+  configatron.site_version_detector_strategy = :top_level_domain
+
   configatron.host      = 'preprod.fameandpartners.com'
 
   configatron.aws.s3 do |s3|
