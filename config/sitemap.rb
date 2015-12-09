@@ -19,11 +19,12 @@ SitemapGenerator::Interpreter.send :include, PathBuildersHelper
 
 SitemapGenerator::Interpreter.class_eval do
   def site_version_default_host(site_version)
-    if configatron.site_version_detector_strategy == :domain
-      "http://#{site_version.domain}"
-    else
-      "http://#{configatron.host}/#{site_version.to_param}"
-    end
+    url = "http://#{configatron.host}"
+    detector.site_version_url(url, site_version).chomp('/')
+  end
+
+  private def detector
+    UrlHelpers::SiteVersion::Detector.detector
   end
 end
 
