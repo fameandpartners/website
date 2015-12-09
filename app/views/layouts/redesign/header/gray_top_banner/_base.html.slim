@@ -11,6 +11,7 @@ ruby:
 
   #account-area.col-md-4.text-right
     = link_to moodboards_path do
+      span.icon.icon-heart
       span.moodboards-area MOODBOARD
     span.pipe |
     = link_to profile_path do
@@ -38,8 +39,6 @@ ruby:
         .tagline Bespoke Fashion. Premium Style. Made for You.
     .right-wrap
       ul.toolbar-moodboard-bag.js-header-toolbar
-        li = react_component('MoodboardItemCount', { moodboard_link: wishlist_path }, {prerender: true})
-        li.separator
         li
           a.js-trigger-shopping-bag href='javascript:;'
             span.copy.js-cart-item-count 0

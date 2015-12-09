@@ -102,4 +102,11 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.item_price          = event.item_price
     @item_return.item_price_adjusted = event.item_price_adjusted
   end
+
+  def advance_manual_order_return(event)
+    event.data.map do |k,v|
+      next if %i( manual_order_data user comment ).include?(k.to_sym)
+      @item_return.send("#{k}=", v)
+    end
+  end
 end

@@ -1,0 +1,9 @@
+.simple_form {
+  .input {
+    label, input { display: inline-block; }
+    label { min-width: 18rem; }
+    .error {
+      color: red;
+    }
+  }
+}
