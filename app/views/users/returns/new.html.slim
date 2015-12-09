@@ -40,7 +40,7 @@
 
                       .return-reason-category-container
                         = item_form.label 'Because'
-                        = item_form.select :reason_category, options_for_select(["Looks different to image on site", "Ordered multiple styles or sizes", "Delivery issues", "Poor quality or faulty", "Size and fit"]), {include_blank: true}, :class => 'form-control form-control-md return-select return-reason-category'
+                        = item_form.select :reason_category, options_for_select(ReturnRequestItem::REASON_CATEGORIES), {include_blank: true}, :class => 'form-control form-control-md return-select return-reason-category'
 
                         .return-reason-container
                           = item_form.label 'And'
