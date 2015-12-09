@@ -70,7 +70,7 @@
         section.carousel-strap
           .outer-wrap
             // TODO: update path
-            = react_component('ProductsCarousel', path: dresses_path(pids: page.variables['caroulsel_pids'].split(','), limit: page.variables['limit']))
+            = react_component('ProductsCarousel', path: dresses_path(pids: page.variables['carousel_pids'].to_s.split(','), limit: page.variables['limit']))
 
       .col-md-12.section-register
         .media-wrap
