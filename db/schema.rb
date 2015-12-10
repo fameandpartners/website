@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151210055035) do
+ActiveRecord::Schema.define(:version => 20151210230429) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -338,12 +338,13 @@ ActiveRecord::Schema.define(:version => 20151210055035) do
     t.integer  "product_id"
     t.string   "size"
     t.string   "customization_value_ids"
-    t.datetime "created_at",                                                             :null => false
-    t.datetime "updated_at",                                                             :null => false
+    t.datetime "created_at",                                                                    :null => false
+    t.datetime "updated_at",                                                                    :null => false
     t.string   "color"
     t.integer  "color_id"
     t.decimal  "price",                   :precision => 8, :scale => 2, :default => 0.0
     t.integer  "size_id"
+    t.string   "height",                                                :default => "standard"
   end
 
   add_index "line_item_personalizations", ["line_item_id"], :name => "index_line_item_personalizations_on_line_item_id"
