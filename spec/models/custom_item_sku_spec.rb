@@ -3,6 +3,7 @@ require 'spec_helper'
 RSpec.describe CustomItemSku do
   let(:custom_colour) { create :product_colour, name: 'pink' }
   let(:custom_size)   { create :product_size, size_template: 3 }
+  let(:chosen_height) { 'standard' }
   let(:style_number)  { 'FB1000' }
   let(:dress)         { create :dress_with_magenta_size_10, sku: style_number }
   let(:master)        { dress.master }
@@ -17,6 +18,7 @@ RSpec.describe CustomItemSku do
       item.color_id                = custom_colour.id
       item.customization_value_ids = [1]
       item.product_id              = variant.product.id
+      item.height                  = chosen_height
     end
   }
 
@@ -24,7 +26,7 @@ RSpec.describe CustomItemSku do
     let(:line_item) { build :line_item, variant: variant, personalization: personalization }
 
     it 'generates a custom SKU' do
-      expect(sku).to eq "FB1000US3AU7C#{custom_colour.id}X"
+      expect(sku).to eq "FB1000US3AU7C#{custom_colour.id}XHS"
     end
 
     it 'includes the style number' do
@@ -39,8 +41,25 @@ RSpec.describe CustomItemSku do
       expect(sku).to include("C#{custom_colour.id}")
     end
 
-    it 'marks customs with trailing X' do
-      expect(sku).to end_with("X")
+    it 'marks customs with X' do
+      expect(sku).to include("X")
+    end
+
+    describe '#height' do
+      context 'standard' do
+        let(:chosen_height) { 'standard' }
+        it { expect(sku).to end_with("HS") }
+      end
+
+      context 'petite' do
+        let(:chosen_height) { 'petite' }
+        it { expect(sku).to end_with("HP") }
+      end
+
+      context 'tall' do
+        let(:chosen_height) { 'tall' }
+        it { expect(sku).to end_with("HT") }
+      end
     end
   end
 
