@@ -36,6 +36,8 @@
         font-size: 1.3rem;
         .icon-delivery-express{
           margin-right: 10px;
+          font-size: 16px;
+          color: $c-neutral-9;
         }
       }
       .delivery-date-text{
@@ -116,7 +118,8 @@
     font-size: 0.875em;
 
     .icon {
-      font-size: 15px;
+      font-size: 16px;
+      color: $c-neutral-9;
     }
 
   }
