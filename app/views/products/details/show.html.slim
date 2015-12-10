@@ -42,6 +42,10 @@ ruby:
             container:  '#product-making-options-content',
             action:     '#product-making-options-action',
             value:      '#{ raw @product.making_option_id }'
+          },
+          height_input: {
+            container: '#product-height-content',
+            action:    '#product-height-action'
           }
         },
         moodboard_links: {
@@ -235,12 +239,14 @@ hr
 
 #product-overlay
 
-- cache [:side_panels, @product.id, current_site_version.code], expires_in:  configatron.cache.expire.long  do
+- cache [:side_panels, @product.id, current_site_version.code, Features.active?(:height_customisation)], expires_in:  configatron.cache.expire.long  do
   = render partial: 'side_panel_sizes'
 
   = render partial: 'side_panel_colours'
 
   = render partial: 'side_panel_customisation'
+  - if Features.active?(:height_customisation)
+    = render partial: 'side_panel_height'
 
   - if @product.making_options.present?
     = render partial: 'side_panel_making_options', locals: { making_options: @product.making_options }

@@ -240,3 +240,41 @@ window.inputs.ProductMakingOptionIdSelector = class ProductMakingOptionIdSelecto
       @$action.html("#{data.name} +#{price}")
     else
       @$action.html("Express Making")
+
+# TODO - Another expedient use of existing classes instead of rewriting the whole shebang in react.
+window.inputs.ProductHeightSelector = class ProductHeightSelector extends BaseProductOptionSelector
+  constructor: (opts = {}) ->
+    super(opts)
+
+    @value = 'standard'
+
+    @$container.find('.height-option').on('click', @selectValueHandler)
+    @$container.find('.close').on('click', @close)
+    @on('change', @updateMenuButton)
+
+  selectValueHandler: (e) =>
+    e.preventDefault() if e
+    @setValueFrom($(e.currentTarget))
+
+  setValueFrom: ($el) ->
+    data = $el.data()
+    @setValue(data.heightOption)
+
+    @$container.find('.height-option.active').not($el).removeClass('active')
+    $el.addClass('active')
+
+  updateMenuButton: () =>
+    selectedValue = @getValue()
+    if selectedValue
+      newTitle = "Height - " + selectedValue
+      @$action.html(newTitle)
+
+  getValue: () ->
+    @value
+  setValue: (newValue) ->
+    if @value != newValue
+      @trigger('change')
+      @value = newValue
+
+  customValue: ->
+    getValue() != 'standard'

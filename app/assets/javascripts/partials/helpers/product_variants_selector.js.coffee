@@ -25,11 +25,13 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
     @colorInput = new window.inputs.ProductColorIdSelector(options.color_input)
     @customizationsInput = new window.inputs.ProductCustomizationIdsSelector(options.customization_input)
     @makingOptionsInput = new window.inputs.ProductMakingOptionIdSelector(options.making_options_input)
+    @heightInput        = new window.inputs.ProductHeightSelector(options.height_input)
 
     @colorInput.on('change', @onChangeHandler)
     @sizeInput.on('change', @onChangeHandler)
     @customizationsInput.on('change', @onChangeHandler)
     @makingOptionsInput.on('change', @onChangeHandler)
+    @heightInput.on(       'change', @onChangeHandler)
 
     # don't allow to select custom color & express making at the same time
     @colorInput.on('change', @updateMakingOptionsAvailablity)
@@ -61,13 +63,14 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
       color_id: @colorInput.val(),
       customizations_ids: @customizationsInput.val(),
       making_options_ids: @makingOptionsInput.val(),
+      height:             @heightInput.val(),
       product_id: @product_id
     }
 
     # if user don't selected size & color, then do nothing.
     return selected if (!selected.size_id || !selected.color_id)
 
-    if @sizeInput.customValue() || @colorInput.customValue() || @customizationsInput.customValue()
+    if @sizeInput.customValue() || @colorInput.customValue() || @customizationsInput.customValue() || @heightInput.customValue()
       selected.variant = @custom
     else
       selected.variant = _.findWhere(@variants, { size_id: selected.size_id, color_id: selected.color_id })

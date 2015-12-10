@@ -6,6 +6,11 @@
   - if @product.default_sizes?
     a#product-size-action.btn-customize Size
 
+- if Features.active?(:height_customisation)
+  .row
+    a#product-height-action.btn-customize
+      | Height - Standard
+
 - if @product.colors?
   .row
     a#product-colorize-action.btn-customize
