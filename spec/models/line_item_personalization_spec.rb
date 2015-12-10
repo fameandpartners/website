@@ -90,4 +90,23 @@ describe LineItemPersonalization, type: :model do
       end
     end
   end
+
+  describe '#height' do
+    describe 'validation' do
+      it { is_expected.to validate_inclusion_of(:height).in_array(%w(tall standard petite)) }
+    end
+
+    describe 'values' do
+      subject(:personalization) { described_class.new }
+
+      it('is standard by default') do
+        expect(personalization.height).to eq 'standard'
+      end
+
+      it 'still allows setting custom values' do
+        personalization.height = 'foobar'
+        expect(personalization.height).to eq 'foobar'
+      end
+    end
+  end
 end
