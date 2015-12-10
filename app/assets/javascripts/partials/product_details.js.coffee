@@ -56,8 +56,9 @@ page.initProductDetailsPage = (options = {}) ->
           size_id: selected.size_id,
           color_id: selected.color_id,
           customizations_ids: selected.customizations_ids,
-          making_options_ids: selected.making_options_ids
-          variant_id: (selected.variant || {})['id']
+          making_options_ids: selected.making_options_ids,
+          variant_id:         (selected.variant || {})['id'],
+          height:             selected.height
         }
         app.shopping_cart.one('change', () ->
           window.app.shopping_bag.open()

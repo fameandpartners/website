@@ -1,4 +1,5 @@
 # reason to extract - old line_items#create is overgrown. and not manageable
+# reason not to extract, not writing any tests.
 #
 # usage
 #    cart_populator = UserCart::Populator.new(
@@ -14,8 +15,8 @@
 #        quantity: 1
 #      }
 #    )
-module UserCart; end
-class  UserCart::Populator
+module UserCart
+class Populator
   attr_reader :site_version, :order, :currency, :product_attributes
 
   def initialize(options = {})
@@ -37,7 +38,7 @@ class  UserCart::Populator
         color:          Spree::Variant.find(@product_attributes[:variant_id]).option_values.first.presentation
       )
     rescue StandardError => e
-      Rails.logger.error('ERROR: customer.io event tracker: auto_apply_coupon')
+      Rails.logger.error('ERROR: customer.io event tracker: gift_selected')
       Rails.logger.error(e)
       NewRelic::Agent.notice_error(e)
     end
@@ -103,7 +104,12 @@ class  UserCart::Populator
     end
 
     def add_personalized_product
+      begin
       personalization = build_personalization
+      rescue StandardError => e
+
+        binding.pry
+      end
       if personalization.valid?
         add_product_to_cart
         personalization.line_item = line_item
@@ -130,12 +136,20 @@ class  UserCart::Populator
         item['color'] = product_color.name
         item.customization_value_ids = product_customizations.map(&:id)
         item.product_id = product.id
+        binding.pry
+        item.height   = product_attributes[:height]
+
       end
     end
 
     def personalized_product?
       return if @is_gift
-      product_variant.is_master? || product_color.custom || product_size.custom || product_customizations.present?
+      product_variant.is_master? || product_color.custom || product_size.custom || product_customizations.present? || custom_height?
+    end
+
+    def custom_height?
+      height = product_attributes[:height].to_s
+      height.present? && height != LineItemPersonalization::DEFAULT_HEIGHT
     end
 
     def product
@@ -215,4 +229,5 @@ class  UserCart::Populator
     def fire_event(name, extra_payload = {})
       ActiveSupport::Notifications.instrument(name, { order: order })
     end
+end
 end

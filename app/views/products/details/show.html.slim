@@ -245,8 +245,8 @@ hr
   = render partial: 'side_panel_colours'
 
   = render partial: 'side_panel_customisation'
-  - if Features.active?(:height_customisation)
-    = render partial: 'side_panel_height'
+
+  = render partial: 'side_panel_height'
 
   - if @product.making_options.present?
     = render partial: 'side_panel_making_options', locals: { making_options: @product.making_options }
