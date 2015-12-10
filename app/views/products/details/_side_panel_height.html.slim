@@ -1,0 +1,27 @@
+#product-height-content.product-side-panel
+  button.close-btn
+    = image_tag "cross.png", alt: 'close button'
+
+
+  .col-md-12
+    .row
+      .col-md-10.col-md-offset-1
+        h2 How tall are you babe?
+        p Tell us your height range, and we can adjust your skirt length for free!
+
+    .row
+      .col-md-3.col-md-offset-1.white-background
+        p
+          a.product-option.height-option data-height-option='petite' href='#'
+            span.option-box Petite
+      .col-md-3
+        p
+          a.product-option.height-option.active data-height-option='standard' href='#'
+            span.option-box Standard
+      .col-md-3
+        p
+          a.product-option.height-option data-height-option='tall' href='#'
+            span.option-box Tall
+
+    .row
+      a.btn.btn-black.close OK

@@ -10,6 +10,7 @@ Features.deactivate(:maintenance)
 Features.deactivate(:send_promotion_email_reminder)
 Features.deactivate(:shipping_message)
 Features.deactivate(:test_analytics)
+Features.deactivate(:height_customisation)
 
 Features.activate(:express_making)
 Features.activate(:gift)
@@ -32,6 +33,7 @@ if Rails.env.development?
   Features.activate(:content_revolution)
   Features.activate(:enhanced_moodboards)
   Features.activate(:fameweddings)
+  Features.activate(:height_customisation)
 
   Features.deactivate(:google_tag_manager)
   Features.deactivate(:test_analytics)
