@@ -17,10 +17,14 @@ ruby:
       $.cookie('modal_site_visit','true')
     }
   "
+  turn_off_site_visit_modal = "$.cookie('modal_site_visit','true')"
 
 = content_for :inline_javascript do
   - if promocode_by_url == ""
     = raw email_capture_modal
+  - else
+    = raw turn_off_site_visit_modal
+
 
 #modal-popup-content-template.welcome.hidden
   input type="hidden" name="content" value="newgirl25"
