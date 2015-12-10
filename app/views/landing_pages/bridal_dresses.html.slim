@@ -1,7 +1,7 @@
 = content_for :head do
   meta name="robots" content="noindex, follow"
 
-- all_products = get_products_from_edit('bridesmaid14', nil, nil, 99)
+= render :partial => '/products/collections/javascript'
 
 .landing-bridesmaid
 
@@ -34,7 +34,7 @@
   .container.products-collections
 
     .row
-      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(0, 4) }
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
 
     .row
       .col-md-6.hidden-sm.hidden-xs
@@ -52,7 +52,7 @@
                 p What’s more? We work quick – our dresses can ship as quickly as within 48 hours.
 
     .row
-      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(4, 4) }
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
 
     .row
       .col-md-6.col-xs-12
@@ -68,8 +68,7 @@
           = image_tag 'landingpages/bridal-dresses/tile-2.jpg'
 
     .row
-      - all_products.drop(8).each_slice(4) do |products|
-        =render :partial => '/landing_pages/products_four', :locals => { :products => products }
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 40, customWrapper: 'col-md-3 col-xs-6'}
 
     .row.more-products
       = link_to 'Shop Bridesmaids Dresses', bridesmaid_collection_path, class: 'btn btn-black'

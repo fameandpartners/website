@@ -2,8 +2,7 @@ class CreateBridalLandingPage < ActiveRecord::Migration
   def up
     page = Revolution::Page.create!(
       :path => '/bridal-dresses',
-      :template_path => '/landing_pages/bridal_dresses.html.slim',
-      :variables => {"limit"=>99}
+      :template_path => '/landing_pages/bridal_dresses.html.slim'
     )
     page.publish!
     page.translations.create!(:locale => 'en-US', :title => 'Bridal Dresses', :meta_description => 'Bridal Dresses', :heading => 'Bridal Dresses')
