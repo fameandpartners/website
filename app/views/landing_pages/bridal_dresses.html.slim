@@ -1,1 +1,77 @@
-h3 Bridal Dresses
+= content_for :head do
+  meta name="robots" content="noindex, follow"
+
+// TODO: update dresses collection
+- all_products = get_products_from_edit('bridesmaid14', nil, nil, 24)
+- cache [:landing, :bridal,  all_products.to_sql], expires_in: configatron.cache.expire.normally do
+
+.landing-bridesmaid
+
+  .category-header
+    .media-wrap
+      = image_tag 'landingpages/bridal-dresses/hero.jpg'
+    .outer-wrap
+      .inner-wrap
+        h1.title
+          span Bridal Dresses
+
+  section.container
+    .row
+      .col-md-12
+        .h2.title-line-on-sides
+          .inner-wrap AS SEEN IN
+      .col-md-12
+        .as-seen-in-partners
+          img.style-me        alt='Style Me Pretty Logo' src='/assets/footer/publisher/style-me.png'
+          img.modern-wedding  alt='Moder Wedding Logo'   src='/assets/footer/publisher/modern-wedding.png'
+          img.cosmo-bride     alt='Cosmo Bride Logo'     src='/assets/footer/publisher/cosmo-bride.png'
+          img.refinery29      alt='Refinery29 Logo'      src='/assets/footer/publisher/refinery29.png'
+          img.glamour         alt='Glamour Logo'         src='/assets/footer/publisher/glamour.png'
+          img.elle            alt='Elle Logo'            src='/assets/footer/publisher/elle.png'
+          img.marie           alt='Marie Logo'           src='/assets/footer/publisher/marie.png'
+          img.russh           alt='Russh Logo'           src='/assets/footer/publisher/russh.png'
+          img.wwd             alt='WWD Logo'             src='/assets/footer/publisher/wwd.png'
+          img.popsugar        alt='Popsugar Logo'        src='/assets/footer/publisher/popsugar.png'
+
+  .container.products-collections
+
+    .row
+      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(0, 4) }
+
+    .row
+      .col-md-6.hidden-sm.hidden-xs
+        .media-wrap
+          = image_tag 'landingpages/bridal-dresses/tile-1.jpg'
+      .col-md-6.col-xs-12
+        .panel-seo
+          .outer-wrap
+            .inner-wrap
+              .content-wrap
+                h2.title
+                  span Unique Wedding Dresses
+                h3.sub-title Say Yes…to fuss-free, affordable, lo-fi wedding dresses.
+                p We are the only online bridal dress boutique that offers unique customization – you can change colours, prints, hem length, strap styles and more.
+                p What’s more? We work quick – our dresses can ship as quickly as within 48 hours.
+
+    .row
+      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(4, 4) }
+
+    .row
+      .col-md-6.col-xs-12
+        .panel-seo
+          .outer-wrap
+            .inner-wrap
+              .content-wrap
+                h2.title
+                  span NEED INSPIRATION? TRY OUR FREE STYLING SERVICE.
+                p Our personal stylists will take you and your bridesmaids-to-be through our collections to find the best silhouettes for each girl, and tailor the perfect look for you and your #girlsquad.
+      .col-md-6.hidden-sm.hidden-xs
+        .media-wrap
+          = image_tag 'landingpages/bridal-dresses/tile-2.jpg'
+
+    .row
+      - all_products.drop(8).each_slice(4) do |products|
+        =render :partial => '/landing_pages/products_four', :locals => { :products => products }
+
+    .row.more-products
+      = link_to 'Shop Bridesmaids Dresses', bridesmaid_collection_path, class: 'btn btn-black'
