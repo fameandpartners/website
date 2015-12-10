@@ -7,47 +7,33 @@
 
 unless Rails.env.development?
   SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(
-    :aws_access_key_id => configatron.aws.s3.access_key_id,
-    :aws_secret_access_key => configatron.aws.s3.secret_access_key,
-    :fog_provider => 'AWS',
-    :fog_directory => configatron.aws.s3.bucket,
-    :fog_region => configatron.aws.s3.region
+      aws_access_key_id:     configatron.aws.s3.access_key_id,
+      aws_secret_access_key: configatron.aws.s3.secret_access_key,
+      fog_provider:          'AWS',
+      fog_directory:         configatron.aws.s3.bucket,
+      fog_region:            configatron.aws.s3.region
   )
 end
 
 SitemapGenerator::Interpreter.send :include, PathBuildersHelper
 
 SitemapGenerator::Interpreter.class_eval do
-  def absolute_url(path = '/')
-    path = ('/' + path).gsub(/\/+/, '/')
-    url = "#{ SitemapGenerator::Sitemap.default_host }#{ path }"
+  def site_version_default_host(site_version)
+    url = "http://#{configatron.host}"
+    detector.site_version_url(url, site_version).chomp('/')
   end
 
-  def site_versions
-    @_site_version ||= SiteVersion.where(default: false).to_a
-  end
-
-  # make links for all site versions
-  # version for default - without prefix
-  # <xhtml:link rel="alternate" hreflang="en" href="http://example.com" />
-  # <xhtml:link rel="alternate" hreflang="en-AU" href="http://example.com/au" />
-  def build_alternates(path)
-    alternates = [{ href: absolute_url(path), lang: 'en-US', nofollow: false }]
-
-    alternates + site_versions.map { |site_version| alternate_href_hash(path, site_version) }
-  end
-
-  def alternate_href_hash(path, site_version)
-    { href: absolute_url('/' + site_version.permalink + path), lang: site_version.locale }
+  private def detector
+    UrlHelpers::SiteVersion::Detector.detector
   end
 end
 
 sitemap_options = {
-  compress: Rails.env.production?,
-  default_host: "http://#{configatron.host}",
-  sitemaps_host: "http://#{configatron.aws.host}",
-  include_root: false,
-  sitemaps_path: 'sitemap'
+    compress:      Rails.env.production?,
+    default_host:  "http://#{configatron.host}",
+    sitemaps_host: "http://#{configatron.aws.host}",
+    include_root:  false,
+    sitemaps_path: 'sitemap'
 }
 
 # XML Priorities:
@@ -74,10 +60,10 @@ SitemapGenerator::Sitemap.create(sitemap_options) do
   add '/assets/returnform.pdf', priority: 0.7
 
   # Creating sitemaps for each site version
-  SiteVersion.find_each do |site_version|
+  SiteVersion.all.each do |site_version|
     sitemap_group_options = {
       include_root: true,
-      default_host: "http://#{configatron.host}/#{site_version.to_param}",
+      default_host: site_version_default_host(site_version),
       filename: site_version.permalink
     }
 

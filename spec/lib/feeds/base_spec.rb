@@ -19,7 +19,7 @@ describe Feeds::Base do
 
       it 'configures @config hash with a title, description and domain' do
         base_feed = described_class.new('jp')
-        expect(base_feed.config).to match(default_config.merge(domain: 'http://fameandpartners.test'))
+        expect(base_feed.config).to match(default_config.merge(domain: 'http://jp.lvh.me'))
       end
     end
 
@@ -33,7 +33,7 @@ describe Feeds::Base do
 
       it 'configures @config hash with a title, description and domain' do
         base_feed = described_class.new('pt')
-        expect(base_feed.config).to match(default_config.merge(domain: 'http://fameandpartners.test/pt'))
+        expect(base_feed.config).to match(default_config.merge(domain: 'http://pt.lvh.me'))
       end
     end
   end
