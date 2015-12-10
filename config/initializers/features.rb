@@ -27,6 +27,7 @@ end
 if Rails.env.preproduction?
   Features.activate(:fameweddings)
   Features.activate(:enhanced_moodboards)
+  Features.activate(:height_customisation)
 end
 
 if Rails.env.development?
@@ -41,6 +42,7 @@ end
 
 if Rails.env.test?
   Features.activate(:enhanced_moodboards)
+  Features.activate(:height_customisation)
 
   Features.deactivate(:google_tag_manager)
   Features.deactivate(:marketing_modals)
