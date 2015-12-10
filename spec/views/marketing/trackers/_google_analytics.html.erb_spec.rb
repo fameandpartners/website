@@ -16,23 +16,10 @@ describe 'marketing/trackers/_google_analytics.html.erb', type: :view do
       expect(rendered).to include "_gaq.push(['_setAccount', 'whatever']);"
     end
 
-    describe 'feature flags' do
-      context ':test_analytics' do
-        context 'is enabled' do
-          before { Features.activate(:test_analytics) }
-
-          it 'has setDomainName analytics configuration' do
-            render
-            expect(rendered).to include("_gaq.push(['_setDomainName', 'none']);")
-          end
-
-          context 'is disalbed' do
-            it 'does not have setDomainName' do
-              expect(rendered).not_to include('_setDomainName')
-            end
-          end
-        end
-      end
+    it 'has cross domain configuration' do
+      render
+      expect(rendered).to include("_gaq.push(['_setDomainName', 'none']);")
+      expect(rendered).to include("_gaq.push(['_setAllowLinker', true]);")
     end
 
     describe 'simple facebook events' do
