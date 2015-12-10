@@ -1,8 +1,7 @@
 = content_for :head do
   meta name="robots" content="noindex, follow"
 
-- all_products = get_products_from_edit('bridesmaid14', nil, nil, 99)
-- cache [:landing, :bridal,  all_products.to_sql], expires_in: configatron.cache.expire.normally do
+- all_products = get_products_from_edit('', nil, nil, 99)
 
 .landing-bridesmaid
 
