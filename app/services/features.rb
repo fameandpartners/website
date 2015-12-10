@@ -3,13 +3,14 @@ module Features
   class << self
     extend Forwardable
     
-    def_delegators :rollout, :active?, :activate_user, :deactivate_user, :activate, :deactivate
+    def_delegators :rollout, :active?, :activate_user, :deactivate_user, :activate, :deactivate, :features
     
     def inactive?(name)
       !active?(name)
     end
   
     private
+
     def rollout
       return Rollout.new(kv_store)
       # code below not thread-safe

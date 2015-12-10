@@ -15,8 +15,6 @@ AdminUi::Engine.routes.draw do
       delete :expire, :on => :collection
     end
 
-    resources :features, only: [:index]
-
     resources :product_indexes, only: [:index, :show] do
       delete :clear, :on => :collection
     end
@@ -42,6 +40,15 @@ AdminUi::Engine.routes.draw do
   end
 
   resources :variants
+
+  resources :features, only: [:index] do
+    collection do
+      get :enable
+      get :disable
+      get :new_ff
+      post :create_ff
+    end
+  end
 
   namespace :content do
     resources :pages

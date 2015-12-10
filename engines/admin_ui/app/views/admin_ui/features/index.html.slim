@@ -1,0 +1,17 @@
+- content_for :page_title, 'Site Features'
+
+.wrapper.wrapper-content
+  .ibox-content
+    h2 Features
+    = link_to "New Feature Flag", new_ff_features_path,  class: 'btn btn-info btn-sm'
+    table
+      thead
+        tr
+        th : h3 Flag
+        th : h3 State
+        th
+      - feature_list.each do |feature|
+        tr
+          td : tt = feature
+          td : tt = active?(feature)
+          td : .text-center = link_to button_text(feature), button_path(feature),  class: 'btn btn-info btn-sm'
