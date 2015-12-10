@@ -15,7 +15,7 @@ module Feeds
       @config = {
         title:       'Fame & Partners',
         description: 'Fame & Partners our formal dresses are uniquely inspired pieces that are perfect for your formal event, school formal or prom.',
-        domain:       URI.join("http://#{ActionMailer::Base.default_url_options[:host]}", @current_site_version.to_param).to_s
+        domain:       domain_url
       }
     end
 
@@ -194,6 +194,16 @@ module Feeds
         styles:    product_styles.map(&:name),
         lookbooks: product_lookbooks.map(&:name)
       }
+    end
+
+
+    private def domain_url
+      url = "http://#{ActionMailer::Base.default_url_options[:host]}"
+      detector.site_version_url(url, current_site_version).chomp('/')
+    end
+
+    private def detector
+      UrlHelpers::SiteVersion::Detector.detector
     end
   end
 end
