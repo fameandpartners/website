@@ -66,7 +66,7 @@ class Products::CollectionsController < Products::BaseController
   end
 
   def set_collection_resource
-    @collection_options = parse_permalink(params[:permalink])
+    @collection_options = parse_permalink(params[:permalink]) || {}
     @collection         = collection_resource(@collection_options)
     page.collection     = @collection
     punch_products if product_ids
