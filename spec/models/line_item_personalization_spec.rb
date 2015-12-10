@@ -37,12 +37,15 @@ describe LineItemPersonalization, type: :model do
     end
 
     context "#color_cost" do
+      before do
+        personalization.product = Spree::Product.new
+      end
+
       it "works if no data" do
         expect(personalization.color_cost).to eql(BigDecimal.new(0))
       end
 
       it "returns 0 for basic color" do
-        personalization.product = Spree::Product.new
         personalization.color = Spree::OptionValue.new
         expect(personalization).to receive(:basic_color?).and_return(true)
 
@@ -50,7 +53,6 @@ describe LineItemPersonalization, type: :model do
       end
 
       it "adds price for custom color" do
-        personalization.product = Spree::Product.new
         personalization.color = Spree::OptionValue.new
         expect(personalization).to receive(:basic_color?).and_return(false)
 
@@ -58,7 +60,6 @@ describe LineItemPersonalization, type: :model do
       end
 
       it "returns discounted price for custom colour" do
-        personalization.product = Spree::Product.new
         expect(personalization).to receive(:color).at_least(:once).and_return(
           double('Spree::OptionValue', discount: discount)
         )
