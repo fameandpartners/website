@@ -50,7 +50,7 @@ module Policies
       return false
     end
 
-    def delivery_date    
+    def delivery_date
       return FAST_MAKING if fast_making?
       if @product.standard_days_for_making.present? && @product.customised_days_for_making.present?
         return {days_for_making: @product.standard_days_for_making,   days_for_delivery: DAYS_FOR_DELIVERY} if !@customized
@@ -64,7 +64,7 @@ module Policies
     def self.delivery_date_text(delivery_date_obj)
       start_date = Date.today + delivery_date_obj[:days_for_making].to_i + configatron.days_delivery_emergency
       end_date   = start_date + DAYS_FOR_DELIVERY
-      (start_date + 1).strftime("%d %B") + " and " + end_date.strftime("%d %B")
+      (start_date + 1).strftime("%d %b") + " and " + end_date.strftime("%d %b")
     end
 
     def self.order_delivery_date(user_cart)
@@ -84,8 +84,8 @@ module Policies
             dates_product_takes_longest = date_num
           end
         end
-        start_date = (Date.today + max_start_date + 1).strftime("%d %B")
-        end_date   = (Date.today + max_start_date + dates_product_takes_longest[:days_for_delivery]).strftime("%d %B")
+        start_date = (Date.today + max_start_date + 1).strftime("%d %b")
+        end_date   = (Date.today + max_start_date + dates_product_takes_longest[:days_for_delivery]).strftime("%d %b")
         return {start_date: start_date, end_date: end_date}
       end
 
@@ -110,10 +110,10 @@ module Policies
           end
         end
 
-        start_date_express     = (Date.today + max_start_date_express + 1).strftime("%d %B")
-        end_date_express       = (Date.today + max_start_date_express + dates_express_product_takes_longest[:days_for_delivery].to_i).strftime("%d %B")
-        start_date_non_express = (Date.today + max_start_date_non_express + 1).strftime("%d %B")
-        end_date_non_express   = (Date.today + max_start_date_non_express + dates_non_express_product_takes_longest[:days_for_delivery].to_i).strftime("%d %B")
+        start_date_express     = (Date.today + max_start_date_express + 1).strftime("%d %b")
+        end_date_express       = (Date.today + max_start_date_express + dates_express_product_takes_longest[:days_for_delivery].to_i).strftime("%d %b")
+        start_date_non_express = (Date.today + max_start_date_non_express + 1).strftime("%d %b")
+        end_date_non_express   = (Date.today + max_start_date_non_express + dates_non_express_product_takes_longest[:days_for_delivery].to_i).strftime("%d %b")
 
         return {start_date_express: start_date_express, end_date_express: end_date_express, start_date_non_express: start_date_non_express, end_date_non_express: end_date_non_express}
       end
