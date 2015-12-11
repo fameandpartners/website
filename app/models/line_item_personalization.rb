@@ -145,4 +145,8 @@ class LineItemPersonalization < ActiveRecord::Base
   def height
     read_attribute(:height).presence || DEFAULT_HEIGHT
   end
+
+  def default_height?
+    height == DEFAULT_HEIGHT
+  end
 end
