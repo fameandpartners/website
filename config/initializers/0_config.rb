@@ -140,6 +140,7 @@ when :preproduction
   configatron.asset_host = "assets.fameandpartners.com/preprod"
 
 when :production
+  configatron.site_version_detector_strategy = :top_level_domain
   configatron.host      = 'www.fameandpartners.com'
 
   configatron.order_production_emails = ['fameandpartners@hotmail.com', 'orders@fameandpartners.com.cn']
