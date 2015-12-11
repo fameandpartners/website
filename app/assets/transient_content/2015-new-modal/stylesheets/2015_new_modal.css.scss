@@ -73,13 +73,14 @@
             padding-left:55px;
             padding-right: 10px;
             @include iphone6p{
-              font-size: 0.8em !important;
-            }
-            @include iphone6{
               font-size: 0.7em !important;
             }
+            @include iphone6{
+              font-size: 0.6em !important;
+            }
             @include iphone5{
-              font-size: 0.53em !important;
+              font-size: 0.45em !important;
+              padding-top: 12px;
             }
           }
         }
@@ -260,4 +261,24 @@
   }
 }
 
+.new-modal.email-capture-modal.welcome-modal{
+  @include mobile{
+    overflow: hidden;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 0;
+    .vex-content{
+      position: absolute;
+      bottom: 0;
+      width: 90%;
+      .vex-dialog-message{
+        h2{
+          font-size: 2.5rem;
+          line-height: 4rem;
+        }
+      }
+    }
+  }
+
+}
 
