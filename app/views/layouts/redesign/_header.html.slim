@@ -72,11 +72,11 @@ ruby:
               = image_tag src='logo/logo-mobile.svg', :alt => 'Fame & Partners'
 
           .masthead.pull-right.visible-xs.visible-sm
-            ul.toolbar-moodboard-bag.js-header-toolbar
-              li
-                a.js-trigger-shopping-bag href='javascript:;'
-                  span.copy.js-cart-item-count 0
-                  span.icon.icon-shopping-bag
+            .js-header-toolbar
+              a.trigger-shopping-cart.js-trigger-shopping-bag href='javascript:;'
+                span.icon.icon-shopping_cart
+                span.count.js-cart-item-count 0
+                span.copy checkout
 
     - unless disable_notices?
       = render 'layouts/redesign/notices'

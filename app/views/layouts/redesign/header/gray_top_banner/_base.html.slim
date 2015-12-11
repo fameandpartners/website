@@ -37,12 +37,11 @@ ruby:
       .logo
         = image_tag 'logo/new-logo.svg'
         .tagline LUXE DRESSES FOR EVERY OCCASION
-    .right-wrap
-      ul.toolbar-moodboard-bag.js-header-toolbar
-        li
-          a.js-trigger-shopping-bag href='javascript:;'
-            span.copy.js-cart-item-count 0
-            span.icon.icon-shopping-bag
+    .right-wrap.js-header-toolbar
+      a.trigger-shopping-cart.js-trigger-shopping-bag href='javascript:;'
+        span.icon.icon-shopping_cart
+        span.count.js-cart-item-count 0
+        span.copy checkout
 
 .row#home-menu.hidden-xs.hidden-sm.text-center
   span.new-this-week
