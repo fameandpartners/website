@@ -22,6 +22,7 @@ describe 'Site Version Redirection', type: :request do
     context 'if request has /au in its path' do
       describe 'redirects path to www.fameandpartners.com.au domain' do
         it_will :redirect, '/au/something?awesome=true', 'http://www.fameandpartners.com.au/something?awesome=true'
+        it_will :redirect, '/au', 'http://www.fameandpartners.com.au/'
       end
     end
   end
