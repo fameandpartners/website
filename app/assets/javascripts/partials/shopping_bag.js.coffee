@@ -22,7 +22,6 @@ window.ShoppingBag = class ShoppingBag
     @value_proposition  = options.value_proposition
     @shipping_message  = options.shipping_message
 
-
     _.bindAll(@, 'closeHandler', 'openHandler', 'open', 'close', 'render', 'removeProductHandler', 'couponFormSubmitHandler', 'removeProductCustomizationHandler', 'removeProductMakingOptionHandler', 'masterpassOpenHandler')
 
     $(options.toggle_link || '.js-header-toolbar .js-trigger-shopping-bag').on('click', @openHandler)
@@ -46,6 +45,7 @@ window.ShoppingBag = class ShoppingBag
       url: urlWithSitePrefix("/user_cart/order_delivery_date")
       type: 'GET'
       success: (data) =>
+        @start_date = @end_date = @start_date_express = @end_date_express = @start_date_non_express = @end_date_non_express = null
         if data
           @start_date                = data.start_date
           @end_date                  = data.end_date
@@ -92,6 +92,7 @@ window.ShoppingBag = class ShoppingBag
     e.preventDefault()
     line_item_id = $(e.currentTarget).closest('.cart-item').data('id')
     @cart.removeProduct(line_item_id)
+    @render()
 
   removeProductCustomizationHandler: (e) ->
     e.preventDefault()
