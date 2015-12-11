@@ -119,7 +119,8 @@ window.helpers.ShoppingCart = class ShoppingCart
         product.variant_id == product_data.variant_id
       )
       @trackAddToCart(added_product)
-      window.location = '/checkout?faadc=MAGIC10&pc=TUFHSUMxMA%3D%3D&tn=Ymxhbms%3D&h=SGFwcHkgSG9saWRheXMgZnJvbSBGYW1lICYgUGFydG5lcnM%3D&m=PGgzPlRha2UgYSAxMCUgb2ZmLCByaWdodCBub3chPC9oMz48ZGl2PjxhIGNsYXNzPVwiYnRuIGJ0bi1ibGFja1wiIG9uY2xpY2s9XCJ2ZXguY2xvc2VBbGwoKTtcIj5HbzwvYS8%2BPC9kaXYvPg%3D%3D&s=bmV3LW1vZGFs&pop=true'
+      # window.location = '/checkout?faadc=MAGIC10&pc=TUFHSUMxMA%3D%3D&tn=Ymxhbms%3D&h=SGFwcHkgSG9saWRheXMgZnJvbSBGYW1lICYgUGFydG5lcnM%3D&m=PGgzPlRha2UgYSAxMCUgb2ZmLCByaWdodCBub3chPC9oMz48ZGl2PjxhIGNsYXNzPVwiYnRuIGJ0bi1ibGFja1wiIG9uY2xpY2s9XCJ2ZXguY2xvc2VBbGwoKTtcIj5HbzwvYS8%2BPC9kaXYvPg%3D%3D&s=bmV3LW1vZGFs&pop=true'
+      window.location = '/checkout'
     ).error( () =>
       @trigger('error')
     )
