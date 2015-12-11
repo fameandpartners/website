@@ -3,7 +3,7 @@ module Features
   class << self
     extend Forwardable
     
-    def_delegators :rollout, :active?, :activate_user, :deactivate_user, :activate, :deactivate, :features
+    def_delegators :rollout, :active?, :activate_user, :deactivate_user, :activate, :deactivate, :features, :clear!
     
     def inactive?(name)
       !active?(name)

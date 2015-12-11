@@ -8,7 +8,9 @@ class FeatureFlag
   validates :flag, presence: true
 
   validate do
-    errors.add(:flag, " already used.") if Features.features.include? self.flag.to_sym
+    if self.flag.present?
+      errors.add(:flag, " already used.") if Features.features.include? (self.flag.to_sym)
+    end
   end
 
   def persisted?
