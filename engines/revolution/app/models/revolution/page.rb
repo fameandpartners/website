@@ -13,7 +13,7 @@ module Revolution
                     :publish_from, :publish_to
     attr_accessor :params
 
-    validates :path, :presence => true
+    validates :path, :presence => true, :uniqueness => true
     validate :path_has_not_changed, :on => :update #read only attributes
 
     has_many :translations, dependent: :destroy, inverse_of: :page
