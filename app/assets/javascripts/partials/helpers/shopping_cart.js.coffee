@@ -106,7 +106,7 @@ window.helpers.ShoppingCart = class ShoppingCart
   #   color_id
   #   customizations_ids
   addProduct: (product_data = {}) ->
-    @showModal()
+    # @showModal()
 
     $.ajax(
       url: urlWithSitePrefix("/user_cart/products")
@@ -114,11 +114,12 @@ window.helpers.ShoppingCart = class ShoppingCart
       dataType: "json"
       data: product_data
     ).success((data) =>
-      @updateData(data)
+      # @updateData(data)
       added_product = _.find((data.products || []), (product) ->
         product.variant_id == product_data.variant_id
       )
       @trackAddToCart(added_product)
+      window.location = '/checkout'
     ).error( () =>
       @trigger('error')
     )
