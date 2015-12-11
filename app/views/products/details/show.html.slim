@@ -239,7 +239,7 @@ hr
 
 #product-overlay
 
-- cache [:side_panels, @product.id, current_site_version.code, Features.active?(:height_customisation)], expires_in:  configatron.cache.expire.long  do
+- cache [:side_panels, @product.id, current_site_version.code], expires_in:  configatron.cache.expire.long  do
   = render partial: 'side_panel_sizes'
 
   = render partial: 'side_panel_colours'
