@@ -40,6 +40,7 @@ class Repositories::CartProduct
       result.color  = Repositories::ProductColors.read(color_id)
       result.customizations = product_customizations.to_a
       result.making_options = product_making_options
+      result.height         = height
 
       result
     end
@@ -81,6 +82,11 @@ class Repositories::CartProduct
     def product_customizations
       return [] if !customized_product?
       line_item.personalization.customization_values.to_a
+    end
+
+    def height
+      return '' if line_item.personalization.default_height?
+      line_item.personalization.height.presence.to_s
     end
 
     def product_making_options

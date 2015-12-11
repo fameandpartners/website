@@ -51,6 +51,13 @@ ruby:
               ' Color:
               span.color
                 ' #{ product.color.presentation }
+
+            - if product.height.present?
+              .pull-left.small
+                ' Height:
+                span
+                  ' #{ product.height.to_s.titleize }
+
             .pull-right.text-muted = product.price.display_price
             - if product.discount.present?
               .pull-right.text-muted.sale-percentage = "#{product.discount}% off"
