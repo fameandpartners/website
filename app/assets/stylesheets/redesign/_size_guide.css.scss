@@ -63,4 +63,23 @@
       font-size: 2.5rem;
     }
   }
+  #old-modal{
+    margin-left: 3px;
+    cursor: pointer;
+  }
+}
+
+.vex-theme-flat-attack.old-size-modal{
+  p{
+    font-weight: 300;
+  }
+  .vex-overlay{
+    height: 200%;
+  }
+  .vex-content{
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    width: 80% !important;
+    border: 2px solid black !important;
+  }
 }
