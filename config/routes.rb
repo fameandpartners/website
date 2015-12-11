@@ -142,6 +142,8 @@ FameAndPartners::Application.routes.draw do
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
     get '/bridal-dresses'     => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridal_collection
 
+    get '/lets-party'     => 'products/collections#show', :permalink => 'dance-hall', :as => :lets_party_collection
+
     get '/all-size' => redirect('/lookbook/all-size')
     get '/lookbook/all-size' => 'products/collections#show', :permalink => 'all-size', :as => :all_size_collection
 

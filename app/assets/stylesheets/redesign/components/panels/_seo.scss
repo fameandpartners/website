@@ -42,6 +42,14 @@
       border-bottom: solid $c-neutral-black 1px;
     }
 
+    &.plain > span {
+      border-bottom: none;
+    }
+
+    &.lrg {
+      font-size: 4rem;
+    }
+
   }
 
   .sub-title {
