@@ -1,6 +1,8 @@
 module Revolution
 
   class ProductService
+    #TODO - bring ids and colours into same data structure.
+    
     attr_reader :product_ids, :site_version
 
     def initialize(product_ids, site_version)
@@ -12,7 +14,7 @@ module Revolution
 
       revolution_ids = get_revolution_ids(params, page_limit)
 
-      collect_products(revolution_ids)
+      collect_products(revolution_ids, params)
 
     end
 
@@ -40,12 +42,12 @@ module Revolution
       revolution_ids
     end
 
-    def collect_products(revolution_ids)
+    def collect_products(revolution_ids, params)
       return OpenStruct.new() if revolution_ids[0].nil?
 
       revolution_ids.each_with_index.collect do |id, i|
         p           = spree_products[id]
-        colour_name = colours[i]
+        colour_name = colours[params[:offset].to_i + i]
 
         images = collection_images(p, colour_name)
 
@@ -65,6 +67,7 @@ module Revolution
 
     def collection_images(product, colour_name)
       images = product.images.find_all { |i| i.attachment_file_name.downcase.include?(colour_name.gsub('-', '_')) && i.attachment_file_name.downcase.include?('crop') }
+
       images.sort_by { |i| i.position }.collect { |i| i.attachment.url(:large) }
     end
 

@@ -5,7 +5,7 @@
 - begin
   - if (pids = variables.fetch('pids') {nil} )
     - service = Revolution::ProductService.new(pids, SiteVersion.default)
-    - products = service.collect_products(service.ids)
+    - products = service.collect_products(service.ids, { offset: 0 })
     .ibox
       .ibox-title
         a.collapse-link

@@ -2,15 +2,16 @@
   <%= javascript_tag do %>
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', '<%= tracker.analytics_id %>']);
+
+    <%# Cross domain config %>
+    _gaq.push(['_setDomainName', 'none']);
+    _gaq.push(['_setAllowLinker', true]);
+
     _gaq.push(['_trackPageview']);
 
     <% if flash[:signed_up_just_now] %>
         var dataLayer = window.dataLayer || [];
         dataLayer.push({event: "registrationCompleted"});
-    <% end %>
-
-    <% if Features.active?(:test_analytics) %>
-      _gaq.push(['_setDomainName', 'none']);
     <% end %>
 
     <% if flash[:track_fb_reminder_promo] %>
@@ -43,8 +44,7 @@
           # _addItem(transactionId, sku, name, category, price, quantity)
           range_taxon   = range_taxon_for(line_item.variant.product)
           category_name = range_taxon.present? ? range_taxon.name : ''
-          sku = line_item.variant.sku
-          sku = line_item.variant.product.sku if sku.blank?
+          sku           = CustomItemSku.new(line_item).call
         %>
         _gaq.push(['_addItem',
           "<%= j @spree_order.number %>",

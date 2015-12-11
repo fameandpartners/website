@@ -126,7 +126,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/lookbook/dance-hall-days' => 'products/collections#show', :permalink => 'dance-hall', :as => :dance_hall_days_collection
     get '/sarah-ellen' => 'products/collections#show', :permalink => 'dance-hall', :as => :sarah_ellen_landing_page
-    get '/best-sellers' => redirect('/dresses/best-sellers')
+    get '/dresses/best-sellers' => 'products/collections#show', :as => :best_sellers
     get '/lookbook/formal-night' => 'products/collections#show', :permalink => 'formal-night', :as => :formal_night_landing_page
     get '/lookbook/race-day' => 'products/collections#show', :permalink => 'race-day', :as => :formal_night_landing_page
 
@@ -140,6 +140,7 @@ FameAndPartners::Application.routes.draw do
     get '/rss/collections' => 'rss#collections', format: :rss, as: :collections_rss
 
     get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
+    get '/bridal-dresses'     => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridal_collection
 
     get '/all-size' => redirect('/lookbook/all-size')
     get '/lookbook/all-size' => 'products/collections#show', :permalink => 'all-size', :as => :all_size_collection
@@ -373,12 +374,6 @@ FameAndPartners::Application.routes.draw do
   # Robots and Feeds
   ##################
   get '/robots', to: 'robots#show', constraints: { format: /txt/ }
-
-  # TODO: 2015/11/09 TTL 1 month
-  # TODO: This seems to be dead. No one knows who is using this feed. If no one complains in a month, this is going to be deleted with its controller
-  # get 'products.xml' => 'feeds#products', :defaults => { :format => 'xml' }
-  # get 'feed/products(.:format)' => 'feeds#products', :defaults => { :format => 'xml' }
-  # get 'simple_products.xml' => 'spree/products#index', :defaults => { :format => 'xml' }
 
   ######
   # Prom

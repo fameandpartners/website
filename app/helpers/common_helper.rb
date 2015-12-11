@@ -10,40 +10,25 @@ module CommonHelper
   end
 
   def get_hreflang(lang)
-    href = get_base_href
-
-    if lang == :au && !href.include?('/au')
-      return "http://#{get_host}/au#{request.fullpath}"
-    end
-
-    if lang == :us && href.include?('/au')
-      return href.gsub('/au','')
-    end
-
-    href
+    site_version = SiteVersion.by_permalink_or_default(lang)
+    detector.site_version_url(request.url, site_version)
   end
 
   def get_canonical_href
-    href = get_base_href
+    canonical_url = URI.parse(request.url)
 
     if @product.present?
-      product_path = collection_product_path(@product, :color => @product.default_color)
-      href = "http://#{get_host}#{product_path}"
+      canonical_url.path = collection_product_path(@product)
     end
 
     if @canonical
-      href = "http://#{get_host}#{@canonical}"
+      canonical_url.path  = ''
+      canonical_url.query = nil
+      canonical_url = URI.join(canonical_url.to_s, @canonical)
     end
 
-    href.gsub(/\?.*/,'')
-  end
-
-  def get_host
-    configatron.host
-  end
-
-  def get_base_href
-    LocalizeUrlService.localize_url(request.url, current_site_version)
+    canonical_url.query = nil
+    canonical_url.to_s
   end
 
   # social links helper
@@ -82,5 +67,9 @@ module CommonHelper
       share_url: share_url,
       product_image_url: product_image_url
     }
+  end
+
+  private def detector
+    UrlHelpers::SiteVersion::Detector.detector
   end
 end

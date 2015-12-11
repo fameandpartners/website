@@ -20,7 +20,7 @@ var ProductsCarouselElement = React.createClass({
       <div className='item-wrap'>
         <a href={urlWithSitePrefix(this.props.product.collection_path)} data-id={this.props.product.id}>
           <div className='media-wrap'>
-            <img alt={this.props.product.name} data-hover={this.props.product.images[0]} src={this.props.product.images[1]}></img>
+            <img alt={this.props.product.name} data-hover={this.props.product.images[1]} src={this.props.product.images[0]}></img>
           </div>
           <div className='details-wrap'>
             <span> {this.props.product.name} </span>

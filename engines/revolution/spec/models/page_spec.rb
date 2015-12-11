@@ -7,6 +7,7 @@ describe Revolution::Page do
   subject(:page) { Revolution::Page.create!(:path => path) }
 
   it { is_expected.to validate_presence_of :path }
+  it { is_expected.to validate_uniqueness_of :path }
 
   it { is_expected.to delegate_method(:title).to(:translation) }
   it { is_expected.to delegate_method(:meta_description).to(:translation) }
@@ -219,6 +220,36 @@ describe Revolution::Page do
     end
   end
 
+  describe '#effective_page_limit' do
+    let(:page_params)    { {} }
+    let(:page_variables) { {} }
+    before do
+      page.variables = page_variables
+      page.params    = page_params
+    end
+
+    context 'params supersede variables' do
+      let(:page_params)    { {limit: 77} }
+      let(:page_variables) { {limit: 99} }
+
+      it  { expect(page.effective_page_limit).to eq 77 }
+    end
+
+    context 'variables supersede fallback' do
+      let(:page_variables) { {limit: 99} }
+
+      it  { expect(page.effective_page_limit).to eq 99 }
+    end
+
+    context 'falls back to default_page_limit' do
+      it { expect(page.effective_page_limit).to eq page.default_page_limit }
+    end
+  end
+
+  describe '#default_page_limit' do
+    it { expect(page.default_page_limit).to eq 21 }
+  end
+
   describe '.limit' do
 
     context 'given no parameter limit and no variable limit' do
@@ -259,8 +290,8 @@ describe Revolution::Page do
         expect(page.limit(product_ids)).to eq 20
       end
       it 'returns 20 when given 22 product_ids and an offset of 21 and a limit of 21' do
-        product_ids = ['451', '1', '2', '3', '4', '5', '6', '7', '8','9','10',
-                       '11', '12', '13',' 14', '15', '16', '17', '18', '19', '20','21']
+
+        product_ids = (1..22).to_a
         page.params = {offset: 21, limit: 21}
         expect(page.limit(product_ids)).to eq 20
       end
@@ -283,6 +314,11 @@ describe Revolution::Page do
       it 'returns 21 when given 2 product_ids and no parameter limit' do
         product_ids = ['457', '2']
         expect(page.limit(product_ids)).to eq 21
+      end
+
+      it 'more products than the limit' do
+        product_ids = (1..30).to_a
+        expect(page.limit(product_ids)).to eq 0
       end
     end
     context 'page is a lookbook' do

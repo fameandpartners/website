@@ -83,7 +83,8 @@ class Products::CollectionsController < Products::BaseController
   end
 
   def punch_products
-    products             = Revolution::ProductService.new(product_ids, current_site_version).products(params, page.no_of_products)
+    return if filters_applied?
+    products             = Revolution::ProductService.new(product_ids, current_site_version).products(params, page.effective_page_limit)
     @collection.products = if page.get("curated") && product_ids.size > 0
                              @collection.total_products = product_ids.size
                              products
@@ -111,21 +112,8 @@ class Products::CollectionsController < Products::BaseController
     params[:pids] || page.get(:pids)
   end
 
-  def collection_resource(collection_options)
-    resource_args = {
-        site_version: current_site_version,
-        collection:   params[:collection],
-        style:        params[:style],
-        event:        params[:event],
-        color:        params[:colour] || params[:color],
-        bodyshape:    params[:bodyshape],
-        discount:     params[:sale] || params[:discount],
-        fast_making:  params[:fast_making],
-        order:        params[:order],
-        limit:        page.limit(product_ids), # page size
-        offset:       page.offset(product_ids, params[:offset]),
-        query_string: params[:q]
-    }.merge(collection_options || {})
+  def collection_resource(collection_options = {})
+    resource_args = filter_options.merge(collection_options)
     Products::CollectionResource.new(resource_args).read
   end
 
@@ -155,5 +143,29 @@ class Products::CollectionsController < Products::BaseController
 
     # Didn't find any collection associated with the permalink
     return nil
+  end
+
+  private def filter_options
+    custom_product_ids = filters_applied? ? [] : product_ids
+    {
+      site_version: current_site_version,
+      collection:   params[:collection],
+      style:        params[:style],
+      event:        params[:event],
+      color:        params[:colour] || params[:color],
+      bodyshape:    params[:bodyshape],
+      discount:     params[:sale] || params[:discount],
+      fast_making:  params[:fast_making],
+      order:        params[:order],
+      limit:        page.limit(custom_product_ids), # page size
+      offset:       page.offset(custom_product_ids, params[:offset]),
+      query_string: params[:q]
+    }
+  end
+
+  def filters_applied?
+    params.slice(
+      :collection, :style, :event, :color, :colour, :bodyshape, :order, :q
+    ).values.any?(&:present?)
   end
 end

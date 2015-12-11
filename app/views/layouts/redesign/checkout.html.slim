@@ -12,7 +12,8 @@ doctype html
     = render 'layouts/redesign/head'
 
   body#top
-    = render 'google_tag_manager/base'
+    - if Features.active?(:google_tag_manager)
+      = render 'google_tag_manager/base'
 
     = yield
 
