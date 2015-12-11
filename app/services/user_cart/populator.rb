@@ -104,12 +104,7 @@ class Populator
     end
 
     def add_personalized_product
-      begin
       personalization = build_personalization
-      rescue StandardError => e
-
-        binding.pry
-      end
       if personalization.valid?
         add_product_to_cart
         personalization.line_item = line_item
@@ -136,9 +131,7 @@ class Populator
         item['color'] = product_color.name
         item.customization_value_ids = product_customizations.map(&:id)
         item.product_id = product.id
-        binding.pry
-        item.height   = product_attributes[:height]
-
+        item.height     = product_attributes[:height]
       end
     end
 
