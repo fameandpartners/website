@@ -6,7 +6,6 @@ Features.deactivate(:content_revolution)
 Features.deactivate(:enhanced_moodboards)
 Features.deactivate(:fameweddings)
 Features.deactivate(:maintenance)
-Features.deactivate(:redirect_to_com_au_domain)
 Features.deactivate(:send_promotion_email_reminder)
 Features.deactivate(:shipping_message)
 Features.deactivate(:test_analytics)
@@ -21,6 +20,7 @@ Features.activate(:moodboard)
 Features.activate(:style_quiz)
 
 if Rails.env.production?
+  Features.activate(:redirect_to_com_au_domain)
 end
 
 if Rails.env.preproduction?
