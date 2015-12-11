@@ -53,7 +53,7 @@ ruby:
       ' SHOP BY EVENT
       ul
         = render partial: 'layouts/redesign/event'
-  - if Features.active?(:fameweddings)    +  span.wedding FAMEweddings
+  - if Features.active?(:fameweddings)
     span.wedding FAMEweddings
   span.lookbook LOOKBOOKS
   /! span.magazine MAGAZINE
@@ -76,7 +76,7 @@ ruby:
 .row.rect#rect-dresses.nav-menu-wrap.menu-dresses
   ul
     li.title shop by
-    li         li
+    li
       = link_to 'Best Sellers', best_sellers_path
     li
       = link_to 'View all dresses', dresses_path
