@@ -18,5 +18,5 @@ ActiveRecord::Base.connection.execute(sql)
 
 
 
-sql = "UPDATE spree_products_taxons SET taxon_id = 271 WHERE taxon_id = 269;"
+sql = "UPDATE product_making_options SET price = 0 WHERE option_type ='fast_making';"
 ActiveRecord::Base.connection.execute(sql)
