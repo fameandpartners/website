@@ -11,8 +11,8 @@ Feature: Full checkout
     Then I select "<Site Version>" site version
     And I select "<Dress Size>" size
     And I click on "Add to Cart" button
-    And I should see the cart sidebar with the checkout button
-    And I click on "CHECKOUT" button
+    # And I should see the cart sidebar with the checkout button
+    # And I click on "CHECKOUT" button
     Then I fill in form fields with:
       | Email                   | my@email.com |
       | First Name              | Roger        |
