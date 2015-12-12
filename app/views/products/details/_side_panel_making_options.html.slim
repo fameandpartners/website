@@ -14,7 +14,10 @@
         p
           ' Get your dress made within 48h
         a.btn.btn-block.btn-secondary.making-option href="#" data-id=option.id data-name=option.name data-price=option.display_price
-          = "+#{ option.display_price }"
+          - if option.display_price.to_s == "$0.00"
+            | +FREE!
+          - else
+            - "+#{ option.display_price }"
     .production-time-box
       h2 Standard
       p Get your dress made in 3-9 business days
