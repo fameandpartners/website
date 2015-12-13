@@ -3,6 +3,7 @@
 
 Features.deactivate(:checkout_fb_login)
 Features.deactivate(:content_revolution)
+Features.deactivate(:delivery_date_messaging)
 Features.deactivate(:enhanced_moodboards)
 Features.deactivate(:fameweddings)
 Features.deactivate(:maintenance)
@@ -10,7 +11,6 @@ Features.deactivate(:send_promotion_email_reminder)
 Features.deactivate(:shipping_message)
 Features.deactivate(:test_analytics)
 
-Features.activate(:delivery_date_messaging)
 Features.activate(:express_making)
 Features.activate(:gift)
 Features.activate(:google_tag_manager)
