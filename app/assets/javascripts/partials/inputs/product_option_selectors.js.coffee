@@ -119,7 +119,7 @@ window.inputs.ProductColorIdSelector = class ProductColorIdSelector extends Base
     if data.price
       @$action.html("#{data.name} +#{data.price}")
       _.delay( () ->
-        window.helpers.showAlert(message: "You have selected a custom color, so we don't have a pic of this dress yet")
+        window.helpers.showAlert(message: "We don’t have a picture of this style in the colour you've chosen. But trust us, it’s beautiful.")
       , 60)
     else
       @$action.html(data.name)
