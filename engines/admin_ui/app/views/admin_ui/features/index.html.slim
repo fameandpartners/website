@@ -12,6 +12,6 @@
         th
       - feature_list.each do |feature|
         tr
-          td : tt = feature
-          td : tt = active?(feature)
+          td = feature
+          td = active?(feature)
           td : .text-center = link_to button_text(feature), button_path(feature),  class: 'btn btn-info btn-sm'
