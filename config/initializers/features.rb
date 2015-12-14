@@ -24,11 +24,13 @@ if Rails.env.production?
 end
 
 if Rails.env.preproduction?
+  Features.activate(:fameweddings)
 end
 
 if Rails.env.development?
   Features.activate(:content_revolution)
   Features.activate(:enhanced_moodboards)
+  Features.activate(:fameweddings)
 
   Features.deactivate(:google_tag_manager)
   Features.deactivate(:test_analytics)
