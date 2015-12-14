@@ -10,11 +10,11 @@ Features.deactivate(:maintenance)
 Features.deactivate(:send_promotion_email_reminder)
 Features.deactivate(:shipping_message)
 Features.deactivate(:test_analytics)
-Features.deactivate(:height_customisation)
 
 Features.activate(:express_making)
 Features.activate(:gift)
 Features.activate(:google_tag_manager)
+Features.activate(:height_customisation)
 Features.activate(:marketing_modals)
 Features.activate(:masterpass)
 Features.activate(:moodboard)
@@ -22,6 +22,7 @@ Features.activate(:style_quiz)
 
 if Rails.env.production?
   Features.activate(:redirect_to_com_au_domain)
+  Features.deactivate(:height_customisation)
 end
 
 if Rails.env.preproduction?
@@ -34,7 +35,6 @@ if Rails.env.development?
   Features.activate(:content_revolution)
   Features.activate(:enhanced_moodboards)
   Features.activate(:fameweddings)
-  Features.activate(:height_customisation)
 
   Features.deactivate(:google_tag_manager)
   Features.deactivate(:test_analytics)
@@ -42,7 +42,6 @@ end
 
 if Rails.env.test?
   Features.activate(:enhanced_moodboards)
-  Features.activate(:height_customisation)
 
   Features.deactivate(:google_tag_manager)
   Features.deactivate(:marketing_modals)
