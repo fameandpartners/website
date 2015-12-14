@@ -6,7 +6,7 @@ window.helpers.showAlert = (opts) ->
     title = opts.title || "awesome babe"
     icon = 'fa-heart-o'
   else
-    title = opts.title || "sorry babe"
+    title = opts.title || "sorry"
     icon = 'fa-frown-o'
 
   message = "<h3>#{title}</h3><p><span class=\"fa fa-icon #{icon}\"></span> #{opts.message}</p>"
