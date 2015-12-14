@@ -288,7 +288,7 @@ FameAndPartners::Application.routes.draw do
       get 'success'
     end
 
-    get '/style-consultation' => 'style_consultations#new'
+    get '/style-consultation' => 'style_consultations#new', as: 'style_consultation'
     resource 'style-consultation', as: 'style_consultation', only: [:new, :create] do
       get 'success'
     end

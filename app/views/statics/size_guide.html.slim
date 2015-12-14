@@ -2,9 +2,7 @@
   .container
     .page-title--details
       h1.no-padding-bottom
-        | FameBabes, be advised:
-        br
-        | We have changed our sizing!
+        | Size Guide
 
 .page-content.size-guide-lp
   .container
@@ -53,14 +51,15 @@
         .text-center Our stylists are on hand to help via chat and email.
       .col-md-6.col-sm-12.col-xs-12.geo.geo-left
         .area.text-center in Sydney
-        .text.text-center If you’re in Sydney, Australia, book in to visit one of our personal stylists
-        .cta.text-center Book in
+        .text.text-center
+          | If you’re in Sydney, Australia, book in to visit one of our personal stylists
+          = link_to 'Book in', style_consultation_path , class: 'cta text-center book-in'
       .col-md-6.col-sm-12.col-xs-12.geo
         .area.text-center Beyond Sydney
         .text.text-center Work with one of our personal stylists via email or chat.
         .cta.text-center Chat now
 
-    .row.ending
+    .row.ending.hidden
       .col-md-6.col-sm-12.col-xs-12.col
         .head Our #FAME models
         .text We include the measurements of each of our models alongside each product to help you figure out the fit. Be sure to refer to these when it comes to customising your style.
