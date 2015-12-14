@@ -1,5 +1,4 @@
 class FeatureFlag
-  include ActiveModel::MassAssignmentSecurity
   include ActiveModel::Conversion
   include ActiveModel::Validations
 

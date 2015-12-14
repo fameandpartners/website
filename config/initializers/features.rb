@@ -4,6 +4,7 @@
 # NB: This has now become an area only for development and test environments as there is
 #     now a UI to control the switching on and off of flags.  Setting it here will
 #     override the UI setting.
+#     To create a new Feature Flag put it in migrations!  Not here as this resets the value every time!
 
 if Rails.env.production?
   Features.activate(:redirect_to_com_au_domain)

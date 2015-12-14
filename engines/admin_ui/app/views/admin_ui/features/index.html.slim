@@ -3,7 +3,6 @@
 .wrapper.wrapper-content
   .ibox-content
     h2 Features
-    = link_to "New Feature Flag", new_ff_features_path,  class: 'btn btn-info btn-sm'
     table
       thead
         tr
@@ -13,5 +12,5 @@
       - feature_list.each do |feature|
         tr
           td = feature
-          td = active?(feature)
+          td = active_text(feature)
           td : .text-center = link_to button_text(feature), button_path(feature),  class: 'btn btn-info btn-sm'

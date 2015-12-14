@@ -45,8 +45,6 @@ AdminUi::Engine.routes.draw do
     collection do
       get :enable
       get :disable
-      get :new_ff
-      post :create_ff
     end
   end
 

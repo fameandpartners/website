@@ -1,15 +1,17 @@
 require 'spec_helper'
-require_relative '../../app/models/feature_flag'
+require_relative '../support/helpers'
 
 RSpec.describe FeatureFlag, type: :model do
 
   before(:each) do
     #Store the current state of the Feature Flags.  This will keep the users
     #dev environment intact as there is no "dev" Redis.
-    @feat_store = []
-    Features.features.each do |feature|
-      @feat_store << { feature: feature, active: Features.active?(feature)}
-    end
+    @feat_store = save_feature_flags!
+  end
+
+  after(:each) do
+    #Restore the state of the Feature Flags before the test was run
+    restore_feature_flags!(@feat_store)
   end
 
   context 'validations' do
@@ -56,14 +58,6 @@ RSpec.describe FeatureFlag, type: :model do
     it 'returns Disabled' do
       feature_flag = FeatureFlag.new(flag: 'test_flag', enabled: 'false')
       expect(feature_flag.state_string).to eq 'Disabled'
-    end
-  end
-
-  after(:each) do
-    #Restore the state of the Feature Flags before the test was run
-    Features.clear!
-    @feat_store.each do |feature|
-      feature[:active] == 'true' ? Features.activate(feature[:feature]) : Features.deactivate(feature[:feature])
     end
   end
 
