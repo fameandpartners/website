@@ -58,7 +58,7 @@
       .col-md-6.col-sm-12.col-xs-12.geo
         .area.text-center Beyond Sydney
         .text.text-center Work with one of our personal stylists via email or chat.
-        .cta.text-center Chat now
+        .cta.text-center Chat now onclick="$zopim.livechat.window.toggle();"
 
     .row.ending.hidden
       .col-md-6.col-sm-12.col-xs-12.col
@@ -79,6 +79,7 @@
 
 coffee:
   $(document).ready ->
+
     $("#old-modal").click ->
       modal_popup = new window.page.EmailCaptureModal({
         message:    ''
