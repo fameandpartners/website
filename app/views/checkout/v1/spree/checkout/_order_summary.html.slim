@@ -51,12 +51,11 @@ ruby:
               ' Color:
               span.color
                 ' #{ product.color.presentation }
+              br
+              ' Height:
+              span
+                ' #{ product.height.to_s.titleize }
 
-            - if product.height.present?
-              .pull-left.small
-                ' Height:
-                span
-                  ' #{ product.height.to_s.titleize }
 
             .pull-right.text-muted = product.price.display_price
             - if product.discount.present?
