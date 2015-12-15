@@ -275,6 +275,7 @@ window.inputs.ProductHeightSelector = class ProductHeightSelector extends BasePr
     if @value != newValue
       @value = newValue
       @trigger('change')
+      @close()
 
   customValue: =>
     @getValue() != 'standard'
