@@ -148,12 +148,7 @@ module Products
         raw[:taxons].select(&:present?).map(&:humanize).map(&:titleize).each do |taxon_name|
           taxon = Spree::Taxon.where("LOWER(REPLACE(name, '-', ' ')) = ?", taxon_name.downcase).first
 
-          if taxon.blank?
-            taxon = range.children.create do |object|
-              object.name = taxon_name
-              object.taxonomy = range.taxonomy
-            end
-          end
+          abort("Taxon '#{taxon_name}' does not exist on dress '#{raw[:name]}' (#{raw[:sku]})!  Upload aborted!") if taxon.blank?
 
           processed[:taxon_ids] << taxon.id
         end
