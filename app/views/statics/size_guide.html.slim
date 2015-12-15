@@ -13,7 +13,7 @@
     .row.measurement-row
       .col-md-6.col-sm-12.col-xs-12.text-col
         h2.head How to take your measurements
-        p We know it sounds weird but we recommend taking your measurements in your underwear and it’s much more accurate if taken by someone else – so get ready to get intimate!
+        p We recommend taking your measurements in your underwear. It’s much more accurate if taken by someone else – so get ready to get intimate!
         p
           b Bust
           | : Measure around the fullest part of your bust.
@@ -51,15 +51,15 @@
         p.head.text-center Need more help ?
         .text-center Our stylists are on hand to help via chat and email.
       .col-md-6.col-sm-12.col-xs-12.geo.geo-left
-        .area.text-center in Sydney
+        .area.text-center In Sydney
         .text.text-center
           | If you’re in Sydney, Australia, book in to visit one of our personal stylists
           = link_to 'Book in', style_consultation_path , class: 'cta text-center book-in'
       .col-md-6.col-sm-12.col-xs-12.geo
         .area.text-center Beyond Sydney
-        .text.text-center Work with one of our personal stylists via email or chat.
-        .cta.text-center onclick="$zopim.livechat.window.toggle();"
-          | Chat now
+        .text.text-center
+          | Work with one of our personal stylists via email or chat.
+          = link_to 'Get in contact', new_contact_path , class: 'cta text-center contact'
 
     .row.ending.hidden
       .col-md-6.col-sm-12.col-xs-12.col
@@ -72,8 +72,7 @@
 
 #old-size-modal.hidden
   h2 Our previous size chart (pre-October 2015)
-  p To further ensure the fit of our garments we have updated all of our dresses to the current size chart.
-  br
+  p.top To further ensure the fit of our garments we have updated all of our dresses to the current size chart.
   p If you’ve previously ordered with us using this sizing chart, please feel free to use this as a reference.
   p Our new sizes run on the smaller side, so please consider ordering one dress size up.
   = render partial: '/products/details/size_chart_table', locals: { data: SizeChart::SIZE_CHART_2014 }
