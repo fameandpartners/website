@@ -26,6 +26,13 @@ AdminUi::Engine.routes.draw do
       require 'sidekiq/web'
       mount Sidekiq::Web => 'd0ec826a2968a7079f0bdd8f1116811f'
     end
+
+    resources :features, only: [:index] do
+      collection do
+        get :enable
+        get :disable
+      end
+    end
   end
 
   namespace :reports do
@@ -40,13 +47,6 @@ AdminUi::Engine.routes.draw do
   end
 
   resources :variants
-
-  resources :features, only: [:index] do
-    collection do
-      get :enable
-      get :disable
-    end
-  end
 
   namespace :content do
     resources :pages
