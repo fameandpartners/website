@@ -1,6 +1,6 @@
 require 'spec_helper'
 require_relative '../support/authorization_support'
-require_relative '../support/helpers'
+require_relative '../support/feature_flag_helper'
 
 module AdminUi
   module Backend

@@ -1,4 +1,4 @@
-module Helpers
+module FeatureFlagHelper
   def save_feature_flags!
     feat_store = []
     Features.features.each do |feature|
@@ -15,6 +15,7 @@ module Helpers
   end
 end
 
+
 RSpec.configure do |c|
-  c.include Helpers
+  c.include FeatureFlagHelper, type: :controller
 end
