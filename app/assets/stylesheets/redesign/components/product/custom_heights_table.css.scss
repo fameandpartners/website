@@ -1,0 +1,19 @@
+table.heights_table {
+  width: 100%;
+  caption {
+    span {
+      display:          inline-block;
+      color:            black;
+      background-color: white;
+      border:           1px solid white;
+      padding:          5px 10px;
+    }
+    span.active {
+      color:            white;
+      background-color: black;
+    }
+  }
+  th {
+    padding: 2px;
+  }
+}
