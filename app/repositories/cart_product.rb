@@ -85,8 +85,8 @@ class Repositories::CartProduct
     end
 
     def height
-      return '' if line_item.personalization.default_height?
-      line_item.personalization.height.presence.to_s
+      return LineItemPersonalization::DEFAULT_HEIGHT.titleize unless line_item.personalization
+      line_item.personalization.height.presence.to_s.titleize
     end
 
     def product_making_options

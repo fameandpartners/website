@@ -25,6 +25,8 @@
               Size: <span><%= product.size.presentation %>,</span>
             <% end %>
             Color: <span class="color"><%= product.color.presentation %></span>
+            <br>
+            Height: <span><%= product.height %></span>
           </div>
           <div class="pull-right text-muted"><%= product.price.display_price %></div>
           <% if (product.discount != null) : %>
