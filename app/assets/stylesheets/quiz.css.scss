@@ -9,6 +9,8 @@
 
 @import 'old_site/libs/jquery.jscrollpane';
 
+@import './media_queries';
+
 @import 'redesign/vars';
 @import 'libs/vex.css';
 @import 'libs/vex-theme-flat-attack.css';
@@ -16,6 +18,7 @@
 // @import 'redesign/modal';
 @import 'redesign/mixins';
 @import 'redesign/icons';
+
 
 @import 'old_site/partials/quiz';
 
