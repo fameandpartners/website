@@ -112,6 +112,8 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       $modal = $(modal)
       @countdownTimer = new window.page.CountdownTimer($modal, @promoStartedAt, @opts.timer)
       @countdownTimer.start()
+      $.cookie('promoHeading', @opts.heading)
+      $.cookie('promoEndTime', @opts.timer)
 
     if @opts.instagram_campaign?
       $('.vex-dialog-button-secondary').on 'click', =>
@@ -262,6 +264,13 @@ window.page.CountdownTimer = class CountdownTimer
     else
       "#{time}"
 
+  updateSaleBannerClock: ->
+    $("#sale-banner .hh").hide()
+    $("#sale-banner .mm").hide()
+    $("#sale-banner .ss").hide()
+    $("#sale-banner .colon").hide()
+    $("#sale-banner .heading").text("Second chance! "+ $("#sale-banner .heading").text())
+
   updateTimer: (startTime, durationInHours) ->
     currentTime = +new Date()
     diffInSeconds = Math.floor((currentTime - startTime) / 1000)
@@ -277,6 +286,7 @@ window.page.CountdownTimer = class CountdownTimer
       @$timerSeconds.html(@formatTime(seconds))
       true
     else
+     @updateSaleBannerClock()
      false
 
   start: () ->
