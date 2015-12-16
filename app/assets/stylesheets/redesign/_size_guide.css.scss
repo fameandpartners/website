@@ -20,6 +20,9 @@
       td{
         text-align: center;
       }
+      td:nth-child(1), td:nth-child(2), td:nth-child(3){
+        width: 95px;
+      }
       td:nth-child(1), td:nth-child(2), td:nth-child(3), td:nth-child(6), td:nth-child(7){
         background-color: #f2f2f2;
       }
