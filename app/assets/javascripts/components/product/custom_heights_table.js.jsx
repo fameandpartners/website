@@ -69,26 +69,36 @@ var CustomHeightsTable = React.createClass({
     var displayImperial = this.state.displayImperial;
 
     return (
-       <table className="heights_table">
-         <caption>
-           Show <span className={displayMetric ? 'active' : ''} onClick={this.setMetric}>Metric (cm) </span>
-           <span className={displayImperial ? 'active' : ''} onClick={this.setImperial}>Inches </span>
-           <span className={displayImperial && displayMetric ? 'active' : ''} onClick={this.setBoth}>Both</span>
-         </caption>
-     <thead>
-      <tr>
-         <th></th>
-         <th>Petite</th>
-         <th>Standard</th>
-         <th>Tall</th>
-      </tr>
-    </thead>
-      <tbody>
-         {this.tableData().skirts.map(function(skirt){
-             return(<SkirtHeightDataRow key={skirt.type} skirt={skirt} displayMetric={displayMetric} displayImperial={displayImperial} />);
-             })}
-      </tbody>
-   </table>)
+      <div className='col-md-12'>
+        <ul className='list-unstyled list-inline'>
+          <li>show</li>
+          <li>
+            <a href='javascript:;' className={displayMetric ? 'active' : ''} onClick={this.setMetric}>Metric<sub> (cm)</sub></a>
+          </li>
+          <li>
+            <a href='javascript:;' className={displayImperial ? 'active' : ''} onClick={this.setImperial}>Inches</a>
+          </li>
+          <li>
+            <a href='javascript:;' className={displayImperial && displayMetric ? 'active' : ''} onClick={this.setBoth}>Both</a>
+          </li>
+        </ul>
+        <table className="table table-striped table-bordered table-condensed">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Petite</th>
+              <th>Standard</th>
+              <th>Tall</th>
+            </tr>
+          </thead>
+          <tbody>
+             {this.tableData().skirts.map(function(skirt){
+                 return(<SkirtHeightDataRow key={skirt.type} skirt={skirt} displayMetric={displayMetric} displayImperial={displayImperial} />);
+                 })}
+          </tbody>
+        </table>
+    </div>
+   )
   }
 });
 
@@ -106,9 +116,9 @@ var SkirtHeightDataRow = React.createClass({
 
 var SkirtHeightValueCell = React.createClass({
   render: function() {
-    var metric    = this.props.displayMetric ? (<span className="cm">{this.props.cm}</span>) : "";
-    var separator = (this.props.displayMetric && this.props.displayImperial) ? " / " : "";
-    var imperial  = this.props.displayImperial ? (<span className="inches">{this.props.inches}</span>) : "";
+    var metric    = this.props.displayMetric ? (<span className="cm">{this.props.cm}<sub> (cm)</sub></span>) : "";
+    var separator = (this.props.displayMetric && this.props.displayImperial) ? " | " : "";
+    var imperial  = this.props.displayImperial ? (<span className="inches">{this.props.inches}<sub> (in)</sub></span>) : "";
 
     return (<td>{metric}{separator}{imperial}</td>);
   }
