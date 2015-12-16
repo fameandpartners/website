@@ -112,8 +112,8 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       $modal = $(modal)
       @countdownTimer = new window.page.CountdownTimer($modal, @promoStartedAt, @opts.timer)
       @countdownTimer.start()
-      $.cookie('promoHeading', @opts.heading)
-      $.cookie('promoEndTime', @opts.timer)
+      $.cookie('promo_heading', @opts.heading)
+      $.cookie('promo_end_time', @opts.timer)
 
     if @opts.instagram_campaign?
       $('.vex-dialog-button-secondary').on 'click', =>
