@@ -5,9 +5,33 @@
   }
 }
 .size-guide-lp{
-    p{
-        font-weight: 300;
+  .size-guide-row{
+    .subheading-row{
+      font-weight: 600;
+      text-align: center;
     }
+    .dark-grey{
+      background-color: #f2f2f2;
+    }
+    .grey{
+      background-color: #fcfcfc;
+    }
+    tbody tr{
+      td{
+        text-align: center;
+      }
+      td:nth-child(1), td:nth-child(2), td:nth-child(3), td:nth-child(6), td:nth-child(7){
+        background-color: #f2f2f2;
+      }
+      td:nth-child(4), td:nth-child(5), td:nth-child(8), td:nth-child(9){
+        background-color: #fcfcfc;
+      }
+    }
+  }
+
+  p{
+      font-weight: 300;
+  }
 
   .head-row{
     .head{

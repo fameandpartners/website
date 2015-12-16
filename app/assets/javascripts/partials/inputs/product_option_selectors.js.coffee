@@ -60,6 +60,7 @@ window.inputs.ProductSizeIdSelector = class ProductSizeIdSelector extends BasePr
   showFitGuide: =>
     @selector.close()
     (new window.modals.FitGuideModal()).show()
+    $('.size-guide thead tr th:eq(4)').attr('colspan',2)
 
   getValue: () ->
     @$container.find('.active').data('id')
