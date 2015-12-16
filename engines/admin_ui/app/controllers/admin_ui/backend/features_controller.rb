@@ -23,11 +23,11 @@ module AdminUi
       end
 
       helper_method def button_text(feature)
-        active_text(feature) == 'Enabled' ? 'Disable' : 'Enable'
+        Features.active?(feature) ? 'Disable' : 'Enable'
       end
 
       helper_method def button_path(feature)
-        active_text(feature) == 'Enabled' ? disable_backend_features_path(feature: feature) : enable_backend_features_path(feature: feature)
+        Features.active?(feature) ? disable_backend_features_path(feature: feature) : enable_backend_features_path(feature: feature)
       end
 
     end

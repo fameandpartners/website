@@ -9,8 +9,7 @@ module AdminUi
 
       before(:each) do
         stub_admin_authorization!
-        #Store the current state of the Feature Flags.  This will keep the users
-        #dev environment intact as there is no "dev" Redis.
+        #Store the current state of the Feature Flags.  This allows us to clear and restore the flags after testing.
         @feat_store = save_feature_flags!
       end
 
@@ -42,10 +41,10 @@ module AdminUi
 
       context 'helper_methods' do
         before(:each) { Features.activate('test_flag') }
-        it { expect(controller.send(:feature_list)).to include :test_flag }
-        it { expect(controller.send(:active_text, 'test_flag')).to eq 'Enabled' }
-        it { expect(controller.send(:button_text, 'test_flag')).to eq 'Disable' }
-        it { expect(controller.send(:button_path, 'test_flag')).to eq '/fame_admin/backend/features/disable?feature=test_flag' }
+        it { expect(subject.feature_list).to include :test_flag }
+        it { expect(subject.active_text('test_flag')).to eq 'Enabled' }
+        it { expect(subject.button_text('test_flag')).to eq 'Disable' }
+        it { expect(subject.button_path('test_flag')).to eq '/fame_admin/backend/features/disable?feature=test_flag' }
       end
 
     end
