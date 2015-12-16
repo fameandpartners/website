@@ -57,6 +57,12 @@ class ApplicationController < ActionController::Base
   def handle_marketing_campaigns
     cookies[:referrer] = request.referrer if cookies[:referrer].blank?
 
+    if !request.url.include?('faadc') && (request.referer && request.referer.include?('shopstyle.com'))
+      uri = Addressable::URI.parse(request.url)
+      uri.query_values = (uri.query_values || {}).merge(:faadc => 'BOXINGDAY25')
+      redirect_to uri.to_s
+    end
+
     if params[:utm_campaign].present?
       capture_utm_params
     end
