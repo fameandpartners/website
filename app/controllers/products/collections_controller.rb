@@ -158,6 +158,8 @@ class Products::CollectionsController < Products::BaseController
       order:        params[:order],
       limit:        page.limit(custom_product_ids), # page size
       offset:       page.offset(custom_product_ids, params[:offset]),
+      price_min:    params[:priceMin],
+      price_max:    params[:priceMax],
       query_string: params[:q]
     }
   end
