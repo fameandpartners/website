@@ -139,7 +139,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/rss/collections' => 'rss#collections', format: :rss, as: :collections_rss
 
-    get '/bridesmaid-dresses' => 'statics#bridesmaid_lp', :as => :bridesmaid_collection
+    get '/bridesmaid-dresses' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_collection
     get '/bridal-dresses'     => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridal_collection
 
     get '/lets-party'     => 'products/collections#show', :permalink => 'dance-hall', :as => :lets_party_collection

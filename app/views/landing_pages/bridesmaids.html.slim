@@ -1,5 +1,7 @@
-- all_products = get_products_from_edit('Bridesmaid14', nil, nil, 24)
-- cache [:landing, :bridesmaids,  all_products.to_sql], expires_in: configatron.cache.expire.normally do
+= content_for :head do
+  meta name="robots" content="noindex, follow"
+
+= render :partial => '/products/collections/javascript'
 
 .landing-bridesmaid
 
@@ -14,7 +16,7 @@
   .container.products-collections
 
     .row
-      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(0, 4) }
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
 
     .row
       .col-md-6.col-xs-12
@@ -33,10 +35,10 @@
           = image_tag 'edits/bridesmaids/tile-1.jpg', alt: 'Bride and Bridesmaid'
 
     .row
-      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(4, 4) }
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
 
     .row
-      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(8, 2) }
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 9, customWrapper: 'col-md-3 col-xs-6'}
       .col-md-6.col-xs-12
         .panel-seo
           .outer-wrap
@@ -66,7 +68,7 @@
                 h2.title
                   span Need inspiration? Try our free Styling Service.
                 p Our personal stylists will take you and your bridesmaids-to-be through our collections to find the best silhouettes for each girl, and tailor the perfect look for you and your #girlsquad.
-      =render :partial => '/landing_pages/products_four', :locals => { :products => all_products.slice(10, 2) }
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 10, rangeTo: 11, customWrapper: 'col-md-3 col-xs-6'}
 
     .row
       .col-md-6.hidden-sm.hidden-xs
@@ -83,8 +85,7 @@
                 p And follow us on Pinterest to see what inspires our collections.
 
     .row
-      - all_products.drop(12).each_slice(4) do |products|
-        =render :partial => '/landing_pages/products_four', :locals => { :products => products }
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 12, rangeTo: 99, customWrapper: 'col-md-3 col-xs-6'}
 
     .row.more-products
       = link_to 'More Dresses', dresses_path, class: 'btn btn-black'
