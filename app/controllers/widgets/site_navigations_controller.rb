@@ -1,14 +1,11 @@
 module Widgets
   class SiteNavigationsController < ActionController::Base
     include Concerns::SiteVersion
-    include Spree::Core::ControllerHelpers::Order
-    include Spree::Core::ControllerHelpers::Auth
 
-    # widget for main nav of the site
-    # used in iframe
+    layout false
+
     def main_nav
-      # default renderer
-      render :main_nav, layout: false
+      # NOOP
     end
 
     def footer
