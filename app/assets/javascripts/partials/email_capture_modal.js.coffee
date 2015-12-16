@@ -265,10 +265,7 @@ window.page.CountdownTimer = class CountdownTimer
       "#{time}"
 
   updateSaleBannerClock: ->
-    $("#sale-banner .hh").hide()
-    $("#sale-banner .mm").hide()
-    $("#sale-banner .ss").hide()
-    $("#sale-banner .colon").hide()
+    $("#sale-banner .hh, .mm, .ss, .colon").hide()
     $("#sale-banner .heading").text("Second chance! "+ $("#sale-banner .heading").text())
 
   updateTimer: (startTime, durationInHours) ->
