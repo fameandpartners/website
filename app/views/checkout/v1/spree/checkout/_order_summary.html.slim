@@ -102,6 +102,9 @@ ruby:
       - if current_site_version.is_australia?
         .taxes Including GST
 
+  p.text-center
+    = link_to 'Back to Dresses', request.referer, :class => 'btn btn-block btn-black'
+
   p.order-number
     = @order.try(:number)
 

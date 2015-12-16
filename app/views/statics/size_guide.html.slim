@@ -1,32 +1,67 @@
-.page-title.default
+.page-title.default.sizing-banner
   .container
     .page-title--details
       h1.no-padding-bottom
-        | FameBabes, be advised:
-        br
-        | We have changed our sizing!
+        | Size Guide
 
 .page-content.size-guide-lp
   .container
+    .row.head-row
+      .col-md-12
+        p.head.text-center OUR FIT GUARANTEE
+        p.text-center.wrong-size Wrong Size? Exchange for free. It's that simple.
+    .row.measurement-row
+      .col-md-6.col-sm-12.col-xs-12.text-col
+        h2.head How to take your measurements
+        p We recommend measuring yourself in your underwear, and if possible, the bra you will be wearing with the dress.  It's much more accurate if your measurements are taken by someone else - so get ready to get intimate!
+        p
+          b Bust
+          | : Measure around the fullest part of your bust.
+        p
+          b Waist
+          | : Measure around your natural waistline – the smallest part of your waist.
+        p
+          b Hips
+          | : Measure 20cm below your waistline at the fullest part of your hips.
+        p
+          b Dress length
+          | : Stand with your heels together, keeping the tape straight and perpendicular to the floor and measure from your shoulders.
+        p
+          b Skirt length
+          | : Stand with your heels together, keeping the tape straight and perpendicular to the floor. Measure from your natural waistline.
+      .col-md-6.col-sm-12.col-xs-12
+        /p VIDEO
+        = image_tag 'sizing-video.jpg'
     .row
-      p We have recently changed our sizing and selected styles are now following new measurements. It is important for you to note that some styles will still come in our old sizing, whereas other styles will come in our new sizing.
-
-      p The two tables below outline the differences between our old and new size chart:
-
-      h2 Old Size Guide
+      .col-md-12
+        h2 Size guide
+        p Fame & Partners sizes are designed to fit the following measurements.
 
       .container
-        .row
-          = render partial: '/products/details/size_chart_table', locals: { data: SizeChart::SIZE_CHART_2014 }
+        .row.size-guide-row
+          .col-md-12
+            = render partial: '/products/details/size_chart_table', locals: { data: SizeChart::SIZE_CHART_2015 }
 
-      h2 New Size Guide
+    .row.help-row
+      .col-md-12
+        p.head.text-center Need more help ?
+        .text-center Our stylists are on hand to help via chat and email.
+      .col-md-6.col-sm-12.col-xs-12.geo.geo-left
+        .area.text-center In Sydney
+        .text.text-center
+          | If you’re in Sydney, Australia, book in to visit one of our personal stylists
+          = link_to 'Book in', style_consultation_path , class: 'cta text-center book-in'
+      .col-md-6.col-sm-12.col-xs-12.geo
+        .area.text-center Beyond Sydney
+        .text.text-center
+          | Work with one of our personal stylists via email or chat.
+          = link_to 'Get in contact', new_contact_path , class: 'cta text-center contact'
 
-      .container
-        .row
-          = render partial: '/products/details/size_chart_table', locals: { data: SizeChart::SIZE_CHART_2015 }
-
-      p As you will see, our sizing has become a bit smaller, so for our new styles, you might want to order your dress in a bigger size than you used to.
-
-      p To make shopping easy for you, you can see what measurements apply to each dress by checking the Fit Guide feature on the product page.
-
-      p We are working on transitioning all of our styles to the new size chart so that very soon you can rely on the same sizing to apply for all dresses.
+    .row.ending.hidden
+      .col-md-6.col-sm-12.col-xs-12.col
+        .head Our #FAME models
+        .text We include the measurements of each of our models alongside each product to help you figure out the fit. Be sure to refer to these when it comes to customising your style.
+      .col-md-6.col-sm-12.col-xs-12.col
+        .head Customer Reviews
+        .text
+          em Reviews about our sizing success to come (not to be developed yet)

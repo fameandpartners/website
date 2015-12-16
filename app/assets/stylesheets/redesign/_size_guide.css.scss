@@ -1,5 +1,144 @@
+.sizing-banner{
+  background-image: url('banner-sizing.jpg');
+  h1{
+    color: $c-neutral-white;
+  }
+}
 .size-guide-lp{
-    p{
-        font-weight: 300;
+  .size-guide-row{
+    .subheading-row{
+      font-weight: 600;
+      text-align: center;
     }
+    .dark-grey{
+      background-color: #f2f2f2;
+    }
+    .grey{
+      background-color: #fcfcfc;
+    }
+    tbody tr{
+      td{
+        text-align: center;
+      }
+      td:nth-child(1), td:nth-child(2), td:nth-child(3){
+        width: 95px;
+      }
+      td:nth-child(1), td:nth-child(2), td:nth-child(3), td:nth-child(6), td:nth-child(7){
+        background-color: #f2f2f2;
+      }
+      td:nth-child(4), td:nth-child(5), td:nth-child(8), td:nth-child(9){
+        background-color: #fcfcfc;
+      }
+    }
+  }
+
+  p{
+      font-weight: 300;
+  }
+
+  .head-row{
+    .head{
+      font-size: 3.5rem;
+      margin-top: 30px;
+      font-family: $font-heading;
+    }
+    .wrong-size{
+      font-weight: 300;
+    }
+    border-bottom: 1px solid $c-neutral-black;
+    padding-bottom: 30px;
+  }
+  .measurement-row{
+    .head{
+      font-size: 2.5rem;
+      margin-top: 0;
+    }
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid $c-neutral-black;
+    p {
+      font-weight: 300;
+    }
+    img{
+      width: 100%
+    }
+  }
+
+  .help-row{
+    margin-top: 20px;
+    border: 1px solid $c-neutral-black;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    .head{
+      font-size: 3rem;
+      font-family: $font-heading;
+    }
+
+    .book-in, .contact{
+      text-decoration: underline;
+      text-align: center;
+      width: 100%;
+      clear: both;
+      float: left;
+      color: black;
+    }
+    .geo{
+      margin-top: 15px;
+      .area, .cta{
+        font-size: 2.5rem;
+      }
+      .cta{
+        text-decoration: underline;
+      }
+      &.geo-left {
+        @include desktop{
+          border-right: 1px solid $c-neutral-black;
+        }
+      }
+    }
+
+  }
+  .ending{
+    margin-top: 20px;
+    .col{
+      padding-left: 40px;
+    }
+    .head{
+      font-size: 2.5rem;
+    }
+  }
+  #old-modal{
+    margin-left: 3px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.vex-theme-flat-attack.old-size-modal{
+  .vex-content .vex-dialog-form .vex-dialog-input h2{
+    font-family: $font-heading !important;
+  }
+  p{
+    font-weight: 300;
+    font-family: $font-heading;
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+  p.top{
+    margin-bottom: 30px;
+  }
+  .vex-overlay{
+    height: 200%;
+  }
+  .vex-content{
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    width: 80% !important;
+    border: 2px solid black !important;
+  }
+  .size-guide{
+    font-size: 16px;
+  }
 }
