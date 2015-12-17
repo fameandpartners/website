@@ -178,11 +178,13 @@ module ApplicationHelper
     end
   end
 
-  #HACK EOL 2015-12-22 MORE HACKS
-  #HACK EOL 2015-12-22 MORE HACKS
-  #HACK EOL 2015-12-22 MORE HACKS
   def sale_active?
-    current_sale.present? && ( sale_promo? || current_sale.active? )
+    return unless current_sale.present?
+    sale_promo? || current_sale.active?
+  end
+
+  def display_sale_notice?
+    sale_active? && current_sale.sitewide_message.present?
   end
 
   def sale_path

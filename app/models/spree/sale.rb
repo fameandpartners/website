@@ -86,13 +86,11 @@ class Spree::Sale < ActiveRecord::Base
   end
 
   def sitewide_message
-    # "#{discount_string} OFF SITEWIDE. LIMITED TIME ONLY."
-    "Let's go halvsies. 50% off your 2nd dress. LTO."
+    nil
   end
 
-  #HACK EOL 2015-12-22 MORE HACKS
   def sale_promo
-    "HALFOFF"
+    nil
   end
 
   class << self
