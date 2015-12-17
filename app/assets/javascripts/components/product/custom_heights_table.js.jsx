@@ -116,9 +116,9 @@ var SkirtHeightDataRow = React.createClass({
 
 var SkirtHeightValueCell = React.createClass({
   render: function() {
-    var metric    = this.props.displayMetric ? (<span className="cm">{this.props.cm}<sub> (cm)</sub></span>) : "";
+    var metric    = this.props.displayMetric ? (<span className="cm">{this.props.cm}<sub>cm</sub></span>) : "";
     var separator = (this.props.displayMetric && this.props.displayImperial) ? " | " : "";
-    var imperial  = this.props.displayImperial ? (<span className="inches">{this.props.inches}<sub> (in)</sub></span>) : "";
+    var imperial  = this.props.displayImperial ? (<span className="inches">{this.props.inches}″</span>) : "";
 
     return (<td>{metric}{separator}{imperial}</td>);
   }
