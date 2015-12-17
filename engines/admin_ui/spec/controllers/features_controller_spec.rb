@@ -1,22 +1,11 @@
 require 'spec_helper'
-require_relative '../support/authorization_support'
-require_relative '../support/feature_flag_helper'
 
 module AdminUi
   module Backend
     RSpec.describe FeaturesController, type: :controller do
       routes { AdminUi::Engine.routes }
 
-      before(:each) do
-        stub_admin_authorization!
-        #Store the current state of the Feature Flags.  This allows us to clear and restore the flags after testing.
-        @feat_store = save_feature_flags!
-      end
-
-      after(:each) do
-        #Restore the state of the Feature Flags before the test was run
-        restore_feature_flags!(@feat_store)
-      end
+      before(:each) { stub_admin_authorization! }
 
       describe 'GET index' do
         it 'renders the index template' do
