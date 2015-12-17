@@ -156,20 +156,19 @@ ruby:
 
       h4 Dress Inspiration
       .inspiration
-        .row
+        .box.col-sm-4.no-padding
+          - if @product.song
+            = image_tag @product.song.image_url, class: 'img-responsive'
+
+        .box.col-sm-4.no-padding
+          - if @product.celebrity && @product.celebrity.image_url
+            = image_tag @product.celebrity.image_url, class: 'img-responsive'
+
+        - @product.inspiration.each do |item|
           .box.col-sm-4.no-padding
-            - if @product.song
-              = image_tag @product.song.image_url, class: 'img-responsive'
+            = image_tag(item.image_url, :class => 'img-responsive')
 
-          .box.col-sm-4.no-padding
-            - if @product.celebrity && @product.celebrity.image_url
-              = image_tag @product.celebrity.image_url, class: 'img-responsive'
-
-          - @product.inspiration.each do |item|
-            .box.col-sm-4.no-padding
-              = image_tag(item.image_url, :class => 'img-responsive')
-
-          p Images courtesy of Google
+        p Images courtesy of Google
 
     .col-md-6.col-sm-12
       - if @product.fit.present?

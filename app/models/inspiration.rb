@@ -7,8 +7,6 @@
 #  - perfumes
 # Also related are CelebrityInspiration
 
-
-# TODO: TTL 2015/12/30, This model isn't used anywhere, and probably is associated to a legacy feature. This should be removed with its data
 class Inspiration < ActiveRecord::Base
   attr_accessible :spree_product_id, :image, :item_type, :content, :active, :name, :title
 
