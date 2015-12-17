@@ -47,7 +47,7 @@ module Revolution
 
       revolution_ids.each_with_index.collect do |id, i|
         p           = spree_products[id]
-        colour_name = colours[i]
+        colour_name = colours[params[:offset].to_i + i]
 
         images = collection_images(p, colour_name)
 
