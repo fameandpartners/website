@@ -21,7 +21,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       order: current_order,
       code:  session[:auto_apply_promocode]
     )
-    session[:auto_applied_promo_code] = session[:auto_apply_promocode]
+
     if promo_service.apply
       session[:auto_applied_promo_code] = session[:auto_apply_promocode]
 
