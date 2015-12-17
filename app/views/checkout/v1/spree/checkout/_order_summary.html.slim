@@ -75,7 +75,7 @@ ruby:
         p style="font-size:0.8em;"
           = current_sale.sitewide_message
           br
-          = "Add two dresses and use discount code: #{current_sale.try(:sale_promo)}"
+          = "Use discount code: #{current_sale.try(:sale_promo)}"
   p
     | Sub Total
     span.pull-right = cart.display_item_total.to_s
@@ -110,5 +110,5 @@ ruby:
     img src="/assets/checkout/visa-mastercard-paypal-masterpass.jpg"
     img src="/assets/comodo-ssl.png"
 
-  p.text-center
+  .row.text-center
     = link_to 'Back to Dresses', request.referer, :class => 'btn btn-block btn-checkout'
