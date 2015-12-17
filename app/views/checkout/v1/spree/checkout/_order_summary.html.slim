@@ -96,9 +96,6 @@ ruby:
       - if current_site_version.is_australia?
         .taxes Including GST
 
-  p.text-center
-    = link_to 'Back to Dresses', request.referer, :class => 'btn btn-block btn-black'
-
   p.order-number
     = @order.try(:number)
 
@@ -112,3 +109,6 @@ ruby:
   .row.shopping-bag-payment-methods
     img src="/assets/checkout/visa-mastercard-paypal-masterpass.jpg"
     img src="/assets/comodo-ssl.png"
+
+  p.text-center
+    = link_to 'Back to Dresses', request.referer, :class => 'btn btn-block btn-checkout'

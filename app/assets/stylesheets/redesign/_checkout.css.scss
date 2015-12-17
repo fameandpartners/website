@@ -224,6 +224,17 @@ $order-summary-bg: #f7f7f9;
     }
   }
 
+  .btn-checkout {
+    border: 1px solid black;
+    color: black;
+    display: block;
+    font-size: 12px;
+    height: 45px;
+    line-height: 14px;
+    padding-top: 1.5rem;
+    width: 100%;
+  }
+
   // Order / Cart Summary
   .checkout-items {
 
