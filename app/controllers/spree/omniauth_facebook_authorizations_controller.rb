@@ -28,7 +28,8 @@ class Spree::OmniauthFacebookAuthorizationsController < Spree::StoreController
       set_after_sign_in_location(root_path)
     end
 
-    session[:auto_apply] = params[:auto_apply] if params.key?(:auto_apply)
+    session[:auto_apply]           = params[:auto_apply] if params.key?(:auto_apply)
+    session[:auto_apply_promocode] = params[:auto_apply_promocode] if params.key?(:auto_apply_promocode)
 
     # Capture PLEASE REMIND ME ABOUT MY SALE events to push onto customer.io later.
     session[:email_reminder_promo] = params[:email_reminder_promo] if params.key?(:email_reminder_promo)
