@@ -1,8 +1,12 @@
 Spree::OrdersController.class_eval do
+  include Marketing::Gtm::Controller::Order
+  include Marketing::Gtm::Controller::GtmEvent
+
   layout 'redesign/application', only: :show
+
   attr_reader :order
   helper_method :order
-  
+
   # Ensure that we get people to login instead of giving them $20 off by 404ing.
   rescue_from CanCan::AccessDenied do
     redirect_to spree.login_path
@@ -13,10 +17,15 @@ Spree::OrdersController.class_eval do
     
     # this is a security hole
     order = ::Spree::Order.find_by_number!(params[:id])
-    
+
     @spree_order = order
     @order = Orders::OrderPresenter.new(order)
+
+    # TODO 2015/12/30 TTL 1 month. @marketing_order now is a GTM object. @marketing_order should be deleted
     @marketing_order = Marketing::OrderPresenter.new(order)
+    append_gtm_order(spree_order: order)
+    append_gtm_event(event: :completed_order) if flash[:commerce_tracking]
+
     respond_with(@order)
   end
 

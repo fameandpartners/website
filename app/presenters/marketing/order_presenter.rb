@@ -1,5 +1,6 @@
 require 'forwardable'
 
+# TODO 2015/12/30 TTL 1 month. This is already implemented as a Marketing::GTM Object
 module Marketing
   class OrderPresenter
     extend Forwardable

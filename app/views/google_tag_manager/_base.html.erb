@@ -13,6 +13,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-KV54GB');</script>
 
 
+<%# TODO 2015/12/30 TTL 1 month. This is already implemented as a Marketing::GTM Object %>
 <%# GTM Completed Order Tracking %>
 <% if flash[:commerce_tracking] || params[:force_tracking] && @marketing_order.present? %>
   <script>
