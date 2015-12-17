@@ -98,6 +98,7 @@ module Orders
           size:             item.size,
           adjusted_size:    item.country_size,
           color:            item.colour_name,
+          height:           item.height,
           quantity:         item.quantity,
           factory:          item.factory,
           deliver_date:     item.projected_delivery_date,
