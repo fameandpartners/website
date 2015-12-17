@@ -68,6 +68,7 @@ var CustomHeightsTable = React.createClass({
     var displayMetric   = this.state.displayMetric;
     var displayImperial = this.state.displayImperial;
 
+
     return (
       <div className='col-md-12'>
         <ul className='list-unstyled list-inline'>
@@ -97,7 +98,8 @@ var CustomHeightsTable = React.createClass({
                  })}
           </tbody>
         </table>
-    </div>
+        <p>Skirt length is measured straight, from waist to hem and is based on wearing <CentimetresOrInches cm="5" inches="2" displayMetric={displayMetric} displayImperial={displayImperial} /> heels.</p>
+      </div>
    )
   }
 });
@@ -108,18 +110,18 @@ var SkirtHeightDataRow = React.createClass({
       <th>{this.props.skirt.type}</th>
       {this.props.skirt.heights.map(function(size){
           return (
-            <SkirtHeightValueCell key={size.cm} displayMetric={this.props.displayMetric} cm={size.cm} displayImperial={this.props.displayImperial} inches={size.inches}/>)
+            <td key={size.cm}><CentimetresOrInches cm={size.cm} inches={size.inches} displayMetric={this.props.displayMetric} displayImperial={this.props.displayImperial} /></td>)
           }.bind(this))}
     </tr>);
   }
 });
 
-var SkirtHeightValueCell = React.createClass({
+var CentimetresOrInches = React.createClass({
   render: function() {
     var metric    = this.props.displayMetric ? (<span className="cm">{this.props.cm}<sub>cm</sub></span>) : "";
     var separator = (this.props.displayMetric && this.props.displayImperial) ? " | " : "";
     var imperial  = this.props.displayImperial ? (<span className="inches">{this.props.inches}″</span>) : "";
 
-    return (<td>{metric}{separator}{imperial}</td>);
+    return (<span>{metric}{separator}{imperial}</span>);
   }
 });
