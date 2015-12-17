@@ -55,20 +55,8 @@ ruby:
       });
   "
 
-  init_song_player = "
-    (function(){
-      $('a[data-action=soundcloud]').on('click', function(e){
-        e.preventDefault();
-        var playerBox = $(e.currentTarget).closest('.box.song').toggleClass('song-playing');
-        var player = playerBox.find('.sc-player');
-        player.find('.sc-controls a.sc-pause').click();
-      });
-    })();
-  "
-
 = content_for :inline_javascript do
   = raw init_product_details_page
-  = raw init_song_player
 
 = content_for :head
   - @product.cropped_images.each_with_index do |image, index|
@@ -171,15 +159,7 @@ ruby:
         .row
           .box.col-sm-4.no-padding
             - if @product.song
-              = link_to 'SoundCloud tune', @product.song.source, class: 'sc-player'
-              = link_to '#', data: { action: 'soundcloud' } do
-                = image_tag @product.song.image_url, class: 'img-responsive'
-                .fa.fa-volume-up
-              span.mask
-              .player-controls
-                = link_to '#', data: { action: 'soundcloud' } do
-                  span.fa.fa-play
-                  span.fa.fa-pause
+              = image_tag @product.song.image_url, class: 'img-responsive'
 
           .box.col-sm-4.no-padding
             - if @product.celebrity && @product.celebrity.image_url
