@@ -85,8 +85,8 @@ class Spree::Sale < ActiveRecord::Base
     end
   end
 
-  def sitewide_message    
-    ""
+  def sitewide_message
+    nil
   end
 
   def sale_promo
