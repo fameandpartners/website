@@ -225,15 +225,9 @@ $order-summary-bg: #f7f7f9;
   }
 
   .btn-checkout {
-    border: 1px solid black;
-    color: black;
-    display: block;
-    font-size: 12px;
-    height: 45px;
-    line-height: 14px;
-    padding-top: 1.5rem;
-    margin-top: 1.5rem;
-    width: 100%;
+    border: 1px solid $c-neutral-black;
+    color: $c-neutral-black;
+    margin-top: 2.5rem;
   }
 
   // Order / Cart Summary
