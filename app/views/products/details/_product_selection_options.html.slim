@@ -16,7 +16,7 @@
     a#product-customize-action.btn-customize
       | Customize
 
-- if Features.active?(:height_customisation)
+- if Features.active?(:height_customisation) && @product.height_customisable?
   .row
     a#product-height-action.btn-customize
       | Height - Standard

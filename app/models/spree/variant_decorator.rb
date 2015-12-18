@@ -94,10 +94,12 @@ Spree::Variant.class_eval do
     end
   end
 
+
   def product_plus_size
-    is_plus = product.taxons.where(:name =>"Plus Size").first
-    return true if is_plus
+    product.plus_size?
   end
+  # TTL - 2015.12.18 - 2016.03.01 - Appears unused
+  deprecate :product_plus_size
 
   private
 
