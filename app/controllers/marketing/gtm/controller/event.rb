@@ -1,7 +1,7 @@
 module Marketing
   module Gtm
     module Controller
-      module GtmEvent
+      module Event
         extend ActiveSupport::Concern
 
         private

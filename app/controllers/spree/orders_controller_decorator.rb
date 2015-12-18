@@ -1,6 +1,6 @@
 Spree::OrdersController.class_eval do
   include Marketing::Gtm::Controller::Order
-  include Marketing::Gtm::Controller::GtmEvent
+  include Marketing::Gtm::Controller::Event
 
   layout 'redesign/application', only: :show
 
