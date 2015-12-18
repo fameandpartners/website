@@ -108,16 +108,7 @@ javascript:
           - @product.moodboard.song_items.each do |item|
             .grid-4
               .picture.audio-cover
-                = link_to 'SoundCloud tune', item.source, class: 'sc-player'
-                = link_to '#', data: { action: 'soundcloud' } do
-                  = image_tag item.image_url
-                  = image_tag '_audio-icon.png', class: 'icon'
-                  span.mask
-                .popup
-                  .fleft
-                    = link_to '#', data: { action: 'soundcloud' } do
-                      span.icon-play
-                      span.icon-pause
+                = image_tag item.image_url
 
           - @product.moodboard.parfume_items.each do |item|
             .grid-4.perfume

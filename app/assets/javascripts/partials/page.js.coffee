@@ -89,14 +89,6 @@ window.page = {
       return false
     )
 
-  enableSoundCloudSongPlayer: (links) ->
-    links.on('click', (e) ->
-      player = $(e.currentTarget).closest('.picture').find('.sc-player')
-      player.find('.sc-controls a.sc-pause').click()
-      track.playedSong(window.product_analytics_label)
-      return false
-    )
-
   enablePersonalisatonForm: (container) ->
     if window.product_variants
       form = window.helpers.createPersonalisationForm(container)
