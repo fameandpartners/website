@@ -16,40 +16,12 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     session[:ty]                  = 'Thanks'
   end
 
-  def redeem_via_fb
-    promo_service = UserCart::PromotionsService.new(
-      order: current_order,
-      code:  session[:auto_apply_promocode]
-    )
-
-    if promo_service.apply
-      session[:auto_applied_promo_code] = session[:auto_apply_promocode]
-
-      begin
-        Marketing::CustomerIOEventTracker.new.track(
-          current_spree_user,
-          'auto_apply_coupon',
-          email:            current_order.email,
-          code:             session[:auto_apply_promocode]
-        )
-      rescue StandardError => e
-        Rails.logger.error('ERROR: customer.io event tracker: auto_apply_coupon')
-        Rails.logger.error(e)
-        NewRelic::Agent.notice_error(e)
-      end
-
-    end
-  end
-
   def mark_and_track_promo_redemption(email)
     return unless session[:redeem_via_fb_state] == 'clicked'
     session[:redeem_via_fb_state] = 'signed_in'
     track_new_modal_fb
     event_type = 'email_capture_modal'
-    if session[:auto_apply].present?
-      event_type = 'auto_apply_coupon'
-      redeem_via_fb
-    end
+    event_type = 'auto_apply_coupon' if session[:auto_apply].present?
 
     begin
       tracker = Marketing::CustomerIOEventTracker.new
@@ -60,7 +32,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         current_spree_user || email,
         event_type,
         email:            email,
-        promocode:        session[:show_promocode_modal] || session[:auto_apply_promocode]
+        promocode:        session[:show_promocode_modal] || session[:auto_apply_promo]
       )
     rescue StandardError => e
       Rails.logger.error('[customer.io] Failed to send event: #{event_type}')
