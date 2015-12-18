@@ -46,7 +46,7 @@
       display: block;
     }
     input[name='email'] {
-      background: white !important;
+      background: $c-neutral-white !important;
       color: black;
       padding-left: 1em !important;
       padding-right: 1em !important;
@@ -54,8 +54,8 @@
       margin-bottom: 30px !important;
     }
     .btn-reset{
-      background-color: black;
-      color: white;
+      background-color: $c-neutral-black;
+      color: $c-neutral-white;
       width: 60%;
       @include mobile{
         width: 80%;
@@ -92,7 +92,7 @@
       width: 30%;
       margin-bottom: -19px;
       border: 0;
-      border-top: 1px solid black;
+      border-top: 1px solid $c-neutral-black;
     }
   }
 }
