@@ -86,7 +86,7 @@ class Spree::Sale < ActiveRecord::Base
   end
 
   def sitewide_message
-    nil
+    "LATERZ 2015! - 30% OFF STOREWIDE"
   end
 
   def sale_promo
