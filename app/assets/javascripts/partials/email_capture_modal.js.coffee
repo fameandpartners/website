@@ -282,6 +282,10 @@ window.page.CountdownTimer = class CountdownTimer
       @countDownType = 'ending'
       @start()
     else if @countDownType == 'ending'
+      $.removeCookie("auto_apply_promo_code_started_at")
+      $.removeCookie('promo_end_time')
+      $.removeCookie("auto_apply_coupon_start_time")
+      $.removeCookie('auto_apply_coupon_duration')
       $("#sale-banner .clock").hide()
 
   updateTimer: (startTime, durationInHours) ->
