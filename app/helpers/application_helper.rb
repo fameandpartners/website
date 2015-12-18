@@ -1,6 +1,6 @@
 # encoding: utf-8
 module ApplicationHelper
-  def conditional_html(options = {}, &block)
+  def conditional_html(options = {})
     lang = I18n.locale
     html_class = options[:class]
     html = <<-"HTML".gsub( /^\s+/, '' )
@@ -10,7 +10,6 @@ module ApplicationHelper
       <!--[if IE 9 ]>       <html lang="#{lang}" class="#{lang} #{html_class} ie ie9 no-js"> <![endif]-->
       <!--[if (gte IE 9)|!(IE)]><!--> <html prefix="fb: http://ogp.me/ns/fb#" lang="#{lang}" class="#{lang} #{html_class} no-js"> <!--<![endif]-->
     HTML
-    html += capture( &block ) << "\n</html>".html_safe if block_given?
     html.html_safe
   end
 
