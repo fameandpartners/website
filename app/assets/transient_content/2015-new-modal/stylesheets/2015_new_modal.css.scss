@@ -51,6 +51,7 @@
       padding-left: 1em !important;
       padding-right: 1em !important;
       font-size: 0.8em !important;
+      margin-bottom: 30px !important;
     }
     .btn-reset{
       background-color: black;
@@ -62,7 +63,6 @@
       @include iphone6{
         font-size: 0.6em;
       }
-      margin-top: 30px;
       margin-bottom: 10px;
       font-size: 0.8em;
       font-weight: 600;
