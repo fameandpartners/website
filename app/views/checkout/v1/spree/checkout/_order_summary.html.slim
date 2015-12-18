@@ -75,7 +75,7 @@ ruby:
         p style="font-size:0.8em;"
           = current_sale.sitewide_message
           br
-          = "Add two dresses and use discount code: #{current_sale.try(:sale_promo)}"
+          = "Use discount code: #{current_sale.try(:sale_promo)}"
   p
     | Sub Total
     span.pull-right = cart.display_item_total.to_s
@@ -96,9 +96,6 @@ ruby:
       - if current_site_version.is_australia?
         .taxes Including GST
 
-  p.text-center
-    = link_to 'Back to Dresses', request.referer, :class => 'btn btn-block btn-black'
-
   p.order-number
     = @order.try(:number)
 
@@ -112,3 +109,7 @@ ruby:
   .row.shopping-bag-payment-methods
     img src="/assets/checkout/visa-mastercard-paypal-masterpass.jpg"
     img src="/assets/comodo-ssl.png"
+
+  .row
+    .col-md-12
+      = link_to 'Continue Shopping', request.referer, :class => 'btn btn-block btn-checkout'

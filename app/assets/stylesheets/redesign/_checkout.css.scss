@@ -224,6 +224,12 @@ $order-summary-bg: #f7f7f9;
     }
   }
 
+  .btn-checkout {
+    border: 1px solid $c-neutral-black;
+    color: $c-neutral-black;
+    margin-top: 2.5rem;
+  }
+
   // Order / Cart Summary
   .checkout-items {
 
