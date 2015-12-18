@@ -12,8 +12,7 @@ module Marketing
         end
 
         def line_items
-          []
-          # order.items.collect { |item| LineItem.new(spree_line_item: item).body }
+          order.line_items.map { |item| LineItem.new(spree_line_item: item).body }
         end
 
         def total_amount

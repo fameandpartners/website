@@ -4,8 +4,11 @@ module Marketing
   module Gtm
     module Presenter
       describe Order, type: :presenter do
-        let(:line_item) { build(:dress_item, quantity: 2, price: 12.34) }
-        let(:order) { build(:complete_order_with_items, number: 'R123456', line_items: [line_item]) }
+        let(:taxon) { create(:taxon, name: 'Jeans') }
+        let(:product) { create(:dress, name: 'Super Dress', sku: 'ABC123', taxons: [taxon]) }
+        let(:variant) { create(:dress_variant, product: product) }
+        let(:line_item) { build(:dress_item, variant: variant, quantity: 2, price: 12.34) }
+        let(:order) { build(:complete_order_with_items, number: 'R123456', currency: 'AUD', line_items: [line_item]) }
 
         subject(:presenter) { described_class.new(spree_order: order) }
 
@@ -18,7 +21,13 @@ module Marketing
             it 'returns hash order details' do
               expect(subject.body).to eq({
                                              currency:        'AUD',
-                                             line_items:      [],
+                                             line_items:      [
+                                                                  { sku:          'ABC123',
+                                                                    name:         'Super Dress',
+                                                                    category:     'Jeans',
+                                                                    total_amount: 24.68,
+                                                                    quantity:     2 }
+                                                              ],
                                              number:          'R123456',
                                              shipping_amount: 0.0,
                                              taxes_amount:    0.0,
