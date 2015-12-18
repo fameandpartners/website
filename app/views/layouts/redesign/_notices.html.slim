@@ -29,13 +29,13 @@
 coffee:
   $(document).ready ->
     if $.cookie("auto_apply_promo_code_started_at")?
-      promoTime = new window.page.CountdownTimer($("#sale-banner"), $.cookie("auto_apply_promo_code_started_at"), $.cookie('promo_end_time'))
+      promoTime = new window.page.CountdownTimer($("#sale-banner"), $.cookie("auto_apply_promo_code_started_at"), $.cookie('promo_end_time'),null, "modal")
       promoTime.start()
       $("#sale-banner .clock .heading").text($.cookie('promo_heading').replace("<br>","").replace(/\s+/g, " "))
       $("#sale-banner .clock").show()
 
     if $.cookie("auto_apply_coupon_start_time")?
-      promoTime = new window.page.CountdownTimer($("#sale-banner"), $.cookie("auto_apply_coupon_start_time"), $.cookie('auto_apply_coupon_duration'))
+      promoTime = new window.page.CountdownTimer($("#sale-banner"), $.cookie("auto_apply_coupon_start_time"), $.cookie('auto_apply_coupon_duration'),null,"faadc")
       promoTime.start()
       $("#sale-banner .clock .heading").text("Limited time to use your discount " + $.cookie("auto_applied_promo_code"))
       $("#sale-banner .clock").show()
