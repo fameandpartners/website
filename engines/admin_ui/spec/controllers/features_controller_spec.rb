@@ -5,7 +5,29 @@ module AdminUi
     RSpec.describe FeaturesController, type: :controller do
       routes { AdminUi::Engine.routes }
 
-      before(:each) { stub_admin_authorization! }
+      before(:each) {
+        stub_admin_authorization!
+        stub_const("Features::DEFINED_FEATURES", %i(checkout_fb_login
+                          content_revolution
+                          delivery_date_messaging
+                          enhanced_moodboards
+                          fameweddings
+                          maintenance
+                          send_promotion_email_reminder
+                          shipping_message
+                          test_analytics
+                          express_making
+                          gift
+                          google_tag_manager
+                          marketing_modals
+                          masterpass
+                          moodboard
+                          style_quiz
+                          redirect_to_com_au_domain
+                          getitquick_unavailable
+                          sales
+                          test_flag))
+      }
 
       describe 'GET index' do
         it 'renders the index template' do
