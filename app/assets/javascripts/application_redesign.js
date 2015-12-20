@@ -38,12 +38,6 @@
 //= require libs/responsiveslides.min.js
 //= require libs/jquery.skippr.js
 
-//----------------------
-// SoundCloud
-//----------------------
-//= require libs/soundcloud/soundcloud.player.api
-//= require libs/soundcloud/sc-player
-
 //----------------
 // Styleguide code
 //----------------

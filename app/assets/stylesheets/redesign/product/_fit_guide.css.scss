@@ -5,9 +5,14 @@ $fg-screen-sm: 480px;
 
 .vex-theme-flat-attack.fit-guide-dialog {
   background-color: rgba(0, 0, 0, 0.4);
-  
+
   .vex-overlay { background: none;}
-  
+
+  .vex-dialog-message{
+    .row:first-child{
+      height: 690px;
+    }
+  }
   .vex-content {
     width: 96%;
     max-width: 1230px;
@@ -93,8 +98,8 @@ $fg-screen-sm: 480px;
     @media (min-width: $fg-screen-lg + 1) {
       display: none;
     }
-    
-    h2 { 
+
+    h2 {
       font-size: 14px;
       margin-bottom: 5px;
     }
@@ -105,12 +110,19 @@ $fg-screen-sm: 480px;
   }
 
   .fit-guide-text {
-    padding: 20px 20px 20px 50px; 
+    padding: 20px 20px 20px 50px;
     @media (max-width: $fg-screen-lg) {
       padding: 20px 10px 10px;
     }
+    em{
+      a {
+        color: inherit;
+        margin-left: 3px;
+        text-decoration: underline;
+      }
+    }
   }
-  
+
   .size-guide {
     font-size: 14px;
     text-align: center;
@@ -120,13 +132,21 @@ $fg-screen-sm: 480px;
     tr:nth-child(even) td {
       background-color: rgba(0, 0, 0, 0.05);
     }
+    tr{
+      td:nth-child(2),td:nth-child(5),td:nth-child(7){
+        border-right: 1px solid $c-neutral-9;
+      }
+    }
     th, td {
       border: 0;
+    }
+    th:not(:last-child){
+      border-right: 1px solid $c-neutral-9;
     }
     th {
       text-transform: uppercase;
       background-color: rgba(0, 0, 0, 0.05);
-      padding: 2px 2px 2px 15px;
+      padding: 2px 2px 2px 2px;
       @media (max-width: $fg-screen-sm) {
         padding-left: 2px;
       }

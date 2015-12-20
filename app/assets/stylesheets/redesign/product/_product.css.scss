@@ -4,6 +4,41 @@
   position: relative;
   min-height: 580px;
 
+  .list-group-item.customization-option  {
+
+  	img {
+  		height:140px;
+  		width:140px;
+  	}
+  }
+
+}
+
+.product-content {
+	position: absolute;
+	z-index: 50;
+	top: 0;
+  height: 100%;
+
+	.row {
+		padding-top: 1.45rem;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+	}
+
+	.btn {
+		font-family: $font-family-secondary;
+		font-size: 1.5rem;
+	}
+
+  .btn-customize {
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
   @media (max-width: 1000px) {
 
     .product-selector {
@@ -220,53 +255,11 @@
 }
 
 .inspiration {
-
   p {
-    font-style: italic;
+    color: $c-neutral-5;
     font-size: 12px;
-    color: #E5E5E5;
+    font-style: italic;
   }
-
-	.row {
-		.box {
-      position: relative;
-
-      &:hover .player-controls {
-        opacity: 1;
-      }
-
-      &.song-playing {
-        .fa-pause {
-          display: inline-block;
-        }
-        .fa-play {
-          display: none;
-        }
-      }
-
-      .player-controls {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: rgba(255, 255, 255, 0.8);
-        opacity: 0;
-        transition: 0.2s;
-        padding: 10px;
-        a { color: #000;}
-      }
-
-      // Icons
-      .fa-volume-up {
-        position: absolute;
-        right: 10px;
-        bottom: 10px;
-        font-size: 24px;
-        color: #fff;
-      }
-      .fa-pause { display: none;}
-		}
-	}
 }
 
 .no-scroll {

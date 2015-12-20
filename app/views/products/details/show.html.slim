@@ -45,17 +45,6 @@ ruby:
       });
   "
 
-  init_song_player = "
-    (function(){
-      $('a[data-action=soundcloud]').on('click', function(e){
-        e.preventDefault();
-        var playerBox = $(e.currentTarget).closest('.box.song').toggleClass('song-playing');
-        var player = playerBox.find('.sc-player');
-        player.find('.sc-controls a.sc-pause').click();
-      });
-    })();
-  "
-
   init_product_details_page_new = "
     window.ProductDetails = window.ProductDetails || {};
     window.ProductDetails.colorOptions = #{ @product.default_color_options.to_json };
@@ -68,7 +57,6 @@ ruby:
 
 = content_for :inline_javascript do
   = raw init_product_details_page
-  = raw init_song_player
 
 = content_for :head
   - @product.cropped_images.each_with_index do |image, index|
@@ -159,28 +147,19 @@ ruby:
 
       h4 Dress Inspiration
       .inspiration
-        .row
+        .box.col-sm-4.no-padding
+          - if @product.song
+            = image_tag @product.song.image_url, class: 'img-responsive'
+
+        .box.col-sm-4.no-padding
+          - if @product.celebrity && @product.celebrity.image_url
+            = image_tag @product.celebrity.image_url, class: 'img-responsive'
+
+        - @product.inspiration.each do |item|
           .box.col-sm-4.no-padding
-            - if @product.song
-              = link_to 'SoundCloud tune', @product.song.source, class: 'sc-player'
-              = link_to '#', data: { action: 'soundcloud' } do
-                = image_tag @product.song.image_url, class: 'img-responsive'
-                .fa.fa-volume-up
-              span.mask
-              .player-controls
-                = link_to '#', data: { action: 'soundcloud' } do
-                  span.fa.fa-play
-                  span.fa.fa-pause
+            = image_tag(item.image_url, :class => 'img-responsive')
 
-          .box.col-sm-4.no-padding
-            - if @product.celebrity && @product.celebrity.image_url
-              = image_tag @product.celebrity.image_url, class: 'img-responsive'
-
-          - @product.inspiration.each do |item|
-            .box.col-sm-4.no-padding
-              = image_tag(item.image_url, :class => 'img-responsive')
-
-          p Images courtesy of Google
+        p Images courtesy of Google
 
     .col-md-6.col-sm-12
       - if @product.fit.present?

@@ -32,7 +32,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         current_spree_user || email,
         event_type,
         email:            email,
-        promocode:        session[:show_promocode_modal]
+        promocode:        session[:show_promocode_modal] || session[:auto_apply_promo]
       )
     rescue StandardError => e
       Rails.logger.error('[customer.io] Failed to send event: #{event_type}')

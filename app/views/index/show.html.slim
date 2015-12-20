@@ -4,10 +4,9 @@ ruby:
 .page-content.index
   // TODO: create helper for multisource images
   = react_component('HeroCarousel', skin: 'skin-light',
-    assets: [{link: sale_path, src: '/assets/home-page-tiles/hero-sale', alt: 'Let\'s go halvsies. 50% off your 2nd dress. LTO. - Shop now'},
-             {link: this_modern_romance_collection_path, src: '/assets/home-page-tiles/hero-8', alt: 'This Modern Romance - Shop now'},
-             {link: bring_on_the_night_collection_path, src: '/assets/home-page-tiles/hero-5', alt: 'Bring On The Night - Shop now'},
-             {link: sarah_ellen_landing_page_path, src: '/assets/home-page-tiles/hero-6', alt: 'The exclusive Miss Ellen - Shop all formal dresses'}])
+    assets: [{link: dresses_path, src: '/assets/home-page-tiles/hero-9', alt: 'LATERZ 2015! Take 30% off storewide - SHOP SALE'},
+      {link: this_modern_romance_collection_path, src: '/assets/home-page-tiles/hero-8', alt: 'This Modern Romance - Shop now'},
+      {link: sarah_ellen_landing_page_path, src: '/assets/home-page-tiles/hero-6', alt: 'The exclusive Miss Ellen - Shop all formal dresses'}])
 
   //
     - if sale_active?
@@ -61,7 +60,7 @@ ruby:
         h2.title-line-on-sides
           .inner-wrap SHOP INSTAGRAM
         = react_component('InstagramCarousel', skin: '',
-          assets: [{link: link_to_dresses + '/dresses/dress-from-afar-545?color=sage-green', src: '/assets/homepage/instagram/No1_Malfada.jpg', user: '@mafaldacastro', cta: "Shop the From Afar Look"},
+          assets: [{link: link_to_dresses + '/dress-from-afar-545?color=sage-green', src: '/assets/homepage/instagram/No1_Malfada.jpg', user: '@mafaldacastro', cta: "Shop the From Afar Look"},
                     {link: link_to_dresses + '/dress-laced-heartline-262?color=white', src: '/assets/homepage/instagram/No2_Alevidal.jpg', user: '@alevidal', cta: "Shop the Laced Heartline Look"},
                     {link: link_to_dresses + '/dress-juliette-505?color=black', src: '/assets/homepage/instagram/No3_Sophie.jpg', user: '@xxsophiehermannxx', cta: "Shop the Juliette Look"},
                     {link: link_to_dresses + '/dress-rory-two-piece-675?color=red', src: '/assets/homepage/instagram/No4_Sarah.jpg', user: '@sarah3llen', cta: "Shop the Rory Look"},

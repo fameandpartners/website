@@ -10,6 +10,26 @@
       $(event.target).parents('fieldset:first').find('.row:first').toggle();
     });
   });
+
+  $(document).ready(function(){
+    $('#active_all_products').change(function(event){
+      var isChecked = $(event.target).prop("checked");
+
+      $('.product-discount-checkbox').each(function(_idx, el){
+        $(el).prop("checked", isChecked);
+      });
+    });
+
+    $('#push_discount_all_products').click(function(event){
+      var newValue = $('#discount_all_products').val();
+
+      $('.product-discount-amount').each(function(_idx, el){
+        $(el).val(newValue);
+      });
+    });
+
+
+  });
 </script>
 
 <div data-hook="admin_sale_edit_form">
@@ -96,9 +116,9 @@
           <table>
             <thead>
               <tr>
-                <td>Active</td>
+                <td>Active <input id="active_all_products" type="checkbox" /></td>
                 <td>Name</td>
-                <td>Discount ( 0..100%)</td>
+                <td>Discount ( 0..100%) <input style="width:auto;min-width: 10rem;" id="discount_all_products" type="number" min="0" max="100" placeholder="Discount for all Products" /><input type="button" id="push_discount_all_products" value="Set All"/></td>
               </tr>
             </thead>
 
@@ -111,9 +131,9 @@
                   <input type="hidden" name="sale[discounts_attributes][<%= index %>][_destroy]" value="1" />
                   <% if discount.present? %>
                     <input type="hidden" name="sale[discounts_attributes][<%= index %>][id]" value="<%= discount.id %>" />
-                    <input type="checkbox" name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" checked />
+                    <input type="checkbox" class='product-discount-checkbox' name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" checked />
                   <% else %>
-                    <input type="checkbox" name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" />
+                    <input type="checkbox" class='product-discount-checkbox' name="sale[discounts_attributes][<%= index %>][_destroy]" value="0" />
                   <% end %>
                 </td>
                 <td>
@@ -123,11 +143,9 @@
                 </td>
                 <td>
                   <% field_name = "sale[discounts_attributes][#{ index }][amount]" %>
-                  <% if discount.present? %>
-                    <input type="number" min="0" max="100" name="<%= field_name %>" value="<%= discount.amount %>" />
-                  <% else %>
-                    <input type="number" min="0" max="100" name="<%= field_name %>" />
-                  <% end %>
+                  <% discount_amount = discount.present? ? discount.amount : '' %>
+                  <input class="product-discount-amount" type="number" min="0" max="100" name="<%= field_name %>" value="<%= discount_amount %>" />
+
                 </td>
               </tr>
               <% index += 1 %>

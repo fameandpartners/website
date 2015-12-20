@@ -49,7 +49,7 @@ module Products
       result[:products] = self.products.map do |product|
         sale_price = product.price.apply(product.discount)
         product.to_h.merge(
-          collection_path: ApplicationController.helpers.collection_product_path(product, site_version: site_version.to_param),
+          collection_path: ApplicationController.helpers.collection_product_path(product),
           price: product.price.display_price.to_s,
           sale_price: sale_price.present? ? sale_price.display_price.to_s : nil
         )

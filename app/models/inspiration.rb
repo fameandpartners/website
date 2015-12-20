@@ -6,6 +6,7 @@
 #  - songs
 #  - perfumes
 # Also related are CelebrityInspiration
+
 class Inspiration < ActiveRecord::Base
   attr_accessible :spree_product_id, :image, :item_type, :content, :active, :name, :title
 

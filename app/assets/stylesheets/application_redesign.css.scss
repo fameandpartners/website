@@ -1,3 +1,158 @@
+/*
+
+z-index levels
+========
+
+*     0 = .timer-box > span:before
+*     0 = .timer-box > span:after
+*     0 = .sumome-popup .sumome-popup-theme
+*     0 = .sumome-popup-preview .sumome-popup-theme
+*     0 = .sumome-smartbar-popup .sumome-smartbar-theme
+*     0 = .sumome-modal .sumome-smartbar-preview .sumome-smartbar-theme
+
+*     1 = .checkbox-gray-md .checkbox-label:after
+*     1 = .hamburger
+*     1 = .nav-menu-container .search-wrapper .icon-search
+*     1 = .tabs.vertical .tab-wrap
+*     1 = .rhombus .rhombus-text-holder
+*     1 = .timer-box > span > span
+*     1 = .card-logo.discover
+*     1 = .card-logo.mastercard
+*     1 = .card-container
+*     1 = div.cs-select
+*     1 = main
+*     1 = .homepage-panel::after
+*     1 = .page-title:after
+*     1 = .slick-arrow
+*     1 = .sumome-popup .sumome-popup-theme .sumome-popup-theme- +XX
+*     1 = .sumome-popup-preview .sumome-popup-theme .sumome-popup-theme- +XX
+*     1 = a.sumome-smartbar-link
+
+*     2 = header #locale-selector-mobile-container ul
+*     2 = .tabs.vertical > ul
+*     2 = .btn-group > .btn (&:hover, &:focus, &:active, &.active)
+*     2 = .btn-group-vertical > .btn (&:hover, &:focus, &:active, &.active)
+*     2 = .input-group .form-control
+*     2 = .input-group-btn > .btn (&:hover, &focus, &:active)
+*     2 = .pagination > .active > a (&:hover, &:focus)
+*     2 = .pagination > .active > span (&:hover, &:focus)
+*     2 = a.list-group-item.active (&:hover, &:focus)
+*     2 = .homepage-panel--content
+*     2 = .goto-arrow
+*     2 = .sumome-popup .sumome-popup-content .sumome-popup-form
+*     2 = .sumome-popup-preview .sumome-popup-content .sumome-popup-form
+*     2 = .sumome-smartbar-popup .sumome-smartbar-content .sumome-smartbar-form
+*     2 = .sumome-modal .sumome-smartbar-preview .sumome-smartbar-content .sumome-smartbar-form 
+
+*     3 = .rslides_tabs
+*     3 = #main-nav
+*     3 = #cart ???
+*     3 = .slides-navigation
+
+*     4 = .sticky-header .alert-sale
+
+*     5 = .carousel-control .icon-prev
+*     5 = .carousel-control .icon-next
+*     5 = .carousel-control .glyphicon-chevron-left
+*     5 = .carousel-control .glyphicon-chevron-right
+*     5 = #sumome-smartbar-popup .sumome-smartbar-close
+*     5 = .sumome-smartbar-popup .sumome-smartbar-close
+*     5 = .sumome-modal .sumome-smartbar-preview .sumome-smartbar-close
+
+*     9 = .product-section--details
+
+*    10 = #sideMenu #new-this-week-menu (min-width: 800px)
+*    10 = #slideMenu #dresses-menu
+*    10 = #slideMenu #lookbook-menu
+*    10 = #slideMenu #wedding-menu
+*    10 = #slideMenu #moodboards-menu
+*    10 = #slideMenu #magazine-menu
+*    10 = #slideMenu #events-menu
+
+*    10 = #gray-top-banner #account-area .account-menu
+*    10 = .carousel-caption  
+
+*    15 = .carousel-indicators
+
+*    50 = .product-content
+
+*    51 = .slides-pagination
+
+*    98 = .sg-btn--select.is-active:hover:after
+*    99 = .sg-btn--select.is-active:hover:before
+
+*    99 = .mega-menu--main
+*    99 = .page-title--details
+*    99 = .select2-close-mask
+
+*   100 = .nav-menu
+*   100 = .sumome-popup .sumome-popup-close
+*   100 = .sumome-popup-preview .sumome-popup-close
+
+*   101 = .rect
+*   102 = header
+*   102 = #locale-selector-container ul
+*   102 = .products-collections .container-fluid .filter-col (max-width: $bootstrap-md-width)
+
+*   200 = div.cs-active
+
+*   990 = .dropdown-backdrop
+
+*   999 = #product-overlay
+*   999 = .skippr-nav-container
+*   999 = .skippr-arrow
+*   999 = .mobile-menu-overlay
+*   999 = #cart ???
+*   999 = #shadow-layer
+
+   1000 = .most-front ???
+*  1000 = .dropdown-menu
+*  1000 = .navbar-static-top
+*  1000 = .mega-menu-menu
+*  1000 = .search-bar
+*  1000 = .mega-menu
+
+*  1010 = .chosen-container .chosen-drop
+*  1010 = .chosen-container-single .chosen-search
+*  1010 = .popover ???
+
+*  1030 = .navbar-fixed-top
+*  1030 = .navbar-fixed-bottom
+
+*  1030 = .tooltip
+
+*  1040 = .modal-backdrop
+*  1040 = .modal ???
+*  1050 = .modal ???
+
+*  1060 = .popover ???
+
+*  1051 = .select2-dropdown
+
+*  1111 = .vex
+*  1112 = .vex-loading-spinner
+*  1112 = .sumome-vex-loading-spinner
+
+*  1999 = .product-side-panel
+
+*  2000 = #sideMenu
+
+*  9999 = .vex-theme-bottom-right-corner.alert .vex-content
+*  9999 = .vex-content
+
+* 10000 = .close-search (max-width: 768px)
+* 10000 = .most-front ???
+
+// beyond crazy
+* 9999999 = #sumome-smartbar-popup
+* 9999999 = .sumome-smartbar-popup
+* 16000002 = .new-modal.email-capture-modal
+* 10000000 = .sumome-popup
+* 1000000099 = .sumome-vex
+* 10000000001 = div#sumome-welcomemat-wrapper
+
+*/
+
 //= require_tree ./libs/vex
 //= require_tree ./redesign/stylesheets
 @import "compass";

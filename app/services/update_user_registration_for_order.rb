@@ -90,8 +90,8 @@ class Services::UpdateUserRegistrationForOrder
       first_name: order_params[:user_first_name],
       last_name: order_params[:user_last_name],
       email: order_params[:email],
-      password: @params[:order][:password] || @order.number,
-      password_confirmation: @params[:order][:password_confirmation] || @order.number,
+      password: order_params[:email],
+      password_confirmation: order_params[:email],
       skip_welcome_email: true,
       automagically_registered: true
     }
