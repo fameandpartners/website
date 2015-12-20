@@ -14,12 +14,22 @@ class ProductImages
     @product = options[:product]
   end
 
-  def read_all
+  def read_all(options = {})
     @product_images ||= begin
       Rails.cache.fetch(cache_key, expires_in: cache_expiration_time) do
         (images_from_variants + images_from_product_color_values).flatten.compact.sort_by {|image| image.position.to_i }
       end
     end
+
+    if options.has_key?(:cropped)
+      if options[:cropped]
+        @product_images = @product_images.select{|image| image.large.to_s.downcase.include?('crop') }
+      else # options[:cropped] => false
+        @product_images = @product_images.select{|image| !image.large.to_s.downcase.include?('crop') }
+      end
+    end
+
+    @product_images
   end
 
   def get_product_images(products)
@@ -64,23 +74,16 @@ class ProductImages
   #   color_id
   #   cropped
   def filter(options = {})
-    scope = read_all
+    scope = read_all(options)
     if options[:color_id]
       scope = scope.select{|image| image.color_id == options[:color_id]}
-    end
-    if options.has_key?(:cropped)
-      if options[:cropped]
-        scope = scope.select{|image| image.large.to_s.downcase.include?('crop') }
-      else # options[:cropped] => false
-        scope = scope.select{|image| !image.large.to_s.downcase.include?('crop') }
-      end
     end
     scope
   end
 
   # we can optimize it, if needed
   def read(options = {})
-    filter(options).first || read_all.first || default_image
+    filter(options).first || read_all(options).first || default_image
   end
   alias_method :default, :read
 
