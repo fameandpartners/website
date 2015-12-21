@@ -257,9 +257,9 @@ module Products
         name:                       /product name/i,
         description:                /description/i,
         # price_in_aud: /rrp/i,
-        price_in_usd:               /price usd/i,
-        taxons:                     /taxons? \d+/i,
-        colors:                     /(color|colour) \d+$/i,
+        price_in_usd: /price usd/i,
+        taxons: /taxons? \d+/i,
+        colors: /(color|colour) \d+$/i,
 
         # Style Profile
         glam:                       /glam$/i,
