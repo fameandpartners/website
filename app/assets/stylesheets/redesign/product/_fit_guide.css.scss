@@ -14,6 +14,18 @@ $fg-screen-sm: 480px;
     }
   }
   .vex-content {
+    @include iphone5{
+      height: 920px;
+    }
+    @include iphone6{
+      height: 960px;
+    }
+    @include iphone6p{
+      height: 990px;
+    }
+    @include tablet{
+      height: 1300px;
+    }
     width: 96%;
     max-width: 1230px;
     min-height: 600px;

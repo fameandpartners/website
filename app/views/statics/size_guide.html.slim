@@ -40,7 +40,7 @@
       .container
         .row.size-guide-row
           .col-md-12
-            = render partial: '/products/details/size_chart_table', locals: { data: SizeChart::SIZE_CHART_2015 }
+            = render partial: '/products/details/size_chart_table', locals: { data: SizeChart::SIZE_CHART_2015 , size_col_span: 3}
 
     .row.help-row
       .col-md-12
