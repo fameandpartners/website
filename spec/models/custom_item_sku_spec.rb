@@ -89,6 +89,20 @@ RSpec.describe CustomItemSku do
         it { expect(sku).to end_with("HA") }
       end
     end
+
+    describe 'fallback on error' do
+      before do
+        allow(generator).to receive(:style_number).and_raise('SomeError')
+      end
+
+      it 'falls back to SKU and custom marker' do
+        expect(sku).to eq "#{style_number}X"
+      end
+
+      it 'still marks the SKU as custom' do
+        expect(sku).to end_with("X")
+      end
+    end
   end
 
   describe 'default items' do
