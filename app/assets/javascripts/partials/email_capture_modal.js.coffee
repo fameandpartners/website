@@ -112,6 +112,8 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       $modal = $(modal)
       @countdownTimer = new window.page.CountdownTimer($modal, @promoStartedAt, @opts.timer)
       @countdownTimer.start()
+      $.cookie('promo_heading', @opts.heading)
+      $.cookie('promo_end_time', @opts.timer)
 
     if @opts.instagram_campaign?
       $('.vex-dialog-button-secondary').on 'click', =>
@@ -245,10 +247,11 @@ window.page.showCountdownTimer = (title, message, promoStartedAt, durationInHour
   new window.page.CountdownBanner($('#countdown-banner'), title, message, promoStartedAt, durationInHours)
 
 window.page.CountdownTimer = class CountdownTimer
-  constructor: ($container, startTime, durationInHours, closeCallback) ->
+  constructor: ($container, startTime, durationInHours, closeCallback , countDownType) ->
     @startTime     = startTime
     @duration      = durationInHours
     @closeCallback = closeCallback
+    @countDownType = countDownType
 
     @$timerHours   = $container.find('.hh')
     @$timerMinutes = $container.find('.mm')
@@ -261,6 +264,29 @@ window.page.CountdownTimer = class CountdownTimer
       "0#{time}"
     else
       "#{time}"
+
+  updateSaleBannerClock: ->
+    $("#sale-banner .heading").text("Second chance! "+ $("#sale-banner .heading").text())
+    if @countDownType == 'modal'
+      $.cookie("auto_apply_promo_code_started_at", +new Date())
+      $.cookie('promo_end_time', 12)
+      @startTime = $.cookie("auto_apply_promo_code_started_at")
+      @duration  = $.cookie('promo_end_time')
+      @countDownType = 'ending'
+      @start()
+    else if @countDownType == 'faadc'
+      $.cookie("auto_apply_coupon_start_time", +new Date())
+      $.cookie('auto_apply_coupon_duration',12)
+      @startTime = $.cookie("auto_apply_coupon_start_time")
+      @duration  = $.cookie('auto_apply_coupon_duration')
+      @countDownType = 'ending'
+      @start()
+    else if @countDownType == 'ending'
+      $.removeCookie("auto_apply_promo_code_started_at")
+      $.removeCookie('promo_end_time')
+      $.removeCookie("auto_apply_coupon_start_time")
+      $.removeCookie('auto_apply_coupon_duration')
+      $("#sale-banner .clock").hide()
 
   updateTimer: (startTime, durationInHours) ->
     currentTime = +new Date()
@@ -277,6 +303,7 @@ window.page.CountdownTimer = class CountdownTimer
       @$timerSeconds.html(@formatTime(seconds))
       true
     else
+     @updateSaleBannerClock()
      false
 
   start: () ->

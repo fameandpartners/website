@@ -66,6 +66,9 @@ module Concerns
       )
 
       session[:email_reminder_promo] = 'scheduled_for_delivery' if skip_discount_code_reminder?
+      cookies[:auto_apply_coupon_start_time] = Time.now.to_i * 1000
+      cookies[:auto_apply_coupon_duration]   = params[:ti]
+      cookies[:auto_applied_promo_code]      = automatic_discount_code
 
       # The promo code might not apply for a multitude of reasons, though
       # usually it's a rule (Spree::Promotion::Rules) on the promocode.

@@ -7,6 +7,33 @@
 }
 
 .alert-sale {
+  .clock{
+    display: none;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    .heading{
+      margin-right: 10px;
+    }
+    .colon{
+      position: absolute;
+      margin-left: 8px;
+    }
+    .hh,.mm,.ss{
+      background-color: black;
+      color: white;
+      width: 35px;
+      font-weight: 600;
+      padding-left: 2px;
+      padding-right: 2px;
+      letter-spacing: 2px;
+      position: relative;
+      display: inline-block;
+    }
+    .mm, .ss{
+      margin-left: 20px;
+    }
+  }
+
   position: relative;
   padding: 0 15px;
   text-transform: uppercase;
