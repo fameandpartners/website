@@ -1,4 +1,4 @@
-- cache [:layout, :product_with_content, @collection.products.map{|p| "#{p.id}-#{p.color.name}" }], expires_in: configatron.cache.expire.long do
+- cache [:layout, :products_with_content, @collection.products.map{|p| "#{p.id}-#{p.color.name}" }], expires_in: configatron.cache.expire.long do
   - products = @collection.products.first(2)
   /! [][][content]
   = render partial: '/products/collections/product', collection: products, as: :product, locals: {col: col}
