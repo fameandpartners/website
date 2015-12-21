@@ -132,7 +132,7 @@ var HeroProductCarousel = React.createClass({
       autoplay: true,
       pauseOnHover: true,
       autoplaySpeed: 8000,
-      speed: 1500,
+      speed: 1000,
       fade: true,
       arrows: false,
       asNavFor: '.js-carousel-hero-product-nav'
