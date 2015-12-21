@@ -127,14 +127,17 @@ var HeroProductCarousel = React.createClass({
   },
 
   initGallery: function() {
+
     $('.js-carousel-hero-product').slick({
       autoplay: true,
+      pauseOnHover: true,
       autoplaySpeed: 8000,
       speed: 1500,
       fade: true,
       arrows: false,
       asNavFor: '.js-carousel-hero-product-nav'
     });
+
     $('.js-carousel-hero-product-nav').slick({
       slidesToShow: 5,
       slidesToScroll: 1,
@@ -145,10 +148,28 @@ var HeroProductCarousel = React.createClass({
       focusOnSelect: true,
       autoplay: true
     });
+
     $('.js-carousel-hero-product').on('afterChange', function(event, slick, direction) {
       $('.js-carousel-hero-product-nav .slick-active:eq(' + slick.currentSlide + ')')
         .addClass('slick-current').siblings().removeClass('slick-current');
     });
+
+    $('.js-carousel-hero-product').on('touchstart', function(event) {
+      $('.js-carousel-hero-product').slick('slickPause');
+    });
+
+    $('.js-carousel-hero-product').on('touchend', function(event) {
+      $('.js-carousel-hero-product').slick('slickPlay');
+    });
+
+    $(".js-carousel-hero-product img").mlens({
+      zoomLevel: 1,
+      borderColor: '#fff',
+      borderSize: 3,
+      lensShape: 'circle',
+      lensSize: ['200px', '200px']
+    });
+
   },
 
   render: function() {

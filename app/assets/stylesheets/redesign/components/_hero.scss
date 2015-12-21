@@ -104,13 +104,19 @@
 
     .carousel-product {
 
-      .media-wrap {
+      .media-wrap > img,
+      .media-wrap > div > img,
+      .media-wrap > div > div {
+        margin-left: -60px;
+      }
+
+      .media-wrap,
+      .media-wrap > div {
         height: 580px;
 
         img {
-          width: auto;
+          width: auto !important; // why why, because mlens plugin inline styling :(
           height: 100%;
-          margin-left: -60px;
         }
 
       }
@@ -125,7 +131,9 @@
       left: 20px;
     }
 
-    .carousel-product .media-wrap img {
+    .carousel-product .media-wrap > img,
+    .carousel-product .media-wrap > div > img,
+    .carousel-product .media-wrap > div > div {
       margin-left: -120px;
     }
 
@@ -133,7 +141,9 @@
 
   @media (max-width: 600px) {
 
-    .carousel-product .media-wrap img {
+    .carousel-product .media-wrap > img,
+    .carousel-product .media-wrap > div > img,
+    .carousel-product .media-wrap > div > div {
       margin-left: -140px;
     }
 

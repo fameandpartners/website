@@ -11,6 +11,7 @@
 //= require bootstrap
 
 //= require libs/jquery.dotdotdot.min
+//= require libs/jquery.mlens.min
 
 // React
 
@@ -23,7 +24,7 @@
 //= require alt/dist/alt.min.js
 //= require components
 
-// node modules
+// npm modules
 //= require slick-carousel/slick/slick.min.js
 
 //---------------------------
