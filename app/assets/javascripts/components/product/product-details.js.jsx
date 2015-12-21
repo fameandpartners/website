@@ -166,7 +166,6 @@ var HeroProductCarousel = React.createClass({
       zoomLevel: 1,
       borderColor: '#fff',
       borderSize: 3,
-      lensShape: 'circle',
       lensSize: ['200px', '200px']
     });
 
