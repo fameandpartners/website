@@ -83,6 +83,11 @@ RSpec.describe CustomItemSku do
         let(:chosen_height) { 'tall' }
         it { expect(sku).to end_with("HT") }
       end
+
+      describe 'transformation' do
+        let(:chosen_height) { 'abc' }
+        it { expect(sku).to end_with("HA") }
+      end
     end
   end
 
