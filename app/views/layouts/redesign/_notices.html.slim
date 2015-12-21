@@ -37,5 +37,5 @@ coffee:
     if $.cookie("auto_apply_coupon_start_time")?
       promoTime = new window.page.CountdownTimer($("#sale-banner"), $.cookie("auto_apply_coupon_start_time"), $.cookie('auto_apply_coupon_duration'),null,"faadc")
       promoTime.start()
-      $("#sale-banner .clock .heading").text("Limited time to use your discount " + $.cookie("auto_applied_promo_code"))
+      $("#sale-banner .clock .heading").text("Limited time to use your discount '" + $.cookie("auto_applied_promo_code") + "'")
       $("#sale-banner .clock").show()
