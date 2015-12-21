@@ -3,6 +3,7 @@ require 'spec_helper'
 RSpec.describe CustomItemSku do
   let(:custom_colour) { create :product_colour, name: 'pink' }
   let(:custom_size)   { create :product_size, size_template: 3 }
+  let(:customization_ids) { [1] }
   let(:chosen_height) { 'standard' }
   let(:style_number)  { 'FB1000' }
   let(:dress)         { create :dress_with_magenta_size_10, sku: style_number }
@@ -16,7 +17,7 @@ RSpec.describe CustomItemSku do
     LineItemPersonalization.new.tap do |item|
       item.size_id                 = custom_size.id
       item.color_id                = custom_colour.id
-      item.customization_value_ids = [1]
+      item.customization_value_ids = customization_ids
       item.product_id              = variant.product.id
       item.height                  = chosen_height
     end
@@ -26,7 +27,7 @@ RSpec.describe CustomItemSku do
     let(:line_item) { build :line_item, variant: variant, personalization: personalization }
 
     it 'generates a custom SKU' do
-      expect(sku).to eq "FB1000US3AU7C#{custom_colour.id}XHS"
+      expect(sku).to eq "FB1000US3AU7C#{custom_colour.id}X1HS"
     end
 
     it 'includes the style number' do
@@ -41,8 +42,30 @@ RSpec.describe CustomItemSku do
       expect(sku).to include("C#{custom_colour.id}")
     end
 
-    it 'marks customs with X' do
-      expect(sku).to include("X")
+    describe 'customizations' do
+      describe 'single customization (the default)' do
+        let(:customization_ids) { [999] }
+        it 'are marked with X and the ID' do
+          expect(sku).to include("X999")
+        end
+      end
+
+      describe 'no customizations (custom colour, size, or height)' do
+        let(:customization_ids) { [] }
+
+        it 'are marked with just X' do
+          expect(sku).to include("X")
+          expect(sku).to end_with "XHS"
+        end
+      end
+
+      describe 'multiple customizations (legacy edge case)' do
+        let(:customization_ids) { [33, 55] }
+
+        it 'are each marked with X and the ID' do
+          expect(sku).to include("X33X55")
+        end
+      end
     end
 
     describe '#height' do
@@ -70,8 +93,8 @@ RSpec.describe CustomItemSku do
       expect(sku).to eq line_item.variant.sku
     end
 
-    it 'wont marks customs with trailing X' do
-      expect(sku).to_not end_with("X")
+    it 'wont mark customs with X' do
+      expect(sku).to_not include("X")
     end
   end
 end
