@@ -1,6 +1,6 @@
 function initProductDetailsStore() {
 
-  if(typeof altFlux === "undefined") {
+  if(typeof altFlux === 'undefined') {
     window.altFlux = new Alt();
 
     var ProductDetailsActions = altFlux.createActions(function() {
@@ -162,8 +162,8 @@ var HeroProductCarousel = React.createClass({
       $('.js-carousel-hero-product').slick('slickPlay');
     });
 
-    $(".js-carousel-hero-product img").mlens({
-      zoomLevel: 1,
+    $('.js-carousel-hero-product img').mlens({
+      zoomLevel: parseFloat(window.innerWidth / 1000).toFixed(1),
       borderColor: '#fff',
       borderSize: 3,
       lensSize: ['200px', '200px']
