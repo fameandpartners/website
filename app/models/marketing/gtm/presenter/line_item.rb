@@ -19,6 +19,10 @@ module Marketing
           CustomItemSku.new(line_item).call
         end
 
+        def variant_sku
+          VariantSku.new(variant).call
+        end
+
         def product_name
           product.name
         end
@@ -33,11 +37,12 @@ module Marketing
 
         def body
           {
-              sku:          sku,
-              name:         product_name,
               category:     category,
+              name:         product_name,
+              quantity:     quantity,
+              sku:          sku,
               total_amount: total_amount,
-              quantity:     quantity
+              variant_sku:  variant_sku
           }
         end
 
