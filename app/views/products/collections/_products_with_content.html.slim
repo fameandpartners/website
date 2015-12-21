@@ -1,26 +1,26 @@
-
-- products = @collection.products.first(2)
-/! [][][content]
-= render partial: '/products/collections/product', collection: products, as: :product, locals: {col: col}
-
-- # THIS IS A HACK HACK HACK 27th October, late, with no dinner
-- # Remove by 1st November, talk to TOBY and yell at him
-- sub_heading = (params[:lps] || page.try(:sub_heading))
-- description = page.try(:description)
-
-- if sub_heading.blank? && description.blank?
-  - sub_heading = 'MADE FOR YOU.'
-  - description = '*In as little as 48 hours.'
-
-.col-xs-6.col-xxs-6.col-md-4.category--item
-  .panel-seo
-    .outer-wrap.txt-truncate-block
-      .inner-wrap
-        .content-wrap.js-sub-heading
-          .title
-            span= raw(sub_heading)
-          = raw(description)
-
-- @collection.products.drop(2).each_slice(col) do |products|
-  /! [][][]
+- cache [:layout, :product_with_content, @collection.products.map{|p| "#{p.id}-#{p.color.name}" }], expires_in: configatron.cache.expire.long do
+  - products = @collection.products.first(2)
+  /! [][][content]
   = render partial: '/products/collections/product', collection: products, as: :product, locals: {col: col}
+
+  - # THIS IS A HACK HACK HACK 27th October, late, with no dinner
+  - # Remove by 1st November, talk to TOBY and yell at him
+  - sub_heading = (params[:lps] || page.try(:sub_heading))
+  - description = page.try(:description)
+
+  - if sub_heading.blank? && description.blank?
+    - sub_heading = 'MADE FOR YOU.'
+    - description = '*In as little as 48 hours.'
+
+  .col-xs-6.col-xxs-6.col-md-4.category--item
+    .panel-seo
+      .outer-wrap.txt-truncate-block
+        .inner-wrap
+          .content-wrap.js-sub-heading
+            .title
+              span= raw(sub_heading)
+            = raw(description)
+
+  - @collection.products.drop(2).each_slice(col) do |products|
+    /! [][][]
+    = render partial: '/products/collections/product', collection: products, as: :product, locals: {col: col}
