@@ -24,4 +24,4 @@
         em
           | For more information about our sizing, visit our
           = link_to 'sizing guide', size_guide_path
-      = render partial: 'size_chart_table', locals: { data: data }
+      = render partial: 'size_chart_table', locals: { data: data , size_col_span: 2}
