@@ -99,6 +99,11 @@ module Orders
       "#{size} (#{order.site_version})"
     end
 
+    def height
+      return LineItemPersonalization::DEFAULT_HEIGHT unless personalizations?
+      personalization.height
+    end
+
     def display_price
       Spree::Price.new(amount: price).display_price.to_s
     end
@@ -154,6 +159,7 @@ module Orders
         :factory                 => factory,
         :color                   => colour_name,
         :size                    => country_size,
+        :height                  => height,
         :customisations          => customisations.collect(&:first).join('|'),
         :promo_codes             => promo_codes.join('|'),
         :customer_notes          => order.customer_notes,

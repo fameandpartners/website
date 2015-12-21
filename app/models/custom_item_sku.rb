@@ -31,6 +31,11 @@ class CustomItemSku
   end
 
   def custom
-    "X"
+    "X#{height}"
+  end
+
+  def height
+    initial = line_item.personalization.height.to_s.upcase.first
+    "H#{initial}"
   end
 end

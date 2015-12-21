@@ -116,6 +116,20 @@ module Products
       end
     end
 
+    describe '#height_customisable? coerces to boolean' do
+      subject(:product) { described_class.new height_customisable: height_customisable }
+
+      context do
+        let(:height_customisable) { nil }
+        it { is_expected.to_not be_height_customisable }
+      end
+
+      context do
+        let(:height_customisable) { "whatever" }
+        it { is_expected.to be_height_customisable }
+      end
+    end
+
     describe '#price_amount' do
       let(:price)   { Spree::Price.new(amount: 15.0, currency: 'AUD') }
       let(:product) { described_class.new price: price, discount: discount }

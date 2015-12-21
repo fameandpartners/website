@@ -22,6 +22,7 @@ class UserCart::ProductsController < UserCart::BaseController
         color_id: params[:color_id],
         customizations_ids: params[:customizations_ids],
         making_options_ids: params[:making_options_ids],
+        height:             params[:height],
         quantity: 1
       },
       is_gift: params[:gift_sku].present?

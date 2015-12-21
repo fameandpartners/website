@@ -326,6 +326,20 @@ Spree::Product.class_eval do
     @discount = Repositories::Discount.get_product_discount(self.id)
   end
 
+  def plus_size?
+    return @plus_size if defined? @plus_size
+    @plus_size = taxons.where(name: "Plus Size").exists?
+  end
+
+  def jumpsuit?
+    return @jumpsuit if defined? @jumpsuit
+    @jumpsuit = taxons.where(name: "Jumpsuit").exists?
+  end
+
+  def height_customisable?
+    ! jumpsuit?
+  end
+
   private
 
   def build_variants_from_option_values_hash

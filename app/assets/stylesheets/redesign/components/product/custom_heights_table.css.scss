@@ -1,0 +1,97 @@
+/* [Panel Skirt Length]
+-------------------------------------------------------*/
+.panel-skirt-length {
+
+  h2,
+  p {
+    text-align: center;
+  }
+
+  p {
+    padding: 0 15% 15px 15%;
+    color: $c-neutral-10;
+    line-height: normal;
+    font-weight: 400;
+  }
+
+  .btn.product-option {
+    position: relative;
+    margin: 0;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    color: $c-neutral-white;
+    border-color: $c-neutral-white;
+
+    &:hover,
+    &:focus {
+      background: $c-brand-blue-pale;
+    }
+
+    &:active,
+    &.active {
+      color: $c-neutral-white;
+      background: $c-brand-blue;
+    }
+
+    &.active:after {
+      content: '\e61a';
+      display: block;
+      position: absolute;
+      top: 12px;
+      right: 5px;
+      font-family: 'icomoon_fame_2015';
+      font-size: 12px;
+      color: $c-neutral-white;
+    }
+
+  }
+
+  .selectors {
+    margin-bottom: 30px;
+
+    [class^="col-"] {
+      padding: 0;
+    }
+
+    span {
+      display: block;
+      padding: 2px;
+      margin-bottom: 15px;
+      line-height: normal;
+      text-align: center;
+      font-size: 1.3rem;
+      color: $c-neutral-10;
+    }
+
+  }
+
+  ul {
+    float: right;
+
+    a {
+      font-weight: 500;
+      color: $c-neutral-black;
+      border-bottom: solid transparent 1px;
+
+      &:hover,
+      &:focus,
+      &.active {
+        color: $c-neutral-black;
+        border-color: $c-neutral-black;
+      }
+
+    }
+
+  }
+
+  sub {
+    bottom: 0;
+    font-size: 70%;
+  }
+
+  .table th,
+  .table td {
+    text-align: center;
+  }
+
+}

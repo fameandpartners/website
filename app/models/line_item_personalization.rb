@@ -19,6 +19,10 @@ class LineItemPersonalization < ActiveRecord::Base
 
   validates :size, :color,  presence: true
 
+  DEFAULT_HEIGHT = 'standard'
+  HEIGHTS = %w(petite standard tall)
+  validates :height, inclusion: { in: HEIGHTS }
+
   DEFAULT_CUSTOM_SIZE_PRICE   = BigDecimal.new('20.0')
   DEFAULT_CUSTOM_COLOR_PRICE  = BigDecimal.new('16.0')
 
@@ -136,5 +140,13 @@ class LineItemPersonalization < ActiveRecord::Base
     else
       customization_value.price
     end
+  end
+
+  def height
+    read_attribute(:height).presence || DEFAULT_HEIGHT
+  end
+
+  def default_height?
+    height == DEFAULT_HEIGHT
   end
 end

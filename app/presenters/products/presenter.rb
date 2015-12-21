@@ -9,7 +9,8 @@ module Products
                   :discount, :recommended_products, :related_outerwear, :available_options, :preorder, :taxons,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
                   :size_chart, :making_option_id, :fit, :size, :fast_making, :standard_days_for_making, :customised_days_for_making,
-                  :default_standard_days_for_making, :default_customised_days_for_making
+                  :default_standard_days_for_making, :default_customised_days_for_making,
+                  :height_customisable
 
     def initialize(opts)
       opts.each do |k, v|
@@ -98,6 +99,10 @@ module Products
 
     def size_chart_data
       SizeChart.chart(size_chart)
+    end
+
+    def height_customisable?
+      !! height_customisable
     end
 
     def customization_options

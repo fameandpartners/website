@@ -42,6 +42,10 @@ ruby:
             container:  '#product-making-options-content',
             action:     '#product-making-options-action',
             value:      '#{ raw @product.making_option_id }'
+          },
+          height_input: {
+            container: '#product-height-content',
+            action:    '#product-height-action'
           }
         },
         moodboard_links: {
@@ -220,6 +224,8 @@ hr
   = render partial: 'side_panel_colours'
 
   = render partial: 'side_panel_customisation'
+
+  = render partial: 'side_panel_height'
 
   - if @product.making_options.present?
     = render partial: 'side_panel_making_options', locals: { making_options: @product.making_options }

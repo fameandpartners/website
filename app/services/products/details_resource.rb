@@ -40,6 +40,7 @@ class Products::DetailsResource
         permalink:                           product.permalink,
         is_active:                           product.is_active?,
         is_deleted:                          product.deleted?,
+        height_customisable:                 product.height_customisable?,
         images:                              product_images.read_all,
         default_image:                       product_images.default,
         price:                               product_price,

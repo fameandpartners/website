@@ -37,12 +37,15 @@ describe LineItemPersonalization, type: :model do
     end
 
     context "#color_cost" do
+      before do
+        personalization.product = Spree::Product.new
+      end
+
       it "works if no data" do
         expect(personalization.color_cost).to eql(BigDecimal.new(0))
       end
 
       it "returns 0 for basic color" do
-        personalization.product = Spree::Product.new
         personalization.color = Spree::OptionValue.new
         expect(personalization).to receive(:basic_color?).and_return(true)
 
@@ -50,7 +53,6 @@ describe LineItemPersonalization, type: :model do
       end
 
       it "adds price for custom color" do
-        personalization.product = Spree::Product.new
         personalization.color = Spree::OptionValue.new
         expect(personalization).to receive(:basic_color?).and_return(false)
 
@@ -58,7 +60,6 @@ describe LineItemPersonalization, type: :model do
       end
 
       it "returns discounted price for custom colour" do
-        personalization.product = Spree::Product.new
         expect(personalization).to receive(:color).at_least(:once).and_return(
           double('Spree::OptionValue', discount: discount)
         )
@@ -86,6 +87,25 @@ describe LineItemPersonalization, type: :model do
         expect(personalization).to receive(:customization_values).and_return([customization])
 
         expect(personalization.customizations_cost).to eql(BigDecimal.new('7.5'))
+      end
+    end
+  end
+
+  describe '#height' do
+    describe 'validation' do
+      it { is_expected.to validate_inclusion_of(:height).in_array(%w(tall standard petite)) }
+    end
+
+    describe 'values' do
+      subject(:personalization) { described_class.new }
+
+      it('is standard by default') do
+        expect(personalization.height).to eq 'standard'
+      end
+
+      it 'still allows setting custom values' do
+        personalization.height = 'foobar'
+        expect(personalization.height).to eq 'foobar'
       end
     end
   end

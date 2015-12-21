@@ -1,0 +1,22 @@
+#product-height-content.product-side-panel.panel-skirt-length
+  button.close-btn
+    = image_tag "cross.png", alt: 'close button'
+
+
+  .col-md-12
+    h2 How tall are you, babe?
+    p Tell us your height range, and we can adjust your skirt length for free!
+
+  .col-md-12.selectors
+    .col-md-3
+      a.btn.btn-block.btn-secondary.product-option.height-option href='#' data-height-option='petite' Petite
+      span Smaller than<br>167cm / 5' 7"
+    .col-md-6
+      a.btn.btn-block.btn-secondary.product-option.height-option.active href='#' data-height-option='standard' Standard
+      span Between<br>168cm / 5' 7" and 174cm / 5' 10"
+    .col-md-3
+      a.btn.btn-block.btn-secondary.product-option.height-option href='#' data-height-option='tall' Tall
+      span Taller than<br>175cm / 5' 10"
+
+  = react_component('CustomHeightsTable')
+

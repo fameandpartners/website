@@ -14,6 +14,7 @@ table.line_items
       th SKU
       th Style Name
       th Size
+      th Height
       th Colour
       th Customisations
       th Factory
@@ -45,6 +46,7 @@ table.line_items
           td = line_item.sku
           td = line_item.style_name
           td = line_item.size
+          td = line_item.height
           td = line_item.colour_name
           td = line_item.customisations.collect(&:first).join("<br>").html_safe
           td = line_item.factory

@@ -109,7 +109,7 @@ Spree::OrderMailer.class_eval do
         promotion:           @order.promotion?,
         promocode:           @order.promo_codes.join(', '),
         line_items:          line_items,
-        customer_notes:       customer_notes,
+        customer_notes:      customer_notes,
         customer_note_data:  @order.customer_notes,
         customer:            @order.name,
         phone:               @order.phone_number,
