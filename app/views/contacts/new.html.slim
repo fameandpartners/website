@@ -1,7 +1,7 @@
 .page-title.default.contact-header
   .container
     .page-title--details
-      h1.no-padding-bottom Let's have a chat      
+      h1.no-padding-bottom How can we help
 
 .page-content.contact
   .container.relative
@@ -10,7 +10,7 @@
         = f.hidden_field :site_version
         .row
           .col-md-12.form-group
-            = f.label :subject, 'How can we help?'
+            = f.label :subject, 'What can we help with?'
             = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, nil), {}, :class => 'form-control form-control-md selectbox'
             p.hint
               | Having a bad dress day?
