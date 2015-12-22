@@ -99,6 +99,8 @@ module Products
         raw[:revenue]             = book.cell(row_num, columns[:revenue])
         raw[:cogs]                = book.cell(row_num, columns[:cogs])
         raw[:color_customization] = book.cell(row_num, columns[:color_customization])
+        raw[:standard_days_for_making] = book.cell(row_num, columns[:standard_days_for_making])
+        raw[:customised_days_for_making] = book.cell(row_num, columns[:customised_days_for_making])
         raw[:short_description]   = book.cell(row_num, columns[:short_description])
 
         # Additional
@@ -208,25 +210,27 @@ module Products
             petite:               raw[:petite]
           },
           properties: {
-            style_notes:          raw[:style_notes],
-            care_instructions:    raw[:care_instructions],
-            size:                 raw[:size],
-            fit:                  raw[:fit],
-            fabric:               raw[:fabric],
-            product_type:         raw[:product_type],
-            product_category:     raw[:product_category],
-            factory_id:           raw[:factory_id],
-            factory_name:         raw[:factory_name],
-            product_coding:       raw[:product_coding],
-            shipping:             raw[:shipping],
-            stylist_quote_short:  raw[:stylist_quote_short],
-            stylist_quote_long:   raw[:stylist_quote_long],
-            product_details:      processed[:product_details],
-            revenue:              raw[:revenue],
-            cogs:                 raw[:cogs],
-            video_id:             processed[:video_id],
-            color_customization:  raw[:color_customization],
-            short_description:    raw[:short_description]
+              style_notes:                raw[:style_notes],
+              care_instructions:          raw[:care_instructions],
+              size:                       raw[:size],
+              fit:                        raw[:fit],
+              fabric:                     raw[:fabric],
+              product_type:               raw[:product_type],
+              product_category:           raw[:product_category],
+              factory_id:                 raw[:factory_id],
+              factory_name:               raw[:factory_name],
+              product_coding:             raw[:product_coding],
+              shipping:                   raw[:shipping],
+              stylist_quote_short:        raw[:stylist_quote_short],
+              stylist_quote_long:         raw[:stylist_quote_long],
+              product_details:            processed[:product_details],
+              revenue:                    raw[:revenue],
+              cogs:                       raw[:cogs],
+              video_id:                   processed[:video_id],
+              color_customization:        raw[:color_customization],
+              short_description:          raw[:short_description],
+              standard_days_for_making:   raw[:standard_days_for_making] || 5,
+              customised_days_for_making: raw[:customised_days_for_making] || 10
           },
           song: {
             link:            raw[:song_link],
@@ -249,46 +253,48 @@ module Products
 
       conformities = {
         # Basic
-        sku: /style #/i,
-        name: /product name/i,
-        description: /description/i,
+        sku:                        /style #/i,
+        name:                       /product name/i,
+        description:                /description/i,
         # price_in_aud: /rrp/i,
-        price_in_usd: /price usd/i,
-        taxons: /taxons? \d+/i,
-        colors: /(color|colour) \d+$/i,
+        price_in_usd:               /price usd/i,
+        taxons:                     /taxons? \d+/i,
+        colors:                     /(color|colour) \d+$/i,
 
         # Style Profile
-        glam: /glam$/i,
-        girly: /girly$/i,
-        classic: /classic$/i,
-        edgy: /edgy$/i,
-        bohemian: /boho$/i,
-        sexiness: /sexy/i,
-        fashionability: /fashion/i,
-        apple: /apple/i,
-        pear: /pear/i,
-        strawberry: /strawberry/i,
-        hour_glass: /hourglass|hourgalss/i,
-        column: /column/i,
-        athletic: /athletic/i,
-        petite: /petite/i,
+        glam:                       /glam$/i,
+        girly:                      /girly$/i,
+        classic:                    /classic$/i,
+        edgy:                       /edgy$/i,
+        bohemian:                   /boho$/i,
+        sexiness:                   /sexy/i,
+        fashionability:             /fashion/i,
+        apple:                      /apple/i,
+        pear:                       /pear/i,
+        strawberry:                 /strawberry/i,
+        hour_glass:                 /hourglass|hourgalss/i,
+        column:                     /column/i,
+        athletic:                   /athletic/i,
+        petite:                     /petite/i,
         # Properties
-        style_notes: /styling notes/i,
-        care_instructions: /care instructions/i,
-        fit: /fit/i,
-        size: /size/i,
-        fabric: /fabric/i,
-        product_type: /product type/i,
-        product_category: /product category/i,
-        factory_id: /factory id/i,
-        factory_name: /factory$/i,
-        color_customization: /colour customisation/i,
+        style_notes:                /styling notes/i,
+        care_instructions:          /care instructions/i,
+        fit:                        /fit/i,
+        size:                       /size/i,
+        fabric:                     /fabric/i,
+        product_type:               /product type/i,
+        product_category:           /product category/i,
+        factory_id:                 /factory id/i,
+        factory_name:               /factory$/i,
+        color_customization:        /colour customisation/i,
         #product_coding: /product coding/i,
-        shipping: /shipping/i,
-        stylist_quote_short: /stylist inspiration quote/i,
+        shipping:                   /shipping/i,
+        stylist_quote_short:        /stylist inspiration quote/i,
         #stylist_quote_long: /expanded stylist quote/i,
-        product_details: /product details/i,
-        short_description: /short description/i
+        product_details:            /product details/i,
+        short_description:          /short description/i,
+        standard_days_for_making:   /standard days for making/i,
+        customised_days_for_making: /customised days for making/i
       }
 
       conformities.each do |key, regex|
@@ -468,6 +474,8 @@ module Products
                  :cogs,
                  :video_id,
                  :color_customization,
+                 :standard_days_for_making,
+                 :customised_days_for_making,
                  :short_description]
 
       properties = args.slice(*allowed).select{ |name, value| value.present? }
