@@ -19,10 +19,10 @@
     .hr-line-dashed
     .form-group
       label.col-sm-2.control-label Publish From
-      .col-sm-10= f.text_field :publish_from, :class => 'form-control'
+      .col-sm-10= f.text_field :publish_from, :class => 'form-control datepicker'
 
       label.col-sm-2.control-label Publish To
-      .col-sm-10= f.text_field :publish_to, :class => 'form-control'
+      .col-sm-10= f.text_field :publish_to, :class => 'form-control datepicker'
 
 = render 'maybe_product_pids', variables: f.object.variables
 
