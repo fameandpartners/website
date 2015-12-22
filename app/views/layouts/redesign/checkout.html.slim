@@ -12,6 +12,7 @@ doctype html
     = render 'layouts/redesign/head'
 
   body#top
+    #shadow-layer
     - if Features.active?(:google_tag_manager)
       = render 'google_tag_manager/base'
 
