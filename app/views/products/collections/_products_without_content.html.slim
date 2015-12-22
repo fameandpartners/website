@@ -1,5 +1,4 @@
 - col = col.present? ? 3 : 4
-- cache [:layout, :products_without_content, @collection.products.map{|p| "#{p.id}-#{p.color.name}" }, col], expires_in: configatron.cache.expire.long do
-  - @collection.products.each_slice(col) do |products|
-    /! [][][][]
-    = render partial: '/products/collections/product', collection: products, as: :product, locals: {col: col}
+- @collection.products.each_slice(col) do |products|
+  /! [][][][]
+  = render partial: '/products/collections/product', collection: products, as: :product, locals: {col: col}
