@@ -48,6 +48,7 @@ class Products::DetailsResource
         taxons:                              product_taxons,
         # page#show specific details
         recommended_products:                recommended_products,
+        variants:                            product.variants,
         related_outerwear:                   related_outerwear,
         available_options:                   product_selection_options,
         moodboard:                           product_moodboard,

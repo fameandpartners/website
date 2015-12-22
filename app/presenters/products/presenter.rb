@@ -6,7 +6,7 @@ module Products
 
     attr_accessor :id, :master_id, :sku, :name, :short_description, :description,
                   :permalink, :is_active, :is_deleted, :images, :default_image, :price,
-                  :discount, :recommended_products, :related_outerwear, :available_options, :preorder, :taxons,
+                  :discount, :recommended_products, :related_outerwear, :available_options, :preorder, :taxons, :variants,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
                   :size_chart, :making_option_id, :fit, :size, :fast_making, :standard_days_for_making, :customised_days_for_making,
                   :default_standard_days_for_making, :default_customised_days_for_making,
