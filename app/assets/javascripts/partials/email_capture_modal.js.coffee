@@ -87,7 +87,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
       @fbPushTracking()
       window.track.event('LandingPageModal', 'Submitted', @opts.promocode)
-      if @opts.className == 'new-modal' || @opts.className == 'new-modal welcome-modal' || @opts.className == 'classic-modal' || @opts.className == 'classic-modal welcome-modal'
+      if @opts.className == 'new-modal' || @opts.className == 'new-modal welcome-modal'
         window.location.replace(window.location.href + "?pop_thanks=true")
         return
       window.location.reload()
