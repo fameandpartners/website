@@ -32,7 +32,7 @@ on_app_master do
 
   # Run Clear Cache worker
   begin
-    run("cd #{config.release_path} && bundle exec rake cache:clear_cache_and_reindex")
+    run("cd #{config.release_path} && bundle exec rake cache:expire &")
   rescue StandardError => e
     puts e.message
   end
