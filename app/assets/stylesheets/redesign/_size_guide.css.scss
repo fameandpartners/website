@@ -17,6 +17,12 @@
       background-color: #fcfcfc;
     }
     tbody tr{
+      @include mobile{
+        td{
+          padding-left: 1px;
+          padding-right: 1px;
+        }
+      }
       td{
         text-align: center;
       }
