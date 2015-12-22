@@ -7,7 +7,7 @@ css:
 
 - if marketing_landing_page?
   = render '/shared/marketing_pop_js'
-    
+
 javascript:
   window.product_analytics_label  = '#{{j analytics_label(:product, @product) }}';
   window.product_variants         = #{{ @product.variants.to_json }};
@@ -140,7 +140,7 @@ javascript:
   - if @recommended_products.present?
     .page-title-with-line
       .title
-        ' More cute dresses
+        ' More dresses
         .arrows-line-horizontal.left
         .arrows-line-horizontal.right
     .category-catalog.products-list
