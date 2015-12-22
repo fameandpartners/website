@@ -162,11 +162,13 @@ var HeroProductCarousel = React.createClass({
       $('.js-carousel-hero-product').slick('slickPlay');
     });
 
-    $('.js-carousel-hero-product img').mlens({
-      zoomLevel: parseFloat(window.innerWidth / 1000).toFixed(1),
-      borderColor: '#fff',
-      borderSize: 3,
-      lensSize: ['200px', '200px']
+    $('.js-zoom-trigger').on('click', function() {
+      $('.js-carousel-hero-product img').mlens({
+        zoomLevel: parseFloat(window.innerWidth / 1000).toFixed(1),
+        borderColor: '#fff',
+        borderSize: 3,
+        lensSize: ['200px', '200px']
+      });
     });
 
   },
@@ -199,6 +201,7 @@ var HeroProductCarousel = React.createClass({
               </div>
             </div>
           </div>
+          <a href='javascript:;'  className='zoom-trigger icon icon-zoom-in js-zoom-trigger'></a>
         </div>
       )
     }

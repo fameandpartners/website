@@ -21,6 +21,27 @@
   min-height: 580px;
   background: #ececf4;
 
+  .zoom-trigger {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 56px 56px 0 0;
+    border-color: $c-neutral-black transparent transparent transparent;
+
+    &:before {
+      position: absolute;
+      top: -51px;
+      left: 5px;
+      font-size: 21px;
+      color: $c-neutral-white;
+    }
+
+  }
+
   .carousel-nav {
     position: absolute;
     top: 0;
