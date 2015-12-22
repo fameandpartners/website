@@ -6,7 +6,7 @@
 
     .form-group
       label.col-sm-2.control-label Path
-      .col-sm-10= f.text_field :path, :class => 'form-control'
+      .col-sm-10= f.text_field :path, :class => 'form-control', disabled: f.object.persisted?
 
     .form-group
       label.col-sm-2.control-label Template Path
