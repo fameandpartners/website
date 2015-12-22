@@ -31,15 +31,20 @@ module AdminUi
       def create
         begin
           params[:page][:variables] = eval(params[:page][:variables])
+
           @page = Revolution::Page.new(params[:page])
           if @page.save
+            flash[:notice] = 'Page successfully created'
             redirect_to action: :index
           else
+            flash[:error] = 'An error occured, please check the variable definition'
             render action: :new
-        end
+          end
+
         rescue StandardError => e
           NewRelic::Agent.notice_error(e)
-          flash[:error] = "An error occured, please check the variable definition"
+
+          flash[:error] = 'An error occured, please check the variable definition'
           render action: :new
         end
       end
@@ -74,7 +79,6 @@ module AdminUi
       def page
         @page ||= Revolution::Page.find(params[:id])
       end
-
     end
   end
 end
