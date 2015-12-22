@@ -6,8 +6,8 @@ module Marketing
 
         private
 
-        def append_gtm_event(event:)
-          gtm_event = Marketing::Gtm::Presenter::Event.new(event: event)
+        def append_gtm_event(event_name:)
+          gtm_event = Marketing::Gtm::Presenter::Event.new(event_name: event_name)
           @gtm_container.append(gtm_event)
         end
       end

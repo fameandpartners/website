@@ -24,7 +24,7 @@ Spree::OrdersController.class_eval do
     # TODO 2015/12/30 TTL 1 month. @marketing_order now is a GTM object. @marketing_order should be deleted
     @marketing_order = Marketing::OrderPresenter.new(order)
     append_gtm_order(spree_order: order)
-    append_gtm_event(event: :completed_order) if flash[:commerce_tracking]
+    append_gtm_event(event_name: :completed_order) if flash[:commerce_tracking]
 
     respond_with(@order)
   end

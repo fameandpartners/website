@@ -2,10 +2,10 @@ module Marketing
   module Gtm
     module Presenter
       class Event < Base
-        attr_reader :event
+        attr_reader :event_name
 
-        def initialize(event:)
-          @event = event
+        def initialize(event_name:)
+          @event_name = event_name
         end
 
         def key
@@ -13,7 +13,7 @@ module Marketing
         end
 
         def body
-          { name: event }
+          event_name
         end
       end
     end
