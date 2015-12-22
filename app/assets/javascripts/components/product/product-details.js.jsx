@@ -162,7 +162,8 @@ var HeroProductCarousel = React.createClass({
       $('.js-carousel-hero-product').slick('slickPlay');
     });
 
-    $('.js-zoom-trigger').on('click', function() {
+    $('.js-zoom-trigger').one('click', function() {
+      $(this).addClass('active');
       $('.js-carousel-hero-product img').mlens({
         zoomLevel: parseFloat(window.innerWidth / 1000).toFixed(1),
         borderColor: '#fff',

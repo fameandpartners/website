@@ -32,6 +32,10 @@
     border-width: 56px 56px 0 0;
     border-color: $c-neutral-black transparent transparent transparent;
 
+    &.active {
+      opacity: .6;
+    }
+
     &:before {
       position: absolute;
       top: -51px;
