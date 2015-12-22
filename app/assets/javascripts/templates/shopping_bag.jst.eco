@@ -98,7 +98,7 @@
   </div>
 </div>
 
-<% if @date_vars["start_date"] || @date_vars["start_date_express"] : %>
+<% if @date_vars?["start_date"] || @date_vars?["start_date_express"] : %>
   <div class='delivery-date-wrapper'>
     <div class="inner">
       <div class="delivery-text text-center">
