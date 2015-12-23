@@ -1,18 +1,24 @@
 module Revolution
   class PageBannerDecorator
-    attr_accessor :page, :params
+    attr_accessor :page, :params, :position, :size, :no_of_banners
 
-    def initialize(page, params)
-      @page   = page
-      @params = params
+    def initialize(page, params, position = 1, size = 'large')
+      @page     = page
+      @params   = params
+      @position = position
+      @size     = size
     end
 
     def image
       if custom?
         "//#{configatron.asset_host}/pages#{asset_safe_page_path}/#{custom_banner}.jpg"
       else
-        page.banner_image
+        page.banner_image(position, size)
       end
+    end
+
+    def no_of_banners
+      page.no_of_banners
     end
 
     # The default Revolution Page Path is 'dresses/*'.
