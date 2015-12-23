@@ -104,7 +104,7 @@ $product-color-hot-pink: #ff3399;
 .color-micro-spot              { @include image-color-selector('BlackMicroSpot.png') }
 .color-midnight-floral         { @include image-color-selector('midnightfloral.jpg') }
 .color-monochrome              { @include image-color-selector('Monochrome.png'); }
-.color-monochrome-code         { @include image-color-selector('MonochromeCoda.png'); }
+.color-monochrome-coda         { @include image-color-selector('MonochromeCoda.png'); }
 .color-nautical-stripe         { @include image-color-selector('NauticalStripe.png'); }
 .color-pink-azalea-floral      { @include image-color-selector('PinkAzaleaFloral.png'); }
 .color-surreal-floral-black    { @include image-color-selector('SurrealFloralBlack.png'); }
