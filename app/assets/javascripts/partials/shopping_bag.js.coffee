@@ -114,7 +114,6 @@ window.ShoppingBag = class ShoppingBag
     @cart.applyPromotionCode($input.val())
 
   masterpassOpenHandler: (e) ->
-    console.log 'click1'
     e.preventDefault() if e
     return if @cart.item_count == 0
 
