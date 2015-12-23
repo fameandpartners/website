@@ -166,7 +166,6 @@ var HeroProductCarousel = React.createClass({
         $this = $(this);
         if(!$this.hasClass()) {
           $this.addClass('active');
-          console.log('jghgh');
           $('.js-carousel-hero-product img').mlens({
             zoomLevel: parseFloat(window.innerWidth / 1000).toFixed(1),
             borderColor: '#fff',
