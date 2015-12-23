@@ -15,15 +15,17 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     @$container.on('click', 'form.promo-code button', @couponFormSubmitHandler)
     @$container.on('submit', 'form.promo-code', @couponFormSubmitHandler)
     @cart.on('change', @render)
+    @initMasterPass(options)
+    @
+
+  initMasterPass: (options) =>
     @masterpass_link = options.masterpass_link
     @$masterpass_cart_callback_uri = options.masterpass_cart_callback_uri
     @$overlay = $("#shadow-layer")
     @masterpass_clicked = false
     $(@masterpass_link).on('click', @masterpassOpenHandler)
-    @
 
   masterpassOpenHandler: (e) =>
-    console.log 'click2'
     e.preventDefault() if e
     return if @cart.item_count == 0
 
