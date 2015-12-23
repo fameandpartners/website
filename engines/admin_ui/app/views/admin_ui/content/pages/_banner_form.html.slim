@@ -1,0 +1,17 @@
+- page.translations.where(locale: locale).first.banners.order(:banner_order).each do |banner|
+  .ibox.float-e-margins
+    .ibox-title
+      h6 = image_tag banner.banner.url, alt: banner.alt_text, width: '300'
+
+    .ibox-content
+      = t.fields_for :banners, banner do |banner|
+        = render partial: 'banner_form_content', :locals => { banner: banner }
+
+.ibox.float-e-margins
+  .ibox-title
+    h6 New Banner
+
+  .ibox-content
+    = t.fields_for :banners, Revolution::Translation::Banner.new do |b|
+      = render partial: 'banner_form_content', :locals => { banner: b }
+

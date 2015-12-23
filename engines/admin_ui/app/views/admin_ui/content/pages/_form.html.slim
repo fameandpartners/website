@@ -84,18 +84,19 @@
           .panel-body
             - if page.translations.where(locale: "en-US").present?
               = f.fields_for :translations, page.translations.where(locale: "en-US").first do |t|
-                = render :partial => 'translation_form', :locals => { :t => t }
+                = render :partial => 'translation_form', :locals => { :t => t, locale: 'en-US' }
             - else
               = f.fields_for :translations, Revolution::Translation.new  do |t|
-                = render :partial => 'translation_form', :locals => { :t => t }
+                = render :partial => 'translation_form', :locals => { :t => t, locale: 'en-US'  }
+
         #tab-en-au.tab-pane
           .panel-body
             - if page.translations.where(locale: "en-AU").present?
               = f.fields_for :translations, page.translations.where(locale: "en-AU").first do |t|
-                = render :partial => 'translation_form', :locals => { :t => t }
+                = render :partial => 'translation_form', :locals => { :t => t, locale: 'en-AU'  }
             - else
               = f.fields_for :translations, Revolution::Translation.new  do |t|
-                = render :partial => 'translation_form', :locals => { :t => t }
+                = render :partial => 'translation_form', :locals => { :t => t, locale: 'en-AU'  }
         #tab-new.tab-pane
           .panel-body
             | new translation

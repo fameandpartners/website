@@ -820,6 +820,7 @@ ActiveRecord::Schema.define(:version => 20160410235811) do
   add_index "revolution_pages", ["publish_from", "publish_to"], :name => "index_revolution_pages_on_publish_from_and_publish_to"
   add_index "revolution_pages", ["rgt"], :name => "index_revolution_pages_on_rgt"
 
+
   create_table "revolution_translations", :force => true do |t|
     t.integer  "page_id"
     t.text     "locale"
