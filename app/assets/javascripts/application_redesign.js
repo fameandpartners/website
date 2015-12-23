@@ -11,6 +11,7 @@
 //= require bootstrap
 
 //= require libs/jquery.dotdotdot.min
+//= require libs/jquery.mlens.min
 
 // React
 
@@ -20,9 +21,10 @@
 //= require es5-shim/es5-shim.js
 //= require react
 //= require react_ujs
+//= require alt/dist/alt.min.js
 //= require components
 
-// node modules
+// npm modules
 //= require slick-carousel/slick/slick.min.js
 
 //---------------------------
@@ -114,14 +116,14 @@ jQuery(document).ready(function($){
     window.location = $(this).attr('href') + '?email=' + email;
   });
 
-  //home page slider
-  $(function() {
-    $(".rslides").responsiveSlides({
-    auto: false,             // Boolean: Animate automatically, true or false
-    pager: true,           // Boolean: Show pager, true or false
-    speed: 3000,            // Integer: Speed of the transition, in milliseconds
-    timeout: 6000,          // Integer: Time between slide transitions, in milliseconds
-    });
-  });
-
+	//home page slider		
+	$(function() {		
+		$(".rslides").responsiveSlides({		
+			auto: false,             // Boolean: Animate automatically, true or false		
+	 		pager: true,           // Boolean: Show pager, true or false		
+			speed: 3000,            // Integer: Speed of the transition, in milliseconds		
+	  		timeout: 6000,          // Integer: Time between slide transitions, in milliseconds		
+    	});		
+	});
+	
 })

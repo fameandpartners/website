@@ -10,16 +10,6 @@ ruby:
   init_product_details_page = "
       page.initProductDetailsPage({
         product_paths: #{ product_paths.to_json },
-        slider: {
-          container: '#slides',
-          images: #{ @product.all_images.to_json },
-          options: {
-            animation: 'fade',
-            animation_speed: 200,
-            play: 6000,
-            preselected: '#{raw @product.color_id}'
-          }
-        },
         selector: {
           product_id: #{ @product.id },
           custom_id: #{ @product.master_id },
@@ -58,6 +48,16 @@ ruby:
         fitguideContainer: '#fit-guide-content'
       });
   "
+
+  init_product_details_page_new = "
+    window.ProductDetails = window.ProductDetails || {};
+    window.ProductDetails.colorOptions = #{ @product.default_color_options.to_json };
+    window.ProductDetails.productImages = #{ @product.all_images.to_json };
+    window.ProductDetails.selectedColor = #{ @product.color_id };
+  "
+
+= content_for :inline_javascript_top do
+  = raw init_product_details_page_new
 
 = content_for :inline_javascript do
   = raw init_product_details_page
@@ -105,32 +105,23 @@ ruby:
             span
               | While stocks last.
 
-.slides-outer-wrapper
-  .slides-inner-wrapper
-    #slides
-      .slides-container
-        / note: we should crop images & update images preloading mechanics - too slow currently
-        = image_tag @product.featured_image.original, id: "product-image-slide-#{ @product.featured_image.id }", class: 'product-image-slide', data: { color_id: @product.featured_image.color_id }, alt: @product.name, style: 'width: 1280px; overflow: hidden;'
-
-      nav.slides-navigation
-        a.next href="#"
-          span.fa.fa-angle-right.fa-4x
-        a.prev href="#"
-          span.fa.fa-angle-left.fa-4x
+.product-selection-wrap
+  .hero-product-wrap
+    = react_component('HeroProductCarousel')
 
   /! Product Section
-  .container-fluid.product-content.text-center
-    .col-md-4.col-md-offset-8.col-sm-6.col-sm-offset-6.product-details.product-section--selection.no-padding
-      .product-details-outer
-        .product-details-inner
-          .row
-            h1 = @product.name
+  .product-selector
+    .outer-wrap
+      .inner-wrap
+        .row
+          .col-md-12
+            h1.heading = @product.name
             - if @product.name.downcase.include?('skirt')
-              p.product-section-skirt-alert
+              p 
                 | (Skirt Only)
-            p.product-section-description
             p#product-price
               span.price = product_price_with_discount(@product.price, @product.discount)
+          .col-md-12
             .icon-wrap
               .icon-fit
                 .copy Guaranteed to fit
@@ -229,14 +220,3 @@ hr
 
   - if @product.making_options.present?
     = render partial: 'side_panel_making_options', locals: { making_options: @product.making_options }
-
-
-coffee:
-  $(window).load ->
-    fbModalHeight = $('.auto-discount-applied').height()
-    if fbModalHeight > 0
-      $('#slides').css("marginTop", 209)
-      $('.product-content').css("top", "23rem")
-
-    if $("#sale-banner").height() > 0
-      $('.product-details').css('margin-top','30px')

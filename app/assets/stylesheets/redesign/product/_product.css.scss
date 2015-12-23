@@ -1,25 +1,30 @@
-@import 'redesign/vars';
-@import 'media_queries';
+/* [Product Page]
+-------------------------------------------------------*/
+.product-selection-wrap {
+  position: relative;
+  min-height: 580px;
 
-.list-group-item.customization-option  {
+  .list-group-item.customization-option  {
 
-	img {
-		height:140px;
-		width:140px;
-	}
-}
+  	img {
+  		height:140px;
+  		width:140px;
+  	}
+  }
 
-.product-content {
-	position: absolute;
-	z-index: 50;
-	top: 0;
-  height: 100%;
+  .product-content {
+  	position: absolute;
+  	z-index: 50;
+  	top: 0;
+    height: 100%;
 
-	.row {
-		padding-top: 1.45rem;
+  	.row {
+  		padding-top: 1.45rem;
 
-    &:first-child {
-      padding-top: 0;
+      &:first-child {
+        padding-top: 0;
+      }
+
     }
 
 	}
@@ -34,73 +39,86 @@
     cursor: pointer;
   }
 
-  .btn-secondary {
-    height: 45px;
-    padding: 0;
+  @media (max-width: 1000px) {
 
-    &:hover {
-      background-color: #355e6d;
+    .product-selector {
+      padding-right: 20px;
+      min-width: 340px;
     }
+
   }
 
-  .secondary-actions .col-md-6:last-child {
-    @media(max-width: 480px){
-      padding-left: 0;
-      margin-top: 15px;
-    }
-  }
+  @media (max-width: $bootstrap-sm-width - 1px) {
 
-  @media (max-width: 767px) {
-
-    & {
+    .product-selector {
       position: relative;
-      height: auto;
-      margin-top: 20px;
-      margin-bottom: 40px;
+      width: 100%;
+      min-width: inherit;
+      max-width: none;
+      padding-right: 0;
+      padding: 30px 20px;
+
+      .col-md-6 {
+        margin-bottom: 20px;
+      }
+
     }
 
   }
 
 }
-// TODO find out what is this for
-@media(max-width: 767px){
-	.screen-height {
-    @media(max-height: 666px){
-		  height:90vh;
-    }
-    @media(min-height: 667px)and(max-height: 959px){
-      height:91vh;
-    }
-    @media(min-height: 960px){
-      height:94vh;
-    }
-	}
-}
 
-.product-details {
+.product-selector {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35%;
+  min-width: 460px;
+  max-width: 620px;
+  height: 100%;
+  padding-right: 50px;
+  text-align: center;
 
-	h1 {
-    font-family: $font-family-secondary;
-		font-size: 2rem;
-    font-weight: 500;
-    margin-top: 0;
-    padding-bottom: 0;
-	}
-
-  .product-details-outer {
+  .outer-wrap {
     display: table;
     width: 100%;
     height: 100%;
   }
 
-  .product-details-inner {
+  .inner-wrap {
     display: table-cell;
     vertical-align: middle;
   }
 
+  .col-md-12 {
+    margin-bottom: 20px;
+  }
+
+  .heading {
+    font-family: $font-family-secondary;
+    font-size: 2rem;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .btn {
+    font-family: $font-family-secondary;
+    font-size: 1.5rem;
+  }
+
+  .btn-secondary {
+    height: 45px;
+    padding: 0;
+
+    &:hover {
+      opacity: .6;
+    }
+
+  }
+
   .icon-wrap {
-    @extend %cfix;
     color: $c-neutral-9;
+    @extend %cfix;
 
     > div {
       float: left;
@@ -137,7 +155,7 @@
       font-size: 10px;
     }
 
-    @include mobile {
+    @media (max-width: 1000px) {
 
       & > div {
         padding: 0 5px;
@@ -147,11 +165,11 @@
 
   }
 
-	.product-section-skirt-alert {
-		font-weight: normal;
-		margin-top: -10px;
-	}
+}
 
+.list-group-item.customization-option img {
+	height: 140px;
+	width: 140px;
 }
 
 #product-size, #product-color, #product-customizations {
@@ -195,6 +213,8 @@
   padding-top: 1.5rem;
   font-size: 12px;
   line-height: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
 
 	&:hover {
 		color: black;
@@ -220,10 +240,6 @@
 
 .price-discount {
 	font-weight: 400;
-}
-
-#product-price{
-	font-weight: 600;
 }
 
 .price-sale {
@@ -255,19 +271,6 @@
 	overflow: hidden !important;
 }
 
-.secondary-actions {
-	.col-md-6 {
-		padding:0;
-	}
-  .col-md-6:first-child {
-    padding-right:10px;
-  }
-
-  .col-md-6:last-child {
-    padding-left:10px;
-  }
-}
-
 #product-overlay {
 	&.is-visible {
     animation: 0.3s ease 0s normal none 1 running cd-fade-in;
@@ -295,13 +298,6 @@
 	 	}
 }
 
-.secondary-actions .col-md-6:first-child {
-
-	@media(max-width: 768px){
-			padding-right: 0;
-	 	}
-}
-
 .slides-outer-wrapper {
   position: relative;
   min-height: 500px;
@@ -321,12 +317,6 @@
     text-transform: uppercase;
     font-weight:    600 !important;
     margin-bottom:  0;
-  }
-}
-
-@media (max-width: 768px) and (orientation: portrait) {
-  #slides img.product-image-slide {
-    left: -35% !important;
   }
 }
 

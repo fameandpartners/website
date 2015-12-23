@@ -17,3 +17,4 @@ app/assets/javascripts/partials/wishlist_page.js.coffee
 app/helpers/products_helper.rb
 app/views/personalization/products/style.html.slim
 app/views/spree/products/show.html.slim
+app/assets/javascripts/partials/product_details.js.coffee

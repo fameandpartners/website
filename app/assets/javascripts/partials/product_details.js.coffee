@@ -1,9 +1,5 @@
 # usage
 #  page.initProductDetailsPage(
-#    slider: {
-#      container: '#slides',
-#      options: { animation: 'fade', play: 6000 },
-#    },
 #    options_select: {
 #      variants: [],
 #      container: '',
@@ -13,11 +9,7 @@
 # );
 
 page.initProductDetailsPage = (options = {}) ->
-  slider      = null
   selector    = null
-
-  # init slider images
-  slider     = new helpers.ProductImagesSlider(options.slider.container, options.slider.images, options.slider.options)
   selector   = new window.helpers.ProductVariantsSelector(options.selector)
 
   # if user selects 'red' color, then change path to /dresses/slug/red
@@ -37,7 +29,6 @@ page.initProductDetailsPage = (options = {}) ->
 
   # change images colors
   selector.on('change', (event, data) ->
-    slider.showImagesWithColor(data.color_id)
     changeUrlToSelectedColor(data.color_id)
     # Push Generic change event with updated selection options.
     window.app.events.trigger('productSelectionOptionsChange', data)
