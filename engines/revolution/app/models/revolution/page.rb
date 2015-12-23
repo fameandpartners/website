@@ -48,10 +48,27 @@ module Revolution
       @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
     end
 
-    def banner_image
-      collection.details.banner.image
+    def banner_image(position, size)
+      if translations.where(locale: locale).first.banners.present?
+        banners = translations.where(locale: locale).first.banners.where('banner_order >= ?', position).order(:banner_order)
+        if banners.blank?
+          #If not found default to the first one
+          banners = translations.where(locale: locale).first.banners.where('banner_order >= ?', 0).order(:banner_order)
+        end
+        banners.first.banner.url
+      else
+        collection.details.banner.image
+      end
     end
 
+    def no_of_banners
+      if translations.where(locale: locale).first.banners.present?
+        translations.where(locale: locale).first.banners.count
+      else
+        1
+      end
+    end
+    
     def translation
       @translation ||= translations.find_for_locale(locale)
     end
