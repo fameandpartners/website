@@ -1,0 +1,10 @@
+.form-group
+  label.col-sm-2.control-label Order
+  .col-sm-10 = banner.number_field :banner_order, min: 1, step: 1, :class => 'form-control'
+.form-group
+  label.col-sm-2.control-label Alt Text
+  .col-sm-10 = banner.text_field :alt_text, :class => 'form-control'
+.form-group
+  label.col-sm-2.control-label Banner
+  .col-sm-10 = banner.file_field :banner
+

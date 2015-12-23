@@ -3,11 +3,14 @@ module Revolution
 
     DEFAULT_LOCALE = 'en-US'
 
-    attr_accessible :locale, :title, :meta_description, :heading, :sub_heading, :description, :page
+    attr_accessible :banners_attributes, :locale, :title, :meta_description, :heading, :sub_heading, :description, :page
 
     validates :page, :locale, :title, :meta_description, presence: true
 
     belongs_to :page, inverse_of: :translations
+
+    has_many :banners, dependent: :destroy, inverse_of: :translation
+    accepts_nested_attributes_for :banners, reject_if: :all_blank
 
     def self.find_for_locale(locale = nil)
       locale ||= Translation::DEFAULT_LOCALE
