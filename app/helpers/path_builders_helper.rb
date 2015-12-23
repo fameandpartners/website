@@ -1,6 +1,6 @@
 # encoding: utf-8
 module PathBuildersHelper
-  # products path generators should be placed here 
+  # products path generators should be placed here
   #
   # active urls
   #   /dresses  -> dresses_path
@@ -15,9 +15,9 @@ module PathBuildersHelper
   #   /collection/taxon => /dresses/taxon
   #     collection_taxon_path(collection)
   #
-  #   /au/dresses/custom-dress-eva-456?params => /dresses/styleit-eva-456 
-  #     personalize_path 
-  #     personalization_style_product_path 
+  #   /au/dresses/custom-dress-eva-456?params => /dresses/styleit-eva-456
+  #     personalize_path
+  #     personalization_style_product_path
   #
   #   taxon_path
 
@@ -35,7 +35,7 @@ module PathBuildersHelper
     path_parts.reject! { |el| el.blank? }
     path =  "/" + path_parts.join('/')
     path = "#{path}?#{options.to_param}" if options.present?
-    
+
     url_without_double_slashes(path)
   end
 
@@ -109,7 +109,9 @@ module PathBuildersHelper
       self.url_options[:site_version],
       'dresses'
     ]
-    taxon = Repositories::Taxonomy.get_taxon_by_name(taxon_name)
+    taxon = Rails.cache.fetch([taxon_name], expires_in: configatron.cache.expire.long) do
+      Repositories::Taxonomy.get_taxon_by_name(taxon_name)
+    end
     path_parts.push(taxon.permalink.parameterize) if taxon.present?
 
     build_url(path_parts, options)
