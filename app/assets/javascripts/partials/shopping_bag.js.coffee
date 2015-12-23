@@ -41,13 +41,9 @@ window.ShoppingBag = class ShoppingBag
     @
 
   addEventToMasterPassButton: () ->
-    $(@masterpass_link || '#buyWithMasterPass').unbind('click');
     $(@masterpass_link || '#buyWithMasterPass').on('click', @masterpassOpenHandler)
 
   render: () ->
-    @$container.html(@template(cart: @cart.data, country_code: @country_code, value_proposition: @value_proposition, shipping_message: @shipping_message))
-    @addEventToMasterPassButton()
-
     $.ajax(
       url: urlWithSitePrefix("/user_cart/order_delivery_date")
       type: 'GET'
