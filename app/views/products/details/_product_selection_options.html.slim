@@ -3,17 +3,17 @@
     a#product-size-action.btn-customize Size
 
 - if @product.colors?
-.col-md-12
+  .col-md-12
     a#product-colorize-action.btn-customize
       | Color
 
 - if @product.customizable?
-.col-md-12
+  .col-md-12
     a#product-customize-action.btn-customize
       | Customize
 
 - if Features.active?(:height_customisation) && @product.height_customisable?
-  .row
+  .col-md-12
     a#product-height-action.btn-customize
       | Height - Standard
 
@@ -23,7 +23,7 @@
       | Express Making
 
 .col-md-12
-    button.btn.btn-block.btn-black.buy-button Add to Cart
+  button.btn.btn-block.btn-black.buy-button Add to Cart
 
 - if delivery_date_messaging_enabled?
   .col-md-12
