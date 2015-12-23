@@ -2,7 +2,7 @@
 -------------------------------------------------------*/
 .product-selection-wrap {
   position: relative;
-  min-height: 580px;
+  min-height: 600px;
 
   .list-group-item.customization-option  {
 
@@ -91,7 +91,11 @@
   }
 
   .col-md-12 {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+  }
+
+  .title {
+    margin-bottom: 0;
   }
 
   .heading {
