@@ -163,13 +163,16 @@ var HeroProductCarousel = React.createClass({
     });
 
     $('.js-zoom-trigger').one('click', function() {
-      $(this).addClass('active');
-      $('.js-carousel-hero-product img').mlens({
-        zoomLevel: parseFloat(window.innerWidth / 1000).toFixed(1),
-        borderColor: '#fff',
-        borderSize: 3,
-        lensSize: ['200px', '200px']
-      });
+        $this = $(this);
+        if(!$this.hasClass()) {
+          $this.addClass('active');
+          $('.js-carousel-hero-product img').mlens({
+            zoomLevel: parseFloat(window.innerWidth / 1000).toFixed(1),
+            borderColor: '#fff',
+            borderSize: 3,
+            lensSize: ['200px', '200px']
+          });
+      }
     });
 
   },
