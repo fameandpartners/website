@@ -2,6 +2,43 @@
 -------------------------------------------------------*/
 .moodboard-v2 {
   margin-bottom: 40px;
+  .honeymoon{
+    border: 1px solid black;
+    padding: 20px;
+    .head{
+      text-decoration: underline;
+    }
+    .honeymoon-content{
+      margin-top: 20px;
+    }
+    .contact{
+      margin-top: 10px;
+      a{
+        text-decoration: underline;
+        font-style: italic;
+        color: inherit;
+        margin-right: 5px;
+      }
+    }
+    .term{
+      margin-top: 10px;
+      a{
+        text-decoration: underline;
+        font-style: italic;
+        color: $c-neutral-black;
+      }
+    }
+  }
+
+  .edit-setting{
+    font-size: 0.875em;
+    font-weight: 400;
+    a{
+      text-decoration: underline;
+      font-style: italic;
+      color: inherit;
+    }
+  }
 
   .menu-wrap,
   .panel-aside {

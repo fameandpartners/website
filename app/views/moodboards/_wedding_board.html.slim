@@ -10,15 +10,15 @@
           = render 'items'
       aside.col-md-4.tab-content#mob-tab-aside
 
+        - if moodboard_editable?
+          p.edit-setting.text-center
+            = link_to("Edit", edit_moodboard_path(@resource))
+            span &nbsp;my settings
+
         .panel-aside
           - if @resource.event_date?
-            p 
-              span.highlight Wedding Date:&nbsp;
-              em  = @resource.event_date
-          - if moodboard_editable?
-            p
-              = link_to("Edit", edit_moodboard_path(@resource))
-              span &nbsp;my settings
+            h3.heading Wedding Date
+            = @resource.event_date
 
         - if @resource.description?
           .panel-aside
@@ -30,12 +30,20 @@
           = render 'collaborators', moodboard: @resource
 
         .panel-aside.panel-swatches
-          h3.heading SWATCHES
+          h3.heading SHOP BY SWATCHES
           = render 'color_swatches', colors: @resource.items.active.map(&:color)
 
         .panel-aside
           h3.heading PERSONAL STYLIST
-          p 
+          p
             span Need some help with ideas or finalising your order?&nbsp;
-            = link_to 'Get in contact', style_consultation_path 
+            = link_to 'Get in contact', contact_path(:selected_option => 'Book a Style Consultation')
             span &nbsp;with one of our personal stylists now.
+
+        .honeymoon.text-center
+          .head FREE HONEYMOON DRESS
+          .honeymoon-content When you purchase 5 or more dresses, we'll give you a <b>free honeymoon dress</b> to help celebrate!
+          .contact
+            = link_to 'Get in contact', contact_path(:selected_option => 'Book a Style Consultation')
+            | with our customer service team to co-ordinate the free honeymoon dress.*
+          .term = link_to 'Terms and conditions' , terms_path
