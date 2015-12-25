@@ -15,12 +15,12 @@
               li.active
                 .tab
                   .inner-wrap
-                    span = mb.name.upcase == 'WISHLIST' ? 'MY MOODBOARD' : mb.name
+                    span = mb.default? ? 'MY MOODBOARD' : mb.name
             - else
               li
                 = link_to moodboard_path(mb), class:'tab'
                   .inner-wrap
-                    span = mb.name.upcase == 'WISHLIST' ? 'MY MOODBOARD' : mb.name
+                    span = mb.default? ? 'MY MOODBOARD' : mb.name
           / temporarily disabling more than 2 moodboard
           - if collection.count < 2
             li
