@@ -13,6 +13,11 @@
 //= require libs/underscore-min
 //= require inspinia-rails
 //= require jquery-ui
+
+//= require react
+//= require react_ujs
+//= require components
+
 //= require_tree .
 
 $(document).ready(function(){
