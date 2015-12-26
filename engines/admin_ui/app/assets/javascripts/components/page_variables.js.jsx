@@ -23,13 +23,10 @@ var PageVariablesField = React.createClass({
         this.setState({variableValue: e.target.value});
     },
     render: function () {
-        var keyInputName = "variables[" + this.props.index + "][" + this.props.variableKey + "]";
-        var valueInputName = "variables[" + this.props.index + "][" + this.props.variableValue + "]";
-
         return (
             <div>
-                <input type="text" name={keyInputName} placeholder="Variable Key" onChange={this.handleKeyChange} value={this.state.variableKey} />
-                <input type="text" name={valueInputName} placeholder="Variable Value" onChange={this.handleValueChange} value={this.state.variableValue} />
+                <input type="text" name="page[variables][][key]" placeholder="Variable Key" onChange={this.handleKeyChange} value={this.state.variableKey} />
+                <input type="text" name="page[variables][][value]" placeholder="Variable Value" onChange={this.handleValueChange} value={this.state.variableValue} />
                 <button onClick={this.handleFieldRemove}>Remove</button>
             </div>
         );
@@ -41,7 +38,7 @@ var PageVariableList = React.createClass({
         var self = this;
         var variables = self.props.variables.map(function (field, index) {
             return (
-                <PageVariablesField key={index} index={index} handleFieldRemove={self.props.handleFieldRemove} variableKey={field.variableKey} variableValue={field.variableValue} />
+                <PageVariablesField key={index} handleFieldRemove={self.props.handleFieldRemove} variableKey={field.variableKey} variableValue={field.variableValue} />
             );
         });
 
