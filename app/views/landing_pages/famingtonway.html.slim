@@ -100,16 +100,16 @@
               .content-wrap
                 h2.heading Those who <em>play </em>together STAY together!
                 = link_to 'Shop dresses', bridesmaid_collection_path, class:'btn btn-lowlight'
-          picture.media-wrap
-            source media='(max-width: 768px)' srcset='#{image_path("landingpages/famingtonway/tile-stay-together-mob.jpg")}'
-            source media='(min-width: 769px)' srcset='#{image_path("landingpages/famingtonway/tile-stay-together.jpg")}'
-            img src='#{image_path("landingpages/famingtonway/tile-stay-together.jpg")}' srcset='
-              #{image_path("landingpages/famingtonway/tile-stay-together-mob.jpg")} 768w,
-              #{image_path("landingpages/famingtonway/tile-stay-together.jpg")} 1024w'
+          picture
+            = link_to 'https://www.instagram.com/fameweddings/', class:'media-wrap'
+              source media='(max-width: 768px)' srcset='#{image_path("landingpages/famingtonway/tile-stay-together-mob.jpg")}'
+              source media='(min-width: 769px)' srcset='#{image_path("landingpages/famingtonway/tile-stay-together.jpg")}'
+              img src='#{image_path("landingpages/famingtonway/tile-stay-together.jpg")}' srcset='
+                #{image_path("landingpages/famingtonway/tile-stay-together-mob.jpg")} 768w,
+                #{image_path("landingpages/famingtonway/tile-stay-together.jpg")} 1024w'
 
       .col-md-12
         h2.heading-secondary With love x
 
     .row
       = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/tile-footer.jpg"}
-

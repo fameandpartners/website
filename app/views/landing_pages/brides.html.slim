@@ -84,7 +84,7 @@
       .col-md-12.section-register
         = link_to build_taxon_path('Wedding'), class:'media-wrap'
           = image_tag "landingpages/brides/tile-shop.jpg"
-        .media-wrap
+        = link_to 'https://www.instagram.com/fameweddings/', class:'media-wrap'
           = image_tag "landingpages/brides/tile-fameweddings.jpg"
 
       .col-md-12
@@ -92,4 +92,3 @@
 
     .row
       = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/brides/tile-footer.jpg"}
-
