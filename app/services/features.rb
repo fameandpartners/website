@@ -1,24 +1,27 @@
 require 'redis'
 module Features
   DEFINED_FEATURES = %i(checkout_fb_login
-                          content_revolution
-                          delivery_date_messaging
-                          enhanced_moodboards
-                          fameweddings
-                          maintenance
-                          send_promotion_email_reminder
-                          shipping_message
-                          test_analytics
-                          express_making
-                          gift
-                          google_tag_manager
-                          marketing_modals
-                          masterpass
-                          moodboard
-                          style_quiz
-                          redirect_to_com_au_domain
-                          sales
-                          getitquick_unavailable)
+                        content_revolution
+                        delivery_date_messaging
+                        enhanced_moodboards
+                        express_making
+                        fameweddings
+                        getitquick_unavailable
+                        gift
+                        google_tag_manager
+                        height_customisation
+                        maintenance
+                        marketing_modals
+                        masterpass
+                        moodboard
+                        redirect_to_com_au_domain
+                        sales
+                        send_promotion_email_reminder
+                        shipping_message
+                        style_quiz
+                        test_analytics
+                        test_flag
+                        )
 
   class << self
     extend Forwardable
