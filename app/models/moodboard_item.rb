@@ -10,6 +10,7 @@ class MoodboardItem < ActiveRecord::Base
   belongs_to :color,   class_name: 'Spree::OptionValue'
   belongs_to :variant, class_name: 'Spree::Variant'
   belongs_to :user,    class_name: 'Spree::User'
+  has_many :moodboard_comments
 
   attr_accessible :uuid, :comments, :likes
 

@@ -1,4 +1,7 @@
 FameAndPartners::Application.routes.draw do
+  resources :moodboard_comments, exclude: [:index, :show]
+
+
   ############################
   # Devise Omniauth Workaround
   ############################

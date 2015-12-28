@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151210230429) do
+ActiveRecord::Schema.define(:version => 20151224020910) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -485,6 +485,16 @@ ActiveRecord::Schema.define(:version => 20151210230429) do
   add_index "moodboard_collaborators", ["email"], :name => "index_moodboard_collaborators_on_email"
   add_index "moodboard_collaborators", ["moodboard_id"], :name => "index_moodboard_collaborators_on_moodboard_id"
   add_index "moodboard_collaborators", ["user_id"], :name => "index_moodboard_collaborators_on_user_id"
+
+  create_table "moodboard_comments", :force => true do |t|
+    t.integer  "moodboard_item_id"
+    t.integer  "user_id"
+    t.text     "comment"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "moodboard_comments", ["moodboard_item_id"], :name => "index_moodboard_comments_on_moodboard_item_id"
 
   create_table "moodboard_item_events", :force => true do |t|
     t.string   "moodboard_item_uuid"

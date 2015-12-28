@@ -1,0 +1,2 @@
+module MoodboardCommentsHelper
+end
