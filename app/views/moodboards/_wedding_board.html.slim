@@ -40,10 +40,10 @@
             = link_to 'Get in contact', contact_path(:selected_option => 'Book a Style Consultation')
             span &nbsp;with one of our personal stylists now.
 
-        .honeymoon.text-center
-          .head FREE HONEYMOON DRESS
-          .honeymoon-content When you purchase 5 or more dresses, we'll give you a <b>free honeymoon dress</b> to help celebrate!
-          .contact
+        .panel-aside.alt.text-center
+          .heading FREE HONEYMOON DRESS
+          p When you purchase 5 or more dresses, we'll give you a <b>free honeymoon dress</b> to help celebrate!
+          p
             = link_to 'Get in contact', contact_path(:selected_option => 'Book a Style Consultation')
-            | with our customer service team to co-ordinate the free honeymoon dress.*
-          .term = link_to 'Terms and conditions' , terms_path
+            | &nbsp;with our customer service team to co-ordinate the free honeymoon dress.*
+          p = link_to 'Terms and conditions' , terms_path
