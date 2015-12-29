@@ -1,6 +1,8 @@
 class CustomItemSku
   attr_reader :line_item
 
+  CUSTOM_MARKER = "X".freeze
+
   def initialize(line_item)
     @line_item = line_item
   end
@@ -11,7 +13,7 @@ class CustomItemSku
     "#{style_number}#{size}#{colour}#{custom}"
   rescue StandardError => e
     NewRelic::Agent.notice_error(e, line_item_id: line_item.id)
-    "#{line_item.variant.sku}#{custom}"
+    "#{line_item.variant.sku}#{CUSTOM_MARKER}"
   end
 
   def style_number
@@ -31,10 +33,17 @@ class CustomItemSku
   end
 
   def custom
-    "X#{height}"
+    "#{customisations}#{height}"
   end
 
-  def height
+  private def customisations
+    line_item
+      .personalization
+      .customization_value_ids
+      .map {|vid| "#{CUSTOM_MARKER}#{vid}"}.join('').presence || CUSTOM_MARKER
+  end
+
+  private def height
     initial = line_item.personalization.height.to_s.upcase.first
     "H#{initial}"
   end
