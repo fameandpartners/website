@@ -18,6 +18,10 @@ module Marketing
           product.price.amount
         end
 
+        def variants
+          product.variants.map { |variant| Variant.new(spree_variant: variant).body }
+        end
+
         def price_with_discount
           product.price_amount
         end
@@ -94,7 +98,8 @@ module Marketing
               images:            all_images,
               description:       description,
               expressMaking:     product.fast_making,
-              sizes:             sizes
+              sizes:             sizes,
+              variants:          variants
           }
         end
       end

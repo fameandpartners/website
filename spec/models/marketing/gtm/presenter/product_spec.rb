@@ -72,7 +72,8 @@ module Marketing
               size:              'Top length: 40.5cm Skirt Length: 50cm',
               style_notes:       'Product Style Notes',
               size_chart:        '2015',
-              fast_making:       true
+              fast_making:       true,
+              variants:          []
           )
         end
 
@@ -99,7 +100,8 @@ module Marketing
                                            selectedColor:     'Red',
                                            sizes:             ['US 2'],
                                            sku:               'ABC123',
-                                           type:              'dresses'
+                                           type:              'dresses',
+                                           variants:          []
                                        })
           end
         end
