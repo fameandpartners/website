@@ -3,6 +3,23 @@
 .moodboard-v2 {
   margin-bottom: 40px;
 
+  .edit-setting {
+    margin-bottom: 20px;
+    font-size: 0.875em;
+    font-weight: 400;
+
+    a {
+      text-decoration: underline;
+      font-style: italic;
+      color: inherit;
+    }
+
+  }
+
+  .panel-aside.alt{
+    border: 1px solid $c-neutral-black;
+  }
+
   .menu-wrap,
   .panel-aside {
 
@@ -240,6 +257,10 @@
           height: 60px;
         }
 
+      }
+
+      .edit-setting {
+        margin-bottom: 40px;
       }
 
     }

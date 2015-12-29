@@ -11,7 +11,7 @@
         .row
           .col-md-12.form-group
             = f.label :subject, 'What can we help with?'
-            = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, nil), {}, :class => 'form-control form-control-md selectbox'
+            = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, params[:selected_option]), {}, :class => 'form-control form-control-md selectbox'
             p.hint
               | Having a bad dress day?
               = link_to 'Return or exchange an order', user_orders_path

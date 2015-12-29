@@ -1,12 +1,12 @@
 = flash_messages
 .menu-wrap
   h1.title-line-on-sides
-    .inner-wrap = @resource.name
+    .inner-wrap MOODBOARDS
   - if enhanced_moodboards_enabled?
     .row.hidden-xs.hidden-sm
       .col-md-3
         .message
-          h2.heading MY MOODBOARDS
+          h2.heading MOODBOARDS
           p Set up a moodboard for each of your events & share with your friends to get their thoughts.
       .col-md-9
         ul
@@ -15,15 +15,15 @@
               li.active
                 .tab
                   .inner-wrap
-                    span = mb.name
+                    span = mb.default? ? 'MY MOODBOARD' : mb.name
             - else
-              li 
+              li
                 = link_to moodboard_path(mb), class:'tab'
                   .inner-wrap
-                    span = mb.name
+                    span = mb.default? ? 'MY MOODBOARD' : mb.name
           / temporarily disabling more than 2 moodboard
           - if collection.count < 2
-            li 
+            li
               = link_to '+', new_moodboard_path, class:'btn-add'
               .hide-visually Create New Moodboard
   .row.hidden-md.hidden-lg
