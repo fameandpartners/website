@@ -12,7 +12,7 @@ class MoodboardItem < ActiveRecord::Base
   belongs_to :user,    class_name: 'Spree::User'
   has_many :moodboard_comments
 
-  attr_accessible :uuid, :comments, :likes
+  attr_accessible :uuid, :comments, :likes, :user_id, :moodboard_id, :product_id, :product_color_value_id, :color_id
 
   validates :uuid, uniqueness: true, presence: true
 

@@ -23,120 +23,103 @@ RSpec.describe MoodboardCommentsController, :type => :controller do
   # This should return the minimal set of attributes required to create a valid
   # MoodboardComment. As you add validations to MoodboardComment, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:moodboard_user) { create(:spree_user) }
+  let(:current_user) { create(:spree_user) }
+  let(:product) { create(:spree_product) }
+  let(:moodboard) { Moodboard.create(user_id: moodboard_user.id, name: 'Test Wedding',
+                                     purpose: 'wedding', event_date: Date.today + 60.days,
+                                     description: 'Test Wedding') }
+  let(:moodboard_item) { MoodboardItem.create(moodboard_id: moodboard.id, product_id: product.id,
+                                              uuid: Random.new().rand(10000), product_color_value_id: 317,
+                                              color_id: 38, user_id: moodboard_user.id) }
+
+
+  let(:valid_attributes) { { moodboard_item_id: moodboard_item.id,
+                             user_id: current_user.id,
+                             comment: 'First test comment' } }
+
+
+  let(:invalid_attributes) { { moodboard_item_id: moodboard_item.id,
+                               user_id: current_user.id,
+                               comment: nil } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # MoodboardCommentsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all MoodboardComments as @MoodboardComments" do
-      moodboard_comment = MoodboardComment.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:MoodboardComments)).to eq([moodboard_comment])
-    end
-  end
-
-  describe "GET #show" do
-    it "assigns the requested moodboard_comment as @moodboard_comment" do
-      moodboard_comment = MoodboardComment.create! valid_attributes
-      get :show, {:id => moodboard_comment.to_param}, valid_session
-      expect(assigns(:moodboard_comment)).to eq(moodboard_comment)
-    end
-  end
-
-  describe "GET #new" do
-    it "assigns a new moodboard_comment as @moodboard_comment" do
-      get :new, {}, valid_session
-      expect(assigns(:moodboard_comment)).to be_a_new(MoodboardComment)
-    end
-  end
-
-  describe "GET #edit" do
-    it "assigns the requested moodboard_comment as @moodboard_comment" do
-      moodboard_comment = MoodboardComment.create! valid_attributes
-      get :edit, {:id => moodboard_comment.to_param}, valid_session
-      expect(assigns(:moodboard_comment)).to eq(moodboard_comment)
-    end
-  end
+  before(:each) { allow(controller).to receive_messages(current_spree_user: current_user) }
 
   describe "POST #create" do
     context "with valid params" do
       it "creates a new MoodboardComment" do
         expect {
-          post :create, {:moodboard_comment => valid_attributes}, valid_session
+          post :create, {:moodboard_comment => valid_attributes}
         }.to change(MoodboardComment, :count).by(1)
       end
 
       it "assigns a newly created moodboard_comment as @moodboard_comment" do
-        post :create, {:moodboard_comment => valid_attributes}, valid_session
+        post :create, {:moodboard_comment => valid_attributes}
         expect(assigns(:moodboard_comment)).to be_a(MoodboardComment)
         expect(assigns(:moodboard_comment)).to be_persisted
       end
 
-      it "redirects to the created moodboard_comment" do
-        post :create, {:moodboard_comment => valid_attributes}, valid_session
-        expect(response).to redirect_to(MoodboardComment.last)
+      it "redirects to the parent moodboard" do
+        post :create, {:moodboard_comment => valid_attributes}
+        expect(response).to redirect_to(Moodboard.last)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved moodboard_comment as @moodboard_comment" do
-        post :create, {:moodboard_comment => invalid_attributes}, valid_session
+        post :create, {:moodboard_comment => invalid_attributes}
         expect(assigns(:moodboard_comment)).to be_a_new(MoodboardComment)
       end
 
-      it "re-renders the 'new' template" do
-        post :create, {:moodboard_comment => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+      it "re-renders the 'moodboard' template" do
+        post :create, {:moodboard_comment => invalid_attributes}
+        expect(response.location).to match(/moodboard/)
       end
     end
   end
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) { {comment: 'Update comment'} }
 
       it "updates the requested moodboard_comment" do
+
         moodboard_comment = MoodboardComment.create! valid_attributes
-        put :update, {:id => moodboard_comment.to_param, :moodboard_comment => new_attributes}, valid_session
+        put :update, {:id => moodboard_comment.to_param, :moodboard_comment => new_attributes}
         moodboard_comment.reload
-        skip("Add assertions for updated state")
-      end
+        expect(moodboard_comment.comment).to eq 'Update comment'
+       end
 
       it "assigns the requested moodboard_comment as @moodboard_comment" do
         moodboard_comment = MoodboardComment.create! valid_attributes
-        put :update, {:id => moodboard_comment.to_param, :moodboard_comment => valid_attributes}, valid_session
+        put :update, {:id => moodboard_comment.to_param, :moodboard_comment => valid_attributes}
         expect(assigns(:moodboard_comment)).to eq(moodboard_comment)
       end
 
       it "redirects to the moodboard_comment" do
         moodboard_comment = MoodboardComment.create! valid_attributes
-        put :update, {:id => moodboard_comment.to_param, :moodboard_comment => valid_attributes}, valid_session
-        expect(response).to redirect_to(moodboard_comment)
+        put :update, {:id => moodboard_comment.to_param, :moodboard_comment => valid_attributes}
+        expect(response).to redirect_to(moodboard)
       end
     end
 
     context "with invalid params" do
       it "assigns the moodboard_comment as @moodboard_comment" do
         moodboard_comment = MoodboardComment.create! valid_attributes
-        put :update, {:id => moodboard_comment.to_param, :moodboard_comment => invalid_attributes}, valid_session
+        put :update, {:id => moodboard_comment.to_param, :moodboard_comment => invalid_attributes}
         expect(assigns(:moodboard_comment)).to eq(moodboard_comment)
       end
 
-      it "re-renders the 'edit' template" do
+      it "renders the 'moodboard' template" do
         moodboard_comment = MoodboardComment.create! valid_attributes
         put :update, {:id => moodboard_comment.to_param, :moodboard_comment => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+        expect(response.location).to match(/moodboard/)
       end
     end
   end
@@ -145,14 +128,14 @@ RSpec.describe MoodboardCommentsController, :type => :controller do
     it "destroys the requested moodboard_comment" do
       moodboard_comment = MoodboardComment.create! valid_attributes
       expect {
-        delete :destroy, {:id => moodboard_comment.to_param}, valid_session
+        delete :destroy, {:id => moodboard_comment.to_param}
       }.to change(MoodboardComment, :count).by(-1)
     end
 
-    it "redirects to the MoodboardComments list" do
+    it "redirects to the Moodboard list" do
       moodboard_comment = MoodboardComment.create! valid_attributes
-      delete :destroy, {:id => moodboard_comment.to_param}, valid_session
-      expect(response).to redirect_to(moodboard_comments_url)
+      delete :destroy, {:id => moodboard_comment.to_param}
+      expect(response).to redirect_to(moodboard)
     end
   end
 
