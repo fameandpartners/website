@@ -1,6 +1,4 @@
 FameAndPartners::Application.routes.draw do
-  resources :moodboard_comments, exclude: [:index, :show]
-
 
   ############################
   # Devise Omniauth Workaround
@@ -374,6 +372,8 @@ FameAndPartners::Application.routes.draw do
   resources :wishlists_items, only: [:create], controller: 'users/wishlists_items' do
     get 'move_to_cart', on: :member
   end
+
+  resources :moodboard_comments, exclude: [:index, :show]
 
   ##################
   # Robots and Feeds

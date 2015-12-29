@@ -24,25 +24,18 @@ RSpec.describe MoodboardCommentsController, :type => :controller do
   # MoodboardComment. As you add validations to MoodboardComment, be sure to
   # adjust the attributes here as well.
 
-  let(:moodboard_user) { create(:spree_user) }
   let(:current_user) { create(:spree_user) }
-  let(:product) { create(:spree_product) }
-  let(:moodboard) { Moodboard.create(user_id: moodboard_user.id, name: 'Test Wedding',
-                                     purpose: 'wedding', event_date: Date.today + 60.days,
-                                     description: 'Test Wedding') }
-  let(:moodboard_item) { MoodboardItem.create(moodboard_id: moodboard.id, product_id: product.id,
-                                              uuid: Random.new().rand(10000), product_color_value_id: 317,
-                                              color_id: 38, user_id: moodboard_user.id) }
+  let(:current_user) { create(:spree_user) }
+  let(:moodboard_item) { create(:moodboard_item) }
+
+  let(:valid_attributes) { {moodboard_item_id: moodboard_item.id,
+                            user_id:           current_user.id,
+                            comment:           'First test comment'} }
 
 
-  let(:valid_attributes) { { moodboard_item_id: moodboard_item.id,
-                             user_id: current_user.id,
-                             comment: 'First test comment' } }
-
-
-  let(:invalid_attributes) { { moodboard_item_id: moodboard_item.id,
-                               user_id: current_user.id,
-                               comment: nil } }
+  let(:invalid_attributes) { {moodboard_item_id: moodboard_item.id,
+                              user_id:           current_user.id,
+                              comment:           nil} }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -94,7 +87,7 @@ RSpec.describe MoodboardCommentsController, :type => :controller do
         put :update, {:id => moodboard_comment.to_param, :moodboard_comment => new_attributes}
         moodboard_comment.reload
         expect(moodboard_comment.comment).to eq 'Update comment'
-       end
+      end
 
       it "assigns the requested moodboard_comment as @moodboard_comment" do
         moodboard_comment = MoodboardComment.create! valid_attributes
@@ -105,7 +98,7 @@ RSpec.describe MoodboardCommentsController, :type => :controller do
       it "redirects to the moodboard_comment" do
         moodboard_comment = MoodboardComment.create! valid_attributes
         put :update, {:id => moodboard_comment.to_param, :moodboard_comment => valid_attributes}
-        expect(response).to redirect_to(moodboard)
+        expect(response).to redirect_to(moodboard_item.moodboard)
       end
     end
 
@@ -119,7 +112,7 @@ RSpec.describe MoodboardCommentsController, :type => :controller do
       it "renders the 'moodboard' template" do
         moodboard_comment = MoodboardComment.create! valid_attributes
         put :update, {:id => moodboard_comment.to_param, :moodboard_comment => invalid_attributes}, valid_session
-        expect(response.location).to match(/moodboard/)
+        expect(response.location).to redirect_to(moodboard_item.moodboard)
       end
     end
   end
@@ -135,7 +128,7 @@ RSpec.describe MoodboardCommentsController, :type => :controller do
     it "redirects to the Moodboard list" do
       moodboard_comment = MoodboardComment.create! valid_attributes
       delete :destroy, {:id => moodboard_comment.to_param}
-      expect(response).to redirect_to(moodboard)
+      expect(response).to redirect_to(moodboard_item.moodboard)
     end
   end
 
