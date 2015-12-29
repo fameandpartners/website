@@ -3,6 +3,11 @@
 .moodboard-v2 {
   margin-bottom: 40px;
 
+  #mob-tab-aside{
+    @include mobile{
+      margin-top: -30px;
+    }
+  }
   .edit-setting{
     font-size: 0.875em;
     font-weight: 400;
