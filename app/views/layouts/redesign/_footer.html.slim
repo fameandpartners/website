@@ -1,10 +1,4 @@
 .footer.container
-  .row.social-row.hidden-xs.hidden-sm.desktop-social
-    .col-md-10.col-md-offset-1
-      .stay-social STAY SOCIAL
-      .stay-social-images
-        = render 'layouts/redesign/social_links'
-
   .mobile-footer.hidden-md.hidden-lg
     .row.buttons.visible-xs.visible-sm
       = link_to style_consultation_url, class: "col-xs-12"
@@ -35,7 +29,12 @@
       = image_tag 'logo/logo-mobile.svg', class: 'footer-logo hidden-xs hidden-sm'
       = render 'layouts/redesign/address'
 
-    .col-md-2.col-md-offset-3.col-sm-3.hidden-xs.hidden-sm.second-col
+    .col-md-4.hidden-sm.hidden-xs
+      .stay-social stay social
+      .stay-social-images
+        = render 'layouts/redesign/social_links'
+
+    .col-md-2.col-sm-3.hidden-xs.hidden-sm.second-col
       ul.footer-nav
         li.footer-nav--item
           = link_to 'Why Shop With Us', why_us_url
