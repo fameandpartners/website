@@ -3,19 +3,17 @@
 .moodboard-v2 {
   margin-bottom: 40px;
 
-  #mob-tab-aside{
-    @include mobile{
-      margin-top: -30px;
-    }
-  }
-  .edit-setting{
+  .edit-setting {
+    margin-bottom: 20px;
     font-size: 0.875em;
     font-weight: 400;
-    a{
+
+    a {
       text-decoration: underline;
       font-style: italic;
       color: inherit;
     }
+
   }
 
   .panel-aside.alt{
@@ -259,6 +257,10 @@
           height: 60px;
         }
 
+      }
+
+      .edit-setting {
+        margin-bottom: 40px;
       }
 
     }
