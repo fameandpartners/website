@@ -84,7 +84,7 @@ var CustomHeightsTable = React.createClass({
             <a href='javascript:;' className={displayImperial && displayMetric ? 'active' : ''} onClick={this.setBoth}>Both</a>
           </li>
         </ul>
-        <table className="table table-striped table-bordered table-condensed">
+        <table className="table table-desktop table-striped table-bordered table-condensed">
           <thead>
             <tr>
               <th></th>
