@@ -93,6 +93,15 @@
 .production-time-box {
   background-color: #fff;
   padding-top: 20px;
+  .making-option{
+    color: black;
+    background-color: white;
+    border: 1px solid #033649;
+  }
+  .making-option.active , .making-option:hover{
+    color: white;
+    background-color: #033649;
+  }
   h2 {
     margin-top: 0;
     margin-bottom: 5px;
