@@ -136,11 +136,10 @@ class Products::CollectionResource
       end
 
       # If a taxon is NOT specified, exclude anything marked not-a-dress
-      not_a_dress_taxon ||= Spree::Taxon.select(:id).where(:name => 'not-a-dress').first
-      if not_a_dress_taxon.present?
-        not_a_dress_taxon_id = not_a_dress_taxon.id
+      exclude_taxon_ids ||= Spree::Taxon.select(:id).where(:name => ['not-a-dress', 'plus-size']).collect{|t|t.id}
+      if exclude_taxon_ids.any?
         if result[:taxon_ids].empty?
-          result[:exclude_taxon_ids] = [not_a_dress_taxon_id]
+          result[:exclude_taxon_ids] = exclude_taxon_ids
         end
       end
 
