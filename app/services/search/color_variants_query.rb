@@ -33,7 +33,7 @@ module Search
       show_outerwear    = !!options[:show_outerwear]
       exclude_taxon_ids = options[:exclude_taxon_ids]
 
-      order = 'created' if order.blank? && query_string.blank?
+      # order = 'created' if order.blank? && query_string.blank?
 
       Tire.search(configatron.elasticsearch.indices.color_variants, size: limit, from: offset) do
 
