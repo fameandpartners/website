@@ -3,17 +3,14 @@
 .wrapper.wrapper-content
   .ibox-content
     h2 Features
-    - feature_states.each do |state, features|
-      h3 = state
-      ul
-        - features.each do |feature|
-          li : tt = feature
-
-    h2
-      ' User Overrides
-      = overriding_user.email
-    - user_overridden_features.each do |state, features|
-      h3 = state
-      ul
-        - features.each do |feature|
-          li : tt = feature
+    table.table
+      thead
+        tr
+        th : h3 Flag
+        th : h3 State
+        th
+      - feature_list.each do |feature|
+        tr
+          td = feature
+          td = active_text(feature)
+          td : .text-center = link_to button_text(feature), button_path(feature),  class: 'btn btn-info btn-sm'

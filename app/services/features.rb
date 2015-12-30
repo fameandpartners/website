@@ -1,15 +1,44 @@
 require 'redis'
 module Features
+  DEFINED_FEATURES = %i(checkout_fb_login
+                        content_revolution
+                        delivery_date_messaging
+                        enhanced_moodboards
+                        express_making
+                        fameweddings
+                        getitquick_unavailable
+                        gift
+                        google_tag_manager
+                        height_customisation
+                        maintenance
+                        marketing_modals
+                        masterpass
+                        moodboard
+                        redirect_to_com_au_domain
+                        sales
+                        send_promotion_email_reminder
+                        shipping_message
+                        style_quiz
+                        test_analytics
+                        test_flag
+                        )
+
   class << self
     extend Forwardable
-    
-    def_delegators :rollout, :active?, :activate_user, :deactivate_user, :activate, :deactivate
+
+    def_delegators :rollout, :activate_user, :deactivate_user, :activate, :deactivate, :features
     
     def inactive?(name)
       !active?(name)
     end
+
+    def active?(feature, user = nil)
+      raise ArgumentError.new("Features.active?: Undefined feature :#{feature.to_sym}") unless DEFINED_FEATURES.include?(feature.to_sym)
+      rollout.active?(feature, user)
+    end
   
     private
+
     def rollout
       return Rollout.new(kv_store)
       # code below not thread-safe
@@ -23,4 +52,4 @@ module Features
       Redis.new(configatron.redis_options)
     end
   end
-end 
+end

@@ -15,8 +15,6 @@ AdminUi::Engine.routes.draw do
       delete :expire, :on => :collection
     end
 
-    resources :features, only: [:index]
-
     resources :product_indexes, only: [:index, :show] do
       delete :clear, :on => :collection
     end
@@ -27,6 +25,13 @@ AdminUi::Engine.routes.draw do
     resource :sidekiq, only: :show do
       require 'sidekiq/web'
       mount Sidekiq::Web => 'd0ec826a2968a7079f0bdd8f1116811f'
+    end
+
+    resources :features, only: [:index] do
+      collection do
+        get :enable
+        get :disable
+      end
     end
   end
 

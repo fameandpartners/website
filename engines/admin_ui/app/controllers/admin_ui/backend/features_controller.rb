@@ -4,23 +4,32 @@ module AdminUi
       def index
       end
 
+      def enable
+        Features.activate(params[:feature])
+        redirect_to backend_features_path, notice: "Feature Flag #{params[:feature]} was successfully Enabled."
+      end
+
+      def disable
+        Features.deactivate(params[:feature])
+        redirect_to backend_features_path, notice: "Feature Flag #{params[:feature]} was successfully Disabled."
+      end
+
       helper_method def feature_list
-        Features.send(:rollout).features
+        Features.features
       end
 
-      helper_method def feature_states
-        feature_list.group_by{|x| Features.active?(x) ? 'Enabled' : 'Disabled' }
+      helper_method def active_text(feature)
+        Features.active?(feature) ? 'Enabled' : 'Disabled'
       end
 
-      helper_method def user_overridden_features
-        feature_list
-          .select { |x| Features.active?(x) != Features.active?(x, overriding_user) }
-          .group_by { |x| Features.active?(x, overriding_user) ? 'Enabled' : 'Disabled' }
+      helper_method def button_text(feature)
+        Features.active?(feature) ? 'Disable' : 'Enable'
       end
 
-      helper_method def overriding_user
-        current_admin_user
+      helper_method def button_path(feature)
+        Features.active?(feature) ? disable_backend_features_path(feature: feature) : enable_backend_features_path(feature: feature)
       end
+
     end
   end
 end

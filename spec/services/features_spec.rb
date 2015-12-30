@@ -22,6 +22,7 @@ describe Features do
   before do
     #allow(Features).to receive(:kv_store).and_return(kv_store)
     allow(Features).to receive(:rollout).and_return(Rollout.new(kv_store))
+    stub_const("Features::DEFINED_FEATURES", %i(blah))
   end
 
   describe 'activation' do
@@ -36,5 +37,9 @@ describe Features do
       Features.deactivate(:blah)
       expect(Features.active?(:blah)).to be false
     end
+  end
+
+  describe 'active?' do
+    it { expect { Features.active?('test_exist') }.to raise_error ArgumentError }
   end
 end
