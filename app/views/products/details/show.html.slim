@@ -117,7 +117,7 @@ ruby:
           .col-md-12.title
             h1.heading = @product.name
             - if @product.name.downcase.include?('skirt')
-              p 
+              p
                 | (Skirt Only)
             p#product-price
               span.price = product_price_with_discount(@product.price, @product.discount)
@@ -195,8 +195,8 @@ ruby:
 
       p.sku SKU: #{@product.sku}
 
-      h4 Share
-      p= render :partial => 'share_buttons', :locals => { product: @product }
+      /h4 Share
+      /p= render :partial => 'share_buttons', :locals => { product: @product }
 
 hr
 
