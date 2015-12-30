@@ -117,7 +117,6 @@ class Products::CollectionsController < Products::BaseController
     Products::CollectionResource.new(resource_args).read
   end
 
-
   def parse_permalink(permalink)
     return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
 
@@ -159,6 +158,8 @@ class Products::CollectionsController < Products::BaseController
       order:        params[:order],
       limit:        page.limit(custom_product_ids), # page size
       offset:       page.offset(custom_product_ids, params[:offset]),
+      price_min:    params[:priceMin],
+      price_max:    params[:priceMax],
       query_string: params[:q]
     }
   end

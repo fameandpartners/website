@@ -4,7 +4,7 @@ var FilterOption = React.createClass({
     return (
       <div className='filter-option'>
         <label>
-          <div className={"thumb thumb-"+this.props.select+" "+this.props.name} name={this.props.name}>
+          <div className={"thumb thumb-"+this.props.select+" "+this.props.name} name={this.props.name} data-pricemin={this.props.priceMin} data-pricemax={this.props.priceMax} >
           </div>
           {this.props.label}
         </label>
@@ -45,6 +45,18 @@ var CollectionFilter = React.createClass({
       return (<FilterOption name={style.table.name} label={style.table.name} select='false'/>)
     });
 
+    currency = this.props.currency
+    if (currency == 'usd') {
+      priceList = [{min: 0,max :199}, {min:200, max:299}, {min: 300, max: 399}, {min: 400, max: null}]
+    } else {
+      priceList = [{min: 0,max :199}, {min:200, max:299}, {min: 300, max: 399}, {min: 400, max: null}]
+    }
+
+    prices = priceList.map(function(price){
+      if (price.max != null) return (<FilterOption name={"$"+price.min+" - $"+price.max} label={"$"+price.min+" - $"+price.max} priceMin={price.min} priceMax={price.max} select='false'/>)
+      else return (<FilterOption name={"$"+price.min+"+"} label={"$"+price.min+"+"} priceMin={price.min} select='false'/>)
+    });
+
     return (
       <div>
 
@@ -58,6 +70,12 @@ var CollectionFilter = React.createClass({
         <br/>
 
         <div className='three-filters'>
+          <b>PRICE</b>
+          <div className='filter-area filter-area-prices'>
+            <FilterOption name='all' label='View all prices' select='true'/>
+            {prices}
+          </div>
+
           <b>STYLES</b>
           <div className='filter-area filter-area-styles short-height'>
             <FilterOption name='all' label='View all styles' select='true'/>
@@ -86,13 +104,12 @@ var CollectionFilter = React.createClass({
             <br/>
           </div>
 
-
-
           <b>BODYSHAPE</b>
           <div className='filter-area filter-area-shapes'>
             <FilterOption name='all' label='View all shapes' select='true'/>
             {shapes}
           </div>
+
         </div>
       </div>
     );

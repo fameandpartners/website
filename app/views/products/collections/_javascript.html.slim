@@ -5,7 +5,7 @@ ruby:
       controls: '.category .category-controls',
       content: '.category .products-collection',
       page_size: #{page_size},
-      reset_source: true,
+      reset_source: false,
       size: #{ @collection.products.size.to_i },
       total_products: #{ @collection.total_products.to_i },
       details_elements: {

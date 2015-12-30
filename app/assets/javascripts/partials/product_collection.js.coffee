@@ -77,13 +77,13 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       closeX = close.position()?.left + close.width() + 20
       $('.filter-col').removeClass("slide-in") if e.clientX > closeX and $('.filter-col').hasClass("slide-in")
 
-   $(document).on('mousedown touchstart', (e) =>
-      @xDown = e.originalEvent.x
-    ).on 'mouseup touchend', (e2) =>
-      @xUp = e2.originalEvent.x
-      if @xDown > @xUp and $('.filter-col').hasClass("slide-in")
-        $('.filter-col').removeClass("slide-in")
-
+    slideDistance = 70
+    $(document).on('mousedown touchstart', (e) =>
+       @xDown = e.originalEvent.x
+     ).on 'mouseup touchend', (e2) =>
+       @xUp = e2.originalEvent.x
+       if @xDown > @xUp + slideDistance and $('.filter-col').hasClass("slide-in")
+         $('.filter-col').removeClass("slide-in")
 
   clearAllOptions: =>
     $(".thumb").removeClass("thumb-true").addClass("thumb-false")
@@ -100,6 +100,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     isShapeCheckbox = area.hasClass("filter-area-shapes")
     isStyleCheckbox = area.hasClass("filter-area-styles")
     isSelect = $(e.target).parent().hasClass("select-color")
+    isPriceCheckbox = area.hasClass("filter-area-prices")
 
     if isSelect
       name = $($('.filter-area-colors select option:selected')[0]).attr("name")
@@ -109,7 +110,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       if $(".filter-area-colors .thumb-true[name='all']").size() == 1
           $(".filter-area-colors .thumb-true[name='all']").click()
 
-    if (isColorCheckbox && !isSelect) || isShapeCheckbox || isStyleCheckbox
+    if (isColorCheckbox && !isSelect) || isShapeCheckbox || isStyleCheckbox || isPriceCheckbox
       checked = $(e.target).hasClass("thumb-true")
       $(e.target).toggleClass("thumb-true thumb-false")
 
@@ -137,6 +138,13 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       else
         if $(".filter-area-styles .thumb-true[name='all']").size() == 1 && !checked
           $(".filter-area-styles .thumb-true[name='all']").click()
+
+    if isPriceCheckbox
+      if name == 'all'
+        return if $(".filter-area-prices .thumb-false[name='all']").size() == 1
+        $(".filter-area-prices .thumb-true[name!='all']").click()
+      else if !checked
+        $(".filter-area-prices .thumb-true[name!='" + name + "']").click()
 
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
@@ -238,13 +246,23 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       for styleInput in styleInputs
         styleArray.push($(styleInput).attr("name"))
 
-    {
+    filter =  {
       bodyshape: bodyshapeArray,
-      colour:    colourArray,
-      style:     styleArray,
-      order:     @productOrderInput.val(),
+      colour: colourArray,
+      style: styleArray,
+      order: @productOrderInput.val()
       q:         getUrlParameter("q")?.replace(/\+/g," ")
     }
+
+    priceHash = {}
+    if $(".filter-area-prices .thumb-true[name!='all']")[0]?
+      priceMin = $(".filter-area-prices .thumb-true[name!='all']:first").data("pricemin")
+      priceMax = $(".filter-area-prices .thumb-true[name!='all']:first").data("pricemax")
+      priceHash["priceMin"] = priceMin
+      priceHash["priceMax"] = priceMax if priceMax?
+      filter = $.extend(filter,priceHash)
+
+    filter
 
   updatePageLocation: (filter) ->
     source = _.clone(@source_path)

@@ -30,6 +30,9 @@ module Search
       fast_making       = options[:fast_making]
       limit             = options[:limit].present? ? options[:limit].to_i : 1000
       offset            = options[:offset].present? ? options[:offset].to_i : 0
+      price_min        = options[:price_min]
+      price_max        = options[:price_max]
+      currency         = options[:currency]
       show_outerwear    = !!options[:show_outerwear]
       exclude_taxon_ids = options[:exclude_taxon_ids]
 
@@ -83,6 +86,14 @@ module Search
           else
             filter :bool, :must => { :term => { 'product.discount' => discount.to_i } }
           end
+        end
+
+        if price_min.present?
+          filter :bool, :should => { :range => { "sale_prices.#{currency}" => { :gt => price_min } } }
+        end
+
+        if price_max.present?
+          filter :bool, :should => { :range => { "sale_prices.#{currency}" => { :lt => price_max } } }
         end
 
         if query_string.present?

@@ -123,9 +123,14 @@ module Products
               }
             end,
             cropped_images: cropped_images_for(product_color_value),
+
             prices: {
               aud: product.price_in(au_site_version.currency).amount,
               usd: product.price_in(us_site_version.currency).amount
+            },
+            sale_prices: {
+                aud: discount > 0 ? product.price_in(au_site_version.currency).apply(product.discount).amount : product.price_in(au_site_version.currency).amount,
+                usd: discount > 0 ? product.price_in(us_site_version.currency).apply(product.discount).amount : product.price_in(us_site_version.currency).amount
             }
          }
 
