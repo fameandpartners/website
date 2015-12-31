@@ -118,16 +118,6 @@ module ApplicationHelper
     end
   end
 
-  # competition share - 6009830748096
-  # order purchased   - 6013645244896
-  def fb_analytics_track(pixel_id, currency, value = '0.00')
-    render 'spree/shared/facebook_analytics', {
-      pixel_id: pixel_id,
-      currency: currency,
-      value: value
-    }
-  end
-
   # individual product discount
   # sale discount
   # promocode discount
