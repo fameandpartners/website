@@ -11,6 +11,10 @@
         th
       - feature_list.each do |feature|
         tr
-          td = feature
-          td = active_text(feature)
-          td : .text-center = link_to button_text(feature), button_path(feature),  class: 'btn btn-info btn-sm'
+          td
+            - if feature_present(feature)
+               = feature
+            - else
+               b = "Undefined feature :#{feature.to_sym}"
+          td = active_text(feature) if feature_present(feature)
+          td : .text-center = link_to button_text(feature), button_path(feature),  class: 'btn btn-info btn-sm' if feature_present(feature)

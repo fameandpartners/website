@@ -30,6 +30,11 @@ module AdminUi
         Features.active?(feature) ? disable_backend_features_path(feature: feature) : enable_backend_features_path(feature: feature)
       end
 
+      helper_method def feature_present(feature)
+        return false unless Features::DEFINED_FEATURES.include?(feature.to_sym)
+        true
+      end
+
     end
   end
 end
