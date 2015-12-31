@@ -37,6 +37,8 @@ module AdminUi
         it { expect(subject.active_text('test_flag')).to eq 'Enabled' }
         it { expect(subject.button_text('test_flag')).to eq 'Disable' }
         it { expect(subject.button_path('test_flag')).to eq '/fame_admin/backend/features/disable?feature=test_flag' }
+        it { expect(subject.feature_present('test_present')).to be_falsey }
+        it { expect(subject.feature_present('test_flag')).to be_truthy }
       end
 
     end

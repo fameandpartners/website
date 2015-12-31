@@ -39,7 +39,4 @@ describe Features do
     end
   end
 
-  describe 'active?' do
-    it { expect { Features.active?('test_exist') }.to raise_error ArgumentError }
-  end
 end

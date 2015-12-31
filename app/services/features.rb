@@ -26,15 +26,10 @@ module Features
   class << self
     extend Forwardable
 
-    def_delegators :rollout, :activate_user, :deactivate_user, :activate, :deactivate, :features
+    def_delegators :rollout, :activate_user, :deactivate_user, :activate, :deactivate, :features, :active?
     
     def inactive?(name)
       !active?(name)
-    end
-
-    def active?(feature, user = nil)
-      raise ArgumentError.new("Features.active?: Undefined feature :#{feature.to_sym}") unless DEFINED_FEATURES.include?(feature.to_sym)
-      rollout.active?(feature, user)
     end
   
     private
