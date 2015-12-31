@@ -33,15 +33,21 @@
     font-size: 1.111111em;
   }
 
-  a.product-option {
+  a.product-option , a.product-option.active:hover{
     display:block;
-    color:#000000;
+    color: $c-neutral-white;
     margin-bottom:10px;
-    &.active {
-      color:#003647;
+    .option-box{
+      background-color: $c-neutral-white;
+      color: $c-neutral-black;
     }
   }
-
+  a.product-option.active, a.product-option:hover {
+    .option-box{
+      background-color: $c-neutral-black;
+      color: $c-neutral-white;
+    }
+  }
 
   .option-box {
     position: relative;
