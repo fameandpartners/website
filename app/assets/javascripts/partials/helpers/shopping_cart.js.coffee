@@ -187,7 +187,7 @@ window.helpers.ShoppingCart = class ShoppingCart
   trackAddToCart: (product) ->
     try
       if @track
-        window.track.addedToCart(product.analytics_label)
+        window.track.addedToCart(product.analytics_label, product)
 
         if _cio
           _cio.track("addedToCart", {

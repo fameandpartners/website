@@ -56,8 +56,17 @@ window.track = {
   removedFromWishlist: (label) ->
     track.event('Wishlist', 'RemovedFromWishlist', label)
 
-  addedToCart: (label) ->
-    @dataLayer.push({"event": "addToCart"})
+  addedToCart: (label, product) ->
+    @dataLayer.push({
+      "event": "addToCart",
+      "product": {
+        "currency": product.price.currency,
+        "name": product.name,
+        "price": product.price.amount,
+        "sku": product.line_item_sku
+      }
+    })
+
     track.event('Products', 'AddedToCart', label)
     track.pageView('/cart/add');
 
