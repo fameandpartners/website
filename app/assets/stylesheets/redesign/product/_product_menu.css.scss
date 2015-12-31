@@ -93,14 +93,14 @@
 .production-time-box {
   background-color: #fff;
   padding-top: 20px;
-  .making-option{
-    color: black;
+  .making-option, .making-option.active:hover{
+    color: $c-neutral-black;
     background-color: $c-neutral-white;
-    border: 1px solid #033649;
+    border: 1px solid $c-neutral-black;
   }
   .making-option.active , .making-option:hover{
     color: white;
-    background-color: #033649;
+    background-color: $c-neutral-black;
   }
   h2 {
     margin-top: 0;

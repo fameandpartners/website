@@ -35,12 +35,18 @@
     }
   }
 
-  .customization-option {
+  .customization-option , .customization-option.active:hover{
     color: $c-neutral-black;
+    background-color: $c-neutral-white;
+  }
 
+  .customization-option:hover {
+    color: $c-neutral-white;
+    background-color: $c-neutral-black;
   }
 
   .btn-black.customization-option {
-    background-color: #000000;
+    color: $c-neutral-white;
+    background-color: $c-neutral-black;
   }
 }
