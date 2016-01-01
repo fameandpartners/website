@@ -15,8 +15,13 @@
       @media(max-width: 800px){
         text-align:center;
       }
-      img{
-        width: 35px;
+
+      .stay-social-images{
+        margin-top: 10px !important;
+        background-color: transparent !important;
+        img{
+          width: 35px;
+        }
       }
     }
 
