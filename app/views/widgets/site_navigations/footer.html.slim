@@ -11,7 +11,7 @@ doctype html
       | try{Typekit.load();}catch(e){}
 
     = stylesheet_link_tag 'widgets/site_navigations'
-    = stylesheet_link_tag 'widgets/footer_widget'
+    = stylesheet_link_tag 'widgets/footer_widget', :id => "footer-css"
     = csrf_meta_tags
 
   body#footer-widget
