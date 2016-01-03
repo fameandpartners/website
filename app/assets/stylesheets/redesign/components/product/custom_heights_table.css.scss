@@ -14,12 +14,17 @@
     font-weight: 400;
   }
 
-  .standard-height{
-    margin-left: 5px !important;
-  }
+  @include desktop{
+    .standard-height{
+      margin-left: 5px !important;
+    }
 
-  .tall-height{
-    margin-left: 10px !important;
+    .tall-height{
+      margin-left: 10px !important;
+    }
+    .selectors {
+      padding-left: 10px;
+    }
   }
 
   .btn.product-option {
@@ -59,7 +64,6 @@
 
 
   .selectors {
-    padding-left: 10px;
     margin-bottom: 30px;
 
     [class^="col-"] {
