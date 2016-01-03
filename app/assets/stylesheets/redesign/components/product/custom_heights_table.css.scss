@@ -14,23 +14,33 @@
     font-weight: 400;
   }
 
+  .standard-height{
+    margin-left: 5px !important;
+  }
+
+  .tall-height{
+    margin-left: 10px !important;
+  }
+
   .btn.product-option {
     position: relative;
     margin: 0;
     padding: 10px 20px;
     font-size: 1.5rem;
-    color: $c-neutral-white;
-    border-color: $c-neutral-white;
+    color: $c-neutral-black;
+    border-color: $c-neutral-black;
+    background-color: $c-neutral-white;
 
     &:hover,
     &:focus {
-      background: $c-brand-blue-pale;
+      color: $c-neutral-white;
+      background: $c-neutral-black;
     }
 
     &:active,
     &.active {
       color: $c-neutral-white;
-      background: $c-brand-blue;
+      background: $c-neutral-black;
     }
 
     &.active:after {
@@ -46,7 +56,10 @@
 
   }
 
+
+
   .selectors {
+    padding-left: 10px;
     margin-bottom: 30px;
 
     [class^="col-"] {

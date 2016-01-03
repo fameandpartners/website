@@ -1,7 +1,7 @@
 var CustomHeightsTable = React.createClass({
   getInitialState: function(){
     return {
-      displayMetric: true,
+      displayMetric: false,
       displayImperial: true
     }
   },
@@ -71,17 +71,14 @@ var CustomHeightsTable = React.createClass({
 
     return (
       <div className='col-md-12'>
-        <h2>SKIRT LENGTHS</h2>
+        <h2>SKIRT LENGTHS MEASUREMENT CHART</h2>
         <p>Skirt length is measured straight, from waist to hem and is based on wearing <CentimetresOrInches cm="5" inches="2" displayMetric={displayMetric} displayImperial={displayImperial} /> heels.</p>
         <ul className='list-unstyled list-inline'>
           <li>
-            <a href='javascript:;' className={displayMetric ? 'active' : ''} onClick={this.setMetric}>Metric</a>
+            <a href='javascript:;' className={displayMetric ? 'active' : ''} onClick={this.setMetric}>CMs</a>
           </li>
           <li>
             <a href='javascript:;' className={displayImperial ? 'active' : ''} onClick={this.setImperial}>Inches</a>
-          </li>
-          <li>
-            <a href='javascript:;' className={displayImperial && displayMetric ? 'active' : ''} onClick={this.setBoth}>Both</a>
           </li>
         </ul>
         <table className="table table-desktop table-striped table-bordered table-condensed">
