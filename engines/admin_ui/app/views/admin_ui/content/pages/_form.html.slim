@@ -14,8 +14,7 @@
 
     .form-group
       label.col-sm-2.control-label Variables
-      .col-sm-10
-        = react_component('PageVariablesComponent', f.object.variables)
+      .col-sm-10= f.text_area :variables, :class => 'form-control', rows: 5
 
     .hr-line-dashed
     .form-group
