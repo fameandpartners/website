@@ -17,6 +17,67 @@
       h1.title Be inspired & shop together with your bridesmaids.
       a href='#how-it-works' class='btn btn-lowlight btn-sm' See how it works
 
+  .container.sign-in-form
+    .row
+      h2.title-line-on-sides
+        .inner-wrap SIGN IN
+      .col-md-5.left-col
+        = link_to 'Log in with Facebook', fb_auth_path(site_version: current_site_version.code), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
+      .col-md-1
+        .separator
+          span or
+      .col-md-6.form-wrap
+        = render :partial => 'spree/shared/login'
+
+  .container.sign-up-form
+    .row
+      .col-md-12.sign-up
+        h2.title-line-on-sides
+          .inner-wrap CREATE AN ACCOUNT
+        - signup_params = {site_version: current_site_version.code}
+        = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) do |f|
+          = f.hidden_field :site_version_id, value: current_site_version.id
+
+        .container
+          .row
+            .col-md-5.left-col
+              = link_to 'Sign up with facebook', fb_auth_path(signup_params), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
+            .col-md-1
+              .separator
+                span or
+            .col-md-6.form-wrap
+              = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) do |f|
+                = f.hidden_field :site_version_id, value: current_site_version.id
+                div data-hook="signup"
+                  .row
+                    .col-md-6.form-group
+                      = f.text_field :first_name, :class => 'form-control form-control-md', :placeholder => t(:first_name)
+                    .col-md-6.form-group
+                      = f.text_field :last_name, :class => 'form-control form-control-md', :placeholder => t(:last_name)
+                    .col-md-12.form-group
+                      = f.email_field :email, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:email)
+
+                  #password-credentials
+                  .row
+                    .col-md-6.form-group
+                      = f.password_field :password, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password)
+                    .col-md-6.form-group
+                      = f.password_field :password_confirmation, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password_confirmation)
+                    .col-md-12.form-group
+                      .checkbox
+                        label for="spree_user_newsletter"
+                          = f.check_box :newsletter, :checked => 'checked'
+                          span
+                            ' Receive new styles in my inbox each week + $25 off
+                    .col-md-5.form-group data-hook="signup_below_password_fields"
+                      = f.submit 'Create account', class: 'btn btn-block btn-black'
+                    .col-md-7.col-sm-12.text-center
+                      p
+                        span Already have an account?
+                        = link_to 'Sign in here', "#", class: 'sign-in-here'
+
+
+
   .container
     .row
       .col-md-12.section-steps#how-it-works
@@ -56,19 +117,18 @@
                 .copy-wrap.highlight
                   span BRIDE TO CHOOSE FREE HONEYMOON DRESS
 
-          .inner-right.position-1
-            = link_to new_moodboard_path
-              picture.media-wrap
-                source media='(max-width: 1023px)' srcset='
-                #{image_path("landingpages/famingtonway/tile-free-honeymoon-dress-mob.jpg")}'
-                source media='(min-width: 1024px)' srcset='
-                #{image_path("landingpages/famingtonway/tile-free-honeymoon-dress.jpg")}'
-                img src='#{image_path("landingpages/famingtonway/tile-free-honeymoon-dress.jpg")}' srcset='
-                  #{image_path("landingpages/famingtonway/tile-free-honeymoon-dress-mob.jpg")} 1023w,
-                  #{image_path("landingpages/famingtonway/tile-free-honeymoon-dress.jpg")} 1024w' alt='
-                  Give your bride the gift of a free honeymoon dress when you and your bridal party dress with fame!'
+          .inner-right.position-1.register-your-event
+            picture.media-wrap
+              source media='(max-width: 1023px)' srcset='
+              #{image_path("landingpages/famingtonway/tile-free-honeymoon-dress-mob.jpg")}'
+              source media='(min-width: 1024px)' srcset='
+              #{image_path("landingpages/famingtonway/tile-free-honeymoon-dress.jpg")}'
+              img src='#{image_path("landingpages/famingtonway/tile-free-honeymoon-dress.jpg")}' srcset='
+                #{image_path("landingpages/famingtonway/tile-free-honeymoon-dress-mob.jpg")} 1023w,
+                #{image_path("landingpages/famingtonway/tile-free-honeymoon-dress.jpg")} 1024w' alt='
+                Give your bride the gift of a free honeymoon dress when you and your bridal party dress with fame!'
           .btn-wrap.position-3
-            = link_to 'Get started', new_moodboard_path, class:'btn btn-lowlight'
+            = link_to 'Get started', new_moodboard_path, class: "btn btn-lowlight"
 
       .col-md-12
         h2.heading-secondary Bridesmaid dresses your girls will love...and wear again.
@@ -113,3 +173,12 @@
 
     .row
       = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/tile-footer.jpg"}
+
+coffee:
+  $(document).ready ->
+    $('.register-your-event').on 'click', ->
+      $("#how-it-works").hide()
+      $(".sign-up-form").show()
+    $('.sign-in-here').on 'click' ,->
+      $(".sign-up-form").hide()
+      $(".sign-in-form").show()
