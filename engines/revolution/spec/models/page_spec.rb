@@ -230,7 +230,7 @@ describe Revolution::Page do
   end
 
   describe '#effective_page_limit' do
-    let(:page_params)    { {} }
+    let(:page_params) { {} }
     let(:page_variables) { {} }
     before do
       page.variables = page_variables
@@ -238,16 +238,16 @@ describe Revolution::Page do
     end
 
     context 'params supersede variables' do
-      let(:page_params)    { {limit: 77} }
+      let(:page_params) { {limit: 77} }
       let(:page_variables) { {limit: 99} }
 
-      it  { expect(page.effective_page_limit).to eq 77 }
+      it { expect(page.effective_page_limit).to eq 77 }
     end
 
     context 'variables supersede fallback' do
       let(:page_variables) { {limit: 99} }
 
-      it  { expect(page.effective_page_limit).to eq 99 }
+      it { expect(page.effective_page_limit).to eq 99 }
     end
 
     context 'falls back to default_page_limit' do
@@ -274,13 +274,13 @@ describe Revolution::Page do
         expect(page.limit(product_ids)).to eq 20
       end
       it 'returns 0 when given 22 product_ids and no offset' do
-        product_ids = ["451", '1', '2', '3', '4', '5', '6', '7', '8','9','10',
-                       '11', '12', '13',' 14', '15', '16', '17', '18', '19', '20','21']
+        product_ids = ["451", '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+                       '11', '12', '13', ' 14', '15', '16', '17', '18', '19', '20', '21']
         expect(page.limit(product_ids)).to eq 0
       end
       it 'returns 20 when given 22 product_ids and an offset of 21' do
-        product_ids = ['451', '1', '2', '3', '4', '5', '6', '7', '8','9','10',
-                       '11', '12', '13',' 14', '15', '16', '17', '18', '19', '20','21']
+        product_ids = ['451', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+                       '11', '12', '13', ' 14', '15', '16', '17', '18', '19', '20', '21']
         page.params = {offset: 21}
         expect(page.limit(product_ids)).to eq 20
       end
@@ -291,11 +291,11 @@ describe Revolution::Page do
         page.params = {limit: 22}
       end
       it 'returns 22 when given 0 product_ids and a parameter limit of 22' do
-        product_ids  = []
+        product_ids = []
         expect(page.limit(product_ids)).to eq 22
       end
       it 'returns 20 when given 2 product_ids and a parameter limit of 22' do
-        product_ids  = ['457', '2']
+        product_ids = ['457', '2']
         expect(page.limit(product_ids)).to eq 20
       end
       it 'returns 20 when given 22 product_ids and an offset of 21 and a limit of 21' do
@@ -332,16 +332,16 @@ describe Revolution::Page do
     end
     context 'page is a lookbook' do
       before do
-        page.variables = {:lookbook=>true}
-        page.params = {}
+        page.variables = {:lookbook => true}
+        page.params    = {}
       end
       it 'given no variable limit, it return a limit of 20' do
         product_ids = []
         expect(page.limit(product_ids)).to eq 20
       end
       it 'given a variable limit, it returns a limit of the variable' do
-        product_ids = []
-        page.variables = {:lookbook=>true,:limit=>30}
+        product_ids    = []
+        page.variables = {:lookbook => true, :limit => 30}
         expect(page.limit(product_ids)).to eq 30
       end
       it 'given no variable limit, it returns 20, even with product ids' do
@@ -349,8 +349,8 @@ describe Revolution::Page do
         expect(page.limit(product_ids)).to eq 20
       end
       it 'given a variable limit, it returns a limit of the variable, even with product ids' do
-        product_ids = ['45', '2']
-        page.variables = {:lookbook=>true,:limit=>30}
+        product_ids    = ['45', '2']
+        page.variables = {:lookbook => true, :limit => 30}
         expect(page.limit(product_ids)).to eq 30
       end
     end
@@ -382,6 +382,113 @@ describe Revolution::Page do
       it { expect(page.offset(product_ids, 0)).to eq 0 }
       it { expect(page.offset(product_ids, 21)).to eq 0 }
       it { expect(page.offset(product_ids, 42)).to eq 20 }
+    end
+  end
+
+  describe 'revolution banners' do
+    let(:collection) { double('Collection') }
+    let(:au_locale) { 'en-AU' }
+    let!(:au_translation) { page.translations.create!(:locale => au_locale, :title => title, :meta_description => title) }
+    let(:us_locale) { 'en-US' }
+    let!(:us_translation) { page.translations.create!(:locale => us_locale, :title => title, :meta_description => title) }
+    before(:each) do
+      allow(page).to receive(:locale).and_return(au_locale)
+      allow(page).to receive(:collection).and_return(collection)
+      allow(collection).to receive_message_chain(:details, :banner, :image => '/url')
+    end
+
+    context ".banner_image" do
+      it { expect(page.banner_image(1, 'large')).to eq '/url' }
+      it 'has a defined AU banner' do
+        allow(page).to receive(:locale).and_return(au_locale)
+        Revolution::Translation::Banner.create!(translation_id:      au_translation.id,
+                                                alt_text:            'alt_text', size: 'large',
+                                                banner_order:        1, banner_file_name: 'au_image.jpg',
+                                                banner_content_type: 'image/jpeg',
+                                                banner_file_size:    72900)
+        expect(page.banner_image(1, 'large')).to match(/au_image/)
+      end
+      it 'has a defined US banner' do
+        allow(page).to receive(:locale).and_return(us_locale)
+        Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
+                                                alt_text:            'alt_text', size: 'large',
+                                                banner_order:        1, banner_file_name: 'us_image.jpg',
+                                                banner_content_type: 'image/jpeg',
+                                                banner_file_size:    72900)
+        expect(page.banner_image(1, 'large')).to match(/us_image/)
+      end
+    end
+
+    context ".no_of_banners" do
+      it { expect(page.no_of_banners).to eq 1 }
+      it 'has 2 AU banners' do
+        Revolution::Translation::Banner.create!(translation_id:      au_translation.id,
+                                                alt_text:            'alt_text1', size: 'large',
+                                                banner_order:        1, banner_file_name: 'au_image1.jpg',
+                                                banner_content_type: 'image/jpeg',
+                                                banner_file_size:    72900)
+        Revolution::Translation::Banner.create!(translation_id:      au_translation.id,
+                                                alt_text:            'alt_text2', size: 'large',
+                                                banner_order:        2, banner_file_name: 'au_image2.jpg',
+                                                banner_content_type: 'image/jpeg',
+                                                banner_file_size:    72900)
+        expect(expect(page.no_of_banners).to eq 2)
+      end
+      it 'has 3 Us banners' do
+        allow(page).to receive(:locale).and_return(us_locale)
+        Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
+                                                alt_text:            'alt_text1', size: 'large',
+                                                banner_order:        1, banner_file_name: 'us_image1.jpg',
+                                                banner_content_type: 'image/jpeg',
+                                                banner_file_size:    72900)
+        Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
+                                                alt_text:            'alt_text2', size: 'large',
+                                                banner_order:        2, banner_file_name: 'us_image2.jpg',
+                                                banner_content_type: 'image/jpeg',
+                                                banner_file_size:    72900)
+        Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
+                                                alt_text:            'alt_text4', size: 'large',
+                                                banner_order:        4, banner_file_name: 'us_image4.jpg',
+                                                banner_content_type: 'image/jpeg',
+                                                banner_file_size:    72900)
+        expect(expect(page.no_of_banners).to eq 3)
+      end
+    end
+
+    context '.alt_text' do
+      it { expect(page.alt_text(1, 'large')).to eq 'alt_text' }
+      it 'returns the alt text from the second AU banner' do
+        Revolution::Translation::Banner.create!(translation_id:      au_translation.id,
+                                                alt_text:            'alt_text1', size: 'large',
+                                                banner_order:        1, banner_file_name: 'au_image1.jpg',
+                                                banner_content_type: 'image/jpeg',
+                                                banner_file_size:    72900)
+        Revolution::Translation::Banner.create!(translation_id:      au_translation.id,
+                                                alt_text:            'alt_text2', size: 'large',
+                                                banner_order:        2, banner_file_name: 'au_image2.jpg',
+                                                banner_content_type: 'image/jpeg',
+                                                banner_file_size:    72900)
+        expect(expect(page.alt_text(2, 'large')).to eq 'alt_text2')
+      end
+      it 'returns the alt text from the third US banner' do
+        allow(page).to receive(:locale).and_return(us_locale)
+        Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
+                                                alt_text:            'alt_text1', size: 'large',
+                                                banner_order:        1, banner_file_name: 'us_image1.jpg',
+                                                banner_content_type: 'image/jpeg',
+                                                banner_file_size:    72900)
+        Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
+                                                alt_text:            'alt_text2', size: 'large',
+                                                banner_order:        2, banner_file_name: 'us_image2.jpg',
+                                                banner_content_type: 'image/jpeg',
+                                                banner_file_size:    72900)
+        Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
+                                                alt_text:            'alt_text4', size: 'large',
+                                                banner_order:        4, banner_file_name: 'us_image4.jpg',
+                                                banner_content_type: 'image/jpeg',
+                                                banner_file_size:    72900)
+        expect(expect(page.alt_text(3, 'large')).to eq 'alt_text4')
+      end
     end
   end
 end
