@@ -247,7 +247,8 @@ window.inputs.ProductHeightSelector = class ProductHeightSelector extends BasePr
   constructor: (opts = {}) ->
     super(opts)
 
-    @value = 'standard'
+    # Default to unspecified.
+    @value = null
 
     @$container.find('.height-option').on('click', @selectValueHandler)
     @$container.find('.close').on('click', @close)
