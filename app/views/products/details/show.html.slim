@@ -1,6 +1,5 @@
 ruby:
-  url_params = params.except(:controller, :action, :product_slug)
-  url_params.merge!(site_version: current_site_version.to_param)
+  url_params    = params.except(:controller, :action, :product_slug)
   product_paths = { default: collection_product_path(@product, url_params) }
 
   @product.default_color_options.each do |color|
