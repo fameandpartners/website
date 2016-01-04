@@ -9,4 +9,8 @@ class MoodboardComment < ActiveRecord::Base
     self.user.first_name
   end
 
+  def as_json(options = {})
+    super options.merge(methods: [:first_name])
+  end
+
 end
