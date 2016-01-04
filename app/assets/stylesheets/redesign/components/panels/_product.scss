@@ -44,61 +44,78 @@
 
   }
 
-  .comments-wrap {
-    min-height: 220px;
+  .comments-trigger-wrap {
+    margin-top: 15px;
+    text-align: center;
 
-    a {
+    .comments-trigger {
       text-decoration: underline;
-      font-style: italic;
-      color: inherit;
+      font-size: 0.875em;
+      color: $c-neutral-black;
     }
 
-    p {
-      margin-bottom: 20px;
-      font-size: 0.875em;
-      font-weight: 400;
+    .modal {
+      z-index: 1041;
+    }
 
-      &:last-child {
-        margin-bottom: 0;
+    .modal-content {
+      text-align: left;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .modal-title {
+      text-transform: none;
+      font-weight: 500;
+    }
+
+    .modal-header {
+      border-bottom: none;
+    }
+
+    .modal-body {
+      max-height: 380px;
+      overflow-y: scroll;
+      margin: 0 15px;
+    }
+
+    .modal-footer {
+      text-align: left;
+      border-top: none;
+    }
+
+    .comment-wrap {
+      margin-bottom: 15px;
+      @extend %cfix;
+
+      .user-name {
+        float: left;
+        width: 20%;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      .user-comment {
+        float: left;
+        width: 80%;
+        padding-left: 20px;
       }
 
     }
 
-    dl {
-      margin-bottom: 0;
-      font-size: 0.875em;
-      font-weight: 400;
-      @extend %cfix;
-    }
-
-    dt {
-      float: left;
-      width: 25%;
+    .form-group {
       margin-bottom: 15px;
-      text-transform: uppercase;
     }
 
-    dd {
-      float: left;
-      width: 75%;
-      max-height: 56px;
-      margin-bottom: 15px;
-      line-height: 1.3;
-    }
-
-    .alt {
-      font-style: italic;
-    }
-
-    .heading {
-      margin: 25px 0;
-      text-decoration: underline;
+    label,
+    input:not(.btn),
+    textarea {
       font-size: 0.875em;
-      font-weight: 500;
+      border-radius: 0;
     }
 
-    .separator {
-      margin: 0 5px;
+    textarea {
+      border-color: $c-neutral-6;
     }
 
   }
