@@ -233,7 +233,7 @@ window.inputs.ProductMakingOptionIdSelector = class ProductMakingOptionIdSelecto
     data ||= @$container.find('.active').data()
 
     if @disabled
-      @$action.html("Standard making 3-9 days")
+      @$action.html("Standard Making 3-9 days")
     else if data? and data.id == 'original'
       @$action.html("Standard Making 3-9 days")
     else if data? and data.name
@@ -247,7 +247,13 @@ window.inputs.ProductHeightSelector = class ProductHeightSelector extends BasePr
   constructor: (opts = {}) ->
     super(opts)
 
-    @value = 'standard'
+    # Downstream validations always assume that a height is selected,
+    # when not required, we just assume that height is standard, and this fulfills all validations.
+    if (opts.required)
+      @value = null
+    else
+      @value = 'standard'
+
 
     @$container.find('.height-option').on('click', @selectValueHandler)
     @$container.find('.close').on('click', @close)
@@ -267,7 +273,7 @@ window.inputs.ProductHeightSelector = class ProductHeightSelector extends BasePr
   updateMenuButton: () =>
     selectedValue = @getValue()
     if selectedValue
-      newTitle = "Height - " + selectedValue
+      newTitle = "Your Height - " + selectedValue
       @$action.html(newTitle)
 
   getValue: () ->

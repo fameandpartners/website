@@ -35,7 +35,8 @@ ruby:
           },
           height_input: {
             container: '#product-height-content',
-            action:    '#product-height-action'
+            action:    '#product-height-action',
+            required:  #{Features.active?(:height_customisation) && @product.height_customisable?}
           }
         },
         moodboard_links: {
