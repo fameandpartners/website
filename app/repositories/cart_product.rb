@@ -26,6 +26,7 @@ class Repositories::CartProduct
         description: line_item_description,
         variant_id: line_item.variant_id,
         line_item_id: line_item.id,
+        line_item_sku: line_item_sku,
         product_type: product_type.to_sym,
         quantity: line_item.quantity,
         price: line_item_price,
@@ -118,5 +119,9 @@ class Repositories::CartProduct
         money: line_item.money,
         money_without_discount: line_item.in_sale? ? line_item.money_without_discount : nil
       )
+    end
+
+    def line_item_sku
+      CustomItemSku.new(line_item).call
     end
 end
