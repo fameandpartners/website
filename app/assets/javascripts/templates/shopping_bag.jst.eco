@@ -40,7 +40,7 @@
             <% end %>
             Color: <span class="color"><%= product.color.name %></span>
             <br>
-            Height: <span><%= product.height %></span>
+            Skirt Length: <span><%= product.height %></span>
           </div>
           <div class="text-muted pull-right"><%= product.price.display_price %></div>
         </div>
