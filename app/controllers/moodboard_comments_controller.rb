@@ -9,7 +9,7 @@ class MoodboardCommentsController < ApplicationController
     respond_to do |format|
       if @moodboard_comment.save
         format.html { redirect_to moodboard_path(id: @moodboard_comment.moodboard_item.moodboard.id), notice: 'Moodboard comment was successfully created.' }
-        format.json { render json: @moodboard_comment, status: :created, location: @moodboard_comment }
+        format.json { render json: @moodboard_comment.attributes.merge({first_name: @moodboard_comment.first_name }), status: :created, location: @moodboard_comment }
       else
         format.html { redirect_to moodboard_path(id: MoodboardItem.find(params[:moodboard_comment][:moodboard_item_id]).moodboard.id, errors: @moodboard_comment.errors) }
         format.json { render json: @moodboard_comment.errors, status: :unprocessable_entity }
