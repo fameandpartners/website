@@ -247,8 +247,13 @@ window.inputs.ProductHeightSelector = class ProductHeightSelector extends BasePr
   constructor: (opts = {}) ->
     super(opts)
 
-    # Default to unspecified.
-    @value = null
+    # Downstream validations always assume that a height is selected,
+    # when not required, we just assume that height is standard, and this fulfills all validations.
+    if (opts.required)
+      @value = null
+    else
+      @value = 'standard'
+
 
     @$container.find('.height-option').on('click', @selectValueHandler)
     @$container.find('.close').on('click', @close)
