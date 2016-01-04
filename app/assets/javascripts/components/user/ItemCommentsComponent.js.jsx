@@ -26,7 +26,7 @@ var ModalComment = React.createClass({
   render: function() {
     return (
       <div className='comment-wrap'>
-        <div className='user-name'>{this.props.prop.moodboard_comment.user_id}</div>
+        <div className='user-name'>{this.props.prop.moodboard_comment.first_name}</div>
         <div className='user-comment'>{this.props.prop.moodboard_comment.comment}</div>
       </div>
     );
