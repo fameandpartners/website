@@ -17,6 +17,10 @@ module Revolution
       end
     end
 
+    def image_alt_text
+      page.alt_text(position, size)
+    end
+
     def no_of_banners
       page.no_of_banners
     end
