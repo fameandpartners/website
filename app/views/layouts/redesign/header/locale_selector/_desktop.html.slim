@@ -7,14 +7,5 @@
     ul
       - SiteVersion.all.each do |site_version|
         li class=('active' if site_version == current_site_version)
-          = link_to site_version_url(request.url, site_version), class: 'site-version-switcher-link' do
+          = link_to site_version_url(request.url, site_version) do
             = render 'layouts/redesign/header/locale_selector/item', site_version: site_version
-
-javascript:
-  jQuery(document).ready(function(){
-    $('.site-version-switcher-link').click(function () {
-      var _gaq             = window._gaq || [];
-      var site_version_url = $(this).attr('href');
-      _gaq.push(['_link', site_version_url]);
-    });
-  });
