@@ -18,6 +18,10 @@
         'fameandpartners.com.au'
     ]);
 
+    // enable ecommerce plugin
+    // Notice that we NEED to remove this plugin when working with enhanced ecommerce: https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce#overview
+    ga('require', 'ecommerce');
+
     ga('send', 'pageview');
 
     <% if flash[:signed_up_just_now] %>
@@ -38,18 +42,16 @@
     <% end %>
 
     <% if flash[:commerce_tracking] || params[:force_tracking] && @spree_order.present? %>
-      <%# more info: https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiEcommerce %>
-      <%# _addTrans(transactionId, affiliation, total, tax, shipping, city, state, country) %>
-      _gaq.push(['_addTrans',
-        "<%= j @spree_order.number %>",
-        "Fame & Partners",
-        "<%= @spree_order.total %>",
-        "<%= @spree_order.adjustments.tax.sum(:amount) %>",
-        "<%= @spree_order.adjustments.shipping.sum(:amount) %>",
-        "<%= j @spree_order.bill_address.city %>",
-        "<%= j @spree_order.bill_address.state_text %>",
-        "<%= j @spree_order.bill_address.country.name %>"
-      ]);
+      <%# more info: https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce %>
+      ga('ecommerce:addTransaction', {
+        'id':          '<%= j @spree_order.number %>',
+        'affiliation': 'Fame & Partners',
+        'currency':    '<%= @spree_order.currency %>',
+        'revenue':     '<%= @spree_order.total %>',
+        'shipping':    '<%= @spree_order.adjustments.shipping.sum(:amount) %>',
+        'tax':         '<%= @spree_order.adjustments.tax.sum(:amount) %>'
+      });
+
       <% @spree_order.line_items.each do |line_item| %>
         <%
           # _addItem(transactionId, sku, name, category, price, quantity)
@@ -57,21 +59,18 @@
           category_name = range_taxon.present? ? range_taxon.name : ''
           sku           = CustomItemSku.new(line_item).call
         %>
-        _gaq.push(['_addItem',
-          "<%= j @spree_order.number %>",
-          "<%= j sku %>",
-          "<%= j line_item.variant.product.name %>",
-          "<%= j category_name %>",
-          "<%= line_item.price %>",
-          "<%= line_item.quantity %>"
-        ]);
 
+        ga('ecommerce:addItem', {
+          'id':       '<%= j @spree_order.number %>',
+          'name':     '<%= j line_item.variant.product.name %>',
+          'sku':      '<%= j sku %>',
+          'category': '<%= j category_name %>',
+          'price':    '<%= line_item.price %>',
+          'quantity': '<%= line_item.quantity %>'
+        });
       <% end %>
 
-      <%# More details at https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingEcommerce#localcurrencies %>
-      _gaq.push(['_set', 'currencyCode', '<%= @spree_order.currency %>']);
-      _gaq.push(['_trackTrans']);
-
+      ga('ecommerce:send'); // Send transaction and item data to Google Analytics.
     <% end %>
   <% end %>
 <% end %>
