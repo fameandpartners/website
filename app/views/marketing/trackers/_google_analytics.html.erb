@@ -26,15 +26,15 @@
     <% end %>
 
     <% if flash[:track_fb_reminder_promo] %>
-      _gaq.push(['_trackEvent', 'Facebook', 'Redeem']);
+      ga('send', 'event', 'Facebook', 'Redeem');
     <% end %>
 
     <% if flash[:track_fb_signin] %>
-      _gaq.push(['_trackEvent', 'Facebook', 'SignIn']);
+      ga('send', 'event', 'Facebook', 'SignIn');
     <% end %>
 
     <% if flash[:track_fb_signup] %>
-      _gaq.push(['_trackEvent', 'Facebook', 'SignUp']);
+      ga('send', 'event', 'Facebook', 'SignUp');
     <% end %>
 
     <% if flash[:commerce_tracking] || params[:force_tracking] && @spree_order.present? %>

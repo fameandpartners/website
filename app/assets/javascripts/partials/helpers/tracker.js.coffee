@@ -2,11 +2,10 @@
 window.track = {
   tracked: []
   dataLayer: window.dataLayer || []
+  ga: window.ga || () ->
 
   pageView: (page_url, page_params) ->
-    window._gaq or= {}
-    if _gaq && _gaq.push
-      _gaq.push(['_trackPageview', page_url])
+    @ga('send', 'pageview', page_url);
 
   remarketing_tag: () ->
     conversion_type = 'remarketing_tag'
@@ -42,12 +41,16 @@ window.track = {
 
   # events
   event: (category, action, label, value) ->
-    window._gaq or= {}
-    if _gaq && _gaq.push
-      eventParams = ['_trackEvent', category, action, null, null]
-      eventParams[3] = label if label?
-      eventParams[4] = value if value?
-      _gaq.push(eventParams)
+    event_params = {
+      hitType: 'event',
+      eventCategory: category,
+      eventAction: action
+    }
+
+    event_params.eventLabel = label if label?
+    event_params.eventValue = value if value?
+
+    @ga('send', event_params)
 
   addedToWishlist: (label) ->
     track.event('Wishlist', 'AddedToWishlist', label)
