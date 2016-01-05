@@ -48,14 +48,10 @@ module Revolution
       @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
     end
 
+    ## Revolution banners
     def banner_image(position, size)
       if banners_exist?
-        banners = translations.where(locale: locale).first.banners.where('banner_order >= ?', position).order(:banner_order)
-        if banners.blank?
-          #If not found default to the first one
-          banners = translations.where(locale: locale).first.banners.where('banner_order >= ?', 0).order(:banner_order)
-        end
-        banners.first.banner.url
+        retrieve_banner(position, size).banner.url
       else
         collection.details.banner.image
       end
@@ -71,20 +67,25 @@ module Revolution
 
     def alt_text(position, size)
       if banners_exist?
-        banners = translations.where(locale: locale).first.banners.where('banner_order >= ?', position).order(:banner_order)
-        if banners.blank?
-          #If not found default to the first one
-          banners = translations.where(locale: locale).first.banners.where('banner_order >= ?', 0).order(:banner_order)
-        end
-        banners.first.alt_text
+        retrieve_banner(position, size).alt_text
       else
         'alt_text'
       end
     end
 
+    def retrieve_banner(position, size)
+      banners = translations.where(locale: locale).first.banners.where('banner_order >= ?', position).order(:banner_order)
+      if banners.blank?
+        #If not found default to the first one
+        banners = translations.where(locale: locale).first.banners.where('banner_order >= ?', 0).order(:banner_order)
+      end
+      banners.first
+    end
+
     def banners_exist?
       translations.where(locale: locale).first.banners.present?
     end
+    ## End Revolution banners
     
     def translation
       @translation ||= translations.find_for_locale(locale)
