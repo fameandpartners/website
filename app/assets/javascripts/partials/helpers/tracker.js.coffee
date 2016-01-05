@@ -47,7 +47,6 @@ window.track = {
       eventParams = ['_trackEvent', category, action, null, null]
       eventParams[3] = label if label?
       eventParams[4] = value if value?
-      #console.log('tracked', eventParams)
       _gaq.push(eventParams)
 
   addedToWishlist: (label) ->
