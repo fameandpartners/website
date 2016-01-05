@@ -110,6 +110,7 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
       missingValues = []
       missingValues.push('size')   if !selected.size_id
       missingValues.push('color')  if !selected.color_id
+      # We present to customers as skirt length, but we are actually asking for customer height
       missingValues.push('skirt length') if !selected.height
 
       result.error = errorMessage + missingValues.join(' and ')
