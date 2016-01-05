@@ -1,0 +1,69 @@
+coffee:
+  $(document).ready ->
+    $('.register-your-event').on 'click', (e) ->
+      e.preventDefault()
+      $("#how-it-works").hide()
+      $(".sign-up-form").show()
+    $('.sign-in-here').on 'click', (e) ->
+      e.preventDefault()
+      $(".sign-up-form").hide()
+      $(".sign-in-form").show()
+
+.container.sign-in-form
+  .row
+    h2.title-line-on-sides
+      .inner-wrap SIGN IN
+    .col-md-5.left-col
+      = link_to 'Log in with Facebook', fb_auth_path(site_version: current_site_version.code), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
+    .col-md-1
+      .separator
+        span or
+    .col-md-6.form-wrap
+      = render :partial => 'spree/shared/login'
+
+.container.sign-up-form
+  .row
+    .col-md-12.sign-up
+      h2.title-line-on-sides
+        .inner-wrap CREATE AN ACCOUNT
+      - signup_params = {site_version: current_site_version.code}
+      = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) do |f|
+        = f.hidden_field :site_version_id, value: current_site_version.id
+
+      .container
+        .row
+          .col-md-5.left-col
+            = link_to 'Sign up with facebook', fb_auth_path(signup_params), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
+          .col-md-1
+            .separator
+              span or
+          .col-md-6.form-wrap
+            = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) do |f|
+              = f.hidden_field :site_version_id, value: current_site_version.id
+              div data-hook="signup"
+                .row
+                  .col-md-6.form-group
+                    = f.text_field :first_name, :class => 'form-control form-control-md', :placeholder => t(:first_name)
+                  .col-md-6.form-group
+                    = f.text_field :last_name, :class => 'form-control form-control-md', :placeholder => t(:last_name)
+                  .col-md-12.form-group
+                    = f.email_field :email, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:email)
+
+                #password-credentials
+                .row
+                  .col-md-6.form-group
+                    = f.password_field :password, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password)
+                  .col-md-6.form-group
+                    = f.password_field :password_confirmation, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password_confirmation)
+                  .col-md-12.form-group
+                    .checkbox
+                      label for="spree_user_newsletter"
+                        = f.check_box :newsletter, :checked => 'checked'
+                        span
+                          ' Receive new styles in my inbox each week + $25 off
+                  .col-md-5.form-group data-hook="signup_below_password_fields"
+                    = f.submit 'Create account', class: 'btn btn-block btn-black'
+                  .col-md-7.col-sm-12.text-center
+                    p
+                      span Already have an account?
+                      = link_to 'Sign in here', "#", class: 'sign-in-here'
