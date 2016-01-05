@@ -8,6 +8,44 @@ coffee:
       e.preventDefault()
       $(".sign-up-form").hide()
       $(".sign-in-form").show()
+    $(".sign-up-form form").on 'submit', (e) ->
+      e.preventDefault()
+      first_name            = $(".sign-up-form form #spree_user_first_name").val()
+      last_name             = $(".sign-up-form form #spree_user_last_name").val()
+      email                 = $(".sign-up-form form #spree_user_email").val()
+      password              = $(".sign-up-form form #spree_user_password").val()
+      password_confirmation = $(".sign-up-form form #spree_user_password_confirmation").val()
+      newsletter            = $(".sign-up-form form #spree_user_newsletter").val()
+
+      if first_name == "" || last_name == "" || email == "" || password == "" || password_confirmation == ""
+        alert("All fields must be filled !!!")
+        return
+
+      if password != password_confirmation || password.length < 6
+        alert("Password and password confirmation must match and be more than 6 characters !!!")
+        return
+
+      $.post(urlWithSitePrefix("/us/user/spree_user"),
+        page: "bride",
+        utf8:       true,
+        spree_user: {
+                      first_name: first_name,
+                      last_name: last_name,
+                      email:                   email,
+                      password:                password,
+                      password_confirmation:   password_confirmation,
+                      newsletter:              newsletter
+                    },
+        commit:     "Create an account",
+        (data, status) ->
+          if data["status"] == "ok"
+            $("#error-email").hide()
+            $(".sign-up-form").hide()
+          else if data["status"] == "fail"
+            $("#error-email").text("Sorry !, email has already been taken !!!")
+            $("#error-email").show()
+      )
+
 
 .container.sign-in-form
   .row
@@ -48,7 +86,7 @@ coffee:
                     = f.text_field :last_name, :class => 'form-control form-control-md', :placeholder => t(:last_name)
                   .col-md-12.form-group
                     = f.email_field :email, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:email)
-
+                    span#error-email
                 #password-credentials
                 .row
                   .col-md-6.form-group
