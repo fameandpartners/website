@@ -116,7 +116,7 @@ var CommentsModal = React.createClass({
                   name="moodboard_comment[user_id]" 
                   id='moodboard_comment_user_id' />
                 <div className="form-group">
-                  <label for='moodboard_comment_comment'>Add a new Comment</label>
+                  <label htmlFor='moodboard_comment_comment'>Add a new Comment</label>
                   <textarea name="moodboard_comment[comment]" 
                     id='moodboard_comment_comment' className='form-control' rows='2'></textarea>
                 </div>
