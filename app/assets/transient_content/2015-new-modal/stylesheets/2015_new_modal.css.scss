@@ -1,3 +1,101 @@
+.classic-modal.welcome-modal{
+  .col-inline{
+    float: left;
+  }
+  .vex-content{
+    width: 60%;
+    @include mobile{
+      width: 90%;
+    }
+    background-color: $c-classic-modal-bg;
+    border: 15px solid white;
+    .vex-dialog-message, p{
+      text-align: center;
+    }
+    h2{
+      border-bottom: 1px solid black;
+      margin-left: 15%;
+      margin-right: 15%;
+      @include desktop{
+        margin-left: 25%;
+        margin-right: 25%;
+      }
+    }
+    @include iphone6{
+      h2{
+        font-size: 0.6em;
+      }
+      p {
+        font-size: 0.7em;
+      }
+    }
+    @include iphone6p{
+      h2, p{
+        font-size: 0.75em;
+      }
+    }
+    .vex-dialog-buttons{
+      .btn{
+        background-image: url("modal-close2.png");
+        border: 0;
+      }
+    }
+  }
+  .vex-footer{
+    .input-group{
+      display: block;
+    }
+    input[name='email'] {
+      background: $c-neutral-white !important;
+      color: black;
+      padding-left: 1em !important;
+      padding-right: 1em !important;
+      font-size: 0.8em !important;
+      margin-bottom: 30px !important;
+    }
+    .btn-reset{
+      background-color: $c-neutral-black;
+      color: $c-neutral-white;
+      width: 60%;
+      @include mobile{
+        width: 80%;
+      }
+      @include iphone6{
+        font-size: 0.6em;
+      }
+      margin-bottom: 10px;
+      font-size: 0.8em;
+      font-weight: 600;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+    .modal-or{
+      font-size: 0.8em;
+      background-color: $c-classic-modal-bg;
+      padding-left: 5px;
+      padding-right: 5px;
+      font-weight: 400 !important;
+    }
+    .email-form{
+      margin-bottom: 15px;
+    }
+    .fb-form{
+      clear: both;
+      padding-bottom: 10px;
+      .btn-facebook{
+        @include mobile{
+          font-size: 14px !important;
+        }
+      }
+    }
+    hr{
+      width: 30%;
+      margin-bottom: -19px;
+      border: 0;
+      border-top: 1px solid $c-neutral-black;
+    }
+  }
+}
 .new-modal.email-capture-modal {
   z-index: 16000002;
   .vex-content {
