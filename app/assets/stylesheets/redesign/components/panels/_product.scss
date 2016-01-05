@@ -71,18 +71,25 @@
     }
 
     .modal {
+      text-align: left;
       z-index: 1041;
     }
 
     .modal-content {
-      text-align: left;
       border-radius: 0;
       box-shadow: none;
     }
 
     .modal-title {
-      text-transform: none;
+      margin: 15px;
+      text-align: center;
       font-weight: 500;
+
+      .inner-wrap {
+        width: auto;
+        float: none;
+      }
+
     }
 
     .modal-header {
@@ -93,11 +100,14 @@
       max-height: 380px;
       overflow-y: scroll;
       margin: 0 15px;
+      padding-top: 0;
     }
 
     .modal-footer {
       text-align: left;
+      background: $c-neutral-2;
       border-color: $c-neutral-4;
+      margin-top: 0;
     }
 
     .comment-wrap {
@@ -173,12 +183,26 @@
         margin: 0;
       }
 
+      .modal-content {
+        min-height: 100vh;
+      }
+
+      .modal-title {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
       .modal-body {
+        max-height: none;
         margin: 0;
       }
 
-      .modal-footer .btn {
-        width: 100%;
+      .modal-footer {
+
+        .btn {
+          width: 100%;
+        }
+
       }
 
     }

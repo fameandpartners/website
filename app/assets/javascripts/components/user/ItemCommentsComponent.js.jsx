@@ -101,7 +101,9 @@ var CommentsModal = React.createClass({
               <button type='button' className='close' data-dismiss='modal' aria-label='Close'>
                 <span aria-hidden='true'>&times;</span>
               </button>
-              <h4 className='modal-title'>Comments about {this.props.props.itemName}</h4>
+              <h4 className='modal-title title-line-on-sides'>
+                <div className='inner-wrap'>Comments about {this.props.props.itemName}</div>
+              </h4>
             </div>
 
             <div className='modal-body'>{comments}</div>
