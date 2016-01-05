@@ -26,7 +26,7 @@
             <% end %>
             Color: <span class="color"><%= product.color.presentation %></span>
             <br>
-            Height: <span><%= product.height %></span>
+            Skirt Length: <span><%= product.height %></span>
           </div>
           <div class="pull-right text-muted"><%= product.price.display_price %></div>
           <% if (product.discount != null) : %>
@@ -37,7 +37,6 @@
           <% for making_option in product.making_options: %>
             <div class="small">
               <%= making_option.name %> + <%= making_option.display_price %>
-              <!-- <a href="#" class="fa fa-close making-option-remove" data-id="<%= making_option.id %>"></a> -->
             </div>
           <% end %>
           <% for customization in product.customizations: %>
@@ -89,4 +88,3 @@
   <img src="/assets/checkout/visa-mastercard-paypal-masterpass.jpg" >
   <img src="/assets/comodo-ssl.png" >
 </div>
-
