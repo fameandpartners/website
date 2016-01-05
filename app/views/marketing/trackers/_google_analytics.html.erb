@@ -1,13 +1,24 @@
 <% if tracker = Spree::Tracker.current %>
   <%= javascript_tag do %>
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', '<%= tracker.analytics_id %>']);
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    <%# Cross domain config %>
-    _gaq.push(['_setDomainName', 'none']);
-    _gaq.push(['_setAllowLinker', true]);
+    ga('create', '<%= tracker.analytics_id %>', 'auto', {'allowLinker': true});
 
-    _gaq.push(['_trackPageview']);
+    // enable Display Advertising Features
+    ga('require', 'displayfeatures');
+
+    // enable multi domain tracking
+    // docs: https://support.google.com/analytics/answer/1034342?hl=en#GA
+    ga('require', 'linker');
+    ga('linker:autoLink', [
+        'fameandpartners.com',
+        'fameandpartners.com.au'
+    ]);
+
+    ga('send', 'pageview');
 
     <% if flash[:signed_up_just_now] %>
         var dataLayer = window.dataLayer || [];
@@ -62,12 +73,6 @@
       _gaq.push(['_trackTrans']);
 
     <% end %>
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
   <% end %>
 <% end %>
 
