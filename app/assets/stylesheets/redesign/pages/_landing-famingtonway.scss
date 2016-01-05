@@ -94,6 +94,10 @@
     display: none;
     border-bottom: 1px solid black;
     padding-bottom: 30px;
+    #error-email{
+      display: none;
+      color: $c-brand-red;
+    }
     .container{
       padding-top: 30px;
       .left-col{

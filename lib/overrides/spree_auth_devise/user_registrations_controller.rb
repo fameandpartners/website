@@ -37,12 +37,10 @@ Spree::UserRegistrationsController.class_eval do
 
   def create
     @user = build_resource(params[:spree_user])
-
     if resource.new_record?
       resource.sign_up_via    = Spree::User::SIGN_UP_VIA.index('Email')
       resource.sign_up_reason = session[:sign_up_reason]
     end
-
     EmailCapture.new({ service: :mailchimp }, email: @user.email,  newsletter: @user.newsletter,
                      first_name: @user.first_name, last_name: @user.last_name,
                      current_sign_in_ip: request.remote_ip, landing_page: session[:landing_page],
@@ -61,14 +59,22 @@ Spree::UserRegistrationsController.class_eval do
       # Marketing pixel
       flash[:signed_up_just_now] = true
 
-      if session.delete(:personalization)
-        redirect_to main_app.personalization_products_path(cf: 'custom-dresses-signup')
+      if params[:page] == "bride"
+        render :json => { status: 'ok' }
       else
-        redirect_to main_app.root_path({ci: 'signup'}.merge(params.slice(:cl)))
+        if session.delete(:personalization)
+          redirect_to main_app.personalization_products_path(cf: 'custom-dresses-signup')
+        else
+          redirect_to main_app.root_path({ci: 'signup'}.merge(params.slice(:cl)))
+        end
       end
     else
       clean_up_passwords(resource)
-      render :new
+      if params[:page] == "bride"
+        render :json => { status: 'fail', messages: resource.errors.messages }
+      else
+        render :new
+      end
     end
   end
 
