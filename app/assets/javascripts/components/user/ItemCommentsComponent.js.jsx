@@ -3,14 +3,14 @@ var ComponentCommentsModal = React.createClass({
     $(this.refs.payload.getDOMNode()).modal();
   },
   render: function() {
-    var Trigger = this.props.trigger;
     var numOfComments = this.props.assets.length;
 
-    return (<div onClick={this.handleClick}>
-      <CommentsTrigger count={numOfComments} />
-      <CommentsModal ref="payload" props={this.props}>
-      </CommentsModal>
-    </div>);
+    return (
+      <div onClick={this.handleClick}>
+        <CommentsTrigger count={numOfComments} />
+        <CommentsModal ref="payload" props={this.props} />
+      </div>
+    );
   },
 });
 
@@ -24,40 +24,72 @@ var CommentsTrigger = React.createClass({
 
 var ModalComment = React.createClass({
   render: function() {
-    return (
-      <div className='comment-wrap'>
-        <div className='user-name'>{this.props.prop.moodboard_comment.first_name}</div>
-        <div className='user-comment'>{this.props.prop.moodboard_comment.comment}</div>
-      </div>
-    );
+    if (this.props.currentUserId === this.props.prop.moodboard_comment.user_id) {
+      return (
+        <div className='comment-wrap'>
+          <div className='user-name txt-truncate-1'>{this.props.prop.moodboard_comment.first_name}</div>
+          <form 
+            action={'/moodboard_comments/' + this.props.prop.moodboard_comment.id} 
+            id={'edit_moodboard_comment_' + this.props.prop.moodboard_comment.id}
+            method='post'>
+            <input type='hidden' value='put' name='_method' />
+            <input type='hidden' value={this.props.token} name='authenticity_token' />
+            <div className='user-comment'>
+              <textarea 
+                id="moodboard_comment_comment" 
+                name="moodboard_comment[comment]" 
+                defaultValue={this.props.prop.moodboard_comment.comment} />
+            </div>
+            <div className='toolbar'>
+              <input type='submit' value='update' className='btn btn-black' />
+              <a 
+                href={'/moodboard_comments/' + this.props.prop.moodboard_comment.id} 
+                data-method='delete' rel='nofollow'>delete</a>
+            </div>
+          </form>
+        </div>
+      );
+    } else {
+      return (
+        <div className='comment-wrap'>
+          <div className='user-name txt-truncate-1'>{this.props.prop.moodboard_comment.first_name}</div>
+          <div className='user-comment'>
+            <p>{this.props.prop.moodboard_comment.comment}</p>
+          </div>
+          {toolbar}
+        </div>
+      );
+    }
   }
 });
  
 var CommentsModal = React.createClass({
   componentDidMount: function() {
-    // Initialize the modal, once we have the DOM node
-    // TODO: Pass these in via props
     $(this.getDOMNode()).modal({background: true, keyboard: true, show: false});
   },
   componentWillUnmount: function() {
     $(this.getDOMNode()).off('hidden');
   },
-  // This was the key fix --- stop events from bubbling
   handleClick: function(e) {
     e.stopPropagation();
   },
   render: function() {
-    console.log(this.props.props);
     var comments; 
 
     if(this.props.props.assets.length > 0) {
+      var currentUserId = this.props.props.currentUserId;
+      var token = this.props.props.token;
       comments = this.props.props.assets.map(function(prop) {
-        return (<ModalComment key={'comment-list-' + prop.moodboard_comment.id} prop={prop} />);
+        return (
+          <ModalComment 
+            key={'comment-list-' + prop.moodboard_comment.id} 
+            prop={prop} 
+            currentUserId={currentUserId} 
+            token={token} />
+        );
       });
     } else {
-      comments = this.props.props.assets.map(function(prop) {
-        return (<p>Be the first to comment on this dress!</p>);
-      });
+      comments = 'Be the first to comment on this dress!';
     }
 
     return (
@@ -77,13 +109,18 @@ var CommentsModal = React.createClass({
             <div className='modal-footer'>
               <form action='/moodboard_comments' method='post' id='new_moodboard_comment'>
                 <input type='hidden' value={this.props.props.token} name='authenticity_token' />
-                <input type='hidden' value={this.props.props.itemId} name='moodboard_comment[moodboard_item_id]' id='moodboard_comment_moodboard_item_id' />
-                <input type='hidden' value={this.props.props.userId} name="moodboard_comment[user_id]" id='moodboard_comment_user_id' />
+                <input type='hidden' value={this.props.props.itemId} 
+                  name='moodboard_comment[moodboard_item_id]' 
+                  id='moodboard_comment_moodboard_item_id' />
+                <input type='hidden' value={this.props.props.currentUserId} 
+                  name="moodboard_comment[user_id]" 
+                  id='moodboard_comment_user_id' />
                 <div className="form-group">
                   <label for='moodboard_comment_comment'>Add a new Comment</label>
-                  <textarea name="moodboard_comment[comment]" id='moodboard_comment_comment' className='form-control' rows='2'></textarea>
+                  <textarea name="moodboard_comment[comment]" 
+                    id='moodboard_comment_comment' className='form-control' rows='2'></textarea>
                 </div>
-                <input type='submit' value='Submit Comment' name='commit' className='btn btn-black' />
+                <input type='submit' value='Submit Comment' className='btn btn-black' />
               </form>
             </div>
 
