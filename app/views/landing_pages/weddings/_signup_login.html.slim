@@ -19,7 +19,7 @@ coffee:
         alert("All fields must be filled !!!")
         return
 
-      $.post(urlWithSitePrefix("/us/user/spree_user/sign_in"),
+      $.post("/us/user/spree_user/sign_in",
         page: "bride",
         utf8:       true,
         authenticity_token: authenticity_token,
@@ -55,7 +55,7 @@ coffee:
         alert("Password and password confirmation must match and be more than 6 characters !!!")
         return
 
-      $.post(urlWithSitePrefix("/us/user/spree_user"),
+      $.post("/us/user/spree_user",
         page: "bride",
         utf8:       true,
         spree_user: {
