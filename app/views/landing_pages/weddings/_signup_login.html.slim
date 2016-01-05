@@ -19,23 +19,28 @@ coffee:
         alert("All fields must be filled !!!")
         return
 
-      $.post("/" + window.app.current_site_version.permalink + "/user/spree_user/sign_in",
-        page: "bride",
-        utf8:       true,
-        authenticity_token: authenticity_token,
-        spree_user: {
-                      email:       email,
-                      password:    password,
-                      remember_me: remember_me
-                    },
-        commit: "Login",
-        (data, status) ->
-          if data["status"] == "ok"
-            $(".sign-in-form #error-email").hide()
-            $(".sign-in-form").hide()
-          else
-            $(".sign-in-form #error-email").text("Incorrect login credentials")
-            $(".sign-in-form #error-email").show()
+      $.ajax(
+        type: "POST"
+        dataType: "json"
+        url: "/" + window.app.current_site_version.permalink + "/user/spree_user/sign_in.js"
+        data: {
+          page: "bride",
+          utf8:       true,
+          authenticity_token: authenticity_token,
+          spree_user: {
+                        email:       email,
+                        password:    password,
+                        remember_me: remember_me
+                      },
+          commit: "Login"
+        }
+      ).success((res) ->
+        if res["error"] == true
+          $(".sign-in-form #error-email").text("Incorrect login credentials")
+          $(".sign-in-form #error-email").show()
+        else
+          $(".sign-in-form #error-email").hide()
+          $(".sign-in-form").hide()
       )
 
     $(".sign-up-form form").on 'submit', (e) ->
@@ -55,27 +60,31 @@ coffee:
         alert("Password and password confirmation must match and be more than 6 characters !!!")
         return
 
-      $.post("/" + window.app.current_site_version.permalink + "/user/spree_user",
-        page: "bride",
-        utf8:       true,
-        spree_user: {
-                      first_name: first_name,
-                      last_name: last_name,
-                      email:                   email,
-                      password:                password,
-                      password_confirmation:   password_confirmation,
-                      newsletter:              newsletter
-                    },
-        commit:     "Create an account",
-        (data, status) ->
-          if data["status"] == "ok"
-            $(".sign-up-form  #error-email").hide()
-            $(".sign-up-form").hide()
-          else if data["status"] == "fail"
-            $(".sign-up-form  #error-email").text("Sorry !, email has already been taken !!!")
-            $(".sign-up-form  #error-email").show()
+      $.ajax(
+        type: "POST"
+        url: "/" + window.app.current_site_version.permalink + "/user/spree_user.js"
+        dataType: "json"
+        data: {
+          ajax_signed_up: true
+          utf8:       true
+          spree_user: {
+                        first_name: first_name,
+                        last_name: last_name,
+                        email:                   email,
+                        password:                password,
+                        password_confirmation:   password_confirmation,
+                        newsletter:              newsletter
+                      },
+          commit:     "Create an account"
+        }
+      ).success((data)->
+        if data["status"] == "ok"
+          $(".sign-up-form  #error-email").hide()
+          $(".sign-up-form").hide()
+        else if data["status"] == "fail"
+          $(".sign-up-form  #error-email").text("Sorry !, email has already been taken !!!")
+          $(".sign-up-form  #error-email").show()
       )
-
 
 .container.sign-in-form
   .row
