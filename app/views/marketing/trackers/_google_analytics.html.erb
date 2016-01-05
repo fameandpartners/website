@@ -13,10 +13,7 @@
     // enable multi domain tracking
     // docs: https://support.google.com/analytics/answer/1034342?hl=en#GA
     ga('require', 'linker');
-    ga('linker:autoLink', [
-        'fameandpartners.com',
-        'fameandpartners.com.au'
-    ]);
+    ga('linker:autoLink', ['fameandpartners.com','fameandpartners.com.au']);
 
     // enable ecommerce plugin
     // Notice that we NEED to remove this plugin when working with enhanced ecommerce: https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce#overview
@@ -44,12 +41,12 @@
     <% if flash[:commerce_tracking] || params[:force_tracking] && @spree_order.present? %>
       <%# more info: https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce %>
       ga('ecommerce:addTransaction', {
-        'id':          '<%= j @spree_order.number %>',
+        'id': '<%= j @spree_order.number %>',
         'affiliation': 'Fame & Partners',
-        'currency':    '<%= @spree_order.currency %>',
-        'revenue':     '<%= @spree_order.total %>',
-        'shipping':    '<%= @spree_order.adjustments.shipping.sum(:amount) %>',
-        'tax':         '<%= @spree_order.adjustments.tax.sum(:amount) %>'
+        'currency': '<%= @spree_order.currency %>',
+        'revenue': '<%= @spree_order.total %>',
+        'shipping': '<%= @spree_order.adjustments.shipping.sum(:amount) %>',
+        'tax': '<%= @spree_order.adjustments.tax.sum(:amount) %>'
       });
 
       <% @spree_order.line_items.each do |line_item| %>
@@ -61,11 +58,11 @@
         %>
 
         ga('ecommerce:addItem', {
-          'id':       '<%= j @spree_order.number %>',
-          'name':     '<%= j line_item.variant.product.name %>',
-          'sku':      '<%= j sku %>',
+          'id': '<%= j @spree_order.number %>',
+          'name': '<%= j line_item.variant.product.name %>',
+          'sku': '<%= j sku %>',
           'category': '<%= j category_name %>',
-          'price':    '<%= line_item.price %>',
+          'price': '<%= line_item.price %>',
           'quantity': '<%= line_item.quantity %>'
         });
       <% end %>
