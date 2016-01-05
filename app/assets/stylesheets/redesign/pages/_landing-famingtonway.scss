@@ -5,6 +5,10 @@
     display: none;
     border-bottom: 1px solid $c-neutral-black;
     padding-bottom: 30px;
+    #error-email{
+      display: none;
+      color: $c-brand-red;
+    }
     .title-line-on-sides{
       margin-bottom: 50px;
     }

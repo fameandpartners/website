@@ -8,6 +8,36 @@ coffee:
       e.preventDefault()
       $(".sign-up-form").hide()
       $(".sign-in-form").show()
+
+    $(".sign-in-form form").on 'submit', (e) ->
+      e.preventDefault()
+      email       = $(".sign-in-form #spree_user_email").val()
+      password    = $(".sign-in-form #spree_user_password").val()
+      remember_me = $(".sign-in-form #spree_user_remember_me").val()
+      authenticity_token = $(".sign-in-form input[name='authenticity_token']").val()
+      if email == "" || password == ""
+        alert("All fields must be filled !!!")
+        return
+
+      $.post(urlWithSitePrefix("/us/user/spree_user/sign_in"),
+        page: "bride",
+        utf8:       true,
+        authenticity_token: authenticity_token,
+        spree_user: {
+                      email:       email,
+                      password:    password,
+                      remember_me: remember_me
+                    },
+        commit: "Login",
+        (data, status) ->
+          if data["status"] == "ok"
+            $(".sign-in-form #error-email").hide()
+            $(".sign-in-form").hide()
+          else
+            $(".sign-in-form #error-email").text("Incorrect login credentials")
+            $(".sign-in-form #error-email").show()
+      )
+
     $(".sign-up-form form").on 'submit', (e) ->
       e.preventDefault()
       first_name            = $(".sign-up-form form #spree_user_first_name").val()
@@ -57,6 +87,7 @@ coffee:
       .separator
         span or
     .col-md-6.form-wrap
+      span#error-email
       = render :partial => 'spree/shared/login'
 
 .container.sign-up-form
