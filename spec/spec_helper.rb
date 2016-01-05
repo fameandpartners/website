@@ -11,6 +11,7 @@ require 'rspec/rails'
 require 'turnip/capybara'
 require 'capybara/rails'
 require 'shoulda/matchers'
+require "paperclip/matchers"
 require 'ffaker'
 
 # Rails.application.railties.all { |r| r.eager_load! }
@@ -35,4 +36,5 @@ RSpec.configure do |config|
 
   # Use DatabaseCleaner instead of ActiveRecord transactional
   config.use_transactional_fixtures = false
+  config.include Paperclip::Shoulda::Matchers
 end
