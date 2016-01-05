@@ -386,6 +386,36 @@ describe Revolution::Page do
   end
 
   describe 'revolution banners' do
+    def au_banners
+      Revolution::Translation::Banner.create!(translation_id:      au_translation.id,
+                                              alt_text:            'alt_text', size: 'large',
+                                              banner_order:        1, banner_file_name: 'au_image.jpg',
+                                              banner_content_type: 'image/jpeg',
+                                              banner_file_size:    72900)
+      Revolution::Translation::Banner.create!(translation_id:      au_translation.id,
+                                              alt_text:            'alt_text2', size: 'large',
+                                              banner_order:        2, banner_file_name: 'au_image2.jpg',
+                                              banner_content_type: 'image/jpeg',
+                                              banner_file_size:    72900)
+    end
+    def us_banners
+      allow(page).to receive(:locale).and_return(us_locale)
+      Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
+                                              alt_text:            'alt_text1', size: 'large',
+                                              banner_order:        1, banner_file_name: 'us_image1.jpg',
+                                              banner_content_type: 'image/jpeg',
+                                              banner_file_size:    72900)
+      Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
+                                              alt_text:            'alt_text2', size: 'large',
+                                              banner_order:        2, banner_file_name: 'us_image2.jpg',
+                                              banner_content_type: 'image/jpeg',
+                                              banner_file_size:    72900)
+      Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
+                                              alt_text:            'alt_text4', size: 'large',
+                                              banner_order:        4, banner_file_name: 'us_image4.jpg',
+                                              banner_content_type: 'image/jpeg',
+                                              banner_file_size:    72900)
+    end
     let(:collection) { double('Collection') }
     let(:au_locale) { 'en-AU' }
     let!(:au_translation) { page.translations.create!(:locale => au_locale, :title => title, :meta_description => title) }
@@ -397,24 +427,26 @@ describe Revolution::Page do
       allow(collection).to receive_message_chain(:details, :banner, :image => '/url')
     end
 
+    context '.banners_exist?' do
+      it { expect(page.banners_exist?).to be_falsey }
+      it 'finds there are AU banners' do
+        au_banners
+        expect(page.banners_exist?).to be_truthy
+      end
+      it 'finds there are US banners' do
+        us_banners
+        expect(page.banners_exist?).to be_truthy
+      end
+    end
+
     context ".banner_image" do
       it { expect(page.banner_image(1, 'large')).to eq '/url' }
       it 'has a defined AU banner' do
-        allow(page).to receive(:locale).and_return(au_locale)
-        Revolution::Translation::Banner.create!(translation_id:      au_translation.id,
-                                                alt_text:            'alt_text', size: 'large',
-                                                banner_order:        1, banner_file_name: 'au_image.jpg',
-                                                banner_content_type: 'image/jpeg',
-                                                banner_file_size:    72900)
+        au_banners
         expect(page.banner_image(1, 'large')).to match(/au_image/)
       end
       it 'has a defined US banner' do
-        allow(page).to receive(:locale).and_return(us_locale)
-        Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
-                                                alt_text:            'alt_text', size: 'large',
-                                                banner_order:        1, banner_file_name: 'us_image.jpg',
-                                                banner_content_type: 'image/jpeg',
-                                                banner_file_size:    72900)
+        us_banners
         expect(page.banner_image(1, 'large')).to match(/us_image/)
       end
     end
@@ -422,35 +454,11 @@ describe Revolution::Page do
     context ".no_of_banners" do
       it { expect(page.no_of_banners).to eq 1 }
       it 'has 2 AU banners' do
-        Revolution::Translation::Banner.create!(translation_id:      au_translation.id,
-                                                alt_text:            'alt_text1', size: 'large',
-                                                banner_order:        1, banner_file_name: 'au_image1.jpg',
-                                                banner_content_type: 'image/jpeg',
-                                                banner_file_size:    72900)
-        Revolution::Translation::Banner.create!(translation_id:      au_translation.id,
-                                                alt_text:            'alt_text2', size: 'large',
-                                                banner_order:        2, banner_file_name: 'au_image2.jpg',
-                                                banner_content_type: 'image/jpeg',
-                                                banner_file_size:    72900)
+        au_banners
         expect(expect(page.no_of_banners).to eq 2)
       end
       it 'has 3 Us banners' do
-        allow(page).to receive(:locale).and_return(us_locale)
-        Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
-                                                alt_text:            'alt_text1', size: 'large',
-                                                banner_order:        1, banner_file_name: 'us_image1.jpg',
-                                                banner_content_type: 'image/jpeg',
-                                                banner_file_size:    72900)
-        Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
-                                                alt_text:            'alt_text2', size: 'large',
-                                                banner_order:        2, banner_file_name: 'us_image2.jpg',
-                                                banner_content_type: 'image/jpeg',
-                                                banner_file_size:    72900)
-        Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
-                                                alt_text:            'alt_text4', size: 'large',
-                                                banner_order:        4, banner_file_name: 'us_image4.jpg',
-                                                banner_content_type: 'image/jpeg',
-                                                banner_file_size:    72900)
+        us_banners
         expect(expect(page.no_of_banners).to eq 3)
       end
     end
@@ -458,37 +466,14 @@ describe Revolution::Page do
     context '.alt_text' do
       it { expect(page.alt_text(1, 'large')).to eq 'alt_text' }
       it 'returns the alt text from the second AU banner' do
-        Revolution::Translation::Banner.create!(translation_id:      au_translation.id,
-                                                alt_text:            'alt_text1', size: 'large',
-                                                banner_order:        1, banner_file_name: 'au_image1.jpg',
-                                                banner_content_type: 'image/jpeg',
-                                                banner_file_size:    72900)
-        Revolution::Translation::Banner.create!(translation_id:      au_translation.id,
-                                                alt_text:            'alt_text2', size: 'large',
-                                                banner_order:        2, banner_file_name: 'au_image2.jpg',
-                                                banner_content_type: 'image/jpeg',
-                                                banner_file_size:    72900)
+        au_banners
         expect(expect(page.alt_text(2, 'large')).to eq 'alt_text2')
       end
       it 'returns the alt text from the third US banner' do
-        allow(page).to receive(:locale).and_return(us_locale)
-        Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
-                                                alt_text:            'alt_text1', size: 'large',
-                                                banner_order:        1, banner_file_name: 'us_image1.jpg',
-                                                banner_content_type: 'image/jpeg',
-                                                banner_file_size:    72900)
-        Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
-                                                alt_text:            'alt_text2', size: 'large',
-                                                banner_order:        2, banner_file_name: 'us_image2.jpg',
-                                                banner_content_type: 'image/jpeg',
-                                                banner_file_size:    72900)
-        Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
-                                                alt_text:            'alt_text4', size: 'large',
-                                                banner_order:        4, banner_file_name: 'us_image4.jpg',
-                                                banner_content_type: 'image/jpeg',
-                                                banner_file_size:    72900)
+        us_banners
         expect(expect(page.alt_text(3, 'large')).to eq 'alt_text4')
       end
     end
+
   end
 end

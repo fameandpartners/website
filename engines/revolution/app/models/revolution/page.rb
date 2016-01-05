@@ -49,7 +49,7 @@ module Revolution
     end
 
     def banner_image(position, size)
-      if translations.where(locale: locale).first.banners.present?
+      if banners_exist?
         banners = translations.where(locale: locale).first.banners.where('banner_order >= ?', position).order(:banner_order)
         if banners.blank?
           #If not found default to the first one
@@ -62,7 +62,7 @@ module Revolution
     end
 
     def no_of_banners
-      if translations.where(locale: locale).first.banners.present?
+      if banners_exist?
         translations.where(locale: locale).first.banners.count
       else
         1
@@ -70,7 +70,7 @@ module Revolution
     end
 
     def alt_text(position, size)
-      if translations.where(locale: locale).first.banners.present?
+      if banners_exist?
         banners = translations.where(locale: locale).first.banners.where('banner_order >= ?', position).order(:banner_order)
         if banners.blank?
           #If not found default to the first one
@@ -80,6 +80,10 @@ module Revolution
       else
         'alt_text'
       end
+    end
+
+    def banners_exist?
+      translations.where(locale: locale).first.banners.present?
     end
     
     def translation
