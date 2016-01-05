@@ -97,7 +97,7 @@
 
     .modal-footer {
       text-align: left;
-      border-top: none;
+      border-color: $c-neutral-4;
     }
 
     .comment-wrap {
@@ -114,7 +114,7 @@
       .user-name {
         float: left;
         width: 20%;
-        padding: 5px;
+        padding: 5px 0;
         text-transform: uppercase;
         font-size: 0.875em;
         font-weight: 500;
@@ -150,6 +150,35 @@
           background: transparent;
         }
 
+      }
+
+    }
+
+    @include iphone6 {
+
+      .comment-wrap {
+
+        .user-name,
+        .user-comment {
+          width: 100%;
+        }
+
+        .user-comment {
+          padding-left: 0;
+        }
+
+      }
+
+      .modal-dialog {
+        margin: 0;
+      }
+
+      .modal-body {
+        margin: 0;
+      }
+
+      .modal-footer .btn {
+        width: 100%;
       }
 
     }
