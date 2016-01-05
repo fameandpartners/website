@@ -65,7 +65,7 @@
           .btn-wrap.position-3
             = link_to 'Get started', new_moodboard_path, class:'btn btn-lowlight register-your-event'
 
-      - if !current_spree_user
+      - if !signed_in?
         = render 'landing_pages/weddings/signup_login', wedding_source: 'brides'
 
       .col-md-12
