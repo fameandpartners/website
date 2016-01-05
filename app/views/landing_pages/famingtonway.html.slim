@@ -17,8 +17,8 @@
       h1.title Be inspired & shop together with your bridesmaids.
       a href='#how-it-works' class='btn btn-lowlight btn-sm' See how it works
 
-
-  = render 'landing_pages/weddings/signup_login', wedding_source: 'bridesmaids'
+  - if !current_spree_user
+    = render 'landing_pages/weddings/signup_login', wedding_source: 'bridesmaids'
 
   .container
     .row
