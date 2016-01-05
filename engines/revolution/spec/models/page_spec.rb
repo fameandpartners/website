@@ -439,6 +439,22 @@ describe Revolution::Page do
       end
     end
 
+    context '.retrieve_banner' do
+      #Making assumption that banners exist
+      it 'returns the first AU banner' do
+        au_banners
+        expect(page.retrieve_banner(1, 'large')).to eq page.translations.where(locale: au_locale).first.banners.first
+      end
+      it 'returns the third US banner' do
+        us_banners
+        expect(page.retrieve_banner(3, 'large')).to eq page.translations.where(locale: us_locale).first.banners.third
+      end
+      it 'returns the first AU banner if attempting to retrieve more than available' do
+        au_banners
+        expect(page.retrieve_banner(3, 'large')).to eq page.translations.where(locale: au_locale).first.banners.first
+      end
+    end
+
     context ".banner_image" do
       it { expect(page.banner_image(1, 'large')).to eq '/url' }
       it 'has a defined AU banner' do
