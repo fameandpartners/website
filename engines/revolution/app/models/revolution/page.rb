@@ -54,7 +54,7 @@ module Revolution
     end
 
     def get(key)
-      variables[key]
+      variables[key] || variables[key.to_s]
     end
 
     def self.find_for(*paths)
