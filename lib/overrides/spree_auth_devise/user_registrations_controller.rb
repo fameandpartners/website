@@ -59,7 +59,7 @@ Spree::UserRegistrationsController.class_eval do
       # Marketing pixel
       flash[:signed_up_just_now] = true
 
-      if params[:ajax_signed_up] == "true"
+      if request.xhr?
         render :json => { status: 'ok' }
       else
         if session.delete(:personalization)
@@ -70,7 +70,7 @@ Spree::UserRegistrationsController.class_eval do
       end
     else
       clean_up_passwords(resource)
-      if params[:ajax_signed_up] == "true"
+      if request.xhr?
         render :json => { status: 'fail', messages: resource.errors.messages }
       else
         render :new
