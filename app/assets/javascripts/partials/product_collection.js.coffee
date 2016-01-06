@@ -141,11 +141,11 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     if isPriceCheckbox
       if $($(e.target).parent()).attr("data-all") == "true"
-        $(".filter-radio-option .radio-icon").removeClass("true").addClass("false")
-        $(".filter-radio-option .radio-icon:first").removeClass("false").addClass("true")
+        $(".filter-radio-option .radio-icon").removeClass("selected")
+        $(".filter-radio-option .radio-icon:first").addClass("selected")
       else
-        $(".filter-radio-option .radio-icon").removeClass("true").addClass("false")
-        $(e.target).removeClass("false").addClass("true")
+        $(".filter-radio-option .radio-icon").removeClass("selected")
+        $(e.target).addClass("selected")
 
 
   resetPagination: (items_on_page, total_records) ->
@@ -258,9 +258,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     priceHash = {}
 
-    if $(".filter-radio-option .radio-icon:first").hasClass("false")
-      priceMin = $($(".filter-radio-option .radio-icon.true").parent()).data("pricemin")
-      priceMax = $($(".filter-radio-option .radio-icon.true").parent()).data("pricemax")
+    if !$(".filter-radio-option .radio-icon:first").hasClass("selected")
+      priceMin = $($(".filter-radio-option .radio-icon.selected").parent()).data("pricemin")
+      priceMax = $($(".filter-radio-option .radio-icon.selected").parent()).data("pricemax")
       priceHash["priceMin"] = priceMin
       priceHash["priceMax"] = priceMax if priceMax?
       filter = $.extend(filter,priceHash)
