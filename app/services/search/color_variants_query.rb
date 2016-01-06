@@ -167,6 +167,8 @@ module Search
               by 'product.created_at', 'asc'
             when 'fast_delivery'
               by 'product.fast_delivery', 'desc'
+            when 'best_sellers'
+              by 'product.total_sales', 'desc'
             when 'alpha_asc'
               by 'product.name', 'asc'
             when 'alpha_desc'
