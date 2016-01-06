@@ -28,13 +28,8 @@ var BlogPosts = React.createClass({
     $.get("http://blog.fameandpartners.com/?json=1&count=100", function(result) {
 
       // Pushing the posts which will be display on homepage
-      posts = [];
-      for (i=0;i< result.posts.length;i++){
-        if (result.posts[i].custom_fields.home_page_display == "true"){
-          result.posts[i].custom_fields.home_page_display_order = parseInt(result.posts[i].custom_fields.home_page_display_order);
-          posts.push(result.posts[i]);
-        }
-      }
+      var posts = result.posts || [];
+      posts = posts.filter(function(post) { return post.custom_fields.home_page_display == "true" });
       posts = posts.slice(0,9);
 
       //Sort those posts by display order
