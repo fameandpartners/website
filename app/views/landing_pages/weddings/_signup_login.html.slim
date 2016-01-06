@@ -9,81 +9,24 @@ coffee:
       $(".sign-up-form").hide()
       $(".sign-in-form").show()
 
-    $(".sign-in-form form").on 'submit', (e) ->
-      e.preventDefault()
-      email       = $(".sign-in-form #spree_user_email").val()
-      password    = $(".sign-in-form #spree_user_password").val()
-      remember_me = $(".sign-in-form #spree_user_remember_me").val()
-      authenticity_token = $(".sign-in-form input[name='authenticity_token']").val()
-      if email == "" || password == ""
-        alert("All fields must be filled !!!")
-        return
+    $('.sign-in-form form').on 'ajax:success', (event, data, status, xhr) ->
+      if data["error"] == true
+        $(".sign-in-form #error-email").text("Incorrect login credentials")
+        $(".sign-in-form #error-email").show()
+      else
+        $(".sign-in-form #error-email").hide()
+        $(".sign-in-form").hide()
 
-      $.ajax(
-        type: "POST"
-        dataType: "json"
-        url: "/" + window.app.current_site_version.permalink + "/user/spree_user/sign_in.js"
-        data: {
-          page: "bride",
-          utf8:       true,
-          authenticity_token: authenticity_token,
-          spree_user: {
-                        email:       email,
-                        password:    password,
-                        remember_me: remember_me
-                      },
-          commit: "Login"
-        }
-      ).success((res) ->
-        if res["error"] == true
-          $(".sign-in-form #error-email").text("Incorrect login credentials")
-          $(".sign-in-form #error-email").show()
-        else
-          $(".sign-in-form #error-email").hide()
-          $(".sign-in-form").hide()
-      )
-
-    $(".sign-up-form form").on 'submit', (e) ->
-      e.preventDefault()
-      first_name            = $(".sign-up-form form #spree_user_first_name").val()
-      last_name             = $(".sign-up-form form #spree_user_last_name").val()
-      email                 = $(".sign-up-form form #spree_user_email").val()
-      password              = $(".sign-up-form form #spree_user_password").val()
-      password_confirmation = $(".sign-up-form form #spree_user_password_confirmation").val()
-      newsletter            = $(".sign-up-form form #spree_user_newsletter").val()
-
-      if first_name == "" || last_name == "" || email == "" || password == "" || password_confirmation == ""
-        alert("All fields must be filled !!!")
-        return
-
-      if password != password_confirmation || password.length < 6
-        alert("Password and password confirmation must match and be more than 6 characters !!!")
-        return
-
-      $.ajax(
-        type: "POST"
-        url: "/" + window.app.current_site_version.permalink + "/user/spree_user.js"
-        dataType: "json"
-        data: {
-          utf8:       true
-          spree_user: {
-                        first_name: first_name,
-                        last_name: last_name,
-                        email:                   email,
-                        password:                password,
-                        password_confirmation:   password_confirmation,
-                        newsletter:              newsletter
-                      },
-          commit:     "Create an account"
-        }
-      ).success((data)->
-        if data["status"] == "ok"
-          $(".sign-up-form  #error-email").hide()
-          $(".sign-up-form").hide()
-        else if data["status"] == "fail"
-          $(".sign-up-form  #error-email").text("Sorry !, email has already been taken !!!")
-          $(".sign-up-form  #error-email").show()
-      )
+    $('.sign-up-form form').on 'ajax:success', (event, data, status, xhr) ->
+      if data["status"] == "ok"
+        $(".sign-up-form  #error-email").hide()
+        $(".sign-up-form").hide()
+      else if data?["messages"]?["email"]?
+        $(".sign-up-form  #error-email").text("Sorry !, email has already been taken !!!")
+        $(".sign-up-form  #error-email").show()
+      else if data["status"] == "fail"
+        $(".sign-up-form  #error-email").text("Please fill all fields , password and password confirmation must match !!!")
+        $(".sign-up-form  #error-email").show()
 
 .container.sign-in-form
   .row
@@ -96,7 +39,30 @@ coffee:
         span or
     .col-md-6.form-wrap
       span#error-email
-      = render :partial => 'spree/shared/login'
+      .form data-hook="login"
+        - login_path = spree.spree_user_session_path(site_version: current_site_version.try(:code))
+        = form_for :spree_user, :url => login_path , remote: true , :html => {:'data-type' => 'json'} do |f|
+          #password-credentials.row
+            .col-md-12
+              = render :partial =>'shared/redesign/flash_messages', flash: flash
+            .col-md-12.form-group
+              = f.label :email
+              = f.email_field :email, class: 'title', tabindex: 1, :class => 'form-control form-control-md'
+            .col-md-12.form-group
+              = f.label :password
+              = f.password_field :password, class: 'title', tabindex: 2, :class => 'form-control form-control-md'
+            .col-md-12.form-group
+              .checkbox
+                label for="spree_user_remember_me"
+                  = f.check_box :remember_me
+                  span= t(:remember_me)
+            .col-md-12.form-group
+              = f.submit 'Login', class: 'btn btn-block btn-black', tabindex: 3
+            .col-md-12
+              p.multiple-links
+                = link_to t(:create_a_new_account), spree.signup_path(cl: 'login-form')
+                = link_to t(:forgot_password), main_app.new_spree_user_password_path, :id=> 'forgot-password'
+
 
 .container.sign-up-form
   .row
@@ -104,7 +70,7 @@ coffee:
       h2.title-line-on-sides
         .inner-wrap CREATE AN ACCOUNT
       - signup_params = {site_version: current_site_version.code}
-      = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) do |f|
+      = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) , remote: true , :html => {:'data-type' => 'json'} do |f|
         = f.hidden_field :site_version_id, value: current_site_version.id
 
       .container
@@ -115,7 +81,7 @@ coffee:
             .separator
               span or
           .col-md-6.form-wrap
-            = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) do |f|
+            = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) , remote: true , :html => {:'data-type' => 'json'} do |f|
               = f.hidden_field :site_version_id, value: current_site_version.id
               div data-hook="signup"
                 .row
