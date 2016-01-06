@@ -26,22 +26,16 @@ var BlogPosts = React.createClass({
   },
   componentDidMount: function() {
     $.get("http://blog.fameandpartners.com/?json=1&count=100", function(result) {
+      var posts = (result.posts || [])
+        .filter(function (post) {
+          return post.custom_fields.home_page_display == "true"
+        })
+        .slice(0, 9)
+        .sort(function(post, another_post) {
+          // WP custom fields values seems to be an Array, so `home_page_display_order` returns something like: ["1"], ["2"], ...
+          return parseInt(post.custom_fields.home_page_display_order[0]) - parseInt(another_post.custom_fields.home_page_display_order[0])
+        });
 
-      // Pushing the posts which will be display on homepage
-      var posts = result.posts || [];
-      posts = posts.filter(function(post) { return post.custom_fields.home_page_display == "true" });
-      posts = posts.slice(0,9);
-
-      //Sort those posts by display order
-      for (i=0;i< posts.length-1;i++){
-        for (j=i+1;j< posts.length;j++){
-          if (posts[i].custom_fields.home_page_display_order > posts[j].custom_fields.home_page_display_order){
-            temp = posts[i];
-            posts[i] = posts[j];
-            posts[j] = temp;
-          }
-        }
-      }
       this.setState({posts: posts})
     }.bind(this));
   },
