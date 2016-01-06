@@ -2,7 +2,7 @@ module Revolution
   class PageBannerDecorator
     attr_accessor :page, :params, :position, :size, :no_of_banners
 
-    def initialize(page, params, position = 1, size = 'large')
+    def initialize(page, params, position = 1, size = 'full')
       @page     = page
       @params   = params
       @position = position

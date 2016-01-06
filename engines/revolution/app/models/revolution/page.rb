@@ -50,7 +50,7 @@ module Revolution
 
     ## Revolution banners
     def banner_image(position, size)
-      if banners_exist?
+      if banners_exist?(size)
         retrieve_banner(position, size).banner.url
       else
         collection.details.banner.image
@@ -58,7 +58,7 @@ module Revolution
     end
 
     def no_of_banners
-      if banners_exist?
+      if banners_exist?(size)
         translations.where(locale: locale).first.banners.count
       else
         1
@@ -66,7 +66,7 @@ module Revolution
     end
 
     def alt_text(position, size)
-      if banners_exist?
+      if banners_exist?(size)
         retrieve_banner(position, size).alt_text
       else
         'alt_text'
@@ -74,16 +74,16 @@ module Revolution
     end
 
     def retrieve_banner(position, size)
-      banners = translations.where(locale: locale).first.banners.where('banner_order >= ?', position).order(:banner_order)
+      banners = translations.where(locale: locale).first.banners.where('banner_order >= ? and size = ?', position, size).order(:banner_order)
       if banners.blank?
         #If not found default to the first one
-        banners = translations.where(locale: locale).first.banners.where('banner_order >= ?', 0).order(:banner_order)
+        banners = translations.where(locale: locale).first.banners.where('banner_order >= ? and size = ?', 0, size).order(:banner_order)
       end
       banners.first
     end
 
-    def banners_exist?
-      translations.where(locale: locale).first.banners.present?
+    def banners_exist?(size)
+      translations.where(locale: locale).first.banners.where(size: size).present?
     end
     ## End Revolution banners
     
