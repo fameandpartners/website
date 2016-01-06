@@ -44,7 +44,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @$banner = $(options.banner)
 
   setUpFilterElements: =>
-    @allCheckboxes = $(".filter-area .thumb")
+    @allCheckboxes = $(".filter-area .thumb, .radio-icon")
     @allCheckboxes.on 'click', (e) =>
       @handleCheckboxes(e)
       @update()
@@ -100,7 +100,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     isShapeCheckbox = area.hasClass("filter-area-shapes")
     isStyleCheckbox = area.hasClass("filter-area-styles")
     isSelect = $(e.target).parent().hasClass("select-color")
-    isPriceCheckbox = area.hasClass("filter-area-prices")
+    isPriceCheckbox = $(e.target).hasClass("radio-icon")
 
     if isSelect
       name = $($('.filter-area-colors select option:selected')[0]).attr("name")
@@ -110,7 +110,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       if $(".filter-area-colors .thumb-true[name='all']").size() == 1
           $(".filter-area-colors .thumb-true[name='all']").click()
 
-    if (isColorCheckbox && !isSelect) || isShapeCheckbox || isStyleCheckbox || isPriceCheckbox
+    if (isColorCheckbox && !isSelect) || isShapeCheckbox || isStyleCheckbox
       checked = $(e.target).hasClass("thumb-true")
       $(e.target).toggleClass("thumb-true thumb-false")
 
@@ -140,11 +140,13 @@ window.ProductCollectionFilter = class ProductCollectionFilter
           $(".filter-area-styles .thumb-true[name='all']").click()
 
     if isPriceCheckbox
-      if name == 'all'
-        return if $(".filter-area-prices .thumb-false[name='all']").size() == 1
-        $(".filter-area-prices .thumb-true[name!='all']").click()
-      else if !checked
-        $(".filter-area-prices .thumb-true[name!='" + name + "']").click()
+      if $($(e.target).parent()).attr("data-all") == "true"
+        $(".filter-radio-option .radio-icon").removeClass("true").addClass("false")
+        $(".filter-radio-option .radio-icon:first").removeClass("false").addClass("true")
+      else
+        $(".filter-radio-option .radio-icon").removeClass("true").addClass("false")
+        $(e.target).removeClass("false").addClass("true")
+
 
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
@@ -255,9 +257,10 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     }
 
     priceHash = {}
-    if $(".filter-area-prices .thumb-true[name!='all']")[0]?
-      priceMin = $(".filter-area-prices .thumb-true[name!='all']:first").data("pricemin")
-      priceMax = $(".filter-area-prices .thumb-true[name!='all']:first").data("pricemax")
+
+    if $(".filter-radio-option .radio-icon:first").hasClass("false")
+      priceMin = $($(".filter-radio-option .radio-icon.true").parent()).data("pricemin")
+      priceMax = $($(".filter-radio-option .radio-icon.true").parent()).data("pricemax")
       priceHash["priceMin"] = priceMin
       priceHash["priceMax"] = priceMax if priceMax?
       filter = $.extend(filter,priceHash)

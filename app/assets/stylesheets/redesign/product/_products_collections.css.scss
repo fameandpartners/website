@@ -269,6 +269,19 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
 			input {
 				margin-right: 5px;
 			}
+			.radio-icon{
+				cursor: pointer;
+				background-image: url(product-collections/radio.png);
+		        width: 20px;
+			    height: 20px;
+			    float: left;
+			    background-size: contain;
+			    margin-top: 2px;
+			    margin-right: 10px;
+			}
+			.radio-icon.true{
+				background-image: url(product-collections/radio-check.png);
+			}
 		}
 
 		.filter-area-styles {
