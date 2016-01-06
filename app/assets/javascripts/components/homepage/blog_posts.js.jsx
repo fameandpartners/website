@@ -31,17 +31,22 @@ var BlogPosts = React.createClass({
       posts = [];
       for (i=0;i< result.posts.length;i++){
         if (result.posts[i].custom_fields.home_page_display == "true"){
+          result.posts[i].custom_fields.home_page_display_order = parseInt(result.posts[i].custom_fields.home_page_display_order);
           posts.push(result.posts[i]);
         }
       }
+      posts = posts.slice(0,9);
 
       //Sort those posts by display order
-      posts.sort(function(a,b){
-        return parseInt(a.custom_fields.home_page_display_order) - parseInt(b.custom_fields.home_page_display_order);
-      });
-
-      //Only display first 8 posts
-      posts = posts.slice(0,9);
+      for (i=0;i< posts.length-1;i++){
+        for (j=i+1;j< posts.length;j++){
+          if (posts[i].custom_fields.home_page_display_order > posts[j].custom_fields.home_page_display_order){
+            temp = posts[i];
+            posts[i] = posts[j];
+            posts[j] = temp;
+          }
+        }
+      }
       this.setState({posts: posts})
     }.bind(this));
   },
