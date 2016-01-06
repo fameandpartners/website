@@ -85,7 +85,7 @@ class Products::CollectionsController < Products::BaseController
     @page        = Revolution::Page.find_for(current_path, '/dresses/*') || Revolution::Page.default_page
     page.params  = params
     page.locale  = current_site_version.locale
-    @banner      = Revolution::PageBannerDecorator.new(page, params)
+    @banner      = Revolution::PageBannerDecorator.new(page, params, 1, 'full')
   end
 
   def punch_products

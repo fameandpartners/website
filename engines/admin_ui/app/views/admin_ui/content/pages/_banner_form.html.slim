@@ -1,7 +1,19 @@
 - page.translations.where(locale: locale).first.banners.order(:banner_order).each do |banner|
   .ibox.float-e-margins
     .ibox-title
-      h6 = image_tag banner.banner.url, alt: banner.alt_text, width: '300'
+      .row
+        .col-md-4
+          h6 = image_tag banner.banner.url, alt: banner.alt_text, width: '300'
+        .col-md-8
+          | Size:&nbsp;
+          = "#{banner.banner_width}px by #{banner.banner_height}"
+          br
+          | File Name:&nbsp;
+          = banner.banner_file_name
+          br
+          | Size:&nbsp;
+          = banner.banner_file_size
+          | kilobytes
 
     .ibox-content
       = t.fields_for :banners, banner do |banner|
