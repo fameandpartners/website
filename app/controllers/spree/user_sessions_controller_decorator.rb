@@ -27,7 +27,7 @@ Spree::UserSessionsController.class_eval do
           render :new
         }
         format.js {
-          render json: { error: true }.to_json
+          render json: { error: true }
         }
       end
     end
