@@ -25,9 +25,11 @@
                 = link_to moodboard_path(mb), class:'tab'
                   .inner-wrap
                     span = mb.default? ? 'MY MOODBOARD' : mb.name
-          li
-            = link_to '+', new_moodboard_path, class:'btn-add'
-            .hide-visually Create New Moodboard
+          / temporarily disabling creating of more than 2 moodboards
+          - if collection.count < 2          
+            li
+              = link_to '+', new_moodboard_path, class:'btn-add'
+              .hide-visually Create New Moodboard
   .row.hidden-md.hidden-lg
     .col-md-12
       ul.tab-content-controls.js-tab-content-controls

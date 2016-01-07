@@ -9,9 +9,10 @@
         .row
           = render 'items'
       aside.col-md-4.tab-content#mob-tab-aside
-        .panel-aside.panel-swatches
-          h3.heading SWATCHES
-          = render 'color_swatches', colors: @resource.items.active.map(&:color)
+        - if !@resource.items.active.empty?
+          .panel-aside.panel-swatches
+            h3.heading SWATCHES
+            = render 'color_swatches', colors: @resource.items.active.map(&:color)
 
         .panel-aside
           h3.heading PERSONAL STYLIST
