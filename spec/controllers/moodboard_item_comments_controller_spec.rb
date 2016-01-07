@@ -18,10 +18,10 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-RSpec.describe MoodboardCommentsController, :type => :controller do
+RSpec.describe MoodboardItemCommentsController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
-  # MoodboardComment. As you add validations to MoodboardComment, be sure to
+  # MoodboardItemComment. As you add validations to MoodboardItemComment, be sure to
   # adjust the attributes here as well.
 
   let(:current_user) { create(:spree_user) }
@@ -39,39 +39,39 @@ RSpec.describe MoodboardCommentsController, :type => :controller do
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # MoodboardCommentsController. Be sure to keep this updated too.
+  # MoodboardItemCommentsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   before(:each) { allow(controller).to receive_messages(current_spree_user: current_user) }
 
   describe "POST #create" do
     context "with valid params" do
-      it "creates a new MoodboardComment" do
+      it "creates a new MoodboardItemComment" do
         expect {
-          post :create, {:moodboard_comment => valid_attributes}
-        }.to change(MoodboardComment, :count).by(1)
+          post :create, {:moodboard_item_comment => valid_attributes}
+        }.to change(MoodboardItemComment, :count).by(1)
       end
 
-      it "assigns a newly created moodboard_comment as @moodboard_comment" do
-        post :create, {:moodboard_comment => valid_attributes}
-        expect(assigns(:moodboard_comment)).to be_a(MoodboardComment)
-        expect(assigns(:moodboard_comment)).to be_persisted
+      it "assigns a newly created moodboard_item_comment as @moodboard_item_comment" do
+        post :create, {:moodboard_item_comment => valid_attributes}
+        expect(assigns(:moodboard_item_comment)).to be_a(MoodboardItemComment)
+        expect(assigns(:moodboard_item_comment)).to be_persisted
       end
 
       it "redirects to the parent moodboard" do
-        post :create, {:moodboard_comment => valid_attributes}
+        post :create, {:moodboard_item_comment => valid_attributes}
         expect(response).to redirect_to(Moodboard.last)
       end
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved moodboard_comment as @moodboard_comment" do
-        post :create, {:moodboard_comment => invalid_attributes}
-        expect(assigns(:moodboard_comment)).to be_a_new(MoodboardComment)
+      it "assigns a newly created but unsaved moodboard_item_comment as @moodboard_item_comment" do
+        post :create, {:moodboard_item_comment => invalid_attributes}
+        expect(assigns(:moodboard_item_comment)).to be_a_new(MoodboardItemComment)
       end
 
       it "re-renders the 'moodboard' template" do
-        post :create, {:moodboard_comment => invalid_attributes}
+        post :create, {:moodboard_item_comment => invalid_attributes}
         expect(response.location).to match(/moodboard/)
       end
     end
@@ -81,52 +81,52 @@ RSpec.describe MoodboardCommentsController, :type => :controller do
     context "with valid params" do
       let(:new_attributes) { {comment: 'Update comment'} }
 
-      it "updates the requested moodboard_comment" do
+      it "updates the requested moodboard_item_comment" do
 
-        moodboard_comment = MoodboardComment.create! valid_attributes
-        put :update, {:id => moodboard_comment.to_param, :moodboard_comment => new_attributes}
+        moodboard_comment = MoodboardItemComment.create! valid_attributes
+        put :update, {:id => moodboard_comment.to_param, :moodboard_item_comment => new_attributes}
         moodboard_comment.reload
         expect(moodboard_comment.comment).to eq 'Update comment'
       end
 
-      it "assigns the requested moodboard_comment as @moodboard_comment" do
-        moodboard_comment = MoodboardComment.create! valid_attributes
-        put :update, {:id => moodboard_comment.to_param, :moodboard_comment => valid_attributes}
-        expect(assigns(:moodboard_comment)).to eq(moodboard_comment)
+      it "assigns the requested moodboard_item_comment as @moodboard_item_comment" do
+        moodboard_comment = MoodboardItemComment.create! valid_attributes
+        put :update, {:id => moodboard_comment.to_param, :moodboard_item_comment => valid_attributes}
+        expect(assigns(:moodboard_item_comment)).to eq(moodboard_comment)
       end
 
-      it "redirects to the moodboard_comment" do
-        moodboard_comment = MoodboardComment.create! valid_attributes
-        put :update, {:id => moodboard_comment.to_param, :moodboard_comment => valid_attributes}
+      it "redirects to the moodboard_item_comment" do
+        moodboard_comment = MoodboardItemComment.create! valid_attributes
+        put :update, {:id => moodboard_comment.to_param, :moodboard_item_comment => valid_attributes}
         expect(response).to redirect_to(moodboard_item.moodboard)
       end
     end
 
     context "with invalid params" do
-      it "assigns the moodboard_comment as @moodboard_comment" do
-        moodboard_comment = MoodboardComment.create! valid_attributes
-        put :update, {:id => moodboard_comment.to_param, :moodboard_comment => invalid_attributes}
-        expect(assigns(:moodboard_comment)).to eq(moodboard_comment)
+      it "assigns the moodboard_item_comment as @moodboard_item_comment" do
+        moodboard_comment = MoodboardItemComment.create! valid_attributes
+        put :update, {:id => moodboard_comment.to_param, :moodboard_item_comment => invalid_attributes}
+        expect(assigns(:moodboard_item_comment)).to eq(moodboard_comment)
       end
 
       it "renders the 'moodboard' template" do
-        moodboard_comment = MoodboardComment.create! valid_attributes
-        put :update, {:id => moodboard_comment.to_param, :moodboard_comment => invalid_attributes}, valid_session
+        moodboard_comment = MoodboardItemComment.create! valid_attributes
+        put :update, {:id => moodboard_comment.to_param, :moodboard_item_comment => invalid_attributes}, valid_session
         expect(response.location).to redirect_to(moodboard_item.moodboard)
       end
     end
   end
 
   describe "DELETE #destroy" do
-    it "destroys the requested moodboard_comment" do
-      moodboard_comment = MoodboardComment.create! valid_attributes
+    it "destroys the requested moodboard_item_comment" do
+      moodboard_comment = MoodboardItemComment.create! valid_attributes
       expect {
         delete :destroy, {:id => moodboard_comment.to_param}
-      }.to change(MoodboardComment, :count).by(-1)
+      }.to change(MoodboardItemComment, :count).by(-1)
     end
 
     it "redirects to the Moodboard list" do
-      moodboard_comment = MoodboardComment.create! valid_attributes
+      moodboard_comment = MoodboardItemComment.create! valid_attributes
       delete :destroy, {:id => moodboard_comment.to_param}
       expect(response).to redirect_to(moodboard_item.moodboard)
     end

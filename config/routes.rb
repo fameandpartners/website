@@ -373,7 +373,7 @@ FameAndPartners::Application.routes.draw do
     get 'move_to_cart', on: :member
   end
 
-  resources :moodboard_comments, exclude: [:index, :show]
+  resources :moodboard_item_comments, exclude: [:index, :show]
 
   ##################
   # Robots and Feeds

@@ -52,4 +52,9 @@ class Moodboard < ActiveRecord::Base
   def user_member?(candidate_user)
     collaborators.map(&:user_id).compact.include?(candidate_user.id) || self.user_id == candidate_user.id
   end
+
+  def allow_comments?
+    purpose == 'wedding'
+  end
+
 end

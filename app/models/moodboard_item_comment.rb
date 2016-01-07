@@ -1,4 +1,4 @@
-class MoodboardComment < ActiveRecord::Base
+class MoodboardItemComment < ActiveRecord::Base
   belongs_to :moodboard_item
   belongs_to :user, class_name: 'Spree::User'
   attr_accessible :comment, :user_id, :moodboard_item_id
