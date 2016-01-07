@@ -1,0 +1,19 @@
+- if spree_current_user
+    #create_wedding_board_wrapper
+      ' TODO - SPINNER
+    - content_for :inline_javascript do
+      | $('#create_wedding_board_wrapper').load('#{edit_wedding_moodboard_path}', '', function(){
+      |   console.log('LOADED DYNAMIC CONTENT');
+      |   $('#wedding_moodboard_edit_form').on('ajax:complete', function(event, xhr, status) {
+      |     console.dir(xhr);
+      |     console.dir(status);
+      |   });
+      |   $('#wedding_moodboard_edit_form').on('ajax:success', function(event, data, status, xhr) {
+      |     console.log('submitted form');
+      |     $('#wedding_moodboard_edit_wrapper').html(xhr.responseText);
+      |   });
+      |  });
+
+- else
+    = render 'landing_pages/weddings/signup_login', wedding_source: wedding_source, return_path: return_path
+

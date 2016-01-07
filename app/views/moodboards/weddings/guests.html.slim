@@ -1,0 +1,30 @@
+#wedding_moodboard_edit_wrapper
+  .row
+    .col-md-8.col-md-offset-4
+      h2.title-line-on-sides
+        .inner-wrap Invite the Bridal Party
+        .inner-wrap To shop with you
+    .col-md-4
+      picture.media-wrap
+        source media='(max-width: 1023px)' srcset='#{image_path("moodboard/signup-mobile-1.jpg")}'
+        source media='(min-width: 1024px)' srcset='#{image_path("moodboard/signup1.jpg")}'
+        img src='#{image_path("moodboard/signup1.jpg")}' srcset='
+          #{image_path("moodboard/signup-mobile-1.jpg")} 1023w,
+          #{image_path("moodboard/signup1.jpg")} 1024w'
+    .col-md-8
+      .row
+
+        ul
+          - @moodboard.collaborators.each do |member|
+            li
+              => member.name.to_s.upcase
+
+        = form_for @moodboard.collaborators.build, url: moodboard_collaborators_path(@moodboard), remote: true do |f|
+          .form-group
+            = f.text_field :name, placeholder: 'Name', :class => "form-control input-sm"
+          .form-group
+            = f.text_field :email, placeholder: 'Email', :class => "form-control input-sm"
+          = f.button 'Add another bridesmaid', :class => "btn btn-black"
+
+        ' or
+        = link_to('do this later', @moodboard)
