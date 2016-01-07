@@ -8,7 +8,7 @@ var ComponentCommentsModal = React.createClass({
     return (
       <div onClick={this.handleClick}>
         <CommentsTrigger count={numOfComments} />
-        <CommentsModal ref="payload" props={this.props} />
+        <CommentsModal ref='payload' {...this.props} />
       </div>
     );
   },
@@ -24,26 +24,26 @@ var CommentsTrigger = React.createClass({
 
 var ModalComment = React.createClass({
   render: function() {
-    if (this.props.currentUserId === this.props.prop.moodboard_item_comment.user_id) {
+    if (this.props.currentUserId === this.props.moodboard_item_comment.user_id) {
       return (
         <div className='comment-wrap'>
-          <div className='user-name txt-truncate-1'>{this.props.prop.moodboard_item_comment.first_name}</div>
+          <div className='user-name txt-truncate-1'>{this.props.moodboard_item_comment.first_name}</div>
           <form 
-            action={'/moodboard_item_comments/' + this.props.prop.moodboard_item_comment.id}
-            id={'edit_moodboard_item_comment_' + this.props.prop.moodboard_item_comment.id}
+            action={'/moodboard_item_comments/' + this.props.moodboard_item_comment.id}
+            id={'edit_moodboard_item_comment_' + this.props.moodboard_item_comment.id}
             method='post'>
             <input type='hidden' value='put' name='_method' />
             <input type='hidden' value={this.props.token} name='authenticity_token' />
             <div className='user-comment'>
               <textarea 
-                id="moodboard_item_comment_comment"
-                name="moodboard_item_comment[comment]"
-                defaultValue={this.props.prop.moodboard_item_comment.comment} />
+                id='moodboard_item_comment_comment'
+                name='moodboard_item_comment[comment]'
+                defaultValue={this.props.moodboard_item_comment.comment} />
             </div>
             <div className='toolbar'>
               <input type='submit' value='update' className='btn btn-black' />
               <a 
-                href={'/moodboard_item_comments/' + this.props.prop.moodboard_item_comment.id}
+                href={'/moodboard_item_comments/' + this.props.moodboard_item_comment.id}
                 data-method='delete' rel='nofollow'>delete</a>
             </div>
           </form>
@@ -52,9 +52,9 @@ var ModalComment = React.createClass({
     } else {
       return (
         <div className='comment-wrap'>
-          <div className='user-name txt-truncate-1'>{this.props.prop.moodboard_item_comment.first_name}</div>
+          <div className='user-name txt-truncate-1'>{this.props.moodboard_item_comment.first_name}</div>
           <div className='user-comment'>
-            <p>{this.props.prop.moodboard_item_comment.comment}</p>
+            <p>{this.props.moodboard_item_comment.comment}</p>
           </div>
           {toolbar}
         </div>
@@ -76,14 +76,14 @@ var CommentsModal = React.createClass({
   render: function() {
     var comments; 
 
-    if(this.props.props.assets.length > 0) {
-      var currentUserId = this.props.props.currentUserId;
-      var token = this.props.props.token;
-      comments = this.props.props.assets.map(function(prop) {
+    if(this.props.assets.length > 0) {
+      var currentUserId = this.props.currentUserId;
+      var token = this.props.token;
+      comments = this.props.assets.map(function(prop) {
         return (
           <ModalComment 
             key={'comment-list-' + prop.moodboard_item_comment.id}
-            prop={prop} 
+            {...prop} 
             currentUserId={currentUserId} 
             token={token} />
         );
@@ -102,7 +102,7 @@ var CommentsModal = React.createClass({
                 <span aria-hidden='true'>&times;</span>
               </button>
               <h4 className='modal-title title-line-on-sides'>
-                <div className='inner-wrap'>Comments about {this.props.props.itemName}</div>
+                <div className='inner-wrap'>Comments about {this.props.itemName}</div>
               </h4>
             </div>
 
@@ -110,16 +110,16 @@ var CommentsModal = React.createClass({
 
             <div className='modal-footer'>
               <form action='/moodboard_item_comments' method='post' id='new_moodboard_item_comment'>
-                <input type='hidden' value={this.props.props.token} name='authenticity_token' />
-                <input type='hidden' value={this.props.props.itemId} 
+                <input type='hidden' value={this.props.token} name='authenticity_token' />
+                <input type='hidden' value={this.props.itemId} 
                   name='moodboard_item_comment[moodboard_item_id]'
                   id='moodboard_item_comment_moodboard_item_id' />
-                <input type='hidden' value={this.props.props.currentUserId} 
-                  name="moodboard_item_comment[user_id]"
+                <input type='hidden' value={this.props.currentUserId} 
+                  name='moodboard_item_comment[user_id]'
                   id='moodboard_item_comment_user_id' />
-                <div className="form-group">
+                <div className='form-group'>
                   <label htmlFor='moodboard_item_comment_comment'>Add a new Comment</label>
-                  <textarea name="moodboard_item_comment[comment]"
+                  <textarea name='moodboard_item_comment[comment]'
                     id='moodboard_item_comment_comment' className='form-control' rows='2'></textarea>
                 </div>
                 <input type='submit' value='Submit Comment' className='btn btn-black' />
