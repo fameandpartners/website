@@ -59,7 +59,7 @@ module Revolution
       end
     end
 
-    def no_of_banners
+    def no_of_banners(size)
       if banners_exist?(size)
         translations.where(locale: locale).first.banners.count
       else
@@ -97,7 +97,12 @@ module Revolution
     end
 
     def banners_exist?(size)
-      translations.first.banners.where(size: size).present?
+      banners_present = false
+      translations.each do |translation|
+        banners_present = translation.banners.where(size: size).present?
+        break if banners_present
+      end
+      banners_present
     end
     ## End Revolution banners
     

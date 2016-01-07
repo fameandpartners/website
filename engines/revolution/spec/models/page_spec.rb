@@ -428,14 +428,14 @@ describe Revolution::Page do
     end
 
     context '.banners_exist?' do
-      it { expect(page.banners_exist?).to be_falsey }
+      it { expect(page.banners_exist?('full')).to be_falsey }
       it 'finds there are AU banners' do
         au_banners
-        expect(page.banners_exist?).to be_truthy
+        expect(page.banners_exist?('full')).to be_truthy
       end
       it 'finds there are US banners' do
         us_banners
-        expect(page.banners_exist?).to be_truthy
+        expect(page.banners_exist?('full')).to be_truthy
       end
     end
 
@@ -468,14 +468,14 @@ describe Revolution::Page do
     end
 
     context ".no_of_banners" do
-      it { expect(page.no_of_banners).to eq 1 }
+      it { expect(page.no_of_banners('full')).to eq 1 }
       it 'has 2 AU banners' do
         au_banners
-        expect(expect(page.no_of_banners).to eq 2)
+        expect(expect(page.no_of_banners('full')).to eq 2)
       end
       it 'has 3 Us banners' do
         us_banners
-        expect(expect(page.no_of_banners).to eq 3)
+        expect(expect(page.no_of_banners('full')).to eq 3)
       end
     end
 
