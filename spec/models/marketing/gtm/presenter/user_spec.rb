@@ -23,7 +23,8 @@ module Marketing
                                                facebook: false,
                                                gender:   'unknown',
                                                loggedIn: false,
-                                               country:  'Brazil'
+                                               country:  'Brazil',
+                                               ip: '179.218.87.233'
                                            })
               end
             end
@@ -36,7 +37,8 @@ module Marketing
                                                facebook: false,
                                                gender:   'unknown',
                                                loggedIn: true,
-                                               country:  'Brazil'
+                                               country:  'Brazil',
+                                               ip: '179.218.87.233'
                                            })
               end
 
@@ -50,7 +52,8 @@ module Marketing
                                                  email:    'loroteiro@silvestre.com',
                                                  loggedIn: true,
                                                  facebook: true,
-                                                 country:  'Brazil'
+                                                 country:  'Brazil',
+                                                 ip: '179.218.87.233'
                                              })
                 end
               end
