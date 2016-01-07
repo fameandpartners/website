@@ -96,7 +96,7 @@
 
     .slider-wrap {
       height: $menu-item-height + 70px;
-      padding: 0 50px;
+      padding: 0 40px;
       overflow: hidden;
       opacity: 0;
     }
@@ -116,19 +116,15 @@
         display: none;
       }
 
-      &:hover {
-        opacity: .6;
-      }
-
     }
 
     .slick-prev {
-      border-width: 40px 30px 40px 0;
+      border-width: 40px 25px 40px 0;
       border-color: transparent $c-neutral-black transparent transparent;
     }
 
     .slick-next {
-      border-width: 40px 0 40px 30px;
+      border-width: 40px 0 40px 25px;
       border-color: transparent transparent transparent $c-neutral-black
     }
 
