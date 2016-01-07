@@ -50,6 +50,8 @@ module Revolution
 
     ## Revolution banners
     def banner_image(position, size)
+      ## NOTE: in future we may totally get rid of Taxons.  What happens if we do not have banners?
+      ## Do we default to what?  '/dresses/...' has '/dresses/*', what about other types of pages?
       if banners_exist?(size)
         retrieve_banner(position, size).banner.url
       else
@@ -74,16 +76,28 @@ module Revolution
     end
 
     def retrieve_banner(position, size)
-      banners = translations.where(locale: locale).first.banners.where('banner_order >= ? and size = ?', position, size).order(:banner_order)
+      #NOTE: If we ever go to more than 2 locales this will have to be changed.
+
+      banners = get_default_banner(position, size, locale)
       if banners.blank?
-        #If not found default to the first one
-        banners = translations.where(locale: locale).first.banners.where('banner_order >= ? and size = ?', 0, size).order(:banner_order)
+        local_locale = translations.where('locale != ?', locale).first.locale
+        banners = get_default_banner(position, size, local_locale)
       end
+
       banners.first
     end
 
+    def get_default_banner(position, size, local_locale)
+      banners = translations.where(locale: local_locale).first.banners.where('banner_order >= ? and size = ?', position, size).order(:banner_order)
+      if banners.blank?
+        #If not found default to the first one
+        banners = translations.where(locale: local_locale).first.banners.where('banner_order >= ? and size = ?', 0, size).order(:banner_order)
+      end
+      banners
+    end
+
     def banners_exist?(size)
-      translations.where(locale: locale).first.banners.where(size: size).present?
+      translations.first.banners.where(size: size).present?
     end
     ## End Revolution banners
     
