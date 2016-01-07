@@ -42,6 +42,14 @@
     color: $c-neutral-black;
   }
 
+  &.compact {
+
+    .inner-wrap {
+      padding: 15px 5%;
+    }
+
+  }
+
   @media (max-width: $bootstrap-lg-width - 1) {
 
     & {

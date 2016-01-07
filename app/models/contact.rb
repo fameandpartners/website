@@ -20,6 +20,7 @@ class Contact
       'Something else',
       [
         'Book a Style Consultation',
+        'Book a Concierge Services',
         'Feedback on the website',
         'None of these apply to me',
         'Fashion IT Girl'

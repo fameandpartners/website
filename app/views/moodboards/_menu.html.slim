@@ -1,15 +1,19 @@
 = flash_messages
 .menu-wrap
-  h1.title-line-on-sides
+  h1.title-line-on-sides.hidden-md.hidden-lg
     .inner-wrap MOODBOARDS
   - if enhanced_moodboards_enabled?
-    .row.hidden-xs.hidden-sm
-      .col-md-3
+    .row
+      .col-md-3.hidden-xs.hidden-sm
         .message
           h2.heading MOODBOARDS
           p Set up a moodboard for each of your events & share with your friends to get their thoughts.
-      .col-md-9
-        ul
+      .col-md-9.col-xs-12
+        - currentCarouselItem = 0
+        - all_moodboards.each_with_index do |mb, index|
+          - is_active_link?(moodboard_path(mb)) ? currentCarouselItem = index : ''
+
+        ul.slider-wrap.js-moodboard-menu-carousel data-slick='{"initialSlide": #{currentCarouselItem}}'
           - all_moodboards.each do |mb|
             - if is_active_link?(moodboard_path(mb))
               li.active
@@ -21,15 +25,17 @@
                 = link_to moodboard_path(mb), class:'tab'
                   .inner-wrap
                     span = mb.default? ? 'MY MOODBOARD' : mb.name
-          / temporarily disabling more than 2 moodboard
-          - if collection.count < 2
-            li
-              = link_to '+', new_moodboard_path, class:'btn-add'
-              .hide-visually Create New Moodboard
+          li
+            = link_to '+', new_moodboard_path, class:'btn-add'
+            .hide-visually Create New Moodboard
   .row.hidden-md.hidden-lg
     .col-md-12
       ul.tab-content-controls.js-tab-content-controls
         li.active
-          a href='#mob-tab-main' class='tab' DRESSES
+          a href='#mob-tab-main' class='tab-control' DRESSES
         li
-          a href='#mob-tab-aside' class='tab' ABOUT
+          a href='#mob-tab-aside' class='tab-control' 
+            - if @resource.purpose == 'wedding' 
+              'WEDDING DETAILS
+            - else
+              'DETAILS
