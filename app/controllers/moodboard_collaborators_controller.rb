@@ -12,12 +12,17 @@ class MoodboardCollaboratorsController < ApplicationController
     if existing
       message = { notice: "#{new_collaborator.email} is already on this moodboard!" }
     elsif new_collaborator.save
-      message = { notice: "#{new_collaborator.name} added!" }
+      message = { notice: "#{new_collaborator.name} invited!" }
     else
       message = { error: new_collaborator.errors.full_messages }
     end
 
-    redirect_to moodboard_path(moodboard), flash: message
+    if request.xhr?
+      message[:collaborators] = moodboard.collaborators.as_json
+      render json: message
+    else
+      redirect_to moodboard_path(moodboard), flash: message
+    end
   end
 
   def index
