@@ -18,7 +18,7 @@
       a href='#how-it-works' class='btn btn-lowlight btn-sm' See how it works
 
   - if !signed_in?
-    = render 'landing_pages/weddings/signup_login', wedding_source: 'bridesmaids'
+    = render 'landing_pages/weddings/signup_login', wedding_source: 'bridesmaids', return_path: bridesmaid_landing_page_path
 
   .container
     .row

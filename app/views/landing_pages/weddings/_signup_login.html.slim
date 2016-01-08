@@ -34,7 +34,7 @@ coffee:
     h2.title-line-on-sides
       .inner-wrap SIGN IN
     .col-md-5.left-col
-      = link_to 'Log in with Facebook', fb_auth_path(site_version: current_site_version.code), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
+      = link_to 'Log in with Facebook', fb_auth_path(spree_user_return_to: return_path), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
     .col-md-1
       .separator
         span or
@@ -77,7 +77,7 @@ coffee:
       .container
         .row
           .col-md-5.left-col
-            = link_to 'Sign up with facebook', fb_auth_path(signup_params), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
+            = link_to 'Sign up with facebook', fb_auth_path(spree_user_return_to: return_path), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
           .col-md-1
             .separator
               span or

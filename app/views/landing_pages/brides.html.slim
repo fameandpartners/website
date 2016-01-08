@@ -66,7 +66,7 @@
             = link_to 'Get started', new_moodboard_path, class:'btn btn-lowlight register-your-event'
 
       - if !signed_in?
-        = render 'landing_pages/weddings/signup_login', wedding_source: 'brides'
+        = render 'landing_pages/weddings/signup_login', wedding_source: 'brides', return_path: brides_landing_page_path
 
       .col-md-12
         h2.heading-secondary Your wedding dress doesn't need to cost the earth to be beautiful, memorable & completely unique to you.
