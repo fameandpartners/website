@@ -1,29 +1,32 @@
 - page.translations.where(locale: locale).first.banners.order(:banner_order).each do |banner|
   .ibox.float-e-margins
     .ibox-title
-      .row
-        .col-md-4
-          h6 = image_tag banner.banner.url, alt: banner.alt_text, width: '300'
-        .col-md-8
-          | Size:&nbsp;
-          = "#{banner.banner_width}px by #{banner.banner_height}"
-          br
-          | File Name:&nbsp;
-          = banner.banner_file_name
-          br
-          | Size:&nbsp;
-          = banner.banner_file_size
-          | kilobytes
+      .container_fluid
+        .row
+          .col-lg-4
+            h6 = image_tag banner.banner.url, alt: banner.alt_text, width: '300'
+          .col-lg-2
+            | Size:&nbsp;
+            = "#{banner.banner_width}px by #{banner.banner_height}"
+            br
+            | File Name:&nbsp;
+            = banner.banner_file_name
+            br
+            | Size:&nbsp;
+            = banner.banner_file_size
+            | kilobytes
+          .col-lg-4
+            = link_to 'Delete Banner', revolution.banner_delete_path(banner), class: 'btn btn-info btn-sm'
 
     .ibox-content
       = t.fields_for :banners, banner do |banner|
-        = render partial: 'banner_form_content', :locals => { banner: banner }
+        = render partial: 'banner_form_content', locals: { banner: banner }
 
 .ibox.float-e-margins
   .ibox-title
     h6 New Banner
 
   .ibox-content
-    = t.fields_for :banners, Revolution::Translation::Banner.new do |b|
-      = render partial: 'banner_form_content', :locals => { banner: b }
+    = t.fields_for :banners, Revolution::Translation::Banner.new do |banner|
+      = render partial: 'banner_form_content', locals: { banner: banner }
 
