@@ -2,12 +2,14 @@
   .row
     .col-md-12
       .welcome-title 
-        span Welcome to Sarah's Wedding. 
+        span Welcome to 
+        = @resource.name
+        '.
         span
           em Share and vote 
           ' on favourite styles and stay organised right up to the wedding day.
         span 
-          a Invite bridal party members
+          em Invite bridal party members
           '  and
           = link_to bridesmaid_collection_path
             ' add dresses
