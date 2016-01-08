@@ -1,13 +1,14 @@
 coffee:
   $(document).ready ->
-    $('.register-your-event').on 'click', (e) ->
+    $('.register-your-event, .sign-in-form #create-new-account').on 'click', (e) ->
       e.preventDefault()
-      $("#how-it-works").hide()
+      $("#how-it-works, .sign-in-form").hide()
       $(".sign-up-form").show()
     $('.sign-in-here').on 'click', (e) ->
       e.preventDefault()
       $(".sign-up-form").hide()
       $(".sign-in-form").show()
+
 
     $('.sign-in-form form').on 'ajax:success', (event, data, status, xhr) ->
       if data["error"] == true
@@ -60,7 +61,7 @@ coffee:
               = f.submit 'Login', class: 'btn btn-block btn-black', tabindex: 3
             .col-md-12
               p.multiple-links
-                = link_to t(:create_a_new_account), spree.signup_path(cl: 'login-form')
+                = link_to t(:create_a_new_account), spree.signup_path(cl: 'login-form'), :id => 'create-new-account'
                 = link_to t(:forgot_password), main_app.new_spree_user_password_path, :id=> 'forgot-password'
 
 

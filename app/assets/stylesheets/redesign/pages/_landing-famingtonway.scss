@@ -21,7 +21,12 @@
         font-size: 16px;
       }
     }
-
+    #password-credentials{
+      input[type='submit']{
+        height: 45px;
+        font-size: 1em;
+      }
+    }
     .separator {
         position: relative;
         display: table;
