@@ -20,6 +20,7 @@ javascript:
     var fragment = window.location.hash;
     var getStartedEl = $('#get_started') ;
     if (fragment && fragment == '#get_started') {
+      loadCreateWeddingBoard();
       getStartedEl.show();
     } else {
       getStartedEl.hide();
