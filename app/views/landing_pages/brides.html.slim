@@ -15,6 +15,8 @@
       a href='#how-it-works' class='btn btn-lowlight' See how it works
 
   .container
+    = render 'landing_pages/weddings/get_started', wedding_source: 'brides', return_path: brides_landing_page_path
+
     .row
       .col-md-12.section-steps#how-it-works
         .outer-wrap.mobile-change-order
@@ -54,7 +56,7 @@
                   span BRIDE TO CHOOSE FREE HONEYMOON DRESS
 
           .inner-right.position-1
-            = link_to new_moodboard_path, class: 'register-your-event'
+            .register-your-event
               picture.media-wrap
                 source media='(max-width: 1023px)' srcset='#{image_path("landingpages/brides/honeymoon-mob.jpg")}'
                 source media='(min-width: 1024px)' srcset='#{image_path("landingpages/brides/honeymoon.jpg")}'
@@ -62,10 +64,10 @@
                   #{image_path("landingpages/brides/honeymoon-mob.jpg")} 1023w,
                   #{image_path("landingpages/brides/honeymoon.jpg")} 1024w' alt='
                   GET A FREE HONEYMOON DRESS OF YOUR CHOICE WHEN YOU DRESS YOUR BRIDAL PARTY WITH US.'
-          .btn-wrap.position-3
-            = link_to 'Get started', new_moodboard_path, class:'btn btn-lowlight register-your-event'
+          /.btn-wrap.position-3
+            /= link_to 'Get started', new_moodboard_path, class:'btn btn-lowlight register-your-event'
 
-      = render 'landing_pages/weddings/get_started', wedding_source: 'brides', return_path: brides_landing_page_path
+
 
       .col-md-12
         h2.heading-secondary Your wedding dress doesn't need to cost the earth to be beautiful, memorable & completely unique to you.

@@ -1,30 +1,34 @@
-#get_started
-  - if spree_current_user
-    #create_wedding_board_wrapper
-      = image_tag 'ajax-loader.gif'
-  - else
+#get_started.create_wedding_board_wrapper
+  - if !spree_current_user
     = render 'landing_pages/weddings/signup_login', wedding_source: wedding_source, return_path: return_path
 
 javascript:
-  var moodBoardEditFormEl = $('#wedding_moodboard_edit_form');
-  $('#create_wedding_board_wrapper').load("#{edit_wedding_moodboard_path}", '', function(){
-    //moodBoardEditFormEl.on('ajax:complete', function(event, xhr, status) {
-    //});
-    // TODO - Scroll to the correct place on the page.
-    moodBoardEditFormEl.on('ajax:success', function(event, data, status, xhr) {
-      $('#wedding_moodboard_edit_wrapper').html(xhr.responseText);
+  function loadCreateWeddingBoard() {
+    var moodBoardEditFormEl = $('#wedding_moodboard_edit_form');
+    $('.create_wedding_board_wrapper').load("#{edit_wedding_moodboard_path}", '', function(){
+      //moodBoardEditFormEl.on('ajax:complete', function(event, xhr, status) {
+      //});
+      // TODO - Scroll to the correct place on the page.
+      moodBoardEditFormEl.on('ajax:success', function(event, data, status, xhr) {
+        $('#wedding_moodboard_edit_wrapper').html(xhr.responseText);
+      });
     });
-   });
+  }
 
 javascript:
-  var fragment = window.location.hash;
-  var getStartedEl = $('#get_started') ;
-  if (fragment && fragment == '#get_started') {
-    getStartedEl.show();
-  } else {
-    getStartedEl.hide();
-  }
-  $('.register-your-event').on('click', function(e) {
-    e.preventDefault();
-    getStartedEl.show();
+  $(document).ready(function(){
+    var fragment = window.location.hash;
+    var getStartedEl = $('#get_started') ;
+    if (fragment && fragment == '#get_started') {
+      getStartedEl.show();
+    } else {
+      getStartedEl.hide();
+    }
+    if ($(".sign-in-form").length == 0) {
+      $('.register-your-event').on('click', function(e) {
+        e.preventDefault();
+        loadCreateWeddingBoard();
+        getStartedEl.show();
+      });
+    }
   });
