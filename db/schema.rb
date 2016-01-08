@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151210230429) do
+ActiveRecord::Schema.define(:version => 20160105035758) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -522,11 +522,16 @@ ActiveRecord::Schema.define(:version => 20151210230429) do
   create_table "moodboards", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.string   "purpose",     :default => "default", :null => false
+    t.string   "purpose",            :default => "default", :null => false
     t.date     "event_date"
     t.text     "description"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.string   "event_progress"
+    t.string   "owner_relationship"
+    t.string   "guest_count"
+    t.string   "bride_first_name"
+    t.string   "bride_last_name"
   end
 
   add_index "moodboards", ["user_id"], :name => "index_moodboards_on_user_id"

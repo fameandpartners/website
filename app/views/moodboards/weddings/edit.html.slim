@@ -1,0 +1,42 @@
+#wedding_moodboard_edit_wrapper
+  .row
+    .col-md-8.col-md-offset-4
+      h2.title-line-on-sides
+        .inner-wrap TELL US ABOUT THE WEDDING
+    .col-md-4
+      picture.media-wrap
+        source media='(max-width: 1023px)' srcset='#{image_path("moodboard/signup-mobile-1.jpg")}'
+        source media='(min-width: 1024px)' srcset='#{image_path("moodboard/signup1.jpg")}'
+        img src='#{image_path("moodboard/signup1.jpg")}' srcset='
+          #{image_path("moodboard/signup-mobile-1.jpg")} 1023w,
+          #{image_path("moodboard/signup1.jpg")} 1024w'
+    .col-md-8
+      .row
+        = form_for(@moodboard_form, as: :wedding_moodboard, :url => wedding_moodboard_path, remote: true, html: { id: 'wedding_moodboard_edit_form' }) do |f|
+          = f.hidden_field :id
+          .col-md-6.form-group
+            = f.label :event_progress, "How ready is the bride?"
+            = f.select :event_progress, f.object.event_progressions, {}, class: "form-control"
+          .col-md-6.form-group
+            = f.label :event_date, "The Wedding Date"
+            = f.text_field :event_date, class:"form-control datepicker"
+          .col-md-6.form-group
+            = f.label :owner_relationship, "Are you the:"
+            = f.select :owner_relationship, f.object.owner_relationships, {}, class: "form-control"
+          .col-md-6.form-group
+            = f.label :guest_count, "How many people in the bridal party?"
+            = f.text_field :guest_count, class: "form-control"
+          .col-md-6.form-group
+            = f.label :bride_first_name, "Bride's first name"
+            = f.text_field :bride_first_name, required: true, class:"form-control"
+          .col-md-6.form-group
+            = f.label :bride_last_name, "Bride's last name"
+            = f.text_field :bride_last_name, class:"form-control"
+          .col-md-12.form-group
+            = f.button 'Invite the bridal party', :class => "btn btn-black"
+
+javascript:
+  $('#wedding_moodboard_edit_form').find('.datepicker').datepicker();
+  $('#wedding_moodboard_edit_form').on('ajax:success', function(event, data, status, xhr) {
+    $('#wedding_moodboard_edit_wrapper').html(xhr.responseText);
+  });

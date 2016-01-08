@@ -42,7 +42,7 @@ z-index levels
 *     2 = .sumome-popup .sumome-popup-content .sumome-popup-form
 *     2 = .sumome-popup-preview .sumome-popup-content .sumome-popup-form
 *     2 = .sumome-smartbar-popup .sumome-smartbar-content .sumome-smartbar-form
-*     2 = .sumome-modal .sumome-smartbar-preview .sumome-smartbar-content .sumome-smartbar-form 
+*     2 = .sumome-modal .sumome-smartbar-preview .sumome-smartbar-content .sumome-smartbar-form
 
 *     3 = .rslides_tabs
 *     3 = #main-nav
@@ -69,7 +69,7 @@ z-index levels
 *    10 = #slideMenu #events-menu
 
 *    10 = #gray-top-banner #account-area .account-menu
-*    10 = .carousel-caption  
+*    10 = .carousel-caption
 
 *    15 = .carousel-indicators
 
@@ -165,6 +165,9 @@ z-index levels
 
 @import 'redesign/icons';
 @import 'libs/icomoon_fame_2015/icons';
+// Note that 'jquery-ui-1.10.4.custom' was also used in the pre March2015 site design,
+// but I chose to duplicate the file, rather than rewrite any of the current usages.
+@import 'libs/jquery-ui-1.10.4.custom';
 
 @import 'redesign/layout';
 @import 'redesign/header';
