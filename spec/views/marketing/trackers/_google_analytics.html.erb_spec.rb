@@ -11,22 +11,32 @@ describe 'marketing/trackers/_google_analytics.html.erb', type: :view do
       allow(Spree::Tracker).to receive(:current).and_return(Spree::Tracker.new(analytics_id: 'whatever'))
     end
 
-    it 'sets GA account ID from Spree::Tracker' do
+    it 'sets GA account ID from Spree::Tracker with cross domain configuration (allowLinker)' do
       render
-      expect(rendered).to include "_gaq.push(['_setAccount', 'whatever']);"
+      expect(rendered).to include "ga('create', 'whatever', 'auto', {'allowLinker': true});"
     end
 
-    it 'has cross domain configuration' do
+    it 'has multiple domains configured' do
       render
-      expect(rendered).to include("_gaq.push(['_setDomainName', 'none']);")
-      expect(rendered).to include("_gaq.push(['_setAllowLinker', true]);")
+      expect(rendered).to include("ga('require', 'linker');")
+      expect(rendered).to include("ga('linker:autoLink', ['fameandpartners.com','fameandpartners.com.au']);")
+    end
+
+    it 'has display advertising features plugin enabled' do
+      render
+      expect(rendered).to include("ga('require', 'displayfeatures');")
+    end
+
+    it 'has ecommerce plugin enabled' do
+      render
+      expect(rendered).to include("ga('require', 'ecommerce');")
     end
 
     describe 'simple facebook events' do
       {
-        track_fb_reminder_promo: "_gaq.push(['_trackEvent', 'Facebook', 'Redeem']);",
-        track_fb_signin:         "_gaq.push(['_trackEvent', 'Facebook', 'SignIn']);",
-        track_fb_signup:         "_gaq.push(['_trackEvent', 'Facebook', 'SignUp']);",
+        track_fb_reminder_promo: "ga('send', 'event', 'Facebook', 'Redeem');",
+        track_fb_signin:         "ga('send', 'event', 'Facebook', 'SignIn');",
+        track_fb_signup:         "ga('send', 'event', 'Facebook', 'SignUp');",
       }.map do |flash_key, expected_output|
         it "tracks :#{flash_key} event" do
           flash[flash_key] = 'truthy'
@@ -70,34 +80,37 @@ describe 'marketing/trackers/_google_analytics.html.erb', type: :view do
         flash[:commerce_tracking] = 'truthy'
         render
 
-        expect(rendered).to include "_gaq.push(['_addTrans',"
-        expect(rendered).to include expected_order_number
-        expect(rendered).to include "_gaq.push(['_addItem',"
-        expect(rendered).to include line_item_sku
-        expect(rendered).to include spree_order.bill_address.city
+        # Order
+        expect(rendered).to include "ga('ecommerce:addTransaction', {"
+        expect(rendered).to include "'id': '#{expected_order_number}'"
+        expect(rendered).to include "'currency': 'AUD'"
+
+        # Line Item
+        expect(rendered).to include "ga('ecommerce:addItem', {"
+        expect(rendered).to include "'sku': '#{line_item_sku}'"
         expect(rendered).to include "198.37"
-        expect(rendered).to include "_gaq.push(['_trackTrans']);"
-        expect(rendered).to include "_gaq.push(['_set', 'currencyCode', 'AUD']);"
+
+        expect(rendered).to include "ga('ecommerce:send');"
       end
 
       describe 'requires triggering' do
         it 'without trigger' do
           render
-          expect(rendered).not_to include "_gaq.push(['_addTrans',"
+          expect(rendered).not_to include "ga('ecommerce:addTransaction', {"
           expect(rendered).not_to include expected_order_number
         end
 
         it ':force_tracking' do
           params[:force_tracking] = 'truthy'
           render
-          expect(rendered).to include "_gaq.push(['_addTrans',"
+          expect(rendered).to include "ga('ecommerce:addTransaction', {"
           expect(rendered).to include expected_order_number
         end
 
         it ':commerce_tracking' do
           flash[:commerce_tracking] = 'truthy'
           render
-          expect(rendered).to include "_gaq.push(['_addTrans',"
+          expect(rendered).to include "ga('ecommerce:addTransaction', {"
           expect(rendered).to include expected_order_number
         end
       end

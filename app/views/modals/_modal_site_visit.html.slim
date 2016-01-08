@@ -7,10 +7,10 @@ ruby:
         content:    \"newgirl25\",
         heading:    \"RUNWAY STYLES AT <br> A FRACTION OF THE PRICE\",
         message:    \"SIGN UP FOR ACCESS <br> + <br> $25 OFF YOUR FIRST PURCHASE.\",
-        className:  \"new-modal welcome-modal\",
+        className:  \"classic-modal welcome-modal\",
         timeout:    3,
         timer:      0,
-        container:  \"#modal-popup-content-template.welcome\",
+        container:  \"#site-visit-modal.welcome\",
         action:     \"#{campaigns_email_capture_path}\",
         force:      true,
       });
@@ -25,16 +25,33 @@ ruby:
   - else
     = raw turn_off_site_visit_modal
 
+/
+  #modal-popup-content-template.welcome.hidden
+    input type="hidden" name="content" value="newgirl25"
+    input type="hidden" name="promocode" value="newgirl25"
+    .vex-footer
+      .row.row-inline.text-center
+        .col-xs-12.col-sm-12.col-inline.email-form
+          .input-group
+            input.form-control.form-control-md.form-control-transparent name="email" type="text" placeholder="EMAIL"
+            span.input-group-addon
+              input.btn-plain.btn-reset type="submit" value="CLICK TO REDEEM"
+        .col-xs-12.col-sm-12.col-inline.full-form.fb-form
+          = link_to "Redeem via Facebook", fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked', new_modal_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
 
-#modal-popup-content-template.welcome.hidden
+
+
+#site-visit-modal.welcome.hidden
   input type="hidden" name="content" value="newgirl25"
   input type="hidden" name="promocode" value="newgirl25"
   .vex-footer
     .row.row-inline.text-center
-      .col-xs-12.col-sm-12.col-inline.email-form
+      .col-xs-10.col-xs-push-1.col-sm-6.col-sm-push-3.col-inline.email-form
         .input-group
           input.form-control.form-control-md.form-control-transparent name="email" type="text" placeholder="EMAIL"
-          span.input-group-addon
-            input.btn-plain.btn-reset type="submit" value="CLICK TO REDEEM"
-      .col-xs-12.col-sm-12.col-inline.full-form.fb-form
+          center
+            input.btn-plain.btn-reset type="submit" value="SIGN UP"
+          hr
+          span.modal-or OR
+      .col-xs-10.col-xs-push-1.col-sm-6.col-sm-push-3.col-inline.full-form.fb-form
         = link_to "Redeem via Facebook", fb_auth_path(auto_apply: true, auto_apply_promo: "newgirl25", redeem_via_fb_state: 'clicked', new_modal_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'

@@ -273,7 +273,7 @@ window.inputs.ProductHeightSelector = class ProductHeightSelector extends BasePr
   updateMenuButton: () =>
     selectedValue = @getValue()
     if selectedValue
-      newTitle = "Your Height - " + selectedValue
+      newTitle = "Skirt Length - " + selectedValue
       @$action.html(newTitle)
 
   getValue: () ->

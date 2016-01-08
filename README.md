@@ -8,9 +8,13 @@
 * Redis 3.0.2
 * `imagemagick` 6.9.1
 
-> Libraries versions can vary. Versions used above are suggestions. 
+> Libraries versions can vary. Versions used above are suggestions.
 
 For more details on installing each library, check [doc/dev/libraries-setup.md](doc/dev/libraries-setup.md).
+
+### Coding Style
+
+We use [EditorConfig](http://EditorConfig.org) to keep coding styles. Please, if you use any text editors/IDEs that don't support it out of the box, [download a plugin for it](http://editorconfig.org/#download).
 
 ### Frameworks
 
@@ -208,5 +212,5 @@ To run every test, including engines', use the `bundle exec rake spec` command
  - **Category/Collection** - `Products::CollectionsController#show`
  - **Product** - `Products::DetailsController#show`
 
-Cheers, 
+Cheers,
 Fame & Partners and Unicorns!
