@@ -217,7 +217,7 @@
   }
 }
 .chosen-container .chosen-results li.active-result {
-  display: list-item !important;
+  display: list-item;
   cursor: pointer;
 }
 .chosen-container .chosen-results li.disabled-result {
