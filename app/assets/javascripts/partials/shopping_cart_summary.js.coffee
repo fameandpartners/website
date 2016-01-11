@@ -36,7 +36,6 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
     overlay = @$overlay;
     $.getJSON(@$masterpass_cart_callback_uri).done (data) ->
-      console.log data
       @masterpass_clicked = false
       spinner.stop()
       overlay.removeClass('most-front');
