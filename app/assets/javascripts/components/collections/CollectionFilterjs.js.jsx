@@ -17,7 +17,7 @@ var FilterRadioOption = React.createClass({
 
   render: function() {
     return (
-      <div className='filter-radio-option' data-all={this.props.all == 'true'} checked={this.props.select == 'true'} name={this.props.name} data-pricemin={this.props.priceMin} data-pricemax={this.props.priceMax} >
+      <div className='filter-radio-option' data-all={this.props.all == 'true'} name={this.props.name} data-pricemin={this.props.priceMin} data-pricemax={this.props.priceMax} >
         <span className={'radio-icon ' + this.props.select}> </span>
         {this.props.label}
       </div>
