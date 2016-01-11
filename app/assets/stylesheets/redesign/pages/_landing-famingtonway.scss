@@ -2,23 +2,54 @@
 -------------------------------------------------------*/
 .landing-famingtonway {
 
-  .invite-wrap {
+  .moodboard-setup {
     padding-bottom: 30px;
     border-bottom: solid $c-neutral-black 1px;
 
     .title-line-on-sides {
-      margin-top: -22px;
       margin-bottom: 30px;
     }
 
     form {
       margin-bottom: 15px;
       @extend %cfix;
+    }
+
+    .steps {
+      text-align: center;
 
       .btn {
-        width: 20%;
+        display: inline-block;
       }
 
+    }
+
+    .btn {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 1em;
+    }
+
+    // START - mobile
+    @media (max-width: $bootstrap-md-width - 1px) {
+
+      .title-line-on-sides {
+        margin-top: 15px;
+      }
+
+    }
+    // END - mobile
+
+  }
+
+  .invite-wrap {
+
+    .title-line-on-sides {
+      margin-top: -22px;
+    }
+
+    form .btn {
+      width: 20%;
     }
 
     .form-group {
@@ -42,12 +73,6 @@
       font-weight: 300;
       font-size: 1.125em;
       border: solid $c-neutral-black 1px;
-    }
-
-    .btn {
-      padding-top: 10px;
-      padding-bottom: 10px;
-      font-size: 1em;
     }
 
     .invited-members-wrap li {
@@ -74,21 +99,8 @@
 
     }
 
-    .later {
-      text-align: center;
-
-      .btn {
-        display: inline-block;
-      }
-
-    }
-
     // START - mobile
     @media (max-width: $bootstrap-md-width - 1px) {
-
-      .title-line-on-sides {
-        margin-top: 15px;
-      }
 
       form .btn,
       .form-group {
@@ -102,6 +114,14 @@
 
     }
     // END - mobile
+
+  }
+
+  .about-wrap {
+
+    .title-line-on-sides {
+      margin-top: -12px;
+    }
 
   }
 

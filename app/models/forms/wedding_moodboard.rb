@@ -6,6 +6,7 @@ module Forms
     module SharedSelectionData
       def owner_relationships
         [
+          "Choose an option",
           "Bride",
           "Maid of Honor",
           "Bridesmaid",
@@ -17,6 +18,7 @@ module Forms
 
       def event_progressions
         [
+          "Choose an option",
           "Engaged",
           "Ready for a ring",
           "Looking for someone special"
