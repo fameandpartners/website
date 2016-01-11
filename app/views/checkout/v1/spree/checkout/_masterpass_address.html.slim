@@ -6,6 +6,14 @@
     field_id = "#{ sanitized_object_name }_state_id"
     state_text_field_id = "#{ sanitized_object_name }_state_name"
     country_field_id = "#{ sanitized_object_name }_country_id"
+    address1 = address2 = ""
+    if address_type == 'billing' && session[:order_address].present?
+      address1 = session[:order_address][:bill_address_attributes][:address1]
+      address2 = session[:order_address][:bill_address_attributes][:address2]
+    elsif address_type == 'shipping' && session[:order_address].present?
+      address1 = session[:order_address][:ship_address_attributes][:address1]
+      address2 = session[:order_address][:ship_address_attributes][:address2]
+    end
 
 = content_for :inline_javascript do
   | $('##{ field_id }').val('#{ address.state_id }');
@@ -34,13 +42,13 @@
 .row
   .col-md-12.form-group
     = form.label :address1, with_required_mark(t(:street_address))
-    = form.text_field :address1, class: 'required form-control form-control-md', required: 'required'
+    = form.text_field :address1, class: 'required form-control form-control-md', required: 'required', value: address1
     p.help-block Must be a physical address, not a P.O. Box
 
 .row
   .col-md-12.form-group
     = form.label :address2, t(:street_address_2)
-    = form.text_field :address2, class: 'required form-control form-control-md'
+    = form.text_field :address2, class: 'required form-control form-control-md', value: address2
 
 .row
   .col-md-4.form-group

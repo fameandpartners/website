@@ -39,7 +39,7 @@ Spree::CheckoutController.class_eval do
     end
 
     if @order.update_attributes(object_params)
-
+      session[:order_address] = object_params
       fire_event('spree.checkout.update')
       if object_params.key?(:coupon_code)
         if object_params[:coupon_code].present? && apply_coupon_code
