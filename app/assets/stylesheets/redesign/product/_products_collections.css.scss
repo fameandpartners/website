@@ -271,16 +271,17 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
 			}
 			.radio-icon{
 				cursor: pointer;
-				background-image: url(product-collections/radio.png);
+				background: url(product-collections/radio.png) 20px 0;
 				width: 20px;
 				height: 20px;
 				float: left;
-				background-size: contain;
+				background-size: cover;
 				margin-top: 2px;
 				margin-right: 10px;
 			}
 			.radio-icon.selected{
-				background-image: url(product-collections/radio-check.png);
+				background: url(product-collections/radio.png) 0 0;
+				background-size: cover;
 			}
 		}
 
