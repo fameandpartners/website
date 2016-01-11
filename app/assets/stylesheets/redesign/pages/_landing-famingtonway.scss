@@ -1,6 +1,90 @@
 /* [Landing Page - Famingtonway]
 -------------------------------------------------------*/
 .landing-famingtonway {
+
+  .invite-wrap {
+    padding-bottom: 30px;
+    border-bottom: solid $c-neutral-black 1px;
+
+    .title-line-on-sides {
+      margin-top: -22px;
+      margin-bottom: 30px;
+    }
+
+    form {
+      margin-bottom: 15px;
+      @extend %cfix;
+
+      .btn {
+        width: 20%;
+      }
+
+    }
+
+    .form-group {
+      float: left;
+      width: 40%;
+      padding-right: 10px;
+
+      input {
+        width: 100%;
+      }
+
+    }
+
+    .message-wrap > p {
+      float: left;
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 300;
+      font-size: 1.125em;
+      border: solid $c-neutral-black 1px;
+    }
+
+    .btn {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 1em;
+    }
+
+    .invited-members-wrap li {
+      padding-bottom: 30px;
+    }
+
+    .invited-member {
+      position: relative;
+      min-height: 30px;
+      padding: 5px 25px 5px 5px;
+      font-size: 0.875em;
+      background: $c-neutral-2;
+
+      .member-name {
+        font-weight: 500;
+      }
+
+      .btn-close {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        text-indent: -9999em;
+      }
+
+    }
+
+    .later {
+      text-align: center;
+
+      .btn {
+        display: inline-block;
+      }
+
+    }
+
+  }
+
   .sign-in-form{
     display: none;
     border-bottom: 1px solid $c-neutral-black;

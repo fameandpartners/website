@@ -55,15 +55,14 @@
                 .copy-wrap.highlight
                   span BRIDE TO CHOOSE FREE HONEYMOON DRESS
 
-          .inner-right.position-1
-            .register-your-event
-              picture.media-wrap
-                source media='(max-width: 1023px)' srcset='#{image_path("landingpages/brides/honeymoon-mob.jpg")}'
-                source media='(min-width: 1024px)' srcset='#{image_path("landingpages/brides/honeymoon.jpg")}'
-                img src='#{image_path("landingpages/brides/honeymoon.jpg")}' srcset='
-                  #{image_path("landingpages/brides/honeymoon-mob.jpg")} 1023w,
-                  #{image_path("landingpages/brides/honeymoon.jpg")} 1024w' alt='
-                  GET A FREE HONEYMOON DRESS OF YOUR CHOICE WHEN YOU DRESS YOUR BRIDAL PARTY WITH US.'
+          a.inner-right.position-1.register-your-event href='javascript:;'
+            picture.media-wrap
+              source media='(max-width: 1023px)' srcset='#{image_path("landingpages/brides/honeymoon-mob.jpg")}'
+              source media='(min-width: 1024px)' srcset='#{image_path("landingpages/brides/honeymoon.jpg")}'
+              img src='#{image_path("landingpages/brides/honeymoon.jpg")}' srcset='
+                #{image_path("landingpages/brides/honeymoon-mob.jpg")} 1023w,
+                #{image_path("landingpages/brides/honeymoon.jpg")} 1024w' alt='
+                GET A FREE HONEYMOON DRESS OF YOUR CHOICE WHEN YOU DRESS YOUR BRIDAL PARTY WITH US.'
           /.btn-wrap.position-3
             /= link_to 'Get started', new_moodboard_path, class:'btn btn-lowlight register-your-event'
 
