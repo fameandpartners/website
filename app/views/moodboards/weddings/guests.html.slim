@@ -19,7 +19,9 @@
           = f.text_field :email, placeholder: 'Email', required: true, :class => "form-control form-control-md"
         = f.button 'Send', :class => "btn btn-black btn-block"
         .message-wrap#moodboard_members_notices
-      p Sent to:
+      // TODO: @moodboard.collaborators alwais contain one extra empty item
+      - if (@moodboard.collaborators.length > 0)
+        p Sent to:
       ul.row.list-unstyled.invited-members-wrap#moodboard_members
         - @moodboard.collaborators.each do |member|
           li.col-md-4

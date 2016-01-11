@@ -51,7 +51,7 @@
     }
 
     .invited-members-wrap li {
-      padding-bottom: 30px;
+      margin-bottom: 30px;
     }
 
     .invited-member {
@@ -82,6 +82,26 @@
       }
 
     }
+
+    // START - mobile
+    @media (max-width: $bootstrap-md-width - 1px) {
+
+      .title-line-on-sides {
+        margin-top: 15px;
+      }
+
+      form .btn,
+      .form-group {
+        width: 100%;
+        padding-right: 0;
+      }
+
+      .invited-members-wrap li {
+        margin-bottom: 15px;
+      }
+
+    }
+    // END - mobile
 
   }
 
