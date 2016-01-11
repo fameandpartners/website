@@ -12,7 +12,7 @@ describe 'sending a contact email', :type => :feature do
         fill_in 'Last name', :with => contact.last_name
         fill_in 'Email', :with => contact.email
         fill_in 'Phone', :with => contact.phone
-        fill_in 'Message', :with => contact.message
+        fill_in 'Your Message', :with => contact.message
         fill_in 'Order number', :with => contact.order_number
       end
       click_button 'Send'
