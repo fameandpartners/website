@@ -12,7 +12,7 @@
     user_signed_in: <%= signed_in? %>,
     site_version: {  name: '<%= current_site_version.try(:name) %>' },
     current_site_version: <%= raw SiteVersionSerializer.new(current_site_version).to_json %>,
-    shopping_cart: new helpers.ShoppingCart({track: <%= Rails.env.production? %>}),
+    shopping_cart: new helpers.ShoppingCart({track: <%= Rails.env.production? || Features.active?(:test_analytics, current_spree_user) %>}),
     user_moodboard: new helpers.UserMoodboard(user_moodboards),
     user_moodboards: new helpers.UserMoodboardStore(user_moodboards),
     events: $({})
