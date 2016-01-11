@@ -103,10 +103,10 @@ class ItemReturnEvent < ActiveRecord::Base
     validates :refunded_at, presence: true
   end
 
-  attr_accessible :user, :factory_fault
+  attr_accessible :user, :factory_fault, :factory_fault_reason
 
   event_type :factory_fault do
-    attributes :user, :factory_fault
+    attributes :user, :factory_fault, :factory_fault_reason
 
     validates :user, presence: true
     validates :factory_fault, presence: true

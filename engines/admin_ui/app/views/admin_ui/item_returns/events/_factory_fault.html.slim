@@ -11,4 +11,7 @@
     |&nbsp;
     = f.label :factory_fault, 'Yes', value: true
   .form-group
+    = f.label :factory_fault_reason, "Reason for Factory Fault: ", class: 'control-label'
+    = f.text_field :factory_fault_reason, value: @event.item_return.factory_fault_reason, class: 'form-control'
+  .form-group
     = f.button 'Submit'
