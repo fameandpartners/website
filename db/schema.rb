@@ -827,6 +827,8 @@ ActiveRecord::Schema.define(:version => 20160331152023) do
   end
 >>>>>>> Revolution banners:  Add sizing.
 
+  add_index "revolution_translation_banners", ["translation_id"], :name => "index_revolution_translation_banners_on_translation_id"
+
   create_table "revolution_translations", :force => true do |t|
     t.integer  "page_id"
     t.text     "locale"
