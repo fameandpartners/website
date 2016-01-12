@@ -15,7 +15,7 @@
       @extend %cfix;
     }
 
-    .steps {
+    .main-cta-wrap {
       text-align: center;
 
       .btn {
@@ -44,8 +44,48 @@
     // START - mobile
     @media (max-width: $bootstrap-md-width - 1px) {
 
+      .media-wrap {
+        display: none;
+      }
+
       .title-line-on-sides {
         margin-top: 15px;
+      }
+
+      .main-cta-wrap {
+
+        a,
+        span,
+        .btn {
+          display: block;
+          width: 100%;
+          margin-top: 15px;
+          margin-left: 0;
+
+          &:first-child {
+            margin-top: 0;
+          }
+
+        }
+
+        span {
+          text-transform: uppercase;
+          font-style: normal;
+        }
+
+        .btn-default {
+          color: $c-neutral-black;
+          background: $c-neutral-2
+        }
+
+      }
+
+    }
+
+    @media (max-width: $bootstrap-sm-width - 1px) {
+
+      .btn {
+        font-size: 0.75em !important; // TODO: fix global
       }
 
     }

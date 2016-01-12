@@ -1,12 +1,8 @@
 .moodboard-setup.invite-wrap#wedding_moodboard_edit_wrapper
   .row
     .col-md-4
-      picture.media-wrap
-        source media='(max-width: 1023px)' srcset='#{image_path("moodboard/signup-mobile-1.jpg")}'
-        source media='(min-width: 1024px)' srcset='#{image_path("moodboard/signup1.jpg")}'
-        img src='#{image_path("moodboard/signup1.jpg")}' srcset='
-          #{image_path("moodboard/signup-mobile-1.jpg")} 1023w,
-          #{image_path("moodboard/signup1.jpg")} 1024w'
+      .media-wrap
+        img src='#{image_path("moodboard/signup1.jpg")}'
     .col-md-8
       h2.title-line-on-sides
         .inner-wrap 
@@ -30,7 +26,7 @@
               .txt-truncate-1 => "#{member.email}"
               /! TODO: implement remove button
                 a.btn-close.sml href='javascript:;' remove member
-      .steps
+      .main-cta-wrap
         = link_to('Do this later', @moodboard, class:'btn btn-lowlight')
 
 
