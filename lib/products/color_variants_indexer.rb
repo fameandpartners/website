@@ -66,6 +66,8 @@ module Products
             next
           end
 
+          total_sales = total_sales_for_sku(product.sku)
+
           logger.info("id #{color_variant_id.to_s.ljust(3)} | #{log_prefix} Indexing")
 
           variants << {
@@ -84,7 +86,7 @@ module Products
               master_id:    product.master.id,
               in_stock:     product.has_stock?,
               discount:     discount,
-
+              total_sales:  total_sales,
               # added because of... really, it more simple add it here instead
               # of trying to refactor all this code
               urls: {
@@ -141,6 +143,15 @@ module Products
 
       logger.info("TOTAL PRODUCTS : #{product_count}")
       @variants = variants
+    end
+
+    def total_sales_for_sku(sku)
+      sql = "SELECT count(v.sku) as count FROM spree_line_items i
+              INNER JOIN spree_variants v ON i.variant_id = v.id
+              WHERE v.sku = '#{sku}'
+              GROUP BY sku"
+      r = ActiveRecord::Base.connection.execute(sql)
+      r.any? ? r.first["count"] : 0
     end
 
     def push_to_index

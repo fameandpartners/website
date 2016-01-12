@@ -26,6 +26,7 @@ module Revolution
     delegate :title, :meta_description, :to => :translation, allow_nil: true
 
     attr_accessor :locale, :collection
+    attr_readonly :path
 
     def heading
       (translation && translation.heading) || collection.details.banner.title
@@ -54,7 +55,7 @@ module Revolution
     end
 
     def get(key)
-      variables[key]
+      variables[key] || variables[key.to_s]
     end
 
     def self.find_for(*paths)

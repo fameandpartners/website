@@ -43,12 +43,13 @@ module Marketing
 
         def body
           {
-              name:     name,
-              gender:   gender,
-              email:    email,
-              loggedIn: logged_in?,
-              facebook: from_facebook?,
-              country:  country
+            country:  country,
+            email:    email,
+            facebook: from_facebook?,
+            gender:   gender,
+            ip:       request_ip,
+            loggedIn: logged_in?,
+            name:     name
           }
         end
       end

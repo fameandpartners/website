@@ -26,29 +26,10 @@
           /# else this
           .inner-wrap-full
             = link_to 'Add to cart', url_path, class: 'btn btn-black btn-xs'
+          - if @resource.allow_comments?
+            .comments-trigger-wrap
+              = react_component('ComponentCommentsModal', assets: item.moodboard_item_comments, itemName: item.product.name, itemId: item.id, currentUserId: current_spree_user.id, token: form_authenticity_token)
 
-          /#, data: { variant: product.variant_id, id: product.item_id }
-          = link_to 'Remove from moodboard', moodboard_item_path(item.moodboard_id, item.id), 
+        /#, data: { variant: product.variant_id, id: product.item_id }
+        = link_to 'Remove from moodboard', moodboard_item_path(item.moodboard_id, item.id), 
             method: :delete, class: 'btn-close'
-
-        /!
-          - if enhanced_moodboards_enabled?
-            .comments-wrap
-              .heading COMMENTS:
-              /! no comments
-                p.alt Be the first to comment on this dress!
-                p
-                  a href='javascript:;' Make
-                  span &nbsp;a comment
-
-              dl
-                dt.txt-truncate-1 Jodie
-                dd.txt-truncate-block Here the bride can give a short overview on her preferences parametres for the big.
-                dt.txt-truncate-1 Tan
-                dd.txt-truncate-block Here the bride can give a short overview on her preferences parametres for the big.
-              p
-                a href='javascript:;' Show
-                span &nbsp;more comments
-                span.separator |
-                a href='javascript:;' Make
-                span &nbsp;a comment

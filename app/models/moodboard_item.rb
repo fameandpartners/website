@@ -10,8 +10,9 @@ class MoodboardItem < ActiveRecord::Base
   belongs_to :color,   class_name: 'Spree::OptionValue'
   belongs_to :variant, class_name: 'Spree::Variant'
   belongs_to :user,    class_name: 'Spree::User'
+  has_many :moodboard_item_comments
 
-  attr_accessible :uuid, :comments, :likes
+  attr_accessible :uuid, :comments, :likes, :user_id, :moodboard_id, :product_id, :product_color_value_id, :color_id
 
   validates :uuid, uniqueness: true, presence: true
 

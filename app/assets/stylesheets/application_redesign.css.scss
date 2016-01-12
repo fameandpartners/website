@@ -120,6 +120,7 @@ z-index levels
 
 *  1040 = .modal-backdrop
 *  1040 = .modal ???
+*  1041 = .panel-product .comments-trigger-wrap .modal
 *  1050 = .modal ???
 
 *  1060 = .popover ???
@@ -240,6 +241,7 @@ z-index levels
 @import 'redesign/components/product/custom_heights_table';
 
 // Pages
+@import 'redesign/pages/contact';
 @import 'redesign/pages/moodboard';
 @import 'redesign/pages/moodboard-edit';
 @import 'redesign/pages/landing-dhd';
