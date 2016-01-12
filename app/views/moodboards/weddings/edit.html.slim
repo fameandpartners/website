@@ -38,5 +38,5 @@
 javascript:
   $('#wedding_moodboard_edit_form').find('.datepicker').datepicker();
   $('#wedding_moodboard_edit_form').on('ajax:success', function(event, data, status, xhr) {
-    $('#wedding_moodboard_edit_wrapper').html(xhr.responseText);
+    $('.create-wedding-board-wrap').html(xhr.responseText);
   });
