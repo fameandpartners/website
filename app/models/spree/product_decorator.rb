@@ -14,7 +14,7 @@ Spree::Product.class_eval do
   has_many  :customisation_values,
             order: 'customisation_values.position ASC'
   has_many :product_color_values,
-           dependent: :destroy
+           dependent: :destroy, inverse_of: :product
 
   has_many :inspirations, foreign_key: :spree_product_id, inverse_of: :product
   has_many :accessories, class_name: 'ProductAccessory', foreign_key: :spree_product_id

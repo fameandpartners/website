@@ -2,7 +2,8 @@
 # - product side bar with size/color/customizations selection
 # usage
 #   Products::SelectionOptions.new(product: product).read
-class Products::SelectionOptions
+module Products
+class SelectionOptions
   attr_reader :site_version, :product, :policy
 
   def initialize(options = {})
@@ -80,19 +81,25 @@ class Products::SelectionOptions
       return []
     end
 
-    # colors part
-    def basic_product_color_ids
-      @basic_product_color_ids ||= product_variants.map{|variant| variant.color_id}.uniq
-    end
-
     def default_product_colors
-      basic_product_color_ids.map do |color_id|
-        Repositories::ProductColors.read(color_id)
-      end.compact.sort_by{|color| color.presentation }
+      @default_product_colors ||= product.product_color_values.active.recommended
+        .map(&:option_value).sort_by{|color| color.presentation }
     end
 
     def extra_product_colors
       return [] unless extra_colors_available?
+
+      # Until we configure "Custom colours" as ProductColorValues, fall back to the old behaviour.
+      return legacy_custom_colours_listing unless Features.active?(:explicit_dress_colors)
+
+      @extra_product_colors ||= product.product_color_values.active.custom
+        .map(&:option_value).sort_by{|color| color.presentation }
+    end
+
+    # TODO - Remove once Feature :explicit_dress_colors is deployed.
+    private def legacy_custom_colours_listing
+      basic_product_color_ids = product_variants.map{|variant| variant.color_id}.uniq
+
       Repositories::ProductColors.read_all.select do |color|
         color.use_in_customisation && !basic_product_color_ids.include?(color.id)
       end.compact.sort_by{|color| color.presentation }
@@ -129,4 +136,5 @@ class Products::SelectionOptions
     def product_making_options
       product.making_options.to_a
     end
+end
 end

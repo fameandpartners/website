@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160105035758) do
+ActiveRecord::Schema.define(:version => 20160111213754) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -613,6 +613,8 @@ ActiveRecord::Schema.define(:version => 20160105035758) do
   create_table "product_color_values", :force => true do |t|
     t.integer "product_id"
     t.integer "option_value_id"
+    t.boolean "active",          :default => true
+    t.boolean "custom",          :default => false
   end
 
   add_index "product_color_values", ["product_id"], :name => "index_product_color_values_on_product_id"
