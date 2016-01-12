@@ -274,13 +274,11 @@ describe Revolution::Page do
         expect(page.limit(product_ids)).to eq 20
       end
       it 'returns 0 when given 22 product_ids and no offset' do
-        product_ids = ["451", '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-                       '11', '12', '13', ' 14', '15', '16', '17', '18', '19', '20', '21']
+        product_ids = (1..22).to_a
         expect(page.limit(product_ids)).to eq 0
       end
       it 'returns 20 when given 22 product_ids and an offset of 21' do
-        product_ids = ['451', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-                       '11', '12', '13', ' 14', '15', '16', '17', '18', '19', '20', '21']
+        product_ids = (1..22).to_a
         page.params = {offset: 21}
         expect(page.limit(product_ids)).to eq 20
       end
@@ -387,34 +385,14 @@ describe Revolution::Page do
 
   describe 'revolution banners' do
     def au_banners
-      Revolution::Translation::Banner.create!(translation_id:      au_translation.id,
-                                              alt_text:            'alt_text', size: 'full',
-                                              banner_order:        1, banner_file_name: 'au_image.jpg',
-                                              banner_content_type: 'image/jpeg',
-                                              banner_file_size:    72900)
-      Revolution::Translation::Banner.create!(translation_id:      au_translation.id,
-                                              alt_text:            'alt_text2', size: 'full',
-                                              banner_order:        2, banner_file_name: 'au_image2.jpg',
-                                              banner_content_type: 'image/jpeg',
-                                              banner_file_size:    72900)
+      create(:translation_banner, translation_id: au_translation.id, banner_order: 1)
+      create(:translation_banner, translation_id: au_translation.id, banner_order: 2)
     end
     def us_banners
       allow(page).to receive(:locale).and_return(us_locale)
-      Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
-                                              alt_text:            'alt_text1', size: 'full',
-                                              banner_order:        1, banner_file_name: 'us_image1.jpg',
-                                              banner_content_type: 'image/jpeg',
-                                              banner_file_size:    72900)
-      Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
-                                              alt_text:            'alt_text2', size: 'full',
-                                              banner_order:        2, banner_file_name: 'us_image2.jpg',
-                                              banner_content_type: 'image/jpeg',
-                                              banner_file_size:    72900)
-      Revolution::Translation::Banner.create!(translation_id:      us_translation.id,
-                                              alt_text:            'alt_text4', size: 'full',
-                                              banner_order:        4, banner_file_name: 'us_image4.jpg',
-                                              banner_content_type: 'image/jpeg',
-                                              banner_file_size:    72900)
+      create(:translation_banner, translation_id: us_translation.id, banner_order: 1)
+      create(:translation_banner, translation_id: us_translation.id, banner_order: 2)
+      create(:translation_banner, translation_id: us_translation.id, banner_order: 4)
     end
     let(:collection) { double('Collection') }
     let(:au_locale) { 'en-AU' }
@@ -443,15 +421,15 @@ describe Revolution::Page do
       #Making assumption that banners exist
       it 'returns the first AU banner' do
         au_banners
-        expect(page.retrieve_banner(1, 'full')).to eq page.translations.where(locale: au_locale).first.banners.first
+        expect(page.retrieve_banner(1, 'full')).to eq page.translations.where(locale: au_locale).first.banners.where(banner_order: 1).first
       end
       it 'returns the third US banner' do
         us_banners
-        expect(page.retrieve_banner(3, 'full')).to eq page.translations.where(locale: us_locale).first.banners.third
+        expect(page.retrieve_banner(3, 'full')).to eq page.translations.where(locale: us_locale).first.banners.where(banner_order: 4).first
       end
       it 'returns the first AU banner if attempting to retrieve more than available' do
         au_banners
-        expect(page.retrieve_banner(3, 'full')).to eq page.translations.where(locale: au_locale).first.banners.first
+        expect(page.retrieve_banner(3, 'full')).to eq page.translations.where(locale: au_locale).first.banners.where(banner_order: 1).first
       end
     end
 
@@ -459,11 +437,11 @@ describe Revolution::Page do
       it { expect(page.banner_image(1, 'full')).to eq '/url' }
       it 'has a defined AU banner' do
         au_banners
-        expect(page.banner_image(1, 'full')).to match(/au_image/)
+        expect(page.banner_image(1, 'full')).to eq page.translations.where(locale: 'en-AU').first.banners.where(banner_order: 1).first.banner.url
       end
       it 'has a defined US banner' do
         us_banners
-        expect(page.banner_image(1, 'full')).to match(/us_image/)
+        expect(page.banner_image(1, 'full')).to eq page.translations.where(locale: 'en-US').first.banners.where(banner_order: 1).first.banner.url
       end
     end
 
@@ -483,11 +461,11 @@ describe Revolution::Page do
       it { expect(page.alt_text(1, 'full')).to eq 'alt_text' }
       it 'returns the alt text from the second AU banner' do
         au_banners
-        expect(expect(page.alt_text(2, 'full')).to eq 'alt_text2')
+        expect(expect(page.alt_text(2, 'full')).to eq page.translations.where(locale: 'en-AU').first.banners.where(banner_order: 2).first.alt_text)
       end
       it 'returns the alt text from the third US banner' do
         us_banners
-        expect(expect(page.alt_text(3, 'full')).to eq 'alt_text4')
+        expect(expect(page.alt_text(3, 'full')).to eq page.translations.where(locale: 'en-US').first.banners.where(banner_order: 4).first.alt_text)
       end
     end
 
