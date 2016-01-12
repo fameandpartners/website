@@ -7,19 +7,6 @@ window.track = {
     this.ga('send', 'pageview', page_url);
   },
 
-  remarketing_tag: function () {
-    var conversion_type = 'remarketing_tag';
-    var id              = 979620714;
-    var image           = new Image(1, 1);
-
-    if (_.contains(this.tracked, conversion_type)) {
-      return false;
-    }
-
-    image.src = "//googleads.g.doubleclick.net/pagead/viewthroughconversion/" + id + "/?value=0&guid=ON&script=0";
-    this.tracked.push(conversion_type);
-  },
-
   conversion: function (conversion_type) {
     var image  = new Image(1, 1);
     var params = this.getConversionOptions(conversion_type);
