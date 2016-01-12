@@ -1,5 +1,4 @@
 window.track = {
-  tracked: [],
   dataLayer: window.dataLayer || [],
   ga: window.ga || function () {},
 
