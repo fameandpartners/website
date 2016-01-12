@@ -12,7 +12,7 @@ FameAndPartners::Application.routes.draw do
   ########################
   # US Redirection to root
   ########################
-  get '/us/*whatevs', to: redirect('/%{whatevs}')
+  get '/us/*whatevs', to: redirect(path: "/%{whatevs}")
   get '/us' => redirect('/')
 
   #######################################################
