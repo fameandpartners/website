@@ -1,73 +1,74 @@
-.footer.container
-  .mobile-footer.hidden-md.hidden-lg
-    .row.buttons.visible-xs.visible-sm
-      = link_to style_consultation_url, class: "col-xs-12"
-        = image_tag 'footer/refer.png', class: 'refer'
-        .text FREE STYLING SESSION
-      - unless Features.active?(:getitquick_unavailable)
-        = link_to fast_making_dresses_url, class: "col-xs-12"
-          = image_tag 'footer/48.png', class: 'hr48'
-          .text 48 HR EXPRESS MAKING
-      = link_to fame_chain_url, class: "col-xs-12"
-        = image_tag 'footer/chain.png', class: 'chain'
-        .text JOIN THE FAME CHAIN
+- cache [:layout, :footer], expires_in: configatron.cache.expire.long do
+  .footer.container
+    .mobile-footer.hidden-md.hidden-lg
+      .row.buttons.visible-xs.visible-sm
+        = link_to style_consultation_url, class: "col-xs-12"
+          = image_tag 'footer/refer.png', class: 'refer'
+          .text FREE STYLING SESSION
+        - unless Features.active?(:getitquick_unavailable)
+          = link_to fast_making_dresses_url, class: "col-xs-12"
+            = image_tag 'footer/48.png', class: 'hr48'
+            .text 48 HR EXPRESS MAKING
+        = link_to fame_chain_url, class: "col-xs-12"
+          = image_tag 'footer/chain.png', class: 'chain'
+          .text JOIN THE FAME CHAIN
 
-    /.row.email-row
-      /.col-xs-12.col-sm-12
-        /.input-group
-          /input type="text" class="form-control email" placeholder="REGISTER YOUR EMAIL FOR THIS XX OFFER" aria-/describedby="basic-addon2"
-          /span.input-group-addon#basic-addon2 SUBMIT
-    .row
-      .stay-social
-        center STAY SOCIAL
-    .row
-      .stay-social-images
-        = render 'layouts/redesign/social_links'
+      /.row.email-row
+        /.col-xs-12.col-sm-12
+          /.input-group
+            /input type="text" class="form-control email" placeholder="REGISTER YOUR EMAIL FOR THIS XX OFFER" aria-/describedby="basic-addon2"
+            /span.input-group-addon#basic-addon2 SUBMIT
+      .row
+        .stay-social
+          center STAY SOCIAL
+      .row
+        .stay-social-images
+          = render 'layouts/redesign/social_links'
 
-  .footer-navigation
-    .col-md-4.col-sm-12
-      = image_tag 'logo/logo-mobile.svg', class: 'footer-logo hidden-xs hidden-sm'
-      = render 'layouts/redesign/address'
+    .footer-navigation
+      .col-md-4.col-sm-12
+        = image_tag 'logo/logo-mobile.svg', class: 'footer-logo hidden-xs hidden-sm'
+        = render 'layouts/redesign/address'
 
-    .col-md-4.hidden-sm.hidden-xs
-      .stay-social stay social
-      .stay-social-images
-        = render 'layouts/redesign/social_links'
+      .col-md-4.hidden-sm.hidden-xs
+        .stay-social stay social
+        .stay-social-images
+          = render 'layouts/redesign/social_links'
 
-    .col-md-2.col-sm-3.hidden-xs.hidden-sm.second-col
-      ul.footer-nav
-        li.footer-nav--item
-          = link_to 'Why Shop With Us', why_us_url
-        li.footer-nav--item
-          = link_to 'About Us', about_us_url
-
-        - if current_site_version.is_australia?
+      .col-md-2.col-sm-3.hidden-xs.hidden-sm.second-col
+        ul.footer-nav
           li.footer-nav--item
-            = link_to 'Fashion IT Girl', 'http://mystyle.fameandpartners.com/fitg-aus-2015'
+            = link_to 'Why Shop With Us', why_us_url
+          li.footer-nav--item
+            = link_to 'About Us', about_us_url
 
-        li.footer-nav--item
-          = link_to 'FAQs & Shipping', faqs_url
-        li.footer-nav--item
-          = link_to 'Size Guide', size_guide_url
-        li.footer-nav--item
-          = link_to 'Our Customer Service Improvements', yelp_url, :class => 'bold'
+          - if current_site_version.is_australia?
+            li.footer-nav--item
+              = link_to 'Fashion IT Girl', 'http://mystyle.fameandpartners.com/fitg-aus-2015'
 
-    .col-md-2.col-sm-3.hidden-xs.hidden-sm.last-col
-      ul.footer-nav
-        li.footer-nav--item
-          = link_to 'Terms', terms_url
-        li.footer-nav--item
-          = link_to 'Get styling advice', style_consultation_url
-        li.footer-nav--item
-          = link_to 'Fame Chain', fame_chain_url
-        li.footer-nav--item
-          = link_to 'Contact Us', new_contact_url
-        li.footer-nav--item
-          = link_to 'Privacy Policy', privacy_url
+          li.footer-nav--item
+            = link_to 'FAQs & Shipping', faqs_url
+          li.footer-nav--item
+            = link_to 'Size Guide', size_guide_url
+          li.footer-nav--item
+            = link_to 'Our Customer Service Improvements', yelp_url, :class => 'bold'
 
-  .lower-row
-    .col-md-6.col-sm-12.copyright
-      p
-        | &copy;&nbsp;
-        = Time.now.year
-        | &nbsp;Fame &amp; Partners. All rights reserved.
+      .col-md-2.col-sm-3.hidden-xs.hidden-sm.last-col
+        ul.footer-nav
+          li.footer-nav--item
+            = link_to 'Terms', terms_url
+          li.footer-nav--item
+            = link_to 'Get styling advice', style_consultation_url
+          li.footer-nav--item
+            = link_to 'Fame Chain', fame_chain_url
+          li.footer-nav--item
+            = link_to 'Contact Us', new_contact_url
+          li.footer-nav--item
+            = link_to 'Privacy Policy', privacy_url
+
+    .lower-row
+      .col-md-6.col-sm-12.copyright
+        p
+          | &copy;&nbsp;
+          = Time.now.year
+          | &nbsp;Fame &amp; Partners. All rights reserved.
