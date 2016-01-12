@@ -33,6 +33,8 @@
           = f.text_field :guest_count, class: "form-control"
         .steps
           = f.button 'Invite the bridal party', :class => "btn btn-lowlight"
+          span or
+          = link_to('do this later', @moodboard)
 
 javascript:
   $('#wedding_moodboard_edit_form').find('.datepicker').datepicker();
