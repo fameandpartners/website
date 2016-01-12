@@ -8,6 +8,7 @@ describe Revolution::Page do
 
   it { is_expected.to validate_presence_of :path }
   it { is_expected.to validate_uniqueness_of :path }
+  it { is_expected.to have_readonly_attribute(:path) }
 
   it { is_expected.to delegate_method(:title).to(:translation) }
   it { is_expected.to delegate_method(:meta_description).to(:translation) }

@@ -14,3 +14,12 @@
 //= require inspinia-rails
 //= require jquery-ui
 //= require_tree .
+
+$(document).ready(function(){
+  $('[data-confirm]').click(function(e){
+    var confirmation_message = $(e.target).data('confirm');
+    var confirmed = confirm(confirmation_message);
+
+    if (!confirmed) { e.preventDefault() }
+  })
+});

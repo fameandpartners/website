@@ -1,32 +1,42 @@
 - content_for :page_title do
   | Pages
-br
-= form_tag content_pages_path, method: "get", class: 'form-horizontal' do
-  .form-group
-    .input-group
-      label.col-sm-2.control-label Search
-      .col-sm-10= text_field_tag :search, params[:search], class: 'form-control'
-      span.input-group-btn
-        = button_tag type: "submit", class: "btn btn-default" do
-          span.fa.fa-search
 
-= paginate collection, theme: 'admin_ui'
+.wrapper.wrapper-content
+  .row
+    .col-lg-12
+      .ibox
+        .ibox-content
+          .row
+            .col-lg-6
+              = form_tag content_pages_path, method: 'get'
+              .input-group
+                = text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search for a page. Example: "/about"', value: params[:search]
+                span.input-group-btn
+                  = button_tag type: 'submit', class: 'btn btn-default'
+                    span.fa.fa-search
 
-table.table
-  thead : tr
-    th Path
-    th Title
-    th
+            .col-lg-6
+              = link_to 'Create a Page', new_content_page_path, class: 'btn btn-primary'
 
-  tbody
-    - collection.each do |page|
-      tr
-        td = link_to page.path, edit_content_page_path(page)
-        td
-          - if page.translation
-            = link_to page.translation.title, edit_content_page_path(page)
-        td
-          = button_to 'Edit', edit_content_page_path(page), :action => "edit", :method => "get", class: "btn btn-primary", :id => "edit_form"
-          = button_to 'Delete', content_page_path(page), action: "destroy", method: :delete, class: "btn btn-primary", id: "delete_form"
+          hr
 
-= link_to 'Create a Page', new_content_page_path, class: "btn btn-primary"
+          = paginate collection, theme: 'admin_ui'
+
+          table.table
+            thead : tr
+              th Path
+              th Title
+              th
+
+            tbody
+              - collection.each do |page|
+                tr
+                  td = link_to page.path, edit_content_page_path(page)
+                  td
+                    - if page.translation
+                      = link_to page.translation.title, edit_content_page_path(page)
+                  td
+                    = button_to 'Edit', edit_content_page_path(page), action: 'edit', method: 'get', class: 'btn btn-info', id: 'edit_form'
+                    = button_to 'Delete', content_page_path(page), action: 'destroy', method: 'delete', class: 'btn btn-danger', id: 'delete_form', data: { confirm: 'Are you sure?' }
+
+          = paginate collection, theme: 'admin_ui'
