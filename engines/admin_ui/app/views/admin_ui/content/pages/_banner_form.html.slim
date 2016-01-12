@@ -16,7 +16,7 @@
             = banner.banner_file_size
             | kilobytes
           .col-lg-4
-            = link_to 'Delete Banner', revolution.banner_delete_path(banner), class: 'btn btn-info btn-sm'
+            = link_to 'Delete Banner', revolution.banner_delete_path(banner), data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
 
     .ibox-content
       = t.fields_for :banners, banner do |banner|
