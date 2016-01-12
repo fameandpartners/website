@@ -33,85 +33,84 @@ coffee:
         $(".sign-up-form  #error-email").text("Please fill all fields , password and password confirmation must match !!!")
         $(".sign-up-form  #error-email").show()
 
-.container.sign-in-form
+.membership.plain.moodboard-setup.sign-in-form
   .row
-    h2.title-line-on-sides
-      .inner-wrap SIGN IN
-    .col-md-5.left-col
-      = link_to 'Log in with Facebook', fb_auth_path(spree_user_return_to: return_path+"#get_started"), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
-    .col-md-1
-      .separator
-        span or
-    .col-md-6.form-wrap
-      span#error-email
-      .form data-hook="login"
-        - login_path = spree.spree_user_session_path(site_version: current_site_version.try(:code))
-        = form_for :spree_user, :url => login_path , remote: true , :html => {:'data-type' => 'json'} do |f|
-          #password-credentials.row
-            .col-md-12
-              = render :partial =>'shared/redesign/flash_messages', flash: flash
-            .col-md-12.form-group
-              = f.label :email
-              = f.email_field :email, class: 'title', tabindex: 1, :class => 'form-control form-control-md'
-            .col-md-12.form-group
-              = f.label :password
-              = f.password_field :password, class: 'title', tabindex: 2, :class => 'form-control form-control-md'
-            .col-md-12.form-group
-              .checkbox
-                label for="spree_user_remember_me"
-                  = f.check_box :remember_me
-                  span= t(:remember_me)
-            .col-md-12.form-group
-              = f.submit 'Login', class: 'btn btn-block btn-black', tabindex: 3
-            .col-md-12
-              p.multiple-links
-                = link_to t(:create_a_new_account), spree.signup_path(cl: 'login-form'), :id => 'create-new-account'
-                = link_to t(:forgot_password), main_app.new_spree_user_password_path, :id=> 'forgot-password'
+    .col-md-12
+      h2.title-line-on-sides
+        .inner-wrap SIGN IN
+      .row
+        .col-md-4.left-col
+          = link_to 'Log in with Facebook', fb_auth_path(spree_user_return_to: return_path+"#get_started"), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
+        .col-md-1
+          .separator
+            span or
+        .col-md-7.form-wrap
+          span#error-email
+          .form data-hook="login"
+            - login_path = spree.spree_user_session_path(site_version: current_site_version.try(:code))
+            = form_for :spree_user, :url => login_path , remote: true , :html => {:'data-type' => 'json'} do |f|
+              #password-credentials.row
+                .col-md-12
+                  = render :partial =>'shared/redesign/flash_messages', flash: flash
+                .col-md-12.form-group
+                  = f.label :email
+                  = f.email_field :email, class: 'title', tabindex: 1, :class => 'form-control form-control-md'
+                .col-md-12.form-group
+                  = f.label :password
+                  = f.password_field :password, class: 'title', tabindex: 2, :class => 'form-control form-control-md'
+                .col-md-12.form-group
+                  .checkbox
+                    label for="spree_user_remember_me"
+                      = f.check_box :remember_me
+                      span= t(:remember_me)
+                .col-md-12
+                  .main-cta-wrap
+                    = f.submit 'Login', class: 'btn btn-black', tabindex: 3
+                    = link_to t(:create_a_new_account), spree.signup_path(cl: 'login-form'), :id => 'create-new-account'
+                    = link_to t(:forgot_password), main_app.new_spree_user_password_path, :id=> 'forgot-password'
 
 
-.container.sign-up-form
+.membership.plain.moodboard-setup.sign-up-form
   .row
-    .col-md-12.sign-up
+    .col-md-12
       h2.title-line-on-sides
         .inner-wrap CREATE AN ACCOUNT
       - signup_params = {site_version: current_site_version.code}
       = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) , remote: true , :html => {:'data-type' => 'json'} do |f|
         = f.hidden_field :site_version_id, value: current_site_version.id
-
-      .container
-        .row
-          .col-md-5.left-col
-            = link_to 'Sign up with facebook', fb_auth_path(spree_user_return_to: return_path+"#get_started"), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
-          .col-md-1
-            .separator
-              span or
-          .col-md-6.form-wrap
-            = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) , remote: true , :html => {:'data-type' => 'json'} do |f|
-              = f.hidden_field :site_version_id, value: current_site_version.id
-              div data-hook="signup"
-                .row
-                  .col-md-6.form-group
-                    = f.text_field :first_name, :class => 'form-control form-control-md', :placeholder => t(:first_name)
-                  .col-md-6.form-group
-                    = f.text_field :last_name, :class => 'form-control form-control-md', :placeholder => t(:last_name)
-                  .col-md-12.form-group
-                    = f.email_field :email, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:email)
-                    span#error-email
-                #password-credentials
-                .row
-                  .col-md-6.form-group
-                    = f.password_field :password, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password)
-                  .col-md-6.form-group
-                    = f.password_field :password_confirmation, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password_confirmation)
-                  .col-md-12.form-group
-                    .checkbox
-                      label for="spree_user_newsletter"
-                        = f.check_box :newsletter, :checked => 'checked'
-                        span
-                          ' Receive new styles in my inbox each week + $25 off
-                  .col-md-5.form-group data-hook="signup_below_password_fields"
-                    = f.submit 'Create account', class: 'btn btn-block btn-black'
-                  .col-md-7.col-sm-12.text-center
-                    p
-                      span Already have an account?
-                      = link_to 'Sign in here', "#", class: 'sign-in-here'
+      .row
+        .col-md-4.left-col
+          = link_to 'Sign up with facebook', fb_auth_path(spree_user_return_to: return_path+"#get_started"), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
+        .col-md-1
+          .separator
+            span or
+        .col-md-7.form-wrap
+          = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) , remote: true , :html => {:'data-type' => 'json'} do |f|
+            = f.hidden_field :site_version_id, value: current_site_version.id
+            div data-hook="signup"
+              .row
+                .col-md-6.form-group
+                  = f.text_field :first_name, :class => 'form-control form-control-md', :placeholder => t(:first_name)
+                .col-md-6.form-group
+                  = f.text_field :last_name, :class => 'form-control form-control-md', :placeholder => t(:last_name)
+                .col-md-12.form-group
+                  = f.email_field :email, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:email)
+                  span#error-email
+              #password-credentials
+              .row
+                .col-md-6.form-group
+                  = f.password_field :password, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password)
+                .col-md-6.form-group
+                  = f.password_field :password_confirmation, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password_confirmation)
+                .col-md-12.form-group
+                  .checkbox
+                    label for="spree_user_newsletter"
+                      = f.check_box :newsletter, :checked => 'checked'
+                      span
+                        ' Receive new styles in my inbox each week + $25 off
+                .col-md-12 data-hook="signup_below_password_fields"
+                  .main-cta-wrap
+                    = f.submit 'Create account', class: 'btn btn-black'
+                    span Already have an account?
+                    = link_to 'Sign in here', 'javascript:;', class:'sign-in-here hidden-xs hidden-sm'
+                    = link_to 'Sign in here', 'javascript:;', class:'btn btn-default sign-in-here hidden-md hidden-lg'

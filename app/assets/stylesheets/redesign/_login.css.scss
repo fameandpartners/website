@@ -1,11 +1,4 @@
 .membership {
-  width: 100%;
-  height: 100vh;
-  min-height: 750px;
-  margin-bottom: -$mega-menu-desktop-height;
-  padding-bottom: $mega-menu-desktop-height;
-  background: url('membership/bg-gaussion-blur-1.jpg') $c-neutral-10 no-repeat;
-  background-size: cover;
 
   .outer-wrap {
     width: 100%;
@@ -34,7 +27,6 @@
     text-transform: none;
     font-size: 2.25em;
     font-weight: 500;
-    color: $c-neutral-white;
 
     span {
       display: block;
@@ -52,12 +44,11 @@
   a:not(.btn) {
     text-decoration: underline;
     font-weight: 500;
-    color: $c-neutral-white;
+    color: $c-neutral-black;
   }
 
   label {
     font-weight: 500;
-    color: $c-neutral-white;
   }
 
   p {
@@ -65,7 +56,6 @@
     text-align: center;
     font-size: 1.125em;
     font-weight: 400;
-    color: $c-neutral-white;
   }
 
   .btn {
@@ -92,7 +82,7 @@
       height: 40px;
       line-height: 40px;
       font-size: 1.75em;
-      color: $c-neutral-white;
+      color: $c-neutral-black;
 
       &:before,
       &:after {
@@ -103,7 +93,7 @@
         margin-left: -1px;
         width: 1px;
         height: 80px;
-        background: $c-neutral-white;
+        background: $c-neutral-black;
       }
 
       &:before {
@@ -123,16 +113,63 @@
   }
 
   .alert {
-    color: $c-neutral-white;
+    color: $c-neutral-black;
     background: transparent;
-    border-color: $c-neutral-white;
+    border-color: $c-neutral-black;
     border-radius: 2px;
 
     h3 {
       margin: 0;
       font-weight: 500;
-      color: $c-neutral-white;
+      color: $c-neutral-black;
       background: transparent;
+    }
+
+  }
+
+  &:not(.plain) {
+    width: 100%;
+    height: 100vh;
+    min-height: 750px;
+    margin-bottom: -$mega-menu-desktop-height;
+    padding-bottom: $mega-menu-desktop-height;
+    background: url('membership/bg-gaussion-blur-1.jpg') $c-neutral-10 no-repeat;
+    background-size: cover;
+
+    .heading {
+      color: $c-neutral-white;
+    }
+
+    a:not(.btn) {
+      color: $c-neutral-white;
+    }
+
+    label {
+      color: $c-neutral-white;
+    }
+
+    p {
+      color: $c-neutral-white;
+    }
+
+    .separator span {
+      color: $c-neutral-white;
+
+      &:before,
+      &:after {
+        background: $c-neutral-white;
+      }
+
+    }
+
+    .alert {
+      color: $c-neutral-white;
+      border-color: $c-neutral-white;
+
+      h3 {
+        color: $c-neutral-white;
+      }
+
     }
 
   }

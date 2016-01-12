@@ -11,6 +11,11 @@
     -moz-box-orient: vertical;
     box-orient: vertical;
 
+    [class^='position-'],
+    [class*='position-'] {
+      display: block;
+    }
+
     .position-1 {
       -webkit-box-ordinal-group: 1;
       -moz-box-ordinal-group: 1;
