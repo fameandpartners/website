@@ -44,61 +44,167 @@
 
   }
 
-  .comments-wrap {
-    min-height: 220px;
+  .comments-trigger-wrap {
+    margin-top: 15px;
+    text-align: center;
 
-    a {
-      text-decoration: underline;
-      font-style: italic;
-      color: inherit;
+    .form-group {
+      margin-bottom: 15px;
     }
 
-    p {
-      margin-bottom: 20px;
+    label,
+    input:not(.btn),
+    textarea {
       font-size: 0.875em;
-      font-weight: 400;
+      border-radius: 0;
+    }
 
-      &:last-child {
-        margin-bottom: 0;
+    textarea {
+      outline: none;
+      border-color: $c-neutral-6;
+    }
+
+    .comments-trigger {
+      text-decoration: underline;
+      font-size: 0.875em;
+      color: $c-neutral-black;
+    }
+
+    .modal {
+      text-align: left;
+      z-index: 1041;
+    }
+
+    .modal-content {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .modal-title {
+      margin: 15px;
+      text-align: center;
+      font-weight: 500;
+
+      .inner-wrap {
+        width: auto;
+        float: none;
       }
 
     }
 
-    dl {
-      margin-bottom: 0;
-      font-size: 0.875em;
-      font-weight: 400;
+    .modal-header {
+      border-bottom: none;
+    }
+
+    .modal-body {
+      max-height: 380px;
+      overflow-y: scroll;
+      margin: 0 15px;
+      padding-top: 0;
+    }
+
+    .modal-footer {
+      text-align: left;
+      background: $c-neutral-2;
+      border-color: $c-neutral-4;
+      margin-top: 0;
+    }
+
+    .comment-wrap {
+      margin-bottom: 15px;
       @extend %cfix;
+
+      textarea {
+        width: 100%;
+        padding: 5px;
+        resize: none;
+        border-color: $c-neutral-4;
+      }
+
+      .user-name {
+        float: left;
+        width: 20%;
+        padding: 5px 0;
+        text-transform: uppercase;
+        font-size: 0.875em;
+        font-weight: 500;
+      }
+
+      .user-comment {
+        float: left;
+        width: 80%;
+        padding-left: 20px;
+
+        p {
+          padding: 5px;
+          font-size: 0.875em;
+          font-weight: normal;
+          color: $c-neutral-12;
+        }
+
+      }
+
+      .toolbar {
+        float: right;
+
+        .btn, 
+        a {
+          display: inline-block;
+          padding: 5px 0 5px 10px;
+          text-transform: none;
+          font-size: 0.875em;
+          font-weight: normal;
+          line-height: 1;
+          vertical-align: middle;
+          color: $c-neutral-6;
+          background: transparent;
+        }
+
+      }
+
     }
 
-    dt {
-      float: left;
-      width: 25%;
-      margin-bottom: 15px;
-      text-transform: uppercase;
-    }
+    @include mobile {
 
-    dd {
-      float: left;
-      width: 75%;
-      max-height: 56px;
-      margin-bottom: 15px;
-      line-height: 1.3;
-    }
+      .comment-wrap {
 
-    .alt {
-      font-style: italic;
-    }
+        .user-name,
+        .user-comment {
+          width: 100%;
+        }
 
-    .heading {
-      margin: 25px 0;
-      text-decoration: underline;
-      font-size: 0.875em;
-      font-weight: 500;
-    }
+        .user-comment {
+          padding-left: 0;
+        }
 
-    .separator {
-      margin: 0 5px;
+      }
+
+      .modal-dialog {
+        margin: 0;
+      }
+
+      .modal-content {
+        min-height: 100vh;
+      }
+
+      .modal-title {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .modal-body {
+        max-height: none;
+        margin: 0;
+      }
+
+      .modal-footer {
+
+        .btn {
+          width: 100%;
+        }
+
+      }
+
     }
 
   }

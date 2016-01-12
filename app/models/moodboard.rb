@@ -3,7 +3,7 @@ class Moodboard < ActiveRecord::Base
   has_many :items, class_name: 'MoodboardItem', inverse_of: :moodboard
   has_many :collaborators, class_name: 'MoodboardCollaborator', inverse_of: :moodboard
 
-  attr_accessible :description, :event_date, :name, :purpose
+  attr_accessible :user_id, :description, :event_date, :name, :purpose
 
   validates :user, presence: true
   validates :name, presence: true
@@ -52,4 +52,9 @@ class Moodboard < ActiveRecord::Base
   def user_member?(candidate_user)
     collaborators.map(&:user_id).compact.include?(candidate_user.id) || self.user_id == candidate_user.id
   end
+
+  def allow_comments?
+    purpose == 'wedding'
+  end
+
 end
