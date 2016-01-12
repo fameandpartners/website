@@ -9,6 +9,23 @@ FameAndPartners::Application.routes.draw do
     get '/us/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
   end
 
+  ########################
+  # US Redirection to root
+  ########################
+  get '/us/*whatevs' => redirect(path: '/%{whatevs}', host: 'www.fameandpartners.com')
+  get '/us' => redirect('/')
+
+  #######################################################
+  # Temporary redirection to fix wrong path sent to users
+  #######################################################
+  get '/AU' => redirect(path: '/au/dresses')
+
+  if Features.active?(:redirect_to_com_au_domain)
+    get '/au/*whatevs' => redirect(path: '/%{whatevs}', host: 'www.fameandpartners.com.au')
+    get '/au' => redirect(path: '/', host: 'www.fameandpartners.com.au')
+  end
+
+
   # TODO: After .com.au migration, this scope can simply go away.
   scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
     ##########
