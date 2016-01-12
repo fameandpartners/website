@@ -155,5 +155,43 @@ module Revolution
       end.join(',')
     end
 
+    def expand_colours(pid_array)
+      return pid_array if pid_array.blank?
+      pos = 0
+      pid_array.each do |pid|
+        prod_id, colour = pid.split('-', 2)
+        if colour.blank?
+          pid_array[pos] = insert_colours(prod_id)
+          pid_array.flatten!
+        end
+        pos += 1
+      end
+
+      pid_array
+    end
+
+    def insert_colours(prod_id)
+      Spree::Product.find(prod_id).basic_colors.collect { |colour| "#{ prod_id }-#{ colour.name }" }
+    end
+
+    def sort_pids(pid_array)
+      #Attempt to move same dress/different colour away from each other.
+      return pid_array if pid_array.blank?
+      (1..pid_array.size-2).each do |cnt|
+        if pid_array[cnt].split('-', 2)[0] == pid_array[cnt-1].split('-', 2)[0]
+          #Move it 4 away
+          temp_pid = pid_array[cnt]
+          pid_array.delete_at(cnt)
+          if cnt+3 > pid_array.size - 1
+            pid_array << temp_pid
+          else
+            pid_array.insert(cnt+3, temp_pid)
+          end
+        end
+      end
+
+      pid_array
+    end
+
   end
 end

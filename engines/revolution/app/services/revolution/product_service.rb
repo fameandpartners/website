@@ -66,8 +66,11 @@ module Revolution
     end
 
     def collection_images(product, colour_name)
-      images = product.images.find_all { |i| i.attachment_file_name.downcase.include?(colour_name.gsub('-', '_')) && i.attachment_file_name.downcase.include?('crop') }
-
+      if colour_name.present?
+        images = product.images.find_all { |i| i.attachment_file_name.downcase.include?(colour_name.gsub('-', '_')) && i.attachment_file_name.downcase.include?('crop') }
+      else
+        images = product.images.find_all { |i| i.attachment_file_name.downcase.include?('crop') }
+      end
       images.sort_by { |i| i.position }.collect { |i| i.attachment.url(:large) }
     end
 

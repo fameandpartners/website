@@ -109,7 +109,8 @@ class Products::CollectionsController < Products::BaseController
   end
 
   def product_ids
-    params[:pids] || page.get(:pids)
+    t_pids = page.expand_colours(params[:pids] || page.get(:pids))
+    page.sort_pids(t_pids)
   end
 
   def collection_resource(collection_options = {})

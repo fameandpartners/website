@@ -376,4 +376,56 @@ describe Revolution::Page do
       it { expect(page.offset(product_ids, 42)).to eq 20 }
     end
   end
+
+  describe ".expand_colours" do
+    let(:product_ids) { ["471-coral", "680-light-pink", "683-burgundy", "262-white", "704-black", "504-lavender",
+                         "680-forest-green", "371-light-pink", "649-black", "191-burgundy", "539-navy"] }
+    it { expect(page.expand_colours(product_ids)).to eq product_ids }
+    context 'returns an expanded list' do
+      it 'is given a list where the first id does not have a colour' do
+        product_ids[0] = '471'
+        allow(page).to receive(:insert_colours).and_return(['471-coral', '471-navy', '471-burgundy'])
+        expect(page.expand_colours(product_ids).size).to eq 13
+      end
+      it 'is given a list where the first and third id does not have a colour' do
+        product_ids[0] = '471'
+        product_ids[2] = '683'
+        allow(page).to receive(:insert_colours).and_return(['471-coral', '471-navy', '471-burgundy'], ['683-burgundy', '683-black'])
+        expect(page.expand_colours(product_ids).size).to eq 14
+      end
+      it 'is given a list where the last (eleventh) id does not have a colour' do
+        product_ids[10] = '539'
+        allow(page).to receive(:insert_colours).and_return(['539-navy', '539-black'])
+        expect(page.expand_colours(product_ids).size).to eq 12
+      end
+    end
+  end
+
+  describe '.sort_pids' do
+    let(:product_ids) { ["471-coral", "680-light-pink", "683-burgundy", "262-white", "704-black", "504-lavender",
+                         "680-forest-green", "371-light-pink", "649-black", "191-burgundy", "539-navy"] }
+    it { expect(page.sort_pids(product_ids)).to eq product_ids }
+    context 'give a list where the same id is adjacent to each other' do
+      it 'has the first and second id the same, but different colours' do
+        product_ids[1] = '471-black'
+        expect(page.sort_pids(product_ids)[4]).to eq '471-black'
+      end
+      it 'has the first, second and third id the same, but different colours' do
+        product_ids[1] = '471-black'
+        product_ids[2] = '471-burgundy'
+        p_ids          = page.sort_pids(product_ids)
+        expect(page.sort_pids(p_ids)[3]).to eq '471-black'
+        expect(page.sort_pids(product_ids)[7]).to eq '471-burgundy'
+      end
+      it 'has the penultimate and ultimate id the same, but different colours' do
+        product_ids[10] = '191-navy'
+        expect(page.sort_pids(product_ids)[10]).to eq '191-navy'
+      end
+      it 'has the antepenultimate and penultimate id the same, but different colours' do
+        product_ids[9] = '649-burgundy'
+        expect(page.sort_pids(product_ids)[10]).to eq '649-burgundy'
+      end
+    end
+
+  end
 end
