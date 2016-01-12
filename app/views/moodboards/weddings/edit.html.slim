@@ -21,10 +21,10 @@
         .col-md-6.form-group
           = f.label :bride_last_name, "Last name"
           = f.text_field :bride_last_name, class:"form-control"
-        .col-md-6.form-group
+        .col-md-6.form-group.has-feedback
           = f.label :event_date, "The Wedding Date"
           = f.text_field :event_date, class:"form-control datepicker"
-          .glyphicon.glyphicon-calendar
+          .icon-calendar.form-control-feedback
         .col-md-6.form-group
           = f.label :event_progress, "How ready is the bride?"
           = f.select :event_progress, f.object.event_progressions, {}, class: "form-control"
