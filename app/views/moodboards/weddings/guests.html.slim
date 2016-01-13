@@ -11,8 +11,10 @@
       = form_for @moodboard.collaborators.build, url: moodboard_collaborators_path(@moodboard), remote: true do |f|
         .form-group
           = f.text_field :name, placeholder: 'Name', required: true, :class => "form-control form-control-md"
+          span.help-block.with-errors
         .form-group
-          = f.text_field :email, placeholder: 'Email', required: true, :class => "form-control form-control-md"
+          = f.text_field :email, placeholder: 'Email', required: true, :class => "form-control form-control-md", type: 'email'
+          span.help-block.with-errors
         = f.button 'Send', :class => "btn btn-black btn-block"
         .message-wrap#moodboard_members_notices
       // TODO: @moodboard.collaborators alwais contain one extra empty item
@@ -36,7 +38,9 @@
 /Timeboxed and fell back on good old fashion JQuery
 
 javascript:
-  $('#new_moodboard_collaborator').on('ajax:success', function(event, data, status, xhr) {
+  var form = $('#new_moodboard_collaborator');
+  form.validator();
+  form.on('ajax:success', function(event, data, status, xhr) {
 
     var results = JSON.parse(xhr.responseText);
     var errorEl = $('#moodboard_members_notices');

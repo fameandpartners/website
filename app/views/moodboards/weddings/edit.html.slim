@@ -9,25 +9,37 @@
       = form_for(@moodboard_form, as: :wedding_moodboard, :url => wedding_moodboard_path, remote: true, html: { id: 'wedding_moodboard_edit_form' }) do |f|
         = f.hidden_field :id
         .row
-          .col-md-6.form-group
-            = f.label :bride_first_name, "First name *"
-            = f.text_field :bride_first_name, required: true, class:"form-control form-control-md"
-          .col-md-6.form-group
-            = f.label :owner_relationship, "Are you the: *"
-            = f.select :owner_relationship, f.object.owner_relationships, {}, class: "form-control form-control-md"
-          .col-md-6.form-group
-            = f.label :bride_last_name, "Last name"
-            = f.text_field :bride_last_name, class:"form-control form-control-md"
-          .col-md-6.form-group.has-feedback
-            = f.label :event_date, "The Wedding Date"
-            = f.text_field :event_date, class:"form-control form-control-md datepicker"
-            .icon-calendar.form-control-feedback
-          .col-md-6.form-group
-            = f.label :event_progress, "How ready is the bride?"
-            = f.select :event_progress, f.object.event_progressions, {}, class: "form-control form-control-md"
-          .col-md-6.form-group
-            = f.label :guest_count, "How many people in the bridal party?"
-            = f.text_field :guest_count, class: "form-control form-control-md"
+          .col-md-12
+            .row
+              .col-md-6.form-group
+                = f.label :bride_first_name, "First name *"
+                = f.text_field :bride_first_name, required: true, class:"form-control form-control-md"
+                span.help-block.with-errors
+              .col-md-6.form-group
+                = f.label :owner_relationship, "Are you the: *"
+                = f.select :owner_relationship, f.object.owner_relationships, {}, required: true, class: "form-control form-control-md", 'data-native-error' => 'Test'
+                span.help-block
+          .col-md-12
+            .row
+              .col-md-6.form-group
+                = f.label :bride_last_name, "Last name"
+                = f.text_field :bride_last_name, class:"form-control form-control-md"
+                span.help-block
+              .col-md-6.form-group.has-feedback
+                = f.label :event_date, "The Wedding Date"
+                = f.text_field :event_date, class:"form-control form-control-md datepicker"
+                .icon-calendar.form-control-feedback
+                span.help-block
+          .col-md-12
+            .row
+              .col-md-6.form-group
+                = f.label :event_progress, "How ready is the bride?"
+                = f.select :event_progress, f.object.event_progressions, {}, class: "form-control form-control-md"
+                span.help-block
+              .col-md-6.form-group
+                = f.label :guest_count, "How many people in the bridal party?"
+                = f.text_field :guest_count, class: "form-control form-control-md"
+                span.help-block
           .col-md-12
             .main-cta-wrap
               = f.button 'Invite the bridal party', :class => "btn btn-lowlight"
@@ -36,7 +48,17 @@
               = link_to('Skip and create moodboard', @moodboard, class:'btn btn-default hidden-md hidden-lg')
 
 javascript:
-  $('#wedding_moodboard_edit_form').find('.datepicker').datepicker();
-  $('#wedding_moodboard_edit_form').on('ajax:success', function(event, data, status, xhr) {
+  var form = $('#wedding_moodboard_edit_form');
+  // this is just hack, need to empty val of default selection to trigger validation
+  form.find('option').each(function() {
+    $this = $(this);
+    if($this.attr('value') === 'Choose an option') {
+      $this.attr('value', '');
+      $this.attr('disabled', 'true');
+    }
+  });
+  form.validator();
+  form.find('.datepicker').datepicker();
+  form.on('ajax:success', function(event, data, status, xhr) {
     $('.create-wedding-board-wrap').html(xhr.responseText);
   });

@@ -1,5 +1,6 @@
 coffee:
   $(document).ready ->
+    $('.membership form').validator();
     if $("#get_started .sign-in-form")?
       $('.register-your-event, .sign-in-form #create-new-account').on 'click', (e) ->
         e.preventDefault()
@@ -54,10 +55,12 @@ coffee:
                   = render :partial =>'shared/redesign/flash_messages', flash: flash
                 .col-md-12.form-group
                   = f.label :email
-                  = f.email_field :email, class: 'title', tabindex: 1, :class => 'form-control form-control-md'
+                  = f.email_field :email, class: 'title', tabindex: 1, :class => 'form-control form-control-md', type: 'email', required: true
+                  span.help-block.with-errors
                 .col-md-12.form-group
                   = f.label :password
-                  = f.password_field :password, class: 'title', tabindex: 2, :class => 'form-control form-control-md'
+                  = f.password_field :password, class: 'title', tabindex: 2, :class => 'form-control form-control-md', required: true
+                  span.help-block.with-errors
                 .col-md-12.form-group
                   .checkbox
                     label for="spree_user_remember_me"
@@ -76,7 +79,7 @@ coffee:
       h2.title-line-on-sides
         .inner-wrap CREATE AN ACCOUNT
       - signup_params = {site_version: current_site_version.code}
-      = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) , remote: true , :html => {:'data-type' => 'json'} do |f|
+      = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params), remote: true , :html => {:'data-type' => 'json'} do |f|
         = f.hidden_field :site_version_id, value: current_site_version.id
       .row
         .col-md-4.left-col
@@ -85,23 +88,27 @@ coffee:
           .separator
             span or
         .col-md-7.form-wrap
-          = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) , remote: true , :html => {:'data-type' => 'json'} do |f|
+          = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params), remote: true , :html => {:'data-type' => 'json'} do |f|
             = f.hidden_field :site_version_id, value: current_site_version.id
             div data-hook="signup"
               .row
                 .col-md-6.form-group
-                  = f.text_field :first_name, :class => 'form-control form-control-md', :placeholder => t(:first_name)
+                  = f.text_field :first_name, required: true, :class => 'form-control form-control-md', :placeholder => t(:first_name)
+                  span.help-block.with-errors
                 .col-md-6.form-group
-                  = f.text_field :last_name, :class => 'form-control form-control-md', :placeholder => t(:last_name)
+                  = f.text_field :last_name, required: true, :class => 'form-control form-control-md', :placeholder => t(:last_name)
+                  span.help-block.with-errors
                 .col-md-12.form-group
-                  = f.email_field :email, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:email)
-                  span#error-email
+                  = f.email_field :email, required: true, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:email), type: 'email'
+                  span.help-block.with-errors#error-email
               #password-credentials
               .row
                 .col-md-6.form-group
-                  = f.password_field :password, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password)
+                  = f.password_field :password, :id => 'sign-up-password', required: true, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password), 'data-minlength' => '6', 'data-minlength-error' => 'Password is too short (minimum is 6 characters)'
+                  span.help-block.with-errors
                 .col-md-6.form-group
-                  = f.password_field :password_confirmation, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password_confirmation)
+                  = f.password_field :password_confirmation, required: true, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password_confirmation), 'data-match' => '#sign-up-password', 'data-match-error' => 'Password fields must match.'
+                  span.help-block.with-errors
                 .col-md-12.form-group
                   .checkbox
                     label for="spree_user_newsletter"
