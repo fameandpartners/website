@@ -7,23 +7,13 @@ window.initProductCollectionMoodboardLinks = (options = {}) ->
   $container = $(options.container)
   buttons_selector = options.buttons
 
-  addProductToMoodboardClickHandler = (e) ->
+  showMoodboardDropdown = (e) ->
     e.preventDefault()
 
     if !app.user_signed_in
       window.redirectToLoginAndBack()
       return
 
-    return if $(e.currentTarget).data('loading')
-    $(e.currentTarget).data('loading', true)
+    $(".dropdown-menu", $(e.currentTarget).parent()).toggleClass("hide")
 
-    item = $(e.currentTarget).closest('div[data-id]')
-    moodboard_options = { product_id: item.data('id'), color_id: item.data('color-id') }
-
-    app.user_moodboard.one('change', (e) ->
-      if app.user_moodboard.contains(moodboard_options)
-        item.find(buttons_selector).replaceWith($('<a>', href: urlWithSitePrefix('/wishlist'), html: 'Added to Moodboard'))
-    )
-    app.user_moodboard.addItem(moodboard_options)
-
-  $container.on('click', buttons_selector, addProductToMoodboardClickHandler)
+  $container.on('click', buttons_selector, showMoodboardDropdown)
