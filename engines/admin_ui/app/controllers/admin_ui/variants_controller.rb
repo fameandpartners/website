@@ -46,6 +46,10 @@ module AdminUi
 
       column :sku, label: 'SKU'
 
+      column :style_number, label: 'Style Number'  do |variant|
+        Spree::Variant.where(is_master: true, product_id: variant.product.id).first.sku
+      end
+
     end
 
     def index
