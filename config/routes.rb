@@ -21,8 +21,8 @@ FameAndPartners::Application.routes.draw do
   get '/AU' => redirect(path: '/au/dresses')
 
   if Features.active?(:redirect_to_com_au_domain)
-    get '/au/*whatevs' => redirect(path: '/%{whatevs}', host: 'www.fameandpartners.com.au')
-    get '/au' => redirect(path: '/', host: 'www.fameandpartners.com.au')
+    get '/au/*whatevs' => redirect(path: '/%{whatevs}')
+    get '/au' => redirect(path: '/')
   end
 
 
