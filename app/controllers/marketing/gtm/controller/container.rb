@@ -23,8 +23,9 @@ module Marketing
           user_presenter   = Presenter::User.new(spree_user: spree_current_user, request_ip: request.ip)
           device_presenter = Presenter::Device.new(user_agent: request.user_agent)
           site_presenter   = Presenter::Site.new(current_site_version: current_site_version)
+          order_presenter  = Presenter::Order.new(spree_order: current_order)
 
-          @gtm_container = Presenter::Container.new(presenters: [user_presenter, device_presenter, site_presenter])
+          @gtm_container = Presenter::Container.new(presenters: [user_presenter, device_presenter, site_presenter, order_presenter])
         end
 
         def append_gtm_page
