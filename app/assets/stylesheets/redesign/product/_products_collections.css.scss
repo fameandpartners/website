@@ -40,6 +40,12 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
 		    	}
 		    }
 		}
+		@include mobile{
+			.dropdown-menu{
+				width: 100%;
+				margin-left: 0;
+			}
+		}
 
 	}
 
