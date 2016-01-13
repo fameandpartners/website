@@ -17,9 +17,6 @@
         <%= @product.price %>
       <% end %>
     </span>
-    <% if !window.app.user_moodboard.contains({ product_id: @product.id, color_id: (@product.color || {}).id  }): %>
-      <span class="moodboard"><sup>+</sup>moodboard</span>
-    <% end %>
   </div>
   <% if @product.fast_making: %>
     <img src="/assets/express_making.png" class="express-delivery" alt="Express Making">
