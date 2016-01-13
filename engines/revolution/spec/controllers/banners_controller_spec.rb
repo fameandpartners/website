@@ -12,7 +12,7 @@ module Revolution
 
       let(:page) { Revolution::Page.create(path: path) }
       let!(:translation) { page.translations.create!(locale: locale, title: title, meta_description: title) }
-      let(:banner) { Revolution::Translation::Banner.create!(translation_id:      translation.id,
+      let(:banner) { Revolution::Banner.create!(translation_id:      translation.id,
                                                              alt_text:            'alt text',
                                                              banner_order:        1,
                                                              size:                'full',
@@ -26,7 +26,7 @@ module Revolution
         it { expect(response).to redirect_to("#{request.base_url}/fame_admin/content/pages/#{page.id}/edit") }
         it { expect(flash[:success]).to eq('Banner deleted') }
         it { expect(assigns(:banner)).to eq(banner) }
-        it { expect(Revolution::Translation::Banner.count).to eq(0) }
+        it { expect(Revolution::Banner.count).to eq(0) }
 
       end
 

@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :translation_banner, :class => Revolution::Translation::Banner do
+  factory :translation_banner, class: Revolution::Banner do
     translation_id              1
     sequence(:alt_text)         { |n| "alt text #{n}" }
     size                        'full'
