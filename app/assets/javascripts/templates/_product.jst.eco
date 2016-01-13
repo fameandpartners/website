@@ -17,6 +17,22 @@
         <%= @product.price %>
       <% end %>
     </span>
+    <span class="moodboard">
+      <sup>+</sup>moodboard
+    </span>
+    <div class="dropdown-menu hide">
+      <% for mb in user_moodboards.moodboards: %>
+        <a data-moodboard-id=<%=mb.id%> data-product-id=<%=@product.id%> data-color-id=<%=@product.color.id%> onclick="clickAddMoodboard(this);">
+          <% @item = {moodboard_id: mb.id, product_id: @product.id, color_id: @product.color.id} %>
+          <% if window.app.user_moodboards.hasItem(@item): %>
+            <i class="fa fa-check"></i>
+          <% else: %>
+            <i class="fa fa-plus"></i>
+          <% end %>
+          <%= mb.name %>
+        </a>
+      <% end %>
+    </div>
   </div>
   <% if @product.fast_making: %>
     <img src="/assets/express_making.png" class="express-delivery" alt="Express Making">
