@@ -53,7 +53,7 @@ module Revolution
       ## NOTE: in future we may totally get rid of Taxons.  What happens if we do not have banners?
       ## Do we default to what?  '/dresses/...' has '/dresses/*', what about other types of pages?
       if banners_exist?(size)
-        retrieve_banner(position, size).banner.url
+        retrieve_banner(position, size).banner_url
       else
         collection.details.banner.image
       end
@@ -61,7 +61,7 @@ module Revolution
 
     def no_of_banners(size)
       if banners_exist?(size)
-        translations.where(locale: locale).first.banners.count
+        translations.banner_count(locale)
       else
         1
       end
@@ -80,7 +80,7 @@ module Revolution
 
       banners = get_default_banner(position, size, locale)
       if banners.blank?
-        local_locale = translations.where('locale != ?', locale).first.locale
+        local_locale = translations.other_locale(locale)
         banners = get_default_banner(position, size, local_locale)
       end
 
@@ -88,10 +88,10 @@ module Revolution
     end
 
     def get_default_banner(position, size, local_locale)
-      banners = translations.where(locale: local_locale).first.banners.where('banner_order >= ? and size = ?', position, size).order(:banner_order)
+      banners = translations.get_banner_for_pos(local_locale, position, size)
       if banners.blank?
         #If not found default to the first one
-        banners = translations.where(locale: local_locale).first.banners.where('banner_order >= ? and size = ?', 0, size).order(:banner_order)
+        banners = translations.get_banner_for_pos(local_locale, 0, size)
       end
       banners
     end
@@ -99,7 +99,7 @@ module Revolution
     def banners_exist?(size)
       banners_present = false
       translations.each do |translation|
-        banners_present = translation.banners.where(size: size).present?
+        banners_present = translation.banner?(size)
         break if banners_present
       end
       banners_present

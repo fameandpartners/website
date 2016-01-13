@@ -19,6 +19,18 @@ module Revolution
     validate :file_dimensions
     validate :same_dimensions
 
+    def self.banner_pos(banner_order, size)
+      where('banner_order >= ? and size = ?', banner_order, size).order(:banner_order)
+    end
+
+    def self.banner_present(size)
+      where(size: size).present?
+    end
+
+    def banner_url
+      banner.url
+    end
+
     private
 
     def file_dimensions
