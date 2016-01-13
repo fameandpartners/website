@@ -27,6 +27,6 @@
     h6 New Banner
 
   .ibox-content
-    = t.fields_for :banners, Revolution::Translation::Banner.new do |banner|
+    = t.fields_for :banners, Revolution::Banner.new do |banner|
       = render partial: 'banner_form_content', locals: { banner: banner }
 

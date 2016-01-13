@@ -1,6 +1,6 @@
 class CreateRevolutionBanners < ActiveRecord::Migration
   def change
-    create_table :revolution_translation_banners do |t|
+    create_table :revolution_banners do |t|
       t.integer :translation_id
       t.string :alt_text
       t.string :size

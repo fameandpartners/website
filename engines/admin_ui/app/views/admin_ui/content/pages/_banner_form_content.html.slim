@@ -13,7 +13,7 @@ p
   .col-sm-10 = banner.text_field :alt_text, class: 'form-control'
 .form-group
   label.col-sm-2.control-label Size
-  .col-sm-10 = banner.select :size, Revolution::Translation::Banner::PAGE_SIZE, include_blank: true
+  .col-sm-10 = banner.select :size, Revolution::Banner::PAGE_SIZE, include_blank: true
 .form-group
   label.col-sm-2.control-label Banner
   .col-sm-10 = banner.file_field :banner

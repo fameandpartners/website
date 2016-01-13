@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe Revolution::Translation::Banner do
+describe Revolution::Banner do
   let(:path)      { '/blah/vtha' }
   let(:locale)    { 'en-AU' }
   let(:title)     { 'Blah Vtha' }
 
   let(:page)  { Revolution::Page.create(path: path) }
   let!(:translation) { page.translations.create!(locale: locale, title: title, meta_description: title) }
-  subject(:banner)  { Revolution::Translation::Banner.new(translation_id: translation.id,
+  subject(:banner)  { Revolution::Banner.new(translation_id: translation.id,
                                                           banner_order: 1,
                                                           size: 'full',
                                                           banner_file_name: 'image1.jpg',

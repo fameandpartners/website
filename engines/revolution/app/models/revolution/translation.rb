@@ -10,6 +10,7 @@ module Revolution
     belongs_to :page, inverse_of: :translations
 
     has_many :banners, dependent: :destroy, inverse_of: :translation
+
     accepts_nested_attributes_for :banners, reject_if: :all_blank
 
     def self.find_for_locale(locale = nil)
