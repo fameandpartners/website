@@ -51,6 +51,7 @@ RSpec.describe ItemReturnEvent, :type => :model do
     it 'updates item_returns.factory_fault to true if true' do
       event.user = Faker::Internet.email
       event.factory_fault = true
+      event.factory_fault_reason = "Test Reason"
       event.save!
       item_returns = ItemReturn.find(item_return.id)
       expect(item_returns.factory_fault).to be true
