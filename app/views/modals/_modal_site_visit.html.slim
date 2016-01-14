@@ -1,8 +1,7 @@
 ruby:
   promocode_by_url = decode(params[:pc])
   email_capture_modal = "
-    if (window.location.pathname == '/dresses/wedding'){
-      console.log('displaying /dress/wedding modal');
+    if ( window.location.pathname.indexOf('/dresses/wedding') > -1 ){
       if ($.cookie('display_dress_wedding_modal') != 'true') {
         var modal_popup = new window.page.EmailCaptureModal({
           promocode:  \"formal15\",
@@ -19,8 +18,7 @@ ruby:
         $.cookie('display_dress_wedding_modal','true')
       }
     }
-    else if (window.location.pathname == '/bridesmaid-dresses'){
-      console.log('displaying /bridesmaid modal');
+    else if ( window.location.pathname.indexOf('/bridesmaid-dresses') > -1 ){
       if ($.cookie('display_bridesmaid_modal') != 'true') {
         var modal_popup = new window.page.EmailCaptureModal({
           promocode:  \"formal15\",
