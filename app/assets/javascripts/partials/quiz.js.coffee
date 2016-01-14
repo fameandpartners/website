@@ -199,10 +199,7 @@ window.Quiz = {
       $question.find('.item:has(:input:checked)').addClass('active')
 
   triggerEvents: (step) ->
-    if Quiz.steps().index(step) is 2
-      track.conversion('quiz_step1')
-    else if Quiz.steps().index(step) is 3
-      track.conversion('quiz_step2')
+    return true;
 
   loadImagesForStep: (step) ->
     $step = $(step)

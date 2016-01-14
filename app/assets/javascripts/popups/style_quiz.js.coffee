@@ -195,10 +195,7 @@ window.popups.StyleQuizPopup = class StyleQuizPopup
       $question.find('.item:has(:input:checked)').addClass('active')
 
   triggerEvents: (step) ->
-    if @steps().index(step) is 2
-      track.conversion('quiz_step1')
-    else if @steps().index(step) is 3
-      track.conversion('quiz_step2')
+    return true
 
   loadImagesForStep: (step) ->
     $step = $(step)
@@ -291,7 +288,7 @@ window.popups.StyleQuizPopup = class StyleQuizPopup
       $message_container.addClass('hide').hide()
     )
 
-    
+
 # this method supports following
 # enableStyleQuizPopup
 #  - add 'on click' handler for required
