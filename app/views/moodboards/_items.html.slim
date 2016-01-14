@@ -13,7 +13,7 @@
               - if item.product_color_value.present?
                 = cropped_product_color_variant_image_tag(item.product_color_value)
               - else
-                .custom-color-info
+                .custom-color-wrap
                   .info-selected Custom color selected:
                   .custom-item-details
                     div class="color-#{item.color.name}"

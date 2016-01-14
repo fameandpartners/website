@@ -16,37 +16,6 @@
 
   }
 
-  .custom-color-info {
-    background-color: rgba($c-neutral-black, 0.3);
-    bottom: 0px;
-    color: $c-neutral-white;
-    font-size: 14px;
-    padding: 10px 0;
-    position: absolute;
-    text-align: center;
-    width: 100%;
-
-    .info-selected {
-      padding-bottom: 5px;
-      text-transform: uppercase;
-    }
-
-    .custom-item-details {
-      div[class*="color-"] {
-        border: 1px solid $c-neutral-4;
-        display: inline-block;
-        height: 20px;
-        margin-bottom: -5px;
-        width: 20px;
-      }
-
-      span {
-        display: inline-block;
-        margin-left: 5px;
-      }
-    }
-  }
-
   .menu-wrap,
   .panel-aside {
 
