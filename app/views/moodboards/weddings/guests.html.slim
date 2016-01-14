@@ -1,35 +1,34 @@
-.moodboard-setup.invite-wrap#wedding_moodboard_edit_wrapper
-  .row
-    .col-md-4
-      .media-wrap
-        img src='#{image_path("moodboard/signup1.jpg")}'
-    .col-md-8
-      h2.title-line-on-sides
-        .inner-wrap 
-          'Invite the Bridal Party
-          .sub-heading To shop with you
-      = form_for @moodboard.collaborators.build, url: moodboard_collaborators_path(@moodboard), remote: true do |f|
-        .form-group
-          = f.text_field :name, placeholder: 'Name', required: true, :class => "form-control form-control-md"
-          span.help-block.with-errors
-        .form-group
-          = f.text_field :email, placeholder: 'Email', required: true, :class => "form-control form-control-md", type: 'email'
-          span.help-block.with-errors
-        = f.button 'Send', :class => "btn btn-black btn-block"
-        .message-wrap#moodboard_members_notices
-      // TODO: @moodboard.collaborators alwais contain one extra empty item
-      - if (@moodboard.collaborators.length > 0)
-        p Sent to:
-      ul.row.list-unstyled.invited-members-wrap#moodboard_members
-        - @moodboard.collaborators.each do |member|
-          li.col-md-4
-            .invited-member
-              .member-name.txt-truncate-1 => member.name.to_s
-              .txt-truncate-1 => "#{member.email}"
-              /! TODO: implement remove button
-                a.btn-close.sml href='javascript:;' remove member
-      .main-cta-wrap
-        = link_to('Do this later', @moodboard, class:'btn btn-lowlight')
+.row
+  .col-md-4
+    .media-wrap
+      img src='#{image_path("moodboard/signup1.jpg")}'
+  .col-md-8
+    h2.title-line-on-sides
+      .inner-wrap 
+        'Invite the Bridal Party
+        .sub-heading To shop with you
+    = form_for @moodboard.collaborators.build, url: moodboard_collaborators_path(@moodboard), remote: true do |f|
+      .form-group
+        = f.text_field :name, placeholder: 'Name', required: true, :class => "form-control form-control-md"
+        span.help-block.with-errors
+      .form-group
+        = f.text_field :email, placeholder: 'Email', required: true, :class => "form-control form-control-md", type: 'email'
+        span.help-block.with-errors
+      = f.button 'Send', :class => "btn btn-black btn-block"
+      .message-wrap#moodboard_members_notices
+    // TODO: @moodboard.collaborators alwais contain one extra empty item
+    - if (@moodboard.collaborators.length > 0)
+      p Sent to:
+    ul.row.list-unstyled.invited-members-wrap#moodboard_members
+      - @moodboard.collaborators.each do |member|
+        li.col-md-4
+          .invited-member
+            .member-name.txt-truncate-1 => member.name.to_s
+            .txt-truncate-1 => "#{member.email}"
+            /! TODO: implement remove button
+              a.btn-close.sml href='javascript:;' remove member
+    .main-cta-wrap
+      = link_to('Do this later', @moodboard, class:'btn btn-lowlight')
 
 
 /Note I tried to use a React component here, but as this is loaded via ajax,
@@ -38,6 +37,7 @@
 /Timeboxed and fell back on good old fashion JQuery
 
 javascript:
+  console.log('guest');
   var form = $('#new_moodboard_collaborator');
   form.validator();
   form.on('ajax:success', function(event, data, status, xhr) {
