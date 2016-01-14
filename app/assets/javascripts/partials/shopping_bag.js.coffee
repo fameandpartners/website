@@ -40,6 +40,9 @@ window.ShoppingBag = class ShoppingBag
       @open()
     @
 
+  addEventToMasterPassButton: () ->
+    $(@masterpass_link || '#buyWithMasterPass').on('click', @masterpassOpenHandler)
+
   render: () ->
     $.ajax(
       url: urlWithSitePrefix("/user_cart/order_delivery_date")
@@ -55,6 +58,7 @@ window.ShoppingBag = class ShoppingBag
           @date_vars["end_date_non_express"]      = data.end_date_non_express
 
         @$container.html(@template(cart: @cart.data, country_code: @country_code, value_proposition: @value_proposition, shipping_message: @shipping_message, date_vars: @date_vars))
+        @addEventToMasterPassButton()
         @rendered = true
     )
 
@@ -71,10 +75,6 @@ window.ShoppingBag = class ShoppingBag
       $('body').addClass('overflow-hidden')
     )
     @$overlay.addClass('is-visible')
-
-#    Add event listener to MasterPass button
-    $(@masterpass_link || '#buyWithMasterPass').unbind('click');
-    $(@masterpass_link || '#buyWithMasterPass').on('click', @masterpassOpenHandler)
     return
 
   openHandler: (e) ->

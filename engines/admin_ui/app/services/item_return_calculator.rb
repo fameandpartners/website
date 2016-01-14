@@ -38,6 +38,7 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
 
   def advance_factory_fault(event)
     @item_return.factory_fault = event.factory_fault
+    @item_return.factory_fault_reason = (@item_return.factory_fault ? event.factory_fault_reason : nil)
   end
 
   def advance_legacy_data_import(event)

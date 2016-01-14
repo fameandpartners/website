@@ -8,7 +8,7 @@ window.style.Quiz = class StyleQuiz
 
   constructor: (options = {}) ->
     @options = options
-    
+
     @masonryGutter = 10
     @masonryItemsInLine = switch
       when $(window).width() <= $tabletScreen && $(window).width() > $phoneScreen then 4
@@ -24,7 +24,7 @@ window.style.Quiz = class StyleQuiz
     @container.on('click', (e) -> e.stopPropagation())
     @container.find('.next a').click _.bind(@nextStepEventHandler, @)
     @container.find('.prev a').click _.bind(@previousStepEventHandler, @)
-    
+
     @init()
 
   windowResizeHandler: (e) =>
@@ -53,8 +53,8 @@ window.style.Quiz = class StyleQuiz
       '-ms-transform': 'scale('+scale+')'
       '-o-transform': 'scale('+scale+')'
       'transform': 'scale('+scale+')'
-    
-    
+
+
     @bindCheckboxesAndRadios()
 
     @processImagesForStepsInSeries()
@@ -76,7 +76,7 @@ window.style.Quiz = class StyleQuiz
     # setTimeout () ->
     #   @containerInner.height($frame.height())
     # , 1000
-    
+
 
   nextStepEventHandler: (event) ->
     event.preventDefault()
@@ -181,10 +181,7 @@ window.style.Quiz = class StyleQuiz
       $question.find('.item:has(:input:checked)').addClass('active')
 
   triggerEvents: (step) ->
-    if @steps().index(step) is 2
-      track.conversion('quiz_step1')
-    else if @steps().index(step) is 3
-      track.conversion('quiz_step2')
+    return true
 
   loadImagesForStep: (step) ->
     $step = $(step)
@@ -233,7 +230,7 @@ window.style.Quiz = class StyleQuiz
     if $scrollable.data('jsp')
       $scrollable.data('jsp').reinitialise()
     else if $(window).width() > $phoneScreen
-      $scrollable.jScrollPane 
+      $scrollable.jScrollPane
         contentWidth: $(step).width() + 'px'
 
   processImagesForStepsInSeries: () ->

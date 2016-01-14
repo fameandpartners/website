@@ -38,7 +38,8 @@ module Reports
           product_colour AS "Colour",
           reason_category AS "Return Reason",
           split_part(split_part(data, '@', 1), 'user:', 2) AS "QC'd By",
-          reason_sub_category AS "Comments"
+          reason_sub_category AS "Comments",
+          factory_fault_reason AS "Factory Fault Reason"
         FROM item_returns LEFT JOIN item_return_events
           ON item_returns.uuid = item_return_events.item_return_uuid
           AND event_type = 'receive_item'

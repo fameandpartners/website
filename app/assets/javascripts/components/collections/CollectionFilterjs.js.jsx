@@ -13,6 +13,18 @@ var FilterOption = React.createClass({
   }
 });
 
+var FilterRadioOption = React.createClass({
+
+  render: function() {
+    return (
+      <div className='filter-radio-option' data-all={this.props.all == 'true'} name={this.props.name} data-pricemin={this.props.priceMin} data-pricemax={this.props.priceMax} >
+        <span className={'radio-icon ' + this.props.select}> </span>
+        {this.props.label}
+      </div>
+    )
+  }
+});
+
 
 var SelectColor = React.createClass({
 
@@ -53,8 +65,8 @@ var CollectionFilter = React.createClass({
     }
 
     prices = priceList.map(function(price){
-      if (price.max != null) return (<FilterOption name={"$"+price.min+" - $"+price.max} label={"$"+price.min+" - $"+price.max} priceMin={price.min} priceMax={price.max} select='false'/>)
-      else return (<FilterOption name={"$"+price.min+"+"} label={"$"+price.min+"+"} priceMin={price.min} select='false'/>)
+      if (price.max != null) return (<FilterRadioOption name="price" label={"$"+price.min+" - $"+price.max} priceMin={price.min} priceMax={price.max} select='false'/>)
+      else return (<FilterRadioOption name="price" label={"$"+price.min+"+"} priceMin={price.min} select=''/>)
     });
 
     return (
@@ -72,7 +84,7 @@ var CollectionFilter = React.createClass({
         <div className='three-filters'>
           <b>PRICE</b>
           <div className='filter-area filter-area-prices'>
-            <FilterOption name='all' label='View all prices' select='true'/>
+            <FilterRadioOption name='price' label='View all prices' select='selected' all='true' />
             {prices}
           </div>
 

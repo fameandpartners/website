@@ -314,6 +314,7 @@ ActiveRecord::Schema.define(:version => 20160105035758) do
     t.boolean  "factory_fault"
     t.integer  "item_price"
     t.integer  "item_price_adjusted"
+    t.string   "factory_fault_reason"
   end
 
   add_index "item_returns", ["line_item_id"], :name => "index_item_returns_on_line_item_id", :unique => true
@@ -485,6 +486,16 @@ ActiveRecord::Schema.define(:version => 20160105035758) do
   add_index "moodboard_collaborators", ["email"], :name => "index_moodboard_collaborators_on_email"
   add_index "moodboard_collaborators", ["moodboard_id"], :name => "index_moodboard_collaborators_on_moodboard_id"
   add_index "moodboard_collaborators", ["user_id"], :name => "index_moodboard_collaborators_on_user_id"
+
+  create_table "moodboard_item_comments", :force => true do |t|
+    t.integer  "moodboard_item_id"
+    t.integer  "user_id"
+    t.text     "comment"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "moodboard_item_comments", ["moodboard_item_id"], :name => "index_moodboard_comments_on_moodboard_item_id"
 
   create_table "moodboard_item_events", :force => true do |t|
     t.string   "moodboard_item_uuid"
