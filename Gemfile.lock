@@ -716,6 +716,8 @@ GEM
       websocket (~> 1.0)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
+    show_me_the_cookies (3.1.0)
+      capybara (~> 2.0)
     sidekiq (2.13.0)
       celluloid (>= 0.14.1)
       connection_pool (>= 1.0.0)
@@ -907,6 +909,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   selenium-webdriver (~> 2.48.1)
   shoulda-matchers
+  show_me_the_cookies (~> 3.1.0)
   sidekiq (= 2.13.0)
   simple_form
   sinatra

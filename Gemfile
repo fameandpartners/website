@@ -139,6 +139,7 @@ group :test do
   gem 'capybara-screenshot', '~> 1.0.11'
   gem 'poltergeist', '~> 1.7.0'
   gem 'selenium-webdriver', '~> 2.48.1'
+  gem 'show_me_the_cookies', '~> 3.1.0'
   gem 'turnip', '~> 1.3.1'
   gem 'database_cleaner', '0.9.1'
   gem 'factory_girl_rails', '4.2.1'
