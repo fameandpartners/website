@@ -1,20 +1,58 @@
 ruby:
   promocode_by_url = decode(params[:pc])
   email_capture_modal = "
-    if ($.cookie('modal_site_visit') != 'true') {
-      var modal_popup = new window.page.EmailCaptureModal({
-        promocode:  \"newgirl25\",
-        content:    \"newgirl25\",
-        heading:    \"RUNWAY STYLES AT <br> A FRACTION OF THE PRICE\",
-        message:    \"SIGN UP FOR $25 <br> OFF YOUR FIRST PURCHASE.\",
-        className:  \"classic-modal welcome-modal\",
-        timeout:    3,
-        timer:      0,
-        container:  \"#site-visit-modal.welcome\",
-        action:     \"#{campaigns_email_capture_path}\",
-        force:      true,
-      });
-      $.cookie('modal_site_visit','true')
+    if (window.location.pathname == '/dresses/wedding'){
+      console.log('displaying /dress/wedding modal');
+      if ($.cookie('display_dress_wedding_modal') != 'true') {
+        var modal_popup = new window.page.EmailCaptureModal({
+          promocode:  \"formal15\",
+          content:    \"formal15\",
+          heading:    \"<img style='position:relative; top:15px;' src='http://i.imgur.com/cAP2Qas.png' width='40px' height='40px'> <h2 style='border-bottom:0;  margin-bottom:0;'> <strong>  30% off  </strong></h2>\",
+          message:    \"your dream wedding dress! <br><h3> Sign up to redeem: </h3>\",
+          className:  \"classic-modal welcome-modal\",
+          timeout:    2,
+          timer:      0,
+          container:  \"#site-visit-modal.welcome\",
+          action:     \"#{campaigns_email_capture_path}\",
+          force:      true,
+        });
+        $.cookie('display_dress_wedding_modal','true')
+      }
+    }
+    else if (window.location.pathname == '/bridesmaid-dresses'){
+      console.log('displaying /bridesmaid modal');
+      if ($.cookie('display_bridesmaid_modal') != 'true') {
+        var modal_popup = new window.page.EmailCaptureModal({
+          promocode:  \"formal15\",
+          content:    \"formal15\",
+          heading:    \"<img style='position:relative; top:15px;' src='http://i.imgur.com/LLw5SXR.png' width='40px' height='40px'> <h2 style='border-bottom:0;  margin-bottom:0;'> <strong>  30% off  </strong></h2>\",
+          message:    \"your dream bridesmaid dress! <br><h3> Sign up to redeem: </h3>\",
+          className:  \"classic-modal welcome-modal\",
+          timeout:    2,
+          timer:      0,
+          container:  \"#site-visit-modal.welcome\",
+          action:     \"#{campaigns_email_capture_path}\",
+          force:      true,
+        });
+        $.cookie('display_bridesmaid_modal','true')
+      }
+    }
+    else {
+      if ($.cookie('modal_site_visit') != 'true') {
+        var modal_popup = new window.page.EmailCaptureModal({
+          promocode:  \"newgirl25\",
+          content:    \"newgirl25\",
+          heading:    \"RUNWAY STYLES AT <br> A FRACTION OF THE PRICE\",
+          message:    \"SIGN UP FOR $25 <br> OFF YOUR FIRST PURCHASE.\",
+          className:  \"classic-modal welcome-modal\",
+          timeout:    3,
+          timer:      0,
+          container:  \"#site-visit-modal.welcome\",
+          action:     \"#{campaigns_email_capture_path}\",
+          force:      true,
+        });
+        $.cookie('modal_site_visit','true')
+      }
     }
   "
   turn_off_site_visit_modal = "$.cookie('modal_site_visit','true')"
