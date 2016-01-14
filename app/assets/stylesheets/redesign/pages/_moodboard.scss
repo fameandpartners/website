@@ -16,10 +16,6 @@
 
   }
 
-  .panel-aside.alt{
-    border: 1px solid $c-neutral-black;
-  }
-
   .menu-wrap,
   .panel-aside {
 
@@ -190,6 +186,10 @@
     text-align: center;
     border-top: solid $c-neutral-black 1px;
     border-bottom: solid $c-neutral-black 1px;
+
+    &.alt {
+      border: 1px solid $c-neutral-black;
+    }
 
     .form-group {
       margin-bottom: 15px;
