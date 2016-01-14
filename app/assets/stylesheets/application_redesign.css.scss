@@ -184,6 +184,10 @@ z-index levels
 // Plugins
 @import '../vendor/bower_components/slick-carousel/slick/slick';
 @import 'redesign/vendor/slick-carousel';
+// Note that 'jquery-ui-1.10.4.custom' was also used in the pre March2015 site design,   
+// but I chose to duplicate the file, rather than rewrite any of the current usages.    
+@import 'libs/jquery-ui-1.10.4.custom';   
+@import 'redesign/vendor/jquery-ui';
 
 // Base
 @import 'redesign/base/type';
