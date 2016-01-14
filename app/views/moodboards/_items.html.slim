@@ -9,8 +9,16 @@
           .media-wrap.keep-ratio
             .inner-wrap
               / TODO - Temporary workaround for missing `product_color_value` on about 700 wishlist items
+              / This conditional should be replaced by something like: "item has a custom color?"
               - if item.product_color_value.present?
                 = cropped_product_color_variant_image_tag(item.product_color_value)
+              - else
+                .custom-color-info
+                  .info-selected Custom color selected:
+                  .custom-item-details
+                    div class="color-#{item.color.name}"
+                    span = item.color.presentation
+                = cropped_product_color_variant_image_tag(item.product.product_color_values.first)
         .details-wrap
           .product-name = item.product.name
           div = item.product.price
