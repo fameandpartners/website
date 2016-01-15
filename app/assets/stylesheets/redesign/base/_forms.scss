@@ -26,3 +26,7 @@ input[type="checkbox"] {
   top: 35px;
   right: 14px;
 }
+
+.has-success .form-control {
+  border-color: rgba($c-neutral-black, .55); // TODO: fix this hack, fix for UI-calendar field 
+}

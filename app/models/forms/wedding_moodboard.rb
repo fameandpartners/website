@@ -36,7 +36,6 @@ module Forms
     property :bride_last_name
     property :name
 
-    validates :event_progress,     inclusion: { in: event_progressions }
     validates :owner_relationship, inclusion: { in: owner_relationships }
     validates :bride_first_name,   presence: true
   end
