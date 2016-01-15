@@ -16,6 +16,36 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
 		.col-md-4:nth-child(3n+1) {
 			clear: left;
 		}
+		.arrow-down{
+			float: left;
+			width: 100%;
+			margin-top: -11px;
+		}
+		.dropdown-menu.hide{
+			display: none;
+		}
+		.dropdown-menu{
+			margin-top: 0;
+			display: block;
+		    width: 70%;
+		    margin-left: 15%;
+		    padding-left: 10px;
+		    position: relative;
+		    a{
+		    	width: 100%;
+		    	cursor: pointer;
+		    	float: left;
+		    	i{
+		    		padding-right: 5px;
+		    	}
+		    }
+		}
+		@include mobile{
+			.dropdown-menu{
+				width: 100%;
+				margin-left: 0;
+			}
+		}
 
 	}
 
