@@ -1,0 +1,6 @@
+- class_name = pcv.active ? 'check-square-o' : 'check-square'
+= content_tag(:i, '', class: "fa fa-#{class_name}  fa-lg")
+
+.flag-active-form
+  = form_for(pcv, url: product_color_path(pcv)) do |f|
+    = f.check_box :active

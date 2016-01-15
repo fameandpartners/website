@@ -12,4 +12,6 @@
  *= require 'jquery-ui'
  *= require_self
  *= require_tree .
+ * Loaded from the main application styles
+ *= require 'redesign/product/_product_colours'
  */

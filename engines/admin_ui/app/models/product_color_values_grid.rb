@@ -14,13 +14,36 @@ class ProductColorValuesGrid
     where(Spree::Product.arel_table[:name].matches("%#{value}%"))
   end
 
+  filter :product_active, :xboolean, default: true do |value|
+    if value
+      where(product_id: Spree::Product.active)
+    end
+  end
+
   filter :style_number do |value|
     where(Spree::Variant.arel_table[:sku].matches("%#{value}%"))
   end
 
-  column :id
+  filter :active, :xboolean
+  filter :custom, :xboolean
+
+  column :id do |pcv|
+    format(pcv.id) do
+      link_to(pcv.id, edit_product_color_path(pcv))
+    end
+  end
+
   column :product do |pcv|
-    pcv.product.name
+    format(pcv.product.name) do
+      link_to(pcv.product.name, spree.admin_product_path(pcv.product))
+    end
+  end
+
+  column :product_active do |pcv|
+    format(pcv.product.active?) do |active|
+      class_name = active ? 'check-square-o' : 'square-o'
+      content_tag(:i, '', class: "fa fa-#{class_name}  fa-lg")
+    end
   end
 
   column(:style_number) { |pcv| pcv.product.sku }
@@ -30,9 +53,15 @@ class ProductColorValuesGrid
 
   column :preview do |pcv|
     format(pcv.option_value.name) do |color_name|
-      content_tag(:div,
-                  content_tag(:div, '&nbsp;'.html_safe, class:"color-#{color_name}"),
-                  class: 'color-option')
+      render 'admin_ui/product_colors/colour_preview', color_name: color_name
+    end
+  end
+
+  column :active? do |pcv|
+    format(pcv.active?) do |active|
+      class_name = active ? 'check-square-o' : 'square-o'
+      content_tag(:i, '', class: "fa fa-#{class_name}  fa-lg")
+      # render :partial => "toggle_active_form", locals: { :pcv => pcv }
     end
   end
 

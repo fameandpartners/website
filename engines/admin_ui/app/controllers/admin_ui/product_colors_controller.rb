@@ -16,5 +16,27 @@ module AdminUi
         end
       end
     end
+
+    def edit
+      @product_color_value = ProductColorValue.find(params[:id].to_i)
+    end
+
+    def update
+      @product_color_value = ProductColorValue.find(params[:id].to_i)
+
+      message = { error: 'A problem occurred saving.' }
+
+      if new_active_state = params[:product_color_value][:active]
+
+        @product_color_value.active = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(new_active_state)
+        if @product_color_value.save
+          new_state = @product_color_value.active? ? 'active' : 'inactive'
+
+          message = { success: "Product Color is now (#{new_state})" }
+        end
+      end
+
+      redirect_to product_colors_path, flash: message
+    end
   end
 end
