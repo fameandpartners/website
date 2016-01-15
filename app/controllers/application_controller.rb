@@ -11,8 +11,9 @@ class ApplicationController < ActionController::Base
   include Concerns::AutomaticDiscount
   include Concerns::Moodboards
 
-  # Google Tag Manager
+  # Marketing related concerns
   include Marketing::Gtm::Controller::Container
+  include Marketing::Tracking::Cookie
 
   if Rails.env.preproduction?
     http_basic_authenticate_with :name => 'fameandpartners', :password => 'pr0m!unicorn'

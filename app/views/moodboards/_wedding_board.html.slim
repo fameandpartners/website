@@ -8,39 +8,35 @@
       .col-md-8.tab-content.active#mob-tab-main
         .row
           = render 'items'
+          .col-md-12
+            = render partial: 'shared/redesign/more_dresses' ,locals: {img_link: "landingpages/tile-footer-mob.jpg", modifier: 'compact'}
       aside.col-md-4.tab-content#mob-tab-aside
 
-        - if moodboard_editable?
-          p.edit-setting.text-center
-            = link_to("Edit", edit_moodboard_path(@resource))
-            span &nbsp;my settings
-
         .panel-aside
+          h3.heading WEDDING DETAILS
           - if @resource.event_date?
-            h3.heading Wedding Date
-            = @resource.event_date
-
-        - if @resource.description?
-          .panel-aside
-            h3.heading THE BRIDE’S BRIEF
-            p = @resource.description
+            p 
+              'Wedding Date: 
+              = @resource.event_date
+              br
+              = link_to("Edit", edit_moodboard_path(@resource))
+              '  details
 
         .panel-aside
-          h3.heading BRIDESMAIDS
+          h3.heading BRIDAL PARTY MEMBERS
           = render 'collaborators', moodboard: @resource
 
-        .panel-aside.panel-swatches
-          h3.heading SHOP BY SWATCHES
-          = render 'color_swatches', colors: @resource.items.active.map(&:color)
+        - if !@resource.items.active.empty?
+          .panel-aside.panel-swatches
+            h3.heading SHOP BY SWATCHES
+            = render 'color_swatches', colors: @resource.items.active.map(&:color)
 
         .panel-aside
-          h3.heading PERSONAL STYLIST
-          p
-            span Need some help with ideas or finalising your order?&nbsp;
-            = link_to 'Get in contact', contact_path(:selected_option => 'Book a Style Consultation')
-            span &nbsp;with one of our personal stylists now.
+          h3.heading CONCIERGE SERVICES
+          p For $49 we will select the dresses, contact your maids and coordinate the bridal party story. Plus, the $49 comes off the cost of your dresses!
+          = link_to 'Book now', contact_path(:selected_option => 'Book a Concierge Services')
 
-        .panel-aside.alt.text-center
+        .panel-aside
           .heading FREE HONEYMOON DRESS
           p When you purchase 5 or more dresses, we'll give you a <b>free honeymoon dress</b> to help celebrate!
           p

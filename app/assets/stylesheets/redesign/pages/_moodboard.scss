@@ -1,17 +1,31 @@
 /* [Moodboard]
 -------------------------------------------------------*/
 .moodboard-v2 {
+  $menu-item-height: 80px;
   margin-bottom: 40px;
 
-  .edit-setting {
-    margin-bottom: 20px;
-    font-size: 0.875em;
-    font-weight: 400;
+  .welcome-title {
+    margin: 20px 4% 60px 4%;
+    text-transform: none;
+    text-align: center;
+    font-size: 1.125em;
+
+    &:first-letter {
+      font-family: $font-heading;
+      font-size: 140%;
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1;
+    }
+
+    em {
+      font-style: normal;
+      font-weight: 500;
+    }
 
     a {
-      text-decoration: underline;
-      font-style: italic;
       color: inherit;
+      text-decoration: underline;
     }
 
   }
@@ -51,7 +65,7 @@
 
     }
 
-    a:not(.btn):not(.tab):not(.btn-add) {
+    a:not(.btn):not(.tab):not(.btn-add):not(.tab-control) {
       text-decoration: underline;
       font-style: italic;
       color: inherit;
@@ -66,7 +80,7 @@
   }
 
   .menu-wrap {
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 40px;
     border-bottom: solid $c-neutral-black 1px;
 
@@ -80,9 +94,48 @@
       text-align: center;
     }
 
+    .slider-wrap {
+      height: $menu-item-height + 70px;
+      padding: 0 40px;
+      overflow: hidden;
+      opacity: 0;
+    }
+
+    .slick-initialized {
+      opacity: 1;
+      @include transition(opacity 0.2s linear);
+    }
+
+    .slick-arrow {
+      width: 0;
+      height: 0;
+      margin-top: -40px;
+      border-style: solid;
+
+      &:before {
+        display: none;
+      }
+
+    }
+
+    .slick-prev {
+      border-width: 40px 25px 40px 0;
+      border-color: transparent $c-neutral-black transparent transparent;
+    }
+
+    .slick-next {
+      border-width: 40px 0 40px 25px;
+      border-color: transparent transparent transparent $c-neutral-black
+    }
+
+    .slick-disabled {
+      opacity: .6;
+    }
+
     li {
       display: inline-block;
       margin-right: 20px;
+      outline: none;
 
       &:last-child {
         margin-right: 0;
@@ -94,7 +147,7 @@
       position: relative;
       display: block;
       width: 190px;
-      height: 80px;
+      height: $menu-item-height;
       margin: 35px 0;
       line-height: normal;
       text-align: center;
@@ -157,39 +210,66 @@
       margin: 58px 0;
     }
 
-    .tab-content-controls {
-      text-align: center;
+  }
 
-      li {
-        width: 40%;
-        max-width: 140px;
-        margin: 0 10px;
+  .tab-content-controls {
+    margin: 3px 0 0 0;
+    border-top: solid $c-neutral-black 1px;
+    text-align: center;
+
+    li {
+      margin: 0;
+    }
+
+    .tab-control {
+      display: block;
+      padding: 10px;
+      color: $c-neutral-black;
+
+      &:hover {
+        font-weight: 500;
       }
 
-      .tab {
-        width: 100%;
-        height: auto;
-        padding: 15px;
+    }
+
+    .active {
+      font-weight: 500;
+    }
+
+  }
+
+  .panel-split {
+    min-height: 229px;
+    margin-bottom: 50px;
+
+    .content-wrap {
+      padding: 0 5%;
+
+      > em {
+        display: block;
       }
 
-      .active .tab:after {
-        display: none;
-      }
+    }
 
+    .heading {
+      margin-bottom: 20px;
+      font-size: 2.25em;
+    }
+
+    .btn {
+      margin-bottom: 15px;
+      padding: 8px 30px;
+      line-height: 1;
+      font-size: 0.813em !important; // TODO: we need to fix this ASAP
     }
 
   }
 
   .panel-aside {
     margin-bottom: 30px;
-    padding: 20px 15px;
+    padding: 20px 5%;
     text-align: center;
-    border-top: solid $c-neutral-black 1px;
-    border-bottom: solid $c-neutral-black 1px;
-
-    &.alt {
-      border: 1px solid $c-neutral-black;
-    }
+    border: solid $c-neutral-black 1px;
 
     .form-group {
       margin-bottom: 15px;
@@ -233,6 +313,33 @@
 
     & {
 
+      .welcome-title {
+        line-height: 1;
+
+        > span {
+          display: block;
+          margin-bottom: 15px;
+        }
+        
+      }
+
+      .menu-wrap .slider-wrap {
+        padding: 0;
+      }
+
+      .panel-split {
+        min-height: initial;
+
+        .content-wrap-outer {
+          padding: 30px 0;
+        }
+
+        .media-wrap {
+          display: none;
+        }
+
+      }
+
       .tab-content {
         display: none;
         visibility: hidden;
@@ -257,10 +364,6 @@
           height: 60px;
         }
 
-      }
-
-      .edit-setting {
-        margin-bottom: 40px;
       }
 
     }
