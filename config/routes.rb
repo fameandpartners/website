@@ -361,6 +361,13 @@ FameAndPartners::Application.routes.draw do
     get '/bridesmaid-party(/*anything)' => redirect('/bridesmaid-dresses')
   end
 
+
+  resource :wedding_moodboard, controller: 'moodboards/weddings', only: [:edit, :update] do
+    collection do
+      get 'guests'
+    end
+  end
+
   resources :moodboards, except: [:destroy] do
     resources :items, controller: 'moodboard_items', only: [:create, :show, :destroy]
     resources :collaborators, controller: 'moodboard_collaborators', only: [:create, :index]

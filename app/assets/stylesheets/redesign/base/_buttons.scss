@@ -62,6 +62,18 @@
     opacity: .6;
   }
 
+  &.sml {
+    width: 14px;
+    height: 14px;
+
+    &:before,
+    &:after {
+      left: 6px;
+      height: 15px;
+    }
+
+  }
+
 }
 
 .btn-add {

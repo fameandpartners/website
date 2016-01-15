@@ -73,6 +73,13 @@ blockquote {
     background: $c-neutral-white;
   }
 
+  .sub-heading {
+    text-transform: none;
+    font-size: 0.75em;
+    font-weight: 500;
+    color: $c-neutral-8;
+  }
+
   &:before {
     content: '';
     display: block;

@@ -3,7 +3,7 @@ class Moodboard < ActiveRecord::Base
   has_many :items, class_name: 'MoodboardItem', inverse_of: :moodboard
   has_many :collaborators, class_name: 'MoodboardCollaborator', inverse_of: :moodboard
 
-  attr_accessible :user_id, :description, :event_date, :name, :purpose
+  attr_accessible :description, :event_date, :name, :purpose, :event_progress, :owner_relationship, :guest_count, :bride_first_name, :bride_last_name
 
   validates :user, presence: true
   validates :name, presence: true
@@ -56,5 +56,4 @@ class Moodboard < ActiveRecord::Base
   def allow_comments?
     purpose == 'wedding'
   end
-
 end

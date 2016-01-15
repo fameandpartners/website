@@ -9,6 +9,7 @@
 
 //= require libs/underscore-min
 //= require bootstrap
+//= require libs/validator.min
 
 //= require libs/jquery.dotdotdot.min
 //= require libs/jquery.mlens.min
