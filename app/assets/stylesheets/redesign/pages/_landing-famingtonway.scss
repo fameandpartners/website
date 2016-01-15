@@ -3,9 +3,25 @@
 .landing-famingtonway {
 
   .create-wedding-board-wrap {
+    position: relative;
     margin-top: 20px;
     min-height: 420px;
     @extend %cfix;
+
+    .loader-wrap {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -12px;
+      margin-top: -12px;
+
+      &.active {
+        display: block;
+      }
+
+    }
+
   }
 
   .moodboard-setup {
