@@ -362,8 +362,11 @@ FameAndPartners::Application.routes.draw do
   end
 
 
-  get 'wedding_moodboard/guests' => 'moodboards/weddings#guests'
-  resource :wedding_moodboard, controller: 'moodboards/weddings', only: [:edit, :update]
+  resource :wedding_moodboard, controller: 'moodboards/weddings', only: [:edit, :update] do
+    collection do
+      get 'guests'
+    end
+  end
 
   resources :moodboards, except: [:destroy] do
     resources :items, controller: 'moodboard_items', only: [:create, :show, :destroy]
