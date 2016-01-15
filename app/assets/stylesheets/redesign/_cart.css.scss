@@ -17,6 +17,18 @@
 }
 
 #cart {
+  .cart{
+    .icon-shopping_cart{
+      font-size: 1.5em;
+      position: absolute;
+      margin-left: -35px;
+    }
+    .cart-amount{
+      top: 5px;
+      left: 25px;
+      color: $c-neutral-black;
+    }
+  }
 
   > div {
     @extend %cfix;

@@ -3,13 +3,13 @@
     <img alt="Submit" class="line-arrow arrow-bag" src="/assets/line-arrow.svg">
   </div>
   <div class="pull-right close-cart">
-    <span class="cart"><img alt="Cart" class="cart-icon" src="/assets/Cart.svg">
-      <span class="cart-amount"><%= @cart.item_count %></span>
+    <span class="cart"><span class="icon icon-shopping_cart">
+      <span class="cart-amount">(<%= @cart.item_count %>)</span>
     </span>
   </div>
   <div>
     <h2 class="cart-title">
-      Shopping Bag
+      Your Cart
     </h2>
   </div>
 </div>
