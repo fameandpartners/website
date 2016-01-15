@@ -106,7 +106,7 @@ class ItemReturnEvent < ActiveRecord::Base
   attr_accessible :user, :factory_fault
 
   event_type :factory_fault do
-    attributes :user, :factory_fault
+    attributes :user, :factory_fault, :factory_fault_reason
 
     validates :user, presence: true
     validates :factory_fault, presence: true
