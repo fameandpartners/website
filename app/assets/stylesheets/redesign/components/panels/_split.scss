@@ -1,0 +1,78 @@
+/* [Panel Split]
+-------------------------------------------------------*/
+.panel-split {
+  position: relative;
+  background: $c-neutral-3;
+  @extend %cfix;
+
+  .content-wrap {
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .heading {
+    margin: 0 0 40px 0;
+    text-transform: none;
+    font-family: $font-heading;
+    font-size: 3.125em;
+
+    em span {
+      display: block;
+      font-size: 0.64em;
+    }
+
+  }
+
+  @include desktop {
+    min-height: 400px;
+
+    .content-wrap-outer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+    }
+
+    .content-wrap-inner {
+      display: table;
+      width: 100%;
+      height: 100%;
+    }
+
+    .content-wrap {
+      display: table-cell;
+      vertical-align: middle;
+      padding: 0 40px;
+    }
+
+    .media-wrap {
+      width: 50%;
+      float: left;
+      left: 50%;
+    }
+
+    &.image-left {
+
+      .media-wrap {
+        left: 0;
+      }
+
+      .content-wrap-outer {
+        left: 50%;
+      }
+
+    }
+
+    .heading {
+      font-size: 3.75em;
+
+      &.alt-size {
+        font-size: 3.125em;
+      }
+
+    }
+
+  }
+
+}
