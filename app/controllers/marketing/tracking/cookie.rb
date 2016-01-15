@@ -8,7 +8,7 @@ module Marketing
       end
 
       private def associate_uuid_to_user
-        cookies[:user_uuid] ||= SecureRandom.uuid
+        cookies[:user_uuid] ||= { value: SecureRandom.uuid, expires: 1.year.from_now }
       end
     end
   end
