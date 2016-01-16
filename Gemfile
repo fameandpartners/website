@@ -45,6 +45,8 @@ gem 'simple_form'
 
 # assets
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'jquery-fileupload-rails', '0.4.1'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'compass-rails', '~> 2.0.5'
 gem 'react-rails', '~> 1.2'
@@ -109,8 +111,6 @@ group :assets do
   gem 'coffee-script-source', '~> 1.8.0'
   gem 'uglifier', '1.3.0'
   gem 'execjs', '~> 2'
-  gem 'jquery-ui-rails'
-  gem 'jquery-fileupload-rails', '0.4.1'
   gem 'eco'
   gem 'bootstrap-sass', '3.3.4.1'
 end
