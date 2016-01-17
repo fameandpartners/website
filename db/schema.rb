@@ -809,25 +809,6 @@ ActiveRecord::Schema.define(:version => 20160331152023) do
   add_index "revolution_pages", ["publish_from", "publish_to"], :name => "index_revolution_pages_on_publish_from_and_publish_to"
   add_index "revolution_pages", ["rgt"], :name => "index_revolution_pages_on_rgt"
 
-<<<<<<< 003b458da0a3beb428432c6534c3829e3bb17c23
-=======
-  create_table "revolution_translation_banners", :force => true do |t|
-    t.integer  "translation_id"
-    t.string   "alt_text"
-    t.string   "size"
-    t.integer  "banner_order"
-    t.string   "banner_file_name"
-    t.string   "banner_content_type"
-    t.integer  "banner_file_size"
-    t.datetime "banner_updated_at"
-    t.integer  "banner_width"
-    t.integer  "banner_height"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
->>>>>>> Revolution banners:  Add sizing.
-
-  add_index "revolution_translation_banners", ["translation_id"], :name => "index_revolution_translation_banners_on_translation_id"
 
   create_table "revolution_translations", :force => true do |t|
     t.integer  "page_id"
