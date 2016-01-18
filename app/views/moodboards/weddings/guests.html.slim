@@ -4,7 +4,7 @@
       img src='#{image_path("moodboard/signup1.jpg")}'
   .col-md-8
     h2.title-line-on-sides
-      .inner-wrap 
+      .inner-wrap
         'Invite the Bridal Party
         .sub-heading To shop with you
     = form_for @moodboard.collaborators.build, url: moodboard_collaborators_path(@moodboard), remote: true do |f|
@@ -17,16 +17,17 @@
       = f.button 'Send', :class => "btn btn-black btn-block"
       .message-wrap#moodboard_members_notices
     // TODO: @moodboard.collaborators alwais contain one extra empty item
-    - if (@moodboard.collaborators.length > 0)
+    - if (@moodboard.collaborators.any?{ |c| c.id.present? })
       p Sent to:
     ul.row.list-unstyled.invited-members-wrap#moodboard_members
       - @moodboard.collaborators.each do |member|
-        li.col-md-4
-          .invited-member
-            .member-name.txt-truncate-1 => member.name.to_s
-            .txt-truncate-1 => "#{member.email}"
-            /! TODO: implement remove button
-              a.btn-close.sml href='javascript:;' remove member
+        - if member.id.present?
+          li.col-md-4
+            .invited-member
+              .member-name.txt-truncate-1 => member.name.to_s
+              .txt-truncate-1 => "#{member.email}"
+              /! TODO: implement remove button
+                a.btn-close.sml href='javascript:;' remove member
     .main-cta-wrap
       = link_to('Do this later', @moodboard, class:'btn btn-lowlight')
 
@@ -56,7 +57,7 @@ javascript:
       $('#moodboard_members').empty().append(_.map(results.collaborators, function (member) {
         return "<li class='col-md-4'><div class='invited-member'>"
           + "<div class='member-name txt-truncate-1'>" + member.name + "</div>"
-          + "<div class='txt-truncate-1'>" + member.email 
+          + "<div class='txt-truncate-1'>" + member.email
           + "</div></div></li>";
       }));
     }
