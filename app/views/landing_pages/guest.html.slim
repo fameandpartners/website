@@ -32,7 +32,7 @@
 
       .col-md-12
         .panel-split.image-left
-          .picture.media-wrap
+          = link_to 'https://www.instagram.com/fameweddings/', class:'media-wrap'
             img src='#{image_path("landingpages/guest/tile-fameweddings.jpg")}'
 
           .content-wrap-outer
@@ -40,7 +40,7 @@
               .content-wrap
                 h2.heading.alt-size LOVE isn't something you find, it's something that finds you<em><span>(Same goes for the dress!)</span></em>
                 // TODO: update link
-                a href='javascript:;' class='btn btn-lowlight' Shop dresses
+                = link_to 'Shop dresses', dresses_path(pids: page.variables['carousel_pids'].to_s.split(',')), class:'btn btn-lowlight'
 
       .col-md-12
         h2.heading-secondary With love x
