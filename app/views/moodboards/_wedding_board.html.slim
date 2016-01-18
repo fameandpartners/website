@@ -18,9 +18,10 @@
             p 
               'Wedding Date: 
               = @resource.event_date
-              br
-              = link_to("Edit", edit_moodboard_path(@resource))
-              '  details
+          p
+            /= link_to("Edit", edit_moodboard_path(@resource))
+            = link_to 'Edit', bridesmaid_landing_page_path + '#section-main'
+            '  details
 
         .panel-aside
           h3.heading BRIDAL PARTY MEMBERS
