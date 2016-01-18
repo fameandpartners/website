@@ -16,18 +16,16 @@
         span.help-block.with-errors
       = f.button 'Send', :class => "btn btn-black btn-block"
       .message-wrap#moodboard_members_notices
-    // TODO: @moodboard.collaborators alwais contain one extra empty item
-    - if (@moodboard.collaborators.pluck(:id).any?(&:present?))
+    - if (@moodboard.collaborators.any?(&:persisted?))
       p Sent to:
     ul.row.list-unstyled.invited-members-wrap#moodboard_members
-      - @moodboard.collaborators.each do |member|
-        - if member.id.present?
-          li.col-md-4
-            .invited-member
-              .member-name.txt-truncate-1 => member.name.to_s
-              .txt-truncate-1 => "#{member.email}"
-              /! TODO: implement remove button
-                a.btn-close.sml href='javascript:;' remove member
+      - @moodboard.collaborators.select(&:persisted?).each do |member|
+        li.col-md-4
+          .invited-member
+            .member-name.txt-truncate-1 => member.name.to_s
+            .txt-truncate-1 => "#{member.email}"
+            /! TODO: implement remove button
+              a.btn-close.sml href='javascript:;' remove member
     .main-cta-wrap
       = link_to('Do this later', @moodboard, class:'btn btn-lowlight')
 
