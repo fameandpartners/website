@@ -783,6 +783,23 @@ ActiveRecord::Schema.define(:version => 20160331152023) do
     t.datetime "updated_at",              :null => false
   end
 
+  create_table "revolution_banners", :force => true do |t|
+    t.integer  "translation_id"
+    t.string   "alt_text"
+    t.string   "size"
+    t.integer  "banner_order"
+    t.string   "banner_file_name"
+    t.string   "banner_content_type"
+    t.integer  "banner_file_size"
+    t.datetime "banner_updated_at"
+    t.integer  "banner_width"
+    t.integer  "banner_height"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "revolution_banners", ["translation_id"], :name => "index_revolution_banners_on_translation_id"
+
   create_table "revolution_pages", :force => true do |t|
     t.integer  "template_id"
     t.text     "path"
@@ -808,7 +825,6 @@ ActiveRecord::Schema.define(:version => 20160331152023) do
   add_index "revolution_pages", ["path"], :name => "index_revolution_pages_on_path", :unique => true
   add_index "revolution_pages", ["publish_from", "publish_to"], :name => "index_revolution_pages_on_publish_from_and_publish_to"
   add_index "revolution_pages", ["rgt"], :name => "index_revolution_pages_on_rgt"
-
 
   create_table "revolution_translations", :force => true do |t|
     t.integer  "page_id"
