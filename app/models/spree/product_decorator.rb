@@ -341,7 +341,7 @@ Spree::Product.class_eval do
   end
 
   def presenter_as_details_resource(site_version = nil)
-    @product = Products::DetailsResource.new(
+    @product ||= Products::DetailsResource.new(
         site_version: site_version,
         product: self
     ).read
