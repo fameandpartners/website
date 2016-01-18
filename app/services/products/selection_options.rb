@@ -83,21 +83,21 @@ class SelectionOptions
 
     def default_product_colors
       @default_product_colors ||= product.product_color_values.active.recommended
-        .map(&:option_value).sort_by{|color| color.presentation }
+        .map(&:option_value).sort_by(&:presentation)
     end
 
     def extra_product_colors
       return [] unless extra_colors_available?
 
-      # Until we configure "Custom colours" as ProductColorValues, fall back to the old behaviour.
-      return legacy_custom_colours_listing unless Features.active?(:explicit_dress_colors)
 
-      @extra_product_colors ||= product.product_color_values.active.custom
-        .map(&:option_value).sort_by{|color| color.presentation }
+      @extra_product_colors ||= (defined_custom_colors.presence || legacy_fallback_custom_colors)
     end
 
-    # TODO - Remove once Feature :explicit_dress_colors is deployed.
-    private def legacy_custom_colours_listing
+    private def defined_custom_colors
+      product.product_color_values.active.custom.map(&:option_value).sort_by(&:presentation)
+    end
+
+    private def legacy_fallback_custom_colors
       basic_product_color_ids = product_variants.map{|variant| variant.color_id}.uniq
 
       Repositories::ProductColors.read_all.select do |color|

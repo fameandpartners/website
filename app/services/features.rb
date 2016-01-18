@@ -5,7 +5,6 @@ module Features
                         delivery_date_messaging
                         enhanced_moodboards
                         express_making
-                        explicit_dress_colors
                         fameweddings
                         getitquick_unavailable
                         gift
