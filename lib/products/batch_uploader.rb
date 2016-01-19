@@ -78,69 +78,7 @@ module Products
 
       # rows = [rows.first] if Rails.env.development?
       rows.to_a.each do |row_num|
-        raw = {}
-
-        # Basic
-        raw[:sku]                 = book.cell(row_num, columns[:sku])
-        raw[:name]                = book.cell(row_num, columns[:name])
-        raw[:description]         = book.cell(row_num, columns[:description])
-        raw[:price_in_aud]        = book.cell(row_num, columns[:price_in_aud])
-        raw[:price_in_usd]        = book.cell(row_num, columns[:price_in_usd])
-        raw[:taxons]              = Array.wrap(columns[:taxons]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
-        raw[:colors]              = Array.wrap(columns[:colors]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
-        puts "Read XLS: #{raw[:sku]}"
-
-        # Style
-        raw[:glam]                = book.cell(row_num, columns[:glam])
-        raw[:girly]               = book.cell(row_num, columns[:girly])
-        raw[:classic]             = book.cell(row_num, columns[:classic])
-        raw[:edgy]                = book.cell(row_num, columns[:edgy])
-        raw[:bohemian]            = book.cell(row_num, columns[:bohemian])
-        raw[:sexiness]            = book.cell(row_num, columns[:sexiness])
-        raw[:fashionability]      = book.cell(row_num, columns[:fashionability])
-        raw[:apple]               = book.cell(row_num, columns[:apple])
-        raw[:pear]                = book.cell(row_num, columns[:pear])
-        raw[:strawberry]          = book.cell(row_num, columns[:strawberry])
-        raw[:hour_glass]          = book.cell(row_num, columns[:hour_glass])
-        raw[:column]              = book.cell(row_num, columns[:column])
-        raw[:athletic]            = book.cell(row_num, columns[:athletic])
-        raw[:petite]              = book.cell(row_num, columns[:petite])
-        # Properties
-        raw[:style_notes]         = book.cell(row_num, columns[:style_notes])
-        raw[:care_instructions]   = book.cell(row_num, columns[:care_instructions])
-        raw[:fit]                 = book.cell(row_num, columns[:fit])
-        raw[:size]                = book.cell(row_num, columns[:size])
-
-        raw[:fabric]              = book.cell(row_num, columns[:fabric])
-        raw[:product_type]        = book.cell(row_num, columns[:product_type])
-        raw[:product_category]    = book.cell(row_num, columns[:product_category])
-        raw[:factory_id]          = book.cell(row_num, columns[:factory_id])
-        raw[:factory_name]        = book.cell(row_num, columns[:factory_name])
-        raw[:product_coding]      = book.cell(row_num, columns[:product_coding])
-        raw[:shipping]            = book.cell(row_num, columns[:shipping])
-        raw[:stylist_quote_short] = book.cell(row_num, columns[:stylist_quote_short])
-        raw[:stylist_quote_long]  = book.cell(row_num, columns[:stylist_quote_long])
-        raw[:product_details]     = book.cell(row_num, columns[:product_details])
-        raw[:revenue]             = book.cell(row_num, columns[:revenue])
-        raw[:cogs]                = book.cell(row_num, columns[:cogs])
-        raw[:color_customization] = book.cell(row_num, columns[:color_customization])
-        raw[:available_colors]    = book.cell(row_num, columns[:available_colors])
-        raw[:standard_days_for_making] = book.cell(row_num, columns[:standard_days_for_making])
-        raw[:customised_days_for_making] = book.cell(row_num, columns[:customised_days_for_making])
-        raw[:short_description]   = book.cell(row_num, columns[:short_description])
-
-        # Additional
-        raw[:song_link]           = book.cell(row_num, columns[:song_link])
-        raw[:song_name]           = book.cell(row_num, columns[:song_name])
-
-        raw[:customizations]      = []
-        columns[:customizations].each_with_index do |customization, index|
-          raw[:customizations] << {
-            name: book.cell(row_num, customization[:name]).to_s.gsub("_x000D_", '').strip,
-            price: book.cell(row_num, customization[:price]).to_s.gsub(/[^\d\.]/, '').to_f,
-            position: index + 1
-          }
-        end
+        raw = extract_raw_row_data(book, columns, row_num)
 
         processed = {}
 
@@ -269,6 +207,72 @@ module Products
       end
 
       @parsed_data
+    end
+
+    def extract_raw_row_data(book, columns, row_num)
+      raw                = {}
+
+      # Basic
+      raw[:sku]                        = book.cell(row_num, columns[:sku])
+      raw[:name]                       = book.cell(row_num, columns[:name])
+      raw[:description]                = book.cell(row_num, columns[:description])
+      raw[:price_in_aud]               = book.cell(row_num, columns[:price_in_aud])
+      raw[:price_in_usd]               = book.cell(row_num, columns[:price_in_usd])
+      raw[:taxons]                     = Array.wrap(columns[:taxons]).map { |i| book.cell(row_num, i) }.reject(&:blank?)
+      raw[:colors]                     = Array.wrap(columns[:colors]).map { |i| book.cell(row_num, i) }.reject(&:blank?)
+      puts "Read XLS: #{raw[:sku]}"
+
+      # Style
+      raw[:glam]                       = book.cell(row_num, columns[:glam])
+      raw[:girly]                      = book.cell(row_num, columns[:girly])
+      raw[:classic]                    = book.cell(row_num, columns[:classic])
+      raw[:edgy]                       = book.cell(row_num, columns[:edgy])
+      raw[:bohemian]                   = book.cell(row_num, columns[:bohemian])
+      raw[:sexiness]                   = book.cell(row_num, columns[:sexiness])
+      raw[:fashionability]             = book.cell(row_num, columns[:fashionability])
+      raw[:apple]                      = book.cell(row_num, columns[:apple])
+      raw[:pear]                       = book.cell(row_num, columns[:pear])
+      raw[:strawberry]                 = book.cell(row_num, columns[:strawberry])
+      raw[:hour_glass]                 = book.cell(row_num, columns[:hour_glass])
+      raw[:column]                     = book.cell(row_num, columns[:column])
+      raw[:athletic]                   = book.cell(row_num, columns[:athletic])
+      raw[:petite]                     = book.cell(row_num, columns[:petite])
+      # Properties
+      raw[:style_notes]                = book.cell(row_num, columns[:style_notes])
+      raw[:care_instructions]          = book.cell(row_num, columns[:care_instructions])
+      raw[:fit]                        = book.cell(row_num, columns[:fit])
+      raw[:size]                       = book.cell(row_num, columns[:size])
+      raw[:fabric]                     = book.cell(row_num, columns[:fabric])
+      raw[:product_type]               = book.cell(row_num, columns[:product_type])
+      raw[:product_category]           = book.cell(row_num, columns[:product_category])
+      raw[:factory_id]                 = book.cell(row_num, columns[:factory_id])
+      raw[:factory_name]               = book.cell(row_num, columns[:factory_name])
+      raw[:product_coding]             = book.cell(row_num, columns[:product_coding])
+      raw[:shipping]                   = book.cell(row_num, columns[:shipping])
+      raw[:stylist_quote_short]        = book.cell(row_num, columns[:stylist_quote_short])
+      raw[:stylist_quote_long]         = book.cell(row_num, columns[:stylist_quote_long])
+      raw[:product_details]            = book.cell(row_num, columns[:product_details])
+      raw[:revenue]                    = book.cell(row_num, columns[:revenue])
+      raw[:cogs]                       = book.cell(row_num, columns[:cogs])
+      raw[:color_customization]        = book.cell(row_num, columns[:color_customization])
+      raw[:available_colors]           = book.cell(row_num, columns[:available_colors])
+      raw[:standard_days_for_making]   = book.cell(row_num, columns[:standard_days_for_making])
+      raw[:customised_days_for_making] = book.cell(row_num, columns[:customised_days_for_making])
+      raw[:short_description]          = book.cell(row_num, columns[:short_description])
+
+      # Additional
+      raw[:song_link]                  = book.cell(row_num, columns[:song_link])
+      raw[:song_name]                  = book.cell(row_num, columns[:song_name])
+
+      raw[:customizations] = []
+      columns[:customizations].each_with_index do |customization, index|
+        raw[:customizations] << {
+          name:     book.cell(row_num, customization[:name]).to_s.gsub("_x000D_", '').strip,
+          price:    book.cell(row_num, customization[:price]).to_s.gsub(/[^\d\.]/, '').to_f,
+          position: index + 1
+        }
+      end
+      raw
     end
 
     def get_columns_codes(book)
