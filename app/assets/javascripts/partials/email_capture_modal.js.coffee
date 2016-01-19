@@ -85,14 +85,17 @@ window.page.EmailCaptureModal = class EmailCaptureModal
         if @opts.className != 'new-modal' && @opts.className != 'new-modal welcome-modal'
           window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 999999)
 
-      @fbPushTracking()
-      window.track.event('LandingPageModal', 'Submitted', @opts.promocode)
+      @signupMarketingTracking()
+
       if @opts.className == 'new-modal' || @opts.className == 'new-modal welcome-modal' || @opts.className == 'classic-modal' || @opts.className == 'classic-modal welcome-modal'
         window.location.replace(window.location.href + "?pop_thanks=true")
         return
       window.location.reload()
 
-  fbPushTracking: =>
+  signupMarketingTracking: =>
+    window.track.event('LandingPageModal', 'Submitted', @opts.promocode)
+    window.track.dataLayer.push({'event': 'modalSignup'})
+
     if @opts.fb
       window._fbq = window._fbq || []
       window._fbq.push(['track', @opts.fb, {'value':'0.00','currency':'USD'}]);
