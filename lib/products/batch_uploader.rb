@@ -78,7 +78,7 @@ module Products
 
       book.default_sheet = book.sheets.first
 
-      columns = get_columns_codes(book)
+      columns = get_column_indices(book)
 
       rows = get_rows_indexes(book, columns)
 
@@ -163,7 +163,6 @@ module Products
       raw[:price_in_usd]               = book.cell(row_num, columns[:price_in_usd])
       raw[:taxons]                     = Array.wrap(columns[:taxons]).map { |i| book.cell(row_num, i) }.reject(&:blank?)
       raw[:colors]                     = Array.wrap(columns[:colors]).map { |i| book.cell(row_num, i) }.reject(&:blank?)
-
 
       # Style
       raw[:glam]                       = book.cell(row_num, columns[:glam])
@@ -289,9 +288,7 @@ module Products
       processed
     end
 
-
-
-    def get_columns_codes(book)
+    def get_column_indices(book)
       return @codes if @codes.present?
 
       book.default_sheet = book.sheets.first
