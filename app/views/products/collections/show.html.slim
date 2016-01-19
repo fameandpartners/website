@@ -43,3 +43,8 @@ coffee:
     };
     window.app.user_moodboards.addItem(item)
     $("i", $(target)).removeClass("fa-plus").addClass("fa-check")
+
+  $(document).ready ->
+    $(".products-collection").on 'click' , (e) ->
+      if !$(e.target).data("moodboard-id")? and !$(e.target).hasClass("moodboard")
+        $(".dropdown-menu",$(e.target).closest(".category--item")).addClass("hide")
