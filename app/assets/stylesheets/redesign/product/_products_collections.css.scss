@@ -152,6 +152,9 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
 	.moodboard {
 		display: block;
 		cursor: pointer;
+		sup{
+			top: 1px;
+		}
 	}
 
 	.message-box {
