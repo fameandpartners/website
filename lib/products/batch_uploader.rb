@@ -80,73 +80,7 @@ module Products
       rows.to_a.each do |row_num|
         raw = extract_raw_row_data(book, columns, row_num)
 
-        processed = {}
-
-        if raw[:sku].present?
-          if raw[:sku].is_a?(String) || raw[:sku].is_a?(Integer)
-            processed[:sku] = raw[:sku].to_s
-          elsif raw[:sku].is_a?(Float)
-            processed[:sku] = raw[:sku].to_i.to_s
-          end
-        end
-
-        if raw[:name].present?
-          if raw[:name].is_a?(String)
-            processed[:name] = raw[:name].titleize
-          end
-        end
-
-        if raw[:description].present?
-          processed[:description] = ActionController::Base.helpers.simple_format(raw[:description])
-        end
-
-        if raw[:product_details].present?
-          processed[:product_details] = ActionController::Base.helpers.simple_format(raw[:product_details])
-        end
-
-        if raw[:short_description].present?
-          processed[:short_description] = ActionController::Base.helpers.simple_format(raw[:short_description])
-        end
-
-        range = (Spree::Taxonomy.where(name: 'Range').first || Spree::Taxonomy.first).root
-
-        processed[:taxon_ids] = []
-        raw[:taxons].select(&:present?).map(&:humanize).map(&:titleize).each do |taxon_name|
-          taxon = Spree::Taxon.where("LOWER(REPLACE(name, '-', ' ')) = ?", taxon_name.downcase).first
-
-          abort("Taxon '#{taxon_name}' does not exist on dress '#{raw[:name]}' (#{raw[:sku]})!  Upload aborted!") if taxon.blank?
-
-          processed[:taxon_ids] << taxon.id
-        end
-
-        processed[:taxon_ids] << new_this_week_taxon_id if @mark_new_this_week && new_this_week_taxon_id.present?
-
-        color_option = Spree::OptionType.color
-
-
-        processed[:colors] = []
-        raw[:colors].each do |presentation|
-          presentation = presentation.strip
-
-          color = color_option.option_values.where('LOWER(presentation) = ?', presentation.downcase).first
-
-          if color.blank?
-            color = color_option.option_values.create do |object|
-              object.name = presentation.downcase.gsub(' ', '-')
-              object.presentation = presentation
-            end
-          end
-
-          processed[:colors] << color.name
-        end
-
-        processed[:customizations] = []
-        raw[:customizations].each do |customization|
-          if customization[:name].present?
-            processed[:customizations] << customization
-          end
-        end
-
+        processed = process_raw_row_data(raw)
 
         item = {
           # Basic
@@ -209,7 +143,7 @@ module Products
       @parsed_data
     end
 
-    def extract_raw_row_data(book, columns, row_num)
+    private def extract_raw_row_data(book, columns, row_num)
       raw                = {}
 
       # Basic
@@ -274,6 +208,78 @@ module Products
       end
       raw
     end
+
+    private def process_raw_row_data(raw)
+      processed = {}
+
+      if raw[:sku].present?
+        if raw[:sku].is_a?(String) || raw[:sku].is_a?(Integer)
+          processed[:sku] = raw[:sku].to_s
+        elsif raw[:sku].is_a?(Float)
+          processed[:sku] = raw[:sku].to_i.to_s
+        end
+      end
+
+      if raw[:name].present?
+        if raw[:name].is_a?(String)
+          processed[:name] = raw[:name].titleize
+        end
+      end
+
+      if raw[:description].present?
+        processed[:description] = ActionController::Base.helpers.simple_format(raw[:description])
+      end
+
+      if raw[:product_details].present?
+        processed[:product_details] = ActionController::Base.helpers.simple_format(raw[:product_details])
+      end
+
+      if raw[:short_description].present?
+        processed[:short_description] = ActionController::Base.helpers.simple_format(raw[:short_description])
+      end
+
+      range = (Spree::Taxonomy.where(name: 'Range').first || Spree::Taxonomy.first).root
+
+      processed[:taxon_ids] = []
+      raw[:taxons].select(&:present?).map(&:humanize).map(&:titleize).each do |taxon_name|
+        taxon = Spree::Taxon.where("LOWER(REPLACE(name, '-', ' ')) = ?", taxon_name.downcase).first
+
+        abort("Taxon '#{taxon_name}' does not exist on dress '#{raw[:name]}' (#{raw[:sku]})!  Upload aborted!") if taxon.blank?
+
+        processed[:taxon_ids] << taxon.id
+      end
+
+      processed[:taxon_ids] << new_this_week_taxon_id if @mark_new_this_week && new_this_week_taxon_id.present?
+
+      color_option = Spree::OptionType.color
+
+
+      processed[:colors] = []
+      raw[:colors].each do |presentation|
+        presentation = presentation.strip
+
+        color = color_option.option_values.where('LOWER(presentation) = ?', presentation.downcase).first
+
+        if color.blank?
+          color = color_option.option_values.create do |object|
+            object.name         = presentation.downcase.gsub(' ', '-')
+            object.presentation = presentation
+          end
+        end
+
+        processed[:colors] << color.name
+      end
+
+      processed[:customizations] = []
+      raw[:customizations].each do |customization|
+        if customization[:name].present?
+          processed[:customizations] << customization
+        end
+      end
+      processed
+    end
+
+
 
     def get_columns_codes(book)
       return @codes if @codes.present?
