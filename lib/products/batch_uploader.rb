@@ -95,63 +95,6 @@ module Products
       info "Parse Complete"
     end
 
-    def build_item_hash(processed, raw)
-      {
-        # Basic
-        sku:            processed[:sku] || raw[:sku],
-        name:           processed[:name] || raw[:name],
-        price_in_aud:   raw[:price_in_aud],
-        price_in_usd:   raw[:price_in_usd],
-        description:    processed[:description] || raw[:description],
-        colors:         processed[:colors],
-        taxon_ids:      processed[:taxon_ids],
-        style_profile:  {
-          glam:           raw[:glam],
-          girly:          raw[:girly],
-          classic:        raw[:classic],
-          edgy:           raw[:edgy],
-          bohemian:       raw[:bohemian],
-          sexiness:       raw[:sexiness],
-          fashionability: raw[:fashionability],
-          apple:          raw[:apple],
-          pear:           raw[:pear],
-          strawberry:     raw[:strawberry],
-          hour_glass:     raw[:hour_glass],
-          column:         raw[:column],
-          athletic:       raw[:athletic],
-          petite:         raw[:petite]
-        },
-        properties:     {
-          style_notes:                raw[:style_notes],
-          care_instructions:          raw[:care_instructions],
-          size:                       raw[:size],
-          fit:                        raw[:fit],
-          fabric:                     raw[:fabric],
-          product_type:               raw[:product_type],
-          product_category:           raw[:product_category],
-          factory_id:                 raw[:factory_id],
-          factory_name:               raw[:factory_name],
-          product_coding:             raw[:product_coding],
-          shipping:                   raw[:shipping],
-          stylist_quote_short:        raw[:stylist_quote_short],
-          stylist_quote_long:         raw[:stylist_quote_long],
-          product_details:            processed[:product_details],
-          revenue:                    raw[:revenue],
-          cogs:                       raw[:cogs],
-          video_id:                   processed[:video_id],
-          color_customization:        raw[:color_customization],
-          short_description:          raw[:short_description],
-          standard_days_for_making:   raw[:standard_days_for_making] || 5,
-          customised_days_for_making: raw[:customised_days_for_making] || 10
-        },
-        song:           {
-          link: raw[:song_link],
-          name: raw[:song_name],
-        },
-        customizations: processed[:customizations],
-      }
-    end
-
     private def extract_raw_row_data(book, columns, row_num)
       raw                = {}
 
@@ -286,6 +229,63 @@ module Products
         end
       end
       processed
+    end
+
+    private def build_item_hash(processed, raw)
+      {
+        # Basic
+        sku:            processed[:sku] || raw[:sku],
+        name:           processed[:name] || raw[:name],
+        price_in_aud:   raw[:price_in_aud],
+        price_in_usd:   raw[:price_in_usd],
+        description:    processed[:description] || raw[:description],
+        colors:         processed[:colors],
+        taxon_ids:      processed[:taxon_ids],
+        style_profile:  {
+          glam:           raw[:glam],
+          girly:          raw[:girly],
+          classic:        raw[:classic],
+          edgy:           raw[:edgy],
+          bohemian:       raw[:bohemian],
+          sexiness:       raw[:sexiness],
+          fashionability: raw[:fashionability],
+          apple:          raw[:apple],
+          pear:           raw[:pear],
+          strawberry:     raw[:strawberry],
+          hour_glass:     raw[:hour_glass],
+          column:         raw[:column],
+          athletic:       raw[:athletic],
+          petite:         raw[:petite]
+        },
+        properties:     {
+          style_notes:                raw[:style_notes],
+          care_instructions:          raw[:care_instructions],
+          size:                       raw[:size],
+          fit:                        raw[:fit],
+          fabric:                     raw[:fabric],
+          product_type:               raw[:product_type],
+          product_category:           raw[:product_category],
+          factory_id:                 raw[:factory_id],
+          factory_name:               raw[:factory_name],
+          product_coding:             raw[:product_coding],
+          shipping:                   raw[:shipping],
+          stylist_quote_short:        raw[:stylist_quote_short],
+          stylist_quote_long:         raw[:stylist_quote_long],
+          product_details:            processed[:product_details],
+          revenue:                    raw[:revenue],
+          cogs:                       raw[:cogs],
+          video_id:                   processed[:video_id],
+          color_customization:        raw[:color_customization],
+          short_description:          raw[:short_description],
+          standard_days_for_making:   raw[:standard_days_for_making] || 5,
+          customised_days_for_making: raw[:customised_days_for_making] || 10
+        },
+        song:           {
+          link: raw[:song_link],
+          name: raw[:song_name],
+        },
+        customizations: processed[:customizations],
+      }
     end
 
     def get_column_indices(book)
