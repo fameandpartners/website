@@ -6,7 +6,7 @@ Importing is a three step process:
 - perform a dry run of the import
 - perform the import
 
-Make sure you do this on preproduction and have the team (including the Visual Merchandising and Product Owner) confirm the data is correct before running on production.
+Make sure you do this on preproduction and have the team (including the Visual Merchandiser and Product Owner) confirm the data is correct before running on production.
 
 ### Prepare
 Prepare accepts a path and a url, and downloads a zip file from dropbox, process the file and cleans any extraneous data.
