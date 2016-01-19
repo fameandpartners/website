@@ -10,12 +10,37 @@ module Products
     include ActionView::Helpers::TextHelper # for truncate
 
     def initialize(available_on, mark_new_this_week = false)
-      @@titles_row_numbers = [8, 10, 11, 12]
-      @@first_content_row_number = 13
       @available_on = available_on
       @keep_taxons = true
       @mark_new_this_week = mark_new_this_week
       show_warning
+    end
+
+    # The Master Product spreadsheet has a 'unique' structure, and rather than detecting it,
+    # this script just hard codes the rows.
+    #  1 |
+    #  2 |
+    #  3 |
+    #  4 |
+    #  5 | MASTER PRODUCT SPREADSHEET # Document Heading
+    #  6 |
+    #  7 |
+    #  8 | [Merged Row] # Column Group Headings
+    #  9 | [Merged Row]
+    # 10 |              # Main Column Heading
+    # 11 |              # Column Sub Heading (Seems unused by script)
+    # 12 |              # Column Sub Sub Heading (Seems unused by script)
+    # 13 |              # First row of content `first_content_row_number`
+    private def titles_row_numbers
+      [8, 10, 11, 12]
+    end
+
+    private def main_column_heading_row
+      titles_row_numbers.second
+    end
+
+    private def first_content_row_number
+      13
     end
 
     def show_warning
@@ -300,7 +325,7 @@ module Products
       conformities.each do |key, regex|
         indexes = []
 
-        book.row(@@titles_row_numbers.second).each_with_index do |title, index|
+        book.row(main_column_heading_row).each_with_index do |title, index|
           next unless title.present?
 
           if title.strip =~ regex
@@ -324,7 +349,7 @@ module Products
       @codes[:description] = 6
 
       @codes[:customizations] = []
-      book.row(@@titles_row_numbers.second).each_with_index do |title, index|
+      book.row(main_column_heading_row).each_with_index do |title, index|
         next unless title =~ /customisation \#\d/i
           @codes[:customizations] << {
             name: index + 1, #honestly wtf
@@ -332,7 +357,7 @@ module Products
           }
       end
 
-      book.row(@@titles_row_numbers.second).each_with_index do |title, index|
+      book.row(main_column_heading_row).each_with_index do |title, index|
         next unless title =~ /Music Track Link/i
         @codes[:song_link]      = index + 1
         @codes[:song_name]      = index + 2
@@ -349,14 +374,14 @@ module Products
     end
 
     def get_rows_indexes(book, columns)
-      first_empty_row_num = @@first_content_row_number
+      first_empty_row_num = first_content_row_number
 
       total_rows = book.last_row(book.sheets.first)
       while first_empty_row_num < total_rows and book.cell(first_empty_row_num, columns[:sku]).present?
         first_empty_row_num += 1
       end
 
-      (@@first_content_row_number..first_empty_row_num)
+      (first_content_row_number..first_empty_row_num)
     end
 
     # create product with restored data
