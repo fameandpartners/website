@@ -2,14 +2,22 @@
 
 require 'roo'
 require 'ostruct'
+require 'log_formatter'
 
 module Products
   class BatchUploader
+    extend Forwardable
+    def_delegators :@logger, :info, :debug, :warn, :error, :fatal
+
     attr_reader :parsed_data, :keep_taxons, :available_on
 
     include ActionView::Helpers::TextHelper # for truncate
 
-    def initialize(available_on, mark_new_this_week = false)
+    def initialize(available_on, mark_new_this_week = false, logdev: $stdout)
+      @logger = Logger.new(logdev)
+      @logger.level = Logger::INFO
+      @logger.formatter = LogFormatter.terminal_formatter
+
       @available_on = available_on
       @keep_taxons = true
       @mark_new_this_week = mark_new_this_week
@@ -45,9 +53,9 @@ module Products
 
     def show_warning
       if @mark_new_this_week
-        p 'NEW PRODUCTS WILL HAVE NEW_THIS_WEEK TAXON'
+        warn 'New products will have new_this_week taxon'
       else
-        p 'NEW PRODUCTS WILL NOT HAVE NEW_THIS_WEEK TAXON'
+        warn 'New products will NOT have new_this_week taxon!'
       end
     end
 
@@ -56,7 +64,7 @@ module Products
     end
 
     def parse_file(file_path)
-      @parsed_data = []
+      info "Loading Excel File #{file_path}"
       return if file_path.nil?
 
       if file_path =~ /\.xls$/
@@ -76,6 +84,7 @@ module Products
 
       book.default_sheet = book.sheets.first
 
+      info "Parsing Data into Hash"
       # rows = [rows.first] if Rails.env.development?
       @parsed_data = rows.to_a.map do |row_num|
         raw = extract_raw_row_data(book, columns, row_num)
@@ -83,6 +92,7 @@ module Products
 
         build_item_hash(processed, raw)
       end
+      info "Parse Complete"
     end
 
     def build_item_hash(processed, raw)
@@ -153,7 +163,7 @@ module Products
       raw[:price_in_usd]               = book.cell(row_num, columns[:price_in_usd])
       raw[:taxons]                     = Array.wrap(columns[:taxons]).map { |i| book.cell(row_num, i) }.reject(&:blank?)
       raw[:colors]                     = Array.wrap(columns[:colors]).map { |i| book.cell(row_num, i) }.reject(&:blank?)
-      puts "Read XLS: #{raw[:sku]}"
+
 
       # Style
       raw[:glam]                       = book.cell(row_num, columns[:glam])
@@ -205,6 +215,7 @@ module Products
           position: index + 1
         }
       end
+      info "Row #{row_num} - Extracted Raw Data for SKU: #{raw[:sku]}"
       raw
     end
 
@@ -381,6 +392,7 @@ module Products
       @codes[:video_id]       = 139 # 138 139 with
       @codes[:short_description] = 140
 
+      info "Found #{@codes.keys.count} keyed columns."
       @codes
     end
 
@@ -392,11 +404,13 @@ module Products
         first_empty_row_num += 1
       end
 
+      info "Found #{first_empty_row_num - first_content_row_number} rows of data."
       (first_content_row_number..first_empty_row_num)
     end
 
     # create product with restored data
     def create_or_update_products(products_attrs)
+      info "Creating or Update Products"
       products_attrs.map do |attrs|
         args = attrs.symbolize_keys
 
@@ -430,8 +444,14 @@ module Products
 
     private
 
+    def section_heading(product = nil, sku: product.sku, name: product.name)
+      "[" << "#{sku} - #{name}".ljust(25) << "]"
+    end
+
     def create_or_update_product(args)
       sku = args[:sku].to_s.downcase.strip
+      section_heading = section_heading(sku: args[:sku], name: args[:name])
+      info "#{section_heading} Building"
 
       raise 'SKU should be present!' unless sku.present?
 
@@ -479,19 +499,20 @@ module Products
         end
       end
 
-      new_product = product.persisted? ? 'Updated' : 'New'
+      new_product = product.persisted? ? 'Updated' : 'Created'
 
       product.save!
-      puts "Saving: #{new_product} - #{product.sku} - #{product.id} - #{product.name}"
+
 
       if args[:price_in_aud].present? || args[:price_in_usd].present?
         add_product_prices(product, args[:price_in_aud], args[:price_in_usd])
       end
-
+      info "#{section_heading} #{new_product} id=#{product.id}"
       product
     end
 
     def add_product_properties(product, args)
+      debug "#{section_heading(product)} #{__method__}"
       allowed = [:style_notes,
                  :care_instructions,
                  :size,
@@ -528,6 +549,7 @@ module Products
     end
 
     def add_product_variants(product, sizes, colors, price_in_aud, price_in_usd)
+      debug "#{section_heading(product)} #{__method__}"
       variants = []
       size_option = Spree::OptionType.size
       color_option = Spree::OptionType.color
@@ -579,6 +601,7 @@ module Products
     end
 
     def add_product_customizations(product, array_of_attributes)
+      debug "#{section_heading(product)} #{__method__}"
       customizations = []
 
       allowed = [:name,
@@ -609,6 +632,7 @@ module Products
     end
 
     def add_product_style_profile(product, args)
+      debug "#{section_heading(product)} #{__method__}"
       attributes = args.slice(:glam,
                               :girly,
                               :classic,
@@ -653,6 +677,7 @@ module Products
     end
 
     def add_product_song(product, raw_attrs)
+      debug "#{section_heading(product)} #{__method__}"
       if raw_attrs[:link].present?
         song = product.inspirations.song.first || product.inspirations.song.build
 
