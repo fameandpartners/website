@@ -124,6 +124,7 @@ module Products
         raw[:revenue]             = book.cell(row_num, columns[:revenue])
         raw[:cogs]                = book.cell(row_num, columns[:cogs])
         raw[:color_customization] = book.cell(row_num, columns[:color_customization])
+        raw[:available_colors]    = book.cell(row_num, columns[:available_colors])
         raw[:standard_days_for_making] = book.cell(row_num, columns[:standard_days_for_making])
         raw[:customised_days_for_making] = book.cell(row_num, columns[:customised_days_for_making])
         raw[:short_description]   = book.cell(row_num, columns[:short_description])
@@ -312,6 +313,7 @@ module Products
           factory_id:                 /factory id/i,
           factory_name:               /factory$/i,
           color_customization:        /colour customisation/i,
+          available_colors:           /available colou?rs/i,
           #product_coding: /product coding/i,
           shipping:                   /shipping/i,
           stylist_quote_short:        /stylist inspiration quote/i,
