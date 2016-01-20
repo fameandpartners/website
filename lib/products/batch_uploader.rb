@@ -20,8 +20,7 @@ module Products
 
       @available_on = available_on
       @keep_taxons = true
-      @mark_new_this_week = mark_new_this_week
-      show_warning
+      self.mark_new_this_week = mark_new_this_week
     end
 
     # The Master Product spreadsheet has a 'unique' structure, and rather than detecting it,
@@ -51,12 +50,13 @@ module Products
       13
     end
 
-    def show_warning
-      if @mark_new_this_week
+    def mark_new_this_week=(value)
+      if value
         warn 'New products will have new_this_week taxon'
       else
         warn 'New products will NOT have new_this_week taxon!'
       end
+      @mark_new_this_week = value
     end
 
     def new_this_week_taxon_id
