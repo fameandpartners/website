@@ -443,14 +443,6 @@ module Products
           add_product_song(product, args[:song].symbolize_keys || {})
 
           product
-        # rescue Exception => message
-        #   Rails.logger.warn(message)
-        #   puts "======== Exception ========"
-        #   puts args[:sku]
-        #   puts args[:style_name]
-        #   puts message
-        #   puts "==========================="
-        #   nil
         end
       end.compact
     end
