@@ -4,6 +4,17 @@ require 'roo'
 require 'ostruct'
 require 'log_formatter'
 
+# TODO - MORE REFACTORING
+# This class contains multiple responsibilities inside it.
+# i.e.
+#  - Loading the file & extracting the raw data
+#  - Preprocessing the data
+#  - Validating the data - This is not explicitly done, but in a few places the code will raise errors on missing data.
+#  - Transforming the data into a simple interchange format, in this case it's a Hash.
+#  - Building & saving the domain models.
+#      There are 7 methods which take a Spree::Product `product` as the first parameter, this is
+#      definitely pointing to a class lurking in there somewhere.
+
 module Products
   class BatchUploader
     extend Forwardable
@@ -48,15 +59,6 @@ module Products
 
     private def first_content_row_number
       13
-    end
-
-    def mark_new_this_week=(value)
-      if value
-        warn 'New products will have new_this_week taxon'
-      else
-        warn 'New products will NOT have new_this_week taxon!'
-      end
-      @mark_new_this_week = value
     end
 
     def new_this_week_taxon_id
@@ -709,6 +711,15 @@ module Products
       usd = Spree::Price.find_or_create_by_variant_id_and_currency(master_variant.id, 'USD')
       usd.amount = us_price if us_price.present?
       usd.save!
+    end
+
+    private def mark_new_this_week=(value)
+      if value
+        warn 'New products will have new_this_week taxon'
+      else
+        warn 'New products will NOT have new_this_week taxon!'
+      end
+      @mark_new_this_week = value
     end
   end
 end
