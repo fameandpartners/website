@@ -77,15 +77,11 @@ module Products
       end
 
       book.default_sheet = book.sheets.first
-
-      columns = get_column_indices(book)
-
-      rows = get_rows_indexes(book, columns)
-
-      book.default_sheet = book.sheets.first
+      columns            = get_column_indices(book)
+      rows               = get_rows_indexes(book, columns)
 
       info "Parsing Data into Hash"
-      # rows = [rows.first] if Rails.env.development?
+
       @parsed_data = rows.to_a.map do |row_num|
         raw = extract_raw_row_data(book, columns, row_num)
         processed = process_raw_row_data(raw)
