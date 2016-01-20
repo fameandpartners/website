@@ -203,24 +203,14 @@ module Products
 
       processed[:taxon_ids] << new_this_week_taxon_id if @mark_new_this_week && new_this_week_taxon_id.present?
 
-      color_option = Spree::OptionType.color
-
-
-      processed[:colors] = []
-      raw[:colors].each do |presentation|
-        presentation = presentation.strip
-
-        color = color_option.option_values.where('LOWER(presentation) = ?', presentation.downcase).first
-
-        if color.blank?
-          color = color_option.option_values.create do |object|
-            object.name         = presentation.downcase.gsub(' ', '-')
-            object.presentation = presentation
-          end
-        end
-
-        processed[:colors] << color.name
-      end
+      # :colors is the legacy recommended colors.
+      # :recommended_colors will each have a variant built from them
+      # :available_colors which are not :recommended_colors will get a ProductColorValue, but no variant.
+      processed[:colors]             = get_color_options(raw[:colors]).map(&:name)
+      recommended_colors             = get_color_options(raw[:colors])
+      available_colors               = get_color_options(raw[:available_colors].to_s.split(','))
+      processed[:recommended_colors] = recommended_colors
+      processed[:available_colors]   = Set.new(available_colors + recommended_colors).to_a
 
       processed[:customizations] = []
       raw[:customizations].each do |customization|
@@ -228,7 +218,30 @@ module Products
           processed[:customizations] << customization
         end
       end
+
       processed
+    end
+
+    private def get_color_options(color_names)
+      Array.wrap(color_names).map(&:strip).map do |human_color_name|
+        find_or_create_color_option(presentation: human_color_name)
+      end
+    end
+
+    class ColorOptionValue < Struct.new(:id, :name, :presentation); end
+
+    private def find_or_create_color_option(presentation:)
+      color = Spree::OptionType.color.option_values.where('LOWER(presentation) = ?', presentation.downcase).first
+
+      if color.blank?
+        warn "Creating new Color option #{presentation}."
+        color = Spree::OptionType.color.option_values.create do |object|
+          object.name         = presentation.downcase.gsub(' ', '-')
+          object.presentation = presentation
+        end
+      end
+
+      ColorOptionValue.new(color.id, color.name, color.presentation)
     end
 
     private def build_item_hash(processed, raw)
@@ -284,7 +297,9 @@ module Products
           link: raw[:song_link],
           name: raw[:song_name],
         },
-        customizations: processed[:customizations],
+        customizations:     processed[:customizations],
+        recommended_colors: processed[:recommended_colors],
+        available_colors:   processed[:available_colors],
       }
     end
 
@@ -421,6 +436,7 @@ module Products
           )
 
           add_product_properties(product, args[:properties].symbolize_keys)
+          add_product_color_options(product, **args.slice(:available_colors, :recommended_colors))
           add_product_variants(product, sizes, args[:colors] || [], args[:price_in_aud], args[:price_in_usd])
           add_product_style_profile(product, args[:style_profile].symbolize_keys)
           add_product_customizations(product, args[:customizations] || [])
@@ -543,6 +559,19 @@ module Products
       end
 
       product
+    end
+
+    def add_product_color_options(product, recommended_colors:, available_colors:)
+      debug "#{section_heading(product)} #{__method__}"
+      custom_colors = available_colors - recommended_colors
+
+      custom_colors.map do |custom|
+        product.product_color_values.where(option_value_id: custom.id, custom: true).first_or_create
+      end
+
+      recommended_colors.map do |recommended|
+        product.product_color_values.where(option_value_id: recommended.id, custom: false).first_or_create
+      end
     end
 
     def add_product_variants(product, sizes, colors, price_in_aud, price_in_usd)
@@ -683,6 +712,7 @@ module Products
     end
 
     def add_product_prices(product, price, us_price = nil)
+      debug "#{section_heading(product)} #{__method__}"
       product.price = price
       product.save
 
