@@ -61,7 +61,6 @@ class ProductColorValuesGrid
     format(pcv.active?) do |active|
       class_name = active ? 'check-square-o' : 'square-o'
       content_tag(:i, '', class: "fa fa-#{class_name}  fa-lg")
-      # render :partial => "toggle_active_form", locals: { :pcv => pcv }
     end
   end
 
