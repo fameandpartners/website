@@ -29,7 +29,10 @@ import_products.sh assumes that the files live in the home (~) directory.
 
 ### Import
 
-> Remember to add the MARK_NEW_THIS_WEEK env variable as "true/false"
+When running the actual import script, make sure that:
+
+- add the `MARK_NEW_THIS_WEEK` env variable as "true/false"
+- New product spreadsheet is inside the `import` folder. (default: `/home/deploy/import/content/import`)
 
 ```
 MARK_NEW_THIS_WEEK=false ./script/import_products.sh
