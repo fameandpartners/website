@@ -28,6 +28,9 @@ import_products.sh assumes that the files live in the home (~) directory.
 ```
 
 ### Import
+
+> Remember to add the MARK_NEW_THIS_WEEK env variable as "true/false"
+
 ```
-./script/import_products.sh
+MARK_NEW_THIS_WEEK=false ./script/import_products.sh
 ```
