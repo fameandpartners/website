@@ -86,7 +86,7 @@ class Spree::Sale < ActiveRecord::Base
   end
 
   def sitewide_message
-    "WHY HELLO, 2016! 30% OFF STOREWIDE"
+    "SUMMER JOY! 30% OFF STOREWIDE"
   end
 
   def sale_promo
