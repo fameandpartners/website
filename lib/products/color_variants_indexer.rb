@@ -28,7 +28,7 @@ module Products
     end
 
     def product_scope
-      Spree::Product
+      Spree::Product.active
     end
 
     def collect_variants
