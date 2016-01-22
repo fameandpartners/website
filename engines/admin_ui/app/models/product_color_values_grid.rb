@@ -13,6 +13,7 @@ class ProductColorValuesGrid
   filter :product do |value|
     where(Spree::Product.arel_table[:name].matches("%#{value}%"))
   end
+  filter :product_id
 
   filter :product_active, :xboolean, default: true do |value|
     if value
