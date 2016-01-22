@@ -16,6 +16,14 @@ class ProductColorValue < ActiveRecord::Base
     images.any?
   end
 
+  def color_name
+    option_value.name
+  end
+
+  def color_id
+    option_value_id
+  end
+
   def self.active
     where(active: true)
   end
