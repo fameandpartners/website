@@ -183,14 +183,18 @@ class Populator
         color_id = product_attributes[:color_id].to_i
 
         # TODO - Replace all conditionals with just the first `product.product_color_values.active` lookup
+        # Once all products are migrated to use explicitly defined ProductColorValues the Fallback else clause can go.
         if (color = product.product_color_values.active.detect { |pcv| color_id == pcv.color_id  })
-          # NOOP Handles new recommended and custom colors
-        # Fallback - Handles non-specified Custom colors
-        elsif (color = product_options.colors.extra.detect{|color| color.id == color_id }).present?
-          color.custom = true
-          # Punch the ProductColorValue API onto the crappy product_options OpenStruct.
-          color.color_name = color.name
-          color.color_id = color.id
+          # NOOP Handles Database stored recommended and custom colors ProductColorValue
+        elsif (color_struct = product_options.colors.extra.detect{ |x| x.id == color_id })
+          # Fallback - Handles non-specified Custom colors
+          # If a customised colors are available for a product, but no colors are
+          # defined as a ProductColorValue, create one on the fly.
+          color = ProductColorValue.new.tap do |pcv|
+            pcv.product         = product
+            pcv.option_value_id = color_struct.id
+            pcv.custom          = true
+          end
         else
           raise Errors::ProductOptionNotAvailable.new("product color ##{ product_color_id } not available")
         end
