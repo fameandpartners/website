@@ -12,7 +12,7 @@ FameAndPartners::Application.routes.draw do
   ########################
   # US Redirection to root
   ########################
-  get '/us/*whatevs' => redirect(path: '/%{whatevs}', host: 'www.fameandpartners.com')
+  get '/us/*whatevs', to: redirect(path: "/%{whatevs}")
   get '/us' => redirect('/')
 
   #######################################################
