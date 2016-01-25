@@ -77,7 +77,7 @@ coffee:
             .separator
               span or
           .col-md-7.form-wrap
-            = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params), remote: true , :html => {:'data-type' => 'json'} do |f|
+            = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params, :protocol => 'https'), remote: true , :html => {:'data-type' => 'json'} do |f|
               = f.hidden_field :site_version_id, value: current_site_version.id
               div data-hook="signup"
                 .row
