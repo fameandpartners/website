@@ -27,7 +27,19 @@ import_products.sh assumes that the files live in the home (~) directory.
 ./script/import_products.sh dryrun
 ```
 
-### Import
+> You can set the `CONTENT_DIRECTORY_TARGET` env variable to ease up local testing.
+
+```shell
+CONTENT_DIRECTORY_TARGET=/Users/tobyhede/document/fame/ProductUpload ./script/import_products.sh dryrun
 ```
-./script/import_products.sh
+
+### Import
+
+When running the actual import script, make sure that:
+
+- add the `MARK_NEW_THIS_WEEK` env variable as "true/false"
+- New product spreadsheet is inside the `import` folder. (default: `/home/deploy/import/content/import`)
+
+```
+MARK_NEW_THIS_WEEK=false ./script/import_products.sh
 ```
