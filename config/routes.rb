@@ -47,7 +47,6 @@ FameAndPartners::Application.routes.draw do
                },
                skip:        [:unlocks, :omniauth_callbacks],
                path_names:  { sign_out: 'logout' },
-               requirements: { :protocol => 'https' }
 
     devise_scope :spree_user do
       get '/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
