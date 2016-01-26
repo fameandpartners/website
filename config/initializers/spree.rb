@@ -10,7 +10,7 @@ Spree.config do |config|
   # Uncomment to override the default site name.
   # config.site_name = "Fame & Partners"
   config.allow_ssl_in_production = true
-  config.allow_ssl_in_staging = false
+  config.allow_ssl_in_staging = true
 
   config.products_per_page = 1000 # disable pagination at all
   config.allow_backorders = false # allow order items out of stock - we have 90% items by order
