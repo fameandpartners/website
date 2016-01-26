@@ -35,7 +35,7 @@ ruby:
 
 - if Features.active?(:checkout_fb_login)
   - if !signed_in?
-    = link_to 'Sign in with Facebook', fb_auth_path, class: 'btn btn-facebook btn-black btn-md'
+    = link_to 'Sign in with Facebook', fb_auth_path(spree_user_return_to: checkout_path), class: 'btn btn-facebook btn-black btn-md'
 
   / Temporary location for heading.
 h2.checkout-section-title
