@@ -340,6 +340,13 @@ Spree::Product.class_eval do
     ! jumpsuit?
   end
 
+  def presenter_as_details_resource(site_version = nil)
+    @product ||= Products::DetailsResource.new(
+        site_version: site_version,
+        product: self
+    ).read
+  end
+
   private
 
   def build_variants_from_option_values_hash
@@ -372,4 +379,5 @@ Spree::Product.class_eval do
   def self.active(currency = nil)
     not_hidden.not_deleted.available(nil, currency)
   end
+
 end
