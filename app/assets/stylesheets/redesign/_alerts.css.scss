@@ -38,7 +38,7 @@
   padding: 0 15px;
   text-transform: uppercase;
   color: $c-neutral-black;
-  background: $c-neutral-2;
+  background: $sales-bg;
 
   a {
     text-decoration: underline;
@@ -66,8 +66,12 @@
     max-width: 450px;
     padding: 0 30px;
     vertical-align: middle;
-    line-height: 1;
-    font-size: 0.938em;
+    line-height: 1.2;
+    font-size: 1.1em;
+    color: $c-neutral-white;
+    font-weight: 600;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 
   .icon {
