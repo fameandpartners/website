@@ -2,7 +2,7 @@ Spree::UserRegistrationsController.class_eval do
 
   layout 'redesign/application'
 
-  ssl_required, :except => :create
+  ssl_required, :except => [:create]
   before_filter :set_title
 
   def set_title
