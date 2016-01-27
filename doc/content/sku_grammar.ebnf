@@ -1,0 +1,9 @@
+FameSKU ::= [0-9A-Z]+  ( 'US0AU4' | 'US2AU6' | 'US4AU8' | 'US6AU10' | 'US8AU12' | 'US10AU14' | 'US12AU16' | 'US14AU18' | 'US16AU20' | 'US18AU22' | 'US20AU24' | 'US22AU26' )  'C' [0-9]+ ( '' |   'X'  [0-9]+ 'H' ('P' | 'S' | 'T'))
+
+FameSKUComposed           ::= StyleNo Size Color  ( NoCustomisation | Customisation HeightCustomisation )
+StyleNo             ::= [0-9A-Z]+
+Size                ::= ( 'US0AU4' | 'US2AU6' | 'US4AU8' | 'US6AU10' | 'US8AU12' | 'US10AU14' | 'US12AU16' | 'US14AU18' | 'US16AU20' | 'US18AU22' | 'US20AU24' | 'US22AU26' )
+Color               ::= 'C' [0-9]+ 
+NoCustomisation     ::= ''
+HeightCustomisation ::=  'H' ( 'P' | 'S' | 'T' )
+Customisation       ::= 'X' [0-9]+
