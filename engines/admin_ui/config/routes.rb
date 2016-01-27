@@ -47,6 +47,7 @@ AdminUi::Engine.routes.draw do
   end
 
   resources :variants
+  resources :product_colors
 
   namespace :content do
     resources :pages

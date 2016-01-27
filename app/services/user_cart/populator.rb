@@ -127,8 +127,8 @@ class Populator
       LineItemPersonalization.new.tap do |item|
         item.size_id  = product_size.id
         item['size']  = product_size.value
-        item.color_id = product_color.id
-        item['color'] = product_color.name
+        item.color_id = product_color.color_id
+        item['color'] = product_color.color_name
         item.customization_value_ids = product_customizations.map(&:id)
         item.product_id = product.id
         item.height     = product_attributes[:height]
@@ -137,7 +137,7 @@ class Populator
 
     def personalized_product?
       return if @is_gift
-      product_variant.is_master? || product_color.custom || product_size.custom || product_customizations.present? || custom_height?
+      product_variant.is_master? || product_color.custom? || product_size.custom || product_customizations.present? || custom_height?
     end
 
     def custom_height?
@@ -176,13 +176,25 @@ class Populator
       end
     end
 
+    # @return ProductColorValue
     def product_color
       @product_color ||= begin
-        product_color_id = product_attributes[:color_id].to_i
-        if (color = product_options.colors.default.detect{|color| color.id == product_color_id }).present?
-          color.custom = false
-        elsif (color = product_options.colors.extra.detect{|color| color.id == product_color_id }).present?
-          color.custom = true
+
+        color_id = product_attributes[:color_id].to_i
+
+        # TODO - Replace all conditionals with just the first `product.product_color_values.active` lookup
+        # Once all products are migrated to use explicitly defined ProductColorValues the Fallback else clause can go.
+        if (color = product.product_color_values.active.detect { |pcv| color_id == pcv.color_id  })
+          # NOOP Handles Database stored recommended and custom colors ProductColorValue
+        elsif (color_struct = product_options.colors.extra.detect{ |x| x.id == color_id })
+          # Fallback - Handles non-specified Custom colors
+          # If a customised colors are available for a product, but no colors are
+          # defined as a ProductColorValue, create one on the fly.
+          color = ProductColorValue.new.tap do |pcv|
+            pcv.product         = product
+            pcv.option_value_id = color_struct.id
+            pcv.custom          = true
+          end
         else
           raise Errors::ProductOptionNotAvailable.new("product color ##{ product_color_id } not available")
         end

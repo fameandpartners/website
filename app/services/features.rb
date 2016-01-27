@@ -27,20 +27,15 @@ module Features
     extend Forwardable
 
     def_delegators :rollout, :activate_user, :deactivate_user, :activate, :deactivate, :features, :active?
-    
+
     def inactive?(name)
       !active?(name)
     end
-  
+
     private
 
     def rollout
-      return Rollout.new(kv_store)
-      # code below not thread-safe
-      # unstable work with forks on production. some hook like after(:fork) { reconnect_to_redis } required
-      @rollout ||= begin      
-        Rollout.new(kv_store)
-      end
+      Rollout.new(kv_store)
     end
 
     def kv_store

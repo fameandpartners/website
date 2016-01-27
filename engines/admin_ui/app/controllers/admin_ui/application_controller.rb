@@ -38,6 +38,7 @@ module AdminUi
         # url = respond_to?(:spree_login_path) ? spree_login_path : root_path
 
         # redirect_to main_app.login_path
+        session["spree_user_return_to"] = request.url
         redirect_to '/login'
       end
     end
