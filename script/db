@@ -287,6 +287,7 @@ function create_test_fixture_dump
   bundle exec rake dev:enable_payment_gateways TARGET_ENV=test
   echo "$(magenta)>> $(white)Adding Test User$(normal)"
   bundle exec rake dev:add_test_fixture_user
+  reset_pg_pk_sequences
 
   echo "$(magenta)>> $(white)Vacumming DEV DB$(normal)"
   vacuumdb -d ${DEV_DB} -e -f
@@ -297,6 +298,11 @@ function create_test_fixture_dump
   cp ${EXPORT_FILE} ${test_fixture_dump_file}
 }
 
+function reset_pg_pk_sequences
+{
+  echo "$(magenta)>> $(white)Resetting Postgres PK Sequences$(normal)"
+  bundle exec rake db:reset_sequences
+}
 
 ## Common ##############################################################################################################
 
