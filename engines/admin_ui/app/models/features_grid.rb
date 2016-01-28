@@ -29,7 +29,7 @@ class FeaturesGrid
   column :state
   column :active? do |feature|
     format(feature.active) do
-      class_name = feature.active ? 'check-square-o' : 'square-o'
+      class_name = feature.active ? 'thumbs-o-up' : 'exclamation text-warning'
       content_tag(:i, '', class: "fa fa-#{class_name}  fa-lg")
     end
   end
