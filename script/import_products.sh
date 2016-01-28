@@ -52,7 +52,7 @@ set -o pipefail
 dryrun=${1:-}
 
 # Init
-import_base_directory='/home/deploy/import/'
+import_base_directory="$HOME/import/"
 import_start_time=$(date '+%Y-%m-%d_%H.%M.%S')
 logfile="${import_base_directory}/log/${dryrun}product_import_${import_start_time}.log"
 log_date_format='%Y-%m-%d %H:%M:%S'
