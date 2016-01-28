@@ -2,39 +2,22 @@ module AdminUi
   module Backend
     class FeaturesController < AdminUi::ApplicationController
       def index
+        @collection = FeaturesGrid.new
       end
 
       def enable
-        Features.activate(params[:feature])
-        redirect_to backend_features_path, notice: "Feature Flag #{params[:feature]} was successfully Enabled."
+        candidate_feature = params[:feature].to_sym
+
+        Features.activate(candidate_feature)
+        redirect_to backend_features_path, notice: "Feature Flag #{candidate_feature} was successfully Enabled."
       end
 
       def disable
-        Features.deactivate(params[:feature])
-        redirect_to backend_features_path, notice: "Feature Flag #{params[:feature]} was successfully Disabled."
-      end
+        candidate_feature = params[:feature].to_sym
 
-      helper_method def feature_list
-        Features.features
+        Features.deactivate(candidate_feature)
+        redirect_to backend_features_path, notice: "Feature Flag #{candidate_feature} was successfully Disabled."
       end
-
-      helper_method def active_text(feature)
-        Features.active?(feature) ? 'Enabled' : 'Disabled'
-      end
-
-      helper_method def button_text(feature)
-        Features.active?(feature) ? 'Disable' : 'Enable'
-      end
-
-      helper_method def button_path(feature)
-        Features.active?(feature) ? disable_backend_features_path(feature: feature) : enable_backend_features_path(feature: feature)
-      end
-
-      helper_method def feature_present(feature)
-        return false unless Features::DEFINED_FEATURES.include?(feature.to_sym)
-        true
-      end
-
     end
   end
 end

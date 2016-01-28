@@ -28,6 +28,10 @@ module Features
 
     def_delegators :rollout, :activate_user, :deactivate_user, :activate, :deactivate, :features, :active?
 
+    def available_features
+      (DEFINED_FEATURES + features).uniq
+    end
+
     def inactive?(name)
       !active?(name)
     end
