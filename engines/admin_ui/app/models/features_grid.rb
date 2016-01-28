@@ -30,8 +30,7 @@ class FeaturesGrid
   column :active? do |feature|
     format(feature.active) do
       class_name = feature.active ? 'thumbs-o-up' : 'exclamation text-warning'
-      title      = feature.active ? 'Enabled' : 'Disabled'
-      content_tag(:i, '', class: "fa fa-#{class_name}  fa-lg", title: title)
+      content_tag(:i, '', class: "fa fa-#{class_name}  fa-lg", title: feature.state)
     end
   end
 
