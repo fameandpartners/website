@@ -8,6 +8,21 @@ page.initCheckoutEditPage = () ->
         $('.auth-alert').hide()
       )
 
+      if $("#modal-cny-template").length != 0
+        if $.cookie('cny-modal-displayed') != 'true'
+          addToCartModal = new window.page.EmailCaptureModal({
+            promocode: "",
+            content: "",
+            container: "#modal-cny-template",
+            heading: "<span style=\"font-size:0.7em;\">Manufacturing Delays</span>",
+            message: "<div style=\"font-size:0.7em;\"><div>Due to the Chinese New Year Holiday we are currently experiencing some delays during the manufacture of garments.</div><div>Please note that dresses ordered over this period may not be delivered until the end of February.<div><div>Thank you for your patience over this time</div><div>Please contact our customer service team if you have any questions.</div><div style=\"margin-top:10px;\"><a class=\"btn btn-black\" onclick=\"vex.closeAll();\">I understand</a/></div></div>",
+            className: "classic-modal welcome-modal",
+            timeout: 0,
+            timer: false,
+            force: false
+          });
+          $.cookie('cny-modal-displayed','true')
+
       @ship_to_different_address = $("input[name='ship_to_address']:first").prop("checked") == false
       $("input[name='ship_to_address']:first").click =>
         @ship_to_different_address = false
