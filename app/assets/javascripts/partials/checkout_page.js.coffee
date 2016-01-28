@@ -9,7 +9,7 @@ page.initCheckoutEditPage = () ->
       )
 
       if $("#modal-cny-template").length != 0
-        if $.cookie('cny-modal-displayed') != 'true!'
+        if $.cookie('cny-modal-displayed') != 'true'
           addToCartModal = new window.page.EmailCaptureModal({
             promocode: "",
             content: "",
