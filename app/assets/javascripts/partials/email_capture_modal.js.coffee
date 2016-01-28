@@ -57,6 +57,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
   process: (data) =>
     if !!data.email
       @opts.email = data.email
+      @signupMarketingTracking()
       $.post(@opts.action, data).done(@success).fail(@error)
     else
       setTimeout(@open, 250)
@@ -85,11 +86,10 @@ window.page.EmailCaptureModal = class EmailCaptureModal
         if @opts.className != 'new-modal' && @opts.className != 'new-modal welcome-modal'
           window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 999999)
 
-      @signupMarketingTracking()
-
       if @opts.className == 'new-modal' || @opts.className == 'new-modal welcome-modal' || @opts.className == 'classic-modal' || @opts.className == 'classic-modal welcome-modal'
         window.location.replace(window.location.href + "?pop_thanks=true")
         return
+
       window.location.reload()
 
   signupMarketingTracking: =>
