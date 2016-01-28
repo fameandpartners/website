@@ -52,7 +52,7 @@ set -o pipefail
 dryrun=${1:-}
 
 # Init
-import_base_directory='/home/deploy/import/'
+import_base_directory="$HOME/import/"
 import_start_time=$(date '+%Y-%m-%d_%H.%M.%S')
 logfile="${import_base_directory}/log/${dryrun}product_import_${import_start_time}.log"
 log_date_format='%Y-%m-%d %H:%M:%S'
@@ -156,9 +156,28 @@ function import_product_spreadsheet()
     return
   fi
   info "Importing $spreadsheet"
+  _ensure_spreadsheet_env_setup
   export FILE_PATH=$spreadsheet
   if [ $dryrun ]; then return; fi
   bundle exec rake import:data || error "FAILED!"
+}
+
+# Configure the MARK_NEW_THIS_WEEK Environment variable.
+function _ensure_spreadsheet_env_setup
+{
+  if [ "${MARK_NEW_THIS_WEEK:-NIL}" = "NIL" ]; then
+    error "Environment var, MARK_NEW_THIS_WEEK is unset, and must be defined."
+    error "Do you want to add the products in this import to the 'New This Week Taxon'?"
+
+    read -p "Press (y) for Yes. Any other key for No" -n 1 do_mark_new_this_week
+    echo ""
+    if [ "${do_mark_new_this_week}" = "y" ]; then
+      export MARK_NEW_THIS_WEEK="TRUE"
+    else
+      export MARK_NEW_THIS_WEEK="FALSE"
+    fi
+  fi
+  success "MARK_NEW_THIS_WEEK=${MARK_NEW_THIS_WEEK}"
 }
 
 function error() { echo $(red)[$(date +"$log_date_format")][E]  $*$(normal); }
