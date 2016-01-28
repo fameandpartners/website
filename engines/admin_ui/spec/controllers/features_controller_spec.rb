@@ -7,7 +7,7 @@ module AdminUi
 
       before(:each) {
         stub_admin_authorization!
-        stub_const("Features::DEFINED_FEATURES", %i(test_flag))
+        stub_const('Features::DEFINED_FEATURES', %i(test_flag))
       }
 
       describe 'GET index' do
@@ -30,17 +30,6 @@ module AdminUi
         it { expect(flash[:notice]).to eq('Feature Flag test_flag was successfully Disabled.') }
         it { expect(Features.active?('test_flag')).to be_falsey }
       end
-
-      context 'helper_methods' do
-        before(:each) { Features.activate('test_flag') }
-        it { expect(subject.feature_list).to include :test_flag }
-        it { expect(subject.active_text('test_flag')).to eq 'Enabled' }
-        it { expect(subject.button_text('test_flag')).to eq 'Disable' }
-        it { expect(subject.button_path('test_flag')).to eq '/fame_admin/backend/features/disable?feature=test_flag' }
-        it { expect(subject.feature_present('test_present')).to be_falsey }
-        it { expect(subject.feature_present('test_flag')).to be_truthy }
-      end
-
     end
   end
 end
