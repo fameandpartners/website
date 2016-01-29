@@ -83,12 +83,16 @@ function prepare
 
   info "Downloading $(blue)${SOURCE_FILE}"
   wget -O "${zip_file_path}" $SOURCE_FILE
+  _fail_on_error $? "Error Downloading"
 
   info "Checking file $(blue)${zip_file_path}"
   unzip -tq "${zip_file_path}"
-  info "Extracting $(blue)${zip_file_path}$(yellow) to $(green)${extract_path}"
+  _fail_on_error $? "Bad Zip File"
 
+  info "Extracting $(blue)${zip_file_path}$(yellow) to $(green)${extract_path}"
+  # -LL Converts all filenames to lowercase, needed for cross platform created zip files.
   unzip -x -LL "${zip_file_path}" -d "${extract_path}" | grep 'creating:'
+  _fail_on_error $? "Error Unzipping"
 
   _clean_from_path '__macosx' "${extract_path}"
   _clean_from_path '*cancelled*' "${extract_path}"
@@ -112,7 +116,15 @@ function green   { tput setaf 2; }
 function yellow  { tput setaf 3; }
 function blue    { tput setaf 4; }
 
-#### Main
+function _fail_on_error
+{
+  if [[ $1 != 0 ]]; then
+    error $2
+    exit $1
+  fi
+}
+
+############ Main ############
 _preamble
 prepare $1 $2
 
