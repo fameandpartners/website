@@ -41,7 +41,7 @@ function _clean_from_path
   dirty_pattern="${1}"
   from_path="${2}"
 
-  info "Deleting $(normal)'${dirty_pattern}'$(yellow) items from $(green)${from_path}"
+  info "Deleting $(blue)'${dirty_pattern}'$(yellow) items from $(green)${from_path}"
   find "${from_path}" -name "${dirty_pattern}" |while read fname; do
     _delete_warn "$fname"
   done
@@ -69,9 +69,10 @@ function prepare
   extract_path="${content_path}/extract/"
   zip_file_path="${content_path}/import.zip"
 
-  echo "Downloading: $(blue)${SOURCE_FILE}$(normal)"
-  echo "To: $(green)${working_path}$(normal)"
-  read -p "Enter to continue, or Ctrl-C to cancel!"
+  echo "Downloading From: $(blue)${SOURCE_FILE}$(normal)"
+  echo "To Directory:     $(green)${working_path}$(normal)"
+  echo
+  read -p "Press $(green)Enter$(normal) to continue, or $(red)Ctrl-C$(normal) to cancel!"
 
   _mkdir_p "${working_path}"
   _mkdir_p "${content_path}"
@@ -99,7 +100,7 @@ function import {
   ./script/import_products.sh
 }
 
-# ########### Output ############
+############ Output ############
 log_date_format='%Y-%m-%d %H:%M:%S'
 function error() { echo $(red)[$(date +"$log_date_format")][E]  $*$(normal); }
 function info() { echo $(yellow)[$(date +"$log_date_format")][I]  $*$(normal); }
