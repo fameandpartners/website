@@ -1,26 +1,39 @@
 #!/bin/bash
 
-#  Prepare - Dropbox to Import Dir
+#  Prepare - Zip File to Import Dir
 #
-#  Prepare accepts a path and a url, and downloads a zip file from dropbox,
-#  process the file and cleans any extraneous data.
+#  Prepare accepts a path and a url, and downloads a zip file,
+#  processes the file and cleans any extraneous data.
 #
 #  To download a zipped file of a folder's contents from dropbox make
 #  sure the url is appended with ?dl=1
 #
-#  ./script/prepare_import.sh {location} {url}
-#  ./script/prepare_import.sh ~ https://www.dropbox.com/sh/ar0b57n8nfnt82s/AADNNbbuOqExZ12voP46Oe07a?dl=1
+#  prepare_import.sh zip_file_url [import_directory]
+#
+#    zip_file_url         URL of a zip file, accessible via http/s
+#    import_directory     Optional: Defaults to $HOME
+#
+#  == Examples ==
+#
+#  Using home directory and dropbox URL
+#    prepare_import.sh https://www.dropbox.com/sh/ar0b57n8nfnt82s/AADNNbbuOqExZ12voP46Oe07a?dl=1
+#
+#  Using custom directory and custom link
+#    prepare_import.sh https://example.com/import_data.zip /tmp/content
 
+function _preamble
+{
+  # Prints all lines of this file, up to the beginning of this function, minus the shebang line, (#!)
+  start_of_func=$(cat $0 | grep -ne "${FUNCNAME[0]}" -m 1 | cut -f1 -d: )
+  print_from=$(expr $start_of_func - 1)
+  print_to=$(expr $start_of_func - 2)
+  head -n $print_from $0 | tail -n $print_to | cut -d# -f2-
+}
 
 # Fail on missing variables.
 set -u
 # Fail on failures in pipes
 set -o pipefail
-
-function _preamble
-{
-  head -n 13 $0 | tail -n 12
-}
 
 function _mkdir_p
 {
@@ -58,8 +71,8 @@ function _ensure_dropbox_dl_link
 
 function prepare
 {
-  BASE_PATH=$1
-  SOURCE_FILE=$2
+  SOURCE_FILE=$1
+  BASE_PATH=$2
 
   _ensure_dropbox_dl_link $SOURCE_FILE
 
@@ -126,7 +139,11 @@ function _fail_on_error
 
 ############ Main ############
 _preamble
-prepare $1 $2
+
+zip_file_url=$1
+import_directory=${2-$HOME}
+
+prepare $zip_file_url $import_directory
 
 
 # mkdir import
