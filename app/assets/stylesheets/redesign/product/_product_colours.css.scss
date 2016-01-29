@@ -59,7 +59,6 @@ $product-color-berry:           #84216d;
 $product-color-black:           #050505;
 $product-color-blue:            #0000ff;
 $product-color-blush:           #eac3c7;
-$product-color-blush:           #eec6c6;
 $product-color-brick:           #993333;
 $product-color-bright-lavender: #ddb6f9;
 $product-color-bright-red:      #ff3333;
@@ -185,7 +184,6 @@ $product-color-wine:            #831c2e;
 .color-blue                    { background-color: $product-color-blue; }
 .color-blue-azalea-floral      { @include image-color-selector('BlueAzaleaFloral.png'); }
 .color-blue-fallen-leaves      { @include image-color-selector('BlueFallenLeaves.png'); }
-.color-blush                   { background-color: $product-color-blush; }
 .color-blush                   { background-color: $product-color-blush; }
 .color-blush-and-black         { @include split-color-selector(#e1c2c1, #000000); }
 .color-brick                   { background-color: $product-color-brick; }
@@ -313,6 +311,7 @@ $product-color-wine:            #831c2e;
 .color-seashell, .color-shell  { background-color: $product-color-shell; }
 .color-silver                  { background-color: $product-color-silver; }
 .color-sky-blue                { background-color: $product-color-sky-blue; }
+.color-sunset-orange { background-color: $product-color-sunset-orange; }
 .color-surreal-floral-black    { @include image-color-selector('SurrealFloralBlack.png'); }
 .color-surreal-floral-white    { @include image-color-selector('SurrealFloralWhite.png'); }
 .color-taupe                   { background-color: $product-color-taupe; }
