@@ -7,13 +7,17 @@
         .media-wrap-outer
           .media-wrap.keep-ratio
             .inner-wrap
-              = image_tag "lookbook/modern-romance.jpg"
+              = image_tag "lookbook/love-lace-2.jpg"
         .content-wrap
           .outer-wrap
             .inner-wrap
-              h1.heading.skin-dark This Modern Romance
-              = link_to 'View this collection', this_modern_romance_collection_path, class: 'btn btn-md btn-black'
+              h1.heading.skin-dark Love Lace
+              = link_to 'View this collection', love_lace_collection_path, class: 'btn btn-md btn-black'
 
+    .col-md-6
+      = link_to this_modern_romance_collection_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/modern-romance.jpg"
+        .copy-wrap This Mordern Romance <em><span>View this collection</span></em>
     .col-md-6
       = link_to bring_on_the_night_collection_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/bring-on-the-night.jpg"
@@ -26,15 +30,17 @@
       = link_to photo_finish_collection_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/photo-finish.jpg"
         .copy-wrap Photo Finish <em><span>View this collection</span></em>
-    .col-md-6
-      = link_to make_a_statement_collection_path, class: 'panel-highlight media-wrap'
-        = image_tag "lookbook/make-a-statement.jpg"
-        .copy-wrap Make a Statement <em><span>View this collection</span></em>
 
     .col-md-12
       h2.title-line-on-sides
         .inner-wrap PREVIOUS LOOKBOOKS
 
+    .col-md-3.col-xs-6
+      = link_to make_a_statement_collection_path, class: 'panel-compact'
+        .media-wrap.keep-ratio
+          .inner-wrap
+            = image_tag "lookbook/make-a-statement.jpg"
+        .copy-wrap Make a Statement
     .col-md-3.col-xs-6
       = link_to luxe_collection_path, class: 'panel-compact'
         .media-wrap.keep-ratio
@@ -47,3 +53,4 @@
           .inner-wrap
             = image_tag "lookbook/besties-bridesmaids.jpg"
         .copy-wrap Besties & Bridesmaids
+
