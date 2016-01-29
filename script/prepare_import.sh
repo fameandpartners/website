@@ -47,11 +47,21 @@ function _clean_from_path
   done
 }
 
+function _ensure_dropbox_dl_link
+{
+  dl_zero=$(echo $1 | grep -e 'dl=0$')
+  if [ "${1}" = "${dl_zero}" ]; then
+    echo  "$(red)Warning! The download link appears to be a Dropbox view (not download) link!$(normal)"
+    echo  "$(red)Fix: Changing $(yellow)dl=0$(red) to $(yellow)dl=1$(red) will make Dropbox build a zip file.$(normal)"
+  fi
+}
+
 function prepare
 {
   BASE_PATH=$1
   SOURCE_FILE=$2
 
+  _ensure_dropbox_dl_link $SOURCE_FILE
 
   working_path="${BASE_PATH}/import"
   content_path="${working_path}/content"
