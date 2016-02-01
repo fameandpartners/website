@@ -35,7 +35,7 @@ window.track = {
         "currency": product.price.currency,
         "name": product.name,
         "price": product.price.amount,
-        "sku": product.line_item_sku
+        "sku": product.sku
       }
     });
     this.event('Products', 'AddedToCart', label);
