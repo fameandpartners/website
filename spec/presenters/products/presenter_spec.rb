@@ -176,5 +176,43 @@ module Products
         end
       end
     end
+
+    describe '#making_options' do
+      let(:fast_making_option) { ProductMakingOption.new(option_type: "fast_making") }
+      let(:other_option)       { ProductMakingOption.new(option_type: Faker::Name.name) }
+      let(:available_options)  { double('available_options', making_options: [fast_making_option, other_option])  }
+      subject(:product)        { described_class.new available_options: available_options }
+
+      context 'fast_making is disabled' do
+        it do
+          allow(product).to receive(:fast_making_disabled?).and_return(false)
+
+          expect(product.making_options).to include(fast_making_option)
+        end
+      end
+
+      context 'fast_making is enabled' do
+        it do
+          allow(product).to receive(:fast_making_disabled?).and_return(true)
+          expect(product.making_options).to_not include(fast_making_option)
+        end
+      end
+
+      describe '#fast_making_disabled? mirrors Feature :getitquick_unavailable' do
+        let(:product) { described_class.new({}) }
+
+        it 'when active' do
+          Features.activate(:getitquick_unavailable)
+
+          expect(product.fast_making_disabled?).to be_truthy
+        end
+
+        it 'when disabled' do
+          Features.deactivate(:getitquick_unavailable)
+
+          expect(product.fast_making_disabled?).to be_falsey
+        end
+      end
+    end
   end
 end
