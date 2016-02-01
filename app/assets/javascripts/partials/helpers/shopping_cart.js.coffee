@@ -32,7 +32,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     else
       @loaded = true
       $.ajax(
-        url: urlWithSitePrefix("/user_cart/details")
+        url: "/user_cart/details"
         type: "GET"
         dataType: "json"
       ).success((data) =>
@@ -78,7 +78,7 @@ window.helpers.ShoppingCart = class ShoppingCart
 
   showGiftModal: () ->
     $.ajax(
-      url: urlWithSitePrefix("/user_cart/products/check_gift_in_cart")
+      url: "/user_cart/products/check_gift_in_cart"
       type: "GET"
       dataType: "json"
     ).success((data) =>
@@ -109,7 +109,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     # @showModal()
 
     $.ajax(
-      url: urlWithSitePrefix("/user_cart/products")
+      url: "/user_cart/products"
       type: "POST"
       dataType: "json"
       data: product_data
@@ -130,7 +130,7 @@ window.helpers.ShoppingCart = class ShoppingCart
 
   removeProduct: (line_item_id) ->
     $.ajax(
-      url: urlWithSitePrefix("/user_cart/products/#{ line_item_id }")
+      url: "/user_cart/products/#{line_item_id}"
       type: "DELETE"
       dataType: "json"
     ).success(
@@ -141,7 +141,7 @@ window.helpers.ShoppingCart = class ShoppingCart
 
   removeProductCustomization: (line_item_id, customization_id) ->
     $.ajax(
-      url: urlWithSitePrefix("/user_cart/products/#{ line_item_id }/customizations/#{ customization_id }")
+      url: "/user_cart/products/#{line_item_id}/customizations/#{customization_id}"
       type: "DELETE"
       dataType: "json"
     ).success(
@@ -152,7 +152,7 @@ window.helpers.ShoppingCart = class ShoppingCart
 
   removeProductMakingOption: (line_item_id, making_option_id) ->
     $.ajax(
-      url: urlWithSitePrefix("/user_cart/products/#{ line_item_id }/making_options/#{ making_option_id }")
+      url: "/user_cart/products/#{line_item_id}/making_options/#{making_option_id}"
       type: "DELETE"
       dataType: "json"
     ).success(
@@ -165,7 +165,7 @@ window.helpers.ShoppingCart = class ShoppingCart
   # note - error messages placed here, if something changed - move this upper in logic
   applyPromotionCode: (code) ->
     $.ajax(
-      url: urlWithSitePrefix("/user_cart/promotion"),
+      url: "/user_cart/promotion",
       type: 'POST',
       dataType: "json",
       data: { promotion_code: code }
