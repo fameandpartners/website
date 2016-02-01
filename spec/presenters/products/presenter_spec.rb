@@ -219,5 +219,13 @@ module Products
         expect(product.fast_making_disabled?).to be_falsey
       end
     end
+
+    describe 'functions as a collection presenter (Products::Collection::Dress)' do
+      let(:hash_keys)   { [:id, :name, :color, :images, :price, :discount, :fast_making, :fast_delivery] }
+      let(:dummy_hash)  { hash_keys.zip(hash_keys.map(&:to_s)).to_h }
+      let(:product)     { described_class.new(dummy_hash) }
+
+      it { expect(product.to_h).to eq(dummy_hash) }
+    end
   end
 end

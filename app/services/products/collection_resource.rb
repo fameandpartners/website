@@ -170,7 +170,7 @@ class Products::CollectionResource
         color    = Repositories::ProductColors.read(color_variant.color.id)
         price    = Spree::Price.new(amount: color_variant.prices[current_currency], currency: current_currency)
 
-        Products::Collection::Dress.from_hash(
+        Products::Presenter.new(
           id:             color_variant.product.id,
           name:           color_variant.product.name,
           color:          color_variant.color,

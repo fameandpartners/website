@@ -10,7 +10,7 @@ module Products
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
                   :size_chart, :making_option_id, :fit, :size, :standard_days_for_making, :customised_days_for_making,
                   :default_standard_days_for_making, :default_customised_days_for_making,
-                  :height_customisable
+                  :height_customisable, :fast_delivery
 
     attr_writer :fast_making
 
@@ -19,6 +19,17 @@ module Products
         instance_variable_set("@#{k}", v) unless v.nil?
       end
     end
+
+    module CollectionDressPresenter
+      # Provide compatibility for old OpenStruct based presenters
+      def to_h
+        [:id, :name, :color, :images, :price, :discount, :fast_making, :fast_delivery].map { |key|
+          [key , send(key)]
+        }.to_h
+      end
+    end
+
+    include CollectionDressPresenter
 
     def type
       'Dress'

@@ -19,7 +19,6 @@
 #     }
 #   }
 class Products::CollectionDetails
-  # include Repositories::CachingSystem
 
   attr_reader :collection, :style, :event, :edits, :bodyshape, :color, :discount, :site_version, :fast_delivery, :root_taxon, :fast_making
 
@@ -45,8 +44,6 @@ class Products::CollectionDetails
     deliverize_taxon if fast_delivery?
     taxon
   end
-
-  # cache_results :read
 
   private
 
