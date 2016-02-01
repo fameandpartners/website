@@ -158,7 +158,15 @@ module Products
     end
 
     def making_options
-       available_options.making_options
+      if fast_making_disabled?
+        available_options.making_options.reject {|mo| mo.option_type.to_s.inquiry.fast_making? }
+      else
+        available_options.making_options
+      end
+    end
+
+    def fast_making_disabled?
+      Features.active?(:getitquick_unavailable)
     end
 
     def default_color
