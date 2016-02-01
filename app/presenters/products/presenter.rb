@@ -8,9 +8,11 @@ module Products
                   :permalink, :is_active, :is_deleted, :images, :default_image, :price,
                   :discount, :recommended_products, :related_outerwear, :available_options, :preorder, :taxons, :variants,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
-                  :size_chart, :making_option_id, :fit, :size, :fast_making, :standard_days_for_making, :customised_days_for_making,
+                  :size_chart, :making_option_id, :fit, :size, :standard_days_for_making, :customised_days_for_making,
                   :default_standard_days_for_making, :default_customised_days_for_making,
                   :height_customisable
+
+    attr_writer :fast_making
 
     def initialize(opts)
       opts.each do |k, v|
@@ -167,6 +169,11 @@ module Products
 
     def fast_making_disabled?
       Features.active?(:getitquick_unavailable)
+    end
+
+    def fast_making
+      return false if fast_making_disabled?
+      @fast_making
     end
 
     def default_color
