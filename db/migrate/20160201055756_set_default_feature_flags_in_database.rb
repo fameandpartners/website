@@ -1,6 +1,6 @@
-class SetDefaultFeatureFlags < ActiveRecord::Migration
+class SetDefaultFeatureFlagsInDatabase < ActiveRecord::Migration
 
-  class FeatureFlag < ActiveRecord::Base
+  class SimpleKeyValue < ActiveRecord::Base
     attr_accessible :key, :data
   end
 
@@ -23,7 +23,7 @@ class SetDefaultFeatureFlags < ActiveRecord::Migration
 
     default_feature_flags.each do |key, data|
       say "Feature #{key}"
-      FeatureFlag.create(key: key, data: data)
+      SimpleKeyValue.create(key: key, data: data)
     end
   end
 

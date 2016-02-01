@@ -1,6 +1,6 @@
-class CreateFeatureFlags < ActiveRecord::Migration
+class CreateSimpleKeyValues < ActiveRecord::Migration
   def change
-    create_table :feature_flags do |t|
+    create_table :simple_key_values do |t|
       t.string :key, null: false
       t.text :data
 

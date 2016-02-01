@@ -44,9 +44,9 @@ module Features
 
     def kv_store
       # Safely fallback for deployment.
-      # TODO - TTL 2016.02.28 - Remove conditional, just return FeatureFlag
-      if ActiveRecord::Base.connection.table_exists? FeatureFlag.table_name
-        FeatureFlag
+      # TODO - TTL 2016.02.28 - Remove conditional, just return SimpleKeyValue
+      if ActiveRecord::Base.connection.table_exists? SimpleKeyValue.table_name
+        SimpleKeyValue
       else
         Redis.new(configatron.redis_options)
       end

@@ -1,7 +1,7 @@
 # An API compatible replacement for Redis
 # Provides `get/set` for use with Rollout.
 
-class FeatureFlag < ActiveRecord::Base
+class SimpleKeyValue < ActiveRecord::Base
   attr_accessible :key, :data
 
   validate :key, :presence => true, :uniqueness => true
