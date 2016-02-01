@@ -14,6 +14,10 @@ class FeatureState < Struct.new(:feature, :active)
   def transition_state
     active ? 'Disable' : 'Enable'
   end
+
+  def description
+    Features.description(feature)
+  end
 end
 
 class FeaturesGrid
@@ -26,6 +30,7 @@ class FeaturesGrid
   end
 
   column :feature
+  column :description
   column :state
   column :active? do |feature|
     format(feature.active) do

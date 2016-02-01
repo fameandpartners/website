@@ -1,27 +1,29 @@
 require 'redis'
 module Features
-  DEFINED_FEATURES = %i(checkout_fb_login
-                        content_revolution
-                        delivery_date_messaging
-                        enhanced_moodboards
-                        express_making
-                        fameweddings
-                        getitquick_unavailable
-                        gift
-                        google_tag_manager
-                        height_customisation
-                        maintenance
-                        marketing_modals
-                        masterpass
-                        moodboard
-                        redirect_to_com_au_domain
-                        sales
-                        send_promotion_email_reminder
-                        shipping_message
-                        style_quiz
-                        test_analytics
-                        test_flag
-                        )
+  # Document the purpose of a feature flag here, this documentation is displayed to admin users in the web UI.
+  # { feature_name: "Description or documentation." }
+  DEFINED_FEATURES = {
+    checkout_fb_login:             "Facebook login on Checkout",
+    content_revolution:            "CMS / Content Engine",
+    delivery_date_messaging:       nil,
+    enhanced_moodboards:           "Sharing & Comments",
+    express_making:                nil,
+    fameweddings:                  'Weddings "Shop"',
+    getitquick_unavailable:        "Turn off 'getitquick/' pages & Product Express Making",
+    gift:                          "DEPRECATED - Remove",
+    google_tag_manager:            "Google Tag Manager - Analytics, Trackers & Marketing managed front-end site additions.",
+    height_customisation:          "Skirt Length Customisation",
+    maintenance:                   "Maintennance Mode - Puts site offline",
+    marketing_modals:              "Onsite Marketing Popups & Modals",
+    masterpass:                    "MasterCard MasterPass digital wallet on Checkout.",
+    moodboard:                     "Moodboards",
+    redirect_to_com_au_domain:     "Redirect '/au/' URLs to .com.au",
+    sales:                         nil,
+    send_promotion_email_reminder: nil,
+    shipping_message:              nil,
+    style_quiz:                    nil,
+    test_analytics:                "Force the rendering of JS Marketing Trackers, usually for testing."
+  }
 
   class << self
     extend Forwardable
@@ -29,7 +31,11 @@ module Features
     def_delegators :rollout, :activate_user, :deactivate_user, :activate, :deactivate, :features, :active?
 
     def available_features
-      (DEFINED_FEATURES + features).uniq
+      (DEFINED_FEATURES.keys + features).uniq
+    end
+
+    def description(name)
+      DEFINED_FEATURES[name].presence || "Undocumented"
     end
 
     def inactive?(name)
