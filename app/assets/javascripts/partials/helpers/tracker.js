@@ -29,15 +29,6 @@ window.track = {
   },
 
   addedToCart: function (label, product) {
-    this.dataLayer.push({
-      "event": "addToCart",
-      "product": {
-        "currency": product.price.currency,
-        "name": product.name,
-        "price": product.price.amount,
-        "sku": product.sku
-      }
-    });
     this.event('Products', 'AddedToCart', label);
     this.pageView('/cart/add');
   },
