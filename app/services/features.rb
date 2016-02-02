@@ -39,11 +39,17 @@ module Features
     private
 
     def rollout
-      Rollout.new(kv_store)
+      @rollout ||= Rollout.new(kv_store)
     end
 
     def kv_store
-      Redis.new(configatron.redis_options)
+      # Safely fallback for deployment.
+      # TODO - TTL 2016.02.28 - Remove conditional, just return SimpleKeyValue
+      if ActiveRecord::Base.connection.table_exists? SimpleKeyValue.table_name
+        SimpleKeyValue
+      else
+        Redis.new(configatron.redis_options)
+      end
     end
   end
 end
