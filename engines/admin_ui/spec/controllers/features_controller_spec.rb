@@ -3,16 +3,21 @@ require 'spec_helper'
 module AdminUi
   module Backend
     RSpec.describe FeaturesController, type: :controller do
+      render_views
       routes { AdminUi::Engine.routes }
 
-      before(:each) {
-        stub_admin_authorization!
-        stub_const('Features::DEFINED_FEATURES', %i(test_flag))
-      }
+      before(:each) do
+        allow(controller).to receive(:current_admin_user).and_return(Spree::User.new)
+        allow(controller).to receive(:authorize_admin).and_return(true)
+
+        stub_const('Features::DEFINED_FEATURES', { test_flag: "TEST_FLAG_DOCUMENTATION" } )
+      end
 
       describe 'GET index' do
-        it 'renders the index template' do
+        it 'shows documentation for features' do
           get :index
+
+          expect(response.body).to include("TEST_FLAG_DOCUMENTATION")
           expect(response.status).to eq(200)
         end
       end

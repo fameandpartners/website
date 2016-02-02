@@ -2,9 +2,9 @@
   a.dropdown-toggle data-toggle="dropdown" href="#"
     span.clear
       span.block.m-t-xs
-        strong.font-bold = current_admin_user.first_name.titleize
+        strong.font-bold = current_admin_user.first_name.to_s.titleize
       span.text-muted.text-xs.block
-        = current_admin_user.last_name.titleize
+        = current_admin_user.last_name.to_s.titleize
         b.caret
   ul.dropdown-menu.animated.fadeInRight.m-t-xs
     li
