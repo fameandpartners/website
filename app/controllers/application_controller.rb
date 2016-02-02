@@ -19,9 +19,7 @@ class ApplicationController < ActionController::Base
     http_basic_authenticate_with :name => 'fameandpartners', :password => 'pr0m!unicorn'
   end
 
-  if Features.active?(:force_sitewide_ssl)
-    ssl_required
-  end
+  force_ssl if: -> { Features.active?(:force_sitewide_ssl) } # Note: this will never be called on dev + Rails 3.2.x. See source of the `force_ssl` method: http://api.rubyonrails.org/v3.2.22/classes/ActionController/ForceSSL/ClassMethods.html#method-i-force_ssl
 
   append_before_filter :store_marketing_params
   append_before_filter :check_marketing_traffic
