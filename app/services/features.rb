@@ -4,7 +4,6 @@ module Features
   # { feature_name: "Description or documentation." }
   DEFINED_FEATURES = {
     checkout_fb_login:             "Facebook login on Checkout",
-    content_revolution:            "CMS / Content Engine",
     delivery_date_messaging:       nil,
     enhanced_moodboards:           "Sharing & Comments",
     express_making:                nil,

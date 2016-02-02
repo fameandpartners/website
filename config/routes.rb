@@ -512,8 +512,5 @@ FameAndPartners::Application.routes.draw do
   end
 
   mount AdminUi::Engine, at: '/fame_admin'
-
-  if Features.active?(:content_revolution)
-    mount Revolution::Engine => '/'
-  end
+  mount Revolution::Engine => '/'
 end
