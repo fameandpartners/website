@@ -241,13 +241,6 @@ ActiveRecord::Schema.define(:version => 20160201055756) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "feature_flags", :force => true do |t|
-    t.string   "key",        :null => false
-    t.text     "data"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "incompatibilities", :force => true do |t|
     t.integer "original_id"
     t.integer "incompatible_id"
@@ -778,6 +771,13 @@ ActiveRecord::Schema.define(:version => 20160201055756) do
 
   add_index "similarities", ["original_id"], :name => "index_similarities_on_original_id"
   add_index "similarities", ["similar_id"], :name => "index_similarities_on_similar_id"
+
+  create_table "simple_key_values", :force => true do |t|
+    t.string   "key",        :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "site_versions", :force => true do |t|
     t.integer  "zone_id"
