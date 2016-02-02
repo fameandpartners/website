@@ -8,6 +8,7 @@ module Features
     enhanced_moodboards:           "Sharing & Comments",
     express_making:                nil,
     fameweddings:                  'Weddings "Shop"',
+    force_sitewide_ssl:            "Force users to use HTTPS version of the website.",
     getitquick_unavailable:        "Turn off 'getitquick/' pages & Product Express Making",
     google_tag_manager:            "Google Tag Manager - Analytics, Trackers & Marketing managed front-end site additions.",
     height_customisation:          "Skirt Length Customisation",

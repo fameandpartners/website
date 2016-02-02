@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     http_basic_authenticate_with :name => 'fameandpartners', :password => 'pr0m!unicorn'
   end
 
-  if Features.active?(:force_sitewide_ssl) # Why the hell is this exploding?
+  if Features.active?(:force_sitewide_ssl)
     ssl_required
   end
 
