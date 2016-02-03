@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160201055756) do
+ActiveRecord::Schema.define(:version => 20160202195654) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -778,6 +778,8 @@ ActiveRecord::Schema.define(:version => 20160201055756) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "simple_key_values", ["key"], :name => "index_simple_key_values_on_key", :unique => true
 
   create_table "site_versions", :force => true do |t|
     t.integer  "zone_id"
