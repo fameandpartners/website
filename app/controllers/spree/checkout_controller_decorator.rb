@@ -1,8 +1,12 @@
 Spree::CheckoutController.class_eval do
+  include Marketing::Gtm::Controller::Product
+  include Marketing::Gtm::Controller::Event
+
   before_filter :prepare_order, only: :edit
   before_filter :set_order_site_version, :only => :update
   before_filter :find_payment_methods, only: [:edit, :update]
   before_filter :before_masterpass
+  before_filter :data_layer_add_to_cart_event, only: [:edit]
   skip_before_filter :check_registration
 
   before_filter def switch_views_version
@@ -308,4 +312,20 @@ Spree::CheckoutController.class_eval do
     @current_step
   end
   helper_method :current_step
+
+  # Marketing + GTM
+
+  def data_layer_add_to_cart_event
+    if (variant_id = flash[:variant_id_added_to_cart])
+      product           = Spree::Variant.find(variant_id).product
+      product_presenter = product.presenter_as_details_resource(current_site_version)
+
+      append_gtm_event(event_name: 'addToCart')
+      append_gtm_product(product_presenter)
+    end
+  end
+
+  def gtm_page_type
+    'checkout'
+  end
 end

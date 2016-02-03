@@ -6,6 +6,7 @@ app/controllers/personalization/*
 app/controllers/boutique_controller.rb & Views etc.
 ProductAccessory
 lib/products/batch_uploader_tania_version.rb
+app/assets/javascripts/partials/helpers/site_version.js.coffee
 
 # Contains 'add-to-wishlist'
 app/assets/javascripts/partials/homepage.js.coffee
