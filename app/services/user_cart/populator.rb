@@ -24,24 +24,6 @@ class Populator
     @site_version     = options[:site_version] || SiteVersion.default
     @currency         = options[:currency]  || site_version.try(:currency)
     @product_attributes = HashWithIndifferentAccess.new(options[:product] || {})
-    @is_gift          = options[:is_gift]
-  end
-
-  def track_gift_to_customerio
-    return unless @is_gift
-    begin
-      Marketing::CustomerIOEventTracker.new.track(
-        order.user,
-        'gift_selected',
-        email:          order.email,
-        variant_id:     @product_attributes[:variant_id],
-        color:          Spree::Variant.find(@product_attributes[:variant_id]).option_values.first.presentation
-      )
-    rescue StandardError => e
-      Rails.logger.error('ERROR: customer.io event tracker: gift_selected')
-      Rails.logger.error(e)
-      NewRelic::Agent.notice_error(e)
-    end
   end
 
   def populate
@@ -55,8 +37,6 @@ class Populator
 
     order.update!
     order.reload
-
-    track_gift_to_customerio
 
     return OpenStruct.new({
       success: true,
@@ -81,8 +61,6 @@ class Populator
   private
 
     def validate!
-      raise Errors::ProductOptionNotAvailable.new("Can't add a gift to an empty cart") if @is_gift && order.line_items.blank?
-      return if @is_gift
       if product_color.custom && product_making_options.present?
         raise Errors::ProductOptionsNotCompatible.new("Custom colors and fast delivery can't be selected at the same time")
       end
@@ -136,7 +114,6 @@ class Populator
     end
 
     def personalized_product?
-      return if @is_gift
       product_variant.is_master? || product_color.custom? || product_size.custom || product_customizations.present? || custom_height?
     end
 

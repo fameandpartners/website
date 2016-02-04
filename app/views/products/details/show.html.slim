@@ -69,7 +69,7 @@ ruby:
   - if params[:color]
     = tag :meta, name: 'robots', content: 'noindex, follow'
 
-- if Features.active?(:marketing_modals) && !Features.active?(:gift)
+- if Features.active?(:marketing_modals)
   #modal-add-to-cart-template.hidden
 
 .product-selection-wrap
