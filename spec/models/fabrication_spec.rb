@@ -21,9 +21,7 @@ RSpec.describe Fabrication, :type => :model do
     let(:shipped_fabrication) { build_stubbed(:fabrication, :shipped) }
     let(:random_fabrication)  { build_stubbed(:fabrication, state: 'make') }
 
-    it do
-      expect(shipped_fabrication.shipped?).to be_truthy
-      expect(random_fabrication.shipped?).to be_falsey
-    end
+    it { expect(shipped_fabrication.shipped?).to be_truthy }
+    it { expect(random_fabrication.shipped?).to be_falsey }
   end
 end
