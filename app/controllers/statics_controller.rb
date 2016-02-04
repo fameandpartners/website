@@ -221,11 +221,6 @@ class StaticsController < ApplicationController
     @description = "AMFAM Collaboration"
   end
 
-  def christmas_gift
-    @title = "Christmas Gift Dresses " + default_seo_title
-    @description = "Perfect Christmas Dresses 2014"
-  end
-
   def fashion_it_girl
     @title = "Fashion IT Girl" + default_seo_title
     @description = "Fashion IT Girl 2015"

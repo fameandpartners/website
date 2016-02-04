@@ -9,7 +9,6 @@ module Features
     express_making:                nil,
     fameweddings:                  'Weddings "Shop"',
     getitquick_unavailable:        "Turn off 'getitquick/' pages & Product Express Making",
-    gift:                          "DEPRECATED - Remove",
     google_tag_manager:            "Google Tag Manager - Analytics, Trackers & Marketing managed front-end site additions.",
     height_customisation:          "Skirt Length Customisation",
     maintenance:                   "Maintennance Mode - Puts site offline",

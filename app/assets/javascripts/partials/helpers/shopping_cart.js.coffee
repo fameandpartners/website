@@ -50,9 +50,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     @data
 
   showModal: () ->
-    if @shouldShowGiftModal()
-      @showGiftModal()
-    else if @shouldShowAddToCartModal()
+    if @shouldShowAddToCartModal()
       @showAddToCartModal()
 
   showAddToCartModal: () ->
@@ -70,35 +68,8 @@ window.helpers.ShoppingCart = class ShoppingCart
       });
       $.cookie('add-to-cart-modal-displayed','true')
 
-  shouldShowGiftModal: () ->
-    $("#gift-modal").length != 0
-
   shouldShowAddToCartModal: () ->
     $("#modal-add-to-cart-template").length != 0
-
-  showGiftModal: () ->
-    $.ajax(
-      url: "/user_cart/products/check_gift_in_cart"
-      type: "GET"
-      dataType: "json"
-    ).success((data) =>
-      if !data.has_gift
-        addToCartModal = new window.page.EmailCaptureModal({
-          promocode: "",
-          content: "",
-          heading: "",
-          message: "",
-          className: "new-modal add-to-cart",
-          action: "",
-          container: "#gift-modal",
-          timeout: 0,
-          timer: false,
-          force: false
-        });
-        return true
-    ).error( () =>
-      @trigger('error')
-    )
 
   # options:
   #   variant_id
