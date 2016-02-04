@@ -16,4 +16,14 @@ RSpec.describe Fabrication, :type => :model do
   end
 
   it { is_expected.to validate_presence_of :line_item_id }
+
+  describe '#shipped?' do
+    let(:shipped_fabrication) { build_stubbed(:fabrication, :shipped) }
+    let(:random_fabrication)  { build_stubbed(:fabrication, state: 'make') }
+
+    it do
+      expect(shipped_fabrication.shipped?).to be_truthy
+      expect(random_fabrication.shipped?).to be_falsey
+    end
+  end
 end
