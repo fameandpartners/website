@@ -145,6 +145,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/lets-party'     => 'products/collections#show', :permalink => 'dance-hall', :as => :lets_party_collection
     get '/lookbook/love-lace-collection' => 'products/collections#show', :permalink => 'love-lace', :as => :love_lace_collection
+    get '/lookbook/great-minds-think-alike' => 'products/collections#show', :permalink => 'great-minds', :as => :great_minds_think_alike_collection
 
     get '/all-size' => redirect('/lookbook/all-size')
     get '/lookbook/all-size' => 'products/collections#show', :permalink => 'all-size', :as => :all_size_collection
