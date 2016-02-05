@@ -3,21 +3,21 @@
   ul
     li.active
       .inner-wrap
-        a href='#collection1' data-toggle="tab" Love Lace Collection
+        a href='#collection1' data-toggle="tab" Great Minds Think Alike
     li
       .inner-wrap
-        a href='#collection2' data-toggle="tab" This Modern Romance Collection
+        a href='#collection2' data-toggle="tab" Love Lace Collection
     li
       .inner-wrap
-        a href='#collection3' data-toggle="tab" Bring On The Night Collection
+        a href='#collection3' data-toggle="tab" This Modern Romance Collection
 
   .tab-wrap
-    = link_to love_lace_collection_path, id: 'collection1', class: 'tab active'
+    = link_to great_minds_think_alike_collection_path, id: 'collection1', class: 'tab active'
+      = image_tag 'home-page-tiles/tab-collectionbox-6.jpg', alt: 'Great Minds Think Alike'
+    = link_to love_lace_collection_path, id: 'collection2', class: 'tab'
       = image_tag 'home-page-tiles/tab-collectionbox-5.jpg', alt: 'Love Lace Collection'
-    = link_to this_modern_romance_collection_path, id: 'collection2', class: 'tab'
+    = link_to this_modern_romance_collection_path, id: 'collection3', class: 'tab'
       = image_tag 'home-page-tiles/tab-collectionbox-4.jpg', alt: 'This Modern Romance Collection'
-    = link_to bring_on_the_night_collection_path, id: 'collection3', class: 'tab'
-      = image_tag 'home-page-tiles/tab-collectionbox-1.jpg', alt: 'Bring On The Night Collection'
 
     a.navigator.btn-prev.js-navigator-prev href='javascript:void(0)'
       .icon.icon-arrow-left
