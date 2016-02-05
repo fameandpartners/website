@@ -25,7 +25,7 @@ class Fabrication < ActiveRecord::Base
       :qc,
       :shipped
   ]
-  
+
   STATES_OPTIONS = STATES.invert.freeze
 
   belongs_to :line_item,  class_name: 'Spree::LineItem'
@@ -37,5 +37,9 @@ class Fabrication < ActiveRecord::Base
 
   def self.for(line_item)
     line_item.fabrication || FabricationEvent.creation.create!(line_item_id: line_item.id).fabrication
+  end
+
+  def shipped?
+    state == 'shipped'
   end
 end
