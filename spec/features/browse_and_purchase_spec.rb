@@ -71,20 +71,16 @@ describe 'browse and purchase process', :type => :feature do
 
     describe 'test UI' do
 
-      it 'search correctly', :chrome do
+      it 'display correct UI', :chrome do
         visit '/search?q=test-non-existing-dress'
         expect(page.find('.page-title')).to have_content "We couldn't find the stuff you were looking for."
         name = Spree::Product.first.name
         visit "/search?q=#{name.gsub(" ","+")}"
         expect(page.find('.page-title')).to have_content "RESULTS FOR"
-      end
 
-      it 'show correct main lookbook in lookbook landing page', :chrome do
         visit '/lookbook'
         expect(page.find('.panel-hero h1').text).to eq("Great Minds Think Alike".upcase)
-      end
 
-      it 'show fitler panel in all dresses page', :chrome do
         visit "/dresses"
         price_filter = page.find('.filter-area-prices')
         expect(price_filter).to have_content("View all prices")
@@ -99,9 +95,7 @@ describe 'browse and purchase process', :type => :feature do
         style_taxons.each do |t|
           expect(style_filter).to have_content(t.name.downcase)
         end
-      end
 
-      it 'show correct user data after login', :chrome do
         login_user
         visit "/profile"
         expect(page.find("#profile_first_name").value).to eql(Spree::User.first.first_name)
