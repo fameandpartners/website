@@ -58,29 +58,32 @@ describe 'browse and purchase process', :type => :feature do
     Utility::Reindexer.reindex
   end
 
+
   before do
     image = double(Spree::Image)
     allow(image).to receive_message_chain(:attachment, :url).and_return('/images/missing.png')
     allow(image).to receive(:attachment_file_name).and_return('abc')
     allow_any_instance_of(ProductColorValue).to receive(:images).and_return([image])
-
     create_data
   end
 
-  context 'authenticated' do
-    before(:each) { login_user }
+  context 'surfing' do
 
-    describe 'searching dresses' do
+    describe 'test UI' do
+
       it 'search correctly', :chrome do
         visit '/search?q=test-non-existing-dress'
         expect(page.find('.page-title')).to have_content "We couldn't find the stuff you were looking for."
         name = Spree::Product.first.name
         visit "/search?q=#{name.gsub(" ","+")}"
-        expect(page.find('.page-title')).to have_content "Results for"
+        expect(page.find('.page-title')).to have_content "RESULTS FOR"
       end
-    end
 
-    describe 'test UI for other pages' do
+      it 'show correct main lookbook in lookbook landing page', :chrome do
+        visit '/lookbook'
+        expect(page.find('.panel-hero h1').text).to eq("Great Minds Think Alike".upcase)
+      end
+
       it 'show fitler panel in all dresses page', :chrome do
         visit "/dresses"
         price_filter = page.find('.filter-area-prices')
@@ -98,12 +101,8 @@ describe 'browse and purchase process', :type => :feature do
         end
       end
 
-      it 'show correct main lookbook in lookbook landing page', :chrome do
-        visit '/lookbook'
-        expect(page.find('.panel-hero h1')).to have_content("Great Minds Think Alike")
-      end
-
       it 'show correct user data after login', :chrome do
+        login_user
         visit "/profile"
         expect(page.find("#profile_first_name").value).to eql(Spree::User.first.first_name)
         expect(page.find("#profile_last_name").value).to eql(Spree::User.first.last_name)
