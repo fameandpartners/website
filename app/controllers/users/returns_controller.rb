@@ -38,13 +38,12 @@ class Users::ReturnsController < Users::BaseController
 
     @order_return = OrderReturnRequest.new(params[:order_return_request])
     if @order_return.save
-      OrderReturnRequestMailer.email(@order_return, user).deliver
+      OrderReturnRequestMailer.email(@order_return, user).deliver unless user.has_spree_role?(:admin)
       render 'success'
     else
       @title = "Order ##{ @order_return.number }"
       render 'new'
     end
-
   end
 
 end
