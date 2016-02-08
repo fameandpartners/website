@@ -1,11 +1,17 @@
 class Users::ReturnsController < Users::BaseController
-  attr_reader :order_return
-  helper_method :order_return
+  attr_reader :order_return, :user
+  helper_method :order_return, :user
 
   def new
     order_number = params[:order_number]
-    user         = try_spree_current_user
-    order        = user.orders.where(number: order_number).first
+
+    @user = try_spree_current_user
+
+    order = if user.has_spree_role?(:admin)
+      Spree::Order.find_by_number(order_number)
+    else
+      user.orders.where(number: order_number).first
+    end
 
     if order.present?
       @order_return = OrderReturnRequest.new(:order => order)
