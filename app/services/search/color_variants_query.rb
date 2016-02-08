@@ -34,8 +34,8 @@ module Search
       price_max        = options[:price_max]
       currency         = options[:currency]
       show_outerwear    = !!options[:show_outerwear]
-      exclude_taxon_ids = options[:exclude_taxon_ids]
-      
+      exclude_taxon_ids = options[:exclude_taxon_ids] if query_string.blank?
+
       Tire.search(configatron.elasticsearch.indices.color_variants, size: limit, from: offset) do
 
         filter :bool, :must => { :term => { 'product.is_deleted' => false } }
