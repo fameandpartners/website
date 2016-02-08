@@ -76,9 +76,8 @@ describe 'browse and purchase process', :type => :feature do
         expect(page.find('.page-title')).to have_content "We couldn't find the stuff you were looking for."
         name = Spree::Product.first.name
 
-        #These two lines work on local , but not on circleci , HELP !!!
-        #visit "/search?q=#{name.gsub(" ","+")}"
-        #expect(page.find('.page-title')).to have_content "RESULTS FOR"
+        visit "/search?q=#{name.gsub(" ","+")}"
+        expect(page.find('.page-title')).to have_content "RESULTS FOR"
 
         visit '/lookbook'
         expect(page.find('.panel-hero h1').text).to eq("Great Minds Think Alike".upcase)
@@ -91,13 +90,12 @@ describe 'browse and purchase process', :type => :feature do
         expect(price_filter).to have_content("$300 - $399")
         expect(price_filter).to have_content("$400+")
 
-        #These six lines work on local , but not on circleci , HELP !!!
-        #style_taxons = Spree::Taxon.where(name: 'Style').first.children
-        #style_filter = page.find('.filter-area-styles')
-        #expect(style_filter).to have_content("view all styles")
-        #style_taxons.each do |t|
-        #  expect(style_filter).to have_content(t.name.downcase)
-        #end
+        style_taxons = Spree::Taxon.where(name: 'Style').first.children
+        style_filter = page.find('.filter-area-styles')
+        expect(style_filter).to have_content("view all styles")
+        style_taxons.each do |t|
+          expect(style_filter).to have_content(t.name.downcase)
+        end
 
         login_user
         visit "/profile"
