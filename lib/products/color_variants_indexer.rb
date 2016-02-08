@@ -56,7 +56,7 @@ module Products
 
           log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.try(:name).try(:ljust, 14)} |"
 
-          # fix circleci indexing issue
+          # fix circleci indexing issue !
           if Rails.env != "test"
             unless active_color_ids.include?(color.try(:id))
               logger.warn "id  -  | #{log_prefix} No Variants for color!"
