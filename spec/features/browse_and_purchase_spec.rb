@@ -29,8 +29,8 @@ describe 'browse and purchase process', :type => :feature do
     taxons.each do |taxon|
       dresses = create_list(:dress, 3, :taxons => [taxon])
       dresses.each do |dress|
-        colour_options.each do | colour_option |        
-          dress.product_color_values << ProductColorValue.new(:option_value => colour_option)          
+        colour_options.each do | colour_option |
+          dress.product_color_values << ProductColorValue.new(:option_value => colour_option)
         end
         # size_options.each do | size_option |
           # ProductColorValue.create!(:option_value => size_option, :product => dress)
@@ -39,8 +39,8 @@ describe 'browse and purchase process', :type => :feature do
         dress.option_types = [color_type, size_type]
         dress.save!
         # dress.reload
-        size_options.each do | size_option |        
-          colour_options.each do | colour_option |        
+        size_options.each do | size_option |
+          colour_options.each do | colour_option |
             Spree::Variant.create(product_id: dress.id).tap do |variant|
               variant.option_values = [size_option, colour_option]
               variant.save!
@@ -53,26 +53,37 @@ describe 'browse and purchase process', :type => :feature do
     # dresses.each_with_index do |dress, i|
     #   dress.taxons << taxons
     #   dress.save!
-    # end    
+    # end
 
     Utility::Reindexer.reindex
   end
 
-  before do      
+  before do
     image = double(Spree::Image)
     allow(image).to receive_message_chain(:attachment, :url).and_return('/images/missing.png')
+    allow(image).to receive(:attachment_file_name).and_return('abc')
     allow_any_instance_of(ProductColorValue).to receive(:images).and_return([image])
 
-    create_data 
+    create_data
   end
 
   context 'authenticated' do
     before(:each) { login_user }
 
+    describe 'searching dresses' do
+      it 'search correctly' do
+        visit '/search?q=test-non-existing-dress'
+        expect(page.find('.page-title')).to have_content "We couldn't find the stuff you were looking for."
+        name = Spree::Product.first.name
+        visit "/search?q=#{name.gsub(" ","+")}"
+        expect(page.find('.page-title')).to have_content "Results for"
+      end
+    end
+
     describe 'browse' do
       # TODO - Actually make this a test. :)
       xit 'should add a product to cart' do
-        visit '/us/'     
+        visit '/us/'
         p = Spree::Product.all.shuffle.first
         find('.nav-menu').click_link("Lace")
 

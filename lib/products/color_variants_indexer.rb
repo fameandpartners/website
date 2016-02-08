@@ -51,13 +51,12 @@ module Products
 
         color_customizable = product.color_customization
         discount           = product.discount.try(:amount).to_i
-
         product.product_color_values.recommended.each do |product_color_value|
           color = product_color_value.option_value
 
-          log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.name.ljust(14)} |"
+          log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.try(:name).try(:ljust, 14)} |"
 
-          unless active_color_ids.include?(color.id)
+          unless active_color_ids.include?(color.try(:id))
             logger.warn "id  -  | #{log_prefix} No Variants for color!"
             next
           end
@@ -115,9 +114,9 @@ module Products
               color_customizable: color_customizable
             },
             color: {
-              id:           color.id,
-              name:         color.name,
-              presentation: color.presentation
+              id:           color.try(:id),
+              name:         color.try(:name),
+              presentation: color.try(:presentation)
             },
             images: product_color_value.images.map do |image|
               {
@@ -127,12 +126,12 @@ module Products
             cropped_images: cropped_images_for(product_color_value),
 
             prices: {
-              aud: product.price_in(au_site_version.currency).amount,
-              usd: product.price_in(us_site_version.currency).amount
+              aud: product.price_in(au_site_version.try(:currency)).amount,
+              usd: product.price_in(us_site_version.try(:currency)).amount
             },
             sale_prices: {
-                aud: discount > 0 ? product.price_in(au_site_version.currency).apply(product.discount).amount : product.price_in(au_site_version.currency).amount,
-                usd: discount > 0 ? product.price_in(us_site_version.currency).apply(product.discount).amount : product.price_in(us_site_version.currency).amount
+                aud: discount > 0 ? product.price_in(au_site_version.try(:currency)).apply(product.discount).amount : product.price_in(au_site_version.try(:currency)).amount,
+                usd: discount > 0 ? product.price_in(us_site_version.try(:currency)).apply(product.discount).amount : product.price_in(us_site_version.try(:currency)).amount
             }
          }
 
