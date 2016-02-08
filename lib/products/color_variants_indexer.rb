@@ -166,6 +166,7 @@ module Products
 
       logger.info('Bulk Upload')
       index.bulk_store(variants)
+      p 'haha',variants
       logger.info('Refresh')
 
       index.refresh
