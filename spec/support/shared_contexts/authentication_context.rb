@@ -2,6 +2,7 @@ module Spec
   module Feature
     module Authentication
       def login_user(user = create(:spree_user, skip_welcome_email: true))
+        allow_any_instance_of(SiteVersion).to receive(:code).and_return("us")
         visit '/login'
         within('#password-credentials') do
           fill_in 'Email', with: user.email

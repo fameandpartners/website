@@ -71,7 +71,13 @@ describe 'browse and purchase process', :type => :feature do
     before(:each) { login_user }
 
     describe 'searching dresses' do
-      it 'search correctly' do
+      it 'show correct user data after login', :chrome do
+        visit "/profile"
+        expect(page.find("#profile_first_name").value).to eql(Spree::User.first.first_name)
+        expect(page.find("#profile_last_name").value).to eql(Spree::User.first.last_name)
+      end
+
+      it 'search correctly', :chrome do
         visit '/search?q=test-non-existing-dress'
         expect(page.find('.page-title')).to have_content "We couldn't find the stuff you were looking for."
         name = Spree::Product.first.name
