@@ -89,13 +89,6 @@ describe 'browse and purchase process', :type => :feature do
         expect(price_filter).to have_content("$300 - $399")
         expect(price_filter).to have_content("$400+")
 
-        #style_taxons = Spree::Taxon.where(name: 'Style').first.children
-        #style_filter = page.find('.filter-area-styles')
-        #expect(style_filter).to have_content("view all styles")
-        #style_taxons.each do |t|
-        #  expect(style_filter).to have_content(t.name.downcase)
-        #end
-
         login_user
         visit "/profile"
         expect(page.find("#profile_first_name").value).to eql(Spree::User.first.first_name)
