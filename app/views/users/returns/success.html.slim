@@ -5,5 +5,11 @@
 
 .page-content.contact
   .container
-    p We won't play hard to get, we'll get back to you ASAP.
-    p Please wait for confirmation before sending your dress back.
+    - if user.has_spree_role?(:admin)
+      p A return request has been created
+      p= "Order: #{order_return.order.number}"
+      p= "Customer Email: #{order_return.order.email}"
+      p= link_to "Back to Order Admin", spree.admin_order_path(order_return.order)
+    - else
+      p We won't play hard to get, we'll get back to you ASAP.
+      p Please wait for confirmation before sending your dress back.
