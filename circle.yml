@@ -4,6 +4,12 @@ machine:
   services:
     - elasticsearch
 
+dependencies:
+  post:
+    - wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.5.2.tar.gz
+    - tar -xvf elasticsearch-1.5.2.tar.gz
+    - elasticsearch-1.5.2/bin/elasticsearch: {background: true}
+
 general:
   artifacts:
     - "tmp/capybara"
