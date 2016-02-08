@@ -169,15 +169,18 @@ function _ensure_spreadsheet_env_setup
     error "Environment var, MARK_NEW_THIS_WEEK is unset, and must be defined."
     error "Do you want to add the products in this import to the 'New This Week Taxon'?"
 
-    read -p "Press (y) for Yes. Any other key for No" -n 1 do_mark_new_this_week
-    echo ""
+    read -p "Press $(blue)(y)$(normal) for $(blue)Yes$(normal). Any $(red)other key$(normal) for $(red)No$(normal): $(green)" -n 1 do_mark_new_this_week
+    echo "$(normal)"
     if [ "${do_mark_new_this_week}" = "y" ]; then
       export MARK_NEW_THIS_WEEK="TRUE"
     else
       export MARK_NEW_THIS_WEEK="FALSE"
     fi
+
+    info "To avoid this step next time, set the ENV var by running $(green)export MARK_NEW_THIS_WEEK=${MARK_NEW_THIS_WEEK}$(normal)"
+
   fi
-  success "MARK_NEW_THIS_WEEK=${MARK_NEW_THIS_WEEK}"
+  success "Using MARK_NEW_THIS_WEEK=${MARK_NEW_THIS_WEEK}"
 }
 
 function error() { echo $(red)[$(date +"$log_date_format")][E]  $*$(normal); }
