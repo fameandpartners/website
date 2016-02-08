@@ -100,6 +100,7 @@ describe 'browse and purchase process', :type => :feature do
         visit "/profile"
         expect(page.find("#profile_first_name").value).to eql(Spree::User.first.first_name)
         expect(page.find("#profile_last_name").value).to eql(Spree::User.first.last_name)
+        visit "/logout"
       end
     end
 
