@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'sending a contact email', :type => :feature do
   describe 'smoke test' do
-    it do
+    it 'works', :chrome do
       contact = build :contact
 
       visit '/'
@@ -17,8 +17,8 @@ describe 'sending a contact email', :type => :feature do
       end
       click_button 'Send'
 
-      expect(page).to have_content "Thanks!"
-      expect(page).to have_content "We won't play hard to get, we'll get back to you ASAP."
+      expect(page).to have_content "THANKS!"
+      expect(page).to have_content "WE WON'T PLAY HARD TO GET, WE'LL GET BACK TO YOU ASAP."
     end
   end
 end

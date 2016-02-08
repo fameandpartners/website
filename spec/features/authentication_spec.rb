@@ -7,26 +7,28 @@ describe 'authentication process', :type => :feature do
   describe 'login' do
 
     context 'with valid credentials' do
-      it 'should authenticate' do
+      it 'should authenticate', :chrome  do
+        allow_any_instance_of(SiteVersion).to receive(:code).and_return("us")
         visit '/login'
         within('#password-credentials') do
           fill_in 'Email', :with => user.email
           fill_in 'Password', :with => user.password
         end
         click_button 'Login'
-        expect(page).to_not have_content 'Invalid email or password.'
+        expect(page).not_to have_content 'Invalid email or password.'
       end
     end
 
     context 'with invalid credentials' do
-      it 'should authenticate' do
+      it 'should authenticate', :chrome do
+        allow_any_instance_of(SiteVersion).to receive(:code).and_return("us")
         visit '/login'
         within('#password-credentials') do
           fill_in 'Email', :with => user.email
           fill_in 'Password', :with => 'adaljshdljhefih'
         end
         click_button 'Login'
-        expect(page).to have_content 'Invalid email or password.'
+        expect(page.find('form .alert-danger').text).to eq "× INVALID EMAIL OR PASSWORD."
       end
     end
 
