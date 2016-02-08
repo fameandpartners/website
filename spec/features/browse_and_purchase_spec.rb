@@ -75,7 +75,6 @@ describe 'browse and purchase process', :type => :feature do
         visit '/search?q=test-non-existing-dress'
         expect(page.find('.page-title')).to have_content "We couldn't find the stuff you were looking for."
         name = Spree::Product.first.name
-
         visit "/search?q=#{name.gsub(" ","+")}"
         expect(page.find('.page-title')).to have_content "RESULTS FOR"
 
