@@ -170,6 +170,7 @@ $product-color-wine:            #831c2e;
 .color-apple-green             { background-color: $product-color-apple-green; }
 .color-apricot                 { background-color: $product-color-apricot; }
 .color-aqua                    { background-color: $product-color-aqua; }
+.color-aqua-lily               { @include image-color-selector('AquaLily.png'); }
 .color-army-green              { background-color: $product-color-army-green; }
 .color-art-soul                { @include image-color-selector('ArtSoul.png'); }
 .color-baby-blue               { background-color: $product-color-baby-blue; }
@@ -177,6 +178,7 @@ $product-color-wine:            #831c2e;
 .color-ballerina               { background-color: $product-color-ballerina; }
 .color-beige                   { background-color: $product-color-beige; }
 .color-berry                   { background-color: $product-color-berry; }
+.color-bird-of-paradise        { @include image-color-selector('BirdOfParadise.png'); }
 .color-black                   { background-color: $product-color-black; }
 .color-black-and-chartreuse    { @include split-color-selector($product-color-black, $product-color-chartreuse); }
 .color-black-and-peacock       { @include split-color-selector($product-color-black, #134b7d); }
@@ -231,6 +233,7 @@ $product-color-wine:            #831c2e;
 .color-garden-floral           { @include image-color-selector('GardenFloral.png'); }
 .color-geo-sage                { @include image-color-selector('GeoSage.png'); }
 .color-gold                    { background-color: $product-color-gold; }
+.color-grand-lily              { @include image-color-selector('GrandLily.png'); }
 .color-green                   { background-color: $product-color-green; }
 .color-grey                    { background-color: $product-color-grey; }
 .color-gunmetal                { background-color: $product-color-gunmetal; }
@@ -265,6 +268,7 @@ $product-color-wine:            #831c2e;
 .color-micro-spot              { @include image-color-selector('BlackMicroSpot.png') }
 .color-mid-grey                { background-color: $product-color-mid-grey; }
 .color-midnight-floral         { @include image-color-selector('midnightfloral.jpg') }
+.color-midnight-reptile        { @include image-color-selector('MidnightReptile.png'); }
 .color-mint                    { background-color: $product-color-mint; }
 .color-monochrome              { @include image-color-selector('Monochrome.png'); }
 .color-monochrome-coda         { @include image-color-selector('MonochromeCoda.png'); }
