@@ -7,7 +7,6 @@ app/controllers/boutique_controller.rb & Views etc.
 ProductAccessory
 lib/products/batch_uploader_tania_version.rb
 app/assets/javascripts/partials/helpers/site_version.js.coffee
-spec/features/browse_and_purchase_spec.rb
 spec/features/contact_email_spec.rb
 bin/populate_db
 bin/prepare_app
