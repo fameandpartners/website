@@ -27,6 +27,10 @@
             // TODO: update path
             = react_component('ProductsCarousel', path: dresses_path(pids: page.variables['carousel_pids'].to_s.split(','), limit: page.variables['limit']))
 
+      .col-md-12.text-center.cta
+        = link_to 'SHOP OUR EXCLUSIVE FAME WEDDINGS BRIDESMAID COLLECTION', build_taxon_path('bridesmaid'), class: 'btn btn-black'
+
+
       .col-md-12.section-register
         .outer-wrap.mobile-change-order
           .media-wrap.position-2
@@ -49,7 +53,7 @@
             .content-wrap-inner
               .content-wrap
                 h2.heading Those who <em>play </em>together STAY together!
-                = link_to 'SHOP BRIDESMAIDS DRESSES', bridesmaid_collection_path, class:'btn btn-lowlight'
+                = link_to 'SHOP BRIDESMAIDS DRESSES', build_taxon_path('bridesmaid'), class:'btn btn-lowlight'
           picture
             = link_to 'https://www.instagram.com/fameweddings/', class:'media-wrap'
               source media='(max-width: 768px)' srcset='#{image_path("landingpages/famingtonway/tile-stay-together-mob.jpg")}'
