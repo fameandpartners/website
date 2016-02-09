@@ -28,9 +28,7 @@ describe 'authentication process', :type => :feature do
           fill_in 'Password', :with => 'adaljshdljhefih'
         end
         click_button 'Login'
-        within 'form' do
-          expect(page).to have_text('INVALID EMAIL OR PASSWORD')
-        end
+        expect(page).to have_text('INVALID EMAIL OR PASSWORD')
       end
     end
 
