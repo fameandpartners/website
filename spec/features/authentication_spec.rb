@@ -28,7 +28,9 @@ describe 'authentication process', :type => :feature do
           fill_in 'Password', :with => 'adaljshdljhefih'
         end
         click_button 'Login'
-        expect(page.find('form .alert-danger').text).to eq "× INVALID EMAIL OR PASSWORD."
+        within 'form' do
+          expect(page).to have_text('INVALID EMAIL OR PASSWORD')
+        end
       end
     end
 
