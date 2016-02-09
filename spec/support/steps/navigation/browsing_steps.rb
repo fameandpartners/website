@@ -24,6 +24,10 @@ module Acceptance
         click_button button_text
       end
 
+      step 'I click on :link_text link' do |link_text|
+        click_link link_text
+      end
+
       step 'I select :site_version site version' do |site_version|
         find('#locale-selector-current').hover
         click_link site_version
