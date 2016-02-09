@@ -35,17 +35,4 @@ RSpec.configure do |config|
 
   # Use DatabaseCleaner instead of ActiveRecord transactional
   config.use_transactional_fixtures = false
-
-  Capybara.default_driver = :poltergeist
-
-  Capybara.register_driver :chrome do |app|
-    Capybara::Selenium::Driver.new(app, browser: :chrome)
-  end
-
-  config.around(:each, :chrome) do |example|
-    Capybara.current_driver = :chrome
-    example.call
-    Capybara.use_default_driver
-  end
-
 end
