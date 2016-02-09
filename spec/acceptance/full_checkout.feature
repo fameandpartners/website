@@ -3,6 +3,7 @@ Feature: Full checkout
   Background:
     Given A sample database with valid data
     And Data is setup correctly
+    And the "marketing_modals" feature is disabled
 
   # TODO: Payment step require connection to PIN payment method. This should be recorded by VCR, not ignored.
   @javascript @no_vcr
@@ -10,6 +11,7 @@ Feature: Full checkout
     When I am on Connie dress page
     Then I select "<Site Version>" site version
     And I select "<Dress Size>" size
+    And I select "<Skirt Length>" skirt length
     And I click on "Add to Cart" button
     # And I should see the cart sidebar with the checkout button
     # And I click on "CHECKOUT" button
@@ -35,6 +37,6 @@ Feature: Full checkout
     Then I should see my order placed, with "Connie" dress, "<Dress Size>" size and "<Dress Price>" price
 
     Examples:
-      | Site Version | Country       | State      | Zipcode Label | Dress Size | Dress Price |
-      | Australia    | Australia     | Queensland | Postcode      | AU 14      | 319.00      |
-      | USA          | United States | California | Zipcode       | US 10      | 289.00      |
+      | Site Version | Country       | State      | Zipcode Label | Dress Size | Skirt Length | Dress Price |
+      | Australia    | Australia     | Queensland | Postcode      | AU 14      | Petite       | 319.00      |
+      | USA          | United States | California | Zipcode       | US 10      | Petite       | 289.00      |

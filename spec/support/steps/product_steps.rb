@@ -4,6 +4,11 @@ module Acceptance
       find('#product-size-action').click
       click_layered_element(:link, dress_size)
     end
+
+    step 'I select :skirt_length skirt length' do |skirt_length|
+      find('#product-height-action').click
+      click_layered_element(:link, skirt_length)
+    end
   end
 end
 
