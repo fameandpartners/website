@@ -92,6 +92,7 @@ $product-color-dark-teal:       #064a51;
 $product-color-deep-purple:     #370840;
 $product-color-dusty-peach:     #f7c6b0;
 $product-color-dusty-pink:      #dd83b9;
+$product-color-electric-blue:   #1f1fcc;
 $product-color-emerald-green:   #057545;
 $product-color-flamingo-pink:   #f9a7c4;
 $product-color-fluoro-orange:   #ff9933;
@@ -223,6 +224,7 @@ $product-color-wine:            #831c2e;
 .color-deep-purple             { background-color: $product-color-deep-purple; }
 .color-dusty-peach             { background-color: $product-color-dusty-peach; }
 .color-dusty-pink              { background-color: $product-color-dusty-pink; }
+.color-electric-blue           { background-color: $product-color-electric-blue; }
 .color-emerald-green           { background-color: $product-color-emerald-green; }
 .color-flamingo-pink           { background-color: $product-color-flamingo-pink; }
 .color-floral-dreamer          { @include image-color-selector('FloralDreamer.png'); }
