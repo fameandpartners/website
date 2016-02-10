@@ -4,9 +4,9 @@
 
 .landing-famingtonway
   = react_component('HeroCarousel', skin: 'skin-light',
-    assets: [{link: brides_landing_page_path, src: '/assets/landingpages/brides/hero', alt: 'The Brides'},
-      {link: bridesmaid_landing_page_path, src: '/assets/landingpages/famingtonway/hero', alt: 'The Bridemaids'},
-      {link: guest_bride_page_path, src: '/assets/landingpages/guest/hero', alt: 'The Guest'}])
+    assets: [{link: build_taxon_path("wedding"), src: '/assets/landingpages/brides/hero', alt: 'The Brides'},
+      {link: build_taxon_path("bridesmaid"), src: '/assets/landingpages/famingtonway/hero', alt: 'The Bridemaids'},
+      {link: build_taxon_path("wedding-guests"), src: '/assets/landingpages/guest/hero', alt: 'The Guest'}])
 
   .container#section-main
     .row
