@@ -4,7 +4,6 @@ Feature: Add to Moodboard
   Background:
     Given A sample database with valid data
       And Data is setup correctly
-      And the "marketing_modals" feature is disabled
       And the "moodboard" feature is enabled
 
   Scenario: Add to moodboard
