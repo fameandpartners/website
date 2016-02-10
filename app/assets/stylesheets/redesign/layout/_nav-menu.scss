@@ -6,10 +6,15 @@
   text-transform: none;
   background: $c-neutral-white;
 
+  .collection-col{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   @media (max-width: 1400px) {
     .row{
       ul{
-        margin: 10px 0 0 0px;
+        margin: 10px 7px 0 0px;
       }
     }
   }
