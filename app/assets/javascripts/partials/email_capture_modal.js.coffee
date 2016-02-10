@@ -90,6 +90,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
         window.location.replace(window.location.href + "?pop_thanks=true")
         return
 
+      $.cookie("new-modal-close-state", "closed")
       window.location.reload()
 
   signupMarketingTracking: =>
