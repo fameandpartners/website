@@ -1,12 +1,3 @@
-<%
-  if Rails.env.test?
-    new_this_week_products = []
-  else
-    new_this_week_products = Rails.cache.fetch(['new_this_week_products', current_site_version.code], expire_in: configatron.cache.expire.long) {
-      Products::CollectionResource.new({ edits: 'new-this-week' }).read.serialize[:products]
-    }
-  end
-%>
 <script type='text/javascript'>
   var newThisWeekProducts = <%= raw new_this_week_products.shuffle.to_json %>;
 </script>
