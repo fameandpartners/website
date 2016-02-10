@@ -9,8 +9,18 @@ window.helpers.ProductSideSelectorPanel = class ProductSideSelectorPanel
   open: =>
     @$overlay.addClass('is-visible')
     @$container.addClass('speed-in')
+    @blockScroll()
 
   close: =>
     @$container.removeClass('speed-in')
     @$overlay.removeClass('is-visible')
+    @unblockScroll()
 
+  blockScroll: ->
+    current = $(window).scrollTop();
+    $(window).scroll (e) ->
+      e.preventDefault();
+      $(window).scrollTop(current);
+
+  unblockScroll: ->
+    $(window).off('scroll');
