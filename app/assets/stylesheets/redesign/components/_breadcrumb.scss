@@ -1,0 +1,17 @@
+/* [Breadcrumbs]
+-------------------------------------------------------*/
+.breadcrumb {
+  padding: 0 15px 0 0;
+  margin-bottom: 0;
+  background-color: transparent;
+
+  a {
+    color: $c-neutral-black;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+  }
+
+}

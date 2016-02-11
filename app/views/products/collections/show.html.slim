@@ -16,23 +16,23 @@
           span.js-heading = raw(params[:lpt] || page.heading)
 
 .page-content.products-collections.category
-  = render :partial => 'filters_sort'
-  .container-fluid
-    .row-fluid
+  .container
+    .row
+      .col-md-12
+        = render :partial => 'filters_sort'
       .col-md-3.filter-col
-        div.inner
-          = render :partial => 'filters_color_shape_style'
+        = render :partial => 'filters_color_shape_style'
 
       .col-md-9
-        .container-fluid.relative.products-collection
-          .products-set
-            = render partial: 'products_with_content', locals: {col: 3}
-          - if request.path.include?("/dresses/plus-size")
-            .products-set.col-md-12
+        .row.products-set
+          = render partial: 'products_with_content', locals: {col: 3}
+        - if request.path.include?("/dresses/plus-size")
+          .row.products-set
+            .col-md-12
               .panel-message
                 h2.heading These dresses are also available for killer curves up to size 22
-          .products-set
-            = render partial: 'pagination'
+        .row.products-set
+          = render partial: 'pagination'
 
 coffee:
   window.clickAddMoodboard= (target) ->

@@ -44,29 +44,11 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @$banner = $(options.banner)
 
   setUpFilterElements: =>
-    @allCheckboxes = $(".filter-area .thumb, .radio-icon")
-    @allCheckboxes.on 'click', (e) =>
-      @handleCheckboxes(e)
-      @update()
-    @selectColor = $(".select-color select")
-    @selectColor.on 'change', (e) =>
-      @handleCheckboxes(e)
+    $(".search-filters :input").on 'change', (e) =>
       @update()
 
-    @clearAll = $(".filter-rect .clear-all")
-    @clearAll.on('click',@clearAllOptions)
-    $(".show-more-styles").on 'click', ->
-      if $(this).text() == "More"
-        $(this).text("Less")
-        $('.filter-area-styles').removeClass('short-height')
-        $('.filter-area-styles').addClass('full-height')
-      else
-        $(this).text("More")
-        $('.filter-area-styles').removeClass('full-height')
-        $('.filter-area-styles').addClass('short-height')
+    $(".js-clear-all-filters").on('click', @clearAllOptions)
 
-    $('.select-color select').select2();
-    $('.filter-area-colors .select2-selection--single').css('padding-top','7px')
     $("#filter-mobile").on 'click', ->
       $('.filter-col').toggleClass("slide-in")
     $(".filter-rect .close").on 'click', ->
@@ -86,67 +68,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
          $('.filter-col').removeClass("slide-in")
 
   clearAllOptions: =>
-    $(".thumb").removeClass("thumb-true").addClass("thumb-false")
-    $(".filter-area-colors .thumb-false[name='all']").removeClass("thumb-false").addClass("thumb-true")
-    $(".filter-area-styles .thumb-false[name='all']").removeClass("thumb-false").addClass("thumb-true")
-    $(".filter-area-shapes .thumb-false[name='all']").removeClass("thumb-false").addClass("thumb-true")
     $('.select-color select').val("none").trigger("change")
     @update()
-
-  handleCheckboxes: (e) =>
-    name = $(e.target).attr("name")
-    area = $(e.target).closest(".filter-area")
-    isColorCheckbox = area.hasClass("filter-area-colors")
-    isShapeCheckbox = area.hasClass("filter-area-shapes")
-    isStyleCheckbox = area.hasClass("filter-area-styles")
-    isSelect = $(e.target).parent().hasClass("select-color")
-    isPriceCheckbox = $(e.target).hasClass("radio-icon")
-
-    if isSelect
-      name = $($('.filter-area-colors select option:selected')[0]).attr("name")
-      return if name=="none"
-      if $(".filter-area-colors .thumb-true[name='"+ name+"']").size() == 0
-        $(".filter-area-colors .thumb[name='"+ name+"']").click()
-      if $(".filter-area-colors .thumb-true[name='all']").size() == 1
-          $(".filter-area-colors .thumb-true[name='all']").click()
-
-    if (isColorCheckbox && !isSelect) || isShapeCheckbox || isStyleCheckbox
-      checked = $(e.target).hasClass("thumb-true")
-      $(e.target).toggleClass("thumb-true thumb-false")
-
-    if isColorCheckbox && !isSelect
-      if name == 'all'
-        return if $(".filter-area-colors .thumb-false[name='all']").size() == 1
-        $(".filter-area-colors .thumb-true[name!='all']").click()
-        $('.select-color select').val("none").trigger("change")
-      else
-        if $(".filter-area-colors .thumb-true[name='all']").size() == 1 && !checked
-          $(".filter-area-colors .thumb-true[name='all']").click()
-
-    if isShapeCheckbox
-      if name == 'all'
-        return if $(".filter-area-shapes .thumb-false[name='all']").size() == 1
-        $(".filter-area-shapes .thumb-true[name!='all']").click()
-      else
-        if $(".filter-area-shapes .thumb-true[name='all']").size() == 1 && !checked
-          $(".filter-area-shapes .thumb-true[name='all']").click()
-
-    if isStyleCheckbox
-      if name == 'all'
-        return if $(".filter-area-styles .thumb-false[name='all']").size() == 1
-        $(".filter-area-styles .thumb-true[name!='all']").click()
-      else
-        if $(".filter-area-styles .thumb-true[name='all']").size() == 1 && !checked
-          $(".filter-area-styles .thumb-true[name='all']").click()
-
-    if isPriceCheckbox
-      if $($(e.target).parent()).attr("data-all") == "true"
-        $(".filter-radio-option .radio-icon").removeClass("selected")
-        $(".filter-radio-option .radio-icon:first").addClass("selected")
-      else
-        $(".filter-radio-option .radio-icon").removeClass("selected")
-        $(e.target).addClass("selected")
-
 
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
@@ -189,7 +112,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         @content.html(content_html)
 
         @resetPagination(collection.products.length, collection.total_products)
-
         if collection && collection.details
           @updateCollectionDetails(collection.details)
 
@@ -230,21 +152,21 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     colourArray = []
     styleArray = []
 
-    if $(".filter-area-colors .thumb-true[name='all']").size() == 0
-      colorInputs = $(".filter-area-colors .thumb-true[name!='all']")
+    if $("#collapse-colors .swatch-all input:not(:checked)")
+      colorInputs = $("#collapse-colors [class^='swatch-']:not(.swatch-all) input:checked")
       for colorInput in colorInputs
         colourArray.push($(colorInput).attr("name"))
-      colour = $(".filter-area-colors select option:selected").attr("name")
+      colour = $("#otherColors option:selected").attr("name")
       if colour != "none"
         colourArray.push(colour)
 
-    if $(".filter-area-shapes .thumb-true[name!='all']")[0]?
-      bodyshapeInputs = $(".filter-area-shapes .thumb-true[name!='all']")
+    if $("#collapse-bodyshape .swatch-all input:not(:checked)")
+      bodyshapeInputs = $("#collapse-bodyshape [class^='swatch-']:not(.swatch-all) input:checked")
       for bodyshapeInput in bodyshapeInputs
         bodyshapeArray.push($(bodyshapeInput).attr("name"))
 
-    if $(".filter-area-styles .thumb-true[name!='all']")[0]?
-      styleInputs = $(".filter-area-styles .thumb-true[name!='all']")
+    if $("#collapse-style .swatch-all input:not(:checked)")
+      styleInputs = $("#collapse-style [class^='swatch-']:not(.swatch-all) input:checked")
       for styleInput in styleInputs
         styleArray.push($(styleInput).attr("name"))
 
@@ -258,9 +180,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     priceHash = {}
 
-    if !$(".filter-radio-option .radio-icon:first").hasClass("selected")
-      priceMin = $($(".filter-radio-option .radio-icon.selected").parent()).data("pricemin")
-      priceMax = $($(".filter-radio-option .radio-icon.selected").parent()).data("pricemax")
+    if $(".selector-price input:checked").data("all") == false
+      priceMin = $(".selector-price input:checked").data("pricemin")
+      priceMax = $(".selector-price input:checked").data("pricemax")
       priceHash["priceMin"] = priceMin
       priceHash["priceMax"] = priceMax if priceMax?
       filter = $.extend(filter,priceHash)

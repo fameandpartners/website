@@ -2698,29 +2698,6 @@ tbody.collapse.in {
   color: #444;
 }
 
-/* line 6, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_breadcrumbs.scss */
-.breadcrumb {
-  padding: 8px 15px;
-  margin-bottom: 25px;
-  list-style: none;
-  background-color: #f5f5f5;
-  border-radius: 4px;
-}
-/* line 13, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_breadcrumbs.scss */
-.breadcrumb > li {
-  display: inline-block;
-}
-/* line 16, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_breadcrumbs.scss */
-.breadcrumb > li + li:before {
-  content: "/ ";
-  padding: 0 5px;
-  color: #ccc;
-}
-/* line 23, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_breadcrumbs.scss */
-.breadcrumb > .active {
-  color: #777777;
-}
-
 /* line 4, ../../../../.gem/ruby/1.9.3/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_pagination.scss */
 .pagination {
   display: inline-block;
@@ -7081,10 +7058,6 @@ p {
     position: relative;
     margin-bottom: 30px;
   }
-}
-/* line 100, ../sass/_category.scss */
-.category-controls {
-  margin-bottom: 20px;
 }
 
 /* line 3, ../sass/_product.scss */
