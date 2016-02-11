@@ -560,7 +560,7 @@ GEM
       paypal-sdk-core (~> 0.2.3)
     pg (0.18.1)
     pin_payment (0.5.1)
-    poltergeist (1.7.0)
+    poltergeist (1.9.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
@@ -580,7 +580,7 @@ GEM
     rabl (0.7.2)
       activesupport (>= 2.3.14)
       multi_json (~> 1.0)
-    rack (1.4.5)
+    rack (1.4.7)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-contrib (1.4.0)
@@ -820,7 +820,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
     websocket (1.2.2)
-    websocket-driver (0.6.2)
+    websocket-driver (0.6.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
     whenever (0.9.4)
@@ -888,7 +888,7 @@ DEPENDENCIES
   paperclip
   pg
   pin_payment
-  poltergeist (~> 1.7.0)
+  poltergeist (~> 1.9.0)
   pry-rails
   psych (~> 2.0.13)
   quiet_assets

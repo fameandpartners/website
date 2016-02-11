@@ -44,6 +44,9 @@ module Products
 
       variants = []
       product_scope.find_each do |product|
+        product_price_in_us = product.price_in(us_site_version.currency)
+        product_price_in_au = product.price_in(au_site_version.currency)
+        total_sales         = total_sales_for_sku(product.sku)
 
         active_color_ids = product.variants.active.map do |variant|
           variant.option_values.colors.map(&:id)
@@ -54,21 +57,16 @@ module Products
         product.product_color_values.recommended.each do |product_color_value|
           color = product_color_value.option_value
 
-          log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.try(:name).try(:ljust, 14)} |"
+          log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.name.ljust(14)} |"
 
-          # fix circleci indexing issue !
-          if Rails.env != "test"
-            unless active_color_ids.include?(color.try(:id))
-              logger.warn "id  -  | #{log_prefix} No Variants for color!"
-              next
-            end
-            unless product_color_value.images.present?
-              logger.error "id  -  | #{log_prefix} No Images!"
-              next
-            end
+          unless active_color_ids.include?(color.try(:id))
+            logger.warn "id  -  | #{log_prefix} No Variants for color!"
+            next
           end
-
-          total_sales = total_sales_for_sku(product.sku)
+          unless product_color_value.images.present?
+            logger.error "id  -  | #{log_prefix} No Images!"
+            next
+          end
 
           logger.info("id #{color_variant_id.to_s.ljust(3)} | #{log_prefix} Indexing")
 
@@ -117,9 +115,9 @@ module Products
               color_customizable: color_customizable
             },
             color: {
-              id:           color.try(:id),
-              name:         color.try(:name),
-              presentation: color.try(:presentation)
+              id:           color.id,
+              name:         color.name,
+              presentation: color.presentation
             },
             images: product_color_value.images.map do |image|
               {
@@ -129,12 +127,12 @@ module Products
             cropped_images: cropped_images_for(product_color_value),
 
             prices: {
-              aud: product.price_in(au_site_version.try(:currency)).amount,
-              usd: product.price_in(us_site_version.try(:currency)).amount
+              aud: product_price_in_au.amount,
+              usd: product_price_in_us.amount
             },
             sale_prices: {
-                aud: discount > 0 ? product.price_in(au_site_version.try(:currency)).apply(product.discount).amount : product.price_in(au_site_version.try(:currency)).amount,
-                usd: discount > 0 ? product.price_in(us_site_version.try(:currency)).apply(product.discount).amount : product.price_in(us_site_version.try(:currency)).amount
+                aud: discount > 0 ? product_price_in_au.apply(product.discount).amount : product_price_in_au.amount,
+                usd: discount > 0 ? product_price_in_us.apply(product.discount).amount : product_price_in_us.amount
             }
          }
 

@@ -86,7 +86,7 @@ class Repositories::Taxonomy
         result = OpenStruct.new(
           {
             id: taxon.id,
-            taxonomy: taxon.taxonomy.try(:name),
+            taxonomy: taxon.taxonomy.name,
             name: taxon.name,
             permalink: taxon.base_permalink,
             position: taxon.position,
