@@ -17,10 +17,7 @@ window.helpers.ProductSideSelectorPanel = class ProductSideSelectorPanel
     @unblockScroll()
 
   blockScroll: ->
-    current = $(window).scrollTop();
-    $(window).scroll (e) ->
-      e.preventDefault();
-      $(window).scrollTop(current);
+    document.body.style.overflow = "hidden"
 
   unblockScroll: ->
-    $(window).off('scroll');
+    document.body.style.overflow = ""
