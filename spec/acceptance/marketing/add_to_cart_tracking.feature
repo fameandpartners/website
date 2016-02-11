@@ -6,10 +6,11 @@ Feature: Add to Cart Tracking
     And the "test_analytics" feature is disabled
     And the "google_tag_manager" feature is enabled
 
-  @javascript @no_vcr
+  @javascript
   Scenario: Buy a Dress
     When I am on Connie dress page
     And I select "US 2" size
+    And I select "Petite" skirt length
     And I click on "Add to Cart" button
     And I should see "Secure checkout"
     Then Page should have dataLayer "addToCart" event
