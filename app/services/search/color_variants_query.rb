@@ -35,6 +35,7 @@ module Search
       currency         = options[:currency]
       show_outerwear    = !!options[:show_outerwear]
       exclude_taxon_ids = options[:exclude_taxon_ids] if query_string.blank?
+      exclude_taxon_ids = nil if taxons.size == 1 && Spree::Taxon.find(taxons.first).name == "Bridesmaid"
 
       Tire.search(configatron.elasticsearch.indices.color_variants, size: limit, from: offset) do
 
