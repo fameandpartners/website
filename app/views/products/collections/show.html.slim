@@ -23,7 +23,7 @@
       .col-md-3.filter-col
         = render :partial => 'filters_color_shape_style'
 
-      .col-md-9
+      .col-md-9.products-collection
         .row.products-set
           = render partial: 'products_with_content', locals: {col: 3}
         - if request.path.include?("/dresses/plus-size")
