@@ -6,9 +6,9 @@ var FilterOption = React.createClass({
 
   render: function() {
     return (
-      <div className='custom-form-element filter-option selector-styles' name={this.props.name}>
+      <div className='custom-form-element filter-option selector-styles' name={this.props.label}>
         <label className={'swatch-color-' + this.props.name}>
-          <input className={this.props.select == 'selected' ? 'selected' : ''} type='checkbox' name={this.props.name} />
+          <input className={this.props.select == 'selected' ? 'selected' : ''} type='checkbox' name={this.props.label} />
           <span className='icon'></span>
           <span>{this.props.label}</span>
         </label>

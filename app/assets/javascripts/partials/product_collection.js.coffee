@@ -156,7 +156,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       colorInputs = $("#collapse-colors [class^='swatch-']:not(.swatch-all) input:checked")
       for colorInput in colorInputs
         colourArray.push($(colorInput).attr("name"))
-      colour = $("#otherColors option:selected").attr("name")
+      colour = $("#other-colors option:selected").attr("name")
       if colour != "none"
         colourArray.push(colour)
 
