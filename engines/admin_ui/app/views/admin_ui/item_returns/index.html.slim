@@ -18,4 +18,11 @@
 div
   = datagrid_table @collection, html: {class: 'table table.condensed'}
 
+// if admin is search for a specifc order, and it cant be found
+- if params[:item_returns_grid][:order_number] && @collection.assets.empty?
+  div
+    p A return request could not be found for this order.
+    = link_to "View this Order", spree.admin_order_path(id: params[:item_returns_grid][:order_number]), class: 'btn btn-info btn-sm'
+
+
 = paginate @collection.assets, theme: 'admin_ui'
