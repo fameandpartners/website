@@ -12,5 +12,5 @@
                 = link_to 'Home', root_path
               li.active Dresses
           .col-md-6
-            .sort
+            .sort.js-products-collection-filter
               = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'

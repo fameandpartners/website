@@ -2,8 +2,8 @@ ruby:
   page_size ||= 21
   init_collection_filter = "
     filter = new ProductCollectionFilter({
-      controls: '.category .category-controls',
-      content: '.category .products-collection',
+      controls: '.js-products-collection-filter',
+      content: '.js-products-collection-wrap',
       page_size: #{page_size},
       reset_source: false,
       size: #{ @collection.products.size.to_i },
@@ -19,7 +19,7 @@ ruby:
   "
   init_product_collection_moodboard_links = "
     initProductCollectionMoodboardLinks({
-      container: '.category .products-collection',
+      container: '.js-products-collection-wrap',
       buttons:   'span.moodboard'
     });"
 

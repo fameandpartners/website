@@ -15,7 +15,7 @@
         h1.title
           span.js-heading = raw(params[:lpt] || page.heading)
 
-.page-content.products-collections.category
+.page-content.products-collections
   .container
     .row
       .col-md-12
@@ -24,7 +24,7 @@
         = render :partial => 'filters_color_shape_style'
 
       .col-md-9.products-collection
-        .row.products-set
+        .row.products-set.js-products-collection-wrap
           = render partial: 'products_with_content', locals: {col: 3}
         - if request.path.include?("/dresses/plus-size")
           .row.products-set
