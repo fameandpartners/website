@@ -7,7 +7,7 @@ class OrderReturnRequestMailer < ActionMailer::Base
     @email = user.email
     mail(
       to: 'team@fameandpartners.com',
-      from: user.email,
+      reply_to: user.email,
       subject: "[Order Return Request] #{@order_return_request.number}",
       layout: false
     )
