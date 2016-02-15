@@ -10,7 +10,6 @@ module Acceptance
 
     step 'I should see the dress added to the moodboard' do
       within('.details') do
-        expect(page).not_to have_selector('i.fa-plus')
         expect(page).to have_selector('i.fa-check')
       end
     end
