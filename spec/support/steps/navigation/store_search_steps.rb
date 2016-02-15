@@ -6,7 +6,7 @@ module Acceptance
 
         # Fill in and press enter
         fill_in 'searchValue', with: dress_name
-        find('#searchValue').send_keys(:Enter)
+        find('#search').click
       end
     end
   end
