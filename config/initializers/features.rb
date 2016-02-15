@@ -16,7 +16,6 @@ if Rails.env.preproduction?
 end
 
 if Rails.env.development?
-  Features.activate(:content_revolution)
   Features.activate(:enhanced_moodboards)
   Features.activate(:fameweddings)
 

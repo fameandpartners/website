@@ -40,7 +40,7 @@
     = @item_return.factory_fault ? 'Yes' : 'No'
     = render :partial => 'payment_info'
     - if @item_return.return_request.present?
-      = render :partial => 'order_return_request'
+      = render :partial => 'order_return_request', :locals => { order_return_request: @item_return.return_request.order_return_request }
 
 
 

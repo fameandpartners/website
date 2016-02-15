@@ -3,16 +3,21 @@ require 'spec_helper'
 module AdminUi
   module Backend
     RSpec.describe FeaturesController, type: :controller do
+      render_views
       routes { AdminUi::Engine.routes }
 
-      before(:each) {
-        stub_admin_authorization!
-        stub_const("Features::DEFINED_FEATURES", %i(test_flag))
-      }
+      before(:each) do
+        allow(controller).to receive(:current_admin_user).and_return(Spree::User.new)
+        allow(controller).to receive(:authorize_admin).and_return(true)
+
+        stub_const('Features::DEFINED_FEATURES', { test_flag: "TEST_FLAG_DOCUMENTATION" } )
+      end
 
       describe 'GET index' do
-        it 'renders the index template' do
+        it 'shows documentation for features' do
           get :index
+
+          expect(response.body).to include("TEST_FLAG_DOCUMENTATION")
           expect(response.status).to eq(200)
         end
       end
@@ -30,17 +35,6 @@ module AdminUi
         it { expect(flash[:notice]).to eq('Feature Flag test_flag was successfully Disabled.') }
         it { expect(Features.active?('test_flag')).to be_falsey }
       end
-
-      context 'helper_methods' do
-        before(:each) { Features.activate('test_flag') }
-        it { expect(subject.feature_list).to include :test_flag }
-        it { expect(subject.active_text('test_flag')).to eq 'Enabled' }
-        it { expect(subject.button_text('test_flag')).to eq 'Disable' }
-        it { expect(subject.button_path('test_flag')).to eq '/fame_admin/backend/features/disable?feature=test_flag' }
-        it { expect(subject.feature_present('test_present')).to be_falsey }
-        it { expect(subject.feature_present('test_flag')).to be_truthy }
-      end
-
     end
   end
 end

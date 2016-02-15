@@ -69,41 +69,8 @@ ruby:
   - if params[:color]
     = tag :meta, name: 'robots', content: 'noindex, follow'
 
-- if Features.active?(:marketing_modals) && !Features.active?(:gift)
+- if Features.active?(:marketing_modals)
   #modal-add-to-cart-template.hidden
-
-- if Features.active?(:gift)
-  #gift-modal.hidden
-    .left-panel
-      center
-        img.logo alt='mobilelogo' src='/assets/logo/logo-mobile.svg'
-        .heading
-          span.you YOU
-          span.deserve DESERVE
-          br
-          span.vip VIP
-          span.treatment TREATMENT
-        .mess
-          .so-we-want SO WE WANT TO GIVE YOU
-          .something SOMETHING SPECIAL.
-        hr
-        img.modelco alt='modelco' src='/assets/gift/modelco.jpg'
-    .right-panel
-      center
-        .mess
-          | Select* your <b>FREE</b> ModalCo gift <b>VALUED AT $24</b> & make your dress pop.
-        .four-lipsticks
-          img.socialize  alt='socialize'  src='/assets/gift/socialize.jpg'  data-sku='GIFTC278'
-          img.morocco    alt='morocco'    src='/assets/gift/morocco.jpg'    data-sku='GIFTC279'
-          img.firered    alt='firered'   src='/assets/gift/firered.jpg'     data-sku='GIFTC280'
-        input.checkout-btn.before-click readonly="readonly" value="CHECK OUT"
-        .tc
-          center
-            span
-              | *If your selected colour in unavailable, we'll send you the closest colour match.
-            br
-            span
-              | While stocks last.
 
 .product-selection-wrap
   .hero-product-wrap
@@ -182,9 +149,9 @@ ruby:
         h4 Style it with
         = simple_format(@product.style_notes)
 
+      - if @product.fabric.present?
         h4 Fabric & Trims
-        - if @product.fabric.present?
-          = simple_format(@product.fabric)
+        = simple_format(@product.fabric)
         | Product may have variations in dying hues so product may look slightly different from image
 
       h4 Care Instructions

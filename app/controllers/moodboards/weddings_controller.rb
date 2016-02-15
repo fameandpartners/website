@@ -26,6 +26,21 @@ module Moodboards
       moodboard
     end
 
+    private def track_moodboard_update(moodboard)
+      mb         = MoodboardsPresenter::MoodboardPresenter.new(moodboard)
+      tracker    = Marketing::CustomerIOEventTracker.new
+      trackable  = { id: mb.owner_email, email: mb.owner_email }
+      extra_data = {
+        moodboard_path:       mb.show_path,
+        moodboard_url:        mb.show_url,
+        moodboard_name:       mb.name,
+        moodboard_owner_name: mb.owner_name,
+      }
+
+      tracker.client.identify(trackable)
+      tracker.track(mb.owner_email, 'wedding_moodboard_update', extra_data)
+    end
+
     def edit
       @moodboard = default_wedding_moodboard
       @moodboard_form = Forms::WeddingMoodboard.new(@moodboard)
@@ -45,6 +60,7 @@ module Moodboards
       if @moodboard_form.validate(params[:wedding_moodboard])
         @moodboard_form.name = wedding_name(@moodboard_form.bride_first_name)
         @moodboard_form.save
+        track_moodboard_update(@moodboard)
         render :guests
       else
         render :edit

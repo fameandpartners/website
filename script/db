@@ -275,7 +275,9 @@ function create_test_fixture_dump
   DELETE FROM spree_product_properties AS spp WHERE spp.product_id != 681;
   DELETE FROM spree_variants AS sv WHERE sv.id NOT IN ( SELECT v.id FROM spree_variants AS v WHERE v.product_id = 681 );
   DELETE FROM spree_prices AS sp WHERE sp.variant_id NOT IN ( SELECT v.id FROM spree_variants AS v WHERE v.product_id = 681 );
-  DELETE FROM spree_option_values_variants AS sovv WHERE sovv.variant_id NOT IN ( SELECT v.id FROM spree_variants AS v WHERE v.product_id = 681 );"
+  DELETE FROM spree_option_values_variants AS sovv WHERE sovv.variant_id NOT IN ( SELECT v.id FROM spree_variants AS v WHERE v.product_id = 681 );
+  DELETE FROM product_color_values AS pcv WHERE pcv.product_id != 681;
+  UPDATE spree_sales set is_active = false;"
 
   echo "$(magenta)>> $(white)Deleting everything (product_id != 681)$(normal)"
 
@@ -285,6 +287,7 @@ function create_test_fixture_dump
   bundle exec rake dev:enable_payment_gateways TARGET_ENV=test
   echo "$(magenta)>> $(white)Adding Test User$(normal)"
   bundle exec rake dev:add_test_fixture_user
+  reset_pg_pk_sequences
 
   echo "$(magenta)>> $(white)Vacumming DEV DB$(normal)"
   vacuumdb -d ${DEV_DB} -e -f
@@ -295,6 +298,11 @@ function create_test_fixture_dump
   cp ${EXPORT_FILE} ${test_fixture_dump_file}
 }
 
+function reset_pg_pk_sequences
+{
+  echo "$(magenta)>> $(white)Resetting Postgres PK Sequences$(normal)"
+  bundle exec rake db:reset_sequences
+}
 
 ## Common ##############################################################################################################
 

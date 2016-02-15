@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Spree::Order, :type => :model do
-  subject(:order)         { Spree::Order.new }
+  subject(:order)     { Spree::Order.new }
   let(:completed_at)  { DateTime.parse('Wed April 1 2015') }
 
   before do
@@ -22,7 +22,7 @@ describe Spree::Order, :type => :model do
     end
   end
 
-  describe "#promocode" do
+  describe '#promocode' do
     it 'returns code only from coupon_code type promotions' do
       expect(order).to receive(:promotions).and_return([
         double('promo', code: 'IMFAME', event_name: "spree.checkout.another_code"),
@@ -32,7 +32,32 @@ describe Spree::Order, :type => :model do
     end
   end
 
-  describe 'shipped' do
+  describe '#returnable?' do
+    let(:line_item) { build(:line_item, fabrication: fabrication) }
+    let(:order) { build(:spree_order, line_items: [line_item]) }
+
+    before(:each) { allow(order).to receive(:order_return_requested?).and_return(false) }
+
+    context 'given that all line items are shipped' do
+      let(:fabrication) { build(:fabrication, :shipped) }
+
+      it { expect(order.returnable?).to be_truthy }
+
+      context 'order has an opened return request' do
+        before(:each) { allow(order).to receive(:order_return_requested?).and_return(true) }
+
+        it { expect(order.returnable?).to be_falsey }
+      end
+    end
+
+    context 'a single line item is not shipped' do
+      let(:fabrication) { build(:fabrication, state: 'anything') }
+
+      it { expect(order.returnable?).to be_falsey }
+    end
+  end
+
+  describe '#shipped?' do
     context 'shipped' do
       before do
         allow(order).to receive(:shipment_state).and_return('shipped')

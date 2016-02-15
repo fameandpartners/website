@@ -1,3 +1,6 @@
+# TODO window.urlWithSitePrefix is not used anymore, since we're now detecting site versions using domains
+# TODO This file has been flagged as a candidate for deletion, after `urlWithSitePrefix` is completely removed from other places
+
 window.getSiteVersionPrefix = () ->
   defaultPrefix = ''
   try

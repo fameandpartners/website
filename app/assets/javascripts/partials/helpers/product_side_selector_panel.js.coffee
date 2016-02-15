@@ -9,8 +9,15 @@ window.helpers.ProductSideSelectorPanel = class ProductSideSelectorPanel
   open: =>
     @$overlay.addClass('is-visible')
     @$container.addClass('speed-in')
+    @blockScroll()
 
   close: =>
     @$container.removeClass('speed-in')
     @$overlay.removeClass('is-visible')
+    @unblockScroll()
 
+  blockScroll: ->
+    document.body.style.overflow = "hidden"
+
+  unblockScroll: ->
+    document.body.style.overflow = ""

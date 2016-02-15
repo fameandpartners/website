@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160105035758) do
+ActiveRecord::Schema.define(:version => 20160205153608) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -613,6 +613,8 @@ ActiveRecord::Schema.define(:version => 20160105035758) do
   create_table "product_color_values", :force => true do |t|
     t.integer "product_id"
     t.integer "option_value_id"
+    t.boolean "active",          :default => true
+    t.boolean "custom",          :default => false
   end
 
   add_index "product_color_values", ["product_id"], :name => "index_product_color_values_on_product_id"
@@ -769,6 +771,15 @@ ActiveRecord::Schema.define(:version => 20160105035758) do
 
   add_index "similarities", ["original_id"], :name => "index_similarities_on_original_id"
   add_index "similarities", ["similar_id"], :name => "index_similarities_on_similar_id"
+
+  create_table "simple_key_values", :force => true do |t|
+    t.string   "key",        :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "simple_key_values", ["key"], :name => "index_simple_key_values_on_key", :unique => true
 
   create_table "site_versions", :force => true do |t|
     t.integer  "zone_id"

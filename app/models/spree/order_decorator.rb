@@ -39,7 +39,8 @@ Spree::Order.class_eval do
   end
 
   def returnable?
-    shipped? && !order_return_requested?
+    line_items_shipped = line_items.all? { |li| Fabrication.for(li).shipped? }
+    line_items_shipped && !order_return_requested?
   end
 
   def order_return_requested?

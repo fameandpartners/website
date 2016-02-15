@@ -13,7 +13,7 @@ module ProductsHelper
     if taxon.present?
       taxon.name.upcase
     else
-      'LONG DRESSES' 
+      'LONG DRESSES'
     end
   end
 
@@ -23,7 +23,7 @@ module ProductsHelper
 
   def available_product_events
     range_taxonomy = Spree::Taxonomy.where(name: 'Event').first
-    
+
     if range_taxonomy.present?
       return range_taxonomy.root.children
     else
@@ -123,9 +123,9 @@ module ProductsHelper
       if colors.present?
         images_for_colors = product.images_for_colors(colors).limit(2).to_a
 
-        if images_for_colors.present?          
+        if images_for_colors.present?
           [images_for_colors.last, images_for_colors.first]
-        else          
+        else
           [product.images.last, product.images.first]
         end
       else
@@ -199,7 +199,7 @@ module ProductsHelper
       variant = product_or_variant.is_a?(Spree::Product) ? product_or_variant.master : product_or_variant
 
       link_options = {
-        data: { 
+        data: {
           'title-add'     => options[:title],
           'title-remove'  => 'Remove from moodboard',
           'action'        => 'add-to-wishlist',
@@ -221,7 +221,7 @@ module ProductsHelper
   end
 
   # render just placeholder
-  # add_to_wishlist_link(variant, 
+  # add_to_wishlist_link(variant,
   #      title: 'Add to wishlist',
   #      class: 'wishlist-link',
   #      title-remove: 'Remove from wishlist'
@@ -358,7 +358,7 @@ module ProductsHelper
   def color_options_for_select_from_options_values(color_option_values, selected = nil)
     options = color_option_values.sort_by{ |c| c.name.downcase }.map do |option_value|
       [
-        option_value.presentation, 
+        option_value.presentation,
         option_value.name,
         class: "color #{option_value.name}"
       ]
@@ -457,33 +457,12 @@ module ProductsHelper
     is_plus = product.taxons.where(:name =>"Plus Size").first
     return true if is_plus
   end
-=begin
-  def activity_description(activity, user)
-    if activity.info[:school_name]
-      actor_description = "Someone from #{activity.info[:school_name]}"
-    elsif (actor = activity.actor).present?
-      actor_description = actor.first_name
-    else
-      actor_description = "Someone"
-    end
 
-    action_description, action_class = case activity.action
-    when "purchased"
-      [ "purchased this item", "icon-purchase" ]
-    when "added_to_cart"
-      [ "added this item to their cart", "icon-bag" ]
-    when "added_to_wishlist"
-      [ "added this item to their moodboard", "icon-heart" ]
-    else # when 'viewed' & by default
-      [ "viewed this item", "icon-eye" ]
-    end
+  def new_this_week_products
+    return [] if Rails.env.test?
 
-    raw("#{content_tag(:i, '', class: 'icon ' + action_class)} #{actor_description} #{action_description} #{timeago(activity.updated_at)}")
+    Rails.cache.fetch(['new_this_week_products', current_site_version.code], expire_in: configatron.cache.expire.long) {
+      Products::CollectionResource.new({ edits: 'new-this-week' }).read.serialize[:products]
+    }
   end
-
-  def timeago(time, options = {})
-    options[:class] ||= "timeago"
-    content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
-  end
-=end
 end

@@ -8,15 +8,28 @@ module Products
                   :permalink, :is_active, :is_deleted, :images, :default_image, :price,
                   :discount, :recommended_products, :related_outerwear, :available_options, :preorder, :taxons, :variants,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
-                  :size_chart, :making_option_id, :fit, :size, :fast_making, :standard_days_for_making, :customised_days_for_making,
+                  :size_chart, :making_option_id, :fit, :size, :standard_days_for_making, :customised_days_for_making,
                   :default_standard_days_for_making, :default_customised_days_for_making,
-                  :height_customisable
+                  :height_customisable, :fast_delivery
+
+    attr_writer :fast_making
 
     def initialize(opts)
       opts.each do |k, v|
         instance_variable_set("@#{k}", v) unless v.nil?
       end
     end
+
+    module CollectionDressPresenter
+      # Provide compatibility for old OpenStruct based presenters
+      def to_h
+        [:id, :name, :color, :images, :price, :discount, :fast_making, :fast_delivery].map { |key|
+          [key , send(key)]
+        }.to_h
+      end
+    end
+
+    include CollectionDressPresenter
 
     def type
       'Dress'
@@ -158,7 +171,20 @@ module Products
     end
 
     def making_options
-       available_options.making_options
+      if fast_making_disabled?
+        available_options.making_options.reject {|mo| mo.option_type.to_s.inquiry.fast_making? }
+      else
+        available_options.making_options
+      end
+    end
+
+    def fast_making_disabled?
+      Features.active?(:getitquick_unavailable)
+    end
+
+    def fast_making
+      return false if fast_making_disabled?
+      @fast_making
     end
 
     def default_color

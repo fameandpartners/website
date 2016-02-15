@@ -42,14 +42,8 @@
                 span BRIDE TO CHOOSE FREE HONEYMOON DRESS
 
         a.inner-right.position-1.register-your-event.js-trigger-tabs-create-moodboard href='#membership_sign-up'
-          picture.media-wrap
-            source media='(max-width: 1023px)' srcset='
-            #{image_path("landingpages/famingtonway/tile-free-honeymoon-dress-mob.jpg")}'
-            source media='(min-width: 1024px)' srcset='
-            #{image_path("landingpages/famingtonway/tile-free-honeymoon-dress.jpg")}'
-            img src='#{image_path("landingpages/famingtonway/tile-free-honeymoon-dress.jpg")}' srcset='
-              #{image_path("landingpages/famingtonway/tile-free-honeymoon-dress-mob.jpg")} 1023w,
-              #{image_path("landingpages/famingtonway/tile-free-honeymoon-dress.jpg")} 1024w' alt='
+          .media-wrap
+            img src='#{image_path("landingpages/famingtonway/tile-free-honeymoon-dress.jpg")}' alt='
               Give your bride the gift of a free honeymoon dress when you and your bridal party dress with fame!'
         /.btn-wrap.position-3
           /= link_to 'Get started', new_moodboard_path, class: "btn btn-lowlight register-your-event"

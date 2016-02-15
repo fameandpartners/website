@@ -2,28 +2,63 @@
 
 require 'roo'
 require 'ostruct'
+require 'log_formatter'
+
+# TODO - MORE REFACTORING
+# This class contains multiple responsibilities inside it.
+# i.e.
+#  - Loading the file & extracting the raw data
+#  - Preprocessing the data
+#  - Validating the data - This is not explicitly done, but in a few places the code will raise errors on missing data.
+#  - Transforming the data into a simple interchange format, in this case it's a Hash.
+#  - Building & saving the domain models.
+#      There are 7 methods which take a Spree::Product `product` as the first parameter, this is
+#      definitely pointing to a class lurking in there somewhere.
 
 module Products
   class BatchUploader
+    extend Forwardable
+    def_delegators :@logger, :info, :debug, :warn, :error, :fatal
+
     attr_reader :parsed_data, :keep_taxons, :available_on
 
     include ActionView::Helpers::TextHelper # for truncate
 
-    def initialize(available_on, mark_new_this_week = false)
-      @@titles_row_numbers = [8, 10, 11, 12]
-      @@first_content_row_number = 13
+    def initialize(available_on, mark_new_this_week = false, logdev: $stdout)
+      @logger = Logger.new(logdev)
+      @logger.level = Logger::INFO
+      @logger.formatter = LogFormatter.terminal_formatter
+
       @available_on = available_on
       @keep_taxons = true
-      @mark_new_this_week = mark_new_this_week
-      show_warning
+      self.mark_new_this_week = mark_new_this_week
     end
 
-    def show_warning
-      if @mark_new_this_week
-        p 'NEW PRODUCTS WILL HAVE NEW_THIS_WEEK TAXON'
-      else
-        p 'NEW PRODUCTS WILL NOT HAVE NEW_THIS_WEEK TAXON'
-      end
+    # The Master Product spreadsheet has a 'unique' structure, and rather than detecting it,
+    # this script just hard codes the rows.
+    #  1 |
+    #  2 |
+    #  3 |
+    #  4 |
+    #  5 | MASTER PRODUCT SPREADSHEET # Document Heading
+    #  6 |
+    #  7 |
+    #  8 | [Merged Row] # Column Group Headings
+    #  9 | [Merged Row]
+    # 10 |              # Main Column Heading
+    # 11 |              # Column Sub Heading (Seems unused by script)
+    # 12 |              # Column Sub Sub Heading (Seems unused by script)
+    # 13 |              # First row of content `first_content_row_number`
+    private def titles_row_numbers
+      [8, 10, 11, 12]
+    end
+
+    private def main_column_heading_row
+      titles_row_numbers.second
+    end
+
+    private def first_content_row_number
+      13
     end
 
     def new_this_week_taxon_id
@@ -31,7 +66,7 @@ module Products
     end
 
     def parse_file(file_path)
-      @parsed_data = []
+      info "Loading Excel File #{file_path}"
       return if file_path.nil?
 
       if file_path =~ /\.xls$/
@@ -44,208 +79,229 @@ module Products
       end
 
       book.default_sheet = book.sheets.first
+      columns            = get_column_indices(book)
+      rows               = get_rows_indexes(book, columns)
 
-      columns = get_columns_codes(book)
+      info "Parsing Data into Hash"
 
-      rows = get_rows_indexes(book, columns)
+      @parsed_data = rows.to_a.map do |row_num|
+        raw = extract_raw_row_data(book, columns, row_num)
+        processed = process_raw_row_data(raw)
 
-      book.default_sheet = book.sheets.first
-
-      # rows = [rows.first] if Rails.env.development?
-      rows.to_a.each do |row_num|
-        raw = {}
-
-        # Basic
-        raw[:sku]                 = book.cell(row_num, columns[:sku])
-        raw[:name]                = book.cell(row_num, columns[:name])
-        raw[:description]         = book.cell(row_num, columns[:description])
-        raw[:price_in_aud]        = book.cell(row_num, columns[:price_in_aud])
-        raw[:price_in_usd]        = book.cell(row_num, columns[:price_in_usd])
-        raw[:taxons]              = Array.wrap(columns[:taxons]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
-        raw[:colors]              = Array.wrap(columns[:colors]).map{|i| book.cell(row_num, i) }.reject(&:blank?)
-        puts "Read XLS: #{raw[:sku]}"
-
-        # Style
-        raw[:glam]                = book.cell(row_num, columns[:glam])
-        raw[:girly]               = book.cell(row_num, columns[:girly])
-        raw[:classic]             = book.cell(row_num, columns[:classic])
-        raw[:edgy]                = book.cell(row_num, columns[:edgy])
-        raw[:bohemian]            = book.cell(row_num, columns[:bohemian])
-        raw[:sexiness]            = book.cell(row_num, columns[:sexiness])
-        raw[:fashionability]      = book.cell(row_num, columns[:fashionability])
-        raw[:apple]               = book.cell(row_num, columns[:apple])
-        raw[:pear]                = book.cell(row_num, columns[:pear])
-        raw[:strawberry]          = book.cell(row_num, columns[:strawberry])
-        raw[:hour_glass]          = book.cell(row_num, columns[:hour_glass])
-        raw[:column]              = book.cell(row_num, columns[:column])
-        raw[:athletic]            = book.cell(row_num, columns[:athletic])
-        raw[:petite]              = book.cell(row_num, columns[:petite])
-        # Properties
-        raw[:style_notes]         = book.cell(row_num, columns[:style_notes])
-        raw[:care_instructions]   = book.cell(row_num, columns[:care_instructions])
-        raw[:fit]                 = book.cell(row_num, columns[:fit])
-        raw[:size]                = book.cell(row_num, columns[:size])
-
-        raw[:fabric]              = book.cell(row_num, columns[:fabric])
-        raw[:product_type]        = book.cell(row_num, columns[:product_type])
-        raw[:product_category]    = book.cell(row_num, columns[:product_category])
-        raw[:factory_id]          = book.cell(row_num, columns[:factory_id])
-        raw[:factory_name]        = book.cell(row_num, columns[:factory_name])
-        raw[:product_coding]      = book.cell(row_num, columns[:product_coding])
-        raw[:shipping]            = book.cell(row_num, columns[:shipping])
-        raw[:stylist_quote_short] = book.cell(row_num, columns[:stylist_quote_short])
-        raw[:stylist_quote_long]  = book.cell(row_num, columns[:stylist_quote_long])
-        raw[:product_details]     = book.cell(row_num, columns[:product_details])
-        raw[:revenue]             = book.cell(row_num, columns[:revenue])
-        raw[:cogs]                = book.cell(row_num, columns[:cogs])
-        raw[:color_customization] = book.cell(row_num, columns[:color_customization])
-        raw[:standard_days_for_making] = book.cell(row_num, columns[:standard_days_for_making])
-        raw[:customised_days_for_making] = book.cell(row_num, columns[:customised_days_for_making])
-        raw[:short_description]   = book.cell(row_num, columns[:short_description])
-
-        # Additional
-        raw[:song_link]           = book.cell(row_num, columns[:song_link])
-        raw[:song_name]           = book.cell(row_num, columns[:song_name])
-
-        raw[:customizations]      = []
-        columns[:customizations].each_with_index do |customization, index|
-          raw[:customizations] << {
-            name: book.cell(row_num, customization[:name]).to_s.gsub("_x000D_", '').strip,
-            price: book.cell(row_num, customization[:price]).to_s.gsub(/[^\d\.]/, '').to_f,
-            position: index + 1
-          }
-        end
-
-        processed = {}
-
-        if raw[:sku].present?
-          if raw[:sku].is_a?(String) || raw[:sku].is_a?(Integer)
-            processed[:sku] = raw[:sku].to_s
-          elsif raw[:sku].is_a?(Float)
-            processed[:sku] = raw[:sku].to_i.to_s
-          end
-        end
-
-        if raw[:name].present?
-          if raw[:name].is_a?(String)
-            processed[:name] = raw[:name].titleize
-          end
-        end
-
-        if raw[:description].present?
-          processed[:description] = ActionController::Base.helpers.simple_format(raw[:description])
-        end
-
-        if raw[:product_details].present?
-          processed[:product_details] = ActionController::Base.helpers.simple_format(raw[:product_details])
-        end
-
-        if raw[:short_description].present?
-          processed[:short_description] = ActionController::Base.helpers.simple_format(raw[:short_description])
-        end
-
-        range = (Spree::Taxonomy.where(name: 'Range').first || Spree::Taxonomy.first).root
-
-        processed[:taxon_ids] = []
-        raw[:taxons].select(&:present?).map(&:humanize).map(&:titleize).each do |taxon_name|
-          taxon = Spree::Taxon.where("LOWER(REPLACE(name, '-', ' ')) = ?", taxon_name.downcase).first
-
-          abort("Taxon '#{taxon_name}' does not exist on dress '#{raw[:name]}' (#{raw[:sku]})!  Upload aborted!") if taxon.blank?
-
-          processed[:taxon_ids] << taxon.id
-        end
-
-        processed[:taxon_ids] << new_this_week_taxon_id if @mark_new_this_week && new_this_week_taxon_id.present?
-
-        color_option = Spree::OptionType.color
-
-
-        processed[:colors] = []
-        raw[:colors].each do |presentation|
-          presentation = presentation.strip
-
-          color = color_option.option_values.where('LOWER(presentation) = ?', presentation.downcase).first
-
-          if color.blank?
-            color = color_option.option_values.create do |object|
-              object.name = presentation.downcase.gsub(' ', '-')
-              object.presentation = presentation
-            end
-          end
-
-          processed[:colors] << color.name
-        end
-
-        processed[:customizations] = []
-        raw[:customizations].each do |customization|
-          if customization[:name].present?
-            processed[:customizations] << customization
-          end
-        end
-
-
-        item = {
-          # Basic
-          sku:                  processed[:sku] || raw[:sku],
-          name:                 processed[:name] || raw[:name],
-          price_in_aud:         raw[:price_in_aud],
-          price_in_usd:         raw[:price_in_usd],
-          description:          processed[:description] || raw[:description],
-          colors:               processed[:colors],
-          taxon_ids:            processed[:taxon_ids],
-          style_profile: {
-            glam:                 raw[:glam],
-            girly:                raw[:girly],
-            classic:              raw[:classic],
-            edgy:                 raw[:edgy],
-            bohemian:             raw[:bohemian],
-            sexiness:             raw[:sexiness],
-            fashionability:       raw[:fashionability],
-            apple:                raw[:apple],
-            pear:                 raw[:pear],
-            strawberry:           raw[:strawberry],
-            hour_glass:           raw[:hour_glass],
-            column:               raw[:column],
-            athletic:             raw[:athletic],
-            petite:               raw[:petite]
-          },
-          properties: {
-              style_notes:                raw[:style_notes],
-              care_instructions:          raw[:care_instructions],
-              size:                       raw[:size],
-              fit:                        raw[:fit],
-              fabric:                     raw[:fabric],
-              product_type:               raw[:product_type],
-              product_category:           raw[:product_category],
-              factory_id:                 raw[:factory_id],
-              factory_name:               raw[:factory_name],
-              product_coding:             raw[:product_coding],
-              shipping:                   raw[:shipping],
-              stylist_quote_short:        raw[:stylist_quote_short],
-              stylist_quote_long:         raw[:stylist_quote_long],
-              product_details:            processed[:product_details],
-              revenue:                    raw[:revenue],
-              cogs:                       raw[:cogs],
-              video_id:                   processed[:video_id],
-              color_customization:        raw[:color_customization],
-              short_description:          raw[:short_description],
-              standard_days_for_making:   raw[:standard_days_for_making] || 5,
-              customised_days_for_making: raw[:customised_days_for_making] || 10
-          },
-          song: {
-            link:            raw[:song_link],
-            name:            raw[:song_name],
-          },
-          customizations:       processed[:customizations],
-        }
-
-        @parsed_data.push(item)
+        build_item_hash(processed, raw)
       end
-
-      @parsed_data
+      info "Parse Complete"
     end
 
-    def get_columns_codes(book)
+    private def extract_raw_row_data(book, columns, row_num)
+      raw                = {}
+
+      # Basic
+      raw[:sku]                        = book.cell(row_num, columns[:sku])
+      raw[:name]                       = book.cell(row_num, columns[:name])
+      raw[:description]                = book.cell(row_num, columns[:description])
+      raw[:price_in_aud]               = book.cell(row_num, columns[:price_in_aud])
+      raw[:price_in_usd]               = book.cell(row_num, columns[:price_in_usd])
+      raw[:taxons]                     = Array.wrap(columns[:taxons]).map { |i| book.cell(row_num, i) }.reject(&:blank?)
+      raw[:colors]                     = Array.wrap(columns[:colors]).map { |i| book.cell(row_num, i) }.reject(&:blank?)
+
+      # Style
+      raw[:glam]                       = book.cell(row_num, columns[:glam])
+      raw[:girly]                      = book.cell(row_num, columns[:girly])
+      raw[:classic]                    = book.cell(row_num, columns[:classic])
+      raw[:edgy]                       = book.cell(row_num, columns[:edgy])
+      raw[:bohemian]                   = book.cell(row_num, columns[:bohemian])
+      raw[:sexiness]                   = book.cell(row_num, columns[:sexiness])
+      raw[:fashionability]             = book.cell(row_num, columns[:fashionability])
+      raw[:apple]                      = book.cell(row_num, columns[:apple])
+      raw[:pear]                       = book.cell(row_num, columns[:pear])
+      raw[:strawberry]                 = book.cell(row_num, columns[:strawberry])
+      raw[:hour_glass]                 = book.cell(row_num, columns[:hour_glass])
+      raw[:column]                     = book.cell(row_num, columns[:column])
+      raw[:athletic]                   = book.cell(row_num, columns[:athletic])
+      raw[:petite]                     = book.cell(row_num, columns[:petite])
+      # Properties
+      raw[:style_notes]                = book.cell(row_num, columns[:style_notes])
+      raw[:care_instructions]          = book.cell(row_num, columns[:care_instructions])
+      raw[:fit]                        = book.cell(row_num, columns[:fit])
+      raw[:size]                       = book.cell(row_num, columns[:size])
+      raw[:fabric]                     = book.cell(row_num, columns[:fabric])
+      raw[:product_type]               = book.cell(row_num, columns[:product_type])
+      raw[:product_category]           = book.cell(row_num, columns[:product_category])
+      raw[:factory_id]                 = book.cell(row_num, columns[:factory_id])
+      raw[:factory_name]               = book.cell(row_num, columns[:factory_name])
+      raw[:product_coding]             = book.cell(row_num, columns[:product_coding])
+      raw[:shipping]                   = book.cell(row_num, columns[:shipping])
+      raw[:stylist_quote_short]        = book.cell(row_num, columns[:stylist_quote_short])
+      raw[:stylist_quote_long]         = book.cell(row_num, columns[:stylist_quote_long])
+      raw[:product_details]            = book.cell(row_num, columns[:product_details])
+      raw[:revenue]                    = book.cell(row_num, columns[:revenue])
+      raw[:cogs]                       = book.cell(row_num, columns[:cogs])
+      raw[:color_customization]        = book.cell(row_num, columns[:color_customization])
+      raw[:available_colors]           = book.cell(row_num, columns[:available_colors])
+      raw[:standard_days_for_making]   = book.cell(row_num, columns[:standard_days_for_making])
+      raw[:customised_days_for_making] = book.cell(row_num, columns[:customised_days_for_making])
+      raw[:short_description]          = book.cell(row_num, columns[:short_description])
+
+      # Additional
+      raw[:song_link]                  = book.cell(row_num, columns[:song_link])
+      raw[:song_name]                  = book.cell(row_num, columns[:song_name])
+
+      raw[:customizations] = []
+      columns[:customizations].each_with_index do |customization, index|
+        raw[:customizations] << {
+          name:     book.cell(row_num, customization[:name]).to_s.gsub("_x000D_", '').strip,
+          price:    book.cell(row_num, customization[:price]).to_s.gsub(/[^\d\.]/, '').to_f,
+          position: index + 1
+        }
+      end
+      info "Row #{row_num} - Extracted Raw Data for SKU: #{raw[:sku]}"
+      raw
+    end
+
+    private def process_raw_row_data(raw)
+      processed = {}
+
+      if raw[:sku].present?
+        if raw[:sku].is_a?(String) || raw[:sku].is_a?(Integer)
+          processed[:sku] = raw[:sku].to_s
+        elsif raw[:sku].is_a?(Float)
+          processed[:sku] = raw[:sku].to_i.to_s
+        end
+      end
+
+      if raw[:name].present?
+        if raw[:name].is_a?(String)
+          processed[:name] = raw[:name].titleize
+        end
+      end
+
+      if raw[:description].present?
+        processed[:description] = ActionController::Base.helpers.simple_format(raw[:description])
+      end
+
+      if raw[:product_details].present?
+        processed[:product_details] = ActionController::Base.helpers.simple_format(raw[:product_details])
+      end
+
+      if raw[:short_description].present?
+        processed[:short_description] = ActionController::Base.helpers.simple_format(raw[:short_description])
+      end
+
+      range = (Spree::Taxonomy.where(name: 'Range').first || Spree::Taxonomy.first).root
+
+      processed[:taxon_ids] = []
+      raw[:taxons].select(&:present?).map(&:humanize).map(&:titleize).each do |taxon_name|
+        taxon = Spree::Taxon.where("LOWER(REPLACE(name, '-', ' ')) = ?", taxon_name.downcase).first
+
+        abort("Taxon '#{taxon_name}' does not exist on dress '#{raw[:name]}' (#{raw[:sku]})!  Upload aborted!") if taxon.blank?
+
+        processed[:taxon_ids] << taxon.id
+      end
+
+      processed[:taxon_ids] << new_this_week_taxon_id if @mark_new_this_week && new_this_week_taxon_id.present?
+
+      # :colors is the legacy recommended colors.
+      # :recommended_colors will each have a variant built from them
+      # :available_colors which are not :recommended_colors will get a ProductColorValue, but no variant.
+      processed[:colors]             = get_color_options(raw[:colors]).map(&:name)
+      recommended_colors             = get_color_options(raw[:colors])
+      available_colors               = get_color_options(raw[:available_colors].to_s.split(','))
+      processed[:recommended_colors] = recommended_colors
+      processed[:available_colors]   = Set.new(available_colors + recommended_colors).to_a
+
+      processed[:customizations] = []
+      raw[:customizations].each do |customization|
+        if customization[:name].present?
+          processed[:customizations] << customization
+        end
+      end
+
+      processed
+    end
+
+    private def get_color_options(color_names)
+      Array.wrap(color_names).map(&:strip).map do |human_color_name|
+        find_or_create_color_option(presentation: human_color_name)
+      end
+    end
+
+    class ColorOptionValue < Struct.new(:id, :name, :presentation); end
+
+    private def find_or_create_color_option(presentation:)
+      color = Spree::OptionType.color.option_values.where('LOWER(presentation) = ?', presentation.downcase).first
+
+      if color.blank?
+        warn "Creating new Color option #{presentation}."
+        color = Spree::OptionType.color.option_values.create do |object|
+          object.name         = presentation.downcase.gsub(' ', '-')
+          object.presentation = presentation
+        end
+      end
+
+      ColorOptionValue.new(color.id, color.name, color.presentation)
+    end
+
+    private def build_item_hash(processed, raw)
+      {
+        # Basic
+        sku:            processed[:sku] || raw[:sku],
+        name:           processed[:name] || raw[:name],
+        price_in_aud:   raw[:price_in_aud],
+        price_in_usd:   raw[:price_in_usd],
+        description:    processed[:description] || raw[:description],
+        colors:         processed[:colors],
+        taxon_ids:      processed[:taxon_ids],
+        style_profile:  {
+          glam:           raw[:glam],
+          girly:          raw[:girly],
+          classic:        raw[:classic],
+          edgy:           raw[:edgy],
+          bohemian:       raw[:bohemian],
+          sexiness:       raw[:sexiness],
+          fashionability: raw[:fashionability],
+          apple:          raw[:apple],
+          pear:           raw[:pear],
+          strawberry:     raw[:strawberry],
+          hour_glass:     raw[:hour_glass],
+          column:         raw[:column],
+          athletic:       raw[:athletic],
+          petite:         raw[:petite]
+        },
+        properties:     {
+          style_notes:                raw[:style_notes],
+          care_instructions:          raw[:care_instructions],
+          size:                       raw[:size],
+          fit:                        raw[:fit],
+          fabric:                     raw[:fabric],
+          product_type:               raw[:product_type],
+          product_category:           raw[:product_category],
+          factory_id:                 raw[:factory_id],
+          factory_name:               raw[:factory_name],
+          product_coding:             raw[:product_coding],
+          shipping:                   raw[:shipping],
+          stylist_quote_short:        raw[:stylist_quote_short],
+          stylist_quote_long:         raw[:stylist_quote_long],
+          product_details:            processed[:product_details],
+          revenue:                    raw[:revenue],
+          cogs:                       raw[:cogs],
+          video_id:                   processed[:video_id],
+          color_customization:        raw[:color_customization],
+          short_description:          raw[:short_description],
+          standard_days_for_making:   raw[:standard_days_for_making] || 5,
+          customised_days_for_making: raw[:customised_days_for_making] || 10
+        },
+        song:           {
+          link: raw[:song_link],
+          name: raw[:song_name],
+        },
+        customizations:     processed[:customizations],
+        recommended_colors: processed[:recommended_colors],
+        available_colors:   processed[:available_colors],
+      }
+    end
+
+    def get_column_indices(book)
       return @codes if @codes.present?
 
       book.default_sheet = book.sheets.first
@@ -287,6 +343,7 @@ module Products
           factory_id:                 /factory id/i,
           factory_name:               /factory$/i,
           color_customization:        /colour customisation/i,
+          available_colors:           /available colou?rs/i,
           #product_coding: /product coding/i,
           shipping:                   /shipping/i,
           stylist_quote_short:        /stylist inspiration quote/i,
@@ -300,7 +357,7 @@ module Products
       conformities.each do |key, regex|
         indexes = []
 
-        book.row(@@titles_row_numbers.second).each_with_index do |title, index|
+        book.row(main_column_heading_row).each_with_index do |title, index|
           next unless title.present?
 
           if title.strip =~ regex
@@ -324,7 +381,7 @@ module Products
       @codes[:description] = 6
 
       @codes[:customizations] = []
-      book.row(@@titles_row_numbers.second).each_with_index do |title, index|
+      book.row(main_column_heading_row).each_with_index do |title, index|
         next unless title =~ /customisation \#\d/i
           @codes[:customizations] << {
             name: index + 1, #honestly wtf
@@ -332,7 +389,7 @@ module Products
           }
       end
 
-      book.row(@@titles_row_numbers.second).each_with_index do |title, index|
+      book.row(main_column_heading_row).each_with_index do |title, index|
         next unless title =~ /Music Track Link/i
         @codes[:song_link]      = index + 1
         @codes[:song_name]      = index + 2
@@ -345,22 +402,25 @@ module Products
       @codes[:video_id]       = 139 # 138 139 with
       @codes[:short_description] = 140
 
+      info "Found #{@codes.keys.count} keyed columns."
       @codes
     end
 
     def get_rows_indexes(book, columns)
-      first_empty_row_num = @@first_content_row_number
+      first_empty_row_num = first_content_row_number
 
       total_rows = book.last_row(book.sheets.first)
       while first_empty_row_num < total_rows and book.cell(first_empty_row_num, columns[:sku]).present?
         first_empty_row_num += 1
       end
 
-      (@@first_content_row_number..first_empty_row_num)
+      info "Found #{first_empty_row_num - first_content_row_number} rows of data."
+      (first_content_row_number..first_empty_row_num)
     end
 
     # create product with restored data
     def create_or_update_products(products_attrs)
+      info "Creating or Update Products"
       products_attrs.map do |attrs|
         args = attrs.symbolize_keys
 
@@ -374,28 +434,27 @@ module Products
           )
 
           add_product_properties(product, args[:properties].symbolize_keys)
+          add_product_color_options(product, **args.slice(:available_colors, :recommended_colors))
           add_product_variants(product, sizes, args[:colors] || [], args[:price_in_aud], args[:price_in_usd])
           add_product_style_profile(product, args[:style_profile].symbolize_keys)
           add_product_customizations(product, args[:customizations] || [])
           add_product_song(product, args[:song].symbolize_keys || {})
 
           product
-        # rescue Exception => message
-        #   Rails.logger.warn(message)
-        #   puts "======== Exception ========"
-        #   puts args[:sku]
-        #   puts args[:style_name]
-        #   puts message
-        #   puts "==========================="
-        #   nil
         end
       end.compact
     end
 
     private
 
+    def section_heading(product = nil, sku: product.sku, name: product.name)
+      "[" << "#{sku} - #{name}".ljust(25) << "]"
+    end
+
     def create_or_update_product(args)
       sku = args[:sku].to_s.downcase.strip
+      section_heading = section_heading(sku: args[:sku], name: args[:name])
+      info "#{section_heading} Building"
 
       raise 'SKU should be present!' unless sku.present?
 
@@ -443,19 +502,20 @@ module Products
         end
       end
 
-      new_product = product.persisted? ? 'Updated' : 'New'
+      new_product = product.persisted? ? 'Updated' : 'Created'
 
       product.save!
-      puts "Saving: #{new_product} - #{product.sku} - #{product.id} - #{product.name}"
+
 
       if args[:price_in_aud].present? || args[:price_in_usd].present?
         add_product_prices(product, args[:price_in_aud], args[:price_in_usd])
       end
-
+      info "#{section_heading} #{new_product} id=#{product.id}"
       product
     end
 
     def add_product_properties(product, args)
+      debug "#{section_heading(product)} #{__method__}"
       allowed = [:style_notes,
                  :care_instructions,
                  :size,
@@ -491,7 +551,21 @@ module Products
       product
     end
 
+    def add_product_color_options(product, recommended_colors:, available_colors:)
+      debug "#{section_heading(product)} #{__method__}"
+      custom_colors = available_colors - recommended_colors
+
+      custom_colors.map do |custom|
+        product.product_color_values.where(option_value_id: custom.id, custom: true).first_or_create
+      end
+
+      recommended_colors.map do |recommended|
+        product.product_color_values.where(option_value_id: recommended.id, custom: false).first_or_create
+      end
+    end
+
     def add_product_variants(product, sizes, colors, price_in_aud, price_in_usd)
+      debug "#{section_heading(product)} #{__method__}"
       variants = []
       size_option = Spree::OptionType.size
       color_option = Spree::OptionType.color
@@ -543,6 +617,7 @@ module Products
     end
 
     def add_product_customizations(product, array_of_attributes)
+      debug "#{section_heading(product)} #{__method__}"
       customizations = []
 
       allowed = [:name,
@@ -573,6 +648,7 @@ module Products
     end
 
     def add_product_style_profile(product, args)
+      debug "#{section_heading(product)} #{__method__}"
       attributes = args.slice(:glam,
                               :girly,
                               :classic,
@@ -617,6 +693,7 @@ module Products
     end
 
     def add_product_song(product, raw_attrs)
+      debug "#{section_heading(product)} #{__method__}"
       if raw_attrs[:link].present?
         song = product.inspirations.song.first || product.inspirations.song.build
 
@@ -625,6 +702,7 @@ module Products
     end
 
     def add_product_prices(product, price, us_price = nil)
+      debug "#{section_heading(product)} #{__method__}"
       product.price = price
       product.save
 
@@ -633,6 +711,15 @@ module Products
       usd = Spree::Price.find_or_create_by_variant_id_and_currency(master_variant.id, 'USD')
       usd.amount = us_price if us_price.present?
       usd.save!
+    end
+
+    private def mark_new_this_week=(value)
+      if value
+        warn 'New products will have new_this_week taxon'
+      else
+        warn 'New products will NOT have new_this_week taxon!'
+      end
+      @mark_new_this_week = value
     end
   end
 end

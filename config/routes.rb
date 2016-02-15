@@ -12,7 +12,7 @@ FameAndPartners::Application.routes.draw do
   ########################
   # US Redirection to root
   ########################
-  get '/us/*whatevs' => redirect(path: '/%{whatevs}', host: 'www.fameandpartners.com')
+  get '/us/*whatevs', to: redirect(path: "/%{whatevs}")
   get '/us' => redirect('/')
 
   #######################################################
@@ -144,6 +144,8 @@ FameAndPartners::Application.routes.draw do
     get '/bridal-dresses'     => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridal_collection
 
     get '/lets-party'     => 'products/collections#show', :permalink => 'dance-hall', :as => :lets_party_collection
+    get '/lookbook/love-lace-collection' => 'products/collections#show', :permalink => 'love-lace', :as => :love_lace_collection
+    get '/lookbook/great-minds-think-alike' => 'products/collections#show', :permalink => 'great-minds', :as => :great_minds_think_alike_collection
 
     get '/all-size' => redirect('/lookbook/all-size')
     get '/lookbook/all-size' => 'products/collections#show', :permalink => 'all-size', :as => :all_size_collection
@@ -182,7 +184,6 @@ FameAndPartners::Application.routes.draw do
       post '/promotion'   => 'promotions#create'
 
       post 'products' => 'products#create'
-      get 'products/check_gift_in_cart' => 'products#check_gift_in_cart'
       delete 'products/:line_item_id' => 'products#destroy'
       delete 'products/:line_item_id/customizations/:customization_id' => 'products#destroy_customization'
       delete 'products/:line_item_id/making_options/:making_option_id' => 'products#destroy_making_option'
@@ -511,8 +512,5 @@ FameAndPartners::Application.routes.draw do
   end
 
   mount AdminUi::Engine, at: '/fame_admin'
-
-  if Features.active?(:content_revolution)
-    mount Revolution::Engine => '/'
-  end
+  mount Revolution::Engine => '/'
 end

@@ -21,6 +21,7 @@
 # search collection & products collection
 #
 class Products::CollectionResource
+  EXCLUDED_TAXONS_NAME = %w(not-a-dress plus-size excluded-from-site)
 
   attr_reader :site_version
   attr_reader :collection
@@ -139,13 +140,7 @@ class Products::CollectionResource
         end
       end
 
-      # If a taxon is NOT specified, exclude anything marked not-a-dress
-      exclude_taxon_ids ||= Spree::Taxon.select(:id).where(:name => ['not-a-dress', 'plus-size']).collect{|t|t.id}
-      if exclude_taxon_ids.any?
-        if result[:taxon_ids].empty?
-          result[:exclude_taxon_ids] = exclude_taxon_ids
-        end
-      end
+      result[:exclude_taxon_ids] = black_hole_taxon_ids - result[:taxon_ids]
 
       result[:discount] = discount if discount.present?
       result[:fast_making] = fast_making unless fast_making.nil?
@@ -175,7 +170,7 @@ class Products::CollectionResource
         color    = Repositories::ProductColors.read(color_variant.color.id)
         price    = Spree::Price.new(amount: color_variant.prices[current_currency], currency: current_currency)
 
-        Products::Collection::Dress.from_hash(
+        Products::Presenter.new(
           id:             color_variant.product.id,
           name:           color_variant.product.name,
           color:          color_variant.color,
@@ -220,5 +215,9 @@ class Products::CollectionResource
 
     def fast_delivery?
       order == 'fast_delivery'
+    end
+
+    def black_hole_taxon_ids
+      @black_hole_taxon_ids ||= Spree::Taxon.where(name: EXCLUDED_TAXONS_NAME).pluck(:id)
     end
 end

@@ -38,17 +38,17 @@ var DetailsColorSelector = React.createClass({
   },
 
   render: function() {
-    var colorClasses = 'option-box color-box color-' + this.props.color.table.name;
+    var colorClasses = 'option-box color-box color-' + this.props.color.name;
     return (
-      <a onClick={this.updateSelectedColor} 
-        href='javascript:;' 
+      <a onClick={this.updateSelectedColor}
+        href='javascript:;'
         className='col-md-6 color-option product-option'
-        data-name={this.props.color.table.presentation} 
-        data-id={this.props.color.table.id}>
-        <span className={colorClasses} 
-          data-name={this.props.color.table.presentation} 
-          data-id={this.props.color.table.id}></span>
-        <span className='option-name'>{this.props.color.table.presentation}</span>
+        data-name={this.props.color.presentation}
+        data-id={this.props.color.id}>
+        <span className={colorClasses}
+          data-name={this.props.color.presentation}
+          data-id={this.props.color.id}></span>
+        <span className='option-name'>{this.props.color.presentation}</span>
       </a>
     )
   }
@@ -76,7 +76,7 @@ var DetailsRecColors = React.createClass({
 
   render: function() {
     colors = this.state.colorOptions.map(function(color) {
-      return (<DetailsColorSelector key={'color-' + color.table.id} color={color} />)
+      return (<DetailsColorSelector key={'color-' + color.option_value.id} color={color.option_value} />)
     });
     return (
       <div>{colors}</div>

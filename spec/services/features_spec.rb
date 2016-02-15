@@ -1,14 +1,13 @@
 require 'spec_helper'
 
 describe Features do
-  
-  class KV 
+  class KV
     attr_reader :kv
     def initialize
       @kv = {}
     end
 
-    def set(key,value) 
+    def set(key,value)
       kv[key] = value
     end
 
@@ -20,9 +19,7 @@ describe Features do
   let(:kv_store) { KV.new }
 
   before do
-    #allow(Features).to receive(:kv_store).and_return(kv_store)
-    allow(Features).to receive(:rollout).and_return(Rollout.new(kv_store))
-    stub_const("Features::DEFINED_FEATURES", %i(blah))
+    allow(Features).to receive(:kv_store).and_return(kv_store)
   end
 
   describe 'activation' do
@@ -39,4 +36,13 @@ describe Features do
     end
   end
 
+  describe '.description' do
+    it do
+      expect(Features.description(:undefined_feature_name)).to eq "Undocumented"
+    end
+
+    it do
+      expect(Features.description(:maintenance)).to eq "Maintennance Mode - Puts site offline"
+    end
+  end
 end

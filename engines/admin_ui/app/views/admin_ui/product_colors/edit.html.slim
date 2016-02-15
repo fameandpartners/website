@@ -1,0 +1,41 @@
+
+.row
+  .col-lg-6
+    .ibox
+      .ibox-title
+        h5
+          => @product_color_value.product.name
+          => @product_color_value.option_value.presentation
+      .ibox-content
+        h5
+          = link_to(@product_color_value.product.name, spree.admin_product_path(@product_color_value.product))
+        ul
+          li = @product_color_value.product.sku
+          li = @product_color_value.product.active?
+          li = @product_color_value.option_value.presentation
+          li = @product_color_value.option_value.name
+
+        = render 'admin_ui/product_colors/colour_preview', color_name: @product_color_value.option_value.name
+  .col-lg-6
+    .ibox
+      .ibox-title
+        h5 Enable / Disable
+      .ibox-content
+        = form_for(@product_color_value, url: product_color_path(@product_color_value)) do |f|
+          .form-group
+            = f.check_box :active, class: 'form-control'
+            = f.label :active
+          .form-group
+            = f.submit 'Save'
+.row
+  .col-lg-12
+    .ibox
+      .ibox-title
+        h5 Images
+      .ibox-content
+        ul
+          - @product_color_value.images.each do |image|
+            li
+              = image.attachment_file_name
+              br
+              = image_tag image.attachment.url

@@ -3,13 +3,13 @@ ruby:
 
 #gray-top-banner.row.visible-md-block.visible-lg-block
 
-  #customer-service.col-md-4
+  #customer-service.col-md-3
     = banner.right_text.to_s.html_safe
 
-  #free-shipping.col-md-4.text-center
+  #free-shipping.col-md-6.text-center
     = banner.center_text.to_s.html_safe
 
-  #account-area.col-md-4.text-right
+  #account-area.col-md-3.text-right
     = link_to moodboards_path do
       span.icon.icon-heart
       span.moodboards-area MOODBOARD
@@ -102,33 +102,38 @@ ruby:
 
 .rect#rect-wedding.nav-menu-wrap.menu-wedding
   .row
-    .col-md-5
+    .col-md-5.collection-col
       ul
-        li.title WEDDINGS
-        li = link_to 'The Bride', brides_landing_page_path
-        li = link_to 'The Bridesmaids', bridesmaid_landing_page_path
-        li = link_to 'The Guests', guest_bride_page_path
+        li.title VIEW THE COLLECTIONS
+        li = link_to 'Bridesmaid Dresses', build_taxon_path('bridesmaid')
+        li = link_to 'Wedding Dresses', build_taxon_path('wedding')
+        li = link_to 'Wedding Guest Dresses', build_taxon_path('wedding-guests')
+        li = link_to 'Lace Dresses', build_taxon_path('Lace')
+        li = link_to 'Cocktail / Evening Weddings', build_taxon_path('cocktail')
+      ul
+        li.title WEDDING PLANNER
+        li = link_to 'Register for Wedding Planner', bridesmaid_landing_page_path
     .col-md-7
       = link_to bridesmaid_landing_page_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/brides.jpg"
-        .copy-wrap BRIDESMAIDS <em><span>View this collection</span></em>
+        .copy-wrap MADE <span class='text-lowercase'>with</span> LOVE <em><span>SIGN UP AND START PLANNING YOUR DREAM DRESSES</span></em>
 
 .rect#rect-lookbook.nav-menu-wrap.menu-lookbook
   .row
     .col-md-5
       ul
         li.title lookbooks
+        li = link_to 'Great Minds Think Alike', great_minds_think_alike_collection_path
+        li = link_to 'Love Lace', love_lace_collection_path
         li = link_to 'This Modern Romance', this_modern_romance_collection_path
         li = link_to 'Bring On The Night', bring_on_the_night_collection_path
         li = link_to 'Dance Hall Days', dance_hall_days_collection_path
         li = link_to 'Photo Finish', photo_finish_collection_path
-        li = link_to 'Make a Statement', make_a_statement_collection_path
-        li = link_to 'Luxe Collection', luxe_collection_path
         li = link_to 'View all lookbooks', lookbook_path
     .col-md-7
-      = link_to this_modern_romance_collection_path, class: 'panel-highlight media-wrap'
-        = image_tag "lookbook/modern-romance.jpg"
-        .copy-wrap This Modern Romance <em><span>View this collection</span></em>
+      = link_to great_minds_think_alike_collection_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/great-minds-think-alike.jpg"
+        .copy-wrap Great Minds Think Alike <em><span>View this collection</span></em>
 
 /!
   .row.rect#rect-magazine.nav-menu-wrap.menu-magazine

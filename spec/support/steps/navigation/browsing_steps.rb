@@ -11,6 +11,10 @@ module Acceptance
         visit '/dresses'
       end
 
+      step 'I visit the :path path' do |path|
+        visit path
+      end
+
       step 'I am on :dress_name dress page' do |dress_name|
         dress = Spree::Product.find_by_name(dress_name)
         visit collection_product_path(dress)
@@ -18,6 +22,10 @@ module Acceptance
 
       step 'I click on :button_text button' do |button_text|
         click_button button_text
+      end
+
+      step 'I click on :link_text link' do |link_text|
+        click_link link_text
       end
 
       step 'I select :site_version site version' do |site_version|

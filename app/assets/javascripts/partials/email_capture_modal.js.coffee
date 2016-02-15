@@ -57,6 +57,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
   process: (data) =>
     if !!data.email
       @opts.email = data.email
+      @signupMarketingTracking()
       $.post(@opts.action, data).done(@success).fail(@error)
     else
       setTimeout(@open, 250)
@@ -85,14 +86,17 @@ window.page.EmailCaptureModal = class EmailCaptureModal
         if @opts.className != 'new-modal' && @opts.className != 'new-modal welcome-modal'
           window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 999999)
 
-      @fbPushTracking()
-      window.track.event('LandingPageModal', 'Submitted', @opts.promocode)
       if @opts.className == 'new-modal' || @opts.className == 'new-modal welcome-modal' || @opts.className == 'classic-modal' || @opts.className == 'classic-modal welcome-modal'
         window.location.replace(window.location.href + "?pop_thanks=true")
         return
+
+      $.cookie("new-modal-close-state", "closed")
       window.location.reload()
 
-  fbPushTracking: =>
+  signupMarketingTracking: =>
+    window.track.event('LandingPageModal', 'Submitted', @opts.promocode)
+    window.track.dataLayer.push({'event': 'modalSignup'})
+
     if @opts.fb
       window._fbq = window._fbq || []
       window._fbq.push(['track', @opts.fb, {'value':'0.00','currency':'USD'}]);
@@ -175,28 +179,6 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       afterClose: @onClose
       callback: @callback
       overlayClosesOnClick: @opts.instagram_campaign?
-
-    if @opts.className == "new-modal add-to-cart"
-      $(".add-to-cart .four-lipsticks img").click (e) ->
-        $(".add-to-cart .four-lipsticks img").removeClass("selected")
-        $(this).toggleClass("selected")
-
-      checkoutBtn = $(".add-to-cart .checkout-btn")
-      checkoutBtn.click (e) =>
-        if checkoutBtn.hasClass("before-click") && $(".add-to-cart .four-lipsticks img.selected").length > 0
-          checkoutBtn.removeClass("before-click").addClass("after-click")
-          sku = $(".add-to-cart .four-lipsticks img.selected").data("sku")
-
-          $.ajax(
-            url: urlWithSitePrefix("/user_cart/products")
-            type: "POST"
-            dataType: "json"
-            data: {gift_sku: sku}
-          ).success(
-            window.location.href = urlWithSitePrefix("/checkout")
-          ).error( () =>
-            window.helpers.showAlert(message: 'Error while add gift to cart ! ')
-          )
 
 window.page.PromocodeModal = class PromocodeModal extends EmailCaptureModal
   constructor: (opts = {}) ->

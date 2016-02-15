@@ -34,9 +34,7 @@ module Search
       price_max        = options[:price_max]
       currency         = options[:currency]
       show_outerwear    = !!options[:show_outerwear]
-      exclude_taxon_ids = options[:exclude_taxon_ids]
-
-      # order = 'created' if order.blank? && query_string.blank?
+      exclude_taxon_ids = options[:exclude_taxon_ids] if query_string.blank?
 
       Tire.search(configatron.elasticsearch.indices.color_variants, size: limit, from: offset) do
 
@@ -51,10 +49,7 @@ module Search
         end
 
         # Outerwear filter
-        # TODO: 27/08/2015 remove this after CreateSpreeProductRelatedOuterwear migration was execute in production.
-        if ActiveRecord::Base.connection.table_exists?(:spree_product_related_outerwear)
-          filter :bool, :must => { :term => { 'product.is_outerwear' => show_outerwear } }
-        end
+        filter :bool, :must => { :term => { 'product.is_outerwear' => show_outerwear } }
 
         # only available items
         filter :bool, :must => { :term => { 'product.in_stock' => true } }
@@ -176,6 +171,9 @@ module Search
             when 'created'
               by 'product.created_at', 'desc'
             else
+              if query_string.blank?
+                by 'product.created_at', 'desc'
+              end
               # Don't have an order here, so this will show any queried dress first in the result,
               # eg, search for 'last Kiss' will show 'last kiss' then 'studded kiss' instead of
               # 'studded kiss' then 'last kiss' which was happening prior.

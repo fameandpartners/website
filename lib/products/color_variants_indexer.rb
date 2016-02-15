@@ -28,7 +28,7 @@ module Products
     end
 
     def product_scope
-      Spree::Product
+      Spree::Product.active
     end
 
     def collect_variants
@@ -44,6 +44,9 @@ module Products
 
       variants = []
       product_scope.find_each do |product|
+        product_price_in_us = product.price_in(us_site_version.currency)
+        product_price_in_au = product.price_in(au_site_version.currency)
+        total_sales         = total_sales_for_sku(product.sku)
 
         active_color_ids = product.variants.active.map do |variant|
           variant.option_values.colors.map(&:id)
@@ -51,8 +54,7 @@ module Products
 
         color_customizable = product.color_customization
         discount           = product.discount.try(:amount).to_i
-
-        product.product_color_values.each do |product_color_value|
+        product.product_color_values.recommended.each do |product_color_value|
           color = product_color_value.option_value
 
           log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.name.ljust(14)} |"
@@ -65,8 +67,6 @@ module Products
             logger.error "id  -  | #{log_prefix} No Images!"
             next
           end
-
-          total_sales = total_sales_for_sku(product.sku)
 
           logger.info("id #{color_variant_id.to_s.ljust(3)} | #{log_prefix} Indexing")
 
@@ -127,12 +127,12 @@ module Products
             cropped_images: cropped_images_for(product_color_value),
 
             prices: {
-              aud: product.price_in(au_site_version.currency).amount,
-              usd: product.price_in(us_site_version.currency).amount
+              aud: product_price_in_au.amount,
+              usd: product_price_in_us.amount
             },
             sale_prices: {
-                aud: discount > 0 ? product.price_in(au_site_version.currency).apply(product.discount).amount : product.price_in(au_site_version.currency).amount,
-                usd: discount > 0 ? product.price_in(us_site_version.currency).apply(product.discount).amount : product.price_in(us_site_version.currency).amount
+                aud: discount > 0 ? product_price_in_au.apply(product.discount).amount : product_price_in_au.amount,
+                usd: discount > 0 ? product_price_in_us.apply(product.discount).amount : product_price_in_us.amount
             }
          }
 

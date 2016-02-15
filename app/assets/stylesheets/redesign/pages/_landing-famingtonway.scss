@@ -2,10 +2,13 @@
 -------------------------------------------------------*/
 .landing-famingtonway {
   margin-bottom: 30px;
+  .cta{
+    margin-bottom: 50px;
+    font-size: 1.5em;
+  }
 
   .create-wedding-board-wrap {
     position: relative;
-    margin-top: 20px;
     min-height: 420px;
     @extend %cfix;
 
@@ -231,7 +234,7 @@
     .title {
       width: 80%;
       max-width: 280px;
-      margin: 0 auto 40px auto;
+      margin: 0 auto;
       padding: 0;
       text-transform: none;
       font-size: 1.375em;
@@ -511,6 +514,10 @@
 
         }
 
+      }
+
+      .create-wedding-board-wrap {
+        margin-top: 20px;
       }
 
     }

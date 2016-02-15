@@ -21,9 +21,8 @@
                 = cropped_product_color_variant_image_tag(item.product.product_color_values.first)
         .details-wrap
           .product-name = item.product.name
-          div = item.product.price
-          / TODO - Handle discounts
-          / span.price = product_price_with_discount(product.price, product.discount)
+          - product_presenter = item.product.presenter_as_details_resource(current_site_version)
+          span.price = product_price_with_discount(product_presenter.price, product_presenter.discount)
 
         .actions-wrap
           /! if like button

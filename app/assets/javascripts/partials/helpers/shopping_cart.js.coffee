@@ -32,7 +32,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     else
       @loaded = true
       $.ajax(
-        url: urlWithSitePrefix("/user_cart/details")
+        url: "/user_cart/details"
         type: "GET"
         dataType: "json"
       ).success((data) =>
@@ -50,9 +50,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     @data
 
   showModal: () ->
-    if @shouldShowGiftModal()
-      @showGiftModal()
-    else if @shouldShowAddToCartModal()
+    if @shouldShowAddToCartModal()
       @showAddToCartModal()
 
   showAddToCartModal: () ->
@@ -70,35 +68,8 @@ window.helpers.ShoppingCart = class ShoppingCart
       });
       $.cookie('add-to-cart-modal-displayed','true')
 
-  shouldShowGiftModal: () ->
-    $("#gift-modal").length != 0
-
   shouldShowAddToCartModal: () ->
     $("#modal-add-to-cart-template").length != 0
-
-  showGiftModal: () ->
-    $.ajax(
-      url: urlWithSitePrefix("/user_cart/products/check_gift_in_cart")
-      type: "GET"
-      dataType: "json"
-    ).success((data) =>
-      if !data.has_gift
-        addToCartModal = new window.page.EmailCaptureModal({
-          promocode: "",
-          content: "",
-          heading: "",
-          message: "",
-          className: "new-modal add-to-cart",
-          action: "",
-          container: "#gift-modal",
-          timeout: 0,
-          timer: false,
-          force: false
-        });
-        return true
-    ).error( () =>
-      @trigger('error')
-    )
 
   # options:
   #   variant_id
@@ -109,7 +80,7 @@ window.helpers.ShoppingCart = class ShoppingCart
     # @showModal()
 
     $.ajax(
-      url: urlWithSitePrefix("/user_cart/products")
+      url: "/user_cart/products"
       type: "POST"
       dataType: "json"
       data: product_data
@@ -130,7 +101,7 @@ window.helpers.ShoppingCart = class ShoppingCart
 
   removeProduct: (line_item_id) ->
     $.ajax(
-      url: urlWithSitePrefix("/user_cart/products/#{ line_item_id }")
+      url: "/user_cart/products/#{line_item_id}"
       type: "DELETE"
       dataType: "json"
     ).success(
@@ -141,7 +112,7 @@ window.helpers.ShoppingCart = class ShoppingCart
 
   removeProductCustomization: (line_item_id, customization_id) ->
     $.ajax(
-      url: urlWithSitePrefix("/user_cart/products/#{ line_item_id }/customizations/#{ customization_id }")
+      url: "/user_cart/products/#{line_item_id}/customizations/#{customization_id}"
       type: "DELETE"
       dataType: "json"
     ).success(
@@ -152,7 +123,7 @@ window.helpers.ShoppingCart = class ShoppingCart
 
   removeProductMakingOption: (line_item_id, making_option_id) ->
     $.ajax(
-      url: urlWithSitePrefix("/user_cart/products/#{ line_item_id }/making_options/#{ making_option_id }")
+      url: "/user_cart/products/#{line_item_id}/making_options/#{making_option_id}"
       type: "DELETE"
       dataType: "json"
     ).success(
@@ -165,7 +136,7 @@ window.helpers.ShoppingCart = class ShoppingCart
   # note - error messages placed here, if something changed - move this upper in logic
   applyPromotionCode: (code) ->
     $.ajax(
-      url: urlWithSitePrefix("/user_cart/promotion"),
+      url: "/user_cart/promotion",
       type: 'POST',
       dataType: "json",
       data: { promotion_code: code }
