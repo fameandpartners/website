@@ -8,5 +8,6 @@ class MergeBridemaidsTaxon < ActiveRecord::Migration
         d.save!
       end
     end
+    Spree::Taxon.find(217).delete
   end
 end
