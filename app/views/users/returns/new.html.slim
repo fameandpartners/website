@@ -1,6 +1,10 @@
 .page-title.default.returns-title
   .container
     .page-title--details
+      - if user.has_spree_role?(:admin)
+        h1.no-padding-bottom Request a Return
+        h2= order_return.order.email
+      -else
         h1.no-padding-bottom You have good dress days and bad dress days. We get it.
         h2 Help us help you.
 
