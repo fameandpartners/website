@@ -66,7 +66,7 @@ class Products::CollectionsController < Products::BaseController
   end
 
   def set_collection_resource
-    @collection_options = parse_permalink(params[:permalink])
+    @collection_options = parse_permalink(params[:permalink]) || {}
     @collection_options[:remove_excluded_from_site_logic] = page.variables[:remove_excluded_from_site_logic]
     @collection         = collection_resource(@collection_options)
     page.collection     = @collection
