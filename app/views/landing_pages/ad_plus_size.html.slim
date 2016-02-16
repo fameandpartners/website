@@ -1,0 +1,73 @@
+= content_for :head do
+  meta name="robots" content="noindex, follow"
+
+= render :partial => '/products/collections/javascript'
+
+.landing-bridesmaid
+
+  .category-header
+    .media-wrap
+      = image_tag 'landingpages/ad-plus-size/hero.jpg'
+    .outer-wrap
+      .inner-wrap
+        h1.title
+          span Plus Size Dresses
+
+  section.container
+    .row
+      .col-md-12
+        .h2.title-line-on-sides
+          .inner-wrap AS SEEN IN
+      .col-md-12
+        .as-seen-in-partners
+          img.style-me        alt='Style Me Pretty Logo' src='/assets/footer/publisher/style-me.png'
+          img.modern-wedding  alt='Moder Wedding Logo'   src='/assets/footer/publisher/modern-wedding.png'
+          img.cosmo-bride     alt='Cosmo Bride Logo'     src='/assets/footer/publisher/cosmo-bride.png'
+          img.refinery29      alt='Refinery29 Logo'      src='/assets/footer/publisher/refinery29.png'
+          img.glamour         alt='Glamour Logo'         src='/assets/footer/publisher/glamour.png'
+          img.elle            alt='Elle Logo'            src='/assets/footer/publisher/elle.png'
+          img.marie           alt='Marie Logo'           src='/assets/footer/publisher/marie.png'
+          img.russh           alt='Russh Logo'           src='/assets/footer/publisher/russh.png'
+          img.wwd             alt='WWD Logo'             src='/assets/footer/publisher/wwd.png'
+          img.popsugar        alt='Popsugar Logo'        src='/assets/footer/publisher/popsugar.png'
+
+  .container.products-collections
+
+    .row
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+
+    .row
+      .col-md-6.hidden-sm.hidden-xs
+        .media-wrap
+          = image_tag 'landingpages/ad-plus-size/tile-1.jpg'
+      .col-md-6.col-xs-12
+        .panel-seo
+          .outer-wrap
+            .inner-wrap
+              .content-wrap
+                h2.title
+                  span All sizes for Plus Size Babes
+                h3.sub-title We make every dress up to size 22
+                p You can even customise your dress to your exact measurements to ensure you get that perfect fit!
+                = link_to 'Shop all dresses', dresses_path, class: 'btn btn-black'
+    .row
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
+
+    .row
+      .col-md-6.col-xs-12
+        .panel-seo
+          .outer-wrap
+            .inner-wrap
+              .content-wrap
+                h2.title
+                  span Make your dress Uniquely You
+                p Customise: Color Sleeve length Straps Split * Length
+      .col-md-6.hidden-sm.hidden-xs
+        .media-wrap
+          = image_tag 'landingpages/ad-plus-size/tile-2.jpg'
+
+    .row
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 99, customWrapper: 'col-md-3 col-xs-6'}
+
+    .row.more-products
+      = link_to 'Shop all dresses', dresses_path, class: 'btn btn-black'
