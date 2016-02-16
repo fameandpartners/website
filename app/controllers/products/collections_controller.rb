@@ -67,6 +67,7 @@ class Products::CollectionsController < Products::BaseController
 
   def set_collection_resource
     @collection_options = parse_permalink(params[:permalink])
+    @collection_options[:remove_excluded_from_site_logic] = page.variables[:remove_excluded_from_site_logic]
     @collection         = collection_resource(@collection_options)
     page.collection     = @collection
     punch_products if product_ids
@@ -114,7 +115,6 @@ class Products::CollectionsController < Products::BaseController
 
   def collection_resource(collection_options = {})
     resource_args = filter_options.merge(collection_options)
-    resource_args[:remove_excluded_from_site_logic] = page.variables[:remove_excluded_from_site_logic]
     Products::CollectionResource.new(resource_args).read
   end
 
