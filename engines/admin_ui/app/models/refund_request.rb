@@ -50,7 +50,7 @@ class RefundRequest < ActiveRecord::Base
   end
 
   def refundable?
-    valid? &&
+    payment_ref.present? &&
       public_key.present? &&
       secret_key.present? &&
       ! refund_ref.present?

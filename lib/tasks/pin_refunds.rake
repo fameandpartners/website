@@ -22,6 +22,7 @@ namespace :pin do
 
     PinPayment::Charge.all.map { |charge|
       request = RefundRequest.new.set_from_charge(charge)
+      request.set_spree_relations
       request.public_key = test_public_key
       request.secret_key = test_secret_key
       request.api_url    = test_api_url

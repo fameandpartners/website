@@ -15,5 +15,21 @@ module AdminUi
         end
       end
     end
+
+    def update
+      @refund_request = RefundRequest.find(params[:id])
+
+      if @refund_request.refundable?
+        message = "Refunding!"
+        @refund_request.refund!
+      else
+        message = "No Change."
+        @refund_request.refresh_refund_status
+      end
+
+      @refund_request.save!
+
+      redirect_to refund_requests_path, notice: message
+    end
   end
 end

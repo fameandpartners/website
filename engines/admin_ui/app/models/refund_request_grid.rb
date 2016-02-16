@@ -48,4 +48,8 @@ class RefundRequestGrid
   # column :public_key
   # column :secret_key
   # column :api_url
+
+  column :refund, :html => true do |refund_request|
+    render 'admin_ui/refund_requests/refund_now', refund_request: refund_request
+   end
 end
