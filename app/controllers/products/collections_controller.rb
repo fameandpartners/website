@@ -67,7 +67,7 @@ class Products::CollectionsController < Products::BaseController
 
   def set_collection_resource
     @collection_options = parse_permalink(params[:permalink])
-    @collection_options[:remove_excluded_from_site_logic] = page.variables[:remove_excluded_from_site_logic] if @collection_options.present? && page.present?
+    @collection_options[:remove_excluded_from_site_logic] = page.variables[:remove_excluded_from_site_logic] if @collection_options.present?
     @collection         = collection_resource(@collection_options)
     page.collection     = @collection
     punch_products if product_ids
