@@ -8,7 +8,7 @@ module PinRefunds
     def column_matchers
       {
         "order_number"      => :order_number,
-        "Order Payment ID"  => :payment_ref,
+        "Payment ID"        => :payment_ref,
         "Date"              => :payment_created_at,
         "Full Order Amount" => :payment_amount,
         "Currency"          => :currency,
@@ -23,6 +23,7 @@ module PinRefunds
     end
 
     def import
+      info "Start"
       build_refund_requests
       fetch_spree_objects
       find_correct_gateway_and_charge
@@ -30,6 +31,7 @@ module PinRefunds
     end
 
     def build_refund_requests
+      info "Reading File"
       csv = CSV.read(csv_file, headers: true, skip_blanks: true, :encoding => 'windows-1251:utf-8')
       @requests = []
 
@@ -40,7 +42,10 @@ module PinRefunds
           [key, row[column]]
         end.to_h
 
-        next if data.values.none?
+        if data.values.none?
+          info "skipping row"
+          next
+        end
 
         request = ::RefundRequest.new(data)
 
@@ -94,6 +99,7 @@ module PinRefunds
 
 
     def find_correct_gateway_and_charge
+      info "Finding Original Charged Gateway"
       total = requests.count
       requests.each_with_index do |request, idx|
         PinPayment.api_url = request.api_url
