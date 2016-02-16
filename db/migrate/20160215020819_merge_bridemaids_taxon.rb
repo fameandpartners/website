@@ -1,13 +1,22 @@
 class MergeBridemaidsTaxon < ActiveRecord::Migration
   def up
-    dressses = Spree::Taxon.find(217).products
-    event_bridesmaid_taxon = Spree::Taxon.find(221)
-    dressses.each do |d|
-      if d.taxons.none?{|t| t.id == 221 }
-        d.taxons << event_bridesmaid_taxon
-        d.save!
-      end
-    end
-    Spree::Taxon.find(217).delete
+    bridesmaid_product_ids = (range_bridesmaid_taxon.product_ids + event_bridesmaid_taxon.product_ids).uniq
+
+    event_bridesmaid_taxon.product_ids = bridesmaid_product_ids
+    event_bridesmaid_taxon.save!
+
+    range_bridesmaid_taxon.delete
+  end
+
+  def down
+    # NOOP
+  end
+
+  private def range_bridesmaid_taxon
+    Spree::Taxon.find(217)
+  end
+
+  private def event_bridesmaid_taxon
+    Spree::Taxon.find(221)
   end
 end
