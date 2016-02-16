@@ -142,7 +142,7 @@ FameAndPartners::Application.routes.draw do
 
     get '/bridesmaid-dresses' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_collection
     get '/bridal-dresses'     => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridal_collection
-    get '/wedding-guest'      => 'products/collections#show', :permalink => '', :as => :wedding_guest_collection
+    get '/wedding-guest'      => 'products/collections#show', :permalink => 'bridesmaid14', :as => :wedding_guest_collection
 
 
     get '/lets-party'     => 'products/collections#show', :permalink => 'dance-hall', :as => :lets_party_collection
