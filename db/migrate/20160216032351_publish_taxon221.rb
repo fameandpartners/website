@@ -1,5 +1,5 @@
 class PublishTaxon221 < ActiveRecord::Migration
   def up
-    Spree::Taxon.find(221).publish!
+    Spree::Taxon.where(permalink: "event/bridesmaid").first.publish!
   end
 end
