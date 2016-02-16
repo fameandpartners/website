@@ -8,5 +8,12 @@ Capybara.default_max_wait_time = ENV.fetch('CAPYBARA_DEFAULT_MAX_WAIT_TIME', '18
 
 # Allow using Chrome
 Capybara.register_driver :chrome do |app|
-  Capybara::Selenium::Driver.new(app, browser: :chrome)
+  Capybara::Selenium::Driver.new(app,
+    browser: :chrome,
+    desired_capabilities: {
+      "chromeOptions" => {
+        "args" => %w{ window-size=1400,768 }
+      }
+    }
+  )
 end

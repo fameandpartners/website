@@ -242,6 +242,7 @@ function sanitise_dev_db
   truncate table moodboard_item_events;
   truncate table moodboard_items;
   truncate table product_accessories;
+  truncate table refund_requests;
   truncate table spree_addresses;
   truncate table spree_adjustments;
   truncate table spree_credit_cards;

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160205153608) do
+ActiveRecord::Schema.define(:version => 20160215022602) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -710,6 +710,31 @@ ActiveRecord::Schema.define(:version => 20160205153608) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "refund_requests", :force => true do |t|
+    t.integer  "order_id"
+    t.integer  "payment_id"
+    t.string   "order_number"
+    t.string   "payment_ref",             :null => false
+    t.string   "currency"
+    t.integer  "payment_amount"
+    t.string   "acceptance_status"
+    t.integer  "requested_refund_amount"
+    t.datetime "payment_created_at"
+    t.string   "customer_name"
+    t.string   "customer_email"
+    t.string   "refund_ref"
+    t.string   "refund_currency"
+    t.string   "refund_success"
+    t.integer  "refund_amount"
+    t.datetime "refund_created_at"
+    t.string   "refund_status_message"
+    t.string   "public_key"
+    t.string   "secret_key"
+    t.string   "api_url"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   create_table "return_request_items", :force => true do |t|
