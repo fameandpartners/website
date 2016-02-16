@@ -7,6 +7,7 @@ class Users::ReturnsController < Users::BaseController
 
     @user = try_spree_current_user
 
+    # TODO: this scoping should be controlled by authorization objects
     order = if user.has_spree_role?(:admin)
       Spree::Order.find_by_number(order_number)
     else
@@ -26,17 +27,20 @@ class Users::ReturnsController < Users::BaseController
     end
   end
 
+  # TODO: need spec
   def create
-    @user = try_spree_current_user
+    @user         = try_spree_current_user
+    @order_return = OrderReturnRequest.new(params[:order_return_request])
+    @order        = Spree::Order.find(params[:order_return_request][:order_id])
 
-    unless user.has_spree_role?(:admin)
-      if user != order.user
+    # TODO: this verification should be done via cancan (or any authorization method)
+    unless @user.has_spree_role?(:admin)
+      if @user != @order.user
         # NewRelic::Agent.notice_error(err)
         redirect_to user_orders_path, { flash: { error: "Sorry Babe, we couldn't find your Order: '#{order_number}'"} }
       end
     end
 
-    @order_return = OrderReturnRequest.new(params[:order_return_request])
     if @order_return.save
       OrderReturnRequestMailer.email(@order_return, user).deliver
       render 'success'
