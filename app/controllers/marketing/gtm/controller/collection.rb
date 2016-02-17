@@ -10,8 +10,8 @@ module Marketing
           'collection'
         end
 
-        def append_gtm_collection(product_collection)
-          gtm_collection = Marketing::Gtm::Presenter::Collection.new(product_collection: product_collection)
+        def append_gtm_collection(collection_presenter)
+          gtm_collection = Marketing::Gtm::Presenter::Collection.new(collection_presenter: collection_presenter)
           @gtm_container.append(gtm_collection)
         end
       end
