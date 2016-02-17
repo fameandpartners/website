@@ -19,7 +19,6 @@ if Rails.env.development?
   Features.activate(:enhanced_moodboards)
   Features.activate(:fameweddings)
 
-  Features.deactivate(:google_tag_manager)
   Features.deactivate(:test_analytics)
 end
 
