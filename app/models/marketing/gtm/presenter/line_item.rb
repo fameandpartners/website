@@ -23,6 +23,10 @@ module Marketing
           VariantSku.new(variant).call
         end
 
+        def product_sku
+          product.sku
+        end
+
         def product_name
           product.name
         end
@@ -40,9 +44,10 @@ module Marketing
               category:     category,
               name:         product_name,
               quantity:     quantity,
-              sku:          sku,
               total_amount: total_amount,
-              variant_sku:  variant_sku
+              sku:          sku,
+              variant_sku:  variant_sku,
+              product_sku:  product_sku
           }
         end
 
