@@ -293,6 +293,9 @@ function create_test_fixture_dump
   echo "$(magenta)>> $(white)Vacumming DEV DB$(normal)"
   vacuumdb -d ${DEV_DB} -e -f
 
+  echo "$(magenta)>> $(white)Disabling all feature flags$(normal)"
+  bundle exec rake dev:disable_feature_flags
+
   dump_development_db
   test_fixture_dump_file='spec/fixtures/database_snapshots/minified_production_data.dump'
   echo "$(magenta)>> $(white)Copying to $(yellow)${test_fixture_dump_file}$(normal)"
