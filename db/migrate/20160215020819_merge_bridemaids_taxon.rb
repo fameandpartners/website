@@ -5,7 +5,7 @@ class MergeBridemaidsTaxon < ActiveRecord::Migration
     event_bridesmaid_taxon.product_ids = bridesmaid_product_ids
     event_bridesmaid_taxon.save!
 
-    range_bridesmaid_taxon.delete
+    range_bridesmaid_taxon.destroy
   end
 
   def down
