@@ -65,6 +65,7 @@ class Products::CollectionResource
     color     = color.first if color.is_a? Array
     style     = style.first if style.is_a? Array
     bodyshape = bodyshape.first if bodyshape.is_a? Array
+
     Products::CollectionPresenter.from_hash(
       products:       products,
       total_products: total_products,
@@ -172,6 +173,7 @@ class Products::CollectionResource
 
         Products::Presenter.new(
           id:             color_variant.product.id,
+          sku:            color_variant.product.sku,
           name:           color_variant.product.name,
           color:          color_variant.color,
           images:         cropped_images(color_variant),
