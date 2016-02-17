@@ -5,8 +5,8 @@ Feature: Add to Moodboard
   Background:
     Given A sample database with valid data
     And Data is setup correctly
-    And the "moodboard" feature is enabled
-    And the "enhanced_moodboards" feature is enabled
+    And The "moodboard" feature is enabled
+    And The "enhanced_moodboards" feature is enabled
     And The example user is signed in
 
   Scenario: Add to moodboard

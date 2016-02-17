@@ -58,4 +58,9 @@ namespace :dev do
       user.validate_presence_of_phone = false
     end.save
   end
+
+  desc 'Disable all feature flags'
+  task :disable_feature_flags => :environment do
+    Features.available_features.each { |feature| Features.deactivate(feature) }
+  end
 end

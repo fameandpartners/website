@@ -3,8 +3,9 @@ Feature: Add to Cart Tracking
   Background:
     Given A sample database with valid data
     And Data is setup correctly
-    And the "test_analytics" feature is disabled
-    And the "google_tag_manager" feature is enabled
+    And Setup default feature flags
+    And The "test_analytics" feature is disabled
+    And The "google_tag_manager" feature is enabled
 
   @javascript
   Scenario: Buy a Dress
