@@ -14,12 +14,13 @@ class CreateGlobalSkus < ActiveRecord::Migration
       t.references :product
       t.references :variant
 
-
-      # :sku, :style_number, :product_name, :variant_id, :size, :color_id, :color_name, :customisation_id, :customisation_name, :height_value, :total_sold, :total_cart
-
       t.timestamps
     end
+
     add_index :global_skus, :product_id
     add_index :global_skus, :variant_id
+
+    execute("ALTER SEQUENCE global_skus_id_seq START with 10000 RESTART;")
+
   end
 end

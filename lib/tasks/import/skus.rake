@@ -1,7 +1,7 @@
-namespace :reports do
-  desc 'SKUs for all time'
+namespace :import do
+  desc 'Generate All SKUS'
   task :skus => :environment do
-
+    puts "PRODUCTS"
     Spree::Product.unscoped do
       Spree::Variant.find_each do |variant|
         begin
@@ -27,9 +27,8 @@ namespace :reports do
         end
       end
     end
-
+    puts "LINE ITEMS"
     Spree::Variant.unscoped do
-
       Spree::LineItem.find_each do |li|
         next unless li.order.present?
 
