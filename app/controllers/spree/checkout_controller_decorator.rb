@@ -1,4 +1,5 @@
 Spree::CheckoutController.class_eval do
+  include Marketing::Gtm::Controller::Order
   include Marketing::Gtm::Controller::Product
   include Marketing::Gtm::Controller::Event
 
@@ -322,6 +323,7 @@ Spree::CheckoutController.class_eval do
 
       append_gtm_event(event_name: 'addToCart')
       append_gtm_product(product_presenter: product_presenter)
+      append_gtm_order(spree_order: current_order)
     end
   end
 
