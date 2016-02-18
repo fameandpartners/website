@@ -15,8 +15,9 @@ module Marketing
         def body
           collection.products.map { |product|
             {
-              sku: product.sku,
-              name: product.name
+              sku:          product.sku,
+              variant_skus: product.variant_skus,
+              name:         product.name
             }
           }
         end
