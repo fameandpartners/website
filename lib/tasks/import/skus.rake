@@ -1,9 +1,21 @@
+require 'ruby-progressbar'
+
 namespace :import do
   desc 'Generate All SKUS'
   task :skus => :environment do
-    puts "PRODUCTS"
+
+    require 'ruby-progressbar'
+    def format_bar(name)
+      "%a %e | #{name} %c/%C |%w%i|"
+    end
+
+    progressbar = ProgressBar.create(:total => Spree::Variant.count + Spree::LineItem.count)
+
+    progressbar.format = format_bar('Variants')
     Spree::Product.unscoped do
       Spree::Variant.find_each do |variant|
+        progressbar.increment
+
         begin
         global_sku = GlobalSku.where(sku: variant.sku).first_or_initialize(
             :sku                => variant.sku,
@@ -27,9 +39,12 @@ namespace :import do
         end
       end
     end
-    puts "LINE ITEMS"
+
+
+    progressbar.format = format_bar('LineItems')
     Spree::Variant.unscoped do
       Spree::LineItem.find_each do |li|
+        progressbar.increment
         next unless li.order.present?
 
         begin
@@ -71,5 +86,6 @@ namespace :import do
         end
       end
     end
+    progressbar.finish
   end
 end
