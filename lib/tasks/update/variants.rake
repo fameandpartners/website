@@ -4,10 +4,10 @@ namespace :update do
   namespace :variants do
     desc 'Regenerate SKUs for product Variants'
     task :skus => :environment do
-      scope = Spree::Variant
+      scope = Spree::Variant.includes(:product, :option_values)
       total = scope.count
 
-      progressbar = ProgressBar.create(:total => total, format: "Items %c/%C %w")
+      progressbar = ProgressBar.create(total: total, format: 'Items %c/%C %w')
 
       scope.find_each do |variant|
         progressbar.increment
