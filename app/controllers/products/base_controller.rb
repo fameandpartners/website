@@ -13,7 +13,7 @@ class Products::BaseController < ApplicationController
     @filter     = Products::CollectionFilter.read
     @results    = search_results
     @collection = @results
-    append_gtm_collection(@results)
+    append_gtm_collection(@collection)
 
     render :search
   end

@@ -10,7 +10,7 @@ module Marketing
           'product'
         end
 
-        def append_gtm_product(product_presenter)
+        def append_gtm_product(product_presenter:)
           gtm_product = Marketing::Gtm::Presenter::Product.new(product_presenter: product_presenter)
           @gtm_container.append(gtm_product)
         end
