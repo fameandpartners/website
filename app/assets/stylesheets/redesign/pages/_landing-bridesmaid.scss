@@ -26,4 +26,21 @@
     }
   }
 
+  .title .no-border{
+    border: 0;
+  }
+
+  .align-top{
+    margin-top: 20px;
+  }
+  @media (max-width: 540px) {
+    .align-top{
+      margin-top: 10px;
+    }
+  }
+
+  .serif-text{
+    font-family: $font-heading;
+  }
+
 }
