@@ -45,9 +45,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   setUpFilterElements: =>
     $(".search-filters :input").on 'change', (e) =>
-      @update()
+      @updateFilterElements(e)
 
-    $(".js-clear-all-filters").on('click', @clearAllOptions)
+    $(".js-trigger-clear-all-filters").on('click', @clearAllOptions)
 
     $("#filter-mobile").on 'click', ->
       $('.filter-col').toggleClass("slide-in")
@@ -67,8 +67,20 @@ window.ProductCollectionFilter = class ProductCollectionFilter
        if @xDown > @xUp + slideDistance and $('.filter-col').hasClass("slide-in")
          $('.filter-col').removeClass("slide-in")
 
+  updateFilterElements: (e) =>
+    $this = $(e.target)
+    if !$this.hasClass('js-filter-all')
+      $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', false)
+    else
+      $this.parents('.panel-collapse').find('input').prop('checked', false)
+      $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', true)
+      $this.parents('.panel-collapse').find('select').val("none").trigger("change")
+    @update()
+
   clearAllOptions: =>
-    $('.select-color select').val("none").trigger("change")
+    $('#filter-accordion :input').prop('checked', false)
+    $('#filter-accordion .js-filter-all').prop('checked', true)
+    $('#filter-accordion select').val("none").trigger("change")
     @update()
 
   resetPagination: (items_on_page, total_records) ->
@@ -152,21 +164,21 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     colourArray = []
     styleArray = []
 
-    if $("#collapse-colors .swatch-all input:not(:checked)")
-      colorInputs = $("#collapse-colors [class^='swatch-']:not(.swatch-all) input:checked")
+    if $("#collapse-colors .js-filter-all input:not(:checked)")
+      colorInputs = $("#collapse-colors input:not(.js-filter-all):checked")
       for colorInput in colorInputs
         colourArray.push($(colorInput).attr("name"))
       colour = $("#other-colors option:selected").attr("name")
       if colour != "none"
         colourArray.push(colour)
 
-    if $("#collapse-bodyshape .swatch-all input:not(:checked)")
-      bodyshapeInputs = $("#collapse-bodyshape [class^='swatch-']:not(.swatch-all) input:checked")
+    if $("#collapse-bodyshape .js-filter-all input:not(:checked)")
+      bodyshapeInputs = $("#collapse-bodyshape input:not(.js-filter-all):checked")
       for bodyshapeInput in bodyshapeInputs
         bodyshapeArray.push($(bodyshapeInput).attr("name"))
 
-    if $("#collapse-style .swatch-all input:not(:checked)")
-      styleInputs = $("#collapse-style [class^='swatch-']:not(.swatch-all) input:checked")
+    if $("#collapse-style .js-filter-all input:not(:checked)")
+      styleInputs = $("#collapse-style input:not(.js-filter-all):checked")
       for styleInput in styleInputs
         styleArray.push($(styleInput).attr("name"))
 
