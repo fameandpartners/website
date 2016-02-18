@@ -28,10 +28,11 @@
             .inner-wrap
               .content-wrap
                 h2.title
-                  span All sizes for Plus Size Babes
-                h3.sub-title We make every dress up to size 22
-                p You can even customise your dress to your exact measurements to ensure you get that perfect fit!
-                = link_to 'Shop all dresses', dresses_path, class: 'btn btn-black'
+                  span.no-border All sizes for<br>Plus Size Babes
+                em 
+                  h3.sub-title We make every dress up to size 22
+                p.align-top.serif-text You can even customise your dress to your exact<br>measurements to ensure you get that perfect fit!
+                = link_to 'Shop all dresses', dresses_path, class: 'btn btn-black align-top'
     .row
       = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
 
@@ -42,14 +43,11 @@
             .inner-wrap
               .content-wrap.customise
                 h2.title
-                  span Make your dress Uniquely You
-                ul
-                  | Customise:
-                  li.text-center + Color
-                  li.text-center + Sleeve length
-                  li.text-center + Straps
-                  li.text-center + Split
-                  li.text-center + Length
+                  span.no-border Make your dress<br>Uniquely You
+                em 
+                  h3.sub-title Every dress is customisable
+                p.align-top.serif-text Pick your dress, choose your colour,<br>skirt length and add a customisation
+                = link_to 'Shop all dresses', dresses_path, class: 'btn btn-black align-top'
       .col-md-6.hidden-sm.hidden-xs
         .media-wrap
           = image_tag 'landingpages/ad-plus-size/tile-2.jpg'
