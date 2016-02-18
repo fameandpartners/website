@@ -174,6 +174,7 @@ class Products::CollectionResource
         Products::Presenter.new(
           id:             color_variant.product.id,
           sku:            color_variant.product.sku,
+          variant_skus:   color_variant.product.variant_skus,
           name:           color_variant.product.name,
           color:          color_variant.color,
           images:         cropped_images(color_variant),
