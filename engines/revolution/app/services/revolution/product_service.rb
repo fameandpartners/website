@@ -12,8 +12,8 @@ module Revolution
 
     def products(params, page_limit)
 
-      revolution_ids = get_revolution_ids(params, page_limit)
-
+      revolution_ids = get_revolution_ids(params, page_limit).compact
+      
       collect_products(revolution_ids, params)
 
     end

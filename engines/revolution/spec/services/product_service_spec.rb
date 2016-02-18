@@ -35,6 +35,12 @@ describe Revolution::ProductService do
       end
     end
 
+    context 'when there are nil items' do
+      it 'remove all nil items' do
+        allow_any_instance_of(Revolution::ProductService).to receive(:get_revolution_ids).and_return(["471",nil,nil,nil])
+        expect(Revolution::ProductService.new(service.ids, current_site_version).products(params, limit).size).to be 1
+      end
+    end
   end
 
   describe '.id_end' do
