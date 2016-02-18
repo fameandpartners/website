@@ -17,4 +17,4 @@ general:
 
 test:
   override:
-    - bundle exec rspec spec engines --color spec --format progress # Default: `bundle exec rspec --color spec --format progress`
+    - bundle exec rspec spec engines
