@@ -50,11 +50,6 @@ configatron.email_marketing.delay_time do |delay_time|
 end
 configatron.email_marketing.store_information = 1.month
 
-configatron.mandrill.smtp do |mandrill|
-  mandrill.username = 'eltons@fameandpartners.com'
-  mandrill.password = '189aQIbDBG2pBeKxqoth5A'
-end
-
 configatron.mailgun.mailbox do |mailgun|
   mailgun.domain   = 'fameandpartners.com.mailgun.org'
   mailgun.username = 'postmaster@fameandpartners.com.mailgun.org'
@@ -97,11 +92,6 @@ when :development
     expire.quickly  = 1.second
     expire.normally = 30.seconds
     expire.long     = 60.seconds
-  end
-
-  configatron.mandrill.smtp do |mandrill|
-    mandrill.username = ''
-    mandrill.password = ''
   end
 
   configatron.mailgun.mailbox do |mailgun|

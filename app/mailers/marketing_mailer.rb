@@ -1,4 +1,5 @@
 class MarketingMailer < ActionMailer::Base
+  # TODO: there's no mandrill config anymore. Any emails trying to use this will raise errors. Watch it.
   self.delivery_method = :mandrill if Rails.env.production?
 
   include ProductsHelper
