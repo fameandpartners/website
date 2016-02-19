@@ -74,7 +74,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     else
       $this.parents('.panel-collapse').find('input').prop('checked', false)
       $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', true)
-      $this.parents('.panel-collapse').find('select').val("none").trigger("change")
+      
     @update()
 
   clearAllOptions: =>
@@ -164,8 +164,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     colourArray = []
     styleArray = []
 
-    if $("#collapse-colors .js-filter-all input:not(:checked)")
-      colorInputs = $("#collapse-colors input:not(.js-filter-all):checked")
+    if $("#collapse-color .js-filter-all input:not(:checked)")
+      colorInputs = $("#collapse-color input:not(.js-filter-all):checked")
       for colorInput in colorInputs
         colourArray.push($(colorInput).attr("name"))
       colour = $("#other-colors option:selected").attr("name")
