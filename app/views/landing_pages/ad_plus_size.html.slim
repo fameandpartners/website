@@ -1,5 +1,4 @@
-= content_for :head do
-  meta name="robots" content="noindex, follow"
+= render :partial => '/pages/robots'
 
 = render :partial => '/products/collections/javascript'
 
@@ -7,11 +6,11 @@
 
   .category-header
     .media-wrap
-      = image_tag 'landingpages/wedding-guest/hero.jpg'
+      = image_tag 'landingpages/ad-plus-size/hero.jpg'
     .outer-wrap
       .inner-wrap
         h1.title
-          span WEDDING GUEST DRESSES
+          span Plus Size Dresses
 
   .container.products-collections
 
@@ -21,19 +20,18 @@
     .row
       .col-md-6.hidden-sm.hidden-xs
         .media-wrap
-          = image_tag 'landingpages/wedding-guest/tile-1.jpg'
+          = image_tag 'landingpages/ad-plus-size/tile-1.jpg'
       .col-md-6.col-xs-12
         .panel-seo
           .outer-wrap
             .inner-wrap
               .content-wrap
                 h2.title
-                  span.no-border Unique Wedding Dresses
-                em  
-                  h3.sub-title SAY YES…TO BEAUTIFUL, AFFORDABLE, WEDDING DRESSES.
-                p.serif-text We are the only online bridal dress boutique that offers unique customization – you can change colours, prints, hem length, strap styles and more.
-                p.serif-text What’s more? We work quick – our dresses can ship as quickly as within 48 hours.
-
+                  span.no-border All sizes for<br>Plus Size Babes
+                em 
+                  h3.sub-title We make every dress up to size 22
+                p.align-top.serif-text You can even customise your dress to your exact<br>measurements to ensure you get that perfect fit!
+                = link_to 'Shop all dresses', dresses_path, class: 'btn btn-black align-top'
     .row
       = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
 
@@ -42,13 +40,16 @@
         .panel-seo
           .outer-wrap
             .inner-wrap
-              .content-wrap
+              .content-wrap.customise
                 h2.title
-                  span.no-border NEED INSPIRATION?<br>TRY OUR FREE STYLING SERVICE.
-                p.serif-text Our personal stylists will take you and your bridesmaids-to-be through our collections to find the best silhouettes for each girl, and tailor the perfect look for you and your #girlsquad.
+                  span.no-border Make your dress<br>Uniquely You
+                em 
+                  h3.sub-title Every dress is customisable
+                p.align-top.serif-text Pick your dress, choose your colour,<br>skirt length and add a customisation
+                = link_to 'Shop all dresses', dresses_path, class: 'btn btn-black align-top'
       .col-md-6.hidden-sm.hidden-xs
         .media-wrap
-          = image_tag 'landingpages/wedding-guest/tile-2.jpg'
+          = image_tag 'landingpages/ad-plus-size/tile-2.jpg'
 
     .row
       = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 99, customWrapper: 'col-md-3 col-xs-6'}
