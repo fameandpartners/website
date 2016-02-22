@@ -141,26 +141,27 @@ class Products::CollectionsController < Products::BaseController
     end
 
     # Didn't find any collection associated with the permalink
-    return nil
+    nil
   end
 
   private def filter_options
     custom_product_ids = filters_applied? ? [] : product_ids
     {
-      site_version: current_site_version,
-      collection:   params[:collection],
-      style:        params[:style],
-      event:        params[:event],
-      color:        params[:colour] || params[:color],
-      bodyshape:    params[:bodyshape],
-      discount:     params[:sale] || params[:discount],
-      fast_making:  params[:fast_making],
-      order:        params[:order] || page.get(:order),
-      limit:        page.limit(custom_product_ids), # page size
-      offset:       page.offset(custom_product_ids, params[:offset]),
-      price_min:    params[:priceMin],
-      price_max:    params[:priceMax],
-      query_string: params[:q]
+      site_version:                    current_site_version,
+      collection:                      params[:collection],
+      style:                           params[:style],
+      event:                           params[:event],
+      color:                           params[:colour] || params[:color],
+      bodyshape:                       params[:bodyshape],
+      discount:                        params[:sale] || params[:discount],
+      fast_making:                     params[:fast_making],
+      order:                           params[:order] || page.get(:order),
+      limit:                           page.limit(custom_product_ids), # page size
+      offset:                          page.offset(custom_product_ids, params[:offset]),
+      price_min:                       params[:priceMin],
+      price_max:                       params[:priceMax],
+      query_string:                    params[:q],
+      remove_excluded_from_site_logic: page.get(:remove_excluded_from_site_logic)
     }
   end
 
