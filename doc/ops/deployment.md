@@ -21,7 +21,7 @@ Merge master to stable, tag, and push
 * `$ git checkout stable`
 * `$ git merge master --ff-only`
 * `$ git tag \`date +v%Y-%m-%d-T%H%M%S%z\``
-* `$ git push --folow-tags`
+* `$ git push --follow-tags`
 * Login to Engine Yard
 * Select `Migrate` and enter `rake db:migrate`
 * Enter the tag in the `ref` field
