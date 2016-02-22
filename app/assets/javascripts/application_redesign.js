@@ -111,6 +111,8 @@
 //= require partials/fitgau_reminder
 
 jQuery(document).ready(function($){
+  $('body').addClass('ready');
+
   $('#forgot-password').on('click', function(e) {
     e.preventDefault();
     email = $('#spree_user_email').val()
