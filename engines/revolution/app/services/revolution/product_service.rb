@@ -13,7 +13,7 @@ module Revolution
     def products(params, page_limit)
 
       revolution_ids = get_revolution_ids(params, page_limit).compact
-      
+
       collect_products(revolution_ids, params)
 
     end
@@ -43,7 +43,7 @@ module Revolution
     end
 
     def collect_products(revolution_ids, params)
-      return OpenStruct.new() if revolution_ids[0].nil?
+      return Products::Presenter.new({}) if revolution_ids[0].nil?
 
       revolution_ids.each_with_index.collect do |id, i|
         p           = spree_products[id]
@@ -54,14 +54,15 @@ module Revolution
         price = p.site_price_for(site_version)
         color = Spree::OptionValue.where(:name => colour_name).first
 
-        OpenStruct.new(
-            :id       => p.id,
-            :sku      => p.sku,
-            :name     => p.name,
-            :price    => price,
-            :discount => p.discount,
-            :images   => images,
-            :color    => color
+        Products::Presenter.new(
+          :id           => p.id,
+          :sku          => p.sku,
+          :variant_skus => p.variant_skus,
+          :name         => p.name,
+          :price        => price,
+          :discount     => p.discount,
+          :images       => images,
+          :color        => color
         )
       end
     end
