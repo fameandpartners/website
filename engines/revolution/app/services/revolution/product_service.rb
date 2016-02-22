@@ -1,5 +1,4 @@
 module Revolution
-
   class ProductService
     #TODO - bring ids and colours into same data structure.
 
@@ -11,11 +10,8 @@ module Revolution
     end
 
     def products(params, page_limit)
-
       revolution_ids = get_revolution_ids(params, page_limit).compact
-
       collect_products(revolution_ids, params)
-
     end
 
     def spree_products
@@ -43,7 +39,7 @@ module Revolution
     end
 
     def collect_products(revolution_ids, params)
-      return Products::Presenter.new({}) if revolution_ids[0].nil?
+      return [] if revolution_ids[0].nil?
 
       revolution_ids.each_with_index.collect do |id, i|
         p           = spree_products[id]
