@@ -6,7 +6,7 @@ module Acceptance
       end
 
       step 'DOM is ready for JS interaction' do
-        expect(page).to have_css('html.js')
+        expect(page).to have_css('body.ready')
       end
     end
   end
