@@ -5,6 +5,8 @@ module Acceptance
       fill_in('Email', with: 'spree@example.com')
       fill_in('Password', with: '123456')
       click_button 'Login'
+      visit '/profile'
+      expect(page).to_not have_text('YOU NEED TO SIGN IN OR SIGN UP BEFORE CONTINUING')
     end
   end
 end
