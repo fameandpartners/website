@@ -11,6 +11,13 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
     border-bottom: solid $c-neutral-black 1px;
     @extend %cfix;
 
+    .trigger-filter {
+      display: block;
+      margin-top: 14px;
+      font-size: 21px;
+      color: $c-neutral-black;
+    }
+
     .sort {
       width: 200px;
     }
@@ -27,10 +34,6 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
       clear: left;
     }
 
-  }
-
-  .col-md-12 {
-    float: left;
   }
 
   @media (max-width: $bootstrap-md-width) {
@@ -132,9 +135,9 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
     display: block;
     cursor: pointer;
 
-	sup {
-		top: 1px;
-	}
+  sup {
+    top: 1px;
+  }
 
   }
 
@@ -173,26 +176,6 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
     @media(max-width: 415px){
       min-height: 380px;
     }
-  }
-
-  .thumb{
-    background-color: #E0E0E0;
-    width: 20px;
-    height: 20px;
-    float: left;
-    margin-right: 10px;
-    cursor: pointer;
-    box-shadow: inset 0px 1px 2px 0px #969696;
-  }
-  .thumb-true{
-    background-color: black;
-    background-image: url(product-collections/tick.svg);
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    background-position: 4px 2px;
-  }
-  .thumb-false{
-    background-color: #E0E0E0;
   }
 
   @media(max-width: $bootstrap-md-width){
@@ -241,14 +224,6 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
     a:not(:first-child){
       margin-left: 5px;
     }
-  }
-
-  @include mobile {
-
-    & {
-      padding-top: 5px;
-    }
-
   }
 
 }

@@ -5,7 +5,7 @@
 window.page or= {}
 window.ProductCollectionFilter = class ProductCollectionFilter
   filter: null
-  content: null
+  content: null,
   updateParams: {}
   collectionTemplate: JST['templates/product_collection']
   collectionMoreTemplate: JST['templates/product_collection_append']
@@ -14,6 +14,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     options = $.extend({
       reset_source: true,
       page_size: 21,
+      mobileBreakpoint: 768,
       showMoreSelector: "*[data-action=show-more-collection-products]"
 		}, options)
 
@@ -29,6 +30,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     # allow user to leave /dresses/for/very/special/case collection
     # or navigate only in it
     @reset_source = options.reset_source
+
+    @mobileBreakpoint = options.mobileBreakpoint
 
     # pagination
     @page_size = options.page_size
@@ -49,23 +52,17 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     $(".js-trigger-clear-all-filters").on('click', @clearAllOptions)
 
-    $("#filter-mobile").on 'click', ->
-      $('.filter-col').toggleClass("slide-in")
-    $(".filter-rect .close").on 'click', ->
-      $('.filter-col').toggleClass("slide-in")
+    # toggle mobile version of filter menu
+    $('.js-trigger-toggle-filters').on 'click', (e) =>
+      $('body').toggleClass('filter-is-active no-scroll');
+      $('.js-side-panel-filters').toggleClass('is-active');
 
-    $(document).on 'click', (e) ->
-      close = $('.filter-col .close')
-      closeX = close.position()?.left + close.width() + 20
-      $('.filter-col').removeClass("slide-in") if e.clientX > closeX and $('.filter-col').hasClass("slide-in")
-
-    slideDistance = 70
-    $(document).on('mousedown touchstart', (e) =>
-       @xDown = e.originalEvent.x
-     ).on 'mouseup touchend', (e2) =>
-       @xUp = e2.originalEvent.x
-       if @xDown > @xUp + slideDistance and $('.filter-col').hasClass("slide-in")
-         $('.filter-col').removeClass("slide-in")
+    # enable content scroll for larger tablets if orientation changed
+    $(window).on 'resize', (e) =>
+      if $(window).width() >= @mobileBreakpoint && $('body').hasClass('filter-is-active')
+        $('body').removeClass('no-scroll');
+      if $(window).width() < @mobileBreakpoint && $('body').hasClass('filter-is-active')
+        $('body').addClass('no-scroll');
 
   updateFilterElements: (e) =>
     $this = $(e.target)
