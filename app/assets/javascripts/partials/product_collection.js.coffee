@@ -77,7 +77,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
   clearAllOptions: =>
     $('#filter-accordion :input').prop('checked', false)
     $('#filter-accordion .js-filter-all').prop('checked', true)
-    $('#filter-accordion select').val("none").trigger("change")
+    $('#filter-accordion select').val('none')
     @update()
 
   resetPagination: (items_on_page, total_records) ->

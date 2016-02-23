@@ -31,17 +31,17 @@
               span View all prices
           .custom-form-element.filter-radio-option.selector-price name='price'
             label
-              = radio_button_tag 'price', '0', params[:priceMin] == '0' ? true : false, 'data-all' => 'false', 'data-pricemin' => '0', 'data-pricemax' => '199'
+              = radio_button_tag 'price', '0', params[:priceMax] == '199' ? true : false, 'data-all' => 'false', 'data-pricemin' => '0', 'data-pricemax' => '199'
               span.icon
               span $0 - $199
           .custom-form-element.filter-radio-option.selector-price name='price'
             label
-              = radio_button_tag 'price', '200', params[:priceMin] == '200' ? true : false, 'data-all' => 'false', 'data-pricemin' => '200', 'data-pricemax' => '299'
+              = radio_button_tag 'price', '200', params[:priceMax] == '299' ? true : false, 'data-all' => 'false', 'data-pricemin' => '200', 'data-pricemax' => '299'
               span.icon
               span $200 - $299
           .custom-form-element.filter-radio-option.selector-price name='price'
             label
-              = radio_button_tag 'price', '300', params[:priceMin] == '300' ? true : false, 'data-all' => 'false', 'data-pricemin' => '300', 'data-pricemax' => '399'
+              = radio_button_tag 'price', '300', params[:priceMax] == '399' ? true : false, 'data-all' => 'false', 'data-pricemin' => '300', 'data-pricemax' => '399'
               span.icon
               span $300 - $399
           .custom-form-element.filter-radio-option.selector-price name='price'
@@ -63,7 +63,12 @@
           - for style in styles
             .custom-form-element.filter-option.selector-styles name='#{style.name}'
               label
-                = check_box_tag style.name, style.name, params[:styles] == style.name ? true : false, 'data-all' => 'false'
+                - preSelected = false
+                - if params[:style]
+                  - for param in params[:style]
+                    - if param == style.name
+                      - preSelected = true
+                = check_box_tag style.name, style.name, preSelected, 'data-all' => 'false'
                 span.icon
                 span = style.name
 
@@ -81,7 +86,12 @@
             - for color in colors
               .custom-form-element.filter-option.selector-color name='#{color.name}'
                 label class=('swatch-color-' + color.name)
-                  = check_box_tag color.name, color.name, params[:colour] == color.name ? true : false, 'data-all' => 'false'
+                  - preSelected = false
+                  - if params[:colour]
+                    - for param in params[:colour]
+                      - if param == color.name
+                        - preSelected = true
+                  = check_box_tag color.name, color.name, preSelected, 'data-all' => 'false'
                   span.icon
                   span = color.name
             .custom-form-element.filter-option.selector-color name='Cheetah'
@@ -114,6 +124,11 @@
           - for shape in shapes
             .custom-form-element.filter-option.selector-bodyshape name='#{shape}'
               label
-                = check_box_tag shape, shape, params[:bodyshape] == shape ? true : false, 'data-all' => 'false'
+                - preSelected = false
+                - if params[:bodyshape]
+                  - for param in params[:bodyshape]
+                    - if param == shape
+                      - preSelected = true
+                = check_box_tag shape, shape, preSelected, 'data-all' => 'false'
                 span.icon
                 span = shape.gsub '_', ' '
