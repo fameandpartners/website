@@ -66,11 +66,14 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   updateFilterElements: (e) =>
     $this = $(e.target)
-    if !$this.hasClass('js-filter-all')
-      $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', false)
-    else
-      $this.parents('.panel-collapse').find('input').prop('checked', false)
+    if $this.parents('.panel-collapse').find('input:checked').length == 0
       $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', true)
+    else
+      if !$this.hasClass('js-filter-all')
+        $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', false)
+      else
+        $this.parents('.panel-collapse').find('input').prop('checked', false)
+        $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', true)
       
     @update()
 
