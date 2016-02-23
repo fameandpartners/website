@@ -19,13 +19,13 @@ module ProductActivityReport
 
   # API Private
 
-  def action_count(action, product_id)
+  def action_count(action, product_id, default_value: 0)
     result = ActiveRecord::Base.connection.execute(total_actions_sql(action, product_id))
 
-    (result.first.to_h.fetch('action_count') { 0 }).to_i
+    (result.first.to_h.fetch('action_count') { default_value }).to_i
   rescue StandardError => _e
     NewRelic::Agent.notice_error(_e)
-    0
+    default_value
   end
 
   def total_actions_sql(action, product_id = nil)
