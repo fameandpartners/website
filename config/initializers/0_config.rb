@@ -50,11 +50,6 @@ configatron.email_marketing.delay_time do |delay_time|
 end
 configatron.email_marketing.store_information = 1.month
 
-configatron.mandrill.smtp do |mandrill|
-  mandrill.username = 'eltons@fameandpartners.com'
-  mandrill.password = '189aQIbDBG2pBeKxqoth5A'
-end
-
 configatron.mailgun.mailbox do |mailgun|
   mailgun.domain   = 'fameandpartners.com.mailgun.org'
   mailgun.username = 'postmaster@fameandpartners.com.mailgun.org'
@@ -86,15 +81,17 @@ when :development
 
   configatron.host = 'localhost.localdomain'
 
+  configatron.aws.s3 do |s3|
+    s3.bucket            = 'dev-fameandpartners'
+    s3.region            = 'us-east-1'
+    s3.access_key_id     = 'AKIAJ7U3MBOEHSMUAOHQ'
+    s3.secret_access_key = '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'
+  end
+
   configatron.cache.expire do |expire|
     expire.quickly  = 1.second
     expire.normally = 30.seconds
     expire.long     = 60.seconds
-  end
-
-  configatron.mandrill.smtp do |mandrill|
-    mandrill.username = ''
-    mandrill.password = ''
   end
 
   configatron.mailgun.mailbox do |mailgun|

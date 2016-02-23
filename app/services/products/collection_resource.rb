@@ -39,25 +39,27 @@ class Products::CollectionResource
   attr_reader :offset
   attr_reader :price_min
   attr_reader :price_max
+  attr_reader :remove_excluded_from_site_logic
 
   def initialize(options = {})
-    @site_version   = options[:site_version] || SiteVersion.default
-    @collection     = Repositories::Taxonomy.get_taxon_by_name(options[:collection])
-    @style          = Repositories::Taxonomy.get_taxon_by_name(options[:style])
-    @edits          = Repositories::Taxonomy.get_taxon_by_name(options[:edits])
-    @event          = Repositories::Taxonomy.get_taxon_by_name(options[:event])
-    @bodyshape      = Repositories::ProductBodyshape.get_by_name(options[:bodyshape])
-    @color_group    = Repositories::ProductColors.get_group_by_name(options[:color_group])
-    @color          = Repositories::ProductColors.get_by_name(options[:color])
-    @discount       = prepare_discount(options[:discount])
-    @fast_making    = options[:fast_making]
-    @show_outerwear = options[:show_outerwear]
-    @query_string   = options[:query_string]
-    @order          = options[:order]
-    @limit          = options[:limit]
-    @offset         = options[:offset]
-    @price_min      = options[:price_min]
-    @price_max      = options[:price_max]
+    @site_version                    = options[:site_version] || SiteVersion.default
+    @collection                      = Repositories::Taxonomy.get_taxon_by_name(options[:collection])
+    @style                           = Repositories::Taxonomy.get_taxon_by_name(options[:style])
+    @edits                           = Repositories::Taxonomy.get_taxon_by_name(options[:edits])
+    @event                           = Repositories::Taxonomy.get_taxon_by_name(options[:event])
+    @bodyshape                       = Repositories::ProductBodyshape.get_by_name(options[:bodyshape])
+    @color_group                     = Repositories::ProductColors.get_group_by_name(options[:color_group])
+    @color                           = Repositories::ProductColors.get_by_name(options[:color])
+    @discount                        = prepare_discount(options[:discount])
+    @fast_making                     = options[:fast_making]
+    @show_outerwear                  = options[:show_outerwear]
+    @query_string                    = options[:query_string]
+    @order                           = options[:order]
+    @limit                           = options[:limit]
+    @offset                          = options[:offset]
+    @price_min                       = options[:price_min]
+    @price_max                       = options[:price_max]
+    @remove_excluded_from_site_logic = options[:remove_excluded_from_site_logic]
   end
 
   # what about ProductCollection class
@@ -65,6 +67,7 @@ class Products::CollectionResource
     color     = color.first if color.is_a? Array
     style     = style.first if style.is_a? Array
     bodyshape = bodyshape.first if bodyshape.is_a? Array
+
     Products::CollectionPresenter.from_hash(
       products:       products,
       total_products: total_products,
@@ -140,7 +143,7 @@ class Products::CollectionResource
         end
       end
 
-      result[:exclude_taxon_ids] = black_hole_taxon_ids - result[:taxon_ids]
+      result[:exclude_taxon_ids] = remove_excluded_from_site_logic ? nil : black_hole_taxon_ids - result[:taxon_ids]
 
       result[:discount] = discount if discount.present?
       result[:fast_making] = fast_making unless fast_making.nil?
@@ -172,6 +175,8 @@ class Products::CollectionResource
 
         Products::Presenter.new(
           id:             color_variant.product.id,
+          sku:            color_variant.product.sku,
+          variant_skus:   color_variant.product.variant_skus,
           name:           color_variant.product.name,
           color:          color_variant.color,
           images:         cropped_images(color_variant),

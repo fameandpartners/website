@@ -1,0 +1,4 @@
+- button_text = refund_request.refundable? ? 'Refund!' : 'Sync'
+= form_for refund_request do |f|
+  = f.hidden_field :action, value: :refund
+  = f.submit button_text

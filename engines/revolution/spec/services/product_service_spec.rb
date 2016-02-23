@@ -1,44 +1,49 @@
 require 'spec_helper'
 
 describe Revolution::ProductService do
-
-  let(:product_ids) {
-    ["471-coral", "680-light-pink", "683-burgundy", "262-white", "704-black", "504-lavender", "680-forest-green"]
-  }
+  let(:product_ids) { %w(471-coral 680-light-pink 683-burgundy 262-white 704-black 504-lavender 680-forest-green) }
 
   let!(:dress) { create(:dress, id: 471) }
   let(:service) { described_class.new(product_ids, 'au') }
-  let!(:current_site_version) { create(:site_version) }
-  let(:params) { {controller: "products/collections", action: "show", permalink: "formal", limit: 21} }
+  let!(:current_site_version) { build_stubbed(:site_version) }
+  let(:params) { { controller: 'products/collections', action: 'show', permalink: 'formal', limit: 21 } }
   let(:limit) { 10 }
-  let(:variables) { {pids: product_ids} }
+  let(:variables) { { pids: product_ids } }
 
-  subject!(:page) { Revolution::Page.create!(path: '/dresses/formal', variables: variables) }
-
+  subject(:page) { Revolution::Page.create!(path: '/dresses/formal', variables: variables) }
 
   it 'should parse the ids' do
-    expect(service.ids).to eq ["471", "680", "683", "262", "704", "504", "680"]
+    expect(service.ids).to eq %w(471 680 683 262 704 504 680)
   end
 
   it 'should parse the colours' do
-    expect(service.colours).to eq ["coral", "light-pink", "burgundy", "white", "black", "lavender", "forest-green"]
+    expect(service.colours).to eq %w(coral light-pink burgundy white black lavender forest-green)
   end
 
-  describe '.products' do
-
+  describe '#products' do
     context 'when limit is greater than the products' do
       let(:limit) { 7 }
+      subject(:service) { Revolution::ProductService.new(product_ids, current_site_version) }
+
       it 'given an offset greater than the number of products 0 products are returned' do
         page.variables  = {pids: product_ids}
         params[:offset] = 8
-        expect(Revolution::ProductService.new(service.ids, current_site_version).products(params, limit).size).to be nil
+
+        result = service.products(params, limit)
+        expect(result).to eq([])
       end
     end
 
+    context 'when there are nil items' do
+      it 'remove all nil items' do
+        allow_any_instance_of(Revolution::ProductService).to receive(:get_revolution_ids).and_return(["471",nil,nil,nil])
+        expect(Revolution::ProductService.new(service.ids, current_site_version).products(params, limit).size).to be 1
+      end
+    end
   end
 
   describe '.id_end' do
-    context "given 7 products" do
+    context 'given 7 products' do
       it 'returns position of 6 if limit > ids' do
         expect(service.id_end(params, limit)).to eq 6
       end

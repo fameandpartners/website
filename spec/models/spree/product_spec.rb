@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Spree::Product, :type => :model do
-  subject(:product) { FactoryGirl.build :dress }
+  subject(:product) { build(:dress) }
 
   it { is_expected.to have_one(:celebrity_inspiration).with_foreign_key(:spree_product_id).class_name('CelebrityInspiration').dependent(:destroy) }
   it { is_expected.to have_one(:style_profile).with_foreign_key(:product_id).class_name('ProductStyleProfile').dependent(:destroy) }
@@ -152,6 +152,16 @@ describe Spree::Product, :type => :model do
       let(:is_jumpsuit) { true }
 
       it { expect(product).to_not be_height_customisable }
+    end
+  end
+
+  describe '#variant_skus' do
+    let(:first_variant) { build(:dress_variant, sku: 'SKU123') }
+    let(:second_variant) { build(:dress_variant, sku: 'SKU456') }
+    let(:product) { build(:dress, variants: [first_variant, second_variant]) }
+
+    it 'return all variant SKUs' do
+      expect(product.variant_skus).to match_array(['SKU123', 'SKU456'])
     end
   end
 end

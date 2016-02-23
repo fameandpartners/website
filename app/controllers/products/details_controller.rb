@@ -36,6 +36,6 @@ class Products::DetailsController < Products::BaseController
     # Drop anything after the first period(.) and newline
     @title       = "#{@product.meta_title} #{default_seo_title}".strip
     @description = @product.meta_description
-    append_gtm_product(@product)
+    append_gtm_product(product_presenter: @product)
   end
 end

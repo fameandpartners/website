@@ -84,6 +84,7 @@ module Products
               position:     product.position,
               permalink:    product.permalink,
               master_id:    product.master.id,
+              variant_skus: product.variant_skus,
               in_stock:     product.has_stock?,
               discount:     discount,
               total_sales:  total_sales,
