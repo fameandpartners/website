@@ -8,7 +8,7 @@ module Features
     enhanced_moodboards:           "Sharing & Comments",
     express_making:                nil,
     fameweddings:                  'Weddings "Shop"',
-    force_sitewide_ssl:            "Force users to use HTTPS version of the website.",
+    force_sitewide_ssl:            "Force users to use HTTPS version of the website. Needs to restart server on feature toggle.",
     getitquick_unavailable:        "Turn off 'getitquick/' pages & Product Express Making",
     google_tag_manager:            "Google Tag Manager - Analytics, Trackers & Marketing managed front-end site additions.",
     height_customisation:          "Skirt Length Customisation",
@@ -48,13 +48,7 @@ module Features
     end
 
     def kv_store
-      # Safely fallback for deployment.
-      # TODO - TTL 2016.02.28 - Remove conditional, just return SimpleKeyValue
-      if ActiveRecord::Base.connection.table_exists? SimpleKeyValue.table_name
-        SimpleKeyValue
-      else
-        Redis.new(configatron.redis_options)
-      end
+      SimpleKeyValue
     end
   end
 end

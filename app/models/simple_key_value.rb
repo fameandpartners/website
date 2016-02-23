@@ -9,10 +9,16 @@ class SimpleKeyValue < ActiveRecord::Base
   def self.set(key, value)
     feature_flag = where(key: key).first_or_create
     feature_flag.update_attributes!(data: value)
+  rescue StandardError => e
+    NewRelic::Agent.notice_error(e)
+    false
   end
 
   def self.get(key)
     where(key: key).first.try(:data)
+  rescue StandardError => e
+    NewRelic::Agent.notice_error(e)
+    false
   end
 
   # Rollout does not define the ability to remove a feature, only turn it off
