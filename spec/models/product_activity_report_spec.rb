@@ -20,7 +20,7 @@ describe ProductActivityReport, type: :feature do
       let(:report_product) { viewed_product }
 
       it '100 times' do
-          expect(views_for_report_product).to eq 100
+        expect(views_for_report_product).to eq 100
       end
     end
 
