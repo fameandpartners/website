@@ -712,6 +712,8 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    sentry-raven (0.15.6)
+      faraday (>= 0.7.6)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
     show_me_the_cookies (3.1.0)
@@ -905,6 +907,7 @@ DEPENDENCIES
   rubyzip (~> 1.1.7)
   sass-rails (~> 3.2.3)
   selenium-webdriver (~> 2.50.0)
+  sentry-raven
   shoulda-matchers
   show_me_the_cookies (~> 3.1.0)
   sidekiq (= 2.13.0)
