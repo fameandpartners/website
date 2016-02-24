@@ -13,7 +13,7 @@ window.initProductCollectionMoodboardLinks = (options = {}) ->
     if !app.user_signed_in
       window.redirectToLoginAndBack()
       return
-
+    console.log('toggle');
     $(".dropdown-menu", $(e.currentTarget).parent()).toggleClass("hide")
 
   $container.on('click', buttons_selector, showMoodboardDropdown)
