@@ -2,16 +2,25 @@ require 'spec_helper'
 
 RSpec.describe SimpleKeyValue, :type => :model do
   it do
-    SimpleKeyValue.set :foo, "bar"
+    described_class.set :foo, "bar"
 
-    expect(SimpleKeyValue.get(:foo)).to eq "bar"
+    expect(described_class.get(:foo)).to eq "bar"
   end
 
   it do
-    SimpleKeyValue.set :foo, "bar"
-    SimpleKeyValue.set :foo, "baz"
+    described_class.set :foo, "bar"
+    described_class.set :foo, "baz"
 
-    expect(SimpleKeyValue.get(:foo)).to eq "baz"
+    expect(described_class.get(:foo)).to eq "baz"
+  end
+
+  context 'errors raising on .get/.set methods' do
+    before(:each) do
+      allow(described_class).to receive(:where).and_raise(StandardError)
+    end
+
+    it { expect(described_class.set(:foo, "bar")).to be_falsy }
+    it { expect(described_class.get(:foo)).to be_falsy }
   end
 end
 

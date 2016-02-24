@@ -19,7 +19,7 @@ SitemapGenerator::Interpreter.send :include, PathBuildersHelper
 
 SitemapGenerator::Interpreter.class_eval do
   def site_version_default_host(site_version)
-    url = "http://#{configatron.host}"
+    url = "https://#{configatron.host}"
     detector.site_version_url(url, site_version).chomp('/')
   end
 
@@ -30,8 +30,8 @@ end
 
 sitemap_options = {
     compress:      Rails.env.production?,
-    default_host:  "http://#{configatron.host}",
-    sitemaps_host: "http://#{configatron.aws.host}",
+    default_host:  "https://#{configatron.host}",
+    sitemaps_host: "https://#{configatron.aws.host}",
     include_root:  false,
     sitemaps_path: 'sitemap'
 }

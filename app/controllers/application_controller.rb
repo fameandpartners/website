@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
     http_basic_authenticate_with :name => 'fameandpartners', :password => 'pr0m!unicorn'
   end
 
+  if Features.active?(:force_sitewide_ssl)
+    ssl_required
+  end
+
   append_before_filter :store_marketing_params
   append_before_filter :check_marketing_traffic
   append_before_filter :count_competition_participants, if: proc { |_| params[:cpt].present? }
