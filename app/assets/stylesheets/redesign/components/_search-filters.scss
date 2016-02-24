@@ -184,44 +184,44 @@
       }
 
       &.swatch-color-green:after {
-        background-color: #10a522;
+        background-color: $product-color-green;
       }
 
       &.swatch-color-silver:after {
-        background-color: #a4a5a7;
+        background-color: $product-color-silver;
       }
 
       &.swatch-color-purple:after {
-        background-color: #622b6f;
+        background-color: $product-color-purple;
       }
 
       &.swatch-color-yellow:after {
-        background-color: #fffacd; // TODO: lemon color, we should also change label or remove this color completly
+        background-color: $product-color-lemon; // TODO: lemon color, we should also change label or remove this color completly
       }
 
       &.swatch-color-nude:after {
-        background-color: #fdd5b1;
+        background-color: $product-color-nude;
       }
 
       &.swatch-color-black:after {
-        background-color: #050505;
+        background-color: $product-color-black;
       }
 
       &.swatch-color-white:after {
-        background-color: #fff;
+        background-color: $product-color-white;
         border-left: solid $c-neutral-2 1px;
       }
 
       &.swatch-color-blue:after {
-        background-color: #0000e5; // TODO: cobalt blue color, we should also change label
+        background-color: $product-color-blue; // TODO: cobalt blue color, we should also change label
       }
 
       &.swatch-color-pink:after {
-        background-color: #ff93ca;
+        background-color: $product-color-pink;
       }
 
       &.swatch-color-red:after {
-        background-color: #d00;
+        background-color: $product-color-red;
       }
 
       &.swatch-color-pastel:after {
@@ -234,23 +234,9 @@
         background-position: 0px 0px;
       }
 
-      &.swatch-color-Cheetah.thumb-true:after {
-        background-image: $product-tick-image-url, $product-cheetah-image-url;
-        background-size: 14px 14px, 140px 40px ;
-        background-repeat: no-repeat, no-repeat;
-        background-position: 4px 2px, 0px 0px;
-      }
-
       &.swatch-color-Rosebud:after {
         background-image: $product-rosebud-image-url;
         background-size: 200px 65px;
-      }
-
-      &.swatch-color-Rosebud.thumb-true:after {
-        background-image: $product-rosebud-image-url, $product-rosebud-image-url;
-        background-size: 14px 14px, 200px 65px ;
-        background-repeat: no-repeat, no-repeat;
-        background-position: 4px 2px, 0px 0px;
       }
 
       @include mobile-header {
