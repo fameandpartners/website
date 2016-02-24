@@ -5,40 +5,46 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
 .products-collections {
   padding-top: 15px;
 
-  	.arrow-down {
-		float: left;
-		width: 100%;
-		margin-top: -11px;
-	}
+  .arrow-down {
+    float: left;
+    width: 100%;
+    margin-top: -11px;
+  }
 
-	.dropdown-menu.hide {
-		display: none;
-	}
+  .dropdown-menu.hide {
+    display: none;
+  }
 
-	.dropdown-menu {
-		margin-top: 0;
-		display: block;
-		width: 70%;
-		margin-left: 15%;
-		padding-left: 10px;
-		position: relative;
-		a{
-			width: 100%;
-			cursor: pointer;
-			float: left;
-			i{
-				padding-right: 5px;
-				font-size: small;
-			}
-		}
-	}
+  .dropdown-menu {
+    margin-top: 0;
+    display: block;
+    width: 70%;
+    margin-left: 15%;
+    padding-left: 10px;
+    position: relative;
 
-	@include mobile{
-		.dropdown-menu{
-			width: 100%;
-			margin-left: 0;
-		}
-	}
+    a {
+      width: 100%;
+      cursor: pointer;
+      float: left;
+
+      i {
+        padding-right: 5px;
+        font-size: small;
+      }
+
+    }
+
+  }
+
+  @include mobile {
+
+    .dropdown-menu{
+      width: 100%;
+      margin-left: 0;
+    }
+
+  }
 
   .category-controls {
     margin-bottom: 30px;
@@ -104,11 +110,13 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
     text-transform: uppercase;
     font-size: 1.2rem;
     font-weight: 600;
-    float:right;
-    width:20%;
-    @media(min-width: 1890px){
+    float: right;
+    width: 20%;
+
+    @media(min-width: 1890px) {
       margin-right:9px;
     }
+    
   }
 
   .select2-container--default .select2-selection--single {
@@ -210,54 +218,6 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
   .category--item{
     @media(max-width: 415px){
       min-height: 380px;
-    }
-  }
-
-  @media(max-width: $bootstrap-md-width){
-    .container-fluid{
-      padding:0;
-      .left-path{
-        margin-left: 12px;
-      }
-      #filter-mobile{
-        span{
-          cursor: pointer;
-        }
-      }
-      .filter-mobile-text{
-        margin-left: 10px;
-      }
-
-      .slide-in{
-        margin-left: 0;
-      }
-
-    }
-    .col-md-9{
-      padding:15px;
-      .container{
-        padding: 0;
-        .sort{
-          width: 55%;
-          margin-right: 0;
-        }
-      }
-
-    }
-
-
-  }
-
-  .left-path{
-    padding-left: 0;
-    margin-top: 25px;
-    margin-left: 60px;
-    a {
-      color: black;
-    }
-
-    a:not(:first-child){
-      margin-left: 5px;
     }
   }
 
