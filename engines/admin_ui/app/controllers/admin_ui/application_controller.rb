@@ -6,6 +6,10 @@ module AdminUi
     include Spree::Core::ControllerHelpers::RespondWith
     include Spree::Core::ControllerHelpers::Common
 
+    if Features.active?(:force_sitewide_ssl)
+      ssl_required
+    end
+
     before_filter :authorize_admin
 
     layout 'admin_ui'
