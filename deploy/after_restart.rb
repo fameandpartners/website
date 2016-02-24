@@ -17,18 +17,20 @@ on_app_master do
     puts e.message
   end
 
-  # # Alert Bugsnag about deploy
-  # begin
-  #   revision        = config.active_revision
-  #   release_stage   = config.framework_env
-  #   # TODO - Duplicated with config/initializers/bugsnag.rb
-  #   bugsnag_api_key = "997499c3e18822c6412e414ca82a86e4"
-  #
-  #   run("cd #{config.release_path} && curl -d \"apiKey=#{bugsnag_api_key}&revision=#{revision}&releaseStage=#{release_stage}\" http://notify.bugsnag.com/deploy" )
-  #
-  # rescue StandardError => e
-  #   puts e.message
-  # end
+  # Alert Sentry about deploy
+  begin
+    revision = config.active_revision
+    command  = <<-COMMAND
+      curl https://app.getsentry.com/api/hooks/release/builtin/68181/27cffdebddcf062bf0b2a5a0ac18c48deb45581dbcb44aa1d2ac73921b0b9a58/ \
+      -X POST \
+      -H 'Content-Type: application/json' \
+      -d '{"version": "#{revision}"}'
+    COMMAND
+
+    run(command)
+  rescue StandardError => e
+    puts e.message
+  end
 
   # Run Clear Cache worker
   begin
