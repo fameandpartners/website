@@ -35,9 +35,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     # pagination
     @page_size = options.page_size
-    @resetPagination(options.size, options.total_products)
     @showMoreSelector = options.showMoreSelector
-    $('#filter-accordion input').on('change', @showMoreSelector, @showMoreProductsClickHandler)
+    @resetPagination(options.size, options.total_products)
+    @content.on('click', @showMoreSelector, @showMoreProductsClickHandler)
     $(window).on('scroll', @scrollHandler)
 
     @productOrderInput  = new inputs.ProductOrderSelector(container: @filter.find('#product_order'))
