@@ -27,7 +27,6 @@ gem 'redcarpet', '~> 2.3.0'
 
 # Monitoring & Events
 gem 'newrelic_rpm'
-gem 'bugsnag'
 gem 'customerio'
 
 # Engines

@@ -17,18 +17,18 @@ on_app_master do
     puts e.message
   end
 
-  # Alert Bugsnag about deploy
-  begin
-    revision        = config.active_revision
-    release_stage   = config.framework_env
-    # TODO - Duplicated with config/initializers/bugsnag.rb
-    bugsnag_api_key = "997499c3e18822c6412e414ca82a86e4"
-
-    run("cd #{config.release_path} && curl -d \"apiKey=#{bugsnag_api_key}&revision=#{revision}&releaseStage=#{release_stage}\" http://notify.bugsnag.com/deploy" )
-
-  rescue StandardError => e
-    puts e.message
-  end
+  # # Alert Bugsnag about deploy
+  # begin
+  #   revision        = config.active_revision
+  #   release_stage   = config.framework_env
+  #   # TODO - Duplicated with config/initializers/bugsnag.rb
+  #   bugsnag_api_key = "997499c3e18822c6412e414ca82a86e4"
+  #
+  #   run("cd #{config.release_path} && curl -d \"apiKey=#{bugsnag_api_key}&revision=#{revision}&releaseStage=#{release_stage}\" http://notify.bugsnag.com/deploy" )
+  #
+  # rescue StandardError => e
+  #   puts e.message
+  # end
 
   # Run Clear Cache worker
   begin
