@@ -97,7 +97,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @updatePaginationLink('active')
 
   updatePaginationLink: (state = 'active') ->
-    row = @content.find(@showMoreSelector).closest('.row.more-products')
+    row = @content.find(@showMoreSelector).closest('.more-products')
     row.find('.status').hide()
     if state == 'loading'
       row.find('.loading').show()
@@ -142,7 +142,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         data: $.param(_.extend(updateRequestParams, { limit: @page_size, offset: @products_on_page })),
         success: (collection) =>
           content_html = @collectionMoreTemplate(collection: collection, col: 3)
-          @content.find(@showMoreSelector).closest('.row.relative').before(content_html)
+          @content.find(@showMoreSelector).closest('.more-products').before(content_html)
           # @updatePagination(collection.products.length, collection.total_products)
           @updatePagination(collection.products.length, collection.total_products)
 

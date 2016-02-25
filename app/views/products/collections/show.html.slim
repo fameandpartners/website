@@ -25,15 +25,13 @@
           .hide-visually Close filters
         = render :partial => 'filters_color_shape_style'
 
-      .col-lg-9.col-md-8.products-collection.js-products-collection-wrap
-        .row.products-set
+      .col-lg-9.col-md-8.products-collection
+        .row.products-set.js-products-collection-wrap
           = render partial: 'products_with_content', locals: {col: 3}
-        - if request.path.include?("/dresses/plus-size")
-          .row.products-set
+          - if request.path.include?("/dresses/plus-size")
             .col-md-12
               .panel-message
                 h2.heading These dresses are also available for killer curves up to size 22
-        .row.products-set
           = render partial: 'pagination'
 
 coffee:

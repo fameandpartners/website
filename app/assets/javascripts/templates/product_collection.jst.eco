@@ -5,13 +5,13 @@
 
 <% if @collection.total_products > @collection.products.length:  %>
   <div class="more-products">
-    <div class="status.active" >
+    <div class="status active" >
       <a href="#" class="btn btn-black" data-action='show-more-collection-products'>More Dresses<a>
     </div>
-    <div class="status.loading" style="display: none;">
+    <div class="status loading" style="display: none;">
       <img src="/assets/fame-spinner.gif" alt="Fame-spinner">
     </div>
-    <div class="status.inactive" style="display: none;">
+    <div class="status inactive" style="display: none;">
     </div>
   </div>
 <% end %>
