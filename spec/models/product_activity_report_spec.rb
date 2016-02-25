@@ -11,7 +11,7 @@ describe ProductActivityReport, type: :feature do
     }
 
     before do
-      100.times do
+      20.times do
         Activity.log_product_viewed(viewed_product)
       end
     end
@@ -19,8 +19,8 @@ describe ProductActivityReport, type: :feature do
     context 'a viewed product' do
       let(:report_product) { viewed_product }
 
-      it '100 times' do
-        expect(views_for_report_product).to eq 100
+      it '20 times' do
+        expect(views_for_report_product).to eq 20
       end
     end
 
@@ -29,6 +29,14 @@ describe ProductActivityReport, type: :feature do
 
       it 'has 0 views' do
         expect(views_for_report_product).to eq 0
+      end
+    end
+
+    describe '.all_actions' do
+      it do
+        expected_actions = {777 => {"viewed" => 20 }}
+
+        expect(ProductActivityReport.all_actions).to eq(expected_actions)
       end
     end
   end
