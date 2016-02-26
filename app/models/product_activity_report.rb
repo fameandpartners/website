@@ -18,7 +18,7 @@ module ProductActivityReport
   end
 
   def action_count(action, product_id)
-    all_actions.fetch(product_id, Hash.new(0))[action.to_s]
+    all_actions.fetch(product_id, {}).fetch(action.to_s, 0)
   end
 
   # API Private
@@ -31,7 +31,7 @@ module ProductActivityReport
     actions_sql = <<-SQL
     SELECT
       owner_id                              AS product_id,
-      json_object_agg(action, action_count) AS stats_list
+      array_to_string(array_agg(row(action, action_count)),'|') AS stats_list
     FROM (
            SELECT
              DISTINCT
@@ -51,7 +51,21 @@ module ProductActivityReport
     actions_results = ActiveRecord::Base.connection.execute(actions_sql)
 
     actions_results.inject(Hash.new(0)) do |memo, obj|
-      memo[obj["product_id"].to_i] = JSON.parse(obj["stats_list"])
+      memo[obj["product_id"].to_i] = stats_list_to_hash(obj["stats_list"])
+      memo
+    end
+  end
+
+  private def stats_list_to_hash(stats_list)
+    # TODO - On upgrade to Postgres 9.4 or better, could use `json_object_agg` and a simple
+    # JSON.parse on the resulting string, instead of this complicated method.
+    #
+    # i.e.
+    # SQL: json_object_agg(action, action_count) AS stats_list
+    # `JSON.parse(obj["stats_list"])`
+    stats_list.to_s.split('|').inject(Hash.new(0)) do |memo, attr|
+      action, value = attr.tr('()', '').split(',')
+      memo[action.to_s]  = value.to_i
       memo
     end
   end
