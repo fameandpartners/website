@@ -241,6 +241,26 @@ ActiveRecord::Schema.define(:version => 20160223050808) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "global_skus", :force => true do |t|
+    t.string   "sku"
+    t.string   "style_number"
+    t.string   "product_name"
+    t.string   "size"
+    t.string   "color_id"
+    t.string   "color_name"
+    t.string   "customisation_id"
+    t.string   "customisation_name"
+    t.string   "height_value"
+    t.text     "data"
+    t.integer  "product_id"
+    t.integer  "variant_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "global_skus", ["product_id"], :name => "index_global_skus_on_product_id"
+  add_index "global_skus", ["variant_id"], :name => "index_global_skus_on_variant_id"
+
   create_table "incompatibilities", :force => true do |t|
     t.integer "original_id"
     t.integer "incompatible_id"
