@@ -88,6 +88,9 @@ en:
   color: 'Colour'
   required_to: 'When do you need the dress by?'
   spree:
+    store:
+      promotions:
+        order_is_nil: Order does not exist. Please, add a product to your cart.
     admin:
       products:
         form:

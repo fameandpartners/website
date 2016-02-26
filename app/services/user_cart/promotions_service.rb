@@ -40,7 +40,7 @@ class PromotionsService
 
     def apply_coupon_code
       if order.nil?
-        @message = I18n.t(:order_is_nil)
+        @message = I18n.t('spree.store.promotions.order_is_nil')
         return false
       end
 
