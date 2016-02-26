@@ -25,19 +25,25 @@ var BlogPosts = React.createClass({
     return {posts: []}
   },
   componentDidMount: function() {
-    $.get("http://blog.fameandpartners.com/?json=1&count=100", function(result) {
-      var posts = (result.posts || [])
-        .filter(function (post) {
-          return post.custom_fields.home_page_display == "true"
-        })
-        .slice(0, 9)
-        .sort(function(post, another_post) {
-          // WP custom fields values seems to be an Array, so `home_page_display_order` returns something like: ["1"], ["2"], ...
-          return parseInt(post.custom_fields.home_page_display_order[0]) - parseInt(another_post.custom_fields.home_page_display_order[0])
-        });
+    $.ajax({
+      url: "//blog.fameandpartners.com/api/get_recent_posts/",
+      method: "GET",
+      data: { count: "100" },
+      dataType: "jsonp",
+      success: function (result) {
+        var posts = (result.posts || [])
+            .filter(function (post) {
+              return post.custom_fields.home_page_display == "true"
+            })
+            .slice(0, 9)
+            .sort(function (post, another_post) {
+              // WP custom fields values seems to be an Array, so `home_page_display_order` returns something like: ["1"], ["2"], ...
+              return parseInt(post.custom_fields.home_page_display_order[0]) - parseInt(another_post.custom_fields.home_page_display_order[0])
+            });
 
-      this.setState({posts: posts})
-    }.bind(this));
+        this.setState({posts: posts})
+      }.bind(this)
+    });
   },
   render: function() {
     if (this.state.posts.length == 0){
