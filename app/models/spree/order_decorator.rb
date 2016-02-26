@@ -183,9 +183,6 @@ Spree::Order.class_eval do
       Spree::OrderMailer.team_confirm_email(self.id).deliver
       ProductionOrderEmailService.new(self.id).deliver
       log_products_purchased
-      if user && user.newsletter?
-        Marketing::Subscriber.new(user: user).set_purchase_date(Date.today)
-      end
     rescue Exception => e
       log_confirm_email_error(e)
       logger.error("#{e.class.name}: #{e.message}")
