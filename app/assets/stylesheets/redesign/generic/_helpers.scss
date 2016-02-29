@@ -39,6 +39,11 @@
   overflow: hidden;
 }
 
+// if you need to hide scrollbars
+.no-scroll {
+  overflow: hidden !important;
+}
+
 // You can extend the cfix class with SASS to avoid the `.cfix` class appearing over and over in your markup.
 .cfix {
 

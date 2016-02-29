@@ -5,7 +5,7 @@
 window.page or= {}
 window.ProductCollectionFilter = class ProductCollectionFilter
   filter: null
-  content: null
+  content: null,
   updateParams: {}
   collectionTemplate: JST['templates/product_collection']
   collectionMoreTemplate: JST['templates/product_collection_append']
@@ -14,6 +14,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     options = $.extend({
       reset_source: true,
       page_size: 21,
+      mobileBreakpoint: 768,
       showMoreSelector: "*[data-action=show-more-collection-products]"
 		}, options)
 
@@ -30,10 +31,12 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     # or navigate only in it
     @reset_source = options.reset_source
 
+    @mobileBreakpoint = options.mobileBreakpoint
+
     # pagination
     @page_size = options.page_size
-    @resetPagination(options.size, options.total_products)
     @showMoreSelector = options.showMoreSelector
+    @resetPagination(options.size, options.total_products)
     @content.on('click', @showMoreSelector, @showMoreProductsClickHandler)
     $(window).on('scroll', @scrollHandler)
 
@@ -44,109 +47,41 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @$banner = $(options.banner)
 
   setUpFilterElements: =>
-    @allCheckboxes = $(".filter-area .thumb, .radio-icon")
-    @allCheckboxes.on 'click', (e) =>
-      @handleCheckboxes(e)
-      @update()
-    @selectColor = $(".select-color select")
-    @selectColor.on 'change', (e) =>
-      @handleCheckboxes(e)
-      @update()
+    $(".search-filters :input").on 'change', (e) =>
+      @updateFilterElements(e)
 
-    @clearAll = $(".filter-rect .clear-all")
-    @clearAll.on('click',@clearAllOptions)
-    $(".show-more-styles").on 'click', ->
-      if $(this).text() == "More"
-        $(this).text("Less")
-        $('.filter-area-styles').removeClass('short-height')
-        $('.filter-area-styles').addClass('full-height')
+    $(".js-trigger-clear-all-filters").on('click', @clearAllOptions)
+
+    # toggle mobile version of filter menu
+    $('.js-trigger-toggle-filters').on 'click', (e) =>
+      $('body').toggleClass('filter-is-active no-scroll');
+      $('.js-side-panel-filters').toggleClass('is-active');
+
+    # enable content scroll for larger tablets if orientation changed
+    $(window).on 'resize', (e) =>
+      if $(window).width() >= @mobileBreakpoint && $('body').hasClass('filter-is-active')
+        $('body').removeClass('no-scroll');
+      if $(window).width() < @mobileBreakpoint && $('body').hasClass('filter-is-active')
+        $('body').addClass('no-scroll');
+
+  updateFilterElements: (e) =>
+    $this = $(e.target)
+    if $this.parents('.panel-collapse').find('input:checked').length == 0
+      $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', true)
+    else
+      if !$this.hasClass('js-filter-all')
+        $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', false)
       else
-        $(this).text("More")
-        $('.filter-area-styles').removeClass('full-height')
-        $('.filter-area-styles').addClass('short-height')
-
-    $('.select-color select').select2();
-    $('.filter-area-colors .select2-selection--single').css('padding-top','7px')
-    $("#filter-mobile").on 'click', ->
-      $('.filter-col').toggleClass("slide-in")
-    $(".filter-rect .close").on 'click', ->
-      $('.filter-col').toggleClass("slide-in")
-
-    $(document).on 'click', (e) ->
-      close = $('.filter-col .close')
-      closeX = close.position()?.left + close.width() + 20
-      $('.filter-col').removeClass("slide-in") if e.clientX > closeX and $('.filter-col').hasClass("slide-in")
-
-    slideDistance = 70
-    $(document).on('mousedown touchstart', (e) =>
-       @xDown = e.originalEvent.x
-     ).on 'mouseup touchend', (e2) =>
-       @xUp = e2.originalEvent.x
-       if @xDown > @xUp + slideDistance and $('.filter-col').hasClass("slide-in")
-         $('.filter-col').removeClass("slide-in")
-
-  clearAllOptions: =>
-    $(".thumb").removeClass("thumb-true").addClass("thumb-false")
-    $(".filter-area-colors .thumb-false[name='all']").removeClass("thumb-false").addClass("thumb-true")
-    $(".filter-area-styles .thumb-false[name='all']").removeClass("thumb-false").addClass("thumb-true")
-    $(".filter-area-shapes .thumb-false[name='all']").removeClass("thumb-false").addClass("thumb-true")
-    $('.select-color select').val("none").trigger("change")
+        $this.parents('.panel-collapse').find('input').prop('checked', false)
+        $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', true)
+      
     @update()
 
-  handleCheckboxes: (e) =>
-    name = $(e.target).attr("name")
-    area = $(e.target).closest(".filter-area")
-    isColorCheckbox = area.hasClass("filter-area-colors")
-    isShapeCheckbox = area.hasClass("filter-area-shapes")
-    isStyleCheckbox = area.hasClass("filter-area-styles")
-    isSelect = $(e.target).parent().hasClass("select-color")
-    isPriceCheckbox = $(e.target).hasClass("radio-icon")
-
-    if isSelect
-      name = $($('.filter-area-colors select option:selected')[0]).attr("name")
-      return if name=="none"
-      if $(".filter-area-colors .thumb-true[name='"+ name+"']").size() == 0
-        $(".filter-area-colors .thumb[name='"+ name+"']").click()
-      if $(".filter-area-colors .thumb-true[name='all']").size() == 1
-          $(".filter-area-colors .thumb-true[name='all']").click()
-
-    if (isColorCheckbox && !isSelect) || isShapeCheckbox || isStyleCheckbox
-      checked = $(e.target).hasClass("thumb-true")
-      $(e.target).toggleClass("thumb-true thumb-false")
-
-    if isColorCheckbox && !isSelect
-      if name == 'all'
-        return if $(".filter-area-colors .thumb-false[name='all']").size() == 1
-        $(".filter-area-colors .thumb-true[name!='all']").click()
-        $('.select-color select').val("none").trigger("change")
-      else
-        if $(".filter-area-colors .thumb-true[name='all']").size() == 1 && !checked
-          $(".filter-area-colors .thumb-true[name='all']").click()
-
-    if isShapeCheckbox
-      if name == 'all'
-        return if $(".filter-area-shapes .thumb-false[name='all']").size() == 1
-        $(".filter-area-shapes .thumb-true[name!='all']").click()
-      else
-        if $(".filter-area-shapes .thumb-true[name='all']").size() == 1 && !checked
-          $(".filter-area-shapes .thumb-true[name='all']").click()
-
-    if isStyleCheckbox
-      if name == 'all'
-        return if $(".filter-area-styles .thumb-false[name='all']").size() == 1
-        $(".filter-area-styles .thumb-true[name!='all']").click()
-      else
-        if $(".filter-area-styles .thumb-true[name='all']").size() == 1 && !checked
-          $(".filter-area-styles .thumb-true[name='all']").click()
-
-    if isPriceCheckbox
-      if $($(e.target).parent()).attr("data-all") == "true"
-        $(".filter-radio-option .radio-icon").removeClass("selected")
-        $(".filter-radio-option .radio-icon:first").addClass("selected")
-      else
-        $(".filter-radio-option .radio-icon").removeClass("selected")
-        $(e.target).addClass("selected")
-
+  clearAllOptions: =>
+    $('#filter-accordion :input').prop('checked', false)
+    $('#filter-accordion .js-filter-all').prop('checked', true)
+    $('#filter-accordion select').val('none')
+    @update()
 
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
@@ -162,7 +97,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @updatePaginationLink('active')
 
   updatePaginationLink: (state = 'active') ->
-    row = @content.find(@showMoreSelector).closest('.row.more-products')
+    row = @content.find(@showMoreSelector).closest('.more-products')
     row.find('.status').hide()
     if state == 'loading'
       row.find('.loading').show()
@@ -189,7 +124,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         @content.html(content_html)
 
         @resetPagination(collection.products.length, collection.total_products)
-
         if collection && collection.details
           @updateCollectionDetails(collection.details)
 
@@ -208,7 +142,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         data: $.param(_.extend(updateRequestParams, { limit: @page_size, offset: @products_on_page })),
         success: (collection) =>
           content_html = @collectionMoreTemplate(collection: collection, col: 3)
-          @content.find(@showMoreSelector).closest('.row.relative').before(content_html)
+          @content.find(@showMoreSelector).closest('.more-products').before(content_html)
           # @updatePagination(collection.products.length, collection.total_products)
           @updatePagination(collection.products.length, collection.total_products)
 
@@ -230,21 +164,21 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     colourArray = []
     styleArray = []
 
-    if $(".filter-area-colors .thumb-true[name='all']").size() == 0
-      colorInputs = $(".filter-area-colors .thumb-true[name!='all']")
+    if $("#collapse-color .js-filter-all input:not(:checked)")
+      colorInputs = $("#collapse-color input:not(.js-filter-all):checked")
       for colorInput in colorInputs
         colourArray.push($(colorInput).attr("name"))
-      colour = $(".filter-area-colors select option:selected").attr("name")
+      colour = $("#other-colors option:selected").attr("name")
       if colour != "none"
         colourArray.push(colour)
 
-    if $(".filter-area-shapes .thumb-true[name!='all']")[0]?
-      bodyshapeInputs = $(".filter-area-shapes .thumb-true[name!='all']")
+    if $("#collapse-bodyshape .js-filter-all input:not(:checked)")
+      bodyshapeInputs = $("#collapse-bodyshape input:not(.js-filter-all):checked")
       for bodyshapeInput in bodyshapeInputs
         bodyshapeArray.push($(bodyshapeInput).attr("name"))
 
-    if $(".filter-area-styles .thumb-true[name!='all']")[0]?
-      styleInputs = $(".filter-area-styles .thumb-true[name!='all']")
+    if $("#collapse-style .js-filter-all input:not(:checked)")
+      styleInputs = $("#collapse-style input:not(.js-filter-all):checked")
       for styleInput in styleInputs
         styleArray.push($(styleInput).attr("name"))
 
@@ -258,9 +192,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     priceHash = {}
 
-    if !$(".filter-radio-option .radio-icon:first").hasClass("selected")
-      priceMin = $($(".filter-radio-option .radio-icon.selected").parent()).data("pricemin")
-      priceMax = $($(".filter-radio-option .radio-icon.selected").parent()).data("pricemax")
+    if $(".selector-price input:checked").data("all") == false
+      priceMin = $(".selector-price input:checked").data("pricemin")
+      priceMax = $(".selector-price input:checked").data("pricemax")
       priceHash["priceMin"] = priceMin
       priceHash["priceMax"] = priceMax if priceMax?
       filter = $.extend(filter,priceHash)

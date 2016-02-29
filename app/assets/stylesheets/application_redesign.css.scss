@@ -73,7 +73,6 @@ z-index levels
 *   101 = .rect
 *   102 = header
 *   102 = #locale-selector-container ul
-*   102 = .products-collections .container-fluid .filter-col (max-width: $bootstrap-md-width)
 
 *   200 = div.cs-active
 
@@ -209,6 +208,7 @@ z-index levels
 @import 'redesign/components/delivery';
 @import 'redesign/components/tabs';
 @import 'redesign/components/dropdowns';
+@import 'redesign/components/breadcrumb';
 @import 'redesign/components/media';
 @import 'redesign/components/hero';
 @import 'redesign/components/blog-posts';
@@ -220,6 +220,7 @@ z-index levels
 @import 'redesign/components/banners';
 @import 'redesign/components/panels/panels';
 @import 'redesign/components/product/custom_heights_table';
+@import 'redesign/components/search-filters';
 
 // Modals
 @import 'redesign/modals/vex';
