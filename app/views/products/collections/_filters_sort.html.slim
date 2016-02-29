@@ -2,22 +2,17 @@
   ruby:
     sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase))
 
-  .container-fluid.category-controls
-    .row-fluid
-      .col-md-3.col-xs-4
-        .left-path.hidden-xs.hidden-sm
-          = link_to root_path
-            | Home /
-          = link_to dresses_path
-            b
-              | Dresses
-        .left-path.visible-xs.visible-sm#filter-mobile
-          span
-            i.fa.fa-filter
-            b.filter-mobile-text
-              | Filter
-      .col-md-9.col-xs-8
-        .container style='width:100%'
-          .row style='width:100%'
-            .sort
+  .row
+    .col-md-12
+      .category-controls
+        .row
+          .col-md-6.col-sm-6.col-xs-6
+            a.icon.icon-filter.trigger-filter.hidden-md.hidden-lg.js-trigger-toggle-filters href='javascript:;'
+              .hide-visually Open filters
+            ol.breadcrumb.hidden-xs.hidden-sm
+              li 
+                = link_to 'Home', root_path
+              li.active Dresses
+          .col-md-6.col-sm-6.col-xs-6
+            .sort.js-products-collection-filter
               = select_tag 'product_order', sort_options, "data-minimum-results-for-search" => 'Infinity', prompt: 'Sort By'

@@ -5,8 +5,9 @@ javascript:
   jQuery(document).ready(function(){
     // Filters
     new ProductCollectionFilter({
-      controls: '.category .category-controls',
-      content: '.category .products-collection',
+      controls: '.js-products-collection-filter',
+      content: '.js-products-collection-wrap',
+      mobileBreakpoint: 992,
       page_size: #{page_size},
       reset_source: false,
       size: #{@collection.products.size.to_i},
@@ -22,7 +23,7 @@ javascript:
 
     // Moodboards
     initProductCollectionMoodboardLinks({
-      container: ".category .products-collection, .container.products-collections",
+      container: ".products-collection",
       buttons: "span.moodboard"
     });
   });

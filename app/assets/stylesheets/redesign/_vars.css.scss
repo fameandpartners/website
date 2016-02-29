@@ -57,6 +57,8 @@ $iphone6p-width: 414px;
 $tablet-width: 768px;
 $desktop-width: 1024px;
 
+// if you are updating $mobile-header value, please remember to update 
+// mobileBreakpoint in views/products/collection/javascript
 $mobile-header: 992px;
 
 // Bootstrap uses these widths as breakpoints

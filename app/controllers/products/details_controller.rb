@@ -37,5 +37,7 @@ class Products::DetailsController < Products::BaseController
     @title       = "#{@product.meta_title} #{default_seo_title}".strip
     @description = @product.meta_description
     append_gtm_product(product_presenter: @product)
+
+    Activity.log_product_viewed(@product, temporary_user_key, try_spree_current_user)
   end
 end

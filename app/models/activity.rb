@@ -5,7 +5,7 @@ class Activity < ActiveRecord::Base
 
   serialize :info, Hash
 
-  attr_accessible :action, :owner_id, :owner_type, :item_id, :item_type, :actor_id, :actor_type
+  attr_accessible :action, :owner_id, :owner_type, :item_id, :item_type, :actor_id, :actor_type, :session_key, :number
 
   %w{owner actor item}.each do |name|
     define_method name.to_s do
@@ -23,24 +23,21 @@ class Activity < ActiveRecord::Base
   end
 
   class << self
-    def log_product_viewed(product, session_key = nil, user = nil)
-      session_key ||= 'user_without_session_key'
+    def log_product_viewed(product, session_key = 'user_without_session_key', user = nil)
+
       args = {
-        action: 'viewed',
-        owner_id: product.id, owner_type: product.class.to_s
+        action:      'viewed',
+        owner_id:    product.id,
+        owner_type:  'Spree::Product',
+        session_key: session_key.to_s,
+        number:      1
       }
+
       if user.present?
         args.update({ actor_id: user.id, actor_type: user.class.to_s })
-      else
-        args.update({ session_key: session_key })
       end
 
-      activity = Activity.where(args).first_or_initialize
-      activity.number = activity.number.to_i + 1
-      if user.present?
-        activity.info = user.reservation_info
-      end
-      activity.save
+      self.create!(args)
     end
 
     def log_product_purchased(product, user = nil, order = nil)

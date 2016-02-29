@@ -39,6 +39,11 @@ class PromotionsService
     end
 
     def apply_coupon_code
+      if order.nil?
+        @message = I18n.t('spree.store.promotions.order_is_nil')
+        return false
+      end
+
       if promotion.blank?
         @message = I18n.t(:coupon_code_not_found)
         return false

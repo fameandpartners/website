@@ -1,0 +1,56 @@
+/* [Side Panel]
+-------------------------------------------------------*/
+.side-panel {
+
+  .btn-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: none;
+    visibility: hidden;
+  }
+
+}
+
+@include mobile-header {
+
+  .side-panel {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 70px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: $c-neutral-white;
+    z-index: 1999;
+    -webkit-overflow-scrolling: touch;
+
+    &.side-panel-left {
+      left: -100%;
+      @include transition(left 0.25s ease 0s);
+
+      &.is-active {
+        left: 0;
+      }
+
+    }
+
+    &.side-panel-right {
+      right: -100%;
+      @include transition(right 0.25s ease 0s);
+
+      &.is-active {
+        right: 0;
+      }
+
+    }
+
+    .btn-close {
+      display: block;
+      visibility: visible;
+    }
+
+  }
+
+}
