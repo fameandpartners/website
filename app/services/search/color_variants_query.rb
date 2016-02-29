@@ -168,8 +168,12 @@ module Search
               by 'product.name', 'asc'
             when 'alpha_desc'
               by 'product.name', 'desc'
-            when 'most_viewed'
+            when 'most_views'
               by 'product.statistics.total_views', 'desc'
+            when 'most_carts'
+              by 'product.statistics.total_carts', 'desc'
+            when 'most_wishlists'
+              by 'product.statistics.total_wishlists', 'desc'
             when 'created'
               by 'product.created_at', 'desc'
             else

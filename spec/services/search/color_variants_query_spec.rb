@@ -59,7 +59,9 @@ module Search
           ['alpha_asc',     {'product.name' => 'asc'}],
           ['alpha_desc',    {'product.name' => 'desc'}],
           ['created',       {'product.created_at' => 'desc'}],
-          ['most_viewed',   {'product.statistics.total_views' => 'desc'}]
+          ['most_views',    {'product.statistics.total_views' => 'desc'}],
+          ['most_carts',    {'product.statistics.total_carts' => 'desc'}],
+          ['most_wishlists',{'product.statistics.total_wishlists' => 'desc'}],
         ]
 
         ordering_rules.each do |(ordering, expected_order_clause)|
