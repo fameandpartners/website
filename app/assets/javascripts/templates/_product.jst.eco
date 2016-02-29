@@ -4,10 +4,12 @@
     <img class="img-product" src='<%= @product.images[0] %>' alt='<%= @product.name %>' data-hover='<%= @product.images[1] || '' %>' data-original='<%= @product.images[0] %>' ></>
   </a>
   <div class="details text-center">
-    <span class="name"><%= @product.name %></span>
-    <% if @product.name.toLowerCase().indexOf("skirt") > -1 : %>
-      <span class="skirt-alert"> (skirt only)</span>
-    <% end %>
+    <a href="<%= @product.collection_path %>" class="media-wrap product-name">
+      <span class="name"><%= @product.name %></span>
+      <% if @product.name.toLowerCase().indexOf("skirt") > -1 : %>
+        <span class="skirt-alert"> (skirt only)</span>
+      <% end %>
+    </a>
     <span class="price">
       <% if @product.sale_price: %>
         <span class="price-original"><%= @product.price %></span>
