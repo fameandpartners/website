@@ -4,7 +4,7 @@ module Search
   RSpec.describe ColorVariantsQuery, type: :feature do
 
     context 'defaults' do
-      subject(:default_query) { Search::ColorVariantsQuery.build.to_hash }
+      subject(:default_query) { ColorVariantsQuery.build.to_hash }
 
       it 'sorts by product.created_at' do
         expect(default_query[:sort]).to eq [{"product.created_at"=>"desc"}]
@@ -36,6 +36,39 @@ module Search
 
         it 'requires available_on' do
           is_expected.to include({:exists=>{:field=>:available_on}})
+        end
+      end
+    end
+
+    describe 'order' do
+      describe 'default order' do
+        it do
+          query = ColorVariantsQuery.build({}).to_hash
+          expect(query[:sort]).to include({"product.created_at"=>"desc"})
+        end
+      end
+
+      context 'defined rules' do
+        ordering_rules = [
+          ['price_high',    {'product.price' => 'desc'}],
+          ['price_low',     {'product.price' => 'asc'}],
+          ['newest',        {'product.created_at' => 'desc'}],
+          ['oldest',        {'product.created_at' => 'asc'}],
+          ['fast_delivery', {'product.fast_delivery' => 'desc'}],
+          ['best_sellers',  {'product.total_sales' => 'desc'}],
+          ['alpha_asc',     {'product.name' => 'asc'}],
+          ['alpha_desc',    {'product.name' => 'desc'}],
+          ['created',       {'product.created_at' => 'desc'}]
+        ]
+
+        ordering_rules.each do |(ordering, expected_order_clause)|
+          describe "#{ordering}" do
+            it "#{ordering} queries #{expected_order_clause}" do
+              ordering_option = {'order' => ordering}
+              query           = ColorVariantsQuery.build(ordering_option).to_hash
+              expect(query[:sort]).to include(expected_order_clause)
+            end
+          end
         end
       end
     end
