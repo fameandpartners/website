@@ -58,7 +58,8 @@ module Search
           ['best_sellers',  {'product.total_sales' => 'desc'}],
           ['alpha_asc',     {'product.name' => 'asc'}],
           ['alpha_desc',    {'product.name' => 'desc'}],
-          ['created',       {'product.created_at' => 'desc'}]
+          ['created',       {'product.created_at' => 'desc'}],
+          ['most_viewed',   {'product.statistics.total_views' => 'desc'}]
         ]
 
         ordering_rules.each do |(ordering, expected_order_clause)|
