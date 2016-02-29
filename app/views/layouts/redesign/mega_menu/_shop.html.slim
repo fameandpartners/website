@@ -3,7 +3,7 @@ li.shop.menu-item
     | Shop
   .mega-menu.hidden-sm
     .mega-menu--main
-      .container-fluid.max-width-100
+      .container-fluid
         .row
           .col-md-3.all-dresses
             = button_to 'View all dresses', dresses_path, class: 'btn btn-block btn-black', method: :get
@@ -24,7 +24,7 @@ li.shop.menu-item
         = link_to dresses_path, class: 'mega-menu-banner' do
           = image_tag current_sale.mega_menu_image_url, class: 'img-responsive'
 
-      .container-fluid.max-width-100
+      .container-fluid
         .row
           .col-md-2.col-lg-2.col-md-offset-4
             h4.link-header Events

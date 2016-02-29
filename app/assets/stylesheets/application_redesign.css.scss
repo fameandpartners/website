@@ -15,9 +15,7 @@ z-index levels
 *     1 = .card-logo.discover
 *     1 = .card-logo.mastercard
 *     1 = .card-container
-*     1 = div.cs-select
 *     1 = main
-*     1 = .homepage-panel::after
 *     1 = .page-title:after
 *     1 = .slick-arrow
 
@@ -30,8 +28,6 @@ z-index levels
 *     2 = .pagination > .active > a (&:hover, &:focus)
 *     2 = .pagination > .active > span (&:hover, &:focus)
 *     2 = a.list-group-item.active (&:hover, &:focus)
-*     2 = .homepage-panel--content
-*     2 = .goto-arrow
 
 *     3 = .rslides_tabs
 *     3 = #main-nav
@@ -43,8 +39,6 @@ z-index levels
 *     5 = .carousel-control .icon-next
 *     5 = .carousel-control .glyphicon-chevron-left
 *     5 = .carousel-control .glyphicon-chevron-right
-
-*     9 = .product-section--details
 
 *    10 = #sideMenu #new-this-week-menu (min-width: 800px)
 *    10 = #slideMenu #dresses-menu
@@ -75,14 +69,11 @@ z-index levels
 *   102 = #locale-selector-container ul
 *   102 = .products-collections .container-fluid .filter-col (max-width: $bootstrap-md-width)
 
-*   200 = div.cs-active
-
 *   990 = .dropdown-backdrop
 
 *   999 = #product-overlay
 *   999 = .skippr-nav-container
 *   999 = .skippr-arrow
-*   999 = .mobile-menu-overlay
 *   999 = #cart ???
 *   999 = #shadow-layer
 
@@ -119,7 +110,6 @@ z-index levels
 *  9999 = .vex-theme-bottom-right-corner.alert .vex-content
 *  9999 = .vex-content
 
-* 10000 = .close-search (max-width: 768px)
 * 10000 = .most-front ???
 
 // beyond crazy

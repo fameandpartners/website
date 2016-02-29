@@ -64,14 +64,14 @@ header {
 .mega-menu-list {
   padding-top: 10px;
   padding-bottom: 5px;
+  padding-left: 0;
   font-family: $font-family-secondary;
   font-size: 1.6rem;
 }
 
 .mega-menu--secondary {
   background-color: #fff;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 15px 60px;
   border-bottom:3px solid $gray-light-bg;
 }
 
@@ -86,18 +86,6 @@ header {
   &:hover {
     color: #355e6d !important;
   }
-}
-
-.mega-menu--main {
-  position: relative;
-  border: 1px solid #040505;
-  border-bottom: none;
-  border-left: none;
-  border-right: none;
-  background-color: #f5f5f5;
-  padding-right: 0;
-  padding-left: 0;
-  height: 100px;
 }
 
 .mega-menu-banner {
@@ -242,6 +230,13 @@ header {
   color: #355e6d;
 }
 
+.nav-menu .primary, 
+.nav-menu .secondary {
+  display: block;
+  list-style: none;
+  padding-left: 0;
+}
+
 li.shop {
 
   ul.story-links {
@@ -295,10 +290,13 @@ li.shop {
 }
 
 .arrow-up {
+  width: 0;
+  height: 0;
+  opacity: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-bottom: 10px solid #f4f4f4;
- }
+}
 
 .nav-menu {
    .search-btn {
@@ -316,10 +314,6 @@ li.shop {
 
 .search-form .form-control {
   width: 85%;
-}
-
-.close-search {
-  padding: 30px 37px 0 0;
 }
 
 .search-input {
