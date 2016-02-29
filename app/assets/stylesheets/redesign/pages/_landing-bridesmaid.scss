@@ -1,6 +1,12 @@
 /* [Landing Page - Bridesmaid]
 -------------------------------------------------------*/
 .landing-page-2 {
+  .re-style{
+    font-weight: 600;
+    text-transform: none;
+    font-style: normal;
+  }
+
   @include iphone5{
     .three-btns-panel{
       height: 260px;
