@@ -55,7 +55,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       window.track.event('LandingPageModal', 'ClosedNoAction', @opts.promocode)
 
   process: (data) =>
-    if !!data.email
+    if !!data.email || data.template_name=="blank"
       @opts.email = data.email
       @signupMarketingTracking()
       $.post(@opts.action, data).done(@success).fail(@error)
