@@ -89,8 +89,6 @@ z-index levels
    1000 = .most-front ???
 *  1000 = .dropdown-menu
 *  1000 = .navbar-static-top
-*  1000 = .mega-menu-menu
-*  1000 = .search-bar
 *  1000 = .mega-menu
 
 *  1010 = .chosen-container .chosen-drop
@@ -144,6 +142,15 @@ z-index levels
 @import 'redesign/icons';
 @import 'libs/icomoon_fame_2015/icons';
 
+// Base
+@import 'redesign/base/base';
+@import 'redesign/base/type';
+@import 'redesign/base/links';
+@import 'redesign/base/input-groups';
+@import 'redesign/base/forms';
+@import 'redesign/base/buttons';
+@import 'redesign/base/containers';
+
 @import 'redesign/layout';
 @import 'redesign/header';
 @import 'redesign/footer';
@@ -188,12 +195,6 @@ z-index levels
 // but I chose to duplicate the file, rather than rewrite any of the current usages.    
 @import 'libs/jquery-ui-1.10.4.custom';   
 @import 'redesign/vendor/jquery-ui';
-
-// Base
-@import 'redesign/base/type';
-@import 'redesign/base/forms';
-@import 'redesign/base/buttons';
-@import 'redesign/base/containers';
 
 // Layout
 @import 'redesign/layout/header';

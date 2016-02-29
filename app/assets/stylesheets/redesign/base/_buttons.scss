@@ -1,5 +1,15 @@
 /* [Buttons]
 -------------------------------------------------------*/
+// TODO: use mixing for these, rename variations and create disabled state
+.btn {
+  padding: 10px 40px;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
 .btn-default {
   color: $c-neutral-white;
   background: $c-neutral-8;
@@ -12,6 +22,22 @@
     color: $c-neutral-white;
     background: $c-neutral-6;
     border-color: transparent;
+  }
+
+}
+
+.btn-primary {
+  color: $c-neutral-white;
+  background: #337ab7;
+  border-color: #2e6da4;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: $c-neutral-white;
+    background: #286090;
+    border-color: #204d74;
   }
 
 }
@@ -30,6 +56,11 @@
     border-color: $c-neutral-black;
   }
 
+}
+
+.btn-black {
+  background: $c-neutral-black;
+  color: $c-neutral-white;
 }
 
 .btn-close {
@@ -72,6 +103,17 @@
       height: 15px;
     }
 
+  }
+
+}
+
+// TODO: marge this with .btn-close
+.close {
+  opacity: 0.7;
+
+  img {
+    width: 20px;
+    height: 20px;
   }
 
 }
@@ -136,4 +178,20 @@
 
   }
 
+}
+
+.btn-lg,
+.btn-group-lg > .btn {
+  padding: 10px 16px;
+  font-size: 20px;
+}
+
+.btn-sm,
+.btn-group-sm > .btn {
+  font-size: 14px;
+}
+
+.btn-xs,
+.btn-group-xs > .btn {
+  font-size: 14px;
 }
