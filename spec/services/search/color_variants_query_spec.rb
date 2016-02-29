@@ -48,6 +48,13 @@ module Search
         end
       end
 
+      describe 'except when searching' do
+        it do
+          query = ColorVariantsQuery.build({query_string: 'foobar'}).to_hash
+          expect(query[:sort]).to be_empty
+        end
+      end
+
       context 'defined rules' do
         ordering_rules = [
           ['price_high',    {'product.price' => 'desc'}],
