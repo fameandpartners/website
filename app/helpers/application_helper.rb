@@ -152,6 +152,7 @@ module ApplicationHelper
   # span.price-old $355
   # ' $295
   def price_for_product(product)
+    byebug
     price = product.site_price_for(current_site_version)
     discount = product_discount(product)
     product_price_with_discount(price, discount)
