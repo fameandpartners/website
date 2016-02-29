@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(:version => 20160223050808) do
   end
 
   add_index "activities", ["action", "owner_type", "owner_id"], :name => "index_activities_on_action_and_owner_type_and_owner_id"
+  add_index "activities", ["action"], :name => "index_activities_on_action"
+  add_index "activities", ["owner_type"], :name => "index_activities_on_owner_type"
 
   create_table "answer_taxons", :force => true do |t|
     t.integer  "answer_id"

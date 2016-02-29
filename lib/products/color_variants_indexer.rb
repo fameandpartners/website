@@ -6,6 +6,7 @@ module Products
     end
 
     include ColorVariantImageDetector
+    include ProductActivityReport
 
     def self.index!
       new.call
@@ -47,6 +48,10 @@ module Products
         product_price_in_us = product.price_in(us_site_version.currency)
         product_price_in_au = product.price_in(au_site_version.currency)
         total_sales         = total_sales_for_sku(product.sku)
+        total_views         = total_product_viewed(product.id)
+        total_carts         = total_product_added_to_cart(product.id)
+        total_wishlists     = total_product_added_to_wishlist(product.id)
+        total_purchased     = total_product_purchased(product.id)
 
         active_color_ids = product.variants.active.map do |variant|
           variant.option_values.colors.map(&:id)
@@ -93,6 +98,13 @@ module Products
               urls: {
                 en_au: helpers.descriptive_url(product, :"en-AU"),
                 en_us: helpers.descriptive_url(product, :"en-US")
+              },
+              statistics: {
+                total_sales:     total_sales,
+                total_views:     total_views,
+                total_carts:     total_carts,
+                total_wishlists: total_wishlists,
+                total_purchased: total_purchased,
               },
               can_be_customized:  product.can_be_customized?,
               fast_delivery:      product.fast_delivery,

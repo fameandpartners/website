@@ -16,5 +16,20 @@ describe Products::DetailsController, :type => :controller do
         expect(response).to have_http_status(:not_found)
       end
     end
+
+
+    describe 'tracking activities' do
+      it 'records the visit for the product' do
+        product_id = 202
+        scope = Activity.where(owner_type: 'Spree::Product', owner_id: product_id)
+
+        expect(scope.count).to eq 0
+
+        create(:dress, id: product_id, name: 'Alexa', permalink: 'alexa-202')
+        get :show, product_slug: 'alexa-202'
+
+        expect(scope.count).to eq 1
+      end
+    end
   end
 end
