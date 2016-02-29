@@ -201,6 +201,10 @@
   }
 }
 
+.details .product-name {
+  background-color: transparent;
+}
+
 .divider {
   @media(max-width: 768px){
     margin-top: 15px;
@@ -364,10 +368,6 @@
 }
 
 .sc-player { display: none; }
-
-.page-content .product-name-link{
-  background-color: transparent;
-}
 
 .dress-more {
   .col-centered {
