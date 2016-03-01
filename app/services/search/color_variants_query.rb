@@ -41,7 +41,7 @@ module Search
           # Do not apply ordering for searches, let ES order by term relevance.
           self.product_orderings['native']
         else
-          self.product_orderings['created']
+          self.product_orderings['newest']
         end
       end
 
@@ -181,7 +181,6 @@ module Search
           self.new('most_views',     "Most Viewed First",             ['product.statistics.total_views', 'desc']),
           self.new('most_carts',     "Most Added to Cart First",      ['product.statistics.total_carts', 'desc']),
           self.new('most_wishlists', "Most Added to Wishlists First", ['product.statistics.total_wishlists', 'desc']),
-          self.new('created',        "Most Recently Created First",   ['product.created_at', 'desc']),
           self.new('native',         "Do Not Apply Ordering",         nil)
         ]
       end
