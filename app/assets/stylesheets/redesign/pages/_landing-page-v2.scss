@@ -1,7 +1,7 @@
 /* [Landing Page - Bridesmaid]
 -------------------------------------------------------*/
 .landing-page-v2 {
-  .alt{
+  .sub-title.alt{
     font-weight: bold;
     font-style: normal;
     text-transform: none;
@@ -13,17 +13,24 @@
     }
 
     .three-btns{
-      width: 98%;
       padding-left: 5px;
       padding-right: 5px;
     }
   }
 
-  .three-btns{
+  @include iphone6{
+    .btn-black.btn.three-btns{
+      margin-top: 10px;
+    }
+  }
+
+  .btn.three-btns{
     width: 95%;
     padding-top: 5px;
     padding-bottom: 5px;
+    margin-top: 15px;
   }
+
   .products-collections {
     padding-top: 0;
   }
