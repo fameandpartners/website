@@ -24,20 +24,22 @@ class Campaigns::EmailCaptureController < ApplicationController
   end
 
   def create
-    Marketing::Subscriber.new(
-      token:          cookies['utm_guest_token'],
-      email:          params[:email],
-      campaign:       params[:content],
-      promocode:      params[:promocode],
-      sign_up_reason: "email_capture_#{params[:content]}",
-      user:           current_spree_user
-    ).create
+    if params["template_name"] != "blank"
+      Marketing::Subscriber.new(
+        token:          cookies['utm_guest_token'],
+        email:          params[:email],
+        campaign:       params[:content],
+        promocode:      params[:promocode],
+        sign_up_reason: "email_capture_#{params[:content]}",
+        user:           current_spree_user
+      ).create
 
-    EmailCapture.new({ service: :mailchimp }, email: params[:email], newsletter: true,
-                                 current_sign_in_ip: request.remote_ip,
-                                 landing_page: session[:landing_page],
-                                 utm_params: session[:utm_params], site_version: current_site_version.name,
-                                 form_name: 'Sitewide Modal Form').capture
+      EmailCapture.new({ service: :mailchimp }, email: params[:email], newsletter: true,
+                                   current_sign_in_ip: request.remote_ip,
+                                   landing_page: session[:landing_page],
+                                   utm_params: session[:utm_params], site_version: current_site_version.name,
+                                   form_name: 'Sitewide Modal Form').capture
+    end
 
     begin
       if params[:promocode].present?
@@ -66,7 +68,7 @@ class Campaigns::EmailCaptureController < ApplicationController
       NewRelic::Agent.notice_error(e)
     end
 
-    send_customerio_event
+    send_customerio_event if params["template_name"] != "blank"
 
     render :json => { status: 'ok' }, status: :ok
 
