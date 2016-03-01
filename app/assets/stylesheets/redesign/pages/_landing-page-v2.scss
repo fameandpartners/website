@@ -2,12 +2,28 @@
 -------------------------------------------------------*/
 .landing-page-v2 {
 
+  .align-top {
+    margin-top: 20px;
+  }
+  @media (max-width: 540px) {
+    .align-top {
+      margin-top: 10px;
+    }
+  }
+
   .sub-title.alt {
     font-weight: 700;
     font-style: normal;
     text-transform: none;
   }
 
+  .three-btns {
+    width: 95%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 15px;
+  }
+  
   @include iphone5 {
     .three-btns-panel {
       height: 260px;
@@ -20,16 +36,9 @@
   }
 
   @include iphone6 {
-    .btn-black.btn.three-btns {
+    .three-btns {
       margin-top: 10px;
     }
-  }
-
-  .btn.three-btns {
-    width: 95%;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-top: 15px;
   }
 
   .products-collections {
@@ -60,17 +69,8 @@
     border: 0;
   }
 
-  .align-top {
-    margin-top: 20px;
-  }
-  @media (max-width: 540px) {
-    .align-top {
-      margin-top: 10px;
-    }
-  }
-
   .serif-text {
     font-family: $font-heading;
   }
-  
+
 }
