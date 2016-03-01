@@ -47,6 +47,7 @@ class MoodboardsController < ApplicationController
   def index
     @resource   = collection.default_or_create
     @title      = @resource.name
+    cookies["active-moodboard"] = @resource.id
     render :show
   end
 
@@ -59,6 +60,7 @@ class MoodboardsController < ApplicationController
                 end
     raise ActiveRecord::RecordNotFound unless @resource.present?
     @title = @resource.name
+    cookies["active-moodboard"] = @resource.id
   end
 
   private

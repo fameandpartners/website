@@ -15,7 +15,7 @@
 
         ul.slider-wrap.js-moodboard-menu-carousel data-slick='{"initialSlide": #{currentCarouselItem}}'
           - all_moodboards.each do |mb|
-            - if is_active_link?(moodboard_path(mb))
+            - if is_active_link?(moodboard_path(mb)) || cookies["active-moodboard"] == mb.id
               li.active
                 .tab
                   .inner-wrap

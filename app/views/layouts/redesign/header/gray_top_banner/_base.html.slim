@@ -10,7 +10,8 @@ ruby:
     = banner.center_text.to_s.html_safe
 
   #account-area.col-md-3.text-right
-    = link_to moodboards_path do
+    - path = cookies["active-moodboard"] == nil ? moodboards_path : moodboard_path(cookies["active-moodboard"])
+    = link_to path do
       span.icon.icon-heart
       span.moodboards-area MOODBOARD
     span.pipe |
