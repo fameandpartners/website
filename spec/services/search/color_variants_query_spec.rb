@@ -55,6 +55,14 @@ module Search
         end
       end
 
+      describe "native ordering" do
+        it "'native' does not order results" do
+          ordering_option = {'order' => 'native'}
+          query           = ColorVariantsQuery.build(ordering_option).to_hash
+          expect(query[:sort]).to be_empty
+        end
+      end
+
       context 'defined rules' do
         ordering_rules = [
           ['price_high',    {'product.price' => 'desc'}],
@@ -69,6 +77,12 @@ module Search
           ['most_carts',    {'product.statistics.total_carts' => 'desc'}],
           ['most_wishlists',{'product.statistics.total_wishlists' => 'desc'}],
         ]
+
+        it 'defines a known set of rules' do
+          all_defined_rule_names = ordering_rules.map(&:first).map(&:to_s) + ['native']
+
+          expect(ColorVariantsQuery.product_orderings.keys).to eq(all_defined_rule_names)
+        end
 
         ordering_rules.each do |(ordering, expected_order_clause)|
           describe "#{ordering}" do
