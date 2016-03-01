@@ -5,6 +5,10 @@ module Acceptance
         expect(page).to have_content(content)
       end
 
+      step 'I should not see :content' do |content|
+        expect(page).not_to have_content(content)
+      end
+
       step 'DOM is ready for JS interaction' do
         expect(page).to have_css('body.ready')
       end
