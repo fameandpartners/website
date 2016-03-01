@@ -10,6 +10,13 @@ describe Revolution::Page do
   it { is_expected.to validate_uniqueness_of :path }
   it { is_expected.to have_readonly_attribute(:path) }
 
+  it do
+    product_orderings = %w(price_high price_low newest oldest fast_delivery best_sellers alpha_asc alpha_desc
+      most_views most_carts most_wishlists created native)
+    is_expected.to validate_inclusion_of(:product_order).in_array(product_orderings)
+  end
+
+
   it { is_expected.to delegate_method(:title).to(:translation) }
   it { is_expected.to delegate_method(:meta_description).to(:translation) }
 
