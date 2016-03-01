@@ -92,13 +92,14 @@ module Search
           end
         end
 
-        if price_min.present?
-          filter :bool, :should => { :range => { "sale_prices.#{currency}" => { :gt => price_min } } }
-        end
-
-        if price_max.present?
-          filter :bool, :should => { :range => { "sale_prices.#{currency}" => { :lt => price_max } } }
-        end
+        filter :bool, :should => {
+          :range => {
+            "sale_prices.#{currency}" => {
+              :gte => price_min,
+              :lte => price_max,
+            }
+          }
+        }
 
         if query_string.present?
           query_string = query_string.downcase.gsub("dresses","").gsub("dress","")
