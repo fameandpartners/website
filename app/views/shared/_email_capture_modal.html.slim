@@ -78,8 +78,9 @@
       input type="hidden" name="promocode" value=promocode
       input type="hidden" name="timer" value=timer
       input type="hidden" name="template_name" value='blank'
-      input.btn-plain.btn-reset type="submit" value='SHOP NOW'
-        / no content, avoid hiding all with css
+      .row
+        input.col-md-4.col-md-push-4.blank-template-submit type="submit" value='SHOP NOW'
+            / no content, avoid hiding all with css
 
   - elsif template_name == 'signup'
     #modal-popup-content-template.hidden
