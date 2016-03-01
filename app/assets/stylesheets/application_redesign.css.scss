@@ -183,9 +183,9 @@ z-index levels
 // Plugins
 @import '../vendor/bower_components/slick-carousel/slick/slick';
 @import 'redesign/vendor/slick-carousel';
-// Note that 'jquery-ui-1.10.4.custom' was also used in the pre March2015 site design,   
-// but I chose to duplicate the file, rather than rewrite any of the current usages.    
-@import 'libs/jquery-ui-1.10.4.custom';   
+// Note that 'jquery-ui-1.10.4.custom' was also used in the pre March2015 site design,
+// but I chose to duplicate the file, rather than rewrite any of the current usages.
+@import 'libs/jquery-ui-1.10.4.custom';
 @import 'redesign/vendor/jquery-ui';
 
 // Base
@@ -230,7 +230,7 @@ z-index levels
 @import 'redesign/pages/moodboard';
 @import 'redesign/pages/moodboard-edit';
 @import 'redesign/pages/landing-dhd';
-@import 'redesign/pages/landing-bridesmaid';
+@import 'redesign/pages/landing-page-v2';
 @import 'redesign/pages/landing-famingtonway';
 @import 'redesign/pages/advertise-page';
 
