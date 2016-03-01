@@ -155,7 +155,7 @@ class Products::CollectionsController < Products::BaseController
       bodyshape:                       params[:bodyshape],
       discount:                        params[:sale] || params[:discount],
       fast_making:                     params[:fast_making],
-      order:                           params[:order] || page.get(:order),
+      order:                           params[:order] || page.product_order,
       limit:                           page.limit(custom_product_ids), # page size
       offset:                          page.offset(custom_product_ids, params[:offset]),
       price_min:                       params[:priceMin],

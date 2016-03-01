@@ -39,9 +39,9 @@ module Search
       product_ordering = self.product_orderings.fetch(order) do
         if query_string.present?
           # Do not apply ordering for searches, let ES order by term relevance.
-          self.available_product_orderings['native']
+          self.product_orderings['native']
         else
-          self.available_product_orderings['created']
+          self.product_orderings['created']
         end
       end
 
