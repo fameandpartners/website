@@ -9,22 +9,17 @@ ruby:
 .page-title.default style="background-color:#EDDCEF;"
   .container
     .page-title--details
-      - if @results.any?
+      - if @collection.any?
         h1.no-padding-bottom Results for "#{params[:q]}"
       - else
         h1.no-padding-bottom Sorry
         p We couldn't find the stuff you were looking for.
 
 .page-content.products-collections.category
-  - if !@results.none?
+  - if !@collection.none?
     = render :partial => 'products/collections/filters_sort'
   .container-fluid
-    - unless search_performed?
-      .row.relative
-        .col.col-md-12
-          | Um, you need to actually search for something
-
-    - if @results.none?
+    - if @collection.none?
       .row.relative
         .col.col-md-12.text-center
           p

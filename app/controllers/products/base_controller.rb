@@ -10,9 +10,8 @@ class Products::BaseController < ApplicationController
 
   def search
     title("Search results for \"#{params[:q]}\"", default_seo_title)
-    @filter     = Products::CollectionFilter.read
-    @results    = search_results
-    @collection = @results
+    load_filters
+    @collection = search_results
     append_gtm_collection(@collection)
 
     render :search
@@ -20,27 +19,26 @@ class Products::BaseController < ApplicationController
 
   def search_for_product_not_found
     title('Page not found', default_seo_title)
-    # TODO: the product_slug param will change on PR 311 (https://github.com/fameandpartners/website/pull/311)
-    params[:q] = prepare_query(params[:product_slug])
-    @results = search_results
+    load_filters
+    params[:q]  = prepare_query(params[:product_slug])
+    @collection = search_results
+
     render :search, status: :not_found
   end
 
   private
 
   def prepare_query(product_slug)
-    if product_name = product_slug.to_s.match(/^(\D+)-/)
-      product_name[1]
-    end
+    product_slug.to_s.match(/^(\D+)-/) { |product_name| product_name[1] }
   end
 
   def search_results
     if search_performed?
-       Products::CollectionResource.new({
-        site_version: current_site_version,
-        query_string: params[:q],
-        limit:        50
-      }).read
+      Products::CollectionResource.new({
+                                         site_version: current_site_version,
+                                         query_string: params[:q],
+                                         limit:        50
+                                       }).read
     else
       []
     end
@@ -51,5 +49,8 @@ class Products::BaseController < ApplicationController
   def search_performed?
     params[:q].present?
   end
-  helper_method :search_performed?
+
+  def load_filters
+    @filter = Products::CollectionFilter.read
+  end
 end

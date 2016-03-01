@@ -1,6 +1,6 @@
 - if local_assigns[:hidden].blank?
   ruby:
-    sort_options = options_from_collection_for_select(@filter.try(:sort_orders), :first, :second, @collection.order.try(:downcase))
+    sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase))
 
   .row
     .col-md-12
@@ -10,7 +10,7 @@
             a.icon.icon-filter.trigger-filter.hidden-md.hidden-lg.js-trigger-toggle-filters href='javascript:;'
               .hide-visually Open filters
             ol.breadcrumb.hidden-xs.hidden-sm
-              li 
+              li
                 = link_to 'Home', root_path
               li.active Dresses
           .col-md-6.col-sm-6.col-xs-6
