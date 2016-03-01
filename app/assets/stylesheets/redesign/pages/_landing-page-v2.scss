@@ -1,10 +1,10 @@
 /* [Landing Page - Bridesmaid]
 -------------------------------------------------------*/
-.new-landing-page {
-  .re-style{
-    font-weight: 600;
-    text-transform: none;
+.landing-page-v2 {
+  .alt{
+    font-weight: bold;
     font-style: normal;
+    text-transform: none;
   }
 
   @include iphone5{
