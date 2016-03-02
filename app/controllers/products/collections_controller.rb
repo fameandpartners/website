@@ -167,7 +167,7 @@ class Products::CollectionsController < Products::BaseController
 
   def filters_applied?
     params.slice(
-      :collection, :style, :event, :color, :colour, :bodyshape, :order, :q
+      :collection, :style, :event, :color, :colour, :bodyshape, :order, :q, :price_min, :price_max
     ).values.any?(&:present?)
   end
 end
