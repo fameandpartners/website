@@ -11,8 +11,9 @@ describe Revolution::Page do
   it { is_expected.to have_readonly_attribute(:path) }
 
   it do
-    product_orderings = %w(price_high price_low newest oldest fast_delivery best_sellers alpha_asc alpha_desc
-      most_views most_carts most_wishlists created native)
+    product_orderings = %w(price_high price_low newest oldest fast_delivery
+      best_sellers alpha_asc alpha_desc
+      most_views most_carts most_wishlists native)
     is_expected.to validate_inclusion_of(:product_order).in_array(product_orderings)
   end
 
