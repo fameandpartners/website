@@ -47,7 +47,7 @@ class MoodboardsController < ApplicationController
   def index
     @resource   = collection.default_or_create
     @title      = @resource.name
-    spree_current_user.update_attributes(active_moodboard_id: @resource.id)
+    spree_current_user.update_active_moodboard(@resource)
     render :show
   end
 
@@ -60,7 +60,7 @@ class MoodboardsController < ApplicationController
                 end
     raise ActiveRecord::RecordNotFound unless @resource.present?
     @title = @resource.name
-    spree_current_user.update_attributes(active_moodboard_id: @resource.id)
+    spree_current_user.update_active_moodboard(@resource)
   end
 
   private
