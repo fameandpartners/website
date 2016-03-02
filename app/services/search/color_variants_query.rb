@@ -30,11 +30,20 @@ module Search
       fast_making       = options[:fast_making]
       limit             = options[:limit].present? ? options[:limit].to_i : 1000
       offset            = options[:offset].present? ? options[:offset].to_i : 0
-      price_min        = options[:price_min]
-      price_max        = options[:price_max]
-      currency         = options[:currency]
+      price_min         = options[:price_min]
+      price_max         = options[:price_max]
+      currency          = options[:currency]
       show_outerwear    = !!options[:show_outerwear]
       exclude_taxon_ids = options[:exclude_taxon_ids] if query_string.blank?
+
+      product_ordering = self.product_orderings.fetch(order) do
+        if query_string.present?
+          # Do not apply ordering for searches, let ES order by term relevance.
+          self.product_orderings['native']
+        else
+          self.product_orderings['newest']
+        end
+      end
 
       Tire.search(configatron.elasticsearch.indices.color_variants, size: limit, from: offset) do
 
@@ -151,35 +160,34 @@ module Search
             })
           end
 
-          case order
-            when 'price_high'
-              by 'product.price', 'desc'
-            when 'price_low'
-              by 'product.price', 'asc'
-            when 'newest'
-              by 'product.created_at', 'desc'
-            when 'oldest'
-              by 'product.created_at', 'asc'
-            when 'fast_delivery'
-              by 'product.fast_delivery', 'desc'
-            when 'best_sellers'
-              by 'product.total_sales', 'desc'
-            when 'alpha_asc'
-              by 'product.name', 'asc'
-            when 'alpha_desc'
-              by 'product.name', 'desc'
-            when 'created'
-              by 'product.created_at', 'desc'
-            else
-              if query_string.blank?
-                by 'product.created_at', 'desc'
-              end
-              # Don't have an order here, so this will show any queried dress first in the result,
-              # eg, search for 'last Kiss' will show 'last kiss' then 'studded kiss' instead of
-              # 'studded kiss' then 'last kiss' which was happening prior.
+          if product_ordering.behaviour
+            by *product_ordering.behaviour
           end
         end
       end
+    end
+
+    class ProductOrdering < Struct.new(:name, :description, :behaviour)
+      def self.all
+        [
+          self.new('price_high',     "Price: High to Low",            ['product.price', 'desc']),
+          self.new('price_low',      "Price: Low to High",            ['product.price', 'asc']),
+          self.new('newest',         "Newest First",                  ['product.created_at', 'desc']),
+          self.new('oldest',         "Oldest First",                  ['product.created_at', 'asc']),
+          self.new('fast_delivery',  "Show Fast Delivery First",      ['product.fast_delivery', 'desc']),
+          self.new('best_sellers',   "Best Sellers",                  ['product.total_sales', 'desc']),
+          self.new('alpha_asc',      "Name: A-Z",                     ['product.name', 'asc']),
+          self.new('alpha_desc',     "Name: Z-A",                     ['product.name', 'desc']),
+          self.new('most_views',     "Most Viewed First",             ['product.statistics.total_views', 'desc']),
+          self.new('most_carts',     "Most Added to Cart First",      ['product.statistics.total_carts', 'desc']),
+          self.new('most_wishlists', "Most Added to Wishlists First", ['product.statistics.total_wishlists', 'desc']),
+          self.new('native',         "Do Not Apply Ordering",         nil)
+        ]
+      end
+    end
+
+    def self.product_orderings
+      @product_orderings ||= ProductOrdering.all.inject({}) {|memo, obj| memo[obj.name] = obj; memo }
     end
   end
 end

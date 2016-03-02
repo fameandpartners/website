@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160223050808) do
+ActiveRecord::Schema.define(:version => 20160229065423) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -788,6 +788,7 @@ ActiveRecord::Schema.define(:version => 20160223050808) do
     t.datetime "updated_at",                        :null => false
     t.boolean  "noindex",        :default => false
     t.boolean  "nofollow",       :default => false
+    t.string   "product_order"
   end
 
   add_index "revolution_pages", ["parent_id"], :name => "index_revolution_pages_on_parent_id"
