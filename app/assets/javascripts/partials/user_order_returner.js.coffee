@@ -63,3 +63,12 @@ window.page.UserOrderReturner = class UserOrderReturner
 
       $p.find('.return-reason-container').show()
       $p.find('.chosen-container.return-reason-select').show()
+
+    $(@$form).on 'submit', (e) ->
+      items = $('#order-return-form div.action')
+      for item in items
+        type = $('.chosen-single:first',$(item)).text()
+        reason = $('div.return-reason-category:first a span',$(item)).text()
+        if type == 'Return' && reason == 'Select an Option'
+          e.preventDefault()
+          alert('You must select a reason for return')
