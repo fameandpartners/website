@@ -14,11 +14,19 @@
 
     .form-group
       label.col-sm-2.control-label Product Ordering
-      .col-sm-10 = f.select :product_order, options_from_collection_for_select(Search::ColorVariantsQuery::ProductOrdering.all, :name, :description, f.object.product_order), {include_blank: true},  :class => 'form-control'
+      .col-sm-10
+        = f.select :product_order, options_from_collection_for_select(Search::ColorVariantsQuery::ProductOrdering.all, :name, :description, f.object.product_order), {include_blank: true},  :class => 'form-control'
+        p
+          ' Order products on the page using this criteria.
+          br
+          ' Note that <strong><tt>pids</tt></strong> will <strong>override</strong> any product ordering you specify, putting those products first.
 
     .form-group
       label.col-sm-2.control-label Variables
-      .col-sm-10= f.text_area :variables, :class => 'form-control', rows: 5
+      .col-sm-10
+        = f.text_area :variables, :class => 'form-control', rows: 5
+        - if page.get(:pids).present?
+          p.text-warning Applied <strong><tt>pids</tt></strong> will put these products before all others.
 
     .hr-line-dashed
     .form-group
