@@ -45,8 +45,7 @@ class Users::ReturnsController < Users::BaseController
       OrderReturnRequestMailer.email(@order_return, user).deliver
       render 'success'
     else
-      @title = "Order ##{ @order_return.number }"
-      render 'new'
+      redirect_to :controller => "users/returns", :action => "new", :order_number => @order.number
     end
   end
 
