@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160229065423) do
+ActiveRecord::Schema.define(:version => 20160302020531) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1578,6 +1578,7 @@ ActiveRecord::Schema.define(:version => 20160229065423) do
     t.datetime "last_payment_failed_notification_sent_at"
     t.date     "birthday"
     t.boolean  "automagically_registered",                                :default => false
+    t.integer  "active_moodboard_id"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
