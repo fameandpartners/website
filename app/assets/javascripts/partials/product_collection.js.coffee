@@ -74,7 +74,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       else
         $this.parents('.panel-collapse').find('input').prop('checked', false)
         $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', true)
-      
+
     @update()
 
   clearAllOptions: =>
@@ -195,8 +195,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     if $(".selector-price input:checked").data("all") == false
       priceMin = $(".selector-price input:checked").data("pricemin")
       priceMax = $(".selector-price input:checked").data("pricemax")
-      priceHash["priceMin"] = priceMin
-      priceHash["priceMax"] = priceMax if priceMax?
+      priceHash["price_min"] = priceMin
+      priceHash["price_max"] = priceMax if priceMax?
       filter = $.extend(filter,priceHash)
 
     filter
