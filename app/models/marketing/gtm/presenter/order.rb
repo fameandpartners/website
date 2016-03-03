@@ -5,7 +5,7 @@ module Marketing
         extend Forwardable
 
         attr_reader :order
-        def_delegators :order, :currency, :number
+        def_delegators :order, :currency, :number, :email
 
         def initialize(spree_order:)
           @order = spree_order
@@ -34,6 +34,7 @@ module Marketing
         def body
           {
               number:          number,
+              email:           email,
               currency:        currency,
               total_amount:    total_amount,
               taxes_amount:    taxes_amount,
