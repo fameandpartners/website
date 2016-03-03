@@ -29,22 +29,11 @@ window.page.UserOrderReturner = class UserOrderReturner
 
     $('.return-reason-category').chosen(selectOpts).change ->
       v = $(this).val().toLowerCase();
+      v = v.charAt(0).toUpperCase() + v.slice(1);
       $p = $(this).parent()
 
       $select = $p.find('select.return-reason-select')
-      opts = switch v
-        when "looks different to image on site"
-          reasons["Looks different to image on site"]
-        when "ordered multiple styles or sizes"
-          reasons["Ordered multiple styles or sizes"]
-        when "delivery issues"
-          reasons["Delivery issues"]
-        when "poor quality or faulty"
-          reasons["Poor quality or faulty"]
-        when "size and fit"
-          reasons["Size and fit"]
-        else
-          []
+      opts = reasons[v] || []
 
       $select.find('option').remove()
       $.each(opts, (key, value) ->
