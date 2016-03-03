@@ -2,15 +2,6 @@ window.page or= {}
 
 window.page.UserOrderReturner = class UserOrderReturner
 
-  data = {
-    different: ["Dress does not sit on the body as shown on the website", "Colour does not match the colour displayed on the website", "Fabric is different to what is represented on the website", "The dress simply didn't meet my expectations"],
-    multiple: ["I was not sure which dress would suit me", "I was unsure of the best size for me", "I loved so many dresses I found it difficult to choose"],
-    delivery: ["My order was late, so I missed my event", "The delivery times on the website were not clear", "My order was held up in transit", "I received a different size to what I ordered", "I received a different style to what I ordered", "I only received part of my order"],
-    quality: ["Dress was damaged when it arrived", "Dress was a poor fit", "Dress had marks on it", "Fabric was poor quality", "Zipper was damaged ", "Dress was poorly made, in my opinion", "Lining fabric looked cheap", "I did not receive my customisation"],
-    size:  ["Dress was too long", "Dress was too short", "Dress was too big around the bust", "Dress was too small around the bust", "Dress was too big around the waist", "Dress was too small around the waist", "Dress was too loose on the hips", "Dress was too tight on the hips", "Fit was unflattering", "Neckline was too low or too open", "Shoulder straps were too long", "Neck tie was too tight", "Shoulder pads fitted poorly", "I did not receive my customisation"]
-  }
-
-
   constructor: (opts = {}) ->
     @$form = $(opts.form)
 
@@ -42,15 +33,15 @@ window.page.UserOrderReturner = class UserOrderReturner
       $select = $p.find('select.return-reason-select')
       opts = switch v
         when "looks different to image on site"
-          data.different
+          opts.reasons["Looks different to image on site"]
         when "ordered multiple styles or sizes"
-          data.multiple
+          opts.reasons["Ordered multiple styles or sizes"]
         when "delivery issues"
-          data.delivery
+          opts.reasons["Delivery issues"]
         when "poor quality or faulty"
-          data.quality
+          opts.reasons["Poor quality or faulty"]
         when "size and fit"
-          data.size
+          opts.reasons["Size and fit"]
         else
           []
 

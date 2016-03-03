@@ -3,6 +3,8 @@ class Users::ReturnsController < Users::BaseController
   helper_method :order_return, :user
 
   def new
+    @reasons = ReturnRequestItem::REASON_CATEGORY_MAP.to_json
+
     order_number = params[:order_number]
 
     @user = try_spree_current_user
