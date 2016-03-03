@@ -167,7 +167,7 @@ module Search
       end
     end
 
-    class ProductOrdering < Struct.new(:name, :description, :behaviour)
+    ProductOrdering = Struct.new(:name, :description, :behaviour) do
       def self.all
         [
           self.new('price_high',     "Price: High to Low",            ['product.price', 'desc']),
