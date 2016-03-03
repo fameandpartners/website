@@ -3,7 +3,8 @@ window.page or= {}
 window.page.UserOrderReturner = class UserOrderReturner
 
   constructor: (opts = {}) ->
-    @$form = $(opts.form)
+    @$form   = $(opts.form)
+    reasons = opts.reasons
 
     $('.return-reason-category-container').hide()
     $('.return-reason-container').hide()
@@ -33,15 +34,15 @@ window.page.UserOrderReturner = class UserOrderReturner
       $select = $p.find('select.return-reason-select')
       opts = switch v
         when "looks different to image on site"
-          opts.reasons["Looks different to image on site"]
+          reasons["Looks different to image on site"]
         when "ordered multiple styles or sizes"
-          opts.reasons["Ordered multiple styles or sizes"]
+          reasons["Ordered multiple styles or sizes"]
         when "delivery issues"
-          opts.reasons["Delivery issues"]
+          reasons["Delivery issues"]
         when "poor quality or faulty"
-          opts.reasons["Poor quality or faulty"]
+          reasons["Poor quality or faulty"]
         when "size and fit"
-          opts.reasons["Size and fit"]
+          reasons["Size and fit"]
         else
           []
 
