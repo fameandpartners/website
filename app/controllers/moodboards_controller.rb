@@ -21,7 +21,7 @@ class MoodboardsController < ApplicationController
     @resource = collection.weddings.build(params[:moodboard])
     if @resource.save
       spree_current_user.update_active_moodboard(@resource)
-      render :show
+      redirect_to moodboard_path(spree_current_user.active_moodboard)
     else
       render :new, alert: @resource.errors.full_messages
     end
