@@ -1,11 +1,13 @@
 = content_for :page_title do
-  = report.description
+  => report.description
+  | Report
 
 .ibox
   .ibox-title
     = report.description
   .ibox-content
     = form_tag request.path, method: 'post', class: 'form-horizontal'
+      = yield :custom_form_fields
       .form-group
         .col-lg-12
           button type='submit' Generate

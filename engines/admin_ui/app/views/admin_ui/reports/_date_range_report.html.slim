@@ -1,0 +1,14 @@
+- content_for :custom_form_fields do
+  .form-group
+    .col-lg-2
+      label.control-label From
+    .col-lg-10
+      = text_field_tag :from, params[:from], :class => 'form-control datepicker datepicker-from', :placeholder =>'From'
+  .form-group
+    .col-lg-2
+      label.control-label To
+    .col-lg-10
+      = text_field_tag :to,   params[:to],   :class => 'form-control datepicker datepicker-to', :placeholder =>'To'
+
+= render 'admin_ui/reports/generic_report'
+
