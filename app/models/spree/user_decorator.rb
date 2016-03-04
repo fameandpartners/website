@@ -25,7 +25,7 @@ Spree::User.class_eval do
   attr_accessor :skip_welcome_email,
                 :validate_presence_of_phone
 
-  attr_accessible :first_name, :last_name, :phone, :dob, :skip_welcome_email, :automagically_registered, :active_moodboard_id
+  attr_accessible :first_name, :last_name, :phone, :dob, :skip_welcome_email, :automagically_registered
 
   validates :first_name, :last_name, :presence => true
 
@@ -147,7 +147,8 @@ Spree::User.class_eval do
     facebook_data.value
   end
 
-  def update_active_moodboard(resource)
-    self.update_attributes(active_moodboard_id: resource.id)
+  def update_active_moodboard(moodboard)
+    self.active_moodboard = moodboard
+    self.save!
   end
 end
