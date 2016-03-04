@@ -45,6 +45,7 @@ class MoodboardsController < ApplicationController
   end
 
   def index
+    redirect_to moodboard_path(spree_current_user.active_moodboard) and return if spree_current_user.active_moodboard.present?
     @resource   = collection.default_or_create
     @title      = @resource.name
     spree_current_user.update_active_moodboard(@resource)
