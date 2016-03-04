@@ -11,7 +11,7 @@ ruby:
 
   #account-area.col-md-3.text-right
     - if spree_current_user
-      - path = spree_current_user.active_moodboard_id.nil? ? moodboards_path : moodboard_path(spree_current_user.active_moodboard)
+      - path = spree_current_user.active_moodboard.nil? ? moodboards_path : moodboard_path(spree_current_user.active_moodboard)
     - else
       - path = moodboards_path
     = link_to path do
