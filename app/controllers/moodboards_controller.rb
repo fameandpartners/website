@@ -20,6 +20,7 @@ class MoodboardsController < ApplicationController
   def create
     @resource = collection.weddings.build(params[:moodboard])
     if @resource.save
+      spree_current_user.update_active_moodboard(@resource)
       render :show
     else
       render :new, alert: @resource.errors.full_messages
