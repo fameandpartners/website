@@ -1,7 +1,3 @@
-- page_title = 'Order Totals Report'
-= content_for :page_title do
-  = page_title
-
 .ibox
   .ibox-title
     = page_title
@@ -16,13 +12,4 @@
       ' Full documentation is here
       a href="https://docs.google.com/a/fameandpartners.com/document/d/1uyrcYDdPxZ96KO1cywyn14p5wKNm2MNuDWYgHBz6IfM/edit?usp=sharing" Doc - Spree Order Totals in Master Returns Spreadsheet
 
-  .ibox-content
-
-    = form_tag admin_ui.reports_order_totals_path, method: 'post', class: 'form-horizontal'
-      .form-group
-        .col-lg-12
-          button type='submit' Generate
-
-h2 Sample
-
-= render partial: 'admin_ui/reports/report_rows_preview', locals: { rows: @rows }
+= render 'admin_ui/reports/generic_report'

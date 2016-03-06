@@ -34,11 +34,12 @@ li class=active_link_to_class('', active: /reports/)
     span.fa.arrow
   ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
     = active_link_to 'Coupon Orders', reports_coupon_adjusted_orders_path, wrap_tag: :li
+    = active_link_to 'Factory Fault Returns', reports_factory_faults_path, wrap_tag: :li
     = active_link_to 'Order Totals', reports_order_totals_path, wrap_tag: :li
     = active_link_to 'Payments', reports_payments_path, wrap_tag: :li
-    = active_link_to 'Sale Items', reports_sale_items_path, wrap_tag: :li
+    = active_link_to 'Product Numbers', reports_product_numbers_path, wrap_tag: :li
     = active_link_to 'Return Shoppers', reports_return_shoppers_path, wrap_tag: :li
-    = active_link_to 'Factory Fault Returns', reports_factory_faults_path, wrap_tag: :li
+    = active_link_to 'Sale Items', reports_sale_items_path, wrap_tag: :li
     = active_link_to 'Size Normalisations', reports_size_normalisations_path, wrap_tag: :li
 
 = menu_item refund_requests_path, 'Refund Requests', icon: 'dollar'

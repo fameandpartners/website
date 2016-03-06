@@ -14,6 +14,10 @@ module Reports
       @to = to.to_datetime.end_of_day
     end
 
+    def description
+      'Payments'
+    end
+
     def each
       return to_enum(__callee__) unless block_given?
 

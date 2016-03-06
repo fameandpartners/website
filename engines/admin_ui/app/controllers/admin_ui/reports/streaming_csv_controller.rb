@@ -2,6 +2,8 @@ module AdminUi
   module Reports
     class StreamingCsvController < AdminUi::ApplicationController
 
+      helper_method :report
+
       def show
         @rows = report.take(10).map &:to_h
       end
@@ -22,7 +24,11 @@ module AdminUi
       private
 
       def filename
-        raise 'Not Implemented'
+        [
+          report.description,
+          'generated',
+          DateTime.now.to_s(:filename),
+        ].join('_') << ".csv"
       end
 
       def report
