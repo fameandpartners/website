@@ -146,4 +146,9 @@ Spree::User.class_eval do
     create_facebook_data if facebook_data.nil?
     facebook_data.value
   end
+
+  def update_active_moodboard(moodboard)
+    self.active_moodboard = moodboard
+    self.save!
+  end
 end

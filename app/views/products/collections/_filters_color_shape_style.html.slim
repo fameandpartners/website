@@ -5,7 +5,7 @@
   - shapes = @filter.shapes
   - styles = @filter.styles
 
-  - selectPriceAll = params[:priceMin] || params[:priceMax] ? false : true
+  - selectPriceAll = params[:price_min] || params[:price_max] ? false : true
   - selectStylesAll = params[:style] ? false : true
   - selectColorsAll = params[:colour] ? false : true
   - selectBodyShapesAll = params[:bodyshape] ? false : true
@@ -31,22 +31,22 @@
               span View all prices
           .custom-form-element.filter-radio-option.selector-price name='price'
             label
-              = radio_button_tag 'price', '0', params[:priceMax] == '199' ? true : false, 'data-all' => 'false', 'data-pricemin' => '0', 'data-pricemax' => '199'
+              = radio_button_tag 'price', '0', params[:price_max] == '199' ? true : false, 'data-all' => 'false', 'data-pricemin' => '0', 'data-pricemax' => '199'
               span.icon
               span $0 - $199
           .custom-form-element.filter-radio-option.selector-price name='price'
             label
-              = radio_button_tag 'price', '200', params[:priceMax] == '299' ? true : false, 'data-all' => 'false', 'data-pricemin' => '200', 'data-pricemax' => '299'
+              = radio_button_tag 'price', '200', params[:price_max] == '299' ? true : false, 'data-all' => 'false', 'data-pricemin' => '200', 'data-pricemax' => '299'
               span.icon
               span $200 - $299
           .custom-form-element.filter-radio-option.selector-price name='price'
             label
-              = radio_button_tag 'price', '300', params[:priceMax] == '399' ? true : false, 'data-all' => 'false', 'data-pricemin' => '300', 'data-pricemax' => '399'
+              = radio_button_tag 'price', '300', params[:price_max] == '399' ? true : false, 'data-all' => 'false', 'data-pricemin' => '300', 'data-pricemax' => '399'
               span.icon
               span $300 - $399
           .custom-form-element.filter-radio-option.selector-price name='price'
             label
-              = radio_button_tag 'price', '400', params[:priceMin] == '400' ? true : false, 'data-all' => 'false', 'data-pricemin' => '400', 'data-pricemax' => 'null'
+              = radio_button_tag 'price', '400', params[:price_min] == '400' ? true : false, 'data-all' => 'false', 'data-pricemin' => '400', 'data-pricemax' => 'null'
               span.icon
               span $400+
 

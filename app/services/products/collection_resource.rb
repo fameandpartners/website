@@ -145,15 +145,15 @@ class Products::CollectionResource
 
       result[:exclude_taxon_ids] = remove_excluded_from_site_logic ? nil : black_hole_taxon_ids - result[:taxon_ids]
 
-      result[:discount] = discount if discount.present?
-      result[:fast_making] = fast_making unless fast_making.nil?
+      result[:discount]     = discount if discount.present?
+      result[:fast_making]  = fast_making unless fast_making.nil?
       result[:query_string] = query_string if query_string.present?
-      result[:order] = order if order.present?
-      result[:limit] = limit if limit.present?
-      result[:offset] = offset if offset.present?
-      result[:price_min]  = price_min if price_min.present?
-      result[:price_max]  = price_max if price_max.present?
-      result[:currency]   = current_currency
+      result[:order]        = order if order.present?
+      result[:limit]        = limit if limit.present?
+      result[:offset]       = offset if offset.present?
+      result[:price_min]    = price_min if price_min.present?
+      result[:price_max]    = price_max if price_max.present?
+      result[:currency]     = current_currency
       # Outerwear
       result[:show_outerwear] = show_outerwear
 

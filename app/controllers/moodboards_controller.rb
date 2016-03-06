@@ -20,7 +20,8 @@ class MoodboardsController < ApplicationController
   def create
     @resource = collection.weddings.build(params[:moodboard])
     if @resource.save
-      render :show
+      spree_current_user.update_active_moodboard(@resource)
+      redirect_to moodboard_path(spree_current_user.active_moodboard)
     else
       render :new, alert: @resource.errors.full_messages
     end
@@ -45,8 +46,10 @@ class MoodboardsController < ApplicationController
   end
 
   def index
+    redirect_to moodboard_path(spree_current_user.active_moodboard) and return if spree_current_user.active_moodboard.present?
     @resource   = collection.default_or_create
     @title      = @resource.name
+    spree_current_user.update_active_moodboard(@resource)
     render :show
   end
 
@@ -59,6 +62,7 @@ class MoodboardsController < ApplicationController
                 end
     raise ActiveRecord::RecordNotFound unless @resource.present?
     @title = @resource.name
+    spree_current_user.update_active_moodboard(@resource)
   end
 
   private

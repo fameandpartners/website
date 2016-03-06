@@ -1,23 +1,46 @@
 /* [Landing Page - Bridesmaid]
 -------------------------------------------------------*/
-.landing-page-2 {
-  @include iphone5{
-    .three-btns-panel{
+.landing-page-v2 {
+
+  .align-top {
+    margin-top: 20px;
+  }
+  @media (max-width: 540px) {
+    .align-top {
+      margin-top: 10px;
+    }
+  }
+
+  .sub-title.alt {
+    font-weight: 700;
+    font-style: normal;
+    text-transform: none;
+  }
+
+  .three-btns {
+    width: 95%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 15px;
+  }
+  
+  @include iphone5 {
+    .three-btns-panel {
       height: 260px;
     }
 
-    .three-btns{
-      width: 98%;
+    .three-btns {
       padding-left: 5px;
       padding-right: 5px;
     }
   }
 
-  .three-btns{
-    width: 95%;
-    padding-top: 5px;
-    padding-bottom: 5px;
+  @include iphone6 {
+    .three-btns {
+      margin-top: 10px;
+    }
   }
+
   .products-collections {
     padding-top: 0;
   }
@@ -42,20 +65,12 @@
     }
   }
 
-  .title .no-border{
+  .title .no-border {
     border: 0;
   }
 
-  .align-top{
-    margin-top: 20px;
-  }
-  @media (max-width: 540px) {
-    .align-top{
-      margin-top: 10px;
-    }
-  }
-
-  .serif-text{
+  .serif-text {
     font-family: $font-heading;
   }
+
 }

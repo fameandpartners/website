@@ -1,45 +1,37 @@
-ruby:
-  promocode_by_url = decode(params[:pc])
-  email_capture_modal = "
-    if ($.cookie('modal_site_visit') != 'true') {
-      var modal_popup = new window.page.EmailCaptureModal({
-        promocode:  \"newgirl25\",
-        content:    \"newgirl25\",
-        heading:    \"RUNWAY STYLES AT <br> A FRACTION OF THE PRICE\",
-        message:    \"SIGN UP FOR $25 <br> OFF YOUR FIRST PURCHASE.\",
-        className:  \"classic-modal welcome-modal\",
-        timeout:    3,
-        timer:      0,
-        container:  \"#site-visit-modal.welcome\",
-        action:     \"#{campaigns_email_capture_path}\",
-        force:      true,
-      });
-      $.cookie('modal_site_visit','true')
+javascript:
+  jQuery(document).ready(function () {
+    var email_capture_path       = "#{campaigns_email_capture_path}";
+    var promocode_param          = "#{params[:pc]}";
+    var hide_welcome_modal_param = "#{params[:hwm]}";
+
+    var hide_welcome_modal = function () {
+      $.cookie("email_capture_welcome_modal", "hide")
+    };
+
+    if (promocode_param !== "" || hide_welcome_modal_param === "true") {
+      hide_welcome_modal();
     }
-  "
-  turn_off_site_visit_modal = "$.cookie('modal_site_visit','true')"
 
-= content_for :inline_javascript do
-  - if promocode_by_url == ""
-    = raw email_capture_modal
-  - else
-    = raw turn_off_site_visit_modal
+    // TODO: probably EmailCaptureModals "pop/show" action should be explicitly called, instead of using a JS object constructor...
+    // Example:
+    // var welcome_modal = new window.page.EmailCaptureModal({ ... });
+    // welcome_modal.show();
+    // welcome_modal.hide();
+    new window.page.EmailCaptureModal({
+      promocode: "newgirl25",
+      content:   "welcome_modal",
+      heading:   "RUNWAY STYLES AT <br> A FRACTION OF THE PRICE",
+      message:   "SIGN UP FOR $25 <br> OFF YOUR FIRST PURCHASE.",
+      className: "classic-modal welcome-modal",
+      timeout:   3,
+      timer:     0,
+      container: "#site-visit-modal.welcome",
+      action:    email_capture_path,
+      force:     false
+    });
 
-/
-  #modal-popup-content-template.welcome.hidden
-    input type="hidden" name="content" value="newgirl25"
-    input type="hidden" name="promocode" value="newgirl25"
-    .vex-footer
-      .row.row-inline.text-center
-        .col-xs-12.col-sm-12.col-inline.email-form
-          .input-group
-            input.form-control.form-control-md.form-control-transparent name="email" type="text" placeholder="EMAIL"
-            span.input-group-addon
-              input.btn-plain.btn-reset type="submit" value="CLICK TO REDEEM"
-        .col-xs-12.col-sm-12.col-inline.full-form.fb-form
-          = link_to "Redeem via Facebook", fb_auth_path(auto_apply: true, redeem_via_fb_state: 'clicked', new_modal_fb_state: 'clicked'), class: 'btn btn-facebook btn-block btn-md'
-
-
+    hide_welcome_modal();
+  });
 
 #site-visit-modal.welcome.hidden
   input type="hidden" name="content" value="newgirl25"
