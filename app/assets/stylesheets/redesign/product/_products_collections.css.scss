@@ -11,22 +11,17 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
     margin-top: -11px;
   }
 
-  .dropdown-menu.hide {
-    display: none;
-  }
-
   .dropdown-menu {
-    margin-top: 0;
-    display: block;
-    width: 70%;
-    margin-left: 15%;
-    padding-left: 10px;
-    position: relative;
+    width: 80%;
+    left: 10%;
+    right: 10%;
+    margin-top: 5px;
+    padding: 5px 0;
+    border: solid $c-neutral-6 1px;
 
     a {
-      width: 100%;
-      cursor: pointer;
-      float: left;
+      display: block;
+      padding: 5px 10px;
 
       i {
         padding-right: 5px;
@@ -35,13 +30,10 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
 
     }
 
-  }
-
-  @include mobile {
-
-    .dropdown-menu{
+    @media (max-width: $bootstrap-md-width) {
       width: 100%;
-      margin-left: 0;
+      left: 0;
+      right: 0;
     }
 
   }
@@ -215,10 +207,16 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
     margin-top:10px
   }
 
-  .category--item{
-    @media(max-width: 415px){
+  .category--item {
+
+    &:hover .media-wrap {
+      opacity: 0.8;
+    }
+
+    @media(max-width: 415px){ 
       min-height: 380px;
     }
+
   }
 
 }

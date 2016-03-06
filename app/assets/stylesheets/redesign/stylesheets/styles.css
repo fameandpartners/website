@@ -6971,10 +6971,6 @@ p {
 .category--item a {
   color: #333333;
 }
-/* line 10, ../sass/_category.scss */
-.category--item:hover {
-  opacity: 0.8;
-}
 
 /* line 18, ../sass/_category.scss */
 .details {

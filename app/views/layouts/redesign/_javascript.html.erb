@@ -35,6 +35,7 @@
   });
 
   window.clickAddMoodboard = function(target) {
+    event.stopPropagation();
     var $target, item, user_moodboards;
     $target = $(target);
     user_moodboards = window.app.user_moodboards;
