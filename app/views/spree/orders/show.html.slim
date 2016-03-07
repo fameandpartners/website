@@ -1,6 +1,5 @@
 - addthis_config = {}
 - if product = order.product
-  = render 'spree/products/product_meta', product: product
   - addthis_config['addthis:url'] = spree.product_url(product)
   - addthis_config['addthis:title'] = product.name
   - addthis_config['addthis:description'] = product.description
@@ -14,11 +13,11 @@ ruby:
 .page-title.default.order
   .container
     .page-title--details
-        h1.no-padding-bottom.order
-          - if successfully_ordered
-            | Order Confirmation
-          - else
-            | Order
+      h1.no-padding-bottom.order
+        - if successfully_ordered
+          | Order Confirmation
+        - else
+          | Order
 
 .page-content.user.order.show
   .container.relative
