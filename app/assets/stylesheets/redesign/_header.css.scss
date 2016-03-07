@@ -79,12 +79,18 @@ header {
   font-size: 1.5rem;
 }
 
+.mega-menu-list--item {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
 .mega-menu-list--item a {
   text-transform: capitalize;
   font-weight: 400;
 
   &:hover {
-    color: #355e6d !important;
+    color: #355e6d;
   }
 }
 

@@ -1,27 +1,3 @@
-
-
-/* line 108, ../sass/_nav.scss */
-.mega-menu-list {
-  padding-left: 0;
-}
-
-/* line 112, ../sass/_nav.scss */
-.mega-menu-list--item {
-  list-style: none;
-  padding-left: 0;
-  margin-left: 0;
-}
-
-/* line 118, ../sass/_nav.scss */
-.mega-menu-list--item a {
-  color: #333333 !important;
-  font-weight: 300;
-}
-/* line 122, ../sass/_nav.scss */
-.mega-menu-list--item a:hover {
-  color: black !important;
-}
-
 /* line 125, ../sass/_nav.scss */
 .search {
   position: relative;
