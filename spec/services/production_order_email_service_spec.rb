@@ -22,8 +22,8 @@ describe ProductionOrderEmailService do
   it 'send emails for each factory' do
 
     expect(mailer).to receive(:deliver).twice
-    expect(Spree::OrderMailer).to receive(:production_order_email).with(order, 'Vtha', v_items).and_return(mailer)
-    expect(Spree::OrderMailer).to receive(:production_order_email).with(order, 'Blah', b_items).and_return(mailer)
+    expect(ProductionOrderEmailService::FactoryPurchaseOrderEmail).to receive(:new).with(order, 'Vtha', v_items).and_return(mailer)
+    expect(ProductionOrderEmailService::FactoryPurchaseOrderEmail).to receive(:new).with(order, 'Blah', b_items).and_return(mailer)
 
     service.deliver
   end
