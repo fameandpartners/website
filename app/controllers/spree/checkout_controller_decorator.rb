@@ -128,17 +128,22 @@ Spree::CheckoutController.class_eval do
     @order = current_order
 
     guard = []
-    unless @order and @order.checkout_allowed?
-      guard << :no_checkout_allowed
-    end
 
-    if @order.insufficient_stock_lines.present?
-      flash[:error] = t(:spree_inventory_error_flash_for_insufficient_quantity)
-      guard << :insufficient_stock_lines
-    end
+    if @order.present?
+      unless @order.checkout_allowed?
+        guard << :no_checkout_allowed
+      end
 
-    if @order.completed?
-      guard << :order_completed
+      if @order.insufficient_stock_lines.present?
+        flash[:error] = t(:spree_inventory_error_flash_for_insufficient_quantity)
+        guard << :insufficient_stock_lines
+      end
+
+      if @order.completed?
+        guard << :order_completed
+      end
+    else
+      guard << :order_is_nil
     end
 
     unless guard.empty?
