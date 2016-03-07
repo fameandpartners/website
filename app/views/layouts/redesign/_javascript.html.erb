@@ -34,7 +34,8 @@
     });
   });
 
-  window.clickAddMoodboard = function(target) {
+  window.clickAddMoodboard = function(target, event) {
+    console.log('click');
     event.stopPropagation();
     var $target, item, user_moodboards;
     $target = $(target);
