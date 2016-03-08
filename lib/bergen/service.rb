@@ -8,6 +8,30 @@ module Bergen
       staging:    'lib/bergen/wsdl/staging.publicapiws.asmx.xml',
     }
 
+    attr_reader :credentials
+
+    def initialize(credentials = default_credentials)
+      @credentials = credentials
+    end
+
+    private def default_credentials
+              Credentials.fetch
+    end
+
+
+    def authenticate
+      # We require the strings as they literally interpolated to the XML.
+      authentication_hash = {
+        "WebAddress!" => credentials.account_id,
+        "UserName"   => credentials.username,
+        "Password"   => credentials.password
+      }
+
+      client.request :authentication_token_get do
+        soap.body = authentication_hash
+      end
+    end
+
     def client
       @client ||= Savon.client(wsdl_file.to_s)
     end
