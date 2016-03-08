@@ -148,7 +148,7 @@ $fg-screen-sm: 480px;
       background-color: rgba(0, 0, 0, 0.05);
     }
     tr{
-      td:nth-child(2),td:nth-child(5),td:nth-child(7){
+      td:nth-child(2),td:nth-child(5),td:nth-child(7),td:nth-child(9){
         border-right: 1px solid $c-neutral-9;
       }
     }

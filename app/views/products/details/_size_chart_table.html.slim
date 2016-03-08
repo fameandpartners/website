@@ -1,10 +1,11 @@
 table.table.table-desktop.size-guide
   thead
     tr
-      th.text-center.dark-grey colspan="#{size_col_span}" Sizes
-      th.text-center.grey colspan="2" Bust
-      th.text-center.dark-grey colspan="2" Waist
-      th.text-center.grey colspan="2" Hip
+      th.text-center.dark-grey colspan="2"  Sizes
+      th.text-center.grey colspan="2"  Bust
+      th.text-center.dar-grey colspan="2"  Underbust
+      th.text-center.grey colspan="2"  Waist
+      th.text-center.dark-grey colspan="2"  Hip
   tbody
     tr.subheading-row
       td.dark-grey.sub-heading Aus/UK
@@ -12,8 +13,10 @@ table.table.table-desktop.size-guide
       td.dark-grey.sub-heading DE
       td.grey.sub-heading cm
       td.grey.sub-heading Inches
+      td.grey.sub-heading cm
+      td.grey.sub-heading Inches
       td.dark-grey.sub-heading cm
-      td.dark-grey.sub-heading Inches
+      td.dark-grey.sub-heading style=("border-right: 1px solid #5C5C5C;") Inches
       td.grey.sub-heading cm
       td.grey.sub-heading Inches
     - data.map do |size|
@@ -23,4 +26,3 @@ table.table.table-desktop.size-guide
 
 - if current_site_version.is_australia?
   p style="text-align:center" All of our garments are in AU sizes for Australian customers
-
