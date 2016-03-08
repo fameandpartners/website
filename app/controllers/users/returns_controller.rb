@@ -3,6 +3,8 @@ class Users::ReturnsController < Users::BaseController
   helper_method :order_return, :user
 
   def new
+    @reasons = ReturnRequestItem::REASON_CATEGORY_MAP.to_json
+
     order_number = params[:order_number]
 
     @user = try_spree_current_user
@@ -45,8 +47,7 @@ class Users::ReturnsController < Users::BaseController
       OrderReturnRequestMailer.email(@order_return, user).deliver
       render 'success'
     else
-      @title = "Order ##{ @order_return.number }"
-      render 'new'
+      redirect_to :controller => "users/returns", :action => "new", :order_number => @order.number
     end
   end
 
