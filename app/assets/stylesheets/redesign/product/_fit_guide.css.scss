@@ -32,7 +32,7 @@ $fg-screen-sm: 480px;
     width: 96%;
     max-width: 1230px;
     min-height: 600px;
-    background: url('_popups/fit-guide-bg-desktop.jpg') left top no-repeat #e7e6e5;
+    background: url('_popups/fit-guide-bg-desktop-Mar-8.jpg') left top no-repeat #e7e6e5;
     background-size: cover;
     @media (max-width: $fg-screen-lg) {
       background: #e7e6e5;
@@ -75,7 +75,7 @@ $fg-screen-sm: 480px;
     width: 100%;
     padding-bottom: 100%;
     @media (max-width: $fg-screen-lg) {
-      background: url('_popups/fit-guide-bg-phone.jpg')no-repeat;
+      background: url('_popups/fit-guide-bg-phone-Mar-8.jpg')no-repeat;
       background-size: cover;
     }
   }
