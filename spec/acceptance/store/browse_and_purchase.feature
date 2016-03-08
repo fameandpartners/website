@@ -18,7 +18,7 @@ Feature: Browse and Purchase
 
   Scenario: List All Lookbooks
     When I visit the "/lookbook" path
-    Then I should see "Great Minds Think Alike"
+    Then I should see "Just The Girls"
     Then I should see "Love Lace"
     Then I should see "This Modern Romance"
     Then I should see "Bring On The Night"
@@ -34,4 +34,3 @@ Feature: Browse and Purchase
     Then I should see "$200 - $299"
     Then I should see "$300 - $399"
     Then I should see "$400+"
-
