@@ -15,7 +15,53 @@ window.ShoppingCartSummary = class ShoppingCartSummary
     @$container.on('click', 'form.promo-code button', @couponFormSubmitHandler)
     @$container.on('submit', 'form.promo-code', @couponFormSubmitHandler)
     @cart.on('change', @render)
+    @initMasterPass(options)
     @
+
+  initMasterPass: (options) =>
+    @masterpass_link = options.masterpass_link
+    @$masterpass_cart_callback_uri = options.masterpass_cart_callback_uri
+    @$overlay = $("#shadow-layer")
+    @masterpass_clicked = false
+    $(@masterpass_link).on('click', @masterpassOpenHandler)
+
+  masterpassOpenHandler: (e) =>
+    e.preventDefault() if e
+    return if @cart.item_count == 0
+
+    @masterpass_clicked = true
+    spinner = new Spinner().spin();
+    @$overlay.append spinner.el;
+    @$overlay.addClass('most-front');
+
+    overlay = @$overlay;
+    $.getJSON(@$masterpass_cart_callback_uri).done (data) ->
+      @masterpass_clicked = false
+      spinner.stop()
+      overlay.removeClass('most-front');
+
+      if data.hasOwnProperty('request_token') and data.hasOwnProperty('callback_domain') and data.hasOwnProperty('checkout_identifier') and data.hasOwnProperty('shipping_suppression') and data.hasOwnProperty('accepted_cards') and data.hasOwnProperty('cart_callback_path')
+        MasterPass.client.checkout
+          requestToken: data.request_token
+          callbackUrl: data.cart_callback_path
+          merchantCheckoutId: data.checkout_identifier
+          allowedCardTypes: data.accepted_cards
+          cancelCallback: data.callback_domain
+          suppressShippingAddressEnable: data.shipping_suppression
+          loyaltyEnabled: 'false'
+          requestBasicCheckout: false,
+          version: 'v6'
+
+        if data.hasOwnProperty('commerce_tracking') and data.commerce_tracking == true
+          axel = Math.random() + ''
+          a = axel * 10000000000000
+          ifrm = document.createElement('IFRAME')
+          ifrm.setAttribute 'src', 'https://4754606.fls.doubleclick.net/activityi;src=4754606;type=mpau;cat=famep00;ord=\' + a + \'?'
+          ifrm.style.width = 1 + 'px'
+          ifrm.style.height = 1 + 'px'
+          ifrm.style.frameborder = 0
+          ifrm.style.display = 'none'
+          document.body.appendChild ifrm
 
   render: () ->
     @$container.html(@template(cart: @cart.data, value_proposition: @value_proposition, shipping_message: @shipping_message ))
