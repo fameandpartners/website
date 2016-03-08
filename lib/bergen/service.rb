@@ -21,4 +21,18 @@ module Bergen
       Rails.env
     end
   end
+
+  Credentials = Struct.new(:account_id, :username, :password, :environment) do
+    def self.fetch
+      new(config.account_id,
+          config.username,
+          config.password,
+          (Rails.env.production? ? :production : :staging)
+      )
+    end
+
+    def self.config
+      configatron.bergen
+    end
+  end
 end
