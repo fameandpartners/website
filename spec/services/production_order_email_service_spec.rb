@@ -9,23 +9,17 @@ describe ProductionOrderEmailService do
   let(:v_items)     { [item, item] }
   let(:b_items)     { [item('Blah')] }
   let(:line_items)  { v_items + b_items }
-  let(:order)       { double(:id => 99, :number => 'ABCDEF123', :line_items => line_items) }
-  let(:mailer)      { double(Spree::OrderMailer) }
+  let(:order)       { double(id:         99,
+                             number:     'ABCDEF123',
+                             line_items: line_items,
+                             user:       Faker.name) }
 
-  subject(:service) { ProductionOrderEmailService.new(order.id) }
+  it 'groups items by factory' do
+    service = ProductionOrderEmailService.new(order)
 
-  before do
-    expect(Spree::Order).to receive(:find).with(order.id).and_return(order)
-
-  end
-
-  it 'send emails for each factory' do
-
-    expect(mailer).to receive(:deliver).twice
-    expect(ProductionOrderEmailService::FactoryPurchaseOrderEmail).to receive(:new).with(order, 'Vtha', v_items).and_return(mailer)
-    expect(ProductionOrderEmailService::FactoryPurchaseOrderEmail).to receive(:new).with(order, 'Blah', b_items).and_return(mailer)
+    expect(service).to receive(:trigger_email).with(order, 'Vtha', v_items)
+    expect(service).to receive(:trigger_email).with(order, 'Blah', b_items)
 
     service.deliver
   end
-
 end

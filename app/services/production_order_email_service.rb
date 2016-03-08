@@ -1,15 +1,18 @@
 class ProductionOrderEmailService
   attr_reader :order
 
-  def initialize(order_id)
-    @order = Spree::Order.find(order_id)
+  def initialize(order)
+    @order = order
   end
-
 
   def deliver
     order.line_items.group_by{ |i|i.factory }.each do |factory, items|
-      FactoryPurchaseOrderEmail.new(order, factory, items).deliver
+      trigger_email(order, factory, items)
     end
+  end
+
+  def trigger_email(order, factory, items)
+    FactoryPurchaseOrderEmail.new(order, factory, items).deliver
   end
 
   class FactoryPurchaseOrderEmail
@@ -19,7 +22,10 @@ class ProductionOrderEmailService
       @raw_order       = order
       @factory         = factory
       @factory_items   = factory_items
-      @order_presenter = Orders::OrderPresenter.new(@raw_order, @factory_items)
+    end
+
+    def order_presenter
+      @order_presenter ||= Orders::OrderPresenter.new(raw_order, factory_items)
     end
 
     def delivery_email
