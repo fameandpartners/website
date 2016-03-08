@@ -22,7 +22,7 @@ class GlobalSku < ActiveRecord::Base
   serialize :data, JSON
 
   def self.find_or_create_by_line_item(line_item_presenter:)
-    where(sku: line_item_presenter.sku).first.presence || create_by_line_item(line_item_presenter: line_item_presenter)
+    where(sku: line_item_presenter.sku).first || create_by_line_item(line_item_presenter: line_item_presenter)
   end
 
   def self.create_by_line_item(line_item_presenter:)

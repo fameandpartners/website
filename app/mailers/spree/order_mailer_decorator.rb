@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 Spree::OrderMailer.class_eval do
-  layout 'mailer', :except => [:team_confirm_email, :production_order_email]
+  layout 'mailer', :except => [:team_confirm_email]
 
   include Spree::BaseHelper
   include OrdersHelper

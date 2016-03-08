@@ -13,13 +13,17 @@ class ProductionOrderEmailService
   end
 
   class FactoryPurchaseOrderEmail
-    attr_accessor :order_presenter, :factory, :factory_items, :raw_order
+    attr_reader :order_presenter, :factory, :factory_items, :raw_order
 
     def initialize(order, factory, factory_items)
       @raw_order       = order
       @factory         = factory
       @factory_items   = factory_items
       @order_presenter = Orders::OrderPresenter.new(@raw_order, @factory_items)
+    end
+
+    def delivery_email
+      configatron.order_production_emails
     end
 
     def deliver
@@ -30,28 +34,26 @@ class ProductionOrderEmailService
 
       line_items = extract_line_items
 
-      begin
-        Marketing::CustomerIOEventTracker.new.track(
-          user,
-          'order_production_order_email',
-          email_to:           configatron.order_production_emails,
-          subject:            subject,
-          number:             order_presenter.number,
-          site:               order_presenter.site_version,
-          total_items:        order_presenter.total_items,
-          promotion:          order_presenter.promotion?,
-          promocode:          order_presenter.promo_codes.join(', '),
-          line_items:         line_items,
-          customer_notes:     order_presenter.customer_notes?,
-          customer_note_data: order_presenter.customer_notes,
-          customer:           order_presenter.name,
-          phone:              order_presenter.phone_number,
-          shipping_address:   order_presenter.shipping_address,
-          factory:            factory
-        )
-      rescue StandardError => e
-        NewRelic::Agent.notice_error(e)
-      end
+      Marketing::CustomerIOEventTracker.new.track(
+        user,
+        'order_production_order_email',
+        email_to:           delivery_email,
+        subject:            subject,
+        number:             order_presenter.number,
+        site:               order_presenter.site_version,
+        total_items:        order_presenter.total_items,
+        promotion:          order_presenter.promotion?,
+        promocode:          order_presenter.promo_codes.join(', '),
+        line_items:         line_items,
+        customer_notes:     order_presenter.customer_notes?,
+        customer_note_data: order_presenter.customer_notes,
+        customer:           order_presenter.name,
+        phone:              order_presenter.phone_number,
+        shipping_address:   order_presenter.shipping_address,
+        factory:            factory
+      )
+    rescue StandardError => e
+      NewRelic::Agent.notice_error(e)
     end
 
     def extract_line_items
