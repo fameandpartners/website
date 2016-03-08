@@ -11,7 +11,7 @@ module Bergen
     context 'Bergen API versions' do
       let(:service) { described_class.new }
 
-      let(:known_version3_methods) {
+      let(:known_staging_methods) {
         [
           :authentication_token_get,
           :get_inventory,
@@ -19,6 +19,7 @@ module Bergen
           :get_inventory_from_date_time,
           :get_inventory_from_date_time_by_batch,
           :get_inventory_by_up_cs,
+          :get_product_quantities_by_upc,
           :get_inventory_by_style,
           :get_receiving_statuses_by_date,
           :get_receiving_statuses_by_date_configurable,
@@ -43,24 +44,25 @@ module Bergen
         ]
       }
 
-      let(:known_version2_methods) {
-        known_version3_methods - [:get_pick_tickets_by_order_number, :style_master_product_update_by_upc]
-      }
-
       describe 'version 2 - staging' do
         it 'correctly loads wsdl methods' do
-          expect(service.client.wsdl.soap_actions).to eq known_version2_methods
+          expect(service.client.wsdl.soap_actions).to eq known_staging_methods
         end
 
         it 'finds the staging endpoint' do
           expect(service.client.wsdl.endpoint).to eq(
-            URI.parse('http://sync.rex11.com/ws/v2staging/publicapiws.asmx')
+            URI.parse('http://sync.rex11.com/ws/v3staging/publicapiws.asmx')
           )
         end
 
       end
 
       describe 'version 3 - production' do
+
+        let(:known_production_methods) {
+          known_staging_methods - [:get_product_quantities_by_upc]
+        }
+
         before do
           def service.environment
             :production
@@ -68,7 +70,7 @@ module Bergen
         end
 
         it 'correctly loads wsdl methods' do
-          expect(service.client.wsdl.soap_actions).to eq known_version3_methods
+          expect(service.client.wsdl.soap_actions).to eq known_production_methods
         end
 
         it 'finds the production endpoint' do

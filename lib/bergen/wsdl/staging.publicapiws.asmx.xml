@@ -161,6 +161,46 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetProductQuantitiesByUpc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UPC" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductQuantitiesByUpcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProductQuantitiesByUpcResult" type="tns:GetProductQuantitiesbyUpcResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetProductQuantitiesbyUpcResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WsResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:ArrayOfProductQuantities" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfProductQuantities">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ProductQuantities" nillable="true" type="tns:ProductQuantities" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProductQuantities">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Upc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WarehouseName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActualQuantity" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PendingQuantity" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AllocatedQuantity" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PutAwayQuantity" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NotShippedQuantity" type="s:int" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="GetInventoryByStyle">
         <s:complexType>
           <s:sequence>
@@ -444,6 +484,30 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
+      <s:element name="GetPickTicketsByOrderNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="authenticationString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="orderNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPickTicketsByOrderNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPickTicketsByOrderNumberResult" type="tns:GetPTsByOrderNumberResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetPTsByOrderNumberResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:WsResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PickTicketNumbers" type="tns:ArrayOfString" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
       <s:element name="GetPickTickesByStatusAndCreateDate">
         <s:complexType>
           <s:sequence>
@@ -592,6 +656,32 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="StyleMasterProductUpdateByUpc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="authenticationString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="product" type="tns:UpdateableProduct" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UpdateableProduct">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Upc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sku" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Style" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Color" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Size" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitPrice" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StyleMasterProductUpdateByUpcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="StyleMasterProductUpdateByUpcResult" type="tns:WsResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetStyleMasterProductAddStatus">
         <s:complexType>
           <s:sequence>
@@ -610,6 +700,7 @@
       <s:element name="string" nillable="true" type="s:string" />
       <s:element name="InventoryResponse" nillable="true" type="tns:InventoryResponse" />
       <s:element name="InventoryByBatchResponse" nillable="true" type="tns:InventoryByBatchResponse" />
+      <s:element name="GetProductQuantitiesbyUpcResponse" nillable="true" type="tns:GetProductQuantitiesbyUpcResponse" />
       <s:element name="ReceivingStatusesByDateResponse" nillable="true" type="tns:ReceivingStatusesByDateResponse" />
       <s:element name="ReceivingTicketByPOResponse" nillable="true" type="tns:ReceivingTicketByPOResponse" />
       <s:element name="ReceivingTicketByTicketNoResponse" nillable="true" type="tns:ReceivingTicketByTicketNoResponse" />
@@ -618,6 +709,7 @@
       <s:element name="PickTicketAddStatusResponse" nillable="true" type="tns:PickTicketAddStatusResponse" />
       <s:element name="WsResponse" nillable="true" type="tns:WsResponse" />
       <s:element name="GetPickTicketResponse" nillable="true" type="tns:GetPickTicketResponse" />
+      <s:element name="GetPTsByOrderNumberResponse" nillable="true" type="tns:GetPTsByOrderNumberResponse" />
       <s:element name="PickTicketByStatusAndCreateDateResponse" nillable="true" type="tns:PickTicketByStatusAndCreateDateResponse" />
       <s:element name="PickTicketObjectItemsInBoxesResponse" nillable="true" type="tns:PickTicketObjectItemsInBoxesResponse" />
       <s:element name="PickTicketObjectItemsInBoxesResponseV2" nillable="true" type="tns:PickTicketObjectItemsInBoxesResponseV2" />
@@ -647,6 +739,8 @@
           <s:element minOccurs="0" maxOccurs="1" name="SupplierDetails" type="s6:SupplierAddress" />
           <s:element minOccurs="0" maxOccurs="1" default="" name="Carrier" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" default="" name="IMPORTSTATUSTEXT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" default="" name="AddedToInventoryDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" default="" name="ArrivedDate" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:element name="receivingTicket" type="s1:ReceivingTicket" />
@@ -771,7 +865,7 @@
           <s:element minOccurs="0" maxOccurs="1" default="" name="SpecialInstructions" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" default="" name="CustomerPONumber" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" default="" name="AuthorizationNumber" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" default="0" name="OrderNumber" type="s:integer" />
+          <s:element minOccurs="0" maxOccurs="1" default="" name="OrderNumber" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" default="" name="TakenBy" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" default="" name="DISTRIBUTIONCENTER" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" default="0" name="DivisionCode" type="s:string" />
@@ -787,6 +881,8 @@
           <s:element minOccurs="0" maxOccurs="1" default="" name="MarkForCode" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="MarkForAddress" type="s6:Address" />
           <s:element minOccurs="0" maxOccurs="unbounded" name="LineItem" type="s10:LineItem" />
+          <s:element minOccurs="0" maxOccurs="1" default="" name="PriorityCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" default="" name="OrderType" type="s:string" />
         </s:sequence>
       </s:complexType>
     </s:schema>
@@ -875,6 +971,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="ShipmentStatus" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="ShipmentStatusCode" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="FreightCharge" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderType" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="Package">
@@ -888,6 +985,8 @@
           <s:element minOccurs="1" maxOccurs="1" name="PackageWidth" type="s:double" />
           <s:element minOccurs="1" maxOccurs="1" name="PackageHeight" type="s:double" />
           <s:element minOccurs="0" maxOccurs="1" name="PackageType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnTrackingNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PackageUniqueId" type="s:long" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="OutBoundLineItem">
@@ -949,6 +1048,7 @@
           <s:enumeration value="Partial Delivery" />
           <s:enumeration value="Delivered" />
           <s:enumeration value="Pending UPS Upload" />
+          <s:enumeration value="Warehouse Transfer Done" />
         </s:restriction>
       </s:simpleType>
     </s:schema>
@@ -1054,6 +1154,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="LoadId" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="ProNumber" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="BolNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderType" type="s:string" />
         </s:sequence>
       </s:complexType>
     </s:schema>
@@ -1071,6 +1172,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="PackageHeight" type="s:double" />
           <s:element minOccurs="0" maxOccurs="1" name="PackageType" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="SsCc20" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PackageUniqueId" type="s:long" />
         </s:sequence>
       </s:complexType>
     </s:schema>
@@ -1084,6 +1186,9 @@
           <s:element minOccurs="0" maxOccurs="1" default="" name="Size" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" default="" name="UPC" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" default="0" name="Price" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" default="" name="CountryOfOrigin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" default="" name="CustomsDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" default="" name="HarmonizedCode" type="s:string" />
         </s:sequence>
       </s:complexType>
     </s:schema>
@@ -1135,6 +1240,12 @@
   </wsdl:message>
   <wsdl:message name="GetInventoryByUPCsSoapOut">
     <wsdl:part name="parameters" element="tns:GetInventoryByUPCsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductQuantitiesByUpcSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductQuantitiesByUpc" />
+  </wsdl:message>
+  <wsdl:message name="GetProductQuantitiesByUpcSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductQuantitiesByUpcResponse" />
   </wsdl:message>
   <wsdl:message name="GetInventoryByStyleSoapIn">
     <wsdl:part name="parameters" element="tns:GetInventoryByStyle" />
@@ -1208,6 +1319,12 @@
   <wsdl:message name="GetPickTicketObjectByBarCodeSoapOut">
     <wsdl:part name="parameters" element="tns:GetPickTicketObjectByBarCodeResponse" />
   </wsdl:message>
+  <wsdl:message name="GetPickTicketsByOrderNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPickTicketsByOrderNumber" />
+  </wsdl:message>
+  <wsdl:message name="GetPickTicketsByOrderNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPickTicketsByOrderNumberResponse" />
+  </wsdl:message>
   <wsdl:message name="GetPickTickesByStatusAndCreateDateSoapIn">
     <wsdl:part name="parameters" element="tns:GetPickTickesByStatusAndCreateDate" />
   </wsdl:message>
@@ -1243,6 +1360,12 @@
   </wsdl:message>
   <wsdl:message name="StyleMasterProductAddSoapOut">
     <wsdl:part name="parameters" element="tns:StyleMasterProductAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="StyleMasterProductUpdateByUpcSoapIn">
+    <wsdl:part name="parameters" element="tns:StyleMasterProductUpdateByUpc" />
+  </wsdl:message>
+  <wsdl:message name="StyleMasterProductUpdateByUpcSoapOut">
+    <wsdl:part name="parameters" element="tns:StyleMasterProductUpdateByUpcResponse" />
   </wsdl:message>
   <wsdl:message name="GetStyleMasterProductAddStatusSoapIn">
     <wsdl:part name="parameters" element="tns:GetStyleMasterProductAddStatus" />
@@ -1292,6 +1415,13 @@
   </wsdl:message>
   <wsdl:message name="GetInventoryByUPCsHttpGetOut">
     <wsdl:part name="Body" element="tns:InventoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductQuantitiesByUpcHttpGetIn">
+    <wsdl:part name="AuthenticationString" type="s:string" />
+    <wsdl:part name="UPC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProductQuantitiesByUpcHttpGetOut">
+    <wsdl:part name="Body" element="tns:GetProductQuantitiesbyUpcResponse" />
   </wsdl:message>
   <wsdl:message name="GetInventoryByStyleHttpGetIn">
     <wsdl:part name="AuthenticationString" type="s:string" />
@@ -1367,6 +1497,13 @@
   </wsdl:message>
   <wsdl:message name="GetPickTicketObjectByBarCodeHttpGetOut">
     <wsdl:part name="Body" element="tns:GetPickTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPickTicketsByOrderNumberHttpGetIn">
+    <wsdl:part name="authenticationString" type="s:string" />
+    <wsdl:part name="orderNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPickTicketsByOrderNumberHttpGetOut">
+    <wsdl:part name="Body" element="tns:GetPTsByOrderNumberResponse" />
   </wsdl:message>
   <wsdl:message name="GetPickTickesByStatusAndCreateDateHttpGetIn">
     <wsdl:part name="AuthenticationString" type="s:string" />
@@ -1457,6 +1594,13 @@
   <wsdl:message name="GetInventoryByUPCsHttpPostOut">
     <wsdl:part name="Body" element="tns:InventoryResponse" />
   </wsdl:message>
+  <wsdl:message name="GetProductQuantitiesByUpcHttpPostIn">
+    <wsdl:part name="AuthenticationString" type="s:string" />
+    <wsdl:part name="UPC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProductQuantitiesByUpcHttpPostOut">
+    <wsdl:part name="Body" element="tns:GetProductQuantitiesbyUpcResponse" />
+  </wsdl:message>
   <wsdl:message name="GetInventoryByStyleHttpPostIn">
     <wsdl:part name="AuthenticationString" type="s:string" />
     <wsdl:part name="style" type="s:string" />
@@ -1531,6 +1675,13 @@
   </wsdl:message>
   <wsdl:message name="GetPickTicketObjectByBarCodeHttpPostOut">
     <wsdl:part name="Body" element="tns:GetPickTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPickTicketsByOrderNumberHttpPostIn">
+    <wsdl:part name="authenticationString" type="s:string" />
+    <wsdl:part name="orderNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPickTicketsByOrderNumberHttpPostOut">
+    <wsdl:part name="Body" element="tns:GetPTsByOrderNumberResponse" />
   </wsdl:message>
   <wsdl:message name="GetPickTickesByStatusAndCreateDateHttpPostIn">
     <wsdl:part name="AuthenticationString" type="s:string" />
@@ -1609,6 +1760,11 @@
       <wsdl:input message="tns:GetInventoryByUPCsSoapIn" />
       <wsdl:output message="tns:GetInventoryByUPCsSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetProductQuantitiesByUpc">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get inventory quantities by UPC</wsdl:documentation>
+      <wsdl:input message="tns:GetProductQuantitiesByUpcSoapIn" />
+      <wsdl:output message="tns:GetProductQuantitiesByUpcSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetInventoryByStyle">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Inventory by style</wsdl:documentation>
       <wsdl:input message="tns:GetInventoryByStyleSoapIn" />
@@ -1669,6 +1825,11 @@
       <wsdl:input message="tns:GetPickTicketObjectByBarCodeSoapIn" />
       <wsdl:output message="tns:GetPickTicketObjectByBarCodeSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetPickTicketsByOrderNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pickticket - Get Pick Ticket numbers by order number</wsdl:documentation>
+      <wsdl:input message="tns:GetPickTicketsByOrderNumberSoapIn" />
+      <wsdl:output message="tns:GetPickTicketsByOrderNumberSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetPickTickesByStatusAndCreateDate">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pickticket - Get Pick Tickets by status and create date range</wsdl:documentation>
       <wsdl:input message="tns:GetPickTickesByStatusAndCreateDateSoapIn" />
@@ -1698,6 +1859,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Products - This method creates stylemaster product from lineitem collection</wsdl:documentation>
       <wsdl:input message="tns:StyleMasterProductAddSoapIn" />
       <wsdl:output message="tns:StyleMasterProductAddSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StyleMasterProductUpdateByUpc">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Products - Update product by UPC</wsdl:documentation>
+      <wsdl:input message="tns:StyleMasterProductUpdateByUpcSoapIn" />
+      <wsdl:output message="tns:StyleMasterProductUpdateByUpcSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetStyleMasterProductAddStatus">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Product status by StyleMasterProduct Object</wsdl:documentation>
@@ -1735,6 +1901,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Inventory by UPCs</wsdl:documentation>
       <wsdl:input message="tns:GetInventoryByUPCsHttpGetIn" />
       <wsdl:output message="tns:GetInventoryByUPCsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductQuantitiesByUpc">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get inventory quantities by UPC</wsdl:documentation>
+      <wsdl:input message="tns:GetProductQuantitiesByUpcHttpGetIn" />
+      <wsdl:output message="tns:GetProductQuantitiesByUpcHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="GetInventoryByStyle">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Inventory by style</wsdl:documentation>
@@ -1785,6 +1956,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pickticket - Get Pick Ticket Object By Barcode</wsdl:documentation>
       <wsdl:input message="tns:GetPickTicketObjectByBarCodeHttpGetIn" />
       <wsdl:output message="tns:GetPickTicketObjectByBarCodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPickTicketsByOrderNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pickticket - Get Pick Ticket numbers by order number</wsdl:documentation>
+      <wsdl:input message="tns:GetPickTicketsByOrderNumberHttpGetIn" />
+      <wsdl:output message="tns:GetPickTicketsByOrderNumberHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="GetPickTickesByStatusAndCreateDate">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pickticket - Get Pick Tickets by status and create date range</wsdl:documentation>
@@ -1848,6 +2024,11 @@
       <wsdl:input message="tns:GetInventoryByUPCsHttpPostIn" />
       <wsdl:output message="tns:GetInventoryByUPCsHttpPostOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetProductQuantitiesByUpc">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get inventory quantities by UPC</wsdl:documentation>
+      <wsdl:input message="tns:GetProductQuantitiesByUpcHttpPostIn" />
+      <wsdl:output message="tns:GetProductQuantitiesByUpcHttpPostOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetInventoryByStyle">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Inventory by style</wsdl:documentation>
       <wsdl:input message="tns:GetInventoryByStyleHttpPostIn" />
@@ -1897,6 +2078,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pickticket - Get Pick Ticket Object By Barcode</wsdl:documentation>
       <wsdl:input message="tns:GetPickTicketObjectByBarCodeHttpPostIn" />
       <wsdl:output message="tns:GetPickTicketObjectByBarCodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPickTicketsByOrderNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pickticket - Get Pick Ticket numbers by order number</wsdl:documentation>
+      <wsdl:input message="tns:GetPickTicketsByOrderNumberHttpPostIn" />
+      <wsdl:output message="tns:GetPickTicketsByOrderNumberHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="GetPickTickesByStatusAndCreateDate">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Pickticket - Get Pick Tickets by status and create date range</wsdl:documentation>
@@ -1978,6 +2164,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetInventoryByUPCs">
       <soap:operation soapAction="http://rex11.com/webmethods/GetInventoryByUPCs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductQuantitiesByUpc">
+      <soap:operation soapAction="http://rex11.com/webmethods/GetProductQuantitiesByUpc" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2093,6 +2288,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetPickTicketsByOrderNumber">
+      <soap:operation soapAction="http://rex11.com/webmethods/GetPickTicketsByOrderNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetPickTickesByStatusAndCreateDate">
       <soap:operation soapAction="http://rex11.com/webmethods/GetPickTickesByStatusAndCreateDate" style="document" />
       <wsdl:input>
@@ -2140,6 +2344,15 @@
     </wsdl:operation>
     <wsdl:operation name="StyleMasterProductAdd">
       <soap:operation soapAction="http://rex11.com/webmethods/StyleMasterProductAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StyleMasterProductUpdateByUpc">
+      <soap:operation soapAction="http://rex11.com/webmethods/StyleMasterProductUpdateByUpc" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2206,6 +2419,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetInventoryByUPCs">
       <soap12:operation soapAction="http://rex11.com/webmethods/GetInventoryByUPCs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductQuantitiesByUpc">
+      <soap12:operation soapAction="http://rex11.com/webmethods/GetProductQuantitiesByUpc" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -2321,6 +2543,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetPickTicketsByOrderNumber">
+      <soap12:operation soapAction="http://rex11.com/webmethods/GetPickTicketsByOrderNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetPickTickesByStatusAndCreateDate">
       <soap12:operation soapAction="http://rex11.com/webmethods/GetPickTickesByStatusAndCreateDate" style="document" />
       <wsdl:input>
@@ -2368,6 +2599,15 @@
     </wsdl:operation>
     <wsdl:operation name="StyleMasterProductAdd">
       <soap12:operation soapAction="http://rex11.com/webmethods/StyleMasterProductAdd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StyleMasterProductUpdateByUpc">
+      <soap12:operation soapAction="http://rex11.com/webmethods/StyleMasterProductUpdateByUpc" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -2434,6 +2674,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetInventoryByUPCs">
       <http:operation location="/GetInventoryByUPCs" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductQuantitiesByUpc">
+      <http:operation location="/GetProductQuantitiesByUpc" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -2524,6 +2773,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetPickTicketObjectByBarCode">
       <http:operation location="/GetPickTicketObjectByBarCode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPickTicketsByOrderNumber">
+      <http:operation location="/GetPickTicketsByOrderNumber" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -2642,6 +2900,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetProductQuantitiesByUpc">
+      <http:operation location="/GetProductQuantitiesByUpc" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetInventoryByStyle">
       <http:operation location="/GetInventoryByStyle" />
       <wsdl:input>
@@ -2732,6 +2999,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetPickTicketsByOrderNumber">
+      <http:operation location="/GetPickTicketsByOrderNumber" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetPickTickesByStatusAndCreateDate">
       <http:operation location="/GetPickTickesByStatusAndCreateDate" />
       <wsdl:input>
@@ -2789,16 +3065,16 @@
   </wsdl:binding>
   <wsdl:service name="PublicAPIWS">
     <wsdl:port name="PublicAPIWSSoap" binding="tns:PublicAPIWSSoap">
-      <soap:address location="http://sync.rex11.com/ws/v2staging/publicapiws.asmx" />
+      <soap:address location="http://sync.rex11.com/ws/v3staging/publicapiws.asmx" />
     </wsdl:port>
     <wsdl:port name="PublicAPIWSSoap12" binding="tns:PublicAPIWSSoap12">
-      <soap12:address location="http://sync.rex11.com/ws/v2staging/publicapiws.asmx" />
+      <soap12:address location="http://sync.rex11.com/ws/v3staging/publicapiws.asmx" />
     </wsdl:port>
     <wsdl:port name="PublicAPIWSHttpGet" binding="tns:PublicAPIWSHttpGet">
-      <http:address location="http://sync.rex11.com/ws/v2staging/publicapiws.asmx" />
+      <http:address location="http://sync.rex11.com/ws/v3staging/publicapiws.asmx" />
     </wsdl:port>
     <wsdl:port name="PublicAPIWSHttpPost" binding="tns:PublicAPIWSHttpPost">
-      <http:address location="http://sync.rex11.com/ws/v2staging/publicapiws.asmx" />
+      <http:address location="http://sync.rex11.com/ws/v3staging/publicapiws.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
