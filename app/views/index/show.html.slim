@@ -3,11 +3,11 @@ ruby:
 
 .page-content.index
   // TODO: create helper for multisource images
+  // TODO: change link
   = react_component('HeroCarousel', skin: 'skin-light',
-    assets: [{link: great_minds_think_alike_collection_path, src: '/assets/home-page-tiles/hero-gmta-v2', alt: 'Great Minds Think Alike'},
+    assets: [{link: great_minds_think_alike_collection_path, src: '/assets/home-page-tiles/JustTheGirls', alt: 'Just The Girls'},
       {link: love_lace_collection_path, src: '/assets/home-page-tiles/hero-lace-2', alt: 'Love Lace Collection'},
-      {link: this_modern_romance_collection_path, src: '/assets/home-page-tiles/hero-8', alt: 'This Modern Romance - Shop now'},
-      {link: sarah_ellen_landing_page_path, src: '/assets/home-page-tiles/hero-6', alt: 'The exclusive Miss Ellen - Shop all formal dresses'}])
+      {link: this_modern_romance_collection_path, src: '/assets/home-page-tiles/hero-8', alt: 'This Modern Romance - Shop now'}])
 
   //
     - if sale_active?
@@ -44,12 +44,12 @@ ruby:
         = link_to bridesmaid_collection_path, class: 'media-wrap'
           = image_tag 'home-page-tiles/tile-wedding-boutique.jpg', alt: 'WEDDING BOUTIQUE - explore BRIDESMAIDS'
         = render 'shared/redesign/tabs_collection'
-        = link_to bring_on_the_night_collection_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/tile-TIS-the-season.jpg', alt: 'TIS THE SEASON - SHOP EVENT DRESSES'
-        = link_to '/dresses/print', class: 'media-wrap'
-          = image_tag 'home-page-tiles/Prints-CategoryTile.png', alt: 'Print Dresses'
-        = link_to build_taxon_path('Velvet'), class: 'media-wrap'
-          = image_tag 'home-page-tiles/VelvetUnderground-CategoryTile4.jpg', alt: 'VELVET UNDERGROUND - SHOP VELVET DRESSES'
+        = link_to build_taxon_path('Lace'), class: 'media-wrap'
+          = image_tag 'home-page-tiles/LOVELACE-CategoryTile2.jpg', alt: 'Tis the season'
+        = link_to build_taxon_path('red-carpet'), class: 'media-wrap'
+          = image_tag 'home-page-tiles/EventDress-CategoryTile3.jpg', alt: 'Prints Charming'
+        = link_to bridesmaid_landing_page_path, class: 'media-wrap'
+          = image_tag 'home-page-tiles/WeddingBoutique-CategoryTile1.jpg', alt: 'Wedding Boutique'
 
       aside.col-md-5
         = react_component('BlogPosts')
