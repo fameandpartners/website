@@ -1,18 +1,17 @@
 # usage
 # initProductCollectionMoodboardLinks(
-#   container: '.category .products-collection',
-#   buttons:   'span.moodboard.add-to-moodboard'
+#   buttons:   '.js-trigger-add-to-moodboard'
 # )
 window.initProductCollectionMoodboardLinks = (options = {}) ->
-  $container = $(options.container)
-  buttons_selector = options.buttons
+  $buttons_selector = $(options.buttons)
+
+  if !app.user_signed_in
+    $buttons_selector.removeAttr('data-toggle')
 
   showMoodboardDropdown = (e) ->
-    e.preventDefault()
-
     if !app.user_signed_in
+      e.preventDefault()
       window.redirectToLoginAndBack()
       return
-    $(".dropdown-menu", $(e.currentTarget).parent()).toggleClass("hide")
 
-  $container.on('click', buttons_selector, showMoodboardDropdown)
+  $buttons_selector.on('click', showMoodboardDropdown)

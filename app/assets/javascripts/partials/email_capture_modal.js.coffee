@@ -33,7 +33,10 @@ window.page.EmailCaptureModal = class EmailCaptureModal
       @promoStartedAt = today
 
     @checkState @opts.uuid, =>
-      setTimeout(@open, timeout) if @pop
+      setTimeout(@open, timeout) if @pop()
+
+  pop: =>
+    @opts.force || $.cookie(@cookie) != 'hide'
 
   checkState: (uuid, callback) =>
     if uuid
@@ -42,8 +45,6 @@ window.page.EmailCaptureModal = class EmailCaptureModal
           callback.call()
     else
       callback.call()
-  pop: =>
-    @opts.force || $.cookie(@cookie) != 'hide'
 
   afterClose: () ->
     $.cookie(@cookie, 'hide', { expires: 365, path: '/' })

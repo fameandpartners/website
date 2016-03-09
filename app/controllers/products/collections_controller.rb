@@ -155,11 +155,11 @@ class Products::CollectionsController < Products::BaseController
       bodyshape:                       params[:bodyshape],
       discount:                        params[:sale] || params[:discount],
       fast_making:                     params[:fast_making],
-      order:                           params[:order] || page.get(:order),
+      order:                           params[:order] || page.product_order,
       limit:                           page.limit(custom_product_ids), # page size
       offset:                          page.offset(custom_product_ids, params[:offset]),
-      price_min:                       params[:priceMin],
-      price_max:                       params[:priceMax],
+      price_min:                       params[:price_min],
+      price_max:                       params[:price_max],
       query_string:                    params[:q],
       remove_excluded_from_site_logic: page.get(:remove_excluded_from_site_logic)
     }
@@ -167,7 +167,7 @@ class Products::CollectionsController < Products::BaseController
 
   def filters_applied?
     params.slice(
-      :collection, :style, :event, :color, :colour, :bodyshape, :order, :q
+      :collection, :style, :event, :color, :colour, :bodyshape, :order, :q, :price_min, :price_max
     ).values.any?(&:present?)
   end
 end

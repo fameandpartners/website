@@ -26,6 +26,7 @@
             thead : tr
               th Path
               th Title
+              th Variables
               th
 
             tbody
@@ -35,6 +36,7 @@
                   td
                     - if page.translation
                       = link_to page.translation.title, edit_content_page_path(page)
+                  td = page.variables.keys.join(', ')
                   td
                     = button_to 'Edit', edit_content_page_path(page), action: 'edit', method: 'get', class: 'btn btn-info', id: 'edit_form'
                     = button_to 'Delete', content_page_path(page), action: 'destroy', method: 'delete', class: 'btn btn-danger', id: 'delete_form', data: { confirm: 'Are you sure?' }

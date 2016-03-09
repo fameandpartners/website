@@ -33,9 +33,3 @@
               .panel-message
                 h2.heading These dresses are also available for killer curves up to size 22
           = render partial: 'pagination'
-
-coffee:
-  $(document).ready ->
-    $(".products-collection").on 'click' , (e) ->
-      if !$(e.target).data("moodboard-id")? and !$(e.target).hasClass("moodboard")
-        $(".dropdown-menu",$(e.target).closest(".category--item")).addClass("hide")

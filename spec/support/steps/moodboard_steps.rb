@@ -3,8 +3,8 @@ module Acceptance
     step 'I add ":dress_name" to my moodboard' do |dress_name|
       within('.details') do
         expect(page).to have_content(dress_name.upcase)
-        first('.moodboard').click
-        find('a', text: 'Wishlist').click
+        click_link '+moodboard'
+        click_link 'Wishlist'
       end
     end
 

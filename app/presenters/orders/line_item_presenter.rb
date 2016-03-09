@@ -66,6 +66,14 @@ module Orders
       end
     end
 
+    def global_sku
+      @global_sku ||= GlobalSku.find_or_create_by_line_item(line_item_presenter: self)
+    end
+
+    def product_number
+      global_sku.id
+    end
+
     def style_name
       variant.try(:product).try(:name) || 'Missing Variant'
     end
@@ -128,6 +136,16 @@ module Orders
 
     def customisations_without_images
       customisations.collect &:first
+    end
+
+    def customisation_ids
+      return [] unless personalizations?
+      Array.wrap(personalization.customization_values.collect(&:id))
+    end
+
+    def customisation_names
+      return [] unless personalizations?
+      Array.wrap(personalization.customization_values.collect(&:presentation))
     end
 
     def personalizations?
@@ -241,6 +259,18 @@ module Orders
       rescue NoMethodError
         Rails.logger.warn("Failed to find image for order email. #{wrapped_order.to_s}")
       end
+    end
+
+    def variant_id
+      variant.try(:id)
+    end
+
+    def product_id
+      variant.try(:product_id)
+    end
+
+    def colour_id
+      colour.try(:id)
     end
 
     private

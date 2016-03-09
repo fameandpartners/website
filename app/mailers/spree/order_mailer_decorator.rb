@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 Spree::OrderMailer.class_eval do
-  layout 'mailer', :except => [:team_confirm_email, :production_order_email]
+  layout 'mailer', :except => [:team_confirm_email]
 
   include Spree::BaseHelper
   include OrdersHelper
@@ -84,43 +84,6 @@ Spree::OrderMailer.class_eval do
       NewRelic::Agent.notice_error(e)
     end
   end
-
-  def production_order_email(order, factory, items)
-    find_order(order)
-
-    subject = "Order Confirmation (订单号码）(#{factory}) ##{@order.number}"
-
-    user = @order.user
-    user ||= Spree::User.where(email: @order.email).first
-
-    customer_notes = @order.customer_notes?
-    @order = Orders::OrderPresenter.new(@order, items)
-    line_items = Orders::OrderPresenter.build_line_items_for_production(@order)
-
-    begin
-      Marketing::CustomerIOEventTracker.new.track(
-        user,
-        'order_production_order_email',
-        email_to:            configatron.order_production_emails,
-        subject:             subject,
-        number:              @order.number,
-        site:                @order.site_version,
-        total_items:         @order.total_items,
-        promotion:           @order.promotion?,
-        promocode:           @order.promo_codes.join(', '),
-        line_items:          line_items,
-        customer_notes:      customer_notes,
-        customer_note_data:  @order.customer_notes,
-        customer:            @order.name,
-        phone:               @order.phone_number,
-        shipping_address:    @order.shipping_address,
-        factory:             factory
-      )
-    rescue StandardError => e
-      NewRelic::Agent.notice_error(e)
-    end
-  end
-
 
   def guest_payment_request(payment_request, resubmission = false)
     @payment_request = payment_request

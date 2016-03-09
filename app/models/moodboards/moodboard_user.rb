@@ -6,7 +6,7 @@ module Moodboards
       has_many :moodboards,               class_name: "Moodboard",             inverse_of: :user
       has_many :moodboard_collaborations, class_name: 'MoodboardCollaborator', inverse_of: :user
       has_many :shared_moodboards,        class_name: "Moodboard", through: :moodboard_collaborations, source: :moodboard
-
+      belongs_to :active_moodboard,       class_name: 'Moodboard', inverse_of: :user
       after_create :accept_moodboard_invitations
     end
 

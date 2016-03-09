@@ -181,7 +181,7 @@ Spree::Order.class_eval do
     begin
       Spree::OrderMailer.confirm_email(self.id).deliver
       Spree::OrderMailer.team_confirm_email(self.id).deliver
-      ProductionOrderEmailService.new(self.id).deliver
+      ProductionOrderEmailService.new(self).deliver
       log_products_purchased
     rescue Exception => e
       log_confirm_email_error(e)
