@@ -34,8 +34,31 @@ class GlobalSku < ActiveRecord::Base
       :color_id           => line_item_presenter.colour_id,
       :color_name         => line_item_presenter.colour_name,
       :height_value       => line_item_presenter.height,
+      :customisation_id   => line_item_presenter.customisation_ids.join(';').presence,
+      :customisation_name => line_item_presenter.customisation_names.join(';').presence,
       :product_id         => line_item_presenter.product_id,
       :variant_id         => line_item_presenter.variant_id
     )
+  end
+
+  def self.find_or_create_by_spree_variant(variant:)
+    where(sku: variant.sku).first || create_by_spree_variant(variant: variant)
+  end
+
+  def self.create_by_spree_variant(variant:)
+    self.create!(
+        :sku                => variant.sku,
+        :style_number       => variant.product.master.sku,
+        :product_name       => variant.product.name,
+        :size               => variant.dress_size.try(:name),
+        :color_id           => variant.dress_color.try(:id),
+        :color_name         => variant.dress_color.try(:name),
+        :customisation_id   => nil,
+        :customisation_name => nil,
+        :height_value       => LineItemPersonalization::DEFAULT_HEIGHT,
+        :data               => nil,
+        :product_id         => variant.product_id,
+        :variant_id         => variant.id
+      )
   end
 end
