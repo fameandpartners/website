@@ -22,15 +22,17 @@ RSpec.describe GlobalSku, :type => :model do
       let(:fresh_sku) { Faker.bothify("???####US##AU##C#X#H?").upcase }
 
       let(:line_item) { instance_spy('Orders::LineItemPresenter',
-                               sku:          fresh_sku,
-                               style_number: 'BAE12345',
-                               style_name:   'Cool Bae',
-                               size:         'USUSAUAU',
-                               colour_id:    89,
-                               colour_name:  'Charpinkle',
-                               height:       'X',
-                               product_id:   44,
-                               variant_id:   999)
+                                     sku:                 fresh_sku,
+                                     style_number:        'BAE12345',
+                                     style_name:          'Cool Bae',
+                                     size:                'USUSAUAU',
+                                     colour_id:           89,
+                                     colour_name:         'Charpinkle',
+                                     height:              'X',
+                                     product_id:          44,
+                                     variant_id:          999,
+                                     customisation_ids:   [4],
+                                     customisation_names: %w(IncreaseMagic))
       }
 
       it do
