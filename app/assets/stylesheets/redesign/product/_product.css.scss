@@ -1,5 +1,43 @@
 /* [Product Page]
 -------------------------------------------------------*/
+.category--item {
+  padding-bottom: 15px;
+}
+
+.category--item a {
+  color: #333333;
+}
+
+.category--item:hover {
+  opacity: 0.8;
+}
+
+.details {
+  margin: 15px 0;
+  font-size: 0.9em;
+}
+
+// TODO: redo these globals, should not be global
+.name {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+}
+
+.price {
+  display: block;
+  text-align: center;
+}
+
+.delivery {
+  display: block;
+  text-align: center;
+  font-size: 0.9em;
+  color: #777777;
+  margin-top: -3px;
+  color: #f8dadf;
+}
+
 .product-selection-wrap {
   position: relative;
   min-height: 600px;

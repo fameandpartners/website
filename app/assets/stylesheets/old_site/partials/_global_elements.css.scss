@@ -1,3 +1,32 @@
+// TODo: redo page titles
+.page-title {
+  background-size: cover;
+  position: relative;
+}
+
+.page-title:after {
+  content: "";
+  background: #000;
+  opacity: 0.1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.page-title--details {
+  padding: 60px 0 55px 0;
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 99;
+}
+
+.page-title--details h1 {
+  margin-top: 0px;
+}
 
 .centered-layout {
 	min-width: $layoutWidth;

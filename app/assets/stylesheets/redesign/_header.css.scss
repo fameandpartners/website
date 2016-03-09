@@ -44,6 +44,14 @@ header {
   z-index: 100;
 }
 
+@media screen and (max-width: 480px) {
+
+  .nav-menu {
+    position: absolute;
+  }
+
+}
+
 .all-dresses {
   padding: 0;
   margin-left: 15px;
@@ -302,6 +310,10 @@ li.shop {
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-bottom: 10px solid #f4f4f4;
+}
+
+.search {
+  position: relative;
 }
 
 .nav-menu {

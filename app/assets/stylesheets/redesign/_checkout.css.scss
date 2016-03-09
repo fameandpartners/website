@@ -370,36 +370,6 @@ $order-summary-bg: #f7f7f9;
     .cart-item-image {
       width: 80px;
     }
-    .delete-item {
-      position:          absolute;
-      width:             21px;
-      height:            21px;
-      right:             15px;
-      top:               50%;
-      margin-top:        -10px;
-      overflow:          hidden;
-      -webkit-transform: rotate(-45deg);
-      -ms-transform:     rotate(-45deg);
-      transform:         rotate(-45deg);
-      &:before, &:after {
-        content:          '';
-        display:          block;
-        position:         absolute;
-        width:            1px;
-        height:           40px;
-        left:             50%;
-        top:              50%;
-        margin-left:      -1px;
-        margin-top:       -20px;
-        background-color: #000000;
-      }
-      &:after {
-        height:      1px;
-        width:       40px;
-        margin-left: -20px;
-        margin-top:  -1px;
-      }
-    }
 
     form.promo-code {
       $order-summary-form-inactive: #bababa;
