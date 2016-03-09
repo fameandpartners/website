@@ -19,4 +19,9 @@ class MoodboardItemEvent < ActiveRecord::Base
     attributes :user_id
     validates :user_id, presence: true
   end
+
+  event_type :like do
+    attributes :user_id
+    validates :user_id, presence: true
+  end
 end
