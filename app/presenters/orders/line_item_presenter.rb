@@ -138,6 +138,16 @@ module Orders
       customisations.collect &:first
     end
 
+    def customisation_ids
+      return [] unless personalizations?
+      Array.wrap(personalization.customization_values.collect(&:id))
+    end
+
+    def customisation_names
+      return [] unless personalizations?
+      Array.wrap(personalization.customization_values.collect(&:presentation))
+    end
+
     def personalizations?
       personalization.present?
     end
