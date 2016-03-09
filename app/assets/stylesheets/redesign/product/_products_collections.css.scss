@@ -104,11 +104,6 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
     font-weight: 600;
     float: right;
     width: 20%;
-
-    @media(min-width: 1890px) {
-      margin-right:9px;
-    }
-
   }
 
   .select2-container--default .select2-selection--single {
