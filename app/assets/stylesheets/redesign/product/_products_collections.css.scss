@@ -203,6 +203,7 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
   }
 
   .category--item {
+    position: relative;
 
     &:hover .media-wrap {
       opacity: 0.8;
