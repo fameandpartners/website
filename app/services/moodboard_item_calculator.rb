@@ -18,8 +18,15 @@ class MoodboardItemCalculator < EventSourcedRecord::Calculator
   end
 
   def advance_like(event)
-    existing_likes = @moodboard_item.user_likes.split(',')
-    new_likes = existing_likes | [event.user_id.to_s]
+    existing_likes             = @moodboard_item.user_likes.split(',')
+    new_likes                  = existing_likes | [event.user_id.to_s]
+    @moodboard_item.user_likes = new_likes.join(',')
+    @moodboard_item.likes      = new_likes.count
+  end
+
+  def advance_unlike(event)
+    existing_likes             = @moodboard_item.user_likes.split(',')
+    new_likes                  = existing_likes - [event.user_id.to_s]
     @moodboard_item.user_likes = new_likes.join(',')
     @moodboard_item.likes      = new_likes.count
   end
