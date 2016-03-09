@@ -6,8 +6,9 @@
   font-size: 1.6rem;
   line-height: 1.6;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: 1px;
+  border-radius: 0;
 }
 
 .btn-default {
@@ -42,6 +43,22 @@
 
 }
 
+.btn-secondary {
+  color: $c-neutral-white;
+  background-color: $c-brand-blue;
+  border-color: transparent;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: $c-neutral-white;
+    background: $c-brand-blue-pale;
+    border-color: transparent;
+  }
+
+}
+
 .btn-lowlight {
   color: $c-neutral-black;
   background: $c-neutral-white;
@@ -61,6 +78,15 @@
 .btn-black {
   background: $c-neutral-black;
   color: $c-neutral-white;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    background: $c-neutral-12;
+    color: $c-neutral-white;
+  }
+
 }
 
 .btn-close {

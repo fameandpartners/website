@@ -28,6 +28,10 @@ header {
     }
   }
 
+  .navbar {
+    margin-bottom: 0;
+  }
+
 }
 
 .sticky-header header {
@@ -42,14 +46,6 @@ header {
   background: $c-neutral-white;
   border-bottom: 1px solid $c-neutral-5;
   z-index: 100;
-}
-
-@media screen and (max-width: 480px) {
-
-  .nav-menu {
-    position: absolute;
-  }
-
 }
 
 .all-dresses {

@@ -48,6 +48,11 @@
   overflow: hidden !important;
 }
 
+// TODO: replace this with .no-scroll
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
 // You can extend the cfix class with SASS to avoid the `.cfix` class appearing over and over in your markup.
 .cfix {
 

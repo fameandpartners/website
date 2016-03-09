@@ -2,7 +2,7 @@
 <ul class="cart-items">
   <% for product in @cart.products: %>
     <li class="cart-item" data-id="<%= product.line_item_id %>">
-      <a class="remove-product fa fa-close pull-right link-grey" href="#0"></a>
+      <a class="remove-product fa fa-close pull-right" href="#0"></a>
       <% if product.name != "Gift" : %>
         <div class="cart-item-image-holder pull-left">
           <a href="<%= product.path %>">
