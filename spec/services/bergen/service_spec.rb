@@ -44,7 +44,7 @@ module Bergen
         ]
       }
 
-      describe 'version 2 - staging' do
+      describe 'staging' do
         it 'correctly loads wsdl methods' do
           expect(service.client.wsdl.soap_actions).to eq known_staging_methods
         end
@@ -57,7 +57,7 @@ module Bergen
 
       end
 
-      describe 'version 3 - production' do
+      describe 'production' do
 
         let(:known_production_methods) {
           known_staging_methods - [:get_product_quantities_by_upc]
