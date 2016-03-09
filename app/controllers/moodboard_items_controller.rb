@@ -20,6 +20,17 @@ class MoodboardItemsController < ApplicationController
   def show
   end
 
+  # TODO - Wrap some logic and UI around this.
+  def like
+    item.events.like.create(user_id: spree_current_user.id)
+    redirect_to moodboard
+  end
+
+  def unlike
+    item.events.unlike.create(user_id: spree_current_user.id)
+    redirect_to moodboard
+  end
+
   def destroy
     item.events.removal.create(user_id: spree_current_user.id)
     redirect_to moodboard
