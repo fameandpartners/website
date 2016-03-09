@@ -76,7 +76,6 @@ configatron.bergen do |bergen|
   bergen.username   = "fameandpartners"
   bergen.password   = "not_set" # Seriously.
 end
-
 configatron.pin_payments.usd_gateways = %W{pk_NxLgEbIIaWwjKEqUnTd6oA pk_FJWiUA3rQW1uXZIg3LwMKQ}
 
 configatron.site_version_detector_strategy = :path
