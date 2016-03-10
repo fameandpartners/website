@@ -32,7 +32,7 @@ $fg-screen-sm: 480px;
     width: 96%;
     max-width: 1230px;
     min-height: 600px;
-    background: url('_popups/fit-guide-bg-desktop-Mar-8.jpg') left top no-repeat #e7e6e5;
+    background: url('_popups/fit-guide-bg-desktop.jpg') left top no-repeat #e7e6e5;
     background-size: cover;
     @media (max-width: $fg-screen-lg) {
       background: #e7e6e5;
@@ -75,7 +75,7 @@ $fg-screen-sm: 480px;
     width: 100%;
     padding-bottom: 100%;
     @media (max-width: $fg-screen-lg) {
-      background: url('_popups/fit-guide-bg-phone-Mar-8.jpg')no-repeat;
+      background: url('_popups/fit-guide-bg-phone.jpg')no-repeat;
       background-size: cover;
     }
   }
@@ -142,13 +142,13 @@ $fg-screen-sm: 480px;
     font-size: 14px;
     text-align: center;
     @media (max-width: $fg-screen-sm) {
-      font-size: 11px;
+      font-size: 12px;
     }
     tr:nth-child(even) td {
       background-color: rgba(0, 0, 0, 0.05);
     }
     tr{
-      td:nth-child(2),td:nth-child(5),td:nth-child(7),td:nth-child(9){
+      td:nth-child(2),td:nth-child(5),td:nth-child(7){
         border-right: 1px solid $c-neutral-9;
       }
     }
@@ -174,12 +174,6 @@ $fg-screen-sm: 480px;
     td[data-title]:nth-child(3),
     td.sub-heading:nth-child(3) {
       display: none !important;
-    }
-  }
-
-  @include iphone5 {
-    .size-guide {
-      font-size: 9px;
     }
   }
 }

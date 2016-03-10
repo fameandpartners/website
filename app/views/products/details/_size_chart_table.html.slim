@@ -2,23 +2,20 @@ table.table.table-desktop.size-guide
   thead
     tr
       th.text-center.dark-grey colspan="#{size_col_span}" Sizes
-      th.text-center.grey colspan="2"  Bust
-      th.text-center.dark-grey colspan="2"  Underbust
-      th.text-center.grey colspan="2"  Waist
-      th.text-center.dark-grey colspan="2"  Hip
+      th.text-center.grey colspan="2" Bust
+      th.text-center.dark-grey colspan="2" Waist
+      th.text-center.grey colspan="2" Hip
   tbody
     tr.subheading-row
-      td.sub-heading Aus/UK
-      td.sub-heading US
-      td.sub-heading DE
-      td.sub-heading cm
-      td.sub-heading Inches
-      td.sub-heading cm
-      td.sub-heading Inches
-      td.sub-heading cm
-      td.sub-heading Inches
-      td.sub-heading cm
-      td.sub-heading Inches
+      td.dark-grey.sub-heading Aus/UK
+      td.dark-grey.sub-heading US
+      td.dark-grey.sub-heading DE
+      td.grey.sub-heading cm
+      td.grey.sub-heading Inches
+      td.dark-grey.sub-heading cm
+      td.dark-grey.sub-heading Inches
+      td.grey.sub-heading cm
+      td.grey.sub-heading Inches
     - data.map do |size|
       tr
         - size.map do |key, value|
@@ -26,3 +23,4 @@ table.table.table-desktop.size-guide
 
 - if current_site_version.is_australia?
   p style="text-align:center" All of our garments are in AU sizes for Australian customers
+
