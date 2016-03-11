@@ -10,8 +10,6 @@
       = yield :custom_form_fields
       .form-group
         .col-lg-12
-          button type='submit' Generate
-
-h2 10 Row Sample
+          button class='btn btn-primary' type='submit' Generate
 
 = render partial: 'admin_ui/reports/report_rows_preview', locals: { rows: @rows }
