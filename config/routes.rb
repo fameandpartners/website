@@ -269,8 +269,8 @@ FameAndPartners::Application.routes.draw do
     get '/privacy' => 'statics#ecom_privacy'
     get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
-    get '/our-journey', to: redirect('/our-customer-service-improvements')
-    get '/our-customer-service-improvements'   => 'statics#yelp', :as => :yelp
+    get '/our-customer-service-improvements', to: redirect('/from-our-ceo')
+    get '/from-our-ceo' => 'statics#yelp', :as => :yelp
     get '/how-it-works', to: redirect("/why-us")
     get '/size-guide'  => 'statics#size_guide', :as => :size_guide
 
