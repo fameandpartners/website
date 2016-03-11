@@ -29,6 +29,8 @@ module AdminUi
       if new_active_state = params[:product_color_value][:active]
 
         @product_color_value.active = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(new_active_state)
+        @product_color_value.custom = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:product_color_value][:custom]) 
+
         if @product_color_value.save
           new_state = @product_color_value.active? ? 'active' : 'inactive'
 
