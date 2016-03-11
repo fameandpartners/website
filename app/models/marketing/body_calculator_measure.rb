@@ -2,20 +2,22 @@ module Marketing
   class BodyCalculatorMeasure < ActiveRecord::Base
     EMAIL_FORMAT_REGEX = /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
 
-    attr_accessible :email,
+    attr_accessible :bust_circumference,
+                    :hip_circumference,
                     :shape,
-                    :bust_circumference,
+                    :size,
                     :under_bust_circumference,
                     :waist_circumference,
-                    :hip_circumference
+                    :email
 
     validates :email, format: EMAIL_FORMAT_REGEX
-    validates :email,
+    validates :bust_circumference,
+              :hip_circumference,
               :shape,
-              :bust_circumference,
+              :size,
               :under_bust_circumference,
               :waist_circumference,
-              :hip_circumference,
+              :email,
               presence: true
   end
 end

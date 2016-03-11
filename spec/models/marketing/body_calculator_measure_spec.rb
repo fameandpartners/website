@@ -10,6 +10,7 @@ module Marketing
 
       it { is_expected.to validate_presence_of(:email) }
       it { is_expected.to validate_presence_of(:shape) }
+      it { is_expected.to validate_presence_of(:size) }
       it { is_expected.to validate_presence_of(:bust_circumference) }
       it { is_expected.to validate_presence_of(:under_bust_circumference) }
       it { is_expected.to validate_presence_of(:waist_circumference) }
