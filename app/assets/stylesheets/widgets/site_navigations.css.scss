@@ -3,7 +3,6 @@
 @import 'redesign/header';
 
 @import 'redesign/stylesheets/bootstrap';
-@import 'redesign/stylesheets/styles';
 
 .nav-menu-container {
   font-family: $font-family-secondary;
@@ -11,10 +10,6 @@
 
 .nav-menu-container .menu-item span {
 	font-weight: 500;
-}
-
-.mobile-logo {
-  margin-top: -3px;
 }
 
 .search-input {

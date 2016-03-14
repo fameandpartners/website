@@ -39,8 +39,17 @@
   overflow: hidden;
 }
 
+.text-white {
+  color: $c-neutral-white !important;
+}
+
 // if you need to hide scrollbars
 .no-scroll {
+  overflow: hidden !important;
+}
+
+// TODO: replace this with .no-scroll
+.overflow-hidden {
   overflow: hidden !important;
 }
 
@@ -63,4 +72,29 @@
     display: table;
   }
 
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-padding-top {
+  padding-top: 0 !important;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+}
+
+.no-padding-right {
+  padding-right: 0 !important;
+}
+
+// TODO: check if this hack is even needed
+.relative {
+  position: relative !important;
 }

@@ -23,6 +23,12 @@ input[type="checkbox"] {
 }
 
 .has-feedback .form-control-feedback {
+  width: 38px;
+  height: 38px;
+  line-height: 38px;
+}
+
+.has-feedback label ~ .form-control-feedback {
   top: 35px;
   right: 14px;
 }

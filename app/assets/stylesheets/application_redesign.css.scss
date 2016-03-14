@@ -15,9 +15,7 @@ z-index levels
 *     1 = .card-logo.discover
 *     1 = .card-logo.mastercard
 *     1 = .card-container
-*     1 = div.cs-select
 *     1 = main
-*     1 = .homepage-panel::after
 *     1 = .page-title:after
 *     1 = .slick-arrow
 
@@ -30,8 +28,6 @@ z-index levels
 *     2 = .pagination > .active > a (&:hover, &:focus)
 *     2 = .pagination > .active > span (&:hover, &:focus)
 *     2 = a.list-group-item.active (&:hover, &:focus)
-*     2 = .homepage-panel--content
-*     2 = .goto-arrow
 
 *     3 = .rslides_tabs
 *     3 = #main-nav
@@ -43,8 +39,6 @@ z-index levels
 *     5 = .carousel-control .icon-next
 *     5 = .carousel-control .glyphicon-chevron-left
 *     5 = .carousel-control .glyphicon-chevron-right
-
-*     9 = .product-section--details
 
 *    10 = #sideMenu #new-this-week-menu (min-width: 800px)
 *    10 = #slideMenu #dresses-menu
@@ -74,22 +68,17 @@ z-index levels
 *   102 = header
 *   102 = #locale-selector-container ul
 
-*   200 = div.cs-active
-
 *   990 = .dropdown-backdrop
 
 *   999 = #product-overlay
 *   999 = .skippr-nav-container
 *   999 = .skippr-arrow
-*   999 = .mobile-menu-overlay
 *   999 = #cart ???
 *   999 = #shadow-layer
 
    1000 = .most-front ???
 *  1000 = .dropdown-menu
 *  1000 = .navbar-static-top
-*  1000 = .mega-menu-menu
-*  1000 = .search-bar
 *  1000 = .mega-menu
 
 *  1010 = .chosen-container .chosen-drop
@@ -120,7 +109,6 @@ z-index levels
 *  9999 = .vex-theme-bottom-right-corner.alert .vex-content
 *  9999 = .vex-content
 
-* 10000 = .close-search (max-width: 768px)
 * 10000 = .most-front ???
 
 // beyond crazy
@@ -142,6 +130,15 @@ z-index levels
 
 @import 'redesign/icons';
 @import 'libs/icomoon_fame_2015/icons';
+
+// Base
+@import 'redesign/base/base';
+@import 'redesign/base/type';
+@import 'redesign/base/links';
+@import 'redesign/base/input-groups';
+@import 'redesign/base/forms';
+@import 'redesign/base/buttons';
+@import 'redesign/base/containers';
 
 @import 'redesign/layout';
 @import 'redesign/header';
@@ -188,12 +185,6 @@ z-index levels
 @import 'libs/jquery-ui-1.10.4.custom';
 @import 'redesign/vendor/jquery-ui';
 
-// Base
-@import 'redesign/base/type';
-@import 'redesign/base/forms';
-@import 'redesign/base/buttons';
-@import 'redesign/base/containers';
-
 // Layout
 @import 'redesign/layout/header';
 @import 'redesign/layout/nav-menu';
@@ -233,6 +224,7 @@ z-index levels
 @import 'redesign/pages/landing-page-v2';
 @import 'redesign/pages/landing-famingtonway';
 @import 'redesign/pages/advertise-page';
+@import 'redesign/pages/pdp';
 
 // Generic
 @import 'redesign/generic/content-order';
@@ -296,11 +288,6 @@ z-index levels
        border:2px solid white;
     }
   }
-}
-
-.btn-secondary {
-  background-color:#033649;
-  color:#FFFFFF;
 }
 
 h1.edit-title {

@@ -1,5 +1,12 @@
 /* [Type]
 -------------------------------------------------------*/
+body {
+  font-size: 1.6em;
+  line-height: 1.6;
+  color: $c-neutral-12;
+  -webkit-font-smoothing: antialiased;
+}
+
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   text-transform: uppercase;
@@ -99,6 +106,20 @@ blockquote {
       font-size: 1.25em;
     }
 
+  }
+
+}
+
+// TODO: redo this legacy title
+.page-title--details {
+  padding: 60px 0 55px 0;
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 99;
+
+  h1 {
+    margin-top: 0;
   }
 
 }

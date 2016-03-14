@@ -1,5 +1,17 @@
 /* [Dropdowns]
 -------------------------------------------------------*/
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 6px solid;
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+  color: #CCCCCC;
+}
+
 .dropdown-moodboard {
   width: 100%;
 
@@ -38,4 +50,10 @@
 
   }
 
+}
+
+.open > .dropdown-menu {
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-box-shadow: none;
 }

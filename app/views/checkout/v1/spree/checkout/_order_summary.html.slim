@@ -28,7 +28,7 @@ ruby:
   ul.cart-items
     - (cart.products || []).each do |product|
       li.cart-item data-id=(product.line_item_id)
-        a.remove-product.fa.fa-close.pull-right.link-grey href="#0"
+        a.remove-product.fa.fa-close.pull-right href="#0"
         - if product.name != "Gift"
           .cart-item-image-holder.pull-left
             = link_to collection_product_path(product) do
