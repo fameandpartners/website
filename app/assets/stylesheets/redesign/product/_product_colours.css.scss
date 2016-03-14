@@ -226,6 +226,7 @@ $product-color-wine:            #831c2e;
 .color-dusty-pink              { background-color: $product-color-dusty-pink; }
 .color-electric-blue           { background-color: $product-color-electric-blue; }
 .color-emerald-green           { background-color: $product-color-emerald-green; }
+.color-feather-love            { @include image-color-selector('FeatherLove.png'); }
 .color-flamingo-pink           { background-color: $product-color-flamingo-pink; }
 .color-floral-dreamer          { @include image-color-selector('FloralDreamer.png'); }
 .color-fluoro-orange           { background-color: $product-color-fluoro-orange; }
@@ -283,6 +284,7 @@ $product-color-wine:            #831c2e;
 .color-ocean                   { background-color: $product-color-ocean; }
 .color-off-white               { background-color: $product-color-off-white; }
 .color-olive                   { background-color: $product-color-olive; }
+.color-olive-shimmer           { @include image-color-selector('OliveShimmer.png'); }
 .color-orange                  { background-color: $product-color-orange; }
 .color-pale-blue               { background-color: $product-color-pale-blue; }
 .color-pale-green              { background-color: $product-color-pale-green; }
@@ -290,6 +292,7 @@ $product-color-wine:            #831c2e;
 .color-pale-peach              { background-color: $product-color-pale-peach; }
 .color-pale-pink               { background-color: $product-color-pale-pink; }
 .color-pale-yellow             { background-color: $product-color-pale-yellow; }
+.color-palermo-floral          { @include image-color-selector('PalermoFloral.png'); }
 .color-peach                   { background-color: $product-color-peach; }
 .color-persian-green           { background-color: $product-color-persian-green; }
 .color-pine                    { background-color: $product-color-pine; }
@@ -303,6 +306,7 @@ $product-color-wine:            #831c2e;
 .color-purple-metal            { background-color: $product-color-purple-metal; }
 .color-red                     { background-color: $product_color-red; }
 .color-red-and-white           { @include split-color-selector($product-color-red, $product-color-white); }
+.color-rococo-floral           { @include image-color-selector('RococoFloral.png'); }
 .color-rose                    { background-color: $product-color-rose; }
 .color-rose-gold               { background-color: $product-color-rose-gold; }
 .color-rosebud                 { @include image-color-selector('Rosebud.png'); }
