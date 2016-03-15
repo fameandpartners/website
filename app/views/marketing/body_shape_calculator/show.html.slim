@@ -3,15 +3,256 @@ html
   head
     title Body Shape Calculator | Fame & Partners
     link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"
+    link rel="stylesheet" type="text/css" href="assets/bower_components/switchery/dist/switchery.min.css"
+    link rel="stylesheet" type="text/css" href="assets/standalone/body_type_finder/style.css"
+  body
+    .page-wrap
+      .outer-wrap
+        .inner-wrap
+
+          header
+            h1.heading Body type finder
+            span.sub-heading Input the measures below to find out the Body Type
+
+          .result-wrap
+
+            // screen 1
+            .inner-wrap.js-screen-1
+              .media-wrap.img-siluet
+                = image_tag "standalone/body_type_finder/siluet.png"
+
+            // screen 2
+            .inner-wrap.cust-results.hidden.js-screen-2
+
+              h3.heading Customer results
+
+              .row
+                .col-xs-5.col-sm-5
+                  table
+                    tr
+                      td Bust
+                      td.js-result-bust
+                    tr
+                      td Underbust
+                      td.js-result-underbust
+                    tr
+                      td Waist
+                      td.js-result-waist
+                    tr
+                      td Hips
+                      td.js-result-hips
+                .col-xs-2.col-sm-2
+                  .media-wrap
+                    = image_tag "standalone/body_type_finder/bodyshape-base.png"
+                .col-xs-5.col-sm-5
+                  .results
+                    span Your Body Type is
+                    h3.heading.js-result-type
+
+              .row.controls-wrap
+                .col-xs-6.col-sm-6
+                  .form-group.form-group-btn
+                    input.btn.btn-secondary.btn-lg.btn-block type="button" value="Copy"
+                .col-xs-6.col-sm-6
+                  .form-group.form-group-btn
+                    input.btn.btn-primary.btn-lg.btn-block type="button" value="Share measurements"
+
+          form.clearfix.form-wrap.measurements-form.js-measurements-form
+            .clearfix
+              .form-group.form-group-heading
+                h2.heading Add / Edit Measurements
+              .form-group.form-group-heading
+                .switch-wrap
+                  label.checkbox-label for="switch-units" inches
+                  input#switch-units.js-switch type="checkbox" name="switch-units"
+                  label.checkbox-label for="switch-units" cm
+            .form-group
+              label for="bust" Bust
+              input#bust.form-control type="text" required="required" value="78"
+            .form-group
+              label for="underbust" Underbust
+              input#underbust.form-control type="text" value="66"
+            .form-group
+              label for="waist" Waist
+              input#waist.form-control type="text" value="60"
+            .form-group
+              label for="hips" Hips
+              input#hips.form-control type="text" value="84"
+            .form-group.form-group-btn
+              input.btn.btn-primary.btn-lg.btn-block.js-trigger-generater type="button" value="Generate body shape"
+            .form-group.form-group-btn
+              input.btn.btn-secondary.btn-lg.btn-block type="reset" value="Reset"
+
     script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"
     script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"
-  body
-    .container
-      .jumbotron
-        h1 data-toggle="tooltip" data-placement="bottom" title="Awesome!"
-          | Awesome Calculator
+    script type="text/javascript" src="assets/bower_components/switchery/dist/switchery.min.js"
 
-  javascript:
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip();
-    });
+    javascript:
+      (function ($) {
+        
+        // create iOS like switch boxes
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        elems.forEach(function(el) {
+          var switchery = new Switchery(el, {
+            color: '#000',
+            secondaryColor: '#000',
+            jackColor: '#fff',
+            size: 'large'
+          });
+        });
+
+        $('.js-trigger-generater').on('click', function() {
+
+          var result;
+          var bodyShape;
+          var dataOb = new Object();
+          var units = 'cm';
+          var bust = $('#bust').val();
+          var underbust = $('#underbust').val();
+          var waist = $('#waist').val();
+          var hips = $('#hips').val();
+
+          if (!$('#switch-units').is(':checked')) {
+            bust = convert_to_cm(bust);
+            underbust = convert_to_cm(underbust);
+            waist = convert_to_cm(waist);
+            hips = convert_to_cm(hips);
+            units = 'inches';
+          }
+
+          user_measurements.bust_circumference = bust;
+          user_measurements.under_bust_circumference = underbust;
+          user_measurements.waist_circumference = waist;
+          user_measurements.hip_circumference = hips;
+
+          result = calculate_body_match(user_measurements);
+          bodyShape = (result === undefined || result === null) ? 'unknown' : result.name;
+
+          $('.js-result-type').html(bodyShape);
+          $('.js-result-bust').html(bust + ' ' + units);
+          $('.js-result-underbust').html(underbust  + ' ' + units);
+          $('.js-result-waist').html(waist  + ' ' + units);
+          $('.js-result-hips').html(hips  + ' ' + units);
+
+          $('.js-screen-1').addClass('hidden');
+          $('.js-screen-2').removeClass('hidden');
+
+          dataOb.email = 'test@test.com';
+          dataOb.shape = bodyShape;
+          dataOb.size = 0; //TODO: do we need to capture this?
+          dataOb.bust_circumference = bust;
+          dataOb.under_bust_circumference = underbust;
+          dataOb.waist_circumference = waist;
+          dataOb.hip_circumference = hips;
+          //TODO: add units
+
+          $.ajax({
+            url: '/body-shape-calculator/store-measures.json',
+            method: 'POST',
+            dataType: 'json',
+            data: JSON.parse('{"body_calculator_measure":' + JSON.stringify(dataOb) + '}')
+          });
+
+        });
+
+        // This algorithm will show how shapes and sizes are used to calculate an user shape.
+        // Remember to consider match tolerance around sizes
+        var Shape = function (opts) {
+          this.name                     = opts.name;
+          this.bust_circumference       = opts.bust_circumference || 0;
+          this.under_bust_circumference = opts.under_bust_circumference || 0;
+          this.waist_circumference      = opts.waist_circumference || 0;
+          this.hip_circumference        = opts.hip_circumference || 0;
+        };
+
+        var Size = function (opts) {
+          this.presentation    = opts.presentation || "US 0/AU 4";
+          this.match_tolerance = opts.match_tolerance || 0;
+          this.shapes          = opts.shapes || [];
+        };
+
+        // Fixture data. Just for example :)
+        var size_0_classic_hourglass_shape = new Shape({
+          name:                     "Hour Glass",
+          bust_circumference:       78,
+          under_bust_circumference: 66,
+          waist_circumference:      60,
+          hip_circumference:        84
+        });
+
+        var size_0_pear_shape = new Shape({
+          name:                     "Pear",
+          bust_circumference:       75,
+          under_bust_circumference: 65,
+          waist_circumference:      60,
+          hip_circumference:        91
+        });
+
+        var size_0 = new Size({
+          presentation:    "US 0/AU 4",
+          match_tolerance: 1.25,
+          shapes:          [size_0_classic_hourglass_shape, size_0_pear_shape]
+        });
+
+        var size_2_classic_hourglass_shape = new Shape({
+          name:                     "Hour Glass",
+          bust_circumference:       80.5,
+          under_bust_circumference: 68.5,
+          waist_circumference:      62.5,
+          hip_circumference:        86.5
+        });
+
+        var size_2_pear_shape = new Shape({
+          name:                     "Pear",
+          bust_circumference:       77.5,
+          under_bust_circumference: 67.5,
+          waist_circumference:      62.5,
+          hip_circumference:        93.5
+        });
+
+        var size_2 = new Size({
+          presentation:    "US 2/AU 6",
+          match_tolerance: 1.25,
+          shapes:          [size_2_classic_hourglass_shape, size_2_pear_shape]
+        });
+
+        var sizes = [size_0, size_2];
+
+        var user_measurements = {
+          bust_circumference:       78,
+          under_bust_circumference: 66,
+          waist_circumference:      60,
+          hip_circumference:        84
+        };
+
+        function measure_fits_user(user_measure, shape_measure, match_tolerance) {
+          var top_limit    = shape_measure + match_tolerance;
+          var bottom_limit = shape_measure - match_tolerance;
+          return user_measure >= bottom_limit && user_measure <= top_limit
+        }
+
+        function match_measurement(user_measurements, shape, size) {
+          var match_tolerance = size.match_tolerance;
+          return (
+            measure_fits_user(user_measurements.bust_circumference, shape.bust_circumference, match_tolerance) &&
+            measure_fits_user(user_measurements.under_bust_circumference, shape.under_bust_circumference, match_tolerance) &&
+            measure_fits_user(user_measurements.waist_circumference, shape.waist_circumference, match_tolerance) &&
+            measure_fits_user(user_measurements.hip_circumference, shape.hip_circumference, match_tolerance)
+          )
+        }
+
+        function calculate_body_match(user_measurements) {
+          return sizes
+            .reduce(function (size) {
+              return size.shapes
+                .find(function (shape) {
+                  return match_measurement(user_measurements, shape, size)
+                });
+            });
+        }
+
+        function convert_to_cm(val) {
+          return (val * 2.54).toFixed(1);
+        }
+
+      })(jQuery);
