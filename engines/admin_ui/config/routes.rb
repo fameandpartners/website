@@ -39,14 +39,15 @@ AdminUi::Engine.routes.draw do
 
   namespace :reports do
     root to: 'dashboard#index'
-    resource :product_numbers,        :only => [:show, :create]
-    resource :payments,               :only => [:show, :create]
-    resource :sale_items,             :only => [:show, :create]
-    resource :coupon_adjusted_orders, :only => [:show, :create]
-    resource :order_totals,           :only => [:show, :create]
-    resource :return_shoppers,        :only => [:show, :create]
-    resource :factory_faults,         :only => [:show, :create]
-    resource :size_normalisations,    :only => [:show]
+    resource :body_shape_calculator_results, only: [:show, :create]
+    resource :coupon_adjusted_orders       , only: [:show, :create]
+    resource :factory_faults               , only: [:show, :create]
+    resource :order_totals                 , only: [:show, :create]
+    resource :payments                     , only: [:show, :create]
+    resource :product_numbers              , only: [:show, :create]
+    resource :return_shoppers              , only: [:show, :create]
+    resource :sale_items                   , only: [:show, :create]
+    resource :size_normalisations          , only: [:show]
   end
 
   resources :variants

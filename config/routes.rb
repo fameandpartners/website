@@ -430,6 +430,11 @@ FameAndPartners::Application.routes.draw do
     get 'footer'   => 'site_navigations#footer'
   end
 
+  scope '/body-shape-calculator' do
+    get '/' => 'marketing/body_shape_calculator#show'
+    post '/store-measures' => 'marketing/body_shape_calculator#store_measures'
+  end
+
   ##############
   # Admin routes
   ##############
