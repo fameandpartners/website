@@ -8,38 +8,21 @@ $fg-screen-sm: 480px;
 
   .vex-overlay { background: none;}
 
-  .vex-dialog-message{
-    .row:first-child{
-      height: 690px;
-    }
-  }
   .vex-content {
-    @include mobile{
-      height: 1400px;
-    }
-    @include iphone5{
-      height: 920px;
-    }
-    @include iphone6{
-      height: 960px;
-    }
-    @include iphone6p{
-      height: 990px;
-    }
-    @include tablet{
-      height: 1520px;
-    }
     width: 96%;
     max-width: 1230px;
     min-height: 600px;
-    background: url('_popups/fit-guide-bg-desktop-Mar-8.jpg') left top no-repeat #e7e6e5;
+    background: url('_popups/fit-guide-bg-desktop-Mar-8.jpg') left top no-repeat $c-classic-modal-bg;
     background-size: cover;
-    @media (max-width: $fg-screen-lg) {
-      background: #e7e6e5;
-      width: auto;
-      margin-left: 10px;
-      margin-right: 10px;
+
+    @media (max-width: $bootstrap-lg-width - 1px) {
+      width: 100%;
     }
+
+    @media (max-width: $bootstrap-md-width - 1px) {
+      background: $c-classic-modal-bg;
+    }
+
   }
 
   .vex-dialog-buttons {
@@ -70,14 +53,20 @@ $fg-screen-sm: 480px;
     line-height: 1.4;
   }
 
+  .mob-image-wrap {
+    padding: 0;
+  }
+
   .square {
     height: 0;
     width: 100%;
     padding-bottom: 100%;
-    @media (max-width: $fg-screen-lg) {
+
+    @media (max-width: $bootstrap-md-width - 1px) {
       background: url('_popups/fit-guide-bg-phone-Mar-8.jpg')no-repeat;
       background-size: cover;
     }
+
   }
 
   .row {
@@ -125,17 +114,23 @@ $fg-screen-sm: 480px;
   }
 
   .fit-guide-text {
-    padding: 20px 20px 20px 50px;
-    @media (max-width: $fg-screen-lg) {
-      padding: 20px 10px 10px;
+    padding: 20px 0;
+
+    em a {
+      color: inherit;
+      margin-left: 3px;
+      text-decoration: underline;
     }
-    em{
-      a {
-        color: inherit;
-        margin-left: 3px;
-        text-decoration: underline;
-      }
+
+    @media (max-width: $bootstrap-lg-width - 1px) {
+      padding-left: 50px;
     }
+
+    @media (max-width: $bootstrap-md-width - 1px) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
   }
 
   .size-guide {
@@ -182,4 +177,13 @@ $fg-screen-sm: 480px;
       font-size: 9px;
     }
   }
+
+}
+
+@media (max-width: $bootstrap-lg-width - 1px) {
+
+  .vex.vex-theme-flat-attack.fit-guide-dialog {
+    padding: 0;
+  }
+
 }
