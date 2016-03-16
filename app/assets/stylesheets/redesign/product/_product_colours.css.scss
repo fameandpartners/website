@@ -112,6 +112,7 @@ $product-color-lavender:        #ba8cd3;
 $product-color-lemon-sorbet:    #ffff99;
 $product-color-lemon:           #f2e983;
 $product-color-light-blue:      #66ccff;
+$product-color-light-gold:      #d6c554;
 $product-color-light-nude:      #e2c7bc;
 $product-color-light-pink:      #f9e2e1;
 $product-color-light-teal:      #12a3b2;
@@ -257,6 +258,7 @@ $product-color-wine:            #831c2e;
 .color-lemon                   { background-color: $product-color-lemon; }
 .color-lemon-sorbet            { background-color: $product-color-lemon-sorbet; }
 .color-light-blue              { background-color: $product-color-light-blue; }
+.color-light-gold              { background-color: $product-color-light-gold; }
 .color-light-nude              { background-color: $product-color-light-nude; }
 .color-light-pink              { background-color: $product-color-light-pink; }
 .color-light-pink-and-charcoal { @include split-color-selector($product-color-light-pink, $product-color-charcoal); }
