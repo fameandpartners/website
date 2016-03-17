@@ -25,9 +25,9 @@ module Bergen
     def authenticate
       # We require the string keys as they literally interpolated to the XML.
       authentication_hash = {
-        "WebAddress!" => credentials.account_id,
-        "UserName"    => credentials.username,
-        "Password"    => credentials.password
+        'WebAddress!' => credentials.account_id,
+        'UserName'    => credentials.username,
+        'Password'    => credentials.password
       }
 
       response = client.request :authentication_token_get do
@@ -152,13 +152,11 @@ module Bergen
     end
   end
 
-  Credentials = Struct.new(:account_id, :username, :password, :environment) do
+  Credentials = Struct.new(:account_id, :username, :password) do
     def self.fetch_default
       new(config.account_id,
           config.username,
-          config.password,
-          (Rails.env.production? ? :production : :staging)
-      )
+          config.password)
     end
 
     def self.config
