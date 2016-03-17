@@ -1,11 +1,5 @@
 # Note that this uses the Savon 1.2 API.
 
-Savon.configure do |config|
-  config.log = true
-  config.log_level = :debug
-end
-
-
 module Bergen
   class Service
 
