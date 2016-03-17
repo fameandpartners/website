@@ -23,17 +23,18 @@
 
 // Desktop
 #gray-top-banner {
-  background-color: #f5f5f5 ;
+  background-color: $c-neutral-black;
   height: 25px;
   padding-top: 4px;
   font-weight: 500;
 
   div{
     padding-top: 0;
+    color: white;
   }
   #account-area{
     .icon-heart{
-      color: $c-neutral-black;
+      color: $c-neutral-white;
       position: absolute;
       margin-top: 3px;
       margin-left: -15px;

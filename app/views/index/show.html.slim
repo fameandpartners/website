@@ -17,25 +17,6 @@ ruby:
               http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_images[:small]} 768w,
               http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_images[:full]} 1024w"
 
-
-  section.container
-    .row
-      .col-md-12
-        .h2.title-line-on-sides
-          .inner-wrap AS SEEN IN
-      .col-md-12
-        .as-seen-in-partners
-          img.refinery29 alt='Refinery29'    src='/assets/footer/publisher/refinery29.png'
-          img.elle       alt='Elle'          src='/assets/footer/publisher/elle.png'
-          img.marie      alt='Marie'         src='/assets/footer/publisher/marie.png'
-          img.russh      alt='Russh'         src='/assets/footer/publisher/russh.png'
-          img.glamour    alt='Glamour'       src='/assets/footer/publisher/glamour.png'
-          img.wwd        alt='WWD'           src='/assets/footer/publisher/wwd.png'
-          img.teen       alt='Teenvogue'     src='/assets/footer/publisher/teen.png'
-          img.popsugar   alt='Popsugar'      src='/assets/footer/publisher/popsugar.png'
-          img.nylon      alt='Nylon'         src='/assets/footer/publisher/nylon.png'
-          img.cosmo      alit='Cosmopolitan' src='/assets/footer/publisher/cosmo.png'
-
   /! Content Section
   section.container.content-block.home-main-content
     .row
@@ -74,6 +55,29 @@ ruby:
                     {link: link_to_dresses + '/dress-akshara-two-piece-617?color=gypsy-scarf', src: '/assets/homepage/instagram/No8_Jeska.jpg', user: '@jeskaalee', cta: "Shop the Akshara Look"},
                     {link: link_to_dresses + '/dress-from-above-518?color=burgundy', src: '/assets/homepage/instagram/No9_Natalia.jpg', user: '@nathalieparis', cta: "Shop the From Above Look"},
                     {link: link_to_dresses + '/dress-midnight-ryder-648?color=black', src: '/assets/homepage/instagram/No10_Friend.jpg', user: '@friendsinfashion', cta: "Shop the Midnight Ryder Look"}])
+                    
+                    
+                    
+  section.container
+    .row
+      .col-md-12
+        .h2.title-line-on-sides
+          .inner-wrap AS SEEN IN
+      .col-md-12
+        .as-seen-in-partners
+          img.refinery29 alt='Refinery29'    src='/assets/footer/publisher/refinery29.png'
+          img.elle       alt='Elle'          src='/assets/footer/publisher/elle.png'
+          img.marie      alt='Marie'         src='/assets/footer/publisher/marie.png'
+          img.russh      alt='Russh'         src='/assets/footer/publisher/russh.png'
+          img.glamour    alt='Glamour'       src='/assets/footer/publisher/glamour.png'
+          img.wwd        alt='WWD'           src='/assets/footer/publisher/wwd.png'
+          img.teen       alt='Teenvogue'     src='/assets/footer/publisher/teen.png'
+          img.popsugar   alt='Popsugar'      src='/assets/footer/publisher/popsugar.png'
+          img.nylon      alt='Nylon'         src='/assets/footer/publisher/nylon.png'
+          img.cosmo      alit='Cosmopolitan' src='/assets/footer/publisher/cosmo.png'
+
+
+
   /! Email Subscription
   = render 'shared/redesign/newsletter_signup'
 
