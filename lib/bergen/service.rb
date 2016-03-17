@@ -4,8 +4,8 @@ module Bergen
   class Service
 
     AVAILABLE_WSDLS = {
-      production: 'lib/bergen/wsdl/production.publicapiws.asmx.xml',
-      staging:    'lib/bergen/wsdl/staging.publicapiws.asmx.xml',
+      production: 'https://sync.rex11.com/ws/v3prod/publicapiws.asmx?WSDL',
+      staging:    'http://sync.rex11.com/ws/v2staging/publicapiws.asmx?WSDL',
     }
 
     attr_reader :credentials
@@ -139,12 +139,11 @@ module Bergen
 
 
     def client
-      @client ||= Savon.client(wsdl_file.to_s)
+      @client ||= Savon.client(wsdl_file)
     end
 
     def wsdl_file
-      local_wsdl = AVAILABLE_WSDLS.fetch(environment, AVAILABLE_WSDLS[:staging])
-      Rails.root.join(local_wsdl)
+      AVAILABLE_WSDLS.fetch(environment, AVAILABLE_WSDLS[:staging])
     end
 
     def environment
