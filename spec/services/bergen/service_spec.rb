@@ -3,14 +3,13 @@ require 'spec_helper'
 
 module Bergen
   RSpec.describe Service do
+    let(:service) { described_class.new }
 
     describe 'calling test API' do
-      let(:service) { described_class.new }
+      pending
     end
 
     context 'Bergen API versions' do
-      let(:service) { described_class.new }
-
       let(:known_staging_methods) {
         [
           :authentication_token_get,
@@ -50,23 +49,17 @@ module Bergen
         end
 
         it 'finds the staging endpoint' do
-          expect(service.client.wsdl.endpoint).to eq(
-            URI.parse('http://sync.rex11.com/ws/v3staging/publicapiws.asmx')
-          )
+          uri_endpoint = URI.parse('http://sync.rex11.com/ws/v3staging/publicapiws.asmx')
+          expect(service.client.wsdl.endpoint).to eq(uri_endpoint)
         end
 
       end
 
       describe 'production' do
+        let(:known_production_methods) { known_staging_methods - [:get_product_quantities_by_upc] }
 
-        let(:known_production_methods) {
-          known_staging_methods - [:get_product_quantities_by_upc]
-        }
-
-        before do
-          def service.environment
-            :production
-          end
+        before(:each) do
+          allow(service).to receive(:environment).and_return(:production)
         end
 
         it 'correctly loads wsdl methods' do
@@ -74,9 +67,8 @@ module Bergen
         end
 
         it 'finds the production endpoint' do
-          expect(service.client.wsdl.endpoint).to eq(
-            URI.parse('https://sync.rex11.com/ws/v3prod/publicapiws.asmx')
-          )
+          uri_endpoint = URI.parse('https://sync.rex11.com/ws/v3prod/publicapiws.asmx')
+          expect(service.client.wsdl.endpoint).to eq(uri_endpoint)
         end
       end
     end
