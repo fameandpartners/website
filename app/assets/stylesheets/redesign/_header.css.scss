@@ -240,7 +240,7 @@ header {
   color: #355e6d;
 }
 
-.nav-menu .primary, 
+.nav-menu .primary,
 .nav-menu .secondary {
   display: block;
   list-style: none;
@@ -1068,7 +1068,7 @@ ul.secondary.pull-right {
 .nav-menu-container{
   .moodboards-area, .my-account{
     text-decoration: none;
-    color: black;
+    color: $c-neutral-white;
   }
   #home-menu{
     a{
