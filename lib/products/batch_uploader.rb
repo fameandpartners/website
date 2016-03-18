@@ -565,7 +565,7 @@ module Products
 
       product.product_color_values.where(custom: false).each do |p|
         p 'haha1',recommended_colors.pluck(:id), 'haha2', p.option_value_id
-        if !recommended_colors.pluck(:id).include?(p.option_value_id)
+        if !recommended_colors.include?(p.option_value_id)
           p.destroy!
         end
       end
