@@ -564,9 +564,7 @@ module Products
       end
 
       product.product_color_values.where(custom: false).each do |p|
-        if !recommended_colors.collect(&:id).include?(p.option_value_id)
-          p.destroy
-        end
+        p.destroy if !recommended_colors.collect(&:id).include?(p.option_value_id)
       end
     end
 
