@@ -562,9 +562,8 @@ module Products
       recommended_colors.map do |recommended|
         product.product_color_values.where(option_value_id: recommended.id, custom: false).first_or_create
       end
-      p 'haha1',recommended_colors.collect(&:id)
+
       product.product_color_values.where(custom: false).each do |p|
-        p 'haha2', p.option_value_id
         if !recommended_colors.collect(&:id).include?(p.option_value_id)
           p.destroy
         end
