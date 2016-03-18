@@ -562,6 +562,13 @@ module Products
       recommended_colors.map do |recommended|
         product.product_color_values.where(option_value_id: recommended.id, custom: false).first_or_create
       end
+
+      product.product_color_values.where(custom: false).each do |p|
+        p 'haha1',recommended_colors.pluck(:id), 'haha2', p.option_value_id
+        if !recommended_colors.pluck(:id).include?(p.option_value_id)
+          p.destroy!
+        end
+      end
     end
 
     def add_product_variants(product, sizes, colors, price_in_aud, price_in_usd)
