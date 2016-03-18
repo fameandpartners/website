@@ -65,7 +65,7 @@ module SizeChart
 
   SIZE_CHART_2014 = self.size_chart_2014.freeze
   SIZE_CHART_2015 = self.size_chart_2015.freeze
-  DEFAULT_CHART   = SIZE_CHART_2014
+  DEFAULT_CHART   = SIZE_CHART_2015
 
   CHARTS = {
     '2014' => SIZE_CHART_2014,
