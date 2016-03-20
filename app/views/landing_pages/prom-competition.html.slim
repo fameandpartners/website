@@ -19,15 +19,15 @@
           .col-md-12
             h1.heading
               span #PARTNERSINCRIME
-              span at Coachella
+              span VIP Trip to Los Angeles
   .container
     .row
       .col-md-12
-        h2.heading-v1 Two lucky duos will be selected and flown to Los Angeles for the VIP Coachella Experience - complete with personal celebrity stylist to prepare your head-to-toe F&P wardrobe and a professional photoshoot.
+        h2.heading-v1 One lucky duo will be flown to LA to strut the red carpet like a VIP for the Nylon Young Hollywood Party. Get outfitted in the latest Fame and Partners collection, be prepped by an industry stylist and capture the moment with an editorial-style photoshoot.
 
     .row.section-1
       .col-md-3
-        = link_to make_a_statement_collection_path, class: "panel-compact"
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/flights.jpg"
@@ -36,45 +36,38 @@
             p All inclusive flights from wherever you are in the world
 
       .col-md-3
-        = link_to luxe_collection_path, class: "panel-compact"
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/dress.jpg"
           .copy-wrap
-            .heading Dresses to impress
-            p Celebrity stylist XX will prepare your head-to-toe oufits
+            .heading Make The Best Dressed
+            p Be professionally styled head to toe in the latest Fame and Partners collection
       .col-md-3
-        = link_to bridesmaid_collection_path, class: "panel-compact"
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/off-to-coachella.jpg"
           .copy-wrap
-            .heading Off to Coachella
-            p Celebrity stylist XX will prepare your head-to-toe oufits
+            .heading Be a VIP
+            p Access to the Nylon Young Hollywood Party
       .col-md-3
-        = link_to photo_finish_collection_path, class: "panel-compact"
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/photo-ready.jpg"
           .copy-wrap
-            .heading Photo ready
-            p Enjoy your very own prefessional photoshoot with XX
+            .heading The Model Life
+            p Live the dream with an industry-level personal photo shoot
 
     .row
       .col-md-12
         h2.heading-v2
           span HOW TO ENTER
-          span.sub-heading Simply post a photo on Instagram & follow these simple
+          span.sub-heading Post a photo of you and your partner in crime on Instagram, tag with #partnersincrime and @fameandpartners between 3/21/2016 and 4/15/2016
 
-    .row.how-to-enter.mobile-change-order
-      .col-md-6.position-2
-        h3 ONE
-        p SHOUT OUT TO WHAT INSPIRES YOU
-        h3 TWO
-        p LOOP YOURSELF IN WITH<br>#PARTNERSINCRIME
-        h3 THREE
-        p LET US KNOW WHO YOU ARE WITH<br>@FAMEANDPARTNERS
-      .col-md-6.position-1
+    .row.how-to-enter
+      .col-md-6.col-md-offset-3
         .media-wrap
           = image_tag "landingpages/prom-competition/collection.jpg"
 
@@ -113,49 +106,49 @@
       .col-md-12
         h2.heading-v2
           span THE FAME GUARENTEE
-          span.sub-heading We start by giving you the power to customize the dress the way you want it.
+          span.sub-heading We give you the power to customize a dress the way you want it.
 
     .row.section-1
       .col-md-3
-        = link_to make_a_statement_collection_path, class: "panel-compact"
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/tile-9.jpg"
           .copy-wrap
-            .heading QUALITY CRAFTSMANSHIP
-            p A timeless quality atelier service
+            .heading Quality Craftsmanship
+            p Bespoke atelier service
 
       .col-md-3
-        = link_to luxe_collection_path, class: "panel-compact"
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/tile-10.jpg"
           .copy-wrap
-            .heading PERSONALIZED FIT
-            p A dress specifically tailored to you
+            .heading Personalized Fit
+            p A dress tailored only to you
       .col-md-3
-        = link_to bridesmaid_collection_path, class: "panel-compact"
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/tile-11.jpg"
           .copy-wrap
-            .heading CUSTOM COLORS
-            p Hundreds of fabrics to choose from
+            .heading Custom Colors
+            p Choose from a huge suite of options
       .col-md-3
-        = link_to photo_finish_collection_path, class: "panel-compact"
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/tile-12.jpg"
           .copy-wrap
-            .heading LOW WASTE PRODUCTION
-            p Every garment is made to order
+            .heading Low Waste Production
+            p Singular garments is made to order
 
   .join-heading-wrap
     .container
       .row
         .col-md-12
           h2.heading-v2
-            span JOIN US
+            span GET THE FAME TREATMENT
   /! Email Subscription
   = render 'shared/redesign/newsletter_signup'
 
