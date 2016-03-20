@@ -563,9 +563,7 @@ module Products
         product.product_color_values.where(option_value_id: recommended.id, custom: false).first_or_create
       end
 
-      product.product_color_values.where(custom: false).each do |p|
-        p.destroy if !recommended_colors.collect(&:id).include?(p.option_value_id)
-      end
+      product.product_color_values.where(custom: false).where('option_value_id NOT IN (?)', recommended_colors.map(&:id)).destroy_all
     end
 
     def add_product_variants(product, sizes, colors, price_in_aud, price_in_usd)
