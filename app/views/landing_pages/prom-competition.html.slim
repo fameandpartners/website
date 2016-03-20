@@ -3,3 +3,206 @@
 = render :partial => '/products/collections/javascript'
 
 .landing-page-prom-competition
+
+  // hero section
+  .hero-wrap
+    picture.media-wrap.keep-ratio
+      .inner-wrap
+        source media='(max-width: 768px)' srcset='#{image_path("landingpages/prom-competition/hero-mob.jpg")}'
+        source media='(min-width: 769px)' srcset='#{image_path("landingpages/prom-competition/hero-full.jpg")}'
+        img src='#{image_path("landingpages/prom-competition/hero-full.jpg")}' srcset='
+          #{image_path("landingpages/prom-competition/hero-mob.jpg")} 768w,
+          #{image_path("landingpages/prom-competition/hero-full.jpg")} 1024w' alt='background image'
+    .content-wrap
+      .container
+        .row
+          .col-md-12
+            h1.heading
+              span #PARTNERSINCRIME
+              span at Coachella
+  .container
+    .row
+      .col-md-12
+        h2.heading-v1 Two lucky duos will be selected and flown to Los Angeles for the VIP Coachella Experience - complete with personal celebrity stylist to prepare your head-to-toe F&P wardrobe and a professional photoshoot.
+
+    .row.section-1
+      .col-md-3
+        = link_to make_a_statement_collection_path, class: "panel-compact"
+          .media-wrap.keep-ratio
+            .inner-wrap
+              = image_tag "landingpages/prom-competition/flights.jpg"
+          .copy-wrap
+            .heading Flights to Los Angeles
+            p All inclusive flights from wherever you are in the world
+
+      .col-md-3
+        = link_to luxe_collection_path, class: "panel-compact"
+          .media-wrap.keep-ratio
+            .inner-wrap
+              = image_tag "landingpages/prom-competition/dress.jpg"
+          .copy-wrap
+            .heading Dresses to impress
+            p Celebrity stylist XX will prepare your head-to-toe oufits
+      .col-md-3
+        = link_to bridesmaid_collection_path, class: "panel-compact"
+          .media-wrap.keep-ratio
+            .inner-wrap
+              = image_tag "landingpages/prom-competition/off-to-coachella.jpg"
+          .copy-wrap
+            .heading Off to Coachella
+            p Celebrity stylist XX will prepare your head-to-toe oufits
+      .col-md-3
+        = link_to photo_finish_collection_path, class: "panel-compact"
+          .media-wrap.keep-ratio
+            .inner-wrap
+              = image_tag "landingpages/prom-competition/photo-ready.jpg"
+          .copy-wrap
+            .heading Photo ready
+            p Enjoy your very own prefessional photoshoot with XX
+
+    .row
+      .col-md-12
+        h2.heading-v2
+          span HOW TO ENTER
+          span.sub-heading Simply post a photo on Instagram & follow these simple
+
+    .row.how-to-enter.mobile-change-order
+      .col-md-6.position-2
+        h3 ONE
+        p SHOUT OUT TO WHAT INSPIRES YOU
+        h3 TWO
+        p LOOP YOURSELF IN WITH<br>#PARTNERSINCRIME
+        h3 THREE
+        p LET US KNOW WHO YOU ARE WITH<br>@FAMEANDPARTNERS
+      .col-md-6.position-1
+        .media-wrap
+          = image_tag "landingpages/prom-competition/collection.jpg"
+
+    .row
+      .col-md-12
+        h2.heading-v3
+          span #PARTNERSINCRIME
+          span.sub-heading Partners In Crime is the story of eight New York-based, real life girls and their partners in crime. Embracing the diversity and creativity of modern friendship, the campaign celebrates the bonds one makes in life and the adventures that can be had together on a night out.
+
+    .row.section-story
+      .col-md-3
+        .panel-compact
+          .media-wrap
+            = image_tag "landingpages/prom-competition/tile-6.jpg"
+          .copy-wrap
+            .heading NATALIE SAUREZ & RYAN ULSH
+            p Some copy here about the specific relationship of this couple
+      .col-md-6
+        .panel-compact
+          .media-wrap
+            = image_tag "landingpages/prom-competition/tile-7.jpg"
+          .copy-wrap
+            .heading NATALIE SAUREZ & RYAN ULSH
+            p Some copy here about the specific relationship of this couple
+      .col-md-3
+        .panel-compact
+          .media-wrap
+            = image_tag "landingpages/prom-competition/tile-8.jpg"
+          .copy-wrap
+            .heading NATALIE SAUREZ & RYAN ULSH
+            p Some copy here about the specific relationship of this couple
+      .col-md-12.button-wrap
+        = link_to 'shop THE COLLECTION', collection_path, class: 'btn btn-lowlight btn-lg'
+
+    .row
+      .col-md-12
+        h2.heading-v2
+          span THE FAME GUARENTEE
+          span.sub-heading We start by giving you the power to customize the dress the way you want it.
+
+    .row.section-1
+      .col-md-3
+        = link_to make_a_statement_collection_path, class: "panel-compact"
+          .media-wrap.keep-ratio
+            .inner-wrap
+              = image_tag "landingpages/prom-competition/tile-9.jpg"
+          .copy-wrap
+            .heading QUALITY CRAFTSMANSHIP
+            p A timeless quality atelier service
+
+      .col-md-3
+        = link_to luxe_collection_path, class: "panel-compact"
+          .media-wrap.keep-ratio
+            .inner-wrap
+              = image_tag "landingpages/prom-competition/tile-10.jpg"
+          .copy-wrap
+            .heading PERSONALIZED FIT
+            p A dress specifically tailored to you
+      .col-md-3
+        = link_to bridesmaid_collection_path, class: "panel-compact"
+          .media-wrap.keep-ratio
+            .inner-wrap
+              = image_tag "landingpages/prom-competition/tile-11.jpg"
+          .copy-wrap
+            .heading CUSTOM COLORS
+            p Hundreds of fabrics to choose from
+      .col-md-3
+        = link_to photo_finish_collection_path, class: "panel-compact"
+          .media-wrap.keep-ratio
+            .inner-wrap
+              = image_tag "landingpages/prom-competition/tile-12.jpg"
+          .copy-wrap
+            .heading LOW WASTE PRODUCTION
+            p Every garment is made to order
+
+  .join-heading-wrap
+    .container
+      .row
+        .col-md-12
+          h2.heading-v2
+            span JOIN US
+  /! Email Subscription
+  = render 'shared/redesign/newsletter_signup'
+
+  .container
+    .row
+      .col-md-12.T-C-wrap
+        h2.heading-v2
+          span TERMS & CONDITIONS
+        p The campaign features eight distinct up and coming influencers with their own personal partner in crime. Fresh faces from diverse backgrounds including top blogger Natalie Suarez with her photographer Ryan Ulsh, Bronx based performer Renell Medrano and model Megan Gabrielle, and model Georgia Hilmer who names her camera as her closest collaborator. The campaign has plucked girls from the street to demonstrate that style and beauty is born from diversity and that everyone needs someone to lean on in life. Each duo was shot wearing their own custom- made Fame and Partners dress styled by Sarah Gore Reeves and photographed by Terry Tsiolis.
+
+  .shop-by-category
+    .container
+      .row
+        .col-md-12
+          h2.heading SHOP BY CATEGORY
+        .col-md-2.hidden-xs.hidden-sm
+        .col-md-2.col-xs-6
+          ul
+            li.title Shop by
+            li = link_to "Best Sellers", best_sellers_path
+            li = link_to "View all dresses", dresses_path
+            li = link_to "What's new", dresses_path(:order => 'newest')
+            - unless Features.active?(:getitquick_unavailable)
+              li = link_to 'Made in 48 hours', fast_making_dresses_path
+            li = link_to 'Plus Size', build_taxon_path('Plus Size')
+        .col-md-2.col-xs-6
+          ul
+            li.title Style
+            li = link_to 'Two-Piece'   , build_taxon_path('Two Piece')
+            li = link_to 'One Shoulder', build_taxon_path('One-Shoulder')
+            li = link_to 'Strapless'   , build_taxon_path('Strapless')
+            li = link_to 'Backless'    , build_taxon_path('Backless')
+            li = link_to "All Styles", dresses_path
+        .col-md-2.col-xs-6
+          ul
+            li.title Events
+            li = link_to 'Formal', build_taxon_path('Formal')
+            li = link_to 'Wedding', build_taxon_path('Wedding')
+            li = link_to 'Birthday', build_taxon_path('Birthday')
+            li = link_to 'Prom', build_taxon_path('Prom')
+            li = link_to "All Events", dresses_path
+        .col-md-2.col-xs-6
+          ul
+            li.title Color
+            li = link_to 'Red'          , colour_path('Red')
+            li = link_to 'Black'        , colour_path('Black')
+            li = link_to 'White'        , colour_path('White')
+            li = link_to 'Pastel'       , colour_path('Pastel')
+            li = link_to "All Colors", dresses_path
+        .col-md-2.hidden-xs.hidden-sm
