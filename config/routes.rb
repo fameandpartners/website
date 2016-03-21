@@ -152,7 +152,8 @@ FameAndPartners::Application.routes.draw do
 
     get '/lets-party'     => 'products/collections#show', :permalink => 'dance-hall', :as => :lets_party_collection
     get '/lookbook/love-lace-collection' => 'products/collections#show', :permalink => 'love-lace', :as => :love_lace_collection
-    get '/lookbook/just-the-girls' => 'products/collections#show', :permalink => 'just-the-girls', :as => :just_the_girls_collection
+    get '/lookbook/just-the-girls'       => 'products/collections#show', :permalink => 'just-the-girls', :as => :just_the_girls_collection
+    get '/lookbook/partners-in-crime'    => 'products/collections#show', :permalink => 'partners-in-crime', :as => :partners_in_crime_collection
 
     get '/all-size' => redirect('/lookbook/all-size')
     get '/lookbook/all-size' => 'products/collections#show', :permalink => 'all-size', :as => :all_size_collection
