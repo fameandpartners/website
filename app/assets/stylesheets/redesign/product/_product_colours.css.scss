@@ -91,7 +91,7 @@ $product-color-dark-tan:        #8c7362;
 $product-color-dark-teal:       #064a51;
 $product-color-deep-purple:     #370840;
 $product-color-dusty-peach:     #f7c6b0;
-$product-color-dusty-pink:      #dd83b9;
+$product-color-dusty-pink:      #ead0d4;
 $product-color-electric-blue:   #1f1fcc;
 $product-color-emerald-green:   #057545;
 $product-color-flamingo-pink:   #f9a7c4;
@@ -161,6 +161,7 @@ $product-color-shell:           #eadfce;
 $product-color-silver:          #d6d6d6;
 $product-color-sky-blue:        #c2e4f4;
 $product-color-sunset-orange:   #e83c25;
+$product-color-tan:             #AF8B72;
 $product-color-taupe:           #dbd2cc;
 $product-color-teal:            #085966;
 $product-color-turquoise:       #1bb2aa;
@@ -326,6 +327,7 @@ $product-color-wine:            #831c2e;
 .color-sunset-orange { background-color: $product-color-sunset-orange; }
 .color-surreal-floral-black    { @include image-color-selector('SurrealFloralBlack.png'); }
 .color-surreal-floral-white    { @include image-color-selector('SurrealFloralWhite.png'); }
+.color-tan                     { background-color: $product-color-tan; }
 .color-taupe                   { background-color: $product-color-taupe; }
 .color-teal                    { background-color: $product-color-teal; }
 .color-tribal-love             { @include image-color-selector('TribalLove.png'); }
