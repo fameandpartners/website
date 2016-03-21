@@ -37,10 +37,6 @@ module Orders
       line_items.count == 1
     end
 
-    def product
-      products.first
-    end
-
     def total_items
       items.sum &:quantity
     end

@@ -1,24 +1,14 @@
-- addthis_config = {}
-- if product = order.product
-  = render 'spree/products/product_meta', product: product
-  - addthis_config['addthis:url'] = spree.product_url(product)
-  - addthis_config['addthis:title'] = product.name
-  - addthis_config['addthis:description'] = product.description
-
-javascript:
-  var addthis_config = {"data_track_addressbar":true};
-
 ruby:
   successfully_ordered = session.delete(:successfully_ordered)
 
 .page-title.default.order
   .container
     .page-title--details
-        h1.no-padding-bottom.order
-          - if successfully_ordered
-            | Order Confirmation
-          - else
-            | Order
+      h1.no-padding-bottom.order
+        - if successfully_ordered
+          | Order Confirmation
+        - else
+          | Order
 
 .page-content.user.order.show
   .container.relative
@@ -78,14 +68,6 @@ ruby:
           - unless current_spree_user.blank?
             p
               button.btn.back-to-orders = link_to 'Your orders', user_orders_path, class: 'btn', remote: true
-        .row
-          p Share your purchase with your friends so no one buys the same dress for your event!
-          .social.addthis_toolbox.addthis_default_style *addthis_config
-            a.addthis_button_facebook_like fb:like:layout="button_count"
-            a.addthis_button_pinterest_pinit
-            a.addthis_button_tweet
-            a.addthis_counter.addthis_pill_style
-          script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f711fa532bc34ad"
 
 - if successfully_ordered || params[:force_tracking]
   = render 'shared/sales_conversion_pixels', locals: { order: @order }
