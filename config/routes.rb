@@ -84,6 +84,9 @@ FameAndPartners::Application.routes.draw do
 
     get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
 
+    # Partners In Crime Sweepstakes Official Rules March 2016
+    get '/prom-competition-terms' => 'statics#prom_competition_terms'
+
     ###########
     # Lookbooks
     ###########
