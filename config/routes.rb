@@ -490,7 +490,6 @@ FameAndPartners::Application.routes.draw do
 
       resource :product_positions, only: [:show, :create, :update]
 
-      put 'sales/reset_cache' => 'sales#reset_cache'
       resources :sales, :except => [:show]
 
       # stock invent settings
