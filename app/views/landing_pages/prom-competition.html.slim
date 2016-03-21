@@ -47,7 +47,7 @@
         .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
-              = image_tag "landingpages/prom-competition/off-to-coachella.jpg"
+              = image_tag "landingpages/prom-competition/nylon.jpg"
           .copy-wrap
             .heading Be a VIP
             p Access to the Nylon Young Hollywood Party
@@ -91,7 +91,9 @@
           .media-wrap
             = image_tag "landingpages/prom-competition/tile-8.jpg"
       .col-md-12.button-wrap
-        = link_to 'shop THE COLLECTION', main_app.root_url + 'lookbook/partners-in-crime', class: 'btn btn-lowlight btn-lg'
+        a.btn.btn-lowlight.btn-lg href="#{main_app.root_url + 'lookbook/partners-in-crime'}"
+          span shop 
+          ' THE COLLECTION
 
     .row
       .col-md-12
