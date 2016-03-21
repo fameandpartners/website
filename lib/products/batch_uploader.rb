@@ -562,6 +562,8 @@ module Products
       recommended_colors.map do |recommended|
         product.product_color_values.where(option_value_id: recommended.id, custom: false).first_or_create
       end
+
+      product.product_color_values.where(custom: false).where('option_value_id NOT IN (?)', recommended_colors.map(&:id)).destroy_all
     end
 
     def add_product_variants(product, sizes, colors, price_in_aud, price_in_usd)
@@ -599,13 +601,17 @@ module Products
 
           variant.save
 
-          aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
-          aud.amount = price_in_aud
-          aud.save!
+          if price_in_aud.present?
+            aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
+            aud.amount = price_in_aud
+            aud.save!
+          end
 
-          usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
-          usd.amount = price_in_usd
-          usd.save!
+          if price_in_usd.present?
+            usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
+            usd.amount = price_in_usd
+            usd.save!
+          end
 
           variants.push(variant) if variant.persisted?
         end
