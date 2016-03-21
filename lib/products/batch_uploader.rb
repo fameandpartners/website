@@ -601,13 +601,17 @@ module Products
 
           variant.save
 
-          aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
-          aud.amount = price_in_aud
-          aud.save!
+          if price_in_aud.present?
+            aud = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'AUD')
+            aud.amount = price_in_aud
+            aud.save!
+          end
 
-          usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
-          usd.amount = price_in_usd
-          usd.save!
+          if price_in_usd.present?
+            usd = Spree::Price.find_or_create_by_variant_id_and_currency(variant.id, 'USD')
+            usd.amount = price_in_usd
+            usd.save!
+          end
 
           variants.push(variant) if variant.persisted?
         end
