@@ -85,7 +85,7 @@ FameAndPartners::Application.routes.draw do
     get '/mystyle' => 'products/collections#show', :as => :mystyle_landing_page
 
     # Partners In Crime Sweepstakes Official Rules March 2016
-    get '/prom-competition-terms' => 'statics#prom_competition_terms'
+    get '/partners-in-crime-terms' => 'statics#prom_competition_terms'
 
     ###########
     # Lookbooks
@@ -147,7 +147,7 @@ FameAndPartners::Application.routes.draw do
     get '/bridal-dresses'     => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridal_collection
     get '/wedding-guest'      => 'products/collections#show', :permalink => 'bridesmaid14', :as => :wedding_guest_collection
     get '/ad-plus-size'       => 'products/collections#show', :permalink => 'bridesmaid14', :as => :ad_plus_size_collection
-    get '/prom-competition'   => 'products/collections#show', :permalink => 'bridesmaid14', :as => :prom_competition_collection
+    get '/partners-in-crime'   => 'products/collections#show', :permalink => 'bridesmaid14', :as => :prom_competition_collection
     get '/prom-ad'            => 'products/collections#show', :permalink => 'bridesmaid14', :as => :prom_ad_collection
 
     get '/lets-party'     => 'products/collections#show', :permalink => 'dance-hall', :as => :lets_party_collection
