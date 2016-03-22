@@ -68,11 +68,6 @@
       font-size: 2.4rem;
     }
 
-    a {
-      font-style: italic;
-      color: inherit;
-    }
-
   }
 
   .heading-v3 {
@@ -203,11 +198,33 @@
   .email-subscription {
     display: block;
     visibility: visible;
-    margin-bottom: 0;
+    margin-bottom: 60px;
     padding: 0 0 60px;
 
     .title {
       margin-bottom: 30px;
+    }
+
+  }
+
+  .T-C-wrap {
+    margin-bottom: 60px;
+    text-align: center;
+
+    .heading-v2 {
+      margin-top: 0;
+      margin-bottom: 25px;
+      color: $c-neutral-10;
+    }
+
+    p {
+      font-size: 0.875em;
+      color: $c-neutral-10;
+    }
+
+    a {
+      text-decoration: underline;
+      color: inherit;
     }
 
   }
@@ -304,7 +321,8 @@
 
     .heading-v1,
     .heading-v2,
-    .heading-v3 {
+    .heading-v3,
+    .T-C-wrap p {
       padding: 0 14%;
     }
 
