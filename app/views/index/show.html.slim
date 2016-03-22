@@ -3,10 +3,10 @@ ruby:
 
 .page-content.index
   // TODO: create helper for multisource images
-  = react_component('HeroCarousel', skin: 'skin-light',
-    assets: [{link: just_the_girls_collection_path, src: '/assets/home-page-tiles/JustTheGirls', alt: 'Just The Girls'},
-      {link: love_lace_collection_path, src: '/assets/home-page-tiles/hero-lace-2', alt: 'Love Lace Collection'},
-      {link: this_modern_romance_collection_path, src: '/assets/home-page-tiles/hero-8', alt: 'This Modern Romance - Shop now'}])
+  = react_component('HeroCarousel', skin: 'skin-dark',
+    assets: [{link: partners_in_crime_collection_path, src: '/assets/home-page-tiles/PartnersInCrime-HERO', alt: 'Partners In Crime'},
+             {link: 'dresses/dress-chiara-978?color=black', src: '/assets/home-page-tiles/FP_Chiara', alt: 'Chiara Three-Piece Set'},
+             {link: just_the_girls_collection_path, src: '/assets/home-page-tiles/JustTheGirls', alt: 'Just The Girls'}])
 
   //
     - if sale_active?
@@ -21,15 +21,15 @@ ruby:
   section.container.content-block.home-main-content
     .row
       .main.col-md-7
-        = link_to bridesmaid_collection_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/WeddingBoutique-CategoryTile1.jpg', alt: 'WEDDING BOUTIQUE - explore BRIDESMAIDS'
+        = link_to '/dresses/new-this-week', class: 'media-wrap'
+          = image_tag 'home-page-tiles/READYFORPROM-CategoryTile1.jpg', alt: 'Ready For Prom - Shop New This Week Dresses'
         = render 'shared/redesign/tabs_collection'
+        = link_to build_taxon_path('Formal'), class: 'media-wrap'
+          = image_tag 'home-page-tiles/JUSTTHEGIRLS-CategoryTile2.jpg', alt: 'Just The Girls - Shop Just The Girls Dresses'
+        = link_to build_taxon_path('print'), class: 'media-wrap'
+          = image_tag 'home-page-tiles/EventDress-CategoryTile3-2.jpg', alt: 'Dress to Impress - Shop Print Dresses'
         = link_to build_taxon_path('Lace'), class: 'media-wrap'
-          = image_tag 'home-page-tiles/LOVELACE-CategoryTile2.jpg', alt: 'Love Lace - Shop Lace'
-        = link_to build_taxon_path('red-carpet'), class: 'media-wrap'
-          = image_tag 'home-page-tiles/EventDress-CategoryTile3.jpg', alt: 'Dress to Impress - Shop Event Dresses'
-        = link_to build_taxon_path('Velvet'), class: 'media-wrap'
-          = image_tag 'home-page-tiles/VelvetUnderground-CategoryTile4.jpg', alt: 'Velvet Underground - Shop Velvet Dresses'
+          = image_tag 'home-page-tiles/LOVELACE-CategoryTile4.jpg', alt: 'Love Lace - Shop Love Lace Dresses'
 
       aside.col-md-5
         = react_component('BlogPosts')
