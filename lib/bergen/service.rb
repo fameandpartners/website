@@ -40,6 +40,14 @@ module Bergen
       ).request
     end
 
+    def get_style_master_product_add_status(return_request_item)
+      GetStyleMasterProductAddStatus.new(
+        savon_client:        client,
+        auth_token:          auth_token,
+        return_request_item: return_request_item
+      ).request
+    end
+
     private
 
     def auth_token
