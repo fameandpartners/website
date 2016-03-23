@@ -32,8 +32,12 @@ module Bergen
       # TODO
     end
 
-    def style_master_product_add
-      # TODO
+    def style_master_product_add(return_request_item)
+      StyleMasterProductAdd.new(
+        savon_client:        client,
+        auth_token:          auth_token,
+        return_request_item: return_request_item
+      ).request
     end
 
     private
