@@ -14,11 +14,26 @@ module Bergen
       @credentials = credentials
     end
 
-
     def get_inventory
       client.request :get_inventory do
         soap.body = { 'AuthenticationString' => auth_token }
       end
+    end
+
+    def receiving_ticket_add(return_request_item)
+      ReceivingTicketAdd.new(
+        savon_client:        client,
+        auth_token:          auth_token,
+        return_request_item: return_request_item
+      ).request
+    end
+
+    def get_receiving_ticket_object_by_ticket_no
+      # TODO
+    end
+
+    def style_master_product_add
+      # TODO
     end
 
     private
