@@ -8,6 +8,10 @@ ruby:
              {link: 'dresses/dress-chiara-978?color=black', src: '/assets/home-page-tiles/Chiara-HERO', alt: 'Chiara Three-Piece Set'},
              {link: just_the_girls_collection_path, src: '/assets/home-page-tiles/JustTheGirls', alt: 'Just The Girls'}])
 
+  section.competition-banner
+    .container
+      = link_to prom_competition_collection_path, class: 'media-wrap'
+        img src="/assets/competition_banner/CompetitionBanner-full.jpg" srcset="/assets/competition_banner/CompetitionBanner-med.jpg 768w, /assets/competition_banner/CompetitionBanner-full.jpg 1024w" alt='Partners in Crime'
   //
     - if sale_active?
       section.banner-sale
@@ -16,7 +20,6 @@ ruby:
             img src="http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_images[:full]}" alt='Shop the Sale' srcset="
               http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_images[:small]} 768w,
               http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_images[:full]} 1024w"
-
   /! Content Section
   section.container.content-block.home-main-content
     .row
