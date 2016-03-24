@@ -105,22 +105,27 @@ html
         $('.js-trigger-generator').on('click', function() {
           var result;
           var bodyShape;
-          var dataOb    = {};
-          var units     = 'inches';
-          var bust      = $('#bust').val();
-          var underbust = $('#underbust').val();
-          var waist     = $('#waist').val();
-          var hips      = $('#hips').val();
+          var dataOb            = {};
+          var user_measurements = {};
+          var units             = 'inches';
+          var bust              = $('#bust').val();
+          var underbust         = $('#underbust').val();
+          var waist             = $('#waist').val();
+          var hips              = $('#hips').val();
 
+          user_measurements.bust_circumference       = bust;
+          user_measurements.under_bust_circumference = underbust;
+          user_measurements.waist_circumference      = waist;
+          user_measurements.hip_circumference        = hips;
 
           if ($('#switch-to-cm').is(':checked')) {
             units = 'cm';
+          } else {
+            user_measurements.bust_circumference       = convert_to_cm(bust);
+            user_measurements.under_bust_circumference = convert_to_cm(underbust);
+            user_measurements.waist_circumference      = convert_to_cm(waist);
+            user_measurements.hip_circumference        = convert_to_cm(hips);
           }
-
-          user_measurements.bust_circumference = bust;
-          user_measurements.under_bust_circumference = underbust;
-          user_measurements.waist_circumference = waist;
-          user_measurements.hip_circumference = hips;
 
           result = calculate_body_match(user_measurements);
           bodyShape = (result === undefined || result === null) ? 'Custom Size Recommended' : result.name;
@@ -136,18 +141,18 @@ html
 
           dataOb.email = 'test@test.com';
           dataOb.shape = bodyShape;
-          dataOb.size = 0; //TODO: do we need to capture this?
-          dataOb.bust_circumference = bust;
+          dataOb.size  = 0; //TODO: do we need to capture this?
+          dataOb.bust_circumference       = bust;
           dataOb.under_bust_circumference = underbust;
-          dataOb.waist_circumference = waist;
-          dataOb.hip_circumference = hips;
+          dataOb.waist_circumference      = waist;
+          dataOb.hip_circumference        = hips;
           //TODO: add units
 
           $.ajax({
-            url: '/body-shape-calculator/store-measures.json',
-            method: 'POST',
+            url:      '/body-shape-calculator/store-measures.json',
+            method:   'POST',
             dataType: 'json',
-            data: JSON.parse('{"body_calculator_measure":' + JSON.stringify(dataOb) + '}')
+            data:     {body_calculator_measure: dataOb}
           });
 
         });
@@ -215,13 +220,6 @@ html
 
         var sizes = [size_0, size_2];
 
-        var user_measurements = {
-          bust_circumference:       78,
-          under_bust_circumference: 66,
-          waist_circumference:      60,
-          hip_circumference:        84
-        };
-
         function measure_fits_user(user_measure, shape_measure, match_tolerance) {
           var top_limit    = shape_measure + match_tolerance;
           var bottom_limit = shape_measure - match_tolerance;
@@ -248,8 +246,8 @@ html
             });
         }
 
-        function convert_to_cm(val) {
-          return (val * 2.54).toFixed(1);
+        function convert_to_cm(inches) {
+          return (inches * 2.54).toFixed(1);
         }
 
       })(jQuery);
