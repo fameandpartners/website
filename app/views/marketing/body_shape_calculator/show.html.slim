@@ -127,7 +127,7 @@ html
           user_measurements.hip_circumference = hips;
 
           result = calculate_body_match(user_measurements);
-          bodyShape = (result === undefined || result === null) ? 'unknown' : result.name;
+          bodyShape = (result === undefined || result === null) ? 'Custom Size Recommended' : result.name;
 
           $('.js-result-type').html(bodyShape);
           $('.js-result-bust').html(bust + ' ' + units);
