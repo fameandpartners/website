@@ -113,7 +113,7 @@ class Products::CollectionsController < Products::BaseController
   end
 
   def collection_resource(collection_options = {})
-    resource_args = filter_options.merge(collection_options)
+    resource_args = collection_options.present? ? filter_options.merge(collection_options) : filter_options
     Products::CollectionResource.new(resource_args).read
   end
 
