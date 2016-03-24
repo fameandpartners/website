@@ -41,9 +41,11 @@ var PageVariablesField = React.createClass({
             <div>
                 <input type="text" name="page[variables][][key]" placeholder="Variable Key"
                   onChange={this.handleKeyChange} value={this.state.variableKey} />
+                  &nbsp;
                 <input type="text" name="page[variables][][value]" placeholder="Variable Value"
                   onChange={this.handleValueChange} value={this.state.variableValue} />
-                <button onClick={this.handleFieldRemove}>Remove</button>
+                  &nbsp;
+                <button className="btn btn-danger btn-xs" onClick={this.handleFieldRemove}>Remove</button>
             </div>
         );
     }
@@ -97,7 +99,7 @@ var PageVariablesComponent = React.createClass({
         return (
             <div>
                 <PageVariableList variables={this.state.variables} handleFieldRemove={this.handleFieldRemove} handleFieldUpdate={this.handleFieldUpdate} />
-                <button className="btn btn-primary btn-sm" onClick={this.handleFieldAdd}>Add</button>
+                <button className="btn btn-primary btn-xs" onClick={this.handleFieldAdd}>Add</button>
             </div>
         );
     }
