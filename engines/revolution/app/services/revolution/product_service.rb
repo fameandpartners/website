@@ -5,8 +5,19 @@ module Revolution
     attr_reader :product_ids, :site_version
 
     def initialize(product_ids, site_version)
-      @product_ids  = product_ids.respond_to?(:values) ? product_ids.values : product_ids.split(',')
+      @product_ids  = get_product_ids(product_ids)
       @site_version = site_version
+    end
+
+    def get_product_ids(pids)
+      case pids
+      when Hash
+        pids.values
+      when Array
+        pids
+      else
+        pids.split(',')
+      end
     end
 
     def products(params, page_limit)
