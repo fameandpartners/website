@@ -50,13 +50,13 @@ html
                     span Your Body Type is
                     h3.heading.js-result-type
 
-              .row.controls-wrap
-                .col-xs-6.col-sm-6
-                  .form-group.form-group-btn
-                    input.btn.btn-secondary.btn-lg.btn-block type="button" value="Copy"
-                .col-xs-6.col-sm-6
-                  .form-group.form-group-btn
-                    input.btn.btn-primary.btn-lg.btn-block type="button" value="Share measurements"
+              /.row.controls-wrap
+              /  .col-xs-6.col-sm-6
+              /    .form-group.form-group-btn
+              /      input.btn.btn-secondary.btn-lg.btn-block type="button" value="Copy"
+              /  .col-xs-6.col-sm-6
+              /    .form-group.form-group-btn
+              /      input.btn.btn-primary.btn-lg.btn-block type="button" value="Share measurements"
 
           form.clearfix.form-wrap.measurements-form.js-measurements-form
             .clearfix
@@ -64,9 +64,9 @@ html
                 h2.heading Add / Edit Measurements
               .form-group.form-group-heading
                 .switch-wrap
-                  label.checkbox-label for="switch-units" inches
-                  input#switch-units.js-switch type="checkbox" name="switch-units"
-                  label.checkbox-label for="switch-units" cm
+                  label.checkbox-label for="switch-to-cm" inches
+                  input#switch-to-cm.js-switch type="checkbox" name="switch-to-cm"
+                  label.checkbox-label for="switch-to-cm" cm
             .form-group
               label for="bust" Bust
               input#bust.form-control type="text" required="required"
@@ -80,7 +80,7 @@ html
               label for="hips" Hips
               input#hips.form-control type="text" required="required"
             .form-group.form-group-btn
-              input.btn.btn-primary.btn-lg.btn-block.js-trigger-generater type="button" value="Generate body shape"
+              input.btn.btn-primary.btn-lg.btn-block.js-trigger-generator type="button" value="Generate body shape"
             .form-group.form-group-btn
               input.btn.btn-secondary.btn-lg.btn-block type="reset" value="Reset"
 
@@ -90,7 +90,7 @@ html
 
     javascript:
       (function ($) {
-        
+
         // create iOS like switch boxes
         var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
         elems.forEach(function(el) {
@@ -102,32 +102,33 @@ html
           });
         });
 
-        $('.js-trigger-generater').on('click', function() {
-
+        $('.js-trigger-generator').on('click', function() {
           var result;
           var bodyShape;
-          var dataOb = new Object();
-          var units = 'cm';
-          var bust = $('#bust').val();
-          var underbust = $('#underbust').val();
-          var waist = $('#waist').val();
-          var hips = $('#hips').val();
+          var dataOb            = {};
+          var user_measurements = {};
+          var units             = 'inches';
+          var bust              = $('#bust').val();
+          var underbust         = $('#underbust').val();
+          var waist             = $('#waist').val();
+          var hips              = $('#hips').val();
 
-          if (!$('#switch-units').is(':checked')) {
-            bust = convert_to_cm(bust);
-            underbust = convert_to_cm(underbust);
-            waist = convert_to_cm(waist);
-            hips = convert_to_cm(hips);
-            units = 'inches';
+          user_measurements.bust_circumference       = bust;
+          user_measurements.under_bust_circumference = underbust;
+          user_measurements.waist_circumference      = waist;
+          user_measurements.hip_circumference        = hips;
+
+          if ($('#switch-to-cm').is(':checked')) {
+            units = 'cm';
+          } else {
+            user_measurements.bust_circumference       = convert_to_cm(bust);
+            user_measurements.under_bust_circumference = convert_to_cm(underbust);
+            user_measurements.waist_circumference      = convert_to_cm(waist);
+            user_measurements.hip_circumference        = convert_to_cm(hips);
           }
 
-          user_measurements.bust_circumference = bust;
-          user_measurements.under_bust_circumference = underbust;
-          user_measurements.waist_circumference = waist;
-          user_measurements.hip_circumference = hips;
-
           result = calculate_body_match(user_measurements);
-          bodyShape = (result === undefined || result === null) ? 'unknown' : result.name;
+          bodyShape = (result === undefined || result === null) ? 'Custom Size Recommended' : result.name;
 
           $('.js-result-type').html(bodyShape);
           $('.js-result-bust').html(bust + ' ' + units);
@@ -140,18 +141,18 @@ html
 
           dataOb.email = 'test@test.com';
           dataOb.shape = bodyShape;
-          dataOb.size = 0; //TODO: do we need to capture this?
-          dataOb.bust_circumference = bust;
+          dataOb.size  = 0; //TODO: do we need to capture this?
+          dataOb.bust_circumference       = bust;
           dataOb.under_bust_circumference = underbust;
-          dataOb.waist_circumference = waist;
-          dataOb.hip_circumference = hips;
+          dataOb.waist_circumference      = waist;
+          dataOb.hip_circumference        = hips;
           //TODO: add units
 
           $.ajax({
-            url: '/body-shape-calculator/store-measures.json',
-            method: 'POST',
+            url:      '/body-shape-calculator/store-measures.json',
+            method:   'POST',
             dataType: 'json',
-            data: JSON.parse('{"body_calculator_measure":' + JSON.stringify(dataOb) + '}')
+            data:     {body_calculator_measure: dataOb}
           });
 
         });
@@ -219,13 +220,6 @@ html
 
         var sizes = [size_0, size_2];
 
-        var user_measurements = {
-          bust_circumference:       78,
-          under_bust_circumference: 66,
-          waist_circumference:      60,
-          hip_circumference:        84
-        };
-
         function measure_fits_user(user_measure, shape_measure, match_tolerance) {
           var top_limit    = shape_measure + match_tolerance;
           var bottom_limit = shape_measure - match_tolerance;
@@ -252,8 +246,8 @@ html
             });
         }
 
-        function convert_to_cm(val) {
-          return (val * 2.54).toFixed(1);
+        function convert_to_cm(inches) {
+          return (inches * 2.54).toFixed(1);
         }
 
       })(jQuery);
