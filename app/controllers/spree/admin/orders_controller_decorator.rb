@@ -35,7 +35,9 @@ module Spree
           params[:q][:completed_at_lt] = params[:q].delete(:created_at_lt)
         end
 
+        per_page = 5000 if params[:format] == 'csv'
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
+
         @orders = @search.result(distinct: true).includes(
           :user => [],
           :shipments => {:inventory_units => :variant},
@@ -46,7 +48,7 @@ module Spree
         ).
             page(page).
             per(per_page)
-
+            
         # Restore dates
         params[:q][:created_at_gt] = created_at_gt
         params[:q][:created_at_lt] = created_at_lt

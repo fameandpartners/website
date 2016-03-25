@@ -7,6 +7,7 @@ module Orders
     def initialize(orders, query_params = {})
 
       orders.includes(:line_items => {:personalizations => [], :variants => { :product => [] }} )
+      
       @orders = orders.collect { |o| OrderPresenter.new(o) }
       @query_params = query_params
     end
