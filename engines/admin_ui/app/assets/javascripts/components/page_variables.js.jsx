@@ -1,11 +1,3 @@
-//TODO: new fields will not have keys on the component variables array, causing a massive deletion if user click "remove" on recently created elements
-// Example:
-// User add a field (field 1)
-// User another field (field 2)
-// User edits key value from a field (field 1)
-// User removes the empty field (field 2)
-// All fields are removed! D=
-
 var PageVariablesField = React.createClass({
     getInitialState: function () {
       return {
