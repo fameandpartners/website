@@ -4,10 +4,23 @@ module Orders
   class LineItemCsvGenerator
     attr_reader :orders, :query_params
 
-    def initialize(orders, query_params = {})
+    def set_up_orders(orders)
+      @orders = orders.includes(  adjustments: [:originator],
+                                  shipments:   [:order],
+                                  line_items:  {
+                                    order:           [:shipments],
+                                    personalization: [:size, :color],
+                                    product:         [:master, :factory],
+                                    variant:         {
+                                      inventory_units: [],
+                                      option_values:   []
+                                    },
+                                  },
+                                ).collect { |o| OrderPresenter.new(o) }
+    end
 
-      orders.includes(:line_items => {:personalizations => [], :variants => { :product => [] }} )
-      @orders = orders.collect { |o| OrderPresenter.new(o) }
+    def initialize(orders, query_params = {})
+      set_up_orders(orders)
       @query_params = query_params
     end
 
