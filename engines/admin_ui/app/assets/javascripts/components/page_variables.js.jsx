@@ -26,8 +26,17 @@ var PageVariablesField = React.createClass({
     },
     handleFieldRemove: function (e) {
       e.preventDefault();
-      var variableKey = this.props.variableKey;
-      this.props.handleFieldRemove(this.state);
+      var self = this;
+      return confirm('Are you sure?', {
+        description: 'Would you like to remove this variable?',
+        confirmLabel: 'Yes',
+        abortLabel: 'No'
+      }).then((function(_this) {
+        return function() {
+          var variableKey = self.props.variableKey;
+          self.props.handleFieldRemove(self.state);
+        };
+      })(this));
     },
     handleKeyChange: function (e) {
       this.setState({variableKey: e.target.value}, this.handleFieldUpdate);
@@ -45,7 +54,7 @@ var PageVariablesField = React.createClass({
                 <input type="text" name="page[variables][][value]" placeholder="Variable Value"
                   onChange={this.handleValueChange} value={this.state.variableValue} />
                   &nbsp;
-                <button className="btn btn-danger btn-xs" onClick={this.handleFieldRemove}>Remove</button>
+                <button className="btn btn-danger btn-xs removable" onClick={this.handleFieldRemove}>Remove</button>
             </div>
         );
     }
@@ -104,3 +113,22 @@ var PageVariablesComponent = React.createClass({
         );
     }
 });
+
+var confirm = function(message, options) {
+  var cleanup, component, props, wrapper;
+  if (options == null) {
+    options = {};
+  }
+  props = $.extend({
+    message: message
+  }, options);
+  wrapper = document.body.appendChild(document.createElement('div'));
+  component = React.render(<Confirm {...props}/>, wrapper);
+  cleanup = function() {
+    React.unmountComponentAtNode(wrapper);
+    return setTimeout(function() {
+      return wrapper.remove();
+    });
+  };
+  return component.promise.always(cleanup).promise();
+};
