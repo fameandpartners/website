@@ -36,6 +36,7 @@ module Spree
         end
 
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
+
         @orders = @search.result(distinct: true).includes(
           :user => [],
           :shipments => {:inventory_units => :variant},

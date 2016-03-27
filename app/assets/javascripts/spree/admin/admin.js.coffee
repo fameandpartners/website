@@ -64,6 +64,6 @@ $ ->
     $form = $(this).closest('form')
     originalAction = $form.attr('action')
     params = $form.serializeArray()
-    params.push(name: 'per_page', value: 1000)
+    params.push(name: 'per_page', value: 5000)
     window.open(originalAction + '.csv?' + $.param(params), '_blank');
     false

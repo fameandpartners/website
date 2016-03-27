@@ -174,6 +174,7 @@ module Orders
         :fabrication_state       => fabrication_status,
         :sku                     => sku,
         :style                   => style_number,
+        :style_name              => style_name,
         :factory                 => factory,
         :color                   => colour_name,
         :size                    => country_size,
