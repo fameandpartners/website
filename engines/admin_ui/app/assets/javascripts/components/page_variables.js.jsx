@@ -19,7 +19,7 @@ var PageVariablesField = React.createClass({
     handleFieldRemove: function (e) {
       e.preventDefault();
       var self = this;
-      return confirm('Are you sure?', {
+      return variables_confirm('Are you sure?', {
         description: 'Would you like to remove this variable?',
         confirmLabel: 'Yes',
         abortLabel: 'No'
@@ -106,7 +106,7 @@ var PageVariablesComponent = React.createClass({
     }
 });
 
-var confirm = function(message, options) {
+var variables_confirm = function(message, options) {
   var cleanup, component, props, wrapper;
   if (options == null) {
     options = {};
