@@ -2,7 +2,7 @@
 
 module Bergen
   class Service
-    attr_reader :credentials, :client
+    attr_reader :client
 
     def initialize
       @client = SavonClient.new
@@ -26,14 +26,14 @@ module Bergen
     end
 
     def style_master_product_add(return_request_item)
-      StyleMasterProductAdd.new(
+      SoapMethods::StyleMasterProductAdd.new(
         savon_client:        client,
         return_request_item: return_request_item
       ).request
     end
 
     def get_style_master_product_add_status(return_request_item)
-      GetStyleMasterProductAddStatus.new(
+      SoapMethods::GetStyleMasterProductAddStatus.new(
         savon_client:        client,
         return_request_item: return_request_item
       ).request

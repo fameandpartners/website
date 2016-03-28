@@ -1,11 +1,10 @@
 module Bergen
   module SoapMethods
     class GetStyleMasterProductAddStatus
-      attr_reader :client, :auth_token, :return_request_item
+      attr_reader :client, :return_request_item
 
-      def initialize(savon_client:, auth_token:, return_request_item:)
+      def initialize(savon_client:, return_request_item:)
         @client              = savon_client
-        @auth_token          = auth_token
         @return_request_item = return_request_item
       end
 
@@ -19,7 +18,7 @@ module Bergen
 
       def required_fields_hash
         {
-          'AuthenticationString' => auth_token,
+          'AuthenticationString' => client.auth_token,
           'UPC'                  => global_sku.sku,
         }
       end
