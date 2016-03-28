@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://sync.rex11.com/ws/v2staging/publicapiws.asmx?WSDL
+    uri: https://sync.rex11.com/ws/v3prod/publicapiws.asmx?WSDL
     body:
       encoding: UTF-8
       string: ''
@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 17 Mar 2016 22:30:16 GMT
+      - Mon, 28 Mar 2016 22:45:51 GMT
   response:
     status:
       code: 200
@@ -29,9 +29,9 @@ http_interactions:
       X-Powered-By:
       - ASP.NET
       Date:
-      - Thu, 17 Mar 2016 22:30:15 GMT
+      - Mon, 28 Mar 2016 22:45:47 GMT
       Content-Length:
-      - '150094'
+      - '158817'
     body:
       encoding: UTF-8
       string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<wsdl:definitions xmlns:s16=\"http://rex11.com/webmethods/AbstractTypes\"
@@ -319,7 +319,20 @@ http_interactions:
         \             <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"PickTicket\"
         type=\"s10:PickTicketDetails\" />\r\n            </s:sequence>\r\n          </s:extension>\r\n
         \       </s:complexContent>\r\n      </s:complexType>\r\n      <s:element
-        name=\"GetPickTickesByStatusAndCreateDate\">\r\n        <s:complexType>\r\n
+        name=\"GetPickTicketsByOrderNumber\">\r\n        <s:complexType>\r\n          <s:sequence>\r\n
+        \           <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"authenticationString\"
+        type=\"s:string\" />\r\n            <s:element minOccurs=\"0\" maxOccurs=\"1\"
+        name=\"orderNumber\" type=\"s:string\" />\r\n          </s:sequence>\r\n        </s:complexType>\r\n
+        \     </s:element>\r\n      <s:element name=\"GetPickTicketsByOrderNumberResponse\">\r\n
+        \       <s:complexType>\r\n          <s:sequence>\r\n            <s:element
+        minOccurs=\"0\" maxOccurs=\"1\" name=\"GetPickTicketsByOrderNumberResult\"
+        type=\"tns:GetPTsByOrderNumberResponse\" />\r\n          </s:sequence>\r\n
+        \       </s:complexType>\r\n      </s:element>\r\n      <s:complexType name=\"GetPTsByOrderNumberResponse\">\r\n
+        \       <s:complexContent mixed=\"false\">\r\n          <s:extension base=\"tns:WsResponse\">\r\n
+        \           <s:sequence>\r\n              <s:element minOccurs=\"0\" maxOccurs=\"1\"
+        name=\"PickTicketNumbers\" type=\"tns:ArrayOfString\" />\r\n            </s:sequence>\r\n
+        \         </s:extension>\r\n        </s:complexContent>\r\n      </s:complexType>\r\n
+        \     <s:element name=\"GetPickTickesByStatusAndCreateDate\">\r\n        <s:complexType>\r\n
         \         <s:sequence>\r\n            <s:element minOccurs=\"0\" maxOccurs=\"1\"
         name=\"AuthenticationString\" type=\"s:string\" />\r\n            <s:element
         minOccurs=\"1\" maxOccurs=\"1\" name=\"pickTicketStatus\" type=\"s11:PickTicketStatus\"
@@ -409,12 +422,31 @@ http_interactions:
         name=\"StyleMasterProductAddResponse\">\r\n        <s:complexType>\r\n          <s:sequence>\r\n
         \           <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"StyleMasterProductAddResult\"
         type=\"tns:WsResponse\" />\r\n          </s:sequence>\r\n        </s:complexType>\r\n
-        \     </s:element>\r\n      <s:element name=\"GetStyleMasterProductAddStatus\">\r\n
+        \     </s:element>\r\n      <s:element name=\"StyleMasterProductUpdateByUpc\">\r\n
         \       <s:complexType>\r\n          <s:sequence>\r\n            <s:element
-        minOccurs=\"0\" maxOccurs=\"1\" name=\"AuthenticationString\" type=\"s:string\"
-        />\r\n            <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"UPC\"
-        type=\"s:string\" />\r\n          </s:sequence>\r\n        </s:complexType>\r\n
-        \     </s:element>\r\n      <s:element name=\"GetStyleMasterProductAddStatusResponse\">\r\n
+        minOccurs=\"0\" maxOccurs=\"1\" name=\"authenticationString\" type=\"s:string\"
+        />\r\n            <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"product\"
+        type=\"tns:UpdateableProduct\" />\r\n          </s:sequence>\r\n        </s:complexType>\r\n
+        \     </s:element>\r\n      <s:complexType name=\"UpdateableProduct\">\r\n
+        \       <s:sequence>\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
+        default=\"\" name=\"Upc\" type=\"s:string\" />\r\n          <s:element minOccurs=\"0\"
+        maxOccurs=\"1\" default=\"\" name=\"Sku\" type=\"s:string\" />\r\n          <s:element
+        minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"Style\" type=\"s:string\"
+        />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"Color\"
+        type=\"s:string\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
+        default=\"\" name=\"Size\" type=\"s:string\" />\r\n          <s:element minOccurs=\"0\"
+        maxOccurs=\"1\" default=\"\" name=\"Description\" type=\"s:string\" />\r\n
+        \         <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"UnitPrice\" type=\"s:decimal\"
+        />\r\n        </s:sequence>\r\n      </s:complexType>\r\n      <s:element
+        name=\"StyleMasterProductUpdateByUpcResponse\">\r\n        <s:complexType>\r\n
+        \         <s:sequence>\r\n            <s:element minOccurs=\"0\" maxOccurs=\"1\"
+        name=\"StyleMasterProductUpdateByUpcResult\" type=\"tns:WsResponse\" />\r\n
+        \         </s:sequence>\r\n        </s:complexType>\r\n      </s:element>\r\n
+        \     <s:element name=\"GetStyleMasterProductAddStatus\">\r\n        <s:complexType>\r\n
+        \         <s:sequence>\r\n            <s:element minOccurs=\"0\" maxOccurs=\"1\"
+        name=\"AuthenticationString\" type=\"s:string\" />\r\n            <s:element
+        minOccurs=\"0\" maxOccurs=\"1\" name=\"UPC\" type=\"s:string\" />\r\n          </s:sequence>\r\n
+        \       </s:complexType>\r\n      </s:element>\r\n      <s:element name=\"GetStyleMasterProductAddStatusResponse\">\r\n
         \       <s:complexType>\r\n          <s:sequence>\r\n            <s:element
         minOccurs=\"0\" maxOccurs=\"1\" name=\"GetStyleMasterProductAddStatusResult\"
         type=\"tns:WsResponse\" />\r\n          </s:sequence>\r\n        </s:complexType>\r\n
@@ -432,13 +464,15 @@ http_interactions:
         nillable=\"true\" type=\"tns:PickTicketAddStatusResponse\" />\r\n      <s:element
         name=\"WsResponse\" nillable=\"true\" type=\"tns:WsResponse\" />\r\n      <s:element
         name=\"GetPickTicketResponse\" nillable=\"true\" type=\"tns:GetPickTicketResponse\"
-        />\r\n      <s:element name=\"PickTicketByStatusAndCreateDateResponse\" nillable=\"true\"
-        type=\"tns:PickTicketByStatusAndCreateDateResponse\" />\r\n      <s:element
-        name=\"PickTicketObjectItemsInBoxesResponse\" nillable=\"true\" type=\"tns:PickTicketObjectItemsInBoxesResponse\"
-        />\r\n      <s:element name=\"PickTicketObjectItemsInBoxesResponseV2\" nillable=\"true\"
-        type=\"tns:PickTicketObjectItemsInBoxesResponseV2\" />\r\n      <s:element
-        name=\"PickTicketStatusByDateResponse\" nillable=\"true\" type=\"tns:PickTicketStatusByDateResponse\"
-        />\r\n    </s:schema>\r\n    <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/ReceivingTicket.xsd\">\r\n
+        />\r\n      <s:element name=\"GetPTsByOrderNumberResponse\" nillable=\"true\"
+        type=\"tns:GetPTsByOrderNumberResponse\" />\r\n      <s:element name=\"PickTicketByStatusAndCreateDateResponse\"
+        nillable=\"true\" type=\"tns:PickTicketByStatusAndCreateDateResponse\" />\r\n
+        \     <s:element name=\"PickTicketObjectItemsInBoxesResponse\" nillable=\"true\"
+        type=\"tns:PickTicketObjectItemsInBoxesResponse\" />\r\n      <s:element name=\"PickTicketObjectItemsInBoxesResponseV2\"
+        nillable=\"true\" type=\"tns:PickTicketObjectItemsInBoxesResponseV2\" />\r\n
+        \     <s:element name=\"PickTicketStatusByDateResponse\" nillable=\"true\"
+        type=\"tns:PickTicketStatusByDateResponse\" />\r\n    </s:schema>\r\n    <s:schema
+        elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/ReceivingTicket.xsd\">\r\n
         \     <s:import namespace=\"http://rex11.com/swpublicapi/ReceivingTicketStatus.xsd\"
         />\r\n      <s:import namespace=\"http://rex11.com/swpublicapi/ReceivingTicketItems.xsd\"
         />\r\n      <s:import namespace=\"http://rex11.com/swpublicapi/ReceivingTicketType.xsd\"
@@ -466,9 +500,12 @@ http_interactions:
         name=\"SupplierDetails\" type=\"s6:SupplierAddress\" />\r\n          <s:element
         minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"Carrier\" type=\"s:string\"
         />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"IMPORTSTATUSTEXT\"
-        type=\"s:string\" />\r\n        </s:sequence>\r\n      </s:complexType>\r\n
-        \     <s:element name=\"receivingTicket\" type=\"s1:ReceivingTicket\" />\r\n
-        \   </s:schema>\r\n    <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/ReceivingTicketStatus.xsd\">\r\n
+        type=\"s:string\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
+        default=\"\" name=\"AddedToInventoryDate\" type=\"s:string\" />\r\n          <s:element
+        minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"ArrivedDate\" type=\"s:string\"
+        />\r\n        </s:sequence>\r\n      </s:complexType>\r\n      <s:element
+        name=\"receivingTicket\" type=\"s1:ReceivingTicket\" />\r\n    </s:schema>\r\n
+        \   <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/ReceivingTicketStatus.xsd\">\r\n
         \     <s:simpleType name=\"ReceivingTicketStatus\">\r\n        <s:restriction
         base=\"s:string\">\r\n          <s:enumeration value=\"Draft\" />\r\n          <s:enumeration
         value=\"PendingCSR\" />\r\n          <s:enumeration value=\"PendingPrinting\"
@@ -577,7 +614,7 @@ http_interactions:
         default=\"\" name=\"CustomerPONumber\" type=\"s:string\" />\r\n          <s:element
         minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"AuthorizationNumber\"
         type=\"s:string\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
-        default=\"0\" name=\"OrderNumber\" type=\"s:integer\" />\r\n          <s:element
+        default=\"\" name=\"OrderNumber\" type=\"s:string\" />\r\n          <s:element
         minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"TakenBy\" type=\"s:string\"
         />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"DISTRIBUTIONCENTER\"
         type=\"s:string\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
@@ -597,9 +634,11 @@ http_interactions:
         />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"MarkForCode\"
         type=\"s:string\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
         name=\"MarkForAddress\" type=\"s6:Address\" />\r\n          <s:element minOccurs=\"0\"
-        maxOccurs=\"unbounded\" name=\"LineItem\" type=\"s10:LineItem\" />\r\n        </s:sequence>\r\n
-        \     </s:complexType>\r\n    </s:schema>\r\n    <s:schema elementFormDefault=\"qualified\"
-        targetNamespace=\"http://rex11.com/swpublicapi/PickTicketPaymentTerms.xsd\">\r\n
+        maxOccurs=\"unbounded\" name=\"LineItem\" type=\"s10:LineItem\" />\r\n          <s:element
+        minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"PriorityCode\" type=\"s:string\"
+        />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"OrderType\"
+        type=\"s:string\" />\r\n        </s:sequence>\r\n      </s:complexType>\r\n
+        \   </s:schema>\r\n    <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/PickTicketPaymentTerms.xsd\">\r\n
         \     <s:simpleType name=\"PickTicketPaymentTerms\">\r\n        <s:restriction
         base=\"s:string\">\r\n          <s:enumeration value=\"PENDING\" />\r\n          <s:enumeration
         value=\"NET\" />\r\n          <s:enumeration value=\"COD\" />\r\n          <s:enumeration
@@ -684,19 +723,23 @@ http_interactions:
         name=\"ShipmentStatus\" type=\"s:string\" />\r\n          <s:element minOccurs=\"0\"
         maxOccurs=\"1\" name=\"ShipmentStatusCode\" type=\"s:string\" />\r\n          <s:element
         minOccurs=\"0\" maxOccurs=\"1\" name=\"FreightCharge\" type=\"s:string\" />\r\n
-        \       </s:sequence>\r\n      </s:complexType>\r\n      <s:complexType name=\"Package\">\r\n
-        \       <s:sequence>\r\n          <s:element minOccurs=\"0\" maxOccurs=\"unbounded\"
-        name=\"LineItems\" type=\"s10:OutBoundLineItem\" />\r\n          <s:element
-        minOccurs=\"1\" maxOccurs=\"1\" name=\"PackageWeight\" type=\"s:decimal\"
-        />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"UOM\" type=\"s:string\"
-        />\r\n          <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"PackageId\"
-        type=\"s:int\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
-        name=\"TrackingNumber\" type=\"s:string\" />\r\n          <s:element minOccurs=\"1\"
-        maxOccurs=\"1\" name=\"PackageLength\" type=\"s:double\" />\r\n          <s:element
-        minOccurs=\"1\" maxOccurs=\"1\" name=\"PackageWidth\" type=\"s:double\" />\r\n
-        \         <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"PackageHeight\"
-        type=\"s:double\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
-        name=\"PackageType\" type=\"s:string\" />\r\n        </s:sequence>\r\n      </s:complexType>\r\n
+        \         <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"OrderType\" type=\"s:string\"
+        />\r\n        </s:sequence>\r\n      </s:complexType>\r\n      <s:complexType
+        name=\"Package\">\r\n        <s:sequence>\r\n          <s:element minOccurs=\"0\"
+        maxOccurs=\"unbounded\" name=\"LineItems\" type=\"s10:OutBoundLineItem\" />\r\n
+        \         <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"PackageWeight\"
+        type=\"s:decimal\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
+        name=\"UOM\" type=\"s:string\" />\r\n          <s:element minOccurs=\"1\"
+        maxOccurs=\"1\" name=\"PackageId\" type=\"s:int\" />\r\n          <s:element
+        minOccurs=\"0\" maxOccurs=\"1\" name=\"TrackingNumber\" type=\"s:string\"
+        />\r\n          <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"PackageLength\"
+        type=\"s:double\" />\r\n          <s:element minOccurs=\"1\" maxOccurs=\"1\"
+        name=\"PackageWidth\" type=\"s:double\" />\r\n          <s:element minOccurs=\"1\"
+        maxOccurs=\"1\" name=\"PackageHeight\" type=\"s:double\" />\r\n          <s:element
+        minOccurs=\"0\" maxOccurs=\"1\" name=\"PackageType\" type=\"s:string\" />\r\n
+        \         <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"ReturnTrackingNumber\"
+        type=\"s:string\" />\r\n          <s:element minOccurs=\"1\" maxOccurs=\"1\"
+        name=\"PackageUniqueId\" type=\"s:long\" />\r\n        </s:sequence>\r\n      </s:complexType>\r\n
         \     <s:complexType name=\"OutBoundLineItem\">\r\n        <s:sequence>\r\n
         \         <s:element minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"Sku\"
         type=\"s:string\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
@@ -746,7 +789,8 @@ http_interactions:
         />\r\n          <s:enumeration value=\"Package in Transit\" />\r\n          <s:enumeration
         value=\"Package Returned\" />\r\n          <s:enumeration value=\"Partial
         Delivery\" />\r\n          <s:enumeration value=\"Delivered\" />\r\n          <s:enumeration
-        value=\"Pending UPS Upload\" />\r\n        </s:restriction>\r\n      </s:simpleType>\r\n
+        value=\"Pending UPS Upload\" />\r\n          <s:enumeration value=\"Warehouse
+        Transfer Done\" />\r\n        </s:restriction>\r\n      </s:simpleType>\r\n
         \   </s:schema>\r\n    <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/PickTicketDetailsItemsInBoxes.xsd\">\r\n
         \     <s:import namespace=\"http://rex11.com/swpublicapi/PickTicketWareHouse.xsd\"
         />\r\n      <s:import namespace=\"http://rex11.com/swpublicapi/PickTicketPaymentTerms.xsd\"
@@ -866,8 +910,9 @@ http_interactions:
         maxOccurs=\"1\" name=\"LoadId\" type=\"s:string\" />\r\n          <s:element
         minOccurs=\"0\" maxOccurs=\"1\" name=\"ProNumber\" type=\"s:string\" />\r\n
         \         <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"BolNumber\" type=\"s:string\"
-        />\r\n        </s:sequence>\r\n      </s:complexType>\r\n    </s:schema>\r\n
-        \   <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/OutBoundPackage.xsd\">\r\n
+        />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"OrderType\"
+        type=\"s:string\" />\r\n        </s:sequence>\r\n      </s:complexType>\r\n
+        \   </s:schema>\r\n    <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/OutBoundPackage.xsd\">\r\n
         \     <s:import namespace=\"http://rex11.com/swpublicapi/PickTicketDetails.xsd\"
         />\r\n      <s:complexType name=\"OutBoundPackage\">\r\n        <s:sequence>\r\n
         \         <s:element minOccurs=\"0\" maxOccurs=\"unbounded\" name=\"LineItems\"
@@ -882,8 +927,9 @@ http_interactions:
         maxOccurs=\"1\" name=\"PackageHeight\" type=\"s:double\" />\r\n          <s:element
         minOccurs=\"0\" maxOccurs=\"1\" name=\"PackageType\" type=\"s:string\" />\r\n
         \         <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"SsCc20\" type=\"s:string\"
-        />\r\n        </s:sequence>\r\n      </s:complexType>\r\n    </s:schema>\r\n
-        \   <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/StyleMasterProduct.xsd\">\r\n
+        />\r\n          <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"PackageUniqueId\"
+        type=\"s:long\" />\r\n        </s:sequence>\r\n      </s:complexType>\r\n
+        \   </s:schema>\r\n    <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/StyleMasterProduct.xsd\">\r\n
         \     <s:complexType name=\"StyleMasterProduct\">\r\n        <s:sequence>\r\n
         \         <s:element minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"Sku\"
         type=\"s:string\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
@@ -894,6 +940,10 @@ http_interactions:
         default=\"\" name=\"Size\" type=\"s:string\" />\r\n          <s:element minOccurs=\"0\"
         maxOccurs=\"1\" default=\"\" name=\"UPC\" type=\"s:string\" />\r\n          <s:element
         minOccurs=\"0\" maxOccurs=\"1\" default=\"0\" name=\"Price\" type=\"s:double\"
+        />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"CountryOfOrigin\"
+        type=\"s:string\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
+        default=\"\" name=\"CustomsDescription\" type=\"s:string\" />\r\n          <s:element
+        minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"HarmonizedCode\" type=\"s:string\"
         />\r\n        </s:sequence>\r\n      </s:complexType>\r\n    </s:schema>\r\n
         \   <s:schema targetNamespace=\"http://rex11.com/webmethods/AbstractTypes\">\r\n
         \     <s:import namespace=\"http://schemas.xmlsoap.org/soap/encoding/\" />\r\n
@@ -973,6 +1023,10 @@ http_interactions:
         \   <wsdl:part name=\"parameters\" element=\"tns:GetPickTicketObjectByBarCode\"
         />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTicketObjectByBarCodeSoapOut\">\r\n
         \   <wsdl:part name=\"parameters\" element=\"tns:GetPickTicketObjectByBarCodeResponse\"
+        />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTicketsByOrderNumberSoapIn\">\r\n
+        \   <wsdl:part name=\"parameters\" element=\"tns:GetPickTicketsByOrderNumber\"
+        />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTicketsByOrderNumberSoapOut\">\r\n
+        \   <wsdl:part name=\"parameters\" element=\"tns:GetPickTicketsByOrderNumberResponse\"
         />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTickesByStatusAndCreateDateSoapIn\">\r\n
         \   <wsdl:part name=\"parameters\" element=\"tns:GetPickTickesByStatusAndCreateDate\"
         />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTickesByStatusAndCreateDateSoapOut\">\r\n
@@ -997,6 +1051,10 @@ http_interactions:
         \   <wsdl:part name=\"parameters\" element=\"tns:StyleMasterProductAdd\" />\r\n
         \ </wsdl:message>\r\n  <wsdl:message name=\"StyleMasterProductAddSoapOut\">\r\n
         \   <wsdl:part name=\"parameters\" element=\"tns:StyleMasterProductAddResponse\"
+        />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"StyleMasterProductUpdateByUpcSoapIn\">\r\n
+        \   <wsdl:part name=\"parameters\" element=\"tns:StyleMasterProductUpdateByUpc\"
+        />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"StyleMasterProductUpdateByUpcSoapOut\">\r\n
+        \   <wsdl:part name=\"parameters\" element=\"tns:StyleMasterProductUpdateByUpcResponse\"
         />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetStyleMasterProductAddStatusSoapIn\">\r\n
         \   <wsdl:part name=\"parameters\" element=\"tns:GetStyleMasterProductAddStatus\"
         />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetStyleMasterProductAddStatusSoapOut\">\r\n
@@ -1075,25 +1133,29 @@ http_interactions:
         name=\"ptbarcode\" type=\"s:string\" />\r\n  </wsdl:message>\r\n  <wsdl:message
         name=\"GetPickTicketObjectByBarCodeHttpGetOut\">\r\n    <wsdl:part name=\"Body\"
         element=\"tns:GetPickTicketResponse\" />\r\n  </wsdl:message>\r\n  <wsdl:message
-        name=\"GetPickTickesByStatusAndCreateDateHttpGetIn\">\r\n    <wsdl:part name=\"AuthenticationString\"
-        type=\"s:string\" />\r\n    <wsdl:part name=\"pickTicketStatus\" type=\"s:string\"
-        />\r\n    <wsdl:part name=\"startDate\" type=\"s:string\" />\r\n    <wsdl:part
-        name=\"endDate\" type=\"s:string\" />\r\n  </wsdl:message>\r\n  <wsdl:message
-        name=\"GetPickTickesByStatusAndCreateDateHttpGetOut\">\r\n    <wsdl:part name=\"Body\"
-        element=\"tns:PickTicketByStatusAndCreateDateResponse\" />\r\n  </wsdl:message>\r\n
-        \ <wsdl:message name=\"GetPickTicketObjectItemsInBoxesHttpGetIn\">\r\n    <wsdl:part
-        name=\"AuthenticationString\" type=\"s:string\" />\r\n    <wsdl:part name=\"ptbarcode\"
-        type=\"s:string\" />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTicketObjectItemsInBoxesHttpGetOut\">\r\n
-        \   <wsdl:part name=\"Body\" element=\"tns:PickTicketObjectItemsInBoxesResponse\"
-        />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTicketObjectItemsInBoxesV2HttpGetIn\">\r\n
-        \   <wsdl:part name=\"authenticationString\" type=\"s:string\" />\r\n    <wsdl:part
+        name=\"GetPickTicketsByOrderNumberHttpGetIn\">\r\n    <wsdl:part name=\"authenticationString\"
+        type=\"s:string\" />\r\n    <wsdl:part name=\"orderNumber\" type=\"s:string\"
+        />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTicketsByOrderNumberHttpGetOut\">\r\n
+        \   <wsdl:part name=\"Body\" element=\"tns:GetPTsByOrderNumberResponse\" />\r\n
+        \ </wsdl:message>\r\n  <wsdl:message name=\"GetPickTickesByStatusAndCreateDateHttpGetIn\">\r\n
+        \   <wsdl:part name=\"AuthenticationString\" type=\"s:string\" />\r\n    <wsdl:part
+        name=\"pickTicketStatus\" type=\"s:string\" />\r\n    <wsdl:part name=\"startDate\"
+        type=\"s:string\" />\r\n    <wsdl:part name=\"endDate\" type=\"s:string\"
+        />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTickesByStatusAndCreateDateHttpGetOut\">\r\n
+        \   <wsdl:part name=\"Body\" element=\"tns:PickTicketByStatusAndCreateDateResponse\"
+        />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTicketObjectItemsInBoxesHttpGetIn\">\r\n
+        \   <wsdl:part name=\"AuthenticationString\" type=\"s:string\" />\r\n    <wsdl:part
         name=\"ptbarcode\" type=\"s:string\" />\r\n  </wsdl:message>\r\n  <wsdl:message
-        name=\"GetPickTicketObjectItemsInBoxesV2HttpGetOut\">\r\n    <wsdl:part name=\"Body\"
-        element=\"tns:PickTicketObjectItemsInBoxesResponseV2\" />\r\n  </wsdl:message>\r\n
-        \ <wsdl:message name=\"GetPickTicketStatusesByDateHttpGetIn\">\r\n    <wsdl:part
-        name=\"AuthenticationString\" type=\"s:string\" />\r\n    <wsdl:part name=\"StartDate\"
-        type=\"s:string\" />\r\n    <wsdl:part name=\"EndDate\" type=\"s:string\"
-        />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTicketStatusesByDateHttpGetOut\">\r\n
+        name=\"GetPickTicketObjectItemsInBoxesHttpGetOut\">\r\n    <wsdl:part name=\"Body\"
+        element=\"tns:PickTicketObjectItemsInBoxesResponse\" />\r\n  </wsdl:message>\r\n
+        \ <wsdl:message name=\"GetPickTicketObjectItemsInBoxesV2HttpGetIn\">\r\n    <wsdl:part
+        name=\"authenticationString\" type=\"s:string\" />\r\n    <wsdl:part name=\"ptbarcode\"
+        type=\"s:string\" />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTicketObjectItemsInBoxesV2HttpGetOut\">\r\n
+        \   <wsdl:part name=\"Body\" element=\"tns:PickTicketObjectItemsInBoxesResponseV2\"
+        />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTicketStatusesByDateHttpGetIn\">\r\n
+        \   <wsdl:part name=\"AuthenticationString\" type=\"s:string\" />\r\n    <wsdl:part
+        name=\"StartDate\" type=\"s:string\" />\r\n    <wsdl:part name=\"EndDate\"
+        type=\"s:string\" />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTicketStatusesByDateHttpGetOut\">\r\n
         \   <wsdl:part name=\"Body\" element=\"tns:PickTicketStatusByDateResponse\"
         />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTicketStatusesByShipDateHttpGetIn\">\r\n
         \   <wsdl:part name=\"AuthenticationString\" type=\"s:string\" />\r\n    <wsdl:part
@@ -1178,13 +1240,17 @@ http_interactions:
         name=\"ptbarcode\" type=\"s:string\" />\r\n  </wsdl:message>\r\n  <wsdl:message
         name=\"GetPickTicketObjectByBarCodeHttpPostOut\">\r\n    <wsdl:part name=\"Body\"
         element=\"tns:GetPickTicketResponse\" />\r\n  </wsdl:message>\r\n  <wsdl:message
-        name=\"GetPickTickesByStatusAndCreateDateHttpPostIn\">\r\n    <wsdl:part name=\"AuthenticationString\"
-        type=\"s:string\" />\r\n    <wsdl:part name=\"pickTicketStatus\" type=\"s:string\"
-        />\r\n    <wsdl:part name=\"startDate\" type=\"s:string\" />\r\n    <wsdl:part
-        name=\"endDate\" type=\"s:string\" />\r\n  </wsdl:message>\r\n  <wsdl:message
-        name=\"GetPickTickesByStatusAndCreateDateHttpPostOut\">\r\n    <wsdl:part
-        name=\"Body\" element=\"tns:PickTicketByStatusAndCreateDateResponse\" />\r\n
-        \ </wsdl:message>\r\n  <wsdl:message name=\"GetPickTicketObjectItemsInBoxesHttpPostIn\">\r\n
+        name=\"GetPickTicketsByOrderNumberHttpPostIn\">\r\n    <wsdl:part name=\"authenticationString\"
+        type=\"s:string\" />\r\n    <wsdl:part name=\"orderNumber\" type=\"s:string\"
+        />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTicketsByOrderNumberHttpPostOut\">\r\n
+        \   <wsdl:part name=\"Body\" element=\"tns:GetPTsByOrderNumberResponse\" />\r\n
+        \ </wsdl:message>\r\n  <wsdl:message name=\"GetPickTickesByStatusAndCreateDateHttpPostIn\">\r\n
+        \   <wsdl:part name=\"AuthenticationString\" type=\"s:string\" />\r\n    <wsdl:part
+        name=\"pickTicketStatus\" type=\"s:string\" />\r\n    <wsdl:part name=\"startDate\"
+        type=\"s:string\" />\r\n    <wsdl:part name=\"endDate\" type=\"s:string\"
+        />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTickesByStatusAndCreateDateHttpPostOut\">\r\n
+        \   <wsdl:part name=\"Body\" element=\"tns:PickTicketByStatusAndCreateDateResponse\"
+        />\r\n  </wsdl:message>\r\n  <wsdl:message name=\"GetPickTicketObjectItemsInBoxesHttpPostIn\">\r\n
         \   <wsdl:part name=\"AuthenticationString\" type=\"s:string\" />\r\n    <wsdl:part
         name=\"ptbarcode\" type=\"s:string\" />\r\n  </wsdl:message>\r\n  <wsdl:message
         name=\"GetPickTicketObjectItemsInBoxesHttpPostOut\">\r\n    <wsdl:part name=\"Body\"
@@ -1286,24 +1352,29 @@ http_interactions:
         - Get Pick Ticket Object By Barcode</wsdl:documentation>\r\n      <wsdl:input
         message=\"tns:GetPickTicketObjectByBarCodeSoapIn\" />\r\n      <wsdl:output
         message=\"tns:GetPickTicketObjectByBarCodeSoapOut\" />\r\n    </wsdl:operation>\r\n
-        \   <wsdl:operation name=\"GetPickTickesByStatusAndCreateDate\">\r\n      <wsdl:documentation
-        xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket - Get Pick Tickets
-        by status and create date range</wsdl:documentation>\r\n      <wsdl:input
-        message=\"tns:GetPickTickesByStatusAndCreateDateSoapIn\" />\r\n      <wsdl:output
-        message=\"tns:GetPickTickesByStatusAndCreateDateSoapOut\" />\r\n    </wsdl:operation>\r\n
-        \   <wsdl:operation name=\"GetPickTicketObjectItemsInBoxes\">\r\n      <wsdl:documentation
+        \   <wsdl:operation name=\"GetPickTicketsByOrderNumber\">\r\n      <wsdl:documentation
         xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket - Get Pick Ticket
-        Object By Barcode with items in boxes</wsdl:documentation>\r\n      <wsdl:input
-        message=\"tns:GetPickTicketObjectItemsInBoxesSoapIn\" />\r\n      <wsdl:output
-        message=\"tns:GetPickTicketObjectItemsInBoxesSoapOut\" />\r\n    </wsdl:operation>\r\n
-        \   <wsdl:operation name=\"GetPickTicketObjectItemsInBoxesV2\">\r\n      <wsdl:documentation
-        xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket - Get Pick Ticket
-        details By Barcode with items in boxes. Pick ticket's package details provides
-        UCC labels number</wsdl:documentation>\r\n      <wsdl:input message=\"tns:GetPickTicketObjectItemsInBoxesV2SoapIn\"
-        />\r\n      <wsdl:output message=\"tns:GetPickTicketObjectItemsInBoxesV2SoapOut\"
-        />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketStatusesByDate\">\r\n
-        \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Get
-        PicvkTicket's status by date</wsdl:documentation>\r\n      <wsdl:input message=\"tns:GetPickTicketStatusesByDateSoapIn\"
+        numbers by order number</wsdl:documentation>\r\n      <wsdl:input message=\"tns:GetPickTicketsByOrderNumberSoapIn\"
+        />\r\n      <wsdl:output message=\"tns:GetPickTicketsByOrderNumberSoapOut\"
+        />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTickesByStatusAndCreateDate\">\r\n
+        \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket
+        - Get Pick Tickets by status and create date range</wsdl:documentation>\r\n
+        \     <wsdl:input message=\"tns:GetPickTickesByStatusAndCreateDateSoapIn\"
+        />\r\n      <wsdl:output message=\"tns:GetPickTickesByStatusAndCreateDateSoapOut\"
+        />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketObjectItemsInBoxes\">\r\n
+        \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket
+        - Get Pick Ticket Object By Barcode with items in boxes</wsdl:documentation>\r\n
+        \     <wsdl:input message=\"tns:GetPickTicketObjectItemsInBoxesSoapIn\" />\r\n
+        \     <wsdl:output message=\"tns:GetPickTicketObjectItemsInBoxesSoapOut\"
+        />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketObjectItemsInBoxesV2\">\r\n
+        \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket
+        - Get Pick Ticket details By Barcode with items in boxes. Pick ticket's package
+        details provides UCC labels number</wsdl:documentation>\r\n      <wsdl:input
+        message=\"tns:GetPickTicketObjectItemsInBoxesV2SoapIn\" />\r\n      <wsdl:output
+        message=\"tns:GetPickTicketObjectItemsInBoxesV2SoapOut\" />\r\n    </wsdl:operation>\r\n
+        \   <wsdl:operation name=\"GetPickTicketStatusesByDate\">\r\n      <wsdl:documentation
+        xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Get PicvkTicket's status by
+        date</wsdl:documentation>\r\n      <wsdl:input message=\"tns:GetPickTicketStatusesByDateSoapIn\"
         />\r\n      <wsdl:output message=\"tns:GetPickTicketStatusesByDateSoapOut\"
         />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketStatusesByShipDate\">\r\n
         \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Get
@@ -1314,6 +1385,10 @@ http_interactions:
         xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Products - This method creates
         stylemaster product from lineitem collection</wsdl:documentation>\r\n      <wsdl:input
         message=\"tns:StyleMasterProductAddSoapIn\" />\r\n      <wsdl:output message=\"tns:StyleMasterProductAddSoapOut\"
+        />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"StyleMasterProductUpdateByUpc\">\r\n
+        \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Products
+        - Update product by UPC</wsdl:documentation>\r\n      <wsdl:input message=\"tns:StyleMasterProductUpdateByUpcSoapIn\"
+        />\r\n      <wsdl:output message=\"tns:StyleMasterProductUpdateByUpcSoapOut\"
         />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetStyleMasterProductAddStatus\">\r\n
         \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Get
         Product status by StyleMasterProduct Object</wsdl:documentation>\r\n      <wsdl:input
@@ -1390,24 +1465,29 @@ http_interactions:
         - Get Pick Ticket Object By Barcode</wsdl:documentation>\r\n      <wsdl:input
         message=\"tns:GetPickTicketObjectByBarCodeHttpGetIn\" />\r\n      <wsdl:output
         message=\"tns:GetPickTicketObjectByBarCodeHttpGetOut\" />\r\n    </wsdl:operation>\r\n
-        \   <wsdl:operation name=\"GetPickTickesByStatusAndCreateDate\">\r\n      <wsdl:documentation
-        xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket - Get Pick Tickets
-        by status and create date range</wsdl:documentation>\r\n      <wsdl:input
-        message=\"tns:GetPickTickesByStatusAndCreateDateHttpGetIn\" />\r\n      <wsdl:output
-        message=\"tns:GetPickTickesByStatusAndCreateDateHttpGetOut\" />\r\n    </wsdl:operation>\r\n
-        \   <wsdl:operation name=\"GetPickTicketObjectItemsInBoxes\">\r\n      <wsdl:documentation
+        \   <wsdl:operation name=\"GetPickTicketsByOrderNumber\">\r\n      <wsdl:documentation
         xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket - Get Pick Ticket
-        Object By Barcode with items in boxes</wsdl:documentation>\r\n      <wsdl:input
-        message=\"tns:GetPickTicketObjectItemsInBoxesHttpGetIn\" />\r\n      <wsdl:output
-        message=\"tns:GetPickTicketObjectItemsInBoxesHttpGetOut\" />\r\n    </wsdl:operation>\r\n
-        \   <wsdl:operation name=\"GetPickTicketObjectItemsInBoxesV2\">\r\n      <wsdl:documentation
-        xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket - Get Pick Ticket
-        details By Barcode with items in boxes. Pick ticket's package details provides
-        UCC labels number</wsdl:documentation>\r\n      <wsdl:input message=\"tns:GetPickTicketObjectItemsInBoxesV2HttpGetIn\"
-        />\r\n      <wsdl:output message=\"tns:GetPickTicketObjectItemsInBoxesV2HttpGetOut\"
-        />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketStatusesByDate\">\r\n
-        \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Get
-        PicvkTicket's status by date</wsdl:documentation>\r\n      <wsdl:input message=\"tns:GetPickTicketStatusesByDateHttpGetIn\"
+        numbers by order number</wsdl:documentation>\r\n      <wsdl:input message=\"tns:GetPickTicketsByOrderNumberHttpGetIn\"
+        />\r\n      <wsdl:output message=\"tns:GetPickTicketsByOrderNumberHttpGetOut\"
+        />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTickesByStatusAndCreateDate\">\r\n
+        \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket
+        - Get Pick Tickets by status and create date range</wsdl:documentation>\r\n
+        \     <wsdl:input message=\"tns:GetPickTickesByStatusAndCreateDateHttpGetIn\"
+        />\r\n      <wsdl:output message=\"tns:GetPickTickesByStatusAndCreateDateHttpGetOut\"
+        />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketObjectItemsInBoxes\">\r\n
+        \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket
+        - Get Pick Ticket Object By Barcode with items in boxes</wsdl:documentation>\r\n
+        \     <wsdl:input message=\"tns:GetPickTicketObjectItemsInBoxesHttpGetIn\"
+        />\r\n      <wsdl:output message=\"tns:GetPickTicketObjectItemsInBoxesHttpGetOut\"
+        />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketObjectItemsInBoxesV2\">\r\n
+        \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket
+        - Get Pick Ticket details By Barcode with items in boxes. Pick ticket's package
+        details provides UCC labels number</wsdl:documentation>\r\n      <wsdl:input
+        message=\"tns:GetPickTicketObjectItemsInBoxesV2HttpGetIn\" />\r\n      <wsdl:output
+        message=\"tns:GetPickTicketObjectItemsInBoxesV2HttpGetOut\" />\r\n    </wsdl:operation>\r\n
+        \   <wsdl:operation name=\"GetPickTicketStatusesByDate\">\r\n      <wsdl:documentation
+        xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Get PicvkTicket's status by
+        date</wsdl:documentation>\r\n      <wsdl:input message=\"tns:GetPickTicketStatusesByDateHttpGetIn\"
         />\r\n      <wsdl:output message=\"tns:GetPickTicketStatusesByDateHttpGetOut\"
         />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketStatusesByShipDate\">\r\n
         \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Get
@@ -1490,24 +1570,29 @@ http_interactions:
         - Get Pick Ticket Object By Barcode</wsdl:documentation>\r\n      <wsdl:input
         message=\"tns:GetPickTicketObjectByBarCodeHttpPostIn\" />\r\n      <wsdl:output
         message=\"tns:GetPickTicketObjectByBarCodeHttpPostOut\" />\r\n    </wsdl:operation>\r\n
-        \   <wsdl:operation name=\"GetPickTickesByStatusAndCreateDate\">\r\n      <wsdl:documentation
-        xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket - Get Pick Tickets
-        by status and create date range</wsdl:documentation>\r\n      <wsdl:input
-        message=\"tns:GetPickTickesByStatusAndCreateDateHttpPostIn\" />\r\n      <wsdl:output
-        message=\"tns:GetPickTickesByStatusAndCreateDateHttpPostOut\" />\r\n    </wsdl:operation>\r\n
-        \   <wsdl:operation name=\"GetPickTicketObjectItemsInBoxes\">\r\n      <wsdl:documentation
+        \   <wsdl:operation name=\"GetPickTicketsByOrderNumber\">\r\n      <wsdl:documentation
         xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket - Get Pick Ticket
-        Object By Barcode with items in boxes</wsdl:documentation>\r\n      <wsdl:input
-        message=\"tns:GetPickTicketObjectItemsInBoxesHttpPostIn\" />\r\n      <wsdl:output
-        message=\"tns:GetPickTicketObjectItemsInBoxesHttpPostOut\" />\r\n    </wsdl:operation>\r\n
-        \   <wsdl:operation name=\"GetPickTicketObjectItemsInBoxesV2\">\r\n      <wsdl:documentation
-        xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket - Get Pick Ticket
-        details By Barcode with items in boxes. Pick ticket's package details provides
-        UCC labels number</wsdl:documentation>\r\n      <wsdl:input message=\"tns:GetPickTicketObjectItemsInBoxesV2HttpPostIn\"
-        />\r\n      <wsdl:output message=\"tns:GetPickTicketObjectItemsInBoxesV2HttpPostOut\"
-        />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketStatusesByDate\">\r\n
-        \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Get
-        PicvkTicket's status by date</wsdl:documentation>\r\n      <wsdl:input message=\"tns:GetPickTicketStatusesByDateHttpPostIn\"
+        numbers by order number</wsdl:documentation>\r\n      <wsdl:input message=\"tns:GetPickTicketsByOrderNumberHttpPostIn\"
+        />\r\n      <wsdl:output message=\"tns:GetPickTicketsByOrderNumberHttpPostOut\"
+        />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTickesByStatusAndCreateDate\">\r\n
+        \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket
+        - Get Pick Tickets by status and create date range</wsdl:documentation>\r\n
+        \     <wsdl:input message=\"tns:GetPickTickesByStatusAndCreateDateHttpPostIn\"
+        />\r\n      <wsdl:output message=\"tns:GetPickTickesByStatusAndCreateDateHttpPostOut\"
+        />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketObjectItemsInBoxes\">\r\n
+        \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket
+        - Get Pick Ticket Object By Barcode with items in boxes</wsdl:documentation>\r\n
+        \     <wsdl:input message=\"tns:GetPickTicketObjectItemsInBoxesHttpPostIn\"
+        />\r\n      <wsdl:output message=\"tns:GetPickTicketObjectItemsInBoxesHttpPostOut\"
+        />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketObjectItemsInBoxesV2\">\r\n
+        \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Pickticket
+        - Get Pick Ticket details By Barcode with items in boxes. Pick ticket's package
+        details provides UCC labels number</wsdl:documentation>\r\n      <wsdl:input
+        message=\"tns:GetPickTicketObjectItemsInBoxesV2HttpPostIn\" />\r\n      <wsdl:output
+        message=\"tns:GetPickTicketObjectItemsInBoxesV2HttpPostOut\" />\r\n    </wsdl:operation>\r\n
+        \   <wsdl:operation name=\"GetPickTicketStatusesByDate\">\r\n      <wsdl:documentation
+        xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Get PicvkTicket's status by
+        date</wsdl:documentation>\r\n      <wsdl:input message=\"tns:GetPickTicketStatusesByDateHttpPostIn\"
         />\r\n      <wsdl:output message=\"tns:GetPickTicketStatusesByDateHttpPostOut\"
         />\r\n    </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketStatusesByShipDate\">\r\n
         \     <wsdl:documentation xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">Get
@@ -1595,6 +1680,10 @@ http_interactions:
         style=\"document\" />\r\n      <wsdl:input>\r\n        <soap:body use=\"literal\"
         />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <soap:body use=\"literal\"
         />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
+        name=\"GetPickTicketsByOrderNumber\">\r\n      <soap:operation soapAction=\"http://rex11.com/webmethods/GetPickTicketsByOrderNumber\"
+        style=\"document\" />\r\n      <wsdl:input>\r\n        <soap:body use=\"literal\"
+        />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <soap:body use=\"literal\"
+        />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
         name=\"GetPickTickesByStatusAndCreateDate\">\r\n      <soap:operation soapAction=\"http://rex11.com/webmethods/GetPickTickesByStatusAndCreateDate\"
         style=\"document\" />\r\n      <wsdl:input>\r\n        <soap:body use=\"literal\"
         />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <soap:body use=\"literal\"
@@ -1616,6 +1705,10 @@ http_interactions:
         />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <soap:body use=\"literal\"
         />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
         name=\"StyleMasterProductAdd\">\r\n      <soap:operation soapAction=\"http://rex11.com/webmethods/StyleMasterProductAdd\"
+        style=\"document\" />\r\n      <wsdl:input>\r\n        <soap:body use=\"literal\"
+        />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <soap:body use=\"literal\"
+        />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
+        name=\"StyleMasterProductUpdateByUpc\">\r\n      <soap:operation soapAction=\"http://rex11.com/webmethods/StyleMasterProductUpdateByUpc\"
         style=\"document\" />\r\n      <wsdl:input>\r\n        <soap:body use=\"literal\"
         />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <soap:body use=\"literal\"
         />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
@@ -1700,6 +1793,10 @@ http_interactions:
         style=\"document\" />\r\n      <wsdl:input>\r\n        <soap12:body use=\"literal\"
         />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <soap12:body use=\"literal\"
         />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
+        name=\"GetPickTicketsByOrderNumber\">\r\n      <soap12:operation soapAction=\"http://rex11.com/webmethods/GetPickTicketsByOrderNumber\"
+        style=\"document\" />\r\n      <wsdl:input>\r\n        <soap12:body use=\"literal\"
+        />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <soap12:body use=\"literal\"
+        />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
         name=\"GetPickTickesByStatusAndCreateDate\">\r\n      <soap12:operation soapAction=\"http://rex11.com/webmethods/GetPickTickesByStatusAndCreateDate\"
         style=\"document\" />\r\n      <wsdl:input>\r\n        <soap12:body use=\"literal\"
         />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <soap12:body use=\"literal\"
@@ -1721,6 +1818,10 @@ http_interactions:
         />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <soap12:body use=\"literal\"
         />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
         name=\"StyleMasterProductAdd\">\r\n      <soap12:operation soapAction=\"http://rex11.com/webmethods/StyleMasterProductAdd\"
+        style=\"document\" />\r\n      <wsdl:input>\r\n        <soap12:body use=\"literal\"
+        />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <soap12:body use=\"literal\"
+        />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
+        name=\"StyleMasterProductUpdateByUpc\">\r\n      <soap12:operation soapAction=\"http://rex11.com/webmethods/StyleMasterProductUpdateByUpc\"
         style=\"document\" />\r\n      <wsdl:input>\r\n        <soap12:body use=\"literal\"
         />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <soap12:body use=\"literal\"
         />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
@@ -1789,74 +1890,77 @@ http_interactions:
         \     <http:operation location=\"/GetPickTicketObjectByBarCode\" />\r\n      <wsdl:input>\r\n
         \       <http:urlEncoded />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n
         \       <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n
-        \   <wsdl:operation name=\"GetPickTickesByStatusAndCreateDate\">\r\n      <http:operation
-        location=\"/GetPickTickesByStatusAndCreateDate\" />\r\n      <wsdl:input>\r\n
-        \       <http:urlEncoded />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n
-        \       <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n
-        \   <wsdl:operation name=\"GetPickTicketObjectItemsInBoxes\">\r\n      <http:operation
-        location=\"/GetPickTicketObjectItemsInBoxes\" />\r\n      <wsdl:input>\r\n
-        \       <http:urlEncoded />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n
-        \       <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n
-        \   <wsdl:operation name=\"GetPickTicketObjectItemsInBoxesV2\">\r\n      <http:operation
-        location=\"/GetPickTicketObjectItemsInBoxesV2\" />\r\n      <wsdl:input>\r\n
-        \       <http:urlEncoded />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n
-        \       <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n
-        \   <wsdl:operation name=\"GetPickTicketStatusesByDate\">\r\n      <http:operation
-        location=\"/GetPickTicketStatusesByDate\" />\r\n      <wsdl:input>\r\n        <http:urlEncoded
+        \   <wsdl:operation name=\"GetPickTicketsByOrderNumber\">\r\n      <http:operation
+        location=\"/GetPickTicketsByOrderNumber\" />\r\n      <wsdl:input>\r\n        <http:urlEncoded
         />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <mime:mimeXml
         part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
-        name=\"GetPickTicketStatusesByShipDate\">\r\n      <http:operation location=\"/GetPickTicketStatusesByShipDate\"
+        name=\"GetPickTickesByStatusAndCreateDate\">\r\n      <http:operation location=\"/GetPickTickesByStatusAndCreateDate\"
         />\r\n      <wsdl:input>\r\n        <http:urlEncoded />\r\n      </wsdl:input>\r\n
         \     <wsdl:output>\r\n        <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n
-        \   </wsdl:operation>\r\n    <wsdl:operation name=\"GetStyleMasterProductAddStatus\">\r\n
-        \     <http:operation location=\"/GetStyleMasterProductAddStatus\" />\r\n
+        \   </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketObjectItemsInBoxes\">\r\n
+        \     <http:operation location=\"/GetPickTicketObjectItemsInBoxes\" />\r\n
         \     <wsdl:input>\r\n        <http:urlEncoded />\r\n      </wsdl:input>\r\n
         \     <wsdl:output>\r\n        <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n
-        \   </wsdl:operation>\r\n  </wsdl:binding>\r\n  <wsdl:binding name=\"PublicAPIWSHttpPost\"
-        type=\"tns:PublicAPIWSHttpPost\">\r\n    <http:binding verb=\"POST\" />\r\n
-        \   <wsdl:operation name=\"AuthenticationTokenGet\">\r\n      <http:operation
-        location=\"/AuthenticationTokenGet\" />\r\n      <wsdl:input>\r\n        <mime:content
+        \   </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketObjectItemsInBoxesV2\">\r\n
+        \     <http:operation location=\"/GetPickTicketObjectItemsInBoxesV2\" />\r\n
+        \     <wsdl:input>\r\n        <http:urlEncoded />\r\n      </wsdl:input>\r\n
+        \     <wsdl:output>\r\n        <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n
+        \   </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketStatusesByDate\">\r\n
+        \     <http:operation location=\"/GetPickTicketStatusesByDate\" />\r\n      <wsdl:input>\r\n
+        \       <http:urlEncoded />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n
+        \       <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n
+        \   <wsdl:operation name=\"GetPickTicketStatusesByShipDate\">\r\n      <http:operation
+        location=\"/GetPickTicketStatusesByShipDate\" />\r\n      <wsdl:input>\r\n
+        \       <http:urlEncoded />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n
+        \       <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n
+        \   <wsdl:operation name=\"GetStyleMasterProductAddStatus\">\r\n      <http:operation
+        location=\"/GetStyleMasterProductAddStatus\" />\r\n      <wsdl:input>\r\n
+        \       <http:urlEncoded />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n
+        \       <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n
+        \ </wsdl:binding>\r\n  <wsdl:binding name=\"PublicAPIWSHttpPost\" type=\"tns:PublicAPIWSHttpPost\">\r\n
+        \   <http:binding verb=\"POST\" />\r\n    <wsdl:operation name=\"AuthenticationTokenGet\">\r\n
+        \     <http:operation location=\"/AuthenticationTokenGet\" />\r\n      <wsdl:input>\r\n
+        \       <mime:content type=\"application/x-www-form-urlencoded\" />\r\n      </wsdl:input>\r\n
+        \     <wsdl:output>\r\n        <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n
+        \   </wsdl:operation>\r\n    <wsdl:operation name=\"GetInventory\">\r\n      <http:operation
+        location=\"/GetInventory\" />\r\n      <wsdl:input>\r\n        <mime:content
         type=\"application/x-www-form-urlencoded\" />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n
         \       <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n
-        \   <wsdl:operation name=\"GetInventory\">\r\n      <http:operation location=\"/GetInventory\"
-        />\r\n      <wsdl:input>\r\n        <mime:content type=\"application/x-www-form-urlencoded\"
-        />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <mime:mimeXml
-        part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
-        name=\"GetInventoryByBatch\">\r\n      <http:operation location=\"/GetInventoryByBatch\"
-        />\r\n      <wsdl:input>\r\n        <mime:content type=\"application/x-www-form-urlencoded\"
-        />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <mime:mimeXml
-        part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
-        name=\"GetInventoryFromDateTime\">\r\n      <http:operation location=\"/GetInventoryFromDateTime\"
-        />\r\n      <wsdl:input>\r\n        <mime:content type=\"application/x-www-form-urlencoded\"
-        />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <mime:mimeXml
-        part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
-        name=\"GetInventoryFromDateTimeByBatch\">\r\n      <http:operation location=\"/GetInventoryFromDateTimeByBatch\"
-        />\r\n      <wsdl:input>\r\n        <mime:content type=\"application/x-www-form-urlencoded\"
-        />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <mime:mimeXml
-        part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
-        name=\"GetInventoryByUPCs\">\r\n      <http:operation location=\"/GetInventoryByUPCs\"
-        />\r\n      <wsdl:input>\r\n        <mime:content type=\"application/x-www-form-urlencoded\"
-        />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <mime:mimeXml
-        part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
-        name=\"GetInventoryByStyle\">\r\n      <http:operation location=\"/GetInventoryByStyle\"
-        />\r\n      <wsdl:input>\r\n        <mime:content type=\"application/x-www-form-urlencoded\"
-        />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <mime:mimeXml
-        part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
-        name=\"GetReceivingStatusesByDate\">\r\n      <http:operation location=\"/GetReceivingStatusesByDate\"
-        />\r\n      <wsdl:input>\r\n        <mime:content type=\"application/x-www-form-urlencoded\"
-        />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <mime:mimeXml
-        part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
-        name=\"GetReceivingStatusesByDateConfigurable\">\r\n      <http:operation
-        location=\"/GetReceivingStatusesByDateConfigurable\" />\r\n      <wsdl:input>\r\n
+        \   <wsdl:operation name=\"GetInventoryByBatch\">\r\n      <http:operation
+        location=\"/GetInventoryByBatch\" />\r\n      <wsdl:input>\r\n        <mime:content
+        type=\"application/x-www-form-urlencoded\" />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n
+        \       <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n
+        \   <wsdl:operation name=\"GetInventoryFromDateTime\">\r\n      <http:operation
+        location=\"/GetInventoryFromDateTime\" />\r\n      <wsdl:input>\r\n        <mime:content
+        type=\"application/x-www-form-urlencoded\" />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n
+        \       <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n
+        \   <wsdl:operation name=\"GetInventoryFromDateTimeByBatch\">\r\n      <http:operation
+        location=\"/GetInventoryFromDateTimeByBatch\" />\r\n      <wsdl:input>\r\n
         \       <mime:content type=\"application/x-www-form-urlencoded\" />\r\n      </wsdl:input>\r\n
         \     <wsdl:output>\r\n        <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n
-        \   </wsdl:operation>\r\n    <wsdl:operation name=\"GetReceivingTicketsByPO\">\r\n
-        \     <http:operation location=\"/GetReceivingTicketsByPO\" />\r\n      <wsdl:input>\r\n
+        \   </wsdl:operation>\r\n    <wsdl:operation name=\"GetInventoryByUPCs\">\r\n
+        \     <http:operation location=\"/GetInventoryByUPCs\" />\r\n      <wsdl:input>\r\n
         \       <mime:content type=\"application/x-www-form-urlencoded\" />\r\n      </wsdl:input>\r\n
         \     <wsdl:output>\r\n        <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n
-        \   </wsdl:operation>\r\n    <wsdl:operation name=\"GetReceivingTicketObjectByTicketNo\">\r\n
-        \     <http:operation location=\"/GetReceivingTicketObjectByTicketNo\" />\r\n
-        \     <wsdl:input>\r\n        <mime:content type=\"application/x-www-form-urlencoded\"
+        \   </wsdl:operation>\r\n    <wsdl:operation name=\"GetInventoryByStyle\">\r\n
+        \     <http:operation location=\"/GetInventoryByStyle\" />\r\n      <wsdl:input>\r\n
+        \       <mime:content type=\"application/x-www-form-urlencoded\" />\r\n      </wsdl:input>\r\n
+        \     <wsdl:output>\r\n        <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n
+        \   </wsdl:operation>\r\n    <wsdl:operation name=\"GetReceivingStatusesByDate\">\r\n
+        \     <http:operation location=\"/GetReceivingStatusesByDate\" />\r\n      <wsdl:input>\r\n
+        \       <mime:content type=\"application/x-www-form-urlencoded\" />\r\n      </wsdl:input>\r\n
+        \     <wsdl:output>\r\n        <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n
+        \   </wsdl:operation>\r\n    <wsdl:operation name=\"GetReceivingStatusesByDateConfigurable\">\r\n
+        \     <http:operation location=\"/GetReceivingStatusesByDateConfigurable\"
+        />\r\n      <wsdl:input>\r\n        <mime:content type=\"application/x-www-form-urlencoded\"
+        />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <mime:mimeXml
+        part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
+        name=\"GetReceivingTicketsByPO\">\r\n      <http:operation location=\"/GetReceivingTicketsByPO\"
+        />\r\n      <wsdl:input>\r\n        <mime:content type=\"application/x-www-form-urlencoded\"
+        />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <mime:mimeXml
+        part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
+        name=\"GetReceivingTicketObjectByTicketNo\">\r\n      <http:operation location=\"/GetReceivingTicketObjectByTicketNo\"
+        />\r\n      <wsdl:input>\r\n        <mime:content type=\"application/x-www-form-urlencoded\"
         />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <mime:mimeXml
         part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n    <wsdl:operation
         name=\"GetReceivingTicketsByStatusAndCreateDate\">\r\n      <http:operation
@@ -1877,6 +1981,10 @@ http_interactions:
         \     <wsdl:output>\r\n        <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n
         \   </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketObjectByBarCode\">\r\n
         \     <http:operation location=\"/GetPickTicketObjectByBarCode\" />\r\n      <wsdl:input>\r\n
+        \       <mime:content type=\"application/x-www-form-urlencoded\" />\r\n      </wsdl:input>\r\n
+        \     <wsdl:output>\r\n        <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n
+        \   </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTicketsByOrderNumber\">\r\n
+        \     <http:operation location=\"/GetPickTicketsByOrderNumber\" />\r\n      <wsdl:input>\r\n
         \       <mime:content type=\"application/x-www-form-urlencoded\" />\r\n      </wsdl:input>\r\n
         \     <wsdl:output>\r\n        <mime:mimeXml part=\"Body\" />\r\n      </wsdl:output>\r\n
         \   </wsdl:operation>\r\n    <wsdl:operation name=\"GetPickTickesByStatusAndCreateDate\">\r\n
@@ -1905,14 +2013,14 @@ http_interactions:
         />\r\n      </wsdl:input>\r\n      <wsdl:output>\r\n        <mime:mimeXml
         part=\"Body\" />\r\n      </wsdl:output>\r\n    </wsdl:operation>\r\n  </wsdl:binding>\r\n
         \ <wsdl:service name=\"PublicAPIWS\">\r\n    <wsdl:port name=\"PublicAPIWSSoap\"
-        binding=\"tns:PublicAPIWSSoap\">\r\n      <soap:address location=\"http://sync.rex11.com/ws/v2staging/publicapiws.asmx\"
+        binding=\"tns:PublicAPIWSSoap\">\r\n      <soap:address location=\"https://sync.rex11.com/ws/v3prod/publicapiws.asmx\"
         />\r\n    </wsdl:port>\r\n    <wsdl:port name=\"PublicAPIWSSoap12\" binding=\"tns:PublicAPIWSSoap12\">\r\n
-        \     <soap12:address location=\"http://sync.rex11.com/ws/v2staging/publicapiws.asmx\"
+        \     <soap12:address location=\"https://sync.rex11.com/ws/v3prod/publicapiws.asmx\"
         />\r\n    </wsdl:port>\r\n    <wsdl:port name=\"PublicAPIWSHttpGet\" binding=\"tns:PublicAPIWSHttpGet\">\r\n
-        \     <http:address location=\"http://sync.rex11.com/ws/v2staging/publicapiws.asmx\"
+        \     <http:address location=\"https://sync.rex11.com/ws/v3prod/publicapiws.asmx\"
         />\r\n    </wsdl:port>\r\n    <wsdl:port name=\"PublicAPIWSHttpPost\" binding=\"tns:PublicAPIWSHttpPost\">\r\n
-        \     <http:address location=\"http://sync.rex11.com/ws/v2staging/publicapiws.asmx\"
+        \     <http:address location=\"https://sync.rex11.com/ws/v3prod/publicapiws.asmx\"
         />\r\n    </wsdl:port>\r\n  </wsdl:service>\r\n</wsdl:definitions>"
     http_version: 
-  recorded_at: Thu, 17 Mar 2016 22:30:17 GMT
+  recorded_at: Mon, 28 Mar 2016 22:45:53 GMT
 recorded_with: VCR 2.9.3

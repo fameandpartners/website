@@ -1,5 +1,3 @@
-# Note that this uses the Savon 1.2 API.
-
 module Bergen
   class Service
     attr_reader :client

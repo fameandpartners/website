@@ -1,3 +1,5 @@
+# Note that this uses the Savon 1.2 API.
+
 module Bergen
   class SavonClient
     extend Forwardable
