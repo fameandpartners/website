@@ -14,7 +14,9 @@ module Bergen
         end
       end
 
-      private def required_fields_hash
+      private
+
+      def required_fields_hash
         {
           'AuthenticationString'  => client.auth_token,
           'SupplierDetails'       => {
@@ -28,10 +30,10 @@ module Bergen
             'ShipmentTypelist' => 'OPENTOHANG'
           },
           'Shipmentitemslist'     => {
-            'SKU'              => 'Product SKU',
-            'Style'            => 'Product Style',
-            'Color'            => 'Product Color',
-            'Size'             => 'Product Size',
+            'SKU'              => global_sku.sku,
+            'Style'            => global_sku.style_number,
+            'Color'            => global_sku.color_name,
+            'Size'             => global_sku.size,
             'ExpectedQuantity' => '0', # Required, but field is ignored
             'ActualQuantity'   => '0', # Required, but field is ignored
             'DamagedQuantity'  => '0' # Required, but field is ignored
@@ -39,6 +41,13 @@ module Bergen
         }
       end
 
+      def line_item_presenter
+        return_request_item.line_item_presenter
+      end
+
+      def global_sku
+        line_item_presenter.global_sku
+      end
     end
   end
 end

@@ -32,11 +32,11 @@ module Bergen
       end
 
       def line_item_presenter
-        Orders::LineItemPresenter.new(return_request_item.line_item, return_request_item.order)
+        return_request_item.line_item_presenter
       end
 
       def global_sku
-        GlobalSku.find_or_create_by_line_item(line_item_presenter: line_item_presenter)
+        line_item_presenter.global_sku
       end
     end
   end
