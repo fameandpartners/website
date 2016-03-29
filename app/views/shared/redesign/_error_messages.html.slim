@@ -7,7 +7,7 @@
 	      span aria-hidden="true" &times;
         - if !target.errors.messages[:password].nil?
           - mess = "Password must have at least 6 characters and password confirmation must match. "
-        - if !target.errors.messages[:first_name].nil?
+        - if !target.errors.messages[:first_name].nil? || !target.errors.messages[:last_name].nil?
   	      - mess = mess.to_s + "First name and Last name must exist ."
         h3.alert-warning = mess
 	    / ul.list-group
