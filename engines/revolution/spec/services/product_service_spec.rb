@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Revolution::ProductService do
-  let(:product_ids) { %w(471-coral 680-light-pink 683-burgundy 262-white 704-black 504-lavender 680-forest-green) }
+  let(:product_ids) { %w(471-coral 680-light-pink 683-burgundy 262-white 704-black 504-lavender 680-forest-green).join(',') }
 
   let!(:dress) { create(:dress, id: 471) }
   let(:service) { described_class.new(product_ids, 'au') }
@@ -37,7 +37,7 @@ describe Revolution::ProductService do
     context 'when there are nil items' do
       it 'remove all nil items' do
         allow_any_instance_of(Revolution::ProductService).to receive(:get_revolution_ids).and_return(["471",nil,nil,nil])
-        expect(Revolution::ProductService.new(service.ids, current_site_version).products(params, limit).size).to be 1
+        expect(Revolution::ProductService.new(product_ids, current_site_version).products(params, limit).size).to be 1
       end
     end
   end

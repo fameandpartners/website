@@ -1,45 +1,35 @@
 module AdminUi
   module Content
     class PagesController < ::AdminUi::ApplicationController
+      before_filter :normalize_page_variables, only: [:update, :create]
 
       def index
-      end
-
-      def edit
-      end
-
-      def update
-        begin
-          params[:page][:variables] = eval(params[:page][:variables])
-          if page.update_attributes(params[:page])
-            flash[:success] = "Page updated"
-            redirect_to action: :edit
-          else
-            render action: :edit
-          end
-        rescue StandardError => e
-          NewRelic::Agent.notice_error(e)
-          flash[:error] = "An error occured, please check the variable definition"
-          render action: :edit
-        end
       end
 
       def new
         @page = Revolution::Page.new
       end
 
-      def create
-        begin
-          params[:page][:variables] = eval(params[:page][:variables])
-          @page = Revolution::Page.new(params[:page])
-          if @page.save
-            redirect_to action: :index
-          else
-            render action: :new
+      def edit
+      end
+
+      def update
+        if page.update_attributes(params[:page])
+          flash[:success] = 'Page updated'
+          redirect_to action: :edit
+        else
+          flash[:error] = 'An error occured, please check errors below'
+          render action: :edit
         end
-        rescue StandardError => e
-          NewRelic::Agent.notice_error(e)
-          flash[:error] = "An error occured, please check the variable definition"
+      end
+
+      def create
+        @page = Revolution::Page.new(params[:page])
+        if @page.save
+          flash[:notice] = 'Page successfully created'
+          redirect_to edit_content_page_path(@page)
+        else
+          flash[:error] = 'An error occured, please check errors below'
           render action: :new
         end
       end
@@ -53,13 +43,21 @@ module AdminUi
           @page.translations.destroy_all
         end
         @page.delete
-        flash[:success] = "Page deleted"
+        flash[:success] = 'Page deleted'
         redirect_to action: :index
       end
 
       private
 
       helper_method :collection, :page
+
+      def normalize_page_variables
+        variables_params = params[:page][:variables] || []
+
+        params[:page][:variables] = variables_params.inject({}) do |hash, kv_hash|
+          hash.merge(kv_hash['key'] => kv_hash['value'])
+        end
+      end
 
       def collection
         page = (params[:page] || 1).to_i

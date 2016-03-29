@@ -24,9 +24,7 @@
     .form-group
       label.col-sm-2.control-label Variables
       .col-sm-10
-        = f.text_area :variables, :class => 'form-control', rows: 5
-        - if page.get(:pids).present?
-          p.text-warning Applied <strong><tt>pids</tt></strong> will put these products before all others.
+        = react_component('PageVariablesComponent', f.object.variables)
 
     .hr-line-dashed
     .form-group
