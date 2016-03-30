@@ -39,7 +39,7 @@ class ProductionOrderEmailService
       user ||= Spree::User.where(email: order_presenter.email).first
 
       line_items = extract_line_items
-
+      byebug
       Marketing::CustomerIOEventTracker.new.track(
         user,
         'order_production_order_email',
