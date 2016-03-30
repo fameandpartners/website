@@ -1,14 +1,13 @@
 require 'spec_helper'
 
 describe Revolution::ProductService do
-  let(:product_ids) { %w(471-coral 680-light-pink 683-burgundy 262-white 704-black 504-lavender 680-forest-green).join(',') }
+  let(:product_ids_ary) { %w(471-coral 680-light-pink 683-burgundy 262-white 704-black 504-lavender 680-forest-green) }
 
-  let!(:dress) { create(:dress, id: 471) }
-  let(:service) { described_class.new(product_ids, 'au') }
-  let!(:current_site_version) { build_stubbed(:site_version) }
+  let(:current_site_version) { build_stubbed(:site_version, :au) }
+  let(:service) { described_class.new(product_ids_ary, current_site_version) }
   let(:params) { { controller: 'products/collections', action: 'show', permalink: 'formal', limit: 21 } }
   let(:limit) { 10 }
-  let(:variables) { { pids: product_ids } }
+  let(:variables) { { pids: product_ids_ary.join(',') } }
 
   subject(:page) { Revolution::Page.create!(path: '/dresses/formal', variables: variables) }
 
@@ -23,10 +22,10 @@ describe Revolution::ProductService do
   describe '#products' do
     context 'when limit is greater than the products' do
       let(:limit) { 7 }
-      subject(:service) { Revolution::ProductService.new(product_ids, current_site_version) }
+      subject(:service) { Revolution::ProductService.new(product_ids_ary, current_site_version) }
 
       it 'given an offset greater than the number of products 0 products are returned' do
-        page.variables  = {pids: product_ids}
+        page.variables  = {pids: product_ids_ary}
         params[:offset] = 8
 
         result = service.products(params, limit)
@@ -35,9 +34,13 @@ describe Revolution::ProductService do
     end
 
     context 'when there are nil items' do
+      let!(:dress) { create(:dress, id: 471) }
+
+      before(:each) { allow(service).to receive(:get_revolution_ids).and_return(['471', nil, nil, nil]) }
+
       it 'remove all nil items' do
-        allow_any_instance_of(Revolution::ProductService).to receive(:get_revolution_ids).and_return(["471",nil,nil,nil])
-        expect(Revolution::ProductService.new(product_ids, current_site_version).products(params, limit).size).to be 1
+        result = service.products(params, limit)
+        expect(result.size).to eq(1)
       end
     end
   end

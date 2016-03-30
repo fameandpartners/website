@@ -4,8 +4,8 @@ module Revolution
 
     attr_reader :product_ids, :site_version
 
-    def initialize(product_ids, site_version)
-      @product_ids  = product_ids.flatten
+    def initialize(product_ids_ary, site_version)
+      @product_ids  = product_ids_ary
       @site_version = site_version
     end
 
