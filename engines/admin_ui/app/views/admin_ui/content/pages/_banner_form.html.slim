@@ -1,26 +1,30 @@
-- page.translations.where(locale: locale).first.banners.order(:banner_order).each do |banner|
-  .ibox.float-e-margins
-    .ibox-title
-      .container_fluid
-        .row
-          .col-lg-4
-            h6 = image_tag banner.banner.url, alt: banner.alt_text, width: '300'
-          .col-lg-2
-            | Size:&nbsp;
-            = "#{banner.banner_width}px by #{banner.banner_height}"
-            br
-            | File Name:&nbsp;
-            = banner.banner_file_name
-            br
-            | Size:&nbsp;
-            = banner.banner_file_size
-            | kilobytes
-          .col-lg-4
-            = link_to 'Delete Banner', revolution.banner_delete_path(banner), data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
-
-    .ibox-content
-      = t.fields_for :banners, banner do |banner|
-        = render partial: 'banner_form_content', locals: { banner: banner }
+- if page.translations.where(locale: locale).first.banners.any?
+  - page.translations.where(locale: locale).first.banners.order(:banner_order).each do |banner|
+    .ibox.float-e-margins
+      .ibox-title
+        .container_fluid
+          .row
+            .col-lg-4
+              h6 = image_tag banner.banner.url, alt: banner.alt_text, width: '300'
+              br
+              = link_to 'Delete Banner', revolution.banner_delete_path(banner), data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs'
+            .col-lg-4
+              = t.fields_for :banners, banner do |banner|
+                .form-group
+                  label Order
+                  = banner.number_field :banner_order, min: 1, step: 1, class: 'form-control'
+                .form-group
+                  label Alt Text
+                  = banner.text_field :alt_text, class: 'form-control'
+            .col-lg-4
+              label Resolution:&nbsp;
+              = "#{banner.banner_width}px by #{banner.banner_height} px"
+              br
+              label File Name:&nbsp;
+              = banner.banner_file_name
+              br
+              label Size:&nbsp;
+              = "#{banner.banner_file_size} kilobytes"
 
 .ibox.float-e-margins
   .ibox-title
