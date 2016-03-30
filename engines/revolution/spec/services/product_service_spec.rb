@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe Revolution::ProductService do
-  let(:product_ids_ary) { %w(471-coral 680-light-pink 683-burgundy 262-white 704-black 504-lavender 680-forest-green) }
+  let(:product_ids) { %w(471-coral 680-light-pink 683-burgundy 262-white 704-black 504-lavender 680-forest-green) }
 
   let(:current_site_version) { build_stubbed(:site_version, :au) }
-  let(:service) { described_class.new(product_ids_ary, current_site_version) }
+  let(:service) { described_class.new(product_ids, current_site_version) }
   let(:params) { { controller: 'products/collections', action: 'show', permalink: 'formal', limit: 21 } }
   let(:limit) { 10 }
-  let(:variables) { { pids: product_ids_ary.join(',') } }
+  let(:variables) { { pids: product_ids.join(',') } }
 
   subject(:page) { Revolution::Page.create!(path: '/dresses/formal', variables: variables) }
 
@@ -22,10 +22,10 @@ describe Revolution::ProductService do
   describe '#products' do
     context 'when limit is greater than the products' do
       let(:limit) { 7 }
-      subject(:service) { Revolution::ProductService.new(product_ids_ary, current_site_version) }
+      subject(:service) { Revolution::ProductService.new(product_ids, current_site_version) }
 
       it 'given an offset greater than the number of products 0 products are returned' do
-        page.variables  = {pids: product_ids_ary}
+        page.variables  = {pids: product_ids}
         params[:offset] = 8
 
         result = service.products(params, limit)
