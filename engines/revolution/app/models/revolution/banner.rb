@@ -7,7 +7,7 @@ module Revolution
 
     belongs_to :translation, inverse_of: :banners
     validates :banner_order, :alt_text, presence: true
-    validates_uniqueness_of :banner_order, scope: [:translation_id, :size]
+    # validates_uniqueness_of :banner_order, scope: [:translation_id, :size]
 
     attr_accessible :alt_text, :translation_id, :banner, :size, :banner_order,
                     :banner_file_name, :banner_content_type, :banner_file_size
@@ -17,7 +17,7 @@ module Revolution
     validates_attachment_size :banner, in: 0..201.kilobytes
 
     validate :file_dimensions
-    validate :same_dimensions
+    # validate :same_dimensions
 
     def self.banner_pos(banner_order, size)
       where('banner_order >= ? and size = ?', banner_order, size).order(:banner_order)
@@ -47,10 +47,11 @@ module Revolution
           width  = SMALL_FILE_DIMENSION[:width]
           height = SMALL_FILE_DIMENSION[:height]
         end
-        unless dimensions.width == width && dimensions.height == height
-          errors.add :banner, "Width must be #{width}px and height must be #{height}px"
-        end
+        # unless dimensions.width == width && dimensions.height == height
+        #   errors.add :banner, "Width must be #{width}px and height must be #{height}px"
+        # end
       end
+      return true
     end
 
     def same_dimensions
