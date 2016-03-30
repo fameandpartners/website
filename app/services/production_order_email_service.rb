@@ -39,7 +39,7 @@ class ProductionOrderEmailService
       user ||= Spree::User.where(email: order_presenter.email).first
 
       line_items = extract_line_items
-
+      
       Marketing::CustomerIOEventTracker.new.track(
         user,
         'order_production_order_email',
@@ -58,7 +58,7 @@ class ProductionOrderEmailService
         shipping_address:   order_presenter.shipping_address,
         factory:            factory,
         display_total:      order_presenter.display_total,
-        currency:           order_presenter.display_total.currency
+        currency:           order_presenter.order.currency
       )
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)
