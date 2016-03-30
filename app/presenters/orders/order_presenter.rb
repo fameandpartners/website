@@ -8,6 +8,7 @@ module Orders
     def_delegators :@order,
                    :products,
                    :display_total,
+                   :currency,
                    :customer_notes,
                    :id,
                    :number,
