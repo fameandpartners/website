@@ -35,7 +35,7 @@ var BlogPosts = React.createClass({
             .filter(function (post) {
               return post.custom_fields.home_page_display == "true"
             })
-            .slice(0, 9)
+            .slice(0, 7)
             .sort(function (post, another_post) {
               // WP custom fields values seems to be an Array, so `home_page_display_order` returns something like: ["1"], ["2"], ...
               return parseInt(post.custom_fields.home_page_display_order[0]) - parseInt(another_post.custom_fields.home_page_display_order[0])
@@ -64,14 +64,12 @@ var BlogPosts = React.createClass({
               <Post post={this.state.posts[0]} />
               <Post post={this.state.posts[1]} />
               <Post post={this.state.posts[2]} />
-              <Post post={this.state.posts[3]} />
             </div>
 
             <div className="col">
+              <Post post={this.state.posts[3]} />
               <Post post={this.state.posts[4]} />
               <Post post={this.state.posts[5]} />
-              <Post post={this.state.posts[6]} />
-              <Post post={this.state.posts[7]} />
             </div>
 
           </div>
