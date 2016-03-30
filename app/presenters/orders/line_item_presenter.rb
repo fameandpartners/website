@@ -181,6 +181,7 @@ module Orders
         :height                  => height,
         :customisations          => customisations.collect(&:first).join('|'),
         :promo_codes             => promo_codes.join('|'),
+        :email                   => order.email,
         :customer_notes          => order.customer_notes,
         :customer_name           => order.name,
         :customer_phone_number   => wrapped_order.phone_number.to_s,
