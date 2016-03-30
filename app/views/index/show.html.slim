@@ -6,7 +6,7 @@ ruby:
   = react_component('HeroCarousel', skin: 'skin-dark',
     assets: [{link: partners_in_crime_collection_path, src: '/assets/home-page-tiles/PartnersInCrime-HERO-2', alt: 'Partners In Crime'},
              {link: 'dresses/dress-chiara-978?color=black', src: '/assets/home-page-tiles/Chiara-HERO', alt: 'Chiara Three-Piece Set'},
-             {link: just_the_girls_collection_path, src: '/assets/home-page-tiles/JustTheGirls', alt: 'Just The Girls'}])
+             {link: dresses_path, src: '/assets/home-page-tiles/hero-forever', alt: 'Forever'}])
 
   section.competition-banner
     .container
@@ -25,14 +25,12 @@ ruby:
     .row
       .main.col-md-7
         = link_to '/dresses/new-this-week', class: 'media-wrap'
-          = image_tag 'home-page-tiles/READYFORPROM-CategoryTile1.jpg', alt: 'Ready For Prom - Shop New This Week Dresses'
+          = image_tag 'home-page-tiles/after-dark-CategoryTile1.jpg', alt: 'AFTER DARK - explore THE NEWEST LOOKS'
         = render 'shared/redesign/tabs_collection'
-        = link_to build_taxon_path('Formal'), class: 'media-wrap'
-          = image_tag 'home-page-tiles/JUSTTHEGIRLS-CategoryTile2.jpg', alt: 'Just The Girls - Shop Just The Girls Dresses'
-        = link_to build_taxon_path('print'), class: 'media-wrap'
-          = image_tag 'home-page-tiles/EventDress-CategoryTile3-2.jpg', alt: 'Dress to Impress - Shop Print Dresses'
-        = link_to build_taxon_path('Lace'), class: 'media-wrap'
-          = image_tag 'home-page-tiles/LOVELACE-CategoryTile4.jpg', alt: 'Love Lace - Shop Love Lace Dresses'
+        = link_to 'https://www.instagram.com/fameandpartners', class: 'media-wrap'
+          = image_tag 'home-page-tiles/snapped-for-social-CategoryTile2.jpg', alt: 'OUR FAVOURITES. Snapped for social. - Explore INSTAGRAM'
+        = link_to best_sellers_path, class: 'media-wrap'
+          = image_tag 'home-page-tiles/the-perfect-color-CategoryTile3.jpg', alt: 'THE PERFECT COLOR. Your dress. Your way. - Customize your DRESS'
 
       aside.col-md-5
         = react_component('BlogPosts')
