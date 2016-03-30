@@ -5,7 +5,7 @@ module Revolution
     attr_reader :product_ids, :site_version
 
     def initialize(product_ids, site_version)
-      @product_ids  = product_ids.split(',')
+      @product_ids  = product_ids.flatten
       @site_version = site_version
     end
 
