@@ -1,10 +1,17 @@
+// TODO: @shaun not sure where to put this, but it shouldn't be here
+
+.number-render {
+  font-family: $font-family-secondary;
+  font-weight: 300;
+}
+
 .footer {
 	width: 100%;
-	padding: 0 0 0 35px;
+  padding-top: 40px;
 	background-color: #f7f7f9;
 
-	.footer-nav, 
-	.footer-social, 
+	.footer-nav,
+	.footer-social,
 	.footer-details-nav {
 		display: block;
 		list-style: none;
@@ -26,7 +33,6 @@
 	}
 
 	.footer-navigation {
-		margin-top: 40px;
 		font-size: 1.3rem;
 		@media(max-width: 800px){
 			text-align:center;
@@ -54,8 +60,7 @@
 
 	.footer-nav--item {
 		margin-bottom: 1px;
-		padding-left: 5rem;
-
+    padding-left: 2.5rem;
 		a {
 			color: #333333;
   			font-weight: 300;
@@ -96,8 +101,9 @@
 
 	.footer-logo {
 		width: 46px;
-		margin-bottom: 40px;
+		margin-bottom: 20px;
 		margin-left: 0;
+    float: left;
 
 		@media(max-width: 768px){
 			margin-left: auto;
@@ -138,11 +144,6 @@
 		}
 	}
 
-	.container {
-		padding-left: 0;
-		padding-right: 0;
-	}
-
 	.social-links {
 		padding-right: 0;
 		margin-bottom: 8px
@@ -163,6 +164,7 @@
 			color: black;
 		}
 	}
+
 	.footer-logo{
 	    float: left;
 	    margin-top: 3px;
@@ -182,14 +184,25 @@
     	padding-bottom: 10px;
         text-transform: capitalize;
     }
+
     .stay-social-images{
-    	float: left;
-	    padding-left: 0px;
-	    padding-right: 5px;
-        img{
-            width: 30px;
-            height: 30px;
-            margin-right: 15px;
+      width: 100%;
+        a{
+            width: 15%;
+            margin: 0 0.8%;
+            display: inline-block;
+
+            &:first-of-type {
+              margin-left: 0;
+            }
+            &:last-of-type {
+              margin-right: 0;
+            }
+
+            img {
+              width: 100%;
+              height: auto;
+            }
         }
     }
     .social-row{
@@ -265,6 +278,7 @@
 	    	}
 	    	.stay-social-images{
 	    		margin-top: -5px;
+          padding-left: 2rem;
 	    		img{
 	    	 		width: 25px;
 	    	 	}
@@ -388,79 +402,87 @@
 				font-size: 9pt;
 			}
 		}
-    }
+  }
 
-    .mobile-footer{
-    	.row{
-    		background-color: #F7F7F9;
-    		margin-right: 0;
-    		.col-xs-12{
-    			padding-left: 0;
-    			padding-right: 0;
-    		}
-    	}
-    	.input-group{
-    		height: 10px;
-    	}
-    	.input-group-addon{
-    		background-color: black;
-    		color: white;
-    	}
-    	input{
-    		width: 100%;
-    		font-size: 10pt;
-    		color: black;
-    		font-weight: 500;
-    		border: none;
-    		max-height: 10px;
-    		@media(min-width: 414px)and(max-width: 992px){
-    			font-size: 9pt;
-    		}
+  .mobile-footer{
+  	.row{
+  		background-color: #F7F7F9;
+  	}
+  	.input-group{
+  		height: 10px;
+  	}
+  	.input-group-addon{
+  		background-color: #000;
+  		color: #fff;
+  	}
+  	input{
+  		width: 100%;
+  		font-size: 10pt;
+  		color: black;
+  		font-weight: 500;
+  		border: none;
+  		max-height: 10px;
 
-    		@media(min-width: 321px)and(max-width: 413px)
-			{
-				font-size:6.5pt;
-			}
-			@media(max-width: 320px)
-			{
+  		@media(min-width: 414px)and(max-width: 992px){
+  			font-size: 9pt;
+  		}
+  		@media(min-width: 321px)and(max-width: 413px){
+			  font-size:6.5pt;
+      }
+			@media(max-width: 320px){
 			    font-size: 6pt;
 			    padding-left: 10px;
 			    padding-right: 10px;
 			}
-    	}
-    	.submit{
-    		background-color: black;
-    		color: white;
-    		font-weight: 600;
-    		cursor: pointer;
-    	}
-    	.stay-social{
-    		margin-top: 10px;
-    		font-weight: 600;
-    	}
-    	.stay-social-images{
-    		text-align: center;
-    		margin-top: 5px;
-    		padding-top: 5px;
-    		padding-bottom: 5px;
-    		width: 100%;
-    		img{
-    			cursor: pointer;
-    			margin-left: 20px;
-    			@media(min-width: 320px)and(max-width: 413px)
-    			{
-    				margin-left: 4px;
-    			}
-    			@media(min-width: 600px)and(max-width: 799px)
-    			{
-    				margin-left: 40px;
-    			}
-    			@media(min-width: 800px){
-    				margin-left: 60px;
-    			}
-    		}
-    	}
+  	}
+  	.submit{
+  		background-color: black;
+  		color: white;
+  		font-weight: 600;
+  		cursor: pointer;
+  	}
+  	.stay-social{
+  		margin-top: 10px;
+  		font-weight: 600;
+  	}
+  	.stay-social-images{
+      width: 100%;
+      max-width: 370px;
+  		text-align: center;
+  		margin-top: 5px;
+  		padding-top: 5px;
+  		padding-bottom: 5px;
+
+      @media(max-width: 992px){
+        margin: 5px auto 20px;
+      }
+
+  		img{
+  			cursor: pointer;
+  		}
+  	}
+  }
+  .email-subscribe {
+    p {
+      font-family: "freight-display-pro", sans-serif;
     }
+    input {
+      height: 45px;
+      padding-top: 9px;
+      padding-bottom: 9px;
+      line-height: 45px;
+      border-color: transparent;
+      display: inline;
+
+      @media(max-width: 1200px){
+        width: 58%;
+      }
+    }
+    .btn {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+  }
 }
 
 .copyright {
@@ -476,10 +498,4 @@
 			float:right;
 		}
 	}*/
-
-	@media(min-width: 990px)and(max-width:1100px){
-		p {
-			padding-left:4rem;
-		}
-	}
 }
