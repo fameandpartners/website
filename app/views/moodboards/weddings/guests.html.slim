@@ -16,10 +16,10 @@
         span.help-block.with-errors
       = f.button 'Send', :class => "btn btn-black btn-block"
       .message-wrap#moodboard_members_notices
-    - if (@moodboard.collaborators.any?(&:persisted?))
+    - if (@moodboard.collaborators.any?(&:persisted?)) && (@moodboard.collaborators.size > 2)
       p Sent to:
     ul.row.list-unstyled.invited-members-wrap#moodboard_members
-      - @moodboard.collaborators.select(&:persisted?).each do |member|
+      - @moodboard.collaborators.select(&:persisted?).reject{|m| m.user_id == m.moodboard.user_id}.each do |member|
         li.col-md-4
           .invited-member
             .member-name.txt-truncate-1 => member.name.to_s
@@ -51,12 +51,15 @@ javascript:
       errorEl.append('<p>' + results.notice + '</p>');
     }
 
+    host_email = results.host_email
     if (results.collaborators) {
       $('#moodboard_members').empty().append(_.map(results.collaborators, function (member) {
-        return "<li class='col-md-4'><div class='invited-member'>"
-          + "<div class='member-name txt-truncate-1'>" + member.name + "</div>"
-          + "<div class='txt-truncate-1'>" + member.email
-          + "</div></div></li>";
+        if (member.email != host_email){
+          return "<li class='col-md-4'><div class='invited-member'>"
+            + "<div class='member-name txt-truncate-1'>" + member.name + "</div>"
+            + "<div class='txt-truncate-1'>" + member.email
+            + "</div></div></li>";
+        }
       }));
     }
   });
