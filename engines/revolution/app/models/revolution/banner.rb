@@ -16,6 +16,8 @@ module Revolution
     validates_attachment_presence :banner
     validates_attachment_size :banner, in: 0..201.kilobytes
 
+    before_create :set_dimensions, if: :uploaded_file?
+
     def self.banner_pos(banner_order, size)
       where('banner_order >= ? and size = ?', banner_order, size).order(:banner_order)
     end
@@ -28,8 +30,25 @@ module Revolution
       banner.url
     end
 
+    def banner_before_save
+      banner.queued_for_write[:original].present?
+    end
+
+    def uploaded_file
+      banner.queued_for_write[:original]
+    end
+
+    def uploaded_file?
+      uploaded_file.present?
+    end
+
     private
 
+    def set_dimensions
+      dimensions = Paperclip::Geometry.from_file(uploaded_file.path)
+      self.banner_width = dimensions.width
+      self.banner_height = dimensions.height
+    end
 
   end
 end
