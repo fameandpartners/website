@@ -21,7 +21,6 @@ describe Revolution::Banner do
   it { should belong_to(:translation).inverse_of(:banners) }
   it { is_expected.to validate_presence_of :banner_order }
   it { is_expected.to validate_presence_of :alt_text }
-  it { is_expected.to validate_uniqueness_of(:banner_order).scoped_to([:translation_id, :size]) }
   it { is_expected.to validate_attachment_content_type(:banner).
       allowing('image/png', 'image/gif', 'image/jpeg').rejecting('text/plain', 'text/xml') }
   it { is_expected.to validate_attachment_presence(:banner) }
