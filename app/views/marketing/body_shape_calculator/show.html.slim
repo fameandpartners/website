@@ -47,8 +47,9 @@ html
                     = image_tag "standalone/body_type_finder/bodyshape-base.png"
                 .col-xs-5.col-sm-5
                   .results
-                    span Your Body Type is
+                    span Your Body Type and Dress Size is
                     h3.heading.js-result-type
+                    .heading.js-result-size
 
               /.row.controls-wrap
               /  .col-xs-6.col-sm-6
@@ -104,14 +105,12 @@ html
 
         $('.js-trigger-generator').on('click', function() {
           var result;
-          var bodyShape;
-          var dataOb            = {};
           var user_measurements = {};
           var units             = 'inches';
-          var bust              = $('#bust').val();
-          var underbust         = $('#underbust').val();
-          var waist             = $('#waist').val();
-          var hips              = $('#hips').val();
+          var bust              = $('#bust').val() || 0;
+          var underbust         = $('#underbust').val() || 0;
+          var waist             = $('#waist').val() || 0;
+          var hips              = $('#hips').val() || 0;
 
           user_measurements.bust_circumference       = bust;
           user_measurements.under_bust_circumference = underbust;
@@ -128,31 +127,33 @@ html
           }
 
           result = calculate_body_match(user_measurements);
-          bodyShape = (result === undefined || result === null) ? 'Custom Size Recommended' : result.name;
 
-          $('.js-result-type').html(bodyShape);
+          $('.js-result-type').html(result.shape.name);
+          $('.js-result-size').html(result.size.presentation);
           $('.js-result-bust').html(bust + ' ' + units);
-          $('.js-result-underbust').html(underbust  + ' ' + units);
-          $('.js-result-waist').html(waist  + ' ' + units);
-          $('.js-result-hips').html(hips  + ' ' + units);
+          $('.js-result-underbust').html(underbust + ' ' + units);
+          $('.js-result-waist').html(waist + ' ' + units);
+          $('.js-result-hips').html(hips + ' ' + units);
 
           $('.js-screen-1').addClass('hidden');
           $('.js-screen-2').removeClass('hidden');
-
-          dataOb.email = 'test@test.com';
-          dataOb.shape = bodyShape || 'NO MATCH';
-          dataOb.size  = 0; //TODO: do we need to capture this?
-          dataOb.bust_circumference       = bust;
-          dataOb.under_bust_circumference = underbust;
-          dataOb.waist_circumference      = waist;
-          dataOb.hip_circumference        = hips;
-          //TODO: add units
 
           $.ajax({
             url:      '/body-shape-calculator/store-measures.json',
             method:   'POST',
             dataType: 'json',
-            data:     {body_calculator_measure: dataOb}
+            data:     {
+              body_calculator_measure: {
+                email:                    'test@test.com', // TODO: this should be filled in when sharing measures
+                shape:                    result.shape.name || '',
+                size:                     result.size.presentation || '',
+                bust_circumference:       bust || 0,
+                under_bust_circumference: underbust || 0,
+                waist_circumference:      waist || 0,
+                hip_circumference:        hips || 0,
+                unit:                     units
+              }
+            }
           });
 
         });
@@ -1344,21 +1345,28 @@ html
         }
 
         function calculate_body_match(user_measurements) {
-          var result_shape = undefined;
+          // Fallback Shape and Size
+          var result = {
+            shape: new Shape({name: "-"}),
+            size:  new Size({presentation: "Custom Size Recommended"})
+          };
 
           for (var i = 0; i < sizes.length; i++) {
-            var size = sizes[i];
-            var shape = size.shapes.find(function (shape) {
+            var size        = sizes[i];
+            var found_shape = size.shapes.find(function (shape) {
               return match_measurement(user_measurements, shape, size)
             });
 
-            if (shape) {
-              result_shape = shape;
+            if (found_shape) {
+              result = {
+                shape: found_shape,
+                size:  size
+              };
               break
             }
           }
 
-          return result_shape;
+          return result;
         }
 
         function convert_to_cm(inches) {
