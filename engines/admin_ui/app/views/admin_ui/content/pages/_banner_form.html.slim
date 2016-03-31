@@ -17,14 +17,15 @@
                   label Alt Text
                   = banner.text_field :alt_text, class: 'form-control'
             .col-lg-4
-              label Resolution:&nbsp;
-              = "#{banner.banner_width}px by #{banner.banner_height} px"
-              br
-              label File Name:&nbsp;
-              = banner.banner_file_name
-              br
-              label Size:&nbsp;
-              = "#{banner.banner_file_size} kilobytes"
+              div.well
+                label Resolution:&nbsp;
+                = "#{banner.banner_width}px by #{banner.banner_height} px"
+                br
+                label File Name:&nbsp;
+                = banner.banner_file_name
+                br
+                label Size:&nbsp;
+                = "#{banner.banner_file_size} kilobytes"
 
 .ibox.float-e-margins
   .ibox-title
