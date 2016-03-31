@@ -112,16 +112,6 @@ html
           var waist             = $('#waist').val() || 0;
           var hips              = $('#hips').val() || 0;
 
-          var dataOb = {
-            email: 'test@test.com',
-            shape: '',
-            size: '',
-            bust_circumference: 0,
-            under_bust_circumference: 0,
-            waist_circumference: 0,
-            hip_circumference: 0
-          };
-
           user_measurements.bust_circumference       = bust;
           user_measurements.under_bust_circumference = underbust;
           user_measurements.waist_circumference      = waist;
@@ -137,31 +127,33 @@ html
           }
 
           result = calculate_body_match(user_measurements);
-          result.shape = (result.shape === undefined || result.shape === '') ? 'Custom Size Recommended' : result.shape.name;
-          result.size = (result.size === undefined || result.size === '') ? '-' : result.size.presentation;
 
-          $('.js-result-type').html(result.shape);
-          $('.js-result-size').html(result.size);
+          $('.js-result-type').html(result.shape.name);
+          $('.js-result-size').html(result.size.presentation);
           $('.js-result-bust').html(bust + ' ' + units);
-          $('.js-result-underbust').html(underbust  + ' ' + units);
-          $('.js-result-waist').html(waist  + ' ' + units);
-          $('.js-result-hips').html(hips  + ' ' + units);
+          $('.js-result-underbust').html(underbust + ' ' + units);
+          $('.js-result-waist').html(waist + ' ' + units);
+          $('.js-result-hips').html(hips + ' ' + units);
 
           $('.js-screen-1').addClass('hidden');
           $('.js-screen-2').removeClass('hidden');
-
-          dataOb.shape = result.shape;
-          dataOb.size  = result.size;
-          dataOb.bust_circumference       = bust;
-          dataOb.under_bust_circumference = underbust;
-          dataOb.waist_circumference      = waist;
-          dataOb.hip_circumference        = hips;
 
           $.ajax({
             url:      '/body-shape-calculator/store-measures.json',
             method:   'POST',
             dataType: 'json',
-            data:     {body_calculator_measure: dataOb}
+            data:     {
+              body_calculator_measure: {
+                email:                    'test@test.com', // TODO: this should be filled in when sharing measures
+                shape:                    result.shape.name || '',
+                size:                     result.size.presentation || '',
+                bust_circumference:       bust || 0,
+                under_bust_circumference: underbust || 0,
+                waist_circumference:      waist || 0,
+                hip_circumference:        hips || 0,
+                unit:                     units
+              }
+            }
           });
 
         });
@@ -1353,20 +1345,23 @@ html
         }
 
         function calculate_body_match(user_measurements) {
+          // Fallback Shape and Size
           var result = {
-            shape:  '',
-            size:   ''
+            shape: new Shape({name: "-"}),
+            size:  new Size({presentation: "Custom Size Recommended"})
           };
 
           for (var i = 0; i < sizes.length; i++) {
-            var size = sizes[i];
-            var shape = size.shapes.find(function (shape) {
+            var size        = sizes[i];
+            var found_shape = size.shapes.find(function (shape) {
               return match_measurement(user_measurements, shape, size)
             });
 
-            if (shape) {
-              result.shape = shape;
-              result.size = sizes[i];
+            if (found_shape) {
+              result = {
+                shape: found_shape,
+                size:  size
+              };
               break
             }
           }
