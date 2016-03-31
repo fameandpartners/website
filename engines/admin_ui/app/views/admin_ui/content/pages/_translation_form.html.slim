@@ -30,4 +30,4 @@
   label.col-sm-2.control-label Description
   .col-sm-10 = t.text_area :description, :class => 'form-control'
 
-= render partial: 'banner_form', :locals => { t: t, locale: locale }
+= render partial: 'banner_form', :locals => { t: t, banners: banners }
