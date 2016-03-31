@@ -16,9 +16,6 @@ module Revolution
     validates_attachment_presence :banner
     validates_attachment_size :banner, in: 0..201.kilobytes
 
-    validate :file_dimensions
-    # validate :same_dimensions
-
     def self.banner_pos(banner_order, size)
       where('banner_order >= ? and size = ?', banner_order, size).order(:banner_order)
     end
@@ -33,26 +30,6 @@ module Revolution
 
     private
 
-    def file_dimensions
-      return true if banner.queued_for_write[:original].blank? #Hate this, but otherwise my tests keep failing!  Tell me how to fix!
-      dimensions         = Paperclip::Geometry.from_file(banner.queued_for_write[:original].path)
-      self.banner_width  = dimensions.width
-      self.banner_height = dimensions.height
-
-      if self.translation.page.path['/dresses/']
-        if self.size == 'full'
-          width  = FULL_FILE_DIMENSION[:width]
-          height = FULL_FILE_DIMENSION[:height]
-        else
-          width  = SMALL_FILE_DIMENSION[:width]
-          height = SMALL_FILE_DIMENSION[:height]
-        end
-        # unless dimensions.width == width && dimensions.height == height
-        #   errors.add :banner, "Width must be #{width}px and height must be #{height}px"
-        # end
-      end
-      return true
-    end
 
   end
 end
