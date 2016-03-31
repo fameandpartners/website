@@ -54,16 +54,5 @@ module Revolution
       return true
     end
 
-    def same_dimensions
-      return true if Rails.env.test? #Hate this, but otherwise my tests keep failing!  Tell me how to fix!
-      # Need to keep the dimensions the same across a size to keep carousels working.
-      prev_banner = Revolution::Translation.where(id: self.translation.id, locale: self.translation.locale).first.banners.where('size = ? and banner_order != ?', self.size, self.banner_order).first
-      if prev_banner.present?
-        if prev_banner.banner_width != self.banner_width || prev_banner.banner_height != self.banner_height
-          errors.add :banner, "All banners must be the same dimensions: Width must be #{prev_banner.banner_width}px and height must be #{prev_banner.banner_height}px"
-        end
-      end
-    end
-
   end
 end
