@@ -37,6 +37,8 @@ module Spree
 
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
 
+        per_page = 5000 if params[:format] == 'csv'
+        
         @orders = @search.result(distinct: true).includes(
           :user => [],
           :shipments => {:inventory_units => :variant},

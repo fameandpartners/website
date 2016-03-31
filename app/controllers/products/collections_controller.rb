@@ -65,11 +65,17 @@ class Products::CollectionsController < Products::BaseController
     @canonical = dresses_path if params[:sale]
   end
 
+  def product_ids
+    page_pids   = page.get(:pids).to_s.split(',')
+    params_pids = Array.wrap(params[:pids])
+    params_pids.empty? ? page_pids : params_pids
+  end
+
   def set_collection_resource
     @collection_options = parse_permalink(params[:permalink])
     @collection         = collection_resource(@collection_options)
     page.collection     = @collection
-    punch_products if product_ids
+    punch_products unless product_ids.empty?
 
     append_gtm_collection(@collection)
   end
@@ -106,10 +112,6 @@ class Products::CollectionsController < Products::BaseController
     else
       {file: 'public/404', layout: false, status: :not_found}
     end
-  end
-
-  def product_ids
-    params[:pids] || page.get(:pids)
   end
 
   def collection_resource(collection_options = {})

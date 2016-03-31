@@ -60,9 +60,10 @@ FameAndPartners::Application.routes.draw do
     ##############
     # Static Pages
     ##############
-    get '/instagram/1' => 'statics#landing_page_mobile', variant: '1'
-    get '/instagram/2' => 'statics#landing_page_mobile', variant: '2'
-    get '/instagram/3' => 'statics#landing_page_mobile', variant: '3'
+    # Legacy marketing campaign
+    # get '/instagram/1' => 'statics#landing_page_mobile', variant: '1'
+    # get '/instagram/2' => 'statics#landing_page_mobile', variant: '2'
+    # get '/instagram/3' => 'statics#landing_page_mobile', variant: '3'
 
     get '/fashionitgirl2015' => 'statics#fashion_it_girl'
     get '/fashionitgirlau2015' => 'statics#fashion_it_girl_au_2015'
