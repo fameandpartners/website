@@ -12,8 +12,11 @@ class Moodboard < ActiveRecord::Base
   scope :weddings, -> { where(purpose: 'wedding') }
   scope :by_recent, -> { order('created_at asc') }
 
+  after_create :add_default_collaborator
+
   # Intended for use as a chained scope off of a Spree::User object.
   # e.g. user.moodboards.default_or_create
+
   def self.default_or_create
     where(default_wishlist_attrs).first_or_create
   end
@@ -55,5 +58,11 @@ class Moodboard < ActiveRecord::Base
 
   def allow_comments?
     purpose == 'wedding'
+  end
+
+  private
+
+  def add_default_collaborator
+    self.collaborators.create(name: user.first_name, email: user.email)
   end
 end

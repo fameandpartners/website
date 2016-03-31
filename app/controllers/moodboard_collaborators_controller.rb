@@ -19,6 +19,7 @@ class MoodboardCollaboratorsController < ApplicationController
 
     if request.xhr?
       message[:collaborators] = moodboard.collaborators.as_json
+      message[:host_email]    = moodboard.user.email
       render json: message
     else
       redirect_to moodboard_path(moodboard), flash: message
