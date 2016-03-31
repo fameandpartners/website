@@ -1,5 +1,5 @@
-- if page.translations.where(locale: locale).first.banners.any?
-  - page.translations.where(locale: locale).first.banners.order(:banner_order).each do |banner|
+- if banners.present?
+  - banners.order(:banner_order).each do |banner|
     .ibox.float-e-margins
       .ibox-title
         .container_fluid
