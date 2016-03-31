@@ -23,6 +23,7 @@ class SiteVersion < ActiveRecord::Base
       self.currency ||= Spree::Config.currency
       self.exchange_rate ||= 1
       self.permalink ||= ''
+      self.domain = 'au.lvh.me'
     end
   end
 
@@ -58,7 +59,7 @@ class SiteVersion < ActiveRecord::Base
           locale_unit_code: 'cm',
           locale_unit_symbol: 'cm',
           currency_code: 'AUD'
-        }) 
+        })
       else
         OpenStruct.new({
           size_info_label: 'US Sizes Displayed',
@@ -90,7 +91,7 @@ class SiteVersion < ActiveRecord::Base
   end
 
   def update_exchange_rate(rate = nil, options = {})
-    if self.currency == Spree::Config.currency 
+    if self.currency == Spree::Config.currency
       puts "site version uses default currency"
       return true
     end
