@@ -11,7 +11,7 @@ module AdminUi
       end
 
       def edit
-        if (pids = page.variables.fetch('pids') {nil} )
+        if pids = page.variables.fetch('pids', nil)
           service = Revolution::ProductService.new(pids.split(','), SiteVersion.default)
           @products = service.collect_products(service.ids, { offset: 0 })
         end
