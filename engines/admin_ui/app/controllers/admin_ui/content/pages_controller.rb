@@ -11,10 +11,7 @@ module AdminUi
       end
 
       def edit
-        if pids = page.variables.fetch('pids', nil)
-          service = Revolution::ProductService.new(pids.split(','), SiteVersion.default)
-          @products = service.collect_products(service.ids, { offset: 0 })
-        end
+
       end
 
       def update
@@ -53,7 +50,7 @@ module AdminUi
 
       private
 
-      helper_method :collection, :page
+      helper_method :collection, :page, :products
 
       def normalize_page_variables
         variables_params = params[:page][:variables] || []
@@ -75,6 +72,14 @@ module AdminUi
 
       def page
         @page ||= Revolution::Page.find(params[:id])
+      end
+
+      def products
+        if pids = page.variables.fetch('pids', nil)
+          service = Revolution::ProductService.new(pids.split(','), SiteVersion.default)
+          products = service.collect_products(service.ids, { offset: 0 })
+        end
+        products
       end
 
     end

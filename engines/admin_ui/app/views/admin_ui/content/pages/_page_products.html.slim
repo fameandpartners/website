@@ -3,7 +3,7 @@
 / If and when we provide a nice UI for adding and removing products
 / from the Page this whole file can be deleted.
 - begin
-  - if @products.present?
+  - if products_collection.present?
     .ibox
       .ibox-title
         a.collapse-link
@@ -19,7 +19,7 @@
             th Errors?
             th Preview
           tbody
-            - @products.each do |product|
+            - products_collection.each do |product|
               - begin
                 - errors = []
                 - errors << 'NO COLOR' unless product.color.present?
