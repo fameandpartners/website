@@ -1,12 +1,3 @@
-ruby:
-  details = Marketing::Subscriber.new(
-    user: current_spree_user,
-    token: cookies['utm_guest_token'],
-    promocode: decode(params[:pc]),
-    ipaddress: request.remote_ip
-  ).details
-  details[:campaign] = 'home' if details[:campaign].blank?
-
 .footer
   .mobile-footer.hidden-md.hidden-lg.container
     .row.buttons.visible-xs.visible-sm
