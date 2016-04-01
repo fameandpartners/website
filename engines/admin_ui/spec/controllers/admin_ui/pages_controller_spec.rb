@@ -31,6 +31,15 @@ module AdminUi
         end
       end
 
+      describe "GET edit page" do
+        let!(:page) { Revolution::Page.create(path: "/dresses/Products") }
+
+        it "does edit page and see zero products" do
+          get :edit, id: page.id
+          expect(controller.send(:products)).to be_nil
+        end
+      end
+
     end
   end
 end
