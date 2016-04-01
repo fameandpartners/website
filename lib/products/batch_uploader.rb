@@ -556,7 +556,9 @@ module Products
       custom_colors = available_colors - recommended_colors
 
       custom_colors.map do |custom|
-        product.product_color_values.where(option_value_id: custom.id, custom: true).first_or_create
+        c = product.product_color_values.where(option_value_id: custom.id, custom: true).first_or_create
+        c.active = true
+        c.save!
       end
 
       recommended_colors.map do |recommended|
