@@ -11,7 +11,6 @@ module AdminUi
       end
 
       def edit
-
       end
 
       def update
