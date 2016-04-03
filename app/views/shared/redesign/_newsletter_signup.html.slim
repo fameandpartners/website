@@ -14,6 +14,3 @@
           h2.title Sign up for an insider round of the latest fashion news, collection drops and underground style options - plus an instant $25 off your first order.
         .col-md-6
           = render 'shared/redesign/newsletter_form'
-
-  = content_for :inline_javascript do
-    | new window.page.EmailNewsletterSubscriber({form: '#email-newsletter-signup form'});
