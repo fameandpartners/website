@@ -4,7 +4,7 @@ ruby:
 .page-content.index
   // TODO: create helper for multisource images
   = react_component('HeroCarousel', skin: 'skin-dark',
-    assets: [{link: dresses_path, src: '/assets/home-page-tiles/HERO-mar31', alt: 'Forever'},
+    assets: [{link: dresses_path, src: '/assets/home-page-tiles/hero-forever', alt: 'Forever'},
              {link: 'dresses/dress-chiara-978?color=black', src: '/assets/home-page-tiles/Chiara-HERO', alt: 'Chiara Three-Piece Set'},
             {link: partners_in_crime_collection_path, src: '/assets/home-page-tiles/PartnersInCrime-HERO-2', alt: 'Partners In Crime'}])
 
@@ -25,7 +25,7 @@ ruby:
     .row
       .main.col-md-7
         = link_to '/dresses/new-this-week', class: 'media-wrap'
-          = image_tag 'home-page-tiles/after-dark-CategoryTile1-new.jpg', alt: 'AFTER DARK - explore THE NEWEST LOOKS'
+          = image_tag 'home-page-tiles/after-dark-CategoryTile1.jpg', alt: 'AFTER DARK - explore THE NEWEST LOOKS'
         = render 'shared/redesign/tabs_collection'
         = link_to 'https://www.instagram.com/fameandpartners', class: 'media-wrap'
           = image_tag 'home-page-tiles/snapped-for-social-CategoryTile2.jpg', alt: 'OUR FAVOURITES. Snapped for social. - Explore INSTAGRAM'
@@ -76,11 +76,6 @@ ruby:
           img.popsugar   alt='Popsugar'      src='/assets/footer/publisher/popsugar.png'
           img.nylon      alt='Nylon'         src='/assets/footer/publisher/nylon.png'
           img.cosmo      alit='Cosmopolitan' src='/assets/footer/publisher/cosmo.png'
-
-
-
-  /! Email Subscription
-  / = render 'shared/redesign/newsletter_signup'
 
   /! SEO content
   = render 'shared/redesign/seo_content'

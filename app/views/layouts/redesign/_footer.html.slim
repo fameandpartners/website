@@ -1,3 +1,12 @@
+ruby:
+  details = Marketing::Subscriber.new(
+    user: current_spree_user,
+    token: cookies['utm_guest_token'],
+    promocode: decode(params[:pc]),
+    ipaddress: request.remote_ip
+  ).details
+  details[:campaign] = 'home' if details[:campaign].blank?
+
 .footer
   .mobile-footer.hidden-md.hidden-lg.container
     .row.buttons.visible-xs.visible-sm
@@ -8,9 +17,9 @@
         = link_to fast_making_dresses_url, class: "col-xs-12"
           = image_tag 'footer/48.png', class: 'hr48'
           .text 48 HR EXPRESS MAKING
-      / = link_to fame_chain_url, class: "col-xs-12"
-      /   = image_tag 'footer/chain.png', class: 'chain'
-      /   .text JOIN THE FAME CHAIN
+      = link_to fame_chain_url, class: "col-xs-12"
+        = image_tag 'footer/chain.png', class: 'chain'
+        .text JOIN THE FAME CHAIN
 
     /.row.email-row
       /.col-xs-12.col-sm-12
@@ -18,60 +27,78 @@
           /input type="text" class="form-control email" placeholder="REGISTER YOUR EMAIL FOR THIS XX OFFER" aria-/describedby="basic-addon2"
           /span.input-group-addon#basic-addon2 SUBMIT
     .row
-      .stay-social
-        center STAY SOCIAL
+      .stay-social STAY SOCIAL
     .row
       .stay-social-images
         = render 'layouts/redesign/social_links'
 
   .footer-navigation.container
     .row
-
-      .col-md-3.col-sm-12
+      .col-md-2.col-sm-12.col-lg-3
         = image_tag 'logo/logo-mobile.svg', class: 'footer-logo hidden-xs hidden-sm'
         = render 'layouts/redesign/address'
 
-      .col-md-2.col-sm-3.hidden-xs.hidden-sm.second-col
-        ul.footer-nav
-          li.footer-nav--item
-            = link_to 'Why Shop With Us', why_us_url
-          li.footer-nav--item
-            = link_to 'About Us', about_us_url
+      .col-md-3
+        .row
+          .col-md-6.col-sm-6
+            ul.footer-nav
+              li.footer-nav--item
+                = link_to 'Why Shop With Us', why_us_url
+              li.footer-nav--item
+                = link_to 'About Us', about_us_url
 
-          - if current_site_version.is_australia?
-            li.footer-nav--item
-              = link_to 'Fashion IT Girl', 'http://mystyle.fameandpartners.com/fitg-aus-2015'
+              - if current_site_version.is_australia?
+                li.footer-nav--item
+                  = link_to 'Fashion IT Girl', 'http://mystyle.fameandpartners.com/fitg-aus-2015'
 
-          li.footer-nav--item
-            = link_to 'FAQs & Shipping', faqs_url
-          li.footer-nav--item
-            = link_to 'Size Guide', size_guide_url
-          li.footer-nav--item
-            = link_to 'From our CEO', yelp_url, :class => 'bold'
+              li.footer-nav--item
+                = link_to 'FAQs & Shipping', faqs_url
+              li.footer-nav--item
+                = link_to 'Size Guide', size_guide_url
+              li.footer-nav--item
+                = link_to 'From our CEO', yelp_url, :class => 'bold'
 
-      .col-md-2.col-sm-3.hidden-xs.hidden-sm.last-col
-        ul.footer-nav
-          li.footer-nav--item
-            = link_to 'Terms', terms_url
-          li.footer-nav--item
-            = link_to 'Get styling advice', style_consultation_url
-          li.footer-nav--item
-            = link_to 'Fame Chain', fame_chain_url
-          li.footer-nav--item
-            = link_to 'Contact Us', new_contact_url
-          li.footer-nav--item
-            = link_to 'Privacy Policy', privacy_url
+          .col-md-6.col-sm-6
+            ul.footer-nav
+              li.footer-nav--item
+                = link_to 'Terms', terms_url
+              li.footer-nav--item
+                = link_to 'Get styling advice', style_consultation_url
+              li.footer-nav--item
+                = link_to 'Fame Chain', fame_chain_url
+              li.footer-nav--item
+                = link_to 'Contact Us', new_contact_url
+              li.footer-nav--item
+                = link_to 'Privacy Policy', privacy_url
 
-      .col-md-2.hidden-sm.hidden-xs
+      .col-md-3.col-lg-2.hidden-sm.hidden-xs
         .stay-social stay social
         .stay-social-images
           = render 'layouts/redesign/social_links'
 
-      = render 'shared/redesign/newsletter_signup', locals: { is_footer: true }
+      .col-md-4.last-col
+        .email-subscribe
+          .newsletter-title Keep Updated
+          p
+            |  GET A TASTE OF FAME WITH $<span class="number-render">25</span> OFF YOUR FIRST PURCHASE, FREE STYLING SESSIONS &amp; VIP TREATMENT.
+          form.form-inline action="https://fameandpartners.createsend.com/t/t/s/urikx/" method="post"
+            .form-group
+              input#fieldEmail.form-control name="cm-urikx-urikx" type="email" placeholder="Register your email for this $25 offer" /
+              input type="hidden" id="fieldName"    name="cm-name" value=(current_spree_user.try(:full_name))
+              input type="hidden" id="fielddkjudk"  name="cm-f-dkjudk" value=(details[:country])
+              input type="hidden" id="fielddkjuhy"  name="cm-f-dkjuhy" value=(details[:promocode])
+              input type="hidden" id="fielddkjuhr"  name="cm-f-dkjuhr" value=(details[:source] || cookies[:referrer])
+              input type="hidden" id="fielddkjuhj"  name="cm-f-dkjuhj" value=(details[:campaign])
+              input type="hidden" id="fielddkjuht"  name="cm-f-dkjuht" value=(details[:ipaddress])
+              input type='hidden' id='mailchimp'    name='mailchimp'   value=(mailchimp_campaigns_email_capture_path)
+              button.btn.btn-black.btn-md type="submit" Submit
+
+  = content_for :inline_javascript do
+    | new window.page.EmailNewsletterSubscriber({form: '#email-newsletter-signup form'});
 
   .container
     .row
-      .col-md-6.col-sm-12.copyright
+      .col-md-6.copyright
         p
           | &copy;&nbsp;
           = Time.now.year
