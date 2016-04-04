@@ -80,6 +80,7 @@
     background: $c-neutral-white;
 
     .content-wrap {
+      position: relative;
       padding: 0 0 30px 0;
     }
 
@@ -107,12 +108,38 @@
 
     }
 
+    .icon {
+      position: absolute;
+      bottom: -35px;
+      left: 50%;
+      margin-left: -35px;
+      width: 70px;
+      height: 70px;
+      line-height: 70px;
+      text-align: center;
+      font-size: 32px;
+      background: $c-neutral-white;
+      border: solid $c-neutral-2 1px;
+      border-radius: 50%;
+      z-index: 1;
+      @include box-shadow(0 1px 3px 0 rgba($c-neutral-black, .25));
+    }
+
     @include desktop {
       min-height: 320px;
 
       .content-wrap {
         padding: 0 20% 0 0;
         text-align: left;
+      }
+
+      .icon {
+        top: 50%;
+        bottom: auto;
+        left: auto;
+        right: -35px;
+        margin-top: -35px;
+        margin-left: 0;
       }
 
     }
