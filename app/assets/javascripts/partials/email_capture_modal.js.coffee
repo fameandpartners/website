@@ -96,7 +96,7 @@ window.page.EmailCaptureModal = class EmailCaptureModal
 
   signupMarketingTracking: =>
     window.track.event('LandingPageModal', 'Submitted', @opts.promocode)
-    window.track.dataLayer.push({'event': 'modalSignup'})
+    window.track.dataLayer.push({'event': 'modalSignup', 'signup_email': @opts.email})
 
     if @opts.fb
       window._fbq = window._fbq || []

@@ -59,3 +59,10 @@ $ ->
           show_flash_error(response.responseText)
 
     false
+    
+  $('body').on 'click', '.export-as-csv', ->
+    $form = $(this).closest('form')
+    originalAction = $form.attr('action')
+    params = $form.serializeArray()
+    window.open(originalAction + '.csv?' + $.param(params), '_blank');
+    false
