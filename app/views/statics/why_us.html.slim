@@ -1,7 +1,7 @@
 .why-us
 
   // hero section
-  .hero-wrap.copy-right 
+  .main-hero-wrap.hero-wrap.copy-right 
     picture.media-wrap.keep-ratio
       .inner-wrap
         source media='(max-width: 1023px)' srcset='#{image_path("_why-us/hero-mob.jpg")}'
@@ -67,7 +67,7 @@
           p The customization option we get the biggest ‘thank you’ for, no more tripping on hemlines or tugging down mini skirts.
         .col-md-3.col-sm-10.col-xs-10.col-md-offset-0.col-sm-offset-1.col-xs-offset-1.panel-compact.alt
           em 4
-          .heading Add to cart
+          .heading Add to cart<br><br>
           p It’s that easy to get a custom-made dress delivered to your door. Give us 10 days if there’s no rush, or 48 hours if it’s an outfit emergency.
   // END - section-personal-style  
 
@@ -142,21 +142,25 @@
           ' Two
           span  MONTHS
         .progress-label Standard Retail
-
-    .row
-      .col-md-8.col-md-offset-2.section-title.text-center
-        h2.section-heading PERSONALIZED SHOPPING EXPERIENCE
+      .col-md-12
+        /! Recen Collections Carousel
+        = render 'shared/redesign/collection_hero_carousel'
 
     section.row
-      .col-md-6
-        .media-wrap
-          = image_tag "_why-us/tile-3.jpg"
-      .col-md-6
-        .section-title
-          h2.section-heading WEDDING PLANNER
-          em Curate your bridal party style for the big day
-          p Register your wedding, create a bridal mood board, and invite your bridesmaids to comment and vote on the dresses they love. The perfect tool for bridal parties spread across the country or the globe. Each bride who uses the Fame and Partners wed ding planner receives a honeymoon dress with our compliments.
-          = link_to 'EXPLORE THE WEDDING PLANNER', bridesmaid_landing_page_path
+      .col-md-9.col-md-offset-1.section-title.text-center
+        h2.section-heading Personalised shopping experience
+      .col-md-12
+        .panel-split.alt
+          .content-wrap-outer
+            .content-wrap-inner
+              .content-wrap
+                h2.section-heading Wedding planner
+                p
+                  em Curate your bridal party style for the big day
+                p Register your wedding, create a bridal mood board, and invite your bridesmaids to comment and vote on the dresses they love. The perfect tool for bridal parties spread across the country or the globe. Each bride who uses the Fame and Partners wed ding planner receives a honeymoon dress with our compliments.
+                = link_to 'EXPLORE THE WEDDING PLANNER', bridesmaid_landing_page_path, class:'btn btn-lowlight btn-sm'
+          .media-wrap
+            = image_tag "_why-us/tile-3.jpg"
 
   /! Shop by category
   = render 'shared/redesign/shop_by_category'

@@ -32,7 +32,7 @@
   }
 
   .panel-compact {
-    margin-bottom: 60px;
+    margin-bottom: 50px;
     padding-top: 20px;
 
     .copy-wrap {
@@ -92,9 +92,17 @@
 
   }
 
-  .section-personal-style .panel-compact {
-    margin-top: 40px;
-    margin-bottom: 0;
+  .section-personal-style {
+
+    .section-title {
+      margin-bottom: 50px;
+    }
+
+    .panel-compact {
+      margin-top: 40px;
+      margin-bottom: 0;
+    }
+
   }
 
   .section-production-model {
@@ -136,10 +144,10 @@
   }
 
   section {
-    margin-bottom: 60px;
+    margin-bottom: 70px;
 
     &.alt {
-      padding: 60px 0;
+      padding: 70px 0;
       background: $c-neutral-3;
     }
 
@@ -152,12 +160,20 @@
       text-align: center;
     }
 
-    .section-collections [class^='col-'] {
-      padding-bottom: 30px;
-      border-bottom: solid $c-neutral-2 1px;
+    .section-collections {
 
-      &:first-child {
-        margin-bottom: 30px;
+      [class^='col-'] {
+        padding-bottom: 30px;
+        border-bottom: solid $c-neutral-2 1px;
+
+        &:first-child {
+          margin-bottom: 30px;
+        }
+
+      }
+
+      .section-title {
+        margin-bottom: 0;
       }
 
     }
@@ -168,7 +184,7 @@
   // START - desktop
   @media (min-width: $bootstrap-md-width) {
 
-    .hero-wrap {
+    .main-hero-wrap {
 
       .media-wrap {
         padding-bottom: 39%;
@@ -197,7 +213,9 @@
     }
 
     .panel-compact {
+      margin-bottom: 30px;
       padding-top: 0;
+      padding-bottom: 20px;
     }
 
     .section-production-model .step {
