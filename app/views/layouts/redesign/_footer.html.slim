@@ -27,58 +27,58 @@ ruby:
           /input type="text" class="form-control email" placeholder="REGISTER YOUR EMAIL FOR THIS XX OFFER" aria-/describedby="basic-addon2"
           /span.input-group-addon#basic-addon2 SUBMIT
     .row
-      .stay-social
-        center STAY SOCIAL
+      .stay-social STAY SOCIAL
     .row
       .stay-social-images
         = render 'layouts/redesign/social_links'
 
   .footer-navigation.container
     .row
-
-      .col-md-3.col-sm-12
+      .col-md-2.col-sm-12.col-lg-3
         = image_tag 'logo/logo-mobile.svg', class: 'footer-logo hidden-xs hidden-sm'
         = render 'layouts/redesign/address'
 
-      .col-md-2.col-sm-3.hidden-xs.hidden-sm.second-col
-        ul.footer-nav
-          li.footer-nav--item
-            = link_to 'Why Shop With Us', why_us_url
-          li.footer-nav--item
-            = link_to 'About Us', about_us_url
+      .col-md-3
+        .row
+          .col-md-6.col-sm-6
+            ul.footer-nav
+              li.footer-nav--item
+                = link_to 'Why Shop With Us', why_us_url
+              li.footer-nav--item
+                = link_to 'About Us', about_us_url
 
-          - if current_site_version.is_australia?
-            li.footer-nav--item
-              = link_to 'Fashion IT Girl', 'http://mystyle.fameandpartners.com/fitg-aus-2015'
+              - if current_site_version.is_australia?
+                li.footer-nav--item
+                  = link_to 'Fashion IT Girl', 'http://mystyle.fameandpartners.com/fitg-aus-2015'
 
-          li.footer-nav--item
-            = link_to 'FAQs & Shipping', faqs_url
-          li.footer-nav--item
-            = link_to 'Size Guide', size_guide_url
-          li.footer-nav--item
-            = link_to 'From our CEO', yelp_url, :class => 'bold'
+              li.footer-nav--item
+                = link_to 'FAQs & Shipping', faqs_url
+              li.footer-nav--item
+                = link_to 'Size Guide', size_guide_url
+              li.footer-nav--item
+                = link_to 'From our CEO', yelp_url, :class => 'bold'
 
-      .col-md-2.col-sm-3.hidden-xs.hidden-sm.last-col
-        ul.footer-nav
-          li.footer-nav--item
-            = link_to 'Terms', terms_url
-          li.footer-nav--item
-            = link_to 'Get styling advice', style_consultation_url
-          li.footer-nav--item
-            = link_to 'Fame Chain', fame_chain_url
-          li.footer-nav--item
-            = link_to 'Contact Us', new_contact_url
-          li.footer-nav--item
-            = link_to 'Privacy Policy', privacy_url
+          .col-md-6.col-sm-6
+            ul.footer-nav
+              li.footer-nav--item
+                = link_to 'Terms', terms_url
+              li.footer-nav--item
+                = link_to 'Get styling advice', style_consultation_url
+              li.footer-nav--item
+                = link_to 'Fame Chain', fame_chain_url
+              li.footer-nav--item
+                = link_to 'Contact Us', new_contact_url
+              li.footer-nav--item
+                = link_to 'Privacy Policy', privacy_url
 
-      .col-md-2.hidden-sm.hidden-xs
+      .col-md-3.col-lg-2.hidden-sm.hidden-xs
         .stay-social stay social
         .stay-social-images
           = render 'layouts/redesign/social_links'
 
-      .col-md-3.hidden-sm.hidden-xs
+      .col-md-4.last-col
         .email-subscribe
-          .stay-social Keep Updated
+          .newsletter-title Keep Updated
           p
             |  GET A TASTE OF FAME WITH $<span class="number-render">25</span> OFF YOUR FIRST PURCHASE, FREE STYLING SESSIONS &amp; VIP TREATMENT.
           form.form-inline action="https://fameandpartners.createsend.com/t/t/s/urikx/" method="post"
@@ -98,7 +98,7 @@ ruby:
 
   .container
     .row
-      .col-md-6.col-sm-12.copyright
+      .col-md-6.copyright
         p
           | &copy;&nbsp;
           = Time.now.year
