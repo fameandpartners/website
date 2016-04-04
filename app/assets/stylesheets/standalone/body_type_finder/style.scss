@@ -198,9 +198,16 @@ tr td:first-child {
   padding: 15px 30px;
   border: solid #fff 1px;
 
+  h3 {
+    font-size: 36px;
+  }
+
+  > .heading {
+    margin-bottom: 50px;
+  }
+
   .heading {
     width: 100%;
-    margin-bottom: 40px;
     text-align: center;
   }
 
@@ -214,12 +221,17 @@ tr td:first-child {
   }
 
   .results {
-    margin-top: 50px;
     text-align: center;
-  }
 
-  .heading {
-    font-size: 36px;
+    span {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+    }
+
   }
 
   .controls-wrap {
