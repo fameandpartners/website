@@ -2,43 +2,6 @@
 -------------------------------------------------------*/
 .landing-page-prom-competition {
 
-  .hero-wrap {
-    margin-bottom: 50px;
-
-    .media-wrap {
-      padding-bottom: 0;
-    }
-
-    .inner-wrap {
-      position: relative;
-    }
-
-    .content-wrap {
-      text-align: center;
-    }
-
-  }
-
-  h1 {
-    margin: 50px 0 0;
-    text-transform: none;
-    font-size: 2.4rem;
-    color: $c-neutral-black;
-
-    span {
-      display: block;
-
-      &:first-child {
-        display: inline-block;
-        margin-bottom: 5px;
-        font-size: 3.8rem;
-        border-bottom: solid $c-neutral-black 1px;
-      }
-
-    }
-
-  }
-
   .heading-v1 {
     margin: 0 0 50px;
     padding: 0;
@@ -101,25 +64,6 @@
 
     .media-wrap {
       padding-bottom: 0;
-    }
-
-    .copy-wrap {
-      margin-top: 40px;
-      padding: 0 10%;
-    }
-
-    .heading {
-      margin-bottom: 15px;
-      font-size: 1.125em;
-      font-weight: bold;
-    }
-
-    p {
-      margin-bottom: 0;
-      text-transform: none;
-      font-family: $font-heading;
-      font-size: 1.25em;
-      font-weight: 300;
     }
 
   }
@@ -212,94 +156,23 @@
 
   }
 
-  .shop-by-category {
-    padding: 60px 0 30px;
-    color: $c-neutral-6;
-    background: $c-neutral-black;
-
-    .heading {
-      margin: 0 0 60px 0;
-      text-align: center;
-      font-size: 2.8rem;
-    }
-
-    .title {
-      text-transform: uppercase;
-    }
-
-    ul {
-      margin: 0 0 30px;
-      padding: 0;
-      list-style: none;
-      text-align: center;
-
-      li {
-        margin: 0 0 5px;
-        padding: 0;
-      }
-
-    }
-
-    a {
-      font-size: 0.875em;
-      color: $c-neutral-6;
-
-      &:hover,
-      &:focus,
-      &:active,
-      &.active {
-        text-decoration: underline;
-      }
-
-    }
-
-  }
-
   // START - desktop
   @media (min-width: $bootstrap-md-width) {
 
     .hero-wrap {
-      position: relative;
 
       .media-wrap {
         padding-bottom: 25%;
       }
 
-      .inner-wrap {
-        position: absolute;
-      }
-
       .content-wrap {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-
-        .container {
-          display: table;
-          height: 100%;
-
-          > .row {
-            display: table-cell;
-            vertical-align: middle;
-          }
-
-        }
-
+        text-align: center;
       }
 
-      .heading {
-        width: 50%;
-        margin: 0 0 0 50%;
+      .heading span {
+        color: $c-neutral-white;
       }
 
-    }
-
-    h1 span:first-child {
-      font-size: 4.2rem;
-      color: $c-neutral-white;
-      border-bottom: none;
     }
 
     .heading-v1,
@@ -322,21 +195,6 @@
 
     .panel-compact {
       margin-bottom: 30px;
-
-      .copy-wrap {
-        margin-top: 20px;
-        padding: 0;
-      }
-
-      .heading {
-        margin-bottom: 10px;
-        font-size: 0.75em;
-      }
-
-      p {
-        font-size: 0.875em;
-      }
-
     }
 
     .section-1 {
@@ -382,11 +240,6 @@
 
     .email-subscription .title {
       margin: 0;
-    }
-
-    .shop-by-category ul {
-      padding-left: 40px;
-      text-align: left;
     }
 
   }

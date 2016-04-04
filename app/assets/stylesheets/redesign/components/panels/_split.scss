@@ -75,4 +75,46 @@
 
   }
 
+  // versions
+  &.alt {
+    background: $c-neutral-white;
+
+    .content-wrap {
+      padding: 0 0 30px 0;
+    }
+
+    .section-heading {
+      margin: 0 0 20px;
+    }
+
+    p {
+      font-size: 1.25em;
+    }
+
+    .btn {
+      font-weight: 500;
+    }
+
+    p,
+    .btn {
+      margin-bottom: 20px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+    }
+
+    @include desktop {
+      min-height: 320px;
+
+      .content-wrap {
+        padding: 0 20% 0 0;
+        text-align: left;
+      }
+
+    }
+
+  }
+
 }
