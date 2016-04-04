@@ -5,7 +5,7 @@
 .landing-page-prom-competition
 
   // hero section
-  .hero-wrap.copy-right 
+  .hero-wrap
     picture.media-wrap.keep-ratio
       .inner-wrap
         source media='(max-width: 768px)' srcset='#{image_path("landingpages/prom-competition/hero-mob.jpg")}'
@@ -19,57 +19,61 @@
           .col-md-12
             h1.heading
               span #PartnersInCrime
-              .sub-heading VIP Trip to Los Angeles
+              span VIP Trip to Los Angeles
   .container
     .row
       .col-md-12
-        h2.heading-v1 One lucky duo will be flown to LA to strut the red carpet like a VIP for the Nylon Young Hollywood Party. Get outfitted in the latest Fame and Partners collection, be prepped by an industry stylist and capture the moment with an editorial-style photoshoot.
+        h2.heading-v1 One lucky duo will be flown to LA to strut the red carpet for the Nylon Young Hollywood Party. Get dressed in the latest Fame and Partners collection by an industry stylist and capture the moment with an editorial-style shoot.
 
     .row.section-1
       .col-md-3
-        .panel-compact.alt
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/flights.jpg"
           .copy-wrap
-            .heading Flights to Los Angeles
-            p All inclusive flights from wherever you are in the world
+            .heading FLY TO LOS ANGELES
+            p All-inclusive flights from wherever you are in the world
 
       .col-md-3
-        .panel-compact.alt
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/dress.jpg"
           .copy-wrap
-            .heading Make The Best Dressed
+            .heading MAKE THE BEST DRESSED LIST
             p Be professionally styled head to toe in the latest Fame and Partners collection
       .col-md-3
-        .panel-compact.alt
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/nylon.jpg"
           .copy-wrap
-            .heading Be a VIP
-            p Access to the Nylon Young Hollywood Party
+            .heading PARTY LIKE A VIP
+            p Get inside the Nylon Young Hollywood Party
       .col-md-3
-        .panel-compact.alt
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/photo-ready.jpg"
           .copy-wrap
-            .heading The Model Life
-            p Live the dream with an industry-level personal photo shoot
+            .heading THE MODEL EXPERIENCE
+            p Live the dream with an industry-level photo shoot
 
     .row
       .col-md-12
         h2.heading-v2
           span HOW TO ENTER
-          span.sub-heading Post a photo of you and your partner in crime on Instagram, tag with #PartnersInCrime and @fameandpartners between 3/21/2016 and 4/15/2016. #{ link_to 'View Terms & Conditions', main_app.root_url + 'prom-competition-terms', target: '_blank' }.
 
     .row.how-to-enter
-      .col-md-6.col-md-offset-3
+      .col-md-6
         .media-wrap
           = image_tag "landingpages/prom-competition/collection.jpg"
+      .col-md-6.copy-wrap
+        .heading-v1 Post a pic of you and your partner in crime on Instagram and tell us in 25 words or less how they inspire you! Make sure to tag @fameandpartners in your photo and #PartnersinCrime to be eligible to enter.
+        .title-line-on-sides
+          .inner-wrap OR
+        .heading-v1 You can e-mail us your photo and entry to #{ link_to 'sweepstakes@fameandpartners.com', 'mailto:sweepstakes@fameandpartners.com' } (by emailing us you agree to receive exclusive updates, discounts and more).
 
     .row
       .col-md-12
@@ -91,7 +95,7 @@
           .media-wrap
             = image_tag "landingpages/prom-competition/tile-8.jpg"
       .col-md-12.button-wrap
-        a.btn.btn-lowlight.btn-lg href="#{main_app.root_url + 'lookbook/partners-in-crime'}"
+        = link_to partners_in_crime_collection_path, class:"btn btn-lowlight btn-lg"
           span shop 
           ' THE COLLECTION
 
@@ -103,7 +107,7 @@
 
     .row.section-1
       .col-md-3
-        .panel-compact.alt
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/tile-9.jpg"
@@ -112,7 +116,7 @@
             p Bespoke atelier service
 
       .col-md-3
-        .panel-compact.alt
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/tile-10.jpg"
@@ -120,7 +124,7 @@
             .heading Personalized Fit
             p A dress tailored only to you
       .col-md-3
-        .panel-compact.alt
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/tile-11.jpg"
@@ -128,13 +132,13 @@
             .heading Custom Colors
             p Choose from a huge suite of options
       .col-md-3
-        .panel-compact.alt
+        .panel-compact
           .media-wrap.keep-ratio
             .inner-wrap
               = image_tag "landingpages/prom-competition/tile-12.jpg"
           .copy-wrap
             .heading Low Waste Production
-            p Singular garments is made to order
+            p Single garments are made to order
 
   .join-heading-wrap
     .container
@@ -144,5 +148,51 @@
             span GET THE FAME TREATMENT
   /! Email Subscription
   = render 'shared/redesign/newsletter_signup'
-  /! Shop by category
-  = render 'shared/redesign/shop_by_category'
+
+  .container
+    .row
+      .col-md-12.T-C-wrap
+        h2.heading-v2
+          span TERMS & CONDITIONS
+        p NO PURCHASE NECESSARY. Sweepstakes open to U.S. residents 18 years and older; void in NY and FL. Enter between 12:00 a.m. ET on 3/21/16 and 11:59 p.m. ET on 4/15/16. Sponsor: Fame & Partners Pty. Ltd. #{ link_to 'See Official Rules here', partners_in_crime_terms_path, target: '_blank' }
+
+  .shop-by-category
+    .container
+      .row
+        .col-md-12
+          h2.heading SHOP BY CATEGORY
+        .col-md-2.hidden-xs.hidden-sm
+        .col-md-2.col-xs-6
+          ul
+            li.title Shop by
+            li = link_to "Best Sellers", best_sellers_path
+            li = link_to "View all dresses", dresses_path
+            li = link_to "What's new", dresses_path(:order => 'newest')
+            - unless Features.active?(:getitquick_unavailable)
+              li = link_to 'Made in 48 hours', fast_making_dresses_path
+            li = link_to 'Plus Size', build_taxon_path('Plus Size')
+        .col-md-2.col-xs-6
+          ul
+            li.title Style
+            li = link_to 'Two-Piece'   , build_taxon_path('Two Piece')
+            li = link_to 'One Shoulder', build_taxon_path('One-Shoulder')
+            li = link_to 'Strapless'   , build_taxon_path('Strapless')
+            li = link_to 'Backless'    , build_taxon_path('Backless')
+            li = link_to "All Styles", dresses_path
+        .col-md-2.col-xs-6
+          ul
+            li.title Events
+            li = link_to 'Formal', build_taxon_path('Formal')
+            li = link_to 'Wedding', build_taxon_path('Wedding')
+            li = link_to 'Birthday', build_taxon_path('Birthday')
+            li = link_to 'Prom', build_taxon_path('Prom')
+            li = link_to "All Events", dresses_path
+        .col-md-2.col-xs-6
+          ul
+            li.title Color
+            li = link_to 'Red'          , colour_path('Red')
+            li = link_to 'Black'        , colour_path('Black')
+            li = link_to 'White'        , colour_path('White')
+            li = link_to 'Pastel'       , colour_path('Pastel')
+            li = link_to "All Colors", dresses_path
+        .col-md-2.hidden-xs.hidden-sm

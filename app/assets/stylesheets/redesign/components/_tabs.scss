@@ -49,8 +49,8 @@
       }
 
       li.active {
-        background: $c-brand-blue;
-        border-color: $c-brand-blue;
+        background: $c-neutral-black;
+        border-color: $c-neutral-black;
 
         &:after {
           content: '';
@@ -62,7 +62,7 @@
           height: 0;
           border-style: solid;
           border-width: ($tab-nav-height / 2) 0 ($tab-nav-height / 2) ($tab-nav-height / 5);
-          border-color: transparent transparent transparent $c-brand-blue;
+          border-color: transparent transparent transparent $c-neutral-black;
         }
 
         a {

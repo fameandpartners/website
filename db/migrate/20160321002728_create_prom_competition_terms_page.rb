@@ -1,7 +1,7 @@
 class CreatePromCompetitionTermsPage < ActiveRecord::Migration
   def up
     page = Revolution::Page.create!(
-      :path => '/prom-competition-terms',
+      :path => '/partners-in-crime-terms',
       :template_path => '/statics/prom_competition_terms'
     )
     
@@ -10,6 +10,6 @@ class CreatePromCompetitionTermsPage < ActiveRecord::Migration
   end
 
   def down
-    Revolution::Page.where(:path => '/prom-competition-terms').delete_all
+    Revolution::Page.where(:path => '/partners-in-crime-terms').delete_all
   end
 end

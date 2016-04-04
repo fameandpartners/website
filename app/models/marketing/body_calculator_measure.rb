@@ -8,7 +8,8 @@ module Marketing
                     :size,
                     :under_bust_circumference,
                     :waist_circumference,
-                    :email
+                    :email,
+                    :unit
 
     validates :email, format: EMAIL_FORMAT_REGEX
     validates :bust_circumference,
@@ -18,6 +19,7 @@ module Marketing
               :under_bust_circumference,
               :waist_circumference,
               :email,
+              :unit,
               presence: true
   end
 end
