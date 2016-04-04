@@ -462,7 +462,7 @@ module ProductsHelper
     return [] if Rails.env.test?
 
     Rails.cache.fetch(['new_this_week_products', current_site_version.code], expire_in: configatron.cache.expire.long) {
-      Products::CollectionResource.new({ edits: 'new-this-week' }).read.serialize[:products]
+      Products::CollectionResource.new({ edits: 'new-this-week', site_version: current_site_version }).read.serialize[:products]
     }
   end
 end
