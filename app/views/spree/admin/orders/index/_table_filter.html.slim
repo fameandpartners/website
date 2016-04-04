@@ -100,4 +100,4 @@
     .actions.filter-actions
       div[data-hook="admin_orders_index_search_buttons"]
         = button t(:filter_results), 'icon-search'
-        = button t(:export_as_csv), 'export-as-csv'
+        = link_to t(:export_as_csv),'#', class: 'export-as-csv button'
