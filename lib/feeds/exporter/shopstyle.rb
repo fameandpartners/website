@@ -6,37 +6,36 @@ module Feeds
         'shopstyle.xml'
       end
 
+      private
+
+      # Sample result: Fame & Partners Vintage Queen Cherry Red Lace Dress Evening Dresses
+
       # @override
-      private def title(item)
-        title  = item[:title]
+      def title(item)
+        title  = item[:product_name]
         styles = available_in_styles(item)
-        size   = in_size(item)
-        events = perfect_for_event(item)
+        events = event_names(item)
 
-        [brand, title, events, styles, size].compact.join(' ')
+        [brand, styles, events, title, 'Dress'].join(' ')
       end
 
-      private def perfect_for_event(item)
-        unless item[:events].blank?
-          events = item[:events].map(&:titleize).join(', ')
-          "- Perfect for #{events}"
-        end
+      def available_in_styles(item)
+        Array.
+          wrap(item[:styles]).
+          first(2).
+          map(&:titleize).
+          join(' ')
       end
 
-      private def in_size(item)
-        unless item[:size].blank?
-          "in Size #{item[:size]}"
-        end
+      def event_names(item)
+        Array.
+          wrap(item[:events]).
+          first(2).
+          map(&:titleize).
+          join(' ')
       end
 
-      private def available_in_styles(item)
-        unless item[:styles].blank?
-          styles = item[:styles].map(&:titleize).join(', ')
-          "Available in #{styles}"
-        end
-      end
-
-      private def brand
+      def brand
         'Fame & Partners'.freeze
       end
     end
