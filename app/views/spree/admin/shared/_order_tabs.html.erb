@@ -17,7 +17,8 @@
       <% if @order.completed? %>
         <dt><%= t(:shipment) %>: </dt>
         <dd id='shipment_status'><span class="state <%= @order.shipment_state %>"><%= t(@order.shipment_state, :scope => :shipment_states, :default => [:missing, "none"]) %></span></dd>
-        <a href="/admin/orders/R534775253/mark_order_as_shipped" class="button" style="padding-top: 12px;">Mark order as Shipped</a>
+
+        <%= link_to 'Mark order as Shipped', mark_order_as_shipped_admin_order_path(@order), class: 'button', style: 'padding-top: 12px;' %>
         <dt><%= t(:payment) %>: </dt>
         <dd id='payment_status'><span class="state <%= @order.payment_state %>"><%= t(@order.payment_state, :scope => :payment_states, :default => [:missing, "none"]) %></span></dd>
         <dt data-hook><%= t(:date_completed) %>:</dt>

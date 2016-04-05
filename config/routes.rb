@@ -460,10 +460,10 @@ FameAndPartners::Application.routes.draw do
     namespace :admin do
       resources :orders do
         member do
-          get 'mark_order_as_shipped'
+          get 'mark_order_as_shipped', :as => 'mark_order_as_shipped'
         end
       end
-      
+
       resources :competition_participations, only: [:index], format: :csv
       scope 'products/:product_id', :as => 'product' do
         resource :style_profile, :controller => 'product_style_profile', :only => [:edit, :update]
