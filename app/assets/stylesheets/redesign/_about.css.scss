@@ -1,18 +1,41 @@
+/* [About us]
+-------------------------------------------------------*/
+// START - desktop
 .about {
 
-  .hero-wrap{
+  .hero-wrap.copy-right{
     background-color: $beage-bg;
-  }
 
-
-  h2 {
-    padding-bottom: 2em;
-    position: relative;
+    .media-wrap {
+      display: none;
+    }
+    .heading {
+      margin-bottom: 50px;
+      text-align: left
+    }
   }
 
   img {
     width: 100%;
   }
-}//.about
 
+  // START - desktop
+  @media (min-width: $bootstrap-md-width) {
 
+    .main-hero-wrap.copy-right {
+
+      .media-wrap {
+        padding-bottom: 39%;
+      }
+
+      .heading {
+        max-width: 360px;
+      }
+
+    }
+
+  }
+  // END - desktop
+
+}
+// END - about
