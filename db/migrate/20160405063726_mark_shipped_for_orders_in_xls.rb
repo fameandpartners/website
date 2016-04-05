@@ -1321,10 +1321,10 @@ class MarkShippedForOrdersInXls < ActiveRecord::Migration
                    "R116245706",
                    "R510435162",
                    "R006015486"]
-    order_list.each do |o|
-      order = Spree::Order.where(number: o).first
-      order.shipment_state = 'shipped'
-      order.save!
+
+    Spree::Order.where(number: order_list).find_each do |o|
+      o.shipment_state = 'shipped'
+      o.save!
     end
   end
 

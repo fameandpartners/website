@@ -7,6 +7,13 @@ module Spree
       attr_reader :hide_line_items
       helper_method :hide_line_items, :order_shipment_states
 
+      def mark_order_as_shipped
+        order = Spree::Order.where(number: params[:id]).first
+        order.shipment_state = 'shipped'
+        order.save!
+        redirect_to action: :show
+      end
+
       def index
         ##################### Original Spree ##############################
         params[:q] ||= {}
@@ -38,7 +45,7 @@ module Spree
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
 
         per_page = 5000 if params[:format] == 'csv'
-        
+
         @orders = @search.result(distinct: true).includes(
           :user => [],
           :shipments => {:inventory_units => :variant},
