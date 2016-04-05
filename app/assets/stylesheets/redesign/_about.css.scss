@@ -1,33 +1,13 @@
 .about {
 
-  .about-header{
-    height: 85vh;
-    min-height: 540px;
-    background-color: #EFEEEA;
-
-    @media (min-width: $bootstrap-sm-width){
-      height: auto;
-    }
-
+  .hero-wrap{
+    background-color: $beage-bg;
   }
 
-  .inner-wrap {
-    width: 96%;
-    margin: 2%;
-  }
 
   h2 {
     padding-bottom: 2em;
     position: relative;
-
-    &:after{
-      width: 1rem;
-      height: 1rem;
-      display: block;
-      content:"\2013";
-      position: absolute;
-      bottom: 0;
-    }
   }
 
   img {
