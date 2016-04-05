@@ -21,13 +21,12 @@ module Bergen
           'AuthenticationString'  => client.auth_token,
           'SupplierDetails'       => {
             'CompanyName' => 'Fame & Partners',
-            'State'       => 'NY',
             'Country'     => 'Australia'
           },
           'ReceivingTicketObject' => {
-            'Carrier'          => 'Shipping Company Name',
-            'Warehouse'        => 'BERGEN LOGISTICS NJ',
-            'ShipmentTypelist' => 'OPENTOHANG'
+            'Carrier'          => 'Truck', # Carrier should be the method being used to ship the product to us. If UPS is shipping the product, then this would be UPS. If you don't know what the carrier is, you can default to "Truck".
+            'Warehouse'        => 'Bergen Logistics NJ2',
+            'ShipmentTypelist' => 'Open To Hang'
           },
           'Shipmentitemslist'     => {
             'SKU'              => global_sku.sku,
