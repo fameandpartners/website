@@ -16,7 +16,8 @@ class  UserCart::UserCartResource
       display_shipment_total: order_display_shipment_total,
       display_promotion_total: order.display_promotion_total,
       display_total: order.display_total,
-      site_version: site_version
+      site_version: site_version,
+      order_number: order.number
     )
   end
 
