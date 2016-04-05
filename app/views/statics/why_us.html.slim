@@ -1,47 +1,167 @@
-.page-title.default.why-us-header
+.why-us
+
+  // hero section
+  .main-hero-wrap.hero-wrap.copy-right 
+    picture.media-wrap.keep-ratio
+      .inner-wrap
+        source media='(max-width: 1023px)' srcset='#{image_path("_why-us/hero-mob.jpg")}'
+        source media='(min-width: 1024px)' srcset='#{image_path("_why-us/hero-full.jpg")}'
+        img src='#{image_path("_why-us/hero-full.jpg")}' srcset='
+          #{image_path("_why-us/hero-mob.jpg")} 1023w,
+          #{image_path("_why-us/hero-full.jpg")} 1024w' alt='background image'
+    .content-wrap
+      .container
+        .row
+          .col-md-12
+            h1.heading
+              span The Modern Atelier
+              .sub-heading Contemporary dresses customized by you fashioned by Fame and Partners
+
   .container
-    .page-title--details
-      h1.no-padding-bottom.why-us-title Why shop with us?
+    .row
+      .col-md-4.panel-compact.alt.add-separator
+        .copy-wrap
+          .heading YOUR PERSONAL COUTURIER
+          p Express yourself through bespoke designs and we’ll help create your personal piece of fashion.
+      .col-md-4.panel-compact.alt.add-separator
+        .copy-wrap
+          .heading ARTISAN QUALITY
+          p Elegant dresses made to order by highly trained ateliers using contemporary designs and fabrications.
+      .col-md-4.panel-compact.alt.add-separator
+        .copy-wrap
+          .heading INSPIRED COLLECTIONS
+          p Designers drawing inspiration from the world around them; new and novel trends, art and culture, countries and their cultural nuances, plus inspiring influencers.
 
-.page-content.why-us
-  .row
-    .col-md-4.no-padding.pink
-      .header.black
-        h2 Twin Alert
-      .block
-        p Our Twin Alert feature means that no girl attending the same event can purchase the same dress with the same customizations, in the same colour. This guarantees that no one will be wearing the same dress or look as you.
+  // START - section-personal-style
+  section.alt.section-personal-style
+    .container
+      .row
+        .col-md-10.col-md-offset-1.section-title.text-center
+          h2.section-heading Personalised style
+          p
+            em Fashion design is now at your fingertips
+          p We give you the power to customize dresses in your own unique style, from current season silhouettes, edgy cocktail frocks, color-popping ball gowns and all white everything for the modern bride.
+          p Choose a dress and tell us what would make it perfect for you:
 
-    .col-md-4.no-padding
-      .header.grey
-        h2 Free Stylists
-      .block
-        p If you need some help sourcing your complete look, Fame & Partners Stylists will source the total look for you, for free! When you purchase your dress with us, our Stylists will give you completely free, tailored advice based on your style profile and then actively find the best products that will match your dress, within your budget.
+      .row
+        .col-md-12
+          picture.media-wrap
+            source media='(max-width: 1023px)' srcset='#{image_path("_why-us/tile-1-mob.jpg")}'
+            source media='(min-width: 1024px)' srcset='#{image_path("_why-us/tile-1.jpg")}'
+            img src='#{image_path("_why-us/tile-1.jpg")}' srcset='
+              #{image_path("_why-us/tile-1-mob.jpg")} 1023w,
+              #{image_path("_why-us/tile-1.jpg")} 1024w' alt=''
 
-    .col-md-4.no-padding.pink
-      .header.black
-        h2 Customize your Dress
-      .block
-        p Want to make a dress completely your own? Choose to get one of our styles made in a different #{t('words.color')} or fabric, change the hemline length, select another unique #{t('words.customization')} or get it made in a size not offered on the site.
+      .row
+        .col-md-3.col-sm-10.col-xs-10.col-md-offset-0.col-sm-offset-1.col-xs-offset-1.panel-compact.alt
+          em 1
+          .heading Pick your favorite dress from our collection
+          p We know it’s tough to decide, which is why you can browse by occasion to make searching a little more simple.
+        .col-md-3.col-sm-10.col-xs-10.col-md-offset-0.col-sm-offset-1.col-xs-offset-1.panel-compact.alt
+          em 2
+          .heading Choose from three customizable features
+          p This is where your personal style comes to in play. Tweak straps, add or remove skirt slits, adjust the neckline and more. Craft the dress to flatter your form.
+        .col-md-3.col-sm-10.col-xs-10.col-md-offset-0.col-sm-offset-1.col-xs-offset-1.panel-compact.alt
+          em 3
+          .heading Modify the length to suit your height
+          p The customization option we get the biggest ‘thank you’ for, no more tripping on hemlines or tugging down mini skirts.
+        .col-md-3.col-sm-10.col-xs-10.col-md-offset-0.col-sm-offset-1.col-xs-offset-1.panel-compact.alt
+          em 4
+          .heading Add to cart<br><br>
+          p It’s that easy to get a custom-made dress delivered to your door. Give us 10 days if there’s no rush, or 48 hours if it’s an outfit emergency.
+  // END - section-personal-style  
 
-  .row
-    .col-md-4.no-padding
-      .header.grey
-        h2 Free Returns
-      .block
-        p You may return any item for free, provided it’s within 30 days of purchase, it is unused and in resalable condition, and the DO NOT REMOVE tag is still attached. For full details on our Returns and Exchanges policy see #{link_to 'here', faqs_path}
+  .container
+    section.row
+      .col-md-12
+        .panel-split.alt
+          .content-wrap-outer
+            .content-wrap-inner
+              .content-wrap
+                h2.section-heading Fit guarantee
+                p
+                  em We offer a superior fit
+                p Just like a luxury tailor we take size, shape and height in to account so that every dress is cut to your body type. This year we’re launching fully personalized sizing too.
+                = link_to 'SEE OUR SIZE GUIDE', size_guide_url, class:'btn btn-lowlight btn-sm'
+          .media-wrap
+            = image_tag "_why-us/tile-2.jpg"
 
-    .col-md-4.no-padding.pink
-      .header.black
-        h2 Fit Guarantee
-      .block
-        p If the size you purchase isn’t right for you, you can exchange it for another size up or down one size, for free.
+  section.alt
+    .container
+      .row
+        .col-md-10.col-md-offset-1.section-title.text-center
+          h2.section-heading Environmentally conscience production model
+          p
+            em Our production model in 3 steps
+        .col-md-12
+          .section-production-model
+            .inner-wrap
+              .step
+                .heading Step 1
+                .copy-wrap Order
+              .step
+                .heading Step 2
+                .copy-wrap Manufacture
+              .step
+                .heading Step 3
+                .copy-wrap Delivery
 
-    .col-md-4.no-padding
-      .header.grey
-        h2 On Demand
-      .block
-        p We make all of our dresses on demand which is how we offer #{t('words.customization')}s and multiple #{t('words.color')} options. This means your dress is uniquely yours, made just for you.
+  .container
 
-  .row.why-us-img
-    = image_tag 'why-us.jpg', alt: ''
+    section.row
+      .col-md-4.panel-compact.alt.add-separator
+        .copy-wrap
+          .icon.icon-made-to-order
+          .heading FASHION TO ORDER
+          p Our dresses are made to order rather than sitting on a rail waiting to be bought. This reduces wasteful manufacturing and thwarts consumerism.
+      .col-md-4.panel-compact.alt.add-separator
+        .copy-wrap
+          .icon.icon-truck
+          .heading DIRECT DELIVERY
+          p The finished dresses are delivered straight to you, with no need to be stored in air-conditioned warehouses.
+      .col-md-4.panel-compact.alt.add-separator
+        .copy-wrap
+          .icon.icon-earth
+          .heading REDUCED WASTE
+          p We don’t carry stock, which means no surplus items each season that would be cleared at discount or even thrown away.
 
+    section.section-collections.row
+      .col-md-6
+        .section-title
+          h2.section-heading Quick fire collections
+          p
+            em Our designers are a savvy set
+          p They can produce new collections within weeks, unlike standard retail brands that take two months or more to refresh their ranges. Which means if we scout a trend or get inspired by a colorful trip overseas, you’ll see it all in our collections within a few weeks. In the modern world, fashion waits for no one.
+      .col-md-5.col-md-offset-1
+        em.heading Speed to market
+        .progress-wrap.prograss-fame
+          ' Two
+          span  WEEKS
+        .progress-label Fame and Partners
+        .progress-wrap.prograss-standard
+          ' Two
+          span  MONTHS
+        .progress-label Standard Retail
+      .col-md-12
+        /! Recen Collections Carousel
+        = render 'shared/redesign/collection_hero_carousel'
+
+    section.row
+      .col-md-9.col-md-offset-1.section-title.text-center
+        h2.section-heading Personalised shopping experience
+      .col-md-12
+        .panel-split.alt
+          .content-wrap-outer
+            .content-wrap-inner
+              .content-wrap
+                h2.section-heading Wedding planner
+                p
+                  em Curate your bridal party style for the big day
+                p Register your wedding, create a bridal mood board, and invite your bridesmaids to comment and vote on the dresses they love. The perfect tool for bridal parties spread across the country or the globe. Each bride who uses the Fame and Partners wed ding planner receives a honeymoon dress with our compliments.
+                = link_to 'EXPLORE THE WEDDING PLANNER', bridesmaid_landing_page_path, class:'btn btn-lowlight btn-sm'
+                .icon.icon-style-quiz
+          .media-wrap
+            = image_tag "_why-us/tile-3.jpg"
+
+  /! Shop by category
+  = render 'shared/redesign/shop_by_category'

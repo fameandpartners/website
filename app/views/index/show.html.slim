@@ -2,11 +2,8 @@ ruby:
   link_to_dresses = build_taxon_path('dresses')
 
 .page-content.index
-  // TODO: create helper for multisource images
-  = react_component('HeroCarousel', skin: 'skin-dark',
-    assets: [{link: dresses_path, src: '/assets/home-page-tiles/HERO-mar31', alt: 'Forever'},
-             {link: 'dresses/dress-chiara-978?color=black', src: '/assets/home-page-tiles/Chiara-HERO', alt: 'Chiara Three-Piece Set'},
-            {link: partners_in_crime_collection_path, src: '/assets/home-page-tiles/PartnersInCrime-HERO-2', alt: 'Partners In Crime'}])
+  /! Hero Carousel
+  = render 'shared/redesign/collection_hero_carousel'
 
   section.competition-banner
     .container

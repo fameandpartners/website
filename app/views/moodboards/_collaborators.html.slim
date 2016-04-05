@@ -1,4 +1,5 @@
 ul
+  li = moodboard.user.first_name.upcase
   - moodboard.collaborators.each do |member|
     li
       => member.name.to_s.upcase

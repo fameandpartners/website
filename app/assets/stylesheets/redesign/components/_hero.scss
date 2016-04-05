@@ -14,6 +14,90 @@
     right: 15px;
   }
 
+  // versions
+  &.copy-right {
+    margin-bottom: 50px;
+
+    .media-wrap {
+      padding-bottom: 0;
+    }
+
+    .inner-wrap {
+      position: relative;
+    }
+
+    .content-wrap {
+      text-align: center;
+    }
+
+    .heading {
+      margin: 50px 0 0;
+      text-transform: none;
+      font-size: 3.8rem;
+      color: $c-neutral-black;
+
+      > span {
+        display: block;
+      }
+
+    }
+
+    .sub-heading {
+      display: inline-block;
+      margin-top: 5px;
+      padding-top: 5px;
+      font-size: 2rem;
+      font-weight: 500;
+      font-style: italic;
+      border-top: solid $c-neutral-black 1px;
+    }
+
+    // START - desktop
+    @media (min-width: $bootstrap-md-width) {
+
+      position: relative;
+
+      .inner-wrap {
+        position: absolute;
+      }
+
+      .content-wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text-align: left;
+
+        .container {
+          display: table;
+          height: 100%;
+
+          > .row {
+            display: table-cell;
+            vertical-align: middle;
+          }
+
+        }
+
+      }
+
+      .heading {
+        width: 50%;
+        margin: 0 0 0 50%;
+        font-size: 4rem;
+      }
+
+      .sub-heading {
+        padding-top: 0;
+        border-top: none;
+      }
+
+    }
+    // END - desktop
+
+  }
+
 }
 
 .hero-product-wrap {
