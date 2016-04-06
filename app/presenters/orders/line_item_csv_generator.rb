@@ -5,18 +5,7 @@ module Orders
     attr_reader :orders, :query_params
 
     def set_up_orders(orders)
-      @orders = orders.includes(  adjustments: [:originator],
-                                  shipments:   [:order],
-                                  line_items:  {
-                                    order:           [:shipments],
-                                    personalization: [:size, :color],
-                                    product:         [:master, :factory],
-                                    variant:         {
-                                      inventory_units: [],
-                                      option_values:   []
-                                    },
-                                  },
-                                ).collect { |o| OrderPresenter.new(o) }
+      @orders = orders.includes(:adjustments, :shipments, :line_items).collect { |o| OrderPresenter.new(o) }
     end
 
     def initialize(orders, query_params = {})
