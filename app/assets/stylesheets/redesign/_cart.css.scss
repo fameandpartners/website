@@ -26,7 +26,6 @@
 }
 
 .checkout-items {
-  padding: 0px 10px;
   padding: 10px 20px;
   border: 1px solid #d9d9d9;
 }
@@ -115,6 +114,13 @@
   float: left;
   background-size: contain;
   clear: both;
+}
+#cart .shopping-bag-order-number {
+  border-top: 1px solid $c-neutral-3;
+  padding-top: 10px;
+  color: $c-neutral-6;
+  font-size: 0.75em;
+  text-align: center;
 }
 #cart .shopping-bag-payment-methods {
   text-align:center;

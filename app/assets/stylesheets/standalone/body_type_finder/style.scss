@@ -212,7 +212,7 @@ tr td:first-child {
   }
 
   table {
-    float: left;
+    margin: 0 auto;
   }
 
   .media-wrap {
@@ -223,13 +223,18 @@ tr td:first-child {
   .results {
     text-align: center;
 
-    span {
-      display: block;
+    div,
+    .type {
       margin-bottom: 10px;
     }
 
-    h3 {
-      margin-bottom: 10px;
+    .size {
+
+    }
+
+    .description {
+      font-size: 14px;
+      color: #ddd;
     }
 
   }

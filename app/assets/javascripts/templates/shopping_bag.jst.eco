@@ -127,6 +127,10 @@
   </div>
 </div>
 
+<div class="shopping-bag-order-number">
+    Your Order Number: <%= @cart.order_number %>
+</div>
+
 <div class="row shopping-bag-payment-methods" >
   <img src="/assets/checkout/visa-mastercard-paypal-masterpass.jpg" >
   <img src="/assets/comodo-ssl.png" >
