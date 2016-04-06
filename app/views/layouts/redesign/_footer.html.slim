@@ -67,7 +67,11 @@
         .stay-social-images
           = render 'layouts/redesign/social_links'
 
-      = render 'shared/redesign/newsletter_signup', locals: { footer: true }
+      .col-md-4
+        .email-subscribe
+          .newsletter-title Keep Updated
+          p Sign up for an insider round of the latest fashion news, collection drops and underground style options - plus an instant $25 off your first order.
+          = render 'shared/redesign/newsletter_form'
 
   .container
     .row
