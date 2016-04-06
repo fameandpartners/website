@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160405094034) do
+ActiveRecord::Schema.define(:version => 20160406155731) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -495,6 +495,8 @@ ActiveRecord::Schema.define(:version => 20160405094034) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  add_index "marketing_order_traffic_parameters", ["order_id"], :name => "index_marketing_order_traffic_parameters_on_order_id"
 
   create_table "marketing_user_visits", :force => true do |t|
     t.integer  "spree_user_id"
