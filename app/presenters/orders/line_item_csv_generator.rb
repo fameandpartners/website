@@ -5,7 +5,7 @@ module Orders
     attr_reader :orders, :query_params
 
     def set_up_orders(orders)
-      @orders = orders.includes(:line_items).collect { |o| OrderPresenter.new(o) }
+      @orders = orders.includes(:adjustments, :shipments, :line_items).collect { |o| OrderPresenter.new(o) }
     end
 
     def initialize(orders, query_params = {})
