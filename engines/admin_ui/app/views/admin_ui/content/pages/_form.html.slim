@@ -34,7 +34,7 @@
       label.col-sm-2.control-label Publish To
       .col-sm-10= f.text_field :publish_to, :class => 'form-control datepicker'
 
-= render 'maybe_product_pids', variables: f.object.variables
+= render partial: 'page_products', locals: {products_collection: products}
 
 .ibox.float-e-margins
   .ibox-title
