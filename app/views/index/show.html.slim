@@ -21,13 +21,13 @@ ruby:
   section.container.content-block.home-main-content
     .row
       .main.col-md-7
-        = link_to '/dresses/new-this-week', class: 'media-wrap'
-          = image_tag 'home-page-tiles/after-dark-CategoryTile1-new.jpg', alt: 'AFTER DARK - explore THE NEWEST LOOKS'
+        = link_to partners_in_crime_collection_path, class: 'media-wrap'
+          = image_tag 'home-page-tiles/CategoryTile1-apr-5.jpg', alt: 'THE MODERN TREATMENT'
         = render 'shared/redesign/tabs_collection'
-        = link_to 'https://www.instagram.com/fameandpartners', class: 'media-wrap'
-          = image_tag 'home-page-tiles/snapped-for-social-CategoryTile2.jpg', alt: 'OUR FAVOURITES. Snapped for social. - Explore INSTAGRAM'
         = link_to best_sellers_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/the-perfect-color-CategoryTile3.jpg', alt: 'THE PERFECT COLOR. Your dress. Your way. - Customize your DRESS'
+          = image_tag 'home-page-tiles/CategoryTile2-apr-5.jpg', alt: 'THE PERFECT COLOUR'
+        = link_to colour_path('Red'), class: 'media-wrap'
+          = image_tag 'home-page-tiles/CategoryTile3-apr-5.jpg', alt: 'LADY IN RED'
 
       aside.col-md-5
         = react_component('BlogPosts')
