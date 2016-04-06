@@ -1,15 +1,7 @@
 - if target && target.errors.any?
   #errorExplanation.errorExplanation.row
-	.col-md-12
-	  .alert.alert-warning.alert-dismissible role="alert"
-
-	    button type="button" class="close" data-dismiss="alert" aria-label="Close"
-	      span aria-hidden="true" &times;
-        - if !target.errors.messages[:password].nil?
-          - mess = "Password must have at least 6 characters and password confirmation must match. "
-        - if !target.errors.messages[:first_name].nil? || !target.errors.messages[:last_name].nil?
-  	      - mess = mess.to_s + "First name and Last name must exist ."
-        h3.alert-warning = mess
-	    / ul.list-group
-	  	/ - target.errors.full_messages.each do |msg|
-	  	/   li.list-group-item= msg
+    .col-md-12
+      .alert.alert-warning.alert-dismissible role="alert"
+        button type="button" class="close" data-dismiss="alert" aria-label="Close"
+          span aria-hidden="true" &times;
+        = target.errors.full_messages.join(', ')
