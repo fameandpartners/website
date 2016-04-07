@@ -8,57 +8,124 @@
         source media='(min-width: 1024px)' srcset='#{image_path("_about/hero-full.jpg")}'
         img src='#{image_path("_about/hero-full.jpg")}' srcset='
           #{image_path("_about/hero-mob.jpg")} 1023w,
-          #{image_path("_about/hero-full.jpg")} 1024w' alt='background image'
+          #{image_path("_about/hero-full.jpg")} 1024w' alt='Inspired by heritage, powered by technology'
     .content-wrap
       .container
         .row
-          .col-md-12
-            h1.heading
-              span Inspired by heritage dressmakers, powered by modern technology
-              .sub-heading Our technology powered, fashion-to-order, anti wastage business model is unique to us. We&lsquo;re proud to be the only company globally making bespoke dresses in as little as 48 hours.
-            .icon-container
-              .made-to-order
-                .icon-circle.icon.icon-made-to-order
-                .icon-heading MADE TO ORDER
-              .made-in-days
-                .icon-circle.icon.icon-made-to-order
-                .icon-heading MADE TO ORDER
+          .col-xs-10.col-md-12
+            .copy-wrap
+              h1.heading
+                span Inspired by heritage dressmakers, powered by modern technology
+                .sub-heading Our technology powered, fashion-to-order, anti wastage business model is unique to us. We&lsquo;re proud to be the only company globally making bespoke dresses in as little as 48 hours.
+              .icon-container.clearfix
+                .icon-graphic
+                  .icon-circle.icon.icon-made-to-order
+                  .icon-heading <strong>MADE TO ORDER</strong>
+                .icon-graphic
+                  .icon-circle.icon.icon-sewing-machine
+                  .icon-heading <strong>MADE IN 2 - 5 days</strong>
 
   .container
     .row
       .col-md-6.col-sm-12
-        h3 We design dresses of our time
-        p Our designs are culturally inspired and capture current trends
+        .copy-wrap
+          h3 We design dresses of our time
+          p Our designs are culturally inspired and capture current trends
       .col-md-6.col-xs-12
 				//TODO: need to pull dynamic content
+  section.bespoke
+    .container
+      .row
+        .col-md-6.col-xs-12.no-padding
+          picture.media-wrap.keep-ratio
+            .inner-wrap
+              source media='(max-width: 1023px)' srcset='#{image_path("_about/bespoke-tile-mob.jpg")}'
+              source media='(min-width: 1024px)' srcset='#{image_path("_about/bespoke-tile-full.jpg")}'
+              img src='#{image_path("_about/bespoke-tile-full.jpg")}' srcset='
+                #{image_path("_about/bespoke-tile-mob.jpg")} 1023w,
+                #{image_path("_about/bespoke-tile-full.jpg")} 1024w' alt='Bespoke tailoring'
 
-    .row
-      .col-md-6.col-xs-12
-      //TODO: need an image here
+        .col-md-6.col-xs-12
+          .copy-wrap
+            h3 A Platform form custom bespoke tailoring
+            p Each of our dresses can be customised in 50 different ways, giving you the power of creative direction.
+            h4 CUSTOMIZED STYLES
+            p Dresses have up to four style customizations, each a new take on the original design.
+            h4 BESPOKE COULOURS AND PRINTS
+            p Choose from more than 20 different color variations for many dresses.
+            h4 DRESS LENGTH
+            p The chosen style can be altered to fit your height
 
-      .col-md-6.col-xs-12
-        h3 A Platform form custom bespoke tailoring
-        p.ndash Each of our dresses can be customised in 50 different ways, giving you the power of creative direction.
-        h4 CUSTOMIZED STYLES
-        p Dresses have up to four style customizations, each a new take on the original design.
-        h4 BESPOKE COULOURS AND PRINTS
-        p Choose from more than 20 different color variations for many dresses.
-        h4 DRESS LENGTH
-        p The chosen style can be altered to fit your height
+  section.dressmaking
+    .container
+      .row
+        .col-md-6.col-xs-12.no-padding.col-md-push-6
+          picture.media-wrap.keep-ratio
+            .inner-wrap
+              source media='(max-width: 1023px)' srcset='#{image_path("_about/dressmaking-tile-mob.jpg")}'
+              source media='(min-width: 1024px)' srcset='#{image_path("_about/dressmaking-tile-full.jpg")}'
+              img src='#{image_path("_about/dressmaking-tile-full.jpg")}' srcset='
+                #{image_path("_about/dressmaking-tile-mob.jpg")} 1023w,
+                #{image_path("_about/dressmaking-tile-full.jpg")} 1024w' alt='Hand made dresses'
 
-    .row
-      .col-md-6.col-xs-12
-        h3 Each dress is handmade by a seamstress
-        p Our dresses are crafted with care and meticulously hand ispected
+        .col-md-6.col-xs-12.col-md-pull-6
+          .copy-wrap
+            h3 Each dress is handmade by a seamstress
+            p Our dresses are crafted with care and meticulously hand ispected
 
-      .col-md-6.col-xs-12
-				//TODO: image need to go here
+  section.expansion
+    .container
+      .row
+        .col-md-6.col-xs-12
+          .copy-wrap
+            h3 Expansion and Growth
+            p &lsquo;Our latest funding round empowers us to introduce more ground&ndash;breaking designs to the world of fashion and give you more control than ever over the desing of your dress&rsquo;
+        .col-md-6.col-xs-12
+          .copy-wrap.clearfix
+            p.expansion-number
+              | <span class="number-title">DRESSES SOLD</span><span class="number">108,000</span>
+            p.expansion-number
+              | <span class="number-title">ESTABLISHED FOR</span><span class="number">751 days</span>
 
-    .row
-      .col-md-6.col-xs-12
-        h3 Expansion and Growth
-        p &lsquo;Our latest funding round empowers us to introduce more ground&ndash;breaking designs to the world of fashion and give you more control than ever over the desing of your dress&rsquo;
-      .col-md-6.col-xs-12
+  section.join-the-team
+    .container
+      .row
+        .col-xs-12.col-sm-4.col-sm-offset-4
+          .copy-wrap
+            = render 'shared/redesign/join_team_fame'
 
-		/! Shop by category
+  section.our-offices
+    .container
+      .row
+        .col-xs-12
+          h3 Our Offices
+      .row
+        .col-xs-12.col-md-4
+          .office-image.sydney
+            p SYDNEY
+        .col-xs-12.col-md-4
+          .office-image.los-angeles
+            p LOS ANGELES
+        .col-xs-12.col-md-4
+          .office-image.new-york
+            p NEW YORK CITY
+
+  section.modern-atelier
+    .container
+      .row
+        .col-xs-12.col-md-6.col-md-push-6
+          picture.media-wrap
+            .inner-wrap
+              source media='(max-width: 1023px)' srcset='#{image_path("_why-us/tile-1-mob.jpg")}'
+              source media='(min-width: 1024px)' srcset='#{image_path("_why-us/tile-1.jpg")}'
+              img src='#{image_path("_why-us/tile-1.jpg")}' srcset='
+                #{image_path("_why-us/tile-1-mob.jpg")} 1023w,
+              #{image_path("_why-us/tile-1.jpg")} 1024w' alt=''
+        .col-xs-12.col-md-6.col-md-pull-6
+          .copy-wrap
+            h3 The Modern Atelier
+            p Contemporary dresses customized by you, fashioned by Fame and Partners
+            a href="/why-us" SEE WHY WE&rsquo;RE DIFFERENT
+
+	/! Shop by category
   = render 'shared/redesign/shop_by_category'
