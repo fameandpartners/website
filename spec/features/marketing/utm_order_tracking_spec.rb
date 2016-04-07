@@ -12,10 +12,7 @@ describe 'I’m capturing order UTM stuff now', type: :feature do
   end
 
   it "doesn't capture UTM params" do
-    utm_count_before = Marketing::OrderTrafficParameters.count
-    visit '/'
-    utm_count_after = Marketing::OrderTrafficParameters.count
-    expect(utm_count_before).to eq(utm_count_after)
+    expect { visit('/') }.to_not change { Marketing::OrderTrafficParameters.count }
   end
 
 end
