@@ -39,6 +39,7 @@ module Orders
                    :factory,
                    :fabrication,
                    :price,
+                   :currency,
                    :quantity
 
     attr_reader :wrapped_order, :item
@@ -188,7 +189,9 @@ module Orders
         :shipping_address        => wrapped_order.shipping_address,
         :return_request          => order.return_requested?,
         :return_action           => return_action,
-        :return_details          => return_details
+        :return_details          => return_details,
+        :price                   => price,
+        :currency                => currency
       }
     end
 
