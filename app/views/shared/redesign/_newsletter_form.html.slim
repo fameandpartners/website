@@ -1,4 +1,5 @@
 ruby:
+  formID = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
   details = Marketing::Subscriber.new(
     user: current_spree_user,
     token: cookies['utm_guest_token'],
@@ -7,16 +8,16 @@ ruby:
   ).details
   details[:campaign] = 'home' if details[:campaign].blank?
 
-form.input-btn action="https://fameandpartners.createsend.com/t/t/s/urikx/" method="post"
-  input#fieldEmail name="cm-urikx-urikx" type="email" placeholder="Register your email for this $25 offer" /
-  input type="hidden" id="fieldName"    name="cm-name" value=(current_spree_user.try(:full_name))
-  input type="hidden" id="fielddkjudk"  name="cm-f-dkjudk" value=(details[:country])
-  input type="hidden" id="fielddkjuhy"  name="cm-f-dkjuhy" value=(details[:promocode])
-  input type="hidden" id="fielddkjuhr"  name="cm-f-dkjuhr" value=(details[:source] || cookies[:referrer])
-  input type="hidden" id="fielddkjuhj"  name="cm-f-dkjuhj" value=(details[:campaign])
-  input type="hidden" id="fielddkjuht"  name="cm-f-dkjuht" value=(details[:ipaddress])
-  input type='hidden' id='mailchimp'    name='mailchimp'   value=(mailchimp_campaigns_email_capture_path)
+form.input-btn id=(formID) action="https://fameandpartners.createsend.com/t/t/s/urikx/" method="post"
+  input.js-en-field-email     type="email"  name="cm-urikx-urikx" placeholder="Register your email for this $25 offer"
+  input.js-en-field-name      type="hidden" name="cm-name"        value=(current_spree_user.try(:full_name))
+  input.js-en-field-country   type="hidden" name="cm-f-dkjudk"    value=(details[:country])
+  input.js-en-field-promocode type="hidden" name="cm-f-dkjuhy"    value=(details[:promocode])
+  input.js-en-field-source    type="hidden" name="cm-f-dkjuhr"    value=(details[:source] || cookies[:referrer])
+  input.js-en-field-campaign  type="hidden" name="cm-f-dkjuhj"    value=(details[:campaign])
+  input.js-en-field-ip        type="hidden" name="cm-f-dkjuht"    value=(details[:ipaddress])
+  input.js-en-field-mailchimp type='hidden' name='mailchimp'      value=(mailchimp_campaigns_email_capture_path)
   button.btn.btn-black.btn-md type="submit" Submit
 
 = content_for :inline_javascript do
-  | new window.page.EmailNewsletterSubscriber({form: '#email-newsletter-signup form'});
+  | new window.page.EmailNewsletterSubscriber({form: '#{formID}'});
