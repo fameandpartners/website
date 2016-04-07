@@ -189,22 +189,21 @@
         margin-top: 0;
       }
       .media-wrap {
-        max-height: 196px;
-        img {
-          position: relative;
-          top: -50px;
-        }
+        // max-height: 196px;
+
       }
     }
 
   }//section
 
   // START - tablet
-  @media (min-width: $bootstrap-md-width) {
+  @media (min-width: $bootstrap-sm-width) {
 
     section {
 
-
+      &.bespoke, &.dressmaking {
+        padding-top: 70px;
+      }
 
     }//section
 
@@ -252,8 +251,27 @@
         }
       }
 
+      &.expansion {
+
+        .copy-wrap {
+          padding-top: 90px;
+        }
+        .expansion-number {
+          width: 100%;
+          margin: 1.5rem;
+          float: none;
+          display: block;
+        }
+      }
+
       &.join-the-team {
         background-image: url('/assets/_about/join-team-fame-full.gif');
+      }
+
+      &.our-offices {
+        .office-image {
+          height: 130px;
+        }
       }
 
     }//section
