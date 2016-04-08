@@ -75,7 +75,8 @@ class ApplicationController < ActionController::Base
     # END Shopstyle missing promocode
 
     if params[:utm_campaign].present?
-      capture_utm_params
+      capture_user_utm_params
+      capture_order_utm_params
     end
 
     if cookies[:utm_guest_token].present? && current_spree_user.present?
@@ -83,7 +84,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def capture_utm_params
+  def capture_user_utm_params
     utm_params = {
       utm_campaign:   params[:utm_campaign],
       utm_source:     params[:utm_source],
@@ -103,6 +104,14 @@ class ApplicationController < ActionController::Base
     if service.user_token_created?
       cookies.permanent[:utm_guest_token] = service.user_token
     end
+  end
+
+  def capture_order_utm_params
+    current_order.try(:create_traffic_parameters, {
+      utm_medium: params[:utm_medium],
+      utm_source: params[:utm_source],
+      utm_campaign: params[:utm_campaign]
+    })
   end
 
   # it's shame to add such method to filter
