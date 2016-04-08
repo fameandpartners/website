@@ -8,6 +8,7 @@ module Orders
           id:       300,
           price:    999,
           quantity: 3,
+          currency: 'USD'
       )
     end
 
@@ -18,6 +19,7 @@ module Orders
       it('#id')            { expect(subject.id).to eq 300 }
       it('#display_price') { expect(subject.price).to eq 999 }
       it('#quantity')      { expect(subject.quantity).to eq 3 }
+      it('#currency')      { expect(subject.currency).to eq 'USD' }
     end
 
     describe '#shipment' do

@@ -1,5 +1,5 @@
-.footer.container
-  .mobile-footer.hidden-md.hidden-lg
+.footer
+  .mobile-footer.hidden-md.hidden-lg.container
     .row.buttons.visible-xs.visible-sm
       = link_to style_consultation_url, class: "col-xs-12"
         = image_tag 'footer/refer.png', class: 'refer'
@@ -8,67 +8,69 @@
         = link_to fast_making_dresses_url, class: "col-xs-12"
           = image_tag 'footer/48.png', class: 'hr48'
           .text 48 HR EXPRESS MAKING
-      = link_to fame_chain_url, class: "col-xs-12"
-        = image_tag 'footer/chain.png', class: 'chain'
-        .text JOIN THE FAME CHAIN
-
-    /.row.email-row
-      /.col-xs-12.col-sm-12
-        /.input-group
-          /input type="text" class="form-control email" placeholder="REGISTER YOUR EMAIL FOR THIS XX OFFER" aria-/describedby="basic-addon2"
-          /span.input-group-addon#basic-addon2 SUBMIT
+      / = link_to fame_chain_url, class: "col-xs-12"
+      /   = image_tag 'footer/chain.png', class: 'chain'
+      /   .text JOIN THE FAME CHAIN
     .row
-      .stay-social
-        center STAY SOCIAL
+      .stay-social STAY SOCIAL
     .row
       .stay-social-images
         = render 'layouts/redesign/social_links'
 
-  .footer-navigation
-    .col-md-4.col-sm-12
-      = image_tag 'logo/logo-mobile.svg', class: 'footer-logo hidden-xs hidden-sm'
-      = render 'layouts/redesign/address'
+  .footer-navigation.container
+    .row
+      .col-md-2.col-sm-12.col-lg-3
+        = image_tag 'logo/logo-mobile.svg', class: 'footer-logo hidden-xs hidden-sm'
+        = render 'layouts/redesign/address'
 
-    .col-md-4.hidden-sm.hidden-xs
-      .stay-social stay social
-      .stay-social-images
-        = render 'layouts/redesign/social_links'
+      .col-md-3
+        .row
+          .col-md-6.col-sm-6
+            ul.footer-nav
+              li.footer-nav--item
+                = link_to 'Why Shop With Us', why_us_url
+              li.footer-nav--item
+                = link_to 'About Us', about_us_url
 
-    .col-md-2.col-sm-3.hidden-xs.hidden-sm.second-col
-      ul.footer-nav
-        li.footer-nav--item
-          = link_to 'Why Shop With Us', why_us_url
-        li.footer-nav--item
-          = link_to 'About Us', about_us_url
+              - if current_site_version.is_australia?
+                li.footer-nav--item
+                  = link_to 'Fashion IT Girl', 'http://mystyle.fameandpartners.com/fitg-aus-2015'
 
-        - if current_site_version.is_australia?
-          li.footer-nav--item
-            = link_to 'Fashion IT Girl', 'http://mystyle.fameandpartners.com/fitg-aus-2015'
+              li.footer-nav--item
+                = link_to 'FAQs & Shipping', faqs_url
+              li.footer-nav--item
+                = link_to 'Size Guide', size_guide_url
+              li.footer-nav--item
+                = link_to 'From our CEO', yelp_url, :class => 'bold'
 
-        li.footer-nav--item
-          = link_to 'FAQs & Shipping', faqs_url
-        li.footer-nav--item
-          = link_to 'Size Guide', size_guide_url
-        li.footer-nav--item
-          = link_to 'From our CEO', yelp_url, :class => 'bold'
+          .col-md-6.col-sm-6
+            ul.footer-nav
+              li.footer-nav--item
+                = link_to 'Terms', terms_url
+              li.footer-nav--item
+                = link_to 'Get styling advice', style_consultation_url
+              li.footer-nav--item
+                = link_to 'Fame Chain', fame_chain_url
+              li.footer-nav--item
+                = link_to 'Contact Us', new_contact_url
+              li.footer-nav--item
+                = link_to 'Privacy Policy', privacy_url
 
-    .col-md-2.col-sm-3.hidden-xs.hidden-sm.last-col
-      ul.footer-nav
-        li.footer-nav--item
-          = link_to 'Terms', terms_url
-        / David wants to hide this
-        /li.footer-nav--item
-          /= link_to 'Get styling advice', style_consultation_url
-        li.footer-nav--item
-          = link_to 'Fame Chain', fame_chain_url
-        li.footer-nav--item
-          = link_to 'Contact Us', new_contact_url
-        li.footer-nav--item
-          = link_to 'Privacy Policy', privacy_url
+      .col-md-3.col-lg-2.hidden-sm.hidden-xs
+        .stay-social stay social
+        .stay-social-images
+          = render 'layouts/redesign/social_links'
 
-  .lower-row
-    .col-md-6.col-sm-12.copyright
-      p
-        | &copy;&nbsp;
-        = Time.now.year
-        | &nbsp;Fame &amp; Partners. All rights reserved.
+      .col-md-4
+        .email-subscribe
+          .newsletter-title Keep Updated
+          p Sign up for an insider round of the latest fashion news, collection drops and underground style options - plus an instant $25 off your first order.
+          = render 'shared/redesign/newsletter_form'
+
+  .container
+    .row
+      .col-md-6.copyright
+        p
+          | &copy;&nbsp;
+          = Time.now.year
+          | &nbsp;Fame &amp; Partners. All rights reserved.

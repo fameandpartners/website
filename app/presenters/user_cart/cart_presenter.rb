@@ -8,6 +8,7 @@ class UserCart::CartPresenter < OpenStruct
         result
       end,
       site_version: site_version,
+      order_number: order_number,
       item_count: item_count,
       promocode: promocode,
       display_item_total: display_item_total.to_s,
@@ -36,7 +37,7 @@ class UserCart::CartPresenter < OpenStruct
 
   def masterpass_available?
     if Features.active?(:masterpass)
-      masterpass_payment_method.present?      
+      masterpass_payment_method.present?
     end
   end
 end
