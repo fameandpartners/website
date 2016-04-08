@@ -2,26 +2,23 @@ window.page or= {}
 
 window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
   constructor: (opts = {}) ->
-    # $('#email-newsletter-signup').hide() if $.cookie('email_newsletter') == 'close'
 
     @campaign = opts.campaign || 'home'
 
-    @$form = $(opts.form)
+    @$form = $('#' + opts.form)
     @$form.on('submit', @submit)
-
-    if window.current_site_version
-      $('#fieldqulir').val(window.current_site_version.permalink)
 
   url: =>
     @$form.attr('action') + "?callback=?"
 
   submit: (e) =>
     e.preventDefault()
-    $.getJSON(@url(), @$form.serialize(), @handler)
+    $this = $(e.target)
+    $.getJSON(@url(), $this.serialize(), @handler)
     $.ajax
-      url: document.getElementById("mailchimp").value,
+      url: $this.find('.js-en-field-mailchimp').value,
       method: 'GET',
-      data: { email: document.getElementById('fieldEmail').value }
+      data: { email: $this.find('.js-en-field-email').value }
 
   handler: (data) =>
     if (data.Status == 400)
