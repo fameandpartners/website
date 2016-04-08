@@ -24,15 +24,38 @@
                 .icon-graphic
                   .icon-circle.icon.icon-sewing-machine
                   .icon-heading <strong>MADE IN 2 - 5 days</strong>
+  section.our-time
+    .container
+      .row
+        .col-xs-12.col-md-6.col-md-push-6.no-padding
+          .about-slick
+            div
+              picture.media-wrap.keep-ratio
+                .inner-wrap
+                  source media='(max-width: 1023px)' srcset='#{image_path("_about/our-time-tile-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("_about/our-time-tile-full.jpg")}'
+                  img src='#{image_path("_about/our-time-tile-full.jpg")}' srcset='#{image_path("_about/our-time-tile-mob.jpg")} 1023w, #{image_path("_about/our-time-tile-full.jpg")} 1024w' alt='Bespoke tailoring'
 
-  .container
-    .row
-      .col-md-6.col-sm-12
-        .copy-wrap
-          h3 We design dresses of our time
-          p Our designs are culturally inspired and capture current trends
-      .col-md-6.col-xs-12
-				//TODO: need to pull dynamic content
+            div
+              picture.media-wrap.keep-ratio
+                .inner-wrap
+                  source media='(max-width: 1023px)' srcset='#{image_path("_about/our-time-1-tile-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("_about/our-time-1-tile-full.jpg")}'
+                  img src='#{image_path("_about/our-time-1-tile-full.jpg")}' srcset='#{image_path("_about/our-time-1-tile-mob.jpg")} 1023w, #{image_path("_about/our-time-1-tile-full.jpg")} 1024w' alt='Bespoke tailoring'
+
+            div
+              picture.media-wrap.keep-ratio
+                .inner-wrap
+                  source media='(max-width: 1023px)' srcset='#{image_path("_about/our-time-2-tile-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("_about/our-time-2-tile-full.jpg")}'
+                  img src='#{image_path("_about/our-time-2-tile-full.jpg")}' srcset='#{image_path("_about/our-time-2-tile-mob.jpg")} 1023w, #{image_path("_about/our-time-2-tile-full.jpg")} 1024w' alt='Bespoke tailoring'
+
+        .col-xs-12.col-md-6.col-md-pull-6
+          .copy-wrap
+            .content-wrap
+              h3 We design dresses of our time
+              p Our designs are culturally inspired and capture current trends
+
   section.bespoke
     .container
       .row
@@ -41,20 +64,19 @@
             .inner-wrap
               source media='(max-width: 1023px)' srcset='#{image_path("_about/bespoke-tile-mob.jpg")}'
               source media='(min-width: 1024px)' srcset='#{image_path("_about/bespoke-tile-full.jpg")}'
-              img src='#{image_path("_about/bespoke-tile-full.jpg")}' srcset='
-                #{image_path("_about/bespoke-tile-mob.jpg")} 1023w,
-                #{image_path("_about/bespoke-tile-full.jpg")} 1024w' alt='Bespoke tailoring'
+              img src='#{image_path("_about/bespoke-tile-full.jpg")}' srcset='#{image_path("_about/bespoke-tile-mob.jpg")} 1023w, #{image_path("_about/bespoke-tile-full.jpg")} 1024w' alt='Bespoke tailoring'
 
         .col-md-6.col-xs-12
           .copy-wrap
-            h3 A Platform form custom bespoke tailoring
-            p Each of our dresses can be customised in 50 different ways, giving you the power of creative direction.
-            h4 CUSTOMIZED STYLES
-            p Dresses have up to four style customizations, each a new take on the original design.
-            h4 BESPOKE COULOURS AND PRINTS
-            p Choose from more than 20 different color variations for many dresses.
-            h4 DRESS LENGTH
-            p The chosen style can be altered to fit your height
+            .content-wrap
+              h3 A Platform form custom bespoke tailoring
+              p Each of our dresses can be customised in 50 different ways, giving you the power of creative direction.
+              h4 CUSTOMIZED STYLES
+              p Dresses have up to four style customizations, each a new take on the original design.
+              h4 BESPOKE COULOURS AND PRINTS
+              p Choose from more than 20 different color variations for many dresses.
+              h4 DRESS LENGTH
+              p The chosen style can be altered to fit your height
 
   section.dressmaking
     .container
@@ -70,8 +92,9 @@
 
         .col-md-6.col-xs-12.col-md-pull-6
           .copy-wrap
-            h3 Each dress is handmade by a seamstress
-            p Our dresses are crafted with care and meticulously hand ispected
+            .content-wrap
+              h3 Each dress is handmade by a seamstress
+              p Our dresses are crafted with care and meticulously hand ispected
 
   section.expansion
     .container
@@ -87,12 +110,7 @@
             p.expansion-number
               | <span class="number-title">ESTABLISHED FOR</span><span class="number">751 days</span>
 
-  section.join-the-team
-    .container
-      .row
-        .col-xs-12.col-sm-4.col-sm-offset-4
-          .copy-wrap
-            = render 'shared/redesign/join_team_fame'
+  = render 'shared/redesign/join_team_fame'
 
   section.our-offices
     .container

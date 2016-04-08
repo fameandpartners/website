@@ -1,3 +1,26 @@
+jQuery(document).ready(function($) {
+
+  var aboutContainer = $('#content-container > div');
+
+  if(aboutContainer.hasClass("about")){
+
+    var slickContainer = $('.about-slick');
+
+    if(slickContainer.html() != ''){
+
+      slickContainer.slick({
+        dots: false,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 1
+      });
+
+    }
+
+  }
+
+});
+
 var MagazineCarouselItem = React.createClass({
 
   render: function() {
@@ -8,7 +31,7 @@ var MagazineCarouselItem = React.createClass({
       <a href={link} className='item-wrap'>
         <div className='media-wrap'>
           <img src={src} />
-        </div>  
+        </div>
         <div className='copy txt-truncate-block'>{copy}</div>
       </a>
     )
