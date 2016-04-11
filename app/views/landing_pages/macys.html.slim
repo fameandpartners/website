@@ -1,0 +1,103 @@
+= render :partial => '/pages/robots'
+
+= render :partial => '/products/collections/javascript'
+
+.landing-macys
+
+  // hero section
+  .main-hero-wrap.hero-wrap.copy-right 
+    picture.media-wrap.keep-ratio
+      .inner-wrap
+        source media='(max-width: 1023px)' srcset='#{image_path("landingpages/macys/hero-mob.jpg")}'
+        source media='(min-width: 1024px)' srcset='#{image_path("landingpages/macys/hero-full.jpg")}'
+        img src='#{image_path("landingpages/macys/hero-full.jpg")}' srcset='
+          #{image_path("landingpages/macys/hero-mob.jpg")} 1023w,
+          #{image_path("landingpages/macys/hero-full.jpg")} 1024w' alt='background image'
+    .content-wrap
+      .container
+        .row
+          .col-md-12
+            h1.heading
+              span Design your dress at Macy’s
+              .sub-heading Complimentary personal styling and fitting session with one of our stylists.
+
+  section
+    .container
+      .row
+        .col-md-8.col-md-offset-2.section-title.text-center
+          h2.section-heading How it works
+          p When you come in for your session your personal stylist will take you through four stages to find the perfect dress for you, fitted perfectly to your body.
+      .row
+        .col-md-3.panel-compact.alt.add-separator
+          .copy-wrap
+            .icon.icon-comment
+            .heading GET STYLING ADVICE
+            p Donec fringilla tortor eu lacinia porttitor. Maecenas cursus tellus id felis laoreet semper. 
+        .col-md-3.panel-compact.alt.add-separator
+          .copy-wrap
+            .icon.icon-dress
+            .heading CHOOSE A DRESS
+            p Donec fringilla tortor eu lacinia porttitor. Maecenas cursus tellus id felis laoreet semper.
+        .col-md-3.panel-compact.alt.add-separator
+          .copy-wrap
+            .icon.icon-fit
+            .heading GET MEASURED
+            p Donec fringilla tortor eu lacinia porttitor. Maecenas cursus tellus id felis laoreet semper.
+        .col-md-3.panel-compact.alt.add-separator
+          .copy-wrap
+            .icon.icon-customize
+            .heading CUSTOMIZE
+            p Donec fringilla tortor eu lacinia porttitor. Maecenas cursus tellus id felis laoreet semper. 
+
+  section.alt
+    .container
+      .row
+        .col-md-8.col-md-offset-2.section-title.text-center
+          h2.section-heading Book your complimentary session
+          p Sessions can be booked at either of the following Macy’s stores. Simply follow the link to book your session at Macy’s with one of our on site stylists, free of charge.
+      .row
+        .col-md-12
+          .panel-split.image-left.alt
+            .media-wrap
+              = image_tag 'landingpages/macys/tile-1.jpg'
+            .content-wrap-outer
+              .content-wrap-inner
+                .content-wrap
+                  h2.section-heading New Jersey
+                  address
+                    span The Mall at Short Hills 
+                    span 1220 Morris Turnpike 
+                    span Short Hills, NJ 07078
+                    span.contact
+                      'Call: 
+                      = link_to '973-467-0800', 'tel:9734670800'
+                  .map-trigger-wrap
+                    a href="https://www.google.com.au/maps/place/The+Mall+at+Short+Hills/@40.7399617,-74.3669983,17z/data=!3m1!4b1!4m2!3m1!1s0x89c3af1cc0b772db:0x85bb7be2af065fac" target='_blank' MAP
+                  /! a.btn.btn-lowlight.btn-sm href='javascript:;' MAKE A BOOKING
+      .row
+        .col-md-12
+          .panel-split.alt.mobile-change-order
+            .content-wrap-outer.position-2
+              .content-wrap-inner
+                .content-wrap
+                  h2.section-heading San Francisco
+                  address
+                    span Macy’s Union Square 
+                    span 170 O’Farrell Street 
+                    span San Francisco, CA 94102
+                    span.contact
+                      'Call: 
+                      = link_to '415-397-3333', 'tel:4153973333'
+                  .map-trigger-wrap
+                    a href="https://www.google.com.au/maps/place/Macy's/@37.7868394,-122.4081555,18z/data=!3m1!5s0x8085808f331d54b9:0xdb455f50f19c2f18!4m5!1m2!2m1!1s+Macy%E2%80%99s+Union+Square+170+O%E2%80%99Farrell+Street+San+Francisco,+CA+94102!3m1!1s0x8085808f243d91f1:0x4959c6d6f475b7e1" target='_blank' MAP
+                  /! a.btn.btn-lowlight.btn-sm href='javascript:;' MAKE A BOOKING
+            .media-wrap.position-1
+              = image_tag 'landingpages/macys/tile-2.jpg'
+
+  section
+    .container
+      .row
+        .col-md-8.col-md-offset-2.section-title.title-why-us.text-center
+          h2.section-heading Why shop with us?
+          p Get a taste of fame with your own personal dressmaker. Fame & Partners bringing the timeless luxury atelier service into the modern world.
+          = link_to 'DISCOVER WHY WE’RE DIFFERENT', why_us_path, class:'btn btn-lowlight btn-sm'
