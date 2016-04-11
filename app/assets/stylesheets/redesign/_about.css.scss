@@ -194,9 +194,12 @@
 
     &.expansion {
 
-      .copy-wrap.clearfix {
-        padding-top: 90px;
-        padding-bottom: 70px;
+      .copy-wrap {
+        padding-bottom: 0;
+
+        &.clearfix {
+          padding-bottom: 60px;
+        }
       }
 
       .expansion-number {
@@ -434,17 +437,24 @@
           height: auto;
           padding: 70px 15%;
           margin: 0 auto;
+
+          &.clearfix {
+            padding-top: 70px;
+            padding-bottom: 70px;
+          }
         }
 
         .expansion-number {
           width: 100%;
-          margin: 1.5rem;
+          margin: 1.5rem 0 4rem;
           float: none;
           display: block;
         }
+
         .number {
-          font-size: 3.5rem;
+          font-size: 5.5rem;
         }
+
       }
 
       &.join-the-team {
@@ -498,6 +508,14 @@
         background-color: $c-neutral-white;
         border-top: 1px solid $c-neutral-3;
         border-bottom: 1px solid $c-neutral-3;
+
+        .expansion-number {
+          margin: 1.5rem 0 4rem;
+        }
+
+        .number {
+          font-size: 5.5rem;
+        }
       }
 
     }
