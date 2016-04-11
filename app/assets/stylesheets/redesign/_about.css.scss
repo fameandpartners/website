@@ -137,6 +137,10 @@
 
     &.our-time {
 
+      .media-wrap.keep-ratio {
+        padding-bottom: 84%;
+      }
+
       .slick-prev {
         left: 5%;
       }
@@ -204,7 +208,7 @@
       }
 
       .expansion-number {
-        width: 50%;
+        width: 100%;
         position: relative;
         display: inline-block;
         float: left;
@@ -333,6 +337,20 @@
     }
 
   }//section
+
+  // START - > iPhone 5
+  @media (min-width: $iphone6-width) {
+
+    section {
+      &.expansion {
+        .expansion-number {
+          width: 50%;
+        }
+      }
+    }
+
+  }
+  // END - > iPhone 5
 
   // START - tablet
   @media (min-width: $bootstrap-sm-width) {
