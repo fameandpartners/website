@@ -1,0 +1,20 @@
+p
+  | Recommended size for images less than or equal to 150kb
+  br
+  | Enforced dress dimensions for full "dress" pages: 1122px by 155px
+  br
+  | Enforced dress dimensions for small (mobile) "dress" pages: 561px by 78px
+
+.form-group
+  label.col-sm-2.control-label Order
+  .col-sm-10 = banner.number_field :banner_order, min: 1, step: 1, class: 'form-control'
+.form-group
+  label.col-sm-2.control-label Alt Text
+  .col-sm-10 = banner.text_field :alt_text, class: 'form-control'
+.form-group
+  label.col-sm-2.control-label Size
+  .col-sm-10 = banner.select :size, Revolution::Banner::PAGE_SIZE, include_blank: true
+.form-group
+  label.col-sm-2.control-label Banner
+  .col-sm-10 = banner.file_field :banner
+

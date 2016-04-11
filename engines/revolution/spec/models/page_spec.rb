@@ -230,7 +230,7 @@ describe Revolution::Page do
   end
 
   describe '#effective_page_limit' do
-    let(:page_params)    { {} }
+    let(:page_params) { {} }
     let(:page_variables) { {} }
     before do
       page.variables = page_variables
@@ -238,16 +238,16 @@ describe Revolution::Page do
     end
 
     context 'params supersede variables' do
-      let(:page_params)    { {limit: 77} }
+      let(:page_params) { {limit: 77} }
       let(:page_variables) { {limit: 99} }
 
-      it  { expect(page.effective_page_limit).to eq 77 }
+      it { expect(page.effective_page_limit).to eq 77 }
     end
 
     context 'variables supersede fallback' do
       let(:page_variables) { {limit: 99} }
 
-      it  { expect(page.effective_page_limit).to eq 99 }
+      it { expect(page.effective_page_limit).to eq 99 }
     end
 
     context 'falls back to default_page_limit' do
@@ -274,13 +274,11 @@ describe Revolution::Page do
         expect(page.limit(product_ids)).to eq 20
       end
       it 'returns 0 when given 22 product_ids and no offset' do
-        product_ids = ["451", '1', '2', '3', '4', '5', '6', '7', '8','9','10',
-                       '11', '12', '13',' 14', '15', '16', '17', '18', '19', '20','21']
+        product_ids = (1..22).to_a
         expect(page.limit(product_ids)).to eq 0
       end
       it 'returns 20 when given 22 product_ids and an offset of 21' do
-        product_ids = ['451', '1', '2', '3', '4', '5', '6', '7', '8','9','10',
-                       '11', '12', '13',' 14', '15', '16', '17', '18', '19', '20','21']
+        product_ids = (1..22).to_a
         page.params = {offset: 21}
         expect(page.limit(product_ids)).to eq 20
       end
@@ -291,11 +289,11 @@ describe Revolution::Page do
         page.params = {limit: 22}
       end
       it 'returns 22 when given 0 product_ids and a parameter limit of 22' do
-        product_ids  = []
+        product_ids = []
         expect(page.limit(product_ids)).to eq 22
       end
       it 'returns 20 when given 2 product_ids and a parameter limit of 22' do
-        product_ids  = ['457', '2']
+        product_ids = ['457', '2']
         expect(page.limit(product_ids)).to eq 20
       end
       it 'returns 20 when given 22 product_ids and an offset of 21 and a limit of 21' do
@@ -332,16 +330,16 @@ describe Revolution::Page do
     end
     context 'page is a lookbook' do
       before do
-        page.variables = {:lookbook=>true}
-        page.params = {}
+        page.variables = {:lookbook => true}
+        page.params    = {}
       end
       it 'given no variable limit, it return a limit of 20' do
         product_ids = []
         expect(page.limit(product_ids)).to eq 20
       end
       it 'given a variable limit, it returns a limit of the variable' do
-        product_ids = []
-        page.variables = {:lookbook=>true,:limit=>30}
+        product_ids    = []
+        page.variables = {:lookbook => true, :limit => 30}
         expect(page.limit(product_ids)).to eq 30
       end
       it 'given no variable limit, it returns 20, even with product ids' do
@@ -349,8 +347,8 @@ describe Revolution::Page do
         expect(page.limit(product_ids)).to eq 20
       end
       it 'given a variable limit, it returns a limit of the variable, even with product ids' do
-        product_ids = ['45', '2']
-        page.variables = {:lookbook=>true,:limit=>30}
+        product_ids    = ['45', '2']
+        page.variables = {:lookbook => true, :limit => 30}
         expect(page.limit(product_ids)).to eq 30
       end
     end
@@ -383,5 +381,93 @@ describe Revolution::Page do
       it { expect(page.offset(product_ids, 21)).to eq 0 }
       it { expect(page.offset(product_ids, 42)).to eq 20 }
     end
+  end
+
+  describe 'revolution banners' do
+    def au_banners
+      create(:translation_banner, translation_id: au_translation.id, banner_order: 1)
+      create(:translation_banner, translation_id: au_translation.id, banner_order: 2)
+    end
+    def us_banners
+      allow(page).to receive(:locale).and_return(us_locale)
+      create(:translation_banner, translation_id: us_translation.id, banner_order: 1)
+      create(:translation_banner, translation_id: us_translation.id, banner_order: 2)
+      create(:translation_banner, translation_id: us_translation.id, banner_order: 4)
+    end
+    let(:collection) { double('Collection') }
+    let(:au_locale) { 'en-AU' }
+    let!(:au_translation) { page.translations.create!(:locale => au_locale, :title => title, :meta_description => title) }
+    let(:us_locale) { 'en-US' }
+    let!(:us_translation) { page.translations.create!(:locale => us_locale, :title => title, :meta_description => title) }
+    before(:each) do
+      allow(page).to receive(:locale).and_return(au_locale)
+      allow(page).to receive(:collection).and_return(collection)
+      allow(collection).to receive_message_chain(:details, :banner, :image => '/url')
+    end
+
+    context '.banners_exist?' do
+      it { expect(page.banners_exist?('full')).to be_falsey }
+      it 'finds there are AU banners' do
+        au_banners
+        expect(page.banners_exist?('full')).to be_truthy
+      end
+      it 'finds there are US banners' do
+        us_banners
+        expect(page.banners_exist?('full')).to be_truthy
+      end
+    end
+
+    context '.retrieve_banner' do
+      #Making assumption that banners exist
+      it 'returns the first AU banner' do
+        au_banners
+        expect(page.retrieve_banner(1, 'full')).to eq page.translations.where(locale: au_locale).first.banners.where(banner_order: 1).first
+      end
+      it 'returns the third US banner' do
+        us_banners
+        expect(page.retrieve_banner(3, 'full')).to eq page.translations.where(locale: us_locale).first.banners.where(banner_order: 4).first
+      end
+      it 'returns the first AU banner if attempting to retrieve more than available' do
+        au_banners
+        expect(page.retrieve_banner(3, 'full')).to eq page.translations.where(locale: au_locale).first.banners.where(banner_order: 1).first
+      end
+    end
+
+    context ".banner_image" do
+      it { expect(page.banner_image(1, 'full')).to eq '/url' }
+      it 'has a defined AU banner' do
+        au_banners
+        expect(page.banner_image(1, 'full')).to eq page.translations.where(locale: 'en-AU').first.banners.where(banner_order: 1).first.banner.url
+      end
+      it 'has a defined US banner' do
+        us_banners
+        expect(page.banner_image(1, 'full')).to eq page.translations.where(locale: 'en-US').first.banners.where(banner_order: 1).first.banner.url
+      end
+    end
+
+    context ".no_of_banners" do
+      it { expect(page.no_of_banners('full')).to eq 1 }
+      it 'has 2 AU banners' do
+        au_banners
+        expect(expect(page.no_of_banners('full')).to eq 2)
+      end
+      it 'has 3 Us banners' do
+        us_banners
+        expect(expect(page.no_of_banners('full')).to eq 3)
+      end
+    end
+
+    context '.alt_text' do
+      it { expect(page.alt_text(1, 'full')).to eq 'alt_text' }
+      it 'returns the alt text from the second AU banner' do
+        au_banners
+        expect(expect(page.alt_text(2, 'full')).to eq page.translations.where(locale: 'en-AU').first.banners.where(banner_order: 2).first.alt_text)
+      end
+      it 'returns the alt text from the third US banner' do
+        us_banners
+        expect(expect(page.alt_text(3, 'full')).to eq page.translations.where(locale: 'en-US').first.banners.where(banner_order: 4).first.alt_text)
+      end
+    end
+
   end
 end

@@ -82,20 +82,23 @@
       .tab-content
         #tab-en-us.tab-pane.active
           .panel-body
-            - if page.translations.where(locale: "en-US").present?
-              = f.fields_for :translations, page.translations.where(locale: "en-US").first do |t|
-                = render :partial => 'translation_form', :locals => { :t => t }
+            - locale_us = page.translations.where(locale: "en-US").try(:first)
+            - if locale_us.present?
+              = f.fields_for :translations, locale_us do |t|
+                = render :partial => 'translation_form', :locals => { :t => t, banners: locale_us.banners }
             - else
               = f.fields_for :translations, Revolution::Translation.new  do |t|
-                = render :partial => 'translation_form', :locals => { :t => t }
+                = render :partial => 'translation_form', :locals => { :t => t, banners: nil }
+
         #tab-en-au.tab-pane
           .panel-body
-            - if page.translations.where(locale: "en-AU").present?
-              = f.fields_for :translations, page.translations.where(locale: "en-AU").first do |t|
-                = render :partial => 'translation_form', :locals => { :t => t }
+            - locale_au = page.translations.where(locale: "en-AU").try(:first)
+            - if locale_au.present?
+              = f.fields_for :translations, locale_au do |t|
+                = render :partial => 'translation_form', :locals => { :t => t, banners: locale_au.banners }
             - else
               = f.fields_for :translations, Revolution::Translation.new  do |t|
-                = render :partial => 'translation_form', :locals => { :t => t }
+                = render :partial => 'translation_form', :locals => { :t => t, banners: nil }
         #tab-new.tab-pane
           .panel-body
             | new translation
