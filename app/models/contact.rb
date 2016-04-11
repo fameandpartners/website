@@ -3,27 +3,25 @@ class Contact
 
   SUBJECTS = [
     [
-      'Help making a purchase',
+      'Place an Order',
       [
-        'Delivery', 'Fabrics', 'Product', 'Styling tips', 'Customization', 'Size'
+        'Delivery', 'Product', 'Styling Tips', 'Customization', 'Size'
       ]
     ],
     [
       'Help with an existing purchase',
       [
-        'Order Status', 'Order Cancellation', 'Address Change Request',
-        'Tracking Number', 'Lost Package', 'Missing Item', 'Wrong Item/Order Received',
-        'Damaged/Defective Item', 'Return', 'Refund', 'Site Issues'
+        'Order Status', 'Change Existing Order', 'Issue with Order', 'Returns & Exchanges'
       ]
     ],
     [
       'Something else',
       [
+        'Site Issues',
         'Book a Style Consultation',
-        'Book a Concierge Services',
-        'Feedback on the website',
-        'None of these apply to me',
-        'Fashion IT Girl'
+        'Retailer Questions',
+        'None of These Apply to Me',
+        "Fashion \"IT\" Girl"
       ]
     ]
   ]
