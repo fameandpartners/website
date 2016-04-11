@@ -147,3 +147,16 @@
 
 	/! Shop by category
   = render 'shared/redesign/shop_by_category'
+
+  ruby:
+    raw init_about_page = "
+      'use strict';
+      (function ($) {
+
+        $('.about-slick').slick();
+
+      }(jQuery));
+    "
+
+  = content_for :inline_javascript do
+    = raw init_about_page
