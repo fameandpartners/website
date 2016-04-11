@@ -8,7 +8,7 @@ var MagazineCarouselItem = React.createClass({
       <a href={link} className='item-wrap'>
         <div className='media-wrap'>
           <img src={src} />
-        </div>  
+        </div>
         <div className='copy txt-truncate-block'>{copy}</div>
       </a>
     )

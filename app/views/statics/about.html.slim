@@ -1,35 +1,159 @@
-.page-title.default.about-header
-  .container-fluid
-    .page-title--details
-      h1.no-padding-bottom.about-title a high quality, bespoke dress making service without the traditional cost
+.about
 
-.page-content.about
-  .row
-    .col-md-6.no-padding.pink
-      .header.black
-        h2 what are we
-      .block
-        p The only destination where you can customize the most current runway trends into a look that is uniquely yours.
+  // hero section
+  .main-hero-wrap.hero-wrap.copy-right
+    picture.media-wrap.keep-ratio
+      .inner-wrap
+        source media='(max-width: 1023px)' srcset='#{image_path("_about/hero-mob.jpg")}'
+        source media='(min-width: 1024px)' srcset='#{image_path("_about/hero-full.jpg")}'
+        img src='#{image_path("_about/hero-full.jpg")}' srcset='
+          #{image_path("_about/hero-mob.jpg")} 1023w,
+          #{image_path("_about/hero-full.jpg")} 1024w' alt='Inspired by heritage, powered by technology'
+    .content-wrap
+      .container
+        .row
+          .col-xs-10.col-md-12
+            .copy-wrap
+              h1.heading
+                span.title-heading Inspired by heritage dressmakers, powered by modern technology
+                span.sub-heading Our technology powered, fashion-to-order, anti wastage business model is unique to us. We&lsquo;re proud to be the only company globally making bespoke dresses in as little as 48 hours.
+              .icon-container.clearfix
+                .icon-graphic
+                  .icon-circle.icon.icon-made-to-order
+                  .icon-heading <strong>MADE TO ORDER</strong>
+                .icon-graphic
+                  .icon-circle.icon.icon-sewing-machine
+                  .icon-heading <strong>MADE IN 2 - 5 DAYS</strong>
+  section.our-time
+    .container
+      .row
+        .col-xs-12.col-md-6.col-md-push-6.no-padding
+          .about-slick
+            div
+              .media-wrap.keep-ratio
+                .inner-wrap
+                  img src='#{image_path("_about/our-time-tile-full.jpg")}' alt='Bespoke tailoring'
 
+            div
+              .media-wrap.keep-ratio
+                .inner-wrap
+                  img src='#{image_path("_about/our-time-1-tile-full.jpg")}' alt='Bespoke tailoring'
 
-    .col-md-6.no-padding
-      .header.grey
-        h2 who are we
-      .block
-        p We are girls who love fashion and technology. The combination of the two means that millions of girls are inspiring other girls every day. We love that this sharing is shaping a generation of girls who want to express their individual style.
-  .row
-    .col-md-6.no-padding
-      .header.grey
-        h2 join the fame chain
-      .block
-        p We have started the fame chain to inspire girls across the globe with what's trending right now for special occasions. If you consider yourself a fashion maven, a blogger or someone who would like to contribute, there are free dresses, dollars and privileges for members.
+            div
+              .media-wrap.keep-ratio
+                .inner-wrap
+                  img src='#{image_path("_about/our-time-2-tile-full.jpg")}' srcset='#{image_path("_about/our-time-2-tile-mob.jpg")} 1023w, #{image_path("_about/our-time-2-tile-full.jpg")} 1024w' alt='Bespoke tailoring'
 
-    .col-md-6.no-padding.pink
-      .header.black
-        h2 we believe
-      .block
-        p We believe that fashion is a form of self expression to be celebrated and what better time to do so than at a special occasion. It's why we are utterly dedicated to helping young women craft a look that is totally unique to them
+        .col-xs-12.col-md-6.col-md-pull-6
+          .copy-wrap
+            .content-wrap
+              h3 We design dresses<br>of our time
+              p Our designs are culturally inspired and capture current trends.
 
+  section.bespoke
+    .container
+      .row
+        .col-md-6.col-xs-12.no-padding
+          picture.media-wrap.keep-ratio
+            .inner-wrap
+              source media='(max-width: 1023px)' srcset='#{image_path("_about/bespoke-tile-mob.jpg")}'
+              source media='(min-width: 1024px)' srcset='#{image_path("_about/bespoke-tile-full.jpg")}'
+              img src='#{image_path("_about/bespoke-tile-full.jpg")}' srcset='#{image_path("_about/bespoke-tile-mob.jpg")} 1023w, #{image_path("_about/bespoke-tile-full.jpg")} 1024w' alt='Bespoke tailoring'
 
-  .row.about-img
-    = image_tag '_about/about.jpg', alt: ''
+        .col-md-6.col-xs-12
+          .copy-wrap
+            .content-wrap
+              h3 A platform for custom bespoke tailoring
+              p Each of our dresses can be customised in 50 different ways, giving you the power of creative direction.
+              h4 CUSTOMIZED STYLES
+              p Dresses have up to four style customizations, each a new take on the original design.
+              h4 BESPOKE COLORS AND PRINTS
+              p Choose from more than 20 different color variations for many dresses.
+              h4 DRESS LENGTH
+              p The chosen style can be altered to fit your height.
+
+  section.dressmaking
+    .container
+      .row
+        .col-md-6.col-xs-12.no-padding.col-md-push-6
+          picture.media-wrap.keep-ratio
+            .inner-wrap
+              source media='(max-width: 1023px)' srcset='#{image_path("_about/dressmaking-tile-mob.jpg")}'
+              source media='(min-width: 1024px)' srcset='#{image_path("_about/dressmaking-tile-full.jpg")}'
+              img src='#{image_path("_about/dressmaking-tile-full.jpg")}' srcset='
+                #{image_path("_about/dressmaking-tile-mob.jpg")} 1023w,
+                #{image_path("_about/dressmaking-tile-full.jpg")} 1024w' alt='Hand made dresses'
+
+        .col-md-6.col-xs-12.col-md-pull-6
+          .copy-wrap
+            .content-wrap
+              h3 Each dress is handmade<br>by a seamstress
+              p Our dresses are crafted with care and meticulously hand inspected.
+
+  section.expansion
+    .container
+      .row
+        .col-md-6.col-xs-12
+          .copy-wrap
+            h3 Expansion and Growth
+            p &ldquo;Our latest funding round empowers us to introduce more ground&ndash;breaking designs to the world of fashion and give you more control than ever over the design of your dress&rdquo;.
+        .col-md-6.col-xs-12
+          .copy-wrap.clearfix
+            p.expansion-number
+              | <span class="number-title">DRESSES SOLD</span><span class="number">108,000</span>
+            p.expansion-number
+              | <span class="number-title">ESTABLISHED FOR</span><span class="number">751 days</span>
+
+  = render 'shared/redesign/join_team_fame'
+
+  section.our-offices
+    .container
+      .row
+        .col-xs-12
+          h3 Our Offices
+      .row
+        .col-xs-12.col-md-4
+          .office-image.sydney
+            .content-wrap
+              p SYDNEY
+        .col-xs-12.col-md-4
+          .office-image.los-angeles
+            .content-wrap
+              p LOS ANGELES
+        .col-xs-12.col-md-4
+          .office-image.new-york
+            .content-wrap
+              p NEW YORK CITY
+
+  section.modern-atelier
+    .container
+      .row
+        .col-xs-12.col-md-6.col-md-push-6
+          picture.media-wrap
+            .inner-wrap
+              source media='(max-width: 1023px)' srcset='#{image_path("_about/modern-atelier.jpg")}'
+              source media='(min-width: 1024px)' srcset='#{image_path("_about/modern-atelier.jpg")}'
+              img src='#{image_path("_about/modern-atelier.jpg")}' srcset='
+                #{image_path("_about/modern-atelier.jpg")} 1023w,
+              #{image_path("_about/modern-atelier.jpg")} 1024w' alt=''
+        .col-xs-12.col-md-6.col-md-pull-6
+          .copy-wrap
+            h3 The Modern Atelier
+            p Contemporary dresses customized by you, fashioned by Fame and Partners.
+            a href="/why-us" SEE WHY WE&rsquo;RE DIFFERENT
+
+	/! Shop by category
+  = render 'shared/redesign/shop_by_category'
+
+  ruby:
+    raw init_about_page = "
+      'use strict';
+      (function ($) {
+
+        $('.about-slick').slick();
+
+      }(jQuery));
+    "
+
+  = content_for :inline_javascript do
+    = raw init_about_page
