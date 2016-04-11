@@ -1,26 +1,3 @@
-jQuery(document).ready(function($) {
-
-  var aboutContainer = $('#content-container > div');
-
-  if(aboutContainer.hasClass("about")){
-
-    var slickContainer = $('.about-slick');
-
-    if(slickContainer.html() != ''){
-
-      slickContainer.slick({
-        dots: false,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 1
-      });
-
-    }
-
-  }
-
-});
-
 var MagazineCarouselItem = React.createClass({
 
   render: function() {
