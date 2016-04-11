@@ -35,13 +35,13 @@ If for any reason you are not happy with your selection, you can exchange an ite
 
 * Standard Dresses may be returned or exchanged for 30 days from original purchase date for a refund or store credit.
 * A 50% restocking fee is applied for all returned or exchanged Custom Dresses. Custom Dresses may be returned orexchanged for 30 days from original purchase date for a refund or store credit.
-* Free return shipping on qualified purchases of up to $8.25, credited back to customer with receipt of postage attached.
+* The cost of your returns postage fee for non-sale items will be reimbursed up to the value of $USD15. The postage receipt must be included in your returns package for reimbursement.
 * Up to 2 dresses from an order that qualify for return/exchange can be returned from an order for a refund. Returns &exchanges on orders with more than 2 dresses will have the remainder of the refund issued for store credit.
-* Any item to be returned or exchanged must be in new, unused and resalable condition, with the DO NOT REMOVE tagstill attached in the same place as originally sent.
+* Any item to be returned or exchanged must be in new, unused and resalable condition, with the DO NOT REMOVE tag still attached in the same place as originally sent.
 * No returns on sale items.
 
 ## CAN I EXCHANGE FOR A DIFFERENT SIZE OR COLOUR?
-Of course! It is completely free, provided you are in Australia or the US to return for a different size. It is also completely free to return for a different recommended colour. If you ordered a customisation, including custom colours, we will charge a restocking fee of 50% of the garments purchase price .
+Of course! It is completely free, provided you are in Australia or the US to return for a different size. It is also completely free to return for a different recommended colour. If you ordered a customisation, including custom colours, we will charge a restocking fee of 50% of the garments purchase price.
 
 If you would like to exchange or return an item, simply follow the steps below.
 
@@ -60,7 +60,7 @@ FOR EXCHANGES:
 3. We will then post you your new garment!
 
 ## HOW LONG DOES IT TAKE TO PROCESS MY RETURN?
-Once we receive your package, your refund will be processed within 7 business days. You will be notified by email once the refund has been processed.
+Once we receive your package, your refund will be processed within 7-10 business days. You will be notified by email once the refund has been processed.
 
 ## HOW DOES STORE CREDIT WORK?
 * Store Credit can not be transferred to another person or account.
