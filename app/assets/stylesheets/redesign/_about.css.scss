@@ -113,9 +113,11 @@
   section {
 
     h3 {
+      font-size: 4rem;
       color: $c-neutral-black;
       line-height: 1;
       margin-top: 0;
+      margin-bottom: 1.5rem;
       text-transform: none;
     }
 
@@ -192,8 +194,8 @@
 
     &.expansion {
 
-      .clearfix {
-        padding-top: 0;
+      .copy-wrap.clearfix {
+        padding-top: 90px;
         padding-bottom: 70px;
       }
 
@@ -320,6 +322,7 @@
         margin-top: 0;
       }
       a {
+        font-family: $font-heading;
         color: #000;
         text-decoration: underline;
       }
@@ -331,6 +334,12 @@
   @media (min-width: $bootstrap-sm-width) {
 
     section {
+
+      &.our-time {
+        .media-wrap.keep-ratio {
+          padding-bottom: 84.4%;
+        }
+      }
 
       &.bespoke, &.dressmaking {
         padding-top: 70px;
@@ -389,7 +398,7 @@
           vertical-align: middle;
 
           h3 {
-            font-size: 1.7em;
+            font-size: 3.5rem;
           }
 
           p {
