@@ -8,7 +8,7 @@ module Reports
 
     def to_sql
       <<-SQL
-        SELECT * FROM global_skus;
+        SELECT gs.id AS UPC, gs.* FROM global_skus AS gs;
       SQL
     end
   end

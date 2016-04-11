@@ -2,6 +2,8 @@ class GlobalSku < ActiveRecord::Base
   belongs_to :product
   belongs_to :variant
 
+  alias_method :upc, :id
+
   attr_accessible :sku,
                   :style_number,
                   :product_name,
