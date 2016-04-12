@@ -141,6 +141,42 @@
         padding-bottom: 84%;
       }
 
+      .about-slick {
+
+        .inner-wrap {
+
+          a {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position: absolute;
+            padding:  0;
+            text-align: center;
+            color: $c-neutral-white;
+            background-color: rgba($c-neutral-black, 0.4);
+          }
+
+          span {
+            display: block;
+          }
+
+          .slick-title {
+            font-weight: bold;
+            font-family: $font-family-secondary;
+            margin-bottom: 0.5rem;
+            padding: 33% 0 0;
+          }
+
+          .slick-date {
+            font-weight: 300;
+            font-family: $font-heading;
+            color: $c-neutral-3;
+          }
+
+        }
+      }//about-slick
+
       .slick-prev {
         left: 5%;
       }
@@ -150,30 +186,57 @@
       }
 
       .slick-dots {
-        margin: -20px auto 0;
-        list-style-type: none;
+        width: 100%;
+        text-align: center;
+        padding: 0;
+        margin: 0 auto 0;
+        position: absolute;
+        z-index: 100;
+        bottom: 15px;
+
+        li {
+          width: 12px;
+          height: 12px;
+          margin: 0 8px;
+          display: inline-block;
+          overflow: hidden;
+          list-style-type: none;
+          border: 1px solid $c-neutral-white;
+          border-radius: 50%;
+          background-color: rgba($c-neutral-white, 0);
+
+          &.slick-active {
+            background-color: rgba($c-neutral-white, 1);
+          }
+
+          &:first-child {
+            margin-right: 0;
+          }
+
+          &:last-child {
+            margin-left: 0;
+          }
+
+          button {
+            background: none;
+            border: none;
+            overflow: hidden;
+            text-indent: 999px;
+          }
+
+        }
 
         &:after {
           height: 0;
-          display: block;
           content: " ";
+          display: block;
           clear: both;
           overflow: hidden;
         }
-        li {
-          list-style-type: none;
-          display: inline;
-          float: left;
-          button {
-            background: none;
-            overflow: hidden;
-            text-indent: -999px;
-            border: none;
-          }
-        }
-      }
 
-    }
+      }//slick-dots
+
+    }//our-time
 
     &.bespoke, &.expansion, &.modern-atelier {
       background-color: $c-neutral-3;
@@ -215,24 +278,25 @@
         color: #000;
         font-family: $font-family-secondary;
       }
-        .number-title {
-          width: 100%;
-          position: absolute;
-          top: -1em;
-          display: block;
-          text-align: left;
-          font-family: $font-family-secondary;
-          font-size: 1rem;
-        }
 
-        .number {
-          width: 100%;
-          font-size: 4.5rem;
-          font-weight: 300;
-          display: block;
-          color: #000;
-          letter-spacing: 0.05rem;
-        }
+      .number-title {
+        width: 100%;
+        position: absolute;
+        top: -1em;
+        display: block;
+        text-align: left;
+        font-family: $font-family-secondary;
+        font-size: 1rem;
+      }
+
+      .number {
+        width: 100%;
+        font-size: 4.5rem;
+        font-weight: 300;
+        display: block;
+        color: #000;
+        letter-spacing: 0.05rem;
+      }
 
     }//expansion
 
@@ -259,9 +323,11 @@
 
       .join-team-fame {
         margin-bottom: 70px;
+
         .btn {
           width: 100%;
         }
+
       }
     }
 
@@ -428,7 +494,8 @@
           }
 
         }
-      }
+
+      }//copy-wrap
 
       &.our-time {
         padding: 80px 0;
@@ -436,6 +503,7 @@
         .media-wrap.keep-ratio {
           padding-bottom: 84%;
         }
+
       }
 
       &.bespoke {
@@ -443,7 +511,7 @@
       }
 
       &.dressmaking {
-          padding-top: 0;
+        padding-top: 0;
       }
 
       &.modern-atelier {
@@ -481,23 +549,21 @@
         background-size: auto 100%;
         background-repeat: no-repeat;
         background-position: center;
+
         .copy-wrap {
           height: auto;
           padding: 70px 0 2.5rem;
         }
+
       }
 
-      &.our-offices {
-        .office-image {
-          height: 130px;
-        }
+      &.our-offices .office-image {
+        height: 130px;
       }
 
-      &.modern-atelier {
-        .copy-wrap {
-          height: auto;
-          padding: 70px 0 2.5rem;
-        }
+      &.modern-atelier .copy-wrap {
+        height: auto;
+        padding: 70px 0 2.5rem;
       }
 
     }//section
@@ -510,6 +576,10 @@
 
     section {
 
+      h3 {
+        font-size: 4rem;
+      }
+
       .copy-wrap {
         height: 494px;
 
@@ -517,10 +587,6 @@
           font-size: 4rem;
         }
 
-      }
-
-      h3 {
-        font-size: 4rem;
       }
 
       &.expansion {
@@ -535,9 +601,10 @@
         .number {
           font-size: 5.5rem;
         }
+
       }
 
-    }
+    }//section
 
   }
   // END - desktop large

@@ -9,6 +9,7 @@
         img src='#{image_path("_about/hero-full.jpg")}' srcset='
           #{image_path("_about/hero-mob.jpg")} 1023w,
           #{image_path("_about/hero-full.jpg")} 1024w' alt='Inspired by heritage, powered by technology'
+
     .content-wrap
       .container
         .row
@@ -32,17 +33,26 @@
             div
               .media-wrap.keep-ratio
                 .inner-wrap
-                  img src='#{image_path("_about/our-time-tile-full.jpg")}' alt='Bespoke tailoring'
+                  a href="/partners-in-crime"
+                    span.slick-title PARTNERS IN CRIME
+                    span.slick-date March 2016
+                  img src='#{image_path("_about/our-time-tile-full.jpg")}' alt='Partners in crime'
 
             div
               .media-wrap.keep-ratio
                 .inner-wrap
-                  img src='#{image_path("_about/our-time-1-tile-full.jpg")}' alt='Bespoke tailoring'
+                  a href="/lookbook/just-the-girls"
+                    span.slick-title JUST THE GIRLS
+                    span.slick-date February 2016
+                  img src='#{image_path("_about/our-time-1-tile-full.jpg")}' alt='Just the girls'
 
             div
               .media-wrap.keep-ratio
                 .inner-wrap
-                  img src='#{image_path("_about/our-time-2-tile-full.jpg")}' srcset='#{image_path("_about/our-time-2-tile-mob.jpg")} 1023w, #{image_path("_about/our-time-2-tile-full.jpg")} 1024w' alt='Bespoke tailoring'
+                  a href="/lookbook/love-lace-collection"
+                    span.slick-title LOVE LACE COLLECTION
+                    span.slick-date January 2016
+                  img src='#{image_path("_about/our-time-2-tile-full.jpg")}' srcset='#{image_path("_about/our-time-2-tile-mob.jpg")} 1023w, #{image_path("_about/our-time-2-tile-full.jpg")} 1024w' alt='Love lace collection'
 
         .col-xs-12.col-md-6.col-md-pull-6
           .copy-wrap
@@ -150,7 +160,13 @@
       'use strict';
       (function ($) {
 
-        $('.about-slick').slick();
+        $('.about-slick').slick({
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          // autoplay: true,
+          // autoplaySpeed: 3500,
+          dots: true
+        });
 
       }(jQuery));
     "
