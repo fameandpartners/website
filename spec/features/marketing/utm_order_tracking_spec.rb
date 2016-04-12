@@ -1,26 +1,39 @@
 require 'spec_helper'
 
-describe 'I’m capturing order UTM stuff now', type: :feature do
-
-  it "captures UTM params" do
-    visit '/?utm_campaign=utm_campaign&utm_source=utm_source&utm_medium=utm_medium'
-
-    utm = Marketing::OrderTrafficParameters.last
-    expect(utm.utm_campaign).to eq('utm_campaign')
-    expect(utm.utm_source).to eq('utm_source')
-    expect(utm.utm_medium).to eq('utm_medium')
-
-    expect { visit('/?utm_campaign=utm_campaign_new&utm_source=utm_source_new&utm_medium=utm_medium_new') }
-      .to_not change { Marketing::OrderTrafficParameters.count }
-
-    utm_updated = Marketing::OrderTrafficParameters.last
-    expect(utm_updated.utm_campaign).to eq('utm_campaign_new')
-    expect(utm_updated.utm_source).to eq('utm_source_new')
-    expect(utm_updated.utm_medium).to eq('utm_medium_new')
+describe 'Captures UTM data from the URL (for each order)', type: :feature do
+  context 'no UTM params on the URL' do
+    it do
+      expect { visit('/') }.not_to change { Marketing::OrderTrafficParameters.count }
+    end
   end
 
-  it "doesn't capture UTM params" do
-    expect { visit('/') }.to_not change { Marketing::OrderTrafficParameters.count }
-  end
+  context 'there are UTM params' do
+    before(:each) do
+      visit '/?utm_campaign=utm_campaign&utm_source=utm_source&utm_medium=utm_medium'
+    end
 
+    it 'captures UTM params on user visit' do
+      utm = Marketing::OrderTrafficParameters.last
+      expect(utm.utm_campaign).to eq('utm_campaign')
+      expect(utm.utm_source).to eq('utm_source')
+      expect(utm.utm_medium).to eq('utm_medium')
+    end
+
+    describe 'user visits website with other UTM params' do
+      before(:each) do
+        visit '/?utm_campaign=other&utm_source=different&utm_medium=medium'
+      end
+
+      it 'does not create more than one traffic object' do
+        expect(Marketing::OrderTrafficParameters.count).to eq(1)
+      end
+
+      it 'updates his/her current order UTM attributes' do
+        utm = Marketing::OrderTrafficParameters.last
+        expect(utm.utm_campaign).to eq('other')
+        expect(utm.utm_source).to eq('different')
+        expect(utm.utm_medium).to eq('medium')
+      end
+    end
+  end
 end
