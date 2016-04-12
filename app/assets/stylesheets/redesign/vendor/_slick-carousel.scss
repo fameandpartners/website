@@ -53,7 +53,7 @@
 }
 
 .slick-prev {
-  left: 0;
+  left: 15px;
 
   &:before {
     content: '\e630';
@@ -62,7 +62,7 @@
 }
 
 .slick-next {
-  right: 0;
+  right: 15px;
 
   &:before {
     content: '\e631';

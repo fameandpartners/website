@@ -184,7 +184,9 @@ $product-color-wine:            #831c2e;
 .color-bird-of-paradise        { @include image-color-selector('BirdOfParadise.png'); }
 .color-black                   { background-color: $product-color-black; }
 .color-black-and-chartreuse    { @include split-color-selector($product-color-black, $product-color-chartreuse); }
+.color-black-and-hot-pink      { @include split-color-selector($product-color-black, $product-color-hot-pink); }
 .color-black-and-peacock       { @include split-color-selector($product-color-black, #134b7d); }
+.color-black-and-red           { @include split-color-selector($product-color-black, $product-color-red); }
 .color-black-and-vintage-gold  { @include split-color-selector($product-color-black, #d8ba00); }
 .color-blue                    { background-color: $product-color-blue; }
 .color-blue-azalea-floral      { @include image-color-selector('BlueAzaleaFloral.png'); }
@@ -247,11 +249,13 @@ $product-color-wine:            #831c2e;
 .color-hot-pink                { background-color: $product-color-hot-pink; }
 .color-ice-blue                { background-color: $product-color-ice-blue; }
 .color-icing-pink              { background-color: $product-color-icing-pink; }
+.color-icing-pink-and-red      { @include split-color-selector($product-color-icing-pink, $product-color-red);  }
 .color-indigo                  { background-color: $product-color-indigo; }
 .color-ivory                   { background-color: $product-color-ivory; }
 .color-ivory-and-hot-pink      { @include split-color-selector($product-color-ivory, $product-color-hot-pink); }
 .color-ivory-and-ice-blue      { @include split-color-selector($product-color-ivory, $product-color-ice-blue); }
 .color-ivory-and-navy          { @include split-color-selector($product-color-ivory, $product-color-navy); }
+.color-ivory-and-pale-pink     { @include split-color-selector($product-color-ivory, $product-color-pale-pink); }
 .color-ivory-and-pink          { @include split-color-selector($product-color-ivory, $product-color-hot-pink); }
 .color-ivory-and-tan           { @include split-color-selector($product-color-ivory, #c3b58b); }
 .color-lavender                { background-color: $product-color-lavender; }
@@ -282,13 +286,16 @@ $product-color-wine:            #831c2e;
 .color-mushroom                { background-color: $product-color-mushroom; }
 .color-nautical-stripe         { @include image-color-selector('NauticalStripe.png'); }
 .color-navy                    { background-color: $product-color-navy; }
+.color-navy-and-black          { @include split-color-selector($product-color-navy, $product-color-black); }
 .color-neon-mint               { background-color: $product-color-neon-mint; }
 .color-nude                    { background-color: $product-color-nude; }
+.color-nude-and-black          { @include split-color-selector($product-color-nude, $product-color-black);  }
 .color-ocean                   { background-color: $product-color-ocean; }
 .color-off-white               { background-color: $product-color-off-white; }
 .color-olive                   { background-color: $product-color-olive; }
 .color-olive-shimmer           { @include image-color-selector('OliveShimmer.png'); }
 .color-orange                  { background-color: $product-color-orange; }
+.color-orange-and-hot-pink     { @include split-color-selector($product-color-orange, $product-color-hot-pink); }
 .color-pale-blue               { background-color: $product-color-pale-blue; }
 .color-pale-green              { background-color: $product-color-pale-green; }
 .color-pale-grey               { background-color: $product-color-pale-grey; }
@@ -301,6 +308,7 @@ $product-color-wine:            #831c2e;
 .color-pine                    { background-color: $product-color-pine; }
 .color-pink                    { background-color: $product-color-pink; }
 .color-pink-and-blush          { @include split-color-selector($product_color-pink, $product_color-blush); }
+.color-pink-and-rose           { @include split-color-selector($product_color-pink, $product-color-rose); }
 .color-pink-azalea-floral      { @include image-color-selector('PinkAzaleaFloral.png'); }
 .color-pink-red                { @include split-color-selector($product_color-pink, $product_color-red); }
 .color-plum                    { background-color: $product-color-plum; }
@@ -323,6 +331,7 @@ $product-color-wine:            #831c2e;
 .color-seafoam                 { background-color: $product-color-seafoam; }
 .color-seashell, .color-shell  { background-color: $product-color-shell; }
 .color-silver                  { background-color: $product-color-silver; }
+.color-silver-and-pale-pink    { @include split-color-selector($product-color-silver, $product-color-pale-pink); }
 .color-sky-blue                { background-color: $product-color-sky-blue; }
 .color-sunset-orange { background-color: $product-color-sunset-orange; }
 .color-surreal-floral-black    { @include image-color-selector('SurrealFloralBlack.png'); }
@@ -336,6 +345,7 @@ $product-color-wine:            #831c2e;
 .color-vibrant-purple          { background-color: $product-color-vibrant-purple; }
 .color-watercolour             { @include image-color-selector('Watercolour.png'); }
 .color-watermelon              { background-color: $product-color-watermelon; }
+.color-white-and-mint          { @include split-color-selector($product-color-white, $product-color-mint); }
 .color-wine                    { background-color: $product-color-wine; }
 
 .color-white, .color-optic-white {

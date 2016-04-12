@@ -1,119 +1,545 @@
+/* [About us]
+-------------------------------------------------------*/
+// START - desktop
 .about {
-	padding-top: 0;
-	padding-bottom: 0;
 
-	.container-fluid {
-		background-color: white;
-		width: 100%
-	}
+  img {
+    width: 100%;
+  }
 
-	.col-md-6 {
-		height: 490px;
-		position: relative;
-	}
+  .copy-wrap {
+    padding: 30px 0 60px;
+  }
 
-	.pink {
-		background-color: #eddcef;
-	}
+  .hero-wrap.copy-right{
+    background-color: $beage-bg;
+    margin-bottom: 0;
 
-	.header {
-		height: 92px;
-		width:100%
-	}
+    .media-wrap {
+      display: none;
+    }
 
-	.black {
-		background-color: black;
-	}
+    .heading {
+      margin-top: 0;
+      margin-bottom: 4.5rem;
+      text-align: left;
+    }
 
-	.grey {
-		background-color: #b8b8b8;
-	}
+    .title-heading {
+      line-height: 1;
+    }
 
-	h2, p {
-		text-align: center;
-		text-transform: uppercase;
-	}
+    .sub-heading {
+      font: normal 100 1.9rem/1.3 $font-heading;
+      border: none;
+      padding-top: 1.5rem;
+      margin-top: 1.7rem;
+      position: relative;
 
-	p {
-		padding-left: 3rem;
-		padding-right: 2.5rem;
-		margin-top: auto;
-		margin-bottom: auto;
-		display: table-cell;
-		vertical-align: middle;
-		text-align: center;
-		font-size: 2rem;
-		line-height: 2.5rem;
-		font-weight: 300;
-	}
+      &:before{
+        width: 1em;
+        display: block;
+        content: "-";
+        position: absolute;
+        top: -1.5rem;
+        left: 0;
+      }
+    }
 
-	h2 {
-		color: white;
-		margin-top: 0;
-		font-size: 2rem;
-		padding-top: 3.5rem;
-	}
+    .icon-container {
+      width: 100%;
+      margin: 0;
+      text-align: center;
+    }
 
-	.row {
-		margin-right: 0;
-		margin-right: 0;
-	}
+    .icon-graphic {
+      margin: 0 20px;
+      display: inline-block;
+      float: left;
+      color: $c-neutral-black;
 
-	.block {
-	  position: absolute;
-	  top: 40px;
-	  width: 100%;
-	  height: 490px;
-	  display: table;
-	}
-}
+      &:first-of-type {
+        margin-left: 0;
+      }
 
-.about-title {
-	text-transform: uppercase;
-	font-size: 6.7rem;
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
 
-		@media screen and (max-width: 768px) {
-		font-size: 3rem;
-		line-height: 3.5rem;
-	}
+    .icon-circle {
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      display: block;
+      margin: 0 auto;
+      position: relative;
+      text-align: center;
 
-}
-
-.about-header.page-title:after {
-	background-color: white;
-	text-transform: uppercase;
-}
-
-.about-header{
-	.page-title--details {
-		height: 240px;
-		padding-top: 6rem;
-	}
-}
-
-.about-img {
-	height: 399px;
-	background-repeat: no-repeat;
-}
-
-.about-img {
-	height: 399px;
-	overflow: hidden;
-
-	img {
-        min-height: 100%;
-        min-width: 1024px;
-        width: 100%;
-        height: auto;
-        position: relative;
+      &:after {
+        width: 60px;
+        height: 60px;
+        display: block;
+        position: absolute;
+        content: " ";
         top: 0;
+        left: 0;
+        border: 1px solid #000;
+        border-radius: 50%;
+      }
+
+      &.icon-made-to-order {
+        font-size: 3rem;
+      }
+
+      &.icon-sewing-machine {
+        font-size: 2.5rem;
+      }
+
+    }//icon-circle
+
+    .icon-heading {
+      font-size: 1rem;
+      margin-top: 1rem;
+      font-family: $font-family-secondary;
+    }
+
+  }//hero-wrap
+
+  .media-wrap.keep-ratio {
+    padding-bottom: 86.5%;
+  }
+
+  section {
+
+    h3 {
+      font-size: 4rem;
+      color: $c-neutral-black;
+      line-height: 1;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      text-transform: none;
+    }
+
+    h4 {
+      font-family: $font-family-secondary;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 2.5rem;
+      color: $c-neutral-black;
+    }
+
+    p {
+      position: relative;
+      font-family: $font-heading;
+      line-height: 1.2;
+    }
+
+    &.our-time {
+
+      .media-wrap.keep-ratio {
+        padding-bottom: 84%;
+      }
+
+      .slick-prev {
+        left: 5%;
+      }
+
+      .slick-next {
+        right: 5%;
+      }
+
+      .slick-dots {
+        margin: -20px auto 0;
+        list-style-type: none;
+
+        &:after {
+          height: 0;
+          display: block;
+          content: " ";
+          clear: both;
+          overflow: hidden;
+        }
+        li {
+          list-style-type: none;
+          display: inline;
+          float: left;
+          button {
+            background: none;
+            overflow: hidden;
+            text-indent: -999px;
+            border: none;
+          }
+        }
+      }
+
+    }
+
+    &.bespoke, &.expansion, &.modern-atelier {
+      background-color: $c-neutral-3;
+    }
+
+    &.bespoke p:first-of-type {
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+
+      &:before{
+        width: 1rem;
+        display: block;
+        font-weight: bold;
+        font-size: 1rem;
+        content: "-";
+        position: absolute;
+        bottom: -1.5rem;
         left: 0;
       }
 
-	@media screen and (max-width: 768px) {
-    img{
-      left: -25%;
     }
-  }
-}
 
+    &.expansion {
+
+      .copy-wrap {
+        padding-bottom: 0;
+
+        &.clearfix {
+          padding-bottom: 60px;
+        }
+
+      }
+
+      .expansion-number {
+        width: 100%;
+        position: relative;
+        display: inline-block;
+        float: left;
+        color: #000;
+        font-family: $font-family-secondary;
+      }
+        .number-title {
+          width: 100%;
+          position: absolute;
+          top: -1em;
+          display: block;
+          text-align: left;
+          font-family: $font-family-secondary;
+          font-size: 1rem;
+        }
+
+        .number {
+          width: 100%;
+          font-size: 4.5rem;
+          font-weight: 300;
+          display: block;
+          color: #000;
+          letter-spacing: 0.05rem;
+        }
+
+    }//expansion
+
+    &.join-the-team {
+      background: none;
+
+      .copy-wrap {
+        text-align: left;
+        padding-top: 70px;
+      }
+
+      h4 {
+        font-family: $font-family-secondary;
+      }
+
+      a {
+        color: $c-neutral-black;
+        text-decoration: underline;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+
+      .join-team-fame {
+        margin-bottom: 70px;
+        .btn {
+          width: 100%;
+        }
+      }
+    }
+
+    //TODO: Should this be global?
+    select {
+      color: $c-neutral-9;
+      // -webkit-appearance: none;
+    }
+
+    &.our-offices {
+      padding-bottom: 70px;
+
+      h3 {
+        text-align: center;
+      }
+
+      h4 {
+        font-family: $font-heading;
+      }
+
+      .office-image {
+        width: 100%;
+        padding-bottom: 26%;
+        margin: 0.75rem 0;
+        display: table;
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        &.sydney {
+          background-image: url('/assets/_about/sydney-full.jpg');
+        }
+        &.los-angeles {
+          background-image: url('/assets/_about/los-angeles-full.jpg');
+        }
+        &.new-york {
+          background-image: url('/assets/_about/new-york-full.jpg');
+        }
+
+        .content-wrap {
+          width: 100%;
+          height: 100%;
+          display: table-cell;
+          vertical-align: middle;
+        }
+
+        p {
+          color: #fff;
+          text-align: center;
+          letter-spacing: 0.5rem;
+          font-family: $font-family-secondary;
+          font-weight: 900;
+          padding-top: 25%;
+        }
+      }
+
+    }//our-offices
+
+    &.modern-atelier {
+      padding-top: 70px;
+
+      .copy-wrap {
+        padding-top: 2.5rem;
+      }
+      h3 {
+        margin-top: 0;
+      }
+      a {
+        font-family: $font-heading;
+        color: #000;
+        text-decoration: underline;
+      }
+    }
+
+  }//section
+
+  // START - > iPhone 5
+  @media (min-width: $iphone6-width) {
+
+    section {
+      &.expansion {
+        .expansion-number {
+          width: 50%;
+        }
+      }
+    }
+
+  }
+  // END - > iPhone 5
+
+  // START - tablet
+  @media (min-width: $bootstrap-sm-width) {
+
+    section {
+
+      &.our-time {
+        .media-wrap.keep-ratio {
+          padding-bottom: 84.4%;
+        }
+      }
+
+      &.bespoke, &.dressmaking {
+        padding-top: 70px;
+      }
+
+      &.join-the-team {
+        .copy-wrap {
+          text-align: center;
+        }
+      }
+
+    }//section
+
+  }
+  // END - tablet
+
+  // START - desktop
+  @media (min-width: $bootstrap-md-width) {
+
+    .main-hero-wrap.copy-right {
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-bottom: 0;
+
+      .media-wrap {
+        display: block;
+        padding-bottom: 39%;
+      }
+
+      .copy-wrap {
+        padding: 10px 0;
+      }
+
+      .heading {
+
+      }
+
+      .icon-container {
+        width: 50%;
+        margin: 0 0 0 50%;
+      }
+
+    }//main-hero-wrap
+
+    section {
+
+      .copy-wrap {
+        height: 420px;
+        display: table;
+        padding: 0 15%;
+
+        .content-wrap {
+          width: 100%;
+          height: 100%;
+          display: table-cell;
+          vertical-align: middle;
+
+          h3 {
+            font-size: 3.5rem;
+          }
+
+          p {
+            font-size: 1em;
+          }
+
+        }
+      }
+
+      &.our-time {
+        padding: 80px 0;
+
+        .media-wrap.keep-ratio {
+          padding-bottom: 84%;
+        }
+      }
+
+      &.bespoke {
+        padding-top: 0;
+      }
+
+      &.dressmaking {
+          padding-top: 0;
+      }
+
+      &.modern-atelier {
+        padding-bottom: 70px;
+      }
+
+      &.expansion {
+
+        .copy-wrap {
+          height: auto;
+          padding: 70px 15%;
+          margin: 0 auto;
+
+          &.clearfix {
+            padding-top: 70px;
+            padding-bottom: 70px;
+          }
+        }
+
+        .expansion-number {
+          width: 100%;
+          margin: 1.5rem 0 4rem;
+          float: none;
+          display: block;
+        }
+
+        .number {
+          font-size: 5.5rem;
+        }
+
+      }
+
+      &.join-the-team {
+        background-image: url('/assets/_about/join-team-fame-full.gif');
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        .copy-wrap {
+          height: auto;
+          padding: 70px 0 2.5rem;
+        }
+      }
+
+      &.our-offices {
+        .office-image {
+          height: 130px;
+        }
+      }
+
+      &.modern-atelier {
+        .copy-wrap {
+          height: auto;
+          padding: 70px 0 2.5rem;
+        }
+      }
+
+    }//section
+
+  }
+  // END - desktop
+
+  // START - desktop large
+  @media (min-width: $bootstrap-lg-width) {
+
+    section {
+
+      .copy-wrap {
+        height: 494px;
+
+        .content-wrap h3 {
+          font-size: 4rem;
+        }
+
+      }
+
+      h3 {
+        font-size: 4rem;
+      }
+
+      &.expansion {
+        background-color: $c-neutral-white;
+        border-top: 1px solid $c-neutral-3;
+        border-bottom: 1px solid $c-neutral-3;
+
+        .expansion-number {
+          margin: 1.5rem 0 4rem;
+        }
+
+        .number {
+          font-size: 5.5rem;
+        }
+      }
+
+    }
+
+  }
+  // END - desktop large
+
+}//about
