@@ -1,9 +1,9 @@
 .footer
   .mobile-footer.hidden-md.hidden-lg.container
     .row.buttons.visible-xs.visible-sm
-      = link_to style_consultation_url, class: "col-xs-12"
-        = image_tag 'footer/refer.png', class: 'refer'
-        .text FREE STYLING SESSION
+      /= link_to style_consultation_url, class: "col-xs-12"
+      /  = image_tag 'footer/refer.png', class: 'refer'
+      /  .text FREE STYLING SESSION
       - unless Features.active?(:getitquick_unavailable)
         = link_to fast_making_dresses_url, class: "col-xs-12"
           = image_tag 'footer/48.png', class: 'hr48'
@@ -47,8 +47,8 @@
             ul.footer-nav
               li.footer-nav--item
                 = link_to 'Terms', terms_url
-              li.footer-nav--item
-                = link_to 'Get styling advice', style_consultation_url
+              /li.footer-nav--item
+              /  = link_to 'Get styling advice', style_consultation_url
               li.footer-nav--item
                 = link_to 'Fame Chain', fame_chain_url
               li.footer-nav--item
