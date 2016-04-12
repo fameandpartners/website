@@ -107,11 +107,18 @@ class ApplicationController < ActionController::Base
   end
 
   def capture_order_utm_params
-    current_order.try(:create_traffic_parameters, {
-      utm_medium: params[:utm_medium],
-      utm_source: params[:utm_source],
-      utm_campaign: params[:utm_campaign]
-    })
+    if current_order
+      utm_params = {
+        utm_medium: params[:utm_medium],
+        utm_source: params[:utm_source],
+        utm_campaign: params[:utm_campaign]
+      }
+      if current_order.traffic_parameters
+        current_order.traffic_parameters.update_attributes(utm_params)
+      else
+        current_order.create_traffic_parameters(utm_params)
+      end
+    end
   end
 
   # it's shame to add such method to filter
