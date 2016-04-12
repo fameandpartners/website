@@ -54,18 +54,17 @@
 
   // TODO: this should be re-usable component
   section {
-    margin-bottom: 70px;
+    margin-bottom: 50px;
 
     &.alt {
-      padding: 70px 0 0;
+      padding: 50px 0 0;
       background: $c-neutral-3;
     }
 
   }
 
   .panel-compact {
-    margin-bottom: 50px;
-    padding-top: 20px;
+    margin-bottom: 0;
 
     .copy-wrap {
       margin-top: 0;
@@ -122,6 +121,11 @@
       text-align: center;
     }
 
+    .panel-compact {
+      margin-bottom: 50px;
+      padding-top: 20px;
+    }
+
   }
   // END - mobile only
 
@@ -146,9 +150,7 @@
     }
 
     .panel-compact {
-      margin-bottom: 30px;
       padding-top: 0;
-      padding-bottom: 20px;
     }
 
     .panel-split {
