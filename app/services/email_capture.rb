@@ -128,9 +128,7 @@ class EmailCapture
   end
 
   def set_list_id
-    list_id = configatron.mailchimp.list_id
-
-    list_id
+    configatron.mailchimp.list_id
   end
 
   def unsubscribed?(email)
