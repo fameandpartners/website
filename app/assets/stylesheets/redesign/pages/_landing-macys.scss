@@ -163,8 +163,15 @@
       .section-heading,
       address {
         float: left;
-        width: 45%;
-        padding-right: 15px;
+        padding-right: 10px;
+      }
+
+      .section-heading {
+        width: 40%;
+      }
+
+      address {
+        width: 50%;
       }
 
       .map-trigger-wrap {
