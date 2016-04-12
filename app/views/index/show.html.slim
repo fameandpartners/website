@@ -11,7 +11,7 @@ ruby:
         img src="/assets/competition_banner/CompetitionBanner-full.jpg" srcset="/assets/competition_banner/CompetitionBanner-med.jpg 768w, /assets/competition_banner/CompetitionBanner-full.jpg 1024w" alt='Partners in Crime'
   //
     - if sale_active?
-      section.banner-sale
+      section.banner-sale`
         .container
           = link_to sale_path, class: 'media-wrap'
             img src="http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_images[:full]}" alt='Shop the Sale' srcset="
