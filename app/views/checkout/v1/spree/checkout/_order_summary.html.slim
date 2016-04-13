@@ -1,12 +1,17 @@
 ruby:
   shopping_bag_texts = Preferences::ShoppingBag.new(current_site_version)
 
+  masterpass = ""
+  masterpass = masterpass + ",
+      masterpass_link: '.buyWithMasterPass:visible',
+      masterpass_cart_callback_uri: urlWithSitePrefix('/masterpass/cart?payment_method_id=" + masterpass_payment_method.id.to_s + "')" if masterpass_available?
+
   shopping_cart_summary_init = "
     window.app.shopping_cart_summary = new ShoppingCartSummary({
       cart: window.app.shopping_cart,
       container: '.checkout-items',
       value_proposition: \"#{shopping_bag_texts.value_proposition}\",
-      shipping_message: \"#{shopping_bag_texts.shipping_message}\"
+      shipping_message: \"#{shopping_bag_texts.shipping_message}\"" + masterpass +"
     });
   "
   preload_cart_data = "
@@ -115,6 +120,15 @@ ruby:
   .row.shopping-bag-payment-methods
     img src="/assets/checkout/visa-mastercard-paypal-masterpass.jpg"
     img src="/assets/comodo-ssl.png"
+
+  - if cart.masterpass_available?
+    - if cart.masterpass_is_production?
+      script src="https://masterpass.com/lightbox/Switch/integration/MasterPass.client.js" type="text/javascript"
+    - else
+      script src="https://sandbox.masterpass.com/lightbox/Switch/integration/MasterPass.client.js" type="text/javascript"
+    .row.shopping-bag-masterpass
+      .col-lg-12.text-center
+        img.buyWithMasterPass src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_180x042px.png" alt="Buy with MasterPass"
 
   .row
     .col-md-12
