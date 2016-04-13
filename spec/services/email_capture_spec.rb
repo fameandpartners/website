@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe EmailCapture do
-  let(:user) { build(:spree_user) }
+  let(:user) { build(:spree_user_real) }
 
   let(:mailchimp) { EmailCapture.new({ service: :mailchimp },
                                        email:              user.email,
@@ -111,6 +111,35 @@ describe EmailCapture do
     it { expect(mailchimp.set_merge[:ip_address]).to eq "101.0.79.50" }
     it { expect(mailchimp.set_merge[:country]).to be }
     it { expect(mailchimp.set_merge[:n_letter]).to be_nil }
+  end
+
+  describe '#unsubscribe' do
+    it 'unsubscribe user and check it' do
+      email_capture = EmailCapture.new({ service: :mailchimp },
+                   email:              user.email,
+                   first_name:         user.first_name,
+                   current_sign_in_ip: "101.0.79.50",
+                   landing_page:       "/dresses/formal",
+                   utm_params:         '',
+                   site_version:       'US',
+                   form_name:          'contact')
+      email_capture.capture
+      email_capture.mailchimp.lists.unsubscribe(email_capture.set_list_id, {email: user.email}, true, false, false)
+      expect(email_capture.unsubscribed?(user.email)).to be_truthy
+    end
+
+    it "check that we can't subscribe user which unsubscribed" do
+      email_capture = EmailCapture.new({ service: :mailchimp },
+                   email:              user.email,
+                   first_name:         user.first_name,
+                   current_sign_in_ip: "101.0.79.50",
+                   landing_page:       "/dresses/formal",
+                   utm_params:         '',
+                   site_version:       'US',
+                   form_name:          'contact')
+      email_capture.capture
+      expect(email_capture.unsubscribed?(user.email)).to be_truthy
+    end
   end
 
 end
