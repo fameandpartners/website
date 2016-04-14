@@ -77,7 +77,7 @@
 
   // versions
   &.alt {
-    background: $c-neutral-white;
+    background: transparent;
 
     .content-wrap {
       position: relative;
@@ -88,7 +88,8 @@
       margin: 0 0 20px;
     }
 
-    p {
+    p,
+    address {
       font-size: 1.25em;
     }
 
@@ -99,6 +100,8 @@
     }
 
     p,
+    a,
+    address,
     .btn {
       margin-bottom: 20px;
 
