@@ -19,6 +19,17 @@ class ContactsController < ApplicationController
     end
   end
 
+  def join_team
+    @contact = Contact.new(params[:contact])
+    if @contact.valid?
+      ContactMailer.join_team(@contact).deliver
+      flash[:notice] = "We're on it!"
+      redirect_to success_contact_path
+    else
+      render 'statics/about'
+    end
+  end
+
   def success
     title('Thank You', default_seo_title)
   end
