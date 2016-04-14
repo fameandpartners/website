@@ -33,7 +33,7 @@
             div
               .media-wrap.keep-ratio
                 .inner-wrap
-                  a href="/partners-in-crime"
+                  = link_to partners_in_crime_competition_path
                     span.slick-title PARTNERS IN CRIME
                     span.slick-date March 2016
                   img src='#{image_path("_about/our-time-tile-full.jpg")}' alt='Partners in crime'
@@ -41,7 +41,7 @@
             div
               .media-wrap.keep-ratio
                 .inner-wrap
-                  a href="/lookbook/just-the-girls"
+                  = link_to just_the_girls_collection_path
                     span.slick-title JUST THE GIRLS
                     span.slick-date February 2016
                   img src='#{image_path("_about/our-time-1-tile-full.jpg")}' alt='Just the girls'
@@ -49,7 +49,7 @@
             div
               .media-wrap.keep-ratio
                 .inner-wrap
-                  a href="/lookbook/love-lace-collection"
+                  = link_to love_lace_collection_path
                     span.slick-title LOVE LACE COLLECTION
                     span.slick-date January 2016
                   img src='#{image_path("_about/our-time-2-tile-full.jpg")}' srcset='#{image_path("_about/our-time-2-tile-mob.jpg")} 1023w, #{image_path("_about/our-time-2-tile-full.jpg")} 1024w' alt='Love lace collection'
@@ -147,7 +147,7 @@
           .copy-wrap
             h3 The Modern Atelier
             p Contemporary dresses customized by you, fashioned by Fame and Partners.
-            a href="/why-us" SEE WHY WE&rsquo;RE DIFFERENT
+            = link_to "SEE WHY WE'RE DIFFERENT", why_us_path
 
 	/! Shop by category
   = render 'shared/redesign/shop_by_category'
