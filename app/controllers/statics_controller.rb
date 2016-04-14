@@ -11,6 +11,7 @@ class StaticsController < ApplicationController
   def about
     @title = "About Us " + default_seo_title
     @description = "We design beautiful dresses for prom and many other occasions. We are a passionate team of fashionista's based in Sydney and NYC"
+    @contact = Contact.new(:site_version => current_site_version.code)
   end
 
   def faqs
