@@ -25,14 +25,13 @@ module Orders
 
     def to_csv
       CSV.generate(headers: true) do |csv|
-        headers_added = false
+
+        orders.first.line_items.first do
+          csv << line_item.headers
+        end
 
         orders.map do |order|
           order.line_items.map do |line_item|
-
-            csv << line_item.headers unless headers_added
-            headers_added = true
-
             begin
               csv << line_item.as_report.values
             rescue NoMethodError => e
