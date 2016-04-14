@@ -26,8 +26,12 @@ module Orders
     def to_csv
       CSV.generate(headers: true) do |csv|
 
-        orders.first.line_items.first do
-          csv << line_item.headers
+        orders.map do |order|
+          order.line_items.map do |line_item|
+            csv << line_item.headers
+            break
+          end
+          break
         end
 
         orders.map do |order|
