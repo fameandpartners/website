@@ -202,9 +202,16 @@ ruby:
                   .panel-highlight.media-wrap
                     = image_tag "lookbook/brides.jpg"
                     .copy-wrap MADE WITH LOVE <em><span>SIGN UP AND START PLANNING YOUR DREAM DRESSES</span></em>
-              li.normal-item = link_to 'The Bride', brides_landing_page_path, class: 'text'
-              li.normal-item = link_to 'The Bridesmaids', bridesmaid_landing_page_path, class: 'text'
-              li.normal-item = link_to 'The Guests', guest_bride_page_path, class: 'text'
+              li.grey-item
+                .text VIEW THE COLLECTIONS
+              li.normal-item = link_to 'Bridesmaid Dresses', build_taxon_path('bridesmaid')
+              li.normal-item = link_to 'Wedding Dresses', build_taxon_path('wedding')
+              li.normal-item = link_to 'Wedding Guest Dresses', build_taxon_path('wedding-guests')
+              li.normal-item = link_to 'Lace Dresses', build_taxon_path('Lace')
+              li.normal-item.no-border = link_to 'Cocktail / Evening Weddings', build_taxon_path('cocktail')
+              li.grey-item
+                .text WEDDING PLANNER
+              li.normal-item.no-border = link_to 'Register for Wedding Planner', bridesmaid_landing_page_path
 
         div#lookbook-menu
           ul.nav.navbar-nav
@@ -283,8 +290,8 @@ ruby:
             = link_to 'FAQs & Shipping', faqs_path, class: 'bottom-area-text'
           li.bottom-area
             = link_to 'Size Guide', size_guide_path, class: 'bottom-area-text'
-          li.bottom-area
-            = link_to 'Get styling advice', style_consultation_path, class: 'bottom-area-text'
+          /li.bottom-area
+          /  = link_to 'Get styling advice', style_consultation_path, class: 'bottom-area-text'
           li.bottom-area
             = link_to 'Fame Chain', fame_chain_path, class: 'bottom-area-text'
           li.bottom-area

@@ -8,7 +8,7 @@ ruby:
   section.competition-banner
     .container
       = link_to partners_in_crime_competition_path, class: 'media-wrap'
-        img src="/assets/competition_banner/CompetitionBanner-full.jpg" srcset="/assets/competition_banner/CompetitionBanner-med.jpg 768w, /assets/competition_banner/CompetitionBanner-full.jpg 1024w" alt='Partners in Crime'
+        img src="/assets/competition_banner/CompetitionBanner-apr-13-full.jpg" srcset="/assets/competition_banner/CompetitionBanner-apr-13-med.jpg 768w, /assets/competition_banner/CompetitionBanner-apr-13-full.jpg 1024w" alt='Partners in Crime'
   //
     - if sale_active?
       section.banner-sale
@@ -19,18 +19,24 @@ ruby:
               http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_images[:full]} 1024w"
   /! Content Section
   section.container.content-block.home-main-content
-    .row
+    .row.aside-single-tile
       .main.col-md-7
-        = link_to partners_in_crime_collection_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/CategoryTile1-apr-5.jpg', alt: 'THE MODERN TREATMENT'
         = render 'shared/redesign/tabs_collection'
         = link_to best_sellers_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/CategoryTile2-apr-7.jpg', alt: 'THE PERFECT COLOUR'
-        = link_to colour_path('Red'), class: 'media-wrap'
-          = image_tag 'home-page-tiles/CategoryTile3-apr-5.jpg', alt: 'LADY IN RED'
+          = image_tag 'home-page-tiles/CategoryTile01.jpg', alt: 'The all time, best seller. - Shop the BACKLESS DREAMER'
+        = link_to dresses_path, class: 'media-wrap'
+          = image_tag 'home-page-tiles/CategoryTile02.jpg', alt: 'Same, same. But different. Get CUSTOMIZING'
 
       aside.col-md-5
-        = react_component('BlogPosts')
+        .outer-wrap
+          = link_to colour_path('Black')
+            picture.media-wrap
+              .inner-wrap
+                source media='(max-width: 1023px)' srcset='#{image_path("home-page-tiles/CategoryTile03-mob.jpg")}'
+                source media='(min-width: 1024px)' srcset='#{image_path("home-page-tiles/CategoryTile03.jpg")}'
+                img src='#{image_path("home-page-tiles/CategoryTile03.jpg")}' srcset='
+                  #{image_path("home-page-tiles/CategoryTile03-mob.jpg")} 1023w,
+                  #{image_path("home-page-tiles/CategoryTile03.jpg")} 1024w' alt='Midnight is Calling - Shop the BLACK EDIT'
 
 
   section.carousel-strap.instagram
