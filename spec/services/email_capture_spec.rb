@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe EmailCapture, :vcr do
-  let(:user) { build(:spree_user, first_name: 'John', last_name: 'Doe', email: 'some.user5@gmail.com') }
+  let(:user) { build(:spree_user, first_name: 'John', last_name: 'Doe', email: 'some.user6@gmail.com') }
 
   let(:email_capture) { EmailCapture.new({ service: :mailchimp },
                                        email:              user.email,
