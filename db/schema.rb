@@ -556,17 +556,16 @@ ActiveRecord::Schema.define(:version => 20160413092439) do
   create_table "moodboard_items", :force => true do |t|
     t.string   "uuid"
     t.integer  "moodboard_id"
-    t.integer  "product_id",                             :null => false
+    t.integer  "product_id",             :null => false
     t.integer  "product_color_value_id"
-    t.integer  "color_id",                               :null => false
+    t.integer  "color_id",               :null => false
     t.integer  "variant_id"
-    t.integer  "user_id",                                :null => false
-    t.integer  "likes",                  :default => 0
+    t.integer  "user_id",                :null => false
+    t.integer  "likes"
     t.text     "comments"
     t.datetime "deleted_at"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.string   "user_likes",             :default => ""
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   add_index "moodboard_items", ["color_id"], :name => "index_moodboard_items_on_color_id"
