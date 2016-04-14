@@ -9,6 +9,7 @@
         img src='#{image_path("_about/hero-full.jpg")}' srcset='
           #{image_path("_about/hero-mob.jpg")} 1023w,
           #{image_path("_about/hero-full.jpg")} 1024w' alt='Inspired by heritage, powered by technology'
+
     .content-wrap
       .container
         .row
@@ -32,17 +33,26 @@
             div
               .media-wrap.keep-ratio
                 .inner-wrap
-                  img src='#{image_path("_about/our-time-tile-full.jpg")}' alt='Bespoke tailoring'
+                  = link_to partners_in_crime_competition_path
+                    span.slick-title PARTNERS IN CRIME
+                    span.slick-date March 2016
+                  img src='#{image_path("_about/our-time-tile-full.jpg")}' alt='Partners in crime'
 
             div
               .media-wrap.keep-ratio
                 .inner-wrap
-                  img src='#{image_path("_about/our-time-1-tile-full.jpg")}' alt='Bespoke tailoring'
+                  = link_to just_the_girls_collection_path
+                    span.slick-title JUST THE GIRLS
+                    span.slick-date February 2016
+                  img src='#{image_path("_about/our-time-1-tile-full.jpg")}' alt='Just the girls'
 
             div
               .media-wrap.keep-ratio
                 .inner-wrap
-                  img src='#{image_path("_about/our-time-2-tile-full.jpg")}' srcset='#{image_path("_about/our-time-2-tile-mob.jpg")} 1023w, #{image_path("_about/our-time-2-tile-full.jpg")} 1024w' alt='Bespoke tailoring'
+                  = link_to love_lace_collection_path
+                    span.slick-title LOVE LACE COLLECTION
+                    span.slick-date January 2016
+                  img src='#{image_path("_about/our-time-2-tile-full.jpg")}' srcset='#{image_path("_about/our-time-2-tile-mob.jpg")} 1023w, #{image_path("_about/our-time-2-tile-full.jpg")} 1024w' alt='Love lace collection'
 
         .col-xs-12.col-md-6.col-md-pull-6
           .copy-wrap
@@ -114,21 +124,18 @@
       .row
         .col-xs-12.col-md-4
           .office-image.sydney
-            .content-wrap
-              p SYDNEY
+            p SYDNEY
         .col-xs-12.col-md-4
           .office-image.los-angeles
-            .content-wrap
-              p LOS ANGELES
+            p LOS ANGELES
         .col-xs-12.col-md-4
           .office-image.new-york
-            .content-wrap
-              p NEW YORK CITY
+            p NEW YORK CITY
 
   section.modern-atelier
     .container
       .row
-        .col-xs-12.col-md-6.col-md-push-6
+        .col-xs-12.col-md-5.col-md-push-7
           picture.media-wrap
             .inner-wrap
               source media='(max-width: 1023px)' srcset='#{image_path("_about/modern-atelier.jpg")}'
@@ -136,11 +143,11 @@
               img src='#{image_path("_about/modern-atelier.jpg")}' srcset='
                 #{image_path("_about/modern-atelier.jpg")} 1023w,
               #{image_path("_about/modern-atelier.jpg")} 1024w' alt=''
-        .col-xs-12.col-md-6.col-md-pull-6
+        .col-xs-12.col-md-4.col-md-pull-5
           .copy-wrap
             h3 The Modern Atelier
             p Contemporary dresses customized by you, fashioned by Fame and Partners.
-            a href="/why-us" SEE WHY WE&rsquo;RE DIFFERENT
+            = link_to "SEE WHY WE'RE DIFFERENT", why_us_path
 
 	/! Shop by category
   = render 'shared/redesign/shop_by_category'
@@ -150,7 +157,16 @@
       'use strict';
       (function ($) {
 
-        $('.about-slick').slick();
+        $('.about-slick').slick({
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 3200,
+          dots: true,
+          arrows: false,
+          useTransform: true,
+          cssEase: 'cubic-bezier(0.770, 0.000, 0.175, 1.000)'
+        });
 
       }(jQuery));
     "

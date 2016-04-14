@@ -133,6 +133,12 @@
 
 }
 
+.btn-multiline {
+  max-width: 100%;
+  height: auto;
+  white-space: normal;
+}
+
 // TODO: marge this with .btn-close
 .close {
   opacity: 0.7;
