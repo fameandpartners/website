@@ -7,120 +7,84 @@
   .container.relative
 
     .row.relative
-    
-      #accordion.panel-group role="tablist" aria-multiselectable="true"
-        .panel.panel-default
-        
-          #headingOne.panel-heading role="tab"
-            h2.panel-title 
-              a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne"
-                |ABOUT US
-            
-          #collapseOne.panel-collapse.collapse.in role="tabpanel" aria-labelledby="headingOne"
-            .panel-body
-              h3 Do you have any store locations?
-              p
-                ' We are an online fashion boutique which means you can shop with us 24/7 from all over the world. To check if we currently offer shipping to your country please
-                => link_to 'Contact Us', new_contact_path
-                '.
-              p 
-                ' We are currently looking at cities to do pop up stores in, if you would like to see us have one at a location near you,
-                => link_to 'Contact Us', new_contact_path
-                ' with your suggestion.
 
-          #headingTwo.panel-heading role="tab"
-            h2.panel-title 
-              a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
-                |ORDERS
-          #collapseTwo.panel-collapse.collapse role="tabpanel" aria-labelledby="headingTwo"
-            .panel-body
-              h3 What is express making?
-              p 
-                ' With our express making we offer our customers the opportunity to have their dress made in 48 hours / 2 business days at the additional charge of $29. This is limited to certain styles and colours which can be viewed on the website here
-                => link_to fast_making_dresses_url, fast_making_dresses_path 
-                ' .
+      h2 ABOUT US
+      h3 Do you have any store locations?
+      p
+        ' We are an online fashion boutique which means you can shop with us 24/7 from all over the world. To check if we currently offer shipping to your country please
+        = link_to 'Contact Us', new_contact_path
+        br
+        ' We are currently looking at cities to do pop up stores in, if you would like to see us have one at a location near you,
+        => link_to 'Contact Us', new_contact_path
+        ' with your suggestion.
 
-              h3 How can I track my order?
-              h4 Track you order in My Account.
-              p Login to your account and select the My Orders tab. Here you will be able to see if your dress has been shipped yet. The two statuses are not yet shipped or a tracking number. The tracking number will link through to our local courier service so you will be able to login to their portal and track where you order is.
+      h2 ORDERS
+      h3 How can I track my order?
+      h4 You can now track you order in My Account.
+      p Login to your account and select the My Orders tab. Here you will be able to see if your dress has been shipped yet. The two statuses are not yet shipped or a tracking number. The tracking number will link through to our local courier service so you will be able to login to their portal and track where you order is.
 
-              h3 Can I cancel my order?
-              p
-                ' If you would like to cancel your order, please
-                => link_to 'Contact Us', new_contact_path
-                ' immediately with your cancellation request and order number.
-              p If your dress has been ordered with 'express making' we cannot accept cancellations as your dress goes immediately into production.
-              p If your dress is customised we cannot accept cancellations after 24 hours from purchase. This is because your dress is already in production. If you wish to cancel your order outside of 24 hours, we can offer you a 50% refund and a 50% credit note with Fame & Partners. This is because the fabric has already been purchased and production started on your custom dress and in most cases we can not resell your dress at retail price.
+      h3 Can I cancel my order?
+      p
+        ' If you would like to cancel your order, please
+        => link_to 'Contact Us', new_contact_path
+        ' immediately with your cancellation request and order number.
+      p If your dress has been ordered with 'express making' we cannot accept cancellations as your dress goes immediately into production.
+      p If your dress is customised we cannot accept cancellations after 24 hours from purchase. This is because your dress is already in production. If you wish to cancel your order outside of 24 hours, we can offer you a 50% refund and a 50% credit note with Fame & Partners. This is because the fabric has already been purchased and production started on your custom dress and in most cases we can not resell your dress at retail price.
 
-          #headingThree.panel-heading role="tab"
-            h2.panel-title 
-              a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseOne"
-                |Shipping &amp; Deliveries
+      h2 Shipping & Deliveries
 
-          #collapseThree.panel-collapse.collapse role="tabpanel" aria-labelledby="headingThree"
-            .panel-body
-              h3 When will my order ship?
+      h3 When will my order ship?
 
-              p Shipping times vary depending on the complexity of any customisations you might order. All of our dresses are made on demand and making will commence the day your order is received. Our make time varies depending on customisations; between 4 - 8 business days which means you will receive your dress in up to 10 business days. We recommend allowing 2 weeks from the date of your purchase to ensure you have enough time for your dress to arrive for your special event.
+      p Shipping times vary depending on the complexity of any customisations you might order. All of our dresses are made on demand and making will commence the day your order is received. Our make time varies depending on customisations; between 4 - 8 business days which means you will receive your dress in up to 10 business days. We recommend allowing 2 weeks from the date of your purchase to ensure you have enough time for your dress to arrive for your special event.
 
-              p 
-                ' You can now select our express making option for an additional cost of $29. This option guarantees you that your dress will arrive with you within 2-5 business days. If you want to know the exact date for your dress to arrive, please contact our Customer Service via our
-                = link_to 'Contact Form', new_contact_path
-                ' .
+      p Please note: Orders are not shipped on the weekends or holidays.
 
-              p Please note: Orders are not shipped on the weekends or holidays.
+      h3 How long will it take for my order to arrive?
+      p Please refer to the table below to determine your shipping times:
 
-              h3 How long will it take for my order to arrive?
-              p Please refer to the table below to determine your shipping times:
+      = render 'shipping_tables'
 
-              = render 'shipping_tables'
+      p Please note that we have no control over delivery times and that unexpected delays may be possible due to customs.
 
-              p Please note that we have no control over delivery times and that unexpected delays may be possible due to customs.
+      h2 RETURNS
+      h3 What is your returns policy?
 
-          #headingFour.panel-heading role="tab"
-            h2.panel-title 
-              a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour"
-                |RETURNS
-          #collapseFour.panel-collapse.collapse role="tabpanel" aria-labelledby="headingFour"
-            .panel-body
-              h3 What is your returns policy?
+      p If for any reason you are not happy with your selection, you can exchange an item for another item, or return it for a refund, subject to the following terms and limitations:
 
-              p If for any reason you are not happy with your selection, you can exchange an item for another item, or return it for a refund, subject to the following terms and limitations:
+      ul
+        li Standard Dresses may be returned or exchanged for 30 days from original purchase date for a refund or store credit.
+        li A 50% restocking fee is applied for all returned or exchanged Custom Dresses.  Custom Dresses may be returned orexchanged for 30 days from original purchase date for a refund or store credit.
+        li The cost of your returns postage fee for non-sale items will be reimbursed up to the value of $USD15. The postage receipt must be included in your returns package for reimbursement.
+        li Up to 2 dresses from an order that qualify for return/exchange can be returned from an order for a refund.  Returns &exchanges on orders with more than 2 dresses will have the remainder of the refund issued for store credit.
+        li Any item to be returned or exchanged must be in new, unused and resalable condition, with the DO NOT REMOVE tag still attached in the same place as originally sent.
+        li No returns on sale items.
 
-              ul
-                li Standard Dresses may be returned or exchanged for 30 days from original purchase date for a refund or store credit.
-                li A 50% restocking fee is applied for all returned or exchanged Custom Dresses.  Custom Dresses may be returned orexchanged for 30 days from original purchase date for a refund or store credit.
-                li The cost of your returns postage fee for non-sale items will be reimbursed up to the value of $USD15. The postage receipt must be included in your returns package for reimbursement.
-                li Up to 2 dresses from an order that qualify for return/exchange can be returned from an order for a refund.  Returns &exchanges on orders with more than 2 dresses will have the remainder of the refund issued for store credit.
-                li Any item to be returned or exchanged must be in new, unused and resalable condition, with the DO NOT REMOVE tag still attached in the same place as originally sent.
-                li No returns on sale items.
+      h3 Can I exchange for a different size or colour?
+      p Of course! It is completely free, provided you are in Australia or the US to return for a different size. It is also completely free to return for a different recommended colour. If you ordered a customisation, including custom colours, we will charge a restocking fee of 50% of the garments purchase price.
 
-              h3 Can I exchange for a different size or colour?
-              p Of course! It is completely free, provided you are in Australia or the US to return for a different size. It is also completely free to return for a different recommended colour. If you ordered a customisation, including custom colours, we will charge a restocking fee of 50% of the garments purchase price.
+      p If you would like to exchange or return an item, simply follow the steps below.
 
-              p If you would like to exchange or return an item, simply follow the steps below.
+      h3 What are the steps I follow to return or exchange an item?
 
-              h3 What are the steps I follow to return or exchange an item?
+      p In just a few easy steps you can return or exchange as follows, depending where you live!
 
-              p In just a few easy steps you can return or exchange as follows, depending where you live!
+      h4 For Returns:
+      ol
+        li You can now submit your returns request via the My Account section of our website. To do so please login to your account and click on the My Orders tab. On the right hand side you will see a column titled return or exchange. Select the relevant order in this column. You will be redirected to the returns page where you will be able to select the individual items which you would like to return. Select the appropriate reason for your return and submit the form our customer service team will be in contact soon after to advise you of the following steps.
 
-              h4 For Returns:
-              ol
-                li You can now submit your returns request via the My Account section of our website. To do so please login to your account and click on the My Orders tab. On the right hand side you will see a column titled return or exchange. Select the relevant order in this column. You will be redirected to the returns page where you will be able to select the individual items which you would like to return. Select the appropriate reason for your return and submit the form our customer service team will be in contact soon after to advise you of the following steps.
+        li We will be in touch once we receive, review and can confirm your refund, which will include the cost of your returns postage provided you are in Australia or the US and can provide us with a recipt.
 
-                li We will be in touch once we receive, review and can confirm your refund, which will include the cost of your returns postage provided you are in Australia or the US and can provide us with a recipt.
+      h4 For Exchanges:
+      ol
+        li You can now submit your exchange  request via the My Account section of our website. To do so please login to your account and click on the My Orders tab. On the right hand side you will see a column titled return or exchange. Select the relevant order in this column. You will be redirected to the returns page where you will be able to select the individual items which you would like to exchange. Select the appropriate reason for you return or exchange and submit the form our customer service team will be in contact soon after to advise you of the following steps.
 
-              h4 For Exchanges:
-              ol
-                li You can now submit your exchange  request via the My Account section of our website. To do so please login to your account and click on the My Orders tab. On the right hand side you will see a column titled return or exchange. Select the relevant order in this column. You will be redirected to the returns page where you will be able to select the individual items which you would like to exchange. Select the appropriate reason for you return or exchange and submit the form our customer service team will be in contact soon after to advise you of the following steps.
+        li We will be in touch once we receive, review and can confirm your exchange, which will include the cost of your returns postage.
+        li We will then post you your new garment!
 
-                li We will be in touch once we receive, review and can confirm your exchange, which will include the cost of your returns postage.
-                li We will then post you your new garment!
-
-              h3 How long does it take to process my return?
-              p Once we receive your package, your refund will be processed within 7-10 business days. You will be notified by email once the refund has been processed.
-              
-              h3 How does Store Credit Work?
-              ul 
-                li Store Credit can not be transferred to another person or account.
-                li Store Credit may not be purchased and is only provided when purchased items have been returned and you have selected "Store Credit" as the refund method or more than 2 items from an order are being returned or exchanged.
+      h3 How long does it take to process my return?
+      p Once we receive your package, your refund will be processed within 7-10 business days. You will be notified by email once the refund has been processed.
+      
+      h3 How does Store Credit Work?
+      ul 
+        li Store Credit can not be transferred to another person or account.
+        li Store Credit may not be purchased and is only provided when purchased items have been returned and you have selected "Store Credit" as the refund method or more than 2 items from an order are being returned or exchanged.
