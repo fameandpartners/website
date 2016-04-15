@@ -20,6 +20,10 @@ describe ContactMailer do
       let(:contact) { build :contact, order_number: nil }
       it { is_expected.to_not include('Order Number') }
     end
+
+    it 'checks the receiver email' do
+      expect(mail.to).to eq(['team@fameandpartners.com'])
+    end
   end
 
   describe "#join_team" do
@@ -33,6 +37,10 @@ describe ContactMailer do
     it { is_expected.to include(contact.name)         }
     it { is_expected.to include(contact.linkedin)     }
     it { is_expected.to include(contact.interests)    }
+
+    it 'checks the receiver email' do
+      expect(mail.to).to eq(['talent@fameandpartners.com'])
+    end
   end
 
 end
