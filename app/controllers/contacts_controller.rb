@@ -12,8 +12,7 @@ class ContactsController < ApplicationController
     @contact = Contact.new(params[:contact])
     if @contact.valid?
       ContactMailer.email(@contact).deliver
-      flash[:notice] = "We're on it!"
-      redirect_to success_contact_path
+      redirect_to success_contact_path, notice: "We're on it!"
     else
       render action: :new
     end
@@ -23,8 +22,7 @@ class ContactsController < ApplicationController
     @contact = Contact.new(params[:contact])
     if @contact.valid?
       ContactMailer.join_team(@contact).deliver
-      flash[:notice] = "We're on it!"
-      redirect_to success_contact_path
+      redirect_to success_contact_path, notice: "We're on it!"
     else
       render 'statics/about'
     end
