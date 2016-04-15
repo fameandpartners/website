@@ -324,7 +324,7 @@ FameAndPartners::Application.routes.draw do
     resource 'contact', as: 'contact', only: [:new, :create] do
       get 'success'
     end
-    post '/about' => 'contacts#join_team', :as => :join_team
+    post '/about' => 'contacts#join_team', as: :join_team
 
     # return form
     get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf')

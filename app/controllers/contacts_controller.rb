@@ -3,7 +3,7 @@ class ContactsController < ApplicationController
   layout 'redesign/application'
 
   def new
-    @contact = Contact.new(:site_version => current_site_version.code)
+    @contact = Contact.new(site_version: current_site_version.code)
     title('Contact', default_seo_title)
     @description = ""
   end
