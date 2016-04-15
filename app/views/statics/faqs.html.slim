@@ -171,3 +171,11 @@
                 ul 
                   li Store Credit can not be transferred to another person or account.
                   li Store Credit may not be purchased and is only provided when purchased items have been returned and you have selected "Store Credit" as the refund method or more than 2 items from an order are being returned or exchanged.
+
+javascript:
+  (function ($) {
+    var hash = document.location.hash;
+    if (hash) {
+      $(hash).addClass('in');
+    }
+  }(jQuery));
