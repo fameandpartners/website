@@ -1,0 +1,46 @@
+.growth-plan
+  
+  // hero section
+  .main-hero-wrap.hero-wrap.copy-right 
+    picture.media-wrap.keep-ratio
+      .inner-wrap
+        source media='(max-width: 1023px)' srcset='#{image_path("_growth-plan/hero-mob.jpg")}'
+        source media='(min-width: 1024px)' srcset='#{image_path("_growth-plan/hero-full.jpg")}'
+        img src='#{image_path("_growth-plan/hero-full.jpg")}' srcset='
+          #{image_path("_growth-plan/hero-mob.jpg")} 1023w,
+          #{image_path("_growth-plan/hero-full.jpg")} 1024w' alt='background image'
+    .content-wrap
+      .container
+        .row
+          .col-md-12
+            h1.heading
+              span The Growth Plan
+              .sub-heading What to expect in the coming year
+
+  .container
+    section.row
+      .col-md-12
+        .panel-split.alt
+          .content-wrap-outer
+            .content-wrap-inner
+              .content-wrap
+                h2.section-heading Fit guarantee
+                p
+                  em We offer a superior fit
+                p Just like a luxury tailor we take size, shape and height in to account so that every dress is cut to your body type. This year we’re launching fully personalized sizing too.
+                = link_to 'SEE OUR SIZE GUIDE', size_guide_url, class:'btn btn-lowlight btn-sm'
+          .media-wrap
+            = image_tag "_growth-plan/tile-1.jpg"
+    section.row
+      .col-md-12
+        .panel-split.image-left.alt
+          .media-wrap
+            = image_tag "_growth-plan/tile-2.jpg"
+          .content-wrap-outer
+            .content-wrap-inner
+              .content-wrap
+                h2.section-heading Fit guarantee
+                p
+                  em We offer a superior fit
+                p Just like a luxury tailor we take size, shape and height in to account so that every dress is cut to your body type. This year we’re launching fully personalized sizing too.
+                = link_to 'SEE OUR SIZE GUIDE', size_guide_url, class:'btn btn-lowlight btn-sm'

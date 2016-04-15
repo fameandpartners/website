@@ -279,6 +279,7 @@ FameAndPartners::Application.routes.draw do
     get '/from-our-ceo' => 'statics#yelp', :as => :yelp
     get '/how-it-works', to: redirect("/why-us")
     get '/size-guide'  => 'statics#size_guide', :as => :size_guide
+    get '/growth-plan'  => 'statics#growth_plan', :as => :growth_plan
 
     get '/fashionista2014', to: redirect("/")
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
