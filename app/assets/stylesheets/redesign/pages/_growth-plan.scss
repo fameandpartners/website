@@ -8,15 +8,53 @@
     text-transform: none;
   }
 
-  p {
+  p,
+  li {
     line-height: 1.1;
     font-family: $font-heading;
     font-weight: 300;
   }
 
+  // TODO: this should be re-usable component
+  .section-title {
+    margin-bottom: 50px;
+
+    .section-heading {
+      margin: 0 0 20px;
+    }
+
+    p {
+      margin-bottom: 20px;
+      font-size: 1.25em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+    }
+
+    &.title-partnerships {
+      margin-bottom: 0;
+    }
+
+  }
+
+  // TODO: this should be re-usable component
+  section {
+    margin-bottom: 50px;
+
+    &.alt {
+      background: $c-neutral-3;
+    }
+
+  }
+
   // START - mobile only
   @media (max-width: $bootstrap-md-width - 1px) {
 
+    section.alt {
+      padding-top: 50px;
+    }
 
   }
   // END - mobile only
@@ -32,6 +70,7 @@
 
       .heading {
         max-width: 360px;
+        color: $c-neutral-white;
       }
 
     }

@@ -89,6 +89,7 @@
     }
 
     p,
+    li,
     address {
       font-size: 1.25em;
     }
@@ -101,9 +102,19 @@
 
     p,
     a,
+    ul,
     address,
     .btn {
       margin-bottom: 20px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+    }
+
+    li {
+      margin-bottom: 5px;
 
       &:last-child {
         margin-bottom: 0;
@@ -128,12 +139,27 @@
       @include box-shadow(0 1px 3px 0 rgba($c-neutral-black, .25));
     }
 
+    // START - mobile only
+    @media (max-width: $bootstrap-md-width - 1px) {
+
+      ul {
+        padding: 0;
+        list-style: none;
+      }
+
+    }
+    // END - mobile only
+
     @include desktop {
       min-height: 320px;
 
       .content-wrap {
         padding: 0 20% 0 0;
         text-align: left;
+      }
+
+      ul {
+        padding-left: 20px;
       }
 
       .icon {
@@ -143,6 +169,10 @@
         right: -35px;
         margin-top: -35px;
         margin-left: 0;
+      }
+
+      &.image-left .content-wrap {
+        padding: 0 0 0 20%;
       }
 
     }
