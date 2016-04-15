@@ -21,4 +21,18 @@ describe ContactMailer do
       it { is_expected.to_not include('Order Number') }
     end
   end
+
+  describe "#join_team" do
+    let(:contact)      { build(:contact, name: 'John Doe', linkedin: 'linkedin.com/johndoe',
+                                interests: 'bla bla bla', site_version: 'site_version' ) }
+    let(:mail)         { described_class.join_team(contact) }
+    subject(:body)     { mail.body.encoded }
+
+    it('upcases the site version') {
+         is_expected.to include('SITE_VERSION')       }
+    it { is_expected.to include(contact.name)         }
+    it { is_expected.to include(contact.linkedin)     }
+    it { is_expected.to include(contact.interests)    }
+  end
+
 end
