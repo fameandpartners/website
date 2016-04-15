@@ -38,7 +38,7 @@ class EmailCapture
         if email_changed?
           #Making an assumption here: The only place where the email changes is on "Account Settings"
           update_list(get_email, email, retrieve_first_name, retrieve_last_name)
-        else
+        elsif !unsubscribed?(email)
           subscribe_list(email, merge_variables)
         end
       rescue Mailchimp::ValidationError => e
@@ -58,7 +58,7 @@ class EmailCapture
 
   def subscribe_list(current_email, merge_variables)
     mailchimp.lists.subscribe(set_list_id, {"email" => current_email},
-                              merge_variables, 'html', false, true, true, false)
+                                merge_variables, 'html', false, true, true, false)
   end
 
   def email_changed?
@@ -128,9 +128,12 @@ class EmailCapture
   end
 
   def set_list_id
-    list_id = configatron.mailchimp.list_id
+    configatron.mailchimp.list_id
+  end
 
-    list_id
+  def unsubscribed?(email)
+    mailchimp.lists.member_info(set_list_id, [email: email])
+      .try(:[], 'data').try(:[], 0).try(:[], 'status') == 'unsubscribed'
   end
 
 end
