@@ -32,7 +32,7 @@ window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
 
   success: =>
     title = 'thanks babe'
-    message = 'Thanks for signing up. Use this promocode for $20 off your purchase: NEWS20.'
+    message = 'Thanks for signing up. Use this promocode for $20 off your purchase: NEWGIRL25.'
     window.helpers.showAlert(message: message, type: 'success', title: title, timeout: 55555)
     $.cookie('email_newsletter', 'close', { expires: 365, path: '/' })
     window.track.event('Newsletter', 'Submitted', @campaign)
