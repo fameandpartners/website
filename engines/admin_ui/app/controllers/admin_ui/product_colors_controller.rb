@@ -2,6 +2,7 @@ require 'datagrid'
 
 module AdminUi
   class ProductColorsController < AdminUi::ApplicationController
+
     def index
       @collection = ProductColorValuesGrid.new(params[:product_color_values_grid])
       respond_to do |f|
@@ -18,27 +19,25 @@ module AdminUi
     end
 
     def edit
-      @product_color_value = ProductColorValue.find(params[:id].to_i)
+      @product_color_value = ProductColorValue.find(params[:id])
     end
 
     def update
-      @product_color_value = ProductColorValue.find(params[:id].to_i)
+      @product_color_value = ProductColorValue.find(params[:id])
+      @product_color_value.tap do |p|
+        p.active = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:product_color_value][:active])
+        p.custom = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:product_color_value][:custom])
+      end
 
-      message = { error: 'A problem occurred saving.' }
-
-      if new_active_state = params[:product_color_value][:active]
-
-        @product_color_value.active = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(new_active_state)
-        @product_color_value.custom = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:product_color_value][:custom]) 
-
-        if @product_color_value.save
-          new_state = @product_color_value.active? ? 'active' : 'inactive'
-
-          message = { success: "Product Color is now (#{new_state})" }
-        end
+      if @product_color_value.save
+        new_state = @product_color_value.active? ? 'active' : 'inactive'
+        message = { success: "Product Color is now (#{new_state})" }
+      else
+        message = { error: 'A problem occurred on saving. Please try again later.' }
       end
 
       redirect_to product_colors_path, flash: message
     end
+
   end
 end
