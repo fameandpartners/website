@@ -3,7 +3,7 @@ class ContactsController < ApplicationController
   layout 'redesign/application'
 
   def new
-    @contact = Contact.new(:site_version => current_site_version.code)
+    @contact = Contact.new(site_version: current_site_version.code)
     title('Contact', default_seo_title)
     @description = ""
   end
@@ -12,10 +12,19 @@ class ContactsController < ApplicationController
     @contact = Contact.new(params[:contact])
     if @contact.valid?
       ContactMailer.email(@contact).deliver
-      flash[:notice] = "We're on it!"
-      redirect_to success_contact_path
+      redirect_to success_contact_path, notice: "We're on it!"
     else
       render action: :new
+    end
+  end
+
+  def join_team
+    @contact = Contact.new(params[:contact])
+    if @contact.valid?
+      ContactMailer.join_team(@contact).deliver
+      redirect_to success_contact_path, notice: "We're on it!"
+    else
+      render 'statics/about'
     end
   end
 

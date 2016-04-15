@@ -12,4 +12,16 @@ class ContactMailer < ActionMailer::Base
       layout: false
     )
   end
+
+  def join_team(contact)
+    @contact = contact
+
+    mail(
+      to: 'talent@fameandpartners.com',
+      from: @contact.email,
+      subject: "[#{@contact.site_version.upcase}] Join team",
+      layout: false
+    )
+  end
+
 end
