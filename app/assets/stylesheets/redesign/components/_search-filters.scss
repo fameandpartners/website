@@ -1,6 +1,6 @@
 /* [Search Filters]
 -------------------------------------------------------*/
-.search-filters {
+.search-filters, .page-content.faq {
   color: $c-neutral-10;
 
   a {
@@ -133,7 +133,7 @@
       &:hover {
         color: $c-neutral-black;
       }
-      
+
     }
 
   }
@@ -160,7 +160,7 @@
       padding-left: 0;
       padding-right: 0;
     }
-    
+
     label {
       position: relative;
       width: 100%;
