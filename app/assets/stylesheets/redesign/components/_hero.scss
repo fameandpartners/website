@@ -25,11 +25,15 @@
     .heading {
       margin: 50px 0 0;
       text-transform: none;
-      font-size: 3.8rem;
       color: $c-neutral-black;
 
       > span {
         display: block;
+
+        &:first-child {
+          font-size: 3.8rem;
+        }
+
       }
 
     }
@@ -46,14 +50,10 @@
 
     .sub-heading {
       display: inline-block;
+      padding-top: 5px;
       font-size: 2rem;
       font-style: italic;
-      
-      &:first-of-type {
-        padding-top: 5px;
-        border-top: solid $c-neutral-black 1px;
-      }
-
+      border-top: solid $c-neutral-black 1px;
     }
 
     // START - desktop
@@ -89,10 +89,14 @@
       .heading {
         width: 50%;
         margin: 0 0 0 50%;
-        font-size: 4rem;
+        
+        > span:first-child {
+          font-size: 4rem;
+        }
+
       }
 
-      .sub-heading:first-of-type {
+      .sub-heading {
         padding-top: 0;
         border-top: none;
       }
