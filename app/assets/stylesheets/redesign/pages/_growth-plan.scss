@@ -8,11 +8,29 @@
     text-transform: none;
   }
 
+  h4 {
+    font-family: $font-family-secondary;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
   p,
   li {
     line-height: 1.1;
     font-family: $font-heading;
     font-weight: 300;
+  }
+
+  .center-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: block;
+    }
+
   }
 
   // TODO: this should be re-usable component
@@ -23,7 +41,8 @@
       margin: 0 0 20px;
     }
 
-    p {
+    p,
+    ul {
       margin-bottom: 20px;
       font-size: 1.25em;
 
@@ -44,6 +63,7 @@
     margin-bottom: 50px;
 
     &.alt {
+      padding: 50px 0;
       background: $c-neutral-3;
     }
 
@@ -54,6 +74,15 @@
 
     section.alt {
       padding-top: 50px;
+    }
+
+    .title-partnerships {
+      text-align: center;
+
+      .content-wrap {
+        margin-bottom: 20px;
+      }
+
     }
 
   }
@@ -71,6 +100,19 @@
       .heading {
         max-width: 360px;
         color: $c-neutral-white;
+      }
+
+    }
+
+    .title-partnerships {
+
+      .content-wrap {
+        padding-right: 20%;
+      }
+
+      &.left-col .content-wrap {
+        padding-left: 20%;
+        padding-right: 0;
       }
 
     }
