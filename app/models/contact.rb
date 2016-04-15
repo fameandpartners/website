@@ -32,13 +32,13 @@ class Contact
   validates :site_version, presence: true
   validates :email, format: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i, presence: true
 
-  with_options if: :contact_form? do
-    validates :first_name, :last_name, :subject, :message, presence: true
+  with_options if: :contact_form? do |contact|
+    contact.validates :first_name, :last_name, :subject, :message, presence: true
   end
 
-  with_options if: :join_us_form? do
-    validates :name, :interests, presence: true
-    validates :linkedin, format: { with: /\A((http|https):\/\/)?(www.)?linkedin.com\//, message: 'use a valid LinkedIn URL' },
+  with_options if: :join_us_form? do |join_team|
+    join_team.validates :name, :interests, presence: true
+    join_team.validates :linkedin, format: { with: /\A((http|https):\/\/)?(www.)?linkedin.com\//, message: 'use a valid LinkedIn URL' },
       if: Proc.new { |c| c.linkedin.present? }
   end
 
