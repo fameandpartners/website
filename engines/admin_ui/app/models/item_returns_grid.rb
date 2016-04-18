@@ -4,7 +4,7 @@ class ItemReturnsGrid
   include Datagrid
 
   scope do
-    ItemReturn
+    ItemReturn.includes(:line_item)
   end
 
   filter(:acceptance_status, :enum,
@@ -39,13 +39,13 @@ class ItemReturnsGrid
     link_to item_return.order_number, spree.admin_order_path(id: item_return.order_number)
   end
   column :order_number,           header: 'Order', html: false
-  column :height,                 header: 'Height' do |item_return|
-    item_return.line_item.personalization.try(:height)
-  end
   column :product_style_number,   header: 'Style'
   column :product_name,           header: 'Product'
   column :product_colour,         header: 'Colour'
   column :product_size,           header: 'Size'
+  column :height,                 header: 'Height' do |item_return|
+    item_return.line_item.try(:personalization).try(:height)
+  end
   column :product_customisations, header: 'Custom?' do |item_return|
     format(item_return.product_customisations) do |is_custom|
       content_tag(:i, '', class: 'fa fa-scissors  fa-lg text-warning' ) if is_custom
@@ -54,5 +54,11 @@ class ItemReturnsGrid
 
   column :requested_at do |ir|
     ir.requested_at.try :to_date
+  end
+
+  column :reason_category,        header: 'Reason Category'
+  column :reason_sub_category,    header: 'Reason sub-Category'
+  column :country,                header: 'Country' do |item_return|
+    item_return.line_item.try(:order).try(:shipping_address).try(:country).try(:name)
   end
 end
