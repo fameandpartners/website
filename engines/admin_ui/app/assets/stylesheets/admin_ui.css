@@ -10,6 +10,7 @@
  *
  *= require 'inspinia-rails'
  *= require 'jquery-ui'
+ *= require chosen.scss
  *= require_self
  *= require_tree .
  * Loaded from the main application styles

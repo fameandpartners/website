@@ -13,6 +13,7 @@
 //= require libs/underscore-min
 //= require inspinia-rails
 //= require jquery-ui
+//= require chosen-jquery
 
 //= require react
 //= require react_ujs
