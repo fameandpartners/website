@@ -1,0 +1,24 @@
+#modal-cny-template.hidden
+
+coffee:
+  $ ->
+    if $("#modal-cny-template").length != 0
+      if $.cookie('cny-modal-displayed') != 'true'
+        addToCartModal = new window.page.EmailCaptureModal({
+          promocode: "",
+          content: "",
+          container: "#modal-cny-template",
+          heading: "<span style=\"font-size:0.7em;\">Manufacturing Delays</span>",
+          message: "<div style=\"font-size:0.7em; padding-left:1rem; padding-right:1rem;\">" +
+                  "<div>Due to local holidays, we are currently experiencing some delays during the manufacture of garments.</div>" +
+                  "<div>Please note that dresses ordered between 15 February - 28 February may not be delivered until mid March.<div>" +
+                  "<div>If you have an urgent request, please contact our customer service team to see if we can still accommodate your event dates.</div>" +
+                  "<p>Normal order cancellation policies apply during this period - please refer to our full <a href='http://www.fameandpartners.com/terms'>Terms and Conditions</a>.</p>" +
+                  "<div style=\"margin-top:10px;\"><a class=\"btn btn-black\" onclick=\"vex.closeAll();\">I understand</a/></div>" +
+                  "</div>",
+          className: "classic-modal welcome-modal",
+          timeout: 0,
+          timer: false,
+          force: false
+        });
+        $.cookie('cny-modal-displayed', 'true')
