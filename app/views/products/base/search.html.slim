@@ -16,23 +16,23 @@ ruby:
         p We couldn't find the stuff you were looking for.
 
 .page-content.products-collections.category
-  - if !@collection.none?
-    = render :partial => 'products/collections/filters_sort'
   .container-fluid
-    - if @collection.none?
-      .row.relative
-        .col.col-md-12.text-center
-          p
-          | Don't sweat it. #{link_to('Browse our dresses', dresses_path)}
+    - if !@collection.none?
+      = render :partial => 'products/collections/filters_sort'
+      - if @collection.none?
+        .row.relative
+          .col.col-md-12.text-center
+            p
+            | Don't sweat it. #{link_to('Browse our dresses', dresses_path)}
 
-    - else
-      .row-fluid
-        .col-md-3.filter-col
-          div.inner
-            = render :partial => 'products/collections/filters_color_shape_style'
+      - else
+        .row
+          .col-md-3.filter-col
+            div.inner
+              = render :partial => 'products/collections/filters_color_shape_style'
 
-        .col-md-9
-          .container-fluid.relative.products-collection
-            = render partial: 'products/collections/products_with_content', locals: {col: 3}
+          .col-md-9
+            .container-fluid.relative.products-collection
+              = render partial: 'products/collections/products_with_content', locals: {col: 3}
 
-            = render partial: 'products/collections/pagination'
+              = render partial: 'products/collections/pagination'
