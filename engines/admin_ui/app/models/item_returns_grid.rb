@@ -38,6 +38,10 @@ class ItemReturnsGrid
   column :order_number,           header: 'Order', order: 'item_returns.order_number', html: true do |item_return|
     link_to item_return.order_number, spree.admin_order_path(id: item_return.order_number)
   end
+  column :order_number,           header: 'Order', html: false
+  column :height,                 header: 'Height' do |item_return|
+    item_return.line_item.personalization.try(:height)
+  end
   column :product_style_number,   header: 'Style'
   column :product_name,           header: 'Product'
   column :product_colour,         header: 'Colour'
