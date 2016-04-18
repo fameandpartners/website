@@ -12,7 +12,7 @@
         .row
           .col-md-3
             p
-              b SKY
+              b SKU
           .col-md-9
             span.label #{@product_color_value.product.sku}
         .row
@@ -51,7 +51,7 @@
             = f.check_box :custom, class: 'form-control'
             = f.label :custom
           .form-group
-            = f.submit 'Save'
+            = f.submit 'Update', class: 'btn btn-primary'
           alert.alert-warning
             | Warning: updating colors custom/active attributes require product reindexing. To do it, proceed to the &nbsp;
             = link_to 'product index section', backend_product_indexes_path
