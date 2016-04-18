@@ -51,7 +51,9 @@ class ItemReturnsGrid
       content_tag(:i, '', class: 'fa fa-scissors  fa-lg text-warning' ) if is_custom
     end
   end
-
+  column :customisation_type,     header: 'Customisation type' do |item_return|
+    item_return.line_item.options_text if item_return.product_customisations
+  end
   column :requested_at do |ir|
     ir.requested_at.try :to_date
   end
