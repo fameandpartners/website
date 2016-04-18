@@ -1,6 +1,7 @@
 module AdminUi
   module Reports
     class FactoryFaultsController < AdminUi::Reports::StreamingCsvController
+      include AdminUi::Reports::Concerns::DateParamCoercer
 
       private
 
@@ -19,26 +20,6 @@ module AdminUi
             DateTime.now.to_s(:filename),
         ].join('_') << ".csv"
       end
-
-      # lol programming
-      def from_date
-        date(params[:from], default: 6.weeks.ago)
-      end
-
-      def to_date
-        date(params[:to], default: Date.today)
-      end
-
-      def date(parameter, default: default)
-        if parameter.present?
-          Date.parse(parameter.to_s).to_date
-        else
-          default
-        end
-      rescue StandardError => e
-        default
-      end
-
     end
   end
 end
