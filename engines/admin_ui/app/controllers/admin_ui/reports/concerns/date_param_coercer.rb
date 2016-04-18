@@ -19,11 +19,7 @@ module AdminUi
         end
 
         private def normalize_date(parameter, default: default)
-          if parameter.present?
-            Date.parse(parameter.to_s).to_date
-          else
-            default
-          end
+          Date.parse(parameter)
         rescue StandardError => _
           default
         end
