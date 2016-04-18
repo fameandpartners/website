@@ -20,17 +20,18 @@ module Reports
     end
 
     def each
-      to_enum(__callee__) unless block_given?
-
-      report_query.find_each(batch_size: 300) do |return_item|
+      report_query.find_each(batch_size: 50) do |return_item|
         yield BergenReturnsPresenter.new(return_item)
       end
     end
 
     def report_query
-      ReturnRequestItem
-        .includes(order_return_request: :order)
-        .where('created_at BETWEEN ? AND ?', @from, @to)
+      ReturnRequestItem.
+        includes({
+                   order_return_request: { order: :shipping_method },
+                   line_item:            [:variant, { personalization: [:size, :color] }]
+                 }).
+        where('created_at BETWEEN ? AND ?', @from, @to)
     end
 
     class BergenReturnsPresenter < SimpleDelegator
