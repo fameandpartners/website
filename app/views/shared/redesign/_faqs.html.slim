@@ -1,0 +1,176 @@
+.page-content.faq
+  .container-fluid
+    .row
+      .col-xs-12.col-md-10.col-md-push-1
+        h2#faqs-about About us
+        #accordion-about-us.panel-group role="tablist" aria-multiselectable="true"
+          .panel.panel-default
+
+            #heading-about-us.panel-heading role="tab"
+              h3
+                a.panel-title role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-about-us" aria-expanded="false" aria-controls="collapse-about-us"
+                  | Do you have any store locations?
+
+            #collapse-about-us.panel-collapse.collapse role="tabpanel" aria-labelledby="heading-about-us"
+              .panel-body
+                p
+                  ' We are an online fashion boutique which means you can shop with us 24/7 from all over the world. To check if we currently offer shipping to your country please
+                  => link_to 'Contact Us', new_contact_path
+                  '.
+                p
+                  ' We are currently looking at cities to do pop up stores in, if you would like to see us have one at a location near you,
+                    => link_to 'Contact Us', new_contact_path
+                    ' with your suggestion.
+
+        h2#faqs-orders Orders
+
+        #accordion-orders.panel-group role="tablist" aria-multiselectable="true"
+          .panel.panel-default
+
+            #heading-orders-track.panel-heading role="tab"
+              h3
+                a.panel-title role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-orders-track" aria-expanded="false" aria-controls="collapse-orders-track"
+                  | How can I track my order?
+
+            #collapse-orders-track.panel-collapse.collapse role="tabpanel" aria-labelledby="heading-orders-track"
+              .panel-body
+                h4 You can now track you order in My Account.
+                p Login to your account and select the My Orders tab. Here you will be able to see if your dress has been shipped yet. The two statuses are not yet shipped or a tracking number. The tracking number will link through to our local courier service so you will be able to login to their portal and track where you order is.
+
+            #heading-orders-cancel.panel-heading role="tab"
+              h3
+                a.panel-title role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-orders-cancel" aria-expanded="false" aria-controls="collapse-orders-cancel"
+                  | Can I cancel my order?
+
+            #collapse-orders-cancel.panel-collapse.collapse role="tabpanel" aria-labelledby="heading-orders-cancel"
+                .panel-body
+                  p
+                    ' If you would like to cancel your order, please
+                    => link_to 'Contact Us', new_contact_path
+                    ' immediately with your cancellation request and order number.
+                  p If your dress has been ordered with 'express making' we cannot accept cancellations as your dress goes immediately into production.
+                  p If your dress is customised we cannot accept cancellations after 24 hours from purchase. This is because your dress is already in production. If you wish to cancel your order outside of 24 hours, we can offer you a 50% refund and a 50% credit note with Fame & Partners. This is because the fabric has already been purchased and production started on your custom dress and in most cases we can not resell your dress at retail price.
+
+
+
+
+
+        h2#faqs-shipping Shipping &amp; deliveries
+
+        #accordion-shipping.panel-group role="tablist" aria-multiselectable="true"
+          .panel.panel-default
+
+            #heading-shipping-track.panel-heading role="tab"
+              h3
+                a.panel-title role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-shipping-track" aria-expanded="false" aria-controls="collapse-shipping-track"
+                  | When will my order ship?
+
+            #collapse-shipping-track.panel-collapse.collapse role="tabpanel" aria-labelledby="heading-shipping-track"
+              .panel-body
+                p Shipping times vary depending on the complexity of any customisations you might order. All of our dresses are made on demand and making will commence the day your order is received. Our make time varies depending on customisations; between 4 - 8 business days which means you will receive your dress in up to 10 business days. We recommend allowing 2 weeks from the date of your purchase to ensure you have enough time for your dress to arrive for your special event.
+
+                p Please note: Orders are not shipped on the weekends or holidays.
+
+            #heading-shipping-order-take.panel-heading role="tab"
+              h3
+                a.panel-title role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-shipping-order-take" aria-expanded="false" aria-controls="collapse-shipping-order-take"
+                  | How long will it take for my order to arrive?
+
+            #collapse-shipping-order-take.panel-collapse.collapse role="tabpanel" aria-labelledby="heading-shipping-order-take"
+              .panel-body
+                p Please refer to the table below to determine your shipping times:
+
+                = render 'statics/shipping_tables'
+
+                p Please note that we have no control over delivery times and that unexpected delays may be possible due to customs.
+
+
+
+
+
+
+
+
+
+
+        h2#faqs-returns Returns
+
+        #accordion-returns.panel-group role="tablist" aria-multiselectable="true"
+          .panel.panel-default
+
+            #heading-returns-policy.panel-heading role="tab"
+              h3
+                a.panel-title role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-returns-policy" aria-expanded="false" aria-controls="collapse-returns-policy"
+                  | What is your returns policy?
+
+            #collapse-returns-policy.panel-collapse.collapse role="tabpanel" aria-labelledby="heading-returns-policy"
+              .panel-body
+                p If for any reason you are not happy with your selection, you can exchange an item for another item, or return it for a refund, subject to the following terms and limitations:
+
+                ul
+                  li Standard Dresses may be returned or exchanged for 30 days from original purchase date for a refund or store credit.
+                  li A 50% restocking fee is applied for all returned or exchanged Custom Dresses.  Custom Dresses may be returned orexchanged for 30 days from original purchase date for a refund or store credit.
+                  li The cost of your returns postage fee for non-sale items will be reimbursed up to the value of $USD15. The postage receipt must be included in your returns package for reimbursement.
+                  li Up to 2 dresses from an order that qualify for return/exchange can be returned from an order for a refund.  Returns &exchanges on orders with more than 2 dresses will have the remainder of the refund issued for store credit.
+                  li Any item to be returned or exchanged must be in new, unused and resalable condition, with the DO NOT REMOVE tag still attached in the same place as originally sent.
+                  li No returns on sale items.
+
+            #heading-returns-size-color.panel-heading role="tab"
+              h3
+                a.panel-title role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-returns-size-color" aria-expanded="false" aria-controls="collapse-returns-size-color"
+                  | Can I exchange for a different size or colour?
+
+            #collapse-returns-size-color.panel-collapse.collapse role="tabpanel" aria-labelledby="heading-returns-size-color"
+              .panel-body
+                p Of course! It is completely free, provided you are in Australia or the US to return for a different size. It is also completely free to return for a different recommended colour. If you ordered a customisation, including custom colours, we will charge a restocking fee of 50% of the garments purchase price.
+
+
+            #heading-returns-returns.panel-heading role="tab"
+              h3
+                a.panel-title role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-returns-returns" aria-expanded="false" aria-controls="collapse-returns-returns"
+                  | What are the steps I follow to return or exchange an item?
+
+            #collapse-returns-returns.panel-collapse.collapse role="tabpanel" aria-labelledby="heading-returns-returns"
+              .panel-body
+                p In just a few easy steps you can return or exchange as follows, depending where you live!
+
+                h4 For Returns:
+                ol
+                  li You can now submit your returns request via the My Account section of our website. To do so please login to your account and click on the My Orders tab. On the right hand side you will see a column titled return or exchange. Select the relevant order in this column. You will be redirected to the returns page where you will be able to select the individual items which you would like to return. Select the appropriate reason for your return and submit the form our customer service team will be in contact soon after to advise you of the following steps.
+
+                  li We will be in touch once we receive, review and can confirm your refund, which will include the cost of your returns postage provided you are in Australia or the US and can provide us with a recipt.
+
+                h4 For Exchanges:
+                ol
+                  li You can now submit your exchange  request via the My Account section of our website. To do so please login to your account and click on the My Orders tab. On the right hand side you will see a column titled return or exchange. Select the relevant order in this column. You will be redirected to the returns page where you will be able to select the individual items which you would like to exchange. Select the appropriate reason for you return or exchange and submit the form our customer service team will be in contact soon after to advise you of the following steps.
+
+                  li We will be in touch once we receive, review and can confirm your exchange, which will include the cost of your returns postage.
+                  li We will then post you your new garment!
+
+            #heading-returns-process.panel-heading role="tab"
+              h3
+                a.panel-title role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-returns-process" aria-expanded="false" aria-controls="collapse-returns-process"
+                  | How long does it take to process my return?
+
+            #collapse-returns-process.panel-collapse.collapse role="tabpanel" aria-labelledby="heading-returns-process"
+              .panel-body
+                p Once we receive your package, your refund will be processed within 7-10 business days. You will be notified by email once the refund has been processed.
+
+            #heading-returns-credit.panel-heading role="tab"
+              h3
+                a.panel-title role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-returns-credit" aria-expanded="false" aria-controls="collapse-returns-credit"
+                  | How does Store Credit Work?
+
+            #collapse-returns-credit.panel-collapse.collapse role="tabpanel" aria-labelledby="heading-returns-credit"
+              .panel-body
+                ul
+                  li Store Credit can not be transferred to another person or account.
+                  li Store Credit may not be purchased and is only provided when purchased items have been returned and you have selected "Store Credit" as the refund method or more than 2 items from an order are being returned or exchanged.
+
+javascript:
+  (function ($) {
+    var hash = document.location.hash;
+    if (hash) {
+      $(hash).addClass('in');
+    }
+  }(jQuery));
