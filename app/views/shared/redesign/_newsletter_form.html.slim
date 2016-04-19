@@ -1,22 +1,5 @@
-ruby:
-  formID = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
-  details = Marketing::Subscriber.new(
-    user: current_spree_user,
-    token: cookies['utm_guest_token'],
-    promocode: decode(params[:pc]),
-    ipaddress: request.remote_ip
-  ).details
-  details[:campaign] = 'home' if details[:campaign].blank?
-
 form.input-btn id=(formID)
   input.js-en-field-email     type="email"  placeholder="Register your email for this $25 offer"
-  input.js-en-field-name      type="hidden" value=(current_spree_user.try(:full_name))
-  input.js-en-field-country   type="hidden" value=(details[:country])
-  input.js-en-field-promocode type="hidden" value=(details[:promocode])
-  input.js-en-field-source    type="hidden" value=(details[:source] || cookies[:referrer])
-  input.js-en-field-campaign  type="hidden" value=(details[:campaign])
-  input.js-en-field-ip        type="hidden" value=(details[:ipaddress])
-  input.js-en-field-mailchimp type='hidden' value=(mailchimp_campaigns_email_capture_path)
   button.btn.btn-black.btn-md type="submit" Submit
 
 = content_for :inline_javascript do
