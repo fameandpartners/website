@@ -16,10 +16,10 @@ window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
     $this = $(e.target)
     url = $('.js-en-field-mailchimp', $this)[0].value
     email = $('.js-en-field-email', $this)[0].value
-    $.getJSON(@url(), $this.serialize(), @handler)
+    $.getJSON(url, $this.serialize(), @handler)
     $.ajax
-      url: url,
-      method: 'GET',
+      url: url
+      method: 'GET'
       data: { email: email }
 
   handler: (data) =>

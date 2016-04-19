@@ -1,5 +1,9 @@
+ruby:
+  formID = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
+
 form.input-btn id=(formID)
   input.js-en-field-email     type="email"  placeholder="Register your email for this $25 offer"
+  input.js-en-field-mailchimp type='hidden' value=(mailchimp_campaigns_email_capture_path)
   button.btn.btn-black.btn-md type="submit" Submit
 
 = content_for :inline_javascript do
