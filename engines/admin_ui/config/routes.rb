@@ -51,8 +51,11 @@ AdminUi::Engine.routes.draw do
   end
 
   resources :variants
-  resources :product_colors
-  get 'product_colors/colors_options/:product_id' => 'product_colors#colors_options_json'
+  resources :product_colors do
+    collection do
+      get 'colors_options/:product_id' => 'product_colors#colors_options_json'
+    end
+  end
 
   namespace :content do
     resources :pages
