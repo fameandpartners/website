@@ -1,32 +1,16 @@
-$.fn.extend
-  dynamicSelectable: ->
-    $(@).each (i, el) ->
-      new DynamicSelectable($(el))
+$ ->
+  urlTemplate = '/fame_admin/product_colors/colors_options/:product_id'
+  productSelect = $('#product_color_value_product_id')
+  colorSelect = $('#product_color_value_option_value_id')
 
-class DynamicSelectable
-  constructor: ($select) ->
-    @init($select)
-
-  init: ($select) ->
-    @urlTemplate = '/fame_admin/product_colors/colors_options/:product_id'
-    @$targetSelect = $($select.data('selectableTarget'))
-    $select.on 'change', =>
-      @clearTarget()
-      url = @constructUrl($select.val())
+  productSelect.on 'change', =>
+      colorSelect.html('<option></option>')
+      url = urlTemplate.replace(/:product_id/, productSelect.val()) if productSelect.val()
       if url
         $.getJSON url, (data) =>
           $.each data['product_colors'], (index, el) =>
-            @$targetSelect.append "<option value='#{el.id}'>#{el.name}</option>"
-          @reinitializeTarget()
+            colorSelect.append "<option value='#{el.id}'>#{el.name}</option>"
+          colorSelect.trigger("chosen:updated")
       else
-        @reinitializeTarget()
+        colorSelect.trigger("chosen:updated")
 
-  reinitializeTarget: ->
-    @$targetSelect.trigger("chosen:updated")
-
-  clearTarget: ->
-    @$targetSelect.html('<option></option>')
-
-  constructUrl: (id) ->
-    if id && id != ''
-      @urlTemplate.replace(/:product_id/, id)

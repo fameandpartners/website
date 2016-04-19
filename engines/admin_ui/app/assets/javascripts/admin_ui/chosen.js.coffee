@@ -5,5 +5,3 @@ $ ->
     no_results_text: 'No results matched'
     width: '400px'
 
-$ ->
-  $('select[data-selectable-target]').dynamicSelectable()
