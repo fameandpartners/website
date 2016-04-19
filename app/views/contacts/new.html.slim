@@ -1,46 +1,58 @@
 .page-content.contact-v2
   .container
     .row
-      .col-md-12
-        h1.title-line-on-sides
-          .inner-wrap How can we help?
+      .col-md-7
+        h1 How can we help?
+        
+        h2.h5 Your details
 
-      = form_for @contact, url: contact_path, method: :post, html: {class: 'col-md-12'} do |f|
-        = f.hidden_field :site_version
-        .row
-          .col-md-5
-            .form-group
-              = f.label :subject, 'What can we help with?'
-              = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, params[:selected_option]), {}, :class => 'form-control form-control-md selectbox'
-              .help-block
-                | Having a bad dress day? 
-                = link_to 'Return or exchange an order', user_orders_path
-            .form-group
-              = f.label :first_name
-                ' First name *
-              = f.text_field :first_name, :class => 'form-control form-control-md'
-            .form-group
-              = f.label :last_name
-                ' Last name *
-              = f.text_field :last_name, :class => 'form-control form-control-md'
-            .form-group
-              = f.label :email
-                ' Email *
-              = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
-            .form-group
-              = f.label :phone
-              = f.text_field :phone, :class => 'form-control form-control-md'
-              .help-block
-                | (include country code)
-          .col-md-7
-            .form-group
-              = f.label :order_number
-              = f.text_field :order_number, :class => 'form-control form-control-md'
-              .help-block
-                | (if you have one)
-            .form-group
-              = f.label :message, 'Your Message *'
-              = f.text_area :message, :class => 'form-control custom'
-            .row
-              .col-md-6
-                = f.submit "Send", class: 'btn btn-black btn-block'
+        = form_for @contact, url: contact_path, method: :post, html: {class: 'col-md-12 container'} do |f|
+          = f.hidden_field :site_version
+        
+          .row.form-group
+            = f.label :first_name
+              ' First name *
+            = f.text_field :first_name, :class => 'form-control form-control-md'
+              
+          .row.form-group
+            = f.label :last_name
+              ' Last name *
+            = f.text_field :last_name, :class => 'form-control form-control-md'
+          .row.form-group
+            = f.label :email
+              ' Email *
+            = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
+          .row.form-group
+            = f.label :phone
+              ' Phone number
+            = f.text_field :phone, :class => 'form-control form-control-md'
+            .help-block
+              | (include country code)
+          
+          .row
+            .col-md-12.no-padding
+              h3.h5 What can we help with?
+          
+              .container-fluid
+                ul.nav.nav-pill.row roll="tablist"
+                  li.active.col-xs-4.no-padding roll="presentation"
+                    a href="#making-a-purchase" aria-controls="making-a-purchase" role="tab" data-toggle="pill" Making a purchase
+                  li.col-xs-4.no-padding role="presentation"
+                    a href="#exisitng-orders" aria-controls="exisitng-orders" role="tab" data-toggle="pill" Existing orders
+                  li.col-xs-4.no-padding role="presentation"
+                    a href="#other-enquiries" aria-controls="other-enquiries" role="tab" data-toggle="pill" Other enquiries
+              
+              .tab-content
+                #making-a-purchase.tab-pane.active roll="tabpanel"
+                  p Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass.
+                #exisitng-orders.tab-pane roll="tabpanel"
+                  .form-group
+                    = f.label :subject, 'Category'
+                    = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, params[:selected_option]), {}, :class => 'form-control form-control-md selectbox'
+                #other-enquiries.tab-pane roll="tabpanel"
+                  .form-group
+                    = f.label :message, 'Your enquiry'
+                    = f.text_area :message, :class => 'form-control custom'
+          .row
+            .col-md-6.no-padding
+              = f.submit "submit", class: 'btn btn-black btn-block'

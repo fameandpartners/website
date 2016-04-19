@@ -2,6 +2,16 @@
 -------------------------------------------------------*/
 .contact-v2 {
 
+  h1 {
+    text-transform: capitalize;
+  }
+
+  h2.h5, h3.h5 {
+    font-family: $font-family-secondary;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+
   a {
     color: inherit;
     text-decoration: underline;
@@ -9,6 +19,30 @@
 
   textarea.custom {
     height: 318px;
+  }
+
+  ul.nav {
+
+    li {
+      background-color: $c-neutral-2;
+      a {
+        text-decoration: none;
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 1.3rem;
+      }
+      &.active {
+        background-color: $c-brand-blue-pale;
+        a {
+          color: $c-neutral-white;
+        }
+      }
+    }
+
+  }
+
+  .tab-content {
+    padding: 1.5rem 0;
   }
 
   .btn {
