@@ -3,21 +3,23 @@
   ul
     li.active
       .inner-wrap
-        a href='#collection1' data-toggle="tab" Partners in Crime Collection
+        a href='#collection1' data-toggle="tab" Pass the Mimosa
     li
       .inner-wrap
-        a href='#collection2' data-toggle="tab" Just The Girls Collection
+        a href='#collection2' data-toggle="tab" Summer &lsquo;16
     li
       .inner-wrap
-        a href='#collection3' data-toggle="tab" Love Lace Collection
+        a href='#collection3' data-toggle="tab" Partners in Crime Collection
 
   .tab-wrap
-    = link_to partners_in_crime_collection_path, id: 'collection1', class: 'tab active'
+    = link_to '#', id: 'collection1', class: 'tab active'
+      = image_tag 'home-page-tiles/tab-collectionbox-9.jpg', alt: 'Pass the Mimosa'
+      
+    = link_to '#', id: 'collection2', class: 'tab'
+      = image_tag 'home-page-tiles/tab-collectionbox-10.jpg', alt: 'Summer &lsquo;16'
+      
+    = link_to partners_in_crime_collection_path, id: 'collection3', class: 'tab'
       = image_tag 'home-page-tiles/CollectionMenu-PIC.jpg', alt: 'Partners in Crime Collection'
-    = link_to just_the_girls_collection_path, id: 'collection2', class: 'tab'
-      = image_tag 'home-page-tiles/tab-collectionbox-7.jpg', alt: 'Just The Girls Collection'
-    = link_to love_lace_collection_path, id: 'collection3', class: 'tab'
-      = image_tag 'home-page-tiles/tab-collectionbox-5.jpg', alt: 'Love Lace Collection'
     
 
     a.navigator.btn-prev.js-navigator-prev href='javascript:void(0)'
