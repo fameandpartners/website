@@ -7,13 +7,17 @@
         .media-wrap-outer
           .media-wrap.keep-ratio
             .inner-wrap
-              = image_tag "lookbook/PartnersInCrime-MegaMenu-NewSize.jpg"
+              = image_tag "lookbook/PassTheMimosa-MegaMenu.jpg"
         .content-wrap
           .outer-wrap
             .inner-wrap
-              h1.heading.skin-dark Partners In Crime
-              = link_to 'View this collection', partners_in_crime_collection_path, class: 'btn btn-md btn-black'
+              h1.heading.skin-dark Pass The Mimosa
+              = link_to 'View this collection', pass_the_mimosa_collection_path, class: 'btn btn-md btn-black'
 
+    .col-md-6
+      = link_to partners_in_crime_collection_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/PartnersInCrime-MegaMenu-NewSize.jpg"
+        .copy-wrap Partners In Crime <em><span>View this collection</span></em>
     .col-md-6
       = link_to just_the_girls_collection_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/JustTheGirls.jpg"
@@ -26,10 +30,6 @@
       = link_to this_modern_romance_collection_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/modern-romance.jpg"
         .copy-wrap This Modern Romance <em><span>View this collection</span></em>
-    .col-md-6
-      = link_to bring_on_the_night_collection_path, class: 'panel-highlight media-wrap'
-        = image_tag "lookbook/bring-on-the-night.jpg"
-        .copy-wrap Bring on the night <em><span>View this collection</span></em>
 
     .col-md-12
       h2.title-line-on-sides
