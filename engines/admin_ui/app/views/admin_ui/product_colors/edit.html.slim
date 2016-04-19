@@ -10,35 +10,20 @@
         h5
           = link_to(@product_color_value.product.name, spree.admin_product_path(@product_color_value.product))
         .row
-          .col-md-3
-            p
-              b SKU
-          .col-md-9
-            span.label #{@product_color_value.product.sku}
+          .col-md-3 : p : b SKU
+          .col-md-9 : span.label #{@product_color_value.product.sku}
         .row
-          .col-md-3
-            p
-              b Is active
-          .col-md-9
-            span.label #{@product_color_value.product.active?}
+          .col-md-3 : p : b Is active
+          .col-md-9 : span.label #{@product_color_value.product.active?}
         .row
-          .col-md-3
-            p
-              b Presentation
-          .col-md-9
-            span.label #{@product_color_value.option_value.presentation}
+          .col-md-3 : p : b Presentation
+          .col-md-9 : span.label #{@product_color_value.option_value.presentation}
         .row
-          .col-md-3
-            p
-              b Name
-          .col-md-9
-            span.label #{@product_color_value.option_value.name}
+          .col-md-3 : p : b Name
+          .col-md-9 : span.label #{@product_color_value.option_value.name}
         .row
-          .col-md-3
-            p
-              b Visual
-          .col-md-9
-            = render 'admin_ui/product_colors/colour_preview', color_name: @product_color_value.option_value.name
+          .col-md-3 : p : b Visual
+          .col-md-9 = render 'admin_ui/product_colors/colour_preview', color_name: @product_color_value.option_value.name
   .col-lg-6
     .ibox
       .ibox-title
