@@ -14,11 +14,13 @@ window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
   submit: (e) =>
     e.preventDefault()
     $this = $(e.target)
+    url = $('.js-en-field-mailchimp', $this)[0].value
+    email = $('.js-en-field-email', $this)[0].value
     $.getJSON(@url(), $this.serialize(), @handler)
     $.ajax
-      url: $this.find('.js-en-field-mailchimp').value,
+      url: url,
       method: 'GET',
-      data: { email: $this.find('.js-en-field-email').value }
+      data: { email: email }
 
   handler: (data) =>
     if (data.Status == 400)
