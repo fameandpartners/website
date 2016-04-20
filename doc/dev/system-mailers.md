@@ -1,29 +1,84 @@
-# MarketingMailer
+## Other Transactional Emails:
+
+- MailGun
+  - contact email
+    - event: user submit contact form on the website (`/contact/new`)
+    - to: `team@fameandpartners.com`
+    - sample subject: `[US] Change Existing Order`
+  - join_team
+      - event: user submit talent form on the website (`/about`)
+      - to: `talent@fameandpartners.com`
+      - sample subject: `[US] Join team`
+  - shipped email
+    - event: an (completed) order was shipped
+    - to: order's email
+    - sample subject: `Hey babe, your dress is on it's way - Order: #R123456`
+    - template: `/app/views/spree/shipment_mailer/shipped_email.html.slim`
+  - order return request email
+    - event: return request is created by the user
+    - to: `team@fameandpartners.com`
+    - sample subject: `[Order Return Request] R123456`
+  - password reset email
+    - event: user reset her password
+    - to: user's email
+    - sample subject: `Password Reset Instructions`
+    - template: `/app/views/spree/user_mailer/reset_password_instructions.html.slim`
+  - welcome email (with password)
+    - to: user just registered on the website
+    - sample subject: `Welcome to Fame & Partners`
+    - template: `/app/views/spree/user_mailer/welcome_with_password.html.slim`
+- Customer.io
+  - Note 1: templates are on customer.io
+  - Note 2: events not necessarily will send emails. Those are configured on customer.io
+  - `email_capture_modal`
+    - event: user subscribe on email capturing modal
+  - `auto_apply_coupon`
+    - event: various reasons, but users triggers this event when eligible for promotions that apply automatically (e.g. facebook login)
+  - `wedding_moodboard_update`
+    - event: user update the wedding moodboard
+  - `email_reminder_promo`
+    - event: user login with facebook via promotional pages (has `email_reminder_promo` on their session)
+  - `abandoned_cart`
+    - event: triggers from time to time for users that have pending cart items for more than 4 hours
+  - `order_confirmation_email`
+    - event: user completes an order
+  - `order_team_confirmation_email`
+    - event: user completes an order
+  - `invited_to_moodboard`
+    - event: user is invited to a moodboard
+  - `order_cancel_email`
+    - event: user cancel an order
+  - `account_created`
+    - event: user signs up
+  - `order_production_order_email`
+    - event: user completes an order
+
+## MarketingMailer
 
 app/views/marketing_mailer/
 
-# Abandoned Cart
+## Abandoned Cart
 
 order = Spree::Order.joins(:line_items).where("user_id is not null").first
 MarketingMailer.abandoned_cart(order, order.user).deliver
 
-# Added Wishlist
+## Added Wishlist
 
 user = WishlistItem.last.user
 MarketingMailer.added_to_wishlist(user).deliver
 
-# style_quiz_completed
+## style_quiz_completed
 
 user = UserStyleProfile.last.user
 MarketingMailer.style_quiz_completed(user).deliver
 
-# Style Quiz Not Completed
+## Style Quiz Not Completed
 
 user = Spree::User.last
 MarketingMailer.style_quiz_not_completed(user).deliver
 
 
-# Product Reservations
+## Product Reservations
 
 app/views/product_reservations_mailer/new_reservation.html.slim (and .erb)
 reservation = ProductReservation.new(
@@ -36,7 +91,7 @@ reservation = ProductReservation.new(
 ProductReservationsMailer.new_reservation(reservation).deliver
 
 
-# Competitions Mailer
+## Competitions Mailer
 app/views/spree/competitions_mailer/
 
 invite = Spree::User.last.invitations.new(
@@ -50,14 +105,14 @@ Spree::CompetitionsMailer.invite(invite).deliver
 Spree::CompetitionsMailer.marketing_email('mail@example.com').deliver
 
 
-# Send to Friend
+## Send to Friend
 app/views/spree/product_mailer/send_to_friend.html.slim
 product = Spree::Product.last
 info = { sender_name: 'Hogwarts', sender_email: 'sender_email@example.com', email: 'email@example.com'}
 Spree::ProductMailer.send_to_friend(product, info).deliver
 
 
-# User Mailer
+## User Mailer
 
 app/views/spree/user_mailer/
 
@@ -78,9 +133,12 @@ Spree::UserMailer.style_call_welcome(Spree::User.first).deliver
 
 
 # Not Used, but Still in Codebase
-# Spree::UserMailer.confirmation_instructions(Spree::User.first).deliver
-# Spree::UserMailer.custom_dress_created(CustomDress.new).deliver
-# Custom Dress Requests
+
+## Spree::UserMailer.confirmation_instructions(Spree::User.first).deliver
+
+## Spree::UserMailer.custom_dress_created(CustomDress.new).deliver
+
+## Custom Dress Requests
 
 app/views/custom_dresses_mailer/request_custom_dress.text.erb
 dress_request = CustomDressRequest.new(
@@ -91,8 +149,8 @@ dress_request = CustomDressRequest.new(
 )
 CustomDressesMailer.request_custom_dress(dress_request).deliver
 
+## FameChain
 
-# FameChain
 app/views/fame_chain_mailer/fame_chain.text.erb
 
 fame_chain = FameChain.new(
@@ -105,19 +163,20 @@ fame_chain = FameChain.new(
 )
 FameChainMailer.fame_chain(fame_chain).deliver
 
-# Shipping
+## Shipping
+
 shipment = Spree::Shipment.last
 Spree::ShipmentMailer.shipped_email(shipment).deliver
 
 
-# wishlist item added - after 2 days
+## wishlist item added - after 2 days
 item = WishlistItem.last
 MarketingMailer.wishlist_item_added(item.user, item).deliver
 
-# wishlist item added - after 2 weeks
+## wishlist item added - after 2 weeks
 item = WishlistItem.last
 MarketingMailer.wishlist_item_added_reminder(item.user, item).deliver
 
-# style profile reminder - after 1 week
+## style profile reminder - after 1 week
 user = UserStyleProfile.last.user
 MarketingMailer.style_quiz_completed_reminder(user).deliver
