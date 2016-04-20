@@ -69,6 +69,7 @@ class ProductionOrderEmailService
         {
           style_num:        item.style_number,
           sku:              item.sku,
+          line_item_id:     item.id,
           product_number:   item.product_number,
           size:             item.size,
           adjusted_size:    item.country_size,
