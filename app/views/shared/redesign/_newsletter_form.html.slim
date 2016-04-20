@@ -1,14 +1,8 @@
 ruby:
   formID = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
 
-form id=(formID) action="https://fameandpartners.createsend.com/t/t/s/urikx/" method="post"
-  input.js-en-field-name      type="hidden" name="cm-name"        value=(current_spree_user.try(:full_name))
-  input.js-en-field-country   type="hidden" name="cm-f-dkjudk"    value=(details[:country])
-  input.js-en-field-promocode type="hidden" name="cm-f-dkjuhy"    value=(details[:promocode])
-  input.js-en-field-source    type="hidden" name="cm-f-dkjuhr"    value=(details[:source] || cookies[:referrer])
-  input.js-en-field-campaign  type="hidden" name="cm-f-dkjuhj"    value=(details[:campaign])
-  input.js-en-field-ip        type="hidden" name="cm-f-dkjuht"    value=(details[:ipaddress])
-  input.js-en-field-mailchimp type="hidden" value=(mailchimp_campaigns_email_capture_path)
+form.input-btn id=(formID)
+  input.js-en-field-mailchimp type='hidden' value=(mailchimp_campaigns_email_capture_path)
   .input-group
     input.form-control.input-lg.js-en-field-email type="email" placeholder="Register your email for this $25 offer"
     span.input-group-btn
