@@ -33,15 +33,18 @@
         text-transform: uppercase;
         text-align: center;
         font-size: 1.3rem;
-
       }
       &.active {
         background-color: $c-brand-blue-pale;
         a {
           color: $c-neutral-white;
         }
-        a:hover {
+        a:hover{
           color: $c-neutral-12;
+        }
+        a:focus {
+          color: $c-neutral-white;
+          background-color: $c-brand-blue-pale;
         }
       }
       &:last-child {
@@ -52,6 +55,10 @@
 
   .tab-content {
     padding: 1.5rem 0;
+
+    p {
+      font-weight: 300;
+    }
   }
 
   .btn {
