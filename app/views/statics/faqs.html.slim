@@ -3,4 +3,48 @@
     .page-title--details
       h1.no-padding-bottom Frequently Asked Questions
 
-= render 'shared/redesign/faqs'
+.page-content.faq
+
+  .container-fluid
+    .row
+      .col-xs-12.col-md-10.col-md-push-1
+      
+        h2#faqs-about About us
+      
+        #accordion-about-us.panel-group role="tablist" aria-multiselectable="false"
+          .panel.panel-default
+            = render 'shared/redesign/faqs/about_store_loc'
+          
+
+        h2#faqs-orders Orders
+
+        #accordion-orders.panel-group role="tablist" aria-multiselectable="false"
+          .panel.panel-default
+            = render 'shared/redesign/faqs/orders_track'
+            = render 'shared/redesign/faqs/orders_cancel'
+            
+
+        h2#faqs-shipping Shipping &amp; deliveries
+
+        #accordion-shipping.panel-group role="tablist" aria-multiselectable="false"
+          .panel.panel-default
+            = render 'shared/redesign/faqs/shipping_when_ship'
+
+
+        h2#faqs-returns Returns
+
+        #accordion-returns.panel-group role="tablist" aria-multiselectable="false"
+          .panel.panel-default
+            = render 'shared/redesign/faqs/returns_policy'
+            = render 'shared/redesign/faqs/returns_different'
+            = render 'shared/redesign/faqs/returns_steps'
+            = render 'shared/redesign/faqs/returns_how_long'
+            = render 'shared/redesign/faqs/returns_store_credit'
+          
+javascript:
+  (function ($) {
+    var hash = document.location.hash;
+    if (hash) {
+      $(hash).addClass('in');
+    }
+  }(jQuery));

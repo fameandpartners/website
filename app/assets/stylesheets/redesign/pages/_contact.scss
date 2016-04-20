@@ -1,9 +1,11 @@
 /* [Contact]
 -------------------------------------------------------*/
 .contact-v2 {
+  padding-top: 5rem;
+  padding-bottom: 7rem;
 
   h1 {
-    text-transform: capitalize;
+    text-transform: none;
   }
 
   h2.h5, h3.h5 {
@@ -25,20 +27,27 @@
 
     li {
       background-color: $c-neutral-2;
+      border-right: 2px solid $c-neutral-white;
       a {
         text-decoration: none;
         text-transform: uppercase;
         text-align: center;
         font-size: 1.3rem;
+
       }
       &.active {
         background-color: $c-brand-blue-pale;
         a {
           color: $c-neutral-white;
         }
+        a:hover {
+          color: $c-neutral-12;
+        }
+      }
+      &:last-child {
+        border-right: none;
       }
     }
-
   }
 
   .tab-content {
@@ -48,6 +57,53 @@
   .btn {
     padding-top: 10px;
     padding-bottom: 10px;
+    margin-bottom: 7rem;
+  }
+
+  .faqs-contianer {
+    background-color: $c-neutral-3;
+    padding-top: 1rem;
+
+    h3 {
+      text-transform: none;
+      font-weight: 500;
+    }
+
+    .h5 {
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    .panel-group {
+      margin-bottom: 0;
+    }
+
+    .panel {
+      background-color: transparent;
+
+      > .panel-heading {
+        background-color: transparent;
+
+      }
+
+    }
+
+    a.panel-title {
+      text-decoration: none;
+    }
+
+    .col-md-10 h2 {
+      padding: 0;
+      margin: 0;
+      display: none;
+    }
+
+  }
+
+  @media (min-width: $bootstrap-md-width)and(max-width: $bootstrap-lg-width) {
+    ul.nav li a{
+      font-size: 1.1rem;
+    }
   }
 
 }

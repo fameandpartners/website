@@ -1,0 +1,12 @@
+#heading-shipping-order-take.panel-heading role="tab"
+  h3
+    a.panel-title.collapsed role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-shipping-order-take" aria-expanded="false" aria-controls="collapse-shipping-order-take"
+      | How long will it take for my order to arrive?
+
+#collapse-shipping-order-take.panel-collapse.collapse role="tabpanel" aria-labelledby="heading-shipping-order-take"
+  .panel-body
+    p Please refer to the table below to determine your shipping times:
+
+    = render 'statics/shipping_tables'
+
+    p Please note that we have no control over delivery times and that unexpected delays may be possible due to customs.

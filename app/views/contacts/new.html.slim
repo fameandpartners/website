@@ -1,33 +1,38 @@
 .page-content.contact-v2
   .container
     .row
-      .col-md-7
+      .col-md-12
         h1 How can we help?
-        
+    .row
+      .col-md-6
         h2.h5 Your details
-
-        = form_for @contact, url: contact_path, method: :post, html: {class: 'col-md-12 container'} do |f|
+        
+        = form_for @contact, url: contact_path, method: :post, html: {class: 'col-md-12 container-fluid'} do |f|
           = f.hidden_field :site_version
         
           .row.form-group
-            = f.label :first_name
-              ' First name *
-            = f.text_field :first_name, :class => 'form-control form-control-md'
+            .col-md-10.col-sm-12.no-padding
+              = f.label :first_name
+                ' First name *
+              = f.text_field :first_name, :class => 'form-control form-control-md'
               
           .row.form-group
-            = f.label :last_name
-              ' Last name *
-            = f.text_field :last_name, :class => 'form-control form-control-md'
+            .col-md-10.col-sm-12.no-padding
+              = f.label :last_name
+                ' Last name *
+              = f.text_field :last_name, :class => 'form-control form-control-md'
           .row.form-group
-            = f.label :email
-              ' Email *
-            = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
+            .col-md-10.col-sm-12.no-padding
+              = f.label :email
+                ' Email *
+              = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
           .row.form-group
-            = f.label :phone
-              ' Phone number
-            = f.text_field :phone, :class => 'form-control form-control-md'
-            .help-block
-              | (include country code)
+            .col-md-10.col-sm-12.no-padding
+              = f.label :phone
+                ' Phone number
+              = f.text_field :phone, :class => 'form-control form-control-md'
+              .help-block
+                | (include country code)
           
           .row
             .col-md-12.no-padding
@@ -35,7 +40,7 @@
           
               .container-fluid
                 ul.nav.nav-pill.row roll="tablist"
-                  li.active.col-xs-4.no-padding roll="presentation"
+                  li.col-xs-4.no-padding roll="presentation"
                     a href="#making-a-purchase" aria-controls="making-a-purchase" role="tab" data-toggle="pill" Making a purchase
                   li.col-xs-4.no-padding role="presentation"
                     a href="#exisitng-orders" aria-controls="exisitng-orders" role="tab" data-toggle="pill" Existing orders
@@ -43,7 +48,7 @@
                     a href="#other-enquiries" aria-controls="other-enquiries" role="tab" data-toggle="pill" Other enquiries
               
               .tab-content
-                #making-a-purchase.tab-pane.active roll="tabpanel"
+                #making-a-purchase.tab-pane roll="tabpanel"
                   p Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass.
                 #exisitng-orders.tab-pane roll="tabpanel"
                   .form-group
@@ -57,7 +62,37 @@
             .col-md-6.no-padding
               = f.submit "submit", class: 'btn btn-black btn-block'
   
-      .col-md-5
-        
-        = render 'shared/redesign/faqs'
+      .col-md-5.col-md-push-1
+        .faqs-contianer
+          
+          h2.h5 Popular FAQS
+          
+          .page-content.faq
+            .row
+              .col-md-12
+                #accordion-contact-accordion.panel-group.container-fluid roll="tablist" aria-multiselectable="false"
+                  .panel.panel-default
+                    = render 'shared/redesign/faqs/returns_policy'
+                    = render 'shared/redesign/faqs/returns_different'
+                    = render 'shared/redesign/faqs/returns_steps'
+                    = render 'shared/redesign/faqs/returns_how_long'
+                    = render 'shared/redesign/faqs/returns_store_credit'
     
+javascript:
+  (function ($) {
+  
+  $('.panel-title').each(function(){
+    
+    var $this = $(this);
+    $this.data('parent', '#accordion-contact-accordion');
+  
+  });
+  
+    var hash = document.location.hash;
+    if (hash) {
+      $(hash).addClass('in');
+    }
+    
+    
+    
+  }(jQuery));
