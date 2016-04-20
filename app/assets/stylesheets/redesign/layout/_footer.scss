@@ -46,6 +46,12 @@ footer.main {
     display: none;
   }
 
+  .title {
+    font-family: $font-family-secondary;
+    font-size: 0.875em;
+    font-weight: 500;
+  }
+
   nav {
     margin-top: 60px;
 

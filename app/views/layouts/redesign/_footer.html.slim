@@ -6,14 +6,14 @@ footer.main
         = image_tag 'logo/new-logo.png', alt: 'Fame and Partners', class: 'logo logo-dark'
         = image_tag 'logo/new-logo-white.png', alt: 'Fame and Partners', class: 'logo logo-light'
       .col-md-5.col-lg-4.newsletter-wrap.position-3
-        p KEEP UPDATED
+        p.title KEEP UPDATED
         p Sign up for an insider round of the latest fashion news, collection drops and underground style options -  plus an instant $25 off your first order.
         = render 'shared/redesign/newsletter_form'
       nav.col-md-6.col-md-offset-1.col-lg-offset-2.position-2
         .row
           .col-sm-4.col-xs-6
             ul
-              li ABOUT
+              li.title ABOUT
               li = link_to 'Why Shop With Us', why_us_url
               li = link_to 'About Us', about_us_url
               li = link_to 'Growth Plan', growth_plan_path
@@ -25,7 +25,7 @@ footer.main
               li = link_to 'Terms', terms_url
           .col-sm-4.col-xs-6
             ul
-              li HELP
+              li.title HELP
               li = link_to 'Shipping Info', faqs_url + '#collapse-shipping-track'
               li = link_to 'Returns Policy', faqs_url + '#collapse-returns-policy'
               li = link_to 'Contact Us', new_contact_url
@@ -36,7 +36,7 @@ footer.main
               li = link_to 'Track My Order', faqs_url + '#collapse-orders-track'
           .col-sm-4.col-xs-6.hidden-xs
             ul
-              li SHOP BY
+              li.title SHOP BY
               li = link_to "Best Sellers", best_sellers_path
               li = link_to "What's New", dresses_path(:order => 'newest')
               li = link_to 'Plus Size', build_taxon_path('Plus Size')
