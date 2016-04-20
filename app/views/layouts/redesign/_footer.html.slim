@@ -26,14 +26,14 @@ footer.main
           .col-sm-4.col-xs-6
             ul
               li HELP
-              li = link_to 'Shipping Info', faqs_url + '#'
+              li = link_to 'Shipping Info', faqs_url + '#collapse-shipping-track'
               li = link_to 'Returns Policy', faqs_url + '#collapse-returns-policy'
               li = link_to 'Contact Us', new_contact_url
               li = link_to 'FAQs', faqs_url
               li = link_to 'Size Guide', size_guide_url
               - if current_site_version.is_australia?
                 li = link_to 'Fashion IT Girl', 'http://mystyle.fameandpartners.com/fitg-aus-2015'
-              li = link_to 'Track My Order', faqs_url + '#'
+              li = link_to 'Track My Order', faqs_url + '#collapse-orders-track'
           .col-sm-4.col-xs-6.hidden-xs
             ul
               li SHOP BY
