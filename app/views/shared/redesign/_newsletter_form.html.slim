@@ -1,12 +1,5 @@
 ruby:
   formID = 'js-email-newsletter-signup-' + SecureRandom.hex(2)
-  details = Marketing::Subscriber.new(
-    user: current_spree_user,
-    token: cookies['utm_guest_token'],
-    promocode: decode(params[:pc]),
-    ipaddress: request.remote_ip
-  ).details
-  details[:campaign] = 'home' if details[:campaign].blank?
 
 form id=(formID) action="https://fameandpartners.createsend.com/t/t/s/urikx/" method="post"
   input.js-en-field-name      type="hidden" name="cm-name"        value=(current_spree_user.try(:full_name))
@@ -15,9 +8,9 @@ form id=(formID) action="https://fameandpartners.createsend.com/t/t/s/urikx/" me
   input.js-en-field-source    type="hidden" name="cm-f-dkjuhr"    value=(details[:source] || cookies[:referrer])
   input.js-en-field-campaign  type="hidden" name="cm-f-dkjuhj"    value=(details[:campaign])
   input.js-en-field-ip        type="hidden" name="cm-f-dkjuht"    value=(details[:ipaddress])
-  input.js-en-field-mailchimp type='hidden' name='mailchimp'      value=(mailchimp_campaigns_email_capture_path)
+  input.js-en-field-mailchimp type="hidden" value=(mailchimp_campaigns_email_capture_path)
   .input-group
-    input.form-control.input-lg.js-en-field-email type="email" name="cm-urikx-urikx" placeholder="Register your email for this $25 offer"
+    input.form-control.input-lg.js-en-field-email type="email" placeholder="Register your email for this $25 offer"
     span.input-group-btn
       button.btn.btn-black.btn-md type="submit" Submit
 
