@@ -8,8 +8,7 @@ ruby:
   ).details
   details[:campaign] = 'home' if details[:campaign].blank?
 
-form.input-btn id=(formID) action="https://fameandpartners.createsend.com/t/t/s/urikx/" method="post"
-  input.js-en-field-email     type="email"  name="cm-urikx-urikx" placeholder="Register your email for this $25 offer"
+form id=(formID) action="https://fameandpartners.createsend.com/t/t/s/urikx/" method="post"
   input.js-en-field-name      type="hidden" name="cm-name"        value=(current_spree_user.try(:full_name))
   input.js-en-field-country   type="hidden" name="cm-f-dkjudk"    value=(details[:country])
   input.js-en-field-promocode type="hidden" name="cm-f-dkjuhy"    value=(details[:promocode])
@@ -17,7 +16,10 @@ form.input-btn id=(formID) action="https://fameandpartners.createsend.com/t/t/s/
   input.js-en-field-campaign  type="hidden" name="cm-f-dkjuhj"    value=(details[:campaign])
   input.js-en-field-ip        type="hidden" name="cm-f-dkjuht"    value=(details[:ipaddress])
   input.js-en-field-mailchimp type='hidden' name='mailchimp'      value=(mailchimp_campaigns_email_capture_path)
-  button.btn.btn-black.btn-md type="submit" Submit
+  .input-group
+    input.form-control.input-lg.js-en-field-email type="email" name="cm-urikx-urikx" placeholder="Register your email for this $25 offer"
+    span.input-group-btn
+      button.btn.btn-black.btn-md type="submit" Submit
 
 = content_for :inline_javascript do
   | new window.page.EmailNewsletterSubscriber({form: '#{formID}'});
