@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Products::CollectionsController, :type => :controller do
+describe Products::CollectionsController, type: :controller do
   describe 'GET show' do
     let(:collection_details) { double('Collection Details', meta_title: 'My Title', seo_description: 'My Description') }
     let(:collection_double)  { double('Collection', details: collection_details) }
 
-    let(:page)               { Revolution::Page.create!(path: '/dresses', :template_path => '/products/collections/show.html.slim') }
-    let!(:translation) { page.translations.create!(:locale => 'en-US', :title => 'Test', :meta_description => "Collection Meta Description") }
+    let(:page)               { Revolution::Page.create!(path: '/dresses', template_path: '/products/collections/show.html.slim') }
+    let(:translation)        { page.translations.create!(locale: 'en-US', title: 'Test', meta_description: "Collection Meta Description") }
 
 
     before(:each) do
@@ -66,6 +66,9 @@ describe Products::CollectionsController, :type => :controller do
   end
 
   describe 'private methods' do
+    let(:page) { Revolution::Page.build(path: '/dresses', template_path: '/products/collections/show.html.slim') }
+
+
     describe '#set_collection_seo_meta_data' do
       describe 'sets @title and @description for a collection page' do
         context 'page is a lookbook' do
@@ -83,7 +86,7 @@ describe Products::CollectionsController, :type => :controller do
         end
 
         context 'page is a collection' do
-          let(:translation) { build(:revolution_translation, :locale => 'en-US', :title => 'Collection Title', :meta_description => 'Collection Meta Description') }
+          let(:translation) { build(:revolution_translation, locale: 'en-US', title: 'Collection Title', meta_description: 'Collection Meta Description') }
 
           before(:each) { controller.instance_variable_set(:@page, translation) }
 
@@ -92,6 +95,32 @@ describe Products::CollectionsController, :type => :controller do
 
             expect(controller.instance_variable_get(:@title)).to include('Collection Title')
             expect(controller.instance_variable_get(:@description)).to eq('Collection Meta Description')
+          end
+        end
+      end
+    end
+
+    describe '#product_ids' do
+      let(:page)  { Revolution::Page.new(path: '/dresses', template_path: '/products/collections/show.html.slim', variables: { pids: '123,456' }) }
+
+      before(:each) { controller.instance_variable_set(:@page, page) }
+
+      describe 'returns page or params product IDs' do
+        context 'receives product ids in a hash' do
+          before(:each) { controller.params = { pids: { '0' => '111', '1' => '222' } } }
+
+          it { expect(controller.send(:product_ids)).to eq(%w(111 222)) }
+        end
+
+        context 'receives product ids in an array' do
+          before(:each) { controller.params = { pids: %w(333 555) } }
+
+          it { expect(controller.send(:product_ids)).to eq(%w(333 555)) }
+        end
+
+        context 'does not receive product ids' do
+          it 'uses pages pids' do
+            expect(controller.send(:product_ids)).to eq(%w(123 456))
           end
         end
       end
