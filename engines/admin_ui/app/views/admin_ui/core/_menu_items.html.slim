@@ -33,6 +33,7 @@ li class=active_link_to_class('', active: /reports/)
     span.nav-label Reports
     span.fa.arrow
   ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
+    = active_link_to 'Bergen Returns', reports_bergen_returns_path, wrap_tag: :li
     = active_link_to 'Body Shape Calculator Results', reports_body_shape_calculator_results_path, wrap_tag: :li
     = active_link_to 'Coupon Orders', reports_coupon_adjusted_orders_path, wrap_tag: :li
     = active_link_to 'Factory Fault Returns', reports_factory_faults_path, wrap_tag: :li

@@ -37,4 +37,6 @@ Gem::Specification.new do |s|
   # Even with this here, the helper is not loaded unless the main app
   # also inlcudes 'active_link_to' in it's Gemfile.
   s.add_dependency "active_link_to"
+
+  s.add_development_dependency 'timecop'
 end

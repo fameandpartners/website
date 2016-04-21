@@ -46,6 +46,7 @@ AdminUi::Engine.routes.draw do
     resource :payments                     , only: [:show, :create]
     resource :product_numbers              , only: [:show, :create]
     resource :return_shoppers              , only: [:show, :create]
+    resource :bergen_returns               , only: [:show, :create]
     resource :sale_items                   , only: [:show, :create]
     resource :size_normalisations          , only: [:show]
   end
