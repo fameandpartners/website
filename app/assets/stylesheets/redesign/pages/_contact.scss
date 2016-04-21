@@ -38,13 +38,14 @@
         background-color: $c-brand-blue-pale;
         a {
           color: $c-neutral-white;
+          background-color: transparent;
         }
         a:hover{
           color: $c-neutral-12;
         }
         a:focus {
           color: $c-neutral-white;
-          background-color: $c-brand-blue-pale;
+          background-color: transparent;
         }
       }
       &:last-child {
