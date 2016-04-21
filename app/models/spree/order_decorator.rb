@@ -350,4 +350,14 @@ Spree::Order.class_eval do
       self.payment_state = 'credit_owed'
     end
   end
+
+  def associate_user_for_guest_checkout(spree_current_user, object_params)
+    return if spree_current_user.present?
+    u = Spree::User.where(email: object_params["bill_address_attributes"]["email"]).first
+    return if u.nil?
+    if u.first_name.downcase == object_params["bill_address_attributes"]["firstname"].downcase && u.last_name == object_params["bill_address_attributes"]["lastname"].downcase
+      self.user = u
+    end
+  end
+
 end
