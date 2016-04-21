@@ -355,9 +355,7 @@ Spree::Order.class_eval do
     return if spree_current_user.present?
     u = Spree::User.where(email: object_params["bill_address_attributes"]["email"]).first
     return if u.nil?
-    if u.first_name.downcase == object_params["bill_address_attributes"]["firstname"].downcase && u.last_name == object_params["bill_address_attributes"]["lastname"].downcase
-      self.user = u
-    end
+    self.user = u if u.first_name.downcase == object_params["bill_address_attributes"]["firstname"].downcase && u.last_name == object_params["bill_address_attributes"]["lastname"].downcase
   end
 
 end
