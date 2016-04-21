@@ -24,7 +24,7 @@ module AdminUi
 
     def create
       @product_color_value = ProductColorValue.new(params[:product_color_value])
-      if @product_color_value.save!
+      if @product_color_value.save
         message = { success: "Color '#{@product_color_value.option_value.name}'
                     for the product '#{@product_color_value.product.name}' successfully created" }
         redirect_to product_colors_path, flash: message
