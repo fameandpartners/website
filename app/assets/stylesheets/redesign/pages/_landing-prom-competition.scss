@@ -132,6 +132,14 @@
     margin-bottom: 60px;
     text-align: center;
 
+    h3 {
+      margin-top: 0;
+    }
+
+    .btn {
+      margin-top: 1rem;
+    }
+
     a {
       font-style: italic;
       color: inherit;
@@ -144,7 +152,7 @@
     .title-line-on-sides {
       width: 60%;
       max-width: 130px;
-      margin: 40px auto;
+      margin: 30px auto;
     }
 
   }

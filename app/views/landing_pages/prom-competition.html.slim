@@ -73,6 +73,8 @@
         .heading-v1
           h3 Email Us
           div You can e-mail us your photo and entry to #{ link_to 'sweepstakes@fameandpartners.com', 'mailto:sweepstakes@fameandpartners.com' } (by emailing us you agree to receive exclusive updates, discounts and more).
+          button.btn.btn-black data-toggle="modal" data-target="#form-modal" href="#" Enter Now
+          
         .title-line-on-sides
           .inner-wrap OR
         .heading-v1
@@ -206,3 +208,46 @@
             li = link_to 'Pastel'       , colour_path('Pastel')
             li = link_to "All Colors", dresses_path
         .col-md-2.hidden-xs.hidden-sm
+
+
+// Modal
+.modal.fade#form-modal tabindex="-1" role="dialog" aria-labelledby="modal-form"
+  .modal-dialog role="document"
+    form
+      .modal-content
+        .modal-header
+          .form-group
+            .col-xs-12
+              button.close type="button" data-dismiss="modal" aria-label="Close"
+                <span aria-hidden="true">&times;</span></button>
+              h4.modal-title Entry Form
+
+        .modal-body
+          .form-group.clearfix
+            .col-xs-12
+              label for="first-name"
+                | First Name
+              input.form-control type="text" name="first-name" placeholder="Jain"
+          .form-group.clearfix
+            .col-xs-12
+              label for="last-name"
+                | Last Name
+              input.form-control type="text" name="first-name" placeholder="Doe"
+          .form-group.clearfix
+            .col-xs-12
+              label for="email"
+                | Email
+              input.form-control type="email" name="email" placeholder="name@address.com"
+          .form-group.clearfix
+            .col-xs-12
+              label for="message"
+                | Your Partner in Crime inspires you how?
+              textarea.form-control name="message" rows="3" max="25"
+
+        .modal-footer
+          .form-group.clearfix
+              .col-xs-12
+                button.btn.btn-default type="button" data-dismiss="modal"
+                  |Close
+                button.btn.btn-primary.btn-black type="button"
+                  |Submit
