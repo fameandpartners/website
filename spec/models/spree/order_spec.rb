@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Spree::Order, :type => :model do
   subject(:order)     { Spree::Order.new }
   let(:completed_at)  { DateTime.parse('Wed April 1 2015') }
-  let(:match_user)    { create(:spree_user) }
+
 
   before do
     allow(order).to receive(:complete?).and_return(true)
@@ -75,8 +75,9 @@ describe Spree::Order, :type => :model do
 
   describe 'associate user when guest checkout based on email, first name and last name' do
     context 'guest checkout' do
+      let(:match_user) { create(:spree_user, email: 'something@music.com', first_name: 'Something', last_name: 'Music') }
       it 'should associate user' do
-        order.associate_user_for_guest_checkout(nil,  {"bill_address_attributes" => {"email" => match_user.email, "firstname" => match_user.first_name, "lastname" => match_user.last_name}})
+        order.associate_user_for_guest_checkout(nil,  {"bill_address_attributes" => {"email" => match_user.email, "firstname" => 'Something', "lastname" => 'Music'}})
         expect(order.user).to eq(match_user)
       end
       it 'should not associate user with correct email and incorrect first/last name' do

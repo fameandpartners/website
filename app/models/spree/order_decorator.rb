@@ -353,9 +353,9 @@ Spree::Order.class_eval do
 
   def associate_user_for_guest_checkout(spree_current_user, object_params)
     return if spree_current_user.present?
-    u = Spree::User.where(email: object_params["bill_address_attributes"]["email"]).first
+    u = Spree::User.where('email = :email AND first_name ILIKE :first_name AND last_name ILIKE :last_name', email: object_params["bill_address_attributes"]["email"], first_name: object_params["bill_address_attributes"]["firstname"], last_name: object_params["bill_address_attributes"]["lastname"]).first
     return if u.nil?
-    self.user = u if u.first_name.downcase == object_params["bill_address_attributes"]["firstname"].downcase && u.last_name == object_params["bill_address_attributes"]["lastname"].downcase
+    self.user = u
   end
 
 end
