@@ -115,6 +115,7 @@ PATH
     admin_ui (0.0.1)
       active_link_to
       cancan
+      chosen-rails
       datagrid
       font-awesome-rails
       kaminari
@@ -238,6 +239,10 @@ GEM
       timers (~> 1.1.0)
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
+    chosen-rails (1.5.1)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
     chronic (0.10.2)
     chunky_png (1.3.4)
     ckeditor (4.1.1)
