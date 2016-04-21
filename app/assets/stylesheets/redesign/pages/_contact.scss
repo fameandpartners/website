@@ -19,12 +19,15 @@
     text-decoration: underline;
   }
 
+  #new_contact {
+    padding-bottom: 7rem;
+  }
+
   textarea.custom {
-    height: 318px;
+    height: 200px;
   }
 
   ul.nav {
-
     li {
       background-color: $c-neutral-2;
       border-right: 2px solid $c-neutral-white;
@@ -54,6 +57,18 @@
     }
   }
 
+  h4.tabs-label {
+    font-family: $font-family-secondary;
+    line-height: normal;
+    font-size: 1.125em;
+    font-weight: 500;
+    text-transform: none;
+    color: $c-neutral-12;
+    padding: 0 0 0.5rem;
+    display: block;
+    text-align: left;
+  }
+
   .tab-content {
     padding: 1.5rem 0;
 
@@ -62,19 +77,45 @@
     }
   }
 
-  .btn {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 7rem;
+  .animate-height {
+    overflow: hidden;
+    @include transition(height 500ms cubic-bezier(0.860, 0.000, 0.070, 1.000));
+    &.animate-hidden {
+      height: 0;
+      @include transition(height 500ms cubic-bezier(0.860, 0.000, 0.070, 1.000));
+    }
   }
 
-  .faqs-contianer {
-    background-color: $c-neutral-3;
-    padding-top: 1rem;
+  .enquiry-container {
+    height: 231px;
+  }
+
+  .submit-container {
+    height: 47px;
+    @include transition-delay(350ms);
+  }
+
+  .btn {
+    margin-top: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .faqs-container {
+
+    .faqs-inner{
+      padding-top: 1rem;
+      background-color: $c-neutral-3;
+    }
+
+    .page-content {
+      padding-bottom: 30px;
+    }
 
     h3 {
       text-transform: none;
       font-weight: 500;
+      font-size: 1.6rem;
     }
 
     .h5 {
@@ -96,14 +137,14 @@
 
     }
 
-    a.panel-title {
+    a {
       text-decoration: none;
-    }
 
-    .col-md-10 h2 {
-      padding: 0;
-      margin: 0;
-      display: none;
+      &.link-to-faqs {
+        margin-top: 2rem;
+        text-align: center;
+        display: block;
+      }
     }
 
   }
@@ -112,6 +153,15 @@
     ul.nav li a{
       font-size: 1.1rem;
     }
+
+
+
+  }
+
+  @media (min-width: $bootstrap-lg-width) {
+
+
+
   }
 
 }
