@@ -693,22 +693,21 @@ ul.secondary.pull-right {
       margin-top: 10px;
     }
   }
-  .bottom-area{
-    background-color: black;
-    color: white;
-    margin-left: 15px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    padding-left: 15px;
-    -webkit-transition: margin-left 0.25s;
-    -moz-transition: margin-left 0.25s;
-    transition: margin-left 0.25s;
-    a{
-      padding: 0;
+
+  .bottom-area {
+    color: $c-neutral-white;
+    background-color: $c-neutral-black;
+
+    a {
+      padding: 10px 15px;
+      color: $c-neutral-white;
     }
-    .bottom-area-text{
-      color: white;
+
+    &.title {
+      padding: 15px 15px 0 15px;
+      font-weight: 600;
     }
+
   }
 
   .no-border{
