@@ -221,15 +221,15 @@ ruby:
                 i.fa.fa-chevron-left
                 .back BACK
             li.manu-content
-              = link_to partners_in_crime_collection_path
+              = link_to pass_the_mimosa_collection_path
                 .panel-highlight.media-wrap
-                  = image_tag "lookbook/PartnersInCrime-MegaMenu-NewSize.jpg"
-                  .copy-wrap Partners In Crime <em><span>View this collection</span></em>
+                  = image_tag "lookbook/PassTheMimosa-MegaMenu.jpg"
+                  .copy-wrap Pass The Mimosa <em><span>View this collection</span></em>
+            li.normal-item = link_to 'Partners In Crime', partners_in_crime_collection_path, class: 'text'
             li.normal-item = link_to 'Just The Girls', just_the_girls_collection_path, class: 'text'
             li.normal-item = link_to 'Love Lace', love_lace_collection_path, class: 'text'
             li.normal-item = link_to 'This Modern Romance', this_modern_romance_collection_path, class: 'text'
             li.normal-item = link_to 'Bring On The Night', bring_on_the_night_collection_path, class: 'text'
-            li.normal-item = link_to 'Dance Hall Days', dance_hall_days_collection_path, class: 'text'
             li.normal-item.no-border = link_to 'View all lookbooks', lookbook_path, class: 'text'
 
         div#moodboards-menu
@@ -282,26 +282,27 @@ ruby:
               .arrow
                 i.fa.fa-chevron-right
 
-          li.bottom-area
-            = link_to 'Why Shop With Us', why_us_path, class: 'bottom-area-text'
-          li.bottom-area
-            = link_to 'About Us', about_us_path, class: 'bottom-area-text'
-          li.bottom-area
-            = link_to 'Our Growth Plan', growth_plan_path, class: 'bottom-area-text'
-          li.bottom-area
-            = link_to 'FAQs & Shipping', faqs_path, class: 'bottom-area-text'
-          li.bottom-area
-            = link_to 'Size Guide', size_guide_path, class: 'bottom-area-text'
-          /li.bottom-area
-          /  = link_to 'Get styling advice', style_consultation_path, class: 'bottom-area-text'
-          li.bottom-area
-            = link_to 'Fame Chain', fame_chain_path, class: 'bottom-area-text'
-          li.bottom-area
-            = link_to 'Contact Us', new_contact_path, class: 'bottom-area-text'
-          li.bottom-area
-            = link_to 'Terms', terms_path, class: 'bottom-area-text'
-          li.bottom-area
-            = link_to 'Privacy Policy', privacy_path, class: 'bottom-area-text'
+          li.bottom-area.title ABOUT
+          li.bottom-area = link_to 'Why Shop With Us', why_us_path
+          li.bottom-area = link_to 'About Us', about_us_path
+          li.bottom-area = link_to 'Growth Plan', growth_plan_path
+          li.bottom-area = link_to 'Fame Chain', fame_chain_path
+          - unless Features.active?(:getitquick_unavailable)
+            li.bottom-area = link_to 'From our CEO', fast_making_dresses_path
+          li.bottom-area = link_to 'From our CEO', yelp_path
+          li.bottom-area = link_to 'Privacy Policy', privacy_path
+          li.bottom-area = link_to 'Terms', terms_path
+
+          li.bottom-area.title HELP
+          li.bottom-area = link_to 'Shipping Info', faqs_path(anchor: 'collapse-shipping-track')
+          li.bottom-area = link_to 'Returns Policy', faqs_path(anchor: 'collapse-returns-policy')
+          li.bottom-area = link_to 'Contact Us', new_contact_url
+          li.bottom-area = link_to 'FAQs', faqs_path
+          li.bottom-area = link_to 'Size Guide', size_guide_path
+          - if current_site_version.is_australia?
+            li.bottom-area = link_to 'Fashion IT Girl', 'http://mystyle.fameandpartners.com/fitg-aus-2015'
+          li.bottom-area = link_to 'Track My Order', faqs_path(anchor: 'collapse-orders-track')
+          /li.bottom-area = link_to 'Get styling advice', style_consultation_path
 
 coffee:
   $(document).ready ->

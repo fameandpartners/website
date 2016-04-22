@@ -155,6 +155,7 @@ FameAndPartners::Application.routes.draw do
     get '/lookbook/love-lace-collection' => 'products/collections#show', :permalink => 'love-lace', :as => :love_lace_collection
     get '/lookbook/just-the-girls'       => 'products/collections#show', :permalink => 'just-the-girls', :as => :just_the_girls_collection
     get '/lookbook/partners-in-crime'    => 'products/collections#show', :permalink => 'partners-in-crime', :as => :partners_in_crime_collection
+    get '/lookbook/pass-the-mimosa'      => 'products/collections#show', :permalink => 'pass-the-mimosa', :as => :pass_the_mimosa_collection
 
     get '/all-size' => redirect('/lookbook/all-size')
     get '/lookbook/all-size' => 'products/collections#show', :permalink => 'all-size', :as => :all_size_collection
@@ -173,7 +174,7 @@ FameAndPartners::Application.routes.draw do
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
     get '/fameweddings/guest' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :guest_bride_page
 
-    get '/macys' => 'products/collections#show', :as => :macys
+    #get '/macys' => 'products/collections#show', :as => :macys
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)

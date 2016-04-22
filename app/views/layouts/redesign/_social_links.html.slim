@@ -1,12 +1,19 @@
-a href='https://www.facebook.com/FameandPartners' target="_blank"
-  = image_tag '_icons/facebook.png'
-a href='https://instagram.com/FameandPartners' target="_blank"
-  = image_tag '_icons/instagram.png'
-a href='https://twitter.com/FameandPartners' target="_blank"
-  = image_tag '_icons/twitter.png'
-a href='https://www.pinterest.com/fameandpartners/' target="_blank"
-  = image_tag '_icons/pinterest.png'
-a href='http://fameandpartners.tumblr.com/' target="_blank"
-  = image_tag '_icons/tumble.jpg'
-a href='http://fameandpartners.polyvore.com/' target="_blank"
-  = image_tag '_icons/polyvore.png'
+ul
+  li
+    = link_to '', 'https://instagram.com/FameandPartners', class:'icon-instagram', target:'_blank'
+    .hide-visually instagram
+  li
+    = link_to '', 'https://www.facebook.com/FameandPartners', class:'icon-facebook2', target:'_blank'
+    .hide-visually facebook
+  li
+    = link_to '', 'https://twitter.com/FameandPartners', class:'icon-twitter', target:'_blank'
+    .hide-visually twitter
+  li
+    = link_to '', 'https://www.pinterest.com/fameandpartners', class:'icon-pinterest', target:'_blank'
+    .hide-visually pinterest
+  li
+    = link_to '', 'http://fameandpartners.tumblr.com', class:'icon-tumblr', target:'_blank'
+    .hide-visually tumblr
+  li
+    = link_to '', 'http://fameandpartners.polyvore.com', class:'icon-polyvore', target:'_blank'
+    .hide-visually polyvore
