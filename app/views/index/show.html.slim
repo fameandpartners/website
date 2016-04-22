@@ -22,21 +22,21 @@ ruby:
     .row.aside-single-tile
       .main.col-md-7
         = render 'shared/redesign/tabs_collection'
-        = link_to '/dresses/two-piece', class: 'media-wrap'
+        = link_to build_taxon_path('Two Piece'), class: 'media-wrap'
           = image_tag 'home-page-tiles/CategoryTile1-apr-19.jpg', alt: 'Cause two is better than one. Shop TWO-PIECE'
         = link_to '/dresses/dress-catalina-997?color=pale-blue', class: 'media-wrap'
           = image_tag 'home-page-tiles/CategoryTile2-apr-19.jpg', alt: 'Dress of the week. Shop NOW'
 
       aside.col-md-5
         .outer-wrap
-          = link_to colour_path('Black')
+          = link_to partners_in_crime_competition_path
             picture.media-wrap
               .inner-wrap
-                source media='(max-width: 1023px)' srcset='#{image_path("home-page-tiles/CategoryTile03-mob.jpg")}'
-                source media='(min-width: 1024px)' srcset='#{image_path("home-page-tiles/CategoryTile03.jpg")}'
-                img src='#{image_path("home-page-tiles/CategoryTile03.jpg")}' srcset='
-                  #{image_path("home-page-tiles/CategoryTile03-mob.jpg")} 1023w,
-                  #{image_path("home-page-tiles/CategoryTile03.jpg")} 1024w' alt='Midnight is Calling - Shop the BLACK EDIT'
+                source media='(max-width: 1023px)' srcset='#{image_path("home-page-tiles/aside-tile-mob-1.jpg")}'
+                source media='(min-width: 1024px)' srcset='#{image_path("home-page-tiles/aside-tile-1.jpg")}'
+                img src='#{image_path("home-page-tiles/aside-tile-1.jpg")}' srcset='
+                  #{image_path("home-page-tiles/aside-tile-mob-1.jpg")} 1023w,
+                  #{image_path("home-page-tiles/aside-tile-1.jpg")} 1024w' alt='Win a VIP Trip to the Nylon Young Hollywood Party'
 
 
   section.carousel-strap.instagram
