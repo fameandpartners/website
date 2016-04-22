@@ -51,6 +51,12 @@ module AdminUi
       redirect_to product_colors_path, flash: message
     end
 
+    def destroy
+      @product_color_value = ProductColorValue.find(params[:id])
+      @product_color_value.destroy
+      redirect_to product_colors_path, flash: { success: 'Color successfully removed' }
+    end
+
     def colors_options_json
       render json: get_color_options(params[:product_id]).map { |c| {id: c.id, name: c.name} }
     end

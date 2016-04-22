@@ -84,4 +84,10 @@ class ProductColorValuesGrid
       content_tag(:i, '', class: "fa fa-#{class_name}  fa-lg")
     end
   end
+
+  column :remove? do |pcv|
+    format(pcv.id) do
+      button_to('Remove', product_color_path(pcv), action: 'destroy', method: 'delete', class: 'btn btn-danger', data: { confirm: 'Are you sure?' })
+    end
+  end
 end
