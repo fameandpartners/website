@@ -1,4 +1,4 @@
-Feature: Complete Guest Checkout > Successfully Buy a Dress + Email Validation Errors + Successful Payment
+Feature: Complete Guest Checkout
 
   Background:
     Given A sample database with valid data
@@ -28,6 +28,17 @@ Feature: Complete Guest Checkout > Successfully Buy a Dress + Email Validation E
     And I select "<Country>" country
     And I click on "Pay Securely" button
     Then I should see "Customer E-Mail is invalid"
+
+  @javascript @no_vcr
+  Scenario Outline: Buy a Dress
+    When I am on Connie dress page
+    Then I select "<Site Version>" site version
+    And I select "<Dress Size>" size
+    And I select "<Skirt Length>" skirt length
+    And I click on "Add to Cart" button
+    # And I should see the cart sidebar with the checkout button
+    # And I click on "CHECKOUT" button
+    Then I fill in form fields with:
     Then I fill in form fields with:
       | Email                   | test@email.com |
       | First Name              | Roger        |
