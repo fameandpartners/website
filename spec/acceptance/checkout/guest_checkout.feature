@@ -43,7 +43,6 @@ Feature: Complete Guest Checkout
     # And I should see the cart sidebar with the checkout button
     # And I click on "CHECKOUT" button
     Then I fill in form fields with:
-    Then I fill in form fields with:
       | Email                   | test@email.com |
       | First Name              | Roger        |
       | Last Name               | That         |
