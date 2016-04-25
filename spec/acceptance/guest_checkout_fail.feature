@@ -1,3 +1,4 @@
+@chrome
 Feature: Full checkout
 
   Background:
@@ -16,8 +17,8 @@ Feature: Full checkout
     # And I should see the cart sidebar with the checkout button
     # And I click on "CHECKOUT" button
     Then I fill in form fields with:
-      | Email                   | my@email.com |
-      | First Name              | Roger        |
+      | Email                   | test        |
+      | First Name              | test        |
       | Last Name               | That         |
       | Street Address          | Street X     |
       | Street Address (cont'd) | House Y      |
@@ -25,16 +26,8 @@ Feature: Full checkout
       | Phone Number            | 2255-4422    |
       | <Zipcode Label>         | 12345        |
     And I select "<State>" state
-    And I select "<Country>" country
     And I click on "Pay Securely" button
-    And I fill in credit card information:
-      | Card number      | 5520000000000000  |
-      | Name on card     | Zaphod Beeblebrox |
-      | CVC              | 123               |
-      | Expiration Month | 10                |
-      | Expiration Year  | 2050              |
-    And I click on "Place My Order" button
-    Then I should see my order placed, with "Connie" dress, "<Dress Size>" size and "<Dress Price>" price
+    Then I should see "Customer E-Mail is invalid"
 
     Examples:
       | Site Version | Country       | State      | Zipcode Label | Dress Size | Skirt Length | Dress Price |
