@@ -1,4 +1,3 @@
-@chrome
 Feature: Full checkout
 
   Background:
