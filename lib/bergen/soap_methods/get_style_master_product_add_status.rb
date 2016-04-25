@@ -19,7 +19,7 @@ module Bergen
       def required_fields_hash
         {
           'AuthenticationString' => client.auth_token,
-          'UPC'                  => global_sku.sku,
+          'UPC'                  => global_sku.upc,
         }
       end
 

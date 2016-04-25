@@ -24,7 +24,7 @@ module Bergen
               'Style' => global_sku.style_number,
               'Color' => global_sku.color_name,
               'Size'  => global_sku.size,
-              'UPC'   => global_sku.sku,
+              'UPC'   => global_sku.upc,
               'Price' => line_item_presenter.price
             }
           }
