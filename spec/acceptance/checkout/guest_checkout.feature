@@ -28,6 +28,10 @@ Feature: Complete Guest Checkout
     And I select "<Country>" country
     And I click on "Pay Securely" button
     Then I should see "Customer E-Mail is invalid"
+    Examples:
+      | Site Version | Country       | State      | Zipcode Label | Dress Size | Skirt Length | Dress Price |
+      | Australia    | Australia     | Queensland | Postcode      | AU 14      | Petite       | 319.00      |
+      | USA          | United States | California | Zipcode       | US 10      | Petite       | 289.00      |
 
   @javascript @no_vcr
   Scenario Outline: Buy a Dress
