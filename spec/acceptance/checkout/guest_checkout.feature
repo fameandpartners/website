@@ -51,6 +51,8 @@ Feature: Complete Guest Checkout
       | City                    | Melbourne    |
       | Phone Number            | 2255-4422    |
       | <Zipcode Label>         | 12345        |
+    And I select "<State>" state
+    And I select "<Country>" country
     And I click on "Pay Securely" button
     And I fill in credit card information:
       | Card number      | 5520000000000000  |
