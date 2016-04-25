@@ -1,4 +1,4 @@
-Feature: Full checkout
+Feature: Guest checkout fail
 
   Background:
     Given A sample database with valid data
