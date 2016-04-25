@@ -6,7 +6,7 @@ module Bergen
 
     AVAILABLE_WSDLS = {
       production: 'https://sync.rex11.com/ws/v3prod/publicapiws.asmx?WSDL',
-      staging:    'http://sync.rex11.com/ws/v2staging/publicapiws.asmx?WSDL',
+      staging:    'https://sync.rex11.com/ws/v3staging/publicapiws.asmx?WSDL',
     }.freeze
 
     attr_reader :client

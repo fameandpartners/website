@@ -72,9 +72,9 @@ configatron.elasticsearch.indices do |index|
 end
 
 configatron.bergen do |bergen|
-  bergen.account_id = "www.fame&partnersinc.com"
-  bergen.username   = "fameandpartners"
-  bergen.password   = "not_set" # Seriously.
+  bergen.account_id = 'www.fame&partnersinc.com'
+  bergen.username   = 'fameandpartners'
+  bergen.password   = 'not_set' # Seriously.
 end
 
 configatron.pin_payments.usd_gateways = %W{pk_NxLgEbIIaWwjKEqUnTd6oA pk_FJWiUA3rQW1uXZIg3LwMKQ}
@@ -175,9 +175,9 @@ when :production
   end
 
   configatron.bergen do |bergen|
-    bergen.account_id = "www.fame&partnersinc.com"
-    bergen.username   = "fameandpartners"
-    bergen.password   = "Bergen1"
+    bergen.account_id = 'www.fame&partnersinc.com'
+    bergen.username   = 'fameandpartners'
+    bergen.password   = 'Bergen1'
   end
 
 when :test
