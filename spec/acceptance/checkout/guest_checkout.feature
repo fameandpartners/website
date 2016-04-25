@@ -1,4 +1,4 @@
-Feature: Guest checkout success
+Feature: Complete Guest Checkout > Successfully Buy a Dress + Email Validation Errors + Successful Payment
 
   Background:
     Given A sample database with valid data
@@ -16,7 +16,7 @@ Feature: Guest checkout success
     # And I should see the cart sidebar with the checkout button
     # And I click on "CHECKOUT" button
     Then I fill in form fields with:
-      | Email                   | my@email.com |
+      | Email                   | test |
       | First Name              | Roger        |
       | Last Name               | That         |
       | Street Address          | Street X     |
@@ -27,6 +27,16 @@ Feature: Guest checkout success
     And I select "<State>" state
     And I select "<Country>" country
     And I click on "Pay Securely" button
+    Then I should see "Customer E-Mail is invalid"
+    Then I fill in form fields with:
+      | Email                   | test@email.com |
+      | First Name              | Roger        |
+      | Last Name               | That         |
+      | Street Address          | Street X     |
+      | Street Address (cont'd) | House Y      |
+      | City                    | Melbourne    |
+      | Phone Number            | 2255-4422    |
+      | <Zipcode Label>         | 12345        |
     And I fill in credit card information:
       | Card number      | 5520000000000000  |
       | Name on card     | Zaphod Beeblebrox |
