@@ -1,11 +1,11 @@
 module Bergen
   module SoapMethods
     class StyleMasterProductAdd
-      attr_reader :client, :return_request_item
+      attr_reader :client, :spree_variant
 
-      def initialize(savon_client:, return_request_item:)
-        @client              = savon_client
-        @return_request_item = return_request_item
+      def initialize(savon_client:, spree_variant:)
+        @client        = savon_client
+        @spree_variant = spree_variant
       end
 
       def request
@@ -25,18 +25,14 @@ module Bergen
               'Color' => global_sku.color_name,
               'Size'  => global_sku.size,
               'UPC'   => global_sku.upc,
-              'Price' => line_item_presenter.price
+              'Price' => spree_variant.price
             }
           }
         }
       end
 
-      def line_item_presenter
-        return_request_item.line_item_presenter
-      end
-
       def global_sku
-        line_item_presenter.global_sku
+        GlobalSku.find_or_create_by_spree_variant(variant: spree_variant)
       end
     end
   end

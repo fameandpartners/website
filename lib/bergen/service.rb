@@ -12,7 +12,7 @@ module Bergen
       ).request
     end
 
-    def receiving_ticket_add(return_request_item)
+    def receiving_ticket_add(return_request_item:)
       SoapMethods::ReceivingTicketAdd.new(
         savon_client:        client,
         return_request_item: return_request_item
@@ -23,17 +23,17 @@ module Bergen
       # TODO
     end
 
-    def style_master_product_add(return_request_item)
+    def style_master_product_add(spree_variant:)
       SoapMethods::StyleMasterProductAdd.new(
-        savon_client:        client,
-        return_request_item: return_request_item
+        savon_client:  client,
+        spree_variant: spree_variant
       ).request
     end
 
-    def get_style_master_product_add_status(return_request_item)
+    def get_style_master_product_add_status(spree_variant:)
       SoapMethods::GetStyleMasterProductAddStatus.new(
-        savon_client:        client,
-        return_request_item: return_request_item
+        savon_client:  client,
+        spree_variant: spree_variant
       ).request
     end
   end
