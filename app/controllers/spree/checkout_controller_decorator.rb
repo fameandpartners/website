@@ -31,7 +31,7 @@ Spree::CheckoutController.class_eval do
       if !registration.successfull?
         @order.state = 'masterpass' if params[:state] == 'masterpass'
         respond_with(@order) do |format|
-          format.html { redirect_to checkout_state_path(@order.state) }
+          format.html { render :edit }
           format.js   { render 'spree/checkout/registration/failed' }
         end
         return
