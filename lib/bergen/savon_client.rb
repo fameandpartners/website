@@ -5,12 +5,12 @@ module Bergen
     extend Forwardable
 
     AVAILABLE_WSDLS = {
-      production: 'https://sync.rex11.com/ws/v3prod/publicapiws.asmx?WSDL',
-      staging:    'https://sync.rex11.com/ws/v3staging/publicapiws.asmx?WSDL',
+      'production' => 'https://sync.rex11.com/ws/v3prod/publicapiws.asmx?WSDL',
+      'staging'    => 'https://sync.rex11.com/ws/v3staging/publicapiws.asmx?WSDL',
     }.freeze
 
     attr_reader :client
-    def_delegators :client, :request
+    def_delegators :client, :request, :wsdl
 
     def initialize
       @client ||= Savon.client(wsdl_file)
@@ -35,7 +35,7 @@ module Bergen
     end
 
     def wsdl_file
-      AVAILABLE_WSDLS.fetch(Rails.env, AVAILABLE_WSDLS[:staging])
+      AVAILABLE_WSDLS.fetch(Rails.env, AVAILABLE_WSDLS['staging'])
     end
 
     def default_credentials
