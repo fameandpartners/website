@@ -132,7 +132,7 @@ class Products::CollectionsController < Products::BaseController
     if color_group = available_color_groups.find_by_name(permalink.downcase)
       return {color_group: color_group.name}
     end
-
+    
     if taxon = Spree::Taxon.published.find_child_taxons_by_permalink(permalink)
       case taxonomy = taxon.taxonomy.name.downcase
         when 'style', 'edits', 'event'
