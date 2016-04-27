@@ -1,130 +1,101 @@
-.page-content.contact-v2
+.contact-us.page-content
   .container
     .row
+
       .col-md-12
         h1 How can we help?
-        
-    .row data-sticky_parent=""
-      .col-md-7
-        h2.h5 Your details
-        
-        .container-fluid
-          .row
-            .col-md-10.no-padding
-              = form_for @contact, url: contact_path, method: :post, html: {class: 'col-md-12 container-fluid'} do |f|
-                = f.hidden_field :site_version
-              
-                .row.form-group
-                  .col-md-10.col-sm-12.no-padding
-                    = f.label :first_name
-                      ' First name *
-                    = f.text_field :first_name, :class => 'form-control form-control-md'
-                    
-                .row.form-group
-                  .col-md-10.col-sm-12.no-padding
-                    = f.label :last_name
-                      ' Last name *
-                    = f.text_field :last_name, :class => 'form-control form-control-md'
-                .row.form-group
-                  .col-md-10.col-sm-12.no-padding
-                    = f.label :email
-                      ' Email *
-                    = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
-                .row.form-group
-                  .col-md-10.col-sm-12.no-padding
-                    = f.label :phone
-                      ' Phone number
-                    = f.text_field :phone, :class => 'form-control form-control-md'
-                    .help-block
-                      | (include country code)
-                
-                .row
-                  .col-md-12.no-padding
-                    h3.h5 Your enquiry
-                    
-                    h4.tabs-label How can we help?
-                    .container-fluid
-                      ul.nav.nav-pill.row roll="tablist"
-                        li.col-xs-4.no-padding roll="presentation"
-                          a href="#making-a-purchase" aria-controls="making-a-purchase" role="tab" data-toggle="pill" Making a purchase
-                        li.col-xs-4.no-padding role="presentation"
-                          a href="#exisitng-orders" aria-controls="exisitng-orders" role="tab" data-toggle="pill" Existing orders
-                        li.col-xs-4.no-padding role="presentation"
-                          a href="#other-enquiries" aria-controls="other-enquiries" role="tab" data-toggle="pill" Other enquiries
-                    
-                    .tab-content
-                      #making-a-purchase.tab-pane roll="tabpanel"
-                        .form-group
-                          //TODO need to seperate these options into three seperat selectboxes
-                          = f.label :subject, 'Category'
-                          = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, params[:selected_option]), {}, :class => 'form-control form-control-md selectbox'
-                      #exisitng-orders.tab-pane roll="tabpanel"
-                        .form-group
-                          = f.label :subject, 'Category'
-                          = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, params[:selected_option]), {}, :class => 'form-control form-control-md selectbox'
-                      #other-enquiries.tab-pane roll="tabpanel"
-                        .form-group
-                          = f.label :subject, 'Category'
-                          = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, params[:selected_option]), {}, :class => 'form-control form-control-md selectbox'
-                        
-                .row
-                  .col-sm-12.no-padding
-                    .form-group.enquiry-container.animate-height.animate-hidden
-                      = f.label :message, 'Your enquiry'
-                      = f.text_area :message, :class => 'form-control custom', :rows => '2'
-                
-                .row
-                  .col-md-6.no-padding.submit-container.animate-height.animate-hidden
-                    = f.submit "submit", class: 'btn btn-black btn-block'
-  
-      .col-md-5
-        .faqs-container data-sticky_column=""
+
+      .col-md-6
+        h2.h5 YOUR DETAILS
+        = form_for @contact, url: contact_path, method: :post do |f|
+          = f.hidden_field :site_version
+
+          .details-wrap
+            .form-group
+              = f.label :first_name
+                ' First name *
+              = f.text_field :first_name, :class => 'form-control form-control-md'
+            .form-group
+              = f.label :last_name
+                ' Last name *
+              = f.text_field :last_name, :class => 'form-control form-control-md'
+            .form-group
+                = f.label :email
+                  ' Email *
+                = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
+            .form-group
+              = f.label :phone
+                ' Phone number
+              = f.text_field :phone, :class => 'form-control form-control-md'
+              .help-block
+               | (include country code)
+
+          h2.h5 WHAT CAN WE HELP WITH?
+
+          ul.nav.nav-pill.nav-justified role='tablist'
+            li role='presentation'
+              a href='#panel-making-a-purchase' data-target='#panel-making-a-purchase, #panel-enquiry, #panel-making-a-purchase-faq' data-toggle='tab' aria-controls='panel-making-a-purchase' role='tab' Making a purchase
+            li role='presentation'
+              a href='#panel-exisitng-orders' data-target='#panel-exisitng-orders, #panel-enquiry, #panel-exisitng-orders-faq' data-toggle='tab' aria-controls='panel-exisitng-orders' role='tab' Existing orders
+            li role='presentation'
+              a href='#panel-other-enquiries' data-target='#panel-other-enquiries, #panel-enquiry, #panel-other-enquiries-faq' data-toggle='tab' aria-controls='panel-other-enquiries' role='tab' Other enquiries
+
+          .tab-content.enquiry-wrap
+            #panel-making-a-purchase.row.tab-pane.form-group role='tabpanel'
+              //TODO need to seperate these options into three seperat selectboxes
+              .col-md-6
+                = f.label :subject, 'Category'
+                = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, params[:selected_option], 'Select'), {}, :class => 'form-control form-control-md'
+            #panel-exisitng-orders.row.tab-pane.form-group role='tabpanel'
+              .col-md-6
+                = f.label :subject, 'Category'
+                = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, params[:selected_option], 'Select'), {}, :class => 'form-control form-control-md'
+            #panel-other-enquiries.row.tab-pane.form-group role='tabpanel'
+              .col-md-6
+                = f.label :subject, 'Category'
+                = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, params[:selected_option], 'Select'), {}, :class => 'form-control form-control-md'
+            #panel-enquiry.tab-pane
+              .form-group
+                = f.label :message, 'Your enquiry'
+                = f.text_area :message, :class => 'form-control', :rows => '4'
+              .row
+                .col-md-6.form-group
+                  = f.submit "submit", class: 'btn btn-black btn-block'
+
+      .col-md-5.col-md-offset-1
+        .faq-wrap.js-faq-wrap data-spy=""
           .faqs-inner
-          
             h2.h5 Popular FAQS
             .page-content.faq
               .row
                 .col-md-12
                   #accordion-contact-accordion.panel-group.container-fluid roll="tablist" aria-multiselectable="false"
-                    .panel.panel-default
-                      = render 'shared/redesign/faqs/returns_policy'
-                      = render 'shared/redesign/faqs/returns_different'
-                      = render 'shared/redesign/faqs/returns_steps'
-                      = render 'shared/redesign/faqs/returns_how_long'
-                      = render 'shared/redesign/faqs/returns_store_credit'
-                    
-              .row
-                .col-md-12  
-                  a.link-to-faqs href="/faqs" SEE ALL FAQS
-                  
-script type="text/javascript" src="/assets/libs/jquery.sticky-kit.min.js"
+                    .tab-content
+                      .tab-pane.active
+                        = render 'shared/redesign/faqs/returns_policy'
+                        = render 'shared/redesign/faqs/returns_different'
+                        = render 'shared/redesign/faqs/returns_steps'
+                        = render 'shared/redesign/faqs/returns_how_long'
+                        = render 'shared/redesign/faqs/returns_store_credit'
+                      #panel-making-a-purchase-faq.tab-pane
+                        = render 'shared/redesign/faqs/returns_policy'
+                        = render 'shared/redesign/faqs/returns_different'
+                        = render 'shared/redesign/faqs/returns_steps'
+                        = render 'shared/redesign/faqs/returns_how_long'
+                        = render 'shared/redesign/faqs/returns_store_credit'
+                      #panel-exisitng-orders-faq.tab-pane
+                        = render 'shared/redesign/faqs/returns_policy'
+                        = render 'shared/redesign/faqs/returns_different'
+                      #panel-other-enquiries-faq.tab-pane
+                        = render 'shared/redesign/faqs/returns_policy'
+                        = render 'shared/redesign/faqs/returns_different'
+                        = render 'shared/redesign/faqs/returns_steps'
+                        = render 'shared/redesign/faqs/returns_how_long'
+                        = render 'shared/redesign/faqs/returns_store_credit'
+                        = render 'shared/redesign/faqs/returns_steps'
+                        = render 'shared/redesign/faqs/returns_how_long'
+                        = render 'shared/redesign/faqs/returns_store_credit'
 
-javascript:
-  (function ($) {
-  
-    $('.panel-title').each(function(){
-      var $this = $(this); 
-      $this.data('parent', '#accordion-contact-accordion');
-    });
-    
-    $('.selectbox').each(function(){
-      var $this = $(this);
-      $this.change(function(){
-        $('.animate-height').removeClass('animate-hidden');
-      });
-    });
-  
-    var hash = document.location.hash;
-    if (hash) {
-      $(hash).addClass('in');
-    }
-    
-    //todo @radek I installed this plugin at ally's request 
-    $('.faqs-container').stick_in_parent({
-      parent: '[data-sticky_parent]',
-      inner_scrolling: true,
-      sticky_class: 'sticky',
-      bottoming: true
-    });
-    
-  }(jQuery));
+              .row
+                .col-md-12
+                  = link_to 'SEE ALL FAQS', faqs_path

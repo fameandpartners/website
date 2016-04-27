@@ -1,107 +1,77 @@
 /* [Contact]
 -------------------------------------------------------*/
-.contact-v2 {
-  padding-top: 5rem;
-  padding-bottom: 7rem;
+.contact-us {
 
   h1 {
     text-transform: none;
   }
 
-  h2.h5, h3.h5 {
+  h2 {
     font-family: $font-family-secondary;
-    font-weight: 500;
-    margin-bottom: 1.5rem;
+    font-size: 0.875em;
+    font-weight: 700;
+    margin-bottom: 20px;
   }
 
-  a {
+  a:not(.btn) {
     color: inherit;
     text-decoration: underline;
   }
 
-  #new_contact {
-    padding-bottom: 7rem;
+  .affix {
+    position: fixed;
+    top: 0;
   }
 
-  textarea.custom {
-    height: 200px;
+  .affix-top {
+    position: static;
   }
 
-  ul.nav {
+  .affix-bottom {
+    position: absolute;
+  }
+
+  .details-wrap {
+    margin-bottom: 30px;
+  }
+
+  .enquiry-wrap .tab-pane {
+    margin-top: 20px;
+  }
+
+  .nav-pill {
+
     li {
-      background-color: $c-neutral-2;
-      border-right: 2px solid $c-neutral-white;
-      a {
-        text-decoration: none;
-        text-transform: uppercase;
-        text-align: center;
-        font-size: 1.3rem;
+      border-left: 2px solid $c-neutral-white;
+
+      &:first-child {
+        border-left: none;
       }
-      &.active {
-        background-color: $c-brand-blue-pale;
-        a {
-          color: $c-neutral-white;
-          background-color: transparent;
-        }
-        a:hover{
-          color: $c-neutral-12;
-        }
-        a:focus {
-          color: $c-neutral-white;
-          background-color: transparent;
-        }
+
+    }
+
+    a {
+      text-decoration: none;
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 0.75em;
+      background: $c-neutral-2;
+
+      &:hover,
+      &:focus {
+         background: $c-neutral-4;
       }
-      &:last-child {
-        border-right: none;
-      }
+
     }
-  }
 
-  h4.tabs-label {
-    font-family: $font-family-secondary;
-    line-height: normal;
-    font-size: 1.125em;
-    font-weight: 500;
-    text-transform: none;
-    color: $c-neutral-12;
-    padding: 0 0 0.5rem;
-    display: block;
-    text-align: left;
-  }
-
-  .tab-content {
-    padding: 1.5rem 0;
-
-    p {
-      font-weight: 300;
+    .active a {
+      color: $c-neutral-white;
+      background: $c-brand-blue;
     }
+
   }
 
-  .animate-height {
-    overflow: hidden;
-    @include transition(height 500ms cubic-bezier(0.860, 0.000, 0.070, 1.000));
-    &.animate-hidden {
-      height: 0;
-      @include transition(height 500ms cubic-bezier(0.860, 0.000, 0.070, 1.000));
-    }
-  }
-
-  .enquiry-container {
-    height: 231px;
-  }
-
-  .submit-container {
-    height: 47px;
-    @include transition-delay(350ms);
-  }
-
-  .btn {
-    margin-top: 2px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-  .faqs-container {
+  .faq-wrap {
 
     .faqs-inner{
       padding-top: 1rem;
@@ -147,21 +117,25 @@
       }
     }
 
-  }
-
-  @media (min-width: $bootstrap-md-width)and(max-width: $bootstrap-lg-width) {
-    ul.nav li a{
-      font-size: 1.1rem;
+    @media (min-width: $bootstrap-md-width) {
+      width: 404px;
+      padding-top: 30px;
     }
 
-
-
-  }
-
-  @media (min-width: $bootstrap-lg-width) {
-
-
+    @media (min-width: $bootstrap-lg-width) {
+      width: 457px; //  this needs to have set width because position fixed, see .affix
+    }
 
   }
+
+  // START - desktop
+  @media (min-width: $bootstrap-md-width) {
+
+    .details-wrap {
+      padding-right: 20%;
+    }
+
+  }
+  // END - desktop
 
 }
