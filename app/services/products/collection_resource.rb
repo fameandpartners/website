@@ -144,6 +144,7 @@ class Products::CollectionResource
       end
 
       result[:exclude_taxon_ids] = remove_excluded_from_site_logic ? nil : black_hole_taxon_ids - result[:taxon_ids]
+      result[:exclude_taxon_ids] = allow_skirt_query(result[:exclude_taxon_ids], result[:taxon_ids])
 
       result[:discount]     = discount if discount.present?
       result[:fast_making]  = fast_making unless fast_making.nil?
@@ -158,6 +159,11 @@ class Products::CollectionResource
       result[:show_outerwear] = show_outerwear
 
       result
+    end
+
+    def allow_skirt_query(exclude_taxons_list, query_taxons)
+      skirt_taxon_id = Spree::Taxon.where(name: "Skirt").first.id
+      exclude_taxons_list.delete(skirt_taxon_id) if query_taxons.include?(skirt_taxon_id)
     end
 
     def total_products
