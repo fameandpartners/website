@@ -10,7 +10,6 @@
 
 - if sub_heading.blank? && description.blank?
   - sub_heading = 'MADE FOR YOU.'
-  - description = '*In as little as 48 hours.'
 
 .col-xs-6.col-xxs-6.col-md-4.category--item
   .panel-seo
@@ -19,7 +18,6 @@
         .content-wrap.js-sub-heading
           .title
             span= raw(sub_heading)
-          = raw(description)
 
 - @collection.products.drop(2).each_slice(col) do |products|
   /! [][][]

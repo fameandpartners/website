@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   # Theme
   # s.add_dependency "inspinia-rails"
   s.add_dependency "font-awesome-rails"
-
+  s.add_dependency "chosen-rails"
 
   # Even with this here, the helper is not loaded unless the main app
   # also inlcudes 'active_link_to' in it's Gemfile.
