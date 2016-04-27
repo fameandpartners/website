@@ -39,6 +39,7 @@ Spree::Product.class_eval do
                   :size_chart,
                   :related_outerwear_ids
 
+  attr_reader :name_with_sku
 
   scope :has_options, lambda { |option_type, value_ids|
     joins(variants: :option_values).where(
@@ -72,6 +73,10 @@ Spree::Product.class_eval do
 
   SIZE_CHARTS = SizeChart::CHARTS.keys
   validates_inclusion_of :size_chart, in: SIZE_CHARTS
+
+  def name_with_sku
+    "#{name} (SKU: #{sku})"
+  end
 
   def new_size_chart?
     size_chart == SIZE_CHARTS.last

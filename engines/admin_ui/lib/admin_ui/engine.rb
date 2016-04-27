@@ -1,5 +1,6 @@
 module AdminUi
   class Engine < ::Rails::Engine
+    require 'chosen-rails'
     isolate_namespace AdminUi
     initializer :assets, :group => :all do |app|
       app.config.assets.precompile += %w{ admin_ui.css }

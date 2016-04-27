@@ -1,6 +1,6 @@
 /* [Content Order]
 -------------------------------------------------------*/
-@media (max-width: $desktop-width - 1) {
+@media (max-width: $bootstrap-md-width - 1) {
 
   .mobile-change-order {
     display: -webkit-box;
@@ -32,6 +32,12 @@
       -webkit-box-ordinal-group: 3;
       -moz-box-ordinal-group: 3;
       box-ordinal-group: 3;
+    }
+
+    .position-4 {
+      -webkit-box-ordinal-group: 4;
+      -moz-box-ordinal-group: 4;
+      box-ordinal-group: 4;
     }
 
   }

@@ -66,8 +66,14 @@ class Products::CollectionsController < Products::BaseController
   end
 
   def product_ids
-    page_pids   = page.get(:pids).to_s.split(',')
-    params_pids = Array.wrap(params[:pids])
+    params_pids = case params[:pids]
+                    when Hash
+                      params[:pids].values
+                    else
+                      Array.wrap(params[:pids])
+                  end
+
+    page_pids = page.get(:pids).to_s.split(',')
     params_pids.empty? ? page_pids : params_pids
   end
 

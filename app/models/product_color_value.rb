@@ -1,5 +1,5 @@
 class ProductColorValue < ActiveRecord::Base
-  attr_accessible :option_value
+  attr_accessible :option_value, :product_id, :option_value_id, :active, :custom
 
   belongs_to :product, class_name: 'Spree::Product', inverse_of: :product_color_values
   belongs_to :option_value,
@@ -7,6 +7,8 @@ class ProductColorValue < ActiveRecord::Base
              conditions: ['option_type_id = ?', Spree::OptionType.color_scope ]
 
   has_many :images, as: :viewable, order: :position, dependent: :destroy, class_name: "Spree::Image"
+
+  validates :product_id, :option_value_id, presence: true
 
   def recommended?
     ! custom?

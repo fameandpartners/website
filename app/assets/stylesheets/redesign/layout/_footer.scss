@@ -1,0 +1,172 @@
+/* [Footer]
+-------------------------------------------------------*/
+footer.main {
+  padding: 60px 0;
+  font-family: $font-heading;
+  font-weight: 300;
+  background: $gray-light-bg;
+
+  p {
+    font-family: $font-heading;
+    font-weight: 300;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a:not(.btn) {
+    color: $c-neutral-black;
+  }
+
+  a:not([class^="icon-"]):not(.btn) {
+    border-bottom: solid transparent 1px;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      border-color: $c-neutral-black;
+    }
+
+  }
+
+  .logo {
+    width: 100%;
+    max-width: 260px;
+  }
+
+  .logo-dark {
+    display: inline-block;
+  }
+
+  .logo-light {
+    display: none;
+  }
+
+  .title {
+    font-family: $font-family-secondary;
+    font-size: 0.875em;
+    font-weight: 500;
+  }
+
+  nav {
+    margin-top: 60px;
+
+    li {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+  }
+
+  .newsletter-wrap {
+    padding-top: 30px;
+  }
+
+  .social-wrap {
+    margin-top: 30px;
+    font-size: 24px;
+
+    li {
+      display: inline-block;
+      margin-left: 40px;
+      margin-bottom: 0;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+    }
+
+  }
+
+  .copyright-wrap {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .form-control {
+    border-color: $c-neutral-8;
+  }
+
+  .btn {
+    min-height: 46px;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-color: $c-neutral-black;
+  }
+
+  &.skin-dark {
+    color: $c-neutral-white;
+    background: $c-neutral-black;
+
+    p {
+      color: $c-neutral-white;
+    }
+
+    a:not(.icon):not(.btn) {
+      color: $c-neutral-white;
+
+      &:hover,
+      &:focus,
+      &:active,
+      &.active {
+        border-color: $c-neutral-white;
+      }
+
+    }
+
+    .logo-dark {
+      display: none;
+    }
+
+    .logo-light {
+      display: inline-block;
+    }
+
+    .form-control,
+    .btn {
+      border-color: $c-neutral-white;
+    }
+
+  }
+
+    // START - mobile
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    p,
+    ul,
+    .logo-wrap,
+    .social-wrap {
+      text-align: center;
+    }
+
+    li {
+      display: inline-block;
+    }
+
+    .social-wrap li {
+      margin-left: 25px;
+    }
+
+  }
+  // END - mobile
+
+  // START - desktop
+  @media (min-width: $bootstrap-md-width) {
+
+    nav {
+      margin-top: -28px;
+    }
+
+    .newsletter-wrap {
+      padding-top: 127px;
+    }
+
+  }
+  // END - desktop
+
+}

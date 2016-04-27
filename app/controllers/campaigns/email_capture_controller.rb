@@ -90,6 +90,6 @@ class Campaigns::EmailCaptureController < ApplicationController
                                  utm_params: session[:utm_params], site_version: current_site_version.name,
                                  form_name: 'Footer Contact').capture
 
-    render nothing: true
+    render :json => { status: 'done' }
   end
 end

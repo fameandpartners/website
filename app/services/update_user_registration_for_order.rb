@@ -67,13 +67,6 @@ class Services::UpdateUserRegistrationForOrder
   end
 
   def order_params_valid?
-    email = order_params[:email]
-    error_messages = EmailValidator.new(attributes: order_params).validate_each(@order, :email, email)
-    if error_messages.present?
-      @order.errors.add(:email, *error_messages)
-    end
-    @order.errors.add(:first_name, "can't be blank")  if order_params[:user_first_name].blank?
-    @order.errors.add(:last_name, "can't be blank")   if order_params[:user_last_name].blank?
     @order.errors.blank?
   end
 

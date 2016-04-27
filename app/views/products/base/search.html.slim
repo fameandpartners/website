@@ -6,33 +6,34 @@ ruby:
 
 = render :partial => 'products/collections/javascript' if @collection.present?
 
-.page-title.default style="background-color:#EDDCEF;"
-  .container
-    .page-title--details
+.category-header
+  .media-wrap
+    = image_tag 'product-collections/default-banner.jpg'
+  .outer-wrap
+    .inner-wrap
       - if @collection.any?
-        h1.no-padding-bottom Results for "#{params[:q]}"
+        h1.title
+          span.js-heading Results for "#{params[:q]}"
       - else
-        h1.no-padding-bottom Sorry
-        p We couldn't find the stuff you were looking for.
+        h1.title
+          span.js-heading Sorry
+          .sub-heading We couldn't find the stuff you were looking for.
 
-.page-content.products-collections.category
-  - if !@collection.none?
-    = render :partial => 'products/collections/filters_sort'
-  .container-fluid
-    - if @collection.none?
-      .row.relative
-        .col.col-md-12.text-center
-          p
-          | Don't sweat it. #{link_to('Browse our dresses', dresses_path)}
+.page-content.products-collections
+  .container
+    .row
+      .col-md-12
+        = render :partial => 'products/collections/filters_sort'
+      .col-lg-3.col-md-4.side-panel.side-panel-left.js-side-panel-filters
+        a.btn-close.js-trigger-toggle-filters href='javascript:;'
+          .hide-visually Close filters
+        = render :partial => 'products/collections/filters_color_shape_style'
 
-    - else
-      .row-fluid
-        .col-md-3.filter-col
-          div.inner
-            = render :partial => 'products/collections/filters_color_shape_style'
-
-        .col-md-9
-          .container-fluid.relative.products-collection
+      .col-lg-9.col-md-8.products-collection
+        .row.products-set.js-products-collection-wrap
+          - if @collection.none?
+            .text-center
+              p Don't sweat it. #{link_to('Browse our dresses', dresses_path)}
+          - else
             = render partial: 'products/collections/products_with_content', locals: {col: 3}
-
             = render partial: 'products/collections/pagination'

@@ -57,6 +57,18 @@ namespace :dev do
       user.skip_welcome_email         = true
       user.validate_presence_of_phone = false
     end.save
+
+    admin = Spree::User.new.tap do |user|
+      user.first_name                 = 'Example'
+      user.last_name                  = 'Admin'
+      user.email                      = 'admin@example.com'
+      user.password                   = '123456'
+      user.password_confirmation      = '123456'
+      user.skip_welcome_email         = true
+      user.validate_presence_of_phone = false
+    end
+    admin.save
+    admin.spree_roles << Spree::Role.find_by_name('admin')
   end
 
   desc 'Disable all feature flags'
