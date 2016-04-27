@@ -5,9 +5,8 @@ Feature: Complete Guest Checkout
     And Data is setup correctly
     And Setup default feature flags
 
-  # TODO: Payment step require connection to PIN payment method. This should be recorded by VCR, not ignored.
   @javascript @no_vcr
-  Scenario Outline: Email Validation Errors
+  Scenario Outline: User Validation Errors
     When I am on Connie dress page
     Then I select "<Site Version>" site version
     And I select "<Dress Size>" size
@@ -15,24 +14,28 @@ Feature: Complete Guest Checkout
     And I click on "Add to Cart" button
     # And I should see the cart sidebar with the checkout button
     # And I click on "CHECKOUT" button
-    Then I fill in form fields with:
-      | Email                   | test      |
-      | First Name              | Roger     |
-      | Last Name               | That      |
-      | Street Address          | Street X  |
-      | Street Address (cont'd) | House Y   |
-      | City                    | Melbourne |
-      | Phone Number            | 2255-4422 |
-      | <Zipcode Label>         | 12345     |
+    Then I fill in form fields with blank spaces:
+      | First Name |
+      | Last Name  |
+    And I fill in form fields with:
+      | Email                   | invalid-email |
+      | Street Address          | Street X      |
+      | Street Address (cont'd) | House Y       |
+      | City                    | Melbourne     |
+      | Phone Number            | 2255-4422     |
+      | <Zipcode Label>         | 12345         |
     And I select "<State>" state
     And I select "<Country>" country
     And I click on "Pay Securely" button
     Then I should see "Customer E-Mail is invalid"
+    Then I should see "First name can't be blank"
+    Then I should see "Last name can't be blank"
     Examples:
       | Site Version | Country       | State      | Zipcode Label | Dress Size | Skirt Length |
       | Australia    | Australia     | Queensland | Postcode      | AU 14      | Petite       |
       | USA          | United States | California | Zipcode       | US 10      | Petite       |
 
+  # TODO: Payment step require connection to PIN payment method. This should be recorded by VCR, not ignored.
   @javascript @no_vcr
   Scenario Outline: Successfully Buy a Dress
     When I am on Connie dress page
