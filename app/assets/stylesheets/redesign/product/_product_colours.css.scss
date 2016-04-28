@@ -210,6 +210,7 @@ $product-color-wine:            #831c2e;
 .color-cinnamon                { background-color: $product-color-cinnamon; }
 .color-cobalt                  { background-color: $product-color-cobalt; }
 .color-cobalt-blue             { background-color: #0000e5; } /* Deprecated? */
+.color-cobalt-crush-floral     { @include image-color-selector('CobaltCrushFloral.png'); }
 .color-coffee                  { background-color: $product-color-coffee; }
 .color-coral                   { background-color: $product-color-coral; }
 .color-cornflower-blue         { background-color: $product-color-cornflower-blue; }
@@ -317,6 +318,7 @@ $product-color-wine:            #831c2e;
 .color-purple-metal            { background-color: $product-color-purple-metal; }
 .color-red                     { background-color: $product_color-red; }
 .color-red-and-white           { @include split-color-selector($product-color-red, $product-color-white); }
+.color-renta-watercolour       { @include image-color-selector('RentaWatercolour.png'); }
 .color-rococo-floral           { @include image-color-selector('RococoFloral.png'); }
 .color-rose                    { background-color: $product-color-rose; }
 .color-rose-gold               { background-color: $product-color-rose-gold; }
@@ -344,6 +346,7 @@ $product-color-wine:            #831c2e;
 .color-turquoise               { background-color: $product-color-turquoise; }
 .color-vibrant-purple          { background-color: $product-color-vibrant-purple; }
 .color-watercolour             { @include image-color-selector('Watercolour.png'); }
+.color-watercolour-camo        { @include image-color-selector('WatercolourCamo.png'); }
 .color-watermelon              { background-color: $product-color-watermelon; }
 .color-white-and-mint          { @include split-color-selector($product-color-white, $product-color-mint); }
 .color-wine                    { background-color: $product-color-wine; }
