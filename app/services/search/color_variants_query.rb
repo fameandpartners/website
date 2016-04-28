@@ -18,7 +18,7 @@ module Search
   class ColorVariantsQuery
     def self.build(options = {})
       options = HashWithIndifferentAccess.new(options)
-
+      
       # some kind of documentation
       colors            = options[:color_ids]
       body_shapes       = options[:body_shapes]
