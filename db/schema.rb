@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160427052835) do
+ActiveRecord::Schema.define(:version => 20160428204352) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -261,6 +261,7 @@ ActiveRecord::Schema.define(:version => 20160427052835) do
   end
 
   add_index "global_skus", ["product_id"], :name => "index_global_skus_on_product_id"
+  add_index "global_skus", ["sku"], :name => "index_global_skus_on_sku", :unique => true
   add_index "global_skus", ["variant_id"], :name => "index_global_skus_on_variant_id"
 
   create_table "incompatibilities", :force => true do |t|
