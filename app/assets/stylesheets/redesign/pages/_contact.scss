@@ -15,7 +15,6 @@
 
   a:not(.btn) {
     color: inherit;
-    text-decoration: underline;
   }
 
   .affix {
@@ -51,7 +50,6 @@
     }
 
     a {
-      text-decoration: none;
       text-transform: uppercase;
       text-align: center;
       font-size: 0.75em;
@@ -72,25 +70,22 @@
   }
 
   .faq-wrap {
-
-    .faqs-inner{
-      padding-top: 1rem;
-      background-color: $c-neutral-3;
-    }
-
-    .page-content {
-      padding-bottom: 30px;
-    }
+    padding: 20px;
+    background: $c-neutral-3;
 
     h3 {
+      margin: 0;
       text-transform: none;
-      font-weight: 500;
-      font-size: 1.6rem;
+      font-size: 1em;
     }
 
     .h5 {
-      padding: 1rem 0;
       text-align: center;
+      font-size: 1em;
+    }
+
+    p {
+      font-size: 0.875em;
     }
 
     .panel-group {
@@ -98,28 +93,22 @@
     }
 
     .panel {
-      background-color: transparent;
-
-      > .panel-heading {
-        background-color: transparent;
-
-      }
-
+      background: transparent;
     }
 
-    a {
-      text-decoration: none;
+    .footer-wrap {
+      margin-top: 20px;
+      text-align: center;
 
-      &.link-to-faqs {
-        margin-top: 2rem;
-        text-align: center;
-        display: block;
+      a {
+        text-decoration: underline;
       }
+
     }
 
     @media (min-width: $bootstrap-md-width) {
       width: 404px;
-      padding-top: 30px;
+      margin-top: 30px;
     }
 
     @media (min-width: $bootstrap-lg-width) {
