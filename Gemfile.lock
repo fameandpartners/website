@@ -910,6 +910,7 @@ DEPENDENCIES
   ruby-progressbar
   rubyzip (~> 1.1.7)
   sass-rails (~> 3.2.3)
+  savon (~> 1.2.0)
   selenium-webdriver (~> 2.53.0)
   sentry-raven
   shoulda-matchers

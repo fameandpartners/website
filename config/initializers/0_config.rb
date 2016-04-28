@@ -71,6 +71,12 @@ configatron.elasticsearch.indices do |index|
   index.color_variants = :color_variants
 end
 
+configatron.bergen do |bergen|
+  bergen.account_id = 'www.fame&partnersinc.com'
+  bergen.username   = 'fameandpartners'
+  bergen.password   = 'not_set' # Seriously.
+end
+
 configatron.pin_payments.usd_gateways = %W{pk_NxLgEbIIaWwjKEqUnTd6oA pk_FJWiUA3rQW1uXZIg3LwMKQ}
 
 configatron.site_version_detector_strategy = :path
@@ -166,6 +172,12 @@ when :production
   configatron.mailchimp do |mailchimp|
     mailchimp.api_key = '0340ea09d6c21efd808cce3d9c9440f6-us7'
     mailchimp.list_id = '77e91e8697'
+  end
+
+  configatron.bergen do |bergen|
+    bergen.account_id = 'www.fame&partnersinc.com'
+    bergen.username   = 'fameandpartners'
+    bergen.password   = 'Bergen1'
   end
 
 when :test
