@@ -1,6 +1,7 @@
 - if local_assigns[:hidden].blank?
   ruby:
-    sort_options = options_from_collection_for_select(@filter.sort_orders, :first, :second, @collection.order.try(:downcase))
+    selected_filter_sort = params[:order]
+    sort_options         = options_from_collection_for_select(@filter.sort_orders, :first, :second, selected_filter_sort)
 
   .row
     .col-md-12
