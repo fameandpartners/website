@@ -37,21 +37,14 @@ class Products::BaseController < ApplicationController
   end
 
   def search_results
-    if search_performed?
-      Products::CollectionResource.new({
-                                         site_version: current_site_version,
-                                         query_string: params[:q],
-                                         limit:        50
-                                       }.merge(params.symbolize_keys)).read
-    else
-      []
-    end
-  rescue StandardError
+    Products::CollectionResource.new({
+                                       site_version: current_site_version,
+                                       query_string: params[:q],
+                                       limit:        50
+                                     }.merge(params.symbolize_keys)).read
+  rescue StandardError => e
+    NewRelic::Agent.notice_error(e)
     []
-  end
-
-  def search_performed?
-    params[:q].present?
   end
 
   def load_filters

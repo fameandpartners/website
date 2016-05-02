@@ -8,6 +8,14 @@ module Acceptance
         fill_in 'searchValue', with: dress_name
         find('#search').click
       end
+
+      step 'Search for an empty string' do
+        find('#search').click
+
+        # Fill in and  enter
+        fill_in 'searchValue', with: ' '
+        find('#search').click
+      end
     end
   end
 end
