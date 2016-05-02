@@ -4,7 +4,7 @@
 
 module Bergen
   module SoapMethods
-    class ReceivingTicketAdd
+    class ReceivingTicketAdd < BaseRequest
       DEFAULT_SOAP_NAMESPACES = {
         'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
         'xmlns:xsd'  => 'http://www.w3.org/2001/XMLSchema',

@@ -1,7 +1,7 @@
 module Bergen
   module SoapMethods
-    class StyleMasterProductAdd
       attr_reader :client, :spree_variant
+    class StyleMasterProductAdd < BaseRequest
 
       def initialize(savon_client:, spree_variant:)
         @client        = savon_client
