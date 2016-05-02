@@ -13,7 +13,6 @@ Feature: Add to Moodboard
     When I visit the dresses page
     And DOM is ready for JS interaction
     And I add "Connie" to my moodboard
-    Then I should see the dress added to the moodboard
     Then I should have "Connie" on my moodboard
 
   @javascript
@@ -21,7 +20,6 @@ Feature: Add to Moodboard
     When I visit the dresses page
     And DOM is ready for JS interaction
     And I add "Connie" to my moodboard
-    Then I should see the dress added to the moodboard
     Then I should have "Connie" on my moodboard
     When I remove "Connie" from my moodboard
      # The extra page view is required here, as the dummy text

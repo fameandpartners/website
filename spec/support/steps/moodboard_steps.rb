@@ -9,11 +9,7 @@ module Acceptance
 
         expect(page).to have_text('Wishlist')
         click_link 'Wishlist'
-      end
-    end
 
-    step 'I should see the dress added to the moodboard' do
-      within('.details') do
         expect(page).to have_selector('i.fa-check')
       end
     end
