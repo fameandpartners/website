@@ -18,7 +18,11 @@
         <dt><%= t(:shipment) %>: </dt>
         <dd id='shipment_status'><span class="state <%= @order.shipment_state %>"><%= t(@order.shipment_state, :scope => :shipment_states, :default => [:missing, "none"]) %></span></dd>
 
-        <%= link_to 'Mark order as Shipped', mark_order_as_shipped_admin_order_path(@order), class: 'button', style: 'padding-top: 12px;' %>
+        <% if @order.can_ship? %>
+          <%= link_to 'Mark order as Shipped', mark_order_as_shipped_admin_order_path(@order), class: 'button', style: 'padding-top: 12px;' %>
+          <blockquote>Note: this <b>will not</b> trigger any emails</blockquote>
+        <% end %>
+
         <dt><%= t(:payment) %>: </dt>
         <dd id='payment_status'><span class="state <%= @order.payment_state %>"><%= t(@order.payment_state, :scope => :payment_states, :default => [:missing, "none"]) %></span></dd>
         <dt data-hook><%= t(:date_completed) %>:</dt>
