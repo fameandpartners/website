@@ -6,16 +6,16 @@ module Bergen
       let(:savon_client) { SavonClient.new }
       let(:soap_method) { described_class.new(savon_client: savon_client) }
 
-      # This will always return empty for staging env
-      it 'returns current inventory' do
-        expect(soap_method.request.body).to eq({
-                                                 get_inventory_response: {
-                                                   get_inventory_result: {
-                                                     notifications: nil,
-                                                     inventory:     nil },
-                                                   :@xmlns               => 'http://rex11.com/webmethods/'
-                                                 }
-                                               })
+      describe '#response' do
+        it do
+          expect(soap_method.response.body).to eq({:get_inventory_response=>{:get_inventory_result=>{:notifications=>nil, :inventory=>{:item=>[{:warehouse=>"Bergen Logistics NJ", :warehouse_id=>"1", :sku=>nil, :style=>"4B218", :color=>"silver", :size=>"US6/AU10", :upc=>"23972", :description=>nil, :price=>"189", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ", :warehouse_id=>"1", :sku=>nil, :style=>"FPSS13062", :color=>"black", :size=>"US0/AU4", :upc=>"26757", :description=>nil, :price=>"219", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ", :warehouse_id=>"1", :sku=>nil, :style=>"sku-1", :color=>"red", :size=>"US20/AU24", :upc=>"10000", :description=>nil, :price=>"198.37", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ2", :warehouse_id=>"4", :sku=>nil, :style=>"4B218", :color=>"silver", :size=>"US6/AU10", :upc=>"23972", :description=>nil, :price=>"189", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ2", :warehouse_id=>"4", :sku=>nil, :style=>"FPSS13062", :color=>"black", :size=>"US0/AU4", :upc=>"26757", :description=>nil, :price=>"219", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ2", :warehouse_id=>"4", :sku=>nil, :style=>"sku-1", :color=>"red", :size=>"US20/AU24", :upc=>"10000", :description=>nil, :price=>"198.37", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ3", :warehouse_id=>"5", :sku=>nil, :style=>"4B218", :color=>"silver", :size=>"US6/AU10", :upc=>"23972", :description=>nil, :price=>"189", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ3", :warehouse_id=>"5", :sku=>nil, :style=>"FPSS13062", :color=>"black", :size=>"US0/AU4", :upc=>"26757", :description=>nil, :price=>"219", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ3", :warehouse_id=>"5", :sku=>nil, :style=>"sku-1", :color=>"red", :size=>"US20/AU24", :upc=>"10000", :description=>nil, :price=>"198.37", :actual_quantity=>"0", :pending_quantity=>"0"}]}}, :@xmlns=>"http://rex11.com/webmethods/"}})
+        end
+      end
+
+      describe '#result' do
+        it 'returns current inventory' do
+          expect(soap_method.result).to eq([{:warehouse=>"Bergen Logistics NJ", :warehouse_id=>"1", :sku=>nil, :style=>"4B218", :color=>"silver", :size=>"US6/AU10", :upc=>"23972", :description=>nil, :price=>"189", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ", :warehouse_id=>"1", :sku=>nil, :style=>"FPSS13062", :color=>"black", :size=>"US0/AU4", :upc=>"26757", :description=>nil, :price=>"219", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ", :warehouse_id=>"1", :sku=>nil, :style=>"sku-1", :color=>"red", :size=>"US20/AU24", :upc=>"10000", :description=>nil, :price=>"198.37", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ2", :warehouse_id=>"4", :sku=>nil, :style=>"4B218", :color=>"silver", :size=>"US6/AU10", :upc=>"23972", :description=>nil, :price=>"189", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ2", :warehouse_id=>"4", :sku=>nil, :style=>"FPSS13062", :color=>"black", :size=>"US0/AU4", :upc=>"26757", :description=>nil, :price=>"219", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ2", :warehouse_id=>"4", :sku=>nil, :style=>"sku-1", :color=>"red", :size=>"US20/AU24", :upc=>"10000", :description=>nil, :price=>"198.37", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ3", :warehouse_id=>"5", :sku=>nil, :style=>"4B218", :color=>"silver", :size=>"US6/AU10", :upc=>"23972", :description=>nil, :price=>"189", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ3", :warehouse_id=>"5", :sku=>nil, :style=>"FPSS13062", :color=>"black", :size=>"US0/AU4", :upc=>"26757", :description=>nil, :price=>"219", :actual_quantity=>"0", :pending_quantity=>"0"}, {:warehouse=>"Bergen Logistics NJ3", :warehouse_id=>"5", :sku=>nil, :style=>"sku-1", :color=>"red", :size=>"US20/AU24", :upc=>"10000", :description=>nil, :price=>"198.37", :actual_quantity=>"0", :pending_quantity=>"0"}])
+        end
       end
     end
   end
