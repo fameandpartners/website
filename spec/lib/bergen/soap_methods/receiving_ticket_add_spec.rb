@@ -14,18 +14,9 @@ module Bergen
       describe 'creates a new receiving ticket' do
         context 'successfully creates' do
           it do
-            expect(soap_method.request.body).to eq({ :receiving_ticket_add_response =>
-                                                       { :receiving_ticket_add_result =>
-                                                           { :notifications       =>
-                                                               { :notification =>
-                                                                   { :error_code => '0',
-                                                                     :severity   => 'Success',
-                                                                     :message    => 'Data saved successfully.' }
-                                                               },
-                                                             :receiving_ticket_id => 'WHRTN915364'
-                                                           },
-                                                         :@xmlns                      => 'http://rex11.com/webmethods/' }
-                                                   })
+            expect(soap_method.result).to eq({
+                                               receiving_ticket_id: 'WHRTN915364'
+                                             })
           end
         end
 
