@@ -35,6 +35,7 @@ path 'engines' do
   gem 'admin_ui'
   gem 'fame_favicon'
   gem 'inspinia-rails'
+  gem 'bergen'
 end
 
 # TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it,
@@ -60,7 +61,6 @@ gem 'geoip', require: false
 gem 'device_detector', '~> 0.8.1'
 gem 'rubyzip', '~> 1.1.7', require: false
 gem 'roo', require: false
-gem 'savon', '~> 1.2.0'
 
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
 

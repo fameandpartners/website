@@ -125,6 +125,9 @@ PATH
       sidekiq
       simple_form
       slim
+    bergen (0.0.1)
+      rails (~> 3.2.22)
+      savon (~> 1.2.0)
     fame_favicon (0.0.1)
       rails (~> 3.2.21)
     inspinia-rails (2.1.0)
@@ -288,9 +291,11 @@ GEM
       multi_json (~> 1.0)
     daemons (1.2.2)
     database_cleaner (0.9.1)
-    datagrid (1.4.0)
+    datagrid (1.4.1)
       rails (>= 3.2.18)
     debug_inspector (0.0.2)
+    declarative (0.0.7)
+      uber (>= 0.0.15)
     deface (0.9.1)
       nokogiri (~> 1.5.0)
       rails (~> 3.1)
@@ -307,8 +312,9 @@ GEM
     devise-encryptable (0.1.2)
       devise (>= 2.1.0)
     diff-lcs (1.2.5)
-    disposable (0.1.15)
-      representable (>= 2.2.3, < 2.4.0)
+    disposable (0.2.6)
+      declarative (~> 0.0.6)
+      representable (>= 2.4.0, <= 3.1.0)
       uber
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
@@ -643,11 +649,13 @@ GEM
       redis-store (~> 1.1.4)
     redis-store (1.1.4)
       redis (>= 2.2)
-    reform (2.0.5)
-      disposable (~> 0.1.11)
+    reform (2.1.0)
+      disposable (>= 0.2.2, < 0.3.0)
+      representable (>= 2.4.0, < 3.1.0)
       uber (~> 0.0.11)
-    representable (2.3.0)
-      uber (~> 0.0.7)
+    representable (3.0.0)
+      declarative (~> 0.0.5)
+      uber (~> 0.0.15)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -841,6 +849,7 @@ DEPENDENCIES
   autoprefixer-rails
   awesome_print
   aws-sdk
+  bergen!
   better_errors
   binding_of_caller
   bootstrap-sass (= 3.3.4.1)
@@ -905,7 +914,6 @@ DEPENDENCIES
   ruby-progressbar
   rubyzip (~> 1.1.7)
   sass-rails (~> 3.2.3)
-  savon (~> 1.2.0)
   selenium-webdriver (~> 2.53.0)
   sentry-raven
   shoulda-matchers
