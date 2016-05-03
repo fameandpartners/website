@@ -146,6 +146,7 @@ group :test do
   gem 'factory_girl_rails', '4.2.1'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-collection_matchers'
+  gem 'rspec-retry'
   gem 'shoulda-matchers'
   gem 'timecop'
   gem 'vcr', '~> 2.9.3'
