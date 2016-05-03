@@ -27,7 +27,7 @@ gem 'redcarpet', '~> 2.3.0'
 # Monitoring & Events
 gem 'newrelic_rpm'
 gem 'sentry-raven'
-gem 'customerio',  '~> 0.6'
+gem 'customerio',  '~> 1.0.0'
 
 # Engines
 path 'engines' do
