@@ -46,7 +46,6 @@ Spree::Shipment.class_eval do
       shipment_tracking_url: @shipment.blank? ? "#" : @shipment.tracking_url
     )
     rescue StandardError => e
-      byebug
       NewRelic::Agent.notice_error(e)
     end
   end
