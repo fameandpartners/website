@@ -1,6 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe GlobalSku, :type => :model do
+RSpec.describe GlobalSku, type: :model do
+  it { is_expected.to belong_to(:product).class_name('Spree::Product') }
+  it { is_expected.to belong_to(:variant).class_name('Spree::Variant') }
 
   describe 'aliased methods' do
     let(:instance) { build(:global_sku, id: 123) }

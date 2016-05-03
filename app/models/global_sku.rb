@@ -1,6 +1,6 @@
 class GlobalSku < ActiveRecord::Base
-  belongs_to :product
-  belongs_to :variant
+  belongs_to :product, class_name: 'Spree::Product'
+  belongs_to :variant, class_name: 'Spree::Variant'
 
   alias_method :upc, :id
 
