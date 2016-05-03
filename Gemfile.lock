@@ -284,8 +284,7 @@ GEM
     connection_pool (2.2.0)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
-    customerio (0.7.0)
-      httparty (>= 0.5, < 0.12)
+    customerio (1.0.0)
       multi_json (~> 1.0)
     daemons (1.2.2)
     database_cleaner (0.9.1)
@@ -460,9 +459,6 @@ GEM
     hodel_3000_compliant_logger (0.1.1)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
-    httparty (0.11.0)
-      multi_json (~> 1.0)
-      multi_xml (>= 0.5.2)
     httpclient (2.6.0.1)
     httpi (1.1.1)
       rack
@@ -859,7 +855,7 @@ DEPENDENCIES
   coffee-script-source (~> 1.8.0)
   compass-rails (~> 2.0.5)
   configatron
-  customerio (~> 0.6)
+  customerio (~> 1.0.0)
   database_cleaner (= 0.9.1)
   default_value_for
   device_detector (~> 0.8.1)
