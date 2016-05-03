@@ -26,26 +26,4 @@ Spree::Shipment.class_eval do
     !! (shipping_method.name =~ matcher)
   end
 
-  def send_shipped_email
-    @shipment = self
-    subject = "Hey babe, your dress is on it's way - Order: ##{@shipment.order.number}"
-
-    order_presenter = Orders::OrderPresenter.new(@shipment.order, @shipment.line_items)
-    line_items = order_presenter.extract_line_items
-    Marketing::CustomerIOEventTracker.new.track(
-      self.order.user,
-      'shipment_mailer',
-      email_to:              @shipment.order.email,
-      from:                  'noreply@fameandpartners.com',
-      subject:               subject,
-      date:                  Date.today.to_formatted_s(:long),
-      name:                  order.first_name.rstrip,
-      shipment_method_name:  @shipment.shipping_method.name,
-      line_items:            line_items,
-      shipment_tracking:     @shipment.tracking,
-      shipment_tracking_url: @shipment.blank? ? "#" : @shipment.tracking_url
-    )
-    rescue StandardError => e
-      NewRelic::Agent.notice_error(e)
-  end
 end

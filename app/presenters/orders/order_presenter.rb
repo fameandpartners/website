@@ -100,8 +100,8 @@ module Orders
           color:            item.colour_name,
           height:           item.height,
           quantity:         item.quantity,
-          factory:          item.factory,
-          deliver_date:     item.projected_delivery_date,
+          factory:          item.factory.name,
+          deliver_date:     item.projected_delivery_date.to_s,
           express_making:   item.making_options.present? ? item.making_options.map{|option| option.name.upcase }.join(', ') : "",
           image_url:        item.image? ? item.image_url : ''
         }.merge(
