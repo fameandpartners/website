@@ -130,21 +130,19 @@
 
   .how-to-enter {
     margin-bottom: 60px;
-    text-align: center;
 
-    a {
-      font-style: italic;
-      color: inherit;
+    h3 {
+      text-transform: none;
+      margin-bottom: 30px;
     }
 
     .heading-v1 {
       margin-bottom: 0;
-    }
 
-    .title-line-on-sides {
-      width: 60%;
-      max-width: 130px;
-      margin: 40px auto;
+      div:not(:last-child) {
+        margin-bottom: 30px;
+      }
+
     }
 
   }
@@ -287,6 +285,10 @@
 
     }
 
+    .how-to-enter {
+      min-height: 400px;
+    }
+
     .panel-compact {
       margin-bottom: 30px;
 
@@ -317,22 +319,6 @@
       }
 
     }
-
-    /*
-    .how-to-enter {
-
-      .col-md-6 {
-        padding-right: 10%;
-
-        &:first-child {
-          padding-left: 10%;
-          padding-right: 0;
-        }
-
-      }
-
-    }
-    */
 
     .section-story {
 
