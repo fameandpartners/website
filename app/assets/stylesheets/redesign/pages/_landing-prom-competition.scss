@@ -287,6 +287,15 @@
 
     .how-to-enter {
       min-height: 400px;
+
+      .heading-v1 {
+        padding: 0;
+      }
+
+      &.image-left .content-wrap {
+        padding-left: 10%;
+      }
+
     }
 
     .panel-compact {
