@@ -119,7 +119,7 @@ module Orders
            # :customizations_0=>{:name=>"N/A", :url=>nil},
            # :customizations_1=>{:name=>"Cool", :url=>nil},
           item.customisations.each_with_index.map do |(name, image_url), idx|
-            ["customizations_#{idx}".to_sym, {name: name, url: image_url}]
+            ["customizations_#{idx}".to_sym, {name: name, url: image_url.to_s}]
           end.to_h
         )
       end
