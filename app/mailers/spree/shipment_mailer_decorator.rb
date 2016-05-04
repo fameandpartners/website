@@ -3,10 +3,9 @@ Spree::ShipmentMailer.class_eval do
 
   def shipped_email(shipment, resend = false)
     shipment        = shipment.is_a?(Spree::Shipment) ? shipment : Spree::Shipment.find(shipment)
-    subject         = shipped_email_subject(spree_shipment: shipment, resend: resend)
+    subject         = shipped_email_subject(spree_shipment: shipment, resend: false)
     order_presenter = Orders::OrderPresenter.new(shipment.order, shipment.line_items)
     line_items      = order_presenter.extract_line_items
-
     Marketing::CustomerIOEventTracker.new.track(
       shipment.order.user,
       'shipment_mailer',

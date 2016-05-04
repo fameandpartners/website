@@ -3,4 +3,5 @@
 - else
   | No Number
 => shipment.shipping_method.try(:name)
-abbr title=shipment.shipped_at = l(shipment.shipped_at.to_date)
+- if shipment.shipped_at.present?
+  abbr title=shipment.shipped_at = l(shipment.shipped_at.to_date)
