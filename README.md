@@ -206,6 +206,11 @@ You can use any other details.
 
 To run every test, including engines', use the `bundle exec rake spec` command
 
+## envvars
+
+Running app in development mode or running tests requires the presents of .env file in the apps root folder.  Obtain a copy of this file from other devs or project manager.
+
+
 ## Useful Pages
 
  - **Home** - `IndexController#show`
