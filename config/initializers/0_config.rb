@@ -81,18 +81,18 @@ configatron.pin_payments.usd_gateways = %W{pk_NxLgEbIIaWwjKEqUnTd6oA pk_FJWiUA3r
 
 configatron.site_version_detector_strategy = :path
 
+configatron.aws.s3 do |s3|
+  s3.bucket            = ENV['S3_BUCKET']
+  s3.region            = ENV['S3_REGION']
+  s3.access_key_id     = ENV['S3_ACCESS_KEY_ID']
+  s3.secret_access_key = ENV['S3_SECRET_ACCESS_KEY']
+end
+
 case Rails.env.to_sym
 when :development
   configatron.site_version_detector_strategy = :subdomain
 
   configatron.host = 'localhost.localdomain'
-
-  configatron.aws.s3 do |s3|
-    s3.bucket            = 'dev-fameandpartners'
-    s3.region            = 'us-east-1'
-    s3.access_key_id     = 'AKIAJ7U3MBOEHSMUAOHQ'
-    s3.secret_access_key = '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'
-  end
 
   configatron.cache.expire do |expire|
     expire.quickly  = 1.second
@@ -115,12 +115,6 @@ when :staging
 when :preproduction
   configatron.host      = 'preprod.fameandpartners.com'
 
-  configatron.aws.s3 do |s3|
-    s3.bucket            = 'preprod-fameandpartners'
-    s3.region            = 'us-west-2'
-    s3.access_key_id     = 'AKIAJ7U3MBOEHSMUAOHQ'
-    s3.secret_access_key = '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'
-  end
   configatron.aws.host = "s3-us-west-2.amazonaws.com/preprod-fameandpartners"
 
   configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
@@ -135,13 +129,6 @@ when :production
   configatron.host      = 'www.fameandpartners.com'
 
   configatron.order_production_emails = ['fameandpartners@hotmail.com', 'orders@fameandpartners.com.cn']
-
-  configatron.aws.s3 do |s3|
-    s3.bucket            = 'fameandpartners'
-    s3.region            = 'ap-southeast-2'
-    s3.access_key_id     = 'AKIAJ7U3MBOEHSMUAOHQ'
-    s3.secret_access_key = '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'
-  end
 
   configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
