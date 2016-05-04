@@ -10,12 +10,21 @@ if defined?(Bundler)
 end
 
 module FameAndPartners
-  def self.yaml_config(config_file)
-    YAML::load(File.open( File.join( Rails.root, 'config', config_file))).with_indifferent_access
-  end
-
   class Application < Rails::Application
     require "#{Rails.root}/config/initializers/bower_rails.rb"
+
+    # [HACK] Replacement for the dotenv-rails gem, was not compatible with spree 1.3
+    # [TODO] Remove this and config/envvar.rb when no longer needed
+    if Rails.env.development? || Rails.env.test?
+      require "#{Rails.root}/config/envvar.rb"
+      ['.env', '.env.local'].each do |file_name|
+        envfile = File.join(Rails.root, file_name)
+        if File.exists?(envfile)
+          Envvar.load envfile
+          break
+        end
+      end
+    end
 
     config.to_prepare do
       # manually load some paths
@@ -98,16 +107,7 @@ module FameAndPartners
     config.assets.paths << Rails.root.join("app", "assets", 'transient_content')
     config.assets.paths << Rails.root.join("app", "assets", "vendor", "bower_components")
 
-    # Production and Preproduction use an Engineyard deployed `redis.yml` file
-    # Having this file in the repo conflicts with the EY managed deployment,
-    # so we have dev/test configs in `redis.local.yml`
-    redis_config_file = if Rails.env.production? || Rails.env.preproduction?
-                          "redis.yml"
-                        else
-                          "redis.local.yml"
-                        end
-
-    config.redis_host = ::FameAndPartners.yaml_config(redis_config_file)[Rails.env][:hosts]
+    config.redis_host = ENV['REDIS_HOST']
     config.redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
 
     config.cache_store = :redis_store, "redis://#{config.redis_host}/0/#{config.redis_namespace}"
