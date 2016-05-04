@@ -52,8 +52,8 @@ configatron.email_marketing.store_information = 1.month
 
 configatron.mailgun.mailbox do |mailgun|
   mailgun.domain   = 'fameandpartners.com.mailgun.org'
-  mailgun.username = 'postmaster@fameandpartners.com.mailgun.org'
-  mailgun.password = '0mqgbkbz34n1'
+  mailgun.username = ENV['MAILGUN_USERNAME']
+  mailgun.password = ENV['MAILGUN_PASSWORD']
 end
 
 configatron.mailchimp do |mailchimp|
@@ -120,8 +120,6 @@ when :staging
 
   configatron.mailgun.mailbox do |mailbox|
     mailbox.domain   = '23st2ages.com'
-    mailbox.username = 'mailer@23stages.com'
-    mailbox.password = '80kmdvXlufsZOW'
   end
 
 when :preproduction
