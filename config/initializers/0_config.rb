@@ -61,7 +61,7 @@ configatron.mailchimp do |mailchimp|
   mailchimp.list_id = ENV['MAILCHIMP_LIST_ID']
 end
 
-configatron.redis_host = ::FameAndPartners.yaml_config("redis.local.yml")[Rails.env][:hosts]
+configatron.redis_host = ENV['REDIS_HOST']
 configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
 
 configatron.es_url = ENV['ES_URL']
@@ -115,7 +115,6 @@ when :preproduction
 
   configatron.aws.host = "s3-us-west-2.amazonaws.com/preprod-fameandpartners"
 
-  configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
 
   configatron.asset_host = "assets.fameandpartners.com/preprod"
@@ -126,7 +125,6 @@ when :production
 
   configatron.order_production_emails = ['fameandpartners@hotmail.com', 'orders@fameandpartners.com.cn']
 
-  configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
 
   configatron.typekit_id = 'day0prb'
