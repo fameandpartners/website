@@ -16,7 +16,7 @@ configatron.aws.secret_key = ""
 configatron.aws.host       = "images.fameandpartners.com" # bucket: fameandpartners
 configatron.asset_host     = ENV['ASSET_HOST']
 
-configatron.typekit_id = 'kur6crm'
+configatron.typekit_id = ENV['TYPEKIT_ID']
 
 configatron.links do |links|
   links.twitter   = 'https://twitter.com/fameandpartners'
@@ -118,8 +118,6 @@ when :production
   configatron.order_production_emails = ['fameandpartners@hotmail.com', 'orders@fameandpartners.com.cn']
 
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
-
-  configatron.typekit_id = 'day0prb'
 
 when :test
   configatron.site_version_detector_strategy = :subdomain
