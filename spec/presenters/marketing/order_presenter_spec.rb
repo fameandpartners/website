@@ -23,7 +23,7 @@ describe Marketing::OrderPresenter, type: :presenter do
       expect(result[:options_text]).to eq(dress_item.options_text)
       expect(result[:quantity]).to eq(dress_item.quantity)
       expect(result[:variant_display_amount]).to eq(dress_item.variant.display_amount)
-      expect(result[:display_amount]).to eq(dress_item.display_amount)
+      expect(result[:display_amount]).to eq(dress_item.display_amount.to_s)
     end
 
   end
