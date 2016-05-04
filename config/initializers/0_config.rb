@@ -72,7 +72,7 @@ configatron.elasticsearch.indices do |index|
 end
 
 configatron.bergen do |bergen|
-  bergen.account_id = 'www.fame&partnersinc.com'
+  bergen.account_id = ENV['BERGEN_ACCOUNT_ID']
   bergen.username   = ENV['BERGEN_USERNAME']
   bergen.password   = ENV['BERGEN_PASSWORD']
 end
