@@ -33,7 +33,7 @@ class ProductionOrderEmailService
     end
 
     def deliver
-      subject = "Order Confirmation (订单号码）(#{factory}) ##{order_presenter.number}"
+      subject = "Order Confirmation (订单号码）(#{factory.name}) ##{order_presenter.number}"
 
       user = raw_order.user
       user ||= Spree::User.where(email: order_presenter.email).first
