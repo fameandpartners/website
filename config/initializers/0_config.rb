@@ -14,7 +14,7 @@ configatron.aws.bucket     = ""
 configatron.aws.access_key = ""
 configatron.aws.secret_key = ""
 configatron.aws.host       = "images.fameandpartners.com" # bucket: fameandpartners
-configatron.asset_host     = "assets.fameandpartners.com"
+configatron.asset_host     = ENV['ASSET_HOST']
 
 configatron.typekit_id = 'kur6crm'
 
@@ -111,8 +111,6 @@ when :preproduction
   configatron.aws.host = "s3-us-west-2.amazonaws.com/preprod-fameandpartners"
 
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
-
-  configatron.asset_host = "assets.fameandpartners.com/preprod"
 
 when :production
   configatron.site_version_detector_strategy = :top_level_domain
