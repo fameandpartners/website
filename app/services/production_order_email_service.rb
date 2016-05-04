@@ -38,8 +38,7 @@ class ProductionOrderEmailService
       user = raw_order.user
       user ||= Spree::User.where(email: order_presenter.email).first
 
-      line_items = extract_line_items
-
+      line_items = order_presenter.extract_line_items
       Marketing::CustomerIOEventTracker.new.track(
         user,
         'order_production_order_email',
@@ -55,9 +54,9 @@ class ProductionOrderEmailService
         customer_note_data: order_presenter.customer_notes,
         customer:           order_presenter.name,
         phone:              order_presenter.phone_number,
-        shipping_address:   order_presenter.shipping_address,
-        factory:            factory,
-        display_total:      order_presenter.display_total,
+        shipping_address:   order_presenter.shipping_address.to_s,
+        factory:            factory.name,
+        display_total:      order_presenter.display_total.to_s,
         currency:           order_presenter.currency
       )
     rescue StandardError => e

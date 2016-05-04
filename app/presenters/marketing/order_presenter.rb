@@ -41,8 +41,8 @@ module Marketing
           making_options_text:    item.making_options_text,
           options_text:           item.options_text,
           quantity:               item.quantity,
-          variant_display_amount: item.variant.display_amount,
-          display_amount:         item.display_amount
+          variant_display_amount: item.variant.display_amount.to_s,
+          display_amount:         item.display_amount.to_s
         }
       end
     end
@@ -52,7 +52,7 @@ module Marketing
         order.adjustments.eligible.collect do |adjustments_item|
           {
             label:          adjustments_item.label,
-            display_amount: adjustments_item.display_amount
+            display_amount: adjustments_item.display_amount.to_s
           }
         end
       else
