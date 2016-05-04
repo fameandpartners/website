@@ -6,6 +6,7 @@ configatron.app_name                = 'Fame And Partners'
 configatron.sitemap_url             = 'http://images.fameandpartners.com/sitemap/sitemap.xml.gz'
 configatron.blog_host               = 'fameandpartners.tumblr.com'
 configatron.days_delivery_emergency = 0
+configatron.secret_token            = 'de28f4fb012e6f8f929a03c7105172fdc91e3433c8d9b5fb73aaef4a343dbf1cb644c77da97f995d273547eb5c8314e63e82355e2653b363f762dc41e347563d' #ENV['SECRET_TOKEN']
 
 # assets
 configatron.aws.enabled    = false
