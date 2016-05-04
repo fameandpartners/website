@@ -57,7 +57,7 @@ configatron.mailgun.mailbox do |mailgun|
 end
 
 configatron.mailchimp do |mailchimp|
-  mailchimp.api_key = '0340ea09d6c21efd808cce3d9c9440f6-us7'
+  mailchimp.api_key = ENV['MAILCHIMP_API_KEY']
   mailchimp.list_id = '48f8d360f7'
 end
 
@@ -163,7 +163,6 @@ when :production
   configatron.typekit_id = 'day0prb'
 
   configatron.mailchimp do |mailchimp|
-    mailchimp.api_key = '0340ea09d6c21efd808cce3d9c9440f6-us7'
     mailchimp.list_id = '77e91e8697'
   end
 
