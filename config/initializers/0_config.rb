@@ -8,6 +8,11 @@ configatron.blog_host               = 'fameandpartners.tumblr.com'
 configatron.days_delivery_emergency = 0
 configatron.secret_token            = ENV['SECRET_TOKEN']
 
+configatron.sentry do |sentry|
+  sentry.public = ENV['SENTRY_PUBLIC']
+  sentry.secret = ENV['SENTRY_SECRET']
+end
+
 # assets
 configatron.aws.enabled    = false
 configatron.aws.bucket     = ""
