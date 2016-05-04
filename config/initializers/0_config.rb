@@ -34,9 +34,8 @@ configatron.cache.expire do |expire|
   expire.long     = 1.day
 end
 
-# Test Environment
-configatron.customerio.site_id    = '14c8952c36a16f4c20c6'
-configatron.customerio.secret_key = 'f1fd531b4d1ac65ca86c'
+configatron.customerio.site_id    = ENV['CUSTOMERIO_SITE_ID']
+configatron.customerio.secret_key = ENV['CUSTOMERIO_SECRET_KEY']
 
 configatron.order_production_emails = ['production@fameandpartners.dev']
 
@@ -156,10 +155,6 @@ when :production
     s3.secret_access_key = 'S64K5wEO6Son9PXywn+IJ9N/dUpf3IyEM2+Byr2j'
   end
 
-  # Production Environment
-  configatron.customerio.site_id    = 'a416731201185e0c6f5f'
-  configatron.customerio.secret_key = 'f179030b06baa363ea38'
-
   configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
 
@@ -167,7 +162,6 @@ when :production
   # configatron.es_url = YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
   configatron.es_url = 'https://readwrite:F0undR3adWrite@c019a72e2bcb614a3809da7bf7d583c0.us-east-1.aws.found.io:9243'
 
-  configatron.customerio.site_id = 'a416731201185e0c6f5f'
   configatron.typekit_id = 'day0prb'
 
   configatron.mailchimp do |mailchimp|
