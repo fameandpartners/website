@@ -44,13 +44,28 @@ module Bergen
 
     Credentials = Struct.new(:account_id, :username, :password) do
       def self.fetch_default
-        new(config.account_id,
-            config.username,
-            config.password)
+        new(
+          config[:account_id],
+          config[:username],
+          config[:password]
+        )
       end
 
+      # Temporary solution while we don't follow 12 factor 100%
       def self.config
-        configatron.bergen
+        if Rails.env.production?
+          {
+            account_id: ENV.fetch('BERGEN_ACCOUNT_ID', 'www.fame&partnersinc.com'),
+            username:   ENV.fetch('BERGEN_USERNAME', 'fameandpartners'),
+            password:   ENV.fetch('BERGEN_PASSWORD', 'Bergen1')
+          }
+        else
+          {
+            account_id: ENV.fetch('BERGEN_ACCOUNT_ID', 'www.fame&partnersinc.com'),
+            username:   ENV.fetch('BERGEN_USERNAME', 'fameandpartners'),
+            password:   ENV.fetch('BERGEN_PASSWORD', 'not_set')
+          }
+        end
       end
     end
   end
