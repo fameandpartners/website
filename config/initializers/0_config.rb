@@ -51,7 +51,7 @@ end
 configatron.email_marketing.store_information = 1.month
 
 configatron.mailgun.mailbox do |mailgun|
-  mailgun.domain   = 'fameandpartners.com.mailgun.org'
+  mailgun.domain   = ENV['MAILGUN_DOMAIN']
   mailgun.username = ENV['MAILGUN_USERNAME']
   mailgun.password = ENV['MAILGUN_PASSWORD']
 end
@@ -100,12 +100,6 @@ when :development
     expire.long     = 60.seconds
   end
 
-  configatron.mailgun.mailbox do |mailgun|
-    mailgun.domain   = ''
-    mailgun.username = ''
-    mailgun.password = ''
-  end
-
   configatron.elasticsearch.indices do |index|
     index.spree_products = :spree_products_development
     index.color_variants = :color_variants_development
@@ -117,10 +111,6 @@ when :development
 
 when :staging
   configatron.host      = 'stage.fameandpartners.com'
-
-  configatron.mailgun.mailbox do |mailbox|
-    mailbox.domain   = '23st2ages.com'
-  end
 
 when :preproduction
   configatron.host      = 'preprod.fameandpartners.com'
