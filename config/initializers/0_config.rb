@@ -58,7 +58,7 @@ end
 
 configatron.mailchimp do |mailchimp|
   mailchimp.api_key = ENV['MAILCHIMP_API_KEY']
-  mailchimp.list_id = '48f8d360f7'
+  mailchimp.list_id = ENV['MAILCHIMP_LIST_ID']
 end
 
 configatron.redis_host = ::FameAndPartners.yaml_config("redis.local.yml")[Rails.env][:hosts]
@@ -73,8 +73,8 @@ end
 
 configatron.bergen do |bergen|
   bergen.account_id = 'www.fame&partnersinc.com'
-  bergen.username   = 'fameandpartners'
-  bergen.password   = 'not_set' # Seriously.
+  bergen.username   = ENV['BERGEN_USERNAME']
+  bergen.password   = ENV['BERGEN_PASSWORD']
 end
 
 configatron.pin_payments.usd_gateways = %W{pk_NxLgEbIIaWwjKEqUnTd6oA pk_FJWiUA3rQW1uXZIg3LwMKQ}
@@ -161,16 +161,6 @@ when :production
   configatron.es_url = 'https://readwrite:F0undR3adWrite@c019a72e2bcb614a3809da7bf7d583c0.us-east-1.aws.found.io:9243'
 
   configatron.typekit_id = 'day0prb'
-
-  configatron.mailchimp do |mailchimp|
-    mailchimp.list_id = '77e91e8697'
-  end
-
-  configatron.bergen do |bergen|
-    bergen.account_id = 'www.fame&partnersinc.com'
-    bergen.username   = 'fameandpartners'
-    bergen.password   = 'Bergen1'
-  end
 
 when :test
   configatron.site_version_detector_strategy = :subdomain
