@@ -8,6 +8,7 @@ gem 'slim'
 gem 'slim-rails'
 gem 'configatron'
 gem 'paperclip'
+gem 'createsend', '~> 2.5.0'
 gem 'sidekiq', '2.13.0'
 gem 'timers', '1.1.0'
 gem 'whenever'
@@ -27,7 +28,7 @@ gem 'redcarpet', '~> 2.3.0'
 # Monitoring & Events
 gem 'newrelic_rpm'
 gem 'sentry-raven'
-gem 'customerio',  '~> 1.0.0'
+gem 'customerio'
 
 # Engines
 path 'engines' do

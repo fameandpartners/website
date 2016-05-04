@@ -25,5 +25,4 @@ Spree::Shipment.class_eval do
   def shipping_method?(matcher)
     !! (shipping_method.name =~ matcher)
   end
-
 end
