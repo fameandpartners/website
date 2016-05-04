@@ -64,7 +64,7 @@ end
 configatron.redis_host = ::FameAndPartners.yaml_config("redis.local.yml")[Rails.env][:hosts]
 configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
 
-configatron.es_url = ::FameAndPartners.yaml_config("elasticsearch.local.yml")[Rails.env][:hosts]
+configatron.es_url = ENV['ES_URL']
 
 configatron.elasticsearch.indices do |index|
   index.spree_products = :spree_products
@@ -105,8 +105,6 @@ when :development
     index.color_variants = :color_variants_development
   end
 
-  configatron.es_url = 'http://localhost:9200'
-
   configatron.redis_options = { namespace: "fame_and_partners_#{Rails.env}", url: "redis://#{configatron.redis_host}/0" }
 
 when :staging
@@ -120,8 +118,6 @@ when :preproduction
   configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
 
-  configatron.es_url = 'https://readwrite:F0undR3adWrite@21b09bd2aadd9ba50c9d2a9658dc99e7.us-west-1.aws.found.io:9243'
-
   configatron.asset_host = "assets.fameandpartners.com/preprod"
 
 when :production
@@ -132,10 +128,6 @@ when :production
 
   configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
-
-  # configatron.es_url = 'https://b13gy7hlm3:brc6ozc6oi@production-4224690387.us-east-1.bonsai.io'
-  # configatron.es_url = YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
-  configatron.es_url = 'https://readwrite:F0undR3adWrite@c019a72e2bcb614a3809da7bf7d583c0.us-east-1.aws.found.io:9243'
 
   configatron.typekit_id = 'day0prb'
 
