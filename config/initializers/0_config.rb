@@ -1,5 +1,5 @@
 # application base
-configatron.host                    = 'fameandpartners.com'
+configatron.host                    = ENV['APP_HOST']
 configatron.noreply                 = 'Fame & Partners<noreply@fameandpartners.com>'
 configatron.admin                   = 'team@fameandpartners.com'
 configatron.app_name                = 'Fame And Partners'
@@ -92,8 +92,6 @@ case Rails.env.to_sym
 when :development
   configatron.site_version_detector_strategy = :subdomain
 
-  configatron.host = 'localhost.localdomain'
-
   configatron.cache.expire do |expire|
     expire.quickly  = 1.second
     expire.normally = 30.seconds
@@ -108,11 +106,8 @@ when :development
   configatron.redis_options = { namespace: "fame_and_partners_#{Rails.env}", url: "redis://#{configatron.redis_host}/0" }
 
 when :staging
-  configatron.host      = 'stage.fameandpartners.com'
 
 when :preproduction
-  configatron.host      = 'preprod.fameandpartners.com'
-
   configatron.aws.host = "s3-us-west-2.amazonaws.com/preprod-fameandpartners"
 
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
@@ -121,7 +116,6 @@ when :preproduction
 
 when :production
   configatron.site_version_detector_strategy = :top_level_domain
-  configatron.host      = 'www.fameandpartners.com'
 
   configatron.order_production_emails = ['fameandpartners@hotmail.com', 'orders@fameandpartners.com.cn']
 
