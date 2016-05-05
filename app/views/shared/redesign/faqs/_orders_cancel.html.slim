@@ -1,14 +1,12 @@
 .panel.panel-default
-  #heading-orders-cancel.panel-heading role="tab"
-    h3
-      a.panel-title.collapsed role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-orders-cancel" aria-expanded="false" aria-controls="collapse-orders-cancel"
-        | Can I cancel my order?
+  .panel-heading role="tab"
+    a.panel-title.collapsed href="javascript:;" role="button" data-toggle="collapse-next" Can I cancel my order?
 
-  #collapse-orders-cancel.panel-collapse.collapse role="tabpanel" aria-labelledby="heading-orders-cancel"
-      .panel-body
-        p
-          ' If you would like to cancel your order, please
-          => link_to 'Contact Us', new_contact_path
-          ' immediately with your cancellation request and order number.
-        p If your dress has been ordered with 'express making' we cannot accept cancellations as your dress goes immediately into production.
-        p If your dress is customised we cannot accept cancellations after 24 hours from purchase. This is because your dress is already in production. If you wish to cancel your order outside of 24 hours, we can offer you a 50% refund and a 50% credit note with Fame & Partners. This is because the fabric has already been purchased and production started on your custom dress and in most cases we can not resell your dress at retail price.
+  .panel-collapse.collapse role="tabpanel"
+    .panel-body
+      p
+        ' If you would like to cancel your order, please
+        => link_to 'Contact Us', new_contact_path
+        ' immediately with your cancellation request and order number.
+      p If your dress has been ordered with 'express making' we cannot accept cancellations as your dress goes immediately into production.
+      p If your dress is customised we cannot accept cancellations after 24 hours from purchase. This is because your dress is already in production. If you wish to cancel your order outside of 24 hours, we can offer you a 50% refund and a 50% credit note with Fame & Partners. This is because the fabric has already been purchased and production started on your custom dress and in most cases we can not resell your dress at retail price.

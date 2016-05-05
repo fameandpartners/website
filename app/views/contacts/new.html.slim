@@ -67,7 +67,7 @@
           .tab-content
             .tab-pane.active
               h2.h5 Popular FAQS
-              #accordion-contact-accordion.panel-group roll='tablist' aria-multiselectable='false'
+              .panel-group roll='tablist' aria-multiselectable='true'
                 = render 'shared/redesign/faqs/returns_policy'
                 = render 'shared/redesign/faqs/returns_different'
                 = render 'shared/redesign/faqs/returns_steps'
@@ -75,7 +75,7 @@
                 = render 'shared/redesign/faqs/returns_store_credit'
             #panel-making-a-purchase-faq.tab-pane
               h2.h5 Making a purchase FAQS
-              #accordion-contact-accordion.panel-group roll='tablist' aria-multiselectable='false'
+              .panel-group roll='tablist' aria-multiselectable='true'
                 = render 'shared/redesign/faqs/returns_policy'
                 = render 'shared/redesign/faqs/returns_different'
                 = render 'shared/redesign/faqs/returns_steps'
@@ -83,12 +83,12 @@
                 = render 'shared/redesign/faqs/returns_store_credit'
             #panel-exisitng-orders-faq.tab-pane
               h2.h5 Existing orders FAQS
-              #accordion-contact-accordion.panel-group roll='tablist' aria-multiselectable='false'
+              .panel-group roll='tablist' aria-multiselectable='true'
                 = render 'shared/redesign/faqs/returns_policy'
                 = render 'shared/redesign/faqs/returns_different'
             #panel-other-enquiries-faq.tab-pane
               h2.h5 Other enquiries FAQS
-              #accordion-contact-accordion.panel-group roll='tablist' aria-multiselectable='false'
+              .panel-group roll='tablist' aria-multiselectable='true'
                 = render 'shared/redesign/faqs/returns_policy'
                 = render 'shared/redesign/faqs/returns_different'
                 = render 'shared/redesign/faqs/returns_steps'
@@ -99,3 +99,11 @@
                 = render 'shared/redesign/faqs/returns_store_credit'
           .footer-wrap
             = link_to 'SEE ALL FAQS', faqs_path
+
+  javascript:
+    $('body').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function() {
+      $this = $(this);
+      var $target = $this.parent().next();
+      $this.toggleClass('collapsed');
+      $target.data('bs.collapse') ? $target.collapse('toggle') : $target.collapse();
+    });

@@ -50,6 +50,7 @@
     }
 
     a {
+      padding: 10px;
       text-transform: uppercase;
       text-align: center;
       font-size: 0.75em;
@@ -79,12 +80,17 @@
       font-size: 1em;
     }
 
+    h4 {
+      font-size: 1em;
+    }
+
     .h5 {
       text-align: center;
       font-size: 1em;
     }
 
-    p {
+    p,
+    ul {
       font-size: 0.875em;
     }
 
@@ -92,7 +98,8 @@
       margin-bottom: 0;
     }
 
-    .panel {
+    .panel,
+    .panel-heading {
       background: transparent;
     }
 
@@ -107,7 +114,7 @@
     }
 
     @media (min-width: $bootstrap-md-width) {
-      width: 404px;
+      width: 370px;
       margin-top: 30px;
     }
 
@@ -116,6 +123,20 @@
     }
 
   }
+
+  // START - mobile
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    h1 {
+      text-align: center;
+    }
+
+    .faq-wrap {
+      margin-top: 30px;
+    }
+
+  }
+  // END - mobile
 
   // START - desktop
   @media (min-width: $bootstrap-md-width) {
