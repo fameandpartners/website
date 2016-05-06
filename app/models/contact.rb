@@ -1,31 +1,6 @@
 class Contact
   include ActiveModel::Validations
 
-  SUBJECTS = [
-    [
-      'Place an Order',
-      [
-        'Delivery', 'Product', 'Styling Tips', 'Customization', 'Size'
-      ]
-    ],
-    [
-      'Help with an existing purchase',
-      [
-        'Order Status', 'Change Existing Order', 'Issue with Order', 'Returns & Exchanges'
-      ]
-    ],
-    [
-      'Something else',
-      [
-        'Site Issues',
-        'Book a Style Consultation',
-        'Retailer Questions',
-        'None of These Apply to Me',
-        "Fashion \"IT\" Girl"
-      ]
-    ]
-  ]
-
   attr_accessor :first_name, :last_name, :email, :subject, :site_version, :message, :phone, :order_number
   attr_accessor :name, :linkedin, :interests, :join_team
 

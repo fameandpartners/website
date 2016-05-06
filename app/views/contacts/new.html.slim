@@ -14,15 +14,15 @@
             .form-group
               = f.label :first_name
                 ' First name *
-              = f.text_field :first_name, :class => 'form-control form-control-md'
+              = f.text_field :first_name, :class => 'form-control form-control-md', :required => 'required'
             .form-group
               = f.label :last_name
                 ' Last name *
-              = f.text_field :last_name, :class => 'form-control form-control-md'
+              = f.text_field :last_name, :class => 'form-control form-control-md', :required => 'required'
             .form-group
                 = f.label :email
                   ' Email *
-                = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
+                = f.text_field :email, type: 'email', :class => 'form-control form-control-md', :required => 'required'
             .form-group
               = f.label :phone
                 ' Phone number
@@ -41,26 +41,34 @@
               a href='#panel-other-enquiries' data-target='#panel-other-enquiries, #panel-enquiry, #panel-other-enquiries-faq' data-toggle='tab' aria-controls='panel-other-enquiries' role='tab' Other enquiries
 
           .tab-content.enquiry-wrap
-            #panel-making-a-purchase.row.tab-pane.form-group role='tabpanel'
-              //TODO need to seperate these options into three seperat selectboxes
-              .col-md-6
-                = f.label :subject, 'Category'
-                = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, params[:selected_option], 'Select'), {}, :class => 'form-control form-control-md'
-            #panel-exisitng-orders.row.tab-pane.form-group role='tabpanel'
-              .col-md-6
-                = f.label :subject, 'Category'
-                = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, params[:selected_option], 'Select'), {}, :class => 'form-control form-control-md'
-            #panel-other-enquiries.row.tab-pane.form-group role='tabpanel'
-              .col-md-6
-                = f.label :subject, 'Category'
-                = f.select :subject, grouped_options_for_select(Contact::SUBJECTS, params[:selected_option], 'Select'), {}, :class => 'form-control form-control-md'
             #panel-enquiry.tab-pane
+              .row.form-group
+                .col-md-6
+                  = f.label :subject, 'Category *'
+                  select#contact_subject.form-control.form-control-md name='contact[subject]'
+                    optgroup#panel-making-a-purchase.tab-pane role='tabpanel'
+                      option value='Delivery' Delivery
+                      option value='Product' Product
+                      option value='Styling Tips' Styling Tips
+                      option value='Customization' Customization
+                      option value='Size' Size
+                    optgroup#panel-exisitng-orders.tab-pane role='tabpanel'
+                      option value='Order Status' Order Status
+                      option value='Change Existing Order' Change Existing Order
+                      option value='Issue with Order' Issue with Order
+                      option value='Returns &amp; Exchanges' Returns &amp; Exchanges
+                    optgroup#panel-other-enquiries.tab-pane role='tabpanel'
+                      option value='Site Issues' Site Issues
+                      option value='Book a Style Consultation' Book a Style Consultation
+                      option value='Retailer Questions' Retailer Questions
+                      option value='None of These Apply to Me' None of These Apply to Me
+                      option value='Fashion "IT" Girl' Fashion "IT" Girl
               .form-group
-                = f.label :message, 'Your enquiry'
-                = f.text_area :message, :class => 'form-control', :rows => '4'
+                = f.label :message, 'Your enquiry *'
+                = f.text_area :message, :class => 'form-control', :rows => '4', :required => 'required'
               .row
                 .col-md-6.form-group
-                  = f.submit "submit", class: 'btn btn-black btn-block'
+                  = f.submit 'submit', class: 'btn btn-black btn-block'
 
       .col-md-5.col-md-offset-1
         .faq.faq-wrap.js-faq-wrap data-spy=''

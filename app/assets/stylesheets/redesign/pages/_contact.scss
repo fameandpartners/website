@@ -17,6 +17,15 @@
     color: inherit;
   }
 
+  optgroup {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+
+  }
+
   .affix {
     position: fixed;
     top: 0;
