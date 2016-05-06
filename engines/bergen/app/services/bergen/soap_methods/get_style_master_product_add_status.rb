@@ -1,6 +1,6 @@
 module Bergen
   module SoapMethods
-    class StyleMasterProductAdd
+    class GetStyleMasterProductAddStatus < BaseRequest
       attr_reader :client, :spree_variant
 
       def initialize(savon_client:, spree_variant:)
@@ -8,10 +8,14 @@ module Bergen
         @spree_variant = spree_variant
       end
 
-      def request
-        client.request :style_master_product_add do
+      def response
+        client.request :get_style_master_product_add_status do
           soap.body = required_fields_hash
         end
+      end
+
+      def result
+        response[:get_style_master_product_add_status_response][:get_style_master_product_add_status_result][:notifications][:notification]
       end
 
       private
@@ -19,15 +23,7 @@ module Bergen
       def required_fields_hash
         {
           'AuthenticationString' => client.auth_token,
-          'products'             => {
-            'StyleMasterProduct' => {
-              'Style' => global_sku.style_number,
-              'Color' => global_sku.color_name,
-              'Size'  => global_sku.size,
-              'UPC'   => global_sku.upc,
-              'Price' => spree_variant.price
-            }
-          }
+          'UPC'                  => global_sku.upc,
         }
       end
 

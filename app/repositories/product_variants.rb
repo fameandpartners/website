@@ -5,7 +5,7 @@
 #   Repositories::ProductVariants.new(product_id: product_id).read(variant_id)
 #     returns specific variant
 #
-#   Repositories::ProductVariants.read(variant_id) 
+#   Repositories::ProductVariants.read(variant_id)
 #     return variant, regardless of activity or master etc
 #     archive - required for user cart products
 #
@@ -51,14 +51,18 @@ class Repositories::ProductVariants
   private
 
     def self.format_variant(variant)
+      # Avoiding memoization setup on `Spree::OptionType.color` + `Spree::OptionType.size` methods
+      size_option_type  = Spree::OptionType.size_scope.first
+      color_option_type = Spree::OptionType.color_scope.first
+
       OpenStruct.new({
-        id: variant.id,
-        size_id: variant.option_values.find{|ov| ov.option_type_id == Spree::Variant.size_option_type.id }.try(:id),
-        color_id: variant.option_values.find{|ov| ov.option_type_id == Spree::Variant.color_option_type.id }.try(:id),
-        count_on_hand: variant.count_on_hand,
-        fast_delivery: variant.fast_delivery,
-        available: variant.available?
-      })
+                       id:            variant.id,
+                       size_id:       variant.option_values.find { |ov| ov.option_type == size_option_type }.try(:id),
+                       color_id:      variant.option_values.find { |ov| ov.option_type == color_option_type }.try(:id),
+                       count_on_hand: variant.count_on_hand,
+                       fast_delivery: variant.fast_delivery,
+                       available:     variant.available?
+                     })
     end
 
     def cache_key

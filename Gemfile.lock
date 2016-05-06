@@ -125,6 +125,9 @@ PATH
       sidekiq
       simple_form
       slim
+    bergen (0.0.1)
+      rails (~> 3.2.22)
+      savon (~> 1.2.0)
     fame_favicon (0.0.1)
       rails (~> 3.2.21)
     inspinia-rails (2.1.0)
@@ -692,6 +695,8 @@ GEM
       rspec-expectations (~> 3.2.0)
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
+    rspec-retry (0.4.5)
+      rspec-core
     rspec-support (3.2.2)
     ruby-ole (1.2.11.8)
     ruby-progressbar (1.7.5)
@@ -846,6 +851,7 @@ DEPENDENCIES
   autoprefixer-rails
   awesome_print
   aws-sdk
+  bergen!
   better_errors
   binding_of_caller
   bootstrap-sass (= 3.3.4.1)
@@ -907,10 +913,10 @@ DEPENDENCIES
   rspec-activemodel-mocks
   rspec-collection_matchers
   rspec-rails (~> 3.2)
+  rspec-retry
   ruby-progressbar
   rubyzip (~> 1.1.7)
   sass-rails (~> 3.2.3)
-  savon (~> 1.2.0)
   selenium-webdriver (~> 2.53.0)
   sentry-raven
   shoulda-matchers

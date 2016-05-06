@@ -4,7 +4,7 @@
 
 module Bergen
   module SoapMethods
-    class ReceivingTicketAdd
+    class ReceivingTicketAdd < BaseRequest
       DEFAULT_SOAP_NAMESPACES = {
         'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/',
         'xmlns:xsd'  => 'http://www.w3.org/2001/XMLSchema',
@@ -25,10 +25,14 @@ module Bergen
         @return_request_item = return_request_item
       end
 
-      def request
+      def response
         client.request :receiving_ticket_add do
           soap.xml { |xml_builder| prepare_xml(xml_builder) }
         end
+      end
+
+      def result
+        { receiving_ticket_id: response[:receiving_ticket_add_response][:receiving_ticket_add_result][:receiving_ticket_id] }
       end
 
       private

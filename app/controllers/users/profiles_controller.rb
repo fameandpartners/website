@@ -32,10 +32,14 @@ class Users::ProfilesController < Users::BaseController
   end
 
   def update_image
-    if @user.update_profile_image(params[:image])
-      render json: { image: @user.image, success: true }
-    else
-      render json: { success: false }
-    end
+    # TODO: Temporarily disabling image file upload due to https://imagetragick.com/
+
+    # if @user.update_profile_image(params[:image])
+    #   render json: { image: @user.image, success: true }
+    # else
+    #   render json: { success: false }
+    # end
+
+    render json: { success: false }
   end
 end
