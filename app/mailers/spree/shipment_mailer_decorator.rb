@@ -3,7 +3,7 @@ Spree::ShipmentMailer.class_eval do
   def shipped_email(shipment, resend = false)
     begin
       shipment        = shipment.is_a?(Spree::Shipment) ? shipment : Spree::Shipment.find(shipment)
-      subject         = shipped_email_subject(spree_shipment: shipment, resend: false)
+      subject         = shipped_email_subject(spree_shipment: shipment, resend: resend)
       order_presenter = Orders::OrderPresenter.new(shipment.order, shipment.line_items)
       line_items      = order_presenter.extract_line_items
       Marketing::CustomerIOEventTracker.new.track(
@@ -30,3 +30,5 @@ Spree::ShipmentMailer.class_eval do
     subject
   end
 end
+
+Marketing::CustomerIOEventTracker.new.track(shipment.order.user.email,'shipment_mailer',email_to:              shipment.order.email,from:                  'noreply@fameandpartners.com',subject:               subject,date:                  Date.today.to_s(:long),name:                  order_presenter.first_name.rstrip,shipment_method_name:  shipment.try(:shipping_method).try(:name),line_items:            line_items,shipment_tracking:     shipment.tracking,shipment_tracking_url: shipment.blank? ? '#' : shipment.tracking_url)
