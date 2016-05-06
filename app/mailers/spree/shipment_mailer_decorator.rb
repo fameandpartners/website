@@ -30,5 +30,3 @@ Spree::ShipmentMailer.class_eval do
     subject
   end
 end
-
-Marketing::CustomerIOEventTracker.new.track(shipment.order.user.email,'shipment_mailer',email_to:              shipment.order.email,from:                  'noreply@fameandpartners.com',subject:               subject,date:                  Date.today.to_s(:long),name:                  order_presenter.first_name.rstrip,shipment_method_name:  shipment.try(:shipping_method).try(:name),line_items:            line_items,shipment_tracking:     shipment.tracking,shipment_tracking_url: shipment.blank? ? '#' : shipment.tracking_url)
