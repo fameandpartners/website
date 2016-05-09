@@ -6,7 +6,7 @@ configatron.app_name                = 'Fame And Partners'
 configatron.sitemap_url             = 'http://images.fameandpartners.com/sitemap/sitemap.xml.gz'
 configatron.blog_host               = 'fameandpartners.tumblr.com'
 configatron.days_delivery_emergency = 0
-configatron.secret_token            = ENV['SECRET_TOKEN']
+configatron.secret_token            = ENV['RAILS_SECRET_KEY_BASE']
 
 configatron.sentry do |sentry|
   sentry.public = ENV['SENTRY_PUBLIC']
