@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Tue, 26 Apr 2016 15:01:55 GMT
+      - Mon, 02 May 2016 09:42:20 GMT
   response:
     status:
       code: 200
@@ -29,7 +29,7 @@ http_interactions:
       X-Powered-By:
       - ASP.NET
       Date:
-      - Tue, 26 Apr 2016 15:01:50 GMT
+      - Mon, 02 May 2016 09:42:13 GMT
       Content-Length:
       - '164899'
     body:
@@ -2096,7 +2096,7 @@ http_interactions:
         \     <http:address location=\"https://sync.rex11.com/ws/v3staging/publicapiws.asmx\"
         />\r\n    </wsdl:port>\r\n  </wsdl:service>\r\n</wsdl:definitions>"
     http_version: 
-  recorded_at: Tue, 26 Apr 2016 15:01:56 GMT
+  recorded_at: Mon, 02 May 2016 09:42:21 GMT
 - request:
     method: post
     uri: https://sync.rex11.com/ws/v3staging/publicapiws.asmx
@@ -2116,7 +2116,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Tue, 26 Apr 2016 15:01:56 GMT
+      - Mon, 02 May 2016 09:42:21 GMT
       Soapaction:
       - '"http://rex11.com/webmethods/AuthenticationTokenGet"'
       Content-Type:
@@ -2139,16 +2139,16 @@ http_interactions:
       X-Powered-By:
       - ASP.NET
       Date:
-      - Tue, 26 Apr 2016 15:01:52 GMT
+      - Mon, 02 May 2016 09:42:15 GMT
       Content-Length:
-      - '465'
+      - '453'
     body:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><AuthenticationTokenGetResponse
-        xmlns="http://rex11.com/webmethods/"><AuthenticationTokenGetResult>4jY2Ohy07m2G5DJAYEvHex3F+r2/f8qoGEvtCrVnr0pSispnyO9jeQ==</AuthenticationTokenGetResult></AuthenticationTokenGetResponse></soap:Body></soap:Envelope>
+        xmlns="http://rex11.com/webmethods/"><AuthenticationTokenGetResult>4jY2Ohy07m1QnCRwXo5CQG0hfRmVH+sexZ7jaLINAnQ=</AuthenticationTokenGetResult></AuthenticationTokenGetResponse></soap:Body></soap:Envelope>
     http_version: 
-  recorded_at: Tue, 26 Apr 2016 15:01:57 GMT
+  recorded_at: Mon, 02 May 2016 09:42:22 GMT
 - request:
     method: post
     uri: https://sync.rex11.com/ws/v3staging/publicapiws.asmx
@@ -2161,20 +2161,20 @@ http_interactions:
         xmlns:ins3="http://rex11.com/swpublicapi/CustomerOrder.xsd" xmlns:ins4="http://rex11.com/swpublicapi/PickTicket.xsd"
         xmlns:ins5="http://rex11.com/swpublicapi/PickTicketDetails.xsd" xmlns:ins6="http://rex11.com/swpublicapi/PickTicketDetailsItemsInBoxes.xsd"
         xmlns:ins7="http://rex11.com/swpublicapi/OutBoundPackage.xsd" xmlns:ins8="http://rex11.com/swpublicapi/StyleMasterProduct.xsd"
-        xmlns:ins9="http://rex11.com/webmethods/AbstractTypes"><env:Body><ins0:GetInventory><ins0:AuthenticationString>4jY2Ohy07m2G5DJAYEvHex3F+r2/f8qoGEvtCrVnr0pSispnyO9jeQ==</ins0:AuthenticationString></ins0:GetInventory></env:Body></env:Envelope>
+        xmlns:ins9="http://rex11.com/webmethods/AbstractTypes"><env:Body><ins0:GetInventory><ins0:AuthenticationString>4jY2Ohy07m1QnCRwXo5CQG0hfRmVH+sexZ7jaLINAnQ=</ins0:AuthenticationString></ins0:GetInventory></env:Body></env:Envelope>
     headers:
       User-Agent:
       - HTTPClient/1.0 (2.6.0.1, ruby 2.1.6 (2015-04-13))
       Accept:
       - "*/*"
       Date:
-      - Tue, 26 Apr 2016 15:01:57 GMT
+      - Mon, 02 May 2016 09:42:22 GMT
       Soapaction:
       - '"http://rex11.com/webmethods/GetInventory"'
       Content-Type:
       - text/xml;charset=UTF-8
       Content-Length:
-      - '1042'
+      - '1030'
   response:
     status:
       code: 200
@@ -2191,333 +2191,32 @@ http_interactions:
       X-Powered-By:
       - ASP.NET
       Date:
-      - Tue, 26 Apr 2016 15:01:53 GMT
+      - Mon, 02 May 2016 09:42:16 GMT
       Content-Length:
-      - '399'
+      - '2863'
     body:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><GetInventoryResponse
-        xmlns="http://rex11.com/webmethods/"><GetInventoryResult><Notifications /><Inventory
-        /></GetInventoryResult></GetInventoryResponse></soap:Body></soap:Envelope>
+        xmlns="http://rex11.com/webmethods/"><GetInventoryResult><Notifications /><Inventory><item><Warehouse>Bergen
+        Logistics NJ</Warehouse><WarehouseId>1</WarehouseId><Sku /><Style>4B218</Style><Color>silver</Color><Size>US6/AU10</Size><Upc>23972</Upc><Description
+        /><Price>189</Price><ActualQuantity>0</ActualQuantity><PendingQuantity>0</PendingQuantity></item><item><Warehouse>Bergen
+        Logistics NJ</Warehouse><WarehouseId>1</WarehouseId><Sku /><Style>FPSS13062</Style><Color>black</Color><Size>US0/AU4</Size><Upc>26757</Upc><Description
+        /><Price>219</Price><ActualQuantity>0</ActualQuantity><PendingQuantity>0</PendingQuantity></item><item><Warehouse>Bergen
+        Logistics NJ</Warehouse><WarehouseId>1</WarehouseId><Sku /><Style>sku-1</Style><Color>red</Color><Size>US20/AU24</Size><Upc>10000</Upc><Description
+        /><Price>198.37</Price><ActualQuantity>0</ActualQuantity><PendingQuantity>0</PendingQuantity></item><item><Warehouse>Bergen
+        Logistics NJ2</Warehouse><WarehouseId>4</WarehouseId><Sku /><Style>4B218</Style><Color>silver</Color><Size>US6/AU10</Size><Upc>23972</Upc><Description
+        /><Price>189</Price><ActualQuantity>0</ActualQuantity><PendingQuantity>0</PendingQuantity></item><item><Warehouse>Bergen
+        Logistics NJ2</Warehouse><WarehouseId>4</WarehouseId><Sku /><Style>FPSS13062</Style><Color>black</Color><Size>US0/AU4</Size><Upc>26757</Upc><Description
+        /><Price>219</Price><ActualQuantity>0</ActualQuantity><PendingQuantity>0</PendingQuantity></item><item><Warehouse>Bergen
+        Logistics NJ2</Warehouse><WarehouseId>4</WarehouseId><Sku /><Style>sku-1</Style><Color>red</Color><Size>US20/AU24</Size><Upc>10000</Upc><Description
+        /><Price>198.37</Price><ActualQuantity>0</ActualQuantity><PendingQuantity>0</PendingQuantity></item><item><Warehouse>Bergen
+        Logistics NJ3</Warehouse><WarehouseId>5</WarehouseId><Sku /><Style>4B218</Style><Color>silver</Color><Size>US6/AU10</Size><Upc>23972</Upc><Description
+        /><Price>189</Price><ActualQuantity>0</ActualQuantity><PendingQuantity>0</PendingQuantity></item><item><Warehouse>Bergen
+        Logistics NJ3</Warehouse><WarehouseId>5</WarehouseId><Sku /><Style>FPSS13062</Style><Color>black</Color><Size>US0/AU4</Size><Upc>26757</Upc><Description
+        /><Price>219</Price><ActualQuantity>0</ActualQuantity><PendingQuantity>0</PendingQuantity></item><item><Warehouse>Bergen
+        Logistics NJ3</Warehouse><WarehouseId>5</WarehouseId><Sku /><Style>sku-1</Style><Color>red</Color><Size>US20/AU24</Size><Upc>10000</Upc><Description
+        /><Price>198.37</Price><ActualQuantity>0</ActualQuantity><PendingQuantity>0</PendingQuantity></item></Inventory></GetInventoryResult></GetInventoryResponse></soap:Body></soap:Envelope>
     http_version: 
-  recorded_at: Tue, 26 Apr 2016 15:01:58 GMT
-- request:
-    method: post
-    uri: https://sync.rex11.com/ws/v3staging/publicapiws.asmx
-    body:
-      encoding: UTF-8
-      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://rex11.com/webmethods/"
-        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="http://rex11.com/webmethods/"
-        xmlns:ins1="http://rex11.com/swpublicapi/ReceivingTicket.xsd" xmlns:ins2="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd"
-        xmlns:ins3="http://rex11.com/swpublicapi/CustomerOrder.xsd" xmlns:ins4="http://rex11.com/swpublicapi/PickTicket.xsd"
-        xmlns:ins5="http://rex11.com/swpublicapi/PickTicketDetails.xsd" xmlns:ins6="http://rex11.com/swpublicapi/PickTicketDetailsItemsInBoxes.xsd"
-        xmlns:ins7="http://rex11.com/swpublicapi/OutBoundPackage.xsd" xmlns:ins8="http://rex11.com/swpublicapi/StyleMasterProduct.xsd"
-        xmlns:ins9="http://rex11.com/webmethods/AbstractTypes"><env:Body><ins0:GetInventory><ins0:AuthenticationString>4jY2Ohy07m2G5DJAYEvHex3F+r2/f8qoGEvtCrVnr0pSispnyO9jeQ==</ins0:AuthenticationString></ins0:GetInventory></env:Body></env:Envelope>
-    headers:
-      User-Agent:
-      - HTTPClient/1.0 (2.6.0.1, ruby 2.1.6 (2015-04-13))
-      Accept:
-      - "*/*"
-      Date:
-      - Tue, 26 Apr 2016 15:02:19 GMT
-      Soapaction:
-      - '"http://rex11.com/webmethods/GetInventory"'
-      Content-Type:
-      - text/xml;charset=UTF-8
-      Content-Length:
-      - '1042'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private, max-age=0
-      Content-Type:
-      - text/xml; charset=utf-8
-      Server:
-      - Microsoft-IIS/7.5
-      X-Aspnet-Version:
-      - 4.0.30319
-      X-Powered-By:
-      - ASP.NET
-      Date:
-      - Tue, 26 Apr 2016 15:02:15 GMT
-      Content-Length:
-      - '399'
-    body:
-      encoding: UTF-8
-      string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><GetInventoryResponse
-        xmlns="http://rex11.com/webmethods/"><GetInventoryResult><Notifications /><Inventory
-        /></GetInventoryResult></GetInventoryResponse></soap:Body></soap:Envelope>
-    http_version: 
-  recorded_at: Tue, 26 Apr 2016 15:02:19 GMT
-- request:
-    method: post
-    uri: https://sync.rex11.com/ws/v3staging/publicapiws.asmx
-    body:
-      encoding: UTF-8
-      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://rex11.com/webmethods/"
-        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="http://rex11.com/webmethods/"
-        xmlns:ins1="http://rex11.com/swpublicapi/ReceivingTicket.xsd" xmlns:ins2="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd"
-        xmlns:ins3="http://rex11.com/swpublicapi/CustomerOrder.xsd" xmlns:ins4="http://rex11.com/swpublicapi/PickTicket.xsd"
-        xmlns:ins5="http://rex11.com/swpublicapi/PickTicketDetails.xsd" xmlns:ins6="http://rex11.com/swpublicapi/PickTicketDetailsItemsInBoxes.xsd"
-        xmlns:ins7="http://rex11.com/swpublicapi/OutBoundPackage.xsd" xmlns:ins8="http://rex11.com/swpublicapi/StyleMasterProduct.xsd"
-        xmlns:ins9="http://rex11.com/webmethods/AbstractTypes"><env:Body><ins0:GetInventory><ins0:AuthenticationString>4jY2Ohy07m2G5DJAYEvHex3F+r2/f8qoGEvtCrVnr0pSispnyO9jeQ==</ins0:AuthenticationString></ins0:GetInventory></env:Body></env:Envelope>
-    headers:
-      User-Agent:
-      - HTTPClient/1.0 (2.6.0.1, ruby 2.1.6 (2015-04-13))
-      Accept:
-      - "*/*"
-      Date:
-      - Tue, 26 Apr 2016 15:02:23 GMT
-      Soapaction:
-      - '"http://rex11.com/webmethods/GetInventory"'
-      Content-Type:
-      - text/xml;charset=UTF-8
-      Content-Length:
-      - '1042'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private, max-age=0
-      Content-Type:
-      - text/xml; charset=utf-8
-      Server:
-      - Microsoft-IIS/7.5
-      X-Aspnet-Version:
-      - 4.0.30319
-      X-Powered-By:
-      - ASP.NET
-      Date:
-      - Tue, 26 Apr 2016 15:02:19 GMT
-      Content-Length:
-      - '399'
-    body:
-      encoding: UTF-8
-      string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><GetInventoryResponse
-        xmlns="http://rex11.com/webmethods/"><GetInventoryResult><Notifications /><Inventory
-        /></GetInventoryResult></GetInventoryResponse></soap:Body></soap:Envelope>
-    http_version: 
-  recorded_at: Tue, 26 Apr 2016 15:02:24 GMT
-- request:
-    method: post
-    uri: https://sync.rex11.com/ws/v3staging/publicapiws.asmx
-    body:
-      encoding: UTF-8
-      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://rex11.com/webmethods/"
-        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="http://rex11.com/webmethods/"
-        xmlns:ins1="http://rex11.com/swpublicapi/ReceivingTicket.xsd" xmlns:ins2="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd"
-        xmlns:ins3="http://rex11.com/swpublicapi/CustomerOrder.xsd" xmlns:ins4="http://rex11.com/swpublicapi/PickTicket.xsd"
-        xmlns:ins5="http://rex11.com/swpublicapi/PickTicketDetails.xsd" xmlns:ins6="http://rex11.com/swpublicapi/PickTicketDetailsItemsInBoxes.xsd"
-        xmlns:ins7="http://rex11.com/swpublicapi/OutBoundPackage.xsd" xmlns:ins8="http://rex11.com/swpublicapi/StyleMasterProduct.xsd"
-        xmlns:ins9="http://rex11.com/webmethods/AbstractTypes"><env:Body><ins0:GetInventory><ins0:AuthenticationString>4jY2Ohy07m2G5DJAYEvHex3F+r2/f8qoGEvtCrVnr0pSispnyO9jeQ==</ins0:AuthenticationString></ins0:GetInventory></env:Body></env:Envelope>
-    headers:
-      User-Agent:
-      - HTTPClient/1.0 (2.6.0.1, ruby 2.1.6 (2015-04-13))
-      Accept:
-      - "*/*"
-      Date:
-      - Tue, 26 Apr 2016 15:02:33 GMT
-      Soapaction:
-      - '"http://rex11.com/webmethods/GetInventory"'
-      Content-Type:
-      - text/xml;charset=UTF-8
-      Content-Length:
-      - '1042'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private, max-age=0
-      Content-Type:
-      - text/xml; charset=utf-8
-      Server:
-      - Microsoft-IIS/7.5
-      X-Aspnet-Version:
-      - 4.0.30319
-      X-Powered-By:
-      - ASP.NET
-      Date:
-      - Tue, 26 Apr 2016 15:02:29 GMT
-      Content-Length:
-      - '399'
-    body:
-      encoding: UTF-8
-      string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><GetInventoryResponse
-        xmlns="http://rex11.com/webmethods/"><GetInventoryResult><Notifications /><Inventory
-        /></GetInventoryResult></GetInventoryResponse></soap:Body></soap:Envelope>
-    http_version: 
-  recorded_at: Tue, 26 Apr 2016 15:02:34 GMT
-- request:
-    method: post
-    uri: https://sync.rex11.com/ws/v3staging/publicapiws.asmx
-    body:
-      encoding: UTF-8
-      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://rex11.com/webmethods/"
-        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="http://rex11.com/webmethods/"
-        xmlns:ins1="http://rex11.com/swpublicapi/ReceivingTicket.xsd" xmlns:ins2="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd"
-        xmlns:ins3="http://rex11.com/swpublicapi/CustomerOrder.xsd" xmlns:ins4="http://rex11.com/swpublicapi/PickTicket.xsd"
-        xmlns:ins5="http://rex11.com/swpublicapi/PickTicketDetails.xsd" xmlns:ins6="http://rex11.com/swpublicapi/PickTicketDetailsItemsInBoxes.xsd"
-        xmlns:ins7="http://rex11.com/swpublicapi/OutBoundPackage.xsd" xmlns:ins8="http://rex11.com/swpublicapi/StyleMasterProduct.xsd"
-        xmlns:ins9="http://rex11.com/webmethods/AbstractTypes"><env:Body><ins0:GetInventory><ins0:AuthenticationString>4jY2Ohy07m2G5DJAYEvHex3F+r2/f8qoGEvtCrVnr0pSispnyO9jeQ==</ins0:AuthenticationString></ins0:GetInventory></env:Body></env:Envelope>
-    headers:
-      User-Agent:
-      - HTTPClient/1.0 (2.6.0.1, ruby 2.1.6 (2015-04-13))
-      Accept:
-      - "*/*"
-      Date:
-      - Tue, 26 Apr 2016 15:02:54 GMT
-      Soapaction:
-      - '"http://rex11.com/webmethods/GetInventory"'
-      Content-Type:
-      - text/xml;charset=UTF-8
-      Content-Length:
-      - '1042'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private, max-age=0
-      Content-Type:
-      - text/xml; charset=utf-8
-      Server:
-      - Microsoft-IIS/7.5
-      X-Aspnet-Version:
-      - 4.0.30319
-      X-Powered-By:
-      - ASP.NET
-      Date:
-      - Tue, 26 Apr 2016 15:02:50 GMT
-      Content-Length:
-      - '399'
-    body:
-      encoding: UTF-8
-      string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><GetInventoryResponse
-        xmlns="http://rex11.com/webmethods/"><GetInventoryResult><Notifications /><Inventory
-        /></GetInventoryResult></GetInventoryResponse></soap:Body></soap:Envelope>
-    http_version: 
-  recorded_at: Tue, 26 Apr 2016 15:02:55 GMT
-- request:
-    method: post
-    uri: https://sync.rex11.com/ws/v3staging/publicapiws.asmx
-    body:
-      encoding: UTF-8
-      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://rex11.com/webmethods/"
-        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="http://rex11.com/webmethods/"
-        xmlns:ins1="http://rex11.com/swpublicapi/ReceivingTicket.xsd" xmlns:ins2="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd"
-        xmlns:ins3="http://rex11.com/swpublicapi/CustomerOrder.xsd" xmlns:ins4="http://rex11.com/swpublicapi/PickTicket.xsd"
-        xmlns:ins5="http://rex11.com/swpublicapi/PickTicketDetails.xsd" xmlns:ins6="http://rex11.com/swpublicapi/PickTicketDetailsItemsInBoxes.xsd"
-        xmlns:ins7="http://rex11.com/swpublicapi/OutBoundPackage.xsd" xmlns:ins8="http://rex11.com/swpublicapi/StyleMasterProduct.xsd"
-        xmlns:ins9="http://rex11.com/webmethods/AbstractTypes"><env:Body><ins0:GetInventory><ins0:AuthenticationString>4jY2Ohy07m2G5DJAYEvHex3F+r2/f8qoGEvtCrVnr0pSispnyO9jeQ==</ins0:AuthenticationString></ins0:GetInventory></env:Body></env:Envelope>
-    headers:
-      User-Agent:
-      - HTTPClient/1.0 (2.6.0.1, ruby 2.1.6 (2015-04-13))
-      Accept:
-      - "*/*"
-      Date:
-      - Tue, 26 Apr 2016 15:03:39 GMT
-      Soapaction:
-      - '"http://rex11.com/webmethods/GetInventory"'
-      Content-Type:
-      - text/xml;charset=UTF-8
-      Content-Length:
-      - '1042'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private, max-age=0
-      Content-Type:
-      - text/xml; charset=utf-8
-      Server:
-      - Microsoft-IIS/7.5
-      X-Aspnet-Version:
-      - 4.0.30319
-      X-Powered-By:
-      - ASP.NET
-      Date:
-      - Tue, 26 Apr 2016 15:03:35 GMT
-      Content-Length:
-      - '399'
-    body:
-      encoding: UTF-8
-      string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><GetInventoryResponse
-        xmlns="http://rex11.com/webmethods/"><GetInventoryResult><Notifications /><Inventory
-        /></GetInventoryResult></GetInventoryResponse></soap:Body></soap:Envelope>
-    http_version: 
-  recorded_at: Tue, 26 Apr 2016 15:03:40 GMT
-- request:
-    method: post
-    uri: https://sync.rex11.com/ws/v3staging/publicapiws.asmx
-    body:
-      encoding: UTF-8
-      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://rex11.com/webmethods/"
-        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="http://rex11.com/webmethods/"
-        xmlns:ins1="http://rex11.com/swpublicapi/ReceivingTicket.xsd" xmlns:ins2="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd"
-        xmlns:ins3="http://rex11.com/swpublicapi/CustomerOrder.xsd" xmlns:ins4="http://rex11.com/swpublicapi/PickTicket.xsd"
-        xmlns:ins5="http://rex11.com/swpublicapi/PickTicketDetails.xsd" xmlns:ins6="http://rex11.com/swpublicapi/PickTicketDetailsItemsInBoxes.xsd"
-        xmlns:ins7="http://rex11.com/swpublicapi/OutBoundPackage.xsd" xmlns:ins8="http://rex11.com/swpublicapi/StyleMasterProduct.xsd"
-        xmlns:ins9="http://rex11.com/webmethods/AbstractTypes"><env:Body><ins0:GetInventory><ins0:AuthenticationString>4jY2Ohy07m2G5DJAYEvHex3F+r2/f8qoGEvtCrVnr0pSispnyO9jeQ==</ins0:AuthenticationString></ins0:GetInventory></env:Body></env:Envelope>
-    headers:
-      User-Agent:
-      - HTTPClient/1.0 (2.6.0.1, ruby 2.1.6 (2015-04-13))
-      Accept:
-      - "*/*"
-      Date:
-      - Tue, 26 Apr 2016 15:03:40 GMT
-      Soapaction:
-      - '"http://rex11.com/webmethods/GetInventory"'
-      Content-Type:
-      - text/xml;charset=UTF-8
-      Content-Length:
-      - '1042'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private, max-age=0
-      Content-Type:
-      - text/xml; charset=utf-8
-      Server:
-      - Microsoft-IIS/7.5
-      X-Aspnet-Version:
-      - 4.0.30319
-      X-Powered-By:
-      - ASP.NET
-      Date:
-      - Tue, 26 Apr 2016 15:03:36 GMT
-      Content-Length:
-      - '399'
-    body:
-      encoding: UTF-8
-      string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><GetInventoryResponse
-        xmlns="http://rex11.com/webmethods/"><GetInventoryResult><Notifications /><Inventory
-        /></GetInventoryResult></GetInventoryResponse></soap:Body></soap:Envelope>
-    http_version: 
-  recorded_at: Tue, 26 Apr 2016 15:03:41 GMT
+  recorded_at: Mon, 02 May 2016 09:42:23 GMT
 recorded_with: VCR 2.9.3

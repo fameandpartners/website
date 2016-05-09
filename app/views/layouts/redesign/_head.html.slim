@@ -24,7 +24,8 @@ meta name="p:domain_verify" content="bca305b234684f817b52dc0131747eb6"
 
 script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"
 
-= render :partial => 'shared/typekit'
+- if !Rails.env.test?
+  = render :partial => 'shared/typekit'
 
 - if !Rails.env.production?
   meta name="robots" content="noindex, nofollow"

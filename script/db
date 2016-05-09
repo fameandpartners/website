@@ -238,6 +238,8 @@ function sanitise_dev_db
   truncate table item_returns;
   truncate table line_item_personalizations;
   truncate table line_item_updates;
+  truncate table marketing_body_calculator_measures;
+  truncate table marketing_order_traffic_parameters;
   truncate table marketing_user_visits;
   truncate table moodboard_item_events;
   truncate table moodboard_items;

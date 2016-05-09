@@ -12,6 +12,8 @@ Spree::OptionType.class_eval do
 
     # I really dislike these class variable based memoised values,
     # but am leaving them in place, despite adding new scopes to contain the SQL.
+    # TODO: As Garrow left this note here, this memoization has serious side effects and it shouldn't exist!
+    # TODO: Careful removing though! It can explode on random places
     def color
       @color ||= color_scope.first
     end

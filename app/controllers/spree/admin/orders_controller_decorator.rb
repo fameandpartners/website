@@ -8,9 +8,14 @@ module Spree
       helper_method :hide_line_items, :order_shipment_states
 
       def mark_order_as_shipped
-        order = Spree::Order.where(number: params[:id]).first
-        order.shipment_state = 'shipped'
-        order.save!
+        if @order.can_ship?
+          @order.shipment_state = 'shipped'
+          @order.save!
+          flash[:success] = 'Order was marked as shipped!'
+        else
+          flash[:error] = 'Order cannot be marked as shipped'
+        end
+
         redirect_to action: :show
       end
 
