@@ -49,23 +49,80 @@ module Spree
 
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
 
-        per_page = 5000 if params[:format] == 'csv'
+        # per_page = 5000 if params[:format] == 'csv'
+        if params[:format] != 'csv'
+          @orders = @search.result(distinct: true).includes(
+            :user => [],
+            :shipments => {:inventory_units => :variant},
+            :payments => [],
+            :line_items => {:variant => :product, :fabrication => [], :making_options => []},
+            :bill_address => [:state, :country],
+            :ship_address => [:state, :country]
+          ).page(page).per(per_page)
+        else
+          @orders = Spree::LineItem.find_by_sql <<-SQL
+            SELECT
 
-        @orders = @search.result(distinct: true).includes(
-          :user => [],
-          :shipments => {:inventory_units => :variant},
-          :payments => [],
-          :line_items => {:variant => :product, :fabrication => [], :making_options => []},
-          :bill_address => [:state, :country],
-          :ship_address => [:state, :country]
-        ).
-            page(page).
-            per(per_page)
+            o.id as order_id,
+            o.state as order_state,
+            o.number as order_number,
+            o.user_first_name,
+            o.user_last_name,
+            o.site_version,
+            li.id as line_item_id,
+            (SELECT count(*) FROM spree_line_items sli WHERE sli."order_id" = o."id") as total_items,
+            to_char(o.completed_at, 'YYYY-MM-DD') as completed_at_char,
+            to_char(o.projected_delivery_date, 'YYYY-MM-DD') as projected_delivery_date_char,
+            ss.tracking as tracking_number,
+            to_char(ss.shipped_at, 'YYYY-MM-DD') as shipment_date,
+            case when f.state <> '' then f.state else 'processing' end as fabrication_state,
+            sv.sku as style,
+            sp.name as style_name,
+            case when lip.id > 0
+              then (SELECT name FROM spree_option_values WHERE id = lip.color_id)
+              else (SELECT spree_option_values.name FROM spree_option_values
+                INNER JOIN "spree_option_values_variants" ON "spree_option_values"."id" = "spree_option_values_variants"."option_value_id"
+                INNER JOIN "spree_option_types" ON "spree_option_types".id = "spree_option_values"."option_type_id"
+                WHERE "spree_option_types"."name" = 'dress-color' AND "spree_option_values_variants"."variant_id" = sv.id)
+            end as color,
+            case when lip.id > 0
+              then (SELECT name FROM spree_option_values WHERE id = lip.size_id)
+              else (SELECT spree_option_values.name FROM spree_option_values
+                INNER JOIN "spree_option_values_variants" ON "spree_option_values"."id" = "spree_option_values_variants"."option_value_id"
+                INNER JOIN "spree_option_types" ON "spree_option_types".id = "spree_option_values"."option_type_id"
+                WHERE "spree_option_types"."name" = 'dress-size' AND "spree_option_values_variants"."variant_id" = sv.id)
+            end as size,
+            lip.height as height,
+            case when fa.name <> '' then fa.name else 'Unknown' end as factory,
+            o.email,
+            o.customer_notes,
+            case when sa.phone <> '' then sa.phone else 'No Phone' end as customer_phone_number,
+            li.price,
+            li.currency
+
+            FROM "spree_orders" o
+            LEFT OUTER JOIN "spree_addresses" sa ON sa."id" = o."bill_address_id"
+            LEFT OUTER JOIN "spree_line_items" li ON li."order_id" = o."id"
+            LEFT OUTER JOIN "line_item_personalizations" lip ON lip."line_item_id" = li."id"
+            LEFT OUTER JOIN "spree_variants" sv ON sv."id" = li."variant_id"
+            LEFT OUTER JOIN "spree_products" sp ON sp."id" = sv."product_id"
+            LEFT OUTER JOIN "fabrications" f ON f."line_item_id" = li."id"
+            LEFT OUTER JOIN "factories" fa ON sp."factory_id" = fa."id"
+            LEFT OUTER JOIN "spree_shipments" ss ON ss."order_id" = o."id"
+
+            WHERE ((sa."firstname" ILIKE 'anna%' AND sa."lastname" ILIKE 'p%' AND o."completed_at" IS NOT NULL))
+            ORDER BY o."completed_at" DESC
+          SQL
+        end
+
 
         # Restore dates
         params[:q][:created_at_gt] = created_at_gt
         params[:q][:created_at_lt] = created_at_lt
         ##################### End Original Spree ##############################
+
+        # ransack_clause = Spree::Order.select('spree_orders.id').ransack(params[:q]).result.to_sql
+        # puts ransack_clause
 
         respond_with(@orders) do |format|
           format.html
