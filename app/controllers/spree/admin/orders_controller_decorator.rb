@@ -60,7 +60,7 @@ module Spree
             :ship_address => [:state, :country]
           ).page(page).per(per_page)
         else
-          @orders = Spree::LineItem.find_by_sql <<-SQL
+          @orders = Spree::Order.find_by_sql <<-SQL
             SELECT
 
             o.id as order_id,
@@ -93,15 +93,24 @@ module Spree
                 WHERE "spree_option_types"."name" = 'dress-size' AND "spree_option_values_variants"."variant_id" = sv.id)
             end as size,
             lip.height as height,
-            case when fa.name <> '' then fa.name else 'Unknown' end as factory,
+            fa.name as factory,
             o.email,
             o.customer_notes,
-            case when sa.phone <> '' then sa.phone else 'No Phone' end as customer_phone_number,
+            sa.phone as customer_phone_number,
+            ssa.address1 as address1,
+            ssa.address2,
+            ssa.city,
+            ssa.zipcode,
+            ssa_s.name as state,
+            ssa_c.name as country,
             li.price,
             li.currency
 
             FROM "spree_orders" o
             LEFT OUTER JOIN "spree_addresses" sa ON sa."id" = o."bill_address_id"
+            LEFT OUTER JOIN "spree_addresses" ssa ON ssa."id" = o."ship_address_id"
+            LEFT OUTER JOIN "spree_states" ssa_s ON ssa_s."id" = ssa."state_id"
+            LEFT OUTER JOIN "spree_countries" ssa_c ON ssa_c."id" = ssa."country_id"
             LEFT OUTER JOIN "spree_line_items" li ON li."order_id" = o."id"
             LEFT OUTER JOIN "line_item_personalizations" lip ON lip."line_item_id" = li."id"
             LEFT OUTER JOIN "spree_variants" sv ON sv."id" = li."variant_id"
@@ -110,19 +119,13 @@ module Spree
             LEFT OUTER JOIN "factories" fa ON sp."factory_id" = fa."id"
             LEFT OUTER JOIN "spree_shipments" ss ON ss."order_id" = o."id"
 
-            WHERE ((sa."firstname" ILIKE 'anna%' AND sa."lastname" ILIKE 'p%' AND o."completed_at" IS NOT NULL))
-            ORDER BY o."completed_at" DESC
+            WHERE #{ransack_criterias Spree::Order.ransack(params[:q]).result.to_sql}
           SQL
         end
-
 
         # Restore dates
         params[:q][:created_at_gt] = created_at_gt
         params[:q][:created_at_lt] = created_at_lt
-        ##################### End Original Spree ##############################
-
-        # ransack_clause = Spree::Order.select('spree_orders.id').ransack(params[:q]).result.to_sql
-        # puts ransack_clause
 
         respond_with(@orders) do |format|
           format.html
@@ -135,6 +138,15 @@ module Spree
       end
 
       private
+
+      def ransack_criterias(ransack_clause)
+        ransack_clause[/WHERE(.*)/, 1]
+          .gsub("\"spree_orders\"", "o")
+          .gsub("\"spree_addresses\"", "sa")
+          .gsub("\"spree_products\"", "sp")
+          .gsub("\"products_spree_variants\"", "sp")
+          .gsub("\"fabrications\"", "f")
+      end
 
       def order_shipment_states
         @order_shipment_states ||= Spree::Order.shipment_states

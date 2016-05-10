@@ -27,42 +27,37 @@ module Orders
       CSV.generate(headers: true) do |csv|
         csv << headers
         orders.map do |order|
-          start = Time.now
-          csv_attr = order.attributes
-          # o = Spree::Order.find(csv_attr['order_id'])
-          # li = Spree::LineItem.find(csv_attr['line_item_id'])
-          # op = OrderPresenter.new(o)
-          # lip = LineItemPresenter.new(li, op)
+          line_attr = order.attributes
           csv << [
-            csv_attr['order_state'],
-            csv_attr['order_number'],
-            csv_attr['line_item_id'],
-            csv_attr['total_items'],
-            csv_attr['completed_at_char'],
+            line_attr['order_state'],
+            line_attr['order_number'],
+            line_attr['line_item_id'],
+            line_attr['total_items'],
+            line_attr['completed_at_char'],
             '', # lip.fast_making? ? "TRUE" : '',
-            csv_attr['projected_delivery_date_char'],
-            csv_attr['tracking_number'],
-            csv_attr['shipment_date'],
-            csv_attr['fabrication_state'],
-            '', # lip.sku,,
-            csv_attr['style'],
-            csv_attr['style_name'] || 'Missing Variant',
-            csv_attr['factory'],
-            csv_attr['color'] || 'Unknown Color',
-            (csv_attr['size'] || 'Unknown Size')  + " (#{csv_attr['site_version']})",
-            csv_attr['height'] || LineItemPersonalization::DEFAULT_HEIGHT,
+            line_attr['projected_delivery_date_char'],
+            line_attr['tracking_number'],
+            line_attr['shipment_date'],
+            line_attr['fabrication_state'],
+            '', # lip.sku,
+            line_attr['style'],
+            line_attr['style_name'] || 'Missing Variant',
+            line_attr['factory'] || 'Unknown',
+            line_attr['color'] || 'Unknown Color',
+            (line_attr['size'] || 'Unknown Size')  + " (#{line_attr['site_version']})",
+            line_attr['height'] || LineItemPersonalization::DEFAULT_HEIGHT,
             '', # lip.customisations.collect(&:first).join('|'),
             '', # lip.promo_codes.join('|'),
-            csv_attr['email'],
-            csv_attr['customer_notes'],
-            "#{csv_attr['user_first_name']} #{csv_attr['user_last_name']}",
-            csv_attr['customer_phone_number'],
-            '', # lip.wrapped_order.shipping_address,
+            line_attr['email'],
+            line_attr['customer_notes'],
+            "#{line_attr['user_first_name']} #{line_attr['user_last_name']}",
+            line_attr['customer_phone_number'] || 'No Phone',
+            shipping_address(line_attr) || 'No Shipping Address',
             '', # lip.order.return_requested?,
             '', # lip.return_action,
             '', # lip.return_details,
             '', # lip.price,
-            csv_attr['currency']
+            line_attr['currency']
           ]
         end
       end
@@ -120,6 +115,13 @@ module Orders
         customer_phone_number:   '(客人电话)',
         shipping_address:        '(客人地址)'
       }
+    end
+
+    def shipping_address(line_attr)
+      return if line_attr['address1'].blank? && line_attr['address1'].blank? \
+        && line_attr['city'].blank? && line_attr['state'].blank? \
+        && line_attr['zipcode'].blank? && line_attr['country'].blank?
+      "#{line_attr['address1']} #{line_attr['address2']} #{line_attr['city']} #{line_attr['state']} #{line_attr['zipcode']} #{line_attr['country']}"
     end
 
   end
