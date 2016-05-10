@@ -174,7 +174,7 @@ FameAndPartners::Application.routes.draw do
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
     get '/fameweddings/guest' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :guest_bride_page
 
-    #get '/macys' => 'products/collections#show', :as => :macys
+    get '/macys' => 'products/collections#show', :as => :macys
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
@@ -282,7 +282,7 @@ FameAndPartners::Application.routes.draw do
     get '/from-our-ceo' => 'statics#yelp', :as => :yelp
     get '/how-it-works', to: redirect("/why-us")
     get '/size-guide'  => 'statics#size_guide', :as => :size_guide
-    #get '/growth-plan'  => 'statics#growth_plan', :as => :growth_plan
+    get '/growth-plan'  => 'statics#growth_plan', :as => :growth_plan
 
     get '/fashionista2014', to: redirect("/")
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info

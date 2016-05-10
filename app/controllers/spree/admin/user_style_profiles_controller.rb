@@ -16,7 +16,7 @@ module Spree
 
       def users_with_style_profile
         user_ids = UserStyleProfile.select('distinct(user_id) as user_id').map(&:user_id)
-        Spree::User.includes(:style_profile).find(user_ids)
+        Spree::User.includes(:style_profile).where(id: user_ids)
       end
 
       def csv_data
@@ -26,7 +26,7 @@ module Spree
       def generate_csv_data
         data = CSV.generate(:col_sep => ';') do |csv|
           csv << [
-            'user id', 
+            'user id',
             'user fname',
             'user lname',
             'user email',
