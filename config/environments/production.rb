@@ -1,7 +1,7 @@
 FameAndPartners::Application.configure do
 
   # Enable the logstasher logs for the current environment
-  config.logstasher.enabled = false
+  config.logstasher.enabled = true
   config.logstasher.suppress_app_log = false
   # Settings specified here will take precedence over those in config/application.rb
 
