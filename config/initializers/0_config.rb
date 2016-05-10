@@ -56,9 +56,9 @@ end
 configatron.email_marketing.store_information = 1.month
 
 configatron.mailgun.mailbox do |mailgun|
-  mailgun.domain   = ENV['MAILGUN_DOMAIN']
-  mailgun.username = ENV['MAILGUN_USERNAME']
-  mailgun.password = ENV['MAILGUN_PASSWORD']
+  mailgun.domain   = ENV['SMTP_DOMAIN']
+  mailgun.username = ENV['SMTP_USERNAME']
+  mailgun.password = ENV['SMTP_PASSWORD']
 end
 
 configatron.mailchimp do |mailchimp|
