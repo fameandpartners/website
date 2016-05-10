@@ -7,8 +7,6 @@
 
 unless Rails.env.development?
   SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(
-      aws_access_key_id:     configatron.aws.s3.access_key_id,
-      aws_secret_access_key: configatron.aws.s3.secret_access_key,
       fog_provider:          'AWS',
       fog_directory:         configatron.aws.s3.bucket,
       fog_region:            configatron.aws.s3.region
