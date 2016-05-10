@@ -90,10 +90,8 @@ configatron.pin_payments.usd_gateways = [
 configatron.site_version_detector_strategy = :path
 
 configatron.aws.s3 do |s3|
-  s3.bucket            = ENV['S3_BUCKET']
-  s3.region            = ENV['S3_REGION']
-  s3.access_key_id     = ENV['S3_ACCESS_KEY_ID']
-  s3.secret_access_key = ENV['S3_SECRET_ACCESS_KEY']
+  s3.bucket            = ENV['AWS_S3_BUCKET']
+  s3.region            = ENV['AWS_S3_REGION']
 end
 
 case Rails.env.to_sym
