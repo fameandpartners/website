@@ -32,6 +32,10 @@ module Acceptance
         find('#locale-selector-current').hover
         click_link site_version
       end
+
+      step 'I click on Place My Order button' do
+        find('.place-order button').trigger('click')
+      end
     end
   end
 end
