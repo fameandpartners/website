@@ -76,35 +76,33 @@
             .tab-pane.active
               h2.h5 Popular FAQS
               .panel-group roll='tablist' aria-multiselectable='true'
-                = render 'shared/redesign/faqs/returns_policy'
-                = render 'shared/redesign/faqs/returns_different'
-                = render 'shared/redesign/faqs/returns_steps'
-                = render 'shared/redesign/faqs/returns_how_long'
-                = render 'shared/redesign/faqs/returns_store_credit'
+                = render 'shared/redesign/faqs/delivery_how_long'
+                = render 'shared/redesign/faqs/delivery_international'
+                = render 'shared/redesign/faqs/delivery_not_home'
+                = render 'shared/redesign/faqs/delivery_how_long'
+                = render 'shared/redesign/faqs/delivery_international'
+                = render 'shared/redesign/faqs/delivery_not_home'
             #panel-making-a-purchase-faq.tab-pane
               h2.h5 Making a purchase FAQS
               .panel-group roll='tablist' aria-multiselectable='true'
-                = render 'shared/redesign/faqs/returns_policy'
-                = render 'shared/redesign/faqs/returns_different'
-                = render 'shared/redesign/faqs/returns_steps'
-                = render 'shared/redesign/faqs/returns_how_long'
-                = render 'shared/redesign/faqs/returns_store_credit'
+                = render 'shared/redesign/faqs/delivery_how_long'
+                = render 'shared/redesign/faqs/delivery_international'
+                = render 'shared/redesign/faqs/delivery_not_home'
+                = render 'shared/redesign/faqs/delivery_POBOX'
+                = render 'shared/redesign/faqs/delivery_sign'
+                = render 'shared/redesign/faqs/delivery_track'
             #panel-exisitng-orders-faq.tab-pane
               h2.h5 Existing orders FAQS
               .panel-group roll='tablist' aria-multiselectable='true'
+                = render 'shared/redesign/faqs/cancle_order'
+                = render 'shared/redesign/faqs/returns_steps'
                 = render 'shared/redesign/faqs/returns_policy'
-                = render 'shared/redesign/faqs/returns_different'
+                = render 'shared/redesign/faqs/info_when_return'
             #panel-other-enquiries-faq.tab-pane
               h2.h5 Other enquiries FAQS
               .panel-group roll='tablist' aria-multiselectable='true'
-                = render 'shared/redesign/faqs/returns_policy'
-                = render 'shared/redesign/faqs/returns_different'
-                = render 'shared/redesign/faqs/returns_steps'
-                = render 'shared/redesign/faqs/returns_how_long'
-                = render 'shared/redesign/faqs/returns_store_credit'
-                = render 'shared/redesign/faqs/returns_steps'
-                = render 'shared/redesign/faqs/returns_how_long'
-                = render 'shared/redesign/faqs/returns_store_credit'
+                = render 'shared/redesign/faqs/exchange_item'
+                = render 'shared/redesign/faqs/excluded_items'
           .footer-wrap
             = link_to 'SEE ALL FAQS', faqs_path
 
