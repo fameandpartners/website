@@ -66,8 +66,7 @@ configatron.mailchimp do |mailchimp|
   mailchimp.list_id = ENV['MAILCHIMP_LIST_ID']
 end
 
-configatron.redis_host = ENV['REDIS_HOST']
-configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
+configatron.redis_options = { namespace: 'fame_and_partners', url: "#{ENV['REDIS_URL']}/0" }
 
 configatron.es_url = ENV['ES_URL']
 
@@ -109,19 +108,16 @@ when :development
     index.color_variants = :color_variants_development
   end
 
-  configatron.redis_options = { namespace: "fame_and_partners_#{Rails.env}", url: "redis://#{configatron.redis_host}/0" }
+  configatron.redis_options = { namespace: 'fame_and_partners_development', url: "#{ENV['REDIS_URL']}/0" }
 
 when :staging
 
 when :preproduction
-  configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
 
 when :production
   configatron.site_version_detector_strategy = :top_level_domain
 
   configatron.order_production_emails = ['fameandpartners@hotmail.com', 'orders@fameandpartners.com.cn']
-
-  configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
 
 when :test
   configatron.site_version_detector_strategy = :subdomain
@@ -131,5 +127,5 @@ when :test
     index.color_variants = :color_variants_test
   end
 
-  configatron.redis_options = { namespace: "fame_and_partners_#{Rails.env}", url: "redis://#{configatron.redis_host}/0" }
+  configatron.redis_options = { namespace: 'fame_and_partners_test', url: "#{ENV['REDIS_URL']}/0" }
 end
