@@ -52,7 +52,7 @@ module Orders
             line_attr['customer_notes'],
             "#{line_attr['user_first_name']} #{line_attr['user_last_name']}",
             line_attr['customer_phone_number'] || 'No Phone',
-            shipping_address(line_attr) || 'No Shipping Address',
+            shipping_address(line_attr).present? ? shipping_address(line_attr) : 'No Shipping Address',
             '', # lip.order.return_requested?,
             '', # lip.return_action,
             '', # lip.return_details,
@@ -118,9 +118,6 @@ module Orders
     end
 
     def shipping_address(line_attr)
-      return if line_attr['address1'].blank? && line_attr['address1'].blank? \
-        && line_attr['city'].blank? && line_attr['state'].blank? \
-        && line_attr['zipcode'].blank? && line_attr['country'].blank?
       "#{line_attr['address1']} #{line_attr['address2']} #{line_attr['city']} #{line_attr['state']} #{line_attr['zipcode']} #{line_attr['country']}"
     end
 
