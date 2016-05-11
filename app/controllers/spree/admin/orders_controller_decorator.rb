@@ -49,7 +49,6 @@ module Spree
 
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
 
-        # per_page = 5000 if params[:format] == 'csv'
         if params[:format] != 'csv'
           @orders = @search.result(distinct: true).includes(
             :user => [],
@@ -85,7 +84,6 @@ module Spree
           .gsub("\"spree_orders\"", "o")
           .gsub("\"spree_addresses\"", "sa")
           .gsub("\"spree_products\"", "sp")
-          .gsub("\"products_spree_variants\"", "sp")
           .gsub("\"fabrications\"", "f")
       end
 
