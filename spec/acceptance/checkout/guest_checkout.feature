@@ -63,7 +63,8 @@ Feature: Complete Guest Checkout
       | CVC              | 123               |
       | Expiration Month | 10                |
       | Expiration Year  | 2050              |
-    And I click on Place My Order button
+    And I close Additional Custom Duty Fees modal
+    And I click on "Place My Order" button
     Then I should see my order placed, with "Connie" dress, "<Dress Size>" size and "<Dress Price>" price
 
     Examples:

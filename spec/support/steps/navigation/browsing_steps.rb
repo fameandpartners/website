@@ -33,8 +33,8 @@ module Acceptance
         click_link site_version
       end
 
-      step 'I click on Place My Order button' do
-        find('.place-order button').trigger('click')
+      step 'I close Additional Custom Duty Fees modal' do
+        find('.classic-modal .vex-dialog-button-primary').click
       end
     end
   end
