@@ -57,7 +57,7 @@ Feature: Complete Guest Checkout
     And I select "<State>" state
     And I select "<Country>" country
     And I click on "Pay Securely" button
-    # And I close Additional Custom Duty Fees modal if it exists
+    And I close Additional Custom Duty Fees modal if it exists
     And I fill in credit card information:
       | Card number      | 5520000000000000  |
       | Name on card     | Zaphod Beeblebrox |
