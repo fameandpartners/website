@@ -57,13 +57,13 @@ Feature: Complete Guest Checkout
     And I select "<State>" state
     And I select "<Country>" country
     And I click on "Pay Securely" button
+    And I close Additional Custom Duty Fees modal if it exists
     And I fill in credit card information:
       | Card number      | 5520000000000000  |
       | Name on card     | Zaphod Beeblebrox |
       | CVC              | 123               |
       | Expiration Month | 10                |
       | Expiration Year  | 2050              |
-    And I close Additional Custom Duty Fees modal if it exists
     And I click on "Place My Order" button
     Then I should see my order placed, with "Connie" dress, "<Dress Size>" size and "<Dress Price>" price
 
