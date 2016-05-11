@@ -37,7 +37,7 @@ module Spree
           ss.tracking as tracking_number,
           to_char(ss.shipped_at, 'YYYY-MM-DD') as shipment_date,
           case when f.state <> '' then f.state else 'processing' end as fabrication_state,
-          sv.sku as style,
+          (SELECT "spree_variants".sku FROM "spree_variants" WHERE "spree_variants"."product_id" = sp.id AND "spree_variants"."is_master" = 't' LIMIT 1) as style,
           sp.name as style_name,
           case when lip.id > 0
             then (SELECT name FROM spree_option_values WHERE id = lip.color_id)
