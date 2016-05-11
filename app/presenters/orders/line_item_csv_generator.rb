@@ -53,9 +53,9 @@ module Orders
             "#{line_attr['user_first_name']} #{line_attr['user_last_name']}",
             line_attr['customer_phone_number'] || 'No Phone',
             shipping_address(line_attr).present? ? shipping_address(line_attr) : 'No Shipping Address',
-            '', # lip.order.return_requested?,
-            '', # lip.return_action,
-            '', # lip.return_details,
+            line_attr['return_action_details'].present? ? 'true' : 'false',
+            line_attr['return_action_details'].try(:split, '/').try(:[], 0),
+            line_attr['return_action_details'].try(:split, '/').try(:[], 1),
             '', # lip.price,
             line_attr['currency']
           ]

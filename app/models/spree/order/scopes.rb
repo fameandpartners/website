@@ -64,6 +64,10 @@ module Spree
           ssa.zipcode,
           ssa_s.name as state,
           ssa_c.name as country,
+          ( SELECT string_agg(rri.action, ' | ') || '/' || string_agg(rri.quantity || ' x ' || rri.reason_category ||  ' - ' || rri.reason, ' | ')
+            FROM return_request_items rri
+            WHERE rri.line_item_id = li.id AND rri.action IN ('return', 'exchange')
+            GROUP BY rri.line_item_id ) as return_action_details,
           li.price,
           li.currency
 
