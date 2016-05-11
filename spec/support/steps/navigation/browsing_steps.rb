@@ -33,8 +33,9 @@ module Acceptance
         click_link site_version
       end
 
-      step 'I close Additional Custom Duty Fees modal' do
-        find('.classic-modal .vex-dialog-button-primary').click
+      step 'I close Additional Custom Duty Fees modal if it exists' do
+        ok_btn = find('.classic-modal .vex-dialog-button-primary')
+        ok_btn.click if ok_btn.present?
       end
     end
   end
