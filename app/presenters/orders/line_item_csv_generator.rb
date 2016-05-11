@@ -34,7 +34,7 @@ module Orders
             line_attr['line_item_id'],
             line_attr['total_items'],
             line_attr['completed_at_char'],
-            '', # lip.fast_making? ? "TRUE" : '',
+            line_attr['fast_making'].present? ? "TRUE" : '',
             line_attr['projected_delivery_date_char'],
             line_attr['tracking_number'],
             line_attr['shipment_date'],
