@@ -125,9 +125,7 @@
 
   &:not(.plain) {
     width: 100%;
-    @include desktop {
-      height: 100vh;
-    }
+    height: 100vh;
     min-height: 750px;
     margin-bottom: -$mega-menu-desktop-height;
     padding-bottom: $mega-menu-desktop-height;
@@ -225,6 +223,10 @@
         margin-top: 10px;
       }
 
+    }
+
+    &:not(.plain) {
+      height: 100%;
     }
 
   }
