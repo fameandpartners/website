@@ -25,13 +25,12 @@
           span.price = product_price_with_discount(product_presenter.price, product_presenter.discount)
 
         .actions-wrap
-          /! if like button
-            .inner-wrap
-              a href='javascript:;' class='btn btn-default btn-xs' Like (0)
-            .inner-wrap
-              = link_to 'Add to cart', url_path, class: 'btn btn-black btn-xs'
-          /# else this
-          .inner-wrap-full
+          .inner-wrap
+            a href='javascript:;' class='btn btn-default btn-xs' 
+              | Like ( 
+              = item.likes
+              | )
+          .inner-wrap
             = link_to 'Add to cart', url_path, class: 'btn btn-black btn-xs'
           - if @resource.allow_comments?
             .comments-trigger-wrap
