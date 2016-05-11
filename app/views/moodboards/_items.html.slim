@@ -29,7 +29,7 @@
             a href='javascript:;' class='btn btn-default btn-xs' 
               | Like ( 
               = item.likes
-              | )
+              |  )
           .inner-wrap
             = link_to 'Add to cart', url_path, class: 'btn btn-black btn-xs'
           - if @resource.allow_comments?
