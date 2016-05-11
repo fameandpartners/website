@@ -23,12 +23,20 @@ module Bergen
       # TODO
     end
 
-    def style_master_product_add(spree_variants:)
-      SoapMethods::StyleMasterProductAdd.new(
+    def style_master_product_add_by_spree_variants(spree_variants:)
+      SoapMethods::StyleMasterProductAddBySpreeVariants.new(
         savon_client:   client,
         spree_variants: spree_variants
       ).result
     end
+
+    # def style_master_product_add_by_return_request_items(return_items:)
+    #   SoapMethods::StyleMasterProductAddByReturnRequestItems.new(
+    #     savon_client:   client,
+    #     spree_variants: spree_variants
+    #   ).result
+    # end
+
 
     def get_style_master_product_add_status(spree_variant:)
       SoapMethods::GetStyleMasterProductAddStatus.new(
