@@ -30,13 +30,12 @@ module Bergen
       ).result
     end
 
-    # def style_master_product_add_by_return_request_items(return_items:)
-    #   SoapMethods::StyleMasterProductAddByReturnRequestItems.new(
-    #     savon_client:   client,
-    #     spree_variants: spree_variants
-    #   ).result
-    # end
-
+    def style_master_product_add_by_return_request_items(return_items:)
+      SoapMethods::StyleMasterProductAddByReturnRequestItems.new(
+        savon_client: client,
+        return_items: return_items
+      ).result
+    end
 
     def get_style_master_product_add_status(spree_variant:)
       SoapMethods::GetStyleMasterProductAddStatus.new(
