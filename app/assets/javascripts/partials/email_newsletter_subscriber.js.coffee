@@ -29,7 +29,9 @@ window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
       @success(data)
 
   failure: (data) =>
-    window.helpers.showAlert(message: data.Message, timeout:5555)
+    title = 'Sorry'
+    message = 'Please check if you entered a valid email address.'
+    window.helpers.showAlert(message: message, type: 'error', title: title, timeout: 55555)
     window.track.event('Newsletter', 'Error', @campaign)
 
   success: =>
