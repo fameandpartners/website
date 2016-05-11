@@ -388,6 +388,7 @@ FameAndPartners::Application.routes.draw do
       member do
         get :like
         get :unlike
+        get :like_num
       end
     end
     resources :collaborators, controller: 'moodboard_collaborators', only: [:create, :index]
