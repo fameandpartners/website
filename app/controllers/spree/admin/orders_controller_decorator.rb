@@ -49,6 +49,8 @@ module Spree
 
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
 
+        ##################### End Original Spree ##############################
+
         if params[:format] != 'csv'
           @orders = @search.result(distinct: true).includes(
             :user => [],
