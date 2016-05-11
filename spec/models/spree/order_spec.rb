@@ -72,20 +72,5 @@ describe Spree::Order, :type => :model do
       it{ expect(order).to_not be_shipped }
     end
   end
-
-  describe 'associate user when guest checkout based on email, first name and last name' do
-    context 'guest checkout' do
-      let(:match_user) { create(:spree_user, email: 'something@music.com', first_name: 'Something', last_name: 'Music') }
-      it 'should associate user' do
-        result = GuestCheckoutAssociation.associate_user_for_guest_checkout(order, nil,  {"bill_address_attributes" => {"email" => match_user.email, "firstname" => 'Something', "lastname" => 'Music'}})
-        expect(result).to be true
-        expect(order.user).to eq(match_user)
-      end
-      it 'should not associate user with correct email and incorrect first/last name' do
-        result = GuestCheckoutAssociation.associate_user_for_guest_checkout(order, nil,  {"bill_address_attributes" => {"email" => match_user.email, "firstname" => "", "lastname" => ""}})
-        expect(result).to be false
-        expect(order.user).to be_nil
-      end
-    end
-  end
+  
 end
