@@ -34,7 +34,7 @@ module Acceptance
       end
 
       step 'I close Additional Custom Duty Fees modal if it exists' do
-        click_button 'OK'
+        click_layered_element(:css, '.classic-modal .vex-dialog-button-primary', text: "OK")
       end
     end
   end
