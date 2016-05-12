@@ -39,24 +39,29 @@ module Spree
             WHERE ilmo.line_item_id = li.id AND pmo.option_type = 'fast_making' ) as fast_making,
           ss.tracking as tracking_number,
           to_char(ss.shipped_at, 'YYYY-MM-DD') as shipment_date,
-          case when f.state <> '' then f.state else 'processing' end as fabrication_state,
+          CASE WHEN f.state <> '' THEN f.state ELSE 'processing' END as fabrication_state,
+          sv.sku as variant_sku,
+          sv.is_master as variant_master,
           (SELECT "spree_variants".sku FROM "spree_variants" WHERE "spree_variants"."product_id" = sp.id AND "spree_variants"."is_master" = 't' LIMIT 1) as style,
           sp.name as style_name,
-          case when lip.id > 0
-            then (SELECT name FROM spree_option_values WHERE id = lip.color_id)
-            else (SELECT spree_option_values.name FROM spree_option_values
+          CASE WHEN lip.id > 0
+            THEN (SELECT name FROM spree_option_values WHERE id = lip.color_id)
+            ELSE (SELECT spree_option_values.name FROM spree_option_values
               INNER JOIN "spree_option_values_variants" ON "spree_option_values"."id" = "spree_option_values_variants"."option_value_id"
               INNER JOIN "spree_option_types" ON "spree_option_types".id = "spree_option_values"."option_type_id"
               WHERE "spree_option_types"."name" = 'dress-color' AND "spree_option_values_variants"."variant_id" = sv.id)
-          end as color,
-          case when lip.id > 0
-            then (SELECT name FROM spree_option_values WHERE id = lip.size_id)
-            else (SELECT spree_option_values.name FROM spree_option_values
+          END as color,
+          CASE WHEN lip.id > 0
+            THEN (SELECT name FROM spree_option_values WHERE id = lip.size_id)
+            ELSE (SELECT spree_option_values.name FROM spree_option_values
               INNER JOIN "spree_option_values_variants" ON "spree_option_values"."id" = "spree_option_values_variants"."option_value_id"
               INNER JOIN "spree_option_types" ON "spree_option_types".id = "spree_option_values"."option_type_id"
               WHERE "spree_option_types"."name" = 'dress-size' AND "spree_option_values_variants"."variant_id" = sv.id)
-          end as size,
+          END as size,
+          lip.id as personalization,
           lip.height as height,
+          ( SELECT id FROM spree_option_values WHERE id = lip.color_id) as color_id,
+          lip.customization_value_ids as customization_value_ids,
           fa.name as factory,
           o.email,
           o.customer_notes,
@@ -87,7 +92,7 @@ module Spree
           LEFT OUTER JOIN "factories" fa ON sp."factory_id" = fa."id"
           LEFT OUTER JOIN "spree_shipments" ss ON ss."order_id" = o."id"
 
-          WHERE #{criterias}
+          WHERE #{criterias}, line_item_id ASC
         SQL
 
         find_by_sql(qry)

@@ -39,7 +39,7 @@ module Orders
             line_attr['tracking_number'],
             line_attr['shipment_date'],
             line_attr['fabrication_state'],
-            '', # lip.sku,
+            sku(line_attr),
             line_attr['style'],
             line_attr['style_name'] || 'Missing Variant',
             line_attr['factory'] || 'Unknown',
@@ -50,7 +50,7 @@ module Orders
             '', # lip.promo_codes.join('|'),
             line_attr['email'],
             line_attr['customer_notes'],
-            "#{line_attr['user_first_name']} #{line_attr['user_last_name']}",
+            customer_name(line_attr),
             line_attr['customer_phone_number'] || 'No Phone',
             shipping_address(line_attr).present? ? shipping_address(line_attr) : 'No Shipping Address',
             line_attr['return_action_details'].present? ? 'true' : 'false',
@@ -117,8 +117,43 @@ module Orders
       }
     end
 
+    def customer_name(line_attr)
+      "#{line_attr['user_first_name']} #{line_attr['user_last_name']}"
+    end
+
     def shipping_address(line_attr)
       "#{line_attr['address1']} #{line_attr['address2']} #{line_attr['city']} #{line_attr['state']} #{line_attr['zipcode']} #{line_attr['country']}"
+    end
+
+    def sku(line_attr)
+      if !line_attr['personalization'].present?
+        variant_sku(line_attr)
+      elsif line_attr['color_id'].nil?
+        error_sku(line_attr)
+      else
+        personalization_sku(line_attr)
+      end
+    end
+
+    def variant_sku(line_attr)
+      line_attr['variant_sku']
+    end
+
+    def error_sku(line_attr)
+      "#{line_attr['variant_sku']}X"
+    end
+
+    def personalization_sku(line_attr)
+      style_number = if line_attr['variant_master'] == 'TRUE'
+        line_attr['variant_sku']
+      else
+        line_attr['style']
+      end.upcase
+      size = line_attr['size'].gsub('/', '')
+      color = "C#{line_attr['color_id']}"
+      custom = YAML.load(line_attr['customization_value_ids']).map {|vid| "X#{vid}"}.join('').presence || 'X'
+      height = "H#{line_attr['height'].to_s.upcase.first}"
+      "#{style_number}#{size}#{color}#{custom}#{height}"
     end
 
   end
