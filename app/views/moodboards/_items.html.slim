@@ -49,13 +49,8 @@ coffee:
       $.ajax(
         url: ("/moodboards/" + mb_id + "/items/" + id + "/like")
         type: 'GET'
-        success: (msg) ->
-          $.ajax(
-            url: ("/moodboards/" + mb_id + "/items/" + id + "/like_num")
-            type: 'GET'
-            success: (data) ->
-              $(".panel-product[data-mb-item-id="+id+"] .like-btn").text("Like ( " + data.likes + " )")
-          )
+        success: (data) ->
+          $(".panel-product[data-mb-item-id="+id+"] .like-btn").text("Like ( " + data.likes + " )")
       )
         
     

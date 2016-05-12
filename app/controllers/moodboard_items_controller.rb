@@ -21,13 +21,9 @@ class MoodboardItemsController < ApplicationController
   end
 
   # TODO - Wrap some logic and UI around this.
-  def like_num
-    render json: {likes: item.likes}
-  end
-
   def like
     item.events.like.create(user_id: spree_current_user.id)
-    render json: {'status' => 'ok'}
+    render json: {likes: item.reload.likes}
   end
 
   def unlike
