@@ -43,5 +43,12 @@ module Bergen
         spree_variant: spree_variant
       ).result
     end
+
+    def get_style_master_product_add_status_by_return_request_item(return_request_item:)
+      SoapMethods::GetStyleMasterProductAddStatusByReturnRequestItem.new(
+        savon_client:        client,
+        return_request_item: return_request_item
+      ).result
+    end
   end
 end
