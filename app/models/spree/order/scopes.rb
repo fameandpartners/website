@@ -60,6 +60,11 @@ module Spree
           END as size,
           lip.id as personalization,
           lip.height as height,
+          ( SELECT string_agg('[' || sa.code || '] ' || sa.name, '|') FROM spree_adjustments sadj
+            INNER JOIN spree_promotion_actions spa ON spa.id = sadj.originator_id
+            INNER JOIN spree_activators sa ON sa.id = spa.activator_id
+            WHERE sadj.adjustable_id = o.id AND sadj."adjustable_type" = 'Spree::Order' AND sadj.originator_type = 'Spree::PromotionAction' AND sa.type IN ('Spree::Promotion')
+            GROUP BY sadj.adjustable_id ) as promo_codes,
           ( SELECT id FROM spree_option_values WHERE id = lip.color_id) as color_id,
           lip.customization_value_ids as customization_value_ids,
           fa.name as factory,
@@ -77,6 +82,8 @@ module Spree
             WHERE rri.line_item_id = li.id AND rri.action IN ('return', 'exchange')
             GROUP BY rri.line_item_id ) as return_action_details,
           li.price,
+          lip.price as personalization_price,
+          ( SELECT SUM(price) FROM line_item_making_options WHERE line_item_id = li.id ) as making_options_price,
           li.currency
 
           FROM "spree_orders" o

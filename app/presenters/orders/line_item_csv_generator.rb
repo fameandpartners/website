@@ -47,7 +47,7 @@ module Orders
             (line_attr['size'] || 'Unknown Size')  + " (#{line_attr['site_version']})",
             line_attr['height'] || LineItemPersonalization::DEFAULT_HEIGHT,
             '', # lip.customisations.collect(&:first).join('|'),
-            '', # lip.promo_codes.join('|'),
+            line_attr['promo_codes'],
             line_attr['email'],
             line_attr['customer_notes'],
             customer_name(line_attr),
@@ -56,7 +56,7 @@ module Orders
             line_attr['return_action_details'].present? ? 'true' : 'false',
             line_attr['return_action_details'].try(:split, '/').try(:[], 0),
             line_attr['return_action_details'].try(:split, '/').try(:[], 1),
-            '', # lip.price,
+            price(line_attr),
             line_attr['currency']
           ]
         end
@@ -154,6 +154,10 @@ module Orders
       custom = YAML.load(line_attr['customization_value_ids']).map {|vid| "X#{vid}"}.join('').presence || 'X'
       height = "H#{line_attr['height'].to_s.upcase.first}"
       "#{style_number}#{size}#{color}#{custom}#{height}"
+    end
+
+    def price(line_attr)
+      line_attr['price'].to_f + line_attr['personalization_price'].to_f + line_attr['making_options_price'].to_f
     end
 
   end
