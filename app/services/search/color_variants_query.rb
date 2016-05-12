@@ -17,11 +17,18 @@
 module Search
   class ColorVariantsQuery
 
-    def self.build_pricing_comparison(price_min, price_max, currency)
-      price_max = price_max.push(2000) if price_min.size == price_max.size + 1
-      result = []
-      price_min.each_with_index { |e,i| result.push({:range => { "sale_prices.#{currency}" => { :gte => price_min[i], :lte => price_max[i] }}})}
-      result
+    def self.build_pricing_comparison(min_prices, max_prices, currency)
+      max_prices = max_prices.push(2000) if min_prices.size == max_prices.size + 1
+      min_prices.zip(max_prices).collect { |min, max|
+          {
+              range: {
+                  "sale_prices.#{currency}" => {
+                      gte: min,
+                      lte: max
+                  }
+              }
+          }
+      }
     end
 
     def self.build(options = {})
