@@ -18,7 +18,7 @@ module Search
   class ColorVariantsQuery
     def self.build(options = {})
       options = HashWithIndifferentAccess.new(options)
-      
+
       # some kind of documentation
       colors            = options[:color_ids]
       body_shapes       = options[:body_shapes]
@@ -30,8 +30,8 @@ module Search
       fast_making       = options[:fast_making]
       limit             = options[:limit].present? ? options[:limit].to_i : 1000
       offset            = options[:offset].present? ? options[:offset].to_i : 0
-      price_min         = options[:price_min].to_f
-      price_max         = options[:price_max].nil? ? nil : options[:price_max].to_f
+      price_min         = options[:price_min].nil? ? nil : options[:price_min].map(&:to_f)
+      price_max         = options[:price_max].nil? ? nil : options[:price_max].map(&:to_f)
       currency          = options[:currency]
       show_outerwear    = !!options[:show_outerwear]
       exclude_taxon_ids = options[:exclude_taxon_ids] if query_string.blank?
@@ -92,14 +92,64 @@ module Search
           end
         end
 
-        filter :bool, :should => {
-          :range => {
-            "sale_prices.#{currency}" => {
-              :gte => price_min,
-              :lte => price_max,
+        if price_min.present? || price_max.present?
+          if price_min.size == 1
+            filter :bool, :should => {
+              :range => {
+                "sale_prices.#{currency}" => {
+                  :gte => price_min[0],
+                  :lte => price_max[0],
+                }
+              },
             }
-          }
-        }
+          elsif price_min.size == 2
+            filter :bool, :should => [
+              {
+                :range => {
+                  "sale_prices.#{currency}" => {
+                    :gte => price_min[0],
+                    :lte => price_max[0],
+                  },
+                }
+              },
+              {
+                :range => {
+                  "sale_prices.#{currency}" => {
+                    :gte => price_min[1],
+                    :lte => price_max[1],
+                  }
+                }
+              }
+            ]
+          elsif price_min.size == 3
+            filter :bool, :should => [
+              {
+                :range => {
+                  "sale_prices.#{currency}" => {
+                    :gte => price_min[0],
+                    :lte => price_max[0],
+                  },
+                }
+              },
+              {
+                :range => {
+                  "sale_prices.#{currency}" => {
+                    :gte => price_min[1],
+                    :lte => price_max[1],
+                  }
+                }
+              },
+              {
+                :range => {
+                  "sale_prices.#{currency}" => {
+                    :gte => price_min[2],
+                    :lte => price_max[2],
+                  }
+                }
+              }
+            ]
+          end
+        end
 
         if query_string.present?
           query_string = query_string.downcase.gsub("dresses","").gsub("dress","")
