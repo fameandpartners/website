@@ -30,10 +30,10 @@ module Bergen
       ).result
     end
 
-    def style_master_product_add_by_return_request_items(return_items:)
+    def style_master_product_add_by_return_request_items(return_request_items:)
       SoapMethods::StyleMasterProductAddByReturnRequestItems.new(
-        savon_client: client,
-        return_items: return_items
+        savon_client:         client,
+        return_request_items: return_request_items
       ).result
     end
 

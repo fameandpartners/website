@@ -9,7 +9,7 @@ module Bergen
       let(:order_return_request) { create(:order_return_request, order: order) }
       let(:return_request_item) { create(:return_request_item, order_return_request: order_return_request, line_item: line_item) }
 
-      let(:soap_method) { described_class.new(savon_client: savon_client, return_items: [return_request_item]) }
+      let(:soap_method) { described_class.new(savon_client: savon_client, return_request_items: [return_request_item]) }
 
       it 'adds some variants to WMS queue' do
         expect(soap_method.result).to eq({ error_code: '0', severity: 'Success', message: 'Data saved successfully' })

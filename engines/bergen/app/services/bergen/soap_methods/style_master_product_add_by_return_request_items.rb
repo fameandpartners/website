@@ -1,13 +1,13 @@
 module Bergen
   module SoapMethods
     class StyleMasterProductAddByReturnRequestItems < BaseRequest
-      attr_reader :client, :return_items
+      attr_reader :client, :return_request_items
 
-      def initialize(savon_client:, return_items:)
-        raise TypeError.new(:return_items) unless return_items.is_a?(Array)
+      def initialize(savon_client:, return_request_items:)
+        raise TypeError.new(:return_request_items) unless return_request_items.is_a?(Array)
 
-        @client       = savon_client
-        @return_items = return_items
+        @client               = savon_client
+        @return_request_items = return_request_items
       end
 
       def response
@@ -46,7 +46,7 @@ module Bergen
       end
 
       def line_items_presenters
-        return_items.collect { |return_item| Orders::LineItemPresenter.new(return_item.line_item, nil) }
+        return_request_items.collect { |return_item| Orders::LineItemPresenter.new(return_item.line_item, nil) }
       end
     end
   end
