@@ -1,6 +1,6 @@
 module Bergen
   module SoapMethods
-    class GetStyleMasterProductAddStatus < BaseRequest
+    class GetStyleMasterProductAddStatusBySpreeVariant < BaseRequest
       attr_reader :client, :spree_variant
 
       def initialize(savon_client:, spree_variant:)

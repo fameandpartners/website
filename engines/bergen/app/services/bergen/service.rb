@@ -37,8 +37,8 @@ module Bergen
       ).result
     end
 
-    def get_style_master_product_add_status(spree_variant:)
-      SoapMethods::GetStyleMasterProductAddStatus.new(
+    def get_style_master_product_add_status_by_spree_variant(spree_variant:)
+      SoapMethods::GetStyleMasterProductAddStatusBySpreeVariant.new(
         savon_client:  client,
         spree_variant: spree_variant
       ).result
