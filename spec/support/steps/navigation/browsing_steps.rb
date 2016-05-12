@@ -32,10 +32,6 @@ module Acceptance
         find('#locale-selector-current').hover
         click_link site_version
       end
-
-      step 'I close Additional Custom Duty Fees modal if it exists' do
-        click_layered_element(:css, '.classic-modal .vex-dialog-button-primary', text: "OK")
-      end
     end
   end
 end
