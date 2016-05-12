@@ -20,6 +20,7 @@ Spree::ShipmentMailer.class_eval do
         shipment_tracking_url: shipment.blank? ? '#' : shipment.tracking_url
       )
     rescue StandardError => e
+      Raven.capture_exception(e)
       NewRelic::Agent.notice_error(e)
     end
   end
