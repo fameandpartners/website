@@ -44,7 +44,7 @@ class Users::ReturnsController < Users::BaseController
     end
 
     if @order_return.save
-      Bergen::Operations::CreateStyleMaster.process(return_request_items: @order_return.return_request_items)
+      Bergen::Operations::OpenReturnRequest.process(return_request_items: @order_return.return_request_items)
       OrderReturnRequestMailer.email(@order_return, user).deliver
       render 'success'
     else
