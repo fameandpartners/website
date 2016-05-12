@@ -39,14 +39,13 @@ module Orders
             line_attr['tracking_number'],
             line_attr['shipment_date'],
             line_attr['fabrication_state'],
-            sku(line_attr),
             line_attr['style'],
             line_attr['style_name'] || 'Missing Variant',
             line_attr['factory'] || 'Unknown',
             line_attr['color'] || 'Unknown Color',
             (line_attr['size'] || 'Unknown Size')  + " (#{line_attr['site_version']})",
             line_attr['height'] || LineItemPersonalization::DEFAULT_HEIGHT,
-            '', # lip.customisations.collect(&:first).join('|'),
+            customization_values(line_attr), # lip.customisations.collect(&:first).join('|'),
             line_attr['promo_codes'],
             line_attr['email'],
             line_attr['customer_notes'],
@@ -77,7 +76,6 @@ module Orders
         :tracking_number,
         :shipment_date,
         :fabrication_state,
-        :sku,
         :style,
         :style_name,
         :factory,
@@ -125,39 +123,17 @@ module Orders
       "#{line_attr['address1']} #{line_attr['address2']} #{line_attr['city']} #{line_attr['state']} #{line_attr['zipcode']} #{line_attr['country']}"
     end
 
-    def sku(line_attr)
-      if !line_attr['personalization'].present?
-        variant_sku(line_attr)
-      elsif line_attr['color_id'].nil?
-        error_sku(line_attr)
-      else
-        personalization_sku(line_attr)
-      end
-    end
-
-    def variant_sku(line_attr)
-      line_attr['variant_sku']
-    end
-
-    def error_sku(line_attr)
-      "#{line_attr['variant_sku']}X"
-    end
-
-    def personalization_sku(line_attr)
-      style_number = if line_attr['variant_master'] == 'TRUE'
-        line_attr['variant_sku']
-      else
-        line_attr['style']
-      end.upcase
-      size = line_attr['size'].gsub('/', '')
-      color = "C#{line_attr['color_id']}"
-      custom = YAML.load(line_attr['customization_value_ids']).map {|vid| "X#{vid}"}.join('').presence || 'X'
-      height = "H#{line_attr['height'].to_s.upcase.first}"
-      "#{style_number}#{size}#{color}#{custom}#{height}"
-    end
-
     def price(line_attr)
       line_attr['price'].to_f + line_attr['personalization_price'].to_f + line_attr['making_options_price'].to_f
+    end
+
+    def customization_values(line_attr)
+      if line_attr['personalization'].present?
+        values = YAML.load(line_attr['customization_value_ids'])
+        values.present? ? CustomisationValue.where(id: values).pluck(:presentation) : []
+      else
+        ['N/A']
+      end.join('|')
     end
 
   end
