@@ -16,6 +16,14 @@
 # )
 module Search
   class ColorVariantsQuery
+    
+    def self.build_pricing_comparison(price_min, price_max, currency)
+      price_max = price_max.push(2000) if price_min.size == price_max.size + 1
+      result = []
+      price_min.each_with_index { |e,i| result.push({:range => { "sale_prices.#{currency}" => { :gte => price_min[i], :lte => price_max[i] }}})}
+      result
+    end
+
     def self.build(options = {})
       options = HashWithIndifferentAccess.new(options)
 
@@ -93,62 +101,7 @@ module Search
         end
 
         if price_min.present? || price_max.present?
-          if price_min.size == 1
-            filter :bool, :should => {
-              :range => {
-                "sale_prices.#{currency}" => {
-                  :gte => price_min[0],
-                  :lte => price_max[0],
-                }
-              },
-            }
-          elsif price_min.size == 2
-            filter :bool, :should => [
-              {
-                :range => {
-                  "sale_prices.#{currency}" => {
-                    :gte => price_min[0],
-                    :lte => price_max[0],
-                  },
-                }
-              },
-              {
-                :range => {
-                  "sale_prices.#{currency}" => {
-                    :gte => price_min[1],
-                    :lte => price_max[1],
-                  }
-                }
-              }
-            ]
-          elsif price_min.size == 3
-            filter :bool, :should => [
-              {
-                :range => {
-                  "sale_prices.#{currency}" => {
-                    :gte => price_min[0],
-                    :lte => price_max[0],
-                  },
-                }
-              },
-              {
-                :range => {
-                  "sale_prices.#{currency}" => {
-                    :gte => price_min[1],
-                    :lte => price_max[1],
-                  }
-                }
-              },
-              {
-                :range => {
-                  "sale_prices.#{currency}" => {
-                    :gte => price_min[2],
-                    :lte => price_max[2],
-                  }
-                }
-              }
-            ]
-          end
+          filter :bool, :should => ColorVariantsQuery.build_pricing_comparison(price_min, price_max, currency)
         end
 
         if query_string.present?
