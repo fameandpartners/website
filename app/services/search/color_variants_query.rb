@@ -16,7 +16,7 @@
 # )
 module Search
   class ColorVariantsQuery
-    
+
     def self.build_pricing_comparison(price_min, price_max, currency)
       price_max = price_max.push(2000) if price_min.size == price_max.size + 1
       result = []
@@ -38,8 +38,8 @@ module Search
       fast_making       = options[:fast_making]
       limit             = options[:limit].present? ? options[:limit].to_i : 1000
       offset            = options[:offset].present? ? options[:offset].to_i : 0
-      price_min         = options[:price_min].nil? ? nil : options[:price_min].map(&:to_f)
-      price_max         = options[:price_max].nil? ? nil : options[:price_max].map(&:to_f)
+      price_min         = Array.wrap(options[:price_min]).map(&:to_f)
+      price_max         = Array.wrap(options[:price_max]).map(&:to_f)
       currency          = options[:currency]
       show_outerwear    = !!options[:show_outerwear]
       exclude_taxon_ids = options[:exclude_taxon_ids] if query_string.blank?
