@@ -84,12 +84,13 @@ class Campaigns::EmailCaptureController < ApplicationController
   end
 
   def mailchimp
-    EmailCapture.new({ service: :mailchimp }, email: params[:email],
+    captured_email = EmailCapture.new({ service: :mailchimp }, email: params[:email],
                                  current_sign_in_ip: request.remote_ip,
                                  landing_page: session[:landing_page],
                                  utm_params: session[:utm_params], site_version: current_site_version.name,
                                  form_name: 'Footer Contact').capture
+     message = captured_email.blank? ? 'invalid' : 'done' # TODO: This isn't pretty, as it should live in the EmailCapture class.
 
-    render :json => { status: 'done' }
+    render json: { status: message }
   end
 end
