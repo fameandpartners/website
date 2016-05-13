@@ -1,5 +1,4 @@
 require 'csv'
-require 'business_time'
 
 module Orders
   class LineItemCsvGenerator
