@@ -1,4 +1,5 @@
 require 'csv'
+require 'business_time'
 
 module Orders
   class LineItemCsvGenerator
@@ -35,7 +36,7 @@ module Orders
             line_attr['total_items'],
             line_attr['completed_at_char'],
             line_attr['fast_making'].present? ? "TRUE" : '',
-            line_attr['projected_delivery_date_char'],
+            delivery_date(line_attr),
             line_attr['tracking_number'],
             line_attr['shipment_date'],
             line_attr['fabrication_state'],
@@ -142,5 +143,17 @@ module Orders
       end.join('|')
     end
 
+    def delivery_date(line_attr)
+      return unless line_attr['completed_at_char'].present?
+
+      delivery_days = 7
+      fast_delivery_days = 2
+
+      if line_attr['fast_making'].present?
+        fast_delivery_days.business_days.after(line_attr['completed_at_char'].to_date)
+      else
+        delivery_days.business_days.after(line_attr['completed_at_char'].to_date)
+      end
+    end
   end
 end

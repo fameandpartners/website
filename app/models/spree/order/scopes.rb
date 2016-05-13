@@ -33,15 +33,12 @@ module Spree
           li.id as line_item_id,
           (SELECT count(*) FROM spree_line_items sli WHERE sli."order_id" = o."id") as total_items,
           to_char(o.completed_at, 'YYYY-MM-DD') as completed_at_char,
-          to_char(o.projected_delivery_date, 'YYYY-MM-DD') as projected_delivery_date_char,
           ( SELECT pmo.id FROM line_item_making_options ilmo
             INNER JOIN product_making_options pmo ON ilmo.making_option_id = pmo.id
             WHERE ilmo.line_item_id = li.id AND pmo.option_type = 'fast_making' ) as fast_making,
           ss.tracking as tracking_number,
           to_char(ss.shipped_at, 'YYYY-MM-DD') as shipment_date,
           CASE WHEN f.state <> '' THEN f.state ELSE 'processing' END as fabrication_state,
-          sv.sku as variant_sku,
-          sv.is_master as variant_master,
           (SELECT "spree_variants".sku FROM "spree_variants" WHERE "spree_variants"."product_id" = sp.id AND "spree_variants"."is_master" = 't' LIMIT 1) as style,
           sp.name as style_name,
           CASE WHEN lip.id > 0
