@@ -200,7 +200,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         priceMinArr.push $(e).data("pricemin")
       priceMaxs = $(".selector-price input:checked")
       for e in priceMaxs
-        priceMaxArr.push $(e).data("pricemax")
+        priceMaxArr.push $(e).data("pricemax") || 5000
       priceHash["price_min"] = priceMinArr
       priceHash["price_max"] = priceMaxArr if priceMaxArr?
       filter = $.extend(filter,priceHash)

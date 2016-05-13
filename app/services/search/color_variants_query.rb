@@ -18,7 +18,6 @@ module Search
   class ColorVariantsQuery
 
     def self.build_pricing_comparison(min_prices, max_prices, currency)
-      max_prices = max_prices.push(2000) if min_prices.size == max_prices.size + 1
       min_prices.zip(max_prices).collect { |min, max|
           {
               range: {
