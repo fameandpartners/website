@@ -136,6 +136,7 @@ module Orders
         values = YAML.load(line_attr['customization_value_ids'])
         customs = values.present? ? CustomisationValue.where(id: values).pluck(:presentation) : []
         customs << ["Custom Color: #{color_name(line_attr)}"] unless line_attr['custom_color']
+        customs
       else
         ['N/A']
       end.join('|')

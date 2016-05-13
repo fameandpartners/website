@@ -68,13 +68,14 @@ module Spree
           ( SELECT id FROM spree_option_values WHERE id = lip.color_id) as color_id,
           lip.customization_value_ids as customization_value_ids,
           CASE WHEN lip.id > 0
-            THEN (SELECT sov.name FROM "spree_products"
-              INNER JOIN "spree_variants" ON "spree_variants".product_id = "spree_products".id
-              INNER JOIN "spree_option_values_variants" sovv ON "spree_variants"."id" = sovv."variant_id"
-              INNER JOIN "spree_option_values" sov ON sov.id = sovv.option_value_id
+            THEN (SELECT DISTINCT(sov.id) FROM "spree_option_values" sov
+              INNER JOIN "spree_option_values_variants" sovv ON "sov"."id" = sovv."option_value_id"
               INNER JOIN "spree_option_types" sot ON sot.id = sov."option_type_id"
-              WHERE spree_variants.id = sv.id AND "spree_variants"."is_master" = 'f' AND "spree_variants"."deleted_at" IS NULL
-                AND sot."name" IN ('dress-color', 'dress-custom-color'))
+              WHERE
+                sot."name" IN ('dress-color', 'dress-custom-color')
+                AND sovv.variant_id IN (SELECT "spree_variants".id FROM "spree_variants"
+                  WHERE "spree_variants".product_id = sp.id AND "spree_variants"."is_master" = 'f' AND "spree_variants"."deleted_at" IS NULL)
+                AND sov.id = lip.color_id)
             ELSE NULL
             END as custom_color,
           fa.name as factory,
