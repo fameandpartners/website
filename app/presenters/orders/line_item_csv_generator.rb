@@ -145,15 +145,7 @@ module Orders
 
     def delivery_date(line_attr)
       return unless line_attr['completed_at_char'].present?
-
-      delivery_days = 7
-      fast_delivery_days = 2
-
-      if line_attr['fast_making'].present?
-        fast_delivery_days.business_days.after(line_attr['completed_at_char'].to_date)
-      else
-        delivery_days.business_days.after(line_attr['completed_at_char'].to_date)
-      end
+      Policies::LineItemProjectedDeliveryDatePolicy.new(line_attr['completed_at_char'].to_date, line_attr['fast_making']).delivery_date
     end
   end
 end
