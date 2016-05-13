@@ -4,6 +4,7 @@ describe Spree::Order, :type => :model do
   subject(:order)     { Spree::Order.new }
   let(:completed_at)  { DateTime.parse('Wed April 1 2015') }
 
+
   before do
     allow(order).to receive(:complete?).and_return(true)
     allow(order).to receive(:completed_at).and_return(completed_at)
@@ -71,4 +72,5 @@ describe Spree::Order, :type => :model do
       it{ expect(order).to_not be_shipped }
     end
   end
+  
 end
