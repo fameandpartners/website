@@ -42,10 +42,10 @@ module Orders
             line_attr['style'],
             line_attr['style_name'] || 'Missing Variant',
             line_attr['factory'] || 'Unknown',
-            line_attr['color'] || 'Unknown Color',
+            color_name(line_attr),
             (line_attr['size'] || 'Unknown Size')  + " (#{line_attr['site_version']})",
             line_attr['height'] || LineItemPersonalization::DEFAULT_HEIGHT,
-            customization_values(line_attr), # lip.customisations.collect(&:first).join('|'),
+            customization_values(line_attr),
             line_attr['promo_codes'],
             line_attr['email'],
             line_attr['customer_notes'],
@@ -127,10 +127,15 @@ module Orders
       line_attr['price'].to_f + line_attr['personalization_price'].to_f + line_attr['making_options_price'].to_f
     end
 
+    def color_name(line_attr)
+      line_attr['color'] || 'Unknown Color'
+    end
+
     def customization_values(line_attr)
       if line_attr['personalization'].present?
         values = YAML.load(line_attr['customization_value_ids'])
-        values.present? ? CustomisationValue.where(id: values).pluck(:presentation) : []
+        customs = values.present? ? CustomisationValue.where(id: values).pluck(:presentation) : []
+        customs << ["Custom Color: #{color_name(line_attr)}"] unless line_attr['custom_color']
       else
         ['N/A']
       end.join('|')
