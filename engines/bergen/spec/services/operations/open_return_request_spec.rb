@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Bergen
   module Operations
-    RSpec.describe OpenReturnRequest do
+    RSpec.describe ReturnItemProcess do
       let(:return_request_items) { double('Return Request Items') }
       let(:bergen_service) { double('Bergen Service') }
 
