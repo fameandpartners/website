@@ -1,73 +1,187 @@
 ruby:
-  successfully_ordered = session.delete(:successfully_ordered)
-
-.page-title.default.order
-  .container
-    .page-title--details
-      h1.no-padding-bottom.order
+  # successfully_ordered = session.delete(:successfully_ordered)
+  successfully_ordered = true
+section.order-details
+  .page-title.default.order
+    .container
+      .page-title--details
         - if successfully_ordered
-          | Order Confirmation
+            h1.order
+              | Thanks for your order!
+            h3.title-subheader.order
+              | Your dresses are being made...
         - else
-          | Order
+            h1.order
+              | Order details
 
-.page-content.user.order.show
-  .container.relative
-    .row
-      .col-md-8.col-md-offset-2
-        .row
-          h2.order-number Your Order Number is: #{ order.number }
+  .page-content.order.show
+    .container.relative
+      .row
+        .order-content-wrapper.col-md-6.col-md-offset-1
+          .row
+            h3.order-number Order # #{ order.number }
+            h3.order-date Order Date #{ l(order.completed_at.to_date) }
+            .order-content
+              .row
+                .order-items
+                  - order.line_items.each do |line_item|
+                    .item
+                      .item-img.col-md-5
+                        = image_tag line_item.image_url, class: 'img-responsive ordered-item-image'
+                      .details.col-md-7
+                        .row
+                          .name.col-md-8
+                            = line_item.style_name
+                          .price.col-md-4
+                            / TODO: If price is integer remove decimals
+                            = line_item.display_price
+                        .row
+                          .item-details.col-md-12
+                            ul
+                              li
+                                | Skirt Length: <span class="value">#{line_item.height}"</span>
+                              li
+                                | Custom color: <span class="value">#{line_item.colour_name}</span>
+                              li
+                                | Size: <span class="value">#{line_item.size}</span>
+                              li
+                                | Quantity: <span class="value">#{line_item.quantity}</span>
+              .row
+                .order-total.col-md-7.col-md-offset-5
+                    .row.shipping-info
+                      .label.col-md-6 Shipping
+                      / TODO: Add shipping cost
+                      / TODO: If price is integer remove decimals
+                      .amount.col-md-6 #{order.display_total}
+                    .row.tax-info
+                      .label.col-md-6 Tax
+                      / TODO: Add tax amount
+                      / TODO: If price is integer remove decimals
+                      .amount.col-md-6 #{order.display_total}
+                    .row.discount-info
+                      .label.col-md-6 Discount
+                      / TODO: If price is integer remove decimals
+                      .amount.col-md-6
+                        | - #{order.display_total}
+                    .row.total-info
+                      .label.col-md-6 Total
+                      / TODO: If price is integer remove decimals
+                      .amount.col-md-6
+                        | #{order.display_total}
+                        - if current_site_version.is_australia?
+                        p.price-note Including GST.
 
-          h2.order-number Ordered On: #{ l(order.completed_at.to_date) }
+          .row
+            .order-info.col-md-12
+              .half-column.col-md-6
+                .billing-address
+                  h4 Billing Address
+                  ul
+                    / TODO Get customer's billing address
+                    li Rebecca Tribecca
+                    li 24 Sequoia Place
+                    li Palo Alto, San Francisco
+                    li 902010 California
 
-        table.table.order-items
-          thead
-            tr
-              th Item
-              th Status
-              th SKU
-              th quantity
-              th price
-          tbody
-            - order.line_items.each do |line_item|
-              tr.item
-                td data-title="Item"
-                  = image_tag line_item.image_url, class: 'img-responsive ordered-item-image'
-                  p
-                    strong
-                      = line_item.style_name
-                    br
+                .shipping-address
+                  h4 Shipping Address
+                  ul
+                    / TODO Get customer's shipping address
+                    li Rebecca Tribecca
+                    li 24 Sequoia Place
+                    li Palo Alto, San Francisco
+                    li 902010 California
+              .half-column.col-md-6
+                .phone
+                  h4 Phone number
+                  / TODO Get customer's phone number
+                  span 0477777721321
 
-                    ="Size:#{line_item.size}, Color: #{line_item.colour_name}"
+                .email
+                  h4 Email
+                  / TODO Get customer's e-mail address
+                  span rebeccatribecca@yahoo.com
 
-                td data-title="status" = line_item_status(line_item)
-                td data-title="sku" = line_item.style_number
-                td data-title="quantity" = line_item.quantity
-                td data-title="price" = line_item.display_price.to_s
+                .email
+                  h4 Exprected delivery date
+                  / TODO: Insert real date estimate
+                  span dth-dth of M, YYYY
 
-            tr.total
-              td colspan="4"
-              td data-title="total"
-                p.title
-                  | Order Total &nbsp;
-                  = order.display_total
-                - if current_site_version.is_australia?
-                  p Including GST.
+          .row
+            .faq-wrapper.col-md-12
+              h2 FAQs about Your Order
+              ul
+                li.question
+                  / TODO Confirm URL
+                  a href='#'
+                    span How long will it take the seamstress to make my dress?
+                    i.link-icon.fa.fa-chevron-right
+                li.question
+                  / TODO Confirm URL
+                  a href='/faqs#collapse-orders-track'
+                    span Where can I track my order?
+                    i.link-icon.fa.fa-chevron-right
+                li.question
+                  / TODO Confirm URL
+                  a href='#'
+                    span My order hasn't arrived in time
+                    i.link-icon.fa.fa-chevron-right
+                li.question
+                  / TODO Confirm URL
+                  a href='/faqs#collapse-returns-size-color'
+                    span Can I change my dress?
+                    i.link-icon.fa.fa-chevron-right
+                li.question
+                  / TODO Confirm URL
+                  a href='#'
+                    span Oops! My addres is wrong!
+                    i.link-icon.fa.fa-chevron-right
+              .see-more
+                a.btn.btn-black href='/faqs'
+                    | See more FAQs
 
-        - if successfully_ordered
-          - if order.has_fast_making_items?
-            p.support If you want to find out the exact delivery date of your order, please get in touch with our customer service via email: #{ mail_to('team@fameandpartners.com') }
+        .col-md-4.order-sidebar-wrapper
+          .order-sidebar
+            .steps-info
+              h3 What happens next?
+              .item
+                h4 1. Your Dress is Being Custom Cut & Made
+                p Our team of artisan seamstresses make your dress from start to finish.
+                / TODO: get real path
+                a.sidebar-link href='/why-us'
+                  | Learn more about our processes
+                  i.link-icon.fa.fa-chevron-right
+              .item
+                h4 2. Your dress is shipped
+                p Once the finishing touches have been made to your dress and we are good to go, we'll email you a shipping confirmation.
+              .item
+                / TODO: Insert real date estimate
+                h4 3. Expect delivery from XXX-XXX of XXX
+                p You'll be able to track your delivery with your shipping confirmation.
+                a.sidebar-link href='/faqs#collapse-shipping-track'
+                  | Learn more about Shipping and Delivery
+                  i.link-icon.fa.fa-chevron-right
+              .item
+                h4 4. It arrives!
+                p Make sure you keep all packaging and leave the tags on in case you need to return / exchange.
+                a.sidebar-link href='/faqs#collapse-returns-policy'
+                  | See our Return Policy
+                  i.link-icon.fa.fa-chevron-right
 
-          p.support
-            ' If you have any questions, please check out our
-            => link_to 'FAQs', 'http://fameandpartners.com/faqs', target: '_blank'
-            ' or contact
-            => link_to 'Customer Service', 'http://fameandpartners.com/contact/', target: '_blank'
-          p Or otherwise contact our friendly team if you need any help.
-          p.support = link_to 'team@fameandpartners.com', 'mailto:team@fameandpartners.com'
-
-          - unless current_spree_user.blank?
-            p
-              button.btn.back-to-orders = link_to 'Your orders', user_orders_path, class: 'btn', remote: true
+            / TODO: Add conditional if customer purchased as guest
+            .account-login-info
+              h3 We've created an account just for you...
+              .login-info
+                span.label Login
+                / TODO: Enter real e-mail address
+                span.value rebeccatribecca@yahoo.com
+              .pwd-info
+                span.label Password
+                / TODO: Enter real password
+                span.value 123456
+              .login-btn
+                a.btn.btn-black href='/profile'
+                  | Go to log in
 
 - if successfully_ordered || params[:force_tracking]
   = render 'shared/sales_conversion_pixels', locals: { order: @order }
