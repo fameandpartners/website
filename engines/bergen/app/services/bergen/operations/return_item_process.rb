@@ -15,7 +15,7 @@ module Bergen
         state :asn_created
         state :asn_received
 
-        event :guarantee_style_master do
+        event :style_master_was_created do
           transitions from: :operation_created, to: :style_master_created
         end
 
@@ -43,9 +43,9 @@ module Bergen
 
       # TODO: careful with naming clashing events
       # def create_asn
-      #   # Workers::CreateAsnWorker.perform_async(self.id)
+      #   Workers::CreateAsnWorker.perform_async(self.id)
       # end
-      #
+
       # TODO: careful with naming clashing events
       # def receive_asn
       #   # Workers::ReceiveAsnWorker.perform_async(self.id)

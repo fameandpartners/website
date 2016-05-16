@@ -8,7 +8,7 @@ module Bergen
       let(:return_item_process) { described_class.create(return_request_item: return_request_item) }
 
       it 'obeys state machines flow' do
-        expect(return_item_process).to transition_from(:operation_created).to(:style_master_created).on_event(:guarantee_style_master)
+        expect(return_item_process).to transition_from(:operation_created).to(:style_master_created).on_event(:style_master_was_created)
         expect(return_item_process).to transition_from(:style_master_created).to(:asn_created).on_event(:create_asn)
         expect(return_item_process).to transition_from(:asn_created).to(:asn_received).on_event(:receive_asn)
       end
