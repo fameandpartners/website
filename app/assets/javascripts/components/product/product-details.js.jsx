@@ -88,9 +88,10 @@ var DetailsRecColors = React.createClass({
 var HeroProductCarouselImage = React.createClass({
 
   render: function() {
+    url = this.props.main == 'main' ? this.props.asset.url : this.props.asset.url_product;
     return (
       <div className='media-wrap'>
-        <img src={this.props.asset.url} alt={this.props.asset.alt} />
+        <img src={url} alt={this.props.asset.alt} />
       </div>
     )
   }
@@ -177,6 +178,16 @@ var HeroProductCarousel = React.createClass({
 
   },
 
+  assets: function(is_main){
+    var selectedColor = this.state.selectedColor;
+    _assets = this.state.productImages.map(function(asset) {
+      if (selectedColor === asset.color_id) {
+        return <HeroProductCarouselImage key={'image-' + asset.id} asset={asset} main={is_main} />
+      }
+    });
+    return _assets;
+  },
+
   render: function() {
     var selectedColor = this.state.selectedColor;
     if (this.state.productImages.length === 0) {
@@ -184,23 +195,18 @@ var HeroProductCarousel = React.createClass({
         <div></div>
       );
     } else {
-      assets = this.state.productImages.map(function(asset) {
-        if (selectedColor === asset.color_id) {
-          return (<HeroProductCarouselImage key={'image-' + asset.id} asset={asset} />)
-        }
-      });
       return (
         <div className='js-hero-product-carousel'>
           <div className='carousel-product'>
             <div className='js-carousel-hero-product'>
-              {assets}
+              { this.assets('main') }
             </div>
           </div>
           <div className='carousel-nav'>
             <div className='outer-wrap'>
               <div className='inner-wrap'>
                 <div className='js-carousel-hero-product-nav'>
-                  {assets}
+                  { this.assets('thumb') }
                 </div>
               </div>
             </div>
