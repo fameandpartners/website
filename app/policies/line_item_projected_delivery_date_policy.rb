@@ -11,18 +11,18 @@ module Policies
     DELIVERY_DAYS = 7
     FAST_DELIVERY_DAYS = 2
 
-    attr_reader :line_item, :order
+    attr_reader :completed_at, :fast_making
 
-    def initialize(line_item, order = nil)
-      @line_item  = line_item
-      @order      = order || line_item.order
+    def initialize(completed_at, fast_making)
+      @completed_at = completed_at
+      @fast_making = fast_making
     end
 
     def delivery_date
-      if line_item.fast_making?
-        FAST_DELIVERY_DAYS.business_days.after(order.completed_at)
+      if fast_making
+        FAST_DELIVERY_DAYS.business_days.after(completed_at)
       else
-        DELIVERY_DAYS.business_days.after(order.completed_at)
+        DELIVERY_DAYS.business_days.after(completed_at)
       end
     end
   end

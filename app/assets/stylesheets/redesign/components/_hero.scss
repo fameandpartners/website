@@ -89,7 +89,7 @@
       .heading {
         width: 50%;
         margin: 0 0 0 50%;
-        
+
         > span:first-child {
           font-size: 4rem;
         }
@@ -189,13 +189,13 @@
 
       img {
         width: auto;
-        height: 180%;
-        margin-left: -110%;
+        height: 100%;
+        margin-left: -50%;
       }
 
     }
 
-    @media (max-width: 1800px) {
+    @media (max-width: 1950px) {
 
       .slick-slider {
         width: 80px;
@@ -203,6 +203,11 @@
 
       .media-wrap {
         height: 120px;
+
+        img {
+          margin-left: -40%;
+        }
+
       }
 
     }
@@ -216,6 +221,11 @@
       .media-wrap {
         height: 90px;
         margin: 5px 0;
+
+        img {
+          margin-left: -50%;
+        }
+
       }
 
     }
@@ -244,7 +254,7 @@
       }
 
     }
-      
+
   }
 
   @media (max-width: 1000px) {

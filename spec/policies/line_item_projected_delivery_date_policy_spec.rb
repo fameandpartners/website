@@ -7,7 +7,7 @@ describe Policies::LineItemProjectedDeliveryDatePolicy do
   context "#delivery_date" do
     it "returns express date" do
       line_item = double(Spree::LineItem, :fast_making? => true)
-      service =  Policies::LineItemProjectedDeliveryDatePolicy.new(line_item, order) 
+      service =  Policies::LineItemProjectedDeliveryDatePolicy.new(order.completed_at, line_item.fast_making?)
 
       expected_date = DateTime.parse('Friday April 3 2015')
       expect(service.delivery_date).to eq expected_date
@@ -15,7 +15,7 @@ describe Policies::LineItemProjectedDeliveryDatePolicy do
 
     it 'returns standard date' do
       line_item = double(Spree::LineItem, :fast_making? => false)
-      service =  Policies::LineItemProjectedDeliveryDatePolicy.new(line_item, order) 
+      service =  Policies::LineItemProjectedDeliveryDatePolicy.new(order.completed_at, line_item.fast_making?)
 
       expected_date = DateTime.parse('Friday April 10 2015')
       expect(service.delivery_date).to eq expected_date
