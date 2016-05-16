@@ -88,10 +88,9 @@ var DetailsRecColors = React.createClass({
 var HeroProductCarouselImage = React.createClass({
 
   render: function() {
-    var url = this.props.main == 'main' ? this.props.asset.url : this.props.asset.url_product;
     return (
       <div className='media-wrap'>
-        <img src={url} alt={this.props.asset.alt} />
+        <img src={this.props.url} alt={this.props.alt} />
       </div>
     )
   }
@@ -182,7 +181,8 @@ var HeroProductCarousel = React.createClass({
     var selectedColor = this.state.selectedColor;
     return this.state.productImages.map(function(asset) {
       if (selectedColor === asset.color_id) {
-        return <HeroProductCarouselImage key={'image-' + asset.id} asset={asset} main={is_main} />
+        var url = is_main == 'main' ? asset.url : asset.url_product;
+        return <HeroProductCarouselImage key={'image-' + asset.id} url={url} alt={asset.alt} />
       }
     });
   },
