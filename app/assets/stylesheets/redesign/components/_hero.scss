@@ -195,7 +195,7 @@
 
     }
 
-    @media (max-width: 1800px) {
+    @media (max-width: 1950px) {
 
       .slick-slider {
         width: 80px;
@@ -203,6 +203,11 @@
 
       .media-wrap {
         height: 120px;
+
+        img {
+          margin-left: -40%;
+        }
+
       }
 
     }
@@ -216,7 +221,13 @@
       .media-wrap {
         height: 90px;
         margin: 5px 0;
+
+        img {
+          margin-left: -50%;
+        }
+
       }
+
 
     }
 
