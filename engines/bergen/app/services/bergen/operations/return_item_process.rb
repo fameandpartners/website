@@ -19,11 +19,11 @@ module Bergen
           transitions from: :operation_created, to: :style_master_created
         end
 
-        event :create_asn do
+        event :asn_was_created do
           transitions from: :style_master_created, to: :asn_created
         end
 
-        event :receive_asn do
+        event :asn_was_received do
           transitions from: :asn_created, to: :asn_received
         end
       end
@@ -41,10 +41,9 @@ module Bergen
         end
       end
 
-      # TODO: careful with naming clashing events
-      # def create_asn
-      #   Workers::CreateAsnWorker.perform_async(self.id)
-      # end
+      def create_asn
+        # Workers::CreateAsnWorker.perform_async(self.id)
+      end
 
       # TODO: careful with naming clashing events
       # def receive_asn
