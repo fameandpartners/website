@@ -5,9 +5,9 @@ module Bergen
     class ReturnItemProcess < ActiveRecord::Base
       include AASM
 
-      # Verifying + creating style master -> on the fly (background)
-      # Checking style master creation -> Scheduled
-      # Checking ASN receival -> Scheduled
+      # => Verifying + creating style master
+      # => Checking style master creation
+      # => Checking ASN receival
 
       aasm do
         state :operation_created, initial: true
