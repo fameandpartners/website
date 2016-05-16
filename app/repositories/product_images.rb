@@ -141,6 +141,7 @@ class ProductImages
         id: image.id,
         position: image.position,
         original: image.attachment.url(:original),
+        product: image.attachment.url(:product),
         large: image.attachment.url(:large),
         xlarge: image.attachment.url(:xlarge),
         small: image.attachment.url(:small)

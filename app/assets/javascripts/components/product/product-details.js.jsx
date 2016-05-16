@@ -90,7 +90,7 @@ var HeroProductCarouselImage = React.createClass({
   render: function() {
     return (
       <div className='media-wrap'>
-        <img src={this.props.asset.url} alt={this.props.asset.alt} />
+        <img src={this.props.url} alt={this.props.alt} />
       </div>
     )
   }
@@ -177,6 +177,16 @@ var HeroProductCarousel = React.createClass({
 
   },
 
+  renderAssets: function(is_main){
+    var selectedColor = this.state.selectedColor;
+    return this.state.productImages.map(function(asset) {
+      if (selectedColor === asset.color_id) {
+        var url = is_main == 'main' ? asset.url : asset.url_product;
+        return <HeroProductCarouselImage key={'image-' + asset.id} url={url} alt={asset.alt} />
+      }
+    });
+  },
+
   render: function() {
     var selectedColor = this.state.selectedColor;
     if (this.state.productImages.length === 0) {
@@ -184,23 +194,18 @@ var HeroProductCarousel = React.createClass({
         <div></div>
       );
     } else {
-      assets = this.state.productImages.map(function(asset) {
-        if (selectedColor === asset.color_id) {
-          return (<HeroProductCarouselImage key={'image-' + asset.id} asset={asset} />)
-        }
-      });
       return (
         <div className='js-hero-product-carousel'>
           <div className='carousel-product'>
             <div className='js-carousel-hero-product'>
-              {assets}
+              { this.renderAssets('main') }
             </div>
           </div>
           <div className='carousel-nav'>
             <div className='outer-wrap'>
               <div className='inner-wrap'>
                 <div className='js-carousel-hero-product-nav'>
-                  {assets}
+                  { this.renderAssets('thumb') }
                 </div>
               </div>
             </div>
