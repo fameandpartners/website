@@ -68,7 +68,7 @@ section.order-details
                       / TODO: If price is integer remove decimals
                       .amount.col-md-6
                         | #{order.display_total}
-                        - if current_site_version.is_australia?
+                      - if current_site_version.is_australia?
                         p.price-note Including GST.
 
           .row
