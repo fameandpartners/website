@@ -27,7 +27,7 @@ section.order-details
                   - order.line_items.each do |line_item|
                     .item
                       .item-img.col-md-5
-                        = image_tag line_item.image_url, class: 'img-responsive ordered-item-image'
+                        = image_tag line_item.image_url, alt: line_item.style_name, class: 'img-responsive ordered-item-image'
                       .details.col-md-7
                         .row
                           .name.col-md-8
