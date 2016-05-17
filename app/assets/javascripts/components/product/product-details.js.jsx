@@ -48,7 +48,7 @@ var DetailsColorSelector = React.createClass({
         <span className={colorClasses}
           data-name={this.props.color.presentation}
           data-id={this.props.color.id}></span>
-        <span className='option-name'>{this.props.color.presentation}</span>
+        <span className='option-name' data-id={this.props.color.id}>{this.props.color.presentation}</span>
       </a>
     )
   }
