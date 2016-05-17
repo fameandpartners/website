@@ -1,271 +1,270 @@
 /* [Order Details]
 -------------------------------------------------------*/
-
 .order-details {
-    font-family: $font-heading;
+  font-family: $font-heading;
 
-    ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  i.link-icon {
+    padding-left: 5px;
+    font-size: 1rem;
+  }
+
+  .page-title.order {
+    background-color: $c-neutral-white;
+  }
+
+  h1 {
+    margin: 0 0 10px;
+    text-transform: none;
+    font-size: 4.9rem;
+  }
+
+  .title-subheader.order {
+    margin: 10px 0 0;
+    color: $c-neutral-black;
+    text-transform: none;
+  }
+
+  .order-content-wrapper {
+
+    .order-number,
+    .order-date {
+      margin: 5px 0;
+      color: $c-neutral-black;
+      text-transform: uppercase;
+      word-spacing: 0.2rem;
+      letter-spacing: 0.1rem;
+      font-weight: bold;
+      font-size: 1.5rem;
+      font-family: $font-family-secondary;
     }
 
-    i.link-icon {
-        padding-left: 5px;
-        font-size: 1rem;
+  }
+
+  .order-content {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 25px 25px 20px;
+    border-top: 1px solid $c-neutral-black;
+    border-bottom: 1px solid $c-neutral-black;
+
+    .order-items {
+
+      .item {
+        display: inline-block;
+        padding-bottom: 30px;
+      }
+
+      .item-details {
+        font-weight: 300;
+
+        .value {
+          color: $c-neutral-black;
+          text-transform: capitalize;
+          font-style: italic;
+        }
+
+      }
+
+      .ordered-item-image {
+        width: auto;
+      }
+
     }
 
-    .page-title.order {
-        background-color: $c-neutral-white;
+    .order-total {
+      margin-bottom: 30px;
+
+      .label {
+        text-align: left;
+      }
+
     }
 
-    h1 {
-        margin: 0 0 10px;
-        text-transform: none;
-        font-size: 4.9rem;
+    .order-items .name,
+    .order-items .price,
+    .order-total .label,
+    .order-total .amount {
+      text-transform: uppercase;
+      word-spacing: 0.2rem;
+      letter-spacing: 0.1rem;
+      font-weight: bold;
+      font-size: 1.5rem;
+      font-family: $font-family-secondary;
     }
 
-    .title-subheader.order {
-        margin: 10px 0 0;
+    .order-items .name,
+    .order-total .label {
+      color: $c-neutral-black;
+      text-align: left;
+    }
+
+    .order-items .price,
+    .order-total .amount {
+      text-align: right;
+    }
+
+    .price-note {
+      color: $c-neutral-10;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 1rem;
+    }
+
+  }
+
+  .order-info {
+    margin-bottom: 25px;
+    padding-bottom: 35px;
+    border-bottom: 1px solid $c-neutral-black;
+
+    h4 {
+      margin: 25px 0 0;
+      font-weight: bold;
+      font-size: 1.55rem;
+      font-family: $font-family-secondary;
+    }
+
+    li,
+    span {
+      color: $c-neutral-12;
+      font-weight: 300;
+      line-height: 120%;
+    }
+
+  }
+
+  .faq-wrapper {
+    h2 {
+      text-transform: none;
+    }
+
+    .see-more {
+      text-align: right;
+    }
+
+    .btn {
+      font-size: 1.45rem;
+    }
+
+    li {
+      line-height: 2.8rem;
+
+      a {
+        color: $c-neutral-12;
+        font-weight: 300;
+
+        &:hover {
+          color: $c-neutral-black;
+        }
+
+        span {
+          text-decoration: underline;
+        }
+
+      }
+
+    }
+
+  }
+
+  .order-sidebar {
+    padding: 20px 25px;
+    background: $c-classic-modal-bg;
+
+    .steps-info {
+      margin-bottom: 30px;
+
+      h3 {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid $c-neutral-10;
         color: $c-neutral-black;
         text-transform: none;
-    }
+        word-spacing: 0.2rem;
+      }
 
-    .order-content-wrapper {
-
-        .order-number,
-        .order-date {
-            margin: 5px 0;
-            color: $c-neutral-black;
-            text-transform: uppercase;
-            word-spacing: 0.2rem;
-            letter-spacing: 0.1rem;
-            font-weight: bold;
-            font-size: 1.5rem;
-            font-family: $font-family-secondary;
-        }
-
-    }
-
-    .order-content {
-        margin-top: 25px;
-        margin-bottom: 25px;
-        padding: 25px 25px 20px;
-        border-top: 1px solid $c-neutral-black;
-        border-bottom: 1px solid $c-neutral-black;
-
-        .order-items {
-
-            .item {
-                display: inline-block;
-                padding-bottom: 30px;
-            }
-
-            .item-details {
-                font-weight: 300;
-
-                .value {
-                    color: $c-neutral-black;
-                    text-transform: capitalize;
-                    font-style: italic;
-                }
-
-            }
-
-            .ordered-item-image {
-                width: auto;
-            }
-
-        }
-
-        .order-total {
-            margin-bottom: 30px;
-
-            .label {
-                text-align: left;
-            }
-
-        }
-
-        .order-items .name,
-        .order-items .price,
-        .order-total .label,
-        .order-total .amount {
-            text-transform: uppercase;
-            word-spacing: 0.2rem;
-            letter-spacing: 0.1rem;
-            font-weight: bold;
-            font-size: 1.5rem;
-            font-family: $font-family-secondary;
-        }
-
-        .order-items .name,
-        .order-total .label {
-            color: $c-neutral-black;
-            text-align: left;
-        }
-
-        .order-items .price,
-        .order-total .amount {
-            text-align: right;
-        }
-
-        .price-note {
-            color: $c-neutral-10;
-            font-weight: 300;
-            font-style: italic;
-            font-size: 1rem;
-        }
-    }
-
-    .order-info {
-        margin-bottom: 25px;
-        padding-bottom: 35px;
-        border-bottom: 1px solid $c-neutral-black;
+      .item {
+        margin: 10px 0 30px;
+        padding: 0 24px;
+        font-size: 1.55rem;
 
         h4 {
-            margin: 25px 0 0;
-            font-weight: bold;
-            font-size: 1.55rem;
-            font-family: $font-family-secondary;
+          margin: 0;
+          text-transform: uppercase;
+          letter-spacing: 0.1rem;
+          font-weight: 600;
+          font-size: 1.55rem;
+          font-family: $font-family-secondary;
         }
 
-        li,
-        span {
-            color: $c-neutral-12;
-            font-weight: 300;
-            line-height: 120%;
+        p {
+          padding-top: 10px;
+          color: $c-neutral-12;
+          font-weight: 300;
+          font-family: $font-heading;
+          line-height: 120%;
         }
+
+        a.sidebar-link {
+          color: $c-neutral-10;
+          text-decoration: underline;
+          font-style: italic;
+        }
+
+      }
 
     }
 
-    .faq-wrapper {
+    .account-login-info {
 
-        h2 {
-            text-transform: none;
+      h3 {
+        padding: 20px 0 10px;
+        border-top: 1px solid $c-neutral-10;
+        color: $c-neutral-black;
+        text-transform: none;
+        word-spacing: 0.2rem;
+      }
+
+      .login-info,
+      .pwd-info {
+        margin: 10px 0;
+        padding: 5px 15px;
+        background: $c-neutral-white;
+      }
+
+      .label {
+        padding-right: 10px;
+        color: $c-neutral-black;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+        font-weight: bold;
+        font-size: 90%;
+        font-family: $font-family-secondary;
+      }
+
+      .value {
+        font-style: italic;
+      }
+
+      .login-btn {
+        text-align: right;
+
+        a.btn {
+          margin-top: 15px;
+          background-color: $c-neutral-black;
+          font-size: 1.45rem;
         }
 
-        .see-more {
-            text-align: right;
-        }
-
-        .btn {
-            font-size: 1.45rem;
-        }
-
-        li {
-            line-height: 2.8rem;
-
-            a {
-                color: $c-neutral-12;
-                font-weight: 300;
-
-                &:hover {
-                    color: $c-neutral-black;
-                }
-
-                span {
-                    text-decoration: underline;
-                }
-
-            }
-
-        }
+      }
 
     }
 
-    .order-sidebar {
-        padding: 20px 25px;
-        background: $c-classic-modal-bg;
-
-        .steps-info {
-            margin-bottom: 30px;
-
-            h3 {
-                margin-bottom: 20px;
-                padding-bottom: 20px;
-                border-bottom: 1px solid $c-neutral-10;
-                color: $c-neutral-black;
-                text-transform: none;
-                word-spacing: 0.2rem;
-            }
-
-            .item {
-                margin: 10px 0 30px;
-                padding: 0 24px;
-                font-size: 1.55rem;
-
-                h4 {
-                    margin: 0;
-                    text-transform: uppercase;
-                    letter-spacing: 0.1rem;
-                    font-weight: 600;
-                    font-size: 1.55rem;
-                    font-family: $font-family-secondary;
-                }
-
-                p {
-                    padding-top: 10px;
-                    color: $c-neutral-12;
-                    font-weight: 300;
-                    font-family: $font-heading;
-                    line-height: 120%;
-                }
-
-                a.sidebar-link {
-                    color: $c-neutral-10;
-                    text-decoration: underline;
-                    font-style: italic;
-                }
-
-            }
-
-        }
-
-        .account-login-info {
-
-            h3 {
-                padding: 20px 0 10px;
-                border-top: 1px solid $c-neutral-10;
-                color: $c-neutral-black;
-                text-transform: none;
-                word-spacing: 0.2rem;
-            }
-
-            .login-info,
-            .pwd-info {
-                margin: 10px 0;
-                padding: 5px 15px;
-                background: $c-neutral-white;
-            }
-
-            .label {
-                padding-right: 10px;
-                color: $c-neutral-black;
-                text-transform: uppercase;
-                letter-spacing: 0.1rem;
-                font-weight: bold;
-                font-size: 90%;
-                font-family: $font-family-secondary;
-            }
-
-            .value {
-                font-style: italic;
-            }
-
-            .login-btn {
-                text-align: right;
-
-                a.btn {
-                    margin-top: 15px;
-                    background-color: $c-neutral-black;
-                    font-size: 1.45rem;
-                }
-
-            }
-
-        }
-
-    }
+  }
 
 }
