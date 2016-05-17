@@ -42,13 +42,12 @@ module Bergen
       end
 
       def create_asn
-        # Workers::CreateAsnWorker.perform_async(self.id)
+        Workers::CreateAsnWorker.perform_async(self.id)
       end
 
-      # TODO: careful with naming clashing events
-      # def receive_asn
-      #   # Workers::ReceiveAsnWorker.perform_async(self.id)
-      # end
+      def receive_asn
+        # Workers::ReceiveAsnWorker.perform_async(self.id)
+      end
 
       private
 

@@ -13,6 +13,8 @@ module Bergen
         expect(return_item_process).to transition_from(:asn_created).to(:asn_received).on_event(:asn_was_received)
       end
 
+      # TODO: It's a good idea to run an actual integration test here, recording real Bergen requests and stuff
+
       describe '#start_process' do
         let(:shipping_address) { build_stubbed(:address, country: country) }
         let(:return_request_item) { build_stubbed(:return_request_item) }
