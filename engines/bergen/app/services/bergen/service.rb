@@ -19,8 +19,11 @@ module Bergen
       ).result
     end
 
-    def get_receiving_ticket_object_by_ticket_no
-      # TODO
+    def get_receiving_ticket_object_by_ticket_no(return_request_item:)
+      SoapMethods::GetReceivingTicketObjectByTicketNo.new(
+        savon_client:        client,
+        return_request_item: return_request_item
+      ).result
     end
 
     def style_master_product_add_by_spree_variants(spree_variants:)

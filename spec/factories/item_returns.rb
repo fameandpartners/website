@@ -28,5 +28,6 @@ FactoryGirl.define do
     refund_method "MyString"
     refund_amount 1
     refunded_at "2015-06-23 13:49:32"
+    bergen_asn_number "WHRTN915384"
   end
 end
