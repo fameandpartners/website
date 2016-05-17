@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160512230210) do
+ActiveRecord::Schema.define(:version => 20160516233017) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -345,6 +345,7 @@ ActiveRecord::Schema.define(:version => 20160512230210) do
     t.integer  "item_price"
     t.integer  "item_price_adjusted"
     t.string   "factory_fault_reason"
+    t.string   "bergen_asn_number"
   end
 
   add_index "item_returns", ["line_item_id"], :name => "index_item_returns_on_line_item_id", :unique => true

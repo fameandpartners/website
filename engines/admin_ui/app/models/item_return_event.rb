@@ -112,6 +112,14 @@ class ItemReturnEvent < ActiveRecord::Base
     validates :factory_fault, presence: true
   end
 
+  attr_accessible :asn_number
+
+  event_type :bergen_asn_created do
+    attributes :asn_number
+
+    validates :asn_number, presence: true
+  end
+
   LEGACY_DATA_IMPORT_ATTRIBUTES = [
     :row_number,
     :rj_ident,
