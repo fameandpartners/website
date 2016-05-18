@@ -1,0 +1,75 @@
+= render :partial => '/pages/robots'
+
+= render :partial => '/products/collections/javascript'
+
+.landing-page-styling-session
+
+  // hero section
+  .hero-wrap
+    picture.media-wrap.keep-ratio
+      .inner-wrap
+        source media='(max-width: 768px)' srcset='#{image_path("landingpages/prom-competition/hero-mob.jpg")}'
+        source media='(min-width: 769px)' srcset='#{image_path("landingpages/prom-competition/hero-full.jpg")}'
+        img src='#{image_path("landingpages/prom-competition/hero-full.jpg")}' srcset='
+          #{image_path("landingpages/prom-competition/hero-mob.jpg")} 768w,
+          #{image_path("landingpages/prom-competition/hero-full.jpg")} 1024w' alt='background image'
+    .content-wrap
+      .container
+        .row
+          .col-md-12
+            h1.heading
+              span Win a VIP trip + attend the Nylon Young Hollywood Party
+              span #PartnersInCrime
+
+  section
+    .container
+      .row
+        .col-md-8.col-md-offset-2.section-title.text-center
+          h2.section-heading How it works
+          p Experience an atelier service usually reserved for the A-list as a Fame and Partners stylist guides you through four key stages of finding the perfect dress.
+      .row
+        .col-md-3.panel-compact.alt.add-separator
+          .copy-wrap
+            .icon.icon-comment
+            .heading GET STYLING ADVICE
+            p Define a look that fits your personality.
+        .col-md-3.panel-compact.alt.add-separator
+          .copy-wrap
+            .icon.icon-dress
+            .heading CHOOSE A DRESS
+            p Choose from the latest runway-ready styles.
+        .col-md-3.panel-compact.alt.add-separator
+          .copy-wrap
+            .icon.icon-fit
+            .heading GET MEASURED
+            p Achieve the most precise fit to your body.
+        .col-md-3.panel-compact.alt.add-separator
+          .copy-wrap
+            .icon.icon-customize
+            .heading CUSTOMIZE
+            p Personalize your dress with a suite of custom options.
+
+  section
+    .container
+      .row
+        .col-md-8.col-md-offset-2.section-title.text-center
+          h2.section-heading Book me in
+          p Experience an atelier service usually reserved for the A-list as a Fame and Partners stylist guides you through four key stages of finding the perfect dress.
+        .col-md-8.col-md-offset-2
+          //TODO - make this form work
+          form.row action='' method='post'
+            .col-md-6.form-group
+              = text_field_tag :first_name, '', :class => 'form-control form-control-md', :placeholder => 'First Name'
+            .col-md-6.form-group
+              = text_field_tag :last_name, '', :class => 'form-control form-control-md', :placeholder => 'Last Name'
+            .col-md-6.form-group
+              = text_field_tag :phone, '', :class => 'form-control form-control-md', :placeholder => 'Phone Number'
+            .col-md-6.form-group
+              = text_field_tag :email, '', type: 'email', :class => 'form-control form-control-md', :placeholder => 'Email'
+            .col-md-6.form-group
+              select#state.form-control.form-control-md
+                option val='' State
+            .col-md-6.form-group
+              = text_field_tag :prefered_time, '', :class => 'form-control form-control-md', :placeholder => 'Prefered Time'
+            .col-md-12.form-group
+              input.btn.btn-black type='submit' value="LET'S DO THIS"

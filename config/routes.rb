@@ -150,6 +150,7 @@ FameAndPartners::Application.routes.draw do
     get '/ad-plus-size'       => 'products/collections#show', :permalink => 'bridesmaid14', :as => :ad_plus_size_collection
     get '/partners-in-crime'   => 'products/collections#show', :permalink => 'bridesmaid14', :as => :partners_in_crime_competition
     get '/prom-ad'            => 'products/collections#show', :permalink => 'bridesmaid14', :as => :prom_ad_collection
+    get '/styling-session-plus' => 'products/collections#show', :as => :styling_session_plus
 
     get '/lets-party'     => 'products/collections#show', :permalink => 'dance-hall', :as => :lets_party_collection
     get '/lookbook/love-lace-collection' => 'products/collections#show', :permalink => 'love-lace', :as => :love_lace_collection
