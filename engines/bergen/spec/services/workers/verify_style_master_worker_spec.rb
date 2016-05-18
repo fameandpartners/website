@@ -48,7 +48,7 @@ module Bergen
           end
 
           context 'error' do
-            pending 'Error handling not implemented yet'
+            # TODO 'Error handling not implemented yet'
           end
         end
       end

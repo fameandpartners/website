@@ -17,7 +17,7 @@ module Bergen
       private
 
       def create_asn_retrieval_event(asn_number)
-        return_request_item.item_return.events.send(:bergen_asn_created).create(asn_number: asn_number)
+        return_request_item.item_return.events.bergen_asn_created.create(asn_number: asn_number)
       end
 
       def advance_in_return_item_process

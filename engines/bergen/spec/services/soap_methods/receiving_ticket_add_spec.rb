@@ -21,7 +21,7 @@ module Bergen
         end
 
         context 'fail to create' do
-          pending 'No fail scenario yet'
+          # TODO No fail scenario yet
         end
       end
     end

@@ -46,7 +46,7 @@ module Bergen
       end
 
       def receive_asn
-        # Workers::ReceiveAsnWorker.perform_async(self.id)
+        Workers::ReceiveAsnWorker.perform_async(self.id)
       end
 
       private
