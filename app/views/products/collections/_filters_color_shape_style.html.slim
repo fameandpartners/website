@@ -44,11 +44,12 @@
               = radio_button_tag 'price', '300', params[:price_max] == '399' ? true : false, 'data-all' => 'false', 'data-pricemin' => '300', 'data-pricemax' => '399'
               span.icon
               span $300 - $399
-          .custom-form-element.filter-radio-option.selector-price name='price'
-            label
-              = radio_button_tag 'price', '400', params[:price_min] == '400' ? true : false, 'data-all' => 'false', 'data-pricemin' => '400', 'data-pricemax' => 'null'
-              span.icon
-              span $400+
+          / Since we don't have any dress cost > 400 , offerring this option is useless, when we have those dresss , we will reopen this option
+          /.custom-form-element.filter-radio-option.selector-price name='price'
+            /label
+              /= radio_button_tag 'price', '400', params[:price_min] == '400' ? true : false, 'data-all' => 'false', 'data-pricemin' => '400', 'data-pricemax' => 'null'
+              /span.icon
+              /span $400+
 
     .panel.panel-default
       .panel-heading#heading-collapse-style role='tab'
