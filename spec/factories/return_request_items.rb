@@ -5,6 +5,8 @@ FactoryGirl.define do
 
     trait :return do
       action 'return'
+      reason_category 'Size and fit'
+      reason 'Dress was too big around the bust'
     end
   end
 end
