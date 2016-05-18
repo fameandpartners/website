@@ -58,10 +58,6 @@ module Bergen
       def from_the_usa?
         return_request_item.order.shipping_address.country.iso3 == 'USA'
       end
-
-      def bergen
-        Bergen::Service.new
-      end
     end
   end
 end
