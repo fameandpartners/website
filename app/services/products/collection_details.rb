@@ -92,7 +92,7 @@ class Products::CollectionDetails
         :banner => {
           :title => 'Black Dresses',
           :subtitle => 'The black dress has taken a new turn. A timeless item in your wardrobe perfect for every occasion. Any style, we’ve got you covered.',
-          :image => "//#{configatron.asset_host}/category-banners/black-dresses-dark-bg.jpg"
+          :image => "#{configatron.asset_host}/category-banners/black-dresses-dark-bg.jpg"
         },
         :meta_title        => 'Black dresses and gowns',
         :meta_description  => "Find a black dress for any occasion and style from prom to maxi’s. Transform and customize your look from day-time office to night-time chic.",
