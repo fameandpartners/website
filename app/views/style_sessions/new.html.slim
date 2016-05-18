@@ -1,142 +1,57 @@
 / Style session
-.page-title.default.style-session
+.landing-page-styling-session
+  .page-title.style-session.container-fluid
+    .register-for-session
+      .row
+      .col-md-2.col-md-offset-1
+        h1
+          | Free one-on-one style advice
+        p
+          | Via video with a dedicated Fame and Partners stylist.
+      .col-md-9
+        p Lorem ipsum...
 
-  = image_tag src='contact/fame-white-logo.png', :class => '', :alt => 'Fame & Partners'
+  .page-content.container.relative
+      .form-global
+        = form_for @style_session, url: style_session_path, method: :post, html: {class: 'form'} do |f|
+          = f.hidden_field :session_type
+          .row
+            .col-md-12.form-group
+              label Full name
+              = f.text_field :full_name, :class => 'form-control form-control-md'
+          .row
+            .col-md-12.form-group
+              label Email
+              = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
+          .row
+            .col-md-12.form-group
+              label Phone
+              = f.text_field :phone, :class => 'form-control form-control-md'
+              p.hint
+                | (include country code)
+          .row
+            .col-md-12.form-group
+              label date of birth
+              = f.text_field :dob, type: 'date', :class => 'form-control form-control-md'
+          .row
+            .col-md-12.form-group
+              label timezone
+              /TODO: Replace it with an autocomplete input, like Select2
+              = f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, {}, :class => 'form-control form-control-md selectbox'
+          .row
+            .col-md-12.form-group
+              label 1st preferred time for the session
+              = f.select :preference1, options_for_select(["9am-11am", "11am-1pm", "1pm-3pm", "3pm-5pm", "5pm-7pm", "7pm-9pm"]), {}, :class => 'form-control form-control-md selectbox'
+          .row
+            .col-md-12.form-group
+              label 2nd preferred time for the session
+              = f.select :preference2, options_for_select(["9am-11am", "11am-1pm", "1pm-3pm", "3pm-5pm", "5pm-7pm", "7pm-9pm"]), {}, :class => 'form-control form-control-md selectbox'
+          .row
+            .col-md-12.form-group
+              label 3rd preferred time for the session
+              = f.select :preference3, options_for_select(["9am-11am", "11am-1pm", "1pm-3pm", "3pm-5pm", "5pm-7pm", "7pm-9pm"]), {}, :class => 'form-control form-control-md selectbox'
 
-.style-session-header class="#{@style_session.name.downcase}"
-
-.register-for-session
-  .top-arrow
-  h1
-    | REGISTER FOR A FREE SESSION
-    br
-    | WITH A PROFESSIONAL STYLIST
-    br
-    span style="font-size:0.6666666em" (Plus $20 to spend on your dress)
-  .bottom-arrow
-
-.page-content.contact.style-session
-  .container.relative
-    .form-global
-      = form_for @style_session, url: style_session_path, method: :post, html: {class: 'form'} do |f|
-        = f.hidden_field :session_type
-        .row
-          .col-md-12.form-group
-            label Full name
-            = f.text_field :full_name, :class => 'form-control form-control-md'
-        .row
-          .col-md-12.form-group
-            label Email
-            = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
-        .row
-          .col-md-12.form-group
-            label Phone
-            = f.text_field :phone, :class => 'form-control form-control-md'
-            p.hint
-              | (include country code)
-        .row
-          .col-md-12.form-group
-            label date of birth
-            = f.text_field :dob, type: 'date', :class => 'form-control form-control-md'
-        .row
-          .col-md-12.form-group
-            label where do you live
-            = f.text_field :location, :class => 'form-control form-control-md'
-            p.hint (e.g. Sydney, Australia or New York, United States)
-        .row
-          .col-md-12.form-group
-            label Skype ID
-            = f.text_field :skype_id, :class => 'form-control form-control-md'
-            p.hint
-              | (optional - so we can do a video chat session)
-        .row
-          .col-md-12.form-group
-            label 1st preferred time for the session
-            = f.select :preference1, options_for_select(["9am-11am", "11am-1pm", "1pm-3pm", "3pm-5pm", "5pm-7pm", "7pm-9pm"]), {}, :class => 'form-control form-control-md selectbox'
-        .row
-          .col-md-12.form-group
-            label 2nd preferred time for the session
-            = f.select :preference2, options_for_select(["9am-11am", "11am-1pm", "1pm-3pm", "3pm-5pm", "5pm-7pm", "7pm-9pm"]), {}, :class => 'form-control form-control-md selectbox'
-        .row
-          .col-md-12.form-group
-            label 3rd preferred time for the session
-            = f.select :preference3, options_for_select(["9am-11am", "11am-1pm", "1pm-3pm", "3pm-5pm", "5pm-7pm", "7pm-9pm"]), {}, :class => 'form-control form-control-md selectbox'
-        .row
-          .col-md-12.form-group
-            label timezone
-            = f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, {}, :class => 'form-control form-control-md selectbox'
-
-        .row
-          .col-md-12.form-group
-            .submit
-              = f.submit "Apply now", class: 'btn btn-black btn-block'
-
-/ @end Style session
-
-
-
-
-/ / Wedding session
-/ .page-title.default.wedding-session
-/   = image_tag src='contact/fame-white-logo.png', :class => '', :alt => 'Fame & Partners'
-
-/ .wedding-session-header
-
-/ .register-for-session
-/   .top-arrow
-/   h1
-/     | Wedding styling
-/     br
-/     span consultation form
-/   .bottom-arrow
-
-/ .page-content.contact.style-session
-/   .container.relative
-/     .form-global
-/       = form_for 'wedding-session', method: :post, html: {class: 'form'} do |f|
-/         .row
-/           .col-md-12.form-group
-/             label Full name
-/             = f.text_field :full_name, :class => 'form-control form-control-md'
-/         .row
-/           .col-md-12.form-group
-/             label Email
-/             = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
-/         .row
-/           .col-md-12.form-group
-/             label Phone
-/             = f.text_field :phone, :class => 'form-control form-control-md'
-/             p.hint
-/               | (include country code)
-/         .row
-/           .col-md-12.form-group
-/             label date of birth
-/             = f.text_field :dob, type: 'date', :class => 'form-control form-control-md'
-/         .row
-/           .col-md-12.form-group
-/             label where do you live
-/             = f.text_field :location, :class => 'form-control form-control-md'
-/             p.hint (e.g. Sydney, Australia or New York, United States)
-/         .row
-/           .col-md-12.form-group
-/             label Skype ID
-/             = f.text_field :skype_id, :class => 'form-control form-control-md'
-/             p.hint
-/               | (optional - so we can do a video chat session)
-/         .row
-/           .col-md-12.form-group
-/             label Wedding date
-/             = f.text_field :dob, type: 'date', :class => 'form-control form-control-md'
-/         .row
-/           .col-md-12.form-group
-/             label Tell us a bit about the wedding
-/             textarea.form-control.form-control-md
-/         .row
-/           .col-md-12.form-group
-/             label timezone
-/             = f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, {}, :class => 'form-control form-control-md selectbox'
-/         .row
-/           .col-md-12.form-group
-/             .submit
-/               = f.submit "Apply now", class: 'btn btn-black btn-block'
-/ / @end Wedding session
+          .row
+            .col-md-12.form-group
+              .submit
+                = f.submit "Confirm my booking", class: 'btn btn-black btn-block'
