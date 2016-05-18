@@ -3,7 +3,7 @@ configatron.host                    = ENV['APP_HOST']
 configatron.noreply                 = 'Fame & Partners<noreply@fameandpartners.com>'
 configatron.admin                   = 'team@fameandpartners.com'
 configatron.app_name                = 'Fame And Partners'
-configatron.sitemap_url             = 'http://images.fameandpartners.com/sitemap/sitemap.xml.gz'
+configatron.sitemap_url             = "#{ENV['RAILS_ASSET_HOST']}/sitemap/sitemap.xml.gz"
 configatron.blog_host               = 'fameandpartners.tumblr.com'
 configatron.days_delivery_emergency = 0
 configatron.secret_token            = ENV['RAILS_SECRET_KEY_BASE']
@@ -18,8 +18,8 @@ configatron.aws.enabled    = false
 configatron.aws.bucket     = ""
 configatron.aws.access_key = ""
 configatron.aws.secret_key = ""
-configatron.aws.host       = ENV['AWS_HOST']
-configatron.asset_host     = ENV['ASSET_HOST']
+configatron.aws.host       = ENV['RAILS_ASSET_HOST']
+configatron.asset_host     = ENV['RAILS_ASSET_HOST']
 
 configatron.typekit_id = ENV['TYPEKIT_ID']
 

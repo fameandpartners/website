@@ -83,7 +83,7 @@ class Products::CollectionDetails
     taxon.footer            = ''
     taxon.banner.title      = 'GET IT QUICK!'
     taxon.banner.subtitle   = 'Introducing express making: Dresses made for you in 48 hours'
-    taxon.banner.image      = "//#{configatron.asset_host}/category-banners/express-making-dark-bg.jpg"
+    taxon.banner.image      = "#{configatron.asset_host}/category-banners/express-making-dark-bg.jpg"
   end
 
   def color_data
@@ -101,7 +101,7 @@ class Products::CollectionDetails
         :banner => {
           :title => 'White/ivory Dresses',
           :subtitle => 'Clean cuts and pristine whites make for a refreshing look. Achieve effortless style in sleek white dresses, with a modern twist.',
-          :image => "//#{configatron.asset_host}/category-banners/white-dresses-bg.jpg"
+          :image => "#{configatron.asset_host}/category-banners/white-dresses-bg.jpg"
         },
         :meta_title        => 'White dresses online',
         :meta_description  => "Made to order white dresses. Perfect for every occasion .Whether a bride or a fashion diva, white is a class and a wardrobe must.",
@@ -110,7 +110,7 @@ class Products::CollectionDetails
         :banner => {
           :title => 'Blue Dresses',
           :subtitle => 'Feeling blue? Change it up in bold & daring shades of teal, turquoise or navy dresses and add an unexpected turn to your wardrobe.',
-          :image => "//#{configatron.asset_host}/category-banners/blue-dresses-bg.jpg"
+          :image => "#{configatron.asset_host}/category-banners/blue-dresses-bg.jpg"
         },
         :meta_title        => 'Blue dresses | Shop our trending range',
         :meta_description  => "Fame & Partners offers a wide variety of blue dresses. From Icy to baby blue, we have it all.",
@@ -119,7 +119,7 @@ class Products::CollectionDetails
         :banner => {
           :title => 'Pink Dresses',
           :subtitle => 'Candy and lolly pops? Only pink frocks! meh! Only pink dresses. Whether you’re tuning into your feminine or fierce side, pink will deliver.',
-          :image => "//#{configatron.asset_host}/category-banners/pink-dresses-bg.jpg"
+          :image => "#{configatron.asset_host}/category-banners/pink-dresses-bg.jpg"
         },
         :meta_title        => 'Pink dresses',
         :meta_description  => "Embrace girl power in every shade of pink. We’ve got you covered girl. Customise these killer dresses into the style you always wished for!",
@@ -128,7 +128,7 @@ class Products::CollectionDetails
         :banner => {
           :title => 'Red Dresses',
           :subtitle => 'Look red haute in statement-making shades.',
-          :image => "//#{configatron.asset_host}/category-banners/red-dresses-dark-bg.jpg"
+          :image => "#{configatron.asset_host}/category-banners/red-dresses-dark-bg.jpg"
         },
         :meta_title        => 'Red Dresses',
         :meta_description  => "Look red haute in statement-making shades.",
@@ -137,7 +137,7 @@ class Products::CollectionDetails
         :banner => {
           :title => 'Pastel Dresses',
           :subtitle => 'Indulge in sweet treats, in the prettiest way possible. A Pastel dress will take you from girly to glam and across all seasons in a click of a button.',
-          :image => "//#{configatron.asset_host}/category-banners/pastel-dresses-bg.jpg"
+          :image => "#{configatron.asset_host}/category-banners/pastel-dresses-bg.jpg"
         },
         :meta_title        => 'Beautiful pastel dresses',
         :meta_description  => "Change it up in pastel hues and take on a fresh look inspired straight from the latest runway trends. Find your own dress style & add  these treats to your wardrobe.",

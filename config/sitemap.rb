@@ -29,7 +29,7 @@ end
 sitemap_options = {
     compress:      Rails.env.production?,
     default_host:  "https://#{configatron.host}",
-    sitemaps_host: "https://#{configatron.aws.host}",
+    sitemaps_host: "#{configatron.aws.host}",
     include_root:  false,
     sitemaps_path: 'sitemap'
 }
