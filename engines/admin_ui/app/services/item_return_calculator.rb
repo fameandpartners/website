@@ -45,6 +45,10 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.bergen_asn_number = event.asn_number
   end
 
+  def advance_bergen_asn_received(event)
+    # TODO: rejected or accepted?
+  end
+
   def advance_legacy_data_import(event)
     return if event.deleted_row.present?
 
