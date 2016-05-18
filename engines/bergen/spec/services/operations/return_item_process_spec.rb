@@ -17,14 +17,14 @@ module Bergen
 
       describe '#start_process' do
         let(:shipping_address) { build_stubbed(:address, country: country) }
-        let(:return_request_item) { build_stubbed(:return_request_item) }
 
         before do
           allow(return_request_item).to receive_message_chain(:order, :shipping_address).and_return(shipping_address)
         end
 
-        context 'return is from the USA' do
+        context 'return is from the USA and for return' do
           let(:country) { build_stubbed(:country, :united_states) }
+          let(:return_request_item) { build_stubbed(:return_request_item, :return) }
 
           it 'saves and call verification worker' do
             expect(return_item_process).to receive(:save!)
@@ -36,6 +36,7 @@ module Bergen
 
         context 'return is not from the USA' do
           let(:country) { build_stubbed(:country, :australia) }
+          let(:return_request_item) { build_stubbed(:return_request_item) }
 
           it 'does not save' do
             expect(return_item_process).not_to receive(:save!)

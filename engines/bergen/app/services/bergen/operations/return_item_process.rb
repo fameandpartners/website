@@ -35,7 +35,7 @@ module Bergen
       validates :return_request_item, presence: true
 
       def start_process
-        if from_the_usa?
+        if from_the_usa? && item_for_return?
           save!
           Workers::VerifyStyleMasterWorker.perform_async(self.id)
         end
@@ -50,6 +50,10 @@ module Bergen
       end
 
       private
+
+      def item_for_return?
+        return_request_item.return_or_exchange?
+      end
 
       def from_the_usa?
         return_request_item.order.shipping_address.country.iso3 == 'USA'
