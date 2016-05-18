@@ -48,7 +48,7 @@ module Bergen
           arrived_date:            response[:arrived_date],
           created_date:            response[:created_date],
           expected_date:           response[:expected_date],
-          memo:                    '', # TODO: do Bergen offer a memo field on response?
+          memo:                    response[:memo],
           receiving_status:        response[:receiving_status],
           receiving_status_code:   response[:receiving_status_code],
           warehouse:               response[:warehouse],
