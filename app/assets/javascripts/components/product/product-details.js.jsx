@@ -177,14 +177,24 @@ var HeroProductCarousel = React.createClass({
 
   },
 
-  renderAssets: function(is_main){
+  renderAssets: function (is_main) {
+    var imageVariant  = is_main == 'main' ? 'url' : 'url_product';
+    var defaultColor  = this.state.productImages[0].color_id;
     var selectedColor = this.state.selectedColor;
-    return this.state.productImages.map(function(asset) {
-      if (selectedColor === asset.color_id) {
-        var url = is_main == 'main' ? asset.url : asset.url_product;
-        return <HeroProductCarouselImage key={'image-' + asset.id} url={url} alt={asset.alt} />
-      }
+    var imageExists   = this.state.productImages.some(function (asset) {
+      return asset.color_id == selectedColor
     });
+
+    selectedColor = imageExists ? selectedColor : defaultColor;
+
+    return this.state.productImages
+        .filter(function (asset) {
+          return selectedColor == asset.color_id
+        })
+        .map(function (asset) {
+          var url = asset[imageVariant];
+          return <HeroProductCarouselImage key={'image-' + asset.id} url={url} alt={asset.alt}/>
+        });
   },
 
   render: function() {
