@@ -33,9 +33,9 @@ script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1
 - if Rails.env.production? || Features.active?(:test_analytics, current_spree_user)
   = render 'marketing/sync_trackers'
 
+= render 'marketing/structured_markup'
+
 /[if lt IE 9]
   = javascript_include_tag 'html5.js'
 
 = yield :head
-
-script type="application/ld+json" { "@context" : "http://schema.org", "@type" : "Organization", "name" : "Fame and Partners", "url" : "http://www.fameandpartners.com", "sameAs" : [ "http://www.facebook.com/FameandPartners", "http://www.twitter.com/fameandpartners", "http://www.instagram.com/fameandpartners", "http://www.youtube.com/user/fameandpartners", "http://www.pinterest.com/fameandpartners"] }
