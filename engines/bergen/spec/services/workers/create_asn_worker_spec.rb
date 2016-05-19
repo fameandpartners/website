@@ -1,20 +1,28 @@
 require 'spec_helper'
 require 'aasm/rspec'
 
+require 'engines/bergen/spec/support/return_item_ready_to_process_context'
+
 module Bergen
   module Workers
-    RSpec.describe CreateAsnWorker do
-      let!(:return_request_item) { build_stubbed(:return_request_item) }
-      let!(:return_item_process) { Operations::ReturnItemProcess.create(return_request_item: return_request_item) }
-      let!(:worker) { described_class.new }
+    RSpec.describe CreateAsnWorker, :vcr do
+      include_context 'return item ready to process'
+
+      let(:worker) { described_class.new }
+
+      before(:each) do
+        return_item_process.style_master_was_created!
+      end
 
       context 'given a return item process id' do
         it 'creates ASN, triggers item returns event sourcing and trigger next step' do
-          expect(worker).to receive(:create_asn).and_return('FAKE_ASN_NUMBER')
-          expect(worker).to receive(:create_asn_retrieval_event).with('FAKE_ASN_NUMBER')
-          expect(worker).to receive(:advance_in_return_item_process)
+          expect(return_item_process).to receive(:receive_asn)
 
           worker.perform(return_item_process.id)
+
+          asn_event = return_request_item.item_return.events.bergen_asn_created.first
+          expect(asn_event.data['asn_number']).to eq('WHRTN915392')
+          expect(return_item_process).to have_state(:asn_created)
         end
       end
     end

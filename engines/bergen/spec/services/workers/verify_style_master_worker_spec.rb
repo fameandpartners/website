@@ -1,54 +1,50 @@
 require 'spec_helper'
 require 'aasm/rspec'
 
+require 'engines/bergen/spec/support/return_item_ready_to_process_context'
+
 module Bergen
   module Workers
     RSpec.describe VerifyStyleMasterWorker do
-      let!(:return_request_item) { build_stubbed(:return_request_item) }
-      let!(:return_item_process) { Operations::ReturnItemProcess.create(return_request_item: return_request_item) }
-      let!(:worker) { described_class.new }
+      include_context 'return item ready to process'
+
+      let(:worker) { described_class.new }
 
       context 'given a return item process id' do
         describe 'verify if style master was created' do
           context 'success' do
-            before do
-              allow(worker).to receive(:style_master_status).and_return(described_class::SUCCESS)
-            end
-
             it do
-              expect(worker).to receive(:advance_in_return_item_process)
+              expect(return_item_process).to receive(:create_asn)
 
               worker.perform(return_item_process.id)
+
+              expect(return_item_process).to have_state(:style_master_created)
             end
           end
 
           context 'not created yet' do
-            before do
-              allow(worker).to receive(:style_master_status).and_return(described_class::UPC_CODE_ERROR)
-            end
-
             it do
-              expect(worker).to receive(:create_style_master)
-              expect(worker).to receive(:verify_again_in_few_minutes)
+              expect(described_class).to receive(:perform_in).with(30.minutes, return_item_process.id)
 
               worker.perform(return_item_process.id)
             end
           end
 
           context 'pending importation' do
-            before do
-              allow(worker).to receive(:style_master_status).and_return(described_class::PENDING_IMPORT)
-            end
-
             it do
-              expect(worker).to receive(:verify_again_in_few_minutes)
+              expect(described_class).to receive(:perform_in).with(30.minutes, return_item_process.id)
 
               worker.perform(return_item_process.id)
             end
           end
 
           context 'error' do
-            # TODO 'Error handling not implemented yet'
+            it do
+              # TODO 'Error handling not implemented yet'
+              # TODO: at least record VCR call
+
+              worker.perform(return_item_process.id)
+            end
           end
         end
       end
