@@ -48,10 +48,64 @@ module Revolution
       @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
     end
 
-    def banner_image
-      collection.details.banner.image
+    ## Revolution banners
+    def banner_image(position, size)
+      ## NOTE: in future we may totally get rid of Taxons.  What happens if we do not have banners?
+      ## Do we default to what?  '/dresses/...' has '/dresses/*', what about other types of pages?
+      if banners_exist?(size)
+        retrieve_banner(position, size).banner_url
+      else
+        collection.details.banner.image
+      end
     end
 
+    def no_of_banners(size)
+      if banners_exist?(size)
+        translations.banner_count(locale)
+      else
+        1
+      end
+    end
+
+    def alt_text(position, size)
+      if banners_exist?(size)
+        retrieve_banner(position, size).alt_text
+      else
+        'alt_text'
+      end
+    end
+
+    def retrieve_banner(position, size)
+      #NOTE: If we ever go to more than 2 locales this will have to be changed.
+
+      banners = get_default_banner(position, size, locale)
+      if banners.blank?
+        local_locale = translations.other_locale(locale)
+        banners = get_default_banner(position, size, local_locale)
+      end
+
+      banners.first
+    end
+
+    def get_default_banner(position, size, local_locale)
+      banners = translations.get_banner_for_pos(local_locale, position, size)
+      if banners.blank?
+        #If not found default to the first one
+        banners = translations.get_banner_for_pos(local_locale, 0, size)
+      end
+      banners
+    end
+
+    def banners_exist?(size)
+      banners_present = false
+      translations.each do |translation|
+        banners_present = translation.banner?(size)
+        break if banners_present
+      end
+      banners_present
+    end
+    ## End Revolution banners
+    
     def translation
       @translation ||= translations.find_for_locale(locale)
     end
