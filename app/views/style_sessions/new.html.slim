@@ -7,137 +7,148 @@
           h1
             | Free one-on-one style advice
           p
-            | Via video with a dedicated Fame and Partners stylist.
+            | Via video with a dedicated <br />Fame and Partners stylist.
         .col-md-8.header-image-right
           // hero section
           .hero-wrap
             picture.media-wrap.keep-ratio
               .inner-wrap
-                / TODO: replace these sample images
-                source media='(max-width: 768px)' srcset='#{image_path("landingpages/prom-competition/hero-mob.jpg")}'
-                source media='(min-width: 769px)' srcset='#{image_path("landingpages/prom-competition/hero-full.jpg")}'
-                img src='#{image_path("landingpages/prom-competition/hero-full.jpg")}' srcset='
-                  #{image_path("landingpages/prom-competition/hero-mob.jpg")} 768w,
-                  #{image_path("landingpages/prom-competition/hero-full.jpg")} 1024w' alt='background image'
+                source media='(max-width: 768px)' srcset='#{image_path("landingpages/styling-session/header-tile-mobile.jpg")}'
+                source media='(min-width: 769px)' srcset='#{image_path("landingpages/styling-session/header-tile.jpg")}'
+                img src='#{image_path("landingpages/styling-session/header-tile.jpg")}' srcset='
+                  #{image_path("landingpages/styling-session/header-tile-mobile.jpg")} 768w,
+                  #{image_path("landingpages/styling-session/header-tile.jpg")} 1024w' alt='background image'
 
     .row
       .page-content
-        .side-content.col-md-4
-          .row
-            .meet-stylist
-              .col-md-6.picture
-                /TODO: insert image here
-              .col-md-6.txt
-                h4 Meet Amber
-                span Headstylist, F&P
-          .row
-            .form-area
-              .col-md-12
-                .h3 Style me up!
+        .side-wrapper.col-md-4
+          .side-content
+            .row
+              .meet-stylist
+                .col-md-6.picture
+                  source media='(max-width: 768px)' srcset='#{image_path("landingpages/styling-session/amber-mobile.jpg")}'
+                  source media='(min-width: 769px)' srcset='#{image_path("landingpages/styling-session/amber.jpg")}'
+                  img src='#{image_path("landingpages/styling-session/amber.jpg")}' srcset='
+                    #{image_path("landingpages/styling-session/amber-mobile.jpg")} 768w,
+                    #{image_path("landingpages/styling-session/amber.jpg")} 1024w' alt='background image'
+                .col-md-6.txt
+                  h4 Meet Amber
+                  span Head stylist, F&P
+            .row
+              .form-area
+                .col-md-12
+                  .intro
+                    h3 Style me up!
+                    p
+                      | It's easy to find the perfect outfit with the Fame and Partners crew on standby. Access your complimentary video session now.
+                  .form-global
+                    = form_for @style_session, url: style_session_path, method: :post, html: {class: 'form'} do |f|
+                      = f.hidden_field :session_type
+                      .row
+                        .col-md-12.form-group
+                          label Full name
+                          = f.text_field :full_name, :placeholder => 'Enter your full name', :class => 'form-control form-control-md'
+                      .row
+                        .col-md-12.form-group
+                          label Email
+                          = f.text_field :email, :placeholder => 'Enter your email address', type: 'email', :class => 'form-control form-control-md'
+                      .row
+                        .col-md-12.form-group
+                          label Phone
+                          span.hint
+                            | (include country code)
+                          = f.text_field :phone, :placeholder => 'Enter your phone number', :class => 'form-control form-control-md'
+
+                      .row
+                        .col-md-12.form-group
+                          label Date of Birth
+                          = f.text_field :dob, type: 'date', :class => 'form-control form-control-md'
+                      .row
+                        .col-md-12.form-group
+                          label Select your timezone
+                          /TODO: Replace it with an autocomplete input, like Select2
+                          = f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, {}, :class => 'form-control form-control-md selectbox'
+                      .row
+                        .col-md-12.form-group
+                          label Preferred time #1
+                          = f.select :preference1, options_for_select(["morning", "midday", "afternoon", "evening"]), {}, :class => 'form-control form-control-md selectbox'
+                      .row
+                        .col-md-12.form-group
+                          label Preferred time #2
+                          = f.select :preference2, options_for_select(["morning", "midday", "afternoon", "evening"]), {}, :class => 'form-control form-control-md selectbox'
+                      .row
+                        .col-md-12.form-group
+                          label Preferred time #3
+                          = f.select :preference3, options_for_select(["morning", "midday", "afternoon", "evening"]), {}, :class => 'form-control form-control-md selectbox'
+                      .row
+                        .col-md-12.form-group
+                          .submit
+                            = f.submit "Confirm my booking", class: 'btn btn-black btn-block'
+
+        .content-wrapper.col-md-8
+          .content-area
+            .row
+              .intro-txt.col-md-12
+                h3 Get styled by a professional stylist
+                p.title-note
+                  | (no purchase required)
                 p
-                  | It's easy to find the perfect outfit with the Fame and Partners crew on standby. Access your complimentary video session now.
-                .form-global
-                  = form_for @style_session, url: style_session_path, method: :post, html: {class: 'form'} do |f|
-                    = f.hidden_field :session_type
-                    .row
-                      .col-md-12.form-group
-                        label Full name
-                        = f.text_field :full_name, :class => 'form-control form-control-md'
-                    .row
-                      .col-md-12.form-group
-                        label Email
-                        = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
-                    .row
-                      .col-md-12.form-group
-                        label Phone
-                        = f.text_field :phone, :class => 'form-control form-control-md'
-                        p.hint
-                          | (include country code)
-                    .row
-                      .col-md-12.form-group
-                        label date of birth
-                        = f.text_field :dob, type: 'date', :class => 'form-control form-control-md'
-                    .row
-                      .col-md-12.form-group
-                        label timezone
-                        /TODO: Replace it with an autocomplete input, like Select2
-                        = f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, {}, :class => 'form-control form-control-md selectbox'
-                    .row
-                      .col-md-12.form-group
-                        label 1st preferred time for the session
-                        = f.select :preference1, options_for_select(["morning", "midday", "afternoon", "evening"]), {}, :class => 'form-control form-control-md selectbox'
-                    .row
-                      .col-md-12.form-group
-                        label 2nd preferred time for the session
-                        = f.select :preference2, options_for_select(["morning", "midday", "afternoon", "evening"]), {}, :class => 'form-control form-control-md selectbox'
-                    .row
-                      .col-md-12.form-group
-                        label 3rd preferred time for the session
-                        = f.select :preference3, options_for_select(["morning", "midday", "afternoon", "evening"]), {}, :class => 'form-control form-control-md selectbox'
-                    .row
-                      .col-md-12.form-group
-                        .submit
-                          = f.submit "Confirm my booking", class: 'btn btn-black btn-block'
+                  | Whether you have nothing to wear on an event or simply want some fresh ideas, we're on deck to guide you through all your wardrobe challenges. <br />No obligation, just some good advice.
+                p
+                  | Our professional stylist can help you answer these questions:
+            .row
+              .question-boxes
+                .item-wrapper.col-md-4
+                  .item
+                    p.question
+                      | "What should I wear to an <span class="highlight">outdoor summer wedding</span> in Palm Spring?"
+                    span.author Hanna C, NJ
 
-        .content-area.col-md-8
-          .row
-            .intro-txt.col-md-12
-              h3 How to get styled by a professional stylist
-              p.note (no purchase required)
-              p
-                | Whether you have nothing to wear on an event or simply want some fresh ideas, we're on deck to guide you through all your wardrobe challendes. No obligation, just some good advice.
-              p
-                | Our professional stylist can help you answer these questions:
-          .row
-            .question-boxes
-              .item.col-md-4
-                p.question
-                  | "What should I wear to an <span class="highlight">outdoor summer wedding</span> in Palm Spring?"
-                span.author Hanna C, NJ
+                  .item
+                    p.question
+                      | "It's <span class="highlight">black tie</span> - but I don't want to look basic"
+                    span.author Hanna B, NJ
 
-              .item.col-md-4
-                p.question
-                  | "<span class="highlight">Biker boots</span> or <span class="highlight">stilettos?</span>"
-                span.author Romy S, WA
+                  .item-img
+                    = image_tag "landingpages/styling-session/content-thumb-1.jpg", class: 'thumb', alt: 'Styling Session - Fame & Partners'
 
-              .item.col-md-4
-                | <img src="http://fakeimg.pl/776x758/?text=img" class="thumb img-responsive">
+                  .item
+                    p.question
+                      | "It's <span class="highlight">black tie</span> - but I don't want to look basic"
+                    span.author Hanna B, NJ
 
-              .item.col-md-4
-                p.question
-                  | "It's <span class="highlight">black tie</span> - but I don't want to look basic"
-                span.author Hanna B, NJ
+                .item-wrapper.col-md-4
+                  .item
+                    p.question
+                      | "<span class="highlight">Biker boots</span> or <span class="highlight">stilettos?</span>"
+                    span.author Romy S, WA
 
-              .item.col-md-4
-                | <img src="http://fakeimg.pl/776x758/?text=img" class="thumb img-responsive">
+                  .item-img
+                    = image_tag "landingpages/styling-session/content-thumb-2.jpg", class: 'thumb', alt: 'Styling Session - Fame & Partners'
 
-              .item.col-md-4
-                p.question
-                  | "What should I wear to an <span class="highlight">outdoor summer wedding</span> in Palm Spring?"
-                span.author Hanna C, NJ
+                  .item
+                    p.question
+                      | "What should I wear to an <span class="highlight">outdoor summer wedding</span> in Palm Spring?"
+                    span.author Hanna C, NJ
 
-              .item.col-md-4
-                | <img src="http://fakeimg.pl/776x758/?text=img" class="thumb img-responsive">
+                  .item-img
+                    = image_tag "landingpages/styling-session/content-thumb-3.jpg", class: 'thumb', alt: 'Styling Session - Fame & Partners'
 
-              .item.col-md-4
-                p.question
-                  | "I want to <span class="highlight">strike the balance</span> between sexy and classy"
-                span.author Eliza D, NY
+                .item-wrapper.col-md-4
+                  .item-img
+                    = image_tag "landingpages/styling-session/content-thumb-4.jpg", class: 'thumb', alt: 'Styling Session - Fame & Partners'
 
-              .item.col-md-4
-                p.question
-                  | "It's <span class="highlight">black tie</span> - but I don't want to look basic"
-                span.author Hanna B, NJ
+                  .item
+                    p.question
+                      | "I want to <span class="highlight">strike the balance</span> between sexy and classy"
+                    span.author Eliza D, NY
 
-              .item.col-md-4
-                p.question
-                  | "Can I match <span class="highlight">black pumps</span> with my IRIS dress?"
-                span.author Alex M, CA
+                  .item
+                    p.question
+                      | "Can I match <span class="highlight">black pumps</span> with my IRIS dress?"
+                    span.author Alex M, CA
 
-              .item.col-md-4
-                | <img src="http://fakeimg.pl/776x758/?text=img" class="thumb img-responsive">
-
-              .item.col-md-4
-                p.question
-                  | "It's <span class="highlight">black tie</span> - but I don't want to look basic"
-                span.author Hanna B, NJ
+                  .item
+                    p.question
+                      | "It's <span class="highlight">black tie</span> - but I don't want to look basic"
+                    span.author Hanna B, NJ
