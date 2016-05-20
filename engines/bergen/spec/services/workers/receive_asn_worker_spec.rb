@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'aasm/rspec'
 
+require 'sidekiq/testing/inline'
 require 'engines/bergen/spec/support/return_item_ready_to_process_context'
 
 module Bergen

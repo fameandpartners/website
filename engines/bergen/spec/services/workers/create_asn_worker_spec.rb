@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'aasm/rspec'
 
+require 'sidekiq/testing/inline'
 require 'engines/bergen/spec/support/return_item_ready_to_process_context'
 
 module Bergen
@@ -9,9 +10,11 @@ module Bergen
       include_context 'return item ready to process'
 
       let(:worker) { described_class.new }
+      let(:asn_date) { Date.parse('10/10/2016') } # Simple Date.today call. No need for TimeCop
 
       before(:each) do
         return_item_process.style_master_was_created!
+        allow(Date).to receive(:today).and_return(asn_date)
       end
 
       context 'given a return item process id' do
