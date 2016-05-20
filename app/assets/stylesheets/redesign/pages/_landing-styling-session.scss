@@ -26,6 +26,8 @@
   }
 
   .page-title {
+    background-color: $c-neutral-white;
+
     h1 {
       margin: 0;
       padding-top: 60px;
@@ -42,6 +44,7 @@
     .header-image-right {
       padding: 0;
     }
+
   }
 
   .side-content,
@@ -73,6 +76,7 @@
         font-style: italic;
         font-size: 2rem;
       }
+
     }
 
     .form-area {
@@ -97,10 +101,13 @@
       .chosen-container {
         width: 100% !important;
       }
+
     }
+
   }
 
   .form-global {
+
     label {
       font-style: italic;
     }
@@ -110,6 +117,7 @@
       font-style: italic;
       font-size: 1.5rem;
     }
+
   }
 
   .content-area {
@@ -135,9 +143,11 @@
         margin-bottom: 30px;
         font-size: 2rem;
       }
+
     }
 
     .question-boxes {
+
       .item {
         position: relative;
         padding: 20px;
@@ -156,6 +166,7 @@
           content: " ";
           pointer-events: none;
         }
+
       }
 
       .item,
@@ -178,6 +189,63 @@
       .highlight {
         font-style: italic;
       }
+
     }
+
   }
+
+}
+
+@media (max-width: $bootstrap-md-width - 1px) {
+
+  .landing-page-styling-session {
+
+    .page-title {
+      text-align: center;
+    }
+
+    .side-content {
+
+      &.meet {
+        background-color: $c-neutral-white;
+      }
+
+      .form-area {
+        text-align: center;
+
+        h3 {
+          margin-top: 15px;
+          padding-top: 0;
+          border-top: none;
+        }
+
+        p {
+          font-size: 1.9rem;
+        }
+
+      }
+
+    }
+
+    .content-area {
+      padding-right: 15px;
+      padding-left: 15px;
+
+      .question-boxes {
+        p.question {
+          font-size: 2rem;
+          line-height: 2.5rem;
+        }
+
+      }
+
+    }
+
+    .meet-stylist,
+    .content-area {
+      padding-top: 30px;
+    }
+
+  }
+
 }
