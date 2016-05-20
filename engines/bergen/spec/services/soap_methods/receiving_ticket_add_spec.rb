@@ -1,12 +1,11 @@
 require 'spec_helper'
 
+require 'engines/bergen/spec/support/return_item_ready_to_process_context'
+
 module Bergen
   module SoapMethods
     RSpec.describe ReceivingTicketAdd, :vcr do
-      let(:order) { create(:complete_order_with_items) }
-      let(:line_item) { order.line_items.first }
-      let(:order_return_request) { create(:order_return_request, order: order) }
-      let(:return_request_item) { create(:return_request_item, order_return_request: order_return_request, line_item: line_item) }
+      include_context 'return item ready to process'
 
       let(:savon_client) { SavonClient.new }
       let(:soap_method) { described_class.new(savon_client: savon_client, return_request_item: return_request_item) }
@@ -15,7 +14,7 @@ module Bergen
         context 'successfully creates' do
           it do
             expect(soap_method.result).to eq({
-                                               receiving_ticket_id: 'WHRTN915364'
+                                               receiving_ticket_id: 'WHRTN1044584'
                                              })
           end
         end
