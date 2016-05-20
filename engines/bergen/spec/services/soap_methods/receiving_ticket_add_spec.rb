@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-require 'engines/bergen/spec/support/return_item_ready_to_process_context'
+require_relative '../../support/return_item_ready_to_process_context'
 
 module Bergen
   module SoapMethods
