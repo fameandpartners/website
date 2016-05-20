@@ -161,7 +161,6 @@ z-index levels
 @import 'redesign/index';
 @import 'redesign/modal';
 @import 'redesign/flash_slider';
-@import 'redesign/faqs';
 @import 'redesign/terms';
 @import 'redesign/login';
 @import 'redesign/sale_lp';
@@ -198,6 +197,7 @@ z-index levels
 @import 'redesign/components/lists';
 @import 'redesign/components/delivery';
 @import 'redesign/components/tabs';
+@import 'redesign/components/nav-pill';
 @import 'redesign/components/dropdowns';
 @import 'redesign/components/breadcrumb';
 @import 'redesign/components/media';
@@ -218,6 +218,7 @@ z-index levels
 
 // Pages
 @import 'redesign/pages/contact';
+@import 'redesign/pages/faq';
 @import 'redesign/pages/moodboard';
 @import 'redesign/pages/moodboard-edit';
 @import 'redesign/pages/landing-dhd';

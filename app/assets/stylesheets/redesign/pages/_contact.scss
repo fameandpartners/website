@@ -13,12 +13,9 @@
     margin-bottom: 20px;
   }
 
-  a:not(.btn) {
-    color: inherit;
-  }
-
   p a {
     text-decoration: underline;
+    color: inherit;
   }
 
   optgroup {
@@ -49,38 +46,6 @@
 
   .enquiry-wrap .tab-pane {
     margin-top: 20px;
-  }
-
-  .nav-pill {
-
-    li {
-      border-left: 2px solid $c-neutral-white;
-
-      &:first-child {
-        border-left: none;
-      }
-
-    }
-
-    a {
-      padding: 10px;
-      text-transform: uppercase;
-      text-align: center;
-      font-size: 0.75em;
-      background: $c-neutral-2;
-
-      &:hover,
-      &:focus {
-         background: $c-neutral-4;
-      }
-
-    }
-
-    .active a {
-      color: $c-neutral-white;
-      background: $c-brand-blue;
-    }
-
   }
 
   .faq-wrap {
