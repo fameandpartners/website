@@ -68,8 +68,11 @@
     }
 
     p,
-    ul {
+    ul,
+    ol {
       font-size: 0.875em;
+      font-weight: normal;
+      color: $c-neutral-10;
     }
 
     .panel-group {
