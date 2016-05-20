@@ -10,6 +10,13 @@ Feature: Browse and Purchase
     And Search for "Non Existing Dress"
     Then I should see "We couldn't find the stuff you were looking for."
 
+  # Regression test for: https://github.com/fameandpartners/website/pull/1637
+  @javascript
+  Scenario: Search For Empty String
+    When I visit the "/" path
+    And Search for an empty string
+    Then I should see "RESULTS FOR"
+
   @javascript
   Scenario: Search For Existent Dress
     When I visit the "/" path
@@ -33,4 +40,4 @@ Feature: Browse and Purchase
     Then I should see "$0 - $199"
     Then I should see "$200 - $299"
     Then I should see "$300 - $399"
-    Then I should see "$400+"
+    #Then I should see "$400+"

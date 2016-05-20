@@ -8,7 +8,6 @@ gem 'slim'
 gem 'slim-rails'
 gem 'configatron'
 gem 'paperclip'
-gem 'createsend', '~> 2.5.0'
 gem 'sidekiq', '2.13.0'
 gem 'timers', '1.1.0'
 gem 'whenever'
@@ -28,7 +27,7 @@ gem 'redcarpet', '~> 2.3.0'
 # Monitoring & Events
 gem 'newrelic_rpm'
 gem 'sentry-raven'
-gem 'customerio'
+gem 'customerio', '~> 1.0.0'
 
 # Engines
 path 'engines' do
@@ -36,6 +35,7 @@ path 'engines' do
   gem 'admin_ui'
   gem 'fame_favicon'
   gem 'inspinia-rails'
+  gem 'bergen'
 end
 
 # TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it,
@@ -138,13 +138,14 @@ group :test do
   gem 'capybara', '~> 2.5.0'
   gem 'capybara-screenshot', '~> 1.0.11'
   gem 'poltergeist', '~> 1.9.0'
-  gem 'selenium-webdriver', '~> 2.50.0'
+  gem 'selenium-webdriver', '~> 2.53.0'
   gem 'show_me_the_cookies', '~> 3.1.0'
   gem 'turnip', '~> 1.3.1'
   gem 'database_cleaner', '0.9.1'
   gem 'factory_girl_rails', '4.2.1'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-collection_matchers'
+  gem 'rspec-retry'
   gem 'shoulda-matchers'
   gem 'timecop'
   gem 'vcr', '~> 2.9.3'

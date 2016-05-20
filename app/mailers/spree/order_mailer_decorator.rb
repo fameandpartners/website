@@ -34,9 +34,9 @@ Spree::OrderMailer.class_eval do
         subject:            subject,
         order_number:       @order.number,
         line_items:         line_items,
-        display_item_total: @order.display_item_total,
+        display_item_total: @order.display_item_total.to_s,
         adjustments:        adjustments,
-        display_total:      @order.display_total,
+        display_total:      @order.display_total.to_s,
         auto_account:       user && user.automagically_registered?,
         today:              Date.today.to_formatted_s(:long)
       )
@@ -65,11 +65,11 @@ Spree::OrderMailer.class_eval do
         email_to:                       "team@fameandpartners.com",
         subject:                        subject,
         line_items:                     line_items,
-        display_item_total:             @order.display_item_total,
+        display_item_total:             @order.display_item_total.to_s,
         promotion:                      @order_presenter.promotion?,
         promocode:                      @order_presenter.promo_codes.join(', '),
         adjustments:                    adjustments,
-        display_total:                  @order.display_total,
+        display_total:                  @order.display_total.to_s,
         # TODO: additional products info was a bridesmaid reference.
         additional_products_info:       false,
         additional_products_info_data:  [],

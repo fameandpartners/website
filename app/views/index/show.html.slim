@@ -5,10 +5,10 @@ ruby:
   /! Hero Carousel
   = render 'shared/redesign/collection_hero_carousel'
 
-  section.competition-banner
-    .container
-      = link_to partners_in_crime_competition_path, class: 'media-wrap'
-        img src="/assets/competition_banner/CompetitionBanner-apr-13-full.jpg" srcset="/assets/competition_banner/CompetitionBanner-apr-13-med.jpg 768w, /assets/competition_banner/CompetitionBanner-apr-13-full.jpg 1024w" alt='Partners in Crime'
+  /section.competition-banner
+  /  .container
+  /    = link_to la_belle_epoque_collection_path, class: 'media-wrap'
+  /      img src="/assets/competition_banner/CollectionBanner-apr-26-full.jpg" srcset="/assets/competition_banner/CollectionBanner-apr-26-med.jpg 768w, /assets/competition_banner/CollectionBanner-apr-26-full.jpg 1024w" alt='La Belle Epoque'
   //
     - if sale_active?
       section.banner-sale`
@@ -22,21 +22,17 @@ ruby:
     .row.aside-single-tile
       .main.col-md-7
         = render 'shared/redesign/tabs_collection'
-        = link_to best_sellers_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/CategoryTile01.jpg', alt: 'The all time, best seller. - Shop the BACKLESS DREAMER'
-        = link_to dresses_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/CategoryTile02.jpg', alt: 'Same, same. But different. Get CUSTOMIZING'
+        = link_to build_taxon_path('Embellishment'), class: 'media-wrap'
+          = image_tag 'home-page-tiles/Category01-may-4.jpg', alt: "It's all in the details"
+        = link_to build_taxon_path('Two Piece'), class: 'media-wrap'
+          = image_tag 'home-page-tiles/CategoryTile-01-may-4.jpg', alt: 'Cause two is better than one'
 
       aside.col-md-5
         .outer-wrap
-          = link_to colour_path('Black')
+          = link_to partners_in_crime_competition_path
             picture.media-wrap
               .inner-wrap
-                source media='(max-width: 1023px)' srcset='#{image_path("home-page-tiles/CategoryTile03-mob.jpg")}'
-                source media='(min-width: 1024px)' srcset='#{image_path("home-page-tiles/CategoryTile03.jpg")}'
-                img src='#{image_path("home-page-tiles/CategoryTile03.jpg")}' srcset='
-                  #{image_path("home-page-tiles/CategoryTile03-mob.jpg")} 1023w,
-                  #{image_path("home-page-tiles/CategoryTile03.jpg")} 1024w' alt='Midnight is Calling - Shop the BLACK EDIT'
+                img src='#{image_path("home-page-tiles/Category03-may-4.jpg")}' alt='Partners in Crime'
 
 
   section.carousel-strap.instagram

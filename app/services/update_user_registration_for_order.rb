@@ -50,9 +50,7 @@ class Services::UpdateUserRegistrationForOrder
       @order.save(validate: false)
       @order.errors.clear
     else
-      @user.errors.messages.each do |field, messages|
-        @order.errors.add(field, *messages)
-      end
+      @order.errors.messages.merge!(@user.errors.messages)
     end
   end
 

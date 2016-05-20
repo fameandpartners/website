@@ -161,16 +161,16 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
   getSelectedValues: () ->
     bodyshapeArray = []
-    colourArray = []
+    colorArray = []
     styleArray = []
 
     if $("#collapse-color .js-filter-all input:not(:checked)")
       colorInputs = $("#collapse-color input:not(.js-filter-all):checked")
       for colorInput in colorInputs
-        colourArray.push($(colorInput).attr("name"))
-      colour = $("#other-colors option:selected").attr("name")
-      if colour != "none"
-        colourArray.push(colour)
+        colorArray.push($(colorInput).attr("name"))
+      color = $("#other-colors option:selected").attr("name")
+      if color != "none"
+        colorArray.push(color)
 
     if $("#collapse-bodyshape .js-filter-all input:not(:checked)")
       bodyshapeInputs = $("#collapse-bodyshape input:not(.js-filter-all):checked")
@@ -184,7 +184,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     filter =  {
       bodyshape: bodyshapeArray,
-      colour: colourArray,
+      color: colorArray,
       style: styleArray,
       order: @productOrderInput.val()
       q:         getUrlParameter("q")?.replace(/\+/g," ")

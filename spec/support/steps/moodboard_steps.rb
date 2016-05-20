@@ -2,21 +2,21 @@ module Acceptance
   module MoodboardSteps
     step 'I add ":dress_name" to my moodboard' do |dress_name|
       within('.details') do
-        expect(page).to have_content(dress_name.upcase)
-        click_link '+moodboard'
-        click_link 'Wishlist'
-      end
-    end
+        expect(page).to have_text(dress_name.upcase)
 
-    step 'I should see the dress added to the moodboard' do
-      within('.details') do
+        expect(page).to have_text('moodboard')
+        click_link 'moodboard'
+
+        expect(page).to have_text('Wishlist')
+        click_link 'Wishlist'
+
         expect(page).to have_selector('i.fa-check')
       end
     end
 
     step 'I remove ":dress_name" from my moodboard' do |dress_name|
       within('.panel-product') do
-        expect(page).to have_content(dress_name)
+        expect(page).to have_text(dress_name)
         find('a', text: 'Remove').click
       end
     end
@@ -27,7 +27,7 @@ module Acceptance
 
     step 'I should have ":dress_name" on my moodboard' do |dress_name|
       send 'I view my moodboard'
-      expect(page).to have_content(dress_name)
+      expect(page).to have_text(dress_name)
     end
   end
 end

@@ -143,7 +143,7 @@ $fg-screen-sm: 480px;
       background-color: rgba(0, 0, 0, 0.05);
     }
     tr{
-      td:nth-child(2),td:nth-child(5),td:nth-child(7),td:nth-child(9){
+      td:nth-child(2),td:nth-child(4),td:nth-child(6),td:nth-child(8){
         border-right: 1px solid $c-neutral-9;
       }
     }
@@ -165,11 +165,6 @@ $fg-screen-sm: 480px;
       padding: 2px;
     }
 
-    // - hide 'Size DE'
-    td[data-title]:nth-child(3),
-    td.sub-heading:nth-child(3) {
-      display: none !important;
-    }
   }
 
   @include iphone5 {

@@ -13,8 +13,12 @@ class Products::BaseController < ApplicationController
     load_filters
     @collection = search_results
     append_gtm_collection(@collection)
-
-    render :search
+    respond_to do |format|
+      format.html { render :search }
+      format.json do
+        render json: @collection.serialize
+      end
+    end
   end
 
   def search_for_product_not_found
@@ -33,21 +37,14 @@ class Products::BaseController < ApplicationController
   end
 
   def search_results
-    if search_performed?
-      Products::CollectionResource.new({
-                                         site_version: current_site_version,
-                                         query_string: params[:q],
-                                         limit:        50
-                                       }).read
-    else
-      []
-    end
-  rescue StandardError
+    Products::CollectionResource.new({
+                                       site_version: current_site_version,
+                                       query_string: params[:q],
+                                       limit:        50
+                                     }.merge(params.symbolize_keys)).read
+  rescue StandardError => e
+    NewRelic::Agent.notice_error(e)
     []
-  end
-
-  def search_performed?
-    params[:q].present?
   end
 
   def load_filters

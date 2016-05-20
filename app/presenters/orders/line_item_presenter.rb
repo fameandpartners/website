@@ -81,7 +81,8 @@ module Orders
 
     def projected_delivery_date
       return unless wrapped_order.order.completed?
-      @projected_delivery_date ||= Policies::LineItemProjectedDeliveryDatePolicy.new(@item, @wrapped_order).delivery_date.try(:to_date)
+      @projected_delivery_date ||= Policies::LineItemProjectedDeliveryDatePolicy.new(
+        @wrapped_order.order.completed_at, @item.fast_making?).delivery_date.try(:to_date)
     end
 
     def fabrication_status
@@ -279,7 +280,6 @@ module Orders
     end
 
     private
-
 
     def standard_variant_for_custom_color
       return unless personalizations?
