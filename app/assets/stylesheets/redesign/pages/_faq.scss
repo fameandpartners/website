@@ -23,8 +23,20 @@
     margin-bottom: 30px;
   }
 
+  .faq-wrap {
+
+    p,
+    ul,
+    ol {
+      font-size: 0.875em;
+      font-weight: normal;
+      color: $c-neutral-10;
+    }
+
+  }
+
   aside {
-    padding: 20px;
+    padding: 20px 20px 40px 20px;
     background: $c-neutral-3;
 
     .h5 {
@@ -37,16 +49,19 @@
     [class^="icon-"] {
       float: left;
       width: 50%;
+      padding-top: 15px;
       text-align: center;
 
       &:before {
-        font-size: 32px;
+        font-size: 24px;
       }
 
       span {
         display: block;
+        margin-top: 5px;
         font-family: $font-family-secondary;
-        font-size: 1.6rem;
+        font-size: 1.4rem;
+        font-weight: bold;
       }
 
     }
@@ -76,12 +91,5 @@
 
   }
   // END - mobile
-
-  // START - desktop
-  @media (min-width: $bootstrap-md-width) {
-
-
-  }
-  // END - desktop
 
 }
