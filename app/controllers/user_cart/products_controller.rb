@@ -19,7 +19,6 @@ class UserCart::ProductsController < UserCart::BaseController
       }
     )
     result = cart_populator.populate
-    variant_sku
 
     if result.success
       if spree_user_signed_in? && current_order.user.nil?
