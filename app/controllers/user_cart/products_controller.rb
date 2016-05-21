@@ -107,5 +107,7 @@ class UserCart::ProductsController < UserCart::BaseController
       size = variant.class.size_option_type.option_values.find(params[:size_id])
       color = variant.class.color_option_type.option_values.find(params[:color_id])
       VariantSku.sku_from_variant(variant, size, color)
+    rescue
+      variant.sku
     end
 end
