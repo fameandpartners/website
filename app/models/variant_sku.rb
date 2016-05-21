@@ -14,6 +14,10 @@ class VariantSku
     variant.sku.to_s.upcase
   end
 
+  def regenerate_sku
+    "#{style_number}#{size}#{color}#{custom}"
+  end
+
   def style_number
     variant.product.master.sku.to_s.upcase
   end

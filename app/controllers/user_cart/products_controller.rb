@@ -19,6 +19,7 @@ class UserCart::ProductsController < UserCart::BaseController
       }
     )
     result = cart_populator.populate
+    variant_sku
 
     if result.success
       if spree_user_signed_in? && current_order.user.nil?
@@ -47,6 +48,7 @@ class UserCart::ProductsController < UserCart::BaseController
       data = add_analytics_labels(@user_cart.serialize)
 
       flash[:variant_id_added_to_cart] = params[:variant_id]
+      flash[:variant_sku] = variant_sku
 
       respond_with(@user_cart) do |format|
         format.json   {
@@ -99,5 +101,14 @@ class UserCart::ProductsController < UserCart::BaseController
       end
 
       data
+    end
+
+    def variant_sku
+      # variant = Spree::Variant.find(params[:variant_id])
+      # size = variant.class.size_option_type.option_values.find(params[:size_id])
+      # color = variant.class.color_option_type.option_values.find(params[:color_id])
+      # variant.option_values << size unless variant.option_values.exists? size
+      # variant.option_values << color unless variant.option_values.exists? color
+      # VariantSku.new(variant).regenerate_sku
     end
 end

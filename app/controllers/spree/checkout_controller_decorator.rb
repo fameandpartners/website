@@ -325,6 +325,7 @@ Spree::CheckoutController.class_eval do
     if (variant_id = flash[:variant_id_added_to_cart])
       product           = Spree::Variant.find(variant_id).product
       product_presenter = product.presenter_as_details_resource(current_site_version)
+      product_presenter.sku = flash[:variant_sku]
 
       append_gtm_event(event_name: 'addToCart')
       append_gtm_product(product_presenter: product_presenter)
