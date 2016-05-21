@@ -66,7 +66,7 @@
 
     .meet-stylist {
       h4 {
-        margin: 0;
+        margin: 45px 0 0;
         font-size: 4.5rem;
         line-height: 3.5rem;
       }
@@ -208,6 +208,15 @@
 
       &.meet {
         background-color: $c-neutral-white;
+      }
+
+      .meet-stylist {
+
+        h4 {
+          margin-top: 15px;
+          font-size: 3rem;
+        }
+
       }
 
       .form-area {
