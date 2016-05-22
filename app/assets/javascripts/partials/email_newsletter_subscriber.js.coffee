@@ -16,20 +16,23 @@ window.page.EmailNewsletterSubscriber = class EmailNewsletterSubscriber
     $this = $(e.target)
     url = $('.js-en-field-mailchimp', $this)[0].value
     email = $('.js-en-field-email', $this)[0].value
-    $.getJSON(url, $this.serialize(), @handler)
     $.ajax
+      dataType: 'json'
       url: url
-      method: 'GET'
+      async: true
       data: { email: email }
+      success: @handler
 
   handler: (data) =>
-    if (data.Status == 400)
-      @failure(data)
-    else
+    if (data.status == 'done')
       @success(data)
+    else
+      @failure(data)
 
-  failure: (data) =>
-    window.helpers.showAlert(message: data.Message, timeout:5555)
+  failure: =>
+    title = 'Sorry'
+    message = 'Please check if you entered a valid email address and try again.'
+    window.helpers.showAlert(message: message, type: 'warning', title: title, timeout: 55555)
     window.track.event('Newsletter', 'Error', @campaign)
 
   success: =>
