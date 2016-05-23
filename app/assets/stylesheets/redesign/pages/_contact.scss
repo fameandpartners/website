@@ -28,23 +28,6 @@
 
   }
 
-  .affix-top {
-    position: relative;
-  }
-
-  .affix {
-    top: 30px;
-  }
-
-  .affix, 
-  .affix-bottom {
-    width: 213px;
-  }
-
-  .affix-bottom {
-    position: absolute;
-  }
-
   .details-wrap {
     margin-bottom: 30px;
   }
@@ -99,14 +82,6 @@
 
     }
 
-    @media (min-width: $bootstrap-md-width) {
-      width: 370px;
-    }
-
-    @media (min-width: $bootstrap-lg-width) {
-      width: 457px; //  this needs to have set width because position fixed, see .affix
-    }
-
   }
 
   // START - mobile
@@ -126,11 +101,42 @@
   // START - desktop
   @media (min-width: $bootstrap-md-width) {
 
+    .affix-top {
+      position: relative;
+    }
+
+    .affix {
+      top: 30px;
+    }
+
+    .affix, 
+    .affix-bottom {
+      width: 213px;
+    }
+
+    .affix-bottom {
+      position: absolute;
+    }
+
     .details-wrap {
       padding-right: 20%;
     }
 
+    .faq-wrap {
+      width: 370px; //  this needs to have set width because position fixed, see .affix
+    }
+
   }
   // END - desktop
+
+  // START - large desktop
+  @media (min-width: $bootstrap-lg-width) {
+
+    .faq-wrap {
+      width: 457px; //  this needs to have set width because position fixed, see .affix
+    }
+
+  }
+  // END - large desktop
 
 }
