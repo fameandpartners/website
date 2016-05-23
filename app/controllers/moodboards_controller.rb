@@ -1,10 +1,15 @@
 class MoodboardsController < ApplicationController
+  before_filter :set_go_to_mb_page, only: [:index]
   before_filter :authenticate_spree_user!
 
   respond_to :js, :html
 
   rescue_from ActiveRecord::RecordNotFound do
     redirect_to moodboards_url, alert: "Sorry babe, we couldn't find that, here's your regular moodboard."
+  end
+
+  def set_go_to_mb_page
+    session[:nonlogin_go_to_mb_page] = true if !current_spree_user
   end
 
   def new
