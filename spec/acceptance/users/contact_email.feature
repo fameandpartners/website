@@ -11,7 +11,7 @@ Feature: Contact Form
       | Last name    | Doe                        |
       | Email        | johndoe@gmail.com          |
       | Phone        | 1234567                    |
-      | Your Message | Lorem Ipsum Dolor Sit Amet |
+      | Your enquiry | Lorem Ipsum Dolor Sit Amet |
       | Order number | R12345                     |
     And I click on "Send" button
     Then I should see "Thanks!"
