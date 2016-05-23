@@ -62,6 +62,7 @@ module Bergen
         }
       end
 
+      # TODO: checking the notification status is better here. This will raise errors if messages are InvalidAsnError or something similar!! # Aren't receving_status and notification messages the same? Check it
       def item_was_received?
         bergen_ticket_response[:receiving_status] == ADDED_TO_INVENTORY
       end

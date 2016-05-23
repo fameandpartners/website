@@ -22,6 +22,7 @@ module Bergen
 
           it 'marks asn as received' do
             # TODO: check actual status and event sourcing data
+            # TODO: don't forget the MEMO Field!!! it's important!!!
             # expect(worker).to receive(:mark_asn_as_received)
 
             # TODO: refactor! this shouldn't be here! this should live on the spec's context
