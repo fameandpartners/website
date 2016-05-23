@@ -1,8 +1,14 @@
 namespace :moodboard_item do
   task :recalculate => :environment do
-    MoodboardItem.all.each do |moodboard_item|
+    require 'ruby-progressbar'
+    progressbar = ProgressBar.create(total: MoodboardItem.count, format: "%a %e | MoodboardItem %c/%C |%w%i|")
+
+    MoodboardItem.find_each do |moodboard_item|
+      progressbar.increment
       MoodboardItemCalculator.new(moodboard_item).run.save!
     end
+
+    progressbar.finish
   end
 
   desc 'Migrate from WishlistItems'
