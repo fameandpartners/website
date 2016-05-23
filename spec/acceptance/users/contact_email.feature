@@ -12,6 +12,6 @@ Feature: Contact Form
       | Email        | johndoe@gmail.com          |
       | Phone        | 1234567                    |
       | Your enquiry | Lorem Ipsum Dolor Sit Amet |
-    And I click on "Send" button
+    And I click on "submit" button
     Then I should see "Thanks!"
     Then I should see "We won't play hard to get, we'll get back to you ASAP."
