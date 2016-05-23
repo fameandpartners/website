@@ -71,7 +71,7 @@
                   = f.submit 'submit', class: 'btn btn-black btn-block'
 
       aside.col-md-5.col-md-offset-1
-        .faq.faq-wrap.js-faq-wrap data-spy=''
+        .faq.faq-wrap.js-faq-wrap data-spy='affix'
           .tab-content
             .tab-pane.active
               h2.h5 Popular FAQS
@@ -107,9 +107,28 @@
             = link_to 'SEE ALL FAQS', faqs_path
 
   javascript:
-    $('body').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function() {
-      $this = $(this);
-      var $target = $this.parent().next();
-      $this.toggleClass('collapsed');
-      $target.data('bs.collapse') ? $target.collapse('toggle') : $target.collapse();
-    });
+    (function($) {
+
+      $( document ).ready(function() {
+        
+        $('.js-faq-wrap').affix({
+          offset: {
+            top: $('.js-faq-wrap').offset().top - 30,
+            bottom: $('.js-footer').outerHeight(true) + 60
+          }
+        });
+        // refresh on accordion interaction
+        $('.js-faq-wrap').on('hidden.bs.collapse shown.bs.collapse', function (e) {
+          $('.js-faq-wrap').affix('checkPosition');
+        });
+
+      });
+
+      $('body').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function() {
+        $this = $(this);
+        var $target = $this.parent().next();
+        $this.toggleClass('collapsed');
+        $target.data('bs.collapse') ? $target.collapse('toggle') : $target.collapse();
+      });
+
+    })(jQuery);

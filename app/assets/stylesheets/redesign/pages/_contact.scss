@@ -3,6 +3,7 @@
 .contact-us {
 
   h1 {
+    margin: 40px 0;
     text-transform: none;
   }
 
@@ -27,13 +28,17 @@
 
   }
 
-  .affix {
-    position: fixed;
-    top: 0;
+  .affix-top {
+    position: relative;
   }
 
-  .affix-top {
-    position: static;
+  .affix {
+    top: 30px;
+  }
+
+  .affix, 
+  .affix-bottom {
+    width: 213px;
   }
 
   .affix-bottom {
@@ -96,7 +101,6 @@
 
     @media (min-width: $bootstrap-md-width) {
       width: 370px;
-      margin-top: 30px;
     }
 
     @media (min-width: $bootstrap-lg-width) {
