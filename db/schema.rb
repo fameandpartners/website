@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160428204352) do
+ActiveRecord::Schema.define(:version => 20160523121335) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -557,16 +557,17 @@ ActiveRecord::Schema.define(:version => 20160428204352) do
   create_table "moodboard_items", :force => true do |t|
     t.string   "uuid"
     t.integer  "moodboard_id"
-    t.integer  "product_id",             :null => false
+    t.integer  "product_id",                             :null => false
     t.integer  "product_color_value_id"
-    t.integer  "color_id",               :null => false
+    t.integer  "color_id",                               :null => false
     t.integer  "variant_id"
-    t.integer  "user_id",                :null => false
-    t.integer  "likes"
+    t.integer  "user_id",                                :null => false
+    t.integer  "likes",                  :default => 0
     t.text     "comments"
     t.datetime "deleted_at"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "user_likes",             :default => ""
   end
 
   add_index "moodboard_items", ["color_id"], :name => "index_moodboard_items_on_color_id"
