@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Mon, 23 May 2016 16:32:20 GMT
+      - Mon, 23 May 2016 16:42:45 GMT
   response:
     status:
       code: 200
@@ -29,7 +29,7 @@ http_interactions:
       X-Powered-By:
       - ASP.NET
       Date:
-      - Mon, 23 May 2016 16:32:18 GMT
+      - Mon, 23 May 2016 16:42:43 GMT
       Content-Length:
       - '164899'
     body:
@@ -2096,7 +2096,7 @@ http_interactions:
         \     <http:address location=\"https://sync.rex11.com/ws/v3staging/publicapiws.asmx\"
         />\r\n    </wsdl:port>\r\n  </wsdl:service>\r\n</wsdl:definitions>"
     http_version: 
-  recorded_at: Mon, 23 May 2016 16:32:20 GMT
+  recorded_at: Mon, 23 May 2016 16:42:45 GMT
 - request:
     method: post
     uri: https://sync.rex11.com/ws/v3staging/publicapiws.asmx
@@ -2116,7 +2116,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Mon, 23 May 2016 16:32:20 GMT
+      - Mon, 23 May 2016 16:42:45 GMT
       Soapaction:
       - '"http://rex11.com/webmethods/AuthenticationTokenGet"'
       Content-Type:
@@ -2139,50 +2139,42 @@ http_interactions:
       X-Powered-By:
       - ASP.NET
       Date:
-      - Mon, 23 May 2016 16:32:18 GMT
+      - Mon, 23 May 2016 16:42:43 GMT
       Content-Length:
       - '465'
     body:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><AuthenticationTokenGetResponse
-        xmlns="http://rex11.com/webmethods/"><AuthenticationTokenGetResult>RezojbXTBq2CETGUhmK9LQYnS95wNKpdKfbIBzQ2UjqPj9E+jFIy9A==</AuthenticationTokenGetResult></AuthenticationTokenGetResponse></soap:Body></soap:Envelope>
+        xmlns="http://rex11.com/webmethods/"><AuthenticationTokenGetResult>RezojbXTBq2CETGUhmK9LQYnS95wNKpdbZeBvfJp6p7I0E/ONf6ycg==</AuthenticationTokenGetResult></AuthenticationTokenGetResponse></soap:Body></soap:Envelope>
     http_version: 
-  recorded_at: Mon, 23 May 2016 16:32:21 GMT
+  recorded_at: Mon, 23 May 2016 16:42:46 GMT
 - request:
     method: post
     uri: https://sync.rex11.com/ws/v3staging/publicapiws.asmx
     body:
       encoding: UTF-8
-      string: <?xml version="1.0" encoding="UTF-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soap:Body><ReceivingTicketAdd
-        xmlns="http://rex11.com/webmethods/"><AuthenticationString>RezojbXTBq2CETGUhmK9LQYnS95wNKpdKfbIBzQ2UjqPj9E+jFIy9A==</AuthenticationString><receivingTicket
-        xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd"><ReceivingStatus>Draft</ReceivingStatus><ReceivingStatusCode>0</ReceivingStatusCode><CreatedDate>10/10/2016</CreatedDate><Shipmentitemslist><Style
-        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">ABC123</Style><Color
-        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">Red</Color><UPC
-        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">10001</UPC><Size
-        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">AU 4/US 0</Size><ExpectedQuantity
-        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">1</ExpectedQuantity><ActualQuantity
-        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">1</ActualQuantity><DamagedQuantity
-        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">0</DamagedQuantity><ProductMSRP
-        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">123.45</ProductMSRP><ShipmentType
-        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">OPENTOHANG</ShipmentType></Shipmentitemslist><ShipmentTypelist>OPENTOHANG</ShipmentTypelist><Warehouse>BERGEN
-        LOGISTICS NJ2</Warehouse><SupplierDetails><CompanyName xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd">Fame
-        &amp; Partners</CompanyName><State xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd">NY</State><Country
-        xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd">USA</Country></SupplierDetails><Carrier>Truck</Carrier></receivingTicket></ReceivingTicketAdd></soap:Body></soap:Envelope>
+      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://rex11.com/webmethods/"
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="http://rex11.com/webmethods/"
+        xmlns:ins1="http://rex11.com/swpublicapi/ReceivingTicket.xsd" xmlns:ins2="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd"
+        xmlns:ins3="http://rex11.com/swpublicapi/CustomerOrder.xsd" xmlns:ins4="http://rex11.com/swpublicapi/PickTicket.xsd"
+        xmlns:ins5="http://rex11.com/swpublicapi/PickTicketDetails.xsd" xmlns:ins6="http://rex11.com/swpublicapi/PickTicketDetailsItemsInBoxes.xsd"
+        xmlns:ins7="http://rex11.com/swpublicapi/OutBoundPackage.xsd" xmlns:ins8="http://rex11.com/swpublicapi/StyleMasterProduct.xsd"
+        xmlns:ins9="http://rex11.com/webmethods/AbstractTypes"><env:Body><ins0:GetReceivingTicketObjectByTicketNo><ins0:AuthenticationString>RezojbXTBq2CETGUhmK9LQYnS95wNKpdbZeBvfJp6p7I0E/ONf6ycg==</ins0:AuthenticationString><ins0:AsnTicketNumber>WHRTN1044588</ins0:AsnTicketNumber></ins0:GetReceivingTicketObjectByTicketNo></env:Body></env:Envelope>
     headers:
       User-Agent:
       - HTTPClient/1.0 (2.6.0.1, ruby 2.1.6 (2015-04-13))
       Accept:
       - "*/*"
       Date:
-      - Mon, 23 May 2016 16:32:21 GMT
+      - Mon, 23 May 2016 16:42:46 GMT
       Soapaction:
-      - '"http://rex11.com/webmethods/ReceivingTicketAdd"'
+      - '"http://rex11.com/webmethods/GetReceivingTicketObjectByTicketNo"'
       Content-Type:
       - text/xml;charset=UTF-8
       Content-Length:
-      - '1891'
+      - '1143'
   response:
     status:
       code: 200
@@ -2199,15 +2191,43 @@ http_interactions:
       X-Powered-By:
       - ASP.NET
       Date:
-      - Mon, 23 May 2016 16:32:18 GMT
+      - Mon, 23 May 2016 16:42:43 GMT
       Content-Length:
-      - '599'
+      - '3363'
     body:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><ReceivingTicketAddResponse
-        xmlns="http://rex11.com/webmethods/"><ReceivingTicketAddResult><Notifications><Notification><ErrorCode>0</ErrorCode><Severity>Success</Severity><Message>Data
-        saved successfully.</Message></Notification></Notifications><ReceivingTicketId>WHRTN1044588</ReceivingTicketId></ReceivingTicketAddResult></ReceivingTicketAddResponse></soap:Body></soap:Envelope>
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><GetReceivingTicketObjectByTicketNoResponse
+        xmlns="http://rex11.com/webmethods/"><GetReceivingTicketObjectByTicketNoResult><Notifications
+        /><ReceivingTicketByTicketNo><ReceivingTicket><ReceivingStatus xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd">Draft</ReceivingStatus><ReceivingStatusCode
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd">100</ReceivingStatusCode><CreatedDate
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd">5/23/2016 12:32:50
+        PM</CreatedDate><Shipmentitemslist xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd"><Style
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">abc123</Style><Color
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">red</Color><UPC
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">10001</UPC><Size
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">au 4/us 0</Size><ExpectedQuantity
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">1</ExpectedQuantity><ActualQuantity
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">0</ActualQuantity><DamagedQuantity
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">0</DamagedQuantity><UnitCost
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">0</UnitCost><ProductMSRP
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">123.45</ProductMSRP><ShipmentType
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">NA</ShipmentType><ReturnReasonCode
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd" /></Shipmentitemslist><ShipmentTypelist
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd">NA</ShipmentTypelist><Warehouse
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd">BERGEN LOGISTICS
+        NJ2</Warehouse><ExpectedDate xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd">5/10/2016</ExpectedDate><SupplierDetails
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd"><CompanyName xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd">Fame
+        &amp; Partners</CompanyName><Address1 xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd"
+        /><Address2 xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd" /><City
+        xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd" /><State xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd"
+        /><Zip xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd" /><Country xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd">United
+        States</Country><Non_US_Region xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd"
+        /><Phone xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd" /><Fax xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd"
+        /><Email xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd" /></SupplierDetails><Carrier
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd">truck</Carrier><AddedToInventoryDate
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd"> </AddedToInventoryDate><ArrivedDate
+        xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd"> </ArrivedDate></ReceivingTicket></ReceivingTicketByTicketNo></GetReceivingTicketObjectByTicketNoResult></GetReceivingTicketObjectByTicketNoResponse></soap:Body></soap:Envelope>
     http_version: 
-  recorded_at: Mon, 23 May 2016 16:32:21 GMT
+  recorded_at: Mon, 23 May 2016 16:42:46 GMT
 recorded_with: VCR 2.9.3

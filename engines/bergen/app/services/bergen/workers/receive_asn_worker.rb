@@ -5,6 +5,13 @@ module Bergen
     class ReceiveAsnWorker < BaseWorker
       VERIFY_AGAIN_INTERVAL = 3.hours
 
+      ADDED_TO_INVENTORY    = 'AddedToInventory'.freeze
+      DRAFT                 = 'Draft'.freeze
+      PENDING_PRINTING      = 'PendingPrinting'.freeze
+      PRINTED_PENDING_COUNT = 'PrintedPendingCount'.freeze
+
+      # TODO: it's possible it never leave Draft if they never receive the parcel
+
       attr_reader :return_request_item, :return_item_process
 
       def perform(return_item_process_id)
@@ -56,7 +63,7 @@ module Bergen
       end
 
       def item_was_received?
-        bergen_ticket_response[:receiving_status] == 'AddedToInventory'
+        bergen_ticket_response[:receiving_status] == ADDED_TO_INVENTORY
       end
 
       def bergen_ticket_response
