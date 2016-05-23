@@ -386,8 +386,7 @@ FameAndPartners::Application.routes.draw do
   resources :moodboards, except: [:destroy] do
     resources :items, controller: 'moodboard_items', only: [:create, :show, :destroy] do
       member do
-        get :like
-        get :unlike
+        get :like_or_unlike
       end
     end
     resources :collaborators, controller: 'moodboard_collaborators', only: [:create, :index]

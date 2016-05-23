@@ -47,7 +47,7 @@ coffee:
       mb_id = $('#moodboard-id').val()
       id = $(e.target).closest('.panel-product').data('mb-item-id')
       $.ajax(
-        url: ("/moodboards/" + mb_id + "/items/" + id + "/like")
+        url: ("/moodboards/" + mb_id + "/items/" + id + "/like_or_unlike")
         type: 'GET'
         success: (data) ->
           $(".panel-product[data-mb-item-id="+id+"] .like-btn").text("Like ( " + data.likes + " )")

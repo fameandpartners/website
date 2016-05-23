@@ -21,14 +21,13 @@ class MoodboardItemsController < ApplicationController
   end
 
   # TODO - Wrap some logic and UI around this.
-  def like
-    item.events.like.create(user_id: spree_current_user.id)
+  def like_or_unlike
+    if item.user_likes.split(",").include?(spree_current_user.id.to_s)
+      item.events.unlike.create(user_id: spree_current_user.id)
+    else
+      item.events.like.create(user_id: spree_current_user.id)
+    end
     render json: {likes: item.reload.likes}
-  end
-
-  def unlike
-    item.events.unlike.create(user_id: spree_current_user.id)
-    render json: {'status' => 'ok'}
   end
 
   def destroy
