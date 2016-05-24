@@ -46,6 +46,7 @@ module Orders
             (line_attr['size'] || 'Unknown Size')  + " (#{line_attr['site_version']})",
             line_attr['height'] || LineItemPersonalization::DEFAULT_HEIGHT,
             customization_values(line_attr),
+            custom_color(line_attr),
             line_attr['promo_codes'],
             line_attr['email'],
             line_attr['customer_notes'],
@@ -83,6 +84,7 @@ module Orders
         :size,
         :height,
         :customisations,
+        :custom_color,
         :promo_codes,
         :email,
         :customer_notes,
@@ -135,11 +137,14 @@ module Orders
       if line_attr['personalization'].present?
         values = YAML.load(line_attr['customization_value_ids'])
         customs = values.present? ? CustomisationValue.where(id: values).pluck(:presentation) : []
-        customs << ["Custom Color: #{color_name(line_attr)}"] unless line_attr['custom_color']
         customs.join('|')
       else
         'N/A'
       end
+    end
+
+    def custom_color(line_attr)
+      "Custom Color: #{color_name(line_attr)}" if line_attr['personalization'].present? && !line_attr['custom_color'].present?
     end
 
     def delivery_date(line_attr)
