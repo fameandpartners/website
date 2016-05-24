@@ -144,7 +144,7 @@ module Orders
     end
 
     def custom_color(line_attr)
-      "Custom Color: #{color_name(line_attr)}" if line_attr['personalization'].present? && !line_attr['custom_color'].present?
+      color_name(line_attr) if line_attr['personalization'].present? && !line_attr['custom_color'].present?
     end
 
     def delivery_date(line_attr)
