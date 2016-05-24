@@ -323,9 +323,9 @@ Spree::CheckoutController.class_eval do
 
   def data_layer_add_to_cart_event
     if flash[:variant_id_added_to_cart] && flash[:color_id] && flash[:size_id]
-      variant           = Spree::Variant.includes(:product).find(flash[:variant_id_added_to_cart])
-      color             = variant.class.color_option_type.option_values.find(flash[:color_id])
-      size              = variant.class.size_option_type.option_values.find(flash[:size_id])
+      variant = Spree::Variant.includes(:product).find(flash[:variant_id_added_to_cart])
+      color   = variant.class.color_option_type.option_values.find(flash[:color_id])
+      size    = variant.class.size_option_type.option_values.find(flash[:size_id])
 
       append_gtm_event(event_name: 'addToCart')
       append_gtm_variant(variant: variant, color: color, size: size)
