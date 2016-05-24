@@ -14,8 +14,8 @@ class Marketing::CancelOrderTracker
         today:              Date.today.to_formatted_s(:long),
         line_items:         Marketing::OrderPresenter.build_line_items(@order),
         adjustments:        Marketing::OrderPresenter.build_adjustments(@order),
-        display_item_total: @order.display_item_total,
-        display_total:      @order.display_total
+        display_item_total: @order.display_item_total.to_s,
+        display_total:      @order.display_total.to_s
       )
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)

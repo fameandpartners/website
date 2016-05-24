@@ -41,6 +41,10 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
+  def return_to_mb_page
+    session[:spree_user_return_to] = "/moodboards"
+    session[:nonlogin_go_to_mb_page] = nil
+  end
   def facebook
     if request.env["omniauth.error"].present?
       flash[:error] = t("devise.omniauth_callbacks.failure", :kind => auth_hash['provider'], :reason => t(:user_was_not_valid))
@@ -58,6 +62,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       FacebookDataFetchWorker.perform_async(authentication.user.id, auth_hash['uid'], auth_hash['credentials']['token'])
 
       mark_and_track_promo_redemption(authentication.user.email)
+      return_to_mb_page if session[:nonlogin_go_to_mb_page]
       redirect_to after_sign_in_path_for(authentication.user), flash: { just_signed_up: true }
 
     elsif spree_current_user
@@ -94,6 +99,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         sign_up_reason = session.delete(:sign_up_reason)
 
         mark_and_track_promo_redemption(user.email)
+        return_to_mb_page if session[:nonlogin_go_to_mb_page]
         redirect_to after_sign_in_path_for(user), flash: { just_signed_up: true }
       else
         session[:omniauth] = auth_hash.except('extra')

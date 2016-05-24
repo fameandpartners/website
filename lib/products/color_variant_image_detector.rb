@@ -14,7 +14,7 @@ module Products
     private def find_images(matcher:, color_variant:)
       color_variant.images
         .select { |i| i.attachment_file_name.downcase.include? matcher }
-        .sort_by(&:position)
+        .sort_by { |i| i.position.to_i } # Position can be nil, and should be compared as zero
         .collect { |i| i.attachment.url(:large) }
     end
   end
