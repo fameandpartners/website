@@ -7,6 +7,7 @@ module SslRequirement
     return Spree::Config[:allow_ssl_in_development_and_test] if (Rails.env.development? or Rails.env.test?)
   end
 
+  # Source: https://github.com/spree/spree/blob/1-3-stable/core/lib/spree/core/ssl_requirement.rb#L102-L112
   def ensure_proper_protocol
     return true if ssl_allowed?
     if ssl_required? && !request.ssl? && ssl_supported?
