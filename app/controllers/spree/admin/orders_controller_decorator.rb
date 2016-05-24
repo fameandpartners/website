@@ -86,6 +86,7 @@ module Spree
           .gsub("\"spree_orders\"", "o")
           .gsub("\"spree_addresses\"", "sa")
           .gsub("\"spree_products\"", "sp")
+          .gsub("\"products_spree_variants\"", "sp")
           .gsub("\"variants_spree_line_items\"", "sv")
           .gsub("\"fabrications\"", "f")
       end
