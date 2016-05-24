@@ -47,7 +47,8 @@ class UserCart::ProductsController < UserCart::BaseController
       data = add_analytics_labels(@user_cart.serialize)
 
       flash[:variant_id_added_to_cart] = params[:variant_id]
-      flash[:variant_sku] = variant_sku
+      flash[:color_id]                 = params[:color_id]
+      flash[:size_id]                  = params[:size_id]
 
       respond_with(@user_cart) do |format|
         format.json   {
@@ -100,14 +101,5 @@ class UserCart::ProductsController < UserCart::BaseController
       end
 
       data
-    end
-
-    def variant_sku
-      variant = Spree::Variant.find(params[:variant_id])
-      size = variant.class.size_option_type.option_values.find(params[:size_id])
-      color = variant.class.color_option_type.option_values.find(params[:color_id])
-      VariantSku.sku_from_variant(variant, size, color)
-    rescue
-      variant.sku
     end
 end

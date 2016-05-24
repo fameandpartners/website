@@ -1,7 +1,7 @@
 Spree::CheckoutController.class_eval do
   include Marketing::Gtm::Controller::Order
-  include Marketing::Gtm::Controller::Product
   include Marketing::Gtm::Controller::Event
+  include Marketing::Gtm::Controller::Variant
 
   before_filter :prepare_order, only: :edit
   before_filter :set_order_site_version, :only => :update
@@ -322,13 +322,13 @@ Spree::CheckoutController.class_eval do
   # Marketing + GTM
 
   def data_layer_add_to_cart_event
-    if (variant_id = flash[:variant_id_added_to_cart])
-      product           = Spree::Variant.find(variant_id).product
-      product_presenter = product.presenter_as_details_resource(current_site_version)
-      product_presenter.sku = flash[:variant_sku]
+    if flash[:variant_id_added_to_cart] && flash[:color_id] && flash[:size_id]
+      variant           = Spree::Variant.includes(:product).find(flash[:variant_id_added_to_cart])
+      color             = variant.class.color_option_type.option_values.find(flash[:color_id])
+      size              = variant.class.size_option_type.option_values.find(flash[:size_id])
 
       append_gtm_event(event_name: 'addToCart')
-      append_gtm_product(product_presenter: product_presenter)
+      append_gtm_variant(variant: variant, color: color, size: size)
       append_gtm_order(spree_order: current_order)
     end
   end
