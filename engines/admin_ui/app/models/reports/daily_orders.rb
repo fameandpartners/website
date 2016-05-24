@@ -133,7 +133,29 @@ module Reports
                 lower("spree_assets".attachment_file_name) LIKE '%front-crop%'
               LIMIT 1)
           ELSE NULL
-          END as custom_variant_image
+          END as custom_variant_image,
+
+        ( SELECT "spree_assets".id || '/large/' || "spree_assets".attachment_file_name
+          FROM "spree_assets"
+          WHERE
+            (
+              ("spree_assets".viewable_id IN
+                ( SELECT "product_color_values".id
+                  FROM "product_color_values"
+                  WHERE
+                  "product_color_values".product_id = sp.id
+                ) AND "spree_assets".viewable_type = 'ProductColorValue')
+            OR
+              ("spree_assets".viewable_id IN
+                ( SELECT "spree_variants".id
+                  FROM "spree_variants"
+                  WHERE
+                  "spree_variants"."product_id" = sp.id AND "spree_variants"."deleted_at" IS NULL
+                ) AND "spree_assets".viewable_type = 'Spree::Variant')
+            )
+          AND
+            lower("spree_assets".attachment_file_name) LIKE '%front-crop%'
+          LIMIT 1) as product_image
 
         FROM "spree_orders" o
         LEFT OUTER JOIN "spree_line_items" li ON li."order_id" = o."id"

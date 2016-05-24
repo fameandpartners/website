@@ -43,7 +43,8 @@ module AdminUi
               r['email'],
               shipping_address(r).present? ? shipping_address(r) : 'No Shipping Address',
               r['variant_image'],
-              r['custom_variant_image']
+              r['custom_variant_image'],
+              r['product_image']
             ]
           end
         end
@@ -104,7 +105,8 @@ module AdminUi
             :email,
             :shipping_address,
             :variant_image,
-            :custom_variant_image
+            :custom_variant_image,
+            :product_image
           ]
         end
 
