@@ -15,15 +15,9 @@ class StyleSessionsController < ApplicationController
     @style_session = StyleSession.new(params[:style_session])
     if @style_session.valid?
       StyleSessionMailer.email(@style_session).deliver
-      flash[:notice] = "We're on it!"
-      redirect_to success_style_session_path
+      render json: { success: true }
     else
-      new()
-      render action: :new
+      render json: { errors: @style_session.errors }
     end
-  end
-
-  def success
-    title('Thank You', default_seo_title)
   end
 end
