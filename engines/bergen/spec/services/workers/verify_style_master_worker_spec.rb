@@ -42,7 +42,6 @@ module Bergen
           context 'error' do
             it do
               # TODO 'Error handling not implemented yet'
-              # TODO: at least record VCR call
 
               worker.perform(return_item_process.id)
             end

@@ -4446,7 +4446,7 @@ http_interactions:
         xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd" /></Shipmentitemslist><ShipmentTypelist
         xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd">NA</ShipmentTypelist><Warehouse
         xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd">BERGEN LOGISTICS
-        NJ2</Warehouse><ExpectedDate xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd">5/10/2016</ExpectedDate><SupplierDetails
+        NJ2</Warehouse><Memo>Sample Memo Woot</Memo><ExpectedDate xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd">5/10/2016</ExpectedDate><SupplierDetails
         xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd"><CompanyName xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd">Fame
         &amp; Partners</CompanyName><Address1 xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd"
         /><Address2 xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd" /><City
