@@ -89,7 +89,7 @@
                   = f.submit 'submit', class: 'btn btn-black btn-block'
 
       aside.col-md-5.col-md-offset-1
-        .faq.faq-wrap.js-faq-wrap data-spy='affix'
+        .faq.faq-wrap.js-faq-wrap
           .tab-content
             .tab-pane.active
               h2.h5 Popular FAQS
@@ -127,7 +127,7 @@
 
   javascript:
     (function($) {
-
+      /*
       $( document ).ready(function() {
         // set affix
         $('.js-faq-wrap').affix({
@@ -142,7 +142,7 @@
         });
 
       });
-
+      */
       // select control for tabs
       $('.js-can-we-help').on('change', function() {
         $('.js-tab-controls a[href="' + $(this).val() + '"]').tab('show');
