@@ -78,34 +78,34 @@ section.order-details
                   h4 Billing Address
                   ul
                     / TODO Get customer's billing address
-                    li Rebecca Tribecca
-                    li 24 Sequoia Place
-                    li Palo Alto, San Francisco
-                    li 902010 California
+                    li = order.order.billing_address.firstname + " " + order.order.billing_address.lastname
+                    li = order.order.billing_address.address1 + " " + order.order.billing_address.address2
+                    li = order.order.billing_address.city
+                    li = order.order.billing_address.zipcode + " " + order.order.billing_address.state.name
 
                 .shipping-address
                   h4 Shipping Address
                   ul
                     / TODO Get customer's shipping address
-                    li Rebecca Tribecca
-                    li 24 Sequoia Place
-                    li Palo Alto, San Francisco
-                    li 902010 California
+                    li = order.order.shipping_address.firstname + " " + order.order.shipping_address.lastname
+                    li = order.order.shipping_address.address1 + " " + order.order.shipping_address.address2
+                    li = order.order.shipping_address.city
+                    li = order.order.shipping_address.zipcode + " " + order.order.shipping_address.state.name
               .half-column.col-md-6
                 .phone
                   h4 Phone number
                   / TODO Get customer's phone number
-                  span 0477777721321
+                  span = order.order.billing_address.phone
 
                 .email
                   h4 Email
                   / TODO Get customer's e-mail address
-                  span rebeccatribecca@yahoo.com
+                  span = order.order.billing_address.email
 
                 .email
                   h4 Expected delivery date
                   / TODO: Insert real date estimate
-                  span dth-dth of M, YYYY
+                  span = order.order.projected_delivery_date.strftime("%d of %b, %Y")
 
           .row
             .faq-wrapper.col-md-12
@@ -156,7 +156,7 @@ section.order-details
                 p Once the finishing touches have been made to your dress and we are good to go, we'll email you a shipping confirmation.
               .item
                 / TODO: Insert real date estimate
-                h4 3. Expect delivery from XXX-XXX of XXX
+                h4 3. Expect delivery from #{order.order.projected_delivery_date.strftime("%d of %b, %Y")}
                 p You'll be able to track your delivery with your shipping confirmation.
                 a.sidebar-link href='/faqs#collapse-shipping-track'
                   | Learn more about Shipping and Delivery
@@ -174,11 +174,11 @@ section.order-details
               .login-info
                 span.label Login
                 / TODO: Enter real e-mail address
-                span.value rebeccatribecca@yahoo.com
+                span.value = current_spree_user.email
               .pwd-info
                 span.label Password
                 / TODO: Enter real password
-                span.value 123456
+                span.value = current_spree_user.email
               .login-btn
                 a.btn.btn-black href='/profile'
                   | Go to log in
