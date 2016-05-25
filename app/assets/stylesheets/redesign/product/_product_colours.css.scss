@@ -166,6 +166,7 @@ $product-color-taupe:           #dbd2cc;
 $product-color-teal:            #085966;
 $product-color-turquoise:       #1bb2aa;
 $product-color-vibrant-purple:  #9f6ba9;
+$product-color-warm-grey:       #b0a5a5;
 $product-color-watermelon:      #ef525e;
 $product-color-white:           #ffffff;
 $product-color-wine:            #831c2e;
@@ -345,6 +346,7 @@ $product-color-wine:            #831c2e;
 .color-tropical-floral         { @include image-color-selector('TropicalFloral.png'); }
 .color-turquoise               { background-color: $product-color-turquoise; }
 .color-vibrant-purple          { background-color: $product-color-vibrant-purple; }
+.color-warm-grey               { background-color: $product-color-warm-grey; }
 .color-watercolour             { @include image-color-selector('Watercolour.png'); }
 .color-watercolour-camo        { @include image-color-selector('WatercolourCamo.png'); }
 .color-watermelon              { background-color: $product-color-watermelon; }

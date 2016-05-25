@@ -1,6 +1,10 @@
 /* [Moodboard]
 -------------------------------------------------------*/
 .moodboard-v2 {
+  .flash {
+    display: none;
+  }
+  
   $menu-item-height: 80px;
   margin-bottom: 40px;
 
@@ -320,7 +324,7 @@
           display: block;
           margin-bottom: 15px;
         }
-        
+
       }
 
       .menu-wrap .slider-wrap {

@@ -324,7 +324,6 @@
         @include order(1);
 
         .outer-wrap {
-          position: absolute;
           top: 0;
           bottom: 0;
           left: 15px;
@@ -343,8 +342,9 @@
         }
 
         img {
-          width: auto;
-          height: 100%;
+          display: block;
+          max-width: 100%;
+          height: auto
         }
 
       }

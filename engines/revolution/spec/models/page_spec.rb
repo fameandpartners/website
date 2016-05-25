@@ -256,7 +256,7 @@ describe Revolution::Page do
   end
 
   describe '#default_page_limit' do
-    it { expect(page.default_page_limit).to eq 21 }
+    it { expect(page.default_page_limit).to eq 23 }
   end
 
   describe '.limit' do
@@ -265,24 +265,24 @@ describe Revolution::Page do
       before do
         page.params = {}
       end
-      it 'returns 21 when given 0 product_ids' do
+      it 'returns 23 when given 0 product_ids' do
         product_ids = []
-        expect(page.limit(product_ids)).to eq 21
+        expect(page.limit(product_ids)).to eq 23
       end
-      it 'returns 20 when given 1 product_ids' do
+      it 'returns 22 when given 1 product_ids' do
         product_ids = ["451"]
-        expect(page.limit(product_ids)).to eq 20
+        expect(page.limit(product_ids)).to eq 22
       end
-      it 'returns 0 when given 22 product_ids and no offset' do
+      it 'returns 0 when given 23 product_ids and no offset' do
         product_ids = ["451", '1', '2', '3', '4', '5', '6', '7', '8','9','10',
-                       '11', '12', '13',' 14', '15', '16', '17', '18', '19', '20','21']
+                       '11', '12', '13',' 14', '15', '16', '17', '18', '19', '20','21','22']
         expect(page.limit(product_ids)).to eq 0
       end
-      it 'returns 20 when given 22 product_ids and an offset of 21' do
+      it 'returns 19 when given 25 product_ids and an offset of 21' do
         product_ids = ['451', '1', '2', '3', '4', '5', '6', '7', '8','9','10',
-                       '11', '12', '13',' 14', '15', '16', '17', '18', '19', '20','21']
+                       '11', '12', '13',' 14', '15', '16', '17', '18', '19', '20','21','22','23','24']
         page.params = {offset: 21}
-        expect(page.limit(product_ids)).to eq 20
+        expect(page.limit(product_ids)).to eq 19
       end
     end
 

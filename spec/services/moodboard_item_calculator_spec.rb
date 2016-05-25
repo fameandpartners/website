@@ -23,6 +23,8 @@ RSpec.describe MoodboardItemCalculator do
       it { expect(projection.color_id).to               eq event.color_id }
       it { expect(projection.user_id).to                eq event.user_id }
       it { expect(projection.variant_id).to             eq event.variant_id }
+      it { expect(projection.likes).to                  eq 0 }
+      it { expect(projection.user_likes).to             eq "" }
     end
   end
 end
