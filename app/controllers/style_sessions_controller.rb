@@ -3,12 +3,9 @@ class StyleSessionsController < ApplicationController
   layout 'redesign/application'
 
   def new
-    @style_session ||= StyleSession.new(
-      session_type: params[:session_type] || 'default'
-    )
-    title("#{ @style_session.name.capitalize } Style Session", default_seo_title)
-    @banner_text = "your #{ @style_session.name.downcase } styling session"
-    @description = ""
+    @style_session = StyleSession.new
+    title('Style Session', default_seo_title)
+    description('Free one-on-one style advice')
   end
 
   def create
