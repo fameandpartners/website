@@ -33,7 +33,7 @@ module Orders
             line_attr['order_number'],
             line_attr['line_item_id'],
             line_attr['total_items'],
-            line_attr['completed_at_char'],
+            line_attr['completed_at_date'],
             line_attr['fast_making'].present? ? "TRUE" : '',
             delivery_date(line_attr),
             line_attr['tracking_number'],
@@ -148,8 +148,8 @@ module Orders
     end
 
     def delivery_date(line_attr)
-      return unless line_attr['completed_at_char'].present?
-      Policies::LineItemProjectedDeliveryDatePolicy.new(line_attr['completed_at_char'].to_date, line_attr['fast_making']).delivery_date
+      return unless line_attr['completed_at_date'].present?
+      Policies::LineItemProjectedDeliveryDatePolicy.new(line_attr['completed_at_date'].to_date, line_attr['fast_making']).delivery_date
     end
   end
 end
