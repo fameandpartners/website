@@ -1,7 +1,7 @@
 class Contact
   include ActiveModel::Validations
 
-  attr_accessor :first_name, :last_name, :email, :subject, :site_version, :message, :phone, :order_number
+  attr_accessor :first_name, :last_name, :email, :subject, :site_version, :message, :country_code, :phone, :order_number
   attr_accessor :name, :linkedin, :interests, :join_team
 
   validates :site_version, presence: true

@@ -10,7 +10,7 @@ Site: <%= @contact.site_version.upcase %>
 First Name: <%= @contact.first_name %>
 Last Name: <%= @contact.last_name %>
 Email: <%= @contact.email %>
-Phone: <%= @contact.phone %>
+Phone: <%= @contact.country_code + @contact.phone %>
 
 --------------------------------------------
 <%= @contact.message %>
