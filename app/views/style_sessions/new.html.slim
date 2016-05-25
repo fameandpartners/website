@@ -44,7 +44,6 @@
                       | It's easy to find the perfect outfit with the Fame and Partners crew on standby. Access your complimentary video session now.
                   .form-global
                     = form_for @style_session, url: style_session_path, method: :post, html: {class: 'form'} do |f|
-                      = f.hidden_field :session_type
                       .row
                         .col-md-12.form-group
                           label for='style_session_full_name'
@@ -63,8 +62,8 @@
 
                       .row
                         .col-md-12.form-group
-                          label Date of Birth
-                          = f.text_field :dob, type: 'date', :class => 'form-control form-control-md'
+                          label Birthday
+                          = f.text_field :birthday, type: 'date', :class => 'form-control form-control-md'
                       .row
                         .col-md-12.form-group
                           label Select your timezone
