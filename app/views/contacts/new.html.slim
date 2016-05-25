@@ -40,9 +40,17 @@
                     ' Phone number
                   = f.text_field :phone, :class => 'form-control form-control-md'
 
-          h2.h5 WHAT CAN WE HELP WITH?
+          .row.form-group
+            .col-md-6
+              label#can_we_help.h5 WHAT CAN WE HELP WITH?
+              select#can_we_help.form-control.form-control-md.js-can-we-help
+                option value='' Select
+                option value='#panel-making-a-purchase' Making a purchase
+                option value='#panel-exisitng-orders' Existing orders
+                option value='#panel-other-enquiries' Other enquiries
 
-          ul.nav.nav-pill.nav-justified role='tablist'
+          // hidden tab controls
+          ul.nav.nav-pill.nav-justified.js-tab-controls.hide-fully role='tablist'
             li role='presentation'
               a href='#panel-making-a-purchase' data-target='#panel-making-a-purchase, #panel-enquiry, #panel-making-a-purchase-faq' data-toggle='tab' aria-controls='panel-making-a-purchase' role='tab' Making a purchase
             li role='presentation'
@@ -121,7 +129,7 @@
     (function($) {
 
       $( document ).ready(function() {
-        
+        // set affix
         $('.js-faq-wrap').affix({
           offset: {
             top: $('.js-faq-wrap').offset().top - 30,
@@ -135,6 +143,12 @@
 
       });
 
+      // select control for tabs
+      $('.js-can-we-help').on('change', function() {
+        $('.js-tab-controls a[href="' + $(this).val() + '"]').tab('show');
+      });
+
+      // FAQ accordions
       $('body').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function() {
         $this = $(this);
         var $target = $this.parent().next();
