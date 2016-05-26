@@ -85,6 +85,10 @@ window.helpers.ShoppingCart = class ShoppingCart
       dataType: "json"
       data: product_data
     ).success((data) =>
+      added_product = _.find((data.products || []), (product) ->
+        product.variant_id == product_data.variant_id
+      )
+      @trackAddToCart(added_product)
       window.location = '/checkout'
     ).error( () =>
       @trigger('error')
@@ -148,3 +152,20 @@ window.helpers.ShoppingCart = class ShoppingCart
       @trigger('error')
     )
 
+  # analytics
+  trackAddToCart: (product) ->
+    try
+      if @track
+        window.track.addedToCart(product.analytics_label, product)
+
+        if _cio
+          _cio.track("addedToCart", {
+            sku: product.sku,
+            name: product.name,
+            color: product.color.name,
+            size: product.size?.presentation,
+            value: product.price.amount,
+            currency: product.price.currency
+          });
+    catch
+      # do nothing
