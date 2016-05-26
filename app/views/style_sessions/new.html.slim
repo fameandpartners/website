@@ -37,54 +37,67 @@
           .side-content
             .row
               .form-area
-                .col-md-12
+                .col-md-12.not-submitted
                   .intro
                     h3 Style me up!
                     p
                       | It's easy to find the perfect outfit with the Fame and Partners crew on standby. Access your complimentary video session now.
                   .form-global
-                    = form_for @style_session, url: style_session_path, method: :post, html: {class: 'form'} do |f|
+                    = form_for @style_session, url: style_session_path, html: {class: 'form js-en-styling-session-form'} do |f|
                       .row
                         .col-md-12.form-group
                           label for='style_session_full_name'
                             | Full name
-                          = f.text_field :full_name, :placeholder => 'Enter your full name', :class => 'form-control form-control-md', required: 'true'
+                          = f.text_field :full_name, :placeholder => 'Enter your full name', :class => 'form-control form-control-md js-en-field-full-name', required: 'true'
                       .row
                         .col-md-12.form-group
                           label for='style_session_email'
                             | Email
-                          = f.text_field :email, :placeholder => 'Enter your email address', type: 'email', :class => 'form-control form-control-md', required: 'true'
+                          = f.text_field :email, :placeholder => 'Enter your email address', type: 'email', :class => 'form-control form-control-md js-en-field-email', required: 'true'
                       .row
                         .col-md-12.form-group
                           label for='style_session_phone'
                             | Phone <span class="hint">(include country code)</span>
-                          = f.text_field :phone, :placeholder => 'Enter your phone number', :class => 'form-control form-control-md'
+                          = f.text_field :phone, :placeholder => 'Enter your phone number', :class => 'form-control form-control-md js-en-field-phone'
 
                       .row
                         .col-md-12.form-group
                           label Birthday
-                          = f.text_field :birthday, type: 'date', :class => 'form-control form-control-md'
+                          = f.text_field :birthday, type: 'date', :class => 'form-control form-control-md js-en-field-birthday'
                       .row
                         .col-md-12.form-group
                           label Select your timezone
                           /TODO: Replace it with an autocomplete input, like Select2
-                          = f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, {}, :class => 'form-control form-control-md selectbox'
+                          = f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, {}, :class => 'form-control form-control-md selectbox js-en-field-timezone'
                       .row
                         .col-md-12.form-group
                           label Preferred time #1
-                          = f.select :preference1, options_for_select(["morning", "midday", "afternoon", "evening"]), {}, :class => 'form-control form-control-md selectbox'
+                          = f.select :preference1, options_for_select(["morning", "midday", "afternoon", "evening"]), {}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-1'
                       .row
                         .col-md-12.form-group
                           label Preferred time #2
-                          = f.select :preference2, options_for_select(["morning", "midday", "afternoon", "evening"]), {}, :class => 'form-control form-control-md selectbox'
+                          = f.select :preference2, options_for_select(["morning", "midday", "afternoon", "evening"]), {}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-2'
                       .row
                         .col-md-12.form-group
                           label Preferred time #3
-                          = f.select :preference3, options_for_select(["morning", "midday", "afternoon", "evening"]), {}, :class => 'form-control form-control-md selectbox'
+                          = f.select :preference3, options_for_select(["morning", "midday", "afternoon", "evening"]), {}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-3'
                       .row
                         .col-md-12.form-group
                           .submit
                             = f.submit "Confirm my booking", class: 'btn btn-black btn-block'
+
+                .col-md-12.confirmation
+                  .intro
+                    h3 All done!
+                    p Thank you for your booking request.
+                    p Amber will be in touch shortly to confirm your booking date and time.
+                  .related-nav
+                    p
+                      a href="/dresses/new-this-week"
+                        | <span>Browse our <span class="highlight">Latest Style</span></span> <i class="fa fa-chevron-right"></i>
+                    p
+                      a href="/dresses/best-sellers"
+                        | <span>Take a look at our <span class="highlight">Bestsellers</span></span> <i class="fa fa-chevron-right"></i>
 
         .content-wrapper.col-md-8
           .content-area
