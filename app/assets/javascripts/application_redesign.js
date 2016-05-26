@@ -81,6 +81,11 @@
 //= require partials/helpers/error_messages.js.coffee
 
 //-----------------------------
+// Styling Session page
+//-----------------------------
+//= require partials/styling_session_page
+
+//-----------------------------
 // Product details with related
 //-----------------------------
 //= require partials/product_details.js
@@ -119,14 +124,14 @@ jQuery(document).ready(function($){
     window.location = $(this).attr('href') + '?email=' + email;
   });
 
-	//home page slider		
-	$(function() {		
-		$(".rslides").responsiveSlides({		
-			auto: false,             // Boolean: Animate automatically, true or false		
-	 		pager: true,           // Boolean: Show pager, true or false		
-			speed: 3000,            // Integer: Speed of the transition, in milliseconds		
-	  		timeout: 6000,          // Integer: Time between slide transitions, in milliseconds		
-    	});		
+	//home page slider
+	$(function() {
+		$(".rslides").responsiveSlides({
+			auto: false,             // Boolean: Animate automatically, true or false
+	 		pager: true,           // Boolean: Show pager, true or false
+			speed: 3000,            // Integer: Speed of the transition, in milliseconds
+	  		timeout: 6000,          // Integer: Time between slide transitions, in milliseconds
+    	});
 	});
-	
+
 })
