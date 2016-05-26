@@ -18,6 +18,9 @@ FameAndPartners::Application.routes.draw do
   #######################################################
   # Temporary redirection to fix wrong path sent to users
   #######################################################
+
+  # TODO: (May 26 2016) Every redirection on this block should live in the HTTP server and not in the application!
+
   get '/AU' => redirect(path: '/au/dresses')
 
   if Features.active?(:redirect_to_com_au_domain)
@@ -220,11 +223,6 @@ FameAndPartners::Application.routes.draw do
     scope '/dresses' do
       root to: 'products/collections#show', as: :dresses
       get '/', to: 'products/collections#show', as: :collection
-
-      # TODO - Remove? - 2015.04.11 - Redirecting old accessory and customisation style URLS to main product page.
-      product_style_custom_redirect = -> path_params, _rq { ["/#{path_params[:site_version]}/dresses/dress-#{path_params[:product_slug]}", path_params[:color_name].presence].join('/') }
-      get '/custom-:product_slug(/:color_name)', to: redirect(product_style_custom_redirect)
-      get '/styleit-:product_slug(/:color_name)', to: redirect(product_style_custom_redirect)
 
       # Colors should behave like query strings, and not paths
       get '/dress-:product_slug/:color' => redirect { |params, req| "/dresses/dress-#{params[:product_slug]}?#{req.params.except(:product_slug, :site_version).to_query}" }
