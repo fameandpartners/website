@@ -67,20 +67,19 @@
                       .row
                         .col-md-12.form-group
                           label Select your timezone
-                          /TODO: Replace it with an autocomplete input, like Select2
-                          = f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, {}, :class => 'form-control form-control-md selectbox js-en-field-timezone'
+                          = f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, { include_blank: true }, :class => 'form-control form-control-md selectbox js-en-field-timezone'
                       .row
                         .col-md-12.form-group
                           label Preferred time #1
-                          = f.select :preference1, options_for_select(["morning", "midday", "afternoon", "evening"]), {}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-1'
+                          = f.select :preference1, options_for_select(["morning", "midday", "afternoon", "evening"]), {include_blank: true}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-1'
                       .row
                         .col-md-12.form-group
                           label Preferred time #2
-                          = f.select :preference2, options_for_select(["morning", "midday", "afternoon", "evening"]), {}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-2'
+                          = f.select :preference2, options_for_select([ "morning", "midday", "afternoon", "evening"]), {include_blank: true}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-2'
                       .row
                         .col-md-12.form-group
                           label Preferred time #3
-                          = f.select :preference3, options_for_select(["morning", "midday", "afternoon", "evening"]), {}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-3'
+                          = f.select :preference3, options_for_select([ "morning", "midday", "afternoon", "evening"]), {include_blank: true}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-3'
                       .row
                         .col-md-12.form-group
                           .submit
