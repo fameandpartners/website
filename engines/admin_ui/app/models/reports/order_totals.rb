@@ -15,6 +15,7 @@ module Reports
           lic.items,
           total,
           payment_total,
+          currency,
           email,
           completed_at :: DATE,
           m.utm_medium,
