@@ -24,6 +24,7 @@ frm.submit (ev) ->
           $('input[name="style_session[' + keys[0] + ']"]').focus()
       return
     error: ->
-      # TODO: display a friendly disclaimer when the form is not sent
       submit_btn.val 'Confirm my booking'
+      msg = '<label class="error">Sorry, your request could not be sent.<br> Please try again later.</label>'
+      submit_btn.after msg
       return
