@@ -19,29 +19,31 @@ module AdminUi
           csv << headers_en
 
           report.each do |r|
+            line = Orders::LineItemCSVPresenter.new r
             csv << [
-              r['order_number'],
-              r['site_version'],
-              r['total_items'],
-              r['promo_codes'],
-              price(r),
-              r['currency'],
-              r['style'],
-              r['line_item_id'],
-              r['size'],
-              adjusted_size(r),
-              r['height'],
-              r['color'],
-              r['quantity'],
-              r['factory'],
-              delivery_date(r),
-              r['fast_making'].present? ? "TRUE" : '',
-              customization_values(r),
-              r['customer_notes'],
-              customer_name(r),
-              r['customer_phone_number'] || 'No Phone',
-              r['email'],
-              shipping_address(r).present? ? shipping_address(r) : 'No Shipping Address',
+              line.order_number,
+              line.site_version,
+              line.total_items,
+              line.promo_codes,
+              line.price,
+              line.currency,
+              line.style,
+              line.line_item_id,
+              line.size,
+              line.adjusted_size,
+              line.height,
+              line.color,
+              line.quantity,
+              line.factory,
+              line.delivery_date,
+              line.fast_making,
+              line.customization_values,
+              line.custom_color,
+              line.customer_notes,
+              line.customer_name,
+              line.customer_phone_number,
+              line.email,
+              line.shipping_address,
               r['variant_image'],
               r['custom_variant_image'],
               r['product_image']
@@ -99,6 +101,7 @@ module AdminUi
             :delivery_date,
             :making_options,
             :customisations,
+            :custom_color,
             :customer_notes,
             :customer_name,
             :customer_phone_number,
@@ -109,38 +112,6 @@ module AdminUi
             :product_image
           ]
         end
-
-      def price(r)
-        r['price'].to_f + r['personalization_price'].to_f + r['making_options_price'].to_f
-      end
-
-      def adjusted_size(r)
-        "#{r['size']} (#{r['site_version']})"
-      end
-
-      def delivery_date(r)
-        return unless r['completed_at_char'].present?
-        Policies::LineItemProjectedDeliveryDatePolicy.new(r['completed_at_char'].to_date, r['fast_making']).delivery_date
-      end
-
-      def customization_values(r)
-        if r['personalization'].present?
-          values = YAML.load(r['customization_value_ids'])
-          customs = values.present? ? CustomisationValue.where(id: values).pluck(:presentation) : []
-          customs << ["Custom Color: #{color_name(r)}"] unless r['custom_color']
-          customs.join('|')
-        else
-          'N/A'
-        end
-      end
-
-      def customer_name(r)
-        "#{r['user_first_name']} #{r['user_last_name']}"
-      end
-
-      def shipping_address(r)
-        "#{r['address1']} #{r['address2']} #{r['city']} #{r['state']} #{r['zipcode']} #{r['country']}"
-      end
 
     end
   end

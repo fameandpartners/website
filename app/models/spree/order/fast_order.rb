@@ -3,17 +3,35 @@ module Spree
     class FastOrder
       class << self
 
-        def sql(criteria)
+        def get_sql(options)
+          case options[:report]
+            when :full_orders
+              where = "#{options[:where]}, line_item_id ASC"
+              sql(where: where)
+            when :daily_orders
+              select = ", #{images}"
+              from = ", #{custom_variant_id}"
+              where = "o.completed_at IS NOT NULL
+              AND o.completed_at between '#{options[:from_date]}' and '#{options[:to_date]}'
+              ORDER BY o.completed_at, line_item_id ASC"
+              sql(select: select, from: from, where: where)
+          end
+        end
+
+        private
+
+        def sql(select: select, where: where, from: from)
           <<-SQL
             SELECT
 
-            o.id as order_id,
             #{order_state},
             #{order_number},
+            #{total_items},
             #{user_first_name},
             #{user_last_name},
             #{site_version},
             #{line_item_id},
+            #{quantity},
             #{fast_making},
             #{tracking_number},
             #{completed_at_date},
@@ -35,35 +53,26 @@ module Spree
             #{return_action_details},
             #{price},
             #{currency}
+            #{select}
 
             FROM "spree_orders" o
+            LEFT OUTER JOIN "spree_line_items" li ON li."order_id" = o."id"
+            LEFT OUTER JOIN "line_item_personalizations" lip ON lip."line_item_id" = li."id"
             LEFT OUTER JOIN "spree_addresses" sa ON sa."id" = o."bill_address_id"
             LEFT OUTER JOIN "spree_addresses" ssa ON ssa."id" = o."ship_address_id"
             LEFT OUTER JOIN "spree_states" ssa_s ON ssa_s."id" = ssa."state_id"
             LEFT OUTER JOIN "spree_countries" ssa_c ON ssa_c."id" = ssa."country_id"
-            LEFT OUTER JOIN "spree_line_items" li ON li."order_id" = o."id"
-            LEFT OUTER JOIN "line_item_personalizations" lip ON lip."line_item_id" = li."id"
             LEFT OUTER JOIN "spree_variants" sv ON sv."id" = li."variant_id"
             LEFT OUTER JOIN "spree_products" sp ON sp."id" = sv."product_id"
             LEFT OUTER JOIN "fabrications" f ON f."line_item_id" = li."id"
             LEFT OUTER JOIN "factories" fa ON sp."factory_id" = fa."id"
             LEFT OUTER JOIN "spree_shipments" ss ON ss."order_id" = o."id"
+            #{from}
 
-            WHERE #{criteria}, line_item_id ASC
+            WHERE #{where}
           SQL
         end
 
-        def get_sql(options)
-          if options[:report] == :orders
-            sql(options[:criteria])
-          else
-
-          end
-        end
-
-        def criterias
-          "sa.firstname ILIKE 'anna%' AND sa.lastname ILIKE 'p%'"
-        end
 
         def order_state
           'o.state as order_state'
@@ -87,6 +96,10 @@ module Spree
 
         def line_item_id
           'li.id as line_item_id'
+        end
+
+        def quantity
+          'li.quantity as quantity'
         end
 
         def total_items
@@ -220,6 +233,88 @@ module Spree
               FROM return_request_items rri
               WHERE rri.line_item_id = li.id AND rri.action IN ('return', 'exchange')
               GROUP BY rri.line_item_id ) as return_action_details"
+        end
+
+        def images
+          "( SELECT spree_assets.id || '/large/' || spree_assets.attachment_file_name
+          FROM spree_assets
+          WHERE
+            (
+              (spree_assets.viewable_id IN
+                ( SELECT pcv.id
+                  FROM product_color_values pcv
+                  WHERE
+                  pcv.product_id = sp.id
+                  AND
+                  pcv.option_value_id IN (SELECT spree_option_values.id FROM spree_option_values
+                    INNER JOIN spree_option_values_variants ON spree_option_values.id = spree_option_values_variants.option_value_id
+                            WHERE spree_option_values_variants.variant_id = sv.id)) AND spree_assets.viewable_type = 'ProductColorValue')
+            OR
+              (spree_assets.viewable_id = sv.id AND spree_assets.viewable_type = 'Spree::Variant')
+            )
+          AND
+            lower(spree_assets.attachment_file_name) LIKE '%front-crop%'
+          LIMIT 1) as variant_image,
+
+        CASE WHEN lip.id > 0
+          THEN
+            ( SELECT spree_assets.id || '/large/' || spree_assets.attachment_file_name
+              FROM spree_assets
+              WHERE
+                (
+                  (spree_assets.viewable_id IN
+                    ( SELECT pcv.id
+                      FROM product_color_values pcv
+                      WHERE
+                      pcv.product_id = sp.id
+                      AND
+                      pcv.option_value_id IN (SELECT spree_option_values.id FROM spree_option_values
+                        INNER JOIN spree_option_values_variants ON spree_option_values.id = spree_option_values_variants.option_value_id
+                              WHERE spree_option_values_variants.variant_id = custom_variant_id)) AND spree_assets.viewable_type = 'ProductColorValue')
+                OR
+                  (spree_assets.viewable_id = custom_variant_id AND spree_assets.viewable_type = 'Spree::Variant')
+                )
+              AND
+                lower(spree_assets.attachment_file_name) LIKE '%front-crop%'
+              LIMIT 1)
+          ELSE NULL
+          END as custom_variant_image,
+
+        ( SELECT spree_assets.id || '/large/' || spree_assets.attachment_file_name
+          FROM spree_assets
+          WHERE
+            (
+              (spree_assets.viewable_id IN
+                ( SELECT product_color_values.id
+                  FROM product_color_values
+                  WHERE
+                  product_color_values.product_id = sp.id
+                ) AND spree_assets.viewable_type = 'ProductColorValue')
+            OR
+              (spree_assets.viewable_id IN
+                ( SELECT spree_variants.id
+                  FROM spree_variants
+                  WHERE
+                  spree_variants.product_id = sp.id AND spree_variants.deleted_at IS NULL
+                ) AND spree_assets.viewable_type = 'Spree::Variant')
+            )
+          AND
+            lower(spree_assets.attachment_file_name) LIKE '%front-crop%'
+          LIMIT 1) as product_image"
+        end
+
+        def custom_variant_id
+          "LATERAL( SELECT
+          CASE WHEN lip.id > 0
+          THEN (SELECT sovv.variant_id FROM spree_option_values sov
+            INNER JOIN spree_option_values_variants sovv ON sov.id = sovv.option_value_id
+            WHERE
+              sovv.variant_id IN (SELECT spree_variants.id FROM spree_variants
+                WHERE spree_variants.product_id = sp.id AND spree_variants.is_master = 'f' AND spree_variants.deleted_at IS NULL)
+              AND sov.id = lip.color_id
+              LIMIT 1)
+          ELSE NULL
+          END as custom_variant_id) s1"
         end
 
       end
