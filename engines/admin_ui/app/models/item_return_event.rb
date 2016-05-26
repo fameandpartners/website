@@ -123,7 +123,7 @@ class ItemReturnEvent < ActiveRecord::Base
     :damaged_quantity,
     :expected_date,
     :expected_quantity,
-    :memo, # TODO: do Bergen offer a memo field on response?
+    :memo,
     :product_msrp,
     :receiving_status,
     :receiving_status_code,
