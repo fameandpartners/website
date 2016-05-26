@@ -19,21 +19,25 @@
     color: inherit;
   }
 
-  optgroup {
-    display: none;
-
-    &.active {
-      display: block;
-    }
-
-  }
-
   .details-wrap {
     margin-bottom: 30px;
   }
 
-  .enquiry-wrap .tab-pane {
-    margin-top: 20px;
+  .enquiry-wrap {
+
+    .tab-pane {
+      margin-top: 20px;
+    }
+
+    optgroup {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+
+    }
+
   }
 
   .faq-wrap {
