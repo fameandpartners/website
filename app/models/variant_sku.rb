@@ -5,6 +5,11 @@ class VariantSku
     @variant = variant
   end
 
+  def self.sku_from_variant(variant, size, color)
+    return variant.sku unless size && color
+    "#{variant.product.master.sku.to_s.upcase}#{size.name.to_s.gsub('/', '')}C#{color.id}"
+  end
+
   # Note that this is somewhat duplicated with CustomItemSku
   def call
     return variant.sku.to_s.upcase if variant.is_master
