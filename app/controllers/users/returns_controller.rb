@@ -55,8 +55,10 @@ class Users::ReturnsController < Users::BaseController
   private
 
   def open_bergen_return_process(order_return)
-    order_return.return_request_items.each do |rri|
-      Bergen::Operations::ReturnItemProcess.new(return_request_item: rri).start_process
+    if Features.active?(:bergen_usa_returns)
+      order_return.return_request_items.each do |rri|
+        Bergen::Operations::ReturnItemProcess.new(return_request_item: rri).start_process
+      end
     end
   end
 end
