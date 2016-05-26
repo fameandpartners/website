@@ -1,6 +1,7 @@
 frm = $('#new_style_session')
 frm_errors = $('label.error', frm)
 submit_btn = $('.form-global .submit input', frm)
+email = $('.js-en-field-email', frm)
 frm.submit (ev) ->
   ev.preventDefault()
   $.ajax
@@ -15,6 +16,7 @@ frm.submit (ev) ->
       if (data.success)
         $(".form-area .not-submitted").css("display", "none")
         $(".form-area .confirmation").css("display", "block")
+        window.track.event('Style Session Form', 'Submit', email)
       else
         submit_btn.val 'Confirm my booking'
         $.each data.errors, (attr_name, validation_msg) ->
@@ -25,6 +27,7 @@ frm.submit (ev) ->
       return
     error: ->
       submit_btn.val 'Confirm my booking'
+      window.track.event('Style Session Form', 'Error', email)
       msg = '<label class="error">Sorry, your request could not be sent.<br> Please try again later.</label>'
       submit_btn.after msg
       return
