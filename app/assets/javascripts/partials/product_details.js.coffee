@@ -49,7 +49,7 @@ page.initProductDetailsPage = (options = {}) ->
           customizations_ids: selected.customizations_ids,
           making_options_ids: selected.making_options_ids,
           variant_id:         (selected.variant || {})['id'],
-          correct_variant_id: (selected.correct_variant || {})['id']
+          dress_variant_id: (selected.dress_variant || {})['id']
           height:             selected.height
         }
         app.shopping_cart.one('change', () ->

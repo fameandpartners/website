@@ -75,7 +75,7 @@ window.helpers.ProductVariantsSelector = class ProductVariantsSelector
     else
       selected.variant = _.findWhere(@variants, { size_id: selected.size_id, color_id: selected.color_id })
 
-    selected.correct_variant = _.findWhere(@variants, { size_id: selected.size_id, color_id: selected.color_id })
+    selected.dress_variant = _.findWhere(@variants, { size_id: selected.size_id, color_id: selected.color_id })
 
     return selected
 
