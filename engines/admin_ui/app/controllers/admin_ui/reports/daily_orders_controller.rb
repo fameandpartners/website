@@ -5,7 +5,7 @@ module AdminUi
     class DailyOrdersController < AdminUi::Reports::StreamingCsvController
 
     def show
-      @rows = CSV.parse(report_csv).map {|a| Hash[ headers_en.zip(a) ] }[1..10]
+      @rows = CSV.parse(report_csv).map {|a| Hash[ report_headers.zip(a) ] }[1..10]
     end
 
     private
@@ -16,7 +16,7 @@ module AdminUi
 
       def report_csv
         CSV.generate(headers: true) do |csv|
-          csv << headers_en
+          csv << report_headers
 
           report.each do |r|
             line = Orders::LineItemCSVPresenter.new r
@@ -82,7 +82,11 @@ module AdminUi
         default
       end
 
-      def headers_en
+      def report_headers
+        en_headers.collect { |k| "#{k} #{cn_headers[k]}" }
+      end
+
+      def en_headers
           [
             :order_number,
             :site_version,
@@ -98,8 +102,8 @@ module AdminUi
             :color,
             :quantity,
             :factory,
-            :delivery_date,
-            :making_options,
+            :projected_delivery_date,
+            :express_making,
             :customisations,
             :custom_color,
             :customer_notes,
@@ -112,6 +116,22 @@ module AdminUi
             :product_image
           ]
         end
+
+      def cn_headers
+        {
+          order_number:            '(订单号码)',
+          express_making:          '(快速决策)',
+          projected_delivery_date: '(要求出厂日期)',
+          style:                   '(款号)',
+          factory:                 '(工厂)',
+          color:                   '(颜色)',
+          size:                    '(尺寸)',
+          customisations:          '(特殊要求)',
+          customer_name:           '(客人名字)',
+          customer_phone_number:   '(客人电话)',
+          shipping_address:        '(客人地址)'
+        }
+      end
 
     end
   end

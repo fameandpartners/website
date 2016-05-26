@@ -14,7 +14,7 @@ module Spree
               where = "o.completed_at IS NOT NULL
               AND o.completed_at between '#{options[:from_date]}' and '#{options[:to_date]}'
               ORDER BY o.completed_at, line_item_id ASC"
-              sql(select: select, from: from, where: where)
+              sql(where: where) #select: select, from: from
           end
         end
 
