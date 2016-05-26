@@ -10,7 +10,7 @@ frm.submit (ev) ->
     beforeSend: ->
       submit_btn.val 'Sending...'
       submit_btn.attr('disabled', true)
-      $('#new_style_session label.error').remove()
+      $('label.error', frm).remove()
       return
     success: (data) ->
       if (data.success)
