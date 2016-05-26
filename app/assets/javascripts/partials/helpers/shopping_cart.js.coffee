@@ -85,12 +85,6 @@ window.helpers.ShoppingCart = class ShoppingCart
       dataType: "json"
       data: product_data
     ).success((data) =>
-      # @updateData(data)
-      added_product = _.find((data.products || []), (product) ->
-        product.variant_id == product_data.variant_id
-      )
-      @trackAddToCart(added_product)
-      # window.location = '/checkout?faadc=MAGIC10&pc=TUFHSUMxMA%3D%3D&tn=Ymxhbms%3D&h=SGFwcHkgSG9saWRheXMgZnJvbSBGYW1lICYgUGFydG5lcnM%3D&m=PGgzPlRha2UgYSAxMCUgb2ZmLCByaWdodCBub3chPC9oMz48ZGl2PjxhIGNsYXNzPVwiYnRuIGJ0bi1ibGFja1wiIG9uY2xpY2s9XCJ2ZXguY2xvc2VBbGwoKTtcIj5HbzwvYS8%2BPC9kaXYvPg%3D%3D&s=bmV3LW1vZGFs&pop=true'
       window.location = '/checkout'
     ).error( () =>
       @trigger('error')
@@ -154,34 +148,3 @@ window.helpers.ShoppingCart = class ShoppingCart
       @trigger('error')
     )
 
-  # analytics
-  trackAddToCart: (product) ->
-    try
-      if @track
-        window.track.addedToCart(product.analytics_label, product)
-
-        if _cio
-          _cio.track("addedToCart", {
-            sku: product.sku,
-            name: product.name,
-            color: product.color.name,
-            size: product.size?.presentation,
-            value: product.price.amount,
-            currency: product.price.currency
-          });
-
-        window._fbq ||= []
-        ids = ['6021815151134','6026191677496','6027615548326','6027496563226']
-        _.each(ids, (id) ->
-          window._fbq.push(['track', id, {
-            sku: product.sku,
-            name: product.name,
-            color: product.color.name,
-            size: product.size?.presentation,
-            value: product.price.amount,
-            currency: product.price.currency
-          }])
-        )
-
-    catch
-      # do nothing
