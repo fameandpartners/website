@@ -171,6 +171,7 @@ FameAndPartners::Application.routes.draw do
     get '/lookbook/just-the-girls'       => 'products/collections#show', :permalink => 'just-the-girls', :as => :just_the_girls_collection
     get '/lookbook/partners-in-crime'    => 'products/collections#show', :permalink => 'partners-in-crime', :as => :partners_in_crime_collection
     get '/lookbook/la-belle-epoque'      => 'products/collections#show', :permalink => 'la-belle-epoque', :as => :la_belle_epoque_collection
+    get '/lookbook/slip-collection'      => 'products/collections#show', :permalink => 'slip-dresses', :as => :slip_dresses_collection
 
     get '/all-size' => redirect('/lookbook/all-size')
     get '/lookbook/all-size' => 'products/collections#show', :permalink => 'all-size', :as => :all_size_collection
