@@ -117,6 +117,7 @@
 
     label {
       font-style: italic;
+      margin: 0;
     }
 
     .hint {
@@ -128,6 +129,13 @@
     .error {
       font-size: 1.6rem;
       color: $c-brand-red;
+      display: block;
+      margin: 3px 0;
+    }
+
+    .submit .error {
+      padding-top: 20px;
+      text-align: center;
     }
 
   }

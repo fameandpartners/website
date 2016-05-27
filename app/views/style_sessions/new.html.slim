@@ -46,41 +46,43 @@
                     = form_for @style_session, url: style_session_path, html: {class: 'form js-en-styling-session-form'} do |f|
                       .row
                         .col-md-12.form-group
-                          label for='style_session_full_name'
+                          label for='style_session_full_name' class='label-full_name'
                             | Full name
                           = f.text_field :full_name, :placeholder => 'Enter your full name', :class => 'form-control form-control-md js-en-field-full-name', required: 'true'
                       .row
                         .col-md-12.form-group
-                          label for='style_session_email'
+                          label for='style_session_email' class='label-email'
                             | Email
                           = f.text_field :email, :placeholder => 'Enter your email address', type: 'email', :class => 'form-control form-control-md js-en-field-email', required: 'true'
                       .row
                         .col-md-12.form-group
-                          label for='style_session_phone'
+                          label for='style_session_phone' class='label-phone'
                             | Phone <span class="hint">(include country code)</span>
-                          = f.text_field :phone, :placeholder => 'Enter your phone number', :class => 'form-control form-control-md js-en-field-phone'
+                          = f.text_field :phone, :placeholder => 'Enter your phone number', :class => 'form-control form-control-md js-en-field-phone', required: 'true'
 
                       .row
                         .col-md-12.form-group
-                          label
+                          label for='style_session_birthday' class='label-birthday'
                             | Birthday <span class="hint">(optional)</span>
                           = f.text_field :birthday, type: 'date', :class => 'form-control form-control-md js-en-field-birthday'
                       .row
                         .col-md-12.form-group
-                          label Select your timezone
+                          label for='style_session_timezone' class='label-timezone'
+                            | Select your timezone
                           = f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, { include_blank: true }, :class => 'form-control form-control-md selectbox js-en-field-timezone'
                       .row
                         .col-md-12.form-group
-                          label Preferred time #1
+                          label for='style_session_preference1' class='label-preference1'
+                            | Preferred time #1
                           = f.select :preference1, options_for_select(["morning", "midday", "afternoon", "evening"]), {include_blank: true}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-1'
                       .row
                         .col-md-12.form-group
-                          label
+                          label for='style_session_preference2' class='label-preference2'
                             | Preferred time #2 <span class="hint">(optional)</span>
                           = f.select :preference2, options_for_select([ "morning", "midday", "afternoon", "evening"]), {include_blank: true}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-2'
                       .row
                         .col-md-12.form-group
-                          label
+                          label for='style_session_preference3' class='label-preference3'
                             | Preferred time #3 <span class="hint">(optional)</span>
                           = f.select :preference3, options_for_select([ "morning", "midday", "afternoon", "evening"]), {include_blank: true}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-3'
                       .row

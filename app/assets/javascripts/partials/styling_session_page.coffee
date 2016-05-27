@@ -22,9 +22,9 @@ frm.submit (ev) ->
         submit_btn.removeAttr("disabled")
         $.each data.errors, (attr_name, validation_msg) ->
           msg = '<label class="error" for="style_session_' + attr_name + '">This field ' + validation_msg[0] + '</label>'
-          $('input[name="style_session[' + attr_name + ']"], select[name="style_session[' + attr_name + ']').after msg
+          $('label[class="label-' + attr_name + '"]').after msg
           keys = Object.keys(data)
-          $('input[name="style_session[' + keys[0] + ']"]').focus()
+          $('input[name="style_session[' + keys[0] + ']"], select[name="style_session[' + keys[0] + ']"]').focus()
       return
     error: ->
       submit_btn.val 'Confirm my booking'
