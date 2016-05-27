@@ -14,7 +14,7 @@ class StyleSession
     :preference3,
     :timezone
 
-  validates_presence_of :email, :full_name
+  validates_presence_of :email, :full_name, :phone, :preference1, :timezone
   validates_format_of :email, with: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
 
   def initialize(attributes = {})
