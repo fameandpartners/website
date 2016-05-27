@@ -20,7 +20,6 @@
   }
 
   p {
-    font-weight: normal;
     font-weight: 300;
     font-family: $font-heading;
   }
@@ -97,13 +96,17 @@
         line-height: 2.6rem;
       }
 
+      .confirmation {
+        display: none;
+      }
+
       .form-global,
       .submit {
         margin-top: 25px;
       }
 
       .chosen-container {
-        width: 100% !important;
+        max-width: 100%;
       }
 
     }
@@ -114,6 +117,7 @@
 
     label {
       font-style: italic;
+      margin: 0;
     }
 
     .hint {
@@ -122,7 +126,48 @@
       font-size: 1.5rem;
     }
 
+    .error {
+      font-size: 1.6rem;
+      color: $c-brand-red;
+      display: block;
+      margin: 3px 0;
+    }
+
+    .submit .error {
+      padding-top: 20px;
+      text-align: center;
+    }
+
   }
+
+  .related-nav {
+    margin-top: 50px;
+
+    a {
+      color: #000;
+      font-size: 1.7rem;
+      font-style: italic;
+    }
+
+    a span {
+      text-decoration: underline;
+    }
+
+    .highlight {
+      font-style: normal;
+      font-size: 1.4rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-family: $font-family-secondary;
+    }
+
+    .fa {
+      font-size: 0.8rem;
+      padding-left: 5px;
+    }
+
+  }
+
 
   .content-area {
     padding-right: 50px;
