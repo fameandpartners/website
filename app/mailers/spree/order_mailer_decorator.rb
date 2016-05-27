@@ -38,7 +38,11 @@ Spree::OrderMailer.class_eval do
         adjustments:        adjustments,
         display_total:      @order.display_total.to_s,
         auto_account:       user && user.automagically_registered?,
-        today:              Date.today.to_formatted_s(:long)
+        today:              Date.today.strftime("%d.%m.%y"),
+        billing_address:    order.try(:billing_address).to_s  || 'No Billing Address',
+        shipping_address:   order.try(:shipping_address).to_s || 'No Shipping Address',
+        phone:              order.try(:billing_address).try(:phone) || 'No Phone',
+        delivery_date:      order.projected_delivery_date.strftime("%a, %d %b %Y")
       )
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)

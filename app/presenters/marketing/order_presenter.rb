@@ -42,7 +42,10 @@ module Marketing
           options_text:           item.options_text,
           quantity:               item.quantity,
           variant_display_amount: item.variant.display_amount.to_s,
-          display_amount:         item.display_amount.to_s
+          display_amount:         item.display_amount.to_s,
+          image_url:              item.image? ? item.image_url : '',
+          height:                 item.height,
+          color:                  item.colour_name,
         }
       end
     end
