@@ -13,10 +13,10 @@ module Marketing
         let(:fake_image) do
           OpenStruct.new(
               position: 1,
-              original: 'http://images.fameandpartners.com/original.png',
-              large:    'http://images.fameandpartners.com/large.png',
-              xlarge:   'http://images.fameandpartners.com/xlarge.png',
-              small:    'http://images.fameandpartners.com/small.png',
+              original: 'https://d1sd72h9dq237j.cloudfront.net/original.png',
+              large:    'https://d1sd72h9dq237j.cloudfront.net/large.png',
+              xlarge:   'https://d1sd72h9dq237j.cloudfront.net/xlarge.png',
+              small:    'https://d1sd72h9dq237j.cloudfront.net/small.png',
               color:    'pink',
               color_id: 29
           )
@@ -91,8 +91,8 @@ module Marketing
                                            description:       'Super Dress Long Description',
                                            discountPercent:   '30',
                                            expressMaking:     true,
-                                           image:             { original: 'http://images.fameandpartners.com/original.png', xlarge: 'http://images.fameandpartners.com/xlarge.png', large: 'http://images.fameandpartners.com/large.png', small: 'http://images.fameandpartners.com/small.png' },
-                                           images:            [{ original: 'http://images.fameandpartners.com/original.png', xlarge: 'http://images.fameandpartners.com/xlarge.png', large: 'http://images.fameandpartners.com/large.png', small: 'http://images.fameandpartners.com/small.png' }],
+                                           image:             { original: 'https://d1sd72h9dq237j.cloudfront.net/original.png', xlarge: 'https://d1sd72h9dq237j.cloudfront.net/xlarge.png', large: 'https://d1sd72h9dq237j.cloudfront.net/large.png', small: 'https://d1sd72h9dq237j.cloudfront.net/small.png' },
+                                           images:            [{ original: 'https://d1sd72h9dq237j.cloudfront.net/original.png', xlarge: 'https://d1sd72h9dq237j.cloudfront.net/xlarge.png', large: 'https://d1sd72h9dq237j.cloudfront.net/large.png', small: 'https://d1sd72h9dq237j.cloudfront.net/small.png' }],
                                            id:                123,
                                            name:              'Super Dress',
                                            price:             12.34,

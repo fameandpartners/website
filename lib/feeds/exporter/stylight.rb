@@ -3,7 +3,7 @@ require 'net/http'
 module Feeds
   module Exporter
     class Stylight < CPC
-      CDN_HOST = 'http://assets.fameandpartners.com/product-feed/white-background/'
+      CDN_HOST = 'https://d1h7wjzwtdym94.cloudfront.net/product-feed/white-background/'
 
       attr_reader :items
 
