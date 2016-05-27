@@ -9,12 +9,12 @@ module Spree
               where = "#{options[:where]}, line_item_id ASC"
               sql(where: where)
             when :daily_orders
-              select = ", #{images}"
-              from = ", #{custom_variant_id}"
+              select = ", #{custom_variant_id}, #{images}"
+              from = ", #{custom_variant_id_from}"
               where = "o.completed_at IS NOT NULL
               AND o.completed_at between '#{options[:from_date]}' and '#{options[:to_date]}'
               ORDER BY o.completed_at, line_item_id ASC"
-              sql(where: where) #select: select, from: from
+              sql(select: select, from: from, where: where)
           end
         end
 
@@ -304,6 +304,10 @@ module Spree
         end
 
         def custom_variant_id
+          's1.custom_variant_id as custom_variant_id'
+        end
+
+        def custom_variant_id_from
           "LATERAL( SELECT
           CASE WHEN lip.id > 0
           THEN (SELECT sovv.variant_id FROM spree_option_values sov

@@ -5,7 +5,7 @@ module AdminUi
     class DailyOrdersController < AdminUi::Reports::StreamingCsvController
 
     def show
-      @rows = CSV.parse(report_csv).map {|a| Hash[ report_headers.zip(a) ] }[1..10]
+      @rows = CSV.parse(report_csv).map {|a| Hash[ en_headers.zip(a) ] }[1..10]
     end
 
     private
@@ -44,9 +44,7 @@ module AdminUi
               line.customer_phone_number,
               line.email,
               line.shipping_address,
-              r['variant_image'],
-              r['custom_variant_image'],
-              r['product_image']
+              line.image
             ]
           end
         end
@@ -65,7 +63,7 @@ module AdminUi
       end
 
       def from_date
-        date(params[:from], default: 7.weeks.ago)
+        date(params[:from], default: 6.weeks.ago)
       end
 
       def to_date
@@ -111,11 +109,9 @@ module AdminUi
             :customer_phone_number,
             :email,
             :shipping_address,
-            :variant_image,
-            :custom_variant_image,
-            :product_image
+            :image
           ]
-        end
+      end
 
       def cn_headers
         {

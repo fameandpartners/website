@@ -10,7 +10,7 @@ module Orders
     %w(
         order_state order_number line_item_id total_items completed_at_date tracking_number
         shipment_date fabrication_state style promo_codes email customer_notes currency
-        site_version quantity
+        site_version quantity size personalization custom_variant_id
       ).each do |attr|
       define_method(attr) { line["#{attr}"] }
     end
@@ -23,12 +23,8 @@ module Orders
       line['factory'] || 'Unknown'
     end
 
-    def size
-      line['size']
-    end
-
     def adjusted_size
-      (line['size'] || 'Unknown Size')  + " (#{line['site_version']})"
+      (size || 'Unknown Size')  + " (#{site_version})"
     end
 
     def height
@@ -60,7 +56,7 @@ module Orders
     end
 
     def customization_values
-      if line['personalization'].present?
+      if personalization.present?
         values = YAML.load(line['customization_value_ids'])
         customs = values.present? ? CustomisationValue.where(id: values).pluck(:presentation) : []
         customs.join('|')
@@ -70,7 +66,7 @@ module Orders
     end
 
     def custom_color
-      color if line['personalization'].present? && !line['custom_color'].present?
+      color if personalization.present? && !line['custom_color'].present?
     end
 
     def delivery_date
@@ -88,6 +84,22 @@ module Orders
 
     def return_details
       line['return_action_details'].try(:split, '/').try(:[], 1)
+    end
+
+    def image
+      image = line['variant_image']
+
+      # Customised dresses use the master variant, find the closest
+      # matching standard variant, use those images
+      if personalization.present? && !image.present? && custom_variant_id.present?
+        image = line['custom_variant_image']
+      end
+
+      # We won't find a colour variant for custom colours, so
+      # fallback to whatever product image.
+      image = line['product_image'] unless image.present?
+
+      "http://images.fameandpartners.com/spree/products/#{image}" if image
     end
 
     private
