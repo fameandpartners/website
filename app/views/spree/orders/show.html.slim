@@ -94,7 +94,7 @@ section.order-details
                   h4 Email
                   span = order.order.billing_address.email
 
-                .email
+                .delivery-date
                   h4 Expected delivery date
                   span = order.order.projected_delivery_date.strftime("%d of %b, %Y")
 
@@ -147,7 +147,8 @@ section.order-details
                 p Once the finishing touches have been made to your dress and we are good to go, we'll email you a shipping confirmation.
               .item
                 / TODO: Insert real date estimate
-                h4 3. Expect delivery: #{order.order.projected_delivery_date.strftime("%d of %b, %Y")}
+                h4
+                  | 3. Expect delivery date: <br> #{order.order.projected_delivery_date.strftime("%d of %b, %Y")}
                 p You'll be able to track your delivery with your shipping confirmation.
                 a.sidebar-link href='/faqs#collapse-shipping-track'
                   | Learn more about Shipping and Delivery
