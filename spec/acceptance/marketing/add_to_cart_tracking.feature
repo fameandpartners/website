@@ -16,3 +16,4 @@ Feature: Add to Cart Tracking
     And I should see "Secure checkout"
     Then Page should have dataLayer "addToCart" event
     Then Page should have dataLayer "Connie" product
+    Then Page should have dataLayer "4B453US2AU6C25" SKU from a variant

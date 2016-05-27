@@ -2,21 +2,6 @@ ruby:
   total_amount = order.display_total
   total_amount = total_amount.to_s.delete('$')
 
-// -- Facebook Conversion Code for Sales
-javascript:
-  (function() {
-  var _fbq = window._fbq || (window._fbq = []);
-  if (!_fbq.loaded) {
-  var fbds = document.createElement('script');
-  fbds.async = true;
-  fbds.src = '//connect.facebook.net/en_US/fbds.js';
-  var s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(fbds, s);
-  _fbq.loaded = true;
-  }
-  })();
-  window._fbq = window._fbq || [];
-  window._fbq.push(['track', '6018317903734', {'value':#{total_amount},'currency': '#{current_site_version.currency}' }]);
 
 noscript
   img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6018317903734&cd[value]=#{total_amount}&cd[currency]=#{current_site_version.currency}&noscript=1"
