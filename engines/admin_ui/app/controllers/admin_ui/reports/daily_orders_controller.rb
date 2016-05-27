@@ -20,15 +20,6 @@ module AdminUi
 
       def filename
         report.filename
-        # [
-        #   report.description,
-        #   'from',
-        #   from_date.to_s(:filename),
-        #   'to',
-        #   to_date.to_s(:filename),
-        #   'generated',
-        #   DateTime.now.to_s(:filename),
-        # ].join('_') << ".csv"
       end
 
       def from_date
