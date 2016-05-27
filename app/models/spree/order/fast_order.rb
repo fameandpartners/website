@@ -244,11 +244,14 @@ module Spree
                 ( SELECT pcv.id
                   FROM product_color_values pcv
                   WHERE
-                  pcv.product_id = sp.id
+                    pcv.product_id = sp.id
                   AND
-                  pcv.option_value_id IN (SELECT spree_option_values.id FROM spree_option_values
-                    INNER JOIN spree_option_values_variants ON spree_option_values.id = spree_option_values_variants.option_value_id
-                            WHERE spree_option_values_variants.variant_id = sv.id)) AND spree_assets.viewable_type = 'ProductColorValue')
+                    pcv.option_value_id IN
+                            ( SELECT option_value_id
+                              FROM spree_option_values_variants
+                              WHERE variant_id = sv.id))
+                  AND
+                    spree_assets.viewable_type = 'ProductColorValue')
             OR
               (spree_assets.viewable_id = sv.id AND spree_assets.viewable_type = 'Spree::Variant')
             )
@@ -266,11 +269,14 @@ module Spree
                     ( SELECT pcv.id
                       FROM product_color_values pcv
                       WHERE
-                      pcv.product_id = sp.id
+                        pcv.product_id = sp.id
                       AND
-                      pcv.option_value_id IN (SELECT spree_option_values.id FROM spree_option_values
-                        INNER JOIN spree_option_values_variants ON spree_option_values.id = spree_option_values_variants.option_value_id
-                              WHERE spree_option_values_variants.variant_id = custom_variant_id)) AND spree_assets.viewable_type = 'ProductColorValue')
+                        pcv.option_value_id IN
+                          ( SELECT option_value_id
+                            FROM spree_option_values_variants
+                            WHERE variant_id = custom_variant_id))
+                      AND
+                        spree_assets.viewable_type = 'ProductColorValue')
                 OR
                   (spree_assets.viewable_id = custom_variant_id AND spree_assets.viewable_type = 'Spree::Variant')
                 )
