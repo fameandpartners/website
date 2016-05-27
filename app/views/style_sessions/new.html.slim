@@ -62,7 +62,8 @@
 
                       .row
                         .col-md-12.form-group
-                          label Birthday
+                          label
+                            | Birthday <span class="hint">(optional)</span>
                           = f.text_field :birthday, type: 'date', :class => 'form-control form-control-md js-en-field-birthday'
                       .row
                         .col-md-12.form-group
@@ -74,11 +75,13 @@
                           = f.select :preference1, options_for_select(["morning", "midday", "afternoon", "evening"]), {include_blank: true}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-1'
                       .row
                         .col-md-12.form-group
-                          label Preferred time #2
+                          label
+                            | Preferred time #2 <span class="hint">(optional)</span>
                           = f.select :preference2, options_for_select([ "morning", "midday", "afternoon", "evening"]), {include_blank: true}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-2'
                       .row
                         .col-md-12.form-group
-                          label Preferred time #3
+                          label
+                            | Preferred time #3 <span class="hint">(optional)</span>
                           = f.select :preference3, options_for_select([ "morning", "midday", "afternoon", "evening"]), {include_blank: true}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-3'
                       .row
                         .col-md-12.form-group
