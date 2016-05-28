@@ -1,18 +1,14 @@
 ruby:
-  # successfully_ordered = session.delete(:successfully_ordered)
-  successfully_ordered = true
+  successfully_ordered = session.delete(:successfully_ordered)
+
 section.order-details
   .page-title.default.order
     .container
       .page-title--details
-        - if successfully_ordered
-            h1.order
-              | Thanks for your order!
-            h3.title-subheader.order
-              | Your dresses are being made...
-        - else
-            h1.order
-              | Order details
+        h1.order
+          | Thanks for your order!
+        h3.title-subheader.order
+          | Your dresses are being made...
 
   .page-content.order.show
     .container.relative
