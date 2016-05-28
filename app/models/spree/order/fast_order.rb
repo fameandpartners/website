@@ -14,14 +14,17 @@ module Spree
               where = "o.completed_at IS NOT NULL
               AND o.completed_at between '#{options[:from_date]}' and '#{options[:to_date]}'
               ORDER BY o.completed_at, line_item_id ASC"
-              sql(select: select, from: from, where: where)
+              sql(with: with, select: select, from: from, where: where)
           end
         end
 
         private
 
-        def sql(select: select, where: where, from: from)
+        def sql(with: with, select: select, where: where, from: from)
           <<-SQL
+
+            #{with}
+
             SELECT
 
             #{order_state},
@@ -236,11 +239,11 @@ module Spree
         end
 
         def images
-          "( SELECT spree_assets.id || '/large/' || spree_assets.attachment_file_name
-          FROM spree_assets
+          "( SELECT product_images.id || '/large/' || product_images.attachment_file_name
+          FROM product_images
           WHERE
             (
-              (spree_assets.viewable_id IN
+              (product_images.viewable_id IN
                 ( SELECT pcv.id
                   FROM product_color_values pcv
                   WHERE
@@ -251,21 +254,19 @@ module Spree
                               FROM spree_option_values_variants
                               WHERE variant_id = sv.id))
                   AND
-                    spree_assets.viewable_type = 'ProductColorValue')
+                    product_images.viewable_type = 'ProductColorValue')
             OR
-              (spree_assets.viewable_id = sv.id AND spree_assets.viewable_type = 'Spree::Variant')
+              (product_images.viewable_id = sv.id AND product_images.viewable_type = 'Spree::Variant')
             )
-          AND
-            lower(spree_assets.attachment_file_name) LIKE '%front-crop%'
           LIMIT 1) as variant_image,
 
         CASE WHEN lip.id > 0
           THEN
-            ( SELECT spree_assets.id || '/large/' || spree_assets.attachment_file_name
-              FROM spree_assets
+            ( SELECT product_images.id || '/large/' || product_images.attachment_file_name
+              FROM product_images
               WHERE
                 (
-                  (spree_assets.viewable_id IN
+                  (product_images.viewable_id IN
                     ( SELECT pcv.id
                       FROM product_color_values pcv
                       WHERE
@@ -276,36 +277,32 @@ module Spree
                             FROM spree_option_values_variants
                             WHERE variant_id = custom_variant_id))
                       AND
-                        spree_assets.viewable_type = 'ProductColorValue')
+                        product_images.viewable_type = 'ProductColorValue')
                 OR
-                  (spree_assets.viewable_id = custom_variant_id AND spree_assets.viewable_type = 'Spree::Variant')
+                  (product_images.viewable_id = custom_variant_id AND product_images.viewable_type = 'Spree::Variant')
                 )
-              AND
-                lower(spree_assets.attachment_file_name) LIKE '%front-crop%'
               LIMIT 1)
           ELSE NULL
           END as custom_variant_image,
 
-        ( SELECT spree_assets.id || '/large/' || spree_assets.attachment_file_name
-          FROM spree_assets
+        ( SELECT product_images.id || '/large/' || product_images.attachment_file_name
+          FROM product_images
           WHERE
             (
-              (spree_assets.viewable_id IN
+              (product_images.viewable_id IN
                 ( SELECT product_color_values.id
                   FROM product_color_values
                   WHERE
                   product_color_values.product_id = sp.id
-                ) AND spree_assets.viewable_type = 'ProductColorValue')
+                ) AND product_images.viewable_type = 'ProductColorValue')
             OR
-              (spree_assets.viewable_id IN
+              (product_images.viewable_id IN
                 ( SELECT spree_variants.id
                   FROM spree_variants
                   WHERE
                   spree_variants.product_id = sp.id AND spree_variants.deleted_at IS NULL
-                ) AND spree_assets.viewable_type = 'Spree::Variant')
+                ) AND product_images.viewable_type = 'Spree::Variant')
             )
-          AND
-            lower(spree_assets.attachment_file_name) LIKE '%front-crop%'
           LIMIT 1) as product_image"
         end
 
@@ -325,6 +322,16 @@ module Spree
               LIMIT 1)
           ELSE NULL
           END as custom_variant_id) s1"
+        end
+
+        def with
+          "WITH product_images AS
+            (
+              SELECT _sa.*
+              FROM spree_assets _sa
+              WHERE (_sa.viewable_type = 'Spree::Variant' OR _sa.viewable_type = 'ProductColorValue')
+              AND lower(_sa.attachment_file_name) LIKE '%front-crop%'
+            )"
         end
 
       end
