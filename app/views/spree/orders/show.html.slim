@@ -105,30 +105,31 @@ section.order-details
                 li.question
                   / TODO Confirm URL
                   a href='#'
-                    span How long will it take the seamstress to make my dress?
+                    span
+                      | How long will it take the seamstress to make my dress?
                     i.link-icon.fa.fa-chevron-right
                 li.question
-                  / TODO Confirm URL
-                  a href='/faqs#collapse-orders-track'
-                    span Where can I track my order?
+                  a href='#{faqs_path}#collapse-delivery-track-order'
+                    span
+                      | Where can I track my order?
+                    i.link-icon.fa.fa-chevron-right
+                li.question
+                  a href='#{faqs_path}#collapse-delivery-shipping-times'
+                    span
+                      | My order hasn't arrived in time
+                    i.link-icon.fa.fa-chevron-right
+                li.question
+                  a href='#{faqs_path}#collapse-exchange-how-to'
+                    span
+                      | Can I change my dress?
                     i.link-icon.fa.fa-chevron-right
                 li.question
                   / TODO Confirm URL
                   a href='#'
-                    span My order hasn't arrived in time
-                    i.link-icon.fa.fa-chevron-right
-                li.question
-                  / TODO Confirm URL
-                  a href='/faqs#collapse-returns-size-color'
-                    span Can I change my dress?
-                    i.link-icon.fa.fa-chevron-right
-                li.question
-                  / TODO Confirm URL
-                  a href='#'
-                    span Oops! My addres is wrong!
+                    span Oops! My address is wrong!
                     i.link-icon.fa.fa-chevron-right
               .see-more
-                a.btn.btn-black href='/faqs'
+                a.btn.btn-black href='#{faqs_path}'
                     | See more FAQs
 
         .col-md-4.order-sidebar-wrapper
@@ -138,25 +139,23 @@ section.order-details
               .item
                 h4 1. Your Dress is Being Custom Cut & Made
                 p Our team of artisan seamstresses make your dress from start to finish.
-                / TODO: get real path
-                a.sidebar-link href='/why-us'
+                a.sidebar-link href='#{why_us_path}'
                   | Learn more about our processes
                   i.link-icon.fa.fa-chevron-right
               .item
                 h4 2. Your dress is shipped
                 p Once the finishing touches have been made to your dress and we are good to go, we'll email you a shipping confirmation.
               .item
-                / TODO: Insert real date estimate
                 h4
                   | 3. Expect delivery date: <br> #{order.order.projected_delivery_date.strftime("%d of %b, %Y")}
                 p You'll be able to track your delivery with your shipping confirmation.
-                a.sidebar-link href='/faqs#collapse-shipping-track'
+                a.sidebar-link href='#{faqs_path}#collapse-shipping-track'
                   | Learn more about Shipping and Delivery
                   i.link-icon.fa.fa-chevron-right
               .item
                 h4 4. It arrives!
                 p Make sure you keep all packaging and leave the tags on in case you need to return / exchange.
-                a.sidebar-link href='/faqs#collapse-returns-policy'
+                a.sidebar-link href='#{faqs_path}/faqs#collapse-returns-policy'
                   | See our Return Policy
                   i.link-icon.fa.fa-chevron-right
 
@@ -172,7 +171,7 @@ section.order-details
                 / TODO: Enter real password
                 span.value = current_spree_user.email
               .login-btn
-                a.btn.btn-black href='/profile'
+                a.btn.btn-black href='#{profile_path}'
                   | Go to log in
 
 - if successfully_ordered || params[:force_tracking]
