@@ -224,7 +224,7 @@ module Spree
                 INNER JOIN spree_option_types sot ON sot.id = sov.option_type_id
                 WHERE
                   sot.name IN ('dress-color', 'dress-custom-color')
-                  AND sovv.variant_id IN (SELECT spree_variants.id FROM spree_variants
+                  AND sovv.variant_id IN (SELECT DISTINCT(spree_variants.id) FROM spree_variants
                     WHERE spree_variants.product_id = sp.id AND spree_variants.is_master = false AND spree_variants.deleted_at IS NULL)
                   AND sov.id = lip.color_id)
               ELSE NULL
@@ -244,13 +244,13 @@ module Spree
           WHERE
             (
               (product_images.viewable_id IN
-                ( SELECT pcv.id
+                ( SELECT DISTINCT(pcv.id)
                   FROM product_color_values pcv
                   WHERE
                     pcv.product_id = sp.id
                   AND
                     pcv.option_value_id IN
-                            ( SELECT option_value_id
+                            ( SELECT DISTINCT(option_value_id)
                               FROM spree_option_values_variants
                               WHERE variant_id = sv.id))
                   AND
@@ -267,13 +267,13 @@ module Spree
               WHERE
                 (
                   (product_images.viewable_id IN
-                    ( SELECT pcv.id
+                    ( SELECT DISTINCT(pcv.id)
                       FROM product_color_values pcv
                       WHERE
                         pcv.product_id = sp.id
                       AND
                         pcv.option_value_id IN
-                          ( SELECT option_value_id
+                          ( SELECT DISTINCT(option_value_id)
                             FROM spree_option_values_variants
                             WHERE variant_id = custom_variant_id))
                       AND
@@ -290,14 +290,14 @@ module Spree
           WHERE
             (
               (product_images.viewable_id IN
-                ( SELECT product_color_values.id
+                ( SELECT DISTINCT(product_color_values.id)
                   FROM product_color_values
                   WHERE
                   product_color_values.product_id = sp.id
                 ) AND product_images.viewable_type = 'ProductColorValue')
             OR
               (product_images.viewable_id IN
-                ( SELECT spree_variants.id
+                ( SELECT DISTINCT(spree_variants.id)
                   FROM spree_variants
                   WHERE
                   spree_variants.product_id = sp.id AND spree_variants.deleted_at IS NULL
