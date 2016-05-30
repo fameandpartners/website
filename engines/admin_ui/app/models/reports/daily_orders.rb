@@ -2,12 +2,16 @@ module Reports
   class DailyOrders
     include RawSqlCsvReport
 
-    def initialize(from:, to:)
+    def initialize(from:, to:, is_report: false)
       raise ArgumentError unless from.respond_to?(:to_date)
       raise ArgumentError unless to.respond_to?(:to_date)
-
-      @from = from.to_datetime.beginning_of_day
-      @to   = to.to_datetime.end_of_day
+      unless is_report
+        @from = from.to_datetime.beginning_of_day
+        @to   = to.to_datetime.end_of_day
+      else
+        @from = from
+        @to = to
+      end
     end
 
     def from
@@ -26,11 +30,10 @@ module Reports
       [
         description,
         'from',
-        @from.to_date.to_s(:filename),
+        @from.to_s(:filename),
         'to',
-        @to.to_date.to_s(:filename),
+        @to.to_s(:filename),
         'generated',
-        DateTime.now.to_s(:filename),
       ].join('_') << ".csv"
     end
 

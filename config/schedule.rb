@@ -12,3 +12,11 @@ end
 every 1.day, at: '1:00 am' do
   rake 'feed:export:all'
 end
+
+every 1.day, at: '1:00 am' do
+  rake 'reports:daily_reports[first]'
+end
+
+every 1.day, at: '1:00 pm' do
+  rake 'reports:daily_reports[second]'
+end
