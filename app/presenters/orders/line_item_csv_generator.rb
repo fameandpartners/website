@@ -24,10 +24,12 @@ module Orders
     end
 
     def to_csv
+      line = Orders::LineItemCSVPresenter
+
       CSV.generate(headers: true) do |csv|
         csv << headers
         orders.map do |order|
-          line = Orders::LineItemCSVPresenter.new order.attributes
+          line.set_line order.attributes
           csv << [
             line.order_state,
             line.order_number,

@@ -39,11 +39,13 @@ module Reports
     end
 
     def report_csv
+      line = Orders::LineItemCSVPresenter
+
       CSV.generate(headers: true) do |csv|
         csv << report_headers
 
         self.each do |r|
-          line = Orders::LineItemCSVPresenter.new r
+          line.set_line r
           csv << [
             line.order_number,
             line.site_version,
