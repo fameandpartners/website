@@ -46,6 +46,7 @@ Spree::OrderMailer.class_eval do
       )
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)
+      Raven.capture_exception(e)
     end
   end
 
