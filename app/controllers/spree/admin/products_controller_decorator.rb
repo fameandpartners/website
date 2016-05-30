@@ -1,6 +1,8 @@
+require 'csv'
 Spree::Admin::ProductsController.class_eval do
   before_filter :set_default_prototype, :only => [:new]
   before_filter :split_related_outerwear_ids, :only => [:update]
+  respond_to :csv
 
   def search_outerwear
     scope = Spree::Product.outerwear
@@ -14,6 +16,20 @@ Spree::Admin::ProductsController.class_eval do
     end
 
     render 'spree/admin/products/search'
+  end
+
+  def export_product_taxons_csv
+    all_products = Spree::Product.includes(:taxons)
+
+    csv = CSV.generate(col_sep: ',') do |csv|
+      csv << ['Product Name',
+              'Taxons']
+      all_products.each do |p|
+        csv << [p.name,
+                p.taxons.pluck(:name).join(",")]
+      end
+    end
+    send_data csv, filename: "all_products_taxons.csv", type: :csv
   end
 
   protected

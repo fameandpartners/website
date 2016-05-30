@@ -81,6 +81,9 @@
                     <div class="page-actions table-cell toolbar" data-hook="toolbar">
                       <ul class="inline-menu">
                         <%= yield :page_actions %>
+                        <% if controller_name == 'products' && action_name == 'index' %>
+                          <a href= <%= admin_export_product_taxons_csv_path %> class="button" id="export_product_taxons_csv" style="margin-top: 10px">Export product  -  taxons CSV</a>
+                        <% end %>
                       </ul>
                     </div>
                   <% end %>
