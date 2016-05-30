@@ -81,6 +81,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     $('#filter-accordion :input').prop('checked', false)
     $('#filter-accordion .js-filter-all').prop('checked', true)
     $('#filter-accordion select').val('none')
+    $('#filter-accordion .panel-collapse').collapse('hide')
     @update()
 
   resetPagination: (items_on_page, total_records) ->
