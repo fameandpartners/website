@@ -129,7 +129,7 @@ section.order-details
               .item
                 h4 1. Your Dress is Being Custom Cut & Made
                 p Our team of artisan seamstresses make your dress from start to finish.
-                a.sidebar-link href='#{why_us_path}'
+                = link_to why_us_path, class: 'sidebar-link'
                   | Learn more about our processes
                   i.link-icon.fa.fa-chevron-right
               .item
@@ -137,15 +137,16 @@ section.order-details
                 p Once the finishing touches have been made to your dress and we are good to go, we'll email you a shipping confirmation.
               .item
                 h4
-                  | 3. Expect delivery date: <br> #{order.order.projected_delivery_date.strftime("%d of %b, %Y")}
+                  | 3. Expect delivery date:
+                  p = order.order.projected_delivery_date.strftime('%d of %b, %Y')
                 p You'll be able to track your delivery with your shipping confirmation.
-                a.sidebar-link href='#{faqs_path}#collapse-orders-track'
+                = link_to faqs_path(anchor: 'collapse-orders-track'), class: 'sidebar-link'
                   | Learn more about Shipping and Delivery
                   i.link-icon.fa.fa-chevron-right
               .item
                 h4 4. It arrives!
                 p Make sure you keep all packaging and leave the tags on in case you need to return / exchange.
-                a.sidebar-link href='#{faqs_path}/faqs#collapse-returns-policy'
+                = link_to faqs_path(anchor: 'collapse-returns-policy'), class: 'sidebar-link'
                   | See our Return Policy
                   i.link-icon.fa.fa-chevron-right
 
