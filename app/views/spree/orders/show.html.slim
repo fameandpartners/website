@@ -155,21 +155,6 @@ section.order-details
                   | See our Return Policy
                   i.link-icon.fa.fa-chevron-right
 
-            / TODO: Add conditional if customer purchased as guest
-            .account-login-info
-              h3 We've created an account just for you...
-              .login-info
-                span.label Login
-                / TODO: Enter real e-mail address
-                span.value = current_spree_user.email
-              .pwd-info
-                span.label Password
-                / TODO: Enter real password
-                span.value = current_spree_user.email
-              .login-btn
-                a.btn.btn-black href='#{profile_path}'
-                  | Go to log in
-
 - if successfully_ordered || params[:force_tracking]
   = render 'shared/sales_conversion_pixels', locals: { order: @order }
   = render 'shared/tracking/masterpass_analytics'
