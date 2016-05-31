@@ -338,6 +338,7 @@ FameAndPartners::Application.routes.draw do
 
     # return form
     get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf')
+    get '/returns', to: redirect('/faqs#collapse-returns-policy')
 
     # External URLs
     get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
