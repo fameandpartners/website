@@ -99,17 +99,17 @@ section.order-details
               h2 FAQs about Your Order
               ul
                 li.question
-                  a href='#{faqs_path}#collapse-shipping-track'
+                  a href='#{faqs_path}#collapse-orders-track'
                     span
                       | How can I track my order?
                     i.link-icon.fa.fa-chevron-right
                 li.question
-                  a href='#{faqs_path}#collapse-delivery-expected-date'
+                  a href='#{faqs_path}#collapse-delivery-how-long'
                     span
                       | How long does Delivery take?
                     i.link-icon.fa.fa-chevron-right
                 li.question
-                  a href='#{faqs_path}#collapse-delivery-sign-in'
+                  a href='#{faqs_path}#collapse-delivery-sign'
                     span
                       | Will I have to sign for my delivery?
                     i.link-icon.fa.fa-chevron-right
@@ -139,7 +139,7 @@ section.order-details
                 h4
                   | 3. Expect delivery date: <br> #{order.order.projected_delivery_date.strftime("%d of %b, %Y")}
                 p You'll be able to track your delivery with your shipping confirmation.
-                a.sidebar-link href='#{faqs_path}#collapse-shipping-track'
+                a.sidebar-link href='#{faqs_path}#collapse-orders-track'
                   | Learn more about Shipping and Delivery
                   i.link-icon.fa.fa-chevron-right
               .item
