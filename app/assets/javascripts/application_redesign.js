@@ -80,6 +80,11 @@
 //= require partials/helpers/error_messages.js.coffee
 
 //-----------------------------
+// Styling Session page
+//-----------------------------
+//= require partials/styling_session_page
+
+//-----------------------------
 // Product details with related
 //-----------------------------
 //= require partials/product_details.js
