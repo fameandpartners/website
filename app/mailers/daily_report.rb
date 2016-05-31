@@ -6,7 +6,7 @@ class DailyReport < ActionMailer::Base
     mail.attachments[report_filename] = File.read(report_full_name)
     mail(
       to: 'orders@fameandpartners.com.cn, bens@fameandpartners.com',
-      subject: "Daily report #{Date.today.to_date} #{report_type}",
+      subject: "Daily orders report #{Date.today.to_date} #{report_type}",
       layout: false
     )
   end
