@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160516233017) do
+ActiveRecord::Schema.define(:version => 20160531235018) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -339,13 +339,15 @@ ActiveRecord::Schema.define(:version => 20160516233017) do
     t.integer  "refund_amount"
     t.datetime "refunded_at"
     t.string   "uuid"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.boolean  "factory_fault"
     t.integer  "item_price"
     t.integer  "item_price_adjusted"
     t.string   "factory_fault_reason"
     t.string   "bergen_asn_number"
+    t.integer  "bergen_actual_quantity"
+    t.integer  "bergen_damaged_quantity"
   end
 
   add_index "item_returns", ["line_item_id"], :name => "index_item_returns_on_line_item_id", :unique => true
