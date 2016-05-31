@@ -99,30 +99,24 @@ section.order-details
               h2 FAQs about Your Order
               ul
                 li.question
-                  / TODO Confirm URL
-                  a href='#'
+                  a href='#{faqs_path}#collapse-shipping-track'
                     span
-                      | How long will it take the seamstress to make my dress?
+                      | How can I track my order?
                     i.link-icon.fa.fa-chevron-right
                 li.question
-                  a href='#{faqs_path}#collapse-delivery-track-order'
+                  a href='#{faqs_path}#collapse-delivery-expected-date'
                     span
-                      | Where can I track my order?
+                      | How long does Delivery take?
                     i.link-icon.fa.fa-chevron-right
                 li.question
-                  a href='#{faqs_path}#collapse-delivery-shipping-times'
+                  a href='#{faqs_path}#collapse-delivery-sign-in'
                     span
-                      | My order hasn't arrived in time
+                      | Will I have to sign for my delivery?
                     i.link-icon.fa.fa-chevron-right
                 li.question
-                  a href='#{faqs_path}#collapse-exchange-how-to'
+                  a href='#{faqs_path}#collapse-order-cancel'
                     span
-                      | Can I change my dress?
-                    i.link-icon.fa.fa-chevron-right
-                li.question
-                  / TODO Confirm URL
-                  a href='#'
-                    span Oops! My address is wrong!
+                      | Can I cancel my order?
                     i.link-icon.fa.fa-chevron-right
               .see-more
                 a.btn.btn-black href='#{faqs_path}'
