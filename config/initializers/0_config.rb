@@ -3,17 +3,17 @@ configatron.host                    = 'fameandpartners.com'
 configatron.noreply                 = 'Fame & Partners<noreply@fameandpartners.com>'
 configatron.admin                   = 'team@fameandpartners.com'
 configatron.app_name                = 'Fame And Partners'
-configatron.sitemap_url             = 'http://images.fameandpartners.com/sitemap/sitemap.xml.gz'
+configatron.sitemap_url             = 'https://d1sd72h9dq237j.cloudfront.net/sitemap/sitemap.xml.gz'
 configatron.blog_host               = 'fameandpartners.tumblr.com'
 configatron.days_delivery_emergency = 0
 
 # assets
 configatron.aws.enabled    = false
-configatron.aws.bucket     = ""
-configatron.aws.access_key = ""
-configatron.aws.secret_key = ""
-configatron.aws.host       = "images.fameandpartners.com" # bucket: fameandpartners
-configatron.asset_host     = "assets.fameandpartners.com"
+configatron.aws.bucket     = ''
+configatron.aws.access_key = ''
+configatron.aws.secret_key = ''
+configatron.aws.host       = 'd1sd72h9dq237j.cloudfront.net' # bucket: fameandpartners
+configatron.asset_host     = 'd1h7wjzwtdym94.cloudfront.net'
 
 configatron.typekit_id = 'kur6crm'
 

@@ -98,10 +98,6 @@ window.page.EmailCaptureModal = class EmailCaptureModal
     window.track.event('LandingPageModal', 'Submitted', @opts.promocode)
     window.track.dataLayer.push({'event': 'modalSignup', 'signup_email': @opts.email})
 
-    if @opts.fb
-      window._fbq = window._fbq || []
-      window._fbq.push(['track', @opts.fb, {'value':'0.00','currency':'USD'}]);
-
   failure: () =>
     window.helpers.showAlert(message: 'Is your email address correct?')
     window.track.event('LandingPageModal', 'Error', @opts.promocode)

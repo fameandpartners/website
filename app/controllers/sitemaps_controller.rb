@@ -1,5 +1,5 @@
 class SitemapsController < ActionController::Base
-  SITEMAP_BASE_URL = "http://#{configatron.aws.host}/sitemap/"
+  SITEMAP_BASE_URL = "https://#{configatron.aws.host}/sitemap/"
 
   # GET /sitemap_index.xml
   # GET /sitemap_index.xml.gz

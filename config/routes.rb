@@ -18,6 +18,9 @@ FameAndPartners::Application.routes.draw do
   #######################################################
   # Temporary redirection to fix wrong path sent to users
   #######################################################
+
+  # TODO: (May 26 2016) Every redirection on this block should live in the HTTP server and not in the application!
+
   get '/AU' => redirect(path: '/au/dresses')
 
   if Features.active?(:redirect_to_com_au_domain)
@@ -25,6 +28,17 @@ FameAndPartners::Application.routes.draw do
     get '/au' => redirect(path: '/', host: 'www.fameandpartners.com.au')
   end
 
+  if Features.active?(:redirect_to_www_and_https)
+    constraints(host: /^fameandpartners.com.au/) do
+      root to: redirect('https://www.fameandpartners.com.au')
+      match '/*path', to: redirect { |_, request| URI.join('https://www.fameandpartners.com.au', request.fullpath).to_s }
+    end
+
+    constraints(host: /^fameandpartners.com/) do
+      root to: redirect('https://www.fameandpartners.com')
+      match '/*path', to: redirect { |_, request| URI.join('https://www.fameandpartners.com', request.fullpath).to_s }
+    end
+  end
 
   # TODO: After .com.au migration, this scope can simply go away.
   scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
@@ -210,11 +224,6 @@ FameAndPartners::Application.routes.draw do
       root to: 'products/collections#show', as: :dresses
       get '/', to: 'products/collections#show', as: :collection
 
-      # TODO - Remove? - 2015.04.11 - Redirecting old accessory and customisation style URLS to main product page.
-      product_style_custom_redirect = -> path_params, _rq { ["/#{path_params[:site_version]}/dresses/dress-#{path_params[:product_slug]}", path_params[:color_name].presence].join('/') }
-      get '/custom-:product_slug(/:color_name)', to: redirect(product_style_custom_redirect)
-      get '/styleit-:product_slug(/:color_name)', to: redirect(product_style_custom_redirect)
-
       # Colors should behave like query strings, and not paths
       get '/dress-:product_slug/:color' => redirect { |params, req| "/dresses/dress-#{params[:product_slug]}?#{req.params.except(:product_slug, :site_version).to_query}" }
       get '/dress-:product_slug' => 'products/details#show'
@@ -308,13 +317,8 @@ FameAndPartners::Application.routes.draw do
       get 'success'
     end
 
-    get '/styling-session'  => 'style_sessions#new', defaults: { session_type: 'default'  }
-    get '/birthday-styling' => 'style_sessions#new', defaults: { session_type: 'birthday' }
-    get '/prom-styling'     => 'style_sessions#new', defaults: { session_type: 'prom' }
-
-    resource 'style-session', as: 'style_session', only: [:new, :create] do
-      get 'success'
-    end
+    get '/styling-session'  => 'style_sessions#new'
+    resource 'style-session', as: 'style_session', only: [:create]
 
     get '/wedding-consultation' => 'wedding_consultations#new'
     resource 'wedding-consultation', as: 'wedding_consultation', only: [:new, :create] do
