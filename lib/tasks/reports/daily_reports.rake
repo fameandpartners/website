@@ -2,7 +2,6 @@ namespace :reports do
   task :daily_reports, [:start, :duration] => [:environment] do |t, args|
 
     class DailyReportSender
-      REPORTS_FOLDER = './tmp/reports/'
 
       attr_reader :start, :duration
 
@@ -12,10 +11,8 @@ namespace :reports do
       end
 
       def call
-        create_report_folder
         save_report
         send_report
-        delete_report
       end
 
       private
@@ -32,25 +29,18 @@ namespace :reports do
         @report ||= ::Reports::DailyOrders.new(from: from, to: to, is_report: true)
       end
 
-      def report_full_name
-        REPORTS_FOLDER + report.filename
-      end
-
-      def create_report_folder
-        FileUtils.mkdir_p(REPORTS_FOLDER)
+      def file
+        @file ||= Tempfile.new('report')
       end
 
       def save_report
-        File.open(report_full_name, 'w') { |file| file.write(report.report_csv) }
+        file.write(report.report_csv)
       end
 
       def send_report
-        DailyReportMailer.email(report_full_name, report.filename, " from #{start}:00 to #{start + duration}:00").deliver
+        DailyReportMailer.email(file, report.filename, " from #{start}:00 to #{start + duration}:00").deliver
       end
 
-      def delete_report
-
-      end
     end
 
     DailyReportSender.new(args[:start], args[:duration]).call
