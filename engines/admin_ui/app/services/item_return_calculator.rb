@@ -49,7 +49,7 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.bergen_actual_quantity = event.actual_quantity
     @item_return.bergen_damaged_quantity = event.damaged_quantity
 
-    # TODO: trigger emails based on rejected/accepted items
+    Bergen::Operations::ReceiveBergenParcel.new(item_return: @item_return).process
   end
 
   def advance_legacy_data_import(event)
