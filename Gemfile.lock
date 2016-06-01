@@ -127,6 +127,7 @@ PATH
       slim
     bergen (0.0.1)
       aasm (~> 4.10.0)
+      admin_ui
       rails (~> 3.2.22)
       savon (~> 1.2.0)
       sidekiq (~> 2.13.0)
