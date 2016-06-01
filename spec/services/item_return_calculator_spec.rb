@@ -88,7 +88,11 @@ RSpec.describe ItemReturnCalculator do
   end
 
   describe '#advance_bergen_asn_received' do
-    before { creation_event }
+    before do
+      creation_event
+
+      expect(Bergen::Operations::ReceiveBergenParcel).to receive_message_chain(:new, :process)
+    end
 
     context 'received damaged items' do
       before do
