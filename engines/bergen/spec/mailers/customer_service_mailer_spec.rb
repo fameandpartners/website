@@ -18,18 +18,20 @@ module Bergen
       include_context 'return item ready to process'
 
       def assert_body
-        expect(mailer.body).to have_text('Order Number R123123')
-        expect(mailer.body).to have_text('Order Date 2015-10-10 05:34:00 -0700')
-        expect(mailer.body).to have_text('Bergen ASN Number WHRTN1044588')
-        expect(mailer.body).to have_text('Product Name Stylight')
-        expect(mailer.body).to have_text('Style Number product-sku')
-        expect(mailer.body).to have_text('Product UPC (Global SKU ID) 10001')
-        expect(mailer.body).to have_text('Size US10/AU14')
-        expect(mailer.body).to have_text('Color Blue')
-        expect(mailer.body).to have_text('Height petite')
-        expect(mailer.body).to have_text('Customization Super Custom')
-        expect(mailer.body).to have_text('Item Purchase Price 12345')
-        expect(mailer.body).to have_text('Customer Address Street 1 Complement, Los Angeles, California, 123-321, United States of America')
+        encoded_mailer = mailer.body.encoded
+
+        expect(encoded_mailer).to have_text('Order Number R123123')
+        expect(encoded_mailer).to have_text('Order Date 2015-10-10 05:34:00 -0700')
+        expect(encoded_mailer).to have_text('Bergen ASN Number WHRTN1044588')
+        expect(encoded_mailer).to have_text('Product Name Stylight')
+        expect(encoded_mailer).to have_text('Style Number product-sku')
+        expect(encoded_mailer).to have_text('Product UPC (Global SKU ID) 10001')
+        expect(encoded_mailer).to have_text('Size US10/AU14')
+        expect(encoded_mailer).to have_text('Color Blue')
+        expect(encoded_mailer).to have_text('Height petite')
+        expect(encoded_mailer).to have_text('Customization Super Custom')
+        expect(encoded_mailer).to have_text('Item Purchase Price 12345')
+        expect(encoded_mailer).to have_text('Customer Address Street 1 Complement, Los Angeles, California, 123-321, United States of America')
       end
     end
 
