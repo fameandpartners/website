@@ -37,11 +37,11 @@ class Services::UpdateUserRegistrationForOrder
     @user
   end
 
-  private
-
   def create_user?
     @user.blank? && @params[:create_account] && !Spree::User.where(:email => order_params[:email]).exists?
   end
+
+  private
 
   def create_user
     @user ||= Spree::User.new(user_params)
