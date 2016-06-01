@@ -8,7 +8,7 @@ h1
       ' and drag
     ' on the scale - from least important to very important
 .chart-wrapper
-  .chart.lips.items-box
+  .chart.lips.items-box style="margin-left:25%"
     - question.answers.order('sexiness ASC').each_with_index do |answer, index|
       .item class="step-#{index}"
         label

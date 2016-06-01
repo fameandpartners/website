@@ -30,10 +30,15 @@ class UpdateQuiz < ActiveRecord::Migration
     q8.update_column(:step, 9)
     q9.update_column(:position, "1010")
     q9.update_column(:step, 10)
-    q9.update_column(:position, "1011")
+    q10.update_column(:position, "1011")
     q10.update_column(:step, 10)
-    q9.update_column(:position, "1012")
-    q11.update_column(:step, 10)
+    q11.update_column(:position, "1012")
+    q11.update_column(:step, 11)
+
+    q8.answers.where('sexiness > 5').delete_all
+    new_q3 = Quiz.active.questions.create(text: "Which colors do you like to wear?", position: "1003", partial: "which_colors", multiple: true, step: 3)
+    new_q12 = Quiz.active.questions.create(text: "What is your dress size?", position: "1013", partial: "dress_size", multiple: false, step: 11)
+    new_q13 = Quiz.active.questions.create(text: "How tall are you?", position: "1014", partial: "how_tall", multiple: false, step: 11)
   end
 
   def down

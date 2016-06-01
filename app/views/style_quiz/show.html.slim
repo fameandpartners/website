@@ -53,7 +53,7 @@ css:
           span.total = @quiz.questions.map(&:step).uniq.count + 1
         .film style="position: relative;"
           = form_for :quiz, url: style_quiz_path, remote: true, method: :put do |f|
-            - @questions_by_steps.to_a.to(1).each do |step, questions|
+            - @questions_by_steps.to_a.to(2).each do |step, questions|
               .step.film-frame id="step-#{step}"
                 - questions.each do |question|
                   .question id="question-#{question.id}"
@@ -65,7 +65,7 @@ css:
               .question id="question-0"
                 = render 'questions/friends'
 
-            - @questions_by_steps.to_a.from(2).each do |step, questions|
+            - @questions_by_steps.to_a.from(3).each do |step, questions|
               .step.film-frame id="step-#{step}"
                 - questions.each do |question|
                   .question id="question-#{question.id}"
