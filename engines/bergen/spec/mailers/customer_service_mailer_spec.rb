@@ -6,11 +6,11 @@ module Bergen
   RSpec.describe CustomerServiceMailer, type: :mailer do
 
     describe 'default configurations' do
-      let(:config) { described_class.default }
+      let(:default_config) { described_class.default }
 
       it do
-        expect(config[:to]).to eq(%w(team@fameandpartners.com returns@fameandpartners.com))
-        expect(config[:from]).to eq('noreply@fameandpartners.com')
+        expect(default_config[:to]).to eq(%w(team@fameandpartners.com returns@fameandpartners.com))
+        expect(default_config[:from]).to eq('noreply@fameandpartners.com')
       end
     end
 
