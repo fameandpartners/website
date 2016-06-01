@@ -23,8 +23,14 @@ module Bergen
         !rejected? && item_return.bergen_actual_quantity > 0
       end
 
-      def admin_ui_url
-        AdminUi.railtie_routes_url_helpers.item_return_path(item_return)
+      def admin_ui_mail_url
+        AdminUi::Engine.routes.url_helpers.item_return_url(item_return, default_url_options)
+      end
+
+      private
+
+      def default_url_options
+        FameAndPartners::Application.config.action_mailer.default_url_options
       end
     end
   end

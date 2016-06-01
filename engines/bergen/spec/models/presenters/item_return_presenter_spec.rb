@@ -34,12 +34,12 @@ module Bergen
         end
       end
 
-      describe '#admin_ui_url' do
+      describe '#admin_ui_mail_url' do
         let(:item_return) { build_stubbed(:item_return, id: 101) }
         let(:presenter) { described_class.new(item_return: item_return) }
 
         it 'returns the admin UI url for the given item return' do
-          expect(presenter.admin_ui_url).to eq('/fame_admin/item_returns/101')
+          expect(presenter.admin_ui_mail_url).to eq('http://fameandpartners.test/fame_admin/item_returns/101')
         end
       end
     end
