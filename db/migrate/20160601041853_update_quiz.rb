@@ -35,6 +35,12 @@ class UpdateQuiz < ActiveRecord::Migration
     q11.update_column(:position, "1012")
     q11.update_column(:step, 11)
 
+    q1.answers.where('code NOT IN (?)', ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"]).delete_all
+    q2.answers.where('code NOT IN (?)', ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"]).delete_all
+    q4.answers.where('code NOT IN (?)', ["dramatic1","dramatic2","dramatic3","romantic1","romantic2","romantic3","edgy1","edgy2","edgy3","statement1","statement2","statement3","natural1","natural2","natural3"]).delete_all
+    q5.answers.where('code NOT IN (?)', ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"]).delete_all
+    q6.answers.where('code NOT IN (?)', ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"]).delete_all
+
     q8.answers.where('sexiness > 5').delete_all
     new_q3 = Quiz.active.questions.create(text: "Which colors do you like to wear?", position: "1003", partial: "which_colors", multiple: true, step: 3)
     new_q12 = Quiz.active.questions.create(text: "What is your dress size?", position: "1013", partial: "dress_size", multiple: false, step: 11)
