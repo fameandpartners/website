@@ -1,0 +1,58 @@
+require 'spec_helper'
+
+require_relative '../support/return_item_ready_to_process_context'
+
+module Bergen
+  RSpec.describe CustomerServiceMailer, type: :mailer do
+
+    describe 'default configurations' do
+      let(:config) { described_class.default }
+
+      it do
+        expect(config[:to]).to eq(%w(team@fameandpartners.com returns@fameandpartners.com))
+        expect(config[:from]).to eq('noreply@fameandpartners.com')
+      end
+    end
+
+    shared_examples 'CustomerServiceMailer body' do
+      include_context 'return item ready to process'
+
+      def assert_body
+        expect(mailer.body).to have_text('Order Number R123123')
+        expect(mailer.body).to have_text('Order Date 2015-10-10 05:34:00 -0700')
+        expect(mailer.body).to have_text('Bergen ASN Number WHRTN1044588')
+        expect(mailer.body).to have_text('Product Name Stylight')
+        expect(mailer.body).to have_text('Style Number product-sku')
+        expect(mailer.body).to have_text('Product UPC (Global SKU ID) 10001')
+        expect(mailer.body).to have_text('Size US10/AU14')
+        expect(mailer.body).to have_text('Color Blue')
+        expect(mailer.body).to have_text('Height petite')
+        expect(mailer.body).to have_text('Customization Super Custom')
+        expect(mailer.body).to have_text('Item Purchase Price 12345')
+        expect(mailer.body).to have_text('Customer Address Street 1 Complement, Los Angeles, California, 123-321, United States of America')
+      end
+    end
+
+    describe '#accepted_parcel' do
+      subject(:mailer) { described_class.accepted_parcel(item_return: item_return) }
+
+      include_examples 'CustomerServiceMailer body'
+
+      it do
+        expect(mailer.subject).to eq('ACCEPTED - Order R123123 received')
+        assert_body
+      end
+    end
+
+    describe '#rejected_parcel' do
+      subject(:mailer) { described_class.rejected_parcel(item_return: item_return) }
+
+      include_examples 'CustomerServiceMailer body'
+
+      it do
+        expect(mailer.subject).to eq('REJECTED - Order R123123 received')
+        assert_body
+      end
+    end
+  end
+end

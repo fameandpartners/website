@@ -1,0 +1,54 @@
+table style="border: 1px solid black; border-collapse: collapse; width: 400px;"
+  tr style="border: 1px solid black"
+    td Order Number
+    td = @item_return.order_number
+
+  tr style="border: 1px solid black"
+    td Order Date
+    td = @item_return.order_date
+
+  tr style="border: 1px solid black"
+
+    td Bergen ASN Number
+    td = @item_return.bergen_asn_number
+
+  tr style="border: 1px solid black"
+
+    td Product Name
+    td = @item_return.product_name
+
+  tr style="border: 1px solid black"
+    td Style Number
+    td = @item_return.product_style_number
+
+  tr style="border: 1px solid black"
+    td Product UPC (Global SKU ID)
+    td = @item_return.global_upc
+
+  tr style="border: 1px solid black"
+    td Size
+    td = @item_return.product_size
+
+  tr style="border: 1px solid black"
+    td Color
+    td = @item_return.product_colour
+
+  tr style="border: 1px solid black"
+    td Height
+    td = @item_return.height
+
+  tr style="border: 1px solid black"
+    td Customization
+    td = @item_return.customization
+
+  tr style="border: 1px solid black"
+    td Item Purchase Price
+    td = @item_return.price
+
+  tr style="border: 1px solid black"
+    td Customer Address
+    td = @item_return.customer_address
+
+p
+  | More information at
+  =<> link_to @item_return.admin_ui_mail_url, @item_return.admin_ui_mail_url
