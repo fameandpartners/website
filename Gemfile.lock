@@ -126,8 +126,10 @@ PATH
       simple_form
       slim
     bergen (0.0.1)
+      aasm (~> 4.10.0)
       rails (~> 3.2.22)
       savon (~> 1.2.0)
+      sidekiq (~> 2.13.0)
     fame_favicon (0.0.1)
       rails (~> 3.2.21)
     inspinia-rails (2.1.0)
@@ -142,6 +144,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.1)
+    aasm (4.10.0)
     actionmailer (3.2.22)
       actionpack (= 3.2.22)
       mail (~> 2.5.4)

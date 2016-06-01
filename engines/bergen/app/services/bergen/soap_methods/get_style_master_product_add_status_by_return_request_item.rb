@@ -1,11 +1,11 @@
 module Bergen
   module SoapMethods
-    class GetStyleMasterProductAddStatus < BaseRequest
-      attr_reader :client, :spree_variant
-
-      def initialize(savon_client:, spree_variant:)
-        @client        = savon_client
-        @spree_variant = spree_variant
+    class GetStyleMasterProductAddStatusByReturnRequestItem < BaseRequest
+      attr_reader :client, :return_request_item
+      #
+      def initialize(savon_client:, return_request_item:)
+        @client                 = savon_client
+        @return_request_item = return_request_item
       end
 
       def response
@@ -28,7 +28,12 @@ module Bergen
       end
 
       def global_sku
-        GlobalSku.find_or_create_by_spree_variant(variant: spree_variant)
+        GlobalSku.find_or_create_by_line_item(line_item_presenter: line_item_presenter)
+      end
+
+      def line_item_presenter
+        line_item = return_request_item.line_item
+        Orders::LineItemPresenter.new(line_item, line_item.order)
       end
     end
   end
