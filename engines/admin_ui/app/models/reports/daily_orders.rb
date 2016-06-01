@@ -72,7 +72,12 @@ module Reports
             line.customer_name,
             line.customer_phone_number,
             line.email,
-            line.shipping_address,
+            line.address1,
+            line.address2,
+            line.city,
+            line.state,
+            line.zipcode,
+            line.country,
             line.image
           ]
         end
@@ -107,7 +112,12 @@ module Reports
         :customer_name,
         :customer_phone_number,
         :email,
-        :shipping_address,
+        :address1,
+        :address2,
+        :city,
+        :state,
+        :zipcode,
+        :country,
         :image
       ]
     end

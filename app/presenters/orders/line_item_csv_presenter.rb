@@ -11,7 +11,8 @@ module Orders
       %w(
           order_state order_number line_item_id total_items completed_at_date tracking_number
           shipment_date fabrication_state style promo_codes email customer_notes currency
-          site_version quantity size personalization custom_variant_id
+          site_version quantity size personalization custom_variant_id address1 address2
+          city state zipcode country
         ).each do |attr|
         define_method(attr) { line["#{attr}"] }
       end
@@ -106,7 +107,7 @@ module Orders
       private
 
       def shipping_address_line
-        "#{line['address1']} #{line['address2']} #{line['city']} #{line['state']} #{line['zipcode']} #{line['country']}"
+        "#{address1} #{address2} #{city} #{state} #{zipcode} #{country}"
       end
 
     end
