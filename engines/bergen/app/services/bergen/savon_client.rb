@@ -57,7 +57,7 @@ module Bergen
           {
             account_id: ENV.fetch('BERGEN_ACCOUNT_ID', 'www.fame&partnersinc.com'),
             username:   ENV.fetch('BERGEN_USERNAME', 'fameandpartners'),
-            password:   ENV.fetch('BERGEN_PASSWORD', 'Bergen1')
+            password:   ENV.fetch('BERGEN_PASSWORD', 'pr0jectpr0m')
           }
         else
           {
