@@ -317,7 +317,7 @@ FameAndPartners::Application.routes.draw do
       get 'success'
     end
 
-    get '/styling-session'  => 'style_sessions#new'
+    get '/styling-session'  => 'style_sessions#new', as: :styling_session
     resource 'style-session', as: 'style_session', only: [:create]
 
     get '/wedding-consultation' => 'wedding_consultations#new'
