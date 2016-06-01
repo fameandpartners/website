@@ -45,7 +45,7 @@ namespace :reports do
       end
 
       def send_report
-        DailyReport.email(report_full_name, report.filename, " from #{start}:00 to #{start + duration}:00").deliver
+        DailyReportMailer.email(report_full_name, report.filename, " from #{start}:00 to #{start + duration}:00").deliver
       end
 
       def delete_report

@@ -1,4 +1,4 @@
-class DailyReport < ActionMailer::Base
+class DailyReportMailer < ActionMailer::Base
 
   default :from => configatron.noreply
 
