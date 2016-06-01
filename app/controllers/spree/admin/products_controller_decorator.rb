@@ -2,7 +2,7 @@ require 'csv'
 Spree::Admin::ProductsController.class_eval do
   before_filter :set_default_prototype, :only => [:new]
   before_filter :split_related_outerwear_ids, :only => [:update]
-  respond_to :csv
+  respond_to :csv, only: [:export_product_taxons_csv]
 
   def search_outerwear
     scope = Spree::Product.outerwear
