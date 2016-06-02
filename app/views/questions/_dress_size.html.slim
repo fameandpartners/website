@@ -6,8 +6,7 @@ ul.body-shapes
     li.item
       label
         .image
-          = image_tag "_quiz/body/#{answer.code}.png", alt: ''
+          .size-box style="width:100px;height: 100px;border: 1px solid; vertical-align: middle;display:table-cell"
+            = answer.code
         .selected
-        .label
-          span = answer.code.humanize.titleize
         = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code

@@ -9,5 +9,5 @@
       li.item style="width:70px"
         label
           = image_tag "_quiz/which_colours/Q3-#{answer.code}.jpg", width: 101, height: 101, alt: ''
-          = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code
+          = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code
           .selected
