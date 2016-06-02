@@ -1,24 +1,6 @@
-@import "compass";
-@import 'droidcss/mixins';
-@import 'old_site/partials/mixins';
+@import 'application_redesign';
 
 @import 'old_site/partials/setup';
-@import 'old_site/partials/fonts';
-@import 'old_site/partials/icons';
-@import 'old_site/partials/global_elements';
-
-@import 'old_site/libs/jquery.jscrollpane';
-
-@import 'media_queries';
-
-@import 'redesign/vars';
-@import 'libs/vex.css';
-@import 'libs/vex-theme-flat-attack.css';
-@import 'libs/vex-theme-bottom-right-corner.css';
-// @import 'redesign/modal';
-@import 'redesign/mixins';
-@import 'redesign/icons';
-
 
 @import 'old_site/partials/quiz';
 

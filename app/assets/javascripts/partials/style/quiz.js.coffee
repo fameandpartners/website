@@ -9,27 +9,15 @@ window.style.Quiz = class StyleQuiz
   constructor: (options = {}) ->
     @options = options
 
-    @masonryGutter = 10
-    @masonryItemsInLine = switch
-      when $(window).width() <= $tabletScreen && $(window).width() > $phoneScreen then 4
-      when $(window).width() <= $phoneScreen then 2
-      else 7
-
     @container = $('.quiz-box')
     @containerInner = @container.find('.quiz-box-inner')
     @stepsBox = @container.find('.steps-box')
-
-    $(window).on('resize', _.throttle(@windowResizeHandler, 100))
 
     @container.on('click', (e) -> e.stopPropagation())
     @container.find('.next a').click _.bind(@nextStepEventHandler, @)
     @container.find('.prev a').click _.bind(@previousStepEventHandler, @)
 
     @init()
-
-  windowResizeHandler: (e) =>
-    e.preventDefault()
-    #@updatePosition()
 
   init: () ->
     _.delay(() ->
@@ -45,15 +33,6 @@ window.style.Quiz = class StyleQuiz
     @container.find('.film').css('width', @stepsBox.width() * $frames.size())
 
     @steps().width(@stepsBox.width())
-    @steps().find('.photos').find('.item').width((@stepsBox.width() / @masonryItemsInLine) - @masonryGutter)
-    scale = Math.max(0.51, (@stepsBox.width() / $chart.width()))
-    $chart.css
-      height: $chart.height() * scale
-      '-webkit-transform': 'scale('+scale+')'
-      '-ms-transform': 'scale('+scale+')'
-      '-o-transform': 'scale('+scale+')'
-      'transform': 'scale('+scale+')'
-
 
     @bindCheckboxesAndRadios()
 
@@ -72,11 +51,6 @@ window.style.Quiz = class StyleQuiz
 
       if $scrollable.data('jsp')
         $scrollable.data('jsp').scrollByY(100)
-    # containerInner = @containerInner
-    # setTimeout () ->
-    #   @containerInner.height($frame.height())
-    # , 1000
-
 
   nextStepEventHandler: (event) ->
     event.preventDefault()
@@ -102,17 +76,12 @@ window.style.Quiz = class StyleQuiz
 
   goToStep: (step) =>
     $step = $(step)
+    @processImagesForStepsInSeries()
     @container.find('.film').animate
       left: '-' + $step.position().left
     @steps().removeClass('current')
     $step.addClass('current')
     @containerInner.height($step.height())
-    if $step.find('.scrollable') && $(window).width() > $phoneScreen
-      if $step.find('.scrollable').data('jsp')
-        $step.find('.scrollable').data('jsp').reinitialise()
-      else
-        $step.find('.scrollable').jScrollPane
-          contentWidth: $step.width()
     @updateProgressBar()
     @updateCurrentStepNumber()
     @triggerEvents($step)
@@ -158,8 +127,7 @@ window.style.Quiz = class StyleQuiz
     ((100 / @stepsCount()) * (@currentStepNumber() - 1)).toFixed()
 
   updateProgressBar: () ->
-    @progressBar().find('.tooltip').text(@currentProgress() + '%')
-    @progressBar().find('.filler').animate
+    @progressBar().animate
       width: @currentProgress() + '%'
 
   updateCurrentStepNumber: () ->
@@ -181,6 +149,7 @@ window.style.Quiz = class StyleQuiz
       $question.find('.item:has(:input:checked)').addClass('active')
 
   triggerEvents: (step) ->
+    $('.js-sexiness-carousel').slick("getSlick").refresh();
     return true
 
   loadImagesForStep: (step) ->
@@ -188,22 +157,13 @@ window.style.Quiz = class StyleQuiz
     for image in $step.find('img')
       $image = $(image)
       if $image.attr('src') is '' && $image.data('src') isnt ''
-        $image.css
-          'position': 'absolute'
-          'left': '-4500px'
         $image.attr('src', $image.data('src'))
 
   applyMasonryForStep: (step) =>
     $step = $(step)
     $step.find('.loader').show()
-    @applyScrollForStep($step)
 
     $quizPhotos = $step.find('.photos')
-
-    $quizPhotos.masonry
-      gutter: @masonryGutter
-      itemSelector: '.item.loaded'
-      columnWidth: '.item'
 
     _quiz = @
     $step.find('.photos img').on 'load', () ->
@@ -214,30 +174,20 @@ window.style.Quiz = class StyleQuiz
       $unappended = $step.find('.item.loaded:not(.appended)')
 
       if $unappended.size() >= 7
-        $unappended.find('img').css
-          'position': ''
-          'left': ''
 
-        $step.find('.photos').masonry 'appended', $unappended
+        $step.find('.photos').addClass('appended')
         $step.find('.loader').hide()
-        $unappended.addClass('appended')
 
         _quiz.applyScrollForStep($step)
 
   applyScrollForStep: (step) ->
     $scrollable = $(step).find('.scrollable')
 
-    if $scrollable.data('jsp')
-      $scrollable.data('jsp').reinitialise()
-    else if $(window).width() > $phoneScreen
-      $scrollable.jScrollPane
-        contentWidth: $(step).width() + 'px'
-
   processImagesForStepsInSeries: () ->
+    console.log('processImagesForStepsInSeries');
     $steps = @stepsWithUnLoadedImage()
     index = 0
 
-    @applyMasonryForStep($steps[index])
     @loadImagesForStep($steps[index])
 
     setTimeout () =>
