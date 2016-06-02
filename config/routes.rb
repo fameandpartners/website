@@ -325,8 +325,8 @@ FameAndPartners::Application.routes.draw do
       get 'success'
     end
 
-    get '/contact' => 'contacts#new'
-    resource 'contact', as: 'contact', only: [:new, :create] do
+    get '/contact/new', to: redirect('/contact'), as: :old_contact_page
+    resource 'contact', as: 'contact', only: [:new, :create], path_names: { new: '/' } do
       get 'success'
     end
     post '/about' => 'contacts#join_team', as: :join_team
