@@ -1,13 +1,11 @@
-.subtitle
-  span WHICH BEST DESCRIBES YOUR BODY SHAPE?
-
-ul.body-shapes
-  - question.answers.each do |answer|
-    li.item
-      label
-        .image
-          = image_tag "_quiz/body/#{answer.code}.png", alt: ''
-        .selected
-        .label
-          span = answer.code.humanize.titleize
-        = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code
+.col-md-8.col-md-offset-4
+  ul.body-shapes
+    - question.answers.each do |answer|
+      li.item
+        label
+          .image
+            = image_tag "_quiz/body/#{answer.code}.png", alt: ''
+          .selected
+          .label
+            span = answer.code.humanize.titleize
+          = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code

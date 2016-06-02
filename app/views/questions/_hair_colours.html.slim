@@ -7,9 +7,15 @@
     .photos-wrapper
         .loader
         .scrollable
-          .row.photos.randomize.items-box
+          .row
+            .col-md-12
+              .title-heading 
+                'WHAT IS YOUR HAIR COLOR?
+                span
+                  '(Select One)
+          .row.photos.items-box
             - question.answers.each do |answer|
-              .col-sm-6.col-md-4.item.unloaded
+              .col-sm-4.col-md-3.item.unloaded
                 label.media-wrap
                   = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code
                   = image_tag "style_quiz/hair/#{answer.code}.jpg"
@@ -18,5 +24,4 @@
                       .inner-wrap
                         div
                           .btn.btn-black.btn-xs Selected
-                        div
-                          span Deselect
+                h6 = answer.code.humanize

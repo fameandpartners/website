@@ -8,6 +8,7 @@
 
 h1,
 h2,
+h6,
 .h5 {
   text-transform: none;
 }
@@ -29,6 +30,12 @@ h1 span {
   margin-bottom: 20px;
   font-size: 0.875em;
   font-weight: bold;
+
+  span {
+    font-weight: normal;
+    font-style: italic;
+  }
+
 }
 
 .progress {
@@ -56,6 +63,30 @@ h1 span {
   padding-left: 10px;
   padding-right: 10px;
   font-size: 1.2rem;
+}
+
+.media-wrap.color-wrap {
+
+  &.fair {
+    background: #f9efe5;
+  }
+
+  &.medium_fair {
+    background: #efdccb;
+  }
+
+  &.medium {
+    background: #e6c3aa;
+  }
+
+  &.medium_dark {
+    background: #cd9d78;
+  }
+
+  &.dark {
+    background: #5d3f34;
+  }
+
 }
 
 .step {
