@@ -18,8 +18,8 @@ Spree::ShipmentMailer.class_eval do
         line_items:            line_items,
         shipment_tracking:     shipment.tracking,
         shipment_tracking_url: shipment.blank? ? '#' : shipment.tracking_url,
-        billing_address:       shipment.order.try(:billing_address).to_s  || 'No Billing Address',
-        shipping_address:      shipment.order.try(:shipping_address).to_s || 'No Shipping Address',
+        billing_address:       shipment.order.try(:billing_address).to_s.blank? ? shipment.order.try(:billing_address).to_s : 'No Billing Address',
+        shipping_address:      shipment.order.try(:shipping_address).to_s.blank? ? shipment.order.try(:shipping_address).to_s : 'No Shipping Address',
         phone:                 shipment.order.try(:billing_address).try(:phone) || 'No Phone',
         delivery_date:         shipment.order.projected_delivery_date.try(:strftime, "%a, %d %b %Y"),
         original_order_date:   shipment.order.created_at.strftime("%a, %d %b %Y")
