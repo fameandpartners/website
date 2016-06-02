@@ -18,7 +18,11 @@ module AdminUi
         headers.delete("Content-Length")
 
         response.status    = 200
-        self.response_body = report.to_csv_rows
+        self.response_body = report_csv
+      end
+
+      def report_csv
+        report.to_csv_rows
       end
 
       private

@@ -48,6 +48,7 @@ AdminUi::Engine.routes.draw do
     resource :return_shoppers              , only: [:show, :create]
     resource :sale_items                   , only: [:show, :create]
     resource :size_normalisations          , only: [:show]
+    resource :daily_orders                 , only: [:show, :create]
   end
 
   resources :variants
