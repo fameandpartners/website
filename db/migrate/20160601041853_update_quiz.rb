@@ -12,17 +12,17 @@ class UpdateQuiz < ActiveRecord::Migration
     q10 = Quiz.active.questions.where(text: "What is your skin colour?").first
     q11 = Quiz.active.questions.where(text: "What is your body shape?").first
 
-    q1.update_column(:position: "1002", step: 2)
-    q2.update_column(:position: "1001", step: 1)
-    q3.update_column(:position: "1004", step: 4)
-    q4.update_column(:position: "1005", step: 5)
-    q5.update_column(:position: "1006", step: 6)
-    q6.update_column(:position: "1007", step: 7)
-    q7.update_column(:position: "1008", step: 8)
-    q8.update_column(:position: "1009", step: 9)
-    q9.update_column(:position: "1010", step: 10)
-    q10.update_column(:position: "1011", step: 10)
-    q11.update_column(:position: "1012", step: 11)
+    q1.update_column(position: "1002", step: 2)
+    q2.update_column(position: "1001", step: 1)
+    q3.update_column(position: "1004", step: 4)
+    q4.update_column(position: "1005", step: 5)
+    q5.update_column(position: "1006", step: 6)
+    q6.update_column(position: "1007", step: 7)
+    q7.update_column(position: "1008", step: 8)
+    q8.update_column(position: "1009", step: 9)
+    q9.update_column(position: "1010", step: 10)
+    q10.update_column(position: "1011", step: 10)
+    q11.update_column(position: "1012", step: 11)
 
     q1.answers.where('code NOT IN (?)', ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"]).delete_all
     q2.answers.where('code NOT IN (?)', ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"]).delete_all
