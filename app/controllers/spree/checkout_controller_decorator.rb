@@ -24,11 +24,11 @@ Spree::CheckoutController.class_eval do
     if @order.state == 'address' || @order.state == 'masterpass'
       # update first/last names, email
       registration = Services::UpdateUserRegistrationForOrder.new(@order, try_spree_current_user, params)
-      session[:guest_checkout] = true if registration.create_user?
       registration.update
       if registration.new_user_created?
         fire_event("spree.user.signup", order: current_order)
         sign_in :spree_user, registration.user
+        session[:new_user_created] = true
       end
       if !registration.successfull?
         @order.state = 'masterpass' if params[:state] == 'masterpass'
