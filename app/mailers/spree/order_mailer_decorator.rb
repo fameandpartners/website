@@ -42,7 +42,7 @@ Spree::OrderMailer.class_eval do
         billing_address:    @order.try(:billing_address).to_s  || 'No Billing Address',
         shipping_address:   @order.try(:shipping_address).to_s || 'No Shipping Address',
         phone:              @order.try(:billing_address).try(:phone) || 'No Phone',
-        delivery_date:      @order.projected_delivery_date.strftime("%a, %d %b %Y")
+        delivery_date:      @order.projected_delivery_date.try(:strftime, '%a, %d %b %Y')
       )
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)
@@ -87,6 +87,7 @@ Spree::OrderMailer.class_eval do
       )
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)
+      Raven.capture_exception(e)
     end
   end
 
