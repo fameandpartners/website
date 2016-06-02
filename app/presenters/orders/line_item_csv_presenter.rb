@@ -12,7 +12,7 @@ module Orders
           order_state order_number line_item_id total_items completed_at_date tracking_number
           shipment_date fabrication_state style promo_codes email customer_notes currency
           site_version quantity size personalization custom_variant_id address1 address2
-          city state zipcode country
+          city state zipcode country color_id
         ).each do |attr|
         define_method(attr) { line["#{attr}"] }
       end
@@ -59,8 +59,7 @@ module Orders
 
       def customization_values
         if personalization.present?
-          values = YAML.load(line['customization_value_ids'])
-          customs = values.present? ? CustomisationValue.where(id: values).pluck(:presentation) : []
+          customs = customization_value_ids.present? ? CustomisationValue.where(id: customization_value_ids).pluck(:presentation) : []
           customs.join('|')
         else
           'N/A'
@@ -104,10 +103,65 @@ module Orders
         "http://images.fameandpartners.com/spree/products/#{image}" if image
       end
 
+      def product_number
+        global_sku.id
+      end
+
+      def sku
+        if personalization.present?
+          color_id.nil? ? error_sku : personalization_sku
+        else
+          variant_sku
+        end
+      end
+
       private
 
       def shipping_address_line
         "#{address1} #{address2} #{city} #{state} #{zipcode} #{country}"
+      end
+
+      def global_sku
+        GlobalSku.find_or_create_by_line_hash(
+          line_hash: {
+            sku: sku,
+            style_number: style,
+            product_name: style_name,
+            size: size,
+            color_id: color_id,
+            color: color,
+            height: height,
+            product_id: line['product_id'],
+            variant_id: line['variant_id'],
+            customisation_id: customization_value_ids,
+            customisation_name: customization_values
+          }
+        )
+      end
+
+      def variant_sku
+        line['variant_sku']
+      end
+
+      def error_sku
+        "#{line['variant_sku']}X"
+      end
+
+      def personalization_sku
+        style_number = if (line['variant_master'] == 'TRUE' || line['variant_master'] == 't')
+                         line['variant_sku']
+                       else
+                         line['style']
+                       end.upcase
+        size = line['size'].gsub('/', '')
+        color = "C#{line['color_id']}"
+        custom = customization_value_ids.map {|vid| "X#{vid}"}.join('').presence || 'X'
+        height = "H#{line['height'].to_s.upcase.first}"
+        "#{style_number}#{size}#{color}#{custom}#{height}"
+      end
+
+      def customization_value_ids
+        YAML.load(line['customization_value_ids']) if line['customization_value_ids'].present?
       end
 
     end

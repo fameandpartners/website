@@ -6,10 +6,11 @@ module Spree
         def get_sql(options)
           case options[:report]
             when :full_orders
+              select = ", #{return_action_details}"
               where = "#{options[:where]}, line_item_id ASC"
-              sql(where: where)
+              sql(select: select, where: where)
             when :daily_orders
-              select = ", #{custom_variant_id}, #{images}"
+              select = ", #{sku}, #{custom_variant_id}, #{images}, #{product_id}, #{variant_id}"
               from = ", #{custom_variant_id_from}"
               where = "o.completed_at IS NOT NULL
               AND o.completed_at between '#{options[:from_date]}' and '#{options[:to_date]}'
@@ -46,14 +47,13 @@ module Spree
             #{size},
             #{personalization},
             #{height},
-            #{promo_codes},
             #{color_id},
+            #{promo_codes},
             #{customization_value_ids},
             #{custom_color},
             #{factory},
             #{customer_notes},
             #{address},
-            #{return_action_details},
             #{price},
             #{currency}
             #{select}
@@ -170,6 +170,11 @@ module Spree
 
         def customer_notes
           'o.customer_notes as customer_notes'
+        end
+
+        def sku
+          'sv.sku as variant_sku,
+          sv.is_master as variant_master'
         end
 
         def price
@@ -308,6 +313,14 @@ module Spree
 
         def custom_variant_id
           's1.custom_variant_id as custom_variant_id'
+        end
+
+        def variant_id
+          'sv.id as variant_id'
+        end
+
+        def product_id
+          'sv.product_id as product_id'
         end
 
         def custom_variant_id_from
