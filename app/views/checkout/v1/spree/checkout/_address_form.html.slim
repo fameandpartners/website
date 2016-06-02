@@ -67,10 +67,7 @@ h2.checkout-section-title
     = form.text_field :address2, class: 'required form-control form-control-md'
 
 .row
-  .col-md-4.form-group
-    = form.label :city, with_required_mark(t(:city))
-    = form.text_field :city, class: 'required form-control form-control-md', required: 'required'
-
+  
   .col-md-4.form-group
     = form.label :country_id, with_required_mark(t(:country))
     select id=(country_field_id) name="#{form.object_name}[country_id]" class="form-control form-control-md selectbox"
@@ -90,7 +87,10 @@ h2.checkout-section-title
     = form.text_field(:state_name,
                       :class => !have_states ? 'required  form-control form-control-md' : 'hidden  form-control form-control-md',
                       :disabled => have_states)
-
+  
+  .col-md-4.form-group
+    = form.label :city, with_required_mark(t(:city))
+    = form.text_field :city, class: 'required form-control form-control-md', required: 'required'
   
 
 .row
