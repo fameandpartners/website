@@ -61,6 +61,7 @@ class ProductionOrderEmailService
       )
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)
+      Raven.capture_exception(e)
     end
   end
 end
