@@ -70,7 +70,7 @@ class Populator
       spree_populator = Spree::OrderPopulator.new(order, currency)
 
 
-      if spree_populator.populate(variants: { product_variant.id => product_quantity })
+      if @line_item_ids = spree_populator.populate(variants: { product_variant.id => product_quantity })
         add_making_options
 
         fire_event('spree.cart.add')
@@ -131,7 +131,7 @@ class Populator
     end
 
     def line_item
-      @line_item ||= Spree::LineItem.where(order_id: order.id, variant_id: product_variant.id).first
+      @line_item ||= Spree::LineItem.where(id: @line_item_ids.first).first
     end
 
     def product_options
