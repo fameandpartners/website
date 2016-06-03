@@ -1,73 +1,154 @@
 ruby:
   successfully_ordered = session.delete(:successfully_ordered)
 
-.page-title.default.order
-  .container
-    .page-title--details
-      h1.no-padding-bottom.order
-        - if successfully_ordered
-          | Order Confirmation
-        - else
-          | Order
+section.order-details
+  .page-title.default.order
+    .container
+      .page-title--details
+        h1.order
+          | Thanks for your order!
+        h3.title-subheader.order
+          | Your dresses are being made...
 
-.page-content.user.order.show
-  .container.relative
-    .row
-      .col-md-8.col-md-offset-2
-        .row
-          h2.order-number Your Order Number is: #{ order.number }
+  .page-content.order.show
+    .container.relative
+      .row
+        .order-content-wrapper.col-md-6.col-md-offset-1
+          .row
+            h3.order-number Order # #{ order.number }
+            h3.order-date Order Date #{ l(order.completed_at.to_date) }
+            .order-content
+              .row
+                .order-items
+                  - order.line_items.each do |line_item|
+                    .item
+                      .item-img.col-md-5
+                        = image_tag line_item.image_url, alt: line_item.style_name, class: 'img-responsive ordered-item-image'
+                      .details.col-md-7
+                        .row
+                          .name.col-md-8
+                            = line_item.style_name
+                          .price.col-md-4
+                            / TODO: If price is integer remove decimals
+                            = line_item.display_price
+                        .row
+                          .item-details.col-md-12
+                            ul
+                              li
+                                | Skirt Length: <span class="value">#{line_item.height}</span>
+                              li
+                                | Custom color: <span class="value">#{line_item.colour_name}</span>
+                              li
+                                | Size: <span class="value">#{line_item.size}</span>
+                              li
+                                | Quantity: <span class="value">#{line_item.quantity}</span>
+              .row
+                .order-total.col-md-7.col-md-offset-5
 
-          h2.order-number Ordered On: #{ l(order.completed_at.to_date) }
+                    .row.discount-info
+                      .label.col-md-6 Shipping
+                      / TODO: If price is integer remove decimals
+                      .amount.col-md-6 #{order.order.shipment.display_amount}
 
-        table.table.order-items
-          thead
-            tr
-              th Item
-              th Status
-              th SKU
-              th quantity
-              th price
-          tbody
-            - order.line_items.each do |line_item|
-              tr.item
-                td data-title="Item"
-                  = image_tag line_item.image_url, class: 'img-responsive ordered-item-image'
-                  p
-                    strong
-                      = line_item.style_name
-                    br
+                    .row.discount-info
+                      .label.col-md-6 Discount
+                      / TODO: If price is integer remove decimals
+                      .amount.col-md-6 #{order.order.display_promotion_total}
 
-                    ="Size:#{line_item.size}, Color: #{line_item.colour_name}"
+                    .row.total-info
+                      .label.col-md-6 Total
+                      / TODO: If price is integer remove decimals
+                      .amount.col-md-6
+                        | #{order.display_total}
+                      - if current_site_version.is_australia?
+                        p.price-note Including GST.
 
-                td data-title="status" = line_item_status(line_item)
-                td data-title="sku" = line_item.style_number
-                td data-title="quantity" = line_item.quantity
-                td data-title="price" = line_item.display_price.to_s
+          .row
+            .order-info.col-md-12
+              .half-column.col-md-6
+                .billing-address
+                  h4 Billing Address
+                  ul
+                    li = order.order.billing_address.firstname + " " + order.order.billing_address.lastname
+                    li = order.order.billing_address.address1 + " " + order.order.billing_address.address2
+                    li = order.order.billing_address.city + ", " + order.order.billing_address.state.name
+                    li = order.order.billing_address.zipcode
 
-            tr.total
-              td colspan="4"
-              td data-title="total"
-                p.title
-                  | Order Total &nbsp;
-                  = order.display_total
-                - if current_site_version.is_australia?
-                  p Including GST.
+                .shipping-address
+                  h4 Shipping Address
+                  ul
+                    li = order.order.shipping_address.firstname + " " + order.order.shipping_address.lastname
+                    li = order.order.shipping_address.address1 + " " + order.order.shipping_address.address2
+                    li = order.order.shipping_address.city + " " + order.order.shipping_address.state.name
+                    li = order.order.shipping_address.zipcode
+              .half-column.col-md-6
+                .phone
+                  h4 Phone number
+                  span = order.order.billing_address.phone
 
-        - if successfully_ordered
-          - if order.has_fast_making_items?
-            p.support If you want to find out the exact delivery date of your order, please get in touch with our customer service via email: #{ mail_to('team@fameandpartners.com') }
+                .email
+                  h4 Email
+                  span = order.order.billing_address.email
 
-          p.support
-            ' If you have any questions, please check out our
-            => link_to 'FAQs', 'http://fameandpartners.com/faqs', target: '_blank'
-            ' or contact
-            => link_to 'Customer Service', 'http://fameandpartners.com/contact/', target: '_blank'
-          p Or otherwise contact our friendly team if you need any help.
-          p.support = link_to 'team@fameandpartners.com', 'mailto:team@fameandpartners.com'
+                .delivery-date
+                  h4 Expected delivery date
+                  span = order.order.projected_delivery_date.strftime("%d of %b, %Y")
 
-          - unless current_spree_user.blank?
-            p
-              button.btn.back-to-orders = link_to 'Your orders', user_orders_path, class: 'btn', remote: true
+          .row
+            .faq-wrapper.col-md-12
+              h2 FAQs about Your Order
+              ul
+                li.question
+                  a href='#{faqs_path}#collapse-orders-track'
+                    span
+                      | How can I track my order?
+                    i.link-icon.fa.fa-chevron-right
+                li.question
+                  a href='#{faqs_path}#collapse-delivery-how-long'
+                    span
+                      | How long does Delivery take?
+                    i.link-icon.fa.fa-chevron-right
+                li.question
+                  a href='#{faqs_path}#collapse-delivery-sign'
+                    span
+                      | Will I have to sign for my delivery?
+                    i.link-icon.fa.fa-chevron-right
+                li.question
+                  a href='#{faqs_path}#collapse-order-cancel'
+                    span
+                      | Can I cancel my order?
+                    i.link-icon.fa.fa-chevron-right
+              .see-more
+                a.btn.btn-black href='#{faqs_path}'
+                    | See more FAQs
+
+        .col-md-4.order-sidebar-wrapper
+          .order-sidebar
+            .steps-info
+              h3 What happens next?
+              .item
+                h4 1. Your Dress is Being Custom Cut & Made
+                p Our team of artisan seamstresses make your dress from start to finish.
+                = link_to why_us_path, class: 'sidebar-link'
+                  | Learn more about our processes
+                  i.link-icon.fa.fa-chevron-right
+              .item
+                h4 2. Your dress is shipped
+                p Once the finishing touches have been made to your dress and we are good to go, we'll email you a shipping confirmation.
+              .item
+                h4
+                  | 3. Expect delivery date:
+                  p = order.order.projected_delivery_date.strftime('%d of %b, %Y')
+                p You'll be able to track your delivery with your shipping confirmation.
+                = link_to faqs_path(anchor: 'collapse-orders-track'), class: 'sidebar-link'
+                  | Learn more about Shipping and Delivery
+                  i.link-icon.fa.fa-chevron-right
+              .item
+                h4 4. It arrives!
+                p Make sure you keep all packaging and leave the tags on in case you need to return / exchange.
+                = link_to faqs_path(anchor: 'collapse-returns-policy'), class: 'sidebar-link'
+                  | See our Return Policy
+                  i.link-icon.fa.fa-chevron-right
 
 - if successfully_ordered || params[:force_tracking]
   = render 'shared/sales_conversion_pixels', locals: { order: @order }
