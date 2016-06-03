@@ -2,7 +2,7 @@ class UpdateQuiz < ActiveRecord::Migration
   def up
     old_quiz = Quiz.active
     new_quiz = Quiz.create(name: 'Style Quiz')
-    q1 = new_quiz.questions.create(text: "Choose the look that's closest to your everyday style?", position: "1002", step: 2,partial => "outfits",multiple => true)
+    q1 = new_quiz.questions.create(text: "Choose the look that's closest to your everyday style?", position: "1002", step: 2,partial: "outfits",multiple: true)
     q2 = new_quiz.questions.create(text: "You're walking the red carpet. Which dress would you wear?", position: "1001", step: 1,partial: "oscar_dresses",multiple: true)
     q3 = new_quiz.questions.create(text: "It's time to dress up. Which best describes your style.", position: "1004", step: 4,:partial => "style_words",:multiple => true)
     q4 = new_quiz.questions.create(text: "Tell us which makeup look you love.",position: "1005", step: 5,:partial => "prom_makeup",:multiple => true)
