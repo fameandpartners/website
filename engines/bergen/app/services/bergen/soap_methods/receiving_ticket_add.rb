@@ -68,7 +68,7 @@ module Bergen
                 receiving_ticket.Warehouse('BERGEN LOGISTICS WEST')
                 # receiving_ticket.Memo('Memo')
                 # receiving_ticket.AuthorizedNumber('Auth 123')
-                # receiving_ticket.CustomerPO('PO 123')
+                receiving_ticket.CustomerPO(order.number)
                 # receiving_ticket.LicensePlate('LP12')
                 # receiving_ticket.DriverName('Tom')
                 # receiving_ticket.TrackingNumbers('1Z23456')
@@ -97,6 +97,10 @@ module Bergen
 
       def line_item_presenter
         return_request_item.line_item_presenter
+      end
+
+      def order
+        line_item_presenter.order
       end
 
       def global_sku
