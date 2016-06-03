@@ -1,5 +1,6 @@
 class UpdateQuiz < ActiveRecord::Migration
   def up
+    old_quiz = Quiz.active
     new_quiz = Quiz.create(name: 'Style Quiz')
     q1 = new_quiz.questions.create(text: "Choose the look that's closest to your everyday style?", position: "1002", step: 2,partial => "outfits",multiple => true)
     q2 = new_quiz.questions.create(text: "You're walking the red carpet. Which dress would you wear?", position: "1001", step: 1,partial: "oscar_dresses",multiple: true)
@@ -28,14 +29,39 @@ class UpdateQuiz < ActiveRecord::Migration
       new_q13.answers.create(code: h)
     end
 
-    q1.answers.where('code NOT IN (?)', ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"]).delete_all
-    q2.answers.where('code NOT IN (?)', ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"]).delete_all
-    q4.answers.where('code NOT IN (?)', ["dramatic1","dramatic2","dramatic3","romantic1","romantic2","romantic3","edgy1","edgy2","edgy3","statement1","statement2","statement3","natural1","natural2","natural3"]).delete_all
-    q5.answers.where('code NOT IN (?)', ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"]).delete_all
-    q6.answers.where('code NOT IN (?)', ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"]).delete_all
+    #q1.answers.where('code NOT IN (?)', ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"]).delete_all
+    #q2.answers.where('code NOT IN (?)', ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"]).delete_all
+    #q4.answers.where('code NOT IN (?)', ["dramatic1","dramatic2","dramatic3","romantic1","romantic2","romantic3","edgy1","edgy2","edgy3","statement1","statement2","statement3","natural1","natural2","natural3"]).delete_all
+    #q5.answers.where('code NOT IN (?)', ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"]).delete_all
+    #q6.answers.where('code NOT IN (?)', ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"]).delete_all
 
-    q8.answers.where('sexiness > 5').delete_all
+    #q8.answers.where('sexiness > 5').delete_all
 
+    old_q1 = old_quiz.questions.where(text: "Choose the look that's closest to your everyday style?").first
+    old_q1.answers.each do |ans|
+      if ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"].include?(ans.code)
+        q1.answers.create(code: ans.code,glam: ans.glam, girly: ans.girly,classic: ans.classic,edgy: ans.edgy, bohemian: ans.bohemian,sexiness: ans.sexiness,fashionability: ans.fashionability)
+      end
+    end
+
+    old_q2 = old_quiz.questions.where(text: "You're walking the red carpet. Which dress would you wear?").first
+    old_q2.answers.each do |ans|
+      if ["boho1","boho2","boho3","classic1","classic2","classic3","edgy1","edgy2","edgy3","girly1","girly2","girly3","glam1","glam2","glam3"].include?(ans.code)
+        q2.answers.create(code: ans.code,glam: ans.glam, girly: ans.girly,classic: ans.classic,edgy: ans.edgy, bohemian: ans.bohemian,sexiness: ans.sexiness,fashionability: ans.fashionability)
+      end
+    end
+
+    old_q3 = old_quiz.questions.where(text: "It's time to dress up. Which best describes your style.").first
+    old_q3.answers.each do |ans|
+      q3.answers.create(code: ans.code,glam: ans.glam, girly: ans.girly,classic: ans.classic,edgy: ans.edgy, bohemian: ans.bohemian,sexiness: ans.sexiness,fashionability: ans.fashionability)
+    end
+
+    old_q4 = old_quiz.questions.where(text: "Tell us which makeup look you love.").first
+    old_q4.answers.each do |ans|
+      if ["dramatic1","dramatic2","dramatic3","romantic1","romantic2","romantic3","edgy1","edgy2","edgy3","statement1","statement2","statement3","natural1","natural2","natural3"].include?(ans.code)
+        q4.answers.create(code: ans.code,glam: ans.glam, girly: ans.girly,classic: ans.classic,edgy: ans.edgy, bohemian: ans.bohemian,sexiness: ans.sexiness,fashionability: ans.fashionability)
+      end
+    end
   end
 
   def down
