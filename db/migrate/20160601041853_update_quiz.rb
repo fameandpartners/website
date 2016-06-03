@@ -76,7 +76,7 @@ class UpdateQuiz < ActiveRecord::Migration
 
     old_q8 = old_quiz.questions.where(text:  "Do you prefer to show some skin or to cover up? Rank how sexy you like to look.").first
     old_q8.answers.each do |ans|
-      if ["sx1","sx2","sx3","sx4","sx5"].include?(ans.code)
+      if ["sxs1","sxs2","sxs3","sxs4","sxs5"].include?(ans.code)
         q8.answers.create(code: ans.code,glam: ans.glam, girly: ans.girly,classic: ans.classic,edgy: ans.edgy, bohemian: ans.bohemian,sexiness: ans.sexiness,fashionability: ans.fashionability)
       end
     end
