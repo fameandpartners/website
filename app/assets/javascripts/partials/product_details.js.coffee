@@ -43,6 +43,7 @@ page.initProductDetailsPage = (options = {}) ->
         window.helpers.showAlert(message: status.error)
       else
         $(options.buyButton).prop('disabled', true)
+        $(options.buyButton).html('Adding to cart...')
         selected = selector.getCurrentSelection()
         product_data = {
           size_id:            selected.size_id,
