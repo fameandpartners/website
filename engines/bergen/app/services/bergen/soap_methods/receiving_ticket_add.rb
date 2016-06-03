@@ -65,7 +65,7 @@ module Bergen
                 end
 
                 receiving_ticket.ShipmentTypelist('OPENTOHANG')
-                receiving_ticket.Warehouse('BERGEN LOGISTICS NJ2')
+                receiving_ticket.Warehouse('BERGEN LOGISTICS WEST')
                 # receiving_ticket.Memo('Memo')
                 # receiving_ticket.AuthorizedNumber('Auth 123')
                 # receiving_ticket.CustomerPO('PO 123')
