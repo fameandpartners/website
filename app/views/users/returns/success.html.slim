@@ -1,15 +1,83 @@
-.page-title.default.contact-header
+/ Returns confirmation page
+.page-returns.returns-success
   .container
-    .page-title--details
-      h1.no-padding-bottom Thanks!
+    .row.page-header
+      .col-md-10.col-md-offset-1
+        h1 Returns Request Confirmation
 
-.page-content.contact
-  .container
-    - if user.has_spree_role?(:admin)
-      p A return request has been created
-      p= "Order: #{order_return.order.number}"
-      p= "Customer Email: #{order_return.order.email}"
-      p= link_to "Back to Order Admin", spree.admin_order_path(order_return.order)
-    - else
-      p We won't play hard to get, we'll get back to you ASAP.
-      p Please wait for confirmation before sending your dress back.
+    .row.page-content
+      # TODO Replace with: if user.has_spree_role?(:admin)
+      - if user && user.has_spree_role?(:admin)
+        p A return request has been created
+        p= "Order: #{order_return.order.number}"
+        p= "Customer Email: #{order_return.order.email}"
+        p= link_to "Back to Order Admin", spree.admin_order_path(order_return.order)
+      - else
+        .steps
+          .row.steps-title
+            .col-md-10.col-md-offset-1
+              h2 Next steps
+
+          .row.item
+            .step-summary.col-md-3.col-md-offset-1
+              p img
+              p Step One
+              h3 Confirm returns policy
+            .step-description.col-md-7
+              p
+                | <span class="highlight">Confirm returns policy</span> for your dress, such as 'Sale items' 'Customised items' or orders with multiple dresses
+              a.item-link href="#"
+                | Our returns policy
+
+          .row.item
+            .step-summary.col-md-3.col-md-offset-1
+              p img
+              p Step Two
+              h3 Repackage Dress
+            .step-description.col-md-7
+              p
+                | <span class="highlight">Do not remove tags</span> attached to the dress
+              p Place dress into its original packaging or a post bag
+
+          .row.item
+            .step-summary.col-md-3.col-md-offset-1
+              p img
+              p Step Three
+              h3 Include Returns Form
+            .step-description.col-md-7
+              p
+                | <span class="highlight">Fill out the return form</span> that came with the dress or download a new form below
+              a.item-link href="#"
+                | Download returns form
+
+          .row.item
+            .step-summary.col-md-3.col-md-offset-1
+              p img
+              p Step Four
+              h3 Put in the Post
+            .step-description.col-md-7
+              .row
+                .address.col-md-5
+                  p
+                    | USA customers
+                  p
+                    | Fame and Partners – Returns <br>15905 Commerce Way <br>Cerritos, CA, 90703
+                .address.col-md-5
+                  p
+                    | Australian customers
+                  p
+                    | Fame and Partners – Returns <br>Suite 8, Level 1 <br>140 Cleveland Street <br>Chippendale, NSW 2008
+
+          .row
+            .notes.col-md-6.col-md-offset-1
+              p
+                | *The cost of your returns postage fee for non-sale items will be reimbursed up to the value of $USD15. The postage receipt must be included in your returns package for reimbursement.
+
+          .row
+            .faqs-box.col-md-5.col-md-offset-1
+              h4 FAQs
+
+            .question-box.col-md-5.col-md-offset-1
+              h4 Questions?
+              p
+                = link_to "Contact us Now", contact_path
