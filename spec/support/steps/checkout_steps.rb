@@ -28,8 +28,9 @@ module Acceptance
     step 'I should see my order placed, with :dress_name dress, :size_number size and :dress_price price' do |dress_name, dress_size, dress_price|
       dress_size_without_spaces = dress_size.delete(' ') # e.g. US10
 
-      expect(page).to have_content('ORDER CONFIRMATION')
-      expect(page).to have_content(dress_name)
+      expect(page).to have_content('Thanks for  your order!')
+      expect(page).to have_content('Your dresses are being made...')
+      expect(page).to have_content(dress_name.upcase)
       expect(page).to have_content(dress_price)
       expect(page).to have_content(dress_size_without_spaces)
     end

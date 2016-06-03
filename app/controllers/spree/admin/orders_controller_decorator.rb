@@ -61,7 +61,7 @@ module Spree
             :ship_address => [:state, :country]
           ).page(page).per(per_page)
         else
-          @orders = Spree::Order.admin_filter ransack_criterias
+          @orders = Spree::Order.find_by_sql(Spree::Order::FastOrder.get_sql report: :full_orders, where: ransack_criteria)
         end
 
         # Restore dates
@@ -80,12 +80,13 @@ module Spree
 
       private
 
-      def ransack_criterias
+      def ransack_criteria
         Spree::Order.ransack(params[:q])
           .result.to_sql[/WHERE(.*)/, 1]
           .gsub("\"spree_orders\"", "o")
           .gsub("\"spree_addresses\"", "sa")
           .gsub("\"spree_products\"", "sp")
+          .gsub("\"products_spree_variants\"", "sp")
           .gsub("\"variants_spree_line_items\"", "sv")
           .gsub("\"fabrications\"", "f")
       end

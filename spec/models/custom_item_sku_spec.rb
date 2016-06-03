@@ -96,7 +96,7 @@ RSpec.describe CustomItemSku do
       end
 
       it 'falls back to SKU and custom marker' do
-        expect(sku).to eq "#{style_number}X"
+        expect(sku).to eq "#{variant.sku}X"
       end
 
       it 'still marks the SKU as custom' do

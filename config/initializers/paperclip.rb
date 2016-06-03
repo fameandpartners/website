@@ -1,6 +1,3 @@
-require 'paperclip/protocol_relative_url_support'
-Paperclip::Attachment.send :include, Paperclip::ProtocolRelativeURLSupport
-
 if Rails.application.config.use_s3
   Paperclip::Attachment.default_options.merge!(
     storage: :fog,
@@ -15,6 +12,6 @@ if Rails.application.config.use_s3
   )
 else
   Paperclip::Attachment.default_options.merge!(
-    :storage => :filesystem
+    storage: :filesystem
   )
 end

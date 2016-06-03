@@ -44,25 +44,31 @@ module Bergen
               ticket_add.AuthenticationString(client.auth_token)
 
               ticket_add.receivingTicket(WMS_NAMESPACES[:receiving_ticket]) do |receiving_ticket|
+                receiving_ticket.ReceivingStatus('Draft') # Always start as a draft. Constant
+                receiving_ticket.ReceivingStatusCode('0') # Always zero. Draft status code
+                receiving_ticket.CreatedDate(Date.today.strftime('%m/%d/%Y')) # Format is mm/dd/yyyy
 
                 receiving_ticket.Shipmentitemslist do |shipment|
                   shipment.Style(global_sku.style_number, WMS_NAMESPACES[:receiving_ticket_items])
                   shipment.Color(global_sku.color_name, WMS_NAMESPACES[:receiving_ticket_items])
+                  shipment.UPC(global_sku.upc, WMS_NAMESPACES[:receiving_ticket_items])
                   shipment.Size(global_sku.size, WMS_NAMESPACES[:receiving_ticket_items])
                   shipment.ExpectedQuantity('1', WMS_NAMESPACES[:receiving_ticket_items]) # Required, but field is ignored
+                  shipment.ActualQuantity('1', WMS_NAMESPACES[:receiving_ticket_items]) # Required, but field is ignored
+                  shipment.DamagedQuantity('0', WMS_NAMESPACES[:receiving_ticket_items]) # Required, but field is ignored
                   # shipment.UnitCost('1', WMS_NAMESPACES[:receiving_ticket_items])
                   # shipment.ProductDescription('Shoes', WMS_NAMESPACES[:receiving_ticket_items])
-                  # shipment.ProductMSRP('1', WMS_NAMESPACES[:receiving_ticket_items])
+                  shipment.ProductMSRP(line_item_presenter.price, WMS_NAMESPACES[:receiving_ticket_items])
                   # shipment.Comments('This is a test', WMS_NAMESPACES[:receiving_ticket_items])
                   shipment.ShipmentType('OPENTOHANG', WMS_NAMESPACES[:receiving_ticket_items])
                   # shipment.ReturnReasonCode('string', WMS_NAMESPACES[:receiving_ticket_items])
                 end
 
                 receiving_ticket.ShipmentTypelist('OPENTOHANG')
-                receiving_ticket.Warehouse('BERGEN LOGISTICS NJ2')
+                receiving_ticket.Warehouse('BERGEN LOGISTICS WEST')
                 # receiving_ticket.Memo('Memo')
                 # receiving_ticket.AuthorizedNumber('Auth 123')
-                # receiving_ticket.CustomerPO('PO 123')
+                receiving_ticket.CustomerPO(order.number)
                 # receiving_ticket.LicensePlate('LP12')
                 # receiving_ticket.DriverName('Tom')
                 # receiving_ticket.TrackingNumbers('1Z23456')
@@ -91,6 +97,10 @@ module Bergen
 
       def line_item_presenter
         return_request_item.line_item_presenter
+      end
+
+      def order
+        line_item_presenter.order
       end
 
       def global_sku

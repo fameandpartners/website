@@ -6,7 +6,7 @@ attributes :id, :firstname, :lastname, :address1, :address2,
 
 # ===== added for the compatibility with Shippo =====
 node(:full_name) { |a| "#{a.firstname} #{a.lastname}" }
-node(:state_text) { |a| a.try(:state).try(:name) }
+node(:state_text) { |a| a.try(:state).try(:abbr) || a.try(:state).try(:name) }
 # ======================================================
 
 child(:country) do |address|

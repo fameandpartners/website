@@ -18,8 +18,12 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '~> 3.2.22'
   s.add_dependency 'savon', '~> 1.2.0'
+  s.add_dependency 'aasm', '~> 4.10.0'
+  s.add_dependency 'sidekiq', '~> 2.13.0'
+  s.add_dependency 'admin_ui'
 
   # s.add_dependency 'jquery-rails'
 
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'factory_girl'
 end

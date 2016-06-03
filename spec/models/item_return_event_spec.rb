@@ -8,7 +8,9 @@ RSpec.describe ItemReturnEvent, :type => :model do
     it { is_expected.to validate_presence_of :line_item_id }
   end
 
-  xdescribe 'return_requested'
+  describe 'return_requested' do
+    # A bunch of attributes. No actual validations. Tests would live on calculator
+  end
 
   describe 'receive_item' do
     subject(:event) { ItemReturnEvent.receive_item.new }
@@ -64,5 +66,11 @@ RSpec.describe ItemReturnEvent, :type => :model do
       item_returns = ItemReturn.find(item_return.id)
       expect(item_returns.factory_fault).to be false
     end
+  end
+
+  describe 'bergen asn created' do
+    subject(:event) { ItemReturnEvent.bergen_asn_created.new }
+
+    it { is_expected.to validate_presence_of :asn_number }
   end
 end

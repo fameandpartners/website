@@ -1,0 +1,61 @@
+require 'spec_helper'
+require 'aasm/rspec'
+
+require 'sidekiq/testing/inline'
+require_relative '../../support/return_item_ready_to_process_context'
+
+module Bergen
+  module Workers
+    RSpec.describe ReceiveAsnWorker, :vcr do
+      include_context 'return item ready to process'
+
+      let(:worker) { described_class.new }
+
+      before(:each) do
+        return_item_process.style_master_was_created!
+        return_item_process.asn_was_created!
+      end
+
+      context 'given a return item process id' do
+        context 'if ASN was received' do
+          it 'marks asn as received' do
+            worker.perform(return_item_process.id)
+
+            event = item_return.events.last
+            expect(event.event_type).to eq('bergen_asn_received')
+            expect(event.data).to eq({
+                                       'actual_quantity'         => '1',
+                                       'color'                   => 'red',
+                                       'damaged_quantity'        => '0',
+                                       'expected_quantity'       => '1',
+                                       'product_msrp'            => '123.45',
+                                       'shipment_type'           => 'NA',
+                                       'size'                    => 'au 4/us 0',
+                                       'style'                   => 'abc123',
+                                       'unit_cost'               => '0',
+                                       'upc'                     => '10001',
+                                       'added_to_inventory_date' => '05/23/2016 12:47:13',
+                                       'arrived_date'            => '05/23/2016',
+                                       'created_date'            => '5/23/2016 12:32:50 PM',
+                                       'expected_date'           => '5/10/2016',
+                                       'memo'                    => 'Sample Memo Woot',
+                                       'receiving_status'        => 'AddedToInventory',
+                                       'receiving_status_code'   => '600',
+                                       'warehouse'               => 'BERGEN LOGISTICS NJ2'
+                                     })
+          end
+        end
+
+        context 'if ASN was not received' do
+          # ASN is going to response Draft status
+
+          it 'verifies it again in a few hours' do
+            expect(described_class).to receive(:perform_in).with(3.hours, return_item_process.id)
+
+            worker.perform(return_item_process.id)
+          end
+        end
+      end
+    end
+  end
+end

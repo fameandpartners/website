@@ -76,5 +76,47 @@ RSpec.describe ItemReturnCalculator do
       expect(created_item_return.acceptance_status).to eq 'rejected'
     end
   end
+
+  describe '#advance_bergen_asn_created' do
+    before do
+      creation_event
+      created_item_return.events.bergen_asn_created.create!({asn_number: 'ABC123-BERGEN'})
+      created_item_return.reload
+    end
+
+    it { expect(created_item_return.bergen_asn_number).to eq('ABC123-BERGEN') }
+  end
+
+  describe '#advance_bergen_asn_received' do
+    before do
+      creation_event
+
+      expect(Bergen::Operations::ReceiveBergenParcel).to receive_message_chain(:new, :process)
+    end
+
+    context 'received damaged items' do
+      before do
+        created_item_return.events.bergen_asn_received.create!({actual_quantity: 0, damaged_quantity: 1})
+        created_item_return.reload
+      end
+
+      it 'rejects the item' do
+        expect(created_item_return.bergen_actual_quantity).to eq(0)
+        expect(created_item_return.bergen_damaged_quantity).to eq(1)
+      end
+    end
+
+    context 'successfully received items' do
+      before do
+        created_item_return.events.bergen_asn_received.create!({actual_quantity: 1, damaged_quantity: 0})
+        created_item_return.reload
+      end
+
+      it 'accept items' do
+        expect(created_item_return.bergen_actual_quantity).to eq(1)
+        expect(created_item_return.bergen_damaged_quantity).to eq(0)
+      end
+    end
+  end
 end
 

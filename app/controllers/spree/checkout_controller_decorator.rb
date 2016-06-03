@@ -1,6 +1,7 @@
 Spree::CheckoutController.class_eval do
   include Marketing::Gtm::Controller::Order
   include Marketing::Gtm::Controller::Product
+  include Marketing::Gtm::Controller::Variant
   include Marketing::Gtm::Controller::Event
 
   before_filter :prepare_order, only: :edit
@@ -27,6 +28,7 @@ Spree::CheckoutController.class_eval do
       if registration.new_user_created?
         fire_event("spree.user.signup", order: current_order)
         sign_in :spree_user, registration.user
+        session[:new_user_created] = true
       end
       if !registration.successfull?
         @order.state = 'masterpass' if params[:state] == 'masterpass'
@@ -323,11 +325,12 @@ Spree::CheckoutController.class_eval do
 
   def data_layer_add_to_cart_event
     if (variant_id = flash[:variant_id_added_to_cart])
-      product           = Spree::Variant.find(variant_id).product
-      product_presenter = product.presenter_as_details_resource(current_site_version)
+      variant           = Spree::Variant.find(variant_id)
+      product_presenter = variant.product.presenter_as_details_resource(current_site_version)
 
       append_gtm_event(event_name: 'addToCart')
       append_gtm_product(product_presenter: product_presenter)
+      append_gtm_variant(spree_variant: variant)
       append_gtm_order(spree_order: current_order)
     end
   end

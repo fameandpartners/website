@@ -24,39 +24,42 @@ module Orders
     end
 
     def to_csv
+      line = Orders::LineItemCSVPresenter
+
       CSV.generate(headers: true) do |csv|
         csv << headers
         orders.map do |order|
-          line_attr = order.attributes
+          line.set_line order.attributes
           csv << [
-            line_attr['order_state'],
-            line_attr['order_number'],
-            line_attr['line_item_id'],
-            line_attr['total_items'],
-            line_attr['completed_at_char'],
-            line_attr['fast_making'].present? ? "TRUE" : '',
-            delivery_date(line_attr),
-            line_attr['tracking_number'],
-            line_attr['shipment_date'],
-            line_attr['fabrication_state'],
-            line_attr['style'],
-            line_attr['style_name'] || 'Missing Variant',
-            line_attr['factory'] || 'Unknown',
-            color_name(line_attr),
-            (line_attr['size'] || 'Unknown Size')  + " (#{line_attr['site_version']})",
-            line_attr['height'] || LineItemPersonalization::DEFAULT_HEIGHT,
-            customization_values(line_attr),
-            line_attr['promo_codes'],
-            line_attr['email'],
-            line_attr['customer_notes'],
-            customer_name(line_attr),
-            line_attr['customer_phone_number'] || 'No Phone',
-            shipping_address(line_attr).present? ? shipping_address(line_attr) : 'No Shipping Address',
-            line_attr['return_action_details'].present? ? 'true' : 'false',
-            line_attr['return_action_details'].try(:split, '/').try(:[], 0),
-            line_attr['return_action_details'].try(:split, '/').try(:[], 1),
-            price(line_attr),
-            line_attr['currency']
+            line.order_state,
+            line.order_number,
+            line.line_item_id,
+            line.total_items,
+            line.completed_at_date,
+            line.fast_making,
+            line.delivery_date,
+            line.tracking_number,
+            line.shipment_date,
+            line.fabrication_state,
+            line.style,
+            line.style_name,
+            line.factory,
+            line.color,
+            line.adjusted_size,
+            line.height,
+            line.customization_values,
+            line.custom_color,
+            line.promo_codes,
+            line.email,
+            line.customer_notes,
+            line.customer_name,
+            line.customer_phone_number,
+            line.shipping_address,
+            line.return_request,
+            line.return_action,
+            line.return_details,
+            line.price,
+            line.currency
           ]
         end
       end
@@ -83,6 +86,7 @@ module Orders
         :size,
         :height,
         :customisations,
+        :custom_color,
         :promo_codes,
         :email,
         :customer_notes,
@@ -115,36 +119,5 @@ module Orders
       }
     end
 
-    def customer_name(line_attr)
-      "#{line_attr['user_first_name']} #{line_attr['user_last_name']}"
-    end
-
-    def shipping_address(line_attr)
-      "#{line_attr['address1']} #{line_attr['address2']} #{line_attr['city']} #{line_attr['state']} #{line_attr['zipcode']} #{line_attr['country']}"
-    end
-
-    def price(line_attr)
-      line_attr['price'].to_f + line_attr['personalization_price'].to_f + line_attr['making_options_price'].to_f
-    end
-
-    def color_name(line_attr)
-      line_attr['color'] || 'Unknown Color'
-    end
-
-    def customization_values(line_attr)
-      if line_attr['personalization'].present?
-        values = YAML.load(line_attr['customization_value_ids'])
-        customs = values.present? ? CustomisationValue.where(id: values).pluck(:presentation) : []
-        customs << ["Custom Color: #{color_name(line_attr)}"] unless line_attr['custom_color']
-        customs.join('|')
-      else
-        'N/A'
-      end
-    end
-
-    def delivery_date(line_attr)
-      return unless line_attr['completed_at_char'].present?
-      Policies::LineItemProjectedDeliveryDatePolicy.new(line_attr['completed_at_char'].to_date, line_attr['fast_making']).delivery_date
-    end
   end
 end

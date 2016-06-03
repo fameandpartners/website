@@ -41,6 +41,17 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
     @item_return.factory_fault_reason = (@item_return.factory_fault ? event.factory_fault_reason : nil)
   end
 
+  def advance_bergen_asn_created(event)
+    @item_return.bergen_asn_number = event.asn_number
+  end
+
+  def advance_bergen_asn_received(event)
+    @item_return.bergen_actual_quantity = event.actual_quantity
+    @item_return.bergen_damaged_quantity = event.damaged_quantity
+
+    Bergen::Operations::ReceiveBergenParcel.new(item_return: @item_return).process
+  end
+
   def advance_legacy_data_import(event)
     return if event.deleted_row.present?
 

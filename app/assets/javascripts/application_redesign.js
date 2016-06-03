@@ -63,7 +63,6 @@
 //= require partials/helpers/alert
 //= require partials/helpers/product_side_selector_panel
 //= require partials/helpers/modal
-//= require partials/helpers/facebook_tracking_hook
 //= require partials/helpers/truncate
 //= require partials/helpers/bs-tabs
 
@@ -79,6 +78,11 @@
 //= require partials/email_capture_modal
 //= require partials/helpers/tracker.js
 //= require partials/helpers/error_messages.js.coffee
+
+//-----------------------------
+// Styling Session page
+//-----------------------------
+//= require partials/styling_session_page
 
 //-----------------------------
 // Product details with related
@@ -119,14 +123,14 @@ jQuery(document).ready(function($){
     window.location = $(this).attr('href') + '?email=' + email;
   });
 
-	//home page slider		
-	$(function() {		
-		$(".rslides").responsiveSlides({		
-			auto: false,             // Boolean: Animate automatically, true or false		
-	 		pager: true,           // Boolean: Show pager, true or false		
-			speed: 3000,            // Integer: Speed of the transition, in milliseconds		
-	  		timeout: 6000,          // Integer: Time between slide transitions, in milliseconds		
-    	});		
+	//home page slider
+	$(function() {
+		$(".rslides").responsiveSlides({
+			auto: false,             // Boolean: Animate automatically, true or false
+	 		pager: true,           // Boolean: Show pager, true or false
+			speed: 3000,            // Integer: Speed of the transition, in milliseconds
+	  		timeout: 6000,          // Integer: Time between slide transitions, in milliseconds
+    	});
 	});
-	
+
 })

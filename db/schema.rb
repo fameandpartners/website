@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160428204352) do
+ActiveRecord::Schema.define(:version => 20160601041853) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -56,6 +56,13 @@ ActiveRecord::Schema.define(:version => 20160428204352) do
   end
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+
+  create_table "bergen_return_item_processes", :force => true do |t|
+    t.string   "aasm_state"
+    t.integer  "return_request_item_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
 
   create_table "bulk_order_updates", :force => true do |t|
     t.text     "user"
@@ -332,12 +339,15 @@ ActiveRecord::Schema.define(:version => 20160428204352) do
     t.integer  "refund_amount"
     t.datetime "refunded_at"
     t.string   "uuid"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.boolean  "factory_fault"
     t.integer  "item_price"
     t.integer  "item_price_adjusted"
     t.string   "factory_fault_reason"
+    t.string   "bergen_asn_number"
+    t.integer  "bergen_actual_quantity"
+    t.integer  "bergen_damaged_quantity"
   end
 
   add_index "item_returns", ["line_item_id"], :name => "index_item_returns_on_line_item_id", :unique => true
@@ -557,16 +567,17 @@ ActiveRecord::Schema.define(:version => 20160428204352) do
   create_table "moodboard_items", :force => true do |t|
     t.string   "uuid"
     t.integer  "moodboard_id"
-    t.integer  "product_id",             :null => false
+    t.integer  "product_id",                             :null => false
     t.integer  "product_color_value_id"
-    t.integer  "color_id",               :null => false
+    t.integer  "color_id",                               :null => false
     t.integer  "variant_id"
-    t.integer  "user_id",                :null => false
-    t.integer  "likes"
+    t.integer  "user_id",                                :null => false
+    t.integer  "likes",                  :default => 0
     t.text     "comments"
     t.datetime "deleted_at"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "user_likes",             :default => ""
   end
 
   add_index "moodboard_items", ["color_id"], :name => "index_moodboard_items_on_color_id"

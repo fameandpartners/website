@@ -14,25 +14,25 @@ ruby:
       section.banner-sale`
         .container
           = link_to sale_path, class: 'media-wrap'
-            img src="http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_images[:full]}" alt='Shop the Sale' srcset="
-              http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_images[:small]} 768w,
-              http://assets.fameandpartners.com/pages/home/sale/#{current_sale.banner_images[:full]} 1024w"
+            img src="https://d1h7wjzwtdym94.cloudfront.net/pages/home/sale/#{current_sale.banner_images[:full]}" alt='Shop the Sale' srcset="
+              https://d1h7wjzwtdym94.cloudfront.net/pages/home/sale/#{current_sale.banner_images[:small]} 768w,
+              https://d1h7wjzwtdym94.cloudfront.net/pages/home/sale/#{current_sale.banner_images[:full]} 1024w"
   /! Content Section
   section.container.content-block.home-main-content
     .row.aside-single-tile
       .main.col-md-7
         = render 'shared/redesign/tabs_collection'
-        = link_to build_taxon_path('Embellishment'), class: 'media-wrap'
-          = image_tag 'home-page-tiles/Category01-may-4.jpg', alt: "It's all in the details"
-        = link_to build_taxon_path('Two Piece'), class: 'media-wrap'
-          = image_tag 'home-page-tiles/CategoryTile-01-may-4.jpg', alt: 'Cause two is better than one'
+        = link_to '/dresses/dress-ziv-1037?color=taupe', class: 'media-wrap'
+          = image_tag 'home-page-tiles/Category-01-may-26.jpg', alt: "Meet Ziv."
+        = link_to styling_session_path, class: 'media-wrap'
+          = image_tag 'home-page-tiles/Category-02-may-26.jpg', alt: 'Need some styling advice? Book your free complimentary styling session with our professional Fame stylist.'
 
       aside.col-md-5
         .outer-wrap
-          = link_to partners_in_crime_competition_path
+          = link_to build_taxon_path('slip-dress')
             picture.media-wrap
               .inner-wrap
-                img src='#{image_path("home-page-tiles/Category03-may-4.jpg")}' alt='Partners in Crime'
+                img src='#{image_path("home-page-tiles/Category-03-may-26.jpg")}' alt='The most alluring must-have.'
 
 
   section.carousel-strap.instagram

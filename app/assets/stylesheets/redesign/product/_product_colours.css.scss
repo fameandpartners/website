@@ -114,7 +114,7 @@ $product-color-lemon:           #f2e983;
 $product-color-light-blue:      #66ccff;
 $product-color-light-gold:      #dfcc7f;
 $product-color-light-nude:      #e2c7bc;
-$product-color-light-pink:      #f9e2e1;
+$product-color-light-pink:      #F5E5EC;
 $product-color-light-teal:      #12a3b2;
 $product-color-lilac:           #ccc3e2;
 $product-color-lipstick-red:    #f40c0c;
@@ -138,7 +138,7 @@ $product-color-pale-blue:       #bbd0ed;
 $product-color-pale-green:      #d1f6d7;
 $product-color-pale-grey:       #e4e4e4;
 $product-color-pale-peach:      #fce5d6;
-$product-color-pale-pink:       #f5e5ec;
+$product-color-pale-pink:       #F9E2E1;
 $product-color-pale-yellow:     #f4e8b3;
 $product-color-peach:           #E2AD9C;
 $product-color-persian-green:   #00a693;
@@ -166,6 +166,7 @@ $product-color-taupe:           #dbd2cc;
 $product-color-teal:            #085966;
 $product-color-turquoise:       #1bb2aa;
 $product-color-vibrant-purple:  #9f6ba9;
+$product-color-warm-grey:       #b0a5a5;
 $product-color-watermelon:      #ef525e;
 $product-color-white:           #ffffff;
 $product-color-wine:            #831c2e;
@@ -345,6 +346,7 @@ $product-color-wine:            #831c2e;
 .color-tropical-floral         { @include image-color-selector('TropicalFloral.png'); }
 .color-turquoise               { background-color: $product-color-turquoise; }
 .color-vibrant-purple          { background-color: $product-color-vibrant-purple; }
+.color-warm-grey               { background-color: $product-color-warm-grey; }
 .color-watercolour             { @include image-color-selector('Watercolour.png'); }
 .color-watercolour-camo        { @include image-color-selector('WatercolourCamo.png'); }
 .color-watermelon              { background-color: $product-color-watermelon; }

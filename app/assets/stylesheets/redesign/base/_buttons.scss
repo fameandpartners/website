@@ -75,6 +75,22 @@
 
 }
 
+.btn-transparent {
+  color: $c-neutral-black;
+  background: transparent;
+  border-color: $c-neutral-black;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: $c-neutral-12;
+    background: transparent;
+    border-color: $c-neutral-12;
+  }
+
+}
+
 .btn-black {
   background: $c-neutral-black;
   color: $c-neutral-white;

@@ -1,0 +1,42 @@
+/* [Nav Pill]
+-------------------------------------------------------*/
+.nav-pill {
+
+  li {
+    border-left: 2px solid $c-neutral-white;
+
+    &:first-child {
+      border-left: none;
+    }
+
+    > a {
+      padding: 10px;
+    }
+
+  }
+
+  a {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 0.75em;
+    color: $c-neutral-black;
+    background: $c-neutral-2;
+
+    &:hover {
+       background: $c-neutral-4;
+    }
+
+  }
+
+  .active a {
+
+    &,
+    &:focus,
+    &:hover {
+      color: $c-neutral-white;
+      background: $c-brand-blue;
+    }
+    
+  }
+
+}
