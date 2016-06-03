@@ -1,9 +1,5 @@
-class StyleQuizController < ActionController::Base
-  include SslRequirement
-  ssl_allowed
-  protect_from_forgery
-
-  layout 'iframe'
+class StyleQuizController < ApplicationController
+  layout 'redesign/application'
 
   respond_to :html, :js
 
@@ -127,22 +123,4 @@ class StyleQuizController < ActionController::Base
     "#{ style_profile_url }?pc=Zm9ybWFsMjU=&amp;h=SEVZLCBIRVJFJ1MgJDIwIEZPUiBZT1UgVE8gU1BFTkQgT04gVEhFIFBFUkZFQ1QgRFJFU1Mh&amp;m=IFVTRTogPHN0cm9uZz5HVVJMUVVJWjwvc3Ryb25nPiBBVCBDSEVDS09VVA==&amp;t=5&amp;s=Z3VybF9jb21fbW9kYWw=&amp;pop=true"
   end
   helper_method :after_quiz_redirect_url
-
-  private
-
-    def current_site_version
-      @current_site_version ||= begin
-        service = FindUsersSiteVersion.new(
-          user: current_spree_user,
-          url_param: request.env['site_version_code'],
-          cookie_param: session[:site_version]
-        )
-        service.get().tap do |site_version|
-          session[:site_version]  ||= site_version.code
-          if current_spree_user && current_spree_user.site_version_id != site_version.id
-            current_spree_user.update_column(:site_version_id, site_version.id)
-          end
-        end
-      end
-    end
 end
