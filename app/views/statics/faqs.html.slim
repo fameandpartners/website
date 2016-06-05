@@ -96,19 +96,3 @@
               span EMAIL
             .copy-wrap We'll be able to assist with your inquiry as soon as possible
           = link_to 'Contact Us', new_contact_url, :class => 'btn btn-transparent btn-block'
-
-
-  javascript:
-    $('body').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function() {
-      $this = $(this);
-      var $target = $this.parent().next();
-      $this.toggleClass('collapsed');
-      $target.data('bs.collapse') ? $target.collapse('toggle') : $target.collapse();
-    });
-    (function ($) {
-      var hash = document.location.hash;
-      if (hash) {
-        $(hash).addClass('in');
-      }
-    }(jQuery));
-
