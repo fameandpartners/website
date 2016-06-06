@@ -547,4 +547,12 @@ FameAndPartners::Application.routes.draw do
 
   mount AdminUi::Engine, at: '/fame_admin'
   mount Revolution::Engine => '/'
+
+  class PhpConstraint
+    def matches?(request)
+      request.path[/\A.*\.php\z/]
+    end
+  end
+
+  match '*path', to: 'application#capture_php', constraints: PhpConstraint.new
 end
