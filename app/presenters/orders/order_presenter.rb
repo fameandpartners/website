@@ -11,6 +11,7 @@ module Orders
                    :currency,
                    :customer_notes,
                    :id,
+                   :email,
                    :number,
                    :completed_at,
                    :name,
