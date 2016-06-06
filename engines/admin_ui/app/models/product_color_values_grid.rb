@@ -25,6 +25,10 @@ class ProductColorValuesGrid
     where(Spree::Variant.arel_table[:sku].matches("%#{value}%"))
   end
 
+  filter :color do |value|
+    where(Spree::OptionValue.arel_table[:presentation].matches("%#{value}%"))
+  end
+
   filter :active, :xboolean
   filter :custom, :xboolean
 

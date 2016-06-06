@@ -55,6 +55,7 @@ class ReturnRequestItem < ActiveRecord::Base
 
   belongs_to :order_return_request
   belongs_to :line_item, :class_name => 'Spree::LineItem'
+  has_one :item_return, foreign_key: :request_id
 
   delegate :image_url, :style_name, :country_size, :colour_name, :display_price, :to => :line_item_presenter
 

@@ -1,6 +1,5 @@
 //= require jquery
 //= require jquery-ui
-//= require jquery_ujs
 //= require libs/underscore-min
 
 //= require slick-carousel/slick/slick.min.js

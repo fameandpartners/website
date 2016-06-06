@@ -350,4 +350,5 @@ Spree::Order.class_eval do
       self.payment_state = 'credit_owed'
     end
   end
+
 end

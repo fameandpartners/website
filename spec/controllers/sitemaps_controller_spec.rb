@@ -11,7 +11,7 @@ describe SitemapsController, type: :controller do
     subject { get :index, site_version: 'au', format: 'xml' }
 
     it 'redirects the user to the sitemap index URL' do
-      expect(subject).to redirect_to('http://images.fameandpartners.com/sitemap/sitemap.xml.gz')
+      expect(subject).to redirect_to('https://d1sd72h9dq237j.cloudfront.net/sitemap/sitemap.xml.gz')
       expect(subject).to have_http_status(:moved_permanently)
     end
   end
@@ -23,7 +23,7 @@ describe SitemapsController, type: :controller do
       before(:each) { request.env['site_version_code'] = 'au' }
 
       it 'redirects to the requested sitemap version' do
-        expect(subject).to redirect_to('http://images.fameandpartners.com/sitemap/au.xml.gz')
+        expect(subject).to redirect_to('https://d1sd72h9dq237j.cloudfront.net/sitemap/au.xml.gz')
         expect(subject).to have_http_status(:moved_permanently)
       end
     end
@@ -32,7 +32,7 @@ describe SitemapsController, type: :controller do
       subject { get :show, format: 'xml' }
 
       it 'redirects to the default sitemap version' do
-        expect(subject).to redirect_to('http://images.fameandpartners.com/sitemap/us.xml.gz')
+        expect(subject).to redirect_to('https://d1sd72h9dq237j.cloudfront.net/sitemap/us.xml.gz')
         expect(subject).to have_http_status(:moved_permanently)
       end
     end

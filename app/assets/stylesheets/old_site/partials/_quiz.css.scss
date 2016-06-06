@@ -65,6 +65,10 @@ h1 span {
   font-size: 1.2rem;
 }
 
+.media-wrap {
+  background: transparent;
+}
+
 .media-wrap.color-wrap {
 
   &.fair {
@@ -133,6 +137,7 @@ h1 span {
 
   .media-wrap {
     padding-bottom: 100%;
+    background: $c-neutral-2;
   }
 
   img {
@@ -147,6 +152,7 @@ h1 span {
     display: table;
     width: 100%;
     height: 100%;
+    padding: 15px;
     font-size: 1.6rem;
 
     .wrap {
@@ -154,10 +160,33 @@ h1 span {
       vertical-align: middle;
     }
 
+    .alt {
+      font-weight: 500;
+      font-style: italic;
+    }
+
   }
 
   .active img {
     opacity: 0.4;
+  }
+
+  &.alt {
+
+    .media-wrap {
+      background: transparent;
+      border: solid $c-neutral-black 1px;
+    }
+
+    .active {
+      color: $c-neutral-white;
+
+      .media-wrap {
+        background: $c-neutral-black;
+      }
+
+    }
+
   }
 
 }
@@ -211,7 +240,6 @@ h1 span {
     margin: 60px 0;
 
     .media-wrap {
-      background: $c-neutral-white;
       @include transition(all 0.2s ease-in-out);
       @include transform(scale(0.8));
     }
@@ -278,6 +306,11 @@ h1 span {
   margin-top: 40px;
   margin-bottom: 60px;
 }
+// hack, hiding auburn hair color
+.auburn {
+  display: none;
+  visibility: hidden;
+}
 
 // START - mobile only
 @media (max-width: $bootstrap-md-width - 1px) {
@@ -324,7 +357,7 @@ h1 span {
   .inner-btn-wrap {
     margin-top: 340px;
   }
-  
+
   .close-quiz {
     position: absolute;
     top: 19px;
@@ -336,7 +369,7 @@ h1 span {
     height: 46px;
     background: url('_quiz/close.png') no-repeat;
   }
-  
+
 }
 
 .quiz-box {
@@ -379,7 +412,7 @@ h1 span {
       white-space: nowrap;
       text-align: center;
       line-height: 0.8;
-      em { 
+      em {
         display: block;
         margin-top: -8px;
         color: #000;
@@ -414,7 +447,7 @@ h1 span {
       font-size: 31px;
       text-align: right;
       color: #fff;
-      em { 
+      em {
         display: block;
         text-transform: none;
       }
@@ -689,7 +722,7 @@ h1 span {
     .chart {
       font-size: 0;
       margin-top: 80px;
-      white-space: nowrap;  
+      white-space: nowrap;
       width: 1060px;
       -webkit-transform-origin: 0 0;
          -moz-transform-origin: 0 0;
@@ -776,14 +809,14 @@ h1 span {
         background-repeat: no-repeat;
         background-position: 0 0;
         &.active { background-position: 0 100%;}
-        
+
         // - size
         &.step-0, &.step-1 { height: 57px;}
         &.step-2, &.step-3 { height: 113px;}
         &.step-4, &.step-5 { height: 170px;}
         &.step-6, &.step-7 { height: 226px;}
         &.step-8, &.step-9 { height: 282px;}
-        
+
         // - bg
         @for $i from 0 through 9 {
           &.step-#{$i} { background-image: url('_quiz/lips/#{$i}.png');}
@@ -810,7 +843,7 @@ h1 span {
       }
       .next {
         right: -84px;
-        a { 
+        a {
           text-transform: none;
           font-style: italic;
         }
@@ -909,7 +942,7 @@ h1 span {
     text-align: center;
     .header {
       padding: 40px 0 200px;
-      img { 
+      img {
         margin: 0 20px;
         vertical-align: middle;
       }
@@ -918,7 +951,7 @@ h1 span {
       font-family: Forum;
       font-size: 95px;
     }
-    .secondary { 
+    .secondary {
       font-size: 40px;
     }
     .pink { color: $pinkColor;}

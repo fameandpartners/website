@@ -3,7 +3,7 @@
   ul
     li.active
       .inner-wrap
-        a href='#collection1' data-toggle="tab" La Belle Époque Collection
+        a href='#collection1' data-toggle="tab" Slip Dress Collection
     li
       .inner-wrap
         a href='#collection2' data-toggle="tab" Partners in Crime Collection
@@ -12,8 +12,8 @@
         a href='#collection3' data-toggle="tab" Just The Girls Collection
 
   .tab-wrap
-    = link_to la_belle_epoque_collection_path, id: 'collection1', class: 'tab active'
-      = image_tag 'home-page-tiles/CollectionMenu-may-4.jpg', alt: 'La Belle Époque Collection'
+    = link_to "/dresses/slip-dress", id: 'collection1', class: 'tab active'
+      = image_tag 'home-page-tiles/CollectionMenu-may-26.jpg', alt: 'Slip Dress Collection'
     = link_to partners_in_crime_collection_path, id: 'collection2', class: 'tab'
       = image_tag 'home-page-tiles/CollectionMenu-PIC.jpg', alt: 'Partners in Crime Collection'
     = link_to just_the_girls_collection_path, id: 'collection3', class: 'tab'

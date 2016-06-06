@@ -3,27 +3,18 @@ class StyleSessionsController < ApplicationController
   layout 'redesign/application'
 
   def new
-    @style_session ||= StyleSession.new(
-      session_type: params[:session_type] || 'default'
-    )
-    title("#{ @style_session.name.capitalize } Style Session", default_seo_title)
-    @banner_text = "your #{ @style_session.name.downcase } styling session"
-    @description = ""
+    @style_session = StyleSession.new
+    title('Style Session', default_seo_title)
+    description('Free one-on-one style advice')
   end
 
   def create
     @style_session = StyleSession.new(params[:style_session])
     if @style_session.valid?
       StyleSessionMailer.email(@style_session).deliver
-      flash[:notice] = "We're on it!"
-      redirect_to success_style_session_path
+      render json: { success: true }
     else
-      new()
-      render action: :new
+      render json: { errors: @style_session.errors }
     end
-  end
-
-  def success
-    title('Thank You', default_seo_title)
   end
 end

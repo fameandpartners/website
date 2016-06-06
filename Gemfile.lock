@@ -126,8 +126,10 @@ PATH
       simple_form
       slim
     bergen (0.0.1)
+      aasm (~> 4.10.0)
       rails (~> 3.2.22)
       savon (~> 1.2.0)
+      sidekiq (~> 2.13.0)
     fame_favicon (0.0.1)
       rails (~> 3.2.21)
     inspinia-rails (2.1.0)
@@ -142,6 +144,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.1)
+    aasm (4.10.0)
     actionmailer (3.2.22)
       actionpack (= 3.2.22)
       mail (~> 2.5.4)
@@ -287,12 +290,8 @@ GEM
     connection_pool (2.2.0)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
-    createsend (2.5.1)
-      hashie (~> 1.0)
-      httparty (~> 0.10)
-      json
-    customerio (0.5.1)
-      httparty (>= 0.5, < 1.0)
+    customerio (1.0.0)
+      multi_json (~> 1.0)
     daemons (1.2.2)
     database_cleaner (0.9.1)
     datagrid (1.4.0)
@@ -466,9 +465,6 @@ GEM
     hodel_3000_compliant_logger (0.1.1)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
-    httparty (0.13.3)
-      json (~> 1.8)
-      multi_xml (>= 0.5.2)
     httpclient (2.6.0.1)
     httpi (1.1.1)
       rack
@@ -868,8 +864,7 @@ DEPENDENCIES
   coffee-script-source (~> 1.8.0)
   compass-rails (~> 2.0.5)
   configatron
-  createsend (~> 2.5.0)
-  customerio
+  customerio (~> 1.0.0)
   database_cleaner (= 0.9.1)
   default_value_for
   device_detector (~> 0.8.1)
@@ -951,4 +946,4 @@ DEPENDENCIES
   zeus
 
 BUNDLED WITH
-   1.11.2
+   1.12.1

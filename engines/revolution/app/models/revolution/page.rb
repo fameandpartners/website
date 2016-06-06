@@ -143,7 +143,7 @@ module Revolution
     end
 
     def default_page_limit
-      21
+      23
     end
 
     def self.default_page

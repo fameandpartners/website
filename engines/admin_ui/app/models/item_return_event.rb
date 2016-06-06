@@ -112,6 +112,43 @@ class ItemReturnEvent < ActiveRecord::Base
     validates :factory_fault, presence: true
   end
 
+  # Bergen Processes
+
+  BERGEN_ASN_ATTRIBUTES = [
+    :actual_quantity,
+    :added_to_inventory_date,
+    :arrived_date,
+    :color,
+    :created_date,
+    :damaged_quantity,
+    :expected_date,
+    :expected_quantity,
+    :memo,
+    :product_msrp,
+    :receiving_status,
+    :receiving_status_code,
+    :shipment_type,
+    :size,
+    :style,
+    :unit_cost,
+    :upc,
+    :warehouse
+  ]
+
+  attr_accessible :asn_number
+
+  event_type :bergen_asn_created do
+    attributes :asn_number
+
+    validates :asn_number, presence: true
+  end
+
+  attr_accessible *BERGEN_ASN_ATTRIBUTES
+
+  event_type :bergen_asn_received do
+    attributes *BERGEN_ASN_ATTRIBUTES
+  end
+
   LEGACY_DATA_IMPORT_ATTRIBUTES = [
     :row_number,
     :rj_ident,

@@ -50,7 +50,7 @@ describe Revolution::PageBannerDecorator do
     describe 'can have custom banners too' do
       it { expect(presenter.image).to_not include path }
       it { expect(presenter.image).to_not include '*' }
-      it { expect(presenter.image).to eq '//assets.fameandpartners.com/pages/dresses/wedontneednosteenkingtests.jpg' }
+      it { expect(presenter.image).to eq '//d1h7wjzwtdym94.cloudfront.net/pages/dresses/wedontneednosteenkingtests.jpg' }
     end
   end
 end

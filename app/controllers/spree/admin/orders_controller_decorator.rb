@@ -49,23 +49,24 @@ module Spree
 
         @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
 
-        per_page = 5000 if params[:format] == 'csv'
+        ##################### End Original Spree ##############################
 
-        @orders = @search.result(distinct: true).includes(
-          :user => [],
-          :shipments => {:inventory_units => :variant},
-          :payments => [],
-          :line_items => {:variant => :product, :fabrication => [], :making_options => []},
-          :bill_address => [:state, :country],
-          :ship_address => [:state, :country]
-        ).
-            page(page).
-            per(per_page)
+        if params[:format] != 'csv'
+          @orders = @search.result(distinct: true).includes(
+            :user => [],
+            :shipments => {:inventory_units => :variant},
+            :payments => [],
+            :line_items => {:variant => :product, :fabrication => [], :making_options => []},
+            :bill_address => [:state, :country],
+            :ship_address => [:state, :country]
+          ).page(page).per(per_page)
+        else
+          @orders = Spree::Order.admin_filter ransack_criterias
+        end
 
         # Restore dates
         params[:q][:created_at_gt] = created_at_gt
         params[:q][:created_at_lt] = created_at_lt
-        ##################### End Original Spree ##############################
 
         respond_with(@orders) do |format|
           format.html
@@ -78,6 +79,17 @@ module Spree
       end
 
       private
+
+      def ransack_criterias
+        Spree::Order.ransack(params[:q])
+          .result.to_sql[/WHERE(.*)/, 1]
+          .gsub("\"spree_orders\"", "o")
+          .gsub("\"spree_addresses\"", "sa")
+          .gsub("\"spree_products\"", "sp")
+          .gsub("\"products_spree_variants\"", "sp")
+          .gsub("\"variants_spree_line_items\"", "sv")
+          .gsub("\"fabrications\"", "f")
+      end
 
       def order_shipment_states
         @order_shipment_states ||= Spree::Order.shipment_states

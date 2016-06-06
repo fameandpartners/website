@@ -1,6 +1,7 @@
 Spree::CheckoutController.class_eval do
   include Marketing::Gtm::Controller::Order
   include Marketing::Gtm::Controller::Product
+  include Marketing::Gtm::Controller::Variant
   include Marketing::Gtm::Controller::Event
 
   before_filter :prepare_order, only: :edit
@@ -39,7 +40,6 @@ Spree::CheckoutController.class_eval do
     end
 
     if @order.update_attributes(object_params)
-
       fire_event('spree.checkout.update')
       if object_params.key?(:coupon_code)
         if object_params[:coupon_code].present? && apply_coupon_code
@@ -80,6 +80,7 @@ Spree::CheckoutController.class_eval do
       end
 
       if @order.state == 'complete' || @order.completed?
+        GuestCheckoutAssociation.associate_user_for_guest_checkout(spree_order: @order, spree_current_user: spree_current_user)
         flash.notice = t(:order_processed_successfully)
         flash[:commerce_tracking] = 'nothing special'
 
@@ -323,11 +324,12 @@ Spree::CheckoutController.class_eval do
 
   def data_layer_add_to_cart_event
     if (variant_id = flash[:variant_id_added_to_cart])
-      product           = Spree::Variant.find(variant_id).product
-      product_presenter = product.presenter_as_details_resource(current_site_version)
+      variant           = Spree::Variant.find(variant_id)
+      product_presenter = variant.product.presenter_as_details_resource(current_site_version)
 
       append_gtm_event(event_name: 'addToCart')
       append_gtm_product(product_presenter: product_presenter)
+      append_gtm_variant(spree_variant: variant)
       append_gtm_order(spree_order: current_order)
     end
   end

@@ -81,6 +81,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     $('#filter-accordion :input').prop('checked', false)
     $('#filter-accordion .js-filter-all').prop('checked', true)
     $('#filter-accordion select').val('none')
+    $('#filter-accordion .panel-collapse').collapse('hide')
     @update()
 
   resetPagination: (items_on_page, total_records) ->
@@ -193,10 +194,16 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     priceHash = {}
 
     if $(".selector-price input:checked").data("all") == false
-      priceMin = $(".selector-price input:checked").data("pricemin")
-      priceMax = $(".selector-price input:checked").data("pricemax")
-      priceHash["price_min"] = priceMin
-      priceHash["price_max"] = priceMax if priceMax?
+      priceMinArr = []
+      priceMaxArr = []
+      priceMins = $(".selector-price input:checked")
+      for e in priceMins
+        priceMinArr.push $(e).data("pricemin")
+      priceMaxs = $(".selector-price input:checked")
+      for e in priceMaxs
+        priceMaxArr.push $(e).data("pricemax") || 5000
+      priceHash["price_min"] = priceMinArr
+      priceHash["price_max"] = priceMaxArr if priceMaxArr?
       filter = $.extend(filter,priceHash)
 
     filter

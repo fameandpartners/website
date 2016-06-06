@@ -40,4 +40,4 @@ Feature: Browse and Purchase
     Then I should see "$0 - $199"
     Then I should see "$200 - $299"
     Then I should see "$300 - $399"
-    Then I should see "$400+"
+    #Then I should see "$400+"

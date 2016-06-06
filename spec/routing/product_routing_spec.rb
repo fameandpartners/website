@@ -23,19 +23,6 @@ describe 'Product Routes', type: :routing do
 end
 
 describe 'Product Redirection', type: :request do
-
-  context 'customisation pages' do
-    it_will :redirect,
-            "/au/dresses/custom-first-in-line-467/white",
-            "/au/dresses/dress-first-in-line-467/white"
-  end
-
-  context 'accessory pages' do
-    it_will :redirect,
-            "/au/dresses/styleit-first-in-line-467/white",
-            "/au/dresses/dress-first-in-line-467/white"
-  end
-
   context 'old taxon urls' do
     it_will :redirect, "dresses/event", "/dresses"
     it_will :redirect, 'dresses/event/graduation', '/dresses/graduation'

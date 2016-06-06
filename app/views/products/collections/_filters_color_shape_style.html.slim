@@ -26,29 +26,30 @@
         .panel-body
           .custom-form-element.filter-radio-option.selector-price name='price'
             label
-              = radio_button_tag 'price', 'all', selectPriceAll ? true : false, 'data-all' => 'true', class: 'js-filter-all'
+              = check_box_tag 'price', 'all', selectPriceAll ? true : false, 'data-all' => 'true', class: 'js-filter-all'
               span.icon
               span View all prices
           .custom-form-element.filter-radio-option.selector-price name='price'
             label
-              = radio_button_tag 'price', '0', params[:price_max] == '199' ? true : false, 'data-all' => 'false', 'data-pricemin' => '0', 'data-pricemax' => '199'
+              = check_box_tag 'price', '0', params[:price_max] == '199' ? true : false, 'data-all' => 'false', 'data-pricemin' => '0', 'data-pricemax' => '199'
               span.icon
               span $0 - $199
           .custom-form-element.filter-radio-option.selector-price name='price'
             label
-              = radio_button_tag 'price', '200', params[:price_max] == '299' ? true : false, 'data-all' => 'false', 'data-pricemin' => '200', 'data-pricemax' => '299'
+              = check_box_tag 'price', '200', params[:price_max] == '299' ? true : false, 'data-all' => 'false', 'data-pricemin' => '200', 'data-pricemax' => '299'
               span.icon
               span $200 - $299
           .custom-form-element.filter-radio-option.selector-price name='price'
             label
-              = radio_button_tag 'price', '300', params[:price_max] == '399' ? true : false, 'data-all' => 'false', 'data-pricemin' => '300', 'data-pricemax' => '399'
+              = check_box_tag 'price', '300', params[:price_max] == '399' ? true : false, 'data-all' => 'false', 'data-pricemin' => '300', 'data-pricemax' => '399'
               span.icon
               span $300 - $399
-          .custom-form-element.filter-radio-option.selector-price name='price'
-            label
-              = radio_button_tag 'price', '400', params[:price_min] == '400' ? true : false, 'data-all' => 'false', 'data-pricemin' => '400', 'data-pricemax' => 'null'
-              span.icon
-              span $400+
+          / Since we don't have any dress cost > 400 , offerring this option is useless, when we have those dresss , we will reopen this option
+          /.custom-form-element.filter-radio-option.selector-price name='price'
+            /label
+              /= radio_button_tag 'price', '400', params[:price_min] == '400' ? true : false, 'data-all' => 'false', 'data-pricemin' => '400', 'data-pricemax' => 'null'
+              /span.icon
+              /span $400+
 
     .panel.panel-default
       .panel-heading#heading-collapse-style role='tab'
