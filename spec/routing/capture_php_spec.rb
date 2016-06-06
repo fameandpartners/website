@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Capture PHP Request', type: :routing do
+describe 'Capture .php requests', type: :routing do
 
   it 'routes to application#capture_php' do
     expect(get: '/abc.php').to route_to(controller: 'application', action: 'capture_php', path: 'abc', format: 'php')
