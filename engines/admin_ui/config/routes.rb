@@ -4,8 +4,6 @@ AdminUi::Engine.routes.draw do
     resources :events, :controller => 'item_returns/events', except: [:update, :delete]
   end
 
-  resources :manual_orders
-
   resources :preferences, only: :index do
     collection do
       put 'update'
@@ -65,4 +63,7 @@ AdminUi::Engine.routes.draw do
   end
 
   root to: 'dashboard#index'
+
+  mount ManualOrder::Engine, at: '/'
+
 end
