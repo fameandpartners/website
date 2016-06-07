@@ -119,6 +119,7 @@ PATH
       datagrid
       font-awesome-rails
       kaminari
+      manual_order
       money
       rails (~> 3.2.21)
       reform
