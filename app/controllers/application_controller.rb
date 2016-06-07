@@ -148,10 +148,6 @@ class ApplicationController < ActionController::Base
     session[:landing_page]
   end
 
-  def capture_php
-    head :not_acceptable
-  end
-
   private
 
   def title(*args)

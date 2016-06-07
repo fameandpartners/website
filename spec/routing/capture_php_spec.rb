@@ -1,13 +1,20 @@
 require 'spec_helper'
 
-describe 'Capture .php requests', type: :routing do
+describe 'Capture `.php` requests', type: :request do
 
-  it 'routes to application#capture_php' do
-    expect(get: '/abc.php').to route_to(controller: 'application', action: 'capture_php', path: 'abc', format: 'php')
+  it 'receives not acceptable' do
+    get '/abc.php'
+    expect(response).to have_http_status :not_acceptable
+    post '/abc.php'
+    expect(response).to have_http_status :not_acceptable
   end
 
-  it 'should not route' do
-    expect(get: '/abc').not_to be_routable
-    expect(get: '/abc.js').not_to be_routable
+  it 'receives not found' do
+    get '/abc'
+    expect(response).to have_http_status :not_found
+    post '/abc'
+    expect(response).to have_http_status :not_found
+    get '/abc.js'
+    expect(response).to have_http_status :not_found
   end
 end
