@@ -39,6 +39,12 @@ It's also important to configure your Elasticsearch to enable dynamic scripting
 script.disable_dynamic: false
 ```
 
+## Environment Variables
+
+Running the app in development mode and tests requires the presence of the `.env` file in the apps root folder.
+
+This file loads environment variables required to run the application. The current versioned file contains examples of the actual values that are used on production.
+
 ### Creating an Admin User
 
 Steps to create an admin user:
@@ -204,12 +210,7 @@ You can use any other details.
 
 ## Testing
 
-To run every test, including engines', use the `bundle exec rake spec` command
-
-## envvars
-
-Running app in development mode or running tests requires the presents of .env file in the apps root folder.  Obtain a copy of this file from other devs or project manager.
-
+To run every test, including engines', use the `bundle exec rake spec engines` command
 
 ## Useful Pages
 
