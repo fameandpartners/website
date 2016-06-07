@@ -51,6 +51,7 @@ $product-color-apple-green:     #1ca564;
 $product-color-apricot:         #ffad80;
 $product-color-aqua:            #4aa5d8;
 $product-color-army-green:      #6a7247;
+$product-color-azure:           #1E3C98;
 $product-color-baby-blue:       #bcd8ed;
 $product-color-baby-pink:       #fde2f0;
 $product-color-ballerina:       #f4ced7;
@@ -177,6 +178,7 @@ $product-color-wine:            #831c2e;
 .color-aqua-lily               { @include image-color-selector('AquaLily.png'); }
 .color-army-green              { background-color: $product-color-army-green; }
 .color-art-soul                { @include image-color-selector('ArtSoul.png'); }
+.color-azure                   { background-color: $product-color-azure; } 
 .color-baby-blue               { background-color: $product-color-baby-blue; }
 .color-baby-pink               { background-color: $product-color-baby-pink; }
 .color-ballerina               { background-color: $product-color-ballerina; }
@@ -303,6 +305,7 @@ $product-color-wine:            #831c2e;
 .color-pale-grey               { background-color: $product-color-pale-grey; }
 .color-pale-peach              { background-color: $product-color-pale-peach; }
 .color-pale-pink               { background-color: $product-color-pale-pink; }
+.color-pale-pink-and-pale-grey { @include split-color-selector($product-color-pale-pink, $product-color-pale-grey); }
 .color-pale-yellow             { background-color: $product-color-pale-yellow; }
 .color-palermo-floral          { @include image-color-selector('PalermoFloral.png'); }
 .color-peach                   { background-color: $product-color-peach; }

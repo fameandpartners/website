@@ -46,13 +46,7 @@ SitemapGenerator::Sitemap.create(sitemap_options) do
   collections_taxons = Spree::Taxon.published.from_range_taxonomy
   styles_taxons      = Spree::Taxon.published.from_style_taxonomy
   colors_taxons      = Spree::OptionValuesGroup.for_colors.available_as_taxon
-  statics_pages = [
-    '/about', '/why-us', '/privacy',
-    '/style-consultation', '/fame-chain',
-    '/fashionitgirl2015',
-    '/bridesmaid-dresses',
-    '/unidays'
-  ]
+  statics_pages      = %w(/about /why-us /privacy /bridesmaid-dresses /unidays)
 
   # Common pages
   add '/assets/returnform.pdf', priority: 0.7
@@ -92,7 +86,7 @@ SitemapGenerator::Sitemap.create(sitemap_options) do
   end
 end
 
-unless Rails.env.development?
+if Rails.env.production?
   SitemapGenerator::Sitemap.ping_search_engines("#{sitemap_options[:sitemaps_host]}/#{sitemap_options[:sitemaps_path]}/sitemap.xml.gz")
 
   # Delete local Sitemap files. They all were uploaded to S3
