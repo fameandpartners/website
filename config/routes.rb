@@ -152,6 +152,7 @@ FameAndPartners::Application.routes.draw do
     get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
     get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
+    get '/lookbook/the-ruffled-up-collection' => 'products/collections#show', :permalink => 'ruffle', :as => :the_ruffled_up_collection
 
     get '/sale-dresses' => redirect('/dresses/sale')
     get '/dresses/sale' => 'products/collections#show', :permalink => 'sale', :as => :sales_collection
@@ -437,9 +438,9 @@ FameAndPartners::Application.routes.draw do
   # Mysterious URLs
   #################
 
-  get '/undefined',    to: 'mysterious_route#undefined'
-  get '/au/undefined', to: 'mysterious_route#undefined'
-  get '/1000668',      to: 'mysterious_route#undefined'
+  get '/undefined',    to: 'errors/mysterious_route#undefined'
+  get '/au/undefined', to: 'errors/mysterious_route#undefined'
+  get '/1000668',      to: 'errors/mysterious_route#undefined'
 
   #########
   # Widgets
@@ -546,4 +547,6 @@ FameAndPartners::Application.routes.draw do
 
   mount AdminUi::Engine, at: '/fame_admin'
   mount Revolution::Engine => '/'
+
+  match '*path', to: 'errors/invalid_format#capture_php', constraints: lambda { |request| request.path[/\.php$/] }
 end
