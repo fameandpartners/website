@@ -152,6 +152,7 @@ FameAndPartners::Application.routes.draw do
     get '/new-years-eve-dresses' => redirect('/lookbook/break-hearts')
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
     get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
+    get '/lookbook/the-ruffled-up-collection' => 'products/collections#show', :permalink => 'ruffle', :as => :the_ruffled_up_collection
 
     get '/sale-dresses' => redirect('/dresses/sale')
     get '/dresses/sale' => 'products/collections#show', :permalink => 'sale', :as => :sales_collection
