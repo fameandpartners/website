@@ -45,6 +45,10 @@ Running the app in development mode and tests requires the presence of the `.env
 
 This file loads environment variables required to run the application. The current versioned file contains examples of the actual values that are used on production.
 
+## Vendored Gems
+
+All gems are vendored (downloaded and stored at `vendor/cache`). Because of this `bundle/config` file is now versioned. Be careful to **NOT** change it.
+
 ### Creating an Admin User
 
 Steps to create an admin user:
