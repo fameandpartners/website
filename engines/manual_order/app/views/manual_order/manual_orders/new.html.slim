@@ -1,0 +1,6 @@
+.ibox.float-e-margins
+  .ibox-title
+    h5 New Manual Order
+  = simple_form_for @manual_order_form, url: manual_orders_path do |f|
+    .ibox-content
+      = f.input :name
