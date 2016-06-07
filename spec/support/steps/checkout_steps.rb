@@ -10,13 +10,9 @@ module Acceptance
       find('li.active-result', text: state_name).click
     end
 
-    step 'I enter :state_name state' do |state_name|
-      find('#order_bill_address_attributes_state_name').set(state_name)
-    end
-
     step 'I select :country_name country' do |country_name|
       find('#order_bill_address_attributes_country_id_chosen').click
-      find('li.active-result', text: country_name).click
+      click_layered_element(:css, 'li.active-result', text: country_name)
     end
 
     step 'I fill in credit card information:' do |cc_info|
