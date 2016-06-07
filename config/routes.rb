@@ -438,9 +438,9 @@ FameAndPartners::Application.routes.draw do
   # Mysterious URLs
   #################
 
-  get '/undefined',    to: 'mysterious_route#undefined'
-  get '/au/undefined', to: 'mysterious_route#undefined'
-  get '/1000668',      to: 'mysterious_route#undefined'
+  get '/undefined',    to: 'errors/mysterious_route#undefined'
+  get '/au/undefined', to: 'errors/mysterious_route#undefined'
+  get '/1000668',      to: 'errors/mysterious_route#undefined'
 
   #########
   # Widgets
@@ -547,4 +547,6 @@ FameAndPartners::Application.routes.draw do
 
   mount AdminUi::Engine, at: '/fame_admin'
   mount Revolution::Engine => '/'
+
+  match '*path', to: 'errors/invalid_format#capture_php', constraints: lambda { |request| request.path[/\.php$/] }
 end

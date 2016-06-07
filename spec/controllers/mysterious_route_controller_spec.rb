@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe MysteriousRouteController, type: :controller do
+RSpec.describe Errors::MysteriousRouteController, type: :controller do
   describe "GET #undefined" do
     it "returns not found" do
       get :undefined
@@ -9,9 +9,9 @@ RSpec.describe MysteriousRouteController, type: :controller do
   end
 end
 
-RSpec.describe MysteriousRouteController, type: :routing do
+RSpec.describe Errors::MysteriousRouteController, type: :routing do
 
-  let(:controller) { { controller: 'mysterious_route', action: 'undefined'} }
+  let(:controller) { { controller: 'errors/mysterious_route', action: 'undefined'} }
 
   it "/undefined" do
     expect(get: "/undefined").to route_to(controller)
