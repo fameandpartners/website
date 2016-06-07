@@ -28,7 +28,6 @@ Feature: Browse and Purchase
     Then I should see "Just The Girls"
     Then I should see "Love Lace"
     Then I should see "This Modern Romance"
-    Then I should see "Bring On The Night"
     Then I should see "Make a Statement"
     Then I should see "Luxe Collection"
     Then I should see "Besties & Bridesmaids"
