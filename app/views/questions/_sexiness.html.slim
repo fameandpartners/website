@@ -32,7 +32,13 @@ javascript:
       centerMode: true,
       centerPadding: '40px',
       slidesToShow: 3,
-      initialSlide: 2
+      initialSlide: 2,
+      responsive: [{
+        breakpoint: 767,
+          settings: {
+            slidesToShow: 1
+          }
+      }]
     });
 
     var slider = $('.js-sexiness-slider').slider({

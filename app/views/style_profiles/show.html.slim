@@ -2,31 +2,11 @@
   = stylesheet_link_tag    'quiz'
   = javascript_include_tag 'quiz'
 
-- content_for :footer do
-  = render '/shared/marketing'
-
-css:
-  /* .quiz-results-wrapper * { overflow-y: auto; }*/
-  .gurl_com_modal.email-capture-modal .vex-content .vex-dialog-form .vex-dialog-message h2 {
-    font-size: 2.4em; 
-    line-height: 1.1;
-  }
-  .gurl_com_modal.email-capture-modal .vex-content .vex-dialog-form .vex-dialog-message p {
-    font-size: 1.5em;
-    line-height: 1.1;
-    padding-top: 0;
-  }
-
-= render '/style_profiles/javascript'
-
 ruby:
   main_style = @user_styles.first
   other_styles = @user_styles[1..-1]
 
-.quiz-box#style_quiz
-  .quiz-header
-    = link_to '/' do
-      = image_tag 'logo/new-logo-white.svg', class: 'logo', :alt => 'Fame & Partners'
+.page-content.quiz-box#style_quiz
   .container
     .row
       .col-md-12.final-wrapper
@@ -37,12 +17,12 @@ ruby:
               |Your style profile is: 
               span = main_style.presentation
             p = main_style.description
-            .questions-count
+            .questions-count.alt
               = main_style.presentation
             .progress
               .progress-bar style="width: #{ main_style.percentage }"
             - other_styles.each_with_index do |style, index|
-              .questions-count
+              .questions-count.alt
                 = "#{ style.presentation } #{ style.percentage }"
               .progress
                 .progress-bar style="width: #{ style.percentage }"

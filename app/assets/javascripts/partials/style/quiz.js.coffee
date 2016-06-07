@@ -3,8 +3,6 @@ window.style or= {}
 window.style.Quiz = class StyleQuiz
   container: null
   options: {}
-  $tabletScreen = 768
-  $phoneScreen = 500
 
   constructor: (options = {}) ->
     @options = options
@@ -30,9 +28,6 @@ window.style.Quiz = class StyleQuiz
     $chart = @container.find('.chart')
     $frame = $frames.first()
     $frame.addClass('current')
-    @container.find('.film').css('width', @stepsBox.width() * $frames.size())
-
-    @steps().width(@stepsBox.width())
 
     @bindCheckboxesAndRadios()
 

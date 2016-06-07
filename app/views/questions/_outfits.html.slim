@@ -9,7 +9,7 @@
       .scrollable
         .row.photos.randomize.items-box
           - question.answers.each do |answer|
-            .col-sm-6.col-md-4.item.unloaded
+            .col-xs-6.col-sm-6.col-md-4.item.unloaded
               label.media-wrap
                 = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code
                 img src="" alt="" data-src="#{image_path("style_quiz/outfits/#{answer.code}.jpg")}"

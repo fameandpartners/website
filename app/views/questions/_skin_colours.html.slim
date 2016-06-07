@@ -10,7 +10,7 @@
                 '(Select One)
         .row.photos.items-box
           - question.answers.each do |answer|
-            .col-sm-4.col-md-3.item.unloaded
+            .col-xs-6.col-sm-4.col-md-3.item.unloaded
               label.media-wrap.color-wrap class="#{answer.code}"
                 = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code
                 = image_tag "style_quiz/spacer-square.png"
