@@ -179,7 +179,6 @@ window.style.Quiz = class StyleQuiz
     $scrollable = $(step).find('.scrollable')
 
   processImagesForStepsInSeries: () ->
-    console.log('processImagesForStepsInSeries');
     $steps = @stepsWithUnLoadedImage()
     index = 0
 
