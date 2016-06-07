@@ -70,10 +70,12 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', true)
     else
       if !$this.hasClass('js-filter-all')
-        $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', false)
+        $this.parents('.panel-collapse').find('.js-filter-all').removeAttr("checked")
       else
         $this.parents('.panel-collapse').find('input').prop('checked', false)
         $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', true)
+        $this.parents('.panel-collapse').find("select option:selected").prop("selected", false)
+        $this.parents('.panel-collapse').find("select option:first").prop("selected", "selected")
 
     @update()
 
