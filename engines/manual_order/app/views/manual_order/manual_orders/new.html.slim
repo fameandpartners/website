@@ -1,6 +1,27 @@
-.ibox.float-e-margins
-  .ibox-title
-    h5 New Manual Order
-  = simple_form_for @manual_order_form, url: manual_orders_path do |f|
-    .ibox-content
-      = f.input :name
+.pages.wrapper.wrapper-content
+  = simple_form_for @manual_order_form, url: manual_orders_path, html: { class: "form-horizontal"} do |f|
+    .ibox.float-e-margins
+      .ibox-title
+        h5 New Manual Order
+      .ibox-content
+        .form-group
+          label.col-sm-2.control-label Style name
+          .col-sm-10 = f.collection_select :style_name, @manual_order_form.style_names, :id, :name, {}, { class: 'chosen-select' }
+        .form-group
+          label.col-sm-2.control-label Size
+          .col-sm-10 = f.collection_select :size, {}, :id, :name, {}, { class: 'chosen-select' }
+        .form-group
+          label.col-sm-2.control-label Skirt Length
+          .col-sm-10 = f.collection_select :length, {}, :id, :name, {}, { class: 'chosen-select' }
+        .form-group
+          label.col-sm-2.control-label Color
+          .col-sm-10 = f.collection_select :color, {}, :id, :name, {}, {class: 'chosen-select'}
+        .form-group
+          label.col-sm-2.control-label Customisation
+          .col-sm-10 = f.collection_select :customisations, {}, :id, :name, {}, {class: 'chosen-select'}
+        .form-group
+          label.col-sm-2.control-label Notes
+          .col-sm-10 = f.text_area :notes
+        .form-group
+          label.col-sm-2.control-label This order is
+          .col-sm-10 = f.collection_radio_buttons :status, [[true, 'An Exchange'] ,[false, 'A new order']], :first, :last
