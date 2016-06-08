@@ -41,9 +41,9 @@ script.disable_dynamic: false
 
 ## Environment Variables
 
-Running the app in development mode and tests requires the presence of the `.env` file in the apps root folder.
+Running the app in development mode requires the presence of the `.env` file in the apps root folder.
 
-This file loads environment variables required to run the application. The current versioned file contains examples of the actual values that are used on production.
+This file loads environment variables required to run the application. You can use the `.env.example` file, which contains examples of the actual values that are used on production.
 
 ## Vendored Gems
 

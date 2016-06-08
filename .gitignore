@@ -10,8 +10,9 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 
-# Ignore local dotenv
+# Ignore local dotenv and default
 .env.local
+.env
 
 # Ignore all logfiles and tempfiles.
 /log/*.log

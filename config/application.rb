@@ -21,7 +21,7 @@ module FameAndPartners
     # [TODO] Remove this and config/envvar.rb when no longer needed
     if Rails.env.development? || Rails.env.test?
       require "#{Rails.root}/config/envvar.rb"
-      ['.env', '.env.local'].each do |file_name|
+      %w(.env .env.local .env.test).each do |file_name|
         envfile = File.join(Rails.root, file_name)
         if File.exists?(envfile)
           Envvar.load envfile
