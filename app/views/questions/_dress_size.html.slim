@@ -11,7 +11,7 @@
         .media-wrap.keep-ratio
           .inner-wrap
             = image_tag "style_quiz/spacer-square.png"
-        label
-          .wrap
-            = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code
-            = answer.code
+            label
+              .wrap
+                = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code
+                = answer.code
