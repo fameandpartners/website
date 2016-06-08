@@ -53,7 +53,7 @@ module Shipping
           next :no_shipment
         end
 
-        # editable_shipments = lit.order.shipments.select { |s| s.tracking.nil? && s.editable_by?(:anyone) }
+        editable_shipments = lit.order.shipments.select { |s| s.tracking.nil? && s.editable_by?(:anyone) }
 
 
         # Simple case
@@ -68,21 +68,25 @@ module Shipping
           # TODO : WHAT HERE?
 
         else
-          next :whatever
+          # next :whatever
           # same_number = lit.order.shipments.detect {|s| s.tracking == lit.tracking_number }
           #
           # if same_number
           #   binding.pry
           # end
           #
-          # no_tracking = editable_shipments.select {|s| s.tracking.nil? }
+          no_tracking = editable_shipments.select {|s| s.tracking.nil? }
           #
           #
-          # if no_tracking
+          if no_tracking
           #   binding.pry
-          #   # no_tracking.tracking = lit.tracking_number
-          #   # no_tracking.line_items = [lit.line_item]
-          # end
+            # IF WE HAVE MULTI TRACKING NUMBERS FOR ONLY ONE SHIPMENT THEN THAT SHIPMENT WILL HAVE ONLY ONE TRACKING NUMBER
+            no_tracking.each do |nt|
+              nt.tracking = lit.tracking_number
+              nt.save!
+              #no_tracking.line_items = [lit.line_item]
+            end
+          end
         end
 
         # Find unshipped shipment on order with same tracking number
@@ -159,7 +163,8 @@ module Shipping
 
         if shipment_item_count > 1 && !shipment.shipped?
           tracking_items.map do |ti|
-            ti.pending(:multiple_items)
+            ti.process(:shipped)
+            #ti.pending(:multiple_items)
           end
         end
 
