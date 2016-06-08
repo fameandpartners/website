@@ -93,7 +93,7 @@ section.order-details
 
                 .delivery-date
                   h4 Expected delivery date
-                  span = order.order.projected_delivery_date.strftime("%d of %b, %Y")
+                  span = order.projected_delivery_date.strftime("%d of %b, %Y")
 
           .row
             .faq-wrapper.col-md-12
@@ -139,7 +139,7 @@ section.order-details
               .item
                 h4
                   | 3. Expect delivery date:
-                  p = order.order.projected_delivery_date.strftime('%d of %b, %Y')
+                  p = order.projected_delivery_date.strftime('%d of %b, %Y')
                 p You'll be able to track your delivery with your shipping confirmation.
                 = link_to faqs_path(anchor: 'collapse-orders-track'), class: 'sidebar-link'
                   | Learn more about Shipping and Delivery
