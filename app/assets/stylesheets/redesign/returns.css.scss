@@ -88,6 +88,7 @@
   }
 
   &.page-returns-success {
+
     p {
       font-family: $font-heading;
       font-weight: lighter;
@@ -106,8 +107,8 @@
     }
 
     .page-content {
+
       .steps-title {
-        margin-bottom: 20px;
 
         h2 {
           font-weight: bold;
@@ -118,14 +119,19 @@
       }
 
       .steps .item {
-        margin-bottom: 30px;
-        display: flex;
+        margin-top: 30px;
+
+        .step-summary-wrapper {
+          padding-bottom: 20px;
+        }
 
         .step-summary {
-          padding: 15px;
           background: $c-neutral-black;
           color: $c-neutral-white;
           text-align: center;
+          padding: 15px;
+          margin-bottom: -99999px;
+          padding-bottom: 99999px;
 
           p {
             color: $c-neutral-white;
@@ -144,12 +150,46 @@
             font-size: 1.6rem;
           }
 
+          i.icon {
+            display: table-cell;
+            background-size: 100%;
+            background-repeat: no-repeat;
+
+            &.step1 {
+             background-image: url('my-account/returns/step1.svg');
+             width: 28px;
+             height: 37px;
+            }
+
+            &.step2 {
+             background-image: url('my-account/returns/step2.svg');
+             width: 40px;
+             height: 37px;
+            }
+
+            &.step3 {
+             background-image: url('my-account/returns/step3.svg');
+             width: 28px;
+             height: 34px;
+            }
+
+            &.step4 {
+             background-image: url('my-account/returns/step4.svg');
+             width: 47px;
+             height: 37px;
+            }
+
+          }
+
         }
 
         .step-description {
+          border:1px solid $c-classic-modal-bg;
+          background-color: $c-neutral-white;
           padding: 20px 30px;
           margin-left: -15px;
-          border:1px solid $c-classic-modal-bg;
+          margin-bottom: -99999px;
+          padding-bottom: 99999px;
 
           p {
             margin: 0;
@@ -169,13 +209,19 @@
 
         }
 
-        .address .country {
-          text-transform: uppercase;
+        .address {
+          padding-bottom: 20px;
+
+          .country {
+            text-transform: uppercase;
+          }
+
         }
 
       }
 
       .notes {
+        margin-top: 20px;
         font-size: 1.35rem;
 
         p {
@@ -185,33 +231,36 @@
 
       }
 
-      .additional-info {
-        margin-top: 100px;
-
-        h4 {
-          text-transform: none;
-          font-size: 3.1rem;
-        }
-
-        .contact-section {
-          padding: 10px 15px;
-          height: 250px;
-        }
-
-      }
-
-
     }
 
   }
 
-  @media only screen and (min-width: 801px) {
+  // START - mobile
+  @media (max-width: $bootstrap-md-width - 1px) {
     .table > tbody > tr > td {
       border-top: black solid 1px;
     }
 
     .table > tbody + tbody {
       border-top: none;
+    }
+
+    &.page-returns-success {
+
+      .page-content .steps  {
+
+        .item {
+          margin-bottom: 30px;
+
+          .step-description {
+            margin-left: 15px;
+            margin-right: 15px;
+          }
+
+        }
+
+      }
+
     }
 
   }
