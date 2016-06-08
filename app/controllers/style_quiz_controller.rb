@@ -115,6 +115,7 @@ class StyleQuizController < ApplicationController
 
     respond_with({}) do |format|
       format.html { redirect_to(after_quiz_redirect_url) }
+      format.js   { render 'style_quiz/thanks' }
     end
   end
 
