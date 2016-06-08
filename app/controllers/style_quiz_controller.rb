@@ -3,6 +3,12 @@ class StyleQuizController < ApplicationController
 
   respond_to :html, :js
 
+  before_filter :set_title
+
+  def set_title
+    @title = "Style Quiz - Dress Recommendations Based on Your Style Profile | Fame and Partners"
+  end
+
   # questions#index
   def show
     @quiz = Quiz.active
