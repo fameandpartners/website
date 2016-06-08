@@ -2,6 +2,12 @@
 
 = render partial: 'shared/break_the_spree_hegemony'
 
+/ Source: https://github.com/amatsuda/kaminari/pull/322#issuecomment-74353552
+- _with_routes(main_app)
+  = paginate collection
+
+= page_entries_info collection
+
 table
   thead : tr
     th id
