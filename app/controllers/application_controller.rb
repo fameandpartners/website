@@ -30,12 +30,12 @@ class ApplicationController < ActionController::Base
   append_before_filter :count_competition_participants, if: proc { |_| params[:cpt].present? }
   append_before_filter :handle_marketing_campaigns
 
+  before_filter :website_on_maintenance, if: proc { Features.active?(:maintenance) }
   before_filter :set_session_country
   before_filter :add_debugging_information
   before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
   before_filter :set_locale
   before_filter :set_landing_page
-
 
   helper_method :analytics_label,
                 :current_wished_product_ids,
@@ -278,6 +278,10 @@ class ApplicationController < ActionController::Base
     Products::RecommendedProducts.new(product: product, limit: options[:limit]).read
   rescue
     Spree::Product.active.limit(3)
+  end
+
+  def website_on_maintenance
+    render 'index/maintenance', layout: 'redesign/maintenance'
   end
 
   def store_marketing_params
