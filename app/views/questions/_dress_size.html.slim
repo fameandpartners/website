@@ -5,13 +5,13 @@
       span
         '(Select One)
 
-	.row.choices.items-box.alt
-	  - question.answers.each do |answer|
-	    .col-xs-4.col-sm-4.col-md-2.item
-	      .media-wrap.keep-ratio
-	        .inner-wrap
-	        	= image_tag "style_quiz/spacer-square.png"
-				label
-					.wrap
-					  = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code
-					  = answer.code
+  .row.choices.items-box.alt
+    - question.answers.each do |answer|
+      .col-xs-4.col-sm-4.col-md-2.item
+        .media-wrap.keep-ratio
+          .inner-wrap
+            = image_tag "style_quiz/spacer-square.png"
+        label
+          .wrap
+            = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code
+            = answer.code
