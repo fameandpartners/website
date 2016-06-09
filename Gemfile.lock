@@ -148,6 +148,8 @@ PATH
       bootstrap-sass
       font-awesome-rails
       rails (~> 3.2.21)
+    manual_order (0.0.1)
+      rails (~> 3.2.22)
     revolution (0.0.1)
       awesome_nested_set
       rails (~> 3.2.21)
@@ -909,6 +911,7 @@ DEPENDENCIES
   launchy (= 2.2.0)
   letter_opener (~> 1.4.1)
   mailchimp-api
+  manual_order!
   meta_request
   net-ssh (~> 2.7.0)
   newrelic_rpm

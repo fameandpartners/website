@@ -36,6 +36,7 @@ path 'engines' do
   gem 'fame_favicon'
   gem 'inspinia-rails'
   gem 'bergen'
+  gem 'manual_order'
 end
 
 # TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it,

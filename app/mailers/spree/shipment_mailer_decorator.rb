@@ -22,7 +22,14 @@ Spree::ShipmentMailer.class_eval do
         shipping_address:      shipment.order.try(:shipping_address).to_s.presence || 'No Shipping Address',
         phone:                 shipment.order.try(:billing_address).try(:phone) || 'No Phone',
         delivery_date:         shipment.order.projected_delivery_date.try(:strftime, "%a, %d %b %Y"),
-        original_order_date:   shipment.order.created_at.strftime("%a, %d %b %Y")
+        original_order_date:   shipment.order.created_at.strftime("%d %b %Y"),
+        display_item_total:    shipment.order.display_item_total.to_s,
+        display_total:         shipment.order.display_total.to_s,
+        auto_account:          shipment.order.user && shipment.order.user.automagically_registered?,
+        order_number:          shipment.order.number,
+        currency:              shipment.order.currency,
+        shipping_amount:       shipment.order.adjustments.where(label: "Shipping").first.try(:amount).to_s,
+        tax:                   nil
       )
     rescue StandardError => e
       Raven.capture_exception(e)
