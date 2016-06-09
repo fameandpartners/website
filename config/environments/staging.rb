@@ -19,7 +19,7 @@ FameAndPartners::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Generate digests for assets URLs
   config.assets.digest = true
@@ -53,7 +53,7 @@ FameAndPartners::Application.configure do
   config.assets.precompile += %w( application_redesign.js application_redesign.css main_nav_widget.css html5.js ie.css widgets/site_navigations.css )
 
   # Disable delivery errors, bad email addresses will be ignored
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.default_url_options = { :host => ENV['APP_HOST'] }
 
@@ -69,10 +69,8 @@ FameAndPartners::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  # Log the query plan for queries taking more than this (works
-  # with SQLite, MySQL, and PostgreSQL)
-  # config.active_record.auto_explain_threshold_in_seconds = 0.5
-  #config.middleware.insert_after(::Rack::Lock, "::Rack::Auth::Basic", "FameAndPartners") do |u, p|
-  #  [u, p] == ['fame', 'fameandpartners']
-  #end
+  # Use S3 for storing attachments
+  config.use_s3 = true
+
+  config.react.variant = :production
 end
