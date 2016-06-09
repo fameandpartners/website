@@ -72,5 +72,7 @@ FameAndPartners::Application.configure do
   # Use S3 for storing attachments
   config.use_s3 = true
 
+  config.skip_mail_delivery = true
+
   config.react.variant = :production
 end
