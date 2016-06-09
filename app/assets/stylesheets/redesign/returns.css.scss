@@ -147,37 +147,6 @@
     font-size: 1.6rem;
   }
 
-  i.icon {
-    display: table-cell;
-    background-size: 100%;
-    background-repeat: no-repeat;
-
-    &.document {
-     background-image: url('my-account/returns/document.svg');
-     width: 28px;
-     height: 37px;
-    }
-
-    &.package {
-     background-image: url('my-account/returns/package.svg');
-     width: 40px;
-     height: 37px;
-    }
-
-    &.checklist {
-     background-image: url('my-account/returns/checklist.svg');
-     width: 28px;
-     height: 34px;
-    }
-
-    &.stamp {
-     background-image: url('my-account/returns/stamp.svg');
-     width: 47px;
-     height: 37px;
-    }
-
-  }
-
   .step-description {
     border:1px solid $c-classic-modal-bg;
     background-color: $c-neutral-white;
