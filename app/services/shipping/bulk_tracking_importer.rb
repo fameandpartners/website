@@ -1,4 +1,3 @@
-require 'csv'
 module Shipping
   class BulkTrackingImporter
 
