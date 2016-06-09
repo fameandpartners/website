@@ -1,0 +1,13 @@
+.container style="margin-top:50px;"
+  .which_colours-left-col style="width:40%;float:left"
+    h1 style='padding-left:0;margin-top:45px;'
+      em Which colors do you like to wear
+      p Select as many as you like, then submit
+  .which_colours-right-col style="width:60%;float:left"
+  ul.rounded-list.heir
+    - question.answers.each do |answer|
+      li.item style="width:70px"
+        label
+          = image_tag "_quiz/which_colours/Q3-#{answer.code}.jpg", width: 101, height: 101, alt: ''
+          = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code
+          .selected
