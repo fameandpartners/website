@@ -104,7 +104,8 @@ module Orders
           factory:          item.factory.name,
           deliver_date:     item.projected_delivery_date.to_s,
           express_making:   item.making_options.present? ? item.making_options.map{|option| option.name.upcase }.join(', ') : "",
-          image_url:        item.image? ? item.image_url : ''
+          image_url:        item.image? ? item.image_url : '',
+          total_price:      item.price
         }.merge(
            # Convert each element of the customisations array
            # to an explicit hash key and child hash.
