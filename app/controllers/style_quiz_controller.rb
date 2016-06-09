@@ -3,14 +3,11 @@ class StyleQuizController < ApplicationController
 
   respond_to :html, :js
 
-  before_filter :set_title
-
-  def set_title
-    @title = "Style Quiz - Dress Recommendations Based on Your Style Profile | Fame and Partners"
-  end
-
   # questions#index
   def show
+    title('Style Quiz - Dress Recommendations Based on Your Style Profile', default_seo_title)
+    description('Not sure to go boho, glam, edgy, classic, or girly? Fame and Partners\' style quiz can help identify your style profile and recommend that perfect dress.')
+
     @quiz = Quiz.active
     @questions_by_steps = @quiz.questions.includes(:answers).order('position ASC').group_by(&:step)
   end

@@ -1,6 +1,5 @@
 - content_for :head do
   = javascript_include_tag 'quiz'
-  meta name="description" content="Not sure to go boho, glam, edgy, classic, or girly? Fame and Partners' style quiz can help identify your style profile and recommend that perfect dress."
 
 - facebook_application = Spree::AuthenticationMethod.where(environment: ::Rails.env, provider: :facebook, active: true).first
 - if facebook_application.present?
@@ -10,7 +9,7 @@
       window.quiz = new window.style.Quiz();
     });
 
-    window.onQuizCompleted = function() { 
+    window.onQuizCompleted = function() {
       window.location = "#{ after_quiz_redirect_url }";
     };
 
