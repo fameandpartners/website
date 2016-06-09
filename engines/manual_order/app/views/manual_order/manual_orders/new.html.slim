@@ -6,13 +6,13 @@
       .ibox-content
         .form-group
           label.col-sm-2.control-label Style name
-          .col-sm-10 = f.collection_select :style_name, @manual_order_form.style_names, :id, :name, {}, { class: 'chosen-select' }
+          .col-sm-10 = f.collection_select :style_name, @manual_order_form.style_names, :id, :name, { include_blank: true }, { class: 'chosen-select',  remote: true }
         .form-group
           label.col-sm-2.control-label Size
           .col-sm-10 = f.collection_select :size, {}, :id, :name, {}, { class: 'chosen-select' }
         .form-group
           label.col-sm-2.control-label Skirt Length
-          .col-sm-10 = f.collection_select :length, {}, :id, :name, {}, { class: 'chosen-select' }
+          .col-sm-10 = f.collection_select :length, length_options_json, :first, :last, { include_blank: true }, { class: 'chosen-select' }
         .form-group
           label.col-sm-2.control-label Color
           .col-sm-10 = f.collection_select :color, {}, :id, :name, {}, {class: 'chosen-select'}
