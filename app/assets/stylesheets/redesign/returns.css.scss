@@ -87,156 +87,150 @@
 
   }
 
-  &.page-returns-success {
+}
+
+.page-returns-success {
+
+  p {
+    font-family: $font-heading;
+    font-weight: lighter;
+  }
+
+  h1 {
+    text-transform: none;
+    margin: 0;
+  }
+
+  .page-title {
+    margin-top: 40px;
+    background: none;
+  }
+
+  .steps-title h2 {
+    font-weight: bold;
+    font-size: 1.6rem;
+    font-family: $font-family-secondary;
+  }
+
+  .steps .item {
+    margin-top: 30px;
+  }
+
+  .step-summary-wrapper {
+    padding-bottom: 20px;
+  }
+
+  .step-summary {
+    background: $c-neutral-black;
+    color: $c-neutral-white;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
 
     p {
-      font-family: $font-heading;
-      font-weight: lighter;
+      color: $c-neutral-white;
     }
 
-    .page-title {
-      margin-top: 40px;
-      background: none;
-
-      h1 {
-        font-size: 3.1rem;
-        text-transform: none;
-        margin: 0;
-      }
-
-    }
-
-    .page-content {
-
-      .steps-title {
-
-        h2 {
-          font-weight: bold;
-          font-size: 1.6rem;
-          font-family: $font-family-secondary;
-        }
-
-      }
-
-      .steps .item {
-        margin-top: 30px;
-
-        .step-summary-wrapper {
-          padding-bottom: 20px;
-        }
-
-        .step-summary {
-          background: $c-neutral-black;
-          color: $c-neutral-white;
-          text-align: center;
-          padding: 15px;
-          margin-bottom: -99999px;
-          padding-bottom: 99999px;
-
-          p {
-            color: $c-neutral-white;
-          }
-
-          h3 {
-            font-weight: bold;
-            font-size: 1.6rem;
-            font-family: $font-family-secondary;
-            letter-spacing: -0.07rem;
-          }
-
-          .step-number {
-            color: $c-neutral-white;
-            font-style: italic;
-            font-size: 1.6rem;
-          }
-
-          i.icon {
-            display: table-cell;
-            background-size: 100%;
-            background-repeat: no-repeat;
-
-            &.step1 {
-             background-image: url('my-account/returns/step1.svg');
-             width: 28px;
-             height: 37px;
-            }
-
-            &.step2 {
-             background-image: url('my-account/returns/step2.svg');
-             width: 40px;
-             height: 37px;
-            }
-
-            &.step3 {
-             background-image: url('my-account/returns/step3.svg');
-             width: 28px;
-             height: 34px;
-            }
-
-            &.step4 {
-             background-image: url('my-account/returns/step4.svg');
-             width: 47px;
-             height: 37px;
-            }
-
-          }
-
-        }
-
-        .step-description {
-          border:1px solid $c-classic-modal-bg;
-          background-color: $c-neutral-white;
-          padding: 20px 30px;
-          margin-left: -15px;
-          margin-bottom: -99999px;
-          padding-bottom: 99999px;
-
-          p {
-            margin: 0;
-          }
-
-          .highlight {
-            font-weight: normal;
-          }
-
-          a.item-link {
-            color: $c-neutral-black;
-            text-decoration: underline;
-            text-transform: uppercase;
-            margin-top: 15px;
-            display: block;
-          }
-
-        }
-
-        .address {
-          padding-bottom: 20px;
-
-          .country {
-            text-transform: uppercase;
-          }
-
-        }
-
-      }
-
-      .notes {
-        margin-top: 20px;
-        font-size: 1.35rem;
-
-        p {
-          color: $c-neutral-10;
-          margin: 0;
-        }
-
-      }
-
+    h3 {
+      font-weight: bold;
+      font-size: 1.6rem;
+      font-family: $font-family-secondary;
+      letter-spacing: -0.07rem;
     }
 
   }
 
-  // START - mobile
-  @media (max-width: $bootstrap-md-width - 1px) {
+  .step-number {
+    color: $c-neutral-white;
+    font-style: italic;
+    font-size: 1.6rem;
+  }
+
+  i.icon {
+    display: table-cell;
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+    &.document {
+     background-image: url('my-account/returns/document.svg');
+     width: 28px;
+     height: 37px;
+    }
+
+    &.package {
+     background-image: url('my-account/returns/package.svg');
+     width: 40px;
+     height: 37px;
+    }
+
+    &.checklist {
+     background-image: url('my-account/returns/checklist.svg');
+     width: 28px;
+     height: 34px;
+    }
+
+    &.stamp {
+     background-image: url('my-account/returns/stamp.svg');
+     width: 47px;
+     height: 37px;
+    }
+
+  }
+
+  .step-description {
+    border:1px solid $c-classic-modal-bg;
+    background-color: $c-neutral-white;
+    padding: 20px 30px;
+    margin-left: -15px;
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+
+    p {
+      margin: 0;
+    }
+
+    .highlight {
+      font-weight: normal;
+    }
+
+    a.item-link {
+      color: $c-neutral-black;
+      text-decoration: underline;
+      text-transform: uppercase;
+      margin-top: 15px;
+      display: block;
+    }
+
+  }
+
+  .address {
+    padding-bottom: 20px;
+
+    .country {
+      text-transform: uppercase;
+    }
+
+  }
+
+  .notes {
+    margin-top: 20px;
+    font-size: 1.4rem;
+
+    p {
+      color: $c-neutral-10;
+      margin: 0;
+    }
+
+  }
+
+}
+
+// START - mobile
+@media (max-width: $bootstrap-md-width - 1px) {
+
+  .returns {
+
     .table > tbody > tr > td {
       border-top: black solid 1px;
     }
@@ -245,20 +239,21 @@
       border-top: none;
     }
 
-    &.page-returns-success {
+  }
 
-      .page-content .steps  {
+  .page-returns-success {
 
-        .item {
-          margin-bottom: 30px;
+    .page-title,
+    .secondary-title {
+      text-align: center;
+    }
 
-          .step-description {
-            margin-left: 15px;
-            margin-right: 15px;
-          }
+    .page-content .steps .item {
+      margin-bottom: 30px;
 
-        }
-
+      .step-description {
+        margin-left: 15px;
+        margin-right: 15px;
       }
 
     }
