@@ -265,12 +265,6 @@ FameAndPartners::Application.routes.draw do
 
     resource 'users/returns', as: 'user_returns', only: [:new, :create]
 
-    # [temporary] opening returns confirmation page without POST
-    get '/user/returns/success'  => 'returns_success#new', as: :returns_success
-    resource 'users/returns', as: 'user_returns', only: [:new, :create] do
-      get 'success'
-    end
-
     get 'styleprofile' => 'users/styleprofiles#show', as: 'styleprofile'
 
     get 'reviews' => 'users/reviews#index', as: 'reviews'
