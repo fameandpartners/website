@@ -1,16 +1,28 @@
 $ ->
-urlTemplate = '/fame_admin/product_colors/colors_options/:product_id'
-productSelect = $('#product_color_value_product_id')
-colorSelect = $('#product_color_value_option_value_id')
+  colorUrl = '/fame_admin/manual_orders/colors/:product_id'
+  sizeUrl = '/fame_admin/manual_orders/sizes/:product_id'
+  styleSelect = $('#forms_manual_order_style_name')
+  colorSelect = $('#forms_manual_order_color')
+  sizeSelect = $('#forms_manual_order_size')
 
-productSelect.on 'change', =>
-colorSelect.html('<option></option>')
-url = urlTemplate.replace(/:product_id/, productSelect.val()) if productSelect.val()
-  if url
-    $.getJSON url, (data) =>
-$.each data['product_colors'], (index, el) =>
-colorSelect.append "<option value='#{el.id}'>#{el.name}</option>"
-colorSelect.trigger("chosen:updated")
-else
-colorSelect.trigger("chosen:updated")
+  styleSelect.on 'change', =>
+    colorSelect.html('<option></option>')
+    url = colorUrl.replace(/:product_id/, styleSelect.val()) if styleSelect.val()
+    if url
+      $.getJSON url, (data) =>
+        $.each data['manual_orders'], (index, el) =>
+          colorSelect.append "<option value='#{el.id}'>#{el.name}</option>"
+        colorSelect.trigger("chosen:updated")
+    else
+      colorSelect.trigger("chosen:updated")
+
+    sizeSelect.html('<option></option>')
+    url = sizeUrl.replace(/:product_id/, styleSelect.val()) if styleSelect.val()
+    if url
+      $.getJSON url, (data) =>
+        $.each data['manual_orders'], (index, el) =>
+          sizeSelect.append "<option value='#{el.id}'>#{el.name}</option>"
+        sizeSelect.trigger("chosen:updated")
+    else
+      sizeSelect.trigger("chosen:updated")
 
