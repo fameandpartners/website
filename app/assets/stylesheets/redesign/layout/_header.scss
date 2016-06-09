@@ -1,12 +1,6 @@
 /* [Header]
 -------------------------------------------------------*/
 header.main {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  z-index: 1000;
   $logo-width: 325px;
 
   .banner-wrap {
@@ -53,7 +47,7 @@ header.main {
     margin: 0 auto;
 
     .logo{
-
+      
       img {
         display: block;
         width: 100%;
@@ -122,7 +116,7 @@ header.main {
     }
 
     @media (max-width: $iphone6-width) {
-
+    
       & .copy {
         display: none;
       }
