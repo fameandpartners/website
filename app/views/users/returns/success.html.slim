@@ -88,9 +88,9 @@
                 p
                   | The postage receipt must be included in your returns package for reimbursement.
 
-  .container
-    .row.additional-info
-      .faqs-section.col-md-6.col-md-offset-1
+  .container.additional-info
+    .row.faqs-section
+      .col-md-6.col-md-offset-1
         h4 FAQs about Returns
         .faq.faq-wrap
           .panel-group roll='tablist' aria-multiselectable='true'
@@ -106,8 +106,6 @@
             = render 'shared/redesign/faqs/when_refunded'
             = render 'shared/redesign/faqs/how_refunded'
 
-      .contact-wrapper.col-md-4
-        = link_to contact_path do
-          .contact-section
-            h4 Questions?
-            p.cta Contact us Now
+      .col-md-4
+        aside
+          = render 'shared/redesign/faqs/aside_panel_faq'
