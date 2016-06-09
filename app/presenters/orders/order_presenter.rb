@@ -105,7 +105,7 @@ module Orders
           deliver_date:     item.projected_delivery_date.to_s,
           express_making:   item.making_options.present? ? item.making_options.map{|option| option.name.upcase }.join(', ') : "",
           image_url:        item.image? ? item.image_url : '',
-          total_price:      item.price,
+          total_price:      item.price.to_s,
           discount:         item.product.discount.to_s
         }.merge(
            # Convert each element of the customisations array

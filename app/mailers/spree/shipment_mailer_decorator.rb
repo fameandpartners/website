@@ -28,7 +28,7 @@ Spree::ShipmentMailer.class_eval do
         auto_account:          shipment.order.user && shipment.order.user.automagically_registered?,
         order_number:          shipment.order.number,
         currency:              shipment.order.currency,
-        shipping_amount:       shipment.order.adjustments.where(label: "Shipping").first.try(:amount),
+        shipping_amount:       shipment.order.adjustments.where(label: "Shipping").first.try(:amount).to_s,
         tax:                   nil
       )
     rescue StandardError => e
