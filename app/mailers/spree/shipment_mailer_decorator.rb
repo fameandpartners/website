@@ -27,7 +27,9 @@ Spree::ShipmentMailer.class_eval do
         display_total:         shipment.order.display_total.to_s,
         auto_account:          shipment.order.user && shipment.order.user.automagically_registered?,
         order_number:          shipment.order.number,
-        currency:              shipment.order.currency
+        currency:              shipment.order.currency,
+        shipping_amount:       shipment.order.adjustments.where(label: "Shipping").first.try(:amount),
+        tax:                   nil
       )
     rescue StandardError => e
       Raven.capture_exception(e)
