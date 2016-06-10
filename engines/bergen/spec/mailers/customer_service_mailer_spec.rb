@@ -41,7 +41,7 @@ module Bergen
       include_examples 'CustomerServiceMailer body'
 
       it do
-        expect(mailer.subject).to eq('ACCEPTED - Order R123123 received')
+        expect(mailer.subject).to eq('[Bergen] ACCEPTED - Order R123123 received')
         assert_body
       end
     end
@@ -52,7 +52,7 @@ module Bergen
       include_examples 'CustomerServiceMailer body'
 
       it do
-        expect(mailer.subject).to eq('REJECTED - Order R123123 received')
+        expect(mailer.subject).to eq('[Bergen] REJECTED - Order R123123 received')
         assert_body
       end
     end

@@ -7,7 +7,7 @@ module Bergen
       @item_return = presenter(item_return)
 
       mail(
-        subject: "ACCEPTED - Order #{item_return.order_number} received",
+        subject: "[Bergen] ACCEPTED - Order #{item_return.order_number} received",
         template_name: 'received_parcel'
       )
     end
@@ -16,7 +16,7 @@ module Bergen
       @item_return = presenter(item_return)
 
       mail(
-        subject: "REJECTED - Order #{item_return.order_number} received",
+        subject: "[Bergen] REJECTED - Order #{item_return.order_number} received",
         template_name: 'received_parcel'
       )
     end
