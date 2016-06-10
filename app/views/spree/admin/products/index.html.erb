@@ -13,7 +13,7 @@
           { remote: true, id: 'admin_product_batch_upload', class: 'button icon-plus'} %>
       </li>
       <li>
-        <a href= <%= admin_export_product_taxons_csv_path %> class="button" id="export_product_taxons_csv" style="margin-top: 10px">Export product  -  taxons CSV</a>
+        <%= link_to 'Export Product-Taxons CSV', admin_export_product_taxons_csv_path, class: 'button icon-file' %>
       </li>
     </ul>
   </div>
