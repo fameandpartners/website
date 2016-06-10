@@ -3,7 +3,7 @@ module ManualOrder
 
     layout 'manual_order'
 
-    helper_method :length_options_json
+    helper_method :length_options
 
     def index
 
@@ -21,6 +21,9 @@ module ManualOrder
       render json: get_color_options(params[:product_id])
     end
 
+    def customisations_options_json
+      render json: get_customisations_options(params[:product_id])
+    end
 
     private
 
@@ -36,7 +39,11 @@ module ManualOrder
       products.find(product_id).variants.map {|v| { id: v.dress_color.id, name: v.dress_color.name} }.uniq
     end
 
-    def length_options_json
+    def get_customisations_options(product_id)
+      products.find(product_id).customisation_values.map {|c| { id: c.id, name: "#{c.presentation} (#{c.price})"} }
+    end
+
+    def length_options
       {
         'petite' =>'Petite',
         'standart' => 'Standart',
