@@ -5,6 +5,10 @@ module Bergen
     RSpec.describe ReceiveBergenParcel, type: :operation do
       let(:operation) { described_class.new(item_return: item_return) }
 
+      before(:each) do
+        expect(CustomerMailer).to receive_message_chain(:received_parcel, :deliver)
+      end
+
       context 'Rejects parcel' do
         let(:item_return) { create(:item_return, :bergen_rejected, acceptance_status: 'any status') }
 
