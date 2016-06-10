@@ -55,6 +55,17 @@ module Bergen
             worker.perform(return_item_process.id)
           end
         end
+
+        context 'ASN does not exists' do
+          it do
+            item_return.bergen_asn_number = 'I-DO-NOT-EXIST'
+            item_return.save
+
+            expect(described_class).to receive(:perform_in).with(3.hours, return_item_process.id)
+
+            worker.perform(return_item_process.id)
+          end
+        end
       end
     end
   end

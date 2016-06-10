@@ -10,7 +10,7 @@ module Bergen
 
       it do
         expect(default_config[:to]).to eq(%w(team@fameandpartners.com returns@fameandpartners.com))
-        expect(default_config[:from]).to eq('noreply@fameandpartners.com')
+        expect(default_config[:from]).to eq('bergen-3pl@fameandpartners.com')
       end
     end
 

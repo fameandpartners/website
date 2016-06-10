@@ -1,7 +1,7 @@
 module Bergen
   class CustomerServiceMailer < ActionMailer::Base
     default to: %w(team@fameandpartners.com returns@fameandpartners.com),
-            from: 'noreply@fameandpartners.com'
+            from: 'bergen-3pl@fameandpartners.com'
 
     def accepted_parcel(item_return:)
       @item_return = presenter(item_return)
