@@ -1,0 +1,118 @@
+.content-collapse-expand {
+
+  & .panel + .panel {
+       margin-top: 0;
+    }
+
+  .panel {
+    border-color: $c-neutral-4;
+    border: 0;
+    border-bottom: 0;
+
+    > .panel-heading {
+      background: $c-neutral-white;
+    }
+
+  }
+
+  .panel-heading {
+    padding: 0;
+
+    +.panel-collapse > .panel-body {
+      border-top: 0;
+    }
+
+  }
+
+  .panel-title {
+    position: relative;
+    display: block;
+    padding: 15px 20px 15px 0;
+    color: $c-neutral-black;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    text-decoration: underline;
+
+    &:after {
+      content: '\e90c';
+      position: absolute;
+      display: block;
+      padding-right: 15px;
+      right: 0;
+      top: 9px;
+      font-family: 'icomoon_fame_2015';
+      font-size: 2rem;
+      color: $c-neutral-black;
+    }
+
+    &.collapsed {
+      border-bottom: 1px solid $c-neutral-9;
+      color: $c-neutral-10;
+      text-decoration: none;
+
+      &:after {
+        top: 16px;
+        content: '\e90d';
+        font-size: 1.3rem;
+      }
+
+      &:hover {
+        color: $c-neutral-black;
+      }
+
+    }
+
+  }
+
+  .panel-body {
+    padding: 0 0 15px 0;
+    border: 0;
+    border-top-color: transparent;
+  }
+
+  .panel-collapse.in {
+
+    .panel-title {
+      border: none;
+    }
+
+    .panel-body {
+      border-bottom: 1px solid $c-neutral-9;
+    }
+
+  }
+
+  p {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+
+  .highlight {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.7rem;
+  }
+
+  .back-to-top {
+    text-transform: uppercase;
+    text-align: right;
+    font-size: 1.3rem;
+
+    a {
+      color: $c-neutral-10;
+    }
+
+    a:hover {
+      color: $c-neutral-black;
+    }
+
+    span:after {
+      content: '\e90b';
+      padding-left: 5px;
+      padding-right: 15px;
+      font-family: 'icomoon_fame_2015';
+    }
+
+  }
+
+}
