@@ -4,22 +4,17 @@ class WeddingConsultationsController < ApplicationController
 
   def new
     @wedding_consultation = WeddingConsultation.new
-    title('Wedding Consultation', default_seo_title)
-    @description = ""
+    @title = "Wedding Consultation - " + default_seo_title
+    @description = "We can help you create the perfect wedding look."
   end
 
   def create
     @wedding_consultation = WeddingConsultation.new(params[:wedding_consultation])
-    if @wedding_consultation.valid?
-      WeddingConsultationMailer.email(@wedding_consultation).deliver
-      flash[:notice] = "We're on it!"
+    if @wedding_consultation.send_request
+      flash[:notice] = 'Your request was successfully sent'
       redirect_to success_wedding_consultation_path
     else
       render action: :new
     end
-  end
-
-  def success
-    title('Thank You', default_seo_title)
   end
 end
