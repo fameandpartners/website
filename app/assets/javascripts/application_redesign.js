@@ -65,6 +65,7 @@
 //= require partials/helpers/modal
 //= require partials/helpers/truncate
 //= require partials/helpers/bs-tabs
+//= require partials/helpers/collapse_toggle
 
 //-----------------------------------
 // Show old quiz in popup with iframe
