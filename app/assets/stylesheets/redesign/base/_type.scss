@@ -110,6 +110,14 @@ blockquote {
 
 }
 
+.tt-capitalize {
+  text-transform: capitalize;
+}
+
+.tt-none {
+  text-transform: none;
+}
+
 // TODO: redo this legacy title
 .page-title--details {
   padding: 60px 0 55px 0;
