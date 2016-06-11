@@ -9,7 +9,14 @@
   }
 
   p {
+    font-family: $font-heading;
     font-weight: 300;
+  }
+
+  p.highlight.title {
+    font-style: italic;
+    font-weight: 500;
+    margin-top: 0;
   }
 
 }
