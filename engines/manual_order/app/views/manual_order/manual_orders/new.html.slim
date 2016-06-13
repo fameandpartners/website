@@ -15,10 +15,10 @@
           .col-sm-10 = f.collection_select :length, length_options, :first, :last, { include_blank: true }, { class: 'chosen-select' }
         .form-group
           label.col-sm-2.control-label Color
-          .col-sm-10 = f.collection_select :color, {}, :id, :name, {}, {class: 'chosen-select'}
+          .col-sm-10 = f.collection_select :color, {}, :id, :name, {}, { class: 'chosen-select' }
         .form-group
           label.col-sm-2.control-label Customisation
-          .col-sm-10 = f.collection_select :customisations, {}, :id, :name, {}, {class: 'chosen-select'}
+          .col-sm-10 = f.collection_select :customisations, {}, :id, :name, {}, { class: 'chosen-select' }
         .form-group
           label.col-sm-2.control-label Notes
           .col-sm-10 = f.text_area :notes
