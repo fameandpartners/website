@@ -8,6 +8,7 @@ gem 'slim'
 gem 'slim-rails'
 gem 'configatron'
 gem 'paperclip'
+# UPDATED
 gem 'sidekiq', '2.13.0'
 gem 'timers', '1.1.0'
 gem 'whenever'
