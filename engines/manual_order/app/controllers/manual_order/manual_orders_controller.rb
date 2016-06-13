@@ -18,7 +18,7 @@ module ManualOrder
     end
 
     def colors_options_json
-      render json: get_color_options(params[:product_id])
+      render json: get_color_options(params[:product_id]) | get_custom_colors(params[:product_id])
     end
 
     def customisations_options_json
@@ -36,7 +36,12 @@ module ManualOrder
     end
 
     def get_color_options(product_id)
-      products.find(product_id).variants.map {|v| { id: v.dress_color.id, name: v.dress_color.name} }.uniq
+      products.find(product_id).variants.map {|v| { id: v.dress_color.id, name: v.dress_color.name, type: 'color'} }.uniq
+    end
+
+    def get_custom_colors(product_id)
+      custom_colors = products.find(product_id).product_color_values.where(custom: true).pluck(:option_value_id)
+      Spree::OptionValue.colors.where('id IN (?)', custom_colors).map {|c| { id: c.id, name: c.name, type: 'custom' } }.uniq
     end
 
     def get_customisations_options(product_id)
