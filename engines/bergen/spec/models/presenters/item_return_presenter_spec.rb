@@ -61,7 +61,7 @@ module Bergen
         include_context 'return item ready to process'
 
         it { expect(presenter.order_date).to eq(DateTime.parse('10/10/2015 12:34:00 UTC')) }
-        it { expect(presenter.price).to eq(12345) }
+        it { expect(presenter.price).to eq('$123.45') }
         it { expect(presenter.customer_address).to eq('Street 1 Complement, Los Angeles, California, 123-321, United States of America') }
       end
 

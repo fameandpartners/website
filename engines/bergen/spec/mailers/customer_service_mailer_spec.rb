@@ -30,7 +30,7 @@ module Bergen
         expect(encoded_mailer).to have_text('Color Blue')
         expect(encoded_mailer).to have_text('Height petite')
         expect(encoded_mailer).to have_text('Customization Super Custom')
-        expect(encoded_mailer).to have_text('Item Purchase Price 12345')
+        expect(encoded_mailer).to have_text('Item Purchase Price $123.45')
         expect(encoded_mailer).to have_text('Customer Address Street 1 Complement, Los Angeles, California, 123-321, United States of America')
       end
     end
