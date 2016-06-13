@@ -68,28 +68,25 @@ gem 'google_drive', '1.0.0', require: false # parse spread sheet
 gem 'sitemap_generator'
 gem 'fog'
 
-gem 'canonical-rails', github: 'jumph4x/canonical-rails'
+gem 'canonical-rails', path: '../gems/canonical-rails'
 
-gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
+gem 'spree', path: '../gems/spree'
 gem 'spree_banner', '~> 1.3.0'
 
 #payments
 gem 'pin_payment'
 
 # spree extensions for authentication
-gem 'spree_auth_devise',
-    :github => 'spree/spree_auth_devise',
-    :branch => '1-3-stable',
-    :ref => 'c4466de3748618971dc401e6e30c0d87f2b9c143'
+gem 'spree_auth_devise', path: '../gems/spree_auth_devise'
 
-gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
+gem 'spree_social', path: '../gems/spree_social'
 
 
 # spree extensions for payments
-gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
-gem 'spree_paypal_express', github: 'fameandpartners/better_spree_paypal_express', branch: '1-3-stable'
+gem 'spree_gateway', path: '../gems/spree_gateway'
+gem 'spree_paypal_express', path: '../gems/better_spree_paypal_express'
 
-gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
+gem 'spree_essentials', path: '../gems/spree_essentials'
 
 # utils
 # replacement for standard library.

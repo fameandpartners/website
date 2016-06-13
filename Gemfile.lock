@@ -1,32 +1,53 @@
-GIT
-  remote: git://github.com/bbtfr/spree_essentials.git
-  revision: e930a71a3c5046b52498b82e8f7a1211f7644241
-  branch: 1.3.x
-  specs:
-    spree_essentials (0.7.0)
-      rdiscount (~> 1.6.8)
-      spree_core (~> 1.3.0)
-
-GIT
-  remote: git://github.com/fameandpartners/better_spree_paypal_express.git
-  revision: 478b27281f7ed806df5ae86a41f9890595f8d242
-  branch: 1-3-stable
+PATH
+  remote: ../gems/better_spree_paypal_express
   specs:
     spree_paypal_express (2.0.3)
       paypal-sdk-merchant (= 1.103.0)
       spree_core (~> 1.3.3)
 
-GIT
-  remote: git://github.com/jumph4x/canonical-rails.git
-  revision: 03adacb2db44f1ae1c3ebe22edd910ddc19e0fbb
+PATH
+  remote: ../gems/canonical-rails
   specs:
     canonical-rails (0.0.9)
       rails (>= 3.1, < 5.0)
 
-GIT
-  remote: git://github.com/spree/spree.git
-  revision: 7d19c8933042cec667634c8cffedcbe6084abf1d
-  branch: 1-3-stable
+PATH
+  remote: ../gems/spree_auth_devise
+  specs:
+    spree_auth_devise (1.3.0)
+      cancan (~> 1.6.7)
+      devise (~> 2.2.3)
+      devise-encryptable (= 0.1.2)
+      spree_core
+
+PATH
+  remote: ../gems/spree_essentials
+  specs:
+    spree_essentials (0.7.0)
+      rdiscount (~> 1.6.8)
+      spree_core (~> 1.3.0)
+
+PATH
+  remote: ../gems/spree_gateway
+  specs:
+    spree_gateway (1.2.0.rc2)
+      savon (~> 1.2)
+      spree_core (~> 1.0)
+
+PATH
+  remote: ../gems/spree_social
+  specs:
+    spree_social (2.3.0)
+      oa-core
+      omniauth
+      omniauth-facebook
+      omniauth-github
+      omniauth-google-oauth2
+      omniauth-twitter
+      spree_core (~> 1.3.0)
+
+PATH
+  remote: ../gems/spree
   specs:
     spree (1.3.6.beta)
       spree_api (= 1.3.6.beta)
@@ -64,41 +85,6 @@ GIT
       spree_core (= 1.3.6.beta)
     spree_sample (1.3.6.beta)
       spree_core (= 1.3.6.beta)
-
-GIT
-  remote: git://github.com/spree/spree_auth_devise.git
-  revision: c4466de3748618971dc401e6e30c0d87f2b9c143
-  ref: c4466de3748618971dc401e6e30c0d87f2b9c143
-  branch: 1-3-stable
-  specs:
-    spree_auth_devise (1.0.0)
-      cancan (~> 1.6.7)
-      devise (~> 2.2.3)
-      devise-encryptable (= 0.1.2)
-      spree_core
-
-GIT
-  remote: git://github.com/spree/spree_gateway.git
-  revision: 1e07f8e5835c5772d5e5db6d5e81478af3e11987
-  branch: 1-3-stable
-  specs:
-    spree_gateway (1.2.0.rc2)
-      savon (~> 1.2)
-      spree_core (~> 1.0)
-
-GIT
-  remote: git://github.com/spree/spree_social.git
-  revision: e0b45b4dc9a9c1137233e33cc1323f425c76cfff
-  branch: 1-3-stable
-  specs:
-    spree_social (2.3.0)
-      oa-core
-      omniauth
-      omniauth-facebook
-      omniauth-github
-      omniauth-google-oauth2
-      omniauth-twitter
-      spree_core (~> 1.3.0)
 
 PATH
   remote: ./spree_masterpass
@@ -166,8 +152,8 @@ GEM
       actionpack
     active_model_serializers (0.9.3)
       activemodel (>= 3.2)
-    activemerchant (1.49.0)
-      activesupport (>= 3.2.14, < 5.0.0)
+    activemerchant (1.59.0)
+      activesupport (>= 3.2.14, < 5.1)
       builder (>= 2.1.2, < 4.0.0)
       i18n (>= 0.6.9)
       nokogiri (~> 1.4)
@@ -212,7 +198,7 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    bcrypt (3.1.10)
+    bcrypt (3.1.11)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
     better_errors (2.1.1)
@@ -462,7 +448,7 @@ GEM
       oauth2 (>= 0.5.0)
     gyoku (0.4.6)
       builder (>= 2.1.2)
-    hashie (1.2.0)
+    hashie (3.4.4)
     hashr (0.0.22)
     highline (1.6.18)
     hike (1.2.3)
@@ -533,24 +519,26 @@ GEM
     oink (0.10.1)
       activerecord
       hodel_3000_compliant_logger
-    omniauth (1.2.2)
+    omniauth (1.3.1)
       hashie (>= 1.2, < 4)
-      rack (~> 1.0)
-    omniauth-facebook (2.0.1)
+      rack (>= 1.0, < 3)
+    omniauth-facebook (3.0.0)
       omniauth-oauth2 (~> 1.2)
     omniauth-github (1.1.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
-    omniauth-google-oauth2 (0.2.6)
-      omniauth (> 1.0)
-      omniauth-oauth2 (~> 1.1)
+    omniauth-google-oauth2 (0.3.1)
+      jwt (~> 1.0)
+      multi_json (~> 1.3)
+      omniauth (>= 1.1.1)
+      omniauth-oauth2 (>= 1.3.1)
     omniauth-oauth (1.1.0)
       oauth
       omniauth (~> 1.0)
-    omniauth-oauth2 (1.3.0)
+    omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
-    omniauth-twitter (1.2.0)
+    omniauth-twitter (1.2.1)
       json (~> 1.3)
       omniauth-oauth (~> 1.1)
     orm_adapter (0.5.0)
@@ -820,7 +808,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-    warden (1.2.3)
+    warden (1.2.6)
       rack (>= 1.0)
     wasabi (2.5.1)
       httpi (~> 1.0)
@@ -954,4 +942,4 @@ RUBY VERSION
    ruby 2.1.6p336
 
 BUNDLED WITH
-   1.12.1
+   1.12.4
