@@ -521,6 +521,8 @@ FameAndPartners::Application.routes.draw do
       get 'stock_invent/auth'           => 'stock_invent#google_auth',   as: :stock_invent_access_token_request
       get 'stock_invent/auth_callback'  => 'stock_invent#auth_callback', as: :stock_invent_google_auth_callback
 
+      get 'export_product_taxons_csv'  => 'products#export_product_taxons', as: :export_product_taxons_csv, defaults: { format: :csv }
+
       resources :products do
         resources :customisation_values
         resources :inspirations do
