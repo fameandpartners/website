@@ -24,4 +24,4 @@
           .col-sm-10 = f.text_area :notes
         .form-group
           label.col-sm-2.control-label This order is
-          .col-sm-10 = f.collection_radio_buttons :status, [[true, 'An Exchange'] ,[false, 'A new order']], :first, :last
+          .col-sm-10 = f.collection_radio_buttons :status, [['new', 'A new order'], ['exchange', 'An Exchange']], :first, :last, { checked: 'new' }
