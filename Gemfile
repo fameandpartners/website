@@ -16,12 +16,12 @@ gem 'active_model_serializers'
 gem 'rack-cors'
 gem 'business_time'
 gem 'rmagick'
-# UPDATED
 gem 'ckeditor'
 gem 'default_value_for'
 gem 'tire'
 gem 'redis-rails'
 gem 'autoprefixer-rails'
+# UPDATED
 gem 'bower-rails', '~> 0.10.0'
 gem 'redcarpet', '~> 2.3.0'
 
