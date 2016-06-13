@@ -34,26 +34,37 @@
     text-decoration: underline;
 
     &:after {
-      content: '\e90c';
+      color: $c-neutral-12;
+      content: '+';
       position: absolute;
       display: block;
-      padding-right: 15px;
+      padding-right: 10px;
       right: 0;
-      top: 9px;
-      font-family: 'icomoon_fame_2015';
-      font-size: 2rem;
-      color: $c-neutral-black;
+      top: 5px;
+      font-family: $font-family-secondary;
+      font-size: 4.5rem;
+      font-weight: 300;
+      -ms-transform: rotate(45deg);
+      -ms-transform-origin: 20% 40%;
+      -webkit-transform: rotate(45deg);
+      -webkit-transform-origin: 20% 40%;
+      transform: rotate(45deg);
     }
 
     &.collapsed {
       border-bottom: 1px solid $c-neutral-9;
-      color: $c-neutral-10;
       text-decoration: none;
 
       &:after {
-        top: 16px;
-        content: '\e90d';
-        font-size: 1.3rem;
+        font-size: 3.4rem;
+        top: 2px;
+        padding-right: 15px;
+        -ms-transform: none;
+        -ms-transform-origin: none;
+        -webkit-transform: none;
+        -webkit-transform-origin: none;
+        transform: none;
+        transform-origin: none;
       }
 
       &:hover {
@@ -97,20 +108,29 @@
     text-transform: uppercase;
     text-align: right;
     font-size: 1.3rem;
+    position: relative;
+    display: block;
+    padding-right: 35px;
 
     a {
       color: $c-neutral-10;
+
+      &:hover {
+        color: $c-neutral-black;
+      }
+
     }
 
-    a:hover {
-      color: $c-neutral-black;
-    }
-
-    span:after {
-      content: '\e90b';
-      padding-left: 5px;
-      padding-right: 15px;
-      font-family: 'icomoon_fame_2015';
+    a:after {
+        color: $c-neutral-8;
+        content: '^';
+        font-size: 2.5rem;
+        font-weight: 300;
+        font-family: $font-family-secondary;
+        position: absolute;
+        display: block;
+        right: 16px;
+        top: -3px;
     }
 
   }
