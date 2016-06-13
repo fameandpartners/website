@@ -2,9 +2,11 @@ doctype html
 html
   head
     title Fame Admin
-    = stylesheet_link_tag "admin_ui", :media => "all"
+    = stylesheet_link_tag 'admin_ui', media: 'all'
+    = stylesheet_link_tag 'manual_order', media: 'all'
     = stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
-    = javascript_include_tag "manual_order"
+    = javascript_include_tag 'admin_ui'
+    = javascript_include_tag 'manual_order'
     = csrf_meta_tags
   body class=""
     #wrapper

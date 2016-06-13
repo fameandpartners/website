@@ -10,10 +10,4 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require libs/underscore-min
-//= require inspinia-rails
-//= require jquery-ui
-//= require chosen-jquery
-
-//= require admin_ui/chosen.js
 //= require manual_order/manual_orders.js
