@@ -1,6 +1,8 @@
 require 'csv'
 
 Spree::Admin::ProductsController.class_eval do
+  layout 'spree/layouts/admin'
+
   before_filter :set_default_prototype, :only => [:new]
   before_filter :split_related_outerwear_ids, :only => [:update]
 
