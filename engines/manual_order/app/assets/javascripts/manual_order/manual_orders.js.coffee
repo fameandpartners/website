@@ -12,10 +12,14 @@ $ ->
   customisationUrl = '/fame_admin/manual_orders/customisations/:product_id'
   customisationSelect = $('#forms_manual_order_customisations')
 
+  imageUrl = '/fame_admin/manual_orders/images/:product_id/:size_id/:color_id'
+  imageTag = $('h3.product_image')
+
   styleSelect.on 'change', =>
     colorSelect.html('<option></option>')
     optColors.html('')
     optCustomColors.html('')
+    imageTag.html('Please select style name')
     url = colorUrl.replace(/:product_id/, styleSelect.val()) if styleSelect.val()
     if url
       $.getJSON url, (data) =>
@@ -47,3 +51,19 @@ $ ->
         customisationSelect.trigger("chosen:updated")
     else
       customisationSelect.trigger("chosen:updated")
+
+  colorSelect.on 'change', =>
+    if sizeSelect.val() and colorSelect.val()
+      url = imageUrl.replace(/:product_id/, styleSelect.val())
+                    .replace(/:size_id/, sizeSelect.val())
+                    .replace(/:color_id/, colorSelect.val())
+      $.getJSON url, (data) =>
+        console.log url
+        console.log data
+        image = $('<img>').attr('src', data.url)
+        console.log image
+        imageTag.html(image)
+
+
+
+
