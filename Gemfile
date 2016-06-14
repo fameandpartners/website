@@ -65,6 +65,7 @@ gem 'rubyzip', '~> 1.1.7', require: false
 gem 'roo', require: false
 
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
+gem 'google-api-client', '~> 0.8.6'
 
 gem 'sitemap_generator'
 gem 'fog'
@@ -121,7 +122,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
   gem 'awesome_print'
-  gem 'launchy', '2.2.0'
+  gem 'launchy', '~> 2.4'
   gem 'letter_opener', '~> 1.4.1'
   gem 'net-ssh', '~> 2.7.0'
   gem 'oink'
