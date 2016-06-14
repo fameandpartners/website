@@ -54,5 +54,8 @@
             .form-group
               label.col-sm-2.control-label Phone
               .col-sm-10 = f.input :phone, label: false, input_html: {class: 'form-control'}
+            .form-group
+              .col-sm-2
+              .col-sm-10 = f.submit 'Create', class: 'btn btn-primary'
           .col-sm-4
-            h3 Product Image...
+            h3.product_image Please select style name
