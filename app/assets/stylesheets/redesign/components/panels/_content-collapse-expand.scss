@@ -1,8 +1,8 @@
 .content-collapse-expand {
 
   & .panel + .panel {
-       margin-top: 0;
-    }
+    margin-top: 0;
+  }
 
   .panel {
     border-color: $c-neutral-4;
@@ -18,7 +18,7 @@
   .panel-heading {
     padding: 0;
 
-    +.panel-collapse > .panel-body {
+    + .panel-collapse > .panel-body {
       border-top: 0;
     }
 
@@ -27,48 +27,33 @@
   .panel-title {
     position: relative;
     display: block;
-    padding: 15px 20px 15px 0;
+    padding: 15px 10px 15px 0;
     color: $c-neutral-black;
     font-size: 1.3rem;
     text-transform: uppercase;
     text-decoration: underline;
 
-    &:after {
-      color: $c-neutral-12;
-      content: '+';
-      position: absolute;
-      display: block;
-      padding-right: 10px;
-      right: 0;
-      top: 5px;
-      font-family: $font-family-secondary;
-      font-size: 4.5rem;
-      font-weight: 300;
-      -ms-transform: rotate(45deg);
-      -ms-transform-origin: 20% 40%;
-      -webkit-transform: rotate(45deg);
-      -webkit-transform-origin: 20% 40%;
-      transform: rotate(45deg);
+    .btn-open-close {
+      @extend .btn-close;
+      float: right;
     }
 
     &.collapsed {
       border-bottom: 1px solid $c-neutral-9;
       text-decoration: none;
 
-      &:after {
-        font-size: 3.4rem;
-        top: 2px;
-        padding-right: 15px;
-        -ms-transform: none;
-        -ms-transform-origin: none;
-        -webkit-transform: none;
-        -webkit-transform-origin: none;
-        transform: none;
-        transform-origin: none;
-      }
-
       &:hover {
         color: $c-neutral-black;
+      }
+
+      .btn-open-close {
+        @include transform(rotate(45deg));
+
+        &:after, &:before {
+          height: 12px;
+          top: 4px;
+        }
+
       }
 
     }
@@ -110,27 +95,21 @@
     font-size: 1.3rem;
     position: relative;
     display: block;
-    padding-right: 35px;
+    padding-right: 25px;
+  }
 
-    a {
-      color: $c-neutral-10;
+  .back-to-top a {
+    color: $c-neutral-10;
 
-      &:hover {
-        color: $c-neutral-black;
-      }
-
+    &:hover {
+      color: $c-neutral-black;
     }
 
-    a:after {
-        color: $c-neutral-8;
-        content: '^';
-        font-size: 2.5rem;
-        font-weight: 300;
-        font-family: $font-family-secondary;
-        position: absolute;
-        display: block;
-        right: 16px;
-        top: -3px;
+    &:after {
+      display: inline-block;
+      top: -3px;
+      right: 4px;
+      @extend .icon-arrow-up;
     }
 
   }
