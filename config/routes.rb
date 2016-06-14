@@ -333,8 +333,8 @@ FameAndPartners::Application.routes.draw do
     post '/about' => 'contacts#join_team', as: :join_team
 
     # return form
-    get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf')
-    get '/returns', to: redirect('/faqs#collapse-returns-policy')
+    get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf'), as: 'returns_form'
+    get '/returns', to: redirect('/faqs#collapse-returns-policy'), as: 'returns_policy'
 
     # External URLs
     get '/trendsetters', to: redirect('http://woobox.com/pybvsm')

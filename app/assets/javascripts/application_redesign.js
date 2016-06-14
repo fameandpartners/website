@@ -114,6 +114,11 @@
 // campaigns
 //= require partials/fitgau_reminder
 
+//--------------------------------
+// FAQs
+//--------------------------------
+//= require partials/helpers/collapse_toggle
+
 jQuery(document).ready(function($){
   $('body').addClass('ready');
 

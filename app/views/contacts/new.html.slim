@@ -337,33 +337,9 @@
 
   javascript:
     (function($) {
-      /*
-      $( document ).ready(function() {
-        // set affix
-        $('.js-faq-wrap').affix({
-          offset: {
-            top: $('.js-faq-wrap').offset().top - 30,
-            bottom: $('.js-footer').outerHeight(true) + 60
-          }
-        });
-        // refresh on accordion interaction
-        $('.js-faq-wrap').on('hidden.bs.collapse shown.bs.collapse', function (e) {
-          $('.js-faq-wrap').affix('checkPosition');
-        });
-
-      });
-      */
       // select control for tabs
       $('.js-can-we-help').on('change', function() {
         $('.js-tab-controls a[href="' + $(this).val() + '"]').tab('show');
-      });
-
-      // FAQ accordions
-      $('body').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function() {
-        $this = $(this);
-        var $target = $this.parent().next();
-        $this.toggleClass('collapsed');
-        $target.data('bs.collapse') ? $target.collapse('toggle') : $target.collapse();
       });
 
     })(jQuery);
