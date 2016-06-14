@@ -4,8 +4,8 @@ class WeddingConsultationsController < ApplicationController
 
   def new
     @wedding_consultation = WeddingConsultation.new
-    @title = "Wedding Consultation - " + default_seo_title
-    @description = "We can help you create the perfect wedding look."
+    title('Wedding Consultation', default_seo_title)
+    description('We can help you create the perfect wedding look.')
   end
 
   def create
