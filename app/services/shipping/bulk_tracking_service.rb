@@ -5,7 +5,7 @@ module Shipping
 
     def initialize(bulk_update, user)
       @bulk_update = bulk_update
-      @user = user
+      @user        = user
     end
 
     def detect_spree_matches
@@ -39,39 +39,25 @@ module Shipping
     def group_shipments
       bulk_update.line_item_updates.each do |lit|
         next :invalid unless lit.order && lit.line_item
+        next :no_shipment unless lit.shipment
 
-        if lit.shipment
-          if lit.shipment.shipped? && lit.shipment.tracking == lit.tracking_number
-            next :ok
-          end
+        spree_shipment = lit.shipment
 
-          if lit.shipment.shipped? && lit.shipment.tracking != lit.tracking_number
-            next :error
-          end
-        else
-          # Handle not in a shipment
-          next :no_shipment
+        if spree_shipment.shipped? && spree_shipment.tracking == lit.tracking_number
+          next :ok
         end
 
-      
-        unless lit.shipment.shipped?
-          if lit.shipment.tracking != lit.tracking_number
-            lit.shipment.tracking = lit.tracking_number
-          end
-          lit.shipment.save
+        if spree_shipment.shipped? && spree_shipment.tracking != lit.tracking_number
+          next :error
         end
 
-
-        # Find unshipped shipment on order with same tracking number
-        # add self to that
-
-
-        # if lit.shipment.tracking.empty? && lit.shipment.line_items.include?(lit.line_item)
-        #   lit.shipment.tracking
-        #
-        # end
-
-
+        # Setup Tracking Numbers
+        unless spree_shipment.shipped?
+          if spree_shipment.tracking != lit.tracking_number
+            spree_shipment.tracking = lit.tracking_number
+            spree_shipment.save
+          end
+        end
       end
     end
 
