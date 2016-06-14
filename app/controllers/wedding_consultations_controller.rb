@@ -10,7 +10,8 @@ class WeddingConsultationsController < ApplicationController
 
   def create
     @wedding_consultation = WeddingConsultation.new(params[:wedding_consultation])
-    if @wedding_consultation.send_request
+    if @wedding_consultation.valid?
+      WeddingConsultationMailer.email(@wedding_consultation).deliver
       flash[:notice] = 'Your request was successfully sent'
       redirect_to success_wedding_consultation_path
     else
