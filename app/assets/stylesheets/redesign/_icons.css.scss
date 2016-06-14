@@ -6,6 +6,7 @@
   width: 24px;
   position: relative;
   cursor: pointer;
+
   &:before, &:after {
     content: '';
     display: block;
@@ -17,20 +18,38 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
+
   &:before {
     width: 200%;
     height: 1px;
     margin-top: -1px;
     margin-left: -100%;
   }
+
   &:after {
     height: 200%;
     width: 1px;
     margin-top: -106%;
   }
+
 }
 // @end Cross icon
 // -----------------
+
+.icon-arrow-up {
+  position: absolute;
+  display: block;
+
+  &:after {
+    content: '^';
+    font-weight: 300;
+    font-family: $font-family-secondary;
+    font-size: 2.5rem;
+    position: absolute;
+    display: block;
+  }
+
+}
 
 .svg-colour {
   @extend %icon;
