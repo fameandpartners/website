@@ -6,7 +6,7 @@ class WeddingConsultationMailer < ActionMailer::Base
     @wedding_consultation = wedding_consultation
 
     mail(
-      to:      'team@fameandpartners.com',
+      to:      'weddingstylist@fameandpartners.com',
       from:    @wedding_consultation.email,
       subject: '[Wedding Consultation]',
       layout:  false
