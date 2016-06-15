@@ -33,6 +33,8 @@ window.style.Quiz = class StyleQuiz
 
     @processImagesForStepsInSeries()
 
+    @updateProgressBar()
+
     @container.find('.photos-nav .up').on 'click', (event) ->
       $button = $(event.target)
       $scrollable = $button.parents('.photos-nav').prev('.scrollable')
@@ -119,7 +121,7 @@ window.style.Quiz = class StyleQuiz
       $(question).is ':has(:checkbox:checked, :radio:checked)'
 
   currentProgress: () ->
-    ((100 / @stepsCount()) * (@currentStepNumber() - 1)).toFixed()
+    ((100 / @stepsCount()) * @currentStepNumber()).toFixed()
 
   updateProgressBar: () ->
     @progressBar().animate

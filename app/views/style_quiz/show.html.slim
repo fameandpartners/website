@@ -39,7 +39,7 @@
           ' QUESTION
           span.current 1
           | /
-          span.total = @quiz.questions.map(&:step).uniq.count + 1
+          span.total = @quiz.questions.map(&:step).uniq.count
         .progress
           .progress-bar style="width: 0%;"
         .row.inner-btn-wrap
