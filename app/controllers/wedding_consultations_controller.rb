@@ -13,9 +13,9 @@ class WeddingConsultationsController < ApplicationController
     if @wedding_consultation.valid?
       WeddingConsultationMailer.email(@wedding_consultation).deliver
       flash[:notice] = 'Your request was successfully sent'
-      redirect_to success_wedding_consultation_path
+      render json: { success: true }
     else
-      render action: :new
+      render json: { errors: @wedding_consultation.errors }
     end
   end
 end
