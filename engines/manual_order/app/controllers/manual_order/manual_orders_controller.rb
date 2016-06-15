@@ -58,9 +58,16 @@ module ManualOrder
     end
 
     def get_image_json(product_id, size_id, color_id)
-      size_variants = Spree::OptionValue.find(size_id).variants.where(product_id: product_id, is_master: false).pluck(:id)
-      color_variants = Spree::OptionValue.find(color_id).variants.where(product_id: product_id, is_master: false).pluck(:id)
-      variant = Spree::Variant.where(id: size_variants & color_variants).first
+      size_variants = if size_id.to_i > 0
+                        Spree::OptionValue.find(size_id).variants
+                          .where(product_id: product_id, is_master: false).pluck(:id)
+                      else
+                        nil
+                      end
+      color_variants = Spree::OptionValue.find(color_id).variants
+                         .where(product_id: product_id, is_master: false).pluck(:id)
+      variant_ids = size_variants.present? ? size_variants & color_variants : color_variants
+      variant = Spree::Variant.where(id: variant_ids).first
       { url: variant.present? ? variant_image(variant).attachment.url(:large) : 'null' }
     end
 
