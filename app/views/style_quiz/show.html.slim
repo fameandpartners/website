@@ -1,35 +1,14 @@
 - content_for :head do
   = javascript_include_tag 'quiz'
 
-- facebook_application = Spree::AuthenticationMethod.where(environment: ::Rails.env, provider: :facebook, active: true).first
-- if facebook_application.present?
-  #fb-root
-  javascript:
-    $(document).ready(function() {
-      window.quiz = new window.style.Quiz();
-    });
+javascript:
+  $(document).ready(function() {
+    window.quiz = new window.style.Quiz();
+  });
 
-    window.onQuizCompleted = function() {
-      window.location = "#{ after_quiz_redirect_url }";
-    };
-
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '#{facebook_application.api_key}',
-        version    : 'v2.0',
-        status     : true,
-        xfbml      : true
-      });
-    };
-
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#version=v2.0&xfbml=1&appId=#{ facebook_application.api_key }";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+  window.onQuizCompleted = function() {
+    window.location = "#{ after_quiz_redirect_url }";
+  };
 
 .page-content.quiz-box#style_quiz
   .container.main-container-wrap

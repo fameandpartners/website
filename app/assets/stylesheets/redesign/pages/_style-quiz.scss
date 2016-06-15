@@ -364,6 +364,22 @@
 
   }
 
+  .share-btn-wrap {
+    margin: 40px 0 0 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .fb_iframe_widget iframe {
+      top: -7px;
+    }
+
+  }
+
   // hack, hiding auburn hair color
   .auburn {
     display: none;

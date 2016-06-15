@@ -1,6 +1,40 @@
 - content_for :head do
   = javascript_include_tag 'quiz'
 
+- facebook_application = Spree::AuthenticationMethod.where(environment: ::Rails.env, provider: :facebook, active: true).first
+- if facebook_application.present?
+  #fb-root
+  javascript:
+
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '#{facebook_application.api_key}',
+        version    : 'v2.0',
+        status     : true,
+        xfbml      : true
+      });
+    };
+
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#version=v2.0&xfbml=1&appId=#{ facebook_application.api_key }";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            p = /^http:/.test('#{ request.url }') ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + '://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'twitter-wjs'));
+
 ruby:
   main_style = @user_styles.first
   other_styles = @user_styles[1..-1]
@@ -25,6 +59,13 @@ ruby:
                 = "#{ style.presentation } #{ style.percentage }"
               .progress
                 .progress-bar style="width: #{ style.percentage }"
+            
+            ul.share-btn-wrap
+              li
+                .fb-share-button data-href="#{ request.url }" data-layout="button"
+              li
+                a.twitter-share-button href="https://twitter.com/share" Tweet
+            
           .col-md-8
             .media-wrap
               = image_tag "style_quiz/final/#{ main_style.name }.jpg"
