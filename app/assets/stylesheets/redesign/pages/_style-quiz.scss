@@ -381,12 +381,6 @@
 
   }
 
-  // hack, hiding auburn hair color
-  .auburn {
-    display: none;
-    visibility: hidden;
-  }
-
   // START - mobile only
   @media (max-width: $bootstrap-sm-width - 1px) {
 
