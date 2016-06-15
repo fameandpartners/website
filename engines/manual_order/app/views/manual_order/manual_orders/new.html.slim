@@ -23,7 +23,7 @@
                   .col-sm-10 = f.collection_select :color, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
                 .form-group
                   label.col-sm-2.control-label Customisation
-                  .col-sm-10 = f.collection_select :customisations, {}, :id, :name, {}, { class: 'chosen-select', multiple: 'multiple' }
+                  .col-sm-10 = f.collection_select :customisations, {}, :id, :name, {}, { class: 'chosen-select' }
                 .form-group
                   label.col-sm-2.control-label Notes
                   .col-sm-10 = f.text_area :notes
