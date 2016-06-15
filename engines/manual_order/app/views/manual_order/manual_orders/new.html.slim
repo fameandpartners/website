@@ -11,16 +11,16 @@
               .col-sm-10 = f.collection_select :style_name, @manual_order_form.style_names, :id, :name_with_sku, { include_blank: true }, { class: 'chosen-select',  remote: true }
             .form-group
               label.col-sm-2.control-label Size
-              .col-sm-10 = f.collection_select :size, {}, :id, :name, {}, { class: 'chosen-select' }
+              .col-sm-10 = f.collection_select :size, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
             .form-group
               label.col-sm-2.control-label Skirt Length
               .col-sm-10 = f.collection_select :length, length_options, :first, :last, { include_blank: true }, { class: 'chosen-select' }
             .form-group
               label.col-sm-2.control-label Color
-              .col-sm-10 = f.collection_select :color, {}, :id, :name, {}, { class: 'chosen-select' }
+              .col-sm-10 = f.collection_select :color, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
             .form-group
               label.col-sm-2.control-label Customisation
-              .col-sm-10 = f.collection_select :customisations, {}, :id, :name, {}, { class: 'chosen-select' }
+              .col-sm-10 = f.collection_select :customisations, {}, :id, :name, {}, { class: 'chosen-select', multiple: 'multiple' }
             .form-group
               label.col-sm-2.control-label Notes
               .col-sm-10 = f.text_area :notes
@@ -58,4 +58,5 @@
               .col-sm-2
               .col-sm-10 = f.submit 'Create', class: 'btn btn-primary'
           .col-sm-4
-            h3.product_image Please select style name
+            h3 Image
+            h4.product_image Please select style, size and color to see image

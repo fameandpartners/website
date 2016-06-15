@@ -4,7 +4,7 @@ $ ->
   colorUrl = '/fame_admin/manual_orders/colors/:product_id'
   colorSelect = $('#forms_manual_order_color')
   optColors = $('<optgroup>').attr('label', "Colors")
-  optCustomColors = $('<optgroup>').attr('label', "Custom Colors + $16.00")
+  optCustomColors = $('<optgroup>').attr('label', "Custom Colors + 16.00")
 
   sizeUrl = '/fame_admin/manual_orders/sizes/:product_id'
   sizeSelect = $('#forms_manual_order_size')
@@ -13,13 +13,13 @@ $ ->
   customisationSelect = $('#forms_manual_order_customisations')
 
   imageUrl = '/fame_admin/manual_orders/images/:product_id/:size_id/:color_id'
-  imageTag = $('h3.product_image')
+  imageTag = $('h4.product_image')
 
   styleSelect.on 'change', =>
     colorSelect.html('<option></option>')
     optColors.html('')
     optCustomColors.html('')
-    imageTag.html('Please select style name')
+    imageTag.html('Please select style, size and color to see image')
     url = colorUrl.replace(/:product_id/, styleSelect.val()) if styleSelect.val()
     if url
       $.getJSON url, (data) =>
@@ -58,11 +58,9 @@ $ ->
                     .replace(/:size_id/, sizeSelect.val())
                     .replace(/:color_id/, colorSelect.val())
       $.getJSON url, (data) =>
-        console.log url
-        console.log data
-        image = $('<img>').attr('src', data.url)
-        console.log image
-        imageTag.html(image)
+        if data.url isnt 'null'
+          image = $('<img>').attr('src', data.url)
+          imageTag.html(image)
 
 
 

@@ -54,14 +54,14 @@ module ManualOrder
     end
 
     def get_customisations_options(product_id)
-      products.find(product_id).customisation_values.map {|c| { id: c.id, name: "#{c.presentation} (#{c.price})"} }
+      products.find(product_id).customisation_values.map {|c| { id: c.id, name: "#{c.presentation} (+#{c.price})"} }
     end
 
     def get_image_json(product_id, size_id, color_id)
       size_variants = Spree::OptionValue.find(size_id).variants.where(product_id: product_id, is_master: false).pluck(:id)
       color_variants = Spree::OptionValue.find(color_id).variants.where(product_id: product_id, is_master: false).pluck(:id)
-      variant = Spree::Variant.find (size_variants | color_variants).first
-      { url: variant_image(variant).try(:attachment).try(:url, :large) }
+      variant = Spree::Variant.where(id: size_variants & color_variants).first
+      { url: variant.present? ? variant_image(variant).attachment.url(:large) : 'null' }
     end
 
     def variant_image(variant)
