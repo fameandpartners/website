@@ -1,0 +1,117 @@
+.content-collapse-expand {
+
+  & .panel + .panel {
+    margin-top: 0;
+  }
+
+  .panel {
+    border-color: $c-neutral-4;
+    border: 0;
+    border-bottom: 0;
+
+    > .panel-heading {
+      background: $c-neutral-white;
+    }
+
+  }
+
+  .panel-heading {
+    padding: 0;
+
+    + .panel-collapse > .panel-body {
+      border-top: 0;
+    }
+
+  }
+
+  .panel-title {
+    position: relative;
+    display: block;
+    padding: 15px 10px 15px 0;
+    color: $c-neutral-black;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    text-decoration: underline;
+
+    .btn-open-close {
+      @extend .btn-close;
+      float: right;
+    }
+
+    &.collapsed {
+      border-bottom: 1px solid $c-neutral-9;
+      text-decoration: none;
+
+      &:hover {
+        color: $c-neutral-black;
+      }
+
+      .btn-open-close {
+        @include transform(rotate(45deg));
+
+        &:after, &:before {
+          height: 12px;
+          top: 4px;
+        }
+
+      }
+
+    }
+
+  }
+
+  .panel-body {
+    padding: 0 0 15px 0;
+    border: 0;
+    border-top-color: transparent;
+  }
+
+  .panel-collapse.in {
+
+    .panel-title {
+      border: none;
+    }
+
+    .panel-body {
+      border-bottom: 1px solid $c-neutral-9;
+    }
+
+  }
+
+  p {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+
+  .highlight {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.7rem;
+  }
+
+  .back-to-top {
+    text-transform: uppercase;
+    text-align: right;
+    font-size: 1.3rem;
+    position: relative;
+    display: block;
+    padding-right: 25px;
+  }
+
+  .back-to-top a {
+    color: $c-neutral-10;
+
+    &:hover {
+      color: $c-neutral-black;
+    }
+
+    &:after {
+      display: inline-block;
+      top: -3px;
+      right: 4px;
+      @extend .icon-arrow-up;
+    }
+
+  }
+
+}
