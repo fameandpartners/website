@@ -15,11 +15,15 @@ $ ->
   imageUrl = '/fame_admin/manual_orders/images/:product_id/:size_id/:color_id'
   imageTag = $('h4.product_image')
 
+  priceUrl = '/fame_admin/manual_orders/prices/:product_id/:size_id/:color_id'
+  priceTag = $('h4.price')
+
   styleSelect.on 'change', =>
     colorSelect.html('<option></option>')
     optColors.html('')
     optCustomColors.html('')
     imageTag.html('Please select style, size and color to see image')
+    priceTag.html('Please select product details')
     url = colorUrl.replace(/:product_id/, styleSelect.val()) if styleSelect.val()
     if url
       $.getJSON url, (data) =>
@@ -64,6 +68,9 @@ $ ->
           image = $('<img>').attr('src', data.url)
           imageTag.html(image)
 
-
-
+      url = priceUrl.replace(/:product_id/, styleSelect.val())
+                    .replace(/:size_id/, sizeSelect.val())
+                    .replace(/:color_id/, colorSelect.val())
+      $.getJSON url, (data) =>
+        priceTag.html(data.price)
 

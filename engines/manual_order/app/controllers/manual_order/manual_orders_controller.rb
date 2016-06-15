@@ -31,7 +31,11 @@ module ManualOrder
     end
 
     def image_json
-      render json: get_image_json(params[:product_id], params[:size_id], params[:color_id])
+      render json: get_image(params[:product_id], params[:size_id], params[:color_id])
+    end
+
+    def price_json
+      render json: get_price(params[:product_id], params[:size_id], params[:color_id])
     end
 
     private
@@ -57,7 +61,16 @@ module ManualOrder
       products.find(product_id).customisation_values.map {|c| { id: c.id, name: "#{c.presentation} (+#{c.price})"} }
     end
 
-    def get_image_json(product_id, size_id, color_id)
+    def get_image(product_id, size_id, color_id)
+      variant = get_variant(product_id, size_id, color_id)
+      { url: variant.present? ? variant_image(variant).attachment.url(:large) : 'null' }
+    end
+
+    def get_price(product_id, size_id, color_id)
+      { price: get_variant(product_id, size_id, color_id).price }
+    end
+
+    def get_variant(product_id, size_id, color_id)
       size_variants = if size_id.to_i > 0
                         Spree::OptionValue.find(size_id).variants
                           .where(product_id: product_id, is_master: false).pluck(:id)
@@ -67,8 +80,7 @@ module ManualOrder
       color_variants = Spree::OptionValue.find(color_id).variants
                          .where(product_id: product_id, is_master: false).pluck(:id)
       variant_ids = size_variants.present? ? size_variants & color_variants : color_variants
-      variant = Spree::Variant.where(id: variant_ids).first
-      { url: variant.present? ? variant_image(variant).attachment.url(:large) : 'null' }
+      Spree::Variant.where(id: variant_ids).first
     end
 
     def variant_image(variant)
