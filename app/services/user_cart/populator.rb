@@ -103,7 +103,7 @@ class Populator
 
     def build_personalization
       LineItemPersonalization.new.tap do |item|
-        item.size_id  = product_sizeproduct_size.id
+        item.size_id  = product_size.id
         item['size']  = product_size.value
         item.color_id = product_color.color_id
         item['color'] = product_color.color_name
