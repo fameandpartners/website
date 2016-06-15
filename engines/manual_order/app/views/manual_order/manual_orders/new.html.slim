@@ -5,58 +5,74 @@
         h5 New Manual Order
       .ibox-content
         .row
-          .col-sm-8
-            .form-group
-              label.col-sm-2.control-label Style name
-              .col-sm-10 = f.collection_select :style_name, @manual_order_form.style_names, :id, :name_with_sku, { include_blank: true }, { class: 'chosen-select',  remote: true }
-            .form-group
-              label.col-sm-2.control-label Size
-              .col-sm-10 = f.collection_select :size, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
-            .form-group
-              label.col-sm-2.control-label Skirt Length
-              .col-sm-10 = f.collection_select :length, length_options, :first, :last, { include_blank: true }, { class: 'chosen-select' }
-            .form-group
-              label.col-sm-2.control-label Color
-              .col-sm-10 = f.collection_select :color, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
-            .form-group
-              label.col-sm-2.control-label Customisation
-              .col-sm-10 = f.collection_select :customisations, {}, :id, :name, {}, { class: 'chosen-select', multiple: 'multiple' }
-            .form-group
-              label.col-sm-2.control-label Notes
-              .col-sm-10 = f.text_area :notes
-            .form-group
-              label.col-sm-2.control-label This order is
-              .col-sm-10 = f.collection_radio_buttons :status, [['new', 'A new order'], ['exchange', 'An Exchange']], :first, :last, { checked: 'new' }
-            .form-group
-              label.col-sm-2.control-label Email
-              .col-sm-10 = f.input :email, label: false, input_html: { class: 'form-control' }
-            .form-group
-              label.col-sm-2.control-label First name
-              .col-sm-10 = f.input :first_name, label: false, input_html: {class: 'form-control'}
-            .form-group
-              label.col-sm-2.control-label Last name
-              .col-sm-10 = f.input :last_name, label: false, input_html: {class: 'form-control'}
-            .form-group
-              label.col-sm-2.control-label Address
-              .col-sm-10 = f.input :address, label: false, input_html: {class: 'form-control'}
-            .form-group
-              label.col-sm-2.control-label City
-              .col-sm-10 = f.input :city, label: false, input_html: {class: 'form-control'}
-            .form-group
-              label.col-sm-2.control-label State
-              .col-sm-10 = f.input :state, label: false, input_html: {class: 'form-control'}
-            .form-group
-              label.col-sm-2.control-label Country
-              .col-sm-10 = f.input :cntry, label: false, input_html: {class: 'form-control'}
-            .form-group
-              label.col-sm-2.control-label Zip
-              .col-sm-10 = f.input :zip, label: false, input_html: {class: 'form-control'}
-            .form-group
-              label.col-sm-2.control-label Phone
-              .col-sm-10 = f.input :phone, label: false, input_html: {class: 'form-control'}
-            .form-group
-              .col-sm-2
-              .col-sm-10 = f.submit 'Create', class: 'btn btn-primary'
-          .col-sm-4
-            h3 Image
-            h4.product_image Please select style, size and color to see image
+          .col-sm-7
+            .panel.panel-default
+              .panel-heading Product details
+              .panel-body
+                .form-group
+                  label.col-sm-2.control-label Style name
+                  .col-sm-10 = f.collection_select :style_name, @manual_order_form.style_names, :id, :name_with_sku, { include_blank: true }, { class: 'chosen-select',  remote: true }
+                .form-group
+                  label.col-sm-2.control-label Size
+                  .col-sm-10 = f.collection_select :size, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
+                .form-group
+                  label.col-sm-2.control-label Skirt Length
+                  .col-sm-10 = f.collection_select :length, length_options, :first, :last, { include_blank: true }, { class: 'chosen-select' }
+                .form-group
+                  label.col-sm-2.control-label Color
+                  .col-sm-10 = f.collection_select :color, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
+                .form-group
+                  label.col-sm-2.control-label Customisation
+                  .col-sm-10 = f.collection_select :customisations, {}, :id, :name, {}, { class: 'chosen-select', multiple: 'multiple' }
+                .form-group
+                  label.col-sm-2.control-label Notes
+                  .col-sm-10 = f.text_area :notes
+                .form-group
+                  label.col-sm-2.control-label This order is
+                  .col-sm-10 = f.collection_radio_buttons :status, [['new', 'A new order'], ['exchange', 'An Exchange']], :first, :last, { checked: 'new' }
+            .panel.panel-default
+              .panel-heading Customer details
+              .panel-body
+                .form-group
+                  label.col-sm-2.control-label Email
+                  .col-sm-10 = f.input :email, label: false, input_html: { class: 'form-control' }
+                .form-group
+                  label.col-sm-2.control-label First name
+                  .col-sm-10 = f.input :first_name, label: false, input_html: {class: 'form-control'}
+                .form-group
+                  label.col-sm-2.control-label Last name
+                  .col-sm-10 = f.input :last_name, label: false, input_html: {class: 'form-control'}
+                .form-group
+                  label.col-sm-2.control-label Address
+                  .col-sm-10 = f.input :address, label: false, input_html: {class: 'form-control'}
+                .form-group
+                  label.col-sm-2.control-label City
+                  .col-sm-10 = f.input :city, label: false, input_html: {class: 'form-control'}
+                .form-group
+                  label.col-sm-2.control-label State
+                  .col-sm-10 = f.input :state, label: false, input_html: {class: 'form-control'}
+                .form-group
+                  label.col-sm-2.control-label Country
+                  .col-sm-10 = f.input :cntry, label: false, input_html: {class: 'form-control'}
+                .form-group
+                  label.col-sm-2.control-label Zip
+                  .col-sm-10 = f.input :zip, label: false, input_html: {class: 'form-control'}
+                .form-group
+                  label.col-sm-2.control-label Phone
+                  .col-sm-10 = f.input :phone, label: false, input_html: {class: 'form-control'}
+          .col-sm-5
+            .panel.panel-default
+              .panel-heading Image
+              .panel-body
+                h4.product_image Please select style, size and color to see image
+            .panel.panel-default
+              .panel-heading Total price
+              .panel-body
+                h4.price Please select product details
+        .row
+          .col-sm-12.text-center
+            = f.submit 'Complete Order and Send for Manufacturing', class: 'btn btn-primary'
+            |&nbsp;
+            |&nbsp;
+            = f.submit 'Send Payment Request to Customer', class: 'btn btn-primary'
+
