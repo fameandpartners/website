@@ -32,6 +32,11 @@ module Bergen
       end
 
       def price
+        money = Money.new(item_return.item_price_adjusted, item_return.order_paid_currency)
+        money.format
+      rescue StandardError => e
+        Raven.capture_exception(e)
+
         item_return.item_price_adjusted
       end
 

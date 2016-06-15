@@ -132,7 +132,7 @@ when :preproduction
   configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
 
-  configatron.es_url = 'https://readwrite:F0undR3adWrite@21b09bd2aadd9ba50c9d2a9658dc99e7.us-west-1.aws.found.io:9243'
+  configatron.es_url = 'https://readwrite:F0undR3adWrite123@21b09bd2aadd9ba50c9d2a9658dc99e7.us-west-1.aws.found.io:9243'
 
   configatron.asset_host = "assets.fameandpartners.com/preprod"
 
@@ -150,17 +150,16 @@ when :production
   end
 
   # Production Environment
-  configatron.customerio.site_id    = 'a416731201185e0c6f5f'
-  configatron.customerio.secret_key = 'f179030b06baa363ea38'
+  configatron.customerio.site_id    = '34c86b93c4a9c39ca8f8'
+  configatron.customerio.secret_key = 'c3b8c0411969f72ec46b'
 
   configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
   configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
 
   # configatron.es_url = 'https://b13gy7hlm3:brc6ozc6oi@production-4224690387.us-east-1.bonsai.io'
   # configatron.es_url = YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
-  configatron.es_url = 'https://readwrite:F0undR3adWrite@c019a72e2bcb614a3809da7bf7d583c0.us-east-1.aws.found.io:9243'
+  configatron.es_url = 'https://production:F0undR3adWrite123@c019a72e2bcb614a3809da7bf7d583c0.us-east-1.aws.found.io:9243'
 
-  configatron.customerio.site_id = 'a416731201185e0c6f5f'
   configatron.typekit_id = 'day0prb'
 
   configatron.mailchimp do |mailchimp|

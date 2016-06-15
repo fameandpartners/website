@@ -29,5 +29,15 @@ FactoryGirl.define do
     refund_amount 1
     refunded_at "2015-06-23 13:49:32"
     bergen_asn_number "WHRTN915384"
+
+    trait :bergen_rejected do
+      bergen_actual_quantity 0
+      bergen_damaged_quantity 1
+    end
+
+    trait :bergen_accepted do
+      bergen_actual_quantity 1
+      bergen_damaged_quantity 0
+    end
   end
 end

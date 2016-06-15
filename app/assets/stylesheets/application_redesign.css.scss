@@ -150,7 +150,6 @@ z-index levels
 @import 'redesign/about';
 @import 'redesign/alerts';
 @import 'redesign/user';
-@import 'redesign/returns';
 @import 'redesign/size_guide';
 @import 'redesign/fame_chain';
 @import 'redesign/facebook';
@@ -236,6 +235,10 @@ z-index levels
 
 //Orders
 @import 'redesign/orders/order-details';
+
+//My Account
+@import 'redesign/pages/my-account/common';
+@import 'redesign/returns';
 
 // Generic
 @import 'redesign/generic/content-order';

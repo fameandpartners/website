@@ -126,11 +126,12 @@ PATH
       simple_form
       slim
     bergen (0.0.1)
-      aasm (~> 4.10.0)
+      aasm
       admin_ui
-      rails (~> 3.2.22)
-      savon (~> 1.2.0)
-      sidekiq (~> 2.13.0)
+      money
+      rails
+      savon
+      sidekiq
     fame_favicon (0.0.1)
       rails (~> 3.2.21)
     inspinia-rails (2.1.0)

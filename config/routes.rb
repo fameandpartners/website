@@ -333,8 +333,8 @@ FameAndPartners::Application.routes.draw do
     post '/about' => 'contacts#join_team', as: :join_team
 
     # return form
-    get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf')
-    get '/returns', to: redirect('/faqs#collapse-returns-policy')
+    get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf'), as: 'returns_form'
+    get '/returns', to: redirect('/faqs#collapse-returns-policy'), as: 'returns_policy'
 
     # External URLs
     get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
@@ -520,6 +520,8 @@ FameAndPartners::Application.routes.draw do
       get 'stock_invent/status'         => 'stock_invent#status',        as: :stock_invent_status
       get 'stock_invent/auth'           => 'stock_invent#google_auth',   as: :stock_invent_access_token_request
       get 'stock_invent/auth_callback'  => 'stock_invent#auth_callback', as: :stock_invent_google_auth_callback
+
+      get 'export_product_taxons_csv'  => 'products#export_product_taxons', as: :export_product_taxons_csv, defaults: { format: :csv }
 
       resources :products do
         resources :customisation_values

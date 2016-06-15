@@ -81,6 +81,36 @@
   @include icon('_icons/waste.svg', 32px, 32px);
 }
 
+.svg-document {
+ background-image: url('_icons/document.svg');
+ width: 28px;
+ height: 37px;
+}
+
+.svg-package {
+ background-image: url('_icons/package.svg');
+ width: 40px;
+ height: 37px;
+}
+
+.svg-checklist {
+ background-image: url('_icons/checklist.svg');
+ width: 28px;
+ height: 34px;
+}
+
+.svg-stamp {
+ background-image: url('_icons/stamp.svg');
+ width: 47px;
+ height: 37px;
+}
+
+i.icon {
+  display: table-cell;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
 %icon {
   display: inline-block;
   overflow: hidden;
