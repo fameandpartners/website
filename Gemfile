@@ -21,9 +21,13 @@ gem 'default_value_for'
 gem 'tire'
 gem 'redis-rails'
 gem 'autoprefixer-rails'
-# UPDATED
 gem 'bower-rails', '~> 0.10.0'
 gem 'redcarpet', '~> 2.3.0'
+gem 'responders'
+gem 'versioncake', '~> 3.1.0'
+gem 'protected_attributes'
+gem 'actionpack-page_caching'
+gem 'actionpack-action_caching'
 
 # Monitoring & Events
 gem 'newrelic_rpm'

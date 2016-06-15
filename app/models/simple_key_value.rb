@@ -4,7 +4,7 @@
 class SimpleKeyValue < ActiveRecord::Base
   attr_accessible :key, :data
 
-  validate :key, :presence => true, :uniqueness => true
+  validates :key, :presence => true, :uniqueness => true
 
   def self.set(key, value)
     feature_flag = where(key: key).first_or_create

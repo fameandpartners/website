@@ -13,7 +13,7 @@ module AdminUi
     # http://pivotallabs.com/leave-your-migrations-in-your-rails-engines/
     initializer :append_migrations do |app|
       unless app.root.to_s.match(root.to_s)
-        app.config.paths["db/migrate"] += config.paths["db/migrate"].expanded
+        app.config.paths["db/migrate"].concat config.paths["db/migrate"].expanded
         if Rails.version =~ /\A4/
           Rails.logger.warn("Rails 4 changes app.config.paths to an object, use new code below; #{__FILE__}:#{__LINE__}")
           # config.paths["db/migrate"].expanded.each do |expanded_path|
