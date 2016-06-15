@@ -22,17 +22,17 @@ ruby:
     .row.aside-single-tile
       .main.col-md-7
         = render 'shared/redesign/tabs_collection'
-        = link_to '/dresses/dress-shaylyn-1054?color=ivory', class: 'media-wrap'
-          = image_tag 'home-page-tiles/Category-01-jun-7.jpg', alt: "Pretty woman."
+        = link_to '/dresses/little-black-dress', class: 'media-wrap'
+          = image_tag 'home-page-tiles/Category-01LBD-15-06-2016.jpg', alt: 'Little black dress. The wardrobe essential, reimagined.'
         = link_to styling_session_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/Category-02-may-26.jpg', alt: 'Need some styling advice? Book your free complimentary styling session with our professional Fame stylist.'
+          = image_tag 'home-page-tiles/Category-02-Styling-15-06-2016.jpg', alt: 'Need some styling advice? Book your free complimentary styling session with our professional Fame stylist.'
 
       aside.col-md-5
         .outer-wrap
-          = link_to build_taxon_path('slip-dress')
+          = link_to build_taxon_path('cocktail')
             picture.media-wrap
               .inner-wrap
-                img src='#{image_path("home-page-tiles/Category-03-jun-7.jpg")}' alt="Slipaway. In a fresh take on a 90's class"
+                img src='#{image_path('home-page-tiles/Category-03-CocktailOclock-15-06-2016.jpg')}' alt="Cocktail O'Clock"
 
 
   section.carousel-strap.instagram
