@@ -9,7 +9,7 @@ describe Policies::LineItemProjectedDeliveryDatePolicy do
       line_item = double(Spree::LineItem, :fast_making? => true)
       service =  Policies::LineItemProjectedDeliveryDatePolicy.new(order.completed_at, line_item.fast_making?)
 
-      expected_date = DateTime.parse('Friday April 3 2015')
+      expected_date = DateTime.parse('Friday April 3 2015 9:00')
       expect(service.delivery_date).to eq expected_date
     end
 
@@ -17,7 +17,7 @@ describe Policies::LineItemProjectedDeliveryDatePolicy do
       line_item = double(Spree::LineItem, :fast_making? => false)
       service =  Policies::LineItemProjectedDeliveryDatePolicy.new(order.completed_at, line_item.fast_making?)
 
-      expected_date = DateTime.parse('Friday April 10 2015')
+      expected_date = DateTime.parse('Friday April 10 2015 9:00')
       expect(service.delivery_date).to eq expected_date
     end
   end

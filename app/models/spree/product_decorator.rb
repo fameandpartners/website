@@ -11,10 +11,8 @@ Spree::Product.class_eval do
     class_name: 'ProductStyleProfile',
     foreign_key: :product_id
 
-  has_many  :customisation_values,
-            order: 'customisation_values.position ASC'
-  has_many :product_color_values,
-           dependent: :destroy, inverse_of: :product
+  has_many  :customisation_values
+  has_many :product_color_values, dependent: :destroy, inverse_of: :product
 
   has_many :inspirations, foreign_key: :spree_product_id, inverse_of: :product
   has_many :accessories, class_name: 'ProductAccessory', foreign_key: :spree_product_id
@@ -29,6 +27,8 @@ Spree::Product.class_eval do
                           class_name: 'Spree::Product',
                           foreign_key: :product_id,
                           join_table: :spree_product_related_outerwear
+
+  scope :customisation_values, -> { order('customisation_values.position ASC') }
 
   attr_accessible :customisation_value_ids,
                   :discounts_attributes,
@@ -54,7 +54,7 @@ Spree::Product.class_eval do
   scope :featured, lambda { where(featured: true) }
   scope :ordered, lambda { order('position asc') }
 
-  default_scope order: "#{self.table_name}.position"
+  default_scope { order("#{self.table_name}.position") }
 
   delegate_belongs_to :master, :in_sale?, :original_price, :price_without_discount
 

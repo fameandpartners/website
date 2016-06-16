@@ -2,14 +2,14 @@ source 'https://rubygems.org'
 
 ruby '2.1.6'
 
-gem 'rails', '~> 3.2.22'
+gem 'rails', '~> 4.2.6'
 gem 'pg'
 gem 'slim'
 gem 'slim-rails'
 gem 'configatron'
 gem 'paperclip'
 gem 'sidekiq', '2.13.0'
-gem 'timers', '1.1.0'
+gem 'timers', '~> 4.0.0'
 gem 'whenever'
 gem 'psych', '~> 2.0.13'
 gem 'active_model_serializers'
@@ -23,6 +23,11 @@ gem 'redis-rails'
 gem 'autoprefixer-rails'
 gem 'bower-rails', '~> 0.10.0'
 gem 'redcarpet', '~> 2.3.0'
+gem 'responders'
+gem 'versioncake', '~> 3.1.0'
+gem 'protected_attributes'
+gem 'actionpack-page_caching'
+gem 'actionpack-action_caching'
 
 # Monitoring & Events
 gem 'newrelic_rpm'
@@ -48,7 +53,7 @@ gem 'simple_form'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-fileupload-rails', '0.4.1'
-gem 'sass-rails',   '~> 3.2.3'
+gem 'sass-rails',   '~> 5.0.4'
 gem 'compass-rails', '~> 2.0.5'
 gem 'react-rails', '~> 1.6'
 gem 'droidcss', '~> 2.0.4'
@@ -64,32 +69,30 @@ gem 'rubyzip', '~> 1.1.7', require: false
 gem 'roo', require: false
 
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
+gem 'google-api-client', '~> 0.8.6'
 
 gem 'sitemap_generator'
 gem 'fog'
 
-gem 'canonical-rails', github: 'jumph4x/canonical-rails'
+gem 'canonical-rails', path: '../gems/canonical-rails'
 
-gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
+gem 'spree', path: '../gems/spree'
 gem 'spree_banner', '~> 1.3.0'
 
 #payments
 gem 'pin_payment'
 
 # spree extensions for authentication
-gem 'spree_auth_devise',
-    :github => 'spree/spree_auth_devise',
-    :branch => '1-3-stable',
-    :ref => 'c4466de3748618971dc401e6e30c0d87f2b9c143'
+gem 'spree_auth_devise', path: '../gems/spree_auth_devise'
 
-gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
+gem 'spree_social', path: '../gems/spree_social'
 
 
 # spree extensions for payments
-gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
-gem 'spree_paypal_express', github: 'fameandpartners/better_spree_paypal_express', branch: '1-3-stable'
+gem 'spree_gateway', path: '../gems/spree_gateway'
+gem 'spree_paypal_express', path: '../gems/better_spree_paypal_express'
 
-gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
+gem 'spree_essentials', path: '../gems/spree_essentials'
 
 # utils
 # replacement for standard library.
@@ -108,7 +111,7 @@ gem 'sinatra',          :require => false
 
 group :assets do
   gem 'bourbon'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'coffee-rails', '~> 4.1.1'
   gem 'coffee-script-source', '~> 1.8.0'
   gem 'uglifier', '1.3.0'
   gem 'execjs', '~> 2'
@@ -123,12 +126,12 @@ group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
   gem 'awesome_print'
-  gem 'launchy', '2.2.0'
+  gem 'launchy', '~> 2.4'
   gem 'letter_opener', '~> 1.4.1'
   gem 'net-ssh', '~> 2.7.0'
   gem 'oink'
   gem 'quiet_assets'
-  gem 'rspec-rails', '~> 3.2'
+  gem 'rspec-rails'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'thin'
@@ -141,7 +144,7 @@ group :test do
   gem 'poltergeist', '~> 1.9.0'
   gem 'selenium-webdriver', '~> 2.53.0'
   gem 'show_me_the_cookies', '~> 3.1.0'
-  gem 'turnip', '~> 1.3.1'
+  gem 'turnip'
   gem 'database_cleaner', '0.9.1'
   gem 'factory_girl_rails', '4.2.1'
   gem 'rspec-activemodel-mocks'

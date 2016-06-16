@@ -53,11 +53,12 @@ module FameAndPartners
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
     # NOTE - If you add or remove an observer during development,
     #        you MUST restart your server, or they won't be loaded.
-    config.active_record.observers ||= []
-    config.active_record.observers << :fabrication_event_observer
-    config.active_record.observers << :activity_observer
-    config.active_record.observers << :item_return_event_observer
-    config.active_record.observers << :moodboard_item_event_observer
+    # byebug
+    # config.active_record.observers ||= []
+    # config.active_record.observers << :fabrication_event_observer
+    # config.active_record.observers << :activity_observer
+    # config.active_record.observers << :item_return_event_observer
+    # config.active_record.observers << :moodboard_item_event_observer
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
@@ -86,7 +87,6 @@ module FameAndPartners
     # This will create an empty whitelist of attributes available for mass-assignment for all models
     # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
     # parameters by using an attr_accessible or attr_protected declaration.
-    config.active_record.whitelist_attributes = true
 
     # Enable the asset pipeline
     disable_warnings = true

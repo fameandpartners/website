@@ -3,9 +3,7 @@ Spree::OptionValue.class_eval do
   has_many :similarities,
            inverse_of: :original,
            foreign_key: :original_id
-  has_many :similars,
-           through: :similarities,
-           order: 'similarities.coefficient asc'
+  has_many :similars, through: :similarities
   has_many :discounts, as: :discountable
 
   has_and_belongs_to_many :option_values_groups,
@@ -15,12 +13,13 @@ Spree::OptionValue.class_eval do
     mini: '48x48#', small: '100x100>', small_square: '100x100#', medium: '240x240>'
   }
 
-  scope :none,    -> { where(id: nil) }
-  scope :colors,  -> { where("option_type_id is not null").where(option_type_id: Spree::OptionType.color.try(:id)) }
-  scope :sizes,   -> { where("option_type_id is not null").where(option_type_id: Spree::OptionType.size.try(:id)) }
+  # scope :none,     -> { where(id: nil) }
+  scope :colors,   -> { where("option_type_id is not null").where(option_type_id: Spree::OptionType.color.try(:id)) }
+  scope :sizes,    -> { where("option_type_id is not null").where(option_type_id: Spree::OptionType.size.try(:id)) }
+  scope :similars, -> { order('similarities.coefficient asc') }
 
   attr_accessible :image, :value, :use_in_customisation
-  validates :value, format: /^#([0-9a-f]{3}|[0-9a-f]{6})$/i, allow_blank: true
+  validates :value, format: /\A#([0-9a-f]{3}|[0-9a-f]{6})\z/i, allow_blank: true
 
   def rgb_values
     # Color::HEX.new(value.to_s).to_lab
