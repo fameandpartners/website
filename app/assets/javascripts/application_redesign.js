@@ -83,6 +83,7 @@
 // Styling Session page
 //-----------------------------
 //= require partials/styling_session_page
+//= require partials/wedding_consultation_page
 
 //-----------------------------
 // Product details with related
