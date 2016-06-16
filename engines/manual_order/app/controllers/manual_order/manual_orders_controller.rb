@@ -3,7 +3,7 @@ module ManualOrder
 
     layout 'manual_order'
 
-    helper_method :length_options, :site_version_options
+    helper_method :skirt_length_options, :site_version_options
 
     def index
 
@@ -113,7 +113,7 @@ module ManualOrder
       }
     end
 
-    def length_options
+    def skirt_length_options
       {
         'petite' =>'Petite',
         'standart' => 'Standart',
