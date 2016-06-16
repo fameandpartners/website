@@ -17,7 +17,7 @@ frm.submit (ev) ->
         $(".form-area .js-en-not-submitted").css("display", "none")
         $(".form-area .js-en-confirmation").css("display", "block")
         window.track.event('Wedding Styling Session Form', 'Submit', email.val())
-        window.track.dataLayer.push({ 'event': 'stylingFormSubmit' })
+        window.track.dataLayer.push({ 'event': 'weddingStylingFormSubmit' })
       else
         submit_btn.val 'Confirm my booking'
         submit_btn.removeAttr("disabled")
