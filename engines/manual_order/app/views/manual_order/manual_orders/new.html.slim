@@ -10,6 +10,9 @@
               .panel-heading Product details
               .panel-body
                 .form-group
+                  label.col-sm-2.control-label Site version
+                  .col-sm-10 = f.collection_select :site_version, site_version_options, :first, :last, {}, { class: 'chosen-select' }
+                .form-group
                   label.col-sm-2.control-label Style name
                   .col-sm-10 = f.collection_select :style_name, @manual_order_form.style_names, :id, :name_with_sku, { include_blank: true }, { class: 'chosen-select',  remote: true }
                 .form-group
@@ -23,7 +26,7 @@
                   .col-sm-10 = f.collection_select :color, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
                 .form-group
                   label.col-sm-2.control-label Customisation
-                  .col-sm-10 = f.collection_select :customisations, {}, :id, :name, {}, { class: 'chosen-select' }
+                  .col-sm-10 = f.collection_select :customisations, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
                 .form-group
                   label.col-sm-2.control-label Notes
                   .col-sm-10 = f.text_area :notes

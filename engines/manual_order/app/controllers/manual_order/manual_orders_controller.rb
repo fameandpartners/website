@@ -3,7 +3,7 @@ module ManualOrder
 
     layout 'manual_order'
 
-    helper_method :length_options
+    helper_method :length_options, :site_version_options
 
     def index
 
@@ -35,7 +35,7 @@ module ManualOrder
     end
 
     def price_json
-      render json: get_price(params[:product_id], params[:size_id], params[:color_id])
+      render json: get_price(params[:product_id], params[:size_id], params[:color_id], params[:currency])
     end
 
     private
@@ -49,25 +49,34 @@ module ManualOrder
     end
 
     def get_color_options(product_id)
-      products.find(product_id).variants.map {|v| { id: v.dress_color.id, name: v.dress_color.name, type: 'color'} }.uniq
+      products.find(product_id).variants
+        .map {|v| { id: v.dress_color.id, name: v.dress_color.presentation, type: 'color'} }.uniq
     end
 
     def get_custom_colors(product_id)
       custom_colors = products.find(product_id).product_color_values.where(custom: true).pluck(:option_value_id)
-      Spree::OptionValue.colors.where('id IN (?)', custom_colors).map {|c| { id: c.id, name: c.name, type: 'custom' } }.uniq
+      Spree::OptionValue.colors.where('id IN (?)', custom_colors)
+        .map {|c| { id: c.id, name: "#{c.presentation} (+ $16.00)", type: 'custom' } }.uniq
     end
 
     def get_customisations_options(product_id)
-      products.find(product_id).customisation_values.map {|c| { id: c.id, name: "#{c.presentation} (+#{c.price})"} }
+      products.find(product_id).customisation_values
+        .map {|c| { id: c.id, name: "#{c.presentation} (+ $#{c.price})" } }
     end
 
     def get_image(product_id, size_id, color_id)
       variant = get_variant(product_id, size_id, color_id)
-      { url: variant.present? ? variant_image(variant).attachment.url(:large) : 'null' }
+      url = if variant.present? && variant_image(variant).try(:attachment).present?
+              variant_image(variant).attachment.url(:large)
+            else
+              'null'
+            end
+      { url: url }
     end
 
-    def get_price(product_id, size_id, color_id)
-      { price: get_variant(product_id, size_id, color_id).price }
+    def get_price(product_id, size_id, color_id, currency = 'USD')
+      price = get_variant(product_id, size_id, color_id).get_price_in(currency)
+      { price: price.amount, currency: currency }
     end
 
     def get_variant(product_id, size_id, color_id)
@@ -79,7 +88,13 @@ module ManualOrder
                       end
       color_variants = Spree::OptionValue.find(color_id).variants
                          .where(product_id: product_id, is_master: false).pluck(:id)
-      variant_ids = size_variants.present? ? size_variants & color_variants : color_variants
+      variant_ids = if size_variants.present? && color_variants.present?
+                      size_variants & color_variants
+                    elsif color_variants.present?
+                      color_variants
+                    else
+                      size_variants
+                    end
       Spree::Variant.where(id: variant_ids).first
     end
 
@@ -89,6 +104,13 @@ module ManualOrder
 
     def cropped_images_for(image_set)
       image_set.select { |i| i.attachment.url(:large).downcase.include?('front-crop') }.first
+    end
+
+    def site_version_options
+      {
+        'USD' =>'USA',
+        'AUD' => 'Australia'
+      }
     end
 
     def length_options

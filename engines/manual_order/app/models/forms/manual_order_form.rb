@@ -3,6 +3,7 @@ require 'reform'
 module Forms
   class ManualOrderForm < ::Reform::Form
 
+    property :site_version, virtual: true
     property :style_name, virtual: true
     property :size, virtual: true
     property :length, virtual: true

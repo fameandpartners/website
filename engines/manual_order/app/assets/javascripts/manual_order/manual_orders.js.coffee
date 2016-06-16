@@ -4,7 +4,7 @@ $ ->
   colorUrl = '/fame_admin/manual_orders/colors/:product_id'
   colorSelect = $('#forms_manual_order_color')
   optColors = $('<optgroup>').attr('label', "Colors")
-  optCustomColors = $('<optgroup>').attr('label', "Custom Colors + 16.00")
+  optCustomColors = $('<optgroup>').attr('label', "Custom Colors + $16.00")
 
   sizeUrl = '/fame_admin/manual_orders/sizes/:product_id'
   sizeSelect = $('#forms_manual_order_size')
@@ -15,15 +15,21 @@ $ ->
   imageUrl = '/fame_admin/manual_orders/images/:product_id/:size_id/:color_id'
   imageTag = $('h4.product_image')
 
-  priceUrl = '/fame_admin/manual_orders/prices/:product_id/:size_id/:color_id'
+  priceUrl = '/fame_admin/manual_orders/prices/:product_id/:size_id/:color_id/:currency'
   priceTag = $('h4.price')
 
-  styleSelect.on 'change', =>
+  siteVersionSelect = $('#forms_manual_order_site_version')
+
+  clearAll = ->
     colorSelect.html('<option></option>')
     optColors.html('')
     optCustomColors.html('')
+    sizeSelect.html('<option></option>')
+    customisationSelect.html('<option></option>')
     imageTag.html('Please select style, size and color to see image')
     priceTag.html('Please select product details')
+
+  updateColors = ->
     url = colorUrl.replace(/:product_id/, styleSelect.val()) if styleSelect.val()
     if url
       $.getJSON url, (data) =>
@@ -36,7 +42,7 @@ $ ->
     else
       colorSelect.trigger("chosen:updated")
 
-    sizeSelect.html('<option></option>')
+  updateSizes = ->
     url = sizeUrl.replace(/:product_id/, styleSelect.val()) if styleSelect.val()
     if url
       $.getJSON url, (data) =>
@@ -47,7 +53,15 @@ $ ->
     else
       sizeSelect.trigger("chosen:updated")
 
-    customisationSelect.html('<option></option>')
+  updatePrice = ->
+    url = priceUrl.replace(/:product_id/, styleSelect.val())
+    .replace(/:size_id/, sizeSelect.val())
+    .replace(/:color_id/, colorSelect.val())
+    .replace(/:currency/, siteVersionSelect.val())
+    $.getJSON url, (data) =>
+      priceTag.html("$#{data.price} #{data.currency}")
+
+  updateCustomisations = ->
     url = customisationUrl.replace(/:product_id/, styleSelect.val()) if styleSelect.val()
     if url
       $.getJSON url, (data) =>
@@ -58,19 +72,30 @@ $ ->
     else
       customisationSelect.trigger("chosen:updated")
 
+  updateImage = ->
+    url = imageUrl.replace(/:product_id/, styleSelect.val())
+    .replace(/:size_id/, sizeSelect.val())
+    .replace(/:color_id/, colorSelect.val())
+    $.getJSON url, (data) =>
+      if data.url isnt 'null'
+        image = $('<img>').attr('src', data.url)
+        imageTag.html(image)
+
+  styleSelect.on 'change', =>
+    clearAll()
+    updateColors()
+    updateSizes()
+    updateCustomisations()
+
   colorSelect.on 'change', =>
     if sizeSelect.val() and colorSelect.val()
-      url = imageUrl.replace(/:product_id/, styleSelect.val())
-                    .replace(/:size_id/, sizeSelect.val())
-                    .replace(/:color_id/, colorSelect.val())
-      $.getJSON url, (data) =>
-        if data.url isnt 'null'
-          image = $('<img>').attr('src', data.url)
-          imageTag.html(image)
+      updateImage()
+      updatePrice()
 
-      url = priceUrl.replace(/:product_id/, styleSelect.val())
-                    .replace(/:size_id/, sizeSelect.val())
-                    .replace(/:color_id/, colorSelect.val())
-      $.getJSON url, (data) =>
-        priceTag.html(data.price)
+  siteVersionSelect.on 'change', =>
+    if sizeSelect.val() and colorSelect.val()
+      updatePrice()
+
+
+
 
