@@ -42,7 +42,7 @@ ruby:
           container: '.dress-more.container.page-content',
           buttons: '.add-to-moodboard'
         },
-        buyButton: '.buy-button',
+        buyButton: '.js-buy-button',
         wishlistButton: '#add-to-moodboard',
         fitguideButton: '#fit-guide',
         fitguideContainer: '#fit-guide-content'
@@ -77,7 +77,7 @@ ruby:
     .row
       .col-md-3
         .panel-side-wrap
-          .panel-side.js-panel-side-left data-spy='affix'
+          .panel-side.panel-side--left.js-panel-side-left data-spy='affix'
             .panel-side-container
               h1.heading = @product.name
               - if @product.name.downcase.include?('skirt')
@@ -85,13 +85,9 @@ ruby:
               
               h5 Description
               p = raw @product.description
-              ul
-                li
-                  a href='' About our model
-                li
-                  a href='' Add to Moodboard
-                li
-                  a href='' Share
+              a href='' About our model
+              a href='' Add to Moodboard
+              a href='' Share
 
       .col-md-6
         .panel-media
@@ -99,19 +95,36 @@ ruby:
             .media-wrap
               = image_tag src='_temp/product1.jpg'
             .media-wrap
-              = image_tag src='_temp/product1.jpg'
+              = image_tag src='https://d1sd72h9dq237j.cloudfront.net/spree/products/23517/large/usp1068-burgundy-crop.jpg?1457926862'
             .media-wrap
-              = image_tag src='_temp/product1.jpg'
+              = image_tag src='https://d1sd72h9dq237j.cloudfront.net/spree/products/23517/large/usp1068-burgundy-crop.jpg?1457926862'
       .col-md-3
         .panel-side-wrap
           .panel-side.js-panel-side-right data-spy='affix'
             .panel-side-container
-              h5 Specify your size
               
-              h5 Design your dress
+              .c-card-customize
+                h4.c-card-customize__header Specify your size
+                a.c-card-customize__content.is-selected href='javascript:;'
+                  .c-card-customize__content__left Dresses Size
+                  .c-card-customize__content__right US10
+                a.c-card-customize__content href='javascript:;'
+                  .c-card-customize__content__left Skirt Length
+                  .c-card-customize__content__right Standard
+                
+              .c-card-customize
+                h4.c-card-customize__header Design your dress
+                a.c-card-customize__content href='javascript:;' 
+                  .c-card-customize__content__left Color
+                  .c-card-customize__content__right
+                a.c-card-customize__content href='javascript:;'
+                  .c-card-customize__content__left Customize
+                  .c-card-customize__content__right
               
               .btn-wrap
-                a.btn.btn-black.btn-lrg herf='javascript:;' ADD TO BAG
+                .price.js-product-price = product_price_with_discount(@product.price, @product.discount)
+                a.btn.btn-black.btn-lrg.js-buy-button herf='javascript:;' ADD TO BAG
+                .est-delivery Estimated delivery 3-4 weeks
         
 
 

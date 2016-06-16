@@ -1,0 +1,50 @@
+/* [Card - customize]
+-------------------------------------------------------*/
+.c-card-customize {
+
+  &__header {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  &__content {
+    position: relative;
+    display: block;
+    padding-left: 30px;
+    color: inherit;
+    @extend %cfix;
+
+    &:not(:first-child) {
+      margin-top: 5px;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border: solid $c-neutral-5 1px;
+    }
+
+    &.is-selected:before {
+      background: $c-neutral-black;
+      border-color: $c-neutral-black;
+    }
+
+  }
+
+  &__content__left {
+    float: left;
+    width: 50%;
+    text-decoration: underline;
+  }
+
+  &__content__right {
+    float: left;
+    width: 50%;
+    text-align: right;
+  }
+
+}

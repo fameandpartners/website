@@ -2,10 +2,24 @@
 -------------------------------------------------------*/
 // move this tovars, it should be equal to the header height
 $header-height: 155px;
+$header-mob-height: 113px;
 .pdp {
   position: relative;
   min-height: 100vh;
   padding-top: $header-height;
+
+  h1 {
+    margin-top: 0;
+  }
+
+  p {
+    font-family: $font-heading;
+    font-weight: 300;
+  }
+
+  a:not(.btn) {
+    color: inherit;
+  }
 
   .panel-side-wrap {
     position: relative;
@@ -22,12 +36,38 @@ $header-height: 155px;
       left: 0;
       right: 0;
       bottom: 0;
+      text-align: center;
+
+      > .btn,
+      > div {
+        margin-bottom: 25px;
+      }
+
+      .est-delivery {
+        font-size: 0.875em;
+        font-style: italic;
+      }
+
+      .price {
+        font-weight: bold;
+      }
+
+    }
+
+    &--left {
+
+      a {
+        display: block;
+        margin-top: 30px;
+        text-decoration: underline;
+      }
+
     }
 
   }
 
   .panel-side-container {
-    padding-top: $header-height;
+    padding-top: $header-height + 150;
   }
 
   .panel-media {
@@ -39,13 +79,15 @@ $header-height: 155px;
   }
 
   .media-wrap {
-    display: flex;
-    justify-content: center;
     height: 100vh;
+    max-height: 850px; // NOTE: this will need to be change when we get new product images
     padding-top: $header-height;
+    background: transparent;
+    @include display-flex;
+    @include justify-content(center);
 
     &:not(:first-child) {
-      margin-top: -$header-height;
+      margin-top: -($header-height - 30);
     }
 
     img {
@@ -56,13 +98,60 @@ $header-height: 155px;
 
   }
 
+  .c-card-customize {
+      margin-bottom: 70px;
+  }
+
   .affix-bottom {
     position: absolute;
   }
 
+  @media (max-width: $bootstrap-lg-width - 1px) {
+
+    .panel-side {
+      width: 212px;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    padding-top: $header-mob-height;
+
+    .panel-media-inner-wrap {
+      margin-bottom: -$header-mob-height;
+    }
+
+    .media-wrap {
+      padding-top: $header-mob-height;
+
+      &:not(:first-child) {
+        margin-top: -($header-mob-height - 30);
+      }
+
+      img {
+        margin-top: -$header-mob-height;
+      }
+
+    }
+
+    .panel-side--left {
+      display: none; // NOTE: this is temp
+    }
+
+    .panel-side {
+      position: relative;
+      width: auto;
+      height: auto;
+    }
+
+    .panel-side-container {
+      padding-top: 0;
+    }
+
+  }
+
 }
-
-
 
 .add-to-moodboard {
   position: absolute;
