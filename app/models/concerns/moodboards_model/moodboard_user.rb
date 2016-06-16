@@ -1,4 +1,4 @@
-module Moodboards
+module MoodboardsModel
   module MoodboardUser
     extend ActiveSupport::Concern
 

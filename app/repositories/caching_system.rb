@@ -20,10 +20,6 @@ module Repositories
       result
     end
 
-    included do
-      # do something here
-    end
-
     module ClassMethods
       def cache_results(method_name)
         # note: in without cache we should reset cache!

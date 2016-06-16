@@ -1,5 +1,5 @@
 Spree::ShippingMethod.class_eval do
-  scope :ordered, order('position asc')
+  scope :ordered, -> { order('position asc') }
 
   before_create :assign_position
 
