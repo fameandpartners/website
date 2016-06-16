@@ -321,10 +321,8 @@ FameAndPartners::Application.routes.draw do
     get '/styling-session'  => 'style_sessions#new', as: :styling_session
     resource 'style-session', as: 'style_session', only: [:create]
 
-    get '/wedding-consultation' => 'wedding_consultations#new'
-    resource 'wedding-consultation', as: 'wedding_consultation', only: [:new, :create] do
-      get 'success'
-    end
+    get '/wedding-consultation' => 'wedding_consultations#new', as: :wedding_consultation
+    resource 'wedding-consultation', as: 'wedding_consultation', only: [:create]
 
     get '/contact/new', to: redirect('/contact'), as: :old_contact_page
     resource 'contact', as: 'contact', only: [:new, :create], path_names: { new: '/' } do

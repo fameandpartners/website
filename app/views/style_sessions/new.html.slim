@@ -69,7 +69,7 @@
                         .col-md-12.form-group
                           label for='style_session_timezone' class='label-timezone'
                             | Select your timezone
-                          = f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, { include_blank: true }, :class => 'form-control form-control-md selectbox js-en-field-timezone'
+                          = f.select :timezone, options_for_select(ActiveSupport::TimeZone.all), { include_blank: true }, :class => 'form-control form-control-md selectbox js-en-field-timezone'
                       .row
                         .col-md-12.form-group
                           label for='style_session_preference1' class='label-preference1'
