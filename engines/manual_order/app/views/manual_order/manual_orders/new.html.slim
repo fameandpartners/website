@@ -20,7 +20,7 @@
                   .col-sm-10 = f.collection_select :size, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
                 .form-group
                   label.col-sm-2.control-label Skirt Length
-                  .col-sm-10 = f.collection_select :length, length_options, :first, :last, { include_blank: true }, { class: 'chosen-select' }
+                  .col-sm-10 = f.collection_select :length, skirt_length_options, :first, :last, { include_blank: true }, { class: 'chosen-select' }
                 .form-group
                   label.col-sm-2.control-label Color
                   .col-sm-10 = f.collection_select :color, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
