@@ -1,7 +1,7 @@
 module ManualOrder
   class ManualOrdersController < ::AdminUi::ApplicationController
 
-    layout 'manual_order'
+    layout 'admin_ui'
 
     helper_method :skirt_length_options, :site_version_options
 
