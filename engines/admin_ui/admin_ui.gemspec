@@ -28,11 +28,11 @@ Gem::Specification.new do |s|
   s.add_dependency "datagrid"
   s.add_dependency "reform"
   s.add_dependency "simple_form"
+  s.add_dependency "chosen-rails"
 
   # Theme
   # s.add_dependency "inspinia-rails"
   s.add_dependency "font-awesome-rails"
-  s.add_dependency "chosen-rails"
 
   # Engines
   s.add_dependency "manual_order"
