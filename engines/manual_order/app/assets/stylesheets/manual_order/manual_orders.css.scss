@@ -1,10 +1,8 @@
-textarea#forms_manual_order_notes
-{
+textarea.manual-textarea {
   width: 500px;
   height: 150px;
 }
 
-input[type="radio"]
-{
+input[type="radio"].manual-radio {
   margin: 10px 2px 5px 15px;
 }
