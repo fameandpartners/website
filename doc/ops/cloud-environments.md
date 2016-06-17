@@ -1,3 +1,29 @@
+# Environments
+
+Cloud environments are managed by Reinteractive OpsCare program. We have the following environments:
+
+- **Staging**: development & testing
+    - Basic HTTP Authentication Credentials:
+        - username: `fandpstaging`
+        - password: `auth4fandpstaging`
+- **Production**: stable
+
+## SSH
+
+To access AWS system, you must install Reinteractive's CLI tool called **Sentinel**. You can find its README and installation process here:
+
+- http://arsenal.reinteractive.net/sentinel/
+
+## Adding your SSH key
+
+You must email Reinteractive support team and ask them to add your SSH public key to each environment.
+
+---
+
+# Legacy
+
+> Note: Fame & Partners production environment is not hosted on EngineYard anymore
+
 # EngineYard Environments
 
 The following environments are configured on Engine Yard (EY), and should be used as described:
@@ -30,7 +56,7 @@ Optionally you can streamline this process by storing the addresses of certain h
 > 5. Enter a name for the key.
 > 6. Paste the key (from Step 1) into the Public Key field.
 > 7. Click Add Key.
-> 
+>
 > You receive a confirmation that your SSH public key has been created and added to your Engine Yard account.
 
 ##### Install A Public Key To An Environment
@@ -51,7 +77,7 @@ For example, the “production” environment of the “MyApp” application.
 
 > ###### To deploy keys
 > After an environment has been updated with one or more new keys, the keys need to be deployed to the environment instances.
-> 
+>
 > In your Dashboard, click the environment that you want to deploy your key(s) to.
 > Click Apply to install the keys.
 > After the keys are deployed, you can connect to your instances via SSH.
@@ -67,10 +93,10 @@ For example, the “production” environment of the “MyApp” application.
 
 > SSH using your own IP address and username deploy. For example:
 
-> ssh deploy@123.123.123.123 
+> ssh deploy@123.123.123.123
 > SSH using your own amazon hostname and username deploy. For example:
-> 
-> ssh deploy@ec2-123-123-123-123.compute-1.amazonaws.com 
+>
+> ssh deploy@ec2-123-123-123-123.compute-1.amazonaws.com
 > ##### Use our automated SSH link
 > Go to your dashboard.
 > Click an environment you want to connect to.
