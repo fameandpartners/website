@@ -1,7 +1,7 @@
 = render 'extra_head_scripts'
 
 .pages.wrapper.wrapper-content
-  = simple_form_for @manual_order_form, url: manual_orders_path, html: { class: "form-horizontal"} do |f|
+  = simple_form_for manual_order_form, url: manual_orders_path, html: { class: "form-horizontal"} do |f|
     .ibox.float-e-margins
       .ibox-title
         h5 New Manual Order
@@ -13,16 +13,16 @@
               .panel-body
                 .form-group
                   label.col-sm-2.control-label Site version
-                  .col-sm-10 = f.collection_select :site_version, site_version_options, :first, :last, {}, { class: 'chosen-select' }
+                  .col-sm-10 = f.collection_select :site_version, manual_order_form.site_version_options, :first, :last, {}, { class: 'chosen-select' }
                 .form-group
                   label.col-sm-2.control-label Style name
-                  .col-sm-10 = f.collection_select :style_name, @manual_order_form.style_names, :id, :name_with_sku, { include_blank: true }, { class: 'chosen-select',  remote: true }
+                  .col-sm-10 = f.collection_select :style_name, manual_order_form.products, :id, :name_with_sku, { include_blank: true }, { class: 'chosen-select',  remote: true }
                 .form-group
                   label.col-sm-2.control-label Size
                   .col-sm-10 = f.collection_select :size, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
                 .form-group
                   label.col-sm-2.control-label Skirt Length
-                  .col-sm-10 = f.collection_select :length, skirt_length_options, :first, :last, { include_blank: true }, { class: 'chosen-select' }
+                  .col-sm-10 = f.collection_select :length, manual_order_form.skirt_length_options, :first, :last, { include_blank: true }, { class: 'chosen-select' }
                 .form-group
                   label.col-sm-2.control-label Color
                   .col-sm-10 = f.collection_select :color, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
