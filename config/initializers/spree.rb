@@ -9,7 +9,7 @@ Spree.config do |config|
   # Example:
   # Uncomment to override the default site name.
   # config.site_name = "Fame & Partners"
-  config.allow_ssl_in_production = true
+  config.allow_ssl_in_production = !!ENV.fetch('SPREE_SSL_IN_PRODUCTION') { false }
   config.allow_ssl_in_staging = false
   config.allow_ssl_in_development_and_test = Features.active?(:force_sitewide_ssl)
 
