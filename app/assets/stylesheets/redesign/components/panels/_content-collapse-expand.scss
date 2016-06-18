@@ -31,7 +31,6 @@
     color: $c-neutral-black;
     font-size: 1.3rem;
     text-transform: uppercase;
-    text-decoration: underline;
 
     .btn-open-close {
       @extend .btn-close;
@@ -40,7 +39,6 @@
 
     &.collapsed {
       border-bottom: 1px solid $c-neutral-9;
-      text-decoration: none;
 
       &:hover {
         color: $c-neutral-black;
@@ -61,7 +59,7 @@
   }
 
   .panel-body {
-    padding: 0 0 15px 0;
+    padding: 0 0 25px 0;
     border: 0;
     border-top-color: transparent;
   }
@@ -79,8 +77,7 @@
   }
 
   p {
-    margin-top: 20px;
-    margin-bottom: 0;
+    margin-bottom: 20px;
   }
 
   .highlight {
