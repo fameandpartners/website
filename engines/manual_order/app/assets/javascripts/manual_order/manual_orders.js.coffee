@@ -1,4 +1,7 @@
 $ ->
+
+  # TODO: replace inline paths with rails routes (in the admin_ui as well)
+
   styleSelect = $('#forms_manual_order_style_name')
 
   colorUrl = '/fame_admin/manual_orders/colors/:product_id'
@@ -95,7 +98,3 @@ $ ->
   siteVersionSelect.on 'change', =>
     if sizeSelect.val() and colorSelect.val()
       updatePrice()
-
-
-
-
