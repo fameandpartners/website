@@ -100,6 +100,7 @@ class StyleQuizController < ActionController::Base
     end
 
     style_profile.save
+    track_event(style_profile.user)
 
     if taxons.present?
       taxons.group_by(&:id).each do |id, group|
@@ -144,5 +145,10 @@ class StyleQuizController < ActionController::Base
           end
         end
       end
+    end
+
+    def track_event(user)
+      tracker = Marketing::CustomerIOEventTracker.new
+      tracker.track(user, :some_event, nil)
     end
 end
