@@ -46,15 +46,18 @@
       font-weight: 500;
     }
 
-    td:first-child, th:first-child {
+    td:first-child,
+    th:first-child {
       border-left: 0;
     }
 
-    td:last-child, th:last-child {
+    td:last-child,
+    th:last-child {
       border-right: 0;
     }
 
-    tr:last-child td, > thead > tr > th {
+    tr:last-child td,
+    > thead > tr > th {
       border-bottom: 0;
     }
 
@@ -67,6 +70,38 @@
       &:first-child {
         text-align: left;
         font-weight: 500;
+      }
+
+    }
+
+  }
+
+  @media only screen and (max-width: 640px) {
+
+    .table {
+
+      tr td {
+        width: initial;
+      }
+
+      td:first-child {
+        border: 0;
+      }
+
+      td:last-child,
+      th:last-child,
+      tr:last-child td,
+      > thead > tr > th {
+        border: 1px solid;
+      }
+
+      tr:not(:first-child) td:first-child {
+        margin-top: 25px;
+      }
+
+      &.shipping td:first-child {
+        padding-left: 7px;
+        border: 1px solid;
       }
 
     }
