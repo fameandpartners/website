@@ -32,7 +32,7 @@
     }
 
     td {
-      border: 1px solid #000;
+      border: 1px solid $c-neutral-black;
     }
 
     tr td {
@@ -62,7 +62,7 @@
       text-transform: uppercase;
       text-align: center;
       padding: 10px 0 16px;
-      border: 1px solid #000;
+      border: 1px solid $c-neutral-black;
 
       &:first-child {
         text-align: left;
