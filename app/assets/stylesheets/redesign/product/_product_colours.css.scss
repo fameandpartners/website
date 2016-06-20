@@ -163,7 +163,7 @@ $product-color-silver:          #d6d6d6;
 $product-color-sky-blue:        #c2e4f4;
 $product-color-sunset-orange:   #e83c25;
 $product-color-tan:             #AF8B72;
-$product-color-taupe:           #dbd2cc;
+$product-color-taupe:           #A8908E;
 $product-color-teal:            #085966;
 $product-color-turquoise:       #1bb2aa;
 $product-color-vibrant-purple:  #9f6ba9;
@@ -178,7 +178,7 @@ $product-color-wine:            #831c2e;
 .color-aqua-lily               { @include image-color-selector('AquaLily.png'); }
 .color-army-green              { background-color: $product-color-army-green; }
 .color-art-soul                { @include image-color-selector('ArtSoul.png'); }
-.color-azure                   { background-color: $product-color-azure; } 
+.color-azure                   { background-color: $product-color-azure; }
 .color-baby-blue               { background-color: $product-color-baby-blue; }
 .color-baby-pink               { background-color: $product-color-baby-pink; }
 .color-ballerina               { background-color: $product-color-ballerina; }
