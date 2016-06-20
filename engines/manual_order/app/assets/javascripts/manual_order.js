@@ -11,3 +11,5 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require manual_order/products
+//= require manual_order/customers
+
