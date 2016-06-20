@@ -123,17 +123,17 @@ ruby:
     .col-md-5
       ul
         li.title lookbooks
+        li = link_to 'The Ruffled Up Collection', the_ruffled_up_collection_path
         li = link_to 'La Belle Époque', la_belle_epoque_collection_path
         li = link_to 'Partners In Crime', partners_in_crime_collection_path
         li = link_to 'Just The Girls', just_the_girls_collection_path
         li = link_to 'Love Lace', love_lace_collection_path
         li = link_to 'This Modern Romance', this_modern_romance_collection_path
-        li = link_to 'Bring On The Night', bring_on_the_night_collection_path
         li = link_to 'View all lookbooks', lookbook_path
     .col-md-7
-      = link_to la_belle_epoque_collection_path, class: 'panel-highlight media-wrap'
-        = image_tag "lookbook/PassTheMimosa-MegaMenu.jpg"
-        .copy-wrap La Belle Époque <em><span>View this collection</span></em>
+      = link_to the_ruffled_up_collection_path, class: 'panel-highlight media-wrap'
+        = image_tag 'lookbook/Summer2016-MegaMenu-15-06-2016.jpg'
+        .copy-wrap The Ruffled Up Collection <em><span>View this collection</span></em>
 
 /!
   .row.rect#rect-magazine.nav-menu-wrap.menu-magazine

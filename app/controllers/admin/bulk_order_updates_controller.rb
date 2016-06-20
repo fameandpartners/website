@@ -47,6 +47,7 @@ class Admin::BulkOrderUpdatesController < Spree::Admin::BaseController
   end
 
   def index
+    @collection = collection.page(params[:page])
   end
 
   def destroy

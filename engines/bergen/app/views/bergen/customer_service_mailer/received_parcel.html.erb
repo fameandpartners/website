@@ -1,0 +1,66 @@
+<table style="border: 1px solid black; border-collapse: collapse; width: 500px;">
+  <tr style="border: 1px solid black">
+    <td>Order Number</td>
+    <td><%= @item_return.order_number %></td>
+  </tr>
+
+  <tr style="border: 1px solid black">
+    <td>Order Date</td>
+    <td><%= @item_return.order_date %></td>
+  </tr>
+
+  <tr style="border: 1px solid black">
+    <td>Bergen ASN Number</td>
+    <td><%= @item_return.bergen_asn_number %></td>
+  </tr>
+
+  <tr style="border: 1px solid black">
+    <td>Product Name</td>
+    <td><%= @item_return.product_name %></td>
+  </tr>
+
+  <tr style="border: 1px solid black">
+    <td>Style Number</td>
+    <td><%= @item_return.product_style_number %></td>
+  </tr>
+
+  <tr style="border: 1px solid black">
+    <td>Product UPC (Global SKU ID)</td>
+    <td><%= @item_return.global_upc %></td>
+  </tr>
+
+  <tr style="border: 1px solid black">
+    <td>Size</td>
+    <td><%= @item_return.product_size %></td>
+  </tr>
+
+  <tr style="border: 1px solid black">
+    <td>Color</td>
+    <td><%= @item_return.product_colour %></td>
+  </tr>
+
+  <tr style="border: 1px solid black">
+    <td>Height</td>
+    <td><%= @item_return.height %></td>
+  </tr>
+
+  <tr style="border: 1px solid black">
+    <td>Customization</td>
+    <td><%= @item_return.customization %></td>
+  </tr>
+
+  <tr style="border: 1px solid black">
+    <td>Item Purchase Price</td>
+    <td><%= @item_return.price %></td>
+  </tr>
+
+  <tr style="border: 1px solid black">
+    <td>Customer Address</td>
+    <td><%= @item_return.customer_address %></td>
+  </tr>
+</table>
+
+<p>
+  More information at <%= link_to @item_return.admin_ui_mail_url, @item_return.admin_ui_mail_url %>
+</p>
+

@@ -17,7 +17,19 @@ Spree::ShipmentMailer.class_eval do
         shipment_method_name:  shipment.try(:shipping_method).try(:name),
         line_items:            line_items,
         shipment_tracking:     shipment.tracking,
-        shipment_tracking_url: shipment.blank? ? '#' : shipment.tracking_url
+        shipment_tracking_url: shipment.blank? ? '#' : shipment.tracking_url,
+        billing_address:       shipment.order.try(:billing_address).to_s.presence || 'No Billing Address',
+        shipping_address:      shipment.order.try(:shipping_address).to_s.presence || 'No Shipping Address',
+        phone:                 shipment.order.try(:billing_address).try(:phone) || 'No Phone',
+        delivery_date:         shipment.order.projected_delivery_date.try(:strftime, "%a, %d %b %Y"),
+        original_order_date:   shipment.order.created_at.strftime("%d %b %Y"),
+        display_item_total:    shipment.order.display_item_total.to_s,
+        display_total:         shipment.order.display_total.to_s,
+        auto_account:          shipment.order.user && shipment.order.user.automagically_registered?,
+        order_number:          shipment.order.number,
+        currency:              shipment.order.currency,
+        shipping_amount:       shipment.order.adjustments.where(label: "Shipping").first.try(:amount).to_s,
+        tax:                   nil
       )
     rescue StandardError => e
       Raven.capture_exception(e)

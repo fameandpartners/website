@@ -126,16 +126,20 @@ PATH
       simple_form
       slim
     bergen (0.0.1)
-      aasm (~> 4.10.0)
-      rails (~> 3.2.22)
-      savon (~> 1.2.0)
-      sidekiq (~> 2.13.0)
+      aasm
+      admin_ui
+      money
+      rails
+      savon
+      sidekiq
     fame_favicon (0.0.1)
       rails (~> 3.2.21)
     inspinia-rails (2.1.0)
       bootstrap-sass
       font-awesome-rails
       rails (~> 3.2.21)
+    manual_order (0.0.1)
+      rails (~> 3.2.22)
     revolution (0.0.1)
       awesome_nested_set
       rails (~> 3.2.21)
@@ -885,6 +889,7 @@ DEPENDENCIES
   launchy (= 2.2.0)
   letter_opener (~> 1.4.1)
   mailchimp-api
+  manual_order!
   meta_request
   net-ssh (~> 2.7.0)
   newrelic_rpm

@@ -51,8 +51,16 @@ describe 'Old Pages Redirection', type: :request do
     end
   end
 
+  context 'returns' do
+    it_will :redirect, '/returns', '/faqs#collapse-returns-policy'
+  end
+
   context 'bridesmaid party' do
     it_will :redirect, '/bridesmaid-party', '/bridesmaid-dresses'
     it_will :redirect, '/bridesmaid-party/anything/else/really', '/bridesmaid-dresses'
+  end
+
+  context 'contact page' do
+    it_will :redirect, '/contact/new', '/contact'
   end
 end

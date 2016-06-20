@@ -22,17 +22,17 @@ ruby:
     .row.aside-single-tile
       .main.col-md-7
         = render 'shared/redesign/tabs_collection'
-        = link_to '/dresses/dress-ziv-1037?color=taupe', class: 'media-wrap'
-          = image_tag 'home-page-tiles/Category-01-may-26.jpg', alt: "Meet Ziv."
+        = link_to '/dresses/little-black-dress', class: 'media-wrap'
+          = image_tag 'home-page-tiles/Category-01LBD-15-06-2016.jpg', alt: 'Little black dress. The wardrobe essential, reimagined.'
         = link_to styling_session_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/Category-02-may-26.jpg', alt: 'Need some styling advice? Book your free complimentary styling session with our professional Fame stylist.'
+          = image_tag 'home-page-tiles/Category-02-Styling-15-06-2016.jpg', alt: 'Need some styling advice? Book your free complimentary styling session with our professional Fame stylist.'
 
       aside.col-md-5
         .outer-wrap
-          = link_to '/dresses/dress-emery-1041?color=warm-grey'
+          = link_to build_taxon_path('cocktail')
             picture.media-wrap
               .inner-wrap
-                img src='#{image_path("home-page-tiles/Category-03-may-26.jpg")}' alt='The most alluring must-have.'
+                img src='#{image_path('home-page-tiles/Category-03-CocktailOclock-15-06-2016.jpg')}' alt="Cocktail O'Clock"
 
 
   section.carousel-strap.instagram
@@ -41,20 +41,20 @@ ruby:
         h2.title-line-on-sides
           .inner-wrap SHOP INSTAGRAM
         = react_component('InstagramCarousel', skin: '',
-          assets: [ {link: link_to_dresses + '/dress-lotus-doll-899?color=grand-lily&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=lotus-doll-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_07.jpg', user: '@fionabriseno', cta: "SHOP THE LOTUS DOLL LOOK"},
+          assets: [ {link: link_to_dresses + '/dress-wyatt-1030?color=dark-burgundy&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=lotus-doll-dress-product', src: '/assets/homepage/instagram/insta1.jpg', user: '@fameandpartners', cta: "SHOP THE WYATT LOOK"},
                     {link: link_to_dresses + '/dress-persia-951?color=navy&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=persia-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_09.jpg', user: '@garancerousseau', cta: "SHOP THE PERSIA LOOK"},
-                    {link: link_to_dresses + '/dress-imogen-97?color=cherry-red&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=imogen-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_21.jpg', user: '@kiraship', cta: "SHOP THE IMOGEN LOOK"},
-                    {link: link_to_dresses + '/dress-janine-906?color=aqua-lily&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=janine-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_23.jpg', user: '@kiraship', cta: "SHOP THE JANINE LOOK"},
-                    {link: link_to_dresses + '/dress-petra-825?color=white', src: '/assets/homepage/instagram/No1.jpg', user: '@michellerollerphoto', cta: "SHOP THE PEDRA LOOK"},
-                    {link: link_to_dresses + '/dress-allegra-680?color=forest-green', src: '/assets/homepage/instagram/No2.jpg', user: '@theruecollective', cta: "SHOP THE ALLEGRA LOOK"},
-                    {link: link_to_dresses + '/dress-wish-upon-439?color=black', src: '/assets/homepage/instagram/No3.jpg', user: '@nadaadellex', cta: "SHOP THE WISH UPON LOOK"},
+                    {link: link_to_dresses + '/dress-aspen-853?color=white&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=persia-dress-product', src: '/assets/homepage/instagram/insta2.jpg', user: '@evaacatherine', cta: "SHOP THE ASPEN LOOK"},
+                    {link: link_to_dresses + '/dress-firefly-640?color=black', src: '/assets/homepage/instagram/lainyhedaya.jpg', user: '@lainyhedaya', cta: "SHOP THIS LOOK"},
+                    {link: link_to_dresses + '/dress-first-in-line-skirt-735?color=white', src: '/assets/homepage/instagram/insta3.jpg', user: '@andreawahl_', cta: "SHOP THE FIRST IN LINE SKIRT LOOK"},
+                    {link: link_to_dresses + '/dress-lotus-doll-899?color=grand-lily&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=lotus-doll-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_07.jpg', user: '@fionabriseno', cta: "SHOP THE LOTUS DOLL LOOK"},
                     {link: link_to_dresses + '/dress-roxy-631?color=burgundy', src: '/assets/homepage/instagram/No4.jpg', user: '@xxsophiehermanxx', cta: "SHOP THE ROXY LOOK"},
-                    {link: link_to_dresses + '/dress-from-afar-545?color=sage-green', src: '/assets/homepage/instagram/No1_Malfada.jpg', user: '@mafaldacastro', cta: "Shop the From Afar Look"},
-                    {link: link_to_dresses + '/dress-laced-heartline-262?color=white', src: '/assets/homepage/instagram/No2_Alevidal.jpg', user: '@alevidal', cta: "Shop the Laced Heartline Look"},
                     {link: link_to_dresses + '/dress-juliette-505?color=black', src: '/assets/homepage/instagram/No3_Sophie.jpg', user: '@xxsophiehermannxx', cta: "Shop the Juliette Look"},
-                    {link: link_to_dresses + '/dress-rory-two-piece-675?color=red', src: '/assets/homepage/instagram/No4_Sarah.jpg', user: '@sarah3llen', cta: "Shop the Rory Look"},
-                    {link: link_to_dresses + '/dress-winged-hero-598?color=geo-sage', src: '/assets/homepage/instagram/No5_Carm.jpg', user: '@x_carms', cta: "Shop the Winged Hero look"},
-                    {link: link_to_dresses + '/dress-perry-543?color=nude', src: '/assets/homepage/instagram/No6_Linhwin.jpg', user: '@linhwinn', cta: "Shop the Perry Look"}])
+                    {link: link_to_dresses + '/dress-wish-upon-439?color=black', src: '/assets/homepage/instagram/No3.jpg', user: '@nadaadellex', cta: "SHOP THE WISH UPON LOOK"},
+                    {link: link_to_dresses + '/dress-janine-906?color=aqua-lily&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=janine-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_23.jpg', user: '@kiraship', cta: "SHOP THE JANINE LOOK"},
+                    {link: link_to_dresses + '/dress-allegra-680?color=forest-green', src: '/assets/homepage/instagram/No2.jpg', user: '@theruecollective', cta: "SHOP THE ALLEGRA LOOK"},
+                    {link: link_to_dresses + '/dress-laced-heartline-262?color=white', src: '/assets/homepage/instagram/No2_Alevidal.jpg', user: '@alevidal', cta: "Shop the Laced Heartline Look"},
+                    {link: link_to_dresses + '/dress-perry-543?color=nude', src: '/assets/homepage/instagram/No6_Linhwin.jpg', user: '@linhwinn', cta: "Shop the Perry Look"},
+                    {link: link_to_dresses + '/dress-rory-two-piece-675?color=red', src: '/assets/homepage/instagram/No4_Sarah.jpg', user: '@sarah3llen', cta: "Shop the Rory Look"}])
 
 
 

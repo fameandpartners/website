@@ -37,7 +37,7 @@ module Bergen
       end
 
       def bergen_attributes
-        response     = bergen_ticket_response
+        response     = bergen_ticket_object
         item_details = response[:shipmentitemslist]
 
         {
@@ -63,11 +63,11 @@ module Bergen
       end
 
       def item_was_received?
-        bergen_ticket_response[:notifications].nil? && bergen_ticket_response[:receiving_status] == ADDED_TO_INVENTORY
+        bergen_ticket_object && bergen_ticket_object[:receiving_status] == ADDED_TO_INVENTORY
       end
 
-      def bergen_ticket_response
-        Bergen::Service.new.get_receiving_ticket_object_by_ticket_no(return_request_item: return_request_item)
+      def bergen_ticket_object
+        @bergen_ticket_object ||= Bergen::Service.new.get_receiving_ticket_object_by_ticket_no(return_request_item: return_request_item)
       end
     end
   end

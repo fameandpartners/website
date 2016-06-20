@@ -45,7 +45,8 @@ Feature: Complete Guest Checkout
     And I click on "Add to Cart" button
     # And I should see the cart sidebar with the checkout button
     # And I click on "CHECKOUT" button
-    Then I fill in form fields with:
+    Then I select "<Country>" country and "<State>" state
+    And I fill in form fields with:
       | Email                   | test@email.com |
       | First Name              | Roger          |
       | Last Name               | That           |
@@ -54,8 +55,6 @@ Feature: Complete Guest Checkout
       | City                    | Melbourne      |
       | Phone Number            | 2255-4422      |
       | <Zipcode Label>         | 12345          |
-    And I select "<State>" state
-    And I select "<Country>" country
     And I click on "Pay Securely" button
     Then I should see "ADDITIONAL CUSTOM DUTY FEES MAY APPLY"
     And I click on "OK" button
@@ -72,3 +71,4 @@ Feature: Complete Guest Checkout
       | Site Version | Country       | State      | Zipcode Label | Dress Size | Skirt Length | Dress Price |
       | Australia    | Australia     | Queensland | Postcode      | AU 14      | Petite       | 319.00      |
       | USA          | United States | California | Zipcode       | US 10      | Petite       | 289.00      |
+      | Australia    | New Zealand   | Whanganui  | Postcode      | AU 14      | Petite       | 319.00      |

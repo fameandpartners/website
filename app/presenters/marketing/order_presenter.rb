@@ -42,7 +42,10 @@ module Marketing
           options_text:           item.options_text,
           quantity:               item.quantity,
           variant_display_amount: item.variant.display_amount.to_s,
-          display_amount:         item.display_amount.to_s
+          display_amount:         item.display_amount.to_s,
+          image_url:              item.image.present? ? item.image.attachment.url(:large) : nil,
+          height:                 item.personalization.present? ? item.personalization.height : LineItemPersonalization::DEFAULT_HEIGHT,
+          color:                  item.personalization.present? ? item.personalization.color.try(:name) || 'Unknown Color' : item.variant.try(:dress_color).try(:name) || 'Unknown Color'
         }
       end
     end
