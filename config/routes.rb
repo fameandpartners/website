@@ -290,7 +290,7 @@ FameAndPartners::Application.routes.draw do
     get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
     get '/our-customer-service-improvements', to: redirect('/from-our-ceo')
-    get '/from-our-ceo' => 'statics#yelp', :as => :yelp
+    get '/from-our-ceo' => 'statics#from_our_ceo', :as => :from_our_ceo
     get '/how-it-works', to: redirect("/why-us")
     get '/size-guide'  => 'statics#size_guide', :as => :size_guide
     get '/growth-plan'  => 'statics#growth_plan', :as => :growth_plan
@@ -322,10 +322,8 @@ FameAndPartners::Application.routes.draw do
     get '/styling-session'  => 'style_sessions#new', as: :styling_session
     resource 'style-session', as: 'style_session', only: [:create]
 
-    get '/wedding-consultation' => 'wedding_consultations#new'
-    resource 'wedding-consultation', as: 'wedding_consultation', only: [:new, :create] do
-      get 'success'
-    end
+    get '/wedding-consultation' => 'wedding_consultations#new', as: :wedding_consultation
+    resource 'wedding-consultation', as: 'wedding_consultation', only: [:create]
 
     get '/contact/new', to: redirect('/contact'), as: :old_contact_page
     resource 'contact', as: 'contact', only: [:new, :create], path_names: { new: '/' } do
@@ -334,8 +332,8 @@ FameAndPartners::Application.routes.draw do
     post '/about' => 'contacts#join_team', as: :join_team
 
     # return form
-    get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf')
-    get '/returns', to: redirect('/faqs#collapse-returns-policy')
+    get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf'), as: 'returns_form'
+    get '/returns', to: redirect('/faqs#collapse-returns-policy'), as: 'returns_policy'
 
     # External URLs
     get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
