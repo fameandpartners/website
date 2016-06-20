@@ -20,6 +20,7 @@ module Forms
     property :cntry, virtual: true
     property :zip, virtual: true
     property :phone, virtual: true
+    property :search, virtual: true
 
     def products
       Spree::Product.active
