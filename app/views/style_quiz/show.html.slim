@@ -11,7 +11,7 @@
       window.quiz = new window.style.Quiz();
     });
 
-    window.onQuizCompleted = function() { 
+    window.onQuizCompleted = function() {
       window.location = "#{ after_quiz_redirect_url }";
     };
 
@@ -35,6 +35,9 @@
 
 css:
   /* .quiz-box .steps-box .scrollable { width: 100%; height: 100%; overflow-x: hidden; overflow-y: scroll;}*/
+ruby:
+  last_step  = @questions_by_steps.to_a.map { |i| i[0] }.sort.last + 1
+  step_count = @quiz.questions.map(&:step).uniq.count + (current_spree_user ? 1 : 2)
 
 .quiz-box#style_quiz
   .quiz-header
@@ -50,7 +53,7 @@ css:
           ' Q
           span.current 1
           | /
-          span.total = @quiz.questions.map(&:step).uniq.count + 1
+          span.total = step_count
         .film style="position: relative;"
           = form_for :quiz, url: style_quiz_path, remote: true, method: :put do |f|
             - @questions_by_steps.to_a.to(1).each do |step, questions|
@@ -72,6 +75,11 @@ css:
                     = f.fields_for "questions][#{question.id}" do |ff|
                       = ff.fields_for :answer do |fff|
                         = render "questions/#{ question.partial}", form: fff, question: question
+
+            - unless current_spree_user
+              .step.film-frame id="step-#{last_step}"
+                .question id="question-#{last_step}"
+                  = render 'questions/email'
         .progress-next
           .prev
             a href="#" Back
