@@ -117,8 +117,27 @@ window.style.Quiz = class StyleQuiz
     @previousStep().size() isnt 0
 
   isCurrentStepFinished: () ->
+    if @currentStep().attr('id') == 'step-10'
+      return @emailIsValid()
+    else
+      return @checkBoxesOrRadioButtonsFilled()
+
+  checkBoxesOrRadioButtonsFilled: () ->
     _.all @currentQuestions(), (question) ->
       $(question).is ':has(:checkbox:checked, :radio:checked)'
+
+  emailIsValid: () ->
+    input = $('input#email')
+    re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if input.length and @currentStep().attr('id') == 'step-10'
+      value = input.val()
+      if re.test(value)
+        return true
+      else
+        alert('Email is invalid')
+        return false
+    else
+      return false
 
   currentProgress: () ->
     ((100 / @stepsCount()) * @currentStepNumber()).toFixed()
