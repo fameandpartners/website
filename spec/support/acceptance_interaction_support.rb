@@ -4,6 +4,7 @@ module AcceptanceInteractionSupport
       find(type, locator, options).trigger('click')
     else
       find(type, locator, options).click
+      sleep 0.5 # Wait animation to fade away. This is horrible, I know...
     end
   end
 end
