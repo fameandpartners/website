@@ -140,7 +140,7 @@ ruby:
       // content tabs START 
       .row
         .col-md-6.col-md-offset-3
-          ul role='tablist'
+          ul.l-tab-controls role='tablist'
             li.active role='presentation'
               a href='#tab-your-way' aria-controls='tab-your-way' role='tab' data-toggle='tab' Your Dress, Your Way
             li role='presentation'
@@ -149,37 +149,51 @@ ruby:
               a.js-tab-trigger-inspiration href='#dress-inspiration' aria-controls='dress-inspiration' role='tab' data-toggle='tab' Dress Inspiration
       .tab-content
         #tab-your-way.row.tab-pane.l-tab-your-way.active role='tabpanel'
-          .h-v-align
-            .col-xs-6.col-md-2
-              .media-wrap
+          .col-xs-6.col-md-2
+            .media-wrap.keep-ratio
+              .inner-wrap
                 = image_tag src='_pdp/tile-style.jpg'
-            .col-xs-6.col-md-2.h-v-align__container
-              .h-v-align__item
-                h3.h5 Select your style
-                p Lorem ipsum dolor sit amet, consectetur adipiscing elit
-            .col-xs-6.col-md-2
-              .media-wrap
+          .col-xs-6.col-md-2
+            .media-wrap.keep-ratio
+              .inner-wrap
+                .v-center
+                  .justify-content
+                    = image_tag src='_icons/professional-dryclean.svg', class:'icon'
+                    h3.h5 Select your style
+                    p Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          .col-xs-6.col-md-2
+            .media-wrap.keep-ratio
+              .inner-wrap
                 = image_tag src='_pdp/tile-fabric.jpg'
-            .col-xs-6.col-md-2.h-v-align__container
-              .h-v-align__item
-                h3.h5 Pick your fabric
-                p Lorem ipsum dolor sit amet, consectetur adipiscing elit
-            .col-xs-6.col-md-2
-              .media-wrap
+          .col-xs-6.col-md-2
+            .media-wrap.keep-ratio
+              .inner-wrap
+                .v-center
+                  .justify-content
+                    = image_tag src='_icons/professional-dryclean.svg', class:'icon'
+                    h3.h5 Pick your fabric
+                    p Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          .col-xs-6.col-md-2
+            .media-wrap.keep-ratio
+              .inner-wrap
                 = image_tag src='_pdp/tile-modify.jpg'
-            .col-xs-6.col-md-2.h-v-align__container
-              .h-v-align__item
-                h3.h5 Modify your dress
-                p Lorem ipsum dolor sit amet, consectetur adipiscing elit
-        #tab-fabric-information.row.tab-pane role='tabpanel'
+          .col-xs-6.col-md-2
+            .media-wrap.keep-ratio
+              .inner-wrap
+                .v-center
+                  .justify-content
+                    = image_tag src='_icons/professional-dryclean.svg', class:'icon'
+                    h3.h5 Modify your dress
+                    p Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        #tab-fabric-information.row.tab-pane.l-tab-fabric-information role='tabpanel'
           .col-md-3.col-md-offset-3
             - if @product.fabric.present?
-              h3.h5 Fabric & Trims
+              h3.h4 Fabric & Trims
               = simple_format(@product.fabric)
               p Product may have variations in dying hues so product may look slightly different from image.
           .col-md-3
-            h3.h5 Garment Care
-            = image_tag src='_icons/professional-dryclean.svg'
+            h3.h4 Garment Care
+            = image_tag src='_icons/professional-dryclean.svg', class:'icon'
             p
               | Professional dry-clean only.
               br

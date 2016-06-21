@@ -15,8 +15,8 @@
 
   p,
   li {
-    line-height: 1.1;
     font-family: $font-heading;
+    font-size: 1.125em;
     font-weight: 300;
   }
 
@@ -29,18 +29,17 @@
     padding: 0;
     list-style: none;
     text-align: center;
+  }
 
-    li {
-      display: inline-block;
-      line-height: 1;
-      font-size: 0.75em;
+  li {
+    display: inline-block;
+    line-height: 1;
+    font-size: 0.75em;
 
-      &:not(:first-child) {
-        margin-left: 4px;
-        padding: 0 0 0 4px;
-        border-left: solid $c-neutral-8 1px;
-      }
-
+    &:not(:first-child) {
+      margin-left: 4px;
+      padding: 0 0 0 4px;
+      border-left: solid $c-neutral-8 1px;
     }
 
   }
@@ -140,6 +139,82 @@
   .affix-bottom {
     position: absolute;
   }
+
+  // START tabs
+  .l-tab-controls {
+    margin: 15px 0 30px 0;
+    text-align: center;
+    color: $c-neutral-10;
+    @extend %cfix;
+
+    li {
+      display: block;
+      float: left;
+      width: 33.33333333%;
+      margin: 0;
+      padding: 0 0 3px 0;
+      border: 0;
+      border-bottom: solid $c-neutral-8 1px;
+
+      a {
+        margin: 0;
+        padding: 0;
+        font-family: $font-family-secondary;
+        font-size: 1.25em;
+        border: 0;
+      }
+
+    }
+
+    .active {
+      font-weight: 600;
+      color: $c-neutral-black;
+      border-color: $c-neutral-black;
+    }
+
+  }
+
+  .l-tab-your-way {
+
+    .keep-ratio {
+      margin-bottom: 30px;
+      padding-bottom: 127%;
+      background: $c-neutral-white;
+    }
+
+    .v-center {
+      display: table;
+      width: 100%;
+      height: 100%;
+    }
+
+    .justify-content {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+  }
+
+  .l-tab-fabric-information {
+
+    .icon {
+      display: block;
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+    }
+
+  }
+  // END tabs
 
   @media (max-width: $bootstrap-lg-width - 1px) {
 

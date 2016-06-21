@@ -101,13 +101,8 @@
 // Align content vericaly
 .h-v-align {
   display: flex;
-
-  &__container {
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-  }
+  align-items: center;
+  justify-content: center;
 
   &__item--top {
     align-self: flex-start;
