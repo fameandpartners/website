@@ -36,6 +36,7 @@ Feature: Complete Guest Checkout
       | USA          | United States | California | Zipcode       | US 10      | Petite       |
 
   # TODO: Payment step require connection to PIN payment method. This should be recorded by VCR, not ignored.
+  # TODO: PIN payments are not working with headless browsers (stopped working on 20/06/2016). Why? Contact their support.
   @javascript @no_vcr @selenium
   Scenario Outline: Successfully Buy a Dress
     When I am on Connie dress page
