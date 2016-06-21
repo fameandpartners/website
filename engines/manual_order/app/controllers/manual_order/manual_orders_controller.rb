@@ -41,6 +41,10 @@ module ManualOrder
       render json: manual_order_form.get_users_searched(params[:term]).limit(10).map {|u| {id: u.id, value: u.full_name}}
     end
 
+    def user_data
+      render json: manual_order_form.get_user_data(params[:user_id])
+    end
+
     private
 
     def manual_order_form
@@ -48,7 +52,9 @@ module ManualOrder
     end
 
     def customers
-      @customers ||= Spree::User.registered.limit(10).map {|u| [u.id, u.full_name]}
+      user_ids = Spree::Order.complete.pluck(:user_id).uniq
+      @customers ||= Spree::User.where(id: user_ids)
+                       .limit(10).map {|u| [u.id, u.full_name]}
     end
 
   end
