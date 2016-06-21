@@ -8,6 +8,7 @@ ManualOrder::Engine.routes.draw do
       get 'images/:product_id/:size_id/:color_id' => 'manual_orders#image_json'
       get 'prices/:product_id/:size_id/:color_id/:currency' => 'manual_orders#price_json'
       get 'autocomplete' => 'manual_orders#autocomplete'
+      get 'user/:user_id' => 'manual_orders#user_data'
     end
   end
 
