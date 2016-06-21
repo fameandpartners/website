@@ -119,6 +119,7 @@ PATH
       datagrid
       font-awesome-rails
       kaminari
+      manual_order
       money
       rails (~> 3.2.21)
       reform
@@ -139,7 +140,11 @@ PATH
       font-awesome-rails
       rails (~> 3.2.21)
     manual_order (0.0.1)
+      chosen-rails
       rails (~> 3.2.22)
+      reform
+      simple_form
+      slim
     revolution (0.0.1)
       awesome_nested_set
       rails (~> 3.2.21)
