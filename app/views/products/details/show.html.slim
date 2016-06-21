@@ -79,54 +79,127 @@ ruby:
         .panel-side-wrap
           .panel-side.panel-side--left.js-panel-side-left data-spy='affix'
             .panel-side-container
-              h1.heading = @product.name
-              - if @product.name.downcase.include?('skirt')
-                p (Skirt Only)
+            
+              div
+                h1.heading = @product.name
+                - if @product.name.downcase.include?('skirt')
+                  p (Skirt Only)
+                
+                h2.h5 Description
+                p = raw @product.description
+                a href='' About our model
+                a href='' Add to Moodboard
+                a href='' Share
               
-              h5 Description
-              p = raw @product.description
-              a href='' About our model
-              a href='' Add to Moodboard
-              a href='' Share
+              ul.btn-wrap
+                li Guarenteed Fit
+                li Free Shipping
+                li Easy Returns
 
       .col-md-6
         .panel-media
           .panel-media-inner-wrap
             .media-wrap
-              = image_tag src='_temp/product1.jpg'
+              = image_tag src='_temp/product-burgundy-crop.jpg'
             .media-wrap
-              = image_tag src='https://d1sd72h9dq237j.cloudfront.net/spree/products/23517/large/usp1068-burgundy-crop.jpg?1457926862'
+              = image_tag src='_temp/product-burgundy-crop.jpg'
             .media-wrap
-              = image_tag src='https://d1sd72h9dq237j.cloudfront.net/spree/products/23517/large/usp1068-burgundy-crop.jpg?1457926862'
+              = image_tag src='_temp/product-burgundy-crop.jpg'
+            .media-wrap
+              = image_tag src='_temp/product-burgundy-crop.jpg'
       .col-md-3
         .panel-side-wrap
           .panel-side.js-panel-side-right data-spy='affix'
             .panel-side-container
               
-              .c-card-customize
-                h4.c-card-customize__header Specify your size
-                a.c-card-customize__content.is-selected href='javascript:;'
-                  .c-card-customize__content__left Dresses Size
-                  .c-card-customize__content__right US10
-                a.c-card-customize__content href='javascript:;'
-                  .c-card-customize__content__left Skirt Length
-                  .c-card-customize__content__right Standard
-                
-              .c-card-customize
-                h4.c-card-customize__header Design your dress
-                a.c-card-customize__content href='javascript:;' 
-                  .c-card-customize__content__left Color
-                  .c-card-customize__content__right
-                a.c-card-customize__content href='javascript:;'
-                  .c-card-customize__content__left Customize
-                  .c-card-customize__content__right
+              div
+                .c-card-customize
+                  h2.h4.c-card-customize__header Specify your size
+                  a.c-card-customize__content.is-selected href='javascript:;'
+                    .c-card-customize__content__left Dresses Size
+                    .c-card-customize__content__right US10
+                  a.c-card-customize__content href='javascript:;'
+                    .c-card-customize__content__left Skirt Length
+                    .c-card-customize__content__right Standard
+                  
+                .c-card-customize
+                  h2.h4.c-card-customize__header Design your dress
+                  a.c-card-customize__content href='javascript:;' 
+                    .c-card-customize__content__left Color
+                    .c-card-customize__content__right
+                  a.c-card-customize__content href='javascript:;'
+                    .c-card-customize__content__left Customize
+                    .c-card-customize__content__right
               
               .btn-wrap
                 .price.js-product-price = product_price_with_discount(@product.price, @product.discount)
                 a.btn.btn-black.btn-lrg.js-buy-button herf='javascript:;' ADD TO BAG
                 .est-delivery Estimated delivery 3-4 weeks
-        
-
+    
+    .js-bottom-content
+      // content tabs START 
+      .row
+        .col-md-6.col-md-offset-3
+          ul role='tablist'
+            li.active role='presentation'
+              a href='#tab-your-way' aria-controls='tab-your-way' role='tab' data-toggle='tab' Your Dress, Your Way
+            li role='presentation'
+              a href='#tab-fabric-information' aria-controls='tab-fabric-information' role='tab' data-toggle='tab' Fabric Information
+            li role='presentation'
+              a.js-tab-trigger-inspiration href='#dress-inspiration' aria-controls='dress-inspiration' role='tab' data-toggle='tab' Dress Inspiration
+      .tab-content
+        #tab-your-way.row.tab-pane.l-tab-your-way.active role='tabpanel'
+          .h-v-align
+            .col-xs-6.col-md-2
+              .media-wrap
+                = image_tag src='_pdp/tile-style.jpg'
+            .col-xs-6.col-md-2.h-v-align__container
+              .h-v-align__item
+                h3.h5 Select your style
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit
+            .col-xs-6.col-md-2
+              .media-wrap
+                = image_tag src='_pdp/tile-fabric.jpg'
+            .col-xs-6.col-md-2.h-v-align__container
+              .h-v-align__item
+                h3.h5 Pick your fabric
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit
+            .col-xs-6.col-md-2
+              .media-wrap
+                = image_tag src='_pdp/tile-modify.jpg'
+            .col-xs-6.col-md-2.h-v-align__container
+              .h-v-align__item
+                h3.h5 Modify your dress
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        #tab-fabric-information.row.tab-pane role='tabpanel'
+          .col-md-3.col-md-offset-3
+            - if @product.fabric.present?
+              h3.h5 Fabric & Trims
+              = simple_format(@product.fabric)
+              p Product may have variations in dying hues so product may look slightly different from image.
+          .col-md-3
+            h3.h5 Garment Care
+            = image_tag src='_icons/professional-dryclean.svg'
+            p
+              | Professional dry-clean only.
+              br
+              | See garment care label for further details on how to care for your garment.
+            p.sku SKU: #{@product.sku}
+        #dress-inspiration.row.tab-pane role='tabpanel'
+          .c-carousel-inspiration.js-carousel-inspiration
+            - if @product.song
+              .c-carousel-inspiration__item
+                .media-wrap
+                  = image_tag @product.song.image_url
+            - if @product.celebrity && @product.celebrity.image_url
+              .c-carousel-inspiration__item
+                .media-wrap
+                  = image_tag @product.celebrity.image_url
+            - @product.inspiration.each do |item|
+              .c-carousel-inspiration__item
+                .media-wrap
+                  = image_tag item.image_url
+      // content tabs END
 
 = render partial: 'micro_data'
 
@@ -153,15 +226,51 @@ javascript:
     $('.js-panel-side-left').affix({
       offset: {
         top: $('.js-panel-side-left').offset().top,
-        bottom: $('.js-footer').outerHeight(true) + 60 // wrapper bottom margin plus header height
+        bottom: $('.js-footer').outerHeight(true) 
+          + $('.js-bottom-content').outerHeight(true) 
+          + 60 // wrapper bottom margin plus header height
       }
     });
     
     $('.js-panel-side-right').affix({
       offset: {
         top: $('.js-panel-side-right').offset().top,
-        bottom: $('.js-footer').outerHeight(true) + 60 // wrapper bottom margin plus header height
+        bottom: $('.js-footer').outerHeight(true) 
+          + $('.js-bottom-content').outerHeight(true) 
+          + 60 // wrapper bottom margin plus header height
       }
+    });
+    
+    // Dress inspiration carousel
+    $('.js-tab-trigger-inspiration').on('shown.bs.tab', function() {
+      $('.js-carousel-inspiration').slick({
+        speed: 600,
+        slidesToShow: 6,
+        slidesToScroll: 6,
+        responsive: [
+          {
+            breakpoint: 768,
+            settings: {
+              arrows: false,
+              centerMode: true,
+              centerPadding: '30px',
+              slidesToShow: 3,
+              slidesToScroll: 3
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              speed: 300,
+              arrows: false,
+              centerMode: true,
+              centerPadding: '20px',
+              slidesToShow: 2,
+              slidesToScroll: 2
+            }
+          }
+        ]
+      });
     });
       
   });

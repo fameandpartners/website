@@ -1,24 +1,52 @@
 /* [PDP]
 -------------------------------------------------------*/
-// move this tovars, it should be equal to the header height
-$header-height: 155px;
-$header-mob-height: 113px;
 .pdp {
   position: relative;
   min-height: 100vh;
-  padding-top: $header-height;
+  padding-top: $mega-menu-desktop-height;
 
   h1 {
     margin-top: 0;
   }
 
-  p {
+  .h5 {
+    font-size: 1.8rem;
+  }
+
+  p,
+  li {
+    line-height: 1.1;
     font-family: $font-heading;
     font-weight: 300;
   }
 
   a:not(.btn) {
     color: inherit;
+  }
+
+  ul {
+    margin: 0 0 25px 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+
+    li {
+      display: inline-block;
+      line-height: 1;
+      font-size: 0.75em;
+
+      &:not(:first-child) {
+        margin-left: 4px;
+        padding: 0 0 0 4px;
+        border-left: solid $c-neutral-8 1px;
+      }
+
+    }
+
+  }
+
+  .c-carousel-inspiration__item {
+    padding: 0 5px;
   }
 
   .panel-side-wrap {
@@ -44,7 +72,10 @@ $header-mob-height: 113px;
       }
 
       .est-delivery {
-        font-size: 0.875em;
+        line-height: 1;
+        font-family: $font-heading;
+        font-weight: 300;
+        font-size: 0.75em;
         font-style: italic;
       }
 
@@ -67,7 +98,7 @@ $header-mob-height: 113px;
   }
 
   .panel-side-container {
-    padding-top: $header-height + 150;
+    padding-top: $mega-menu-desktop-height + 100;
   }
 
   .panel-media {
@@ -75,31 +106,35 @@ $header-mob-height: 113px;
   }
 
   .panel-media-inner-wrap {
-    margin-bottom: -$header-height;
+    margin-bottom: -$mega-menu-desktop-height;
   }
 
-  .media-wrap {
+  .panel-media .media-wrap {
+    display: flex;
+    justify-content: center;
     height: 100vh;
     max-height: 850px; // NOTE: this will need to be change when we get new product images
-    padding-top: $header-height;
+    padding-top: $mega-menu-desktop-height;
     background: transparent;
-    @include display-flex;
-    @include justify-content(center);
 
     &:not(:first-child) {
-      margin-top: -($header-height - 30);
+      margin-top: -($mega-menu-desktop-height - 30);
     }
 
     img {
       width: auto;
       height: 100%;
-      margin-top: -$header-height;
+      margin-top: -$mega-menu-desktop-height;
     }
 
   }
 
   .c-card-customize {
-      margin-bottom: 70px;
+    margin-bottom: 70px;
+  }
+
+  .tab-content {
+    min-height: 260px;
   }
 
   .affix-bottom {
@@ -116,21 +151,25 @@ $header-mob-height: 113px;
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
-    padding-top: $header-mob-height;
+    padding-top: $mega-menu-mobile-height;
 
     .panel-media-inner-wrap {
-      margin-bottom: -$header-mob-height;
+      margin-bottom: 0;
     }
 
-    .media-wrap {
-      padding-top: $header-mob-height;
+    .panel-media .media-wrap {
+      display: block;
+      height: auto;
+      padding-top: 0;
 
       &:not(:first-child) {
-        margin-top: -($header-mob-height - 30);
+        margin-top: 0;
       }
 
       img {
-        margin-top: -$header-mob-height;
+        width: 100%;
+        height: auto;
+        margin-top: 0;
       }
 
     }
@@ -147,6 +186,14 @@ $header-mob-height: 113px;
 
     .panel-side-container {
       padding-top: 0;
+    }
+
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    .c-carousel-inspiration {
+      padding: 0 10px;
     }
 
   }
