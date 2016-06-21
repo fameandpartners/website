@@ -3,7 +3,7 @@ module ManualOrder
 
     layout 'admin_ui'
 
-    helper_method :manual_order_form
+    helper_method :manual_order_form, :customers
 
     def index
 
@@ -37,10 +37,18 @@ module ManualOrder
       render json: manual_order_form.get_price(params[:product_id], params[:size_id], params[:color_id], params[:currency])
     end
 
+    def autocomplete
+      render json: manual_order_form.get_users_searched(params[:term]).limit(10).map {|u| {id: u.id, value: u.full_name}}
+    end
+
     private
 
     def manual_order_form
       @manual_order_form ||= Forms::ManualOrderForm.new(Spree::Product.new)
+    end
+
+    def customers
+      @customers ||= Spree::User.registered.limit(10).map {|u| [u.id, u.full_name]}
     end
 
   end
