@@ -58,8 +58,11 @@
                     label.col-sm-2.control-label Last name
                     .col-sm-10 = f.input :last_name, label: false, input_html: {class: 'form-control'}
                   .form-group
-                    label.col-sm-2.control-label Address
-                    .col-sm-10 = f.input :address, label: false, input_html: {class: 'form-control'}
+                    label.col-sm-2.control-label Address1
+                    .col-sm-10 = f.input :address1, label: false, input_html: {class: 'form-control'}
+                  .form-group
+                    label.col-sm-2.control-label Address2
+                    .col-sm-10 = f.input :address2, label: false, input_html: {class: 'form-control'}
                   .form-group
                     label.col-sm-2.control-label City
                     .col-sm-10 = f.input :city, label: false, input_html: {class: 'form-control'}
@@ -71,7 +74,7 @@
                     .col-sm-10 = f.input :cntry, label: false, input_html: {class: 'form-control'}
                   .form-group
                     label.col-sm-2.control-label Zip
-                    .col-sm-10 = f.input :zip, label: false, input_html: {class: 'form-control'}
+                    .col-sm-10 = f.input :zipcode, label: false, input_html: {class: 'form-control'}
                   .form-group
                     label.col-sm-2.control-label Phone
                     .col-sm-10 = f.input :phone, label: false, input_html: {class: 'form-control'}
