@@ -6,4 +6,4 @@
 
 # Zero Downtime Deploy
 zdd_unicorn
-# zdd_puma # if your app server is Puma
+wheneverize_worker
