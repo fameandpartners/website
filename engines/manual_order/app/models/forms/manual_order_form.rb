@@ -14,11 +14,12 @@ module Forms
     property :email, virtual: true
     property :first_name, virtual: true
     property :last_name, virtual: true
-    property :address, virtual: true
+    property :address1, virtual: true
+    property :address2, virtual: true
     property :city, virtual: true
     property :state, virtual: true
     property :cntry, virtual: true
-    property :zip, virtual: true
+    property :zipcode, virtual: true
     property :phone, virtual: true
     property :search, virtual: true
 
@@ -63,12 +64,31 @@ module Forms
 
     def get_users_searched(term)
       terms = term.split(' ')
-      users = Spree::User.registered
+      user_ids = Spree::Order.complete.pluck(:user_id).uniq
+      users = Spree::User.where(id: user_ids)
       if terms.size == 1
         users.where('first_name ILIKE ? OR last_name ILIKE ?', "%#{terms[0]}%", "%#{terms[0]}%")
       else
         users.where('first_name ILIKE ? AND last_name ILIKE ?', "%#{terms[0]}%", "%#{terms[1]}%")
       end
+    end
+
+    def get_user_data(user_id)
+      user = Spree::User.find(user_id)
+      address = user.orders.complete.last.ship_address
+
+      {
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        address1: address.address1,
+        address2: address.address2,
+        city: address.city,
+        zipcode: address.zipcode,
+        phone: address.phone,
+        state_id: address.state_id,
+        country_id: address.country_id
+      }
     end
 
     def site_version_options
