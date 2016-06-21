@@ -72,7 +72,7 @@ ruby:
 - if Features.active?(:marketing_modals)
   #modal-add-to-cart-template.hidden
 
-.page-content.pdp
+.pdp
   .container
     .row
       .col-md-3
@@ -136,7 +136,9 @@ ruby:
                 a.btn.btn-black.btn-lrg.js-buy-button herf='javascript:;' ADD TO BAG
                 .est-delivery Estimated delivery 3-4 weeks
     
+    // content bottom wrap START 
     .js-bottom-content
+    
       // content tabs START 
       .row
         .col-md-6.col-md-offset-3
@@ -214,6 +216,34 @@ ruby:
                 .media-wrap
                   = image_tag item.image_url
       // content tabs END
+      
+      // content styling advice START
+      .row
+        .col-md-4
+          .c-styling-advice
+            h2 Get free professional styling advice.
+            p Let us help you to style your perfect outfit for any occasion. Meet Amber, one of the most influential stylists working today. 
+            .media-wrap
+              = image_tag '_pdp/tile-styling-advice.jpg'
+            .row
+              .col-md-4
+                = image_tag '_icons/professional-dryclean.svg', class:'icon'
+                h3.h5 Latest Trends
+                p Lorem ipsum dolor sit amet
+              .col-md-4
+                = image_tag '_icons/professional-dryclean.svg', class:'icon'
+                h3.h5 Coloring
+                p Lorem ipsum dolor sit amet
+              .col-md-4
+                = image_tag '_icons/professional-dryclean.svg', class:'icon'
+                h3.h5 Body Mapping
+                p Lorem ipsum dolor sit amet
+            a.btn.btn-black Book your free styling session
+        .col-md-8
+          = render partial: 'related_products', locals: { product: @product }
+      // content styling advice END
+      
+    // content bottom wrap END 
 
 = render partial: 'micro_data'
 
@@ -236,22 +266,22 @@ ruby:
     
 javascript:
   $(document).ready(function() {
+  
+  var offsetBottom = $('.js-footer').outerHeight(true) 
+    + $('.js-bottom-content').outerHeight(true) 
+    + 160; // wrapper bottom margin plus header height
     
     $('.js-panel-side-left').affix({
       offset: {
         top: $('.js-panel-side-left').offset().top,
-        bottom: $('.js-footer').outerHeight(true) 
-          + $('.js-bottom-content').outerHeight(true) 
-          + 60 // wrapper bottom margin plus header height
+        bottom: offsetBottom
       }
     });
     
     $('.js-panel-side-right').affix({
       offset: {
         top: $('.js-panel-side-right').offset().top,
-        bottom: $('.js-footer').outerHeight(true) 
-          + $('.js-bottom-content').outerHeight(true) 
-          + 60 // wrapper bottom margin plus header height
+        bottom: offsetBottom
       }
     });
     
