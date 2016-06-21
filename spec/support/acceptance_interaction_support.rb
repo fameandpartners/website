@@ -1,6 +1,10 @@
 module AcceptanceInteractionSupport
   def click_layered_element(type, locator, options = {})
-    find(type, locator, options).trigger('click')
+    if Capybara.current_driver == :poltergeist
+      find(type, locator, options).trigger('click')
+    else
+      find(type, locator, options).click
+    end
   end
 end
 
