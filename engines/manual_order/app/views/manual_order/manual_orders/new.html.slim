@@ -42,7 +42,7 @@
                   .col-sm-3
                     = radio_button_tag(:customer, 'existing', true)
                     = label_tag(:customer_existing, 'Existing customer?')
-                  .col-sm-9 = f.input :search, label: false, placeholder: 'Please start typing customer name', input_html: {class: 'form-control'}
+                  .col-sm-9 = f.collection_select :search, customers, :first, :last, { include_blank: true, prompt: 'Please start typing customer name' }, { class: 'chosen-select' }
                 .form-group
                   .col-sm-12
                     = radio_button_tag(:customer, 'new')

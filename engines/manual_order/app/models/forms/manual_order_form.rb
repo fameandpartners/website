@@ -61,6 +61,16 @@ module Forms
       { price: price.amount, currency: currency }
     end
 
+    def get_users_searched(term)
+      terms = term.split(' ')
+      users = Spree::User.registered
+      if terms.size == 1
+        users.where('first_name ILIKE ? OR last_name ILIKE ?', "%#{terms[0]}%", "%#{terms[0]}%")
+      else
+        users.where('first_name ILIKE ? AND last_name ILIKE ?', "%#{terms[0]}%", "%#{terms[1]}%")
+      end
+    end
+
     def site_version_options
       {
         'USD' =>'USA',
