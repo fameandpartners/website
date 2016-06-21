@@ -99,7 +99,7 @@ class StyleQuizController < ApplicationController
     end
 
     style_profile.save
-    track_event(style_profile.user)
+    style_profile.user ? track_user_email(style_profile.user.email) : track_user_email(params[:email])
 
     if taxons.present?
       taxons.group_by(&:id).each do |id, group|
@@ -146,8 +146,8 @@ class StyleQuizController < ApplicationController
       end
     end
 
-    def track_event(user)
-      tracker = Marketing::CustomerIOEventTracker.new
-      tracker.track(user, :some_event, nil)
+    def track_user_email(email)
+      return unless email
+      Marketing::CustomerIOEventTracker.new.identify_user_by_email(email, current_site_version)
     end
 end
