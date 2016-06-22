@@ -47,7 +47,7 @@ FameAndPartners::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  # config.action_controller.asset_host = ENV['RAILS_ASSET_HOST']
+  config.action_controller.asset_host = ENV['RAILS_ASSET_HOST']
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += %w( application_redesign.js application_redesign.css main_nav_widget.css html5.js ie.css widgets/site_navigations.css)
@@ -58,7 +58,7 @@ FameAndPartners::Application.configure do
   config.action_mailer.default_url_options = { :host => ENV['APP_HOST'] }
 
   # config.action_mailer.asset_host = ENV['RAILS_ASSET_HOST']
-  config.action_mailer.asset_host = 'http://www.fameandpartners.com' # TODO: hardcoded for the moment
+  config.action_mailer.asset_host = 'https://www.fameandpartners.com' # TODO: hardcoded for the moment
 
   # Enable threaded mode
   # config.threadsafe!
