@@ -31,6 +31,23 @@ module Forms
       @countries ||= Spree::Country.where(iso: ['US', 'CA', 'DE', 'MX', 'GB', 'AU', 'NZ']).map {|c| [c.id, c.name]}
     end
 
+    def states
+      @states ||= Spree::Country.where(iso: 'US').first.states
+    end
+
+    def states_us
+      @states_us ||= states.map {|s| {id: s.id, name: s.name}}
+    end
+
+    def states_ca
+      @states_ca ||= Spree::Country.where(iso: 'CA').first.states.map {|s| {id: s.id, name: s.name}}
+    end
+
+    def states_au
+      @states_au ||= Spree::Country.where(iso: 'AU').first.states.map {|s| {id: s.id, name: s.name}}
+    end
+
+
     def get_size_options(product_id)
       products.find(product_id).variants.map {|v| { id: v.dress_size.id, name: v.dress_size.name} }.uniq
     end

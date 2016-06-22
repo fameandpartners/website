@@ -8,9 +8,9 @@ $ ->
   address2 = $('#forms_manual_order_address2')
   city = $('#forms_manual_order_city')
   country = $('#forms_manual_order_country')
+  state = $('#forms_manual_order_state')
   zipcode = $('#forms_manual_order_zipcode')
   phone = $('#forms_manual_order_phone')
-
 
   searchUrl = '/fame_admin/manual_orders/autocomplete'
   userUrl = '/fame_admin/manual_orders/user/:user_id'
@@ -41,9 +41,24 @@ $ ->
         country.val(data.country_id)
         zipcode.val(data.zipcode)
         phone.val(data.phone)
-        
-        country.trigger('chosen:updated')
 
+        switch $('#forms_manual_order_country option:selected').text()
+          when 'Australia' then refreshStates(states_au)
+          when 'United States' then refreshStates(states_us)
+          when 'Canada' then refreshStates(states_ca)
+
+        state.val(data.state_id)
+
+        updateCountryAndState()
+
+  refreshStates = (states) ->
+    state.html('<option></option>')
+    $.each states, (index, el) =>
+      state.append $('<option>').attr('value', el.id).text(el.name)
+
+  updateCountryAndState = ->
+    country.trigger('chosen:updated')
+    state.trigger('chosen:updated')
 
   $('#customer_existing').on 'click', =>
     customerform.attr('disabled', 'disabled')
@@ -57,7 +72,9 @@ $ ->
     address2.val('')
     city.val('')
     country.val('')
+    state.val('')
     zipcode.val('')
     phone.val('')
 
-    country.trigger('chosen:updated')
+    updateCountryAndState()
+
