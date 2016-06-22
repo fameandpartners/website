@@ -1,4 +1,8 @@
-h1 ENTER YOUR EMAIL!
-
-.enter_email
-  = text_field_tag 'email', nil, placeholder: 'Enter your email'
+.row
+  .col-md-4
+    .heading
+      h1 Email
+      h2.h5 Enter your email.
+  .col-md-8
+    .enter_email
+      = form.text_field 'email', placeholder: 'Enter your email'

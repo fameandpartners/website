@@ -117,10 +117,7 @@ window.style.Quiz = class StyleQuiz
     @previousStep().size() isnt 0
 
   isCurrentStepFinished: () ->
-    if @currentStep().attr('id') == 'step-10'
-      return @emailIsValid()
-    else
-      return @checkBoxesOrRadioButtonsFilled()
+    return @checkBoxesOrRadioButtonsFilled()
 
   checkBoxesOrRadioButtonsFilled: () ->
     _.all @currentQuestions(), (question) ->
