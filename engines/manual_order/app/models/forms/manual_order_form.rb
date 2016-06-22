@@ -27,6 +27,10 @@ module Forms
       Spree::Product.active
     end
 
+    def countries
+      @countries ||= Spree::Country.where(iso: ['US', 'CA', 'DE', 'MX', 'GB', 'AU', 'NZ']).map {|c| [c.id, c.name]}
+    end
+
     def get_size_options(product_id)
       products.find(product_id).variants.map {|v| { id: v.dress_size.id, name: v.dress_size.name} }.uniq
     end

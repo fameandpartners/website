@@ -7,6 +7,7 @@ $ ->
   address1 = $('#forms_manual_order_address1')
   address2 = $('#forms_manual_order_address2')
   city = $('#forms_manual_order_city')
+  country = $('#forms_manual_order_country')
   zipcode = $('#forms_manual_order_zipcode')
   phone = $('#forms_manual_order_phone')
 
@@ -37,8 +38,11 @@ $ ->
         address1.val(data.address1)
         address2.val(data.address2)
         city.val(data.city)
+        country.val(data.country_id)
         zipcode.val(data.zipcode)
         phone.val(data.phone)
+        
+        country.trigger('chosen:updated')
 
 
   $('#customer_existing').on 'click', =>
@@ -52,5 +56,8 @@ $ ->
     address1.val('')
     address2.val('')
     city.val('')
+    country.val('')
     zipcode.val('')
     phone.val('')
+
+    country.trigger('chosen:updated')
