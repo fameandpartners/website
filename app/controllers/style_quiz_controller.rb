@@ -99,7 +99,12 @@ class StyleQuizController < ApplicationController
     end
 
     style_profile.save
-    style_profile.user ? track_user_email(style_profile.user.email) : track_user_email(params[:email])
+
+    if style_profile.user
+      track_user_email(style_profile.user.email)
+    else
+      track_user_email(params.try(:[], :quiz).try(:[], :user).try(:[], :email))
+    end
 
     if taxons.present?
       taxons.group_by(&:id).each do |id, group|

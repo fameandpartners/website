@@ -10,6 +10,9 @@ javascript:
     window.location = "#{ after_quiz_redirect_url }";
   };
 
+ruby:
+  step_total = @quiz.questions.map(&:step).uniq.count + (current_spree_user ? 0 : 1)
+
 .page-content.quiz-box#style_quiz
   .container.main-container-wrap
     .col-md-4.quiz-wrapper-box
@@ -18,7 +21,7 @@ javascript:
           ' QUESTION
           span.current 1
           | /
-          span.total = @quiz.questions.map(&:step).uniq.count
+          span.total = step_total
         .progress
           .progress-bar style="width: 0%;"
         .row.inner-btn-wrap
