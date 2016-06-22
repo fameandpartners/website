@@ -150,7 +150,6 @@ z-index levels
 @import 'redesign/about';
 @import 'redesign/alerts';
 @import 'redesign/user';
-@import 'redesign/returns';
 @import 'redesign/size_guide';
 @import 'redesign/fame_chain';
 @import 'redesign/facebook';
@@ -212,6 +211,7 @@ z-index levels
 @import 'redesign/components/product/custom_heights_table';
 @import 'redesign/components/search-filters';
 @import 'redesign/components/strips/shop-by-category';
+@import 'redesign/components/panels/content-collapse-expand';
 
 // Modals
 @import 'redesign/modals/vex';
@@ -231,9 +231,15 @@ z-index levels
 @import 'redesign/pages/pdp';
 @import 'redesign/pages/why-us';
 @import 'redesign/pages/growth-plan';
+@import 'redesign/pages/shop-social';
+@import 'redesign/pages/from_our_ceo';
 
 //Orders
 @import 'redesign/orders/order-details';
+
+//My Account
+@import 'redesign/pages/my-account/common';
+@import 'redesign/returns';
 
 // Generic
 @import 'redesign/generic/content-order';

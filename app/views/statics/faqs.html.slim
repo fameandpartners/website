@@ -85,30 +85,4 @@
 
       .col-md-4
         aside
-          h2.h5 Need more help?
-          .inner-wrap
-            .icon-icon-chat
-              span LIVE CHAT
-            .copy-wrap Speak to a custom service representative immediately
-          a.btn.btn-transparent.btn-block href='javascript:;' onclick='$zopim.livechat.window.show();' Start Live Chat
-          .inner-wrap
-            .icon-icon-email
-              span EMAIL
-            .copy-wrap We'll be able to assist with your inquiry as soon as possible
-          = link_to 'Contact Us', new_contact_url, :class => 'btn btn-transparent btn-block'
-
-
-  javascript:
-    $('body').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function() {
-      $this = $(this);
-      var $target = $this.parent().next();
-      $this.toggleClass('collapsed');
-      $target.data('bs.collapse') ? $target.collapse('toggle') : $target.collapse();
-    });
-    (function ($) {
-      var hash = document.location.hash;
-      if (hash) {
-        $(hash).addClass('in');
-      }
-    }(jQuery));
-
+          = render 'shared/redesign/faqs/aside_panel_faq'

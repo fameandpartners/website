@@ -10,7 +10,7 @@ module Bergen
 
       it do
         expect(default_config[:to]).to eq(%w(team@fameandpartners.com returns@fameandpartners.com))
-        expect(default_config[:from]).to eq('noreply@fameandpartners.com')
+        expect(default_config[:from]).to eq('bergen-3pl@fameandpartners.com')
       end
     end
 
@@ -30,7 +30,7 @@ module Bergen
         expect(encoded_mailer).to have_text('Color Blue')
         expect(encoded_mailer).to have_text('Height petite')
         expect(encoded_mailer).to have_text('Customization Super Custom')
-        expect(encoded_mailer).to have_text('Item Purchase Price 12345')
+        expect(encoded_mailer).to have_text('Item Purchase Price $123.45')
         expect(encoded_mailer).to have_text('Customer Address Street 1 Complement, Los Angeles, California, 123-321, United States of America')
       end
     end
@@ -41,7 +41,7 @@ module Bergen
       include_examples 'CustomerServiceMailer body'
 
       it do
-        expect(mailer.subject).to eq('ACCEPTED - Order R123123 received')
+        expect(mailer.subject).to eq('[Bergen] ACCEPTED - Order R123123 received')
         assert_body
       end
     end
@@ -52,7 +52,7 @@ module Bergen
       include_examples 'CustomerServiceMailer body'
 
       it do
-        expect(mailer.subject).to eq('REJECTED - Order R123123 received')
+        expect(mailer.subject).to eq('[Bergen] REJECTED - Order R123123 received')
         assert_body
       end
     end
