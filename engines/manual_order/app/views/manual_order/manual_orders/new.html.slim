@@ -71,7 +71,7 @@
                     .col-sm-10 = f.input :state, label: false, input_html: {class: 'form-control'}
                   .form-group
                     label.col-sm-2.control-label Country
-                    .col-sm-10 = f.input :country, label: false, input_html: {class: 'form-control'}
+                    .col-sm-10 = f.collection_select :country, manual_order_form.countries, :first, :last, { include_blank: true }, { class: 'chosen-select' }
                   .form-group
                     label.col-sm-2.control-label Zip
                     .col-sm-10 = f.input :zipcode, label: false, input_html: {class: 'form-control'}
