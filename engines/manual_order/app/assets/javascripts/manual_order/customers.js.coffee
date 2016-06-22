@@ -1,5 +1,16 @@
 $ ->
   searchSelect = $('#forms_manual_order_search')
+  customerform = $('#customer_form')
+  email = $('#forms_manual_order_email')
+  first_name = $('#forms_manual_order_first_name')
+  last_name = $('#forms_manual_order_last_name')
+  address1 = $('#forms_manual_order_address1')
+  address2 = $('#forms_manual_order_address2')
+  city = $('#forms_manual_order_city')
+  zipcode = $('#forms_manual_order_zipcode')
+  phone = $('#forms_manual_order_phone')
+
+
   searchUrl = '/fame_admin/manual_orders/autocomplete'
   userUrl = '/fame_admin/manual_orders/user/:user_id'
 
@@ -17,15 +28,29 @@ $ ->
     results
 
   searchSelect.on 'change', =>
-    console.log 'change'
     url = userUrl.replace(/:user_id/, searchSelect.val()) if searchSelect.val()
     if url
       $.getJSON url, (data) =>
-        $('#forms_manual_order_email').val(data.email)
-        $('#forms_manual_order_first_name').val(data.first_name)
-        $('#forms_manual_order_last_name').val(data.last_name)
-        $('#forms_manual_order_address1').val(data.address1)
-        $('#forms_manual_order_address2').val(data.address2)
-        $('#forms_manual_order_city').val(data.city)
-        $('#forms_manual_order_zipcode').val(data.zipcode)
-        $('#forms_manual_order_phone').val(data.phone)
+        email.val(data.email)
+        first_name.val(data.first_name)
+        last_name.val(data.last_name)
+        address1.val(data.address1)
+        address2.val(data.address2)
+        city.val(data.city)
+        zipcode.val(data.zipcode)
+        phone.val(data.phone)
+
+
+  $('#customer_existing').on 'click', =>
+    customerform.attr('disabled', 'disabled')
+
+  $('#customer_new').on 'click', =>
+    customerform.removeAttr('disabled')
+    email.val('')
+    first_name.val('')
+    last_name.val('')
+    address1.val('')
+    address2.val('')
+    city.val('')
+    zipcode.val('')
+    phone.val('')
