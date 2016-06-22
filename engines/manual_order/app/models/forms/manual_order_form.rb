@@ -18,7 +18,7 @@ module Forms
     property :address2, virtual: true
     property :city, virtual: true
     property :state, virtual: true
-    property :cntry, virtual: true
+    property :country, virtual: true
     property :zipcode, virtual: true
     property :phone, virtual: true
     property :search, virtual: true
