@@ -15,11 +15,11 @@ end
 
 # assets
 configatron.aws.enabled    = false
-configatron.aws.bucket     = ""
-configatron.aws.access_key = ""
-configatron.aws.secret_key = ""
-configatron.aws.host       = ENV['RAILS_ASSET_HOST']
-configatron.asset_host     = ENV['RAILS_ASSET_HOST']
+configatron.aws.bucket     = ''
+configatron.aws.access_key = ''
+configatron.aws.secret_key = ''
+configatron.aws.host       = ENV['RAILS_ASSET_HOST']     # Production Bucket
+configatron.asset_host     = ENV['MARKETING_ASSET_HOST'] # Marketing Bucket
 
 configatron.typekit_id = ENV['TYPEKIT_ID']
 
