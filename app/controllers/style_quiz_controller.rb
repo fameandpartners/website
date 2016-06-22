@@ -135,24 +135,8 @@ class StyleQuizController < ApplicationController
 
   private
 
-    def current_site_version
-      @current_site_version ||= begin
-        service = FindUsersSiteVersion.new(
-          user: current_spree_user,
-          url_param: request.env['site_version_code'],
-          cookie_param: session[:site_version]
-        )
-        service.get().tap do |site_version|
-          session[:site_version]  ||= site_version.code
-          if current_spree_user && current_spree_user.site_version_id != site_version.id
-            current_spree_user.update_column(:site_version_id, site_version.id)
-          end
-        end
-      end
-    end
-
-    def track_user_email(email)
-      return unless email
-      Marketing::CustomerIOEventTracker.new.identify_user_by_email(email, current_site_version)
-    end
+  def track_user_email(email)
+    return unless email
+    Marketing::CustomerIOEventTracker.new.identify_user_by_email(email, current_site_version)
+  end
 end

@@ -52,6 +52,10 @@ window.style.Quiz = class StyleQuiz
   nextStepEventHandler: (event) ->
     event.preventDefault()
 
+    if @isCurrentStepEmaiInput() and not @isEmailValid()
+      alert('Invalid email')
+      return
+
     if @isCurrentStepFinished()
       if @isNextStepExist()
         @goToNextStep()
@@ -117,22 +121,19 @@ window.style.Quiz = class StyleQuiz
     @previousStep().size() isnt 0
 
   isCurrentStepFinished: () ->
-    return if @currentStep().attr('id') == 'step-email' then @emailIsValid() else @checkBoxesOrRadioButtonsFilled()
+    return if @isCurrentStepEmaiInput() then @isEmailValid() else @areCheckBoxesOrRadioButtonsFilled()
 
-  checkBoxesOrRadioButtonsFilled: () ->
+  isCurrentStepEmaiInput: () ->
+    @currentStep().attr('id') is 'step-email'
+
+  areCheckBoxesOrRadioButtonsFilled: () ->
     _.all @currentQuestions(), (question) ->
       $(question).is ':has(:checkbox:checked, :radio:checked)'
 
-  emailIsValid: () ->
-    input = $('input#quiz_user_email')
-    return false unless input.length
+  isEmailValid: () ->
+    value = $('input#quiz_user_email').val()
     re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    value = input.val()
-    if re.test(value)
-      return true
-    else
-      alert('Email is invalid')
-      return false
+    re.test(value)
 
   currentProgress: () ->
     ((100 / @stepsCount()) * @currentStepNumber()).toFixed()
