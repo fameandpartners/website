@@ -21,7 +21,7 @@ module Forms
     property :country, virtual: true
     property :zipcode, virtual: true
     property :phone, virtual: true
-    property :search, virtual: true
+    property :existing_customer, virtual: true
 
     def products
       Spree::Product.active

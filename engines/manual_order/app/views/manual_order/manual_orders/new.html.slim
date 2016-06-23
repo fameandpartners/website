@@ -47,12 +47,12 @@ javascript:
                   .col-sm-3
                     = radio_button_tag(:customer, 'existing', true)
                     = label_tag(:customer_existing, 'Existing customer?')
-                  .col-sm-9 = f.collection_select :search, customers, :first, :last, { include_blank: true, prompt: 'Please start typing customer name' }, { class: 'chosen-select' }
+                  .col-sm-9 = f.collection_select :existing_customer, customers, :first, :last, { include_blank: true, prompt: 'Please start typing customer name' }, { class: 'chosen-select', disabled: false }
                 .form-group
                   .col-sm-12
                     = radio_button_tag(:customer, 'new')
                     = label_tag(:customer_new, 'New customer')
-                fieldset#customer_form[disabled='disabled']
+                fieldset#customer_form[disabled=true]
                   .form-group
                     label.col-sm-2.control-label Email
                     .col-sm-10 = f.input :email, label: false, input_html: { class: 'form-control' }
@@ -72,11 +72,11 @@ javascript:
                     label.col-sm-2.control-label City
                     .col-sm-10 = f.input :city, label: false, input_html: {class: 'form-control'}
                   .form-group
-                    label.col-sm-2.control-label State
-                    .col-sm-10 = f.collection_select :state, manual_order_form.states, :id, :name, { include_blank: true }, { class: 'chosen-select' }
-                  .form-group
                     label.col-sm-2.control-label Country
-                    .col-sm-10 = f.collection_select :country, manual_order_form.countries, :first, :last, { include_blank: true }, { class: 'chosen-select' }
+                    .col-sm-10 = f.collection_select :country, manual_order_form.countries, :first, :last, { include_blank: true }, { class: 'chosen-select', disabled: true }
+                  .form-group
+                    label.col-sm-2.control-label State
+                    .col-sm-10 = f.collection_select :state, manual_order_form.states, :id, :name, {include_blank: true}, {class: 'chosen-select', disabled: true}
                   .form-group
                     label.col-sm-2.control-label Zip
                     .col-sm-10 = f.input :zipcode, label: false, input_html: {class: 'form-control'}
