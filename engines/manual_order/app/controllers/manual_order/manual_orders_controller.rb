@@ -17,23 +17,23 @@ module ManualOrder
       render 'new'
     end
 
-    def sizes_options_json
+    def sizes_options
       render json: manual_order_form.get_size_options(params[:product_id])
     end
 
-    def colors_options_json
+    def colors_options
       render json: manual_order_form.get_color_options(params[:product_id]) | manual_order_form.get_custom_colors(params[:product_id])
     end
 
-    def customisations_options_json
+    def customisations_options
       render json: manual_order_form.get_customisations_options(params[:product_id])
     end
 
-    def image_json
+    def image
       render json: manual_order_form.get_image(params[:product_id], params[:size_id], params[:color_id])
     end
 
-    def price_json
+    def price
       render json: manual_order_form.get_price(params[:product_id], params[:size_id], params[:color_id], params[:currency])
     end
 
