@@ -1,6 +1,6 @@
 $ ->
-  searchSelect = $('#forms_manual_order_search')
-  customerform = $('#customer_form')
+  existingCustomer = $('#forms_manual_order_existing_customer')
+  customerForm = $('#customer_form')
   email = $('#forms_manual_order_email')
   first_name = $('#forms_manual_order_first_name')
   last_name = $('#forms_manual_order_last_name')
@@ -15,7 +15,7 @@ $ ->
   searchUrl = '/fame_admin/manual_orders/autocomplete'
   userUrl = '/fame_admin/manual_orders/user/:user_id'
 
-  searchSelect.ajaxChosen
+  existingCustomer.ajaxChosen
     minTermLength: 2
     type: 'GET'
     url: searchUrl
@@ -28,8 +28,8 @@ $ ->
         text: val.value
     results
 
-  searchSelect.on 'change', =>
-    url = userUrl.replace(/:user_id/, searchSelect.val()) if searchSelect.val()
+  existingCustomer.on 'change', =>
+    url = userUrl.replace(/:user_id/, existingCustomer.val()) if existingCustomer.val()
     if url
       $.getJSON url, (data) =>
         email.val(data.email)
@@ -43,28 +43,55 @@ $ ->
         phone.val(data.phone)
 
         switch $('#forms_manual_order_country option:selected').text()
-          when 'Australia' then refreshStates(states_au)
-          when 'United States' then refreshStates(states_us)
-          when 'Canada' then refreshStates(states_ca)
+          when 'Australia' then refreshStates(states_au, true)
+          when 'United States' then refreshStates(states_us, true)
+          when 'Canada' then refreshStates(states_ca, true)
 
         state.val(data.state_id)
-
         updateCountryAndState()
 
-  refreshStates = (states) ->
+  country.on 'change', =>
+    switch $('#forms_manual_order_country option:selected').text()
+      when 'Australia' then refreshStates(states_au, false)
+      when 'United States' then refreshStates(states_us, false)
+      when 'Canada' then refreshStates(states_ca, false)
+      else clearStates()
+    updateState()
+
+  refreshStates = (states, status) ->
     state.html('<option></option>')
     $.each states, (index, el) =>
       state.append $('<option>').attr('value', el.id).text(el.name)
+    state.attr('disabled', status)
+
+  clearStates = ->
+    state.html('<option></option>')
+    state.attr('disabled', true)
+
+  updateState = ->
+    state.trigger('chosen:updated')
 
   updateCountryAndState = ->
     country.trigger('chosen:updated')
     state.trigger('chosen:updated')
 
+  updateExistingCustomer = ->
+    existingCustomer.trigger('chosen:updated')
+
   $('#customer_existing').on 'click', =>
-    customerform.attr('disabled', 'disabled')
+    country.val('')
+    state.val('')
+
+    existingCustomer.attr('disabled', false)
+    updateExistingCustomer()
+
+    customerForm.attr('disabled', true)
+    country.attr('disabled', true)
+    state.attr('disabled', true)
+    updateCountryAndState()
 
   $('#customer_new').on 'click', =>
-    customerform.removeAttr('disabled')
+    existingCustomer.val('')
     email.val('')
     first_name.val('')
     last_name.val('')
@@ -76,5 +103,10 @@ $ ->
     zipcode.val('')
     phone.val('')
 
+    existingCustomer.attr('disabled', true)
+    updateExistingCustomer()
+
+    customerForm.attr('disabled', false)
+    country.attr('disabled', false)
     updateCountryAndState()
 
