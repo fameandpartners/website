@@ -1,90 +1,90 @@
-.page-title.default.fame
-  .container
-    .page-title--details
-      = image_tag '_famechain/title.png', width: 432, height: 146, alt: 'The Fame Chain'
+.page-fame-chain.add-bottom-padding
 
-      p.text-center
-        | A network of fashion forward
-        br
-        | free thinking bloggers increasing their cred
-        br
-        | through being linked.
+  // hero section
+  .main-hero-wrap.hero-wrap.copy-right
+    picture.media-wrap.keep-ratio
+      .inner-wrap
+        source media='(max-width: 1023px)' srcset='#{image_path("_fame_chain/hero-mob.jpg")}'
+        source media='(min-width: 1024px)' srcset='#{image_path("_fame_chain/hero-full.jpg")}'
+        img src='#{image_path("_famechain/hero-full.jpg")}' srcset='
+          #{image_path("_famechain/hero-mob.jpg")} 1023w,
+          #{image_path("_famechain/hero-full.jpg")} 1024w' alt='The Fame Chain: A network of fashion forward free thinking bloggers increasing their cred through being linked'
 
-.page-content.thefamechain
-  .container-fluid.call-to-actions
-    .row
-      = link_to build_taxon_path('Prom')
-        .col-md-4.text-center.no-padding
-          = image_tag "_famechain/glam_rebel.jpg", alt: 'Prom Queen collection', class: 'img-responsive '
-      a href="#email-container"
-        .col-md-4.text-center.no-padding
-          = image_tag "_famechain/glam_rebel2.jpg", alt: 'Newsletter sign up', class: 'img-responsive'
-      = link_to style_consultation_path
-        .col-md-4.text-center.no-padding
-          = image_tag "_famechain/real_prom.jpg", alt: 'Styling session sign up', class: 'img-responsive'
+    .content-wrap
+      .container
+        .row
+          .col-md-10
+            .copy-wrap
+              h1.heading
+                span The Fame Chain
+                span.sub-heading
+                  | A network of fashion forward free thinking bloggers increasing their cred through being linked.
 
-  .form
-    .row.apply
-      h2.text-center Apply now
-    .apply-now
-
-    = form_for @fame_chain, url: fame_chain_path, method: :post, html: {class: 'form'} do |f|
+  section.apply-form
+    .container
       .row
-        .col-md-5.col-md-offset-2
-          .row
-            .form-group
-              label.text-right name
-              = f.text_field :name
-          .row
-            .form-group
-              label.text-right email
-              = f.text_field :email, type: 'email'
-          .row
-            .form-group
-              label blog/vlog
-              = f.text_field :blog, type: 'url'
+        .col-md-6.col-md-offset-3
+          .intro-section.text-center
+            h2
+              | Apply now
+            p Want your piece of fame? Enter your details below for the opportunity to join the #famechain community
 
-      .row
-        .col-md-5.col-md-offset-2.no-padding
-          .form-group
-            label Instagram
-            = f.text_field :instagram, type: 'url'
-        .col-md-3
-            .form-group
-              label number of<br>Followers
-              = f.text_field :instagram_size, type: 'text'
+          .apply-now
+            = form_for @fame_chain, url: fame_chain_path, method: :post, html: {class: 'form'} do |f|
+              .row
+                .col-md-12
+                    .form-group
+                      label Your name
+                      = f.text_field :name
 
-      .row
-        .col-md-5.col-md-offset-2.no-padding
-          .form-group
-            label facebook
-            = f.text_field :facebook, type: 'url'
-        .col-md-3
-            .form-group
-              label number of<br>followers
-              = f.text_field :facebook_size, type: 'text'
+                    .form-group
+                      label Email address
+                      = f.text_field :email, type: 'email'
 
-      .row
-        .col-md-5.col-md-offset-2.no-padding
-          .form-group
-            label pinterest
-            = f.text_field :pinterest, type: 'url'
-        .col-md-3
-            .form-group
-              label.control-label number of<br>followers
-              = f.text_field :pinterest_size, type: 'text'
+                    .form-group
+                      label Blog / Vlog
+                      = f.text_field :blog, type: 'url'
 
-      .row
-        .col-md-5.col-md-offset-2
-          .row
-            .form-group
-              label other
-              = f.text_field :other, type: 'text'
+              .row
+                .col-md-9
+                  .form-group
+                    label Instagram
+                    = f.text_field :instagram, type: 'url'
+                .col-md-3
+                    .form-group
+                      label No. of Followers
+                      = f.text_field :instagram_size, type: 'text'
 
-      .row
-        .col-md-3.col-md-offset-4.submit-button
-          .submit
-            = f.submit "Apply now", class: 'btn btn-black'
+              .row
+                .col-md-9
+                  .form-group
+                    label Facebook
+                    = f.text_field :facebook, type: 'url'
+                .col-md-3
+                    .form-group
+                      label No. of followers
+                      = f.text_field :facebook_size, type: 'text'
+
+              .row
+                .col-md-9
+                  .form-group
+                    label pinterest
+                    = f.text_field :pinterest, type: 'url'
+                .col-md-3
+                    .form-group
+                      label.control-label No. of followers
+                      = f.text_field :pinterest_size, type: 'text'
+
+              .row
+                .col-md-12
+                    .form-group
+                      label Other
+                      = f.text_field :other, type: 'text'
+
+              .row
+                .col-md-12.submit-button
+                  .submit
+                    = f.submit "Apply now", class: 'btn btn-black'
 
 
 javascript:
