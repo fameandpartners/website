@@ -190,6 +190,7 @@ FameAndPartners::Application.routes.draw do
     get '/fameweddings/guest' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :guest_bride_page
 
     get '/macys' => 'products/collections#show', :as => :macys
+    get '/shop-social' => 'products/collections#show', :as => :shop_social
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
@@ -282,9 +283,7 @@ FameAndPartners::Application.routes.draw do
     get '/about'   => 'statics#about', :as => :about_us
     get '/why-us'  => 'statics#why_us', :as => :why_us
     get '/team', to: redirect("http://www.fameandpartners.com/about")
-    scope :module => 'revolution' do
-      get '/terms'   => 'pages#show'
-    end
+    get '/terms'   => 'statics#ecom_terms'
     get '/privacy' => 'statics#ecom_privacy'
     get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
