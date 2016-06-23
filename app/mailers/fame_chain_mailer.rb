@@ -8,8 +8,7 @@ class FameChainMailer < ActionMailer::Base
     mail(
       to: 'famechain@fameandpartners.com',
       from: @fame_chain.email,
-      subject: '[Fame Chain]',
-      layout: false
+      subject: '[Fame Chain] New Request'
     )
   end
 end
