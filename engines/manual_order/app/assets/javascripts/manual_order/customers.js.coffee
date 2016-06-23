@@ -59,7 +59,7 @@ $ ->
       when 'United States' then refreshStates(states_us, false)
       when 'Canada' then refreshStates(states_ca, false)
       else clearStates()
-    updateState()
+    updateStates()
 
   refreshStates = (states, status) ->
     state.html('<option></option>')
@@ -71,7 +71,7 @@ $ ->
     state.html('<option></option>')
     state.attr('disabled', true)
 
-  updateState = ->
+  updateStates = ->
     state.trigger('chosen:updated')
 
   updateCountryAndState = ->
