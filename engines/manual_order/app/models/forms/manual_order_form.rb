@@ -48,8 +48,8 @@ module Forms
     end
 
     def customers
-      user_ids = Spree::Order.complete.limit(50).pluck(:user_id).uniq
-      @customers ||= Spree::User.where(id: user_ids).limit(50).map {|u| [u.id, u.full_name]}
+      user_ids = Spree::Order.complete.last(50).map(&:user_id).uniq
+      @customers ||= Spree::User.where(id: user_ids).limit(10).map {|u| [u.id, u.full_name]}
     end
 
     def get_size_options(product_id)
