@@ -12,7 +12,25 @@
 - `master` branch represents merged and accepted pull requests
 - `stable` branch represents code that's ready to go to production
 - Git tags are used to tag code releases to **production**
-    - Note: only use git tags for **production** releases!
+
+
+# Deploying
+
+To deploy to any environment, you must have a valid Reinteractive's Sentinel token. More details are documented on [cloud environment docs.](doc/ops/cloud-environments.md)
+
+After you have a valid Sentinel token, create a new copy of the `OpsCare.yml.example` file, renaming it to `OpsCare.yml`, and configure it with the desired values.
+
+## Staging
+
+Run `sentinel deploy staging`
+
+## Production
+
+Run `sentinel deploy staging`
+
+# LEGACY
+
+**IMPORTANT NOTE**: EngineYard is no longer used!
 
 ## Deploy to preproduction
 
