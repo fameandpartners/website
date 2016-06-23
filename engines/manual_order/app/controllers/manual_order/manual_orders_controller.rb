@@ -37,8 +37,8 @@ module ManualOrder
       render json: manual_order_form.get_price(params[:product_id], params[:size_id], params[:color_id], params[:currency])
     end
 
-    def autocomplete
-      render json: manual_order_form.get_users_searched(params[:term]).limit(10).map {|u| {id: u.id, value: u.full_name}}
+    def autocomplete_customers
+      render json: manual_order_form.get_users_searched(params[:term])
     end
 
     def user_data
