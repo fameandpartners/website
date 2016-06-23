@@ -49,6 +49,9 @@ $ ->
 
         state.val(data.state_id)
         updateCountryAndState()
+    else
+      clearCustomerForm()
+      updateCountryAndState()
 
   country.on 'change', =>
     switch $('#forms_manual_order_country option:selected').text()
@@ -91,7 +94,17 @@ $ ->
     updateCountryAndState()
 
   $('#customer_new').on 'click', =>
+    clearCustomerForm()
+
     existingCustomer.val('')
+    existingCustomer.attr('disabled', true)
+    updateExistingCustomer()
+
+    customerForm.attr('disabled', false)
+    country.attr('disabled', false)
+    updateCountryAndState()
+
+  clearCustomerForm = ->
     email.val('')
     first_name.val('')
     last_name.val('')
@@ -102,11 +115,4 @@ $ ->
     state.val('')
     zipcode.val('')
     phone.val('')
-
-    existingCustomer.attr('disabled', true)
-    updateExistingCustomer()
-
-    customerForm.attr('disabled', false)
-    country.attr('disabled', false)
-    updateCountryAndState()
 
