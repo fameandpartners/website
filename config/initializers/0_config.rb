@@ -18,8 +18,8 @@ configatron.aws.enabled    = false
 configatron.aws.bucket     = ''
 configatron.aws.access_key = ''
 configatron.aws.secret_key = ''
-configatron.aws.host       = ENV['RAILS_ASSET_HOST']     # Production Bucket
-configatron.asset_host     = ENV['MARKETING_ASSET_HOST'] # Marketing Bucket
+configatron.aws.host       = ENV['RAILS_ASSET_HOST'] # Production and Marketing Buckets are on the same CloudFront Distribution
+configatron.asset_host     = ENV['RAILS_ASSET_HOST'] # Production and Marketing Buckets are on the same CloudFront Distribution
 
 configatron.typekit_id = ENV['TYPEKIT_ID']
 
