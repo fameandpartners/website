@@ -20,10 +20,6 @@ if Rails.application.config.use_s3
     fog_directory:   configatron.aws.s3.bucket,
     path:            'system/:attachment/:id/:style/:basename.:extension'
   )
-
-  # Spree::Config[:attachment_url] = :fog_public_url
-  # Spree::Config[:attachment_url] = :s3_alias_url
-  # Spree::Config[:attachment_url] default is :s3_alias_url
 else
   Paperclip::Attachment.default_options.merge!(
     storage: :filesystem

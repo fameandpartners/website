@@ -67,6 +67,10 @@ bin/spring
 # Cached bash Autocompletion of rake tasks
 .rake_tasks~
 
+
 # Ignore sublime files
 *.sublime-project
 *.sublime-workspace
+
+# Ignore OpsCare.yml
+OpsCare.yml
