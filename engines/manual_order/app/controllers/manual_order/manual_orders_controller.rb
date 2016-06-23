@@ -3,7 +3,7 @@ module ManualOrder
 
     layout 'admin_ui'
 
-    helper_method :manual_order_form, :customers
+    helper_method :manual_order_form
 
     def index
 
@@ -49,12 +49,6 @@ module ManualOrder
 
     def manual_order_form
       @manual_order_form ||= Forms::ManualOrderForm.new(Spree::Product.new)
-    end
-
-    def customers
-      user_ids = Spree::Order.complete.pluck(:user_id).uniq
-      @customers ||= Spree::User.where(id: user_ids)
-                       .limit(10).map {|u| [u.id, u.full_name]}
     end
 
   end

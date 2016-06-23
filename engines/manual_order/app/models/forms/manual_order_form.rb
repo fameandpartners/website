@@ -47,6 +47,10 @@ module Forms
       @states_au ||= Spree::Country.where(iso: 'AU').first.states.map {|s| {id: s.id, name: s.name}}
     end
 
+    def customers
+      user_ids = Spree::Order.complete.limit(50).pluck(:user_id).uniq
+      @customers ||= Spree::User.where(id: user_ids).limit(50).map {|u| [u.id, u.full_name]}
+    end
 
     def get_size_options(product_id)
       products.find(product_id).variants.map {|v| { id: v.dress_size.id, name: v.dress_size.name} }.uniq
