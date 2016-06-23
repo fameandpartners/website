@@ -47,7 +47,7 @@ javascript:
                   .col-sm-3
                     = radio_button_tag(:customer, 'existing', true)
                     = label_tag(:customer_existing, 'Existing customer?')
-                  .col-sm-9 = f.collection_select :existing_customer, customers, :first, :last, { include_blank: true }, { class: 'chosen-select' }
+                  .col-sm-9 = f.collection_select :existing_customer, manual_order_form.customers, :first, :last, { include_blank: true }, { class: 'chosen-select' }
                 .form-group
                   .col-sm-12
                     = radio_button_tag(:customer, 'new')
