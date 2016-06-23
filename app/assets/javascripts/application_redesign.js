@@ -87,6 +87,11 @@
 //= require partials/wedding_consultation_page
 
 //-----------------------------
+// Fame Chain page
+//-----------------------------
+//= require partials/fame_chain_page
+
+//-----------------------------
 // Product details with related
 //-----------------------------
 //= require partials/product_details.js
