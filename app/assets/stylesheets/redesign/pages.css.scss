@@ -1,20 +1,111 @@
 .pages  {
-  table {
-    td, th {
-      padding:5px 10px;
-      border-right: 1px dashed #ccc;
+
+  h3 {
+    font-family: inherit;
+    font-size: 1.8rem;
+    font-weight: 500;
+    text-transform: inherit;
+  }
+
+  .page-title {
+    background-color: $c-neutral-white;
+    text-align: center;
+  }
+
+  p, li {
+    font-family: $font-heading;
+    font-weight: 300;
+  }
+
+  p.highlight.title {
+    font-style: italic;
+    font-weight: 500;
+    margin-top: 0;
+  }
+
+  .table {
+    font-size: 1.4rem;
+    margin: 20px 0;
+
+    td:not(:first-child) {
+      font-family: $font-heading;
     }
 
     td {
-      border-top: 1px solid #ddd;
+      border: 1px solid $c-neutral-black;
     }
 
-    td:last-child, th:last-child {
-      border-right: none;
-      border-bottom: 1px solid #ddd;
+    tr td {
+      padding: 10px 0;
+      width: 20%;
+      text-align: center;
     }
+
+    tr td:first-child {
+      text-align: left;
+      font-weight: 500;
+    }
+
+    td:first-child,
+    th:first-child {
+      border-left: 0;
+    }
+
+    td:last-child,
+    th:last-child {
+      border-right: 0;
+    }
+
+    tr:last-child td,
+    > thead > tr > th {
+      border-bottom: 0;
+    }
+
+    th {
+      text-transform: uppercase;
+      text-align: center;
+      padding: 10px 0 16px;
+      border: 1px solid $c-neutral-black;
+
+      &:first-child {
+        text-align: left;
+        font-weight: 500;
+      }
+
+    }
+
   }
-  p {
-    font-weight: 300;
+
+  @media only screen and (max-width: 640px) {
+
+    .table {
+
+      tr td {
+        width: initial;
+      }
+
+      td:first-child {
+        border: 0;
+      }
+
+      td:last-child,
+      th:last-child,
+      tr:last-child td,
+      > thead > tr > th {
+        border: 1px solid;
+      }
+
+      tr:not(:first-child) td:first-child {
+        margin-top: 25px;
+      }
+
+      &.shipping td:first-child {
+        padding-left: 7px;
+        border: 1px solid;
+      }
+
+    }
+
   }
+
 }
