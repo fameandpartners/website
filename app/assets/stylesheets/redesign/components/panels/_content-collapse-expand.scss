@@ -7,7 +7,7 @@
   .panel {
     border-color: $c-neutral-4;
     border: 0;
-    border-bottom: 0;
+    border-bottom: 1px solid $c-neutral-9;
 
     > .panel-heading {
       background: $c-neutral-white;
@@ -38,7 +38,6 @@
     }
 
     &.collapsed {
-      border-bottom: 1px solid $c-neutral-9;
 
       &:hover {
         color: $c-neutral-black;
@@ -62,18 +61,6 @@
     padding: 0 0 25px 0;
     border: 0;
     border-top-color: transparent;
-  }
-
-  .panel-collapse.in {
-
-    .panel-title {
-      border: none;
-    }
-
-    .panel-body {
-      border-bottom: 1px solid $c-neutral-9;
-    }
-
   }
 
   p {
