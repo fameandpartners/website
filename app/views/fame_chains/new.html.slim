@@ -38,60 +38,60 @@
                       .form-group
                         label for='fame_chain_name' class='label-name'
                           | Your name
-                        = f.text_field :name, required: 'true'
+                        = f.text_field :name, required: 'true', class: 'form-control form-control-md'
 
                       .form-group
                         label for='fame_chain_email' class='label-email'
                           | Email address
-                        = f.text_field :email, type: 'email', required: 'true'
+                        = f.text_field :email, type: 'email', required: 'true', class: 'form-control form-control-md'
 
                       .form-group
                         label for='fame_chain_blog' class='label-blog'
                           | Blog / Vlog
-                        = f.text_field :blog, type: 'url', value: 'http://'
+                        = f.text_field :blog, type: 'url', value: 'http://', class: 'form-control form-control-md'
 
                   .row
                     .col-sm-8
                       .form-group
                         label for='fame_chain_instagram' class='label-instagram'
                           | Instagram
-                        = f.text_field :instagram, type: 'url', value: 'http://instagram.com/'
+                        = f.text_field :instagram, type: 'url', value: 'http://instagram.com/', class: 'form-control form-control-md'
                     .col-sm-4
                       .form-group
                         label.control-label for='fame_chain_instagram_size' class='label-instagram_size'
                           | No. of <span class="social-network-name">Instagram</span> Followers
-                        = f.text_field :instagram_size, type: 'text'
+                        = f.text_field :instagram_size, type: 'text', class: 'form-control form-control-md'
 
                   .row
                     .col-sm-8
                       .form-group
                         label for='fame_chain_facebook' class='label-facebook'
                           | Facebook
-                        = f.text_field :facebook, type: 'url', value: 'http://facebook.com/'
+                        = f.text_field :facebook, type: 'url', value: 'http://facebook.com/', class: 'form-control form-control-md'
                     .col-sm-4
                       .form-group
                         label.control-label for='fame_chain_facebook_size' class='label-facebook_size'
                           | No. of <span class="social-network-name">Facebook</span> Followers
-                        = f.text_field :facebook_size, type: 'text'
+                        = f.text_field :facebook_size, type: 'text', class: 'form-control form-control-md'
 
                   .row
                     .col-sm-8
                       .form-group
                         label for='fame_chain_pinterest' class='label-pinterest'
                           | Pinterest
-                        = f.text_field :pinterest, type: 'url', value: 'http://pinterest.com/'
+                        = f.text_field :pinterest, type: 'url', value: 'http://pinterest.com/', class: 'form-control form-control-md'
                     .col-sm-4
                         .form-group
                           label.control-label for='fame_chain_pinterest_size' class='label-pinterest_size'
                             | No. of <span class="social-network-name">Pinterest</span> Followers
-                          = f.text_field :pinterest_size, type: 'text'
+                          = f.text_field :pinterest_size, type: 'text', class: 'form-control form-control-md'
 
                   .row
                     .col-md-12
                         .form-group
                           label for='fame_chain_other' class='label-other'
                             | Other
-                          = f.text_field :other, type: 'text'
+                          = f.text_field :other, type: 'text', class: 'form-control form-control-md'
 
                   .row
                     .col-md-12.submit-button
