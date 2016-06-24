@@ -11,18 +11,8 @@
     margin-top: 35px;
   }
 
-  .form-group {
-    // text-align: left;
-  }
-
   label {
     font-family: $font-heading;
-  }
-
-  input[type=text],
-  input[type=email],
-  input[type=url] {
-    width: 100%;
   }
 
   //intro section
@@ -31,7 +21,6 @@
 
     h2 {
       text-transform: none;
-      @extend .h1;
     }
 
     p {
