@@ -6,10 +6,14 @@
 #
 
 unless Rails.env.development?
-  SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(
-      fog_provider:          'AWS',
-      fog_directory:         configatron.aws.s3.bucket,
-      fog_region:            configatron.aws.s3.region
+  SitemapGenerator::Sitemap.adapter = SitemapGenerator::FogAdapter.new(
+    fog_credentials: {
+      use_iam_profile: true,
+      provider:        'AWS',
+      region:          configatron.aws.s3.region
+    },
+    fog_host:        configatron.aws.host,
+    fog_directory:   configatron.aws.s3.bucket,
   )
 end
 
