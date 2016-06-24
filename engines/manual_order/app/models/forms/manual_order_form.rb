@@ -136,7 +136,7 @@ module Forms
       site_version = SiteVersion.where(currency: params[:currency]).first
       variant_id = get_variant(params[:style_name], params[:size], params[:color])
 
-      populator = UserCart::Populator.new(
+      UserCart::Populator.new(
         order: order,
         site_version: site_version,
         currency: params[:currency],
@@ -145,17 +145,38 @@ module Forms
           size_id: params[:size],
           color_id: params[:color],
           customizations_ids: params[:customisations],
-          # making_options_ids: params[:making_options_ids],
           height:             params[:height],
           quantity: 1
         }
-      )
-      populator.populate
+      ).populate
 
-      order.reload!
       order.customer_notes = params[:notes]
-      order.save
+      order.currency = params[:currency]
 
+      if params[:existing_customer].present?
+        user = Spree::User.find(params[:existing_customer])
+        user_last_order = user.orders.complete.last
+        order.bill_address_id = user_last_order.bill_address_id
+        order.ship_address_id = user_last_order.ship_address_id
+      else
+        address = { firstname: params[:first_name],
+          lastname: params[:last_name],
+          address1: params[:address1],
+          address2: params[:address2],
+          city: params[:city],
+          state_id: params[:state],
+          country_id: params[:country],
+          zipcode: params[:zipcode],
+          phone: params[:phone],
+          email: params[:email]
+        }
+        ship_address = Spree::Address.create(address)
+        bill_address = Spree::Address.create(address)
+        order.bill_address_id = ship_address.id
+        order.ship_address_id = bill_address.id
+      end
+
+      order.save
     end
 
     private
