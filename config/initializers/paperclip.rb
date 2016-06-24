@@ -10,6 +10,7 @@ if Rails.application.config.use_s3
       secret_access_key: configatron.aws.s3.secret_access_key
     },
     s3_host_alias:  aws_host_without_protocol,
+    s3_permissions: :public_read,
     s3_protocol:    'https'
   )
 
@@ -23,6 +24,7 @@ if Rails.application.config.use_s3
     },
     fog_host:        configatron.aws.host,
     fog_directory:   configatron.aws.s3.bucket,
+    fog_public:      true,
     path:            'system/:attachment/:id/:style/:basename.:extension'
   )
 else
