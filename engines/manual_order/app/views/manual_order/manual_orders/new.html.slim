@@ -18,7 +18,7 @@ javascript:
               .panel-body
                 .form-group
                   label.col-sm-2.control-label Site version
-                  .col-sm-10 = f.collection_select :site_version, manual_order_form.site_version_options, :first, :last, {}, { class: 'chosen-select' }
+                  .col-sm-10 = f.collection_select :currency, manual_order_form.site_version_options, :first, :last, {}, { class: 'chosen-select' }
                 .form-group
                   label.col-sm-2.control-label Style name
                   .col-sm-10 = f.collection_select :style_name, manual_order_form.products, :id, :name_with_sku, { include_blank: true }, { class: 'chosen-select',  remote: true }

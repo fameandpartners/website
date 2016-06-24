@@ -3,7 +3,7 @@ require 'reform'
 module Forms
   class ManualOrderForm < ::Reform::Form
 
-    property :site_version, virtual: true
+    property :currency, virtual: true
     property :style_name, virtual: true
     property :size, virtual: true
     property :length, virtual: true
@@ -129,6 +129,33 @@ module Forms
         'standart' => 'Standart',
         'tall' => 'Tall'
       }
+    end
+
+    def save_order(params)
+      order = Spree::Order.create
+      site_version = SiteVersion.where(currency: params[:currency]).first
+      variant_id = get_variant(params[:style_name], params[:size], params[:color])
+
+      populator = UserCart::Populator.new(
+        order: order,
+        site_version: site_version,
+        currency: params[:currency],
+        product: {
+          variant_id: variant_id,
+          size_id: params[:size],
+          color_id: params[:color],
+          customizations_ids: params[:customisations],
+          # making_options_ids: params[:making_options_ids],
+          height:             params[:height],
+          quantity: 1
+        }
+      )
+      populator.populate
+
+      order.reload!
+      order.customer_notes = params[:notes]
+      order.save
+
     end
 
     private
