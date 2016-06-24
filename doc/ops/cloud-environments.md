@@ -18,6 +18,51 @@ To access AWS system, you must install Reinteractive's CLI tool called **Sentine
 
 You must email Reinteractive support team and ask them to add your SSH public key to each environment.
 
+## Available commands and variables on the `after_deploy.sh` hook
+
+Notes:
+
+- Commands run on master deployed instance, and then replicated
+- Environment variables are available on shell commands.
+  - e.g. `echo $SENTRY_SECRET`
+  - e.g. `echo $RAILS_ENV`
+
+Some examples:
+
+```bash
+# Call a service method
+zdd_unicorn
+
+# Set Whenever cron jobs
+[[ -f "${current_app_path}/bin/whenever" ]] && \
+  cd ${current_app_path} && ./bin/whenever --write-crontab
+
+# Creating a required directory
+mkdir -p ${this_release_dir}/vendor/assets/javascript
+
+# running a rake task
+bundle exec rake bower:install
+
+
+Since the hooks are called by the Tracks script, they have access to all variables and methods defined by the script.
+See the source to figure behaviours. The most notable ones are:
+
+shell
+# Usual variables
+$APP_NAME
+$FRAMEWORK_ENV
+$APP_REPO
+$app_full_name
+$app_dir
+$git_cached_copy
+$release_app_path
+$current_app_path
+$shared_app_path
+$previous_release
+$first_deploy
+$this_release_dir
+```
+
 ---
 
 # Legacy
