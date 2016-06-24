@@ -11,6 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require manual_order/ajax-chosen
+//= require manual_order/jquery.validate
 //= require manual_order/products
 //= require manual_order/customers
+//= require manual_order/validations
 
