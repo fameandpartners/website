@@ -7,3 +7,20 @@
 # Zero Downtime Deploy
 zdd_unicorn
 wheneverize_worker
+
+
+###############################
+# Fame & Parters Dev Team Hooks
+###############################
+
+# Clear cache
+cd ${current_app_path} && bundle exec rake cache:clear &
+
+# Alert NewRelic about deploy
+# TODO
+
+# Alert Sentry about deploy
+# TODO
+
+# Alert Slack about deploy
+# TODO
