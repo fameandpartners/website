@@ -14,6 +14,7 @@ module ManualOrder
     end
 
     def create
+      manual_order_form.save_order(params[:forms_manual_order])
       render 'new'
     end
 
@@ -48,7 +49,7 @@ module ManualOrder
     private
 
     def manual_order_form
-      @manual_order_form ||= Forms::ManualOrderForm.new(Spree::Product.new)
+      @manual_order_form ||= Forms::ManualOrderForm.new(Spree::Order.new)
     end
 
   end
