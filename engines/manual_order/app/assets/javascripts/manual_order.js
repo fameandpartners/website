@@ -10,8 +10,9 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require manual_order/ajax-chosen
-//= require manual_order/jquery.validate
+//= require libs/ajax-chosen
+//= require libs/jquery.validate
+//= require manual_order/chosen
 //= require manual_order/products
 //= require manual_order/customers
 //= require manual_order/validations
