@@ -15,7 +15,7 @@ module ManualOrder
 
     def create
       manual_order_form.save_order(params[:forms_manual_order])
-      render 'new'
+      redirect_to manual_orders_path, flash: { success: 'Order has been created successfully' }
     end
 
     def sizes_options
