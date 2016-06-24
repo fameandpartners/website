@@ -3,9 +3,14 @@ if Rails.application.config.use_s3
 
   # Custom configurations for Spree forceful usage of Paperclip's S3 storage mode
   Paperclip::Attachment.default_options.merge!(
-    url:           ':s3_alias_url',
-    s3_host_alias: aws_host_without_protocol,
-    s3_protocol:   'https'
+    url:            ':s3_alias_url',
+    s3_credentials: {
+      bucket:            configatron.aws.s3.bucket,
+      access_key_id:     configatron.aws.s3.access_key_id,
+      secret_access_key: configatron.aws.s3.secret_access_key
+    },
+    s3_host_alias:  aws_host_without_protocol,
+    s3_protocol:    'https'
   )
 
   # Reinteractive: trying to use :fog a storage. Spree 1.3 isn't allowing it
