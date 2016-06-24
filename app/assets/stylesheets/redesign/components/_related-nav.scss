@@ -1,0 +1,27 @@
+.related-nav {
+  margin-top: 50px;
+
+  a {
+    color: #000;
+    font-size: 1.7rem;
+    font-style: italic;
+  }
+
+  a span {
+    text-decoration: underline;
+  }
+
+  .highlight {
+    font-style: normal;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: $font-family-secondary;
+  }
+
+  .fa {
+    font-size: 0.8rem;
+    padding-left: 5px;
+  }
+
+}
