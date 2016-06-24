@@ -14,6 +14,8 @@
 //= require libs/jquery.dotdotdot.min
 //= require libs/jquery.mlens.min
 
+//= require modernizr-custom
+
 // React
 
 // Adding es5-shim due to PhantomJS
