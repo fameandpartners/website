@@ -6,8 +6,6 @@ if Rails.application.config.use_s3
     url:            ':s3_alias_url',
     s3_credentials: {
       bucket:            configatron.aws.s3.bucket,
-      access_key_id:     configatron.aws.s3.access_key_id,
-      secret_access_key: configatron.aws.s3.secret_access_key
     },
     s3_host_alias:  aws_host_without_protocol,
     s3_permissions: :public_read,
