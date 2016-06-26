@@ -147,6 +147,18 @@
 
   }
 
+  &.lg {
+    width: 50px;
+    height: 50px;
+
+    &:before,
+    &:after {
+      left: 20px;
+      height: 51px;
+    }
+
+  }
+
 }
 
 .btn-multiline {

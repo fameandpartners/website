@@ -47,4 +47,32 @@
     text-align: right;
   }
 
+  .side-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    padding-top: $mega-menu-desktop-height;
+    background: $c-neutral-white;
+    opacity: 0;
+    z-index: 1;
+    transition: all 200ms ease-in;
+
+    &.is-active {
+      left: 0;
+      opacity: 1;
+    }
+
+    .btn-close {
+      display: inline-block;
+      margin-top: 15px;
+    }
+
+    .c-card-customize__header {
+      padding-top: 50px;
+    }
+
+  }
+
 }

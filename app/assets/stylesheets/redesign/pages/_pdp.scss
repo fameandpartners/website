@@ -97,6 +97,17 @@
 
   .panel-side-container {
     padding-top: $mega-menu-desktop-height + 100;
+
+    > div:not(.btn-wrap) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding-top: $mega-menu-desktop-height + 100;
+      overflow-x: hidden;
+    }
+
   }
 
   .panel-media {
