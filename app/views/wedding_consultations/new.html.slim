@@ -1,73 +1,173 @@
-.page-title.default.wedding-session
-  = image_tag src='contact/fame-white-logo.png', :class => '', :alt => 'Fame & Partners'
+/ Wedding Style session
+.landing-page-wedding-styling-session
+  .page.container
+    .row
+      .page-title
+        .col-md-4
+          h1
+            | Free one-on-one wedding style advice
+          p
+            | Via video with a dedicated <br />Fame and Partners stylist.
+        .col-md-8.header-image-right
+          // hero section
+          .hero-wrap
+            picture.media-wrap.keep-ratio
+              .inner-wrap
+                source media='(max-width: 768px)' srcset='#{image_path("landingpages/wedding-consultation/header-tile-mobile.jpg")}'
+                source media='(min-width: 769px)' srcset='#{image_path("landingpages/wedding-consultation/header-tile.jpg")}'
+                img src='#{image_path("landingpages/wedding-consultation/header-tile.jpg")}' srcset='
+                  #{image_path("landingpages/wedding-consultation/header-tile-mobile.jpg")} 768w,
+                  #{image_path("landingpages/wedding-consultation/header-tile.jpg")} 1024w' alt='background image'
 
-.wedding-session-header
+    .row
+      .page-content
+        .side-wrapper.col-md-4
+          .side-content.meet
+            .row
+                .meet-stylist
+                  .col-xs-6.picture
+                    source media='(max-width: 768px)' srcset='#{image_path("landingpages/styling-session/amber-mobile.jpg")}'
+                    source media='(min-width: 769px)' srcset='#{image_path("landingpages/styling-session/amber.jpg")}'
+                    img src='#{image_path("landingpages/styling-session/amber.jpg")}' srcset='
+                      #{image_path("landingpages/styling-session/amber-mobile.jpg")} 768w,
+                      #{image_path("landingpages/styling-session/amber.jpg")} 1024w' alt='background image'
+                  .col-xs-6.txt
+                    h4 Meet Amber
+                    span Head stylist, F&P
+          .side-content
+            .row
+              .form-area
+                .col-md-12.not-submitted.js-en-not-submitted
+                  .intro
+                    h3 Style me up!
+                    p
+                      | It's easy to find the perfect wedding outfit with the Fame and Partners crew on standby. Access your complimentary video session now.
+                  .form-global
+                    = form_for @wedding_consultation, url: wedding_consultation_path, html: {class: 'form js-en-styling-session-form'} do |f|
+                      .row
+                        .col-md-12.form-group
+                          label for='wedding_consultation_full_name' class='label-full_name'
+                            | Full name
+                          = f.text_field :full_name, :placeholder => 'Enter your full name', :class => 'form-control form-control-md js-en-field-full-name', required: 'true'
+                      .row
+                        .col-md-12.form-group
+                          label for='wedding_consultation_email' class='label-email'
+                            | Email
+                          = f.text_field :email, :placeholder => 'Enter your email address', type: 'email', :class => 'form-control form-control-md js-en-field-email', required: 'true'
+                      .row
+                        .col-md-12.form-group
+                          label for='wedding_consultation_phone' class='label-phone'
+                            | Phone <span class="hint">(include country code)</span>
+                          = f.text_field :phone, :placeholder => 'Enter your phone number', :class => 'form-control form-control-md js-en-field-phone', required: 'true'
 
-.register-for-session
-  .top-arrow
-  h1
-    | REGISTER FOR A FREE SESSION
-    br
-    | WITH A PROFESSIONAL STYLIST
-    br
-    span style="font-size:0.6666666em" (Plus $20 to spend on your dress)
-  .bottom-arrow
+                      .row
+                        .col-md-12.form-group
+                          label for='wedding_consultation_birthday' class='label-birthday'
+                            | Birthday <span class="hint">(optional)</span>
+                          = f.text_field :birthday, type: 'date', :class => 'form-control form-control-md js-en-field-birthday'
+                      .row
+                        .col-md-12.form-group
+                          label for='wedding_consultation_timezone' class='label-timezone'
+                            | Select your timezone
+                          = f.select :timezone, options_for_select(ActiveSupport::TimeZone.all), { include_blank: true }, :class => 'form-control form-control-md selectbox js-en-field-timezone'
+                      .row
+                        .col-md-12.form-group
+                          label for='wedding_consultation_preference1' class='label-preference1'
+                            | Preferred time #1
+                          = f.select :preference1, options_for_select(["morning", "midday", "afternoon", "evening"]), {include_blank: true}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-1'
+                      .row
+                        .col-md-12.form-group
+                          label for='wedding_consultation_preference2' class='label-preference2'
+                            | Preferred time #2 <span class="hint">(optional)</span>
+                          = f.select :preference2, options_for_select([ "morning", "midday", "afternoon", "evening"]), {include_blank: true}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-2'
+                      .row
+                        .col-md-12.form-group
+                          label for='wedding_consultation_preference3' class='label-preference3'
+                            | Preferred time #3 <span class="hint">(optional)</span>
+                          = f.select :preference3, options_for_select([ "morning", "midday", "afternoon", "evening"]), {include_blank: true}, :class => 'form-control form-control-md selectbox js-en-field-preferred-time-3'
+                      .row
+                        .col-md-12.form-group
+                          .submit
+                            = f.submit "Confirm my booking", class: 'btn btn-black btn-block'
 
-.page-content.contact.style-session
-  .container.relative
-    .form-global
-      = form_for @wedding_consultation, url: wedding_consultation_path, method: :post, html: {class: 'form'} do |f|
-        .row
-          .col-md-12.form-group
-            label Full name
-            = f.text_field :full_name, :class => 'form-control form-control-md'
-        .row
-          .col-md-12.form-group
-            label Email
-            = f.text_field :email, type: 'email', :class => 'form-control form-control-md'
-        .row
-          .col-md-12.form-group
-            label Phone
-            = f.text_field :phone, :class => 'form-control form-control-md'
-            p.hint
-              | (include country code)
-        .row
-          .col-md-12.form-group
-            label date of birth
-            = f.text_field :dob, type: 'date', :class => 'form-control form-control-md'
-        .row
-          .col-md-12.form-group
-            label where do you live
-            = f.text_field :location, :class => 'form-control form-control-md'
-            p.hint (e.g. Sydney, Australia or New York, United States)
-        .row
-          .col-md-12.form-group
-            label Skype ID
-            = f.text_field :skype_id, :class => 'form-control form-control-md'
-            p.hint
-              | (optional - so we can do a video chat session)
-        .row
-          .col-md-12.form-group
-            label Wedding date
-            = f.text_field :dob, type: 'date', :class => 'form-control form-control-md'
-        .row
-          .col-md-12.form-group
-            label Your Wedding Vibe
-            = f.select :info, options_for_select(["Relaxed Bohemian", "Classic", "Formal", "Country", "City Chic", "Vintage", "Opulent"]), {}, :class => 'form-control form-control-md selectbox'
-        .row
-          .col-md-12.form-group
-            label timezone
-            = f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, {}, :class => 'form-control form-control-md selectbox'
-        .row
-          .col-md-12.form-group
-            .submit
-              = f.submit "Apply now", class: 'btn btn-black btn-block'
+                .col-md-12.confirmation.js-en-confirmation
+                  .intro
+                    h3 All done!
+                    p Thank you for your booking request.
+                    p Amber will be in touch shortly to confirm your booking date and time.
+                  .related-nav
+                    p
+                      a href='#{build_taxon_path('New This Week')}'
+                        | <span>Browse our <span class="highlight">Latest Style</span></span> <i class="fa fa-chevron-right"></i>
+                    p
+                      a href='#{best_sellers_path}'
+                        | <span>Take a look at our <span class="highlight">Bestsellers</span></span> <i class="fa fa-chevron-right"></i>
 
-coffee:
-  $ ->
-    placeholder = $('#wedding_consultation_info').attr('placeholder')
-    $('#wedding_consultation_info').on 'focus', ->
-      $(this).attr('placeholder', "")
+        .content-wrapper.col-md-8
+          .content-area
+            .row
+              .intro-txt.col-md-12
+                h3
+                  | Get wedding-ready with a professional stylist
+                p.title-note
+                  | (no purchase required)
+                p
+                  | Whether you have nothing to wear the wedding of the year or simply want some fresh ideas, we're on deck to guide you through some stunning wedding wardrobe choices (that won't upstage the bride). No obligation, just some good advice.
+                p
+                  | Our professional stylist can help you answer these questions:
+            .row
+              .question-boxes
+                .item-wrapper.col-md-4.col-xs-6
+                  .item
+                    p.question
+                      | "What should I wear to an <span class="highlight">outdoor summer wedding</span> in Palm Spring?"
+                    span.author Hanna C, NY
 
-    $('#wedding_consultation_info').on 'blur', ->
-      $(this).attr('placeholder', placeholder)
+                  .item
+                    p.question
+                      | "It's <span class="highlight">black tie</span> - but I don't want to look basic"
+                    span.author Anna B, LA
+
+                  .item-img
+                    = image_tag "landingpages/wedding-consultation/content-thumb-1.jpg", class: 'thumb', alt: 'Styling Session - Fame & Partners'
+
+                  .item
+                    p.question
+                      | "What is the perfect <span class="highlight">beachside wedding look?</span>"
+                    span.author Danielle F, TX
+
+                .item-wrapper.col-md-4.col-xs-6
+                  .item
+                    p.question
+                      | "<span class="highlight">Are boots appropriate?</span>"
+                    span.author Romy S, WA
+
+                  .item-img
+                    = image_tag "landingpages/wedding-consultation/content-thumb-2.jpg", class: 'thumb', alt: 'Styling Session - Fame & Partners'
+
+                  .item
+                    p.question
+                      | "What kind of <span class="highlight">jewelry</span> can I wear with my Dress?"
+                    span.author Lauren W, FL
+
+                  .item-img
+                    = image_tag "landingpages/wedding-consultation/content-thumb-4.jpg", class: 'thumb', alt: 'Styling Session - Fame & Partners'
+
+                .item-wrapper.col-md-4.hidden-xs.visible-md-block.visible-lg-block
+                  .item-img
+                    = image_tag "landingpages/wedding-consultation/content-thumb-3.jpg", class: 'thumb', alt: 'Styling Session - Fame & Partners'
+
+                  .item
+                    p.question
+                      | "I'm invited by a date. I want to <span class="highlight">strike the balance</span> between sexy and classy"
+                    span.author Eliza D, NY
+
+                  .item
+                    p.question
+                      | "Can I match <span class="highlight">black pumps</span> with my IRIS dress?"
+                    span.author Alex M, CA
+
+                  .item
+                    p.question
+                      | "Can I wear a <span class="highlight">red lipstick with a red dress?</span>"
+                    span.author Lisa P, NJ

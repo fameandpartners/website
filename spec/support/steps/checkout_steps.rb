@@ -12,7 +12,19 @@ module Acceptance
 
     step 'I select :country_name country' do |country_name|
       find('#order_bill_address_attributes_country_id_chosen').click
-      click_layered_element(:css, 'li.active-result', text: country_name)
+      find('li.active-result', text: country_name).click
+    end
+
+    step 'I select :country_name country and :state_name state' do |country_name, state_name|
+      find('#order_bill_address_attributes_country_id_chosen').click
+      find('li.active-result', text: country_name).click
+
+      if country_name == 'New Zealand'
+        find('#order_bill_address_attributes_state_name').set(state_name)
+      else
+        find('#order_bill_address_attributes_state_id_chosen').click
+        find('li.active-result', text: state_name).click
+      end
     end
 
     step 'I fill in credit card information:' do |cc_info|

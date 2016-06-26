@@ -66,3 +66,6 @@ bin/spring
 # Ignore sublime files
 *.sublime-project
 *.sublime-workspace
+
+# Ignore node modules
+/node_modules

@@ -190,6 +190,7 @@ FameAndPartners::Application.routes.draw do
     get '/fameweddings/guest' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :guest_bride_page
 
     get '/macys' => 'products/collections#show', :as => :macys
+    get '/shop-social' => 'products/collections#show', :as => :shop_social
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
@@ -289,7 +290,7 @@ FameAndPartners::Application.routes.draw do
     get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
     get '/our-customer-service-improvements', to: redirect('/from-our-ceo')
-    get '/from-our-ceo' => 'statics#yelp', :as => :yelp
+    get '/from-our-ceo' => 'statics#from_our_ceo', :as => :from_our_ceo
     get '/how-it-works', to: redirect("/why-us")
     get '/size-guide'  => 'statics#size_guide', :as => :size_guide
     get '/growth-plan'  => 'statics#growth_plan', :as => :growth_plan
@@ -321,10 +322,8 @@ FameAndPartners::Application.routes.draw do
     get '/styling-session'  => 'style_sessions#new', as: :styling_session
     resource 'style-session', as: 'style_session', only: [:create]
 
-    get '/wedding-consultation' => 'wedding_consultations#new'
-    resource 'wedding-consultation', as: 'wedding_consultation', only: [:new, :create] do
-      get 'success'
-    end
+    get '/wedding-consultation' => 'wedding_consultations#new', as: :wedding_consultation
+    resource 'wedding-consultation', as: 'wedding_consultation', only: [:create]
 
     get '/contact/new', to: redirect('/contact'), as: :old_contact_page
     resource 'contact', as: 'contact', only: [:new, :create], path_names: { new: '/' } do
@@ -333,8 +332,8 @@ FameAndPartners::Application.routes.draw do
     post '/about' => 'contacts#join_team', as: :join_team
 
     # return form
-    get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf')
-    get '/returns', to: redirect('/faqs#collapse-returns-policy')
+    get '/returnsform', to: redirect('http://www.fameandpartners.com/assets/returnform.pdf'), as: 'returns_form'
+    get '/returns', to: redirect('/faqs#collapse-returns-policy'), as: 'returns_policy'
 
     # External URLs
     get '/trendsetters', to: redirect('http://woobox.com/pybvsm')
@@ -438,9 +437,9 @@ FameAndPartners::Application.routes.draw do
   # Mysterious URLs
   #################
 
-  get '/undefined',    to: 'mysterious_route#undefined'
-  get '/au/undefined', to: 'mysterious_route#undefined'
-  get '/1000668',      to: 'mysterious_route#undefined'
+  get '/undefined',    to: 'errors/mysterious_route#undefined'
+  get '/au/undefined', to: 'errors/mysterious_route#undefined'
+  get '/1000668',      to: 'errors/mysterious_route#undefined'
 
   #########
   # Widgets
@@ -521,6 +520,8 @@ FameAndPartners::Application.routes.draw do
       get 'stock_invent/auth'           => 'stock_invent#google_auth',   as: :stock_invent_access_token_request
       get 'stock_invent/auth_callback'  => 'stock_invent#auth_callback', as: :stock_invent_google_auth_callback
 
+      get 'export_product_taxons_csv'  => 'products#export_product_taxons', as: :export_product_taxons_csv, defaults: { format: :csv }
+
       resources :products do
         resources :customisation_values
         resources :inspirations do
@@ -547,4 +548,6 @@ FameAndPartners::Application.routes.draw do
 
   mount AdminUi::Engine, at: '/fame_admin'
   mount Revolution::Engine => '/'
+
+  match '*path', to: 'errors/invalid_format#capture_php', constraints: lambda { |request| request.path[/\.php$/] }
 end

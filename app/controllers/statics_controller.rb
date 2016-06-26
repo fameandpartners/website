@@ -29,7 +29,7 @@ class StaticsController < ApplicationController
     @description = "Terms & Conditions"
   end
 
-  def yelp
+  def from_our_ceo
     @title = "From our CEO " + default_seo_title
     @description = "From our CEO"
   end

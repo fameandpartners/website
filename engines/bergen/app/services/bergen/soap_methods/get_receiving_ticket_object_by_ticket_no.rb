@@ -15,7 +15,8 @@ module Bergen
       end
 
       def result
-        response[:get_receiving_ticket_object_by_ticket_no_response][:get_receiving_ticket_object_by_ticket_no_result][:receiving_ticket_by_ticket_no][:receiving_ticket]
+        response_body = response[:get_receiving_ticket_object_by_ticket_no_response][:get_receiving_ticket_object_by_ticket_no_result][:receiving_ticket_by_ticket_no]
+        response_body && response_body[:receiving_ticket]
       end
 
       private
