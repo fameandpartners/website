@@ -117,9 +117,9 @@
 //= require partials/fitgau_reminder
 
 //--------------------------------
-// FAQs
+// Header
 //--------------------------------
-//= require partials/helpers/collapse_toggle
+//= require partials/header
 
 jQuery(document).ready(function($){
   $('body').addClass('ready');
