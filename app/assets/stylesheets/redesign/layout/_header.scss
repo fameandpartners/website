@@ -1,7 +1,7 @@
 /* [Header]
 -------------------------------------------------------*/
 header.main {
-  $logo-width: 325px;
+  $logo-width: 265px;
 
   .banner-wrap {
     width: 100%;
@@ -41,29 +41,15 @@ header.main {
 
   .logo-wrap {
     position: relative;
-    display: block;
-    width: $logo-width;
-    height: 50px;
+    display: inline-block;
     margin: 0 auto;
 
     .logo{
-      
+
       img {
-        display: block;
-        width: 100%;
-        height: auto;
+        width: $logo-width;
       }
 
-    }
-
-    .tagline {
-      width: 100%;
-      margin-top: 10px;
-      text-align: center;
-      text-transform: uppercase;
-      font-family: $font-heading;
-      font-size: 1em;
-      color: $c-neutral-black;
     }
 
   }
@@ -116,7 +102,7 @@ header.main {
     }
 
     @media (max-width: $iphone6-width) {
-    
+
       & .copy {
         display: none;
       }
