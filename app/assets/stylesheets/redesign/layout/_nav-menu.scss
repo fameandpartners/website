@@ -5,6 +5,11 @@
   margin-left: 10%;
   text-transform: none;
   background: $c-neutral-white;
+  padding: 0 20px 20px 30px;
+
+  .panel-highlight {
+    margin: 0;
+  }
 
   .collection-col{
     padding-left: 10px;
