@@ -4,11 +4,15 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile ~/.gitignore_global
 
-# Ignore bundler config
-/.bundle
+# Do not ignore bundler config, since gems are vendored for deploys
+#/.bundle
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
+
+# Ignore local dotenv and default
+.env.local
+.env
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
@@ -63,6 +67,13 @@ bin/spring
 # Cached bash Autocompletion of rake tasks
 .rake_tasks~
 
+
 # Ignore sublime files
 *.sublime-project
 *.sublime-workspace
+
+# Ignore OpsCare.yml
+OpsCare.yml
+
+# Ignore node modules
+/node_modules

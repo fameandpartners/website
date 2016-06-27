@@ -1,21 +1,27 @@
 # application base
-configatron.host                    = 'fameandpartners.com'
+configatron.host                    = ENV['APP_HOST']
 configatron.noreply                 = 'Fame & Partners<noreply@fameandpartners.com>'
 configatron.admin                   = 'team@fameandpartners.com'
 configatron.app_name                = 'Fame And Partners'
-configatron.sitemap_url             = 'https://d1sd72h9dq237j.cloudfront.net/sitemap/sitemap.xml.gz'
+configatron.sitemap_url             = "#{ENV['RAILS_ASSET_HOST']}/sitemap/sitemap.xml.gz"
 configatron.blog_host               = 'fameandpartners.tumblr.com'
 configatron.days_delivery_emergency = 0
+configatron.secret_token            = ENV['RAILS_SECRET_KEY_BASE']
+
+configatron.sentry do |sentry|
+  sentry.public = ENV['SENTRY_PUBLIC']
+  sentry.secret = ENV['SENTRY_SECRET']
+end
 
 # assets
 configatron.aws.enabled    = false
 configatron.aws.bucket     = ''
 configatron.aws.access_key = ''
 configatron.aws.secret_key = ''
-configatron.aws.host       = 'd1sd72h9dq237j.cloudfront.net' # bucket: fameandpartners
-configatron.asset_host     = 'd1h7wjzwtdym94.cloudfront.net'
+configatron.aws.host       = ENV['RAILS_ASSET_HOST'] # Production and Marketing Buckets are on the same CloudFront Distribution
+configatron.asset_host     = ENV['RAILS_ASSET_HOST'] # Production and Marketing Buckets are on the same CloudFront Distribution
 
-configatron.typekit_id = 'kur6crm'
+configatron.typekit_id = ENV['TYPEKIT_ID']
 
 configatron.links do |links|
   links.twitter   = 'https://twitter.com/fameandpartners'
@@ -33,9 +39,8 @@ configatron.cache.expire do |expire|
   expire.long     = 1.day
 end
 
-# Test Environment
-configatron.customerio.site_id    = '14c8952c36a16f4c20c6'
-configatron.customerio.secret_key = 'f1fd531b4d1ac65ca86c'
+configatron.customerio.site_id    = ENV['CUSTOMERIO_SITE_ID']
+configatron.customerio.secret_key = ENV['CUSTOMERIO_SECRET_KEY']
 
 configatron.order_production_emails = ['production@fameandpartners.dev']
 
@@ -51,42 +56,46 @@ end
 configatron.email_marketing.store_information = 1.month
 
 configatron.mailgun.mailbox do |mailgun|
-  mailgun.domain   = 'fameandpartners.com.mailgun.org'
-  mailgun.username = 'postmaster@fameandpartners.com.mailgun.org'
-  mailgun.password = '0mqgbkbz34n1'
+  mailgun.domain   = ENV['SMTP_DOMAIN']
+  mailgun.username = ENV['SMTP_USERNAME']
+  mailgun.password = ENV['SMTP_PASSWORD']
 end
 
 configatron.mailchimp do |mailchimp|
-  mailchimp.api_key = '0340ea09d6c21efd808cce3d9c9440f6-us7'
-  mailchimp.list_id = '48f8d360f7'
+  mailchimp.api_key = ENV['MAILCHIMP_API_KEY']
+  mailchimp.list_id = ENV['MAILCHIMP_LIST_ID']
 end
 
-configatron.redis_host = ::FameAndPartners.yaml_config("redis.local.yml")[Rails.env][:hosts]
-configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
+configatron.redis_options = { namespace: 'fame_and_partners', url: "#{ENV['REDIS_URL']}/0" }
 
-configatron.es_url = ::FameAndPartners.yaml_config("elasticsearch.local.yml")[Rails.env][:hosts]
+configatron.es_url = ENV['ES_URL']
 
 configatron.elasticsearch.indices do |index|
   index.spree_products = :spree_products
   index.color_variants = :color_variants
 end
 
-configatron.pin_payments.usd_gateways = %W{pk_NxLgEbIIaWwjKEqUnTd6oA pk_FJWiUA3rQW1uXZIg3LwMKQ}
+configatron.bergen do |bergen|
+  bergen.account_id = ENV['BERGEN_ACCOUNT_ID']
+  bergen.username   = ENV['BERGEN_USERNAME']
+  bergen.password   = ENV['BERGEN_PASSWORD']
+end
+
+configatron.pin_payments.usd_gateways = [
+  ENV['PINS_USD_GATEWAY_1'],
+  ENV['PINS_USD_GATEWAY_2']
+]
 
 configatron.site_version_detector_strategy = :path
+
+configatron.aws.s3 do |s3|
+  s3.bucket            = ENV['AWS_S3_BUCKET']
+  s3.region            = ENV['AWS_S3_REGION']
+end
 
 case Rails.env.to_sym
 when :development
   configatron.site_version_detector_strategy = :subdomain
-
-  configatron.host = 'localhost.localdomain'
-
-  configatron.aws.s3 do |s3|
-    s3.bucket            = 'dev-fameandpartners'
-    s3.region            = 'us-east-1'
-    s3.access_key_id     = 'AKIAJ7U3MBOEHSMUAOHQ'
-    s3.secret_access_key = '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'
-  end
 
   configatron.cache.expire do |expire|
     expire.quickly  = 1.second
@@ -94,78 +103,21 @@ when :development
     expire.long     = 60.seconds
   end
 
-  configatron.mailgun.mailbox do |mailgun|
-    mailgun.domain   = ''
-    mailgun.username = ''
-    mailgun.password = ''
-  end
-
   configatron.elasticsearch.indices do |index|
     index.spree_products = :spree_products_development
     index.color_variants = :color_variants_development
   end
 
-  configatron.es_url = 'http://localhost:9200'
-
-  configatron.redis_options = { namespace: "fame_and_partners_#{Rails.env}", url: "redis://#{configatron.redis_host}/0" }
+  configatron.redis_options = { namespace: 'fame_and_partners_development', url: "#{ENV['REDIS_URL']}/0" }
 
 when :staging
-  configatron.host      = 'stage.fameandpartners.com'
-
-  configatron.mailgun.mailbox do |mailbox|
-    mailbox.domain   = '23st2ages.com'
-    mailbox.username = 'mailer@23stages.com'
-    mailbox.password = '80kmdvXlufsZOW'
-  end
 
 when :preproduction
-  configatron.host      = 'preprod.fameandpartners.com'
-
-  configatron.aws.s3 do |s3|
-    s3.bucket            = 'preprod-fameandpartners'
-    s3.region            = 'us-west-2'
-    s3.access_key_id     = 'AKIAJ7U3MBOEHSMUAOHQ'
-    s3.secret_access_key = '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'
-  end
-  configatron.aws.host = "s3-us-west-2.amazonaws.com/preprod-fameandpartners"
-
-  configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
-  configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
-
-  configatron.es_url = 'https://readwrite:F0undR3adWrite123@21b09bd2aadd9ba50c9d2a9658dc99e7.us-west-1.aws.found.io:9243'
-
-  configatron.asset_host = "assets.fameandpartners.com/preprod"
 
 when :production
   configatron.site_version_detector_strategy = :top_level_domain
-  configatron.host      = 'www.fameandpartners.com'
 
   configatron.order_production_emails = ['fameandpartners@hotmail.com', 'orders@fameandpartners.com.cn']
-
-  configatron.aws.s3 do |s3|
-    s3.bucket            = 'fameandpartners'
-    s3.region            = 'ap-southeast-2'
-    s3.access_key_id     = 'AKIAJ7U3MBOEHSMUAOHQ'
-    s3.secret_access_key = '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'
-  end
-
-  # Production Environment
-  configatron.customerio.site_id    = '34c86b93c4a9c39ca8f8'
-  configatron.customerio.secret_key = 'c3b8c0411969f72ec46b'
-
-  configatron.redis_host = ::FameAndPartners.yaml_config("redis.yml")[Rails.env][:hosts]
-  configatron.redis_options = { namespace: 'fame_and_partners', url: "redis://#{configatron.redis_host}/0" }
-
-  # configatron.es_url = 'https://b13gy7hlm3:brc6ozc6oi@production-4224690387.us-east-1.bonsai.io'
-  # configatron.es_url = YAML::load(File.open("#{Rails.root}/config/elasticsearch.yml"))[Rails.env][:hosts]
-  configatron.es_url = 'https://production:F0undR3adWrite123@c019a72e2bcb614a3809da7bf7d583c0.us-east-1.aws.found.io:9243'
-
-  configatron.typekit_id = 'day0prb'
-
-  configatron.mailchimp do |mailchimp|
-    mailchimp.api_key = '0340ea09d6c21efd808cce3d9c9440f6-us7'
-    mailchimp.list_id = '77e91e8697'
-  end
 
 when :test
   configatron.site_version_detector_strategy = :subdomain
@@ -175,5 +127,5 @@ when :test
     index.color_variants = :color_variants_test
   end
 
-  configatron.redis_options = { namespace: "fame_and_partners_#{Rails.env}", url: "redis://#{configatron.redis_host}/0" }
+  configatron.redis_options = { namespace: 'fame_and_partners_test', url: "#{ENV['REDIS_URL']}/0" }
 end
