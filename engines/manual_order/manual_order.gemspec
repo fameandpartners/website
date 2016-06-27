@@ -16,8 +16,12 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*'] + ['Rakefile', 'README.rdoc']
   s.test_files = Dir['test/**/*']
 
+  # Base
   s.add_dependency 'rails', '~> 3.2.22'
-  # s.add_dependency "jquery-rails"
 
-  s.add_development_dependency 'sqlite3'
+  # UI
+  s.add_dependency 'slim'
+  s.add_dependency 'simple_form'
+  s.add_dependency 'reform'
+  s.add_dependency 'chosen-rails'
 end
