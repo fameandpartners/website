@@ -63,4 +63,7 @@ AdminUi::Engine.routes.draw do
   end
 
   root to: 'dashboard#index'
+
+  mount ManualOrder::Engine, at: '/'
+
 end

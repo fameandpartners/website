@@ -7,7 +7,7 @@
   .panel {
     border-color: $c-neutral-4;
     border: 0;
-    border-bottom: 0;
+    border-bottom: 1px solid $c-neutral-9;
 
     > .panel-heading {
       background: $c-neutral-white;
@@ -31,7 +31,6 @@
     color: $c-neutral-black;
     font-size: 1.3rem;
     text-transform: uppercase;
-    text-decoration: underline;
 
     .btn-open-close {
       @extend .btn-close;
@@ -39,8 +38,6 @@
     }
 
     &.collapsed {
-      border-bottom: 1px solid $c-neutral-9;
-      text-decoration: none;
 
       &:hover {
         color: $c-neutral-black;
@@ -61,26 +58,13 @@
   }
 
   .panel-body {
-    padding: 0 0 15px 0;
+    padding: 0 0 25px 0;
     border: 0;
     border-top-color: transparent;
   }
 
-  .panel-collapse.in {
-
-    .panel-title {
-      border: none;
-    }
-
-    .panel-body {
-      border-bottom: 1px solid $c-neutral-9;
-    }
-
-  }
-
   p {
-    margin-top: 20px;
-    margin-bottom: 0;
+    margin-bottom: 20px;
   }
 
   .highlight {

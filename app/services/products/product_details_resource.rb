@@ -121,7 +121,7 @@ class Products::ProductDetailsResource
     end
 
     def product_url
-      "//#{ configatron.host}#{product_path}"
+      "#{configatron.host}#{product_path}"
     end
 
     # sizes
@@ -134,7 +134,7 @@ class Products::ProductDetailsResource
         all_sizes = {}
         product_variants.each do |variant_info|
           if available_sizes_values.include?(variant_info[:size_value].to_i)
-            all_sizes[variant_info[:size_id]] ||= { 
+            all_sizes[variant_info[:size_id]] ||= {
               id: variant_info[:size_id],
               name: variant_info[:size],
               title: "#{ site_version.size_settings.locale_code } #{ variant_info[:size_presentation].to_i }",
@@ -189,7 +189,7 @@ class Products::ProductDetailsResource
     # extra sizes - has extra pay
     def extra_product_sizes
       return [] if product_has_free_extra_sizes?
-      sizes = product_sizes.select{|size| size[:value] >= extra_size_start && size[:value] <= default_size_end } 
+      sizes = product_sizes.select{|size| size[:value] >= extra_size_start && size[:value] <= default_size_end }
       sizes.map {|size| size[:extra_price] = true; size }
     end
 
@@ -216,7 +216,7 @@ class Products::ProductDetailsResource
         all_colors = {}
 
         product_variants.each do |variant_info|
-          all_colors[variant_info[:color_id]] ||= { 
+          all_colors[variant_info[:color_id]] ||= {
             id: variant_info[:color_id],
             name: variant_info[:color],
             title: variant_info[:color_presentation],
@@ -228,7 +228,7 @@ class Products::ProductDetailsResource
         all_colors.values.sort_by{|item| item[:value] }
       end
     end
-    
+
     def extra_product_color_price
       Spree::Price.new(amount: 16, currency: site_version.currency)
     end
@@ -277,5 +277,5 @@ class Products::ProductDetailsResource
         result[value.id] = value.incompatibilities.map(&:incompatible_id)
       end
       result
-    end 
+    end
 end
