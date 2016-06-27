@@ -1041,58 +1041,54 @@ ul.secondary.pull-right {
   @include transition(height 0.4s);
 }
 
-.rect{
-  background-color: white;
-  width: 70%;
-  margin-left: 15%;
+.rect-wrapper {
+  background: $c-neutral-white;
   position: absolute;
+  width: 100%;
+}
+
+.rect{
+  background-color: $c-neutral-white;
   z-index: 101;
-
-  visibility: hidden;
-  opacity: 0;
-  left: -9999em;
-
+  display: none;
   margin-top: -1px;
-  border: solid $c-neutral-10 1px;
-  border-top-color: $c-neutral-4;
 
   &.active {
-    visibility: visible;
-    opacity: 1;
-    left: auto;
+    display: block;
   }
 
 }
 
-.nav-menu-container{
-  .moodboards-area, .my-account{
+.nav-menu-container {
+
+  .moodboards-area, .my-account {
     text-decoration: none;
     color: $c-neutral-white;
   }
-  #home-menu{
-    a{
+
+  #home-menu {
+    margin: 30px 0;
+
+    a {
       color: black;
       text-decoration: none;
     }
-    border-color: #d7d7d7;
-    border-width: 1px;
-    border-style: solid;
-    background-color: white;
-    border-left: 0;
-    border-right: 0;
+
+    background-color: $c-neutral-white;
     font-weight: 700;
 
-    span{
+    span {
       display: inline-block;
       height: 30px;
-      margin-top: -1px;
-      margin-bottom: -2px;
-      padding: 0 15px;
       line-height: 30px;
       font-size: 1.2rem;
-      color: #000;
+      color: $c-neutral-black;
       cursor: pointer;
       position: relative;
+
+      &:not(.logo) {
+        margin: 0 15px;
+      }
 
       em {
         font-size: 1.4rem;
@@ -1103,18 +1099,15 @@ ul.secondary.pull-right {
 
     }
 
-    span:hover:not(.search-wrapper) {
+    .nav-main-menu {
 
-      &,
-      & > a {
-        background-color: #003647;
-        color: white;
+      span:hover, span.active {
+        border-bottom: 2px solid $c-neutral-black;
       }
 
     }
-    span:last-child:hover{
-      background-color: transparent;
-    }
+
+
     #search{
       .nav-mobile-logo{
         height: 15px;
