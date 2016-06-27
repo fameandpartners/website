@@ -10,6 +10,9 @@ javascript:
     window.location = "#{ after_quiz_redirect_url }";
   };
 
+ruby:
+  step_total = @quiz.questions.map(&:step).uniq.count + (current_spree_user ? 0 : 1)
+
 .page-content.quiz-box#style_quiz
   .container.main-container-wrap
     .col-md-4.quiz-wrapper-box
@@ -18,7 +21,7 @@ javascript:
           ' QUESTION
           span.current 1
           | /
-          span.total = @quiz.questions.map(&:step).uniq.count
+          span.total = step_total
         .progress
           .progress-bar style="width: 0%;"
         .row.inner-btn-wrap
@@ -31,6 +34,10 @@ javascript:
             .step.film-frame id="step-#{step}"
               - questions.each do |question|
                 .question id="question-#{question.id}"
-                  = f.fields_for "questions][#{question.id}" do |ff|
+                  = f.fields_for "questions[#{question.id}]" do |ff|
                     = ff.fields_for :answer do |fff|
                       = render "questions/#{ question.partial}", form: fff, question: question
+          - unless current_spree_user
+            .step.film-frame id="step-email"
+              = f.fields_for 'user' do |ff|
+                = render 'questions/email', form: ff

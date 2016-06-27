@@ -100,6 +100,12 @@ class StyleQuizController < ApplicationController
 
     style_profile.save
 
+    if style_profile.user
+      track_user_email(style_profile.user.email)
+    else
+      track_user_email(params.try(:[], :quiz).try(:[], :user).try(:[], :email))
+    end
+
     if taxons.present?
       taxons.group_by(&:id).each do |id, group|
         style_profile.user_style_profile_taxons.create do |object|
@@ -126,4 +132,11 @@ class StyleQuizController < ApplicationController
     "#{ style_profile_url }?pc=Zm9ybWFsMjU=&amp;h=SEVZLCBIRVJFJ1MgJDIwIEZPUiBZT1UgVE8gU1BFTkQgT04gVEhFIFBFUkZFQ1QgRFJFU1Mh&amp;m=IFVTRTogPHN0cm9uZz5HVVJMUVVJWjwvc3Ryb25nPiBBVCBDSEVDS09VVA==&amp;t=5&amp;s=Z3VybF9jb21fbW9kYWw=&amp;"
   end
   helper_method :after_quiz_redirect_url
+
+  private
+
+  def track_user_email(email)
+    return unless email
+    Marketing::CustomerIOEventTracker.new.identify_user_by_email(email, current_site_version)
+  end
 end
