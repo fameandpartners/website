@@ -14,6 +14,8 @@
 //= require libs/jquery.dotdotdot.min
 //= require libs/jquery.mlens.min
 
+//= require modernizr-custom
+
 // React
 
 // Adding es5-shim due to PhantomJS
@@ -66,6 +68,7 @@
 //= require partials/helpers/truncate
 //= require partials/helpers/bs-tabs
 //= require partials/helpers/collapse_toggle
+//= require partials/helpers/form_submit_ajax_validation
 
 //-----------------------------------
 // Show old quiz in popup with iframe
@@ -79,12 +82,6 @@
 //= require partials/email_capture_modal
 //= require partials/helpers/tracker.js
 //= require partials/helpers/error_messages.js.coffee
-
-//-----------------------------
-// Styling Session page
-//-----------------------------
-//= require partials/styling_session_page
-//= require partials/wedding_consultation_page
 
 //-----------------------------
 // Product details with related
@@ -115,11 +112,6 @@
 
 // campaigns
 //= require partials/fitgau_reminder
-
-//--------------------------------
-// FAQs
-//--------------------------------
-//= require partials/helpers/collapse_toggle
 
 jQuery(document).ready(function($){
   $('body').addClass('ready');

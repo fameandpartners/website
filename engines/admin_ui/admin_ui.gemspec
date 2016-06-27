@@ -28,11 +28,14 @@ Gem::Specification.new do |s|
   s.add_dependency "datagrid"
   s.add_dependency "reform"
   s.add_dependency "simple_form"
+  s.add_dependency "chosen-rails"
 
   # Theme
   # s.add_dependency "inspinia-rails"
   s.add_dependency "font-awesome-rails"
-  s.add_dependency "chosen-rails"
+
+  # Engines
+  s.add_dependency "manual_order"
 
   # Even with this here, the helper is not loaded unless the main app
   # also inlcudes 'active_link_to' in it's Gemfile.

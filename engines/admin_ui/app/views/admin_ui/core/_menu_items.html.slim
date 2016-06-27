@@ -1,21 +1,22 @@
-= menu_item root_path, 'Dashboard', icon: 'dashboard', exact: true
+= menu_item admin_ui.root_path, 'Dashboard', icon: 'dashboard', exact: true
 
-= menu_item item_returns_path, 'Returns', icon: 'thumbs-down', exact: true
-= menu_item variants_path, 'Variants', icon: 'cube'
-= menu_item product_colors_path, 'Color Variants', icon: 'eyedropper'
+= menu_item admin_ui.item_returns_path, 'Returns', icon: 'thumbs-down', exact: true
+= menu_item manual_order.manual_orders_path, 'Manual Orders', icon: 'thumbs-up'
+= menu_item admin_ui.variants_path, 'Variants', icon: 'cube'
+= menu_item admin_ui.product_colors_path, 'Color Variants', icon: 'eyedropper'
 
-li class=active_link_to_class(root_path, active: /backend/)
+li class=active_link_to_class(admin_ui.root_path, active: /backend/)
   a href="#"
     i.fa.fa-database
     span.nav-label Backend
     span.fa.arrow
   ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
-    = active_link_to 'Caches', backend_caches_path, wrap_tag: :li
-    = active_link_to 'Sidekiq', backend_sidekiq_path, wrap_tag: :li
-    = active_link_to 'Indexes', backend_product_indexes_path, wrap_tag: :li
-    = active_link_to 'Feature Flags', backend_features_path, wrap_tag: :li
-    = active_link_to 'Return Requests', backend_return_requests_path, wrap_tag: :li
-    = active_link_to 'Manual Returns Spreadsheet', backend_manually_managed_returns_path, wrap_tag: :li
+    = active_link_to 'Caches', admin_ui.backend_caches_path, wrap_tag: :li
+    = active_link_to 'Sidekiq', admin_ui.backend_sidekiq_path, wrap_tag: :li
+    = active_link_to 'Indexes', admin_ui.backend_product_indexes_path, wrap_tag: :li
+    = active_link_to 'Feature Flags', admin_ui.backend_features_path, wrap_tag: :li
+    = active_link_to 'Return Requests', admin_ui.backend_return_requests_path, wrap_tag: :li
+    = active_link_to 'Manual Returns Spreadsheet', admin_ui.backend_manually_managed_returns_path, wrap_tag: :li
 
 li class=active_link_to_class('', active: /content/)
   a href="#"
@@ -23,9 +24,9 @@ li class=active_link_to_class('', active: /content/)
     span.nav-label Content
     span.fa.arrow
   ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
-    = active_link_to 'Pages', content_pages_path, wrap_tag: :li
+    = active_link_to 'Pages', admin_ui.content_pages_path, wrap_tag: :li
 
-= menu_item preferences_path, 'Preferences', icon: 'cog', exact: true
+= menu_item admin_ui.preferences_path, 'Preferences', icon: 'cog', exact: true
 
 li class=active_link_to_class('', active: /reports/)
   a href="#"
@@ -33,17 +34,17 @@ li class=active_link_to_class('', active: /reports/)
     span.nav-label Reports
     span.fa.arrow
   ul.nav.nav-second-level.collapse aria-expanded="false" style="height: 0px;"
-    = active_link_to 'Body Shape Calculator Results', reports_body_shape_calculator_results_path, wrap_tag: :li
-    = active_link_to 'Coupon Orders', reports_coupon_adjusted_orders_path, wrap_tag: :li
-    = active_link_to 'Factory Fault Returns', reports_factory_faults_path, wrap_tag: :li
-    = active_link_to 'Order Totals', reports_order_totals_path, wrap_tag: :li
-    = active_link_to 'Payments', reports_payments_path, wrap_tag: :li
-    = active_link_to 'Product Numbers', reports_product_numbers_path, wrap_tag: :li
-    = active_link_to 'Return Shoppers', reports_return_shoppers_path, wrap_tag: :li
-    = active_link_to 'Sale Items', reports_sale_items_path, wrap_tag: :li
-    = active_link_to 'Size Normalisations', reports_size_normalisations_path, wrap_tag: :li
-    = active_link_to 'Daily Orders (China)', reports_daily_orders_path, wrap_tag: :li
+    = active_link_to 'Body Shape Calculator Results', admin_ui.reports_body_shape_calculator_results_path, wrap_tag: :li
+    = active_link_to 'Coupon Orders', admin_ui.reports_coupon_adjusted_orders_path, wrap_tag: :li
+    = active_link_to 'Factory Fault Returns', admin_ui.reports_factory_faults_path, wrap_tag: :li
+    = active_link_to 'Order Totals', admin_ui.reports_order_totals_path, wrap_tag: :li
+    = active_link_to 'Payments', admin_ui.reports_payments_path, wrap_tag: :li
+    = active_link_to 'Product Numbers', admin_ui.reports_product_numbers_path, wrap_tag: :li
+    = active_link_to 'Return Shoppers', admin_ui.reports_return_shoppers_path, wrap_tag: :li
+    = active_link_to 'Sale Items', admin_ui.reports_sale_items_path, wrap_tag: :li
+    = active_link_to 'Size Normalisations', admin_ui.reports_size_normalisations_path, wrap_tag: :li
+    = active_link_to 'Daily Orders (China)', admin_ui.reports_daily_orders_path, wrap_tag: :li
 
-= menu_item refund_requests_path, 'Refund Requests', icon: 'dollar'
+= menu_item admin_ui.refund_requests_path, 'Refund Requests', icon: 'dollar'
 = menu_item spree.admin_path, 'Spree Admin', icon: 'shopping-cart'
 = menu_item main_app.root_path, 'Website', icon: 'globe', exact: true

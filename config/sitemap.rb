@@ -6,12 +6,14 @@
 #
 
 unless Rails.env.development?
-  SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(
-      aws_access_key_id:     configatron.aws.s3.access_key_id,
-      aws_secret_access_key: configatron.aws.s3.secret_access_key,
-      fog_provider:          'AWS',
-      fog_directory:         configatron.aws.s3.bucket,
-      fog_region:            configatron.aws.s3.region
+  SitemapGenerator::Sitemap.adapter = SitemapGenerator::FogAdapter.new(
+    fog_credentials: {
+      use_iam_profile: true,
+      provider:        'AWS',
+      region:          configatron.aws.s3.region
+    },
+    fog_host:        configatron.aws.host,
+    fog_directory:   configatron.aws.s3.bucket,
   )
 end
 
@@ -19,7 +21,7 @@ SitemapGenerator::Interpreter.send :include, PathBuildersHelper
 
 SitemapGenerator::Interpreter.class_eval do
   def site_version_default_host(site_version)
-    url = "https://#{configatron.host}"
+    url = "#{configatron.host}"
     detector.site_version_url(url, site_version).chomp('/')
   end
 
@@ -30,8 +32,8 @@ end
 
 sitemap_options = {
     compress:      Rails.env.production?,
-    default_host:  "https://#{configatron.host}",
-    sitemaps_host: "https://#{configatron.aws.host}",
+    default_host:  "#{configatron.host}",
+    sitemaps_host: "#{configatron.aws.host}",
     include_root:  false,
     sitemaps_path: 'sitemap'
 }

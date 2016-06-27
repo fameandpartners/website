@@ -1,27 +1,28 @@
 class FameChain
   include ActiveModel::Validations
 
-  attr_accessor :name, :email, :blog, :facebook, :facebook_size, :instagram, :instagram_size, :pinterest, :pinterest_size, :other, :to_key
+  attr_accessor :name,
+                :email,
+                :blog,
+                :facebook,
+                :facebook_size,
+                :instagram,
+                :instagram_size,
+                :pinterest,
+                :pinterest_size,
+                :other,
+                :to_key
 
-  validates :name, presence: true
-  validates :email, format: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i, presence: true
+  validates_presence_of :name, :email
+  validates_format_of :email, with: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
 
   def initialize(attributes = {})
     attributes.each do |name, value|
-      send("#{name}=", value)
+      public_send("#{name}=", value)
     end
   end
 
-  def persisted?
-    false
-  end
-
-  def send_request
-    if self.valid?
-      FameChainMailer.fame_chain(self).deliver
-      true
-    else
-      false
-    end
+  def to_key
+    nil
   end
 end

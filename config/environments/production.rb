@@ -1,4 +1,8 @@
 FameAndPartners::Application.configure do
+
+  # Enable the logstasher logs for the current environment
+  config.logstasher.enabled = true
+  config.logstasher.suppress_app_log = false
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -12,7 +16,6 @@ FameAndPartners::Application.configure do
   config.serve_static_assets = false
 
   # Compress JavaScripts and CSS
-  #config.assets.compress = true
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
@@ -44,16 +47,18 @@ FameAndPartners::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  # config.action_controller.asset_host = "http://assets.example.com"
+  config.action_controller.asset_host = ENV['RAILS_ASSET_HOST']
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( storefront.js application_redesign.css main_nav_widget.css html5.js ie.css widgets/site_navigations.css)
+  config.assets.precompile += %w( storefront.js application_redesign.css main_nav_widget.css html5.js ie.css widgets/site_navigations.css quiz.css quiz.js)
 
   # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.raise_delivery_errors = true
 
-  config.action_mailer.default_url_options = { :host => 'www.fameandpartners.com' }
-  config.action_mailer.asset_host = 'http://www.fameandpartners.com'
+  config.action_mailer.default_url_options = { :host => ENV['APP_HOST'] }
+
+  # config.action_mailer.asset_host = ENV['RAILS_ASSET_HOST']
+  config.action_mailer.asset_host = 'https://www.fameandpartners.com' # TODO: hardcoded for the moment
 
   # Enable threaded mode
   # config.threadsafe!
@@ -65,10 +70,10 @@ FameAndPartners::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  # Log the query plan for queries taking more than this (works
-  # with SQLite, MySQL, and PostgreSQL)
-  # config.active_record.auto_explain_threshold_in_seconds = 0.5
-
   # Use S3 for storing attachments
   config.use_s3 = true
+
+  config.skip_mail_delivery = ENV['SKIP_MAIL_DELIVERY'] == 'true'
+
+  config.react.variant = :production
 end

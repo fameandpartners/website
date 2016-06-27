@@ -7,7 +7,7 @@ describe Spree::Gateway::Pin do
   context 'US' do
 
     before do
-      expect(gateway).to receive(:preferred_publishable_key).and_return('pk_FJWiUA3rQW1uXZIg3LwMKQ')
+      expect(gateway).to receive(:preferred_publishable_key).and_return('obtain-test-gateway-from-mngr')
     end
 
     it 'USD gateway' do
@@ -18,7 +18,7 @@ describe Spree::Gateway::Pin do
   context 'AUD' do
 
     before do
-      expect(gateway).to receive(:preferred_publishable_key).and_return('aljsbhjkl234jklhasdjlaghsd')
+      expect(gateway).to receive(:preferred_publishable_key).and_return('anything-else-does-not-matter')
     end
 
     it 'USD gateway' do

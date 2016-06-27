@@ -1,0 +1,10 @@
+\#*
+*~
+.#*
+.DS_Store
+coverage
+Gemfile.lock
+tmp
+pkg
+spec/dummy
+.rvmrc
