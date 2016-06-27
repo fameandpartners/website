@@ -74,3 +74,6 @@ bin/spring
 
 # Ignore OpsCare.yml
 OpsCare.yml
+
+# Ignore node modules
+/node_modules
