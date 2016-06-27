@@ -62,7 +62,7 @@ class Spree::Sale < ActiveRecord::Base
   end
 
   def mega_menu_image_url
-    "//#{configatron.asset_host}/sale/#{name.downcase}.jpg"
+    "#{configatron.asset_host}/sale/#{name.downcase}.jpg"
   end
 
   def banner_images

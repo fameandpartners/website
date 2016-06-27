@@ -100,6 +100,17 @@ GIT
       omniauth-twitter
       spree_core (~> 1.3.0)
 
+GIT
+  remote: git@github.com:reinteractive/OpsCare.git
+  revision: 6b841a01826c8f3bb2d105a2cda4a7d4205e4c50
+  branch: master
+  specs:
+    ops_care (1.0.1)
+      bugsnag (~> 2)
+      logstasher (~> 0)
+      okcomputer (~> 1)
+      skylight (~> 0)
+
 PATH
   remote: ./spree_masterpass
   specs:
@@ -228,6 +239,8 @@ GEM
       sass (~> 3.4)
       thor
     bower-rails (0.10.0)
+    bugsnag (2.8.13)
+      json (~> 1.7, >= 1.7.7)
     builder (3.0.4)
     business_time (0.7.4)
       activesupport (>= 3.1.0)
@@ -494,6 +507,12 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.4.1)
       launchy (~> 2.2)
+    logstash-event (1.2.02)
+    logstasher (0.9.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      logstash-event (~> 1.2.0)
+      request_store
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -533,6 +552,7 @@ GEM
     oink (0.10.1)
       activerecord
       hodel_3000_compliant_logger
+    okcomputer (1.7.1)
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
@@ -658,6 +678,7 @@ GEM
       uber (~> 0.0.11)
     representable (2.3.0)
       uber (~> 0.0.7)
+    request_store (1.3.1)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -748,6 +769,8 @@ GEM
       tilt (>= 1.3, < 3)
     sitemap_generator (5.0.5)
       builder
+    skylight (0.10.3)
+      activesupport (>= 3.0.0)
     slim (3.0.3)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
@@ -894,6 +917,7 @@ DEPENDENCIES
   net-ssh (~> 2.7.0)
   newrelic_rpm
   oink
+  ops_care!
   paperclip
   pg
   pin_payment
