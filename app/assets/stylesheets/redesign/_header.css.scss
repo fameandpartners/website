@@ -1069,7 +1069,7 @@ ul.secondary.pull-right {
 
 .nav-menu-container {
 
-  .moodboards-area, .my-account {
+  a {
     text-decoration: none;
     color: $c-neutral-white;
   }
@@ -1189,7 +1189,6 @@ ul.secondary.pull-right {
       right: 0;
       background-color: #fff;
       border: solid #d7d7d7 1px;
-      border-top-color: transparent;
       @include transition(all 0.3s linear);
 
       input {
