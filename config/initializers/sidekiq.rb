@@ -1,9 +1,7 @@
 Sidekiq.configure_server do |config|
-  config.redis = configatron.redis_options
-
-  ActiveRecord::Base.configurations['production']['pool'] = 15
+  config.redis = { url: "#{ENV['REDIS_URL']}/0" }
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = configatron.redis_options
+  config.redis = { url: "#{ENV['REDIS_URL']}/0" }
 end
