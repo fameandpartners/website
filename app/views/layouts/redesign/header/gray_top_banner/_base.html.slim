@@ -9,9 +9,8 @@ ruby:
         = banner.center_text.to_s.html_safe
 
       #account-area.col-md-3.text-right
-        = link_to moodboards_path do
-          span.icon.icon-heart
-          span.moodboards-area MOODBOARD
+        = render 'layouts/redesign/header/locale_selector/desktop'
+
         span.pipe |
         = link_to profile_path do
           span.my-account MY ACCOUNT
