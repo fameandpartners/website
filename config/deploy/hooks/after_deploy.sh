@@ -14,6 +14,7 @@ wheneverize_worker
 ###############################
 
 # Clear cache
+echo "Clearing Application Cache"
 cd ${current_app_path} && bundle exec rake cache:clear &
 
 # Alert NewRelic about deploy
