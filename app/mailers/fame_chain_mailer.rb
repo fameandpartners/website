@@ -1,15 +1,14 @@
 class FameChainMailer < ActionMailer::Base
-  layout 'mailer'
 
   default :from => configatron.noreply
 
-  def fame_chain(model)
-    @fame_chain = model
+  def email(fame_chain)
+    @fame_chain = fame_chain
 
     mail(
       to: 'famechain@fameandpartners.com',
       from: @fame_chain.email,
-      subject: 'Fame Chain'
+      subject: '[Fame Chain] New Request'
     )
   end
 end

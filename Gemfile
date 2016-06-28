@@ -106,6 +106,8 @@ gem 'ruby-progressbar', :require => false
 
 gem 'sinatra',          :require => false
 
+gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
+
 group :assets do
   gem 'bourbon'
   gem 'coffee-rails', '~> 3.2.1'

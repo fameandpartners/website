@@ -1,4 +1,4 @@
-configatron.twitter.consumer_key        = "fv7x8oXZZf2x8um15QlkA"
-configatron.twitter.consumer_secret     = "zpBn2XyP5CzLdme069ahOgPJeA3Te3NY2byAUZUeHM"
-configatron.twitter.access_token        = '1445555088-fLkQuFD3BMK7OhNemLxNy1aKjRezJ19teIZaUS5'
-configatron.twitter.access_token_secret = 'YzotL48zIYTccIFPiiUBh7ZtoF9sFNSwHLSpAx7X6hnP1'
+configatron.twitter.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
+configatron.twitter.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
+configatron.twitter.access_token        = ENV['TWITTER_ACCESS_TOKEN']
+configatron.twitter.access_token_secret = ENV['TWITTER_ACCESS_TOKEN_SECRET']

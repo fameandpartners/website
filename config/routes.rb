@@ -307,10 +307,8 @@ FameAndPartners::Application.routes.draw do
       end
     end
 
-    get '/fame-chain' => 'fame_chains#new'
-    resource 'fame-chain', as: 'fame_chain', only: [:new, :create] do
-      get 'success'
-    end
+    get '/fame-chain' => 'fame_chains#new', as: :fame_chain
+    resource 'fame-chain', as: 'fame_chain', only: [:create]
 
     get '/style-consultation', to: redirect("/styling-session")
 

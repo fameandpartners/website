@@ -9,7 +9,7 @@ module Revolution
 
     def image
       if custom?
-        "//#{configatron.asset_host}/pages#{asset_safe_page_path}/#{custom_banner}.jpg"
+        "#{configatron.asset_host}/pages#{asset_safe_page_path}/#{custom_banner}.jpg"
       else
         page.banner_image
       end
