@@ -1,5 +1,5 @@
 'use strict';
-$(document).ready(function() {
+(function ($) {
 
   //Search input trigger
   $("#search").on('click', function() {
@@ -63,10 +63,6 @@ $(document).ready(function() {
       nav: true
     });
   }
-
-});
-
-(function ($) {
 
   // Fixed Navbar during scroll
   $(window).scroll(function() {
