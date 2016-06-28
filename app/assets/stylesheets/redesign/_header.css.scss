@@ -1098,7 +1098,8 @@ ul.secondary.pull-right {
         margin: 0 15px;
       }
 
-      em {
+      em,
+      &.featured-nav {
         font-size: 1.4rem;
         font-style: italic;
         text-transform: none;
