@@ -67,7 +67,9 @@ ruby:
     .container
       .rect#rect-dresses.nav-menu-wrap.menu-dresses
         .row
-          span.btn-close.pull-right
+          .col-md-12
+            span.btn-close.pull-right.js-close-nav-menu
+
           .col-md-2.dresses-browse
             ul
               li.title Browse
@@ -132,6 +134,9 @@ ruby:
 
       .rect#rect-wedding.nav-menu-wrap.menu-wedding
         .row
+          .col-md-12
+            span.btn-close.pull-right.js-close-nav-menu
+
           .col-md-3.wedding
             ul
               li.title SHOP FOR THE
@@ -147,6 +152,9 @@ ruby:
 
       .rect#rect-lookbook.nav-menu-wrap.menu-lookbook
         .row
+          .col-md-12
+            span.btn-close.pull-right.js-close-nav-menu
+
           .col-md-3
             ul
               li.title lookbooks
@@ -206,7 +214,7 @@ coffee:
 
     if $('html').find('.rect.active')
       $('html').click (event) ->
-        if !($('.rect').has(event.target).length || $(event.target).hasClass('active'))
+        if $(event.target).hasClass('js-close-nav-menu') || !($('.rect').has(event.target).length || $(event.target).hasClass('active'))
           $("#home-menu .nav-main-menu span, .rect").removeClass('active');
 
     $("#account-area .my-account").mouseover ->
