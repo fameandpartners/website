@@ -66,8 +66,6 @@ configatron.mailchimp do |mailchimp|
   mailchimp.list_id = ENV['MAILCHIMP_LIST_ID']
 end
 
-configatron.redis_options = { url: "#{ENV['REDIS_URL']}/0" }
-
 configatron.es_url = ENV['ES_URL']
 
 configatron.elasticsearch.indices do |index|
@@ -108,8 +106,6 @@ when :development
     index.color_variants = :color_variants_development
   end
 
-  configatron.redis_options = { url: "#{ENV['REDIS_URL']}/0" }
-
 when :staging
 
 when :preproduction
@@ -126,6 +122,4 @@ when :test
     index.spree_products = :spree_products_test
     index.color_variants = :color_variants_test
   end
-
-  configatron.redis_options = { url: "#{ENV['REDIS_URL']}/0" }
 end
