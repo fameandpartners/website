@@ -6,13 +6,20 @@
   .inner-wrap {
     @extend %cfix;
     margin-bottom: 40px;
-    padding: 0 15px;
   }
 
   .item-wrap {
     float: left;
     width: 20%;
     padding: 0 15px;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
 
     > a {
       display: block;
