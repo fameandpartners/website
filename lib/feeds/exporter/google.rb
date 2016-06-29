@@ -103,12 +103,12 @@ module Feeds
           use_iam_profile: true
         }
 
-        if Rails.env.development?
-          storage_credentials.merge!({
-                                       aws_access_key_id:     ENV['AWS_S3_ACCESS_KEY_ID'],
-                                       aws_secret_access_key: ENV['AWS_S3_SECRET_ACCESS_KEY'],
-                                       use_iam_profile:       false
-                                     })
+        storage_credentials.tap do |credentials|
+          credentials.merge!({
+                               aws_access_key_id:     ENV['AWS_S3_ACCESS_KEY_ID'],
+                               aws_secret_access_key: ENV['AWS_S3_SECRET_ACCESS_KEY'],
+                               use_iam_profile:       false
+                             }) if Rails.env.development?
         end
       end
     end
