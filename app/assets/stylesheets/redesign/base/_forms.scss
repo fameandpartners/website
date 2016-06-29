@@ -6,7 +6,7 @@ label {
   font-weight: 500;
 }
 
-input[type="radio"], 
+input[type="radio"],
 input[type="checkbox"] {
   margin-top: 6px;
 }
@@ -34,7 +34,7 @@ input[type="checkbox"] {
 }
 
 .has-success .form-control {
-  border-color: rgba($c-neutral-black, .55); // TODO: fix this hack, fix for UI-calendar field 
+  border-color: rgba($c-neutral-black, .55); // TODO: fix this hack, fix for UI-calendar field
 }
 
 // Custom checkbox and radio
@@ -64,7 +64,7 @@ input[type="checkbox"] {
     & + .icon {
       background-position: 0 0;
     }
-    
+
     &:checked + .icon {
       background-position: -40px 0;
     }
@@ -80,7 +80,7 @@ input[type="checkbox"] {
     & + .icon {
       background-position: -100px 0;
     }
-    
+
     &:checked + .icon {
       background-position: -140px 0;
     }
@@ -89,6 +89,33 @@ input[type="checkbox"] {
       background-position: -160px 0;
     }
 
+  }
+
+}
+
+.form-global {
+
+  label {
+    font-style: italic;
+    margin: 0;
+  }
+
+  .hint {
+    color: $c-neutral-10;
+    font-style: italic;
+    font-size: 1.5rem;
+  }
+
+  .error {
+    font-size: 1.6rem;
+    color: $c-brand-red;
+    display: block;
+    margin: 3px 0;
+  }
+
+  .submit .error {
+    padding-top: 20px;
+    text-align: center;
   }
 
 }

@@ -1,5 +1,10 @@
 = render 'extra_head_scripts'
 
+javascript:
+  var states_us = #{manual_order_form.states_us.to_json.to_s.html_safe};
+  var states_ca = #{manual_order_form.states_ca.to_json.to_s.html_safe};
+  var states_au = #{manual_order_form.states_au.to_json.to_s.html_safe};
+
 .pages.wrapper.wrapper-content
   = simple_form_for manual_order_form, url: manual_orders_path, html: { class: "form-horizontal"} do |f|
     .ibox.float-e-margins
@@ -39,32 +44,45 @@
               .panel-heading Customer details
               .panel-body
                 .form-group
-                  label.col-sm-2.control-label Email
-                  .col-sm-10 = f.input :email, label: false, input_html: { class: 'form-control' }
+                  .col-sm-3
+                    = radio_button_tag(:customer, 'existing', true)
+                    = label_tag(:customer_existing, 'Existing customer?')
+                  .col-sm-9 = f.collection_select :existing_customer, manual_order_form.customers, :first, :last, { include_blank: true }, { class: 'chosen-select' }
                 .form-group
-                  label.col-sm-2.control-label First name
-                  .col-sm-10 = f.input :first_name, label: false, input_html: {class: 'form-control'}
-                .form-group
-                  label.col-sm-2.control-label Last name
-                  .col-sm-10 = f.input :last_name, label: false, input_html: {class: 'form-control'}
-                .form-group
-                  label.col-sm-2.control-label Address
-                  .col-sm-10 = f.input :address, label: false, input_html: {class: 'form-control'}
-                .form-group
-                  label.col-sm-2.control-label City
-                  .col-sm-10 = f.input :city, label: false, input_html: {class: 'form-control'}
-                .form-group
-                  label.col-sm-2.control-label State
-                  .col-sm-10 = f.input :state, label: false, input_html: {class: 'form-control'}
-                .form-group
-                  label.col-sm-2.control-label Country
-                  .col-sm-10 = f.input :cntry, label: false, input_html: {class: 'form-control'}
-                .form-group
-                  label.col-sm-2.control-label Zip
-                  .col-sm-10 = f.input :zip, label: false, input_html: {class: 'form-control'}
-                .form-group
-                  label.col-sm-2.control-label Phone
-                  .col-sm-10 = f.input :phone, label: false, input_html: {class: 'form-control'}
+                  .col-sm-12
+                    = radio_button_tag(:customer, 'new')
+                    = label_tag(:customer_new, 'New customer')
+                fieldset#customer_form[disabled=true]
+                  .form-group
+                    label.col-sm-2.control-label Email
+                    .col-sm-10 = f.input :email, label: false, input_html: { class: 'form-control' }
+                  .form-group
+                    label.col-sm-2.control-label First name
+                    .col-sm-10 = f.input :first_name, label: false, input_html: { class: 'form-control' }
+                  .form-group
+                    label.col-sm-2.control-label Last name
+                    .col-sm-10 = f.input :last_name, label: false, input_html: { class: 'form-control' }
+                  .form-group
+                    label.col-sm-2.control-label Address1
+                    .col-sm-10 = f.input :address1, label: false, input_html: { class: 'form-control' }
+                  .form-group
+                    label.col-sm-2.control-label Address2
+                    .col-sm-10 = f.input :address2, label: false, input_html: { class: 'form-control' }
+                  .form-group
+                    label.col-sm-2.control-label City
+                    .col-sm-10 = f.input :city, label: false, input_html: { class: 'form-control' }
+                  .form-group
+                    label.col-sm-2.control-label Country
+                    .col-sm-10 = f.collection_select :country, manual_order_form.countries, :first, :last, { include_blank: true }, { class: 'chosen-select', disabled: true }
+                  .form-group
+                    label.col-sm-2.control-label State
+                    .col-sm-10 = f.collection_select :state, manual_order_form.states, :id, :name, { include_blank: true }, { class: 'chosen-select', disabled: true }
+                  .form-group
+                    label.col-sm-2.control-label Zip
+                    .col-sm-10 = f.input :zipcode, label: false, input_html: { class: 'form-control' }
+                  .form-group
+                    label.col-sm-2.control-label Phone
+                    .col-sm-10 = f.input :phone, label: false, input_html: { class: 'form-control' }
           .col-sm-5
             .panel.panel-default
               .panel-heading Image
@@ -79,5 +97,5 @@
             = f.submit 'Complete Order and Send for Manufacturing', class: 'btn btn-primary'
             |&nbsp;
             |&nbsp;
-            = f.submit 'Send Payment Request to Customer', class: 'btn btn-primary'
+            = f.submit 'Send Payment Request to Customer', class: 'btn btn-primary', disabled: true
 

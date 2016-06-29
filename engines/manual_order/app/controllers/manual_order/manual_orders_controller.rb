@@ -37,6 +37,14 @@ module ManualOrder
       render json: manual_order_form.get_price(params[:product_id], params[:size_id], params[:color_id], params[:currency])
     end
 
+    def autocomplete_customers
+      render json: manual_order_form.get_users_searched(params[:term])
+    end
+
+    def user_data
+      render json: manual_order_form.get_user_data(params[:user_id])
+    end
+
     private
 
     def manual_order_form

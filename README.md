@@ -39,6 +39,16 @@ It's also important to configure your Elasticsearch to enable dynamic scripting
 script.disable_dynamic: false
 ```
 
+## Environment Variables
+
+Running the app in development mode requires the presence of the `.env` file in the apps root folder.
+
+This file loads environment variables required to run the application. You can use the `.env.example` file, which contains examples of the actual values that are used on production.
+
+## Vendored Gems
+
+All gems are vendored (downloaded and stored at `vendor/cache`). Because of this `bundle/config` file is now versioned. Be careful to **NOT** change it.
+
 ### Creating an Admin User
 
 Steps to create an admin user:
@@ -204,7 +214,7 @@ You can use any other details.
 
 ## Testing
 
-To run every test, including engines', use the `bundle exec rake spec` command
+To run every test, including engines', use the `bundle exec rake spec engines` command
 
 ## Useful Pages
 
