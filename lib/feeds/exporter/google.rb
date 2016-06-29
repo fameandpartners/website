@@ -1,6 +1,8 @@
+require_relative './base'
+
 module Feeds
   module Exporter
-    class CPC < Base
+    class Google < Base
 
       # @override
       def export_file_name
