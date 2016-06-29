@@ -68,11 +68,7 @@ module Feeds
       end
 
       def save(xml)
-        Fog::Storage.new({
-                           provider:              'AWS',
-                           aws_access_key_id:     configatron.aws.s3.access_key_id,
-                           aws_secret_access_key: configatron.aws.s3.secret_access_key
-                         }).
+        Fog::Storage.new(storage_credentials).
           directories.
           get(configatron.aws.s3.bucket).
           files.
@@ -98,6 +94,22 @@ module Feeds
       # @override
       def product_description(item)
         CGI.escapeHTML(item[:description])
+      end
+
+      def storage_credentials
+        storage_credentials = {
+          provider:        'AWS',
+          region:          configatron.aws.s3.region,
+          use_iam_profile: true
+        }
+
+        if Rails.env.development?
+          storage_credentials.merge!({
+                                       aws_access_key_id:     ENV['AWS_S3_ACCESS_KEY_ID'],
+                                       aws_secret_access_key: ENV['AWS_S3_SECRET_ACCESS_KEY'],
+                                       use_iam_profile:       false
+                                     })
+        end
       end
     end
   end
