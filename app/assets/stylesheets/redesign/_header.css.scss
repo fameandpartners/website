@@ -1085,10 +1085,9 @@ ul.secondary.pull-right {
     background-color: $c-neutral-white;
     font-weight: 700;
 
-    span {
+    .nav-main-menu span {
+      border-bottom: 2px solid transparent;
       display: inline-block;
-      height: 30px;
-      line-height: 30px;
       font-size: 1.2rem;
       color: $c-neutral-black;
       cursor: pointer;
@@ -1109,9 +1108,10 @@ ul.secondary.pull-right {
     }
 
     .nav-main-menu {
+      padding-bottom: 35px;
 
       span:hover, span.active {
-        border-bottom: 2px solid $c-neutral-black;
+        border-color: $c-neutral-black;
       }
 
     }
@@ -1178,8 +1178,9 @@ ul.secondary.pull-right {
   }
 
   .search-wrapper {
-    $search-input-height: 44px;
+    $search-input-height: 32px;
     position: relative;
+    display: inline-block;
 
     .search-input {
       position: absolute;
@@ -1188,11 +1189,10 @@ ul.secondary.pull-right {
       top: 0;
       right: 0;
       background-color: #fff;
-      border: solid #d7d7d7 1px;
       @include transition(all 0.3s linear);
 
       input {
-        display: block;
+        display: none;
         width: 100%;
         height: 29px;
         padding: 0 $search-input-height 0 10px;
@@ -1202,8 +1202,6 @@ ul.secondary.pull-right {
         color: #999;
         border: none;
         opacity: 0;
-        @include transition(opacity 0.15s linear);
-        @include transition-delay(0.4s);
 
         &:focus{
           outline: 0;
@@ -1218,16 +1216,14 @@ ul.secondary.pull-right {
       z-index: 1;
     }
 
-    &.active {
+    &.active .search-input {
+      width: 230px;
+      height: $search-input-height;
+      border: 1px solid $c-neutral-4;
 
-      .search-input {
-        width: 410px;
-        height: $search-input-height;
-
-        input {
-          opacity: 1;
-        }
-
+      input {
+        opacity: 1;
+        display: block;
       }
 
     }
