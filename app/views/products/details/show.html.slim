@@ -4,11 +4,18 @@ ruby:
 
   @product.default_color_options.each do |color|
     product_paths[color.id] = collection_product_path(@product, url_params.merge(color: color.name))
+    
+  @current_site_version = current_site_version.to_json
   end
 
-  init_product_details_page = "window.PdpData = #{ @product.to_json } || {};"
+  init_product_details_page = "
+    window.PdpData = {};
+    window.PdpData.images = #{ @product.all_images.to_json };
+    window.PdpData.colors = #{ @product.default_color_options.to_json };
+    window.PdpData.defaultSizes = #{ @product.default_sizes.to_json };
+    window.PdpData.sizeChart = #{ @product.size_chart_data.to_json };"
 
-= content_for :inline_javascript do
+= content_for :inline_javascript_top do
   = raw init_product_details_page
 
 = content_for :head
@@ -46,10 +53,11 @@ ruby:
                 li Easy Returns
 
       .col-md-6
-        = react_component('PdpGallery')
+        #PdpGallery
       .col-md-3
         .panel-side-wrap
-          #PdpSidePanelRight.panel-side.js-panel-side-right data-spy='affix'
+          .panel-side.js-panel-side-right data-spy='affix'
+            #PdpSidePanelRight
     
     // content bottom wrap START 
     .js-bottom-content
@@ -162,13 +170,9 @@ ruby:
 
 = render partial: 'micro_data'
 
-#fit-guide-content.hidden
-  = render :partial => 'size_guide', :locals => { data: @product.size_chart_data, explanation: @product.size_chart_explanation, size_chart: @product.size_chart }
-
 #product-overlay
 
 - cache [:side_panels, @product.id, current_site_version.code], expires_in:  configatron.cache.expire.long  do
-  = render partial: 'side_panel_sizes'
 
   = render partial: 'side_panel_colours'
 

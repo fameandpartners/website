@@ -5,10 +5,8 @@
   min-height: 100vh;
   padding-top: $mega-menu-desktop-height;
 
-  h1,
-  .h1,
-  h2,
-  .h2 {
+  h1, .h1,
+  h2, .h2 {
     margin-top: 0;
   }
 
@@ -312,6 +310,51 @@
   }
   // END styling advice
 
+  .panel-side-container-size {
+
+    .size-cart-trigger {
+      display: block;
+      margin-top: 30px;
+      text-align: center;
+      text-decoration: underline;
+    }
+
+    .inner-wrap {
+      margin-left: -2%;
+      margin-right: -2%;
+    }
+
+    p {
+      font-size: 1em;
+
+      a {
+        font-style: italic;
+        text-decoration: underline;
+      }
+
+    }
+
+  }
+
+  .selector-size {
+    display: inline-block;
+    width: 21%;
+    margin: 2%;
+    padding: 12px 5px;
+    text-align: center;
+    font-size: 0.75em;
+    font-weight: 500;
+    border: solid $c-neutral-4 1px;
+    cursor: pointer;
+
+    &.is-selected {
+      color: $c-neutral-white;
+      background: $c-neutral-black;
+      border-color: $c-neutral-black;
+    }
+
+  }
+
   @media (max-width: $bootstrap-lg-width - 1px) {
 
     .panel-side {
@@ -365,6 +408,18 @@
 
     .c-carousel-inspiration {
       padding: 0 10px;
+    }
+
+  }
+
+  @media (min-width: $bootstrap-sm-width) and (max-width: $bootstrap-md-width) {
+
+    .container {
+      width: auto;
+    }
+
+    .slick-slide {
+      margin: 0 5px;
     }
 
   }
