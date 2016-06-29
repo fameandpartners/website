@@ -89,6 +89,8 @@ configatron.site_version_detector_strategy = :path
 configatron.aws.s3 do |s3|
   s3.bucket            = ENV['AWS_S3_BUCKET']
   s3.region            = ENV['AWS_S3_REGION']
+  s3.access_key_id     = ENV['AWS_S3_ACCESS_KEY_ID']     # Secret + Key IDs are usually blank. If IAM profile doesn't allow read/write access, this is used instead
+  s3.secret_access_key = ENV['AWS_S3_SECRET_ACCESS_KEY'] # Secret + Key IDs are usually blank. If IAM profile doesn't allow read/write access, this is used instead
 end
 
 case Rails.env.to_sym
