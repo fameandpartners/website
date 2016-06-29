@@ -12,7 +12,7 @@ $ ->
   zipcode = $('#forms_manual_order_zipcode')
   phone = $('#forms_manual_order_phone')
 
-  searchUrl = '/fame_admin/manual_orders/autocomplete'
+  searchUrl = '/fame_admin/manual_orders/autocomplete_customers'
   userUrl = '/fame_admin/manual_orders/user/:user_id'
 
   existingCustomer.ajaxChosen
