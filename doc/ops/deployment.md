@@ -24,9 +24,13 @@ After you have a valid Sentinel token, create a new copy of the `OpsCare.yml.exa
 
 Run `sentinel deploy staging`
 
+### Deploying a specific branch
+
+To deploy a specific branch, use the `--branch-name` option: `sentinel deploy staging --branch-name feat/my-awesome-branch`
+
 ## Production
 
-Run `sentinel deploy staging`
+Run `sentinel deploy production`
 
 # LEGACY
 
