@@ -1,4 +1,5 @@
 require_relative './base'
+require 'fog'
 
 module Feeds
   module Exporter
@@ -67,12 +68,19 @@ module Feeds
       end
 
       def save(xml)
-        require 'fileutils'
-        FileUtils::mkdir_p(File.dirname(export_file_path))
-
-        file = File.open(export_file_path, 'w')
-        file.write(xml)
-        file.close
+        Fog::Storage.new({
+                           provider:              'AWS',
+                           aws_access_key_id:     configatron.aws.s3.access_key_id,
+                           aws_secret_access_key: configatron.aws.s3.secret_access_key
+                         }).
+          directories.
+          get(configatron.aws.s3.bucket).
+          files.
+          create(
+            key:    export_file_path,
+            body:   xml,
+            public: true
+          )
       end
 
       private
