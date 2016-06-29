@@ -1,9 +1,8 @@
-require_relative '../../exporter/base'
 require 'net/http'
 
 module Feeds
   module Exporter
-    class Stylight < Google
+    class Stylight < CPC
       CDN_HOST = 'https://d1h7wjzwtdym94.cloudfront.net/product-feed/white-background/'
 
       attr_reader :items

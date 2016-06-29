@@ -1,9 +1,6 @@
-require_relative './base'
-require 'fog'
-
 module Feeds
   module Exporter
-    class Google < Base
+    class CPC < Base
 
       # @override
       def export_file_name
@@ -68,15 +65,12 @@ module Feeds
       end
 
       def save(xml)
-        Fog::Storage.new(storage_credentials).
-          directories.
-          get(configatron.aws.s3.bucket).
-          files.
-          create(
-            key:    export_file_path,
-            body:   xml,
-            public: true
-          )
+        require 'fileutils'
+        FileUtils::mkdir_p(File.dirname(export_file_path))
+
+        file = File.open(export_file_path, 'w')
+        file.write(xml)
+        file.close
       end
 
       private
@@ -94,22 +88,6 @@ module Feeds
       # @override
       def product_description(item)
         CGI.escapeHTML(item[:description])
-      end
-
-      def storage_credentials
-        storage_credentials = {
-          provider:        'AWS',
-          region:          configatron.aws.s3.region,
-          use_iam_profile: true
-        }
-
-        storage_credentials.tap do |credentials|
-          credentials.merge!({
-                               aws_access_key_id:     ENV['AWS_S3_ACCESS_KEY_ID'],
-                               aws_secret_access_key: ENV['AWS_S3_SECRET_ACCESS_KEY'],
-                               use_iam_profile:       false
-                             }) if Rails.env.development?
-        end
       end
     end
   end

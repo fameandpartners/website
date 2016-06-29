@@ -23,9 +23,10 @@ module Feeds
       end
 
       def export_file_path
-        File.join(
-          'feeds',
+        Rails.root.join(
+          'public',
           current_site_version.permalink,
+          'feeds',
           'products',
           export_file_name
         )
