@@ -12,22 +12,6 @@ header.main {
       padding: 0 ($mobile-header - $logo-width) / 2;
     }
 
-    .left-wrap,
-    .right-wrap {
-      position: absolute;
-      max-width: ($mobile-header - $logo-width) / 2;
-    }
-
-    .left-wrap {
-      left: 0;
-      top: 15px;
-    }
-
-    .right-wrap {
-      right: 0;
-      top: 12px;
-    }
-
     @include mobile-header {
 
       & {
@@ -54,36 +38,67 @@ header.main {
 
   }
 
-  .trigger-shopping-cart {
-    display: block;
-    text-transform: none;
-    color: $c-neutral-black;
+  .nav-icons {
+    margin-top: -4px;
+    padding-right: 5px;
 
-    &:hover,
-    &:focus {
-      opacity: .6;
+    .icon {
+      font-size: 2.2rem;
+      color: $c-neutral-black;
+      display: inline-block;
+      padding: 5px;
+
+      &:hover,
+      &:focus,
+      &:active {
+        opacity: .6;
+        cursor: pointer;
+      }
+
     }
 
-    .icon,
+    .trigger-shopping-cart {
+      position: relative;
+    }
+
+    .count {
+      color: $c-neutral-white;
+      background: $c-neutral-black;
+      border-radius: 100%;
+      padding: 1px 4px;
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      position: absolute;
+      right: -1px;
+      top: -10px;
+    }
+
+  }
+
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .js-header-toolbar span {
+      display: inline-block;
+    }
+
     .count,
     .copy {
-      float: left;
       display: block;
       line-height: 25px;
-    }
-
-    .count,
-    .copy {
       margin-left: 4px;
       font-size: 1.5rem;
     }
 
-    .icon {
-      font-size: 25px;
+    .copy {
+      text-decoration: underline;
+      text-transform: none;
+      font-style: italic;
+      font-weight: 300;
     }
 
-    .count {
-      font-weight: 400;
+   .count {
 
       &:before {
         content: '(';
@@ -91,20 +106,6 @@ header.main {
 
       &:after {
         content: ')';
-      }
-
-    }
-
-    .copy {
-      text-decoration: underline;
-      font-style: italic;
-      font-weight: 300;
-    }
-
-    @media (max-width: $iphone6-width) {
-
-      & .copy {
-        display: none;
       }
 
     }
