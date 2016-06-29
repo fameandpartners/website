@@ -1,8 +1,6 @@
-require_relative '../../exporter/base'
-
 module Feeds
   module Exporter
-    class Polyvore < Google
+    class Polyvore < CPC
       # @override
       def export_file_name
         'google-flat-images.xml'
