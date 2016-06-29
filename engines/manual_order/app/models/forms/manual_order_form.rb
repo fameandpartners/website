@@ -88,14 +88,17 @@ module Forms
     end
 
     def get_users_searched(term)
-      terms = term.split(' ')
-      user_ids = Spree::Order.complete.pluck(:user_id).uniq
-      users = Spree::User.where(id: user_ids)
-      if terms.size == 1
-        users.where('first_name ILIKE ? OR last_name ILIKE ?', "%#{terms[0]}%", "%#{terms[0]}%")
-      else
-        users.where('first_name ILIKE ? AND last_name ILIKE ?', "%#{terms[0]}%", "%#{terms[1]}%")
-      end.limit(10).map {|u| {id: u.id, value: u.full_name}}
+      first_name_term, last_name_term = term.split(' ')
+      operator = 'AND'
+      if last_name_term.nil?
+        last_name_term = first_name_term
+        operator = 'OR'
+      end
+
+      user_ids = Spree::Order.complete.select('DISTINCT user_id').pluck(:user_id)
+      Spree::User.where(id: user_ids)
+        .where("first_name ILIKE ? #{operator} last_name ILIKE ?", "%#{first_name_term}%", "%#{last_name_term}%")
+        .limit(10).map {|u| {id: u.id, value: u.full_name}}
     end
 
     def get_user_data(user_id)
