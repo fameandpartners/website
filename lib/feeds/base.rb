@@ -1,10 +1,6 @@
-require_relative './exporter/base'
-require_relative './exporter/cpc'
-require_relative './exporter/polyvore'
-
 module Feeds
   class Base
-    FEEDS =  %w(CPC Shopstyle)
+    FEEDS =  %w(Google Shopstyle)
 
     attr_reader :config, :current_site_version, :logger
 
