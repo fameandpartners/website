@@ -48,7 +48,7 @@ module Forms
     end
 
     def customers
-      user_ids = Spree::Order.complete.last(50).map(&:user_id).uniq
+      user_ids = Spree::Order.complete.select('DISTINCT user_id').limit(10).pluck(:user_id)
       @customers ||= Spree::User.where(id: user_ids).limit(10).map {|u| [u.id, u.full_name]}
     end
 
