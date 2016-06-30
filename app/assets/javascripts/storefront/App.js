@@ -6,23 +6,25 @@ import {Provider} from 'react-redux';
 import PdpGallery from './components/PDP/PdpGallery';
 import PdpSidePanelRight from './components/PDP/PdpSidePanelRight';
 
-const store = configureStore(window.PdpData);
+// PDP
+if(typeof window.PdpData !== 'undefined') {
+  const store = configureStore(window.PdpData);
 
-console.log('Store changed: ', store.getState());
-
-store.subscribe(() => {
   console.log('Store changed: ', store.getState());
-});
 
-//PDP
-render(
-  <Provider store={store}>
-    <PdpGallery />
-  </Provider>, document.getElementById('PdpGallery')
-);
+  store.subscribe(() => {
+    console.log('Store changed: ', store.getState());
+  });
 
-render(
-  <Provider store={store}>
-    <PdpSidePanelRight />
-  </Provider>, document.getElementById('PdpSidePanelRight')
-);
+  render(
+    <Provider store={store}>
+      <PdpGallery />
+    </Provider>, document.getElementById('PdpGallery')
+  );
+
+  render(
+    <Provider store={store}>
+      <PdpSidePanelRight />
+    </Provider>, document.getElementById('PdpSidePanelRight')
+  );
+}

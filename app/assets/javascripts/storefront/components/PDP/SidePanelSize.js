@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
+import SidePanelSizeChart from './SidePanelSizeChart';
 
 class SidePanelSize extends SidePanel {
   constructor(props, context) {
@@ -57,16 +58,8 @@ class SidePanelSize extends SidePanel {
             </a>
           </div>
           <h2 className="h4 c-card-customize__header">Choose your size</h2>
-          <div className="inner-wrap">{sizes}</div>
-          <a href="#" className="size-cart-trigger">View the Size Chart</a>
-          <div className="size-cart-container">
-            <p>
-              Measurements are much more accurate if taken by someone else.
-              For more information about our sizing, visit our <a href="/size-guide" target="_blank">sizing guide</a>.</p>
-            <table>
-
-            </table>
-          </div>
+          <div className="sizes-wrap">{sizes}</div>
+          <SidePanelSizeChart />
         </div>
       </div>
     );

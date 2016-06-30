@@ -36,13 +36,19 @@ class PdpGallery extends React.Component {
       <div className="panel-media">
         <div className="panel-media-inner-wrap js-pdp-hero-gallery">
           <div className="media-wrap">
-            <img src="/assets/_temp/product-burgundy-crop.jpg" />
+            <img src="/assets/_temp/product-1.jpg" />
           </div>
           <div className="media-wrap">
-            <img src="/assets/_temp/product-burgundy-crop.jpg" />
+            <img src="/assets/_temp/product-2.jpg" />
           </div>
           <div className="media-wrap">
-            <img src="/assets/_temp/product-burgundy-crop.jpg" />
+            <img src="/assets/_temp/product-3.jpg" />
+          </div>
+          <div className="media-wrap">
+            <img src="/assets/_temp/product-4.jpg" />
+          </div>
+          <div className="media-wrap">
+            <img src="/assets/_temp/product-5.jpg" />
           </div>
         </div>
       </div>
