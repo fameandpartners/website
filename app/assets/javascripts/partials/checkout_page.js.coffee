@@ -11,11 +11,13 @@ page.initCheckoutEditPage = () ->
       @ship_to_different_address = $("input[name='ship_to_address']:first").prop("checked") == false
       $("input[name='ship_to_address']:first").click =>
         @ship_to_different_address = false
+        $('#order_bill_address_attributes_country_id').trigger('change')
         page.updateShippingFormVisibility()
 
 
       $("input[name='ship_to_address']:last").click =>
         @ship_to_different_address = true
+        $('#order_ship_address_attributes_country_id').trigger('change')
         page.updateShippingFormVisibility()
 
 
@@ -349,9 +351,16 @@ page.initCheckoutEditPage = () ->
 
     countryChanged: () ->
       shippingFeeAlert = $('#shipping_fee_alert')
-      if window.checkout_page.countries[$(this).val()]
+      element = $(this)
+      useBillingAddressToShip = $('#ship_to_address_Ship_to_this_address')
+      countryHasShippingFee = window.checkout_page.countries[element.val()]
+      if element.attr('id') == 'order_bill_address_attributes_country_id' and useBillingAddressToShip.is(':checked') and countryHasShippingFee
         shippingFeeAlert.show()
-      else
+      else if element.attr('id') == 'order_bill_address_attributes_country_id' and useBillingAddressToShip.is(':checked')
+        shippingFeeAlert.hide()
+      else if element.attr('id') == 'order_ship_address_attributes_country_id' and countryHasShippingFee
+        shippingFeeAlert.show()
+      else if element.attr('id') == 'order_ship_address_attributes_country_id'
         shippingFeeAlert.hide()
   }
   page.init()
