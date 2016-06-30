@@ -3,7 +3,6 @@ module Shippo
 
     def update
       order_number = params[:metadata].split(' ')[1]
-      # order = Spree::Order.where(number: order_number).first
       if (order = Spree::Order.where(number: order_number).first)
         if (shipment = order.shipments.first)
           shipment.update_attributes(tracking: params[:tracking_number])
