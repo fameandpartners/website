@@ -55,7 +55,8 @@ FameAndPartners::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.raise_delivery_errors = true
 
-  config.action_mailer.default_url_options = { :host => ENV['APP_HOST'] }
+  app_host_without_protocol = ENV['APP_HOST'].to_s.gsub('https://', '').gsub('http://', '')
+  config.action_mailer.default_url_options = { host: app_host_without_protocol, protocol: 'https' }
 
   # config.action_mailer.asset_host = ENV['RAILS_ASSET_HOST']
   config.action_mailer.asset_host = 'https://www.fameandpartners.com' # TODO: hardcoded for the moment
