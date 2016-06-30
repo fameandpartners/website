@@ -4,7 +4,7 @@ require_relative './exporter/polyvore'
 
 module Feeds
   class Base
-    FEEDS =  %w(CPC Polyvore Stylight Shopstyle)
+    FEEDS =  %w(CPC Shopstyle)
 
     attr_reader :config, :current_site_version, :logger
 
