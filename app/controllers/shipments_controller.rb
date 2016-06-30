@@ -7,7 +7,7 @@ class ShipmentsController < ActionController::Base
       if order.shipment.present?
         order.shipment.update_attributes(tracking: params[:tracking_number])
       else
-        order.shipment.create(tracking: params[:tracking_number])
+        order.shipments.create(tracking: params[:tracking_number])
       end
     end
     render :nothing => true, :status => 200, :content_type => 'text/html'
