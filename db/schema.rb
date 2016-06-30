@@ -1644,9 +1644,9 @@ ActiveRecord::Schema.define(:version => 20160727014602) do
     t.integer  "zoneable_id"
     t.string   "zoneable_type"
     t.integer  "zone_id"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-    t.boolean  "international_shipping_fee"
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
+    t.boolean  "has_international_shipping_fee", :default => false
   end
 
   create_table "spree_zones", :force => true do |t|
