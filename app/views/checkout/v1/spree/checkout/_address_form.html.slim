@@ -109,6 +109,10 @@ h2.checkout-section-title
     = form.label :zipcode, with_required_mark(t(:zip))
     = form.text_field :zipcode, class: 'required form-control form-control-md', required: 'required'
 
+div class="row" id="shipping_fee_alert" style="display: none"
+  .col-md-6.col-md-offset-3
+    h1 International Shipping Fee
+
 /- if address_type == 'billing'
   .row
     .col-md-4.form-group
