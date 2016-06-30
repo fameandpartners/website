@@ -81,6 +81,7 @@ header.main {
 
   .rect-wrapper {
     background: $c-neutral-white;
+    border-bottom: 1px solid $c-neutral-5;
     position: absolute;
     width: 100%;
     z-index: 101;
