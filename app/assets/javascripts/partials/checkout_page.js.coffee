@@ -346,6 +346,13 @@ page.initCheckoutEditPage = () ->
         page.onAjaxFailureHandler()
 
         page.pin_request_in_process = false
+
+    countryChanged: () ->
+      shippingFeeAlert = $('#shipping_fee_alert')
+      if window.checkout_page.countries[$(this).val()]
+        shippingFeeAlert.show()
+      else
+        shippingFeeAlert.hide()
   }
   page.init()
   window.checkout_page = page
