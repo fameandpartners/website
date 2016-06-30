@@ -255,6 +255,7 @@ $product-color-wine:            #831c2e;
 .color-icing-pink              { background-color: $product-color-icing-pink; }
 .color-icing-pink-and-red      { @include split-color-selector($product-color-icing-pink, $product-color-red);  }
 .color-indigo                  { background-color: $product-color-indigo; }
+.color-indigo-cotton-stripe    { @include image-color-selector('IndigoCottonStripe.png'); }
 .color-ivory                   { background-color: $product-color-ivory; }
 .color-ivory-and-hot-pink      { @include split-color-selector($product-color-ivory, $product-color-hot-pink); }
 .color-ivory-and-ice-blue      { @include split-color-selector($product-color-ivory, $product-color-ice-blue); }
@@ -301,6 +302,7 @@ $product-color-wine:            #831c2e;
 .color-orange                  { background-color: $product-color-orange; }
 .color-orange-and-hot-pink     { @include split-color-selector($product-color-orange, $product-color-hot-pink); }
 .color-pale-blue               { background-color: $product-color-pale-blue; }
+.color-pale-blue-cotton-stripe { @include image-color-selector('PaleBlueCottonStripe.png') }
 .color-pale-green              { background-color: $product-color-pale-green; }
 .color-pale-grey               { background-color: $product-color-pale-grey; }
 .color-pale-peach              { background-color: $product-color-pale-peach; }
