@@ -216,6 +216,16 @@ header.main {
 
   }
 
+  #fixed-header {
+    position: fixed;
+    width: 100%;
+    background: $c-neutral-white;
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+    padding-bottom: $md-content-margin-top;
+  }
+
   @media (max-width: $bootstrap-md-width - 1px) {
 
     .js-header-toolbar span {
