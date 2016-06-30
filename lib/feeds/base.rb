@@ -198,7 +198,7 @@ module Feeds
 
 
     private def domain_url
-      url = "http://#{ActionMailer::Base.default_url_options[:host]}"
+      url = ENV.fetch('APP_HOST') { 'https://www.fameandpartners.com' }
       detector.site_version_url(url, current_site_version).chomp('/')
     end
 
