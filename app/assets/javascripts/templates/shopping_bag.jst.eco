@@ -3,7 +3,7 @@
     <img alt="Submit" class="line-arrow arrow-bag" src="/assets/line-arrow.svg">
   </div>
   <div class="pull-right close-cart">
-    <span class="cart"><span class="icon icon-shopping_cart">
+    <span class="cart"><span class="icon icon-bag">
       <span class="cart-amount">(<%= @cart.item_count %>)</span>
     </span>
   </div>
