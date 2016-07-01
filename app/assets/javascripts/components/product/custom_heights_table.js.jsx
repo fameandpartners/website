@@ -72,7 +72,7 @@ var CustomHeightsTable = React.createClass({
     return (
       <div className='col-md-12'>
         <h2>SKIRT LENGTHS MEASUREMENT CHART</h2>
-        <p>Skirt length is measured straight, from waist to hem and is based on wearing <CentimetresOrInches cm="5" inches="2" displayMetric={displayMetric} displayImperial={displayImperial} /> heels.</p>
+        <p>Skirt length is measured straight, from waist to hem and is based on wearing <CentimetresOrInches cm="5" inches="4" displayMetric={displayMetric} displayImperial={displayImperial} /> heels.</p>
         <ul className='list-unstyled list-inline'>
           <li>
             <a href='javascript:;' className={displayMetric ? 'active' : ''} onClick={this.setMetric}>CMs</a>
