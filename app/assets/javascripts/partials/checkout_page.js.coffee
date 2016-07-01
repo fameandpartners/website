@@ -354,13 +354,16 @@ page.initCheckoutEditPage = () ->
       element = $(this)
       useBillingAddressToShip = $('#ship_to_address_Ship_to_this_address')
       countryHasShippingFee = window.checkout_page.countries[element.val()]
-      if element.attr('id') == 'order_bill_address_attributes_country_id' and useBillingAddressToShip.is(':checked') and countryHasShippingFee
+      isBillAddressCountry = element.attr('id') == 'order_bill_address_attributes_country_id'
+      isShipAddressCountry = element.attr('id') == 'order_ship_address_attributes_country_id'
+      useBillingAddressToShipChecked = useBillingAddressToShip.is(':checked')
+      if isBillAddressCountry and useBillingAddressToShipChecked and countryHasShippingFee
         shippingFeeAlert.show()
-      else if element.attr('id') == 'order_bill_address_attributes_country_id' and useBillingAddressToShip.is(':checked')
+      else if isBillAddressCountry and useBillingAddressToShipChecked
         shippingFeeAlert.hide()
-      else if element.attr('id') == 'order_ship_address_attributes_country_id' and countryHasShippingFee
+      else if isShipAddressCountry and countryHasShippingFee
         shippingFeeAlert.show()
-      else if element.attr('id') == 'order_ship_address_attributes_country_id'
+      else if isShipAddressCountry
         shippingFeeAlert.hide()
   }
   page.init()

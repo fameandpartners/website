@@ -4,7 +4,7 @@ ruby:
   last_name = form.object.lastname.present? ? form.object.lastname : (@order.try(:last_name) || @user.try(:last_name))
   shopping_bag_texts = Preferences::ShoppingBag.new(current_site_version)
   countries = available_countries_for_current_zone
-  countries_with_fees = Hash[countries.map(&:id).zip(countries.map { |c| c.zone_member.has_international_shipping_fee })]
+  countries_with_fees = Hash[countries.map { |country| [country.id, country.zone_member.has_international_shipping_fee] }]
 
 - if Spree::Config[:address_requires_state]
   ruby:
