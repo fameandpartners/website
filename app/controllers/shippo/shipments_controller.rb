@@ -7,7 +7,7 @@ module Shippo
         if (shipment = order.shipments.first)
           shipment.update_attributes(tracking: params[:tracking_number])
         else
-          order.shipments.create(tracking: params[:tracking_number])
+          order.shipments.create(tracking: params[:tracking_number], shipping_method: Spree::ShippingMethod.first)
         end
       end
       render :nothing => true, :status => 200, :content_type => 'text/html'
