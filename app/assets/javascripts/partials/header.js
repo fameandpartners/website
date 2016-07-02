@@ -29,15 +29,6 @@
     var close_menu;
     close_menu = '#home-menu .nav-main-menu span, .rect';
 
-    //Close mega menu when cursor is outside for too long
-    $('.rect-wrapper, .nav-menu-container').on('mouseleave', function(e) {
-      if (!($('.rect-wrapper').has(e.relatedTarget).length)) {
-        setTimeout((function() {
-          return $("" + close_menu + "").removeClass('active');
-        }), 5000);
-      }
-    });
-
     //Close mega menu when clicked outside
     $('html').click(function(event) {
       if ($(event.target).hasClass('js-close-nav-menu') || !($('.rect-wrapper .rect').has(event.target).length || $(event.target).hasClass('active'))) {
