@@ -3,46 +3,53 @@
 
   //Search input trigger
   $("#search").on('click', function() {
-    return $(this).addClass('active');
+    $(this).addClass('active');
   });
   $('.js-search-trigger').on('click', function(e) {
     if ($(this).parent().hasClass('active')) {
       if ($("#searchForm #searchValue").val() !== '') {
-        return $("#searchForm").submit();
+        $("#searchForm").submit();
       } else {
         e.stopPropagation();
-        return $("#search").removeClass('active');
+        $("#search").removeClass('active');
       }
     }
   });
 
   //Mega menu trigger
-  $("#home-menu .nav-main-menu span.js-open-nav-menu").on('click', function() {
+  $(".nav-main-menu .js-open-nav-menu").on('click', function() {
     var menu_index;
-    $("#home-menu .nav-main-menu span, .rect, #search").removeClass('active');
     menu_index = $(this).index();
-    return $(".nav-main-menu span:eq(" + menu_index + "), .rect-wrapper .rect:eq(" + menu_index + ")").addClass('active');
+
+    // Toggle when clicked
+    if ($('html').find('.rect.active')) {
+      $(".nav-main-menu span:not(':eq(" + menu_index + ")'), .rect-wrapper .rect:not(':eq(" + menu_index + ")')").removeClass('active');
+    }
+    $(".nav-main-menu span:eq(" + menu_index + "), .rect-wrapper .rect:eq(" + menu_index + ")").toggleClass('active');
+
   });
 
-  //Triggers to close current mega menu
+  //Check if any mega menu is open
   if ($('html').find('.rect.active')) {
+
+    //Close mega menu when clicked beneath it
+    $('html').click(function(event) {
     var close_menu;
     close_menu = '#home-menu .nav-main-menu span, .rect';
-
-    //Close mega menu when clicked outside
-    $('html').click(function(event) {
-      if ($(event.target).hasClass('js-close-nav-menu') || !($('.rect-wrapper .rect').has(event.target).length || $(event.target).hasClass('active'))) {
-        return $("" + close_menu + "").removeClass('active');
+      if ($(event.target).closest('#fixed-header').length === 0) {
+        $(close_menu).removeClass('active');
+        console.log('removeu');
       }
     });
+
   }
 
   //My account area trigger
   $("#account-area .my-account").mouseenter(function() {
-    return $("#account-area .account-menu").show();
+    $("#account-area .account-menu").show();
   });
   $("#account-area .account-menu").mouseleave(function() {
-    return $("#account-area .account-menu").hide();
+    $("#account-area .account-menu").hide();
   });
 
   //Lookbook slide
