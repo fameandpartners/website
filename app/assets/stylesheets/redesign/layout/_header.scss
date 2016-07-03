@@ -229,6 +229,10 @@ header.main {
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
+    .rect-wrapper {
+      margin-top: 45px;
+    }
+
     .shopping-bag-wrapper span {
       display: inline-block;
     }
