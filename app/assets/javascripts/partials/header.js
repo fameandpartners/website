@@ -73,4 +73,8 @@
     });
   }
 
+  if ($('#locale-warn-bar:visible').length) {
+    $( 'header.main' ).addClass('locale-warn-active');
+  }
+
 })(jQuery);
