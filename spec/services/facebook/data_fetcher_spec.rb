@@ -4,15 +4,7 @@ module Facebook
   describe DataFetcher, type: :service do
     let(:token) { 'CAACEdEose0cBAFZAeqc2JqR1zc2SbNfcjrEPFc5TlZC5TSF7ScsXAyHBdEuZC96cYAdF82ZAeILxF631RGzr6uZAkn2gLZCZBiAmq4t5mVzxIXjZAV84wKR3sF5RqdoLNlygYmZASfrlsexqRup8dMmVc1EsQG6sRTKy8DfhD5lGLZCK4BwDF47dXAPVciXOXhZBurF6dYuI3oG8kN0N95eVW1L7IRWHlBspAQZD' }
     let(:uid) { '10204225122802197' }
-    let(:fetcher) { described_class.new(uid, token) }
-
-    describe '#fetch_birthday', :vcr do
-      let(:birthday) { Date.new(1989, 8, 11) }
-
-      it 'gets user birthday' do
-        expect(fetcher.fetch_birthday).to eq(birthday)
-      end
-    end
+    let(:fetcher) { described_class.new(token) }
 
     describe '#fetch_friends', :vcr do
       it 'gets user friends' do

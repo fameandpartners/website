@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://graph.facebook.com/10204225122802197/friends?access_token=CAACEdEose0cBAFZAeqc2JqR1zc2SbNfcjrEPFc5TlZC5TSF7ScsXAyHBdEuZC96cYAdF82ZAeILxF631RGzr6uZAkn2gLZCZBiAmq4t5mVzxIXjZAV84wKR3sF5RqdoLNlygYmZASfrlsexqRup8dMmVc1EsQG6sRTKy8DfhD5lGLZCK4BwDF47dXAPVciXOXhZBurF6dYuI3oG8kN0N95eVW1L7IRWHlBspAQZD&limit=1000&offset=0
+    uri: https://graph.facebook.com/me/friends?access_token=CAACEdEose0cBAFZAeqc2JqR1zc2SbNfcjrEPFc5TlZC5TSF7ScsXAyHBdEuZC96cYAdF82ZAeILxF631RGzr6uZAkn2gLZCZBiAmq4t5mVzxIXjZAV84wKR3sF5RqdoLNlygYmZASfrlsexqRup8dMmVc1EsQG6sRTKy8DfhD5lGLZCK4BwDF47dXAPVciXOXhZBurF6dYuI3oG8kN0N95eVW1L7IRWHlBspAQZD
     body:
       encoding: US-ASCII
       string: ''
@@ -61,7 +61,7 @@ http_interactions:
         Henrique Sant'' Ana","id":"782877135108614"},{"name":"Rafael R\u00eago Drumond","id":"100001730876765"},{"name":"Jo\u00e3o
         Felipe Nicolaci Pimentel","id":"100001891377345"},{"name":"Eduarosemel Ribeiro","id":"916701648403548"},{"name":"Gustavo
         Honorato","id":"100002182470868"},{"name":"Leonardo Preuss","id":"623080164444223"},{"name":"Robson
-        Morais","id":"100002523742601"},{"name":"Leonardo Picciani","id":"100007124167949"}],"paging":{"next":"https:\/\/graph.facebook.com\/v2.0\/10204225122802197\/friends?limit=1000&offset=1000&access_token=CAACEdEose0cBAFZAeqc2JqR1zc2SbNfcjrEPFc5TlZC5TSF7ScsXAyHBdEuZC96cYAdF82ZAeILxF631RGzr6uZAkn2gLZCZBiAmq4t5mVzxIXjZAV84wKR3sF5RqdoLNlygYmZASfrlsexqRup8dMmVc1EsQG6sRTKy8DfhD5lGLZCK4BwDF47dXAPVciXOXhZBurF6dYuI3oG8kN0N95eVW1L7IRWHlBspAQZD&__after_id=enc_AdDeZBoow9fPcVghJmKVVKIZBAcHJVfEWpTrZA1mRQ6ZCNdVdxUZCl9pcOtVC5DzoZBaU17ZA3r8P1mZAODZA4mPMbJ4iHvKL"},"summary":{"total_count":372}}'
-    http_version: 
+        Morais","id":"100002523742601"},{"name":"Leonardo Picciani","id":"100007124167949"}],"paging":{"cursors":{"before":"QVFIUjJEM3ZA0ZAzkyX0pka2xIby1oY3lOc2cxbEJCN0NkR0dfM25xR29sMGlOd2xiSzBYY296VjRRN291Q2VHRk94N0wZD","after":"QVFIUjJEM3ZA0ZAzkyX0pka2xIby1oY3lOc2cxbEJCN0NkR0dfM25xR29sMGlOd2xiSzBYY296VjRRN291Q2VHRk94N0wZD"}},"summary":{"total_count":372}}'
+    http_version:
   recorded_at: Thu, 17 Sep 2015 01:13:28 GMT
 recorded_with: VCR 2.9.3
