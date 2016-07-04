@@ -70,7 +70,7 @@ module Feeds
       def save(xml)
         Fog::Storage.new(storage_credentials).
           directories.
-          get(configatron.aws.s3.bucket).
+          get(ENV['AWS_S3_BUCKET']).
           files.
           create(
             key:    export_file_path,
@@ -99,7 +99,7 @@ module Feeds
       def storage_credentials
         storage_credentials = {
           provider:        'AWS',
-          region:          configatron.aws.s3.region,
+          region:          ENV['AWS_S3_REGION'],
           use_iam_profile: true
         }
 
