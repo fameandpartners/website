@@ -22,10 +22,10 @@ class SidePanelSizeChart extends React.Component {
   }
 
   render() {
-    const triggerState = this.state.active ? 'size-cart-trigger is-active' : 'size-cart-trigger';
+    const triggerState = this.state.active ? 'chart-wrap-trigger is-active' : 'chart-wrap-trigger';
     const triggerCopy = this.state.active ? 'Size Chart' : 'View the Size Chart';
     return (
-      <div className="size-cart-container">
+      <div className="chart-wrap">
         <a href="#" className={triggerState} onClick={this.toggleMenu}>{triggerCopy}</a>
         <div className="inner-wrap">
           <p>

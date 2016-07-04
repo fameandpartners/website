@@ -3,14 +3,18 @@ import {customizeReducer,
         imageReducer,
         colorReducer,
         defaultSizesReducer,
-        sizeChartReducer} from './pdpReducers';
+        lengthReducer,
+        sizeChartReducer,
+        skirtChartReducer} from './pdpReducers';
 
 const rootReducer = combineReducers({
   customize: customizeReducer,
   images: imageReducer,
   colors: colorReducer,
   defaultSizes: defaultSizesReducer,
-  sizeChart: sizeChartReducer
+  lengths: lengthReducer,
+  sizeChart: sizeChartReducer,
+  skirts: skirtChartReducer
 });
 
 export default rootReducer;

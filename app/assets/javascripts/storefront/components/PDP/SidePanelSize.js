@@ -20,7 +20,7 @@ class SidePanelSize extends SidePanel {
     let customize = this.state.customize;
     customize.size.id = event.target.dataset.id;
     customize.size.presentation = event.target.dataset.presentation;
-    this.setState({customize: customize});
+    this.setState({customize});
     this.props.actions.selectSize(this.state.customize);
   }
 
@@ -41,7 +41,7 @@ class SidePanelSize extends SidePanel {
     });
 
     return (
-      <div className="panel-side-container-size">
+      <div className="side-container side-container-size">
         <a href="#"
           className={triggerState}
           onClick={this.openMenu}>
@@ -58,7 +58,7 @@ class SidePanelSize extends SidePanel {
             </a>
           </div>
           <h2 className="h4 c-card-customize__header">Choose your size</h2>
-          <div className="sizes-wrap">{sizes}</div>
+          <div className="row">{sizes}</div>
           <SidePanelSizeChart />
         </div>
       </div>

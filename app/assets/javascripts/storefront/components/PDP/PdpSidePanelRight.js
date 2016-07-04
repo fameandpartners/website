@@ -1,5 +1,6 @@
 import React from 'react';
 import SidePanelSize from './SidePanelSize';
+import SidePanelLength from './SidePanelLength';
 
 class PdpSidePanelRight extends React.Component {
   constructor(props, context) {
@@ -19,7 +20,7 @@ class PdpSidePanelRight extends React.Component {
           <div className="c-card-customize">
             <h2 className="h4 c-card-customize__header">Specify your size</h2>
             <SidePanelSize />
-
+            <SidePanelLength />
           </div>
 
           <div className="c-card-customize">

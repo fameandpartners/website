@@ -10,6 +10,7 @@
   &__content {
     position: relative;
     display: block;
+    margin-bottom: 5px;
     padding-left: 30px;
     color: inherit;
     @extend %cfix;
@@ -45,6 +46,7 @@
     float: left;
     width: 50%;
     text-align: right;
+    text-transform: capitalize;
   }
 
   .side-menu {
