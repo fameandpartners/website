@@ -3,6 +3,7 @@
 
   //Search input trigger
   $("#search").on('click', function() {
+    $('.nav-main-menu').fadeTo( "slow", 0.1 );
     $(this).addClass('active');
   });
   $('.js-search-trigger').on('click', function(e) {
@@ -12,9 +13,20 @@
       } else {
         e.stopPropagation();
         $("#search").removeClass('active');
+        $('.nav-main-menu').fadeTo( "slow", 1 );
       }
     }
   });
+
+  //Close search input if clicked outside
+  if ($('html').find('#search.active')) {
+    $('html').click(function(event) {
+      if ($(event.target).closest('#search').length === 0) {
+        $('#search').removeClass('active');
+        $('.nav-main-menu').fadeTo( "slow", 1 );
+      }
+    });
+  }
 
   //Mega menu trigger
   $(".nav-main-menu .js-open-nav-menu").on('click', function() {
@@ -38,7 +50,6 @@
     close_menu = '#home-menu .nav-main-menu span, .rect';
       if ($(event.target).closest('#fixed-header').length === 0) {
         $(close_menu).removeClass('active');
-        console.log('removeu');
       }
     });
 
