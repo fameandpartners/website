@@ -173,7 +173,7 @@ header.main {
         top: 0;
         right: 0;
         background-color: #fff;
-        @include transition(all 0.3s linear);
+        @include transition(width 0.3s linear);
 
         input {
           display: none;
@@ -193,6 +193,14 @@ header.main {
 
         }
 
+        .close-search {
+          display: none;
+          position: absolute;
+          left: -25px;
+          top: 5px;
+          cursor: pointer;
+        }
+
       }
 
       .icon-search {
@@ -201,11 +209,11 @@ header.main {
       }
 
       &.active .search-input {
-        width: 600px;
+        width: 300px;
         height: $search-input-height;
         border: 1px solid $c-neutral-4;
 
-        input {
+        input, .close-search {
           opacity: 1;
           display: block;
         }
