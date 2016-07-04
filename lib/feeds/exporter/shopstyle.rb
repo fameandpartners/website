@@ -1,6 +1,8 @@
+require_relative './google'
+
 module Feeds
   module Exporter
-    class Shopstyle < CPC
+    class Shopstyle < Google
       # @override
       def export_file_name
         'shopstyle.xml'

@@ -400,6 +400,8 @@ FameAndPartners::Application.routes.draw do
 
   resources :moodboard_item_comments, exclude: [:index, :show]
 
+  post 'shipments_update', to: 'shippo/shipments#update'
+
   ##################
   # Robots and Feeds
   ##################
