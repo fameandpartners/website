@@ -81,7 +81,6 @@ header.main {
 
   .rect-wrapper {
     background: $c-neutral-white;
-    border-bottom: 1px solid $c-neutral-5;
     position: absolute;
     width: 100%;
     z-index: 101;
@@ -225,6 +224,11 @@ header.main {
 
   @media (min-width: $bootstrap-md-width) {
     padding-bottom: $md-content-margin-top;
+
+    .rect-wrapper {
+      border-bottom: 1px solid $c-neutral-5;
+    }
+
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
