@@ -5,6 +5,7 @@
   $("#search").on('click', function() {
     $('.nav-main-menu').fadeTo( "slow", 0.1 );
     $(this).addClass('active');
+    $('#searchValue').focus();
   });
   $('.js-search-trigger').on('click', function(e) {
     if ($(this).parent().hasClass('active')) {
