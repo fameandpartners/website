@@ -12,6 +12,7 @@
 
   //Search input trigger
   $("#search").on('click', function() {
+    close_menu();
     $('.nav-main-menu').fadeTo( 300, 0 );
     $(this).addClass('active');
     $('#searchValue').focus();
