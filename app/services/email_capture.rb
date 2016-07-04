@@ -57,8 +57,8 @@ class EmailCapture
   end
 
   def subscribe_list(current_email, merge_variables)
-    mailchimp.lists.subscribe(set_list_id, {"email" => current_email},
-                                merge_variables, 'html', false, true, true, false)
+    # mailchimp.lists.subscribe(set_list_id, {"email" => current_email},
+    #                             merge_variables, 'html', false, true, true, false)
   end
 
   def email_changed?
@@ -132,8 +132,8 @@ class EmailCapture
   end
 
   def unsubscribed?(email)
-    mailchimp.lists.member_info(set_list_id, [email: email])
-      .try(:[], 'data').try(:[], 0).try(:[], 'status') == 'unsubscribed'
+    # mailchimp.lists.member_info(set_list_id, [email: email])
+    #   .try(:[], 'data').try(:[], 0).try(:[], 'status') == 'unsubscribed'
   end
 
 end
