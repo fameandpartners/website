@@ -1,30 +1,35 @@
 'use strict';
 (function ($) {
 
+  function close_search(){
+    $('#search').removeClass('active');
+    $('.nav-main-menu').fadeTo( 100, 1 );
+  }
+
   //Search input trigger
   $("#search").on('click', function() {
-    $('.nav-main-menu').fadeTo( "slow", 0.1 );
+    $('.nav-main-menu').fadeTo( 300, 0 );
     $(this).addClass('active');
     $('#searchValue').focus();
   });
+
+
   $('.js-search-trigger').on('click', function(e) {
     if ($(this).parent().hasClass('active')) {
       if ($("#searchForm #searchValue").val() !== '') {
         $("#searchForm").submit();
       } else {
         e.stopPropagation();
-        $("#search").removeClass('active');
-        $('.nav-main-menu').fadeTo( "slow", 1 );
+        close_search();
       }
     }
   });
 
-  //Close search input if clicked outside
+  //Close search input triggers
   if ($('html').find('#search.active')) {
     $('html').click(function(event) {
-      if ($(event.target).closest('#search').length === 0) {
-        $('#search').removeClass('active');
-        $('.nav-main-menu').fadeTo( "slow", 1 );
+      if ($(event.target).closest('#search').length === 0 || $(event.target).is('span.close-search.btn-close')) {
+        close_search();
       }
     });
   }
