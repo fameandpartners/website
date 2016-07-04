@@ -1,7 +1,11 @@
 'use strict';
 (function ($) {
 
-  function close_search(){
+  function close_menu() {
+    $('#home-menu .nav-main-menu span, .rect').removeClass('active');
+  }
+
+  function close_search() {
     $('#search').removeClass('active');
     $('.nav-main-menu').fadeTo( 100, 1 );
   }
@@ -52,10 +56,8 @@
 
     //Close mega menu when clicked beneath it
     $('html').click(function(event) {
-    var close_menu;
-    close_menu = '#home-menu .nav-main-menu span, .rect';
       if ($(event.target).closest('#fixed-header').length === 0) {
-        $(close_menu).removeClass('active');
+        close_menu();
       }
     });
 
