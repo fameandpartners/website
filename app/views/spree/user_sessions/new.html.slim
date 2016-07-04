@@ -10,12 +10,14 @@
           .col-md-5
             = link_to 'Log in with Facebook', fb_auth_path(site_version: current_site_version.code), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
           .col-md-1
-            .separator 
+            .separator
               span or
           .col-md-6.form-wrap
-            = render :partial => 'spree/shared/login'
+            = render partial: 'spree/shared/login'
 
-coffee:
-  fbModalHeight = $('.auto-discount-applied').height()
-  if fbModalHeight > 0
-    $('.page-title').css("marginTop", 209)
+javascript:
+  jQuery(document).ready(function () {
+    var fbModalHeight = $('.auto-discount-applied').height();
+    if (fbModalHeight > 0)
+      $('.page-title').css("marginTop", 209);
+  });
