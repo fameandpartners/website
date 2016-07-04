@@ -78,7 +78,7 @@
     $( 'header.main' ).addClass('locale-warn-active');
   }
 
-  $('#locale-selector-mobile-container').on('click', function() {
+  $('#locale-selector-mobile-container, #locale-selector-current').on('click', function() {
     $(this).toggleClass('show-options');
   });
 

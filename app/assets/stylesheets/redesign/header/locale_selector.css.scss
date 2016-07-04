@@ -109,8 +109,8 @@
     padding-bottom: 2px;
     position: relative;
 
-    &:hover,
-    &:active {
+    &.show-options {
+
       ul {
         display: block;
       }
@@ -118,6 +118,7 @@
       .arrow {
         @include transform(rotate(180deg));
       }
+
     }
 
     .arrow {
