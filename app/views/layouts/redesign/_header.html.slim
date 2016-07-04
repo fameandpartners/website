@@ -55,10 +55,12 @@ ruby:
   header.main
 
     .nav-menu.nav-alert-top
-      = render 'layouts/redesign/header/locale_selector/mobile'
-      .container-fluid.nav-menu-container
+      #fixed-header
         = render 'layouts/redesign/header/locale_warn/base', warning: @locale_warning
-      = render 'layouts/redesign/header/gray_top_banner/base'
+        = render 'layouts/redesign/header/gray_top_banner/base'
+
+      = render 'layouts/redesign/header/locale_selector/mobile'
+
       .container-fluid
         #masthead-container.cfix
           .masthead.pull-left.visible-xs.visible-sm
