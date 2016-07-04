@@ -23,7 +23,6 @@ gem 'redis-rails'
 gem 'autoprefixer-rails'
 gem 'bower-rails', '~> 0.10.0'
 gem 'redcarpet', '~> 2.3.0'
-gem 'koala'
 
 # Monitoring & Events
 gem 'newrelic_rpm'
@@ -63,6 +62,7 @@ gem 'geoip', require: false
 gem 'device_detector', '~> 0.8.1'
 gem 'rubyzip', '~> 1.1.7', require: false
 gem 'roo', require: false
+gem 'koala'
 
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
 
