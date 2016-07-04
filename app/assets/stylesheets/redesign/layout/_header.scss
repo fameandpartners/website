@@ -217,13 +217,20 @@ header.main {
   }
 
   #fixed-header {
-    position: fixed;
     width: 100%;
     background: $c-neutral-white;
   }
 
   @media (min-width: $bootstrap-md-width) {
     padding-bottom: $md-content-margin-top;
+
+    &.locale-warn-active {
+      padding-bottom: $fixed-header-with-locale-warn;
+    }
+
+    #fixed-header {
+      position: fixed;
+    }
 
     .rect-wrapper {
       border-bottom: 1px solid $c-neutral-5;
