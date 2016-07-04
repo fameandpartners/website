@@ -15,9 +15,9 @@
           .col-md-6.form-wrap
             = render partial: 'spree/shared/login'
 
-/http://stackoverflow.com/questions/25635395/execjsruntimeerror-in-listingsindex-error
-
-coffee:
-  fbModalHeight = $('.auto-discount-applied').height()
-  if fbModalHeight > 0
-    $('.page-title').css("marginTop", 209)
+javascript:
+  jQuery(document).ready(function () {
+    var fbModalHeight = $('.auto-discount-applied').height();
+    if (fbModalHeight > 0)
+      $('.page-title').css("marginTop", 209);
+  });
