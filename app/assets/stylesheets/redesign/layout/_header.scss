@@ -92,10 +92,6 @@ header.main {
     display: none;
     margin-top: -1px;
 
-    &.active {
-      display: block;
-    }
-
     .btn-close {
       z-index: 101;
       cursor: pointer;
@@ -147,7 +143,7 @@ header.main {
       .nav-main-menu {
         padding-bottom: 35px;
 
-        span:hover, span.active {
+        span:hover {
           border-color: $c-neutral-black;
         }
 
@@ -241,6 +237,14 @@ header.main {
 
     .rect-wrapper {
       border-bottom: 1px solid $c-neutral-5;
+    }
+
+    .rect.active,  {
+      display: block;
+    }
+
+    .nav-menu-container #home-menu .nav-main-menu span.active {
+      border-color: $c-neutral-black;
     }
 
   }
