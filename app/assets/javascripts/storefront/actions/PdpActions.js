@@ -5,3 +5,7 @@ export function selectSize(customize) {
 export function selectLength(customize) {
   return { type: 'SELECT_LENGTH', customize };
 }
+
+export function selectColor(customize) {
+  return { type: 'SELECT_COLOR', customize };
+}

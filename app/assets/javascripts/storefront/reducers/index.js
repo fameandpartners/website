@@ -1,20 +1,26 @@
 import {combineReducers} from 'redux';
 import {customizeReducer,
         imageReducer,
-        colorReducer,
+        defaultColorReducer,
+        customColorReducer,
         defaultSizesReducer,
         lengthReducer,
         sizeChartReducer,
-        skirtChartReducer} from './pdpReducers';
+        skirtChartReducer,
+        preselectedColorReducer,
+        customColorPriceReducer} from './pdpReducers';
 
 const rootReducer = combineReducers({
   customize: customizeReducer,
   images: imageReducer,
-  colors: colorReducer,
+  defaultColors: defaultColorReducer,
+  customColors: customColorReducer,
+  customColorPrice: customColorPriceReducer,
   defaultSizes: defaultSizesReducer,
   lengths: lengthReducer,
   sizeChart: sizeChartReducer,
-  skirts: skirtChartReducer
+  skirts: skirtChartReducer,
+  preselectedColor: preselectedColorReducer
 });
 
 export default rootReducer;
