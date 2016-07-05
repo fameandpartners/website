@@ -8,13 +8,9 @@ class FacebookDataFetchWorker
     return if user.blank?
 
     # Facebook Data
-    fetcher = Facebook::DataFetcher.new(uid, token)
+    fetcher = Facebook::DataFetcher.new(token)
 
     user.facebook_data_value[:uid] = uid
-
-    if (birthday = fetcher.fetch_birthday)
-      user.update_column(:birthday, birthday)
-    end
 
     if (friends = fetcher.fetch_friends)
       user.facebook_data_value[:friends] = friends

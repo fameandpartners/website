@@ -1,58 +1,26 @@
-require 'json'
-require 'open-uri'
-
 class Facebook::DataFetcher
-  attr_accessor :uid
-  attr_accessor :token
 
-  def initialize(uid, token)
-    self.uid = uid
-    self.token = token
-  end
+  attr_accessor :graph
 
-  def fetch_birthday
-    response = get(nil, fields: 'birthday')
-
-    if response['birthday'].present?
-      Date.strptime(response['birthday'], '%m/%d/%Y')
-    else
-      nil
-    end
+  def initialize(token)
+    self.graph = Koala::Facebook::API.new(token)
   end
 
   def fetch_friends
-    friends = []
-    limit   = 1000
-    offset  = 0
+    all_friends = []
 
-    loop do
-      response = get('friends', limit: limit, offset: offset)
+    friends = self.graph.get_connection('me', 'friends')
 
-      friends += response['data']
-
-      break if response['data'].size < limit
-
-      offset += limit
+    while friends.present?
+      all_friends.concat friends
+      friends = friends.next_page
     end
 
-    friends
+    all_friends
   end
 
   def fetch_gender
-    response = get('/', fields: 'gender')
-    response['gender']
+    self.graph.get_object('me')['gender']
   end
 
-  private
-
-  def get(path = nil, params = {})
-    url = [base_url, path].compact.join('/')
-    url += "?#{params.merge(access_token: token).to_params}"
-
-    JSON.parse(open(url).read)
-  end
-
-  def base_url
-    "https://graph.facebook.com/#{uid}"
-  end
 end
