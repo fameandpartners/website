@@ -12,6 +12,8 @@ Feature: Create manual orders
       | City                    | Melbourne      |
       | Phone Number            | 2255-4422      |
       | Zipcode                 | 12345          |
+      | Country                 | United States  |
+      | State                   | California     |
     And The example completed order exists with this user
 
   @javascript
@@ -33,3 +35,5 @@ Feature: Create manual orders
     And I click on "Create" link
     And I select "Roger That" from chosen customers select box
     Then I should see correct user data prefilled
+#    And I click on "Complete Order and Send for Manufacturing" button
+#    Then I should see "can't be blank"

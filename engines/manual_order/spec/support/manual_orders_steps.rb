@@ -15,7 +15,9 @@ module Acceptance
                  address2: user_data['Street Address 2'],
                  city: user_data['City'],
                  zipcode: user_data['Zipcode'],
-                 phone: user_data['Phone Number']
+                 phone: user_data['Phone Number'],
+                 country: Spree::Country.where(name: user_data['Country']).first,
+                 state: Spree::State.where(name: user_data['State']).first
       user = create :spree_user
       user.first_name = user_data['First Name']
       user.last_name = user_data['Last Name']
@@ -72,6 +74,8 @@ module Acceptance
       expect(page).to have_field('forms_manual_order_city', with: 'Melbourne')
       expect(page).to have_field('forms_manual_order_phone', with: '2255-4422')
       expect(page).to have_field('forms_manual_order_zipcode', with: '12345')
+      expect(page).to have_selector('#forms_manual_order_country_chosen a span', text: 'United States')
+      expect(page).to have_selector('#forms_manual_order_state_chosen a span', text: 'California')
     end
 
     private
