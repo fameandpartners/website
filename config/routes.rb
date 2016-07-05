@@ -153,6 +153,7 @@ FameAndPartners::Application.routes.draw do
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
     get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
     get '/lookbook/the-ruffled-up-collection' => 'products/collections#show', :permalink => 'ruffle', :as => :the_ruffled_up_collection
+    get '/lookbook/the-freshly-picked-collection' => 'products/collections#show', :permalink => 'cotton-collection', :as => :the_freshly_picked_collection
 
     get '/sale-dresses' => redirect('/dresses/sale')
     get '/dresses/sale' => 'products/collections#show', :permalink => 'sale', :as => :sales_collection
@@ -283,9 +284,7 @@ FameAndPartners::Application.routes.draw do
     get '/about'   => 'statics#about', :as => :about_us
     get '/why-us'  => 'statics#why_us', :as => :why_us
     get '/team', to: redirect("http://www.fameandpartners.com/about")
-    scope :module => 'revolution' do
-      get '/terms'   => 'pages#show'
-    end
+    get '/terms'   => 'statics#ecom_terms'
     get '/privacy' => 'statics#ecom_privacy'
     get '/legal'   => 'statics#legal'
     get '/faqs'   => 'statics#faqs'
@@ -309,15 +308,10 @@ FameAndPartners::Application.routes.draw do
       end
     end
 
-    get '/fame-chain' => 'fame_chains#new'
-    resource 'fame-chain', as: 'fame_chain', only: [:new, :create] do
-      get 'success'
-    end
+    get '/fame-chain' => 'fame_chains#new', as: :fame_chain
+    resource 'fame-chain', as: 'fame_chain', only: [:create]
 
-    get '/style-consultation' => 'style_consultations#new', as: 'style_consultation'
-    resource 'style-consultation', as: 'style_consultation', only: [:new, :create] do
-      get 'success'
-    end
+    get '/style-consultation', to: redirect("/styling-session")
 
     get '/styling-session'  => 'style_sessions#new', as: :styling_session
     resource 'style-session', as: 'style_session', only: [:create]
@@ -405,6 +399,8 @@ FameAndPartners::Application.routes.draw do
   end
 
   resources :moodboard_item_comments, exclude: [:index, :show]
+
+  post 'shipments_update', to: 'shippo/shipments#update'
 
   ##################
   # Robots and Feeds

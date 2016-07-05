@@ -22,17 +22,17 @@ ruby:
     .row.aside-single-tile
       .main.col-md-7
         = render 'shared/redesign/tabs_collection'
-        = link_to '/dresses/little-black-dress', class: 'media-wrap'
-          = image_tag 'home-page-tiles/Category-01LBD-15-06-2016.jpg', alt: 'Little black dress. The wardrobe essential, reimagined.'
+        = link_to '/dresses/dress-delaney-two-piece-1095?color=navy', class: 'media-wrap'
+          = image_tag 'home-page-tiles/Category-01-2016-07-01.jpg', alt: 'It takes two. Double-up on style in the Delaney set. Shop now'
         = link_to styling_session_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/Category-02-Styling-15-06-2016.jpg', alt: 'Need some styling advice? Book your free complimentary styling session with our professional Fame stylist.'
+          = image_tag 'home-page-tiles/Category-02-2016-07-01.jpg', alt: "Free styling session. Via chat, phone or video, book a free session with LA's go-to fashion stylist, Amber Bond. Book me in"
 
       aside.col-md-5
         .outer-wrap
-          = link_to build_taxon_path('cocktail')
+          = link_to 'dresses/dress-cenit-two-piece-1088?color=pale-blue-cotton-stripe'
             picture.media-wrap
               .inner-wrap
-                img src='#{image_path('home-page-tiles/Category-03-CocktailOclock-15-06-2016.jpg')}' alt="Cocktail O'Clock"
+                img src='#{image_path('home-page-tiles/Category-03-2016-07-01.jpg')}' alt="Knot your average. Shop the Cenit Two-Piece"
 
 
   section.carousel-strap.instagram
@@ -41,11 +41,11 @@ ruby:
         h2.title-line-on-sides
           .inner-wrap SHOP INSTAGRAM
         = react_component('InstagramCarousel', skin: '',
-          assets: [ {link: link_to_dresses + '/dress-wyatt-1030?color=dark-burgundy&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=lotus-doll-dress-product', src: '/assets/homepage/instagram/insta1.jpg', user: '@fameandpartners', cta: "SHOP THE WYATT LOOK"},
-                    {link: link_to_dresses + '/dress-persia-951?color=navy&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=persia-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_09.jpg', user: '@garancerousseau', cta: "SHOP THE PERSIA LOOK"},
+          assets: [ {link: link_to_dresses + '/dress-wyatt-1030?color=dark-burgundy&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=lotus-doll-dress-product', src: '/assets/homepage/instagram/Instagram-01.jpg', user: '@fameandpartners', cta: "SHOP THE WYATT LOOK"},
+                    {link: link_to_dresses + '/dress-paxton-1043?color=navy', src: '/assets/homepage/instagram/_hollyt.jpg', user: '@_hollyt', cta: "SHOP THE PAXTON"},
                     {link: link_to_dresses + '/dress-aspen-853?color=white&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=persia-dress-product', src: '/assets/homepage/instagram/insta2.jpg', user: '@evaacatherine', cta: "SHOP THE ASPEN LOOK"},
                     {link: link_to_dresses + '/dress-firefly-640?color=black', src: '/assets/homepage/instagram/lainyhedaya.jpg', user: '@lainyhedaya', cta: "SHOP THIS LOOK"},
-                    {link: link_to_dresses + '/dress-first-in-line-skirt-735?color=white', src: '/assets/homepage/instagram/insta3.jpg', user: '@andreawahl_', cta: "SHOP THE FIRST IN LINE SKIRT LOOK"},
+                    {link: link_to_dresses + '/dress-audrey-1032?color=pale-pink-and-pale-grey', src: '/assets/homepage/instagram/jacquiealexander.jpg', user: '@jacquiealexander', cta: "SHOP THE AUDREY"},
                     {link: link_to_dresses + '/dress-lotus-doll-899?color=grand-lily&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=lotus-doll-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_07.jpg', user: '@fionabriseno', cta: "SHOP THE LOTUS DOLL LOOK"},
                     {link: link_to_dresses + '/dress-roxy-631?color=burgundy', src: '/assets/homepage/instagram/No4.jpg', user: '@xxsophiehermanxx', cta: "SHOP THE ROXY LOOK"},
                     {link: link_to_dresses + '/dress-juliette-505?color=black', src: '/assets/homepage/instagram/No3_Sophie.jpg', user: '@xxsophiehermannxx', cta: "Shop the Juliette Look"},

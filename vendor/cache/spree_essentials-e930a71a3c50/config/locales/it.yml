@@ -1,0 +1,40 @@
+it:
+  successfully_created: "%{resource} è stato creato con successo!"
+  successfully_removed: "%{resource} è stato rimosso con successo!"
+  successfully_updated: "%{resource} è stato aggiornato con successo!"
+
+  essentials:
+    parsed_with: Interpretato con
+
+  activerecord:
+    attributes:
+      order:
+        completed_at: Completato il
+    errors:
+      messages:
+        invalid_date_time: è una data non valida.
+
+  upload:
+    model_name: Allegato
+    file_name: Nome file
+    size: Dimensioni
+
+  spree:
+    admin:
+      shared:
+        contents_tab:
+          content: Contentuto
+
+      subnav:
+        uploads: Allegati
+
+      uploads:
+        new:
+          new_upload: Nuovo allegato
+        edit:
+          edit_upload: Modifica allegato
+          preview: Anteprima
+          link: Collegamento
+        index:
+          listing_uploads: Elenco allegati
+          new_upload: Carica un file

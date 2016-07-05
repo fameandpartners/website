@@ -1,0 +1,17 @@
+---
+stack:
+  name: fandp-web
+  default_env: staging
+  environments:
+    - staging:
+        maintenance_role: web
+        region: us-east-1
+        roles:
+          - name: web
+            user: app_user
+    - production:
+        region: us-east-1
+        roles:
+          - name: web
+            user: app_user
+          - name: worker
