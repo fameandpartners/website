@@ -29,7 +29,7 @@ module Acceptance
       end
 
       step 'I select :site_version site version' do |site_version|
-        find('#locale-selector-current').hover
+        find('#locale-selector-current').click
         click_link site_version
       end
     end
