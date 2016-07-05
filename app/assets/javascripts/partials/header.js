@@ -90,4 +90,10 @@
     $(this).toggleClass('show-options');
   });
 
+  $("#side-search-area #side-search-icon").on('click', function() {
+    if ($("#side-search-area #searchForm input").val() !== "") {
+      $("#side-search-area #searchForm").submit();
+    }
+  });
+
 })(jQuery);

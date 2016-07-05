@@ -306,9 +306,3 @@ ruby:
             li.bottom-area = link_to 'Fashion IT Girl', 'http://mystyle.fameandpartners.com/fitg-aus-2015'
           li.bottom-area = link_to 'Track My Order', faqs_path(anchor: 'collapse-orders-track')
           /li.bottom-area = link_to 'Get styling advice', style_consultation_path
-
-coffee:
-  $(document).ready ->
-    $("#side-search-area #side-search-icon").on 'click', ->
-      if $("#side-search-area #searchForm input").val() != ""
-        $("#side-search-area #searchForm").submit()
