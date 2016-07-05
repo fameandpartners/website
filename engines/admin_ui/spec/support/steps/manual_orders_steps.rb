@@ -60,12 +60,25 @@ module Acceptance
 
     step 'I select "Roger That" from chosen customers select box' do
       chosen_select('Roger That', from: '#forms_manual_order_existing_customer')
+      trigger_poltergeist_event(field_id: '#forms_manual_order_existing_customer_chosen', event: 'focus')
     end
 
     step 'I should see correct user data prefilled' do
-      expect(page).to have_selector("//input[contains(@value,'Roger')]")
+      expect(page).to have_field('forms_manual_order_first_name', with: 'Roger')
+      expect(page).to have_field('forms_manual_order_last_name', with: 'That')
+      expect(page).to have_field('forms_manual_order_email', with: 'test@email.com')
+      expect(page).to have_field('forms_manual_order_address1', with: 'Street X')
+      expect(page).to have_field('forms_manual_order_address2', with: 'House Y')
+      expect(page).to have_field('forms_manual_order_city', with: 'Melbourne')
+      expect(page).to have_field('forms_manual_order_phone', with: '2255-4422')
+      expect(page).to have_field('forms_manual_order_zipcode', with: '12345')
     end
 
+    private
+
+    def trigger_poltergeist_event(field_id:, event: :focus)
+      find(field_id).trigger(event) if Capybara.current_driver == :poltergeist
+    end
   end
 end
 
