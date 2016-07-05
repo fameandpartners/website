@@ -33,6 +33,7 @@ module Marketing
       order.adjustments.shipping.sum(:amount).to_f
     end
 
+    # TODO: `.build_line_items` and `.build_adjustments` should be instance methods
     def self.build_line_items(order)
       order.line_items.collect do |item|
         {

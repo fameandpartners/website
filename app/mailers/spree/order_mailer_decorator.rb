@@ -20,7 +20,8 @@ Spree::OrderMailer.class_eval do
     subject = (resend ? "[#{t(:resend).upcase}] " : '')
     subject += "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
 
-    line_items = Marketing::OrderPresenter.build_line_items(@order)
+    # TODO: `.build_line_items` and `.build_adjustments` should be instance methods
+    line_items  = Marketing::OrderPresenter.build_line_items(@order)
     adjustments = Marketing::OrderPresenter.build_adjustments(@order)
 
     user = @order.user
@@ -38,7 +39,7 @@ Spree::OrderMailer.class_eval do
         adjustments:        adjustments,
         display_total:      @order.display_total.to_s,
         auto_account:       user && user.automagically_registered?,
-        today:              Date.today.strftime("%d.%m.%y"),
+        today:              Date.today.strftime('%d.%m.%y'),
         billing_address:    @order.try(:billing_address).to_s  || 'No Billing Address',
         shipping_address:   @order.try(:shipping_address).to_s || 'No Shipping Address',
         phone:              @order.try(:billing_address).try(:phone) || 'No Phone',
