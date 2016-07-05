@@ -6,6 +6,8 @@ export function customizeReducer(state = {}, action) {
       return Object.assign({}, state, action.customize);
     case 'SELECT_COLOR':
       return Object.assign({}, state, action.customize);
+    case 'SELECT_CUSTOM':
+      return Object.assign({}, state, action.customize);
     default:
       return state;
   }
@@ -44,5 +46,9 @@ export function skirtChartReducer(state = {}, action) {
 }
 
 export function preselectedColorReducer(state = {}, action) {
+  return state;
+}
+
+export function customOptionsReducer(state = {}, action) {
   return state;
 }

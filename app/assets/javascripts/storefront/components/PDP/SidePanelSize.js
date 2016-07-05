@@ -46,7 +46,7 @@ class SidePanelSize extends SidePanel {
           className={triggerState}
           onClick={this.openMenu}>
           <div className="c-card-customize__content__left">Dresses Size</div>
-          <div className="c-card-customize__content__right">{this.props.customize.size.presentation}</div>
+          <div className="c-card-customize__content__right txt-truncate-1">{this.props.customize.size.presentation}</div>
         </a>
 
         <div className={menuState}>

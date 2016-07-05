@@ -499,6 +499,47 @@
     }
 
   }
+
+  .selector-custom {
+    display: block;
+    width: 96%;
+    margin: 15px 2% 0 2%;
+
+    .media-wrap {
+      padding: 0 20px;
+      background: transparent;
+    }
+
+    .item-price {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-weight: bold;
+    }
+
+    .item-name {
+      position: relative;
+      padding-left: 22px;
+      padding-right: 50px;
+
+      &:before {
+        content: '';
+        position: absolute;
+        left: 2px;
+        top: 6px;
+        width: 12px;
+        height: 12px;
+        border: solid $c-neutral-5 1px;
+      }
+
+    }
+
+    &.is-selected .item-name:before {
+      background: $c-neutral-black;
+      border-color: $c-neutral-black;
+    }
+
+  }
   // END side panels
 
   @media (max-width: $bootstrap-lg-width - 1px) {

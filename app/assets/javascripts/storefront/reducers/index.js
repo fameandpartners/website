@@ -8,7 +8,8 @@ import {customizeReducer,
         sizeChartReducer,
         skirtChartReducer,
         preselectedColorReducer,
-        customColorPriceReducer} from './pdpReducers';
+        customColorPriceReducer,
+        customOptionsReducer} from './pdpReducers';
 
 const rootReducer = combineReducers({
   customize: customizeReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   lengths: lengthReducer,
   sizeChart: sizeChartReducer,
   skirts: skirtChartReducer,
-  preselectedColor: preselectedColorReducer
+  preselectedColor: preselectedColorReducer,
+  customOptions: customOptionsReducer
 });
 
 export default rootReducer;

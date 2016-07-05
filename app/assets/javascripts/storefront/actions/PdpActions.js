@@ -9,3 +9,7 @@ export function selectLength(customize) {
 export function selectColor(customize) {
   return { type: 'SELECT_COLOR', customize };
 }
+
+export function selectCustom(customize) {
+  return { type: 'SELECT_CUSTOM', customize };
+}

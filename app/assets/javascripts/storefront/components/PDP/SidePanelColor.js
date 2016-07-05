@@ -77,7 +77,7 @@ class SidePanelColor extends SidePanel {
           className={triggerState}
           onClick={this.openMenu}>
           <div className="c-card-customize__content__left">Color</div>
-          <div className="c-card-customize__content__right">{this.props.customize.color.presentation}</div>
+          <div className="c-card-customize__content__right txt-truncate-1">{this.props.customize.color.presentation}</div>
         </a>
 
         <div className={menuState}>
