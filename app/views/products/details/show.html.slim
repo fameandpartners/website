@@ -176,13 +176,6 @@ ruby:
     // content bottom wrap END 
 
 = render partial: 'micro_data'
-
-#product-overlay
-
-- cache [:side_panels, @product.id, current_site_version.code], expires_in:  configatron.cache.expire.long  do
-
-  - if @product.making_options.present?
-    = render partial: 'side_panel_making_options', locals: { making_options: @product.making_options }
     
 javascript:
   $(document).ready(function() {

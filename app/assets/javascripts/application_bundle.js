@@ -13,13 +13,13 @@ var _configureStore2 = _interopRequireDefault(_configureStore);
 
 var _reactRedux = require('react-redux');
 
-var _PdpGallery = require('./components/PDP/PdpGallery');
+var _Gallery = require('./components/PDP/Gallery');
 
-var _PdpGallery2 = _interopRequireDefault(_PdpGallery);
+var _Gallery2 = _interopRequireDefault(_Gallery);
 
-var _PdpSidePanelRight = require('./components/PDP/PdpSidePanelRight');
+var _SidePanelRight = require('./components/PDP/SidePanelRight');
 
-var _PdpSidePanelRight2 = _interopRequireDefault(_PdpSidePanelRight);
+var _SidePanelRight2 = _interopRequireDefault(_SidePanelRight);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35,18 +35,18 @@ if (typeof window.PdpData !== 'undefined') {
     (0, _reactDom.render)(_react2.default.createElement(
       _reactRedux.Provider,
       { store: store },
-      _react2.default.createElement(_PdpGallery2.default, null)
+      _react2.default.createElement(_Gallery2.default, null)
     ), document.getElementById('PdpGallery'));
 
     (0, _reactDom.render)(_react2.default.createElement(
       _reactRedux.Provider,
       { store: store },
-      _react2.default.createElement(_PdpSidePanelRight2.default, null)
+      _react2.default.createElement(_SidePanelRight2.default, null)
     ), document.getElementById('PdpSidePanelRight'));
   })();
 }
 
-},{"./components/PDP/PdpGallery":3,"./components/PDP/PdpSidePanelRight":4,"./store/configureStore":14,"react":197,"react-dom":51,"react-redux":54}],2:[function(require,module,exports){
+},{"./components/PDP/Gallery":3,"./components/PDP/SidePanelRight":9,"./store/configureStore":14,"react":197,"react-dom":51,"react-redux":54}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -187,152 +187,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = require('react-redux');
-
-var _redux = require('redux');
-
-var _PdpActions = require('../../actions/PdpActions');
-
-var pdpActions = _interopRequireWildcard(_PdpActions);
-
-var _SidePanelSize = require('./SidePanelSize');
-
-var _SidePanelSize2 = _interopRequireDefault(_SidePanelSize);
-
-var _SidePanelLength = require('./SidePanelLength');
-
-var _SidePanelLength2 = _interopRequireDefault(_SidePanelLength);
-
-var _SidePanelColor = require('./SidePanelColor');
-
-var _SidePanelColor2 = _interopRequireDefault(_SidePanelColor);
-
-var _SidePanelCustom = require('./SidePanelCustom');
-
-var _SidePanelCustom2 = _interopRequireDefault(_SidePanelCustom);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var PdpSidePanelRight = function (_React$Component) {
-  _inherits(PdpSidePanelRight, _React$Component);
-
-  function PdpSidePanelRight(props, context) {
-    _classCallCheck(this, PdpSidePanelRight);
-
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PdpSidePanelRight).call(this, props, context));
-
-    _this.state = {
-      customize: {}
-    };
-    return _this;
-  }
-
-  _createClass(PdpSidePanelRight, [{
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'panel-side-container' },
-        _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(
-            'div',
-            { className: 'c-card-customize' },
-            _react2.default.createElement(
-              'h2',
-              { className: 'h4 c-card-customize__header' },
-              'Specify your size'
-            ),
-            _react2.default.createElement(_SidePanelSize2.default, null),
-            _react2.default.createElement(_SidePanelLength2.default, null)
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'c-card-customize' },
-            _react2.default.createElement(
-              'h2',
-              { className: 'h4 c-card-customize__header' },
-              'Design your dress'
-            ),
-            _react2.default.createElement(_SidePanelColor2.default, null),
-            function () {
-              if (_this2.props.customOptions.length) {
-                return _react2.default.createElement(_SidePanelCustom2.default, null);
-              }
-            }()
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'btn-wrap' },
-          _react2.default.createElement(
-            'div',
-            { className: 'price js-product-price' },
-            '$0000'
-          ),
-          _react2.default.createElement(
-            'a',
-            { href: 'javascript:;', className: 'btn btn-black btn-lrg js-buy-button' },
-            'ADD TO BAG'
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'est-delivery' },
-            'Estimated delivery 3-4 weeks'
-          )
-        )
-      );
-    }
-  }]);
-
-  return PdpSidePanelRight;
-}(_react2.default.Component);
-
-PdpSidePanelRight.propTypes = {
-  customize: _react.PropTypes.object.isRequired,
-  customOptions: _react.PropTypes.array.isRequired,
-  actions: _react.PropTypes.object.isRequired
-};
-
-function mapStateToProps(state, ownProps) {
-  return {
-    customize: state.customize,
-    customOptions: state.customOptions
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: (0, _redux.bindActionCreators)(pdpActions, dispatch)
-  };
-}
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(PdpSidePanelRight);
-
-},{"../../actions/PdpActions":2,"./SidePanelColor":6,"./SidePanelCustom":7,"./SidePanelLength":8,"./SidePanelSize":10,"react":197,"react-redux":54,"redux":206}],5:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -375,7 +229,7 @@ var SidePanel = function (_React$Component) {
 
 exports.default = SidePanel;
 
-},{"react":197}],6:[function(require,module,exports){
+},{"react":197}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -599,7 +453,7 @@ function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SidePanelColor);
 
-},{"../../actions/PdpActions":2,"./SidePanel":5,"react":197,"react-redux":54,"redux":206}],7:[function(require,module,exports){
+},{"../../actions/PdpActions":2,"./SidePanel":4,"react":197,"react-redux":54,"redux":206}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -779,7 +633,7 @@ function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SidePanelCustom);
 
-},{"../../actions/PdpActions":2,"./SidePanel":5,"react":197,"react-redux":54,"redux":206}],8:[function(require,module,exports){
+},{"../../actions/PdpActions":2,"./SidePanel":4,"react":197,"react-redux":54,"redux":206}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -947,7 +801,7 @@ function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SidePanelLength);
 
-},{"../../actions/PdpActions":2,"./SidePanel":5,"./SidePanelLengthChart":9,"react":197,"react-redux":54,"redux":206}],9:[function(require,module,exports){
+},{"../../actions/PdpActions":2,"./SidePanel":4,"./SidePanelLengthChart":8,"react":197,"react-redux":54,"redux":206}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1160,7 +1014,153 @@ function mapStateToProps(state, ownProps) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(SidePanelLengthChart);
 
-},{"react":197,"react-redux":54,"react-simpletabs":59}],10:[function(require,module,exports){
+},{"react":197,"react-redux":54,"react-simpletabs":59}],9:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+var _redux = require('redux');
+
+var _PdpActions = require('../../actions/PdpActions');
+
+var pdpActions = _interopRequireWildcard(_PdpActions);
+
+var _SidePanelSize = require('./SidePanelSize');
+
+var _SidePanelSize2 = _interopRequireDefault(_SidePanelSize);
+
+var _SidePanelLength = require('./SidePanelLength');
+
+var _SidePanelLength2 = _interopRequireDefault(_SidePanelLength);
+
+var _SidePanelColor = require('./SidePanelColor');
+
+var _SidePanelColor2 = _interopRequireDefault(_SidePanelColor);
+
+var _SidePanelCustom = require('./SidePanelCustom');
+
+var _SidePanelCustom2 = _interopRequireDefault(_SidePanelCustom);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PdpSidePanelRight = function (_React$Component) {
+  _inherits(PdpSidePanelRight, _React$Component);
+
+  function PdpSidePanelRight(props, context) {
+    _classCallCheck(this, PdpSidePanelRight);
+
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PdpSidePanelRight).call(this, props, context));
+
+    _this.state = {
+      customize: {}
+    };
+    return _this;
+  }
+
+  _createClass(PdpSidePanelRight, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'panel-side-container' },
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'div',
+            { className: 'c-card-customize' },
+            _react2.default.createElement(
+              'h2',
+              { className: 'h4 c-card-customize__header' },
+              'Specify your size'
+            ),
+            _react2.default.createElement(_SidePanelSize2.default, null),
+            _react2.default.createElement(_SidePanelLength2.default, null)
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'c-card-customize' },
+            _react2.default.createElement(
+              'h2',
+              { className: 'h4 c-card-customize__header' },
+              'Design your dress'
+            ),
+            _react2.default.createElement(_SidePanelColor2.default, null),
+            function () {
+              if (_this2.props.customOptions.length) {
+                return _react2.default.createElement(_SidePanelCustom2.default, null);
+              }
+            }()
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'btn-wrap' },
+          _react2.default.createElement(
+            'div',
+            { className: 'price js-product-price' },
+            '$0000'
+          ),
+          _react2.default.createElement(
+            'a',
+            { href: 'javascript:;', className: 'btn btn-black btn-lrg js-buy-button' },
+            'ADD TO BAG'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'est-delivery' },
+            'Estimated delivery 3-4 weeks'
+          )
+        )
+      );
+    }
+  }]);
+
+  return PdpSidePanelRight;
+}(_react2.default.Component);
+
+PdpSidePanelRight.propTypes = {
+  customize: _react.PropTypes.object.isRequired,
+  customOptions: _react.PropTypes.array.isRequired,
+  actions: _react.PropTypes.object.isRequired
+};
+
+function mapStateToProps(state, ownProps) {
+  return {
+    customize: state.customize,
+    customOptions: state.customOptions
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: (0, _redux.bindActionCreators)(pdpActions, dispatch)
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(PdpSidePanelRight);
+
+},{"../../actions/PdpActions":2,"./SidePanelColor":5,"./SidePanelCustom":6,"./SidePanelLength":7,"./SidePanelSize":10,"react":197,"react-redux":54,"redux":206}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1318,7 +1318,7 @@ function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SidePanelSize);
 
-},{"../../actions/PdpActions":2,"./SidePanel":5,"./SidePanelSizeChart":11,"react":197,"react-redux":54,"redux":206}],11:[function(require,module,exports){
+},{"../../actions/PdpActions":2,"./SidePanel":4,"./SidePanelSizeChart":11,"react":197,"react-redux":54,"redux":206}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

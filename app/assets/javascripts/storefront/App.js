@@ -3,8 +3,8 @@ import {render} from 'react-dom';
 import configureStore from './store/configureStore';
 import {Provider} from 'react-redux';
 
-import PdpGallery from './components/PDP/PdpGallery';
-import PdpSidePanelRight from './components/PDP/PdpSidePanelRight';
+import PdpGallery from './components/PDP/Gallery';
+import PdpSidePanelRight from './components/PDP/SidePanelRight';
 
 // PDP
 if(typeof window.PdpData !== 'undefined') {
