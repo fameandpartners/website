@@ -111,7 +111,6 @@ header.main {
     #home-menu {
       margin-top: 30px;
       background-color: $c-neutral-white;
-      font-weight: 700;
 
       a {
         color: black;
@@ -122,6 +121,7 @@ header.main {
         border-bottom: 2px solid transparent;
         display: inline-block;
         font-size: 1.2rem;
+        font-weight: 700;
         color: $c-neutral-black;
         cursor: pointer;
         position: relative;
@@ -176,11 +176,26 @@ header.main {
           height: 29px;
           padding: 0 $search-input-height 0 10px;
           line-height: 29px;
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: #999;
           border: none;
           opacity: 0;
+          color: $c-neutral-black;
+          font-size: 1.4rem;
+          font-weight: normal;
+
+          //TODO: should this be the global style for placeholders?
+          // It’s important to use each declaration as a separated declaration, otherwise it will break on some browsers
+          &::-webkit-input-placeholder {
+            color: $c-neutral-black;
+          }
+
+          &::-moz-placeholder {
+            color: $c-neutral-black;
+            opacity: 1;
+          }
+
+          &:-ms-input-placeholder {
+            color: $c-neutral-black;
+          }
 
           &:focus{
             outline: 0;
@@ -195,6 +210,7 @@ header.main {
           top: 5px;
           cursor: pointer;
         }
+
 
       }
 

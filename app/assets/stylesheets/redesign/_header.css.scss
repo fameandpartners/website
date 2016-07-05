@@ -330,44 +330,6 @@ li.shop {
   width: 85%;
 }
 
-.search-input {
-
-  ::-webkit-input-placeholder { /* WebKit browsers */
-    text-transform: none;
-    padding-bottom: 0;
-    margin-bottom: 0;
-    bottom: 0;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #999;
-  }
-
-  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    text-transform: none;
-    opacity:  1;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #999;
-  }
-
-  ::-moz-placeholder { /* Mozilla Firefox 19+ */
-    text-transform: none;
-    opacity:  1;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #999;
-  }
-
-  :-ms-input-placeholder { /* Internet Explorer 10+ */
-    text-transform: none;
-    font-size: 1.2rem;
-    vertical-align: baseline;
-    font-weight: 700;
-    color: #999;
-  }
-
-}
-
 .edit-title a {
   padding-top: 5px;
 
