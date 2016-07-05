@@ -67,14 +67,15 @@ header.main {
       border-radius: 100%;
       display: inline-block;
       position: absolute;
-      font-size: 0.8rem;
+      font-size: 1rem;
       font-weight: 600;
       text-align: center;
-      right: -1px;
+      line-height: 1.1rem;
+      right: 0;
       top: -10px;
       width: 15px;
       height: 15px;
-      padding: 2px 0 0 2px;
+      padding: 2px 0 0 1px;
     }
 
   }
