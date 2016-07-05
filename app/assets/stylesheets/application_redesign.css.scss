@@ -330,3 +330,44 @@ h1.edit-title {
     outline:none;
   }
 }
+
+#shipping_fee_alert{
+  width: 100%;
+  border: 1px solid #acacac;
+  margin-left: 0;
+  margin-top: 14px;
+  .left-warning{
+    float: left;
+    height: 100%;
+    width: 95px;
+  }
+  img{
+      padding: 23px 17px;
+    }
+  .right-warning{
+    font-size: 14px;
+    float: left;
+    width: calc(100% - 95px);
+    margin-bottom: 15px;
+  }
+  .title{
+    margin-top: 13px;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+  .bold{
+    font-weight: bold;
+  }
+  .simple{
+    margin: 0;
+  }
+  .top10{
+    margin-top: 10px;
+  }
+  input{
+    margin-right: 10px;
+  }
+  .uppercase{
+    text-transform: uppercase;
+  }
+}
