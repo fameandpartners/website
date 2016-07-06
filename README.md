@@ -14,7 +14,11 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
 
 ### Coding Style
 
-We use [EditorConfig](http://EditorConfig.org) to keep coding styles. Please, if you use any text editors/IDEs that don't support it out of the box, [download a plugin for it](http://editorconfig.org/#download).
+* We use [EditorConfig](http://EditorConfig.org) to keep coding styles. Please, if you use any text editors/IDEs that don't support it out of the box, [download a plugin for it](http://editorconfig.org/#download).
+* Remember, follow *THE RULES*, otherwise, your PR will receive complaints: https://github.com/fameandpartners/website/wiki/The-Rules
+* Front-end:
+  * CSS guidelines: https://github.com/fameandpartners/website/blob/master/doc/dev/css-guidelines.md
+  * JS guidelines: https://github.com/fameandpartners/website/wiki/JS-Guidelines
 
 ### Frameworks
 
