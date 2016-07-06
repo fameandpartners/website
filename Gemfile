@@ -52,6 +52,7 @@ gem 'sass-rails',   '~> 3.2.3'
 gem 'compass-rails', '~> 2.0.5'
 gem 'react-rails', '~> 1.6'
 gem 'droidcss', '~> 2.0.4'
+gem 'asset_sync', '~> 1.1.0'
 
 # Data
 gem 'event_sourced_record'
