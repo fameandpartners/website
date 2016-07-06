@@ -1,7 +1,5 @@
 require 'forwardable'
 
-# TODO This is being used by the /mailers/spree/order_mailer_decorator.rb, but its behaviour is almost the same as the GTM object
-# TODO Replace it by the GTM object (gtm/order.rb)
 module Marketing
   class OrderPresenter
     extend Forwardable
