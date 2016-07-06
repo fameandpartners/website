@@ -3,7 +3,6 @@
 .pdp {
   position: relative;
   min-height: 100vh;
-  padding-top: $mega-menu-desktop-height;
 
   h1, .h1,
   h2, .h2 {
@@ -552,7 +551,7 @@
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
-    padding-top: $mega-menu-mobile-height;
+    padding-top: 0;
 
     .panel-media-inner-wrap {
       margin-bottom: 0;
