@@ -15,6 +15,8 @@ Spree::CheckoutController.class_eval do
     prepend_view_path Rails.root.join('app/views/checkout/v1')
   end
 
+  after_filter :update_adjustments, only: [:update]
+
   layout 'redesign/checkout'
 
   # update - address/payment
@@ -320,6 +322,10 @@ Spree::CheckoutController.class_eval do
     @current_step
   end
   helper_method :current_step
+
+  def update_adjustments
+    current_order.updater.update_adjustments
+  end
 
   # Marketing + GTM
 
