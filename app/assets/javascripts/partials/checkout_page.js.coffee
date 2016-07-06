@@ -365,6 +365,36 @@ page.initCheckoutEditPage = () ->
         shippingFeeAlert.show()
       else if isShipAddressCountry
         shippingFeeAlert.hide()
+      window.checkout_page.uncheckInternationalShippingFeeCheckbox()
+      window.checkout_page.changeButtonStatus()
+
+    shippingFeeHasToBeApplied: () ->
+      if $('#ship_to_address_Ship_to_this_address').is(':checked')
+        element = $('#order_bill_address_attributes_country_id')
+      else
+        element = $('#order_ship_address_attributes_country_id')
+      window.checkout_page.countries[element.val()]
+
+    internationalShippingFeeCheckboxIsVisible: () ->
+      $('#international_shipping_fee').is(':visible')
+
+    internationalShippingFeeCheckboxIsChecked: () ->
+      $('#international_shipping_fee').is(':checked')
+
+    uncheckInternationalShippingFeeCheckbox: () ->
+      $('#international_shipping_fee').removeAttr('checked')
+
+    changeButtonStatus: () ->
+      if @internationalShippingFeeCheckboxIsVisible() and not @internationalShippingFeeCheckboxIsChecked()
+        $('button[name="pay_securely"]').prop('disabled', true)
+      else
+        $('button[name="pay_securely"]').prop('disabled', false)
+
+    internationalShippingFeeCheckboxClicked: () ->
+      if $(this).is(':checked')
+        $('button[name="pay_securely"]').prop('disabled', false)
+      else
+        $('button[name="pay_securely"]').prop('disabled', true)
   }
   page.init()
   window.checkout_page = page
