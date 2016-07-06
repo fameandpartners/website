@@ -152,7 +152,7 @@
       &:hover,
       &.active {
         cursor: pointer;
-        font-weight: 600;
+        background: $c-neutral-11;
       }
     }
   }
