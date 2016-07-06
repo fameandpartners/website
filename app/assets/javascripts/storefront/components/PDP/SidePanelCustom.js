@@ -9,7 +9,7 @@ class SidePanelCustom extends SidePanel {
     super(props, context);
 
     this.state = {
-      customize: {custom: {id: '', presentation: '', price: ''}}
+      customize: {custom: {id: '', presentation: '', price: null}}
     };
 
     this.onChange = this.onChange.bind(this);
@@ -21,11 +21,11 @@ class SidePanelCustom extends SidePanel {
     if(this.props.customize.custom.id === event.currentTarget.dataset.id) {
       customize.custom.id = "";
       customize.custom.presentation = "";
-      customize.custom.price = "";
+      customize.custom.price = null;
     } else {
       customize.custom.id = event.currentTarget.dataset.id;
       customize.custom.presentation = event.currentTarget.dataset.presentation;
-      customize.custom.price = event.currentTarget.dataset.price;
+      customize.custom.price = parseFloat(event.currentTarget.dataset.price);
     }
     this.setState({customize});
     this.props.actions.selectSize(this.state.customize);
@@ -39,14 +39,14 @@ class SidePanelCustom extends SidePanel {
       const itemState = this.props.customize.custom.id == option.table.id
         ? "selector-custom is-selected" : "selector-custom";
       const price =
-        parseInt(option.table.display_price.money.fractional
+        parseFloat(option.table.display_price.money.fractional
         / option.table.display_price.money.currency.subunit_to_unit);
       return (
         <a href="#" className={itemState}
           onClick={this.onChange} key={index}
           data-id={option.table.id}
           data-presentation={option.table.name}
-          data-price={option.table.display_price.money.fractional}>
+          data-price={price}>
           <div className="item-name">
             {option.table.name}
             <div className="item-price">+${price}</div>

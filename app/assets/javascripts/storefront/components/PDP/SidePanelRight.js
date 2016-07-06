@@ -6,6 +6,7 @@ import SidePanelSize from './SidePanelSize';
 import SidePanelLength from './SidePanelLength';
 import SidePanelColor from './SidePanelColor';
 import SidePanelCustom from './SidePanelCustom';
+import CtaPrice from './CtaPrice';
 
 class PdpSidePanelRight extends React.Component {
   constructor(props, context) {
@@ -39,11 +40,7 @@ class PdpSidePanelRight extends React.Component {
           </div>
         </div>
 
-        <div className="btn-wrap">
-          <div className="price js-product-price">$0000</div>
-          <a href="javascript:;" className="btn btn-black btn-lrg js-buy-button">ADD TO BAG</a>
-          <div className="est-delivery">Estimated delivery 3-4 weeks</div>
-        </div>
+        <CtaPrice />
       </div>
     );
   }

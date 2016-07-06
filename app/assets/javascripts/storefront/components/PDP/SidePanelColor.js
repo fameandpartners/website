@@ -13,7 +13,8 @@ class SidePanelColor extends SidePanel {
         color: {
           id: this.props.preselectedColor.id,
           presentation: this.props.preselectedColor.presentation,
-          name: this.props.preselectedColor.name
+          name: this.props.preselectedColor.name,
+          price: null
         }
       }
     };
@@ -27,6 +28,7 @@ class SidePanelColor extends SidePanel {
     customize.color.id = event.currentTarget.dataset.id;
     customize.color.presentation = event.currentTarget.dataset.presentation;
     customize.color.name = event.currentTarget.dataset.name;
+    customize.color.price = parseFloat(event.currentTarget.dataset.price);
     this.setState({customize});
     this.props.actions.selectColor(this.state.customize);
   }
@@ -47,12 +49,18 @@ class SidePanelColor extends SidePanel {
           onClick={this.onChange} key={index}
           data-id={color.option_value.id}
           data-presentation={color.option_value.presentation}
-          data-name={color.option_value.name}>
+          data-name={color.option_value.name}
+          data-price={customColorPrice}>
           <div className={swatch}></div>
           <div className="item-name">{color.option_value.presentation}</div>
         </a>
       );
     });
+
+    const customColorPrice =
+      parseFloat(this.props.customColorPrice.money.fractional
+      / this.props.customColorPrice.money.currency.subunit_to_unit);
+
     const customColors = this.props.customColors.map((color, index) => {
       const itemState = this.props.customize.color.id == color.option_value.id
         ? "selector-color is-selected" : "selector-color";
@@ -62,15 +70,13 @@ class SidePanelColor extends SidePanel {
           onClick={this.onChange} key={index}
           data-id={color.option_value.id}
           data-presentation={color.option_value.presentation}
-          data-name={color.option_value.name}>
+          data-name={color.option_value.name}
+          data-price={customColorPrice}>
           <div className={swatch}></div>
           <div className="item-name">{color.option_value.presentation}</div>
         </a>
       );
     });
-    const customColorPrice =
-      parseInt(this.props.customColorPrice.money.fractional
-      / this.props.customColorPrice.money.currency.subunit_to_unit);
     return (
       <div className="side-container side-container-color">
         <a href="#"

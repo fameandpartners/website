@@ -17,6 +17,14 @@ export function imageReducer(state = {}, action) {
   return state;
 }
 
+export function productPriceReducer(state = {}, action) {
+  return state;
+}
+
+export function productDiscountReducer(state = {}, action) {
+  return state;
+}
+
 export function defaultColorReducer(state = {}, action) {
   return state;
 }

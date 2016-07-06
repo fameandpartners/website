@@ -79,11 +79,13 @@ export default function configureStore(initialState) {
         },
         color: {
           id: '',
-          presentation: ''
+          presentation: '',
+          price: null
         },
         custom: {
           id: '',
-          presentation: ''
+          presentation: '',
+          price: null
         }
       }
     }
