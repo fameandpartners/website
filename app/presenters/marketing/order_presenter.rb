@@ -5,8 +5,9 @@ module Marketing
     extend Forwardable
 
     def_delegators :@order,
-                   :number,
-                   :currency
+                   :currency,
+                   :email,
+                   :number
 
     attr_reader :order, :items
 
