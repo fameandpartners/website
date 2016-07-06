@@ -5,18 +5,6 @@ ruby:
   /! Hero Carousel
   = render 'shared/redesign/collection_hero_carousel'
 
-  /section.competition-banner
-  /  .container
-  /    = link_to la_belle_epoque_collection_path, class: 'media-wrap'
-  /      img src="/assets/competition_banner/CollectionBanner-apr-26-full.jpg" srcset="/assets/competition_banner/CollectionBanner-apr-26-med.jpg 768w, /assets/competition_banner/CollectionBanner-apr-26-full.jpg 1024w" alt='La Belle Epoque'
-  //
-    - if sale_active?
-      section.banner-sale`
-        .container
-          = link_to sale_path, class: 'media-wrap'
-            img src="https://d1h7wjzwtdym94.cloudfront.net/pages/home/sale/#{current_sale.banner_images[:full]}" alt='Shop the Sale' srcset="
-              https://d1h7wjzwtdym94.cloudfront.net/pages/home/sale/#{current_sale.banner_images[:small]} 768w,
-              https://d1h7wjzwtdym94.cloudfront.net/pages/home/sale/#{current_sale.banner_images[:full]} 1024w"
   /! Content Section
   section.container.content-block.home-main-content
     .row.aside-single-tile
