@@ -272,8 +272,16 @@ header.main {
       margin-top: 45px;
     }
 
-    .shopping-bag-wrapper span {
-      display: inline-block;
+    .shopping-bag-wrapper {
+
+      span {
+        display: inline-block;
+      }
+
+      .icon-bag {
+        font-size: 1.7rem;
+      }
+
     }
 
     .count,
