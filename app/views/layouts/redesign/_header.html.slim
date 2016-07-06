@@ -55,11 +55,13 @@ ruby:
   header.main
 
     .nav-menu.nav-alert-top
-      = render 'layouts/redesign/header/locale_selector/mobile'
-      .container-fluid.nav-menu-container
+      #fixed-header
         = render 'layouts/redesign/header/locale_warn/base', warning: @locale_warning
         = render 'layouts/redesign/header/gray_top_banner/base'
 
+      = render 'layouts/redesign/header/locale_selector/mobile'
+
+      .container-fluid
         #masthead-container.cfix
           .masthead.pull-left.visible-xs.visible-sm
             nav.navbar.navbar-default.visible-xs.visible-sm.hamburger role="navigation"
@@ -72,9 +74,9 @@ ruby:
               = image_tag src='logo/logo-mobile.svg', :alt => 'Fame & Partners'
 
           .masthead.pull-right.visible-xs.visible-sm
-            .js-header-toolbar
+            span.shopping-bag-wrapper.js-header-toolbar
               a.trigger-shopping-cart.js-trigger-shopping-bag href='javascript:;'
-                span.icon.icon-shopping_cart
+                span.icon.icon-bag
                 span.count.js-cart-item-count 0
                 span.copy checkout
 
@@ -304,9 +306,3 @@ ruby:
             li.bottom-area = link_to 'Fashion IT Girl', 'http://mystyle.fameandpartners.com/fitg-aus-2015'
           li.bottom-area = link_to 'Track My Order', faqs_path(anchor: 'collapse-orders-track')
           /li.bottom-area = link_to 'Get styling advice', style_consultation_path
-
-coffee:
-  $(document).ready ->
-    $("#side-search-area #side-search-icon").on 'click', ->
-      if $("#side-search-area #searchForm input").val() != ""
-        $("#side-search-area #searchForm").submit()

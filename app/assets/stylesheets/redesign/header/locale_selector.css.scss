@@ -32,7 +32,13 @@
     padding-top: 0;
     color: white;
   }
-  #account-area{
+
+  #account-area {
+
+    a span {
+      color: $c-neutral-white;
+    }
+
     .icon-heart{
       color: $c-neutral-white;
       position: absolute;
@@ -44,7 +50,7 @@
       margin-right: 20px;
     }
     .account-menu{
-      z-index: 10;
+      z-index: 102;
       top: 54px;
       right: 0;
       display: none;
@@ -76,7 +82,7 @@
 #locale-selector-container {
   position: relative;
   text-transform: initial;
-  font-size: 14px;
+  text-align: left;
 
   a {
     color: inherit;
@@ -92,16 +98,19 @@
 
   #locale-selector-label {
     display: inline-block;
+    font-family: $font-heading;
   }
 
   #locale-selector-current {
-    cursor: default;
+    cursor: pointer;
     display: inline-block;
     margin-left: 10px;
     padding-right: 20px;
+    padding-bottom: 2px;
     position: relative;
 
-    &:hover {
+    &.show-options {
+
       ul {
         display: block;
       }
@@ -109,41 +118,41 @@
       .arrow {
         @include transform(rotate(180deg));
       }
+
     }
 
     .arrow {
-      @include dropdown-triangle($color: #000, $width: 8px, $height: 5px);
+      @include dropdown-triangle($color: $c-neutral-white, $width: 8px, $height: 5px);
 
       height: 0;
       position: absolute;
-      left: 0;
-      top: 40%;
+      right: 0;
+      top: 35%;
     }
   }
 
   ul {
-    background-color: $gray-light-bg;
+    background-color: $c-neutral-black;
     display: none;
     list-style: none;
     margin-left: -5px;
     padding: 0;
     position: absolute;
-    width: 115px;
     z-index: 102;
+    width: 73px;
 
     li {
       float: none;
 
       a {
-        padding: 7px 0 7px 6px;
+        padding: 7px 0 7px 15px;
+        color: $c-neutral-white;
       }
 
+      &:hover,
       &.active {
-        background-color: darken($gray-light-bg, 10%);
-      }
-
-      &:hover {
-        background-color: darken($gray-light-bg, 5%);
+        cursor: pointer;
+        background: $c-neutral-11;
       }
     }
   }
@@ -194,7 +203,7 @@
     position: relative;
 
     .arrow {
-      @include dropdown-triangle($color: #000, $width: 16px, $height: 8px);
+      @include dropdown-triangle($color: $c-neutral-black, $width: 16px, $height: 8px);
       margin-right: -25px;
       position: absolute;
       right: 0;
@@ -213,7 +222,6 @@
     width: 100%;
 
     li {
-      cursor: pointer;
       float: none;
 
       a {

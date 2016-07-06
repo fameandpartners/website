@@ -113,6 +113,11 @@
 // campaigns
 //= require partials/fitgau_reminder
 
+//--------------------------------
+// Header
+//--------------------------------
+//= require partials/header
+
 jQuery(document).ready(function($){
   $('body').addClass('ready');
 

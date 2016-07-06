@@ -1,14 +1,12 @@
 /* [Nav Menu]
 -------------------------------------------------------*/
 .nav-menu-wrap {
-  width: 80%;
-  margin-left: 10%;
   text-transform: none;
   background: $c-neutral-white;
+  padding: 20px 0;
 
-  .collection-col{
-    padding-left: 10px;
-    padding-right: 10px;
+  .panel-highlight {
+    margin: 0;
   }
 
   @media (max-width: 1400px) {
@@ -70,8 +68,8 @@
   .title {
     padding-bottom: 5px;
     text-transform: uppercase;
-    font-size: 14px;
-    border-bottom: solid $c-neutral-2 2px;
+    font-size: 1.3rem;
+    font-weight: 600;
   }
 
   @media (max-width: 1200px){
