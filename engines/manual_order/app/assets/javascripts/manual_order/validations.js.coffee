@@ -1,6 +1,6 @@
 $(document).ready ->
   $('#new_forms_manual_order').validate
-    ignore: ":hidden:not(select)"
+    ignore: ":hidden:not(select), .chosen-search input"
     debug: true
     rules:
       'forms_manual_order[style_name]':
@@ -22,8 +22,6 @@ $(document).ready ->
         required: '#customer_new:checked'
       'forms_manual_order[address1]':
         required: '#customer_new:checked'
-      'forms_manual_order[address2]':
-        required: '#customer_new:checked'
       'forms_manual_order[city]':
         required: '#customer_new:checked'
       'forms_manual_order[country]':
@@ -32,5 +30,6 @@ $(document).ready ->
         required: '#customer_new:checked'
       'forms_manual_order[phone]':
         required: '#customer_new:checked'
-  return
-
+    submitHandler: (form) ->
+      form.submit()
+      return

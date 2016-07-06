@@ -28,12 +28,7 @@ Feature: Create manual orders
     Then I should have black dress image
     And I select "Australia" from chosen country select box
     Then I should see "$319.0 AUD"
-
-  @javascript
-  Scenario:
-    When I am on the manual orders page
-    And I click on "Create" link
     And I select "Roger That" from chosen customers select box
     Then I should see correct user data prefilled
-#    And I click on "Complete Order and Send for Manufacturing" button
-#    Then I should see "can't be blank"
+    And I click on "Complete Order and Send for Manufacturing" button
+    Then I should see "Order has been created successfully"
