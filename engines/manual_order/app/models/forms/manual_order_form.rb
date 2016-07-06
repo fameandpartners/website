@@ -156,6 +156,8 @@ module Forms
       order.customer_notes = params[:notes]
       order.currency = params[:currency]
 
+      order.number = order.number.gsub('R', 'E') if params[:status] == 'exchange'
+
       if params[:existing_customer].present?
         user = Spree::User.find(params[:existing_customer])
         user_last_order = user.orders.complete.last
