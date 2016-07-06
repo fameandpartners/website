@@ -32,6 +32,14 @@ module Marketing
       order.adjustments.shipping.sum(:amount).to_f
     end
 
+    def shipping_address
+      AddressPresenter.new(order.ship_address)
+    end
+
+    def billing_address
+      AddressPresenter.new(order.bill_address)
+    end
+
     # TODO: `.build_line_items` and `.build_adjustments` should be instance methods
     def self.build_line_items(order)
       order.line_items.collect do |item|

@@ -20,9 +20,11 @@ Spree::OrderMailer.class_eval do
     subject = (resend ? "[#{t(:resend).upcase}] " : '')
     subject += "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
 
-    # TODO: `.build_line_items` and `.build_adjustments` should be instance methods
-    line_items  = Marketing::OrderPresenter.build_line_items(@order)
-    adjustments = Marketing::OrderPresenter.build_adjustments(@order)
+    # TODO: `.build_line_items` and `.build_adjustments` should be Marketing::OrderPresenter's instance methods
+    # TODO: maybe these order presenters are very specific for emails...should the name "Marketing" be rethinked?
+    order_presenter = Marketing::OrderPresenter.new(@order)
+    line_items      = Marketing::OrderPresenter.build_line_items(@order)
+    adjustments     = Marketing::OrderPresenter.build_adjustments(@order)
 
     user = @order.user
     user ||= Spree::User.where(email: @order.email).first
@@ -31,19 +33,21 @@ Spree::OrderMailer.class_eval do
       Marketing::CustomerIOEventTracker.new.track(
         user,
         'order_confirmation_email',
-        email_to:           @order.email,
-        subject:            subject,
-        order_number:       @order.number,
-        line_items:         line_items,
-        display_item_total: @order.display_item_total.to_s,
-        adjustments:        adjustments,
-        display_total:      @order.display_total.to_s,
-        auto_account:       user && user.automagically_registered?,
-        today:              Date.today.strftime('%d.%m.%y'),
-        billing_address:    @order.try(:billing_address).to_s  || 'No Billing Address',
-        shipping_address:   @order.try(:shipping_address).to_s || 'No Shipping Address',
-        phone:              @order.try(:billing_address).try(:phone) || 'No Phone',
-        delivery_date:      @order.projected_delivery_date.try(:strftime, '%a, %d %b %Y')
+        email_to:                    order_presenter.email,
+        subject:                     subject,
+        order_number:                order_presenter.number,
+        line_items:                  line_items,
+        display_item_total:          @order.display_item_total.to_s,
+        adjustments:                 adjustments,
+        display_total:               @order.display_total.to_s,
+        auto_account:                user && user.automagically_registered?,
+        today:                       Date.today.strftime('%d.%m.%y'),
+        phone:                       @order.try(:billing_address).try(:phone) || 'No Phone',
+        delivery_date:               @order.projected_delivery_date.try(:strftime, '%a, %d %b %Y'),
+        billing_address_attributes:  order_presenter.billing_address.to_h,
+        shipping_address_attributes: order_presenter.shipping_address.to_h,
+        billing_address:             @order.try(:billing_address).to_s || 'No Billing Address',
+        shipping_address:            @order.try(:shipping_address).to_s || 'No Shipping Address',
       )
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)
