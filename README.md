@@ -3,7 +3,7 @@
 ## System Requirements
 
 * Ruby 2.1.5 (2.2.0 also works)
-* Postgres 9.2
+* Postgres 9.5
 * ElasticSearch 1.6.0
 * Redis 3.0.2
 * `imagemagick` 6.9.1
