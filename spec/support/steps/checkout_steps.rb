@@ -27,6 +27,10 @@ module Acceptance
       end
     end
 
+    step 'I agree with shipping fee' do
+      find('#international_shipping_fee').click
+    end
+
     step 'I fill in credit card information:' do |cc_info|
       cc_info = cc_info.to_h
 
