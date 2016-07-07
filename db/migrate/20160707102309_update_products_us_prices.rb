@@ -157,6 +157,12 @@ class UpdateProductsUsPrices < ActiveRecord::Migration
 
     new_us_prices.each do |(style, _, new_price_string)|
       master_variant = Spree::Variant.where(is_master: true).where('sku ILIKE ?', style).first
+
+      if master_variant.nil?
+        say %Q{Style "#{style}" does not exist! Skipping...}
+        next
+      end
+
       new_price      = Float(new_price_string)
       usd_prices     = master_variant.product.prices.where(currency: 'USD')
 
