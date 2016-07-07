@@ -22,13 +22,7 @@ module Spree
                           self.preferred_normal_products_shipping_amount
                         end
 
-      zone_member = if object.class == Spree::Order
-                      object.try(:shipping_address).try(:country).try(:zone_member)
-                    elsif object.class == Spree::Shipment
-                      object.try(:address).try(:country).try(:zone_member)
-                    end
-
-      shipping_fee = zone_member && zone_member.has_international_shipping_fee ? self.preferred_international_shipping_fee : 0
+      shipping_fee = calculate_international_shipping_fee(object)
       shipping_amount + shipping_fee
     end
 
@@ -41,6 +35,16 @@ module Spree
       return false if object.blank? || !object.respond_to?(:coupon_code_added_promotion)
       promotion = object.coupon_code_added_promotion
       promotion.present? && promotion.require_shipping_charge?
+    end
+
+    def calculate_international_shipping_fee(object)
+      zone_member = if object.class == Spree::Order
+                      object.try(:shipping_address).try(:country).try(:zone_member)
+                    elsif object.class == Spree::Shipment
+                      object.try(:address).try(:country).try(:zone_member)
+                    end
+
+      zone_member && zone_member.has_international_shipping_fee ? self.preferred_international_shipping_fee : 0
     end
   end
 end
