@@ -331,47 +331,56 @@ h1.edit-title {
   }
 }
 
+/* [ABU DHABI ORDERS]
+-------------------------------------------------------*/
+$grey-border: #acacac;
+
 #shipping_fee_alert{
   width: 100%;
-  border: 1px solid #acacac;
+  border: 1px solid $grey-border;
   margin-left: 0;
   margin-top: 14px;
+
   .left-warning{
     float: left;
     height: 100%;
     width: 95px;
   }
+
   img{
-      padding: 23px 17px;
-    }
+    padding: 23px 17px;
+  }
+
   .right-warning{
-    font-size: 14px;
+    font-size: 1.4rem;
     float: left;
     width: calc(100% - 95px);
     margin-bottom: 15px;
   }
-  .title{
+
+  h4{
+    font-size: 1.4rem;
     margin-top: 13px;
     font-weight: bold;
     margin-bottom: 0;
   }
-  .bold{
-    font-weight: bold;
-  }
-  .simple{
-    margin: 0;
-  }
-  .top10{
-    margin-top: 10px;
-  }
+
   input{
     margin-right: 10px;
   }
-  .uppercase{
-    text-transform: uppercase;
-  }
+
   .underline{
     text-decoration: underline;
     font-weight: bold;
   }
 }
+
+.top10{
+  margin-top: 10px;
+}
+
+.no-margin{
+  margin: 0;
+}
+
+/*-------------------------------------------------------*/
