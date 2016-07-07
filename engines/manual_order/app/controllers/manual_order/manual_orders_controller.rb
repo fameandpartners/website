@@ -14,8 +14,13 @@ module ManualOrder
     end
 
     def create
-      manual_order_form.save_order(params[:forms_manual_order])
-      redirect_to manual_orders_path, flash: { success: 'Order has been created successfully' }
+     message = if manual_order_form.save_order(params[:forms_manual_order])
+                'Order has been created successfully'
+               else
+                'There was a problem with order saving.'
+     end
+
+     redirect_to manual_orders_path, flash: { success: message }
     end
 
     def sizes_options

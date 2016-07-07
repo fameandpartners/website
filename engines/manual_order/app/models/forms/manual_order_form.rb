@@ -135,53 +135,8 @@ module Forms
     end
 
     def save_order(params)
-      order = Spree::Order.create
-      site_version = SiteVersion.where(currency: params[:currency]).first
-      variant_id = get_variant(params[:style_name], params[:size], params[:color])
-
-      UserCart::Populator.new(
-        order: order,
-        site_version: site_version,
-        currency: params[:currency],
-        product: {
-          variant_id: variant_id,
-          size_id: params[:size],
-          color_id: params[:color],
-          customizations_ids: params[:customisations],
-          height:             params[:height],
-          quantity: 1
-        }
-      ).populate
-
-      order.customer_notes = params[:notes]
-      order.currency = params[:currency]
-
-      order.number = order.number.gsub('R', 'E') if params[:status] == 'exchange'
-
-      if params[:existing_customer].present?
-        user = Spree::User.find(params[:existing_customer])
-        user_last_order = user.orders.complete.last
-        order.bill_address_id = user_last_order.bill_address_id
-        order.ship_address_id = user_last_order.ship_address_id
-      else
-        address = { firstname: params[:first_name],
-          lastname: params[:last_name],
-          address1: params[:address1],
-          address2: params[:address2],
-          city: params[:city],
-          state_id: params[:state],
-          country_id: params[:country],
-          zipcode: params[:zipcode],
-          phone: params[:phone],
-          email: params[:email]
-        }
-        ship_address = Spree::Address.create(address)
-        bill_address = Spree::Address.create(address)
-        order.bill_address_id = ship_address.id
-        order.ship_address_id = bill_address.id
-      end
-
-      order.save
+      variant = get_variant(params[:style_name], params[:size], params[:color])
+      Operations::ManualOrder.new(params, variant).create
     end
 
     private
