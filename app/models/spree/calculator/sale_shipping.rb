@@ -22,7 +22,12 @@ module Spree
                           self.preferred_normal_products_shipping_amount
                         end
 
-      zone_member = object.try(:shipping_address).try(:country).try(:zone_member)
+      zone_member = if object.class == Spree::Order
+                      object.try(:shipping_address).try(:country).try(:zone_member)
+                    else
+                      object.try(:address).try(:country).try(:zone_member)
+                    end
+
       shipping_fee = zone_member && zone_member.has_international_shipping_fee ? self.preferred_international_shipping_fee : 0
       shipping_amount + shipping_fee
     end
