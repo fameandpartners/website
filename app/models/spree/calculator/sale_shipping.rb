@@ -24,7 +24,7 @@ module Spree
 
       zone_member = if object.class == Spree::Order
                       object.try(:shipping_address).try(:country).try(:zone_member)
-                    else
+                    elsif object.class == Spree::Shipment
                       object.try(:address).try(:country).try(:zone_member)
                     end
 
