@@ -1,12 +1,6 @@
 export function customizeReducer(state = {}, action) {
   switch(action.type) {
-    case 'SELECT_SIZE':
-      return Object.assign({}, state, action.customize);
-    case 'SELECT_LENGTH':
-      return Object.assign({}, state, action.customize);
-    case 'SELECT_COLOR':
-      return Object.assign({}, state, action.customize);
-    case 'SELECT_CUSTOM':
+    case 'CUSTOMIZE_DRESS':
       return Object.assign({}, state, action.customize);
     default:
       return state;
@@ -14,6 +8,10 @@ export function customizeReducer(state = {}, action) {
 }
 
 export function imageReducer(state = {}, action) {
+  return state;
+}
+
+export function variantsReducer(state = {}, action) {
   return state;
 }
 

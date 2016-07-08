@@ -11,6 +11,7 @@ ruby:
 
   init_product_details_page = "
     window.PdpData = {};
+    window.PdpData.variants = #{ @product.available_options.variants.serialize.to_json };
     window.PdpData.images = #{ @product.all_images.to_json };
     window.PdpData.defaultColors = #{ @product.default_color_options.to_json };
     window.PdpData.customColors = #{ @product.custom_color_options.to_json };
@@ -22,7 +23,7 @@ ruby:
     window.PdpData.productDiscount = #{ @productDiscount };
     window.PdpData.preselectedColor = {
       id: #{ @product.color_id.to_json }, 
-      presentation: #{ @product.name.to_json },
+      presentation: #{ @product.color_name.to_json },
       name: #{ @product.color_name.to_json }};"
 
 = content_for :inline_javascript_top do
@@ -37,6 +38,17 @@ ruby:
 
 - if Features.active?(:marketing_modals)
   #modal-add-to-cart-template.hidden
+  
+// TODO:  note this is very naughty way of connecting PDP react with shopping cart
+//        this will need to be fixed later after we migrate cart to react
+form
+  input id='pdpCartSizeId' type='hidden' value=''
+  input id='pdpCartColorId' type='hidden' value='#{raw @product.color_id}'
+  input id='pdpCartCustomIds' type='hidden' value=''
+  input id='pdpCartMakingIds' type='hidden' value='#{ raw @product.making_option_id }'
+  input id='pdpCartVariantId' type='hidden' value=''
+  input id='pdpCartDressVariantId' type='hidden' value=''
+  input id='pdpCartLength' type='hidden' value=''
 
 .pdp
   .container

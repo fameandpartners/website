@@ -86,7 +86,8 @@ export default function configureStore(initialState) {
           id: '',
           presentation: '',
           price: null
-        }
+        },
+        variantId : null
       }
     }
   );

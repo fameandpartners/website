@@ -4,24 +4,25 @@ import {bindActionCreators} from 'redux';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
 import SidePanelSizeChart from './SidePanelSizeChart';
+import {GetVariationId} from './utils';
 
 class SidePanelSize extends SidePanel {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      customize: {size: {id: '', presentation: ''}}
-    };
-
-    this.onSizeChange = this.onSizeChange.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
-  onSizeChange(event) {
-    let customize = this.state.customize;
-    customize.size.id = event.target.dataset.id;
-    customize.size.presentation = event.target.dataset.presentation;
-    this.setState({customize});
-    this.props.actions.selectSize(this.state.customize);
+  onChange(event) {
+    let customize = {};
+    customize.size = {};
+    customize.size.id = event.currentTarget.dataset.id;
+    customize.size.presentation = event.currentTarget.dataset.presentation;
+    customize.variantId = GetVariationId(
+      this.props.variants,
+      this.props.customize.color.id,
+      customize.size.id);
+    this.props.actions.customizeDress(customize);
   }
 
   render() {
@@ -33,7 +34,7 @@ class SidePanelSize extends SidePanel {
         ? "selector-size is-selected" : "selector-size";
       return (
         <a href="#" className={itemState}
-          onClick={this.onSizeChange} key={index}
+          onClick={this.onChange} key={index}
           data-id={size.table.id} data-presentation={size.table.presentation}>
           {size.table.presentation}
         </a>
@@ -67,14 +68,14 @@ class SidePanelSize extends SidePanel {
 }
 
 SidePanelSize.propTypes = {
-  customize: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+  customize: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
-    defaultSizes: state.defaultSizes
+    defaultSizes: state.defaultSizes,
+    variants: state.variants
   };
 }
 

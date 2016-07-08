@@ -9,19 +9,15 @@ class SidePanelLength extends SidePanel {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      customize: {length: {id: '', presentation: ''}}
-    };
-
     this.onChange = this.onChange.bind(this);
   }
 
   onChange(event) {
-    let customize = this.state.customize;
-    customize.length.id = event.target.dataset.id;
-    customize.length.presentation = event.target.dataset.id;
-    this.setState({customize});
-    this.props.actions.selectLength(this.state.customize);
+    let customize = {};
+    customize.length = {};
+    customize.length.id = event.currentTarget.dataset.id;
+    customize.length.presentation = event.currentTarget.dataset.id;
+    this.props.actions.customizeDress(customize);
   }
 
   render() {
@@ -74,8 +70,7 @@ class SidePanelLength extends SidePanel {
 }
 
 SidePanelLength.propTypes = {
-  customize: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+  customize: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {

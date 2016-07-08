@@ -8,16 +8,13 @@ class SidePanelCustom extends SidePanel {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      customize: {custom: {id: '', presentation: '', price: null}}
-    };
-
     this.onChange = this.onChange.bind(this);
   }
 
   onChange(event) {
-    // toggle option
-    let customize = this.state.customize;
+    let customize = {};
+    customize.custom = {};
+
     if(this.props.customize.custom.id === event.currentTarget.dataset.id) {
       customize.custom.id = "";
       customize.custom.presentation = "";
@@ -27,8 +24,8 @@ class SidePanelCustom extends SidePanel {
       customize.custom.presentation = event.currentTarget.dataset.presentation;
       customize.custom.price = parseFloat(event.currentTarget.dataset.price);
     }
-    this.setState({customize});
-    this.props.actions.selectSize(this.state.customize);
+
+    this.props.actions.customizeDress(customize);
   }
 
   render() {
@@ -85,8 +82,7 @@ class SidePanelCustom extends SidePanel {
 
 SidePanelCustom.propTypes = {
   customize: PropTypes.object.isRequired,
-  customOptions: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  customOptions: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state, ownProps) {

@@ -8,6 +8,15 @@ class CtaPrice extends React.Component {
     super(props, context);
   }
 
+  componentDidUpdate() {
+    // TODO: redo this
+    // this is just very hacky way to connect this with shopping cart
+    document.getElementById('pdpCartSizeId').value = this.props.customize.size.id;
+    document.getElementById('pdpCartColorId').value = this.props.customize.color.id;
+    document.getElementById('pdpCartCustomIds').value = this.props.customize.custom.id;
+    document.getElementById('pdpCartLength').value = this.props.customize.length.id;
+  }
+
   render() {
     const price =
       parseFloat(this.props.productPrice.amount)

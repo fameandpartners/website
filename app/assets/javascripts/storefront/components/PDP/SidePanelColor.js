@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
+import {GetVariationId} from './utils';
 
 class SidePanelColor extends SidePanel {
   constructor(props, context) {
@@ -15,33 +16,39 @@ class SidePanelColor extends SidePanel {
           presentation: this.props.preselectedColor.presentation,
           name: this.props.preselectedColor.name,
           price: null
-        }
+        },
+        variantId: null
       }
     };
 
-    this.props.actions.selectColor(this.state.customize);
+    this.props.actions.customizeDress(this.state.customize);
     this.onChange = this.onChange.bind(this);
   }
 
   onChange(event) {
-    let customize = this.state.customize;
+    let customize = {};
+    customize.color = {};
     customize.color.id = event.currentTarget.dataset.id;
     customize.color.presentation = event.currentTarget.dataset.presentation;
     customize.color.name = event.currentTarget.dataset.name;
-    customize.color.price = parseFloat(event.currentTarget.dataset.price);
-    this.setState({customize});
-    this.props.actions.selectColor(this.state.customize);
+    customize.color.price = event.currentTarget.dataset.price;
+    customize.variantId = GetVariationId(
+      this.props.variants,
+      this.props.customize.size.id,
+      customize.color.id);
+    this.props.actions.customizeDress(customize);
   }
 
   render() {
+    const props = this.props;
     const menuState = this.state.active ? 'side-menu is-active' : 'side-menu';
-    const triggerState = this.props.customize.color.id
+    const triggerState = props.customize.color.id
       ? "c-card-customize__content is-selected" : "c-card-customize__content";
 
-    const previewColor = "color-preview color-" + this.props.customize.color.name;
+    const previewColor = "color-preview color-" + props.customize.color.name;
 
-    const defaultColors = this.props.defaultColors.map((color, index) => {
-      const itemState = this.props.customize.color.id == color.option_value.id
+    const defaultColors = props.defaultColors.map((color, index) => {
+      const itemState = props.customize.color.id == color.option_value.id
         ? "selector-color is-selected" : "selector-color";
       const swatch = "swatch color-" + color.option_value.name;
       return (
@@ -58,11 +65,11 @@ class SidePanelColor extends SidePanel {
     });
 
     const customColorPrice =
-      parseFloat(this.props.customColorPrice.money.fractional
-      / this.props.customColorPrice.money.currency.subunit_to_unit);
+      parseFloat(props.customColorPrice.money.fractional
+      / props.customColorPrice.money.currency.subunit_to_unit);
 
-    const customColors = this.props.customColors.map((color, index) => {
-      const itemState = this.props.customize.color.id == color.option_value.id
+    const customColors = props.customColors.map((color, index) => {
+      const itemState = props.customize.color.id == color.option_value.id
         ? "selector-color is-selected" : "selector-color";
       const swatch = "swatch color-" + color.option_value.name;
       return (
@@ -83,7 +90,7 @@ class SidePanelColor extends SidePanel {
           className={triggerState}
           onClick={this.openMenu}>
           <div className="c-card-customize__content__left">Color</div>
-          <div className="c-card-customize__content__right txt-truncate-1">{this.props.customize.color.presentation}</div>
+          <div className="c-card-customize__content__right txt-truncate-1">{props.customize.color.presentation}</div>
         </a>
 
         <div className={menuState}>
@@ -96,7 +103,7 @@ class SidePanelColor extends SidePanel {
           </div>
           <h2 className="h4 c-card-customize__header">
             Selected Color:
-            <span> {this.props.customize.color.presentation}</span>
+            <span> {props.customize.color.presentation}</span>
           </h2>
           <div className={previewColor}></div>
           <h3 className="h5 heading-secondary">Recommended Colors</h3>
@@ -120,8 +127,7 @@ class SidePanelColor extends SidePanel {
 }
 
 SidePanelColor.propTypes = {
-  customize: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+  customize: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
@@ -130,7 +136,8 @@ function mapStateToProps(state, ownProps) {
     defaultColors: state.defaultColors,
     customColors: state.customColors,
     customColorPrice: state.customColorPrice,
-    preselectedColor: state.preselectedColor
+    preselectedColor: state.preselectedColor,
+    variants: state.variants
   };
 }
 
