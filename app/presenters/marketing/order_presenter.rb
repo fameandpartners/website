@@ -43,6 +43,9 @@ module Marketing
     # TODO: `.build_line_items` and `.build_adjustments` should be instance methods
     def self.build_line_items(order)
       order.line_items.collect do |item|
+        image_urls        = Products::ColorVariantImageDetector.cropped_images_for(item.product)
+        product_image_url = image_urls.sample # TODO: this should reflect the chosen line item color. Right now, is randomly picking a product image
+
         {
           sku:                    item.variant.sku,
           name:                   item.variant.product.name,
@@ -51,7 +54,7 @@ module Marketing
           quantity:               item.quantity,
           variant_display_amount: item.variant.display_amount.to_s,
           display_amount:         item.display_amount.to_s,
-          image_url:              item.image.present? ? item.image.attachment.url(:large) : nil,
+          image_url:              product_image_url,
           height:                 item.personalization.present? ? item.personalization.height : LineItemPersonalization::DEFAULT_HEIGHT,
           color:                  item.personalization.present? ? item.personalization.color.try(:name) || 'Unknown Color' : item.variant.try(:dress_color).try(:name) || 'Unknown Color'
         }

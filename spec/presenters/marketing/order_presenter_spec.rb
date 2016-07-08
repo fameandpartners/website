@@ -12,11 +12,14 @@ describe Marketing::OrderPresenter, type: :presenter do
   end
 
   describe 'class methods' do
-    let(:dress_item) { build(:dress_item, price: 9.99, quantity: 1) }
+    let(:dress_color) { build(:product_colour, name: 'blue') }
+    let(:dress_item_personalization) { build(:personalization, height: 'petite', color: dress_color) }
+    let(:dress_variant) { create(:dress_variant) }
+    let(:dress_item) { build(:dress_item, price: 9.99, quantity: 1, personalization: dress_item_personalization, variant: dress_variant) }
     let(:adjustment) { build(:adjustment, adjustable_type: 'Spree::Order') }
-    let(:order) { build_stubbed(:spree_order, number: 'R123', currency: 'BRL',line_items: [dress_item], adjustments: [adjustment], projected_delivery_date: Date.new) }
+    let(:order) { build(:spree_order, number: 'R123', currency: 'BRL',line_items: [dress_item], adjustments: [adjustment], projected_delivery_date: Date.new) }
 
-    it 'build_line_items' do
+    it '.build_line_items' do
       result = described_class.build_line_items(order).first
       expect(result[:sku]).to eq(dress_item.variant.sku)
       expect(result[:name]).to eq(dress_item.variant.product.name)
@@ -25,8 +28,16 @@ describe Marketing::OrderPresenter, type: :presenter do
       expect(result[:quantity]).to eq(dress_item.quantity)
       expect(result[:variant_display_amount]).to eq(dress_item.variant.display_amount.to_s)
       expect(result[:display_amount]).to eq(dress_item.display_amount.to_s)
+
+      # expect(result[:image_url]).to eq(nil) # TODO: Image URL should point to the cropped version, like the cart at the storefront
+      expect(result[:height]).to eq('petite')
+      expect(result[:color]).to eq('blue')
     end
 
+    it '.build_adjustments' do
+      # TODO result = described_class.build_adjustments(order).first
+      skip 'TODO'
+    end
   end
 
   describe 'instance methods' do
