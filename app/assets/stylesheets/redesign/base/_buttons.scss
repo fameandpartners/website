@@ -256,4 +256,14 @@
   margin-top: 25px;
   padding: 10px 40px;
   display: inline-block;
+  border-radius: 0;
+}
+
+//Button with white background
+.btn-white {
+  background: $c-neutral-white;
+  color: $c-neutral-black;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 0;
 }
