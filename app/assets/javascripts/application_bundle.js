@@ -388,7 +388,10 @@ var SidePanelColor = function (_SidePanel) {
       customize.color.presentation = event.currentTarget.dataset.presentation;
       customize.color.name = event.currentTarget.dataset.name;
       customize.color.price = event.currentTarget.dataset.price;
-      customize.variantId = (0, _utils.GetVariationId)(this.props.variants, this.props.customize.size.id, customize.color.id);
+      // search for dress variant id, this will work only for default color dresses
+      // NOTE: we should check if this is even needed, since length
+      // selection is required.
+      customize.dressVariantId = (0, _utils.GetDressVariantId)(this.props.variants, this.props.customize.size.id, customize.color.id);
       this.props.actions.customizeDress(customize);
     }
   }, {
@@ -1274,7 +1277,10 @@ var SidePanelSize = function (_SidePanel) {
       customize.size = {};
       customize.size.id = event.currentTarget.dataset.id;
       customize.size.presentation = event.currentTarget.dataset.presentation;
-      customize.variantId = (0, _utils.GetVariationId)(this.props.variants, this.props.customize.color.id, customize.size.id);
+      // search for dress variant id, this will work only for default color dresses
+      // NOTE: we should check if this is even needed, since length
+      // selection is required.
+      customize.dressVariantId = (0, _utils.GetDressVariantId)(this.props.variants, this.props.customize.color.id, customize.size.id);
       this.props.actions.customizeDress(customize);
     }
   }, {
@@ -1640,7 +1646,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps)(SidePanelSizeChart);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var GetVariationId = exports.GetVariationId = function GetVariationId(vars, color, size) {
+var GetDressVariantId = exports.GetDressVariantId = function GetDressVariantId(vars, color, size) {
   var id = void 0;
   vars.map(function (val) {
     if (parseInt(val.color_id) === parseInt(color) && parseInt(val.size_id) === parseInt(size)) {
@@ -1663,7 +1669,7 @@ var _pdpReducers = require('./pdpReducers');
 
 var rootReducer = (0, _redux.combineReducers)({
   customize: _pdpReducers.customizeReducer,
-  variants: _pdpReducers.variantsReducer,
+  variants: _pdpReducers.dressVariantReducer,
   images: _pdpReducers.imageReducer,
   productPrice: _pdpReducers.productPriceReducer,
   productDiscount: _pdpReducers.productDiscountReducer,
@@ -1688,7 +1694,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.customizeReducer = customizeReducer;
 exports.imageReducer = imageReducer;
-exports.variantsReducer = variantsReducer;
+exports.dressVariantReducer = dressVariantReducer;
 exports.productPriceReducer = productPriceReducer;
 exports.productDiscountReducer = productDiscountReducer;
 exports.defaultColorReducer = defaultColorReducer;
@@ -1719,7 +1725,7 @@ function imageReducer() {
   return state;
 }
 
-function variantsReducer() {
+function dressVariantReducer() {
   var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   var action = arguments[1];
 
@@ -1875,7 +1881,7 @@ function configureStore(initialState) {
         presentation: '',
         price: null
       },
-      variantId: null
+      dressVariantId: null
     }
   });
 

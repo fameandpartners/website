@@ -1,4 +1,4 @@
-export const GetVariationId = (vars, color, size) => {
+export const GetDressVariantId = (vars, color, size) => {
   let id;
   vars.map(val => {
     if(parseInt(val.color_id) === parseInt(color)

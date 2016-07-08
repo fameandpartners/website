@@ -87,7 +87,7 @@ export default function configureStore(initialState) {
           presentation: '',
           price: null
         },
-        variantId : null
+        dressVariantId : null
       }
     }
   );

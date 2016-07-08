@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import {customizeReducer,
-        variantsReducer,
+        dressVariantReducer,
         imageReducer,
         productPriceReducer,
         productDiscountReducer,
@@ -16,7 +16,7 @@ import {customizeReducer,
 
 const rootReducer = combineReducers({
   customize: customizeReducer,
-  variants: variantsReducer,
+  variants: dressVariantReducer,
   images: imageReducer,
   productPrice: productPriceReducer,
   productDiscount: productDiscountReducer,

@@ -11,7 +11,7 @@ export function imageReducer(state = {}, action) {
   return state;
 }
 
-export function variantsReducer(state = {}, action) {
+export function dressVariantReducer(state = {}, action) {
   return state;
 }
 

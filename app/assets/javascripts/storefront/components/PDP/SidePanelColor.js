@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
-import {GetVariationId} from './utils';
+import {GetDressVariantId} from './utils';
 
 class SidePanelColor extends SidePanel {
   constructor(props, context) {
@@ -32,7 +32,10 @@ class SidePanelColor extends SidePanel {
     customize.color.presentation = event.currentTarget.dataset.presentation;
     customize.color.name = event.currentTarget.dataset.name;
     customize.color.price = event.currentTarget.dataset.price;
-    customize.variantId = GetVariationId(
+    // search for dress variant id, this will work only for default color dresses
+    // NOTE: we should check if this is even needed, since length
+    // selection is required.
+    customize.dressVariantId = GetDressVariantId(
       this.props.variants,
       this.props.customize.size.id,
       customize.color.id);
