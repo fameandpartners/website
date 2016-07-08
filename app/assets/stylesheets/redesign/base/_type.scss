@@ -140,3 +140,13 @@ blockquote {
   font-style: italic;
   text-decoration: underline;
 }
+
+.cta-link-alt {
+  color: $c-neutral-black;
+  font-family: $font-heading;
+  font-style: italic;
+  text-decoration: none;
+  border-bottom: 1px solid $c-neutral-black;
+  display: inline-block;
+  margin: 10px 0;
+}
