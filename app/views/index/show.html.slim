@@ -5,24 +5,24 @@ ruby:
 
   // Featured section
   .main-hero-wrap.hero-wrap.copy-left
-    picture.media-wrap.keep-ratio
-      .inner-wrap
-        source media='(max-width: 1023px)' srcset='#{image_path("homepage/hero-featured/featured-mob.jpg")}'
-        source media='(min-width: 1024px)' srcset='#{image_path("homepage/hero-featured/featured-full.jpg")}'
-        img src='#{image_path("homepage/hero-featured/featured-full.jpg")}' srcset='
-          #{image_path("homepage/hero-featured/featured-mob.jpg")} 1023w,
-          #{image_path("homepage/hero-featured/featured-full.jpg")} 1024w' alt="It's a Date. Easy looks that are sexy, comfortable and made for you."
+    = link_to dresses_path
+      picture.media-wrap.keep-ratio
+        .inner-wrap
+          source media='(max-width: 1023px)' srcset='#{image_path("homepage/hero-featured/featured-mob.jpg")}'
+          source media='(min-width: 1024px)' srcset='#{image_path("homepage/hero-featured/featured-full.jpg")}'
+          img src='#{image_path("homepage/hero-featured/featured-full.jpg")}' srcset='
+            #{image_path("homepage/hero-featured/featured-mob.jpg")} 1023w,
+            #{image_path("homepage/hero-featured/featured-full.jpg")} 1024w' alt="It's a Date. Easy looks that are sexy, comfortable and made for you."
 
-    .content-wrap
-      .container
-        .row
-          .col-md-4.col-md-offset-1
-            .copy-wrap
-              h1.heading
-                span It’s a Date
-                span.sub-heading
-                  | Easy looks that are sexy, comfortable and made for you.
-              = link_to dresses_path
+      .content-wrap
+        .container
+          .row
+            .col-md-4.col-md-offset-1
+              .copy-wrap
+                h1.heading
+                  span It’s a Date
+                  span.sub-heading
+                    | Easy looks that are sexy, comfortable and made for you.
                 span.btn-md.btn-featured
                   | View <span class="copy-highlight">dresses</span>
 
@@ -60,88 +60,88 @@ ruby:
 
     .row
       .col-md-12.cta-item-huge
-        .section-img-wrap.copy-center
-          picture.media-wrap.keep-ratio
-            .inner-wrap
-              = image_tag 'homepage/influencer/influencer-1.jpg', alt: "Explore Georgia Fowler's"
+        = link_to "#"
+          .section-img-wrap.copy-center
+            picture.media-wrap.keep-ratio
+              .inner-wrap
+                = image_tag 'homepage/influencer/influencer-1.jpg', alt: "Explore Georgia Fowler's"
 
-          .content-wrap
-            .container-cta
-              .row-cta
-                .col-md-12
-                  .copy-wrap.text-center
-                    = link_to "#"
+            .content-wrap
+              .container-cta
+                .row-cta
+                  .col-md-12
+                    .copy-wrap.text-center
                       span.btn-sm.btn-white
                         span.cta-link Explore
                         span.copy-highlight  Georgia Fowler's
     .row
       .col-md-6.cta-item
-        .section-img-wrap.copy-center
-          picture.media-wrap.keep-ratio
-            .inner-wrap
-              = image_tag 'homepage/influencer/influencer-2.jpg', alt: "Shop Our Slipe Dress"
+        = link_to "#"
+          .section-img-wrap.copy-center
+            picture.media-wrap.keep-ratio
+              .inner-wrap
+                = image_tag 'homepage/influencer/influencer-2.jpg', alt: "Shop Our Slipe Dress"
 
-          .content-wrap
-            .container-cta
-              .row-cta
-                .col-md-12
-                  .copy-wrap.text-center
-                    = link_to "#"
+            .content-wrap
+              .container-cta
+                .row-cta
+                  .col-md-12
+                    .copy-wrap.text-center
                       span.btn-sm.btn-white
                         span.cta-link Shop
                         span.copy-highlight  Our Slip Dress
 
       .col-md-6.cta-item
-        .section-img-wrap.copy-center
-          picture.media-wrap.keep-ratio
-            .inner-wrap
-              = image_tag 'homepage/influencer/influencer-3.jpg', alt: "Shop Our Gown"
+        = link_to "#"
+          .section-img-wrap.copy-center
+            picture.media-wrap.keep-ratio
+              .inner-wrap
+                = image_tag 'homepage/influencer/influencer-3.jpg', alt: "Shop Our Gown"
 
-          .content-wrap
-            .container-cta
-              .row-cta
-                .col-md-12
-                  .copy-wrap.text-center
-                    = link_to "#"
+            .content-wrap
+              .container-cta
+                .row-cta
+                  .col-md-12
+                    .copy-wrap.text-center
                       span.btn-sm.btn-white
                         span.cta-link Shop
                         span.copy-highlight  Our Gown
 
     .row
       .col-md-6.cta-item
-        .section-img-wrap.copy-center
-          picture.media-wrap.keep-ratio
-            .inner-wrap
-              = image_tag 'homepage/influencer/influencer-4.jpg', alt: "Shop Our Cocktail"
+        = link_to "#"
+          .section-img-wrap.copy-center
+            picture.media-wrap.keep-ratio
+              .inner-wrap
+                = image_tag 'homepage/influencer/influencer-4.jpg', alt: "Shop Our Cocktail"
 
-          .content-wrap
-            .container-cta
-              .row-cta
-                .col-md-12
-                  .copy-wrap.text-center
-                    = link_to "#"
+            .content-wrap
+              .container-cta
+                .row-cta
+                  .col-md-12
+                    .copy-wrap.text-center
                       span.btn-sm.btn-white
                         span.cta-link Shop
                         span.copy-highlight  Our Cocktail
 
       .col-md-6.cta-item
-        .section-img-wrap.copy-center
-          picture.media-wrap.keep-ratio
-            .inner-wrap
-              = image_tag 'homepage/influencer/influencer-5.jpg', alt: "Shop Our Wedding"
+        = link_to "#"
+          .section-img-wrap.copy-center
+            picture.media-wrap.keep-ratio
+              .inner-wrap
+                = image_tag 'homepage/influencer/influencer-5.jpg', alt: "Shop Our Wedding"
 
-          .content-wrap
-            .container-cta
-              .row-cta
-                .col-md-12
-                  .copy-wrap.text-center
-                    = link_to "#"
+            .content-wrap
+              .container-cta
+                .row-cta
+                  .col-md-12
+                    .copy-wrap.text-center
                       span.btn-sm.btn-white
                         span.cta-link Shop
                         span.copy-highlight  Our Wedding
 
   // Section: Influencer
-  section.section-box.container#styling
+  section.section-box.container.section-styling
     .row
       .col-md-6
         .item
@@ -157,16 +157,21 @@ ruby:
               | View the <span class="copy-highlight">Style Finder</span>
 
       .col-md-6
-        .item.bordered.with-padding-top
+        .item.bordered.item-alt.styling-session
           .row
-            .col-md-6
-              = image_tag 'homepage/styling/styling-session.jpg', :class => 'img-responsive'
+            .col-md-7
+              = link_to styling_session_path
+                = image_tag 'homepage/styling/styling-session.jpg', :class => 'img-responsive hidden-xs hidden-sm'
 
-            .col-md-6
+            .col-md-5
               h3 Book your free styling session.
               p These are the styles  that have stood the test of time. We collect information from you.
-              = link_to 'javascript:;'
-                u Book a <span class="copy-highlight">Styling Session</span>
+              = link_to styling_session_path, class: "cta-link-alt"
+                span Book a
+                span.copy-highlight  Styling Session
+
+              = link_to styling_session_path
+                = image_tag 'homepage/styling/styling-session-mob.jpg', :class => 'img-responsive hidden-md hidden-lg'
 
   .carousel-strap.instagram
     section.section-box.container
