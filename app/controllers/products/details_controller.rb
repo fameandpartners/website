@@ -47,8 +47,8 @@ class Products::DetailsController < Products::BaseController
   private
 
   def load_my_things_pixel
-    append_gtm_event(event_name: 'product_page')
-    @gtm_container.append_single_variable('product_id', @product.id)
+    append_gtm_event(event_name: 'productPage')
+    @gtm_container.append_single_variable('productId', @product.id)
   end
 
 end

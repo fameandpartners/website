@@ -333,8 +333,8 @@ Spree::CheckoutController.class_eval do
       append_gtm_variant(spree_variant: variant)
       append_gtm_order(spree_order: current_order)
 
-      append_gtm_event(event_name: 'shopping_cart_page')
-      @gtm_container.append_single_variable('last_product_added', variant.product.id)
+      append_gtm_event(event_name: 'shoppingCartPage')
+      @gtm_container.append_single_variable('lastProductAdded', variant.product.id)
     end
   end
 

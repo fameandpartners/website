@@ -185,12 +185,12 @@ class Products::CollectionsController < Products::BaseController
 
   def produce_gtm_data
     if request.path[/\A\/dresses\/?\z/]
-      append_gtm_event(event_name: 'category_page')
-      @gtm_container.append_single_variable('category_name', 'dresses')
+      append_gtm_event(event_name: 'categoryPage')
+      @gtm_container.append_single_variable('categoryName', 'dresses')
     elsif request.path[/\A\/dresses\/.{3,}\/?\z/]
-      append_gtm_event(event_name: 'sub_category_page')
-      @gtm_container.append_single_variable('category_name', 'dresses')
-      @gtm_container.append_single_variable('sub_category_name', request.path.split('/').last)
+      append_gtm_event(event_name: 'subCategoryPage')
+      @gtm_container.append_single_variable('categoryName', 'dresses')
+      @gtm_container.append_single_variable('subCategoryName', request.path.split('/').last)
     end
   end
 end
