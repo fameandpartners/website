@@ -252,6 +252,11 @@ class StaticsController < ApplicationController
     @description = "Hashtag #fame2015 to win"
   end
 
+  def modern_classics
+    @title = "Modern Classic"
+    @description = "Modern Classic"
+  end
+
   # Legacy marketing campaign
   # def landing_page_mobile
   #   @title = 'A mid-summer night out'
