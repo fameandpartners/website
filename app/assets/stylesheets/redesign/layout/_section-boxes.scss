@@ -1,7 +1,11 @@
 /* [Section boxes]
 -------------------------------------------------------*/
 .section-box {
-  margin-bottom: $section-spacing-margin-top;
+  margin-top: $section-spacing-margin-top;
+
+  &.extra-spacing-top {
+    margin-top: ($section-spacing-margin-top + 40px);
+  }
 
   p {
     font-family: $font-heading;
