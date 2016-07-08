@@ -2,7 +2,8 @@ ruby:
   link_to_dresses = build_taxon_path('dresses')
 
 .page-content.index
-  /! Featured section
+
+  // Featured section
   .main-hero-wrap.hero-wrap.copy-left
     picture.media-wrap.keep-ratio
       .inner-wrap
@@ -25,64 +26,163 @@ ruby:
                 span.btn-md.btn-featured
                   | View <span class="copy-highlight">dresses</span>
 
-  /! Content Section
-  section.container.content-block.home-main-content
-    .row.aside-single-tile
-      .main.col-md-7
-        = render 'shared/redesign/tabs_collection'
-        = link_to '/dresses/dress-delaney-two-piece-1095?color=navy', class: 'media-wrap'
-          = image_tag 'home-page-tiles/Category-01-2016-07-01.jpg', alt: 'It takes two. Double-up on style in the Delaney set. Shop now'
-        = link_to styling_session_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/Category-02-2016-07-01.jpg', alt: "Free styling session. Via chat, phone or video, book a free session with LA's go-to fashion stylist, Amber Bond. Book me in"
-
-      aside.col-md-5
-        .outer-wrap
-          = link_to 'dresses/dress-cenit-two-piece-1081?color=pale-blue-cotton-stripe'
-            picture.media-wrap
-              .inner-wrap
-                img src='#{image_path('home-page-tiles/Category-03-2016-07-01.jpg')}' alt="Knot your average. Shop the Cenit Two-Piece"
-
-
-  section.carousel-strap.instagram
-    .container
-      .outer-wrap
-        h2.title-line-on-sides
-          .inner-wrap SHOP INSTAGRAM
-        = react_component('InstagramCarousel', skin: '',
-          assets: [ {link: link_to_dresses + '/dress-wyatt-1030?color=dark-burgundy&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=lotus-doll-dress-product', src: '/assets/homepage/instagram/Instagram-01.jpg', user: '@fameandpartners', cta: "SHOP THE WYATT LOOK"},
-                    {link: link_to_dresses + '/dress-paxton-1043?color=navy', src: '/assets/homepage/instagram/_hollyt.jpg', user: '@_hollyt', cta: "SHOP THE PAXTON"},
-                    {link: link_to_dresses + '/dress-aspen-853?color=white&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=persia-dress-product', src: '/assets/homepage/instagram/insta2.jpg', user: '@evaacatherine', cta: "SHOP THE ASPEN LOOK"},
-                    {link: link_to_dresses + '/dress-firefly-640?color=black', src: '/assets/homepage/instagram/lainyhedaya.jpg', user: '@lainyhedaya', cta: "SHOP THIS LOOK"},
-                    {link: link_to_dresses + '/dress-audrey-1032?color=pale-pink-and-pale-grey', src: '/assets/homepage/instagram/jacquiealexander.jpg', user: '@jacquiealexander', cta: "SHOP THE AUDREY"},
-                    {link: link_to_dresses + '/dress-lotus-doll-899?color=grand-lily&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=lotus-doll-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_07.jpg', user: '@fionabriseno', cta: "SHOP THE LOTUS DOLL LOOK"},
-                    {link: link_to_dresses + '/dress-roxy-631?color=burgundy', src: '/assets/homepage/instagram/No4.jpg', user: '@xxsophiehermanxx', cta: "SHOP THE ROXY LOOK"},
-                    {link: link_to_dresses + '/dress-juliette-505?color=black', src: '/assets/homepage/instagram/No3_Sophie.jpg', user: '@xxsophiehermannxx', cta: "Shop the Juliette Look"},
-                    {link: link_to_dresses + '/dress-wish-upon-439?color=black', src: '/assets/homepage/instagram/No3.jpg', user: '@nadaadellex', cta: "SHOP THE WISH UPON LOOK"},
-                    {link: link_to_dresses + '/dress-janine-906?color=aqua-lily&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=janine-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_23.jpg', user: '@kiraship', cta: "SHOP THE JANINE LOOK"},
-                    {link: link_to_dresses + '/dress-allegra-680?color=forest-green', src: '/assets/homepage/instagram/No2.jpg', user: '@theruecollective', cta: "SHOP THE ALLEGRA LOOK"},
-                    {link: link_to_dresses + '/dress-laced-heartline-262?color=white', src: '/assets/homepage/instagram/No2_Alevidal.jpg', user: '@alevidal', cta: "Shop the Laced Heartline Look"},
-                    {link: link_to_dresses + '/dress-perry-543?color=nude', src: '/assets/homepage/instagram/No6_Linhwin.jpg', user: '@linhwinn', cta: "Shop the Perry Look"},
-                    {link: link_to_dresses + '/dress-rory-two-piece-675?color=red', src: '/assets/homepage/instagram/No4_Sarah.jpg', user: '@sarah3llen', cta: "Shop the Rory Look"}])
-
-
-
-  section.container
+  // Section: F&P Story
+  section.section-box.container#fp-story
     .row
-      .col-md-12
-        .h2.title-line-on-sides
-          .inner-wrap AS SEEN IN
-      .col-md-12
-        .as-seen-in-partners
-          img.refinery29 alt='Refinery29'    src='/assets/footer/publisher/refinery29.png'
-          img.elle       alt='Elle'          src='/assets/footer/publisher/elle.png'
-          img.marie      alt='Marie'         src='/assets/footer/publisher/marie.png'
-          img.russh      alt='Russh'         src='/assets/footer/publisher/russh.png'
-          img.glamour    alt='Glamour'       src='/assets/footer/publisher/glamour.png'
-          img.wwd        alt='WWD'           src='/assets/footer/publisher/wwd.png'
-          img.teen       alt='Teenvogue'     src='/assets/footer/publisher/teen.png'
-          img.popsugar   alt='Popsugar'      src='/assets/footer/publisher/popsugar.png'
-          img.nylon      alt='Nylon'         src='/assets/footer/publisher/nylon.png'
-          img.cosmo      alit='Cosmopolitan' src='/assets/footer/publisher/cosmo.png'
+      .col-md-12.heading-overlay-wrapper
+        h2.heading-overlay The Fame Story
 
-  /! SEO content
-  = render 'shared/redesign/seo_content'
+    .row
+      .col-md-4
+        .item.bordered
+          h3 Here is some copy about why you will <em>love</em> us and our product.
+          h4 A little bit of additional copy here
+          = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive'
+
+      .col-md-4
+        .item.bordered
+          = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive hidden-sm hidden-xs'
+          h3 Made to order, made for you with love - exactly how you <em>want</em> it.
+          h4 A little bit of additional copy here
+          = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive hidden-md hidden-lg'
+
+      .col-md-4
+        .item.bordered
+          h3 The fit guarantee. Tell our customers about our <em>unique</em> sizing and fit.
+          h4 A little bit of additional copy here
+          = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive'
+
+  // Section: Influencer
+  section.section-box.container#fp-influencer
+    .row
+      .col-md-12.heading-overlay-wrapper
+        h2.heading-overlay F&P Influencer
+
+    .row
+      .col-md-12.cta-item-huge
+        .section-img-wrap.copy-center
+          picture.media-wrap.keep-ratio
+            .inner-wrap
+              img src='#{image_path("homepage/influencer/influencer-1.jpg")}' alt="Explore Georgia Fowler's"
+
+          .content-wrap
+            .container-cta
+              .row-cta
+                .col-md-12
+                  .copy-wrap.text-center
+                    = link_to "#"
+                      span.btn-sm.btn-white
+                        | <span class="cta-link">Explore</span> <span class="copy-highlight">Georgia Fowler's</span>
+    .row
+      .col-md-6.cta-item
+        .section-img-wrap.copy-center
+          picture.media-wrap.keep-ratio
+            .inner-wrap
+              img src='#{image_path("homepage/influencer/influencer-2.jpg")}' alt="Shop Our Slipe Dress"
+
+          .content-wrap
+            .container-cta
+              .row-cta
+                .col-md-12
+                  .copy-wrap.text-center
+                    = link_to "#"
+                      span.btn-sm.btn-white
+                        | <span class="cta-link">Shop</span> <span class="copy-highlight">Our Slip Dress</span>
+
+      .col-md-6.cta-item
+        .section-img-wrap.copy-center
+          picture.media-wrap.keep-ratio
+            .inner-wrap
+              img src='#{image_path("homepage/influencer/influencer-3.jpg")}' alt="Shop Our Gown"
+
+          .content-wrap
+            .container-cta
+              .row-cta
+                .col-md-12
+                  .copy-wrap.text-center
+                    = link_to "#"
+                      span.btn-sm.btn-white
+                        | <span class="cta-link">Shop</span> <span class="copy-highlight">Our Gown</span>
+
+    .row
+      .col-md-6.cta-item
+        .section-img-wrap.copy-center
+          picture.media-wrap.keep-ratio
+            .inner-wrap
+              img src='#{image_path("homepage/influencer/influencer-4.jpg")}' alt="Shop Our Cocktail"
+
+          .content-wrap
+            .container-cta
+              .row-cta
+                .col-md-12
+                  .copy-wrap.text-center
+                    = link_to "#"
+                      span.btn-sm.btn-white
+                        | <span class="cta-link">Shop</span> <span class="copy-highlight">Our Cocktail</span>
+
+      .col-md-6.cta-item
+        .section-img-wrap.copy-center
+          picture.media-wrap.keep-ratio
+            .inner-wrap
+              img src='#{image_path("homepage/influencer/influencer-5.jpg")}' alt="Shop Our Wedding"
+
+          .content-wrap
+            .container-cta
+              .row-cta
+                .col-md-12
+                  .copy-wrap.text-center
+                    = link_to "#"
+                      span.btn-sm.btn-white
+                        | <span class="cta-link">Shop</span> <span class="copy-highlight">Our Wedding</span>
+
+  // Section: Influencer
+  section.section-box.container#styling
+    .row
+      .col-md-6
+        .item
+          h3 Here is some copy about our unique guided experience here - two to three lines worth of copy to go here. Filler copy.
+          p These are the styles  that have stood the test of time. We collect information from you when you register on our site, complete our style quiz, add to a wishlist, place an order, subscribe to our newsletter.
+
+          = link_to 'javascript:;', class: 'inline-btn'
+            span.btn-sm.btn-featured
+              | View the <span class="copy-highlight">Fit Finder</span>
+
+          = link_to 'javascript:;', class: 'inline-btn'
+            span.btn-sm.btn-featured
+              | View the <span class="copy-highlight">Style Finder</span>
+
+      .col-md-6
+        .item.bordered.with-padding-top
+          .row
+            .col-md-6
+              = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive'
+
+            .col-md-6
+              h3 Book your free styling session.
+              p These are the styles  that have stood the test of time. We collect information from you.
+              = link_to 'javascript:;'
+                u Book a <span class="copy-highlight">Styling Session</span>
+
+  .carousel-strap.instagram
+    section.section-box.container
+      .row
+        .col-md-12.heading-overlay-wrapper
+          h2.heading-overlay.inverted-margin Shop Instagram
+
+      .row
+        .col-md-12
+          = react_component('InstagramCarousel', skin: '',
+            assets: [ {link: link_to_dresses + '/dress-wyatt-1030?color=dark-burgundy&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=lotus-doll-dress-product', src: '/assets/homepage/instagram/Instagram-01.jpg', user: '@fameandpartners', cta: "SHOP THE WYATT LOOK"},
+                      {link: link_to_dresses + '/dress-paxton-1043?color=navy', src: '/assets/homepage/instagram/_hollyt.jpg', user: '@_hollyt', cta: "SHOP THE PAXTON"},
+                      {link: link_to_dresses + '/dress-aspen-853?color=white&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=persia-dress-product', src: '/assets/homepage/instagram/insta2.jpg', user: '@evaacatherine', cta: "SHOP THE ASPEN LOOK"},
+                      {link: link_to_dresses + '/dress-firefly-640?color=black', src: '/assets/homepage/instagram/lainyhedaya.jpg', user: '@lainyhedaya', cta: "SHOP THIS LOOK"},
+                      {link: link_to_dresses + '/dress-audrey-1032?color=pale-pink-and-pale-grey', src: '/assets/homepage/instagram/jacquiealexander.jpg', user: '@jacquiealexander', cta: "SHOP THE AUDREY"},
+                      {link: link_to_dresses + '/dress-lotus-doll-899?color=grand-lily&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=lotus-doll-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_07.jpg', user: '@fionabriseno', cta: "SHOP THE LOTUS DOLL LOOK"},
+                      {link: link_to_dresses + '/dress-roxy-631?color=burgundy', src: '/assets/homepage/instagram/No4.jpg', user: '@xxsophiehermanxx', cta: "SHOP THE ROXY LOOK"},
+                      {link: link_to_dresses + '/dress-juliette-505?color=black', src: '/assets/homepage/instagram/No3_Sophie.jpg', user: '@xxsophiehermannxx', cta: "Shop the Juliette Look"},
+                      {link: link_to_dresses + '/dress-wish-upon-439?color=black', src: '/assets/homepage/instagram/No3.jpg', user: '@nadaadellex', cta: "SHOP THE WISH UPON LOOK"},
+                      {link: link_to_dresses + '/dress-janine-906?color=aqua-lily&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=janine-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_23.jpg', user: '@kiraship', cta: "SHOP THE JANINE LOOK"},
+                      {link: link_to_dresses + '/dress-allegra-680?color=forest-green', src: '/assets/homepage/instagram/No2.jpg', user: '@theruecollective', cta: "SHOP THE ALLEGRA LOOK"},
+                      {link: link_to_dresses + '/dress-laced-heartline-262?color=white', src: '/assets/homepage/instagram/No2_Alevidal.jpg', user: '@alevidal', cta: "Shop the Laced Heartline Look"},
+                      {link: link_to_dresses + '/dress-perry-543?color=nude', src: '/assets/homepage/instagram/No6_Linhwin.jpg', user: '@linhwinn', cta: "Shop the Perry Look"},
+                      {link: link_to_dresses + '/dress-rory-two-piece-675?color=red', src: '/assets/homepage/instagram/No4_Sarah.jpg', user: '@sarah3llen', cta: "Shop the Rory Look"}])
