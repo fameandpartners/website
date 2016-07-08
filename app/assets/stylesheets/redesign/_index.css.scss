@@ -19,6 +19,18 @@
     padding-bottom: 5px;
   }
 
+  .cta-link-alt {
+    font-size: 1.3rem;
+  }
+
+  @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
+
+    .section-styling .btn-featured {
+      margin-top: 15px;
+    }
+
+  }
+
   @media (min-width: $bootstrap-md-width) {
 
     .hero-wrap.copy-left .heading {
@@ -40,6 +52,14 @@
 
     .btn-featured {
       margin-top: 45px;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .section-styling .styling-session {
+      margin-top: $section-spacing-margin-top;
     }
 
   }
