@@ -108,5 +108,6 @@ Feature: Complete Guest Checkout
     Then I should see my order placed, with "Connie" dress, "<Dress Size>" size and "<Dress Price>" price
 
     Examples:
-      | Site Version | Country        | State      | Zipcode Label | Dress Size | Skirt Length | Dress Price |
-      | USA          | United Kingdom | Avon       | Zipcode       | US 10      | Petite       | 289.00      |
+      | Site Version | Country        | State                   | Zipcode Label | Dress Size | Skirt Length | Dress Price |
+      | USA          | United Kingdom | Avon                    | Zipcode       | US 10      | Petite       | 289.00      |
+      | USA          | Germany        | Baden-Württemberg       | Zipcode       | US 10      | Petite       | 289.00      |
