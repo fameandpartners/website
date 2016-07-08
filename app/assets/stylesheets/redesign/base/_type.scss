@@ -129,8 +129,14 @@ blockquote {
 .copy-highlight {
   font-family: $font-family-secondary;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   padding-left: 3px;
+}
+
+.cta-link {
+  font-family: $font-heading;
+  font-style: italic;
+  text-decoration: underline;
 }
