@@ -63,7 +63,7 @@ ruby:
         .section-img-wrap.copy-center
           picture.media-wrap.keep-ratio
             .inner-wrap
-              img src='#{image_path("homepage/influencer/influencer-1.jpg")}' alt="Explore Georgia Fowler's"
+              = image_tag 'homepage/influencer/influencer-1.jpg', alt: "Explore Georgia Fowler's"
 
           .content-wrap
             .container-cta
@@ -72,13 +72,14 @@ ruby:
                   .copy-wrap.text-center
                     = link_to "#"
                       span.btn-sm.btn-white
-                        | <span class="cta-link">Explore</span> <span class="copy-highlight">Georgia Fowler's</span>
+                        span.cta-link Explore
+                        span.copy-highlight  Georgia Fowler's
     .row
       .col-md-6.cta-item
         .section-img-wrap.copy-center
           picture.media-wrap.keep-ratio
             .inner-wrap
-              img src='#{image_path("homepage/influencer/influencer-2.jpg")}' alt="Shop Our Slipe Dress"
+              = image_tag 'homepage/influencer/influencer-2.jpg', alt: "Shop Our Slipe Dress"
 
           .content-wrap
             .container-cta
@@ -87,13 +88,14 @@ ruby:
                   .copy-wrap.text-center
                     = link_to "#"
                       span.btn-sm.btn-white
-                        | <span class="cta-link">Shop</span> <span class="copy-highlight">Our Slip Dress</span>
+                        span.cta-link Shop
+                        span.copy-highlight  Our Slip Dress
 
       .col-md-6.cta-item
         .section-img-wrap.copy-center
           picture.media-wrap.keep-ratio
             .inner-wrap
-              img src='#{image_path("homepage/influencer/influencer-3.jpg")}' alt="Shop Our Gown"
+              = image_tag 'homepage/influencer/influencer-3.jpg', alt: "Shop Our Gown"
 
           .content-wrap
             .container-cta
@@ -102,14 +104,15 @@ ruby:
                   .copy-wrap.text-center
                     = link_to "#"
                       span.btn-sm.btn-white
-                        | <span class="cta-link">Shop</span> <span class="copy-highlight">Our Gown</span>
+                        span.cta-link Shop
+                        span.copy-highlight  Our Gown
 
     .row
       .col-md-6.cta-item
         .section-img-wrap.copy-center
           picture.media-wrap.keep-ratio
             .inner-wrap
-              img src='#{image_path("homepage/influencer/influencer-4.jpg")}' alt="Shop Our Cocktail"
+              = image_tag 'homepage/influencer/influencer-4.jpg', alt: "Shop Our Cocktail"
 
           .content-wrap
             .container-cta
@@ -118,13 +121,14 @@ ruby:
                   .copy-wrap.text-center
                     = link_to "#"
                       span.btn-sm.btn-white
-                        | <span class="cta-link">Shop</span> <span class="copy-highlight">Our Cocktail</span>
+                        span.cta-link Shop
+                        span.copy-highlight  Our Cocktail
 
       .col-md-6.cta-item
         .section-img-wrap.copy-center
           picture.media-wrap.keep-ratio
             .inner-wrap
-              img src='#{image_path("homepage/influencer/influencer-5.jpg")}' alt="Shop Our Wedding"
+              = image_tag 'homepage/influencer/influencer-5.jpg', alt: "Shop Our Wedding"
 
           .content-wrap
             .container-cta
@@ -133,7 +137,8 @@ ruby:
                   .copy-wrap.text-center
                     = link_to "#"
                       span.btn-sm.btn-white
-                        | <span class="cta-link">Shop</span> <span class="copy-highlight">Our Wedding</span>
+                        span.cta-link Shop
+                        span.copy-highlight  Our Wedding
 
   // Section: Influencer
   section.section-box.container#styling
@@ -155,7 +160,7 @@ ruby:
         .item.bordered.with-padding-top
           .row
             .col-md-6
-              = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive'
+              = image_tag 'homepage/styling/styling-session.jpg', :class => 'img-responsive'
 
             .col-md-6
               h3 Book your free styling session.
