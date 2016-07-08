@@ -14,13 +14,12 @@
 
   }
 
-  .carousel-strap.instagram {
-    background: $c-classic-modal-bg;
-    padding-bottom: 5px;
-  }
-
   .cta-link-alt {
     font-size: 1.3rem;
+  }
+
+  .section-instagram .carousel-strap {
+    background: none;
   }
 
   @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
