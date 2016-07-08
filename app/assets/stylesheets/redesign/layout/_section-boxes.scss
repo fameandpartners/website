@@ -15,29 +15,6 @@
 
   }
 
-  .heading-overlay-wrapper {
-    text-align: center;
-    margin-bottom: -25px;
-    z-index: 1;
-
-    .heading-overlay {
-      display: inline-block;
-      font-family: $font-family-secondary;
-      font-size: 1.2rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      padding: 8px 20px;
-      background: $c-neutral-black;
-      color: $c-neutral-white;
-
-      &.inverted-margin {
-        margin-bottom: 0;
-        margin-top: -33px;
-      }
-    }
-
-  }
-
   .item, .item-alt {
     padding: 0 18px 20px;
 
@@ -136,7 +113,6 @@
 
   }
 
-
   @media (min-width: $bootstrap-lg-width) {
 
     .inline-btn:not(:nth-of-type(1)) {
@@ -177,4 +153,28 @@
 
   }
 
+}
+
+.heading-overlay-wrapper {
+  text-align: center;
+  margin-bottom: -25px;
+  z-index: 1;
+
+  .heading-overlay {
+    display: inline-block;
+    font-family: $font-family-secondary;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    background: $c-neutral-black;
+    color: $c-neutral-white;
+  }
+
+}
+
+// When we need a 100% wide background
+.section-wrapper {
+  background: $c-classic-modal-bg;
+  padding: 25px 0 5px;
 }
