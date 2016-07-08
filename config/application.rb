@@ -111,8 +111,11 @@ module FameAndPartners
     config.assets.paths << Rails.root.join("app", "assets", 'transient_content')
     config.assets.paths << Rails.root.join("app", "assets", "vendor", "bower_components")
 
-    config.redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
-    config.cache_store = :redis_store, "#{ENV['REDIS_URL']}/0/#{config.redis_namespace}"
+    # Redis cache store
+    # config.redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
+    # config.cache_store = :redis_store, "#{ENV['REDIS_URL']}/0/#{config.redis_namespace}"
+
+    config.cache_store = :memory_store, { size: 32.megabytes }
 
     # Use S3 for storing attachments
     config.use_s3 = false
