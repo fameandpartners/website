@@ -1,15 +1,13 @@
 /* [Section boxes]
 -------------------------------------------------------*/
-$box-padding-top: 25px;
-
 .section-box {
-  margin-bottom: 40px;
+  margin-bottom: $section-spacing-margin-top;
 
   p {
     font-family: $font-heading;
     font-size: 2rem;
     font-weight: 300;
-    line-height: 2.2rem;
+    line-height: 2.5rem;
 
     &:nth-of-type(1) {
       margin-top: 30px;
@@ -40,12 +38,8 @@ $box-padding-top: 25px;
 
   }
 
-  .item {
+  .item, .item-alt {
     padding: 0 18px 20px;
-
-    &.with-padding-top {
-      padding-top: 20px;
-    }
 
     &.bordered {
       border: 1px solid $c-neutral-6;
@@ -69,6 +63,10 @@ $box-padding-top: 25px;
       margin: $box-padding-top 0 0;
     }
 
+  }
+
+  .item-alt {
+    padding: 10px;
   }
 
   .section-img-wrap {
@@ -129,7 +127,7 @@ $box-padding-top: 25px;
   .cta-item-huge {
 
     .media-wrap {
-      height: 545px;
+      height: 544px;
     }
 
     .media-wrap.keep-ratio {
@@ -138,8 +136,13 @@ $box-padding-top: 25px;
 
   }
 
-  .inline-btn:not(:nth-of-type(1)) {
-    margin-left: 15px;
+
+  @media (min-width: $bootstrap-lg-width) {
+
+    .inline-btn:not(:nth-of-type(1)) {
+      margin-left: 15px;
+    }
+
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
@@ -156,12 +159,20 @@ $box-padding-top: 25px;
 
     }
 
+    .item-alt h3 {
+      margin-top: 0;
+    }
+
     .cta-item, .cta-item-huge {
       padding: 0;
     }
 
     .cta-item-huge .media-wrap {
       height: 358px;
+    }
+
+    .inline-btn:not(:nth-of-type(1)) {
+      margin-left: 15px;
     }
 
   }
