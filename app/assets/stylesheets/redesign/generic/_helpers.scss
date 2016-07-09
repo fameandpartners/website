@@ -8,7 +8,7 @@
 
 // Hide from both screenreaders and browsers
 .hide-fully {
-  display: none!important; 
+  display: none!important;
   visibility: hidden!important;
 }
 
@@ -101,4 +101,21 @@
 // TODO: check if this hack is even needed
 .relative {
   position: relative !important;
+}
+
+@media (min-width: $bootstrap-md-width) {
+
+  .same-height-cols {
+
+    .row, .row > div[class*='col-'] {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      flex: 1 1 auto;
+    }
+
+  }
+
 }
