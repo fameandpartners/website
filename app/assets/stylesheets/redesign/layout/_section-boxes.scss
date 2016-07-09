@@ -54,35 +54,35 @@
 
     &.copy-center {
     position: relative;
+    }
 
-      .inner-wrap {
-        position: absolute;
+    .img-wrap img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .content-wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      text-align: left;
+
+      .container-cta {
+        display: table;
+        height: 100%;
+        width: 100%;
+
+        > .row-cta {
+          display: table-cell;
+          vertical-align: middle;
+        }
+
       }
 
-      .content-wrap {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        text-align: left;
-
-        .container-cta {
-          display: table;
-          height: 100%;
-          width: 100%;
-
-          > .row-cta {
-            display: table-cell;
-            vertical-align: middle;
-          }
-
-        }
-
-        .copy-wrap {
-          font-size: 1.4rem;
-        }
-
+      .copy-wrap {
+        font-size: 1.4rem;
       }
 
     }
@@ -144,14 +144,6 @@
 
   }
 
-  @media (min-width: $bootstrap-lg-width) {
-
-    .inline-btn:not(:nth-of-type(1)) {
-      margin-left: 15px;
-    }
-
-  }
-
   @media (min-width: $bootstrap-md-width) {
 
     .copy-img-side-by-side .link-align-bottom {
@@ -175,16 +167,17 @@
 
     }
 
-    .item-alt h3 {
-      margin-top: 0;
+    .item-alt {
+      padding: 30px;
+
+      h3 {
+        margin-top: 0;
+      }
+
     }
 
     .cta-item, .cta-item-huge {
       padding: 0;
-    }
-
-    .cta-item-huge .media-wrap {
-      height: 358px;
     }
 
     .inline-btn:not(:nth-of-type(1)) {
