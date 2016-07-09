@@ -117,10 +117,46 @@
 
   }
 
+  .copy-img-side-by-side {
+
+    .copy-side {
+      padding: 0 25px;
+      position: relative;
+
+      p a {
+        color: $c-neutral-black;
+        border-bottom: 1px solid $c-neutral-6;
+      }
+
+      .link-align-bottom {
+
+        span {
+          font-size: 1.2rem;
+        }
+
+        a {
+          border: 0;
+        }
+
+      }
+
+    }
+
+  }
+
   @media (min-width: $bootstrap-lg-width) {
 
     .inline-btn:not(:nth-of-type(1)) {
       margin-left: 15px;
+    }
+
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    .copy-img-side-by-side .link-align-bottom {
+      bottom: 5%;
+      position: absolute;
     }
 
   }
@@ -153,6 +189,10 @@
 
     .inline-btn:not(:nth-of-type(1)) {
       margin-left: 15px;
+    }
+
+    .link-align-bottom {
+      margin-top: 115%;
     }
 
   }
