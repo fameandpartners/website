@@ -31,26 +31,26 @@ ruby:
     .row
       .col-md-12.heading-overlay-wrapper
         h2.heading-overlay The Fame Story
+    .same-height-cols
+      .row
+        .col-md-4
+          .item.bordered
+            h3 Here is some copy about why you will <em>love</em> us and our product.
+            h4 A little bit of additional copy here
+            = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive'
 
-    .row
-      .col-md-4
-        .item.bordered
-          h3 Here is some copy about why you will <em>love</em> us and our product.
-          h4 A little bit of additional copy here
-          = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive'
+        .col-md-4
+          .item.bordered
+            = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive hidden-sm hidden-xs'
+            h3 Made to order, made for you with love - exactly how you <em>want</em> it.
+            h4 A little bit of additional copy here
+            = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive hidden-md hidden-lg'
 
-      .col-md-4
-        .item.bordered
-          = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive hidden-sm hidden-xs'
-          h3 Made to order, made for you with love - exactly how you <em>want</em> it.
-          h4 A little bit of additional copy here
-          = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive hidden-md hidden-lg'
-
-      .col-md-4
-        .item.bordered
-          h3 The fit guarantee. Tell our customers about our <em>unique</em> sizing and fit.
-          h4 A little bit of additional copy here
-          = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive'
+        .col-md-4
+          .item.bordered
+            h3 The fit guarantee. Tell our customers about our <em>unique</em> sizing and fit.
+            h4 A little bit of additional copy here
+            = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive'
 
   // Section: Influencer
   section.section-box.container#fp-influencer
@@ -141,7 +141,7 @@ ruby:
                         span.copy-highlight  Our Wedding
 
   // Section: Influencer
-  section.section-box.container.section-styling
+  section.section-box.extra-spacing-top.container.section-styling
     .row
       .col-md-6
         .item
@@ -174,13 +174,13 @@ ruby:
                 = image_tag 'homepage/styling/styling-session-mob.jpg', :class => 'img-responsive hidden-md hidden-lg'
 
   // Section: Instagram
-  section.container
+  section.section-box.extra-spacing-top.container
     .row
       .col-md-12.heading-overlay-wrapper
         h2.heading-overlay Shop Instagram
 
   .section-wrapper.section-instagram
-    section.section-box.container
+    .container
       .row
         .col-md-12
           .carousel-strap.instagram
@@ -199,3 +199,41 @@ ruby:
                           {link: link_to_dresses + '/dress-laced-heartline-262?color=white', src: '/assets/homepage/instagram/No2_Alevidal.jpg', user: '@alevidal', cta: "Shop the Laced Heartline Look"},
                           {link: link_to_dresses + '/dress-perry-543?color=nude', src: '/assets/homepage/instagram/No6_Linhwin.jpg', user: '@linhwinn', cta: "Shop the Perry Look"},
                           {link: link_to_dresses + '/dress-rory-two-piece-675?color=red', src: '/assets/homepage/instagram/No4_Sarah.jpg', user: '@sarah3llen', cta: "Shop the Rory Look"}])
+
+
+  // Section: Social networks
+  section.section-box.extra-spacing-top.container.section-social.same-height-cols
+    .row
+      .col-md-6.copy-img-side-by-side
+        .item.bordered.item-alt.section-facebook
+          .row
+            .col-xs-5.copy-side
+              .content-wrapper
+                p Like us on #{link_to "facebook", "https://www.facebook.com/FameandPartners", target:"_blank"} and be the first to hear about exclusive sales and events.
+
+                .link-align-bottom
+                  = link_to 'https://www.facebook.com/FameandPartners', target: '_blank'
+                    span.btn-sm.btn-white.no-padding.btn-arrow
+                      span.cta-link Explore
+                      span.copy-highlight  Facebook
+
+            .col-xs-7.img-side
+              = link_to 'https://www.facebook.com/FameandPartners', target: '_blank'
+                = image_tag 'homepage/social/facebook.jpg', :class => 'img-responsive'
+
+      .col-md-6.copy-img-side-by-side
+        .item.bordered.item-alt.section-tumblr
+          .row
+            .col-xs-5.copy-side
+              .content-wrapper
+                p Check out #{link_to "tumblr", "https://fameandpartners.tumblr.com/", target:"_blank"} to see what’s inspiring us and our dress collections.
+
+                .link-align-bottom
+                  = link_to 'http://fameandpartners.tumblr.com/', target: '_blank'
+                    span.btn-sm.btn-white.no-padding.btn-arrow
+                      span.cta-link Explore
+                      span.copy-highlight  Tumblr
+
+            .col-xs-7.img-side
+              = link_to 'http://fameandpartners.tumblr.com/', target: '_blank'
+                = image_tag 'homepage/social/tumblr.jpg', :class => 'img-responsive'
