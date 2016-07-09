@@ -62,9 +62,13 @@ ruby:
       .col-md-12.cta-item-huge
         = link_to "#"
           .section-img-wrap.copy-center
-            picture.media-wrap.keep-ratio
-              .inner-wrap
-                = image_tag 'homepage/influencer/influencer-1.jpg', alt: "Explore Georgia Fowler's"
+            picture
+              .img-wrap
+                source media='(max-width: 1023px)' srcset='#{image_path("homepage/influencer/influencer-1-mob.jpg")}'
+                source media='(min-width: 1024px)' srcset='#{image_path("homepage/influencer/influencer-1-retina.jpg")}'
+                img src='#{image_path("homepage/influencer/influencer-1.jpg")}' srcset='
+                  #{image_path("homepage/influencer/influencer-1-mob.jpg")} 1023w,
+                  #{image_path("homepage/influencer/influencer-1-retina.jpg")} 1024w' alt="Explore Georgia Fowler's"
 
             .content-wrap
               .container-cta
@@ -78,9 +82,13 @@ ruby:
       .col-md-6.cta-item
         = link_to "#"
           .section-img-wrap.copy-center
-            picture.media-wrap.keep-ratio
-              .inner-wrap
-                = image_tag 'homepage/influencer/influencer-2.jpg', alt: "Shop Our Slipe Dress"
+            picture
+              .img-wrap
+                source media='(max-width: 1023px)' srcset='#{image_path("homepage/influencer/influencer-2-mob.jpg")}'
+                source media='(min-width: 1024px)' srcset='#{image_path("homepage/influencer/influencer-2-retina.jpg")}'
+                img src='#{image_path("homepage/influencer/influencer-2.jpg")}' srcset='
+                  #{image_path("homepage/influencer/influencer-2-mob.jpg")} 1023w,
+                  #{image_path("homepage/influencer/influencer-2-retina.jpg")} 1024w' alt="Shop Our Slipe Dress"
 
             .content-wrap
               .container-cta
@@ -94,9 +102,13 @@ ruby:
       .col-md-6.cta-item
         = link_to "#"
           .section-img-wrap.copy-center
-            picture.media-wrap.keep-ratio
-              .inner-wrap
-                = image_tag 'homepage/influencer/influencer-3.jpg', alt: "Shop Our Gown"
+            picture
+              .img-wrap
+                source media='(max-width: 1023px)' srcset='#{image_path("homepage/influencer/influencer-3-mob.jpg")}'
+                source media='(min-width: 1024px)' srcset='#{image_path("homepage/influencer/influencer-3-retina.jpg")}'
+                img src='#{image_path("homepage/influencer/influencer-3.jpg")}' srcset='
+                  #{image_path("homepage/influencer/influencer-3-mob.jpg")} 1023w,
+                  #{image_path("homepage/influencer/influencer-3-retina.jpg")} 1024w' alt="Shop Our Gown"
 
             .content-wrap
               .container-cta
@@ -111,9 +123,13 @@ ruby:
       .col-md-6.cta-item
         = link_to "#"
           .section-img-wrap.copy-center
-            picture.media-wrap.keep-ratio
-              .inner-wrap
-                = image_tag 'homepage/influencer/influencer-4.jpg', alt: "Shop Our Cocktail"
+            picture
+              .img-wrap
+                source media='(max-width: 1023px)' srcset='#{image_path("homepage/influencer/influencer-4-mob.jpg")}'
+                source media='(min-width: 1024px)' srcset='#{image_path("homepage/influencer/influencer-4-retina.jpg")}'
+                img src='#{image_path("homepage/influencer/influencer-4.jpg")}' srcset='
+                  #{image_path("homepage/influencer/influencer-4-mob.jpg")} 1023w,
+                  #{image_path("homepage/influencer/influencer-4-retina.jpg")} 1024w' alt="Shop Our Cocktail"
 
             .content-wrap
               .container-cta
@@ -127,9 +143,13 @@ ruby:
       .col-md-6.cta-item
         = link_to "#"
           .section-img-wrap.copy-center
-            picture.media-wrap.keep-ratio
-              .inner-wrap
-                = image_tag 'homepage/influencer/influencer-5.jpg', alt: "Shop Our Wedding"
+            picture
+              .img-wrap
+                source media='(max-width: 1023px)' srcset='#{image_path("homepage/influencer/influencer-5-mob.jpg")}'
+                source media='(min-width: 1024px)' srcset='#{image_path("homepage/influencer/influencer-5-retina.jpg")}'
+                img src='#{image_path("homepage/influencer/influencer-5.jpg")}' srcset='
+                  #{image_path("homepage/influencer/influencer-5-mob.jpg")} 1023w,
+                  #{image_path("homepage/influencer/influencer-5-retina.jpg")} 1024w' alt="Shop Our Wedding"
 
             .content-wrap
               .container-cta
@@ -171,7 +191,7 @@ ruby:
                 span.copy-highlight  Styling Session
 
               = link_to styling_session_path
-                = image_tag 'homepage/styling/styling-session-mob.jpg', :class => 'img-responsive hidden-md hidden-lg'
+                = image_tag 'homepage/styling/styling-session.jpg', :class => 'img-responsive hidden-md hidden-lg'
 
   // Section: Instagram
   section.section-box.extra-spacing-top.container
