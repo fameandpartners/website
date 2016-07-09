@@ -144,6 +144,40 @@
 
   }
 
+  @media (min-width: $bootstrap-md-width) {
+
+    .tag-info-section {
+      position: relative;
+    }
+
+    .tag-info-wrapper {
+      display: block;
+      margin-left: -70px;
+      letter-spacing: 0.1rem;
+      font-size: 1.3rem;
+
+      .tag-info {
+        position: absolute;
+        top: 50%;
+        z-index: 1;
+      }
+
+      .diagonal-line {
+        @include transform (rotate(45deg));
+        border-top: 1px solid #999;
+        width: 30px;
+        margin-left: 55px;
+      }
+
+      .vertical-text {
+        @include transform (rotate(-90deg));
+        text-align: center;
+      }
+
+    }
+
+  }
+
   @media (max-width: $bootstrap-md-width - 1px) {
 
     .item {
@@ -183,6 +217,10 @@
         height: 100%;
       }
 
+    }
+
+    .tag-info-section .tag-info-wrapper {
+      display: none;
     }
 
   }
