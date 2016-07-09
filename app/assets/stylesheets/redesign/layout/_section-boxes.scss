@@ -144,15 +144,6 @@
 
   }
 
-  @media (min-width: $bootstrap-md-width) {
-
-    .copy-img-side-by-side .link-align-bottom {
-      bottom: 5%;
-      position: absolute;
-    }
-
-  }
-
   @media (max-width: $bootstrap-md-width - 1px) {
 
     .item {
@@ -184,8 +175,23 @@
       margin-left: 15px;
     }
 
+    .copy-img-side-by-side .item .row {
+      display: flex;
+      flex-wrap: wrap;
+
+      .content-wrapper {
+        height: 100%;
+      }
+
+    }
+
+  }
+
+  @media (min-width: $bootstrap-sm-width) {
+
     .link-align-bottom {
-      margin-top: 115%;
+      bottom: 0;
+      position: absolute;
     }
 
   }
@@ -210,7 +216,7 @@
 
 }
 
-// When we need a 100% wide background
+// When we need a 100%-wide section container with background
 .section-wrapper {
   background: $c-classic-modal-bg;
   padding: 25px 0 5px;
