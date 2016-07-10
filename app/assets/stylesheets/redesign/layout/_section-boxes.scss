@@ -128,16 +128,8 @@
         border-bottom: 1px solid $c-neutral-6;
       }
 
-      .link-align-bottom {
-
-        span {
-          font-size: 1.2rem;
-        }
-
-        a {
-          border: 0;
-        }
-
+      .link-align-bottom a {
+        border: 0;
       }
 
     }
