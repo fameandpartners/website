@@ -223,28 +223,18 @@ ruby:
   section.section-box.extra-spacing-top.container
     .row
       .col-md-12.heading-overlay-wrapper
-        h2.heading-overlay Shop Instagram
+        h2.heading-overlay Get Social
 
   .section-wrapper.section-instagram
     .container
       .row
-        .col-md-12
-          .carousel-strap.instagram
-            = react_component('InstagramCarousel', skin: '',
-              assets: [ {link: link_to_dresses + '/dress-wyatt-1030?color=dark-burgundy&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=lotus-doll-dress-product', src: '/assets/homepage/instagram/Instagram-01.jpg', user: '@fameandpartners', cta: "SHOP THE WYATT LOOK"},
-                        {link: link_to_dresses + '/dress-paxton-1043?color=navy', src: '/assets/homepage/instagram/_hollyt.jpg', user: '@_hollyt', cta: "SHOP THE PAXTON"},
-                        {link: link_to_dresses + '/dress-aspen-853?color=white&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=persia-dress-product', src: '/assets/homepage/instagram/insta2.jpg', user: '@evaacatherine', cta: "SHOP THE ASPEN LOOK"},
-                        {link: link_to_dresses + '/dress-firefly-640?color=black', src: '/assets/homepage/instagram/lainyhedaya.jpg', user: '@lainyhedaya', cta: "SHOP THIS LOOK"},
-                        {link: link_to_dresses + '/dress-audrey-1032?color=pale-pink-and-pale-grey', src: '/assets/homepage/instagram/jacquiealexander.jpg', user: '@jacquiealexander', cta: "SHOP THE AUDREY"},
-                        {link: link_to_dresses + '/dress-lotus-doll-899?color=grand-lily&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=lotus-doll-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_07.jpg', user: '@fionabriseno', cta: "SHOP THE LOTUS DOLL LOOK"},
-                        {link: link_to_dresses + '/dress-roxy-631?color=burgundy', src: '/assets/homepage/instagram/No4.jpg', user: '@xxsophiehermanxx', cta: "SHOP THE ROXY LOOK"},
-                        {link: link_to_dresses + '/dress-juliette-505?color=black', src: '/assets/homepage/instagram/No3_Sophie.jpg', user: '@xxsophiehermannxx', cta: "Shop the Juliette Look"},
-                        {link: link_to_dresses + '/dress-wish-upon-439?color=black', src: '/assets/homepage/instagram/No3.jpg', user: '@nadaadellex', cta: "SHOP THE WISH UPON LOOK"},
-                        {link: link_to_dresses + '/dress-janine-906?color=aqua-lily&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=janine-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_23.jpg', user: '@kiraship', cta: "SHOP THE JANINE LOOK"},
-                        {link: link_to_dresses + '/dress-allegra-680?color=forest-green', src: '/assets/homepage/instagram/No2.jpg', user: '@theruecollective', cta: "SHOP THE ALLEGRA LOOK"},
-                        {link: link_to_dresses + '/dress-laced-heartline-262?color=white', src: '/assets/homepage/instagram/No2_Alevidal.jpg', user: '@alevidal', cta: "Shop the Laced Heartline Look"},
-                        {link: link_to_dresses + '/dress-perry-543?color=nude', src: '/assets/homepage/instagram/No6_Linhwin.jpg', user: '@linhwinn', cta: "Shop the Perry Look"},
-                        {link: link_to_dresses + '/dress-rory-two-piece-675?color=red', src: '/assets/homepage/instagram/No4_Sarah.jpg', user: '@sarah3llen', cta: "Shop the Rory Look"}])
+        .col-md-12.text-center
+          .instagram-widget
+            <script src="//foursixty.com/media/scripts/fs.slider.v2.js" data-feed-id="fame-and-partners" data-theme="slider_v2" data-cell-size="20%"></script>
+
+          = link_to 'https://foursixty.com/fame-and-partners/', target: '_blank'
+              span.btn-xs.btn-featured
+                | Shop <span class="copy-highlight">Instagram</span>
 
 
   // Section: Social networks
