@@ -13,16 +13,16 @@ class SidePanelCustom extends SidePanel {
 
   onChange(event) {
     let customize = {};
-    customize.custom = {};
+    customize.customization = {};
 
-    if(this.props.customize.custom.id === event.currentTarget.dataset.id) {
-      customize.custom.id = "";
-      customize.custom.presentation = "";
-      customize.custom.price = null;
+    if(this.props.customize.customization.id === event.currentTarget.dataset.id) {
+      customize.customization.id = "";
+      customize.customization.presentation = "";
+      customize.customization.price = null;
     } else {
-      customize.custom.id = event.currentTarget.dataset.id;
-      customize.custom.presentation = event.currentTarget.dataset.presentation;
-      customize.custom.price = parseFloat(event.currentTarget.dataset.price);
+      customize.customization.id = event.currentTarget.dataset.id;
+      customize.customization.presentation = event.currentTarget.dataset.presentation;
+      customize.customization.price = parseFloat(event.currentTarget.dataset.price);
     }
 
     this.props.actions.customizeDress(customize);
@@ -30,10 +30,10 @@ class SidePanelCustom extends SidePanel {
 
   render() {
     const menuState = this.state.active ? 'side-menu is-active' : 'side-menu';
-    const triggerState = this.props.customize.custom.id
+    const triggerState = this.props.customize.customization.id
       ? "c-card-customize__content is-selected" : "c-card-customize__content";
     const customs = this.props.customOptions.map((option, index) => {
-      const itemState = this.props.customize.custom.id == option.table.id
+      const itemState = this.props.customize.customization.id == option.table.id
         ? "selector-custom is-selected" : "selector-custom";
       const price =
         parseFloat(option.table.display_price.money.fractional
@@ -61,7 +61,7 @@ class SidePanelCustom extends SidePanel {
           className={triggerState}
           onClick={this.openMenu}>
           <div className="c-card-customize__content__left">Customize</div>
-          <div className="c-card-customize__content__right txt-truncate-1">{this.props.customize.custom.presentation}</div>
+          <div className="c-card-customize__content__right txt-truncate-1">{this.props.customize.customization.presentation}</div>
         </a>
 
         <div className={menuState}>

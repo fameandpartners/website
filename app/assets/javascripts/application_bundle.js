@@ -106,13 +106,23 @@ var CtaPrice = function (_React$Component) {
       // this is just very hacky way to connect this with shopping cart
       document.getElementById('pdpCartSizeId').value = this.props.customize.size.id;
       document.getElementById('pdpCartColorId').value = this.props.customize.color.id;
-      document.getElementById('pdpCartCustomIds').value = this.props.customize.custom.id;
+      document.getElementById('pdpCartCustomId').value = this.props.customize.customization.id;
+      // TODO: build express making functionality
+      document.getElementById('pdpCartMakingId').value = null;
+      document.getElementById('pdpCartDressVariantId').value = this.props.customize.dressVariantId;
       document.getElementById('pdpCartLength').value = this.props.customize.length.id;
+      document.getElementById('pdpCartVariantId').value = JSON.stringify({
+        id: this.props.product.master_id,
+        product_id: this.props.product.id,
+        count_on_hand: 0,
+        fast_delivery: false,
+        available: true
+      });
     }
   }, {
     key: 'render',
     value: function render() {
-      var price = parseFloat(this.props.price) + this.props.customize.color.price + this.props.customize.custom.price - this.props.discount;
+      var price = parseFloat(this.props.price) + parseFloat(this.props.customize.color.price) + parseFloat(this.props.customize.customization.price) - parseFloat(this.props.discount);
       return _react2.default.createElement(
         'div',
         { className: 'btn-wrap' },
@@ -124,7 +134,7 @@ var CtaPrice = function (_React$Component) {
         ),
         _react2.default.createElement(
           'a',
-          { href: 'javascript:;', className: 'btn btn-black btn-lrg' },
+          { href: 'javascript:;', className: 'btn btn-black btn-lrg', disabled: 'disabled' },
           'ADD TO BAG'
         ),
         _react2.default.createElement(
@@ -142,14 +152,16 @@ var CtaPrice = function (_React$Component) {
 CtaPrice.propTypes = {
   customize: _react.PropTypes.object,
   price: _react.PropTypes.string,
-  discount: _react.PropTypes.number
+  discount: _react.PropTypes.number,
+  product: _react.PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
     price: state.product.price.price.amount,
-    discount: state.discount
+    discount: state.discount,
+    product: state.product
   };
 }
 
@@ -376,7 +388,7 @@ var SidePanelColor = function (_SidePanel) {
       customize.color = {};
       customize.color.id = this.props.preselectedColorId;
       customize.color.name = this.props.preselectedColorName;
-      customize.color.price = null;
+      customize.color.price = 0;
       customize.color.presentation = this.props.defaultColors.reduce(function (color, index) {
         if (color.option_value.id === _this2.props.preselectedColorId) {
           return color.option_value.presentation;
@@ -420,7 +432,7 @@ var SidePanelColor = function (_SidePanel) {
             'data-id': color.option_value.id,
             'data-presentation': color.option_value.presentation,
             'data-name': color.option_value.name,
-            'data-price': props.customColorPrice },
+            'data-price': '0' },
           _react2.default.createElement('div', { className: swatch }),
           _react2.default.createElement(
             'div',
@@ -610,16 +622,16 @@ var SidePanelCustom = function (_SidePanel) {
     key: 'onChange',
     value: function onChange(event) {
       var customize = {};
-      customize.custom = {};
+      customize.customization = {};
 
-      if (this.props.customize.custom.id === event.currentTarget.dataset.id) {
-        customize.custom.id = "";
-        customize.custom.presentation = "";
-        customize.custom.price = null;
+      if (this.props.customize.customization.id === event.currentTarget.dataset.id) {
+        customize.customization.id = "";
+        customize.customization.presentation = "";
+        customize.customization.price = null;
       } else {
-        customize.custom.id = event.currentTarget.dataset.id;
-        customize.custom.presentation = event.currentTarget.dataset.presentation;
-        customize.custom.price = parseFloat(event.currentTarget.dataset.price);
+        customize.customization.id = event.currentTarget.dataset.id;
+        customize.customization.presentation = event.currentTarget.dataset.presentation;
+        customize.customization.price = parseFloat(event.currentTarget.dataset.price);
       }
 
       this.props.actions.customizeDress(customize);
@@ -630,9 +642,9 @@ var SidePanelCustom = function (_SidePanel) {
       var _this2 = this;
 
       var menuState = this.state.active ? 'side-menu is-active' : 'side-menu';
-      var triggerState = this.props.customize.custom.id ? "c-card-customize__content is-selected" : "c-card-customize__content";
+      var triggerState = this.props.customize.customization.id ? "c-card-customize__content is-selected" : "c-card-customize__content";
       var customs = this.props.customOptions.map(function (option, index) {
-        var itemState = _this2.props.customize.custom.id == option.table.id ? "selector-custom is-selected" : "selector-custom";
+        var itemState = _this2.props.customize.customization.id == option.table.id ? "selector-custom is-selected" : "selector-custom";
         var price = parseFloat(option.table.display_price.money.fractional / option.table.display_price.money.currency.subunit_to_unit);
         return _react2.default.createElement(
           'a',
@@ -676,7 +688,7 @@ var SidePanelCustom = function (_SidePanel) {
           _react2.default.createElement(
             'div',
             { className: 'c-card-customize__content__right txt-truncate-1' },
-            this.props.customize.custom.presentation
+            this.props.customize.customization.presentation
           )
         ),
         _react2.default.createElement(
@@ -1786,23 +1798,23 @@ function configureStore(initialState) {
   }, {
     customize: {
       size: {
-        id: '',
+        id: null,
         presentation: ''
       },
       length: {
-        id: '',
+        id: null,
         presentation: ''
       },
       color: {
-        id: '',
+        id: null,
         presentation: '',
         name: '',
-        price: null
+        price: 0
       },
-      custom: {
-        id: '',
+      customization: {
+        id: null,
         presentation: '',
-        price: null
+        price: 0
       },
       dressVariantId: null
     }

@@ -17,7 +17,7 @@ class SidePanelColor extends SidePanel {
     customize.color = {};
     customize.color.id = this.props.preselectedColorId;
     customize.color.name = this.props.preselectedColorName;
-    customize.color.price = null;
+    customize.color.price = 0;
     customize.color.presentation = this.props.defaultColors.reduce((color, index) => {
       if(color.option_value.id === this.props.preselectedColorId) {
         return color.option_value.presentation;
@@ -61,7 +61,7 @@ class SidePanelColor extends SidePanel {
           data-id={color.option_value.id}
           data-presentation={color.option_value.presentation}
           data-name={color.option_value.name}
-          data-price={props.customColorPrice}>
+          data-price="0">
           <div className={swatch}></div>
           <div className="item-name">{color.option_value.presentation}</div>
         </a>

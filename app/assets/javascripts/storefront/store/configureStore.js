@@ -70,23 +70,23 @@ export default function configureStore(initialState) {
     {
       customize: {
         size: {
-          id: '',
+          id: null,
           presentation: ''
         },
         length: {
-          id: '',
+          id: null,
           presentation: ''
         },
         color: {
-          id: '',
+          id: null,
           presentation: '',
           name: '',
-          price: null
+          price: 0
         },
-        custom: {
-          id: '',
+        customization: {
+          id: null,
           presentation: '',
-          price: null
+          price: 0
         },
         dressVariantId : null
       }
