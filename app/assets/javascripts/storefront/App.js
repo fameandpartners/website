@@ -7,8 +7,10 @@ import PdpGallery from './components/PDP/Gallery';
 import PdpSidePanelRight from './components/PDP/SidePanelRight';
 
 // PDP
-if(typeof window.PdpData !== 'undefined') {
-  const store = configureStore(window.PdpData);
+if(typeof window.PdpDataFull !== 'undefined') {
+  const store = configureStore(window.PdpDataFull);
+
+  console.log('Store: ', store.getState());
 
   store.subscribe(() => {
     console.log('Store changed: ', store.getState());

@@ -9,36 +9,37 @@ class SidePanelColor extends SidePanel {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      customize: {
-        color: {
-          id: this.props.preselectedColor.id,
-          presentation: this.props.preselectedColor.presentation,
-          name: this.props.preselectedColor.name,
-          price: null
-        },
-        variantId: null
-      }
-    };
-
-    this.props.actions.customizeDress(this.state.customize);
     this.onChange = this.onChange.bind(this);
+  }
+
+  componentWillMount() {
+    let customize = {};
+    customize.color = {};
+    customize.color.id = this.props.preselectedColorId;
+    customize.color.name = this.props.preselectedColorName;
+    customize.color.price = null;
+    customize.color.presentation = this.props.defaultColors.reduce((color, index) => {
+      if(color.option_value.id === this.props.preselectedColorId) {
+        return color.option_value.presentation;
+      }
+    });
+    this.props.actions.customizeDress(customize);
   }
 
   onChange(event) {
     let customize = {};
     customize.color = {};
     customize.color.id = event.currentTarget.dataset.id;
-    customize.color.presentation = event.currentTarget.dataset.presentation;
     customize.color.name = event.currentTarget.dataset.name;
+    customize.color.presentation = event.currentTarget.dataset.presentation;
     customize.color.price = event.currentTarget.dataset.price;
     // search for dress variant id, this will work only for default color dresses
     // NOTE: we should check if this is even needed, since length
     // selection is required.
     customize.dressVariantId = GetDressVariantId(
       this.props.variants,
-      this.props.customize.size.id,
-      customize.color.id);
+      customize.color.id,
+      this.props.customize.size.id);
     this.props.actions.customizeDress(customize);
   }
 
@@ -60,16 +61,12 @@ class SidePanelColor extends SidePanel {
           data-id={color.option_value.id}
           data-presentation={color.option_value.presentation}
           data-name={color.option_value.name}
-          data-price={customColorPrice}>
+          data-price={props.customColorPrice}>
           <div className={swatch}></div>
           <div className="item-name">{color.option_value.presentation}</div>
         </a>
       );
     });
-
-    const customColorPrice =
-      parseFloat(props.customColorPrice.money.fractional
-      / props.customColorPrice.money.currency.subunit_to_unit);
 
     const customColors = props.customColors.map((color, index) => {
       const itemState = props.customize.color.id == color.option_value.id
@@ -81,7 +78,7 @@ class SidePanelColor extends SidePanel {
           data-id={color.option_value.id}
           data-presentation={color.option_value.presentation}
           data-name={color.option_value.name}
-          data-price={customColorPrice}>
+          data-price={props.customColorPrice}>
           <div className={swatch}></div>
           <div className="item-name">{color.option_value.presentation}</div>
         </a>
@@ -116,7 +113,7 @@ class SidePanelColor extends SidePanel {
               return (
                 <div>
                   <h3 className="h5 heading-secondary">
-                    Custom Colors&nbsp;&nbsp; +${customColorPrice}
+                    Custom Colors&nbsp;&nbsp; +${parseFloat(props.customColorPrice)}
                   </h3>
                   <div className="row">{customColors}</div>
                 </div>
@@ -136,11 +133,12 @@ SidePanelColor.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
-    defaultColors: state.defaultColors,
-    customColors: state.customColors,
-    customColorPrice: state.customColorPrice,
-    preselectedColor: state.preselectedColor,
-    variants: state.variants
+    defaultColors: state.product.available_options.table.colors.table.default,
+    customColors: state.product.available_options.table.colors.table.extra,
+    customColorPrice: state.product.available_options.table.colors.table.default_extra_price.price.amount,
+    preselectedColorId: state.product.color_id,
+    preselectedColorName: state.product.color_name,
+    variants: state.product.available_options.table.variants
   };
 }
 

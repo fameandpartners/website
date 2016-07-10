@@ -81,14 +81,13 @@ class SidePanelCustom extends SidePanel {
 }
 
 SidePanelCustom.propTypes = {
-  customize: PropTypes.object.isRequired,
-  customOptions: PropTypes.array.isRequired
+  customize: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
-    customOptions: state.customOptions
+    customOptions: state.product.available_options.table.customizations.table.all
   };
 }
 

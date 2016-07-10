@@ -80,6 +80,7 @@ export default function configureStore(initialState) {
         color: {
           id: '',
           presentation: '',
+          name: '',
           price: null
         },
         custom: {

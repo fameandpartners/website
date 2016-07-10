@@ -77,8 +77,8 @@ SidePanelSize.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
-    defaultSizes: state.defaultSizes,
-    variants: state.variants
+    defaultSizes: state.product.available_options.table.sizes.table.default,
+    variants: state.product.available_options.table.variants
   };
 }
 

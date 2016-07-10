@@ -7,35 +7,11 @@ export function customizeReducer(state = {}, action) {
   }
 }
 
-export function imageReducer(state = {}, action) {
+export function productReducer(state = {}, action) {
   return state;
 }
 
-export function dressVariantReducer(state = {}, action) {
-  return state;
-}
-
-export function productPriceReducer(state = {}, action) {
-  return state;
-}
-
-export function productDiscountReducer(state = {}, action) {
-  return state;
-}
-
-export function defaultColorReducer(state = {}, action) {
-  return state;
-}
-
-export function customColorReducer(state = {}, action) {
-  return state;
-}
-
-export function customColorPriceReducer(state = {}, action) {
-  return state;
-}
-
-export function defaultSizesReducer(state = {}, action) {
+export function discountReducer(state = {}, action) {
   return state;
 }
 
@@ -43,18 +19,6 @@ export function lengthReducer(state = {}, action) {
   return state;
 }
 
-export function sizeChartReducer(state = {}, action) {
-  return state;
-}
-
 export function skirtChartReducer(state = {}, action) {
-  return state;
-}
-
-export function preselectedColorReducer(state = {}, action) {
-  return state;
-}
-
-export function customOptionsReducer(state = {}, action) {
   return state;
 }

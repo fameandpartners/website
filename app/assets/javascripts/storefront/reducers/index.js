@@ -1,34 +1,16 @@
 import {combineReducers} from 'redux';
-import {customizeReducer,
-        dressVariantReducer,
-        imageReducer,
-        productPriceReducer,
-        productDiscountReducer,
-        defaultColorReducer,
-        customColorReducer,
-        defaultSizesReducer,
+import {productReducer,
+        discountReducer,
         lengthReducer,
-        sizeChartReducer,
         skirtChartReducer,
-        preselectedColorReducer,
-        customColorPriceReducer,
-        customOptionsReducer} from './pdpReducers';
+        customizeReducer} from './pdpReducers';
 
 const rootReducer = combineReducers({
-  customize: customizeReducer,
-  variants: dressVariantReducer,
-  images: imageReducer,
-  productPrice: productPriceReducer,
-  productDiscount: productDiscountReducer,
-  defaultColors: defaultColorReducer,
-  customColors: customColorReducer,
-  customColorPrice: customColorPriceReducer,
-  defaultSizes: defaultSizesReducer,
+  product: productReducer,
+  discount: discountReducer,
   lengths: lengthReducer,
-  sizeChart: sizeChartReducer,
   skirts: skirtChartReducer,
-  preselectedColor: preselectedColorReducer,
-  customOptions: customOptionsReducer
+  customize: customizeReducer
 });
 
 export default rootReducer;

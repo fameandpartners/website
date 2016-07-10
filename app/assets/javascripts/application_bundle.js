@@ -24,9 +24,11 @@ var _SidePanelRight2 = _interopRequireDefault(_SidePanelRight);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // PDP
-if (typeof window.PdpData !== 'undefined') {
+if (typeof window.PdpDataFull !== 'undefined') {
   (function () {
-    var store = (0, _configureStore2.default)(window.PdpData);
+    var store = (0, _configureStore2.default)(window.PdpDataFull);
+
+    console.log('Store: ', store.getState());
 
     store.subscribe(function () {
       console.log('Store changed: ', store.getState());
@@ -110,7 +112,7 @@ var CtaPrice = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var price = parseFloat(this.props.productPrice.amount) + this.props.customize.color.price + this.props.customize.custom.price - this.props.productDiscount;
+      var price = parseFloat(this.props.price) + this.props.customize.color.price + this.props.customize.custom.price - this.props.discount;
       return _react2.default.createElement(
         'div',
         { className: 'btn-wrap' },
@@ -138,17 +140,16 @@ var CtaPrice = function (_React$Component) {
 }(_react2.default.Component);
 
 CtaPrice.propTypes = {
-  productPrice: _react.PropTypes.object.isRequired,
-  productDiscount: _react.PropTypes.number.isRequired,
-  customize: _react.PropTypes.object.isRequired,
-  actions: _react.PropTypes.object.isRequired
+  customize: _react.PropTypes.object,
+  price: _react.PropTypes.string,
+  discount: _react.PropTypes.number
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    productPrice: state.productPrice.price,
-    productDiscount: state.productDiscount,
-    customize: state.customize
+    customize: state.customize,
+    price: state.product.price.price.amount,
+    discount: state.discount
   };
 }
 
@@ -362,42 +363,46 @@ var SidePanelColor = function (_SidePanel) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SidePanelColor).call(this, props, context));
 
-    _this.state = {
-      customize: {
-        color: {
-          id: _this.props.preselectedColor.id,
-          presentation: _this.props.preselectedColor.presentation,
-          name: _this.props.preselectedColor.name,
-          price: null
-        },
-        variantId: null
-      }
-    };
-
-    _this.props.actions.customizeDress(_this.state.customize);
     _this.onChange = _this.onChange.bind(_this);
     return _this;
   }
 
   _createClass(SidePanelColor, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      var customize = {};
+      customize.color = {};
+      customize.color.id = this.props.preselectedColorId;
+      customize.color.name = this.props.preselectedColorName;
+      customize.color.price = null;
+      customize.color.presentation = this.props.defaultColors.reduce(function (color, index) {
+        if (color.option_value.id === _this2.props.preselectedColorId) {
+          return color.option_value.presentation;
+        }
+      });
+      this.props.actions.customizeDress(customize);
+    }
+  }, {
     key: 'onChange',
     value: function onChange(event) {
       var customize = {};
       customize.color = {};
       customize.color.id = event.currentTarget.dataset.id;
-      customize.color.presentation = event.currentTarget.dataset.presentation;
       customize.color.name = event.currentTarget.dataset.name;
+      customize.color.presentation = event.currentTarget.dataset.presentation;
       customize.color.price = event.currentTarget.dataset.price;
       // search for dress variant id, this will work only for default color dresses
       // NOTE: we should check if this is even needed, since length
       // selection is required.
-      customize.dressVariantId = (0, _utils.GetDressVariantId)(this.props.variants, this.props.customize.size.id, customize.color.id);
+      customize.dressVariantId = (0, _utils.GetDressVariantId)(this.props.variants, customize.color.id, this.props.customize.size.id);
       this.props.actions.customizeDress(customize);
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var props = this.props;
       var menuState = this.state.active ? 'side-menu is-active' : 'side-menu';
@@ -411,11 +416,11 @@ var SidePanelColor = function (_SidePanel) {
         return _react2.default.createElement(
           'a',
           { href: '#', className: itemState,
-            onClick: _this2.onChange, key: index,
+            onClick: _this3.onChange, key: index,
             'data-id': color.option_value.id,
             'data-presentation': color.option_value.presentation,
             'data-name': color.option_value.name,
-            'data-price': customColorPrice },
+            'data-price': props.customColorPrice },
           _react2.default.createElement('div', { className: swatch }),
           _react2.default.createElement(
             'div',
@@ -425,19 +430,17 @@ var SidePanelColor = function (_SidePanel) {
         );
       });
 
-      var customColorPrice = parseFloat(props.customColorPrice.money.fractional / props.customColorPrice.money.currency.subunit_to_unit);
-
       var customColors = props.customColors.map(function (color, index) {
         var itemState = props.customize.color.id == color.option_value.id ? "selector-color is-selected" : "selector-color";
         var swatch = "swatch color-" + color.option_value.name;
         return _react2.default.createElement(
           'a',
           { href: '#', className: itemState,
-            onClick: _this2.onChange, key: index,
+            onClick: _this3.onChange, key: index,
             'data-id': color.option_value.id,
             'data-presentation': color.option_value.presentation,
             'data-name': color.option_value.name,
-            'data-price': customColorPrice },
+            'data-price': props.customColorPrice },
           _react2.default.createElement('div', { className: swatch }),
           _react2.default.createElement(
             'div',
@@ -514,7 +517,7 @@ var SidePanelColor = function (_SidePanel) {
                   'h3',
                   { className: 'h5 heading-secondary' },
                   'Custom Colors   +$',
-                  customColorPrice
+                  parseFloat(props.customColorPrice)
                 ),
                 _react2.default.createElement(
                   'div',
@@ -539,11 +542,12 @@ SidePanelColor.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
-    defaultColors: state.defaultColors,
-    customColors: state.customColors,
-    customColorPrice: state.customColorPrice,
-    preselectedColor: state.preselectedColor,
-    variants: state.variants
+    defaultColors: state.product.available_options.table.colors.table.default,
+    customColors: state.product.available_options.table.colors.table.extra,
+    customColorPrice: state.product.available_options.table.colors.table.default_extra_price.price.amount,
+    preselectedColorId: state.product.color_id,
+    preselectedColorName: state.product.color_name,
+    variants: state.product.available_options.table.variants
   };
 }
 
@@ -712,14 +716,13 @@ var SidePanelCustom = function (_SidePanel) {
 }(_SidePanel3.default);
 
 SidePanelCustom.propTypes = {
-  customize: _react.PropTypes.object.isRequired,
-  customOptions: _react.PropTypes.array.isRequired
+  customize: _react.PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
-    customOptions: state.customOptions
+    customOptions: state.product.available_options.table.customizations.table.all
   };
 }
 
@@ -1191,7 +1194,7 @@ var PdpSidePanelRight = function (_React$Component) {
             ),
             _react2.default.createElement(_SidePanelColor2.default, null),
             function () {
-              if (_this2.props.customOptions.length) {
+              if (_this2.props.skirts.length) {
                 return _react2.default.createElement(_SidePanelCustom2.default, null);
               }
             }()
@@ -1206,12 +1209,12 @@ var PdpSidePanelRight = function (_React$Component) {
 }(_react2.default.Component);
 
 PdpSidePanelRight.propTypes = {
-  customOptions: _react.PropTypes.array.isRequired
+  skirts: _react.PropTypes.array.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    customOptions: state.customOptions
+    skirts: state.skirts
   };
 }
 
@@ -1364,8 +1367,8 @@ SidePanelSize.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
-    defaultSizes: state.defaultSizes,
-    variants: state.variants
+    defaultSizes: state.product.available_options.table.sizes.table.default,
+    variants: state.product.available_options.table.variants
   };
 }
 
@@ -1634,7 +1637,7 @@ SidePanelSizeChart.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    sizeChart: state.sizeChart
+    sizeChart: state.product.sizes.table.default
   };
 }
 
@@ -1649,8 +1652,8 @@ Object.defineProperty(exports, "__esModule", {
 var GetDressVariantId = exports.GetDressVariantId = function GetDressVariantId(vars, color, size) {
   var id = void 0;
   vars.map(function (val) {
-    if (parseInt(val.color_id) === parseInt(color) && parseInt(val.size_id) === parseInt(size)) {
-      id = val.id;
+    if (parseInt(val.table.color_id) === parseInt(color) && parseInt(val.table.size_id) === parseInt(size)) {
+      id = val.table.id;
     }
   });
   return id;
@@ -1668,20 +1671,11 @@ var _redux = require('redux');
 var _pdpReducers = require('./pdpReducers');
 
 var rootReducer = (0, _redux.combineReducers)({
-  customize: _pdpReducers.customizeReducer,
-  variants: _pdpReducers.dressVariantReducer,
-  images: _pdpReducers.imageReducer,
-  productPrice: _pdpReducers.productPriceReducer,
-  productDiscount: _pdpReducers.productDiscountReducer,
-  defaultColors: _pdpReducers.defaultColorReducer,
-  customColors: _pdpReducers.customColorReducer,
-  customColorPrice: _pdpReducers.customColorPriceReducer,
-  defaultSizes: _pdpReducers.defaultSizesReducer,
+  product: _pdpReducers.productReducer,
+  discount: _pdpReducers.discountReducer,
   lengths: _pdpReducers.lengthReducer,
-  sizeChart: _pdpReducers.sizeChartReducer,
   skirts: _pdpReducers.skirtChartReducer,
-  preselectedColor: _pdpReducers.preselectedColorReducer,
-  customOptions: _pdpReducers.customOptionsReducer
+  customize: _pdpReducers.customizeReducer
 });
 
 exports.default = rootReducer;
@@ -1693,19 +1687,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.customizeReducer = customizeReducer;
-exports.imageReducer = imageReducer;
-exports.dressVariantReducer = dressVariantReducer;
-exports.productPriceReducer = productPriceReducer;
-exports.productDiscountReducer = productDiscountReducer;
-exports.defaultColorReducer = defaultColorReducer;
-exports.customColorReducer = customColorReducer;
-exports.customColorPriceReducer = customColorPriceReducer;
-exports.defaultSizesReducer = defaultSizesReducer;
+exports.productReducer = productReducer;
+exports.discountReducer = discountReducer;
 exports.lengthReducer = lengthReducer;
-exports.sizeChartReducer = sizeChartReducer;
 exports.skirtChartReducer = skirtChartReducer;
-exports.preselectedColorReducer = preselectedColorReducer;
-exports.customOptionsReducer = customOptionsReducer;
 function customizeReducer() {
   var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   var action = arguments[1];
@@ -1718,56 +1703,14 @@ function customizeReducer() {
   }
 }
 
-function imageReducer() {
+function productReducer() {
   var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   var action = arguments[1];
 
   return state;
 }
 
-function dressVariantReducer() {
-  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-  var action = arguments[1];
-
-  return state;
-}
-
-function productPriceReducer() {
-  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-  var action = arguments[1];
-
-  return state;
-}
-
-function productDiscountReducer() {
-  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-  var action = arguments[1];
-
-  return state;
-}
-
-function defaultColorReducer() {
-  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-  var action = arguments[1];
-
-  return state;
-}
-
-function customColorReducer() {
-  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-  var action = arguments[1];
-
-  return state;
-}
-
-function customColorPriceReducer() {
-  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-  var action = arguments[1];
-
-  return state;
-}
-
-function defaultSizesReducer() {
+function discountReducer() {
   var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   var action = arguments[1];
 
@@ -1781,28 +1724,7 @@ function lengthReducer() {
   return state;
 }
 
-function sizeChartReducer() {
-  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-  var action = arguments[1];
-
-  return state;
-}
-
 function skirtChartReducer() {
-  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-  var action = arguments[1];
-
-  return state;
-}
-
-function preselectedColorReducer() {
-  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-  var action = arguments[1];
-
-  return state;
-}
-
-function customOptionsReducer() {
   var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   var action = arguments[1];
 
@@ -1874,6 +1796,7 @@ function configureStore(initialState) {
       color: {
         id: '',
         presentation: '',
+        name: '',
         price: null
       },
       custom: {

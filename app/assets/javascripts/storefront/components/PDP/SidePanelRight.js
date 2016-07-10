@@ -25,7 +25,7 @@ class PdpSidePanelRight extends React.Component {
             <h2 className="h4 c-card-customize__header">Design your dress</h2>
               <SidePanelColor />
               {(() => {
-                if(this.props.customOptions.length) {
+                if(this.props.skirts.length) {
                   return (
                     <SidePanelCustom />
                   );
@@ -40,12 +40,12 @@ class PdpSidePanelRight extends React.Component {
 }
 
 PdpSidePanelRight.propTypes = {
-  customOptions: PropTypes.array.isRequired
+  skirts: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    customOptions: state.customOptions
+    skirts: state.skirts
   };
 }
 

@@ -106,7 +106,7 @@ SidePanelSizeChart.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    sizeChart: state.sizeChart
+    sizeChart: state.product.sizes.table.default
   };
 }
 

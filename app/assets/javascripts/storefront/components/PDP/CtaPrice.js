@@ -19,10 +19,10 @@ class CtaPrice extends React.Component {
 
   render() {
     const price =
-      parseFloat(this.props.productPrice.amount)
+      parseFloat(this.props.price)
       + this.props.customize.color.price
       + this.props.customize.custom.price
-      - this.props.productDiscount;
+      - this.props.discount;
     return (
       <div className="btn-wrap">
         <div className="price">${price}</div>
@@ -34,17 +34,16 @@ class CtaPrice extends React.Component {
 }
 
 CtaPrice.propTypes = {
-  productPrice: PropTypes.object.isRequired,
-  productDiscount: PropTypes.number.isRequired,
-  customize: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+  customize: PropTypes.object,
+  price: PropTypes.string,
+  discount: PropTypes.number
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    productPrice: state.productPrice.price,
-    productDiscount: state.productDiscount,
-    customize: state.customize
+    customize: state.customize,
+    price: state.product.price.price.amount,
+    discount: state.discount
   };
 }
 
