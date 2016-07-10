@@ -34,8 +34,13 @@
     font-size: 1.3rem;
   }
 
-  .section-instagram .carousel-strap {
-    background: none;
+  .section-instagram {
+    padding: 40px 0;
+
+    .instagram-widget {
+      padding-top: 25px;
+    }
+
   }
 
   @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
