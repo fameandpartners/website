@@ -164,7 +164,7 @@
 
       .diagonal-line {
         @include transform (rotate(45deg));
-        border-top: 1px solid #999;
+        border-top: 1px solid $c-neutral-8;
         width: 30px;
         margin-left: 55px;
       }
