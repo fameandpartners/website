@@ -138,6 +138,7 @@
   <img src="/assets/comodo-ssl.png" >
 </div>
 
+<!--
 <div class="row shopping-bag-masterpass" >
   <% if @cart.masterpass_available: %>
     <% if @cart.masterpass_is_production: %>
@@ -151,3 +152,4 @@
     </div>
   <% end %>
 </div>
+-->
