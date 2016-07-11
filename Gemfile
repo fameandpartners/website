@@ -137,6 +137,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'puma'
   gem 'meta_request'
+  gem 'foreman', require: false
 end
 
 group :test do
