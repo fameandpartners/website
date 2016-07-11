@@ -135,7 +135,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.2'
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'thin'
+  gem 'puma'
   gem 'meta_request'
 end
 
