@@ -4,8 +4,9 @@
 # # Don't touch this line
 # . ${current_app_path}/config/deploy/hooks/services/load.sh
 
+git_revision_tag=`cd ${current_app_path} && git describe --tags`
+
 if [ "${SERVER_ROLE}" == "web" ] ; then
-  git_revision_tag=`cd ${current_app_path} && git describe --tags`
 
   # Alert Sentry about deploy
   sentry_endpoint='https://app.getsentry.com/api/hooks'
