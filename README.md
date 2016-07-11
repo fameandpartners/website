@@ -2,10 +2,11 @@
 
 ## System Requirements
 
-* Ruby 2.1.5 (2.2.0 also works)
+* Ruby 2.1.6
 * Postgres 9.5
-* ElasticSearch 1.6.0
-* Redis 3.0.2
+* ElasticSearch 1.7.x
+* Redis
+* memcached
 * `imagemagick` 6.9.1
 
 > Libraries versions can vary. Versions used above are suggestions.
@@ -147,11 +148,19 @@ Tire.index(configatron.elasticsearch.indices.spree_products).refresh
 
 #### Caches
 
-You can wipe local redis caches by running
+You can wipe cache by running
+
+```
+rake cache:clear
+```
+
+or
 
 ```
 rake cache:expire
 ```
+
+> This will simply invoke the `Rails.cache.clear` command.
 
 #### Images & Assets
 
