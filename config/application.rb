@@ -110,7 +110,7 @@ module FameAndPartners
     config.assets.paths << Rails.root.join("app", "assets", 'transient_content')
     config.assets.paths << Rails.root.join("app", "assets", "vendor", "bower_components")
 
-    config.cache_store = :dalli_store, ENV['MEMCACHED_URL'], { expires_in: 1.day, compress: true }
+    config.cache_store = :dalli_store, ENV['MEMCACHE_SERVERS'], { namespace: "fandp-#{Rails.env}", expires_in: 1.day, compress: true }
 
     # Use S3 for storing attachments
     config.use_s3 = false
