@@ -30,11 +30,12 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
 * `$ git clone git@github.com:fameandpartners/website.git`
 * `$ cd ./website`
 * `$ cp config/database.yml.example config/database.yml`
+* `$ bundle install`
 
 If you are using homebrew and it's default settings, the supplied Procfile may work out-of-the-box
 
 ```shell
-$ bundle exec rails s
+$ bundle exec foreman s
 ```
 
 It's also important to configure your Elasticsearch to enable dynamic scripting
