@@ -33,7 +33,7 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
 If you are using homebrew and it's default settings, the supplied Procfile may work out-of-the-box
 
 ```shell
-$ bundle exec thin start -p 3000
+$ bundle exec rails s
 ```
 
 It's also important to configure your Elasticsearch to enable dynamic scripting
