@@ -19,7 +19,6 @@ gem 'rmagick'
 gem 'ckeditor'
 gem 'default_value_for'
 gem 'tire'
-gem 'redis-rails' # TODO: deprecated. Remove it in place of Memcached. Search through code where this is explicitly referenced
 gem 'dalli'
 gem 'autoprefixer-rails'
 gem 'bower-rails', '~> 0.10.0'

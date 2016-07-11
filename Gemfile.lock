@@ -668,24 +668,8 @@ GEM
       tilt
     redcarpet (2.3.0)
     redis (3.2.1)
-    redis-actionpack (3.2.4)
-      actionpack (~> 3.2.0)
-      redis-rack (~> 1.4.4)
-      redis-store (~> 1.1.4)
-    redis-activesupport (3.2.5)
-      activesupport (~> 3.2.0)
-      redis-store (~> 1.1.0)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
-    redis-rack (1.4.4)
-      rack (~> 1.4.0)
-      redis-store (~> 1.1.4)
-    redis-rails (3.2.4)
-      redis-actionpack (~> 3.2.4)
-      redis-activesupport (~> 3.2.4)
-      redis-store (~> 1.1.4)
-    redis-store (1.1.4)
-      redis (>= 2.2)
     reform (2.0.5)
       disposable (~> 0.1.11)
       uber (~> 0.0.11)
@@ -942,7 +926,6 @@ DEPENDENCIES
   rails (~> 3.2.22)
   react-rails (~> 1.6)
   redcarpet (~> 2.3.0)
-  redis-rails
   revolution!
   rmagick
   rollout
@@ -985,3 +968,9 @@ DEPENDENCIES
   webmock (~> 1.21.0)
   whenever
   zeus
+
+RUBY VERSION
+   ruby 2.1.6p336
+
+BUNDLED WITH
+   1.12.5
