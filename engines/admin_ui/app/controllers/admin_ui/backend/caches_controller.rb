@@ -10,10 +10,8 @@ module AdminUi
 
       def expire
         message = if params[:really_expire] == 'EXPIRE'
-                    ::NewRelic::Agent.record_custom_event(
-                      'cache_expire_full',
-                      user: current_admin_user.email
-                    )
+                    Rails.cache.clear
+                    ::NewRelic::Agent.record_custom_event('cache_expire_full', user: current_admin_user.email)
 
                     'Expired whole cache'
                   else
