@@ -253,8 +253,8 @@ class StaticsController < ApplicationController
   end
 
   def modern_classics
-    @title = "Modern Classic"
-    @description = "Modern Classic"
+    title('Modern Classic', default_seo_title)
+    description('Modern Classic')
   end
 
   # Legacy marketing campaign
