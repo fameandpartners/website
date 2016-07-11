@@ -4,7 +4,8 @@
 # # Don't touch this line
 # . ${current_app_path}/config/deploy/hooks/services/load.sh
 
-if ([ "${SERVER_ROLE}" == "web" ] && [ "${FRAMEWORK_ENV}" == "production" ]) ; then
+#if ([ "${SERVER_ROLE}" == "web" ] && [ "${FRAMEWORK_ENV}" == "production" ]) ; then
+if ([ "${SERVER_ROLE}" == "web" ] && [ "${FRAMEWORK_ENV}" == "staging" ]) ; then
   # Alert Sentry about deploy
   sentry_endpoint='https://app.getsentry.com/api/hooks'
   curl ${sentry_endpoint}/release/builtin/${SENTRY_PUBLIC_KEY}/${SENTRY_PRIVATE_KEY}/ \
