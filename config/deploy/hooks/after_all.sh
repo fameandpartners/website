@@ -7,10 +7,6 @@
 if [ "${SERVER_ROLE}" == "web" ] ; then
   git_revision_tag=`cd ${current_app_path} && git describe --tags`
 
-  # Clear cache
-  echo "Clearing Application Cache"
-  cd ${current_app_path} && bundle exec rake cache:clear &
-
   # Alert Sentry about deploy
   sentry_endpoint='https://app.getsentry.com/api/hooks'
   curl ${sentry_endpoint}/release/builtin/${SENTRY_PUBLIC_KEY}/${SENTRY_PRIVATE_KEY}/ \
