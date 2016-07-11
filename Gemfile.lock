@@ -318,6 +318,7 @@ GEM
       safe_yaml (~> 1.0.0)
     customerio (1.0.0)
       multi_json (~> 1.0)
+    dalli (2.7.6)
     database_cleaner (0.9.1)
     datagrid (1.4.0)
       rails (>= 3.2.18)
@@ -901,6 +902,7 @@ DEPENDENCIES
   compass-rails (~> 2.0.5)
   configatron
   customerio (~> 1.0.0)
+  dalli
   database_cleaner (= 0.9.1)
   default_value_for
   device_detector (~> 0.8.1)
