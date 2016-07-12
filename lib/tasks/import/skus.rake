@@ -51,15 +51,4 @@ namespace :import do
     end
     progressbar.finish
   end
-
-  # More information about this file at https://fameandpartners.atlassian.net/browse/WEBSITE-587 or https://fameandpartners.atlassian.net/browse/WEBSITE-621
-  desc 'Generate GlobalSKUs for Bergen BERGEN STYLE MASTER Excel file'
-  task generate_bergen_style_master_global_skus: :environment do
-    file_path = ENV['FILE_PATH']
-
-    raise 'FILE_PATH required' if file_path.blank?
-    raise 'File must be a CSV' if File.extname(file_path) != '.csv'
-
-    Importers::BergenStyleMaster.new(file_path).import
-  end
 end
