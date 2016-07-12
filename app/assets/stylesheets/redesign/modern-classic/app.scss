@@ -1,28 +1,4 @@
-@font-face {
-  font-family: Freight;
-  src: url(/assets/ufonts.com_freight-big-light-opentype.otf);
-  // src: url(/assets/ufonts.com_freight-disp-book-italic-opentype.otf);
-}
-
-
-$max-width: 2675px;
-$h2-size: 6.4rem;
-$p-description: 2.8rem;
-$p-above: 1.8rem;
-$p-collection: 2.1rem;
-$model-name-size: 1.6rem;
-$model-h3: 1.9rem;
-$model-add: 1.6rem;
-$model-price: 1.8rem;
-$intro: 1.6rem;
-$footer-form-p-size: 1.2em;
-
-$Gilda: 'Freight', serif;
-
-$part-margin: 100px;
-$h2-margin-part-right: 95px;
-$p-part-text: 45px;
-$p-part-text-collection: 35px;
+$max-width: 1920px;
 
 .main-content{
   max-width: $max-width;
@@ -82,7 +58,7 @@ $p-part-text-collection: 35px;
   text-transform: uppercase;
   background-color: #000;
   padding: 7px 20px;
-  left: 10%;
+  left: 5.2%;
   top: 20px;
   letter-spacing: 1.5px;
   z-index: 10;
@@ -128,8 +104,8 @@ p.part-text-above {
 
 p.part-text-collection {
   margin-top: $p-part-text-collection;
+  font-family: $GildaItalic;
   text-decoration: underline;
-  font-style: italic;
   font-size: $p-collection;
   letter-spacing: 1.1px;
 }
@@ -203,6 +179,10 @@ p.part-text-collection {
     text-align: center;
   }
 
+  h3{
+    text-transform: capitalize;
+  }
+
   .part-dress-description {
     margin-top: 33px;
   }
@@ -271,7 +251,7 @@ p.part-text-collection {
   }
 
   .part-right {
-    width: 45.6%;
+    width: 45.5%;
   }
 }
 
@@ -287,7 +267,7 @@ p.part-text-collection {
     width: 42%;
     padding-left: 0;
     position: absolute;
-    right: -33%;
+    right: -34%;
     top: 30px;
   }
 }
@@ -295,13 +275,6 @@ p.part-text-collection {
 .part-7,
 .part-9 {
   margin-top: $part-margin;
-}
-
-.part-8 {
-
-  .part-right-text {
-    right: -33.5%;
-  }
 }
 
 .part-text {
@@ -328,6 +301,7 @@ p.part-text-collection {
 
   .part-dress {
     width: 30%;
+    padding-right: 5px;
 
   &:first-child{
     width: 30.15%;
@@ -342,11 +316,11 @@ p.part-text-collection {
 .part-10 {
 
   .part-left {
-    width: 49.9%;
+    width: 49.95%;
   }
 
   .part-right {
-    width: 50.1%;
+    width: 50.05%;
   }
 }
 
@@ -680,6 +654,7 @@ p.part-text-collection {
   .part-10{
     .part-left{
       width: 100%;
+      transition: all .3s;
     }
     .part-right{
       display: none;
