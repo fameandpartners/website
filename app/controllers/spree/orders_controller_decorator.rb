@@ -1,6 +1,4 @@
 Spree::OrdersController.class_eval do
-  include ActionView::Helpers::NumberHelper
-
   include Marketing::Gtm::Controller::Order
   include Marketing::Gtm::Controller::Event
 
@@ -26,7 +24,7 @@ Spree::OrdersController.class_eval do
     append_gtm_order(spree_order: order)
     append_gtm_event(event_name: :completed_order) if flash[:commerce_tracking]
 
-    my_things_pixel_data_layer if flash[:fire_my_things_pixel]
+    append_gtm_event(event_name: 'endOfTransaction') if flash[:fire_my_things_pixel]
 
     respond_with(@order)
   end
@@ -103,25 +101,5 @@ Spree::OrdersController.class_eval do
     else
       authorize! :create, Spree::Order
     end
-  end
-
-  def my_things_pixel_data_layer
-    transaction = @order.order.payments.where(state: 'completed').first
-    transaction_id = transaction.identifier
-    transaction_amount = number_with_precision_wrapper(transaction.amount.to_f)
-
-    products_with_prices = @order.order.line_items.map { |li| [li.variant.product.sku, li.total] }.uniq
-
-    output = products_with_prices.map do |sku, price|
-      qty = @order.order.line_items.select { |li| li.variant.product.sku == sku && li.total == price }.size
-      { id: sku, price: number_with_precision_wrapper(price), qty: qty }
-    end
-
-    append_gtm_event(event_name: 'endOfTransaction')
-    @gtm_container.append_variables(productsInOrder: output, transactionId: transaction_id, transactionAmount: transaction_amount)
-  end
-
-  def number_with_precision_wrapper(number)
-    number_with_precision(number, precision: 2, delimiter: ',')
   end
 end
