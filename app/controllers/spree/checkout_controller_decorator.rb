@@ -94,7 +94,6 @@ Spree::CheckoutController.class_eval do
         end
 
         respond_with(@order) do |format|
-          flash[:fire_my_things_pixel] = true
           format.html{ redirect_to completion_route }
           format.js{ render 'spree/checkout/complete' }
         end
@@ -333,9 +332,6 @@ Spree::CheckoutController.class_eval do
       append_gtm_product(product_presenter: product_presenter)
       append_gtm_variant(spree_variant: variant)
       append_gtm_order(spree_order: current_order)
-
-      append_gtm_event(event_name: 'shoppingCartPage')
-      @gtm_container.append_single_variable('lastProductAdded', variant.product.id)
     end
   end
 
