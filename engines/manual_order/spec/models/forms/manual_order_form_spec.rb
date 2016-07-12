@@ -35,7 +35,6 @@ describe Forms::ManualOrderForm do
         size: dress_size.id,
         length: 'standart',
         color: dress_color.id,
-        # customisations: '1599',
         notes: 'notes',
         status: 'exchange',
         email: 'john.doe@gmail.com',
@@ -53,25 +52,23 @@ describe Forms::ManualOrderForm do
 
     let(:manual_order) { described_class.new(Spree::Order.new) }
 
-    describe 'creates new false order' do
+    describe 'creates falsey order' do
       it { expect { manual_order.save_order(false_params) }.to raise_error ActiveRecord::RecordNotFound }
     end
 
-    describe 'creates new correct order' do
-      it 'creates new order successfully' do
-        expect(manual_order.save_order(correct_params)).to be_truthy
-      end
-    end
-
-    describe 'check the new order correctness' do
+    describe 'creates truthy order' do
 
       let(:created_order) { manual_order.save_order(correct_params) }
 
-      it 'creates new order correctly' do
+      it 'creates new order successfully' do
+        expect(created_order).to be_truthy
+      end
+
+      it 'creates new order with correct product name' do
         expect(created_order.line_items.first.variant.product.name).to eq('Stylight')
       end
 
-      it 'creates address correctly' do
+      it 'creates new order with correct ship_address' do
         expect(created_order.ship_address.firstname).to eq('John')
         expect(created_order.ship_address.lastname).to eq('Doe')
         expect(created_order.ship_address.email).to eq('john.doe@gmail.com')
