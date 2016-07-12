@@ -96,32 +96,40 @@ var CtaPrice = function (_React$Component) {
   function CtaPrice(props, context) {
     _classCallCheck(this, CtaPrice);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(CtaPrice).call(this, props, context));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CtaPrice).call(this, props, context));
+
+    _this.addToBag = _this.addToBag.bind(_this);
+    return _this;
   }
 
   _createClass(CtaPrice, [{
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
+    key: 'addToBag',
+    value: function addToBag() {
       // TODO: redo this
       // this is just very hacky way to connect this with shopping cart
-      document.getElementById('pdpCartSizeId').value = this.props.customize.size.id;
-      document.getElementById('pdpCartColorId').value = this.props.customize.color.id;
-      document.getElementById('pdpCartCustomId').value = this.props.customize.customization.id;
-      // TODO: build express making functionality
-      document.getElementById('pdpCartMakingId').value = null;
-      document.getElementById('pdpCartDressVariantId').value = this.props.customize.dressVariantId;
-      document.getElementById('pdpCartLength').value = this.props.customize.length.id;
-      document.getElementById('pdpCartVariantId').value = JSON.stringify({
-        id: this.props.product.master_id,
-        product_id: this.props.product.id,
-        count_on_hand: 0,
-        fast_delivery: false,
-        available: true
-      });
+      if (this.props.customize.size.id && this.props.customize.color.id && this.props.customize.length.id) {
+        document.getElementById('pdpCartSizeId').value = this.props.customize.size.id;
+        document.getElementById('pdpCartColorId').value = this.props.customize.color.id;
+        document.getElementById('pdpCartCustomId').value = this.props.customize.customization.id;
+        // TODO: build express making functionality
+        document.getElementById('pdpCartMakingId').value = null;
+        document.getElementById('pdpCartDressVariantId').value = this.props.customize.dressVariantId;
+        document.getElementById('pdpCartLength').value = this.props.customize.length.id;
+        document.getElementById('pdpCartVariantId').value = JSON.stringify({
+          id: this.props.product.master_id,
+          product_id: this.props.product.id,
+          count_on_hand: 0,
+          fast_delivery: false,
+          available: true
+        });
+        $('#pdpDataForCheckout').submit();
+      }
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var price = parseFloat(this.props.price) + parseFloat(this.props.customize.color.price) + parseFloat(this.props.customize.customization.price) - parseFloat(this.props.discount);
       return _react2.default.createElement(
         'div',
@@ -132,11 +140,21 @@ var CtaPrice = function (_React$Component) {
           '$',
           price
         ),
-        _react2.default.createElement(
-          'a',
-          { href: 'javascript:;', className: 'btn btn-black btn-lrg', disabled: 'disabled' },
-          'ADD TO BAG'
-        ),
+        function () {
+          if (_this2.props.customize.size.id && _this2.props.customize.color.id && _this2.props.customize.length.id) {
+            return _react2.default.createElement(
+              'a',
+              { href: 'javascript:;', onClick: _this2.addToBag, className: 'btn btn-black btn-lrg' },
+              'ADD TO BAG'
+            );
+          } else {
+            return _react2.default.createElement(
+              'a',
+              { href: 'javascript:;', className: 'btn btn-black btn-lrg', disabled: 'disabled' },
+              'ADD TO BAG'
+            );
+          }
+        }(),
         _react2.default.createElement(
           'div',
           { className: 'est-delivery' },

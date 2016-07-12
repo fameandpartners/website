@@ -30,7 +30,7 @@ ruby:
   
 // TODO:  note this is very naughty way of connecting PDP react with shopping cart
 //        this will need to be fixed later after we migrate cart to react
-form
+form#pdpDataForCheckout action="" method="get"
   input id='pdpCartSizeId' type='hidden' value=''
   input id='pdpCartColorId' type='hidden' value='#{raw @product.color_id}'
   input id='pdpCartCustomId' type='hidden' value=''
@@ -56,7 +56,7 @@ form
                 p = raw @product.description
                 a href='' About our model
                 a href='' Add to Moodboard
-                a href='' Share
+                a.js-trigger-share href='javascript:;' Share
               
               ul.btn-wrap
                 li Guarenteed Fit

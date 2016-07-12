@@ -1,3 +1,22 @@
+$(document).on('submit', '#pdpDataForCheckout', () ->
+  $this = $(this)
+  product_data = {
+    size_id:            $this.find('#pdpCartSizeId').val(),
+    color_id:           $this.find('#pdpCartColorId').val(),
+    customizations_ids: $this.find('#pdpCartCustomId').val(),
+    making_options_ids: $this.find('#pdpCartMakingId').val(),
+    variant_id:         $this.find('#pdpCartVariantId').val(),
+    dress_variant_id:   $this.find('#pdpCartDressVariantId').val(),
+    height:             $this.find('#pdpCartLength').val()
+  }
+  app.shopping_cart.one('change', () ->
+    window.app.shopping_bag.open()
+  )
+  app.shopping_cart.addProduct(product_data)
+)
+
+
+
 # usage
 #  page.initProductDetailsPage(
 #    options_select: {
