@@ -17,10 +17,6 @@
 
   .section-styling {
 
-    .inline-btn:not(:nth-of-type(1)) {
-      margin-left: 15px;
-    }
-
     .cta-link-alt {
       margin-bottom: 25px;
     }
@@ -81,5 +77,22 @@
     }
 
   }
+
+  @media (min-width: $bootstrap-sm-width) {
+
+    .section-styling .inline-btn:not(:nth-of-type(1)) {
+      margin-left: 15px;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-sm-width) {
+
+    .section-styling .inline-btn {
+      display:block;
+    }
+
+  }
+
 
 }
