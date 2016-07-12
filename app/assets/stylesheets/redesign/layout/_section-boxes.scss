@@ -3,10 +3,6 @@
 .section-box {
   margin-top: $section-spacing-margin-top;
 
-  &.extra-spacing-top {
-    margin-top: ($section-spacing-margin-top + 40px);
-  }
-
   p {
     font-family: $font-heading;
     font-size: 2rem;
