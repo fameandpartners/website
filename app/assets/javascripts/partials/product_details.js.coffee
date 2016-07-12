@@ -1,13 +1,20 @@
 $(document).on('submit', '#pdpDataForCheckout', () ->
   $this = $(this)
+  dressVarId = undefined
+  customIds = undefined
+  if $this.find('#pdpCartVariantId').val()
+    dressVarId = parseInt($this.find('#pdpCartVariantId').val())
+  if $this.find('#pdpCartCustomId').val()
+    customIds = parseInt($this.find('#pdpCartCustomId').val())
+
   product_data = {
-    size_id:            $this.find('#pdpCartSizeId').val(),
-    color_id:           $this.find('#pdpCartColorId').val(),
-    customizations_ids: $this.find('#pdpCartCustomId').val(),
+    size_id:            parseInt($this.find('#pdpCartSizeId').val()),
+    color_id:           parseInt($this.find('#pdpCartColorId').val()),
+    variant_id:         parseInt($this.find('#pdpCartVariantId').val()),
     making_options_ids: $this.find('#pdpCartMakingId').val(),
-    variant_id:         $this.find('#pdpCartVariantId').val(),
-    dress_variant_id:   $this.find('#pdpCartDressVariantId').val(),
-    height:             $this.find('#pdpCartLength').val()
+    height:             $this.find('#pdpCartLength').val(),
+    customizations_ids: customIds,
+    dress_variant_id:   dressVarId
   }
   app.shopping_cart.one('change', () ->
     window.app.shopping_bag.open()
