@@ -62,10 +62,18 @@ describe Forms::ManualOrderForm do
 
       it 'creates new order successfully' do
         expect(created_order).to be_truthy
+        expect(created_order.site_version).to eq('usa')
+        expect(created_order.currency).to eq('USD')
       end
 
       it 'creates new order with correct product name' do
         expect(created_order.line_items.first.variant.product.name).to eq('Stylight')
+      end
+
+      it 'creates new order with correct user' do
+        expect(created_order.user.first_name).to eq('John')
+        expect(created_order.user.last_name).to eq('Doe')
+        expect(created_order.user.email).to eq('john.doe@gmail.com')
       end
 
       it 'creates new order with correct ship_address' do
@@ -77,6 +85,8 @@ describe Forms::ManualOrderForm do
         expect(created_order.ship_address.address2).to eq('Address2')
         expect(created_order.ship_address.zipcode).to eq('61201')
         expect(created_order.ship_address.phone).to eq('+38094659031')
+        expect(created_order.ship_address.country).to eq(country)
+        expect(created_order.ship_address.state).to eq(state)
       end
     end
 
