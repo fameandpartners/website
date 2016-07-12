@@ -26,6 +26,8 @@ module Operations
         }
       ).populate
 
+      return false if cart[:success] == false
+
       order.customer_notes = params[:notes]
       order.currency = params[:currency]
       order.number = update_number(order.number) if params[:status] == 'exchange'
