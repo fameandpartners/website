@@ -15,6 +15,10 @@ export function discountReducer(state = {}, action) {
   return state;
 }
 
+export function productPathsReducer(state = {}, action) {
+  return state;
+}
+
 export function lengthReducer(state = {}, action) {
   return state;
 }

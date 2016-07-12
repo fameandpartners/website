@@ -421,7 +421,11 @@ var SidePanelColor = function (_SidePanel) {
       // NOTE: we should check if this is even needed, since length
       // selection is required.
       customize.dressVariantId = (0, _utils.GetDressVariantId)(this.props.variants, customize.color.id, this.props.customize.size.id);
+
       this.props.actions.customizeDress(customize);
+
+      // update url
+      (0, _utils.UpdateUrl)(customize.color.id, this.props.paths);
     }
   }, {
     key: 'render',
@@ -571,7 +575,8 @@ function mapStateToProps(state, ownProps) {
     customColorPrice: state.product.available_options.table.colors.table.default_extra_price.price.amount,
     preselectedColorId: state.product.color_id,
     preselectedColorName: state.product.color_name,
-    variants: state.product.available_options.table.variants
+    variants: state.product.available_options.table.variants,
+    paths: state.paths
   };
 }
 
@@ -1668,19 +1673,38 @@ function mapStateToProps(state, ownProps) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(SidePanelSizeChart);
 
 },{"react":199,"react-redux":56,"react-simpletabs":61}],13:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+// This will attempt to find a variant ID
+// It will succeed only for the default colors
 var GetDressVariantId = exports.GetDressVariantId = function GetDressVariantId(vars, color, size) {
   var id = void 0;
+
   vars.map(function (val) {
     if (parseInt(val.table.color_id) === parseInt(color) && parseInt(val.table.size_id) === parseInt(size)) {
       id = val.table.id;
     }
   });
+
   return id;
+};
+
+// Update URL on dress color change
+var UpdateUrl = exports.UpdateUrl = function UpdateUrl(colorId, paths) {
+  var url = void 0;
+
+  if (paths) {
+    if (paths[colorId]) {
+      url = paths[colorId];
+    } else {
+      url = paths.default;
+    }
+  }
+
+  window.history.replaceState({ path: url }, '', url);
 };
 
 },{}],14:[function(require,module,exports){
@@ -1697,6 +1721,7 @@ var _pdpReducers = require('./pdpReducers');
 var rootReducer = (0, _redux.combineReducers)({
   product: _pdpReducers.productReducer,
   discount: _pdpReducers.discountReducer,
+  paths: _pdpReducers.productPathsReducer,
   lengths: _pdpReducers.lengthReducer,
   skirts: _pdpReducers.skirtChartReducer,
   customize: _pdpReducers.customizeReducer
@@ -1713,6 +1738,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.customizeReducer = customizeReducer;
 exports.productReducer = productReducer;
 exports.discountReducer = discountReducer;
+exports.productPathsReducer = productPathsReducer;
 exports.lengthReducer = lengthReducer;
 exports.skirtChartReducer = skirtChartReducer;
 function customizeReducer() {
@@ -1735,6 +1761,13 @@ function productReducer() {
 }
 
 function discountReducer() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  var action = arguments[1];
+
+  return state;
+}
+
+function productPathsReducer() {
   var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   var action = arguments[1];
 

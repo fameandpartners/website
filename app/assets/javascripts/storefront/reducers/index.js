@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import {productReducer,
         discountReducer,
+        productPathsReducer,
         lengthReducer,
         skirtChartReducer,
         customizeReducer} from './pdpReducers';
@@ -8,6 +9,7 @@ import {productReducer,
 const rootReducer = combineReducers({
   product: productReducer,
   discount: discountReducer,
+  paths: productPathsReducer,
   lengths: lengthReducer,
   skirts: skirtChartReducer,
   customize: customizeReducer

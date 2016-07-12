@@ -11,6 +11,7 @@ ruby:
 
   init_product_details_page = "window.PdpDataFull = 
     {
+      paths: #{ product_paths.to_json },
       product: #{ @product.to_json },
       discount: #{ @productDiscount }
     };"

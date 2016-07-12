@@ -16,82 +16,16 @@ $(document).on('submit', '#pdpDataForCheckout', () ->
     customizations_ids: customIds,
     dress_variant_id:   dressVarId
   }
+
   app.shopping_cart.one('change', () ->
     window.app.shopping_bag.open()
   )
   app.shopping_cart.addProduct(product_data)
 )
 
-
-
-# usage
-#  page.initProductDetailsPage(
-#    options_select: {
-#      variants: [],
-#      container: '',
-#    },
-#    buyButton: '.buy-button',
-#    wishlistButton: '.moodboard-button'
-# );
-
 page.initProductDetailsPage = (options = {}) ->
   selector    = null
   selector   = new window.helpers.ProductVariantsSelector(options.selector)
-
-  # if user selects 'red' color, then change path to /dresses/slug/red
-  # don't do this for products without color
-  product_paths = options.product_paths
-  changeUrlToSelectedColor = (color_id) ->
-    if product_paths
-      if product_paths[color_id]
-        url = product_paths[color_id]
-      else
-        url = product_paths.default
-
-      window.history.replaceState({ path: url }, '', url)
-
-  # ensure location color according to preselected color
-  selected = selector.getValue()
-
-  # change images colors
-  selector.on('change', (event, data) ->
-    changeUrlToSelectedColor(data.color_id)
-    # Push Generic change event with updated selection options.
-    window.app.events.trigger('productSelectionOptionsChange', data)
-  )
-
-  # init buy button
-  if options.buyButton
-    $(options.buyButton).on('click', (e) ->
-      e.preventDefault()
-      status = selector.validate()
-      if !status.valid
-        window.helpers.showAlert(message: status.error)
-      else
-        $(options.buyButton).prop('disabled', true)
-        $(options.buyButton).html('Adding to cart...')
-        selected = selector.getCurrentSelection()
-        product_data = {
-          size_id:            selected.size_id,
-          color_id:           selected.color_id,
-          customizations_ids: selected.customizations_ids,
-          making_options_ids: selected.making_options_ids,
-          variant_id:         (selected.variant || {})['id'],
-          dress_variant_id:   (selected.dress_variant || {})['id']
-          height:             selected.height
-        }
-        app.shopping_cart.one('change', () ->
-          window.app.shopping_bag.open()
-        )
-        app.shopping_cart.addProduct(product_data)
-    )
-
-  if options.fitguideButton
-    $(options.fitguideButton).on('click', (e) ->
-      e.preventDefault()
-      modal = new window.modals.FitGuideModal(container: options.fitguideContainer)
-      modal.show()
-    )
 
   # init moodboard button
   if options.wishlistButton

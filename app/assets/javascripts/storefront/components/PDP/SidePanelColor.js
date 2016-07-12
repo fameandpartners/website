@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
-import {GetDressVariantId} from './utils';
+import {GetDressVariantId, UpdateUrl} from './utils';
 
 class SidePanelColor extends SidePanel {
   constructor(props, context) {
@@ -40,7 +40,11 @@ class SidePanelColor extends SidePanel {
       this.props.variants,
       customize.color.id,
       this.props.customize.size.id);
+
     this.props.actions.customizeDress(customize);
+
+    // update url
+    UpdateUrl(customize.color.id, this.props.paths);
   }
 
   render() {
@@ -138,7 +142,8 @@ function mapStateToProps(state, ownProps) {
     customColorPrice: state.product.available_options.table.colors.table.default_extra_price.price.amount,
     preselectedColorId: state.product.color_id,
     preselectedColorName: state.product.color_name,
-    variants: state.product.available_options.table.variants
+    variants: state.product.available_options.table.variants,
+    paths: state.paths
   };
 }
 
