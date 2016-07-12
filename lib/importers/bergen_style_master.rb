@@ -7,18 +7,15 @@ module Importers
       preface
 
 
-      # Count lines fast
-      progress = ProgressBar.create(total: csv_line_count, format: 'Processed: %c/%C  |%w%i|')
-      CSV.foreach(csv_file, headers: true, skip_blanks: true, encoding: 'windows-1251:utf-8') do |csv_row|
-        progress.increment
+      parse_file do |csv_row|
+        bergen_product = BergenProductTemplate.new(csv_row)
 
-        bergen_product = BergenCsvTemplate.new(csv_row)
+        # generate_global_sku(bergen_product, spree_product)
+        # generate_comparison_csv()
 
         # puts bergen_product.us_size
         # binding.pry
       end
-
-      progress.finish
 
 
       #
@@ -56,24 +53,54 @@ module Importers
       info 'Done'
     end
 
+    def compare
+      preface
+
+      matched_csv   = BergenCsvTemplate.new('bergen_matched.csv')
+      unmatched_csv = BergenCsvTemplate.new('bergen_unmatched.csv')
+
+      parse_file do |csv_row|
+        bergen_product = BergenProductTemplate.new(csv_row)
+
+        # Match Bergen Product
+        # => Global SKU?
+        # => Style + Size + ?
+
+        global_sku     = GlobalSku.where(id: bergen_product.upc).first
+
+        matched_csv << csv_row
+        unmatched_csv << csv_row
+
+        binding.pry if global_sku.nil?
+
+        break if bergen_product.upc == '11379'
+
+      end
+
+      matched_csv.close
+      unmatched_csv.close
+
+      info 'Done'
+      info 'Comparison CSV file '
+    end
+
     private
+
+    def parse_file
+      progress = ProgressBar.create(total: csv_line_count, format: 'Processed: %c/%C  |%w%i| %e')
+      CSV.foreach(csv_file, headers: true, skip_blanks: true, encoding: 'windows-1251:utf-8') do |csv_row|
+        progress.increment
+        yield csv_row
+      end
+      progress.finish
+    end
 
     def csv_line_count
       # Thanks to http://stackoverflow.com/questions/2650517/count-the-number-of-lines-in-a-file-without-reading-entire-file-into-memory
       `wc -l "#{csv_file}"`.strip.split(' ')[0].to_i
     end
 
-    class BergenCsvTemplate
-      # {
-      #   nil => "AU4",
-      #   "STYLE" => "1310000DL",
-      #   "COLOR" => "BLACK",
-      #   "SIZE" => "US0",
-      #   "BRIEFDESCRIPTION" => "Rock Goddess",
-      #   "UPCCODE" => "14865",
-      #   "MSRP" => "0"
-      # }
-
+    class BergenProductTemplate
       def initialize(csv_row)
         @color        = csv_row['COLOR']
         @product_name = csv_row['BRIEFDESCRIPTION']
@@ -100,6 +127,26 @@ module Importers
 
       def upc
         @upc.downcase
+      end
+    end
+
+    class BergenCsvTemplate
+      HEADERS = %w(CONCAT STYLE COLOR US_SIZE AU_SIZE BRIEFDESCRIPTION UPCCODE MSRP)
+
+      extend Forwardable
+
+      attr_reader :file
+      def_delegators :file, :<<, :close
+
+      def initialize(csv_name)
+        @file = CSV.open(Rails.root.join('tmp', csv_name), 'wb')
+        write_headers
+
+        @file
+      end
+
+      def write_headers
+        file << HEADERS
       end
     end
   end
