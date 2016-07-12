@@ -39,4 +39,4 @@ javascript:
   var pageIsSubCategory = subCategoryRegex.test(window.location.pathname);
   var dataLayerObject = {'pageIsSubCategory': pageIsSubCategory, 'categoryName': window.location.pathname.split('/')[1]};
   if (pageIsSubCategory) dataLayerObject['subCategoryName'] = window.location.pathname.split('/')[2];
-  dataLayer.push(dataLayerObject);
+  if (window.dataLayer) window.dataLayer.push(dataLayerObject);
