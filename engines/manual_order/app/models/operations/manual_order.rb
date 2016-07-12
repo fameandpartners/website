@@ -12,16 +12,16 @@ module Operations
       order = Spree::Order.create
       site_version = SiteVersion.where(currency: params[:currency]).first
 
-      UserCart::Populator.new(
+      cart = UserCart::Populator.new(
         order: order,
         site_version: site_version,
         currency: params[:currency],
         product: {
-          variant_id: variant,
+          variant_id: variant.id,
           size_id: params[:size],
           color_id: params[:color],
           customizations_ids: params[:customisations],
-          height:             params[:height],
+          height: params[:height],
           quantity: 1
         }
       ).populate
@@ -41,6 +41,7 @@ module Operations
       end
 
       order.save
+      order
     end
 
     private

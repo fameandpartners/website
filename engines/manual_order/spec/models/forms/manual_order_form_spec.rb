@@ -1,52 +1,86 @@
 require 'spec_helper'
+require_relative '../../support/manual_orders_shared_context'
 
 describe Forms::ManualOrderForm do
-   context 'process' do
-      let(:false_params) {
-        {
-          currency: 'USD',
-          style_name: '794',
-          size: '24',
-          length: 'standart',
-          color: '179',
-          customisations: '1873',
-          notes: 'notes',
-          status: 'exchange',
-          existing_customer: '14'
-        }
-      }
 
-      let(:correct_params) {
-        {
-          currency: 'USD',
-          style_name: '681',
-          size: '149',
-          length: 'standart',
-          color: '25',
-          customisations: '1599',
-          notes: 'notes',
-          status: 'exchange',
-          email: 'john.doe@gmail.com',
-          first_name: 'John',
-          last_name: 'Doe',
-          address1: 'Address1',
-          address2: 'Address2',
-          city: 'Los-Angeles',
-          country: '49',
-          state: '32',
-          zipcode: '61201',
-          phone: '+380977789031'
-        }
-      }
+  context 'process' do
+    include_context 'manual order context'
 
-    it 'creates new false order' do
-      manual_order = described_class.new(Spree::Order.new)
-      expect { manual_order.save_order(false_params) }.to raise_error ActiveRecord::RecordNotFound
+    before(:each) do
+      rememoize(Spree::OptionType, :@color)
+      rememoize(Spree::OptionType, :@size)
+      rememoize(Repositories::ProductSize, :@sizes_map)
+      ProductColorValue.belongs_to(:option_value, class_name: 'Spree::OptionValue',
+                                   conditions: ['option_type_id = ?', Spree::OptionType.color_scope ])
     end
 
-    it 'creates new false order' do
-       manual_order = described_class.new(Spree::Order.new)
-       expect(manual_order.save_order(correct_params)).to true
+    let(:false_params){
+      {
+        currency: 'USD',
+        style_name: '794',
+        size: '24',
+        length: 'standart',
+        color: '179',
+        customisations: '1873',
+        notes: 'notes',
+        status: 'exchange',
+        existing_customer: '14'
+      }
+    }
+
+    let(:correct_params) {
+      {
+        currency: 'USD',
+        style_name: product.id,
+        size: dress_size.id,
+        length: 'standart',
+        color: dress_color.id,
+        # customisations: '1599',
+        notes: 'notes',
+        status: 'exchange',
+        email: 'john.doe@gmail.com',
+        first_name: 'John',
+        last_name: 'Doe',
+        address1: 'Address1',
+        address2: 'Address2',
+        city: 'Los-Angeles',
+        country: country.id,
+        state: state.id,
+        zipcode: '61201',
+        phone: '+38094659031'
+      }
+    }
+
+    let(:manual_order) { described_class.new(Spree::Order.new) }
+
+    describe 'creates new false order' do
+      it { expect { manual_order.save_order(false_params) }.to raise_error ActiveRecord::RecordNotFound }
+    end
+
+    describe 'creates new correct order' do
+      it 'creates new order successfully' do
+        expect(manual_order.save_order(correct_params)).to be_truthy
+      end
+    end
+
+    describe 'check the new order correctness' do
+
+      let(:created_order) { manual_order.save_order(correct_params) }
+
+      it 'creates new order correctly' do
+        expect(created_order.line_items.first.variant.product.name).to eq('Stylight')
+      end
+
+      it 'creates address correctly' do
+        expect(created_order.ship_address.firstname).to eq('John')
+        expect(created_order.ship_address.lastname).to eq('Doe')
+        expect(created_order.ship_address.email).to eq('john.doe@gmail.com')
+        expect(created_order.ship_address.city).to eq('Los-Angeles')
+        expect(created_order.ship_address.address1).to eq('Address1')
+        expect(created_order.ship_address.address2).to eq('Address2')
+        expect(created_order.ship_address.zipcode).to eq('61201')
+        expect(created_order.ship_address.phone).to eq('+38094659031')
+      end
     end
 
   end
