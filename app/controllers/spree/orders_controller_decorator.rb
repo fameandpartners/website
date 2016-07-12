@@ -110,11 +110,11 @@ Spree::OrdersController.class_eval do
     transaction_id = transaction.identifier
     transaction_amount = number_with_precision_wrapper(transaction.amount.to_f)
 
-    products = @order.order.line_items.map { |li| li.variant.product }.uniq
+    products_with_prices = @order.order.line_items.map { |li| [li.variant.product.sku, li.total] }.uniq
 
-    output = products.map do |p|
-      qty = @order.order.line_items.select { |li| li.variant.product.id == p.id }.size
-      {id: p.id, price: number_with_precision_wrapper(p.price.to_f), qty: qty}
+    output = products_with_prices.map do |sku, price|
+      qty = @order.order.line_items.select { |li| li.variant.product.sku == sku && li.total == price }.size
+      { id: sku, price: number_with_precision_wrapper(price), qty: qty }
     end
 
     append_gtm_event(event_name: 'endOfTransaction')
