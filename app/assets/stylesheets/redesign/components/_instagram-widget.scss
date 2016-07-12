@@ -22,17 +22,12 @@
     margin: 10px;
   }
 
-  .fs-wrapper {
-    height: auto;
-  }
-
   .fs-entry-container {
-    height: 0 !important;
     width: (100%/$instagram-columns) !important;
     padding-top: (100%/$instagram-columns) !important;
   }
 
-  .fs-desktop .fs-timeline-entry {
+  .fs-timeline-entry {
     background-size: 110%; //Just to remove the white border around smaller images
 
     .fs-text-container {
@@ -69,19 +64,18 @@
   .fs-wrapper .fs-has-links::after,
   .fs-text-product,
   .fs-overlink-text {
-      font-family: $font-family-secondary;
-      font-style: normal;
-      font-weight: bold;
+    font-family: $font-family-secondary;
+    font-style: normal;
+    font-weight: bold;
   }
 
   .fs-wrapper .fs-text-container {
+    background-color: rgba($c-neutral-black, 0.8);
+    margin: 0px;
 
     * {
       color: $c-neutral-white;
     }
-
-    background-color: rgba($c-neutral-black, 0.8);
-    margin: 0px;
 
   }
 
@@ -91,6 +85,26 @@
 
   .fs-wrapper .fs-timeline-entry {
     margin: 1px;
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .fs-entry-container {
+      $instagram-columns: 2;
+      width: (100%/$instagram-columns) !important;
+      padding-top: (100%/$instagram-columns) !important;
+      border: 10px solid $c-classic-modal-bg;
+
+      &:nth-child(2n) {
+        border-right: 0;
+      }
+
+      &:nth-child(n+6) {
+        display: none;
+      }
+
+    }
+
   }
 
 }
