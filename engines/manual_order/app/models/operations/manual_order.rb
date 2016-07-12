@@ -28,25 +28,39 @@ module Operations
 
       return false if cart[:success] == false
 
-      order.customer_notes = params[:notes]
-      order.currency = params[:currency]
-      order.number = update_number(order.number) if params[:status] == 'exchange'
-
       if params[:existing_customer].present?
         user = Spree::User.find(params[:existing_customer])
         user_last_order = user.orders.complete.last
-        order.bill_address_id = user_last_order.bill_address_id
-        order.ship_address_id = user_last_order.ship_address_id
+        order.user = user
+        order.bill_address = user_last_order.bill_address
+        order.ship_address = user_last_order.ship_address
       else
-        order.bill_address_id = Spree::Address.create(address_params).id
-        order.ship_address_id = Spree::Address.create(address_params).id
+        order.user = Spree::User.create_user(user_params)
+        order.bill_address = Spree::Address.create(address_params)
+        order.ship_address = Spree::Address.create(address_params)
       end
+
+      order.user_first_name = params[:first_name] || order.bill_address.firstname
+      order.user_last_name = params[:last_name] || order.bill_address.lastname
+      order.email = params[:email] || order.bill_address.email
+      order.currency = params[:currency]
+      order.customer_notes = params[:notes]
+      order.site_version = site_version.permalink
+      order.number = update_number(order.number) if params[:status] == 'exchange'
 
       order.save
       order
     end
 
     private
+
+    def user_params
+      {
+        first_name: params[:first_name],
+        last_name: params[:last_name],
+        email: params[:email]
+      }
+    end
 
     def address_params
       {
