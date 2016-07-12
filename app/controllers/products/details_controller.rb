@@ -1,6 +1,5 @@
 class Products::DetailsController < Products::BaseController
   include Marketing::Gtm::Controller::Product
-  include Marketing::Gtm::Controller::Event
 
   layout 'redesign/application'
 
@@ -40,15 +39,5 @@ class Products::DetailsController < Products::BaseController
     append_gtm_product(product_presenter: @product)
 
     Activity.log_product_viewed(@product, temporary_user_key, try_spree_current_user)
-
-    load_my_things_pixel
   end
-
-  private
-
-  def load_my_things_pixel
-    append_gtm_event(event_name: 'productPage')
-    @gtm_container.append_single_variable('productId', @product.id)
-  end
-
 end
