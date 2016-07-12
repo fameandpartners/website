@@ -29,7 +29,6 @@
 
 class Products::CollectionsController < Products::BaseController
   include Marketing::Gtm::Controller::Collection
-  include Marketing::Gtm::Controller::Event
 
   layout 'redesign/application'
   attr_reader :page, :banner
@@ -47,10 +46,7 @@ class Products::CollectionsController < Products::BaseController
     @collection.use_auto_discount!(current_promotion.discount) if current_promotion
 
     respond_to do |format|
-      format.html do
-        produce_gtm_data
-        render collection_template
-      end
+      format.html { render collection_template }
       format.json do
         render json: @collection.serialize
       end
@@ -181,16 +177,5 @@ class Products::CollectionsController < Products::BaseController
     params.slice(
       :collection, :style, :event, :color, :colour, :bodyshape, :order, :q, :price_min, :price_max
     ).values.any?(&:present?)
-  end
-
-  def produce_gtm_data
-    if request.path[/\A\/dresses\/?\z/]
-      append_gtm_event(event_name: 'categoryPage')
-      @gtm_container.append_single_variable('categoryName', 'dresses')
-    elsif request.path[/\A\/dresses\/.{3,}\/?\z/]
-      append_gtm_event(event_name: 'subCategoryPage')
-      @gtm_container.append_single_variable('categoryName', 'dresses')
-      @gtm_container.append_single_variable('subCategoryName', request.path.split('/').last)
-    end
   end
 end

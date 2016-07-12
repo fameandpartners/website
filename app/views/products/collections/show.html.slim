@@ -33,3 +33,10 @@
               .panel-message
                 h2.heading These dresses are also available for killer curves up to size 22
           = render partial: 'pagination'
+
+javascript:
+  var subCategoryRegex = /^\/dresses\/[a-z-]{3,}\/?$/;
+  var pageIsSubCategory = subCategoryRegex.test(window.location.pathname);
+  var dataLayerObject = {'pageIsSubCategory': pageIsSubCategory, 'categoryName': window.location.pathname.split('/')[1]};
+  if (pageIsSubCategory) dataLayerObject['subCategoryName'] = window.location.pathname.split('/')[2];
+  dataLayer.push(dataLayerObject);
