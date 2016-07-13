@@ -94,7 +94,6 @@ Spree::CheckoutController.class_eval do
         end
 
         respond_with(@order) do |format|
-          flash[:fire_my_things_pixel] = true
           format.html{ redirect_to completion_route }
           format.js{ render 'spree/checkout/complete' }
         end
