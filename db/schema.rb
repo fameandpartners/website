@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(:version => 20160713100115) do
     t.integer  "return_request_item_id"
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
-    t.datetime "processed_at"
     t.boolean  "failed",                 :default => false
     t.string   "sentry_id"
   end

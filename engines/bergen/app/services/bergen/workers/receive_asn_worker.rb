@@ -20,7 +20,7 @@ module Bergen
           mark_asn_as_received
         end
 
-        @return_item_process.update_column(:processed_at, DateTime.now)
+        @return_item_process.touch
       rescue StandardError => e
         sentry_error = Raven.capture_exception(e)
         @return_item_process.update_column(:sentry_id, sentry_error.id)
