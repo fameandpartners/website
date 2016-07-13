@@ -12,6 +12,8 @@ module Bergen
         asn_number = create_asn                # Create ASN
         create_asn_retrieval_event(asn_number) # Save Bergen Ticket Number on Item Request Return
         advance_in_return_item_process         # Continue
+
+        @return_item_process.touch(:processed_at)
       rescue StandardError => e
         sentry_error = Raven.capture_exception(e)
         @return_item_process.update_column(:sentry_id, sentry_error.id)

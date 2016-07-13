@@ -23,6 +23,8 @@ module Bergen
         else
           verify_again_in_few_hours
         end
+
+        @return_item_process.touch(:processed_at)
       rescue StandardError => e
         sentry_error = Raven.capture_exception(e)
         @return_item_process.update_column(:sentry_id, sentry_error.id)
