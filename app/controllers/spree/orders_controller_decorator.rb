@@ -14,7 +14,7 @@ Spree::OrdersController.class_eval do
 
   # todo: merge order & user_cart => completed order resource
   def show
-
+    
     # this is a security hole
     order = ::Spree::Order.find_by_number!(params[:id])
 
@@ -23,8 +23,6 @@ Spree::OrdersController.class_eval do
 
     append_gtm_order(spree_order: order)
     append_gtm_event(event_name: :completed_order) if flash[:commerce_tracking]
-
-    append_gtm_event(event_name: 'endOfTransaction') if flash[:fire_my_things_pixel]
 
     respond_with(@order)
   end
