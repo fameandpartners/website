@@ -18,7 +18,7 @@ module Bergen
       it do
         expect(mailer.subject).to eq('Fame & Partners Order R123123123 - Package Received')
         expect(mailer.to).to eq(['loroteiro@silvestre.com'])
-        expect(mailer.body).to include('Thank you for sending back your order for return')
+        expect(mailer.body).to have_text('Thank you for sending back your order for return')
       end
     end
   end
