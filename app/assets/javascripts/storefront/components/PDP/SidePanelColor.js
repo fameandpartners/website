@@ -15,10 +15,10 @@ class SidePanelColor extends SidePanel {
   componentWillMount() {
     let customize = {};
     customize.color = {};
-    customize.color.id = this.props.preselectedColorId;
+    customize.color.id = parseInt(this.props.preselectedColorId);
     customize.color.name = this.props.preselectedColorName;
     customize.color.price = 0;
-    customize.color.presentation = this.props.defaultColors.reduce((color, index) => {
+    customize.color.presentation = this.props.defaultColors.map((color, index) => {
       if(color.option_value.id === this.props.preselectedColorId) {
         return color.option_value.presentation;
       }
@@ -29,7 +29,7 @@ class SidePanelColor extends SidePanel {
   onChange(event) {
     let customize = {};
     customize.color = {};
-    customize.color.id = event.currentTarget.dataset.id;
+    customize.color.id = parseInt(event.currentTarget.dataset.id);
     customize.color.name = event.currentTarget.dataset.name;
     customize.color.presentation = event.currentTarget.dataset.presentation;
     customize.color.price = event.currentTarget.dataset.price;

@@ -1,12 +1,23 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
 import Enquire from 'enquire.js';
 
 class PdpGallery extends React.Component {
   constructor() {
     super();
+
+    this.initGallery = this.initGallery.bind(this);
   }
 
   componentDidMount() {
+    this.initGallery();
+  }
+
+  componentDidUpdate() {
+    this.initGallery();
+  }
+
+  initGallery() {
     Enquire.register('screen and (max-width: 992px)', {
       match: () => {
         $('.js-pdp-hero-gallery').slick({
@@ -32,24 +43,19 @@ class PdpGallery extends React.Component {
   }
 
   render() {
+    const images = this.props.product.images.map((image, index) => {
+      if(image.table.color_id === this.props.customize.color.id) {
+        return (
+          <div className="media-wrap" key={index}>
+            <img src={image.table.original} alt="Product image" />
+          </div>
+        );
+      }
+    });
     return (
       <div className="panel-media">
         <div className="panel-media-inner-wrap js-pdp-hero-gallery">
-          <div className="media-wrap">
-            <img src="/assets/_temp/product-1.jpg" />
-          </div>
-          <div className="media-wrap">
-            <img src="/assets/_temp/product-2.jpg" />
-          </div>
-          <div className="media-wrap">
-            <img src="/assets/_temp/product-3.jpg" />
-          </div>
-          <div className="media-wrap">
-            <img src="/assets/_temp/product-4.jpg" />
-          </div>
-          <div className="media-wrap">
-            <img src="/assets/_temp/product-5.jpg" />
-          </div>
+          {images}
         </div>
       </div>
     );
@@ -57,4 +63,16 @@ class PdpGallery extends React.Component {
 
 }
 
-export default PdpGallery;
+PdpGallery.propTypes = {
+  customize: PropTypes.object.isRequired,
+  product: PropTypes.object.isRequired
+};
+
+function mapStateToProps(state, ownProps) {
+  return {
+    customize: state.customize,
+    product: state.product
+  };
+}
+
+export default connect(mapStateToProps)(PdpGallery);

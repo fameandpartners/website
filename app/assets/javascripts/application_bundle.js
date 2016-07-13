@@ -198,6 +198,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = require('react-redux');
+
 var _enquire = require('enquire.js');
 
 var _enquire2 = _interopRequireDefault(_enquire);
@@ -216,12 +218,25 @@ var PdpGallery = function (_React$Component) {
   function PdpGallery() {
     _classCallCheck(this, PdpGallery);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(PdpGallery).call(this));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PdpGallery).call(this));
+
+    _this.initGallery = _this.initGallery.bind(_this);
+    return _this;
   }
 
   _createClass(PdpGallery, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this.initGallery();
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      this.initGallery();
+    }
+  }, {
+    key: 'initGallery',
+    value: function initGallery() {
       _enquire2.default.register('screen and (max-width: 992px)', {
         match: function match() {
           $('.js-pdp-hero-gallery').slick({
@@ -246,37 +261,24 @@ var PdpGallery = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
+      var images = this.props.product.images.map(function (image, index) {
+        if (image.table.color_id === _this2.props.customize.color.id) {
+          return _react2.default.createElement(
+            'div',
+            { className: 'media-wrap', key: index },
+            _react2.default.createElement('img', { src: image.table.original, alt: 'Product image' })
+          );
+        }
+      });
       return _react2.default.createElement(
         'div',
         { className: 'panel-media' },
         _react2.default.createElement(
           'div',
           { className: 'panel-media-inner-wrap js-pdp-hero-gallery' },
-          _react2.default.createElement(
-            'div',
-            { className: 'media-wrap' },
-            _react2.default.createElement('img', { src: '/assets/_temp/product-1.jpg' })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'media-wrap' },
-            _react2.default.createElement('img', { src: '/assets/_temp/product-2.jpg' })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'media-wrap' },
-            _react2.default.createElement('img', { src: '/assets/_temp/product-3.jpg' })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'media-wrap' },
-            _react2.default.createElement('img', { src: '/assets/_temp/product-4.jpg' })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'media-wrap' },
-            _react2.default.createElement('img', { src: '/assets/_temp/product-5.jpg' })
-          )
+          images
         )
       );
     }
@@ -285,9 +287,21 @@ var PdpGallery = function (_React$Component) {
   return PdpGallery;
 }(_react2.default.Component);
 
-exports.default = PdpGallery;
+PdpGallery.propTypes = {
+  customize: _react.PropTypes.object.isRequired,
+  product: _react.PropTypes.object.isRequired
+};
 
-},{"enquire.js":17,"react":199}],5:[function(require,module,exports){
+function mapStateToProps(state, ownProps) {
+  return {
+    customize: state.customize,
+    product: state.product
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(PdpGallery);
+
+},{"enquire.js":17,"react":199,"react-redux":56}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -398,10 +412,10 @@ var SidePanelColor = function (_SidePanel) {
 
       var customize = {};
       customize.color = {};
-      customize.color.id = this.props.preselectedColorId;
+      customize.color.id = parseInt(this.props.preselectedColorId);
       customize.color.name = this.props.preselectedColorName;
       customize.color.price = 0;
-      customize.color.presentation = this.props.defaultColors.reduce(function (color, index) {
+      customize.color.presentation = this.props.defaultColors.map(function (color, index) {
         if (color.option_value.id === _this2.props.preselectedColorId) {
           return color.option_value.presentation;
         }
@@ -413,7 +427,7 @@ var SidePanelColor = function (_SidePanel) {
     value: function onChange(event) {
       var customize = {};
       customize.color = {};
-      customize.color.id = event.currentTarget.dataset.id;
+      customize.color.id = parseInt(event.currentTarget.dataset.id);
       customize.color.name = event.currentTarget.dataset.name;
       customize.color.presentation = event.currentTarget.dataset.presentation;
       customize.color.price = event.currentTarget.dataset.price;
