@@ -39,7 +39,6 @@ module Bergen
       def start_process
         if from_the_usa? && item_for_return?
           save!
-          verify_style_master
         end
       end
 
