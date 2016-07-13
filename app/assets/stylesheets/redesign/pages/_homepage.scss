@@ -23,10 +23,6 @@
 
   }
 
-  .cta-link-alt {
-    font-size: 1.3rem;
-  }
-
   .section-instagram {
     padding: 40px 0;
 
@@ -34,6 +30,14 @@
       padding-top: 25px;
     }
 
+  }
+
+  .cta-link-alt {
+    font-size: 1.3rem;
+  }
+
+  .cta-link-arrow-right {
+    font-size: 1.2rem;
   }
 
   @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
