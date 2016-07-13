@@ -20,7 +20,7 @@ namespace :bergen do
     # each 3 hours
     desc 'Verify received ASNs master with Bergen'
     task receive_asns: :environment do
-      Bergen::Operations::ReturnItemProcess.not_failed.asn_created.find_each do |return_item_process|
+      Bergen::Operations::ReturnItemProcess.not_failed.asn_created.months_old(3).find_each do |return_item_process|
         return_item_process.receive_asn
       end
     end

@@ -31,6 +31,7 @@ module Bergen
       belongs_to :return_request_item
 
       scope :not_failed, -> { where(failed: false) }
+      scope :months_old, -> (months) { where(updated_at: months.to_i.months.ago..Time.zone.now) }
 
       attr_accessible :return_request_item
 
