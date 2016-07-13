@@ -160,6 +160,7 @@ z-index levels
 @import 'redesign/contact';
 @import 'redesign/fashionista_winner';
 @import 'redesign/modal';
+@import 'redesign/shipping_fee_warning';
 @import 'redesign/flash_slider';
 @import 'redesign/terms';
 @import 'redesign/login';
@@ -330,61 +331,3 @@ h1.edit-title {
     outline:none;
   }
 }
-
-/* [ABU DHABI ORDERS]
--------------------------------------------------------*/
-$grey-border: #acacac;
-
-#shipping_fee_alert{
-  width: 100%;
-  border: 1px solid $grey-border;
-  margin-left: 0;
-  margin-top: 14px;
-
-  .left-warning{
-    float: left;
-    height: 100%;
-    width: 95px;
-  }
-
-  img{
-    padding: 23px 17px;
-  }
-
-  .right-warning{
-    font-size: 1.4rem;
-    float: left;
-    width: calc(100% - 95px);
-    margin-bottom: 15px;
-  }
-
-  h4{
-    font-size: 1.4rem;
-    margin-top: 13px;
-    font-weight: bold;
-    margin-bottom: 0;
-  }
-
-  input{
-    margin-right: 10px;
-  }
-
-  .underline{
-    text-decoration: underline;
-    font-weight: bold;
-  }
-  .underline{
-    text-decoration: underline;
-    font-weight: bold;
-  }
-}
-
-.top10{
-  margin-top: 10px;
-}
-
-.no-margin{
-  margin: 0;
-}
-
-/*-------------------------------------------------------*/
