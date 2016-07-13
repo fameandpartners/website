@@ -6,49 +6,15 @@ module Importers
     def import
       preface
 
-
       parse_file do |csv_row|
         bergen_product = BergenProductTemplate.new(csv_row)
 
-        # generate_global_sku(bergen_product, spree_product)
-        # generate_comparison_csv()
-
-        # puts bergen_product.us_size
-        # binding.pry
+        unless bergen_product.exists?
+          global_sku = bergen_product.create_global_sku
+          warn ['Creating Global SKU for', bergen_product.to_s.ljust(35), global_sku].join(' ')
+        end
       end
 
-
-      #
-      # Spree::Product.transaction do
-      #   csv.each do |row|
-      #     sku          = row['style'].downcase
-      #     name         = row['name'].to_s
-      #     factory_name = row['factory'].to_s.capitalize
-      #
-      #     product = Spree::Product.where('lower(name) = ?', name.downcase).first
-      #     variant = Spree::Variant.where("spree_variants.sku ILIKE '#{sku}%'").first
-      #
-      #     unless variant || product
-      #       warn "Skipping: No Product found for SKU='#{sku}' or name='#{name}'"
-      #       next
-      #     end
-      #
-      #     factory = Factory.find_or_create_by_name(factory_name)
-      #
-      #     product ||= variant.product
-      #     old_factory_name = product.property(:factory_name)
-      #
-      #     product.factory = factory
-      #     set_property    = product.set_property(:factory_name, factory_name)
-      #     set_object      = product.save
-      #
-      #     if set_property && set_object
-      #       progress.increment
-      #       info "#{green("OK")} sku=#{sku} name=#{name} factory=#{old_factory_name} -> #{factory_name}"
-      # end
-      # end
-      # progress.finish
-      # end
 
       info 'Done'
     end
@@ -70,20 +36,20 @@ module Importers
     end
 
     class BergenProductTemplate
+      CSV_HEADERS = {
+        color: 'Color',
+        size:  'Full Size',
+        style: 'Style'
+      }
+
       def initialize(csv_row)
-        @color        = csv_row['COLOR']
-        @product_name = csv_row['BRIEFDESCRIPTION']
-        @size         = csv_row['SIZE']
-        @style        = csv_row['STYLE']
-        @upc          = csv_row['UPCCODE']
+        @color = csv_row[CSV_HEADERS[:color]]
+        @size  = csv_row[CSV_HEADERS[:size]]
+        @style = csv_row[CSV_HEADERS[:style]]
       end
 
       def color
         @color.downcase
-      end
-
-      def product_name
-        @product_name.downcase
       end
 
       def us_size
@@ -94,8 +60,35 @@ module Importers
         @style.downcase
       end
 
-      def upc
-        @upc.downcase
+      def to_s
+        [
+          style,
+          color,
+          us_size
+        ].join(', ')
+      end
+
+      def exists?
+        GlobalSku.
+          where('style_number ILIKE ?', style).
+          where('size ILIKE ?', "%#{us_size}%").
+          where('color_name ILIKE ?', color).
+          any?
+      end
+
+      def create_global_sku
+        # variant = Spree::Variant.where('sku ILIKE ?', style).first
+        Spree::Variant.
+          includes(:option_values).
+          where('sku ILIKE ?', "#{style}%").
+          where('spree_option_values.name ILIKE ?', color).
+          where('spree_option_values.name ILIKE ?', "%#{us_size}%").
+          to_sql
+
+        # TODO: How to handle variants that never existed in the system!?
+
+
+        'Super Global SKU!'
       end
     end
   end
