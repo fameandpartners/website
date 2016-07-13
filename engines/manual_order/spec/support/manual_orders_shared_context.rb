@@ -11,5 +11,5 @@ RSpec.shared_context 'manual order context' do
   let!(:product_color_value) { create(:product_color_value, product: product, option_value: dress_color) }
   let!(:price) { create(:price, variant: variant) }
   let!(:shipping_method) { create(:simple_shipping_method) }
-  let!(:site_version) { create(:site_version, name: 'USA', currency: 'USD') }
+  let!(:site_version) { create(:site_version, name: 'USA', permalink: 'us', currency: 'USD') }
 end

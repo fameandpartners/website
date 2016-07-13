@@ -62,8 +62,14 @@ describe Forms::ManualOrderForm do
 
       it 'creates new order successfully' do
         expect(created_order).to be_truthy
-        expect(created_order.site_version).to eq('usa')
+        expect(created_order.site_version).to eq('us')
         expect(created_order.currency).to eq('USD')
+        expect(created_order.number[0]).to eq('E')
+      end
+
+      it 'creates new order as new' do
+        new_order = manual_order.save_order(correct_params.merge(status: 'new'))
+        expect(new_order.number[0]).to eq('R')
       end
 
       it 'creates new order with correct product name' do
