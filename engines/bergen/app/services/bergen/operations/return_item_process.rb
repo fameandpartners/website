@@ -30,6 +30,8 @@ module Bergen
 
       belongs_to :return_request_item
 
+      scope :not_failed, -> { where(failed: false) }
+
       attr_accessible :return_request_item
 
       validates :return_request_item, presence: true
