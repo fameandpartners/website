@@ -19,7 +19,7 @@ gem 'rmagick'
 gem 'ckeditor'
 gem 'default_value_for'
 gem 'tire'
-gem 'redis-rails'
+gem 'dalli'
 gem 'autoprefixer-rails'
 gem 'bower-rails', '~> 0.10.0'
 gem 'redcarpet', '~> 2.3.0'
@@ -137,6 +137,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'puma'
   gem 'meta_request'
+  gem 'foreman', require: false
 end
 
 group :test do

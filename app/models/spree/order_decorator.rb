@@ -70,7 +70,8 @@ Spree::Order.class_eval do
   end
 
   def clean_cache!
-    ActiveSupport::Cache::RedisStore.new(Rails.application.config.cache_store.last).delete_matched("*#{cache_key}*")
+    # NOOP
+    # TODO: `Spree::Order#clean_cache!` isn't clearing any cache. There are no cache keys with `Spree::Order#cache_key` value
   end
 
   def has_personalized_items?

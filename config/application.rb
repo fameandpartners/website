@@ -102,7 +102,6 @@ module FameAndPartners
     config.active_record.whitelist_attributes = true
 
     # Enable the asset pipeline
-    disable_warnings = true
     config.assets.enabled = true
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
@@ -111,8 +110,7 @@ module FameAndPartners
     config.assets.paths << Rails.root.join("app", "assets", 'transient_content')
     config.assets.paths << Rails.root.join("app", "assets", "vendor", "bower_components")
 
-    config.redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
-    config.cache_store = :redis_store, "#{ENV['REDIS_URL']}/0/#{config.redis_namespace}"
+    config.cache_store = :dalli_store, ENV['MEMCACHE_SERVERS'], { namespace: "fandp-#{Rails.env}", expires_in: 1.day, compress: true }
 
     # Use S3 for storing attachments
     config.use_s3 = false
