@@ -1,4 +1,4 @@
-class StyleQuizController < ApplicationController
+class QuizController < ApplicationController
   layout 'redesign/application'
 
   respond_to :html, :js
@@ -124,7 +124,7 @@ class StyleQuizController < ApplicationController
 
     respond_with({}) do |format|
       format.html { redirect_to(style_profile_url) }
-      format.js   { render 'style_quiz/thanks' }
+      format.js   { render 'quiz/thanks' }
     end
   end
 
