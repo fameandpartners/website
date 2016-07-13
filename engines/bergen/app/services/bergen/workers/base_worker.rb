@@ -5,7 +5,7 @@ module Bergen
     class BaseWorker
       include Sidekiq::Worker
 
-      sidekiq_options retry: 25, backtrace: true
+      sidekiq_options retry: 1, backtrace: true
     end
   end
 end
