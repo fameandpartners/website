@@ -30,7 +30,7 @@ module Bergen
             # TODO: Error handling
         end
 
-        @return_item_process.touch(:processed_at)
+        @return_item_process.update_column(:processed_at, DateTime.now)
       rescue StandardError => e
         sentry_error = Raven.capture_exception(e)
         @return_item_process.update_column(:sentry_id, sentry_error.id)
