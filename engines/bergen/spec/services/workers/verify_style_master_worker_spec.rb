@@ -25,17 +25,17 @@ module Bergen
 
           context 'not created yet' do
             it do
-              expect(described_class).to receive(:perform_in).with(30.minutes, return_item_process.id)
-
               worker.perform(return_item_process.id)
+
+              expect(return_item_process.aasm_state).to eq('operation_created')
             end
           end
 
           context 'pending importation' do
             it do
-              expect(described_class).to receive(:perform_in).with(30.minutes, return_item_process.id)
-
               worker.perform(return_item_process.id)
+
+              expect(return_item_process.aasm_state).to eq('operation_created')
             end
           end
 
