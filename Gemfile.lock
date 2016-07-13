@@ -143,6 +143,7 @@ PATH
       money
       rails
       savon
+      sentry-raven
       sidekiq
     fame_favicon (0.0.1)
       rails (~> 3.2.21)
