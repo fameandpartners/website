@@ -65,6 +65,8 @@ describe Forms::ManualOrderForm do
         expect(created_order.site_version).to eq('us')
         expect(created_order.currency).to eq('USD')
         expect(created_order.number[0]).to eq('E')
+        expect(created_order.state).to eq('complete')
+        expect(created_order.completed_at).to be_truthy
       end
 
       it 'creates new order as new' do

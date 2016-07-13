@@ -47,8 +47,11 @@ module Operations
       order.customer_notes = params[:notes]
       order.site_version = site_version.permalink
       order.number = update_number(order.number) if params[:status] == 'exchange'
-
       order.save
+
+      order.touch :completed_at
+      order.update_column :state, 'complete'
+
       order
     end
 
