@@ -38,7 +38,6 @@ module Bergen
 
       def advance_in_return_item_process
         return_item_process.style_master_was_created!
-        return_item_process.create_asn
       end
 
       def create_style_master

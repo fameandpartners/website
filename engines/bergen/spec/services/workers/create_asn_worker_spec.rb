@@ -19,8 +19,6 @@ module Bergen
 
       context 'given a return item process id' do
         it 'creates ASN, triggers item returns event sourcing and trigger next step' do
-          expect(return_item_process).to receive(:receive_asn)
-
           worker.perform(return_item_process.id)
 
           asn_event = return_request_item.item_return.events.bergen_asn_created.first

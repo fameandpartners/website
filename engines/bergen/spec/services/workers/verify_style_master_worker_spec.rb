@@ -15,8 +15,6 @@ module Bergen
         describe 'verify if style master was created' do
           context 'success' do
             it do
-              expect(return_item_process).to receive(:create_asn)
-
               worker.perform(return_item_process.id)
 
               expect(return_item_process).to have_state(:style_master_created)
@@ -27,7 +25,7 @@ module Bergen
             it do
               worker.perform(return_item_process.id)
 
-              expect(return_item_process.aasm_state).to eq('operation_created')
+              expect(return_item_process).to have_state(:operation_created)
             end
           end
 
@@ -35,7 +33,7 @@ module Bergen
             it do
               worker.perform(return_item_process.id)
 
-              expect(return_item_process.aasm_state).to eq('operation_created')
+              expect(return_item_process).to have_state(:operation_created)
             end
           end
 

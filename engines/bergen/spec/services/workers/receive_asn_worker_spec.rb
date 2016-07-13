@@ -21,7 +21,7 @@ module Bergen
           it 'marks asn as received' do
             worker.perform(return_item_process.id)
 
-            expect(return_item_process.aasm_state).to eq('asn_received')
+            expect(return_item_process).to have_state(:asn_received)
 
             event = item_return.events.last
             expect(event.event_type).to eq('bergen_asn_received')
@@ -54,7 +54,7 @@ module Bergen
           it 'verifies it again in a few hours' do
             worker.perform(return_item_process.id)
 
-            expect(return_item_process.aasm_state).to eq('asn_created')
+            expect(return_item_process).to have_state(:asn_created)
           end
         end
 
@@ -65,7 +65,7 @@ module Bergen
 
             worker.perform(return_item_process.id)
 
-            expect(return_item_process.aasm_state).to eq('asn_created')
+            expect(return_item_process).to have_state(:asn_created)
           end
         end
 

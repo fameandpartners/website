@@ -28,7 +28,6 @@ module Bergen
 
       def advance_in_return_item_process
         return_item_process.asn_was_created!
-        return_item_process.receive_asn
       end
 
       def create_asn
