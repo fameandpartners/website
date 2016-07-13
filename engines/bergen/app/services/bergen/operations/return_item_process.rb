@@ -39,8 +39,12 @@ module Bergen
       def start_process
         if from_the_usa? && item_for_return?
           save!
-          Workers::VerifyStyleMasterWorker.perform_async(self.id)
+          verify_style_master
         end
+      end
+
+      def verify_style_master
+        Workers::VerifyStyleMasterWorker.perform_async(self.id)
       end
 
       def create_asn
