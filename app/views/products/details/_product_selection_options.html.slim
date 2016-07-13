@@ -43,10 +43,9 @@
     .col-md-6.col-sm-6
       button#fit-guide.btn.btn-block.btn-secondary Size Guide
     .col-md-6.col-sm-6
-      - if Features.active?(:moodboard) && !Features.active?(:enhanced_moodboards)
-          button#add-to-moodboard.btn.btn-block.btn-secondary data-user-present=current_spree_user.present?
-            |+ Moodboard
-      - if Features.active?(:moodboard) && Features.active?(:enhanced_moodboards)
+      - if Features.active?(:moodboard)
+        button#add-to-moodboard.btn.btn-block.btn-secondary data-user-present=current_spree_user.present?
+          |+ Moodboard
         .btn-group.dropdown-moodboard
           button.btn.btn-block.btn-secondary.dropdown-toggle data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' data-user-present=current_spree_user.present?
             |+ Moodboard
