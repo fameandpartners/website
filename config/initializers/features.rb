@@ -21,7 +21,6 @@ if Rails.env.development?
 end
 
 if Rails.env.test?
-
   Features.deactivate(:force_sitewide_ssl)
   Features.deactivate(:google_tag_manager)
   Features.deactivate(:marketing_modals)
