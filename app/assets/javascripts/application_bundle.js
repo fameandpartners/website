@@ -426,6 +426,11 @@ var SidePanelColor = function (_SidePanel) {
 
       // update url
       (0, _utils.UpdateUrl)(customize.color.id, this.props.paths);
+
+      // TODO: redo this
+      // this is just very hacky way to connect this with wishlist_item_data
+      document.getElementById('pdpWishlistColorId').value = this.props.customize.color.id;
+      document.getElementById('pdpWishlistVariantId').value = customize.dressVariantId;
     }
   }, {
     key: 'render',

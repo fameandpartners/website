@@ -9,15 +9,16 @@ ruby:
   @productDiscount = @product.discount.to_json == 'null' ? 0 : @product.discount.to_json;
   end
 
-  init_product_details_page = "window.PdpDataFull = 
-    {
+  # NOTE: this JS block is loaded into the head, this should contain page data only
+  product_details_page_data = "
+    window.PdpDataFull = {
       paths: #{ product_paths.to_json },
       product: #{ @product.to_json },
       discount: #{ @productDiscount }
     };"
 
 = content_for :inline_javascript_top do
-  = raw init_product_details_page
+  = raw product_details_page_data
 
 = content_for :head
   - @product.cropped_images.each_with_index do |image, index|
@@ -29,9 +30,10 @@ ruby:
 - if Features.active?(:marketing_modals)
   #modal-add-to-cart-template.hidden
   
-// TODO:  note this is very naughty way of connecting PDP react with shopping cart
-//        this will need to be fixed later after we migrate cart to react
-form#pdpDataForCheckout action="" method="get"
+// TODO:  note this is very naughty way of connecting PDP react components with
+//        legacy JS, for example shopping cart.
+//        This will need to be fixed later after we migrate coffee to react
+form.hide-fully#pdpDataForCheckout
   input id='pdpCartSizeId' type='hidden' value=''
   input id='pdpCartColorId' type='hidden' value='#{raw @product.color_id}'
   input id='pdpCartCustomId' type='hidden' value=''
@@ -39,7 +41,12 @@ form#pdpDataForCheckout action="" method="get"
   input id='pdpCartVariantId' type='hidden' value=''
   input id='pdpCartDressVariantId' type='hidden' value=''
   input id='pdpCartLength' type='hidden' value=''
-
+  
+form.hide-fully#pdpDataForWishlist
+  input id='pdpWishlistColorId' type='hidden' value='#{raw @product.color_id}'
+  input id='pdpWishlistVariantId' type='hidden' value=''
+  input id='pdpWishlistProductId' type='hidden' value='#{raw @product.id}'
+  
 .pdp
   .container
     .row
@@ -56,7 +63,12 @@ form#pdpDataForCheckout action="" method="get"
                 h2.h5 Description
                 p = raw @product.description
                 a href='' About our model
-                a href='' Add to Moodboard
+                - if Features.active?(:moodboard)
+                  a href='#moodboard-options' data-user-present='#{current_spree_user.present?}' role='button' data-toggle='collapse' aria-expanded='false'
+                    'Add to Moodboard
+                  #moodboard-options.moodboard-options.collapse
+                    / TODO - Support for dynamic colours.
+                    = react_component('AddProductToAnyMoodboard', moodboards: user_moodboards, product_id: @product.id, color_id: @product.color_id)
                 a.js-trigger-share href='javascript:;' Share
               
               ul.btn-wrap

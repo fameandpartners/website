@@ -541,6 +541,37 @@
   }
   // END side panels
 
+  // Moodboard dropdown
+  .moodboard-options {
+    // TODO: clean this up, most of these are just resets
+    ul {
+      margin: 0;
+      text-align: left;
+    }
+
+    li  {
+      display: block;
+      margin: 10px 0 0 0;
+      padding: 0;
+      font-family: $font-family-secondary;
+      font-size: 0.875em;
+      font-weight: normal;
+      border: none;
+    }
+
+    a {
+      margin: 0;
+      text-decoration: none;
+    }
+
+    em {
+      margin-left: 5px;
+      font-style: normal;
+      font-weight: 700;
+    }
+
+  }
+
   @media (max-width: $bootstrap-lg-width - 1px) {
 
     .panel-side {
@@ -610,28 +641,4 @@
 
   }
 
-}
-
-.add-to-moodboard {
-  position: absolute;
-  padding: 10px;
-  right: 15px;
-  top: 0px;
-  opacity: 0.3;
-  transition: opacity 0.2s;
-  -webkit-transition: opacity 0.2s;
-}
-
-.add-to-moodboard:hover {
-  opacity: 1;
-}
-
-.divider {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 100px;
-  height: 1px;
-  background: #eeeeee;
-  margin-top: 30px;
-  margin-bottom: 30px;
 }
