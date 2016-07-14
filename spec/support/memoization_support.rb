@@ -8,13 +8,17 @@ end
 
 RSpec.configure do |config|
   config.before(:each) do
+    # Ours
     MemoizationSupport.rememoize(SiteVersion, :@default)
     MemoizationSupport.rememoize(SiteVersion, :@permalinks)
+
+    # Spree
+    MemoizationSupport.rememoize(Spree::Variant, :@size_option_type)
     MemoizationSupport.rememoize(Spree::OptionType, :@color)
     MemoizationSupport.rememoize(Spree::OptionType, :@size)
+
+    # Legacy
     MemoizationSupport.rememoize(Repositories::ProductColors, :@color_groups)
-    MemoizationSupport.rememoize(ProductSize, :@sizes_map)
-    MemoizationSupport.rememoize(Spree::Variant, :@size_option_type)
-    MemoizationSupport.rememoize(Spree::OptionType, :@size)
+    MemoizationSupport.rememoize(Repositories::ProductSize, :@sizes_map)
   end
 end
