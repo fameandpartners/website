@@ -4,7 +4,6 @@ describe 'Sitemap', type: :request do
   @asset_host = ENV['RAILS_ASSET_HOST']
 
   before do
-    rememoize(SiteVersion, :@default)
     create :site_version, :us, :default
     create :site_version, :au
   end
