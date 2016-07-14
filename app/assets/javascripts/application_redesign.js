@@ -118,6 +118,11 @@
 //--------------------------------
 //= require partials/header
 
+//--------------------------------
+// Homepage
+//--------------------------------
+//= require partials/homepage
+
 jQuery(document).ready(function($){
   $('body').addClass('ready');
 
