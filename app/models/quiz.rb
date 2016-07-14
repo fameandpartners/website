@@ -12,5 +12,13 @@ class Quiz < ActiveRecord::Base
     def active
       Quiz.last
     end
+
+    def style_quiz
+      Quiz.where(name: 'Style Quiz').last
+    end
+
+    def wedding_quiz
+      Quiz.where(name: 'Wedding Quiz').last
+    end
   end
 end

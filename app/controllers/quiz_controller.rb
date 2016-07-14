@@ -20,13 +20,13 @@ class QuizController < ApplicationController
     title(quiz_titles[@quiz_type], default_seo_title)
     description(quiz_descriptions[@quiz_type])
 
-    @quiz = Quiz.active
+    @quiz = Quiz.send("#{@quiz_type}_quiz")
     @questions_by_steps = @quiz.questions.includes(:answers).order('position ASC').group_by(&:step)
   end
 
   # answers#create
   def update
-    quiz = Quiz.last
+    quiz = Quiz.send("#{@quiz_type}_quiz")
     question_ids = params[:quiz][:questions].keys
 
     unless quiz.questions.find(question_ids).size.eql?(quiz.questions.size)
@@ -141,7 +141,7 @@ class QuizController < ApplicationController
   end
 
   def after_quiz_redirect_url
-    "#{ style_profile_url }?pc=Zm9ybWFsMjU=&amp;h=SEVZLCBIRVJFJ1MgJDIwIEZPUiBZT1UgVE8gU1BFTkQgT04gVEhFIFBFUkZFQ1QgRFJFU1Mh&amp;m=IFVTRTogPHN0cm9uZz5HVVJMUVVJWjwvc3Ryb25nPiBBVCBDSEVDS09VVA==&amp;t=5&amp;s=Z3VybF9jb21fbW9kYWw=&amp;"
+    "#{ send("#{quiz_type}_profile_url") }?pc=Zm9ybWFsMjU=&amp;h=SEVZLCBIRVJFJ1MgJDIwIEZPUiBZT1UgVE8gU1BFTkQgT04gVEhFIFBFUkZFQ1QgRFJFU1Mh&amp;m=IFVTRTogPHN0cm9uZz5HVVJMUVVJWjwvc3Ryb25nPiBBVCBDSEVDS09VVA==&amp;t=5&amp;s=Z3VybF9jb21fbW9kYWw=&amp;"
   end
   helper_method :after_quiz_redirect_url
 
