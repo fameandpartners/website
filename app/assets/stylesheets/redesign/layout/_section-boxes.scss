@@ -27,10 +27,6 @@ $section-spacing-margin-top: 40px;
       border: 1px solid $c-neutral-6;
     }
 
-    &.bordered > img {
-      padding-top: $box-padding-top;
-    }
-
     h3 {
       text-transform: none;
       font-size: 3.2rem;
@@ -38,11 +34,13 @@ $section-spacing-margin-top: 40px;
       margin-top: $box-padding-top;
     }
 
-    h4 {
-      font-family: $font-family-secondary;
-      font-weight: 600;
-      font-size: 1.3rem;
-      margin: $box-padding-top 0 0;
+    p.summary {
+      font-size: 1.7rem;
+      margin: ($box-padding-top - 20px) 0 0;
+    }
+
+    .item-copy {
+      padding: 0 15px;
     }
 
   }

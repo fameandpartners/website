@@ -27,7 +27,7 @@ ruby:
                   | Start <span class="copy-highlight">designing</span>
 
   // Section: F&P Story
-  section.section-box.container#fp-story
+  section.section-box.container.section-fame-story
     .row
       .col-md-12.heading-overlay-wrapper
         h2.heading-overlay The Fame Story
@@ -41,22 +41,39 @@ ruby:
       .row
         .col-md-4
           .item.bordered
-            h3 Here is some copy about why you will <em>love</em> us and our product.
-            h4 A little bit of additional copy here
-            = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive'
+            .item-copy
+              h3 Your <em>personal</em> atelier.
+              p.summary Timeless appeal. Contemporary edge. Completely customizable to suit your style.
+              // TODO: update link.
+              = link_to 'javascript:;'
+                span.cta-link-arrow-right
+                  span.copy-highlight Explore
+                  i.icon.icon-arrow-right
+            = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive', alt: 'Your personal atelier'
 
         .col-md-4
           .item.bordered
-            = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive hidden-sm hidden-xs'
-            h3 Made to order, made for you with love - exactly how you <em>want</em> it.
-            h4 A little bit of additional copy here
-            = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive hidden-md hidden-lg'
+            .item-copy
+              h3 <em>Made</em>-to-order.
+              p.summary Each piece is handmade just for you. <br class="visible-lg-block">No mass production, less waste.
+              // TODO: update link.
+              = link_to 'javascript:;', class: "cta-link-sm"
+                span.cta-link-arrow-right
+                  span.copy-highlight Learn more
+                  i.icon.icon-arrow-right
+            = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive', alt: 'Made-to-order'
 
         .col-md-4
           .item.bordered
-            h3 The fit guarantee. Tell our customers about our <em>unique</em> sizing and fit.
-            h4 A little bit of additional copy here
-            = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive'
+            .item-copy
+              h3 Tailored for <em>you</em>.
+              p.summary Our signature size model means never<br class="visible-lg-block"> having to say, "It doesn't fit."
+              // TODO: update link.
+              = link_to 'javascript:;', class: "cta-link-sm"
+                span.cta-link-arrow-right
+                  span.copy-highlight The Fit Guide
+                  i.icon.icon-arrow-right
+            = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive', alt: 'Tailored for you'
 
   // Section: Influencer
   section.section-box.container#fp-influencer
