@@ -208,16 +208,12 @@ ruby:
       .row
         .col-md-6
           .item
-            h3 Here is some copy about our unique guided experience here - two to three lines worth of copy to go here. Filler copy.
-            p These are the styles  that have stood the test of time. We collect information from you when you register on our site, complete our style quiz, add to a wishlist, place an order, subscribe to our newsletter.
+            h3 Welcome to the F&P shopping experience: collections curated specifically for you, based on your personal style, preferred fit, and inspirations.
+            p Launching soon, our Style Quiz and Fit Finder features will give us the tools to create a custom collection that speaks to you. Until then, get advice from a style expert anytime through Live Chat.
 
-            = link_to 'javascript:;', class: 'inline-btn'
+            = link_to 'javascript:;'
               span.btn-xs.btn-featured
-                | View the <span class="copy-highlight">Fit Finder</span>
-
-            = link_to 'javascript:;', class: 'inline-btn'
-              span.btn-xs.btn-featured
-                | View the <span class="copy-highlight">Style Finder</span>
+                | Start <span class="copy-highlight">Chatting</span>
 
         .col-md-6
           .item.bordered.item-alt.styling-session
@@ -227,14 +223,17 @@ ruby:
                   = image_tag 'homepage/styling/styling-session.jpg', :class => 'img-responsive hidden-xs hidden-sm'
 
               .col-md-5
-                h3 Book your free styling session.
-                p These are the styles  that have stood the test of time. We collect information from you.
-                = link_to styling_session_path, class: "cta-link-alt"
-                  span Book a
-                  span.copy-highlight  Styling Session
+                .item-copy
+                  h3 Styled by Fame — for free.
+                  p Our wardrobe stylist Amber Bond is ready to style you via chat, phone or video call.
+                  = link_to styling_session_path, class: 'cta-link-alt'
+                    span.cta-link-arrow-right
+                      span Book a
+                      span.copy-highlight  Free Styling Session
+                      i.icon.icon-arrow-right
 
-                = link_to styling_session_path
-                  = image_tag 'homepage/styling/styling-session.jpg', :class => 'img-responsive hidden-md hidden-lg'
+                  = link_to styling_session_path
+                    = image_tag 'homepage/styling/styling-session.jpg', :class => 'img-responsive hidden-md hidden-lg'
 
   // Section: Instagram
   section.section-box.container
