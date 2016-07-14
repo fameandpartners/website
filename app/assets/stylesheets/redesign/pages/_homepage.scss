@@ -129,20 +129,12 @@
 
   @media (min-width: $bootstrap-md-width) {
 
-    .hero-wrap.copy-left .heading {
+    .hero-wrap .heading {
       margin: 0;
-
-      span:first-child {
-        font-size: 8.5rem;
-      }
-
-      .sub-heading {
-        font-size: 2.7rem;
-      }
-
+      width: 100%;
     }
 
-    .hero-wrap.copy-left .media-wrap {
+    .hero-wrap .media-wrap {
       padding-bottom: 35%;
       min-height: 450px;
     }
