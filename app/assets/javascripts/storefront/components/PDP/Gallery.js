@@ -14,6 +14,7 @@ class PdpGallery extends React.Component {
   }
 
   componentDidUpdate() {
+    $('.js-pdp-hero-gallery').slick('unslick');
     this.initGallery();
   }
 

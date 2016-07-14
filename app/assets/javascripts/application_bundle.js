@@ -232,6 +232,7 @@ var PdpGallery = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
+      $('.js-pdp-hero-gallery').slick('unslick');
       this.initGallery();
     }
   }, {
