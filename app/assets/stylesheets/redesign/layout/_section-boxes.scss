@@ -122,8 +122,12 @@ $section-spacing-margin-top: 40px;
 
     .copy-side {
       padding: 0 25px;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
       position: relative;
+
+      p:first-child {
+        margin-top: 14px;
+      }
 
       p a {
         color: $c-neutral-black;
@@ -187,7 +191,7 @@ $section-spacing-margin-top: 40px;
     }
 
     .item-alt {
-      padding: 30px;
+      padding: 11px 30px 30px;
 
       h3 {
         margin-top: 0;
