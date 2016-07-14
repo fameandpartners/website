@@ -1,6 +1,8 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Enquire from 'enquire.js';
+import {Scrollspy} from 'react-scrollspy';
+import {StickyContainer, Sticky} from 'react-sticky';
 
 class PdpGallery extends React.Component {
   constructor() {
@@ -14,7 +16,6 @@ class PdpGallery extends React.Component {
   }
 
   componentDidUpdate() {
-    $('.js-pdp-hero-gallery').slick('unslick');
     this.initGallery();
   }
 
@@ -47,8 +48,10 @@ class PdpGallery extends React.Component {
   }
 
   render() {
-    // check if selected color ID matches any available images
     let foundImage = false;
+    let thumbIds = [];
+
+    // check if selected color ID matches any available images
     this.props.images.map((image, index) => {
       if(image.color_id === this.props.customize.color.id) {
         foundImage = true;
@@ -63,8 +66,11 @@ class PdpGallery extends React.Component {
     // match color id with images
     const IMAGES = this.props.images.map((image, index) => {
       if(image.color_id === COLOR_ID) {
+        let id = "gallery-image-" + index;
+        thumbIds.push(id);
         return (
           <div className="media-wrap" key={index}>
+            <span id={id} className="scrollspy-trigger"></span>
             <img src={image.url} alt={image.alt} />
           </div>
         );
@@ -73,9 +79,22 @@ class PdpGallery extends React.Component {
 
     return (
       <div className="panel-media">
-        <div className="panel-media-inner-wrap js-pdp-hero-gallery">
+        <StickyContainer className="panel-media-inner-wrap js-pdp-hero-gallery">
           {IMAGES}
-        </div>
+          <Sticky topOffset={80} className="scrollspy-thumbs">
+            <Scrollspy items={thumbIds}
+              currentClassName="is-selected">
+              {thumbIds.map((id, index) => {
+                let selector = "#" + id;
+                return (
+                  <li key={index}>
+                    <a href={selector}></a>
+                  </li>
+                );
+              })}
+            </Scrollspy>
+          </Sticky>
+        </StickyContainer>
       </div>
     );
   }
