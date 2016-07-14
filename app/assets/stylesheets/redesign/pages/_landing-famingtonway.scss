@@ -14,6 +14,15 @@ li {
     padding: 0;
     text-decoration: none;
     text-transform: none;
+    list-style: none;
+}
+
+.hide {
+	display: none;
+}
+
+.unhide {
+	display: block;
 }
 
 .col-centered {
@@ -54,7 +63,7 @@ li {
     }
 
     section {
-        margin-top: 65px;
+        margin-top: 50px;
     }
 
     ul.planner-benefits {
@@ -77,6 +86,9 @@ li {
     }
 
     .item {
+    	max-width: 400px;
+    	margin: auto;
+    	margin-top: 20px;
         border: 1px solid #bcbcbc;
         padding: 30px 20px;
     }
@@ -89,7 +101,9 @@ li {
 
 }
 
-@media (max-width: $bootstrap-sm-width - 1px) {
+// END - Landing Page Specific Styling
+
+@media (max-width: $bootstrap-lg-width - 1px) {
 
 	.landing-famingtonway {
 
@@ -146,6 +160,101 @@ li {
 	}
 
 }
+
+// START - Sign up specific styling
+
+.landing-famingtonway {
+
+	#membership_sign-in {
+		display: none;
+	}
+
+	ul.tabs {
+
+		li {
+			display: inline-block;
+			width: 20%;
+			font-size: 1em;
+			font-weight: bold;
+			border-bottom: 1px solid #000000;	
+		}
+
+		.tab-inactive {
+			border-color: #c1c1c1;
+			color: #c1c1c1;
+		}
+
+	}
+
+	.form-wrap {
+		width: 100%;
+		margin-bottom: 30px;
+	}
+
+	span.form-label {
+		letter-spacing: 0.04em;
+	}
+
+	.form-control {
+		margin-top: 5px;
+	}
+
+	.sign-up-form {
+		padding: 20px;
+		max-width:600px;
+	}
+
+	.cta-wrap {
+		margin-bottom: 20px;
+		text-align: center;
+	}
+
+	.secondary-cta-wrap {
+		max-width:340px;
+		margin: auto;
+		margin-top: 20px;
+
+		.secondary-cta { 
+			width: 49%;
+			display: inline-block;
+			color: #000;
+			font-size: 1em;
+		    font-family: "freight-display-pro", serif;
+		    font-weight: 500;
+		    font-style: italic;
+		    text-align: center;
+		    text-transform: none;
+		   
+		}
+	
+	}
+
+}
+
+@media (max-width: $bootstrap-lg-width - 1px) {
+
+	.landing-famingtonway {
+
+		ul.tabs {
+
+			li {
+				
+				width: 27%;
+				
+			}
+
+		}
+
+	}
+}
+
+
+
+
+
+
+
+// END - Sign up specifc styling
 
 
 

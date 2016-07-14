@@ -21,19 +21,13 @@ coffee:
         $(".sign-up-form  #error-email").text("Please fill all fields , password and password confirmation must match !!!")
         $(".sign-up-form  #error-email").show()
 
-.col-md-12.tab-pane.fade#membership_sign-in
-  .membership.plain.moodboard-setup.sign-in-form
+section.col-md-12.tab-pane#membership_sign-in
+  .membership.plain.moodboard-setup.sign-up-form.col-centered
     .row
       .col-md-12
-        h2.title-line-on-sides
-          .inner-wrap SIGN IN
-        .row
-          .col-md-4.left-col
-            = link_to 'Log in with Facebook', fb_auth_path(spree_user_return_to: return_path+"#get_started"), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
-          .col-md-1
-            .separator
-              span or
-          .col-md-7.form-wrap
+        h2.text-center Sign in 
+        section.row
+          .col-md-12.form-wrap
             span#error-email
             .form data-hook="login"
               - login_path = spree.spree_user_session_path(site_version: current_site_version.try(:code))
@@ -42,71 +36,73 @@ coffee:
                   .col-md-12
                     = render :partial =>'shared/redesign/flash_messages', flash: flash
                   .col-md-12.form-group
-                    = f.label :email
+                    span.form-label Email
                     = f.email_field :email, class: 'title', tabindex: 1, :class => 'form-control form-control-md', type: 'email', required: true
                     span.help-block.with-errors
                   .col-md-12.form-group
-                    = f.label :password
+                    span.form-label Password
                     = f.password_field :password, class: 'title', tabindex: 2, :class => 'form-control form-control-md', required: true
                     span.help-block.with-errors
-                  .col-md-12.form-group
-                    .checkbox
-                      label for="spree_user_remember_me"
-                        = f.check_box :remember_me
-                        span= t(:remember_me)
+                    .secondary-cta 
+                        = link_to t(:forgot_password), main_app.new_spree_user_password_path, :id=> 'forgot-password'
+                  / .col-md-12.form-group
+                  /   .checkbox
+                  /     label for="spree_user_remember_me"
+                  /       = f.check_box :remember_me
+                  /       span= t(:remember_me)
                   .col-md-12
-                    .main-cta-wrap
+                    .cta-wrap
                       = f.submit 'Login', class: 'btn btn-black', tabindex: 3
-                      = link_to 'Create a new account', '#membership_sign-up', class:'hidden-xs hidden-sm js-trigger-tabs-create-moodboard'
-                      = link_to t(:forgot_password), main_app.new_spree_user_password_path, :id=> 'forgot-password'
+                    .secondary-cta-wrap
+                      .secondary-cta
+                        = link_to 'Create a new account', '#membership_sign-up', :class => 'js-trigger-tabs-create-moodboard js-trigger-signup'
+                      .secondary-cta
+                        = link_to 'Sign up with Facebook', fb_auth_path(spree_user_return_to: return_path+"#get_started"), class: ''
+                    
 
-
-.col-md-12.tab-pane.fade#membership_sign-up
-  .membership.plain.moodboard-setup.sign-up-form
+section.col-md-12.tab-pane#membership_sign-up
+  .membership.plain.moodboard-setup.sign-up-form.col-centered
     .row
       .col-md-12
-        h2.title-line-on-sides
-          .inner-wrap CREATE AN ACCOUNT
+        h2.text-center Register an account
         - signup_params = {site_version: current_site_version.code}
         = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params), remote: true , :html => {:'data-type' => 'json'} do |f|
           = f.hidden_field :site_version_id, value: current_site_version.id
-        .row
-          .col-md-4.left-col
-            = link_to 'Sign up with facebook', fb_auth_path(spree_user_return_to: return_path+"#get_started"), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
-          .col-md-1
-            .separator
-              span or
-          .col-md-7.form-wrap
+        section.row
+          .col-md-12.form-wrap
             = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params), remote: true , :html => {:'data-type' => 'json'} do |f|
               = f.hidden_field :site_version_id, value: current_site_version.id
               div data-hook="signup"
                 .row
                   .col-md-6.form-group
+                    span.form-label First Name
                     = f.text_field :first_name, required: true, :class => 'form-control form-control-md', :placeholder => t(:first_name)
                     span.help-block.with-errors
                   .col-md-6.form-group
+                    span.form-label Last Name
                     = f.text_field :last_name, required: true, :class => 'form-control form-control-md', :placeholder => t(:last_name)
                     span.help-block.with-errors
                   .col-md-12.form-group
+                    span.form-label Email
                     = f.email_field :email, required: true, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:email), type: 'email'
                     span.help-block.with-errors#error-email
                 #password-credentials
                 .row
                   .col-md-6.form-group
+                    span.form-label Password
                     = f.password_field :password, :id => 'sign-up-password', required: true, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password), 'data-minlength' => '6', 'data-minlength-error' => 'Password is too short (minimum is 6 characters)'
                     span.help-block.with-errors
                   .col-md-6.form-group
+                    span.form-label Password Confirmation
                     = f.password_field :password_confirmation, required: true, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password_confirmation), 'data-match' => '#sign-up-password', 'data-match-error' => 'Password fields must match.'
                     span.help-block.with-errors
                   .col-md-12.form-group
-                    .checkbox
-                      label for="spree_user_newsletter"
-                        = f.check_box :newsletter, :checked => 'checked'
-                        span
-                          ' Receive new styles in my inbox each week + $25 off
                   .col-md-12 data-hook="signup_below_password_fields"
-                    .main-cta-wrap
-                      = f.submit 'Create account', class: 'btn btn-black'
-                      span Already have an account?
-                      = link_to 'Sign in here', '#membership_sign-in', class:'hidden-xs hidden-sm js-trigger-tabs-create-moodboard'
-                      = link_to 'Sign in here', '#membership_sign-in', class:'btn btn-default hidden-md hidden-lg js-trigger-tabs-create-moodboard'
+                    .cta-wrap
+                      = f.submit 'Register now', class: 'btn btn-black'
+                    .secondary-cta-wrap
+                      .secondary-cta
+                        = link_to 'I already have an account', '#membership_sign-in', :class => 'js-trigger-tabs-create-moodboard js-trigger-signup'
+                      .secondary-cta
+                        = link_to 'Sign up with Facebook', fb_auth_path(spree_user_return_to: return_path+"#get_started"), class: ''
+
