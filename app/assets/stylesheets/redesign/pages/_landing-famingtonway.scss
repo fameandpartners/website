@@ -1,13 +1,158 @@
 /* [Landing Page - Famingtonway]
 -------------------------------------------------------*/
-.landing-famingtonway {
-  margin-bottom: 30px;
-  .cta{
-    margin-bottom: 50px;
-    font-size: 1.5em;
-  }
 
-  .create-wedding-board-wrap {
+// START - General Styling
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    text-transform: none;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.centered-cta {
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+
+// END - General Styling
+
+// START - Landing Page Specific Styling
+
+.landing-famingtonway {
+    margin-bottom: 30px;
+
+    // Hero Banner Styling
+
+    .main-hero-wrap {
+        background-color: #f5f5f5;
+        min-height: 300px;
+        .title-wrapper {
+            max-width: 400px;
+            margin-top: 110px;
+         
+        }
+    }
+
+    // Offset pulls overlay inline with border
+
+    .overlay-offset {
+        position: relative;
+        top: -15px;
+    }
+
+    section {
+        margin-top: 65px;
+    }
+
+    ul.planner-benefits {
+        margin-top: 50px;
+        li {
+            padding: 0 10px;
+            display: inline-block;
+            border-left: 1px solid #bcbcbc;
+        }
+    }
+
+    // START - image offsets
+
+    .img-text-offset {
+        margin-top: 105px;
+    }
+
+    .bordered {
+    	border: 1px solid #bcbcbc;
+    }
+
+    .item {
+        border: 1px solid #bcbcbc;
+        padding: 30px 20px;
+    }
+
+	.expunge-border {
+	    border-left: 0;
+	}
+
+	// END - image offsets
+
+}
+
+@media (max-width: $bootstrap-sm-width - 1px) {
+
+	.landing-famingtonway {
+
+		// START - mobile resets
+
+		.img-text-offset {
+			margin-top: 30px;
+		}
+
+		.full-width-mobile-reset {
+			width: 100%;
+			padding: 0;
+		}
+
+		.item-alt {
+			padding: 0;
+		}
+
+		.margin-reset {
+			margin-left: 0;
+			margin-right: 0;
+		}
+
+		ul.planner-benefits  {
+
+			li.expunge-mobile-border {
+				border: 0;	
+			}
+
+			li {
+				padding-bottom: 10px;
+			}
+			
+		}
+
+		// END - mobile resets
+
+		.img-module-top-padding {
+			padding-top: 20px;
+		}
+
+		.title-wrapper {
+			margin-bottom: 25px;
+		}
+
+		.text-center-mobile {
+			text-align: center;
+		}
+
+		.item {
+	        margin-bottom: 20px;
+	    }
+
+	}
+
+}
+
+
+
+
+
+
+ /* .create-wedding-board-wrap {
     position: relative;
     min-height: 420px;
     @extend %cfix;
@@ -530,6 +675,6 @@
       padding-top: 30px;
     }
 
-  }
+  }*/
 
-}
+/*}*/
