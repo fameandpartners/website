@@ -22,17 +22,13 @@ module Importers
     private
 
     def parse_file
-      progress = ProgressBar.create(total: csv_line_count, format: 'Processed: %c/%C  |%w%i| %e')
+      csv_line_count = `wc -l "#{csv_file}"`.strip.split(' ')[0].to_i # Thanks to http://stackoverflow.com/questions/2650517/count-the-number-of-lines-in-a-file-without-reading-entire-file-into-memory
+      progress       = ProgressBar.create(total: csv_line_count, format: 'Processed: %c/%C  |%w%i| %e')
       CSV.foreach(csv_file, headers: true, skip_blanks: true, encoding: 'windows-1251:utf-8') do |csv_row|
         progress.increment
         yield csv_row
       end
       progress.finish
-    end
-
-    def csv_line_count
-      # Thanks to http://stackoverflow.com/questions/2650517/count-the-number-of-lines-in-a-file-without-reading-entire-file-into-memory
-      `wc -l "#{csv_file}"`.strip.split(' ')[0].to_i
     end
 
     class BergenProductTemplate
@@ -77,14 +73,21 @@ module Importers
       end
 
       def create_global_sku
-        # variant = Spree::Variant.where('sku ILIKE ?', style).first
-        Spree::Variant.
-          includes(:option_values).
-          where('sku ILIKE ?', "#{style}%").
-          where('spree_option_values.name ILIKE ?', color).
-          where('spree_option_values.name ILIKE ?', "%#{us_size}%").
-          to_sql
+        variants       = Spree::Variant.includes(option_values: :option_type).where('sku ILIKE ?', "#{style}%")
+        # variant_colors = variants.map(&:dress_color).compact.map(&:name).uniq
+        # variant_sizes  = variants.map(&:dress_size).compact.map(&:name).uniq.map(&:downcase).map {|size| size.split('/')[0]}
 
+        #   where('spree_option_values.name ILIKE ?', color).
+        #   where('spree_option_values.name ILIKE ?', "%#{us_size}%")
+
+        if variants.empty?
+          puts "DOES NOT EXIST #{style}"
+        end
+
+        # puts ['Does it has color? ', "(#{color}): ", variant_colors.include?(color)].join
+        # puts ['Does it has US size? ', "(#{us_size}): ", variant_sizes.include?(us_size)].join
+
+        # TODO: Also notice that there's the possibility of non-existant Styles!!!
         # TODO: How to handle variants that never existed in the system!?
 
 
