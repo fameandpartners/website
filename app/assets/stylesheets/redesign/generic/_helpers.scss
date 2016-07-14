@@ -103,6 +103,7 @@
   position: relative !important;
 }
 
+// Same-height columns
 @media (min-width: $bootstrap-md-width) {
 
   .same-height-cols {
@@ -116,6 +117,44 @@
       flex: 1 1 auto;
     }
 
+  }
+
+}
+
+// Five Equal Columns
+.col-xs-5ths, .col-sm-5ths, .col-md-5ths, .col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-xs-5ths {
+    width: 20%;
+    float: left;
+}
+
+@media (min-width: $bootstrap-sm-width) {
+
+  .col-sm-5ths {
+      width: 20%;
+      float: left;
+  }
+
+}
+@media (min-width: $bootstrap-md-width) {
+
+  .col-md-5ths {
+      width: 20%;
+      float: left;
+  }
+
+}
+@media (min-width: $bootstrap-lg-width) {
+
+  .col-lg-5ths {
+      width: 20%;
+      float: left;
   }
 
 }
