@@ -245,10 +245,70 @@ ruby:
   .section-wrapper.section-instagram
     .container
       .row
-        .col-md-12.text-center
-          .instagram-widget
-            <script src="//foursixty.com/media/scripts/fs.embed.v2.js" data-feed-id="fame-and-partners" data-theme="showcase_v2" data-page-size="5"></script>
+        .instagram-widget
 
+          // Instagram Item
+          .item.col-md-5ths.col-xs-6
+            = link_to 'https://www.instagram.com/p/BHXo0l7jvzR/?hl=en', class: 'item-wrap'
+              .media-wrap
+                = image_tag 'homepage/get-social/instagram-1.jpg', :class => 'img-responsive'
+                .overlay
+                  .overlay-outer-wrap
+                    .overlay-inner-wrap
+                      span.cta-instagram
+                        span.user @jessalizzi
+                        span.cta-link shop
+
+          // Instagram Item
+          .item.col-md-5ths.col-xs-6
+            = link_to 'https://www.instagram.com/p/BGqCdjFS1Jz/?taken-by=fameandpartners&hl=en', class: 'item-wrap'
+              .media-wrap
+                = image_tag 'homepage/get-social/instagram-2.jpg', :class => 'img-responsive'
+                .overlay
+                  .overlay-outer-wrap
+                    .overlay-inner-wrap
+                      span.cta-instagram
+                        span.user @lainyhedaya
+                        span.cta-link shop
+
+          // Instagram Item
+          .item.col-md-5ths.col-xs-6
+            = link_to 'https://www.instagram.com/p/BHiDoBODX1A/?taken-by=fameandpartners&hl=en', class: 'item-wrap'
+              .media-wrap
+                = image_tag 'homepage/get-social/instagram-3.jpg', :class => 'img-responsive'
+                .overlay
+                  .overlay-outer-wrap
+                    .overlay-inner-wrap
+                      span.cta-instagram
+                        span.user @samblacky
+                        span.cta-link shop
+
+          // Instagram Item
+          .item.col-md-5ths.col-xs-6
+            = link_to 'https://www.instagram.com/p/BHqKt6PjQFU/?taken-by=fameandpartners&hl=en', class: 'item-wrap'
+              .media-wrap
+                = image_tag 'homepage/get-social/instagram-4.jpg', :class => 'img-responsive'
+                .overlay
+                  .overlay-outer-wrap
+                    .overlay-inner-wrap
+                      span.cta-instagram
+                        span.user @carodaur
+                        span.cta-link shop
+
+          // Instagram Item
+          .item.col-md-5ths.hidden-sm.hidden-xs
+            = link_to 'https://www.instagram.com/p/BH0p3MCgEUx/?taken-by=fameandpartners&hl=en', class: 'item-wrap'
+              .media-wrap
+                = image_tag 'homepage/get-social/instagram-5.jpg', :class => 'img-responsive'
+                .overlay
+                  .overlay-outer-wrap
+                    .overlay-inner-wrap
+                      span.cta-instagram
+                        span.user @kirstenanderton
+                        span.cta-link shop
+
+      .row
+        .col-md-12.text-center
           = link_to shop_social_path
               span.btn-xs.btn-featured
                 | Shop <span class="copy-highlight">Instagram</span>
