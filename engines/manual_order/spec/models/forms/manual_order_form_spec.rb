@@ -6,14 +6,6 @@ describe Forms::ManualOrderForm do
   context 'process' do
     include_context 'manual order context'
 
-    before(:each) do
-      rememoize(Spree::OptionType, :@color)
-      rememoize(Spree::OptionType, :@size)
-      rememoize(Repositories::ProductSize, :@sizes_map)
-      ProductColorValue.belongs_to(:option_value, class_name: 'Spree::OptionValue',
-                                   conditions: ['option_type_id = ?', Spree::OptionType.color_scope ])
-    end
-
     let(:false_params){
       {
         currency: 'USD',
