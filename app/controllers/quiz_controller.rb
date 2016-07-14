@@ -20,13 +20,13 @@ class QuizController < ApplicationController
     title(quiz_titles[@quiz_type], default_seo_title)
     description(quiz_descriptions[@quiz_type])
 
-    @quiz = Quiz.active
+    @quiz = Quiz.send("#{@quiz_type}_quiz")
     @questions_by_steps = @quiz.questions.includes(:answers).order('position ASC').group_by(&:step)
   end
 
   # answers#create
   def update
-    quiz = Quiz.last
+    quiz = Quiz.send("#{@quiz_type}_quiz")
     question_ids = params[:quiz][:questions].keys
 
     unless quiz.questions.find(question_ids).size.eql?(quiz.questions.size)
