@@ -20,7 +20,5 @@ RSpec.configure do |config|
     # Legacy
     MemoizationSupport.rememoize(Repositories::ProductColors, :@color_groups)
     MemoizationSupport.rememoize(Repositories::ProductSize, :@sizes_map)
-    ProductColorValue.belongs_to(:option_value, class_name: 'Spree::OptionValue',
-                                 conditions: ['option_type_id = ?', Spree::OptionType.color_scope ])
   end
 end
