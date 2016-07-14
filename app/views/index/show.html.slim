@@ -96,36 +96,36 @@ ruby:
             .item-copy
               h3 Your <em>personal</em> atelier.
               p.summary Timeless appeal. Contemporary edge. Completely customizable to suit your style.
-              // TODO: update link.
-              = link_to 'javascript:;'
+              = link_to '/dresses/new-this-week'
                 span.cta-link-arrow-right
                   span.copy-highlight Explore
                   i.icon.icon-arrow-right
-            = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive', alt: 'Your personal atelier'
+            = link_to '/dresses/new-this-week'
+              = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive', alt: 'Your personal atelier'
 
         .col-md-4.hidden-sm.hidden-sm
           .item.bordered
             .item-copy
               h3 <em>Made</em>-to-order.
               p.summary Each piece is handmade just for you. <br class="visible-lg-block">No mass production, less waste.
-              // TODO: update link.
-              = link_to 'javascript:;', class: "cta-link-sm"
+              = link_to about_us_path
                 span.cta-link-arrow-right
                   span.copy-highlight Learn more
                   i.icon.icon-arrow-right
-            = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive', alt: 'Made-to-order'
+            = link_to about_us_path
+              = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive', alt: 'Made-to-order'
 
         .col-md-4.hidden-sm.hidden-sm
           .item.bordered
             .item-copy
               h3 Tailored for <em>you</em>.
               p.summary Our signature size model means never<br class="visible-lg-block"> having to say, "It doesn't fit."
-              // TODO: update link.
-              = link_to 'javascript:;', class: "cta-link-sm"
+              = link_to size_guide_path
                 span.cta-link-arrow-right
                   span.copy-highlight The Fit Guide
                   i.icon.icon-arrow-right
-            = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive', alt: 'Tailored for you'
+            = link_to size_guide_path
+              = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive', alt: 'Tailored for you'
 
   // Section: Style icon
   section.section-box.container.section-style-icon
@@ -168,7 +168,7 @@ ruby:
 
       .row
         .col-md-6.cta-item
-          = link_to "#"
+          = link_to 'dresses/slip-dress'
             .section-img-wrap.copy-center
               picture
                 .img-wrap
@@ -188,7 +188,7 @@ ruby:
                           span.copy-highlight  Our Slip Dress Edit
 
         .col-md-6.cta-item
-          = link_to "#"
+          = link_to 'dresses/ball-gowns'
             .section-img-wrap.copy-center
               picture
                 .img-wrap
@@ -209,7 +209,7 @@ ruby:
 
       .row
         .col-md-6.cta-item
-          = link_to "#"
+          = link_to '/dresses/cocktail'
             .section-img-wrap.copy-center
               picture
                 .img-wrap
@@ -229,7 +229,7 @@ ruby:
                           span.copy-highlight  Our Cocktail Edit
 
         .col-md-6.cta-item
-          = link_to "#"
+          = link_to 'dresses/wedding'
             .section-img-wrap.copy-center
               picture
                 .img-wrap
@@ -263,7 +263,7 @@ ruby:
             h3 Welcome to the F&P shopping experience: collections curated specifically for you, based on your personal style, preferred fit, and inspirations.
             p Launching soon, our Style Quiz and Fit Finder features will give us the tools to create a custom collection that speaks to you. Until then, get advice from a style expert anytime through Live Chat.
 
-            = link_to 'javascript:;'
+            = link_to 'javascript:;', onclick: '$zopim.livechat.window.show();'
               span.btn-xs.btn-featured
                 | Start <span class="copy-highlight">Chatting</span>
 
