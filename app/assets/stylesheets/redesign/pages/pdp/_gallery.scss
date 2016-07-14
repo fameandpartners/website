@@ -1,0 +1,34 @@
+/* [PDP - gallery]
+-------------------------------------------------------*/
+.slick-dots {
+  position: relative;
+  margin-top: -32px;
+  padding: 0 15px;
+  text-align: right;
+
+  li {
+    border-left: none;
+  }
+
+  a {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border: solid $c-neutral-8 1px;
+  }
+
+  .slick-active a {
+    background: $c-neutral-black;
+    border-color: $c-neutral-black;
+  }
+
+  @media (min-width: $bootstrap-sm-width) {
+
+    width: 50%;
+    margin: 5px 0 5px 50%;
+    padding: 0 15px;
+    text-align: center;
+
+  }
+
+}

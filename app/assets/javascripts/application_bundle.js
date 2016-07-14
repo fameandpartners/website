@@ -242,6 +242,9 @@ var PdpGallery = function (_React$Component) {
           $('.js-pdp-hero-gallery').slick({
             arrows: false,
             dots: true,
+            customPaging: function customPaging() {
+              return '<a href="javascript:;"></a>';
+            },
             slidesToShow: 2,
             slidesToScroll: 2,
             responsive: [{

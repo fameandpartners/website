@@ -23,6 +23,9 @@ class PdpGallery extends React.Component {
         $('.js-pdp-hero-gallery').slick({
           arrows: false,
           dots: true,
+          customPaging: function() {
+            return '<a href="javascript:;"></a>';
+          },
           slidesToShow: 2,
           slidesToScroll: 2,
           responsive: [
@@ -55,7 +58,7 @@ class PdpGallery extends React.Component {
     const COLOR_ID = foundImage
       ? this.props.customize.color.id
       : this.props.product.color_id;
-      
+
     // match color id with images
     const IMAGES = this.props.images.map((image, index) => {
       if(image.color_id === COLOR_ID) {
