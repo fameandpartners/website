@@ -25,3 +25,9 @@ every(1.day, at: '10:00 am') { rake 'reports:daily_reports[16, 2]' }
 every(1.day, at: '12:00 pm') { rake 'reports:daily_reports[18, 2]' }
 every(1.day, at: '2:00 pm') { rake 'reports:daily_reports[20, 2]' }
 every(1.day, at: '4:00 pm') { rake 'reports:daily_reports[22, 2]' }
+
+# Bergen scheduled tasks
+
+every(30.minutes) { rake 'bergen:workers:verify_style_masters' }
+every(30.minutes) { rake 'bergen:workers:create_asns' }
+every(3.hours)    { rake 'bergen:workers:receive_asns' }

@@ -30,6 +30,9 @@ module Bergen
 
       belongs_to :return_request_item
 
+      scope :not_failed, -> { where(failed: false) }
+      scope :months_old, -> (months) { where(updated_at: months.to_i.months.ago..Time.zone.now) }
+
       attr_accessible :return_request_item
 
       validates :return_request_item, presence: true
@@ -37,8 +40,11 @@ module Bergen
       def start_process
         if from_the_usa? && item_for_return?
           save!
-          Workers::VerifyStyleMasterWorker.perform_async(self.id)
         end
+      end
+
+      def verify_style_master
+        Workers::VerifyStyleMasterWorker.perform_async(self.id)
       end
 
       def create_asn
