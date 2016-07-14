@@ -1,0 +1,26 @@
+/* [Carousel Navigation]
+-------------------------------------------------------*/
+
+.slick-dots {
+  position: relative;
+  margin-top: -50px;
+  text-align: center;
+
+  button {
+    display: none;
+  }
+
+  li {
+    padding: 5px;
+    margin: 0 7px;
+    display: inline-block;
+    border: solid $c-neutral-8 1px;
+    cursor: pointer;
+  }
+
+  .slick-active {
+    background: $c-neutral-black;
+    border-color: $c-neutral-black;
+  }
+
+}
