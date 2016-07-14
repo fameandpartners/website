@@ -11,6 +11,10 @@ export function productReducer(state = {}, action) {
   return state;
 }
 
+export function imagesReducer(state = {}, action) {
+  return state;
+}
+
 export function discountReducer(state = {}, action) {
   return state;
 }

@@ -10,11 +10,15 @@ ruby:
   end
 
   # NOTE: this JS block is loaded into the head, this should contain page data only
+  # TODO: @product source will need to be cleaned, we have way too many duplicated there
+  #       also images are mess, have to load all_images separately because images inside
+  #       of @pruduct.images include mix of images in defferent ratios.
   product_details_page_data = "
     window.PdpDataFull = {
       paths: #{ product_paths.to_json },
       product: #{ @product.to_json },
-      discount: #{ @productDiscount }
+      discount: #{ @productDiscount},
+      images: #{@product.all_images.to_json}
     };"
 
 = content_for :inline_javascript_top do

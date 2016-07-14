@@ -263,22 +263,35 @@ var PdpGallery = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var images = this.props.product.images.map(function (image, index) {
-        if (image.table.color_id === _this2.props.customize.color.id) {
+      // check if selected color ID matches any available images
+      var foundImage = false;
+      this.props.images.map(function (image, index) {
+        if (image.color_id === _this2.props.customize.color.id) {
+          foundImage = true;
+        }
+      });
+
+      // if no match found, use default dress color
+      var COLOR_ID = foundImage ? this.props.customize.color.id : this.props.product.color_id;
+
+      // match color id with images
+      var IMAGES = this.props.images.map(function (image, index) {
+        if (image.color_id === COLOR_ID) {
           return _react2.default.createElement(
             'div',
             { className: 'media-wrap', key: index },
-            _react2.default.createElement('img', { src: image.table.original, alt: 'Product image' })
+            _react2.default.createElement('img', { src: image.url, alt: image.alt })
           );
         }
       });
+
       return _react2.default.createElement(
         'div',
         { className: 'panel-media' },
         _react2.default.createElement(
           'div',
           { className: 'panel-media-inner-wrap js-pdp-hero-gallery' },
-          images
+          IMAGES
         )
       );
     }
@@ -289,13 +302,15 @@ var PdpGallery = function (_React$Component) {
 
 PdpGallery.propTypes = {
   customize: _react.PropTypes.object.isRequired,
-  product: _react.PropTypes.object.isRequired
+  product: _react.PropTypes.object.isRequired,
+  images: _react.PropTypes.array.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
-    product: state.product
+    product: state.product,
+    images: state.images
   };
 }
 
@@ -1739,6 +1754,7 @@ var _pdpReducers = require('./pdpReducers');
 
 var rootReducer = (0, _redux.combineReducers)({
   product: _pdpReducers.productReducer,
+  images: _pdpReducers.imagesReducer,
   discount: _pdpReducers.discountReducer,
   paths: _pdpReducers.productPathsReducer,
   lengths: _pdpReducers.lengthReducer,
@@ -1756,6 +1772,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.customizeReducer = customizeReducer;
 exports.productReducer = productReducer;
+exports.imagesReducer = imagesReducer;
 exports.discountReducer = discountReducer;
 exports.productPathsReducer = productPathsReducer;
 exports.lengthReducer = lengthReducer;
@@ -1773,6 +1790,13 @@ function customizeReducer() {
 }
 
 function productReducer() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  var action = arguments[1];
+
+  return state;
+}
+
+function imagesReducer() {
   var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   var action = arguments[1];
 

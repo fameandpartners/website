@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import {productReducer,
+        imagesReducer,
         discountReducer,
         productPathsReducer,
         lengthReducer,
@@ -8,6 +9,7 @@ import {productReducer,
 
 const rootReducer = combineReducers({
   product: productReducer,
+  images: imagesReducer,
   discount: discountReducer,
   paths: productPathsReducer,
   lengths: lengthReducer,

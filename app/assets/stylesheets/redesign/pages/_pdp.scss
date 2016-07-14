@@ -2,7 +2,6 @@
 -------------------------------------------------------*/
 .pdp {
   position: relative;
-  min-height: 100vh;
 
   h1, .h1,
   h2, .h2 {
@@ -39,6 +38,10 @@
       border-left: solid $c-neutral-8 1px;
     }
 
+  }
+
+  .main-content-area {
+    min-height: 100vh;
   }
 
   .c-carousel-inspiration__item {
@@ -119,7 +122,7 @@
 
   .panel-media .media-wrap {
     display: flex;
-    justify-content: center;
+    //justify-content: center;
     height: 100vh;
     max-height: 850px; // NOTE: this will need to be change when we get new product images
     padding-top: $mega-menu-desktop-height;

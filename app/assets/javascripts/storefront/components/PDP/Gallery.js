@@ -43,19 +43,34 @@ class PdpGallery extends React.Component {
   }
 
   render() {
-    const images = this.props.product.images.map((image, index) => {
-      if(image.table.color_id === this.props.customize.color.id) {
+    // check if selected color ID matches any available images
+    let foundImage = false;
+    this.props.images.map((image, index) => {
+      if(image.color_id === this.props.customize.color.id) {
+        foundImage = true;
+      }
+    });
+
+    // if no match found, use default dress color
+    const COLOR_ID = foundImage
+      ? this.props.customize.color.id
+      : this.props.product.color_id;
+      
+    // match color id with images
+    const IMAGES = this.props.images.map((image, index) => {
+      if(image.color_id === COLOR_ID) {
         return (
           <div className="media-wrap" key={index}>
-            <img src={image.table.original} alt="Product image" />
+            <img src={image.url} alt={image.alt} />
           </div>
         );
       }
     });
+
     return (
       <div className="panel-media">
         <div className="panel-media-inner-wrap js-pdp-hero-gallery">
-          {images}
+          {IMAGES}
         </div>
       </div>
     );
@@ -65,13 +80,15 @@ class PdpGallery extends React.Component {
 
 PdpGallery.propTypes = {
   customize: PropTypes.object.isRequired,
-  product: PropTypes.object.isRequired
+  product: PropTypes.object.isRequired,
+  images: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
-    product: state.product
+    product: state.product,
+    images: state.images
   };
 }
 
