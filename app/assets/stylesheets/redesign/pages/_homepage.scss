@@ -151,6 +151,15 @@
       margin-top: $section-spacing-margin-top;
     }
 
+    .hero-wrap .copy-wrap {
+      padding-top: 30px;
+    }
+
+    .hero-tile-carousel .slick-dots {
+      top: -285px;
+      margin-top: 0;
+    }
+
   }
 
   @media (min-width: $bootstrap-sm-width) {
@@ -165,6 +174,16 @@
 
     .section-styling .inline-btn {
       display:block;
+    }
+
+  }
+
+  // Note: This breakpoint was manually added because all the other mobile variables make it look awful...
+  // TODO: make this a variable perhaps?
+  @media (max-width: 535px) {
+
+    .hero-tile-carousel .slick-dots {
+      top: -345px;
     }
 
   }

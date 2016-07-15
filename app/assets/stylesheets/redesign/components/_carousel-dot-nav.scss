@@ -23,4 +23,12 @@
     border-color: $c-neutral-black;
   }
 
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    li {
+      padding: 8px;
+    }
+
+  }
+
 }
