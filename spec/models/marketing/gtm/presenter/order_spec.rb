@@ -20,16 +20,15 @@ module Marketing
           context 'given a spree order' do
             it 'returns hash order details' do
               expect(subject.body).to eq({
-                                             currency:           'AUD',
-                                             email:              'something@intheway.com',
-                                             line_items:         [],
-                                             line_items_summary: [],
-                                             number:             'R123456',
-                                             shipping_amount:    0.0,
-                                             taxes_amount:       0.0,
-                                             total_amount:       24.68,
-                                             transaction_amount: '0.00',
-                                             transaction_id:     nil
+                                             currency:               'AUD',
+                                             email:                  'something@intheway.com',
+                                             line_items:             [],
+                                             line_items_summary:     [],
+                                             number:                 'R123456',
+                                             shipping_amount:        0.0,
+                                             taxes_amount:           0.0,
+                                             total_amount:           24.68,
+                                             humanized_total_amount: '24.68'
                                          })
             end
           end
