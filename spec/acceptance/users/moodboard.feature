@@ -5,7 +5,6 @@ Feature: Add to Moodboard
     Given A sample database with valid data
     And Data is setup correctly
     And The "moodboard" feature is enabled
-    And The "enhanced_moodboards" feature is enabled
     And The example user is signed in
 
   @javascript
