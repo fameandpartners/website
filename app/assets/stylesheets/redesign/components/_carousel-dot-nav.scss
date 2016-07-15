@@ -5,6 +5,7 @@
   position: relative;
   margin-top: -50px;
   text-align: center;
+  padding: 0;
 
   button {
     display: none;
@@ -16,6 +17,15 @@
     display: inline-block;
     border: solid $c-neutral-8 1px;
     cursor: pointer;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
   }
 
   .slick-active {
