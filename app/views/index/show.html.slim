@@ -84,48 +84,49 @@ ruby:
       .col-md-12.heading-overlay-wrapper
         h2.heading-overlay The Fame Story
 
-    .same-height-cols.tag-info-section
-      .tag-info-wrapper
+    .tag-info-section
+      .tag-info-wrapper.visible-lg-block
         .tag-info
           .section-name.vertical-text The Fame Story
           .diagonal-line
 
-      .row
-        .col-md-4
-          .item.bordered
-            .item-copy
-              h3 Your <em>personal</em> atelier.
-              p.summary Timeless appeal. Contemporary edge. Completely customizable to suit your style.
+      .same-height-cols
+        .row
+          .col-md-4
+            .item.bordered
+              .item-copy
+                h3 Your <em>personal</em> atelier.
+                p.summary Timeless appeal. Contemporary edge. Completely customizable to suit your style.
+                = link_to '/dresses/new-this-week'
+                  span.cta-link-arrow-right
+                    span.copy-highlight Explore
+                    i.icon.icon-arrow-right
               = link_to '/dresses/new-this-week'
-                span.cta-link-arrow-right
-                  span.copy-highlight Explore
-                  i.icon.icon-arrow-right
-            = link_to '/dresses/new-this-week'
-              = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive', alt: 'Your personal atelier'
+                = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive', alt: 'Your personal atelier'
 
-        .col-md-4.hidden-sm.hidden-sm
-          .item.bordered
-            .item-copy
-              h3 <em>Made</em>-to-order.
-              p.summary Each piece is handmade just for you. <br class="visible-lg-block">No mass production, less waste.
+          .col-md-4.hidden-sm.hidden-sm
+            .item.bordered
+              .item-copy
+                h3 <em>Made</em>-to-order.
+                p.summary Each piece is handmade just for you. <br class="visible-lg-block">No mass production, less waste.
+                = link_to about_us_path
+                  span.cta-link-arrow-right
+                    span.copy-highlight Learn more
+                    i.icon.icon-arrow-right
               = link_to about_us_path
-                span.cta-link-arrow-right
-                  span.copy-highlight Learn more
-                  i.icon.icon-arrow-right
-            = link_to about_us_path
-              = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive', alt: 'Made-to-order'
+                = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive', alt: 'Made-to-order'
 
-        .col-md-4.hidden-sm.hidden-sm
-          .item.bordered
-            .item-copy
-              h3 Tailored for <em>you</em>.
-              p.summary Our signature size model means never<br class="visible-lg-block"> having to say, "It doesn't fit."
+          .col-md-4.hidden-sm.hidden-sm
+            .item.bordered
+              .item-copy
+                h3 Tailored for <em>you</em>.
+                p.summary Our signature size model means never<br class="visible-lg-block"> having to say, "It doesn't fit."
+                = link_to size_guide_path
+                  span.cta-link-arrow-right
+                    span.copy-highlight The Fit Guide
+                    i.icon.icon-arrow-right
               = link_to size_guide_path
-                span.cta-link-arrow-right
-                  span.copy-highlight The Fit Guide
-                  i.icon.icon-arrow-right
-            = link_to size_guide_path
-              = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive', alt: 'Tailored for you'
+                = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive', alt: 'Tailored for you'
 
   // Section: Style icon
   section.section-box.container.section-style-icon
@@ -134,7 +135,7 @@ ruby:
         h2.heading-overlay F&P Style icon
 
     .tag-info-section
-      .tag-info-wrapper
+      .tag-info-wrapper.visible-lg-block
         .tag-info
           .section-name.vertical-text F&P Style icon
           .diagonal-line
@@ -151,7 +152,7 @@ ruby:
                   #{image_path("homepage/fp-style-icon/fp-style-icon-1-retina.jpg")} 1024w' alt="F&P Style Icon"
 
     .tag-info-section
-      .tag-info-wrapper
+      .tag-info-wrapper.visible-lg-block
         .tag-info
           .section-name.vertical-text Our Edits
           .diagonal-line
@@ -242,7 +243,7 @@ ruby:
   section.section-box.container.section-styling
 
     .tag-info-section
-      .tag-info-wrapper
+      .tag-info-wrapper.visible-lg-block
         .tag-info
           .section-name.vertical-text Guided Browsing
           .diagonal-line
@@ -290,7 +291,7 @@ ruby:
         .row
 
         .tag-info-section
-          .tag-info-wrapper
+          .tag-info-wrapper.visible-lg-block
             .tag-info
               .section-name.vertical-text Get Social
               .diagonal-line
