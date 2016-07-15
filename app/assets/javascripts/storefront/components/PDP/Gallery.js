@@ -23,6 +23,7 @@ class PdpGallery extends React.Component {
     Enquire.register('screen and (max-width: 992px)', {
       match: () => {
         $('.js-pdp-hero-gallery').slick({
+          infinite: false,
           arrows: false,
           dots: true,
           customPaging: function() {

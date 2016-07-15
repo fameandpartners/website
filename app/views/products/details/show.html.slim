@@ -53,8 +53,8 @@ form.hide-fully#pdpDataForWishlist
   
 .pdp
   .container
-    .row.main-content-area
-      .col-md-3
+    .row.main-content-area.mobile-change-order
+      .col-xs-12.col-sm-6.col-md-3.position-1
         .panel-side-wrap
           .panel-side.panel-side--left.js-panel-side-left data-spy='affix'
             .panel-side-container
@@ -79,9 +79,7 @@ form.hide-fully#pdpDataForWishlist
                 li Free Shipping
                 li Easy Returns
 
-      .col-md-6
-        #PdpGallery
-      .col-md-3
+      .col-xs-12.col-sm-6.col-md-3.position-2
         .panel-side-wrap
           .panel-side.js-panel-side-right data-spy='affix'
             #PdpSidePanelRight
@@ -191,9 +189,10 @@ form.hide-fully#pdpDataForWishlist
             a.btn.btn-black Book your free styling session
         .col-md-8
           = render partial: 'related_products', locals: { product: @product }
+          
       // content styling advice END
       
-    // content bottom wrap END 
+    // content bottom wrap END
 
 = render partial: 'micro_data'
     

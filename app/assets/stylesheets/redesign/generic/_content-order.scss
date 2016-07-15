@@ -7,9 +7,9 @@
     display: -moz-box;
     display: box;
 
-    -webkit-box-orient: vertical;
-    -moz-box-orient: vertical;
-    box-orient: vertical;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    box-orient: horizontal;
 
     [class^='position-'],
     [class*='position-'] {

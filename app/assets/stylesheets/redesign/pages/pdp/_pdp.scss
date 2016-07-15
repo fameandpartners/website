@@ -52,101 +52,6 @@
     position: relative;
   }
 
-  .panel-side {
-    position: fixed;
-    top: 0;
-    width: 262px;
-    height: 100vh;
-
-    .btn-wrap {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      text-align: center;
-
-      > .btn,
-      > div {
-        margin-bottom: 25px;
-      }
-
-      .est-delivery {
-        line-height: 1;
-        font-family: $font-heading;
-        font-weight: 300;
-        font-size: 0.75em;
-        font-style: italic;
-      }
-
-      .price {
-        font-weight: bold;
-      }
-
-    }
-
-    &--left {
-
-      a {
-        display: block;
-        margin-top: 30px;
-        text-decoration: underline;
-      }
-
-    }
-
-  }
-
-  .panel-side-container {
-    padding-top: $mega-menu-desktop-height + 100;
-
-    > div:not(.btn-wrap) {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      padding-top: $mega-menu-desktop-height + 100;
-      //overflow-x: hidden;
-      overflow: hidden;
-    }
-
-  }
-
-  .panel-media {
-    overflow: hidden;
-  }
-
-  .panel-media-inner-wrap {
-    margin-bottom: -$mega-menu-desktop-height;
-  }
-
-  .panel-media .media-wrap {
-    position: relative;
-    display: flex;
-    //justify-content: center;
-    height: 100vh;
-    max-height: 850px; // NOTE: this will need to be change when we get new product images
-    padding-top: $mega-menu-desktop-height;
-    background: transparent;
-
-    &:not(:first-child) {
-      margin-top: -($mega-menu-desktop-height - 30);
-    }
-
-    img {
-      width: auto;
-      height: 100%;
-      margin-top: -$mega-menu-desktop-height;
-    }
-
-    .scrollspy-trigger {
-      position: absolute;
-      top: 100px;
-      left: 0;
-    }
-
-  }
-
   .c-card-customize {
     margin-bottom: 70px;
   }
@@ -582,48 +487,9 @@
 
   }
 
-  @media (max-width: $bootstrap-lg-width - 1px) {
-
-    .panel-side {
-      width: 215px;
-    }
-
-  }
-
   @media (max-width: $bootstrap-md-width - 1px) {
 
     padding-top: 0;
-
-    .panel-media-inner-wrap {
-      margin-bottom: 0;
-    }
-
-    .panel-media .media-wrap {
-      display: block;
-      height: auto;
-      padding-top: 0;
-
-      &:not(:first-child) {
-        margin-top: 0;
-      }
-
-      img {
-        width: 100%;
-        height: auto;
-        margin-top: 0;
-      }
-
-    }
-
-    .panel-side--left {
-      display: none; // NOTE: this is temp
-    }
-
-    .panel-side {
-      position: relative;
-      width: auto;
-      height: auto;
-    }
 
     .panel-side-container {
       padding-top: 0;
@@ -633,25 +499,90 @@
 
   @media (min-width: $bootstrap-md-width) {
 
+    .panel-side {
+      position: fixed;
+      top: 0;
+      width: 215px;
+      height: 100vh;
+
+      .btn-wrap {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        text-align: center;
+
+        > .btn,
+        > div {
+          margin-bottom: 25px;
+        }
+
+        .est-delivery {
+          line-height: 1;
+          font-family: $font-heading;
+          font-weight: 300;
+          font-size: 0.75em;
+          font-style: italic;
+        }
+
+        .price {
+          font-weight: bold;
+        }
+
+      }
+
+      &--left {
+
+        a {
+          display: block;
+          margin-top: 30px;
+          text-decoration: underline;
+        }
+
+      }
+
+    }
+
+    .panel-side-container {
+      padding-top: $mega-menu-desktop-height + 100;
+
+      > div:not(.btn-wrap) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding-top: $mega-menu-desktop-height + 100;
+        //overflow-x: hidden;
+        overflow: hidden;
+      }
+
+    }
+
     .c-carousel-inspiration {
       padding: 0 10px;
     }
 
   }
 
-  @media (min-width: $bootstrap-sm-width) and (max-width: $bootstrap-lg-width) {
+  @media (min-width: $bootstrap-lg-width) {
+
+    .panel-side {
+      width: 262px;
+    }
+
+  }
+
+  @media (min-width: $bootstrap-sm-width) and (max-width: $bootstrap-lg-width - 1px) {
 
     .container {
       width: auto;
     }
 
-    .slick-slide {
-      margin: 0 5px;
-    }
-
   }
 
   // load all PDP components here
+  @import 'side-panels';
   @import 'gallery';
 
 }

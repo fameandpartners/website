@@ -244,6 +244,7 @@ var PdpGallery = function (_React$Component) {
       _enquire2.default.register('screen and (max-width: 992px)', {
         match: function match() {
           $('.js-pdp-hero-gallery').slick({
+            infinite: false,
             arrows: false,
             dots: true,
             customPaging: function customPaging() {

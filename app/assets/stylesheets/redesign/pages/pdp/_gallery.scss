@@ -1,5 +1,73 @@
 /* [PDP - gallery]
 -------------------------------------------------------*/
+.panel-media {
+  overflow: hidden;
+}
+
+.panel-media-inner-wrap {
+  margin-bottom: -$mega-menu-desktop-height;
+}
+
+.panel-media .media-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  max-height: 850px; // NOTE: this will need to be change when we get new product images
+  padding-top: $mega-menu-desktop-height;
+  background: transparent;
+
+  &:not(:first-child) {
+    margin-top: -($mega-menu-desktop-height - 30);
+  }
+
+  img {
+    width: auto;
+    height: 100%;
+    margin-top: -$mega-menu-desktop-height;
+  }
+
+  .scrollspy-trigger {
+    position: absolute;
+    top: 100px;
+    left: 0;
+  }
+
+}
+
+@media (max-width: $bootstrap-md-width - 1px) {
+
+  .panel-media-inner-wrap {
+    margin-bottom: 0;
+  }
+
+  .panel-media .media-wrap {
+    display: block;
+    height: auto;
+    padding-top: 0;
+
+    &:not(:first-child) {
+      margin-top: 0;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      margin-top: 0;
+    }
+
+  }
+
+}
+
+@media (min-width: $bootstrap-sm-width) and (max-width: $bootstrap-lg-width) {
+
+  .slick-slide {
+    margin: 0 5px;
+  }
+
+}
+
 .slick-dots {
   position: relative;
   margin-top: -32px;
