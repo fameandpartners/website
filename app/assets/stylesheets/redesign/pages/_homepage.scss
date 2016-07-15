@@ -158,6 +158,14 @@
 
   }
 
+  @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
+
+    .section-fame-story .item .item-copy {
+      min-height: 200px;
+    }
+
+  }
+
   @media (min-width: $bootstrap-sm-width) {
 
     .section-styling .inline-btn:not(:nth-of-type(1)) {
