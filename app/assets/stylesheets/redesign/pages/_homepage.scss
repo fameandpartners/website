@@ -128,14 +128,14 @@
 
   @media (min-width: $bootstrap-md-width) {
 
-    .hero-wrap .heading {
-      margin: 0;
-      width: 100%;
-    }
-
     .hero-wrap .media-wrap {
       padding-bottom: 35%;
       min-height: 450px;
+    }
+
+    .hero-wrap .heading {
+      margin: 0;
+      width: 100%;
     }
 
     .btn-featured {
@@ -220,6 +220,22 @@
 
     .hero-tile-carousel .slick-dots {
       top: -425px;
+    }
+
+  }
+
+  @media (min-width: 1440px) and (max-width: 1920px) {
+
+    .hero-wrap .media-wrap {
+      padding-bottom: 40%;
+    }
+
+  }
+
+  @media (min-width: 1921px) {
+
+    .hero-wrap .media-wrap {
+      padding-bottom: 30%;
     }
 
   }
