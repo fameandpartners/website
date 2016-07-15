@@ -30,16 +30,16 @@ module Marketing
           order.total.to_f
         end
 
+        def humanized_total_amount
+          number_with_precision_wrapper(total_amount)
+        end
+
         def taxes_amount
           order.adjustments.tax.sum(:amount).to_f
         end
 
         def shipping_amount
           order.adjustments.shipping.sum(:amount).to_f
-        end
-
-        def transaction_id
-          transaction.try(:identifier)
         end
 
         def transaction_amount
@@ -52,16 +52,15 @@ module Marketing
 
         def body
           {
-              number:             number,
-              email:              email,
-              currency:           currency,
-              total_amount:       total_amount,
-              taxes_amount:       taxes_amount,
-              shipping_amount:    shipping_amount,
-              line_items:         line_items,
-              line_items_summary: line_items_summary,
-              transaction_id:     transaction_id,
-              transaction_amount: transaction_amount
+              number:                 number,
+              email:                  email,
+              currency:               currency,
+              total_amount:           total_amount,
+              taxes_amount:           taxes_amount,
+              shipping_amount:        shipping_amount,
+              line_items:             line_items,
+              line_items_summary:     line_items_summary,
+              humanized_total_amount: humanized_total_amount
           }
         end
 
