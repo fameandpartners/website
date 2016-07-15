@@ -242,6 +242,11 @@ $section-spacing-margin-top: 40px;
       text-align: center;
       margin-right: -11px;
       margin-left: -4px;
+
+      &.extra-margin-left {
+        margin-left: -15px;
+      }
+
     }
 
   }
