@@ -174,9 +174,18 @@
 
   }
 
-  // Note: This breakpoint was manually added because all the other mobile variables make it look awful...
-  // TODO: make this a variable perhaps?
+  // Note: These breakpoints were manually added because all the other mobile variables make the hero carousel look awful...
+  // TODO: make these as variables, perhaps?
+
   @media (max-width: 535px) {
+
+    .hero-tile-carousel .slick-dots {
+      top: -290px;
+    }
+
+  }
+
+  @media (max-width: 520px) {
 
     .hero-tile-carousel .slick-dots {
       top: -345px;
@@ -184,5 +193,20 @@
 
   }
 
+  @media (max-width: $iphone6-width) {
+
+    .hero-tile-carousel .slick-dots {
+      top: -365px;
+    }
+
+  }
+
+  @media (max-width: $iphone5-width) {
+
+    .hero-tile-carousel .slick-dots {
+      top: -425px;
+    }
+
+  }
 
 }
