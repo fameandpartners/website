@@ -29,14 +29,15 @@ class SidePanelSize extends SidePanel {
   }
 
   render() {
-    const menuState = this.state.active ? 'side-menu is-active' : 'side-menu';
-    const triggerState = this.props.customize.size.id
+    const MENU_STATE = this.state.active ? 'side-menu is-active' : 'side-menu';
+    const TRIGGER_STATE = this.props.customize.size.id
       ? "c-card-customize__content is-selected" : "c-card-customize__content";
-    const sizes = this.props.defaultSizes.map((size, index) => {
-      const itemState = this.props.customize.size.id == size.table.id
+
+    const SIZES = this.props.defaultSizes.map((size, index) => {
+      const ITEM_STATE = this.props.customize.size.id == size.table.id
         ? "selector-size is-selected" : "selector-size";
       return (
-        <a href="#" className={itemState}
+        <a href="javascript:;" className={ITEM_STATE}
           onClick={this.onChange} key={index}
           data-id={size.table.id} data-presentation={size.table.presentation}>
           {size.table.presentation}
@@ -46,23 +47,23 @@ class SidePanelSize extends SidePanel {
 
     return (
       <div className="side-container side-container-size">
-        <a href="#"
-          className={triggerState}
+        <a href="javascript:;"
+          className={TRIGGER_STATE}
           onClick={this.openMenu}>
           <div className="c-card-customize__content__left">Dresses Size</div>
           <div className="c-card-customize__content__right txt-truncate-1">{this.props.customize.size.presentation}</div>
         </a>
 
-        <div className={menuState}>
+        <div className={MENU_STATE}>
           <div className="text-right">
-            <a href="#"
+            <a href="javascript:;"
               className="btn-close lg"
               onClick={this.closeMenu}>
                 <span className="hide-visually">Close Menu</span>
             </a>
           </div>
           <h2 className="h4 c-card-customize__header">Choose your size</h2>
-          <div className="row">{sizes}</div>
+          <div className="row">{SIZES}</div>
           <SidePanelSizeChart />
         </div>
       </div>

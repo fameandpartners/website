@@ -388,11 +388,15 @@ var SidePanel = function (_React$Component) {
     key: 'openMenu',
     value: function openMenu() {
       this.setState({ active: true });
+      // removes body scroll bar when opened
+      $('body').addClass('no-scroll');
     }
   }, {
     key: 'closeMenu',
     value: function closeMenu() {
       this.setState({ active: false });
+      // and adds it back in when closed
+      $('body').removeClass('no-scroll');
     }
   }]);
 
@@ -1071,7 +1075,7 @@ var SidePanelLengthChart = function (_React$Component) {
               { title: 'inches' },
               _react2.default.createElement(
                 'table',
-                { className: 'table text-center' },
+                { className: 'table table-desktop text-center' },
                 _react2.default.createElement(
                   'thead',
                   null,
@@ -1129,7 +1133,7 @@ var SidePanelLengthChart = function (_React$Component) {
               { title: 'cm' },
               _react2.default.createElement(
                 'table',
-                { className: 'table text-center' },
+                { className: 'table table-desktop text-center' },
                 _react2.default.createElement(
                   'thead',
                   null,
@@ -1384,13 +1388,14 @@ var SidePanelSize = function (_SidePanel) {
     value: function render() {
       var _this2 = this;
 
-      var menuState = this.state.active ? 'side-menu is-active' : 'side-menu';
-      var triggerState = this.props.customize.size.id ? "c-card-customize__content is-selected" : "c-card-customize__content";
-      var sizes = this.props.defaultSizes.map(function (size, index) {
-        var itemState = _this2.props.customize.size.id == size.table.id ? "selector-size is-selected" : "selector-size";
+      var MENU_STATE = this.state.active ? 'side-menu is-active' : 'side-menu';
+      var TRIGGER_STATE = this.props.customize.size.id ? "c-card-customize__content is-selected" : "c-card-customize__content";
+
+      var SIZES = this.props.defaultSizes.map(function (size, index) {
+        var ITEM_STATE = _this2.props.customize.size.id == size.table.id ? "selector-size is-selected" : "selector-size";
         return _react2.default.createElement(
           'a',
-          { href: '#', className: itemState,
+          { href: 'javascript:;', className: ITEM_STATE,
             onClick: _this2.onChange, key: index,
             'data-id': size.table.id, 'data-presentation': size.table.presentation },
           size.table.presentation
@@ -1402,8 +1407,8 @@ var SidePanelSize = function (_SidePanel) {
         { className: 'side-container side-container-size' },
         _react2.default.createElement(
           'a',
-          { href: '#',
-            className: triggerState,
+          { href: 'javascript:;',
+            className: TRIGGER_STATE,
             onClick: this.openMenu },
           _react2.default.createElement(
             'div',
@@ -1418,13 +1423,13 @@ var SidePanelSize = function (_SidePanel) {
         ),
         _react2.default.createElement(
           'div',
-          { className: menuState },
+          { className: MENU_STATE },
           _react2.default.createElement(
             'div',
             { className: 'text-right' },
             _react2.default.createElement(
               'a',
-              { href: '#',
+              { href: 'javascript:;',
                 className: 'btn-close lg',
                 onClick: this.closeMenu },
               _react2.default.createElement(
@@ -1442,7 +1447,7 @@ var SidePanelSize = function (_SidePanel) {
           _react2.default.createElement(
             'div',
             { className: 'row' },
-            sizes
+            SIZES
           ),
           _react2.default.createElement(_SidePanelSizeChart2.default, null)
         )
@@ -1560,7 +1565,7 @@ var SidePanelSizeChart = function (_React$Component) {
               { title: 'US' },
               _react2.default.createElement(
                 'table',
-                { className: 'table text-center' },
+                { className: 'table table-desktop text-center' },
                 _react2.default.createElement(
                   'thead',
                   null,
@@ -1640,7 +1645,7 @@ var SidePanelSizeChart = function (_React$Component) {
               { title: 'AUS/UK' },
               _react2.default.createElement(
                 'table',
-                { className: 'table text-center' },
+                { className: 'table table-desktop text-center' },
                 _react2.default.createElement(
                   'thead',
                   null,
@@ -1730,7 +1735,7 @@ SidePanelSizeChart.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    sizeChart: state.product.sizes.table.default
+    sizeChart: state.sizeChart
   };
 }
 
@@ -1785,6 +1790,7 @@ var _pdpReducers = require('./pdpReducers');
 var rootReducer = (0, _redux.combineReducers)({
   product: _pdpReducers.productReducer,
   images: _pdpReducers.imagesReducer,
+  sizeChart: _pdpReducers.sizeChartReducer,
   discount: _pdpReducers.discountReducer,
   paths: _pdpReducers.productPathsReducer,
   lengths: _pdpReducers.lengthReducer,
@@ -1803,6 +1809,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.customizeReducer = customizeReducer;
 exports.productReducer = productReducer;
 exports.imagesReducer = imagesReducer;
+exports.sizeChartReducer = sizeChartReducer;
 exports.discountReducer = discountReducer;
 exports.productPathsReducer = productPathsReducer;
 exports.lengthReducer = lengthReducer;
@@ -1827,6 +1834,13 @@ function productReducer() {
 }
 
 function imagesReducer() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  var action = arguments[1];
+
+  return state;
+}
+
+function sizeChartReducer() {
   var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   var action = arguments[1];
 

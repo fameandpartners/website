@@ -33,7 +33,7 @@ class SidePanelSizeChart extends React.Component {
             For more information about our sizing, visit our <a href="/size-guide" target="_blank">sizing guide</a>.</p>
           <Tabs>
             <Tabs.Panel title="US">
-              <table className="table text-center">
+              <table className="table table-desktop text-center">
                 <thead>
                   <tr>
                     <th>Sizes</th>
@@ -64,7 +64,7 @@ class SidePanelSizeChart extends React.Component {
             </Tabs.Panel>
 
             <Tabs.Panel title="AUS/UK">
-              <table className="table text-center">
+              <table className="table table-desktop text-center">
                 <thead>
                   <tr>
                     <th>Sizes</th>
@@ -106,7 +106,7 @@ SidePanelSizeChart.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    sizeChart: state.product.sizes.table.default
+    sizeChart: state.sizeChart
   };
 }
 

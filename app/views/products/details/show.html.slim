@@ -18,7 +18,8 @@ ruby:
       paths: #{ product_paths.to_json },
       product: #{ @product.to_json },
       discount: #{ @productDiscount},
-      images: #{@product.all_images.to_json}
+      images: #{@product.all_images.to_json},
+      sizeChart: #{ @product.size_chart_data.to_json }
     };"
 
 = content_for :inline_javascript_top do
@@ -50,13 +51,14 @@ form.hide-fully#pdpDataForWishlist
   input id='pdpWishlistColorId' type='hidden' value='#{raw @product.color_id}'
   input id='pdpWishlistVariantId' type='hidden' value=''
   input id='pdpWishlistProductId' type='hidden' value='#{raw @product.id}'
-  
+
 .pdp
   .container
     .row.main-content-area.mobile-change-order
       .col-sm-6.col-md-3.position-2
         .panel-side-wrap
-          .panel-side.panel-side--left.js-panel-side-left data-spy='affix'
+          // to enable affix data-spy='affix' to this container
+          .panel-side.panel-side--left.js-panel-side-left
             .panel-side-container
             
               div
@@ -83,7 +85,8 @@ form.hide-fully#pdpDataForWishlist
         #PdpGallery
       .col-xs-12.col-sm-6.col-md-3.position-3
         .panel-side-wrap
-          .panel-side.js-panel-side-right data-spy='affix'
+          // to enable affix data-spy='affix' to this container
+          .panel-side.js-panel-side-right
             #PdpSidePanelRight
     
     // content bottom wrap START 

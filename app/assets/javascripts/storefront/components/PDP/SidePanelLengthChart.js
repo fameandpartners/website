@@ -31,7 +31,7 @@ class SidePanelLengthChart extends React.Component {
           <p>Skirt length is measured straight, from waist to hem and is based on wearing 5cm heels.</p>
           <Tabs>
             <Tabs.Panel title="inches">
-              <table className="table text-center">
+              <table className="table table-desktop text-center">
                 <thead>
                   <tr>
                     <th>Type</th>
@@ -58,7 +58,7 @@ class SidePanelLengthChart extends React.Component {
             </Tabs.Panel>
 
             <Tabs.Panel title="cm">
-              <table className="table text-center">
+              <table className="table table-desktop text-center">
                 <thead>
                   <tr>
                     <th>Type</th>
