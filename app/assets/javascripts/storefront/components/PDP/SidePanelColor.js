@@ -54,7 +54,7 @@ class SidePanelColor extends SidePanel {
 
   render() {
     const props = this.props;
-    const menuState = this.state.active ? 'side-menu is-active' : 'side-menu';
+    const menuState = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
     const triggerState = props.customize.color.id
       ? "c-card-customize__content is-selected" : "c-card-customize__content";
 
@@ -94,7 +94,7 @@ class SidePanelColor extends SidePanel {
       );
     });
     return (
-      <div className="side-container side-container-color">
+      <div className="pdp-side-container pdp-side-container-color">
         <a href="#"
           className={triggerState}
           onClick={this.openMenu}>

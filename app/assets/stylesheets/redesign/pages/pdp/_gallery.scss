@@ -1,7 +1,17 @@
 /* [PDP - gallery]
 -------------------------------------------------------*/
 .panel-media {
+  position: relative;
   overflow: hidden;
+
+  .trigger-details {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    text-decoration: underline;
+    font-size: 0.875em;
+  }
+
 }
 
 .panel-media-inner-wrap {

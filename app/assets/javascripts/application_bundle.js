@@ -299,28 +299,24 @@ var PdpGallery = function (_React$Component) {
       });
 
       return _react2.default.createElement(
-        'div',
-        { className: 'panel-media' },
+        _reactSticky.StickyContainer,
+        { className: 'panel-media-inner-wrap js-pdp-hero-gallery' },
+        IMAGES,
         _react2.default.createElement(
-          _reactSticky.StickyContainer,
-          { className: 'panel-media-inner-wrap js-pdp-hero-gallery' },
-          IMAGES,
+          _reactSticky.Sticky,
+          { topOffset: 80, className: 'scrollspy-thumbs' },
           _react2.default.createElement(
-            _reactSticky.Sticky,
-            { topOffset: 80, className: 'scrollspy-thumbs' },
-            _react2.default.createElement(
-              _reactScrollspy.Scrollspy,
-              { items: thumbIds,
-                currentClassName: 'is-selected' },
-              thumbIds.map(function (id, index) {
-                var selector = "#" + id;
-                return _react2.default.createElement(
-                  'li',
-                  { key: index },
-                  _react2.default.createElement('a', { href: selector })
-                );
-              })
-            )
+            _reactScrollspy.Scrollspy,
+            { items: thumbIds,
+              currentClassName: 'is-selected' },
+            thumbIds.map(function (id, index) {
+              var selector = "#" + id;
+              return _react2.default.createElement(
+                'li',
+                { key: index },
+                _react2.default.createElement('a', { href: selector })
+              );
+            })
           )
         )
       );
@@ -501,7 +497,7 @@ var SidePanelColor = function (_SidePanel) {
       var _this3 = this;
 
       var props = this.props;
-      var menuState = this.state.active ? 'side-menu is-active' : 'side-menu';
+      var menuState = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
       var triggerState = props.customize.color.id ? "c-card-customize__content is-selected" : "c-card-customize__content";
 
       var previewColor = "color-preview color-" + props.customize.color.name;
@@ -547,7 +543,7 @@ var SidePanelColor = function (_SidePanel) {
       });
       return _react2.default.createElement(
         'div',
-        { className: 'side-container side-container-color' },
+        { className: 'pdp-side-container pdp-side-container-color' },
         _react2.default.createElement(
           'a',
           { href: '#',
@@ -726,7 +722,7 @@ var SidePanelCustom = function (_SidePanel) {
     value: function render() {
       var _this2 = this;
 
-      var menuState = this.state.active ? 'side-menu is-active' : 'side-menu';
+      var menuState = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
       var triggerState = this.props.customize.customization.id ? "c-card-customize__content is-selected" : "c-card-customize__content";
       var customs = this.props.customOptions.map(function (option, index) {
         var itemState = _this2.props.customize.customization.id == option.table.id ? "selector-custom is-selected" : "selector-custom";
@@ -759,7 +755,7 @@ var SidePanelCustom = function (_SidePanel) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'side-container side-container-custom' },
+        { className: 'pdp-side-container pdp-side-container-custom' },
         _react2.default.createElement(
           'a',
           { href: '#',
@@ -896,7 +892,7 @@ var SidePanelLength = function (_SidePanel) {
     value: function render() {
       var _this2 = this;
 
-      var menuState = this.state.active ? 'side-menu is-active' : 'side-menu';
+      var menuState = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
       var triggerState = this.props.customize.length.id ? "c-card-customize__content is-selected" : "c-card-customize__content";
       var lengths = this.props.lengths.map(function (length, index) {
         var itemState = _this2.props.customize.length.id === length.value ? "selector-size is-selected" : "selector-size";
@@ -920,7 +916,7 @@ var SidePanelLength = function (_SidePanel) {
       });
       return _react2.default.createElement(
         'div',
-        { className: 'side-container side-container-length' },
+        { className: 'pdp-side-container pdp-side-container-length' },
         _react2.default.createElement(
           'a',
           { href: '#',
@@ -1388,7 +1384,7 @@ var SidePanelSize = function (_SidePanel) {
     value: function render() {
       var _this2 = this;
 
-      var MENU_STATE = this.state.active ? 'side-menu is-active' : 'side-menu';
+      var MENU_STATE = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
       var TRIGGER_STATE = this.props.customize.size.id ? "c-card-customize__content is-selected" : "c-card-customize__content";
 
       var SIZES = this.props.defaultSizes.map(function (size, index) {
@@ -1404,7 +1400,7 @@ var SidePanelSize = function (_SidePanel) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'side-container side-container-size' },
+        { className: 'pdp-side-container pdp-side-container-size' },
         _react2.default.createElement(
           'a',
           { href: 'javascript:;',

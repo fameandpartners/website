@@ -21,7 +21,7 @@ class SidePanelLength extends SidePanel {
   }
 
   render() {
-    const menuState = this.state.active ? 'side-menu is-active' : 'side-menu';
+    const menuState = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
     const triggerState = this.props.customize.length.id
       ? "c-card-customize__content is-selected" : "c-card-customize__content";
     const lengths = this.props.lengths.map((length, index) => {
@@ -42,7 +42,7 @@ class SidePanelLength extends SidePanel {
       );
     });
     return (
-      <div className="side-container side-container-length">
+      <div className="pdp-side-container pdp-side-container-length">
         <a href="#"
           className={triggerState}
           onClick={this.openMenu}>

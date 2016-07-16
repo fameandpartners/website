@@ -29,7 +29,7 @@ class SidePanelSize extends SidePanel {
   }
 
   render() {
-    const MENU_STATE = this.state.active ? 'side-menu is-active' : 'side-menu';
+    const MENU_STATE = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
     const TRIGGER_STATE = this.props.customize.size.id
       ? "c-card-customize__content is-selected" : "c-card-customize__content";
 
@@ -46,7 +46,7 @@ class SidePanelSize extends SidePanel {
     });
 
     return (
-      <div className="side-container side-container-size">
+      <div className="pdp-side-container pdp-side-container-size">
         <a href="javascript:;"
           className={TRIGGER_STATE}
           onClick={this.openMenu}>

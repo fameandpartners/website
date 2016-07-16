@@ -54,27 +54,7 @@
     text-transform: capitalize;
   }
 
-  .side-menu {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    width: 100%;
-    height: 100%;
-    padding-top: $mega-menu-desktop-height;
-    background: $c-neutral-white;
-    opacity: 0;
-    z-index: 1;
-    transition: all 200ms ease-in;
-
-    &.is-active {
-      left: 0;
-      opacity: 1;
-    }
-
-    .btn-close {
-      display: inline-block;
-      margin-top: 15px;
-    }
+  .pdp-side-menu {
 
     .c-card-customize__header {
       padding-top: 50px;
@@ -102,17 +82,6 @@
 
     &__content__left {
       text-decoration: none;
-    }
-
-    .side-menu {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      height: 100vh;
-      padding: 0 30px;
-      overflow-y: scroll;
-      border-top: solid $c-neutral-2 2px;
-      z-index: 1001;
     }
 
   }

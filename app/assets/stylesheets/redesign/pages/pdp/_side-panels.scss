@@ -1,6 +1,6 @@
 /* [PDP - side panels]
 -------------------------------------------------------*/
-.side-container {
+.pdp-side-container {
 
   p {
     margin-bottom: 20px;
@@ -153,3 +153,17 @@
   }
 
 }
+
+// START - details section
+.panel-side-left {
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .heading {
+      text-align: center;
+    }
+
+  }
+
+}
+// END - details section

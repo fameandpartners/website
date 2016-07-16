@@ -405,7 +405,7 @@
 
       }
 
-      &--left {
+      &-left {
 
         a {
           display: block;
@@ -455,8 +455,10 @@
 
   }
 
-  // load all PDP components here
-  @import 'side-panels';
   @import 'gallery';
 
 }
+
+// load all PDP components here
+@import 'side-panels';
+@import 'side-menu';

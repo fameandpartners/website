@@ -79,24 +79,22 @@ class PdpGallery extends React.Component {
     });
 
     return (
-      <div className="panel-media">
-        <StickyContainer className="panel-media-inner-wrap js-pdp-hero-gallery">
-          {IMAGES}
-          <Sticky topOffset={80} className="scrollspy-thumbs">
-            <Scrollspy items={thumbIds}
-              currentClassName="is-selected">
-              {thumbIds.map((id, index) => {
-                let selector = "#" + id;
-                return (
-                  <li key={index}>
-                    <a href={selector}></a>
-                  </li>
-                );
-              })}
-            </Scrollspy>
-          </Sticky>
-        </StickyContainer>
-      </div>
+      <StickyContainer className="panel-media-inner-wrap js-pdp-hero-gallery">
+        {IMAGES}
+        <Sticky topOffset={80} className="scrollspy-thumbs">
+          <Scrollspy items={thumbIds}
+            currentClassName="is-selected">
+            {thumbIds.map((id, index) => {
+              let selector = "#" + id;
+              return (
+                <li key={index}>
+                  <a href={selector}></a>
+                </li>
+              );
+            })}
+          </Scrollspy>
+        </Sticky>
+      </StickyContainer>
     );
   }
 

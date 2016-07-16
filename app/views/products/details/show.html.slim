@@ -55,10 +55,14 @@ form.hide-fully#pdpDataForWishlist
 .pdp
   .container
     .row.main-content-area.mobile-change-order
-      .col-sm-6.col-md-3.position-2
+    
+      .col-md-3.panel-side-left.js-panel-side-left
         .panel-side-wrap
+          .text-right.visible-xs
+            a.btn-close.lg.js-panel-side-left-toggle href='javascript:;'
+              .hide-visually Close Menu
           // to enable affix data-spy='affix' to this container
-          .panel-side.panel-side--left.js-panel-side-left
+          .panel-side
             .panel-side-container
             
               div
@@ -81,8 +85,9 @@ form.hide-fully#pdpDataForWishlist
                 li Free Shipping
                 li Easy Returns
 
-      .col-xs-12.col-sm-12.col-md-6.position-1
+      .col-xs-12.col-sm-12.col-md-6.panel-media.position-1
         #PdpGallery
+        a.trigger-details.visible-xs.js-panel-side-left-toggle href='javascript:;' + DETAILS
       .col-xs-12.col-sm-6.col-md-3.position-3
         .panel-side-wrap
           // to enable affix data-spy='affix' to this container
@@ -203,6 +208,19 @@ form.hide-fully#pdpDataForWishlist
     
 javascript:
   $(document).ready(function() {
+  
+  // controls for details container, mobile only
+  $('.js-panel-side-left-toggle').on('click', function() {
+    $('.js-panel-side-left').toggleClass('is-active');
+    $('body').toggleClass('no-scroll');
+  });
+  
+  
+  
+  
+  
+  
+  
   
   var offsetBottom = $('.js-footer').outerHeight(true) 
     + $('.js-bottom-content').outerHeight(true) 

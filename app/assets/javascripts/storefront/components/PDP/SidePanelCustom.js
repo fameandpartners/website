@@ -29,7 +29,7 @@ class SidePanelCustom extends SidePanel {
   }
 
   render() {
-    const menuState = this.state.active ? 'side-menu is-active' : 'side-menu';
+    const menuState = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
     const triggerState = this.props.customize.customization.id
       ? "c-card-customize__content is-selected" : "c-card-customize__content";
     const customs = this.props.customOptions.map((option, index) => {
@@ -56,7 +56,7 @@ class SidePanelCustom extends SidePanel {
     });
 
     return (
-      <div className="side-container side-container-custom">
+      <div className="pdp-side-container pdp-side-container-custom">
         <a href="#"
           className={triggerState}
           onClick={this.openMenu}>
