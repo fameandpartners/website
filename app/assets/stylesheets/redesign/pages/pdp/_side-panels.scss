@@ -155,12 +155,31 @@
 }
 
 // START - details section
-.panel-side-left {
+.pdp-panel-side-left {
+
+  a:not(.btn-close) {
+    display: block;
+    margin-top: 30px;
+    text-decoration: underline;
+  }
+
+  .panel {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
     .heading {
+      margin-top: 15px;
       text-align: center;
+      font-size: 3.4rem;
+    }
+
+    .btn-wrap {
+      margin-top: 40px;
     }
 
   }
