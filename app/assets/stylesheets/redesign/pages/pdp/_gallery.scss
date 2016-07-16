@@ -43,7 +43,7 @@
 
   .panel-media .media-wrap {
     display: block;
-    height: auto;
+    max-height: 650px;
     padding-top: 0;
 
     &:not(:first-child) {
@@ -51,11 +51,17 @@
     }
 
     img {
-      width: 100%;
-      height: auto;
       margin-top: 0;
     }
 
+  }
+
+}
+
+@media (max-width: $bootstrap-sm-width - 1px) {
+
+  .panel-media .media-wrap {
+    max-height: 460px;
   }
 
 }
