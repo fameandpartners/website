@@ -18,15 +18,14 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "enquire.js": "2.1.1",
-    "react": "15.1.0",
-    "react-dom": "15.1.0",
-    "react-redux": "4.4.5",
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2",
+    "react-redux": "^4.4.5",
     "react-scrollspy": "^2.1.2",
     "react-simpletabs": "0.7.0",
     "react-slick": "^0.12.2",
     "react-sticky": "^5.0.4",
-    "redux": "3.5.2",
-    "redux-immutable-state-invariant": "1.2.3"
+    "redux": "^3.5.2",
+    "redux-immutable-state-invariant": "^1.2.3"
   }
 }

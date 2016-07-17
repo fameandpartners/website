@@ -135,7 +135,7 @@ form.hide-fully#pdpDataForWishlist
                     .justify-content
                       = image_tag src='_icons/dress.svg', class:'icon'
                       h3.h5 Select your style
-                      p Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                      p Sort by style, occasion, or collection to find the perfect piece
             .col-xs-6.col-md-2
               .media-wrap.keep-ratio
                 .inner-wrap
@@ -147,7 +147,7 @@ form.hide-fully#pdpDataForWishlist
                     .justify-content
                       = image_tag src='_icons/fabric.svg', class:'icon'
                       h3.h5 Pick your fabric
-                      p Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                      p Choose the color and composition that suit you best
             .col-xs-6.col-md-2
               .media-wrap.keep-ratio
                 .inner-wrap
@@ -159,7 +159,7 @@ form.hide-fully#pdpDataForWishlist
                     .justify-content
                       = image_tag src='_icons/scissors.svg', class:'icon'
                       h3.h5 Modify your dress
-                      p Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                      p You design the details with our customization menu
 
         #tab-fabric-information.row.tab-pane
           .row.l-tab-fabric-information
@@ -197,23 +197,19 @@ form.hide-fully#pdpDataForWishlist
       .row
         .col-md-4
           .c-styling-advice
-            h2 Get free professional styling advice.
+            h2 Get Free Styling Advice
             p Let us help you to style your perfect outfit for any occasion. Meet Amber, one of the most influential stylists working today. 
             .media-wrap
               = image_tag '_pdp/tile-styling-advice.jpg'
             .row
-              .col-xs-4.col-sm-4.col-md-4
+              .col-xs-6.col-sm-6.col-md-6
                 = image_tag '_icons/dress.svg', class:'icon'
-                h3.h5 Latest Trends
-                p Lorem ipsum dolor sit amet
-              .col-xs-4.col-sm-4.col-md-4
+                h3.h5 Latest Trend Analysis
+                p Inside information on what’s happening now + the next big thing
+              .col-xs-6.col-sm-6.col-md-6
                 = image_tag '_icons/color.svg', class:'icon'
-                h3.h5 Coloring
-                p Lorem ipsum dolor sit amet
-              .col-xs-4.col-sm-4.col-md-4
-                = image_tag '_icons/dress.svg', class:'icon'
-                h3.h5 Body Mapping
-                p Lorem ipsum dolor sit amet
+                h3.h5 Color & Tailoring Expertise
+                p Collaborate on a look that fits, flatters and celebrates you
             a.btn.btn-black Book your free styling session
         .col-md-8
           = render partial: 'related_products', locals: { product: @product }
