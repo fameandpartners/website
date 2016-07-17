@@ -193,11 +193,12 @@ $section-spacing-margin-top: 40px;
     display: inline-block;
     position: relative;
     bottom: -22px;
+    padding: 8px 20px 6px;
+    margin-top: 0;
     font-family: $font-family-secondary;
     font-size: 1.2rem;
     font-weight: 500;
     text-transform: uppercase;
-    padding: 8px 20px 6px;
     background: $c-neutral-black;
     color: $c-neutral-white;
   }
