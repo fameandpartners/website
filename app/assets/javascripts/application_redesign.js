@@ -119,9 +119,9 @@
 //= require partials/header
 
 //--------------------------------
-// Homepage
+// Hero Tile Carousel
 //--------------------------------
-//= require partials/homepage
+//= require partials/hero-tile-carousel
 
 jQuery(document).ready(function($){
   $('body').addClass('ready');
