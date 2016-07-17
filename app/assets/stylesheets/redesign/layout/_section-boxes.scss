@@ -192,11 +192,12 @@ $section-spacing-margin-top: 40px;
 
 .heading-overlay-wrapper {
   text-align: center;
-  margin-bottom: -25px;
   z-index: 1;
 
   .heading-overlay {
     display: inline-block;
+    position: relative;
+    bottom: -22px;
     font-family: $font-family-secondary;
     font-size: 1.2rem;
     font-weight: 500;
