@@ -1,42 +1,42 @@
 /* [Carousel Navigation]
 -------------------------------------------------------*/
 
-.slick-dots {
-  position: relative;
-  margin-top: -50px;
+.hero-carousel-nav {
   text-align: center;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+  bottom: 20px;
   padding: 0;
-
-  button {
-    display: none;
-  }
+  margin: 0;
 
   li {
-    padding: 5px;
-    margin: 0 7px;
     display: inline-block;
-    border: solid $c-neutral-8 1px;
+    padding: 10px 7px;
     cursor: pointer;
-
-    &:first-child {
-      margin-left: 0;
-    }
-
-    &:last-child {
-      margin-right: 0;
-    }
-
   }
 
-  .slick-active {
+  a {
+    display: block;
+    padding: 6px;
+    border: solid $c-neutral-8 1px;
+  }
+
+  .current a {
     background: $c-neutral-black;
     border-color: $c-neutral-black;
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
+    bottom: -68px;
+
     li {
-      padding: 8px;
+      padding: 10px;
+    }
+
+    a {
+      padding: 7px;
     }
 
   }
