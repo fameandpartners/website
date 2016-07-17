@@ -28,18 +28,18 @@
   height: 100vh;
   max-height: 850px; // NOTE: this will need to be change when we get new product images
   overflow: hidden;
-  padding-top: $mega-menu-desktop-height;
+  padding-top: 30px;
   background: transparent;
 
   &:not(:first-child) {
-    margin-top: -($mega-menu-desktop-height - 30);
+    margin-top: -30px;
   }
 
   img {
     display: block;
     width: auto;
     height: 100%;
-    margin-top: -$mega-menu-desktop-height;
+    margin-top: -30px;
   }
 
   .scrollspy-trigger {

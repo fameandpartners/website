@@ -52,10 +52,6 @@
     position: relative;
   }
 
-  .tab-content {
-    min-height: 260px;
-  }
-
   .affix-bottom {
     position: absolute;
   }
@@ -403,16 +399,13 @@
   @media (min-width: $bootstrap-md-width) {
 
     .panel-side {
-      position: fixed;
-      top: 0;
-      width: 215px;
       height: 100vh;
 
       .btn-wrap {
         position: absolute;
         left: 0;
         right: 0;
-        bottom: 0;
+        bottom: $mega-menu-desktop-height;
         text-align: center;
 
         > .btn,
@@ -442,14 +435,6 @@
 
     .c-carousel-inspiration {
       padding: 0 10px;
-    }
-
-  }
-
-  @media (min-width: $bootstrap-lg-width) {
-
-    .panel-side {
-      width: 262px;
     }
 
   }
