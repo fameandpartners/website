@@ -29,9 +29,10 @@
   }
 
   .section-styling {
+    padding-bottom: $box-padding-top;
 
     .cta-link-alt {
-      margin-bottom: 25px;
+      margin-bottom: $box-padding-top;
     }
 
     .styling-session .item-copy {
@@ -53,7 +54,7 @@
     }
 
     .instagram-widget {
-      padding: 25px 0;
+      padding: $box-padding-top 0;
       display: inline-block;
 
       .item {
@@ -118,6 +119,10 @@
 
   }
 
+  .section-social {
+    padding-top: $box-padding-top;
+  }
+
   .cta-link-alt {
     font-size: 1.3rem;
   }
@@ -144,6 +149,7 @@
 
     .section-styling .styling-session {
       margin-top: 30px;
+      padding-left: 15px;
     }
 
   }

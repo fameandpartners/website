@@ -1,10 +1,9 @@
 /* [Section boxes]
 -------------------------------------------------------*/
 $section-spacing-margin-top: 40px;
+$box-padding-top: 25px;
 
 .section-box {
-
-  $box-padding-top: 25px;
 
   margin-top: $section-spacing-margin-top;
 
@@ -140,7 +139,7 @@ $section-spacing-margin-top: 40px;
     .item {
 
       &.bordered {
-        margin-bottom: 20px;
+        margin-bottom: $box-padding-top;
       }
 
       h3 {
@@ -150,7 +149,7 @@ $section-spacing-margin-top: 40px;
     }
 
     .item-alt {
-      padding: 24px 30px 30px;
+      padding: 24px 18px;
 
       h3 {
         margin-top: 0;
@@ -208,7 +207,7 @@ $section-spacing-margin-top: 40px;
 // When we need a 100%-wide section container with background
 .section-wrapper {
   background: $c-classic-modal-bg;
-  padding: 25px 0 5px;
+  padding: $box-padding-top 0 5px;
 }
 
 // Side tags
