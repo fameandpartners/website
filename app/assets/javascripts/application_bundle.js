@@ -260,16 +260,10 @@ var PdpGallery = function (_React$Component) {
         arrows: false,
         dots: true,
         responsive: [{
-          breakpoint: 768,
+          breakpoint: 992,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1
-          }
-        }, {
-          breakpoint: 992,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2
           }
         }, {
           breakpoint: 9999,

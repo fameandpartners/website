@@ -37,17 +37,10 @@ class PdpGallery extends React.Component {
       dots: true,
       responsive: [
         {
-          breakpoint: 768,
+          breakpoint: 992,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1
-          }
-        },
-        {
-          breakpoint: 992,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2
           }
         },
         {

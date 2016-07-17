@@ -41,7 +41,7 @@
 
 }
 
-@media (max-width: $bootstrap-sm-width - 1px) {
+@media (max-width: $bootstrap-md-width - 1px) {
 
   .pdp-panel-side-left {
 
@@ -58,12 +58,16 @@
 
   }
 
-}
-
-@media (max-width: $bootstrap-md-width - 1px) {
-
   .pdp-side-menu {
     @include pdp-side-menu-mobile;
+  }
+
+}
+
+@media (min-width: $bootstrap-md-width) {
+
+  .pdp-side-menu {
+    overflow-y: scroll;
   }
 
 }
