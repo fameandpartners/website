@@ -35,8 +35,6 @@ class PdpGallery extends React.Component {
       infinite: true,
       arrows: false,
       dots: true,
-      slidesToShow: 2,
-      slidesToScroll: 2,
       responsive: [
         {
           breakpoint: 768,
@@ -44,6 +42,17 @@ class PdpGallery extends React.Component {
             slidesToShow: 1,
             slidesToScroll: 1
           }
+        },
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        },
+        {
+          breakpoint: 9999,
+          settings: 'unslick'
         }
       ]
     };

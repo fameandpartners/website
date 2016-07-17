@@ -1,5 +1,10 @@
 /* [PDP - gallery]
 -------------------------------------------------------*/
+.slick-slide {
+  height: auto;
+  min-height: inherit;
+}
+
 .panel-media {
   position: relative;
   overflow: hidden;
@@ -25,7 +30,7 @@
   overflow: hidden;
   padding-top: $mega-menu-desktop-height;
   background: transparent;
-  
+
   &:not(:first-child) {
     margin-top: -($mega-menu-desktop-height - 30);
   }
