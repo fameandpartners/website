@@ -1,56 +1,34 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-import Enquire from 'enquire.js';
 import {Scrollspy} from 'react-scrollspy';
 import {StickyContainer, Sticky} from 'react-sticky';
+import Slick from 'react-slick';
 
 class PdpGallery extends React.Component {
   constructor() {
     super();
-
-    this.initGallery = this.initGallery.bind(this);
-  }
-
-  componentDidMount() {
-    this.initGallery();
-  }
-
-  componentDidUpdate() {
-    this.initGallery();
-  }
-
-  initGallery() {
-    Enquire.register('screen and (max-width: 992px)', {
-      match: () => {
-        $('.js-pdp-hero-gallery').slick({
-          infinite: false,
-          arrows: false,
-          dots: true,
-          customPaging: function() {
-            return '<a href="javascript:;"></a>';
-          },
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          responsive: [
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
-            }
-          ]
-        });
-      },
-      unmatch: () => {
-        $('.js-pdp-hero-gallery').slick('unslick');
-      }
-    });
   }
 
   render() {
     let foundImage = false;
     let thumbIds = [];
+
+    const SETTINGS = {
+      infinite: true,
+      arrows: false,
+      dots: true,
+      slidesToShow: 2,
+      slidesToScroll: 2,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    };
 
     // check if selected color ID matches any available images
     this.props.images.map((image, index) => {
@@ -65,7 +43,7 @@ class PdpGallery extends React.Component {
       : this.props.product.color_id;
 
     // match color id with images
-    const IMAGES = this.props.images.map((image, index) => {
+    let images = this.props.images.map((image, index) => {
       if(image.color_id === COLOR_ID) {
         let id = "gallery-image-" + index;
         thumbIds.push(id);
@@ -77,24 +55,26 @@ class PdpGallery extends React.Component {
         );
       }
     });
+    images = images.filter((n) => {
+      return n !== undefined;
+    });
 
     return (
-      <StickyContainer className="panel-media-inner-wrap js-pdp-hero-gallery">
-        {IMAGES}
-        <Sticky topOffset={80} className="scrollspy-thumbs">
-          <Scrollspy items={thumbIds}
-            currentClassName="is-selected">
-            {thumbIds.map((id, index) => {
-              let selector = "#" + id;
-              return (
-                <li key={index}>
-                  <a href={selector}></a>
-                </li>
-              );
-            })}
-          </Scrollspy>
-        </Sticky>
-      </StickyContainer>
+      <div className="panel-media-inner-wrap">
+        <Slick {...SETTINGS}>
+          {images.map((item, index) => (<div key={index}>{item}</div>))}
+        </Slick>
+        <div className="scrollspy-thumbs">
+          {thumbIds.map((id, index) => {
+            let selector = "#" + id;
+            return (
+              <li key={index}>
+                <a href={selector}></a>
+              </li>
+            );
+          })}
+        </div>
+      </div>
     );
   }
 

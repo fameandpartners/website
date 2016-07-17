@@ -100,14 +100,15 @@
 
   }
 
-  a {
+  button {
     display: block;
     width: 15px;
     height: 15px;
+    text-indent: -9999em;
     border: solid $c-neutral-8 1px;
   }
 
-  .slick-active a {
+  .slick-active button {
     background: $c-neutral-black;
     border-color: $c-neutral-black;
   }
