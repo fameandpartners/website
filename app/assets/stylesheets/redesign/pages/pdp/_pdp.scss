@@ -52,10 +52,6 @@
     position: relative;
   }
 
-  .c-card-customize {
-    margin-bottom: 70px;
-  }
-
   .tab-content {
     min-height: 260px;
   }
@@ -75,17 +71,21 @@
     vertical-align: middle;
   }
 
+  .panel-side-container .c-card-customize {
+    margin-bottom: 70px;
+  }
+
+  .price {
+    font-weight: bold;
+  }
+
   // START tabs
   .l-tab-controls {
     margin: 15px 0 30px 0;
     text-align: center;
     color: $c-neutral-10;
-    @extend %cfix;
 
     li {
-      display: block;
-      float: left;
-      width: 33.33333333%;
       margin: 0;
       padding: 0 0 3px 0;
       border: 0;
@@ -102,7 +102,6 @@
     }
 
     .active {
-      font-weight: 600;
       color: $c-neutral-black;
       border-color: $c-neutral-black;
     }
@@ -142,7 +141,7 @@
 
   // START styling advice
   .c-styling-advice {
-    padding: 30px;
+    padding: 30px 20px;
     text-align: center;
     background: $c-neutral-2;
 
@@ -172,7 +171,7 @@
 
     .btn {
       padding: 10px;
-      font-size: 0.75em;
+      font-size: 0.625em
     }
 
     .icon {
@@ -365,8 +364,38 @@
 
     padding-top: 0;
 
+    .main-content-area {
+      min-height: initial;
+    }
+
     .panel-side-container {
       padding-top: 0;
+
+      .c-card-customize {
+        margin-bottom: 30px;
+      }
+
+      .est-delivery {
+        margin-bottom: 40px;
+        line-height: 1;
+        text-align: center;
+        font-family: $font-heading;
+        font-weight: 300;
+        font-size: 0.75em;
+        font-style: italic;
+      }
+
+      .price {
+        margin-bottom: 15px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .btn {
+        display: block;
+        margin-bottom: 15px;
+      }
+
     }
 
   }
@@ -389,18 +418,6 @@
         > .btn,
         > div {
           margin-bottom: 25px;
-        }
-
-        .est-delivery {
-          line-height: 1;
-          font-family: $font-heading;
-          font-weight: 300;
-          font-size: 0.75em;
-          font-style: italic;
-        }
-
-        .price {
-          font-weight: bold;
         }
 
       }
@@ -445,10 +462,13 @@
 
   }
 
+  // if components depend on .pdp parent class, add them here
   @import 'gallery';
+  @import 'panel-group';
+  @import 'related-products';
 
 }
 
-// load all PDP components here
+// load all other PDP components here
 @import 'side-panels';
 @import 'side-menu';

@@ -13,6 +13,7 @@
 
 //= require libs/jquery.dotdotdot.min
 //= require libs/jquery.mlens.min
+//= require libs/bootstrap-tabcollapse
 
 //= require modernizr-custom
 
@@ -24,7 +25,6 @@
 //= require es5-shim/es5-shim.js
 //= require react
 //= require react_ujs
-//= require alt/dist/alt.min.js
 //= require components
 
 // npm modules

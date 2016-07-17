@@ -15,14 +15,23 @@ class PdpSidePanelRight extends React.Component {
     return (
       <div className="panel-side-container">
         <div>
-          <div className="c-card-customize">
-            <h2 className="h4 c-card-customize__header">Specify your size</h2>
+          <ul className="row l-tab-controls hidden-md hidden-lg" role="tablist">
+            <li className="col-xs-6 col-sm-6 active" role="presentation">
+              <a href="#tab-size-fit" role="tab" data-toggle="tab">Size + Fit</a>
+            </li>
+            <li className="col-xs-6 col-sm-6" role="presentation">
+              <a href="#tab-color-cust" role="tab" data-toggle="tab">Color + Customize</a>
+            </li>
+          </ul>
+
+          <div id="tab-size-fit" className="c-card-customize active" role="tabpanel">
+            <h2 className="h4 c-card-customize__header hidden-xs hidden-sm">Specify your size</h2>
             <SidePanelSize />
             <SidePanelLength />
           </div>
 
-          <div className="c-card-customize">
-            <h2 className="h4 c-card-customize__header">Design your dress</h2>
+          <div id="tab-color-cust" className="c-card-customize" role="tabpanel">
+            <h2 className="h4 c-card-customize__header hidden-xs hidden-sm">Design your dress</h2>
               <SidePanelColor />
               {(() => {
                 if(this.props.skirts.length) {

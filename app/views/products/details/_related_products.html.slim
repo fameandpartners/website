@@ -3,32 +3,33 @@ ruby:
           recommended_products: product.recommended_products,
           related_outerwear:      product.related_outerwear
   )
-
-.dress-more
-  h3.h4.text-center.heading Similar Styles
-  .row
-    - related.recommended.each do |recommended_product|
-      .col-md-3.col-xs-6 data-id=(recommended_product.id)
-        = link_to collection_product_path(recommended_product), :class => 'c-product' do
-          .media-wrap
-            = image_tag recommended_product.image.try(:large)
-          .details-wrap
-            .v-center
-              .justify-content
-                .product-name = recommended_product.name
-                .product-price = product_price_with_discount(recommended_product.price, recommended_product.discount)
-          
-  h3.h4.text-center.heading As Seen On     
-  .row
-    .col-md-3
-      .media-wrap
-        = image_tag '_pdp/tile-seen-on-1.jpg'
-    .col-md-3
-      .media-wrap
-        = image_tag '_pdp/tile-seen-on-2.jpg'
-    .col-md-3
-      .media-wrap
-        = image_tag '_pdp/tile-seen-on-3.jpg'
-    .col-md-3
-      .media-wrap
-        = image_tag '_pdp/tile-seen-on-4.jpg'
+  
+.related-products
+  .dress-more
+    h3.h4.text-center.heading Similar Styles
+    .row
+      - related.recommended.each do |recommended_product|
+        .col-md-3.col-xs-6 data-id=(recommended_product.id)
+          = link_to collection_product_path(recommended_product), :class => 'c-product' do
+            .media-wrap
+              = image_tag recommended_product.image.try(:large)
+            .details-wrap
+              .v-center
+                .justify-content
+                  .product-name = recommended_product.name
+                  .product-price = product_price_with_discount(recommended_product.price, recommended_product.discount)
+            
+    h3.h4.text-center.heading As Seen On     
+    .row
+      .col-xs-6.col-sm-6.col-md-3
+        .media-wrap
+          = image_tag '_pdp/tile-seen-on-1.jpg'
+      .col-xs-6.col-sm-6.col-md-3
+        .media-wrap
+          = image_tag '_pdp/tile-seen-on-2.jpg'
+      .col-xs-6.col-sm-6.col-md-3
+        .media-wrap
+          = image_tag '_pdp/tile-seen-on-3.jpg'
+      .col-xs-6.col-sm-6.col-md-3
+        .media-wrap
+          = image_tag '_pdp/tile-seen-on-4.jpg'

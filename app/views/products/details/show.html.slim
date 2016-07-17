@@ -86,7 +86,7 @@ form.hide-fully#pdpDataForWishlist
                     .panel
                       a href='#moodboard-options' data-user-present='#{current_spree_user.present?}' data-toggle='collapse' data-parent='#accordion'
                         'Add to Moodboard
-                      #moodboard-options.moodboard-options.collapse
+                      #moodboard-options.moodboard-options.collapse role='tabpanel'
                         / TODO - Support for dynamic colours.
                         = react_component('AddProductToAnyMoodboard', moodboards: user_moodboards, product_id: @product.id, color_id: @product.color_id)
                 
@@ -109,68 +109,75 @@ form.hide-fully#pdpDataForWishlist
     .js-bottom-content
     
       // content tabs START 
-      .row
+      // these controls needs to be hidden for mobile
+      #content-tab-controls.row.hidden-xs.hidden-sm
         .col-md-6.col-md-offset-3
-          ul.l-tab-controls role='tablist'
-            li.active role='presentation'
-              a href='#tab-your-way' aria-controls='tab-your-way' role='tab' data-toggle='tab' Your Dress, Your Way
-            li role='presentation'
-              a href='#tab-fabric-information' aria-controls='tab-fabric-information' role='tab' data-toggle='tab' Fabric Information
-            li role='presentation'
-              a.js-tab-trigger-inspiration href='#dress-inspiration' aria-controls='dress-inspiration' role='tab' data-toggle='tab' Dress Inspiration
-      .tab-content
-        #tab-your-way.row.tab-pane.l-tab-your-way.active role='tabpanel'
-          .col-xs-6.col-md-2
-            .media-wrap.keep-ratio
-              .inner-wrap
-                = image_tag src='_pdp/tile-style.jpg'
-          .col-xs-6.col-md-2
-            .media-wrap.keep-ratio
-              .inner-wrap
-                .v-center
-                  .justify-content
-                    = image_tag src='_icons/professional-dryclean.svg', class:'icon'
-                    h3.h5 Select your style
-                    p Lorem ipsum dolor sit amet, consectetur adipiscing elit
-          .col-xs-6.col-md-2
-            .media-wrap.keep-ratio
-              .inner-wrap
-                = image_tag src='_pdp/tile-fabric.jpg'
-          .col-xs-6.col-md-2
-            .media-wrap.keep-ratio
-              .inner-wrap
-                .v-center
-                  .justify-content
-                    = image_tag src='_icons/professional-dryclean.svg', class:'icon'
-                    h3.h5 Pick your fabric
-                    p Lorem ipsum dolor sit amet, consectetur adipiscing elit
-          .col-xs-6.col-md-2
-            .media-wrap.keep-ratio
-              .inner-wrap
-                = image_tag src='_pdp/tile-modify.jpg'
-          .col-xs-6.col-md-2
-            .media-wrap.keep-ratio
-              .inner-wrap
-                .v-center
-                  .justify-content
-                    = image_tag src='_icons/professional-dryclean.svg', class:'icon'
-                    h3.h5 Modify your dress
-                    p Lorem ipsum dolor sit amet, consectetur adipiscing elit
-        #tab-fabric-information.row.tab-pane.l-tab-fabric-information role='tabpanel'
-          .col-md-3.col-md-offset-3
-            - if @product.fabric.present?
-              h3.h4 Fabric & Trims
-              = simple_format(@product.fabric)
-              p Product may have variations in dying hues so product may look slightly different from image.
-          .col-md-3
-            h3.h4 Garment Care
-            = image_tag src='_icons/professional-dryclean.svg', class:'icon'
-            p
-              | Professional dry-clean only.
-              br
-              | See garment care label for further details on how to care for your garment.
-            p.sku SKU: #{@product.sku}
-        #dress-inspiration.row.tab-pane role='tabpanel'
+          ul.row.l-tab-controls.tab-content
+            li.col-md-4.active
+              a href='#tab-your-way' data-toggle='tab' Your Dress, Your Way
+            li.col-md-4
+              a href='#tab-fabric-information' data-toggle='tab' Fabric Information
+            li.col-md-4
+              a.js-tab-trigger-inspiration href='#dress-inspiration' data-toggle='tab' Dress Inspiration
+      
+      #content-tabs.tab-content
+
+        #tab-your-way.tab-pane.in.active
+          .row.l-tab-your-way
+            .col-xs-6.col-md-2
+              .media-wrap.keep-ratio
+                .inner-wrap
+                  = image_tag src='_pdp/tile-style.jpg'
+            .col-xs-6.col-md-2
+              .media-wrap.keep-ratio
+                .inner-wrap
+                  .v-center
+                    .justify-content
+                      = image_tag src='_icons/professional-dryclean.svg', class:'icon'
+                      h3.h5 Select your style
+                      p Lorem ipsum dolor sit amet, consectetur adipiscing elit
+            .col-xs-6.col-md-2
+              .media-wrap.keep-ratio
+                .inner-wrap
+                  = image_tag src='_pdp/tile-fabric.jpg'
+            .col-xs-6.col-md-2
+              .media-wrap.keep-ratio
+                .inner-wrap
+                  .v-center
+                    .justify-content
+                      = image_tag src='_icons/professional-dryclean.svg', class:'icon'
+                      h3.h5 Pick your fabric
+                      p Lorem ipsum dolor sit amet, consectetur adipiscing elit
+            .col-xs-6.col-md-2
+              .media-wrap.keep-ratio
+                .inner-wrap
+                  = image_tag src='_pdp/tile-modify.jpg'
+            .col-xs-6.col-md-2
+              .media-wrap.keep-ratio
+                .inner-wrap
+                  .v-center
+                    .justify-content
+                      = image_tag src='_icons/professional-dryclean.svg', class:'icon'
+                      h3.h5 Modify your dress
+                      p Lorem ipsum dolor sit amet, consectetur adipiscing elit
+
+        #tab-fabric-information.row.tab-pane
+          .row.l-tab-fabric-information
+            .col-md-3.col-md-offset-3
+              - if @product.fabric.present?
+                h3.h4 Fabric & Trims
+                = simple_format(@product.fabric)
+                p Product may have variations in dying hues so product may look slightly different from image.
+            .col-md-3
+              h3.h4 Garment Care
+              = image_tag src='_icons/professional-dryclean.svg', class:'icon'
+              p
+                | Professional dry-clean only.
+                br
+                | See garment care label for further details on how to care for your garment.
+              p.sku SKU: #{@product.sku}
+        
+        #dress-inspiration.row.tab-pane
           .c-carousel-inspiration.js-carousel-inspiration
             - if @product.song
               .c-carousel-inspiration__item
@@ -195,15 +202,15 @@ form.hide-fully#pdpDataForWishlist
             .media-wrap
               = image_tag '_pdp/tile-styling-advice.jpg'
             .row
-              .col-md-4
+              .col-xs-4.col-sm-4.col-md-4
                 = image_tag '_icons/professional-dryclean.svg', class:'icon'
                 h3.h5 Latest Trends
                 p Lorem ipsum dolor sit amet
-              .col-md-4
+              .col-xs-4.col-sm-4.col-md-4
                 = image_tag '_icons/professional-dryclean.svg', class:'icon'
                 h3.h5 Coloring
                 p Lorem ipsum dolor sit amet
-              .col-md-4
+              .col-xs-4.col-sm-4.col-md-4
                 = image_tag '_icons/professional-dryclean.svg', class:'icon'
                 h3.h5 Body Mapping
                 p Lorem ipsum dolor sit amet
@@ -225,6 +232,10 @@ javascript:
     $('.js-panel-side-left').toggleClass('is-active');
     $('body').toggleClass('no-scroll');
   });
+  
+  // bootstrap tab extension, will switch between tabs for desktop and
+  // accordion for mobile
+  $('#content-tab-controls').tabCollapse();
   
   
   

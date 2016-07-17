@@ -1267,11 +1267,33 @@ var PdpSidePanelRight = function (_React$Component) {
           'div',
           null,
           _react2.default.createElement(
+            'ul',
+            { className: 'row l-tab-controls hidden-md hidden-lg', role: 'tablist' },
+            _react2.default.createElement(
+              'li',
+              { className: 'col-xs-6 col-sm-6 active', role: 'presentation' },
+              _react2.default.createElement(
+                'a',
+                { href: '#tab-size-fit', role: 'tab', 'data-toggle': 'tab' },
+                'Size + Fit'
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              { className: 'col-xs-6 col-sm-6', role: 'presentation' },
+              _react2.default.createElement(
+                'a',
+                { href: '#tab-color-cust', role: 'tab', 'data-toggle': 'tab' },
+                'Color + Customize'
+              )
+            )
+          ),
+          _react2.default.createElement(
             'div',
-            { className: 'c-card-customize' },
+            { id: 'tab-size-fit', className: 'c-card-customize active', role: 'tabpanel' },
             _react2.default.createElement(
               'h2',
-              { className: 'h4 c-card-customize__header' },
+              { className: 'h4 c-card-customize__header hidden-xs hidden-sm' },
               'Specify your size'
             ),
             _react2.default.createElement(_SidePanelSize2.default, null),
@@ -1279,10 +1301,10 @@ var PdpSidePanelRight = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'c-card-customize' },
+            { id: 'tab-color-cust', className: 'c-card-customize', role: 'tabpanel' },
             _react2.default.createElement(
               'h2',
-              { className: 'h4 c-card-customize__header' },
+              { className: 'h4 c-card-customize__header hidden-xs hidden-sm' },
               'Design your dress'
             ),
             _react2.default.createElement(_SidePanelColor2.default, null),
