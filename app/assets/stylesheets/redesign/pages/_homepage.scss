@@ -158,11 +158,6 @@
       padding-top: 30px;
     }
 
-    .hero-tile-carousel .slick-dots {
-      top: -285px;
-      margin-top: 0;
-    }
-
   }
 
   @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
@@ -191,38 +186,6 @@
 
   // Note: These breakpoints were manually added because all the other mobile variables make the hero carousel look awful...
   // TODO: make these as variables, perhaps?
-
-  @media (max-width: 535px) {
-
-    .hero-tile-carousel .slick-dots {
-      top: -290px;
-    }
-
-  }
-
-  @media (max-width: 520px) {
-
-    .hero-tile-carousel .slick-dots {
-      top: -345px;
-    }
-
-  }
-
-  @media (max-width: $iphone6-width) {
-
-    .hero-tile-carousel .slick-dots {
-      top: -365px;
-    }
-
-  }
-
-  @media (max-width: $iphone5-width) {
-
-    .hero-tile-carousel .slick-dots {
-      top: -425px;
-    }
-
-  }
 
   @media (min-width: 1440px) and (max-width: 1920px) {
 
