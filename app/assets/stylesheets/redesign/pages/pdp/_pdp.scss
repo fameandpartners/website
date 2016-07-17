@@ -381,12 +381,6 @@
 
       .est-delivery {
         margin-bottom: 40px;
-        line-height: 1;
-        text-align: center;
-        font-family: $font-heading;
-        font-weight: 300;
-        font-size: 0.75em;
-        font-style: italic;
       }
 
       .price {
@@ -434,9 +428,17 @@
         left: 0;
         width: 100%;
         height: 100%;
-        padding-top: $mega-menu-desktop-height + 100;
-        //overflow-x: hidden;
+        padding-top: 100px;
         overflow: hidden;
+      }
+
+      .est-delivery {
+        line-height: 1;
+        text-align: center;
+        font-family: $font-heading;
+        font-weight: 300;
+        font-size: 0.75em;
+        font-style: italic;
       }
 
     }
