@@ -162,7 +162,7 @@ form.hide-fully#pdpDataForWishlist
                       p You design the details with our customization menu
 
         #tab-fabric-information.row.tab-pane
-          .row.l-tab-fabric-information
+          .l-tab-fabric-information
             .col-md-3.col-md-offset-3
               - if @product.fabric.present?
                 h3.h4 Fabric & Trims
@@ -177,18 +177,18 @@ form.hide-fully#pdpDataForWishlist
                 | See garment care label for further details on how to care for your garment.
               p.sku SKU: #{@product.sku}
         
-        #dress-inspiration.row.tab-pane
-          .c-carousel-inspiration.js-carousel-inspiration
+        #dress-inspiration.tab-pane
+          .row.l-tab-inspiration
             - if @product.song
-              .c-carousel-inspiration__item
+              .col-xs-6.col-sm-6.col-md-2
                 .media-wrap
                   = image_tag @product.song.image_url
             - if @product.celebrity && @product.celebrity.image_url
-              .c-carousel-inspiration__item
+              .col-xs-6.col-sm-6.col-md-2
                 .media-wrap
                   = image_tag @product.celebrity.image_url
             - @product.inspiration.each do |item|
-              .c-carousel-inspiration__item
+              .col-xs-6.col-sm-6.col-md-2
                 .media-wrap
                   = image_tag item.image_url
       // content tabs END
@@ -232,21 +232,37 @@ javascript:
     // bootstrap tab extension, will switch between tabs for desktop and
     // accordion for mobile
     $('#content-tab-controls').tabCollapse();
+    
+    function initSticky() {
+      $('.js-panel-side-left').sticky({
+        responsiveWidth: true,
+        bottomSpacing: 
+          $('.js-bottom-content').outerHeight() 
+          + $('.js-footer').outerHeight()
+          + $('.js-fixed-header').outerHeight()
+      });
+      $('.js-panel-side-right').sticky({
+        responsiveWidth: true,
+        bottomSpacing:
+          $('.js-bottom-content').outerHeight() 
+          + $('.js-footer').outerHeight()
+          + $('.js-fixed-header').outerHeight()
+      });
+    }
   
     // sticky side panel
-    $('.js-panel-side-left').sticky({
-      responsiveWidth: true,
-      bottomSpacing: 
-        $('.js-bottom-content').outerHeight() 
-        + $('.js-footer').outerHeight()
-        + $('.js-fixed-header').outerHeight()
-    });
-    $('.js-panel-side-right').sticky({
-      responsiveWidth: true,
-      bottomSpacing:
-        $('.js-bottom-content').outerHeight() 
-        + $('.js-footer').outerHeight()
-        + $('.js-fixed-header').outerHeight()
+    if($(window).width() >= 992) {
+      initSticky();
+    }
+    
+    // update on resize
+    $(window).resize(function() {
+      if($(window).width() >= 992) {
+        initSticky();
+      } else {
+        $('.js-panel-side-left').sticky('update');
+        $('.js-panel-side-right').sticky('update');
+      }
     });
 
   });
