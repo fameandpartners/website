@@ -222,10 +222,32 @@ var PdpGallery = function (_React$Component) {
   function PdpGallery() {
     _classCallCheck(this, PdpGallery);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(PdpGallery).call(this));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PdpGallery).call(this));
+
+    _this.state = {
+      imageWidth: 0
+    };
+
+    _this.handleResize = _this.handleResize.bind(_this);
+    return _this;
   }
 
   _createClass(PdpGallery, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      window.addEventListener('resize', this.handleResize);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      window.removeEventListener('resize', this.handleResize);
+    }
+  }, {
+    key: 'handleResize',
+    value: function handleResize() {
+      this.setState({ imageWidth: 0 });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -248,6 +270,10 @@ var PdpGallery = function (_React$Component) {
         }]
       };
 
+      var STYlE = {
+        marginLeft: this.state.imageWidth / 2 * -1
+      };
+
       // check if selected color ID matches any available images
       this.props.images.map(function (image, index) {
         if (image.color_id === _this2.props.customize.color.id) {
@@ -267,7 +293,7 @@ var PdpGallery = function (_React$Component) {
             'div',
             { className: 'media-wrap', key: index },
             _react2.default.createElement('span', { id: id, className: 'scrollspy-trigger' }),
-            _react2.default.createElement('img', { src: image.url, alt: image.alt })
+            _react2.default.createElement('img', { src: image.url, alt: image.alt, onLoad: _this2.handleImageLoaded })
           );
         }
       });

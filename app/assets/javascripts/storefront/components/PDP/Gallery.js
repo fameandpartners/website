@@ -7,6 +7,24 @@ import Slick from 'react-slick';
 class PdpGallery extends React.Component {
   constructor() {
     super();
+
+    this.state = {
+      imageWidth: 0
+    };
+
+    this.handleResize = this.handleResize.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  handleResize() {
+    this.setState({imageWidth: 0});
   }
 
   render() {
@@ -30,6 +48,10 @@ class PdpGallery extends React.Component {
       ]
     };
 
+    const STYlE = {
+      marginLeft: (this.state.imageWidth / 2) * -1
+    };
+
     // check if selected color ID matches any available images
     this.props.images.map((image, index) => {
       if(image.color_id === this.props.customize.color.id) {
@@ -50,7 +72,7 @@ class PdpGallery extends React.Component {
         return (
           <div className="media-wrap" key={index}>
             <span id={id} className="scrollspy-trigger"></span>
-            <img src={image.url} alt={image.alt} />
+            <img src={image.url} alt={image.alt} onLoad={this.handleImageLoaded} />
           </div>
         );
       }

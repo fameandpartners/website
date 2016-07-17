@@ -20,18 +20,18 @@
 
 .panel-media .media-wrap {
   position: relative;
-  display: flex;
-  justify-content: center;
   height: 100vh;
   max-height: 850px; // NOTE: this will need to be change when we get new product images
+  overflow: hidden;
   padding-top: $mega-menu-desktop-height;
   background: transparent;
-
+  
   &:not(:first-child) {
     margin-top: -($mega-menu-desktop-height - 30);
   }
 
   img {
+    display: block;
     width: auto;
     height: 100%;
     margin-top: -$mega-menu-desktop-height;
@@ -105,6 +105,7 @@
     width: 15px;
     height: 15px;
     text-indent: -9999em;
+    background: $c-neutral-white;
     border: solid $c-neutral-8 1px;
   }
 
