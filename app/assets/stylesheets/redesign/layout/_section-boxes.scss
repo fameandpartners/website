@@ -21,7 +21,7 @@ $section-spacing-margin-top: 40px;
   }
 
   .item, .item-alt {
-    padding: 0 18px 20px;
+    padding: 18px;
 
     &.bordered {
       border: 1px solid $c-neutral-6;
@@ -31,7 +31,6 @@ $section-spacing-margin-top: 40px;
       text-transform: none;
       font-size: 3.2rem;
       line-height: 3.3rem;
-      margin-top: $box-padding-top;
     }
 
     p.summary {
@@ -43,10 +42,6 @@ $section-spacing-margin-top: 40px;
       padding: 0 15px;
     }
 
-  }
-
-  .item-alt {
-    padding: 10px;
   }
 
   .section-img-wrap {
