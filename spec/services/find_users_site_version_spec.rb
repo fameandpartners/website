@@ -4,7 +4,6 @@ describe FindUsersSiteVersion, type: :service do
   describe '#get' do
     before(:each) do
       SiteVersion.delete_all
-      rememoize(SiteVersion, :@default)
     end
 
     it 'returns site version chosen by user previously' do

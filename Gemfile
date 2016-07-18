@@ -133,8 +133,6 @@ group :development, :test do
   gem 'oink'
   gem 'quiet_assets'
   gem 'rspec-rails', '~> 3.2'
-  gem 'spring'
-  gem 'spring-commands-rspec'
   gem 'puma'
   gem 'meta_request'
   gem 'foreman', require: false
