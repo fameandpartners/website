@@ -218,7 +218,7 @@ form.hide-fully#pdpDataForWishlist
                 = image_tag '_icons/color.svg', class:'icon'
                 h3.h5 Color & Tailoring Expertise
                 p Collaborate on a look that fits, flatters and celebrates you
-            a.btn.btn-black Book your free styling session
+            = link_to 'Book your free styling session', styling_session_path, class:'btn btn-black'
         .col-md-8
           = render partial: 'related_products', locals: { product: @product }
           
