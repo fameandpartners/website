@@ -56,7 +56,7 @@ form.hide-fully#pdpDataForWishlist
   .container
     .row.main-content-area
       // to enable affix data-spy='affix' to this container
-      .col-md-3.pdp-panel-side-left
+      .col-md-3.pdp-panel-side-left.js-panel-side-left-details-trigger
         .panel-side-wrap.js-panel-side-left
           .text-right.visible-xs.visible-sm
             a.btn-close.lg.js-panel-side-left-toggle href='javascript:;'
@@ -225,7 +225,7 @@ javascript:
   
     // controls for details container, mobile only
     $('.js-panel-side-left-toggle').on('click', function() {
-      $('.js-panel-side-left').toggleClass('is-active');
+      $('.js-panel-side-left-details-trigger').toggleClass('is-active');
       $('body').toggleClass('no-scroll');
     });
     
