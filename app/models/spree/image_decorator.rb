@@ -9,4 +9,5 @@ Spree::Image.class_eval do
 
   # Spree's `Spree::Core::S3Support` overrides
   self.attachment_definitions[:attachment][:storage] = :fog
+  self.attachment_definitions[:attachment][:path]    = 'spree/products/:id/:style/:basename.:extension'
 end
