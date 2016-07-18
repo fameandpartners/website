@@ -88,7 +88,7 @@
   .l-tab-controls {
     margin: 15px 0 30px 0;
     text-align: center;
-    color: $c-neutral-10;
+    color: $c-neutral-8;
 
     li {
       margin: 0;
@@ -107,6 +107,7 @@
     }
 
     .active {
+      font-weight: bold;
       color: $c-neutral-black;
       border-color: $c-neutral-black;
     }
@@ -411,6 +412,7 @@
 
     .panel-side {
       height: 100vh;
+      min-height: 750px;
 
       .btn-wrap {
         position: absolute;
