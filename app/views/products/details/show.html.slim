@@ -130,9 +130,8 @@ form.hide-fully#pdpDataForWishlist
               a.js-tab-trigger-inspiration href='#dress-inspiration' data-toggle='tab' Dress Inspiration
       
       #content-tabs.tab-content
-
-        #tab-your-way.tab-pane.in.active
-          .row.l-tab-your-way
+        #tab-your-way.row.tab-pane.in.active
+          .l-tab-your-way
             .col-xs-6.col-md-2
               .media-wrap.keep-ratio
                 .inner-wrap
@@ -186,8 +185,8 @@ form.hide-fully#pdpDataForWishlist
                 | See garment care label for further details on how to care for your garment.
               p.sku SKU: #{@product.sku}
         
-        #dress-inspiration.tab-pane
-          .row.l-tab-inspiration
+        #dress-inspiration.row.tab-pane
+          .l-tab-inspiration
             - if @product.song
               .col-xs-6.col-sm-6.col-md-2
                 .media-wrap
@@ -240,7 +239,10 @@ javascript:
     
     // bootstrap tab extension, will switch between tabs for desktop and
     // accordion for mobile
-    $('#content-tab-controls').tabCollapse();
+    $('#content-tab-controls').tabCollapse({
+      tabsClass: 'hidden-sm hidden-xs',
+      accordionClass: 'visible-sm visible-xs'
+    });
     
     function initSticky() {
       $('.js-panel-side-left').sticky({

@@ -457,6 +457,27 @@
 
   }
 
+  // add helpers here, its only place where !important is allowed
+  @media (max-width: $bootstrap-md-width - 1px) {
+    // these are just hacks, had to overwritte sticky plugin because it does not have
+    // an destructor
+    .sticky-wrapper {
+      height: auto !important;
+    }
+
+    .is-sticky {
+
+      > div {
+        float: left !important;
+        position: relative !important;
+        width: 100% !important;
+        top: 0 !important;
+      }
+
+    }
+
+  }
+
   // if components depend on .pdp parent class, add them here
   @import 'gallery';
   @import 'panel-group';
