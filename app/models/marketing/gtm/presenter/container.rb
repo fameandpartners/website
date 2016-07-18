@@ -17,6 +17,7 @@ module Marketing
           presenters.each { |presenter| append(presenter) }
           base_hash.to_json.html_safe
         rescue StandardError => e
+          Raven.capture_exception(e)
           NewRelic::Agent.notice_error(e)
         end
       end
