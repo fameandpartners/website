@@ -72,7 +72,7 @@ class SidePanelCustom extends SidePanel {
                 <span className="hide-visually">Close Menu</span>
             </a>
           </div>
-          <h2 className="h4 c-card-customize__header">Choose your skirt length</h2>
+          <h2 className="h4 c-card-customize__header">Select your customization</h2>
           <div className="row">{customs}</div>
         </div>
       </div>

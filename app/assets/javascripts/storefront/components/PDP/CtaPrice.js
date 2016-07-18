@@ -62,7 +62,7 @@ class CtaPrice extends React.Component {
               );
             } else {
               return (
-                <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg" disabled="disabled">ADD TO BAG</a>
+                <a href="javascript:;" onClick={this.addToBag} className="btn btn-lowlight btn-lrg" disabled="disabled">ADD TO BAG</a>
               );
             }
           })()}

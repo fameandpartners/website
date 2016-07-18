@@ -158,7 +158,7 @@ var CtaPrice = function (_React$Component) {
           } else {
             return _react2.default.createElement(
               'a',
-              { href: 'javascript:;', onClick: _this2.addToBag, className: 'btn btn-black btn-lrg', disabled: 'disabled' },
+              { href: 'javascript:;', onClick: _this2.addToBag, className: 'btn btn-lowlight btn-lrg', disabled: 'disabled' },
               'ADD TO BAG'
             );
           }
@@ -821,7 +821,7 @@ var SidePanelCustom = function (_SidePanel) {
           _react2.default.createElement(
             'h2',
             { className: 'h4 c-card-customize__header' },
-            'Choose your skirt length'
+            'Select your customization'
           ),
           _react2.default.createElement(
             'div',
@@ -1496,7 +1496,7 @@ var SidePanelSize = function (_SidePanel) {
           _react2.default.createElement(
             'div',
             { className: ERROR },
-            'Dresses Size'
+            'Dress Size'
           ),
           _react2.default.createElement(
             'div',

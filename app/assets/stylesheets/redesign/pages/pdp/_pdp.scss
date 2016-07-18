@@ -40,6 +40,11 @@
 
   }
 
+  .btn.disabled,
+  .btn[disabled] {
+    opacity: 1;
+  }
+
   .est-delivery {
     line-height: 1;
     text-align: center;
