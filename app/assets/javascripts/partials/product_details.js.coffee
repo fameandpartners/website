@@ -25,3 +25,12 @@ page.initProductDetailsPage = (options = {}) ->
     )
     app.shopping_cart.addProduct(product_data)
   )
+
+  # redirect not loged-in users
+  $('.js-add-to-moodboard').on('click', (e) ->
+
+    e.preventDefault()
+    if !app.user_signed_in
+      window.redirectToLoginAndBack()
+      return
+  )

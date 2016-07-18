@@ -21,9 +21,14 @@ ruby:
       images: #{@product.all_images.to_json},
       sizeChart: #{ @product.size_chart_data.to_json }
     };"
+    
+  init_product_details_page = "page.initProductDetailsPage();"
 
 = content_for :inline_javascript_top do
   = raw product_details_page_data
+  
+= content_for :inline_javascript do		
+  = raw init_product_details_page
 
 = content_for :head
   - @product.cropped_images.each_with_index do |image, index|
@@ -82,13 +87,17 @@ form.hide-fully#pdpDataForWishlist
                       - if @product.size.present?
                         p = simple_format(@product.size)
                   - if Features.active?(:moodboard)
-                    .panel
-                      a href='#moodboard-options' data-user-present='#{current_spree_user.present?}' data-toggle='collapse' data-parent='#accordion'
-                        'Add to Moodboard
-                      #moodboard-options.moodboard-options.collapse role='tabpanel'
-                        / TODO - Support for dynamic colours.
-                        = react_component('AddProductToAnyMoodboard', moodboards: user_moodboards, product_id: @product.id, color_id: @product.color_id)
-                
+                    - if current_spree_user.present?
+                      .panel
+                        a href='#moodboard-options' data-user-present='#{current_spree_user.present?}' data-toggle='collapse' data-parent='#accordion'
+                          'Add to Moodboard
+                        #moodboard-options.moodboard-options.collapse role='tabpanel'
+                          / TODO - Support for dynamic colours.
+                          = react_component('AddProductToAnyMoodboard', moodboards: user_moodboards, product_id: @product.id, color_id: @product.color_id)
+                    - else
+                      // this will redirect not loged-in users to login page
+                      a.js-add-to-moodboard href='javascript:;' data-user-present='#{current_spree_user.present?}' Add to Moodboard
+                  
               ul.btn-wrap
                 li Guarenteed Fit
                 li Free Shipping
