@@ -45,6 +45,7 @@
           <td>
             <%= link_to image.attachment.url(:original), target: :blank do %>
               <%= image_tag image.attachment.url(:product) %>
+              <%= image.attachment.original_filename %>
             <% end %>
           </td>
           <% if @product.has_variants? %>
