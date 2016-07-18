@@ -40,6 +40,15 @@
 
   }
 
+  .est-delivery {
+    line-height: 1;
+    text-align: center;
+    font-family: $font-heading;
+    font-weight: 300;
+    font-size: 0.75em;
+    font-style: italic;
+  }
+
   .main-content-area {
     min-height: 100vh;
   }
@@ -430,15 +439,6 @@
         height: 100%;
         padding-top: 100px;
         overflow: hidden;
-      }
-
-      .est-delivery {
-        line-height: 1;
-        text-align: center;
-        font-family: $font-heading;
-        font-weight: 300;
-        font-size: 0.75em;
-        font-style: italic;
       }
 
     }
