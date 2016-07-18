@@ -8,6 +8,8 @@ Spree::Image.class_eval do
   end
 
   # Spree's `Spree::Core::S3Support` overrides
-  self.attachment_definitions[:attachment][:storage] = :fog
-  self.attachment_definitions[:attachment][:path]    = 'spree/products/:id/:style/:basename.:extension' # Default is `Spree::Config[:attachment_path]`, with value: "/spree/products/:id/:style/:basename.:extension"
+  if Rails.application.config.use_s3
+    self.attachment_definitions[:attachment][:storage] = :fog
+    self.attachment_definitions[:attachment][:path]    = 'spree/products/:id/:style/:basename.:extension' # Default is `Spree::Config[:attachment_path]`, with value: "/spree/products/:id/:style/:basename.:extension"
+  end
 end
