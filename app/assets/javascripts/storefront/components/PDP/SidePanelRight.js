@@ -12,6 +12,32 @@ class PdpSidePanelRight extends React.Component {
   }
 
   render() {
+    const ERROR_MESSAGE = (() => {
+      if(this.props.customize.size.error && this.props.customize.length.error) {
+        return (
+          <div className="error-message">
+            Please select a {this.props.customize.size.message} and {this.props.customize.length.message} to continue.
+          </div>
+        );
+      } else if(this.props.customize.size.error && !this.props.customize.length.error) {
+        return (
+          <div className="error-message">
+            Please select a {this.props.customize.size.message} to continue.
+          </div>
+        );
+      } else if(!this.props.customize.size.error && this.props.customize.length.error) {
+        return (
+          <div className="error-message">
+            Please select a {this.props.customize.length.message} to continue.
+          </div>
+        );
+      } else {
+        return (
+          <span></span>
+        );
+      }
+    })();
+
     return (
       <div className="panel-side-container">
         <div>
@@ -26,6 +52,7 @@ class PdpSidePanelRight extends React.Component {
 
           <div id="tab-size-fit" className="c-card-customize active" role="tabpanel">
             <h2 className="h4 c-card-customize__header hidden-xs hidden-sm">Specify your size</h2>
+            {ERROR_MESSAGE}
             <SidePanelSize />
             <SidePanelLength />
           </div>
@@ -49,12 +76,14 @@ class PdpSidePanelRight extends React.Component {
 }
 
 PdpSidePanelRight.propTypes = {
-  skirts: PropTypes.array.isRequired
+  skirts: PropTypes.array.isRequired,
+  customize: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    skirts: state.skirts
+    skirts: state.skirts,
+    customize: state.customize
   };
 }
 

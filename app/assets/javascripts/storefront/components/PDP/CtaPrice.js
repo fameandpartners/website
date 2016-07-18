@@ -25,6 +25,22 @@ class CtaPrice extends React.Component {
       // TODO: build express making functionality
       document.getElementById('pdpCartMakingId').value = null;
       $('#pdpDataForCheckout').submit();
+    } else {
+      // set errors
+      if(!this.props.customize.size.id) {
+        let customize = {};
+        customize.size = {};
+        customize.size.error = true;
+        customize.size.message = 'dress size';
+        this.props.actions.customizeDress(customize);
+      }
+      if(!this.props.customize.length.id) {
+        let customize = {};
+        customize.length = {};
+        customize.length.error = true;
+        customize.length.message = 'dress length';
+        this.props.actions.customizeDress(customize);
+      }
     }
   }
 
@@ -46,7 +62,7 @@ class CtaPrice extends React.Component {
               );
             } else {
               return (
-                <a href="javascript:;" className="btn btn-black btn-lrg" disabled="disabled">ADD TO BAG</a>
+                <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg" disabled="disabled">ADD TO BAG</a>
               );
             }
           })()}
@@ -60,7 +76,8 @@ CtaPrice.propTypes = {
   customize: PropTypes.object,
   price: PropTypes.string,
   discount: PropTypes.number,
-  product: PropTypes.object
+  product: PropTypes.object,
+  actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {

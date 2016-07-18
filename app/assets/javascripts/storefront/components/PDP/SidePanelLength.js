@@ -21,15 +21,18 @@ class SidePanelLength extends SidePanel {
   }
 
   render() {
-    const menuState = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
-    const triggerState = this.props.customize.length.id
+    const ERROR = this.props.customize.length.error
+      ? "c-card-customize__content__left error"
+      : "c-card-customize__content__left";
+    const MENU_STATE = this.state.active ? "pdp-side-menu is-active" : "pdp-side-menu";
+    const TRIGGER_STATE = this.props.customize.length.id
       ? "c-card-customize__content is-selected" : "c-card-customize__content";
-    const lengths = this.props.lengths.map((length, index) => {
-      const itemState = this.props.customize.length.id === length.value
+    const LENGTHS = this.props.lengths.map((length, index) => {
+      const ITEM_STATE = this.props.customize.length.id === length.value
         ? "selector-size is-selected" : "selector-size";
       return (
         <div className="row" key={index}>
-          <a href="#" className={itemState}
+          <a href="#" className={ITEM_STATE}
             onClick={this.onChange} data-id={length.value}>
             {length.value}
           </a>
@@ -44,13 +47,13 @@ class SidePanelLength extends SidePanel {
     return (
       <div className="pdp-side-container pdp-side-container-length">
         <a href="#"
-          className={triggerState}
+          className={TRIGGER_STATE}
           onClick={this.openMenu}>
-          <div className="c-card-customize__content__left">Skirt Length</div>
+          <div className={ERROR}>Skirt Length</div>
           <div className="c-card-customize__content__right txt-truncate-1">{this.props.customize.length.presentation}</div>
         </a>
 
-        <div className={menuState}>
+        <div className={MENU_STATE}>
           <div className="text-right">
             <a href="#"
               className="btn-close lg"
@@ -61,7 +64,7 @@ class SidePanelLength extends SidePanel {
           <h2 className="h4 c-card-customize__header">Choose your skirt length</h2>
           <p>Tell us your height category and we can adjust your
             skirt length for free!</p>
-          {lengths}
+          {LENGTHS}
           <SidePanelLengthChart />
         </div>
       </div>

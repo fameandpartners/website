@@ -71,11 +71,15 @@ export default function configureStore(initialState) {
       customize: {
         size: {
           id: null,
-          presentation: ''
+          presentation: '',
+          error: false,
+          message: ''
         },
         length: {
           id: null,
-          presentation: ''
+          presentation: '',
+          error: false,
+          message: ''
         },
         color: {
           id: null,

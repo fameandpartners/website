@@ -29,6 +29,9 @@ class SidePanelSize extends SidePanel {
   }
 
   render() {
+    const ERROR = this.props.customize.size.error
+      ? "c-card-customize__content__left error"
+      : "c-card-customize__content__left";
     const MENU_STATE = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
     const TRIGGER_STATE = this.props.customize.size.id
       ? "c-card-customize__content is-selected" : "c-card-customize__content";
@@ -50,7 +53,7 @@ class SidePanelSize extends SidePanel {
         <a href="javascript:;"
           className={TRIGGER_STATE}
           onClick={this.openMenu}>
-          <div className="c-card-customize__content__left">Dresses Size</div>
+          <div className={ERROR}>Dresses Size</div>
           <div className="c-card-customize__content__right txt-truncate-1">{this.props.customize.size.presentation}</div>
         </a>
 

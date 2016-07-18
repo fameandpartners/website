@@ -28,8 +28,6 @@ if (typeof window.PdpDataFull !== 'undefined') {
   (function () {
     var store = (0, _configureStore2.default)(window.PdpDataFull);
 
-    console.log('Store: ', store.getState());
-
     store.subscribe(function () {
       console.log('Store changed: ', store.getState());
     });
@@ -117,6 +115,22 @@ var CtaPrice = function (_React$Component) {
         // TODO: build express making functionality
         document.getElementById('pdpCartMakingId').value = null;
         $('#pdpDataForCheckout').submit();
+      } else {
+        // set errors
+        if (!this.props.customize.size.id) {
+          var customize = {};
+          customize.size = {};
+          customize.size.error = true;
+          customize.size.message = 'dress size';
+          this.props.actions.customizeDress(customize);
+        }
+        if (!this.props.customize.length.id) {
+          var _customize = {};
+          _customize.length = {};
+          _customize.length.error = true;
+          _customize.length.message = 'dress length';
+          this.props.actions.customizeDress(_customize);
+        }
       }
     }
   }, {
@@ -144,7 +158,7 @@ var CtaPrice = function (_React$Component) {
           } else {
             return _react2.default.createElement(
               'a',
-              { href: 'javascript:;', className: 'btn btn-black btn-lrg', disabled: 'disabled' },
+              { href: 'javascript:;', onClick: _this2.addToBag, className: 'btn btn-black btn-lrg', disabled: 'disabled' },
               'ADD TO BAG'
             );
           }
@@ -165,7 +179,8 @@ CtaPrice.propTypes = {
   customize: _react.PropTypes.object,
   price: _react.PropTypes.string,
   discount: _react.PropTypes.number,
-  product: _react.PropTypes.object
+  product: _react.PropTypes.object,
+  actions: _react.PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
@@ -905,16 +920,17 @@ var SidePanelLength = function (_SidePanel) {
     value: function render() {
       var _this2 = this;
 
-      var menuState = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
-      var triggerState = this.props.customize.length.id ? "c-card-customize__content is-selected" : "c-card-customize__content";
-      var lengths = this.props.lengths.map(function (length, index) {
-        var itemState = _this2.props.customize.length.id === length.value ? "selector-size is-selected" : "selector-size";
+      var ERROR = this.props.customize.length.error ? "c-card-customize__content__left error" : "c-card-customize__content__left";
+      var MENU_STATE = this.state.active ? "pdp-side-menu is-active" : "pdp-side-menu";
+      var TRIGGER_STATE = this.props.customize.length.id ? "c-card-customize__content is-selected" : "c-card-customize__content";
+      var LENGTHS = this.props.lengths.map(function (length, index) {
+        var ITEM_STATE = _this2.props.customize.length.id === length.value ? "selector-size is-selected" : "selector-size";
         return _react2.default.createElement(
           'div',
           { className: 'row', key: index },
           _react2.default.createElement(
             'a',
-            { href: '#', className: itemState,
+            { href: '#', className: ITEM_STATE,
               onClick: _this2.onChange, 'data-id': length.value },
             length.value
           ),
@@ -933,11 +949,11 @@ var SidePanelLength = function (_SidePanel) {
         _react2.default.createElement(
           'a',
           { href: '#',
-            className: triggerState,
+            className: TRIGGER_STATE,
             onClick: this.openMenu },
           _react2.default.createElement(
             'div',
-            { className: 'c-card-customize__content__left' },
+            { className: ERROR },
             'Skirt Length'
           ),
           _react2.default.createElement(
@@ -948,7 +964,7 @@ var SidePanelLength = function (_SidePanel) {
         ),
         _react2.default.createElement(
           'div',
-          { className: menuState },
+          { className: MENU_STATE },
           _react2.default.createElement(
             'div',
             { className: 'text-right' },
@@ -974,7 +990,7 @@ var SidePanelLength = function (_SidePanel) {
             null,
             'Tell us your height category and we can adjust your skirt length for free!'
           ),
-          lengths,
+          LENGTHS,
           _react2.default.createElement(_SidePanelLengthChart2.default, null)
         )
       );
@@ -1273,6 +1289,38 @@ var PdpSidePanelRight = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      var ERROR_MESSAGE = function () {
+        if (_this2.props.customize.size.error && _this2.props.customize.length.error) {
+          return _react2.default.createElement(
+            'div',
+            { className: 'error-message' },
+            'Please select a ',
+            _this2.props.customize.size.message,
+            ' and ',
+            _this2.props.customize.length.message,
+            ' to continue.'
+          );
+        } else if (_this2.props.customize.size.error && !_this2.props.customize.length.error) {
+          return _react2.default.createElement(
+            'div',
+            { className: 'error-message' },
+            'Please select a ',
+            _this2.props.customize.size.message,
+            ' to continue.'
+          );
+        } else if (!_this2.props.customize.size.error && _this2.props.customize.length.error) {
+          return _react2.default.createElement(
+            'div',
+            { className: 'error-message' },
+            'Please select a ',
+            _this2.props.customize.length.message,
+            ' to continue.'
+          );
+        } else {
+          return _react2.default.createElement('span', null);
+        }
+      }();
+
       return _react2.default.createElement(
         'div',
         { className: 'panel-side-container' },
@@ -1309,6 +1357,7 @@ var PdpSidePanelRight = function (_React$Component) {
               { className: 'h4 c-card-customize__header hidden-xs hidden-sm' },
               'Specify your size'
             ),
+            ERROR_MESSAGE,
             _react2.default.createElement(_SidePanelSize2.default, null),
             _react2.default.createElement(_SidePanelLength2.default, null)
           ),
@@ -1337,12 +1386,14 @@ var PdpSidePanelRight = function (_React$Component) {
 }(_react2.default.Component);
 
 PdpSidePanelRight.propTypes = {
-  skirts: _react.PropTypes.array.isRequired
+  skirts: _react.PropTypes.array.isRequired,
+  customize: _react.PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    skirts: state.skirts
+    skirts: state.skirts,
+    customize: state.customize
   };
 }
 
@@ -1419,6 +1470,7 @@ var SidePanelSize = function (_SidePanel) {
     value: function render() {
       var _this2 = this;
 
+      var ERROR = this.props.customize.size.error ? "c-card-customize__content__left error" : "c-card-customize__content__left";
       var MENU_STATE = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
       var TRIGGER_STATE = this.props.customize.size.id ? "c-card-customize__content is-selected" : "c-card-customize__content";
 
@@ -1443,7 +1495,7 @@ var SidePanelSize = function (_SidePanel) {
             onClick: this.openMenu },
           _react2.default.createElement(
             'div',
-            { className: 'c-card-customize__content__left' },
+            { className: ERROR },
             'Dresses Size'
           ),
           _react2.default.createElement(
@@ -1962,11 +2014,15 @@ function configureStore(initialState) {
     customize: {
       size: {
         id: null,
-        presentation: ''
+        presentation: '',
+        error: false,
+        message: ''
       },
       length: {
         id: null,
-        presentation: ''
+        presentation: '',
+        error: false,
+        message: ''
       },
       color: {
         id: null,
