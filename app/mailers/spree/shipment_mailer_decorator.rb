@@ -32,6 +32,12 @@ Spree::ShipmentMailer.class_eval do
         tax:                   nil
       )
     rescue StandardError => e
+      if e.class == Customerio::Client::InvalidResponse
+        response = HashWithIndifferentAccess[e.response.to_hash]
+        response[:body] = e.response.body
+        Raven.capture_exception(e, extra: { response: response })
+      end
+
       Raven.capture_exception(e)
       NewRelic::Agent.notice_error(e)
     end
