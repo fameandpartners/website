@@ -24,6 +24,8 @@
 }
 
 .panel-media .media-wrap {
+  display: flex;
+  justify-content: center;
   position: relative;
   height: 100vh;
   max-height: 850px; // NOTE: this will need to be change when we get new product images
