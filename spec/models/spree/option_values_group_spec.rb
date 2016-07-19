@@ -10,8 +10,6 @@ describe Spree::OptionValuesGroup, type: :model do
 
   describe 'scopes' do
     describe '.for_colors' do
-      before(:each) { rememoize(Spree::OptionType, :@color) }
-
       it 'returns only groups that belongs to the dresses-color OptionType' do
         color_option_type = create(:option_type, :color)
         other_option_type = create(:option_type)

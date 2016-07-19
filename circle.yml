@@ -10,6 +10,8 @@ dependencies:
 machine:
   ruby:
     version: 2.1.6
+  node:
+    version: 6.3.0
 
 general:
   artifacts:

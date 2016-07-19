@@ -27,7 +27,6 @@ module Bergen
 
           it 'saves and call verification worker' do
             expect(return_item_process).to receive(:save!)
-            expect(Workers::VerifyStyleMasterWorker).to receive(:perform_async).with(return_item_process.id)
 
             return_item_process.start_process
           end

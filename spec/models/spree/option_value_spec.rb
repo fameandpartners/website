@@ -2,11 +2,6 @@ require 'spec_helper'
 
 describe Spree::OptionValue, type: :model do
   describe 'scopes' do
-    before(:each) do
-      rememoize(Spree::OptionType, :@color)
-      rememoize(Spree::OptionType, :@size)
-    end
-
     describe '.colors' do
       context 'No color option type created' do
         it 'returns empty relation if no color option type' do
