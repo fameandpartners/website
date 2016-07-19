@@ -11,7 +11,7 @@ Feature: Complete Guest Checkout
     Then I select "<Site Version>" site version
     And I select "<Dress Size>" size
     And I select "<Skirt Length>" skirt length
-    And I click on "Add to Cart" button
+    And I click on "ADD TO BAG" button
     # And I should see the cart sidebar with the checkout button
     # And I click on "CHECKOUT" button
     Then I fill in form fields with blank spaces:
@@ -42,7 +42,7 @@ Feature: Complete Guest Checkout
     Then I select "<Site Version>" site version
     And I select "<Dress Size>" size
     And I select "<Skirt Length>" skirt length
-    And I click on "Add to Cart" button
+    And I click on "ADD TO BAG" button
     # And I should see the cart sidebar with the checkout button
     # And I click on "CHECKOUT" button
     Then I select "<Country>" country and "<State>" state
