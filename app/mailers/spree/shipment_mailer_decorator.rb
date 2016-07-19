@@ -36,9 +36,10 @@ Spree::ShipmentMailer.class_eval do
         response = HashWithIndifferentAccess[e.response.to_hash]
         response[:body] = e.response.body
         Raven.capture_exception(e, extra: { response: response })
+      else
+        Raven.capture_exception(e)
       end
 
-      Raven.capture_exception(e)
       NewRelic::Agent.notice_error(e)
     end
   end
