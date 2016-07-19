@@ -1933,6 +1933,9 @@ exports.default = rootReducer;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 exports.customizeReducer = customizeReducer;
 exports.productReducer = productReducer;
 exports.imagesReducer = imagesReducer;
@@ -1947,7 +1950,7 @@ function customizeReducer() {
 
   switch (action.type) {
     case 'CUSTOMIZE_DRESS':
-      return Object.assign({}, state, action.customize);
+      return _extends({}, state, action.customize);
     default:
       return state;
   }
@@ -2008,6 +2011,9 @@ function skirtChartReducer() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 exports.default = configureStore;
 
 var _redux = require('redux');
@@ -2023,7 +2029,7 @@ var _reduxImmutableStateInvariant2 = _interopRequireDefault(_reduxImmutableState
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function configureStore(initialState) {
-  initialState = Object.assign({}, initialState, {
+  initialState = _extends({}, initialState, {
     lengths: [{
       value: 'petite',
       presentation_1: 'Smaller than',
