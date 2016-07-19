@@ -1,0 +1,41 @@
+.container.wedding-quiz-container{
+  width: 89%;
+  max-width: 1920px;
+
+  .quiz-wrapper-box{
+    padding-right: 3.9%;
+  }
+
+}
+
+.wedding-item{
+  padding-right: 7px;
+  padding-left: 7px;
+}
+
+.quiz-box .choices.wedding-quiz-img img {
+  opacity: 1
+}
+
+.dress-size-box {
+  width: 75px;
+  border: 1px solid #484848;
+  text-align: center;
+  padding: 8px;
+  margin-right: 11px;
+}
+
+.cup-size-boxes {
+
+  .dress-size-box {
+    padding: 18px;
+  }
+}
+
+.m-top-10 {
+  margin-top: 10px;
+}
+
+.m-top-50 {
+  margin-top: 50px;
+}
