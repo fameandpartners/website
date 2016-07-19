@@ -350,23 +350,30 @@ page.initCheckoutEditPage = () ->
         page.pin_request_in_process = false
 
     countryChanged: () ->
-      shippingFeeAlert = $('#shipping_fee_alert')
       element = $(this)
       useBillingAddressToShip = $('#ship_to_address_Ship_to_this_address')
       countryHasShippingFee = window.checkout_page.countries[element.val()]
       isBillAddressCountry = element.attr('id') == 'order_bill_address_attributes_country_id'
       isShipAddressCountry = element.attr('id') == 'order_ship_address_attributes_country_id'
       useBillingAddressToShipChecked = useBillingAddressToShip.is(':checked')
+      selectedCountry = window.checkout_page.selectedCountry(element)
       if isBillAddressCountry and useBillingAddressToShipChecked and countryHasShippingFee
-        shippingFeeAlert.show()
+        window.checkout_page.showShippingFeeAlert(selectedCountry)
       else if isBillAddressCountry and useBillingAddressToShipChecked
-        shippingFeeAlert.hide()
+        window.checkout_page.hideShippingFeeAlert()
       else if isShipAddressCountry and countryHasShippingFee
-        shippingFeeAlert.show()
+        window.checkout_page.showShippingFeeAlert(selectedCountry)
       else if isShipAddressCountry
-        shippingFeeAlert.hide()
+        window.checkout_page.hideShippingFeeAlert()
       window.checkout_page.uncheckInternationalShippingFeeCheckbox()
       window.checkout_page.changeButtonStatus()
+
+    showShippingFeeAlert: (country) ->
+      $('#country_name').html(country)
+      $('#shipping_fee_alert').show()
+
+    hideShippingFeeAlert: () ->
+      $('#shipping_fee_alert').hide()
 
     shippingFeeHasToBeApplied: () ->
       if $('#ship_to_address_Ship_to_this_address').is(':checked')
@@ -395,6 +402,13 @@ page.initCheckoutEditPage = () ->
         $('button[name="pay_securely"]').prop('disabled', false)
       else
         $('button[name="pay_securely"]').prop('disabled', true)
+
+    selectedCountry: (element) ->
+      result = element.children(':selected').html().match(/\w+(\s\w+)*/)
+      if result
+        result[0]
+      else
+        result
   }
   page.init()
   window.checkout_page = page
