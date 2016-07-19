@@ -27,6 +27,11 @@ module Acceptance
       end
     end
 
+    step 'I should see shipping to :country_name warning' do |country_name|
+      expect(page).to have_text("#{country_name.upcase} ORDERS")
+      expect(page).to have_text('Additional custom duty fees apply to your selected country.')
+    end
+
     step 'I agree with shipping fee' do
       find('#international_shipping_fee').click
     end

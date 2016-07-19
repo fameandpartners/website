@@ -75,7 +75,7 @@ Feature: Complete Guest Checkout
       | USA          | United States | California | Zipcode       | US 10      | Petite       | 289.00      |
       | Australia    | New Zealand   | Whanganui  | Postcode      | AU 14      | Petite       | 319.00      |
 
-  @javascript @no_vcr @selenium
+  @javascript @no_vcr
   Scenario Outline: Successfully Buy a Dress and ship to UK
     When I am on Connie dress page
     Then I select "<Site Version>" site version
@@ -83,7 +83,7 @@ Feature: Complete Guest Checkout
     And I select "<Skirt Length>" skirt length
     And I click on "Add to Cart" button
     Then I select "<Country>" country and "<State>" state
-    And I should see "Additional custom duty fees apply to your selected country."
+    And I should see shipping to "<Country>" warning
     And I fill in form fields with:
       | Email                   | test@email.com |
       | First Name              | Roger          |
@@ -97,7 +97,7 @@ Feature: Complete Guest Checkout
     And I click on "Pay Securely" button
     Then I should see "ADDITIONAL CUSTOM DUTY FEES MAY APPLY"
     And I click on "OK" button
-    And I should see "Shipping $30.0"
+    And I should see "Shipping$30.0"
     And I fill in credit card information:
       | Card number      | 5520000000000000  |
       | Name on card     | Zaphod Beeblebrox |
