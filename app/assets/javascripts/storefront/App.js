@@ -10,9 +10,10 @@ import PdpSidePanelRight from './components/PDP/SidePanelRight';
 if(typeof window.PdpDataFull !== 'undefined') {
   const store = configureStore(window.PdpDataFull);
 
-  store.subscribe(() => {
-    console.log('Store changed: ', store.getState());
-  });
+//  JUST FOR DEV!!!
+//   store.subscribe(() => {
+//     console.log('Store changed: ', store.getState());
+//   });
 
   render(
     <Provider store={store}>
