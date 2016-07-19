@@ -14,7 +14,7 @@ ruby:
   step_total = @quiz.questions.map(&:step).uniq.count + (current_spree_user ? 0 : 1)
 
 .page-content.quiz-box#style_quiz
-  .container.main-container-wrap
+  div class="container main-container-wrap#{@quiz_type == :wedding ? " wedding-quiz-container" : ""}"
     .col-md-4.quiz-wrapper-box
       .progress-next
         .questions-count

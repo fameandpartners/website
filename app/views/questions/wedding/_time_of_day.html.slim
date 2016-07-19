@@ -1,0 +1,58 @@
+.row
+  .col-md-4
+    .heading
+      h1 Time of Day
+      h2.h5 Slide the scale to indicate of day.
+  .col-md-8
+    .chart-wrapper
+      .carousel-strap.js-sexiness-carousel
+        .media-wrap.item-wrap
+          = image_tag "wedding_quiz/2/001.jpg"
+        .media-wrap.item-wrap
+          = image_tag "wedding_quiz/2/002.jpg"
+        .media-wrap.item-wrap
+          = image_tag "wedding_quiz/2/003.jpg"
+        .media-wrap.item-wrap
+          = image_tag "style_quiz/sexiness/Q9-3.jpg"
+        .media-wrap.item-wrap
+          = image_tag "style_quiz/sexiness/Q9-4.jpg"
+      .slider
+        .js-sexiness-slider
+        .copy-wrap
+          .copy-left MORNING
+          .copy-right EVENING
+      .js-sexiness-select
+        - question.answers.order('sexiness ASC').each_with_index do |answer, index|
+          = radio_button_tag "quiz[questions][#{question.id}][answer][code]", answer.code
+
+javascript:
+  $(function() {
+    $('.js-sexiness-carousel').slick({
+      arrows: false,
+      centerMode: true,
+      centerPadding: '40px',
+      slidesToShow: 3,
+      initialSlide: 2,
+      responsive: [{
+        breakpoint: 767,
+          settings: {
+            slidesToShow: 1
+          }
+      }]
+    });
+
+    var slider = $('.js-sexiness-slider').slider({
+      min: 1,
+      max: 5,
+      value: 3,
+      range: 'min',
+      slide: function( event, ui ) {
+        $('.js-sexiness-select input[value=sxs' + ui.value + ']').prop('checked', true);
+        $('.js-sexiness-carousel').slick('slickGoTo', ui.value - 1, true);
+      }
+    });
+    // update slider
+    $('.js-sexiness-carousel').on('afterChange', function(event, slick, currentSlide, nextSlide) {
+      slider.slider('value', currentSlide + 1);
+    });
+  });
