@@ -1,0 +1,351 @@
+= render :partial => 'landing_pages/common'
+
+.page-content.style-icon-page
+
+  .category-header
+    .media-wrap
+      = image_tag 'style-icon/high-summer/hero-header.jpg', :class => 'img-responsive'
+
+    .outer-wrap
+      .inner-wrap
+        h1.title
+          span Brittany Xavier
+
+  // F&P Style Icon - Intro text
+  section.section-box.container-fluid.no-padding.no-margin.top-overlay.section-intro
+    .row
+      .col-md-12.heading-overlay-wrapper
+        h2.heading-overlay F&P Style Icon
+
+    .row.vertical-align-copy
+      .col-md-4.col-md-offset-1.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+        .copy-wrap
+          p Arriving at Georgie airy East Village apartment to find her fresh-faced and with coffees in hand for us, despite seven long-haul flights wasn’t all that surprising. We mean, the only reason we even knew the girl had flown more copy here.
+          .cta-wrapper
+             / TODO: add real link.
+             .cta-product-caption.copy-highlight
+              | Cara wears #{link_to "Sasha", "#", :class => 'highlight'} Top in White
+
+      .col-md-6.col-md-offset-1.content-img
+        = image_tag 'style-icon/high-summer/intro.jpg', :class => 'img-responsive'
+
+  / TEMPORARY: Hide the menu until it is developed
+  .page-navigation.float-on-scroll.hidden
+    .container
+      .row
+        .col-md-12
+          .link #{link_to "Look 1", "#look1"}
+          .link #{link_to "Look 2", "#look2"}
+          .link #{link_to "Look 3", "#look3"}
+          .link #{link_to "Look 4", "#look4"}
+          .link #{link_to "Look 5", "#look5"}
+          .link #{link_to "Look 6", "#look6"}
+          .link #{link_to "Look 7", "#look7"}
+          .link #{link_to "Look 8", "#look8"}
+
+  // Look 1
+  // TODO: Get the real ID for this product
+  - current_dress_id = "#"
+  / TODO: Get these variables (name, price, link) from the ID above, dynamically
+  - current_dress_name = "Allegra"
+  - current_dress_link = "https://www.fameandpartners.com/dresses/dress-allegra-680?color=pale-pink"
+  - current_dress_price = "$279"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#look1
+    .row
+      .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
+        / TODO: replace with the real copy
+        h2.heading-overlay The #{current_dress_name}
+
+    .row
+      .col-md-10.col-md-offset-1.content-img
+        = link_to current_dress_link
+          = image_tag 'style-icon/high-summer/look-01.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+    .row
+      .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1.content-copy
+        .copy-wrap.text-center
+          / TODO: replace with the real copy
+          h3 Rebel Belle
+          p
+            | Soft pink pleats are ladylike as can be when paired with delicate gold accessories.
+            span.line-break-md  Got a rebellious streak? Toughen up with a leather jacket and a swipe of clashing red lipstick
+
+          / TODO: replace with the real dress name
+          .cta-product-caption.copy-highlight
+            | Pictured above: #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to current_dress_link
+              span.btn-md.btn-featured
+               | Shop & customize
+
+  // TODO: Check if this product has been created in production
+  // Look 2
+  // TODO: Get the real ID for this product
+  - current_dress_id = "#"
+  / TODO: Get these variables (name, price, link) from the ID above, dynamically
+  - current_dress_name = "Kirrily"
+  - current_dress_link = "#"
+  - current_dress_price = "$299"
+  section.section-box.container-fluid.no-padding.no-margin.section-look#look2
+    .row
+      .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
+        / TODO: replace with the real copy
+        h2.heading-overlay The #{current_dress_name}
+
+    .row.vertical-align-copy
+      .col-md-6.col-md-offset-1.content-img
+
+        = image_tag 'style-icon/high-summer/look-02.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+      .col-md-3.col-md-offset-1.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+        .copy-wrap
+          / TODO: replace with the real copy
+          h3 Pattern Behavior
+          p Slip-on flats make the Kirrily dress an easy, effortless daytime look. Play with patterns for night: pretty polka dots + an embellished topper = the ultimate it-girl pairing.
+
+          / TODO: replace with the real dress name
+          .cta-product-caption.copy-highlight
+            | Pictured
+            span.hidden-md.hidden-lg  above:
+            span.hidden-xs.hidden-sm  left:
+            |  #{link_to "#{current_dress_name} The #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to current_dress_link
+              span.btn-md.btn-featured
+               | Shop & customize
+
+  // Look 3
+  // TODO: Get the real ID for this product
+  - current_dress_id = "#"
+  / TODO: Get these variables (name, price, link) from the ID above, dynamically
+  - current_dress_name = "Maaike"
+  - current_dress_link = "https://www.fameandpartners.com/dresses/dress-maaike-1065?color=black"
+  - current_dress_price = "$249"
+  section.section-box.container-fluid.no-padding.no-margin.section-look#look3
+    .row
+      .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
+        / TODO: replace with the real copy
+        h2.heading-overlay The #{current_dress_name}
+
+    .row
+      .col-md-12.content-img
+
+        = image_tag 'style-icon/high-summer/look-03.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+    .row
+      .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1.content-copy
+        .copy-wrap.text-center
+          / TODO: replace with the real copy
+          h3 Throwback, 2 Ways
+          p
+            | It’s all about casual ‘90s callouts: the cropped white tee layered underneath a slim tank, the chunky choker.
+            span.line-break-md  Step outside of your comfort zone under the cover of night and add an unexpected touch of vintage.
+
+          / TODO: replace with the real dress name
+          .cta-product-caption.copy-highlight
+            | Pictured above: #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to current_dress_link
+              span.btn-md.btn-featured
+               | Shop & customize
+
+  // Look 4
+  // TODO: Get the real ID for this product
+  - current_dress_id = "#"
+  / TODO: Get these variables (name, price, link) from the ID above, dynamically
+  - current_dress_name = "Dara Jumpsuit"
+  - current_dress_link = "https://www.fameandpartners.com/dresses/dress-dara-jumpsuit-1056?color=looking-glass"
+  - current_dress_price = "$229"
+  section.section-box.container-fluid.no-padding.no-margin.section-look#look4
+    .row
+      .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
+        / TODO: replace with the real copy
+        h2.heading-overlay The #{current_dress_name}
+
+    .row
+      .col-md-12.content-img
+
+        = image_tag 'style-icon/high-summer/look-04.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+    .row
+      .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1.content-copy
+        .copy-wrap.text-center
+          / TODO: replace with the real copy
+          h3 Floral Redux
+          p
+            | Tame an all-over print by layering a solid tee underneath. Going out?
+            span.line-break-md  Pile on more patterns for an eclectic mix that can’t be copped.
+
+          / TODO: replace with the real dress name
+          .cta-product-caption.copy-highlight
+            | Pictured above: #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to current_dress_link
+              span.btn-md.btn-featured
+               | Shop & customize
+
+  // TODO: Check if this product has been created in production
+  // Look 5
+  // TODO: Get the real ID for this product
+  - current_dress_id = "#"
+  / TODO: Get these variables (name, price, link) from the ID above, dynamically
+  - current_dress_name = "Murphy"
+  - current_dress_link = "#"
+  - current_dress_price = "$229"
+  section.section-box.container-fluid.no-padding.no-margin.section-look#look5
+    .row
+      .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
+        / TODO: replace with the real copy
+        h2.heading-overlay The #{current_dress_name}
+
+    .row.vertical-align-copy
+      .col-md-6.col-md-offset-1.content-img
+
+        = image_tag 'style-icon/high-summer/look-05.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+      .col-md-3.col-md-offset-1.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+        .copy-wrap
+          / TODO: replace with the real copy
+          h3 Something Different
+          p Of course, an LBD makes a sexy statement at night with a pair of open-toe heels—but don’t think you can’t make it work for daytime, too. Over ripped denim, the Murphy dress becomes an unexpected wardrobe hero.
+
+          / TODO: replace with the real dress name
+          .cta-product-caption.copy-highlight
+            | Pictured
+            span.hidden-md.hidden-lg  above:
+            span.hidden-xs.hidden-sm  left:
+            |  #{link_to "#{current_dress_name} The #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to current_dress_link
+              span.btn-md.btn-featured
+               | Shop & customize
+
+  // TODO: Check if this product has been created in production
+  // Look 6
+  // TODO: Get the real ID for this product
+  - current_dress_id = "#"
+  / TODO: Get these variables (name, price, link) from the ID above, dynamically
+  - current_dress_name = "Azzedine"
+  - current_dress_link = "#"
+  - current_dress_price = "$299"
+  section.section-box.container-fluid.no-padding.no-margin.section-look#look6
+    .row
+      .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
+        / TODO: replace with the real copy
+        h2.heading-overlay The #{current_dress_name}
+
+    .row
+      .col-md-12.content-img
+
+        = image_tag 'style-icon/high-summer/look-06.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+    .row
+      .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1.content-copy
+        .copy-wrap.text-center
+          / TODO: replace with the real copy
+          h3 New Hollywood
+          p
+            | Modernize feminine details—ruffles, a plunging neckline, a floral print—with a gilt body chain to catch the sun.
+            span.line-break-md  Make the same print evening-appropriate with a nod to classic ‘40s screen sirens.
+
+          / TODO: replace with the real dress name
+          .cta-product-caption.copy-highlight
+            | Pictured above: #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to current_dress_link
+              span.btn-md.btn-featured
+               | Shop & customize
+
+  // Look 7
+  // TODO: Get the real ID for this product
+  - current_dress_id = "#"
+  / TODO: Get these variables (name, price, link) from the ID above, dynamically
+  - current_dress_name = "Delaney"
+  - current_dress_link = "https://www.fameandpartners.com/dresses/dress-delaney-three-piece-1088?color=white"
+  - current_dress_price = "$349"
+  section.section-box.container-fluid.no-padding.no-margin.section-look#look7
+    .row
+      .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
+        / TODO: replace with the real copy
+        h2.heading-overlay The #{current_dress_name}
+
+    .row
+      .col-md-8.col-md-offset-2.content-img
+
+        = image_tag 'style-icon/high-summer/look-07.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+    .row
+      .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1.content-copy
+        .copy-wrap.text-center
+          / TODO: replace with the real copy
+          h3 It's a tie!
+          p The Delaney three-piece set is chic any way you wear it. The vibe is “Cali Girl Cool” with a soft tee and oversized sunglasses, while an updo and and architectural accessories scream “Art World Darling.”
+
+          / TODO: replace with the real dress name
+          .cta-product-caption.copy-highlight
+            | Pictured above: #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to current_dress_link
+              span.btn-md.btn-featured
+               | Shop & customize
+
+  // Look 8
+  // TODO: Get the real ID for this product
+  - current_dress_id = "#"
+  / TODO: Get these variables (name, price, link) from the ID above, dynamically
+  - current_dress_name = "Greer Two Piece"
+  - current_dress_link = "https://www.fameandpartners.com/dresses/dress-greer-two-piece-1070?color=black"
+  - current_dress_price = "$229"
+  section.section-box.container-fluid.no-padding.no-margin.section-look#look8
+    .row
+      .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
+        / TODO: replace with the real copy
+        h2.heading-overlay #{current_dress_name}
+
+    .row.vertical-align-copy
+      .col-md-6.col-md-offset-1.content-img
+
+        = image_tag 'style-icon/high-summer/look-08.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+      .col-md-3.col-md-offset-1.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+        .copy-wrap
+          / TODO: replace with the real copy
+          h3 #FreeTheShoulders
+          p Don’t overcomplicate it; a statement choker and bold lip are all you need in the Greer two-piece. Let your shoulders shine.
+
+          / TODO: replace with the real dress name
+          .cta-product-caption.copy-highlight
+            | Pictured
+            span.hidden-md.hidden-lg  above:
+            span.hidden-xs.hidden-sm  left:
+            |  #{link_to "#{current_dress_name} The #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to current_dress_link
+              span.btn-md.btn-featured
+               | Shop & customize
+
+  // Featured Products / Curated Edit
+  section.section-box.section-products.products-collections.category
+    .container.relative.products-collection
+
+      .row
+        .col-md-12.text-center
+          h3.featured-products-title Shop Britanny's Curated Edit
+
+      / TODO: Change this to the real Edit name.
+      - all_products = get_products_from_edit('AMFAM', nil, nil, 9)
+
+      .row
+        - all_products.each_slice(3) do |products|
+          - products ||= []
+          - products.each do |product|
+            = render :partial => '/landing_pages/product', :locals => { :product => product, :product_columns => 'col-md-4 col-xs-6' }
