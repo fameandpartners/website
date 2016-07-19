@@ -1,0 +1,69 @@
+/* [F&P STYLE ICON]
+-------------------------------------------------------*/
+.style-icon-page {
+
+  h1.title {
+    color: $c-neutral-black;
+  }
+
+  a {
+    color: $c-neutral-black;
+  }
+
+  .section-intro {
+
+    p {
+      font-size: 3.3rem;
+      line-height: 130%;
+    }
+
+    .cta-product-caption a {
+      border-bottom: 1px solid $c-neutral-black;
+    }
+
+  }
+
+  .content-copy:not(.vertical-align){
+
+    h3 {
+      margin-top: 70px;
+    }
+
+  }
+
+  .copy-wrap h3,
+  h3.featured-products-title {
+    font-size: 4rem;
+    text-transform: none;
+  }
+
+  .featured-products-title {
+    margin: 85px 0;
+  }
+
+  .cta-product-caption {
+    font-size: 1.2rem;
+  }
+
+  .vertical-align-copy {
+    @include column-vertical-align();
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    .copy-wrap h3 {
+      margin-top: 40px;
+      font-size: 3rem;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .content-copy {
+      text-align: center;
+    }
+
+  }
+
+}
