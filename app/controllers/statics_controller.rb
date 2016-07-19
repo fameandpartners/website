@@ -80,7 +80,11 @@ class StaticsController < ApplicationController
     render :template => 'landing_pages/bohemian_summer', :layout => 'redesign/application'
   end
 
-
+  def high_summer
+    @title = "Brittany Xavier's High Summer Collection | Dresses - Fame & Partners"
+    @description = "Discover beautiful summer dresses here at Fame & Partners"
+    render :template => 'landing_pages/high_summer', :layout => 'redesign/application'
+  end
 
   def all_size
     @title = "All Size | Beautiful Dresses - Fame & Partners"
