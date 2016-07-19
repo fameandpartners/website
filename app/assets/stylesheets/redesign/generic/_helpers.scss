@@ -103,6 +103,14 @@
   position: relative !important;
 }
 
+@media (min-width: $bootstrap-md-width) {
+
+  .line-break-md {
+    display: block;
+  }
+
+}
+
 // Same-height columns
 @media (min-width: $bootstrap-md-width) {
 
