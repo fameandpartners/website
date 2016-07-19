@@ -4,8 +4,10 @@
   top: 0;
   left: 100%;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  padding-bottom: $mega-menu-desktop-height;
   background: $c-neutral-white;
+  overflow: hidden;
   opacity: 0;
   z-index: 1;
   transition: all 200ms ease-in;
@@ -13,9 +15,7 @@
 
 @mixin pdp-side-menu-mobile {
   position: fixed;
-  top: 0;
   bottom: 0;
-  height: 100vh;
   padding: 0 30px;
   overflow-y: scroll;
   border-top: solid $c-neutral-2 2px;
@@ -31,6 +31,10 @@
   position: absolute;
   @include pdp-side-menu-core;
 
+  .custom-scroll {
+    padding-right: 10px;
+  }
+
   .btn-close {
     margin-top: 15px;
   }
@@ -44,13 +48,12 @@
 @media (max-width: $bootstrap-md-width - 1px) {
 
   .pdp-panel-side-left {
+    @include pdp-side-menu-core;
+    @include pdp-side-menu-mobile;
 
     .btn-close {
       margin-top: 15px;
     }
-
-    @include pdp-side-menu-core;
-    @include pdp-side-menu-mobile;
 
     &.is-active {
       @include pdp-side-menu-active;
@@ -60,14 +63,6 @@
 
   .pdp-side-menu {
     @include pdp-side-menu-mobile;
-  }
-
-}
-
-@media (min-width: $bootstrap-md-width) {
-
-  .pdp-side-menu {
-    overflow-y: scroll;
   }
 
 }

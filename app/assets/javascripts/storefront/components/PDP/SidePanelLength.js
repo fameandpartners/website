@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {Scrollbars} from 'react-custom-scrollbars';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
 import SidePanelLengthChart from './SidePanelLengthChart';
@@ -21,6 +22,8 @@ class SidePanelLength extends SidePanel {
   }
 
   render() {
+    const AUTO_HIDE = true;
+
     const ERROR = this.props.customize.length.error
       ? "c-card-customize__content__left error"
       : "c-card-customize__content__left";
@@ -54,18 +57,22 @@ class SidePanelLength extends SidePanel {
         </a>
 
         <div className={MENU_STATE}>
-          <div className="text-right">
-            <a href="#"
-              className="btn-close lg"
-              onClick={this.closeMenu}>
-                <span className="hide-visually">Close Menu</span>
-            </a>
-          </div>
-          <h2 className="h4 c-card-customize__header">Choose your skirt length</h2>
-          <p>Tell us your height category and we can adjust your
-            skirt length for free!</p>
-          {LENGTHS}
-          <SidePanelLengthChart />
+          <Scrollbars autoHide={AUTO_HIDE}>
+            <div className="custom-scroll">
+              <div className="text-right">
+                <a href="#"
+                  className="btn-close lg"
+                  onClick={this.closeMenu}>
+                    <span className="hide-visually">Close Menu</span>
+                </a>
+              </div>
+              <h2 className="h4 c-card-customize__header">Choose your skirt length</h2>
+              <p>Tell us your height category and we can adjust your
+                skirt length for free!</p>
+              {LENGTHS}
+              <SidePanelLengthChart />
+            </div>
+          </Scrollbars>
         </div>
       </div>
     );

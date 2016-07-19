@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {Scrollbars} from 'react-custom-scrollbars';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
 import {GetDressVariantId, UpdateUrl} from './utils';
@@ -53,6 +54,8 @@ class SidePanelColor extends SidePanel {
   }
 
   render() {
+    const AUTO_HIDE = true;
+
     const props = this.props;
     const menuState = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
     const triggerState = props.customize.color.id
@@ -103,32 +106,36 @@ class SidePanelColor extends SidePanel {
         </a>
 
         <div className={menuState}>
-          <div className="text-right">
-            <a href="#"
-              className="btn-close lg"
-              onClick={this.closeMenu}>
-                <span className="hide-visually">Close Menu</span>
-            </a>
-          </div>
-          <h2 className="h4 c-card-customize__header">
-            Selected Color:
-            <span> {props.customize.color.presentation}</span>
-          </h2>
-          <div className={previewColor}></div>
-          <h3 className="h5 heading-secondary">Recommended Colors</h3>
-          <div className="row">{defaultColors}</div>
-          {(() => {
-            if(customColors.length) {
-              return (
-                <div>
-                  <h3 className="h5 heading-secondary">
-                    Custom Colors&nbsp;&nbsp; +${parseFloat(props.customColorPrice)}
-                  </h3>
-                  <div className="row">{customColors}</div>
-                </div>
-              );
-            }
-          })()}
+          <Scrollbars autoHide={AUTO_HIDE}>
+            <div className="custom-scroll">
+              <div className="text-right">
+                <a href="#"
+                  className="btn-close lg"
+                  onClick={this.closeMenu}>
+                    <span className="hide-visually">Close Menu</span>
+                </a>
+              </div>
+              <h2 className="h4 c-card-customize__header">
+                Selected Color:
+                <span> {props.customize.color.presentation}</span>
+              </h2>
+              <div className={previewColor}></div>
+              <h3 className="h5 heading-secondary">Recommended Colors</h3>
+              <div className="row">{defaultColors}</div>
+              {(() => {
+                if(customColors.length) {
+                  return (
+                    <div>
+                      <h3 className="h5 heading-secondary">
+                        Custom Colors&nbsp;&nbsp; +${parseFloat(props.customColorPrice)}
+                      </h3>
+                      <div className="row">{customColors}</div>
+                    </div>
+                  );
+                }
+              })()}
+            </div>
+          </Scrollbars>
         </div>
       </div>
     );

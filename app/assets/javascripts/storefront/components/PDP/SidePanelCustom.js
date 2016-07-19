@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {Scrollbars} from 'react-custom-scrollbars';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
 
@@ -29,6 +30,8 @@ class SidePanelCustom extends SidePanel {
   }
 
   render() {
+    const AUTO_HIDE = true;
+
     const menuState = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
     const triggerState = this.props.customize.customization.id
       ? "c-card-customize__content is-selected" : "c-card-customize__content";
@@ -65,15 +68,19 @@ class SidePanelCustom extends SidePanel {
         </a>
 
         <div className={menuState}>
-          <div className="text-right">
-            <a href="#"
-              className="btn-close lg"
-              onClick={this.closeMenu}>
-                <span className="hide-visually">Close Menu</span>
-            </a>
-          </div>
-          <h2 className="h4 c-card-customize__header">Select your customization</h2>
-          <div className="row">{customs}</div>
+          <Scrollbars autoHide={AUTO_HIDE}>
+            <div className="custom-scroll">
+              <div className="text-right">
+                <a href="#"
+                  className="btn-close lg"
+                  onClick={this.closeMenu}>
+                    <span className="hide-visually">Close Menu</span>
+                </a>
+              </div>
+              <h2 className="h4 c-card-customize__header">Select your customization</h2>
+              <div className="row">{customs}</div>
+            </div>
+          </Scrollbars>
         </div>
       </div>
     );

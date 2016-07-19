@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {Scrollbars} from 'react-custom-scrollbars';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
 import SidePanelSizeChart from './SidePanelSizeChart';
@@ -29,6 +30,8 @@ class SidePanelSize extends SidePanel {
   }
 
   render() {
+    const AUTO_HIDE = true;
+
     const ERROR = this.props.customize.size.error
       ? "c-card-customize__content__left error"
       : "c-card-customize__content__left";
@@ -58,16 +61,20 @@ class SidePanelSize extends SidePanel {
         </a>
 
         <div className={MENU_STATE}>
-          <div className="text-right">
-            <a href="javascript:;"
-              className="btn-close lg"
-              onClick={this.closeMenu}>
-                <span className="hide-visually">Close Menu</span>
-            </a>
-          </div>
-          <h2 className="h4 c-card-customize__header">Choose your size</h2>
-          <div className="row">{SIZES}</div>
-          <SidePanelSizeChart />
+          <Scrollbars autoHide={AUTO_HIDE}>
+            <div className="custom-scroll">
+              <div className="text-right">
+                <a href="javascript:;"
+                  className="btn-close lg"
+                  onClick={this.closeMenu}>
+                    <span className="hide-visually">Close Menu</span>
+                </a>
+              </div>
+              <h2 className="h4 c-card-customize__header">Choose your size</h2>
+              <div className="row">{SIZES}</div>
+              <SidePanelSizeChart />
+            </div>
+          </Scrollbars>
         </div>
       </div>
     );
