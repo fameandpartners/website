@@ -193,6 +193,9 @@ FameAndPartners::Application.routes.draw do
     get '/macys' => 'products/collections#show', :as => :macys
     get '/shop-social' => 'products/collections#show', :as => :shop_social
 
+    # "F&P Style Icon" landing pages
+    get '/brittany-xavier-high-summer-collection' => 'statics#high_summer', :as => :high_summer_collection
+
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
       get '/getitquick' => 'hacky_messages#getitquick_unavailable', :as => :fast_making_dresses
