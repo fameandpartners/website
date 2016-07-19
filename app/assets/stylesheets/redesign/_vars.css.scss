@@ -36,6 +36,20 @@ $font-family-secondary: 'brandon-grotesque', sans-serif;
 // Freight - available weight and styles:
 // 300, 300 italic, 500, 500 italic
 $font-heading: 'freight-display-pro', sans-serif;
+
+@font-face {
+  font-family: Freight;
+  src: url(/assets/ufonts.com_freight-big-light-opentype.otf);
+}
+
+@font-face {
+  font-family: Freight-Italic;
+  src: url(/assets/ufonts.com_freight-disp-book-italic-opentype.otf);
+}
+
+$Gilda: 'Freight', serif; //modern-classic
+$GildaItalic: 'Freight-Italic', serif; //modern-classic
+
 // @end Fonts
 
 // Form
