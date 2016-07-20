@@ -8,24 +8,21 @@ class AddAdditionalCountriesToCheckOut < ActiveRecord::Migration
 
   AUSTRALIA_ZONE_COUNTRY_NAMES = ['Hong Kong', 'Malaysia', 'Japan', 'Singapore', 'China']
 
-  AUSTRALIA_ZONE = Spree::Zone.find(3)
-  US_ZONE = Spree::Zone.find(4)
-
   def up
-    AUSTRALIA_ZONE_COUNTRY_NAMES.each { |country_name| add_country_to_zone(AUSTRALIA_ZONE, country_name) }
+    AUSTRALIA_ZONE_COUNTRY_NAMES.each { |country_name| add_country_to_zone(australia_zone, country_name) }
 
-    US_ZONE_COUNTRY_NAMES.each { |country_name| add_country_to_zone(US_ZONE, country_name) }
+    US_ZONE_COUNTRY_NAMES.each { |country_name| add_country_to_zone(us_zone, country_name) }
 
-    update_zone_members_counter(AUSTRALIA_ZONE)
-    update_zone_members_counter(US_ZONE)
+    update_zone_members_counter(australia_zone)
+    update_zone_members_counter(us_zone)
   end
 
   def down
-    US_ZONE_COUNTRY_NAMES.each { |country_name| remove_country_from_zone(US_ZONE, country_name) }
-    AUSTRALIA_ZONE_COUNTRY_NAMES.each { |country_name| remove_country_from_zone(AUSTRALIA_ZONE, country_name) }
+    US_ZONE_COUNTRY_NAMES.each { |country_name| remove_country_from_zone(us_zone, country_name) }
+    AUSTRALIA_ZONE_COUNTRY_NAMES.each { |country_name| remove_country_from_zone(australia_zone, country_name) }
 
-    update_zone_members_counter(AUSTRALIA_ZONE)
-    update_zone_members_counter(US_ZONE)
+    update_zone_members_counter(australia_zone)
+    update_zone_members_counter(us_zone)
   end
 
   def add_country_to_zone(zone, country_name)
@@ -52,5 +49,13 @@ class AddAdditionalCountriesToCheckOut < ActiveRecord::Migration
   def update_zone_members_counter(zone)
     zone.zone_members_count = zone.zone_members.size
     zone.save!
+  end
+
+  def australia_zone
+    @australia_zone ||= Spree::Zone.find(3)
+  end
+
+  def us_zone
+    @us_zone ||= Spree::Zone.find(4)
   end
 end
