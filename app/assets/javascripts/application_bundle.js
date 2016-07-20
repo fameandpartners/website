@@ -25,24 +25,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // PDP
 if (typeof window.PdpDataFull !== 'undefined') {
-  var store = (0, _configureStore2.default)(window.PdpDataFull);
+  (function () {
+    var store = (0, _configureStore2.default)(window.PdpDataFull);
 
-  //  JUST FOR DEV!!!
-  //   store.subscribe(() => {
-  //     console.log('Store changed: ', store.getState());
-  //   });
+    //  JUST FOR DEV!!!
+    store.subscribe(function () {
+      console.log('Store changed: ', store.getState());
+    });
 
-  (0, _reactDom.render)(_react2.default.createElement(
-    _reactRedux.Provider,
-    { store: store },
-    _react2.default.createElement(_Gallery2.default, null)
-  ), document.getElementById('PdpGallery'));
+    (0, _reactDom.render)(_react2.default.createElement(
+      _reactRedux.Provider,
+      { store: store },
+      _react2.default.createElement(_Gallery2.default, null)
+    ), document.getElementById('PdpGallery'));
 
-  (0, _reactDom.render)(_react2.default.createElement(
-    _reactRedux.Provider,
-    { store: store },
-    _react2.default.createElement(_SidePanelRight2.default, null)
-  ), document.getElementById('PdpSidePanelRight'));
+    (0, _reactDom.render)(_react2.default.createElement(
+      _reactRedux.Provider,
+      { store: store },
+      _react2.default.createElement(_SidePanelRight2.default, null)
+    ), document.getElementById('PdpSidePanelRight'));
+  })();
 }
 
 },{"./components/PDP/Gallery":4,"./components/PDP/SidePanelRight":10,"./store/configureStore":16,"react":240,"react-dom":69,"react-redux":72}],2:[function(require,module,exports){
