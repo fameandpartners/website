@@ -2,6 +2,10 @@
 -------------------------------------------------------*/
 .style-icon-page {
 
+  .category-header .media-wrap {
+    display: block;
+  }
+
   h1.title {
     color: $c-neutral-black;
   }
@@ -21,12 +25,18 @@
       border-bottom: 1px solid $c-neutral-black;
     }
 
+    h2.title {
+      margin-top: 45px;
+      text-transform: none;
+    }
+
   }
 
   .content-copy:not(.vertical-align){
 
     h3 {
       margin-top: 70px;
+      font-size: 4rem;
     }
 
   }
@@ -49,19 +59,27 @@
     @include column-vertical-align();
   }
 
-  @media (min-width: $bootstrap-md-width) {
+  @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
 
-    .copy-wrap h3 {
-      margin-top: 40px;
-      font-size: 3rem;
+    .container-fluid.no-padding.no-margin .vertical-align-copy .content-img {
+      padding-right: 15px;
     }
 
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
+    .copy-wrap h3 {
+      margin-top: 40px;
+      font-size: 3rem;
+    }
+
     .content-copy {
       text-align: center;
+    }
+
+    .section-intro p {
+      font-size: 2.3rem;
     }
 
   }
