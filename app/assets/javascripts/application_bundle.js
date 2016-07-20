@@ -1371,64 +1371,81 @@ var PdpSidePanelRight = function (_React$Component) {
         }
       }();
 
-      return _react2.default.createElement(
-        'div',
-        { className: 'panel-side-container' },
-        _react2.default.createElement(
+      if (this.props.product.is_active) {
+        return _react2.default.createElement(
           'div',
-          null,
+          { className: 'panel-side-container' },
           _react2.default.createElement(
-            'ul',
-            { className: 'row l-tab-controls hidden-md hidden-lg', role: 'tablist' },
+            'div',
+            null,
             _react2.default.createElement(
-              'li',
-              { className: 'col-xs-6 col-sm-6 active', role: 'presentation' },
+              'ul',
+              { className: 'row l-tab-controls hidden-md hidden-lg', role: 'tablist' },
               _react2.default.createElement(
-                'a',
-                { href: '#tab-size-fit', role: 'tab', 'data-toggle': 'tab' },
-                'Size + Fit'
+                'li',
+                { className: 'col-xs-6 col-sm-6 active', role: 'presentation' },
+                _react2.default.createElement(
+                  'a',
+                  { href: '#tab-size-fit', role: 'tab', 'data-toggle': 'tab' },
+                  'Size + Fit'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'col-xs-6 col-sm-6', role: 'presentation' },
+                _react2.default.createElement(
+                  'a',
+                  { href: '#tab-color-cust', role: 'tab', 'data-toggle': 'tab' },
+                  'Color + Customize'
+                )
               )
             ),
             _react2.default.createElement(
-              'li',
-              { className: 'col-xs-6 col-sm-6', role: 'presentation' },
+              'div',
+              { id: 'tab-size-fit', className: 'c-card-customize active', role: 'tabpanel' },
               _react2.default.createElement(
-                'a',
-                { href: '#tab-color-cust', role: 'tab', 'data-toggle': 'tab' },
-                'Color + Customize'
-              )
+                'h2',
+                { className: 'h4 c-card-customize__header hidden-xs hidden-sm' },
+                'Specify your size'
+              ),
+              ERROR_MESSAGE,
+              _react2.default.createElement(_SidePanelSize2.default, null),
+              _react2.default.createElement(_SidePanelLength2.default, null)
+            ),
+            _react2.default.createElement(
+              'div',
+              { id: 'tab-color-cust', className: 'c-card-customize', role: 'tabpanel' },
+              _react2.default.createElement(
+                'h2',
+                { className: 'h4 c-card-customize__header hidden-xs hidden-sm' },
+                'Design your dress'
+              ),
+              _react2.default.createElement(_SidePanelColor2.default, null),
+              function () {
+                if (_this2.props.skirts.length) {
+                  return _react2.default.createElement(_SidePanelCustom2.default, null);
+                }
+              }()
             )
           ),
+          _react2.default.createElement(_CtaPrice2.default, null)
+        );
+      } else {
+        return _react2.default.createElement(
+          'div',
+          { className: 'panel-side-container' },
           _react2.default.createElement(
-            'div',
-            { id: 'tab-size-fit', className: 'c-card-customize active', role: 'tabpanel' },
-            _react2.default.createElement(
-              'h2',
-              { className: 'h4 c-card-customize__header hidden-xs hidden-sm' },
-              'Specify your size'
-            ),
-            ERROR_MESSAGE,
-            _react2.default.createElement(_SidePanelSize2.default, null),
-            _react2.default.createElement(_SidePanelLength2.default, null)
+            'p',
+            null,
+            'Sorry, the dress you are looking for is currently unavailable.'
           ),
           _react2.default.createElement(
-            'div',
-            { id: 'tab-color-cust', className: 'c-card-customize', role: 'tabpanel' },
-            _react2.default.createElement(
-              'h2',
-              { className: 'h4 c-card-customize__header hidden-xs hidden-sm' },
-              'Design your dress'
-            ),
-            _react2.default.createElement(_SidePanelColor2.default, null),
-            function () {
-              if (_this2.props.skirts.length) {
-                return _react2.default.createElement(_SidePanelCustom2.default, null);
-              }
-            }()
+            'a',
+            { href: 'http://www.fameandpartners.com/dresses', className: 'link' },
+            'Search similar dresses'
           )
-        ),
-        _react2.default.createElement(_CtaPrice2.default, null)
-      );
+        );
+      }
     }
   }]);
 
@@ -1437,13 +1454,15 @@ var PdpSidePanelRight = function (_React$Component) {
 
 PdpSidePanelRight.propTypes = {
   skirts: _react.PropTypes.array.isRequired,
-  customize: _react.PropTypes.object.isRequired
+  customize: _react.PropTypes.object.isRequired,
+  product: _react.PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     skirts: state.skirts,
-    customize: state.customize
+    customize: state.customize,
+    product: state.product
   };
 }
 
