@@ -58,7 +58,9 @@
 
   .panel-media .media-wrap {
     display: block;
-    max-height: 650px;
+    width: 100%;
+    height: auto;
+    max-height: none;
     padding-top: 0;
 
     &:not(:first-child) {
