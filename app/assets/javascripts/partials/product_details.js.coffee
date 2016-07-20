@@ -6,7 +6,7 @@ page.initProductDetailsPage = (options = {}) ->
     dressVarId = undefined
     customIds = undefined
     if $this.find('#pdpCartVariantId').val()
-      dressVarId = parseInt($this.find('#pdpCartVariantId').val())
+      dressVarId = parseInt($this.find('#pdpCartDressVariantId').val())
     if $this.find('#pdpCartCustomId').val()
       customIds = parseInt($this.find('#pdpCartCustomId').val())
 
