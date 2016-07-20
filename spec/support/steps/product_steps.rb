@@ -13,6 +13,11 @@ module Acceptance
       find('.btn-close.lg').click
       expect(page).to have_selector('.pdp-side-menu', visible: false)
     end
+
+    step 'I should see add to cart link enabled' do
+      add_to_bag_link = find_link('ADD TO BAG')
+      expect(add_to_bag_link['class']).not_to have_text('btn-lowlight')
+    end
   end
 end
 
