@@ -24,4 +24,4 @@ Feature: Add to Moodboard
      # The extra page view is required here, as the dummy text
      # does not display after all ajax deletions.
     Then I view my moodboard
-    Then I should see "GET INSPIRED!"
+    Then I should see "Get Inspired!"
