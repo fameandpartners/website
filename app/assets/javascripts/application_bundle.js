@@ -600,7 +600,7 @@ var SidePanelColor = function (_SidePanel) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'c-card-customize__content__right txt-truncate-1' },
+            { className: 'c-card-customize__content__right' },
             props.customize.color.presentation
           )
         ),
@@ -824,7 +824,7 @@ var SidePanelCustom = function (_SidePanel) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'c-card-customize__content__right txt-truncate-1' },
+            { className: 'c-card-customize__content__right' },
             this.props.customize.customization.presentation
           )
         ),
@@ -998,7 +998,7 @@ var SidePanelLength = function (_SidePanel) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'c-card-customize__content__right txt-truncate-1' },
+            { className: 'c-card-customize__content__right' },
             this.props.customize.length.presentation
           )
         ),
@@ -1552,7 +1552,7 @@ var SidePanelSize = function (_SidePanel) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'c-card-customize__content__right txt-truncate-1' },
+            { className: 'c-card-customize__content__right' },
             this.props.customize.size.presentation
           )
         ),

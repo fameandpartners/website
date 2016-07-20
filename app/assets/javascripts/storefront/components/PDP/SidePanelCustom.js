@@ -64,7 +64,7 @@ class SidePanelCustom extends SidePanel {
           className={triggerState}
           onClick={this.openMenu}>
           <div className="c-card-customize__content__left">Customize</div>
-          <div className="c-card-customize__content__right txt-truncate-1">{this.props.customize.customization.presentation}</div>
+          <div className="c-card-customize__content__right">{this.props.customize.customization.presentation}</div>
         </a>
 
         <div className={menuState}>

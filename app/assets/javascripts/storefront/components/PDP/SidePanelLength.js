@@ -53,7 +53,7 @@ class SidePanelLength extends SidePanel {
           className={TRIGGER_STATE}
           onClick={this.openMenu}>
           <div className={ERROR}>Skirt Length</div>
-          <div className="c-card-customize__content__right txt-truncate-1">{this.props.customize.length.presentation}</div>
+          <div className="c-card-customize__content__right">{this.props.customize.length.presentation}</div>
         </a>
 
         <div className={MENU_STATE}>
