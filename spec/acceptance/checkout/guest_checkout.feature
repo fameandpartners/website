@@ -11,7 +11,7 @@ Feature: Complete Guest Checkout
     Then I select "<Site Version>" site version
     And I select "<Dress Size>" size
     And I select "<Skirt Length>" skirt length
-    Then I should see an active "ADD TO BAG" link
+    Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
     # And I should see the cart sidebar with the checkout button
     # And I click on "CHECKOUT" button
@@ -43,7 +43,7 @@ Feature: Complete Guest Checkout
     Then I select "<Site Version>" site version
     And I select "<Dress Size>" size
     And I select "<Skirt Length>" skirt length
-    Then I should see an active "ADD TO BAG" link
+    Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
     # And I should see the cart sidebar with the checkout button
     # And I click on "CHECKOUT" button
