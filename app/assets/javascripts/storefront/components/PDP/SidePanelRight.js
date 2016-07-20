@@ -76,8 +76,12 @@ class PdpSidePanelRight extends React.Component {
     } else {
       return (
         <div className="panel-side-container">
-          <p>Sorry, the dress you are looking for is currently unavailable.</p>
-          <a href="http://www.fameandpartners.com/dresses" className="link">Search similar dresses</a>
+          <div>
+            <p>Sorry, the dress you are looking for is currently unavailable.</p>
+            <p>
+              <a href="http://www.fameandpartners.com/dresses" className="link">Search similar dresses</a>
+            </p>
+          </div>
         </div>
       );
     }
