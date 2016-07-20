@@ -15,13 +15,13 @@ Feature: Browse and Purchase
   Scenario: Search For Empty String
     When I visit the "/" path
     And Search for an empty string
-    Then I should see "RESULTS FOR"
+    Then I should see "Results for"
 
   @javascript
   Scenario: Search For Existent Dress
     When I visit the "/" path
     And Search for "Connie"
-    Then I should see "RESULTS FOR"
+    Then I should see "Results for"
 
   Scenario: List All Lookbooks
     When I visit the "/lookbook" path
