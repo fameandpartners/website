@@ -415,37 +415,20 @@
 
   @media (min-width: $bootstrap-md-width) {
 
-    .panel-side {
-      height: 100vh;
-      min-height: 750px;
-
-      .btn-wrap {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: $mega-menu-desktop-height;
-        text-align: center;
-
-        > .btn,
-        > div {
-          margin-bottom: 25px;
-        }
-
-      }
-
+    .panel-side-container {
+      padding-top: $mega-menu-desktop-height;
     }
 
-    .panel-side-container {
-      padding-top: $mega-menu-desktop-height + 100;
+    ul.btn-wrap {
+      margin-top: 70px;
+    }
 
-      > div:not(.btn-wrap) {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        padding-top: 100px;
-        overflow: hidden;
+    .btn-wrap {
+      text-align: center;
+
+      > .btn,
+      > div {
+        margin-bottom: 25px;
       }
 
     }

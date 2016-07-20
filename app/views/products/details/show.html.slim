@@ -247,17 +247,17 @@ javascript:
     function initSticky() {
       $('.js-panel-side-left').sticky({
         responsiveWidth: true,
-        topSpacing: 114,
+        topSpacing: $('.js-fixed-header').outerHeight(),
         bottomSpacing: 
           $('.js-bottom-content').outerHeight() 
-          + $('.js-footer').outerHeight()
+          + $('.js-footer').outerHeight() + $('.js-fixed-header').outerHeight()
       });
       $('.js-panel-side-right').sticky({
         responsiveWidth: true,
-        topSpacing: 114,
+        topSpacing: $('.js-fixed-header').outerHeight(),
         bottomSpacing:
           $('.js-bottom-content').outerHeight() 
-          + $('.js-footer').outerHeight()
+          + $('.js-footer').outerHeight() + $('.js-fixed-header').outerHeight()
       });
     }
   
