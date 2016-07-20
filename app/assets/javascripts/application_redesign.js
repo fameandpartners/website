@@ -69,6 +69,7 @@
 //= require partials/helpers/bs-tabs
 //= require partials/helpers/collapse_toggle
 //= require partials/helpers/form_submit_ajax_validation
+//= require partials/helpers/anchor_navigation
 
 //-----------------------------------
 // Show old quiz in popup with iframe
