@@ -1,10 +1,10 @@
 module Shippo
   class Label
 
-    attr_reader :return_item_process
+    attr_reader :return_request_item
 
-    def initialize(return_item_process)
-      @return_item_process = return_item_process
+    def initialize(return_request_item)
+      @return_request_item = return_request_item
     end
 
     def create
@@ -49,7 +49,7 @@ module Shippo
     end
 
     def order
-      @order ||= return_item_process.return_request_item.order_return_request.order
+      @order ||= return_request_item.order_return_request.order
     end
 
     def ship_address
