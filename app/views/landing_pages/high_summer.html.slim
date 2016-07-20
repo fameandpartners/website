@@ -4,11 +4,12 @@
 
   .category-header
     .media-wrap
-      = image_tag 'style-icon/high-summer/hero-header.jpg', :class => 'img-responsive'
+      = image_tag 'style-icon/high-summer/hero-header.jpg', :srcset => "#{image_path("style-icon/high-summer/hero-header-mob.jpg")} 1023w,
+            #{image_path("style-icon/high-summer/hero-header.jpg")} 1024w", :class => 'img-responsive'
 
     .outer-wrap
       .inner-wrap
-        h1.title
+        h1.title.hidden-xs.hidden-sm
           span Brittany Xavier
 
   // F&P Style Icon - Intro text
@@ -18,20 +19,23 @@
         h2.heading-overlay F&P Style Icon
 
     .row.vertical-align-copy
-      .col-md-4.col-md-offset-1.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+      .col-lg-4.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
+          h2.title.hidden-md.hidden-lg Brittany Xavier
+          / TODO: Add real copy here.
           p Arriving at Georgie airy East Village apartment to find her fresh-faced and with coffees in hand for us, despite seven long-haul flights wasn’t all that surprising. We mean, the only reason we even knew the girl had flown more copy here.
           .cta-wrapper
              / TODO: add real link.
              .cta-product-caption.copy-highlight
               | Cara wears #{link_to "Sasha", "#", :class => 'highlight'} Top in White
 
-      .col-md-6.col-md-offset-1.content-img
-        = image_tag 'style-icon/high-summer/intro.jpg', :class => 'img-responsive'
+      .col-lg-6.col-lg-offset-1.col-md-7.content-img
+        = image_tag 'style-icon/high-summer/intro.jpg', :srcset => "#{image_path("style-icon/high-summer/intro-mob.jpg")} 1023w,
+            #{image_path("style-icon/high-summer/intro.jpg")} 1024w", :class => 'img-responsive'
 
   / TEMPORARY: Hide the menu until it is developed
   .page-navigation.float-on-scroll.hidden
-    .container
+    .container-fluid
       .row
         .col-md-12
           .link #{link_to "Look 1", "#look1"}
@@ -50,22 +54,21 @@
   - current_dress_name = "Allegra"
   - current_dress_link = "https://www.fameandpartners.com/dresses/dress-allegra-680?color=pale-pink"
   - current_dress_price = "$279"
-
   section.section-box.container-fluid.no-padding.no-margin.section-look#look1
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
-        / TODO: replace with the real copy
         h2.heading-overlay The #{current_dress_name}
 
     .row
       .col-md-10.col-md-offset-1.content-img
         = link_to current_dress_link
-          = image_tag 'style-icon/high-summer/look-01.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+          = image_tag 'style-icon/high-summer/look-01.jpg', :srcset => "#{image_path("style-icon/high-summer/look-01-mob.jpg")} 1023w,
+            #{image_path("style-icon/high-summer/look-01.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
     .row
       .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1.content-copy
         .copy-wrap.text-center
-          / TODO: replace with the real copy
+
           h3 Rebel Belle
           p
             | Soft pink pleats are ladylike as can be when paired with delicate gold accessories.
@@ -91,17 +94,17 @@
   section.section-box.container-fluid.no-padding.no-margin.section-look#look2
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
-        / TODO: replace with the real copy
         h2.heading-overlay The #{current_dress_name}
 
     .row.vertical-align-copy
-      .col-md-6.col-md-offset-1.content-img
+      .col-lg-6.col-lg-offset-1.col-md-7.content-img
+        = link_to current_dress_link
+          = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
+            #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
-        = image_tag 'style-icon/high-summer/look-02.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
-
-      .col-md-3.col-md-offset-1.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
-          / TODO: replace with the real copy
+
           h3 Pattern Behavior
           p Slip-on flats make the Kirrily dress an easy, effortless daytime look. Play with patterns for night: pretty polka dots + an embellished topper = the ultimate it-girl pairing.
 
@@ -127,18 +130,18 @@
   section.section-box.container-fluid.no-padding.no-margin.section-look#look3
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
-        / TODO: replace with the real copy
         h2.heading-overlay The #{current_dress_name}
 
     .row
       .col-md-12.content-img
-
-        = image_tag 'style-icon/high-summer/look-03.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+        = link_to current_dress_link
+          = image_tag 'style-icon/high-summer/look-03.jpg', :srcset => "#{image_path("style-icon/high-summer/look-03-mob.jpg")} 1023w,
+            #{image_path("style-icon/high-summer/look-03.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
     .row
       .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1.content-copy
         .copy-wrap.text-center
-          / TODO: replace with the real copy
+
           h3 Throwback, 2 Ways
           p
             | It’s all about casual ‘90s callouts: the cropped white tee layered underneath a slim tank, the chunky choker.
@@ -163,18 +166,18 @@
   section.section-box.container-fluid.no-padding.no-margin.section-look#look4
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
-        / TODO: replace with the real copy
         h2.heading-overlay The #{current_dress_name}
 
     .row
       .col-md-12.content-img
-
-        = image_tag 'style-icon/high-summer/look-04.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+        = link_to current_dress_link
+          = image_tag 'style-icon/high-summer/look-04.jpg', :srcset => "#{image_path("style-icon/high-summer/look-04-mob.jpg")} 1023w,
+            #{image_path("style-icon/high-summer/look-04.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
     .row
       .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1.content-copy
         .copy-wrap.text-center
-          / TODO: replace with the real copy
+
           h3 Floral Redux
           p
             | Tame an all-over print by layering a solid tee underneath. Going out?
@@ -200,17 +203,17 @@
   section.section-box.container-fluid.no-padding.no-margin.section-look#look5
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
-        / TODO: replace with the real copy
         h2.heading-overlay The #{current_dress_name}
 
     .row.vertical-align-copy
-      .col-md-6.col-md-offset-1.content-img
+      .col-lg-6.col-lg-offset-1.col-md-7.content-img
+        = link_to current_dress_link
+          = image_tag 'style-icon/high-summer/look-05.jpg', :srcset => "#{image_path("style-icon/high-summer/look-05-mob.jpg")} 1023w,
+            #{image_path("style-icon/high-summer/look-05.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
-        = image_tag 'style-icon/high-summer/look-05.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
-
-      .col-md-3.col-md-offset-1.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
-          / TODO: replace with the real copy
+
           h3 Something Different
           p Of course, an LBD makes a sexy statement at night with a pair of open-toe heels—but don’t think you can’t make it work for daytime, too. Over ripped denim, the Murphy dress becomes an unexpected wardrobe hero.
 
@@ -237,18 +240,18 @@
   section.section-box.container-fluid.no-padding.no-margin.section-look#look6
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
-        / TODO: replace with the real copy
         h2.heading-overlay The #{current_dress_name}
 
     .row
       .col-md-12.content-img
-
-        = image_tag 'style-icon/high-summer/look-06.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+        = link_to current_dress_link
+          = image_tag 'style-icon/high-summer/look-06.jpg', :srcset => "#{image_path("style-icon/high-summer/look-06-mob.jpg")} 1023w,
+            #{image_path("style-icon/high-summer/look-06.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
     .row
       .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1.content-copy
         .copy-wrap.text-center
-          / TODO: replace with the real copy
+
           h3 New Hollywood
           p
             | Modernize feminine details—ruffles, a plunging neckline, a floral print—with a gilt body chain to catch the sun.
@@ -273,18 +276,18 @@
   section.section-box.container-fluid.no-padding.no-margin.section-look#look7
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
-        / TODO: replace with the real copy
         h2.heading-overlay The #{current_dress_name}
 
     .row
       .col-md-8.col-md-offset-2.content-img
-
-        = image_tag 'style-icon/high-summer/look-07.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+        = link_to current_dress_link
+          = image_tag 'style-icon/high-summer/look-07.jpg', :srcset => "#{image_path("style-icon/high-summer/look-07-mob.jpg")} 1023w,
+            #{image_path("style-icon/high-summer/look-07.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
     .row
       .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1.content-copy
         .copy-wrap.text-center
-          / TODO: replace with the real copy
+
           h3 It's a tie!
           p The Delaney three-piece set is chic any way you wear it. The vibe is “Cali Girl Cool” with a soft tee and oversized sunglasses, while an updo and and architectural accessories scream “Art World Darling.”
 
@@ -307,17 +310,17 @@
   section.section-box.container-fluid.no-padding.no-margin.section-look#look8
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
-        / TODO: replace with the real copy
         h2.heading-overlay #{current_dress_name}
 
     .row.vertical-align-copy
-      .col-md-6.col-md-offset-1.content-img
+      .col-lg-6.col-lg-offset-1.col-md-7.content-img
+        = link_to current_dress_link
+          = image_tag 'style-icon/high-summer/look-08.jpg', :srcset => "#{image_path("style-icon/high-summer/look-08-mob.jpg")} 1023w,
+            #{image_path("style-icon/high-summer/look-08.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
-        = image_tag 'style-icon/high-summer/look-08.jpg', :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
-
-      .col-md-3.col-md-offset-1.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
-          / TODO: replace with the real copy
+
           h3 #FreeTheShoulders
           p Don’t overcomplicate it; a statement choker and bold lip are all you need in the Greer two-piece. Let your shoulders shine.
 
@@ -342,7 +345,7 @@
           h3.featured-products-title Shop Britanny's Curated Edit
 
       / TODO: Change this to the real Edit name.
-      - all_products = get_products_from_edit('AMFAM', nil, nil, 9)
+      - all_products = get_products_from_edit('high-summer', nil, nil, 9)
 
       .row
         - all_products.each_slice(3) do |products|
