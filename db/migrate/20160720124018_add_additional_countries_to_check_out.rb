@@ -10,7 +10,6 @@ class AddAdditionalCountriesToCheckOut < ActiveRecord::Migration
 
   def up
     AUSTRALIA_ZONE_COUNTRY_NAMES.each { |country_name| add_country_to_zone(australia_zone, country_name) }
-
     US_ZONE_COUNTRY_NAMES.each { |country_name| add_country_to_zone(us_zone, country_name) }
 
     update_zone_members_counter(australia_zone)
