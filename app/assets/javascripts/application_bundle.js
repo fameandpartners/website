@@ -250,7 +250,7 @@ var PdpGallery = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       window.addEventListener('resize', this.handleResize);
-      this.handleResize;
+      this.handleResize();
     }
   }, {
     key: 'componentWillUnmount',

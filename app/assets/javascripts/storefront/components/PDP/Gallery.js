@@ -15,7 +15,7 @@ class PdpGallery extends React.Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
-    this.handleResize;
+    this.handleResize();
   }
 
   componentWillUnmount() {
