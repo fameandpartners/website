@@ -27,7 +27,12 @@ class AddAdditionalCountriesToCheckOut < ActiveRecord::Migration
 
   def add_country_to_zone(zone, country_name)
     country = Spree::Country.where(name: country_name).first
-    raise "Country #{country_name} not found" unless country
+
+    unless country
+      ActiveRecord::Migration.say("Country #{country_name} not found")
+      return
+    end
+
     if zone.members.map(&:zoneable_id).include? country.id
       puts "#{country.name} already in the #{zone.name} zone"
       zone_member = zone.members.where(zoneable_id: country.id).first
@@ -40,7 +45,11 @@ class AddAdditionalCountriesToCheckOut < ActiveRecord::Migration
 
   def remove_country_from_zone(zone, country_name)
     country = Spree::Country.where(name: country_name).first
-    raise "Country #{country_name} not found" unless country
+
+    unless country
+      ActiveRecord::Migration.say("Country #{country_name} not found")
+      return
+    end
 
     zone_member = zone.members.where(zoneable_id: country.id).first
     zone_member.destroy if zone_member
