@@ -8,7 +8,24 @@ module Shippo
     end
 
     def create
+      transaction.object_status == 'SUCCESS' ? success_results : fail_results
+    end
 
+  private
+
+    def success_results
+      {
+        status: transaction.object_status,
+        label_url: transaction.label_url,
+        tracking_number: transaction.tracking_number,
+      }
+    end
+
+    def fail_results
+      {
+        status: transaction.object_status,
+        messages: transaction.messages
+      }
     end
 
     def transaction
@@ -18,6 +35,10 @@ module Shippo
         async: false)
     end
 
+    def lowest_rate
+      shipment.rates().min_by{|r| r[:amount].to_f}
+    end
+
     def shipment
       @shipment ||= Shippo::Shipment.create(
         object_purpose: 'PURCHASE',
@@ -25,10 +46,6 @@ module Shippo
         address_to: address_to,
         parcel: parcel,
         async: false)
-    end
-
-    def lowest_rate
-      shipment.rates_list.min_by{|r| r[:amount].to_f}
     end
 
     def order
@@ -71,11 +88,11 @@ module Shippo
 
     def parcel
       {
-        length: 5,
-        width: 2,
-        height: 5,
+        length: 14,
+        width: 8,
+        height: 2,
         distance_unit: :in,
-        weight: 2,
+        weight: 2.5,
         mass_unit: :lb
       }
     end
