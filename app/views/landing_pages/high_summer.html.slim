@@ -22,30 +22,26 @@
       .col-lg-4.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
           h2.title.hidden-md.hidden-lg Brittany Xavier
-          / TODO: Add real copy here.
-          p Arriving at Georgie airy East Village apartment to find her fresh-faced and with coffees in hand for us, despite seven long-haul flights wasn’t all that surprising. We mean, the only reason we even knew the girl had flown more copy here.
+          p
+            | You may know Brittany Xavier from her blog, Thrifts and Threads, or from her appearances on nearly every must-read style site the internet has to offer. Now get to know her as the ultimate F&P Style Icon—one who’s redefined the art of mix-and-match.
+            span.line-break-md  Consider us inspired.
           .cta-wrapper
              / TODO: add real link.
              .cta-product-caption.copy-highlight
-              | Cara wears #{link_to "Sasha", "#", :class => 'highlight'} Top in White
+              | Brittany wears #{link_to "Murphy", "#", :class => 'highlight'} dress in black.
 
       .col-lg-6.col-lg-offset-1.col-md-7.content-img
         = image_tag 'style-icon/high-summer/intro.jpg', :srcset => "#{image_path("style-icon/high-summer/intro-mob.jpg")} 1023w,
             #{image_path("style-icon/high-summer/intro.jpg")} 1024w", :class => 'img-responsive'
 
-  / TEMPORARY: Hide the menu until it is developed
-  .page-navigation.float-on-scroll.hidden
+  .local-navigation
     .container-fluid
-      .row
-        .col-md-12
-          .link #{link_to "Look 1", "#look1"}
-          .link #{link_to "Look 2", "#look2"}
-          .link #{link_to "Look 3", "#look3"}
-          .link #{link_to "Look 4", "#look4"}
-          .link #{link_to "Look 5", "#look5"}
-          .link #{link_to "Look 6", "#look6"}
-          .link #{link_to "Look 7", "#look7"}
-          .link #{link_to "Look 8", "#look8"}
+      .row.js-float-on-scroll
+        .col-md-10.col-md-offset-1
+          ul.navigation-wrapper
+            - how_many_links = 8
+            - for i in (1..how_many_links) do
+              li.link #{link_to "Look #{i}", "#look#{i}"}
 
   // Look 1
   // TODO: Get the real ID for this product
@@ -113,7 +109,7 @@
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            |  #{link_to "#{current_dress_name} The #{current_dress_price}", current_dress_link}
+            |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
 
           .cta-wrapper
             = link_to current_dress_link
@@ -222,7 +218,7 @@
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            |  #{link_to "#{current_dress_name} The #{current_dress_price}", current_dress_link}
+            |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
 
           .cta-wrapper
             = link_to current_dress_link
@@ -329,7 +325,7 @@
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            |  #{link_to "#{current_dress_name} The #{current_dress_price}", current_dress_link}
+            |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
 
           .cta-wrapper
             = link_to current_dress_link
