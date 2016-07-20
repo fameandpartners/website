@@ -60,7 +60,6 @@
     display: block;
     width: 100%;
     height: auto;
-    max-height: 70vh;
     padding-top: 0;
 
     &:not(:first-child) {
@@ -68,6 +67,8 @@
     }
 
     img {
+      width: 100%;
+      height: auto;
       margin-top: 0;
     }
 

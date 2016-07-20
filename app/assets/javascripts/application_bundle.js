@@ -276,7 +276,7 @@ var PdpGallery = function (_React$Component) {
     key: 'calculateOffset',
     value: function calculateOffset(image) {
       // calculate image offset
-      if (image.clientWidth > image.parentNode.clientWidth) {
+      if (image.clientWidth > image.parentNode.clientWidth && window.outerWidth >= 992) {
         return (image.clientWidth / 2 - image.parentNode.clientWidth / 2) * -1;
       }
     }
