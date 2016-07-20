@@ -166,3 +166,11 @@
   }
 
 }
+
+// Anchor navigation (on page load): additional padding due to our fixed header
+:target:before {
+  content: "";
+  display: block;
+  height: $md-content-margin-top; /* fixed header height */
+  margin: -$md-content-margin-top 0 0; /* negative fixed header height */
+}
