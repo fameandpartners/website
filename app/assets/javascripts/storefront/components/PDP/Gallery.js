@@ -8,23 +8,36 @@ class PdpGallery extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      imageWidth: 0
-    };
-
+    this.handleLoad = this.handleLoad.bind(this);
     this.handleResize = this.handleResize.bind(this);
+    this.calculateOffset = this.calculateOffset.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
+    this.handleResize;
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
   }
 
+  handleLoad(image) {
+    image.target.style.marginLeft = this.calculateOffset(image.target) + 'px';
+  }
+
   handleResize() {
-    this.setState({imageWidth: 0});
+    const IMAGES = document.getElementsByClassName('js-gallery-image');
+    [...IMAGES].map((image) => {
+      image.style.marginLeft = this.calculateOffset(image) + 'px';
+    });
+  }
+
+  calculateOffset(image) {
+    // calculate image offset
+    if(image.clientWidth > image.parentNode.clientWidth) {
+      return ((image.clientWidth / 2) - (image.parentNode.clientWidth / 2)) * -1;
+    }
   }
 
   render() {
@@ -50,10 +63,6 @@ class PdpGallery extends React.Component {
       ]
     };
 
-    const STYlE = {
-      marginLeft: (this.state.imageWidth / 2) * -1
-    };
-
     // check if selected color ID matches any available images
     this.props.images.map((image, index) => {
       if(image.color_id === this.props.customize.color.id) {
@@ -74,11 +83,13 @@ class PdpGallery extends React.Component {
         return (
           <div className="media-wrap" key={index}>
             <span id={id} className="scrollspy-trigger"></span>
-            <img src={image.url} alt={image.alt} onLoad={this.handleImageLoaded} />
+            <img src={image.url} alt={image.alt}
+              className="js-gallery-image" onLoad={this.handleLoad} />
           </div>
         );
       }
     });
+
     images = images.filter((n) => {
       return n !== undefined;
     });
