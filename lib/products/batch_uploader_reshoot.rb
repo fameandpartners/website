@@ -169,7 +169,7 @@ module Products
         processed[:short_description] = ActionController::Base.helpers.simple_format(raw[:short_description])
       end
 
-      # :colors is the legacy recommended colors.
+      # :colors is the legacy color colors.
       # :recommended_colors will each have a variant built from them
       # :available_colors which are not :recommended_colors will get a ProductColorValue, but no variant.
       processed[:colors]             = get_color_options(raw[:colors]).map(&:name)
@@ -388,21 +388,20 @@ module Products
 
     # create product with restored data
     def update_products
-      info 'Creating or Update Products'
+      info 'Updating Products (active colors and fit attribute)'
 
       parsed_data.map do |attrs|
         args = attrs.symbolize_keys
 
-      #   TODO: - [ ] deactivate product color values that exists
-      #   TODO :- [ ] create product color values that aren't related to the product yet
-      #   TODO            - [ ] Update model information
-      #
-      #   product = create_or_update_product(args)
-      #
-      #   add_product_properties(product, args[:properties].symbolize_keys)
-      #   add_product_color_options(product, **args.slice(:available_colors, :recommended_colors))
-      #
-      #   product
+        product = find_product(args)
+        next if product.blank?
+
+        # [x] deactivate product color values that exists
+        # [x] create product color values that aren't related to the product yet
+        # [x] Update model information
+
+        add_product_properties(product, args[:properties].symbolize_keys)
+        update_product_color_options(product, **args.slice(:available_colors))
       end
     end
 
@@ -412,106 +411,49 @@ module Products
       "[" << "#{sku} - #{name}".ljust(25) << "]"
     end
 
-    def create_or_update_product(args)
-      sku             = args[:sku].to_s.downcase.strip
-      section_heading = section_heading(sku: args[:sku], name: args[:name])
-      info "#{section_heading} Building"
-
+    def find_product(args)
+      sku = args[:sku].to_s.downcase.strip
       raise 'SKU should be present!' unless sku.present?
 
       master = Spree::Variant.where(deleted_at: nil, is_master: true).where('LOWER(TRIM(sku)) = ?', sku).order('id DESC').first
 
-      product = master.try(:product)
-
-      if product.blank?
-        product = Spree::Product.new(sku: sku, featured: false, on_demand: true)
+      if master.blank?
+        warn "Srpree::Variant with SKU: #{sku} DOES NOT exist!"
+        return
       end
 
-      attributes = {
-        name:        args[:name],
-        price:       args[:price_in_aud],
-        description: args[:description],
-      }
-
-      edits = Spree::Taxonomy.find_by_name('Edits') || Spree::Taxonomy.find_by_id(8)
-
-      attributes.select! { |name, value| value.present? }
-
-      product.assign_attributes(attributes, without_protection: true)
-
-      if attributes[:name].present?
-        if product.persisted?
-          if product.valid? && product.name_was.downcase != attributes[:name].downcase
-            product.save_permalink(attributes[:name].downcase.gsub(/\s/, '_'))
-            product.assign_attributes(attributes, without_protection: true)
-          end
-        else
-          product.permalink = attributes[:name].downcase.gsub(/\s/, '_')
-        end
-      end
-
-      new_product = product.persisted? ? 'Updated' : 'Created'
-
-      product.save!
-
-
-
-      info "#{section_heading} #{new_product} id=#{product.id}"
-      product
+      master.product
     end
 
     def add_product_properties(product, args)
       debug "#{section_heading(product)} #{__method__}"
-      allowed = [:style_notes,
-                 :care_instructions,
-                 :size,
-                 :fit,
-                 :fabric,
-                 :product_type,
-                 :product_category,
-                 :factory_id,
-                 :factory_name,
-                 :product_coding,
-                 :shipping,
-                 :stylist_quote_short,
-                 :stylist_quote_long,
-                 :product_details,
-                 :revenue,
-                 :cogs,
-                 :video_id,
-                 :color_customization,
-                 :standard_days_for_making,
-                 :customised_days_for_making,
-                 :short_description]
-
-      properties = args.slice(*allowed).select { |name, value| value.present? }
-
+      allowed    = [:fit]
+      properties = args.slice(*allowed).select { |_, value| value.present? }
       properties.each do |name, value|
         product.set_property(name, value)
       end
-
-      if factory = Factory.find_by_name(args[:factory_name].try(:capitalize))
-        product.factory = factory
-      end
-
-      product
     end
 
-    def add_product_color_options(product, recommended_colors:, available_colors:)
-      debug "#{section_heading(product)} #{__method__}"
-      custom_colors = available_colors - recommended_colors
+    def update_product_color_options(spree_product, available_colors:)
+      debug "#{section_heading(spree_product)} #{__method__}"
 
-      custom_colors.map do |custom|
-        c        = product.product_color_values.where(option_value_id: custom.id, custom: true).first_or_create
-        c.active = true
-        c.save!
+      # [x] deactivate product color values that exists
+      # [x] create product color values that aren't related to the product yet
+
+      product_color_values = spree_product.product_color_values.where(custom: false)
+
+      # Deactivate current product colors
+      product_color_values.map do |product_color_value|
+        product_color_value.active = false
+        product_color_value.save!
       end
 
-      recommended_colors.map do |recommended|
-        product.product_color_values.where(option_value_id: recommended.id, custom: false).first_or_create
+      # Create product colors (not custom)
+      available_colors.each do |available_color|
+        new_color        = product_color_values.where(option_value_id: available_color.id, custom: false).first_or_create
+        new_color.active = true
+        new_color.save!
       end
-
-      product.product_color_values.where(custom: false).where('option_value_id NOT IN (?)', recommended_colors.map(&:id)).destroy_all
     end
   end
 end
