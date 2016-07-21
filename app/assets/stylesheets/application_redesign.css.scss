@@ -64,8 +64,7 @@ z-index levels
 
 *   100 = .nav-menu
 
-*   101 = .rect-wrapper
-*   102 = header
+*   101 = .rect
 *   102 = #locale-selector-container ul
 *   105 = .about .slick-dots
 
@@ -81,6 +80,9 @@ z-index levels
 *  1000 = .dropdown-menu
 *  1000 = .navbar-static-top
 *  1000 = .mega-menu
+*  1000 = header.main
+
+*  1001 = .c-card-customize .pdp-side-menu
 
 *  1010 = .chosen-container .chosen-drop
 *  1010 = .chosen-container-single .chosen-search
@@ -211,6 +213,8 @@ z-index levels
 @import 'redesign/components/related-nav';
 @import 'redesign/components/cart';
 
+@import 'redesign/components/cards/cards';
+
 // Modals
 @import 'redesign/modals/vex';
 
@@ -226,7 +230,7 @@ z-index levels
 @import 'redesign/pages/landing-macys';
 @import 'redesign/pages/landing-styling-session';
 @import 'redesign/pages/advertise-page';
-@import 'redesign/pages/pdp';
+@import 'redesign/pages/pdp/pdp';
 @import 'redesign/pages/why-us';
 @import 'redesign/pages/growth-plan';
 @import 'redesign/pages/shop-social';
