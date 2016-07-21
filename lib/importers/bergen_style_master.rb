@@ -106,11 +106,8 @@ module Importers
         add_product_color_option(product, spree_color_option_value)
 
         # Create Global SKU
-
-        # global_sku = GlobalSku.find_or_create_by_spree_variant(variant: spree_variant)
-        # return global_sku.upc
-
-        'Super Global SKU!'
+        global_sku = GlobalSku.find_or_create_by_spree_variant(variant: spree_variant)
+        global_sku.upc
       end
 
       private
@@ -122,6 +119,28 @@ module Importers
         # - Price
         # - Color
         # - Size
+
+        product_variants = Spree::Variant.where(product_id: spree_product.id)
+        spree_variant    = product_variants.detect do |variant|
+          [spree_size_option_value.id, spree_color_option_value.id].all? { |id|
+            variant.option_value_ids.include?(id)
+          }
+        end
+
+        if spree_variant.nil?
+          spree_variant = spree_product.variants.build
+
+          # Avoids errors with Spree hooks updating lots and lots of orders.
+          # See: spree/core/app/models/spree/variant.rb:146 #on_demand=
+          spree_variant.send :write_attribute, :on_demand, true
+
+          spree_variant.option_values = [spree_size_option_value, spree_color_option_value]
+          spree_variant.deleted_at    = 1.day.ago
+
+          spree_variant.save
+        end
+
+        spree_variant
       end
 
       def add_product_color_option(spree_product, spree_color_option_value)
