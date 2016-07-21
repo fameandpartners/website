@@ -68,6 +68,7 @@
 
   .panel-side-wrap {
     position: relative;
+    overflow: hidden;
   }
 
   .affix-bottom {
@@ -428,6 +429,7 @@
     }
 
     .btn-wrap {
+      padding-bottom: 30px;
       text-align: center;
 
       > .btn,
