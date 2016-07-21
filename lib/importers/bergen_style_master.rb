@@ -7,14 +7,13 @@ module Importers
       preface
 
       parse_file do |csv_row|
-        bergen_product = BergenProductTemplate.new(csv_row)
+        bergen_product = BergenProductTemplate.new(csv_row, logger: @logger)
 
         unless bergen_product.exists?
-          global_sku = bergen_product.create_global_sku
-          warn ['Creating Global SKU for', bergen_product.to_s.ljust(35), global_sku].join(' ')
+          global_sku_upc = bergen_product.create_global_sku
+          info ['Creating Global SKU for', bergen_product.to_s.ljust(35), global_sku_upc].join(' ')
         end
       end
-
 
       info 'Done'
     end
@@ -23,7 +22,7 @@ module Importers
 
     def parse_file
       csv_line_count = `wc -l "#{csv_file}"`.strip.split(' ')[0].to_i # Thanks to http://stackoverflow.com/questions/2650517/count-the-number-of-lines-in-a-file-without-reading-entire-file-into-memory
-      progress       = ProgressBar.create(total: csv_line_count, format: 'Processed: %c/%C  |%w%i| %e')
+      progress       = ProgressBar.create(total: csv_line_count, format: 'Processed: %c/%C')
       CSV.foreach(csv_file, headers: true, skip_blanks: true, encoding: 'windows-1251:utf-8') do |csv_row|
         progress.increment
         yield csv_row
@@ -38,10 +37,16 @@ module Importers
         style: 'Style'
       }
 
-      def initialize(csv_row)
+      include Term::ANSIColor
+      extend Forwardable
+      def_delegators :@logger, :warn
+
+      def initialize(csv_row, logger: STDOUT)
         @color = csv_row[CSV_HEADERS[:color]]
         @size  = csv_row[CSV_HEADERS[:size]]
         @style = csv_row[CSV_HEADERS[:style]]
+
+        @logger = logger
       end
 
       def color
@@ -53,7 +58,7 @@ module Importers
       end
 
       def style
-        @style.downcase
+        @style.downcase.strip
       end
 
       def to_s
@@ -73,25 +78,67 @@ module Importers
       end
 
       def create_global_sku
-        variants       = Spree::Variant.includes(option_values: :option_type).where('sku ILIKE ?', "#{style}%")
-        # variant_colors = variants.map(&:dress_color).compact.map(&:name).uniq
-        # variant_sizes  = variants.map(&:dress_size).compact.map(&:name).uniq.map(&:downcase).map {|size| size.split('/')[0]}
+        master = Spree::Variant.where(is_master: true).where('LOWER(TRIM(sku)) = ?', style).first
 
-        #   where('spree_option_values.name ILIKE ?', color).
-        #   where('spree_option_values.name ILIKE ?', "%#{us_size}%")
-
-        if variants.empty?
-          puts "DOES NOT EXIST #{style}"
+        if master.nil?
+          did_not_create_error 'SKU does not exist'
+          return
         end
 
-        # puts ['Does it has color? ', "(#{color}): ", variant_colors.include?(color)].join
-        # puts ['Does it has US size? ', "(#{us_size}): ", variant_sizes.include?(us_size)].join
+        product      = master.product
+        size_option  = Spree::OptionType.size
+        color_option = Spree::OptionType.color
 
-        # TODO: Also notice that there's the possibility of non-existant Styles!!!
-        # TODO: How to handle variants that never existed in the system!?
+        spree_size_option_value  = size_option.option_values.where('name ILIKE ?', "%#{us_size}%").first
+        spree_color_option_value = color_option.option_values.where('name ILIKE ?', color).first
 
+        if spree_size_option_value.blank?
+          did_not_create_error 'Size option does not exist'
+          return
+        end
+
+        if spree_color_option_value.blank?
+          did_not_create_error 'Color option does not exist'
+          return
+        end
+
+        spree_variant = find_or_create_product_variant(product, spree_size_option_value, spree_color_option_value)
+        add_product_color_option(product, spree_color_option_value)
+
+        # Create Global SKU
+
+        # global_sku = GlobalSku.find_or_create_by_spree_variant(variant: spree_variant)
+        # return global_sku.upc
 
         'Super Global SKU!'
+      end
+
+      private
+
+      def find_or_create_product_variant(spree_product, spree_size_option_value, spree_color_option_value)
+        # Variant must not show on store front. It MUST be marked as deleted_at
+
+        # - Deleted at?
+        # - Price
+        # - Color
+        # - Size
+      end
+
+      def add_product_color_option(spree_product, spree_color_option_value)
+        # Create a ProductColorValue as NOT CUSTOM and INACTIVE
+
+        unless spree_product.product_color_values.exists?(option_value_id: spree_color_option_value.id, custom: false)
+          ProductColorValue.create(
+            product_id:      spree_product.id,
+            option_value_id: spree_color_option_value.id,
+            active:          false,
+            custom:          false
+          )
+        end
+      end
+
+      def did_not_create_error(message)
+        warn [message, style, color, us_size].join(', ')
       end
     end
   end
