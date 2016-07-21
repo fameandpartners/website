@@ -41,7 +41,7 @@ class PdpGallery extends React.Component {
       var offset = ((image.clientWidth / 2) - (image.parentNode.clientWidth / 2)) * -1;
 
       // If image is old (e.g. Skirts), move images only 30% to the left
-      if (image.clientWidth > 1200) { offset = offset * MOVE_LEFT_PERCENT }
+      if (image.naturalWidth > 1600) { offset = offset * MOVE_LEFT_PERCENT }
 
       return offset
     }
