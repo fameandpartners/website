@@ -125,9 +125,10 @@ module Importers
       end
 
       def add_product_color_option(spree_product, spree_color_option_value)
+        # If ProductColorValue on dress + color combination (custom or not):
         # Create a ProductColorValue as NOT CUSTOM and INACTIVE
 
-        unless spree_product.product_color_values.exists?(option_value_id: spree_color_option_value.id, custom: false)
+        unless spree_product.product_color_values.exists?(option_value_id: spree_color_option_value.id)
           ProductColorValue.create(
             product_id:      spree_product.id,
             option_value_id: spree_color_option_value.id,
