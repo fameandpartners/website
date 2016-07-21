@@ -64,6 +64,7 @@ gem 'device_detector', '~> 0.8.1'
 gem 'rubyzip', '~> 1.1.7', require: false
 gem 'roo', require: false
 gem 'koala'
+gem 'gibbon'
 
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
 
