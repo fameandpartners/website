@@ -8,29 +8,23 @@ module Shippo
     end
 
     def create
-      transaction.object_status == 'SUCCESS' ? success_results : fail_results
+      transaction_results
     end
 
   private
 
-    def success_results
+    def transaction_results
       {
         status: transaction.object_status,
         label_url: transaction.label_url,
         tracking_number: transaction.tracking_number,
-      }
-    end
-
-    def fail_results
-      {
-        status: transaction.object_status,
         messages: transaction.messages
       }
     end
 
     def transaction
       @transaction ||= Shippo::Transaction.create(
-        rate: lowest_rate,
+        rate: lowest_rate[:object_id],
         label_file_type: 'PDF',
         async: false)
     end
@@ -67,7 +61,7 @@ module Shippo
         zip: ship_address.zipcode,
         country: ship_address.country.iso,
         phone: ship_address.phone,
-        email: ship_address.email
+        email: ship_address.email || order.email
       }
     end
 

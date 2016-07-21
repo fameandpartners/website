@@ -9,9 +9,10 @@ module Bergen
         @return_item_process = Operations::ReturnItemProcess.find(return_item_process_id)
         @return_request_item = return_item_process.return_request_item
 
-        asn_number = create_asn                # Create ASN
-        create_asn_retrieval_event(asn_number) # Save Bergen Ticket Number on Item Request Return
-        advance_in_return_item_process         # Continue
+        label = Shippo::Label.new(@return_request_item).create
+        asn_number = create_asn(label[:tracking_number])     # Create ASN
+        create_asn_retrieval_event(asn_number)               # Save Bergen Ticket Number on Item Request Return
+        advance_in_return_item_process                       # Continue
 
         @return_item_process.touch
       rescue StandardError => e
@@ -30,8 +31,11 @@ module Bergen
         return_item_process.asn_was_created!
       end
 
-      def create_asn
-        result = bergen.receiving_ticket_add(return_request_item: return_request_item)
+      def create_asn(tracking_number)
+        result = bergen.receiving_ticket_add(
+          return_request_item: return_request_item,
+          tracking_number: tracking_number
+        )
         result[:receiving_ticket_id]
       end
 
