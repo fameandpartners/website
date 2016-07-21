@@ -392,6 +392,10 @@
       min-height: initial;
     }
 
+    .btn-wrap {
+      padding-bottom: 30px;
+    }
+
     .panel-side-container {
       padding-top: 0;
 
@@ -424,12 +428,15 @@
       padding-top: $mega-menu-desktop-height;
     }
 
+    .panel-side-wrap {
+      height: 100vh;
+    }
+
     ul.btn-wrap {
       margin-top: 70px;
     }
 
     .btn-wrap {
-      padding-bottom: 30px;
       text-align: center;
 
       > .btn,
