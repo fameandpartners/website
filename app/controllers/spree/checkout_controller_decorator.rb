@@ -325,6 +325,8 @@ Spree::CheckoutController.class_eval do
 
   def data_layer_add_to_cart_event
     if (variant_id = flash[:variant_id_added_to_cart])
+      return if variant_id == 'NaN'
+
       variant           = Spree::Variant.find(variant_id)
       product_presenter = variant.product.presenter_as_details_resource(current_site_version)
 
