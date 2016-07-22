@@ -42,7 +42,7 @@ class SidePanelCustom extends SidePanel {
         parseFloat(option.table.display_price.money.fractional
         / option.table.display_price.money.currency.subunit_to_unit);
       return (
-        <a href="#" className={itemState}
+        <a href="javascript:;" className={itemState}
           onClick={this.onChange} key={index}
           data-id={option.table.id}
           data-presentation={option.table.name}
@@ -60,7 +60,7 @@ class SidePanelCustom extends SidePanel {
 
     return (
       <div className="pdp-side-container pdp-side-container-custom">
-        <a href="#"
+        <a href="javascript:;"
           className={triggerState}
           onClick={this.openMenu}>
           <div className="c-card-customize__content__left">Customize</div>
@@ -71,7 +71,7 @@ class SidePanelCustom extends SidePanel {
           <Scrollbars autoHide={AUTO_HIDE}>
             <div className="custom-scroll">
               <div className="text-right">
-                <a href="#"
+                <a href="javascript:;"
                   className="btn-close lg"
                   onClick={this.closeMenu}>
                     <span className="hide-visually">Close Menu</span>

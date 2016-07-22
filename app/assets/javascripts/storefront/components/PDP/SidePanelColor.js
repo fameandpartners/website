@@ -68,7 +68,7 @@ class SidePanelColor extends SidePanel {
         ? "selector-color is-selected" : "selector-color";
       const swatch = "swatch color-" + color.option_value.name;
       return (
-        <a href="#" className={itemState}
+        <a href="javascript:;" className={itemState}
           onClick={this.onChange} key={index}
           data-id={color.option_value.id}
           data-presentation={color.option_value.presentation}
@@ -85,7 +85,7 @@ class SidePanelColor extends SidePanel {
         ? "selector-color is-selected" : "selector-color";
       const swatch = "swatch color-" + color.option_value.name;
       return (
-        <a href="#" className={itemState}
+        <a href="javascript:;" className={itemState}
           onClick={this.onChange} key={index}
           data-id={color.option_value.id}
           data-presentation={color.option_value.presentation}
@@ -98,7 +98,7 @@ class SidePanelColor extends SidePanel {
     });
     return (
       <div className="pdp-side-container pdp-side-container-color">
-        <a href="#"
+        <a href="javascript:;"
           className={triggerState}
           onClick={this.openMenu}>
           <div className="c-card-customize__content__left">Color</div>
@@ -109,7 +109,7 @@ class SidePanelColor extends SidePanel {
           <Scrollbars autoHide={AUTO_HIDE}>
             <div className="custom-scroll">
               <div className="text-right">
-                <a href="#"
+                <a href="javascript:;"
                   className="btn-close lg"
                   onClick={this.closeMenu}>
                     <span className="hide-visually">Close Menu</span>

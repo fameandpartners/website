@@ -560,7 +560,7 @@ var SidePanelColor = function (_SidePanel) {
         var swatch = "swatch color-" + color.option_value.name;
         return _react2.default.createElement(
           'a',
-          { href: '#', className: itemState,
+          { href: 'javascript:;', className: itemState,
             onClick: _this3.onChange, key: index,
             'data-id': color.option_value.id,
             'data-presentation': color.option_value.presentation,
@@ -580,7 +580,7 @@ var SidePanelColor = function (_SidePanel) {
         var swatch = "swatch color-" + color.option_value.name;
         return _react2.default.createElement(
           'a',
-          { href: '#', className: itemState,
+          { href: 'javascript:;', className: itemState,
             onClick: _this3.onChange, key: index,
             'data-id': color.option_value.id,
             'data-presentation': color.option_value.presentation,
@@ -599,7 +599,7 @@ var SidePanelColor = function (_SidePanel) {
         { className: 'pdp-side-container pdp-side-container-color' },
         _react2.default.createElement(
           'a',
-          { href: '#',
+          { href: 'javascript:;',
             className: triggerState,
             onClick: this.openMenu },
           _react2.default.createElement(
@@ -627,7 +627,7 @@ var SidePanelColor = function (_SidePanel) {
                 { className: 'text-right' },
                 _react2.default.createElement(
                   'a',
-                  { href: '#',
+                  { href: 'javascript:;',
                     className: 'btn-close lg',
                     onClick: this.closeMenu },
                   _react2.default.createElement(
@@ -794,7 +794,7 @@ var SidePanelCustom = function (_SidePanel) {
         var price = parseFloat(option.table.display_price.money.fractional / option.table.display_price.money.currency.subunit_to_unit);
         return _react2.default.createElement(
           'a',
-          { href: '#', className: itemState,
+          { href: 'javascript:;', className: itemState,
             onClick: _this2.onChange, key: index,
             'data-id': option.table.id,
             'data-presentation': option.table.name,
@@ -823,7 +823,7 @@ var SidePanelCustom = function (_SidePanel) {
         { className: 'pdp-side-container pdp-side-container-custom' },
         _react2.default.createElement(
           'a',
-          { href: '#',
+          { href: 'javascript:;',
             className: triggerState,
             onClick: this.openMenu },
           _react2.default.createElement(
@@ -851,7 +851,7 @@ var SidePanelCustom = function (_SidePanel) {
                 { className: 'text-right' },
                 _react2.default.createElement(
                   'a',
-                  { href: '#',
+                  { href: 'javascript:;',
                     className: 'btn-close lg',
                     onClick: this.closeMenu },
                   _react2.default.createElement(
@@ -979,7 +979,7 @@ var SidePanelLength = function (_SidePanel) {
           { className: 'row', key: index },
           _react2.default.createElement(
             'a',
-            { href: '#', className: ITEM_STATE,
+            { href: 'javascript:;', className: ITEM_STATE,
               onClick: _this2.onChange, 'data-id': length.value },
             length.value
           ),
@@ -997,7 +997,7 @@ var SidePanelLength = function (_SidePanel) {
         { className: 'pdp-side-container pdp-side-container-length' },
         _react2.default.createElement(
           'a',
-          { href: '#',
+          { href: 'javascript:;',
             className: TRIGGER_STATE,
             onClick: this.openMenu },
           _react2.default.createElement(
@@ -1025,7 +1025,7 @@ var SidePanelLength = function (_SidePanel) {
                 { className: 'text-right' },
                 _react2.default.createElement(
                   'a',
-                  { href: '#',
+                  { href: 'javascript:;',
                     className: 'btn-close lg',
                     onClick: this.closeMenu },
                   _react2.default.createElement(
@@ -1138,7 +1138,7 @@ var SidePanelLengthChart = function (_React$Component) {
         { className: 'chart-wrap' },
         _react2.default.createElement(
           'a',
-          { href: '#', className: triggerState, onClick: this.toggleMenu },
+          { href: 'javascript:;', className: triggerState, onClick: this.toggleMenu },
           triggerCopy
         ),
         _react2.default.createElement(
@@ -1719,7 +1719,7 @@ var SidePanelSizeChart = function (_React$Component) {
         { className: 'chart-wrap' },
         _react2.default.createElement(
           'a',
-          { href: '#', className: triggerState, onClick: this.toggleMenu },
+          { href: 'javascript:;', className: triggerState, onClick: this.toggleMenu },
           triggerCopy
         ),
         _react2.default.createElement(
