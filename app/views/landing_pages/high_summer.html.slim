@@ -355,5 +355,8 @@
         .col-md-12.text-center
           h3.featured-products-title Shop Brittany's Curated Edit
 
+      - all_products = get_products_from_edit('high-summer', nil, nil, 9)
+
       .row
-        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, customWrapper: 'col-md-4 col-xs-6'}
+        - all_products.each_slice(4) do |products|
+          = render :partial => '/landing_pages/products_four', :locals => { :products => products }
