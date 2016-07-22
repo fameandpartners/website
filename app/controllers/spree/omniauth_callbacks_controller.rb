@@ -94,7 +94,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if user.save
         flash[:notice] = "Signed in successfully."
 
-        MailchimpClient.new.add_customer(user) if user_is_new
+        MailChimpClient.new.add_customer(user) if user_is_new
 
         FacebookDataFetchWorker.perform_async(user.id, auth_hash['uid'], auth_hash['credentials']['token'])
 
