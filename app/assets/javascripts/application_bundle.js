@@ -95,6 +95,10 @@ var CtaPrice = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CtaPrice).call(this, props, context));
 
+    _this.state = {
+      sending: false
+    };
+
     _this.addToBag = _this.addToBag.bind(_this);
     return _this;
   }
@@ -105,6 +109,8 @@ var CtaPrice = function (_React$Component) {
       // TODO: redo this
       // this is just very hacky way to connect this with shopping cart
       if (this.props.customize.size.id && this.props.customize.color.id && this.props.customize.length.id) {
+        // disable "ADD TO BAG" button and show spinner
+        this.setState({ sending: true });
         document.getElementById('pdpCartSizeId').value = this.props.customize.size.id;
         document.getElementById('pdpCartColorId').value = this.props.customize.color.id;
         document.getElementById('pdpCartCustomId').value = this.props.customize.customization.id;
@@ -148,11 +154,17 @@ var CtaPrice = function (_React$Component) {
           price
         ),
         function () {
-          if (_this2.props.customize.size.id && _this2.props.customize.color.id && _this2.props.customize.length.id) {
+          if (_this2.props.customize.size.id && _this2.props.customize.color.id && _this2.props.customize.length.id && !_this2.state.sending) {
             return _react2.default.createElement(
               'a',
               { href: 'javascript:;', onClick: _this2.addToBag, className: 'btn btn-black btn-lrg' },
               'ADD TO BAG'
+            );
+          } else if (_this2.state.sending) {
+            return _react2.default.createElement(
+              'a',
+              { href: 'javascript:;', className: 'btn btn-black btn-loading btn-lrg' },
+              _react2.default.createElement('img', { src: '/assets/loader-bg-black.gif', alt: 'Adding to bag' })
             );
           } else {
             return _react2.default.createElement(
