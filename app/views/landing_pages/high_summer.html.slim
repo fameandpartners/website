@@ -5,7 +5,7 @@
   .category-header
     .media-wrap
       = image_tag 'style-icon/high-summer/hero-header.jpg', :srcset => "#{image_path("style-icon/high-summer/hero-header-mob.jpg")} 1023w,
-            #{image_path("style-icon/high-summer/hero-header.jpg")} 1024w", :class => 'img-responsive'
+            #{image_path("style-icon/high-summer/hero-header.jpg")} 1024w", :class => 'img-responsive', :alt => "Brittany Xavier's High Summer Collection"
 
     .outer-wrap
       .inner-wrap
@@ -28,14 +28,13 @@
             br.hidden-sm.hidden-xs
             span.line-break-md  Consider us inspired.
           .cta-wrapper
-             / TODO: Check if this product has been created in production
-             / TODO: add real link.
              .cta-product-caption.copy-highlight
-              | Brittany wears #{link_to "Murphy", "#", :class => 'highlight'} dress in black.
+              | Brittany wears #{link_to "Murphy", "#{dresses_path}/dress-murphy-1091?color=black", :class => 'highlight'} dress in black.
 
       .col-lg-6.col-lg-offset-1.col-md-7.content-img
-        = image_tag 'style-icon/high-summer/intro.jpg', :srcset => "#{image_path("style-icon/high-summer/intro-mob.jpg")} 1023w,
-            #{image_path("style-icon/high-summer/intro.jpg")} 1024w", :class => 'img-responsive'
+        = link_to dresses_path + "/dress-murphy-1091?color=black"
+          = image_tag 'style-icon/high-summer/intro.jpg', :srcset => "#{image_path("style-icon/high-summer/intro-mob.jpg")} 1023w,
+              #{image_path("style-icon/high-summer/intro.jpg")} 1024w", :class => 'img-responsive', :alt => 'Murphy Dress'
 
 
   .local-navigation-wrapper.container-fluid
@@ -48,12 +47,15 @@
               li.link #{link_to "Look #{i}", "#look#{i}"}
 
   // Look 1
-  // TODO: Get the real ID for this product
-  - current_dress_id = "#"
-  / TODO: Get these variables (name, price, link) from the ID above, dynamically. Is it possible?
   - current_dress_name = "Allegra"
-  - current_dress_link = "https://www.fameandpartners.com/dresses/dress-allegra-680?color=pale-pink"
-  - current_dress_price = "$279"
+  - current_dress_link = "#{dresses_path}/dress-allegra-680?color=pale-pink"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$289"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$279"
+
   section.section-box.container-fluid.no-padding.no-margin.section-look#look1
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
@@ -82,14 +84,16 @@
               span.btn-md.btn-featured
                | Shop & customize
 
-  // TODO: Check if this product has been created in production
   // Look 2
-  // TODO: Get the real ID for this product
-  - current_dress_id = "#"
-  / TODO: Get these variables (name, price, link) from the ID above, dynamically. Is it possible?
   - current_dress_name = "Kirrily"
-  - current_dress_link = "#"
-  - current_dress_price = "$299"
+  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$379"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$299"
+
   section.section-box.container-fluid.no-padding.no-margin.section-look#look2
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
@@ -119,12 +123,15 @@
                | Shop & customize
 
   // Look 3
-  // TODO: Get the real ID for this product
-  - current_dress_id = "#"
-  / TODO: Get these variables (name, price, link) from the ID above, dynamically. Is it possible?
   - current_dress_name = "Maaike"
-  - current_dress_link = "https://www.fameandpartners.com/dresses/dress-maaike-1065?color=black"
-  - current_dress_price = "$249"
+  - current_dress_link = "#{dresses_path}/dress-maaike-1065?color=black"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$299"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$249"
+
   section.section-box.container-fluid.no-padding.no-margin.section-look#look3
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
@@ -154,12 +161,15 @@
                | Shop & customize
 
   // Look 4
-  // TODO: Get the real ID for this product
-  - current_dress_id = "#"
-  / TODO: Get these variables (name, price, link) from the ID above, dynamically. Is it possible?
   - current_dress_name = "Dara Jumpsuit"
-  - current_dress_link = "https://www.fameandpartners.com/dresses/dress-dara-jumpsuit-1056?color=looking-glass"
-  - current_dress_price = "$229"
+  - current_dress_link = "#{dresses_path}/dress-dara-jumpsuit-1056?color=looking-glass"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$289"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$229"
+
   section.section-box.container-fluid.no-padding.no-margin.section-look#look4
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
@@ -188,14 +198,16 @@
               span.btn-md.btn-featured
                | Shop & customize
 
-  // TODO: Check if this product has been created in production
   // Look 5
-  // TODO: Get the real ID for this product
-  - current_dress_id = "#"
-  / TODO: Get these variables (name, price, link) from the ID above, dynamically. Is it possible?
   - current_dress_name = "Murphy"
-  - current_dress_link = "#"
-  - current_dress_price = "$229"
+  - current_dress_link = "#{dresses_path}/dress-murphy-1091?color=black"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$289"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$229"
+
   section.section-box.container-fluid.no-padding.no-margin.section-look#look5
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
@@ -224,14 +236,16 @@
               span.btn-md.btn-featured
                | Shop & customize
 
-  // TODO: Check if this product has been created in production
   // Look 6
-  // TODO: Get the real ID for this product
-  - current_dress_id = "#"
-  / TODO: Get these variables (name, price, link) from the ID above, dynamically. Is it possible?
   - current_dress_name = "Azzedine"
-  - current_dress_link = "#"
-  - current_dress_price = "$299"
+  - current_dress_link = "#{dresses_path}/dress-azzedine-1103?color=ornate-midnight-floral"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$379"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$299"
+
   section.section-box.container-fluid.no-padding.no-margin.section-look#look6
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
@@ -261,12 +275,14 @@
                | Shop & customize
 
   // Look 7
-  // TODO: Get the real ID for this product
-  - current_dress_id = "#"
-  / TODO: Get these variables (name, price, link) from the ID above, dynamically. Is it possible?
   - current_dress_name = "Delaney"
-  - current_dress_link = "https://www.fameandpartners.com/dresses/dress-delaney-three-piece-1088?color=white"
-  - current_dress_price = "$349"
+  - current_dress_link = "#{dresses_path}/dress-delaney-three-piece-1088?color=white"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$439"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$349"
   section.section-box.container-fluid.no-padding.no-margin.section-look#look7
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
@@ -294,12 +310,15 @@
                | Shop & customize
 
   // Look 8
-  // TODO: Get the real ID for this product
-  - current_dress_id = "#"
-  / TODO: Get these variables (name, price, link) from the ID above, dynamically. Is it possible?
   - current_dress_name = "Greer Two Piece"
-  - current_dress_link = "https://www.fameandpartners.com/dresses/dress-greer-two-piece-1070?color=black"
-  - current_dress_price = "$229"
+  - current_dress_link = "#{dresses_path}/dress-greer-two-piece-1070?color=black"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$289"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$229"
+
   section.section-box.container-fluid.no-padding.no-margin.section-look#look8
     .row
       .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
