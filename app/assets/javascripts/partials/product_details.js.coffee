@@ -1,7 +1,9 @@
 page.initProductDetailsPage = (options = {}) ->
   # After user clicks the ADD TO CART button, react selector will populate
   # on page hidden form and trigger submit.
-  $(document).on('submit', '#pdpDataForCheckout', () ->
+  $(document).on('submit', '#pdpDataForCheckout', (e) ->
+    e.preventDefault()
+
     $this = $(this)
     dressVarId = undefined
     customIds = undefined
