@@ -12,14 +12,18 @@ var config = {
 		dist: './app/assets/javascripts/',
 		mainJS: './app/assets/javascripts/storefront/App.js'
 	}
-}
+};
+
+gulp.task('apply-node-env', function() {
+  process.env.NODE_ENV = process.env.NODE_ENV || 'production';
+});
 
 gulp.task('clean-scripts', function () {
   return gulp.src(config.paths.dist + 'application_bundle.js', {read: false})
     .pipe(clean());
 });
 
-gulp.task('js', ['clean-scripts'], function() {
+gulp.task('js', ['apply-node-env', 'clean-scripts'], function() {
 	browserify(config.paths.mainJS)
 		.transform(babelify, {presets: ['es2015', 'react']})
 		.bundle()
@@ -29,7 +33,7 @@ gulp.task('js', ['clean-scripts'], function() {
 });
 
 gulp.task('watch', function() {
-	gulp.watch(config.paths.js, ['js']);
+  gulp.watch(config.paths.js, ['apply-node-env', 'js']);
 });
 
-gulp.task('default', ['js', 'watch']);
+gulp.task('default', ['apply-node-env', 'js', 'watch']);

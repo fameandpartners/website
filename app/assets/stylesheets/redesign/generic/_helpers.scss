@@ -98,6 +98,22 @@
   margin-bottom: 0 !important;
 }
 
+// Align content vericaly
+.h-v-align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__item--top {
+    align-self: flex-start;
+  }
+
+  &__item--bottom {
+    align-self: flex-end;
+  }
+
+}
+
 // TODO: check if this hack is even needed
 .relative {
   position: relative !important;
