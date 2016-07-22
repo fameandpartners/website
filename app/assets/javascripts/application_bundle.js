@@ -177,7 +177,7 @@ var CtaPrice = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'est-delivery' },
-          'Estimated delivery 3-4 weeks'
+          'Estimated delivery 1-2 weeks'
         )
       );
     }
