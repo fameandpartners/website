@@ -39,8 +39,11 @@ class MailChimpClient
     }
 
     gibbon.ecommerce.stores(STORE_ID).orders.create(body: order_params)
+
+    puts "Order #{order.number} added to MailChimp"
   rescue StandardError => e
-    byebug
+    puts e
+    puts e.backtrace.join("\n\t")
     Raven.capture_exception(e)
   end
 
