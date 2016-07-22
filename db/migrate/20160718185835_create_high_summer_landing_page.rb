@@ -4,7 +4,7 @@ class CreateHighSummerLandingPage < ActiveRecord::Migration
       page = Revolution::Page.create!(
         path:          '/brittany-xavier-high-summer-collection',
         template_path: '/landing_pages/high_summer',
-        variables:     { lookbook: true, limit: 9, pids: %w(1090-white 1086-pale-blue-cotton-stripe 1082-navy 1071-pale-blue 1068-white 1061-looking-glass 1054-black 1040-black 1030-dark-burgundy) },
+        variables:     { lookbook: true, limit: 9, pids: %w(1061-looking-glass 1068-white 1104-black 1105-black 1012-navy 1064-pale-blue 1092-pale-pink 1010-feather-love 1096-hot-pink) },
         publish_from:  1.day.ago
       )
       page.translations.create!(locale: 'en-US', title: "Britanny Xavier's High Summer Collection", meta_description: "Britanny Xavier's High Summer Collection", heading: "Britanny Xavier's High Summer Collection")
