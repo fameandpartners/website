@@ -1,6 +1,6 @@
 = render :partial => 'landing_pages/common'
 
-.page-content.style-icon-page
+.page-content.style-icon-page.relative
 
   .category-header
     .media-wrap
@@ -34,11 +34,12 @@
         = image_tag 'style-icon/high-summer/intro.jpg', :srcset => "#{image_path("style-icon/high-summer/intro-mob.jpg")} 1023w,
             #{image_path("style-icon/high-summer/intro.jpg")} 1024w", :class => 'img-responsive'
 
-  .local-navigation
-    .container-fluid
-      .row.js-float-on-scroll
+
+  .local-navigation-wrapper.container-fluid
+    .row
+      .local-navigation.js-float-menu-on-scroll
         .col-md-10.col-md-offset-1
-          ul.navigation-wrapper
+          ul.nav
             - how_many_links = 8
             - for i in (1..how_many_links) do
               li.link #{link_to "Look #{i}", "#look#{i}"}
