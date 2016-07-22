@@ -2,24 +2,35 @@
 (function ($) {
 
   // Get useful data before any interaction
-  var $navHeightDesktop = $("#fixed-header").delay(300).outerHeight(),
-      $navHeightLocalMenu = $(".js-float-menu-on-scroll").delay(300).outerHeight(),
-      $localNavOffsetTop = $(".local-navigation-wrapper .js-float-menu-on-scroll").offset().top,
-      $offsetHeight = $navHeightDesktop+$navHeightLocalMenu,
-      $offsetHeightExtra = 45; // Magic number ¯\_(ツ)_/¯
+  var $navHeightDesktop = 0,
+      $navHeightLocalMenu = 0,
+      $localNavOffsetTop = 0;
+
+  if ($("#fixed-header").length)
+    var $navHeightDesktop = $("#fixed-header").delay(300).outerHeight();
+
+  if ($(".js-float-menu-on-scroll").length)
+    var $navHeightLocalMenu = $(".js-float-menu-on-scroll").delay(300).outerHeight();
+
+  if ($(".local-navigation-wrapper .js-float-menu-on-scroll").length)
+    var $localNavOffsetTop = $(".local-navigation-wrapper .js-float-menu-on-scroll").offset().top;
+
+    var $offsetHeight = $navHeightDesktop+$navHeightLocalMenu,
+        $offsetHeightExtra = 45, // Magic number ¯\_(ツ)_/¯
+        $mdScreenWidth = 992;
 
   // Add DOM helper if we are loading this page directly from an URL containing an anchor (/something#foo=bar)
   // This is needed for our fixed header and floating menu
   if ( window.location.hash ) {
-      var $hash = window.location.hash,
-          id   = $hash.slice(1),
-          elem = document.getElementById(id),
-          hashlink = '<div id='+id+' class="hashlink js-hashlink"></div>';
+    var $hash = window.location.hash,
+        $id   = $hash.slice(1),
+        $elem = document.getElementById($id),
+        $hashlink = '<div id='+$id+' class="hashlink js-hashlink"></div>';
 
-      elem.removeAttribute('id');
-      elem.insertAdjacentHTML('beforebegin', hashlink);
-      $('.js-hashlink').css({'height': $offsetHeight+'px', 'margin-top': -$offsetHeight+'px'});
-      window.location.hash = $hash;
+    $elem.removeAttribute('id');
+    $elem.insertAdjacentHTML('beforebegin', $hashlink);
+    $('.js-hashlink').css({'height': $offsetHeight+'px', 'margin-top': -$offsetHeight+'px'});
+    window.location.hash = $hash;
   }
 
   // Check if we have any floating menu in the page
@@ -50,36 +61,38 @@
     });
 
     // Responsive floating menu as a Carousel on mobile
-    var $window = $(window),
-        $responsiveNavLocal = $('.local-navigation .nav'),
-        $toggleSlick;
+    if ($(".local-navigation .nav").length) {
+      var $window = $(window),
+          $toggleSlick,
+          $responsiveNavLocal = $('.local-navigation .nav')
 
-    $toggleSlick = function () {
-      if ($window.width() < 992) {
-        if(!$responsiveNavLocal.hasClass('slick-initialized')) {
-          $responsiveNavLocal.slick({
-            autoplay: false,
-            fade: false,
-            arrows: false,
-            dots: false,
-            edgeFriction: 10,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            variableWidth: true,
-            infinite: true,
-            focusOnSelect: true,
-            mobileFirst: true
-          });
-        }
-      } else {
-        if($responsiveNavLocal.hasClass('slick-initialized')) {
-          $responsiveNavLocal.slick('unslick');
+      $toggleSlick = function () {
+        if ($window.width() < $mdScreenWidth) {
+          if(!$responsiveNavLocal.hasClass('slick-initialized')) {
+            $responsiveNavLocal.slick({
+              autoplay: false,
+              fade: false,
+              arrows: false,
+              dots: false,
+              edgeFriction: 10,
+              slidesToShow: 4,
+              slidesToScroll: 1,
+              variableWidth: true,
+              infinite: true,
+              focusOnSelect: true,
+              mobileFirst: true
+            });
+          }
+        } else {
+          if($responsiveNavLocal.hasClass('slick-initialized')) {
+            $responsiveNavLocal.slick('unslick');
+          }
         }
       }
-    }
 
-    $window.delay(500).resize($toggleSlick);
-    $toggleSlick();
+      $window.delay(500).resize($toggleSlick);
+      $toggleSlick();
+    }
 
   }
 
@@ -93,13 +106,21 @@
 
       if ($target.length) {
         // Get some useful data after the click interaction
-        var $navHeightLocalMenu = $(".js-float-menu-on-scroll").delay(300).outerHeight(),
-            $navHeightDesktop = $("#fixed-header").delay(300).outerHeight(),
-            $offsetClickFromLocalNav = 0,
-            $offsetHeightNav;
+        var $offsetClickFromLocalNav = 0,
+            $navHeightLocalMenu = 0,
+            $navHeightDesktop = 0,
+            $offsetHeightNav = 0;
+
+        if ($(".js-float-menu-on-scroll").length)
+          var $navHeightLocalMenu = $(".js-float-menu-on-scroll").delay(300).outerHeight();
+
+        if ($("#fixed-header").length)
+          var $navHeightDesktop = $("#fixed-header").delay(300).outerHeight();
 
         // Reset our on-load anchor target helper
-        $('.js-hashlink').css({'height': '0px', 'margin-top': $offsetHeightExtra+'px'});
+        if ($('.js-hashlink').length) {
+          $('.js-hashlink').css({'height': '0px', 'margin-top': $offsetHeightExtra+'px'});
+        }
 
         // This prevents the anchor target to be overlayed by our floating header
         if ($(this).closest(".local-navigation-wrapper").length) {
@@ -107,7 +128,7 @@
         }
 
         // Define the top offset for our anchor navigation, based on screen size
-        if ($(window).width() < 992) {
+        if ($(window).width() < $mdScreenWidth) {
           $offsetHeightNav = $navHeightLocalMenu;
         } else {
           $offsetHeightNav = $navHeightDesktop+$offsetClickFromLocalNav;
