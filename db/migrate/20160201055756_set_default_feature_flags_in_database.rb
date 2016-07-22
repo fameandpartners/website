@@ -8,7 +8,6 @@ class SetDefaultFeatureFlagsInDatabase < ActiveRecord::Migration
     default_feature_flags = {
       "feature:checkout_fb_login"         => "100|",
       "feature:content_revolution"        => "100|",
-      "feature:enhanced_moodboards"       => "100|",
       "feature:fameweddings"              => "100|",
       "feature:height_customisation"      => "100|",
       "feature:marketing_modals"          => "100|",

@@ -102,8 +102,7 @@ when :development
   end
 
 when :staging
-
-when :preproduction
+  configatron.site_version_detector_strategy = :top_level_domain
 
 when :production
   configatron.site_version_detector_strategy = :top_level_domain
