@@ -40,16 +40,17 @@
     $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: ($offsetHeight+$offsetHeightExtra) })
 
     // Watch scrolling to show/hide floating menu
-    $(document).on("scroll", function() {
+    $(document).delay(500).on("scroll", function() {
       var $windowPosition = $(window).scrollTop();
 
       // Toggle floating menu if window position is below the target element
-      if ($windowPosition > (($localNavOffsetTop*2)-$navHeightDesktop)) {
+      // if ($windowPosition < ($localNavOffsetTop+$navHeightLocalMenu)) {
+      if ($windowPosition+$navHeightDesktop >= $(".local-navigation-wrapper").offset().top+$navHeightLocalMenu){
         if ($('.js-float-menu-on-scroll.fixed-nav').length) {
-          $('.js-float-menu-on-scroll.fixed-nav').fadeIn();
-          $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile').fadeIn();
+          $('.js-float-menu-on-scroll.fixed-nav').fadeIn(100);
+          $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile').fadeIn(100);
         } else {
-          $('.local-navigation-wrapper .js-float-menu-on-scroll').clone().addClass('fixed-nav').appendTo('#fixed-header').fadeIn();
+          $('.local-navigation-wrapper .js-float-menu-on-scroll').clone().addClass('fixed-nav').appendTo('#fixed-header').fadeIn(100);
         }
       } else {
         if ($('.js-float-menu-on-scroll.fixed-nav').length) {
