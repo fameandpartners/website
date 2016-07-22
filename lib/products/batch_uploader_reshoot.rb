@@ -440,12 +440,20 @@ module Products
       # [x] deactivate product color values that exists
       # [x] create product color values that aren't related to the product yet
 
-      product_color_values = spree_product.product_color_values.where(custom: false)
+      product_color_values = spree_product.product_color_values
 
-      # Deactivate current product colors
-      product_color_values.map do |product_color_value|
+      # Deactivate current product non custom colors
+      product_color_values.where(custom: false).each do |product_color_value|
         product_color_value.active = false
         product_color_value.save!
+      end
+
+      # Convert custom colors to main colors
+      available_colors.each do |available_color|
+        if (custom_color = product_color_values.where(option_value_id: available_color.id, custom: true).first)
+          custom_color.custom = false
+          custom_color.save!
+        end
       end
 
       # Create product colors (not custom)

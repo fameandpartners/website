@@ -35,7 +35,7 @@ class SidePanelLength extends SidePanel {
         ? "selector-size is-selected" : "selector-size";
       return (
         <div className="row" key={index}>
-          <a href="#" className={ITEM_STATE}
+          <a href="javascript:;" className={ITEM_STATE}
             onClick={this.onChange} data-id={length.value}>
             {length.value}
           </a>
@@ -49,7 +49,7 @@ class SidePanelLength extends SidePanel {
     });
     return (
       <div className="pdp-side-container pdp-side-container-length">
-        <a href="#"
+        <a href="javascript:;"
           className={TRIGGER_STATE}
           onClick={this.openMenu}>
           <div className={ERROR}>Skirt Length</div>
@@ -60,7 +60,7 @@ class SidePanelLength extends SidePanel {
           <Scrollbars autoHide={AUTO_HIDE}>
             <div className="custom-scroll">
               <div className="text-right">
-                <a href="#"
+                <a href="javascript:;"
                   className="btn-close lg"
                   onClick={this.closeMenu}>
                     <span className="hide-visually">Close Menu</span>
