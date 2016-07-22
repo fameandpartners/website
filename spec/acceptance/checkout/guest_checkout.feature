@@ -71,6 +71,6 @@ Feature: Complete Guest Checkout
 
     Examples:
       | Site Version | Country       | State      | Zipcode Label | Dress Size | Skirt Length | Dress Price |
-      | Australia    | Australia     | Queensland | Postcode      | AU 14      | Petite       | 319.00      |
+      | Australia    | Australia     | Queensland | Postcode      | AU 14      | Standard     | 319.00      |
       | USA          | United States | California | Zipcode       | US 10      | Standard     | 289.00      |
-      | Australia    | New Zealand   | Whanganui  | Postcode      | AU 8       | Tall         | 319.00      |
+      | Australia    | New Zealand   | Whanganui  | Postcode      | AU 8       | Standard     | 319.00      |
