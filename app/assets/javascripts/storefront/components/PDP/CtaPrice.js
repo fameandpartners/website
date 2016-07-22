@@ -7,6 +7,10 @@ class CtaPrice extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+    this.state = {
+      sending: false
+    };
+
     this.addToBag = this.addToBag.bind(this);
   }
 
@@ -16,6 +20,8 @@ class CtaPrice extends React.Component {
     if(this.props.customize.size.id
       && this.props.customize.color.id
       && this.props.customize.length.id) {
+      // disable "ADD TO BAG" button and show spinner
+      this.setState({sending:true});
       document.getElementById('pdpCartSizeId').value = this.props.customize.size.id;
       document.getElementById('pdpCartColorId').value = this.props.customize.color.id;
       document.getElementById('pdpCartCustomId').value = this.props.customize.customization.id;
@@ -56,9 +62,18 @@ class CtaPrice extends React.Component {
           {(() => {
             if(this.props.customize.size.id
               && this.props.customize.color.id
-              && this.props.customize.length.id) {
+              && this.props.customize.length.id
+              && !this.state.sending) {
               return (
-                <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">ADD TO BAG</a>
+                <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">
+                  ADD TO BAG
+                </a>
+              );
+            } else if(this.state.sending) {
+              return (
+                <a href="javascript:;" className="btn btn-black btn-loading btn-lrg">
+                  <img src="/assets/loader-bg-black.gif" alt="Adding to bag" />
+                </a>
               );
             } else {
               return (
@@ -66,7 +81,7 @@ class CtaPrice extends React.Component {
               );
             }
           })()}
-        <div className="est-delivery">Estimated delivery 3-4 weeks</div>
+        <div className="est-delivery">Estimated delivery 1-2 weeks</div>
       </div>
     );
   }

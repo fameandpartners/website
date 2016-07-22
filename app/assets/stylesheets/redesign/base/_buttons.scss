@@ -103,6 +103,18 @@
     color: $c-neutral-white;
   }
 
+  &.btn-loading {
+
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background: $c-neutral-black;
+    }
+
+  }
+
 }
 
 .btn-close {
