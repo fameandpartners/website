@@ -59,39 +59,6 @@
     @include column-vertical-align();
   }
 
-  .navigation-wrapper {
-    text-align: center;
-    width: 100%;
-    padding: 38px 0 0;
-    margin: 0;
-    @include display-flex;
-
-    li {
-      padding: 0;
-      margin: 0 -2px;
-      display: inline-block;
-      flex-basis: 100%;
-    }
-
-    a {
-      color: $c-neutral-8;
-      border-bottom: 1px solid $c-neutral-8;
-      padding: 18px 35px;
-      display: inline-block;
-      font-size: 1.4rem;
-      width: 100%;
-
-      &.active,
-      &:hover {
-        border-color: $c-neutral-black;
-        color: $c-neutral-black;
-        font-weight: 500;
-      }
-
-    }
-
-  }
-
   @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
 
     .container-fluid.no-padding.no-margin .vertical-align-copy .content-img {
