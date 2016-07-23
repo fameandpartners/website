@@ -142,14 +142,24 @@ ruby:
 
       .row
         .col-md-12.cta-item-huge
-          .section-img-wrap.copy-center
-            picture
-              .img-wrap
-                source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-1-mob.jpg")}'
-                source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-1-retina.jpg")}'
-                img src='#{image_path("homepage/fp-style-icon/fp-style-icon-1-mob.jpg")}' srcset='
-                  #{image_path("homepage/fp-style-icon/fp-style-icon-1-mob.jpg")} 1023w,
-                  #{image_path("homepage/fp-style-icon/fp-style-icon-1-retina.jpg")} 1024w' alt="F&P Style Icon"
+          = link_to '/brittany-xavier-high-summer-collection'
+            .section-img-wrap.copy-center
+              picture
+                .img-wrap
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-1-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-1-retina.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/fp-style-icon-1-mob.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/fp-style-icon-1-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/fp-style-icon-1-retina.jpg")} 1024w' alt="F&P Style Icon"
+
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                     .copy-wrap.text-center
+                       span.cta-link-white-bg
+                        span.cta-link Explore
+                        span.copy-highlight  Brittany Xavier's Edit
 
     .tag-info-section
       .tag-info-wrapper.visible-lg-block
