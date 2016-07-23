@@ -69,7 +69,11 @@
       opacity: 1;
       @include transition(opacity linear .6s);
     }
-    
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+    overflow: visible;
   }
 
 }

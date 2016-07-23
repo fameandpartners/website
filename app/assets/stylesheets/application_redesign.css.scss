@@ -159,7 +159,6 @@ z-index levels
 @import 'redesign/style_consult';
 @import 'redesign/contact';
 @import 'redesign/fashionista_winner';
-@import 'redesign/index';
 @import 'redesign/modal';
 @import 'redesign/flash_slider';
 @import 'redesign/terms';
@@ -189,6 +188,7 @@ z-index levels
 @import 'redesign/layout/footer';
 @import 'redesign/layout/nav-menu';
 @import 'redesign/layout/menu-new-this-week';
+@import 'redesign/layout/section-boxes';
 
 // Components
 @import 'redesign/components/lists';
@@ -212,6 +212,7 @@ z-index levels
 @import 'redesign/components/panels/content-collapse-expand';
 @import 'redesign/components/related-nav';
 @import 'redesign/components/cart';
+@import 'redesign/components/carousel-dot-nav';
 
 @import 'redesign/components/cards/cards';
 
@@ -234,6 +235,7 @@ z-index levels
 @import 'redesign/pages/why-us';
 @import 'redesign/pages/growth-plan';
 @import 'redesign/pages/shop-social';
+@import 'redesign/pages/homepage';
 
 //Orders
 @import 'redesign/orders/order-details';

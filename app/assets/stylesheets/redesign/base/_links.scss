@@ -10,5 +10,39 @@ a {
     text-decoration: none;
     outline: none;
   }
-  
+
+}
+
+.cta-link {
+  font-family: $font-heading;
+  font-style: italic;
+  border-bottom: 1px solid $c-neutral-6;
+}
+
+.cta-link-alt {
+  color: $c-neutral-black;
+  font-family: $font-heading;
+  font-style: italic;
+  text-decoration: none;
+  border-bottom: 1px solid $c-neutral-black;
+  display: inline-block;
+  margin: 10px 0;
+}
+
+.cta-link-white-bg {
+  font-size: 1.3rem;
+  padding: 5px 20px;
+  background: $c-neutral-white;
+  color: $c-neutral-black;
+}
+
+.cta-link-arrow-right {
+  color: $c-neutral-black;
+
+   .icon {
+      font-weight: 600;
+      padding-left: 3px;
+      font-size: 1rem;
+    }
+
 }
