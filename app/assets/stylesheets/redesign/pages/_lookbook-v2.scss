@@ -1,0 +1,93 @@
+/* [Lookbook v2]
+-------------------------------------------------------*/
+.lookbook-v2-page {
+
+  .category-header .media-wrap {
+    display: block;
+  }
+
+  h1.title {
+    color: $c-neutral-black;
+  }
+
+  a {
+    color: $c-neutral-black;
+  }
+
+  .section-intro {
+
+    p {
+      font-size: 3.3rem;
+      line-height: 130%;
+    }
+
+    .cta-product-caption a {
+      border-bottom: 1px solid $c-neutral-black;
+    }
+
+    h2.title {
+      margin-top: 45px;
+      text-transform: none;
+    }
+
+  }
+
+  .content-copy:not(.vertical-align){
+
+    h3 {
+      margin-top: 70px;
+      font-size: 4rem;
+    }
+
+  }
+
+  .copy-wrap h3,
+  h3.featured-products-title {
+    font-size: 4rem;
+    text-transform: none;
+  }
+
+  .featured-products-title {
+    margin: 85px 0;
+  }
+
+  .cta-product-caption {
+    font-size: 1.2rem;
+  }
+
+  .vertical-align-copy {
+    @include column-vertical-align();
+  }
+
+  @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
+
+    .container-fluid.no-padding.no-margin .vertical-align-copy .content-img {
+      padding-right: 15px;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .copy-wrap h3 {
+      margin-top: 40px;
+      font-size: 3rem;
+    }
+
+    .content-copy {
+      text-align: center;
+    }
+
+    .section-intro p {
+      font-size: 2.3rem;
+    }
+
+    // We currently show 2 columns of products on mobile.
+    // To make the grid look better let's hide the last product only if it's an odd item.
+    .products-collections .category--item:last-child:nth-child(odd) {
+      display: none;
+    }
+
+  }
+
+}

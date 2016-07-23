@@ -10,3 +10,16 @@
   // END - tablet
 
 }
+
+.container-fluid.no-padding.no-margin {
+  padding: 0;
+
+  .row {
+    margin: 0;
+  }
+
+  .content-img {
+    padding: 0;
+  }
+
+}

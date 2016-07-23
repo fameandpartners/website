@@ -4,8 +4,11 @@ $section-spacing-margin-top: 40px;
 $box-padding-top: 25px;
 
 .section-box {
-
   margin-top: $section-spacing-margin-top;
+
+  &.top-overlay {
+    margin-top: -37px;
+  }
 
   p {
     font-family: $font-heading;
@@ -134,6 +137,11 @@ $box-padding-top: 25px;
 
   }
 
+  .cta-product-caption {
+    margin: 25px 0;
+    font-weight: 500;
+  }
+
   @media (max-width: $bootstrap-md-width - 1px) {
 
     .item {
@@ -200,6 +208,14 @@ $box-padding-top: 25px;
     text-transform: uppercase;
     background: $c-neutral-black;
     color: $c-neutral-white;
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    &.tag-align-left {
+      text-align: left;
+    }
+
   }
 
 }

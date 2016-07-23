@@ -80,8 +80,6 @@ class StaticsController < ApplicationController
     render :template => 'landing_pages/bohemian_summer', :layout => 'redesign/application'
   end
 
-
-
   def all_size
     @title = "All Size | Beautiful Dresses - Fame & Partners"
     @description = "Discover beautiful dresses for every body here at Fame & Partners"

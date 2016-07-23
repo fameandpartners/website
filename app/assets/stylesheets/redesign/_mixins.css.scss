@@ -70,3 +70,17 @@
   background-repeat: no-repeat;
   @include background-size(100% auto);
 }
+
+@mixin column-vertical-align($v-align: center) {
+
+  @media (min-width: $bootstrap-md-width) {
+      display: flex;
+
+      .vertical-align {
+        display: flex;
+        align-items: $v-align;;
+      }
+
+  }
+
+}
