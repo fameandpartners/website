@@ -445,8 +445,10 @@ var SidePanel = function (_React$Component) {
     key: 'openMenu',
     value: function openMenu() {
       this.setState({ active: true });
-      // removes body scroll bar when opened
-      $('body').addClass('no-scroll');
+      // removes body scroll bar when opened, mobile only
+      if (window.innerWidth < 992) {
+        $('body').addClass('no-scroll');
+      }
     }
   }, {
     key: 'closeMenu',
