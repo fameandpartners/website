@@ -34,7 +34,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  &:hover, 
+  &:hover,
   &:focus {
       color: transparent;
       background: transparent;
@@ -76,4 +76,84 @@
     color: $c-neutral-white;
   }
 
+}
+
+.rslides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.rslides li {
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+}
+
+.rslides img {
+  display: block;
+  height: auto;
+  float: left;
+  width: 100%;
+  border: 0;
+}
+
+.rslides_tabs {
+  position: relative;
+  z-index: 3;
+  list-style: none;
+  padding: 0;
+  top: -70px;
+  font-size: 50px;
+  list-style: none;
+  margin: 0 auto 50px;
+  max-width: 340px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0px;
+
+  @media(max-width: 768px){
+    font-size: 20px;
+    top: -30px;
+  }
+}
+
+.rslides_tabs li {
+  display: inline;
+  float: none;
+  margin-right: 1px;
+  a {
+    color: lightgrey;
+  }
+}
+
+.rslides_tabs a {
+  width: auto;
+  line-height: 20px;
+  padding: 9px 3px;
+  height: auto;
+  background: transparent;
+  display: inline;
+}
+
+.rslides_tabs li:first-child {
+  margin-left: 0;
+}
+
+.rslides_tabs .rslides_here a {
+  color: grey;
+  font-weight: bold;
+  text-decoration: none;
 }
