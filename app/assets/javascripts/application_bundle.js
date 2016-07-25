@@ -557,6 +557,8 @@ var SidePanelColor = function (_SidePanel) {
       // this is just very hacky way to connect this with wishlist_item_data
       document.getElementById('pdpWishlistColorId').value = this.props.customize.color.id;
       document.getElementById('pdpWishlistVariantId').value = customize.dressVariantId;
+
+      this.closeMenu();
     }
   }, {
     key: 'render',
@@ -795,6 +797,8 @@ var SidePanelCustom = function (_SidePanel) {
       }
 
       this.props.actions.customizeDress(customize);
+
+      this.closeMenu();
     }
   }, {
     key: 'render',
@@ -977,6 +981,8 @@ var SidePanelLength = function (_SidePanel) {
       customize.length.id = event.currentTarget.dataset.id;
       customize.length.presentation = event.currentTarget.dataset.id;
       this.props.actions.customizeDress(customize);
+
+      this.closeMenu();
     }
   }, {
     key: 'render',
@@ -1566,6 +1572,8 @@ var SidePanelSize = function (_SidePanel) {
       // selection is required.
       customize.dressVariantId = (0, _utils.GetDressVariantId)(this.props.variants, this.props.customize.color.id, customize.size.id);
       this.props.actions.customizeDress(customize);
+
+      this.closeMenu();
     }
   }, {
     key: 'render',

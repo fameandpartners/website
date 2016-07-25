@@ -27,6 +27,8 @@ class SidePanelCustom extends SidePanel {
     }
 
     this.props.actions.customizeDress(customize);
+
+    this.closeMenu();
   }
 
   render() {

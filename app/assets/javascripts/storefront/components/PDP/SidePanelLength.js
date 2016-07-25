@@ -19,6 +19,8 @@ class SidePanelLength extends SidePanel {
     customize.length.id = event.currentTarget.dataset.id;
     customize.length.presentation = event.currentTarget.dataset.id;
     this.props.actions.customizeDress(customize);
+
+    this.closeMenu();
   }
 
   render() {
