@@ -12,7 +12,7 @@ unless Rails.env.development?
       provider:        'AWS',
       region:          ENV['AWS_S3_REGION']
     },
-    fog_host:        configatron.aws.host,
+    fog_host:        ENV['RAILS_ASSET_HOST'],
     fog_directory:   ENV['AWS_S3_BUCKET'],
   )
 end
@@ -33,7 +33,7 @@ end
 sitemap_options = {
     compress:      Rails.env.production?,
     default_host:  "#{configatron.host}",
-    sitemaps_host: "#{configatron.aws.host}",
+    sitemaps_host: ENV['RAILS_ASSET_HOST'],
     include_root:  false,
     sitemaps_path: 'sitemap'
 }

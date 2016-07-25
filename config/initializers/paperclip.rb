@@ -1,5 +1,5 @@
 if Rails.application.config.use_s3
-  aws_host_without_protocol = configatron.aws.host.to_s.gsub('https://', '').gsub('http://', '')
+  aws_host_without_protocol = ENV['RAILS_ASSET_HOST'].to_s.gsub('https://', '').gsub('http://', '')
 
   # Custom configurations for Spree forceful usage of Paperclip's S3 storage mode
   Paperclip::Attachment.default_options.merge!(

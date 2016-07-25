@@ -9,8 +9,6 @@ configatron.days_delivery_emergency = 0
 configatron.secret_token            = ENV['RAILS_SECRET_KEY_BASE']
 
 # assets
-configatron.aws.enabled    = false
-configatron.aws.host       = ENV['RAILS_ASSET_HOST'] # Production and Marketing Buckets are on the same CloudFront Distribution
 configatron.asset_host     = ENV['RAILS_ASSET_HOST'] # Production and Marketing Buckets are on the same CloudFront Distribution
 
 configatron.typekit_id = ENV['TYPEKIT_ID']
