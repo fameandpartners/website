@@ -1,3 +1,6 @@
+require 'shippo'
+Shippo::api_token = ENV['SHIPPO_KEY']
+
 module Shippo
   class Label
 
@@ -8,12 +11,8 @@ module Shippo
     end
 
     def create
-      transaction_results
-    end
+      transaction = create_transaction
 
-  private
-
-    def transaction_results
       {
         status: transaction.object_status,
         label_url: transaction.label_url,
@@ -22,19 +21,20 @@ module Shippo
       }
     end
 
-    def transaction
-      @transaction ||= Shippo::Transaction.create(
+    private
+
+    def create_transaction
+      shipment = create_shipment
+      lowest_rate = shipment.rates().min_by{|r| r[:amount].to_f}
+
+      Shippo::Transaction.create(
         rate: lowest_rate[:object_id],
         label_file_type: 'PDF',
         async: false)
     end
 
-    def lowest_rate
-      shipment.rates().min_by{|r| r[:amount].to_f}
-    end
-
-    def shipment
-      @shipment ||= Shippo::Shipment.create(
+    def create_shipment
+      Shippo::Shipment.create(
         object_purpose: 'PURCHASE',
         address_from: address_from,
         address_to: address_to,
@@ -43,11 +43,11 @@ module Shippo
     end
 
     def order
-      @order ||= return_request_item.order_return_request.order
+      return_request_item.order_return_request.order
     end
 
     def ship_address
-      @ship_address ||= order.ship_address
+      order.ship_address
     end
 
     def address_from
