@@ -22,7 +22,6 @@ module MailChimpClient
 
       gibbon.ecommerce.stores(STORE_ID).customers.create(body: user_params)
     rescue StandardError => e
-      byebug
       Raven.capture_exception(e)
     end
 
