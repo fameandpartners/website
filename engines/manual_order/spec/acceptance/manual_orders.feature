@@ -18,8 +18,7 @@ Feature: Create manual orders
 
   @javascript
   Scenario:
-    When I am on the manual orders page
-    And I click on "Create" link
+    When I am on the new manual order page
     And I select "Connie" product from chosen style name select box
     And I select size "US4/AU8" from chosen size select box
     And I select skirt length "Standart" from chosen length select box

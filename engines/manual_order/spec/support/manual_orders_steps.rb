@@ -1,8 +1,8 @@
 module Acceptance
   module ManualOrdersSteps
 
-    step 'I am on the manual orders page' do
-      visit '/fame_admin/manual_orders'
+    step 'I am on the new manual order page' do
+      visit '/fame_admin/manual_orders/new'
     end
 
     step 'The example user created with:' do |user_data|
