@@ -787,7 +787,7 @@ var SidePanelCustom = function (_SidePanel) {
       if (this.props.customize.customization.id === event.currentTarget.dataset.id) {
         customize.customization.id = "";
         customize.customization.presentation = "";
-        customize.customization.price = null;
+        customize.customization.price = 0;
       } else {
         customize.customization.id = event.currentTarget.dataset.id;
         customize.customization.presentation = event.currentTarget.dataset.presentation;
