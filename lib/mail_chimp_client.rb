@@ -27,20 +27,13 @@ class MailChimpClient
 
     order_params = {
       id: order.number,
-      customer: {
-        id: order.user.id.to_s,
-        email: order.user.email,
-        first_name: order.user.first_name,
-        last_name: order.user.last_name
-      },
+      customer: customer_for_order(order),
       currency_code: order.currency,
       order_total: order.total.to_f,
       lines: order_line_items(order)
     }
 
     gibbon.ecommerce.stores(STORE_ID).orders.create(body: order_params)
-
-    puts "Order #{order.number} added to MailChimp"
   rescue StandardError => e
     puts e
     puts e.backtrace.join("\n\t")
@@ -110,5 +103,25 @@ class MailChimpClient
     }
 
     gibbon.ecommerce.stores(STORE_ID).products(product.sku).variants.create(body: variant_params)
+  end
+
+  def customer_for_order(order)
+    if order.user
+      {
+        id:            order.user.id.to_s,
+        email_address: order.user.email,
+        first_name:    order.user.first_name,
+        last_name:     order.user.last_name,
+        opt_in_status: false
+      }
+    else
+      {
+        id:            order.number,
+        email_address: order.email,
+        first_name:    order.user_first_name,
+        last_name:     order.user_last_name,
+        opt_in_status: false
+      }
+    end
   end
 end
