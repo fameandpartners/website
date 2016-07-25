@@ -25,8 +25,8 @@ section.col-md-12.tab-pane#membership_sign-in
   .membership.plain.moodboard-setup.sign-up-form.col-centered
     .row
       .col-md-12
-        h2.text-center Sign in 
-        section.row
+        h2.text-center Sign in to Fame Weddings
+        section
           .col-md-12.form-wrap
             span#error-email
             .form data-hook="login"
@@ -64,11 +64,11 @@ section.col-md-12.tab-pane#membership_sign-up
   .membership.plain.moodboard-setup.sign-up-form.col-centered
     .row
       .col-md-12
-        h2.text-center Register an account
+        h2.text-center Register an account for Fame Weddings
         - signup_params = {site_version: current_site_version.code}
         = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params), remote: true , :html => {:'data-type' => 'json'} do |f|
           = f.hidden_field :site_version_id, value: current_site_version.id
-        section.row
+        section
           .col-md-12.form-wrap
             = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params), remote: true , :html => {:'data-type' => 'json'} do |f|
               = f.hidden_field :site_version_id, value: current_site_version.id
@@ -76,25 +76,25 @@ section.col-md-12.tab-pane#membership_sign-up
                 .row
                   .col-md-6.form-group
                     span.form-label First Name
-                    = f.text_field :first_name, required: true, :class => 'form-control form-control-md', :placeholder => t(:first_name)
+                    = f.text_field :first_name, required: true, :class => 'form-control form-control-md'
                     span.help-block.with-errors
                   .col-md-6.form-group
                     span.form-label Last Name
-                    = f.text_field :last_name, required: true, :class => 'form-control form-control-md', :placeholder => t(:last_name)
+                    = f.text_field :last_name, required: true, :class => 'form-control form-control-md'
                     span.help-block.with-errors
                   .col-md-12.form-group
                     span.form-label Email
-                    = f.email_field :email, required: true, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:email), type: 'email'
+                    = f.email_field :email, required: true, autocomplete: :off, :class => 'form-control form-control-md', type: 'email'
                     span.help-block.with-errors#error-email
                 #password-credentials
                 .row
                   .col-md-6.form-group
                     span.form-label Password
-                    = f.password_field :password, :id => 'sign-up-password', required: true, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password), 'data-minlength' => '6', 'data-minlength-error' => 'Password is too short (minimum is 6 characters)'
+                    = f.password_field :password, :id => 'sign-up-password', required: true, autocomplete: :off, :class => 'form-control form-control-md', 'data-minlength' => '6', 'data-minlength-error' => 'Password is too short (minimum is 6 characters)'
                     span.help-block.with-errors
                   .col-md-6.form-group
                     span.form-label Password Confirmation
-                    = f.password_field :password_confirmation, required: true, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password_confirmation), 'data-match' => '#sign-up-password', 'data-match-error' => 'Password fields must match.'
+                    = f.password_field :password_confirmation, required: true, autocomplete: :off, :class => 'form-control form-control-md', 'data-match' => '#sign-up-password', 'data-match-error' => 'Password fields must match.'
                     span.help-block.with-errors
                   .col-md-12.form-group
                   .col-md-12 data-hook="signup_below_password_fields"
@@ -106,3 +106,149 @@ section.col-md-12.tab-pane#membership_sign-up
                       .secondary-cta
                         = link_to 'Sign up with Facebook', fb_auth_path(spree_user_return_to: return_path+"#get_started"), class: ''
 
+/ This is the dress length preferences
+
+section.col-md-12.tab-pane#membership_sign-up
+  .membership.plain.moodboard-setup.sign-up-form.col-centered
+    .row
+      .col-md-12.text-center
+        h2 Dress Length
+        h3 If you're not sure, pick as many as you like
+    section.custom-form-element.text-center
+      label
+        input data-all="false" type='checkbox'
+        .icon
+        span.form-label Long
+      label
+        input data-all="false" type='checkbox'
+        .icon
+        span.form-label Medium
+      label
+        input data-all="false" type='checkbox'
+        .icon
+        span.form-label Short
+    .col-md-12 data-hook="signup_below_password_fields"
+      .cta-wrap
+        .btn.btn-black Next Question
+      .secondary-cta-wrap.text-center
+        .secondary-cta
+          = link_to 'Skip this step', '#membership_sign-in', :class => 'js-trigger-tabs-create-moodboard js-trigger-signup'
+     
+/ This is the fabric preference
+
+section.col-md-12.tab-pane#membership_sign-up
+  .membership.plain.moodboard-setup.sign-up-form.col-centered
+    .row
+      .col-md-12.text-center
+        h2 Fabric Type
+        h3 If you're not sure, pick as many as you like
+    section.custom-form-element.text-center
+      label
+        input data-all="false" type='checkbox'
+        .icon
+        span.form-label Satin
+      label
+        input data-all="false"  type='checkbox'
+        .icon
+        span.form-label Cotton
+      label
+        input data-all="false"  type='checkbox'
+        .icon
+        span.form-label Georgette
+    .col-md-12 data-hook="signup_below_password_fields"
+      .cta-wrap
+        .btn.btn-black Next Question
+      .secondary-cta-wrap.text-center
+        .secondary-cta
+          = link_to 'Skip this step', '#membership_sign-in', :class => 'js-trigger-tabs-create-moodboard js-trigger-signup'
+     
+/ This is the colour preference tab
+
+section.col-md-12.tab-pane#membership_sign-up
+  .membership.plain.moodboard-setup.sign-up-form.col-centered.search-filters
+    .row
+      .col-md-12.text-center.swatch-color-green
+        h2 Bridesmaid Dress Color
+        h3 If you're not sure, pick as many as you like
+    section 
+      .col-md-4.col-xs-4
+        .custom-form-element.filter-option.selector-color.cascading-form
+          label.swatch-color-black.swatch-preview for="checkbox"
+            input data-all="false" id="black" type="checkbox" value="black"
+            span.color-picker Black
+          label.swatch-color-silver.swatch-preview for="checkbox"
+            input data-all="false" id="silver" type="checkbox" value="silver"
+            span.color-picker Silver
+          label.swatch-color-white.swatch-preview for="checkbox"
+            input data-all="false" id="white" type="checkbox" value="white"
+            span.color-picker White
+          label.swatch-color-yellow.swatch-preview for="checkbox"
+            input data-all="false" id="yellow" type="checkbox" value="yellow"
+            span.color-picker Yellow
+
+      .col-md-4.col-xs-4
+        .custom-form-element.filter-option.selector-color.cascading-form
+          label.swatch-color-red.swatch-preview for="checkbox"
+            input data-all="false" id="red" type="checkbox" value="red"
+            span.color-picker Red
+          label.swatch-color-pink.swatch-preview for="checkbox"
+            input data-all="false" id="pink" type="checkbox" value="pink"
+            span.color-picker Pink
+          label.swatch-color-nude.swatch-preview for="nude"
+            input data-all="false" id="nude" type="checkbox" value="nude"
+            span.color-picker Nude
+        
+      .col-md-4.col-xs-4 
+        .custom-form-element.filter-option.selector-color.cascading-form
+          label.swatch-color-purple.swatch-preview for="checkbox"
+            input data-all="false" id="purple" type="checkbox" value="purple"
+            span.color-picker Purple
+          label.swatch-color-blue.swatch-preview for="checkbox"
+            input data-all="false" id="blue" type="checkbox" value="blue"
+            span.color-picker Blue
+          label.swatch-color-green.swatch-preview for="checkbox"
+            input data-all="false" id="green" type="checkbox" value="green"
+            span.color-picker Green
+    .col-md-12 data-hook="signup_below_password_fields"
+      .cta-wrap
+        .btn.btn-black Next Question
+      .secondary-cta-wrap.text-center
+        .secondary-cta
+          = link_to 'Skip this step', '#membership_sign-in', :class => 'js-trigger-tabs-create-moodboard js-trigger-signup'
+     
+
+  javascript:
+
+    $('.custom-form-element').children().click(function() {
+      // This adds a class to mark item as selected
+      $(this).children().next().toggleClass('selected-state');
+      // This changes the data-all attribute to true
+      $(this).children().attr('data-all', 'true');
+    });
+    
+
+    function loadCreateWeddingBoard() {
+      var wedding_moodboard_edit_wrapper = $('#wedding_moodboard_edit_wrapper');
+      wedding_moodboard_edit_wrapper.load('#{edit_wedding_moodboard_path}', '', function(data, status, xhr) {
+        init_wedding_moodboard_edit_wrapper();
+        $('.js-moodboard-loader').removeClass('active');
+      });
+    }
+
+    $(document).ready(function() {
+      
+      var $tabs = $('.js-tabs-create-moodboard .tab-pane');
+
+      if ($('#membership_sign-in').length == 0) {
+        loadCreateWeddingBoard();
+      } else {
+        $('.js-trigger-tabs-moodboard-how-it-works').tab('hide');
+        $('.js-moodboard-loader').removeClass('active');
+      }
+
+      $('.js-trigger-tabs-create-moodboard').on('click', function(e) {
+        e.preventDefault();
+        $(this).tab('show');
+      });
+
+    });
