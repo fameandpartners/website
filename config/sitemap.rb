@@ -10,10 +10,10 @@ unless Rails.env.development?
     fog_credentials: {
       use_iam_profile: true,
       provider:        'AWS',
-      region:          configatron.aws.s3.region
+      region:          ENV['AWS_S3_REGION']
     },
     fog_host:        configatron.aws.host,
-    fog_directory:   configatron.aws.s3.bucket,
+    fog_directory:   ENV['AWS_S3_BUCKET'],
   )
 end
 

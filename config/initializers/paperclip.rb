@@ -5,7 +5,7 @@ if Rails.application.config.use_s3
   Paperclip::Attachment.default_options.merge!(
     url:            ':s3_alias_url',
     s3_credentials: {
-      bucket:            configatron.aws.s3.bucket,
+      bucket: ENV['AWS_S3_BUCKET'],
     },
     s3_host_alias:  aws_host_without_protocol,
     s3_permissions: :public_read,
@@ -18,10 +18,10 @@ if Rails.application.config.use_s3
     fog_credentials: {
       use_iam_profile: true,
       provider:        'AWS',
-      region:          configatron.aws.s3.region
+      region:          ENV['AWS_S3_REGION'],
     },
-    fog_host:        configatron.aws.host,
-    fog_directory:   configatron.aws.s3.bucket,
+    fog_host:        ENV['RAILS_ASSET_HOST'],
+    fog_directory:   ENV['AWS_S3_BUCKET'],
     fog_public:      true,
     path:            'system/:attachment/:id/:style/:basename.:extension'
   )

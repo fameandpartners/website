@@ -42,7 +42,7 @@ Spree.config do |config|
 
   if Rails.application.config.use_s3
     config.use_s3 = true
-    config.s3_bucket = configatron.aws.s3.bucket
+    config.s3_bucket = ENV['AWS_S3_BUCKET']
 
     config.attachment_url = ":s3_alias_url"
     config.attachment_path = '/spree/products/:id/:style/:basename.:extension'
