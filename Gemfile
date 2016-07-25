@@ -37,6 +37,7 @@ path 'engines' do
   gem 'inspinia-rails'
   gem 'bergen'
   gem 'manual_order'
+  gem 'mailchimp_client'
 end
 
 # TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it,

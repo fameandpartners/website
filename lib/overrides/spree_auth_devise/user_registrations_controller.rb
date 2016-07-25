@@ -59,7 +59,7 @@ Spree::UserRegistrationsController.class_eval do
       associate_user
 
       # Create customer on Mailchimp
-      MailChimpClient.new.add_customer(resource)
+      MailChimpClient::API.new.add_customer(resource)
 
       # Marketing pixel
       flash[:signed_up_just_now] = true
