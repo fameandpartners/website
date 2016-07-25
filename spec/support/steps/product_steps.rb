@@ -4,7 +4,6 @@ module Acceptance
       click_link 'Dress Size'
       sleep 0.2 # User interacting with sidebar + animation
       click_link dress_size
-      find('.btn-close.lg').click
       sleep 0.2 # User interacting with sidebar + animation
       expect(page).to have_selector('.pdp-side-menu', visible: false)
     end
@@ -13,7 +12,6 @@ module Acceptance
       click_link 'Skirt Length'
       sleep 0.2 # User interacting with sidebar + animation
       click_link skirt_length.downcase
-      find('.btn-close.lg').click
       sleep 0.2 # User interacting with sidebar + animation
       expect(page).to have_selector('.pdp-side-menu', visible: false)
     end

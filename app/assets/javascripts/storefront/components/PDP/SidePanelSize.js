@@ -27,6 +27,8 @@ class SidePanelSize extends SidePanel {
       this.props.customize.color.id,
       customize.size.id);
     this.props.actions.customizeDress(customize);
+
+    this.closeMenu();
   }
 
   render() {
