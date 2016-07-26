@@ -12,76 +12,14 @@ module MailChimpClient
     def add_customer(user)
       return if customer_exists? user
 
-      user_params = {
-        id:            user.id.to_s,
-        email_address: user.email,
-        first_name:    user.first_name,
-        last_name:     user.last_name,
-        opt_in_status: false
-      }
+      user_presenter = MailChimpClient::UserPresenter.new(user)
+      user_params = user_presenter.read
 
       gibbon.ecommerce.stores(STORE_ID).customers.create(body: user_params)
-    rescue StandardError => e
-      Raven.capture_exception(e)
-    end
-
-    def add_order(order)
-      return unless order
-
-      order_params = {
-        id:            order.number,
-        customer:      customer_for_order(order),
-        currency_code: order.currency,
-        order_total:   order.total.to_f,
-        lines:         order_line_items(order)
-      }
-
-      gibbon.ecommerce.stores(STORE_ID).orders.create(body: order_params)
     rescue StandardError => e
       puts e
       puts e.backtrace.join("\n\t")
       Raven.capture_exception(e)
-    end
-
-    private
-
-    def customer_exists?(user)
-      gibbon.ecommerce.stores(STORE_ID).customers(user.id).retrieve
-      true
-    rescue Gibbon::MailChimpError
-      false
-    end
-
-    def product_exists?(product)
-      gibbon.ecommerce.stores(STORE_ID).products(product.sku).retrieve
-      true
-    rescue Gibbon::MailChimpError
-      false
-    end
-
-    def variant_exists?(product, sku)
-      gibbon.ecommerce.stores(STORE_ID).products(product.sku).variants(sku).retrieve
-      true
-    rescue Gibbon::MailChimpError
-      false
-    end
-
-    def order_line_items(order)
-      order.line_items.map do |line_item|
-        product = line_item.variant.product
-        add_product(product) unless product_exists?(product)
-
-        sku = CustomItemSku.new(line_item).call
-        add_variant(product, sku) unless variant_exists?(product, sku)
-
-        {
-          id:                 line_item.id.to_s,
-          product_id:         line_item.variant.product.sku,
-          product_variant_id: CustomItemSku.new(line_item).call,
-          quantity:           1,
-          price:              line_item.price
-        }
-      end
     end
 
     def add_product(product)
@@ -108,24 +46,57 @@ module MailChimpClient
       gibbon.ecommerce.stores(STORE_ID).products(product.sku).variants.create(body: variant_params)
     end
 
-    def customer_for_order(order)
-      if order.user
-        {
-          id:            order.user.id.to_s,
-          email_address: order.user.email,
-          first_name:    order.user.first_name,
-          last_name:     order.user.last_name,
-          opt_in_status: false
-        }
-      else
-        {
-          id:            order.number,
-          email_address: order.email,
-          first_name:    order.user_first_name,
-          last_name:     order.user_last_name,
-          opt_in_status: false
-        }
-      end
+    def add_order(order)
+      return unless order
+
+      order_params = MailChimpClient::OrderPresenter.new(order).read
+
+      gibbon.ecommerce.stores(STORE_ID).orders.create(body: order_params)
+    rescue StandardError => e
+      puts e
+      puts e.backtrace.join("\n\t")
+      Raven.capture_exception(e)
+    end
+
+    def add_store
+      return if store_exists?
+
+      store_params = {
+        id: STORE_ID,
+        list_id: ENV['MAILCHIMP_LIST_ID'],
+        name: 'Fame and Partners',
+        currency_code: 'USD'
+      }
+
+      gibbon.ecommerce.stores.create(body: store_params)
+    end
+
+    def customer_exists?(user)
+      gibbon.ecommerce.stores(STORE_ID).customers(user.id).retrieve
+      true
+    rescue Gibbon::MailChimpError
+      false
+    end
+
+    def product_exists?(product)
+      gibbon.ecommerce.stores(STORE_ID).products(product.sku).retrieve
+      true
+    rescue Gibbon::MailChimpError
+      false
+    end
+
+    def variant_exists?(product, sku)
+      gibbon.ecommerce.stores(STORE_ID).products(product.sku).variants(sku).retrieve
+      true
+    rescue Gibbon::MailChimpError
+      false
+    end
+
+    def store_exists?
+      gibbon.ecommerce.stores(STORE_ID).retrieve
+      true
+    rescue Gibbon::MailChimpError
+      false
     end
   end
 end
