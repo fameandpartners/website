@@ -1,8 +1,7 @@
-/* [Search Filters]
+/* [Faqs]
 -------------------------------------------------------*/
 
-//TODO seperate these styles
-.search-filters{
+.faq {
   color: $c-neutral-10;
 
   a {
@@ -31,7 +30,7 @@
   }
 
   & .panel + .panel {
-     margin-top: 0;
+    margin-top: 0;
   }
 
   .panel {
@@ -116,26 +115,12 @@
     font-size: 0.875em;
     color: $c-neutral-black;
 
-    &:after {
-      content: '\e007';
-      position: absolute;
-      display: block;
-      top: 16px;
-      right: 0;
-      font-family: 'icomoon_fame_2015';
+    &.faq-title {
+      text-transform: none;
     }
 
     &.collapsed {
       color: $c-neutral-10;
-
-      &:after {
-        content: '\e008';
-      }
-
-      &:hover {
-        color: $c-neutral-black;
-      }
-
     }
 
   }
