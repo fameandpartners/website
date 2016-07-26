@@ -18,8 +18,12 @@ active {
 
 span {
   font-weight: 400;
-  font-size: 0.9em;
+  /*font-size: 0.9em;*/
   letter-spacing: 0.04em;
+}
+
+.inline {
+  display: inline-block;
 }
 
 .moodboard-v2 {
@@ -202,7 +206,6 @@ span {
 
     li {
       display: inline-block;
-      margin-right: 20px;
       outline: none;
 
       &:last-child {
@@ -386,19 +389,21 @@ span {
     .btn { 
       padding: 0;
     }
-    .actions-wrap {
-
-      .inner-wrap {
-        width: 33%;
-        padding: 0;
-
-        .comments-trigger-wrap {
-          margin-top: 0;
-
-        }
-
-      }
     
+    .product-name { 
+      text-transform: uppercase;
+      font-size: 1em;
+      letter-spacing: 0.04em;
+      margin: 50px 10px 0px;
+    }
+
+    .action-btn {
+      padding: 10px 0;
+      background-color: #f9f9f9;
+      &:hover {
+        background-color: #f5f5f5;
+      }
+
     }
 
   }
@@ -463,8 +468,13 @@ span {
       }
 
       .menu-wrap .slider-wrap {
+     
+       
+      }
+
+      .create-moodboard {
         padding: 0;
-        width: 110px;
+
       }
 
       .panel-split {
@@ -515,6 +525,23 @@ span {
       .tab-pane {
         padding: 10px 0;
       }
+
+     /* .menu-wrap {
+        .active {
+
+          .tab {
+
+            &:after {
+              content: '';
+              width: 110px;
+           
+            }
+
+          }
+
+        }
+
+      }*/
 
       ul {
         margin-top: 0;

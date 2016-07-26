@@ -20,32 +20,30 @@ input type='hidden' id="moodboard-id" value=@resource.id
                     div class="color-#{item.color.name}"
                     span = item.color.presentation
                 = cropped_product_color_variant_image_tag(item.product.product_color_values.first)
-        .actions-wrap
-          .inner-wrap
-            a href='javascript:;' class='btn btn-default btn-xs like-btn' 
-              | Like ( 
-              = item.likes
-              |  )
-          .inner-wrap
-            = link_to 'Add to cart', url_path, class: 'btn btn-xs'
 
-          .inner-wrap
-            - if @resource.allow_comments?
+        .col-md-6.action-btn
+          a href='javascript:;' class='btn btn-xs like-btn' 
+            | Like ( 
+            = item.likes
+            |  )
+        
+        .col-md-6.action-btn
+          - if @resource.allow_comments?
             a href='javascript:;' class='btn btn-xs' 
-              .comments-trigger-wrap.btn.btn-xs
-                = react_component('ComponentCommentsModal', assets: item.moodboard_item_comments, itemName: item.product.name, itemId: item.id, currentUserId: current_spree_user.id, token: form_authenticity_token)
+              = react_component('ComponentCommentsModal', assets: item.moodboard_item_comments, itemName: item.product.name, itemId: item.id, currentUserId: current_spree_user.id, token: form_authenticity_token)
 
-          
         .details-wrap
-          .product-name = item.product.name
+          .product-name.inline = item.product.name
           - product_presenter = item.product.presenter_as_details_resource(current_site_version)
-          span.price = product_price_with_discount(product_presenter.price, product_presenter.discount)
-
+          span.price.inline = product_price_with_discount(product_presenter.price, product_presenter.discount)
+          span = link_to 'Add to cart', url_path, class: 'btn btn-xs'
         
 
         /#, data: { variant: product.variant_id, id: product.item_id }
         = link_to 'Remove from moodboard', moodboard_item_path(item.moodboard_id, item.id),
             method: :delete, class: 'btn-close'
+
+    <div class="col-md-6"><div class="item bordered item-alt styling-session"><div class="row"><div class="col-lg-6 col-md-5"><a href="/styling-session"><img alt="Styling-session" class="img-responsive hidden-xs hidden-sm" src="https://d1msb7dh8kb0o9.cloudfront.net/assets/homepage/styling/styling-session-620a02b9f6ef3d5899a5ea61d230f76b.jpg"></a></div><div class="col-lg-6 col-md-7"><div class="item-copy"><h3>Styled by Fame <br class="hidden-xs hidden-sm">— for free.</h3><p>Our wardrobe stylist Amber Bond is ready to style you via chat, phone or video call.</p><a href="/styling-session"><span class="cta-link-arrow-right"><span class="cta-link-alt"><span>Book a</span><span class="copy-highlight"> Free Styling Session</span></span><i class="icon icon-arrow-right"></i></span></a></div><a href="/styling-session"><img alt="Styling-session" class="img-responsive hidden-md hidden-lg" src="https://d1msb7dh8kb0o9.cloudfront.net/assets/homepage/styling/styling-session-620a02b9f6ef3d5899a5ea61d230f76b.jpg"></a></div></div></div></div>  
 
 coffee:
   $(document).ready  ->
@@ -58,5 +56,7 @@ coffee:
         success: (data) ->
           $(".panel-product[data-mb-item-id="+id+"] .like-btn").text("Like ( " + data.likes + " )")
       )
+
+
         
     

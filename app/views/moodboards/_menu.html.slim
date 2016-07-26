@@ -1,9 +1,16 @@
 
+javascript:
+  $('.multiple-items').slick({
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 3
+  });
+
 
 .menu-wrap
   .row
-    .col-md-10.col-lg-offset-1.col-xs-12
-      <li class="slick-slide" data-slick-index="2" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide02">
+    .col-md-2
+      <li class="slick-slide create-moodboard" data-slick-index="2" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide02">
         <a href="/moodboards/8872" class="tab" tabindex="-1">
           <div class="inner-wrap">
             p +
@@ -11,11 +18,11 @@
           </div>
         </a>
       </li>
+    .col-md-10.col-xs-10
       - currentCarouselItem = 0
-      - all_moodboards.each_with_index do |mb, index|
+      / - 3.each_with_index do |mb, index|
         - is_active_link?(moodboard_path(mb)) ? currentCarouselItem = index : ''
-
-      ul.slider-wrap.js-moodboard-menu-carousel data-slick='{"initialSlide": #{currentCarouselItem}}'
+      ul.slider-wrap.multiple-items.js-moodboard-menu-carousel data-slick='{"initialSlide": #{currentCarouselItem}}'
         
         - all_moodboards.each do |mb|
           - if is_active_link?(moodboard_path(mb))
