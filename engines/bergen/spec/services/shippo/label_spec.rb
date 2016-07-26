@@ -3,7 +3,7 @@ require 'spec_helper'
 require_relative '../../support/return_item_ready_to_process_context'
 
 module Shippo
-  RSpec.describe Label, type: :operation do
+  RSpec.describe Label, :vcr, type: :operation do
     include_context 'return item ready to process'
 
     let(:label) { described_class.new(return_request_item) }
