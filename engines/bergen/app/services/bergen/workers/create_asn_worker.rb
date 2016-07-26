@@ -9,10 +9,10 @@ module Bergen
         @return_item_process = Operations::ReturnItemProcess.find(return_item_process_id)
         @return_request_item = return_item_process.return_request_item
 
-        label = Shippo::Label.new(@return_request_item).create
-        asn_number = create_asn(label[:tracking_number])     # Create ASN
-        create_asn_retrieval_event(asn_number)               # Save Bergen Ticket Number on Item Request Return
-        advance_in_return_item_process                       # Continue
+        label = Shippo::Label.new(@return_request_item).create      # Create Shippo return label
+        asn_number = create_asn(label[:tracking_number])            # Create ASN
+        create_asn_retrieval_event(asn_number, label[:label_url])   # Save Bergen Ticket Number on Item Request Return
+        advance_in_return_item_process                              # Continue
 
         @return_item_process.touch
       rescue StandardError => e
@@ -23,8 +23,11 @@ module Bergen
 
       private
 
-      def create_asn_retrieval_event(asn_number)
-        return_request_item.item_return.events.bergen_asn_created.create(asn_number: asn_number)
+      def create_asn_retrieval_event(asn_number, shippo_label)
+        return_request_item.item_return.events.bergen_asn_created.create(
+          asn_number: asn_number,
+          shippo_label: shippo_label
+        )
       end
 
       def advance_in_return_item_process

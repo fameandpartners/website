@@ -1,6 +1,3 @@
-require 'shippo'
-Shippo::api_token = ENV['SHIPPO_KEY']
-
 module Shippo
   class Label
 
