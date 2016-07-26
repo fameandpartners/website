@@ -1,7 +1,7 @@
 .why-us
 
   // hero section
-  .main-hero-wrap.hero-wrap.copy-right 
+  .main-hero-wrap.hero-wrap.copy-right
     picture.media-wrap.keep-ratio
       .inner-wrap
         source media='(max-width: 1023px)' srcset='#{image_path("_why-us/hero-mob.jpg")}'
@@ -69,7 +69,7 @@
           em 4
           .heading Add to cart<br><br>
           p It’s that easy to get a custom-made dress delivered to your door. Give us 10 days if there’s no rush, or 48 hours if it’s an outfit emergency.
-  // END - section-personal-style  
+  // END - section-personal-style
 
   .container
     section.row
@@ -143,8 +143,9 @@
           span  MONTHS
         .progress-label Standard Retail
       .col-md-12
-        /! Recen Collections Carousel
-        = render 'shared/redesign/collection_hero_carousel'
+        /! Recent Collections Carousel
+        .featured-collections-carousel.js-hero-tile-carousel
+          = render 'shared/redesign/collection_hero_carousel'
 
     section.row
       .col-md-10.col-md-offset-1.section-title.text-center
