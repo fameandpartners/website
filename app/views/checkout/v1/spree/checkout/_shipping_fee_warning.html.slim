@@ -1,14 +1,15 @@
 div class="row alert-fee" id="shipping_fee_alert"
-  .left-part-img
-    img src="/assets/checkout/warning.png" alt=""
-  .right-part-text
-    h4.title
-      span#country_name Abu Dhabi
-      | #{' Orders'}
-    p.no-margin Additional custom duty fees apply to your selected country.
-    p.no-margin To learn more about custom duty fees <u> Find out more here</u>
-    p.top10 Please note that <strong> $30 shipping fee </strong> applies to this country
-    = check_box_tag :international_shipping_fee
-    span.text-uppercase i understand that there may be custom duty fees
+  .col-xs-12
+    .left-part-img
+      img src="/assets/checkout/warning.png" alt=""
+    .right-part-text
+      h4.title
+        span#country_name Abu Dhabi
+        | #{' Orders'}
+      p.no-margin Additional custom duty fees apply to your selected country.
+      p.no-margin To learn more about custom duty fees <u> Find out more here</u>
+      p.m-top-10 Please note that <strong> $30 shipping fee </strong> applies to this country
+      = check_box_tag :international_shipping_fee
+      span.text-uppercase i understand that there may be custom duty fees
 = content_for :inline_javascript do
   | $('#international_shipping_fee').click(window.checkout_page.internationalShippingFeeCheckboxClicked);

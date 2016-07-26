@@ -3,6 +3,7 @@
 
 .alert-fee {
   display: none;
+  padding: 15px;
   width: 100%;
   border: 1px solid $c-neutral-8;
   margin-left: 0;
@@ -14,7 +15,7 @@
   }
 
   img {
-    padding: 23px 17px;
+    padding: 23px 17px 23px 3px;
   }
 
   .right-part-text {
@@ -26,17 +27,13 @@
   h4 {
     font-size: 1.4rem;
     margin-top: 13px;
-    font-weight: bold;
+    font-weight: 500;
     margin-bottom: 0;
   }
 
   input {
     margin-right: 10px;
   }
-}
-
-.top10 {
-  margin-top: 10px;
 }
 
 .no-margin {
@@ -46,12 +43,14 @@
 @media only screen and (max-width: 600px) {
 
   .alert-fee {
+    padding: 0;
+    padding-bottom: 10px;
 
     .left-part-img {
+      display: table;
+      width: auto;
       float: none;
       margin: 0 auto;
-      width: auto;
-      display: table;
 
       img {
         padding: 10px 0 0;
@@ -59,10 +58,9 @@
     }
 
     .right-part-text {
-      padding: 0 10px;
-      padding: 0px 10px;
-      text-align: center;
       width: 100%;
+      padding: 0 10px;
+      text-align: center;
     }
   }
 }
