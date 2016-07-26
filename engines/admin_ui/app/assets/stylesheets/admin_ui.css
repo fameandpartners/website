@@ -15,4 +15,8 @@
  *= require_tree .
  * Loaded from the main application styles
  *= require 'redesign/product/_product_colours'
+ *
+ * Manual Orders
+ *
+ *= require 'manual_order'
  */
