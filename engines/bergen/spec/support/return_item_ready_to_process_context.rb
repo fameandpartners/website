@@ -1,4 +1,6 @@
 RSpec.shared_context 'return item ready to process' do
+
+  # items with correct data
   let(:country) { build(:country, name: 'United States of America') }
   let(:state) { build(:state, name: 'California', abbr: 'CA', country: country) }
   let(:ship_address) { build(:address, firstname: 'Anna', lastname: 'Smit',
@@ -20,6 +22,20 @@ RSpec.shared_context 'return item ready to process' do
   let(:item_return) { return_request_item.item_return }
 
   let(:return_item_process) { Bergen::Operations::ReturnItemProcess.create(return_request_item: return_request_item) }
+
+  # items with wrong data
+  let(:wrong_ship_address) { build(:address, firstname: 'Anna', lastname: 'Smit',
+                                   address1: 'bla-bla-bla', address2: '',
+                                   zipcode: '90013', city: 'Los Angeles', state: state,
+                                   email: '') }
+  let(:order_with_wrong_address) { create(:complete_order_with_items, number: 'R123123',
+                                          ship_address: wrong_ship_address,
+                                          completed_at: '10/10/2015 12:34:00 UTC',
+                                          line_items: [line_item]) }
+  let(:order_return_request_wrong) { create(:order_return_request, order: order_with_wrong_address) }
+  let(:return_request_item_wrong) { create(:return_request_item, :return,
+                                           order_return_request: order_return_request_wrong,
+                                           line_item: line_item) }
 
   before(:each) do
     allow(Bergen::Operations::ReturnItemProcess).to receive(:find).with(return_item_process.id).and_return(return_item_process)
