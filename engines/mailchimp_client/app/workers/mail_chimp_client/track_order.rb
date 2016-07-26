@@ -1,5 +1,5 @@
 module MailChimpClient
-  class Worker
+  class TrackOrder
     include Sidekiq::Worker
 
     def perform(order_id)
