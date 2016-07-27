@@ -5,7 +5,6 @@ Feature: Add to Moodboard
     Given A sample database with valid data
     And Data is setup correctly
     And The "moodboard" feature is enabled
-    And The "enhanced_moodboards" feature is enabled
     And The example user is signed in
 
   @javascript
@@ -25,4 +24,4 @@ Feature: Add to Moodboard
      # The extra page view is required here, as the dummy text
      # does not display after all ajax deletions.
     Then I view my moodboard
-    Then I should see "GET INSPIRED!"
+    Then I should see "Get Inspired!"

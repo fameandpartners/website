@@ -17,15 +17,13 @@
 // You can import *selection.json* back to the IcoMoon app using the
 // *Import Icons* button (or via Main Menu > Manage Projects) to retrieve your icon selection.
 
-
-$icomoon-hash: random(1000);
 @font-face {
   font-family: 'icomoon_fame_2015';
-  src:url('icomoon_fame_2015.eot?#{$icomoon-hash}');
-    src:url('icomoon_fame_2015.eot?#{$icomoon-hash}#iefix') format('embedded-opentype'),
-        url('icomoon_fame_2015.ttf?#{$icomoon-hash}') format('truetype'),
-        url('icomoon_fame_2015.woff?#{$icomoon-hash}') format('woff'),
-        url('icomoon_fame_2015.svg?#{$icomoon-hash}#icomoon_fame_2015') format('svg');
+  src: font-url('icomoon_fame_2015.eot');
+  src: font-url('icomoon_fame_2015.eot#iefix') format('embedded-opentype'),
+       font-url('icomoon_fame_2015.ttf') format('truetype'),
+       font-url('icomoon_fame_2015.woff') format('woff'),
+       font-url('icomoon_fame_2015.svg#icomoon_fame_2015') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -44,194 +42,200 @@ $icomoon-hash: random(1000);
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-account:before {
-	content: "\e604";
+.icon-sewing-machine:before {
+    content: "\e907";
 }
-.icon-magnified:before {
-	content: "\e605";
+.icon-icon-email:before {
+    content: "\e909";
 }
-.icon-shopping-bag:before {
-	content: "\e606";
-}
-.icon-phone-chat:before {
-	content: "\e600";
-}
-.icon-chat-bubbles:before {
-	content: "\e601";
-}
-.icon-lock:before {
-	content: "\e602";
-}
-.icon-shopping-bag-check:before {
-	content: "\e603";
-}
-.icon-shopping_cart:before {
-	content: "\e900";
+.icon-icon-chat:before {
+    content: "\e90a";
 }
 .icon-thread:before {
-	content: "\e627";
-}
-.icon-sewing-machine:before {
-	content: "\e628";
+    content: "\e627";
 }
 .icon-delivery:before {
-	content: "\e625";
+    content: "\e625";
 }
 .icon-delivery-express:before {
-	content: "\e626";
+    content: "\e626";
 }
 .icon-logo:before {
-	content: "\e607";
+    content: "\e607";
 }
 .icon-twin:before {
-	content: "\e622";
+    content: "\e622";
 }
 .icon-guarantee:before {
-	content: "\e608";
+    content: "\e608";
 }
 .icon-comment:before {
-	content: "\e609";
+    content: "\e609";
 }
 .icon-arrows:before {
-	content: "\e60a";
+    content: "\e60a";
 }
 .icon-price-free:before {
-	content: "\e60b";
+    content: "\e60b";
 }
 .icon-erase:before {
-	content: "\e60c";
+    content: "\e60c";
 }
 .icon-dollar:before {
-	content: "\e60d";
+    content: "\e60d";
 }
 .icon-arrow-square-left:before {
-	content: "\e630";
+    content: "\e630";
 }
 .icon-arrow-square-right:before {
-	content: "\e631";
+    content: "\e631";
+}
+.icon-account:before {
+    content: "\e604";
+}
+.icon-magnified:before {
+    content: "\e605";
+}
+.icon-shopping-bag:before {
+    content: "\e606";
+}
+.icon-phone-chat:before {
+    content: "\e600";
+}
+.icon-chat-bubbles:before {
+    content: "\e601";
+}
+.icon-lock:before {
+    content: "\e602";
+}
+.icon-shopping-bag-check:before {
+    content: "\e603";
+}
+.icon-shopping_cart:before {
+    content: "\e900";
 }
 .icon-close:before {
-	content: "\e611";
+    content: "\e611";
 }
 .icon-customize:before {
-	content: "\e60e";
+    content: "\e60e";
 }
 .icon-stylists:before {
-	content: "\e61c";
+    content: "\e61c";
 }
 .icon-customize2:before {
-	content: "\e61d";
+    content: "\e61d";
 }
 .icon-shipping:before {
-	content: "\e61e";
+    content: "\e61e";
 }
 .icon-returns:before {
-	content: "\e61f";
+    content: "\e61f";
 }
 .icon-dress:before {
-	content: "\e620";
+    content: "\e620";
 }
 .icon-vimeo:before {
-	content: "\e612";
+    content: "\e612";
 }
 .icon-ondemand:before {
-	content: "\e621";
+    content: "\e621";
 }
 .icon-tumblr:before {
-	content: "\e613";
+    content: "\e613";
 }
 .icon-scissors:before {
-	content: "\e60f";
+    content: "\e60f";
 }
 .icon-cutline:before {
-	content: "\e610";
+    content: "\e610";
 }
 .icon-expand:before {
-	content: "\e614";
+    content: "\e614";
 }
 .icon-pinterest:before {
-	content: "\e615";
+    content: "\e615";
 }
 .icon-facebook:before {
-	content: "\e616";
+    content: "\e616";
 }
 .icon-twitter:before {
-	content: "\e617";
+    content: "\e617";
 }
 .icon-mail:before {
-	content: "\e618";
+    content: "\e618";
 }
 .icon-google-plus:before {
-	content: "\e619";
+    content: "\e619";
 }
 .icon-checkmark:before {
-	content: "\e61a";
+    content: "\e61a";
 }
 .icon-polyvore:before {
     content: "\e908";
 }
 .icon-arrow-left:before {
-	content: "\e623";
+    content: "\e623";
 }
 .icon-arrow-right:before {
-	content: "\e624";
+    content: "\e624";
 }
 .icon-heart:before {
-	content: "\e006";
+    content: "\e006";
 }
 .icon-instagram:before {
-	content: "\e61b";
+    content: "\e61b";
 }
 .icon-youtube:before {
-	content: "\e629";
+    content: "\e629";
 }
 .icon-hr-left:before {
-	content: "\e005";
+    content: "\e005";
 }
 .icon-hr-right:before {
-	content: "\e004";
+    content: "\e004";
 }
 .icon-hexagon:before {
-	content: "\e62a";
+    content: "\e62a";
 }
 .icon-dropdown-down:before {
-	content: "\e001";
+    content: "\e001";
 }
 .icon-dropdown-up:before {
-	content: "\e000";
+    content: "\e000";
 }
 .icon-square:before {
-	content: "\e003";
+    content: "\e003";
 }
 .icon-hr-up:before {
-	content: "\e007";
+    content: "\e007";
 }
 .icon-hr-down:before {
-	content: "\e008";
+    content: "\e008";
 }
 .icon-facebook2:before {
-	content: "\e62b";
+    content: "\e62b";
 }
 .icon-trash:before {
-	content: "\e62c";
+    content: "\e62c";
 }
 .icon-play:before {
-	content: "\e62d";
+    content: "\e62d";
 }
 .icon-pause:before {
-	content: "\e62e";
+    content: "\e62e";
 }
 .icon-zoom-in:before {
-	content: "\e62f";
+    content: "\e62f";
 }
 .icon-eyedrop:before {
-	content: "\e632";
+    content: "\e632";
 }
-.icon-parcel_returns:before {
-	content: "\e800";
+.icon-Easy_Returns:before {
+    content: "\e800";
 }
 .icon-fit:before {
-	content: "\e801";
+    content: "\e801";
 }
 .icon-calendar:before {
     content: "\e901";
@@ -251,12 +255,12 @@ $icomoon-hash: random(1000);
 .icon-style-quiz:before {
     content: "\e906";
 }
-.icon-sewing-machine:before {
-    content: "\e907";
+.icon-search:before {
+    content: "\e90b";
 }
-.icon-icon-email:before {
-    content: "\e909";
+.icon-heart-o:before {
+    content: "\e90c";
 }
-.icon-icon-chat:before {
-    content: "\e90a";
+.icon-bag:before {
+    content: "\e90d";
 }

@@ -1,0 +1,175 @@
+/* [PDP - gallery]
+-------------------------------------------------------*/
+.slick-slide {
+  height: auto;
+  min-height: inherit;
+}
+
+.panel-media {
+  position: relative;
+  overflow: hidden;
+
+  .trigger-details {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    text-decoration: underline;
+    font-size: 0.875em;
+  }
+
+}
+
+.panel-media-inner-wrap {
+  margin-bottom: -$mega-menu-desktop-height;
+
+  .loader {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    margin-top: -13px;
+    margin-left: -13px;
+    width: 26px;
+    height: 26px;
+    background: url(spinner-big.gif);
+    background-size: cover;
+  }
+
+  .media-wrap {
+    position: relative;
+
+    img {
+      opacity: 0;
+      transition: opacity 200ms linear;
+    }
+
+    &.is-loaded {
+
+      img {
+        opacity: 1;
+      }
+
+      .loader {
+        display: none;
+      }
+
+    }
+
+  }
+
+}
+
+.panel-media .media-wrap {
+  position: relative;
+  height: 100vh;
+  max-height: 850px; // NOTE: this will need to be change when we get new product images
+  overflow: hidden;
+  padding-top: 30px;
+  background: transparent;
+
+  &:not(:first-child) {
+    margin-top: -30px;
+  }
+
+  img {
+    display: block;
+    width: auto;
+    height: 100%;
+    margin-top: -30px;
+  }
+
+  .scrollspy-trigger {
+    position: absolute;
+    top: 100px;
+    left: 0;
+  }
+
+}
+
+@media (max-width: $bootstrap-md-width - 1px) {
+
+  .panel-media-inner-wrap {
+    margin-bottom: 0;
+  }
+
+  .panel-media .media-wrap {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding-top: 0;
+
+    &:not(:first-child) {
+      margin-top: 0;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      margin-top: 0;
+    }
+
+  }
+
+}
+
+.slick-dots {
+  position: relative;
+  margin-top: -32px;
+  padding: 0 15px;
+  text-align: right;
+
+  li {
+    border-left: none;
+
+    &:not(:first-child) {
+      margin-left: 5px;
+      padding-left: 5px;
+    }
+
+  }
+
+  button {
+    display: block;
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    text-indent: -9999em;
+    background: $c-neutral-white;
+    border: solid $c-neutral-8 1px;
+  }
+
+  .slick-active button {
+    background: $c-neutral-black;
+    border-color: $c-neutral-black;
+  }
+
+}
+
+.scrollspy-thumbs {
+  // temp disabled
+  display: none;
+
+  li {
+    display: block;
+    border-left: none;
+
+    &:not(:first-child) {
+      margin: 5px 0 0 0;
+      padding: 5px 0 0 0;
+    }
+
+  }
+
+  a {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border: solid $c-neutral-8 1px;
+  }
+
+  .is-selected a {
+    background: $c-neutral-black;
+    border-color: $c-neutral-black;
+  }
+
+}

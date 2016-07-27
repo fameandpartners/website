@@ -8,11 +8,6 @@ configatron.blog_host               = 'fameandpartners.tumblr.com'
 configatron.days_delivery_emergency = 0
 configatron.secret_token            = ENV['RAILS_SECRET_KEY_BASE']
 
-configatron.sentry do |sentry|
-  sentry.public = ENV['SENTRY_PUBLIC']
-  sentry.secret = ENV['SENTRY_SECRET']
-end
-
 # assets
 configatron.aws.enabled    = false
 configatron.aws.bucket     = ''
@@ -66,8 +61,6 @@ configatron.mailchimp do |mailchimp|
   mailchimp.list_id = ENV['MAILCHIMP_LIST_ID']
 end
 
-configatron.redis_options = { namespace: 'fame_and_partners', url: "#{ENV['REDIS_URL']}/0" }
-
 configatron.es_url = ENV['ES_URL']
 
 configatron.elasticsearch.indices do |index|
@@ -108,11 +101,8 @@ when :development
     index.color_variants = :color_variants_development
   end
 
-  configatron.redis_options = { namespace: 'fame_and_partners_development', url: "#{ENV['REDIS_URL']}/0" }
-
 when :staging
-
-when :preproduction
+  configatron.site_version_detector_strategy = :top_level_domain
 
 when :production
   configatron.site_version_detector_strategy = :top_level_domain
@@ -126,6 +116,4 @@ when :test
     index.spree_products = :spree_products_test
     index.color_variants = :color_variants_test
   end
-
-  configatron.redis_options = { namespace: 'fame_and_partners_test', url: "#{ENV['REDIS_URL']}/0" }
 end

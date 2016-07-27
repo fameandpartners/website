@@ -8,7 +8,7 @@
 
 // Hide from both screenreaders and browsers
 .hide-fully {
-  display: none!important; 
+  display: none!important;
   visibility: hidden!important;
 }
 
@@ -98,7 +98,87 @@
   margin-bottom: 0 !important;
 }
 
+// Align content vericaly
+.h-v-align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__item--top {
+    align-self: flex-start;
+  }
+
+  &__item--bottom {
+    align-self: flex-end;
+  }
+
+}
+
 // TODO: check if this hack is even needed
 .relative {
   position: relative !important;
+}
+
+@media (min-width: $bootstrap-md-width) {
+
+  .line-break-md {
+    display: block;
+  }
+
+}
+
+// Same-height columns
+@media (min-width: $bootstrap-md-width) {
+
+  .same-height-cols {
+
+    .row, .row > div[class*='col-'] {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      flex: 1 1 auto;
+    }
+
+  }
+
+}
+
+// Five Equal Columns
+.col-xs-5ths, .col-sm-5ths, .col-md-5ths, .col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-xs-5ths {
+    width: 20%;
+    float: left;
+}
+
+@media (min-width: $bootstrap-sm-width) {
+
+  .col-sm-5ths {
+      width: 20%;
+      float: left;
+  }
+
+}
+@media (min-width: $bootstrap-md-width) {
+
+  .col-md-5ths {
+      width: 20%;
+      float: left;
+  }
+
+}
+@media (min-width: $bootstrap-lg-width) {
+
+  .col-lg-5ths {
+      width: 20%;
+      float: left;
+  }
+
 }

@@ -50,12 +50,13 @@ FameAndPartners::Application.configure do
   config.action_controller.asset_host = ENV['RAILS_ASSET_HOST']
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( application_redesign.js application_redesign.css main_nav_widget.css html5.js ie.css widgets/site_navigations.css quiz.css quiz.js)
+  config.assets.precompile += %w( storefront.js application_redesign.css main_nav_widget.css html5.js ie.css widgets/site_navigations.css quiz.css quiz.js)
 
   # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.raise_delivery_errors = true
 
-  config.action_mailer.default_url_options = { :host => ENV['APP_HOST'] }
+  app_host_without_protocol = ENV['APP_HOST'].to_s.gsub('https://', '').gsub('http://', '')
+  config.action_mailer.default_url_options = { host: app_host_without_protocol, protocol: 'https' }
 
   # config.action_mailer.asset_host = ENV['RAILS_ASSET_HOST']
   config.action_mailer.asset_host = 'https://www.fameandpartners.com' # TODO: hardcoded for the moment

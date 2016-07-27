@@ -7,7 +7,7 @@
   }
 
   // versions
-  &.copy-right {
+  &.copy-right, &.copy-left {
     margin-bottom: 50px;
 
     .media-wrap {
@@ -56,10 +56,21 @@
       border-top: solid $c-neutral-black 1px;
     }
 
-    // START - desktop
-    @media (min-width: $bootstrap-md-width) {
+  }
 
-      position: relative;
+  .cta-wrapper {
+    margin-top: 25px;
+  }
+
+}
+
+// START - desktop
+@media (min-width: $bootstrap-md-width) {
+
+  .hero-wrap {
+
+    &.copy-right, &.copy-left {
+    position: relative;
 
       .inner-wrap {
         position: absolute;
@@ -86,14 +97,8 @@
 
       }
 
-      .heading {
-        width: 50%;
-        margin: 0 0 0 50%;
-
-        > span:first-child {
-          font-size: 4rem;
-        }
-
+      .heading > span:first-child {
+        font-size: 4rem;
       }
 
       .sub-heading {
@@ -102,11 +107,23 @@
       }
 
     }
-    // END - desktop
+
+    &.copy-right .heading {
+      width: 50%;
+      margin: 0 0 0 50%;
+
+      &.full {
+        width: 100%;
+        margin: 0;
+      }
+
+    }
 
   }
 
 }
+// END - desktop
+
 
 .hero-product-wrap {
   position: relative;

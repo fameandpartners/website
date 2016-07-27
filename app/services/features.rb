@@ -6,7 +6,7 @@ module Features
     bergen_usa_returns:            'Enable Bergen return process (background workers and emails) whenever an user creates an order return in the USA',
     checkout_fb_login:             "Facebook login on Checkout",
     delivery_date_messaging:       nil,
-    enhanced_moodboards:           "Sharing & Comments",
+    enhanced_moodboards:           "[DEPRECATED] Sharing & Comments",
     express_making:                nil,
     fameweddings:                  'Weddings "Shop"',
     force_sitewide_ssl:            "Force users to use HTTPS version of the website. Needs to restart server on feature toggle.",

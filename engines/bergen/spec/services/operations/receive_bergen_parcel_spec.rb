@@ -6,7 +6,8 @@ module Bergen
       let(:operation) { described_class.new(item_return: item_return) }
 
       before(:each) do
-        expect(CustomerMailer).to receive_message_chain(:received_parcel, :deliver)
+        # TODO: 13/07/2016 temporarily disabling customer facing emails due to worker triggering too many times
+        # expect(CustomerMailer).to receive_message_chain(:received_parcel, :deliver)
       end
 
       context 'Rejects parcel' do

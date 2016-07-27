@@ -1,0 +1,40 @@
+/* [Carousel Navigation]
+-------------------------------------------------------*/
+
+.hero-carousel-nav {
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+  bottom: 20px;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: inline-block;
+    padding: 10px 7px;
+    cursor: pointer;
+  }
+
+  a {
+    display: block;
+    padding: 6px;
+    border: solid $c-neutral-8 1px;
+  }
+
+  .current a {
+    background: $c-neutral-black;
+    border-color: $c-neutral-black;
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    bottom: -68px;
+
+    li {
+      padding: 10px;
+    }
+
+  }
+
+}

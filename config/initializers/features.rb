@@ -12,19 +12,15 @@ end
 
 if Rails.env.preproduction?
   Features.activate(:fameweddings)
-  Features.activate(:enhanced_moodboards)
 end
 
 if Rails.env.development?
-  Features.activate(:enhanced_moodboards)
   Features.activate(:fameweddings)
 
   Features.deactivate(:test_analytics)
 end
 
 if Rails.env.test?
-  Features.activate(:enhanced_moodboards)
-
   Features.deactivate(:force_sitewide_ssl)
   Features.deactivate(:google_tag_manager)
   Features.deactivate(:marketing_modals)

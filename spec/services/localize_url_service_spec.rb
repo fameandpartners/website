@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe LocalizeUrlService do
-  before(:each) { rememoize(SiteVersion, :@permalinks) }
-
   describe '.localize_url' do
     before(:each) { create(:site_version, permalink: 'pt') }
 

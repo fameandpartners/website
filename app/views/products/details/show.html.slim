@@ -4,62 +4,30 @@ ruby:
 
   @product.default_color_options.each do |color|
     product_paths[color.id] = collection_product_path(@product, url_params.merge(color: color.name))
+    
+  @current_site_version = current_site_version.to_json
+  @productDiscount = @product.discount.to_json == 'null' ? 0 : @product.discount.to_json;
   end
 
-  init_product_details_page = "
-      page.initProductDetailsPage({
-        product_paths: #{ product_paths.to_json },
-        selector: {
-          product_id: #{ @product.id },
-          custom_id: #{ @product.master_id },
-          variants: #{raw @product.available_options.variants.serialize.to_json },
-          container: '.product-section--selection',
-          size_input: {
-            container: '#product-size-content',
-            action: '#product-size-action'
-          },
-          color_input: {
-            container:  '#product-color-content',
-            action:     '#product-colorize-action',
-            value:      '#{raw @product.color_id}'
-          },
-          customization_input: {
-            container:  '#product-customizations-content',
-            action:     '#product-customize-action'
-          },
-          making_options_input: {
-            container:  '#product-making-options-content',
-            action:     '#product-making-options-action',
-            value:      '#{ raw @product.making_option_id }'
-          },
-          height_input: {
-            container: '#product-height-content',
-            action:    '#product-height-action',
-            required:  #{Features.active?(:height_customisation) && @product.height_customisable?}
-          }
-        },
-        moodboard_links: {
-          container: '.dress-more.container.page-content',
-          buttons: '.add-to-moodboard'
-        },
-        buyButton: '.buy-button',
-        wishlistButton: '#add-to-moodboard',
-        fitguideButton: '#fit-guide',
-        fitguideContainer: '#fit-guide-content'
-      });
-  "
-
-  init_product_details_page_new = "
-    window.ProductDetails = window.ProductDetails || {};
-    window.ProductDetails.colorOptions = #{ @product.default_color_options.to_json };
-    window.ProductDetails.productImages = #{ @product.all_images.to_json };
-    window.ProductDetails.selectedColor = #{ @product.color_id };
-  "
+  # NOTE: this JS block is loaded into the head, this should contain page data only
+  # TODO: @product source will need to be cleaned, we have way too many duplicated there
+  #       also images are mess, have to load all_images separately because images inside
+  #       of @pruduct.images include mix of images in defferent ratios.
+  product_details_page_data = "
+    window.PdpDataFull = {
+      paths: #{ product_paths.to_json },
+      product: #{ @product.to_json },
+      discount: #{ @productDiscount},
+      images: #{@product.all_images.to_json},
+      sizeChart: #{ @product.size_chart_data.to_json }
+    };"
+    
+  init_product_details_page = "page.initProductDetailsPage();"
 
 = content_for :inline_javascript_top do
-  = raw init_product_details_page_new
-
-= content_for :inline_javascript do
+  = raw product_details_page_data
+  
+= content_for :inline_javascript do		
   = raw init_product_details_page
 
 = content_for :head
@@ -71,119 +39,248 @@ ruby:
 
 - if Features.active?(:marketing_modals)
   #modal-add-to-cart-template.hidden
+  
+// TODO:  note this is very naughty way of connecting PDP react components with
+//        legacy JS, for example shopping cart.
+//        This will need to be fixed later after we migrate coffee to react
+form.hide-fully#pdpDataForCheckout
+  input id='pdpCartSizeId' type='hidden' value=''
+  input id='pdpCartColorId' type='hidden' value='#{raw @product.color_id}'
+  input id='pdpCartCustomId' type='hidden' value=''
+  input id='pdpCartMakingId' type='hidden' value='#{ raw @product.making_option_id }'
+  input id='pdpCartVariantId' type='hidden' value=''
+  input id='pdpCartDressVariantId' type='hidden' value=''
+  input id='pdpCartLength' type='hidden' value=''
+  
+form.hide-fully#pdpDataForWishlist
+  input id='pdpWishlistColorId' type='hidden' value='#{raw @product.color_id}'
+  input id='pdpWishlistVariantId' type='hidden' value=''
+  input id='pdpWishlistProductId' type='hidden' value='#{raw @product.id}'
 
-.product-selection-wrap
-  .hero-product-wrap
-    = react_component('HeroProductCarousel')
+.pdp
+  .container
+    .row.main-content-area
+      // to enable affix data-spy='affix' to this container
+      .col-md-3.pdp-panel-side-left.js-panel-side-left-details-trigger
+        .panel-side-wrap.js-panel-side-left
+          .text-right.visible-xs.visible-sm
+            a.btn-close.lg.js-panel-side-left-toggle href='javascript:;'
+              .hide-visually Close Menu
+          .panel-side
+            .panel-side-container
+            
+              div
+                h1.heading = @product.name
+                - if @product.name.downcase.include?('skirt')
+                  p (Skirt Only)
+                  
+                #accordion role='tablist'
+                  .panel
+                    a href='#collapse-description' data-toggle='collapse' data-parent='#accordion' Description
+                    #collapse-description.collapse.in role='tabpanel'
+                      p = raw @product.description
+                  .panel
+                    a href='#collapse-about' data-toggle='collapse' data-parent='#accordion' About our model
+                    #collapse-about.collapse role='tabpanel'
+                      - if @product.fit.present?
+                        p = simple_format(@product.fit)
+                      - if @product.size.present?
+                        p = simple_format(@product.size)
+                  - if Features.active?(:moodboard)
+                    - if current_spree_user.present?
+                      .panel
+                        a href='#moodboard-options' data-user-present='#{current_spree_user.present?}' data-toggle='collapse' data-parent='#accordion'
+                          'Add to Moodboard
+                        #moodboard-options.moodboard-options.collapse role='tabpanel'
+                          / TODO - Support for dynamic colours.
+                          = react_component('AddProductToAnyMoodboard', moodboards: user_moodboards, product_id: @product.id, color_id: @product.color_id)
+                    - else
+                      // this will redirect not loged-in users to login page
+                      a.js-add-to-moodboard href='javascript:;' data-user-present='#{current_spree_user.present?}' Add to Moodboard
+                  
+              ul.btn-wrap
+                li Guaranteed Fit
+                li Free Shipping
+                li Easy Returns
 
-  /! Product Section
-  .product-selector
-    .outer-wrap
-      .inner-wrap
-        .row
-          .col-md-12.title
-            h1.heading = @product.name
-            - if @product.name.downcase.include?('skirt')
+      .col-md-6.panel-media
+        #PdpGallery
+        a.trigger-details.visible-xs.visible-sm.js-panel-side-left-toggle href='javascript:;' + DETAILS
+        
+      .col-md-3
+        .panel-side-wrap.js-panel-side-right
+          // to enable affix data-spy='affix' to this container
+          .panel-side
+            #PdpSidePanelRight
+    
+    // content bottom wrap START 
+    // js class is used to get bottom offset for sticky side panel
+    .js-bottom-content
+    
+      // content tabs START 
+      // these controls needs to be hidden for mobile
+      #content-tab-controls.row.hidden-xs.hidden-sm
+        .col-md-6.col-md-offset-3
+          ul.row.l-tab-controls.tab-content
+            li.col-md-4.active
+              a href='#tab-your-way' data-toggle='tab' Your Dress, Your Way
+            li.col-md-4
+              a href='#tab-fabric-information' data-toggle='tab' Fabric Information
+            li.col-md-4
+              a.js-tab-trigger-inspiration href='#dress-inspiration' data-toggle='tab' Dress Inspiration
+      
+      #content-tabs.content-tabs.tab-content
+        #tab-your-way.row.tab-pane.in.active
+          .l-tab-your-way
+            .col-xs-6.col-md-2
+              .media-wrap.keep-ratio
+                .inner-wrap
+                  = image_tag src='_pdp/tile-style.jpg'
+            .col-xs-6.col-md-2
+              .media-wrap.keep-ratio
+                .inner-wrap
+                  .v-center
+                    .justify-content
+                      = image_tag src='_icons/dress.svg', class:'icon'
+                      h3.h4 Select your style
+                      p Sort by style, occasion, or collection to find the perfect piece
+            .col-xs-6.col-md-2
+              .media-wrap.keep-ratio
+                .inner-wrap
+                  = image_tag src='_pdp/tile-fabric.jpg'
+            .col-xs-6.col-md-2
+              .media-wrap.keep-ratio
+                .inner-wrap
+                  .v-center
+                    .justify-content
+                      = image_tag src='_icons/fabric.svg', class:'icon'
+                      h3.h4 Pick your fabric
+                      p Choose the color and composition that suit you best
+            .col-xs-6.col-md-2
+              .media-wrap.keep-ratio
+                .inner-wrap
+                  = image_tag src='_pdp/tile-modify.jpg'
+            .col-xs-6.col-md-2
+              .media-wrap.keep-ratio
+                .inner-wrap
+                  .v-center
+                    .justify-content
+                      = image_tag src='_icons/scissors.svg', class:'icon'
+                      h3.h4 Modify your dress
+                      p You design the details with our customization menu
+
+        #tab-fabric-information.row.tab-pane
+          .l-tab-fabric-information
+            .col-md-3.col-md-offset-3
+              - if @product.fabric.present?
+                h3.h4 Fabric & Trims
+                = simple_format(@product.fabric)
+                p Product may have variations in dying hues so product may look slightly different from image.
+            .col-md-3
+              h3.h4 Garment Care
+              = image_tag src='_icons/professional-dryclean.svg', class:'icon'
               p
-                | (Skirt Only)
-            p#product-price
-              span.price = product_price_with_discount(@product.price, @product.discount)
-          .col-md-12
-            .icon-wrap
-              .icon-fit
-                .copy Guaranteed to fit
-              .icon-eyedrop
-                .copy Customize how you want
-              .icon-delivery-express
-                .copy Free, on time delivery
-              .icon-parcel_returns
-                .copy Return for free*
-          - if @product.is_active || custom_order?
-            = render 'product_selection_options'
-          - else
-            = render 'inactive_product_selection'
-
-/! About The Dress
-.dress-about.container.page-content
-  - if @product.name.downcase.include?('skirt')
-      h2.text-center About The Skirt
-  - else
-    h2.text-center About The Dress
-
-  .divider
-  .row
-    .col-md-6.col-sm-12.hidden-xs
-      h4 The Story
-      div=raw @product.description
-
-      h4 Dress Inspiration
-      .inspiration
-        .box.col-sm-4.no-padding
-          - if @product.song
-            = image_tag @product.song.image_url, class: 'img-responsive'
-
-        .box.col-sm-4.no-padding
-          - if @product.celebrity && @product.celebrity.image_url
-            = image_tag @product.celebrity.image_url, class: 'img-responsive'
-
-        - @product.inspiration.each do |item|
-          .box.col-sm-4.no-padding
-            = image_tag(item.image_url, :class => 'img-responsive')
-
-        p Images courtesy of Google
-
-    .col-md-6.col-sm-12
-      - if @product.fit.present?
-        h4 About our #famebabe
-        = simple_format(@product.fit)
-
-      - if @product.size.present?
-        = simple_format(@product.size)
-
-      - if @product.preorder.present?
-        .pre-order
-          strong Pre-order
-          | This item will ship within 4 weeks
-
-      - if @product.style_notes.present?
-        h4 Style it with
-        = simple_format(@product.style_notes)
-
-      - if @product.fabric.present?
-        h4 Fabric & Trims
-        = simple_format(@product.fabric)
-        | Product may have variations in dying hues so product may look slightly different from image
-
-      h4 Care Instructions
-      p
-        | Professional dry-clean only
-        br
-        | See garment care label for further details on how to care for your garment
-
-      p.sku SKU: #{@product.sku}
-
-      /h4 Share
-      /p= render :partial => 'share_buttons', :locals => { product: @product }
-
-hr
-
-= render partial: 'related_products', locals: { product: @product }
+                | Professional dry-clean only.
+                br
+                | See garment care label for further details on how to care for your garment.
+              p.sku SKU: #{@product.sku}
+        
+        #dress-inspiration.row.tab-pane
+          .l-tab-inspiration
+            - if @product.song
+              .col-xs-6.col-sm-6.col-md-2
+                .media-wrap
+                  = image_tag @product.song.image_url
+            - if @product.celebrity && @product.celebrity.image_url
+              .col-xs-6.col-sm-6.col-md-2
+                .media-wrap
+                  = image_tag @product.celebrity.image_url
+            - @product.inspiration.each do |item|
+              .col-xs-6.col-sm-6.col-md-2
+                .media-wrap
+                  = image_tag item.image_url
+      // content tabs END
+      
+      // content styling advice START
+      .row
+        .col-md-4
+          .c-styling-advice
+            h2 Get Free Styling Advice
+            p Let us help you to style your perfect outfit for any occasion. Meet Amber, one of the most influential stylists working today. 
+            .media-wrap
+              = image_tag '_pdp/tile-styling-advice.jpg'
+            .row
+              .col-xs-6.col-sm-6.col-md-6
+                = image_tag '_icons/dress.svg', class:'icon'
+                h3.h5 Latest Trend Analysis
+                p Inside information on what’s happening now + the next big thing
+              .col-xs-6.col-sm-6.col-md-6
+                = image_tag '_icons/color-tailoring.svg', class:'icon'
+                h3.h5 Color & Tailoring Expertise
+                p Collaborate on a look that fits, flatters and celebrates you
+            = link_to 'Book your free styling session', styling_session_path, class:'btn btn-black'
+        .col-md-8
+          = render partial: 'related_products', locals: { product: @product }
+          
+      // content styling advice END
+      
+    // content bottom wrap END
 
 = render partial: 'micro_data'
+    
+javascript:
+  $(document).ready(function() {
+  
+    // controls for details container, mobile only
+    $('.js-panel-side-left-toggle').on('click', function() {
+      $('.js-panel-side-left-details-trigger').toggleClass('is-active');
+      $('body').toggleClass('no-scroll');
+    });
+    
+    // bootstrap tab extension, will switch between tabs for desktop and
+    // accordion for mobile
+    $('#content-tab-controls').tabCollapse({
+      tabsClass: 'hidden-sm hidden-xs',
+      accordionClass: 'visible-sm visible-xs'
+    });
+    
+    function initSticky() {
+      $('.js-panel-side-left').sticky({
+        responsiveWidth: true,
+        topSpacing: $('.js-fixed-header').outerHeight(),
+        bottomSpacing: 
+          $('.js-bottom-content').outerHeight() 
+          + $('.js-footer').outerHeight() + $('.js-fixed-header').outerHeight()
+      });
+      $('.js-panel-side-right').sticky({
+        responsiveWidth: true,
+        topSpacing: $('.js-fixed-header').outerHeight(),
+        bottomSpacing:
+          $('.js-bottom-content').outerHeight() 
+          + $('.js-footer').outerHeight() + $('.js-fixed-header').outerHeight()
+      });
+      $('.js-panel-side-left').sticky('update');
+      $('.js-panel-side-right').sticky('update');
+    }
+    
+    function unstickSticky() {
+      $('.js-panel-side-left').unstick();
+      $('.js-panel-side-right').unstick();
+    }
+  
+    // sticky side panel
+    if(window.innerWidth >= 992) {
+      initSticky();
+    }
+    
+    // update on resize
+    $(window).resize(function() {
+      if(window.innerWidth >= 992) {
+        unstickSticky();
+        initSticky();
+      } else {
+        unstickSticky();
+      }
+    });
 
-#fit-guide-content.hidden
-  = render :partial => 'size_guide', :locals => { data: @product.size_chart_data, explanation: @product.size_chart_explanation, size_chart: @product.size_chart }
-
-#product-overlay
-
-- cache [:side_panels, @product.id, current_site_version.code], expires_in:  configatron.cache.expire.long  do
-  = render partial: 'side_panel_sizes'
-
-  = render partial: 'side_panel_colours'
-
-  = render partial: 'side_panel_customisation'
-
-  = render partial: 'side_panel_height'
-
-  - if @product.making_options.present?
-    = render partial: 'side_panel_making_options', locals: { making_options: @product.making_options }
+  });

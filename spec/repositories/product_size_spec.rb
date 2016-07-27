@@ -6,13 +6,6 @@ module Repositories
 
     let(:site_version) { build_stubbed(:site_version) }
 
-    before :each do
-      # Sigh
-      rememoize(ProductSize, :@sizes_map)
-      rememoize(Spree::Variant, :@size_option_type)
-      rememoize(Spree::OptionType, :@size)
-    end
-
     context 'characterisation' do
       context 'without sizes / variants' do
         let(:product) { create :dress }

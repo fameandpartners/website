@@ -1,21 +1,23 @@
 Spree::User.class_eval do
   require 'open-uri'
-  require 'net/http'
 
   def apply_omniauth_with_additional_attributes(omniauth)
     if omniauth['provider'] == "facebook"
+      token = omniauth.try(:credentials).try(:token)
+      raise 'No authentication token' unless token
 
-      self.email      = omniauth['info']['email'] if email.blank?
-      self.first_name = omniauth['info']['first_name'] if first_name.blank?
-      self.last_name  = omniauth['info']['last_name'] if last_name.blank?
+      graph = Koala::Facebook::API.new(token)
+      facebook_user = graph.get_object 'me'
+
+      self.email      = facebook_user['email'] if email.blank?
+      self.first_name = facebook_user['first_name'] if first_name.blank?
+      self.last_name  = facebook_user['last_name'] if last_name.blank?
 
       if Rails.env.development?
         logger.warn "Facebook: not using avatar"
       else
-      response    = Net::HTTP.get_response(
-        URI.parse("http://graph.facebook.com/#{omniauth['uid']}/picture?width=1024&height=1024")
-      )
-      self.avatar = open(response.header['location'])
+        avatar_url = graph.get_picture_data('me', width: 1024, height: 1024).try(:[], 'data').try(:[], 'url')
+        self.avatar = open(avatar_url)
       end
     end
   rescue StandardError => e

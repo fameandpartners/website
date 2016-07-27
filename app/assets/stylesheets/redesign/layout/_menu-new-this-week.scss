@@ -5,8 +5,7 @@
 
   .inner-wrap {
     @extend %cfix;
-    margin-bottom: 40px;
-    padding: 0 15px;
+    margin: 0 -15px 40px;
   }
 
   .item-wrap {

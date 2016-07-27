@@ -9,7 +9,6 @@ stack:
         roles:
           - name: web
             user: app_user
-          - name: worker
     - production:
         region: us-east-1
         roles:

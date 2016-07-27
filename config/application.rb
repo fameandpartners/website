@@ -19,14 +19,20 @@ module FameAndPartners
 
     # [HACK] Replacement for the dotenv-rails gem, was not compatible with spree 1.3
     # [TODO] Remove this and config/envvar.rb when no longer needed
-    if Rails.env.development? || Rails.env.test?
-      require "#{Rails.root}/config/envvar.rb"
-      %w(.env .env.local .env.test).each do |file_name|
-        envfile = File.join(Rails.root, file_name)
-        if File.exists?(envfile)
-          Envvar.load envfile
-          break
-        end
+    if Rails.env.test?
+      require Rails.root.join('lib', 'envvar', 'envvar')
+      Envvar.load Rails.root.join('.env.test')
+    end
+
+    if Rails.env.development?
+      require Rails.root.join('lib', 'envvar', 'envvar')
+
+      begin
+        Envvar.load Rails.root.join('.env')
+      rescue Errno::ENOENT => _
+        puts '-------WARNING--------'
+        puts 'ENV FILE missing. Please, create an ".env" based on ".env.example"'
+        puts '----------------------'
       end
     end
 
@@ -102,7 +108,6 @@ module FameAndPartners
     config.active_record.whitelist_attributes = true
 
     # Enable the asset pipeline
-    disable_warnings = true
     config.assets.enabled = true
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
@@ -111,8 +116,7 @@ module FameAndPartners
     config.assets.paths << Rails.root.join("app", "assets", 'transient_content')
     config.assets.paths << Rails.root.join("app", "assets", "vendor", "bower_components")
 
-    config.redis_namespace = ['fame_and_partners', Rails.env, 'cache'].join('_')
-    config.cache_store = :redis_store, "#{ENV['REDIS_URL']}/0/#{config.redis_namespace}"
+    config.cache_store = :dalli_store, ENV['MEMCACHE_SERVERS'], { namespace: "fandp-#{Rails.env}", expires_in: 1.day, compress: true }
 
     # Use S3 for storing attachments
     config.use_s3 = false

@@ -1,0 +1,68 @@
+/* [PDP - side menus]
+-------------------------------------------------------*/
+@mixin pdp-side-menu-core {
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100vh;
+  padding-bottom: $mega-menu-desktop-height;
+  background: $c-neutral-white;
+  overflow: hidden;
+  opacity: 0;
+  z-index: 1;
+  transition: all 200ms ease-in;
+}
+
+@mixin pdp-side-menu-mobile {
+  position: fixed;
+  bottom: 0;
+  padding: 0 30px;
+  overflow-y: scroll;
+  border-top: solid $c-neutral-2 2px;
+  z-index: 1001;
+}
+
+@mixin pdp-side-menu-active {
+  left: 0;
+  opacity: 1;
+}
+
+.pdp-side-menu {
+  position: absolute;
+  @include pdp-side-menu-core;
+
+  .custom-scroll {
+    padding-right: 10px;
+  }
+
+  .btn-close {
+    margin-top: 15px;
+  }
+
+  &.is-active {
+    @include pdp-side-menu-active;
+  }
+
+}
+
+@media (max-width: $bootstrap-md-width - 1px) {
+
+  .pdp-panel-side-left {
+    @include pdp-side-menu-core;
+    @include pdp-side-menu-mobile;
+
+    .btn-close {
+      margin-top: 15px;
+    }
+
+    &.is-active {
+      @include pdp-side-menu-active;
+    }
+
+  }
+
+  .pdp-side-menu {
+    @include pdp-side-menu-mobile;
+  }
+
+}

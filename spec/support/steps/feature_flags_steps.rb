@@ -1,7 +1,6 @@
 module Acceptance
   module FeatureFlagsSteps
     FLAGS_ENABLED_BY_DEFAULT= %i(
-                                enhanced_moodboards
                                 fameweddings
                                 height_customisation
                                 moodboard

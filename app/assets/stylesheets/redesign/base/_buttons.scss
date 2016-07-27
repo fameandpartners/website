@@ -103,9 +103,22 @@
     color: $c-neutral-white;
   }
 
+  &.btn-loading {
+
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background: $c-neutral-black;
+    }
+
+  }
+
 }
 
 .btn-close {
+  display: inline-block;
   position: relative;
   width: 18px;
   height: 18px;
@@ -143,6 +156,18 @@
     &:after {
       left: 6px;
       height: 15px;
+    }
+
+  }
+
+  &.lg {
+    width: 50px;
+    height: 50px;
+
+    &:before,
+    &:after {
+      left: 20px;
+      height: 51px;
     }
 
   }
@@ -241,5 +266,20 @@
 
 .btn-xs,
 .btn-group-xs > .btn {
-  font-size: 14px;
+  font-size: 1.2rem;
+}
+
+//Hero section button
+.btn-featured {
+  color: $c-neutral-black;
+  font-family: $font-heading !important;
+  font-weight: 500;
+  font-style: italic;
+  text-transform: none;
+  background: none;
+  border: 1px solid $c-neutral-8;
+  margin-top: 25px;
+  padding: 10px 22px;
+  display: inline-block;
+  border-radius: 0;
 }

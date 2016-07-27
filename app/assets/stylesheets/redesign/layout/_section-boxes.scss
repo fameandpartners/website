@@ -1,0 +1,266 @@
+/* [Section boxes]
+-------------------------------------------------------*/
+$section-spacing-margin-top: 40px;
+$box-padding-top: 25px;
+
+.section-box {
+  margin-top: $section-spacing-margin-top;
+
+  &.top-overlay {
+    margin-top: -37px;
+  }
+
+  p {
+    font-family: $font-heading;
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 2.5rem;
+
+    &:nth-of-type(1) {
+      margin-top: 30px;
+    }
+
+  }
+
+  .item, .item-alt {
+    padding: 18px;
+
+    &.bordered {
+      border: 1px solid $c-neutral-6;
+    }
+
+    h3 {
+      text-transform: none;
+      font-size: 3.2rem;
+      line-height: 3.3rem;
+    }
+
+    p.summary {
+      font-size: 1.7rem;
+      margin: ($box-padding-top - 20px) 0 0;
+    }
+
+    .item-copy {
+      padding: 0 15px;
+    }
+
+  }
+
+  .section-img-wrap {
+
+    &.copy-center {
+      position: relative;
+    }
+
+    .img-wrap img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .content-wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      text-align: left;
+
+      .container-cta {
+        display: table;
+        height: 100%;
+        width: 100%;
+
+        > .row-cta {
+          display: table-cell;
+          vertical-align: middle;
+        }
+
+      }
+
+      .copy-wrap {
+        font-size: 1.4rem;
+      }
+
+    }
+
+  }
+
+  .cta-item {
+
+    &.col-md-6:nth-child(even) {
+      padding-left: 0;
+    }
+
+    &.col-md-6:nth-child(odd) {
+      padding-right: 0;
+    }
+
+    .media-wrap {
+      height: 366px;
+    }
+
+  }
+
+  .cta-item-huge {
+
+    .media-wrap {
+      height: 544px;
+    }
+
+    .media-wrap.keep-ratio {
+      padding-bottom: 47%;
+    }
+
+  }
+
+  .copy-img-side-by-side {
+
+    .copy-side {
+      padding: 0 25px;
+      margin-bottom: 14px;
+      position: relative;
+
+      p:first-child {
+        margin-top: 14px;
+      }
+
+      p a {
+        color: $c-neutral-black;
+        border-bottom: 1px solid $c-neutral-6;
+      }
+
+      .link-align-bottom a {
+        border: 0;
+      }
+
+    }
+
+  }
+
+  .cta-product-caption {
+    margin: 25px 0;
+    font-weight: 500;
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .item {
+
+      &.bordered {
+        margin-bottom: $box-padding-top;
+      }
+
+      h3 {
+        margin-top: ($box-padding-top + 10px);
+      }
+
+    }
+
+    .item-alt {
+      padding: 24px 18px;
+
+      h3 {
+        margin-top: 0;
+      }
+
+    }
+
+    .cta-item, .cta-item-huge {
+      padding: 0;
+    }
+
+    .copy-img-side-by-side .item .row {
+      display: flex;
+      flex-wrap: wrap;
+
+      .content-wrapper {
+        height: 100%;
+      }
+
+    }
+
+  }
+
+  @media (min-width: $bootstrap-sm-width) {
+
+    .link-align-bottom {
+      bottom: 0;
+      position: absolute;
+    }
+
+  }
+
+}
+
+.heading-overlay-wrapper {
+  text-align: center;
+  z-index: 1;
+
+  .heading-overlay {
+    display: inline-block;
+    position: relative;
+    bottom: -22px;
+    padding: 8px 20px 6px;
+    margin-top: 0;
+    font-family: $font-family-secondary;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    background: $c-neutral-black;
+    color: $c-neutral-white;
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    &.tag-align-left {
+      text-align: left;
+    }
+
+  }
+
+}
+
+// When we need a 100%-wide section container with background
+.section-wrapper {
+  background: $c-classic-modal-bg;
+  padding: $box-padding-top 0 5px;
+}
+
+// Side tags
+.tag-info-section {
+  position: relative;
+
+  .tag-info-wrapper {
+    display: block;
+    margin-left: -70px;
+    letter-spacing: 0.1rem;
+    font-size: 1.3rem;
+
+    .tag-info {
+      position: absolute;
+      top: 48%;
+      z-index: 1;
+    }
+
+    .diagonal-line {
+      @include transform (rotate(45deg));
+      border-top: 1px solid $c-neutral-8;
+      width: 30px;
+      margin-left: 55px;
+    }
+
+    .vertical-text {
+      @include transform (rotate(-90deg));
+      text-align: center;
+      margin-right: -11px;
+      margin-left: -4px;
+
+      &.extra-margin-left {
+        margin-left: -15px;
+      }
+
+    }
+
+  }
+
+}

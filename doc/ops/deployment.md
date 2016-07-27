@@ -24,9 +24,25 @@ After you have a valid Sentinel token, create a new copy of the `OpsCare.yml.exa
 
 Run `sentinel deploy staging`
 
+### Deploying a specific branch
+
+To deploy a specific branch, use the `--branch-name` option: `sentinel deploy staging --branch-name feat/my-awesome-branch`
+
+### Faster deploys on staging
+
+On staging environment, you don't need to follow all steps which `Sentinel` tool introduces to the deployment process (real zero downtime deployments, snapshots, etc.).
+
+To achieve that:
+
+1. SSH into the staging machine: `sentinel ssh staging --role web`
+2. Go to the app folder: `cdapp`
+3. Use the deploy command with the desired branch name: `deploy --branch=feature/super-new-one`
+
+This will execute the deployment process straight into the staging machine, only copying new code from the repository and executing it against the existent isntance.
+
 ## Production
 
-Run `sentinel deploy staging`
+Run `sentinel deploy production`
 
 # LEGACY
 

@@ -19,7 +19,7 @@ gem 'rmagick'
 gem 'ckeditor'
 gem 'default_value_for'
 gem 'tire'
-gem 'redis-rails'
+gem 'dalli'
 gem 'autoprefixer-rails'
 gem 'bower-rails', '~> 0.10.0'
 gem 'redcarpet', '~> 2.3.0'
@@ -52,6 +52,7 @@ gem 'sass-rails',   '~> 3.2.3'
 gem 'compass-rails', '~> 2.0.5'
 gem 'react-rails', '~> 1.6'
 gem 'droidcss', '~> 2.0.4'
+gem 'asset_sync', '~> 1.1.0'
 
 # Data
 gem 'event_sourced_record'
@@ -62,6 +63,7 @@ gem 'geoip', require: false
 gem 'device_detector', '~> 0.8.1'
 gem 'rubyzip', '~> 1.1.7', require: false
 gem 'roo', require: false
+gem 'koala'
 
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
 
@@ -131,10 +133,9 @@ group :development, :test do
   gem 'oink'
   gem 'quiet_assets'
   gem 'rspec-rails', '~> 3.2'
-  gem 'spring'
-  gem 'spring-commands-rspec'
-  gem 'thin'
+  gem 'puma'
   gem 'meta_request'
+  gem 'foreman', require: false
 end
 
 group :test do

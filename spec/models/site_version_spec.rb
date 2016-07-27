@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe SiteVersion, type: :model do
   describe '.permalinks' do
-    before(:each) { rememoize(described_class, :@permalinks) }
-
     it 'returns all site versions permalinks' do
       create(:site_version, permalink: 'au')
       create(:site_version, permalink: 'us')

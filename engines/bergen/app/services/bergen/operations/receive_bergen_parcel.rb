@@ -17,7 +17,8 @@ module Bergen
           CustomerServiceMailer.rejected_parcel(item_return: item_return).deliver
         end
 
-        CustomerMailer.received_parcel(item_return: item_return).deliver
+        # TODO: 13/07/2016 temporarily disabling customer facing emails due to worker triggering too many times
+        # CustomerMailer.received_parcel(item_return: item_return).deliver
       end
 
       private

@@ -59,7 +59,7 @@ module Products
 
         color_customizable = product.color_customization
         discount           = product.discount.try(:amount).to_i
-        product.product_color_values.recommended.each do |product_color_value|
+        product.product_color_values.recommended.active.each do |product_color_value|
           color = product_color_value.option_value
 
           log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.name.ljust(14)} |"

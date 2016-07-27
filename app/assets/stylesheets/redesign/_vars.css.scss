@@ -1,11 +1,12 @@
 // Brand Colors
 $c-brand-blue: #003647;
 $c-brand-blue-pale: #355e6d; // secondar buttn hover
-$c-brand-red: #e32329;
+$c-brand-red: #b30000;
 $c-brand-pink: #eeddf0;
 
 // Neutral Colors
 $c-neutral-white: #fff;
+$c-neutral-1: #fbfbfb;
 $c-neutral-2: #f5f5f5;
 $c-neutral-3: #f8f8f8;
 $c-neutral-4: #d7d7d7;
@@ -42,8 +43,8 @@ $form-control-height-md: 45px;
 // @end Form
 
 // Mega Menu
-$mega-menu-desktop-height: 155px;
-$mega-menu-mobile-height: 110px;
+$mega-menu-desktop-height: 114px;
+$mega-menu-mobile-height: 113px;
 // @end Mega Menu
 
 // Locale Warn
@@ -66,3 +67,7 @@ $mobile-header: 992px;
 $bootstrap-sm-width: 768px;
 $bootstrap-md-width: 992px;
 $bootstrap-lg-width: 1200px;
+
+//Fixed header
+$md-content-margin-top: 106px;
+$fixed-header-with-locale-warn: ($md-content-margin-top + 49px);

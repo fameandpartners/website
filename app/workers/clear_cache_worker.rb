@@ -35,7 +35,6 @@ class ClearCacheWorker
     end
 
     def reset_cache
-      ActiveSupport::Cache::RedisStore.new(Rails.application.config.cache_store.last).clear
       Rails.cache.clear
     end
 

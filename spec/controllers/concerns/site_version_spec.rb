@@ -29,8 +29,6 @@ describe Concerns::SiteVersion, type: :controller do
     end
 
     describe '#enforce_param_site_version' do
-      before { rememoize(SiteVersion, :@default) }
-
       let(:australian_site_version) { create(:site_version, permalink: 'au') }
       let(:brazilian_site_version)  { create(:site_version, permalink: 'br') }
 

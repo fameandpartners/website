@@ -2,10 +2,11 @@
 
 ## System Requirements
 
-* Ruby 2.1.5 (2.2.0 also works)
-* Postgres 9.2
-* ElasticSearch 1.6.0
-* Redis 3.0.2
+* Ruby 2.1.6
+* Postgres 9.5
+* ElasticSearch 1.7.x
+* Redis
+* memcached
 * `imagemagick` 6.9.1
 
 > Libraries versions can vary. Versions used above are suggestions.
@@ -14,7 +15,11 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
 
 ### Coding Style
 
-We use [EditorConfig](http://EditorConfig.org) to keep coding styles. Please, if you use any text editors/IDEs that don't support it out of the box, [download a plugin for it](http://editorconfig.org/#download).
+* We use [EditorConfig](http://EditorConfig.org) to keep coding styles. Please, if you use any text editors/IDEs that don't support it out of the box, [download a plugin for it](http://editorconfig.org/#download).
+* Remember, follow *THE RULES*, otherwise, your PR will receive complaints: https://github.com/fameandpartners/website/wiki/The-Rules
+* Front-end:
+  * CSS guidelines: https://github.com/fameandpartners/website/blob/master/doc/dev/css-guidelines.md
+  * JS guidelines: https://github.com/fameandpartners/website/wiki/JS-Guidelines
 
 ### Frameworks
 
@@ -25,11 +30,12 @@ We use [EditorConfig](http://EditorConfig.org) to keep coding styles. Please, if
 * `$ git clone git@github.com:fameandpartners/website.git`
 * `$ cd ./website`
 * `$ cp config/database.yml.example config/database.yml`
+* `$ bundle install`
 
 If you are using homebrew and it's default settings, the supplied Procfile may work out-of-the-box
 
 ```shell
-$ bundle exec thin start -p 3000
+$ bundle exec foreman s
 ```
 
 It's also important to configure your Elasticsearch to enable dynamic scripting
@@ -143,11 +149,19 @@ Tire.index(configatron.elasticsearch.indices.spree_products).refresh
 
 #### Caches
 
-You can wipe local redis caches by running
+You can wipe cache by running
+
+```
+rake cache:clear
+```
+
+or
 
 ```
 rake cache:expire
 ```
+
+> This will simply invoke the `Rails.cache.clear` command.
 
 #### Images & Assets
 

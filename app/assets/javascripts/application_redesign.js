@@ -13,6 +13,8 @@
 
 //= require libs/jquery.dotdotdot.min
 //= require libs/jquery.mlens.min
+//= require libs/bootstrap-tabcollapse
+//= require libs/jquery.sticky
 
 //= require modernizr-custom
 
@@ -24,7 +26,6 @@
 //= require es5-shim/es5-shim.js
 //= require react
 //= require react_ujs
-//= require alt/dist/alt.min.js
 //= require components
 
 // npm modules
@@ -69,6 +70,7 @@
 //= require partials/helpers/bs-tabs
 //= require partials/helpers/collapse_toggle
 //= require partials/helpers/form_submit_ajax_validation
+//= require partials/helpers/anchor_navigation
 
 //-----------------------------------
 // Show old quiz in popup with iframe
@@ -90,7 +92,6 @@
 //= require partials/inputs/new.js.coffee
 //= require partials/inputs/product_option_selectors.js.coffee
 //= require partials/helpers/product_images_slider.js.coffee
-//= require partials/helpers/product_variants_selector.js.coffee
 //= require partials/product_collection_image_hover.js.coffee
 
 //--------------------------------
@@ -112,6 +113,16 @@
 
 // campaigns
 //= require partials/fitgau_reminder
+
+//--------------------------------
+// Header
+//--------------------------------
+//= require partials/header
+
+//--------------------------------
+// Hero Tile Carousel
+//--------------------------------
+//= require partials/hero-tile-carousel
 
 jQuery(document).ready(function($){
   $('body').addClass('ready');

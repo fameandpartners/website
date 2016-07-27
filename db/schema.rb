@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160615092915) do
+ActiveRecord::Schema.define(:version => 20160718185835) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -60,8 +60,10 @@ ActiveRecord::Schema.define(:version => 20160615092915) do
   create_table "bergen_return_item_processes", :force => true do |t|
     t.string   "aasm_state"
     t.integer  "return_request_item_id"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.boolean  "failed",                 :default => false
+    t.string   "sentry_id"
   end
 
   create_table "bulk_order_updates", :force => true do |t|

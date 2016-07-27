@@ -2,79 +2,343 @@ ruby:
   link_to_dresses = build_taxon_path('dresses')
 
 .page-content.index
-  /! Hero Carousel
-  = render 'shared/redesign/collection_hero_carousel'
 
-  /section.competition-banner
-  /  .container
-  /    = link_to la_belle_epoque_collection_path, class: 'media-wrap'
-  /      img src="/assets/competition_banner/CollectionBanner-apr-26-full.jpg" srcset="/assets/competition_banner/CollectionBanner-apr-26-med.jpg 768w, /assets/competition_banner/CollectionBanner-apr-26-full.jpg 1024w" alt='La Belle Epoque'
-  //
-    - if sale_active?
-      section.banner-sale`
-        .container
-          = link_to sale_path, class: 'media-wrap'
-            img src="https://d1h7wjzwtdym94.cloudfront.net/pages/home/sale/#{current_sale.banner_images[:full]}" alt='Shop the Sale' srcset="
-              https://d1h7wjzwtdym94.cloudfront.net/pages/home/sale/#{current_sale.banner_images[:small]} 768w,
-              https://d1h7wjzwtdym94.cloudfront.net/pages/home/sale/#{current_sale.banner_images[:full]} 1024w"
-  /! Content Section
-  section.container.content-block.home-main-content
-    .row.aside-single-tile
-      .main.col-md-7
-        = render 'shared/redesign/tabs_collection'
-        = link_to '/dresses/dress-greer-two-piece-1070?color=black', class: 'media-wrap'
-          = image_tag 'home-page-tiles/Category-June-24-01.jpg', alt: 'Date Night. Go for noir off-the-shoulder detail.'
-        = link_to styling_session_path, class: 'media-wrap'
-          = image_tag 'home-page-tiles/Category-June-24-02.jpg', alt: 'Complimentary wedding styling appointment.'
+  // Featured section
+  .homepage-carousel.js-hero-tile-carousel
+    = render 'shared/redesign/collection_hero_carousel'
 
-      aside.col-md-5
-        .outer-wrap
-          = link_to build_taxon_path('cocktail')
-            picture.media-wrap
-              .inner-wrap
-                img src='#{image_path('home-page-tiles/Category-03-CocktailOclock-15-06-2016.jpg')}' alt="Cocktail O'Clock"
+  // Section: F&P Story
+  section.section-box.container.section-fame-story
+    .row
+      .col-md-12.heading-overlay-wrapper
+        h2.heading-overlay The Fame Story
 
+    .tag-info-section
+      .tag-info-wrapper.visible-lg-block
+        .tag-info
+          .section-name.vertical-text The Fame Story
+          .diagonal-line
 
-  section.carousel-strap.instagram
-    .container
-      .outer-wrap
-        h2.title-line-on-sides
-          .inner-wrap SHOP INSTAGRAM
-        = react_component('InstagramCarousel', skin: '',
-          assets: [ {link: link_to_dresses + '/dress-wyatt-1030?color=dark-burgundy&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=lotus-doll-dress-product', src: '/assets/homepage/instagram/Instagram-01.jpg', user: '@fameandpartners', cta: "SHOP THE WYATT LOOK"},
-                    {link: link_to_dresses + '/dress-persia-951?color=navy&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=persia-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_09.jpg', user: '@garancerousseau', cta: "SHOP THE PERSIA LOOK"},
-                    {link: link_to_dresses + '/dress-aspen-853?color=white&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=persia-dress-product', src: '/assets/homepage/instagram/insta2.jpg', user: '@evaacatherine', cta: "SHOP THE ASPEN LOOK"},
-                    {link: link_to_dresses + '/dress-firefly-640?color=black', src: '/assets/homepage/instagram/lainyhedaya.jpg', user: '@lainyhedaya', cta: "SHOP THIS LOOK"},
-                    {link: link_to_dresses + '/dress-first-in-line-skirt-735?color=white', src: '/assets/homepage/instagram/Instagram-02.jpg', user: '@andreawahl_', cta: "SHOP THE FIRST IN LINE SKIRT LOOK"},
-                    {link: link_to_dresses + '/dress-lotus-doll-899?color=grand-lily&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=lotus-doll-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_07.jpg', user: '@fionabriseno', cta: "SHOP THE LOTUS DOLL LOOK"},
-                    {link: link_to_dresses + '/dress-roxy-631?color=burgundy', src: '/assets/homepage/instagram/No4.jpg', user: '@xxsophiehermanxx', cta: "SHOP THE ROXY LOOK"},
-                    {link: link_to_dresses + '/dress-juliette-505?color=black', src: '/assets/homepage/instagram/No3_Sophie.jpg', user: '@xxsophiehermannxx', cta: "Shop the Juliette Look"},
-                    {link: link_to_dresses + '/dress-wish-upon-439?color=black', src: '/assets/homepage/instagram/No3.jpg', user: '@nadaadellex', cta: "SHOP THE WISH UPON LOOK"},
-                    {link: link_to_dresses + '/dress-janine-906?color=aqua-lily&utm_medium=instagram-homepage-carousel&utm_source=april-social-shoot&utm_campaign=janine-dress-product', src: '/assets/homepage/instagram/Rebekah_Campbell_Instagram_23.jpg', user: '@kiraship', cta: "SHOP THE JANINE LOOK"},
-                    {link: link_to_dresses + '/dress-allegra-680?color=forest-green', src: '/assets/homepage/instagram/No2.jpg', user: '@theruecollective', cta: "SHOP THE ALLEGRA LOOK"},
-                    {link: link_to_dresses + '/dress-laced-heartline-262?color=white', src: '/assets/homepage/instagram/No2_Alevidal.jpg', user: '@alevidal', cta: "Shop the Laced Heartline Look"},
-                    {link: link_to_dresses + '/dress-perry-543?color=nude', src: '/assets/homepage/instagram/No6_Linhwin.jpg', user: '@linhwinn', cta: "Shop the Perry Look"},
-                    {link: link_to_dresses + '/dress-rory-two-piece-675?color=red', src: '/assets/homepage/instagram/No4_Sarah.jpg', user: '@sarah3llen', cta: "Shop the Rory Look"}])
+      .same-height-cols
+        .row
+          .col-md-4
+            .item.bordered
+              .item-copy
+                h3 Your <em>personal</em> atelier.
+                p.summary Timeless appeal. Contemporary edge. Completely customizable to suit your style.
+                = link_to '/dresses/new-this-week'
+                  span.cta-link-arrow-right
+                    span.copy-highlight Explore
+                    i.icon.icon-arrow-right
+              = link_to '/dresses/new-this-week'
+                = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive', alt: 'Your personal atelier'
 
+          .col-md-4.hidden-sm.hidden-xs
+            .item.bordered
+              .item-copy
+                h3 <em>Made</em>-to-order.
+                p.summary Each piece is handmade just for you. <br class="visible-lg-block">No mass production, less waste.
+                = link_to about_us_path
+                  span.cta-link-arrow-right
+                    span.copy-highlight Learn more
+                    i.icon.icon-arrow-right
+              = link_to about_us_path
+                = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive', alt: 'Made-to-order'
 
+          .col-md-4.hidden-sm.hidden-xs
+            .item.bordered
+              .item-copy
+                h3 Tailored for <em>you</em>.
+                p.summary Our signature size model means never<br class="visible-lg-block"> having to say, "It doesn't fit."
+                = link_to size_guide_path
+                  span.cta-link-arrow-right
+                    span.copy-highlight The Fit Guide
+                    i.icon.icon-arrow-right
+              = link_to size_guide_path
+                = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive', alt: 'Tailored for you'
 
+  // Section: Style icon
+  section.section-box.container.section-style-icon
+    .row
+      .col-md-12.heading-overlay-wrapper
+        h2.heading-overlay F&P Style icon
+
+    .tag-info-section
+      .tag-info-wrapper.visible-lg-block
+        .tag-info
+          .section-name.vertical-text F&P Style icon
+          .diagonal-line
+
+      .row
+        .col-md-12.cta-item-huge
+          = link_to '/brittany-xavier-high-summer-collection'
+            .section-img-wrap.copy-center
+              picture
+                .img-wrap
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-1-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-1-retina.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/fp-style-icon-1-mob.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/fp-style-icon-1-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/fp-style-icon-1-retina.jpg")} 1024w' alt="F&P Style Icon"
+
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                     .copy-wrap.text-center
+                       span.cta-link-white-bg
+                        span.cta-link Explore
+                        span.copy-highlight  Brittany Xavier's Edit
+
+    .tag-info-section
+      .tag-info-wrapper.visible-lg-block
+        .tag-info
+          .section-name.vertical-text Our Edits
+          .diagonal-line
+
+      .row
+        .col-md-6.cta-item
+          = link_to 'dresses/slip-dress'
+            .section-img-wrap.copy-center
+              picture
+                .img-wrap
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-2-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-2-retina.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/fp-style-icon-2-mob.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/fp-style-icon-2-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/fp-style-icon-2-retina.jpg")} 1024w' alt="Shop Our Slip Dress"
+
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                      .copy-wrap.text-center
+                        span.cta-link-white-bg
+                          span.cta-link Shop
+                          span.copy-highlight  Our Slip Dress Edit
+
+        .col-md-6.cta-item
+          = link_to 'dresses/ball-gowns'
+            .section-img-wrap.copy-center
+              picture
+                .img-wrap
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-3-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-3-retina.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/fp-style-icon-3-mob.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/fp-style-icon-3-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/fp-style-icon-3-retina.jpg")} 1024w' alt="Shop Our Gown"
+
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                      .copy-wrap.text-center
+                        span.cta-link-white-bg
+                          span.cta-link Shop
+                          span.copy-highlight  Our Gown Edit
+
+      .row
+        .col-md-6.cta-item
+          = link_to '/dresses/cocktail'
+            .section-img-wrap.copy-center
+              picture
+                .img-wrap
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-4-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-4-retina.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/fp-style-icon-4.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/fp-style-icon-4-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/fp-style-icon-4-retina.jpg")} 1024w' alt="Shop Our Cocktail"
+
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                      .copy-wrap.text-center
+                        span.cta-link-white-bg
+                          span.cta-link Shop
+                          span.copy-highlight  Our Cocktail Edit
+
+        .col-md-6.cta-item
+          = link_to 'dresses/wedding'
+            .section-img-wrap.copy-center
+              picture
+                .img-wrap
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-5-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-5-retina.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/fp-style-icon-5.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/fp-style-icon-5-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/fp-style-icon-5-retina.jpg")} 1024w' alt="Shop Our Wedding"
+
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                      .copy-wrap.text-center
+                        span.cta-link-white-bg
+                          span.cta-link Shop
+                          span.copy-highlight  Our Wedding Edit
+
+  // Section: Styling
+  section.section-box.container.section-styling
+
+    .tag-info-section
+      .tag-info-wrapper.visible-lg-block
+        .tag-info
+          .section-name.vertical-text.extra-margin-left Curated Collections
+          .diagonal-line
+
+      .row
+        .col-md-6
+          .item
+            h3 Welcome to the F&P shopping experience: collections curated specifically for you, based on your personal style, preferred fit, and inspirations.
+            p Launching soon, our Style Quiz and Fit Finder features will give us the tools to create a custom collection that speaks to you. Until then, get advice from a style expert anytime through Live Chat.
+
+            = link_to 'javascript:;', onclick: '$zopim.livechat.window.show();'
+              span.btn-xs.btn-featured
+                | Start <span class="copy-highlight">Chatting</span>
+
+        .col-md-6
+          .item.bordered.item-alt.styling-session
+            .row
+              .col-lg-6.col-md-5
+                = link_to styling_session_path
+                  = image_tag 'homepage/styling/styling-session.jpg', :class => 'img-responsive hidden-xs hidden-sm'
+
+              .col-lg-6.col-md-7
+                .item-copy
+                  h3 Styled by Fame <br class="hidden-xs hidden-sm">— for free.
+                  p Our wardrobe stylist Amber Bond is ready to style you via chat, phone or video call.
+                  = link_to styling_session_path
+                    span.cta-link-arrow-right
+                      span.cta-link-alt
+                        span Book a
+                        span.copy-highlight  Free Styling Session
+                      i.icon.icon-arrow-right
+
+                = link_to styling_session_path
+                  = image_tag 'homepage/styling/styling-session.jpg', :class => 'img-responsive hidden-md hidden-lg'
+
+  // Section: Instagram
   section.container
     .row
-      .col-md-12
-        .h2.title-line-on-sides
-          .inner-wrap AS SEEN IN
-      .col-md-12
-        .as-seen-in-partners
-          img.refinery29 alt='Refinery29'    src='/assets/footer/publisher/refinery29.png'
-          img.elle       alt='Elle'          src='/assets/footer/publisher/elle.png'
-          img.marie      alt='Marie'         src='/assets/footer/publisher/marie.png'
-          img.russh      alt='Russh'         src='/assets/footer/publisher/russh.png'
-          img.glamour    alt='Glamour'       src='/assets/footer/publisher/glamour.png'
-          img.wwd        alt='WWD'           src='/assets/footer/publisher/wwd.png'
-          img.teen       alt='Teenvogue'     src='/assets/footer/publisher/teen.png'
-          img.popsugar   alt='Popsugar'      src='/assets/footer/publisher/popsugar.png'
-          img.nylon      alt='Nylon'         src='/assets/footer/publisher/nylon.png'
-          img.cosmo      alit='Cosmopolitan' src='/assets/footer/publisher/cosmo.png'
+      .col-md-12.heading-overlay-wrapper
+        h2.heading-overlay Get Social
 
-  /! SEO content
-  = render 'shared/redesign/seo_content'
+  .section-wrapper
+    .section-box.section-instagram
+      .container
+        .row
+
+        .tag-info-section
+          .tag-info-wrapper.visible-lg-block
+            .tag-info
+              .section-name.vertical-text Get Social
+              .diagonal-line
+
+          .instagram-widget
+
+            // Instagram Item
+            .item.col-md-5ths.col-xs-6
+              = link_to '/dresses/dress-kai-1042?color=pale-pink', class: 'item-wrap'
+                .media-wrap
+                  = image_tag 'homepage/get-social/instagram-1.jpg', :class => 'img-responsive'
+                  .overlay
+                    .overlay-outer-wrap
+                      .overlay-inner-wrap
+                        span.cta-instagram
+                          span.user @jessalizzi
+                          span.cta-link shop
+
+            // Instagram Item
+            .item.col-md-5ths.col-xs-6
+              = link_to '/dresses/dress-firefly-640?color=black', class: 'item-wrap'
+                .media-wrap
+                  = image_tag 'homepage/get-social/instagram-2.jpg', :class => 'img-responsive'
+                  .overlay
+                    .overlay-outer-wrap
+                      .overlay-inner-wrap
+                        span.cta-instagram
+                          span.user @lainyhedaya
+                          span.cta-link shop
+
+            // Instagram Item
+            .item.col-md-5ths.col-xs-6
+              = link_to '/dresses/dress-lovelight-two-piece-860?color=ivory', class: 'item-wrap'
+                .media-wrap
+                  = image_tag 'homepage/get-social/instagram-3.jpg', :class => 'img-responsive'
+                  .overlay
+                    .overlay-outer-wrap
+                      .overlay-inner-wrap
+                        span.cta-instagram
+                          span.user @samblacky
+                          span.cta-link shop
+
+            // Instagram Item
+            .item.col-md-5ths.col-xs-6
+              = link_to '/dresses/dress-midnight-eyes-778?color=white', class: 'item-wrap'
+                .media-wrap
+                  = image_tag 'homepage/get-social/instagram-4.jpg', :class => 'img-responsive'
+                  .overlay
+                    .overlay-outer-wrap
+                      .overlay-inner-wrap
+                        span.cta-instagram
+                          span.user @carodaur
+                          span.cta-link shop
+
+            // Instagram Item
+            .item.col-md-5ths.hidden-sm.hidden-xs
+              = link_to '/dresses/dress-flynn-1044?color=black', class: 'item-wrap'
+                .media-wrap
+                  = image_tag 'homepage/get-social/instagram-5.jpg', :class => 'img-responsive'
+                  .overlay
+                    .overlay-outer-wrap
+                      .overlay-inner-wrap
+                        span.cta-instagram
+                          span.user @kirstenanderton
+                          span.cta-link shop
+
+        .row
+          .col-md-12.text-center
+            = link_to shop_social_path
+                span.btn-xs.btn-featured
+                  | Shop <span class="copy-highlight">Instagram</span>
+
+
+  // Section: Social networks
+  section.section-box.container.section-social.same-height-cols
+    .row
+      .col-md-6.copy-img-side-by-side
+        .item.bordered.item-alt.section-facebook
+          .row
+            .col-sm-5.copy-side
+              .content-wrapper
+                p Like us on #{link_to "facebook", "https://www.facebook.com/FameandPartners", target:"_blank"} and be the first to hear about exclusive sales and events.
+
+                .link-align-bottom
+                  = link_to 'https://www.facebook.com/FameandPartners', target: '_blank'
+                    span.cta-link-arrow-right
+                      span.cta-link Explore
+                      span.copy-highlight  Facebook
+                      i.icon.icon-arrow-right
+
+            .col-sm-7.img-side
+              = link_to 'https://www.facebook.com/FameandPartners', target: '_blank'
+                = image_tag 'homepage/social-cards/facebook.jpg', :class => 'img-responsive'
+
+      .col-md-6.copy-img-side-by-side
+        .item.bordered.item-alt.section-tumblr
+          .row
+            .col-sm-5.copy-side
+              .content-wrapper
+                p Check out #{link_to "tumblr", "https://fameandpartners.tumblr.com/", target:"_blank"} to see what’s inspiring us and our dress collections.
+
+                .link-align-bottom
+                  = link_to 'http://fameandpartners.tumblr.com/', target: '_blank'
+                    span.cta-link-arrow-right
+                      span.cta-link Explore
+                      span.copy-highlight  Tumblr
+                      i.icon.icon-arrow-right
+
+            .col-sm-7.img-side
+              = link_to 'http://fameandpartners.tumblr.com/', target: '_blank'
+                = image_tag 'homepage/social-cards/tumblr.jpg', :class => 'img-responsive'

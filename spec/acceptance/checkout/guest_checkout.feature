@@ -5,13 +5,14 @@ Feature: Complete Guest Checkout
     And Data is setup correctly
     And Setup default feature flags
 
-  @javascript @no_vcr
+  @javascript @no_vcr @selenium
   Scenario Outline: User Validation Errors
     When I am on Connie dress page
     Then I select "<Site Version>" site version
     And I select "<Dress Size>" size
     And I select "<Skirt Length>" skirt length
-    And I click on "Add to Cart" button
+    Then I should see add to cart link enabled
+    And I click on "ADD TO BAG" link
     # And I should see the cart sidebar with the checkout button
     # And I click on "CHECKOUT" button
     Then I fill in form fields with blank spaces:
@@ -32,18 +33,18 @@ Feature: Complete Guest Checkout
     Then I should see "Last name can't be blank"
     Examples:
       | Site Version | Country       | State      | Zipcode Label | Dress Size | Skirt Length |
-      | Australia    | Australia     | Queensland | Postcode      | AU 14      | Petite       |
+      | Australia    | Australia     | Queensland | Postcode      | AU 14      | Standard     |
       | USA          | United States | California | Zipcode       | US 10      | Petite       |
 
-  # TODO: Payment step require connection to PIN payment method. This should be recorded by VCR, not ignored.
-  # TODO: PIN payments are not working with headless browsers (stopped working on 20/06/2016). Why? Contact their support.
+  # TODO: Payment step require connection to PIN payment method. This should be kept like this, since we can detect PIN payments breaking changes!
   @javascript @no_vcr @selenium
   Scenario Outline: Successfully Buy a Dress
     When I am on Connie dress page
     Then I select "<Site Version>" site version
     And I select "<Dress Size>" size
     And I select "<Skirt Length>" skirt length
-    And I click on "Add to Cart" button
+    Then I should see add to cart link enabled
+    And I click on "ADD TO BAG" link
     # And I should see the cart sidebar with the checkout button
     # And I click on "CHECKOUT" button
     Then I select "<Country>" country and "<State>" state
@@ -71,5 +72,5 @@ Feature: Complete Guest Checkout
     Examples:
       | Site Version | Country       | State      | Zipcode Label | Dress Size | Skirt Length | Dress Price |
       | Australia    | Australia     | Queensland | Postcode      | AU 14      | Petite       | 319.00      |
-      | USA          | United States | California | Zipcode       | US 10      | Petite       | 289.00      |
-      | Australia    | New Zealand   | Whanganui  | Postcode      | AU 14      | Petite       | 319.00      |
+      | USA          | United States | California | Zipcode       | US 10      | Standard     | 289.00      |
+      | Australia    | New Zealand   | Whanganui  | Postcode      | AU 8       | Tall         | 319.00      |

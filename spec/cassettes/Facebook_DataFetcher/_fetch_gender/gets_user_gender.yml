@@ -2,51 +2,58 @@
 http_interactions:
 - request:
     method: get
-    uri: https://graph.facebook.com/10204225122802197//?access_token=CAACEdEose0cBAFZAeqc2JqR1zc2SbNfcjrEPFc5TlZC5TSF7ScsXAyHBdEuZC96cYAdF82ZAeILxF631RGzr6uZAkn2gLZCZBiAmq4t5mVzxIXjZAV84wKR3sF5RqdoLNlygYmZASfrlsexqRup8dMmVc1EsQG6sRTKy8DfhD5lGLZCK4BwDF47dXAPVciXOXhZBurF6dYuI3oG8kN0N95eVW1L7IRWHlBspAQZD&fields=gender
+    uri: https://graph.facebook.com/me?access_token=EAACEdEose0cBAIHZBBKjt9iMpCba7L9dGrxlZBgZBBXAfOgKe2C7hULf6OU8HG8yzSEN6n44Ul7WyVjth7inmGD8OIheEnUcUpl2Jr9TxiIZA1GTc7MWsbrBy3IGWzN4RaC8hjiYklcZBnJ3ZAAR2sIoWfv9eU60swV1jEdsZCuNQZDZD
     body:
       encoding: US-ASCII
       string: ''
     headers:
+      User-Agent:
+      - Faraday v0.9.1
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
-      User-Agent:
-      - Ruby
   response:
     status:
       code: 200
       message: OK
     headers:
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Type:
-      - application/json; charset=UTF-8
-      X-Fb-Trace-Id:
-      - FA21EzdJuIM
-      X-Fb-Rev:
-      - '1939973'
       Etag:
-      - '"6e4a5d1f69d8b9c9a80585af3f3df3c00936e4a7"'
-      Pragma:
-      - no-cache
-      Cache-Control:
-      - private, no-cache, no-store, must-revalidate
-      Facebook-Api-Version:
-      - v2.0
+      - '"d4d3654ff5d261d0f40de85c887805a9595712a8"'
+      Access-Control-Allow-Credentials:
+      - 'true'
+      X-Fb-Rev:
+      - '2426927'
+      X-Fb-Trace-Id:
+      - AcPm/QtvHez
       Expires:
       - Sat, 01 Jan 2000 00:00:00 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Facebook-Api-Version:
+      - v2.0
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      Access-Control-Allow-Origin:
+      - "*"
+      Last-Modified:
+      - '2016-04-01T12:51:58+0000'
+      Vary:
+      - Accept-Encoding
       X-Fb-Debug:
-      - Y6djOiHvE4rn6VyH3W65jBsdpo4QN0S77IRN74n7FPANQs3o9oJqAEgg+4GIZoL8A5JBcjk2MtDlCpEDDfsmrQ==
+      - TysPQrqUGbFI32Zs4Z+VvsLTbAOH4xppvMWwAA93vLOffxsIOG60esMkRk33aMWQb4N2wAhDo/uOTbXKPAN46A==
       Date:
-      - Thu, 17 Sep 2015 01:16:34 GMT
+      - Mon, 04 Jul 2016 16:36:04 GMT
       Connection:
       - keep-alive
       Content-Length:
-      - '42'
+      - '229'
     body:
       encoding: UTF-8
-      string: '{"gender":"male","id":"10204225122802197"}'
+      string: '{"id":"10204225122802197","email":"tiagoamaro\u0040hotmail.com","first_name":"Tiago","gender":"male","last_name":"Amaro","link":"https:\/\/www.facebook.com\/app_scoped_user_id\/10204225122802197\/","locale":"en_US","name":"Tiago
+        Amaro","timezone":2,"updated_time":"2016-04-01T12:51:58+0000","verified":true}'
     http_version: 
-  recorded_at: Thu, 17 Sep 2015 01:16:35 GMT
+  recorded_at: Mon, 04 Jul 2016 16:36:04 GMT
 recorded_with: VCR 2.9.3

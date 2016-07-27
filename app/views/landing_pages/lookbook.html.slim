@@ -7,17 +7,18 @@
         .media-wrap-outer
           .media-wrap.keep-ratio
             .inner-wrap
-              = image_tag "lookbook/Summer2016-MegaMenu-option2.jpg"
+              = link_to the_freshly_picked_collection_path
+                = image_tag "lookbook/featured-lookbook.jpg"
         .content-wrap
           .outer-wrap
             .inner-wrap
-              h1.heading.skin-dark The Ruffled Up Collection
-              = link_to 'View this collection', the_ruffled_up_collection_path, class: 'btn btn-md btn-black'
+              h1.heading.skin-dark The Freshly Picked Collection
+              = link_to 'View this collection', the_freshly_picked_collection_path, class: 'btn btn-md btn-black'
 
     .col-md-6
-      = link_to la_belle_epoque_collection_path, class: 'panel-highlight media-wrap'
-        = image_tag "lookbook/Summer2016-MegaMenu.jpg"
-        .copy-wrap La Belle Époque <em><span>View this collection</span></em>
+      = link_to the_ruffled_up_collection_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/Summer2016-MegaMenu-option2.jpg"
+        .copy-wrap The Ruffled Up Collection <em><span>View this collection</span></em>
     .col-md-6
       = link_to partners_in_crime_collection_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/PartnersInCrime-MegaMenu-NewSize.jpg"
@@ -34,17 +35,15 @@
       = link_to this_modern_romance_collection_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/modern-romance.jpg"
         .copy-wrap This Modern Romance <em><span>View this collection</span></em>
-    
+    .col-md-6
+      = link_to make_a_statement_collection_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/featured-make-a-statement.jpg"
+        .copy-wrap Make a Statement <em><span>View this collection</span></em>
+
     .col-md-12
       h2.title-line-on-sides
         .inner-wrap PREVIOUS LOOKBOOKS
 
-    .col-md-3.col-xs-6
-      = link_to make_a_statement_collection_path, class: 'panel-compact'
-        .media-wrap.keep-ratio
-          .inner-wrap
-            = image_tag "lookbook/make-a-statement.jpg"
-        .copy-wrap Make a Statement
     .col-md-3.col-xs-6
       = link_to luxe_collection_path, class: 'panel-compact'
         .media-wrap.keep-ratio

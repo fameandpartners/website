@@ -19,6 +19,11 @@
 //= require react_ujs
 //= require components
 
+//
+// Manual Orders
+//
+//= require manual_order
+
 //= require_tree .
 
 $(document).ready(function(){

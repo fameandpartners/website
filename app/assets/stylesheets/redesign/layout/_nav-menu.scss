@@ -1,14 +1,12 @@
 /* [Nav Menu]
 -------------------------------------------------------*/
 .nav-menu-wrap {
-  width: 80%;
-  margin-left: 10%;
   text-transform: none;
   background: $c-neutral-white;
+  padding: 20px 0;
 
-  .collection-col{
-    padding-left: 10px;
-    padding-right: 10px;
+  .panel-highlight {
+    margin: 0;
   }
 
   @media (max-width: 1400px) {
@@ -70,8 +68,8 @@
   .title {
     padding-bottom: 5px;
     text-transform: uppercase;
-    font-size: 14px;
-    border-bottom: solid $c-neutral-2 2px;
+    font-size: 1.3rem;
+    font-weight: 600;
   }
 
   @media (max-width: 1200px){
@@ -81,6 +79,68 @@
     right: 0;
     border-left-color: transparent;
     border-right-color: transparent;
+  }
+
+}
+
+// On-page/Anchor navigation
+.local-navigation-wrapper {
+  padding-top: 38px;
+}
+
+.local-navigation {
+  width: 100%;
+  text-transform: none;
+  display: inline-block;
+  padding: 5px 0;
+
+  ul {
+    text-align: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    @include display-flex;
+  }
+
+  li {
+    padding: 0;
+    margin: 0 -2px;
+    display: inline-block;
+    flex-basis: 100%;
+  }
+
+  a {
+    color: $c-neutral-8;
+    border-bottom: 1px solid $c-neutral-8;
+    padding: 18px 35px;
+    display: inline-block;
+    font-size: 1.4rem;
+    width: 100%;
+  }
+
+  .nav li {
+
+    &.active a,
+    a:hover,
+    a:focus {
+      background: none;
+      border-color: $c-neutral-black;
+      color: $c-neutral-black;
+      font-weight: 500;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    &.fixed-nav-mobile {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      background: $c-neutral-white;
+      z-index: 3;
+    }
+
   }
 
 }

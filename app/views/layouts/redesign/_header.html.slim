@@ -55,11 +55,13 @@ ruby:
   header.main
 
     .nav-menu.nav-alert-top
-      = render 'layouts/redesign/header/locale_selector/mobile'
-      .container-fluid.nav-menu-container
+      #fixed-header.js-fixed-header
         = render 'layouts/redesign/header/locale_warn/base', warning: @locale_warning
         = render 'layouts/redesign/header/gray_top_banner/base'
 
+      = render 'layouts/redesign/header/locale_selector/mobile'
+
+      .container-fluid
         #masthead-container.cfix
           .masthead.pull-left.visible-xs.visible-sm
             nav.navbar.navbar-default.visible-xs.visible-sm.hamburger role="navigation"
@@ -72,9 +74,9 @@ ruby:
               = image_tag src='logo/logo-mobile.svg', :alt => 'Fame & Partners'
 
           .masthead.pull-right.visible-xs.visible-sm
-            .js-header-toolbar
+            span.shopping-bag-wrapper.js-header-toolbar
               a.trigger-shopping-cart.js-trigger-shopping-bag href='javascript:;'
-                span.icon.icon-shopping_cart
+                span.icon.icon-bag
                 span.count.js-cart-item-count 0
                 span.copy checkout
 
@@ -221,10 +223,11 @@ ruby:
                 i.fa.fa-chevron-left
                 .back BACK
             li.manu-content
-              = link_to the_ruffled_up_collection_path
+              = link_to the_freshly_picked_collection_path
                 .panel-highlight.media-wrap
-                  = image_tag 'lookbook/Summer2016-MegaMenu-15-06-2016.jpg'
-                  .copy-wrap The Ruffled Up Collection <em><span>View this collection</span></em>
+                  = image_tag 'lookbook/Cotton2016-MegaMenu-2016-07-01.jpg'
+                  .copy-wrap The Freshly Picked Collection <em><span>View this collection</span></em>
+            li.normal-item = link_to 'The Ruffled Up Collection', the_ruffled_up_collection_path, class: 'text'
             li.normal-item = link_to 'Partners In Crime', partners_in_crime_collection_path, class: 'text'
             li.normal-item = link_to 'Just The Girls', just_the_girls_collection_path, class: 'text'
             li.normal-item = link_to 'Love Lace', love_lace_collection_path, class: 'text'
@@ -271,8 +274,6 @@ ruby:
             .arrow
               i.fa.fa-chevron-right
           li.normal-item
-            a.text href='http://blog.fameandpartners.com' target='_blank' BLOG
-          li.normal-item
             div
               = link_to 'ACCOUNT LOGIN', profile_path, class: 'text'
           li.normal-item.no-border#moodboards-menu-open
@@ -302,9 +303,3 @@ ruby:
             li.bottom-area = link_to 'Fashion IT Girl', 'http://mystyle.fameandpartners.com/fitg-aus-2015'
           li.bottom-area = link_to 'Track My Order', faqs_path(anchor: 'collapse-orders-track')
           /li.bottom-area = link_to 'Get styling advice', style_consultation_path
-
-coffee:
-  $(document).ready ->
-    $("#side-search-area #side-search-icon").on 'click', ->
-      if $("#side-search-area #searchForm input").val() != ""
-        $("#side-search-area #searchForm").submit()

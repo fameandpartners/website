@@ -24,6 +24,20 @@ namespace :import do
     Rake::Task['update:images:positions'].execute
   end
 
+  desc 'Import product data from the Reshoot excel file, which includes color and model information data'
+  task data_reshoot: :environment do
+    raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
+
+    file_path = ENV['FILE_PATH']
+
+    STDOUT.sync = true
+    puts "#{DateTime.now} START XLS IMPORTER"
+
+    uploader = Products::BatchUploaderReshoot.new
+    uploader.parse_file(file_path)
+    uploader.update_products
+  end
+
   task :data_Tania_version => :environment do
     raise 'FILE_PATH required' if ENV['FILE_PATH'].blank?
 

@@ -3,4 +3,12 @@
 
 APP_PATH = File.expand_path('../../config/application',  __FILE__)
 require File.expand_path('../../config/boot',  __FILE__)
+
+# Use Puma as Rails 3 default server. This can be removed after Rails 4 upgrade.
+
+if ENV.fetch('RAILS_ENV', 'development') == 'development'
+  require 'rack/handler'
+  Rack::Handler::WEBrick = Rack::Handler.get(:puma)
+end
+
 require 'rails/commands'

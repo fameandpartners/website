@@ -3,13 +3,15 @@ dependencies:
     - sudo curl --output /usr/local/bin/phantomjs https://s3.amazonaws.com/circle-downloads/phantomjs-2.1.1
 
   post:
-    - wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.5.2.tar.gz
-    - tar -xvf elasticsearch-1.5.2.tar.gz
-    - elasticsearch-1.5.2/bin/elasticsearch: {background: true}
+    - wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.5.tar.gz
+    - tar -xvf elasticsearch-1.7.5.tar.gz
+    - elasticsearch-1.7.5/bin/elasticsearch: {background: true}
 
 machine:
   ruby:
     version: 2.1.6
+  node:
+    version: 6.3.0
 
 general:
   artifacts:

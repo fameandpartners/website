@@ -3,8 +3,6 @@ require 'sidekiq'
 module Bergen
   module Workers
     class ReceiveAsnWorker < BaseWorker
-      VERIFY_AGAIN_INTERVAL = 3.hours
-
       ADDED_TO_INVENTORY    = 'AddedToInventory'.freeze
       DRAFT                 = 'Draft'.freeze
       PENDING_PRINTING      = 'PendingPrinting'.freeze
@@ -20,16 +18,16 @@ module Bergen
 
         if item_was_received?
           mark_asn_as_received
-        else
-          verify_again_in_few_hours
         end
+
+        @return_item_process.touch
+      rescue StandardError => e
+        sentry_error = Raven.capture_exception(e)
+        @return_item_process.update_column(:sentry_id, sentry_error.id)
+        @return_item_process.update_column(:failed, true)
       end
 
       private
-
-      def verify_again_in_few_hours
-        self.class.perform_in(VERIFY_AGAIN_INTERVAL, return_item_process.id)
-      end
 
       def mark_asn_as_received
         return_item_process.asn_was_received!

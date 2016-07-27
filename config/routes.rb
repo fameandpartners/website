@@ -153,6 +153,7 @@ FameAndPartners::Application.routes.draw do
     get '/break-hearts-collection' => redirect('/lookbook/break-hearts')
     get '/lookbook/break-hearts' => 'products/collections#show', :permalink => 'breakhearts', :as => :break_hearts_collection
     get '/lookbook/the-ruffled-up-collection' => 'products/collections#show', :permalink => 'ruffle', :as => :the_ruffled_up_collection
+    get '/lookbook/the-freshly-picked-collection' => 'products/collections#show', :permalink => 'cotton-collection', :as => :the_freshly_picked_collection
 
     get '/sale-dresses' => redirect('/dresses/sale')
     get '/dresses/sale' => 'products/collections#show', :permalink => 'sale', :as => :sales_collection
@@ -170,7 +171,7 @@ FameAndPartners::Application.routes.draw do
     get '/lookbook/love-lace-collection' => 'products/collections#show', :permalink => 'love-lace', :as => :love_lace_collection
     get '/lookbook/just-the-girls'       => 'products/collections#show', :permalink => 'just-the-girls', :as => :just_the_girls_collection
     get '/lookbook/partners-in-crime'    => 'products/collections#show', :permalink => 'partners-in-crime', :as => :partners_in_crime_collection
-    get '/lookbook/la-belle-epoque'      => 'products/collections#show', :permalink => 'la-belle-epoque', :as => :la_belle_epoque_collection
+    get '/lookbook/la-belle-epoque' => redirect('/lookbook')
 
     get '/all-size' => redirect('/lookbook/all-size')
     get '/lookbook/all-size' => 'products/collections#show', :permalink => 'all-size', :as => :all_size_collection
@@ -183,6 +184,9 @@ FameAndPartners::Application.routes.draw do
     get '/amfam' => redirect('/wicked-game-collection')
     get '/amfam-dresses' => redirect('/wicked-game-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
+
+    # "F&P Style Icon" landing pages
+    get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
 
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
@@ -310,10 +314,7 @@ FameAndPartners::Application.routes.draw do
     get '/fame-chain' => 'fame_chains#new', as: :fame_chain
     resource 'fame-chain', as: 'fame_chain', only: [:create]
 
-    get '/style-consultation' => 'style_consultations#new', as: 'style_consultation'
-    resource 'style-consultation', as: 'style_consultation', only: [:new, :create] do
-      get 'success'
-    end
+    get '/style-consultation', to: redirect("/styling-session")
 
     get '/styling-session'  => 'style_sessions#new', as: :styling_session
     resource 'style-session', as: 'style_session', only: [:create]
@@ -399,6 +400,8 @@ FameAndPartners::Application.routes.draw do
   end
 
   resources :moodboard_item_comments, exclude: [:index, :show]
+
+  post 'shipments_update', to: 'shippo/shipments#update'
 
   ##################
   # Robots and Feeds

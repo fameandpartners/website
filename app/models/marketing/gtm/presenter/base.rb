@@ -15,6 +15,7 @@ module Marketing
         def rescuable_body
           body
         rescue StandardError => e
+          Raven.capture_exception(e)
           NewRelic::Agent.notice_error(e)
           { error: e.message }
         end

@@ -3,8 +3,6 @@ require 'sidekiq'
 module Bergen
   module Workers
     class VerifyStyleMasterWorker < BaseWorker
-      VERIFY_AGAIN_INTERVAL = 30.minutes
-
       # TODO: probably these messages shouldn't live here, but live inside one of the soap methods
       # TODO: but we have two for getting status: return items + variants.
       ERROR                 = 'Error'.freeze # indicates that product add failed;
@@ -23,27 +21,27 @@ module Bergen
             advance_in_return_item_process
           when UPC_CODE_ERROR
             create_style_master
-            verify_again_in_few_minutes
           when PENDING_IMPORT
-            verify_again_in_few_minutes
+            # NOOP
           else
-            # TODO: Error handling
+            # TODO: Bergen ERROR signal handling
         end
+
+        @return_item_process.touch
+      rescue StandardError => e
+        sentry_error = Raven.capture_exception(e)
+        @return_item_process.update_column(:sentry_id, sentry_error.id)
+        @return_item_process.update_column(:failed, true)
       end
 
       private
 
       def advance_in_return_item_process
         return_item_process.style_master_was_created!
-        return_item_process.create_asn
       end
 
       def create_style_master
         bergen.style_master_product_add_by_return_request_items(return_request_items: [return_request_item])
-      end
-
-      def verify_again_in_few_minutes
-        self.class.perform_in(VERIFY_AGAIN_INTERVAL, return_item_process.id)
       end
 
       def style_master_status

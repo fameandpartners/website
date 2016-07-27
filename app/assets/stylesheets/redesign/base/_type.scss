@@ -9,7 +9,6 @@ body {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  text-transform: uppercase;
   font-family: $font-heading;
   font-weight: 300;
 }
@@ -122,4 +121,15 @@ blockquote {
     margin-top: 0;
   }
 
+}
+
+// This class is used when most of the copy has serif font and
+//  we need to add a custom sans-serif style to highlight part of it
+.copy-highlight {
+  font-family: $font-family-secondary;
+  font-style: normal;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  padding-left: 3px;
 }
