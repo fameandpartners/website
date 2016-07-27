@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://apikey:502d42126b7740932aeb929f6be873a2-us7@us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1
+    uri: https://apikey:<MAILCHIMP_API_KEY>@us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1
     body:
       encoding: US-ASCII
       string: ''
@@ -25,7 +25,7 @@ http_interactions:
       Content-Type:
       - application/problem+json; charset=utf-8
       X-Request-Id:
-      - 2de555da-1e62-40d5-863e-95e19b7b92d5
+      - 790b902b-ef50-426b-8f7e-b5cc8a1da752
       Link:
       - <https://us7.api.mailchimp.com/schema/3.0/ProblemDetailDocument.json>; rel="describedBy"
       Vary:
@@ -33,7 +33,7 @@ http_interactions:
       Content-Length:
       - '198'
       Date:
-      - Tue, 26 Jul 2016 14:56:50 GMT
+      - Wed, 27 Jul 2016 10:48:39 GMT
       Connection:
       - keep-alive
       Set-Cookie:
@@ -43,13 +43,13 @@ http_interactions:
       string: '{"type":"http://developer.mailchimp.com/documentation/mailchimp/guides/error-glossary/","title":"Resource
         Not Found","status":404,"detail":"The requested resource could not be found.","instance":""}'
     http_version: 
-  recorded_at: Tue, 26 Jul 2016 14:56:50 GMT
+  recorded_at: Wed, 27 Jul 2016 10:48:39 GMT
 - request:
     method: post
-    uri: https://apikey:502d42126b7740932aeb929f6be873a2-us7@us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products
+    uri: https://apikey:<MAILCHIMP_API_KEY>@us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products
     body:
       encoding: UTF-8
-      string: '{"id":"sku-1","title":"Split 1","variants":[{"id":"sku-1","title":"sku-1"}]}'
+      string: '{"id":"sku-1","title":"Lace 1","variants":[{"id":"sku-1","title":"sku-1"}]}'
     headers:
       User-Agent:
       - Faraday v0.9.1
@@ -69,28 +69,28 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       X-Request-Id:
-      - 94596274-2872-4974-a9a1-ad0b5e05c9f4
+      - f754557f-0015-4dd0-9927-4f86d5e489c5
       Link:
       - <https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Instance.json>;
         rel="describedBy"
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '2289'
+      - '2288'
       Date:
-      - Tue, 26 Jul 2016 14:56:51 GMT
+      - Wed, 27 Jul 2016 10:48:40 GMT
       Connection:
       - keep-alive
       Set-Cookie:
       - _AVESTA_ENVIRONMENT=prod; path=/
     body:
       encoding: UTF-8
-      string: '{"id":"sku-1","title":"Split 1","handle":"","url":"","description":"","type":"","vendor":"","image_url":"","variants":[{"id":"sku-1","title":"sku-1","url":"","sku":"","price":0,"inventory_quantity":0,"image_url":"","backorders":"","visibility":"","created_at":"2016-07-26T14:56:51+00:00","updated_at":"2016-07-26T14:56:51+00:00","_links":[{"rel":"self","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/sku-1","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json"},{"rel":"parent","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Collection.json"},{"rel":"update","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/sku-1","method":"PATCH","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json"},{"rel":"upsert","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/sku-1","method":"PUT","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json"},{"rel":"delete","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/sku-1","method":"DELETE"}]}],"published_at_foreign":"","_links":[{"rel":"self","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Instance.json"},{"rel":"parent","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Collection.json"},{"rel":"delete","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1","method":"DELETE"},{"rel":"variants","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Collection.json"}]}'
+      string: '{"id":"sku-1","title":"Lace 1","handle":"","url":"","description":"","type":"","vendor":"","image_url":"","variants":[{"id":"sku-1","title":"sku-1","url":"","sku":"","price":0,"inventory_quantity":0,"image_url":"","backorders":"","visibility":"","created_at":"2016-07-27T10:48:39+00:00","updated_at":"2016-07-27T10:48:39+00:00","_links":[{"rel":"self","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/sku-1","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json"},{"rel":"parent","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Collection.json"},{"rel":"update","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/sku-1","method":"PATCH","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json"},{"rel":"upsert","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/sku-1","method":"PUT","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json"},{"rel":"delete","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/sku-1","method":"DELETE"}]}],"published_at_foreign":"","_links":[{"rel":"self","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Instance.json"},{"rel":"parent","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Collection.json"},{"rel":"delete","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1","method":"DELETE"},{"rel":"variants","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Collection.json"}]}'
     http_version: 
-  recorded_at: Tue, 26 Jul 2016 14:56:51 GMT
+  recorded_at: Wed, 27 Jul 2016 10:48:40 GMT
 - request:
     method: get
-    uri: https://apikey:502d42126b7740932aeb929f6be873a2-us7@us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/SKU-1US8AU12C2
+    uri: https://apikey:<MAILCHIMP_API_KEY>@us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/SKU-1US26AU30C2
     body:
       encoding: US-ASCII
       string: ''
@@ -113,7 +113,7 @@ http_interactions:
       Content-Type:
       - application/problem+json; charset=utf-8
       X-Request-Id:
-      - 3f657d50-a4e2-4cfa-a1fd-fe69f1aca164
+      - 5c5814ef-e826-46ac-8d32-62ffc36b2799
       Link:
       - <https://us7.api.mailchimp.com/schema/3.0/ProblemDetailDocument.json>; rel="describedBy"
       Vary:
@@ -121,7 +121,7 @@ http_interactions:
       Content-Length:
       - '198'
       Date:
-      - Tue, 26 Jul 2016 14:56:52 GMT
+      - Wed, 27 Jul 2016 10:48:40 GMT
       Connection:
       - keep-alive
       Set-Cookie:
@@ -131,13 +131,13 @@ http_interactions:
       string: '{"type":"http://developer.mailchimp.com/documentation/mailchimp/guides/error-glossary/","title":"Resource
         Not Found","status":404,"detail":"The requested resource could not be found.","instance":""}'
     http_version: 
-  recorded_at: Tue, 26 Jul 2016 14:56:52 GMT
+  recorded_at: Wed, 27 Jul 2016 10:48:40 GMT
 - request:
     method: post
-    uri: https://apikey:502d42126b7740932aeb929f6be873a2-us7@us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants
+    uri: https://apikey:<MAILCHIMP_API_KEY>@us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants
     body:
       encoding: UTF-8
-      string: '{"id":"SKU-1US8AU12C2","title":"Split 1","sku":"SKU-1US8AU12C2"}'
+      string: '{"id":"SKU-1US26AU30C2","title":"Lace 1","sku":"SKU-1US26AU30C2"}'
     headers:
       User-Agent:
       - Faraday v0.9.1
@@ -157,31 +157,31 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       X-Request-Id:
-      - fb116f0a-c632-4616-a775-c3785aedd811
+      - 79409acb-d672-4d33-9c70-db8d5b9d0f64
       Link:
       - <https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json>;
         rel="describedBy"
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '1379'
+      - '1384'
       Date:
-      - Tue, 26 Jul 2016 14:56:52 GMT
+      - Wed, 27 Jul 2016 10:48:41 GMT
       Connection:
       - keep-alive
       Set-Cookie:
       - _AVESTA_ENVIRONMENT=prod; path=/
     body:
       encoding: UTF-8
-      string: '{"id":"SKU-1US8AU12C2","title":"Split 1","url":"","sku":"SKU-1US8AU12C2","price":0,"inventory_quantity":0,"image_url":"","backorders":"","visibility":"","created_at":"2016-07-26T14:56:52+00:00","updated_at":"2016-07-26T14:56:52+00:00","_links":[{"rel":"self","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/SKU-1US8AU12C2","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json"},{"rel":"parent","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Collection.json"},{"rel":"update","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/SKU-1US8AU12C2","method":"PATCH","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json"},{"rel":"upsert","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/SKU-1US8AU12C2","method":"PUT","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json"},{"rel":"delete","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/SKU-1US8AU12C2","method":"DELETE"}]}'
+      string: '{"id":"SKU-1US26AU30C2","title":"Lace 1","url":"","sku":"SKU-1US26AU30C2","price":0,"inventory_quantity":0,"image_url":"","backorders":"","visibility":"","created_at":"2016-07-27T10:48:40+00:00","updated_at":"2016-07-27T10:48:40+00:00","_links":[{"rel":"self","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/SKU-1US26AU30C2","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json"},{"rel":"parent","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Collection.json"},{"rel":"update","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/SKU-1US26AU30C2","method":"PATCH","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json"},{"rel":"upsert","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/SKU-1US26AU30C2","method":"PUT","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json"},{"rel":"delete","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/products/sku-1/variants/SKU-1US26AU30C2","method":"DELETE"}]}'
     http_version: 
-  recorded_at: Tue, 26 Jul 2016 14:56:52 GMT
+  recorded_at: Wed, 27 Jul 2016 10:48:41 GMT
 - request:
     method: post
-    uri: https://apikey:502d42126b7740932aeb929f6be873a2-us7@us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders
+    uri: https://apikey:<MAILCHIMP_API_KEY>@us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders
     body:
       encoding: UTF-8
-      string: '{"id":"R047672844","customer":{"id":"2","email_address":"user1@gmail.com","first_name":"first_name_1","last_name":"last_name_1","opt_in_status":false},"currency_code":"USD","order_total":198.37,"lines":[{"id":"1","product_id":"sku-1","product_variant_id":"SKU-1US8AU12C2","quantity":1,"price":"198.37"}]}'
+      string: '{"id":"R047672844","customer":{"id":"1","email_address":"user1@gmail.com","first_name":"first_name_1","last_name":"last_name_1","opt_in_status":false},"currency_code":"USD","order_total":198.37,"lines":[{"id":"1","product_id":"sku-1","product_variant_id":"SKU-1US26AU30C2","quantity":1,"price":"198.37"}]}'
     headers:
       User-Agent:
       - Faraday v0.9.1
@@ -201,24 +201,24 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       X-Request-Id:
-      - f9e36262-c507-42a6-a7d3-2e751ba744ee
+      - 0fcc2c3f-8e60-4a8e-be98-7beeafdb033f
       Link:
       - <https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Orders/Instance.json>;
         rel="describedBy"
       Vary:
       - Accept-Encoding
       Content-Length:
-      - '3465'
+      - '3464'
       Date:
-      - Tue, 26 Jul 2016 14:56:53 GMT
+      - Wed, 27 Jul 2016 10:48:41 GMT
       Connection:
       - keep-alive
       Set-Cookie:
       - _AVESTA_ENVIRONMENT=prod; path=/
     body:
       encoding: UTF-8
-      string: '{"id":"R047672844","customer":{"id":"2","email_address":"user1@gmail.com","opt_in_status":false,"company":"","first_name":"first_name_1","last_name":"last_name_1","orders_count":0,"total_spent":0,"address":{"address1":"","address2":"","city":"","province":"","province_code":"","postal_code":"","country":"","country_code":""},"created_at":"2016-07-26T14:55:34+00:00","updated_at":"2016-07-26T14:55:34+00:00","_links":[{"rel":"self","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/customers/2","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Customers/Instance.json"},{"rel":"parent","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/customers","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Customers/Collection.json"},{"rel":"update","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/customers/2","method":"PATCH","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Customers/Instance.json"},{"rel":"upsert","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/customers/2","method":"PUT","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Customers/Instance.json"},{"rel":"delete","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/customers/2","method":"DELETE"}]},"campaign_id":"","financial_status":"","fulfillment_status":"","currency_code":"USD","order_total":198.37,"tax_total":0,"shipping_total":0,"tracking_code":"","processed_at_foreign":"","cancelled_at_foreign":"","updated_at_foreign":"","lines":[{"id":"1","product_id":"sku-1","product_title":"Split
-        1","product_variant_id":"SKU-1US8AU12C2","product_variant_title":"Split 1","quantity":1,"price":198.37,"_links":[{"rel":"self","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders/R047672844/lines/1","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Orders/Lines/Instance.json"},{"rel":"parent","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders/R047672844","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Orders/Collection.json"},{"rel":"update","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders/R047672844/lines/1","method":"PATCH","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Orders/Lines/Instance.json"},{"rel":"delete","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders/R047672844/lines/1","method":"DELETE"}]}],"_links":[{"rel":"self","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders/R047672844","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Orders/Instance.json"},{"rel":"parent","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Orders/Collection.json"},{"rel":"update","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders/R047672844","method":"PATCH","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Orders/Instance.json"},{"rel":"delete","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders/R047672844","method":"DELETE"}]}'
+      string: '{"id":"R047672844","customer":{"id":"1","email_address":"user1@gmail.com","opt_in_status":false,"company":"","first_name":"first_name_1","last_name":"last_name_1","orders_count":0,"total_spent":0,"address":{"address1":"","address2":"","city":"","province":"","province_code":"","postal_code":"","country":"","country_code":""},"created_at":"2016-07-27T10:48:41+00:00","updated_at":"2016-07-27T10:48:41+00:00","_links":[{"rel":"self","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/customers/1","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Customers/Instance.json"},{"rel":"parent","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/customers","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Customers/Collection.json"},{"rel":"update","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/customers/1","method":"PATCH","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Customers/Instance.json"},{"rel":"upsert","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/customers/1","method":"PUT","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Customers/Instance.json"},{"rel":"delete","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/customers/1","method":"DELETE"}]},"campaign_id":"","financial_status":"","fulfillment_status":"","currency_code":"USD","order_total":198.37,"tax_total":0,"shipping_total":0,"tracking_code":"","processed_at_foreign":"","cancelled_at_foreign":"","updated_at_foreign":"","lines":[{"id":"1","product_id":"sku-1","product_title":"Lace
+        1","product_variant_id":"SKU-1US26AU30C2","product_variant_title":"Lace 1","quantity":1,"price":198.37,"_links":[{"rel":"self","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders/R047672844/lines/1","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Orders/Lines/Instance.json"},{"rel":"parent","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders/R047672844","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Orders/Collection.json"},{"rel":"update","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders/R047672844/lines/1","method":"PATCH","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Orders/Lines/Instance.json"},{"rel":"delete","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders/R047672844/lines/1","method":"DELETE"}]}],"_links":[{"rel":"self","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders/R047672844","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Orders/Instance.json"},{"rel":"parent","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Orders/Collection.json"},{"rel":"update","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders/R047672844","method":"PATCH","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Orders/Instance.json"},{"rel":"delete","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/fame_and_partners/orders/R047672844","method":"DELETE"}]}'
     http_version: 
-  recorded_at: Tue, 26 Jul 2016 14:56:53 GMT
+  recorded_at: Wed, 27 Jul 2016 10:48:41 GMT
 recorded_with: VCR 2.9.3

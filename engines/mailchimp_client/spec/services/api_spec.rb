@@ -3,14 +3,16 @@ require 'spec_helper'
 module MailChimpClient
   RSpec.describe API, type: :service do
     let(:api) { described_class.new }
+    let(:user) { build(:spree_user) }
+
+    before do
+      allow(user).to receive(:id).and_return(1)
+      allow(user).to receive(:email).and_return('user1@gmail.com')
+      allow(user).to receive(:first_name).and_return('first_name_1')
+      allow(user).to receive(:last_name).and_return('last_name_1')
+    end
 
     describe('#add_cusotmer', :vcr) do
-      let(:user)  { build(:spree_user) }
-
-      before do
-        allow(user).to receive(:id).and_return(1)
-        user.email = 'user1@gmail.com'
-      end
 
       it('adds customer to MailChimp') do
         response = api.add_customer(user)
@@ -25,10 +27,9 @@ module MailChimpClient
       let(:order) { create(:complete_order_with_items) }
 
       before do
-        allow(order.user).to receive(:id).and_return(2)
+        allow(order).to receive(:user).and_return(user)
         allow(order.line_items.first).to receive(:id).and_return(1)
         allow(order).to receive(:number).and_return('R047672844')
-        order.user.email = 'user1@gmail.com'
       end
 
       it('adds order to MailChimp') do
