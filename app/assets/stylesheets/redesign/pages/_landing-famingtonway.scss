@@ -10,100 +10,107 @@
 }
 
 .centered-cta {
+  float: none;
+  margin: 0 auto;
 	margin-bottom: 30px;
 	margin-top: 30px;
 }
 
 .secondary-cta-wrap {
-    max-width: 340px;
+    max-width:340px;
     margin: auto;
     margin-top: 20px;
 
-    .secondary-cta { 
-      width: 49%;
-      display: inline-block;
-      color: #000;
-      font-size: 1em;
-      font-family: "freight-display-pro", serif;
-      font-weight: 500;
-      font-style: italic;
-      text-align: center;
-      text-transform: none;
-    }
-  
+  .secondary-cta { 
+    width: 49%;
+    display: inline-block;
+    color: #000;
+    font-size: 1em;
+    font-family: "freight-display-pro", serif;
+    font-weight: 500;
+    font-style: italic;
+    text-align: center;
+    text-transform: none;
   }
-
-// END - General Styling
+  
+}
 
 // START - Landing Page Specific Styling
 
 .landing-famingtonway {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 
-    // Hero Banner Styling
+  // Hero Banner Styling
 
-    .main-hero-wrap {
-      background-color: #f5f5f5;
-      min-height: 300px;
-      background-size: cover;
-      background-position: 50%;
+  .main-hero-wrap {
+    background-color: #f5f5f5;
+    min-height: 300px;
+    background-size: cover;
+    background-position: 50%;
 
-      .title-wrapper {
-          max-width: 400px;
+    .title-wrapper {
+        max-width: 400px;
+  
+      h1 {
+        color: white;
+        padding-top: 9%;
     
-        h1 {
-          color: white;
-          padding-top: 9%;
-      
-        }
-
       }
 
     }
 
-    // Offset pulls overlay inline with border
+  }
 
-    .overlay-offset {
-        position: relative;
-        top: -15px;
+  // Hero Banner Styling
+
+  .heading-overlay {
+    bottom: 0;
+  }
+
+  .overlay-offset {
+    position: relative;
+    top: -15px;
+  }
+
+  section {
+    margin-top: 30px;
+    margin-bottom: 30px;     
+  }
+
+  // Planner Benefits
+
+  ul.planner-benefits {
+    margin-top: 50px;
+
+    li {
+      padding: 0 10px;
+      display: inline-block;
+      border-left: 1px solid #bcbcbc;
     }
 
-    section {
-        margin-top: 50px;
-    }
+  }
 
-    ul.planner-benefits {
-      margin-top: 50px;
-      li {
-          padding: 0 10px;
-          display: inline-block;
-          border-left: 1px solid #bcbcbc;
-      }
+  // START - image offsets
 
-    }
+  .img-text-offset {
+    margin-top: 105px;
+  }
 
-    // START - image offsets
+  .img-text-offset-2 {
+    margin-top: 85px;
+  }
 
-    .img-text-offset {
-        margin-top: 105px;
-    }
+  .bordered {
+  	border: 1px solid #bcbcbc;
+  }
 
-    .img-text-offset-2 {
-        margin-top: 85px;
-    }
-
-
-    .bordered {
-    	border: 1px solid #bcbcbc;
-    }
-
-    .item {
-    	max-width: 400px;
-    	margin: auto;
-    	margin-top: 10px;
-      padding: 30px 20px;
-      border: 1px solid #bcbcbc;
-    }
+  .item {
+  	max-width: 400px;
+  	margin: auto;
+  	margin-top: 10px;
+    padding: 30px 20px;
+    border: 1px solid #bcbcbc;
+  }
 
 	.expunge-border {
 	    border-left: 0;
@@ -185,9 +192,35 @@
 
 .landing-famingtonway {
 
-	#membership_sign-in {
+  .sign-up {
+    display: none;
+  }
+
+	.membership_sign-in {
 		display: none;
 	}
+
+  .nav {
+    
+    a {
+      color: $c-neutral-black;
+      cursor: pointer;
+    }
+
+    .tabs {
+      padding: 10px 0px;
+      border-bottom: 1px solid $c-neutral-4;
+    }
+
+    .tabs:hover  { 
+      background-color: $c-neutral-1;
+    }
+
+    .active {
+      border-bottom-color: $c-neutral-black;
+    }
+    
+  }
 
 	ul.tabs {
 
@@ -212,13 +245,8 @@
 
 	.form-wrap {
 		width: 100%;
+    margin-top: 30px;
 		margin-bottom: 30px;
-	}
-
-	span.form-label {
-		font-weight: 400;
-		font-size: 0.9em;
-		letter-spacing: 0.04em;
 	}
 
 	.form-control {
@@ -226,7 +254,7 @@
 	}
 
 	.sign-up-form {
-		max-width:600px;
+
 
     h3 {
       padding-top: 10px;
@@ -239,8 +267,8 @@
 		text-align: center;
 	}
 
-
 	.custom-form-element {
+    margin-top: 30px;
 
 		label { 
 			display: inline-block;
