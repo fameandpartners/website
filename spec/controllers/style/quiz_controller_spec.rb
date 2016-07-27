@@ -4,7 +4,7 @@ def questions_partials
   %w{outfits oscar_dresses style_words prom_makeup prom_hair prom_dresses fashionability sexiness hair_colours skin_colours body_shapes}
 end
 
-describe StyleQuizController, :type => :controller do
+describe QuizController, :type => :controller do
   render_views
 
   before :all do

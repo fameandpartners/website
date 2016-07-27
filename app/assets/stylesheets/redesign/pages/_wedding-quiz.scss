@@ -1,0 +1,106 @@
+.container.wedding-quiz-container{
+  // width: 94%;
+  // max-width: 1920px;
+
+  .questions-count {
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+
+  // .wedding-quiz-progress .inner-btn-wrap { //if maket
+  //   margin-top: 100%;
+  // }
+  h1 span {
+    text-decoration: line-through;
+    text-transform: capitalize !important; // because '.quiz-box h1 span' has uppercase
+  }
+
+  .wedding-quiz-next-button {
+    width: 200px;
+
+    a {
+      font-size: 1.3rem;
+    }
+  }
+
+  h1,
+  h2 {font-family: $Gilda; }
+
+  // h1 { font-size: 6.2rem; } //if maket
+
+  // h2 { font-size: 2.5rem; } //if maket
+
+  // .quiz-wrapper-box{ //if maket
+  //   padding-right: 0;
+  // }
+
+  .item {
+    margin-bottom: 15px;
+  }
+
+  .media-wrap p {
+    font-family: $font-family-secondary;
+  }
+}
+// .pad-left-container{ //if maket
+//   padding-left: 105px;
+// }
+
+
+
+.parametres-span {
+  width: 70px;
+  display: block;
+  float: left;
+}
+
+.wedding-input {
+  border: 1px solid $c-neutral-11;
+  margin-right: 10px;
+}
+
+
+.wedding-item {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.wedding-item-thin {
+  padding-right: 7px;
+  padding-left: 7px;
+}
+
+.media-wrap-paragraf {
+  padding-top: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  // font-size: 1.6rem; //if maket
+  font-size: 1.3rem;
+}
+
+.quiz-box .choices.wedding-quiz-img img {
+  opacity: 1
+}
+
+.dress-size-box {
+  width: 75px;
+  border: 1px solid $c-neutral-11;
+  text-align: center;
+  padding: 8px;
+  margin-right: 11px;
+}
+
+.cup-size-boxes {
+
+  .dress-size-box {
+    padding: 18px;
+  }
+}
+
+.m-top-10 {
+  margin-top: 10px;
+}
+
+.m-top-50 {
+  margin-top: 50px;
+}
