@@ -10,6 +10,10 @@
   &.copy-right, &.copy-left {
     margin-bottom: 50px;
 
+    &.no-margin {
+      margin: 0;
+    }
+
     .media-wrap {
       padding-bottom: 0;
     }
@@ -49,6 +53,7 @@
     }
 
     .sub-heading {
+      font-family: $font-heading;
       display: inline-block;
       padding-top: 5px;
       font-size: 2rem;
@@ -60,6 +65,17 @@
 
   .cta-wrapper {
     margin-top: 25px;
+  }
+
+  .white-text {
+
+    .heading,
+    .sub-heading,
+    p,
+    span {
+      color: $c-neutral-white;
+    }
+
   }
 
 }
@@ -104,6 +120,15 @@
       .sub-heading {
         padding-top: 0;
         border-top: none;
+      }
+
+    }
+
+    .img-as-block {
+      padding-bottom: 0;
+
+      .inner-wrap {
+        position: relative;
       }
 
     }
