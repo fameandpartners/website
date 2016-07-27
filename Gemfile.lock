@@ -968,8 +968,5 @@ DEPENDENCIES
   whenever
   zeus
 
-RUBY VERSION
-   ruby 2.1.6p336
-
 BUNDLED WITH
    1.12.5

@@ -338,11 +338,9 @@ FameAndPartners::Application.routes.draw do
     root :to => 'index#show'
 
     # style quiz
-    #resource :quiz, :only => [:show] do
-    #  resources :questions, :only => [:index]
-    #  resources :answers, :only => [:create]
-    #end
-    resource :style_quiz, only: [:show, :update], controller: 'style_quiz'
+    get '/style_quiz' => redirect('/style-quiz'), as: :old_style_quiz_redirection
+    resource :style_quiz, only: [:show, :update], controller: 'style_quiz', path: 'style-quiz'
+
     resource :style_profile, only: [:show], controller: 'style_profiles'
 
     scope '/users/:user_id', :as => :user do
