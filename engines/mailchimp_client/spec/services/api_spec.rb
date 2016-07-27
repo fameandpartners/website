@@ -29,6 +29,7 @@ module MailChimpClient
       before do
         allow(order).to receive(:user).and_return(user)
         allow(order.line_items.first).to receive(:id).and_return(1)
+        allow(order.line_items.first.variant.product).to receive(:sku).and_return('sku-1')
         allow(order).to receive(:number).and_return('R047672844')
       end
 

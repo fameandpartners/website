@@ -17,8 +17,6 @@ module MailChimpClient
 
       gibbon.ecommerce.stores(STORE_ID).customers.create(body: user_params)
     rescue StandardError => e
-      puts e
-      puts e.backtrace.join("\n\t")
       Raven.capture_exception(e)
     end
 
@@ -53,8 +51,6 @@ module MailChimpClient
 
       gibbon.ecommerce.stores(STORE_ID).orders.create(body: order_params)
     rescue StandardError => e
-      puts e
-      puts e.backtrace.join("\n\t")
       Raven.capture_exception(e)
     end
 
