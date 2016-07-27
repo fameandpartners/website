@@ -1,535 +1,322 @@
+@import 'redesign/vars.css.scss';
+
 /* [Landing Page - Famingtonway]
 -------------------------------------------------------*/
+
 .landing-famingtonway {
-  margin-bottom: 30px;
-  .cta{
-    margin-bottom: 50px;
-    font-size: 1.5em;
+  // START - General Styling
+
+  .col-centered {
+    float: none;
+    margin: 0 auto;
+    padding: 0;
   }
 
-  .create-wedding-board-wrap {
-    position: relative;
-    min-height: 420px;
-    @extend %cfix;
-
-    .loader-wrap {
-      display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-left: -12px;
-      margin-top: -12px;
-
-      &.active {
-        display: block;
-      }
-
-    }
-
+  .centered-cta {
+    float: none;
+    margin: 30px auto;
   }
 
-  .moodboard-setup {
-    padding-bottom: 30px;
-    border-bottom: solid $c-neutral-black 1px;
-
-    .title-line-on-sides {
-      margin-bottom: 30px;
-    }
-
-    form {
-      margin-bottom: 15px;
-      @extend %cfix;
-    }
-
-    .main-cta-wrap {
-      text-align: center;
-
-      .btn {
-        display: inline-block;
-      }
-
-      a:not(.btn),
-      span {
-        margin-left: 10px;
-        font-style: italic;
-      }
-
-      a:not(.btn) {
-        text-decoration: underline;
-        color: $c-neutral-black;
-      }
-
-    }
-
-    .btn {
-      padding-top: 12px;
-      padding-bottom: 12px;
-      font-size: 1em;
-    }
-
-    // START - mobile
-    @media (max-width: $bootstrap-md-width - 1px) {
-
-      .media-wrap {
-        display: none;
-      }
-
-      .title-line-on-sides {
-        margin-top: 15px;
-      }
-
-      .main-cta-wrap {
-
-        a,
-        span,
-        .btn {
-          display: block;
-          width: 100%;
-          margin-top: 15px;
-          margin-left: 0;
-
-          &:first-child {
-            margin-top: 0;
-          }
-
-        }
-
-        span {
-          text-transform: uppercase;
-          font-style: normal;
-        }
-
-        .btn-default {
-          color: $c-neutral-black;
-          background: $c-neutral-2
-        }
-
-      }
-
-    }
-
-    @media (max-width: $bootstrap-sm-width - 1px) {
-
-      .btn {
-        font-size: 0.75em !important; // TODO: fix global
-      }
-
-    }
-    // END - mobile
-
-  }
-
-  .invite-wrap {
-
-    .title-line-on-sides {
-      margin-top: -22px;
-    }
-
-    form .btn {
-      width: 20%;
-    }
-
-    .form-group {
-      float: left;
-      width: 40%;
-      padding-right: 10px;
-
-      input {
-        width: 100%;
-      }
-
-    }
-
-    .message-wrap > p {
-      float: left;
-      width: 100%;
-      margin-bottom: 15px;
-      padding: 10px;
-      text-align: center;
-      text-transform: uppercase;
-      font-weight: 300;
-      font-size: 1.125em;
-      border: solid $c-neutral-black 1px;
-    }
-
-    .invited-members-wrap li {
-      margin-bottom: 30px;
-    }
-
-    .invited-member {
-      position: relative;
-      min-height: 30px;
-      padding: 5px 25px 5px 5px;
-      font-size: 0.875em;
-      background: $c-neutral-2;
-
-      .member-name {
-        font-weight: 500;
-      }
-
-      .btn-close {
-        position: absolute;
-        top: 4px;
-        right: 4px;
-        text-indent: -9999em;
-      }
-
-    }
-
-    // START - mobile
-    @media (max-width: $bootstrap-md-width - 1px) {
-
-      form .btn,
-      .form-group {
-        width: 100%;
-        padding-right: 0;
-      }
-
-      .invited-members-wrap li {
-        margin-bottom: 15px;
-      }
-
-    }
-    // END - mobile
-
-  }
-
-  .about-wrap {
-
-    .title-line-on-sides {
-      margin-top: -12px;
-    }
-
-  }
-
-  .heading-secondary {
-    margin: 60px 0;
-    text-align: center;
-    text-transform: none;
-    line-height: 1.3;
-    font-family: $font-heading;
-    font-size: 1.25em;
-
-    em {
-      display: block;
-    }
-
-  }
-
-  .btn {
-    padding: 5px 10px;
-    line-height: normal;
-    font-size: 0.75em !important; // TODO: this is embarrassing, please fix me Radek, ASAP
-  }
-
-  // START - hero-wrap
-  .hero-wrap {
-
-    .copy-wrap {
-      position: relative;
-      padding: 50px 0;
-      text-align: center;
-    }
-
-    .title {
-      width: 80%;
-      max-width: 280px;
-      margin: 0 auto;
-      padding: 0;
-      text-transform: none;
-      font-size: 1.375em;
-    }
-
-  }
-  // END - hero-wrap
-
-  // START - section-steps
-  .section-steps {
-    position: relative;
-
-    .outer-wrap {
-      @extend %cfix;
-    }
-
-    .inner-left {
-      margin-top: 30px;
-    }
-
-    .btn-wrap {
-      position: relative;
-      text-align: center;
-
-      .btn {
-        position: relative;
-      }
-
-      &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background: $c-neutral-black;
-      }
-
-    }
-
-    ul {
-      padding-bottom: 30px;
-    }
-
-    li {
-      margin-top: 30px;
-    }
-
-    em {
-      font-size: 0.75em;
-    }
-
-    .copy-wrap {
-      font-size: 0.875em;
-    }
-
-  }
-  // END - section-steps
-
-   // START - section-register
-  .section-register {
-
-    .outer-wrap {
-      position: relative;
-      min-height: 270px;
-      @extend %cfix;
-    }
-
-    .inner-wrap {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .content-wrap-outer {
-      display: table;
-      width: 100%;
-      height: 100%;
-    }
-
-    .content-wrap-inner {
-      display: table-cell;
-      vertical-align: middle;
-      text-align: center;
-    }
-
-    .content-wrap {
+  .secondary-cta-wrap {
+    max-width: 340px;
+    margin: 20px auto auto;
+
+    .secondary-cta {
+      width: 49%;
       display: inline-block;
-      max-width: 290px;
-      padding: 60px 40px;
-      background: rgba($c-neutral-white, .9);
-    }
-
-    .heading {
-      margin: 0 0 20px 0;
-      font-family: $font-heading;
-      font-size: 1.625em;
+      color: #000;
+      font-size: 1em;
+      font-family: "freight-display-pro", serif;
+      font-weight: 500;
+      font-style: italic;
+      text-align: center;
+      text-transform: none;
     }
 
   }
-  // END - section-register
 
-  // START - section-together
-  .section-together {
-    position: relative;
-    background: $c-neutral-3;
-    @extend %cfix;
+  // START - Landing Page Specific Styling
 
-    .content-wrap {
-      padding: 40px 20px;
+  .landing-famingtonway {
+    margin-bottom: 30px;
+
+    // Hero Banner Styling
+
+    .main-hero-wrap {
+      min-height: 300px;
+      background-size: cover;
+      background: #f5f5f5 50%;
+
+      .title-wrapper {
+        max-width: 400px;
+
+        h1 {
+          color: white;
+          padding-top: 9%;
+
+        }
+
+      }
+
+    }
+
+    // Hero Banner Styling
+
+    .heading-overlay {
+      bottom: 0;
+    }
+
+    .overlay-offset {
+      position: relative;
+      top: -15px;
+    }
+
+    section {
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    // Planner Benefits
+
+    ul.planner-benefits {
+      margin-top: 50px;
+
+      li {
+        padding: 0 10px;
+        display: inline-block;
+        border-left: 1px solid #bcbcbc;
+      }
+
+    }
+
+    // START - image offsets
+
+    .img-text-offset {
+      margin-top: 105px;
+    }
+
+    .img-text-offset-2 {
+      margin-top: 85px;
+    }
+
+    .bordered {
+      border: 1px solid #bcbcbc;
+    }
+
+    .item {
+      max-width: 400px;
+      margin: 10px auto auto;
+      padding: 30px 20px;
+      border: 1px solid #bcbcbc;
+    }
+
+    .expunge-border {
+      border-left: 0;
+    }
+
+    // END - image offsets
+
+  }
+
+  // END - Landing Page Specific Styling
+
+  // START - Mobile Specific Styling
+
+  @media (max-width: $bootstrap-lg-width - 1px) {
+
+    .landing-famingtonway {
+
+      // START - mobile resets
+
+      .img-text-offset {
+        margin-top: 30px;
+      }
+
+      .img-text-offset-2 {
+        margin-top: 30px;
+      }
+
+      .full-width-mobile-reset {
+        width: 100%;
+        padding: 0;
+      }
+
+      .item-alt {
+        padding: 0;
+      }
+
+      .margin-reset {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      ul.planner-benefits {
+
+        li.expunge-mobile-border {
+          border: 0;
+        }
+
+        li {
+          padding-bottom: 10px;
+        }
+
+      }
+
+      // END - mobile resets
+
+      .img-module-top-padding {
+        padding-top: 20px;
+      }
+
+      .title-wrapper {
+        margin-bottom: 25px;
+      }
+
+      .text-center-mobile {
+        text-align: center;
+      }
+
+      .item {
+        margin-bottom: 20px;
+      }
+
+    }
+
+  }
+
+  // END - Mobile Specific Styling
+
+  // START - Sign up specific styling
+
+  .landing-famingtonway {
+
+    .sign-up {
+      display: none;
+    }
+
+    .membership_sign-in {
+      display: none;
+    }
+
+    .nav {
+
+      a {
+        color: $c-neutral-black;
+        cursor: pointer;
+      }
+
+      .tabs {
+        padding: 10px 0;
+        border-bottom: 1px solid $c-neutral-4;
+      }
+
+      .tabs:hover {
+        background-color: $c-neutral-1;
+      }
+
+      .active {
+        border-bottom-color: $c-neutral-black;
+      }
+
+    }
+
+    ul.tabs {
+
+      li {
+        display: inline-block;
+        width: 39%;
+        font-size: 1em;
+        font-weight: 400;
+        border-bottom: 1px solid #000000;
+      }
+
+      .tab-inactive {
+        border-color: #c1c1c1;
+        color: #c1c1c1;
+      }
+
+    }
+
+    .form {
+      padding: 0 20px;
+    }
+
+    .form-wrap {
+      width: 100%;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    .form-control {
+      margin-top: 5px;
+    }
+
+    .sign-up-form {
+
+      h3 {
+        padding-top: 10px;
+      }
+
+    }
+
+    .cta-wrap {
+      margin-bottom: 20px;
       text-align: center;
     }
 
-    .heading {
-      margin: 0 0 40px 0;
-      text-transform: none;
-      font-family: $font-heading;
-      font-size: 3.125em;
+    .custom-form-element {
+      margin-top: 30px;
 
-      em span {
+      label {
+        display: inline-block;
+        border: 0;
+        padding: 0;
+        margin: 0 20px 40px 20px;
+      }
+
+      span.color-picker {
+        position: relative;
+        top: 5px;
+        left: 40px;
+        font-size: 1.2em;
+      }
+
+      label:after {
+        width: 100%;
+      }
+
+      .swatch-preview {
+        width: 30px;
+        height: 30px;
+
+      }
+
+    }
+
+    .cascading-form {
+      padding-bottom: 20px;
+
+      label {
         display: block;
-        font-size: 0.64em;
-      }
+        margin: 10px;
 
+      }
+      .selected-state {
+        font-weight: bold;
+        text-decoration: underline;
+      }
     }
-
   }
 
-  .align-left{
-    left: 0 !important;
-  }
-
-  // END - section-together
-
-  .panel-more-dresses {
-    margin-top: 0;
-  }
-
-  .carousel-strap {
-    margin-bottom: 50px;
-  }
-
-  @include desktop {
-
-    & {
-
-      .btn {
-        padding-left: 20px;
-        padding-right: 20px;
+  @media (max-width: $bootstrap-lg-width - 1px) {
+    .landing-famingtonway {
+      ul.tabs {
+        li {
+          width: 27%;
+        }
       }
-
-      .heading-secondary {
-        margin: 60px 0;
-
-        &.heading-width-md {
-          margin-left: 28%;
-          margin-right: 28%;
-        }
-
-        &.heading-width-sml {
-          margin-left: 36%;
-          margin-right: 36%;
-        }
-
-      }
-
-      .hero-wrap {
-
-        .copy-wrap {
-          margin-top: -15px;
-          padding: 0 0 30px 0;
-        }
-
-        .title {
-          display: none;
-          visibility: hidden;
-        }
-
-      }
-
-      .section-steps {
-
-        .outer-wrap {
-          border-bottom: solid $c-neutral-black 1px;
-        }
-
-        .media-wrap {
-          border-top: solid $c-neutral-black 1px;
-        }
-
-        .inner-left,
-        .inner-right {
-          float: left;
-          width: 50%;
-          min-height: 1px;
-        }
-
-        .inner-left {
-          margin-top: 0;
-        }
-
-        .inner-right {
-          padding-top: 27px;
-        }
-
-        .btn-wrap {
-          display: none;
-          visibility: hidden;
-        }
-
-        ul {
-          padding-left: 12%;
-          padding-right: 12%;
-        }
-
-      }
-
-      .section-register {
-
-        .media-wrap {
-          float: left;
-          width: 50%;
-        }
-
-      }
-
-      .section-together {
-        min-height: 400px;
-
-        .content-wrap-outer {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 50%;
-          height: 100%;
-        }
-
-        .content-wrap-inner {
-          display: table;
-          width: 100%;
-          height: 100%;
-        }
-
-        .content-wrap {
-          display: table-cell;
-          vertical-align: middle;
-          padding: 0 40px;
-        }
-
-        .media-wrap {
-          width: 50%;
-          float: left;
-          left: 50%;
-        }
-
-        &.image-left {
-
-          .media-wrap {
-            left: 0;
-          }
-
-          .content-wrap-outer {
-            left: 50%;
-          }
-
-        }
-
-        .heading {
-          font-size: 3.75em;
-
-          &.alt-size {
-            font-size: 3.125em;
-          }
-
-        }
-
-      }
-
-      .create-wedding-board-wrap {
-        margin-top: 20px;
-      }
-
     }
-
   }
 
-  @media (min-width: $bootstrap-lg-width) {
-
-    & .section-steps ul {
-      padding-top: 30px;
-    }
-
-  }
-
+  // END - Sign up specific styling
 }
