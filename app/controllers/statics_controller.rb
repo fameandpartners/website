@@ -123,13 +123,6 @@ class StaticsController < ApplicationController
     render :template => 'statics/unidays_lp', :layout => 'redesign/application'
   end
 
-  def wedding_parties
-    @title = "Wedding & Parties | Beautiful Dresses - Fame & Partners"
-    @description = "Discover beautiful dresses for wedding and parties at Fame & Partners"
-    render :template => 'landing_pages/wedding_parties', :layout => 'redesign/application'
-  end
-
-
 # =======================================================================
 # OLD PAGES
 # =======================================================================

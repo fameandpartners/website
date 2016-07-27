@@ -197,7 +197,6 @@ FameAndPartners::Application.routes.draw do
     get '/shop-social' => 'products/collections#show', :as => :shop_social
 
     # Wedding & Parties landing pages
-    get '/wedding' => 'statics#wedding_parties', :as => :wedding_parties
     get '/wedding/bohemian' => 'products/collections#show', :permalink => 'wedding-modern-bohemian-collection', :as => :wedding_bohemian_collection
     get '/wedding/classic' => 'products/collections#show', :permalink => 'wedding-contemporary-classic-collection', :as => :wedding_classic_collection
 
