@@ -1,0 +1,351 @@
+= render partial: 'landing_pages/common'
+
+.page-content.lookbook-v2-page.relative
+
+  // Hero tile
+  .main-hero-wrap.hero-wrap.copy-left.no-margin
+    picture.media-wrap.keep-ratio.img-as-block
+      .inner-wrap
+        / TODO: add real imagery
+        source media='(max-width: 1023px)' srcset='#{image_path("landingpages/weddings-parties/hero-mob.jpg")}'
+        source media='(min-width: 1024px)' srcset='#{image_path("landingpages/weddings-parties/hero-full.jpg")}'
+        img src='#{image_path("landingpages/weddings-parties/hero-full.jpg")}' srcset='
+          #{image_path("landingpages/weddings-parties/hero-mob.jpg")} 1023w,
+          #{image_path("landingpages/weddings-parties/hero-full.jpg")} 1024w' alt='Wedding & Parties. A collection celebrating magical moments with those you love; special connections against a cityscape of anonymity - at weddings, parties or whatever.'
+
+    .content-wrap
+      .container
+        .row
+          .col-md-6.col-md-offset-3
+            .copy-wrap.text-center.white-text
+              h1.heading
+                span Weddings & Parties
+              .sub-heading
+                | A collection celebrating magical moments with those you love; special connections against a cityscape of anonymity - at weddings, parties or whatever.
+
+  // F&P Capsule tag
+  section.section-box.container-fluid.no-padding.no-margin.top-overlay.section-intro
+    .row
+      .col-md-12.heading-overlay-wrapper
+        h2.heading-overlay F&P Capsule
+
+  .local-navigation-wrapper.container-fluid
+    .row
+      .local-navigation.js-float-menu-on-scroll
+        .col-md-10.col-md-offset-1
+          ul.nav
+            li.link #{link_to "Modern Bride", "#look1"}
+            li.link #{link_to "Rehearsal dinner", "#look2"}
+            li.link #{link_to "The Bridesmaid", "#look3"}
+            li.link #{link_to "Wedding Guests", "#look4"}
+            li.link #{link_to "The After Party", "#look5"}
+
+  // Look 1
+  / TODO: add real copy
+  / TODO: add real image
+  / TODO: add real prices
+  / TODO: add real link
+  - current_dress_name = "Allegra"
+  - current_dress_link = "#{dresses_path}/dress-allegra-680?color=pale-pink"
+  - current_collection_link = "javascript:;"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$289"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$279"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#look1
+    .row
+      .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
+        h2.heading-overlay The Modern Bride
+
+    .row.vertical-align-copy
+      .col-md-6.content-img
+        = link_to current_dress_link
+          = image_tag 'landingpages/weddings-parties/look-01.jpg', srcset: "#{image_path("landingpages/weddings-parties/look-01-mob.jpg")} 1023w,
+            #{image_path("landingpages/weddings-parties/look-01.jpg")} 1024w", class: 'img-responsive', alt: "The Modern Bride Dress"
+
+      .col-md-4.col-md-offset-1.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+        .copy-wrap
+
+          h3 <em>The</em> Dress
+          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt maiores molestias qui, ullam minima. Doloribus, repellendus vitae sint a, eligendi natus maxime distinctio quis quam, praesentium harum alias. Enim, doloremque.
+
+          .cta-product-caption.copy-highlight
+            | Pictured
+            span.hidden-md.hidden-lg  above:
+            span.hidden-xs.hidden-sm  left:
+            |  #{link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to 'javascript:;', class: 'cta-link'
+               | Shop the collection
+
+  .products-grid
+    .container
+      .row
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
+
+      .row
+        .col-md-12.text-center
+          .cta-wrapper
+            = link_to current_collection_link
+              span.btn-md.btn-featured
+               | Shop & customize
+
+  // Look 2
+  / TODO: add real copy
+  / TODO: add real image
+  / TODO: add real prices
+  / TODO: add real link
+  - current_dress_name = "Kirrily"
+  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - current_collection_link = "javascript:;"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$379"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$299"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#look2
+    .row
+      .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
+        h2.heading-overlay Rehearsal dinner
+
+    .row.vertical-align-copy
+      .col-md-7.content-img
+        = link_to current_dress_link
+          = image_tag 'landingpages/weddings-parties/look-02.jpg', srcset: "#{image_path("landingpages/weddings-parties/look-02-mob.jpg")} 1023w,
+            #{image_path("landingpages/weddings-parties/look-02.jpg")} 1024w", class: 'img-responsive', alt: "Rehearsal Dinner Dress"
+
+      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+        .copy-wrap
+
+          h3 It’s nearly time
+          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt maiores molestias qui, ullam minima. Doloribus, repellendus vitae sint a, eligendi natus maxime distinctio quis quam, praesentium harum alias. Enim, doloremque.
+
+          .cta-product-caption.copy-highlight
+            | Pictured
+            span.hidden-md.hidden-lg  above:
+            span.hidden-xs.hidden-sm  left:
+            |  #{link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to 'javascript:;', class: 'cta-link'
+               | Shop the collection
+
+  .products-grid
+    .container
+      .row
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 15, customWrapper: 'col-md-3 col-xs-6'}
+
+      .row
+        .col-md-12.text-center
+          .cta-wrapper
+            = link_to current_collection_link
+              span.btn-md.btn-featured
+               | Shop & customize
+
+  // Look 3
+  / TODO: add real copy
+  / TODO: add real image
+  / TODO: add real prices
+  / TODO: add real link
+  - current_dress_name = "Maaike"
+  - current_dress_link = "#{dresses_path}/dress-maaike-1065?color=black"
+  - current_collection_link = "javascript:;"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$299"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$249"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#look3
+    .row
+      .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
+        h2.heading-overlay The Bridesmaid
+
+    .row.vertical-align-copy
+      .col-md-7.content-img
+        = link_to current_dress_link
+          = image_tag 'landingpages/weddings-parties/look-03.jpg', srcset: "#{image_path("landingpages/weddings-parties/look-03-mob.jpg")} 1023w,
+            #{image_path("landingpages/weddings-parties/look-03.jpg")} 1024w", class: 'img-responsive', alt: "The Bridesmaid Dress"
+
+      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+        .copy-wrap
+
+          h3 The girls
+          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt maiores molestias qui, ullam minima. Doloribus, repellendus vitae sint a, eligendi natus maxime distinctio quis quam, praesentium harum alias. Enim, doloremque.
+
+          .cta-product-caption.copy-highlight
+            | Pictured
+            span.hidden-md.hidden-lg  above:
+            span.hidden-xs.hidden-sm  left:
+            |  #{link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to 'javascript:;', class: 'cta-link'
+               | Shop the collection
+
+  .products-grid
+    .container
+      .row
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 23, customWrapper: 'col-md-3 col-xs-6'}
+
+      .row
+        .col-md-12.text-center
+          .cta-wrapper
+            = link_to current_collection_link
+              span.btn-md.btn-featured
+               | Shop & customize
+
+  // Look 4
+  / TODO: add real copy
+  / TODO: add real image
+  / TODO: add real prices
+  / TODO: add real link
+  - current_dress_name = "Dara Jumpsuit"
+  - current_dress_link = "#{dresses_path}/dress-dara-jumpsuit-1056?color=looking-glass"
+  - current_collection_link = "javascript:;"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$289"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$229"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#look4
+    .row
+      .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
+        h2.heading-overlay Wedding Guests
+
+    .row.vertical-align-copy
+      .col-md-7.content-img
+        = link_to current_dress_link
+          = image_tag 'landingpages/weddings-parties/look-04.jpg', srcset: "#{image_path("landingpages/weddings-parties/look-04-mob.jpg")} 1023w,
+            #{image_path("landingpages/weddings-parties/look-04.jpg")} 1024w", class: 'img-responsive', alt: "Wedding Guests Dress"
+
+      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+        .copy-wrap
+
+          h3 Frock up
+          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt maiores molestias qui, ullam minima. Doloribus, repellendus vitae sint a, eligendi natus maxime distinctio quis quam, praesentium harum alias. Enim, doloremque.
+
+          .cta-product-caption.copy-highlight
+            | Pictured
+            span.hidden-md.hidden-lg  above:
+            span.hidden-xs.hidden-sm  left:
+            |  #{link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to 'javascript:;', class: 'cta-link'
+               | Shop the collection
+
+  .products-grid
+    .container
+      .row
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 24, rangeTo: 31, customWrapper: 'col-md-3 col-xs-6'}
+
+      .row
+        .col-md-12.text-center
+          .cta-wrapper
+            = link_to current_collection_link
+              span.btn-md.btn-featured
+               | Shop & customize
+
+  // Look 5
+  / TODO: add real copy
+  / TODO: add real image
+  / TODO: add real prices
+  / TODO: add real link
+  - current_dress_name = "Murphy"
+  - current_dress_link = "#{dresses_path}/dress-murphy-1091?color=black"
+  - current_collection_link = "javascript:;"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$289"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$229"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#look5
+    .row
+      .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
+        h2.heading-overlay The After Party
+
+    .row.vertical-align-copy
+      .col-md-7.content-img
+        = link_to current_dress_link
+          = image_tag 'landingpages/weddings-parties/look-05.jpg', srcset: "#{image_path("landingpages/weddings-parties/look-05-mob.jpg")} 1023w,
+            #{image_path("landingpages/weddings-parties/look-05.jpg")} 1024w", class: 'img-responsive', alt: "The After Party Dress"
+
+      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+        .copy-wrap
+
+          h3 Dance the night away
+          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt maiores molestias qui, ullam minima. Doloribus, repellendus vitae sint a, eligendi natus maxime distinctio quis quam, praesentium harum alias. Enim, doloremque.
+
+          .cta-product-caption.copy-highlight
+            | Pictured
+            span.hidden-md.hidden-lg  above:
+            span.hidden-xs.hidden-sm  left:
+            |  #{link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to 'javascript:;', class: 'cta-link'
+               | Shop the collection
+
+  .products-grid
+    .container
+      .row
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 32, rangeTo: 39, customWrapper: 'col-md-3 col-xs-6'}
+
+      .row
+        .col-md-12.text-center
+          .cta-wrapper
+            = link_to current_collection_link
+              span.btn-md.btn-featured
+               | Shop & customize
+
+  // Section: Related navigation
+  section.section-box.container.section-related.same-height-cols
+    .row
+      .col-md-6.copy-img-side-by-side
+        .item.bordered.item-alt.section-wedding-planner
+          .row
+            .col-sm-5.copy-side
+              .content-wrapper
+                p Plan your big day with the Fame Wedding Planner.
+
+                .link-align-bottom
+                  = link_to 'javascript:;'
+                    span.cta-link-arrow-right
+                      span.cta-link Start your
+                      span.copy-highlight  Moodboard
+                      i.icon.icon-arrow-right
+
+            .col-sm-7.img-side
+              = link_to 'javascript:;'
+                = image_tag 'http://fakeimg.pl/350x200/?text=img', class: 'img-responsive', alt: 'Start your Moodboard'
+
+      .col-md-6.copy-img-side-by-side
+        .item.bordered.item-alt.section-styling-session
+          .row
+            .col-sm-5.copy-side
+              .content-wrapper
+                p Need some style guidance? Book a free styling session.
+
+                .link-align-bottom
+                  = link_to styling_session_path
+                    span.cta-link-arrow-right
+                      span.cta-link Contact
+                      span.copy-highlight  Amber
+                      i.icon.icon-arrow-right
+
+            .col-sm-7.img-side
+              = link_to styling_session_path
+                = image_tag 'http://fakeimg.pl/350x200/?text=img', class: 'img-responsive', alt: 'Book a free styling session'
+
