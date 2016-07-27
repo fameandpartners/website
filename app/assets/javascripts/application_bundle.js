@@ -275,6 +275,7 @@ var PdpGallery = function (_React$Component) {
     key: 'handleLoad',
     value: function handleLoad(image) {
       image.target.style.marginLeft = this.calculateOffset(image.target) + 'px';
+      image.target.parentNode.className += ' is-loaded';
     }
   }, {
     key: 'handleResize',
@@ -347,7 +348,8 @@ var PdpGallery = function (_React$Component) {
             { className: 'media-wrap', key: index },
             _react2.default.createElement('span', { id: id, className: 'scrollspy-trigger' }),
             _react2.default.createElement('img', { src: image.url, alt: image.alt,
-              className: 'js-gallery-image', onLoad: _this3.handleLoad })
+              className: 'js-gallery-image', onLoad: _this3.handleLoad }),
+            _react2.default.createElement('span', { className: 'loader' })
           );
         }
       });

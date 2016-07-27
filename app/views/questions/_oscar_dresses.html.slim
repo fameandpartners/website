@@ -1,26 +1,22 @@
-h1
-  em You’re walking the red carpet!
-  ' WHICH DRESS WOULD YOU WEAR?
-.subtitle
-  span CHOOSE AS MANY AS YOU LIKE
-.photos-wrapper
-  .loader
-  .scrollable
-    .photos.randomize.items-box
-      - question.answers.each do |answer|
-        .item.unloaded
-          label
-            = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code
-            img src="" alt="" data-src="#{image_path("style_quiz/redcarpet/#{answer.code}.jpg")}"
-            span.selected selected
-  .photos-nav
-    .hidden-on-phone
-      .instructions Use your mouse/trackpad or click the arrows to scroll through the photos
-      .up
-        .arrows-line-vertical
-      .down
-        .arrows-line-vertical
-    .visible-on-phone
-      .instructions 
-        ' Drag across to scroll through photos
-        span.icon.icon-hr-right
+.row
+  .col-md-4
+    .heading
+      h1 Your red carpet look
+      h2.h5 Choose as many as needed.
+  .col-md-8
+    .photos-wrapper
+      .loader
+      .scrollable
+        .row.photos.randomize.items-box
+          - question.answers.each do |answer|
+            .col-xs-6.col-sm-6.col-md-4.item.unloaded
+              label.media-wrap
+                = check_box_tag "quiz[questions][#{question.id}][answer][codes][]", answer.code
+                img src="" alt="" data-src="#{image_path("style_quiz/redcarpet/#{answer.code}.jpg")}"
+                .selected
+                  .outer-wrap
+                    .inner-wrap
+                      div
+                        .btn.btn-black.btn-xs Selected
+                      div
+                        span Deselect
