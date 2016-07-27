@@ -31,6 +31,11 @@ Spree::ShipmentMailer.class_eval do
         shipping_amount:       shipment.order.adjustments.where(label: "Shipping").first.try(:amount).to_s,
         tax:                   nil
       )
+    rescue Customerio::Client::InvalidResponse => e
+      response = HashWithIndifferentAccess[e.response.to_hash]
+      response[:body] = e.response.body
+      Raven.capture_exception(e, extra: { response: response })
+      NewRelic::Agent.notice_error(e)
     rescue StandardError => e
       Raven.capture_exception(e)
       NewRelic::Agent.notice_error(e)

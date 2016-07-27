@@ -69,7 +69,6 @@ class Populator
     def add_product_to_cart
       spree_populator = Spree::OrderPopulator.new(order, currency)
 
-
       if spree_populator.populate(variants: { product_variant.id => product_quantity })
         add_making_options
 
@@ -173,7 +172,7 @@ class Populator
             pcv.custom          = true
           end
         else
-          raise Errors::ProductOptionNotAvailable.new("product color ##{ product_color_id } not available")
+          raise Errors::ProductOptionNotAvailable.new("product color ##{ color_id } not available")
         end
 
         color

@@ -14,7 +14,11 @@ module ManualOrder
     end
 
     def create
-      render 'new'
+     if manual_order_form.validate(params[:forms_manual_order])
+       manual_order_form.save { |hash| manual_order_form.save_order(hash) }
+
+       redirect_to manual_orders_path, flash: { success: 'Order has been created successfully' }
+     end
     end
 
     def sizes_options
@@ -48,7 +52,7 @@ module ManualOrder
     private
 
     def manual_order_form
-      @manual_order_form ||= Forms::ManualOrderForm.new(Spree::Product.new)
+      @manual_order_form ||= Forms::ManualOrderForm.new(Spree::Order.new)
     end
 
   end

@@ -21,7 +21,7 @@ $ ->
   priceUrl = '/fame_admin/manual_orders/prices/:product_id/:size_id/:color_id/:currency'
   priceTag = $('h4.price')
 
-  siteVersionSelect = $('#forms_manual_order_site_version')
+  currencySelect = $('#forms_manual_order_currency')
 
   clearAll = ->
     colorSelect.html('<option></option>')
@@ -60,7 +60,7 @@ $ ->
     url = priceUrl.replace(/:product_id/, styleSelect.val())
     .replace(/:size_id/, sizeSelect.val())
     .replace(/:color_id/, colorSelect.val())
-    .replace(/:currency/, siteVersionSelect.val())
+    .replace(/:currency/, currencySelect.val())
     $.getJSON url, (data) =>
       priceTag.html("$#{data.price} #{data.currency}")
 
@@ -95,6 +95,6 @@ $ ->
       updateImage()
       updatePrice()
 
-  siteVersionSelect.on 'change', =>
+  currencySelect.on 'change', =>
     if sizeSelect.val() and colorSelect.val()
       updatePrice()

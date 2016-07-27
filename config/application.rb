@@ -19,14 +19,20 @@ module FameAndPartners
 
     # [HACK] Replacement for the dotenv-rails gem, was not compatible with spree 1.3
     # [TODO] Remove this and config/envvar.rb when no longer needed
-    if Rails.env.development? || Rails.env.test?
-      require "#{Rails.root}/config/envvar.rb"
-      %w(.env .env.local .env.test).each do |file_name|
-        envfile = File.join(Rails.root, file_name)
-        if File.exists?(envfile)
-          Envvar.load envfile
-          break
-        end
+    if Rails.env.test?
+      require Rails.root.join('lib', 'envvar', 'envvar')
+      Envvar.load Rails.root.join('.env.test')
+    end
+
+    if Rails.env.development?
+      require Rails.root.join('lib', 'envvar', 'envvar')
+
+      begin
+        Envvar.load Rails.root.join('.env')
+      rescue Errno::ENOENT => _
+        puts '-------WARNING--------'
+        puts 'ENV FILE missing. Please, create an ".env" based on ".env.example"'
+        puts '----------------------'
       end
     end
 

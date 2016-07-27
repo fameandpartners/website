@@ -6,20 +6,12 @@ ruby:
   // Featured section
   .main-hero-wrap.hero-wrap.copy-left
     = link_to dresses_path
-      picture.media-wrap.keep-ratio
-        .inner-wrap
           source media='(max-width: 1023px)' srcset='#{image_path("homepage/hero-featured/featured-mob.jpg")}'
           source media='(min-width: 1024px)' srcset='#{image_path("homepage/hero-featured/featured-full.jpg")}'
           img src='#{image_path("homepage/hero-featured/featured-full.jpg")}' srcset='
             #{image_path("homepage/hero-featured/featured-mob.jpg")} 1023w,
             #{image_path("homepage/hero-featured/featured-full.jpg")} 1024w' alt="It's a Date. Easy looks that are sexy, comfortable and made for you."
-
-      .content-wrap
-        .container
-          .row
             .col-md-4.col-md-offset-1
-              .copy-wrap
-                h1.heading
                   span It’s a Date
                   span.sub-heading
                     | Easy looks that are sexy, comfortable and made for you.
