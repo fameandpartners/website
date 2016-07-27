@@ -1,58 +1,125 @@
-= render :partial => '/pages/robots'
+= render partial: '/pages/robots'
 
-= render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
+= render partial: '/products/collections/javascript', locals: { page_size: 99 }
 
 .landing-famingtonway
-  = react_component('HeroCarousel', skin: 'skin-light',
-    assets: [{link: build_taxon_path("wedding"), src: '/assets/landingpages/brides/hero', alt: 'The Brides'},
-      {link: build_taxon_path("bridesmaid"), src: '/assets/landingpages/famingtonway/hero', alt: 'The Bridemaids'},
-      {link: build_taxon_path("wedding-guests"), src: '/assets/landingpages/guest/hero', alt: 'The Guest'}])
+  .landing-page
+    .main-hero-wrap
+      picture.media-wrap.keep-ratio style="padding-bottom: 17%"
+        .inner-wrap
+          source media='(max-width: 768px)' srcset='#{image_path("landingpages/styling-session/header-tile-mobile.jpg")}'
+          source media='(min-width: 769px)' srcset='#{image_path("landingpages/styling-session/header-tile.jpg")}'
+          img src='#{image_path("landingpages/styling-session/header-tile.jpg")}' srcset='
+            #{image_path("landingpages/styling-session/header-tile-mobile.jpg")} 768w,
+            #{image_path("landingpages/styling-session/header-tile.jpg")} 1024w' alt='background image'
 
-  .container#section-main
-    .row
-      = render 'landing_pages/weddings/get_started', wedding_source: 'bridesmaids', return_path: bridesmaid_landing_page_path
-
-      .col-md-12
-        h2.heading-secondary Bridesmaid dresses your girls will love...and wear again.
-        section.carousel-strap
-          .outer-wrap
-            // TODO: update path
-            = react_component('ProductsCarousel', path: dresses_path(pids: page.variables['carousel_pids'].to_s.split(','), limit: page.variables['limit']))
-
-      .col-md-12.text-center.cta
-        = link_to 'SHOP OUR EXCLUSIVE FAME WEDDINGS BRIDESMAID COLLECTION', build_taxon_path('bridesmaid'), class: 'btn btn-black btn-multiline'
-
-
-      .col-md-12.section-register
-        .outer-wrap.mobile-change-order
-          .media-wrap.position-2
-            = image_tag 'landingpages/famingtonway/tile-register-1.jpg'
-          .media-wrap.position-1
-            = image_tag 'landingpages/famingtonway/tile-register-2.jpg'
+        .outer-wrap.title-wrapper.text-center
           .inner-wrap
-            .content-wrap-outer
-              .content-wrap-inner
-                .content-wrap
-                  h2.heading Get married<br>with fame
-                  = link_to 'Register now', new_moodboard_path, class:'btn btn-lowlight'
+            h1 The Wedding Planner
 
-      .col-md-12
-        .panel-split
-          .content-wrap-outer
-            .content-wrap-inner
-              .content-wrap
-                h2.heading Those who <em>play </em>together STAY together!
-                = link_to 'SHOP BRIDESMAIDS DRESSES', build_taxon_path('bridesmaid'), class:'btn btn-lowlight'
-          picture
-            = link_to 'https://www.instagram.com/fameweddings/', class:'media-wrap'
-              source media='(max-width: 768px)' srcset='#{image_path("landingpages/famingtonway/tile-stay-together-mob.jpg")}'
-              source media='(min-width: 769px)' srcset='#{image_path("landingpages/famingtonway/tile-stay-together.jpg")}'
-              img src='#{image_path("landingpages/famingtonway/tile-stay-together.jpg")}' srcset='
-                #{image_path("landingpages/famingtonway/tile-stay-together-mob.jpg")} 768w,
-                #{image_path("landingpages/famingtonway/tile-stay-together.jpg")} 1024w'
+    .container#section-main
+      .col-md-12.heading-overlay-wrapper.overlay-offset
+        h2.heading-overlay Fame Weddings
 
-      .col-md-12
-        h2.heading-secondary With love x
+      section.row#landing-page
+        .col-md-12.text-center
+          h3 Plan your big day with Fame </br> Gather your girls and let the fun begin.
+          ul.planner-benefits
+            li.expunge-mobile-border
+              h4 <em>Save</em> dresses to a moodboard
+            li.expunge-mobile-border
+              h4 <em>Comment</em> on your choices
+            li.expunge-mobile-border
+              h4 <em>Share</em> with your bridal party
+            li.expunge-mobile-border
+              h4 <em>Vote</em> on the ones you love
 
-    .row
-      = render partial: 'shared/redesign/more_dresses' , locals: {img_link: "landingpages/tile-footer.jpg"}
+      .row
+        .col-md-12.text-center
+          = link_to 'javascript:;', class: 'inline-btn'
+              span.btn-xs.btn-featured
+                | Start building your <span class="copy-highlight">Moodboard</span>
+      section.row.section-box
+        .col-md-12.heading-overlay-wrapper
+          h2.heading-overlay How it works
+        .col-md-4
+          .item.bordered
+            = image_tag 'moodboard/how_it_works/how-it-works-1.jpg', class: 'img-responsive'
+            .col-md-2.heading-overlay-wrapper.overlay-offset.col-centered
+              h2.heading-overlay 1
+            h3 <em>Sign up</em> and answer a few simple questions about your wedding day plans
+
+        .col-md-4
+          .item.bordered
+            = image_tag 'moodboard/how_it_works/how-it-works-2.jpg', class: 'img-responsive'
+            .col-md-2.heading-overlay-wrapper.overlay-offset.col-centered
+              h2.heading-overlay 2
+            h3 <em>Create</em> as many boards as you like and add your favourite dress to them
+
+        .col-md-4
+          .item.bordered
+            = image_tag 'moodboard/how_it_works/how-it-works-3.jpg', class: 'img-responsive'
+            .col-md-2.heading-overlay-wrapper.overlay-offset.col-centered
+              h2.heading-overlay 3
+            h3 <em>Share</em> your board with you bridal party so they can vote on favorites
+
+      section.row.section-box#group-discount
+        .col-md-6.col-md-push-6
+          .item-alt.styling-session
+            .row
+              .col-md-7.full-width-mobile-reset
+                = link_to styling_session_path
+                  = image_tag 'landingpages/famingtonway/famington-1.png', class: ''
+
+        .col-md-6.col-md-pull-6.img-text-offset.text-center-mobile
+          h3 <em>Receive</em> a group discount code to purchase your selected Bridal Party dresses.
+          p These are the styles  that have stood the test of time. We collect information from you when you register on our site
+          .inline-btn.begin-moodboard
+            span.btn-xs.btn-featured
+              | Start building your <span class="copy-highlight">Moodboard</span>
+
+      section.row.section-box.bordered.margin-reset
+        .col-md-12.heading-overlay-wrapper.overlay-offset
+          h2.heading-overlay Wedding Concierge
+        .col-md-6.col-sm-6
+          .item-alt.styling-session
+            .row
+              .col-md-7.img-module-top-padding
+                = link_to styling_session_path
+                  = image_tag 'landingpages/famingtonway/famington-2.png', class: ''
+        .col-md-6.img-text-offset-2.title-wrapper.text-center-mobile
+          h3 <em>Receive</em> a group discount code to purchase your selected Bridal Party dresses.
+          p These are the styles  that have stood the test of time. We collect information from you when you register on our site
+          = link_to 'javascript:;', class: 'inline-btn'
+            span.btn-xs.btn-featured
+              | Book your <span class="copy-highlight">STYLING SESSION</span>
+
+      .centered-cta
+        .col-md-12.text-center
+          .inline-btn.begin-moodboard
+              span.btn-xs.btn-featured
+                | Start building your <span class="copy-highlight">Moodboard</span>
+
+  // step 2
+  .sign-up
+    .container#section-main
+      section.row#registration-form
+        .col-md-12.col-centered
+
+          = render 'landing_pages/weddings/signup_login', return_path: bridesmaid_landing_page_path
+
+  javascript:
+    // This function changes the
+    $('.js-trigger-signup').click(function() {
+
+      $('.membership_sign-up, .membership_sign-in').fadeToggle(200);
+
+    })
+
+    $('.begin-moodboard').click(function() {
+
+      $('.landing-page').fadeToggle(200);
+      $('.sign-up').fadeToggle(200);
+
+    })
+
