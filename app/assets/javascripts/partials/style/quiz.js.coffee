@@ -15,6 +15,9 @@ window.style.Quiz = class StyleQuiz
     @container.find('.next a').click _.bind(@nextStepEventHandler, @)
     @container.find('.prev a').click _.bind(@previousStepEventHandler, @)
 
+    # TODO: this is usef for capture email step. Shouldn't live with style quiz logic
+    @container.find('.submit-quiz-capture-email').click _.bind(@nextStepEventHandler, @)
+
     @init()
 
   init: () ->
@@ -53,7 +56,7 @@ window.style.Quiz = class StyleQuiz
     event.preventDefault()
 
     if @isCurrentStepEmaiInput() and not @isEmailValid()
-      alert('Invalid email')
+      $('.quiz-capture-email .error').removeClass('hidden')
       return
 
     if @isCurrentStepFinished()

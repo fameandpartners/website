@@ -1,8 +1,14 @@
-.row
+.row.quiz-capture-email
   .col-md-4
     .heading
-      h1 Email
-      h2.h5 Enter your email.
+      h2 Please, fill in your email!
   .col-md-8
-    .enter_email
-      = form.text_field 'email', placeholder: 'Enter your email'
+    .row.form-global
+      .col-md-12
+        label
+          | To check which style fits you the best, please, type your email below:
+        .form-group
+          label.error.hidden Email is invalid
+          = form.text_field 'email', class: 'form-control form-control-md', required: true, placeholder: 'Enter your email'
+      .col-md-12
+        a.submit-quiz-capture-email.btn.btn-block.btn-black.btn-xs href="#" I'm ready to check my style!
