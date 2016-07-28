@@ -25,14 +25,23 @@
       .col-md-12.text-center
         h2.title Plan your big day with Fame <br> Gather your girls and let the fun begin.
         ul
-          li <em>Save</em> dresses to a moodboard
-          li <em>Comment</em> on your choices
-          li <em>Share</em> with your bridal party
-          li <em>Vote</em> on the ones you love
-        = link_to 'javascript:;'
-          .btn-md.btn-featured Start building your <span class='copy-highlight'>Moodboard</span>
+          li
+            em Save
+            |  dresses to a moodboard
+          li
+            em Comment
+            |  on your choices
+          li
+            em Share
+            |  with your bridal party
+          li
+            em Vote
+            |  on the ones you love
+        a.btn-md.btn-featured.js-trigger-create-moodboard href="javascript:;"
+          | Start building your
+          span.copy-highlight  Moodboard
 
-        
+
     section.row.section-box
       .col-md-12.heading-overlay-wrapper
         h2.heading-overlay How it works
@@ -41,21 +50,27 @@
           = image_tag 'moodboard/how_it_works/how-it-works-1.jpg', class: 'img-responsive'
           .col-md-2.heading-overlay-wrapper.overlay-offset.col-centered
             h2.heading-overlay 1
-          h3 <em>Sign up</em> and answer a few simple questions about your wedding day plans
+          h3
+            em Sign up
+            |  and answer a few simple questions about your wedding day plans
 
       .col-md-4
         .item.bordered
           = image_tag 'moodboard/how_it_works/how-it-works-2.jpg', class: 'img-responsive'
           .col-md-2.heading-overlay-wrapper.overlay-offset.col-centered
             h2.heading-overlay 2
-          h3 <em>Create</em> as many boards as you like and add your favourite dress to them
+          h3
+            em Create
+            |  as many boards as you like and add your favourite dress to them
 
       .col-md-4
         .item.bordered
           = image_tag 'moodboard/how_it_works/how-it-works-3.jpg', class: 'img-responsive'
           .col-md-2.heading-overlay-wrapper.overlay-offset.col-centered
             h2.heading-overlay 3
-          h3 <em>Share</em> your board with you bridal party so they can vote on favorites
+          h3
+            em Share
+            |  your board with you bridal party so they can vote on favorites
 
     section.row.section-box#group-discount
       .col-md-6.col-md-push-6
@@ -66,11 +81,14 @@
                 = image_tag 'landingpages/famingtonway/famington-1.png', class: ''
 
       .col-md-6.col-md-pull-6.img-text-offset.text-center-mobile
-        h3 <em>Receive</em> a group discount code to purchase your selected Bridal Party dresses.
+        h3
+          em Receive
+          |  a group discount code to purchase your selected Bridal Party dresses.
         p These are the styles  that have stood the test of time. We collect information from you when you register on our site
         .inline-btn.begin-moodboard
-          span.btn-xs.btn-featured
-            | Start building your <span class="copy-highlight">Moodboard</span>
+          a.btn-xs.btn-featured.js-trigger-create-moodboard href="javascript:;"
+            | Start building your
+            span.copy-highlight  Moodboard
 
     section.row.section-box.bordered.margin-reset
       .col-md-12.heading-overlay-wrapper.overlay-offset
@@ -84,15 +102,17 @@
       .col-md-6.img-text-offset-2.text-center-mobile
         h3 <em>Receive</em> a group discount code to purchase your selected Bridal Party dresses.
         p These are the styles  that have stood the test of time. We collect information from you when you register on our site
-        = link_to 'javascript:;', class: 'inline-btn'
+        = link_to styling_session_path, class: 'inline-btn'
           span.btn-xs.btn-featured
-            | Book your <span class="copy-highlight">STYLING SESSION</span>
+            | Book your
+            span.copy-highlight  STYLING SESSION
 
     .centered-cta
       .col-md-12.text-center
         .inline-btn.begin-moodboard
-            span.btn-xs.btn-featured
-              | Start building your <span class="copy-highlight">Moodboard</span>
+          a.btn-md.btn-featured.js-trigger-create-moodboard href="javascript:;"
+            | Start building your
+            span.copy-highlight  Moodboard
 
 // step 2
 .sign-up
