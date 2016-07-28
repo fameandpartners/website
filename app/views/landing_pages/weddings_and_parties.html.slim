@@ -43,17 +43,19 @@
   // Look 1
   / TODO: add real copy
   / TODO: add real image
-  / TODO: add real prices
-  / TODO: add real link
-  - current_dress_name = "Allegra"
-  - current_dress_link = "#{dresses_path}/dress-allegra-680?color=pale-pink"
-  - current_collection_link = "javascript:;"
+  - current_dress_1_name = "Calafia"
+  - current_dress_1_link = "#{dresses_path}/dress-calafia-1009?color=ivory"
+  - current_dress_2_name = "Kelis"
+  - current_dress_2_link = "#{dresses_path}/dress-kelis-1067?color=pale-blue"
+  - current_collection_link = "#{dresses_path}/wedding"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$289"
+    - current_dress_1_price = "$399"
+    - current_dress_2_price = "$249"
   - else
     // USA - PRICE
-    - current_dress_price = "$279"
+    - current_dress_1_price = "$349"
+    - current_dress_2_price = "$199"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#look1
     .row
@@ -62,7 +64,7 @@
 
     .row.vertical-align-copy
       .col-md-6.content-img
-        = link_to current_dress_link
+        = link_to current_collection_link
           = image_tag 'landingpages/weddings-parties/look-01.jpg', srcset: "#{image_path("landingpages/weddings-parties/look-01-mob.jpg")} 1023w,
             #{image_path("landingpages/weddings-parties/look-01.jpg")} 1024w", class: 'img-responsive', alt: "The Modern Bride Dress"
 
@@ -76,16 +78,17 @@
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            |  #{link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link}
+            .product-info #{link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link}
+            .product-info #{link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link}
 
           .cta-wrapper
-            = link_to 'javascript:;', class: 'cta-link'
+            = link_to current_collection_link, class: 'cta-link'
                | Shop the collection
 
   .products-grid
     .container
       .row
-        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
 
       .row
         .col-md-12.text-center
@@ -97,17 +100,19 @@
   // Look 2
   / TODO: add real copy
   / TODO: add real image
-  / TODO: add real prices
-  / TODO: add real link
-  - current_dress_name = "Kirrily"
-  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
-  - current_collection_link = "javascript:;"
+  - current_dress_1_name = "Shaylyn"
+  - current_dress_1_link = "#{dresses_path}/dress-shaylyn-1054?color=ivory"
+  - current_dress_2_name = "Estelle"
+  - current_dress_2_link = "#{dresses_path}/dress-estelle-two-piece-852?color=black"
+  - current_collection_link = "#{dresses_path}/white"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$379"
+    - current_dress_1_price = "$399"
+    - current_dress_2_price = "$349"
   - else
     // USA - PRICE
-    - current_dress_price = "$299"
+    - current_dress_1_price = "$319"
+    - current_dress_2_price = "$349"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#look2
     .row
@@ -116,7 +121,7 @@
 
     .row.vertical-align-copy
       .col-md-7.content-img
-        = link_to current_dress_link
+        = link_to current_collection_link
           = image_tag 'landingpages/weddings-parties/look-02.jpg', srcset: "#{image_path("landingpages/weddings-parties/look-02-mob.jpg")} 1023w,
             #{image_path("landingpages/weddings-parties/look-02.jpg")} 1024w", class: 'img-responsive', alt: "Rehearsal Dinner Dress"
 
@@ -130,16 +135,17 @@
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            |  #{link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link}
+            .product-info #{link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link}
+            .product-info #{link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link}
 
           .cta-wrapper
-            = link_to 'javascript:;', class: 'cta-link'
+            = link_to current_collection_link, class: 'cta-link'
                | Shop the collection
 
   .products-grid
     .container
       .row
-        = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 15, customWrapper: 'col-md-3 col-xs-6'}
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
 
       .row
         .col-md-12.text-center
@@ -151,17 +157,15 @@
   // Look 3
   / TODO: add real copy
   / TODO: add real image
-  / TODO: add real prices
-  / TODO: add real link
-  - current_dress_name = "Maaike"
-  - current_dress_link = "#{dresses_path}/dress-maaike-1065?color=black"
-  - current_collection_link = "javascript:;"
+  - current_dress_name = "Lux"
+  - current_dress_link = "#{dresses_path}/dress-lux-1038?color=pastel-pink"
+  - current_collection_link = "#{dresses_path}/bridesmaid"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$299"
+    - current_dress_price = "$279"
   - else
     // USA - PRICE
-    - current_dress_price = "$249"
+    - current_dress_price = "$219"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#look3
     .row
@@ -184,16 +188,16 @@
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            |  #{link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link}
+            .product-info #{link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link}
 
           .cta-wrapper
-            = link_to 'javascript:;', class: 'cta-link'
+            = link_to current_collection_link, class: 'cta-link'
                | Shop the collection
 
   .products-grid
     .container
       .row
-        = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 23, customWrapper: 'col-md-3 col-xs-6'}
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 15, customWrapper: 'col-md-3 col-xs-6'}
 
       .row
         .col-md-12.text-center
@@ -205,17 +209,15 @@
   // Look 4
   / TODO: add real copy
   / TODO: add real image
-  / TODO: add real prices
-  / TODO: add real link
-  - current_dress_name = "Dara Jumpsuit"
-  - current_dress_link = "#{dresses_path}/dress-dara-jumpsuit-1056?color=looking-glass"
-  - current_collection_link = "javascript:;"
+  - current_dress_name = "Ziv"
+  - current_dress_link = "#{dresses_path}/dress-ziv-1037?color=champagne"
+  - current_collection_link = "#{dresses_path}/wedding-guests"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$289"
+    - current_dress_price = "$199"
   - else
     // USA - PRICE
-    - current_dress_price = "$229"
+    - current_dress_price = "$259"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#look4
     .row
@@ -238,16 +240,16 @@
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            |  #{link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link}
+            .product-info #{link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link}
 
           .cta-wrapper
-            = link_to 'javascript:;', class: 'cta-link'
+            = link_to current_collection_link, class: 'cta-link'
                | Shop the collection
 
   .products-grid
     .container
       .row
-        = render partial: 'pick_products_without_content', locals: {rangeFrom: 24, rangeTo: 31, customWrapper: 'col-md-3 col-xs-6'}
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 23, customWrapper: 'col-md-3 col-xs-6'}
 
       .row
         .col-md-12.text-center
@@ -259,17 +261,19 @@
   // Look 5
   / TODO: add real copy
   / TODO: add real image
-  / TODO: add real prices
-  / TODO: add real link
-  - current_dress_name = "Murphy"
-  - current_dress_link = "#{dresses_path}/dress-murphy-1091?color=black"
-  - current_collection_link = "javascript:;"
+  - current_dress_1_name = "Foxi"
+  - current_dress_1_link = "#{dresses_path}/dress-foxi-643?color=black"
+  - current_dress_2_name = "Romeo"
+  - current_dress_2_link = "#{dresses_path}/dress-romeo-994?color=black"
+  - current_collection_link = "#{dresses_path}/party"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$289"
+    - current_dress_1_price = "$229"
+    - current_dress_2_price = "$379"
   - else
     // USA - PRICE
-    - current_dress_price = "$229"
+    - current_dress_1_price = "$189"
+    - current_dress_2_price = "$299"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#look5
     .row
@@ -278,7 +282,7 @@
 
     .row.vertical-align-copy
       .col-md-7.content-img
-        = link_to current_dress_link
+        = link_to current_collection_link
           = image_tag 'landingpages/weddings-parties/look-05.jpg', srcset: "#{image_path("landingpages/weddings-parties/look-05-mob.jpg")} 1023w,
             #{image_path("landingpages/weddings-parties/look-05.jpg")} 1024w", class: 'img-responsive', alt: "The After Party Dress"
 
@@ -292,16 +296,17 @@
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            |  #{link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link}
+            .product-info #{link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link}
+            .product-info #{link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link}
 
           .cta-wrapper
-            = link_to 'javascript:;', class: 'cta-link'
+            = link_to current_collection_link, class: 'cta-link'
                | Shop the collection
 
   .products-grid
     .container
       .row
-        = render partial: 'pick_products_without_content', locals: {rangeFrom: 32, rangeTo: 39, customWrapper: 'col-md-3 col-xs-6'}
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 24, rangeTo: 31, customWrapper: 'col-md-3 col-xs-6'}
 
       .row
         .col-md-12.text-center
@@ -321,14 +326,15 @@
                 p Plan your big day with the Fame Wedding Planner.
 
                 .link-align-bottom
-                  = link_to 'javascript:;'
+                  = link_to moodboards_path
                     span.cta-link-arrow-right
                       span.cta-link Start your
                       span.copy-highlight  Moodboard
                       i.icon.icon-arrow-right
 
             .col-sm-7.img-side
-              = link_to 'javascript:;'
+              = link_to moodboards_path
+                / TODO: add real image
                 = image_tag 'http://fakeimg.pl/350x200/?text=img', class: 'img-responsive', alt: 'Start your Moodboard'
 
       .col-md-6.copy-img-side-by-side
@@ -347,5 +353,6 @@
 
             .col-sm-7.img-side
               = link_to styling_session_path
+                / TODO: add real image
                 = image_tag 'http://fakeimg.pl/350x200/?text=img', class: 'img-responsive', alt: 'Book a free styling session'
 
