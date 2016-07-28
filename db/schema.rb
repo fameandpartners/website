@@ -57,6 +57,15 @@ ActiveRecord::Schema.define(:version => 20160727014602) do
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
 
+  create_table "bergen_return_item_processes", :force => true do |t|
+    t.string   "aasm_state"
+    t.integer  "return_request_item_id"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.boolean  "failed",                 :default => false
+    t.string   "sentry_id"
+  end
+
   create_table "bulk_order_updates", :force => true do |t|
     t.text     "user"
     t.text     "filename"
@@ -261,6 +270,7 @@ ActiveRecord::Schema.define(:version => 20160727014602) do
   end
 
   add_index "global_skus", ["product_id"], :name => "index_global_skus_on_product_id"
+  add_index "global_skus", ["sku"], :name => "index_global_skus_on_sku", :unique => true
   add_index "global_skus", ["variant_id"], :name => "index_global_skus_on_variant_id"
 
   create_table "incompatibilities", :force => true do |t|
@@ -331,12 +341,15 @@ ActiveRecord::Schema.define(:version => 20160727014602) do
     t.integer  "refund_amount"
     t.datetime "refunded_at"
     t.string   "uuid"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.boolean  "factory_fault"
     t.integer  "item_price"
     t.integer  "item_price_adjusted"
     t.string   "factory_fault_reason"
+    t.string   "bergen_asn_number"
+    t.integer  "bergen_actual_quantity"
+    t.integer  "bergen_damaged_quantity"
   end
 
   add_index "item_returns", ["line_item_id"], :name => "index_item_returns_on_line_item_id", :unique => true
