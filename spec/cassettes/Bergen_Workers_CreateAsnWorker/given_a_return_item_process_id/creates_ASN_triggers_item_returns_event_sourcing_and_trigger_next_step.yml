@@ -1,6 +1,234 @@
 ---
 http_interactions:
 - request:
+    method: post
+    uri: https://api.goshippo.com/v1/shipments/
+    body:
+      encoding: UTF-8
+      string: '{"object_purpose":"PURCHASE","address_from":{"object_purpose":"PURCHASE","name":"Anna
+        Smit","street1":"1226 Factory Place","street2":"","city":"Los Angeles","state":"CA","zip":"90013","country":"US","phone":"950-363-0411","email":"anna@gmail.com"},"address_to":{"object_purpose":"PURCHASE","name":"Fame
+        \u0026 Partners Inc","company":"C/O Bergen Logistics West","street1":"15905
+        Commerce Way ","city":"Cerritos","state":"CA","zip":"90703","country":"US","phone":"+1
+        555 341 9393","email":"support@fameandpartners.com"},"parcel":{"length":14,"width":8,"height":2,"distance_unit":"in","weight":2.5,"mass_unit":"lb"},"async":false}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Authorization:
+      - ShippoToken 5c29ba21094aca086ddb8fc1b959ef01171d5ee9
+      Content-Length:
+      - '628'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Allow:
+      - GET, POST, HEAD, OPTIONS
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 21 Jul 2016 13:16:32 GMT
+      P3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      Server:
+      - nginx/1.8.0
+      Vary:
+      - Host, Cookie, Accept-Encoding
+      Content-Length:
+      - '1758'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIADDLkFcC/+2a3XLjthXHXwWj6zUFECAB+KrurrfJTJP1rOxmmkyGg0+Z
+        jUSy/NCuupOZvkbv8gR9iH2UPEkPKNmyJX9Q203rrHxlEfgfEDg450cAxoeR
+        UXWduzpTxpRd0TajY/TDjy/QqNR/c6bNTO1U6yyUjmJM0iPMj2JyTugxSY8p
+        jqiQ34826q6ye6jzXqidp1wqG6dGMqqFlI4QorGisbDGsBsG5bvC1cHGusUf
+        vJo7VdhK1S2UNpEp5zekTQsdCdK/nPz561dbFV0Y5Why8fLl6WRyo67q6qps
+        erOzi7cvvzqZnIZaZW3tmibzNbwC6jBNPLEsTqjELFGx0kwqLxwlRlCs7U2b
+        tgwWnjllMCZKcsa4Fkoag5VOU21x6kRvAQMxbhbUQlEtaZpg4QWDP8pyKSRz
+        ThBslSBB3XR6njdNXhZZu6z6Lr96++bszevXW7V27Yc75yONv7/Z2dq1XV0M
+        HeJKnZUeDIpuNoMi0zVtOW8y68xM1aqFDmwq86LpalUYl6l5CLX+PaNbFaar
+        a1eY5cbIvW9rBY8ffu7f6F2odxkJxqNbRfF1EYy4ybq69+Vl21bN8Xisqjya
+        ls1lXlVlCJXxgozD09xBzI8fi8Fx3+Z40/osb0L/f/jwaLzdE1ND0otEPIkH
+        p9eOepVexnPMNTUm1YI5YiVMJPcxhWdHsFJ7pteVz4ZmrlqofKb0zGUr34Nd
+        W3cu1LRtnesOvHmFnE1YQGxyPuoD6jogRheT3q8rVTYrjZrdqd1UrS2qulzk
+        djW0i7PJzaIsn6upy3hyM1ZWPT0KU5qbqKGRmqt/lIV613thfGXbjHkyhvai
+        qpje0WaM8Sc1CnY3W21cvcgBDG7hZlkBkxIa/RbSAr1SS3SS1x//vSNry59c
+        n8Zd1WQFaIECy0zl9a7S1fPmKnFAFH6T4GT4KCwgznXveYKBFse4T1bbrfL6
+        tikkqfkpTPNmfq+zGoq8mjXuDgRspgpH+B4WXGsewsi91hs762YwpBr80LZu
+        XvVfunVV2bUamrKZg4Av81WbtizrVZv3182BmjDX1xG89THtpYByimMfE6qZ
+        IolwilnrqVDaWc/j3nuup0lwHGDuN2cK2YspZJcpEhNvNPacK8okplLL1Cuh
+        BTc8UZo+EaaMXp9Mzk8n56PbcElJJIfCZUd7YHBBp6qewa/om2gfzmQumEGC
+        fiJwsHgGzhcEHLwXcPAucHxCFBEihWER5n0iYQltUsHiOMUa+PBEgHObM7GI
+        WDKQMzvaQ+PMREGq7IWYJlh86oImAbg88+UL4Qsbfgaxo15vkghVjHNJVKKY
+        sEJw76X1CeyXeCpc+iT5QtJIiIF82dEeAF8mzpSFHbpNanr1XhuleJsrV4n5
+        TJSDJwrBnjFGpCTaMK6MJjqcuRBKlHLS+6dJFBkxMpQo29qDI8qgXdFtrAzd
+        Ee2Q5fkI5svii9iLL+KuHZHzTnnHjSCMGK+ENwmWJPVaUKaf5o6I4EgMPXnZ
+        0R4AX84va+eOAl4mUGPax+BCe640vXYQV+jziuVLJQrfiyh8lyicOIoxtQlX
+        KXOw/0nimHKWCKkN5vpp7oFERIYCZVt6ADz5Ux2C/GGGTO/R3EGPdDA9Xq3T
+        ErU5ZBNaqHoZoXWhs6hrOjWbLVFeIHKUIN01eQFJh8J7omfy/I7Ig6M0Sfa4
+        AbKlXpHHAo+kYAnj8ItKK6xk2GOSqNRKGOaTJE8Mg0mHnu5uax9mz+Rzw2fy
+        29Bn8gh+zuq8rPN2ib4BB6PT91W4ZPIAjRrAUbW2ydx98iEHvPeC6Q2kbJFP
+        L1tkrxFVonnZtOgimkQozEuweMbQwxjCmlhGaAxZlTAlidRx7D2NmTLScEf/
+        Dxhie2GI3XEIrBSVgmhKWMq4oEokVDoOZVJ6L57KTZnRH08n5+C7i947L786
+        PTnb/R93Ekk8EE7b0gNk00AmfWYWXS+S3uXtZVgKvUDxi4+/lDWi/Uro4y9a
+        NbBaKgv07hLWTWhZdjWqApKmDoEfaohwBJG3rs7bX//5rwZplxdT1EDkPTPs
+        98YwuhfD6F2bOINt6L1NCeNeap8QT2E9pR3l3Or/PcOuAuyhtVQa0aHHztvS
+        A6FVfzd4fSr0GK167T6nQnx/ZAGu4rByEs97ts8Pmh+3mv0waoD8vRevDiZM
+        ad3VLLbuff+at4EWk3XGfqdgnVtMj9Ffw0cjLxYlhACaq2W/GUfhKjtqLx2y
+        eVPN1BI+JNc3qVF/xXnU8+6/ePEFxB36evWBCpUVPH7bzTX8gQzQedHHFsob
+        VJQt+nunZrnPoR8QVbUzDiYKFW5atnlofdWnaLT2TasAjarvx8//AfGukQPD
+        MAAA
+    http_version: 
+  recorded_at: Thu, 21 Jul 2016 13:16:32 GMT
+- request:
+    method: get
+    uri: https://api.goshippo.com/v1/shipments/bef379ad26c943b899e111b0a328dcc4/rates/
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Authorization:
+      - ShippoToken 5c29ba21094aca086ddb8fc1b959ef01171d5ee9
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Allow:
+      - GET, HEAD, OPTIONS
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 21 Jul 2016 13:16:33 GMT
+      P3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      Server:
+      - nginx/1.8.0
+      Vary:
+      - Host, Cookie, Accept-Encoding
+      Content-Length:
+      - '1379'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+        t0J0fWR5XMXh5MR2PdvnB82Lt/8CTmAtMZEsAAA=
+    http_version: 
+  recorded_at: Thu, 21 Jul 2016 13:16:33 GMT
+- request:
+    method: post
+    uri: https://api.goshippo.com/v1/transactions/
+    body:
+      encoding: UTF-8
+      string: '{"rate":"caa3981b31464783a8539e739899ff8a","label_file_type":"PDF","async":false}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Authorization:
+      - ShippoToken 5c29ba21094aca086ddb8fc1b959ef01171d5ee9
+      Content-Length:
+      - '81'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Allow:
+      - GET, POST, HEAD, OPTIONS
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 21 Jul 2016 13:16:35 GMT
+      P3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      Server:
+      - nginx/1.8.0
+      Vary:
+      - Host, Cookie, Accept-Encoding
+      Content-Length:
+      - '539'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIADPLkFcC/4VSa2vbMBT9KyHQfloc2/JLgdAZNytZ08Fw2rKNYWTpOlZr
+        W0aSk6Vj/31ykgYP1u3reejec65+jkX+BFRnShMN49lo/BCvltfjd6Mh0ame
+        Se+TZJGmA45KMC7Wk67tBBM7nLjO2kEzJ5ghZOHA/TpQdy17W+1bfuAP1fwg
+        BDuCMGKYIi/3UBQQ5AdezljEGM491x4YxK4B2XsYbN8XpAbSsJZIbVBlUVH3
+        0h1RmQaljUzLDgwiT7EpIQhHTo4cL/DCCJHIRxhCg2FcFBHp3S2nz12bsaOl
+        6arKgI3QvOCUaC6aDGrCq6yQZtpsVJBKwd8VWvybF7o8ZunHaknoM282WdPV
+        +RHGru372JToYSdEth0GduC5f4jPdzvteSZKrrSQe8N8+z7EO1llrRRbzo4z
+        Sq1bNZtOtRCVsjrVHlqcbsR03VsS0RRc1jE9rM2bttNXQvLNgfzU1fO3d6xI
+        DlU/bzhGlbxtxYRBxbcg9xMgSlsKWaQmL6Ihu+P0//0Hq2XFVco3jQkvYf4S
+        lfs0Way3Pi53/lMMF+4H8vC5dOPm/u4CXV8ufrRcgpo7vt1vh7F/GT+mMaWg
+        1C3sl2we3y7jjzerJPHvvqxWj8sbz437EGabGiTlpDLht4JTOCU69V2bF8gG
+        1GvPtDO11yoz14bXy6our7lSfYFDWMjjCc4vaWL+HDnQv34DdukUobIDAAA=
+    http_version: 
+  recorded_at: Thu, 21 Jul 2016 13:16:35 GMT
+- request:
     method: get
     uri: https://sync.rex11.com/ws/v3staging/publicapiws.asmx?WSDL
     body:
@@ -12,7 +240,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Mon, 23 May 2016 16:32:20 GMT
+      - Thu, 21 Jul 2016 13:16:35 GMT
   response:
     status:
       code: 200
@@ -29,9 +257,9 @@ http_interactions:
       X-Powered-By:
       - ASP.NET
       Date:
-      - Mon, 23 May 2016 16:32:18 GMT
+      - Thu, 21 Jul 2016 13:13:00 GMT
       Content-Length:
-      - '164899'
+      - '165426'
     body:
       encoding: UTF-8
       string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<wsdl:definitions xmlns:s16=\"http://rex11.com/webmethods/AbstractTypes\"
@@ -577,8 +805,9 @@ http_interactions:
         LOGISTICS NJ2\" />\r\n          <s:enumeration value=\"BERGEN LOGISTICS NJ3\"
         />\r\n          <s:enumeration value=\"BERGEN LOGISTICS HK\" />\r\n          <s:enumeration
         value=\"BERGEN LOGISTICS NJ3B\" />\r\n          <s:enumeration value=\"BERGEN
-        LOGISTICS CA\" />\r\n        </s:restriction>\r\n      </s:simpleType>\r\n
-        \   </s:schema>\r\n    <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/CustomerOrder.xsd\">\r\n
+        LOGISTICS CAN\" />\r\n          <s:enumeration value=\"BERGEN LOGISTICS NL\"
+        />\r\n        </s:restriction>\r\n      </s:simpleType>\r\n    </s:schema>\r\n
+        \   <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/CustomerOrder.xsd\">\r\n
         \     <s:complexType name=\"SupplierAddress\">\r\n        <s:sequence>\r\n
         \         <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"CompanyName\"
         type=\"s:string\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
@@ -667,6 +896,10 @@ http_interactions:
         maxOccurs=\"unbounded\" name=\"LineItem\" type=\"s10:LineItem\" />\r\n          <s:element
         minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"PriorityCode\" type=\"s:string\"
         />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"OrderType\"
+        type=\"s:string\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
+        default=\"\" name=\"GiftMessage\" type=\"s:string\" />\r\n          <s:element
+        minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"VatNumber\" type=\"s:string\"
+        />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"DutiesPayer\"
         type=\"s:string\" />\r\n        </s:sequence>\r\n      </s:complexType>\r\n
         \   </s:schema>\r\n    <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/PickTicketPaymentTerms.xsd\">\r\n
         \     <s:simpleType name=\"PickTicketPaymentTerms\">\r\n        <s:restriction
@@ -755,13 +988,15 @@ http_interactions:
         minOccurs=\"0\" maxOccurs=\"1\" name=\"FreightCharge\" type=\"s:string\" />\r\n
         \         <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"OrderType\" type=\"s:string\"
         />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"MasterTrackingNumber\"
-        type=\"s:string\" />\r\n        </s:sequence>\r\n      </s:complexType>\r\n
-        \     <s:complexType name=\"Package\">\r\n        <s:sequence>\r\n          <s:element
-        minOccurs=\"0\" maxOccurs=\"unbounded\" name=\"LineItems\" type=\"s10:OutBoundLineItem\"
-        />\r\n          <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"PackageWeight\"
-        type=\"s:decimal\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
-        name=\"UOM\" type=\"s:string\" />\r\n          <s:element minOccurs=\"1\"
-        maxOccurs=\"1\" name=\"PackageId\" type=\"s:int\" />\r\n          <s:element
+        type=\"s:string\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
+        name=\"GiftMessage\" type=\"s:string\" />\r\n          <s:element minOccurs=\"0\"
+        maxOccurs=\"1\" name=\"VatNumber\" type=\"s:string\" />\r\n        </s:sequence>\r\n
+        \     </s:complexType>\r\n      <s:complexType name=\"Package\">\r\n        <s:sequence>\r\n
+        \         <s:element minOccurs=\"0\" maxOccurs=\"unbounded\" name=\"LineItems\"
+        type=\"s10:OutBoundLineItem\" />\r\n          <s:element minOccurs=\"1\" maxOccurs=\"1\"
+        name=\"PackageWeight\" type=\"s:decimal\" />\r\n          <s:element minOccurs=\"0\"
+        maxOccurs=\"1\" name=\"UOM\" type=\"s:string\" />\r\n          <s:element
+        minOccurs=\"1\" maxOccurs=\"1\" name=\"PackageId\" type=\"s:int\" />\r\n          <s:element
         minOccurs=\"0\" maxOccurs=\"1\" name=\"TrackingNumber\" type=\"s:string\"
         />\r\n          <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"PackageLength\"
         type=\"s:double\" />\r\n          <s:element minOccurs=\"1\" maxOccurs=\"1\"
@@ -2096,7 +2331,7 @@ http_interactions:
         \     <http:address location=\"https://sync.rex11.com/ws/v3staging/publicapiws.asmx\"
         />\r\n    </wsdl:port>\r\n  </wsdl:service>\r\n</wsdl:definitions>"
     http_version: 
-  recorded_at: Mon, 23 May 2016 16:32:20 GMT
+  recorded_at: Thu, 21 Jul 2016 13:16:40 GMT
 - request:
     method: post
     uri: https://sync.rex11.com/ws/v3staging/publicapiws.asmx
@@ -2116,7 +2351,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Mon, 23 May 2016 16:32:20 GMT
+      - Thu, 21 Jul 2016 13:16:41 GMT
       Soapaction:
       - '"http://rex11.com/webmethods/AuthenticationTokenGet"'
       Content-Type:
@@ -2139,16 +2374,16 @@ http_interactions:
       X-Powered-By:
       - ASP.NET
       Date:
-      - Mon, 23 May 2016 16:32:18 GMT
+      - Thu, 21 Jul 2016 13:13:06 GMT
       Content-Length:
       - '465'
     body:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><AuthenticationTokenGetResponse
-        xmlns="http://rex11.com/webmethods/"><AuthenticationTokenGetResult>RezojbXTBq2CETGUhmK9LQYnS95wNKpdKfbIBzQ2UjqPj9E+jFIy9A==</AuthenticationTokenGetResult></AuthenticationTokenGetResponse></soap:Body></soap:Envelope>
+        xmlns="http://rex11.com/webmethods/"><AuthenticationTokenGetResult>RezojbXTBq1Wp39zH18PRiOnqn8ORTpaJTKhbu4Y7xHpg4KyGJcZ9Q==</AuthenticationTokenGetResult></AuthenticationTokenGetResponse></soap:Body></soap:Envelope>
     http_version: 
-  recorded_at: Mon, 23 May 2016 16:32:21 GMT
+  recorded_at: Thu, 21 Jul 2016 13:16:42 GMT
 - request:
     method: post
     uri: https://sync.rex11.com/ws/v3staging/publicapiws.asmx
@@ -2156,7 +2391,7 @@ http_interactions:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="UTF-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soap:Body><ReceivingTicketAdd
-        xmlns="http://rex11.com/webmethods/"><AuthenticationString>RezojbXTBq2CETGUhmK9LQYnS95wNKpdKfbIBzQ2UjqPj9E+jFIy9A==</AuthenticationString><receivingTicket
+        xmlns="http://rex11.com/webmethods/"><AuthenticationString>RezojbXTBq1Wp39zH18PRiOnqn8ORTpaJTKhbu4Y7xHpg4KyGJcZ9Q==</AuthenticationString><receivingTicket
         xmlns="http://rex11.com/swpublicapi/ReceivingTicket.xsd"><ReceivingStatus>Draft</ReceivingStatus><ReceivingStatusCode>0</ReceivingStatusCode><CreatedDate>10/10/2016</CreatedDate><Shipmentitemslist><Style
         xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">ABC123</Style><Color
         xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">Red</Color><UPC
@@ -2167,8 +2402,9 @@ http_interactions:
         xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">0</DamagedQuantity><ProductMSRP
         xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">123.45</ProductMSRP><ShipmentType
         xmlns="http://rex11.com/swpublicapi/ReceivingTicketItems.xsd">OPENTOHANG</ShipmentType></Shipmentitemslist><ShipmentTypelist>OPENTOHANG</ShipmentTypelist><Warehouse>BERGEN
-        LOGISTICS NJ2</Warehouse><SupplierDetails><CompanyName xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd">Fame
-        &amp; Partners</CompanyName><State xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd">NY</State><Country
+        LOGISTICS WEST</Warehouse><CustomerPO>R123123</CustomerPO><TrackingNumbers>9205590164917300760642</TrackingNumbers><SupplierDetails><CompanyName
+        xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd">Fame &amp; Partners</CompanyName><State
+        xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd">NY</State><Country
         xmlns="http://rex11.com/swpublicapi/CustomerOrder.xsd">USA</Country></SupplierDetails><Carrier>Truck</Carrier></receivingTicket></ReceivingTicketAdd></soap:Body></soap:Envelope>
     headers:
       User-Agent:
@@ -2176,13 +2412,13 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Mon, 23 May 2016 16:32:21 GMT
+      - Thu, 21 Jul 2016 13:16:42 GMT
       Soapaction:
       - '"http://rex11.com/webmethods/ReceivingTicketAdd"'
       Content-Type:
       - text/xml;charset=UTF-8
       Content-Length:
-      - '1891'
+      - '1981'
   response:
     status:
       code: 200
@@ -2199,7 +2435,7 @@ http_interactions:
       X-Powered-By:
       - ASP.NET
       Date:
-      - Mon, 23 May 2016 16:32:18 GMT
+      - Thu, 21 Jul 2016 13:13:07 GMT
       Content-Length:
       - '599'
     body:
@@ -2207,7 +2443,7 @@ http_interactions:
       string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><ReceivingTicketAddResponse
         xmlns="http://rex11.com/webmethods/"><ReceivingTicketAddResult><Notifications><Notification><ErrorCode>0</ErrorCode><Severity>Success</Severity><Message>Data
-        saved successfully.</Message></Notification></Notifications><ReceivingTicketId>WHRTN1044588</ReceivingTicketId></ReceivingTicketAddResult></ReceivingTicketAddResponse></soap:Body></soap:Envelope>
+        saved successfully.</Message></Notification></Notifications><ReceivingTicketId>WHRTN1044724</ReceivingTicketId></ReceivingTicketAddResult></ReceivingTicketAddResponse></soap:Body></soap:Envelope>
     http_version: 
-  recorded_at: Mon, 23 May 2016 16:32:21 GMT
+  recorded_at: Thu, 21 Jul 2016 13:16:44 GMT
 recorded_with: VCR 2.9.3
