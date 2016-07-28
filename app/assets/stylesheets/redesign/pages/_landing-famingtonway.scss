@@ -2,12 +2,34 @@
 -------------------------------------------------------*/
 .landing-famingtonway {
 
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    font-family: $font-heading;
+    font-weight: 300;
+    font-size: 1.25em;
+
+    li {
+      display: block;
+      margin-bottom: 15px;
+      line-height: 1;
+    }
+
+    em {
+      font-weight: 500;
+    }
+
+  }
+
   .hero-wrap {
     position: relative;
     color: $c-neutral-white;
 
     .media-wrap {
-      padding-bottom: 25%;
+      padding-bottom: 28%;
+      overflow: hidden;
     }
 
   }
@@ -31,6 +53,64 @@
     }
 
   }
+
+  .section-full {
+    margin-top: 0;
+
+    .heading-overlay {
+      top: -14px;
+      bottom: 0;
+    }
+
+    .title {
+      margin: 30px 0;
+    }
+
+    ul {
+      margin-bottom: 40px;
+    }
+
+    .btn-featured {
+      margin: 0 0 40px 0;
+    }
+
+  }
+
+  // START - Mobile Specific Styling
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .hero-wrap .media-wrap {
+      padding-bottom: 40px;
+    }
+
+    .title-wrap .title {
+      font-size: 2.8rem;
+    }
+
+  }
+  // END - Mobile Specific Styling
+
+  // START - Desktop Specific Styling
+  @media (min-width: $bootstrap-md-width) {
+
+    ul {
+
+      li {
+        display: inline-block;
+        margin-bottom: 0;
+      }
+
+      li:not(:first-child) {
+        margin-left: 10px;
+        padding-left: 10px;
+        border-left: solid $c-neutral-10 1px;
+      }
+
+    }
+
+  }
+  // END - Desktop Specific Styling
+
 
   .col-centered {
     float: none;
@@ -73,24 +153,6 @@
     .overlay-offset {
       position: relative;
       top: -15px;
-    }
-
-    section {
-      margin-top: 30px;
-      margin-bottom: 30px;
-    }
-
-    // Planner Benefits
-
-    ul.planner-benefits {
-      margin-top: 50px;
-
-      li {
-        padding: 0 10px;
-        display: inline-block;
-        border-left: 1px solid #bcbcbc;
-      }
-
     }
 
     // START - image offsets
@@ -152,18 +214,6 @@
       .margin-reset {
         margin-left: 0;
         margin-right: 0;
-      }
-
-      ul.planner-benefits {
-
-        li.expunge-mobile-border {
-          border: 0;
-        }
-
-        li {
-          padding-bottom: 10px;
-        }
-
       }
 
       // END - mobile resets
