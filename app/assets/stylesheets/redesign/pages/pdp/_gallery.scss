@@ -21,6 +21,42 @@
 
 .panel-media-inner-wrap {
   margin-bottom: -$mega-menu-desktop-height;
+
+  .loader {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    margin-top: -13px;
+    margin-left: -13px;
+    width: 26px;
+    height: 26px;
+    background: url(spinner-big.gif);
+    background-size: cover;
+  }
+
+  .media-wrap {
+    position: relative;
+
+    img {
+      opacity: 0;
+      transition: opacity 200ms linear;
+    }
+
+    &.is-loaded {
+
+      img {
+        opacity: 1;
+      }
+
+      .loader {
+        display: none;
+      }
+
+    }
+
+  }
+
 }
 
 .panel-media .media-wrap {
@@ -96,6 +132,7 @@
     display: block;
     width: 15px;
     height: 15px;
+    padding: 0;
     text-indent: -9999em;
     background: $c-neutral-white;
     border: solid $c-neutral-8 1px;

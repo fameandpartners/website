@@ -1,5 +1,3 @@
-= render 'extra_head_scripts'
-
 javascript:
   var states_us = #{manual_order_form.states_us.to_json.to_s.html_safe};
   var states_ca = #{manual_order_form.states_ca.to_json.to_s.html_safe};
@@ -18,22 +16,22 @@ javascript:
               .panel-body
                 .form-group
                   label.col-sm-2.control-label Site version
-                  .col-sm-10 = f.collection_select :site_version, manual_order_form.site_version_options, :first, :last, {}, { class: 'chosen-select' }
+                  .col-sm-10 = f.collection_select :currency, manual_order_form.site_version_options, :first, :last, {}, { class: 'chosen-select2' }
                 .form-group
                   label.col-sm-2.control-label Style name
-                  .col-sm-10 = f.collection_select :style_name, manual_order_form.products, :id, :name_with_sku, { include_blank: true }, { class: 'chosen-select',  remote: true }
+                  .col-sm-10 = f.collection_select :style_name, manual_order_form.products, :id, :name_with_sku, { include_blank: true }, { class: 'chosen-select2' }
                 .form-group
                   label.col-sm-2.control-label Size
-                  .col-sm-10 = f.collection_select :size, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
+                  .col-sm-10 = f.collection_select :size, {}, :id, :name, { include_blank: true }, { class: 'chosen-select2' }
                 .form-group
                   label.col-sm-2.control-label Skirt Length
-                  .col-sm-10 = f.collection_select :length, manual_order_form.skirt_length_options, :first, :last, { include_blank: true }, { class: 'chosen-select' }
+                  .col-sm-10 = f.collection_select :length, manual_order_form.skirt_length_options, :first, :last, { include_blank: true }, { class: 'chosen-select2' }
                 .form-group
                   label.col-sm-2.control-label Color
-                  .col-sm-10 = f.collection_select :color, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
+                  .col-sm-10 = f.collection_select :color, {}, :id, :name, { include_blank: true }, { class: 'chosen-select2' }
                 .form-group
                   label.col-sm-2.control-label Customisation
-                  .col-sm-10 = f.collection_select :customisations, {}, :id, :name, { include_blank: true }, { class: 'chosen-select' }
+                  .col-sm-10 = f.collection_select :customisations, {}, :id, :name, { include_blank: true }, { class: 'chosen-select2' }
                 .form-group
                   label.col-sm-2.control-label Notes
                   .col-sm-10 = f.text_area :notes, class: 'manual-textarea'
@@ -47,7 +45,7 @@ javascript:
                   .col-sm-3
                     = radio_button_tag(:customer, 'existing', true)
                     = label_tag(:customer_existing, 'Existing customer?')
-                  .col-sm-9 = f.collection_select :existing_customer, manual_order_form.customers, :first, :last, { include_blank: true }, { class: 'chosen-select' }
+                  .col-sm-9 = f.collection_select :existing_customer, manual_order_form.customers, :first, :last, { include_blank: true }, { class: 'chosen-select2' }
                 .form-group
                   .col-sm-12
                     = radio_button_tag(:customer, 'new')
@@ -55,34 +53,34 @@ javascript:
                 fieldset#customer_form[disabled=true]
                   .form-group
                     label.col-sm-2.control-label Email
-                    .col-sm-10 = f.input :email, label: false, input_html: { class: 'form-control' }
+                    .col-sm-10 = f.input :email, label: false, required: false, input_html: { class: 'form-control' }
                   .form-group
                     label.col-sm-2.control-label First name
-                    .col-sm-10 = f.input :first_name, label: false, input_html: { class: 'form-control' }
+                    .col-sm-10 = f.input :first_name, label: false, required: false, input_html: { class: 'form-control' }
                   .form-group
                     label.col-sm-2.control-label Last name
-                    .col-sm-10 = f.input :last_name, label: false, input_html: { class: 'form-control' }
+                    .col-sm-10 = f.input :last_name, label: false, required: false, input_html: { class: 'form-control' }
                   .form-group
                     label.col-sm-2.control-label Address1
-                    .col-sm-10 = f.input :address1, label: false, input_html: { class: 'form-control' }
+                    .col-sm-10 = f.input :address1, label: false, required: false, input_html: { class: 'form-control' }
                   .form-group
                     label.col-sm-2.control-label Address2
-                    .col-sm-10 = f.input :address2, label: false, input_html: { class: 'form-control' }
+                    .col-sm-10 = f.input :address2, label: false, required: false, input_html: { class: 'form-control' }
                   .form-group
                     label.col-sm-2.control-label City
-                    .col-sm-10 = f.input :city, label: false, input_html: { class: 'form-control' }
+                    .col-sm-10 = f.input :city, label: false, required: false, input_html: { class: 'form-control' }
                   .form-group
                     label.col-sm-2.control-label Country
-                    .col-sm-10 = f.collection_select :country, manual_order_form.countries, :first, :last, { include_blank: true }, { class: 'chosen-select', disabled: true }
+                    .col-sm-10 = f.collection_select :country, manual_order_form.countries, :first, :last, { include_blank: true }, { class: 'chosen-select2', disabled: true }
                   .form-group
                     label.col-sm-2.control-label State
-                    .col-sm-10 = f.collection_select :state, manual_order_form.states, :id, :name, { include_blank: true }, { class: 'chosen-select', disabled: true }
+                    .col-sm-10 = f.collection_select :state, manual_order_form.states, :id, :name, { include_blank: true }, { class: 'chosen-select2', disabled: true }
                   .form-group
                     label.col-sm-2.control-label Zip
-                    .col-sm-10 = f.input :zipcode, label: false, input_html: { class: 'form-control' }
+                    .col-sm-10 = f.input :zipcode, label: false, required: false, input_html: { class: 'form-control' }
                   .form-group
                     label.col-sm-2.control-label Phone
-                    .col-sm-10 = f.input :phone, label: false, input_html: { class: 'form-control' }
+                    .col-sm-10 = f.input :phone, label: false, required: false, input_html: { class: 'form-control' }
           .col-sm-5
             .panel.panel-default
               .panel-heading Image

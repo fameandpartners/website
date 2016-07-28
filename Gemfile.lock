@@ -144,6 +144,7 @@ PATH
       rails
       savon
       sentry-raven
+      shippo
       sidekiq
     fame_favicon (0.0.1)
       rails (~> 3.2.21)
@@ -744,6 +745,10 @@ GEM
       websocket (~> 1.0)
     sentry-raven (0.15.6)
       faraday (>= 0.7.6)
+    shippo (1.0.4)
+      json (~> 1.8.1)
+      mime-types (>= 1.25, < 3.0)
+      rest-client (~> 1.4)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
     show_me_the_cookies (3.1.0)
@@ -967,9 +972,6 @@ DEPENDENCIES
   webmock (~> 1.21.0)
   whenever
   zeus
-
-RUBY VERSION
-   ruby 2.1.6p336
 
 BUNDLED WITH
    1.12.5

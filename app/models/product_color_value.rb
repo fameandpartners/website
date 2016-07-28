@@ -2,6 +2,9 @@ class ProductColorValue < ActiveRecord::Base
   attr_accessible :option_value, :product_id, :option_value_id, :active, :custom
 
   belongs_to :product, class_name: 'Spree::Product', inverse_of: :product_color_values
+
+  # TODO: this relationship uses a deprecated option: `conditions`. This should be a simple validation or anything else! This will not work on Rails 4!
+  # TODO: when removing this `conditions` options, REMEMBER to remove it from the "spec/support/memoization_support.rb" file
   belongs_to :option_value,
              class_name: 'Spree::OptionValue',
              conditions: ['option_type_id = ?', Spree::OptionType.color_scope ]

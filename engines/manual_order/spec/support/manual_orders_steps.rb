@@ -1,8 +1,8 @@
 module Acceptance
   module ManualOrdersSteps
 
-    step 'I am on the manual orders page' do
-      visit '/fame_admin/manual_orders'
+    step 'I am on the new manual order page' do
+      visit '/fame_admin/manual_orders/new'
     end
 
     step 'The example user created with:' do |user_data|
@@ -53,7 +53,7 @@ module Acceptance
     end
 
     step 'I select "Australia" from chosen country select box' do
-      chosen_select('Australia', from: '#forms_manual_order_site_version')
+      chosen_select('Australia', from: '#forms_manual_order_currency')
     end
 
     step 'I should have black dress image' do

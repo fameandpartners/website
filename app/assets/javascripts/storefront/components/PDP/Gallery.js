@@ -24,6 +24,7 @@ class PdpGallery extends React.Component {
 
   handleLoad(image) {
     image.target.style.marginLeft = this.calculateOffset(image.target) + 'px';
+    image.target.parentNode.className += ' is-loaded';
   }
 
   handleResize() {
@@ -92,6 +93,7 @@ class PdpGallery extends React.Component {
             <span id={id} className="scrollspy-trigger"></span>
             <img src={image.url} alt={image.alt}
               className="js-gallery-image" onLoad={this.handleLoad} />
+            <span className="loader"></span>
           </div>
         );
       }

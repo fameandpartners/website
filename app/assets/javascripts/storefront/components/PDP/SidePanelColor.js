@@ -51,6 +51,8 @@ class SidePanelColor extends SidePanel {
     // this is just very hacky way to connect this with wishlist_item_data
     document.getElementById('pdpWishlistColorId').value = this.props.customize.color.id;
     document.getElementById('pdpWishlistVariantId').value = customize.dressVariantId;
+
+    this.closeMenu();
   }
 
   render() {

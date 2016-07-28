@@ -213,8 +213,8 @@ z-index levels
 @import 'redesign/components/related-nav';
 @import 'redesign/components/cart';
 @import 'redesign/components/carousel-dot-nav';
-
 @import 'redesign/components/cards/cards';
+@import 'redesign/components/legacy/legacy-carousel';
 
 // Modals
 @import 'redesign/modals/vex';
@@ -234,6 +234,7 @@ z-index levels
 @import 'redesign/pages/pdp/pdp';
 @import 'redesign/pages/why-us';
 @import 'redesign/pages/growth-plan';
+@import 'redesign/pages/style-quiz';
 @import 'redesign/pages/shop-social';
 @import 'redesign/pages/homepage';
 @import 'redesign/pages/lookbook-v2';

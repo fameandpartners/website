@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.goshippo.com/v1/shipments/
+    body:
+      encoding: UTF-8
+      string: '{"object_purpose":"PURCHASE","address_from":{"object_purpose":"PURCHASE","name":"Anna
+        Smit","street1":"bla-bla-bla","street2":"","city":"Los Angeles","state":"CA","zip":"90013","country":"US","phone":"439.615.3224","email":""},"address_to":{"object_purpose":"PURCHASE","name":"Fame
+        \u0026 Partners Inc","company":"C/O Bergen Logistics West","street1":"15905
+        Commerce Way ","city":"Cerritos","state":"CA","zip":"90703","country":"US","phone":"+1
+        555 341 9393","email":"support@fameandpartners.com"},"parcel":{"length":14,"width":8,"height":2,"distance_unit":"in","weight":2.5,"mass_unit":"lb"},"async":false}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Authorization:
+      - ShippoToken 5c29ba21094aca086ddb8fc1b959ef01171d5ee9
+      Content-Length:
+      - '607'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 400
+      message: BAD REQUEST
+    headers:
+      Allow:
+      - GET, POST, HEAD, OPTIONS
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 26 Jul 2016 15:05:15 GMT
+      P3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      Server:
+      - nginx/1.8.0
+      Vary:
+      - Host, Cookie
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"address_from": [{"__all__": ["For an Address to be PURCHASE''able,
+        all information must be provided."]}]}'
+    http_version: 
+  recorded_at: Tue, 26 Jul 2016 15:05:15 GMT
+recorded_with: VCR 2.9.3

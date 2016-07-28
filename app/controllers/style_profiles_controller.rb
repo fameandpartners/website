@@ -1,10 +1,5 @@
 class StyleProfilesController < ApplicationController
-  include SslRequirement
-  ssl_allowed
-  protect_from_forgery
-
-  #layout 'redesign/application'
-  layout 'iframe'
+  layout 'redesign/application'
 
   def show
     @style_profile = get_user_style_profile(current_spree_user)
@@ -34,7 +29,7 @@ class StyleProfilesController < ApplicationController
         end
       end
 
-      if user.present? && user.style_profile.present? 
+      if user.present? && user.style_profile.present?
         return user.style_profile
       else
         raise CanCan::AccessDenied

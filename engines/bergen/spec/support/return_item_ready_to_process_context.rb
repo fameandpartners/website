@@ -1,7 +1,11 @@
 RSpec.shared_context 'return item ready to process' do
+
   let(:country) { build(:country, name: 'United States of America') }
-  let(:state) { build(:state, name: 'California', country: country) }
-  let(:ship_address) { build(:address, address1: 'Street 1', address2: 'Complement', zipcode: '123-321', city: 'Los Angeles', state: state) }
+  let(:state) { build(:state, name: 'California', abbr: 'CA', country: country) }
+  let(:ship_address) { build(:address, firstname: 'Anna', lastname: 'Smit',
+                              address1: '1226 Factory Place', address2: '',
+                              zipcode: '90013', city: 'Los Angeles', state: state,
+                              email: 'anna@gmail.com') }
 
   let(:dress_size) { build(:product_size, name: 'US10/AU14') }
   let(:dress_color) { build(:product_colour, name: 'Blue') }
