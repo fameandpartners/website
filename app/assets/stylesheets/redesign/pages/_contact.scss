@@ -43,6 +43,16 @@
   .faq-wrap {
     padding: 20px;
     background: $c-neutral-3;
+    color: $c-neutral-10;
+
+    a {
+      color: $c-neutral-10;
+
+      &:hover {
+        color: $c-neutral-black;
+      }
+
+    }
 
     h3 {
       margin: 0;
@@ -113,7 +123,7 @@
       top: 30px;
     }
 
-    .affix, 
+    .affix,
     .affix-bottom {
       width: 213px;
     }

@@ -31,7 +31,6 @@
     padding: 15px 10px 15px 0;
     color: $c-neutral-black;
     font-size: 1.3rem;
-    text-transform: uppercase;
 
     .btn-open-close {
       @extend .btn-close;
@@ -54,6 +53,15 @@
 
       }
 
+    }
+
+    &.faq-title {
+      padding: 15px 20px 15px 0;
+      font-size: 0.875em;
+    }
+
+    &.panel-uc-title {
+      text-transform: uppercase;
     }
 
   }
