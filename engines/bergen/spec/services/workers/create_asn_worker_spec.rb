@@ -28,7 +28,7 @@ module Bergen
           worker.perform(return_item_process.id)
           asn_event = return_request_item.item_return.events.bergen_asn_created.first
 
-          expect(return_request_item.line_item.order.shipments.last.tracking).to eq('9205590164917300760642')
+          expect(shipment.reload.tracking).to eq('9205590164917300760642')
           expect(asn_event.data['asn_number']).to eq('WHRTN1044724')
           expect(return_item_process).to have_state(:asn_created)
         end
