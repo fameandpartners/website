@@ -6,7 +6,6 @@
   .main-hero-wrap.hero-wrap.copy-left.no-margin
     picture.media-wrap.keep-ratio.img-as-block
       .inner-wrap
-        / TODO: add real imagery
         source media='(max-width: 1023px)' srcset='#{image_path("landingpages/weddings-parties/hero-mob.jpg")}'
         source media='(min-width: 1024px)' srcset='#{image_path("landingpages/weddings-parties/hero-full.jpg")}'
         img src='#{image_path("landingpages/weddings-parties/hero-full.jpg")}' srcset='
@@ -34,15 +33,14 @@
       .local-navigation.js-float-menu-on-scroll
         .col-md-10.col-md-offset-1
           ul.nav
-            li.link #{link_to "Modern Bride", "#look1"}
-            li.link #{link_to "Rehearsal dinner", "#look2"}
-            li.link #{link_to "The Bridesmaid", "#look3"}
-            li.link #{link_to "Wedding Guests", "#look4"}
-            li.link #{link_to "The After Party", "#look5"}
+            li.link = link_to "Modern Bride", "#look1"
+            li.link = link_to "Rehearsal dinner", "#look2"
+            li.link = link_to "The Bridesmaid", "#look3"
+            li.link = link_to "Wedding Guests", "#look4"
+            li.link = link_to "The After Party", "#look5"
 
   // Look 1
   / TODO: add real copy
-  / TODO: add real image
   - current_dress_1_name = "Calafia"
   - current_dress_1_link = "#{dresses_path}/dress-calafia-1009?color=ivory"
   - current_dress_2_name = "Kelis"
@@ -78,8 +76,8 @@
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            .product-info #{link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link}
-            .product-info #{link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link}
+            .product-info = link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link
+            .product-info = link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link
 
           .cta-wrapper
             = link_to current_collection_link, class: 'cta-link'
@@ -99,7 +97,6 @@
 
   // Look 2
   / TODO: add real copy
-  / TODO: add real image
   - current_dress_1_name = "Shaylyn"
   - current_dress_1_link = "#{dresses_path}/dress-shaylyn-1054?color=ivory"
   - current_dress_2_name = "Estelle"
@@ -135,8 +132,8 @@
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            .product-info #{link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link}
-            .product-info #{link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link}
+            .product-info = link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link
+            .product-info = link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link
 
           .cta-wrapper
             = link_to current_collection_link, class: 'cta-link'
@@ -156,7 +153,6 @@
 
   // Look 3
   / TODO: add real copy
-  / TODO: add real image
   - current_dress_name = "Lux"
   - current_dress_link = "#{dresses_path}/dress-lux-1038?color=pastel-pink"
   - current_collection_link = "#{dresses_path}/bridesmaid"
@@ -188,7 +184,7 @@
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            .product-info #{link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link}
+            .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link
 
           .cta-wrapper
             = link_to current_collection_link, class: 'cta-link'
@@ -208,7 +204,6 @@
 
   // Look 4
   / TODO: add real copy
-  / TODO: add real image
   - current_dress_name = "Ziv"
   - current_dress_link = "#{dresses_path}/dress-ziv-1037?color=champagne"
   - current_collection_link = "#{dresses_path}/wedding-guests"
@@ -240,7 +235,7 @@
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            .product-info #{link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link}
+            .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link
 
           .cta-wrapper
             = link_to current_collection_link, class: 'cta-link'
@@ -260,7 +255,6 @@
 
   // Look 5
   / TODO: add real copy
-  / TODO: add real image
   - current_dress_1_name = "Foxi"
   - current_dress_1_link = "#{dresses_path}/dress-foxi-643?color=black"
   - current_dress_2_name = "Romeo"
@@ -296,8 +290,8 @@
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            .product-info #{link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link}
-            .product-info #{link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link}
+            .product-info = link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link
+            .product-info = link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link
 
           .cta-wrapper
             = link_to current_collection_link, class: 'cta-link'
@@ -334,7 +328,6 @@
 
             .col-sm-7.img-side
               = link_to moodboards_path
-                / TODO: add real image
                 = image_tag 'landingpages/weddings-parties/moodboards-box.jpg', class: 'img-responsive', alt: 'Start your Moodboard'
 
       .col-md-6.copy-img-side-by-side
@@ -353,6 +346,5 @@
 
             .col-sm-7.img-side
               = link_to styling_session_path
-                / TODO: add real image
                 = image_tag 'landingpages/weddings-parties/styling-session-box.jpg', class: 'img-responsive', alt: 'Book a free styling session'
 
