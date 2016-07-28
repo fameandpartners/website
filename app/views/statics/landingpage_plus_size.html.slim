@@ -9,28 +9,28 @@
             li
               = link_to '/collection/mesh/gloria' do
                 = image_tag('statics/plussize/GLORIA.jpg')
-            li 
+            li
               = link_to '/collection/lace/harriet' do
                 = image_tag('statics/plussize/HARRIET.jpg')
-            li 
+            li
               = link_to '/collection/v-neck/clara' do
                 = image_tag('statics/plussize/CLARA.jpg')
-            li 
+            li
               = link_to '/collection/pleated/dorothy' do
                 = image_tag('statics/plussize/DOROTHY.jpg')
-            li 
+            li
               = link_to '/collection/pleated/eleanor' do
                 = image_tag('statics/plussize/ELEANOR.jpg')
-            li 
+            li
               = link_to '/collection/lace/malala' do
                 = image_tag('statics/plussize/MALALA.jpg')
-            li 
+            li
               = link_to '/collection/balls/marie' do
                 = image_tag('statics/plussize/MARIE.jpg')
-            li 
+            li
               = link_to '/collection/pleated/maya' do
                 = image_tag('statics/plussize/MAYA.jpg')
-            li 
+            li
               = link_to '/collection/strapless/susan' do
                 = image_tag('statics/plussize/SUSAN.jpg')
       .row
@@ -85,8 +85,8 @@
                   .grid-6
                     = link_to collection_product_path(product), :title => product.name do
                       = product_image(product, :class=>"prod-image")
-                
-                
+
+
       .row.category-catalog
         .section-title
           - if current_site_version.code == 'us'
@@ -99,7 +99,7 @@
               .picture
                 = link_to collection_product_path(product), :title => product.name do
                   = hoverable_product_image_tag(product, colors: @current_colors, itemprop: 'image', alt: product.name)
-                  h6 = product.name  
+                  h6 = product.name
               .price = price_for_product(product)
               .buttons
                 .buy-button
@@ -107,4 +107,3 @@
                 - if (product.can_be_customized? and !product.in_sale?)
                   .custom-button
                     = link_to t('words.customize'), personalization_product_path(permalink: product.permalink, :cf => 'collection'), class: 'btn empty border small', title: "#{t('words.customize').titleize} this dress"
-script type="application/javascript" src="//s.uadx.com/10087880-8926-11e3-ab95-22000afe405e:60f56d40-2c8f-11e4-9a5c-22000afe405e.js"
