@@ -71,6 +71,20 @@
     margin: 70px 0;
   }
 
+  @media (min-width: $bootstrap-md-width) {
+
+    .product-info {
+      display: inline;
+
+      &:not(:first-of-type)::before {
+        content: " | ";
+        padding: 0 5px;
+      }
+
+    }
+
+  }
+
   @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
 
     .container-fluid.no-padding.no-margin .vertical-align-copy .content-img {
