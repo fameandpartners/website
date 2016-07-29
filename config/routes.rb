@@ -189,9 +189,10 @@ FameAndPartners::Application.routes.draw do
     get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
 
     # Landing pages
-    get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
-    get '/fameweddings/bride' => redirect('/fameweddings/bridesmaid')
-    get '/fameweddings/guest' => redirect('/fameweddings/bridesmaid')
+    get '/fameweddings'            => 'products/collections#show', permalink: 'bridesmaid14', as: :bridesmaid_landing_page
+    get '/fameweddings/bridesmaid' => redirect('/fameweddings')
+    get '/fameweddings/bride'      => redirect('/fameweddings')
+    get '/fameweddings/guest'      => redirect('/fameweddings')
 
     get '/macys' => 'products/collections#show', :as => :macys
     get '/shop-social' => 'products/collections#show', :as => :shop_social

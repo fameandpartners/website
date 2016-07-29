@@ -7,7 +7,8 @@ describe 'Landing Pages', type: :request do
   end
 
   context 'bridesmaid redirections' do
-    it_will :redirect, '/fameweddings/bride', '/fameweddings/bridesmaid'
-    it_will :redirect, '/fameweddings/guest', '/fameweddings/bridesmaid'
+    it_will :redirect, '/fameweddings/bridesmaid', '/fameweddings'
+    it_will :redirect, '/fameweddings/bride',      '/fameweddings'
+    it_will :redirect, '/fameweddings/guest',      '/fameweddings'
   end
 end
