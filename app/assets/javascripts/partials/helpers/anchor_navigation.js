@@ -75,11 +75,11 @@
               fade: false,
               arrows: false,
               dots: false,
-              edgeFriction: 10,
+              edgeFriction: 0,
               slidesToShow: 4,
               slidesToScroll: 1,
               variableWidth: true,
-              infinite: true,
+              infinite: false,
               focusOnSelect: true,
               mobileFirst: true
             });
