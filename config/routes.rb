@@ -190,8 +190,8 @@ FameAndPartners::Application.routes.draw do
 
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
-    get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
-    get '/fameweddings/guest' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :guest_bride_page
+    get '/fameweddings/bride' => redirect('/fameweddings/bridesmaid')
+    get '/fameweddings/guest' => redirect('/fameweddings/bridesmaid')
 
     get '/macys' => 'products/collections#show', :as => :macys
     get '/shop-social' => 'products/collections#show', :as => :shop_social
