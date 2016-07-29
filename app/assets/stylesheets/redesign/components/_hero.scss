@@ -67,17 +67,6 @@
     margin-top: 25px;
   }
 
-  .white-text {
-
-    .heading,
-    .sub-heading,
-    p,
-    span {
-      color: $c-neutral-white;
-    }
-
-  }
-
 }
 
 // START - desktop
@@ -140,6 +129,17 @@
       &.full {
         width: 100%;
         margin: 0;
+      }
+
+    }
+
+    .white-text {
+
+      .heading,
+      .sub-heading,
+      p,
+      span {
+        color: $c-neutral-white;
       }
 
     }

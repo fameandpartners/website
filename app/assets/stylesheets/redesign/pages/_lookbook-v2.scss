@@ -73,9 +73,17 @@
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
-    .copy-wrap h3 {
-      margin-top: 40px;
-      font-size: 3rem;
+    .copy-wrap {
+
+      .sub-heading {
+        border-top: 0;
+      }
+
+      h3 {
+        margin-top: 40px;
+        font-size: 3rem;
+      }
+
     }
 
     .content-copy {
