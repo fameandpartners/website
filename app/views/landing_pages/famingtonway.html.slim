@@ -2,7 +2,7 @@
 
 = render partial: '/products/collections/javascript', locals: { page_size: 99 }
 
-.landing-famingtonway
+.page-content.landing-famingtonway
   .hero-wrap
     picture.media-wrap.keep-ratio
       .inner-wrap
@@ -35,7 +35,7 @@
           li
             em Vote
             |  on the ones you love
-        a.btn-md.btn-featured.js-trigger-go-to-create-moodboard href="#create-moodboard-or-login"
+        a.btn-md.btn-featured.js-trigger-go-to-create-moodboard href='#create-moodboard-or-login'
           | Start building your
           span.copy-highlight  Moodboard
 
@@ -80,40 +80,39 @@
                 |  your board with you bridal party so they can vote on favorites
                 
 
-    section.row.section-box#group-discount
-      .col-md-6.col-md-push-6
-        .item-alt.styling-session
-          .row
-            .col-md-7.full-width-mobile-reset
-              = link_to styling_session_path
-                = image_tag 'landingpages/famingtonway/famington-1.png', class: ''
+  section.container.section-box
+    .row
+      .col-md-12
+        .panel-split.alt.mobile-change-order
+          .content-wrap-outer.position-2
+            .content-wrap-inner
+              .content-wrap
+                h2.section-heading
+                  em Receive
+                  |  a group discount code to purchase your selected Bridal Party dresses.
+                p These are the styles  that have stood the test of time. We collect information from you when you register on our site.
+                a.btn-xs.btn-featured.js-trigger-go-to-create-moodboard href="#create-moodboard-or-login"
+                  | Start building your
+                  span.copy-highlight  Moodboard
+          .media-wrap.position-1
+            = image_tag 'landingpages/famingtonway/famington-1.png'
 
-      .col-md-6.col-md-pull-6.img-text-offset.text-center-mobile
-        h3
-          em Receive
-          |  a group discount code to purchase your selected Bridal Party dresses.
-        p These are the styles  that have stood the test of time. We collect information from you when you register on our site
-        .inline-btn.begin-moodboard
-          a.btn-xs.btn-featured.js-trigger-go-to-create-moodboard href="#create-moodboard-or-login"
-            | Start building your
-            span.copy-highlight  Moodboard
-
-    section.row.section-box.bordered.margin-reset
-      .col-md-12.heading-overlay-wrapper.overlay-offset
-        h2.heading-overlay Wedding Concierge
-      .col-md-6.col-sm-6
-        .item-alt.styling-session
-          .row
-            .col-md-7.img-module-top-padding
-              = link_to styling_session_path
-                = image_tag 'landingpages/famingtonway/famington-2.png', class: ''
-      .col-md-6.img-text-offset-2.text-center-mobile
-        h3 <em>Receive</em> a group discount code to purchase your selected Bridal Party dresses.
-        p These are the styles  that have stood the test of time. We collect information from you when you register on our site
-        = link_to styling_session_path, class: 'inline-btn'
-          span.btn-xs.btn-featured
-            | Book your
-            span.copy-highlight  STYLING SESSION
+  section.row.section-box.bordered.margin-reset
+    .col-md-12.heading-overlay-wrapper.overlay-offset
+      h2.heading-overlay Wedding Concierge
+    .col-md-6.col-sm-6
+      .item-alt.styling-session
+        .row
+          .col-md-7.img-module-top-padding
+            = link_to styling_session_path
+              = image_tag 'landingpages/famingtonway/famington-2.png', class: ''
+    .col-md-6.img-text-offset-2.text-center-mobile
+      h3 <em>Receive</em> a group discount code to purchase your selected Bridal Party dresses.
+      p These are the styles  that have stood the test of time. We collect information from you when you register on our site
+      = link_to styling_session_path, class: 'inline-btn'
+        span.btn-xs.btn-featured
+          | Book your
+          span.copy-highlight  STYLING SESSION
 
     .centered-cta
       .col-md-12.text-center
