@@ -15,11 +15,10 @@
       .inner-wrap
         h1.title The Wedding Planner
 
-  section.container.section-box.section-full
+  section.container.section-full
     .row
       .col-md-12.heading-overlay-wrapper
         h3.heading-overlay Fame weddings
-
     .row
       .col-md-12.text-center
         h2.title Plan your big day with Fame <br> Gather your girls and let the fun begin.
@@ -41,35 +40,45 @@
           span.copy-highlight  Moodboard
 
 
-    section.row.section-box
+  section.container.section-box
+    .row.hidden-md.hidden-lg
+      .col-md-12
+        h2.title.text-center <em>Using</em> the Moodboard
+    .row
       .col-md-12.heading-overlay-wrapper
-        h2.heading-overlay How it works
-      .col-md-4
-        .item.bordered
-          = image_tag 'moodboard/how_it_works/how-it-works-1.jpg', class: 'img-responsive'
-          .col-md-2.heading-overlay-wrapper.overlay-offset.col-centered
-            h2.heading-overlay 1
-          h3
-            em Sign up
-            |  and answer a few simple questions about your wedding day plans
+        h3.heading-overlay How it works
+    .same-height-cols
+      .row
+        .col-md-4
+          .item.bordered
+            .media-wrap
+              = image_tag 'moodboard/how_it_works/how-it-works-1.jpg'
+            .step 1
+            .item-copy
+              h3
+                em Sign up
+                |  and answer a few simple questions about your wedding day plans
 
-      .col-md-4
-        .item.bordered
-          = image_tag 'moodboard/how_it_works/how-it-works-2.jpg', class: 'img-responsive'
-          .col-md-2.heading-overlay-wrapper.overlay-offset.col-centered
-            h2.heading-overlay 2
-          h3
-            em Create
-            |  as many boards as you like and add your favourite dress to them
-
-      .col-md-4
-        .item.bordered
-          = image_tag 'moodboard/how_it_works/how-it-works-3.jpg', class: 'img-responsive'
-          .col-md-2.heading-overlay-wrapper.overlay-offset.col-centered
-            h2.heading-overlay 3
-          h3
-            em Share
-            |  your board with you bridal party so they can vote on favorites
+        .col-md-4
+          .item.bordered
+            .media-wrap
+              = image_tag 'moodboard/how_it_works/how-it-works-2.jpg'
+            .step 2
+            .item-copy
+              h3
+                em Create
+                |  as many boards as you like and add your favourite dress to them
+        
+        .col-md-4
+          .item.bordered
+            .media-wrap
+              = image_tag 'moodboard/how_it_works/how-it-works-3.jpg'
+            .step 3
+            .item-copy
+              h3
+                em Share
+                |  your board with you bridal party so they can vote on favorites
+                
 
     section.row.section-box#group-discount
       .col-md-6.col-md-push-6

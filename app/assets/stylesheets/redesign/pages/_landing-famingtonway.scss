@@ -23,6 +23,25 @@
 
   }
 
+  .item {
+
+    .step {
+      position: relative;
+      width: 25px;
+      margin: -15px auto 0 auto;
+      padding: 1px 8px;
+      text-align: center;
+      font-size: 1.125em;
+      color: $c-neutral-white;
+      background: $c-neutral-black;
+    }
+
+    .item-copy em {
+      font-weight: 500;
+    }
+
+  }
+
   .hero-wrap {
     position: relative;
     color: $c-neutral-white;
@@ -71,7 +90,7 @@
     }
 
     .btn-featured {
-      margin: 0 0 40px 0;
+      margin: 0;
     }
 
   }
@@ -106,267 +125,5 @@
 
   }
   // END - Desktop Specific Styling
-
-
-  .col-centered {
-    float: none;
-    margin: 0 auto;
-    padding: 0;
-  }
-
-  .centered-cta {
-    float: none;
-    margin: 30px auto;
-  }
-
-  .secondary-cta-wrap {
-    max-width: 340px;
-    margin: 20px auto auto;
-
-    .secondary-cta {
-      width: 49%;
-      display: inline-block;
-      color: #000;
-      font-size: 1em;
-      font-family: "freight-display-pro", serif;
-      font-weight: 500;
-      font-style: italic;
-      text-align: center;
-      text-transform: none;
-    }
-
-  }
-
-  // START - Landing Page Specific Styling
-
-  .landing-famingtonway {
-    margin-bottom: 30px;
-
-    .heading-overlay {
-      bottom: 0;
-    }
-
-    .overlay-offset {
-      position: relative;
-      top: -15px;
-    }
-
-    // START - image offsets
-
-    .img-text-offset {
-      margin-top: 105px;
-    }
-
-    .img-text-offset-2 {
-      margin-top: 85px;
-    }
-
-    .bordered {
-      border: 1px solid #bcbcbc;
-    }
-
-    .item {
-      max-width: 400px;
-      margin: 10px auto auto;
-      padding: 30px 20px;
-      border: 1px solid #bcbcbc;
-    }
-
-    .expunge-border {
-      border-left: 0;
-    }
-
-    // END - image offsets
-
-  }
-
-  // END - Landing Page Specific Styling
-
-  // START - Mobile Specific Styling
-
-  @media (max-width: $bootstrap-lg-width - 1px) {
-
-    .landing-famingtonway {
-
-      // START - mobile resets
-
-      .img-text-offset {
-        margin-top: 30px;
-      }
-
-      .img-text-offset-2 {
-        margin-top: 30px;
-      }
-
-      .full-width-mobile-reset {
-        width: 100%;
-        padding: 0;
-      }
-
-      .item-alt {
-        padding: 0;
-      }
-
-      .margin-reset {
-        margin-left: 0;
-        margin-right: 0;
-      }
-
-      // END - mobile resets
-
-      .img-module-top-padding {
-        padding-top: 20px;
-      }
-
-      .title-wrapper {
-        margin-bottom: 25px;
-      }
-
-      .text-center-mobile {
-        text-align: center;
-      }
-
-      .item {
-        margin-bottom: 20px;
-      }
-
-    }
-
-  }
-
-  // END - Mobile Specific Styling
-
-  // START - Sign up specific styling
-
-  .landing-famingtonway {
-
-    .sign-up {
-      display: none;
-    }
-
-    .membership_sign-in {
-      display: none;
-    }
-
-    .nav {
-
-      a {
-        color: $c-neutral-black;
-        cursor: pointer;
-      }
-
-      .tabs {
-        padding: 10px 0;
-        border-bottom: 1px solid $c-neutral-4;
-      }
-
-      .tabs:hover {
-        background-color: $c-neutral-1;
-      }
-
-      .active {
-        border-bottom-color: $c-neutral-black;
-      }
-
-    }
-
-    ul.tabs {
-
-      li {
-        display: inline-block;
-        width: 39%;
-        font-size: 1em;
-        font-weight: 400;
-        border-bottom: 1px solid #000000;
-      }
-
-      .tab-inactive {
-        border-color: #c1c1c1;
-        color: #c1c1c1;
-      }
-
-    }
-
-    .form {
-      padding: 0 20px;
-    }
-
-    .form-wrap {
-      width: 100%;
-      margin-top: 30px;
-      margin-bottom: 30px;
-    }
-
-    .form-control {
-      margin-top: 5px;
-    }
-
-    .sign-up-form {
-
-      h3 {
-        padding-top: 10px;
-      }
-
-    }
-
-    .cta-wrap {
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .custom-form-element {
-      margin-top: 30px;
-
-      label {
-        display: inline-block;
-        border: 0;
-        padding: 0;
-        margin: 0 20px 40px 20px;
-      }
-
-      span.color-picker {
-        position: relative;
-        top: 5px;
-        left: 40px;
-        font-size: 1.2em;
-      }
-
-      label:after {
-        width: 100%;
-      }
-
-      .swatch-preview {
-        width: 30px;
-        height: 30px;
-
-      }
-
-    }
-
-    .cascading-form {
-      padding-bottom: 20px;
-
-      label {
-        display: block;
-        margin: 10px;
-
-      }
-      .selected-state {
-        font-weight: bold;
-        text-decoration: underline;
-      }
-    }
-  }
-
-  @media (max-width: $bootstrap-lg-width - 1px) {
-    .landing-famingtonway {
-      ul.tabs {
-        li {
-          width: 27%;
-        }
-      }
-    }
-  }
-
-  // END - Sign up specific styling
+  
 }
