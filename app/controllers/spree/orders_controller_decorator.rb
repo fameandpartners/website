@@ -22,7 +22,7 @@ Spree::OrdersController.class_eval do
     @order = Orders::OrderPresenter.new(order)
 
     append_gtm_order(spree_order: order)
-    append_gtm_event(event_name: :completed_order) if flash[:commerce_tracking]
+    append_gtm_event(event_name: :completed_order) if flash[:trigger_my_things_end_of_transaction]
 
     respond_with(@order)
   end
