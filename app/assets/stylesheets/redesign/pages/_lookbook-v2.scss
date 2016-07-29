@@ -10,6 +10,7 @@
     color: $c-neutral-black;
   }
 
+
   a {
     color: $c-neutral-black;
   }
@@ -40,7 +41,7 @@
 
   }
 
-  .content-copy:not(.vertical-align){
+  .content-copy:not(.vertical-align) {
 
     h3 {
       margin-top: 70px;
@@ -72,6 +73,10 @@
   }
 
   @media (min-width: $bootstrap-md-width) {
+
+    h1 > span:first-child {
+      font-size: 4.4rem;
+    }
 
     .product-info {
       display: inline;

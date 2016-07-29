@@ -33,11 +33,6 @@
 
       > span {
         display: block;
-
-        &:first-child {
-          font-size: 3.8rem;
-        }
-
       }
 
     }
@@ -67,12 +62,13 @@
     margin-top: 25px;
   }
 
-}
 
 // START - desktop
-@media (min-width: $bootstrap-md-width) {
+  @media (min-width: $bootstrap-md-width) {
 
-  .hero-wrap {
+    h1 > span:first-child {
+      font-size: 4.4rem;
+    }
 
     &.copy-right, &.copy-left {
     position: relative;
@@ -100,10 +96,6 @@
 
         }
 
-      }
-
-      .heading > span:first-child {
-        font-size: 4rem;
       }
 
       .sub-heading {
@@ -146,9 +138,17 @@
 
   }
 
-}
-// END - desktop
+  // END - desktop
 
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .heading > span:first-child {
+      font-size: 3.8rem;
+    }
+
+  }
+
+}
 
 .hero-product-wrap {
   position: relative;
