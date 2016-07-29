@@ -81,6 +81,10 @@
     .product-info {
       display: inline;
 
+      &:first-of-type {
+        padding-left: 5px;
+      }
+
       &:not(:first-of-type)::before {
         content: " | ";
         padding: 0 5px;
