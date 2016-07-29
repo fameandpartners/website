@@ -95,6 +95,17 @@
 
   }
 
+  .section-full-split {
+
+    .outer-wrap {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: solid $c-neutral-6 1px;
+      @extend %cfix;
+    }
+
+  }
+
   // START - Mobile Specific Styling
   @media (max-width: $bootstrap-md-width - 1px) {
 
@@ -104,6 +115,10 @@
 
     .panel-split .section-heading {
       margin-top: 40px;
+    }
+
+    .section-full-split {
+      text-align: center;
     }
 
   }

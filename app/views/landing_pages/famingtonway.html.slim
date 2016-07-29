@@ -97,68 +97,69 @@
           .media-wrap.position-1
             = image_tag 'landingpages/famingtonway/famington-1.png'
 
-  section.row.section-box.bordered.margin-reset
-    .col-md-12.heading-overlay-wrapper.overlay-offset
-      h2.heading-overlay Wedding Concierge
-    .col-md-6.col-sm-6
-      .item-alt.styling-session
-        .row
-          .col-md-7.img-module-top-padding
-            = link_to styling_session_path
-              = image_tag 'landingpages/famingtonway/famington-2.png', class: ''
-    .col-md-6.img-text-offset-2.text-center-mobile
-      h3 <em>Receive</em> a group discount code to purchase your selected Bridal Party dresses.
-      p These are the styles  that have stood the test of time. We collect information from you when you register on our site
-      = link_to styling_session_path, class: 'inline-btn'
-        span.btn-xs.btn-featured
-          | Book your
-          span.copy-highlight  STYLING SESSION
+  section.container.section-box.section-full-split
+    .row
+      .col-md-12.heading-overlay-wrapper
+        h3.heading-overlay Wedding Concierge
+      .col-md-12
+        .outer-wrap
+          .col-md-6
+            .media-wrap
+              = image_tag 'landingpages/famingtonway/famington-2.png'
+          .col-md-6
+            h2 <em>Receive</em> a group discount code to purchase your selected Bridal Party dresses.
+            p These are the styles  that have stood the test of time. We collect information from you when you register on our site
+            = link_to styling_session_path, class: 'inline-btn'
+              span.btn-xs.btn-featured
+                | Book your
+                span.copy-highlight  STYLING SESSION
 
-    .centered-cta
+  section.container.section-box
+    .row
       .col-md-12.text-center
-        .inline-btn.begin-moodboard
-          a.btn-md.btn-featured.js-trigger-go-to-create-moodboard href="#create-moodboard-or-login"
-            | Start building your
-            span.copy-highlight  Moodboard
+        a.btn-md.btn-featured.js-trigger-go-to-create-moodboard href="#create-moodboard-or-login"
+          | Start building your
+          span.copy-highlight  Moodboard
 
   / TODO: this login logic is crazy! This is temporarily duplicated here, since it's used on other pages with the `_get_started` template + `_signup_login`
-  .container#create-moodboard-or-login
-    .row
-      .create-wedding-board-wrap.tab-content.js-tabs-create-moodboard
-        / Note: `signup_login` template is a bootstrap paned template. It has a `#membership_sign-in` and `#membership_sign-up` selectors
-        a.js-trigger-tabs-sign-in-form href='#membership_sign-in'
-        - if !spree_current_user
-          = render 'landing_pages/weddings/signup_login', wedding_source: 'bridesmaids', return_path: bridesmaid_landing_page_path
-        a.js-trigger-tabs-moodboard-edit href='#wedding_moodboard_edit_wrapper'
-        .col-md-12.moodboard-setup.about-wrap.tab-pane.fade#wedding_moodboard_edit_wrapper
-        a.js-trigger-tabs-moodboard-guests href='#wedding_moodboard_guests_wrapper'
-        .col-md-12.moodboard-setup.invite-wrap.tab-pane.fade#wedding_moodboard_guests_wrapper
+  /!
+    .container#create-moodboard-or-login
+      .row
+        .create-wedding-board-wrap.tab-content.js-tabs-create-moodboard
+          / Note: `signup_login` template is a bootstrap paned template. It has a `#membership_sign-in` and `#membership_sign-up` selectors
+          a.js-trigger-tabs-sign-in-form href='#membership_sign-in'
+          - if !spree_current_user
+            = render 'landing_pages/weddings/signup_login', wedding_source: 'bridesmaids', return_path: bridesmaid_landing_page_path
+          a.js-trigger-tabs-moodboard-edit href='#wedding_moodboard_edit_wrapper'
+          .col-md-12.moodboard-setup.about-wrap.tab-pane.fade#wedding_moodboard_edit_wrapper
+          a.js-trigger-tabs-moodboard-guests href='#wedding_moodboard_guests_wrapper'
+          .col-md-12.moodboard-setup.invite-wrap.tab-pane.fade#wedding_moodboard_guests_wrapper
 
-javascript:
-  window.weddingPlanner = {};
-  window.weddingPlanner.loadCreateWeddingBoard = function () {
-    var wedding_moodboard_edit_wrapper = $('#wedding_moodboard_edit_wrapper');
-    wedding_moodboard_edit_wrapper.load('#{edit_wedding_moodboard_path}', '', function () {
-      init_wedding_moodboard_edit_wrapper(); // This is loaded through the `edit.html.slim` template
-    });
-  };
-  window.weddingPlanner.loginOrCreateMoodboard = function () {
-    // If logged in or not
-    if ($('#membership_sign-in').length == 0) {
-      window.weddingPlanner.loadCreateWeddingBoard();
-    } else {
-      $('.js-trigger-tabs-sign-in-form').tab('show');
-    }
-  };
+  javascript:
+    window.weddingPlanner = {};
+    window.weddingPlanner.loadCreateWeddingBoard = function () {
+      var wedding_moodboard_edit_wrapper = $('#wedding_moodboard_edit_wrapper');
+      wedding_moodboard_edit_wrapper.load('#{edit_wedding_moodboard_path}', '', function () {
+        init_wedding_moodboard_edit_wrapper(); // This is loaded through the `edit.html.slim` template
+      });
+    };
+    window.weddingPlanner.loginOrCreateMoodboard = function () {
+      // If logged in or not
+      if ($('#membership_sign-in').length == 0) {
+        window.weddingPlanner.loadCreateWeddingBoard();
+      } else {
+        $('.js-trigger-tabs-sign-in-form').tab('show');
+      }
+    };
 
-  $(document).ready(function () {
-    // When clicking on "Start building moodboard", follow anchor and follow up login or create moodboard logic
-    $('.js-trigger-go-to-create-moodboard').on('click', function () {
-      window.weddingPlanner.loginOrCreateMoodboard()
-    });
+    $(document).ready(function () {
+      // When clicking on "Start building moodboard", follow anchor and follow up login or create moodboard logic
+      $('.js-trigger-go-to-create-moodboard').on('click', function () {
+        window.weddingPlanner.loginOrCreateMoodboard()
+      });
 
-    // Show moodboard creation if user is logged in or just registered. Selectors are available on `_signup_login` template
-    $('.js-trigger-tabs-create-moodboard').on('click', function () {
-      $(this).tab('show');
+      // Show moodboard creation if user is logged in or just registered. Selectors are available on `_signup_login` template
+      $('.js-trigger-tabs-create-moodboard').on('click', function () {
+        $(this).tab('show');
+      });
     });
-  });
