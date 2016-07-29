@@ -75,7 +75,7 @@
               fade: false,
               arrows: false,
               dots: false,
-              edgeFriction: 0,
+              edgeFriction: 10,
               slidesToShow: 4,
               slidesToScroll: 1,
               variableWidth: true,
