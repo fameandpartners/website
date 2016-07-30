@@ -16,7 +16,7 @@
     var $localNavOffsetTop = $(".local-navigation-wrapper .js-float-menu-on-scroll").offset().top;
 
     var $offsetHeight = $navHeightDesktop+$navHeightLocalMenu,
-        $offsetHeightExtra = 45, // Magic number ¯\_(ツ)_/¯
+        $offsetHeightExtra = 45, // The desired distance between the target and the fixed header + local navigation
         $mdScreenWidth = 992;
 
   // Add DOM helper if we are loading this page directly from an URL containing an anchor (/something#foo=bar)
@@ -29,7 +29,11 @@
 
     $elem.removeAttribute('id');
     $elem.insertAdjacentHTML('beforebegin', $hashlink);
-    $('.js-hashlink').css({'height': $offsetHeight+'px', 'margin-top': -$offsetHeight+'px'});
+    if ($(".local-navigation .nav").length) {
+      $('.js-hashlink').css({'height': ($offsetHeight-$offsetHeightExtra)+'px', 'margin-top': -($offsetHeight-$offsetHeightExtra)+'px'});
+    } else {
+      $('.js-hashlink').css({'height': $offsetHeight+'px', 'margin-top': -$offsetHeight+'px'});
+    }
     window.location.hash = $hash;
   }
 
@@ -97,8 +101,8 @@
 
   }
 
-  // Watch clicks on anchor links
-  $(document).on("click", "a[href*='#']:not([href='#'])", function() {
+  // Watch clicks on anchor links, only when page has certain elements
+  $(document).has(".js-smooth-scroll, .local-navigation .nav").on("click", "a[href*='#']:not([href='#'], [href*='#panel-'])", function() {
 
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
 
@@ -119,14 +123,16 @@
           var $navHeightDesktop = $("#fixed-header").delay(300).outerHeight();
 
         // Reset our on-load anchor target helper
-        if ($('.js-hashlink').length) {
-          $('.js-hashlink').css({'height': '0px', 'margin-top': $offsetHeightExtra+'px'});
-        }
+        if ($('.js-hashlink').length)
+          if ($(".local-navigation .nav").length) {
+            $('.js-hashlink').css({'height': '0px', 'margin-top': $offsetHeightExtra+'px'});
+          } else {
+            $('.js-hashlink').css({'height': '0px', 'margin-top': '0px'});
+          }
 
         // This prevents the anchor target to be overlayed by our floating header
-        if ($(this).closest(".local-navigation-wrapper").length) {
+        if ($(this).closest(".local-navigation-wrapper").length)
           $offsetClickFromLocalNav = $navHeightLocalMenu;
-        }
 
         // Define the top offset for our anchor navigation, based on screen size
         if ($(window).width() < $mdScreenWidth) {
@@ -138,7 +144,7 @@
         // Scroll smoothly to our target
         $('html, body').delay(300).animate({
           scrollTop: ($target.offset().top-$offsetHeightNav)
-        }, 1000);
+        }, 500);
         // Keep local anchor navigation in browser history
         history.pushState({}, "", this.href);
         return false;
