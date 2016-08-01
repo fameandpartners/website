@@ -1,9 +1,13 @@
 FactoryGirl.define do
-  factory :style_quiz, class: Quiz do
+  factory :quiz, class: Quiz do
     name 'Style Quiz'
-  end
 
-  factory :wedding_quiz, class: Quiz do
-    name 'Wedding Quiz'
+    trait :wedding do
+      name 'Wedding Quiz'
+    end
+
+    trait :style do
+      name 'Style Quiz'
+    end
   end
 end

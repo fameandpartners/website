@@ -1,23 +1,17 @@
 require 'spec_helper'
 
 RSpec.describe Quiz, type: :model do
-  context "Quiz" do
-    let!(:style_quiz)   { create(:style_quiz) }
-    let!(:wedding_quiz) { create(:wedding_quiz) }
-    let(:quiz)          { class_double('Quiz') }
+  describe 'scopes' do
+    describe '.style_quiz' do
+      let!(:style_quiz) { create(:quiz, :style) }
 
-    context "::style_quiz" do
-      it("returns style_quiz") do
-        expect(quiz).to receive(:style_quiz).and_return(style_quiz)
-        quiz.style_quiz
-      end
+      it { expect(described_class.style_quiz).to eq(style_quiz) }
     end
 
-    context "::wedding_quiz" do
-      it("returns wedding_quiz") do
-        expect(quiz).to receive(:wedding_quiz).and_return(wedding_quiz)
-        quiz.wedding_quiz
-      end
+    describe '.wedding_quiz' do
+      let!(:wedding_quiz) { create(:quiz, :wedding) }
+
+      it { expect(described_class.wedding_quiz).to eq(wedding_quiz) }
     end
   end
 end
