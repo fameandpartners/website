@@ -27,6 +27,7 @@ module Spree
             #{with}
 
             SELECT
+            DISTINCT
 
             #{order_state},
             #{order_number},
@@ -38,6 +39,7 @@ module Spree
             #{quantity},
             #{fast_making},
             #{tracking_number},
+            #{completed_at},
             #{completed_at_date},
             #{shipment_date},
             #{fabrication_state},
@@ -60,16 +62,17 @@ module Spree
 
             FROM "spree_orders" o
             LEFT OUTER JOIN "spree_line_items" li ON li."order_id" = o."id"
+            LEFT OUTER JOIN "spree_variants" sv ON sv."id" = li."variant_id"
+            LEFT OUTER JOIN "spree_products" sp ON sp."id" = sv."product_id"
+            LEFT OUTER JOIN "spree_inventory_units" siu ON siu.order_id = o.id AND siu.variant_id = sv.id
             LEFT OUTER JOIN "line_item_personalizations" lip ON lip."line_item_id" = li."id"
+            LEFT OUTER JOIN "spree_shipments" ss ON ss."id" = siu.shipment_id AND ss."order_id" = o."id"
             LEFT OUTER JOIN "spree_addresses" sa ON sa."id" = o."bill_address_id"
             LEFT OUTER JOIN "spree_addresses" ssa ON ssa."id" = o."ship_address_id"
             LEFT OUTER JOIN "spree_states" ssa_s ON ssa_s."id" = ssa."state_id"
             LEFT OUTER JOIN "spree_countries" ssa_c ON ssa_c."id" = ssa."country_id"
-            LEFT OUTER JOIN "spree_variants" sv ON sv."id" = li."variant_id"
-            LEFT OUTER JOIN "spree_products" sp ON sp."id" = sv."product_id"
             LEFT OUTER JOIN "fabrications" f ON f."line_item_id" = li."id"
             LEFT OUTER JOIN "factories" fa ON sp."factory_id" = fa."id"
-            LEFT OUTER JOIN "spree_shipments" ss ON ss."order_id" = o."id"
             #{from}
 
             WHERE #{where}
@@ -107,6 +110,10 @@ module Spree
 
         def total_items
           '( SELECT count(*) FROM spree_line_items sli WHERE sli.order_id = o.id) as total_items'
+        end
+
+        def completed_at
+          'o.completed_at'
         end
 
         def completed_at_date
