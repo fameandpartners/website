@@ -24,6 +24,16 @@
   }
 
   .faq-wrap {
+    color: $c-neutral-10;
+
+    a {
+      color: $c-neutral-10;
+
+      &:hover {
+        color: $c-neutral-black;
+      }
+
+    }
 
     p,
     ul,

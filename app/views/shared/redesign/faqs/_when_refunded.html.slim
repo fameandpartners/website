@@ -1,8 +1,11 @@
-.panel.panel-default
+.panel.content-collapse-expand.panel-default
   .panel-heading role="tab"
-    a.panel-title.collapsed href="javascript:;" role="button" data-toggle="collapse-next" When will I receive my refund?
+    a.panel-title.faq-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+      | When will I receive my refund?
+      span.btn-open-close
 
   #collapse-returns-when-refunded.panel-collapse.collapse role="tabpanel"
     .panel-body
 
-      p Once we receive your package, your refund will be processed within 7-10 business days. You will be notified by email once the refund has been processed.
+      p
+        | Once we receive your package, your refund will be processed within 7-10 business days. You will be notified by email once the refund has been processed.
