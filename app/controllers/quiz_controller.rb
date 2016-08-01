@@ -27,7 +27,7 @@ class QuizController < ApplicationController
 
   # answers#create
   def update
-    quiz = Quiz.send("#{@quiz_type}_quiz")
+    quiz = Quiz.find(params[:quiz][:id])
     question_ids = params[:quiz][:questions].keys
 
     unless quiz.questions.find(question_ids).size.eql?(quiz.questions.size)

@@ -30,6 +30,7 @@ ruby:
     .steps-box
       .film
         = form_for :quiz, url: @current_quiz_path, remote: true, method: :put do |f|
+          = f.hidden_field :id
           - @questions_by_steps.each do |step, questions|
             .step.film-frame id="step-#{step}"
               - questions.each do |question|
