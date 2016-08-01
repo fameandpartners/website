@@ -1,20 +1,33 @@
-class StyleQuizController < ApplicationController
+class QuizController < ApplicationController
   layout 'redesign/application'
 
   respond_to :html, :js
 
-  # questions#index
-  def show
+  def show_style
     title('Style Quiz - Dress Recommendations Based on Your Style Profile', default_seo_title)
     description('Not sure to go boho, glam, edgy, classic, or girly? Fame and Partners\' style quiz can help identify your style profile and recommend that perfect dress.')
 
-    @quiz = Quiz.active
+    @quiz               = Quiz.style_quiz
     @questions_by_steps = @quiz.questions.includes(:answers).order('position ASC').group_by(&:step)
+    @current_quiz_path  = style_quiz_path
+
+    render 'show'
+  end
+
+  def show_wedding
+    title('Wedding Quiz')
+    description('Wedding Quiz')
+
+    @quiz               = Quiz.wedding_quiz
+    @questions_by_steps = @quiz.questions.includes(:answers).order('position ASC').group_by(&:step)
+    @current_quiz_path  = wedding_quiz_path
+
+    render 'show'
   end
 
   # answers#create
   def update
-    quiz = Quiz.last
+    quiz = Quiz.find(params[:quiz][:id])
     question_ids = params[:quiz][:questions].keys
 
     unless quiz.questions.find(question_ids).size.eql?(quiz.questions.size)
@@ -124,7 +137,7 @@ class StyleQuizController < ApplicationController
 
     respond_with({}) do |format|
       format.html { redirect_to(style_profile_url) }
-      format.js   { render 'style_quiz/thanks' }
+      format.js   { render 'quiz/thanks' }
     end
   end
 
