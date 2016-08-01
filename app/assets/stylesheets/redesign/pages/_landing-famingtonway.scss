@@ -47,7 +47,8 @@
     color: $c-neutral-white;
 
     .media-wrap {
-      padding-bottom: 28%;
+      min-height: 50px;
+      padding-bottom: 24%;
       overflow: hidden;
     }
 
@@ -69,6 +70,7 @@
     .title {
       display: table-cell;
       vertical-align: middle;
+      margin: 0;
     }
 
   }
@@ -109,8 +111,8 @@
   // START - Mobile Specific Styling
   @media (max-width: $bootstrap-md-width - 1px) {
 
-    .hero-wrap .media-wrap {
-      padding-bottom: 42%;
+    .title-wrap .title {
+      font-size: 3.2rem;
     }
 
     .panel-split .section-heading {
