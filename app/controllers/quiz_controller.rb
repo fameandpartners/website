@@ -1,27 +1,28 @@
 class QuizController < ApplicationController
   layout 'redesign/application'
 
-  before_filter :quiz_type
-
   respond_to :html, :js
 
-  # questions#index
-  def show
-    quiz_titles = {
-      style: 'Style Quiz - Dress Recommendations Based on Your Style Profile',
-      wedding: 'Wedding Quiz'
-    }
+  def show_style
+    title('Style Quiz - Dress Recommendations Based on Your Style Profile', default_seo_title)
+    description('Not sure to go boho, glam, edgy, classic, or girly? Fame and Partners\' style quiz can help identify your style profile and recommend that perfect dress.')
 
-    quiz_descriptions = {
-      style: 'Not sure to go boho, glam, edgy, classic, or girly? Fame and Partners\' style quiz can help identify your style profile and recommend that perfect dress.',
-      wedding: 'Wedding Quiz Description'
-    }
-
-    title(quiz_titles[@quiz_type], default_seo_title)
-    description(quiz_descriptions[@quiz_type])
-
-    @quiz = Quiz.send("#{@quiz_type}_quiz")
+    @quiz               = Quiz.style_quiz
     @questions_by_steps = @quiz.questions.includes(:answers).order('position ASC').group_by(&:step)
+    @current_quiz_path  = style_quiz_path
+
+    render 'show'
+  end
+
+  def show_wedding
+    title('Wedding Quiz')
+    description('Wedding Quiz')
+
+    @quiz               = Quiz.wedding_quiz
+    @questions_by_steps = @quiz.questions.includes(:answers).order('position ASC').group_by(&:step)
+    @current_quiz_path  = wedding_quiz_path
+
+    render 'show'
   end
 
   # answers#create
@@ -145,10 +146,5 @@ class QuizController < ApplicationController
   def track_user_email(email)
     return unless email
     Marketing::CustomerIOEventTracker.new.identify_user_by_email(email, current_site_version)
-  end
-
-  def quiz_type
-    quiz_type_regex = /(?!\/)[a-z]*(?<!-quiz)/
-    @quiz_type = request.path[quiz_type_regex].to_sym
   end
 end

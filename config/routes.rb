@@ -339,10 +339,14 @@ FameAndPartners::Application.routes.draw do
 
     # style quiz
     get '/style_quiz' => redirect('/style-quiz'), as: :old_style_quiz_redirection
-    resource :style_quiz, only: [:show, :update], controller: 'quiz', path: 'style-quiz'
+    resource :style_quiz, only: [:update], controller: 'quiz', path: 'style-quiz' do
+      root to: 'quiz#show_style'
+    end
 
     # wedding quiz
-    resource :wedding_quiz, only: [:show, :update], controller: 'quiz', path: 'wedding-quiz'
+    resource :wedding_quiz, only: [:update], controller: 'quiz', path: 'wedding-quiz' do
+      root to: 'quiz#show_wedding'
+    end
 
     resource :style_profile, only: [:show], controller: 'style_profiles'
     resource :wedding_profile, only: [:show], controller: 'style_profiles'
