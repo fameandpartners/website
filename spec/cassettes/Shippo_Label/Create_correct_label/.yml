@@ -1,0 +1,232 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.goshippo.com/v1/shipments/
+    body:
+      encoding: UTF-8
+      string: '{"object_purpose":"PURCHASE","address_from":{"object_purpose":"PURCHASE","name":"Anna
+        Smit","street1":"1226 Factory Place","street2":"","city":"Los Angeles","state":"CA","zip":"90013","country":"US","phone":"733.824.8126
+        x384","email":"anna@gmail.com"},"address_to":{"object_purpose":"PURCHASE","name":"Fame
+        \u0026 Partners Inc","company":"C/O Bergen Logistics West","street1":"15905
+        Commerce Way ","city":"Cerritos","state":"CA","zip":"90703","country":"US","phone":"+1
+        555 341 9393","email":"support@fameandpartners.com"},"parcel":{"length":14,"width":8,"height":2,"distance_unit":"in","weight":2.5,"mass_unit":"lb"},"async":false}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Authorization:
+      - ShippoToken 5c29ba21094aca086ddb8fc1b959ef01171d5ee9
+      Content-Length:
+      - '633'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Allow:
+      - GET, POST, HEAD, OPTIONS
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 26 Jul 2016 15:05:08 GMT
+      P3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      Server:
+      - nginx/1.8.0
+      Vary:
+      - Host, Cookie, Accept-Encoding
+      Content-Length:
+      - '1761'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIACR8l1cC/+2a627juBXHX4Xw54lMiheJ+dR0JtNdoLsTjJMW3cVC4E2O
+        urakUpJn3MECfY1+2yfoQ8yj9El6KDtxYuciz85uMxsDAWKR/0ORh+f8RFL6
+        MDLK+8L5TBlTdWXbjI7R9z+8QKNK/92ZNjPeqdZZKB3FmIgjnBzF4pzwYwx/
+        ImJMfDfaqLva7qEueiGhONZ5nGjLGZM2T3nCUouJiplSQrMbBtW70vlgY93i
+        D7maO1XaWvkWSpvIVPMb0qaFjgTpX07+/PWrrYoujHI0uXj58nQyuVFXd76u
+        mt7s7OLty69OJqehVlnrXdNkuYdbQJ0WQjDKuU1Syai0qUwol5pLnhtnFLtp
+        01Z9fxNmKQaTXBLGBZbWWU0SmROdU61csICBGDcLapmwPI0F4TpxzAqrBNVc
+        WcKMkLE0KqibTs+LpimqMmuXdd/lV2/fnL15/Xqr1q79cOd8EPndzc5613a+
+        HDrElTqrcjAou9kMikzXtNW8yawzM+VVCx3YVBZl03lVGpepeQi1cB88ulVh
+        Ou9daZYbI/e+9QouP/zU3zF3od5lJBiPbhXF10Uw4ibrfO/Ly7atm+PxWNVF
+        NK2ay6KuqxAq4wUZh6u5g5gfPxaD477N8ab1WdGE/n//4dF4uyemhqRXGhGR
+        DE6vHfUqvSzHQpCEUqYTph2VOc9pjIXDaS4413um15XPhmauWqhipvTMZSvf
+        g13rOxdq2tYXugNvXiFnExYUR0ky6gPqOiBGF5PerytVNquMmt2p3VStLWpf
+        LQq7GtrF2eRmUVbM1dRlCb8ZK6ueHoUpLUzU0EjN1T+rUr3rvTC+sm3GCR9D
+        e1FdTu9oM8b4kxoFu5utNs4vCgCDW7hZVsKkhEa/hbRAr9QSnRT+4392ZG31
+        o+vTuKubrAQtUGCZqcLvKp2fN1eJA6LwmwQnw0NhAXGue88TfEzxMe6T1Xar
+        vL5tCklqfgzTvJnf66yGolzNGncHAjZThSN8DwuuNQ9h5F7rjZ11MxiSBz+0
+        rZvX/ZNuXVV1rYambOYg4Kti1aatKr9q8/66OVAT5vo6grcepr1USwp5kseE
+        aqYIT51i1uY0VdrZPIl777meJsFxgLlfnSnDH9k76hVTEpJiyXKBgQAst1hL
+        JUSMmeROxBabJ8KU0euTyfnp5Hx0Gy6CRHIoXHa0zwwu6FT5GfyKvon24Uzm
+        ghkk6CcCB6cH4ByAswFOSpWQWkiVYs3SlIWrlGpNTWwZrKWfCHBucyZOI8YH
+        cmZH+9w4M1GQKnshpgkWn7qggVA78OV3wxe+F1/4Ll9cmuoUkzThSrMENryp
+        40Jz2AA7JblQT5IvRERpOpAvO9pnwJeJM1Vph26Tml6910Yp3ubKVWIeiPKl
+        E4XtRRS2SxRqJFXGmZgxzsJvISWRjCuTYE4VfZpEkREjQ4myrX12RBm0K7qN
+        laE7oh2yHI5gfl98ob+UL0xgaRKqUljPMEdSTRNuqXa5Ybl0mjxNvuAoHXry
+        sqN9Bnw5v/TOHQW8TKDGtI/BhfZcaXrtIK7Qw4rlQJQd9YooitBY4tjl2jJm
+        sEudsMYIq7iQzrB938P+NkSBsQwFyrb0GfDkTz4E+cMMmd6juYMeYjA9Xq3T
+        ErUFZBNaKL+M0LrQWdQ1nZrNlqgoETniSHdNUULSoXCf6ECeL4g8IhJC7vEF
+        yJZ6/TqJOVjGxLnjJGFWGtWjAVuAUM7yPH+S5IkxDGbo6e629mH2TD43fCa/
+        Dn0mj+DnzBeVL9ol+gYcjE7f1+Ejkwdo1ACO6rVN5u6TDzngvRdMbyBly2J6
+        2SJ7jagKzaumRRfRJEJhXoLFAUMPYwhrYhksGIxknClJpI7jPKeQVQa2JY7+
+        HzCU7oWh9A4M6dikLklEbgXDqdUwRp4QofIkIZy4J4Kh0R9PJ+fgu4veOy+/
+        Oj05233HzSOJB8JpW/oM2TSQSZ+ZRdeLpHdFexmWQi9Q/OLjz5VHtF8JffxZ
+        qwZWS1WJ3l3Cugktq86jOiBp6hD4wUOEI4i8dXXR/vdf/26QdkU5RQ1E3oFh
+        XxrDhn/tt6NeMYxLIhyjRqWaMgsbOudSFmuOLVUkMeK3Z9hVgD20lhIRHXrs
+        vC19JrTqvw1enwo9Rqteu8+pULI/sgBXcVg5pYc92+cHzQ9bzX4YNUD+3otX
+        BxOmsu5qFlv3vr/N20CLyTpj/6pgnVtOj9HfwkOjKBcVhACaq2W/GUfhU3bU
+        Xjpki6aeqSU8SK6/pEb9J86jnne/4MYXEHfo69UDKlTWcPltN9fwDzJAF2Uf
+        W6hoUFm16B+dmhV5Af2AqPLOOJgoVLpp1Rah9VWfotHaN60CNKq+Hz/9D//i
+        hmjDMAAA
+    http_version: 
+  recorded_at: Tue, 26 Jul 2016 15:05:08 GMT
+- request:
+    method: get
+    uri: https://api.goshippo.com/v1/shipments/1302bf27bd5449df85748d01a24aa6b4/rates/
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Authorization:
+      - ShippoToken 5c29ba21094aca086ddb8fc1b959ef01171d5ee9
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Allow:
+      - GET, HEAD, OPTIONS
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 26 Jul 2016 15:05:09 GMT
+      P3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      Server:
+      - nginx/1.8.0
+      Vary:
+      - Host, Cookie, Accept-Encoding
+      Content-Length:
+      - '1376'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+        PrI8ruLQOcndme3jg+b5638Ax020/ZEsAAA=
+    http_version: 
+  recorded_at: Tue, 26 Jul 2016 15:05:09 GMT
+- request:
+    method: post
+    uri: https://api.goshippo.com/v1/transactions/
+    body:
+      encoding: UTF-8
+      string: '{"rate":"7b2c8e776fd6408dbb1d5716af77151e","label_file_type":"PDF","async":false}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Authorization:
+      - ShippoToken 5c29ba21094aca086ddb8fc1b959ef01171d5ee9
+      Content-Length:
+      - '81'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Allow:
+      - GET, POST, HEAD, OPTIONS
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 26 Jul 2016 15:05:11 GMT
+      P3p:
+      - CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+      Server:
+      - nginx/1.8.0
+      Vary:
+      - Host, Cookie, Accept-Encoding
+      Content-Length:
+      - '538'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIACd8l1cC/4VSXW/aMBT9KwhpfRrBJnECSKiLaNVR6FSJMtROU+TYN+A1
+        iS3bgdFp/30OoSiV1u31fPjcc69/dWX6A5hNjKUWuuNO92u8mF11P3baRGVq
+        ZrmaTq+XyxbHNDgXr8kBwmEPRb1B+IDJGJExRh4ekKeWulL8fTX2SPBGLY7C
+        FIUh5Skj6SgL6JAMQ+T7DEUEp8EIglHLIPcl6NrDYfcpowXQkiuqrUONx2RR
+        S/fUJBaMdTKrK3CIPtWO0gEbQhSFGQ8DNORpijmJcEizKMIEQ+1Wgj1XKuGN
+        pazy3IGltCITjFohywQKKvIk0y5t3MlobuDvCiv/zUu7bbrUsVZT9izKTVJW
+        RdrAowEiZOSWGIxw5CM09DEJgzfi891Oc56JrTBW6oNjvn1v45XOE6XlTvAm
+        Y2utMuN+30qZG68y6rjF/kb2H2rLVJaZ0EXMjmOLUlX2UmqxOZJfqmLy/ow5
+        TSGv89oxZiuUkj0OudiBPvSAGusZ36MFfZEl3Tfp//sPnuLZ5VJsSldew+Ru
+        lT+GQO638/3LIgxu79ez/Up9fqKx+eBfXVz/VEKDmWCCMBq6M+OLeL2MGQNj
+        5nCY8Uk8n8W3N4vplNw9Lhbr2U0wiOsKbpYCNBM0d9V3UjA49Tltu3Av0A2Y
+        1y2zyi29MIm7Nbze1VRpIYyp19eGpW4OcH7JUvfj6JH+/QcMJLF5sAMAAA==
+    http_version: 
+  recorded_at: Tue, 26 Jul 2016 15:05:11 GMT
+recorded_with: VCR 2.9.3

@@ -185,7 +185,7 @@ FameAndPartners::Application.routes.draw do
     get '/amfam-dresses' => redirect('/wicked-game-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
 
-    # "F&P Style Icon" landing pages
+    # Lookbook v2.0 landing pages
     get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
 
     # Landing pages
@@ -196,6 +196,8 @@ FameAndPartners::Application.routes.draw do
 
     get '/macys' => 'products/collections#show', :as => :macys
     get '/shop-social' => 'products/collections#show', :as => :shop_social
+
+    get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
@@ -339,11 +341,9 @@ FameAndPartners::Application.routes.draw do
     root :to => 'index#show'
 
     # style quiz
-    #resource :quiz, :only => [:show] do
-    #  resources :questions, :only => [:index]
-    #  resources :answers, :only => [:create]
-    #end
-    resource :style_quiz, only: [:show, :update], controller: 'style_quiz'
+    get '/style_quiz' => redirect('/style-quiz'), as: :old_style_quiz_redirection
+    resource :style_quiz, only: [:show, :update], controller: 'style_quiz', path: 'style-quiz'
+
     resource :style_profile, only: [:show], controller: 'style_profiles'
 
     scope '/users/:user_id', :as => :user do

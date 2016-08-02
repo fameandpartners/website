@@ -62,7 +62,7 @@ module Bergen
 
         it { expect(presenter.order_date).to eq(DateTime.parse('10/10/2015 12:34:00 UTC')) }
         it { expect(presenter.price).to eq('$123.45') }
-        it { expect(presenter.customer_address).to eq('Street 1 Complement, Los Angeles, California, 123-321, United States of America') }
+        it { expect(presenter.customer_address).to eq('1226 Factory Place, Los Angeles, California, 90013, United States of America') }
       end
 
       describe 'Global SKU attributes' do

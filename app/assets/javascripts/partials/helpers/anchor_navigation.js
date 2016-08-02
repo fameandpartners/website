@@ -79,7 +79,7 @@
               slidesToShow: 4,
               slidesToScroll: 1,
               variableWidth: true,
-              infinite: true,
+              infinite: false,
               focusOnSelect: true,
               mobileFirst: true
             });

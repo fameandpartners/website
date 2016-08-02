@@ -135,10 +135,10 @@ class ItemReturnEvent < ActiveRecord::Base
     :warehouse
   ]
 
-  attr_accessible :asn_number
+  attr_accessible :asn_number, :shippo_label
 
   event_type :bergen_asn_created do
-    attributes :asn_number
+    attributes :asn_number, :shippo_label
 
     validates :asn_number, presence: true
   end

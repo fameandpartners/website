@@ -1,87 +1,43 @@
 - content_for :head do
-  = stylesheet_link_tag    'quiz'
   = javascript_include_tag 'quiz'
-  meta name="viewport" content="width=device-width, initial-scale=1"
 
-- facebook_application = Spree::AuthenticationMethod.where(environment: ::Rails.env, provider: :facebook, active: true).first
-- if facebook_application.present?
-  #fb-root
-  javascript:
-    $(document).ready(function() {
-      window.quiz = new window.style.Quiz();
-    });
+javascript:
+  $(document).ready(function() {
+    window.quiz = new window.style.Quiz();
+  });
 
-    window.onQuizCompleted = function() { 
-      window.location = "#{ after_quiz_redirect_url }";
-    };
+  window.onQuizCompleted = function() {
+    window.location = "#{ style_profile_url }";
+  };
 
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '#{facebook_application.api_key}',
-        version    : 'v2.0',
-        status     : true,
-        xfbml      : true
-      });
-    };
+ruby:
+  step_total = @quiz.questions.map(&:step).uniq.count + (current_spree_user ? 0 : 1)
 
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#version=v2.0&xfbml=1&appId=#{ facebook_application.api_key }";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-css:
-  /* .quiz-box .steps-box .scrollable { width: 100%; height: 100%; overflow-x: hidden; overflow-y: scroll;}*/
-
-.quiz-box#style_quiz
-  .quiz-header
-    = link_to '/' do
-      = image_tag 'logo/new-logo-white.svg', class: 'logo', :alt => 'Fame & Partners'
-  .quiz-wrapper-box
-    .quiz-box-inner
-      /uncomment this to show thanks
-      /= render :template => 'style_quiz/thanks.html.slim'
-      .steps-box style="overflow: hidden;"
-        /.flash-notification.btn.pink.flash.message.hide
+.page-content.quiz-box#style_quiz
+  .container.main-container-wrap
+    .col-md-4.quiz-wrapper-box
+      .progress-next
         .questions-count
-          ' Q
+          ' QUESTION
           span.current 1
           | /
-          span.total = @quiz.questions.map(&:step).uniq.count + 1
-        .film style="position: relative;"
-          = form_for :quiz, url: style_quiz_path, remote: true, method: :put do |f|
-            - @questions_by_steps.to_a.to(1).each do |step, questions|
-              .step.film-frame id="step-#{step}"
-                - questions.each do |question|
-                  .question id="question-#{question.id}"
-                    = f.fields_for "questions][#{question.id}" do |ff|
-                      = ff.fields_for :answer do |fff|
-                        = render "questions/#{ question.partial}", form: fff, question: question
-
-            .step.film-frame id="step-#{0}"
-              .question id="question-0"
-                = render 'questions/friends'
-
-            - @questions_by_steps.to_a.from(2).each do |step, questions|
-              .step.film-frame id="step-#{step}"
-                - questions.each do |question|
-                  .question id="question-#{question.id}"
-                    = f.fields_for "questions][#{question.id}" do |ff|
-                      = ff.fields_for :answer do |fff|
-                        = render "questions/#{ question.partial}", form: fff, question: question
-        .progress-next
-          .prev
-            a href="#" Back
-          .progress-bar
-            .filler style="width: 0%;"
-              .tooltip 0%
-          .questions-count
-            ' Q
-            span.current 1
-            | /
-            span.total = @quiz.questions.map(&:step).uniq.count + 1
-          .next
-            a href="#" Next
+          span.total = step_total
+        .progress
+          .progress-bar style="width: 0%;"
+        .row.inner-btn-wrap
+          .col-md-6.col-sm-6.col-xs-6.next
+            a.btn.btn-block.btn-black.btn-xs href="#" Next question
+    .steps-box
+      .film
+        = form_for :quiz, url: style_quiz_path, remote: true, method: :put do |f|
+          - @questions_by_steps.each do |step, questions|
+            .step.film-frame id="step-#{step}"
+              - questions.each do |question|
+                .question id="question-#{question.id}"
+                  = f.fields_for "questions[#{question.id}]" do |ff|
+                    = ff.fields_for :answer do |fff|
+                      = render "questions/#{ question.partial}", form: fff, question: question
+          - unless current_spree_user
+            .step.film-frame id="step-email"
+              = f.fields_for 'user' do |ff|
+                = render 'questions/email', form: ff
