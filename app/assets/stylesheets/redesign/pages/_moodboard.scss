@@ -1,12 +1,78 @@
 /* [Moodboard]
 -------------------------------------------------------*/
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+li,
+active {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  text-transform: none;
+  list-style: none;
+}
+
+span {
+  font-weight: 400;
+  /*font-size: 0.9em;*/
+  letter-spacing: 0.04em;
+}
+
+.inline {
+  display: inline-block;
+}
+
 .moodboard-v2 {
+
+  $new-neutral-color: #d1d1d1;
+  $menu-item-height: 190px;
+  margin-bottom: 40px;
+
+  a { 
+    color: #000;
+  }
+
+  .add-underline {
+    text-decoration: underline;
+  }
+
   .flash {
     display: none;
   }
-  
-  $menu-item-height: 80px;
-  margin-bottom: 40px;
+
+  ul.tabs {
+
+    li {
+      display: inline-block;
+      width: 32%;
+      font-size: 0.9em;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid #c1c1c1; 
+      color: #c1c1c1;
+
+      a {
+        color: black;
+      }
+
+    }
+
+    .active {
+      color: black;
+      font-weight: bold;
+      border-color: #000; 
+
+    }
+
+  }
+
+  .new-row {
+    margin-top: 55px;
+  } 
 
   .welcome-title {
     margin: 20px 4% 60px 4%;
@@ -86,7 +152,7 @@
   .menu-wrap {
     margin-top: 20px;
     margin-bottom: 40px;
-    border-bottom: solid $c-neutral-black 1px;
+    border-bottom: solid $new-neutral-color 1px;
 
     .title-line-on-sides {
       margin: 0;
@@ -100,7 +166,6 @@
 
     .slider-wrap {
       height: $menu-item-height + 70px;
-      padding: 0 40px;
       overflow: hidden;
       opacity: 0;
     }
@@ -111,6 +176,7 @@
     }
 
     .slick-arrow {
+      display: none;
       width: 0;
       height: 0;
       margin-top: -40px;
@@ -123,13 +189,15 @@
     }
 
     .slick-prev {
+      display: none;
       border-width: 40px 25px 40px 0;
-      border-color: transparent $c-neutral-black transparent transparent;
+      border-color: transparent $new-neutral-color transparent transparent;
     }
 
     .slick-next {
+      display: none;
       border-width: 40px 0 40px 25px;
-      border-color: transparent transparent transparent $c-neutral-black
+      border-color: transparent transparent transparent $new-neutral-color
     }
 
     .slick-disabled {
@@ -138,7 +206,6 @@
 
     li {
       display: inline-block;
-      margin-right: 20px;
       outline: none;
 
       &:last-child {
@@ -150,17 +217,16 @@
     .tab {
       position: relative;
       display: block;
-      width: 190px;
+      width: 155px;
       height: $menu-item-height;
       margin: 35px 0;
       line-height: normal;
       text-align: center;
-      text-transform: uppercase;
       font-size: 1.6rem;
       font-weight: 500;
-      color: $c-neutral-black;
+      color: $new-neutral-color;
       background: $c-neutral-white;
-      border: solid $c-neutral-black 1px;
+      border: solid $new-neutral-color 1px;
 
       .inner-wrap {
         display: table;
@@ -168,17 +234,31 @@
         height: 100%;
       }
 
+      .media-wrap {
+        background-color: white;
+        padding: 5px;
+
+      } 
+
       span {
-        display: table-cell;
-        vertical-align: middle;
-        padding: 5px 30px;
+        position: relative;
+        top: 3px;
+        color: #000;
+        font-family: 'freight-display-pro', serif;
+
+      }
+
+      span.plus, p { 
+        font-size: 6.2em;
+        font-weight: lighter;
+        font-family: 'brandon-grotesque', sans-serif;
       }
 
       &:hover,
       &:focus {
-        color: $c-neutral-black;
+        color: $new-neutral-color;
         background: $c-neutral-2;
-        border-color: $c-neutral-black;
+        border-color: $new-neutral-color;
       }
 
     }
@@ -187,22 +267,22 @@
 
       .tab {
         color: $c-neutral-white;
-        background: $c-neutral-black;
-        border-color: $c-neutral-white;
+        background: white;
+        border-color: #000;
 
         &:after {
           content: '';
-          display: block;
+          display: none;
           position: absolute;
           top: 100%;
           left: 50%;
           margin-top: 13px;
           margin-left: -8px;
           width: 0;
-          height: 0;
+          height: 170px;
           border-style: solid;
           border-width: 13px 8px 0 8px;
-          border-color: $c-neutral-black transparent transparent transparent;
+          border-color: $new-neutral-color transparent transparent transparent;
         }
 
       }
@@ -218,7 +298,7 @@
 
   .tab-content-controls {
     margin: 3px 0 0 0;
-    border-top: solid $c-neutral-black 1px;
+    border-top: solid $new-neutral-color 1px;
     text-align: center;
 
     li {
@@ -228,7 +308,7 @@
     .tab-control {
       display: block;
       padding: 10px;
-      color: $c-neutral-black;
+      color: $new-neutral-color;
 
       &:hover {
         font-weight: 500;
@@ -267,13 +347,73 @@
       font-size: 0.813em !important; // TODO: we need to fix this ASAP
     }
 
+
+
   }
 
-  .panel-aside {
+  input.public-link {
+    font-family: 'freight-display-pro', serif;
+    font-style: italic;
+    margin-top:20px;
+    width: 70%;
+  }
+
+  .bordered {
+    border: 1px solid black;
+   }
+
+   span.form-label {
+    font-weight: 400;
+    font-size: 0.9em;
+    letter-spacing: 0.04em;
+  }
+
+  .tab-pane {
+    padding: 40px 0;
+    border-bottom: 1px solid $new-neutral-color;
+
+    ul {
+      margin-top: 20px;
+    }
+
+    li {
+      display: inline-block;
+      padding: 0 30px;
+      max-width: 250px;
+    }
+    
+  }
+
+  .panel-product {
+
+    .btn { 
+      padding: 0;
+    }
+    
+    .product-name { 
+      text-transform: uppercase;
+      font-size: 1em;
+      letter-spacing: 0.04em;
+      margin: 50px 10px 0px;
+    }
+
+    .action-btn {
+      padding: 10px 0;
+      background-color: #f9f9f9;
+      &:hover {
+        background-color: #f5f5f5;
+      }
+
+    }
+
+  }
+
+
+/*  .panel-aside {
     margin-bottom: 30px;
     padding: 20px 5%;
     text-align: center;
-    border: solid $c-neutral-black 1px;
+    border: solid $new-neutral-color 1px;
 
     .form-group {
       margin-bottom: 15px;
@@ -311,7 +451,7 @@
       text-indent: -9999em;
     }
 
-  }
+  }*/
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
@@ -328,25 +468,37 @@
       }
 
       .menu-wrap .slider-wrap {
+     
+       
+      }
+
+      .create-moodboard {
         padding: 0;
+
       }
 
       .panel-split {
         min-height: initial;
 
         .content-wrap-outer {
-          padding: 30px 0;
+          padding: 10px 0;
         }
 
         .media-wrap {
+          padding: 5px;
           display: none;
+          background-color: white;
+
+          img {
+            padding: 5px;
+            background-color: white;
+          }
+
         }
 
       }
 
       .tab-content {
-        display: none;
-        visibility: hidden;
 
         &.active {
           display: block;
@@ -368,6 +520,37 @@
           height: 60px;
         }
 
+      }
+
+      .tab-pane {
+        padding: 10px 0;
+      }
+
+     /* .menu-wrap {
+        .active {
+
+          .tab {
+
+            &:after {
+              content: '';
+              width: 110px;
+           
+            }
+
+          }
+
+        }
+
+      }*/
+
+      ul {
+        margin-top: 0;
+      }
+
+      li {
+        display: block;
+        padding: 0 30px;
+        max-width: 250px;
       }
 
     }

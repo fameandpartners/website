@@ -1,3 +1,5 @@
+
+    
 .moodboard-v2.js-tabs-moodboard-content-mobile
   .container
     .row
@@ -5,42 +7,100 @@
         = render 'menu'
 
     .row
-      .col-md-8.tab-content.active#mob-tab-main
-        .row
+      .col-md-12
+        - all_moodboards.each do |mb|
+          - if is_active_link?(moodboard_path(mb))
+            .title-wrapper.col-centered.text-center
+              h2 = mb.default? ? 'MY MOODBOARD' : mb.name 
+        .col-md-4.col-centered.text-center
+          span.public-link  Copy public link to share moodboard
+          input.public-link.text-center value="fameandpartners.com/ul8t9f8"
+
+    .row.new-row  
+      .col-md-12.col-centered
+        ul.tabs.nav.text-center
+          li.active data-toggle="pill" href="#wedding-details"
+            a Wedding Details
+           
+          li data-toggle="pill" href="#bridal-members"
+            a Bridal Members
+
+          li data-toggle="pill" href="#dress-preferences"
+            a Dress Preferences
+
+        .tab-content
+          .col-md-12.col-m-12.tab-pane.fade.in.active.text-center id="wedding-details"
+            ul
+              li
+                span Brides Name
+                h4 Rebbeca Tribeca
+              li
+                span Date of Wedding
+                h4 Rebbeca Tribeca
+              li
+                span Wedding Theme
+                h4 Classical
+              li
+                span Number of Bridesmaids
+                h4 Rebbeca Tribeca
+
+            .secondary-cta-wrap
+              .secondary-cta.add-underline
+                a Edit details
+
+          .col-md-12.col-m-12.tab-pane.fade.in.text-center id="bridal-members"
+            ul
+              li
+                span Mother of Bride
+                h4 Elanor
+              li
+                span Maid of Honor
+                h4 Sophie
+              li
+                span Bridesmaid
+                h4 Stacey
+              li
+                span Number of Bridesmaids
+                h4 Anastasia
+
+            .new-row.secondary-cta-wrap
+              .secondary-cta.add-underline
+                a Add members
+               
+              .secondary-cta.add-underline
+                a Edit details
+            
+          .col-md-12.col-m-12.tab-pane.fade.in.text-center id="dress-preferences"
+            ul
+              li
+                span Mother of Bride
+                h4 Elanor
+              li
+                span Maid of Honor
+                h4 Sophie
+              li
+                span Bridesmaid
+                h4 Stacey
+              li
+                span Number of Bridesmaids
+                h4 Anastasia
+
+            .new-row.secondary-cta-wrap
+              .secondary-cta.add-underline
+                a Edit dress preferences
+              
+          
+    .row.new-row  
+      .col-md-12.col-centered.text-center  
+        h2 Bridesmaid's Favorites 
+        h4 The favourites as decicded by the squad
+        .new-row      
           = render 'items'
-          .col-md-12
-            = render partial: 'shared/redesign/more_dresses' ,locals: {img_link: "landingpages/tile-footer-mob.jpg", modifier: 'compact'}
-      aside.col-md-4.tab-content#mob-tab-aside
 
-        .panel-aside
-          h3.heading WEDDING DETAILS
-          - if @resource.event_date?
-            p 
-              'Wedding Date: 
-              = @resource.event_date
-          p
-            /= link_to("Edit", edit_moodboard_path(@resource))
-            = link_to 'Edit', bridesmaid_landing_page_path + '#section-main'
-            '  details
 
-        .panel-aside
-          h3.heading BRIDAL PARTY MEMBERS
-          = render 'collaborators', moodboard: @resource
 
-        - if !@resource.items.active.empty?
-          .panel-aside.panel-swatches
-            h3.heading SHOP BY SWATCHES
-            = render 'color_swatches', colors: @resource.items.active.map(&:color)
 
-        .panel-aside
-          h3.heading CONCIERGE SERVICES
-          p For $49 we will select the dresses, contact your maids and coordinate the bridal party story. Plus, the $49 comes off the cost of your dresses!
-          = link_to 'Book now', contact_path(:selected_option => 'Book a Concierge Services')
 
-        .panel-aside
-          .heading FREE HONEYMOON DRESS
-          p When you purchase 5 or more dresses, we'll give you a <b>free honeymoon dress</b> to help celebrate!
-          p
-            = link_to 'Get in contact', contact_path(:selected_option => 'Book a Style Consultation')
-            | &nbsp;with our customer service team to co-ordinate the free honeymoon dress.*
-          p = link_to 'Terms and conditions' , terms_path
+
+
+    

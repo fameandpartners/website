@@ -1,42 +1,65 @@
-= flash_messages
-.menu-wrap
-  h1.title-line-on-sides.hidden-md.hidden-lg
-    .inner-wrap MOODBOARDS
-  .row
-    .col-md-3.hidden-xs.hidden-sm
-      .message
-        h2.heading MOODBOARDS
-        p Set up moodboards to curate your own Fame and Partners collections.
-    .col-md-9.col-xs-12
-      - currentCarouselItem = 0
-      - all_moodboards.each_with_index do |mb, index|
-        - is_active_link?(moodboard_path(mb)) ? currentCarouselItem = index : ''
 
-      ul.slider-wrap.js-moodboard-menu-carousel data-slick='{"initialSlide": #{currentCarouselItem}}'
+javascript:
+  $('.multiple-items').slick({
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 3
+  });
+
+
+.menu-wrap
+  .row
+    .col-md-2
+      <li class="slick-slide create-moodboard" data-slick-index="2" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide02">
+        <a href="/moodboards/8872" class="tab" tabindex="-1">
+          <div class="inner-wrap">
+            p +
+            span Create Moodboard
+          </div>
+        </a>
+      </li>
+    .col-md-10.col-xs-10
+      - currentCarouselItem = 0
+      / - 3.each_with_index do |mb, index|
+        - is_active_link?(moodboard_path(mb)) ? currentCarouselItem = index : ''
+      ul.slider-wrap.multiple-items.js-moodboard-menu-carousel data-slick='{"initialSlide": #{currentCarouselItem}}'
+        
         - all_moodboards.each do |mb|
           - if is_active_link?(moodboard_path(mb))
             li.active
               .tab
                 .inner-wrap
-                  span = mb.default? ? 'MY MOODBOARD' : mb.name
+                  .media-wrap
+                    picture
+                      img src="/assets/landingpages/famingtonway/moodboard.png"
+                  span  =   mb.default? ? 'MY MOODBOARD' : mb.name 
           - else
             li
               = link_to moodboard_path(mb), class:'tab'
                 .inner-wrap
+                  .media-wrap
+                    picture
+                      img src="/assets/landingpages/famingtonway/moodboard.png"
                   span = mb.default? ? 'MY MOODBOARD' : mb.name
         / temporarily disabling creating of more than 2 moodboards
-        - if collection.count < 2
+        - if collection.count < 2          
           li
             = link_to '+', new_moodboard_path, class:'btn-add'
             .hide-visually Create New Moodboard
-  .row.hidden-md.hidden-lg
-    .col-md-12
-      ul.tab-content-controls.js-tab-content-controls
-        li.active
-          a href='#mob-tab-main' class='tab-control' DRESSES
-        li
-          a href='#mob-tab-aside' class='tab-control'
-            - if @resource.purpose == 'wedding'
-              'WEDDING DETAILS
-            - else
-              'DETAILS
+
+
+
+
+
+  / .row.hidden-md.hidden-lg
+  /   .col-md-12
+  /     ul.tab-content-controls.js-tab-content-controls
+  /       li.active
+  /         a href='#mob-tab-main' class='tab-control' DRESSES
+  /       li
+  /         a href='#mob-tab-aside' class='tab-control' 
+  /           - if @resource.purpose == 'wedding' 
+  /             'WEDDING DETAILS
+  /           - else
+  /             'DETAILS
+

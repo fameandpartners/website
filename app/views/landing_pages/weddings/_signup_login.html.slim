@@ -21,92 +21,262 @@ coffee:
         $(".sign-up-form  #error-email").text("Please fill all fields , password and password confirmation must match !!!")
         $(".sign-up-form  #error-email").show()
 
-.col-md-12.tab-pane.fade#membership_sign-in
-  .membership.plain.moodboard-setup.sign-in-form
-    .row
-      .col-md-12
-        h2.title-line-on-sides
-          .inner-wrap SIGN IN
-        .row
-          .col-md-4.left-col
-            = link_to 'Log in with Facebook', fb_auth_path(spree_user_return_to: return_path+"#get_started"), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
-          .col-md-1
-            .separator
-              span or
-          .col-md-7.form-wrap
-            span#error-email
-            .form data-hook="login"
-              - login_path = spree.spree_user_session_path(site_version: current_site_version.try(:code))
-              = form_for :spree_user, :url => login_path , remote: true , :html => {:'data-type' => 'json'} do |f|
-                #password-credentials.row
-                  .col-md-12
-                    = render :partial =>'shared/redesign/flash_messages', flash: flash
-                  .col-md-12.form-group
-                    = f.label :email
-                    = f.email_field :email, class: 'title', tabindex: 1, :class => 'form-control form-control-md', type: 'email', required: true
-                    span.help-block.with-errors
-                  .col-md-12.form-group
-                    = f.label :password
-                    = f.password_field :password, class: 'title', tabindex: 2, :class => 'form-control form-control-md', required: true
-                    span.help-block.with-errors
-                  .col-md-12.form-group
-                    .checkbox
-                      label for="spree_user_remember_me"
-                        = f.check_box :remember_me
-                        span= t(:remember_me)
-                  .col-md-12
-                    .main-cta-wrap
-                      = f.submit 'Login', class: 'btn btn-black', tabindex: 3
-                      = link_to 'Create a new account', '#membership_sign-up', class:'hidden-xs hidden-sm js-trigger-tabs-create-moodboard'
-                      = link_to t(:forgot_password), main_app.new_spree_user_password_path, :id=> 'forgot-password'
+section
+  .row
+    .col-md-6.col-md-offset-3
+      .row.nav.text-center    
+        .col-md-4.tabs.active data-toggle="pill" href="#wedding-details"
+          a Register
+         
+        .col-md-4.tabs data-toggle="pill" href="#bridal-members"
+          a Wedding Details
+
+        .col-md-4.tabs data-toggle="pill" href="#dress-preferences"
+          a Dress Preferences
+
+  .tab-content
+ 
+    .col-md-12.tab-pane.active.fade.in.text-center id="wedding-details"
+      .row
+        section.col-md-8.col-md-offset-2.tab-pane.membership_sign-up
+          .membership.plain.moodboard-setup.sign-up-form
+            .row
+              .col-md-12
+                h2.text-center Register an account for Fame Weddings
+                - signup_params = {site_version: current_site_version.code}
+                = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params), remote: true , :html => {:'data-type' => 'json'} do |f|
+                  = f.hidden_field :site_version_id, value: current_site_version.id
+                
+                .col-md-12.form-wrap.text-left
+                  = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params), remote: true , :html => {:'data-type' => 'json'} do |f|
+                    = f.hidden_field :site_version_id, value: current_site_version.id
+                    div data-hook="signup"
+                      .row
+                        .col-md-6.form-group
+                          span.form-label First Name
+                          = f.text_field :first_name, required: true, :class => 'form-control form-control-md'
+                          span.help-block.with-errors
+                        .col-md-6.form-group
+                          span.form-label Last Name
+                          = f.text_field :last_name, required: true, :class => 'form-control form-control-md'
+                          span.help-block.with-errors
+                        .col-md-12.form-group
+                          span.form-label Email
+                          = f.email_field :email, required: true, autocomplete: :off, :class => 'form-control form-control-md', type: 'email'
+                          span.help-block.with-errors#error-email
+                      #password-credentials
+                      .row
+                        .col-md-6.form-group
+                          span.form-label Password
+                          = f.password_field :password, :id => 'sign-up-password', required: true, autocomplete: :off, :class => 'form-control form-control-md', 'data-minlength' => '6', 'data-minlength-error' => 'Password is too short (minimum is 6 characters)'
+                          span.help-block.with-errors
+                        .col-md-6.form-group
+                          span.form-label Password Confirmation
+                          = f.password_field :password_confirmation, required: true, autocomplete: :off, :class => 'form-control form-control-md', 'data-match' => '#sign-up-password', 'data-match-error' => 'Password fields must match.'
+                          span.help-block.with-errors
+                        .col-md-12.form-group
+                        .col-md-12 data-hook="signup_below_password_fields"
+                          .cta-wrap
+                            = f.submit 'Register now', class: 'btn btn-black'
+                          .secondary-cta-wrap
+                            .secondary-cta
+                              = link_to 'I already have an account', '#membership_sign-in', :class => 'js-trigger-tabs-create-moodboard js-trigger-signup'
+                            .secondary-cta
+                              = link_to 'Sign up with Facebook', fb_auth_path(spree_user_return_to: return_path+"#get_started"), class: ''
+
+      section.col-md-8.col-md-offset-2.tab-pane.membership_sign-in
+        .membership.plain.moodboard-setup.sign-up-form
+          .row
+            .col-md-12
+              h2.text-center Sign in to Fame Weddings
+              .col-md-12.form-wrap.text-left
+                span#error-email
+                .form data-hook="login"
+                  - login_path = spree.spree_user_session_path(site_version: current_site_version.try(:code))
+                  = form_for :spree_user, :url => login_path , remote: true , :html => {:'data-type' => 'json'} do |f|
+                    #password-credentials.row
+                      .col-md-12
+                        = render :partial =>'shared/redesign/flash_messages', flash: flash
+                      .col-md-12.form-group
+                        span.form-label Email
+                        = f.email_field :email, class: 'title', tabindex: 1, :class => 'form-control form-control-md', type: 'email', required: true
+                        span.help-block.with-errors
+                      .col-md-12.form-group
+                        span.form-label Password
+                        = f.password_field :password, class: 'title', tabindex: 2, :class => 'form-control form-control-md', required: true
+                        span.help-block.with-errors
+                        .secondary-cta 
+                            = link_to t(:forgot_password), main_app.new_spree_user_password_path, :id=> 'forgot-password'
+                      / .col-md-12.form-group
+                      /   .checkbox
+                      /     label for="spree_user_remember_me"
+                      /       = f.check_box :remember_me
+                      /       span= t(:remember_me)
+                      .col-md-12
+                        .cta-wrap
+                          = f.submit 'Login', class: 'btn btn-black', tabindex: 3
+                        .secondary-cta-wrap
+                          .secondary-cta
+                            = link_to 'Create a new account', '#membership_sign-up', :class => 'js-trigger-tabs-create-moodboard js-trigger-signup'
+                          .secondary-cta
+                            = link_to 'Sign up with Facebook', fb_auth_path(spree_user_return_to: return_path+"#get_started"), class: ''
+
+    // section pending login fix
+    .col-md-12.tab-pane.fade.in.text-center id="bridal-members"
+   
+
+    .col-md-12.tab-pane.fade.in.text-center id="dress-preferences"
+      .row
+        section.col-md-8.col-md-offset-2.tab-pane
+          .membership.plain.moodboard-setup.sign-up-form
+            .row
+              .col-md-12.text-center
+                h2 Dress Length
+                / h3 If you're not sure, pick as many as you like
+            .custom-form-element.text-center
+              label
+                input data-all="false" type='checkbox'
+                .icon
+                span.form-label Long
+              label
+                input data-all="false" type='checkbox'
+                .icon
+                span.form-label Medium
+              label
+                input data-all="false" type='checkbox'
+                .icon
+                span.form-label Short
+            / .col-md-12 data-hook="signup_below_password_fields"
+            /   .cta-wrap
+            /     .btn.btn-black Next Question
+            /   .secondary-cta-wrap.text-center
+            /     .secondary-cta
+            /       = link_to 'Skip this step', '#membership_sign-in', :class => 'js-trigger-tabs-create-moodboard js-trigger-signup'
+             
+        / This is the fabric preference
+
+        section.col-md-8.col-md-offset-2.tab-pane#membership_sign-up
+          .membership.plain.moodboard-setup.sign-up-form
+            .row
+              .col-md-12.text-center
+                h2 Fabric Type
+                / h3 If you're not sure, pick as many as you like
+            .custom-form-element.text-center
+              label
+                input data-all="false" type='checkbox'
+                .icon
+                span.form-label Satin
+              label
+                input data-all="false"  type='checkbox'
+                .icon
+                span.form-label Cotton
+              label
+                input data-all="false"  type='checkbox'
+                .icon
+                span.form-label Georgette
+            / .col-md-12 data-hook="signup_below_password_fields"
+            /   .cta-wrap
+            /     .btn.btn-black Next Question
+            /   .secondary-cta-wrap.text-center
+            /     .secondary-cta
+            /       = link_to 'Skip this step', '#membership_sign-in', :class => 'js-trigger-tabs-create-moodboard js-trigger-signup'
+             
+        / This is the colour preference tab
+
+        section.col-md-8.col-md-offset-2.tab-pane#membership_sign-up
+          .membership.plain.moodboard-setup.sign-up-form.search-filters
+            .row
+              .col-md-12.text-center.swatch-color-green
+                h2 Bridesmaid Dress Color
+                / h3 If you're not sure, pick as many as you like
+            .row 
+              .col-md-8.col-md-offset-2
+                .col-md-4.col-xs-4
+                  .custom-form-element.filter-option.selector-color.cascading-form
+                    label.swatch-color-black.swatch-preview for="checkbox"
+                      input data-all="false" id="black" type="checkbox" value="black"
+                      span.color-picker Black
+                    label.swatch-color-silver.swatch-preview for="checkbox"
+                      input data-all="false" id="silver" type="checkbox" value="silver"
+                      span.color-picker Silver
+                    label.swatch-color-white.swatch-preview for="checkbox"
+                      input data-all="false" id="white" type="checkbox" value="white"
+                      span.color-picker White
+                    label.swatch-color-yellow.swatch-preview for="checkbox"
+                      input data-all="false" id="yellow" type="checkbox" value="yellow"
+                      span.color-picker Yellow
+
+                .col-md-4.col-xs-4
+                  .custom-form-element.filter-option.selector-color.cascading-form
+                    label.swatch-color-red.swatch-preview for="checkbox"
+                      input data-all="false" id="red" type="checkbox" value="red"
+                      span.color-picker Red
+                    label.swatch-color-pink.swatch-preview for="checkbox"
+                      input data-all="false" id="pink" type="checkbox" value="pink"
+                      span.color-picker Pink
+                    label.swatch-color-nude.swatch-preview for="nude"
+                      input data-all="false" id="nude" type="checkbox" value="nude"
+                      span.color-picker Nude
+                  
+                .col-md-4.col-xs-4 
+                  .custom-form-element.filter-option.selector-color.cascading-form
+                    label.swatch-color-purple.swatch-preview for="checkbox"
+                      input data-all="false" id="purple" type="checkbox" value="purple"
+                      span.color-picker Purple
+                    label.swatch-color-blue.swatch-preview for="checkbox"
+                      input data-all="false" id="blue" type="checkbox" value="blue"
+                      span.color-picker Blue
+                    label.swatch-color-green.swatch-preview for="checkbox"
+                      input data-all="false" id="green" type="checkbox" value="green"
+                      span.color-picker Green
+          .col-md-12 data-hook="signup_below_password_fields"
+            .cta-wrap
+              .btn.btn-black Next Question
+            .secondary-cta-wrap.text-center
+              .secondary-cta
+                = link_to 'Skip this step', '#membership_sign-in', :class => 'js-trigger-tabs-create-moodboard js-trigger-signup'        
+                      
+  javascript:
+
+    $('.custom-form-element').children().click(function() {
+      // This adds a class to mark item as selected
+      $(this).children().next().toggleClass('selected-state');
+      // This changes the data-all attribute to true
+      $(this).children().attr('data-all', 'true');
+    });
 
 
-.col-md-12.tab-pane.fade#membership_sign-up
-  .membership.plain.moodboard-setup.sign-up-form
-    .row
-      .col-md-12
-        h2.title-line-on-sides
-          .inner-wrap CREATE AN ACCOUNT
-        - signup_params = {site_version: current_site_version.code}
-        = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params), remote: true , :html => {:'data-type' => 'json'} do |f|
-          = f.hidden_field :site_version_id, value: current_site_version.id
-        .row
-          .col-md-4.left-col
-            = link_to 'Sign up with facebook', fb_auth_path(spree_user_return_to: return_path+"#get_started"), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
-          .col-md-1
-            .separator
-              span or
-          .col-md-7.form-wrap
-            = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params), remote: true , :html => {:'data-type' => 'json'} do |f|
-              = f.hidden_field :site_version_id, value: current_site_version.id
-              div data-hook="signup"
-                .row
-                  .col-md-6.form-group
-                    = f.text_field :first_name, required: true, :class => 'form-control form-control-md', :placeholder => t(:first_name)
-                    span.help-block.with-errors
-                  .col-md-6.form-group
-                    = f.text_field :last_name, required: true, :class => 'form-control form-control-md', :placeholder => t(:last_name)
-                    span.help-block.with-errors
-                  .col-md-12.form-group
-                    = f.email_field :email, required: true, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:email), type: 'email'
-                    span.help-block.with-errors#error-email
-                #password-credentials
-                .row
-                  .col-md-6.form-group
-                    = f.password_field :password, :id => 'sign-up-password', required: true, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password), 'data-minlength' => '6', 'data-minlength-error' => 'Password is too short (minimum is 6 characters)'
-                    span.help-block.with-errors
-                  .col-md-6.form-group
-                    = f.password_field :password_confirmation, required: true, autocomplete: :off, :class => 'form-control form-control-md', :placeholder => t(:password_confirmation), 'data-match' => '#sign-up-password', 'data-match-error' => 'Password fields must match.'
-                    span.help-block.with-errors
-                  .col-md-12.form-group
-                    .checkbox
-                      label for="spree_user_newsletter"
-                        = f.check_box :newsletter, :checked => 'checked'
-                        span
-                          ' Receive new styles in my inbox each week + $25 off
-                  .col-md-12 data-hook="signup_below_password_fields"
-                    .main-cta-wrap
-                      = f.submit 'Create account', class: 'btn btn-black'
-                      span Already have an account?
-                      = link_to 'Sign in here', '#membership_sign-in', class:'hidden-xs hidden-sm js-trigger-tabs-create-moodboard'
-                      = link_to 'Sign in here', '#membership_sign-in', class:'btn btn-default hidden-md hidden-lg js-trigger-tabs-create-moodboard'
+    $('.nav > .tabs').on('click', function(e) {
+      // remove the existing active state
+      $('.nav > .tabs').removeClass('active');
+      // adds active to element that was clicked
+      $(this).addClass('active');
+    });  
+    
+    function loadCreateWeddingBoard() {
+      var wedding_moodboard_edit_wrapper = $('#wedding_moodboard_edit_wrapper');
+      wedding_moodboard_edit_wrapper.load('#{edit_wedding_moodboard_path}', '', function(data, status, xhr) {
+        init_wedding_moodboard_edit_wrapper();
+        $('.js-moodboard-loader').removeClass('active');
+      });
+    }
+
+    $(document).ready(function() {
+      
+      var $tabs = $('.js-tabs-create-moodboard .tab-pane');
+
+      if ($('#membership_sign-in').length == 0) {
+        loadCreateWeddingBoard();
+      } else {
+        $('.js-trigger-tabs-moodboard-how-it-works').tab('hide');
+        $('.js-moodboard-loader').removeClass('active');
+      }
+
+      $('.js-trigger-tabs-create-moodboard').on('click', function(e) {
+        e.preventDefault();
+        $(this).tab('show');
+      });
+
+      
+
+    });
