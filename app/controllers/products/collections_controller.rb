@@ -129,8 +129,8 @@ class Products::CollectionsController < Products::BaseController
     return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
 
     available_color_groups = Spree::OptionValuesGroup.for_colors.available_as_taxon
-    if color_group = available_color_groups.find_by_name(permalink.downcase)
-      return {color_group: color_group.name}
+    if (color_group = available_color_groups.where(name: permalink).first)
+      return { color_group: color_group.name }
     end
 
     if taxon = Spree::Taxon.published.find_child_taxons_by_permalink(permalink)

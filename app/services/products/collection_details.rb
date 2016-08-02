@@ -148,5 +148,4 @@ class Products::CollectionDetails
   def fast_delivery?
     fast_delivery == true
   end
-
 end
