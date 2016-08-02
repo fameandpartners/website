@@ -81,7 +81,8 @@ Feature: Complete Guest Checkout
     Then I select "<Site Version>" site version
     And I select "<Dress Size>" size
     And I select "<Skirt Length>" skirt length
-    And I click on "Add to Cart" button
+    Then I should see add to cart link enabled
+    And I click on "ADD TO BAG" link
     Then I select "<Country>" country and "<State>" state
     And I should see shipping to "<Country>" warning
     And I fill in form fields with:
