@@ -125,24 +125,35 @@ ruby:
               - unless Features.active?(:getitquick_unavailable)
                 li.normal-item
                   = link_to 'Made in 48 hours', fast_making_dresses_path, class: 'text'
+              li.normal-item
+                = link_to 'Maxi Dresses', build_taxon_path('Maxi'), class: 'text'
+              li.normal-item
+                = link_to 'Midi Dresses', build_taxon_path('Midi'), class: 'text'
+              li.normal-item
+                = link_to 'Mini Dresses', mini_dresses_collection_path, class: 'text'
+              li.normal-item
+                = link_to 'Skirts', skirts_collection_path, class: 'text'
+
               li.grey-item
                 .text STYLES
-              li.normal-item
-                = link_to 'Two-Piece', build_taxon_path('Two Piece'), class: 'text'
-              li.normal-item
-                = link_to 'Strapless', build_taxon_path('Strapless'), class: 'text'
-              li.normal-item
-                = link_to 'Backless', build_taxon_path('Backless'), class: 'text'
-              li.normal-item
-                = link_to 'Lace', build_taxon_path('Lace'), class: 'text'
-              li.normal-item.no-border
-                = link_to 'Maxi', build_taxon_path('Maxi'), class: 'text'
-              li.normal-item.no-border
-                = link_to 'Short Dresses', build_taxon_path('Short'), class: 'text'
+              li.normal-item = link_to 'Two-Piece'            , build_taxon_path('Two Piece'), class: 'text'
+              li.normal-item = link_to 'Off-Shoulder'         , build_taxon_path('Off-Shoulder'), class: 'text'
+              li.normal-item = link_to 'Long Sleeve'          , build_taxon_path('Long Sleeve'), class: 'text'
+              li.normal-item = link_to 'Strapless'            , build_taxon_path('Strapless'), class: 'text'
+              li.normal-item = link_to 'Backless'             , build_taxon_path('Backless'), class: 'text'
+              li.normal-item = link_to 'Lace'                 , build_taxon_path('Lace'), class: 'text'
+              li.normal-item = link_to 'Bodycon'              , build_taxon_path('Bodycon'), class: 'text'
+              li.normal-item = link_to 'Slips'                , build_taxon_path('Slip Dress'), class: 'text'
+              li.normal-item = link_to 'Jumpsuit/Playsuit'    , build_taxon_path('Jumpsuit'), class: 'text'
+
               li.grey-item
                 .text DRESS CODE
               li.normal-item
+                = link_to 'Daytime', build_taxon_path('Daytime'), class: 'text'
+              li.normal-item
                 = link_to 'Formal', build_taxon_path('Formal'), class: 'text'
+              li.normal-item
+                = link_to 'Vacation', build_taxon_path('Vacation'), class: 'text'
               li.normal-item
                 = link_to 'Wedding', build_taxon_path('Wedding'), class: 'text'
               li.normal-item
@@ -167,10 +178,6 @@ ruby:
                 = link_to 'Date Night', build_taxon_path('Date Night'), class: 'text'
               li.normal-item.no-border
                 = link_to 'Cocktail', build_taxon_path('Cocktail'), class: 'text'
-              li.grey-item
-                .text SEPARATES
-              li.normal-item.no-border
-                = link_to 'Skirts', skirts_collection_path, class: 'text'
 
         - if Features.active?(:fameweddings)
 
