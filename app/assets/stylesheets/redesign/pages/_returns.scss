@@ -1,94 +1,114 @@
-.returns {
+.return-page {
 
-  .chosen-container-single .chosen-single {
-    float: none;
-    border: 1px solid black;
-    background:$c-neutral-white;
-    box-shadow: none !important;
+  h1 {
+    margin: 40px 0;
+    text-transform: none;
+  }
+
+  p {
+    font-weight: normal;
+  }
+
+  a {
+    color: $c-neutral-black;
+  }
+
+  .order-number,
+  .order-date {
+    margin: 5px 0;
+    color: $c-neutral-black;
+    text-transform: uppercase;
+    word-spacing: 0.2rem;
+    letter-spacing: 0.1rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+    font-family: $font-family-secondary;
+  }
+
+  .inner-wrapper {
+    @extend %cfix;
+  }
+
+  .dress-wrapper {
+    font-family: $font-heading;
+    padding: 30px 0 40px;
+    margin-bottom: 40px;
+    border-bottom: solid $c-neutral-9 1px;
+
+    .item-img {
+      padding-left: 0;
+    }
+
+    .ordered-item-image {
+      width: auto;
+    }
+
+    .item-name {
+      font-size: 3.8rem;
+      font-weight: 300;
+      line-height: 3.8rem;
+      margin: 30px 0 20px;
+    }
+
+    .quantity {
+      font-size: 3.6rem;
+    }
+
+    .size,
+    .color {
+      font-size: 2.3rem;
+      font-weight: 300;
+      line-height: 2.4rem;
+      margin-bottom: 0;
+
+      .info-details {
+        font-style: italic;
+      }
+    }
+
+    .price {
+      font-family: $font-family-secondary;
+      font-weight: 600;
+      margin-top: 40px;
+      text-align: left;
+    }
   }
 
   label {
-    display:block;
-    margin-bottom:0px;
-    width:100%;
+    margin-bottom: 10px;
   }
 
-  .return-reason-category-container {
-    label {
-      margin-top:7px;
-      margin-bottom:0px;
-    }
-
-  }
-
-  .background-grey {
-    background-color: $c-neutral-2;
-  }
-
-
-  p.option {
-    text-transform: uppercase;
-    font-size: 12px;
-  }
-
-  table {
-    background-color: $c-neutral-white;
-    text-align: left;
-
-    td {
-      padding: 0;
-
-      img {
-        float: left;
-
-        @media only screen and (max-width: 800px) {
-          clear: both
-        }
-
-      }
-
-      p {
-        padding-left: 15rem;
-
-        @media only screen and (min-width: 801px) {
-          padding-top: 3rem;
-        }
-
-      }
-
-    }
-
-  }
-
-  button.btn {
-    padding: 0;
+  .chosen-container-single {
+    margin-bottom: 20px;
+    width: 100% !important;
   }
 
   .btn.submit {
-    margin-bottom: 1rem;
-    width: 100%;
-    height: 45px;
+    font-weight: normal;
+    font-size: 1.2rem;
+    padding: 0;
+    width: 150px;
+    height: 35px;
+    float: right;
+    margin: 20px 0;
   }
 
-  .row.header {
+  aside {
+    font-family: $font-heading;
+
     h2 {
-      padding-left: 2rem;
-      text-align: center;
-    }
-
-    h2.order-number {
-      margin-bottom: 0.5rem;
-    }
-
-    h2.order-date {
       margin-top: 0;
-      font-size: 15px;
     }
 
+    p {
+      font-size: 1.2em;
+      font-weight: 300;
+      font-family: $font-heading;
+    }
   }
-
 }
 
+//TODO Return Page Success still in the old design
 .page-returns-success {
 
   p {
@@ -206,19 +226,6 @@
 
 // START - mobile
 @media (max-width: $bootstrap-md-width - 1px) {
-
-  .returns {
-
-    .table > tbody > tr > td {
-      border-top: black solid 1px;
-    }
-
-    .table > tbody + tbody {
-      border-top: none;
-    }
-
-  }
-
   .page-returns-success {
 
     .page-title,
