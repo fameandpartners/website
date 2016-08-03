@@ -141,9 +141,9 @@
         }
 
         // Scroll smoothly to our target
-        $('html, body').delay(300).animate({
+        $('html, body').animate({
           scrollTop: (target.offset().top-offsetHeightNav)
-        }, 500);
+        }, 250);
         // Keep local anchor navigation in browser history
         history.pushState({}, "", this.href);
         return false;
