@@ -1,8 +1,10 @@
-.panel.panel-default
+.panel.content-collapse-expand.panel-default#collapse-delivery-international
   .panel-heading role="tab"
-    a.panel-title.collapsed href="javascript:;" role="button" data-toggle="collapse-next" Do you ship internationally?
+    a.panel-title.faq-title.collapsed href="#collapse-delivery-international" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+      | Do you ship internationally?
+      span.btn-open-close
 
-  #collapse-delivery-international.panel-collapse.collapse role="tabpanel"
+  .panel-collapse.collapse role="tabpanel"
     .panel-body
-
-      p Yes! Any country outside of the United States, Australia, United Kingdom, New Zealand, and Canada will be charged a $30 shipping fee.
+      p
+        | Yes! Any country outside of the United States, Australia, United Kingdom, New Zealand, and Canada will be charged a $30 shipping fee.

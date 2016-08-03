@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Scrollspy} from 'react-scrollspy';
-import {StickyContainer, Sticky} from 'react-sticky';
 import Slick from 'react-slick';
 
 class PdpGallery extends React.Component {

@@ -1,8 +1,10 @@
-.panel.panel-default
+.panel.content-collapse-expand.panel-default#collapse-delivery-sign
   .panel-heading role="tab"
-    a.panel-title.collapsed href="javascript:;" role="button" data-toggle="collapse-next" Will I have to sign for my delivery?
+    a.panel-title.faq-title.collapsed href="#collapse-delivery-sign" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+      | Will I have to sign for my delivery?
+      span.btn-open-close
 
-  #collapse-delivery-sign.panel-collapse.collapse role="tabpanel"
+  .panel-collapse.collapse role="tabpanel"
     .panel-body
-
-      p Someone will need to be home to sign for your order upon delivery.
+      p
+        | Someone will need to be home to sign for your order upon delivery.

@@ -3,14 +3,15 @@
 .page-content.lookbook-v2-page.relative
 
   .category-header
-    .media-wrap
-      = image_tag 'style-icon/high-summer/hero-header.jpg', :srcset => "#{image_path("style-icon/high-summer/hero-header-mob.jpg")} 1023w,
-            #{image_path("style-icon/high-summer/hero-header.jpg")} 1024w", :class => 'img-responsive', :alt => "Brittany Xavier's High Summer Collection"
+    .hero-wrap
+      .media-wrap
+        = image_tag 'style-icon/high-summer/hero-header.jpg', :srcset => "#{image_path("style-icon/high-summer/hero-header-mob.jpg")} 1023w,
+              #{image_path("style-icon/high-summer/hero-header.jpg")} 1024w", :class => 'img-responsive', :alt => "Brittany Xavier's High Summer Collection"
 
-    .outer-wrap
-      .inner-wrap
-        h1.title.hidden-xs.hidden-sm
-          span Brittany Xavier
+      .outer-wrap
+        .inner-wrap
+          h1.title.hidden-xs.hidden-sm
+            span Brittany Xavier
 
   // F&P Style Icon - Intro text
   section.section-box.container-fluid.no-padding.no-margin.top-overlay.section-intro
@@ -40,7 +41,7 @@
   .local-navigation-wrapper.container-fluid
     .row
       .local-navigation.js-float-menu-on-scroll
-        .col-md-10.col-md-offset-1
+        .nav-wrapper.col-md-10.col-md-offset-1
           ul.nav
             - how_many_links = 8
             - for i in (1..how_many_links) do

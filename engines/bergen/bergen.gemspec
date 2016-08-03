@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'savon'
   s.add_dependency 'sidekiq'
   s.add_dependency 'sentry-raven'
+  s.add_dependency 'shippo'
 
   # s.add_dependency 'jquery-rails'
 

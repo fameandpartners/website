@@ -10,8 +10,17 @@
     color: $c-neutral-black;
   }
 
+
   a {
     color: $c-neutral-black;
+  }
+
+  .hero-wrap {
+
+    .sub-heading {
+      font-style: normal;
+    }
+
   }
 
   .section-intro {
@@ -32,7 +41,7 @@
 
   }
 
-  .content-copy:not(.vertical-align){
+  .content-copy:not(.vertical-align) {
 
     h3 {
       margin-top: 70px;
@@ -59,6 +68,32 @@
     @include column-vertical-align();
   }
 
+  .products-grid {
+    margin: 70px 0;
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    h1 > span:first-child {
+      font-size: 4.4rem;
+    }
+
+    .product-info {
+      display: inline;
+
+      &:first-of-type {
+        padding-left: 5px;
+      }
+
+      &:not(:first-of-type)::before {
+        content: " | ";
+        padding: 0 5px;
+      }
+
+    }
+
+  }
+
   @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
 
     .container-fluid.no-padding.no-margin .vertical-align-copy .content-img {
@@ -69,9 +104,17 @@
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
-    .copy-wrap h3 {
-      margin-top: 40px;
-      font-size: 3rem;
+    .copy-wrap {
+
+      .sub-heading {
+        border-top: 0;
+      }
+
+      h3 {
+        margin-top: 40px;
+        font-size: 3rem;
+      }
+
     }
 
     .content-copy {
