@@ -7,13 +7,13 @@
       localNavOffsetTop = 0;
 
   if ($("#fixed-header").length)
-    var navHeightDesktop = $("#fixed-header").delay(300).outerHeight();
+    navHeightDesktop = $("#fixed-header").delay(300).outerHeight();
 
   if ($(".js-float-menu-on-scroll").length)
-    var navHeightLocalMenu = $(".js-float-menu-on-scroll").delay(300).outerHeight();
+    navHeightLocalMenu = $(".js-float-menu-on-scroll").delay(300).outerHeight();
 
   if ($(".local-navigation-wrapper .js-float-menu-on-scroll").length)
-    var localNavOffsetTop = $(".local-navigation-wrapper .js-float-menu-on-scroll").offset().top;
+    localNavOffsetTop = $(".local-navigation-wrapper .js-float-menu-on-scroll").offset().top;
 
     var offsetHeight = navHeightDesktop+navHeightLocalMenu,
         offsetHeightExtra = 45, // The desired distance between the target and the fixed header + local navigation
@@ -116,10 +116,10 @@
             offsetHeightNav = 0;
 
         if ($(".js-float-menu-on-scroll").length)
-          var navHeightLocalMenu = $(".js-float-menu-on-scroll").delay(300).outerHeight();
+          navHeightLocalMenu = $(".js-float-menu-on-scroll").delay(300).outerHeight();
 
         if ($("#fixed-header").length)
-          var navHeightDesktop = $("#fixed-header").delay(300).outerHeight();
+          navHeightDesktop = $("#fixed-header").delay(300).outerHeight();
 
         // Reset our on-load anchor target helper
         if ($('.js-hashlink').length)
