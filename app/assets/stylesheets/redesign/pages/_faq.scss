@@ -26,13 +26,13 @@
   .faq-wrap {
     color: $c-neutral-10;
 
-    a {
+    a,
+    a:hover {
+      color: $c-neutral-black;
+    }
+
+    a.collapsed {
       color: $c-neutral-10;
-
-      &:hover {
-        color: $c-neutral-black;
-      }
-
     }
 
     p,
