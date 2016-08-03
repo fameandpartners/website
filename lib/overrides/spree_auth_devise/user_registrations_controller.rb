@@ -42,16 +42,13 @@ Spree::UserRegistrationsController.class_eval do
       resource.sign_up_via    = Spree::User::SIGN_UP_VIA.index('Email')
       resource.sign_up_reason = session[:sign_up_reason]
     end
-    EmailCaptureWorker.perform_async(user:         { email:      @user.email,
-                                                     newsletter: @user.newsletter,
-                                                     first_name: @user.first_name,
-                                                     last_name:  @user.last_name },
-                                     remote_ip:    request.remote_ip,
-                                     landing_page: session[:landing_page],
-                                     utm_params:   session[:utm_params],
-                                     site_version: current_site_version.name)
 
     if resource.save
+      EmailCaptureWorker.perform_async(resource.id, remote_ip:    request.remote_ip,
+                                                    landing_page: session[:landing_page],
+                                                    utm_params:   session[:utm_params],
+                                                    site_version: current_site_version.name)
+
       session.delete(:sign_up_reason)
 
       sign_in :spree_user, resource
