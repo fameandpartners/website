@@ -16,7 +16,7 @@
     localNavOffsetTop = $(".local-navigation-wrapper .js-float-menu-on-scroll").offset().top;
 
     var offsetHeight = navHeightDesktop+navHeightLocalMenu,
-        offsetHeightExtra = 45, // The desired distance between the target and the fixed header + local navigation
+        offsetTargetTopPadding = 45, // The desired distance between the target and the fixed header + local navigation
         mdScreenWidth = 992;
 
   // Add DOM helper if we are loading this page directly from an URL containing an anchor (/something#foo=bar)
@@ -30,7 +30,7 @@
     elem.removeAttribute('id');
     elem.insertAdjacentHTML('beforebegin', hashlink);
     if ($(".local-navigation .nav").length) {
-      $('.js-hashlink').css({'height': (offsetHeight-offsetHeightExtra)+'px', 'margin-top': -(offsetHeight-offsetHeightExtra)+'px'});
+      $('.js-hashlink').css({'height': (offsetHeight-offsetTargetTopPadding)+'px', 'margin-top': -(offsetHeight-offsetTargetTopPadding)+'px'});
     } else {
       $('.js-hashlink').css({'height': offsetHeight+'px', 'margin-top': -offsetHeight+'px'});
     }
@@ -41,7 +41,7 @@
   if ($('.js-float-menu-on-scroll').length) {
 
     // Add scrollspy trigger
-    $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (offsetHeight+offsetHeightExtra) })
+    $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (offsetHeight+offsetTargetTopPadding) })
 
     // Watch scrolling to show/hide floating menu
     $(document).delay(500).on("scroll", function() {
@@ -124,7 +124,7 @@
         // Reset our on-load anchor target helper
         if ($('.js-hashlink').length)
           if ($(".local-navigation .nav").length) {
-            $('.js-hashlink').css({'height': '0px', 'margin-top': offsetHeightExtra+'px'});
+            $('.js-hashlink').css({'height': '0px', 'margin-top': offsetTargetTopPadding+'px'});
           } else {
             $('.js-hashlink').css({'height': '0px', 'margin-top': '0px'});
           }
