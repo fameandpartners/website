@@ -18,8 +18,8 @@
   });
 
   // Watch clicks on anchor links
-  $(document).has(".panel-collapse").on("click", "a[href*='#']:not([href='#'], [href*='#panel-'], [data-toggle=collapse-next])", function() {
-    // Expand/Collapse panels
+  $(document).has(".panel-collapse").on("click", "a.panel-title:not([href*='#panel-'], [data-toggle=collapse-next])", function() {
+    // Expand panels
     $('.active #' + this.hash.slice(1) + ' .panel-collapse').addClass('in').css('height','');
     $('.active #' + this.hash.slice(1) + ' .panel-title').removeClass('collapsed');
   });
