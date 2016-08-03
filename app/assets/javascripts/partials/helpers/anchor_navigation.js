@@ -2,20 +2,20 @@
 (function ($) {
 
   // Get useful data before any interaction
-  var navHeightDesktop = 0,
-      navHeightLocalMenu = 0,
-      localNavOffsetTop = 0;
+  var sitewideHeaderHeight = 0,
+      navLocalMenuHeight = 0,
+      localNavTopOffset = 0;
 
   if ($("#fixed-header").length)
-    navHeightDesktop = $("#fixed-header").delay(300).outerHeight();
+    sitewideHeaderHeight = $("#fixed-header").delay(300).outerHeight();
 
   if ($(".js-float-menu-on-scroll").length)
-    navHeightLocalMenu = $(".js-float-menu-on-scroll").delay(300).outerHeight();
+    navLocalMenuHeight = $(".js-float-menu-on-scroll").delay(300).outerHeight();
 
   if ($(".local-navigation-wrapper .js-float-menu-on-scroll").length)
-    localNavOffsetTop = $(".local-navigation-wrapper .js-float-menu-on-scroll").offset().top;
+    localNavTopOffset = $(".local-navigation-wrapper .js-float-menu-on-scroll").offset().top;
 
-    var offsetHeight = navHeightDesktop+navHeightLocalMenu,
+    var offsetHeight = sitewideHeaderHeight+navLocalMenuHeight,
         offsetTargetTopPadding = 45, // The desired distance between the target and the fixed header + local navigation
         mdScreenWidth = 992;
 
@@ -48,7 +48,7 @@
       var windowPosition = $(window).scrollTop();
 
       // Toggle floating menu if window position is below the target element
-      if (windowPosition+navHeightDesktop >= $(".local-navigation-wrapper").offset().top+navHeightLocalMenu){
+      if (windowPosition+sitewideHeaderHeight >= $(".local-navigation-wrapper").offset().top+navLocalMenuHeight){
         if ($('.js-float-menu-on-scroll.fixed-nav').length) {
           $('.js-float-menu-on-scroll.fixed-nav').fadeIn(100);
           $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile').fadeIn(100);
@@ -111,15 +111,15 @@
       if (target.length) {
         // Get some useful data after the click interaction
         var offsetClickFromLocalNav = 0,
-            navHeightLocalMenu = 0,
-            navHeightDesktop = 0,
-            offsetHeightNav = 0;
+            navLocalMenuHeight = 0,
+            sitewideHeaderHeight = 0,
+            offsetNavHeight = 0;
 
         if ($(".js-float-menu-on-scroll").length)
-          navHeightLocalMenu = $(".js-float-menu-on-scroll").delay(300).outerHeight();
+          navLocalMenuHeight = $(".js-float-menu-on-scroll").delay(300).outerHeight();
 
         if ($("#fixed-header").length)
-          navHeightDesktop = $("#fixed-header").delay(300).outerHeight();
+          sitewideHeaderHeight = $("#fixed-header").delay(300).outerHeight();
 
         // Reset our on-load anchor target helper
         if ($('.js-hashlink').length)
@@ -131,18 +131,18 @@
 
         // This prevents the anchor target to be overlayed by our floating header
         if ($(this).closest(".local-navigation-wrapper").length)
-          offsetClickFromLocalNav = navHeightLocalMenu;
+          offsetClickFromLocalNav = navLocalMenuHeight;
 
         // Define the top offset for our anchor navigation, based on screen size
         if ($(window).width() < mdScreenWidth) {
-          offsetHeightNav = navHeightLocalMenu;
+          offsetNavHeight = navLocalMenuHeight;
         } else {
-          offsetHeightNav = navHeightDesktop+offsetClickFromLocalNav;
+          offsetNavHeight = sitewideHeaderHeight+offsetClickFromLocalNav;
         }
 
         // Scroll smoothly to our target
         $('html, body').animate({
-          scrollTop: (target.offset().top-offsetHeightNav)
+          scrollTop: (target.offset().top-offsetNavHeight)
         }, 250);
         // Keep local anchor navigation in browser history
         history.pushState({}, "", this.href);
