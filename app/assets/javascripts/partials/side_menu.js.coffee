@@ -14,6 +14,10 @@ window.SideMenu = class SideMenu
     $(@$overlay).on 'click', =>
       @close()
 
+    if($('#sideMenu nav').is(':visible'))
+      $('a.expand-faq').on 'click', =>
+        @close()
+
     $(document).on('mousedown', (e) =>
       @xDown = e.originalEvent.x
       @blockScroll()
