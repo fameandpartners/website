@@ -55,4 +55,4 @@ window.page.UserOrderReturner = class UserOrderReturner
           alert('You must select a reason for return')
           return
       # disable submit button after successfull click
-      $('.returns button.btn.btn-black.submit').prop('disabled', true)
+      $(e.target).find('button').prop('disabled', true);
