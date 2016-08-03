@@ -107,7 +107,7 @@ ruby:
             = link_to 'SHOP ALL NEW THIS WEEK', build_taxon_path('New This Week'), class: "btn btn-black btn-md"
 
         div#dresses-menu
-          - cache ['views/layouts/redesign/mega_menu/_dress-code.html.slim', 'dresses-menu'] do
+          - cache ['views/layouts/redesign/mega_menu/_dress_code', 'dresses-menu'] do
             ul.nav.navbar-nav
               li.normal-item
                 .text.text-back SHOP
@@ -116,7 +116,7 @@ ruby:
                   .back BACK
               li.grey-item
                 .text SHOP BY
-              = render partial: 'layouts/redesign/mega_menu/shop-by'
+              = render partial: 'layouts/redesign/mega_menu/shop_by'
 
               li.grey-item
                 .text STYLES
@@ -124,7 +124,7 @@ ruby:
 
               li.grey-item
                 .text DRESS CODE
-              = render partial: 'layouts/redesign/mega_menu/dress-code'
+              = render partial: 'layouts/redesign/mega_menu/dress_code'
 
         - if Features.active?(:fameweddings)
 
@@ -142,7 +142,7 @@ ruby:
                     .copy-wrap MADE WITH LOVE <em><span>SIGN UP AND START PLANNING YOUR DREAM DRESSES</span></em>
               li.grey-item
                 .text VIEW THE COLLECTIONS
-              = render partial: 'layouts/redesign/mega_menu/wedding-collections'
+              = render partial: 'layouts/redesign/mega_menu/wedding_collections'
 
               li.grey-item
                 .text WEDDING PLANNER
