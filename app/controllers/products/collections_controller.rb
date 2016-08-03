@@ -128,17 +128,18 @@ class Products::CollectionsController < Products::BaseController
   def parse_permalink(permalink)
     return {} if permalink.blank? # Note: remember the route "/*permalink". Blank means "/dresses" category
 
-    available_color_groups = Spree::OptionValuesGroup.for_colors.available_as_taxon
-    if (color_group = available_color_groups.where(name: permalink).first)
+    # Color groups as categories
+    if (color_group = Spree::OptionValuesGroup.for_colors.available_as_taxon.where(name: permalink).first)
       return { color_group: color_group.name }
     end
 
-    if taxon = Spree::Taxon.published.find_child_taxons_by_permalink(permalink)
+    # Taxons as categories
+    if (taxon = Spree::Taxon.published.find_child_taxons_by_permalink(permalink))
       case taxonomy = taxon.taxonomy.name.downcase
         when 'style', 'edits', 'event'
-          return {taxonomy.to_sym => permalink}
+          return { taxonomy.to_sym => permalink }
         when 'range'
-          return {collection: permalink}
+          return { collection: permalink }
       end
     end
 
