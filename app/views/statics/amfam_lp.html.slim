@@ -5,8 +5,8 @@ ruby:
   else
     cache_keys << 'not-authenticated'
   end
-  cache_keys << 'products' 
-  
+  cache_keys << 'products'
+
   if show_prices_with_applied_promocode? && current_promotion.present?
     cache_keys.push(current_promotion.code)
   end
@@ -19,7 +19,7 @@ ruby:
     - products = get_products_from_edit('AMFAM', nil, nil, 20)
     .sb1
       = image_tag 'campaigns/amfam/banner1.jpg', width: 1140, class: 'image'
-    .inner  
+    .inner
       .sb2
         .left
           = image_tag 'campaigns/amfam/text.jpg', alt: '', class: 'textimg'
@@ -43,7 +43,7 @@ ruby:
                 = amfam_hoverable_product_image_tag dress, itemprop: 'image', alt: dress.name
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
-              .price = price_for_product(dress) 
+              .price = price_for_product(dress)
       .sb3
         .left
           = image_tag 'campaigns/amfam/2.jpg', width: 764, class: 'image', alt: ''
@@ -57,7 +57,7 @@ ruby:
               .text
                 = link_to dress.name, collection_product_path(dress), class: 'title'
                 .price = price_for_product(dress)
-              
+
       .catalog
         - products[7..10].each do |dress|
           .catalog-item
@@ -67,6 +67,3 @@ ruby:
             .text
               = link_to dress.name, collection_product_path(dress), class: 'title'
               .price = price_for_product(dress)
-      
-
-script type="application/javascript" src="//s.uadx.com/6ef9a6c0-178d-11e4-80ee-22000afe405e:1a1d5400-480a-11e4-9e3e-22000afe405e.js"
