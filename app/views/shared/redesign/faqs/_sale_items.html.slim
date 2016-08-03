@@ -1,8 +1,11 @@
-.panel.panel-default
+.panel.content-collapse-expand.panel-default
   .panel-heading role="tab"
-    a.panel-title.collapsed href="javascript:;" role="button" data-toggle="collapse-next" Can I return sale items?
+    a.panel-title.faq-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+      | Can I return sale items?
+      span.btn-open-close
 
   #collapse-returns-sale-items.panel-collapse.collapse role="tabpanel"
     .panel-body
 
-      p All sale items are considered a final sale. Please note that sale items include those items that are on markdown on the website.  Dresses purchased using a Promo Code or email offer are not considered a sale item and are eligible to return.
+      p
+        | All sale items are considered a final sale. Please note that sale items include those items that are on markdown on the website.  Dresses purchased using a Promo Code or email offer are not considered a sale item and are eligible to return.
