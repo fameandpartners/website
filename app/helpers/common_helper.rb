@@ -15,7 +15,7 @@ module CommonHelper
   end
 
   def get_canonical_href
-    canonical_url = URI.parse(request.url)
+    canonical_url = Addressable::URI.parse(request.url)
 
     if @product.present?
       canonical_url.path = collection_product_path(@product)
