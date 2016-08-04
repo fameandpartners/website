@@ -96,47 +96,47 @@ class Products::CollectionDetails
   # Banner meta information is now handled by the Revolution CMS!!!
   def color_data
     {
-      'black'         => {
+      'black'       => {
         banner: {
           image: "#{configatron.asset_host}/category-banners/black-dresses-dark-bg.jpg"
         },
       },
-      'blues-purples' => {
+      'blue-purple' => {
         banner: {
           image: "#{configatron.asset_host}/category-banners/blue-dresses-bg.jpg"
         },
       },
-      'greens'        => {
+      'green'       => {
         banner: {
           image: "#{configatron.asset_host}/category-banners/green-dresses-bg.jpg"
         }
       },
-      'grey'          => {
+      'grey'        => {
         banner: {
           image: "#{configatron.asset_host}/category-banners/grey-dresses-bg.jpg"
         }
       },
-      'nude-tan'      => {
+      'nude-tan'    => {
         banner: {
           image: "#{configatron.asset_host}/category-banners/nude-tan-dresses-bg.jpg"
         }
       },
-      'pastels'       => {
+      'pastel'      => {
         banner: {
           image: "#{configatron.asset_host}/category-banners/pastel-dresses-bg.jpg"
         },
       },
-      'pinks'         => {
+      'pink'        => {
         banner: {
           image: "#{configatron.asset_host}/category-banners/pink-dresses-bg.jpg"
         },
       },
-      'reds'          => {
+      'red'         => {
         banner: {
           image: "#{configatron.asset_host}/category-banners/red-dresses-dark-bg.jpg"
         },
       },
-      'white-ivory'   => {
+      'white-ivory' => {
         banner: {
           image: "#{configatron.asset_host}/category-banners/white-dresses-bg.jpg"
         },

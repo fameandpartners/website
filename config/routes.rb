@@ -247,10 +247,7 @@ FameAndPartners::Application.routes.draw do
       get '/wedding', to: redirect('/dresses/bridal')
       get '/short', to: redirect('/dresses/mini')
 
-      get '/blue', to: redirect('/dresses/blues-purples')
-      get '/pastel', to: redirect('/dresses/pastels')
-      get '/pink', to: redirect('/dresses/pinks')
-      get '/red', to: redirect('/dresses/reds')
+      get '/blue', to: redirect('/dresses/blue-purple')
       get '/white', to: redirect('/dresses/white-ivory')
 
       # Current collections
