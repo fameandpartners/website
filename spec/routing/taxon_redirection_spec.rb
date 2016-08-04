@@ -15,5 +15,11 @@ describe 'Taxon Redirection', type: :request do
   context '08-2016 mega menu update' do
     it_will :redirect, '/dresses/wedding', '/dresses/bridal'
     it_will :redirect, '/dresses/short', '/dresses/mini'
+
+    it_will :redirect, '/dresses/blue', '/dresses/blues-purples'
+    it_will :redirect, '/dresses/pastel', '/dresses/pastels'
+    it_will :redirect, '/dresses/pink', '/dresses/pinks'
+    it_will :redirect, '/dresses/red', '/dresses/reds'
+    it_will :redirect, '/dresses/white', '/dresses/white-ivory'
   end
 end

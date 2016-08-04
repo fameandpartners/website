@@ -1,13 +1,4 @@
 class ActivateSomeColorGroupsAsTaxons < ActiveRecord::Migration
-  # Black - black
-  # White/Ivory - white, ivory,
-  # Nude/Tan - dark tan, dark nude, light tan, light nude, sand, champagne, nude, dark chocolate, chocolate, coffee,
-  # Grey - pale grey, grey, mid grey, charcoal, water grey, mushroom,
-  # Greens - mint, dark mint, olive, army green, dark forest, sage green, teal, aqua, light teal, dark teal, turquoise, apple green
-  # Pinks - candy pink, pale pink, light pink, blush, rose, watermelon, coral, salmon, petal pink, pink nouveau, hot pink, magenta, flamingo pink, berry
-  # Reds - burgundy, red, cherry red, lipstick red, dark burgundy,
-  # Pastels - pale pink, pale blue, pale yellow, pale grey, peach, pastel peach,
-
   COLOR_GROUP_MAPPING = {
     'black'         => ['black'],
     'blues-purples' => ['pale blue', 'cobalt blue', 'purple', 'plum', 'ice blue', 'indigo', 'navy', 'lilac', 'lavender', 'dark lavender', 'aqua', 'cornflower blue', 'mauve'],
