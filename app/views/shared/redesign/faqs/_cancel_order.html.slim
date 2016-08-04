@@ -1,10 +1,10 @@
-.panel.content-collapse-expand.panel-default
+.panel.content-collapse-expand.panel-default#collapse-order-cancel
   .panel-heading role="tab"
-    a.panel-title.faq-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+    a.panel-title.faq-title.collapsed href="#collapse-order-cancel" role="button" data-parent=".panel-group" data-toggle="collapse-next"
       | Can I cancel my order?
       span.btn-open-close
 
-  #collapse-order-cancel.panel-collapse.collapse role="tabpanel"
+  .panel-collapse.collapse role="tabpanel"
     .panel-body
       p
-        | Yes! You are able to cancel your order within 24 hours of purchase. If you would like to cancel your order, please contact us immediately at <a href="mailto:team@fameandpartners.com">team@fameandpartners.com</a> with your cancellation request and order number.
+        | Yes! You are able to cancel your order within 24 hours of purchase. If you would like to cancel your order, please contact us immediately at #{link_to "team@fameandpartners.com", "mailto:team@fameandpartners.com"} with your cancellation request and order number.
