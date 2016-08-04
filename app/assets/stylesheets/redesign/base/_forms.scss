@@ -119,9 +119,3 @@ input[type="checkbox"] {
   }
 
 }
-
-// Select-box workaround for Safari
-// Ugly but it works...
-.chosen-container .chosen-results li[style*="display: inline;"] {
-  display: block !important;
-}
