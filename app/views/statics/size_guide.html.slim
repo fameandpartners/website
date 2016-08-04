@@ -37,7 +37,17 @@
         = image_tag 'sizing-video.jpg'
     .row
       .col-md-12
-        h2 Size guide
+        h2 New size guide
+        p Fame & Partners sizes are designed to fit the following measurements.
+
+      .container
+        .row.size-guide-row
+          .col-md-12
+            = render partial: '/products/details/size_chart_table', locals: { data: SizeChart::SIZE_CHART_2016_v2 , size_col_span: 2}
+
+    .row
+      .col-md-12
+        h2 Legacy size guide
         p Fame & Partners sizes are designed to fit the following measurements.
 
       .container
