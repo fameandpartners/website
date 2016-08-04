@@ -1,91 +1,42 @@
 /* [SHIPPING FEE ALERT]
 -------------------------------------------------------*/
-
 .alert-fee {
-  display: none;
-  padding: 15px;
   width: 100%;
+  padding: 15px;
   border: 1px solid $c-neutral-8;
-  margin-left: 0;
-  margin-top: 14px;
 
-  .left-part-img {
-    float: left;
-    width: 95px;
+  .media-wrap {
+    width: 60px;
+    margin-top: 10px;
   }
 
-  img {
-    padding: 23px 17px 23px 3px;
-  }
-
-  .right-part-text {
-    font-size: 1.4rem;
-    float: left;
-    margin-bottom: 15px;
-  }
-
-  h4 {
-    font-size: 1.4rem;
-    margin-top: 13px;
+  .title {
     font-weight: 500;
-    margin-bottom: 0;
+    text-transform: none;
+    color: $c-neutral-black;
+  }
+
+  p,
+  label {
+    font-size: 0.875em;
+  }
+
+  a {
+    font-weight: bold;
+    text-decoration: underline;
+    color: inherit;
   }
 
   input {
-    margin-right: 10px;
+    margin-top: 3px;
   }
-}
 
-.no-margin {
-  margin: 0;
-}
+  @media (max-width: $bootstrap-sm-width - 1px) {
 
-@media only screen and (max-width: 600px) {
-
-  .alert-fee {
-    padding: 0;
-    padding-bottom: 10px;
-
-    .left-part-img {
-      display: table;
-      width: auto;
-      float: none;
-      margin: 0 auto;
-
-      img {
-        padding: 10px 0 0;
-      }
+    .media-wrap {
+      width: 35px;
     }
 
-    .right-part-text {
-      width: 100%;
-      padding: 0 10px;
-      text-align: center;
-    }
   }
+
 }
-
-@media only screen and (max-width: 415px) {
-
-  .alert-fee {
-
-    .right-part-text {
-      width: 75%;
-      margin: 0 auto;
-      float: none;
-    }
-  }
-}
-
-@media only screen and (max-width: 375px) {
-
-  .alert-fee {
-
-    .right-part-text {
-      width: 90%;
-      padding: 0;
-    }
-  }
-}
-
-/*-------------------------------------------------------*/
