@@ -62,7 +62,8 @@
     margin-top: 25px;
   }
 
-  // START - desktop
+
+// START - desktop
   @media (min-width: $bootstrap-md-width) {
 
     h1 > span:first-child {
@@ -124,12 +125,11 @@
 
     }
 
-    &.white-text {
+    .white-text {
 
       .heading,
       .sub-heading,
       p,
-      a,
       span {
         color: $c-neutral-white;
       }
@@ -137,6 +137,7 @@
     }
 
   }
+
   // END - desktop
 
   @media (max-width: $bootstrap-md-width - 1px) {
