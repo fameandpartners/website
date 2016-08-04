@@ -60,5 +60,13 @@ describe 'Seo Helpers', type: :helper do
         expect(subject).to eq 'http://us.lvh.me/my-address'
       end
     end
+
+    context 'bad URL' do
+      let!(:request_double)  { double('Request', url: 'http://us.lvh.me/blah/vtha?a+|+b&c=d') }
+
+      it 'should generate path' do
+        expect(subject).to eq 'http://us.lvh.me/blah/vtha'
+      end
+    end
   end
 end
