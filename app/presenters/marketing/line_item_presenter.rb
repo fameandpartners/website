@@ -5,7 +5,10 @@ module Marketing
     extend Forwardable
 
     def_delegators :@item,
-                   :quantity
+                   :variant,
+                   :quantity,
+                   :making_options_text,
+                   :options_text
 
     attr_reader :item, :wrapped_order
 
@@ -30,10 +33,34 @@ module Marketing
       item.total.to_f
     end
 
-    private
+    def display_amount
+      item.display_amount.to_s
+    end
 
-    def variant
-      item.variant
+    def variant_display_amount
+      variant.display_amount.to_s
+    end
+
+    def size
+      if item.personalization.present?
+        item.personalization.size.try(:name)
+      else
+        item.variant.try(:dress_size).try(:name)
+      end
+
+      # || 'Unknown Size'
+    end
+
+    def color
+      if item.personalization.present?
+        item.personalization.color.try(:name) || 'Unknown Color'
+      else
+        item.variant.try(:dress_color).try(:name) || 'Unknown Color'
+      end
+    end
+
+    def height
+      item.personalization.present? ? item.personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
     end
 
     def product

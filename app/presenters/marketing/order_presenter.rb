@@ -51,22 +51,22 @@ module Marketing
     end
 
     def build_line_items
-      order.line_items.collect do |item|
+      line_items.collect do |item|
         image_urls        = Products::ColorVariantImageDetector.cropped_images_for(item.product)
         product_image_url = image_urls.sample # TODO: this should reflect the chosen line item color. Right now, is randomly picking a product image
 
         {
-          sku:                    item.variant.sku,
-          name:                   item.variant.product.name,
+          sku:                    item.sku,
+          name:                   item.product_name,
           making_options_text:    item.making_options_text,
           options_text:           item.options_text,
           quantity:               item.quantity,
-          variant_display_amount: item.variant.display_amount.to_s,
-          display_amount:         item.display_amount.to_s,
-          image_url:              product_image_url,
-          size:                   size(item),
-          color:                  color(item),
-          height:                 height(item)
+          variant_display_amount: item.variant_display_amount,
+          display_amount:         item.display_amount,
+          size:                   item.size,
+          color:                  item.color,
+          height:                 item.height,
+          image_url:              product_image_url
         }
       end
     end
@@ -82,28 +82,6 @@ module Marketing
       else
         []
       end
-    end
-
-    private
-
-    def size(line_item)
-      if line_item.personalization.present?
-        line_item.personalization.size.try(:name) || 'Unknown Size'
-      else
-        line_item.variant.try(:dress_size).try(:name) || 'Unknown Size'
-      end
-    end
-
-    def color(line_item)
-      if line_item.personalization.present?
-        line_item.personalization.color.try(:name) || 'Unknown Color'
-      else
-        line_item.variant.try(:dress_color).try(:name) || 'Unknown Color'
-      end
-    end
-
-    def height(line_item)
-      line_item.personalization.present? ? line_item.personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
     end
 
   end
