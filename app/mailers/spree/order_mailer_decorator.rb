@@ -20,11 +20,7 @@ Spree::OrderMailer.class_eval do
     subject = (resend ? "[#{t(:resend).upcase}] " : '')
     subject += "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
 
-    # TODO: `.build_line_items` and `.build_adjustments` should be Marketing::OrderPresenter's instance methods
-    # TODO: maybe these order presenters are very specific for emails...should the name "Marketing" be rethinked?
     order_presenter = Marketing::OrderPresenter.new(@order)
-    line_items      = Marketing::OrderPresenter.build_line_items(@order)
-    adjustments     = Marketing::OrderPresenter.build_adjustments(@order)
 
     user = @order.user
     user ||= Spree::User.where(email: @order.email).first
@@ -36,9 +32,9 @@ Spree::OrderMailer.class_eval do
         email_to:                    order_presenter.email,
         subject:                     subject,
         order_number:                order_presenter.number,
-        line_items:                  line_items,
+        line_items:                  order_presenter.build_line_items,
         display_item_total:          @order.display_item_total.to_s,
-        adjustments:                 adjustments,
+        adjustments:                 order_presenter.build_adjustments,
         display_total:               @order.display_total.to_s,
         auto_account:                user && user.automagically_registered?,
         today:                       Date.today.strftime('%d.%m.%y'),
@@ -57,13 +53,9 @@ Spree::OrderMailer.class_eval do
 
   def team_confirm_email(order)
     find_order(order)
-
-    @order_presenter = Orders::OrderPresenter.new(@order)
-
     subject = "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
 
-    line_items = Marketing::OrderPresenter.build_line_items(@order)
-    adjustments = Marketing::OrderPresenter.build_adjustments(@order)
+    order_presenter = Marketing::OrderPresenter.new(@order)
 
     user = @order.user
     user ||= Spree::User.where(email: @order.email).first
@@ -74,11 +66,11 @@ Spree::OrderMailer.class_eval do
         'order_team_confirmation_email',
         email_to:                       "team@fameandpartners.com",
         subject:                        subject,
-        line_items:                     line_items,
+        line_items:                     order_presenter.build_line_items,
         display_item_total:             @order.display_item_total.to_s,
-        promotion:                      @order_presenter.promotion?,
-        promocode:                      @order_presenter.promo_codes.join(', '),
-        adjustments:                    adjustments,
+        promotion:                      order_presenter.promotion?,
+        promocode:                      order_presenter.promo_codes.join(', '),
+        adjustments:                    order_presenter.build_adjustments,
         display_total:                  @order.display_total.to_s,
         # TODO: additional products info was a bridesmaid reference.
         additional_products_info:       false,

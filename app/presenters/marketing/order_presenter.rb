@@ -40,8 +40,17 @@ module Marketing
       AddressPresenter.new(order.bill_address)
     end
 
-    # TODO: `.build_line_items` and `.build_adjustments` should be instance methods
-    def self.build_line_items(order)
+    def promotion?
+      promo_codes.any?
+    end
+
+    def promo_codes
+      @promo_codes ||= order.adjustments.where("originator_type = 'Spree::PromotionAction'").collect { |adj|
+        "[#{adj.originator.promotion.code}] #{adj.originator.promotion.name}"
+      }
+    end
+
+    def build_line_items
       order.line_items.collect do |item|
         image_urls        = Products::ColorVariantImageDetector.cropped_images_for(item.product)
         product_image_url = image_urls.sample # TODO: this should reflect the chosen line item color. Right now, is randomly picking a product image
@@ -55,13 +64,14 @@ module Marketing
           variant_display_amount: item.variant.display_amount.to_s,
           display_amount:         item.display_amount.to_s,
           image_url:              product_image_url,
-          height:                 item.personalization.present? ? item.personalization.height : LineItemPersonalization::DEFAULT_HEIGHT,
-          color:                  item.personalization.present? ? item.personalization.color.try(:name) || 'Unknown Color' : item.variant.try(:dress_color).try(:name) || 'Unknown Color'
+          size:                   size(item),
+          color:                  color(item),
+          height:                 height(item)
         }
       end
     end
 
-    def self.build_adjustments(order)
+    def build_adjustments
       if order.adjustments.present?
         order.adjustments.eligible.collect do |adjustments_item|
           {
@@ -73,5 +83,28 @@ module Marketing
         []
       end
     end
+
+    private
+
+    def size(line_item)
+      if line_item.personalization.present?
+        line_item.personalization.size.try(:name) || 'Unknown Size'
+      else
+        line_item.variant.try(:dress_size).try(:name) || 'Unknown Size'
+      end
+    end
+
+    def color(line_item)
+      if line_item.personalization.present?
+        line_item.personalization.color.try(:name) || 'Unknown Color'
+      else
+        line_item.variant.try(:dress_color).try(:name) || 'Unknown Color'
+      end
+    end
+
+    def height(line_item)
+      line_item.personalization.present? ? line_item.personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
+    end
+
   end
 end
