@@ -37,8 +37,8 @@ Spree::OrderMailer.class_eval do
         today:                       Date.today.strftime('%d.%m.%y'),
         phone:                       order_presenter.phone,
         delivery_date:               order_presenter.projected_delivery_date,
-        billing_address_attributes:  order_presenter.billing_address_attributes,
-        shipping_address_attributes: order_presenter.shipping_address_attributes,
+        billing_address_attributes:  order_presenter.billing_address_attributes.to_h,
+        shipping_address_attributes: order_presenter.shipping_address_attributes.to_h,
         billing_address:             order_presenter.billing_address,
         shipping_address:            order_presenter.shipping_address
       )

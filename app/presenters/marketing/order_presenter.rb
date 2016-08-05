@@ -43,11 +43,11 @@ module Marketing
     end
 
     def shipping_address_attributes
-      AddressPresenter.new(order.ship_address).to_h
+      AddressPresenter.new(order.ship_address)
     end
 
     def billing_address_attributes
-      AddressPresenter.new(order.bill_address).to_h
+      AddressPresenter.new(order.bill_address)
     end
 
     def billing_address
