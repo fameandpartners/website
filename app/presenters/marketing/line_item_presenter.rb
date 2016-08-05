@@ -8,7 +8,8 @@ module Marketing
                    :variant,
                    :quantity,
                    :making_options_text,
-                   :options_text
+                   :options_text,
+                   :personalization
 
     attr_reader :item, :wrapped_order
 
@@ -41,30 +42,36 @@ module Marketing
       variant.display_amount.to_s
     end
 
-    def size
-      if item.personalization.present?
-        item.personalization.size.try(:name)
-      else
-        item.variant.try(:dress_size).try(:name)
-      end
-    end
-
     def current_size
       size.split('/').detect {|s| s.downcase.include? @wrapped_order.site_version } || 'Unknown Size'
     rescue
       'Unknown Size'
     end
 
-    def color
-      if item.personalization.present?
-        item.personalization.color.try(:name) || 'Unknown Color'
+    def size
+      if personalization.present?
+        personalization.size.try(:name)
       else
-        item.variant.try(:dress_color).try(:name) || 'Unknown Color'
+        variant.try(:dress_size).try(:name)
+      end
+    end
+
+    def color
+      if personalization.present?
+        personalization.color.try(:name) || 'Unknown Color'
+      else
+        variant.try(:dress_color).try(:name) || 'Unknown Color'
       end
     end
 
     def height
-      item.personalization.present? ? item.personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
+      personalization.present? ? personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
+    end
+
+    def customisation
+      if personalization.present?
+        personalization.customization_values.collect(&:presentation).join(' / ')
+      end
     end
 
     def product
