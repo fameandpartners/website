@@ -5,6 +5,31 @@
   }
 }
 .size-guide-lp{
+
+  .modal {
+
+    .inner-wrap {
+      padding: 40px 15px;
+      background: $c-neutral-2;
+    }
+
+    .title {
+      margin: 0 0 20px;
+      text-align: center;
+    }
+
+    p:last-child {
+      margin-bottom: o;
+    }
+
+    img {
+      display: block;
+      width: 40px;
+      margin: 0 auto 20px auto;
+    }
+
+  }
+
   .size-guide-row{
     .subheading-row{
       font-weight: 600;
@@ -40,24 +65,6 @@
 
   p{
       font-weight: 300;
-  }
-
-  .modal {
-
-    .inner-wrap {
-      padding: 60px;
-      background: $c-neutral-2;
-    }
-
-    .title {
-      margin: 0 0 20px;
-      text-align: center;
-    }
-
-    p:last-child {
-      margin-bottom: o;
-    }
-
   }
 
   .head-row{
@@ -133,6 +140,15 @@
       font-size: 2.5rem;
     }
   }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    .modal .inner-wrap {
+      padding: 60px;
+    }
+
+  }
+
 }
 
 @include iphone6 {
