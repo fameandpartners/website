@@ -30,17 +30,17 @@ Spree::OrderMailer.class_eval do
         subject:                     subject,
         order_number:                order_presenter.number,
         line_items:                  order_presenter.build_line_items,
-        display_item_total:          @order.display_item_total.to_s,
+        display_item_total:          order_presenter.display_item_total,
         adjustments:                 order_presenter.build_adjustments,
-        display_total:               @order.display_total.to_s,
+        display_total:               order_presenter.display_total,
         auto_account:                user && user.automagically_registered?,
         today:                       Date.today.strftime('%d.%m.%y'),
-        phone:                       @order.try(:billing_address).try(:phone) || 'No Phone',
-        delivery_date:               @order.projected_delivery_date.try(:strftime, '%a, %d %b %Y'),
-        billing_address_attributes:  order_presenter.billing_address.to_h,
-        shipping_address_attributes: order_presenter.shipping_address.to_h,
-        billing_address:             @order.try(:billing_address).to_s || 'No Billing Address',
-        shipping_address:            @order.try(:shipping_address).to_s || 'No Shipping Address',
+        phone:                       order_presenter.phone,
+        delivery_date:               order_presenter.projected_delivery_date,
+        billing_address_attributes:  order_presenter.billing_address_attributes,
+        shipping_address_attributes: order_presenter.shipping_address_attributes,
+        billing_address:             order_presenter.billing_address,
+        shipping_address:            order_presenter.shipping_address
       )
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)
@@ -61,20 +61,20 @@ Spree::OrderMailer.class_eval do
         email_to:                       "team@fameandpartners.com",
         subject:                        subject,
         line_items:                     order_presenter.build_line_items,
-        display_item_total:             @order.display_item_total.to_s,
+        display_item_total:             order_presenter.display_item_total,
         promotion:                      order_presenter.promotion?,
         promocode:                      order_presenter.promo_codes.join(', '),
         adjustments:                    order_presenter.build_adjustments,
-        display_total:                  @order.display_total.to_s,
+        display_total:                  order_presenter.display_total,
         # TODO: additional products info was a bridesmaid reference.
         additional_products_info:       false,
         additional_products_info_data:  [],
-        phone_present:                  @order.billing_address.present? ? @order.billing_address.phone.present? : false,
-        phone:                          @order.billing_address.present? ? @order.billing_address.phone : '',
-        billing_address:                @order.billing_address.to_s,
-        shipping_address:               @order.shipping_address.to_s,
-        required_to_present:            @order.required_to.present?,
-        required_to:                    @order.required_to
+        phone_present:                  order_presenter.phone_present?,
+        phone:                          order_presenter.phone,
+        billing_address:                order_presenter.billing_address,
+        shipping_address:               order_presenter.shipping_address,
+        required_to_present:            order_presenter.required_to.present?,
+        required_to:                    order_presenter.required_to
       )
     rescue StandardError => e
       NewRelic::Agent.notice_error(e)

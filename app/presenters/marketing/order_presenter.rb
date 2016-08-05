@@ -8,7 +8,8 @@ module Marketing
                    :currency,
                    :email,
                    :number,
-                   :site_version
+                   :site_version,
+                   :required_to
 
     attr_reader :order, :items
 
@@ -25,6 +26,14 @@ module Marketing
       order.total.to_f
     end
 
+    def display_total
+      order.display_total.to_s
+    end
+
+    def display_item_total
+      order.display_item_total.to_s
+    end
+
     def taxes_amount
       order.adjustments.tax.sum(:amount).to_f
     end
@@ -33,12 +42,32 @@ module Marketing
       order.adjustments.shipping.sum(:amount).to_f
     end
 
-    def shipping_address
-      AddressPresenter.new(order.ship_address)
+    def shipping_address_attributes
+      AddressPresenter.new(order.ship_address).to_h
+    end
+
+    def billing_address_attributes
+      AddressPresenter.new(order.bill_address).to_h
     end
 
     def billing_address
-      AddressPresenter.new(order.bill_address)
+      order.try(:billing_address).to_s || 'No Billing Address'
+    end
+
+    def shipping_address
+      order.try(:shipping_address).to_s || 'No Shipping Address'
+    end
+
+    def phone
+      order.try(:billing_address).try(:phone) || 'No Phone'
+    end
+
+    def phone_present?
+      order.try(:billing_address).try(:phone).present?
+    end
+
+    def projected_delivery_date
+      order.projected_delivery_date.try(:strftime, '%a, %d %b %Y')
     end
 
     def promotion?
