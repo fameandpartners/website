@@ -7,7 +7,8 @@ module Marketing
     def_delegators :@order,
                    :currency,
                    :email,
-                   :number
+                   :number,
+                   :site_version
 
     attr_reader :order, :items
 
@@ -64,6 +65,7 @@ module Marketing
           variant_display_amount: item.variant_display_amount,
           display_amount:         item.display_amount,
           size:                   item.size,
+          current_size:           item.current_size,
           color:                  item.color,
           height:                 item.height,
           image_url:              product_image_url

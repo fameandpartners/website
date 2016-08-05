@@ -47,8 +47,12 @@ module Marketing
       else
         item.variant.try(:dress_size).try(:name)
       end
+    end
 
-      # || 'Unknown Size'
+    def current_size
+      size.split('/').detect {|s| s.downcase.include? @wrapped_order.site_version } || 'Unknown Size'
+    rescue
+      'Unknown Size'
     end
 
     def color
