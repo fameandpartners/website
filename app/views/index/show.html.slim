@@ -73,13 +73,14 @@ ruby:
         .col-md-12.cta-item-huge
           = link_to '/brittany-xavier-high-summer-collection'
             .section-img-wrap.copy-center
-              picture
-                .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/Aug-3-tile1-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-3-tile1.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/Aug-3-tile1-mob.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/Aug-3-tile1-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/Aug-3-tile1.jpg")} 1024w' alt="Style Inspiration: Brittany Xavier"
+              .hero-wrap
+                picture.img-as-block
+                  .img-wrap
+                    source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/Aug-3-tile1-mob.jpg")}'
+                    source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-3-tile1.jpg")}'
+                    img src='#{image_path("homepage/fp-style-icon/Aug-3-tile1-mob.jpg")}' srcset='
+                      #{image_path("homepage/fp-style-icon/Aug-3-tile1-mob.jpg")} 1023w,
+                      #{image_path("homepage/fp-style-icon/Aug-3-tile1.jpg")} 1024w' alt="Style Inspiration: Brittany Xavier"
 
               .content-wrap
                 .container-cta
