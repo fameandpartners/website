@@ -349,6 +349,9 @@ page.initCheckoutEditPage = () ->
 
         page.pin_request_in_process = false
 
+    # TODO: this behavior belongs to the shipping warning fee component. This shouldn' be
+    # Used methods: `@countryChanged`, `@showShippingFeeAlert`, `@showShippingFeeAlert`, `@shippingFeeHasToBeApplied`, `@internationalShippingFeeCheckboxIsVisible`, `@internationalShippingFeeCheckboxIsChecked`
+    # `@uncheckInternationalShippingFeeCheckbox`, `@changeButtonStatus`, `@internationalShippingFeeCheckboxClicked`, `@selectedCountry`
     countryChanged: () ->
       element = $(this)
       useBillingAddressToShip = $('#ship_to_address_Ship_to_this_address')
