@@ -17,13 +17,10 @@ Spree::OrderMailer.class_eval do
 
   def confirm_email(order, resend = false)
     find_order(order)
+    order_presenter = Marketing::OrderPresenter.new(@order)
+    user = @order.user || Spree::User.where(email: @order.email).first
     subject = (resend ? "[#{t(:resend).upcase}] " : '')
     subject += "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
-
-    order_presenter = Marketing::OrderPresenter.new(@order)
-
-    user = @order.user
-    user ||= Spree::User.where(email: @order.email).first
 
     begin
       Marketing::CustomerIOEventTracker.new.track(
@@ -53,12 +50,9 @@ Spree::OrderMailer.class_eval do
 
   def team_confirm_email(order)
     find_order(order)
-    subject = "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
-
     order_presenter = Marketing::OrderPresenter.new(@order)
-
-    user = @order.user
-    user ||= Spree::User.where(email: @order.email).first
+    user = @order.user || Spree::User.where(email: @order.email).first
+    subject = "#{Spree::Config[:site_name]} #{t('order_mailer.confirm_email.subject')} ##{@order.number}"
 
     begin
       Marketing::CustomerIOEventTracker.new.track(
