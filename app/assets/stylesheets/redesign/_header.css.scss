@@ -1,3 +1,4 @@
+@import 'compass/css3/transition';
 @import 'mixins';
 
 /////////// locale warn //////////
@@ -669,45 +670,48 @@ ul.secondary.pull-right {
 
   }
 
-  .no-border{
+  .no-border {
     border: none !important;
   }
-  .normal-item{
-    height: 0;
-    font-size: 10pt;
+
+  .normal-item {
+    font-size: 1.3rem;
     padding-top: 15px;
     padding-bottom: 40px;
     font-weight: 600;
     padding-left: 10px;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: #D0D0D0;
-    -webkit-transition: margin-left 0.25s;
-    -moz-transition: margin-left 0.25s;
-    transition: margin-left 0.25s;
-    a{
+    border-bottom: 1px solid $c-neutral-4;
+    @include transition-property(margin-left);
+    @include transition-duration(0.25s);
+    cursor: pointer;
+
+    a {
       padding: 0;
     }
-    .text{
+
+    .text {
       width: 90%;
       float: left;
       margin-top: 3px;
       font-weight: 400;
     }
-    .arrow{
+
+    .arrow {
       float: left;
       width: initial;
       margin-top: 3px;
     }
-    div{
+
+    div {
       padding-bottom: 10px;
     }
+
   }
-  #inner-main-menu{
-    .text{
-      font-weight: 600 !important;
-    }
+
+  #inner-main-menu .text{
+    font-weight: 600 !important;
   }
+
   .inner-main-menu-slide-left{
     @media(max-width: 320px){
       margin-left: -300px;
@@ -933,10 +937,7 @@ ul.secondary.pull-right {
     .text{
       width: 95%;
     }
-    .normal-item:first-child{
-      padding-top: 10px;
-      border: none;
-    }
+
     .grey-item{
       background-color: #f5f5f5;
       margin-left: 15px;

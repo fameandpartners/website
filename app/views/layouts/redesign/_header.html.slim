@@ -107,7 +107,7 @@ ruby:
             = link_to 'SHOP ALL NEW THIS WEEK', build_taxon_path('New This Week'), class: "btn btn-black btn-md"
 
         div#dresses-menu
-          - cache ['views/layouts/redesign/_event.html.slim', 'dresses-menu'] do
+          - cache ['views/layouts/redesign/mega_menu/_dress_code', 'dresses-menu'] do
             ul.nav.navbar-nav
               li.normal-item
                 .text.text-back SHOP
@@ -116,79 +116,15 @@ ruby:
                   .back BACK
               li.grey-item
                 .text SHOP BY
-              li.normal-item
-                = link_to "Best Sellers", best_sellers_path, class: 'text'
-              li.normal-item
-                = link_to "View all dresses", dresses_path, class: 'text'
-              li.normal-item
-                = link_to "What's new", dresses_path(:order => 'newest'), class: 'text'
-              - unless Features.active?(:getitquick_unavailable)
-                li.normal-item
-                  = link_to 'Made in 48 hours', fast_making_dresses_path, class: 'text'
-              li.normal-item
-                = link_to 'Plus Size', build_taxon_path('Plus Size'), class: 'text'
+              = render partial: 'layouts/redesign/mega_menu/shop_by'
+
               li.grey-item
                 .text STYLES
-              li.normal-item
-                = link_to 'Two-Piece', build_taxon_path('Two Piece'), class: 'text'
-              li.normal-item
-                = link_to 'One Shoulder', build_taxon_path('One-Shoulder'), class: 'text'
-              li.normal-item
-                = link_to 'Strapless', build_taxon_path('Strapless'), class: 'text'
-              li.normal-item
-                = link_to 'V-Neck', build_taxon_path('V-Neck'), class: 'text'
-              li.normal-item
-                = link_to 'Split', build_taxon_path('Split'), class: 'text'
-              li.normal-item
-                = link_to 'Backless', build_taxon_path('Backless'), class: 'text'
-              li.normal-item
-                = link_to 'Lace', build_taxon_path('Lace'), class: 'text'
-              li.normal-item.no-border
-                = link_to 'Maxi', build_taxon_path('Maxi'), class: 'text'
-              li.normal-item.no-border
-                = link_to 'Short Dresses', build_taxon_path('Short'), class: 'text'
+              = render partial: 'layouts/redesign/mega_menu/style'
+
               li.grey-item
-                .text EVENTS
-              li.normal-item
-                = link_to 'Formal', build_taxon_path('Formal'), class: 'text'
-              li.normal-item
-                = link_to 'Wedding', build_taxon_path('Wedding'), class: 'text'
-              li.normal-item
-                = link_to 'Birthday', build_taxon_path('Birthday'), class: 'text'
-              li.normal-item
-                = link_to 'Special Event', build_taxon_path('Special Event'), class: 'text'
-              li.normal-item
-                = link_to 'Ball Gowns', build_taxon_path('Ball Gowns'), class: 'text'
-              li.normal-item
-                = link_to 'Bridesmaid', bridesmaid_collection_path, class: 'text'
-              li.normal-item
-                = link_to 'Graduation', build_taxon_path('Graduation'), class: 'text'
-              li.normal-item
-                = link_to 'Prom', build_taxon_path('Prom'), class: 'text'
-              li.normal-item
-                = link_to 'Homecoming', build_taxon_path('Homecoming'), class: 'text'
-              li.normal-item
-                = link_to 'Sweet 16', build_taxon_path('Sweet 16'), class: 'text'
-              li.normal-item
-                = link_to 'Debutante', build_taxon_path('Debutante'), class: 'text'
-              li.normal-item
-                = link_to 'Spring Racing', build_taxon_path('Spring Racing'), class: 'text'
-              li.normal-item
-                = link_to 'Party', build_taxon_path('Party'), class: 'text'
-              li.normal-item
-                = link_to 'New Years Eve', build_taxon_path('New Years Eve'), class: 'text'
-              li.normal-item
-                = link_to 'Red Carpet', build_taxon_path('Red Carpet'), class: 'text'
-              li.normal-item
-                = link_to 'Black Tie', build_taxon_path('Black Tie'), class: 'text'
-              li.normal-item
-                = link_to 'Date Night', build_taxon_path('Date Night'), class: 'text'
-              li.normal-item.no-border
-                = link_to 'Cocktail', build_taxon_path('Cocktail'), class: 'text'
-              li.grey-item
-                .text SEPARATES
-              li.normal-item.no-border
-                = link_to 'Skirts', skirts_collection_path, class: 'text'
+                .text DRESS CODE
+              = render partial: 'layouts/redesign/mega_menu/dress_code'
 
         - if Features.active?(:fameweddings)
 
@@ -206,11 +142,8 @@ ruby:
                     .copy-wrap MADE WITH LOVE <em><span>SIGN UP AND START PLANNING YOUR DREAM DRESSES</span></em>
               li.grey-item
                 .text VIEW THE COLLECTIONS
-              li.normal-item = link_to 'Bridesmaid Dresses', build_taxon_path('bridesmaid')
-              li.normal-item = link_to 'Wedding Dresses', build_taxon_path('wedding')
-              li.normal-item = link_to 'Wedding Guest Dresses', build_taxon_path('wedding-guests')
-              li.normal-item = link_to 'Lace Dresses', build_taxon_path('Lace')
-              li.normal-item.no-border = link_to 'Cocktail / Evening Weddings', build_taxon_path('cocktail')
+              = render partial: 'layouts/redesign/mega_menu/wedding_collections'
+
               li.grey-item
                 .text WEDDING PLANNER
               li.normal-item.no-border = link_to 'Register for Wedding Planner', bridesmaid_landing_page_path
@@ -227,12 +160,7 @@ ruby:
                 .panel-highlight.media-wrap
                   = image_tag 'lookbook/Cotton2016-MegaMenu-2016-07-01.jpg'
                   .copy-wrap The Freshly Picked Collection <em><span>View this collection</span></em>
-            li.normal-item = link_to 'The Ruffled Up Collection', the_ruffled_up_collection_path, class: 'text'
-            li.normal-item = link_to 'Partners In Crime', partners_in_crime_collection_path, class: 'text'
-            li.normal-item = link_to 'Just The Girls', just_the_girls_collection_path, class: 'text'
-            li.normal-item = link_to 'Love Lace', love_lace_collection_path, class: 'text'
-            li.normal-item = link_to 'This Modern Romance', this_modern_romance_collection_path, class: 'text'
-            li.normal-item.no-border = link_to 'View all lookbooks', lookbook_path, class: 'text'
+            = render partial: 'layouts/redesign/mega_menu/lookbook'
 
         div#moodboards-menu
           ul.nav.navbar-nav
@@ -299,7 +227,5 @@ ruby:
           li.bottom-area = link_to 'Contact Us', new_contact_url
           li.bottom-area = link_to 'FAQs', faqs_path
           li.bottom-area = link_to 'Size Guide', size_guide_path
-          - if current_site_version.is_australia?
-            li.bottom-area = link_to 'Fashion IT Girl', 'http://mystyle.fameandpartners.com/fitg-aus-2015'
           li.bottom-area = link_to 'Track My Order', faqs_path(anchor: 'collapse-orders-track'), class: 'expand-faq'
           /li.bottom-area = link_to 'Get styling advice', style_consultation_path
