@@ -78,3 +78,20 @@
         .head Customer Reviews
         .text
           em Reviews about our sizing success to come (not to be developed yet)
+          
+  .modal.fade.js-modal-new-sizes-alert
+    .modal-dialog
+      .modal-content
+        .outer-wrap
+          .inner-wrap
+            a.btn-close.md href='javascript:;' data-dismiss='modal' aria-label='Close'
+              .hide-visually Close Menu
+            h4.h2.title We are currently updating our size guides
+            p We recommend measuring yourself in your underwear, and if possible, the bra you will be wearing with the dress. It's much more accurate if your measurements are taken by someone else - so get ready to get intimate!
+            p We recommend measuring yourself in your underwear, and if possible, the bra you will be wearing with the dress. It's much more accurate if your measurements are taken by someone else - so get ready to get intimate!
+        
+  javascript:
+    //Show modal immediately after page load
+    $(document).ready(function() {
+      $('.js-modal-new-sizes-alert').modal('show')
+    });

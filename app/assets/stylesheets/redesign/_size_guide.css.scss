@@ -42,6 +42,24 @@
       font-weight: 300;
   }
 
+  .modal {
+
+    .inner-wrap {
+      padding: 60px;
+      background: $c-neutral-2;
+    }
+
+    .title {
+      margin: 0 0 20px;
+      text-align: center;
+    }
+
+    p:last-child {
+      margin-bottom: o;
+    }
+
+  }
+
   .head-row{
     .head{
       font-size: 3.5rem;
@@ -115,11 +133,6 @@
       font-size: 2.5rem;
     }
   }
-  #old-modal{
-    margin-left: 3px;
-    cursor: pointer;
-    text-decoration: underline;
-  }
 }
 
 @include iphone6 {
@@ -131,32 +144,5 @@
 @include iphone5 {
   .size-guide-lp .size-guide {
     font-size: 0.625em;
-  }
-}
-
-.vex-theme-flat-attack.old-size-modal{
-  .vex-content .vex-dialog-form .vex-dialog-input h2{
-    font-family: $font-heading !important;
-  }
-  p{
-    font-weight: 300;
-    font-family: $font-heading;
-    font-size: 16px;
-    margin-bottom: 0;
-  }
-  p.top{
-    margin-bottom: 30px;
-  }
-  .vex-overlay{
-    height: 200%;
-  }
-  .vex-content{
-    padding-left: 25px !important;
-    padding-right: 25px !important;
-    width: 80% !important;
-    border: 2px solid black !important;
-  }
-  .size-guide{
-    font-size: 16px;
   }
 }
