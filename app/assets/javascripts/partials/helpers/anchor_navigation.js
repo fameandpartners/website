@@ -13,11 +13,11 @@
     navLocalMenuHeight = $(".js-float-menu-on-scroll").delay(300).outerHeight();
 
   if ($(".local-navigation-wrapper .js-float-menu-on-scroll").length)
-    localNavTopOffset = $(".local-navigation-wrapper .js-float-menu-on-scroll").offset().top;
+    localNavTopOffset = $(".local-navigation-wrapper .js-float-menu-on-scroll").offset().top; // Desktop only
 
-    var offsetHeight = sitewideHeaderHeight+navLocalMenuHeight,
-        offsetTargetTopPadding = 45, // The desired distance between the target and the fixed header + local navigation
-        mdScreenWidth = 992;
+  var offsetHeight = sitewideHeaderHeight+navLocalMenuHeight,
+      offsetTargetTopPadding = 45, // The desired distance between the target and the page header
+      mdScreenWidth = 992;
 
   // Add DOM helper if we are loading this page directly from an URL containing an anchor (/something#foo=bar)
   // This is needed for our fixed header and floating menu
@@ -41,25 +41,49 @@
   if ($('.js-float-menu-on-scroll').length) {
 
     // Add scrollspy trigger
-    $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (offsetHeight+offsetTargetTopPadding) })
+    // If this is a mobile device we don't worry about the fixed header's height for the top offset
+    if( $(".local-navigation-wrapper .local-navigation").css('position') == 'fixed') {
+      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (offsetTargetTopPadding) })
+    } else {
+      //Since this is not a mobile device then we have to consider the fixed header in the top offset
+      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (offsetHeight+offsetTargetTopPadding) })
+    }
 
     // Watch scrolling to show/hide floating menu
     $(document).delay(500).on("scroll", function() {
-      var windowPosition = $(window).scrollTop();
 
-      // Toggle floating menu if window position is below the target element
-      if (windowPosition+sitewideHeaderHeight >= $(".local-navigation-wrapper").offset().top+navLocalMenuHeight){
-        if ($('.js-float-menu-on-scroll.fixed-nav').length) {
-          $('.js-float-menu-on-scroll.fixed-nav').fadeIn(100);
-          $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile').fadeIn(100);
-        } else {
-          $('.local-navigation-wrapper .js-float-menu-on-scroll').clone().addClass('fixed-nav').appendTo('#fixed-header').fadeIn(100);
-        }
+      // Checking if it is a mobile device...
+      // Mobile: attach the local menu to the bottom
+      if( $(".local-navigation-wrapper .local-navigation").css('position') == 'fixed' ) {
+
+        $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile').fadeIn(100);
+        $('.js-footer').css({'padding-bottom': ''+navLocalMenuHeight*1.1+'px'}); //Add an extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
+
       } else {
-        if ($('.js-float-menu-on-scroll.fixed-nav').length) {
-          $('.js-float-menu-on-scroll.fixed-nav').fadeOut(300);
-          $('.local-navigation-wrapper .js-float-menu-on-scroll').removeClass('fixed-nav-mobile');
+
+        // It's not a mobile device...
+
+        // Detach the local menu from the bottom
+        $('.local-navigation-wrapper .js-float-menu-on-scroll.fixed-nav-mobile').removeClass('fixed-nav-mobile').fadeOut(100);
+        $('.js-footer').css({'padding-bottom': ''});
+
+        // Attach the local navigation to the fixed header
+        // Toggle floating menu if window position is below the target element
+        var windowPosition = $(window).scrollTop(),
+            target_local_navigation = $(".local-navigation-wrapper");
+
+        if (windowPosition+sitewideHeaderHeight >= target_local_navigation.offset().top+navLocalMenuHeight){
+          if ($('.js-float-menu-on-scroll.fixed-nav').length) {
+            $('.js-float-menu-on-scroll.fixed-nav').fadeIn(100);
+          } else {
+            $('.local-navigation-wrapper .js-float-menu-on-scroll').clone().appendTo('#fixed-header').addClass('fixed-nav').fadeIn(100);
+          }
+        } else {
+          // Window position is above "target_local_navigation"
+          if ($('.js-float-menu-on-scroll.fixed-nav').length)
+            $('.js-float-menu-on-scroll.fixed-nav').fadeOut(300);
         }
+
       }
 
     });
@@ -121,7 +145,7 @@
         if ($("#fixed-header").length)
           sitewideHeaderHeight = $("#fixed-header").delay(300).outerHeight();
 
-        // Reset our on-load anchor target helper
+        // Reset our on-page-load anchor target helper
         if ($('.js-hashlink').length)
           if ($(".local-navigation .nav").length) {
             $('.js-hashlink').css({'height': '0px', 'margin-top': offsetTargetTopPadding+'px'});
@@ -129,14 +153,12 @@
             $('.js-hashlink').css({'height': '0px', 'margin-top': '0px'});
           }
 
-        // This prevents the anchor target to be overlayed by our floating header
+        // This prevents the anchor target to be covered by our fixed header
         if ($(this).closest(".local-navigation-wrapper").length)
           offsetClickFromLocalNav = navLocalMenuHeight;
 
         // Define the top offset for our anchor navigation, based on screen size
-        if ($(window).width() < mdScreenWidth) {
-          offsetNavHeight = navLocalMenuHeight;
-        } else {
+        if ($(window).width() > mdScreenWidth) {
           offsetNavHeight = sitewideHeaderHeight+offsetClickFromLocalNav;
         }
 
