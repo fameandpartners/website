@@ -188,6 +188,9 @@ FameAndPartners::Application.routes.draw do
     # Lookbook v2.0 landing pages
     get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
 
+    # IT Girl - Landing page
+    get '/it-girl' => 'products/collections#show', :permalink => 'it-girl', :as => :it_girl_landing_page
+
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page

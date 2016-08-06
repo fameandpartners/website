@@ -1,0 +1,475 @@
+= render :partial => 'landing_pages/common'
+
+.page-content.lookbook-v2-page.relative
+
+  .hero-wrap.copy-right
+    .media-wrap
+      = image_tag 'style-icon/high-summer/hero-header.jpg', :srcset => "#{image_path("style-icon/high-summer/hero-header-mob.jpg")} 1023w,
+            #{image_path("style-icon/high-summer/hero-header.jpg")} 1024w", :class => 'img-responsive', :alt => "Brittany Xavier's High Summer Collection"
+    .content-wrap
+      .container
+        .row
+          .col-xs-12.col-md-12
+            .copy-wrap.text-center
+              h1.heading
+                span Redefining a classic.
+                .sub-heading 1. <em>Select</em> a classic Silhoutte from the edit below
+                .sub-heading 2. <em>Choose</em> from our comprehensive range of colors & fabrics
+                .sub-heading 3. <em>Modify</em> the length and customize the shape to fit and flatter your body
+                .sub-heading 4. Receive a bespoke dress, <em>handcrafted</em> by one of our artisan seamstresses
+
+  .local-navigation-wrapper.container-fluid
+    .row
+      .local-navigation.js-float-menu-on-scroll
+        .nav-wrapper.col-md-12
+          ul.nav
+            li.link #{link_to "The Gown", "#thegown"}
+            li.link #{link_to "The Slip", "#theslip"}
+            li.link #{link_to "The Wrap Dress", "#thewrap"}
+            li.link #{link_to "The Cocktail Dress", "#thecocktail"}
+            li.link #{link_to "The Two-Piece", "#thetwopiece"}
+            li.link #{link_to "The Jump Suit", "#thejumpsuit"}
+            li.link #{link_to "The Skater", "#theskater"}
+            li.link #{link_to "The Maxi", "#themaxi"}
+            li.link #{link_to "The Mini", "#themini"}
+            li.link #{link_to "The LBD", "#thelbd"}
+
+  // Gown
+  - current_dress_name = "Gown"
+  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$329.5"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$299"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#thegown
+    .row
+      .col-md-10.heading-overlay-wrapper.tag-align-left
+        h2.heading-overlay The #{current_dress_name}
+
+    .row.vertical-align-copy
+      .col-lg-8.col-md-7.content-img
+        = link_to current_dress_link
+          = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
+            #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+        .copy-wrap
+
+          h3 Nouveau elegance
+          p There’s something refreshing about low-key glamour. The It Girl knows a show-stopping gown is statement enough; she styles it only with loose waves and a carefree attitude.
+
+          .cta-product-caption.copy-highlight
+            | Pictured
+            span.hidden-md.hidden-lg  above:
+            span.hidden-xs.hidden-sm  left:
+            |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to current_dress_link
+              span.btn-md.btn-featured
+               | Shop & customize
+
+  // Featured Products / Curated Edit
+  section.section-box.section-products.products-collections.category
+   .container.relative.products-collection
+     .row
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+
+  // Slip
+  - current_dress_name = "Slip"
+  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - if current_site_version.is_australia?
+   // AUSTRALIA - PRICE
+   - current_dress_price = "$329.5"
+  - else
+   // USA - PRICE
+   - current_dress_price = "$299"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#thegown
+   .row
+     .col-md-10.heading-overlay-wrapper.tag-align-left
+       h2.heading-overlay The #{current_dress_name}
+
+   .row.vertical-align-copy
+     .col-lg-8.col-md-7.content-img
+       = link_to current_dress_link
+         = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
+           #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+     .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+       .copy-wrap
+
+         h3 Simple is sexy.
+         p  A slip dress that skims the body is a must-have for modern girls everywhere. When the color, fit, and length are just right, it becomes a wardrobe chameleon, transforming from casual (with a denim jacket) to evening-appropriate (with open-toe sandals).
+
+         .cta-product-caption.copy-highlight
+           | Pictured
+           span.hidden-md.hidden-lg  above:
+           span.hidden-xs.hidden-sm  left:
+           |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+         .cta-wrapper
+           = link_to current_dress_link
+             span.btn-md.btn-featured
+              | Shop & customize
+
+  // Featured Products / Curated Edit
+  section.section-box.section-products.products-collections.category
+   .container.relative.products-collection
+     .row
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+
+  // Wrap Dress
+  - current_dress_name = "Wrap Dress"
+  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - if current_site_version.is_australia?
+   // AUSTRALIA - PRICE
+   - current_dress_price = "$329.5"
+  - else
+   // USA - PRICE
+   - current_dress_price = "$299"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#thewrap
+   .row
+     .col-md-10.heading-overlay-wrapper.tag-align-left
+       h2.heading-overlay The #{current_dress_name}
+
+   .row.vertical-align-copy
+     .col-lg-8.col-md-7.content-img
+       = link_to current_dress_link
+         = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
+           #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+     .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+       .copy-wrap
+
+         h3 It comes back around.
+         p  Wrap dresses have stood the test of time—but this is not your mother’s wrap. The It way to wear the look? Cinched at the waist, per usual, but updated with architectural accessories and strap-happy details.
+
+         .cta-product-caption.copy-highlight
+           | Pictured
+           span.hidden-md.hidden-lg  above:
+           span.hidden-xs.hidden-sm  left:
+           |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+         .cta-wrapper
+           = link_to current_dress_link
+             span.btn-md.btn-featured
+              | Shop & customize
+
+  // Featured Products / Curated Edit
+  section.section-box.section-products.products-collections.category
+   .container.relative.products-collection
+     .row
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+
+  // Cocktail Dress
+  - current_dress_name = "Cocktail Dress"
+  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - if current_site_version.is_australia?
+   // AUSTRALIA - PRICE
+   - current_dress_price = "$329.5"
+  - else
+   // USA - PRICE
+   - current_dress_price = "$299"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#thecocktail
+   .row
+     .col-md-10.heading-overlay-wrapper.tag-align-left
+       h2.heading-overlay The #{current_dress_name}
+
+   .row.vertical-align-copy
+     .col-lg-8.col-md-7.content-img
+       = link_to current_dress_link
+         = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
+           #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+     .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+       .copy-wrap
+
+         h3 Style, straight up.
+         p  The cocktail dress: every girl needs a go-to. May we suggest a contemporary take? Mix an off-the-shoulder fit with feminine ruffles and sexy cutouts for a look that’s anything but basic.
+
+         .cta-product-caption.copy-highlight
+           | Pictured
+           span.hidden-md.hidden-lg  above:
+           span.hidden-xs.hidden-sm  left:
+           |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+         .cta-wrapper
+           = link_to current_dress_link
+             span.btn-md.btn-featured
+              | Shop & customize
+
+  // Featured Products / Curated Edit
+  section.section-box.section-products.products-collections.category
+   .container.relative.products-collection
+     .row
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+
+  // Two-Piece Dress
+  - current_dress_name = "Two-Piece"
+  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - if current_site_version.is_australia?
+   // AUSTRALIA - PRICE
+   - current_dress_price = "$329.5"
+  - else
+   // USA - PRICE
+   - current_dress_price = "$299"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#thetwopiece
+   .row
+     .col-md-10.heading-overlay-wrapper.tag-align-left
+       h2.heading-overlay The #{current_dress_name}
+
+   .row.vertical-align-copy
+     .col-lg-8.col-md-7.content-img
+       = link_to current_dress_link
+         = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
+           #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+     .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+       .copy-wrap
+
+         h3 Sets goddess.
+         p  Say hello to your new style standby, the two-piece set. Worn together, the look is coordinated cool. When separated, the possibilities are endless.
+
+         .cta-product-caption.copy-highlight
+           | Pictured
+           span.hidden-md.hidden-lg  above:
+           span.hidden-xs.hidden-sm  left:
+           |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+         .cta-wrapper
+           = link_to current_dress_link
+             span.btn-md.btn-featured
+              | Shop & customize
+
+  // Featured Products / Curated Edit
+  section.section-box.section-products.products-collections.category
+   .container.relative.products-collection
+     .row
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+
+  // Jumpsuit Dress
+  - current_dress_name = "Jumpsuit"
+  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$329.5"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$299"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#thejumpsuit
+    .row
+      .col-md-10.heading-overlay-wrapper.tag-align-left
+        h2.heading-overlay The #{current_dress_name}
+
+    .row.vertical-align-copy
+      .col-lg-8.col-md-7.content-img
+        = link_to current_dress_link
+          = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
+             #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+        .copy-wrap
+
+          h3 Step out.
+          p  While it may seem simple, the all-in-one jumpsuit hints at the complexities of the modern woman. She wears the pants and has something to say. She personalizes each outfit to make a unique statement. She isn’t afraid to take a stand.
+
+          .cta-product-caption.copy-highlight
+            | Pictured
+            span.hidden-md.hidden-lg  above:
+            span.hidden-xs.hidden-sm  left:
+            |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to current_dress_link
+              span.btn-md.btn-featured
+                | Shop & customize
+
+  // Featured Products / Curated Edit
+  section.section-box.section-products.products-collections.category
+   .container.relative.products-collection
+     .row
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+
+  // Skater Dress
+  - current_dress_name = "Skater"
+  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$329.5"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$299"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#theskater
+    .row
+      .col-md-10.heading-overlay-wrapper.tag-align-left
+        h2.heading-overlay The #{current_dress_name}
+
+    .row.vertical-align-copy
+      .col-lg-8.col-md-7.content-img
+        = link_to current_dress_link
+          = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
+             #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+        .copy-wrap
+
+          h3 Kick. Push.
+          p  Has there ever been a silhouette sweeter than the fit-and-flare?  Show off an hourglass figure—or just fake one—in a little something that nips in at the waist and flows over the hips. Floral prints encouraged.
+
+          .cta-product-caption.copy-highlight
+            | Pictured
+            span.hidden-md.hidden-lg  above:
+            span.hidden-xs.hidden-sm  left:
+            |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to current_dress_link
+              span.btn-md.btn-featured
+                | Shop & customize
+
+  // Featured Products / Curated Edit
+  section.section-box.section-products.products-collections.category
+   .container.relative.products-collection
+     .row
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+
+  // Maxi Dress
+  - current_dress_name = "Maxi"
+  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$329.5"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$299"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#themaxi
+    .row
+      .col-md-10.heading-overlay-wrapper.tag-align-left
+        h2.heading-overlay The #{current_dress_name}
+
+    .row.vertical-align-copy
+      .col-lg-8.col-md-7.content-img
+        = link_to current_dress_link
+          = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
+             #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+        .copy-wrap
+
+          h3 Maximum impact.
+          p  The maxi has long been the focus of the free-spirited woman’s wardrobe. Today’s It Girl ditches the traditional, shape-camouflaging fit in favor of a style with a bit more structure.
+
+          .cta-product-caption.copy-highlight
+            | Pictured
+            span.hidden-md.hidden-lg  above:
+            span.hidden-xs.hidden-sm  left:
+            |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to current_dress_link
+              span.btn-md.btn-featured
+                | Shop & customize
+
+  // Featured Products / Curated Edit
+  section.section-box.section-products.products-collections.category
+   .container.relative.products-collection
+     .row
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+
+  // Mini Dress
+  - current_dress_name = "Mini"
+  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$329.5"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$299"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#themini
+    .row
+      .col-md-10.heading-overlay-wrapper.tag-align-left
+        h2.heading-overlay The #{current_dress_name}
+
+    .row.vertical-align-copy
+      .col-lg-8.col-md-7.content-img
+        = link_to current_dress_link
+          = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
+             #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+        .copy-wrap
+
+          h3 Hey, shorty.
+          p  In the 1960s, the mini skirt was a symbol of rebellion. These days, it’s more shocking to pair legs for days with bookish brogues and a high collar. Viva la revolucion.
+
+          .cta-product-caption.copy-highlight
+            | Pictured
+            span.hidden-md.hidden-lg  above:
+            span.hidden-xs.hidden-sm  left:
+            |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to current_dress_link
+              span.btn-md.btn-featured
+                | Shop & customize
+
+  // Featured Products / Curated Edit
+  section.section-box.section-products.products-collections.category
+   .container.relative.products-collection
+     .row
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+
+  // LBD Dress
+  - current_dress_name = "LBD"
+  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - if current_site_version.is_australia?
+    // AUSTRALIA - PRICE
+    - current_dress_price = "$329.5"
+  - else
+    // USA - PRICE
+    - current_dress_price = "$299"
+
+  section.section-box.container-fluid.no-padding.no-margin.section-look#thelbd
+    .row
+      .col-md-10.heading-overlay-wrapper.tag-align-left
+        h2.heading-overlay The #{current_dress_name}
+
+    .row.vertical-align-copy
+      .col-lg-8.col-md-7.content-img
+        = link_to current_dress_link
+          = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
+               #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+
+      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
+        .copy-wrap
+
+          h3 Little Bespoke Dress.
+          p  The LBD has been done and done again—and for good reason. But it’s time to reinvent your closet’s #1 classic by customizing a dress that’s yours and yours alone. Introducing the new LBD: Little Bespoke Dress.
+
+          .cta-product-caption.copy-highlight
+            | Pictured
+            span.hidden-md.hidden-lg  above:
+            span.hidden-xs.hidden-sm  left:
+            |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
+
+          .cta-wrapper
+            = link_to current_dress_link
+              span.btn-md.btn-featured
+                | Shop & customize
+
+  // Featured Products / Curated Edit
+  section.section-box.section-products.products-collections.category
+    .container.relative.products-collection
+      .row
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
