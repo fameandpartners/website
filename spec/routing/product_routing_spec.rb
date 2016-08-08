@@ -17,20 +17,5 @@ describe 'Product Routes', type: :routing do
                                                       "action"       => "show",
                                                       "site_version" => "au",
                                                       "permalink"    => "evening")
-
-  end
-
-end
-
-describe 'Product Redirection', type: :request do
-  context 'old taxon urls' do
-    it_will :redirect, "dresses/event", "/dresses"
-    it_will :redirect, 'dresses/event/graduation', '/dresses/graduation'
-    it_will :redirect, "dresses/style", "/dresses"
-    it_will :redirect, 'dresses/style/long', '/dresses/long'
-  end
-
-  context 'plus-size' do
-    it_will :redirect, "/plus-size", '/dresses/plus-size'
   end
 end

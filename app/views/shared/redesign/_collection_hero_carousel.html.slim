@@ -1,73 +1,73 @@
 // HOMEPAGE HERO CAROUSEL
 
 // Carousel Item 1
-.main-hero-wrap.hero-wrap.copy-left
+.main-hero-wrap.hero-wrap.copy-left.white-text
   picture.media-wrap.keep-ratio
     .inner-wrap
-      source media='(max-width: 1023px)' srcset='#{image_path("homepage/hero-featured/featured-1-mob.jpg")}'
-      source media='(min-width: 1024px)' srcset='#{image_path("homepage/hero-featured/featured-1-full.jpg")}'
-      img src='#{image_path("homepage/hero-featured/featured-1-mob.jpg")}' srcset='
-        #{image_path("homepage/hero-featured/featured-1-mob.jpg")} 1023w,
-        #{image_path("homepage/hero-featured/featured-1-full.jpg")} 1024w' alt="Style and Substance. Custom, contemporary designs. Tailor-made clothing. Less waste. We're more than just a pretty dress."
+      source media='(max-width: 1023px)' srcset='#{image_path("homepage/hero-featured/Aug-3-featured-1-mob.jpg")}'
+      source media='(min-width: 1024px)' srcset='#{image_path("homepage/hero-featured/Aug-3-featured-1-full.jpg")}'
+      img src='#{image_path("homepage/hero-featured/Aug-3-featured-1-mob.jpg")}' srcset='
+        #{image_path("homepage/hero-featured/Aug-3-featured-1-mob.jpg")} 1023w,
+        #{image_path("homepage/hero-featured/Aug-3-featured-1-full.jpg")} 1024w' alt="Hero image"
 
   .content-wrap
     .container
       .row
-        .col-md-5.col-md-offset-0.col-lg-4.col-xs-offset-1.col-xs-10
-          .copy-wrap
+        .col-md-4.col-md-offset-4
+          .copy-wrap.text-center
             h1.heading
-              span Style and Substance
+              span Love me, <br>Lights Out
               span.sub-heading
-                | Custom, contemporary designs. <br>Tailor-made clothing. Less waste. <br>We're more than just a pretty dress.
-            = link_to dresses_path
+                | Introducing the Weddings and<br>Parties Collection.
+            = link_to weddings_parties_page_path
               .cta-wrapper
                 span.btn-md.btn-featured
-                  | Start <span class="copy-highlight">designing</span>
+                  | Explore <span class="copy-highlight">WEDDINGS</span>
 
 // Carousel Item 2
 .main-hero-wrap.hero-wrap.copy-right
   picture.media-wrap.keep-ratio
     .inner-wrap
-      source media='(max-width: 1023px)' srcset='#{image_path("homepage/hero-featured/featured-2-mob.jpg")}'
-      source media='(min-width: 1024px)' srcset='#{image_path("homepage/hero-featured/featured-2-full.jpg")}'
-      img src='#{image_path("homepage/hero-featured/featured-2-mob.jpg")}' srcset='
-        #{image_path("homepage/hero-featured/featured-2-mob.jpg")} 1023w,
-        #{image_path("homepage/hero-featured/featured-2-full.jpg")} 1024w' alt="Fresh picks. Easy dresses and mix-and-match separates in fresh, clean cotton."
+      source media='(max-width: 1023px)' srcset='#{image_path("homepage/hero-featured/Aug-3-featured-2-mob.jpg")}'
+      source media='(min-width: 1024px)' srcset='#{image_path("homepage/hero-featured/Aug-3-featured-2-full.jpg")}'
+      img src='#{image_path("homepage/hero-featured/Aug-3-featured-2-mob.jpg")}' srcset='
+        #{image_path("homepage/hero-featured/Aug-3-featured-2-mob.jpg")} 1023w,
+        #{image_path("homepage/hero-featured/Aug-3-featured-2-full.jpg")} 1024w' alt="Hero image"
 
   .content-wrap
     .container
       .row
-        .col-md-4.col-md-offset-7.col-xs-offset-1.col-xs-10
+        .col-md-4
           .copy-wrap
             h1.heading.full
-              span Fresh Picks
+              span All Hail The High Collar
               span.sub-heading
-                | Easy dresses and mix-and-match <br class="visible-lg-block">separates in fresh, clean cotton.
-            = link_to the_freshly_picked_collection_path
+                | You'll be up to your neck in style.
+            = link_to dresses_path + '/dress-murphy-1091?color=pale-pink'
               .cta-wrapper
                 span.btn-md.btn-featured
-                  | Shop <span class="copy-highlight">Cotton</span>
+                  | Shop <span class="copy-highlight">THE LOOK</span>
 
 // Carousel Item 3
 .main-hero-wrap.hero-wrap.copy-right
   picture.media-wrap.keep-ratio
     .inner-wrap
-      source media='(max-width: 1023px)' srcset='#{image_path("homepage/hero-featured/featured-3-mob.jpg")}'
-      source media='(min-width: 1024px)' srcset='#{image_path("homepage/hero-featured/featured-3-full.jpg")}'
-      img src='#{image_path("homepage/hero-featured/featured-3-mob.jpg")}' srcset='
-        #{image_path("homepage/hero-featured/featured-3-mob.jpg")} 1023w,
-        #{image_path("homepage/hero-featured/featured-3-full.jpg")} 1024w' alt="Slip into something. A little more custom. Create the slip dress of your dreams."
+      source media='(max-width: 1023px)' srcset='#{image_path("homepage/hero-featured/Aug-3-featured-3-mob.jpg")}'
+      source media='(min-width: 1024px)' srcset='#{image_path("homepage/hero-featured/Aug-3-featured-3-full.jpg")}'
+      img src='#{image_path("homepage/hero-featured/Aug-3-featured-3-mob.jpg")}' srcset='
+        #{image_path("homepage/hero-featured/Aug-3-featured-3-mob.jpg")} 1023w,
+        #{image_path("homepage/hero-featured/Aug-3-featured-3-full.jpg")} 1024w' alt="Hero image"
 
   .content-wrap
     .container
       .row
-        .col-md-4.col-md-offset-8.col-xs-offset-1.col-xs-10
+        .col-md-4
           .copy-wrap
             h1.heading.full
-              span Slip into something
+              span Light & Sweet
               span.sub-heading
-                | A little more custom. Create the <br class="visible-lg-block">slip dress of your dreams.
-            = link_to '/dresses/slip-dress'
+                | Wrap up summer in must-have cottons.
+            = link_to the_freshly_picked_collection_path
               .cta-wrapper
                 span.btn-md.btn-featured
-                  | Shop <span class="copy-highlight">Slip dresses</span>
+                  | Shop <span class="copy-highlight">FRESHLY PICKED</span>
