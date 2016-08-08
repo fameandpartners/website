@@ -40,29 +40,31 @@ section.order-details
                               li
                                 | Custom color: <span class="value">#{line_item.colour_name}</span>
                               li
-                                | Size: <span class="value">#{line_item.size}</span>
+                                | Customized cut: <span class="value">#{line_item.customisation_text}</span>
+                              li
+                                | Size: <span class="value">#{line_item.current_size}</span>
                               li
                                 | Quantity: <span class="value">#{line_item.quantity}</span>
               .row
                 .order-total.col-md-7.col-md-offset-5
 
-                    .row.discount-info
-                      .label.col-md-6 Shipping
-                      / TODO: If price is integer remove decimals
-                      .amount.col-md-6 #{order.order.shipment.display_amount}
+                  .row.discount-info
+                    .label.col-md-6 Shipping
+                    / TODO: If price is integer remove decimals
+                    .amount.col-md-6 #{order.shipment.display_amount}
 
-                    .row.discount-info
-                      .label.col-md-6 Discount
-                      / TODO: If price is integer remove decimals
-                      .amount.col-md-6 #{order.order.display_promotion_total}
+                  .row.discount-info
+                    .label.col-md-6 Discount
+                    / TODO: If price is integer remove decimals
+                    .amount.col-md-6 #{order.display_promotion_total}
 
-                    .row.total-info
-                      .label.col-md-6 Total
-                      / TODO: If price is integer remove decimals
-                      .amount.col-md-6
-                        | #{order.display_total}
-                      - if current_site_version.is_australia?
-                        p.price-note Including GST.
+                  .row.total-info
+                    .label.col-md-6 Total
+                    / TODO: If price is integer remove decimals
+                    .amount.col-md-6
+                      | #{order.display_total}
+                    - if current_site_version.is_australia?
+                      p.price-note Including GST.
 
           .row
             .order-info.col-md-12
@@ -70,30 +72,30 @@ section.order-details
                 .billing-address
                   h4 Billing Address
                   ul
-                    li = order.order.billing_address.firstname + " " + order.order.billing_address.lastname
-                    li = order.order.billing_address.address1 + " " + order.order.billing_address.address2
-                    li = order.order.billing_address.city + ", " + (order.order.billing_address.state.try(:name) || order.order.billing_address.state_name)
-                    li = order.order.billing_address.zipcode
+                    li = order.billing_address.firstname + " " + order.billing_address.lastname
+                    li = order.billing_address.address1 + " " + order.billing_address.address2
+                    li = order.billing_address.city + ", " + (order.billing_address.state.try(:name) || order.billing_address.state_name)
+                    li = order.billing_address.zipcode
 
                 .shipping-address
                   h4 Shipping Address
                   ul
-                    li = order.order.shipping_address.firstname + " " + order.order.shipping_address.lastname
-                    li = order.order.shipping_address.address1 + " " + order.order.shipping_address.address2
-                    li = order.order.shipping_address.city + ", " + (order.order.shipping_address.state.try(:name) || order.order.shipping_address.state_name)
-                    li = order.order.shipping_address.zipcode
+                    li = order.shipping_address.firstname + " " + order.shipping_address.lastname
+                    li = order.shipping_address.address1 + " " + order.shipping_address.address2
+                    li = order.shipping_address.city + ", " + (order.shipping_address.state.try(:name) || order.shipping_address.state_name)
+                    li = order.shipping_address.zipcode
               .half-column.col-md-6
                 .phone
                   h4 Phone number
-                  span = order.order.billing_address.phone
+                  span = order.billing_address.phone
 
                 .email
                   h4 Email
-                  span = order.order.billing_address.email
+                  span = order.billing_address.email
 
                 .delivery-date
                   h4 Expected delivery date
-                  span = order.projected_delivery_date.strftime("%d of %b, %Y")
+                  span = order.expected_delivery_date
 
           .row
             .faq-wrapper.col-md-12

@@ -150,6 +150,12 @@ module Orders
       Array.wrap(personalization.customization_values.collect(&:presentation))
     end
 
+    def customisation_text
+      if personalizations?
+        personalization.customization_values.collect(&:presentation).join(' / ')
+      end
+    end
+
     def personalizations?
       personalization.present?
     end
@@ -243,6 +249,11 @@ module Orders
       end
     end
 
+    def current_size
+      size.split('/').detect {|s| s.downcase.include? @wrapped_order.site_version }
+    rescue
+      'Unknown Size'
+    end
 
     # Seriously, wtf are custom dresses so hard?
     def image
