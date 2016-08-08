@@ -5,7 +5,6 @@
   var sitewideHeaderHeight = 0,
       navLocalMenuHeight = 0,
       localNavTopOffset = 0,
-      offsetHeight = sitewideHeaderHeight+navLocalMenuHeight,
       offsetTargetTopPadding = 45, // The desired distance between the target and the page header
       mdScreenWidth = 992,
       responsiveNavLocal = $('.local-navigation .nav');
@@ -18,6 +17,8 @@
 
   if ($(".local-navigation-wrapper .js-float-menu-on-scroll").length)
     localNavTopOffset = $(".local-navigation-wrapper .js-float-menu-on-scroll").offset().top; // Desktop only
+
+  var offsetHeight = sitewideHeaderHeight+navLocalMenuHeight;
 
   // Add DOM helper if we are loading this page directly from an URL containing an anchor (/something#foo=bar)
   // This is needed for our fixed header and floating menu
