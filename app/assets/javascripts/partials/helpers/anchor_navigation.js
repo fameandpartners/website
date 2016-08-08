@@ -49,6 +49,50 @@
       $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (offsetHeight+offsetTargetTopPadding) })
     }
 
+    // Floating menu as a responsive Carousel
+    if (responsiveNavLocal.length) {
+      var renderSlick,
+          slick_anchor_id = window.location.hash,
+          slick_target_position
+
+      renderSlick = function () {
+        if(!responsiveNavLocal.hasClass('slick-initialized')) {
+
+          responsiveNavLocal.slick({
+            autoplay: false,
+            fade: false,
+            arrows: true,
+            dots: false,
+            edgeFriction: 10,
+            slidesToScroll: 1,
+            slidesToShow: 5,
+            variableWidth: true,
+            infinite: false,
+            focusOnSelect: true,
+            centerMode: false,
+            mobileFirst: true,
+            responsive: [
+              {
+                breakpoint: mdScreenWidth,
+                settings: {
+                  centerMode: true,
+                  slidesToShow: 3
+                }
+              }]
+          });
+
+          if (slick_anchor_id) {
+            slick_target_position = $('.local-navigation .nav a').index($('[href="'+slick_anchor_id+'"]'));
+            responsiveNavLocal.slick( "slickGoTo", parseInt( slick_target_position ), true ).fadeIn(250);
+          }
+
+        }
+      }
+
+      // Render for the first time (on page load)
+      renderSlick();
+    }
+
     // Watch scrolling to show/hide floating menu
     $(document).delay(500).on("scroll", function() {
 
@@ -87,39 +131,6 @@
       }
 
     });
-
-    // Responsive floating menu as a Carousel on mobile
-    if ($(".local-navigation .nav").length) {
-      var window_var = $(window),
-          toggleSlick;
-
-      toggleSlick = function () {
-        if (window_var.width() < mdScreenWidth) {
-          if(!responsiveNavLocal.hasClass('slick-initialized')) {
-            responsiveNavLocal.slick({
-              autoplay: false,
-              fade: false,
-              arrows: false,
-              dots: false,
-              edgeFriction: 10,
-              slidesToShow: 4,
-              slidesToScroll: 1,
-              variableWidth: true,
-              infinite: false,
-              focusOnSelect: true,
-              mobileFirst: true
-            });
-          }
-        } else {
-          if(responsiveNavLocal.hasClass('slick-initialized')) {
-            responsiveNavLocal.slick('unslick');
-          }
-        }
-      }
-
-      window_var.delay(500).resize(toggleSlick);
-      toggleSlick();
-    }
 
   }
 
