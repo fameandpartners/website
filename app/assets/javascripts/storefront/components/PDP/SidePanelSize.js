@@ -73,6 +73,9 @@ class SidePanelSize extends SidePanel {
                 </a>
               </div>
               <h2 className="h4 c-card-customize__header">Choose your size</h2>
+              <p className="error text-center">
+                <strong>Please read first: </strong>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
               <div className="row">{SIZES}</div>
               <SidePanelSizeChart />
             </div>
