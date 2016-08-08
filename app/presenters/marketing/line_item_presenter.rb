@@ -1,22 +1,10 @@
-require 'forwardable'
-
 module Marketing
-  class LineItemPresenter
-    extend Forwardable
+  class LineItemPresenter < CommonLineItemPresenter
 
     def_delegators :@item,
-                   :variant,
                    :quantity,
                    :making_options_text,
-                   :options_text,
-                   :personalization
-
-    attr_reader :item, :wrapped_order
-
-    def initialize(item, wrapped_order)
-      @item          = item
-      @wrapped_order = wrapped_order
-    end
+                   :options_text
 
     def sku
       variant.sku.blank? ? product.sku : variant.sku
@@ -42,35 +30,11 @@ module Marketing
       variant.display_amount.to_s
     end
 
-    def current_size
-      size.split('/').detect {|s| s.downcase.include? @wrapped_order.site_version } || 'Unknown Size'
-    rescue
-      'Unknown Size'
-    end
-
-    def size
-      if personalization.present?
-        personalization.size.try(:name)
-      else
-        variant.try(:dress_size).try(:name)
-      end
-    end
-
     def color
       if personalization.present?
         personalization.color.try(:name) || 'Unknown Color'
       else
         variant.try(:dress_color).try(:name) || 'Unknown Color'
-      end
-    end
-
-    def height
-      personalization.present? ? personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
-    end
-
-    def customisation
-      if personalization.present?
-        personalization.customization_values.collect(&:presentation).join(' / ')
       end
     end
 

@@ -97,8 +97,8 @@ module Marketing
           current_size:           item.current_size,
           color:                  item.color,
           height:                 item.height,
-          customisation:          item.customisation,
-          image_url:              product_image_url
+          customisation:          item.customisation_text,
+          image_url:              item.image_url #product_image_url
         }
       end
     end
