@@ -25,14 +25,8 @@ ruby:
                       ="#{item_form.object.order_quantity} x "
                     span.style
                       ="#{item_form.object.style_name}"
-                  .size
-                    | Size:
-                    span.info-details
-                      =" #{item_form.object.country_size.to_i}"
-                  .color
-                    | Color:
-                    span.info-details
-                      =" #{item_form.object.colour_name}"
+                  .size Size: <em>#{item_form.object.country_size.to_i}</em>
+                  .color Color: <em>#{item_form.object.colour_name}</em>
                   .price
                     = item_form.object.display_price
               .inner-wrapper
