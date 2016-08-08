@@ -148,6 +148,19 @@
 
   });
 
+  // Monitor scrollspy
+  $(window).on('activate.bs.scrollspy', function(e) {
+    // Change the anchor URL according to each seen section
+    history.replaceState({}, "", $("a[href^='#']", e.target).attr("href"));
+
+
+    // Activate the current item in Slick carousel by matching Scrollspy's current response
+    if(responsiveNavLocal.hasClass('slick-initialized'))
+      slick_target_position = $('.local-navigation .nav a').index($('[href="'+window.location.hash+'"]'));
+      responsiveNavLocal.slick( "slickGoTo", parseInt( slick_target_position ), true ).fadeIn(1000);
+
+  });
+
   // Watch clicks on anchor links, only when page has certain elements
   $(document).has(".js-smooth-scroll, .local-navigation .nav").on("click", "a[href*='#']:not([href='#'], [href*='#panel-'])", function() {
 
