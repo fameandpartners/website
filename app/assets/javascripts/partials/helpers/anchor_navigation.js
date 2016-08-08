@@ -4,7 +4,11 @@
   // Get useful data before any interaction
   var sitewideHeaderHeight = 0,
       navLocalMenuHeight = 0,
-      localNavTopOffset = 0;
+      localNavTopOffset = 0,
+      offsetHeight = sitewideHeaderHeight+navLocalMenuHeight,
+      offsetTargetTopPadding = 45, // The desired distance between the target and the page header
+      mdScreenWidth = 992,
+      responsiveNavLocal = $('.local-navigation .nav');
 
   if ($("#fixed-header").length)
     sitewideHeaderHeight = $("#fixed-header").delay(300).outerHeight();
@@ -14,10 +18,6 @@
 
   if ($(".local-navigation-wrapper .js-float-menu-on-scroll").length)
     localNavTopOffset = $(".local-navigation-wrapper .js-float-menu-on-scroll").offset().top; // Desktop only
-
-  var offsetHeight = sitewideHeaderHeight+navLocalMenuHeight,
-      offsetTargetTopPadding = 45, // The desired distance between the target and the page header
-      mdScreenWidth = 992;
 
   // Add DOM helper if we are loading this page directly from an URL containing an anchor (/something#foo=bar)
   // This is needed for our fixed header and floating menu
@@ -91,8 +91,7 @@
     // Responsive floating menu as a Carousel on mobile
     if ($(".local-navigation .nav").length) {
       var window_var = $(window),
-          toggleSlick,
-          responsiveNavLocal = $('.local-navigation .nav')
+          toggleSlick;
 
       toggleSlick = function () {
         if (window_var.width() < mdScreenWidth) {
