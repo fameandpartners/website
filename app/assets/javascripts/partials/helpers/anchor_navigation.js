@@ -42,7 +42,7 @@
 
     // Add scrollspy trigger
     // If this is a mobile device we don't worry about the fixed header's height for the top offset
-    if( $(".local-navigation-wrapper .local-navigation").css('position') == 'fixed') {
+    if( $(window).width() <= mdScreenWidth ) {
       $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (offsetTargetTopPadding) })
     } else {
       //Since this is not a mobile device then we have to consider the fixed header in the top offset
