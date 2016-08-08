@@ -82,9 +82,6 @@ module Marketing
 
     def build_line_items
       line_items.collect do |item|
-        image_urls        = Products::ColorVariantImageDetector.cropped_images_for(item.product)
-        product_image_url = image_urls.sample # TODO: this should reflect the chosen line item color. Right now, is randomly picking a product image
-
         {
           sku:                    item.sku,
           name:                   item.product_name,
@@ -98,7 +95,7 @@ module Marketing
           color:                  item.color,
           height:                 item.height,
           customisation:          item.customisation_text,
-          image_url:              item.image_url #product_image_url
+          image_url:              item.image_url
         }
       end
     end
