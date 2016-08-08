@@ -138,6 +138,16 @@
 
   }
 
+  $(window).delay(500).on("resize", function() {
+
+    if( $(window).width() <= mdScreenWidth ) {
+      $('.js-float-menu-on-scroll').removeClass('fixed-nav').css({'top': ''});
+      $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile').fadeIn(100);
+      $('.js-footer').css({'padding-bottom': ''+navLocalMenuHeight*1.1+'px'}); //Add extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
+    }
+
+  });
+
   // Watch clicks on anchor links, only when page has certain elements
   $(document).has(".js-smooth-scroll, .local-navigation .nav").on("click", "a[href*='#']:not([href='#'], [href*='#panel-'])", function() {
 
