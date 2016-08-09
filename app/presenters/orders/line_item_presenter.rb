@@ -119,40 +119,6 @@ module Orders
       Array.wrap(personalization.customization_values.collect(&:presentation))
     end
 
-    def as_report
-      {
-        :order_state             => order.state,
-        :order_number            => number,
-        :line_item               => id,
-        :total_items             => total_items,
-        :completed_at            => order.completed_at.try(:to_date),
-        :express_making          => fast_making? ? "TRUE" : '',
-        :projected_delivery_date => projected_delivery_date,
-        :tracking_number         => tracking_number,
-        :shipment_date           => shipped_at.try(:to_date),
-        :fabrication_state       => fabrication_status,
-        :sku                     => sku,
-        :style                   => style_number,
-        :style_name              => style_name,
-        :factory                 => factory,
-        :color                   => colour_name,
-        :size                    => country_size,
-        :height                  => height,
-        :customisations          => customisations.collect(&:first).join('|'),
-        :promo_codes             => promo_codes.join('|'),
-        :email                   => order.order.email,
-        :customer_notes          => order.customer_notes,
-        :customer_name           => order.name,
-        :customer_phone_number   => wrapped_order.phone_number.to_s,
-        :shipping_address        => wrapped_order.shipping_address,
-        :return_request          => order.return_requested?,
-        :return_action           => return_action,
-        :return_details          => return_details,
-        :price                   => price,
-        :currency                => currency
-      }
-    end
-
     def return_action
       if order.return_requested? && return_item
         return_item.action
@@ -169,27 +135,6 @@ module Orders
 
     def return_item
       @return_item ||= order.return_request.return_request_items.where(:line_item_id => id).first
-    end
-
-    def headers
-
-      cn_headers = {
-        order_number:            '(订单号码)',
-        completed_at:            '(订单日期)',
-        express_making:          '(快速决策)',
-        projected_delivery_date: '(要求出厂日期)',
-        tracking_number:         '(速递单号)',
-        style:                   '(款号)',
-        factory:                 '(工厂)',
-        color:                   '(颜色)',
-        size:                    '(尺寸)',
-        customisations:          '(特殊要求)',
-        customer_name:           '(客人名字)',
-        customer_phone_number:   '(客人电话)',
-        shipping_address:        '(客人地址)'
-      }
-
-      as_report.keys.collect { |k| "#{k} #{cn_headers[k]}" }
     end
 
     def variant_id
