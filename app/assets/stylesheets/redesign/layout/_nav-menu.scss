@@ -123,22 +123,25 @@
     width: auto;
   }
 
-  .slick-prev {
-    left: 0;
-  }
-
-  .slick-next {
-    right: 0;
-  }
-
   .slick-arrow {
     color: $c-neutral-10;
+    font-size: 2rem;
+    top: 40px;
 
     &:before {
       background: $c-neutral-white;
       @include box-shadow( 0 0 25px 25px rgba($c-neutral-white, 0.75) );
     }
 
+  }
+
+  // This is needed because the left arrow looks smaller than the right one with the default value above
+  .slick-arrow:first-child {
+    font-size: 3rem;
+  }
+
+  .slick-arrow:last-child {
+    right: 0;
   }
 
   .slick-disabled {

@@ -72,6 +72,8 @@
             focusOnSelect: true,
             centerMode: false,
             mobileFirst: false,
+            prevArrow: '<span>◂</span>',
+            nextArrow: '<span>▸</span>',
             responsive: [
               {
                 breakpoint: mdScreenWidth,
