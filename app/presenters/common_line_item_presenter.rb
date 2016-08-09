@@ -42,7 +42,7 @@ class CommonLineItemPresenter
   end
 
   def height
-    personalization.present? ? personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
+    personalizations? ? personalization.height : LineItemPersonalization::DEFAULT_HEIGHT
   end
 
   def customisation_text
