@@ -17,7 +17,7 @@ describe Marketing::OrderPresenter, type: :presenter do
     let(:dress_variant) { create(:dress_variant) }
     let(:dress_item) { build(:dress_item, price: 9.99, quantity: 1, personalization: dress_item_personalization,
                              variant: dress_variant) }
-    let(:adjustment) { build(:adjustment, adjustable_type: 'Spree::Order') }
+    let(:adjustment) { create(:adjustment, adjustable_type: 'Spree::Order') }
     let(:order) { build(:spree_order, number: 'R123', currency: 'BRL',line_items: [dress_item],
                         adjustments: [adjustment], projected_delivery_date: Date.new) }
 
@@ -37,8 +37,9 @@ describe Marketing::OrderPresenter, type: :presenter do
     end
 
     it '.build_adjustments' do
-      # TODO result = described_class.build_adjustments(order).first
-      skip 'TODO'
+      result = presenter.build_adjustments.first
+      expect(result[:label]).to eq(order.adjustments.eligible.first.label)
+      expect(result[:display_amount]).to eq(order.adjustments.eligible.first.display_amount.to_s)
     end
   end
 
