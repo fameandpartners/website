@@ -8,6 +8,7 @@
 
   &__Overlay {
     background: rgba($c-neutral-black, 0.5);
+    overflow-y: scroll;
     z-index: 1050;
   }
 

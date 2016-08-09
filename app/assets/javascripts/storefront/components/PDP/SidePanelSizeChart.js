@@ -9,12 +9,15 @@ class SidePanelSizeChart extends React.Component {
 
     this.state = {
       active: false,
-      modalIsOpen: false
+      modalIsOpen: false,
+      imchesIsActive: true,
+      cmIsActive: false
     };
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.toggleMenu = this.toggleMenu.bind(this);
+    this.showInches = this.showInches.bind(this);
+    this.showCm = this.showCm.bind(this);
   }
 
   openModal() {
@@ -25,16 +28,24 @@ class SidePanelSizeChart extends React.Component {
     this.setState({modalIsOpen: false});
   }
 
-  toggleMenu() {
-    if(this.state.active) {
-      this.setState({active: false});
-    } else {
-      this.setState({active: true});
-    }
+  showCm() {
+    this.setState({
+      imchesIsActive: false,
+      cmIsActive: true
+    });
+  }
+
+  showInches() {
+    this.setState({
+      imchesIsActive: true,
+      cmIsActive: false
+    });
   }
 
   render() {
     const TRIGGER_COPY = this.state.active ? 'View New Size Guide' : 'View Legacy Size Guide';
+    const INCHES_IS_ACTIVE = this.state.imchesIsActive ? 'is-active' : '';
+    const CM_IS_ACTIVE = this.state.cmIsActive ? 'is-active' : '';
     // this is just reset, proper styling will be applied through SASS
     const MODAL_STYLE = {
       overlay: {
@@ -98,7 +109,17 @@ class SidePanelSizeChart extends React.Component {
                   <thead>
                     <tr>
                       <th className="divider" colSpan="2">Sizing</th>
-                      <th colSpan="4">Measurements</th>
+                      <th colSpan="4">
+                        Measurements
+                        <span className="toggle-controls">
+                          <a href="javascript:;"
+                            className={"toggle-selector " + INCHES_IS_ACTIVE}
+                            onClick={this.showInches}>inches</a>
+                          <a href="javascript:;"
+                            className={"toggle-selector " + CM_IS_ACTIVE}
+                            onClick={this.showCm}>cm</a>
+                        </span>
+                      </th>
                     </tr>
                     <tr>
                       <th>US</th>
@@ -109,14 +130,14 @@ class SidePanelSizeChart extends React.Component {
                       <th>Hip</th>
                     </tr>
                   </thead>
-                  {this.props.sizeChart.map((row, index) => {
-                    let dataArray = new Array;
-                    for(let obj in row) {
-                      dataArray.push(row[obj]);
-                    }
-                    return (
-                      <tbody className="inches" key={index}>
-                        <tr>
+                  <tbody>
+                    {this.props.sizeChart.map((row, index) => {
+                      let dataArray = new Array;
+                      for(let obj in row) {
+                        dataArray.push(row[obj]);
+                      }
+                      return (
+                        <tr key={index} className={INCHES_IS_ACTIVE}>
                           <td>{dataArray[1]}</td>
                           <td className="divider">{dataArray[0]}</td>
                           <td>{dataArray[3]}</td>
@@ -124,9 +145,25 @@ class SidePanelSizeChart extends React.Component {
                           <td>{dataArray[7]}</td>
                           <td>{dataArray[9]}</td>
                         </tr>
-                      </tbody>
-                    );
-                  })}
+                      );
+                    })}
+                    {this.props.sizeChart.map((row, index) => {
+                      let dataArray = new Array;
+                      for(let obj in row) {
+                        dataArray.push(row[obj]);
+                      }
+                      return (
+                        <tr key={index} className={CM_IS_ACTIVE}>
+                          <td>{dataArray[1]}</td>
+                          <td className="divider">{dataArray[0]}</td>
+                          <td>{dataArray[2]}</td>
+                          <td>{dataArray[4]}</td>
+                          <td>{dataArray[6]}</td>
+                          <td>{dataArray[8]}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -135,75 +172,6 @@ class SidePanelSizeChart extends React.Component {
             <span className="hide-visually">Close Menu</span>
           </a>
         </Modal>
-
-        <div className="inner-wrap">
-          <p>
-            Measurements are much more accurate if taken by someone else.
-            For more information about our sizing, visit our <a href="/size-guide" target="_blank">sizing guide</a>.</p>
-          <Tabs>
-            <Tabs.Panel title="US">
-              <table className="table table-desktop text-center">
-                <thead>
-                  <tr>
-                    <th>Sizes</th>
-                    <th>Bust</th>
-                    <th>Underbust</th>
-                    <th>Waist</th>
-                    <th>Hip</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.props.sizeChart.map((row, index) => {
-                    let dataArray = new Array;
-                    for(let obj in row) {
-                      dataArray.push(row[obj]);
-                    }
-                    return (
-                      <tr key={index}>
-                        <td>{dataArray[1]}</td>
-                        <td>{dataArray[3]}</td>
-                        <td>{dataArray[5]}</td>
-                        <td>{dataArray[7]}</td>
-                        <td>{dataArray[9]}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </Tabs.Panel>
-
-            <Tabs.Panel title="AUS/UK">
-              <table className="table table-desktop text-center">
-                <thead>
-                  <tr>
-                    <th>Sizes</th>
-                    <th>Bust</th>
-                    <th>Underbust</th>
-                    <th>Waist</th>
-                    <th>Hip</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.props.sizeChart.map((row, index) => {
-                    let dataArray = new Array;
-                    for(let obj in row) {
-                      dataArray.push(row[obj]);
-                    }
-                    return (
-                      <tr key={index}>
-                        <td>{dataArray[0]}</td>
-                        <td>{dataArray[2]}</td>
-                        <td>{dataArray[4]}</td>
-                        <td>{dataArray[6]}</td>
-                        <td>{dataArray[8]}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </Tabs.Panel>
-          </Tabs>
-        </div>
       </div>
     );
   }

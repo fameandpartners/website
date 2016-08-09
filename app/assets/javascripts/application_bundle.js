@@ -1732,12 +1732,15 @@ var SidePanelSizeChart = function (_React$Component) {
 
     _this.state = {
       active: false,
-      modalIsOpen: false
+      modalIsOpen: false,
+      imchesIsActive: true,
+      cmIsActive: false
     };
 
     _this.openModal = _this.openModal.bind(_this);
     _this.closeModal = _this.closeModal.bind(_this);
-    _this.toggleMenu = _this.toggleMenu.bind(_this);
+    _this.showInches = _this.showInches.bind(_this);
+    _this.showCm = _this.showCm.bind(_this);
     return _this;
   }
 
@@ -1752,18 +1755,27 @@ var SidePanelSizeChart = function (_React$Component) {
       this.setState({ modalIsOpen: false });
     }
   }, {
-    key: 'toggleMenu',
-    value: function toggleMenu() {
-      if (this.state.active) {
-        this.setState({ active: false });
-      } else {
-        this.setState({ active: true });
-      }
+    key: 'showCm',
+    value: function showCm() {
+      this.setState({
+        imchesIsActive: false,
+        cmIsActive: true
+      });
+    }
+  }, {
+    key: 'showInches',
+    value: function showInches() {
+      this.setState({
+        imchesIsActive: true,
+        cmIsActive: false
+      });
     }
   }, {
     key: 'render',
     value: function render() {
       var TRIGGER_COPY = this.state.active ? 'View New Size Guide' : 'View Legacy Size Guide';
+      var INCHES_IS_ACTIVE = this.state.imchesIsActive ? 'is-active' : '';
+      var CM_IS_ACTIVE = this.state.cmIsActive ? 'is-active' : '';
       // this is just reset, proper styling will be applied through SASS
       var MODAL_STYLE = {
         overlay: {
@@ -1937,7 +1949,25 @@ var SidePanelSizeChart = function (_React$Component) {
                       _react2.default.createElement(
                         'th',
                         { colSpan: '4' },
-                        'Measurements'
+                        'Measurements',
+                        _react2.default.createElement(
+                          'span',
+                          { className: 'toggle-controls' },
+                          _react2.default.createElement(
+                            'a',
+                            { href: 'javascript:;',
+                              className: "toggle-selector " + INCHES_IS_ACTIVE,
+                              onClick: this.showInches },
+                            'inches'
+                          ),
+                          _react2.default.createElement(
+                            'a',
+                            { href: 'javascript:;',
+                              className: "toggle-selector " + CM_IS_ACTIVE,
+                              onClick: this.showCm },
+                            'cm'
+                          )
+                        )
                       )
                     ),
                     _react2.default.createElement(
@@ -1975,17 +2005,17 @@ var SidePanelSizeChart = function (_React$Component) {
                       )
                     )
                   ),
-                  this.props.sizeChart.map(function (row, index) {
-                    var dataArray = new Array();
-                    for (var obj in row) {
-                      dataArray.push(row[obj]);
-                    }
-                    return _react2.default.createElement(
-                      'tbody',
-                      { className: 'inches', key: index },
-                      _react2.default.createElement(
+                  _react2.default.createElement(
+                    'tbody',
+                    null,
+                    this.props.sizeChart.map(function (row, index) {
+                      var dataArray = new Array();
+                      for (var obj in row) {
+                        dataArray.push(row[obj]);
+                      }
+                      return _react2.default.createElement(
                         'tr',
-                        null,
+                        { key: index, className: INCHES_IS_ACTIVE },
                         _react2.default.createElement(
                           'td',
                           null,
@@ -2016,9 +2046,49 @@ var SidePanelSizeChart = function (_React$Component) {
                           null,
                           dataArray[9]
                         )
-                      )
-                    );
-                  })
+                      );
+                    }),
+                    this.props.sizeChart.map(function (row, index) {
+                      var dataArray = new Array();
+                      for (var obj in row) {
+                        dataArray.push(row[obj]);
+                      }
+                      return _react2.default.createElement(
+                        'tr',
+                        { key: index, className: CM_IS_ACTIVE },
+                        _react2.default.createElement(
+                          'td',
+                          null,
+                          dataArray[1]
+                        ),
+                        _react2.default.createElement(
+                          'td',
+                          { className: 'divider' },
+                          dataArray[0]
+                        ),
+                        _react2.default.createElement(
+                          'td',
+                          null,
+                          dataArray[2]
+                        ),
+                        _react2.default.createElement(
+                          'td',
+                          null,
+                          dataArray[4]
+                        ),
+                        _react2.default.createElement(
+                          'td',
+                          null,
+                          dataArray[6]
+                        ),
+                        _react2.default.createElement(
+                          'td',
+                          null,
+                          dataArray[8]
+                        )
+                      );
+                    })
+                  )
                 )
               )
             )
@@ -2030,185 +2100,6 @@ var SidePanelSizeChart = function (_React$Component) {
               'span',
               { className: 'hide-visually' },
               'Close Menu'
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'inner-wrap' },
-          _react2.default.createElement(
-            'p',
-            null,
-            'Measurements are much more accurate if taken by someone else. For more information about our sizing, visit our ',
-            _react2.default.createElement(
-              'a',
-              { href: '/size-guide', target: '_blank' },
-              'sizing guide'
-            ),
-            '.'
-          ),
-          _react2.default.createElement(
-            _reactSimpletabs2.default,
-            null,
-            _react2.default.createElement(
-              _reactSimpletabs2.default.Panel,
-              { title: 'US' },
-              _react2.default.createElement(
-                'table',
-                { className: 'table table-desktop text-center' },
-                _react2.default.createElement(
-                  'thead',
-                  null,
-                  _react2.default.createElement(
-                    'tr',
-                    null,
-                    _react2.default.createElement(
-                      'th',
-                      null,
-                      'Sizes'
-                    ),
-                    _react2.default.createElement(
-                      'th',
-                      null,
-                      'Bust'
-                    ),
-                    _react2.default.createElement(
-                      'th',
-                      null,
-                      'Underbust'
-                    ),
-                    _react2.default.createElement(
-                      'th',
-                      null,
-                      'Waist'
-                    ),
-                    _react2.default.createElement(
-                      'th',
-                      null,
-                      'Hip'
-                    )
-                  )
-                ),
-                _react2.default.createElement(
-                  'tbody',
-                  null,
-                  this.props.sizeChart.map(function (row, index) {
-                    var dataArray = new Array();
-                    for (var obj in row) {
-                      dataArray.push(row[obj]);
-                    }
-                    return _react2.default.createElement(
-                      'tr',
-                      { key: index },
-                      _react2.default.createElement(
-                        'td',
-                        null,
-                        dataArray[1]
-                      ),
-                      _react2.default.createElement(
-                        'td',
-                        null,
-                        dataArray[3]
-                      ),
-                      _react2.default.createElement(
-                        'td',
-                        null,
-                        dataArray[5]
-                      ),
-                      _react2.default.createElement(
-                        'td',
-                        null,
-                        dataArray[7]
-                      ),
-                      _react2.default.createElement(
-                        'td',
-                        null,
-                        dataArray[9]
-                      )
-                    );
-                  })
-                )
-              )
-            ),
-            _react2.default.createElement(
-              _reactSimpletabs2.default.Panel,
-              { title: 'AUS/UK' },
-              _react2.default.createElement(
-                'table',
-                { className: 'table table-desktop text-center' },
-                _react2.default.createElement(
-                  'thead',
-                  null,
-                  _react2.default.createElement(
-                    'tr',
-                    null,
-                    _react2.default.createElement(
-                      'th',
-                      null,
-                      'Sizes'
-                    ),
-                    _react2.default.createElement(
-                      'th',
-                      null,
-                      'Bust'
-                    ),
-                    _react2.default.createElement(
-                      'th',
-                      null,
-                      'Underbust'
-                    ),
-                    _react2.default.createElement(
-                      'th',
-                      null,
-                      'Waist'
-                    ),
-                    _react2.default.createElement(
-                      'th',
-                      null,
-                      'Hip'
-                    )
-                  )
-                ),
-                _react2.default.createElement(
-                  'tbody',
-                  null,
-                  this.props.sizeChart.map(function (row, index) {
-                    var dataArray = new Array();
-                    for (var obj in row) {
-                      dataArray.push(row[obj]);
-                    }
-                    return _react2.default.createElement(
-                      'tr',
-                      { key: index },
-                      _react2.default.createElement(
-                        'td',
-                        null,
-                        dataArray[0]
-                      ),
-                      _react2.default.createElement(
-                        'td',
-                        null,
-                        dataArray[2]
-                      ),
-                      _react2.default.createElement(
-                        'td',
-                        null,
-                        dataArray[4]
-                      ),
-                      _react2.default.createElement(
-                        'td',
-                        null,
-                        dataArray[6]
-                      ),
-                      _react2.default.createElement(
-                        'td',
-                        null,
-                        dataArray[8]
-                      )
-                    );
-                  })
-                )
-              )
             )
           )
         )

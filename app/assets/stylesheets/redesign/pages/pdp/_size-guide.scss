@@ -21,6 +21,17 @@
 
   }
 
+  tbody tr {
+    display: none;
+    visibility: hidden;
+
+    &.is-active {
+      display: table-row;
+      visibility: visible;
+    }
+
+  }
+
   th,
   td {
     padding: 4px;
@@ -32,6 +43,41 @@
 
     &.divider {
       border-right: solid $c-neutral-4 1px;
+    }
+
+  }
+
+  .toggle-controls {
+    float: right;
+
+    a {
+      position: relative;
+      margin-left: 10px;
+      padding-left: 18px;
+      color: $c-neutral-8;
+
+      &:before {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        top: 2px;
+        left: 0;
+        width: 13px;
+        height: 13px;
+        border: solid $c-neutral-6 1px;
+      }
+
+    }
+
+    .is-active {
+      text-decoration: underline;
+      color: inherit;
+
+      &:before {
+        background: $c-neutral-black;
+        border-color: $c-neutral-black;
+      }
+
     }
 
   }
