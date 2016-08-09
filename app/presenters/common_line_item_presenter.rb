@@ -81,11 +81,11 @@ class CommonLineItemPresenter
     end
   end
 
-  private
-
   def personalizations?
     personalization.present?
   end
+
+  private
 
   def standard_variant_for_custom_color
     return unless personalizations?
