@@ -73,9 +73,21 @@ class SidePanelSize extends SidePanel {
                 </a>
               </div>
               <h2 className="h4 c-card-customize__header">Choose your size</h2>
-              <p className="error text-center">
-                <strong>Please read first: </strong>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+              {(() => {
+                if(this.props.sizeChartVersion === "2016") {
+                  return (
+                    <p className="error text-center">
+                      <strong>Before you select a size: </strong>
+                      Refer to the legacy size guide to ensure the best possible fit.</p>
+                  );
+                } else {
+                  return (
+                    <p className="error text-center">
+                      <strong>Before you select a size: </strong>
+                      Refer to our new size guide to ensure the best possible fit.</p>
+                  );
+                }
+              })()}
               <div className="row">{SIZES}</div>
               <SidePanelSizeChart />
             </div>
@@ -94,7 +106,8 @@ function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
     defaultSizes: state.product.available_options.table.sizes.table.default,
-    variants: state.product.available_options.table.variants
+    variants: state.product.available_options.table.variants,
+    sizeChartVersion: state.product.size_chart
   };
 }
 

@@ -1645,16 +1645,31 @@ var SidePanelSize = function (_SidePanel) {
                 { className: 'h4 c-card-customize__header' },
                 'Choose your size'
               ),
-              _react2.default.createElement(
-                'p',
-                { className: 'error text-center' },
-                _react2.default.createElement(
-                  'strong',
-                  null,
-                  'Please read first: '
-                ),
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor'
-              ),
+              function () {
+                if (_this2.props.sizeChartVersion === "2016") {
+                  return _react2.default.createElement(
+                    'p',
+                    { className: 'error text-center' },
+                    _react2.default.createElement(
+                      'strong',
+                      null,
+                      'Before you select a size: '
+                    ),
+                    'Refer to the legacy size guide to ensure the best possible fit.'
+                  );
+                } else {
+                  return _react2.default.createElement(
+                    'p',
+                    { className: 'error text-center' },
+                    _react2.default.createElement(
+                      'strong',
+                      null,
+                      'Before you select a size: '
+                    ),
+                    'Refer to our new size guide to ensure the best possible fit.'
+                  );
+                }
+              }(),
               _react2.default.createElement(
                 'div',
                 { className: 'row' },
@@ -1679,7 +1694,8 @@ function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
     defaultSizes: state.product.available_options.table.sizes.table.default,
-    variants: state.product.available_options.table.variants
+    variants: state.product.available_options.table.variants,
+    sizeChartVersion: state.product.size_chart
   };
 }
 
