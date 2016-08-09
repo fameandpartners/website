@@ -6,34 +6,36 @@ module Spree
     let(:delivery_date) { Date.parse('10/10/2016') }
 
     let(:user) { build(:spree_user, email: 'loroteiro@silvestre.com') }
-    let(:address) { build(:address, address1: 'Street Macarena', address2: 'Around the Corner', zipcode: '12321', city: 'Las Ketchup', phone: '1234-5678') }
-    let(:order) { create(:complete_order_with_items, number: 'R123123123', projected_delivery_date: delivery_date, user: user, bill_address: address, ship_address: address) }
+    let(:address) { build(:address, address1: 'Street Macarena', address2: 'Around the Corner',
+                          zipcode: '12321', city: 'Las Ketchup', phone: '1234-5678') }
+    let(:order) { create(:complete_order_with_items, number: 'R123123123', projected_delivery_date: delivery_date,
+                         user: user, bill_address: address, ship_address: address) }
+    let(:presenter) { Marketing::OrderPresenter.new(order) }
 
     before(:each) do
       Spree::Config[:site_name] = 'My Super eCommerce'
       allow(Date).to receive(:today).and_return(today_date)
-      allow_any_instance_of(Marketing::OrderPresenter).to receive_messages(billing_address: {}, shipping_address: {})
+      # allow_any_instance_of(Marketing::OrderPresenter).to receive_messages(billing_address: {}, shipping_address: {})
     end
 
     let(:expected_attributes) {
       {
         # Calculated attributes. TODO on assertive values
-        adjustments:                 Marketing::OrderPresenter.build_adjustments(order),
-        display_item_total:          order.display_item_total.to_s,
-        display_total:               order.display_total.to_s,
-        line_items:                  Marketing::OrderPresenter.build_line_items(order),
-        billing_address_attributes:  {}, # Empty Hash. Tested in Marketing::AddressPresenter
-        shipping_address_attributes: {}, # Empty Hash. Tested in Marketing::AddressPresenter
-        # Delegated attributes. Easy to process
-        auto_account:                false,
-        billing_address:             'Street Macarena Around the Corner, Las Ketchup, Alabama, 12321, United States of Foo',
-        delivery_date:               'Sun, 09 Oct 2016',
         email_to:                    'loroteiro@silvestre.com',
-        order_number:                'R123123123',
-        phone:                       '1234-5678',
-        shipping_address:            'Street Macarena Around the Corner, Las Ketchup, Alabama, 12321, United States of Foo',
         subject:                     'My Super eCommerce Order Confirmation #R123123123',
+        order_number:                'R123123123',
+        line_items:                  presenter.build_line_items,
+        display_item_total:          order.display_item_total.to_s,
+        adjustments:                 presenter.build_adjustments,
+        display_total:               order.display_total.to_s,
+        auto_account:                false,
         today:                       '05.05.16',
+        phone:                       '1234-5678',
+        delivery_date:               'Sun, 09 Oct 2016',
+        billing_address_attributes:  presenter.billing_address_attributes.to_h,
+        shipping_address_attributes: presenter.shipping_address_attributes.to_h,
+        billing_address:             'Street Macarena Around the Corner, Las Ketchup, Alabama, 12321, United States of Foo',
+        shipping_address:            'Street Macarena Around the Corner, Las Ketchup, Alabama, 12321, United States of Foo'
       }
     }
 

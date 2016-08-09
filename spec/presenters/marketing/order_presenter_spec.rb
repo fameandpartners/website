@@ -15,12 +15,14 @@ describe Marketing::OrderPresenter, type: :presenter do
     let(:dress_color) { build(:product_colour, name: 'blue') }
     let(:dress_item_personalization) { build(:personalization, height: 'petite', color: dress_color) }
     let(:dress_variant) { create(:dress_variant) }
-    let(:dress_item) { build(:dress_item, price: 9.99, quantity: 1, personalization: dress_item_personalization, variant: dress_variant) }
+    let(:dress_item) { build(:dress_item, price: 9.99, quantity: 1, personalization: dress_item_personalization,
+                             variant: dress_variant) }
     let(:adjustment) { build(:adjustment, adjustable_type: 'Spree::Order') }
-    let(:order) { build(:spree_order, number: 'R123', currency: 'BRL',line_items: [dress_item], adjustments: [adjustment], projected_delivery_date: Date.new) }
+    let(:order) { build(:spree_order, number: 'R123', currency: 'BRL',line_items: [dress_item],
+                        adjustments: [adjustment], projected_delivery_date: Date.new) }
 
     it '.build_line_items' do
-      result = described_class.build_line_items(order).first
+      result = presenter.build_line_items.first
       expect(result[:sku]).to eq(dress_item.variant.sku)
       expect(result[:name]).to eq(dress_item.variant.product.name)
       expect(result[:making_options_text]).to eq(dress_item.making_options_text)
