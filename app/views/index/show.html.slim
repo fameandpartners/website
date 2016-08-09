@@ -31,7 +31,7 @@ ruby:
                     span.copy-highlight Explore
                     i.icon.icon-arrow-right
               = link_to '/dresses/new-this-week'
-                = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive', alt: ''
+                = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive', alt: 'Your personal atelier'
 
           .col-md-4.hidden-sm.hidden-xs
             .item.bordered
@@ -43,7 +43,7 @@ ruby:
                     span.copy-highlight Learn more
                     i.icon.icon-arrow-right
               = link_to about_us_path
-                = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive', alt: ''
+                = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive', alt: 'Made-to-order'
 
           .col-md-4.hidden-sm.hidden-xs
             .item.bordered
@@ -55,7 +55,7 @@ ruby:
                     span.copy-highlight The Fit Guide
                     i.icon.icon-arrow-right
               = link_to size_guide_path
-                = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive', alt: ''
+                = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive', alt: 'Tailored for you'
 
   // Section: Style icon
   section.section-box.container.section-style-icon
@@ -73,14 +73,13 @@ ruby:
         .col-md-12.cta-item-huge
           = link_to '/brittany-xavier-high-summer-collection'
             .section-img-wrap.copy-center
-              .hero-wrap
-                picture.img-as-block
-                  .img-wrap
-                    source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/Aug-3-tile1-mob.jpg")}'
-                    source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-3-tile1.jpg")}'
-                    img src='#{image_path("homepage/fp-style-icon/Aug-3-tile1-mob.jpg")}' srcset='
-                      #{image_path("homepage/fp-style-icon/Aug-3-tile1-mob.jpg")} 1023w,
-                      #{image_path("homepage/fp-style-icon/Aug-3-tile1.jpg")} 1024w'
+              picture
+                .img-wrap
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/Aug-3-tile1-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-3-tile1.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/Aug-3-tile1-mob.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/Aug-3-tile1-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/Aug-3-tile1.jpg")} 1024w' alt="Image tile"
 
               .content-wrap
                 .container-cta
@@ -107,7 +106,7 @@ ruby:
                   source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-3-tile2.jpg")}'
                   img src='#{image_path("homepage/fp-style-icon/Aug-3-tile2-mob.jpg")}' srcset='
                     #{image_path("homepage/fp-style-icon/Aug-3-tile2-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/Aug-3-tile2.jpg")} 1024w'
+                    #{image_path("homepage/fp-style-icon/Aug-3-tile2.jpg")} 1024w' alt="Image tile"
 
               .content-wrap
                 .container-cta
@@ -127,7 +126,7 @@ ruby:
                   source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-3-tile3.jpg")}'
                   img src='#{image_path("homepage/fp-style-icon/Aug-3-tile3-mob.jpg")}' srcset='
                     #{image_path("homepage/fp-style-icon/Aug-3-tile3-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/Aug-3-tile3.jpg")} 1024w'
+                    #{image_path("homepage/fp-style-icon/Aug-3-tile3.jpg")} 1024w' alt="Image tile"
 
               .content-wrap
                 .container-cta
@@ -148,7 +147,7 @@ ruby:
                   source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-3-tile4.jpg")}'
                   img src='#{image_path("homepage/fp-style-icon/Aug-3-tile4-mob.jpg")}' srcset='
                     #{image_path("homepage/fp-style-icon/Aug-3-tile4-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/Aug-3-tile4.jpg")} 1024w'
+                    #{image_path("homepage/fp-style-icon/Aug-3-tile4.jpg")} 1024w' alt="Image tile"
 
               .content-wrap
                 .container-cta
@@ -168,7 +167,7 @@ ruby:
                   source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-3-tile5.jpg")}'
                   img src='#{image_path("homepage/fp-style-icon/Aug-3-tile5-mob.jpg")}' srcset='
                     #{image_path("homepage/fp-style-icon/Aug-3-tile5-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/Aug-3-tile5.jpg")} 1024w'
+                    #{image_path("homepage/fp-style-icon/Aug-3-tile5.jpg")} 1024w' alt="Image tile"
 
               .content-wrap
                 .container-cta
@@ -203,7 +202,7 @@ ruby:
             .row
               .col-lg-6.col-md-5
                 = link_to styling_session_path
-                  = image_tag 'homepage/styling/styling-session.jpg', :class => 'img-responsive hidden-xs hidden-sm', alt: ''
+                  = image_tag 'homepage/styling/styling-session.jpg', :class => 'img-responsive hidden-xs hidden-sm'
 
               .col-lg-6.col-md-7
                 .item-copy
@@ -217,7 +216,7 @@ ruby:
                       i.icon.icon-arrow-right
 
                 = link_to styling_session_path
-                  = image_tag 'homepage/styling/styling-session.jpg', :class => 'img-responsive hidden-md hidden-lg', alt: ''
+                  = image_tag 'homepage/styling/styling-session.jpg', :class => 'img-responsive hidden-md hidden-lg'
 
   // Section: Instagram
   section.container
@@ -242,7 +241,7 @@ ruby:
             .item.col-md-5ths.col-xs-6
               = link_to '/dresses/dress-wyatt-1030?color=dark-burgundy', class: 'item-wrap'
                 .media-wrap
-                  = image_tag 'homepage/get-social/Aug-3-instagram-1.jpg', :class => 'img-responsive', alt: ''
+                  = image_tag 'homepage/get-social/Aug-3-instagram-1.jpg', :class => 'img-responsive'
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
@@ -254,7 +253,7 @@ ruby:
             .item.col-md-5ths.col-xs-6
               = link_to '/dresses/dress-flynn-1044?color=black', class: 'item-wrap'
                 .media-wrap
-                  = image_tag 'homepage/get-social/Aug-3-instagram-2.jpg', :class => 'img-responsive', alt: ''
+                  = image_tag 'homepage/get-social/Aug-3-instagram-2.jpg', :class => 'img-responsive'
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
@@ -266,7 +265,7 @@ ruby:
             .item.col-md-5ths.col-xs-6
               = link_to '/dresses/dress-emery-1041?color=warm-grey', class: 'item-wrap'
                 .media-wrap
-                  = image_tag 'homepage/get-social/Aug-3-instagram-3.jpg', :class => 'img-responsive', alt: ''
+                  = image_tag 'homepage/get-social/Aug-3-instagram-3.jpg', :class => 'img-responsive'
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
@@ -278,7 +277,7 @@ ruby:
             .item.col-md-5ths.col-xs-6
               = link_to '/dresses/dress-storm-802?color=pale-grey', class: 'item-wrap'
                 .media-wrap
-                  = image_tag 'homepage/get-social/Aug-3-instagram-4.jpg', :class => 'img-responsive', alt: ''
+                  = image_tag 'homepage/get-social/Aug-3-instagram-4.jpg', :class => 'img-responsive'
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
@@ -290,7 +289,7 @@ ruby:
             .item.col-md-5ths.hidden-sm.hidden-xs
               = link_to '/dresses/dress-fall-from-heaven-971?color=red', class: 'item-wrap'
                 .media-wrap
-                  = image_tag 'homepage/get-social/Aug-3-instagram-5.jpg', :class => 'img-responsive', alt: ''
+                  = image_tag 'homepage/get-social/Aug-3-instagram-5.jpg', :class => 'img-responsive'
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
@@ -324,7 +323,7 @@ ruby:
 
             .col-sm-7.img-side
               = link_to 'https://www.facebook.com/FameandPartners', target: '_blank'
-                = image_tag 'homepage/social-cards/facebook.jpg', :class => 'img-responsive', alt: ''
+                = image_tag 'homepage/social-cards/facebook.jpg', :class => 'img-responsive'
 
       .col-md-6.copy-img-side-by-side
         .item.bordered.item-alt.section-tumblr
@@ -342,4 +341,4 @@ ruby:
 
             .col-sm-7.img-side
               = link_to 'http://fameandpartners.tumblr.com/', target: '_blank'
-                = image_tag 'homepage/social-cards/tumblr.jpg', :class => 'img-responsive', alt: ''
+                = image_tag 'homepage/social-cards/tumblr.jpg', :class => 'img-responsive'

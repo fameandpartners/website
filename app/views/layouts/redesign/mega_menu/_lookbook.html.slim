@@ -1,41 +1,8 @@
-li.shop.menu-item
-  a.menu-item--link href="#"
-    | Lookbook
-  .mega-menu.hidden-sm.story-list
-    .stories.container-fluid.center
-
-      .col-md-2
-        = link_to dance_hall_days_collection do
-          .image-container
-            = image_tag src="#{configatron.asset_host}/lookbook/dance-hall-days/nav.jpg", :class => 'img-responsive', :alt => 'Dance Hall Days'
-          p.text-center.edit-title Dance Hall Days
-
-      .col-md-2
-        = link_to luxe_collection_path do
-          .image-container
-            = image_tag src="#{configatron.asset_host}/lookbook/the-luxe-collection/nav.jpg", :class => 'img-responsive', :alt => 'The Luxe Collection'
-          p.text-center.edit-title The Luxe Collection
-
-      .col-md-2
-        = link_to bohemian_summer_collection_path do
-          .image-container
-            = image_tag src="#{configatron.asset_host}/lookbook/bohemian-summer/nav.jpg", :class => 'img-responsive', :alt => 'Here Comes the Sun'
-          p.text-center.edit-title Bohemian Summer
-
-      .col-md-2
-        = link_to bridesmaid_collection_path do
-          .image-container.bridesmaids
-            = image_tag src="#{configatron.asset_host}/lookbook/bridesmaids/nav.jpg", :class => 'img-responsive', :alt => 'Our Beautiful Bridesmaids Collection'
-          p.text-center.edit-title Besties and Bridesmaids Collection
-
-      .col-md-2
-        = link_to all_size_collection_path do
-          .image-container
-            = image_tag src="#{configatron.asset_host}/lookbook/all-size/nav.jpg", :class => 'img-responsive', :alt => 'All Sizes'
-          p.text-center.edit-title I'll Have What She's Having
-
-      .col-md-2
-        = link_to here_comes_the_sun_collection_path do
-          .image-container
-            = image_tag src="#{configatron.asset_host}/lookbook/here-comes-the-sun/nav.jpg", :class => 'img-responsive', :alt => 'Here Comes the Sun'
-          p.text-center.edit-title Here Comes The Sun
+- cache ['views/layouts/redesign/mega_menu/_lookbook'] do
+  li.normal-item = link_to 'The Freshly Picked Collection',     the_freshly_picked_collection_path,       class: 'text'
+  li.normal-item = link_to 'The Ruffled Up Collection',         the_ruffled_up_collection_path,           class: 'text'
+  li.normal-item = link_to 'Partners In Crime',                 partners_in_crime_collection_path,        class: 'text'
+  li.normal-item = link_to 'Just The Girls',                    just_the_girls_collection_path,           class: 'text'
+  li.normal-item = link_to 'Love Lace',                         love_lace_collection_path,                class: 'text'
+  li.normal-item = link_to 'This Modern Romance',               this_modern_romance_collection_path,      class: 'text'
+  li.normal-item.no-border = link_to 'View all lookbooks',      lookbook_path,                            class: 'text'

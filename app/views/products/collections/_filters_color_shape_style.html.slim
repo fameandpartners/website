@@ -19,9 +19,11 @@
           span Filters
         a.js-trigger-clear-all-filters href='javascript:;' Clear All
 
-    .panel.panel-default
+    .panel.content-collapse-expand.panel-default
       .panel-heading#heading-collapse-price role='tab'
-        a.panel-title.collapsed role='button' data-toggle='collapse' data-target='#collapse-price' aria-expanded='false' aria-controls='collapse-price' PRICE
+        a.panel-title.collapsed role='button' data-toggle='collapse' data-target='#collapse-price' aria-expanded='false' aria-controls='collapse-price'
+          | PRICE
+          span.btn-open-close
       .panel-collapse.collapse#collapse-price role='tabpanel' aria-labelledby='heading-collapse-price'
         .panel-body
           .custom-form-element.filter-radio-option.selector-price name='price'
@@ -51,9 +53,11 @@
               /span.icon
               /span $400+
 
-    .panel.panel-default
+    .panel.content-collapse-expand.panel-default
       .panel-heading#heading-collapse-style role='tab'
-        a.panel-title.collapsed role='button' data-toggle='collapse' data-target='#collapse-style' aria-expanded='false' aria-controls='collapse-style' STYLES
+        a.panel-title.collapsed role='button' data-toggle='collapse' data-target='#collapse-style' aria-expanded='false' aria-controls='collapse-style'
+          | STYLES
+          span.btn-open-close
       .panel-collapse.collapse#collapse-style role='tabpanel' aria-labelledby='heading-collapse-style'
         .panel-body
           .custom-form-element.filter-option.selector-styles
@@ -73,9 +77,11 @@
                 span.icon
                 span = style.name
 
-    .panel.panel-default
+    .panel.content-collapse-expand.panel-default
       .panel-heading#heading-collapse-color role='tab'
-        a.panel-title.collapsed role='button' data-toggle='collapse' data-target='#collapse-color' aria-expanded='false' aria-controls='collapse-color' COLORS
+        a.panel-title.collapsed role='button' data-toggle='collapse' data-target='#collapse-color' aria-expanded='false' aria-controls='collapse-color'
+          | COLORS
+          span.btn-open-close
       .panel-collapse.collapse#collapse-color role='tabpanel' aria-labelledby='heading-collapse-color'
         .panel-body
           .color-checkboxes
@@ -112,9 +118,11 @@
               - for color in selectColors
                 option name='#{color.name}' value='#{color.name}' #{color.name}
 
-    .panel.panel-default
+    .panel.content-collapse-expand.panel-default
       .panel-heading#heading-collapse-bodyshape role='tab'
-        a.panel-title.collapsed role='button' data-toggle='collapse' data-target='#collapse-bodyshape' aria-expanded='false' aria-controls='collapse-bodyshape' BODYSHAPE
+        a.panel-title.collapsed role='button' data-toggle='collapse' data-target='#collapse-bodyshape' aria-expanded='false' aria-controls='collapse-bodyshape'
+          | BODYSHAPE
+          span.btn-open-close
       .panel-collapse.collapse#collapse-bodyshape role='tabpanel' aria-labelledby='heading-collapse-bodyshape'
         .panel-body
           .custom-form-element.filter-option.selector-bodyshape
