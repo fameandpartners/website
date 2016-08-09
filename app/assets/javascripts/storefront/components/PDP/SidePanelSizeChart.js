@@ -77,7 +77,17 @@ class SidePanelSizeChart extends React.Component {
           <div className="pdp-sizeguide">
             <div className="row">
               <div className="col-md-12">
-                <h4 className="h2 text-center">Size guide</h4>
+                {(() => {
+                  if(this.props.sizeChartVersion === "2016") {
+                    return (
+                      <h4 className="h2 title text-center">Legacy size guide</h4>
+                    );
+                  } else {
+                    return (
+                      <h4 className="h2 title text-center">Size guide</h4>
+                    );
+                  }
+                })()}
               </div>
               <div className="col-md-6">
                 <Tabs>
@@ -89,7 +99,7 @@ class SidePanelSizeChart extends React.Component {
                   </Tabs.Panel>
                   <Tabs.Panel title="Measuring tips">
                     <p>FYI - Your results will be the most accurate if someone else helps you measure!</p>
-                    <h6>Fame Tips</h6>
+                    <h5 className="heading"><em>Fame Tips</em></h5>
                     <p>- Measure yourself in your underwear and, if possible, the bra you’d like to wear with the dress.
                       Stand tall with your feet together.<br/>- If you plan on wearing heels with the dress, don’t forget
                       to include heel height in your measurement! This will help you decide which of our three dress
@@ -178,12 +188,14 @@ class SidePanelSizeChart extends React.Component {
 }
 
 SidePanelSizeChart.propTypes = {
-  sizeChart: PropTypes.array.isRequired
+  sizeChart: PropTypes.array.isRequired,
+  sizeChartVersion: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    sizeChart: state.sizeChart
+    sizeChart: state.sizeChart,
+    sizeChartVersion: state.product.size_chart
   };
 }
 

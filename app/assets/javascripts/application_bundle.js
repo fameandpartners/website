@@ -1789,6 +1789,8 @@ var SidePanelSizeChart = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var TRIGGER_COPY = this.state.active ? 'View New Size Guide' : 'View Legacy Size Guide';
       var INCHES_IS_ACTIVE = this.state.imchesIsActive ? 'is-active' : '';
       var CM_IS_ACTIVE = this.state.cmIsActive ? 'is-active' : '';
@@ -1835,11 +1837,21 @@ var SidePanelSizeChart = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'col-md-12' },
-                _react2.default.createElement(
-                  'h4',
-                  { className: 'h2 text-center' },
-                  'Size guide'
-                )
+                function () {
+                  if (_this2.props.sizeChartVersion === "2016") {
+                    return _react2.default.createElement(
+                      'h4',
+                      { className: 'h2 title text-center' },
+                      'Legacy size guide'
+                    );
+                  } else {
+                    return _react2.default.createElement(
+                      'h4',
+                      { className: 'h2 title text-center' },
+                      'Size guide'
+                    );
+                  }
+                }()
               ),
               _react2.default.createElement(
                 'div',
@@ -1866,9 +1878,13 @@ var SidePanelSizeChart = function (_React$Component) {
                       'FYI - Your results will be the most accurate if someone else helps you measure!'
                     ),
                     _react2.default.createElement(
-                      'h6',
-                      null,
-                      'Fame Tips'
+                      'h5',
+                      { className: 'heading' },
+                      _react2.default.createElement(
+                        'em',
+                        null,
+                        'Fame Tips'
+                      )
                     ),
                     _react2.default.createElement(
                       'p',
@@ -2127,12 +2143,14 @@ var SidePanelSizeChart = function (_React$Component) {
 }(_react2.default.Component);
 
 SidePanelSizeChart.propTypes = {
-  sizeChart: _react.PropTypes.array.isRequired
+  sizeChart: _react.PropTypes.array.isRequired,
+  sizeChartVersion: _react.PropTypes.string.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    sizeChart: state.sizeChart
+    sizeChart: state.sizeChart,
+    sizeChartVersion: state.product.size_chart
   };
 }
 

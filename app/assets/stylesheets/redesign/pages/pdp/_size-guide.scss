@@ -3,11 +3,25 @@
 .pdp-sizeguide {
   padding: 20px;
 
+  .title {
+    margin: 30px;
+  }
+
+  .heading {
+    margin-bottom: 5px;
+  }
+
   p {
+    margin-bottom: 15px;
     font-size: 0.875em;
     font-weight: 300;
-    line-height: 1;
+    line-height: 1.1;
     font-family: $font-heading;
+
+    strong {
+      font-family: $font-family-secondary;
+    }
+
   }
 
   table {
@@ -34,17 +48,22 @@
 
   th,
   td {
-    padding: 4px;
+    padding: 3px;
     text-align: center;
     font-size: 0.75em;
-    font-weight: 500;
-    font-family: $font-heading;
+    font-weight: normal;
     border-bottom: solid $c-neutral-4 1px;
 
     &.divider {
       border-right: solid $c-neutral-4 1px;
     }
 
+  }
+
+  tr:first-child th {
+    font-size: 0.875em;
+    font-weight: 500;
+    font-family: $font-heading;
   }
 
   .toggle-controls {
@@ -106,6 +125,14 @@
       font-weight: bold;
       color: $c-neutral-black;
       border-color: $c-neutral-black;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .tabs {
+      margin-bottom: 30px;
     }
 
   }

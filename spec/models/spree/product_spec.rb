@@ -62,7 +62,7 @@ describe Spree::Product, :type => :model do
 
   describe '#size_chart' do
     it do
-      is_expected.to validate_inclusion_of(:size_chart).in_array(%w(2014 2015 2016))
+      is_expected.to validate_inclusion_of(:size_chart).in_array(%w(2014 2015 2016 2016_v2))
     end
 
     describe '#new_size_chart?' do
