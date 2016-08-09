@@ -126,13 +126,11 @@
   .slick-arrow {
     color: $c-neutral-10;
     font-size: 2rem;
-    top: 45px;
-
-    &:before {
-      background: $c-neutral-white;
-      @include box-shadow( 0 0 25px 25px rgba($c-neutral-white, 0.75) );
-    }
-
+    top: 23px;
+    padding: 18px 0;
+    background: $c-neutral-white;
+    @include box-shadow( 0 0 20px 10px rgba($c-neutral-white, 0.7) );
+    width: 16px;
   }
 
   // This is needed because the left arrow looks smaller than the right one with the default value above
