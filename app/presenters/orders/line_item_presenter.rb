@@ -46,7 +46,7 @@ module Orders
     end
 
     def sku
-      if personalization.present?
+      if personalizations?
         CustomItemSku.new(item).call
       else
         variant.sku
