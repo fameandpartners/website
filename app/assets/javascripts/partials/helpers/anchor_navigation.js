@@ -5,7 +5,7 @@
   var sitewideHeaderHeight = 0,
       navLocalMenuHeight = 0,
       localNavTopOffset = 0,
-      offsetTargetTopPadding = 45, // The desired distance between the target and the page header
+      offsetTargetTopPadding = 70, // The desired distance between the target and the page header
       mdScreenWidth = 992,
       responsiveNavLocal = $('.local-navigation .nav');
 
@@ -13,10 +13,10 @@
     sitewideHeaderHeight = $("#fixed-header").delay(300).outerHeight();
 
   if ($(".js-float-menu-on-scroll").length)
-    navLocalMenuHeight = $(".js-float-menu-on-scroll").delay(300).outerHeight();
+    navLocalMenuHeight = $(".local-navigation-wrapper").delay(300).outerHeight();
 
   if ($(".local-navigation-wrapper .js-float-menu-on-scroll").length)
-    localNavTopOffset = $(".local-navigation-wrapper .js-float-menu-on-scroll").offset().top; // Desktop only
+    localNavTopOffset = $(".local-navigation-wrapper").offset().top; // Desktop only
 
   var offsetHeight = sitewideHeaderHeight+navLocalMenuHeight;
 
@@ -43,11 +43,11 @@
 
     // Add scrollspy trigger
     // If this is a mobile device we don't worry about the fixed header's height for the top offset
-    if( $(window).width() <= mdScreenWidth ) {
+    if( $(window).width() < mdScreenWidth ) {
       $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (offsetTargetTopPadding) })
     } else {
       //Since this is not a mobile device then we have to consider the fixed header in the top offset
-      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (offsetHeight+offsetTargetTopPadding) })
+      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (offsetHeight) })
     }
 
     // Floating menu as a responsive Carousel
@@ -66,17 +66,20 @@
             dots: false,
             edgeFriction: 10,
             slidesToScroll: 1,
-            slidesToShow: 5,
-            variableWidth: true,
+            slidesToShow: 4,
+            variableWidth: false,
             infinite: false,
             focusOnSelect: true,
             centerMode: false,
-            mobileFirst: true,
+            mobileFirst: false,
             responsive: [
               {
                 breakpoint: mdScreenWidth,
                 settings: {
+                  focusOnSelect: true,
                   centerMode: true,
+                  mobileFirst: true,
+                  variableWidth: true,
                   slidesToShow: 3
                 }
               }]
@@ -150,7 +153,7 @@
   });
 
   // Monitor scrollspy
-  $(window).on('activate.bs.scrollspy', function(e) {
+  $(window).delay(500).on('activate.bs.scrollspy', function(e) {
     // Change the anchor URL according to each seen section
     history.replaceState({}, "", $("a[href^='#']", e.target).attr("href"));
 
@@ -192,11 +195,18 @@
           }
 
         // This prevents the anchor target to be covered by our fixed header
-        if ($(this).closest(".local-navigation-wrapper").length)
-          offsetClickFromLocalNav = navLocalMenuHeight;
+        if( !$('.js-float-menu-on-scroll.fixed-nav').length ) {
+          if ($(this).closest(".local-navigation-wrapper").length) {
+            offsetClickFromLocalNav = navLocalMenuHeight+offsetTargetTopPadding;
+          }
+        } else {
+          offsetClickFromLocalNav = offsetTargetTopPadding;
+        }
 
         // Define the top offset for our anchor navigation, based on screen size
-        if ($(window).width() > mdScreenWidth) {
+        if ($(window).width() < mdScreenWidth) {
+          offsetNavHeight = offsetClickFromLocalNav;
+        } else {
           offsetNavHeight = sitewideHeaderHeight+offsetClickFromLocalNav;
         }
 
