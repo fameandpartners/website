@@ -4,11 +4,11 @@ class CreateItGirlPage < ActiveRecord::Migration
       page = Revolution::Page.create!(
         path:          '/it-girl',
         template_path: '/lookbook/it_girl',
-        variables:     { lookbook: true, limit: 9, pids: %w(1061-looking-glass 1068-white 1104-black 1105-black 1012-navy 1064-pale-blue 1092-pale-pink 1010-feather-love 1096-hot-pink) },
+        variables:     { lookbook: true, limit: 40, pids: %w(1061-looking-glass 1068-white 1104-black 1105-black 1012-navy 1064-pale-blue 1092-pale-pink 1010-feather-love 1096-hot-pink) },
         publish_from:  1.day.ago
       )
-      page.translations.create!(locale: 'en-US', title: "IT Girl", meta_description: "IT Girl", heading: "IT Girl", meta_description: "IT Girl")
-      page.translations.create!(locale: 'en-AU', title: "IT Girl", meta_description: "IT Girl", heading: "IT Girl", meta_description: "IT Girl")
+      page.translations.create!(locale: 'en-US', title: "The It Girl Collection", meta_description: "Classic silhouettes, your way. Our LBDs, wrap dresses, slip dresses, minis, maxis, gowns, matching sets, and jumpsuits are all customizable and made-to-order.", heading: "Modern Classics - Shop Cocktail Dresses, Slips, Little Black Dresses", meta_description: "Classic silhouettes, your way. Our LBDs, wrap dresses, slip dresses, minis, maxis, gowns, matching sets, and jumpsuits are all customizable and made-to-order.")
+      page.translations.create!(locale: 'en-AU', title: "The It Girl Collection", meta_description: "Classic silhouettes, your way. Our LBDs, wrap dresses, slip dresses, minis, maxis, gowns, matching sets, and jumpsuits are all customizable and made-to-order.", heading: "Modern Classics - Shop Cocktail Dresses, Slips, Little Black Dresses", meta_description: "Classic silhouettes, your way. Our LBDs, wrap dresses, slip dresses, minis, maxis, gowns, matching sets, and jumpsuits are all customizable and made-to-order.")
     end
   end
 

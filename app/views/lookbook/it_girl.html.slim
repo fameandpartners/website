@@ -4,8 +4,8 @@
 
   .hero-wrap.copy-right
     .media-wrap
-      = image_tag 'style-icon/high-summer/hero-header.jpg', :srcset => "#{image_path("style-icon/high-summer/hero-header-mob.jpg")} 1023w,
-            #{image_path("style-icon/high-summer/hero-header.jpg")} 1024w", :class => 'img-responsive', :alt => "Brittany Xavier's High Summer Collection"
+      = image_tag 'landingpages/it-girl/hero-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/hero-mobile.jpg")} 1023w,
+            #{image_path("landingpages/it-girl/hero-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "IT Girl"
     .content-wrap
       .container
         .row
@@ -50,10 +50,10 @@
         h2.heading-overlay The #{current_dress_name}
 
     .row.vertical-align-copy
-      .col-lg-8.col-md-7.content-img
+      .col-md-7.content-img
         = link_to current_dress_link
-          = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
-            #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+          = image_tag 'landingpages/it-girl/gown-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/gown-mobile.jpg")} 1023w,
+            #{image_path("landingpages/it-girl/gown-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
@@ -94,10 +94,10 @@
        h2.heading-overlay The #{current_dress_name}
 
    .row.vertical-align-copy
-     .col-lg-8.col-md-7.content-img
+     .col-md-7.content-img
        = link_to current_dress_link
-         = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
-           #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+         = image_tag 'landingpages/it-girl/slip-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/slip-mobile.jpg")} 1023w,
+           #{image_path("landingpages/it-girl/slip-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
        .copy-wrap
@@ -120,7 +120,7 @@
   section.section-box.section-products.products-collections.category
    .container.relative.products-collection
      .row
-       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
 
   // Wrap Dress
   - current_dress_name = "Wrap Dress"
@@ -138,10 +138,10 @@
        h2.heading-overlay The #{current_dress_name}
 
    .row.vertical-align-copy
-     .col-lg-8.col-md-7.content-img
+     .col-md-7.content-img
        = link_to current_dress_link
-         = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
-           #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+         = image_tag 'landingpages/it-girl/wrap-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/wrap-mobile.jpg")} 1023w,
+           #{image_path("landingpages/it-girl/wrap-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
        .copy-wrap
@@ -164,7 +164,7 @@
   section.section-box.section-products.products-collections.category
    .container.relative.products-collection
      .row
-       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 11, customWrapper: 'col-md-3 col-xs-6'}
 
   // Cocktail Dress
   - current_dress_name = "Cocktail Dress"
@@ -182,10 +182,10 @@
        h2.heading-overlay The #{current_dress_name}
 
    .row.vertical-align-copy
-     .col-lg-8.col-md-7.content-img
+     .col-md-7.content-img
        = link_to current_dress_link
-         = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
-           #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+         = image_tag 'landingpages/it-girl/cocktail-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/cocktail-mobile.jpg")} 1023w,
+           #{image_path("landingpages/it-girl/cocktail-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
        .copy-wrap
@@ -208,7 +208,7 @@
   section.section-box.section-products.products-collections.category
    .container.relative.products-collection
      .row
-       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 12, rangeTo: 15, customWrapper: 'col-md-3 col-xs-6'}
 
   // Two-Piece Dress
   - current_dress_name = "Two-Piece"
@@ -226,10 +226,10 @@
        h2.heading-overlay The #{current_dress_name}
 
    .row.vertical-align-copy
-     .col-lg-8.col-md-7.content-img
+     .col-md-7.content-img
        = link_to current_dress_link
-         = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
-           #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+         = image_tag 'landingpages/it-girl/twopiece-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/twopiece-mobile.jpg")} 1023w,
+           #{image_path("landingpages/it-girl/twopiece-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
        .copy-wrap
@@ -252,7 +252,7 @@
   section.section-box.section-products.products-collections.category
    .container.relative.products-collection
      .row
-       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 19, customWrapper: 'col-md-3 col-xs-6'}
 
   // Jumpsuit Dress
   - current_dress_name = "Jumpsuit"
@@ -270,10 +270,10 @@
         h2.heading-overlay The #{current_dress_name}
 
     .row.vertical-align-copy
-      .col-lg-8.col-md-7.content-img
+      .col-md-7.content-img
         = link_to current_dress_link
-          = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
-             #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+          = image_tag 'landingpages/it-girl/jumpsuit-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/jumpsuit-mobile.jpg")} 1023w,
+             #{image_path("landingpages/it-girl/jumpsuit-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
@@ -296,7 +296,7 @@
   section.section-box.section-products.products-collections.category
    .container.relative.products-collection
      .row
-       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 20, rangeTo: 23, customWrapper: 'col-md-3 col-xs-6'}
 
   // Skater Dress
   - current_dress_name = "Skater"
@@ -314,10 +314,10 @@
         h2.heading-overlay The #{current_dress_name}
 
     .row.vertical-align-copy
-      .col-lg-8.col-md-7.content-img
+      .col-md-7.content-img
         = link_to current_dress_link
-          = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
-             #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+          = image_tag 'landingpages/it-girl/skater-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/skater-mobile.jpg")} 1023w,
+             #{image_path("landingpages/it-girl/skater-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
@@ -340,7 +340,7 @@
   section.section-box.section-products.products-collections.category
    .container.relative.products-collection
      .row
-       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 24, rangeTo: 27, customWrapper: 'col-md-3 col-xs-6'}
 
   // Maxi Dress
   - current_dress_name = "Maxi"
@@ -358,10 +358,10 @@
         h2.heading-overlay The #{current_dress_name}
 
     .row.vertical-align-copy
-      .col-lg-8.col-md-7.content-img
+      .col-md-7.content-img
         = link_to current_dress_link
-          = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
-             #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+          = image_tag 'landingpages/it-girl/maxi-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/maxi-mobile.jpg")} 1023w,
+             #{image_path("landingpages/it-girl/maxi-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
@@ -384,7 +384,7 @@
   section.section-box.section-products.products-collections.category
    .container.relative.products-collection
      .row
-       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 28, rangeTo: 31, customWrapper: 'col-md-3 col-xs-6'}
 
   // Mini Dress
   - current_dress_name = "Mini"
@@ -402,10 +402,10 @@
         h2.heading-overlay The #{current_dress_name}
 
     .row.vertical-align-copy
-      .col-lg-8.col-md-7.content-img
+      .col-md-7.content-img
         = link_to current_dress_link
-          = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
-             #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+          = image_tag 'landingpages/it-girl/mini-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/mini-mobile.jpg")} 1023w,
+             #{image_path("landingpages/it-girl/mini-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
@@ -428,7 +428,7 @@
   section.section-box.section-products.products-collections.category
    .container.relative.products-collection
      .row
-       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+       = render partial: 'pick_products_without_content', locals: {rangeFrom: 32, rangeTo: 35, customWrapper: 'col-md-3 col-xs-6'}
 
   // LBD Dress
   - current_dress_name = "LBD"
@@ -446,10 +446,10 @@
         h2.heading-overlay The #{current_dress_name}
 
     .row.vertical-align-copy
-      .col-lg-8.col-md-7.content-img
+      .col-md-7.content-img
         = link_to current_dress_link
-          = image_tag 'style-icon/high-summer/look-02.jpg', :srcset => "#{image_path("style-icon/high-summer/look-02-mob.jpg")} 1023w,
-               #{image_path("style-icon/high-summer/look-02.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+          = image_tag 'landingpages/it-girl/lbd-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/lbd-mobile.jpg")} 1023w,
+               #{image_path("landingpages/it-girl/lbd-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
@@ -472,4 +472,4 @@
   section.section-box.section-products.products-collections.category
     .container.relative.products-collection
       .row
-        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 36, rangeTo: 39, customWrapper: 'col-md-3 col-xs-6'}
