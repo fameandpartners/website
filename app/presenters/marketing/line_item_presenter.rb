@@ -30,14 +30,6 @@ module Marketing
       variant.display_amount.to_s
     end
 
-    def color
-      if personalization.present?
-        personalization.color.try(:name) || 'Unknown Color'
-      else
-        variant.try(:dress_color).try(:name) || 'Unknown Color'
-      end
-    end
-
     def product
       variant.product
     rescue StandardError => e

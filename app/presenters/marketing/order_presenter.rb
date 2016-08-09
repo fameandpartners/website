@@ -90,9 +90,8 @@ module Marketing
           quantity:               item.quantity,
           variant_display_amount: item.variant_display_amount,
           display_amount:         item.display_amount,
-          size:                   item.size,
-          current_size:           item.current_size,
-          color:                  item.color,
+          size:                   item.size_name,
+          color:                  item.colour_name,
           height:                 item.height,
           customisation:          item.customisation_text,
           image_url:              item.image_url

@@ -23,10 +23,22 @@ class CommonLineItemPresenter
     end
   end
 
-  def current_size
+  def size_name
     size.split('/').detect {|s| s.downcase.include? order.site_version }
   rescue
     'Unknown Size'
+  end
+
+  def colour
+    if personalizations?
+      personalization.color
+    else
+      variant.try(:dress_color)
+    end
+  end
+
+  def colour_name
+    colour.try(:name) || 'Unknown Color'
   end
 
   def height
