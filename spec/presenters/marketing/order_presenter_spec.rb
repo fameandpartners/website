@@ -5,7 +5,6 @@ describe Marketing::OrderPresenter, type: :presenter do
 
   describe 'delegates to Spree::Order' do
     let(:order) { build_stubbed(:spree_order, email: 'loroteiro@silvestre.com', number: 'R123123123', currency: 'BRL') }
-
     it('#currency') { expect(presenter.currency).to eq('BRL') }
     it('#email') { expect(presenter.email).to eq('loroteiro@silvestre.com') }
     it('#number') { expect(presenter.number).to eq('R123123123') }
@@ -13,13 +12,14 @@ describe Marketing::OrderPresenter, type: :presenter do
 
   describe 'class methods' do
     let(:dress_color) { build(:product_colour, name: 'blue') }
-    let(:dress_item_personalization) { build(:personalization, height: 'petite', color: dress_color) }
+    let(:dress_size) { build(:product_size, name: 'US10/AU14') }
+    let(:dress_item_personalization) { build(:personalization, height: 'petite', color: dress_color, size: dress_size) }
     let(:dress_variant) { create(:dress_variant) }
     let(:dress_item) { build(:dress_item, price: 9.99, quantity: 1, personalization: dress_item_personalization,
                              variant: dress_variant) }
     let(:adjustment) { create(:adjustment, adjustable_type: 'Spree::Order') }
-    let(:order) { build(:spree_order, number: 'R123', currency: 'BRL',line_items: [dress_item],
-                        adjustments: [adjustment], projected_delivery_date: Date.new) }
+    let(:order) { build(:spree_order, number: 'R123', currency: 'BRL', line_items: [dress_item],
+                        adjustments: [adjustment], projected_delivery_date: Date.new, site_version: 'us') }
 
     it '.build_line_items' do
       result = presenter.build_line_items.first
@@ -34,6 +34,7 @@ describe Marketing::OrderPresenter, type: :presenter do
       # expect(result[:image_url]).to eq(nil) # TODO: Image URL should point to the cropped version, like the cart at the storefront
       expect(result[:height]).to eq('petite')
       expect(result[:color]).to eq('blue')
+      expect(result[:size]).to eq('US10')
     end
 
     it '.build_adjustments' do
