@@ -129,7 +129,7 @@ module Forms
     def skirt_length_options
       {
         'petite' =>'Petite',
-        'standart' => 'Standart',
+        'standard' => 'Standard',
         'tall' => 'Tall'
       }
     end
