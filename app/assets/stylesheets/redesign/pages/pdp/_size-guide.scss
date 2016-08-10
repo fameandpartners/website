@@ -68,6 +68,8 @@
 
   .toggle-controls {
     float: right;
+    font-family: $font-family-secondary;
+    font-weight: normal;
 
     a {
       position: relative;
@@ -79,7 +81,7 @@
         content: '';
         display: inline-block;
         position: absolute;
-        top: 2px;
+        top: 4px;
         left: 0;
         width: 13px;
         height: 13px;
@@ -106,7 +108,6 @@
     padding: 0;
     list-style: none;
     text-align: center;
-    color: $c-neutral-8;
 
     li {
       display: inline-block;
@@ -116,14 +117,15 @@
     a {
       display: block;
       padding: 0 0 10px 0;
-      color: inherit;
+      font-size: 0.875em;
+      color: $c-neutral-black;
       border-bottom: solid $c-neutral-8 1px;
       cursor: pointer;
     }
 
-    .is-active {
-      font-weight: bold;
-      color: $c-neutral-black;
+    .is-active a,
+    a:hover {
+      font-weight: 500;
       border-color: $c-neutral-black;
     }
 
