@@ -56,7 +56,7 @@
 
     // Add scrollspy trigger
     // If this is a mobile device we don't worry about the fixed header's height for the top offset
-    if( $(window).width() < mdScreenWidth ) {
+    if ( $(window).width() < mdScreenWidth ) {
       $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (offsetTargetTopPadding) })
     } else {
       //Since this is not a mobile device then we have to consider the fixed header in the top offset
@@ -70,7 +70,7 @@
           slick_target_position
 
       renderSlick = function () {
-        if(!responsiveNavLocal.hasClass('slick-initialized')) {
+        if (!responsiveNavLocal.hasClass('slick-initialized')) {
 
           responsiveNavLocal.slick({
             autoplay: false,
@@ -108,6 +108,16 @@
 
       // Render for the first time (on page load)
       renderSlick();
+
+      // Autoplay if user is 2 sections in
+      responsiveNavLocal.on('afterChange', function(event, slick, currentSlide){
+        if (currentSlide > 1) {
+          $(this).slick("slickSetOption", "autoplay", true);
+        } else {
+          $(this).slick("slickSetOption", "autoplay", false);
+        }
+      });
+
     }
 
     // Watch scrolling to show/hide floating menu
