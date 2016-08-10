@@ -28,7 +28,8 @@ module Forms
     end
 
     def countries
-      @countries ||= Spree::Country.where(iso: ['US', 'CA', 'DE', 'MX', 'GB', 'AU', 'NZ']).map {|c| [c.id, c.name]}
+      order_cond = "iso!='US', iso!='CA', iso!='DE', iso!='MX', iso!='GB', iso!='AU', iso!='NZ'"
+      @countries ||= Spree::Country.order(order_cond).map {|c| [c.id, c.name]}
     end
 
     def states
