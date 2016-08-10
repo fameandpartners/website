@@ -17,6 +17,7 @@
   var sitewideHeaderHeight = 0,
       navLocalMenuHeight = 0,
       localNavTopOffset = 0,
+      lastNavLocalItem = $('.js-float-menu-on-scroll .nav a:last').attr('href'),
       offsetTargetTopPadding = 70, // The desired distance between the target and the page header
       mdScreenWidth = 992,
       responsiveNavLocal = $('.local-navigation .nav');
@@ -145,6 +146,15 @@
             $('.js-float-menu-on-scroll').removeClass('fixed-nav').css({'top': ''});
           }
 
+          //When the local navigation is not fixed and the screen is above it, remove the anchor from the URL.
+          history.replaceState({}, "", window.location.toString().split("#")[0]);
+
+        }
+
+        // Monitor the screen position to check if it is currently showing the last navigation item
+        if (windowPosition+sitewideHeaderHeight >= $(lastNavLocalItem).offset().top+$(lastNavLocalItem).outerHeight()){
+          // If the screen goes beneath the last item we remove the anchor from the URL
+          history.replaceState({}, "", window.location.toString().split("#")[0]);
         }
 
 
