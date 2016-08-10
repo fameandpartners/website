@@ -7,4 +7,4 @@
   .ibox-content
     = datagrid_form_for @collection, :method => :get, url: collection_url
   .ibox-footer
-    = link_to "Download CSV", url_for(format: 'csv')
+    = link_to "Download CSV", url_for(format: 'csv', refund_request_grid: params[:refund_request_grid])
