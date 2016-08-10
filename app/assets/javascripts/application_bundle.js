@@ -1897,7 +1897,7 @@ var SidePanelSizeChart = function (_React$Component) {
                       'p',
                       null,
                       _react2.default.createElement(
-                        'strong',
+                        'span',
                         null,
                         'Bust'
                       ),
@@ -1907,7 +1907,7 @@ var SidePanelSizeChart = function (_React$Component) {
                       'p',
                       null,
                       _react2.default.createElement(
-                        'strong',
+                        'span',
                         null,
                         'Under-bust'
                       ),
@@ -1917,7 +1917,7 @@ var SidePanelSizeChart = function (_React$Component) {
                       'p',
                       null,
                       _react2.default.createElement(
-                        'strong',
+                        'span',
                         null,
                         'Waist'
                       ),
@@ -1927,7 +1927,7 @@ var SidePanelSizeChart = function (_React$Component) {
                       'p',
                       null,
                       _react2.default.createElement(
-                        'strong',
+                        'span',
                         null,
                         'Hips'
                       ),
@@ -1937,7 +1937,7 @@ var SidePanelSizeChart = function (_React$Component) {
                       'p',
                       null,
                       _react2.default.createElement(
-                        'strong',
+                        'span',
                         null,
                         'Dress Length'
                       ),
@@ -1947,7 +1947,7 @@ var SidePanelSizeChart = function (_React$Component) {
                       'p',
                       null,
                       _react2.default.createElement(
-                        'strong',
+                        'span',
                         null,
                         'Skirt Length'
                       ),
@@ -1961,7 +1961,7 @@ var SidePanelSizeChart = function (_React$Component) {
                 { className: 'col-md-6' },
                 _react2.default.createElement(
                   'p',
-                  { className: 'text-center' },
+                  { className: 'table-title text-center' },
                   'Fame & Partners sizes are designed to fit the following measurements.'
                 ),
                 _react2.default.createElement(

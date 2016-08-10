@@ -4,21 +4,24 @@
   padding: 20px;
 
   .title {
-    margin: 30px;
+    margin: 0 60px 40px 60px;
   }
 
   .heading {
     margin-bottom: 5px;
   }
 
+  .table-title {
+    margin-top: 20px;
+  }
+
   p {
-    margin-bottom: 15px;
     font-size: 0.875em;
     font-weight: 300;
-    line-height: 1.1;
+    line-height: 1.4;
     font-family: $font-heading;
 
-    strong {
+    span {
       font-family: $font-family-secondary;
     }
 
@@ -132,6 +135,10 @@
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
+
+    .title {
+      margin: 30px 60px;
+    }
 
     .tabs {
       margin-bottom: 30px;

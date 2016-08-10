@@ -104,17 +104,17 @@ class SidePanelSizeChart extends React.Component {
                       Stand tall with your feet together.<br/>- If you plan on wearing heels with the dress, don’t forget
                       to include heel height in your measurement! This will help you decide which of our three dress
                       lengths - Petite, Standard, or Tall - is best for you.</p>
-                    <p><strong>Bust</strong> - Measure around the fullest part of your chest, keeping the tape level to the floor.</p>
-                    <p><strong>Under-bust</strong> - Measure directly under your bust (around your rib cage, where your bra band sits), keeping the tape level to the floor.</p>
-                    <p><strong>Waist</strong> - Measure around your natural waistline (the smallest part of your waist).</p>
-                    <p><strong>Hips</strong> - Measure around the fullest part of your hips. Slim-hipped ladies can take this measurement from 20cm/8in below the waistline.</p>
-                    <p><strong>Dress Length</strong> - Stand with your heels together and measure from your shoulders to the floor, keeping the tape straight and perpendicular to the floor.</p>
-                    <p><strong>Skirt Length</strong> - Stand with your heels together and measure from your natural waistline to the floor, keeping the tape straight and perpendicular to the floor.</p>
+                    <p><span>Bust</span> - Measure around the fullest part of your chest, keeping the tape level to the floor.</p>
+                    <p><span>Under-bust</span> - Measure directly under your bust (around your rib cage, where your bra band sits), keeping the tape level to the floor.</p>
+                    <p><span>Waist</span> - Measure around your natural waistline (the smallest part of your waist).</p>
+                    <p><span>Hips</span> - Measure around the fullest part of your hips. Slim-hipped ladies can take this measurement from 20cm/8in below the waistline.</p>
+                    <p><span>Dress Length</span> - Stand with your heels together and measure from your shoulders to the floor, keeping the tape straight and perpendicular to the floor.</p>
+                    <p><span>Skirt Length</span> - Stand with your heels together and measure from your natural waistline to the floor, keeping the tape straight and perpendicular to the floor.</p>
                   </Tabs.Panel>
                 </Tabs>
               </div>
               <div className="col-md-6">
-                <p className="text-center">Fame & Partners sizes are designed to fit the following measurements.</p>
+                <p className="table-title text-center">Fame & Partners sizes are designed to fit the following measurements.</p>
                 <table>
                   <thead>
                     <tr>
