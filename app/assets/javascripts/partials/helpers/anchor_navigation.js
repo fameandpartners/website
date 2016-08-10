@@ -1,6 +1,18 @@
 'use strict';
 (function ($) {
 
+  function slickNavLocalGoTo(responsiveNavLocal) {
+
+    var responsiveNavLocal,
+        slick_target_position;
+
+    // Go to target item in local navigation, according to the current anchor
+    if (responsiveNavLocal.hasClass('slick-initialized'))
+      slick_target_position = $('.local-navigation .nav a').index($('[href="'+window.location.hash+'"]'));
+      responsiveNavLocal.slick( "slickGoTo", parseInt( slick_target_position ), true );
+
+  }
+
   // Get useful data before any interaction
   var sitewideHeaderHeight = 0,
       navLocalMenuHeight = 0,
@@ -78,7 +90,6 @@
               {
                 breakpoint: mdScreenWidth,
                 settings: {
-                  focusOnSelect: true,
                   centerMode: true,
                   mobileFirst: true,
                   variableWidth: true,
@@ -88,8 +99,7 @@
           });
 
           if (slick_anchor_id) {
-            slick_target_position = $('.local-navigation .nav a').index($('[href="'+slick_anchor_id+'"]'));
-            responsiveNavLocal.slick( "slickGoTo", parseInt( slick_target_position ), true ).fadeIn(250);
+            slickNavLocalGoTo(responsiveNavLocal);
           }
 
         }
@@ -100,11 +110,11 @@
     }
 
     // Watch scrolling to show/hide floating menu
-    $(document).delay(500).on("scroll", function() {
+    $(document).delay(100).on("scroll", function() {
 
       // Checking if it is a mobile device...
       // Mobile: attach the local menu to the bottom
-      if( $(window).width() <= mdScreenWidth ) {
+      if( $(window).width() < mdScreenWidth ) {
 
         $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile').fadeIn(100);
         $('.js-footer').css({'padding-bottom': ''+navLocalMenuHeight*1.1+'px'}); //Add an extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
@@ -114,7 +124,7 @@
         // It's not a mobile device...
 
         // Detach the local menu from the bottom
-        $('.local-navigation-wrapper .js-float-menu-on-scroll.fixed-nav-mobile').removeClass('fixed-nav-mobile').fadeOut(100);
+        $('.local-navigation-wrapper .js-float-menu-on-scroll.fixed-nav-mobile').removeClass('fixed-nav-mobile');
         $('.js-footer').css({'padding-bottom': ''});
 
         // Attach the local navigation to the fixed header
@@ -132,7 +142,7 @@
 
           // Window position is above "target_local_navigation"
           if ($('.js-float-menu-on-scroll.fixed-nav').length) {
-            $('.js-float-menu-on-scroll').removeClass('fixed-nav');
+            $('.js-float-menu-on-scroll').removeClass('fixed-nav').css({'top': ''});
           }
 
         }
@@ -144,13 +154,19 @@
 
   }
 
-  $(window).delay(500).on("resize", function() {
+  $(window).delay(250).on("resize", function() {
 
-    if( $(window).width() <= mdScreenWidth ) {
+    if( $(window).width() < mdScreenWidth ) {
       $('.js-float-menu-on-scroll').removeClass('fixed-nav').css({'top': ''});
       $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile').fadeIn(100);
       $('.js-footer').css({'padding-bottom': ''+navLocalMenuHeight*1.1+'px'}); //Add extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
     }
+
+    clearTimeout(timeout);
+    var timeout = setTimeout(function() {
+      // Go to menu item when resize is finished
+      slickNavLocalGoTo(responsiveNavLocal);
+    }, 250);
 
   });
 
@@ -159,11 +175,8 @@
     // Change the anchor URL according to each seen section
     history.replaceState({}, "", $("a[href^='#']", e.target).attr("href"));
 
-
     // Activate the current item in Slick carousel by matching Scrollspy's current response
-    if(responsiveNavLocal.hasClass('slick-initialized'))
-      slick_target_position = $('.local-navigation .nav a').index($('[href="'+window.location.hash+'"]'));
-      responsiveNavLocal.slick( "slickGoTo", parseInt( slick_target_position ), true ).fadeIn(1000);
+    slickNavLocalGoTo(responsiveNavLocal);
 
   });
 
