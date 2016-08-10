@@ -15,11 +15,17 @@
     margin-top: 20px;
   }
 
-  p {
+  ul {
+    padding-left: 20px;
+  }
+
+  p,
+  .custom li {
     font-size: 0.875em;
     font-weight: 300;
     line-height: 1.4;
     font-family: $font-heading;
+    color: $c-neutral-black;
 
     span {
       font-family: $font-family-secondary;

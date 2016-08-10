@@ -100,10 +100,12 @@ class SidePanelSizeChart extends React.Component {
                   <Tabs.Panel title="Measuring tips">
                     <p>FYI - Your results will be the most accurate if someone else helps you measure!</p>
                     <h5 className="heading"><em>Fame Tips</em></h5>
-                    <p>- Measure yourself in your underwear and, if possible, the bra you’d like to wear with the dress.
-                      Stand tall with your feet together.<br/>- If you plan on wearing heels with the dress, don’t forget
-                      to include heel height in your measurement! This will help you decide which of our three dress
-                      lengths - Petite, Standard, or Tall - is best for you.</p>
+                    <ul className="custom">
+                      <li>Measure yourself in your underwear and, if possible, the bra you’d like to wear with the dress.
+                      Stand tall with your feet together.</li>
+                      <li>If you plan on wearing heels with the dress, don’t forget to include heel height in your measurement! This will help you decide which of our three dress
+                      lengths - Petite, Standard, or Tall - is best for you.</li>
+                    </ul>
                     <p><span>Bust</span> - Measure around the fullest part of your chest, keeping the tape level to the floor.</p>
                     <p><span>Under-bust</span> - Measure directly under your bust (around your rib cage, where your bra band sits), keeping the tape level to the floor.</p>
                     <p><span>Waist</span> - Measure around your natural waistline (the smallest part of your waist).</p>

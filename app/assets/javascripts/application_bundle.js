@@ -1887,11 +1887,18 @@ var SidePanelSizeChart = function (_React$Component) {
                       )
                     ),
                     _react2.default.createElement(
-                      'p',
-                      null,
-                      '- Measure yourself in your underwear and, if possible, the bra you’d like to wear with the dress. Stand tall with your feet together.',
-                      _react2.default.createElement('br', null),
-                      '- If you plan on wearing heels with the dress, don’t forget to include heel height in your measurement! This will help you decide which of our three dress lengths - Petite, Standard, or Tall - is best for you.'
+                      'ul',
+                      { className: 'custom' },
+                      _react2.default.createElement(
+                        'li',
+                        null,
+                        'Measure yourself in your underwear and, if possible, the bra you’d like to wear with the dress. Stand tall with your feet together.'
+                      ),
+                      _react2.default.createElement(
+                        'li',
+                        null,
+                        'If you plan on wearing heels with the dress, don’t forget to include heel height in your measurement! This will help you decide which of our three dress lengths - Petite, Standard, or Tall - is best for you.'
+                      )
                     ),
                     _react2.default.createElement(
                       'p',
