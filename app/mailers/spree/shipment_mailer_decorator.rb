@@ -4,31 +4,31 @@ Spree::ShipmentMailer.class_eval do
     begin
       shipment        = shipment.is_a?(Spree::Shipment) ? shipment : Spree::Shipment.find(shipment)
       subject         = shipped_email_subject(spree_shipment: shipment, resend: resend)
-      order_presenter = Orders::OrderPresenter.new(shipment.order, shipment.line_items)
-      line_items      = order_presenter.extract_line_items
+      order_presenter = Marketing::OrderPresenter.new(shipment.order)
+
       Marketing::CustomerIOEventTracker.new.track(
-        shipment.order.user,
+        order_presenter.user,
         'shipment_mailer',
-        email_to:              shipment.order.email,
+        email_to:              order_presenter.email,
         from:                  'noreply@fameandpartners.com',
         subject:               subject,
         date:                  Date.today.to_s(:long),
         name:                  order_presenter.first_name.rstrip,
-        shipment_method_name:  shipment.try(:shipping_method).try(:name),
-        line_items:            line_items,
-        shipment_tracking:     shipment.tracking,
-        shipment_tracking_url: shipment.blank? ? '#' : shipment.tracking_url,
-        billing_address:       shipment.order.try(:billing_address).to_s.presence || 'No Billing Address',
-        shipping_address:      shipment.order.try(:shipping_address).to_s.presence || 'No Shipping Address',
-        phone:                 shipment.order.try(:billing_address).try(:phone) || 'No Phone',
-        delivery_date:         shipment.order.projected_delivery_date.try(:strftime, "%a, %d %b %Y"),
-        original_order_date:   shipment.order.created_at.strftime("%d %b %Y"),
-        display_item_total:    shipment.order.display_item_total.to_s,
-        display_total:         shipment.order.display_total.to_s,
-        auto_account:          shipment.order.user && shipment.order.user.automagically_registered?,
-        order_number:          shipment.order.number,
-        currency:              shipment.order.currency,
-        shipping_amount:       shipment.order.adjustments.where(label: "Shipping").first.try(:amount).to_s,
+        shipment_method_name:  order_presenter.shipment_method_name,
+        line_items:            order_presenter.build_line_items,
+        shipment_tracking:     order_presenter.shipment_tracking,
+        shipment_tracking_url: order_presenter.shipment_tracking_url,
+        billing_address:       order_presenter.billing_address,
+        shipping_address:      order_presenter.shipping_address,
+        phone:                 order_presenter.phone,
+        delivery_date:         order_presenter.projected_delivery_date,
+        original_order_date:   order_presenter.original_order_date,
+        display_item_total:    order_presenter.display_item_total,
+        display_total:         order_presenter.display_total,
+        auto_account:          order_presenter.auto_account,
+        order_number:          order_presenter.number,
+        currency:              order_presenter.currency,
+        shipping_amount:       order_presenter.shipping_amount,
         tax:                   nil,
         adjustments:           order_presenter.build_adjustments
       )

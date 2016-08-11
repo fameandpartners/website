@@ -7,6 +7,7 @@ module Marketing
     def_delegators :@order,
                    :currency,
                    :email,
+                   :first_name,
                    :number,
                    :site_version,
                    :required_to
@@ -16,6 +17,14 @@ module Marketing
     def initialize(order)
       @order = order
       @items = order.line_items
+    end
+
+    def auto_account
+      order.user && order.user.automagically_registered?
+    end
+
+    def user
+      order.user
     end
 
     def line_items
@@ -58,6 +67,18 @@ module Marketing
       order.try(:shipping_address).to_s || 'No Shipping Address'
     end
 
+    def shipment_method_name
+      order.shipment.try(:shipping_method).try(:name)
+    end
+
+    def shipment_tracking
+      order.shipment.tracking
+    end
+
+    def shipment_tracking_url
+      order.shipment.blank? ? '#' : order.shipment.tracking_url
+    end
+
     def phone
       order.try(:billing_address).try(:phone) || 'No Phone'
     end
@@ -68,6 +89,10 @@ module Marketing
 
     def projected_delivery_date
       order.projected_delivery_date.try(:strftime, '%a, %d %b %Y')
+    end
+
+    def original_order_date
+      order.created_at.strftime('%d %b %Y')
     end
 
     def promotion?
