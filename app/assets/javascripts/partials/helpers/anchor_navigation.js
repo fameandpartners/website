@@ -27,7 +27,7 @@
     sitewideHeaderHeight = $("#fixed-header").delay(300).outerHeight();
 
   // Set the height and offset of the local navigation
-  if ($(".js-float-menu-on-scroll").length)
+  if ($(".local-navigation-wrapper").length)
     navLocalMenuHeight = $(".local-navigation-wrapper").delay(300).outerHeight();
     localNavTopOffset = $(".local-navigation-wrapper").offset().top; // Desktop only
 
