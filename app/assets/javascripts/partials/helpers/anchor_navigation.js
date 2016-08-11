@@ -27,9 +27,10 @@
     sitewideHeaderHeight = $("#fixed-header").delay(300).outerHeight();
 
   // Set the height and offset of the local navigation
-  if ($(".local-navigation-wrapper").length)
+  if ($(".local-navigation-wrapper").length) {
     navLocalMenuHeight = $(".local-navigation-wrapper").delay(300).outerHeight();
     localNavTopOffset = $(".local-navigation-wrapper").offset().top; // Desktop only
+  }
 
   var offsetHeight = sitewideHeaderHeight+navLocalMenuHeight;
 
@@ -125,88 +126,91 @@
     }
 
     // Watch scrolling to show/hide floating menu
-    $(document).delay(100).on("scroll", function() {
+    if ($(".local-navigation-wrapper").length) {
+      $(document).delay(100).on("scroll", function() {
 
-      // Checking if it is a mobile device...
-      // Mobile: attach the local menu to the bottom
-      if( $(window).width() < mdScreenWidth ) {
+        // Checking if it is a mobile device...
+        // Mobile: attach the local menu to the bottom
+        if( $(window).width() < mdScreenWidth ) {
 
-        $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile').fadeIn(100);
-        $('.js-footer').css({'padding-bottom': ''+navLocalMenuHeight*1.1+'px'}); //Add an extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
-
-      } else {
-
-        // It's not a mobile device...
-
-        // Desktop: Detach the local menu from the bottom
-        $('.local-navigation-wrapper .js-float-menu-on-scroll.fixed-nav-mobile').removeClass('fixed-nav-mobile');
-        $('.js-footer').css({'padding-bottom': ''});
-
-        // Toggle floating menu if window position is below the target element
-        var windowPosition = $(window).scrollTop(),
-            target_local_navigation = $(".local-navigation-wrapper");
-
-        if (windowPosition+sitewideHeaderHeight >= target_local_navigation.offset().top+navLocalMenuHeight){
-
-          // Attach the local navigation to the fixed header
-          if (!$('.js-float-menu-on-scroll.fixed-nav').length) {
-            $('.js-float-menu-on-scroll').addClass('fixed-nav').css({'top': ''+sitewideHeaderHeight+'px'}).fadeIn(100);
-          }
+          $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile').fadeIn(100);
+          $('.js-footer').css({'padding-bottom': ''+navLocalMenuHeight*1.1+'px'}); //Add an extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
 
         } else {
 
-          // Window position is above "target_local_navigation"
+          // It's not a mobile device...
 
-          // Detach the local navigation from the fixed header
-          if ($('.js-float-menu-on-scroll.fixed-nav').length) {
-            $('.js-float-menu-on-scroll').removeClass('fixed-nav').css({'top': ''});
+          // Desktop: Detach the local menu from the bottom
+          $('.local-navigation-wrapper .js-float-menu-on-scroll.fixed-nav-mobile').removeClass('fixed-nav-mobile');
+          $('.js-footer').css({'padding-bottom': ''});
+
+          // Toggle floating menu if window position is below the target element
+          var windowPosition = $(window).scrollTop(),
+              target_local_navigation = $(".local-navigation-wrapper");
+
+          if (windowPosition+sitewideHeaderHeight >= target_local_navigation.offset().top+navLocalMenuHeight){
+
+            // Attach the local navigation to the fixed header
+            if (!$('.js-float-menu-on-scroll.fixed-nav').length) {
+              $('.js-float-menu-on-scroll').addClass('fixed-nav').css({'top': ''+sitewideHeaderHeight+'px'}).fadeIn(100);
+            }
+
+          } else {
+
+            // Window position is above "target_local_navigation"
+
+            // Detach the local navigation from the fixed header
+            if ($('.js-float-menu-on-scroll.fixed-nav').length) {
+              $('.js-float-menu-on-scroll').removeClass('fixed-nav').css({'top': ''});
+            }
+
+            // The local navigation is not fixed and the screen is above it = Remove the anchor from the URL.
+            history.replaceState({}, "", window.location.toString().split("#")[0]);
+
           }
 
-          // The local navigation is not fixed and the screen is above it = Remove the anchor from the URL.
-          history.replaceState({}, "", window.location.toString().split("#")[0]);
+          // Monitor the screen position to check if it is currently showing the last navigation item
+          if (windowPosition+sitewideHeaderHeight >= $(lastNavLocalItem).offset().top+$(lastNavLocalItem).outerHeight()){
+            // If the screen goes beneath the last item we remove the anchor from the URL
+            history.replaceState({}, "", window.location.toString().split("#")[0]);
+          }
+
 
         }
 
-        // Monitor the screen position to check if it is currently showing the last navigation item
-        if (windowPosition+sitewideHeaderHeight >= $(lastNavLocalItem).offset().top+$(lastNavLocalItem).outerHeight()){
-          // If the screen goes beneath the last item we remove the anchor from the URL
-          history.replaceState({}, "", window.location.toString().split("#")[0]);
+      });
+
+      // Monitor window resizing
+      $(window).delay(250).on("resize", function() {
+
+        // If we're on mobile add proper styling to the local navigation
+        if ( $(window).width() < mdScreenWidth ) {
+          $('.js-float-menu-on-scroll').removeClass('fixed-nav').css({'top': ''});
+          $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile').fadeIn(100);
+          $('.js-footer').css({'padding-bottom': ''+navLocalMenuHeight*1.1+'px'}); //Add extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
         }
 
+        // Go to menu item when resize is finished
+        clearTimeout(timeout);
+        var timeout = setTimeout(function() {
+          slickNavLocalGoTo(responsiveNavLocal);
+        }, 250);
 
-      }
+      });
 
-    });
+      // Monitor scrollspy
+      $(window).delay(500).on('activate.bs.scrollspy', function(e) {
+        // Change the anchor URL according to each seen section
+        history.replaceState({}, "", $("a[href^='#']", e.target).attr("href"));
 
-  }
+        // Activate the current item in Slick carousel by matching Scrollspy's current response
+        slickNavLocalGoTo(responsiveNavLocal);
 
-  // Monitor window resizing
-  $(window).delay(250).on("resize", function() {
+      });
 
-    // If we're on mobile add proper styling to the local navigation
-    if ( $(window).width() < mdScreenWidth ) {
-      $('.js-float-menu-on-scroll').removeClass('fixed-nav').css({'top': ''});
-      $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile').fadeIn(100);
-      $('.js-footer').css({'padding-bottom': ''+navLocalMenuHeight*1.1+'px'}); //Add extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
     }
 
-    // Go to menu item when resize is finished
-    clearTimeout(timeout);
-    var timeout = setTimeout(function() {
-      slickNavLocalGoTo(responsiveNavLocal);
-    }, 250);
-
-  });
-
-  // Monitor scrollspy
-  $(window).delay(500).on('activate.bs.scrollspy', function(e) {
-    // Change the anchor URL according to each seen section
-    history.replaceState({}, "", $("a[href^='#']", e.target).attr("href"));
-
-    // Activate the current item in Slick carousel by matching Scrollspy's current response
-    slickNavLocalGoTo(responsiveNavLocal);
-
-  });
+  }
 
   // Watch clicks on anchor links (only when page has certain elements)
   $(document).has(".js-smooth-scroll, .local-navigation .nav").on("click", "a[href*='#']:not([href='#'], [href*='#panel-'])", function() {
