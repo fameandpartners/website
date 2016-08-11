@@ -29,7 +29,8 @@ Spree::ShipmentMailer.class_eval do
         order_number:          shipment.order.number,
         currency:              shipment.order.currency,
         shipping_amount:       shipment.order.adjustments.where(label: "Shipping").first.try(:amount).to_s,
-        tax:                   nil
+        tax:                   nil,
+        adjustments:           order_presenter.build_adjustments
       )
     rescue Customerio::Client::InvalidResponse => e
       response = HashWithIndifferentAccess[e.response.to_hash]

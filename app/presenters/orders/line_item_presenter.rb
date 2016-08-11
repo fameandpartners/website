@@ -87,6 +87,10 @@ module Orders
       Spree::Price.new(amount: price).display_price.to_s
     end
 
+    def display_amount
+      item.display_amount.to_s
+    end
+
     def customisations
       if personalizations?
         customs = Array.wrap(
