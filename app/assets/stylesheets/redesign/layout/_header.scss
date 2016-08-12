@@ -31,7 +31,7 @@ header.main {
     .logo{
 
       img {
-        width: $logo-width;
+        max-width: $logo-width;
       }
 
     }
