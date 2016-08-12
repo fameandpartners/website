@@ -98,6 +98,10 @@
   margin-bottom: 0 !important;
 }
 
+.img-responsive {
+  width: 100%; // Fix for IE
+}
+
 // Align content vericaly
 .h-v-align {
   display: flex;
