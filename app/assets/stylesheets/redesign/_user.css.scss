@@ -33,6 +33,11 @@
 
   .btn{
     background-color: #C0C0C0;
+
+    &.btn-transparent {
+      background: transparent;
+    }
+
   }
 }
 // @end Account
