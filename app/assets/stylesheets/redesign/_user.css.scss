@@ -33,6 +33,11 @@
 
   .btn{
     background-color: #C0C0C0;
+
+    &.btn-black{
+      background: $c-neutral-black;
+    }
+
   }
 }
 // @end Account
