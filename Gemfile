@@ -95,7 +95,7 @@ gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :
 
 # utils
 # replacement for standard library.
-gem 'addressable', require: false
+gem 'addressable'
 
 gem 'rollout'
 

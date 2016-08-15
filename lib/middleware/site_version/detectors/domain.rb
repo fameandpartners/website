@@ -17,7 +17,7 @@ module Middleware
         end
 
         def site_version_url(current_url, site_version)
-          versioned_uri      = URI.parse(current_url)
+          versioned_uri      = Addressable::URI.parse(current_url)
           versioned_uri.host = site_version.domain
           versioned_uri.to_s
         end
