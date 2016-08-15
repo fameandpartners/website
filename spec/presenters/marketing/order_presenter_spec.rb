@@ -10,7 +10,7 @@ describe Marketing::OrderPresenter, type: :presenter do
     it('#number') { expect(presenter.number).to eq('R123123123') }
   end
 
-  describe 'class methods' do
+  describe 'instance methods' do
     let(:dress_color) { build(:product_colour, name: 'blue') }
     let(:dress_size) { build(:product_size, name: 'US10/AU14') }
     let(:dress_item_personalization) { build(:personalization, height: 'petite', color: dress_color, size: dress_size) }
@@ -21,7 +21,7 @@ describe Marketing::OrderPresenter, type: :presenter do
     let(:order) { build(:spree_order, number: 'R123', currency: 'BRL', line_items: [dress_item],
                         adjustments: [adjustment], projected_delivery_date: Date.new, site_version: 'us') }
 
-    it '.build_line_items' do
+    it 'build_line_items' do
       result = presenter.build_line_items.first
       expect(result[:sku]).to eq(dress_item.variant.sku)
       expect(result[:name]).to eq(dress_item.variant.product.name)
@@ -37,15 +37,11 @@ describe Marketing::OrderPresenter, type: :presenter do
       expect(result[:size]).to eq('US10')
     end
 
-    it '.build_adjustments' do
+    it 'build_adjustments' do
       result = presenter.build_adjustments.first
       expect(result[:label]).to eq(order.adjustments.eligible.first.label)
       expect(result[:display_amount]).to eq(order.adjustments.eligible.first.display_amount.to_s)
     end
-  end
-
-  describe 'instance methods' do
-    let(:order) { build_stubbed(:spree_order) }
 
     describe '#total_amount' do
       it 'returns the total amount of an order' do
