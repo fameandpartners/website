@@ -35,11 +35,11 @@
             li.link #{link_to "The LBD", "#thelbd"}
 
   // Gown
-  - current_dress_name = "Gown"
-  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - current_dress_name = "Oscar Dress"
+  - current_dress_link = "#{dresses_path}/dress-oscar-1099?color=black"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$329.5"
+    - current_dress_price = "$370"
   - else
     // USA - PRICE
     - current_dress_price = "$299"
@@ -47,7 +47,7 @@
   section.section-box.container-fluid.no-padding.no-margin.section-look#thegown
     .row
       .col-md-10.heading-overlay-wrapper.tag-align-left
-        h2.heading-overlay The #{current_dress_name}
+        h2.heading-overlay The Gown
 
     .row.vertical-align-copy
       .col-lg-8.col-md-7.content-img
@@ -68,7 +68,7 @@
             |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
 
           .cta-wrapper
-            = link_to current_dress_link
+            = link_to "#{dresses_path}/ball-gowns"
               span.btn-md.btn-featured
                | Shop & customize
 
@@ -79,19 +79,19 @@
        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
 
   // Slip
-  - current_dress_name = "Slip"
-  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - current_dress_name = "Ziv Dress"
+  - current_dress_link = "#{dresses_path}/dress-ziv-1037?color=champagne"
   - if current_site_version.is_australia?
    // AUSTRALIA - PRICE
-   - current_dress_price = "$329.5"
+   - current_dress_price = "$199"
   - else
    // USA - PRICE
-   - current_dress_price = "$299"
+   - current_dress_price = "$259"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#thegown
    .row
      .col-md-10.heading-overlay-wrapper.tag-align-left
-       h2.heading-overlay The #{current_dress_name}
+       h2.heading-overlay The Slip
 
    .row.vertical-align-copy
      .col-lg-8.col-md-7.content-img
@@ -112,7 +112,7 @@
            |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
 
          .cta-wrapper
-           = link_to current_dress_link
+           = link_to "#{dresses_path}/slip-dress"
              span.btn-md.btn-featured
               | Shop & customize
 
@@ -123,19 +123,19 @@
        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
 
   // Wrap Dress
-  - current_dress_name = "Wrap Dress"
-  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - current_dress_name = "Kimberly Dress"
+  - current_dress_link = "#{dresses_path}/dress-kimberly-1133?color=navy"
   - if current_site_version.is_australia?
    // AUSTRALIA - PRICE
-   - current_dress_price = "$329.5"
+   - current_dress_price = "$499"
   - else
    // USA - PRICE
-   - current_dress_price = "$299"
+   - current_dress_price = "$399"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#thewrap
    .row
      .col-md-10.heading-overlay-wrapper.tag-align-left
-       h2.heading-overlay The #{current_dress_name}
+       h2.heading-overlay The Wrap Dress
 
    .row.vertical-align-copy
      .col-lg-8.col-md-7.content-img
@@ -156,7 +156,7 @@
            |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
 
          .cta-wrapper
-           = link_to current_dress_link
+           = link_to "#{dresses_path}/wrap"
              span.btn-md.btn-featured
               | Shop & customize
 
@@ -167,19 +167,19 @@
        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
 
   // Cocktail Dress
-  - current_dress_name = "Cocktail Dress"
-  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - current_dress_name = "Firefly Dress"
+  - current_dress_link = "#{dresses_path}/dress-firefly-640?color=black"
   - if current_site_version.is_australia?
    // AUSTRALIA - PRICE
-   - current_dress_price = "$329.5"
+   - current_dress_price = "$329"
   - else
    // USA - PRICE
-   - current_dress_price = "$299"
+   - current_dress_price = "$269"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#thecocktail
    .row
      .col-md-10.heading-overlay-wrapper.tag-align-left
-       h2.heading-overlay The #{current_dress_name}
+       h2.heading-overlay The Cocktail Dress
 
    .row.vertical-align-copy
      .col-lg-8.col-md-7.content-img
@@ -200,7 +200,7 @@
            |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
 
          .cta-wrapper
-           = link_to current_dress_link
+           = link_to "#{dresses_path}/cocktail"
              span.btn-md.btn-featured
               | Shop & customize
 
@@ -211,11 +211,11 @@
        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
 
   // Two-Piece Dress
-  - current_dress_name = "Two-Piece"
-  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - current_dress_name = "Metz Two Piece"
+  - current_dress_link = "#{dresses_path}/dress-metz-two-piece-1121?color=blush"
   - if current_site_version.is_australia?
    // AUSTRALIA - PRICE
-   - current_dress_price = "$329.5"
+   - current_dress_price = "$379"
   - else
    // USA - PRICE
    - current_dress_price = "$299"
@@ -223,7 +223,7 @@
   section.section-box.container-fluid.no-padding.no-margin.section-look#thetwopiece
    .row
      .col-md-10.heading-overlay-wrapper.tag-align-left
-       h2.heading-overlay The #{current_dress_name}
+       h2.heading-overlay The Two-Piece
 
    .row.vertical-align-copy
      .col-lg-8.col-md-7.content-img
@@ -244,7 +244,7 @@
            |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
 
          .cta-wrapper
-           = link_to current_dress_link
+           = link_to "#{dresses_path}/two-piece"
              span.btn-md.btn-featured
               | Shop & customize
 
@@ -255,19 +255,19 @@
        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
 
   // Jumpsuit Dress
-  - current_dress_name = "Jumpsuit"
-  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - current_dress_name = "Ekera Jumpsuit"
+  - current_dress_link = "#{dresses_path}/dress-ekera-jumpsuit-1104?color=black"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$329.5"
+    - current_dress_price = "$319"
   - else
     // USA - PRICE
-    - current_dress_price = "$299"
+    - current_dress_price = "$249"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#thejumpsuit
     .row
       .col-md-10.heading-overlay-wrapper.tag-align-left
-        h2.heading-overlay The #{current_dress_name}
+        h2.heading-overlay The Jumpsuit
 
     .row.vertical-align-copy
       .col-lg-8.col-md-7.content-img
@@ -288,7 +288,7 @@
             |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
 
           .cta-wrapper
-            = link_to current_dress_link
+            = link_to "#{dresses_path}/jumpsuit"
               span.btn-md.btn-featured
                 | Shop & customize
 
@@ -299,19 +299,19 @@
        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
 
   // Skater Dress
-  - current_dress_name = "Skater"
-  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - current_dress_name = "Rosewater Dress"
+  - current_dress_link = "#{dresses_path}/dress-rosewater-1112?color=rosewater-floral"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$329.5"
+    - current_dress_price = "$279"
   - else
     // USA - PRICE
-    - current_dress_price = "$299"
+    - current_dress_price = "$219"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#theskater
     .row
       .col-md-10.heading-overlay-wrapper.tag-align-left
-        h2.heading-overlay The #{current_dress_name}
+        h2.heading-overlay The Skater
 
     .row.vertical-align-copy
       .col-lg-8.col-md-7.content-img
@@ -332,7 +332,7 @@
             |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
 
           .cta-wrapper
-            = link_to current_dress_link
+            = link_to "#{dresses_path}/fit-and-flare"
               span.btn-md.btn-featured
                 | Shop & customize
 
@@ -343,19 +343,19 @@
        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
 
   // Maxi Dress
-  - current_dress_name = "Maxi"
-  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - current_dress_name = "Siana Dress"
+  - current_dress_link = "#{dresses_path}/dress-siana-1126?color=navy"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$329.5"
+    - current_dress_price = "$329"
   - else
     // USA - PRICE
-    - current_dress_price = "$299"
+    - current_dress_price = "$259"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#themaxi
     .row
       .col-md-10.heading-overlay-wrapper.tag-align-left
-        h2.heading-overlay The #{current_dress_name}
+        h2.heading-overlay The Maxi
 
     .row.vertical-align-copy
       .col-lg-8.col-md-7.content-img
@@ -376,7 +376,7 @@
             |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
 
           .cta-wrapper
-            = link_to current_dress_link
+            = link_to "#{dresses_path}/maxi"
               span.btn-md.btn-featured
                 | Shop & customize
 
@@ -387,19 +387,19 @@
        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
 
   // Mini Dress
-  - current_dress_name = "Mini"
-  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - current_dress_name = "Palais Dress"
+  - current_dress_link = "#{dresses_path}/dress-palais-1053?color=black"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$329.5"
+    - current_dress_price = "$399"
   - else
     // USA - PRICE
-    - current_dress_price = "$299"
+    - current_dress_price = "$319"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#themini
     .row
       .col-md-10.heading-overlay-wrapper.tag-align-left
-        h2.heading-overlay The #{current_dress_name}
+        h2.heading-overlay The Mini
 
     .row.vertical-align-copy
       .col-lg-8.col-md-7.content-img
@@ -420,7 +420,7 @@
             |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
 
           .cta-wrapper
-            = link_to current_dress_link
+            = link_to "#{dresses_path}/mini"
               span.btn-md.btn-featured
                 | Shop & customize
 
@@ -431,19 +431,19 @@
        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
 
   // LBD Dress
-  - current_dress_name = "LBD"
-  - current_dress_link = "#{dresses_path}/dress-kirrily-1100?color=spot"
+  - current_dress_name = "Katrina Dress"
+  - current_dress_link = "#{dresses_path}/dress-katrina-1045?color=black"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$329.5"
+    - current_dress_price = "$339"
   - else
     // USA - PRICE
-    - current_dress_price = "$299"
+    - current_dress_price = "$269"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#thelbd
     .row
       .col-md-10.heading-overlay-wrapper.tag-align-left
-        h2.heading-overlay The #{current_dress_name}
+        h2.heading-overlay The LBD
 
     .row.vertical-align-copy
       .col-lg-8.col-md-7.content-img
@@ -464,7 +464,7 @@
             |  #{link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link}
 
           .cta-wrapper
-            = link_to current_dress_link
+            = link_to "#{dresses_path}/little-black-dress"
               span.btn-md.btn-featured
                 | Shop & customize
 
