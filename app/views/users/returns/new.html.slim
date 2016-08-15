@@ -2,66 +2,70 @@ ruby:
   setup_js = "
     new window.page.UserOrderReturner({form: '#order-return-form', reasons: #{@reasons} });
   "
-.page-title.default.returns-title
+.return-page.page-content
   .container
-    .page-title--details
-      - if user.has_spree_role?(:admin)
-        h1.no-padding-bottom Request a Return
-        h2= order_return.order.email
-      -else
-        h1.no-padding-bottom You have good dress days and bad dress days. We get it.
-        h2 Help us help you.
-
-.page-content.returns
-  .container.relative
     .row
-      .col-md-8.col-md-offset-2.background-grey
-        .row.header
-          h2.order-number Order no: #{ order_return.number }
-          h2.order-date Order date: #{ l(order_return.completed_at.to_date) }
+      .col-md-12
+          h1.text-center Please confirm your return
+
+      .col-md-6
+        h3.order-number Order # #{ order_return.number }
+        h3.order-date Order Date #{ l(order_return.completed_at.to_date) }
         = form_for order_return, url: user_returns_path, method: :post, html: {class: 'form', :id => 'order-return-form'} do |f|
           = f.hidden_field :order_id
-          table.table.table-responsive
-            thead.hide
-              tr
-                th Item
-                th
-                th Options
-            tbody
-              = f.fields_for :return_request_items do |item_form|
-                = item_form.hidden_field :line_item_id
-                tr
-                  td= image_tag item_form.object.image_url, class: 'img-responsive ordered-item-image'
-                  td
-                      = item_form.object.order_quantity
-                      | &nbsp;X&nbsp;
-                      = item_form.object.style_name
-                      br
-                      ="Size:#{item_form.object.country_size.to_i}, Color: #{item_form.object.colour_name}"
-                      br
-                      = item_form.object.display_price
-                  td
-                    div.action id="actions-#{item_form.object.line_item_id}"
+          .content-wrap
+            = f.fields_for :return_request_items do |item_form|
+              = item_form.hidden_field :line_item_id
+              .inner-wrapper.dress-wrapper
+                .item-img.col-md-5
+                  = image_tag item_form.object.image_url, class: 'img-responsive ordered-item-image'
+                .item-details.col-md-6
+                  .item-name
+                    span.quantity
+                      ="#{item_form.object.order_quantity} x "
+                    span.style
+                      ="#{item_form.object.style_name}"
+                  .size Size: <em>#{item_form.object.country_size.to_i}</em>
+                  .color Color: <em>#{item_form.object.colour_name}</em>
+                  .price
+                    = item_form.object.display_price
+              .inner-wrapper
+                div.action id="actions-#{item_form.object.line_item_id}"
+                  = item_form.label 'I want to'
+                  = item_form.select :action, options_for_select(["Keep", "Return", "Exchange"], 'keep'), {}, :class => 'form-control form-control-md return-select return-action'
 
-                      = item_form.label 'I want to'
-                      = item_form.select :action, options_for_select(["Keep", "Return", "Exchange"], 'keep'), {}, :class => 'form-control form-control-md return-select return-action'
+                  .return-reason-category-container
+                    = item_form.label 'Because'
+                    = item_form.select :reason_category, options_for_select(ReturnRequestItem::REASON_CATEGORIES), {include_blank: true}, :class => 'form-control form-control-md return-select return-reason-category'
 
-                      .return-reason-category-container
-                        = item_form.label 'Because'
-                        = item_form.select :reason_category, options_for_select(ReturnRequestItem::REASON_CATEGORIES), {include_blank: true}, :class => 'form-control form-control-md return-select return-reason-category'
+                    .return-reason-container
+                      = item_form.label 'And'
+                      = item_form.select :reason, options_for_select([]), {}, :class => 'form-control form-control-md return-select return-reason-select'
 
-                        .return-reason-container
-                          = item_form.label 'And'
+          .inner-wrapper
+            button.btn.btn-black.submit Submit Return
+          .inner-wrapper
+            = link_to 'Back to orders', user_orders_path, :class => 'cancel'
 
-                          = item_form.select :reason, options_for_select([]), {}, :class => 'form-control form-control-md return-select return-reason-select'
-
-          .row
-            .col-md-5
-
-            .col-md-5.col-md-offset-2
-              button.btn.btn-black.submit Submit
-              = link_to 'Back to orders', user_orders_path, :class => 'cancel'
-
+      aside.col-md-5.col-md-offset-1
+        h2
+          | Fame returns policy
+        h3
+          | Standard Dresses
+        p
+          | May be returned or exchanged within 30 days of the original purchase date for a full refund or store credit.
+        h3
+          | Customized Dresses
+        p
+          | A 50% restocking fee is applied to all Custom Orders being returned or exchanged, this includes choosing a Custom Color.  Customized orders may be returned or exchanged within 30 days of the original purchase date.
+        h3
+          | Multiple Dresses
+        p
+          | Maximum of 2 dresses from a single order may be returned for a refund. Returns and exchanges on orders with more than 2 dresses will have the remainder of the refund issued as a store credit. *Refund amount is based on whether the dress is a Standard or Customized piece.
+        h3
+          | Sale Items
+        p
+          | All sale items are considered a final sale.
 
 = content_for :inline_javascript do
   = raw setup_js
