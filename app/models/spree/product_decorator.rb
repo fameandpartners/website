@@ -78,10 +78,6 @@ Spree::Product.class_eval do
     "#{name} (SKU: #{sku})"
   end
 
-  def new_size_chart?
-    size_chart == SIZE_CHARTS.last
-  end
-
   def cache_key
     "products/#{id}-#{updated_at.to_s(:number)}"
   end
