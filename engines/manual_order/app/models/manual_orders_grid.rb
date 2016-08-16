@@ -24,14 +24,14 @@ class ManualOrdersGrid
 
   # decorate { |line_item| Orders::LineItemPresenter.new(line_item, Orders::OrderPresenter.new(line_item.order)) }
 
-  column(:completed_at, header: 'Order date') {|model| model.order.completed_at.strftime("%m/%d/%y")}
-  column(:number, header: 'Order number') {|model| model.order.number}
+  column(:order_date, header: 'Order date') {|model| model.order.completed_at.strftime("%m/%d/%y")}
+  column(:order_number, header: 'Order number') {|model| model.order.number}
   column(:id, header: 'Line ID') {|model| model.id}
-  column(:id, header: 'Style') {|model| ManualOrdersGrid.decorate(model).style_number}
-  column(:id, header: 'SKU') {|model| ManualOrdersGrid.decorate(model).sku}
-  column(:id, header: 'Size') {|model| ManualOrdersGrid.decorate(model).size}
-  column(:id, header: 'Height') {|model| ManualOrdersGrid.decorate(model).height}
-  column(:id, header: 'Color') {|model| ManualOrdersGrid.decorate(model).colour_name}
+  column(:style, header: 'Style') {|model| ManualOrdersGrid.decorate(model).style_number}
+  column(:sku, header: 'SKU') {|model| ManualOrdersGrid.decorate(model).sku}
+  column(:size, header: 'Size') {|model| ManualOrdersGrid.decorate(model).size}
+  column(:height, header: 'Height') {|model| ManualOrdersGrid.decorate(model).height}
+  column(:color, header: 'Color') {|model| ManualOrdersGrid.decorate(model).colour_name}
 
   private
 
