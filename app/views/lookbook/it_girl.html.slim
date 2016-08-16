@@ -4,8 +4,13 @@
 
   .hero-wrap.copy-right
     .media-wrap
-      = image_tag 'landingpages/it-girl/hero-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/hero-mobile.jpg")} 1023w,
-            #{image_path("landingpages/it-girl/hero-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "IT Girl"
+      picture
+        source media='(max-width: 1023px)' srcset='#{image_path("landingpages/it-girl/hero-mobile.jpg")}'
+        source media='(min-width: 1024px)' srcset='#{image_path("landingpages/it-girl/hero-desktop.jpg")}'
+        = image_tag 'landingpages/it-girl/hero-desktop.jpg', srcset: "#{image_path("landingpages/it-girl/hero-mobile.jpg")} 1023w,
+          #{image_path("landingpages/it-girl/hero-desktop.jpg")} 1024w", class: 'img-responsive', alt: "IT Girl"
+
+
     .content-wrap
       .container
         .row
@@ -53,8 +58,11 @@
     .row.vertical-align-copy
       .col-md-7.content-img
         = link_to current_dress_link
-          = image_tag 'landingpages/it-girl/gown-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/gown-mobile.jpg")} 1023w,
-            #{image_path("landingpages/it-girl/gown-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+          picture
+            source media='(max-width: 1023px)' srcset='#{image_path("landingpages/it-girl/gown-mobile.jpg")}'
+            source media='(min-width: 1024px)' srcset='#{image_path("landingpages/it-girl/gown-desktop.jpg")}'
+            = image_tag 'landingpages/it-girl/gown-desktop.jpg', srcset: "#{image_path("landingpages/it-girl/gown-mobile.jpg")} 1023w,
+              #{image_path("landingpages/it-girl/gown-desktop.jpg")} 1024w", class: 'img-responsive', alt: "#{current_dress_name} Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
@@ -97,8 +105,11 @@
    .row.vertical-align-copy
      .col-md-7.content-img
        = link_to current_dress_link
-         = image_tag 'landingpages/it-girl/slip-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/slip-mobile.jpg")} 1023w,
-           #{image_path("landingpages/it-girl/slip-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+        picture
+          source media='(max-width: 1023px)' srcset='#{image_path("landingpages/it-girl/slip-mobile.jpg")}'
+          source media='(min-width: 1024px)' srcset='#{image_path("landingpages/it-girl/slip-desktop.jpg")}'
+          = image_tag 'landingpages/it-girl/slip-desktop.jpg', srcset: "#{image_path("landingpages/it-girl/slip-mobile.jpg")} 1023w,
+             #{image_path("landingpages/it-girl/slip-desktop.jpg")} 1024w", class: 'img-responsive', alt: "#{current_dress_name} Dress"
 
      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
        .copy-wrap
@@ -141,8 +152,11 @@
    .row.vertical-align-copy
      .col-md-7.content-img
        = link_to current_dress_link
-         = image_tag 'landingpages/it-girl/wrap-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/wrap-mobile.jpg")} 1023w,
-           #{image_path("landingpages/it-girl/wrap-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+        picture
+          source media='(max-width: 1023px)' srcset='#{image_path("landingpages/it-girl/wrap-mobile.jpg")}'
+          source media='(min-width: 1024px)' srcset='#{image_path("landingpages/it-girl/wrap-desktop.jpg")}'
+          = image_tag 'landingpages/it-girl/wrap-desktop.jpg', srcset: "#{image_path("landingpages/it-girl/wrap-mobile.jpg")} 1023w,
+           #{image_path("landingpages/it-girl/wrap-desktop.jpg")} 1024w", class: 'img-responsive', alt: "#{current_dress_name} Dress"
 
      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
        .copy-wrap
@@ -185,8 +199,11 @@
    .row.vertical-align-copy
      .col-md-7.content-img
        = link_to current_dress_link
-         = image_tag 'landingpages/it-girl/cocktail-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/cocktail-mobile.jpg")} 1023w,
-           #{image_path("landingpages/it-girl/cocktail-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+        picture
+          source media='(max-width: 1023px)' srcset='#{image_path("landingpages/it-girl/cocktail-mobile.jpg")}'
+          source media='(min-width: 1024px)' srcset='#{image_path("landingpages/it-girl/cocktail-desktop.jpg")}'
+          = image_tag 'landingpages/it-girl/cocktail-desktop.jpg', srcset: "#{image_path("landingpages/it-girl/cocktail-mobile.jpg")} 1023w,
+           #{image_path("landingpages/it-girl/cocktail-desktop.jpg")} 1024w", class: 'img-responsive', alt: "#{current_dress_name} Dress"
 
      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
        .copy-wrap
@@ -229,8 +246,11 @@
    .row.vertical-align-copy
      .col-md-7.content-img
        = link_to current_dress_link
-         = image_tag 'landingpages/it-girl/twopiece-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/twopiece-mobile.jpg")} 1023w,
-           #{image_path("landingpages/it-girl/twopiece-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+        picture
+          source media='(max-width: 1023px)' srcset='#{image_path("landingpages/it-girl/twopiece-mobile.jpg")}'
+          source media='(min-width: 1024px)' srcset='#{image_path("landingpages/it-girl/twopiece-desktop.jpg")}'
+          = image_tag 'landingpages/it-girl/twopiece-desktop.jpg', srcset: "#{image_path("landingpages/it-girl/twopiece-mobile.jpg")} 1023w,
+           #{image_path("landingpages/it-girl/twopiece-desktop.jpg")} 1024w", class: 'img-responsive', alt: "#{current_dress_name} Dress"
 
      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
        .copy-wrap
@@ -273,8 +293,11 @@
     .row.vertical-align-copy
       .col-md-7.content-img
         = link_to current_dress_link
-          = image_tag 'landingpages/it-girl/jumpsuit-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/jumpsuit-mobile.jpg")} 1023w,
-             #{image_path("landingpages/it-girl/jumpsuit-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+          picture
+            source media='(max-width: 1023px)' srcset='#{image_path("landingpages/it-girl/jumpsuit-mobile.jpg")}'
+            source media='(min-width: 1024px)' srcset='#{image_path("landingpages/it-girl/jumpsuit-desktop.jpg")}'
+            = image_tag 'landingpages/it-girl/jumpsuit-desktop.jpg', srcset: "#{image_path("landingpages/it-girl/jumpsuit-mobile.jpg")} 1023w,
+               #{image_path("landingpages/it-girl/jumpsuit-desktop.jpg")} 1024w", class: 'img-responsive', alt: "#{current_dress_name} Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
@@ -317,8 +340,11 @@
     .row.vertical-align-copy
       .col-md-7.content-img
         = link_to current_dress_link
-          = image_tag 'landingpages/it-girl/skater-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/skater-mobile.jpg")} 1023w,
-             #{image_path("landingpages/it-girl/skater-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+          picture
+            source media='(max-width: 1023px)' srcset='#{image_path("landingpages/it-girl/skater-mobile.jpg")}'
+            source media='(min-width: 1024px)' srcset='#{image_path("landingpages/it-girl/skater-desktop.jpg")}'
+            = image_tag 'landingpages/it-girl/skater-desktop.jpg', srcset: "#{image_path("landingpages/it-girl/skater-mobile.jpg")} 1023w,
+               #{image_path("landingpages/it-girl/skater-desktop.jpg")} 1024w", class: 'img-responsive', alt: "#{current_dress_name} Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
@@ -361,8 +387,11 @@
     .row.vertical-align-copy
       .col-md-7.content-img
         = link_to current_dress_link
-          = image_tag 'landingpages/it-girl/maxi-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/maxi-mobile.jpg")} 1023w,
-             #{image_path("landingpages/it-girl/maxi-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+          picture
+            source media='(max-width: 1023px)' srcset='#{image_path("landingpages/it-girl/maxi-mobile.jpg")}'
+            source media='(min-width: 1024px)' srcset='#{image_path("landingpages/it-girl/maxi-desktop.jpg")}'
+            = image_tag 'landingpages/it-girl/maxi-desktop.jpg', srcset: "#{image_path("landingpages/it-girl/maxi-mobile.jpg")} 1023w,
+               #{image_path("landingpages/it-girl/maxi-desktop.jpg")} 1024w", class: 'img-responsive', alt: "#{current_dress_name} Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
@@ -405,8 +434,11 @@
     .row.vertical-align-copy
       .col-md-7.content-img
         = link_to current_dress_link
-          = image_tag 'landingpages/it-girl/mini-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/mini-mobile.jpg")} 1023w,
-             #{image_path("landingpages/it-girl/mini-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+          picture
+            source media='(max-width: 1023px)' srcset='#{image_path("landingpages/it-girl/mini-mobile.jpg")}'
+            source media='(min-width: 1024px)' srcset='#{image_path("landingpages/it-girl/mini-desktop.jpg")}'
+            = image_tag 'landingpages/it-girl/mini-desktop.jpg', srcset: "#{image_path("landingpages/it-girl/mini-mobile.jpg")} 1023w,
+               #{image_path("landingpages/it-girl/mini-desktop.jpg")} 1024w", class: 'img-responsive', alt: "#{current_dress_name} Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
@@ -449,8 +481,11 @@
     .row.vertical-align-copy
       .col-md-7.content-img
         = link_to current_dress_link
-          = image_tag 'landingpages/it-girl/lbd-desktop.jpg', :srcset => "#{image_path("landingpages/it-girl/lbd-mobile.jpg")} 1023w,
-               #{image_path("landingpages/it-girl/lbd-desktop.jpg")} 1024w", :class => 'img-responsive', :alt => "#{current_dress_name} Dress"
+          picture
+            source media='(max-width: 1023px)' srcset='#{image_path("landingpages/it-girl/lbd-mobile.jpg")}'
+            source media='(min-width: 1024px)' srcset='#{image_path("landingpages/it-girl/lbd-desktop.jpg")}'
+            = image_tag 'landingpages/it-girl/lbd-desktop.jpg', srcset: "#{image_path("landingpages/it-girl/lbd-mobile.jpg")} 1023w,
+                 #{image_path("landingpages/it-girl/lbd-desktop.jpg")} 1024w", class: 'img-responsive', alt: "#{current_dress_name} Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
