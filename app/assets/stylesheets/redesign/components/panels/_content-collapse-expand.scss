@@ -35,6 +35,12 @@
     .btn-open-close {
       @extend .btn-close;
       float: right;
+
+      .side-panel & {
+        display: block;
+        visibility: visible;
+      }
+
     }
 
     &.collapsed {

@@ -14,8 +14,8 @@ window.SideMenu = class SideMenu
     $(@$overlay).on 'click', =>
       @close()
 
-    if($('#sideMenu nav').is(':visible'))
-      $('a.expand-faq').on 'click', =>
+    $(window).delay(250).on 'resize', =>
+      if($('#sideMenu nav').is(':hidden'))
         @close()
 
     $(document).on('mousedown', (e) =>

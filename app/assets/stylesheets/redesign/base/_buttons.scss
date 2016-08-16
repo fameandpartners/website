@@ -282,4 +282,10 @@
   padding: 10px 22px;
   display: inline-block;
   border-radius: 0;
+
+  &.white-txt-border {
+    color: $c-neutral-white;
+    border: 1px solid $c-neutral-white;
+  }
+
 }
