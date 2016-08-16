@@ -43,9 +43,11 @@ class SidePanelSizeChart extends React.Component {
   }
 
   render() {
-    const TRIGGER_COPY = this.state.active ? 'View New Size Guide' : 'View Legacy Size Guide';
     const INCHES_IS_ACTIVE = this.state.imchesIsActive ? 'is-active' : '';
     const CM_IS_ACTIVE = this.state.cmIsActive ? 'is-active' : '';
+    const SIZE_CHART_TITLE = this.props.sizeChartVersion === '2016' ? 'Legacy Size Guide' : 'Size Guide';
+    const SIZE_CHART_VIEW_TEXT = this.props.sizeChartVersion === '2016' ? 'View legacy size guide' : 'View new size guide';
+
     // this is just reset, proper styling will be applied through SASS
     const MODAL_STYLE = {
       overlay: {
@@ -68,7 +70,7 @@ class SidePanelSizeChart extends React.Component {
 
     return (
       <div className="chart-wrap">
-        <a href="javascript:;" className="chart-wrap-trigger" onClick={this.openModal}>{TRIGGER_COPY}</a>
+        <a href="javascript:;" className="chart-wrap-trigger" onClick={this.openModal}>{SIZE_CHART_VIEW_TEXT}</a>
 
         <Modal
           style={MODAL_STYLE}
@@ -77,17 +79,7 @@ class SidePanelSizeChart extends React.Component {
           <div className="pdp-sizeguide">
             <div className="row">
               <div className="col-md-12">
-                {(() => {
-                  if(this.props.sizeChartVersion === "2016") {
-                    return (
-                      <h4 className="h2 title text-center">Legacy size guide</h4>
-                    );
-                  } else {
-                    return (
-                      <h4 className="h2 title text-center">Size guide</h4>
-                    );
-                  }
-                })()}
+                <h4 className="h2 title text-center">{SIZE_CHART_TITLE}</h4>
               </div>
               <div className="col-md-6">
                 <Tabs>
