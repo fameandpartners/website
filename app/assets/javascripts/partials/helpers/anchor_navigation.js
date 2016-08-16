@@ -5,11 +5,10 @@
 
     var responsiveNavLocal,
         slick_target_position;
-
     // Go to target item in local navigation, according to the current anchor
     if (responsiveNavLocal.hasClass('slick-initialized'))
       slick_target_position = $('.local-navigation .nav a').index($('[href="'+window.location.hash+'"]'));
-      responsiveNavLocal.slick( "slickGoTo", parseInt( slick_target_position ), true );
+      responsiveNavLocal.slick( "slickGoTo", parseInt( slick_target_position ), false);
 
   }
 
@@ -19,7 +18,9 @@
       localNavTopOffset = 0,
       lastNavLocalItem = $('.js-float-menu-on-scroll .nav a:last').attr('href'), // Get the last section ID
       offsetTargetTopPadding = 70, // The desired distance between the target and the page header
+      initialoffsetTargetTopPadding = 570, //the nav does not update for each section until you scroll through half of the category.
       mdScreenWidth = 992,
+      moScreenWidth = 768,
       responsiveNavLocal = $('.local-navigation .nav');
 
   // Set the height of the fixed header
@@ -61,7 +62,7 @@
     // Add scrollspy trigger
     // If this is a mobile device we don't worry about the fixed header's height for the top offset
     if ( $(window).width() < mdScreenWidth ) {
-      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (offsetTargetTopPadding) })
+      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (initialoffsetTargetTopPadding) })
     } else {
       //Since this is not a mobile device then we have to consider the fixed header in the top offset
       $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (offsetHeight) })
@@ -83,24 +84,34 @@
             dots: false,
             edgeFriction: 10,
             slidesToScroll: 1,
-            slidesToShow: 4,
-            variableWidth: false,
+            slidesToShow: 8,
             infinite: false,
             focusOnSelect: true,
             centerMode: false,
             mobileFirst: false,
+            variableWidth: true,
             prevArrow: '<span>◂</span>',
             nextArrow: '<span>▸</span>',
             responsive: [
               {
                 breakpoint: mdScreenWidth,
                 settings: {
+                  centerMode: false,
+                  mobileFirst: true,
+                  variableWidth: true,
+                  slidesToShow: 3
+                }
+              },
+              {
+                breakpoint: moScreenWidth,
+                settings: {
                   centerMode: true,
                   mobileFirst: true,
                   variableWidth: true,
                   slidesToShow: 3
                 }
-              }]
+              }
+            ]
           });
 
           // Go to current nav item
@@ -117,7 +128,7 @@
       // Autoplay if user is 2 sections in
       responsiveNavLocal.on('afterChange', function(event, slick, currentSlide){
         if (currentSlide > 1) {
-          $(this).slick("slickSetOption", "autoplay", true);
+          //$(this).slick("slickSetOption", "autoplay", true);
         } else {
           $(this).slick("slickSetOption", "autoplay", false);
         }
