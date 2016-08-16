@@ -154,6 +154,8 @@ PATH
       rails
     manual_order (0.0.1)
       chosen-rails
+      datagrid
+      kaminari
       rails (~> 3.2.22)
       reform
       simple_form
