@@ -381,6 +381,92 @@
 
   }
 
+  .choices.wedding-quiz-img img {
+    opacity: 1
+  }
+
+  .dress-size-box {
+    width: 70px;
+    border: 1px solid $c-neutral-11;
+    text-align: center;
+    padding: 5px;
+    margin-right: 11px;
+    margin-top: 10px;
+  }
+
+  .wedding {
+    max-width: 85px;
+    padding-top: 20px;
+
+    label {
+      margin-bottom: 20px;
+    }
+  }
+
+  .cup-size-boxes {
+
+    .dress-size-box {
+      padding: 18px;
+    }
+  }
+
+  .parametres-span {
+    width: 75px;
+    display: block;
+    float: left;
+  }
+
+  .wedding-input {
+    margin-right: 10px;
+  }
+
+  .wedding-form {
+    margin-top: 30px;
+
+    .form-group {
+      clear: both;
+      overflow: hidden;
+    }
+
+    label {
+      float: left;
+    }
+
+    input {
+      clear: left;
+      float: left;
+      height: 30px;
+    }
+
+    button {
+      width: 260px;
+      font-size: 1.2rem;
+      margin: 0 auto;
+      display: block;
+      margin-bottom: 10px;
+      padding: 10px 10px;
+
+      &:first-child {
+        background-color: #000;
+        color: #fff;
+      }
+
+      &:last-child {
+        background-color: #fff;
+        border: 1px solid $c-neutral-11;
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+
+    .cup-size-boxes.wedding-items {
+
+      .dress-size-box {
+      }
+    }
+
+  }
   // START - mobile only
   @media (max-width: $bootstrap-sm-width - 1px) {
 
@@ -469,8 +555,44 @@
       padding-bottom: 30%;
     }
 
+    .wedding-items {
+      display: table;
+      margin: 0 auto;
+
+      .clear-max-978 {
+        clear: both;
+      }
+    }
+
+   .cup-size-boxes.wedding-items .dress-size-box {
+      width: 58px;
+      padding: 10px;
+    }
   }
   // END - mobile only
+
+@media (max-width: 640px) {
+
+  .wedding-items .dress-size-box {
+    width: 60px;
+    font-size: 1.3rem;
+
+    &.clear-max-640 {
+      clear: both;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+
+  .cup-size-boxes.wedding-items .dress-size-box {
+    width: 49px;
+  }
+
+  .wedding {
+    max-width: 65px;
+  }
+}
 
   // Old styling, not sure if its needed anymore
   .quiz-overlay {

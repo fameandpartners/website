@@ -1,20 +1,32 @@
-class StyleQuizController < ApplicationController
+class QuizController < ApplicationController
   layout 'redesign/application'
+
+  before_filter :quiz_type
 
   respond_to :html, :js
 
   # questions#index
   def show
-    title('Style Quiz - Dress Recommendations Based on Your Style Profile', default_seo_title)
-    description('Not sure to go boho, glam, edgy, classic, or girly? Fame and Partners\' style quiz can help identify your style profile and recommend that perfect dress.')
+    quiz_titles = {
+      style: 'Style Quiz - Dress Recommendations Based on Your Style Profile',
+      wedding: 'Wedding Quiz'
+    }
 
-    @quiz = Quiz.active
+    quiz_descriptions = {
+      style: 'Not sure to go boho, glam, edgy, classic, or girly? Fame and Partners\' style quiz can help identify your style profile and recommend that perfect dress.',
+      wedding: 'Wedding Quiz Description'
+    }
+
+    title(quiz_titles[@quiz_type], default_seo_title)
+    description(quiz_descriptions[@quiz_type])
+
+    @quiz = Quiz.send("#{@quiz_type}_quiz")
     @questions_by_steps = @quiz.questions.includes(:answers).order('position ASC').group_by(&:step)
   end
 
   # answers#create
   def update
-    quiz = Quiz.last
+    quiz = Quiz.send("#{@quiz_type}_quiz")
     question_ids = params[:quiz][:questions].keys
 
     unless quiz.questions.find(question_ids).size.eql?(quiz.questions.size)
@@ -124,7 +136,7 @@ class StyleQuizController < ApplicationController
 
     respond_with({}) do |format|
       format.html { redirect_to(style_profile_url) }
-      format.js   { render 'style_quiz/thanks' }
+      format.js   { render 'quiz/thanks' }
     end
   end
 
@@ -133,5 +145,10 @@ class StyleQuizController < ApplicationController
   def track_user_email(email)
     return unless email
     Marketing::CustomerIOEventTracker.new.identify_user_by_email(email, current_site_version)
+  end
+
+  def quiz_type
+    quiz_type_regex = /(?!\/)[a-z]*(?<!-quiz)/
+    @quiz_type = request.path[quiz_type_regex].to_sym
   end
 end
