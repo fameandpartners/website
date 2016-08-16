@@ -1,3 +1,5 @@
+require 'datagrid'
+
 class ManualOrdersGrid
   include Datagrid
 
@@ -22,8 +24,19 @@ class ManualOrdersGrid
 
   # decorate { |line_item| Orders::LineItemPresenter.new(line_item, Orders::OrderPresenter.new(line_item.order)) }
 
-  column(:completed_at, header: 'Order date') {|model| model.order.completed_at.strftime("%m/%d/%y")  }
+  column(:completed_at, header: 'Order date') {|model| model.order.completed_at.strftime("%m/%d/%y")}
   column(:number, header: 'Order number') {|model| model.order.number}
   column(:id, header: 'Line ID') {|model| model.id}
+  column(:id, header: 'Style') {|model| ManualOrdersGrid.decorate(model).style_number}
+  column(:id, header: 'SKU') {|model| ManualOrdersGrid.decorate(model).sku}
+  column(:id, header: 'Size') {|model| ManualOrdersGrid.decorate(model).size}
+  column(:id, header: 'Height') {|model| ManualOrdersGrid.decorate(model).height}
+  column(:id, header: 'Color') {|model| ManualOrdersGrid.decorate(model).colour_name}
+
+  private
+
+  def self.decorate(line_item)
+    Orders::LineItemPresenter.new(line_item, Orders::OrderPresenter.new(line_item.order))
+  end
 
 end
