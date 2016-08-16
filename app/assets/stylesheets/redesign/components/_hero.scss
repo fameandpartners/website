@@ -10,10 +10,6 @@
   &.copy-right, &.copy-left {
     margin-bottom: 50px;
 
-    &.no-margin {
-      margin: 0;
-    }
-
     .media-wrap {
       padding-bottom: 0;
     }
@@ -30,10 +26,6 @@
       margin: 50px 0 0;
       text-transform: none;
       color: $c-neutral-black;
-
-      &.no-margin {
-        margin: 0;
-      }
 
       > span {
         display: block;

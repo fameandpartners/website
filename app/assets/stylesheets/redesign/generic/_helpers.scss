@@ -94,6 +94,10 @@
   padding-right: 0 !important;
 }
 
+.no-margin {
+  margin: 0 !important;
+}
+
 .no-margin-bottom {
   margin-bottom: 0 !important;
 }
@@ -125,15 +129,15 @@
 
 @media (min-width: $bootstrap-md-width) {
 
+  .no-margin-md {
+    margin: 0 !important;
+  }
+
   .line-break-md {
     display: block;
   }
 
-}
-
-// Same-height columns
-@media (min-width: $bootstrap-md-width) {
-
+  // Same-height columns
   .same-height-cols {
 
     > .row > div[class*='col-'] {
