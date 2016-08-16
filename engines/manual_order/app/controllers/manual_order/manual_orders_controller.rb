@@ -6,7 +6,18 @@ module ManualOrder
     helper_method :manual_order_form
 
     def index
-
+      @collection = ManualOrdersGrid.new(params[:manual_orders_grid])
+      respond_to do |f|
+        f.html do
+          @collection.scope { |scope| scope.page(params[:page]).per(50) }
+        end
+        f.csv do
+          send_data @collection.to_csv,
+                    type: "text/csv",
+                    disposition: 'inline',
+                    filename: "manual_orders-#{DateTime.now.to_s(:file_timestamp)}.csv"
+        end
+      end
     end
 
     def new
