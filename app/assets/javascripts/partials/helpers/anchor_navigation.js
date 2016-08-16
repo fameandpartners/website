@@ -20,7 +20,7 @@
       offsetTargetTopPadding = 70, // The desired distance between the target and the page header
       initialoffsetTargetTopPadding = 570, //the nav does not update for each section until you scroll through half of the category.
       mdScreenWidth = 992,
-      moScreenWidth = 768,
+      smScreenWidth = 768,
       responsiveNavLocal = $('.local-navigation .nav');
 
   // Set the height of the fixed header
@@ -103,7 +103,7 @@
                 }
               },
               {
-                breakpoint: moScreenWidth,
+                breakpoint: smScreenWidth,
                 settings: {
                   centerMode: true,
                   mobileFirst: true,
