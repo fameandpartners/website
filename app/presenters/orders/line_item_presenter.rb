@@ -1,8 +1,8 @@
 # encoding: utf-8
 
 module Orders
-  class LineItemPresenter < CommonLineItemPresenter
-    class NoShipment
+  class LineItemPresenter < Orders::Shared::LineItemPresenter
+  class NoShipment
       def shipped?
         false
       end

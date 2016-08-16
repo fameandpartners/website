@@ -1,7 +1,7 @@
 module Marketing
-  class LineItemPresenter < CommonLineItemPresenter
+  class LineItemPresenter < Orders::Shared::LineItemPresenter
 
-    def_delegators :@item,
+  def_delegators :@item,
                    :quantity,
                    :making_options_text,
                    :options_text
