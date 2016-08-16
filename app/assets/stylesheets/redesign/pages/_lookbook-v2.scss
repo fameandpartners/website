@@ -21,6 +21,18 @@
       font-style: normal;
     }
 
+    ul.sub-heading {
+      margin: 0;
+      padding: 2rem 0;
+
+      li {
+        padding: 0 0 2rem 0;
+        margin: 0;
+        list-style: none;
+      }
+
+    }
+
   }
 
   .section-intro {
