@@ -4,25 +4,25 @@
 .main-hero-wrap.hero-wrap.copy-left.white-text
   picture.media-wrap.keep-ratio
     .inner-wrap
-      source media='(max-width: 1023px)' srcset='#{image_path("homepage/hero-featured/Aug-3-featured-1-mob.jpg")}'
-      source media='(min-width: 1024px)' srcset='#{image_path("homepage/hero-featured/Aug-3-featured-1-full.jpg")}'
-      img src='#{image_path("homepage/hero-featured/Aug-3-featured-1-full.jpg")}' srcset='
-        #{image_path("homepage/hero-featured/Aug-3-featured-1-mob.jpg")} 1023w,
-        #{image_path("homepage/hero-featured/Aug-3-featured-1-full.jpg")} 1024w'
+      source media='(max-width: 1023px)' srcset='#{image_path("homepage/hero-featured/Aug-11-featured-1-mob.jpg")}'
+      source media='(min-width: 1024px)' srcset='#{image_path("homepage/hero-featured/Aug-11-featured-1-full.jpg")}'
+      img src='#{image_path("homepage/hero-featured/Aug-11-featured-1-mob.jpg")}' srcset='
+        #{image_path("homepage/hero-featured/Aug-11-featured-1-mob.jpg")} 1023w,
+        #{image_path("homepage/hero-featured/Aug-11-featured-1-full.jpg")} 1024w'
 
   .content-wrap
     .container
       .row
-        .col-md-4.col-md-offset-4
-          .copy-wrap.text-center
-            / adding .no-margin here as this heading is longer than the others and does not get properly centred vertically
+        .col-md-4.col-md-offset-5
+          .copy-wrap
+            / adding .no-margin-md here as this heading is longer than the others and does not get properly centred vertically
             h1.heading.no-margin-md
               span Love me, <br>Lights Out
               span.sub-heading
                 | Introducing the Weddings and<br>Parties Collection.
             = link_to weddings_parties_page_path
               .cta-wrapper
-                span.btn-md.btn-featured
+                span.btn-md.btn-featured.white-txt-border
                   | Explore <span class="copy-highlight">WEDDINGS</span>
 
 // Carousel Item 2
