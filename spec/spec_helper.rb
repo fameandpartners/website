@@ -40,6 +40,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 end
 
+# TODO: remove this RSpec monkey patching when updating to latest RSpec. See https://github.com/fameandpartners/website/issues/1912
 RSpec::Rails::ViewRendering::EmptyTemplatePathSetDecorator.class_eval do
   def initialize(original_path_set)
     super()
