@@ -169,8 +169,7 @@
   .nav li {
 
     &.active a,
-    a:hover,
-    a:focus {
+    a:hover {
       background: none;
       border-color: $c-neutral-black;
       color: $c-neutral-black;
