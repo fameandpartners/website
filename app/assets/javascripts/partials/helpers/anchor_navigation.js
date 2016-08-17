@@ -118,15 +118,6 @@
       // Render for the first time (on page load)
       renderSlick();
 
-      // Autoplay if user is 2 sections in
-      responsiveNavLocal.on('afterChange', function(event, slick, currentSlide){
-        if (currentSlide > 1) {
-          //$(this).slick("slickSetOption", "autoplay", true);
-        } else {
-          $(this).slick("slickSetOption", "autoplay", false);
-        }
-      });
-
     }
 
     // Watch scrolling to show/hide floating menu
