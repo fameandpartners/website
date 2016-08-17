@@ -1,20 +1,10 @@
-require 'forwardable'
-
-# TODO This is being used by the /mailers/spree/order_mailer_decorator.rb, but its behaviour is almost the same as the GTM object.
-# TODO Replace it by the GTM object (gtm/line_item.rb)
 module Marketing
-  class LineItemPresenter
-    extend Forwardable
+  class LineItemPresenter < Orders::Shared::LineItemPresenter
 
-    def_delegators :@item,
-                   :quantity
-
-    attr_reader :item, :wrapped_order
-
-    def initialize(item, wrapped_order)
-      @item          = item
-      @wrapped_order = wrapped_order
-    end
+  def_delegators :@item,
+                   :quantity,
+                   :making_options_text,
+                   :options_text
 
     def sku
       variant.sku.blank? ? product.sku : variant.sku
@@ -32,10 +22,12 @@ module Marketing
       item.total.to_f
     end
 
-    private
+    def display_amount
+      item.display_amount.to_s
+    end
 
-    def variant
-      item.variant
+    def variant_display_amount
+      variant.display_amount.to_s
     end
 
     def product
