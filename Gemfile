@@ -8,7 +8,7 @@ gem 'slim'
 gem 'slim-rails'
 gem 'configatron'
 gem 'paperclip'
-gem 'sidekiq', '2.13.0'
+gem 'sidekiq', '4.1.2'
 gem 'timers', '1.1.0'
 gem 'whenever'
 gem 'psych', '~> 2.0.13'
@@ -95,7 +95,7 @@ gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :
 
 # utils
 # replacement for standard library.
-gem 'addressable', require: false
+gem 'addressable'
 
 gem 'rollout'
 

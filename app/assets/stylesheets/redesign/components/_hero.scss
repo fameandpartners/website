@@ -10,10 +10,6 @@
   &.copy-right, &.copy-left {
     margin-bottom: 50px;
 
-    &.no-margin {
-      margin: 0;
-    }
-
     .media-wrap {
       padding-bottom: 0;
     }
@@ -62,8 +58,7 @@
     margin-top: 25px;
   }
 
-
-// START - desktop
+  // START - desktop
   @media (min-width: $bootstrap-md-width) {
 
     h1 > span:first-child {
@@ -125,11 +120,12 @@
 
     }
 
-    .white-text {
+    &.white-text {
 
       .heading,
       .sub-heading,
       p,
+      a,
       span {
         color: $c-neutral-white;
       }
@@ -137,7 +133,6 @@
     }
 
   }
-
   // END - desktop
 
   @media (max-width: $bootstrap-md-width - 1px) {

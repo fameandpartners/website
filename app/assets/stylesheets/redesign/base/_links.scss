@@ -13,6 +13,10 @@ a {
 
 }
 
+.link-underline {
+  border-bottom: 1px solid $c-neutral-6;
+}
+
 .cta-link {
   font-family: $font-heading;
   font-style: italic;

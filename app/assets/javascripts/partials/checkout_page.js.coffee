@@ -8,6 +8,8 @@ page.initCheckoutEditPage = () ->
         $('.auth-alert').hide()
       )
 
+      $('.selectbox').outerWidth("100%")
+
       @ship_to_different_address = $("input[name='ship_to_address']:first").prop("checked") == false
       $("input[name='ship_to_address']:first").click =>
         @ship_to_different_address = false

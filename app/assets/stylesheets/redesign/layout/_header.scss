@@ -3,6 +3,15 @@
 header.main {
   $logo-width: 265px;
 
+  #locale-selector-mobile-container {
+    position: relative;
+
+    ul {
+      z-index: 2;
+    }
+
+  }
+
   .banner-wrap {
     width: 100%;
     padding: 25px 0;
@@ -31,7 +40,7 @@ header.main {
     .logo{
 
       img {
-        width: $logo-width;
+        max-width: $logo-width;
       }
 
     }

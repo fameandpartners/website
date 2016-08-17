@@ -42,7 +42,16 @@ This will execute the deployment process straight into the staging machine, only
 
 ## Production
 
-Run `sentinel deploy production`
+### Local Machine
+
+Merge stable with master, tag and push it
+
+1. Checkout stable (`git checkout stable`)
+1. Merge stable with master (`git merge master --ff-only`)
+1. Tag it (`` git tag `date +v%Y-%m-%d-T%H%M%S%z` ``)
+1. Push stable with tags to origin (`git push stable --tags`)
+
+After `stable` branch is updated, run `sentinel deploy production`.
 
 # LEGACY
 

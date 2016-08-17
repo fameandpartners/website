@@ -89,7 +89,7 @@ h2.checkout-section-title
       select id=(field_id) name="#{form.object_name}[state_id]" class="form-control form-control-md selectbox" disabled=(!have_states)
         option value='' data-country=''
         - states.each do |state|
-          option selected=(address.state_id == state.id) style=(state.country_id == address.country_id ? '' : 'display: none;') value=(state.id) data-country=(state.country_id) = state.name
+          option selected=(address.state_id == state.id) style=(state.country_id == address.country_id ? 'display: block;' : 'display: none;') value=(state.id) data-country=(state.country_id) = state.name
 
     = form.text_field(:state_name,
                       :class => !have_states ? 'required  form-control form-control-md' : 'hidden  form-control form-control-md',
