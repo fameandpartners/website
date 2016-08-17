@@ -357,6 +357,11 @@ $product-color-wine:            #831c2e;
 .color-watermelon              { background-color: $product-color-watermelon; }
 .color-white-and-mint          { @include split-color-selector($product-color-white, $product-color-mint); }
 .color-wine                    { background-color: $product-color-wine; }
+.color-spot                    { @include image-color-selector('Spot.png'); }
+.color-rosewater-floral        { @include image-color-selector('RosewaterFloral.png'); }
+.color-crosswalk               { @include image-color-selector('Crosswalk.png'); }
+.color-looking-glass           { @include image-color-selector('LookingGlass.png'); }
+.color-ornate-midnight-floral  { @include image-color-selector('OrnateMidinightFloral.png'); }
 
 .color-white, .color-optic-white {
   background-color: $product-color-white;
