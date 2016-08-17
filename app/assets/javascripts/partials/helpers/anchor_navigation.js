@@ -48,7 +48,7 @@
 
     // If the URL contains an anchor and a local navigation
     if ($(".local-navigation .nav").length) {
-      $('.js-hashlink').css({'height': (offsetHeight-offsetTargetTopPadding)+'px', 'margin-top': -(offsetHeight-offsetTargetTopPadding)+'px'});
+      $('.js-hashlink').css({'height': (offsetTargetTopPadding*2)+'px', 'margin-top': -(offsetTargetTopPadding*2)+'px'});
     } else {
     // If the URL contains an anchor but not a local navigation
       $('.js-hashlink').css({'height': offsetHeight+'px', 'margin-top': -offsetHeight+'px'});
