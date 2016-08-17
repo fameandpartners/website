@@ -159,7 +159,7 @@
           var windowPosition = $(window).scrollTop(),
               target_local_navigation = $(".local-navigation-wrapper");
 
-          if (windowPosition+sitewideHeaderHeight >= target_local_navigation.offset().top+navLocalMenuHeight){
+          if (windowPosition+sitewideHeaderHeight >= target_local_navigation.offset().top - offsetTargetTopPadding - (offsetTargetTopPadding/2)){
 
             // Attach the local navigation to the fixed header
             if (!$('.js-float-menu-on-scroll.fixed-nav').length) {
