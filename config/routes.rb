@@ -188,6 +188,9 @@ FameAndPartners::Application.routes.draw do
     # Lookbook v2.0 landing pages
     get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
 
+    # IT Girl - Landing page
+    get '/it-girl' => 'products/collections#show', :permalink => 'it-girl', :as => :it_girl_landing_page
+
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
@@ -238,11 +241,19 @@ FameAndPartners::Application.routes.draw do
 
       get '/outerwear-:product_slug', to: 'products/details#show', as: :outerwear_details
 
-      #roots categories
+      # Legacy routes and its redirections
       get '/style', to: redirect('/dresses')
       get '/style/:taxon', to: redirect('/dresses/%{taxon}')
       get '/event', to: redirect('/dresses')
       get '/event/:taxon', to: redirect('/dresses/%{taxon}')
+
+      get '/wedding', to: redirect('/dresses/bridal')
+      get '/short', to: redirect('/dresses/mini')
+
+      get '/blue', to: redirect('/dresses/blue-purple')
+      get '/white', to: redirect('/dresses/white-ivory')
+
+      # Current collections
       get '/sale-(:sale)' => 'products/collections#show', as: 'dresses_on_sale'
       get '/*permalink' => 'products/collections#show', as: 'taxon'
     end

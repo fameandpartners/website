@@ -1,0 +1,240 @@
+.return-page {
+
+  h1 {
+    margin: 40px 0;
+    text-transform: none;
+  }
+
+  p {
+    font-weight: normal;
+  }
+
+  a {
+    color: $c-neutral-black;
+  }
+
+  .order-number,
+  .order-date {
+    margin: 5px 0;
+    color: $c-neutral-black;
+    text-transform: uppercase;
+    word-spacing: 0.2rem;
+    letter-spacing: 0.1rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+    font-family: $font-family-secondary;
+  }
+
+  .inner-wrapper {
+    @extend %cfix;
+  }
+
+  .dress-wrapper {
+    font-family: $font-heading;
+    padding: 30px 0 40px;
+    margin-bottom: 40px;
+    border-bottom: solid $c-neutral-9 1px;
+
+    .item-img {
+      padding-left: 0;
+    }
+
+    .ordered-item-image {
+      width: auto;
+    }
+
+    .item-name {
+      font-size: 3.8rem;
+      font-weight: 300;
+      line-height: 3.8rem;
+      margin: 30px 0 20px;
+    }
+
+    .quantity {
+      font-size: 3.6rem;
+    }
+
+    .size,
+    .color {
+      font-size: 2.3rem;
+      font-weight: 300;
+      line-height: 2.4rem;
+      margin-bottom: 0;
+    }
+
+    .price {
+      font-family: $font-family-secondary;
+      font-weight: 600;
+      margin-top: 40px;
+      text-align: left;
+    }
+
+  }
+
+  label {
+    margin-bottom: 10px;
+  }
+
+  .btn.submit {
+    font-weight: normal;
+    font-size: 1.2rem;
+    padding: 0;
+    width: 150px;
+    height: 35px;
+    float: right;
+    margin: 20px 0;
+  }
+
+  aside {
+    font-family: $font-heading;
+
+    h2 {
+      margin-top: 0;
+    }
+
+    p {
+      font-size: 2rem;
+      font-weight: 300;
+      font-family: $font-heading;
+    }
+  }
+}
+
+//TODO Return Page Success still in the old design
+.page-returns-success {
+
+  p {
+    font-family: $font-heading;
+    font-weight: lighter;
+  }
+
+  h1 {
+    text-transform: none;
+    margin: 0;
+  }
+
+  .page-title {
+    margin-top: 40px;
+    background: none;
+  }
+
+  .secondary-title h2 {
+    font-weight: bold;
+    font-size: 1.6rem;
+    font-family: $font-family-secondary;
+  }
+
+  .steps .item {
+    margin-top: 30px;
+  }
+
+  .step-summary-wrapper {
+    padding-bottom: 20px;
+  }
+
+  .step-summary {
+    background: $c-neutral-black;
+    color: $c-neutral-white;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+
+    p {
+      color: $c-neutral-white;
+    }
+
+    h3 {
+      font-weight: bold;
+      font-size: 1.6rem;
+      font-family: $font-family-secondary;
+      letter-spacing: -0.07rem;
+    }
+
+  }
+
+  .step-number {
+    color: $c-neutral-6;
+    font-style: italic;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  .step-description {
+    border:1px solid $c-classic-modal-bg;
+    background-color: $c-neutral-white;
+    padding: 20px 30px;
+    margin-left: -15px;
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+
+    p {
+      margin: 0;
+      &.normal-paragraph {
+        margin-top: 15px;
+      }
+    }
+
+    .highlight {
+      font-weight: normal;
+    }
+
+    .highlight-alt {
+      font-weight: normal;
+      font-style: italic;
+    }
+
+    a.item-link {
+      color: $c-neutral-black;
+      text-decoration: underline;
+      text-transform: uppercase;
+      margin-top: 15px;
+      display: block;
+    }
+
+  }
+
+  .address {
+    padding-bottom: 20px;
+
+    .country {
+      text-transform: uppercase;
+    }
+
+  }
+
+  .notes {
+    margin-top: 20px;
+    font-size: 1.4rem;
+
+    p {
+      color: $c-neutral-10;
+      margin: 0;
+    }
+
+  }
+
+}
+
+// START - mobile
+@media (max-width: $bootstrap-md-width - 1px) {
+  .page-returns-success {
+
+    .page-title,
+    .secondary-title {
+      text-align: center;
+    }
+
+    .page-content .steps .item {
+      margin-bottom: 30px;
+
+      .step-description {
+        margin-left: 15px;
+        margin-right: 15px;
+      }
+
+    }
+
+  }
+
+}

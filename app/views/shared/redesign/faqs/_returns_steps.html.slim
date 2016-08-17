@@ -1,10 +1,10 @@
-.panel.content-collapse-expand.panel-default
+.panel.content-collapse-expand.panel-default#collapse-returns-steps
   .panel-heading role="tab"
-    a.panel-title.faq-title.collapsed href="javascript:;" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+    a.panel-title.faq-title.collapsed href="#collapse-returns-steps" role="button" data-parent=".panel-group" data-toggle="collapse-next"
       | How do I return an item?
       span.btn-open-close
 
-  #collapse-returns-steps.panel-collapse.collapse role="tabpanel"
+  .panel-collapse.collapse role="tabpanel"
     .panel-body
       ol
         li
@@ -14,7 +14,7 @@
           | Then, please print your Return Confirmation email, which you will receive after you submit your Return Request, and include in your package.
 
         li
-          | Lastly, contact our customer service with your order number <a href="mailto:team@fameandpartners.com?subject=Returning Order Address - ORDER NUMBER">(team@fameandpartners.com)</a> to know which address you should ship your returning order
+          | Lastly, contact our customer service with your order number #{link_to "(team@fameandpartners.com)", "mailto:team@fameandpartners.com?subject=Returning Order Address - ORDER NUMBER"} to know which address you should ship your returning order
 
         /li Lastly, please ship your returning order, along with the completed Return/Exchange Form and all receipts, to the following address:
         /<br>

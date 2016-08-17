@@ -15,8 +15,8 @@
         .panel-aside
           h3.heading WEDDING DETAILS
           - if @resource.event_date?
-            p 
-              'Wedding Date: 
+            p
+              'Wedding Date:
               = @resource.event_date
           p
             /= link_to("Edit", edit_moodboard_path(@resource))
@@ -31,16 +31,3 @@
           .panel-aside.panel-swatches
             h3.heading SHOP BY SWATCHES
             = render 'color_swatches', colors: @resource.items.active.map(&:color)
-
-        .panel-aside
-          h3.heading CONCIERGE SERVICES
-          p For $49 we will select the dresses, contact your maids and coordinate the bridal party story. Plus, the $49 comes off the cost of your dresses!
-          = link_to 'Book now', contact_path(:selected_option => 'Book a Concierge Services')
-
-        .panel-aside
-          .heading FREE HONEYMOON DRESS
-          p When you purchase 5 or more dresses, we'll give you a <b>free honeymoon dress</b> to help celebrate!
-          p
-            = link_to 'Get in contact', contact_path(:selected_option => 'Book a Style Consultation')
-            | &nbsp;with our customer service team to co-ordinate the free honeymoon dress.*
-          p = link_to 'Terms and conditions' , terms_path
