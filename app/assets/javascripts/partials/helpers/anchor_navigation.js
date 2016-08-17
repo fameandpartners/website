@@ -254,7 +254,7 @@
         // This prevents the anchor target to be covered by our fixed header
         if( !$('.js-float-menu-on-scroll.fixed-nav').length ) {
           if ($(this).closest(".local-navigation-wrapper").length) {
-            offsetClickFromLocalNav = navLocalMenuHeight+offsetTargetTopPadding;
+            offsetClickFromLocalNav = (offsetTargetTopPadding*2);
           }
         } else {
           offsetClickFromLocalNav = offsetTargetTopPadding;
