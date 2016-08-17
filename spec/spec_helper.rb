@@ -39,3 +39,14 @@ RSpec.configure do |config|
   # Use DatabaseCleaner instead of ActiveRecord transactional
   config.use_transactional_fixtures = false
 end
+
+RSpec::Rails::ViewRendering::EmptyTemplatePathSetDecorator.class_eval do
+  def initialize(original_path_set)
+    super()
+    @original_path_set = original_path_set
+  end
+
+  def find_all_anywhere(*args)
+    find_all(args)
+  end
+end
