@@ -50,12 +50,14 @@ module Search
       show_outerwear    = !!options[:show_outerwear]
       exclude_taxon_ids = options[:exclude_taxon_ids] if query_string.blank?
 
-      product_ordering = self.product_orderings.fetch(order) do
+      product_orderings = self.product_orderings(currency: currency)
+
+      product_ordering = product_orderings.fetch(order) do
         if query_string.present?
           # Do not apply ordering for searches, let ES order by term relevance.
-          self.product_orderings['native']
+          product_orderings['native']
         else
-          self.product_orderings['newest']
+          product_orderings['newest']
         end
       end
 
@@ -170,34 +172,60 @@ module Search
             })
           end
 
-          if product_ordering.behaviour
-            by *product_ordering.behaviour
+          if product_ordering[:behaviour].present?
+            by *product_ordering[:behaviour]
           end
         end
       end
     end
 
-    ProductOrdering = Struct.new(:name, :description, :behaviour) do
-      def self.all
-        [
-          self.new('price_high',     "Price: High to Low",            ['product.price', 'desc']),
-          self.new('price_low',      "Price: Low to High",            ['product.price', 'asc']),
-          self.new('newest',         "Newest First",                  ['product.created_at', 'desc']),
-          self.new('oldest',         "Oldest First",                  ['product.created_at', 'asc']),
-          self.new('fast_delivery',  "Show Fast Delivery First",      ['product.fast_delivery', 'desc']),
-          self.new('best_sellers',   "Best Sellers",                  ['product.total_sales', 'desc']),
-          self.new('alpha_asc',      "Name: A-Z",                     ['product.name', 'asc']),
-          self.new('alpha_desc',     "Name: Z-A",                     ['product.name', 'desc']),
-          self.new('most_views',     "Most Viewed First",             ['product.statistics.total_views', 'desc']),
-          self.new('most_carts',     "Most Added to Cart First",      ['product.statistics.total_carts', 'desc']),
-          self.new('most_wishlists', "Most Added to Wishlists First", ['product.statistics.total_wishlists', 'desc']),
-          self.new('native',         "Do Not Apply Ordering",         nil)
-        ]
+    class ProductOrdering
+      attr_accessor :all, :currency
+
+      def initialize(currency: nil)
+        self.currency = currency
+        self.all = {}
+        add_orders
+      end
+
+      def add(name, description, behaviour)
+        all.update(name => {
+          description: description,
+          behaviour: behaviour
+        })
+      end
+
+      def all_as_collection
+        all.map { |key, value| [key, value[:description]]  }
+      end
+
+      private
+
+      def add_orders
+        price_behaviour_field = \
+          if currency.present?
+            "prices.#{currency}"
+          else
+            'product.price'
+          end
+
+        self.add('price_high',     "Price: High to Low",            [price_behaviour_field, 'desc'])
+        self.add('price_low',      "Price: Low to High",            [price_behaviour_field, 'asc'])
+        self.add('newest',         "Newest First",                  ['product.created_at', 'desc'])
+        self.add('oldest',         "Oldest First",                  ['product.created_at', 'asc'])
+        self.add('fast_delivery',  "Show Fast Delivery First",      ['product.fast_delivery', 'desc'])
+        self.add('best_sellers',   "Best Sellers",                  ['product.total_sales', 'desc'])
+        self.add('alpha_asc',      "Name: A-Z",                     ['product.name', 'asc'])
+        self.add('alpha_desc',     "Name: Z-A",                     ['product.name', 'desc'])
+        self.add('most_views',     "Most Viewed First",             ['product.statistics.total_views', 'desc'])
+        self.add('most_carts',     "Most Added to Cart First",      ['product.statistics.total_carts', 'desc'])
+        self.add('most_wishlists', "Most Added to Wishlists First", ['product.statistics.total_wishlists', 'desc'])
+        self.add('native',         "Do Not Apply Ordering",         nil)
       end
     end
 
-    def self.product_orderings
-      @product_orderings ||= ProductOrdering.all.inject({}) {|memo, obj| memo[obj.name] = obj; memo }
+    def self.product_orderings(currency: nil)
+      ProductOrdering.new(currency: currency).all
     end
   end
 end
