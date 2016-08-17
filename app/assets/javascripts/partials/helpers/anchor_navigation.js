@@ -101,16 +101,6 @@
               {
                 breakpoint: mdScreenWidth,
                 settings: {
-                  centerMode: false,
-                  mobileFirst: true,
-                  variableWidth: true,
-                  slidesToShow: 3
-                }
-              },
-              {
-                breakpoint: smScreenWidth,
-                settings: {
-                  centerMode: true,
                   mobileFirst: true,
                   variableWidth: true,
                   slidesToShow: 3
