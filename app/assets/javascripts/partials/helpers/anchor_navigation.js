@@ -65,7 +65,7 @@
       $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (initialoffsetTargetTopPadding) })
     } else {
       //Since this is not a mobile device then we have to consider the fixed header in the top offset
-      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (offsetHeight) })
+      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (((offsetHeight)/2)-offsetTargetTopPadding) })
     }
 
     // Floating menu as a responsive Carousel
