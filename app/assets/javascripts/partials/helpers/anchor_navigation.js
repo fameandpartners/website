@@ -18,6 +18,8 @@
       localNavTopOffset = 0,
       lastNavLocalItem = $('.js-float-menu-on-scroll .nav a:last').attr('href'), // Get the last section ID
       offsetTargetTopPadding = 70, // The desired distance between the target and the page header
+      mobileTargetOffset = offsetTargetTopPadding/2,
+      desktopTargetOffset = offsetTargetTopPadding*2,
       initialoffsetTargetTopPadding = 570, //the nav does not update for each section until you scroll through half of the category.
       mdScreenWidth = 992,
       smScreenWidth = 768,
@@ -48,9 +50,13 @@
 
     // If the URL contains an anchor and a local navigation
     if ($(".local-navigation .nav").length) {
-      $('.js-hashlink').css({'height': (offsetTargetTopPadding*2)+'px', 'margin-top': -(offsetTargetTopPadding*2)+'px'});
+      if ( $(window).width() < mdScreenWidth ) {
+        $('.js-hashlink').css({'height': '0px', 'margin-bottom': -(mobileTargetOffset)+'px'});
+      } else {
+        $('.js-hashlink').css({'height': (desktopTargetOffset)+'px', 'margin-top': -(desktopTargetOffset)+'px'});
+      }
     } else {
-    // If the URL contains an anchor but not a local navigation
+      // If the URL contains an anchor but not a local navigation
       $('.js-hashlink').css({'height': offsetHeight+'px', 'margin-top': -offsetHeight+'px'});
     }
     window.location.hash = hash_var;
@@ -62,10 +68,10 @@
     // Add scrollspy trigger
     // If this is a mobile device we don't worry about the fixed header's height for the top offset
     if ( $(window).width() < mdScreenWidth ) {
-      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (initialoffsetTargetTopPadding) })
+      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (mobileTargetOffset) })
     } else {
       //Since this is not a mobile device then we have to consider the fixed header in the top offset
-      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (((offsetHeight)/2)-offsetTargetTopPadding) })
+      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (desktopTargetOffset+offsetTargetTopPadding) })
     }
 
     // Floating menu as a responsive Carousel
@@ -158,7 +164,7 @@
           var windowPosition = $(window).scrollTop(),
               target_local_navigation = $(".local-navigation-wrapper");
 
-          if (windowPosition+sitewideHeaderHeight >= target_local_navigation.offset().top - offsetTargetTopPadding - (offsetTargetTopPadding/2)){
+          if (windowPosition+sitewideHeaderHeight >= target_local_navigation.offset().top - offsetTargetTopPadding - (mobileTargetOffset)){
 
             // Attach the local navigation to the fixed header
             if (!$('.js-float-menu-on-scroll.fixed-nav').length) {
@@ -246,18 +252,30 @@
         // Reset our on-page-load anchor target helper
         if ($('.js-hashlink').length)
           if ($(".local-navigation .nav").length) {
-            $('.js-hashlink').css({'height': '0px', 'margin-top': offsetTargetTopPadding+'px'});
+            if ( $(window).width() < mdScreenWidth ) {
+              $('.js-hashlink').css({'height': '0px', 'margin-bottom': -(mobileTargetOffset)+'px'});
+            } else {
+              $('.js-hashlink').css({'height': '0px', 'margin-top': offsetTargetTopPadding+'px'});
+            }
           } else {
             $('.js-hashlink').css({'height': '0px', 'margin-top': '0px'});
           }
 
         // This prevents the anchor target to be covered by our fixed header
-        if( !$('.js-float-menu-on-scroll.fixed-nav').length ) {
+        if( $('.js-float-menu-on-scroll.fixed-nav').length ) {
           if ($(this).closest(".local-navigation-wrapper").length) {
-            offsetClickFromLocalNav = (offsetTargetTopPadding*2);
+            offsetClickFromLocalNav = (offsetTargetTopPadding);
+          }
+        } else if( $('.js-float-menu-on-scroll.fixed-nav-mobile').length ) {
+          if ($(this).closest(".local-navigation-wrapper").length) {
+            offsetClickFromLocalNav = 0;
           }
         } else {
-          offsetClickFromLocalNav = offsetTargetTopPadding;
+          if ($(this).closest(".local-navigation-wrapper").length) {
+            offsetClickFromLocalNav = (desktopTargetOffset);
+          } else {
+            offsetClickFromLocalNav = (offsetTargetTopPadding);
+          }
         }
 
         // Define the top offset for our anchor navigation, based on screen size
