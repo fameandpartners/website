@@ -20,9 +20,7 @@
       offsetTargetTopPadding = 70, // The desired distance between the target and the page header
       mobileTargetOffset = offsetTargetTopPadding/2,
       desktopTargetOffset = offsetTargetTopPadding*2,
-      initialoffsetTargetTopPadding = 570, //the nav does not update for each section until you scroll through half of the category.
       mdScreenWidth = 992,
-      smScreenWidth = 768,
       responsiveNavLocal = $('.local-navigation .nav');
 
   // Set the height of the fixed header
@@ -229,12 +227,8 @@
       if (target.length) {
         // Get some useful data after the click interaction
         var offsetClickFromLocalNav = 0,
-            navLocalMenuHeight = 0,
             sitewideHeaderHeight = 0,
             offsetNavHeight = 0;
-
-        if ($(".js-float-menu-on-scroll").length)
-          navLocalMenuHeight = $(".js-float-menu-on-scroll").delay(300).outerHeight();
 
         if ($("#fixed-header").length)
           sitewideHeaderHeight = $("#fixed-header").delay(300).outerHeight();
