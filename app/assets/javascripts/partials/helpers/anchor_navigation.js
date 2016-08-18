@@ -70,17 +70,17 @@
     // Add scrollspy trigger
     // If this is a mobile device we don't worry about the fixed header's height for the top offset
     if ( $(window).width() < mdScreenWidth ) {
-      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (mobileTargetOffset) })
+      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (mobileTargetOffset) });
     } else {
       //Since this is not a mobile device then we have to consider the fixed header in the top offset
-      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (desktopTargetOffset+offsetTargetPadding) })
+      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (desktopTargetOffset+offsetTargetPadding) });
     }
 
     // Floating menu as a responsive Carousel
     if (responsiveNavLocal.length) {
       var renderSlick,
           slickAnchorId = window.location.hash,
-          slickTargetPosition
+          slickTargetPosition;
 
       renderSlick = function () {
         if (!responsiveNavLocal.hasClass('slick-initialized')) {
