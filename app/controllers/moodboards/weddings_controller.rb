@@ -1,7 +1,7 @@
 module Moodboards
   class WeddingsController < ApplicationController
 
-    layout false
+    before_filter :authenticate_spree_user!
 
     private def search_scope
       spree_current_user.moodboards.weddings
@@ -12,11 +12,7 @@ module Moodboards
     end
 
     private def default_wedding_moodboard
-      default_name = if spree_current_user.first_name.present?
-                       wedding_name(spree_current_user.first_name)
-                     else
-                       "Wedding"
-                     end
+      default_name = wedding_name(spree_current_user.first_name)
 
       moodboard = search_scope.first
 
