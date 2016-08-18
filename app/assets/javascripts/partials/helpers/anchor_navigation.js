@@ -29,11 +29,11 @@
 
   // Set the height of the fixed header
   if ($("#fixed-header").length)
-    sitewideHeaderHeight = $("#fixed-header").delay(300).outerHeight();
+    sitewideHeaderHeight = $("#fixed-header").outerHeight();
 
   // Set the height and offset of the local navigation
   if ($(".local-navigation-wrapper").length) {
-    navLocalMenuHeight = $(".local-navigation-wrapper").delay(300).outerHeight();
+    navLocalMenuHeight = $(".local-navigation-wrapper").outerHeight();
     localNavTopOffset = $(".local-navigation-wrapper").offset().top; // Desktop only
   }
 
@@ -226,7 +226,7 @@
             offsetNavHeight = 0;
 
         if ($("#fixed-header").length)
-          sitewideHeaderHeight = $("#fixed-header").delay(300).outerHeight();
+          sitewideHeaderHeight = $("#fixed-header").outerHeight();
 
         // Reset our on-page-load anchor target helper
         if ($('.js-hashlink').length)
