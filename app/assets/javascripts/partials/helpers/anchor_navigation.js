@@ -130,7 +130,7 @@
         if( $(window).width() < mdScreenWidth ) {
 
           $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile');
-          $('.js-footer').css({'padding-bottom': ''+navLocalMenuHeight*1.1+'px'}); //Add an extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
+          $('.js-footer').css({'padding-bottom': navLocalMenuHeight*1.1+'px'}); //Add an extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
 
         } else {
 
@@ -148,7 +148,7 @@
 
             // Attach the local navigation to the fixed header
             if (!$('.js-float-menu-on-scroll.fixed-nav').length) {
-              $('.js-float-menu-on-scroll').addClass('fixed-nav').css({'top': ''+sitewideHeaderHeight+'px'});
+              $('.js-float-menu-on-scroll').addClass('fixed-nav').css({'top': sitewideHeaderHeight+'px'});
             }
 
           } else {
@@ -183,7 +183,7 @@
         if ( $(window).width() < mdScreenWidth ) {
           $('.js-float-menu-on-scroll').removeClass('fixed-nav').css({'top': ''});
           $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile');
-          $('.js-footer').css({'padding-bottom': ''+navLocalMenuHeight*1.1+'px'}); //Add extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
+          $('.js-footer').css({'padding-bottom': navLocalMenuHeight*1.1+'px'}); //Add extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
         }
 
         // Go to menu item when resize is finished
