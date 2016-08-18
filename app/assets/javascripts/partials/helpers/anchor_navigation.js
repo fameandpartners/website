@@ -6,9 +6,15 @@
     var responsiveNavLocal,
         slick_target_position;
     // Go to target item in local navigation, according to the current anchor
-    if (responsiveNavLocal.hasClass('slick-initialized'))
+    if (responsiveNavLocal.hasClass('slick-initialized')) {
       slick_target_position = $('.local-navigation .nav a').index($('[href="'+window.location.hash+'"]'));
       responsiveNavLocal.slick( "slickGoTo", parseInt( slick_target_position ), false);
+
+      //remove all active class
+      responsiveNavLocal.find('.slick-slide.active').removeClass('active');
+      //set active class for current navigation item
+      responsiveNavLocal.find('.slick-slide[data-slick-index='+slick_target_position+']').addClass('active');
+    }
 
   }
 
@@ -88,7 +94,7 @@
             dots: false,
             edgeFriction: 10,
             infinite: false,
-            focusOnSelect: true,
+            focusOnSelect: false,
             centerMode: false,
             mobileFirst: false,
             variableWidth: false,
