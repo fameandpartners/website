@@ -1,169 +1,33 @@
 /* [Tabs]
 -------------------------------------------------------*/
-.tabs {
-  position: relative;
-  background: $c-neutral-white;
-  @extend %cfix;
+.tabs-horizontal {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  color: $c-neutral-8;
 
-  &.vertical {
-    $tab-nav-height: 120px;
+  li {
+    margin: 0;
+    padding: 0 0 3px 0;
+    border: 0;
+    border-bottom: solid $c-neutral-8 1px;
 
-    > ul {
-      position: relative;
-      float: left;
-      width: 30%;
+    a {
       margin: 0;
       padding: 0;
-      list-style: none;
-      z-index: 2;
-
-      li {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: $tab-nav-height;
-        border-bottom: solid $c-neutral-5 1px;
-
-        &:first-child {
-          border-top: solid $c-neutral-5 1px;
-        }
-
-      }
-
-      .inner-wrap {
-        display: table;
-        width: 100%;
-        height: 100%;
-      }
-
-      a {
-        display: table-cell;
-        width: 100%;
-        height: 100%;
-        padding: 0 30px;
-        vertical-align: middle;
-        font-size: 0.750em;
-        text-transform: uppercase;
-        color: $c-neutral-black;
-        border-collapse: collapse;
-      }
-
-      li.active {
-        background: $c-neutral-black;
-        border-color: $c-neutral-black;
-
-        &:after {
-          content: '';
-          display: block;
-          position: absolute;
-          top: 0;
-          left: 100%;
-          width: 0;
-          height: 0;
-          border-style: solid;
-          border-width: ($tab-nav-height / 2) 0 ($tab-nav-height / 2) ($tab-nav-height / 5);
-          border-color: transparent transparent transparent $c-neutral-black;
-        }
-
-        a {
-          color: $c-neutral-white;
-        }
-
-      }
-
+      font-family: $font-family-secondary;
+      font-size: 1.25em;
+      color: inherit;
+      border: 0;
     }
 
-    .tab-wrap {
-      position: relative;
-      float: left;
-      width: 70%;
-      min-height: 100px;
-      z-index: 1;
-    }
+  }
 
-    .tab {
-      position: absolute;
-      display: block;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      opacity: 0;
-      visibility: hidden;
-
-      img {
-        display: block;
-        width: 100%;
-        height: auto;
-      }
-
-      &.active {
-        opacity: 1;
-        visibility: visible;
-        @include transition(opacity linear .6s);
-      }
-
-      @media(min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width){
-        img{
-          width: auto;
-          height: 100%;
-          margin-left: -60px;
-        }
-      }
-
-    }
-
-    .navigator {
-      $btn-size: 30px;
-      position: absolute;
-      width: $btn-size;
-      height: $btn-size;
-      top: 50%;
-      margin-top: -($btn-size / 2);
-      display: none;
-      text-align: center;
-      border: solid $c-neutral-white 1px;
-
-      &.btn-prev {
-        left: 15px;
-      }
-
-      &.btn-next {
-        right: 15px;
-      }
-
-      .icon:before {
-        font-size: 14px;
-        line-height: $btn-size;
-        color: $c-neutral-white;
-      }
-
-    }
-
-    // START - mobile
-    @include mobile {
-
-      & {
-
-        .tab-wrap {
-          padding-bottom: 45px;
-        }
-
-        > ul {
-          display: none;
-          background: $c-neutral-2;
-        }
-
-        .navigator {
-          display: block;
-        }
-
-      }
-
-    }
-    // END - mobile
-
+  .active {
+    font-weight: bold;
+    color: $c-neutral-black;
+    border-color: $c-neutral-black;
   }
 
 }

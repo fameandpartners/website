@@ -1,35 +1,90 @@
 /* [Moodboard Edit]
 -------------------------------------------------------*/
-.moodboard-v2-edit {
-  margin-top: 40px;
+.moodboard-edit {
 
-  .title-line-on-sides {
-    margin: 0;
+  .hero-wrap {
+    position: relative;
+    color: $c-neutral-white;
+
+    .media-wrap {
+      min-height: 50px;
+      padding-bottom: 24%;
+      overflow: hidden;
+    }
+
   }
 
-  .media-wrap {
-    margin-top: -14px;
-  }
+  .title-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 
-  form {
-    margin-top: 30px;
-    @extend %cfix;
-  }
+    .inner-wrap {
+      display: table;
+      width: 100%;
+      height: 100%;
+    }
 
-  @media (max-width: $bootstrap-md-width - 1px) {
+    .title {
+      display: table-cell;
+      vertical-align: middle;
+      margin: 0;
 
-    & {
-
-      .media-wrap {
-        margin-top: 20px;
-      }
-
-      .btn {
-        width: 100%;
+      span {
+        display: block;
+        font-size: 2.4rem;
       }
 
     }
 
   }
+
+  .section-full {
+    margin-top: 0;
+
+    .heading-overlay {
+      top: -14px;
+      bottom: 0;
+    }
+
+    .title:first-child {
+      margin-top: 50px;
+    }
+
+    .title:last-child {
+      margin-bottom: 30px;
+    }
+
+  }
+
+  .tabs-horizontal {
+    padding-top: 40px;
+  }
+
+  .btn-wrap {
+    margin-top: 40px;
+  }
+
+  // START - Mobile Specific Styling
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .title-wrap .title {
+      font-size: 3.2rem;
+
+      span {
+        display: none;
+      }
+
+    }
+
+  }
+  // END - Mobile Specific Styling
+
+  // START - Desktop Specific Styling
+  @media (min-width: $bootstrap-md-width) {
+  }
+  // END - Desktop Specific Styling
 
 }
