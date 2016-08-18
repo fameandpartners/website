@@ -93,5 +93,6 @@ javascript:
         .row
           .col-sm-12.text-center
             = f.submit 'Complete Order and Send for Manufacturing', class: 'btn btn-primary'
-            = f.submit 'Send Payment Request to Customer', class: 'btn btn-primary hidden', disabled: true
-
+            |&nbsp;
+            |&nbsp;
+            = link_to 'Cancel', manual_orders_path, class: 'btn btn-white'
