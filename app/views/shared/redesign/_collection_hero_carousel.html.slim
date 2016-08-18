@@ -1,14 +1,13 @@
 // HOMEPAGE HERO CAROUSEL
 
 // Carousel Item 1
-.main-hero-wrap.hero-wrap.copy-left
-  = link_to it_girl_landing_page_path
-    picture.media-wrap
-      source media='(max-width: 991px)' srcset='#{image_path('homepage/hero-featured/Aug-17-featured-1-mob.jpg')}'
-      source media='(min-width: 992px)' srcset='#{image_path('homepage/hero-featured/Aug-17-featured-1-full.jpg')}'
-      img src='#{image_path('homepage/hero-featured/Aug-17-featured-1-mob.jpg')}' srcset='
-        #{image_path("homepage/hero-featured/Aug-17-featured-1-mob.jpg")} 991w,
-        #{image_path("homepage/hero-featured/Aug-17-featured-1-full.jpg")} 992w'
+= link_to it_girl_landing_page_path, class:'main-hero-wrap hero-wrap copy-left'
+  picture.media-wrap
+    source media='(max-width: 991px)' srcset='#{image_path('homepage/hero-featured/Aug-17-featured-1-mob.jpg')}'
+    source media='(min-width: 992px)' srcset='#{image_path('homepage/hero-featured/Aug-17-featured-1-full.jpg')}'
+    img src='#{image_path('homepage/hero-featured/Aug-17-featured-1-mob.jpg')}' srcset='
+      #{image_path("homepage/hero-featured/Aug-17-featured-1-mob.jpg")} 991w,
+      #{image_path("homepage/hero-featured/Aug-17-featured-1-full.jpg")} 992w'
 
 
   .content-wrap
@@ -20,20 +19,18 @@
               span The It Girl Collection
               span.sub-heading
                 | Modern Classics, made your way
-            = link_to it_girl_landing_page_path
-              .cta-wrapper
-                span.btn-md.btn-featured
-                  | Start <span class="copy-highlight">CUSTOMIZING</span>
+            .cta-wrapper
+              span.btn-md.btn-featured
+                | Start <span class="copy-highlight">CUSTOMIZING</span>
 
 // Carousel Item 2
-.main-hero-wrap.hero-wrap.copy-left.white-text
-  = link_to weddings_parties_page_path
-    picture.media-wrap
-      source media='(max-width: 991px)' srcset='#{image_path('homepage/hero-featured/Aug-11-featured-1-mob.jpg')}'
-      source media='(min-width: 992px)' srcset='#{image_path('homepage/hero-featured/Aug-11-featured-1-full.jpg')}'
-      img src='#{image_path('homepage/hero-featured/Aug-11-featured-1-mob.jpg')}' srcset='
-        #{image_path("homepage/hero-featured/Aug-11-featured-1-mob.jpg")} 991w,
-        #{image_path("homepage/hero-featured/Aug-11-featured-1-full.jpg")} 992w'
+= link_to weddings_parties_page_path, class:'main-hero-wrap hero-wrap copy-left white-text'
+  picture.media-wrap
+    source media='(max-width: 991px)' srcset='#{image_path('homepage/hero-featured/Aug-11-featured-1-mob.jpg')}'
+    source media='(min-width: 992px)' srcset='#{image_path('homepage/hero-featured/Aug-11-featured-1-full.jpg')}'
+    img src='#{image_path('homepage/hero-featured/Aug-11-featured-1-mob.jpg')}' srcset='
+      #{image_path("homepage/hero-featured/Aug-11-featured-1-mob.jpg")} 991w,
+      #{image_path("homepage/hero-featured/Aug-11-featured-1-full.jpg")} 992w'
 
   .content-wrap
     .container
@@ -45,20 +42,18 @@
               span Love me, <br>Lights Out
               span.sub-heading
                 | Introducing the Weddings and<br>Parties Collection.
-            = link_to weddings_parties_page_path
-              .cta-wrapper
-                span.btn-md.btn-featured
-                  | Explore <span class="copy-highlight">WEDDINGS</span>
+            .cta-wrapper
+              span.btn-md.btn-featured
+                | Explore <span class="copy-highlight">WEDDINGS</span>
 
 // Carousel Item 3
-.main-hero-wrap.hero-wrap.copy-right
-  = link_to '/dresses/dress-dragon-eyes-lace-1135?color=black'
-    picture.media-wrap
-      source media='(max-width: 991px)' srcset='#{image_path('homepage/hero-featured/Aug-17-featured-2-mob.jpg')}'
-      source media='(min-width: 992px)' srcset='#{image_path('homepage/hero-featured/Aug-17-featured-2-full.jpg')}'
-      img src='#{image_path('homepage/hero-featured/Aug-17-featured-2-full.jpg')}' srcset='
-        #{image_path("homepage/hero-featured/Aug-17-featured-2-mob.jpg")} 991w,
-        #{image_path("homepage/hero-featured/Aug-17-featured-2-full.jpg")} 992w'
+= link_to '/dresses/dress-dragon-eyes-lace-1135?color=black', class:'main-hero-wrap hero-wrap copy-right'
+  picture.media-wrap
+    source media='(max-width: 991px)' srcset='#{image_path('homepage/hero-featured/Aug-17-featured-2-mob.jpg')}'
+    source media='(min-width: 992px)' srcset='#{image_path('homepage/hero-featured/Aug-17-featured-2-full.jpg')}'
+    img src='#{image_path('homepage/hero-featured/Aug-17-featured-2-full.jpg')}' srcset='
+      #{image_path("homepage/hero-featured/Aug-17-featured-2-mob.jpg")} 991w,
+      #{image_path("homepage/hero-featured/Aug-17-featured-2-full.jpg")} 992w'
 
   .content-wrap
     .container
@@ -69,7 +64,6 @@
               span Style Up-To-There
               span.sub-heading
                 | A little leg, a little lace, a lot of style.
-            = link_to '/dresses/dress-dragon-eyes-lace-1135?color=black'
-              .cta-wrapper
-                span.btn-md.btn-featured
-                  | Get <span class="copy-highlight">THE DRESS</span>
+            .cta-wrapper
+              span.btn-md.btn-featured
+                | Get <span class="copy-highlight">THE DRESS</span>
