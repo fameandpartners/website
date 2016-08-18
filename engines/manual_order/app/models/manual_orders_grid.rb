@@ -12,6 +12,12 @@ class ManualOrdersGrid
     where(Spree::Order.arel_table[:number].matches("%#{value}%"))
   end
 
+  filter(:order_type, :enum,
+         select: -> { { 'Manual' => 'M' , 'Exchange' => 'E' } },
+         :include_blank => true) do |value|
+    where(Spree::Order.arel_table[:number].matches("#{value}%"))
+  end
+
   # TODO: replace decorate class def with gem's def after datagrid gem update to 1.4.4 version
   # decorate { |line_item| Orders::LineItemPresenter.new(line_item, Orders::OrderPresenter.new(line_item.order)) }
 
