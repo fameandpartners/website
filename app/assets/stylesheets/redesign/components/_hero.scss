@@ -2,6 +2,10 @@
 -------------------------------------------------------*/
 .hero-wrap {
 
+  > a {
+    display: block;
+  }
+
   .media-wrap {
     min-height: 100px;
   }
@@ -128,6 +132,11 @@
       a,
       span {
         color: $c-neutral-white;
+      }
+
+      .btn-featured {
+        color: $c-neutral-white;
+        border-color: $c-neutral-white;
       }
 
     }

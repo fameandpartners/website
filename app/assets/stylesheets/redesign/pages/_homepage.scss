@@ -125,9 +125,16 @@
 
   @media (min-width: $bootstrap-md-width) {
 
-    .hero-wrap .media-wrap {
-      padding-bottom: 35%;
-      min-height: 450px;
+    .hero-wrap {
+
+      .media-wrap {
+        min-height: 430px;
+      }
+
+      .heading {
+        margin-top: 0;
+      }
+
     }
 
     .btn-featured {
@@ -169,29 +176,10 @@
 
   }
 
-  @media (max-width: $bootstrap-sm-width) {
+  @media (max-width: $bootstrap-sm-width - 1px) {
 
     .section-styling .inline-btn {
-      display:block;
-    }
-
-  }
-
-  // Note: These breakpoints were manually added because all the other mobile variables make the hero carousel look awful...
-  // TODO: make these as variables, perhaps?
-
-  @media (min-width: 1440px) and (max-width: 1920px) {
-
-    .hero-wrap .media-wrap {
-      padding-bottom: 40%;
-    }
-
-  }
-
-  @media (min-width: 1921px) {
-
-    .hero-wrap .media-wrap {
-      padding-bottom: 30%;
+      display: block;
     }
 
   }
