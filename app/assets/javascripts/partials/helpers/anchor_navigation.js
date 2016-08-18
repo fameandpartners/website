@@ -1,19 +1,17 @@
 'use strict';
 (function ($) {
 
-  function slickNavLocalGoTo(responsiveNavLocal) {
+  function slickNavLocalGoTo($responsiveNavLocal) {
 
-    var responsiveNavLocal,
-        slick_target_position;
     // Go to target item in local navigation, according to the current anchor
-    if (responsiveNavLocal.hasClass('slick-initialized')) {
-      slick_target_position = $('.local-navigation .nav a').index($('[href="'+window.location.hash+'"]'));
-      responsiveNavLocal.slick( "slickGoTo", parseInt( slick_target_position ), false);
+    if ($responsiveNavLocal.hasClass('slick-initialized')) {
+      var slickTargetPosition = $('.local-navigation .nav a').index($('[href="'+window.location.hash+'"]'));
+      $responsiveNavLocal.slick( "slickGoTo", parseInt( slickTargetPosition ), false);
 
       //remove all active class
-      responsiveNavLocal.find('.slick-slide.active').removeClass('active');
+      $responsiveNavLocal.find('.slick-slide.active').removeClass('active');
       //set active class for current navigation item
-      responsiveNavLocal.find('.slick-slide[data-slick-index='+slick_target_position+']').addClass('active');
+      $responsiveNavLocal.find('.slick-slide[data-slick-index='+slickTargetPosition+']').addClass('active');
     }
 
   }
@@ -23,9 +21,9 @@
       navLocalMenuHeight = 0,
       localNavTopOffset = 0,
       lastNavLocalItem = $('.js-float-menu-on-scroll .nav a:last').attr('href'), // Get the last section ID
-      offsetTargetTopPadding = 70, // The desired distance between the target and the page header
-      mobileTargetOffset = offsetTargetTopPadding/2,
-      desktopTargetOffset = offsetTargetTopPadding*2,
+      offsetTargetPadding = 70, // The desired distance between the target and the page header
+      mobileTargetOffset = offsetTargetPadding/2,
+      desktopTargetOffset = offsetTargetPadding*2,
       mdScreenWidth = 992,
       responsiveNavLocal = $('.local-navigation .nav');
 
@@ -44,8 +42,8 @@
   // Add DOM helper if we are loading this page directly from an URL containing an anchor (/something#foo=bar)
   // This is needed for our fixed header and floating menu
   if ( window.location.hash ) {
-    var hash_var = window.location.hash,
-        id   = hash_var.slice(1),
+    var hashVar = window.location.hash,
+        id   = hashVar.slice(1),
         elem = document.getElementById(id),
         hashlink = '<div id='+id+' class="hashlink js-hashlink"></div>';
 
@@ -63,7 +61,7 @@
       // If the URL contains an anchor but not a local navigation
       $('.js-hashlink').css({'height': offsetHeight+'px', 'margin-top': -offsetHeight+'px'});
     }
-    window.location.hash = hash_var;
+    window.location.hash = hashVar;
   }
 
   // Check if we have any floating menu in the page
@@ -75,14 +73,14 @@
       $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (mobileTargetOffset) })
     } else {
       //Since this is not a mobile device then we have to consider the fixed header in the top offset
-      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (desktopTargetOffset+offsetTargetTopPadding) })
+      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (desktopTargetOffset+offsetTargetPadding) })
     }
 
     // Floating menu as a responsive Carousel
     if (responsiveNavLocal.length) {
       var renderSlick,
-          slick_anchor_id = window.location.hash,
-          slick_target_position
+          slickAnchorId = window.location.hash,
+          slickTargetPosition
 
       renderSlick = function () {
         if (!responsiveNavLocal.hasClass('slick-initialized')) {
@@ -114,7 +112,7 @@
           });
 
           // Go to current nav item
-          if (slick_anchor_id) {
+          if (slickAnchorId) {
             slickNavLocalGoTo(responsiveNavLocal);
           }
 
@@ -147,9 +145,9 @@
 
           // Toggle floating menu if window position is below the target element
           var windowPosition = $(window).scrollTop(),
-              target_local_navigation = $(".local-navigation-wrapper");
+              targetLocalNavigation = $(".local-navigation-wrapper");
 
-          if (windowPosition+sitewideHeaderHeight >= target_local_navigation.offset().top - offsetTargetTopPadding - (mobileTargetOffset)){
+          if (windowPosition+sitewideHeaderHeight >= targetLocalNavigation.offset().top - offsetTargetPadding - (mobileTargetOffset)){
 
             // Attach the local navigation to the fixed header
             if (!$('.js-float-menu-on-scroll.fixed-nav').length) {
@@ -158,7 +156,7 @@
 
           } else {
 
-            // Window position is above "target_local_navigation"
+            // Window position is above "targetLocalNavigation"
 
             // Detach the local navigation from the fixed header
             if ($('.js-float-menu-on-scroll.fixed-nav').length) {
@@ -236,7 +234,7 @@
             if ( $(window).width() < mdScreenWidth ) {
               $('.js-hashlink').css({'height': '0px', 'margin-bottom': -(mobileTargetOffset)+'px'});
             } else {
-              $('.js-hashlink').css({'height': '0px', 'margin-top': offsetTargetTopPadding+'px'});
+              $('.js-hashlink').css({'height': '0px', 'margin-top': offsetTargetPadding+'px'});
             }
           } else {
             $('.js-hashlink').css({'height': '0px', 'margin-top': '0px'});
@@ -245,7 +243,7 @@
         // This prevents the anchor target to be covered by our fixed header
         if( $('.js-float-menu-on-scroll.fixed-nav').length ) {
           if ($(this).closest(".local-navigation-wrapper").length) {
-            offsetClickFromLocalNav = (offsetTargetTopPadding);
+            offsetClickFromLocalNav = (offsetTargetPadding);
           }
         } else if( $('.js-float-menu-on-scroll.fixed-nav-mobile').length ) {
           if ($(this).closest(".local-navigation-wrapper").length) {
@@ -255,7 +253,7 @@
           if ($(this).closest(".local-navigation-wrapper").length) {
             offsetClickFromLocalNav = (desktopTargetOffset);
           } else {
-            offsetClickFromLocalNav = (offsetTargetTopPadding);
+            offsetClickFromLocalNav = (offsetTargetPadding);
           }
         }
 
