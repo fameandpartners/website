@@ -78,12 +78,12 @@
 
     // Floating menu as a responsive Carousel
     if (responsiveNavLocal.length) {
-      var renderSlick,
-          slickAnchorId = window.location.hash,
-          slickTargetPosition;
 
-      renderSlick = function () {
+      // Render on page load
+      (function renderSlick() {
         if (!responsiveNavLocal.hasClass('slick-initialized')) {
+          var slickAnchorId = window.location.hash,
+              slickTargetPosition;
 
           responsiveNavLocal.slick({
             autoplay: false,
@@ -117,10 +117,7 @@
           }
 
         }
-      }
-
-      // Render for the first time (on page load)
-      renderSlick();
+      })();
 
     }
 
