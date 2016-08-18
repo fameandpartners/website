@@ -17,7 +17,7 @@
         .row
           .col-md-6.col-md-offset-3
             .copy-wrap.text-center.white-text
-              h1.heading
+              h1.heading.no-margin-md
                 span Weddings & Parties
               .sub-heading
                 | A collection for girls who keep it real. Show your love in a look that’s easy, ethereal, and effortlessly elegant.
@@ -40,19 +40,15 @@
             li.link = link_to "The After Party", "#after-party"
 
   // Look 1
-  - current_dress_1_name = "Shaylyn"
-  - current_dress_1_link = "#{dresses_path}/dress-shaylyn-1054?color=ivory"
-  - current_dress_2_name = "Estelle"
-  - current_dress_2_link = "#{dresses_path}/dress-estelle-two-piece-852?color=black"
+  - current_dress_name = "Estelle"
+  - current_dress_link = "#{dresses_path}/dress-estelle-two-piece-852?color=white"
   - current_edit_link = "#{dresses_path}/wedding"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_1_price = "$399"
-    - current_dress_2_price = "$349"
+    - current_dress_price = "$349"
   - else
     // USA - PRICE
-    - current_dress_1_price = "$319"
-    - current_dress_2_price = "$349"
+    - current_dress_price = "$349"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#modern-bride
     .row
@@ -75,8 +71,7 @@
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            .product-info = link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link
-            .product-info = link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link
+            .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link
 
           .cta-wrapper
             = link_to current_edit_link, class: 'cta-link'

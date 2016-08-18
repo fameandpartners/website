@@ -4,6 +4,8 @@ class Marketing::CancelOrderTracker
   end
 
   def send_customerio_event
+    order_presenter = Marketing::OrderPresenter.new(@order)
+
     begin
       Marketing::CustomerIOEventTracker.new.track(
         @order.user,
@@ -12,8 +14,8 @@ class Marketing::CancelOrderTracker
         subject:            "Your order has been canceled",
         order_number:       @order.number,
         today:              Date.today.to_formatted_s(:long),
-        line_items:         Marketing::OrderPresenter.build_line_items(@order),
-        adjustments:        Marketing::OrderPresenter.build_adjustments(@order),
+        line_items:         order_presenter.build_line_items,
+        adjustments:        order_presenter.build_adjustments,
         display_item_total: @order.display_item_total.to_s,
         display_total:      @order.display_total.to_s
       )

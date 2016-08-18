@@ -119,7 +119,7 @@ $top-overlay-margin-top: 37px;
     .copy-side {
       padding: 0 25px;
       margin-bottom: 14px;
-      position: relative;
+      position: inherit;
 
       p:first-child {
         margin-top: 14px;
@@ -189,7 +189,7 @@ $top-overlay-margin-top: 37px;
   @media (min-width: $bootstrap-sm-width) {
 
     .link-align-bottom {
-      bottom: 0;
+      bottom: 10%;
       position: absolute;
     }
 
