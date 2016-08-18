@@ -4,18 +4,6 @@ class ManualOrdersGrid
   include Datagrid
 
   scope do
-    # Spree::Order.complete.where("number ILIKE 'M%' or number ILIKE 'E%'").includes(:line_items)
-    # Spree::Order.find_by_sql(
-    #   <<-SQL
-    #     SELECT
-    #       o.id as order_id,
-    #       o.number,
-    #       o.completed_at,
-    #       li.*
-    #     FROM "spree_line_items" li INNER JOIN "spree_orders" o ON o."id" = li."order_id"
-    #     WHERE (o.completed_at is NOT NULL and (o.number ILIKE 'M%' or o.number ILIKE 'E%'))
-    #   SQL
-    # )
     Spree::LineItem.joins(:order).where("spree_orders.completed_at is NOT NULL and
       (spree_orders.number ILIKE 'M%' or spree_orders.number ILIKE 'E%')").includes(:order)
   end
@@ -34,8 +22,8 @@ class ManualOrdersGrid
   column(:delivery_due, header: 'Delivery due') do |model|
     ManualOrdersGrid.decorate(model).projected_delivery_date.strftime("%m/%d/%y")
   end
-  column(:order_number, header: 'Order number', order: 'spree_orders.number') do |model|
-    model.order.number
+  column(:order_number, header: 'Order number', order: 'spree_orders.number', :html => true) do |model|
+    link_to model.order.number, spree.admin_order_path(id: model.order.number)
   end
   column(:id, header: 'Line ID', order: 'spree_line_items.id') {|model| model.id}
   column(:style, header: 'Style') {|model| ManualOrdersGrid.decorate(model).style_number}
