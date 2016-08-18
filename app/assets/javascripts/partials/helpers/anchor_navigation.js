@@ -20,8 +20,10 @@
   var sitewideHeaderHeight = 0,
       navLocalMenuHeight = 0,
       localNavTopOffset = 0,
-      lastNavLocalItem = $('.js-float-menu-on-scroll .nav a:last').attr('href'), // Get the last section ID
-      offsetTargetPadding = 70, // The desired distance between the target and the page header
+      // Get the last section ID
+      lastNavLocalItem = $('.js-float-menu-on-scroll .nav a:last').attr('href'),
+      // The desired distance between the target and the page header
+      offsetTargetPadding = 70,
       mobileTargetOffset = offsetTargetPadding/2,
       desktopTargetOffset = offsetTargetPadding*2,
       mdScreenWidth = 992,
@@ -34,7 +36,8 @@
   // Set the height and offset of the local navigation
   if ($(".local-navigation-wrapper").length) {
     navLocalMenuHeight = $(".local-navigation-wrapper").outerHeight();
-    localNavTopOffset = $(".local-navigation-wrapper").offset().top; // Desktop only
+    // Desktop only
+    localNavTopOffset = $(".local-navigation-wrapper").offset().top;
   }
 
   var offsetHeight = sitewideHeaderHeight+navLocalMenuHeight;
@@ -130,7 +133,8 @@
         if( $(window).width() < mdScreenWidth ) {
 
           $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile');
-          $('.js-footer').css({'padding-bottom': navLocalMenuHeight*1.1+'px'}); //Add an extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
+          //Add an extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
+          $('.js-footer').css({'padding-bottom': navLocalMenuHeight*1.1+'px'});
 
         } else {
 
@@ -183,7 +187,8 @@
         if ( $(window).width() < mdScreenWidth ) {
           $('.js-float-menu-on-scroll').removeClass('fixed-nav').css({'top': ''});
           $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile');
-          $('.js-footer').css({'padding-bottom': navLocalMenuHeight*1.1+'px'}); //Add extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
+          //Add extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
+          $('.js-footer').css({'padding-bottom': navLocalMenuHeight*1.1+'px'});
         }
 
         // Go to menu item when resize is finished
