@@ -53,20 +53,14 @@
   .container.additional-info
     .row.faqs-section
       .col-md-8
-        h2 FAQs about Returns
+        h2 FAQs about Orders
         .faq.faq-wrap
           .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
+            = render 'shared/redesign/faqs/delivery_how_long'
+            = render 'shared/redesign/faqs/delivery_sign'
+            = render 'shared/redesign/faqs/delivery_POBOX'
+            = render 'shared/redesign/faqs/cancel_order'
             = render 'shared/redesign/faqs/returns_policy'
-            = render 'shared/redesign/faqs/returns_steps'
-            = render 'shared/redesign/faqs/info_when_return'
-            = render 'shared/redesign/faqs/received_return'
-            = render 'shared/redesign/faqs/track_return'
-            = render 'shared/redesign/faqs/excluded_items'
-            = render 'shared/redesign/faqs/faulty_items'
-            = render 'shared/redesign/faqs/original_packaging'
-            = render 'shared/redesign/faqs/sale_items'
-            = render 'shared/redesign/faqs/when_refunded'
-            = render 'shared/redesign/faqs/how_refunded'
 
       .col-md-4
         aside
