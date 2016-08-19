@@ -196,7 +196,7 @@ module Search
       end
 
       def all_as_collection
-        all.map { |key, value| [key, value[:description]]  }
+        all.map { |key, value| [value[:description], key]  }
       end
 
       private
