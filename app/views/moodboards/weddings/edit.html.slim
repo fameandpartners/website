@@ -1,4 +1,4 @@
-.page-content.landing-famingtonway
+.page-content.moodboard-edit
   .hero-wrap
     .media-wrap.keep-ratio
       .inner-wrap
@@ -6,8 +6,117 @@
     .title-wrap.text-center
       .inner-wrap
         h1.title
-          'The Wedding Planner
-          span Save & share your favorite dresses with Fame Wedding moodbords
+          .container
+            .row
+              .col-md-6.col-md-offset-3 The Wedding Planner
+            .row
+              .col-md-4.col-md-offset-4
+                span Save & share your favorite dresses with Fame Wedding moodbords
+              
+  section.container.section-full
+    .row
+      .col-md-12.heading-overlay-wrapper
+        h3.heading-overlay Fame weddings
+    .row
+      .col-md-8.col-md-offset-2
+        ul.row.tabs-horizontal
+          li.col-md-4.active
+            a href='#tab-register' data-toggle='tab' Register
+          li.col-md-4
+            a href='#tab-details' data-toggle='tab' Wedding details
+          li.col-md-4
+            a href='#tab-style' data-toggle='tab' Dress style
+        .tab-content
+          #tab-register.tab-pane.active
+            h2.title.text-center Register an Account
+            form.row
+              .col-md-6.form-group
+                label for='first-name' First name
+                input.form-control.form-control-md name='first-name'
+              .col-md-6.form-group
+                label for='last-name' Last name
+                input.form-control.form-control-md name='last-name'
+              .col-md-12.form-group
+                label for='email' Email address
+                input.form-control.form-control-md type='email' name='email'
+              .col-md-6.form-group
+                label for='password' Password
+                input.form-control.form-control-md type='password' name='password'
+              .col-md-6.form-group
+                label for='confirm-password' Confirm password
+                input.form-control.form-control-md type='password' name='confirm-password'
+              .col-md-12.btn-wrap.text-center
+                button.btn.btn-black REGISTER NOW
+              .col-md-12.btn-wrap.text-center
+                a href='javascript:;'
+                  span.cta-link-alt
+                    span Register with
+                    span.copy-highlight FACEBOOK
+            
+          #tab-details.tab-pane
+            div
+              h2.title.text-center The Essentials
+              h4.title.text-center This will help us curate the most relevant dresses for you
+            form.row
+              .col-md-6.form-group
+                label for='bride-name' Bride’s name
+                input.form-control.form-control-md name='bride-name'
+              .col-md-3.form-group
+                label for='bridesmaids' No. of bridesmaids
+                input.form-control.form-control-md name='bridesmaids'
+              .col-md-3.form-group
+                label for='theme' Wedding theme
+                input.form-control.form-control-md name='theme'
+              .col-md-6.form-group
+                label for='wedding-date' Date of wedding
+                input.form-control.form-control-md name='wedding-date'
+              .col-md-6.form-group
+                label for='wedding-time' Time of wedding
+                input.form-control.form-control-md name='wedding-time'
+              .col-md-12.btn-wrap.text-center
+                button.btn.btn-black NEXT QUESTION
+              .col-md-12.btn-wrap.text-center
+                a href='javascript:;'
+                  span.cta-link-alt
+                    span Skip this step
+            div
+              h2.title.text-center The Bridal Party
+              h4.title.text-center The best friends, the soul sisters, the squad
+            form.row
+              .col-md-6.form-group
+                label for='friends-name' Name
+                input.form-control.form-control-md name='friends-name'
+              .col-md-6.form-group
+                label for='duty' Wedding day duty
+                select.form-control.form-control-md name='duty'
+                  option Select
+                  option Duty 1
+              .col-md-12.form-group
+                label for='friends-email' Email address
+                input.form-control.form-control-md type='email' name='friends-email'
+              .col-md-12.btn-wrap.text-center
+                button.btn.btn-lowlight ADD MEMBER
+              .col-md-12.btn-wrap.text-center
+                button.btn.btn-black NEXT QUESTION
+              .col-md-12.btn-wrap.text-center
+                a href='javascript:;'
+                  span.cta-link-alt
+                    span Skip this step
+            
+          #tab-style.tab-pane
+            div
+              h2.title.text-center Bridesmaids Dress Color
+              h4.title.text-center If you're not sure, pick as many as you like
+            form.row
+              .col-md-12.btn-wrap.text-center
+                button.btn.btn-black NEXT QUESTION
+              .col-md-12.btn-wrap.text-center
+                a href='javascript:;'
+                  span.cta-link-alt
+                    span Skip this step
+            h2.title.text-center Dress Length
+            h2.title.text-center Fabric Type
+
 
 
 .row
