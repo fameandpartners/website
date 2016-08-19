@@ -98,7 +98,6 @@
             focusOnSelect: false,
             centerMode: false,
             mobileFirst: false,
-            variableWidth: false,
             speed: 1000,
             prevArrow: '<span>◂</span>',
             nextArrow: '<span>▸</span>',
@@ -107,7 +106,6 @@
                 breakpoint: mdScreenWidth,
                 settings: {
                   mobileFirst: true,
-                  variableWidth: true,
                   slidesToShow: 3
                 }
               }
