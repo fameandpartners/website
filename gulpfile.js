@@ -1,12 +1,13 @@
 'use strict';
 
-var gulp = require('gulp');
-var clean = require('gulp-clean');
-var browserify = require('browserify');
-var vinyl = require('vinyl-source-stream');
-var babelify = require('babelify'); // transforms ES6 to ES5
+const gulp = require('gulp');
+const clean = require('gulp-clean');
+const eslint = require('gulp-eslint');
+const browserify = require('browserify');
+const vinyl = require('vinyl-source-stream');
+const babelify = require('babelify'); // transforms ES6 to ES5
 
-var config = {
+const config = {
 	paths: {
 		js: './app/assets/javascripts/storefront/**/*.js',
 		dist: './app/assets/javascripts/',
@@ -14,16 +15,16 @@ var config = {
 	}
 };
 
-gulp.task('apply-node-env', function() {
+gulp.task('apply-node-env', () => {
   process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 });
 
-gulp.task('clean-scripts', function () {
+gulp.task('clean-scripts', () => {
   return gulp.src(config.paths.dist + 'application_bundle.js', {read: false})
     .pipe(clean());
 });
 
-gulp.task('js', ['apply-node-env', 'clean-scripts'], function() {
+gulp.task('js', ['apply-node-env', 'clean-scripts'], () => {
 	browserify(config.paths.mainJS)
 		.transform(babelify, {presets: ['es2015', 'react']})
 		.bundle()
@@ -32,7 +33,14 @@ gulp.task('js', ['apply-node-env', 'clean-scripts'], function() {
 		.pipe(gulp.dest(config.paths.dist));
 });
 
-gulp.task('watch', function() {
+gulp.task('lint', () => {
+  return gulp.src(config.paths.js)
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+gulp.task('watch', () => {
   gulp.watch(config.paths.js, ['apply-node-env', 'js']);
 });
 
