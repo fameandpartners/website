@@ -21,7 +21,7 @@ $ ->
   priceUrl = '/fame_admin/manual_orders/prices/:product_id/:size_id/:color_id/:currency'
   priceTag = $('h4.price')
 
-  adjustButton = $('.adjust_btn')
+  adjustButton = $('.adjust_btn .adjust')
   adjustPanel = $('.adjust_panel')
   adjustPanelAmount = $('.adjust_panel .amount')
   adjustPanelDescription = $('.adjust_panel .description')
