@@ -21,7 +21,8 @@ $ ->
   priceUrl = '/fame_admin/manual_orders/prices/:product_id/:size_id/:color_id/:currency'
   priceTag = $('h4.price')
 
-  adjustButton = $('.adjust_btn .adjust')
+  adjustButton = $('.adjust_btn_panel .adjust_btn')
+  adjustButtonPanel = $('.adjust_btn_panel')
   adjustPanel = $('.adjust_panel')
   adjustPanelAmount = $('.adjust_panel .amount')
   adjustPanelDescription = $('.adjust_panel .description')
@@ -37,6 +38,10 @@ $ ->
     customisationSelect.html('<option></option>')
     imageTag.html('Please select style, size and color to see image')
     priceTag.html('Please select product details')
+    adjustButtonPanel.hide()
+    adjustPanel.hide()
+    adjustPanelAmount.val('')
+    adjustPanelDescription.val('')
 
   updateColors = ->
     url = colorUrl.replace(/:product_id/, styleSelect.val()) if styleSelect.val()
@@ -69,6 +74,7 @@ $ ->
     .replace(/:currency/, currencySelect.val())
     $.getJSON url, (data) =>
       priceTag.html("$#{data.price} #{data.currency}")
+      adjustButtonPanel.show()
 
   updateCustomisations = ->
     url = customisationUrl.replace(/:product_id/, styleSelect.val()) if styleSelect.val()
@@ -113,7 +119,11 @@ $ ->
     adjustButton.hide()
 
   adjustPanelOKButton.on 'click', =>
-    if !$.isNumeric( adjustPanelAmount.val() ) || !$.trim(adjustPanelDescription.val()).length
+    if !$.trim(adjustPanelAmount.val()).length && !$.trim(adjustPanelDescription.val()).length
+      adjustButton.show()
+      adjustPanelOKButton.hide()
+      adjustPanel.hide()
+    else if !$.isNumeric( adjustPanelAmount.val() ) || !$.trim(adjustPanelDescription.val()).length
       alert('Please input correct amount value and description')
       return false
     else
