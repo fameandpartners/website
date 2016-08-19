@@ -5,20 +5,20 @@
     .inner-wrap
       .container
         .row
-          h1.col-md-12.heading 
+          h1.col-md-12.heading
             ' We launch new runway inspired styles every week
             span Sign up for priority access + $25 off your first purchase
           .col-md-5
             = link_to 'Sign up with facebook', fb_auth_path(signup_params), class: 'btn btn-facebook btn-block btn-black btn-md fb-login'
           .col-md-1
-            .separator 
+            .separator
               span or
           .col-md-6.form-wrap
-            = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params) do |f|
+            = form_for :spree_user, url: spree.spree_user_registration_path(@spree_user, signup_params) do |f|
               = f.hidden_field :site_version_id, value: current_site_version.id
-              = render :partial => 'spree/shared/user_form', :locals => { :f => f }
+              = render partial: 'spree/shared/user_form', locals: { f: f }
           .col-md-12
             p.footnote
-              span By registering above you acknowledge and accept our 
+              span By registering above you acknowledge and accept our
               = link_to 'Terms of Service', terms_path, target: '_blank'
               span .
