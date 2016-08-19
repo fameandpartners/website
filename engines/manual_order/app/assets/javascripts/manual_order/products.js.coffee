@@ -21,6 +21,12 @@ $ ->
   priceUrl = '/fame_admin/manual_orders/prices/:product_id/:size_id/:color_id/:currency'
   priceTag = $('h4.price')
 
+  adjustButton = $('.adjust_btn')
+  adjustPanel = $('.adjust_panel')
+  adjustPanelAmount = $('.adjust_panel .amount')
+  adjustPanelDescription = $('.adjust_panel .description')
+  adjustPanelOKButton = $('.adjust_panel .ok_button')
+
   currencySelect = $('#forms_manual_order_currency')
 
   clearAll = ->
@@ -98,3 +104,21 @@ $ ->
   currencySelect.on 'change', =>
     if sizeSelect.val() and colorSelect.val()
       updatePrice()
+
+  adjustButton.on 'click', =>
+    adjustPanel.show()
+    adjustPanelAmount.attr('readonly', false);
+    adjustPanelDescription.attr('readonly', false);
+    adjustPanelOKButton.show()
+    adjustButton.hide()
+
+  adjustPanelOKButton.on 'click', =>
+    if !$.isNumeric( adjustPanelAmount.val() ) || !$.trim(adjustPanelDescription.val()).length
+      alert('Please input correct amount value and description')
+      return false
+    else
+      adjustButton.show()
+      adjustPanelOKButton.hide()
+      adjustPanelAmount.attr('readonly', true);
+      adjustPanelDescription.attr('readonly', true);
+
