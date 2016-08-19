@@ -27,6 +27,7 @@ $ ->
   adjustPanelAmount = $('.adjust_panel .amount')
   adjustPanelDescription = $('.adjust_panel .description')
   adjustPanelOKButton = $('.adjust_panel .ok_button')
+  submitButton = $('.submit_btn')
 
   currencySelect = $('#forms_manual_order_currency')
 
@@ -117,12 +118,14 @@ $ ->
     adjustPanelDescription.attr('readonly', false);
     adjustPanelOKButton.show()
     adjustButton.hide()
+    submitButton.attr('disabled', true)
 
   adjustPanelOKButton.on 'click', =>
     if !$.trim(adjustPanelAmount.val()).length && !$.trim(adjustPanelDescription.val()).length
       adjustButton.show()
       adjustPanelOKButton.hide()
       adjustPanel.hide()
+      submitButton.attr('disabled', false)
     else if !$.isNumeric( adjustPanelAmount.val() ) || !$.trim(adjustPanelDescription.val()).length
       alert('Please input correct amount value and description')
       return false
@@ -131,4 +134,5 @@ $ ->
       adjustPanelOKButton.hide()
       adjustPanelAmount.attr('readonly', true);
       adjustPanelDescription.attr('readonly', true);
+      submitButton.attr('disabled', false)
 
