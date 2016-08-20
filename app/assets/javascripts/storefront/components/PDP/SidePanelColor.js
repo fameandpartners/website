@@ -64,11 +64,13 @@ class SidePanelColor extends SidePanel {
       ? "c-card-customize__content is-selected" : "c-card-customize__content";
 
     const previewColor = "color-preview color-" + props.customize.color.name;
+    const currentColor = "item-preview color-" + props.customize.color.name;
 
     const defaultColors = props.defaultColors.map((color, index) => {
       const itemState = props.customize.color.id == color.option_value.id
         ? "selector-color is-selected" : "selector-color";
       const swatch = "swatch color-" + color.option_value.name;
+
       return (
         <a href="javascript:;" className={itemState}
           onClick={this.onChange} key={index}
@@ -103,7 +105,7 @@ class SidePanelColor extends SidePanel {
         <a href="javascript:;"
           className={triggerState}
           onClick={this.openMenu}>
-          <div className="c-card-customize__content__left">Color</div>
+          <div className="c-card-customize__content__left"><span className={currentColor}></span> Color</div>
           <div className="c-card-customize__content__right">{props.customize.color.presentation}</div>
         </a>
 
