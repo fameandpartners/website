@@ -9,7 +9,8 @@ class VariantSku
   def call
     return variant.sku.to_s.upcase if variant.is_master
     "#{style_number}#{size}#{color}#{custom}"
-  rescue => e
+  rescue StandardError => e
+    Raven.capture_exception(e)
     NewRelic::Agent.notice_error(e, variant_id: variant.id)
     variant.sku.to_s.upcase
   end
