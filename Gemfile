@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.1.6'
 
-gem 'rails', '~> 3.2.22'
+gem 'rails', '~> 3.2.22.2'
 gem 'pg'
 gem 'slim'
 gem 'slim-rails'

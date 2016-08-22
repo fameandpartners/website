@@ -1,0 +1,37 @@
+/* [Modals]
+-------------------------------------------------------*/
+.modal {
+
+  .modal-content {
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .outer-wrap {
+    padding: 15px;
+  }
+
+  .inner-wrap {
+    position: relative;
+  }
+
+  .btn-close {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    .modal-dialog {
+      width: 900px;
+    }
+
+    .outer-wrap {
+      padding: 30px;
+    }
+
+  }
+
+}
