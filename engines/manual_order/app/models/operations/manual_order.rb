@@ -21,7 +21,7 @@ module Operations
           size_id: params[:size],
           color_id: params[:color],
           customizations_ids: params[:customisations],
-          height: params[:height],
+          height: params[:length],
           quantity: 1
         }
       ).populate
