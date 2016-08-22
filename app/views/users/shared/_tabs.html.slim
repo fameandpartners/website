@@ -1,32 +1,15 @@
 - active_tab ||= controller_name
 
-ul.nav.nav-tabs-lg
-  li.col-sm-3 class=( %w{profiles account_settings}.include?(active_tab.to_s) ? 'active' : '')
-    = link_to profile_path, remote: true do
-      span 
-        ' Account 
-        br
-        ' Settings
-  
-  - if Features.active?(:moodboard) || current_user_moodboard.items.any?
-    li.col-sm-3 class=( %w{wishlist wishlist_items}.include?(active_tab.to_s) ? 'active' : '')
-      = link_to wishlist_path do
-        span 
-          ' My 
-          br
-          ' Moodboard
-  li.col-sm-3 class=( %w{orders order}.include?(active_tab.to_s) ? 'active' : '')
-    = link_to user_orders_path, remote: true do
-      span
-        ' My 
-        br
-        ' Orders
-  /li class=( %w{reviews}.include?(active_tab.to_s) ? 'active' : '')
-  /  = link_to 'My Reviews', reviews_path, remote: true
-  - if Features.active?(:style_quiz)
-    li.col-sm-3 class=( %w{styleprofile styleprofiles}.include?(active_tab.to_s) ? 'active' : '')
-      = link_to styleprofile_path, remote: true do
-        span
-          ' My Style 
-          br
-          ' Profile
+.container-fluid
+  .row
+    .local-navigation
+      .nav-wrapper.col-md-6.col-md-offset-3
+        ul.nav
+          li.link class=( %w{orders order}.include?(active_tab.to_s) ? 'active' : '')
+            = link_to user_orders_path, remote: true do
+              span
+                | My Orders
+          li.link class=( %w{profiles account_settings}.include?(active_tab.to_s) ? 'active' : '')
+            = link_to profile_path, remote: true do
+              span
+                | Account Settings
