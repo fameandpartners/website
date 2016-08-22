@@ -62,19 +62,7 @@ describe Spree::Product, :type => :model do
 
   describe '#size_chart' do
     it do
-      is_expected.to validate_inclusion_of(:size_chart).in_array(%w(2014 2015 2016))
-    end
-
-    describe '#new_size_chart?' do
-      it 'by default' do
-        product = described_class.new
-        expect(product.new_size_chart?).to be_truthy
-      end
-
-      it 'when latest' do
-        product = described_class.new :size_chart => '2016'
-        expect(product.new_size_chart?).to be_truthy
-      end
+      is_expected.to validate_inclusion_of(:size_chart).in_array(%w(2014 2015 2016 2016_v2))
     end
   end
 
