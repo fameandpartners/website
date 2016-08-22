@@ -67,6 +67,37 @@
     margin-top: 40px;
   }
 
+  .color-swatch {
+    display: block;
+    margin-bottom: 15px;
+    cursor: pointer;
+    @extend %cfix;
+
+    .swatch {
+      float: left;
+      width: 30px;
+      height: 30px;
+    }
+
+    .copy {
+      float: left;
+      margin-left: 10px;
+      line-height: 30px;
+      font-weight: normal;
+    }
+
+    input {
+      display: none;
+
+      &:checked + .copy {
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
+    }
+
+  }
+
   // START - Mobile Specific Styling
   @media (max-width: $bootstrap-md-width - 1px) {
 
