@@ -6,7 +6,7 @@ module Forms
     property :currency, virtual: true
     property :style_name, virtual: true
     property :size, virtual: true
-    property :length, virtual: true
+    property :height, virtual: true
     property :color, virtual: true
     property :customisations, virtual: true
     property :notes, virtual: true
