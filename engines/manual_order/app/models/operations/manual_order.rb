@@ -51,6 +51,7 @@ module Operations
 
       order.touch :completed_at
       order.update_column :state, 'complete'
+      order.project_delivery_date
 
       order
     end
