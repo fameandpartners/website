@@ -209,18 +209,18 @@ module Search
             'product.price'
           end
 
-        self.add('price_high',     "Price: High to Low",            [price_behaviour_field, 'desc'])
-        self.add('price_low',      "Price: Low to High",            [price_behaviour_field, 'asc'])
-        self.add('newest',         "Newest First",                  ['product.created_at', 'desc'])
-        self.add('oldest',         "Oldest First",                  ['product.created_at', 'asc'])
-        self.add('fast_delivery',  "Show Fast Delivery First",      ['product.fast_delivery', 'desc'])
-        self.add('best_sellers',   "Best Sellers",                  ['product.total_sales', 'desc'])
-        self.add('alpha_asc',      "Name: A-Z",                     ['product.name', 'asc'])
-        self.add('alpha_desc',     "Name: Z-A",                     ['product.name', 'desc'])
-        self.add('most_views',     "Most Viewed First",             ['product.statistics.total_views', 'desc'])
-        self.add('most_carts',     "Most Added to Cart First",      ['product.statistics.total_carts', 'desc'])
-        self.add('most_wishlists', "Most Added to Wishlists First", ['product.statistics.total_wishlists', 'desc'])
-        self.add('native',         "Do Not Apply Ordering",         nil)
+        add('price_high',     "Price: High to Low",            [price_behaviour_field, 'desc'])
+        add('price_low',      "Price: Low to High",            [price_behaviour_field, 'asc'])
+        add('newest',         "Newest First",                  ['product.created_at', 'desc'])
+        add('oldest',         "Oldest First",                  ['product.created_at', 'asc'])
+        add('fast_delivery',  "Show Fast Delivery First",      ['product.fast_delivery', 'desc'])
+        add('best_sellers',   "Best Sellers",                  ['product.total_sales', 'desc'])
+        add('alpha_asc',      "Name: A-Z",                     ['product.name', 'asc'])
+        add('alpha_desc',     "Name: Z-A",                     ['product.name', 'desc'])
+        add('most_views',     "Most Viewed First",             ['product.statistics.total_views', 'desc'])
+        add('most_carts',     "Most Added to Cart First",      ['product.statistics.total_carts', 'desc'])
+        add('most_wishlists', "Most Added to Wishlists First", ['product.statistics.total_wishlists', 'desc'])
+        add('native',         "Do Not Apply Ordering",         nil)
       end
     end
 
