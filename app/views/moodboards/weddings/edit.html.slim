@@ -18,42 +18,10 @@
       .col-md-12.heading-overlay-wrapper
         h3.heading-overlay Fame weddings
     .row
-      .col-md-8.col-md-offset-2
-        ul.row.tabs-horizontal
-          li.col-md-4.active
-            a href='#tab-register' data-toggle='tab' Register
-          li.col-md-4
-            a href='#tab-details' data-toggle='tab' Wedding details
-          li.col-md-4
-            a href='#tab-style' data-toggle='tab' Dress style
+      .col-md-8.col-md-offset-2    
         .tab-content
-          #tab-register.tab-pane.active
-            h2.title.text-center Register an Account
-            form.row
-              .col-md-6.form-group
-                label for='first-name' First name
-                input.form-control.form-control-md name='first-name'
-              .col-md-6.form-group
-                label for='last-name' Last name
-                input.form-control.form-control-md name='last-name'
-              .col-md-12.form-group
-                label for='email' Email address
-                input.form-control.form-control-md type='email' name='email'
-              .col-md-6.form-group
-                label for='password' Password
-                input.form-control.form-control-md type='password' name='password'
-              .col-md-6.form-group
-                label for='confirm-password' Confirm password
-                input.form-control.form-control-md type='password' name='confirm-password'
-              .col-md-12.btn-wrap.text-center
-                button.btn.btn-black REGISTER NOW
-              .col-md-12.btn-wrap.text-center
-                a href='javascript:;'
-                  span.cta-link-alt
-                    span Register with
-                    span.copy-highlight FACEBOOK
-            
-          #tab-details.tab-pane
+        
+          #tab-step-1.tab-pane.active
             div
               h2.title.text-center The Essentials
               h4.title.text-center This will help us curate the most relevant dresses for you
@@ -74,11 +42,13 @@
                 label for='wedding-time' Time of wedding
                 input.form-control.form-control-md name='wedding-time'
               .col-md-12.btn-wrap.text-center
-                button.btn.btn-black NEXT QUESTION
+                a.btn.btn-black href='#tab-step-2' data-toggle='tab' NEXT QUESTION
               .col-md-12.btn-wrap.text-center
-                a href='javascript:;'
+                a href='#tab-step-2' data-toggle='tab'
                   span.cta-link-alt
                     span Skip this step
+                      
+          #tab-step-2.tab-pane
             div
               h2.title.text-center The Bridal Party
               h4.title.text-center The best friends, the soul sisters, the squad
@@ -97,13 +67,14 @@
               .col-md-12.btn-wrap.text-center
                 button.btn.btn-lowlight ADD MEMBER
               .col-md-12.btn-wrap.text-center
-                button.btn.btn-black NEXT QUESTION
+                a.btn.btn-black href='#tab-step-1' data-toggle='tab' PREVIOUS QUESTION
+                a.btn.btn-black href='#tab-step-3' data-toggle='tab' NEXT QUESTION
               .col-md-12.btn-wrap.text-center
-                a href='javascript:;'
+                a href='#tab-step-3' data-toggle='tab'
                   span.cta-link-alt
                     span Skip this step
-            
-          #tab-style.tab-pane
+
+          #tab-step-3.tab-pane
             div
               h2.title.text-center Bridesmaids Dress Color
               h4.title.text-center If you're not sure, pick as many as you like
@@ -195,12 +166,15 @@
                       .swatch.color-red
                       input type='checkbox'
                       .copy Red
-              .col-md-12.btn-wrap.text-center
-                button.btn.btn-black NEXT QUESTION
-              .col-md-12.btn-wrap.text-center
-                a href='javascript:;'
-                  span.cta-link-alt
-                    span Skip this step
+                  .col-md-12.btn-wrap.text-center
+                    a.btn.btn-black href='#tab-step-2' data-toggle='tab' PREVIOUS QUESTION
+                    a.btn.btn-black href='#tab-step-4' data-toggle='tab' NEXT QUESTION
+                  .col-md-12.btn-wrap.text-center
+                    a href='#tab-step-4' data-toggle='tab'
+                      span.cta-link-alt
+                        span Skip this step
+          
+          #tab-step-4.tab-pane
             div
               h2.title.text-center Dress Length
               h4.title.text-center If you're not sure, pick as many as you like
@@ -223,38 +197,42 @@
                       span.icon
                       span Short
                   .col-md-12.btn-wrap.text-center
-                    button.btn.btn-black NEXT QUESTION
+                    a.btn.btn-black href='#tab-step-3' data-toggle='tab' PREVIOUS QUESTION
+                    a.btn.btn-black href='#tab-step-5' data-toggle='tab' NEXT QUESTION
                   .col-md-12.btn-wrap.text-center
-                    a href='javascript:;'
+                    a href='#tab-step-5' data-toggle='tab'
                       span.cta-link-alt
                         span Skip this step
-              div
-                h2.title.text-center Fabric Type
-                h4.title.text-center If you're not sure, pick as many as you like
-              form.row
-                .col-md-6.col-md-offset-3
-                  .row
-                    .col-md-4.custom-form-element
-                      label
-                        input type='checkbox'
-                        span.icon
-                        span Satin
-                    .col-md-4.custom-form-element
-                      label
-                        input type='checkbox'
-                        span.icon
-                        span Cotton
-                    .col-md-4.custom-form-element
-                      label
-                        input type='checkbox'
-                        span.icon
-                        span Georgette
-                    .col-md-12.btn-wrap.text-center
-                      button.btn.btn-black FINISH
-                    .col-md-12.btn-wrap.text-center
-                      a href='javascript:;'
-                        span.cta-link-alt
-                          span Skip this step
+          
+          #tab-step-5.tab-pane
+            div
+              h2.title.text-center Fabric Type
+              h4.title.text-center If you're not sure, pick as many as you like
+            form.row
+              .col-md-6.col-md-offset-3
+                .row
+                  .col-md-4.custom-form-element
+                    label
+                      input type='checkbox'
+                      span.icon
+                      span Satin
+                  .col-md-4.custom-form-element
+                    label
+                      input type='checkbox'
+                      span.icon
+                      span Cotton
+                  .col-md-4.custom-form-element
+                    label
+                      input type='checkbox'
+                      span.icon
+                      span Georgette
+                  .col-md-12.btn-wrap.text-center
+                    a.btn.btn-black href='#tab-step-4' data-toggle='tab' PREVIOUS QUESTION
+                    a.btn.btn-black href='javascript:;' data-toggle='tab' FINISH
+                  .col-md-12.btn-wrap.text-center
+                    a href='javascript:;' data-toggle='tab'
+                      span.cta-link-alt
+                        span Skip this step
 
 
 
