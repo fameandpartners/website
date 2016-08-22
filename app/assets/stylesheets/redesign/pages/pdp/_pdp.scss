@@ -315,6 +315,20 @@
 
   }
 
+  .pdp-side-container-color {
+
+    .item-preview {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border: 1px solid $c-neutral-5;
+    }
+
+  }
+
   .selector-custom {
     display: block;
     width: 96%;
@@ -422,6 +436,15 @@
         margin-bottom: 15px;
       }
 
+    }
+
+    .pdp-side-container-color .item-preview {
+      left: 8px;
+      top: 50%;
+      width: 18px;
+      height: 18px;
+      margin-top: -9px;
+      border: solid $c-neutral-5 1px;
     }
 
   }

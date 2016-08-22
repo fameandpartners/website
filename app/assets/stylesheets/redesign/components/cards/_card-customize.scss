@@ -1,14 +1,5 @@
 /* [Card - customize]
 -------------------------------------------------------*/
-%item-indicator {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 6px;
-  width: 12px;
-  height: 12px;
-  border: 1px solid $c-neutral-5;
-}
 
 .c-card-customize {
 
@@ -18,23 +9,6 @@
 
     span {
       font-style: italic;
-    }
-
-  }
-
-  .pdp-side-container-color .c-card-customize__content .item-preview {
-    @extend %item-indicator;
-  }
-
-  div:not(.pdp-side-container-color) .c-card-customize__content {
-
-    &:before {
-      @extend %item-indicator;
-    }
-
-    &.is-selected:before {
-      background: $c-neutral-black;
-      border-color: $c-neutral-black;
     }
 
   }
@@ -49,6 +23,21 @@
 
     &:not(:first-child) {
       margin-top: 5px;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border: 1px solid $c-neutral-5;
+    }
+
+    &.is-selected:before {
+      background: $c-neutral-black;
+      border-color: $c-neutral-black;
     }
 
   }
@@ -78,15 +67,6 @@
 
     display: none;
 
-    %item-indicator-responsive {
-      left: 8px;
-      top: 50%;
-      width: 18px;
-      height: 18px;
-      margin-top: -9px;
-      border: solid $c-neutral-5 1px;
-    }
-
     &.active {
       display: block;
     }
@@ -95,14 +75,16 @@
       margin-bottom: 10px;
       padding: 6px 15px 6px 38px;
       border: solid $c-neutral-5 1px;
-    }
 
-    .pdp-side-container-color .c-card-customize__content .item-preview {
-      @extend %item-indicator-responsive;
-    }
+      &:before {
+        left: 8px;
+        top: 50%;
+        width: 18px;
+        height: 18px;
+        margin-top: -9px;
+        border: solid $c-neutral-5 1px;
+      }
 
-    div:not(.pdp-side-container-color) .c-card-customize__content:before {
-      @extend %item-indicator-responsive;
     }
 
     &__content__left {
