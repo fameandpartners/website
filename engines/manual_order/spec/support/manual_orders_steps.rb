@@ -45,7 +45,7 @@ module Acceptance
     end
 
     step 'I select skirt length "Standard" from chosen length select box' do
-      chosen_select('Standard', from: '#forms_manual_order_length')
+      chosen_select('Standard', from: '#forms_manual_order_height')
     end
 
     step 'I select "Black" color from chosen color select box' do
