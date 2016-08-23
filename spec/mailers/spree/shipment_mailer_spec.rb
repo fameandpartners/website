@@ -37,14 +37,14 @@ module Spree
         shipping_address:      'Street Macarena Around the Corner, Las Ketchup, Alabama, 12321, United States of Foo',
         phone:                 address.phone,
         delivery_date:         'Sun, 09 Oct 2016',
-        original_order_date:   '12 Aug 2016',
-        display_item_total:    "$198.37",
-        display_total:         "$198.37",
+        original_order_date:   order.created_at.strftime('%d %b %Y'),
+        display_item_total:    '$198.37',
+        display_total:         '$198.37',
         auto_account:          false,
         currency:              order.currency,
         shipping_amount:       0.0,
         tax:                   nil,
-        adjustments:           [{ label: "Shipping", display_amount: "$0.00" }]
+        adjustments:           [{label: 'Shipping', display_amount: '$0.00'}]
       }
     }
 
