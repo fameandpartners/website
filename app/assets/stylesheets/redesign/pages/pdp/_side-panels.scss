@@ -188,5 +188,31 @@
 
   }
 
+  .share-label {
+    display: inline-block;
+    margin-top: 30px;
+    text-decoration: underline;
+  }
+
+  .share-btn-wrap {
+    margin: 0;
+    display: inline-block;
+    text-align: inherit;
+
+    li {
+      border-left: none;
+      margin-left: 8px;
+
+      a {
+        font-size: 1.4rem;
+        color: $c-neutral-9;
+        margin-top: 0;
+        text-decoration:none;
+      }
+
+    }
+
+  }
+
 }
 // END - details section

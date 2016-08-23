@@ -97,6 +97,16 @@ form.hide-fully#pdpDataForWishlist
                     - else
                       // this will redirect not loged-in users to login page
                       a.js-add-to-moodboard href='javascript:;' data-user-present='#{current_spree_user.present?}' Add to Moodboard
+                  .panel
+                    span.share-label
+                      | Share
+                    ul.share-btn-wrap
+                      li
+                        a.icon-facebook2 href='https://www.facebook.com/sharer/sharer.php?u=#{request.url}' target='_blank'
+                      li
+                        a.icon-twitter href='https://twitter.com/share?url=#{request.url}' target='_blank'
+                      li
+                        a.icon-pinterest href='http://pinterest.com/pin/create/button/?url=#{request.url}' target='_blank'
                   
               ul.btn-wrap
                 li Guaranteed Fit
@@ -235,6 +245,14 @@ javascript:
     $('.js-panel-side-left-toggle').on('click', function() {
       $('.js-panel-side-left-details-trigger').toggleClass('is-active');
       $('body').toggleClass('no-scroll');
+    });
+
+    $('.pdp-panel-side-left .share-btn-wrap a').on('click', function () {
+      var newwindow = window.open($(this).attr('href'), '', 'left=20,top=20,width=500,height=500,toolbar=0,resizable=0,scrollbars=1');
+      if (window.focus) {
+        newwindow.focus();
+      }
+      return false;
     });
     
     // bootstrap tab extension, will switch between tabs for desktop and
