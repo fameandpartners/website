@@ -44,34 +44,4 @@ RSpec.describe VariantSku do
       end
     end
   end
-
-  xdescribe 'old SKUs' do
-    subject(:sku)       { variant.generate_sku }
-
-    context 'master variant' do
-      let(:variant)       { dress.master }
-
-      it "returns the master's sku" do
-        expect(sku).to eq style_number
-      end
-    end
-
-    context 'with variants' do
-      let(:dress)   { create :dress_with_magenta_size_10, sku: style_number}
-      let(:variant) { dress.variants.first }
-
-      it 'includes the style number' do
-        expect(sku).to include(style_number)
-      end
-
-      it 'includes the colour' do
-        expect(sku).to include('Color:Magenta')
-      end
-
-      it "includes the size" do
-        expect(sku).to include('US 10/AU 14')
-      end
-
-    end
-  end
 end
