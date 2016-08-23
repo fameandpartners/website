@@ -16,6 +16,10 @@ RSpec.describe VariantSku do
       end
 
       it 'falls back to upcased variant SKU' do
+        expect(sku).to eq('OMGWTFBBQ')
+      end
+
+      it 'reports to NewRelic and Sentry' do
         expect(Raven).to receive(:capture_exception).with(StandardError)
         expect(NewRelic::Agent).to receive(:notice_error).with(StandardError, variant_id: nil)
 
