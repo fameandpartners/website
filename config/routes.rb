@@ -28,18 +28,6 @@ FameAndPartners::Application.routes.draw do
     get '/au' => redirect(path: '/', host: 'www.fameandpartners.com.au')
   end
 
-  if Features.active?(:redirect_to_www_and_https)
-    constraints(host: /^fameandpartners.com.au/) do
-      root to: redirect('https://www.fameandpartners.com.au')
-      match '/*path', to: redirect { |_, request| URI.join('https://www.fameandpartners.com.au', request.fullpath).to_s }
-    end
-
-    constraints(host: /^fameandpartners.com/) do
-      root to: redirect('https://www.fameandpartners.com')
-      match '/*path', to: redirect { |_, request| URI.join('https://www.fameandpartners.com', request.fullpath).to_s }
-    end
-  end
-
   # TODO: After .com.au migration, this scope can simply go away.
   scope '(:site_version)', constraints: { site_version: /(us|au)/ } do
     ##########
