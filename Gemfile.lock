@@ -147,7 +147,7 @@ PATH
       shippo (~> 1.0.4)
       sidekiq
     fame_favicon (0.0.1)
-      rails (~> 3.2.21)
+      rails
     inspinia-rails (2.1.0)
       bootstrap-sass
       font-awesome-rails
