@@ -20,9 +20,6 @@ FameAndPartners::Application.routes.draw do
   #######################################################
 
   # TODO: (May 26 2016) Every redirection on this block should live in the HTTP server and not in the application!
-
-  get '/AU' => redirect(path: '/au/dresses')
-
   if Features.active?(:redirect_to_com_au_domain)
     get '/au/*whatevs' => redirect(path: '/%{whatevs}', host: 'www.fameandpartners.com.au')
     get '/au' => redirect(path: '/', host: 'www.fameandpartners.com.au')
