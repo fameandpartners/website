@@ -20,7 +20,7 @@
               span The It Girl Collection
               span.sub-heading
                 | Modern Classics, made your way
-            = link_to it_girl_landing_page_path, class: 'hero-banner-link', data: { description: 'The It Girl Collection' }
+            = link_to it_girl_landing_page_path, class: 'js-hero-banner-link', data: { description: 'The It Girl Collection' }
               .cta-wrapper
                 span.btn-md.btn-featured
                   | Start <span class="copy-highlight">CUSTOMIZING</span>
@@ -45,7 +45,7 @@
               span Love me, <br>Lights Out
               span.sub-heading
                 | Introducing the Weddings and<br>Parties Collection.
-            = link_to weddings_parties_page_path, class: 'hero-banner-link', data: { description: 'Love me, Lights Out' }
+            = link_to weddings_parties_page_path, class: 'js-hero-banner-link', data: { description: 'Love me, Lights Out' }
               .cta-wrapper
                 span.btn-md.btn-featured.white-txt-border
                   | Explore <span class="copy-highlight">WEDDINGS</span>
@@ -69,17 +69,15 @@
               span Style Up-To-There
               span.sub-heading
                 | A little leg, a little lace, a lot of style.
-            = link_to '/dresses/dress-dragon-eyes-lace-1135?color=black', class: 'hero-banner-link', data: { description: 'Style Up-To-There' }
+            = link_to '/dresses/dress-dragon-eyes-lace-1135?color=black', class: 'js-hero-banner-link', data: { description: 'Style Up-To-There' }
               .cta-wrapper
                 span.btn-md.btn-featured
                   | Get <span class="copy-highlight">THE DRESS</span>
 
 javascript:
-  $('.hero-banner-link').click(function (e) {
-    e.preventDefault();
+  $('.js-hero-banner-link').click(function () {
     var link = $(this);
-    var description = link.attr('data-description');
-    var value = $('.hero-banner-link').index(link);
+    var description = link.data('description');
+    var value = $('.js-hero-banner-link').index(link);
     track.event('Banner', 'Click', description, value);
-    window.location.href = link.attr('href');
   });
