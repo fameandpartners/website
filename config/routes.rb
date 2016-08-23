@@ -9,6 +9,11 @@ FameAndPartners::Application.routes.draw do
     get '/us/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
   end
 
+  ###################################################################
+  # Feed files redirections. They live above any `/us` + `/au` redirection
+  ###################################################################
+  get '/au/feeds/products/shopstyle.xml', to: 'marketing/feeds/shopstyle#au_feed'
+
   ########################
   # US Redirection to root
   ########################
