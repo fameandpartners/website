@@ -84,8 +84,8 @@ module Acceptance
       expect(created_order.site_version).to eq('au')
       expect(created_order.currency).to eq('AUD')
       expect(created_order.state).to eq('complete')
-      expect(created_order.completed_at).to be_truthy
-      expect(created_order.projected_delivery_date).to be_truthy
+      expect(created_order.completed_at).to be_an_instance_of(ActiveSupport::TimeWithZone)
+      expect(created_order.projected_delivery_date).to be_an_instance_of(ActiveSupport::TimeWithZone)
     end
 
     private
