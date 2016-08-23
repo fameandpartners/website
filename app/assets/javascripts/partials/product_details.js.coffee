@@ -18,11 +18,9 @@ page.initProductDetailsPage = (options = {}) ->
       variant_id:         parseInt($this.find('#pdpCartVariantId').val()),
       making_options_ids: $this.find('#pdpCartMakingId').val(),
       height:             $this.find('#pdpCartLength').val(),
-      customizations_ids: customIds
+      customizations_ids: customIds,
+      dress_variant_id:   dressVarId || null
     }
-
-    if dressVarId
-      product_data.dress_variant_id = dressVarId
 
     app.shopping_cart.one('change', () ->
       window.app.shopping_bag.open()
