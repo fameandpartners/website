@@ -92,7 +92,7 @@ RSpec.describe CustomItemSku do
 
     describe 'fallback on error' do
       before do
-        allow(generator).to receive(:style_number).and_raise(StandardError, 'Mystical Error')
+        allow(generator).to receive(:style_number).and_raise(StandardError)
       end
 
       it 'falls back to SKU and custom marker' do
@@ -105,6 +105,7 @@ RSpec.describe CustomItemSku do
 
       it 'reports to NewRelic and Sentry' do
         expect(Raven).to receive(:capture_exception).with(StandardError)
+        expect(NewRelic::Agent).to receive(:notice_error).with(StandardError, line_item_id: nil)
 
         generator.call
       end

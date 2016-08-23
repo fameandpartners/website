@@ -12,6 +12,7 @@ class VariantSku
   rescue StandardError => e
     Raven.capture_exception(e)
     NewRelic::Agent.notice_error(e, variant_id: variant.id)
+
     variant.sku.to_s.upcase
   end
 
