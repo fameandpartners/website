@@ -10,7 +10,7 @@ module Operations
 
     def create
       cart = cart_populator
-      return false if cart[:success] == false
+      return false if !cart[:success]
 
       if params[:existing_customer].present?
         assign_customer
