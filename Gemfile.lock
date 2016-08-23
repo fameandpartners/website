@@ -150,8 +150,8 @@ PATH
       rails
     inspinia-rails (2.1.0)
       bootstrap-sass
-      font-awesome-rails
-      rails (~> 3.2.21)
+      font-awesome-rails (~> 4.3.0.0)
+      rails
     manual_order (0.0.1)
       chosen-rails
       rails (~> 3.2.22)
