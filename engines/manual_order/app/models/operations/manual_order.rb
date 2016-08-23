@@ -53,6 +53,11 @@ module Operations
       order.update_column :state, 'complete'
       order.project_delivery_date
 
+      unit = order.shipments.first.inventory_units.build
+      unit.variant_id = variant.id
+      unit.order_id = order.id
+      unit.save
+
       order
     end
 
