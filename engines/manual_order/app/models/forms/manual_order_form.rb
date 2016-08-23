@@ -128,11 +128,7 @@ module Forms
     end
 
     def skirt_length_options
-      {
-        'petite' =>'Petite',
-        'standard' => 'Standard',
-        'tall' => 'Tall'
-      }
+      Hash[LineItemPersonalization::HEIGHTS.map{|h| [h, h.humanize]}]
     end
 
     def save_order(params)
