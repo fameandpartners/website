@@ -47,20 +47,6 @@
 
   }
 
-  .progress {
-    height: 12px;
-    background: $c-neutral-white;
-    border: solid $c-neutral-black 1px;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .progress-bar {
-    line-height: 12px;
-    background: $c-neutral-black;
-    box-shadow: none;
-  }
-
   .questions-count {
     margin-bottom: 10px;
     text-transform: uppercase;

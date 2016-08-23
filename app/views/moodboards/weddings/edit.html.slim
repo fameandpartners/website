@@ -18,33 +18,40 @@
       .col-md-12.heading-overlay-wrapper
         h3.heading-overlay Fame weddings
     .row
-      .col-md-8.col-md-offset-2    
-        .tab-content
+      .col-md-6.col-md-offset-3
+        p.questions-count
+          'STEP 
+          span.js-questions-count 1
+          '/
+          span 5
+        .progress
+          .progress-bar.js-progress-bar style='width: 20%;'
+    .row
+      .col-md-8.col-md-offset-2
+        = form_for(@moodboard_form, as: :wedding_moodboard, :url => wedding_moodboard_path, remote: true, html: { id: 'wedding_moodboard_edit_form', class: 'tab-content' }) do |f|
+          = f.hidden_field :id
         
           #tab-step-1.tab-pane.active
             div
               h2.title.text-center The Essentials
               h4.title.text-center This will help us curate the most relevant dresses for you
-            form.row
+            .row
               .col-md-6.form-group
-                label for='bride-name' Bride’s name
-                input.form-control.form-control-md name='bride-name'
-              .col-md-3.form-group
-                label for='bridesmaids' No. of bridesmaids
-                input.form-control.form-control-md name='bridesmaids'
-              .col-md-3.form-group
-                label for='theme' Wedding theme
-                input.form-control.form-control-md name='theme'
+                = f.label :bride_first_name, 'Bride’s name'
+                = f.text_field :bride_first_name, required: true, class:'form-control form-control-md'
               .col-md-6.form-group
-                label for='wedding-date' Date of wedding
-                input.form-control.form-control-md name='wedding-date'
+                = f.label :guest_count, 'No. of bridesmaids'
+                = f.select :guest_count, f.object.no_of_bridesmaids, {}, required: true, class: 'form-control form-control-md'
+              .col-md-6.form-group.has-feedback
+                = f.label :event_date, 'Date of wedding'
+                = f.text_field :event_date, class:'form-control form-control-md datepicker js-datepicker'
+                .icon-calendar.form-control-feedback
               .col-md-6.form-group
-                label for='wedding-time' Time of wedding
-                input.form-control.form-control-md name='wedding-time'
-              .col-md-12.btn-wrap.text-center
-                a.btn.btn-black href='#tab-step-2' data-toggle='tab' NEXT QUESTION
-              .col-md-12.btn-wrap.text-center
-                a href='#tab-step-2' data-toggle='tab'
+                label for='wedding_time' Time of wedding
+                input.form-control.form-control-md name='wedding_time'
+              .col-md-4.col-md-offset-8.btn-wrap.text-center
+                a.btn.btn-black.btn-block href='#tab-step-2' data-next-step='2' data-toggle='tab' NEXT QUESTION
+                a href='#tab-step-2' data-next-step='2' data-toggle='tab'
                   span.cta-link-alt
                     span Skip this step
                       
@@ -52,10 +59,10 @@
             div
               h2.title.text-center The Bridal Party
               h4.title.text-center The best friends, the soul sisters, the squad
-            form.row
+            .row
               .col-md-6.form-group
-                label for='friends-name' Name
-                input.form-control.form-control-md name='friends-name'
+                label for='friends_name' Name
+                input.form-control.form-control-md name='friends_name'
               .col-md-6.form-group
                 label for='duty' Wedding day duty
                 select.form-control.form-control-md name='duty'
@@ -65,12 +72,12 @@
                 label for='friends-email' Email address
                 input.form-control.form-control-md type='email' name='friends-email'
               .col-md-12.btn-wrap.text-center
-                button.btn.btn-lowlight ADD MEMBER
+                = f.button 'ADD MEMBER'
               .col-md-12.btn-wrap.text-center
-                a.btn.btn-black href='#tab-step-1' data-toggle='tab' PREVIOUS QUESTION
-                a.btn.btn-black href='#tab-step-3' data-toggle='tab' NEXT QUESTION
+                a.btn.btn-black href='#tab-step-1' data-next-step='1' data-toggle='tab' PREVIOUS QUESTION
+                a.btn.btn-black href='#tab-step-3' data-next-step='3' data-toggle='tab' NEXT QUESTION
               .col-md-12.btn-wrap.text-center
-                a href='#tab-step-3' data-toggle='tab'
+                a href='#tab-step-3' data-next-step='3' data-toggle='tab'
                   span.cta-link-alt
                     span Skip this step
 
@@ -78,7 +85,7 @@
             div
               h2.title.text-center Bridesmaids Dress Color
               h4.title.text-center If you're not sure, pick as many as you like
-            form.row
+            .row
               .col-md-10.col-md-offset-2
                 .row
                   .col-md-4
@@ -167,10 +174,10 @@
                       input type='checkbox'
                       .copy Red
                   .col-md-12.btn-wrap.text-center
-                    a.btn.btn-black href='#tab-step-2' data-toggle='tab' PREVIOUS QUESTION
-                    a.btn.btn-black href='#tab-step-4' data-toggle='tab' NEXT QUESTION
+                    a.btn.btn-black href='#tab-step-2' data-next-step='2' data-toggle='tab' PREVIOUS QUESTION
+                    a.btn.btn-black href='#tab-step-4' data-next-step='4' data-toggle='tab' NEXT QUESTION
                   .col-md-12.btn-wrap.text-center
-                    a href='#tab-step-4' data-toggle='tab'
+                    a href='#tab-step-4' data-next-step='4' data-toggle='tab'
                       span.cta-link-alt
                         span Skip this step
           
@@ -178,7 +185,7 @@
             div
               h2.title.text-center Dress Length
               h4.title.text-center If you're not sure, pick as many as you like
-            form.row
+            .row
               .col-md-6.col-md-offset-3
                 .row
                   .col-md-4.custom-form-element
@@ -197,10 +204,10 @@
                       span.icon
                       span Short
                   .col-md-12.btn-wrap.text-center
-                    a.btn.btn-black href='#tab-step-3' data-toggle='tab' PREVIOUS QUESTION
-                    a.btn.btn-black href='#tab-step-5' data-toggle='tab' NEXT QUESTION
+                    a.btn.btn-black href='#tab-step-3' data-next-step='3' data-toggle='tab' PREVIOUS QUESTION
+                    a.btn.btn-black href='#tab-step-5' data-next-step='5' data-toggle='tab' NEXT QUESTION
                   .col-md-12.btn-wrap.text-center
-                    a href='#tab-step-5' data-toggle='tab'
+                    a href='#tab-step-5' data-next-step='5' data-toggle='tab'
                       span.cta-link-alt
                         span Skip this step
           
@@ -208,7 +215,7 @@
             div
               h2.title.text-center Fabric Type
               h4.title.text-center If you're not sure, pick as many as you like
-            form.row
+            .row
               .col-md-6.col-md-offset-3
                 .row
                   .col-md-4.custom-form-element
@@ -227,80 +234,22 @@
                       span.icon
                       span Georgette
                   .col-md-12.btn-wrap.text-center
-                    a.btn.btn-black href='#tab-step-4' data-toggle='tab' PREVIOUS QUESTION
-                    a.btn.btn-black href='javascript:;' data-toggle='tab' FINISH
+                    a.btn.btn-black href='#tab-step-4' data-next-step='4' data-toggle='tab' PREVIOUS QUESTION
+                    = link_to('FINISH', @moodboard, class:'btn btn-black')
                   .col-md-12.btn-wrap.text-center
-                    a href='javascript:;' data-toggle='tab'
+                    = link_to @moodboard
                       span.cta-link-alt
                         span Skip this step
 
 
-
-.row
-  .col-md-4
-    .media-wrap
-      img src='#{image_path("moodboard/signup1.jpg")}'
-  .col-md-8
-    h2.title-line-on-sides
-      .inner-wrap TELL US ABOUT THE WEDDING
-    = form_for(@moodboard_form, as: :wedding_moodboard, :url => wedding_moodboard_path, remote: true, html: { id: 'wedding_moodboard_edit_form' }) do |f|
-      = f.hidden_field :id
-      .row
-        .col-md-12
-          .row
-            .col-md-6.form-group
-              = f.label :bride_first_name, "Bride's first name *"
-              = f.text_field :bride_first_name, required: true, class:"form-control form-control-md"
-              span.help-block.with-errors
-            .col-md-6.form-group
-              = f.label :owner_relationship, "Are you the: *"
-              = f.select :owner_relationship, f.object.owner_relationships, {}, required: true, class: "form-control form-control-md", 'data-native-error' => 'Test'
-              span.help-block
-        .col-md-12
-          .row
-            .col-md-6.form-group
-              = f.label :bride_last_name, "Bride's last name"
-              = f.text_field :bride_last_name, class:"form-control form-control-md"
-              span.help-block
-            .col-md-6.form-group.has-feedback
-              = f.label :event_date, "The Wedding Date"
-              = f.text_field :event_date, class:"form-control form-control-md datepicker"
-              .icon-calendar.form-control-feedback
-              span.help-block
-        .col-md-12
-          .row
-            .col-md-6.form-group
-              = f.label :event_progress, "How ready is the bride?"
-              = f.select :event_progress, f.object.event_progressions, {}, class: "form-control form-control-md"
-              span.help-block
-            .col-md-6.form-group
-              = f.label :guest_count, "How many people in the bridal party?"
-              = f.text_field :guest_count, class: "form-control form-control-md"
-              span.help-block
-        .col-md-12
-          .main-cta-wrap
-            = f.button 'Invite the bridal party', :class => "btn btn-lowlight"
-            span or
-            = link_to('do this later', @moodboard, class:'hidden-xs hidden-sm')
-            = link_to('Skip and create moodboard', @moodboard, class:'btn btn-default hidden-md hidden-lg')
-
 javascript:
-  function init_wedding_moodboard_edit_wrapper() {
-    $('.js-trigger-tabs-moodboard-edit').tab('show');
-    var formEdit = $('#wedding_moodboard_edit_form');
-    // this is just hack, need to empty val of default selection to trigger validation
-    formEdit.find('option').each(function() {
-      $this = $(this);
-      if($this.attr('value') === 'Choose an option') {
-        $this.attr('value', '');
-        $this.attr('disabled', 'true');
-      }
+  $(document).ready(function() {
+    $('.js-datepicker').datepicker();
+    
+    // update progress bar
+    $('[data-next-step]').on('click', function() {
+      var step = $(this).data('next-step');
+      $('.js-questions-count').html(step);
+      $('.js-progress-bar').css({'width': (20 * step) + '%'});
     });
-
-    formEdit.find('.datepicker').datepicker();
-    formEdit.validator();
-    formEdit.on('ajax:success', function(event, data, status, xhr) {
-      $('#wedding_moodboard_guests_wrapper').html(xhr.responseText);
-      $('.js-trigger-tabs-moodboard-guests').tab('show');
-    });
-  };
+  });
