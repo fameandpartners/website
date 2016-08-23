@@ -138,13 +138,13 @@ PATH
       simple_form
       slim
     bergen (0.0.1)
-      aasm
+      aasm (~> 4.10.0)
       admin_ui
-      money
+      money (~> 5.1.1)
       rails
-      savon
+      savon (~> 1.2.0)
       sentry-raven
-      shippo
+      shippo (~> 1.0.4)
       sidekiq
     fame_favicon (0.0.1)
       rails (~> 3.2.21)

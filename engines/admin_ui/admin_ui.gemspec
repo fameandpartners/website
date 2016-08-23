@@ -22,12 +22,12 @@ Gem::Specification.new do |s|
   s.add_dependency "money"
 
   # UI
-  s.add_dependency 'slim' # Version specified on main app Gemfile
-  s.add_dependency 'sidekiq' # Version specified on main app Gemfile
+  s.add_dependency 'slim'        # Version specified on main app Gemfile
+  s.add_dependency 'sidekiq'     # Version specified on main app Gemfile
+  s.add_dependency 'simple_form' # Version specified on main app Gemfile
   s.add_dependency 'kaminari', '~> 0.14.1'
   s.add_dependency 'datagrid', '~> 1.4.0'
   s.add_dependency 'reform', '~> 2.0.5'
-  s.add_dependency 'simple_form' # Version specified on main app Gemfile
   s.add_dependency 'chosen-rails', '~> 1.5.1'
 
   # Theme
