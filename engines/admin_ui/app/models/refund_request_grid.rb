@@ -4,7 +4,7 @@ class RefundRequestGrid
   include Datagrid
 
   scope do
-    RefundRequest
+    RefundRequest.includes(order: :shipments)
   end
 
   filter(:custom1, :dynamic)
