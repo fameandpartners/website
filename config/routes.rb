@@ -205,8 +205,8 @@ FameAndPartners::Application.routes.draw do
     get '/shop-social' => 'products/collections#show', :as => :shop_social
 
     get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
-    get '/dress-for-wedding' => 'products/collections#show', :permalink => 'dress-for-wedding', :as => :dress_for_wedding_page
-    get '/dress-for-parties' => 'products/collections#show', :permalink => 'dress-for-parties', :as => :dress_for_parties_page
+    get '/dress-for-wedding'    => 'products/collections#show', :permalink => 'dress-for-wedding', :as => :dress_for_wedding_page
+    get '/dress-for-parties'    => 'products/collections#show', :permalink => 'dress-for-parties', :as => :dress_for_parties_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
