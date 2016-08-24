@@ -92,23 +92,9 @@ ruby:
             = render partial: 'layouts/redesign/mega_menu/dress_code'
 
 
-    .rect#rect-wedding.nav-menu-wrap.menu-wedding
+    .rect#rect-wedding.nav-menu-wrap.menu-wedding.grid-img-cta-nav
       .row
-
-        .col-md-2.wedding-collections
-          ul
-            li.title VIEW THE COLLECTIONS
-            = render partial: 'layouts/redesign/mega_menu/wedding_collections'
-
-        .col-md-3.wedding-planner
-          ul
-            li.title WEDDING PLANNER
-            li = link_to 'Register for Wedding Planner', bridesmaid_landing_page_path
-
-        .col-md-7.wedding-bridesmaid
-          = link_to bridesmaid_landing_page_path, class: 'panel-highlight media-wrap'
-            = image_tag "lookbook/brides.jpg"
-            .copy-wrap MADE <span class='text-lowercase'>with</span> LOVE <em><span>SIGN UP AND START PLANNING YOUR DREAM DRESSES</span></em>
+        = render partial: 'layouts/redesign/mega_menu/fame_weddings'
 
     .rect#rect-lookbook.nav-menu-wrap.menu-lookbook
       .row
