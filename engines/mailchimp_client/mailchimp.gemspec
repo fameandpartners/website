@@ -7,11 +7,11 @@ require "mailchimp/version"
 Gem::Specification.new do |s|
   s.name        = "mailchimp_client"
   s.version     = MailChimpClient::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Mailchimp."
-  s.description = "TODO: Description of Mailchimp."
+  s.authors     = ['Fame & Partners Dev Team']
+  s.email       = ['dev@fameandpartners.com']
+  s.homepage    = 'https://github.com/fameandpartners/website/tree/master/engines/mailchimp_client'
+  s.summary     = 'MailChimp integration using Gibbon'
+  s.description = 'MailChimp integration using Gibbon'
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
