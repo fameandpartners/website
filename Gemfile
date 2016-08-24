@@ -163,4 +163,5 @@ group :production do
   gem 'aws-sdk'
 end
 
+# TODO: this should be removed whenever `EmailCapture` class be replaced by the new MailChimp engine
 gem 'mailchimp-api', require: 'mailchimp'
