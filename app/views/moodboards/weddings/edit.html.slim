@@ -48,12 +48,15 @@
                 .icon-calendar.form-control-feedback
               .col-md-6.form-group
                 label for='wedding_time' Time of wedding
-                input.form-control.form-control-md name='wedding_time'
-              .col-md-4.col-md-offset-8.btn-wrap.text-center
-                a.btn.btn-black.btn-block href='#tab-step-2' data-next-step='2' data-toggle='tab' NEXT QUESTION
-                a href='#tab-step-2' data-next-step='2' data-toggle='tab'
-                  span.cta-link-alt
-                    span Skip this step
+                input.form-control.form-control-md id='wedding_time'
+              .col-md-12
+                .btn-wrap.text-center
+                  .row
+                    .col-md-4.col-md-offset-8
+                      a.btn.btn-black.btn-block href='#tab-step-2' data-next-step='2' data-toggle='tab' NEXT QUESTION
+                      a.js-ga-tracker href='#tab-step-2' data-next-step='2' data-toggle='tab' data-ga-description='Style Up-To-There'
+                        span.cta-link-alt
+                          span Skip this step
                       
           #tab-step-2.tab-pane
             div
@@ -62,15 +65,15 @@
             .row
               .col-md-6.form-group
                 label for='friends_name' Name
-                input.form-control.form-control-md name='friends_name'
+                input.form-control.form-control-md id='friends_name'
               .col-md-6.form-group
-                label for='duty' Wedding day duty
-                select.form-control.form-control-md name='duty'
+                label for='wedding_duty' Wedding day duty
+                select.form-control.form-control-md id='wedding_duty'
                   option Select
                   option Duty 1
               .col-md-12.form-group
-                label for='friends-email' Email address
-                input.form-control.form-control-md type='email' name='friends-email'
+                label for='friends_email' Email address
+                input.form-control.form-control-md type='email' id='friends_email'
               .col-md-12.btn-wrap.text-center
                 = f.button 'ADD MEMBER'
               .col-md-12.btn-wrap.text-center
