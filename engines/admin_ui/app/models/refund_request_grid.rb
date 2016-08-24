@@ -39,7 +39,7 @@ class RefundRequestGrid
   column :customer_name
   column :customer_email
   column(:date_purchased) { self.order.completed_at }
-  column(:date_goods_shipped) { self.order.shipment.shipped_at }
+  column(:date_goods_shipped) { self.order.shipments.last.try(:shipped_at) }
   column :refund_ref
   column :refund_currency
   # column :refund_success
