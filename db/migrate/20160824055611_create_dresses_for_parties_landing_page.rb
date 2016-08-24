@@ -1,23 +1,6 @@
 class CreateDressesForPartiesLandingPage < ActiveRecord::Migration
-  def up
-    unless Revolution::Page.where(path: lookbook_properties[:path]).exists?
-      page = Revolution::Page.create!(
-        path:          lookbook_properties[:path],
-        template_path: lookbook_properties[:template_path],
-        variables:     { lookbook: true, pids: lookbook_properties[:pids] },
-        publish_from:  1.day.ago
-      )
-      page.translations.create!(locale: 'en-US', title: lookbook_properties[:title], heading: lookbook_properties[:heading], meta_description: lookbook_properties[:meta_description])
-      page.translations.create!(locale: 'en-AU', title: lookbook_properties[:title], heading: lookbook_properties[:heading], meta_description: lookbook_properties[:meta_description])
-    end
-  end
-
-  def down
-    Revolution::Page.where(path: lookbook_properties[:path]).delete_all
-  end
-
   # All values MUST be Strings!
-  private def lookbook_properties
+  private def landing_page_properties
     {
       path:             '/dress-for-parties',
       template_path:    '/landing_pages/dress_for_parties',
@@ -26,5 +9,22 @@ class CreateDressesForPartiesLandingPage < ActiveRecord::Migration
       title:            'Dress for parties',
       meta_description: 'Discover beautiful party dresses here at Fame & Partners',
     }
+  end
+
+  def up
+    unless Revolution::Page.where(path: landing_page_properties[:path]).exists?
+      page = Revolution::Page.create!(
+        path:          landing_page_properties[:path],
+        template_path: landing_page_properties[:template_path],
+        variables:     { lookbook: true, pids: landing_page_properties[:pids] },
+        publish_from:  1.day.ago
+      )
+      page.translations.create!(locale: 'en-US', title: landing_page_properties[:title], heading: landing_page_properties[:heading], meta_description: landing_page_properties[:meta_description])
+      page.translations.create!(locale: 'en-AU', title: landing_page_properties[:title], heading: landing_page_properties[:heading], meta_description: landing_page_properties[:meta_description])
+    end
+  end
+
+  def down
+    Revolution::Page.where(path: landing_page_properties[:path]).delete_all
   end
 end
