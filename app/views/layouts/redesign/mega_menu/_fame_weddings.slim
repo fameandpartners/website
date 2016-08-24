@@ -1,0 +1,27 @@
+- cache ['views/layouts/redesign/mega_menu/_fame_weddings'] do
+	.col-md-4
+		.weddings-and-parties.nav-item
+			= link_to weddings_parties_page_path
+				img src='#{image_path('mega-menu/fame-weddings/weddings-and-parties.jpg')}' class='img-responsive'
+
+				.cta-wrap
+					span.cta-link Shop
+					span.copy-highlight  Weddings and parties
+
+	.col-md-4
+		.wedding-planner.nav-item
+			= link_to bridesmaid_landing_page_path
+				img src='#{image_path('mega-menu/fame-weddings/wedding-planner.jpg')}' class='img-responsive'
+
+				.cta-wrap
+					span.cta-link Moodboard
+					span.copy-highlight  Your bridal party look
+
+	.col-md-4
+		.free-styling-session.nav-item
+			= link_to wedding_consultation_path
+				img src='#{image_path('mega-menu/fame-weddings/styling-session.jpg')}' class='img-responsive'
+
+				.cta-wrap
+					span.cta-link Free
+					span.copy-highlight  Style advice
