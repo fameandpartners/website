@@ -126,32 +126,32 @@ PATH
     admin_ui (0.0.1)
       active_link_to
       cancan
-      chosen-rails
-      datagrid
-      font-awesome-rails
-      kaminari
+      chosen-rails (~> 1.5.1)
+      datagrid (~> 1.4.0)
+      font-awesome-rails (~> 4.3.0.0)
+      kaminari (~> 0.14.1)
       manual_order
       money
       rails (~> 3.2.21)
-      reform
+      reform (~> 2.0.5)
       sidekiq
       simple_form
       slim
     bergen (0.0.1)
-      aasm
+      aasm (~> 4.10.0)
       admin_ui
-      money
+      money (~> 5.1.1)
       rails
-      savon
+      savon (~> 1.2.0)
       sentry-raven
-      shippo
+      shippo (~> 1.0.4)
       sidekiq
     fame_favicon (0.0.1)
-      rails (~> 3.2.21)
+      rails
     inspinia-rails (2.1.0)
       bootstrap-sass
-      font-awesome-rails
-      rails (~> 3.2.21)
+      font-awesome-rails (~> 4.3.0.0)
+      rails
     manual_order (0.0.1)
       chosen-rails
       rails (~> 3.2.22)
@@ -321,8 +321,8 @@ GEM
       multi_json (~> 1.0)
     dalli (2.7.6)
     database_cleaner (0.9.1)
-    datagrid (1.4.0)
-      rails (>= 3.2.18)
+    datagrid (1.4.4)
+      rails (>= 3.2.22.2)
     debug_inspector (0.0.2)
     deface (0.9.1)
       nokogiri (~> 1.5.0)
