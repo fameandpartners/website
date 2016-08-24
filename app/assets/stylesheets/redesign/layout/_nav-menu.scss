@@ -92,6 +92,27 @@
 
 }
 
+.grid-img-cta-nav {
+
+  .cta-wrap {
+    padding-top: 10px;
+    text-align: center;
+  }
+
+  a {
+    color: $c-neutral-black;
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .nav-item {
+      margin-bottom: 35px;
+    }
+
+  }
+
+}
+
 // On-page/Anchor navigation
 .local-navigation-wrapper {
   padding-top: 38px;
