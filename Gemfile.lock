@@ -153,7 +153,8 @@ PATH
       font-awesome-rails (~> 4.3.0.0)
       rails
     mailchimp_client (0.0.1)
-      rails (~> 3.2.22)
+      gibbon (~> 2.2.4)
+      sidekiq
     manual_order (0.0.1)
       chosen-rails
       rails (~> 3.2.22)
@@ -904,7 +905,6 @@ DEPENDENCIES
   fog
   foreman
   geoip
-  gibbon
   google_drive (= 1.0.0)
   inspinia-rails!
   ipaddress
