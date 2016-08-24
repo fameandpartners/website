@@ -1,9 +1,8 @@
 module MailChimpClient
   class API
-
     attr_reader :gibbon
 
-    STORE_ID = 'fame_and_partners'
+    STORE_ID = ENV['MAILCHIMP_STORE_ID']
 
     def initialize
       @gibbon = Gibbon::Request.new(api_key: ENV['MAILCHIMP_API_KEY'])
