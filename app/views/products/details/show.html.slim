@@ -98,15 +98,14 @@ form.hide-fully#pdpDataForWishlist
                       // this will redirect not loged-in users to login page
                       a.js-add-to-moodboard href='javascript:;' data-user-present='#{current_spree_user.present?}' Add to Moodboard
                   .panel
-                    span.share-label
-                      | Share
+                    a.share-cta.js-panel-side-share-toggle href='#share-options' Share
                     ul.share-btn-wrap
                       li
-                        a.icon-facebook2 href='https://www.facebook.com/sharer/sharer.php?u=#{request.url}' target='_blank'
+                        a.icon-facebook2.js-share-pop-up href='https://www.facebook.com/sharer/sharer.php?u=#{request.url}' target='_blank'
                       li
-                        a.icon-twitter href='https://twitter.com/share?url=#{request.url}' target='_blank'
+                        a.icon-twitter.js-share-pop-up href='https://twitter.com/share?url=#{request.url}' target='_blank'
                       li
-                        a.icon-pinterest href='http://pinterest.com/pin/create/button/?url=#{request.url}' target='_blank'
+                        a.icon-pinterest.js-share-pop-up href='http://pinterest.com/pin/create/button/?url=#{request.url}' target='_blank'
                   
               ul.btn-wrap
                 li Guaranteed Fit
@@ -247,7 +246,12 @@ javascript:
       $('body').toggleClass('no-scroll');
     });
 
-    $('.pdp-panel-side-left .share-btn-wrap a').on('click', function () {
+    $('.js-panel-side-share-toggle').on('click', function () {
+      $('.share-btn-wrap').toggleClass('is-active');
+      return false;
+    });
+
+    $('.js-share-pop-up').on('click', function () {
       var newwindow = window.open($(this).attr('href'), '', 'left=20,top=20,width=500,height=500,toolbar=0,resizable=0,scrollbars=1');
       if (window.focus) {
         newwindow.focus();
