@@ -176,7 +176,23 @@ module Products
       index.delete
 
       logger.info('Create')
-      index.create
+
+      # Create index w/ defined types for specific fields
+      # TODO: Move work with index to model with all fields definitions
+      Tire.index index.name do
+        create :mappings => {
+          :document => {
+            :properties => {
+              :prices => {
+                :properties => {
+                  :aud => { :type => 'float'},
+                  :usd => { :type => 'float'},
+                }
+              }
+            }
+          }
+        }
+      end
 
       logger.info('Bulk Upload')
       index.bulk_store(variants)
