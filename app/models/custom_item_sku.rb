@@ -12,7 +12,9 @@ class CustomItemSku
     return line_item.variant.sku unless line_item.personalization.present?
     "#{style_number}#{size}#{colour}#{custom}"
   rescue StandardError => e
+    Raven.capture_exception(e)
     NewRelic::Agent.notice_error(e, line_item_id: line_item.id)
+
     "#{line_item.variant.sku}#{CUSTOM_MARKER}"
   end
 
