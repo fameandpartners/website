@@ -1,6 +1,6 @@
 class CreateDressesForPartiesLandingPage < ActiveRecord::Migration
   def up
-    unless Revolution::Page.where(path: '/weddings-and-parties').exists?
+    unless Revolution::Page.where(path: '/dress-for-parties').exists?
       page = Revolution::Page.create!(
         path:          '/dress-for-parties',
         template_path: '/landing_pages/dress_for_parties',
