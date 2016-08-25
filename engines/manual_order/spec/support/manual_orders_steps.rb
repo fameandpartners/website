@@ -61,8 +61,8 @@ module Acceptance
     end
 
     step 'I fill adjustment fields' do
-      find('.adjust_panel .amount').set('-10')
-      find('.adjust_panel .description').set('PROMO')
+      find('.adjust-panel .amount').set('-10')
+      find('.adjust-panel .description').set('PROMO')
     end
 
     step 'I select "Roger That" from chosen customers select box' do
