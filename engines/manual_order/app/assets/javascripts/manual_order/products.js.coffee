@@ -118,21 +118,21 @@ $ ->
     adjustPanelDescription.attr('readonly', false);
     adjustPanelOKButton.show()
     adjustButton.hide()
-    submitButton.attr('disabled', true)
+    submitButton.prop('disabled', true)
 
   adjustPanelOKButton.on 'click', =>
     if !$.trim(adjustPanelAmount.val()).length && !$.trim(adjustPanelDescription.val()).length
       adjustButton.show()
       adjustPanelOKButton.hide()
       adjustPanel.hide()
-      submitButton.attr('disabled', false)
+      submitButton.prop('disabled', false)
     else if !$.isNumeric( adjustPanelAmount.val() ) || !$.trim(adjustPanelDescription.val()).length
       alert('Please input correct amount value and description')
       return false
     else
       adjustButton.show()
       adjustPanelOKButton.hide()
-      adjustPanelAmount.attr('readonly', true);
-      adjustPanelDescription.attr('readonly', true);
-      submitButton.attr('disabled', false)
+      adjustPanelAmount.prop('readonly', true);
+      adjustPanelDescription.prop('readonly', true);
+      submitButton.prop('disabled', false)
 
