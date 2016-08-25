@@ -95,6 +95,7 @@
 // On-page/Anchor navigation
 .local-navigation-wrapper {
   padding-top: 38px;
+  display: block;
 }
 
 .local-navigation {
@@ -103,9 +104,52 @@
   display: inline-block;
   padding: 5px 15px;
 
+  &.fixed-nav {
+    position: fixed;
+    z-index: 3;
+    background: $c-neutral-white;
+    left: 0;
+  }
+
+  .nav-wrapper {
+    padding: 0;
+  }
+
+  .slick-list {
+    margin: 0 auto;
+  }
+
+  .slick-track {
+    width: auto;
+  }
+
+  .slick-arrow {
+    color: $c-neutral-10;
+    font-size: 2rem;
+    top: 23px;
+    padding: 18px 0;
+    background: $c-neutral-white;
+    @include box-shadow( 0 0 20px 10px rgba($c-neutral-white, 0.7) );
+    width: 16px;
+  }
+
+  // This is needed because the left arrow looks smaller than the right one with the default value above
+  .slick-arrow:first-child {
+    font-size: 3rem;
+  }
+
+  .slick-arrow:last-child {
+    right: 0;
+  }
+
+  .slick-disabled {
+    visibility: hidden;
+  }
+
   ul {
     text-align: center;
-    width: 100%;
+    min-width: 100%;
+    left: 0;
     padding: 0;
     margin: 0;
     @include display-flex;
@@ -144,9 +188,11 @@
 
     &.fixed-nav-mobile {
       width: 100%;
-      margin: 0 -15px;
+      margin: 0;
       position: fixed;
-      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       background: $c-neutral-white;
       z-index: 3;
     }
@@ -155,7 +201,7 @@
 
 }
 
-// Mobile
+// Mobile navigation
 #sideMenu .nav.navbar-nav ul {
   padding-left: 0;
 }
