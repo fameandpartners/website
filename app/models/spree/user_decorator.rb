@@ -131,15 +131,7 @@ Spree::User.class_eval do
   end
 
   def send_welcome_email
-    tracker = Marketing::CustomerIOEventTracker.new
-    tracker.identify_user(self, recent_site_version)
-    tracker.track(
-      self,
-      'account_created',
-      first_name: self.first_name,
-      last_name: self.last_name,
-      email: self.email
-    )
+    SendWelcomeEmailWorker.perform_async(self.id)
   end
 
   def facebook_data_value

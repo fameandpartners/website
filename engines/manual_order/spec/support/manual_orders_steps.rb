@@ -44,8 +44,8 @@ module Acceptance
       chosen_select('US4/AU8', from: '#forms_manual_order_size')
     end
 
-    step 'I select skirt length "Standart" from chosen length select box' do
-      chosen_select('Standart', from: '#forms_manual_order_length')
+    step 'I select skirt length "Standard" from chosen length select box' do
+      chosen_select('Standard', from: '#forms_manual_order_length')
     end
 
     step 'I select "Black" color from chosen color select box' do
