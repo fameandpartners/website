@@ -115,7 +115,7 @@
 
   .invited-member {
     position: relative;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     padding-right: 30px;
 
     .member-name {
@@ -136,6 +136,11 @@
 
   }
 
+  .link-btn {
+    display: block;
+    margin-bottom: 30px;
+  }
+
   // START - Mobile Specific Styling
   @media (max-width: $bootstrap-md-width - 1px) {
 
@@ -146,6 +151,10 @@
         display: none;
       }
 
+    }
+
+    .link-btn {
+      text-align: center;
     }
 
   }
