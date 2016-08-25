@@ -21,7 +21,7 @@ module Operations
       fill_order_details
       order.save
       finalize_order
-      create_univentory_units
+      create_inventory_units
 
       order
     end
@@ -74,7 +74,7 @@ module Operations
       order.project_delivery_date
     end
 
-    def create_univentory_units
+    def create_inventory_units
       unit = order.shipments.first.inventory_units.build
       unit.variant_id = variant.id
       unit.order_id = order.id
