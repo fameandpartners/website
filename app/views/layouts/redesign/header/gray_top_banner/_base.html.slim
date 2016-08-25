@@ -17,14 +17,10 @@ ruby:
           - if spree_user_signed_in?
             .account.container-fluid
               ul
-                li
-                  = link_to 'My Moodboard', wishlist_path, id: 'moodboard-trigger'
-                li
-                  = link_to 'My Details', profile_path
-                li
-                  = link_to 'My Orders', user_orders_path
-                li
-                  a href="/logout" LOGOUT
+                li = link_to 'My Orders', user_orders_path
+                li = link_to 'My Moodboards', wishlist_path, id: 'moodboard-trigger'
+                li = link_to 'My Details', profile_path
+                li = link_to 'Logout', '/logout'
 
 .container-fluid.nav-menu-container
   .row#home-menu.hidden-xs.hidden-sm
@@ -32,7 +28,7 @@ ruby:
     .col-md-3
       = link_to root_path, class: 'logo-wrap' do
         span.logo
-          = image_tag 'logo/new-logo.svg', :alt => 'Fame & Partners'
+          = image_tag 'logo/new-logo.svg', alt: 'Fame & Partners', class: 'img-responsive'
 
     .col-md-6.nav-main-menu.text-center
 

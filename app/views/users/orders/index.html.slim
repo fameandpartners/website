@@ -1,7 +1,7 @@
 .user-account-page-title
   .container
-    .page-title--details
-      h1.user-account-title.no-padding-bottom.text-white My Orders
+    .col-md-12
+      h1.text-center My Account
 
 .page-content.user.order.show
   .container.relative
@@ -49,3 +49,19 @@
                       | Return Requested
                     - if order.returnable?
                       = link_to 'return or exchange', new_user_returns_path(:order_number => order.number), :class => 'btn return'
+
+  .container.additional-info
+    .row.faqs-section
+      .col-md-8
+        h2 FAQs about Orders
+        .faq.faq-wrap
+          .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
+            = render 'shared/redesign/faqs/delivery_how_long'
+            = render 'shared/redesign/faqs/delivery_sign'
+            = render 'shared/redesign/faqs/delivery_POBOX'
+            = render 'shared/redesign/faqs/cancel_order'
+            = render 'shared/redesign/faqs/returns_policy'
+
+      .col-md-4
+        aside
+          = render 'shared/redesign/faqs/aside_panel_faq'

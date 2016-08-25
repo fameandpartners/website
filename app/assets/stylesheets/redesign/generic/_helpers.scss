@@ -94,12 +94,20 @@
   padding-right: 0 !important;
 }
 
+.no-margin {
+  margin: 0 !important;
+}
+
 .no-margin-bottom {
   margin-bottom: 0 !important;
 }
 
 .margin-top-30 {
   margin-top: 30px !important;
+}
+
+.img-responsive {
+  width: 100%; // Fix for IE
 }
 
 // Align content vericaly
@@ -125,24 +133,26 @@
 
 @media (min-width: $bootstrap-md-width) {
 
+  .no-margin-md {
+    margin: 0 !important;
+  }
+
   .line-break-md {
     display: block;
   }
 
-}
-
-// Same-height columns
-@media (min-width: $bootstrap-md-width) {
-
+  // Same-height columns
   .same-height-cols {
 
-    .row, .row > div[class*='col-'] {
+    > .row > div[class*='col-'] {
       display: -webkit-box;
       display: -moz-box;
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
-      flex: 1 1 auto;
+      -webkit-flex: auto;
+      -ms-flex: auto;
+      flex: auto;
     }
 
   }

@@ -9,6 +9,11 @@ FameAndPartners::Application.routes.draw do
     get '/us/user/auth/facebook/callback' => 'spree/omniauth_callbacks#facebook'
   end
 
+  ###################################################################
+  # Feed files redirections. They live above any `/us` + `/au` redirection
+  ###################################################################
+  get '/au/feeds/products/shopstyle.xml', to: 'marketing/feeds/shopstyle#au_feed'
+
   ########################
   # US Redirection to root
   ########################
@@ -187,6 +192,9 @@ FameAndPartners::Application.routes.draw do
 
     # Lookbook v2.0 landing pages
     get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
+
+    # IT Girl - Landing page
+    get '/it-girl' => 'products/collections#show', :permalink => 'it-girl', :as => :it_girl_landing_page
 
     # Landing pages
     get '/fameweddings'            => 'products/collections#show', permalink: 'bridesmaid14', as: :bridesmaid_landing_page

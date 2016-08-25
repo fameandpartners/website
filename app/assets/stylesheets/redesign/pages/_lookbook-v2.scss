@@ -19,6 +19,18 @@
 
     .sub-heading {
       font-style: normal;
+      line-height: 3rem;
+    }
+
+    ul.sub-heading {
+      margin: 0;
+      padding: 2rem 0;
+
+      li {
+        margin: 0;
+        list-style: none;
+      }
+
     }
 
   }

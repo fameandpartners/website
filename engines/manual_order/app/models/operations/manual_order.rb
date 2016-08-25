@@ -66,7 +66,7 @@ module Operations
     end
 
     def address_params
-      {
+      addr = {
         firstname: params[:first_name],
         lastname: params[:last_name],
         address1: params[:address1],
@@ -78,6 +78,9 @@ module Operations
         phone: params[:phone],
         email: params[:email]
       }
+
+      addr.merge!({state_name: 'no state'}) if params[:state].nil?
+      addr
     end
 
     def update_number(_number)

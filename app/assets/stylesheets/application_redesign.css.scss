@@ -194,6 +194,7 @@ z-index levels
 @import 'redesign/components/lists';
 @import 'redesign/components/delivery';
 @import 'redesign/components/tabs';
+@import 'redesign/components/modals';
 @import 'redesign/components/nav-pill';
 @import 'redesign/components/dropdowns';
 @import 'redesign/components/breadcrumb';
@@ -219,6 +220,7 @@ z-index levels
 
 // Modals
 @import 'redesign/modals/vex';
+@import 'redesign/vendor/react-modal';
 
 // Pages
 @import 'redesign/pages/contact';
@@ -245,7 +247,7 @@ z-index levels
 
 //My Account
 @import 'redesign/pages/my-account/common';
-@import 'redesign/returns';
+@import 'redesign/pages/returns';
 
 // Generic
 @import 'redesign/generic/content-order';
