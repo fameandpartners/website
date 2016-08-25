@@ -39,15 +39,15 @@
             li.link = link_to "Wedding Guests", "#wedding-guests"
 
   // Look 1
-  - current_dress_name = "Estelle"
-  - current_dress_link = "#{dresses_path}/dress-estelle-two-piece-852?color=white"
-  - current_edit_link = "#{dresses_path}/wedding"
+  - current_dress_name = "Milena Two Piece"
+  - current_dress_link = "#{dresses_path}/dress-milena-two-piece-1090?color=white"
+  - current_edit_link = "#{dresses_path}/bridal"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$349"
+    - current_dress_price = "$419"
   - else
     // USA - PRICE
-    - current_dress_price = "$349"
+    - current_dress_price = "329"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#modern-bride
     .row
@@ -89,19 +89,15 @@
                | Shop & customize
 
   // Look 2
-  - current_dress_1_name = "Calafia"
+  - current_dress_1_name = "Shaylyn Dress"
   - current_dress_1_link = "#{dresses_path}/dress-calafia-1009?color=ivory"
-  - current_dress_2_name = "Kelis"
-  - current_dress_2_link = "#{dresses_path}/dress-kelis-1067?color=pale-blue"
-  - current_edit_link = "#{dresses_path}/white"
+  - current_edit_link = "#{dresses_path}/white-ivory"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
     - current_dress_1_price = "$399"
-    - current_dress_2_price = "$249"
   - else
     // USA - PRICE
-    - current_dress_1_price = "$349"
-    - current_dress_2_price = "$199"
+    - current_dress_1_price = "$319"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#rehearsal-dinner
     .row
@@ -125,7 +121,6 @@
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
             .product-info = link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link
-            .product-info = link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link
 
           .cta-wrapper
             = link_to current_edit_link, class: 'cta-link'
@@ -144,15 +139,19 @@
                | Shop & customize
 
   // Look 3
-  - current_dress_name = "Lux"
-  - current_dress_link = "#{dresses_path}/dress-lux-1038?color=pastel-pink"
-  - current_edit_link = "#{dresses_path}/bridesmaid"
+  - current_dress_1_name = "Callais Dress"
+  - current_dress_1_link = "#{dresses_path}/dress-callais-1064?color=pale-blue"
+  - current_dress_2_name = "Kelis Dress"
+  - current_dress_2_link = "#{dresses_path}/dress-kelis-1067?color=pale-blue"
+  - current_edit_link = "/bridesmaid-dresses"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$279"
+    - current_dress_1_price = "$329"
+    - current_dress_2_price = "$249"
   - else
     // USA - PRICE
-    - current_dress_price = "$219"
+    - current_dress_1_price = "$299"
+    - current_dress_2_price = "$199"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#bridesmaids
     .row
@@ -175,7 +174,8 @@
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link
+            .product-info = link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link
+            .product-info = link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link
 
           .cta-wrapper
             = link_to current_edit_link, class: 'cta-link'
@@ -194,15 +194,15 @@
                | Shop & customize
 
   // Look 4
-  - current_dress_name = "Ziv"
-  - current_dress_link = "#{dresses_path}/dress-ziv-1037?color=champagne"
+  - current_dress_name = "Danielle Dress"
+  - current_dress_link = "#{dresses_path}/dress-callais-1064?color=pale-blue"
   - current_edit_link = "#{dresses_path}/wedding-guests"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$199"
+    - current_dress_price = "$339"
   - else
     // USA - PRICE
-    - current_dress_price = "$259"
+    - current_dress_price = "$269"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#wedding-guests
     .row

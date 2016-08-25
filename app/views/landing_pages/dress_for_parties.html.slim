@@ -40,9 +40,9 @@
             li.link = link_to "Up All Night", "#all-night"
 
   // Look 1
-  - current_dress_name = "Estelle"
+  - current_dress_name = "Estelle Two Piece"
   - current_dress_link = "#{dresses_path}/dress-estelle-two-piece-852?color=white"
-  - current_edit_link = "#{dresses_path}/wedding"
+  - current_edit_link = "#{dresses_path}/black-tie"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
     - current_dress_price = "$349"
@@ -90,19 +90,15 @@
                | Shop & customize
 
   // Look 2
-  - current_dress_1_name = "Calafia"
-  - current_dress_1_link = "#{dresses_path}/dress-calafia-1009?color=ivory"
-  - current_dress_2_name = "Kelis"
-  - current_dress_2_link = "#{dresses_path}/dress-kelis-1067?color=pale-blue"
-  - current_edit_link = "#{dresses_path}/white"
+  - current_dress_1_name = "Catalina Dress"
+  - current_dress_1_link = "#{dresses_path}/dress-catalina-997?color=pale-blue"
+  - current_edit_link = "#{dresses_path}/cocktail"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_1_price = "$399"
-    - current_dress_2_price = "$249"
+    - current_dress_1_price = "$259"
   - else
     // USA - PRICE
-    - current_dress_1_price = "$349"
-    - current_dress_2_price = "$199"
+    - current_dress_1_price = "$229"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#cocktail-lite
     .row
@@ -126,7 +122,6 @@
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
             .product-info = link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link
-            .product-info = link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link
 
           .cta-wrapper
             = link_to current_edit_link, class: 'cta-link'
@@ -145,9 +140,9 @@
                | Shop & customize
 
   // Look 3
-  - current_dress_name = "Lux"
+  - current_dress_name = "Lux Dress"
   - current_dress_link = "#{dresses_path}/dress-lux-1038?color=pastel-pink"
-  - current_edit_link = "#{dresses_path}/bridesmaid"
+  - current_edit_link = "#{dresses_path}/day-night"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
     - current_dress_price = "$279"
@@ -195,15 +190,15 @@
                | Shop & customize
 
   // Look 4
-  - current_dress_name = "Ziv"
-  - current_dress_link = "#{dresses_path}/dress-ziv-1037?color=champagne"
-  - current_edit_link = "#{dresses_path}/wedding-guests"
+  - current_dress_name = "Ziv Dress"
+  - current_dress_link = "#{dresses_path}/dress-ziv-1037?color=taupe"
+  - current_edit_link = "#{dresses_path}/night-out"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$199"
+    - current_dress_price = "$259"
   - else
     // USA - PRICE
-    - current_dress_price = "$259"
+    - current_dress_price = "$199"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#night-out
     .row
@@ -245,19 +240,15 @@
                | Shop & customize
 
   // Look 5
-  - current_dress_1_name = "Foxi"
-  - current_dress_1_link = "#{dresses_path}/dress-foxi-643?color=black"
-  - current_dress_2_name = "Romeo"
-  - current_dress_2_link = "#{dresses_path}/dress-romeo-994?color=black"
+  - current_dress_1_name = "Romeo Dress"
+  - current_dress_1_link = "#{dresses_path}/dress-romeo-994?color=black"
   - current_edit_link = "#{dresses_path}/party"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_1_price = "$229"
-    - current_dress_2_price = "$379"
+    - current_dress_1_price = "$379"
   - else
     // USA - PRICE
-    - current_dress_1_price = "$189"
-    - current_dress_2_price = "$299"
+    - current_dress_1_price = "$299"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#all-night
     .row
@@ -281,7 +272,6 @@
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
             .product-info = link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link
-            .product-info = link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link
 
           .cta-wrapper
             = link_to current_edit_link, class: 'cta-link'
