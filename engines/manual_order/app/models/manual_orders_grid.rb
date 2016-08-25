@@ -6,7 +6,7 @@ class ManualOrdersGrid
   scope do
     Spree::LineItem.joins(:order)
       .where("spree_orders.completed_at is NOT NULL and (spree_orders.number ILIKE 'M%' or spree_orders.number ILIKE 'E%')")
-      .order('spree_orders.completed_at DESC').includes(:order)
+      .order('spree_orders.completed_at DESC')
   end
 
   decorate { |line_item| Orders::LineItemPresenter.new(line_item, Orders::OrderPresenter.new(line_item.order)) }
