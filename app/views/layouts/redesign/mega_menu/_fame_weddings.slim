@@ -3,7 +3,7 @@
   .col-md-4
     .weddings-and-parties.nav-item
       = link_to weddings_parties_page_path
-        img src='#{image_path('mega-menu/fame-weddings/weddings-and-parties.jpg')}' class='img-responsive'
+        = image_tag 'mega-menu/fame-weddings/weddings-and-parties.jpg', class: 'img-responsive', alt: ''
 
         .content-wrap
           .container-cta
@@ -16,7 +16,7 @@
   .col-md-4
     .wedding-planner.nav-item
       = link_to bridesmaid_landing_page_path
-        img src='#{image_path('mega-menu/fame-weddings/wedding-planner.jpg')}' class='img-responsive'
+        = image_tag 'mega-menu/fame-weddings/wedding-planner.jpg', class: 'img-responsive', alt: ''
 
         .content-wrap
           .container-cta
@@ -29,7 +29,7 @@
   .col-md-4
     .free-styling-session.nav-item
       = link_to wedding_consultation_path
-        img src='#{image_path('mega-menu/fame-weddings/styling-session.jpg')}' class='img-responsive'
+        = image_tag 'mega-menu/fame-weddings/styling-session.jpg', class: 'img-responsive', alt: ''
 
         .content-wrap
           .container-cta
