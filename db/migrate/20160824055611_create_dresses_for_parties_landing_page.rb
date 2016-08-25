@@ -4,7 +4,7 @@ class CreateDressesForPartiesLandingPage < ActiveRecord::Migration
     {
       path:             '/dress-for-parties',
       template_path:    '/landing_pages/dress_for_parties',
-      pids:             %w(1054-ivory 283-white 262-white 345-white 1060-ivory 1049-ivory 1008-white 1009-ivory 1064-blush 1096-light-nude 1106-mushroom 635-peach 861-pale-grey 997-pale-blue 840-navy 582-navy 1037-champagne 1084-indigo-cotton-stripe 1087-navy 1067-pale-blue 987-grey 1018-black 1071-pale-blue 1056-looking-glass 980-burgundy 1092-black 643-black 1028-light-khaki 1095-black 485-black 640-forest-green 1046-black).join(','),
+      pids:             %w(1119-navy 1128-black 1136-navy 1127-black 1067-pale-blue 1077-navy 1061-looking-through-glass 1069-white 1138-navy 1112-rosewater-floral 1091-pale-pink 1030-dark-burgundy 1065-black 1123-champagne 1094-ornate-midnight-floral 1080-navy 1031-black 1042-pale-pink 1139-silver 1052-black 1124-black 1047-ivory 1043-navy 1048-ivory 980-burgundy 1092-black 643-black 1028-light-khaki 1053-black 485-black 640-forest-green 1046-black).join(','),
       heading:          'Dress for parties',
       title:            'Dress for parties',
       meta_description: 'Discover beautiful party dresses here at Fame & Partners',
