@@ -6,6 +6,7 @@ $ ->
 
   colorUrl = '/fame_admin/manual_orders/colors/:product_id'
   colorSelect = $('#forms_manual_order_color')
+
   optColors = $('<optgroup>').attr('label', "Colors")
   optCustomColors = $('<optgroup>').attr('label', "Custom Colors + $16.00")
 
@@ -21,12 +22,12 @@ $ ->
   priceUrl = '/fame_admin/manual_orders/prices/:product_id/:size_id/:color_id/:currency'
   priceTag = $('h4.price')
 
-  adjustButton = $('.adjust_btn_panel .adjust_btn')
-  adjustButtonPanel = $('.adjust_btn_panel')
-  adjustPanel = $('.adjust_panel')
+  adjustButtonPanel = $('.adjust-btn-panel')
+  adjustButton = $('.adjust-btn', adjustButtonPanel)
+  adjustPanel = $('.adjust-panel')
   adjustPanelAmount = $('.amount', adjustPanel)
   adjustPanelDescription = $('.description', adjustPanel)
-  adjustPanelOKButton = $('.ok_button', adjustPanel)
+  adjustPanelOKButton = $('.ok-button', adjustPanel)
   submitButton = $('.submit_btn')
 
   currencySelect = $('#forms_manual_order_currency')

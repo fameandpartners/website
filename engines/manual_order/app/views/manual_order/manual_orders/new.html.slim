@@ -90,14 +90,14 @@ javascript:
               .panel-heading Price
               .panel-body
                 h4.price Please select product details
-                .adjust_btn_panel style='display:none'
-                  = link_to 'Adjust', '#', class: 'btn btn-xs btn-info adjust_btn'
-                .adjust_panel style='display:none'
-                  | Amount: <input type="text" name="forms_manual_order[adj_amount]" class="amount"/>
-                  | &nbsp;&nbsp;
-                  | Description: <input type="text" name="forms_manual_order[adj_description]" class="description" />
-                  | &nbsp;&nbsp;
-                  = link_to 'OK', '#', class: 'btn btn-xs btn-info ok_button'
+                .adjust-btn-panel.hidden-el
+                  = link_to 'Adjust', '#', class: 'btn btn-xs btn-info adjust-btn'
+                .adjust-panel.hidden-el
+                  span Amount:
+                  = text_field_tag 'forms_manual_order[adj_amount]', nil, class: 'amount'
+                  span Description:
+                  = text_field_tag 'forms_manual_order[adj_description]', nil, class: 'description'
+                  = link_to 'OK', '#', class: 'btn btn-xs btn-info ok-button'
         .row
           .col-sm-12.text-center
             = f.submit 'Complete Order and Send for Manufacturing', class: 'btn btn-primary save'
