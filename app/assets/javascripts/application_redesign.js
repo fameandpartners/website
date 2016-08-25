@@ -124,6 +124,11 @@
 //--------------------------------
 //= require partials/hero-tile-carousel
 
+//--------------------------------
+// Marketing Tracking Events
+//--------------------------------
+//= require marketing/hero_carousel_tracking
+
 jQuery(document).ready(function($){
   $('body').addClass('ready');
 
