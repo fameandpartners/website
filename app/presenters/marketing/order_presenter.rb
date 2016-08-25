@@ -20,7 +20,7 @@ module Marketing
     end
 
     def auto_account
-      order.user && order.user.automagically_registered?
+      order.user.try(:automagically_registered?)
     end
 
     def user
