@@ -113,6 +113,29 @@
 
   }
 
+  .invited-member {
+    position: relative;
+    margin-bottom: 10px;
+    padding-right: 30px;
+
+    .member-name {
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .member-role {
+      font-style: italic;
+      line-height: 1;
+    }
+
+    .btn-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+  }
+
   // START - Mobile Specific Styling
   @media (max-width: $bootstrap-md-width - 1px) {
 

@@ -53,8 +53,8 @@
                 .btn-wrap.text-center
                   .row
                     .col-md-4.col-md-offset-8
-                      a.btn.btn-black.btn-block href='#tab-step-2' data-next-step='2' data-toggle='tab' NEXT QUESTION
-                      a.js-ga-tracker href='#tab-step-2' data-next-step='2' data-toggle='tab' data-ga-description='Style Up-To-There'
+                      a.btn.btn-black.btn-block href='#tab-step-2' data-next-step='2' data-toggle='tab' NEXT STEP
+                      a href='#tab-step-2' data-next-step='2' data-toggle='tab'
                         span.cta-link-alt
                           span Skip this step
                       
@@ -67,22 +67,41 @@
                 label for='friends_name' Name
                 input.form-control.form-control-md id='friends_name'
               .col-md-6.form-group
-                label for='wedding_duty' Wedding day duty
-                select.form-control.form-control-md id='wedding_duty'
-                  option Select
-                  option Duty 1
+                = f.label :owner_relationship, 'Wedding day duty'
+                = f.select :owner_relationship, f.object.owner_relationships, {}, class: 'form-control form-control-md'
               .col-md-12.form-group
                 label for='friends_email' Email address
                 input.form-control.form-control-md type='email' id='friends_email'
-              .col-md-12.btn-wrap.text-center
-                = f.button 'ADD MEMBER'
-              .col-md-12.btn-wrap.text-center
-                a.btn.btn-black href='#tab-step-1' data-next-step='1' data-toggle='tab' PREVIOUS QUESTION
-                a.btn.btn-black href='#tab-step-3' data-next-step='3' data-toggle='tab' NEXT QUESTION
-              .col-md-12.btn-wrap.text-center
-                a href='#tab-step-3' data-next-step='3' data-toggle='tab'
-                  span.cta-link-alt
-                    span Skip this step
+              .col-md-12.form-group.text-center.margin-top-30
+                = f.button 'ADD MEMBER', class:'btn btn-lowlight'
+              .col-md-12.form-group.margin-top-30
+                .row
+                  .col-md-10.col-md-offset-1
+                    .row
+                      .col-md-6
+                        .invited-member
+                          .member-name.txt-truncate-1 TATATATAT TATATTA
+                          .member-role Bridesmaid
+                          a.btn-close.sml href='javascript:;'
+                            .hide-visually remove member
+                      .col-md-6
+                        .invited-member
+                          .member-name.txt-truncate-1 TATATATAT TATATTA
+                          .member-role Bridesmaid
+                          a.btn-close.sml href='javascript:;'
+                            .hide-visually remove member
+              .col-md-12
+                .btn-wrap
+                  .row
+                    .col-md-4
+                      a href='#tab-step-1' data-next-step='1' data-toggle='tab'
+                        span.cta-link-alt
+                          span Previous step
+                    .col-md-4.col-md-offset-4.text-center
+                      a.btn.btn-black.btn-block href='#tab-step-3' data-next-step='3' data-toggle='tab' NEXT STEP
+                      a href='#tab-step-3' data-next-step='3' data-toggle='tab'
+                        span.cta-link-alt
+                          span Skip this step
 
           #tab-step-3.tab-pane
             div
@@ -176,73 +195,92 @@
                       .swatch.color-red
                       input type='checkbox'
                       .copy Red
-                  .col-md-12.btn-wrap.text-center
-                    a.btn.btn-black href='#tab-step-2' data-next-step='2' data-toggle='tab' PREVIOUS QUESTION
-                    a.btn.btn-black href='#tab-step-4' data-next-step='4' data-toggle='tab' NEXT QUESTION
-                  .col-md-12.btn-wrap.text-center
-                    a href='#tab-step-4' data-next-step='4' data-toggle='tab'
-                      span.cta-link-alt
-                        span Skip this step
+              .col-md-12
+                .btn-wrap
+                  .row
+                    .col-md-4
+                      a href='#tab-step-2' data-next-step='2' data-toggle='tab'
+                        span.cta-link-alt
+                          span Previous step
+                    .col-md-4.col-md-offset-4.text-center
+                      a.btn.btn-black.btn-block href='#tab-step-4' data-next-step='4' data-toggle='tab' NEXT STEP
+                      a href='#tab-step-4' data-next-step='4' data-toggle='tab'
+                        span.cta-link-alt
+                          span Skip this step
           
           #tab-step-4.tab-pane
             div
               h2.title.text-center Dress Length
               h4.title.text-center If you're not sure, pick as many as you like
             .row
-              .col-md-6.col-md-offset-3
+              .col-md-12
                 .row
-                  .col-md-4.custom-form-element
-                    label
-                      input type='checkbox'
-                      span.icon
-                      span Long
-                  .col-md-4.custom-form-element
-                    label
-                      input type='checkbox'
-                      span.icon
-                      span Medium
-                  .col-md-4.custom-form-element
-                    label
-                      input type='checkbox'
-                      span.icon
-                      span Short
-                  .col-md-12.btn-wrap.text-center
-                    a.btn.btn-black href='#tab-step-3' data-next-step='3' data-toggle='tab' PREVIOUS QUESTION
-                    a.btn.btn-black href='#tab-step-5' data-next-step='5' data-toggle='tab' NEXT QUESTION
-                  .col-md-12.btn-wrap.text-center
-                    a href='#tab-step-5' data-next-step='5' data-toggle='tab'
-                      span.cta-link-alt
-                        span Skip this step
+                  .col-md-6.col-md-offset-3
+                    .row
+                      .col-md-4.custom-form-element
+                        label
+                          input type='checkbox'
+                          span.icon
+                          span Long
+                      .col-md-4.custom-form-element
+                        label
+                          input type='checkbox'
+                          span.icon
+                          span Medium
+                      .col-md-4.custom-form-element
+                        label
+                          input type='checkbox'
+                          span.icon
+                          span Short
+              .col-md-12
+                .btn-wrap
+                  .row
+                    .col-md-4
+                      a href='#tab-step-3' data-next-step='3' data-toggle='tab'
+                        span.cta-link-alt
+                          span Previous step
+                    .col-md-4.col-md-offset-4.text-center
+                      a.btn.btn-black.btn-block href='#tab-step-5' data-next-step='5' data-toggle='tab' NEXT STEP
+                      a href='#tab-step-5' data-next-step='5' data-toggle='tab'
+                        span.cta-link-alt
+                          span Skip this step
           
           #tab-step-5.tab-pane
             div
               h2.title.text-center Fabric Type
               h4.title.text-center If you're not sure, pick as many as you like
             .row
-              .col-md-6.col-md-offset-3
+              .col-md-12
                 .row
-                  .col-md-4.custom-form-element
-                    label
-                      input type='checkbox'
-                      span.icon
-                      span Satin
-                  .col-md-4.custom-form-element
-                    label
-                      input type='checkbox'
-                      span.icon
-                      span Cotton
-                  .col-md-4.custom-form-element
-                    label
-                      input type='checkbox'
-                      span.icon
-                      span Georgette
-                  .col-md-12.btn-wrap.text-center
-                    a.btn.btn-black href='#tab-step-4' data-next-step='4' data-toggle='tab' PREVIOUS QUESTION
-                    = link_to('FINISH', @moodboard, class:'btn btn-black')
-                  .col-md-12.btn-wrap.text-center
-                    = link_to @moodboard
-                      span.cta-link-alt
-                        span Skip this step
+                  .col-md-6.col-md-offset-3
+                    .row
+                      .col-md-4.custom-form-element
+                        label
+                          input type='checkbox'
+                          span.icon
+                          span Satin
+                      .col-md-4.custom-form-element
+                        label
+                          input type='checkbox'
+                          span.icon
+                          span Cotton
+                      .col-md-4.custom-form-element
+                        label
+                          input type='checkbox'
+                          span.icon
+                          span Georgette
+              .col-md-12
+                .btn-wrap
+                  .row
+                    .col-md-4
+                      a href='#tab-step-4' data-next-step='4' data-toggle='tab'
+                        span.cta-link-alt
+                          span Previous step
+                    .col-md-4.col-md-offset-4.text-center
+                      = link_to('FINISH', @moodboard, class:'btn btn-black btn-block')
+                      = link_to @moodboard
+                        span.cta-link-alt
+                          span Skip this step
 
 
 javascript:
