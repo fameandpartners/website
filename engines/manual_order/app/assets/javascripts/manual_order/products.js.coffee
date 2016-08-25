@@ -24,9 +24,9 @@ $ ->
   adjustButton = $('.adjust_btn_panel .adjust_btn')
   adjustButtonPanel = $('.adjust_btn_panel')
   adjustPanel = $('.adjust_panel')
-  adjustPanelAmount = $('.adjust_panel .amount')
-  adjustPanelDescription = $('.adjust_panel .description')
-  adjustPanelOKButton = $('.adjust_panel .ok_button')
+  adjustPanelAmount = $('.amount', adjustPanel)
+  adjustPanelDescription = $('.description', adjustPanel)
+  adjustPanelOKButton = $('.ok_button', adjustPanel)
   submitButton = $('.submit_btn')
 
   currencySelect = $('#forms_manual_order_currency')
