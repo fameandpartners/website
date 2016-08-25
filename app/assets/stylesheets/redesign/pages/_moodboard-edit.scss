@@ -157,12 +157,20 @@
       text-align: center;
     }
 
+    .btn-block {
+      margin-bottom: 30px;
+    }
+
+    .custom-form-element label {
+      font-size: 0.75em;
+
+      .icon {
+        margin-right: 5px;
+      }
+
+    }
+
   }
   // END - Mobile Specific Styling
-
-  // START - Desktop Specific Styling
-  @media (min-width: $bootstrap-md-width) {
-  }
-  // END - Desktop Specific Styling
 
 }
