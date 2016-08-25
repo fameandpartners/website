@@ -114,8 +114,8 @@ $ ->
 
   adjustButton.on 'click', =>
     adjustPanel.show()
-    adjustPanelAmount.attr('readonly', false);
-    adjustPanelDescription.attr('readonly', false);
+    adjustPanelAmount.prop('readonly', false);
+    adjustPanelDescription.prop('readonly', false);
     adjustPanelOKButton.show()
     adjustButton.hide()
     submitButton.prop('disabled', true)
