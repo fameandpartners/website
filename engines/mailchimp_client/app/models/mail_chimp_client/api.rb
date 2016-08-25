@@ -1,3 +1,5 @@
+require 'gibbon'
+
 module MailChimpClient
   class API
     attr_reader :gibbon
@@ -20,7 +22,7 @@ module MailChimpClient
     end
 
     def add_product(product)
-      return unless product
+      return unless product.present?
 
       product_params = {
         id:       product.sku,
@@ -32,7 +34,7 @@ module MailChimpClient
     end
 
     def add_variant(product, sku)
-      return unless product && sku
+      return unless product.present? && sku.present?
 
       variant_params = {
         id:    sku,
@@ -44,7 +46,7 @@ module MailChimpClient
     end
 
     def add_order(order)
-      return unless order
+      return unless order.present?
 
       order_params = MailChimpClient::OrderPresenter.new(order).read
 
