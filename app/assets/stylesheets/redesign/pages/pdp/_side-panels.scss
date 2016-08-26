@@ -193,7 +193,7 @@
   }
 
   .share-btn-wrap {
-    margin: 0;
+    margin: 0 0 0 8px;
     display: none;
     text-align: inherit;
 
@@ -203,12 +203,14 @@
 
     li {
       border-left: none;
-      margin-left: 8px;
+      padding: 0;
+      margin: 0;
 
       a {
         font-size: 1.4rem;
         color: $c-neutral-9;
         margin-top: 0;
+        padding: 0 6px;
         text-decoration: none;
       }
 
