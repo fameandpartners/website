@@ -97,15 +97,21 @@ form.hide-fully#pdpDataForWishlist
                     - else
                       // this will redirect not loged-in users to login page
                       a.js-add-to-moodboard href='javascript:;' data-user-present='#{current_spree_user.present?}' Add to Moodboard
+
                   .panel
-                    a.share-cta.js-panel-side-share-toggle href='#share-options' Share
-                    ul.share-btn-wrap
-                      li
-                        a.icon-facebook2.js-share-pop-up href='https://www.facebook.com/sharer/sharer.php?u=#{request.url}' target='_blank'
-                      li
-                        a.icon-twitter.js-share-pop-up href='https://twitter.com/share?url=#{request.url}' target='_blank'
-                      li
-                        a.icon-pinterest.js-share-pop-up href='http://pinterest.com/pin/create/button/?url=#{request.url}' target='_blank'
+                    .addthis_toolbox
+                      a.share-cta.js-panel-side-share-toggle href='#share-options' Share
+
+                      ul.share-btn-wrap.custom_images
+                        li
+                          a.addthis_button_facebook title='Share to Facebook'
+                            .icon-facebook2
+                        li
+                          a.addthis_button_twitter title='Share to Twitter'
+                            .icon-twitter
+                        li
+                          a.addthis_button_pinterest_share title='Share to Pinterest'
+                            .icon-pinterest
 
               ul.btn-wrap
                 li Guaranteed Fit
@@ -236,6 +242,9 @@ form.hide-fully#pdpDataForWishlist
     // content bottom wrap END
 
 = render partial: 'micro_data'
+
+script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57c0c134e80f9415"
+
 
 javascript:
   $(document).ready(function() {
