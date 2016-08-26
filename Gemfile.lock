@@ -320,7 +320,7 @@ GEM
     customerio (1.0.0)
       multi_json (~> 1.0)
     dalli (2.7.6)
-    database_cleaner (0.9.1)
+    database_cleaner (1.5.3)
     datagrid (1.4.4)
       rails (>= 3.2.22.2)
     debug_inspector (0.0.2)
@@ -887,7 +887,7 @@ DEPENDENCIES
   configatron
   customerio (~> 1.0.0)
   dalli
-  database_cleaner (= 0.9.1)
+  database_cleaner
   default_value_for
   device_detector (~> 0.8.1)
   droidcss (~> 2.0.4)

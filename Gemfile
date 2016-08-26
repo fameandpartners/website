@@ -145,11 +145,11 @@ group :test do
   gem 'selenium-webdriver', '~> 2.53.0'
   gem 'show_me_the_cookies', '~> 3.1.0'
   gem 'turnip', '~> 1.3.1'
-  gem 'database_cleaner', '0.9.1'
   gem 'factory_girl_rails', '4.2.1'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-collection_matchers'
   gem 'rspec-retry'
+  gem 'database_cleaner', require: false
   gem 'shoulda-matchers'
   gem 'timecop'
   gem 'vcr', '~> 2.9.3'
