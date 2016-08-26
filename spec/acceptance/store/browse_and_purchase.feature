@@ -5,22 +5,14 @@ Feature: Browse and Purchase
     And Data is setup correctly
 
   @javascript
-  Scenario: Search For Non-Existent Dress
+  Scenario: Search For Dresses
     When I visit the "/" path
     And Search for "Non Existing Dress"
     Then I should see "We couldn't find the stuff you were looking for."
-
-  # Regression test for: https://github.com/fameandpartners/website/pull/1637
-  @javascript
-  Scenario: Search For Empty String
-    When I visit the "/" path
-    And Search for an empty string
-    Then I should see "Results for"
-
-  @javascript
-  Scenario: Search For Existent Dress
-    When I visit the "/" path
     And Search for "Connie"
+    Then I should see "Results for"
+    # Regression test for: https://github.com/fameandpartners/website/pull/1637
+    And Search for an empty string
     Then I should see "Results for"
 
   Scenario: List All Lookbooks
