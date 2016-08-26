@@ -30,7 +30,6 @@ $(document).ready ->
         required: (el) ->
           country = $('#forms_manual_order_country option:selected').text()
           return true if _.include(['Australia', 'United States', 'Canada'], country)
-#          '#customer_new:checked'
       'forms_manual_order[zipcode]':
         required: '#customer_new:checked'
       'forms_manual_order[phone]':
