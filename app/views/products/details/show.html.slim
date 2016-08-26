@@ -4,7 +4,7 @@ ruby:
 
   @product.default_color_options.each do |color|
     product_paths[color.id] = collection_product_path(@product, url_params.merge(color: color.name))
-    
+
   @current_site_version = current_site_version.to_json
   @productDiscount = @product.discount.to_json == 'null' ? 0 : @product.discount.to_json;
   end
@@ -21,13 +21,13 @@ ruby:
       images: #{@product.all_images.to_json},
       sizeChart: #{ @product.size_chart_data.to_json }
     };"
-    
+
   init_product_details_page = "page.initProductDetailsPage();"
 
 = content_for :inline_javascript_top do
   = raw product_details_page_data
-  
-= content_for :inline_javascript do		
+
+= content_for :inline_javascript do
   = raw init_product_details_page
 
 = content_for :head
@@ -39,7 +39,7 @@ ruby:
 
 - if Features.active?(:marketing_modals)
   #modal-add-to-cart-template.hidden
-  
+
 // TODO:  note this is very naughty way of connecting PDP react components with
 //        legacy JS, for example shopping cart.
 //        This will need to be fixed later after we migrate coffee to react
@@ -51,7 +51,7 @@ form.hide-fully#pdpDataForCheckout
   input id='pdpCartVariantId' type='hidden' value=''
   input id='pdpCartDressVariantId' type='hidden' value=''
   input id='pdpCartLength' type='hidden' value=''
-  
+
 form.hide-fully#pdpDataForWishlist
   input id='pdpWishlistColorId' type='hidden' value='#{raw @product.color_id}'
   input id='pdpWishlistVariantId' type='hidden' value=''
@@ -68,12 +68,12 @@ form.hide-fully#pdpDataForWishlist
               .hide-visually Close Menu
           .panel-side
             .panel-side-container
-            
+
               div
                 h1.heading = @product.name
                 - if @product.name.downcase.include?('skirt')
                   p (Skirt Only)
-                  
+
                 #accordion role='tablist'
                   .panel
                     a href='#collapse-description' data-toggle='collapse' data-parent='#accordion' Description
@@ -106,7 +106,7 @@ form.hide-fully#pdpDataForWishlist
                         a.icon-twitter.js-share-pop-up href='https://twitter.com/share?url=#{request.url}' target='_blank'
                       li
                         a.icon-pinterest.js-share-pop-up href='http://pinterest.com/pin/create/button/?url=#{request.url}' target='_blank'
-                  
+
               ul.btn-wrap
                 li Guaranteed Fit
                 li Free Shipping
@@ -115,18 +115,18 @@ form.hide-fully#pdpDataForWishlist
       .col-md-6.panel-media
         #PdpGallery
         a.trigger-details.visible-xs.visible-sm.js-panel-side-left-toggle href='javascript:;' + DETAILS
-        
+
       .col-md-3
         .panel-side-wrap.js-panel-side-right
           // to enable affix data-spy='affix' to this container
           .panel-side
             #PdpSidePanelRight
-    
-    // content bottom wrap START 
+
+    // content bottom wrap START
     // js class is used to get bottom offset for sticky side panel
     .js-bottom-content
-    
-      // content tabs START 
+
+      // content tabs START
       // these controls needs to be hidden for mobile
       #content-tab-controls.row.hidden-xs.hidden-sm
         .col-md-6.col-md-offset-3
@@ -137,7 +137,7 @@ form.hide-fully#pdpDataForWishlist
               a href='#tab-fabric-information' data-toggle='tab' Fabric Information
             li.col-md-4
               a.js-tab-trigger-inspiration href='#dress-inspiration' data-toggle='tab' Dress Inspiration
-      
+
       #content-tabs.content-tabs.tab-content
         #tab-your-way.row.tab-pane.in.active
           .l-tab-your-way
@@ -193,7 +193,7 @@ form.hide-fully#pdpDataForWishlist
                 br
                 | See garment care label for further details on how to care for your garment.
               p.sku SKU: #{@product.sku}
-        
+
         #dress-inspiration.row.tab-pane
           .l-tab-inspiration
             - if @product.song
@@ -209,13 +209,13 @@ form.hide-fully#pdpDataForWishlist
                 .media-wrap
                   = image_tag item.image_url
       // content tabs END
-      
+
       // content styling advice START
       .row
         .col-md-4
           .c-styling-advice
             h2 Get Free Styling Advice
-            p Let us help you to style your perfect outfit for any occasion. Meet Amber, one of the most influential stylists working today. 
+            p Let us help you to style your perfect outfit for any occasion. Meet Amber, one of the most influential stylists working today.
             .media-wrap
               = image_tag '_pdp/tile-styling-advice.jpg'
             .row
@@ -230,16 +230,16 @@ form.hide-fully#pdpDataForWishlist
             = link_to 'Book your free styling session', styling_session_path, class:'btn btn-black'
         .col-md-8
           = render partial: 'related_products', locals: { product: @product }
-          
+
       // content styling advice END
-      
+
     // content bottom wrap END
 
 = render partial: 'micro_data'
-    
+
 javascript:
   $(document).ready(function() {
-  
+
     // controls for details container, mobile only
     $('.js-panel-side-left-toggle').on('click', function() {
       $('.js-panel-side-left-details-trigger').toggleClass('is-active');
@@ -251,50 +251,42 @@ javascript:
       return false;
     });
 
-    $('.js-share-pop-up').on('click', function () {
-      var newwindow = window.open($(this).attr('href'), '', 'left=20,top=20,width=500,height=500,toolbar=0,resizable=0,scrollbars=1');
-      if (window.focus) {
-        newwindow.focus();
-      }
-      return false;
-    });
-    
     // bootstrap tab extension, will switch between tabs for desktop and
     // accordion for mobile
     $('#content-tab-controls').tabCollapse({
       tabsClass: 'hidden-sm hidden-xs',
       accordionClass: 'visible-sm visible-xs'
     });
-    
+
     function initSticky() {
       $('.js-panel-side-left').sticky({
         responsiveWidth: true,
         topSpacing: $('.js-fixed-header').outerHeight(),
-        bottomSpacing: 
-          $('.js-bottom-content').outerHeight() 
+        bottomSpacing:
+          $('.js-bottom-content').outerHeight()
           + $('.js-footer').outerHeight() + $('.js-fixed-header').outerHeight()
       });
       $('.js-panel-side-right').sticky({
         responsiveWidth: true,
         topSpacing: $('.js-fixed-header').outerHeight(),
         bottomSpacing:
-          $('.js-bottom-content').outerHeight() 
+          $('.js-bottom-content').outerHeight()
           + $('.js-footer').outerHeight() + $('.js-fixed-header').outerHeight()
       });
       $('.js-panel-side-left').sticky('update');
       $('.js-panel-side-right').sticky('update');
     }
-    
+
     function unstickSticky() {
       $('.js-panel-side-left').unstick();
       $('.js-panel-side-right').unstick();
     }
-  
+
     // sticky side panel
     if(window.innerWidth >= 992) {
       initSticky();
     }
-    
+
     // update on resize
     $(window).resize(function() {
       if(window.innerWidth >= 992) {
