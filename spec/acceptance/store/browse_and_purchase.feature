@@ -25,12 +25,13 @@ Feature: Browse and Purchase
 
   Scenario: List All Lookbooks
     When I visit the "/lookbook" path
+    Then I should see "It Girl Collection"
+    Then I should see "Wedding & Parties"
+    Then I should see "Fresh Collection"
+    Then I should see "The Ruffled Up Collection"
+    Then I should see "Partners In Crime"
     Then I should see "Just The Girls"
     Then I should see "Love Lace"
-    Then I should see "This Modern Romance"
-    Then I should see "Make a Statement"
-    Then I should see "Luxe Collection"
-    Then I should see "Photo Finish"
 
   Scenario: Show Filters on Dresses List
     When I visit the dresses page
@@ -38,4 +39,3 @@ Feature: Browse and Purchase
     Then I should see "$0 - $199"
     Then I should see "$200 - $299"
     Then I should see "$300 - $399"
-    #Then I should see "$400+"
