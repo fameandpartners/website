@@ -36,6 +36,7 @@ AdminUi::Engine.routes.draw do
   end
 
   resources :refund_requests, only: [:index, :update]
+  resources :return_requests_reports, only: [:index]
 
   namespace :reports do
     root to: 'dashboard#index'
