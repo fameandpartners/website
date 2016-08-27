@@ -89,13 +89,21 @@
                 span.hidden-xs.hidden-sm  left:
                 .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link
 
+          .row.product-heading-wrap
+            .product-heading.col-md-4.col-xs-6
+              h4.title The Evening:
+            .product-heading.col-md-4.col-xs-6
+              h4.title The Showstopper:
+            .product-heading.col-md-4.col-xs-6
+              h4.title The Wallet Friendly:
+
           .row
             .products-grid.products-collections.no-margin
               .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 2, customWrapper: 'col-md-4 col-xs-6'}
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-4 col-xs-6'}
 
           .row
             .cta-wrapper.col-md-12
               = link_to current_edit_link
                 span.btn-md.btn-featured
-                 | Explore
+                 | Shop & Customize
