@@ -32,10 +32,10 @@
         .col-md-4
           = link_to current_dress_link
             picture
-              source media='(max-width: 1023px)' srcset='http://fakeimg.pl/1024x1500/?text=desktop'
-              source media='(min-width: 1024px)' srcset='http://fakeimg.pl/512x750/?text=mobile'
-              = image_tag 'landingpages/it-girl/gown-desktop.jpg', srcset: "http://fakeimg.pl/1024x1500/?text=desktop 1023w,
-                http://fakeimg.pl/512x750/?text=mobile 1024w", class: 'img-responsive', alt: "#{current_dress_name}"
+              source media='(max-width: 991px)' srcset='http://fakeimg.pl/512x750/?text=mobile'
+              source media='(min-width: 992px)' srcset='http://fakeimg.pl/1024x1500/?text=desktop'
+              = image_tag 'landingpages/it-girl/gown-desktop.jpg', srcset: "http://fakeimg.pl/1024x1500/?512x750=mobile,
+                http://fakeimg.pl/1024x1500/?text=desktop 1024w", class: 'img-responsive', alt: "#{current_dress_name}"
 
         .col-md-4
           h1 Introducing the latest - The Gown Collection
@@ -70,10 +70,10 @@
         .col-md-4.col-md-offset-3
           = link_to current_dress_link
             picture
-              source media='(max-width: 1023px)' srcset='http://fakeimg.pl/1024x1500/?text=desktop'
-              source media='(min-width: 1024px)' srcset='http://fakeimg.pl/512x750/?text=mobile'
-              = image_tag 'landingpages/it-girl/gown-desktop.jpg', srcset: "http://fakeimg.pl/1024x1500/?text=desktop 1023w,
-                http://fakeimg.pl/512x750/?text=mobile 1024w", class: 'img-responsive', alt: "#{current_dress_name}"
+              source media='(max-width: 991px)' srcset='http://fakeimg.pl/512x750/?text=mobile'
+              source media='(min-width: 992px)' srcset='http://fakeimg.pl/1024x1500/?text=desktop'
+              = image_tag 'landingpages/it-girl/gown-desktop.jpg', srcset: "http://fakeimg.pl/1024x1500/?512x750=mobile,
+                http://fakeimg.pl/1024x1500/?text=desktop 1024w", class: 'img-responsive', alt: "#{current_dress_name}"
 
         .col-md-4
 
