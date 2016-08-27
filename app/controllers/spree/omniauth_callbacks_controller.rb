@@ -110,11 +110,11 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     user ||= (spree_current_user || authentication.try(:user))
 
-    EmailCapture.new({service: :mailchimp }, email: user.email, newsletter: true,
-                                 first_name: user.first_name, last_name: user.last_name,
-                                 current_sign_in_ip: request.remote_ip, landing_page: session[:landing_page],
-                                 utm_params: session[:utm_params], site_version: current_site_version.name,
-                                 facebook_uid: auth_hash['uid'], form_name: 'Facebook').capture
+    EmailCaptureWorker.perform_async(user.id, remote_ip:    request.remote_ip,
+                                              landing_page: session[:landing_page],
+                                              utm_params:   session[:utm_params],
+                                              site_version: current_site_version.name,
+                                              form_name:    'Facebook')
 
     if session[:email_reminder_promo].present? && session[:email_reminder_promo] !=  'scheduled_for_delivery'
       tracker = Marketing::CustomerIOEventTracker.new

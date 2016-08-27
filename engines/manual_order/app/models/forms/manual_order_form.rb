@@ -28,7 +28,8 @@ module Forms
     end
 
     def countries
-      @countries ||= Spree::Country.where(iso: ['US', 'CA', 'DE', 'MX', 'GB', 'AU', 'NZ']).map {|c| [c.id, c.name]}
+      order_cond = "iso!='US', iso!='CA', iso!='DE', iso!='MX', iso!='GB', iso!='AU', iso!='NZ', name"
+      @countries ||= Spree::Country.select([:id, :name]).order(order_cond).map {|c| [c.id, c.name]}
     end
 
     def states
@@ -129,7 +130,7 @@ module Forms
     def skirt_length_options
       {
         'petite' =>'Petite',
-        'standart' => 'Standart',
+        'standard' => 'Standard',
         'tall' => 'Tall'
       }
     end

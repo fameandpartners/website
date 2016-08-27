@@ -438,15 +438,5 @@ module Products
       end
     end
 
-    class << self
-      def available_sort_orders
-        [
-          ['price_high', 'Price High'],
-          ['price_low', 'Price Low'],
-          ['newest', "What's new"],
-          ['fast_delivery', 'Next day delivery']
-        ]
-      end
-    end
   end
 end

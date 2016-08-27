@@ -1,18 +1,37 @@
 require 'spec_helper'
 
 RSpec.describe VariantSku do
-  let(:style_number)     { 'OMGWTFBBQ' }
+  let(:style_number)     { 'OmGWtFBBq' }
   let(:dress)            { create :dress, sku: style_number }
 
   describe 'new SKUs' do
     let(:sku_generator) { described_class.new(variant) }
     subject(:sku)       { sku_generator.call }
 
+    context 'fallback on error' do
+      let(:variant) { dress.master }
+
+      before do
+        allow_any_instance_of(described_class).to receive(:style_number).and_raise(StandardError)
+      end
+
+      it 'falls back to upcased variant SKU' do
+        expect(sku).to eq('OMGWTFBBQ')
+      end
+
+      it 'reports to NewRelic and Sentry' do
+        expect(Raven).to receive(:capture_exception).with(StandardError)
+        expect(NewRelic::Agent).to receive(:notice_error).with(StandardError, variant_id: nil)
+
+        sku_generator.call
+      end
+    end
+
     context 'master variant' do
       let(:variant)       { dress.master }
 
-      it "returns the master's sku" do
-        expect(sku).to eq style_number
+      it "returns the master's upcased sku" do
+        expect(sku).to eq('OMGWTFBBQ')
       end
     end
 
@@ -32,7 +51,7 @@ RSpec.describe VariantSku do
       end
 
       it 'includes the style number' do
-        expect(sku).to include(style_number)
+        expect(sku).to include('OMGWTFBBQ')
       end
 
       it 'includes the colour id' do
@@ -42,36 +61,6 @@ RSpec.describe VariantSku do
       it "includes the size name, without separating '/'" do
         expect(sku).to include('US10AU14')
       end
-    end
-  end
-
-  xdescribe 'old SKUs' do
-    subject(:sku)       { variant.generate_sku }
-
-    context 'master variant' do
-      let(:variant)       { dress.master }
-
-      it "returns the master's sku" do
-        expect(sku).to eq style_number
-      end
-    end
-
-    context 'with variants' do
-      let(:dress)   { create :dress_with_magenta_size_10, sku: style_number}
-      let(:variant) { dress.variants.first }
-
-      it 'includes the style number' do
-        expect(sku).to include(style_number)
-      end
-
-      it 'includes the colour' do
-        expect(sku).to include('Color:Magenta')
-      end
-
-      it "includes the size" do
-        expect(sku).to include('US 10/AU 14')
-      end
-
     end
   end
 end
