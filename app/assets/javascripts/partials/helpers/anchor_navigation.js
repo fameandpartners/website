@@ -54,7 +54,9 @@
     elem.insertAdjacentHTML('beforebegin', hashlink);
 
     // If the URL contains an anchor and a local navigation
-    if ($(".local-navigation .nav").length) {
+    if ($(".local-navigation-vertical .nav").length) {
+      $('.js-hashlink').css({'height': (offsetTargetPadding)+'px', 'margin-top': -(offsetTargetPadding)+'px'});
+    } else if ($(".local-navigation .nav").length) {
       if ( $(window).width() < mdScreenWidth ) {
         $('.js-hashlink').css({'height': '0px', 'margin-bottom': -(mobileTargetOffset)+'px'});
       } else {
@@ -246,8 +248,8 @@
           if ($(this).closest(".local-navigation-wrapper").length) {
             offsetClickFromLocalNav = (offsetTargetPadding);
           }
-        } else if( $('.js-float-menu-on-scroll.fixed-nav-mobile').length ) {
-          if ($(this).closest(".local-navigation-wrapper").length) {
+        } else if( $('.js-float-menu-on-scroll.fixed-nav-mobile, .local-navigation-vertical').length ) {
+          if ($(this).closest(".local-navigation-wrapper, .local-navigation-vertical").length) {
             offsetClickFromLocalNav = 0;
           }
         } else {
