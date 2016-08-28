@@ -95,6 +95,20 @@
 // On-page/Anchor navigation
 .local-navigation-wrapper {
   padding-top: 38px;
+
+  .nav li {
+
+    &.active a,
+    a:hover,
+    a:focus {
+      background: none;
+      border-color: $c-neutral-black;
+      color: $c-neutral-black;
+      font-weight: 500;
+    }
+
+  }
+
 }
 
 .local-navigation {
@@ -127,19 +141,6 @@
     width: 100%;
   }
 
-  .nav li {
-
-    &.active a,
-    a:hover,
-    a:focus {
-      background: none;
-      border-color: $c-neutral-black;
-      color: $c-neutral-black;
-      font-weight: 500;
-    }
-
-  }
-
   @media (max-width: $bootstrap-md-width - 1px) {
 
     &.fixed-nav-mobile {
@@ -152,6 +153,25 @@
     }
 
   }
+
+}
+
+.local-navigation-vertical {
+
+  &.nav-fixed {
+    position: fixed;
+  }
+
+  .nav li {
+
+    a {
+      text-decoration: underline;
+      padding: 5px 15px;
+      font-size: 1.5rem;
+    }
+
+  }
+
 
 }
 
