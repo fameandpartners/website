@@ -43,7 +43,7 @@
       #tab-login.tab-pane
         h2.title.text-center Login with your account
         - login_path = spree.spree_user_session_path(site_version: current_site_version.try(:code))
-        = form_for :spree_user, :url => login_path , remote: true , :html => {:'data-type' => 'json', :class => 'row'} do |f|
+        = form_for :spree_user, :url => login_path , remote: true , :html => {:'data-type' => 'json', :class => 'row js-membership js-membership-login'} do |f|
           .col-md-6.col-md-offset-3.form-group
             = render :partial =>'shared/redesign/flash_messages', flash: flash
           .col-md-6.col-md-offset-3.form-group
@@ -64,26 +64,25 @@ javascript:
   $(document).ready(function() {
     $('.js-membership').validator();
     
-    $('.sign-in-form form').on('ajax:success', function(event, data, status, xhr) {
+    $('.js-membership-login').on('ajax:success', function(event, data, status, xhr) {
+      var emailError = $(this).find('#error-email');
       if (data["error"] === true) {
-        $('.sign-in-form #error-email').text('Incorrect login credentials');
-        $('.sign-in-form #error-email').show();
+        emailError.text('Incorrect login credentials').show();
       } else {
-        $('.sign-in-form #error-email').hide();
+        emailError.hide();
         loadCreateWeddingBoard();
       }
     });
 
     $('.js-membership-signup').on('ajax:success', function(event, data, status, xhr) {
+      var emailError = $(this).find('#error-email');
       if (data['status'] === 'ok') {
-        $('.js-membership-signup  #error-email').hide();
+        emailError.hide();
         loadCreateWeddingBoard();
-      } else if ((data != null ? (data["messages"]) != null ? data["messages"]["email"] : void 0 : void 0) != null) {
-        $('.js-membership-signup  #error-email').text('Sorry !, email has already been taken !!!');
-        $('.js-membership-signup #error-email').show();
+      } else if ((data !== null ? (data['messages']) !== null ? data['messages']['email'] : void 0 : void 0) !== null) {
+        emailError.text('Sorry !, email has already been taken !!!').show();
       } else if (data['status'] === 'fail') {
-        $('.js-membership-signup  #error-email').text('Please fill all fields , password and password confirmation must match !!!');
-        $('.js-membership-signup  #error-email').show();
+        emailError.text('Please fill all fields , password and password confirmation must match !!!').show();
       }
     });
   });
