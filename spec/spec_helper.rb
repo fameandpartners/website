@@ -36,7 +36,7 @@ RSpec.configure do |config|
 
   config.infer_base_class_for_anonymous_controllers = false
 
-  # Use DatabaseCleaner instead of ActiveRecord transactional
+  # Use DatabaseCleaner for transactions
   config.use_transactional_fixtures = false
 end
 

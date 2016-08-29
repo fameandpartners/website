@@ -128,25 +128,19 @@ ruby:
 
         - if Features.active?(:fameweddings)
 
-          div#wedding-menu
+          div#wedding-menu.grid-img-cta-nav
             ul.nav.navbar-nav
               li.normal-item
                 .text.text-back FAMEWEDDINGS
                 .arrow
                   i.fa.fa-chevron-left
                   .back BACK
-              li.manu-content
-                = link_to bridesmaid_landing_page_path
-                  .panel-highlight.media-wrap
-                    = image_tag "lookbook/brides.jpg"
-                    .copy-wrap MADE WITH LOVE <em><span>SIGN UP AND START PLANNING YOUR DREAM DRESSES</span></em>
-              li.grey-item
-                .text VIEW THE COLLECTIONS
-              = render partial: 'layouts/redesign/mega_menu/wedding_collections'
 
-              li.grey-item
-                .text WEDDING PLANNER
-              li.normal-item.no-border = link_to 'Register for Wedding Planner', bridesmaid_landing_page_path
+              li
+                .content-wrap
+                  .container-cta
+                    .row-cta
+                      = render partial: 'layouts/redesign/mega_menu/fame_weddings'
 
         div#lookbook-menu
           ul.nav.navbar-nav
@@ -156,10 +150,10 @@ ruby:
                 i.fa.fa-chevron-left
                 .back BACK
             li.manu-content
-              = link_to the_freshly_picked_collection_path
+              = link_to it_girl_landing_page_path
                 .panel-highlight.media-wrap
-                  = image_tag 'lookbook/Cotton2016-MegaMenu-2016-07-01.jpg'
-                  .copy-wrap The Freshly Picked Collection <em><span>View this collection</span></em>
+                  = image_tag 'lookbook/Itgirl-MegaMenu-2016-08-24.jpg'
+                  .copy-wrap It Girl Collection <em><span>View this collection</span></em>
             = render partial: 'layouts/redesign/mega_menu/lookbook'
 
         div#moodboards-menu

@@ -11,7 +11,7 @@ describe Forms::ManualOrderForm do
         currency: 'USD',
         style_name: '794',
         size: '24',
-        length: 'standart',
+        height: 'standard',
         color: '179',
         customisations: '1873',
         notes: 'notes',
@@ -25,7 +25,7 @@ describe Forms::ManualOrderForm do
         currency: 'USD',
         style_name: product.id,
         size: dress_size.id,
-        length: 'standart',
+        height: 'petite',
         color: dress_color.id,
         notes: 'notes',
         status: 'exchange',
@@ -59,11 +59,12 @@ describe Forms::ManualOrderForm do
         expect(created_order.number[0]).to eq('E')
         expect(created_order.state).to eq('complete')
         expect(created_order.completed_at).to be_truthy
+        expect(created_order.line_items.first.personalization.height).to eq('petite')
       end
 
       it 'creates new order as new' do
         new_order = manual_order.save_order(correct_params.merge(status: 'new'))
-        expect(new_order.number[0]).to eq('R')
+        expect(new_order.number[0]).to eq('M')
       end
 
       it 'creates new order with correct product name' do
