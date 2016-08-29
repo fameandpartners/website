@@ -62,6 +62,10 @@
                 
 javascript:
   $(document).ready(function() {
+    function redirectToCreateWeddingBoard() {
+      window.location.replace('#{edit_wedding_moodboard_path}');
+    };
+  
     $('.js-membership').validator();
     
     $('.js-membership-login').on('ajax:success', function(event, data, status, xhr) {
@@ -70,7 +74,7 @@ javascript:
         emailError.text('Incorrect login credentials').show();
       } else {
         emailError.hide();
-        loadCreateWeddingBoard();
+        redirectToCreateWeddingBoard();
       }
     });
 
@@ -78,7 +82,7 @@ javascript:
       var emailError = $(this).find('#error-email');
       if (data['status'] === 'ok') {
         emailError.hide();
-        loadCreateWeddingBoard();
+        redirectToCreateWeddingBoard();
       } else if ((data !== null ? (data['messages']) !== null ? data['messages']['email'] : void 0 : void 0) !== null) {
         emailError.text('Sorry !, email has already been taken !!!').show();
       } else if (data['status'] === 'fail') {
