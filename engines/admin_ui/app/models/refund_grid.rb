@@ -32,7 +32,9 @@ class RefundGrid
   column(:return_status) do |item_return|
     item_return.acceptance_status == 'received' ? 'Received' : 'Not Received'
   end
-  column :refund_amount
+  column(:refund_amount) do |item_return|
+    Money.new(item_return.refund_amount, 'USD').format
+  end
   column :refund_status do |item_return|
     item_return.refund_status == 'Complete' ? 'Paid' : 'Not Paid'
   end
