@@ -64,7 +64,7 @@ describe Forms::ManualOrderForm do
 
       it 'creates new order as new' do
         new_order = manual_order.save_order(correct_params.merge(status: 'new'))
-        expect(new_order.number[0]).to eq('R')
+        expect(new_order.number[0]).to eq('M')
       end
 
       it 'creates new order with correct product name' do
