@@ -141,6 +141,16 @@
     margin-bottom: 30px;
   }
 
+  .custom-form-element {
+    display: inline-block;
+    margin: 0 15px;
+
+    label {
+      font-weight: normal;
+    }
+
+  }
+
   // START - Mobile Specific Styling
   @media (max-width: $bootstrap-md-width - 1px) {
 
@@ -161,8 +171,12 @@
       margin-bottom: 30px;
     }
 
-    .custom-form-element label {
-      font-size: 0.75em;
+    .custom-form-element {
+      margin: 0 10px;
+
+      label {
+        font-size: 0.75em;
+      }
 
       .icon {
         margin-right: 5px;
