@@ -27,260 +27,258 @@
         .progress
           .progress-bar.js-progress-bar style='width: 20%;'
     .row
-      .col-md-8.col-md-offset-2
-        = form_for(@moodboard_form, as: :wedding_moodboard, :url => wedding_moodboard_path, remote: true, html: { id: 'wedding_moodboard_edit_form', class: 'tab-content' }) do |f|
-          = f.hidden_field :id
-        
-          #tab-step-1.tab-pane.active
-            div
-              h2.title.text-center The Essentials
-              h4.title.text-center This will help us curate the most relevant dresses for you
-            .row
-              .col-md-6.form-group
-                = f.label :bride_first_name, 'Bride’s name'
-                = f.text_field :bride_first_name, required: true, class:'form-control form-control-md'
-              .col-md-6.form-group
-                = f.label :guest_count, 'No. of bridesmaids'
-                = f.select :guest_count, f.object.no_of_bridesmaids, {}, required: true, class: 'form-control form-control-md'
-              .col-md-6.form-group.has-feedback
-                = f.label :event_date, 'Date of wedding'
-                = f.text_field :event_date, class:'form-control form-control-md datepicker js-datepicker'
-                .icon-calendar.form-control-feedback
-              .col-md-6.form-group
-                label for='wedding_time' Time of wedding
-                input.form-control.form-control-md id='wedding_time'
-              .col-md-12
-                .btn-wrap.text-center
-                  .row
-                    .col-md-4.col-md-offset-8
-                      a.btn.btn-black.btn-block href='#tab-step-2' data-next-step='2' data-toggle='tab' NEXT STEP
-                      a.link-btn href='#tab-step-2' data-next-step='2' data-toggle='tab'
-                        span.cta-link-alt
-                          span Skip this step
-                      
-          #tab-step-2.tab-pane
-            div
-              h2.title.text-center The Bridal Party
-              h4.title.text-center The best friends, the soul sisters, the squad
-            .row
-              .col-md-6.form-group
-                label for='friends_name' Name
-                input.form-control.form-control-md id='friends_name'
-              .col-md-6.form-group
-                = f.label :owner_relationship, 'Wedding day duty'
-                = f.select :owner_relationship, f.object.owner_relationships, {}, class: 'form-control form-control-md'
-              .col-md-12.form-group
-                label for='friends_email' Email address
-                input.form-control.form-control-md type='email' id='friends_email'
-              .col-md-12.form-group.text-center.margin-top-30
-                = f.button 'ADD MEMBER', class:'btn btn-lowlight'
-              .col-md-12.form-group.margin-top-30
+      .col-md-8.col-md-offset-2.tab-content
+      
+        #tab-step-1.tab-pane.active
+          div
+            h2.title.text-center The Essentials
+            h4.title.text-center This will help us curate the most relevant dresses for you
+          = form_for(@moodboard_form, as: :wedding_moodboard, :url => wedding_moodboard_path, remote: true, html: { id: 'wedding_moodboard_edit_form', class: 'row' }) do |f|
+            = f.hidden_field :id
+            .col-md-6.form-group
+              = f.label :bride_first_name, 'Bride’s name'
+              = f.text_field :bride_first_name, required: true, class:'form-control form-control-md'
+            .col-md-6.form-group
+              = f.label :guest_count, 'No. of bridesmaids'
+              = f.select :guest_count, f.object.no_of_bridesmaids, {}, required: true, class: 'form-control form-control-md'
+            .col-md-6.form-group.has-feedback
+              = f.label :event_date, 'Date of wedding'
+              = f.text_field :event_date, class:'form-control form-control-md datepicker js-datepicker'
+              .icon-calendar.form-control-feedback
+            .col-md-6.form-group
+              label for='wedding_time' Time of wedding
+              input.form-control.form-control-md id='wedding_time'
+            .col-md-12
+              .btn-wrap.text-center
                 .row
-                  .col-md-10.col-md-offset-1
-                    .row
+                  .col-md-4.col-md-offset-8
+                    = link_to('NEXT STEP', @moodboard, class:'btn btn-black btn-block', 'data-target' => '#tab-step-2', 'data-next-step' => '2', 'data-toggle' => 'tab')
+                    a.link-btn href='#tab-step-2' data-next-step='2' data-toggle='tab'
+                      span.cta-link-alt
+                        span Skip this step
+                    
+        #tab-step-2.tab-pane
+          div
+            h2.title.text-center The Bridal Party
+            h4.title.text-center The best friends, the soul sisters, the squad
+          = form_for @moodboard.collaborators.build, url: moodboard_collaborators_path(@moodboard), remote: true, class:'row' do |f|
+            .col-md-6.form-group
+              = f.label :name, 'Name'
+              = f.text_field :name, required: true, :class => 'form-control form-control-md'
+              span.help-block.with-errors
+            .col-md-6.form-group
+              label for='owner_relationship' Wedding day duty
+              input.form-control.form-control-md id='owner_relationship'
+            .col-md-12.form-group
+              = f.label :email, 'Email address'
+              = f.text_field :email, required: true, :class => 'form-control form-control-md', type: 'email'
+              span.help-block.with-errors
+            .col-md-12.form-group.text-center.margin-top-30
+              = f.button 'ADD MEMBER', class:'btn btn-lowlight'
+              .message-wrap#moodboard_members_notices
+            .col-md-12.margin-top-30
+              .row
+                .col-md-10.col-md-offset-1
+                  .row#moodboard_members
+                    - @moodboard.collaborators.select(&:persisted?).each do |member|
                       .col-md-6
                         .invited-member
-                          .member-name.txt-truncate-1 TATATATAT TATATTA
-                          .member-role Bridesmaid
+                          .member-name.txt-truncate-1 => member.name.to_s
+                          .member-role 
                           a.btn-close.sml href='javascript:;'
                             .hide-visually remove member
-                      .col-md-6
-                        .invited-member
-                          .member-name.txt-truncate-1 TATATATAT TATATTA
-                          .member-role Bridesmaid
-                          a.btn-close.sml href='javascript:;'
-                            .hide-visually remove member
-              .col-md-12
-                .btn-wrap
-                  .row
-                    .col-md-4
-                      a.link-btn href='#tab-step-1' data-next-step='1' data-toggle='tab'
-                        span.cta-link-alt
-                          span Previous step
-                    .col-md-4.col-md-offset-4.text-center
-                      a.btn.btn-black.btn-block href='#tab-step-3' data-next-step='3' data-toggle='tab' NEXT STEP
-                      a.link-btn href='#tab-step-3' data-next-step='3' data-toggle='tab'
-                        span.cta-link-alt
-                          span Skip this step
 
-          #tab-step-3.tab-pane
-            div
-              h2.title.text-center Bridesmaids Dress Color
-              h4.title.text-center If you're not sure, pick as many as you like
-            .row
-              .col-md-10.col-md-offset-2
+            .col-md-12
+              .btn-wrap
                 .row
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-black
-                      input type='checkbox'
-                      .copy Black
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-bright-yellow
-                      input type='checkbox'
-                      .copy Yellow
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-purple
-                      input type='checkbox'
-                      .copy Purple
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-white
-                      input type='checkbox'
-                      .copy White & Ivory
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-tan
-                      input type='checkbox'
-                      .copy Tan
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-blue
-                      input type='checkbox'
-                      .copy Blue
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-grey
-                      input type='checkbox'
-                      .copy Grey
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-nude
-                      input type='checkbox'
-                      .copy Nude
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-mint
-                      input type='checkbox'
-                      .copy Mint
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-silver
-                      input type='checkbox'
-                      .copy Silver
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-peach
-                      input type='checkbox'
-                      .copy Peach
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-turquoise
-                      input type='checkbox'
-                      .copy Turquoise
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-gold
-                      input type='checkbox'
-                      .copy Gold
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-pink
-                      input type='checkbox'
-                      .copy Pink
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-green
-                      input type='checkbox'
-                      .copy Green
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-orange
-                      input type='checkbox'
-                      .copy Orange
-                  .col-md-4.col-xs-6
-                    label.color-swatch
-                      .swatch.color-red
-                      input type='checkbox'
-                      .copy Red
-              .col-md-12
-                .btn-wrap
-                  .row
-                    .col-md-4
-                      a.link-btn href='#tab-step-2' data-next-step='2' data-toggle='tab'
-                        span.cta-link-alt
-                          span Previous step
-                    .col-md-4.col-md-offset-4.text-center
-                      a.btn.btn-black.btn-block href='#tab-step-4' data-next-step='4' data-toggle='tab' NEXT STEP
-                      a.link-btn href='#tab-step-4' data-next-step='4' data-toggle='tab'
-                        span.cta-link-alt
-                          span Skip this step
-          
-          #tab-step-4.tab-pane
-            div
-              h2.title.text-center Dress Length
-              h4.title.text-center If you're not sure, pick as many as you like
-            .row
-              .col-md-12
+                  .col-md-4
+                    a.link-btn href='#tab-step-1' data-next-step='1' data-toggle='tab'
+                      span.cta-link-alt
+                        span Previous step
+                  .col-md-4.col-md-offset-4.text-center
+                    a.btn.btn-black.btn-block href='#tab-step-3' data-next-step='3' data-toggle='tab' NEXT STEP
+                    a.link-btn href='#tab-step-3' data-next-step='3' data-toggle='tab'
+                      span.cta-link-alt
+                        span Skip this step
+
+        #tab-step-3.tab-pane
+          div
+            h2.title.text-center Bridesmaids Dress Color
+            h4.title.text-center If you're not sure, pick as many as you like
+          .row
+            .col-md-10.col-md-offset-2
+              .row
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-black
+                    input type='checkbox'
+                    .copy Black
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-bright-yellow
+                    input type='checkbox'
+                    .copy Yellow
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-purple
+                    input type='checkbox'
+                    .copy Purple
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-white
+                    input type='checkbox'
+                    .copy White & Ivory
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-tan
+                    input type='checkbox'
+                    .copy Tan
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-blue
+                    input type='checkbox'
+                    .copy Blue
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-grey
+                    input type='checkbox'
+                    .copy Grey
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-nude
+                    input type='checkbox'
+                    .copy Nude
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-mint
+                    input type='checkbox'
+                    .copy Mint
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-silver
+                    input type='checkbox'
+                    .copy Silver
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-peach
+                    input type='checkbox'
+                    .copy Peach
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-turquoise
+                    input type='checkbox'
+                    .copy Turquoise
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-gold
+                    input type='checkbox'
+                    .copy Gold
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-pink
+                    input type='checkbox'
+                    .copy Pink
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-green
+                    input type='checkbox'
+                    .copy Green
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-orange
+                    input type='checkbox'
+                    .copy Orange
+                .col-md-4.col-xs-6
+                  label.color-swatch
+                    .swatch.color-red
+                    input type='checkbox'
+                    .copy Red
+            .col-md-12
+              .btn-wrap
                 .row
-                  .col-md-6.col-md-offset-3
-                    .row
-                      .col-md-4.col-xs-4.custom-form-element
-                        label
-                          input type='checkbox'
-                          span.icon
-                          span Long
-                      .col-md-4.col-xs-4.custom-form-element
-                        label
-                          input type='checkbox'
-                          span.icon
-                          span Medium
-                      .col-md-4.col-xs-4.custom-form-element
-                        label
-                          input type='checkbox'
-                          span.icon
-                          span Short
-              .col-md-12
-                .btn-wrap
+                  .col-md-4
+                    a.link-btn href='#tab-step-2' data-next-step='2' data-toggle='tab'
+                      span.cta-link-alt
+                        span Previous step
+                  .col-md-4.col-md-offset-4.text-center
+                    a.btn.btn-black.btn-block href='#tab-step-4' data-next-step='4' data-toggle='tab' NEXT STEP
+                    a.link-btn href='#tab-step-4' data-next-step='4' data-toggle='tab'
+                      span.cta-link-alt
+                        span Skip this step
+        
+        #tab-step-4.tab-pane
+          div
+            h2.title.text-center Dress Length
+            h4.title.text-center If you're not sure, pick as many as you like
+          .row
+            .col-md-12
+              .row
+                .col-md-6.col-md-offset-3
                   .row
-                    .col-md-4
-                      a.link-btn href='#tab-step-3' data-next-step='3' data-toggle='tab'
-                        span.cta-link-alt
-                          span Previous step
-                    .col-md-4.col-md-offset-4.text-center
-                      a.btn.btn-black.btn-block href='#tab-step-5' data-next-step='5' data-toggle='tab' NEXT STEP
-                      a.link-btn href='#tab-step-5' data-next-step='5' data-toggle='tab'
-                        span.cta-link-alt
-                          span Skip this step
-          
-          #tab-step-5.tab-pane
-            div
-              h2.title.text-center Fabric Type
-              h4.title.text-center If you're not sure, pick as many as you like
-            .row
-              .col-md-12
+                    .col-md-4.col-xs-4.custom-form-element
+                      label
+                        input type='checkbox'
+                        span.icon
+                        span Long
+                    .col-md-4.col-xs-4.custom-form-element
+                      label
+                        input type='checkbox'
+                        span.icon
+                        span Medium
+                    .col-md-4.col-xs-4.custom-form-element
+                      label
+                        input type='checkbox'
+                        span.icon
+                        span Short
+            .col-md-12
+              .btn-wrap
                 .row
-                  .col-md-6.col-md-offset-3
-                    .row
-                      .col-md-4.col-xs-4.custom-form-element
-                        label
-                          input type='checkbox'
-                          span.icon
-                          span Satin
-                      .col-md-4.col-xs-4.custom-form-element
-                        label
-                          input type='checkbox'
-                          span.icon
-                          span Cotton
-                      .col-md-4.col-xs-4.custom-form-element
-                        label
-                          input type='checkbox'
-                          span.icon
-                          span Georgette
-              .col-md-12
-                .btn-wrap
+                  .col-md-4
+                    a.link-btn href='#tab-step-3' data-next-step='3' data-toggle='tab'
+                      span.cta-link-alt
+                        span Previous step
+                  .col-md-4.col-md-offset-4.text-center
+                    a.btn.btn-black.btn-block href='#tab-step-5' data-next-step='5' data-toggle='tab' NEXT STEP
+                    a.link-btn href='#tab-step-5' data-next-step='5' data-toggle='tab'
+                      span.cta-link-alt
+                        span Skip this step
+        
+        #tab-step-5.tab-pane
+          div
+            h2.title.text-center Fabric Type
+            h4.title.text-center If you're not sure, pick as many as you like
+          .row
+            .col-md-12
+              .row
+                .col-md-6.col-md-offset-3
                   .row
-                    .col-md-4
-                      a.link-btn href='#tab-step-4' data-next-step='4' data-toggle='tab'
-                        span.cta-link-alt
-                          span Previous step
-                    .col-md-4.col-md-offset-4.text-center
-                      = link_to('FINISH', @moodboard, class:'btn btn-black btn-block')
-                      = link_to @moodboard, class:'link-btn'
-                        span.cta-link-alt
-                          span Skip this step
+                    .col-md-4.col-xs-4.custom-form-element
+                      label
+                        input type='checkbox'
+                        span.icon
+                        span Satin
+                    .col-md-4.col-xs-4.custom-form-element
+                      label
+                        input type='checkbox'
+                        span.icon
+                        span Cotton
+                    .col-md-4.col-xs-4.custom-form-element
+                      label
+                        input type='checkbox'
+                        span.icon
+                        span Georgette
+            .col-md-12
+              .btn-wrap
+                .row
+                  .col-md-4
+                    a.link-btn href='#tab-step-4' data-next-step='4' data-toggle='tab'
+                      span.cta-link-alt
+                        span Previous step
+                  .col-md-4.col-md-offset-4.text-center
+                    = link_to('FINISH', @moodboard, class:'btn btn-black btn-block')
+                    = link_to @moodboard, class:'link-btn'
+                      span.cta-link-alt
+                        span Skip this step
 
 
 javascript:
@@ -292,5 +290,30 @@ javascript:
       var step = $(this).data('next-step');
       $('.js-questions-count').html(step);
       $('.js-progress-bar').css({'width': (20 * step) + '%'});
+    });
+    
+    var collaboratorForm = $('#new_moodboard_collaborator');
+    collaboratorForm.validator();
+    collaboratorForm.on('ajax:success', function(event, data, status, xhr) {
+      var results = JSON.parse(xhr.responseText);
+      var errorEl = $('#moodboard_members_notices');
+
+      errorEl.empty();
+
+      if (results.error) {
+        errorEl.append('<p>' + results.error + '</p>');
+      } else if (results.notice) {
+        errorEl.append('<p>' + results.notice + '</p>');
+      }
+
+      if (results.collaborators) {
+        $('#moodboard_members').empty().append(_.map(results.collaborators, function (member) {
+          return "<div class='col-md-6'><div class='invited-member'>"
+            + "<div class='member-name txt-truncate-1'>" + member.name + "</div>"
+            + "<div class='member-role'>"
+            + "<a class='btn-close sml' href='javascript:;''><div class='hide-visually'>remove member</div></a>"
+            + "</div></div></div>";
+        }));
+      }
     });
   });
