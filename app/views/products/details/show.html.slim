@@ -243,11 +243,17 @@ form.hide-fully#pdpDataForWishlist
 
 = render partial: 'micro_data'
 
-script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57c0c134e80f9415"
-
-
 javascript:
+
   $(document).ready(function() {
+
+    // AddThis async call
+    var addthis_config = {
+      "ui_use_css": false,
+      "pubid": 'ra-57c0c134e80f9415'
+    };
+
+    addthis.init();
 
     // controls for details container, mobile only
     $('.js-panel-side-left-toggle').on('click', function() {
@@ -307,3 +313,6 @@ javascript:
     });
 
   });
+
+// Load AddThis asynchronously
+script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#async=1"
