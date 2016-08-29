@@ -46,7 +46,7 @@ module Operations
       order.currency = params[:currency]
       order.customer_notes = params[:notes]
       order.site_version = site_version.permalink
-      order.number = update_number(order.number) if params[:status] == 'exchange'
+      order.number = update_number(order.number)
       order.save
 
       order.touch :completed_at
@@ -84,7 +84,7 @@ module Operations
     end
 
     def update_number(_number)
-      'E' + _number.gsub(/[^0-9]/, '')
+      (params[:status] == 'exchange' ? 'E' : 'M') + _number.gsub(/[^0-9]/, '')
     end
 
   end
