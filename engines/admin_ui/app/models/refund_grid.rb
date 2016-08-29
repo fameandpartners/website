@@ -1,6 +1,6 @@
 require 'datagrid'
 
-class ReturnRequestReportGrid
+class RefundGrid
   include Datagrid
 
   filter(:order_number)
@@ -13,7 +13,7 @@ class ReturnRequestReportGrid
   end
 
   scope do
-    ItemReturn.includes( line_item: {order: :shipments} )
+    ItemReturn.includes(line_item: { order: :shipments })
   end
 
   column :order_number
@@ -27,7 +27,7 @@ class ReturnRequestReportGrid
   end
   column(:date_goods_shipped) do |item_return|
     next unless item_return.line_item.present?
-    item_return.line_item.order.try(:shipment).try(:shipped_at).try(:strftime, '%Y-%m-%d')
+    item_return.line_item.order.shipments.first.try(:shipped_at).try(:strftime, '%Y-%m-%d')
   end
   column(:return_status) do |item_return|
     item_return.acceptance_status == 'received' ? 'Received' : 'Not Received'
