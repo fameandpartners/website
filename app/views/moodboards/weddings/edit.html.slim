@@ -64,19 +64,17 @@
           = form_for @moodboard.collaborators.build, url: moodboard_collaborators_path(@moodboard), remote: true, class:'row' do |f|
             .col-md-6.form-group
               = f.label :name, 'Name'
-              = f.text_field :name, required: true, :class => 'form-control form-control-md'
-              span.help-block.with-errors
+              = f.text_field :name, :class => 'form-control form-control-md'
             .col-md-6.form-group
               label for='owner_relationship' Wedding day duty
               input.form-control.form-control-md id='owner_relationship'
             .col-md-12.form-group
               = f.label :email, 'Email address'
-              = f.text_field :email, required: true, :class => 'form-control form-control-md', type: 'email'
-              span.help-block.with-errors
+              = f.text_field :email, :class => 'form-control form-control-md', type: 'email'
             .col-md-12.form-group.text-center.margin-top-30
               = f.button 'ADD MEMBER', class:'btn btn-lowlight'
-              .message-wrap#moodboard_members_notices
-            .col-md-12.margin-top-30
+            .col-md-12.text-center.margin-top-15#moodboard_members_notices
+            .col-md-12.margin-top-15
               .row
                 .col-md-10.col-md-offset-1
                   .row#moodboard_members
