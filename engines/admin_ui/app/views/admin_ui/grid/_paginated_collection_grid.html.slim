@@ -5,6 +5,6 @@
     .ibox-title
       = page_entries_info @collection.assets, entry_name: 'item'
     .ibox-content
-      = datagrid_table @collection, html: { class: 'table table-condensed' }
+      = datagrid_table @collection, html: { class: 'table table-condensed table-striped table-hover' }
 
 = paginate @collection.assets, theme: 'admin_ui'
