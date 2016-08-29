@@ -77,14 +77,14 @@ javascript:
     $('.js-membership-signup').on('ajax:success', function(event, data, status, xhr) {
       console.log('data', data['status']);
       if (data['status'] === 'ok') {
-        $('.sign-up-form  #error-email').hide();
+        $('.js-membership-signup  #error-email').hide();
         loadCreateWeddingBoard();
       } else if (data !== null) {
-        $('.sign-up-form  #error-email').text('Sorry !, email has already been taken !!!');
-        $('.sign-up-form  #error-email').show();
+        $('.js-membership-signup  #error-email').text('Sorry !, email has already been taken !!!');
+        $('.js-membership-signup #error-email').show();
       } else if (data['status'] === 'fail') {
-        $('.sign-up-form  #error-email').text('Please fill all fields , password and password confirmation must match !!!');
-        $('.sign-up-form  #error-email').show();
+        $('.js-membership-signup  #error-email').text('Please fill all fields , password and password confirmation must match !!!');
+        $('.js-membership-signup  #error-email').show();
       }
     });
   });
