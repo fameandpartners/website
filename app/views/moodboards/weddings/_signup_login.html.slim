@@ -75,11 +75,10 @@ javascript:
     });
 
     $('.js-membership-signup').on('ajax:success', function(event, data, status, xhr) {
-      console.log('data', data['status']);
       if (data['status'] === 'ok') {
         $('.js-membership-signup  #error-email').hide();
         loadCreateWeddingBoard();
-      } else if (data !== null) {
+      } else if ((data != null ? (data["messages"]) != null ? data["messages"]["email"] : void 0 : void 0) != null) {
         $('.js-membership-signup  #error-email').text('Sorry !, email has already been taken !!!');
         $('.js-membership-signup #error-email').show();
       } else if (data['status'] === 'fail') {
