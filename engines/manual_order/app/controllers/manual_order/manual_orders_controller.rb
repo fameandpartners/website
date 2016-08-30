@@ -9,7 +9,7 @@ module ManualOrder
       @collection = ManualOrdersGrid.new(params[:manual_orders_grid])
       respond_to do |f|
         f.html do
-          @collection.scope { |scope| scope.page(params[:page]).per(50) }
+          @collection.scope { |scope| scope.page(params[:page]).per(25) }
         end
         f.csv do
           send_data @collection.to_csv,
