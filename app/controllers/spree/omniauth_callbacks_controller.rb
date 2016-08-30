@@ -84,17 +84,13 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       user.apply_omniauth_with_additional_attributes(auth_hash)
 
-      is_new_user = user.new_record?
-
-      if is_new_user
+      if user.new_record?
         user.sign_up_via = Spree::User::SIGN_UP_VIA.index('Facebook')
         user.sign_up_reason = session[:sign_up_reason]
       end
 
       if user.save
         flash[:notice] = "Signed in successfully."
-
-        MailChimpClient::TrackCustomer.perform_async(user.id) if is_new_user
 
         FacebookDataFetchWorker.perform_async(user.id, auth_hash['uid'], auth_hash['credentials']['token'])
 

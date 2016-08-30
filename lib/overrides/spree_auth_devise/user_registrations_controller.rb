@@ -58,9 +58,6 @@ Spree::UserRegistrationsController.class_eval do
       session[:spree_user_signup] = true
       associate_user
 
-      # Create customer on Mailchimp
-      MailChimpClient::TrackCustomer.perform_async(resource.id)
-
       # Marketing pixel
       flash[:signed_up_just_now] = true
 
