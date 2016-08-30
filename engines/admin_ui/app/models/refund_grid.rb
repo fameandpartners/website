@@ -3,6 +3,10 @@ require 'datagrid'
 class RefundGrid
   include Datagrid
 
+  scope do
+    ItemReturn.includes(line_item: [order: [:shipments]])
+  end
+
   filter(:order_number)
   filter(:return_status, :enum, select: ['Received', 'Not Received']) do |value|
     (value == 'Received') ? where(acceptance_status: 'received') : where("acceptance_status != 'received'")
@@ -12,14 +16,9 @@ class RefundGrid
     (value == 'Paid') ? where(refund_status: 'Complete') : where("refund_status != 'Complete'")
   end
 
-  scope do
-    ItemReturn.includes(line_item: { order: :shipments })
-  end
-
   column :order_number
-  column(:line_item_sku) do |item_return|
-    next unless item_return.line_item.present?
-    CustomItemSku.new(item_return.line_item).call
+  column(:line_item_id) do |item_return|
+    item_return.line_item.try(:id)
   end
   column(:date_purchased) do |item_return|
     next unless item_return.line_item.present?
