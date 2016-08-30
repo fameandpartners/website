@@ -60,6 +60,9 @@ describe Forms::ManualOrderForm do
         expect(created_order.state).to eq('complete')
         expect(created_order.completed_at).to be_truthy
         expect(created_order.line_items.first.personalization.height).to eq('petite')
+        expect(created_order.projected_delivery_date).to be_truthy
+        expect(created_order.completed_at).to be_an_instance_of(ActiveSupport::TimeWithZone)
+        expect(created_order.projected_delivery_date).to be_an_instance_of(ActiveSupport::TimeWithZone)
       end
 
       it 'creates new order as new' do

@@ -30,4 +30,5 @@ Feature: Create manual orders
     And I select "Roger That" from chosen customers select box
     Then I should see correct user data prefilled
     And I click on "Complete Order and Send for Manufacturing" button
+    Then I should get right order results
     Then I should see "Order has been created successfully"
