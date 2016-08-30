@@ -53,6 +53,23 @@
 
   }
 
+  .section-steps-customize {
+    background: $c-neutral-3;
+    margin: 2rem 0;
+
+    ol {
+
+      li {
+        font-size: 2rem;
+        font-family: $font-heading;
+        float: left;
+        padding: 2rem 5rem 2rem 0;
+      }
+
+    }
+
+  }
+
   .content-copy:not(.vertical-align) {
 
     h3 {
@@ -141,6 +158,22 @@
     // To make the grid look better let's hide the last product only if it's an odd item.
     .products-collections .category--item:last-child:nth-child(odd) {
       display: none;
+    }
+
+    .section-steps-customize {
+
+      ol {
+        text-align: center;
+        list-style-position: inside;
+        padding: 1rem 0;
+
+        li {
+          float: none;
+          padding: 1rem 0;
+        }
+
+      }
+
     }
 
   }
