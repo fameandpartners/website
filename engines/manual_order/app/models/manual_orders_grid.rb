@@ -8,6 +8,8 @@ class ManualOrdersGrid
       (spree_orders.number ILIKE 'M%' or spree_orders.number ILIKE 'E%')").includes(:order)
   end
 
+  decorate { |line_item| Orders::LineItemPresenter.new(line_item, Orders::OrderPresenter.new(line_item.order)) }
+
   filter :order_number do |value|
     where(Spree::Order.arel_table[:number].matches("%#{value}%"))
   end
@@ -17,8 +19,6 @@ class ManualOrdersGrid
          :include_blank => true) do |value|
     where(Spree::Order.arel_table[:number].matches("#{value}%"))
   end
-
-  decorate { |line_item| Orders::LineItemPresenter.new(line_item, Orders::OrderPresenter.new(line_item.order)) }
 
   column(:order_id, header: 'Order ID', order: 'spree_orders.id') {|model| model.order.id}
   column(:order_date, header: 'Order date', order: 'spree_orders.completed_at') do |model|
