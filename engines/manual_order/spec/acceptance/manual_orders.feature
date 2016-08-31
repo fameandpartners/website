@@ -21,7 +21,7 @@ Feature: Create manual orders
     When I am on the new manual order page
     And I select "Connie" product from chosen style name select box
     And I select size "US4/AU8" from chosen size select box
-    And I select skirt length "Standart" from chosen length select box
+    And I select skirt length "Standard" from chosen length select box
     And I select "Black" color from chosen color select box
     Then I should see "$289.0 USD"
     Then I should have black dress image
@@ -30,4 +30,5 @@ Feature: Create manual orders
     And I select "Roger That" from chosen customers select box
     Then I should see correct user data prefilled
     And I click on "Complete Order and Send for Manufacturing" button
+    Then I should get right order results
     Then I should see "Order has been created successfully"
