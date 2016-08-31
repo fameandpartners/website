@@ -1,8 +1,11 @@
-.panel.panel-default
+.panel.content-collapse-expand.panel-default#collapse-exchanges-how-refund
   .panel-heading role="tab"
-    a.panel-title.collapsed href="javascript:;" role="button" data-toggle="collapse-next" How will I be refunded?
+    a.panel-title.faq-title.collapsed href="#collapse-exchanges-how-refund" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+      | How will I be refunded?
+      span.btn-open-close
 
-  #collapse-exchanges-how-refund.panel-collapse.collapse role="tabpanel"
+  .panel-collapse.collapse role="tabpanel"
     .panel-body
 
-      p You will be refunded based on the original form of payment. If for some reason you no longer have access to the original form of payment, then your refund will be processed via PayPal. If you have any questions, please contact us at <a href="mailto:team@fameandpartners.com">team@fameandpartners.com</a>.
+      p
+        | You will be refunded based on the original form of payment. If for some reason you no longer have access to the original form of payment, then your refund will be processed via PayPal. If you have any questions, please contact us at #{link_to "team@fameandpartners.com", "mailto:team@fameandpartners.com"}.

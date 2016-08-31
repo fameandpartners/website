@@ -11,7 +11,7 @@ ruby:
   section.section-box.container.section-fame-story
     .row
       .col-md-12.heading-overlay-wrapper
-        h2.heading-overlay The Fame Story
+        h1.heading-overlay The Fame Story
 
     .tag-info-section
       .tag-info-wrapper.visible-lg-block
@@ -71,24 +71,24 @@ ruby:
 
       .row
         .col-md-12.cta-item-huge
-          = link_to '/brittany-xavier-high-summer-collection'
+          = link_to high_summer_collection_path
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-1-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-1-retina.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/fp-style-icon-1-mob.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/fp-style-icon-1-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/fp-style-icon-1-retina.jpg")} 1024w' alt="F&P Style Icon"
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile1-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile1.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/Aug-17-tile1.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/Aug-17-tile1-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/Aug-17-tile1.jpg")} 1024w' alt="Image tile"
 
               .content-wrap
                 .container-cta
                   .row-cta
                     .col-md-12
-                     .copy-wrap.text-center
-                       span.cta-link-white-bg
-                        span.cta-link Explore
-                        span.copy-highlight  Brittany Xavier's Edit
+                      .copy-wrap.text-center
+                        span.cta-link-white-bg
+                          span.cta-link Brittany Xavier Styles
+                          span.copy-highlight  Day to Night
 
     .tag-info-section
       .tag-info-wrapper.visible-lg-block
@@ -98,15 +98,15 @@ ruby:
 
       .row
         .col-md-6.cta-item
-          = link_to 'dresses/slip-dress'
+          = link_to dresses_path + '/maxi'
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-2-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-2-retina.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/fp-style-icon-2-mob.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/fp-style-icon-2-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/fp-style-icon-2-retina.jpg")} 1024w' alt="Shop Our Slip Dress"
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile2-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile2.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/Aug-17-tile2.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/Aug-17-tile2-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/Aug-17-tile2.jpg")} 1024w' alt="Image tile"
 
               .content-wrap
                 .container-cta
@@ -115,18 +115,18 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  Our Slip Dress Edit
+                          span.copy-highlight  Maxi Dresses
 
         .col-md-6.cta-item
-          = link_to 'dresses/ball-gowns'
+          = link_to dresses_path + '/wedding'
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-3-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-3-retina.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/fp-style-icon-3-mob.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/fp-style-icon-3-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/fp-style-icon-3-retina.jpg")} 1024w' alt="Shop Our Gown"
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile3-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile3.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/Aug-17-tile3.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/Aug-17-tile3-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/Aug-17-tile3.jpg")} 1024w' alt="Image tile"
 
               .content-wrap
                 .container-cta
@@ -135,19 +135,19 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  Our Gown Edit
+                          span.copy-highlight  Wedding Whites
 
       .row
         .col-md-6.cta-item
-          = link_to '/dresses/cocktail'
+          = link_to dresses_path + '/party'
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-4-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-4-retina.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/fp-style-icon-4.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/fp-style-icon-4-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/fp-style-icon-4-retina.jpg")} 1024w' alt="Shop Our Cocktail"
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile4-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile4.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/Aug-17-tile4.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/Aug-17-tile4-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/Aug-17-tile4.jpg")} 1024w' alt="Image tile"
 
               .content-wrap
                 .container-cta
@@ -156,18 +156,18 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  Our Cocktail Edit
+                          span.copy-highlight  Party Dresses
 
         .col-md-6.cta-item
-          = link_to 'dresses/wedding'
+          = link_to dresses_path + '/off-shoulder'
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-5-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/fp-style-icon-5-retina.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/fp-style-icon-5.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/fp-style-icon-5-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/fp-style-icon-5-retina.jpg")} 1024w' alt="Shop Our Wedding"
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile5-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile5.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/Aug-17-tile5.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/Aug-17-tile5-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/Aug-17-tile5.jpg")} 1024w' alt="Image tile"
 
               .content-wrap
                 .container-cta
@@ -176,7 +176,7 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  Our Wedding Edit
+                          span.copy-highlight  Off The Shoulder
 
   // Section: Styling
   section.section-box.container.section-styling
@@ -241,43 +241,43 @@ ruby:
             .item.col-md-5ths.col-xs-6
               = link_to '/dresses/dress-kai-1042?color=pale-pink', class: 'item-wrap'
                 .media-wrap
-                  = image_tag 'homepage/get-social/instagram-1.jpg', :class => 'img-responsive'
+                  = image_tag 'homepage/get-social/Aug-17-instagram-1.jpg', :class => 'img-responsive'
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @jessalizzi
+                          span.user @rocky_barnes
                           span.cta-link shop
 
             // Instagram Item
             .item.col-md-5ths.col-xs-6
-              = link_to '/dresses/dress-firefly-640?color=black', class: 'item-wrap'
+              = link_to '/dresses/dress-cici-jumpsuit-1111?color=black', class: 'item-wrap'
                 .media-wrap
-                  = image_tag 'homepage/get-social/instagram-2.jpg', :class => 'img-responsive'
+                  = image_tag 'homepage/get-social/Aug-17-instagram-2.jpg', :class => 'img-responsive'
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @lainyhedaya
+                          span.user @georgiafowler
                           span.cta-link shop
 
             // Instagram Item
             .item.col-md-5ths.col-xs-6
-              = link_to '/dresses/dress-lovelight-two-piece-860?color=ivory', class: 'item-wrap'
+              = link_to '/dresses/dress-cenit-two-piece-1081?color=pale-blue-cotton-stripe', class: 'item-wrap'
                 .media-wrap
-                  = image_tag 'homepage/get-social/instagram-3.jpg', :class => 'img-responsive'
+                  = image_tag 'homepage/get-social/Aug-17-instagram-3.jpg', :class => 'img-responsive'
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @samblacky
+                          span.user @fancytreehouse
                           span.cta-link shop
 
             // Instagram Item
             .item.col-md-5ths.col-xs-6
-              = link_to '/dresses/dress-midnight-eyes-778?color=white', class: 'item-wrap'
+              = link_to '/dresses/dress-storm-802?color=pale-grey', class: 'item-wrap'
                 .media-wrap
-                  = image_tag 'homepage/get-social/instagram-4.jpg', :class => 'img-responsive'
+                  = image_tag 'homepage/get-social/Aug-17-instagram-4.jpg', :class => 'img-responsive'
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
@@ -287,14 +287,14 @@ ruby:
 
             // Instagram Item
             .item.col-md-5ths.hidden-sm.hidden-xs
-              = link_to '/dresses/dress-flynn-1044?color=black', class: 'item-wrap'
+              = link_to '/dresses/dress-analise-956?color=black', class: 'item-wrap'
                 .media-wrap
-                  = image_tag 'homepage/get-social/instagram-5.jpg', :class => 'img-responsive'
+                  = image_tag 'homepage/get-social/Aug-17-instagram-5.jpg', :class => 'img-responsive'
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @kirstenanderton
+                          span.user @tsangtastic
                           span.cta-link shop
 
         .row

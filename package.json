@@ -16,6 +16,7 @@
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-connect": "^4.1.0",
+    "gulp-eslint": "^3.0.1",
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
@@ -24,11 +25,11 @@
     "react-custom-scrollbars": "^4.0.0",
     "react-dom": "^15.2.1",
     "react-image-magnifier": "^1.0.0",
+    "react-modal": "^1.4.0",
     "react-redux": "^4.4.5",
     "react-scrollspy": "^2.1.2",
     "react-simpletabs": "0.7.0",
     "react-slick": "^0.12.2",
-    "react-sticky": "^5.0.4",
     "redux": "^3.5.2",
     "redux-immutable-state-invariant": "^1.2.3"
   }

@@ -1,9 +1,7 @@
 /* [Search Filters]
 -------------------------------------------------------*/
 
-//TODO seperate these styles
-
-.search-filters, .faq {
+.search-filters {
   color: $c-neutral-10;
 
   a {
@@ -31,10 +29,6 @@
 
   }
 
-  & .panel + .panel {
-     margin-top: 0;
-  }
-
   .panel {
     border-color: $c-neutral-4;
     border-top-color: transparent;
@@ -51,10 +45,6 @@
       border-top-color: transparent;
     }
 
-  }
-
-  .panel-heading {
-    padding: 0;
   }
 
   .title-wrap {
@@ -111,27 +101,9 @@
   }
 
   .panel-title {
-    position: relative;
-    display: block;
-    padding: 15px 20px 15px 0;
-    font-size: 0.875em;
-    color: $c-neutral-black;
-
-    &:after {
-      content: '\e007';
-      position: absolute;
-      display: block;
-      top: 16px;
-      right: 0;
-      font-family: 'icomoon_fame_2015';
-    }
 
     &.collapsed {
       color: $c-neutral-10;
-
-      &:after {
-        content: '\e008';
-      }
 
       &:hover {
         color: $c-neutral-black;
@@ -139,10 +111,6 @@
 
     }
 
-  }
-
-  .panel-body {
-    padding: 0 0 15px 0;
   }
 
   .custom-form-element {

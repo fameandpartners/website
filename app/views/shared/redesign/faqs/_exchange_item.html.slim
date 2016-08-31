@@ -1,17 +1,21 @@
-.panel.panel-default
+.panel.content-collapse-expand.panel-default#collapse-exchange-item
   .panel-heading role="tab"
-    a.panel-title.collapsed href="javascript:;" role="button" data-toggle="collapse-next" How do I exchange an item?
+    a.panel-title.faq-title.collapsed href="#collapse-exchange-item" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+      | How do I exchange an item?
+      span.btn-open-close
 
-  #collapse-exchange-item.panel-collapse.collapse role="tabpanel"
+  .panel-collapse.collapse role="tabpanel"
     .panel-body
-
       ol
 
-        li First, please submit a return/exchange request by logging into your Fame and Partners account and clicking on the My Orders tab. On the right hand side, you will see a Return or Exchange option.  Then select the relevant order and you will be redirected to the returns page where you will be able to select the individual items which you would like to exchange. Select the appropriate reason for you exchange and submit the form.
+        li
+          | First, please submit a return/exchange request by logging into your Fame and Partners account and clicking on the My Orders tab. On the right hand side, you will see a Return or Exchange option.  Then select the relevant order and you will be redirected to the returns page where you will be able to select the individual items which you would like to exchange. Select the appropriate reason for you exchange and submit the form.
 
-        li Then, please print your Return Confirmation email, which you will receive after you submit your Return Request, and include in your package.
+        li
+          | Then, please print your Return Confirmation email, which you will receive after you submit your Return Request, and include in your package.
 
-        li Lastly, contact our customer service with your order number <a href="mailto:team@fameandpartners.com?subject=Returning Order Address - ORDER NUMBER">(team@fameandpartners.com)</a> to know which address you should ship your returning order
+        li
+          | Lastly, contact our customer service with your order number #{link_to "(team@fameandpartners.com)", "mailto:team@fameandpartners.com?subject=Returning Order Address - ORDER NUMBER"} to know which address you should ship your returning order
 
         /li Lastly, please ship your returning order, along with the completed Return/Exchange Form and all receipts, to the following address:
         /<br>
@@ -20,7 +24,8 @@
         /'New York, NY 10004<br>
         /'UNITED STATES
 
-      p After we have received this information from you, we will place this order and we will get started on your new dress!
+      p
+        | After we have received this information from you, we will place this order and we will get started on your new dress!
 
       hr
       p

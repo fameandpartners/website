@@ -28,41 +28,49 @@ export default function configureStore(initialState) {
         {
           type: 'Mini',
           heights: [
-            {type: 'Petite',   cm: '42', inches: '16 ½'},
-            {type: 'Standard', cm: '45', inches: '17 ¾'},
-            {type: 'Tall',     cm: '48', inches: '19'}
+            {type: 'Petite',   cm: '42.5', inches: '16 ¾'},
+            {type: 'Standard', cm: '45',   inches: '17 ½'},
+            {type: 'Tall',     cm: '47.5', inches: '18 ¾'}
           ]
         },
         {
           type: 'Knee',
           heights: [
-            {type: 'Petite',   cm: '45.5', inches: '18'},
-            {type: 'Standard', cm: '50',   inches: '19 ¾'},
-            {type: 'Tall',     cm: '54.5', inches: '21 ½'}
+            {type: 'Petite',   cm: '54', inches: '21 ¼'},
+            {type: 'Standard', cm: '57', inches: '22 ½'},
+            {type: 'Tall',     cm: '60', inches: '23 ¾'}
           ]
         },
         {
           type: 'Petti',
           heights: [
-            {type: 'Petite',   cm: '64', inches: '25'},
-            {type: 'Standard', cm: '70', inches: '27 ½'},
-            {type: 'Tall',     cm: '76', inches: '30'}
+            {type: 'Petite',   cm: '68', inches: '26 ¾'},
+            {type: 'Standard', cm: '72', inches: '28 ¼'},
+            {type: 'Tall',     cm: '76', inches: '29 ¾'}
           ]
         },
         {
           type: 'Midi',
           heights: [
-            {type: 'Petite',   cm: '72', inches: '28 ½'},
+            {type: 'Petite',   cm: '75', inches: '29 ½'},
             {type: 'Standard', cm: '80', inches: '31 ½'},
-            {type: 'Tall',     cm: '88', inches: '34 ½'}
+            {type: 'Tall',     cm: '85', inches: '33 ½'}
+          ]
+        },
+        {
+          type: 'Ankle',
+          heights: [
+            {type: 'Petite',   cm: '94',  inches: '37'},
+            {type: 'Standard', cm: '99',  inches: '39'},
+            {type: 'Tall',     cm: '104', inches: '41'}
           ]
         },
         {
           type: 'Maxi',
           heights: [
-            {type: 'Petite',   cm: '102', inches: '40'},
-            {type: 'Standard', cm: '112', inches: '44'},
-            {type: 'Tall',     cm: '122', inches: '48'}
+            {type: 'Petite',   cm: '104', inches: '41'},
+            {type: 'Standard', cm: '110', inches: '43 ¼'},
+            {type: 'Tall',     cm: '116', inches: '45 ½'}
           ]
         }
       ]

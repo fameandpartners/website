@@ -1,11 +1,10 @@
 // Page header
 .user-account-page-title {
-  background-color: $peach-bg;
- }
 
-.user-account-title {
-  color: #000000;
-  text-transform: none;
+  h1 {
+    margin-top: 40px;
+  }
+
 }
 // @end Page header
 // ---------------
@@ -33,7 +32,17 @@
 
   .btn{
     background-color: #C0C0C0;
+
+    &.btn-black{
+      background: $c-neutral-black;
+    }
+
+    &.btn-transparent {
+      background: transparent;
+    }
+
   }
+  
 }
 // @end Account
 // ---------------

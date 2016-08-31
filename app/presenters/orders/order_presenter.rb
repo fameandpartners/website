@@ -17,10 +17,14 @@ module Orders
                    :name,
                    :first_name,
                    :shipments,
+                   :billing_address,
+                   :shipping_address,
                    :site_version,
                    :state,
                    :to_param,
-                   :has_fast_making_items?
+                   :has_fast_making_items?,
+                   :display_promotion_total,
+                   :shipment
 
     attr_reader :order, :items
 
@@ -50,6 +54,10 @@ module Orders
     def projected_delivery_date
       return unless order.completed?
       order.projected_delivery_date.try(:to_date) || Policies::OrderProjectedDeliveryDatePolicy.new(order).delivery_date.try(:to_date)
+    end
+
+    def expected_delivery_date
+      projected_delivery_date.try(:strftime, '%a, %d %b %Y')
     end
 
     def promo_codes

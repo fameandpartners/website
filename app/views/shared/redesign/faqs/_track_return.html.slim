@@ -1,8 +1,11 @@
-.panel.panel-default
+.panel.content-collapse-expand.panel-default#collapse-returns-track-return
   .panel-heading role="tab"
-    a.panel-title.collapsed href="javascript:;" role="button" data-toggle="collapse-next" How can I track my return?
+    a.panel-title.faq-title.collapsed href="#collapse-returns-track-return" role="button" data-parent=".panel-group" data-toggle="collapse-next"
+      | How can I track my return?
+      span.btn-open-close
 
-  #collapse-returns-track-return.panel-collapse.collapse role="tabpanel"
+  .panel-collapse.collapse role="tabpanel"
     .panel-body
 
-      p We will be in touch with you via email as soon as we receive your return.  In the meantime, if you have any questions regarding the status of your return, please contact us at <a href="mailto:team@fameandpartners.com">team@fameandpartners.com</a>.
+      p
+        | We will be in touch with you via email as soon as we receive your return.  In the meantime, if you have any questions regarding the status of your return, please contact us at #{link_to "team@fameandpartners.com", "mailto:team@fameandpartners.com"}.

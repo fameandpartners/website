@@ -1,9 +1,14 @@
 /* [Hero]
 -------------------------------------------------------*/
 .hero-wrap {
+  display: block;
 
   .media-wrap {
     min-height: 100px;
+  }
+
+  .heading {
+    margin: 0;
   }
 
   // versions
@@ -23,17 +28,11 @@
     }
 
     .heading {
-      margin: 50px 0 0;
       text-transform: none;
       color: $c-neutral-black;
 
       > span {
         display: block;
-
-        &:first-child {
-          font-size: 3.8rem;
-        }
-
       }
 
     }
@@ -49,6 +48,7 @@
     }
 
     .sub-heading {
+      font-family: $font-heading;
       display: inline-block;
       padding-top: 5px;
       font-size: 2rem;
@@ -62,12 +62,12 @@
     margin-top: 25px;
   }
 
-}
+  // START - desktop
+  @media (min-width: $bootstrap-md-width) {
 
-// START - desktop
-@media (min-width: $bootstrap-md-width) {
-
-  .hero-wrap {
+    h1 > span:first-child {
+      font-size: 4.4rem;
+    }
 
     &.copy-right, &.copy-left {
     position: relative;
@@ -97,13 +97,18 @@
 
       }
 
-      .heading > span:first-child {
-        font-size: 4rem;
-      }
-
       .sub-heading {
         padding-top: 0;
         border-top: none;
+      }
+
+    }
+
+    .img-as-block {
+      padding-bottom: 0;
+
+      .inner-wrap {
+        position: relative;
       }
 
     }
@@ -119,11 +124,40 @@
 
     }
 
+    &.white-text {
+
+      .heading,
+      .sub-heading,
+      p,
+      a,
+      span {
+        color: $c-neutral-white;
+      }
+
+      .btn-featured {
+        color: $c-neutral-white;
+        border-color: $c-neutral-white;
+      }
+
+    }
+
+  }
+  // END - desktop
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .heading {
+      margin-top: 50px;
+
+      > span:first-child {
+        font-size: 3.8rem;
+      }
+
+    }
+
   }
 
 }
-// END - desktop
-
 
 .hero-product-wrap {
   position: relative;

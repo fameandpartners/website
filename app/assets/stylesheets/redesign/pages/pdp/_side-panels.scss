@@ -11,6 +11,10 @@
       text-decoration: underline;
     }
 
+    strong {
+      font-weight: 500;
+    }
+
   }
 
   table {
@@ -119,7 +123,7 @@
   &-color {
 
     .color-preview {
-      height: 130px;
+      height: 80px;
     }
 
   }

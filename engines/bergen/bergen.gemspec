@@ -16,13 +16,16 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*'] + ['Rakefile', 'README.rdoc']
   s.test_files = Dir['spec/**/*']
 
-  s.add_dependency 'aasm'
+  s.add_dependency 'rails'             # Version specified on main app Gemfile
+  s.add_dependency 'sidekiq'           # Version specified on main app Gemfile
+  s.add_dependency 'sentry-raven'      # Version specified on main app Gemfile
+  s.add_dependency 'money', '~> 5.1.1' # Version also specified on spree_core
+  s.add_dependency 'savon', '~> 1.2.0' # Version also specified on spree_gateway
+  s.add_dependency 'aasm', '~> 4.10.0'
+  s.add_dependency 'shippo', '~> 1.0.4'
+
+  # Related Engines dependency
   s.add_dependency 'admin_ui'
-  s.add_dependency 'money'
-  s.add_dependency 'rails'
-  s.add_dependency 'savon'
-  s.add_dependency 'sidekiq'
-  s.add_dependency 'sentry-raven'
 
   # s.add_dependency 'jquery-rails'
 

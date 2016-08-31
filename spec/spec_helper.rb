@@ -36,6 +36,18 @@ RSpec.configure do |config|
 
   config.infer_base_class_for_anonymous_controllers = false
 
-  # Use DatabaseCleaner instead of ActiveRecord transactional
+  # Use DatabaseCleaner for transactions
   config.use_transactional_fixtures = false
+end
+
+# TODO: remove this RSpec monkey patching when updating to latest RSpec. See https://github.com/fameandpartners/website/issues/1912
+RSpec::Rails::ViewRendering::EmptyTemplatePathSetDecorator.class_eval do
+  def initialize(original_path_set)
+    super()
+    @original_path_set = original_path_set
+  end
+
+  def find_all_anywhere(*args)
+    find_all(args)
+  end
 end

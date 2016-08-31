@@ -8,6 +8,7 @@
     border-color: $c-neutral-4;
     border: 0;
     border-bottom: 1px solid $c-neutral-9;
+    border-radius: 0;
 
     > .panel-heading {
       background: $c-neutral-white;
@@ -30,11 +31,16 @@
     padding: 15px 10px 15px 0;
     color: $c-neutral-black;
     font-size: 1.3rem;
-    text-transform: uppercase;
 
     .btn-open-close {
       @extend .btn-close;
       float: right;
+
+      .side-panel & {
+        display: block;
+        visibility: visible;
+      }
+
     }
 
     &.collapsed {
@@ -53,6 +59,15 @@
 
       }
 
+    }
+
+    &.faq-title {
+      padding: 15px 20px 15px 0;
+      font-size: 0.875em;
+    }
+
+    &.panel-uc-title {
+      text-transform: uppercase;
     }
 
   }

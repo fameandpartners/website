@@ -8,7 +8,11 @@ module Bergen
       include_context 'return item ready to process'
 
       let(:savon_client) { SavonClient.new }
-      let(:soap_method) { described_class.new(savon_client: savon_client, return_request_item: return_request_item) }
+      let(:soap_method) { described_class.new(
+        savon_client: savon_client,
+        return_request_item: return_request_item,
+        tracking_number: 'tracking_number'
+      ) }
 
       describe 'creates a new receiving ticket' do
         context 'successfully creates' do

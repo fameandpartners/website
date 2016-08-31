@@ -53,6 +53,15 @@ module Middleware
               expect(result).to eq('http://example.com.br/something?in-the=way')
             end
           end
+
+          context 'given a bad URL and a site version' do
+            let(:url) { 'http://www.example.com/something?a+|+b&c=d' }
+
+            it 'replaces the URL domain with the site version\'s' do
+              result = detector.site_version_url(url, br_site_version)
+              expect(result).to eq('http://example.com.br/something?a+|+b&c=d')
+            end
+          end
         end
       end
     end

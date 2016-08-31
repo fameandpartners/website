@@ -2,12 +2,13 @@
 -------------------------------------------------------*/
 $section-spacing-margin-top: 40px;
 $box-padding-top: 25px;
+$top-overlay-margin-top: 37px;
 
 .section-box {
   margin-top: $section-spacing-margin-top;
 
   &.top-overlay {
-    margin-top: -37px;
+    margin-top: -($top-overlay-margin-top);
   }
 
   p {
@@ -118,7 +119,7 @@ $box-padding-top: 25px;
     .copy-side {
       padding: 0 25px;
       margin-bottom: 14px;
-      position: relative;
+      position: inherit;
 
       p:first-child {
         margin-top: 14px;
@@ -143,6 +144,10 @@ $box-padding-top: 25px;
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
+
+    &.heading-has-copy.top-overlay {
+      margin-top: $top-overlay-margin-top;
+    }
 
     .item {
 
@@ -184,7 +189,7 @@ $box-padding-top: 25px;
   @media (min-width: $bootstrap-sm-width) {
 
     .link-align-bottom {
-      bottom: 0;
+      bottom: 10%;
       position: absolute;
     }
 

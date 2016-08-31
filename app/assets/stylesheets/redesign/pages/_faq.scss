@@ -7,14 +7,7 @@
     text-transform: none;
   }
 
-  h2 {
-    font-family: $font-family-secondary;
-    font-size: 0.875em;
-    font-weight: 700;
-    margin-bottom: 20px;
-  }
-
-  p a {
+  .panel-body a {
     text-decoration: underline;
     color: inherit;
   }
@@ -24,6 +17,16 @@
   }
 
   .faq-wrap {
+    color: $c-neutral-10;
+
+    a,
+    a:hover {
+      color: $c-neutral-black;
+    }
+
+    a.collapsed {
+      color: $c-neutral-10;
+    }
 
     p,
     ul,
