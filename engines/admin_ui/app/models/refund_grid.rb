@@ -12,7 +12,7 @@ class RefundGrid
     (value == 'Received') ? where(acceptance_status: 'received') : where("acceptance_status != 'received'")
   end
   filter(:refund_amount, :integer, range: true)
-  filter(:return_status, :enum, select: ['Paid', 'Not Paid']) do |value|
+  filter(:refund_status, :enum, select: ['Paid', 'Not Paid']) do |value|
     (value == 'Paid') ? where(refund_status: 'Complete') : where("refund_status != 'Complete'")
   end
 
