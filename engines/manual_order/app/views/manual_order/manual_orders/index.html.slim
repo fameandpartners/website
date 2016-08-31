@@ -2,6 +2,6 @@
   ' Manual Orders
 
 = render 'admin_ui/grid/grid_collection_filters', collection_url: manual_orders_path
-= link_to 'Create a Manual Order', new_manual_order_path, class: 'btn btn-info'
-br
+.row : .col-lg-12
+  = link_to 'Create a Manual Order', new_manual_order_path, class: 'btn btn-info'
 = render 'admin_ui/grid/paginated_collection_grid'
