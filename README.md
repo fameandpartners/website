@@ -30,6 +30,8 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
   - prefix `feature/` or `fix/` depending on it's type
   - suffix with JIRA's task sumary name (`-WEBSITE-number`)
   - examples: `feature/new-order-types-WEBSITE-9999`, `fix/homepage-issues-WEBSITE-9998`
+  - please refer to [fameandpartners#rules](https://github.com/fameandpartners/website/wiki/The-Rules) for more information
+* Commits should follow [fameandpartners#commit-style-guide](https://github.com/fameandpartners/website/wiki/Commit-Style-Guide)
 * For review process please follow [cody#usage](https://github.com/aergonaut/cody#usage) documentation
 
 ### Frameworks
