@@ -57,7 +57,7 @@ module Orders
     end
 
     def expected_delivery_date
-      order.projected_delivery_date.strftime("%d of %b, %Y")
+      projected_delivery_date.try(:strftime, '%a, %d %b %Y')
     end
 
     def promo_codes

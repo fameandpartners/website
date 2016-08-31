@@ -16,11 +16,11 @@
       .row
         .col-md-4.col-md-offset-9
           .copy-wrap
-            h1.no-margin
+            h2.heading.no-margin-md
               span The It Girl Collection
               span.sub-heading
                 | Modern Classics, made your way
-            = link_to it_girl_landing_page_path
+            = link_to it_girl_landing_page_path, data: { description: 'The It Girl Collection' }
               .cta-wrapper
                 span.btn-md.btn-featured
                   | Start <span class="copy-highlight">CUSTOMIZING</span>
@@ -41,14 +41,14 @@
         .col-md-4.col-md-offset-5
           .copy-wrap
             / adding .no-margin-md here as this heading is longer than the others and does not get properly centred vertically
-            h1.heading.no-margin-md
-              span All Eyes On You
+            h2.heading.no-margin-md
+              span Love me, <br>Lights Out
               span.sub-heading
-                | Statement-making party dresses,<br>right this way.
-            = link_to weddings_parties_page_path
+                | Introducing the Weddings and<br>Parties Collection.
+            = link_to weddings_parties_page_path, data: { description: 'Love me, Lights Out' }
               .cta-wrapper
                 span.btn-md.btn-featured.white-txt-border
-                  | Shop <span class="copy-highlight">PARTIES</span>
+                  | Explore <span class="copy-highlight">WEDDINGS</span>
 
 // Carousel Item 3
 .main-hero-wrap.hero-wrap.copy-right
@@ -65,11 +65,11 @@
       .row
         .col-md-12.text-center
           .copy-wrap
-            h1.heading.full
+            h2.heading.full
               span Style Up-To-There
               span.sub-heading
                 | A little leg, a little lace, a lot of style.
-            = link_to '/dresses/dress-dragon-eyes-lace-1135?color=black'
+            = link_to '/dresses/dress-dragon-eyes-lace-1135?color=black', data: { description: 'Style Up-To-There' }
               .cta-wrapper
                 span.btn-md.btn-featured
                   | Get <span class="copy-highlight">THE DRESS</span>

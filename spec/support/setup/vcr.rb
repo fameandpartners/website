@@ -6,6 +6,7 @@ VCR.configure do |c|
   c.hook_into :webmock
   c.ignore_localhost = true
   c.allow_http_connections_when_no_cassette = true
+  c.filter_sensitive_data('<MAILCHIMP_API_KEY>') { ENV['MAILCHIMP_API_KEY'] }
 end
 
 # Allow VCR to be turned off

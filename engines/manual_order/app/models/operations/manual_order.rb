@@ -46,11 +46,12 @@ module Operations
       order.currency = params[:currency]
       order.customer_notes = params[:notes]
       order.site_version = site_version.permalink
-      order.number = update_number(order.number) if params[:status] == 'exchange'
+      order.number = update_number(order.number)
       order.save
 
       order.touch :completed_at
       order.update_column :state, 'complete'
+      order.project_delivery_date
 
       order
     end
@@ -66,7 +67,7 @@ module Operations
     end
 
     def address_params
-      {
+      addr = {
         firstname: params[:first_name],
         lastname: params[:last_name],
         address1: params[:address1],
@@ -78,10 +79,13 @@ module Operations
         phone: params[:phone],
         email: params[:email]
       }
+
+      addr.merge!({state_name: 'no state'}) if params[:state].nil?
+      addr
     end
 
     def update_number(_number)
-      'E' + _number.gsub(/[^0-9]/, '')
+      (params[:status] == 'exchange' ? 'E' : 'M') + _number.gsub(/[^0-9]/, '')
     end
 
   end

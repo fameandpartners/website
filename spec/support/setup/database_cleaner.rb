@@ -10,7 +10,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each, type: :feature) do
-    DatabaseCleaner.strategy = :deletion
+    DatabaseCleaner.strategy = :truncation, { pre_count: true, reset_ids: false }
   end
 
   config.before(:each) do
