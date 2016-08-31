@@ -1,4 +1,4 @@
-module MailChimpClient
+module MailChimp
   class UserPresenter
 
     attr_accessor :user

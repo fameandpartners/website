@@ -1,4 +1,4 @@
-module MailChimpClient
+module MailChimp
   class OrderPresenter
 
     attr_accessor :order
@@ -21,7 +21,7 @@ module MailChimpClient
 
     def customer_for_order(order)
       if order.user
-        MailChimpClient::UserPresenter.new(order.user).read
+        UserPresenter.new(order.user).read
       else
         {
           id:            order.number,
@@ -34,7 +34,7 @@ module MailChimpClient
     end
 
     def order_line_items(order)
-      order.line_items.map { |line_item| MailChimpClient::LineItemPresenter.new(line_item).read }
+      order.line_items.map { |line_item| LineItemPresenter.new(line_item).read }
     end
   end
 end
