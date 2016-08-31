@@ -26,7 +26,7 @@ module Forms
     property :adj_description, virtual: true
 
     def products
-      Spree::Product.active
+      Spree::Product.where(id: Spree::Variant.where('deleted_at is NULL').pluck(:product_id).uniq)
     end
 
     def countries
@@ -46,22 +46,25 @@ module Forms
     end
 
     def get_size_options(product_id)
-      products.find(product_id).variants.map {|v| { id: v.dress_size.id, name: v.dress_size.name} }.uniq
+      Spree::Product.find(product_id).variants.map do |v|
+        { id: v.dress_size.id, name: v.dress_size.name} if v.dress_size.present?
+      end.compact.uniq
     end
 
     def get_color_options(product_id)
-      products.find(product_id).variants
-        .map {|v| { id: v.dress_color.id, name: v.dress_color.presentation, type: 'color'} }.uniq
+      Spree::Product.find(product_id).variants.map do |v|
+        { id: v.dress_color.id, name: v.dress_color.presentation, type: 'color'} if v.dress_color.present?
+      end.compact.uniq
     end
 
     def get_custom_colors(product_id)
-      custom_colors = products.find(product_id).product_color_values.where(custom: true).pluck(:option_value_id)
+      custom_colors = Spree::Product.find(product_id).product_color_values.where(custom: true).pluck(:option_value_id)
       Spree::OptionValue.colors.where('id IN (?)', custom_colors)
         .map {|c| { id: c.id, name: "#{c.presentation} (+ $16.00)", type: 'custom' } }.uniq
     end
 
     def get_customisations_options(product_id)
-      products.find(product_id).customisation_values
+      Spree::Product.find(product_id).customisation_values
         .map {|c| { id: c.id, name: "#{c.presentation} (+ $#{c.price})" } }
     end
 
