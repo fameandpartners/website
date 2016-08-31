@@ -44,7 +44,7 @@ li class=active_link_to_class('', active: /reports/)
     = active_link_to 'Sale Items', admin_ui.reports_sale_items_path, wrap_tag: :li
     = active_link_to 'Size Normalisations', admin_ui.reports_size_normalisations_path, wrap_tag: :li
     = active_link_to 'Daily Orders (China)', admin_ui.reports_daily_orders_path, wrap_tag: :li
+    = active_link_to 'Refunds', admin_ui.reports_refunds_path, wrap_tag: :li
 
-= menu_item admin_ui.refund_requests_path, 'Refund Requests', icon: 'dollar'
 = menu_item spree.admin_path, 'Spree Admin', icon: 'shopping-cart'
 = menu_item main_app.root_path, 'Website', icon: 'globe', exact: true
