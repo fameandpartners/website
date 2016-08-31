@@ -3,14 +3,14 @@
 .page-content.lookbook-v2-page.relative
 
   // Hero tile
-  .main-hero-wrap.hero-wrap.copy-left.no-margin.white-text
+  .main-hero-wrap.hero-wrap.copy-left.white-text
     picture.media-wrap.keep-ratio.img-as-block
       .inner-wrap
-        source media='(max-width: 1023px)' srcset='#{image_path("landingpages/weddings-parties/hero-mob.jpg")}'
-        source media='(min-width: 1024px)' srcset='#{image_path("landingpages/weddings-parties/hero-full.jpg")}'
-        img src='#{image_path("landingpages/weddings-parties/hero-full.jpg")}' srcset='
-          #{image_path("landingpages/weddings-parties/hero-mob.jpg")} 1023w,
-          #{image_path("landingpages/weddings-parties/hero-full.jpg")} 1024w' alt='Wedding & Parties. A collection celebrating magical moments with those you love; special connections against a cityscape of anonymity - at weddings, parties or whatever.'
+        source media='(max-width: 1023px)' srcset='#{image_path("landingpages/weddings-parties/weddings-hero-mob.jpg")}'
+        source media='(min-width: 1024px)' srcset='#{image_path("landingpages/weddings-parties/weddings-hero-full.jpg")}'
+        img src='#{image_path("landingpages/weddings-parties/weddings-hero-full.jpg")}' srcset='
+          #{image_path("landingpages/weddings-parties/weddings-hero-mob.jpg")} 1023w,
+          #{image_path("landingpages/weddings-parties/weddings-hero-full.jpg")} 1024w' alt='Wedding & Parties. A collection celebrating magical moments with those you love; special connections against a cityscape of anonymity - at weddings, parties or whatever.'
 
     .content-wrap
       .container
@@ -18,12 +18,12 @@
           .col-md-6.col-md-offset-3
             .copy-wrap.text-center.white-text
               h1.heading.no-margin-md
-                span Weddings & Parties
+                span Love In Bloom
               .sub-heading
-                | A collection for girls who keep it real. Show your love in a look that’s easy, ethereal, and effortlessly elegant.
+                | She loves a good party—minus the fuss and the fanfare. She fantasizes about white lace and bright bouquets. She is cool, calm, and confident. She is the picture of perennial love.
 
   // F&P Capsule tag
-  section.section-box.container-fluid.no-padding.no-margin.top-overlay.heading-has-copy.section-intro
+  section.section-box.container-fluid.no-padding.top-overlay.heading-has-copy.section-intro
     .row
       .col-md-12.heading-overlay-wrapper
         h2.heading-overlay FAME WEDDINGS
@@ -37,18 +37,17 @@
             li.link = link_to "The Rehearsal Dinner", "#rehearsal-dinner"
             li.link = link_to "The Bridesmaids", "#bridesmaids"
             li.link = link_to "Wedding Guests", "#wedding-guests"
-            li.link = link_to "The After Party", "#after-party"
 
   // Look 1
-  - current_dress_name = "Estelle"
-  - current_dress_link = "#{dresses_path}/dress-estelle-two-piece-852?color=white"
-  - current_edit_link = "#{dresses_path}/wedding"
+  - current_dress_name = "Milena Two Piece"
+  - current_dress_link = "#{dresses_path}/dress-milena-two-piece-1090?color=white"
+  - current_edit_link = "#{dresses_path}/bridal"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$349"
+    - current_dress_price = "$419"
   - else
     // USA - PRICE
-    - current_dress_price = "$349"
+    - current_dress_price = "$329"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#modern-bride
     .row
@@ -58,24 +57,25 @@
     .row.vertical-align-copy
       .col-md-7.content-img
         = link_to current_edit_link
-          = image_tag 'landingpages/weddings-parties/look-01.jpg', srcset: "#{image_path("landingpages/weddings-parties/look-01-mob.jpg")} 1023w,
-            #{image_path("landingpages/weddings-parties/look-01.jpg")} 1024w", class: 'img-responsive', alt: "The Modern Bride Dress"
+          = image_tag 'landingpages/weddings-parties/weddings-look-01.jpg', srcset: "#{image_path("landingpages/weddings-parties/weddings-look-01-mob.jpg")} 1023w,
+            #{image_path("landingpages/weddings-parties/weddings-look-01.jpg")} 1024w", class: 'img-responsive', alt: "The Modern Bride Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
 
-          h3 For your <br class="visible-lg-block"><em>wedding day</em>
-          p Evoke modern romance in the custom-made dress you’ve been dreaming of, whether you’re a classic bride who stands on ceremony or a romantic with a rebellious streak.
+          h3 Better <em>together</em>.
+          p The bride and the groom, roses and baby’s breath, crop tops and midi skirts... all things that are better together. Go for a fresh take on tradition in our modern bridal collection.
 
           .cta-product-caption.copy-highlight
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link
+            .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link, class:'link-underline'
 
           .cta-wrapper
-            = link_to current_edit_link, class: 'cta-link'
-               | Shop the edit
+            = link_to current_edit_link
+               span.btn-md.btn-featured
+                | Customize <span class="copy-highlight">the dress</span>
 
   .products-grid.products-collections
     .container
@@ -90,19 +90,15 @@
                | Shop & customize
 
   // Look 2
-  - current_dress_1_name = "Calafia"
+  - current_dress_1_name = "Shaylyn Dress"
   - current_dress_1_link = "#{dresses_path}/dress-calafia-1009?color=ivory"
-  - current_dress_2_name = "Kelis"
-  - current_dress_2_link = "#{dresses_path}/dress-kelis-1067?color=pale-blue"
-  - current_edit_link = "#{dresses_path}/white"
+  - current_edit_link = "#{dresses_path}/white-ivory"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
     - current_dress_1_price = "$399"
-    - current_dress_2_price = "$249"
   - else
     // USA - PRICE
-    - current_dress_1_price = "$349"
-    - current_dress_2_price = "$199"
+    - current_dress_1_price = "$319"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#rehearsal-dinner
     .row
@@ -112,25 +108,25 @@
     .row.vertical-align-copy
       .col-md-7.content-img
         = link_to current_edit_link
-          = image_tag 'landingpages/weddings-parties/look-02.jpg', srcset: "#{image_path("landingpages/weddings-parties/look-02-mob.jpg")} 1023w,
-            #{image_path("landingpages/weddings-parties/look-02.jpg")} 1024w", class: 'img-responsive', alt: "Rehearsal Dinner Dress"
+          = image_tag 'landingpages/weddings-parties/weddings-look-02.jpg', srcset: "#{image_path("landingpages/weddings-parties/weddings-look-02-mob.jpg")} 1023w,
+            #{image_path("landingpages/weddings-parties/weddings-look-02.jpg")} 1024w", class: 'img-responsive', alt: "Rehearsal Dinner Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
 
-          h3 For the <em>Bride-to-be</em>
-          p Wedding whites in silhouettes you love. Shine bright at the engagement party, bridal shower, bachelorette night, and rehearsal dinner in the hero of the pre-wedding wardrobe, the Little White Dress.
+          h3 About to <em>blossom</em>.
+          p Cut the worry out of your pre-wedding routine with our collection of Little White Dresses, perfect for the engagement party, bridal shower, rehearsal dinner, and beyond. No fuss, no stress–just the custom-made dress of your dreams.
 
           .cta-product-caption.copy-highlight
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            .product-info = link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link
-            .product-info = link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link
+            .product-info = link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link, class:'link-underline'
 
           .cta-wrapper
-            = link_to current_edit_link, class: 'cta-link'
-               | Shop the edit
+            = link_to current_edit_link
+              span.btn-md.btn-featured
+                | All the <span class="copy-highlight">LWDS</span>
 
   .products-grid.products-collections
     .container
@@ -145,15 +141,19 @@
                | Shop & customize
 
   // Look 3
-  - current_dress_name = "Lux"
-  - current_dress_link = "#{dresses_path}/dress-lux-1038?color=pastel-pink"
-  - current_edit_link = "#{dresses_path}/bridesmaid"
+  - current_dress_1_name = "Callais Dress"
+  - current_dress_1_link = "#{dresses_path}/dress-callais-1064?color=pale-blue"
+  - current_dress_2_name = "Kelis Dress"
+  - current_dress_2_link = "#{dresses_path}/dress-kelis-1067?color=pale-blue"
+  - current_edit_link = "/bridesmaid-dresses"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$279"
+    - current_dress_1_price = "$329"
+    - current_dress_2_price = "$249"
   - else
     // USA - PRICE
-    - current_dress_price = "$219"
+    - current_dress_1_price = "$299"
+    - current_dress_2_price = "$199"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#bridesmaids
     .row
@@ -163,24 +163,26 @@
     .row.vertical-align-copy
       .col-md-7.content-img
         = link_to current_dress_link
-          = image_tag 'landingpages/weddings-parties/look-03.jpg', srcset: "#{image_path("landingpages/weddings-parties/look-03-mob.jpg")} 1023w,
-            #{image_path("landingpages/weddings-parties/look-03.jpg")} 1024w", class: 'img-responsive', alt: "The Bridesmaid Dress"
+          = image_tag 'landingpages/weddings-parties/weddings-look-03.jpg', srcset: "#{image_path("landingpages/weddings-parties/weddings-look-03-mob.jpg")} 1023w,
+            #{image_path("landingpages/weddings-parties/weddings-look-03.jpg")} 1024w", class: 'img-responsive', alt: "The Bridesmaid Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
 
-          h3 For the <em>girls</em> by <br class="visible-lg-block">your side
+          h3 <em>Best</em> buds.
           p Your bridesmaids are the most important women in your life; celebrate those special connections in individually customized, breathtakingly beautiful bridesmaids dresses they’ll fall in love with.
 
           .cta-product-caption.copy-highlight
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link
+            .product-info = link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link, class:'link-underline'
+            .product-info = link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link, class:'link-underline'
 
           .cta-wrapper
-            = link_to current_edit_link, class: 'cta-link'
-               | Shop the edit
+            = link_to current_edit_link
+              span.btn-md.btn-featured
+                | Make them <span class="copy-highlight">special</span>
 
   .products-grid.products-collections
     .container
@@ -195,15 +197,15 @@
                | Shop & customize
 
   // Look 4
-  - current_dress_name = "Ziv"
-  - current_dress_link = "#{dresses_path}/dress-ziv-1037?color=champagne"
+  - current_dress_name = "Danielle Dress"
+  - current_dress_link = "#{dresses_path}/dress-callais-1064?color=pale-blue"
   - current_edit_link = "#{dresses_path}/wedding-guests"
   - if current_site_version.is_australia?
     // AUSTRALIA - PRICE
-    - current_dress_price = "$199"
+    - current_dress_price = "$339"
   - else
     // USA - PRICE
-    - current_dress_price = "$259"
+    - current_dress_price = "$269"
 
   section.section-box.container-fluid.no-padding.no-margin.section-look#wedding-guests
     .row
@@ -213,24 +215,25 @@
     .row.vertical-align-copy
       .col-md-7.content-img
         = link_to current_dress_link
-          = image_tag 'landingpages/weddings-parties/look-04.jpg', srcset: "#{image_path("landingpages/weddings-parties/look-04-mob.jpg")} 1023w,
-            #{image_path("landingpages/weddings-parties/look-04.jpg")} 1024w", class: 'img-responsive', alt: "Wedding Guests Dress"
+          = image_tag 'landingpages/weddings-parties/weddings-look-04.jpg', srcset: "#{image_path("landingpages/weddings-parties/weddings-look-04-mob.jpg")} 1023w,
+            #{image_path("landingpages/weddings-parties/weddings-look-04.jpg")} 1024w", class: 'img-responsive', alt: "Wedding Guests Dress"
 
       .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
         .copy-wrap
 
-          h3 For the <em>party-goers</em>
-          p Raise a glass to real-life fairytales in a look that’s cool, contemporary, and versatile enough to wear again and again.
+          h3 Catch the <em>bouquet</em>.
+          p They’re saying, “I Do” and, naturally, your first thought is, “New dress!” Rush to catch that bouquet (or don’t) in look that’s cool, contemporary, and versatile enough to wear again and again.
 
           .cta-product-caption.copy-highlight
             | Pictured
             span.hidden-md.hidden-lg  above:
             span.hidden-xs.hidden-sm  left:
-            .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link
+            .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link, class:'link-underline'
 
           .cta-wrapper
-            = link_to current_edit_link, class: 'cta-link'
-               | Shop the edit
+            = link_to current_edit_link
+              span.btn-md.btn-featured
+                | Shop the <span class="copy-highlight">collection</span>
 
   .products-grid.products-collections
     .container
@@ -243,49 +246,6 @@
             = link_to current_edit_link
               span.btn-md.btn-featured
                | Shop & customize
-
-  // Look 5
-  - current_dress_1_name = "Foxi"
-  - current_dress_1_link = "#{dresses_path}/dress-foxi-643?color=black"
-  - current_dress_2_name = "Romeo"
-  - current_dress_2_link = "#{dresses_path}/dress-romeo-994?color=black"
-  - current_edit_link = "#{dresses_path}/party"
-  - if current_site_version.is_australia?
-    // AUSTRALIA - PRICE
-    - current_dress_1_price = "$229"
-    - current_dress_2_price = "$379"
-  - else
-    // USA - PRICE
-    - current_dress_1_price = "$189"
-    - current_dress_2_price = "$299"
-
-  section.section-box.container-fluid.no-padding.no-margin.section-look#after-party
-    .row
-      .col-md-10.col-md-offset-1.heading-overlay-wrapper.tag-align-left
-        h2.heading-overlay The After Party
-
-    .row.vertical-align-copy
-      .col-md-7.content-img
-        = link_to current_edit_link
-          = image_tag 'landingpages/weddings-parties/look-05.jpg', srcset: "#{image_path("landingpages/weddings-parties/look-05-mob.jpg")} 1023w,
-            #{image_path("landingpages/weddings-parties/look-05.jpg")} 1024w", class: 'img-responsive', alt: "The After Party Dress"
-
-      .col-lg-3.col-lg-offset-1.col-md-5.col-md-offset-0.col-xs-10.col-xs-offset-1.content-copy.vertical-align
-        .copy-wrap
-
-          h3 For dancing the <br class="visible-lg-block">night away
-          p An edit for the party girl who’s all grown up. Catch the light in sequined separates, glittering gowns and cocktail frocks with attitude.
-
-          .cta-product-caption.copy-highlight
-            | Pictured
-            span.hidden-md.hidden-lg  above:
-            span.hidden-xs.hidden-sm  left:
-            .product-info = link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link
-            .product-info = link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link
-
-          .cta-wrapper
-            = link_to current_edit_link, class: 'cta-link'
-               | Shop the edit
 
   .products-grid.products-collections
     .container
