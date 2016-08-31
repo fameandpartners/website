@@ -53,10 +53,6 @@ module Products
         total_wishlists     = total_product_added_to_wishlist(product.id)
         total_purchased     = total_product_purchased(product.id)
 
-        active_color_ids = product.variants.active.map do |variant|
-          variant.option_values.colors.map(&:id)
-        end.flatten.uniq
-
         color_customizable = product.color_customization
         discount           = product.discount.try(:amount).to_i
         product.product_color_values.recommended.active.each do |product_color_value|
@@ -64,10 +60,6 @@ module Products
 
           log_prefix = "Product #{product_index.to_s.rjust(3)}/#{product_count.to_s.ljust(3)} #{product.name.ljust(18)} | #{color.name.ljust(14)} |"
 
-          unless active_color_ids.include?(color.id)
-            logger.warn "id  -  | #{log_prefix} No Variants for color!"
-            next
-          end
           unless product_color_value.images.present?
             logger.error "id  -  | #{log_prefix} No Images!"
             next
