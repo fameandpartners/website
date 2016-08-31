@@ -24,7 +24,8 @@ module Orders
                    :to_param,
                    :has_fast_making_items?,
                    :display_promotion_total,
-                   :shipment
+                   :shipment,
+                   :completed?
 
     attr_reader :order, :items
 
