@@ -38,10 +38,10 @@ FameAndPartners::Application.configure do
   config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # Do not compress assets
-  config.assets.compress = false
+  config.assets.compress = ENV.fetch('DEVELOPMENT_ASSETS_COMPRESS', 'false') == 'true'
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = ENV.fetch('DEVELOPMENT_ASSETS_DEBUG', 'true') == 'true'
 
   # Use S3 for storing attachments
   config.use_s3 = true
