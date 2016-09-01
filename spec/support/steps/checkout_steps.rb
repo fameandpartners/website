@@ -1,10 +1,5 @@
 module Acceptance
   module CheckoutSteps
-    step 'I should see the cart sidebar with the checkout button' do
-      expect(page).to have_text('SHOPPING BAG')
-      expect(page).to have_button('CHECKOUT')
-    end
-
     step 'I select :state_name state' do |state_name|
       find('#order_bill_address_attributes_state_id_chosen').click
       find('li.active-result', text: state_name).click

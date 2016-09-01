@@ -13,8 +13,6 @@ Feature: Complete Guest Checkout
     And I select "<Skirt Length>" skirt length
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
-    # And I should see the cart sidebar with the checkout button
-    # And I click on "CHECKOUT" button
     Then I fill in form fields with blank spaces:
       | First Name |
       | Last Name  |
@@ -45,8 +43,6 @@ Feature: Complete Guest Checkout
     And I select "<Skirt Length>" skirt length
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
-    # And I should see the cart sidebar with the checkout button
-    # And I click on "CHECKOUT" button
     Then I select "<Country>" country and "<State>" state
     And I fill in form fields with:
       | Email                   | test@email.com |
