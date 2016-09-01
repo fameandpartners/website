@@ -4,11 +4,13 @@
 = render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
 
 - if banner.display?
-  .page-title.default.category-header style="background-image: url('#{banner.image}')"
-    .container
-      .page-title--details
-        h1.no-padding-bottom = params[:lpt]
-        p= params[:lps]
+  .category-header
+    .media-wrap
+      img src='#{banner.image}'
+    .outer-wrap
+      .inner-wrap
+        h1.title
+          span.js-heading = raw(params[:lpt] || page.heading)
 
 .page-content.products-collections.category
   .container.relative.products-collection
