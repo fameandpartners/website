@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Scrollspy} from 'react-scrollspy';
 import Slick from 'react-slick';
-import ImageMagnifier from './ImageMagnifier';
 
 class PdpGallery extends React.Component {
   constructor() {
@@ -89,10 +88,11 @@ class PdpGallery extends React.Component {
         let id = "gallery-image-" + index;
         thumbIds.push(id);
         return (
-          <div className="media-wrap is-loaded" key={index}>
+          <div className="media-wrap" key={index}>
             <span id={id} className="scrollspy-trigger"></span>
+            <img src={image.url} alt={image.alt}
+              className="js-gallery-image" onLoad={this.handleLoad} />
             <span className="loader"></span>
-            <ImageMagnifier src={image.url} alt={image.alt} />
           </div>
         );
       }
