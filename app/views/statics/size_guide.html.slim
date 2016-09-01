@@ -55,30 +55,17 @@
           .col-md-12
             = render partial: '/products/details/size_chart_table', locals: { data: SizeChart::SIZE_CHART_2016 , size_col_span: 2}
 
-    .row.help-row
+    .row.advice-fit
       .col-md-12
-        p.head.text-center Need more help ?
-        .text-center Our stylists are on hand to help via chat and email.
-      .col-md-6.col-sm-12.col-xs-12.geo.geo-left
-        .area.text-center In Sydney
-        .text.text-center
-          | If you’re in Sydney, Australia, book in to visit one of our personal stylists
-          = link_to 'Book in', styling_session_path , class: 'cta text-center book-in'
-      .col-md-6.col-sm-12.col-xs-12.geo
-        .area.text-center Beyond Sydney
-        .text.text-center
-          | Work with one of our personal stylists via email or chat.
-          = link_to 'Get in contact', contact_path , class: 'cta text-center contact'
+        h2.h3.text-center Want advice on fit and style ?
+        .col-md-10.col-md-offset-1.text-center
+          p Let Fame style you--for free. Our wardrobe stylist Amber Bond is available to advise on fit, customization, and styling options via chat, phone, or video call. It's that easy.
 
-    .row.ending.hidden
-      .col-md-6.col-sm-12.col-xs-12.col
-        .head Our #FAME models
-        .text We include the measurements of each of our models alongside each product to help you figure out the fit. Be sure to refer to these when it comes to customising your style.
-      .col-md-6.col-sm-12.col-xs-12.col
-        .head Customer Reviews
-        .text
-          em Reviews about our sizing success to come (not to be developed yet)
-          
+        .col-md-12.text-center
+          = link_to styling_session_path
+            span.btn-xs.btn-featured
+              | Book Your Session
+
   .modal.fade.js-modal-new-sizes-alert
     .modal-dialog
       .modal-content
@@ -91,7 +78,7 @@
             p While we roll this out across all of our 1000+ styles, you'll see two separate size charts on the site.
             p Some pieces follow our brand new size guide, and some follow our legacy size guide. Don't worry, there's a note on every single product page that lets you know which size chart to reference.
             p If you've shopped with us before, your size may have changed, so make sure to check before clicking 'Add to cart'.
-        
+
   javascript:
     //Show modal immediately after page load
     $(document).ready(function() {

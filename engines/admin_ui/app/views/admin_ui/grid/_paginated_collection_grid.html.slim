@@ -1,3 +1,10 @@
 = paginate @collection.assets, theme: 'admin_ui'
-= datagrid_table @collection, html: {class: 'table table.condensed'}
+
+.row : .col-lg-12
+  .ibox
+    .ibox-title
+      = page_entries_info @collection.assets, entry_name: 'item'
+    .ibox-content
+      = datagrid_table @collection, html: { class: 'table table-condensed table-striped table-hover' }
+
 = paginate @collection.assets, theme: 'admin_ui'

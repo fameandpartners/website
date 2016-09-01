@@ -1,3 +1,4 @@
+# TODO: this should be replaced with the MailChimp Client engine. The engine works with background workers and it uses an updated MailChimp API client lib: gibbon
 class EmailCapture
 
   attr_reader :service, :mailchimp, :mailchimp_struct, :email,

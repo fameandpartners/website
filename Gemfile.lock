@@ -152,8 +152,13 @@ PATH
       bootstrap-sass
       font-awesome-rails (~> 4.3.0.0)
       rails
+    mailchimp_client (0.0.1)
+      gibbon (~> 2.2.4)
+      sidekiq
     manual_order (0.0.1)
       chosen-rails
+      datagrid
+      kaminari
       rails (~> 3.2.22)
       reform
       simple_form
@@ -166,7 +171,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.1)
-    aasm (4.10.0)
+    aasm (4.10.1)
     actionmailer (3.2.22.4)
       actionpack (= 3.2.22.4)
       mail (~> 2.5.4)
@@ -271,7 +276,7 @@ GEM
       launchy
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
-    chosen-rails (1.5.1)
+    chosen-rails (1.5.2)
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sass-rails (>= 3.2)
@@ -467,6 +472,9 @@ GEM
     geoip (1.5.0)
     gherkin (2.12.2)
       multi_json (~> 1.3)
+    gibbon (2.2.4)
+      faraday (>= 0.9.1)
+      multi_json (>= 1.11.0)
     git-version-bump (0.15.1)
     google-api-client (0.7.1)
       addressable (>= 2.3.2)
@@ -909,6 +917,7 @@ DEPENDENCIES
   launchy (= 2.2.0)
   letter_opener (~> 1.4.1)
   mailchimp-api
+  mailchimp_client!
   manual_order!
   meta_request
   net-ssh (~> 2.7.0)

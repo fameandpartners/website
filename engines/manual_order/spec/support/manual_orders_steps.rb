@@ -78,6 +78,16 @@ module Acceptance
       expect(page).to have_selector('#forms_manual_order_state_chosen a span', text: 'California')
     end
 
+    step 'I should get right order results' do
+      created_order = Spree::Order.last
+
+      expect(created_order.site_version).to eq('au')
+      expect(created_order.currency).to eq('AUD')
+      expect(created_order.state).to eq('complete')
+      expect(created_order.completed_at).to be_an_instance_of(ActiveSupport::TimeWithZone)
+      expect(created_order.projected_delivery_date).to be_an_instance_of(ActiveSupport::TimeWithZone)
+    end
+
     private
 
     def trigger_poltergeist_event(field_id:, event: :focus)

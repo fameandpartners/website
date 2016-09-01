@@ -37,6 +37,7 @@ path 'engines' do
   gem 'inspinia-rails'
   gem 'bergen'
   gem 'manual_order'
+  gem 'mailchimp_client'
 end
 
 # TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it,
@@ -161,4 +162,5 @@ group :production do
   gem 'aws-sdk'
 end
 
+# TODO: this should be removed whenever `EmailCapture` class be replaced by the new MailChimp engine
 gem 'mailchimp-api', require: 'mailchimp'
