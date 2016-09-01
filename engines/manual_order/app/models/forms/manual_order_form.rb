@@ -26,7 +26,7 @@ module Forms
     property :adj_description, virtual: true
 
     def products
-      Spree::Product.where(id: Spree::Variant.where('deleted_at is NULL').pluck(:product_id).uniq)
+      Spree::Product.where(id: Spree::Variant.where('deleted_at is NULL').pluck('DISTINCT product_id'))
     end
 
     def countries
