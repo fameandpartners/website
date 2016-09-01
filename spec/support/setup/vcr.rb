@@ -7,6 +7,8 @@ VCR.configure do |c|
   c.ignore_localhost = true
   c.allow_http_connections_when_no_cassette = true
   c.filter_sensitive_data('<MAILCHIMP_API_KEY>') { ENV['MAILCHIMP_API_KEY'] }
+  c.filter_sensitive_data('<MAILCHIMP_LIST_ID>') { ENV['MAILCHIMP_LIST_ID'] }
+  c.filter_sensitive_data('<MAILCHIMP_STORE_ID>') { ENV['MAILCHIMP_STORE_ID'] }
 end
 
 # Allow VCR to be turned off

@@ -1,11 +1,10 @@
 module MailChimp
   class LineItemPresenter
 
-    attr_accessor :line_item, :api
+    attr_accessor :line_item
 
     def initialize(line_item)
       self.line_item = line_item
-      self.api = MailChimpClient::API.new
     end
 
     def to_h
