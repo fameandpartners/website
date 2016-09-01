@@ -6,11 +6,10 @@ module MailChimp
       def self.call(user)
         return true if Exists.(user)
 
-        store_id = ENV['MAILCHIMP_STORE_ID']
         user_presenter = UserPresenter.new(user)
-        user_params = user_presenter.read
+        user_params = user_presenter.to_h
 
-        GibbonInstance.().ecommerce.stores(store_id).customers.create(body: user_params)
+        Store.current.customers.create(body: user_params)
         true
       rescue StandardError => e
         Rails.logger.error e
@@ -22,8 +21,7 @@ module MailChimp
     class Exists
 
       def self.call(user)
-        store_id = ENV['MAILCHIMP_STORE_ID']
-        GibbonInstance.().ecommerce.stores(store_id).customers(user.id.to_s).retrieve
+        Store.current.customers(user.id.to_s).retrieve
         true
       rescue Gibbon::MailChimpError
         false

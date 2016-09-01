@@ -7,7 +7,7 @@ module MailChimp
       self.user = user
     end
 
-    def read
+    def to_h
       {
         id:            user.id.to_s,
         email_address: user.email,

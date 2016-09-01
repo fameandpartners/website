@@ -7,14 +7,13 @@ module MailChimp
         return false unless product.present?
         return true if Exists.(product)
 
-        store_id = ENV['MAILCHIMP_STORE_ID']
         product_params = {
-          id:       product.sku[/\w+/],
+          id:       product.sku.strip,
           title:    product.name,
-          variants: [{ id: product.master.sku[/\w+/], title: product.master.sku[/\w+/] }] # MailChimp will not create product without any variant
+          variants: [{ id: product.master.sku.strip, title: product.master.sku.strip }] # MailChimp will not create product without any variant
         }
 
-        GibbonInstance.().ecommerce.stores(store_id).products.create(body: product_params)
+        Store.current.products.create(body: product_params)
         true
       rescue StandardError => e
         Rails.logger.error e
@@ -26,9 +25,7 @@ module MailChimp
     class Exists
 
       def self.call(product)
-        store_id = ENV['MAILCHIMP_STORE_ID']
-        valid_product_sku = product.sku[/\w+/] # Some SKU's start with ' '
-        GibbonInstance.().ecommerce.stores(store_id).products(valid_product_sku).retrieve
+        Store.current.products(product.sku.strip).retrieve
         true
       rescue Gibbon::MailChimpError
         false

@@ -7,7 +7,7 @@ module MailChimp
       self.order = order
     end
 
-    def read
+    def to_h
       {
         id:            order.number,
         customer:      customer_for_order(order),
@@ -21,7 +21,7 @@ module MailChimp
 
     def customer_for_order(order)
       if order.user
-        UserPresenter.new(order.user).read
+        UserPresenter.new(order.user).to_h
       else
         {
           id:            order.number,
@@ -34,7 +34,7 @@ module MailChimp
     end
 
     def order_line_items(order)
-      order.line_items.map { |line_item| LineItemPresenter.new(line_item).read }
+      order.line_items.map { |line_item| LineItemPresenter.new(line_item).to_h }
     end
   end
 end

@@ -1,6 +1,10 @@
 module MailChimp
   class Store
 
+    def self.current
+      Client.request.ecommerce.stores(ENV['MAILCHIMP_STORE_ID'])
+    end
+
     class Create
 
       def self.call
@@ -13,7 +17,7 @@ module MailChimp
           currency_code: 'USD'
         }
 
-        GibbonInstance.().ecommerce.stores.create(body: store_params)
+        Client.request.ecommerce.stores.create(body: store_params)
         true
       rescue StandardError => e
         Rails.logger.error e
@@ -25,7 +29,7 @@ module MailChimp
     class Exists
 
       def self.call
-        GibbonInstance.().ecommerce.stores(ENV['MAILCHIMP_STORE_ID']).retrieve
+        Client.request.ecommerce.stores(ENV['MAILCHIMP_STORE_ID']).retrieve
         true
       rescue Gibbon::MailChimpError
         false

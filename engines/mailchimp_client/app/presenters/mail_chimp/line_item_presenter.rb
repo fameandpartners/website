@@ -8,7 +8,7 @@ module MailChimp
       self.api = MailChimpClient::API.new
     end
 
-    def read
+    def to_h
       product = line_item.variant.product
       product_present = Product::Create.(product)
 

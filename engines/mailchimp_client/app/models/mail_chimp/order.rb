@@ -4,12 +4,11 @@ module MailChimp
     class Create
 
       def self.call(order)
-        return false unless order.present?
+        raise ArgumentError, 'a Spree::Order is required' unless order.is_a? Spree::Order
         return true if Exists.(order)
 
-        store_id = ENV['MAILCHIMP_STORE_ID']
-        order_params = OrderPresenter.new(order).read
-        GibbonInstance.().ecommerce.stores(store_id).orders.create(body: order_params)
+        order_params = OrderPresenter.new(order).to_h
+        Store.current.orders.create(body: order_params)
         true
       rescue StandardError => e
         Rails.logger.error e
@@ -21,8 +20,7 @@ module MailChimp
     class Exists
 
       def self.call(order)
-        store_id = ENV['MAILCHIMP_STORE_ID']
-        GibbonInstance.().ecommerce.stores(store_id).orders(order.number).retrieve
+        Store.current.orders(order.number).retrieve
         true
       rescue Gibbon::MailChimpError
         false
