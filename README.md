@@ -21,6 +21,19 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
   * CSS guidelines: https://github.com/fameandpartners/website/blob/master/doc/dev/css-guidelines.md
   * JS guidelines: https://github.com/fameandpartners/website/wiki/JS-Guidelines
 
+### Contributing
+
+* To provide any new changes - create new branch and then pull request (PR)
+* All changes goes through JIRA tasks (https://fameandpartners.atlassian.net)
+* New PR name should start with JIRA's task summary name (e.g. `WEBSITE-123123`)
+* New branch name should have:
+  - prefix `feature/` or `fix/` depending on it's type
+  - suffix with JIRA's task sumary name (`-WEBSITE-number`)
+  - examples: `feature/new-order-types-WEBSITE-9999`, `fix/homepage-issues-WEBSITE-9998`
+  - please refer to [fameandpartners#rules](https://github.com/fameandpartners/website/wiki/The-Rules) for more information
+* Commits should follow [fameandpartners#commit-style-guide](https://github.com/fameandpartners/website/wiki/Commit-Style-Guide)
+* For review process please follow [cody#usage](https://github.com/aergonaut/cody#usage) documentation
+
 ### Frameworks
 
 * We are using Spree Ecommerce base engine. See more details at the [Spree Guides website.](http://guides.spreecommerce.com)
