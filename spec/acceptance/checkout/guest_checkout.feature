@@ -5,7 +5,7 @@ Feature: Complete Guest Checkout
     And Data is setup correctly
     And Setup default feature flags
 
-  @javascript @no_vcr @selenium
+  @javascript @no_vcr
   Scenario Outline: User Validation Errors
     When I am on Connie dress page
     Then I select "<Site Version>" site version
@@ -35,7 +35,7 @@ Feature: Complete Guest Checkout
       | USA          | United States | California | Zipcode       | US 10      | Petite       |
 
   # TODO: Payment step require connection to PIN payment method. This should be kept like this, since we can detect PIN payments breaking changes!
-  @javascript @no_vcr @selenium
+  @javascript @no_vcr
   Scenario Outline: Successfully Buy a Dress
     When I am on Connie dress page
     Then I select "<Site Version>" site version
