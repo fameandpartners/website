@@ -3,6 +3,8 @@ ruby:
   first_name = form.object.firstname.present? ? form.object.firstname : (@order.try(:first_name) || @user.try(:first_name))
   last_name = form.object.lastname.present? ? form.object.lastname : (@order.try(:last_name) || @user.try(:last_name))
   shopping_bag_texts = Preferences::ShoppingBag.new(current_site_version)
+  countries = available_countries_for_current_zone
+  countries_with_fees = Hash[countries.map { |country| [country.id, country.zone_member.has_international_shipping_fee] }]
 
 - if Spree::Config[:address_requires_state]
   ruby:
@@ -22,6 +24,11 @@ ruby:
     | $('##{ country_field_id }').on('change', function() {
     |   checkout_page.updateStatesVisibility('##{ country_field_id }', '##{ field_id }', '##{state_text_field_id}');
     | });
+
+    | $('##{ country_field_id }').change(checkout_page.countryChanged);
+
+    | checkout_page.countries = #{raw countries_with_fees.to_json};
+    | $('##{ country_field_id }').trigger('change');
 / TODO - Temporary workaround to show the 'Address Details heading inside the form
 / until we move the shipping form first and change the JS to copy billing address from shipping instead.
 /  - Note that Pin requires the billing address data, so we can't just drop the billing form.
@@ -67,15 +74,15 @@ h2.checkout-section-title
     = form.text_field :address2, class: 'required form-control form-control-md'
 
 .row
-  
+
   .col-md-4.form-group
     = form.label :country_id, with_required_mark(t(:country))
     select id=(country_field_id) name="#{form.object_name}[country_id]" class="form-control form-control-md selectbox"
-      - available_countries_for_current_zone.each do |country|
+      - countries.each do |country|
         - select_country = (address.country_id == country.id ? true : false )
         option selected=(select_country) value=(country.id) data-states-required=(country.states_required ? 'required' : nil)
           = country.name
-          
+
   .col-md-4.form-group class=(address.country.states_required ? '' : 'hidden')
     = form.label :state, with_required_mark(t(:state))
     span.states_selector_container  class=(have_states ? 'required' : 'hidden')
@@ -87,11 +94,11 @@ h2.checkout-section-title
     = form.text_field(:state_name,
                       :class => !have_states ? 'required  form-control form-control-md' : 'hidden  form-control form-control-md',
                       :disabled => have_states)
-  
+
   .col-md-4.form-group
     = form.label :city, with_required_mark(t(:city))
     = form.text_field :city, class: 'required form-control form-control-md', required: 'required'
-  
+
 
 .row
   .col-md-6.form-group

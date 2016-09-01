@@ -1,4 +1,3 @@
-= render 'modals/custom_duty_fee_modal'
 - if @credit_card_gateway.is_a?(Spree::Gateway::Pin)
   - content_for :head do
     - if Rails.env.production? && !@credit_card_gateway.prefers_test_mode?

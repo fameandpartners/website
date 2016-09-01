@@ -13,11 +13,13 @@ page.initCheckoutEditPage = () ->
       @ship_to_different_address = $("input[name='ship_to_address']:first").prop("checked") == false
       $("input[name='ship_to_address']:first").click =>
         @ship_to_different_address = false
+        $('#order_bill_address_attributes_country_id').trigger('change')
         page.updateShippingFormVisibility()
 
 
       $("input[name='ship_to_address']:last").click =>
         @ship_to_different_address = true
+        $('#order_ship_address_attributes_country_id').trigger('change')
         page.updateShippingFormVisibility()
 
 
@@ -348,6 +350,70 @@ page.initCheckoutEditPage = () ->
         page.onAjaxFailureHandler()
 
         page.pin_request_in_process = false
+
+    # TODO: this behavior belongs to the shipping warning fee component. This shouldn' be
+    # Used methods: `@countryChanged`, `@showShippingFeeAlert`, `@showShippingFeeAlert`, `@shippingFeeHasToBeApplied`, `@internationalShippingFeeCheckboxIsVisible`, `@internationalShippingFeeCheckboxIsChecked`
+    # `@uncheckInternationalShippingFeeCheckbox`, `@changeButtonStatus`, `@internationalShippingFeeCheckboxClicked`, `@selectedCountry`
+    countryChanged: () ->
+      element = $(this)
+      useBillingAddressToShip = $('#ship_to_address_Ship_to_this_address')
+      countryHasShippingFee = window.checkout_page.countries[element.val()]
+      isBillAddressCountry = element.attr('id') == 'order_bill_address_attributes_country_id'
+      isShipAddressCountry = element.attr('id') == 'order_ship_address_attributes_country_id'
+      useBillingAddressToShipChecked = useBillingAddressToShip.is(':checked')
+      selectedCountry = window.checkout_page.selectedCountry(element)
+      if isBillAddressCountry and useBillingAddressToShipChecked and countryHasShippingFee
+        window.checkout_page.showShippingFeeAlert(selectedCountry)
+      else if isBillAddressCountry and useBillingAddressToShipChecked
+        window.checkout_page.hideShippingFeeAlert()
+      else if isShipAddressCountry and countryHasShippingFee
+        window.checkout_page.showShippingFeeAlert(selectedCountry)
+      else if isShipAddressCountry
+        window.checkout_page.hideShippingFeeAlert()
+      window.checkout_page.uncheckInternationalShippingFeeCheckbox()
+      window.checkout_page.changeButtonStatus()
+
+    showShippingFeeAlert: (country) ->
+      $('#country_name').html(country)
+      $('#shipping_fee_alert').show()
+
+    hideShippingFeeAlert: () ->
+      $('#shipping_fee_alert').hide()
+
+    shippingFeeHasToBeApplied: () ->
+      if $('#ship_to_address_Ship_to_this_address').is(':checked')
+        element = $('#order_bill_address_attributes_country_id')
+      else
+        element = $('#order_ship_address_attributes_country_id')
+      window.checkout_page.countries[element.val()]
+
+    internationalShippingFeeCheckboxIsVisible: () ->
+      $('#international_shipping_fee').is(':visible')
+
+    internationalShippingFeeCheckboxIsChecked: () ->
+      $('#international_shipping_fee').is(':checked')
+
+    uncheckInternationalShippingFeeCheckbox: () ->
+      $('#international_shipping_fee').removeAttr('checked')
+
+    changeButtonStatus: () ->
+      if @internationalShippingFeeCheckboxIsVisible() and not @internationalShippingFeeCheckboxIsChecked()
+        $('button[name="pay_securely"]').prop('disabled', true)
+      else
+        $('button[name="pay_securely"]').prop('disabled', false)
+
+    internationalShippingFeeCheckboxClicked: () ->
+      if $(this).is(':checked')
+        $('button[name="pay_securely"]').prop('disabled', false)
+      else
+        $('button[name="pay_securely"]').prop('disabled', true)
+
+    selectedCountry: (element) ->
+      result = element.children(':selected').html().match(/\w+(\s\w+)*/)
+      if result
+        result[0]
+      else
+        result
   }
   page.init()
   window.checkout_page = page
