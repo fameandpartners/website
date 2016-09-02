@@ -33,7 +33,7 @@
         - current_dress_price = "$299"
 
     .row
-      section.section-box.no-margin-md
+      section.section-box.no-margin-md.vertical-align-copy
         .col-md-4.col-md-offset-3
           = link_to current_dress_link
             picture.intro
@@ -45,23 +45,26 @@
                   class: 'img-responsive',
                   alt: "#{current_dress_name}"
 
-        .col-md-4
-          h1 Introducing the latest - The Gown Collection
+        .col-md-4.vertical-align
+          .content-copy
+            h1 Introducing the latest - The Gown Collection
 
-          p There's no experience more luxurious than slipping into a gorgeous, flowing gown and feeling the fabric slide over your skin. The dress hugs your body; the color and style are just right–and why? Because it's a true original, custom-made for you.
+            p There's no experience more luxurious than slipping into a gorgeous, flowing gown and feeling the fabric slide over your skin. The dress hugs your body; the color and style are just right–and why? Because it's a true original, custom-made for you.
 
-          p Let's design your dream dress.
+            p.double-line-height
 
-          .cta-product-caption.copy-highlight
-            | Pictured
-            span.hidden-md.hidden-lg  above:
-            span.hidden-xs.hidden-sm  left:
-            .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+            p Let's design your dream dress.
 
-          .cta-wrapper
-            = link_to current_edit_link
-              span.btn-md.btn-featured
-               | Explore
+            .cta-product-caption.copy-highlight
+              | Pictured
+              span.hidden-md.hidden-lg  above:
+              span.hidden-xs.hidden-sm  left:
+              .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+
+            .cta-wrapper
+              = link_to current_edit_link
+                span.btn-md.btn-featured
+                 | Explore
 
     // Section #2
     - current_dress_name = "Laced Victoria dress"
@@ -77,7 +80,7 @@
       // USA - PRICE
       - current_dress_price = "$329"
     .row
-      section.section-box#the-sophisticate
+      section.section-box#the-sophisticate.vertical-align-copy
         .col-md-4.col-md-offset-3
           = link_to current_dress_link
             picture
@@ -89,37 +92,38 @@
                   class: 'img-responsive',
                   alt: "#{current_dress_name}"
 
-        .col-md-4
-          .row
-            .col-md-12
-              h2.h1 The Sophisticate
+        .col-md-4.vertical-align
+          .content-copy
+            .row
+              .col-md-12
+                  h2.h1 The Sophisticate
 
-              p Her style is refined elegance at its best. While the Sophisticate doesn't hesitate try new trends, she prefers a timeless approach–so those Instagram photos will still look of-the-moment years from now, of course.
+                  p Her style is refined elegance at its best. While the Sophisticate doesn't hesitate try new trends, she prefers a timeless approach–so those Instagram photos will still look of-the-moment years from now, of course.
 
-              .cta-product-caption.copy-highlight
-                | Pictured
-                span.hidden-md.hidden-lg  above:
-                span.hidden-xs.hidden-sm  left:
-                .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+                  .cta-product-caption.copy-highlight
+                    | Pictured
+                    span.hidden-md.hidden-lg  above:
+                    span.hidden-xs.hidden-sm  left:
+                    .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
 
-          .row.product-heading-wrap
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Evening:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Showstopper:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Wallet Friendly:
+            .row.product-heading-wrap
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Evening:
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Showstopper:
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Wallet Friendly:
 
-          .row
-            .products-grid.products-collections.no-margin
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-4 col-xs-6'}
+            .row
+              .products-grid.products-collections.no-margin
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-4 col-xs-6'}
 
-          .row
-            .cta-wrapper.col-md-12
-              = link_to current_edit_link
-                span.btn-md.btn-featured
-                 | Shop & Customize
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_edit_link
+                  span.btn-md.btn-featured
+                   | Shop & Customize
 
     // Section #3
     - current_dress_name = "Serpentina dress"
@@ -135,7 +139,7 @@
       // USA - PRICE
       - current_dress_price = "$299"
     .row
-      section.section-box#the-true-romantic
+      section.section-box#the-true-romantic.vertical-align-copy
         .col-md-4.col-md-offset-3
           = link_to current_dress_link
             picture
@@ -147,37 +151,38 @@
                   class: 'img-responsive',
                   alt: "#{current_dress_name}"
 
-        .col-md-4
-          .row
-            .col-md-12
-              h2.h1 The True Romantic
+        .col-md-4.vertical-align
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1 The True Romantic
 
-              p The True Romantic is no damsel in distress–she can create her own fairytale, thank you very much. Her story starts with the dress: sweet and feminine, with just the right amount of attitude.
+                p The True Romantic is no damsel in distress–she can create her own fairytale, thank you very much. Her story starts with the dress: sweet and feminine, with just the right amount of attitude.
 
-              .cta-product-caption.copy-highlight
-                | Pictured
-                span.hidden-md.hidden-lg  above:
-                span.hidden-xs.hidden-sm  left:
-                .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+                .cta-product-caption.copy-highlight
+                  | Pictured
+                  span.hidden-md.hidden-lg  above:
+                  span.hidden-xs.hidden-sm  left:
+                  .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
 
-          .row.product-heading-wrap
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Evening:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Showstopper:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Wallet Friendly:
+            .row.product-heading-wrap
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Evening:
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Showstopper:
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Wallet Friendly:
 
-          .row
-            .products-grid.products-collections.no-margin
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-4 col-xs-6'}
+            .row
+              .products-grid.products-collections.no-margin
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-4 col-xs-6'}
 
-          .row
-            .cta-wrapper.col-md-12
-              = link_to current_edit_link
-                span.btn-md.btn-featured
-                 | Shop & Customize
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_edit_link
+                  span.btn-md.btn-featured
+                   | Shop & Customize
 
     // Section #4
     - current_dress_name = "Escala dress"
@@ -193,7 +198,7 @@
       // USA - PRICE
       - current_dress_price = "$279"
     .row
-      section.section-box#the-glamouri
+      section.section-box#the-glamouri.vertical-align-copy
         .col-md-4.col-md-offset-3
           = link_to current_dress_link
             picture
@@ -205,37 +210,38 @@
                   class: 'img-responsive',
                   alt: "#{current_dress_name}"
 
-        .col-md-4
-          .row
-            .col-md-12
-              h2.h1 The Glamouri
+        .col-md-4.vertical-align
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1 The Glamouri
 
-              p She's got a flair for the theatrical. The Glamouri is no stranger to full, sweeping skirts and dangerously plunging necklines–but don't even think about calling her dramatic. It's all style, darling.
+                p She's got a flair for the theatrical. The Glamouri is no stranger to full, sweeping skirts and dangerously plunging necklines–but don't even think about calling her dramatic. It's all style, darling.
 
-              .cta-product-caption.copy-highlight
-                | Pictured
-                span.hidden-md.hidden-lg  above:
-                span.hidden-xs.hidden-sm  left:
-                .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+                .cta-product-caption.copy-highlight
+                  | Pictured
+                  span.hidden-md.hidden-lg  above:
+                  span.hidden-xs.hidden-sm  left:
+                  .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
 
-          .row.product-heading-wrap
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Evening:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Showstopper:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Wallet Friendly:
+            .row.product-heading-wrap
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Evening:
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Showstopper:
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Wallet Friendly:
 
-          .row
-            .products-grid.products-collections.no-margin
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 11, customWrapper: 'col-md-4 col-xs-6'}
+            .row
+              .products-grid.products-collections.no-margin
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 11, customWrapper: 'col-md-4 col-xs-6'}
 
-          .row
-            .cta-wrapper.col-md-12
-              = link_to current_edit_link
-                span.btn-md.btn-featured
-                 | Shop & Customize
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_edit_link
+                  span.btn-md.btn-featured
+                   | Shop & Customize
 
     // Section #5
     - current_dress_name = "Cici jumpsuit"
@@ -251,7 +257,7 @@
       // USA - PRICE
       - current_dress_price = "$299"
     .row
-      section.section-box#the-minimalist
+      section.section-box#the-minimalist.vertical-align-copy
         .col-md-4.col-md-offset-3
           = link_to current_dress_link
             picture
@@ -263,37 +269,38 @@
                   class: 'img-responsive',
                   alt: "#{current_dress_name}"
 
-        .col-md-4
-          .row
-            .col-md-12
-              h2.h1 The Minimalist
+        .col-md-4.vertical-align
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1 The Minimalist
 
-              p The Minimalist is a no-fuss kind of woman. She knows what works and keeps it simple. Her motto is “Less is more,” and she's got the pared-down closet to prove it.
+                p The Minimalist is a no-fuss kind of woman. She knows what works and keeps it simple. Her motto is “Less is more,” and she's got the pared-down closet to prove it.
 
-              .cta-product-caption.copy-highlight
-                | Pictured
-                span.hidden-md.hidden-lg  above:
-                span.hidden-xs.hidden-sm  left:
-                .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+                .cta-product-caption.copy-highlight
+                  | Pictured
+                  span.hidden-md.hidden-lg  above:
+                  span.hidden-xs.hidden-sm  left:
+                  .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
 
-          .row.product-heading-wrap
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Evening:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Showstopper:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Wallet Friendly:
+            .row.product-heading-wrap
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Evening:
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Showstopper:
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Wallet Friendly:
 
-          .row
-            .products-grid.products-collections.no-margin
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 12, rangeTo: 15, customWrapper: 'col-md-4 col-xs-6'}
+            .row
+              .products-grid.products-collections.no-margin
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 12, rangeTo: 15, customWrapper: 'col-md-4 col-xs-6'}
 
-          .row
-            .cta-wrapper.col-md-12
-              = link_to current_edit_link
-                span.btn-md.btn-featured
-                 | Shop & Customize
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_edit_link
+                  span.btn-md.btn-featured
+                   | Shop & Customize
 
     // Section #6
     - current_dress_name = "Harbourside dress"
@@ -309,7 +316,7 @@
       // USA - PRICE
       - current_dress_price = "$249"
     .row
-      section.section-box#the-bohemian
+      section.section-box#the-bohemian.vertical-align-copy
         .col-md-4.col-md-offset-3
           = link_to current_dress_link
             picture
@@ -321,37 +328,38 @@
                   class: 'img-responsive',
                   alt: "#{current_dress_name}"
 
-        .col-md-4
-          .row
-            .col-md-12
-              h2.h1 The Bohemian
+        .col-md-4.vertical-align
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1 The Bohemian
 
-              p The free-spirited Bohemian is a woman that can't be tamed. She has a romantic side a mile wide, and wears her wild heart on her ruffled sleeve.
+                p The free-spirited Bohemian is a woman that can't be tamed. She has a romantic side a mile wide, and wears her wild heart on her ruffled sleeve.
 
-              .cta-product-caption.copy-highlight
-                | Pictured
-                span.hidden-md.hidden-lg  above:
-                span.hidden-xs.hidden-sm  left:
-                .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+                .cta-product-caption.copy-highlight
+                  | Pictured
+                  span.hidden-md.hidden-lg  above:
+                  span.hidden-xs.hidden-sm  left:
+                  .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
 
-          .row.product-heading-wrap
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Evening:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Showstopper:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Wallet Friendly:
+            .row.product-heading-wrap
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Evening:
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Showstopper:
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Wallet Friendly:
 
-          .row
-            .products-grid.products-collections.no-margin
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 19, customWrapper: 'col-md-4 col-xs-6'}
+            .row
+              .products-grid.products-collections.no-margin
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 19, customWrapper: 'col-md-4 col-xs-6'}
 
-          .row
-            .cta-wrapper.col-md-12
-              = link_to current_edit_link
-                span.btn-md.btn-featured
-                 | Shop & Customize
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_edit_link
+                  span.btn-md.btn-featured
+                   | Shop & Customize
 
     // Section #7
     - current_dress_name = "Jacquie dress"
@@ -367,7 +375,7 @@
       // USA - PRICE
       - current_dress_price = "$269"
     .row
-      section.section-box#the-provocateur
+      section.section-box#the-provocateur.vertical-align-copy
         .col-md-4.col-md-offset-3
           = link_to current_dress_link
             picture
@@ -379,37 +387,38 @@
                   class: 'img-responsive',
                   alt: "#{current_dress_name}"
 
-        .col-md-4
-          .row
-            .col-md-12
-              h2.h1 The Provocateur
+        .col-md-4.vertical-align
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1 The Provocateur
 
-              p She's not afraid to raise a few eyebrows–in fact, she prefers it. The Provocateur doesn't play favorites–she'll don a head-turning outfit no matter where she goes: the supermarket, the office, or the formal event of the season.
+                p She's not afraid to raise a few eyebrows–in fact, she prefers it. The Provocateur doesn't play favorites–she'll don a head-turning outfit no matter where she goes: the supermarket, the office, or the formal event of the season.
 
-              .cta-product-caption.copy-highlight
-                | Pictured
-                span.hidden-md.hidden-lg  above:
-                span.hidden-xs.hidden-sm  left:
-                .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+                .cta-product-caption.copy-highlight
+                  | Pictured
+                  span.hidden-md.hidden-lg  above:
+                  span.hidden-xs.hidden-sm  left:
+                  .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
 
-          .row.product-heading-wrap
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Evening:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Showstopper:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Wallet Friendly:
+            .row.product-heading-wrap
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Evening:
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Showstopper:
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Wallet Friendly:
 
-          .row
-            .products-grid.products-collections.no-margin
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 20, rangeTo: 23, customWrapper: 'col-md-4 col-xs-6'}
+            .row
+              .products-grid.products-collections.no-margin
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 20, rangeTo: 23, customWrapper: 'col-md-4 col-xs-6'}
 
-          .row
-            .cta-wrapper.col-md-12
-              = link_to current_edit_link
-                span.btn-md.btn-featured
-                 | Shop & Customize
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_edit_link
+                  span.btn-md.btn-featured
+                   | Shop & Customize
 
     // Section #8
     - current_dress_name = "Westside dress"
@@ -425,7 +434,7 @@
       // USA - PRICE
       - current_dress_price = "$349"
     .row
-      section.section-box#the-classically-inclined
+      section.section-box#the-classically-inclined.vertical-align-copy
         .col-md-4.col-md-offset-3
           = link_to current_dress_link
             picture
@@ -437,34 +446,35 @@
                   class: 'img-responsive',
                   alt: "#{current_dress_name}"
 
-        .col-md-4
-          .row
-            .col-md-12
-              h2.h1 The Classically Inclined
+        .col-md-4.vertical-align
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1 The Classically Inclined
 
-              p Her fashion icons include Audrey Hepburn, Sofia Coppola, and Caroline Bessette-Kennedy; and though the Classically Inclined may be inspired by vintage style, she always adds just the right amount of modern.
+                p Her fashion icons include Audrey Hepburn, Sofia Coppola, and Caroline Bessette-Kennedy; and though the Classically Inclined may be inspired by vintage style, she always adds just the right amount of modern.
 
-              .cta-product-caption.copy-highlight
-                | Pictured
-                span.hidden-md.hidden-lg  above:
-                span.hidden-xs.hidden-sm  left:
-                .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+                .cta-product-caption.copy-highlight
+                  | Pictured
+                  span.hidden-md.hidden-lg  above:
+                  span.hidden-xs.hidden-sm  left:
+                  .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
 
-          .row.product-heading-wrap
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Evening:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Showstopper:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Wallet Friendly:
+            .row.product-heading-wrap
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Evening:
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Showstopper:
+              .product-heading.col-md-4.col-xs-6
+                h4.title The Wallet Friendly:
 
-          .row
-            .products-grid.products-collections.no-margin
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 24, rangeTo: 27, customWrapper: 'col-md-4 col-xs-6'}
+            .row
+              .products-grid.products-collections.no-margin
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 24, rangeTo: 27, customWrapper: 'col-md-4 col-xs-6'}
 
-          .row
-            .cta-wrapper.col-md-12
-              = link_to current_edit_link
-                span.btn-md.btn-featured
-                 | Shop & Customize
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_edit_link
+                  span.btn-md.btn-featured
+                   | Shop & Customize
