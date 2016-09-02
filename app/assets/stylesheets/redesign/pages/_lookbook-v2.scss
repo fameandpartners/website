@@ -119,8 +119,17 @@
 
     }
 
-    &.portrait-template .products-set .category--item:nth-of-type(4) {
-      display: none;
+    &.portrait-template {
+
+      picture.intro {
+        margin-top: -35px;
+        display: block;
+      }
+
+      .products-set .category--item:nth-of-type(4) {
+        display: none;
+      }
+
     }
 
   }
