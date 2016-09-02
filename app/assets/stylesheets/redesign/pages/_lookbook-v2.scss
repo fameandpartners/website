@@ -133,6 +133,10 @@
         display: none;
       }
 
+      .local-navigation-vertical.affix {
+        top: $fixed-header-with-locale-warn;
+      }
+
     }
 
   }
