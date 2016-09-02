@@ -1,0 +1,30 @@
+// Products listing
+
+.no-fixed-height .category--item {
+  height: auto;
+  min-height: auto;
+}
+
+.category--item {
+
+  .name {
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    text-align: center;
+    font-weight: bold;
+    display: block;
+  }
+
+  .price {
+    margin: 4px 0;
+    font-size: 1rem;
+    display: block;
+    text-align: center;
+  }
+
+  .details {
+    font-size: 1.1rem;
+    margin: 20px 0 15px;
+  }
+
+}

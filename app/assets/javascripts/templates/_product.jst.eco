@@ -23,10 +23,7 @@
     <div class="dropdown">
       <a href="javascript:;" class="js-trigger-add-to-moodboard" data-toggle="dropdown">
         <sup>+</sup>
-        moodboard
-        <span class="arrow-down">
-          <i class="fa fa-caret-down"></i>
-        </span>
+        <span class="link-underline">Moodboard</span>
       </a>
       <div class="dropdown-menu">
         <% for mb in user_moodboards.moodboards: %>
