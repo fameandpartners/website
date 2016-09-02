@@ -89,7 +89,7 @@
   }
 
   .product-heading .title {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     font-style: italic;
     color: $c-neutral-black;
     margin-bottom: 0;
@@ -135,6 +135,21 @@
 
       .local-navigation-vertical.affix {
         top: $fixed-header-with-locale-warn;
+      }
+
+      .product-heading:nth-of-type(1),
+      .products-grid .category--item:nth-of-type(1) {
+        padding-right: 1px;
+      }
+
+      .product-heading:nth-of-type(2),
+      .products-grid .category--item:nth-of-type(2) {
+        padding: 0 8px;
+      }
+
+      .product-heading:nth-of-type(3),
+      .products-grid .category--item:nth-of-type(3) {
+        padding-left: 1px;
       }
 
     }
