@@ -7,6 +7,12 @@ dependencies:
     - tar -xvf elasticsearch-1.7.5.tar.gz
     - elasticsearch-1.7.5/bin/elasticsearch: {background: true}
 
+  override:
+    # Install git-lfs
+    - curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+    - sudo apt-get install git-lfs=1.4.1
+    - ssh git@github.com git-lfs-authenticate fameandpartners/website.git download
+
 machine:
   ruby:
     version: 2.1.6
