@@ -2,16 +2,29 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as pdpActions from '../../actions/PdpActions';
+import {MODAL_STYLE} from './utils';
+import Modal from 'react-modal';
 
 class CtaPrice extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      sending: false
+      sending: false,
+      modalIsOpen: false
     };
 
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
     this.addToBag = this.addToBag.bind(this);
+  }
+
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+
+  closeModal() {
+    this.setState({modalIsOpen: false});
   }
 
   addToBag() {
@@ -51,14 +64,27 @@ class CtaPrice extends React.Component {
   }
 
   render() {
-    const price =
+
+    const PRICE =
       parseFloat(this.props.price)
       + parseFloat(this.props.customize.color.price)
       + parseFloat(this.props.customize.customization.price)
       - parseFloat(this.props.discount);
+
     return (
       <div className="btn-wrap">
-        <div className="price">${price}</div>
+        <div className="price">${PRICE}</div>
+          {(() => {
+            if(this.props.siteVersion === "Australia") {
+              return (
+                <div className="afterpay-message">
+                  <span>or 4 easy payments of ${PRICE / 4} with</span>
+                  <img src="/assets/_afterpay/logo-sml.png" alt="afterpay logo" />
+                  <a href="javascript:;" onClick={this.openModal}>info</a>
+                </div>
+              );
+            }
+          })()}
           {(() => {
             if(this.props.customize.size.id
               && this.props.customize.color.id
@@ -82,6 +108,17 @@ class CtaPrice extends React.Component {
             }
           })()}
         <div className="est-delivery">Estimated delivery 1-2 weeks</div>
+        <Modal
+          style={MODAL_STYLE}
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}>
+          <div className="row">
+            <div className="col-md-12">
+              <h4 className="h2 title text-center">Afterpay</h4>
+              <p></p>
+            </div>
+          </div>
+        </Modal>
       </div>
     );
   }
@@ -92,6 +129,7 @@ CtaPrice.propTypes = {
   price: PropTypes.string,
   discount: PropTypes.number,
   product: PropTypes.object,
+  siteVersion: PropTypes.string,
   actions: PropTypes.object.isRequired
 };
 
@@ -100,6 +138,7 @@ function mapStateToProps(state, ownProps) {
     customize: state.customize,
     price: state.product.price.price.amount,
     discount: state.discount,
+    siteVersion: state.siteVersion,
     product: state.product
   };
 }
