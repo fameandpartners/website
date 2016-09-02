@@ -89,7 +89,7 @@
   }
 
   .product-heading .title {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-style: italic;
     color: $c-neutral-black;
     margin-bottom: 0;
@@ -97,6 +97,14 @@
 
   .product-info a {
     border-bottom: 1px solid $c-neutral-black;
+  }
+
+  &.portrait-template {
+
+    p {
+      font-size: 1.7rem;
+    }
+
   }
 
   @media (min-width: $bootstrap-md-width) {
@@ -146,7 +154,6 @@
       .products-grid .category--item:nth-of-type(2) {
         padding: 0 8px;
       }
-
       .product-heading:nth-of-type(3),
       .products-grid .category--item:nth-of-type(3) {
         padding-left: 1px;
