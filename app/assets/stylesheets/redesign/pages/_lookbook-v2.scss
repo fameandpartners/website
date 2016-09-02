@@ -95,6 +95,10 @@
     margin-bottom: 0;
   }
 
+  .product-info a {
+    border-bottom: 1px solid $c-neutral-black;
+  }
+
   @media (min-width: $bootstrap-md-width) {
 
     h1 > span:first-child {
