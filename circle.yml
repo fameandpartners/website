@@ -9,6 +9,7 @@ dependencies:
 
   override:
     # Install git-lfs
+    - sudo mkdir -p /usr/etc/ && sudo touch /usr/etc/gitconfig
     - curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
     - sudo apt-get install git-lfs=1.4.1
     - ssh git@github.com git-lfs-authenticate fameandpartners/website.git download
