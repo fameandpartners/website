@@ -13,10 +13,10 @@
               li.link = link_to "The Sophisticate", "#the-sophisticate"
               li.link = link_to "The True Romantic", "#the-true-romantic"
               li.link = link_to "The Glamouri", "#the-glamouri"
-              li.link = link_to "The Classically Inclined", "#the-classically-inclined"
               li.link = link_to "The Minimalist", "#the-minimalist"
               li.link = link_to "The Bohemian", "#the-bohemian"
               li.link = link_to "The Provocateur", "#the-provocateur"
+              li.link = link_to "The Classically Inclined", "#the-classically-inclined"
 
       // Intro area
       - current_dress_name = "Dragon Eyes Lace dress"
@@ -217,59 +217,6 @@
                  | Shop & Customize
 
     // Section #4
-    - current_dress_name = "Westside dress"
-    - current_dress_link = "#{dresses_path}/dress-westside-1118?color=black"
-    // TODO: add real link to current edit page
-    - current_edit_link = "#"
-    - if current_site_version.is_australia?
-      // AUSTRALIA - PRICE
-      - current_dress_price = "$439"
-    - else
-      // USA - PRICE
-      - current_dress_price = "$349"
-    .row
-      section.section-box#the-classically-inclined
-        .col-md-4.col-md-offset-3
-          = link_to current_dress_link
-            picture
-              source media='(max-width: 991px)' srcset='http://fakeimg.pl/512x750/?text=mobile'
-              source media='(min-width: 992px)' srcset='http://fakeimg.pl/1024x1500/?text=desktop'
-              = image_tag 'landingpages/it-girl/gown-desktop.jpg', srcset: "http://fakeimg.pl/1024x1500/?512x750=mobile,
-                http://fakeimg.pl/1024x1500/?text=desktop 1024w", class: 'img-responsive', alt: "#{current_dress_name}"
-
-        .col-md-4
-          .row
-            .col-md-12
-              h2.h1 The Classically Inclined
-
-              p Backless Dreamer, based on Classic Backless, is a georgette dress featuring a sporty high halter neckline, and criss-cross back straps. Backless Dreamer, based on Classic Backless, is a georgette dress.
-
-              .cta-product-caption.copy-highlight
-                | Pictured
-                span.hidden-md.hidden-lg  above:
-                span.hidden-xs.hidden-sm  left:
-                .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link
-
-          .row.product-heading-wrap
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Evening:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Showstopper:
-            .product-heading.col-md-4.col-xs-6
-              h4.title The Wallet Friendly:
-
-          .row
-            .products-grid.products-collections.no-margin
-              .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 12, rangeTo: 15, customWrapper: 'col-md-4 col-xs-6'}
-
-          .row
-            .cta-wrapper.col-md-12
-              = link_to current_edit_link
-                span.btn-md.btn-featured
-                 | Shop & Customize
-
-    // Section #5
     - current_dress_name = "Cici jumpsuit"
     - current_dress_link = "#{dresses_path}/dress-cici-jumpsuit-1111?color=black"
     // TODO: add real link to current edit page
@@ -314,7 +261,7 @@
           .row
             .products-grid.products-collections.no-margin
               .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 19, customWrapper: 'col-md-4 col-xs-6'}
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 12, rangeTo: 15, customWrapper: 'col-md-4 col-xs-6'}
 
           .row
             .cta-wrapper.col-md-12
@@ -322,7 +269,7 @@
                 span.btn-md.btn-featured
                  | Shop & Customize
 
-    // Section #6
+    // Section #5
     - current_dress_name = "Harbourside dress"
     - current_dress_link = "#{dresses_path}/dress-harbourside-1123?color=champagne"
     // TODO: add real link to current edit page
@@ -367,7 +314,7 @@
           .row
             .products-grid.products-collections.no-margin
               .products-set
-                = render partial: 'pick_products_without_content', locals: {rangeFrom: 20, rangeTo: 23, customWrapper: 'col-md-4 col-xs-6'}
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 19, customWrapper: 'col-md-4 col-xs-6'}
 
           .row
             .cta-wrapper.col-md-12
@@ -375,7 +322,7 @@
                 span.btn-md.btn-featured
                  | Shop & Customize
 
-    // Section #1
+    // Section #6
     - current_dress_name = "Jacquie dress"
     - current_dress_link = "#{dresses_path}/dress-jacquie-1012?color=white"
     // TODO: add real link to current edit page
@@ -400,6 +347,59 @@
           .row
             .col-md-12
               h2.h1 The Provocateur
+
+              p Backless Dreamer, based on Classic Backless, is a georgette dress featuring a sporty high halter neckline, and criss-cross back straps. Backless Dreamer, based on Classic Backless, is a georgette dress.
+
+              .cta-product-caption.copy-highlight
+                | Pictured
+                span.hidden-md.hidden-lg  above:
+                span.hidden-xs.hidden-sm  left:
+                .product-info = link_to "1. The #{current_dress_name} #{current_dress_price}", current_dress_link
+
+          .row.product-heading-wrap
+            .product-heading.col-md-4.col-xs-6
+              h4.title The Evening:
+            .product-heading.col-md-4.col-xs-6
+              h4.title The Showstopper:
+            .product-heading.col-md-4.col-xs-6
+              h4.title The Wallet Friendly:
+
+          .row
+            .products-grid.products-collections.no-margin
+              .products-set
+                = render partial: 'pick_products_without_content', locals: {rangeFrom: 20, rangeTo: 23, customWrapper: 'col-md-4 col-xs-6'}
+
+          .row
+            .cta-wrapper.col-md-12
+              = link_to current_edit_link
+                span.btn-md.btn-featured
+                 | Shop & Customize
+
+    // Section #7
+    - current_dress_name = "Westside dress"
+    - current_dress_link = "#{dresses_path}/dress-westside-1118?color=black"
+    // TODO: add real link to current edit page
+    - current_edit_link = "#"
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$439"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$349"
+    .row
+      section.section-box#the-classically-inclined
+        .col-md-4.col-md-offset-3
+          = link_to current_dress_link
+            picture
+              source media='(max-width: 991px)' srcset='http://fakeimg.pl/512x750/?text=mobile'
+              source media='(min-width: 992px)' srcset='http://fakeimg.pl/1024x1500/?text=desktop'
+              = image_tag 'landingpages/it-girl/gown-desktop.jpg', srcset: "http://fakeimg.pl/1024x1500/?512x750=mobile,
+                http://fakeimg.pl/1024x1500/?text=desktop 1024w", class: 'img-responsive', alt: "#{current_dress_name}"
+
+        .col-md-4
+          .row
+            .col-md-12
+              h2.h1 The Classically Inclined
 
               p Backless Dreamer, based on Classic Backless, is a georgette dress featuring a sporty high halter neckline, and criss-cross back straps. Backless Dreamer, based on Classic Backless, is a georgette dress.
 
