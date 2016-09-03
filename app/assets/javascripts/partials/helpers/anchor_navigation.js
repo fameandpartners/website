@@ -270,7 +270,7 @@
         // Scroll smoothly to our target
         $('html, body').animate({
           scrollTop: (target.offset().top-offsetNavHeight)
-        }, 250);
+        }, 1000);
         // Keep local anchor navigation in browser history
         history.pushState({}, "", this.href);
         return false;
