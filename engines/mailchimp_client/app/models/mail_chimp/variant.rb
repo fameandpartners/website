@@ -16,6 +16,7 @@ module MailChimp
         Store.current.products(product.sku.strip).variants.create(body: variant_params)
         true
       rescue StandardError => e
+        Raven.capture_exception(e)
         Rails.logger.error e
         Rails.logger.error e.backtrace.join("\n\t")
         false

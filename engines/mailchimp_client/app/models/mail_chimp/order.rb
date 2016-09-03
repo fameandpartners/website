@@ -11,6 +11,7 @@ module MailChimp
         Store.current.orders.create(body: order_params)
         true
       rescue StandardError => e
+        Raven.capture_exception(e)
         Rails.logger.error e
         Rails.logger.error e.backtrace.join("\n\t")
         false
