@@ -105,6 +105,12 @@
       font-size: 1.7rem;
     }
 
+    .content-img img {
+      width: auto;
+      height: 100vh;
+      margin: 0 auto;
+    }
+
   }
 
   @media (min-width: $bootstrap-md-width) {
