@@ -146,6 +146,7 @@
 // On-page/Anchor navigation
 .local-navigation-wrapper {
   padding-top: 38px;
+  display: block;
 
   .nav li {
     letter-spacing: 0.7px;
@@ -169,42 +170,84 @@
 .local-navigation {
   width: 100%;
   text-transform: none;
-  display: inline-block;
   padding: 5px 15px;
+
+  &.fixed-nav {
+    position: fixed;
+    z-index: 3;
+    background: $c-neutral-white;
+    left: 0;
+    @include transition(all 0.3s ease-in-out);
+  }
+
+  .nav-wrapper {
+    padding: 0;
+  }
+
+  .slick-list {
+    margin: 0 auto;
+  }
+
+  .slick-track {
+    width: auto;
+  }
+
+  .slick-arrow {
+    color: $c-neutral-10;
+    font-size: 2rem;
+    top: 23px;
+    padding: 18px 0;
+    background: $c-neutral-white;
+    @include box-shadow( 0 0 20px 10px rgba($c-neutral-white, 0.7) );
+    width: 16px;
+  }
+
+  // This is needed because the left arrow looks smaller than the right one with the default value above
+  .slick-arrow:first-child {
+    font-size: 3rem;
+  }
+
+  .slick-arrow:last-child {
+    right: 0;
+  }
+
+  .slick-disabled {
+    visibility: hidden;
+  }
 
   ul {
     text-align: center;
-    width: 100%;
+    min-width: 100%;
+    left: 0;
     padding: 0;
     margin: 0;
-    @include display-flex;
   }
 
   li {
     padding: 0;
     margin: 0 -2px;
-    display: inline-block;
-    flex-basis: 100%;
   }
 
   a {
     color: $c-neutral-8;
     border-bottom: 1px solid $c-neutral-8;
-    padding: 18px 35px;
-    display: inline-block;
+    padding: 18px 0;
+    display: block;
     font-size: 1.4rem;
-    width: 100%;
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
     &.fixed-nav-mobile {
       width: 100%;
-      margin: 0 -15px;
+      margin: 0;
       position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       background: $c-neutral-white;
       z-index: 3;
+      @include transition(all 0.3s ease-in-out);
     }
 
   }
