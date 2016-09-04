@@ -161,6 +161,15 @@
 
 }
 
+@media (max-width: $bootstrap-md-width - 1px) {
+
+  .no-spacing-cols-mobile {
+    margin: 0 -15px;
+    padding: 0;
+  }
+
+}
+
 // Five Equal Columns
 .col-xs-5ths, .col-sm-5ths, .col-md-5ths, .col-lg-5ths {
     position: relative;
