@@ -105,12 +105,6 @@
       font-size: 1.7rem;
     }
 
-    .content-img img {
-      width: auto;
-      height: 90vh;
-      margin: 0 auto;
-    }
-
   }
 
   @media (min-width: $bootstrap-md-width) {
@@ -137,6 +131,10 @@
 
       section.intro {
         margin-top: 0;
+      }
+
+      .content-img img {
+        padding: 0 10%;
       }
 
       .products-set .category--item:nth-of-type(4) {
