@@ -143,8 +143,9 @@
         display: none;
       }
 
-      .local-navigation-vertical.affix {
+      .local-navigation-vertical {
         top: $fixed-header-with-locale-warn;
+        position: fixed;
       }
 
       .product-heading:nth-of-type(1),
