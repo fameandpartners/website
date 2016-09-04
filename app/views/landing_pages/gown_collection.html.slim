@@ -17,7 +17,7 @@
       - current_dress_price = "$299"
 
     .row
-      section.section-box.intro.vertical-align-copy
+      section.section-box.intro.vertical-align-copy#intro
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
           = link_to current_dress_link
             picture
@@ -46,18 +46,18 @@
               .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
 
             .cta-wrapper
-              = link_to "#the-sophisticate"
+              = link_to "#start"
                 span.btn-md.btn-featured.no-margin
                  | Explore
 
     // On-page navigation
-    .row
+    .row#start
       .local-navigation-wrapper.col-md-2
         .local-navigation-vertical
           .nav-wrapper
-            h4 The Gown Collection
+            h4.hidden-sm.hidden-xs The Gown Collection
             ul.nav
-              li.link = link_to "Introducing Gowns", "#top"
+              li.link = link_to "Introducing Gowns", "#intro"
               li.link = link_to "The Sophisticate", "#the-sophisticate"
               li.link = link_to "The True Romantic", "#the-true-romantic"
               li.link = link_to "The Glamouri", "#the-glamouri"
