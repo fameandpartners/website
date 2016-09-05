@@ -27,26 +27,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // PDP
 if (typeof window.PdpDataFull !== 'undefined') {
-  (function () {
-    var store = (0, _configureStore2.default)(window.PdpDataFull);
+  var store = (0, _configureStore2.default)(window.PdpDataFull);
 
-    //  JUST FOR DEV!!!
-    store.subscribe(function () {
-      console.log('Store changed: ', store.getState());
-    });
+  //  JUST FOR DEV!!!
+  //  store.subscribe(() => {
+  //    console.log('Store changed: ', store.getState());
+  //  });
 
-    (0, _reactDom.render)(_react2.default.createElement(
-      _reactRedux.Provider,
-      { store: store },
-      _react2.default.createElement(_Gallery2.default, null)
-    ), document.getElementById('PdpGallery'));
+  (0, _reactDom.render)(_react2.default.createElement(
+    _reactRedux.Provider,
+    { store: store },
+    _react2.default.createElement(_Gallery2.default, null)
+  ), document.getElementById('PdpGallery'));
 
-    (0, _reactDom.render)(_react2.default.createElement(
-      _reactRedux.Provider,
-      { store: store },
-      _react2.default.createElement(_SidePanelRight2.default, null)
-    ), document.getElementById('PdpSidePanelRight'));
-  })();
+  (0, _reactDom.render)(_react2.default.createElement(
+    _reactRedux.Provider,
+    { store: store },
+    _react2.default.createElement(_SidePanelRight2.default, null)
+  ), document.getElementById('PdpSidePanelRight'));
 }
 
 },{"./components/PDP/Gallery":4,"./components/PDP/SidePanelRight":10,"./store/configureStore":16,"babel-polyfill":18,"react":552,"react-dom":378,"react-redux":388}],2:[function(require,module,exports){
@@ -228,20 +226,73 @@ var CtaPrice = function (_React$Component) {
           _reactModal2.default,
           {
             style: _utils.MODAL_STYLE,
+            className: 'md',
             isOpen: this.state.modalIsOpen,
             onRequestClose: this.closeModal },
           _react2.default.createElement(
             'div',
-            { className: 'row' },
+            { className: 'afterpay-modal' },
             _react2.default.createElement(
               'div',
-              { className: 'col-md-12' },
+              { className: 'row' },
               _react2.default.createElement(
-                'h4',
-                { className: 'h2 title text-center' },
-                'Afterpay'
+                'div',
+                { className: 'col-md-12' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'header-wrap' },
+                  _react2.default.createElement('img', { src: '/assets/_afterpay/logo-sml.png', alt: 'afterpay logo' }),
+                  _react2.default.createElement(
+                    'h4',
+                    { className: 'h2 title' },
+                    'Buy Now.',
+                    _react2.default.createElement(
+                      'em',
+                      null,
+                      'Pay Later.'
+                    ),
+                    'No Interest'
+                  ),
+                  _react2.default.createElement(
+                    'h5',
+                    { className: 'h6 title' },
+                    'Just select ',
+                    _react2.default.createElement(
+                      'strong',
+                      null,
+                      'Afterpay'
+                    ),
+                    ' at checkout.'
+                  )
+                )
               ),
-              _react2.default.createElement('p', null)
+              _react2.default.createElement(
+                'div',
+                { className: 'col-md-12' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'content-wrap' },
+                  _react2.default.createElement(
+                    'p',
+                    null,
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    null,
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                  )
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'a',
+            { href: 'javascript:;', className: 'btn-close', onClick: this.closeModal },
+            _react2.default.createElement(
+              'span',
+              { className: 'hide-visually' },
+              'Close Menu'
             )
           )
         )
