@@ -2,7 +2,7 @@
 
 .page-content.lookbook-v2-page.relative
 
-  .hero-wrap.copy-right
+  .hero-wrap.copy-right.no-margin
     .media-wrap
       picture
         source media='(max-width: 1023px)' srcset='#{image_path("landingpages/it-girl/hero-mobile.jpg")}'
@@ -22,6 +22,22 @@
                   li The silhouettes you know and love.
                   li The freedom to create a look that’s all your own.
                   li Georgia Fowler wears The It Girl Collection.
+
+  .local-navigation-wrapper.container-fluid
+    .row
+      .local-navigation.js-float-menu-on-scroll
+        .nav-wrapper.col-md-12
+          ul.nav data-slick='{"slidesToShow": 8, "slidesToScroll": 2}'
+            li.link #{link_to "The Gown", "#thegown"}
+            li.link #{link_to "The Slip", "#theslip"}
+            li.link #{link_to "The Wrap Dress", "#thewrap"}
+            li.link #{link_to "The Cocktail", "#thecocktail"}
+            li.link #{link_to "The Two-Piece", "#thetwopiece"}
+            li.link #{link_to "The Jumpsuit", "#thejumpsuit"}
+            li.link #{link_to "The Skater", "#theskater"}
+            li.link #{link_to "The Maxi", "#themaxi"}
+            li.link #{link_to "The Mini", "#themini"}
+            li.link #{link_to "The LBD", "#thelbd"}
 
   // Gown
   - current_dress_name = "Oscar Dress"
