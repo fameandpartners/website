@@ -65,6 +65,12 @@ describe Forms::ManualOrderForm do
         expect(created_order.projected_delivery_date).to be_an_instance_of(ActiveSupport::TimeWithZone)
       end
 
+      it 'allows update tracking numbers' do
+        shipment = created_order.shipments.last
+        expect(shipment.update_attributes(tracking: 'new_tracking_number')).to be_truthy
+        expect(created_order.shipments.last.tracking).to eq('new_tracking_number')
+      end
+
       it 'creates new order as new' do
         new_order = manual_order.save_order(correct_params.merge(status: 'new'))
         expect(new_order.number[0]).to eq('M')
