@@ -44,7 +44,7 @@
 
   // Add DOM helper if we are loading this page directly from an URL containing an anchor (/something#foo=bar)
   // This is needed for our fixed header and floating menu
-  if ( window.location.hash ) {
+  if ( window.location.hash != '#top' ) {
     var hashVar = window.location.hash,
         id   = hashVar.slice(1),
         elem = document.getElementById(id),
@@ -67,6 +67,8 @@
       $('.js-hashlink').css({'height': offsetHeight+'px', 'margin-top': -offsetHeight+'px'});
     }
     window.location.hash = hashVar;
+  } else {
+    window.location.hash = '';
   }
 
   // Check if we have any floating menu in the page
