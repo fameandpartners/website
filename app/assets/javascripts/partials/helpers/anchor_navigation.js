@@ -21,13 +21,14 @@
       navLocalMenuHeight = 0,
       localNavTopOffset = 0,
       // Get the last section ID
-      lastNavLocalItem = $('.js-float-menu-on-scroll .nav a:last').attr('href'),
+      lastNavLocalItem = $('.local-navigation-wrapper .nav a:last').attr('href'),
       // The desired distance between the target and the page header
       offsetTargetPadding = 70,
       mobileTargetOffset = offsetTargetPadding/2,
       desktopTargetOffset = offsetTargetPadding*2,
       mdScreenWidth = 992,
-      responsiveNavLocal = $('.local-navigation .nav');
+      horizontalNavLocal = $('.local-navigation .nav'),
+      verticalNavLocal = $('.local-navigation-vertical');
 
   // Set the height of the fixed header
   if ($("#fixed-header").length)
@@ -72,63 +73,75 @@
   }
 
   // Check if we have any floating menu in the page
-  if ($('.js-float-menu-on-scroll').length) {
+  if ($('.js-float-menu-on-scroll, .js-float-vertical-menu-on-scroll').length) {
 
-    // Add scrollspy trigger
-    // If this is a mobile device we don't worry about the fixed header's height for the top offset
-    if ( $(window).width() < mdScreenWidth ) {
-      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (mobileTargetOffset) });
-    } else {
-      //Since this is not a mobile device then we have to consider the fixed header in the top offset
-      $('body').scrollspy({ target: '.js-float-menu-on-scroll', offset: (desktopTargetOffset+offsetTargetPadding) });
-    }
+    // Responsive Carousel
+    var renderSlick,
+        selectorNavLocal = $(".local-navigation-wrapper .nav"),
+        slickTargetPosition;
 
-    // Floating menu as a responsive Carousel
-    if (responsiveNavLocal.length) {
+    renderSlick = function() {
+      if (!selectorNavLocal.hasClass('slick-initialized')) {
 
-      // Render on page load
-      (function renderSlick() {
-        if (!responsiveNavLocal.hasClass('slick-initialized')) {
-          var slickAnchorId = window.location.hash,
-              slickTargetPosition;
-
-          responsiveNavLocal.slick({
-            autoplay: false,
-            fade: false,
-            arrows: true,
-            dots: false,
-            edgeFriction: 10,
-            infinite: false,
-            focusOnSelect: false,
-            centerMode: false,
-            mobileFirst: false,
-            speed: 1000,
-            prevArrow: '<span>◂</span>',
-            nextArrow: '<span>▸</span>',
-            responsive: [
-              {
-                breakpoint: mdScreenWidth,
-                settings: {
-                  mobileFirst: true,
-                  slidesToShow: 3,
-                  slidesToScroll: 2
-                }
+        selectorNavLocal.slick({
+          autoplay: false,
+          fade: false,
+          arrows: true,
+          dots: false,
+          edgeFriction: 10,
+          infinite: false,
+          focusOnSelect: false,
+          centerMode: false,
+          mobileFirst: false,
+          speed: 1000,
+          prevArrow: '<span>◂</span>',
+          nextArrow: '<span>▸</span>',
+          responsive: [
+            {
+              breakpoint: mdScreenWidth,
+              settings: {
+                mobileFirst: true,
+                slidesToShow: 3,
+                slidesToScroll: 2
               }
-            ]
-          });
+            }
+          ]
+        });
 
-          // Go to current nav item
-          if (slickAnchorId) {
-            slickNavLocalGoTo(responsiveNavLocal);
-          }
-
+        // Go to current nav item
+        if (window.location.hash) {
+          slickNavLocalGoTo(selectorNavLocal);
         }
-      })();
 
-    }
+      }
+    };
 
     // Watch scrolling to show/hide floating menu
     if ($(".local-navigation-wrapper").length) {
+
+      // Horizontal navigation
+      // Render as a carousel on page load (desktop and mobile)
+      if (horizontalNavLocal.length) {
+        renderSlick();
+      }
+
+      if ( $(window).width() < mdScreenWidth ) {
+        // Add scrollspy trigger
+        // If this is a mobile device we don't worry about the fixed header's height for the top offset
+        $('body').scrollspy({ target: '.local-navigation-wrapper', offset: (mobileTargetOffset) });
+
+        // Vertical navigation
+        // Render as a carousel on page load (desktop and mobile)
+        if (verticalNavLocal.length) {
+          verticalNavLocal.addClass('fixed-nav-mobile');
+          renderSlick();
+        }
+
+      } else {
+        //Since this is not a mobile device then we have to consider the fixed header in the top offset
+        $('body').scrollspy({ target: '.local-navigation-wrapper', offset: (desktopTargetOffset+offsetTargetPadding) });
+      }
+
       $(document).delay(100).on("scroll", function() {
 
         // Checking if it is a mobile device...
@@ -136,8 +149,6 @@
         if( $(window).width() < mdScreenWidth ) {
 
           $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile');
-          //Add an extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
-          $('.js-footer').css({'padding-bottom': navLocalMenuHeight*1.1+'px'});
 
         } else {
 
@@ -145,7 +156,12 @@
 
           // Desktop: Detach the local menu from the bottom
           $('.local-navigation-wrapper .js-float-menu-on-scroll.fixed-nav-mobile').removeClass('fixed-nav-mobile');
-          $('.js-footer').css({'padding-bottom': ''});
+
+          // Desktop: remove carousel from vertical navigation
+          verticalNavLocal.removeClass('fixed-nav-mobile');
+          if (verticalNavLocal.find('.nav').hasClass('slick-initialized')) {
+            verticalNavLocal.find('.nav').slick('unslick');
+          }
 
           // Toggle floating menu if window position is below the target element
           var windowPosition = $(window).scrollTop(),
@@ -172,12 +188,24 @@
 
           }
 
-          // Monitor the screen position to check if it is currently showing the last navigation item
-          if (windowPosition+sitewideHeaderHeight >= $(lastNavLocalItem).offset().top+$(lastNavLocalItem).outerHeight()){
-            // If the screen goes beneath the last item we remove the anchor from the URL
-            history.replaceState({}, "", window.location.toString().split("#")[0]);
-          }
+          // // Monitor the screen position to check if it is currently showing the last navigation item
+          // if (windowPosition+sitewideHeaderHeight >= $(lastNavLocalItem).offset().top+$(lastNavLocalItem).outerHeight()){
+          //   // If the screen goes beneath the last item we remove the anchor from the URL
+          //   history.replaceState({}, "", window.location.toString().split("#")[0]);
+          // }
 
+          // If we have the vertical menu let's toggle the navigation according to the screen position
+          if (verticalNavLocal.length){
+
+            if ((verticalNavLocal.offset().top + verticalNavLocal.outerHeight(true)) >= ($('footer').offset().top)){
+              // It's below the last item, so we hide it
+              verticalNavLocal.fadeTo(0, 0);
+            } else {
+              // It's on or above the last item, so we show it
+              verticalNavLocal.fadeTo(0, 1);
+            }
+
+          }
 
         }
 
@@ -190,14 +218,12 @@
         if ( $(window).width() < mdScreenWidth ) {
           $('.js-float-menu-on-scroll').removeClass('fixed-nav').css({'top': ''});
           $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile');
-          //Add extra bottom padding in footer (so the the mobile local menu doesn't cover any content)
-          $('.js-footer').css({'padding-bottom': navLocalMenuHeight*1.1+'px'});
         }
 
         // Go to menu item when resize is finished
         clearTimeout(timeout);
         var timeout = setTimeout(function() {
-          slickNavLocalGoTo(responsiveNavLocal);
+          slickNavLocalGoTo(selectorNavLocal);
         }, 250);
 
       });
@@ -208,7 +234,7 @@
         history.replaceState({}, "", $("a[href^='#']", e.target).attr("href"));
 
         // Activate the current item in Slick carousel by matching Scrollspy's current response
-        slickNavLocalGoTo(responsiveNavLocal);
+        slickNavLocalGoTo(selectorNavLocal);
 
       });
 
@@ -251,7 +277,7 @@
             offsetClickFromLocalNav = (offsetTargetPadding);
           }
         } else if( $('.js-float-menu-on-scroll.fixed-nav-mobile, .local-navigation-vertical').length ) {
-          if ($(this).closest(".local-navigation-wrapper, .local-navigation-vertical").length) {
+          if ($(this).closest(".local-navigation-wrapper").length) {
             offsetClickFromLocalNav = 0;
           }
         } else {
