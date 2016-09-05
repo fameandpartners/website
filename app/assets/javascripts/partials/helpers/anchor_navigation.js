@@ -188,12 +188,6 @@
 
           }
 
-          // // Monitor the screen position to check if it is currently showing the last navigation item
-          // if (windowPosition+sitewideHeaderHeight >= $(lastNavLocalItem).offset().top+$(lastNavLocalItem).outerHeight()){
-          //   // If the screen goes beneath the last item we remove the anchor from the URL
-          //   history.replaceState({}, "", window.location.toString().split("#")[0]);
-          // }
-
           // If we have the vertical menu let's toggle the navigation according to the screen position
           if (verticalNavLocal.length){
 
