@@ -2,23 +2,23 @@ class UpdateTrackingNumbers < ActiveRecord::Migration
 
   def up
     orders = {
-      'R218370811' =>	'5988372305',
-      'E460662077' =>	'5988226580',
-      'E625434523' =>	'2326323403',
-      'E710215800' =>	'5414416582',
-      'R573876378' =>	'9801757210',
-      'R860044172' =>	'9801757210',
-      'R360818471' =>	'4557995083',
-      'R613863247' =>	'4557995083',
-      'R383756418' =>	'3123746592',
-      'R214828582' =>	'3123818316',
-      'R403158341' =>	'5270504912',
-      'R170215248' =>	'5988238620',
-      'R018584027' =>	'5988244006',
-      'R267152573' =>	'6427979434',
-      'R748643322' =>	'6427985130',
-      'R616423780' =>	'6427990472',
-      'R173376427' =>	'5952510104',
+      'R218370811' => '5988372305',
+      'E460662077' => '5988226580',
+      'E625434523' => '2326323403',
+      'E710215800' => '5414416582',
+      'R573876378' => '9801757210',
+      'R860044172' => '9801757210',
+      'R360818471' => '4557995083',
+      'R613863247' => '4557995083',
+      'R383756418' => '3123746592',
+      'R214828582' => '3123818316',
+      'R403158341' => '5270504912',
+      'R170215248' => '5988238620',
+      'R018584027' => '5988244006',
+      'R267152573' => '6427979434',
+      'R748643322' => '6427985130',
+      'R616423780' => '6427990472',
+      'R173376427' => '5952510104',
       'R765124843' => '2136331385',
       'R338774721' => '2136332214',
       'R807788540' => '2136333076',
@@ -62,17 +62,18 @@ class UpdateTrackingNumbers < ActiveRecord::Migration
       'R738022065' => '5823722833',
       'R873587464' => '5823728326'
     }
-    
+
     orders.each do |order_number, tracking_number|
       if (order = Spree::Order.where(number: order_number).first)
-        unit = order.shipments.first.inventory_units.build
-        unit.variant_id = order.line_items.first.variant.id
-        unit.order_id = order.id
-        unit.save
+        if (shipment = order.shipments.first)
+          unit            = shipment.inventory_units.build
+          unit.variant_id = order.line_items.first.variant.id
+          unit.order_id   = order.id
+          unit.save
 
-        shipment = order.shipments.first
-        shipment.tracking = tracking_number
-        shipment.save
+          shipment.tracking = tracking_number
+          shipment.save
+        end
       end
     end
   end
