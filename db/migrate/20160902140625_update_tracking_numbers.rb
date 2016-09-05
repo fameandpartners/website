@@ -21,17 +21,17 @@ class UpdateTrackingNumbers < ActiveRecord::Migration
       'R173376427' =>	'5952510104'
     }
 
-    orders.each do |k,v|
-      order = Spree::Order.where(number: k).first
+    orders.each do |order_number, tracking_number|
+      if (order = Spree::Order.where(number: order_number).first)
+        unit = order.shipments.first.inventory_units.build
+        unit.variant_id = order.line_items.first.variant.id
+        unit.order_id = order.id
+        unit.save
 
-      unit = order.shipments.first.inventory_units.build
-      unit.variant_id = order.line_items.first.variant.id
-      unit.order_id = order.id
-      unit.save
-
-      shipment = order.shipments.first
-      shipment.tracking = v
-      shipment.save
+        shipment = order.shipments.first
+        shipment.tracking = tracking_number
+        shipment.save
+      end
     end
   end
 
