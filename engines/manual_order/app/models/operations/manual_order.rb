@@ -1,7 +1,7 @@
 module Operations
   class ManualOrder
 
-    attr_reader :params, :variant
+    attr_reader :params, :variant, :order
 
     def initialize(params, variant)
       @params = params
@@ -9,10 +9,28 @@ module Operations
     end
 
     def create
-      order = Spree::Order.create
-      site_version = SiteVersion.where(currency: params[:currency]).first
+      cart = cart_populator
+      return false if !cart[:success]
 
-      cart = UserCart::Populator.new(
+      if params[:existing_customer].present?
+        assign_customer
+      else
+        create_customer
+      end
+
+      fill_order_details
+      order.save
+      finalize_order
+      create_inventory_units
+      adjust_price
+
+      order
+    end
+
+    private
+
+    def cart_populator
+      UserCart::Populator.new(
         order: order,
         site_version: site_version,
         currency: params[:currency],
@@ -25,21 +43,23 @@ module Operations
           quantity: 1
         }
       ).populate
+    end
 
-      return false if cart[:success] == false
+    def assign_customer
+      user = Spree::User.find(params[:existing_customer])
+      user_last_order = user.orders.complete.last
+      order.user = user
+      order.bill_address = user_last_order.bill_address
+      order.ship_address = user_last_order.ship_address
+    end
 
-      if params[:existing_customer].present?
-        user = Spree::User.find(params[:existing_customer])
-        user_last_order = user.orders.complete.last
-        order.user = user
-        order.bill_address = user_last_order.bill_address
-        order.ship_address = user_last_order.ship_address
-      else
-        order.user = Spree::User.create_user(user_params)
-        order.bill_address = Spree::Address.create(address_params)
-        order.ship_address = Spree::Address.create(address_params)
-      end
+    def create_customer
+      order.user = Spree::User.create_user(user_params)
+      order.bill_address = Spree::Address.create(address_params)
+      order.ship_address = Spree::Address.create(address_params)
+    end
 
+    def fill_order_details
       order.user_first_name = params[:first_name] || order.bill_address.firstname
       order.user_last_name = params[:last_name] || order.bill_address.lastname
       order.email = params[:email] || order.bill_address.email
@@ -47,16 +67,34 @@ module Operations
       order.customer_notes = params[:notes]
       order.site_version = site_version.permalink
       order.number = update_number(order.number)
-      order.save
+    end
 
+    def finalize_order
       order.touch :completed_at
       order.update_column :state, 'complete'
       order.project_delivery_date
-
-      order
     end
 
-    private
+    def create_inventory_units
+      unit = order.shipments.first.inventory_units.build
+      unit.variant_id = variant.id
+      unit.order_id = order.id
+      unit.save
+    end
+
+    def adjust_price
+      if params[:adj_amount].present? && params[:adj_description].present?
+        order.adjustments.create({ amount: params[:adj_amount], label: params[:adj_description] })
+      end
+    end
+
+    def order
+      @order ||= Spree::Order.create
+    end
+
+    def site_version
+      SiteVersion.where(currency: params[:currency]).first
+    end
 
     def user_params
       {
