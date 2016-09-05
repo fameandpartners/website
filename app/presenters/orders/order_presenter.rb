@@ -24,7 +24,8 @@ module Orders
                    :to_param,
                    :has_fast_making_items?,
                    :display_promotion_total,
-                   :shipment
+                   :shipment,
+                   :completed?
 
     attr_reader :order, :items
 
@@ -57,7 +58,7 @@ module Orders
     end
 
     def expected_delivery_date
-      order.projected_delivery_date.strftime("%d of %b, %Y")
+      projected_delivery_date.try(:strftime, '%a, %d %b %Y')
     end
 
     def promo_codes

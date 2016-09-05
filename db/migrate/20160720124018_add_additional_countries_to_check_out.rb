@@ -1,0 +1,69 @@
+class AddAdditionalCountriesToCheckOut < ActiveRecord::Migration
+
+  US_ZONE_COUNTRY_NAMES = ['Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia',
+                           'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania',
+                           'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia',
+                           'Spain', 'Sweden', 'United Kingdom', 'United Arab Emirates', 'Saudi Arabia', 'Russian Federation',
+                           'Israel', 'Puerto Rico']
+
+  AUSTRALIA_ZONE_COUNTRY_NAMES = ['Hong Kong', 'Malaysia', 'Japan', 'Singapore', 'China']
+
+  def up
+    AUSTRALIA_ZONE_COUNTRY_NAMES.each { |country_name| add_country_to_zone(australia_zone, country_name) }
+    US_ZONE_COUNTRY_NAMES.each { |country_name| add_country_to_zone(us_zone, country_name) }
+
+    update_zone_members_counter(australia_zone)
+    update_zone_members_counter(us_zone)
+  end
+
+  def down
+    US_ZONE_COUNTRY_NAMES.each { |country_name| remove_country_from_zone(us_zone, country_name) }
+    AUSTRALIA_ZONE_COUNTRY_NAMES.each { |country_name| remove_country_from_zone(australia_zone, country_name) }
+
+    update_zone_members_counter(australia_zone)
+    update_zone_members_counter(us_zone)
+  end
+
+  def add_country_to_zone(zone, country_name)
+    country = Spree::Country.where(name: country_name).first
+
+    unless country
+      ActiveRecord::Migration.say("Country #{country_name} not found")
+      return
+    end
+
+    if zone.members.map(&:zoneable_id).include? country.id
+      puts "#{country.name} already in the #{zone.name} zone"
+      zone_member = zone.members.where(zoneable_id: country.id).first
+      zone_member.has_international_shipping_fee = true
+      zone_member.save!
+    else
+      zone.members.create!(zoneable_id: country.id, zoneable_type: 'Spree::Country', has_international_shipping_fee: true)
+    end
+  end
+
+  def remove_country_from_zone(zone, country_name)
+    country = Spree::Country.where(name: country_name).first
+
+    unless country
+      ActiveRecord::Migration.say("Country #{country_name} not found")
+      return
+    end
+
+    zone_member = zone.members.where(zoneable_id: country.id).first
+    zone_member.destroy if zone_member
+  end
+
+  def update_zone_members_counter(zone)
+    zone.zone_members_count = zone.zone_members.size
+    zone.save!
+  end
+
+  def australia_zone
+    @australia_zone ||= Spree::Zone.find(3)
+  end
+
+  def us_zone
+    @us_zone ||= Spree::Zone.find(4)
+  end
+end

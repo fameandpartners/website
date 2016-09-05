@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160805082330) do
+ActiveRecord::Schema.define(:version => 20160824055611) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1644,8 +1644,9 @@ ActiveRecord::Schema.define(:version => 20160805082330) do
     t.integer  "zoneable_id"
     t.string   "zoneable_type"
     t.integer  "zone_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
+    t.boolean  "has_international_shipping_fee", :default => false
   end
 
   create_table "spree_zones", :force => true do |t|

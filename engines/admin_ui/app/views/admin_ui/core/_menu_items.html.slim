@@ -1,7 +1,7 @@
 = menu_item admin_ui.root_path, 'Dashboard', icon: 'dashboard', exact: true
 
 = menu_item admin_ui.item_returns_path, 'Returns', icon: 'thumbs-down', exact: true
-= menu_item manual_order.new_manual_order_path, 'Manual Orders', icon: 'thumbs-up'
+= menu_item manual_order.manual_orders_path, 'Manual Orders', icon: 'thumbs-up'
 = menu_item admin_ui.variants_path, 'Variants', icon: 'cube'
 = menu_item admin_ui.product_colors_path, 'Color Variants', icon: 'eyedropper'
 
@@ -44,7 +44,7 @@ li class=active_link_to_class('', active: /reports/)
     = active_link_to 'Sale Items', admin_ui.reports_sale_items_path, wrap_tag: :li
     = active_link_to 'Size Normalisations', admin_ui.reports_size_normalisations_path, wrap_tag: :li
     = active_link_to 'Daily Orders (China)', admin_ui.reports_daily_orders_path, wrap_tag: :li
+    = active_link_to 'Refunds', admin_ui.reports_refunds_path, wrap_tag: :li
 
-= menu_item admin_ui.refund_requests_path, 'Refund Requests', icon: 'dollar'
 = menu_item spree.admin_path, 'Spree Admin', icon: 'shopping-cart'
 = menu_item main_app.root_path, 'Website', icon: 'globe', exact: true

@@ -5,7 +5,8 @@ describe Spree::Calculator::SaleShipping, type: :model do
 
   subject(:calculator) { Spree::Calculator::SaleShipping.new(
     preferred_sale_products_shipping_amount:    15.5,
-    preferred_normal_products_shipping_amount:  9.9
+    preferred_normal_products_shipping_amount:  9.9,
+    preferred_international_shipping_fee:       30.0
   )}
 
   matcher :be_default_charge do
@@ -19,6 +20,13 @@ describe Spree::Calculator::SaleShipping, type: :model do
     match { |actual| actual == BigDecimal.new('15.5') }
     failure_message do |actual|
       "expected that #{actual.to_f} would be the extra shipping charge (15.5)"
+    end
+  end
+
+  matcher :be_international_shipping_fee_with_default_charge do
+    match { |actual| actual == BigDecimal.new('39.9') }
+    failure_message do |actual|
+      "expected that #{actual.to_f} would be the international shipping fee with default shipping charge (39.9)"
     end
   end
 
@@ -53,6 +61,24 @@ describe Spree::Calculator::SaleShipping, type: :model do
           double('promo', require_shipping_charge?: false)
         )
 
+        expect(shipping_amount).to be_default_charge
+      end
+    end
+
+    context 'international shipping fee' do
+      let(:zone_member) { Spree::ZoneMember.new }
+
+      before do
+        allow(order.shipping_address.country).to receive(:zone_member).and_return(zone_member)
+      end
+
+      it 'international shipping fee for orders to zone member with shipping fee' do
+        allow(zone_member).to receive(:has_international_shipping_fee).and_return(true)
+        expect(shipping_amount).to be_international_shipping_fee_with_default_charge
+      end
+
+      it 'no international shipping fee for orders to zone member without shipping fee' do
+        allow(zone_member).to receive(:has_international_shipping_fee).and_return(false)
         expect(shipping_amount).to be_default_charge
       end
     end

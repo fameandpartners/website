@@ -15,19 +15,19 @@
     var i, current_div = (index + 1);
 
     // Create slider navigation wrapper
-    $('<ul />', {'class': 'hero-carousel-nav'}).appendTo(slickSelector + ' .hero-wrap:nth-of-type('+current_div+') picture .inner-wrap');
+    $('<ul />', {'class': 'hero-carousel-nav'}).appendTo(slickSelector + ' .hero-wrap:nth-of-type('+current_div+') picture');
 
     for (i = 0; i < 3; i++) {
 
       //Create navigation links
-      $('<li />', {'class': 'item-nav'}).appendTo(slickSelector + ' .hero-wrap:nth-of-type('+current_div+') picture .inner-wrap ul');
+      $('<li />', {'class': 'item-nav'}).appendTo(slickSelector + ' .hero-wrap:nth-of-type('+current_div+') picture ul');
 
       // Match each nav link to each slide
       $(this).find('.item-nav:nth-of-type('+current_div+')').addClass('current');
     }
 
     // Add <a> tags (just to make the squares)
-    $('.hero-wrap:nth-of-type('+current_div+') picture .inner-wrap .item-nav').append('<a href="javascript:;"></a>');
+    $('.hero-wrap:nth-of-type('+current_div+') picture .item-nav').append('<a href="javascript:;"></a>');
 
     // Why click on <li> and not <a>?
     // This is for UX, as users might find it difficult to click on the small squares (which are <a> tags).
