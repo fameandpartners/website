@@ -22,6 +22,7 @@ module Operations
       order.save
       finalize_order
       create_inventory_units
+      adjust_price
 
       order
     end
@@ -79,6 +80,12 @@ module Operations
       unit.variant_id = variant.id
       unit.order_id = order.id
       unit.save
+    end
+
+    def adjust_price
+      if params[:adj_amount].present? && params[:adj_description].present?
+        order.adjustments.create({ amount: params[:adj_amount], label: params[:adj_description] })
+      end
     end
 
     def order

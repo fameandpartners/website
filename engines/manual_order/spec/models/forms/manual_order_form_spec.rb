@@ -27,6 +27,8 @@ describe Forms::ManualOrderForm do
         size: dress_size.id,
         height: 'petite',
         color: dress_color.id,
+        adj_amount: '-10',
+        adj_description: 'PROMO',
         notes: 'notes',
         status: 'exchange',
         email: 'john.doe@gmail.com',
@@ -63,6 +65,8 @@ describe Forms::ManualOrderForm do
         expect(created_order.projected_delivery_date).to be_truthy
         expect(created_order.completed_at).to be_an_instance_of(ActiveSupport::TimeWithZone)
         expect(created_order.projected_delivery_date).to be_an_instance_of(ActiveSupport::TimeWithZone)
+        expect(created_order.adjustments.last.amount).to eq(-10.0)
+        expect(created_order.adjustments.last.label).to eq('PROMO')
       end
 
       it 'allows update tracking numbers' do
