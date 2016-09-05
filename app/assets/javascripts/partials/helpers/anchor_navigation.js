@@ -1,17 +1,17 @@
 'use strict';
 (function ($) {
 
-  function slickNavLocalGoTo($responsiveNavLocal) {
+  function slickNavLocalGoTo($selectorNavLocal) {
 
     // Go to target item in local navigation, according to the current anchor
-    if ($responsiveNavLocal.hasClass('slick-initialized')) {
-      var slickTargetPosition = $('.local-navigation .nav a').index($('[href="'+window.location.hash+'"]'));
-      $responsiveNavLocal.slick( "slickGoTo", parseInt( slickTargetPosition ), false);
+    if ($selectorNavLocal.hasClass('slick-initialized')) {
+      var slickTargetPosition = $('.local-navigation-wrapper .nav a').index($('[href="'+window.location.hash+'"]'));
+      $selectorNavLocal.slick( "slickGoTo", parseInt( slickTargetPosition ), false);
 
       //remove all active class
-      $responsiveNavLocal.find('.slick-slide.active').removeClass('active');
+      $selectorNavLocal.find('.slick-slide.active').removeClass('active');
       //set active class for current navigation item
-      $responsiveNavLocal.find('.slick-slide[data-slick-index='+slickTargetPosition+']').addClass('active');
+      $selectorNavLocal.find('.slick-slide[data-slick-index='+slickTargetPosition+']').addClass('active');
     }
 
   }
