@@ -11,7 +11,7 @@ describe Forms::ManualOrderForm do
         currency: 'USD',
         style_name: '794',
         size: '24',
-        length: 'standart',
+        height: 'standard',
         color: '179',
         customisations: '1873',
         notes: 'notes',
@@ -25,8 +25,10 @@ describe Forms::ManualOrderForm do
         currency: 'USD',
         style_name: product.id,
         size: dress_size.id,
-        length: 'standart',
+        height: 'petite',
         color: dress_color.id,
+        adj_amount: '-10',
+        adj_description: 'PROMO',
         notes: 'notes',
         status: 'exchange',
         email: 'john.doe@gmail.com',
@@ -59,11 +61,23 @@ describe Forms::ManualOrderForm do
         expect(created_order.number[0]).to eq('E')
         expect(created_order.state).to eq('complete')
         expect(created_order.completed_at).to be_truthy
+        expect(created_order.line_items.first.personalization.height).to eq('petite')
+        expect(created_order.projected_delivery_date).to be_truthy
+        expect(created_order.completed_at).to be_an_instance_of(ActiveSupport::TimeWithZone)
+        expect(created_order.projected_delivery_date).to be_an_instance_of(ActiveSupport::TimeWithZone)
+        expect(created_order.adjustments.last.amount).to eq(-10.0)
+        expect(created_order.adjustments.last.label).to eq('PROMO')
+      end
+
+      it 'allows update tracking numbers' do
+        shipment = created_order.shipments.last
+        expect(shipment.update_attributes(tracking: 'new_tracking_number')).to be_truthy
+        expect(created_order.shipments.last.tracking).to eq('new_tracking_number')
       end
 
       it 'creates new order as new' do
         new_order = manual_order.save_order(correct_params.merge(status: 'new'))
-        expect(new_order.number[0]).to eq('R')
+        expect(new_order.number[0]).to eq('M')
       end
 
       it 'creates new order with correct product name' do

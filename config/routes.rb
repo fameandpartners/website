@@ -25,24 +25,9 @@ FameAndPartners::Application.routes.draw do
   #######################################################
 
   # TODO: (May 26 2016) Every redirection on this block should live in the HTTP server and not in the application!
-
-  get '/AU' => redirect(path: '/au/dresses')
-
   if Features.active?(:redirect_to_com_au_domain)
     get '/au/*whatevs' => redirect(path: '/%{whatevs}', host: 'www.fameandpartners.com.au')
     get '/au' => redirect(path: '/', host: 'www.fameandpartners.com.au')
-  end
-
-  if Features.active?(:redirect_to_www_and_https)
-    constraints(host: /^fameandpartners.com.au/) do
-      root to: redirect('https://www.fameandpartners.com.au')
-      match '/*path', to: redirect { |_, request| URI.join('https://www.fameandpartners.com.au', request.fullpath).to_s }
-    end
-
-    constraints(host: /^fameandpartners.com/) do
-      root to: redirect('https://www.fameandpartners.com')
-      match '/*path', to: redirect { |_, request| URI.join('https://www.fameandpartners.com', request.fullpath).to_s }
-    end
   end
 
   # TODO: After .com.au migration, this scope can simply go away.
@@ -206,6 +191,8 @@ FameAndPartners::Application.routes.draw do
     get '/shop-social' => 'products/collections#show', :as => :shop_social
 
     get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
+    get '/dress-for-wedding'    => 'products/collections#show', :permalink => 'dress-for-wedding', :as => :dress_for_wedding_page
+    get '/dress-for-parties'    => 'products/collections#show', :permalink => 'dress-for-parties', :as => :dress_for_parties_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)

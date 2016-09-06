@@ -35,8 +35,6 @@ AdminUi::Engine.routes.draw do
     end
   end
 
-  resources :refund_requests, only: [:index, :update]
-
   namespace :reports do
     root to: 'dashboard#index'
     resource :body_shape_calculator_results, only: [:show, :create]
@@ -49,6 +47,7 @@ AdminUi::Engine.routes.draw do
     resource :sale_items                   , only: [:show, :create]
     resource :size_normalisations          , only: [:show]
     resource :daily_orders                 , only: [:show, :create]
+    resource :refunds                      , only: [:show]
   end
 
   resources :variants

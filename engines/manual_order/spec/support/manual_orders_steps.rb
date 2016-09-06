@@ -45,7 +45,7 @@ module Acceptance
     end
 
     step 'I select skirt length "Standard" from chosen length select box' do
-      chosen_select('Standard', from: '#forms_manual_order_length')
+      chosen_select('Standard', from: '#forms_manual_order_height')
     end
 
     step 'I select "Black" color from chosen color select box' do
@@ -58,6 +58,11 @@ module Acceptance
 
     step 'I should have black dress image' do
       expect(page).to have_selector('h4.product_image img[src*=black-front-crop]')
+    end
+
+    step 'I fill adjustment fields' do
+      find('.adjust-panel .amount').set('-10')
+      find('.adjust-panel .description').set('PROMO')
     end
 
     step 'I select "Roger That" from chosen customers select box' do
@@ -76,6 +81,23 @@ module Acceptance
       expect(page).to have_field('forms_manual_order_zipcode', with: '12345')
       expect(page).to have_selector('#forms_manual_order_country_chosen a span', text: 'United States')
       expect(page).to have_selector('#forms_manual_order_state_chosen a span', text: 'California')
+    end
+
+    step 'I should get right order results' do
+      created_order = Spree::Order.last
+
+      expect(created_order.site_version).to eq('au')
+      expect(created_order.currency).to eq('AUD')
+      expect(created_order.state).to eq('complete')
+      expect(created_order.completed_at).to be_an_instance_of(ActiveSupport::TimeWithZone)
+      expect(created_order.projected_delivery_date).to be_an_instance_of(ActiveSupport::TimeWithZone)
+      expect(created_order.number[0]).to eq('M')
+      expect(created_order.state).to eq('complete')
+      expect(created_order.item_total).to eq(319.00)
+      expect(created_order.total).to eq(309.00)
+      expect(created_order.adjustment_total).to eq(-10)
+      expect(created_order.adjustments.last.amount).to eq(-10.0)
+      expect(created_order.adjustments.last.label).to eq('PROMO')
     end
 
     private

@@ -6,7 +6,7 @@ module Forms
     property :currency, virtual: true
     property :style_name, virtual: true
     property :size, virtual: true
-    property :length, virtual: true
+    property :height, virtual: true
     property :color, virtual: true
     property :customisations, virtual: true
     property :notes, virtual: true
@@ -22,6 +22,8 @@ module Forms
     property :zipcode, virtual: true
     property :phone, virtual: true
     property :existing_customer, virtual: true
+    property :adj_amount, virtual: true
+    property :adj_description, virtual: true
 
     def products
       Spree::Product.active
@@ -84,7 +86,7 @@ module Forms
     end
 
     def get_price(product_id, size_id, color_id, currency = 'USD')
-      price = get_variant(product_id, size_id, color_id).get_price_in(currency)
+      price = get_variant(product_id, size_id, color_id, currency).get_price_in(currency)
       { price: price.amount, currency: currency }
     end
 
@@ -128,11 +130,7 @@ module Forms
     end
 
     def skirt_length_options
-      {
-        'petite' =>'Petite',
-        'standard' => 'Standard',
-        'tall' => 'Tall'
-      }
+      Hash[LineItemPersonalization::HEIGHTS.map{|h| [h, h.humanize]}]
     end
 
     def save_order(params)
@@ -142,15 +140,9 @@ module Forms
 
     private
 
-    def get_variant(product_id, size_id, color_id)
-      size_variants = if size_id.to_i > 0
-                        Spree::OptionValue.find(size_id).variants
-                          .where(product_id: product_id, is_master: false).pluck(:id)
-                      else
-                        nil
-                      end
-      color_variants = Spree::OptionValue.find(color_id).variants
-                         .where(product_id: product_id, is_master: false).pluck(:id)
+    def get_variant(product_id, size_id, color_id, currency = 'USD')
+      size_variants = size_id.to_i > 0 ? get_variant_ids(product_id, size_id, currency) : nil
+      color_variants = get_variant_ids(product_id, color_id, currency)
       variant_ids = if size_variants.present? && color_variants.present?
                       size_variants & color_variants
                     elsif color_variants.present?
@@ -159,6 +151,14 @@ module Forms
                       size_variants
                     end
       Spree::Variant.where(id: variant_ids).first
+    end
+
+    def get_variant_ids(product_id, option_value_id, currency)
+      Spree::OptionValue.find(option_value_id).variants
+        .where(product_id: product_id, is_master: false)
+        .joins(:prices)
+        .where("spree_prices.currency = '#{currency}' and spree_prices.amount IS NOT NULL")
+        .pluck(:id)
     end
 
     def variant_image(variant)

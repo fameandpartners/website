@@ -37,6 +37,7 @@ path 'engines' do
   gem 'inspinia-rails'
   gem 'bergen'
   gem 'manual_order'
+  gem 'mailchimp_client'
 end
 
 # TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it,
@@ -145,11 +146,11 @@ group :test do
   gem 'selenium-webdriver', '~> 2.53.0'
   gem 'show_me_the_cookies', '~> 3.1.0'
   gem 'turnip', '~> 1.3.1'
-  gem 'database_cleaner', '0.9.1'
   gem 'factory_girl_rails', '4.2.1'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-collection_matchers'
   gem 'rspec-retry'
+  gem 'database_cleaner', require: false
   gem 'shoulda-matchers'
   gem 'timecop'
   gem 'vcr', '~> 2.9.3'
@@ -161,4 +162,5 @@ group :production do
   gem 'aws-sdk'
 end
 
+# TODO: this should be removed whenever `EmailCapture` class be replaced by the new MailChimp engine
 gem 'mailchimp-api', require: 'mailchimp'
