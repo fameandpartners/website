@@ -130,12 +130,9 @@ group :development, :test do
   gem 'awesome_print'
   gem 'launchy', '2.2.0'
   gem 'letter_opener', '~> 1.4.1'
-  gem 'net-ssh', '~> 2.7.0'
-  gem 'oink'
   gem 'quiet_assets'
   gem 'rspec-rails', '~> 3.2'
   gem 'puma'
-  gem 'meta_request'
   gem 'bullet'
   gem 'foreman', require: false
 end
