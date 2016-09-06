@@ -1,0 +1,92 @@
+.row.moodboard-edit
+  .col-md-8.col-md-offset-2
+    .row
+      .col-md-6.col-md-offset-3
+        ul.row.tabs-horizontal		
+          li.col-xs-6.col-md-6.col-md-offset-3.active		
+            a href='#tab-register' data-toggle='tab' Register		
+          li.col-xs-6.col-md-6
+            a href='#tab-login' data-toggle='tab' Login
+    .tab-content		
+      #tab-register.tab-pane.active
+        h2.title.text-center Register an Account
+        - signup_params = {site_version: current_site_version.code}
+        = form_for :spree_user, :url => spree.spree_user_registration_path(@spree_user, signup_params), remote: true , :html => {:'data-type' => 'json', :class => 'row js-membership js-membership-signup'} do |f|
+          = f.hidden_field :site_version_id, value: current_site_version.id
+          .col-md-6.form-group
+            = f.label :first_name
+            = f.text_field :first_name, required: true, :class => 'form-control form-control-md'
+            span.help-block.with-errors
+          .col-md-6.form-group
+            = f.label :last_name
+            = f.text_field :last_name, required: true, :class => 'form-control form-control-md'
+            span.help-block.with-errors
+          .col-md-12.form-group
+            = f.label :email
+            = f.email_field :email, required: true, autocomplete: :off, :class => 'form-control form-control-md'
+            span.help-block.with-errors#error-email
+          .col-md-6.form-group
+            = f.label :password
+            = f.password_field :password, :id => 'sign-up-password', required: true, autocomplete: :off, :class => 'form-control form-control-md', 'data-minlength' => '6', 'data-minlength-error' => 'Password is too short (minimum is 6 characters)'
+            span.help-block.with-errors
+          .col-md-6.form-group
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation, required: true, autocomplete: :off, :class => 'form-control form-control-md', 'data-match' => '#sign-up-password', 'data-match-error' => 'Password fields must match.'
+            span.help-block.with-errors
+          .col-md-12.btn-wrap.text-center		
+            = f.submit 'REGISTER NOW', class: 'btn btn-black'
+            = link_to fb_auth_path(spree_user_return_to: return_path), class: 'link-btn'	
+              span.cta-link-alt		
+                span Register with		
+                span.copy-highlight FACEBOOK
+
+      #tab-login.tab-pane
+        h2.title.text-center Login with your account
+        - login_path = spree.spree_user_session_path(site_version: current_site_version.try(:code))
+        = form_for :spree_user, :url => login_path , remote: true , :html => {:'data-type' => 'json', :class => 'row js-membership js-membership-login'} do |f|
+          .col-md-6.col-md-offset-3.form-group
+            = render :partial =>'shared/redesign/flash_messages', flash: flash
+          .col-md-6.col-md-offset-3.form-group
+            = f.label :email
+            = f.email_field :email, class: 'title', tabindex: 1, :class => 'form-control form-control-md', type: 'email', required: true
+            span.help-block.with-errors
+          .col-md-6.col-md-offset-3.form-group
+            = f.label :password
+            = f.password_field :password, class: 'title', tabindex: 2, :class => 'form-control form-control-md', required: true
+          .col-md-6.col-md-offset-3.btn-wrap.text-center		
+            = f.submit 'LOGIN', class: 'btn btn-black'
+            = link_to fb_auth_path(spree_user_return_to: return_path), class: 'link-btn'	
+              span.cta-link-alt		
+                span Login with		
+                span.copy-highlight FACEBOOK
+                
+javascript:
+  $(document).ready(function() {
+    function redirectToCreateWeddingBoard() {
+      window.location.replace('#{edit_wedding_moodboard_path}');
+    };
+  
+    $('.js-membership').validator();
+    
+    $('.js-membership-login').on('ajax:success', function(event, data, status, xhr) {
+      var emailError = $(this).find('#error-email');
+      if (data["error"] === true) {
+        emailError.text('Incorrect login credentials').show();
+      } else {
+        emailError.hide();
+        redirectToCreateWeddingBoard();
+      }
+    });
+
+    $('.js-membership-signup').on('ajax:success', function(event, data, status, xhr) {
+      var emailError = $(this).find('#error-email');
+      if (data['status'] === 'ok') {
+        emailError.hide();
+        redirectToCreateWeddingBoard();
+      } else if ((data !== null ? (data['messages']) !== null ? data['messages']['email'] : void 0 : void 0) !== null) {
+        emailError.text('Sorry !, email has already been taken !!!').show();
+      } else if (data['status'] === 'fail') {
+        emailError.text('Please fill all fields , password and password confirmation must match !!!').show();
+      }
+    });
+  });

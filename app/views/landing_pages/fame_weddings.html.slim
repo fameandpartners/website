@@ -1,0 +1,137 @@
+= render partial: '/pages/robots'
+
+.page-content
+  .landing-famingtonway
+    .hero-wrap
+      .media-wrap.keep-ratio
+        .inner-wrap
+          img src='#{image_path("landingpages/famingtonway/hero-full.jpg")}' alt='background image'
+      .title-wrap.text-center
+        .inner-wrap
+          h1.title The Wedding Planner
+    section.container.section-full
+      .row
+        .col-md-12.heading-overlay-wrapper
+          h3.heading-overlay Fame weddings
+
+    .js-section-landingpage
+      section.container.section-full
+        .row
+          .col-md-12.text-center
+            h2.title Plan your big day with Fame <br> Gather your girls and let the fun begin.
+            ul
+              li
+                em Save
+                |  dresses to a moodboard
+              li
+                em Comment
+                |  on your choices
+              li
+                em Share
+                |  with your bridal party
+              li
+                em Vote
+                |  on the ones you love
+            - if !spree_current_user
+              a.btn-md.btn-featured.js-show-login href='javascript:;'
+                | Start building your
+                span.copy-highlight  Moodboard
+            - else
+              = link_to edit_wedding_moodboard_path, class: 'btn-md btn-featured'
+                | Start building your
+                span.copy-highlight  Moodboard
+                
+      section.container.section-box
+        .row.hidden-md.hidden-lg
+          .col-md-12
+            h2.title.text-center <em>Using</em> the Moodboard
+        .row
+          .col-md-12.heading-overlay-wrapper
+            h3.heading-overlay How it works
+        .same-height-cols
+          .row
+            .col-md-4
+              .item.bordered
+                .media-wrap
+                  = image_tag 'landingpages/famingtonway/how-it-works-1.jpg'
+                .step 1
+                .item-copy
+                  h3
+                    em Sign up
+                    |  and answer a few simple questions about your wedding day plans
+
+            .col-md-4
+              .item.bordered
+                .media-wrap
+                  = image_tag 'landingpages/famingtonway/how-it-works-2.jpg'
+                .step 2
+                .item-copy
+                  h3
+                    em Create
+                    |  as many boards as you like and add your favourite dresses to them
+
+            .col-md-4
+              .item.bordered
+                .media-wrap
+                  = image_tag 'landingpages/famingtonway/how-it-works-3.jpg'
+                .step 3
+                .item-copy
+                  h3
+                    em Share
+                    |  your board with you bridal party so they can vote on favourites
+
+      section.container.section-box
+        .row
+          .col-md-12
+            .panel-split.alt.mobile-change-order
+              .content-wrap-outer.position-2
+                .content-wrap-inner
+                  .content-wrap
+                    h2.section-heading
+                      em Our 
+                      | gift to you:
+                    p When you choose Fame and Partners to dress your Maid of Honor and bridesmaids, everyone saves.
+                    = link_to build_taxon_path('bridesmaid'), class: 'btn-xs btn-featured'
+                      | Shop
+                      span.copy-highlight BRIDESMAID DRESSES
+              .media-wrap.position-1
+                = image_tag 'landingpages/famingtonway/tile-1.jpg'
+
+      section.container.section-box.section-full-split
+        .row
+          .col-md-12.heading-overlay-wrapper
+            h3.heading-overlay Wedding Concierge
+          .col-md-12
+            .outer-wrap
+              .col-md-6
+                .media-wrap
+                  = image_tag 'landingpages/famingtonway/tile-2.jpg'
+              .col-md-6
+                h2 <em>Receive</em> a group discount code to purchase your selected Bridal Party dresses.
+                p LA’s premiere stylist, Amber Bond, is here to help you and your bridal party customize and style each look for the big day—absolutely free.
+                = link_to styling_session_path, class: 'inline-btn'
+                  span.btn-xs.btn-featured
+                    | Book your
+                    span.copy-highlight STYLING SESSION
+
+      section.container.section-box
+        .row
+          .col-md-12.text-center
+            - if !spree_current_user
+              a.btn-md.btn-featured.js-show-login href='javascript:;'
+                | Start building your
+                span.copy-highlight  Moodboard
+            - else
+              = link_to edit_wedding_moodboard_path, class: 'btn-md btn-featured'
+                | Start building your
+                span.copy-highlight  Moodboard
+
+  - if !spree_current_user
+    .container.hidden.js-section-login
+      = render 'moodboards/weddings/signup_login', return_path: bridesmaid_landing_page_path
+      
+javascript:
+  $('.js-show-login').on('click', function() {
+    $('.js-section-login').removeClass('hidden');
+    $('.js-section-landingpage').addClass('hidden');
+  });

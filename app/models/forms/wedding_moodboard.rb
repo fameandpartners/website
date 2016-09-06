@@ -24,6 +24,22 @@ module Forms
           "Looking for someone special"
         ]
       end
+
+      def no_of_bridesmaids
+        [
+          "Choose an option",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+        ]
+      end
     end
     include SharedSelectionData
     extend SharedSelectionData
@@ -40,5 +56,3 @@ module Forms
     validates :bride_first_name,   presence: true
   end
 end
-
-

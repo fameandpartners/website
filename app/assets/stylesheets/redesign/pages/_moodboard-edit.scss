@@ -1,35 +1,190 @@
 /* [Moodboard Edit]
 -------------------------------------------------------*/
-.moodboard-v2-edit {
-  margin-top: 40px;
+.moodboard-edit {
 
-  .title-line-on-sides {
-    margin: 0;
+  .hero-wrap {
+    position: relative;
+    color: $c-neutral-white;
+
+    .media-wrap {
+      min-height: 50px;
+      padding-bottom: 24%;
+      overflow: hidden;
+    }
+
   }
 
-  .media-wrap {
-    margin-top: -14px;
-  }
+  .title-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 
-  form {
-    margin-top: 30px;
-    @extend %cfix;
-  }
+    .inner-wrap {
+      display: table;
+      width: 100%;
+      height: 100%;
+    }
 
-  @media (max-width: $bootstrap-md-width - 1px) {
+    .title {
+      display: table-cell;
+      vertical-align: middle;
+      margin: 0;
 
-    & {
-
-      .media-wrap {
-        margin-top: 20px;
-      }
-
-      .btn {
-        width: 100%;
+      span {
+        display: block;
+        font-size: 2.4rem;
       }
 
     }
 
   }
+
+  .questions-count {
+    margin: 60px 0 0;
+    font-size: 0.875em;
+  }
+
+  .progress {
+    height: 20px;
+  }
+
+  .progress-bar {
+    line-height: 20px;
+  }
+
+  .section-full {
+    margin-top: 0;
+
+    .heading-overlay {
+      top: -14px;
+      bottom: 0;
+    }
+
+    .title:first-child {
+      margin-top: 40px;
+    }
+
+    .title:last-child {
+      margin-bottom: 40px;
+    }
+
+  }
+
+  .tabs-horizontal {
+    padding-top: 40px;
+  }
+
+  .btn-wrap {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: solid $c-neutral-2 2px;
+  }
+
+  .color-swatch {
+    display: block;
+    margin-bottom: 15px;
+    cursor: pointer;
+    @extend %cfix;
+
+    .swatch {
+      float: left;
+      width: 30px;
+      height: 30px;
+    }
+
+    .copy {
+      float: left;
+      margin-left: 10px;
+      line-height: 30px;
+      font-weight: normal;
+    }
+
+    input {
+      display: none;
+
+      &:checked + .copy {
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
+    }
+
+  }
+
+  .invited-member {
+    position: relative;
+    margin-bottom: 30px;
+    padding-right: 30px;
+
+    .member-name {
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .member-role {
+      font-style: italic;
+      line-height: 1;
+    }
+
+    .btn-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+  }
+
+  .link-btn {
+    display: block;
+    margin-bottom: 30px;
+  }
+
+  .custom-form-element {
+    display: inline-block;
+    margin: 0 15px;
+
+    label {
+      font-weight: normal;
+    }
+
+  }
+
+  // START - Mobile Specific Styling
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .title-wrap .title {
+      font-size: 3.2rem;
+
+      span {
+        display: none;
+      }
+
+    }
+
+    .link-btn {
+      text-align: center;
+    }
+
+    .btn-block {
+      margin-bottom: 30px;
+    }
+
+    .custom-form-element {
+      margin: 0 10px;
+
+      label {
+        font-size: 0.75em;
+      }
+
+      .icon {
+        margin-right: 5px;
+      }
+
+    }
+
+  }
+  // END - Mobile Specific Styling
 
 }
