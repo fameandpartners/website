@@ -19,7 +19,7 @@ module Operations
       end
 
       fill_order_details
-      order.save
+      order.save!
       finalize_order
       create_inventory_units
       adjust_price
