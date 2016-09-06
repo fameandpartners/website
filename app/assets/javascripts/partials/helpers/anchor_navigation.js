@@ -26,7 +26,8 @@
       offsetTargetPadding = 70,
       mobileTargetOffset = offsetTargetPadding/2,
       desktopTargetOffset = offsetTargetPadding*2,
-      mdScreenWidth = 992,
+      // That's the safest width to handle the md viewport without glitches
+      mdScreenWidth = 977,
       horizontalNavLocal = $('.local-navigation .nav'),
       verticalNavLocal = $('.local-navigation-vertical');
 
@@ -58,7 +59,7 @@
     if ($(".local-navigation-vertical .nav").length) {
       $('.js-hashlink').css({'height': (offsetTargetPadding)+'px', 'margin-top': -(offsetTargetPadding)+'px'});
     } else if ($(".local-navigation .nav").length) {
-      if ( $(window).width() < mdScreenWidth ) {
+      if ( $(window).innerWidth() < mdScreenWidth ) {
         $('.js-hashlink').css({'height': '0px', 'margin-bottom': -(mobileTargetOffset)+'px'});
       } else {
         $('.js-hashlink').css({'height': (desktopTargetOffset)+'px', 'margin-top': -(desktopTargetOffset)+'px'});
@@ -125,7 +126,7 @@
         renderSlick();
       }
 
-      if ( $(window).width() < mdScreenWidth ) {
+      if ( $(window).innerWidth() < mdScreenWidth ) {
         // Add scrollspy trigger
         // If this is a mobile device we don't worry about the fixed header's height for the top offset
         $('body').scrollspy({ target: '.local-navigation-wrapper', offset: (mobileTargetOffset) });
@@ -146,7 +147,7 @@
 
         // Checking if it is a mobile device...
         // Mobile: attach the local menu to the bottom
-        if( $(window).width() < mdScreenWidth ) {
+        if( $(window).innerWidth() < mdScreenWidth ) {
 
           $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile');
 
@@ -209,9 +210,25 @@
       $(window).delay(250).on("resize", function() {
 
         // If we're on mobile add proper styling to the local navigation
-        if ( $(window).width() < mdScreenWidth ) {
+        if ( $(window).innerWidth() <= mdScreenWidth ) {
           $('.js-float-menu-on-scroll').removeClass('fixed-nav').css({'top': ''});
           $('.local-navigation-wrapper .js-float-menu-on-scroll').addClass('fixed-nav-mobile');
+
+          // Vertical navigation
+          // Render as a carousel on page load (desktop and mobile)
+          if (verticalNavLocal.length) {
+            verticalNavLocal.addClass('fixed-nav-mobile');
+            renderSlick();
+          }
+
+        } else {
+
+          // Desktop: remove carousel from vertical navigation
+          verticalNavLocal.removeClass('fixed-nav-mobile');
+          if (verticalNavLocal.find('.nav').hasClass('slick-initialized')) {
+            verticalNavLocal.find('.nav').slick('unslick');
+          }
+
         }
 
         // Go to menu item when resize is finished
@@ -256,7 +273,7 @@
         // Reset our on-page-load anchor target helper
         if ($('.js-hashlink').length)
           if ($(".local-navigation .nav").length) {
-            if ( $(window).width() < mdScreenWidth ) {
+            if ( $(window).innerWidth() < mdScreenWidth ) {
               $('.js-hashlink').css({'height': '0px', 'margin-bottom': -(mobileTargetOffset)+'px'});
             } else {
               $('.js-hashlink').css({'height': '0px', 'margin-top': offsetTargetPadding+'px'});
@@ -283,7 +300,7 @@
         }
 
         // Define the top offset for our anchor navigation, based on screen size
-        if ($(window).width() < mdScreenWidth) {
+        if ($(window).innerWidth() < mdScreenWidth) {
           offsetNavHeight = offsetClickFromLocalNav;
         } else {
           offsetNavHeight = sitewideHeaderHeight+offsetClickFromLocalNav;
