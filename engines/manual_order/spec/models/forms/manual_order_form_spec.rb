@@ -48,11 +48,10 @@ describe Forms::ManualOrderForm do
 
     describe 'creates falsey order' do
       it { expect { manual_order.save_order(false_params) }.to raise_error ActiveRecord::RecordNotFound }
+    end
 
-      it 'creates new order without customer (no state)' do
-        new_order = manual_order.save_order(correct_params.merge(state: ''))
-        expect(new_order.user).to be_nil
-      end
+    describe 'creates new order without customer (no state)' do
+        it { expect { manual_order.save_order(correct_params.merge(state: '')) }.to raise_error ActiveRecord::RecordInvalid }
     end
 
     describe 'creates truthy order' do
