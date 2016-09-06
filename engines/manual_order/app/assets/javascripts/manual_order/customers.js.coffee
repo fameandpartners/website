@@ -41,11 +41,6 @@ $ ->
         country.val(data.country_id)
         zipcode.val(data.zipcode)
         phone.val(data.phone)
-
-#        switch $('#forms_manual_order_country option:selected').text()
-#          when 'Australia' then refreshStates(states_au, true)
-#          when 'United States' then refreshStates(states_us, true)
-#          when 'Canada' then refreshStates(states_ca, true)
         refreshStates(true)
         state.val(data.state_id)
         updateCountryAndState()
@@ -62,11 +57,6 @@ $ ->
       refreshStates(false)
     else
       clearStates()
-#    switch
-#      when 'Australia' then refreshStates(states_au, false)
-#      when 'United States' then refreshStates(states_us, false)
-#      when 'Canada' then refreshStates(states_ca, false)
-#      else clearStates()
     updateStates()
 
   refreshStates = (status) ->

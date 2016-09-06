@@ -33,7 +33,6 @@ $(document).ready ->
             value.country.name
           )
           return countries_with_states_arr.includes(country_name)
-#          return true if _.include(['Australia', 'United States', 'Canada'], country)
       'forms_manual_order[zipcode]':
         required: '#customer_new:checked'
       'forms_manual_order[phone]':

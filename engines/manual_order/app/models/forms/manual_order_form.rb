@@ -39,22 +39,6 @@ module Forms
         .to_json(include:{states: {only: [:id,:name]}}, only: [:id, :name])
     end
 
-    def states
-      @states ||= Spree::Country.where(iso: 'US').first.states
-    end
-
-    def states_us
-      @states_us ||= states.map {|s| {id: s.id, name: s.name}}
-    end
-
-    def states_ca
-      @states_ca ||= Spree::Country.where(iso: 'CA').first.states.map {|s| {id: s.id, name: s.name}}
-    end
-
-    def states_au
-      @states_au ||= Spree::Country.where(iso: 'AU').first.states.map {|s| {id: s.id, name: s.name}}
-    end
-
     def customers
       user_ids = Spree::Order.complete.select('DISTINCT user_id').limit(10).pluck(:user_id)
       @customers ||= Spree::User.where(id: user_ids).limit(10).map {|u| [u.id, u.full_name]}
