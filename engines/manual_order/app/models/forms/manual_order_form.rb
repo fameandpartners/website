@@ -34,6 +34,11 @@ module Forms
       @countries ||= Spree::Country.select([:id, :name]).order(order_cond).map {|c| [c.id, c.name]}
     end
 
+    def countries_with_states
+      Spree::Country.where(id: Spree::State.pluck(:country_id).uniq)
+        .to_json(include:{states: {only: [:id,:name]}}, only: [:id, :name])
+    end
+
     def states
       @states ||= Spree::Country.where(iso: 'US').first.states
     end

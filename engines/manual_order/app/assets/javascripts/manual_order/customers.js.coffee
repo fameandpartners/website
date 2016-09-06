@@ -42,11 +42,11 @@ $ ->
         zipcode.val(data.zipcode)
         phone.val(data.phone)
 
-        switch $('#forms_manual_order_country option:selected').text()
-          when 'Australia' then refreshStates(states_au, true)
-          when 'United States' then refreshStates(states_us, true)
-          when 'Canada' then refreshStates(states_ca, true)
-
+#        switch $('#forms_manual_order_country option:selected').text()
+#          when 'Australia' then refreshStates(states_au, true)
+#          when 'United States' then refreshStates(states_us, true)
+#          when 'Canada' then refreshStates(states_ca, true)
+        refreshStates(true)
         state.val(data.state_id)
         updateCountryAndState()
     else
@@ -54,15 +54,27 @@ $ ->
       updateCountryAndState()
 
   country.on 'change', =>
-    switch $('#forms_manual_order_country option:selected').text()
-      when 'Australia' then refreshStates(states_au, false)
-      when 'United States' then refreshStates(states_us, false)
-      when 'Canada' then refreshStates(states_ca, false)
-      else clearStates()
+    country_name = $('#forms_manual_order_country option:selected').text()
+    countries_with_states_arr = countries_with_states.map((value, _) ->
+      value.country.name
+    )
+    if countries_with_states_arr.includes(country_name)
+      refreshStates(false)
+    else
+      clearStates()
+#    switch
+#      when 'Australia' then refreshStates(states_au, false)
+#      when 'United States' then refreshStates(states_us, false)
+#      when 'Canada' then refreshStates(states_ca, false)
+#      else clearStates()
     updateStates()
 
-  refreshStates = (states, status) ->
+  refreshStates = (status) ->
     state.html('<option></option>')
+    country_name = $('#forms_manual_order_country option:selected').text()
+    states = countries_with_states.find((value, _) ->
+      return value.country.name == country_name
+    ).country.states
     $.each states, (index, el) =>
       state.append $('<option>').attr('value', el.id).text(el.name)
     state.attr('disabled', status)

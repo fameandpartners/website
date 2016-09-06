@@ -28,8 +28,12 @@ $(document).ready ->
         required: '#customer_new:checked'
       'forms_manual_order[state]':
         required: (el) ->
-          country = $('#forms_manual_order_country option:selected').text()
-          return true if _.include(['Australia', 'United States', 'Canada'], country)
+          country_name = $('#forms_manual_order_country option:selected').text()
+          countries_with_states_arr = countries_with_states.map((value, _) ->
+            value.country.name
+          )
+          return countries_with_states_arr.includes(country_name)
+#          return true if _.include(['Australia', 'United States', 'Canada'], country)
       'forms_manual_order[zipcode]':
         required: '#customer_new:checked'
       'forms_manual_order[phone]':
