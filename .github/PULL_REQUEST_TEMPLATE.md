@@ -1,10 +1,14 @@
 # Please, Review the Following
 
-- branch's name **MUST HAVE** JIRA's ticket reference (e.g `feat/awesome-feature-WEBSITE-123123`)
-- You **SHOULD** add reviewers to your PR
-  - More information on `https://github.com/aergonaut/cody#usage`
-- PR name must have a clear description
-- Explain the changes you made here.
-- You can add screenshots, notes or whatever you want to explain the changes you are making
+- [REQUIRED] branch's name **MUST HAVE** JIRA's ticket reference (e.g `feat/awesome-feature-WEBSITE-123`)
+- [REQUIRED] PR name **MUST HAVE** a clear description and JIRA ticket reference (e.g. `[Fix][WEBSITE-123] Sitemap bug finally solved`
+- [REQUIRED] You **MUST** add reviewers to your PR
+- [REQUIRED] Explain the changes you made here.
+  - You can add screenshots or notes to explain the changes you are making
 
 For more information, refer to https://github.com/fameandpartners/website/#contributing
+
+## Reviewers List
+
+- [ ] @ reviewer 1
+- [ ] @ reviewer 2
