@@ -35,7 +35,8 @@ module Forms
     end
 
     def countries_with_states
-      Spree::Country.where(id: Spree::State.pluck(:country_id).uniq)
+      country_ids = Spree::State.uniq(:country_id).pluck(:country_id)
+      Spree::Country.where(id: country_ids).includes(:states)
         .to_json(include:{states: {only: [:id,:name]}}, only: [:id, :name])
     end
 

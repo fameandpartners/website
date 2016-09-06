@@ -61,9 +61,9 @@ $ ->
 
   refreshStates = (status) ->
     state.html('<option></option>')
-    country_name = $('#forms_manual_order_country option:selected').text()
+    countryName = $('#forms_manual_order_country option:selected').text()
     states = countriesWithStates.find((value, _) ->
-      return value.country.name == country_name
+      return value.country.name == countryName
     ).country.states
     $.each states, (index, el) =>
       state.append $('<option>').attr('value', el.id).text(el.name)
