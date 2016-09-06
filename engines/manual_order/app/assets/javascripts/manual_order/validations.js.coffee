@@ -1,4 +1,14 @@
 $(document).ready ->
+
+  $.validator.addMethod 'stateCheck', ((value, element) ->
+    country_name = $('#forms_manual_order_country option:selected').text()
+    countries_with_states_arr = countries_with_states.map((value, _) ->
+      value.country.name
+    )
+
+    countries_with_states_arr.includes(country_name) && $('#forms_manual_order_state').val() != ''
+  ), 'State should be specified'
+
   $('#new_forms_manual_order').validate
     ignore: ":hidden:not(select), .chosen-search input"
     debug: true
@@ -13,6 +23,7 @@ $(document).ready ->
         required: true
       'forms_manual_order[existing_customer]':
         required: '#customer_existing:checked'
+        stateCheck: true
       'forms_manual_order[email]':
         required: '#customer_new:checked'
         email: true
