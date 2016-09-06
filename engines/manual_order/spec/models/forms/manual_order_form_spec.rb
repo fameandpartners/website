@@ -46,15 +46,15 @@ describe Forms::ManualOrderForm do
 
     let(:manual_order) { described_class.new(Spree::Order.new) }
 
-    describe 'creates falsey order' do
+    describe 'tries to create an order with invalid params' do
       it { expect { manual_order.save_order(false_params) }.to raise_error ActiveRecord::RecordNotFound }
     end
 
-    describe 'creates new order without customer (no state)' do
+    describe 'tries to create an order without state in the address' do
         it { expect { manual_order.save_order(correct_params.merge(state: '')) }.to raise_error ActiveRecord::RecordInvalid }
     end
 
-    describe 'creates truthy order' do
+    describe 'creates an order with valid params' do
 
       let(:created_order) { manual_order.save_order(correct_params) }
 
