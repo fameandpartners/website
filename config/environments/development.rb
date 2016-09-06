@@ -60,5 +60,15 @@ FameAndPartners::Application.configure do
   # Force React-Rails components to be reloaded on Dev mode.
   config.watchable_dirs.merge!( { Rails.root.join("/app/assets/javascripts/**/*.jsx.*") => ['jsx']})
 
+  # Oink
   Rails.application.middleware.use( Oink::Middleware, :logger => Rails.logger )
+
+  # Bullet
+  config.after_initialize do
+    Bullet.enable        = ENV.fetch('BULLET_ENABLE', 'false') == 'true'
+    Bullet.bullet_logger = true
+    Bullet.console       = true
+    Bullet.rails_logger  = true
+    Bullet.add_footer    = true
+  end
 end

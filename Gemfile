@@ -136,6 +136,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.2'
   gem 'puma'
   gem 'meta_request'
+  gem 'bullet'
   gem 'foreman', require: false
 end
 
