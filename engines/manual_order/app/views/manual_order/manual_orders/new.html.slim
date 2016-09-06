@@ -1,5 +1,5 @@
 javascript:
-  var countries_with_states = #{manual_order_form.countries_with_states.to_s.html_safe};
+  var countriesWithStates = #{manual_order_form.countries_with_states.to_s.html_safe};
 
 .pages.wrapper.wrapper-content
   = simple_form_for manual_order_form, url: manual_orders_path, html: { class: "form-horizontal"} do |f|

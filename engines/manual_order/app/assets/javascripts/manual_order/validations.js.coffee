@@ -1,12 +1,12 @@
 $(document).ready ->
 
-  countries_with_states_arr = countries_with_states.map((value, _) ->
+  countriesWithStatesArr = countriesWithStates.map((value, _) ->
     value.country.name
   )
 
   $.validator.addMethod 'stateCheck', ((value, element) ->
     country_name = $('#forms_manual_order_country option:selected').text()
-    countries_with_states_arr.includes(country_name) && $('#forms_manual_order_state').val() != ''
+    countriesWithStatesArr.includes(country_name) && $('#forms_manual_order_state').val() != ''
   ), 'State should be specified'
 
   $('#new_forms_manual_order').validate
@@ -39,8 +39,8 @@ $(document).ready ->
         required: '#customer_new:checked'
       'forms_manual_order[state]':
         required: (el) ->
-          country_name = $('#forms_manual_order_country option:selected').text()
-          countries_with_states_arr.includes(country_name)
+          countryName = $('#forms_manual_order_country option:selected').text()
+          countriesWithStatesArr.includes(countryName)
       'forms_manual_order[zipcode]':
         required: '#customer_new:checked'
       'forms_manual_order[phone]':

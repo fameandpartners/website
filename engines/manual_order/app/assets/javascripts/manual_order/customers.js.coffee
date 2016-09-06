@@ -49,11 +49,11 @@ $ ->
       updateCountryAndState()
 
   country.on 'change', =>
-    country_name = $('#forms_manual_order_country option:selected').text()
-    countries_with_states_arr = countries_with_states.map((value, _) ->
+    countryName = $('#forms_manual_order_country option:selected').text()
+    countriesWithStatesArr = countriesWithStates.map((value, _) ->
       value.country.name
     )
-    if countries_with_states_arr.includes(country_name)
+    if countriesWithStatesArr.includes(countryName)
       refreshStates(false)
     else
       clearStates()
@@ -62,7 +62,7 @@ $ ->
   refreshStates = (status) ->
     state.html('<option></option>')
     country_name = $('#forms_manual_order_country option:selected').text()
-    states = countries_with_states.find((value, _) ->
+    states = countriesWithStates.find((value, _) ->
       return value.country.name == country_name
     ).country.states
     $.each states, (index, el) =>
