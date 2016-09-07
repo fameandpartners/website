@@ -34,3 +34,4 @@ Feature: Create manual orders
     Then I should see correct user data prefilled
     And I click on "Complete Order and Send for Manufacturing" button
     Then I should get right order results
+    Then I should see "has been created successfully"
