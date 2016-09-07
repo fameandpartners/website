@@ -8,7 +8,7 @@ $(document).ready ->
 
     $.validator.addMethod 'stateCheck', ((value, element) ->
       countryName = $('#forms_manual_order_country option:selected').text()
-      countriesWithStatesArr.includes(countryName) && $('#forms_manual_order_state').val() != ''
+      _.include(countriesWithStatesArr, countryName) && $('#forms_manual_order_state').val() != ''
     ), 'State should be specified'
 
     $('#new_forms_manual_order').validate

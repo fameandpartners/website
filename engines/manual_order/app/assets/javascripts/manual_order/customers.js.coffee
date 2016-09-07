@@ -50,10 +50,10 @@ $ ->
 
   country.on 'change', =>
     countryName = $('#forms_manual_order_country option:selected').text()
-    countriesWithStatesArr = countriesWithStates.map((value, _) ->
+    countriesWithStatesArr = _.map(countriesWithStates, (value) ->
       value.country.name
     )
-    if countriesWithStatesArr.includes(countryName)
+    if _.include(countriesWithStatesArr, countryName)
       refreshStates(false)
     else
       clearStates()
@@ -62,9 +62,10 @@ $ ->
   refreshStates = (status) ->
     state.html('<option></option>')
     countryName = $('#forms_manual_order_country option:selected').text()
-    states = countriesWithStates.find((value, _) ->
+    states = _.find(countriesWithStates, (value) ->
       return value.country.name == countryName
     ).country.states
+
     $.each states, (index, el) =>
       state.append $('<option>').attr('value', el.id).text(el.name)
     state.attr('disabled', status)
