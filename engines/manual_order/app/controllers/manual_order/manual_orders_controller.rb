@@ -29,7 +29,7 @@ module ManualOrder
        order = manual_order_form.save { |hash| manual_order_form.save_order(hash) }
 
        flash[:success] = "Order " \
-                          "#{view_context.link_to order.number, spree.admin_order_path(id: order.number)} " \
+                          "#{view_context.link_to order.number, spree.admin_order_path(order.number)} " \
                           "has been created successfully".html_safe
        redirect_to manual_orders_path
      end
