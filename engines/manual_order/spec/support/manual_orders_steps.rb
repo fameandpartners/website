@@ -98,6 +98,8 @@ module Acceptance
       expect(created_order.adjustment_total).to eq(-10)
       expect(created_order.adjustments.last.amount).to eq(-10.0)
       expect(created_order.adjustments.last.label).to eq('PROMO')
+
+      expect(page).to have_content(created_order.number)
     end
 
     private
