@@ -17,14 +17,17 @@
 
   .price {
     margin: 4px 0;
-    font-size: 1rem;
     display: block;
     text-align: center;
   }
 
   .details {
-    font-size: 1.1rem;
     margin: 20px 0 15px;
+  }
+
+  .price,
+  .details {
+    font-size: 1.2rem;
   }
 
 }
