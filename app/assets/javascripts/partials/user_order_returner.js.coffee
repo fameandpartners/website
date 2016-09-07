@@ -12,7 +12,7 @@ window.page.UserOrderReturner = class UserOrderReturner
     $('.return-action').change ->
       v = $(this).val();
       $p = $(this).parent()
-      if v == "keep"
+      if v == "Keep"
         $p.find('.return-reason-container').hide()
         $p.find('.return-reason-category-container').hide()
       else
