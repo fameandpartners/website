@@ -102,7 +102,7 @@
               breakpoint: mdScreenWidth,
               settings: {
                 mobileFirst: true,
-                slidesToShow: 3,
+                slidesToShow: 2,
                 slidesToScroll: 2
               }
             }
