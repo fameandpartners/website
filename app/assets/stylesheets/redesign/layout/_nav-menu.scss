@@ -151,7 +151,7 @@
   .nav li {
     letter-spacing: 0.7px;
 
-    .icon {
+    a .icon {
       opacity: 0;
     }
 
@@ -169,7 +169,7 @@
 
   }
 
-  .nav.arrow-when-active .active a {
+  .nav.arrow-when-active:not(.slick-initialized) .active a {
     text-decoration: none;
 
     .icon {
