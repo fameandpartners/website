@@ -19,7 +19,7 @@ module Operations
       end
 
       fill_order_details
-      order.save
+      order.save!
       finalize_order
       create_inventory_units
       adjust_price
@@ -118,7 +118,7 @@ module Operations
         email: params[:email]
       }
 
-      addr.merge!({state_name: 'no state'}) if params[:state].nil?
+      addr.merge!({state_name: 'no state'}) unless params[:state].present?
       addr
     end
 
