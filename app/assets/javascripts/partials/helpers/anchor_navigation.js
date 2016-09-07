@@ -1,6 +1,8 @@
 'use strict';
 (function ($) {
 
+  // TODO: Split all of this into 2 separate files
+
   function slickNavLocalGoTo($selectorNavLocal) {
 
     // Go to target item in local navigation, according to the current anchor
