@@ -26,9 +26,12 @@ module ManualOrder
 
     def create
      if manual_order_form.validate(params[:forms_manual_order])
-       manual_order_form.save { |hash| manual_order_form.save_order(hash) }
+       order = manual_order_form.save { |hash| manual_order_form.save_order(hash) }
 
-       redirect_to manual_orders_path, flash: { success: 'Order has been created successfully' }
+       flash[:success] = "Order " \
+                          "#{view_context.link_to order.number, spree.admin_order_path(id: order.number)} " \
+                          "has been created successfully".html_safe
+       redirect_to manual_orders_path
      end
     end
 
