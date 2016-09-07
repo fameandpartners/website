@@ -12,7 +12,7 @@ window.page.UserOrderReturner = class UserOrderReturner
     $('.return-action').change ->
       v = $(this).val();
       $p = $(this).parent()
-      if v == "Keep"
+      if String(v).toLowerCase() == "keep"
         $p.find('.return-reason-container').hide()
         $p.find('.return-reason-category-container').hide()
       else
@@ -39,7 +39,7 @@ window.page.UserOrderReturner = class UserOrderReturner
       for item in items
         type = $('.return-action',$(item)).val()
         reason = $('.return-reason-category',$(item)).val()
-        if type == 'Return' && reason == ''
+        if String(type).toLowerCase() == 'return' && reason == ''
           e.preventDefault()
           alert('You must select a reason for return')
           return
