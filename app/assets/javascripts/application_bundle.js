@@ -176,7 +176,7 @@ var CtaPrice = function (_React$Component) {
           PRICE
         ),
         function () {
-          if (_this2.props.siteVersion === "Australia") {
+          if (_this2.props.siteVersion === "Australia" && _this2.props.flags.afterpay) {
             return _react2.default.createElement(
               'div',
               { className: 'afterpay-message' },
@@ -309,6 +309,7 @@ CtaPrice.propTypes = {
   discount: _react.PropTypes.number,
   product: _react.PropTypes.object,
   siteVersion: _react.PropTypes.string,
+  flags: _react.PropTypes.object,
   actions: _react.PropTypes.object.isRequired
 };
 
@@ -318,7 +319,8 @@ function mapStateToProps(state, ownProps) {
     price: state.product.price.price.amount,
     discount: state.discount,
     siteVersion: state.siteVersion,
-    product: state.product
+    product: state.product,
+    flags: state.flags
   };
 }
 
@@ -2315,7 +2317,8 @@ var rootReducer = (0, _redux.combineReducers)({
   lengths: _pdpReducers.lengthReducer,
   skirts: _pdpReducers.skirtChartReducer,
   customize: _pdpReducers.customizeReducer,
-  siteVersion: _pdpReducers.siteVersionReducer
+  siteVersion: _pdpReducers.siteVersionReducer,
+  flags: _pdpReducers.flagsReducer
 });
 
 exports.default = rootReducer;
@@ -2338,6 +2341,7 @@ exports.productPathsReducer = productPathsReducer;
 exports.lengthReducer = lengthReducer;
 exports.skirtChartReducer = skirtChartReducer;
 exports.siteVersionReducer = siteVersionReducer;
+exports.flagsReducer = flagsReducer;
 function customizeReducer() {
   var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   var action = arguments[1];
@@ -2400,6 +2404,13 @@ function skirtChartReducer() {
 }
 
 function siteVersionReducer() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  var action = arguments[1];
+
+  return state;
+}
+
+function flagsReducer() {
   var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   var action = arguments[1];
 

@@ -75,7 +75,7 @@ class CtaPrice extends React.Component {
       <div className="btn-wrap">
         <div className="price">${PRICE}</div>
           {(() => {
-            if(this.props.siteVersion === "Australia") {
+            if(this.props.siteVersion === "Australia" && this.props.flags.afterpay) {
               return (
                 <div className="afterpay-message">
                   <span>or 4 easy payments of ${PRICE / 4} with</span>
@@ -153,6 +153,7 @@ CtaPrice.propTypes = {
   discount: PropTypes.number,
   product: PropTypes.object,
   siteVersion: PropTypes.string,
+  flags: PropTypes.object,
   actions: PropTypes.object.isRequired
 };
 
@@ -162,7 +163,8 @@ function mapStateToProps(state, ownProps) {
     price: state.product.price.price.amount,
     discount: state.discount,
     siteVersion: state.siteVersion,
-    product: state.product
+    product: state.product,
+    flags: state.flags
   };
 }
 

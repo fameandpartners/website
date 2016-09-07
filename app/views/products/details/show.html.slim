@@ -20,7 +20,8 @@ ruby:
       discount: #{ @productDiscount},
       images: #{ @product.all_images.to_json },
       sizeChart: #{ @product.size_chart_data.to_json },
-      siteVersion: #{ @current_site_version.name.to_json }
+      siteVersion: #{ @current_site_version.name.to_json },
+      flags: {afterpay: false}
     };"
     
   init_product_details_page = "page.initProductDetailsPage();"
