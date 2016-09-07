@@ -151,6 +151,10 @@
   .nav li {
     letter-spacing: 0.7px;
 
+    .icon {
+      opacity: 0;
+    }
+
     &.active a,
     a:hover {
       background: none;
@@ -161,6 +165,20 @@
 
     a:focus {
       background: none;
+    }
+
+  }
+
+  .nav.arrow-when-active .active a {
+    text-decoration: none;
+
+    .icon {
+      display: inline-block;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding-left: 2px;
+      opacity: 1;
+      @include transition(all 0.5s ease-in-out);
     }
 
   }

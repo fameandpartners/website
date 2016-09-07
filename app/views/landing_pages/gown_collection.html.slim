@@ -56,15 +56,46 @@
         .local-navigation-vertical.js-float-vertical-menu-on-scroll
           .nav-wrapper
             h4.hidden-sm.hidden-xs The Gown Collection
-            ul.nav
-              li.link = link_to "Introducing Gowns", "#intro"
-              li.link = link_to "The Sophisticate", "#the-sophisticate"
-              li.link = link_to "The True Romantic", "#the-true-romantic"
-              li.link = link_to "The Glamouri", "#the-glamouri"
-              li.link = link_to "The Minimalist", "#the-minimalist"
-              li.link = link_to "The Bohemian", "#the-bohemian"
-              li.link = link_to "The Provocateur", "#the-provocateur"
-              li.link = link_to "The Classically Inclined", "#the-classically-inclined"
+
+            ul.nav.arrow-when-active
+              li.link
+                = link_to "#intro"
+                  | Introducing Gowns
+                  i.icon.icon-arrow-right
+
+              li.link
+                = link_to "#the-sophisticate"
+                  | The Sophisticate
+                  i.icon.icon-arrow-right
+
+              li.link
+                = link_to "#the-true-romantic"
+                  | The True Romantic
+                  i.icon.icon-arrow-right
+
+              li.link
+                = link_to "#the-glamouri"
+                  | The Glamouri
+                  i.icon.icon-arrow-right
+
+              li.link
+                = link_to "#the-minimalist"
+                  | The Minimalist
+                  i.icon.icon-arrow-right
+
+              li.link
+                = link_to "#the-bohemian"
+                  | The Bohemian
+                  i.icon.icon-arrow-right
+
+              li.link
+                = link_to "#the-provocateur"
+                  | The Provocateur
+                  i.icon.icon-arrow-right
+
+              li.link = link_to "#the-classically-inclined"
+                  | The Classically Inclined
+                  i.icon.icon-arrow-right
 
     // Section #2
     - current_dress_name = "Laced Victoria dress"
