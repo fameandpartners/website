@@ -1,6 +1,6 @@
 module Bergen
   module SoapMethods
-    class StyleMasterProductAddByReturnRequestItems < BaseRequest
+    class StyleMasterProductAdd < BaseRequest
       attr_reader :client, :return_request_items
 
       def initialize(savon_client:, return_request_items:)

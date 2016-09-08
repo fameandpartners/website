@@ -1,6 +1,6 @@
 module Bergen
   module SoapMethods
-    class GetStyleMasterProductAddStatusByReturnRequestItem < BaseRequest
+    class GetStyleMasterProductAddStatus < BaseRequest
       attr_reader :client, :return_request_item
       #
       def initialize(savon_client:, return_request_item:)
