@@ -8,7 +8,7 @@
     // Go to target item in local navigation, according to the current anchor
     if ($selectorNavLocal.hasClass('slick-initialized')) {
       var slickTargetPosition = $('.local-navigation-wrapper .nav a').index($('[href="'+window.location.hash+'"]'));
-      $selectorNavLocal.slick( "slickGoTo", parseInt( slickTargetPosition ), false);
+      $selectorNavLocal.slick( "slickGoTo", parseInt( slickTargetPosition ), true);
 
       //remove all active class
       $selectorNavLocal.find('.slick-slide.active').removeClass('active');
