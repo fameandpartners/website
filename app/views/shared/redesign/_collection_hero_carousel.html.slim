@@ -1,6 +1,28 @@
 // HOMEPAGE HERO CAROUSEL
 
 // Carousel Item 1
+= link_to gown_collection_landing_page_path, class: 'main-hero-wrap hero-wrap copy-left white-text', data: { description: 'The Gown Collection' }
+  picture.media-wrap
+    source media='(max-width: 1023px)' srcset='#{image_path('homepage/hero-featured/sept-8-featured-1-mob.jpg')}'
+    source media='(min-width: 1024px)' srcset='#{image_path('homepage/hero-featured/sept-8-featured-1.jpg')}'
+    img src='#{image_path('homepage/hero-featured/sept-8-featured-1.jpg')}' srcset='
+      #{image_path("homepage/hero-featured/sept-8-featured-1-mob.jpg")} 1023w,
+      #{image_path("homepage/hero-featured/sept-8-featured-1.jpg")} 1024w'
+
+  .content-wrap
+    .container
+      .row
+        .col-md-4.col-lg-3
+          .copy-wrap
+            h2.heading.no-margin-md
+              span The Gown Collection.
+              span.sub-heading
+                | The only place where you can co-design the perfect gown. What does yours look like?
+            .cta-wrapper
+              span.btn-md.btn-featured
+                | Find <span class="copy-highlight">YOUR STYLE</span>
+
+// Carousel Item 2
 = link_to it_girl_landing_page_path, class: 'main-hero-wrap hero-wrap copy-left', data: { description: 'The It Girl Collection' }
   picture.media-wrap
     source media='(max-width: 1023px)' srcset='#{image_path('homepage/hero-featured/aug-29-featured-1-mob.jpg')}'
@@ -12,17 +34,17 @@
   .content-wrap
     .container
       .row
-        .col-md-4.col-md-offset-8
+        .col-md-3.col-md-offset-9
           .copy-wrap
             h2.heading.no-margin-md
-              span The It Girl Collection
+              span Modern Classics
               span.sub-heading
                 | The silhouettes you love. The freedom to create a look that's all your own.
             .cta-wrapper
               span.btn-md.btn-featured
                 | Start <span class="copy-highlight">Customizing</span>
 
-// Carousel Item 2
+// Carousel Item 3
 = link_to dress_for_wedding_page_path, class: 'main-hero-wrap hero-wrap copy-left', data: { description: 'Love Blooms Eternal' }
   picture.media-wrap
     source media='(max-width: 1023px)' srcset='#{image_path('homepage/hero-featured/aug-29-featured-2-mob.jpg')}'
@@ -43,25 +65,3 @@
             .cta-wrapper
               span.btn-md.btn-featured
                 | Say <span class="copy-highlight">I do</span>
-
-// Carousel Item 3
-= link_to '/dresses/dress-tate-1120?color=dusk', class: 'main-hero-wrap hero-wrap copy-left', data: { description: 'The New Slip Dress' }
-  picture.media-wrap
-    source media='(max-width: 1023px)' srcset='#{image_path('homepage/hero-featured/aug-29-featured-3-mob.jpg')}'
-    source media='(min-width: 1024px)' srcset='#{image_path('homepage/hero-featured/aug-29-featured-3.jpg')}'
-    img src='#{image_path('homepage/hero-featured/aug-29-featured-3.jpg')}' srcset='
-      #{image_path("homepage/hero-featured/aug-29-featured-3-mob.jpg")} 1023w,
-      #{image_path("homepage/hero-featured/aug-29-featured-3.jpg")} 1024w'
-
-  .content-wrap
-    .container
-      .row
-        .col-md-4.col-md-offset-4.text-center
-          .copy-wrap
-            h2.heading.no-margin-md
-              span The New <br class="hidden-sm hidden-xs">Slip Dress
-              span.sub-heading
-                | A draped neckline takes the slip dress from simple to sultry, just like that.
-            .cta-wrapper
-              span.btn-md.btn-featured
-                | Shop <span class="copy-highlight">the Tate</span>
