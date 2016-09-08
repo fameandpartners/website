@@ -7,18 +7,26 @@
         .media-wrap-outer
           .media-wrap.keep-ratio
             .inner-wrap
-              = link_to it_girl_landing_page_path
+              = link_to gown_collection_landing_page_path
                 = image_tag "lookbook/featured-lookbook.jpg"
         .content-wrap
           .outer-wrap
             .inner-wrap
-              h1.heading.skin-light It Girl Collection
-              = link_to 'View this collection', it_girl_landing_page_path, class: 'btn btn-md btn-black'
+              h1.heading.skin-light Gowns Collection
+              = link_to 'View this collection', gown_collection_landing_page_path, class: 'btn btn-md btn-black'
 
     .col-md-6
-      = link_to weddings_parties_page_path, class: 'panel-highlight media-wrap'
-        = image_tag "lookbook/wedding-parties.jpg"
-        .copy-wrap Wedding & Parties <em><span>View this collection</span></em>
+      = link_to dress_for_wedding_page_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/weddings-collection.jpg"
+        .copy-wrap Weddings Collection <em><span>View this collection</span></em>
+    .col-md-6
+      = link_to dress_for_parties_page_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/parties-collection.jpg"
+        .copy-wrap Parties Collection <em><span>View this collection</span></em>
+    .col-md-6
+      = link_to it_girl_landing_page_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/it-girl-collection.jpg"
+        .copy-wrap It Girl Collection <em><span>View this collection</span></em>
     .col-md-6
       = link_to the_freshly_picked_collection_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/fresh-collection-lookbook.jpg"
@@ -31,14 +39,6 @@
       = link_to partners_in_crime_collection_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/PartnersInCrime-MegaMenu-NewSize.jpg"
         .copy-wrap Partners In Crime <em><span>View this collection</span></em>
-    .col-md-6
-      = link_to just_the_girls_collection_path, class: 'panel-highlight media-wrap'
-        = image_tag "lookbook/JustTheGirls.jpg"
-        .copy-wrap Just The Girls <em><span>View this collection</span></em>
-    .col-md-6
-      = link_to love_lace_collection_path, class: 'panel-highlight media-wrap'
-        = image_tag "lookbook/love-lace-2.jpg"
-        .copy-wrap Love Lace <em><span>View this collection</span></em>
 
     .col-md-12
       h2.title-line-on-sides
