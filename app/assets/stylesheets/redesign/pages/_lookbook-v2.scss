@@ -77,7 +77,7 @@
   }
 
   .cta-product-caption {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .vertical-align-copy {
@@ -86,6 +86,25 @@
 
   .products-grid {
     margin: 70px 0;
+  }
+
+  .product-heading .title {
+    font-size: 1.4rem;
+    font-style: italic;
+    color: $c-neutral-black;
+    margin-bottom: 0;
+  }
+
+  .product-info a {
+    border-bottom: 1px solid $c-neutral-black;
+  }
+
+  &.portrait-template {
+
+    p {
+      font-size: 1.5rem;
+    }
+
   }
 
   @media (min-width: $bootstrap-md-width) {
@@ -108,6 +127,36 @@
 
     }
 
+    &.portrait-template {
+
+      section.intro {
+        margin-top: 0;
+
+        .content-copy {
+          margin-top: -25%;
+        }
+
+      }
+
+      .content-img img {
+        padding: 0 5%;
+      }
+
+      .content-copy {
+        padding-top: 55px;
+      }
+
+      .products-set .category--item:nth-of-type(4) {
+        display: none;
+      }
+
+      .local-navigation-vertical {
+        top: $fixed-header-with-locale-warn;
+        position: fixed;
+      }
+
+    }
+
   }
 
   @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
@@ -115,6 +164,7 @@
     .container-fluid.no-padding.no-margin .vertical-align-copy .content-img {
       padding-right: 15px;
     }
+
 
   }
 
@@ -133,6 +183,7 @@
 
     }
 
+    .cta-wrapper,
     .content-copy {
       text-align: center;
     }
@@ -141,6 +192,7 @@
       font-size: 2.3rem;
     }
 
+    .product-heading-wrap,
     // We currently show 2 columns of products on mobile.
     // To make the grid look better let's hide the last product only if it's an odd item.
     .products-collections .category--item:last-child:nth-child(odd) {
