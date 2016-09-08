@@ -71,8 +71,6 @@
       $('.js-hashlink').css({'height': offsetHeight+'px', 'margin-top': -offsetHeight+'px'});
     }
     window.location.hash = hashVar;
-  } else {
-    window.location.hash = '';
   }
 
   // Check if we have any floating menu in the page
