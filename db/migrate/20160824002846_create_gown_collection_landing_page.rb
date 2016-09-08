@@ -4,7 +4,7 @@ class CreateGownCollectionLandingPage < ActiveRecord::Migration
     {
       path:             '/gown-collection',
       template_path:    '/landing_pages/gown_collection',
-      pids:             %w(1127-ivory 1119-navy 1137-black 918-black 1130-black 1128-black 1099-pale-pink 1096-light-nude 944-tan 1136-navy 632-dark-gold 582-white 1118-black 1129-winter-grey 979-pale-pink 620-white 1111-black 919-black 915-black 897-cherry-red 1123-champagne 1121-navy 903-pale-blue 1110-rosewater-floral 1012-white 1120-dusk 379-navy 1000-black).join(','),
+      pids:             %w(1127-ivory 1119-navy 1137-black 918-black 1130-black 1128-black 1099-pale-pink 1096-light-nude 944-tan 1136-navy 632-dark-gold 582-white 1111-black 919-black 915-black 897-cherry-red 1123-champagne 1121-navy 903-pale-blue 1110-rosewater-floral 1012-white 1120-dusk 379-navy 1000-black 1118-black 1129-winter-grey 979-pale-pink 620-white).join(','),
       limit:            '99',
       heading:          'Gown Collection',
       title:            'Gowns, ball gowns, and formal dresses',
