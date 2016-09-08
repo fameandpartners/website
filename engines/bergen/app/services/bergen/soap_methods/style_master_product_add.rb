@@ -36,7 +36,7 @@ module Bergen
           global_sku = GlobalSku.find_or_create_by_line_item(line_item_presenter: line_item_presenter)
 
           {
-            'Style' => global_sku.style_number,
+            'Style' => global_sku.upc, # UPCs are being sent in place of Style: https://fameandpartners.atlassian.net/browse/WEBSITE-839
             'Color' => global_sku.color_name,
             'Size'  => global_sku.size,
             'UPC'   => global_sku.upc,
