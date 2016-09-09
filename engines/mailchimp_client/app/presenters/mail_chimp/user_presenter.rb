@@ -1,4 +1,4 @@
-module MailChimpClient
+module MailChimp
   class UserPresenter
 
     attr_accessor :user
@@ -7,7 +7,7 @@ module MailChimpClient
       self.user = user
     end
 
-    def read
+    def to_h
       {
         id:            user.id.to_s,
         email_address: user.email,

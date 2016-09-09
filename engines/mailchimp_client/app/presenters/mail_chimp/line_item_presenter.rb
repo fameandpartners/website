@@ -1,19 +1,20 @@
-module MailChimpClient
+module MailChimp
   class LineItemPresenter
 
-    attr_accessor :line_item, :api
+    attr_accessor :line_item
 
     def initialize(line_item)
       self.line_item = line_item
-      self.api = MailChimpClient::API.new
     end
 
-    def read
+    def to_h
       product = line_item.variant.product
-      api.add_product(product) unless api.product_exists?(product)
+      product_present = Product::Create.(product)
 
       sku = CustomItemSku.new(line_item).call
-      api.add_variant(product, sku) unless api.variant_exists?(product, sku)
+      variant_present = Variant::Create.(product, sku)
+
+      raise 'Error creating product with variant' unless product_present && variant_present
 
       {
         id:                 line_item.id.to_s,

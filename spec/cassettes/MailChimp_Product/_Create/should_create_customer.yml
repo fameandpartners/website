@@ -1,0 +1,91 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://apikey:<MAILCHIMP_API_KEY>@us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/products/SKU
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - application/problem+json; charset=utf-8
+      X-Request-Id:
+      - 4672d00f-7039-4937-887b-5737f0f694bd
+      Link:
+      - <https://us7.api.mailchimp.com/schema/3.0/ProblemDetailDocument.json>; rel="describedBy"
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '198'
+      Date:
+      - Thu, 01 Sep 2016 11:26:21 GMT
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - _AVESTA_ENVIRONMENT=prod; path=/
+    body:
+      encoding: UTF-8
+      string: '{"type":"http://developer.mailchimp.com/documentation/mailchimp/guides/error-glossary/","title":"Resource
+        Not Found","status":404,"detail":"The requested resource could not be found.","instance":""}'
+    http_version: 
+  recorded_at: Thu, 01 Sep 2016 11:26:21 GMT
+- request:
+    method: post
+    uri: https://apikey:<MAILCHIMP_API_KEY>@us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/products
+    body:
+      encoding: UTF-8
+      string: '{"id":"SKU","title":"Name","variants":[{"id":"SKU","title":"SKU"}]}'
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Request-Id:
+      - d16ec82c-639d-4c62-a3bc-195d23b0eb00
+      Link:
+      - <https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Instance.json>;
+        rel="describedBy"
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '2301'
+      Date:
+      - Thu, 01 Sep 2016 11:26:22 GMT
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - _AVESTA_ENVIRONMENT=prod; path=/
+    body:
+      encoding: UTF-8
+      string: '{"id":"SKU","title":"Name","handle":"","url":"","description":"","type":"","vendor":"","image_url":"","variants":[{"id":"SKU","title":"SKU","url":"","sku":"","price":0,"inventory_quantity":0,"image_url":"","backorders":"","visibility":"","created_at":"2016-09-01T11:26:22+00:00","updated_at":"2016-09-01T11:26:22+00:00","_links":[{"rel":"self","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/products/SKU/variants/SKU","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json"},{"rel":"parent","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/products/SKU","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Collection.json"},{"rel":"update","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/products/SKU/variants/SKU","method":"PATCH","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json"},{"rel":"upsert","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/products/SKU/variants/SKU","method":"PUT","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Instance.json"},{"rel":"delete","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/products/SKU/variants/SKU","method":"DELETE"}]}],"published_at_foreign":"","_links":[{"rel":"self","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/products/SKU","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Instance.json"},{"rel":"parent","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/products","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Collection.json"},{"rel":"delete","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/products/SKU","method":"DELETE"},{"rel":"variants","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/products/SKU/variants","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Products/Variants/Collection.json"}]}'
+    http_version: 
+  recorded_at: Thu, 01 Sep 2016 11:26:22 GMT
+recorded_with: VCR 2.9.3
