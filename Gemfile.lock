@@ -906,7 +906,6 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   koala
-  launchy (= 2.2.0)
   letter_opener (~> 1.4.1)
   mailchimp-api
   mailchimp_client!
