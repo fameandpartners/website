@@ -5,6 +5,10 @@ module Spree
       preference :merchant_key, :string, default: ''
       preference :server, :string, default: 'sandbox'
 
+      attr_accessible :preferred_merchant_id,
+                      :preferred_merchant_key,
+                      :preferred_server
+
       # Spree Gateway methods
 
       def auto_capture?
