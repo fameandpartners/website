@@ -21,7 +21,6 @@ class ManualOrdersGrid
     where(Spree::Order.arel_table[:number].matches("#{value}%"))
   end
 
-  column(:order_id, header: 'Order ID', order: 'spree_orders.id') {|model| model.order.id}
   column(:order_date, header: 'Order date', order: 'spree_orders.completed_at') do |model|
     model.order.completed_at.strftime("%m/%d/%y")
   end
@@ -40,5 +39,14 @@ class ManualOrdersGrid
   column(:color, header: 'Color') {|model| model.colour_name}
   column(:customisations, header: 'Customisations') {|model| model.customisation_text}
   column(:factory, header: 'Factory') {|model| model.factory.name}
+  column(:return_or_exchange, header: 'Return or Exchange', html: true) do |model|
+    if model.order.returnable?
+      link_to 'Return or Exchange', main_app.new_user_returns_path(:order_number => model.order.number)
+    elsif model.order.order_return_requested?
+      'Return Requested'
+    else
+      ''
+    end
+  end
 
 end
