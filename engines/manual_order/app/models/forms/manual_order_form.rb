@@ -46,10 +46,7 @@ module Forms
     end
 
     def site_version_options
-      {
-        'USD' =>'USA',
-        'AUD' => 'Australia'
-      }
+      Hash[SiteVersion.order('site_versions.default DESC').map {|s| [s.currency, s.name] }]
     end
 
     def skirt_length_options
