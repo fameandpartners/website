@@ -195,7 +195,7 @@ $order-summary-bg: #f7f7f9;
 
     // Style the default bootstrap panel classes.
     // TODO - use semantic classes and extend the bootstrap ones.
-    #payment-selection {
+    .payment-selection {
       .panel {
         .row:last-child .form-group { margin-bottom: 0; }
 
@@ -451,10 +451,58 @@ $order-summary-bg: #f7f7f9;
       color:      darken($gray-light-bg, 20%);
     }
   }
+
+  @media (max-width: $bootstrap-sm-width - 1px) {
+
+    .btn {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+  }
+
 }
 
 .checkout.page-content {
   .form-control {
     color: $black-checkout-input;
   }
+}
+
+.panel-afterpay {
+
+  a:not(.btn) {
+    text-decoration: underline;
+    color: inherit;
+  }
+
+  .btn {
+    margin: 30px 0 10px;
+  }
+
+  .payments {
+    margin: 30px 0;
+  }
+
+  .payment,
+  .separator {
+    display: inline-block;
+    padding: 0 10px;
+    line-height: 1;
+  }
+
+  .separator {
+    vertical-align: middle;
+  }
+
+  .to-pay {
+    margin-bottom: 5px;
+    font-size: 1.75em;
+    color: $c-brand-blue;
+  }
+
+  .time-period {
+    font-size: 0.875em;
+  }
+
 }
