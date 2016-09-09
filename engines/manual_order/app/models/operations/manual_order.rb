@@ -126,5 +126,26 @@ module Operations
       (params[:status] == 'exchange' ? 'E' : 'M') + _number.gsub(/[^0-9]/, '')
     end
 
+    def get_variant
+      size_variants = params[:size_id].to_i > 0 ? get_variant_ids(params[:size_id]) : nil
+      color_variants = get_variant_ids(params[:color_id])
+      variant_ids = if size_variants.present? && color_variants.present?
+                      size_variants & color_variants
+                    elsif color_variants.present?
+                      color_variants
+                    else
+                      size_variants
+                    end
+      Spree::Variant.where(id: variant_ids).first
+    end
+
+    def get_variant_ids(option_value_id)
+      Spree::OptionValue.find(option_value_id).variants
+        .where(product_id: params[:product_id], is_master: false)
+        .joins(:prices)
+        .where("spree_prices.currency = '#{params[:currency] || 'USD'}' and spree_prices.amount IS NOT NULL")
+        .pluck(:id)
+    end
+
   end
 end

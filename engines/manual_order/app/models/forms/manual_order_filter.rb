@@ -38,7 +38,7 @@ module Forms
     end
 
     def price
-      price = get_variant.get_price_in(params[:currency])
+      price = product.site_price_for(site_version)
       { price: price.amount, currency: params[:currency] }
     end
 
@@ -98,35 +98,6 @@ module Forms
 
     def product_image
       product_images.find{ |i| i[:color_id] == params[:color_id].to_i }
-    end
-
-    def get_variant
-      size_variants = params[:size_id].to_i > 0 ? get_variant_ids(params[:size_id]) : nil
-      color_variants = get_variant_ids(params[:color_id])
-      variant_ids = if size_variants.present? && color_variants.present?
-                      size_variants & color_variants
-                    elsif color_variants.present?
-                      color_variants
-                    else
-                      size_variants
-                    end
-      Spree::Variant.where(id: variant_ids).first
-    end
-
-    def get_variant_ids(option_value_id)
-      Spree::OptionValue.find(option_value_id).variants
-        .where(product_id: params[:product_id], is_master: false)
-        .joins(:prices)
-        .where("spree_prices.currency = '#{params[:currency] || 'USD'}' and spree_prices.amount IS NOT NULL")
-        .pluck(:id)
-    end
-
-    def variant_image(variant)
-      cropped_images_for(variant.product.images_for_variant(variant))
-    end
-
-    def cropped_images_for(image_set)
-      image_set.select { |i| i.attachment.url(:large).downcase.include?('front-crop') }.first
     end
 
   end
