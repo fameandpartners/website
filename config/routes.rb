@@ -184,6 +184,9 @@ FameAndPartners::Application.routes.draw do
     # Gown Collection - Landing page
     get '/gown-collection' => 'products/collections#show', :permalink => 'gown-collection', :as => :gown_collection_landing_page
 
+    # Cocktail Collection - Landing page
+    get '/cocktail-collection' => 'products/collections#show', :permalink => 'cocktail-collection', :as => :cocktail_collection_landing_page
+
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
