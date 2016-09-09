@@ -54,7 +54,7 @@ module Forms
     end
 
     def skirt_length_options
-      Hash[LineItemPersonalization::HEIGHTS.map{|h| [h, h.humanize]}]
+      Hash[LineItemPersonalization::HEIGHTS.map { |h| [h, h.humanize] }]
     end
 
     def save_order(params)
