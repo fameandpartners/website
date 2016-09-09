@@ -7,32 +7,32 @@ module Forms
       @params = params
     end
 
-    def get_size_options
+    def size_options
       product_options[:sizes][:default].map do |p|
         { id: p.id, name: p.name }
       end
     end
 
-    def get_color_options
+    def color_options
       product_options[:colors][:default].map do |p|
         { id: p.id, name: p.presentation, type: 'color' }
       end
     end
 
-    def get_custom_colors
+    def custom_colors
       product_options[:colors][:extra].map do |p|
         { id: p.id, name: "#{p.presentation} (+ $#{extra_color_price})", type: 'custom' }
       end
     end
 
-    def get_customisations_options
+    def customisations_options
       product_options[:customizations][:all].map do |p|
         price = p[:display_price].money.dollars
         { id: p.id, name: "#{p.name} (+ $#{price})" }
       end
     end
 
-    def get_image
+    def image
       variant = get_variant
       url = if variant.present? && variant_image(variant).try(:attachment).present?
               variant_image(variant).attachment.url(:large)
@@ -42,12 +42,12 @@ module Forms
       { url: url }
     end
 
-    def get_price
+    def price
       price = get_variant.get_price_in(params[:currency])
       { price: price.amount, currency: params[:currency] }
     end
 
-    def get_users_searched
+    def users_searched
       first_name_term, last_name_term = params[:term].split(' ')
       operator = 'AND'
       if last_name_term.nil?
@@ -61,7 +61,7 @@ module Forms
         .limit(10).map {|u| {id: u.id, value: u.full_name}}
     end
 
-    def get_user_data
+    def user_data
       user = Spree::User.find(params[:user_id])
       address = user.orders.complete.last.ship_address
 

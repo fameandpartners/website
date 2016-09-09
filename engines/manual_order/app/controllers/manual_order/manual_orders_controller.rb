@@ -36,31 +36,31 @@ module ManualOrder
     end
 
     def sizes_options
-      render json: manual_order_filter.get_size_options
+      render json: manual_order_filter.size_options
     end
 
     def colors_options
-      render json: manual_order_filter.get_color_options | manual_order_filter.get_custom_colors
+      render json: manual_order_filter.color_options | manual_order_filter.custom_colors
     end
 
     def customisations_options
-      render json: manual_order_filter.get_customisations_options
+      render json: manual_order_filter.customisations_options
     end
 
     def image
-      render json: manual_order_filter.get_image
+      render json: manual_order_filter.image
     end
 
     def price
-      render json: manual_order_filter.get_price
+      render json: manual_order_filter.price
     end
 
     def autocomplete_customers
-      render json: manual_order_filter.get_users_searched
+      render json: manual_order_filter.users_searched
     end
 
     def user_data
-      render json: manual_order_filter.get_user_data
+      render json: manual_order_filter.user_data
     end
 
     private
