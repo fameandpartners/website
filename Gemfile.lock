@@ -137,6 +137,8 @@ PATH
       sidekiq
       simple_form
       slim
+    afterpay (0.0.1)
+      rails (~> 3.2.22.4)
     bergen (0.0.1)
       aasm (~> 4.10.0)
       admin_ui
@@ -863,6 +865,7 @@ DEPENDENCIES
   active_model_serializers
   addressable
   admin_ui!
+  afterpay!
   asset_sync (~> 1.1.0)
   autoprefixer-rails
   awesome_print
