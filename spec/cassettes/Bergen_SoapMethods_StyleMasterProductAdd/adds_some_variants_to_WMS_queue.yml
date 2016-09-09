@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Wed, 11 May 2016 18:41:42 GMT
+      - Thu, 08 Sep 2016 13:03:57 GMT
   response:
     status:
       code: 200
@@ -29,9 +29,9 @@ http_interactions:
       X-Powered-By:
       - ASP.NET
       Date:
-      - Wed, 11 May 2016 18:41:42 GMT
+      - Thu, 08 Sep 2016 13:03:57 GMT
       Content-Length:
-      - '164899'
+      - '165584'
     body:
       encoding: UTF-8
       string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<wsdl:definitions xmlns:s16=\"http://rex11.com/webmethods/AbstractTypes\"
@@ -531,9 +531,10 @@ http_interactions:
         type=\"s:string\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
         default=\"\" name=\"AddedToInventoryDate\" type=\"s:string\" />\r\n          <s:element
         minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"ArrivedDate\" type=\"s:string\"
-        />\r\n        </s:sequence>\r\n      </s:complexType>\r\n      <s:element
-        name=\"receivingTicket\" type=\"s1:ReceivingTicket\" />\r\n    </s:schema>\r\n
-        \   <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/ReceivingTicketStatus.xsd\">\r\n
+        />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"ReceivingType\"
+        type=\"s:string\" />\r\n        </s:sequence>\r\n      </s:complexType>\r\n
+        \     <s:element name=\"receivingTicket\" type=\"s1:ReceivingTicket\" />\r\n
+        \   </s:schema>\r\n    <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/ReceivingTicketStatus.xsd\">\r\n
         \     <s:simpleType name=\"ReceivingTicketStatus\">\r\n        <s:restriction
         base=\"s:string\">\r\n          <s:enumeration value=\"Draft\" />\r\n          <s:enumeration
         value=\"PendingCSR\" />\r\n          <s:enumeration value=\"PendingPrinting\"
@@ -577,8 +578,9 @@ http_interactions:
         LOGISTICS NJ2\" />\r\n          <s:enumeration value=\"BERGEN LOGISTICS NJ3\"
         />\r\n          <s:enumeration value=\"BERGEN LOGISTICS HK\" />\r\n          <s:enumeration
         value=\"BERGEN LOGISTICS NJ3B\" />\r\n          <s:enumeration value=\"BERGEN
-        LOGISTICS CA\" />\r\n        </s:restriction>\r\n      </s:simpleType>\r\n
-        \   </s:schema>\r\n    <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/CustomerOrder.xsd\">\r\n
+        LOGISTICS CAN\" />\r\n          <s:enumeration value=\"BERGEN LOGISTICS NL\"
+        />\r\n        </s:restriction>\r\n      </s:simpleType>\r\n    </s:schema>\r\n
+        \   <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/CustomerOrder.xsd\">\r\n
         \     <s:complexType name=\"SupplierAddress\">\r\n        <s:sequence>\r\n
         \         <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"CompanyName\"
         type=\"s:string\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
@@ -667,6 +669,10 @@ http_interactions:
         maxOccurs=\"unbounded\" name=\"LineItem\" type=\"s10:LineItem\" />\r\n          <s:element
         minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"PriorityCode\" type=\"s:string\"
         />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"OrderType\"
+        type=\"s:string\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
+        default=\"\" name=\"GiftMessage\" type=\"s:string\" />\r\n          <s:element
+        minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"VatNumber\" type=\"s:string\"
+        />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\" default=\"\" name=\"DutiesPayer\"
         type=\"s:string\" />\r\n        </s:sequence>\r\n      </s:complexType>\r\n
         \   </s:schema>\r\n    <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/PickTicketPaymentTerms.xsd\">\r\n
         \     <s:simpleType name=\"PickTicketPaymentTerms\">\r\n        <s:restriction
@@ -755,13 +761,15 @@ http_interactions:
         minOccurs=\"0\" maxOccurs=\"1\" name=\"FreightCharge\" type=\"s:string\" />\r\n
         \         <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"OrderType\" type=\"s:string\"
         />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"MasterTrackingNumber\"
-        type=\"s:string\" />\r\n        </s:sequence>\r\n      </s:complexType>\r\n
-        \     <s:complexType name=\"Package\">\r\n        <s:sequence>\r\n          <s:element
-        minOccurs=\"0\" maxOccurs=\"unbounded\" name=\"LineItems\" type=\"s10:OutBoundLineItem\"
-        />\r\n          <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"PackageWeight\"
-        type=\"s:decimal\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
-        name=\"UOM\" type=\"s:string\" />\r\n          <s:element minOccurs=\"1\"
-        maxOccurs=\"1\" name=\"PackageId\" type=\"s:int\" />\r\n          <s:element
+        type=\"s:string\" />\r\n          <s:element minOccurs=\"0\" maxOccurs=\"1\"
+        name=\"GiftMessage\" type=\"s:string\" />\r\n          <s:element minOccurs=\"0\"
+        maxOccurs=\"1\" name=\"VatNumber\" type=\"s:string\" />\r\n        </s:sequence>\r\n
+        \     </s:complexType>\r\n      <s:complexType name=\"Package\">\r\n        <s:sequence>\r\n
+        \         <s:element minOccurs=\"0\" maxOccurs=\"unbounded\" name=\"LineItems\"
+        type=\"s10:OutBoundLineItem\" />\r\n          <s:element minOccurs=\"1\" maxOccurs=\"1\"
+        name=\"PackageWeight\" type=\"s:decimal\" />\r\n          <s:element minOccurs=\"0\"
+        maxOccurs=\"1\" name=\"UOM\" type=\"s:string\" />\r\n          <s:element
+        minOccurs=\"1\" maxOccurs=\"1\" name=\"PackageId\" type=\"s:int\" />\r\n          <s:element
         minOccurs=\"0\" maxOccurs=\"1\" name=\"TrackingNumber\" type=\"s:string\"
         />\r\n          <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"PackageLength\"
         type=\"s:double\" />\r\n          <s:element minOccurs=\"1\" maxOccurs=\"1\"
@@ -821,8 +829,9 @@ http_interactions:
         value=\"Package Returned\" />\r\n          <s:enumeration value=\"Partial
         Delivery\" />\r\n          <s:enumeration value=\"Delivered\" />\r\n          <s:enumeration
         value=\"Pending UPS Upload\" />\r\n          <s:enumeration value=\"Warehouse
-        Transfer Done\" />\r\n        </s:restriction>\r\n      </s:simpleType>\r\n
-        \   </s:schema>\r\n    <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/PickTicketDetailsItemsInBoxes.xsd\">\r\n
+        Transfer Done\" />\r\n          <s:enumeration value=\"Cancelled Not Found\"
+        />\r\n        </s:restriction>\r\n      </s:simpleType>\r\n    </s:schema>\r\n
+        \   <s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://rex11.com/swpublicapi/PickTicketDetailsItemsInBoxes.xsd\">\r\n
         \     <s:import namespace=\"http://rex11.com/swpublicapi/PickTicketWareHouse.xsd\"
         />\r\n      <s:import namespace=\"http://rex11.com/swpublicapi/PickTicketPaymentTerms.xsd\"
         />\r\n      <s:import namespace=\"http://rex11.com/swpublicapi/PickTicketBillingOption.xsd\"
@@ -2096,7 +2105,7 @@ http_interactions:
         \     <http:address location=\"https://sync.rex11.com/ws/v3staging/publicapiws.asmx\"
         />\r\n    </wsdl:port>\r\n  </wsdl:service>\r\n</wsdl:definitions>"
     http_version: 
-  recorded_at: Wed, 11 May 2016 18:41:43 GMT
+  recorded_at: Thu, 08 Sep 2016 13:03:59 GMT
 - request:
     method: post
     uri: https://sync.rex11.com/ws/v3staging/publicapiws.asmx
@@ -2116,7 +2125,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Wed, 11 May 2016 18:41:43 GMT
+      - Thu, 08 Sep 2016 13:03:59 GMT
       Soapaction:
       - '"http://rex11.com/webmethods/AuthenticationTokenGet"'
       Content-Type:
@@ -2139,16 +2148,16 @@ http_interactions:
       X-Powered-By:
       - ASP.NET
       Date:
-      - Wed, 11 May 2016 18:41:42 GMT
+      - Thu, 08 Sep 2016 13:03:59 GMT
       Content-Length:
-      - '465'
+      - '453'
     body:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><AuthenticationTokenGetResponse
-        xmlns="http://rex11.com/webmethods/"><AuthenticationTokenGetResult>4jY2Ohy07m01vVdWskhufBhDQhfV+MYzU1GalhS3Z/7Eo9XqXueMtA==</AuthenticationTokenGetResult></AuthenticationTokenGetResponse></soap:Body></soap:Envelope>
+        xmlns="http://rex11.com/webmethods/"><AuthenticationTokenGetResult>RezojbXTBq0WGyg46EGjNC6ciZmiTB46f0/QLWPcvtY=</AuthenticationTokenGetResult></AuthenticationTokenGetResponse></soap:Body></soap:Envelope>
     http_version: 
-  recorded_at: Wed, 11 May 2016 18:41:43 GMT
+  recorded_at: Thu, 08 Sep 2016 13:04:00 GMT
 - request:
     method: post
     uri: https://sync.rex11.com/ws/v3staging/publicapiws.asmx
@@ -2161,20 +2170,20 @@ http_interactions:
         xmlns:ins3="http://rex11.com/swpublicapi/CustomerOrder.xsd" xmlns:ins4="http://rex11.com/swpublicapi/PickTicket.xsd"
         xmlns:ins5="http://rex11.com/swpublicapi/PickTicketDetails.xsd" xmlns:ins6="http://rex11.com/swpublicapi/PickTicketDetailsItemsInBoxes.xsd"
         xmlns:ins7="http://rex11.com/swpublicapi/OutBoundPackage.xsd" xmlns:ins8="http://rex11.com/swpublicapi/StyleMasterProduct.xsd"
-        xmlns:ins9="http://rex11.com/webmethods/AbstractTypes"><env:Body><ins0:StyleMasterProductAdd><ins0:AuthenticationString>4jY2Ohy07m01vVdWskhufBhDQhfV+MYzU1GalhS3Z/7Eo9XqXueMtA==</ins0:AuthenticationString><ins0:products><ins0:StyleMasterProduct><ins8:Style>sku-1</ins8:Style><ins8:Color>red</ins8:Color><ins8:Size>US2/AU6</ins8:Size><ins8:UPC>10000</ins8:UPC><ins8:Price>198.37</ins8:Price></ins0:StyleMasterProduct></ins0:products></ins0:StyleMasterProductAdd></env:Body></env:Envelope>
+        xmlns:ins9="http://rex11.com/webmethods/AbstractTypes"><env:Body><ins0:StyleMasterProductAdd><ins0:AuthenticationString>RezojbXTBq0WGyg46EGjNC6ciZmiTB46f0/QLWPcvtY=</ins0:AuthenticationString><ins0:products><ins0:StyleMasterProduct><ins8:Style>10000</ins8:Style><ins8:Color>red</ins8:Color><ins8:Size>US6/AU10</ins8:Size><ins8:UPC>10000</ins8:UPC><ins8:Price>198.37</ins8:Price></ins0:StyleMasterProduct></ins0:products></ins0:StyleMasterProductAdd></env:Body></env:Envelope>
     headers:
       User-Agent:
       - HTTPClient/1.0 (2.6.0.1, ruby 2.1.6 (2015-04-13))
       Accept:
       - "*/*"
       Date:
-      - Wed, 11 May 2016 18:41:43 GMT
+      - Thu, 08 Sep 2016 13:04:00 GMT
       Soapaction:
       - '"http://rex11.com/webmethods/StyleMasterProductAdd"'
       Content-Type:
       - text/xml;charset=UTF-8
       Content-Length:
-      - '1287'
+      - '1276'
   response:
     status:
       code: 200
@@ -2191,7 +2200,7 @@ http_interactions:
       X-Powered-By:
       - ASP.NET
       Date:
-      - Wed, 11 May 2016 18:41:42 GMT
+      - Thu, 08 Sep 2016 13:04:00 GMT
       Content-Length:
       - '559'
     body:
@@ -2201,5 +2210,5 @@ http_interactions:
         xmlns="http://rex11.com/webmethods/"><StyleMasterProductAddResult><Notifications><Notification><ErrorCode>0</ErrorCode><Severity>Success</Severity><Message>Data
         saved successfully</Message></Notification></Notifications></StyleMasterProductAddResult></StyleMasterProductAddResponse></soap:Body></soap:Envelope>
     http_version: 
-  recorded_at: Wed, 11 May 2016 18:41:43 GMT
+  recorded_at: Thu, 08 Sep 2016 13:04:00 GMT
 recorded_with: VCR 2.9.3
