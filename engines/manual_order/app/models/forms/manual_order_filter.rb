@@ -33,12 +33,7 @@ module Forms
     end
 
     def image
-      variant = get_variant
-      url = if variant.present? && variant_image(variant).try(:attachment).present?
-              variant_image(variant).attachment.url(:large)
-            else
-              'null'
-            end
+      url = product_image.present? ? product_image[:large] : 'null'
       { url: url }
     end
 
@@ -93,6 +88,18 @@ module Forms
       @product_options ||= Products::SelectionOptions.new(site_version: site_version, product: product).read
     end
 
+    def extra_color_price
+      product_options[:colors][:default_extra_price][:amount]
+    end
+
+    def product_images
+      Repositories::ProductImages.new(product: product).read_all
+    end
+
+    def product_image
+      product_images.find{ |i| i[:color_id] == params[:color_id].to_i }
+    end
+
     def get_variant
       size_variants = params[:size_id].to_i > 0 ? get_variant_ids(params[:size_id]) : nil
       color_variants = get_variant_ids(params[:color_id])
@@ -104,10 +111,6 @@ module Forms
                       size_variants
                     end
       Spree::Variant.where(id: variant_ids).first
-    end
-
-    def extra_color_price
-      product_options[:colors][:default_extra_price][:amount]
     end
 
     def get_variant_ids(option_value_id)
