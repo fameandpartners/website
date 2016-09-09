@@ -3,9 +3,8 @@ module Operations
 
     attr_reader :params, :variant, :order
 
-    def initialize(params, variant)
+    def initialize(params)
       @params = params
-      @variant = variant
     end
 
     def create
@@ -126,9 +125,9 @@ module Operations
       (params[:status] == 'exchange' ? 'E' : 'M') + _number.gsub(/[^0-9]/, '')
     end
 
-    def get_variant
-      size_variants = params[:size_id].to_i > 0 ? get_variant_ids(params[:size_id]) : nil
-      color_variants = get_variant_ids(params[:color_id])
+    def variant
+      size_variants = params[:size].to_i > 0 ? get_variant_ids(params[:size]) : nil
+      color_variants = get_variant_ids(params[:color])
       variant_ids = if size_variants.present? && color_variants.present?
                       size_variants & color_variants
                     elsif color_variants.present?
@@ -141,7 +140,7 @@ module Operations
 
     def get_variant_ids(option_value_id)
       Spree::OptionValue.find(option_value_id).variants
-        .where(product_id: params[:product_id], is_master: false)
+        .where(product_id: params[:style_name], is_master: false)
         .joins(:prices)
         .where("spree_prices.currency = '#{params[:currency] || 'USD'}' and spree_prices.amount IS NOT NULL")
         .pluck(:id)

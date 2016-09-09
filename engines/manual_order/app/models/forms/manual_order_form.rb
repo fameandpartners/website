@@ -58,8 +58,7 @@ module Forms
     end
 
     def save_order(params)
-      variant = get_variant(params[:style_name], params[:size], params[:color])
-      Operations::ManualOrder.new(params, variant).create
+      Operations::ManualOrder.new(params).create
     end
 
   end
