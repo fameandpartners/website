@@ -133,6 +133,7 @@ module FameAndPartners
     config.after_initialize do
       Rails.configuration.spree.payment_methods << Spree::Gateway::Pin
       Rails.configuration.spree.payment_methods << Spree::Gateway::NabTransactGateway
+      Rails.configuration.spree.payment_methods << Spree::Gateway::AfterpayPayment
 
       Rails.application.config.spree.calculators.shipping_methods << Spree::Calculator::PriceSackShipping
       Rails.application.config.spree.calculators.shipping_methods << Spree::Calculator::SaleShipping
