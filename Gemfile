@@ -135,11 +135,8 @@ group :development do
   gem 'bullet'
 end
 
-group :development, :test do
-  gem 'rspec-rails', '~> 3.2'
-end
-
 group :test do
+  gem 'rspec-rails', '~> 3.2'
   gem 'capybara', '~> 2.5.0'
   gem 'capybara-screenshot', '~> 1.0.11'
   gem 'poltergeist', '~> 1.9.0'
