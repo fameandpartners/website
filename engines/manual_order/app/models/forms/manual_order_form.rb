@@ -25,13 +25,17 @@ module Forms
     property :adj_amount, virtual: true
     property :adj_description, virtual: true
 
+    def product_ids
+      Spree::Variant.where('deleted_at is NULL').uniq(:product_id).pluck(:product_id)
+    end
+
     def products
-      Spree::Product.where(id: Spree::Variant.where('deleted_at is NULL').pluck('DISTINCT product_id'))
+      Spree::Product.where(id: product_ids)
     end
 
     def countries
       order_cond = "iso!='US', iso!='CA', iso!='DE', iso!='MX', iso!='GB', iso!='AU', iso!='NZ', name"
-      Spree::Country.select([:id, :name]).order(order_cond).map {|c| [c.id, c.name]}
+      Spree::Country.select([:id, :name]).order(order_cond).map { |c| [c.id, c.name] }
     end
 
     def countries_with_states
@@ -42,11 +46,11 @@ module Forms
 
     def customers
       user_ids = Spree::Order.complete.select('DISTINCT user_id').limit(10).pluck(:user_id)
-      Spree::User.where(id: user_ids).limit(10).map {|u| [u.id, u.full_name]}
+      Spree::User.where(id: user_ids).limit(10).map { |u| [u.id, u.full_name] }
     end
 
     def site_version_options
-      Hash[SiteVersion.order('site_versions.default DESC').map {|s| [s.currency, s.name] }]
+      Hash[SiteVersion.order('site_versions.default DESC').map { |s| [s.currency, s.name] }]
     end
 
     def skirt_length_options
