@@ -44,7 +44,7 @@
               = render 'shared/redesign/faqs/delivery_international'
               = render 'shared/redesign/faqs/delivery_sign'
               = render 'shared/redesign/faqs/delivery_POBOX'
-              - if current_site_version.is_australia?
+              - if current_site_version.is_australia? && Features.active?(:afterpay)
                 = render 'shared/redesign/faqs/afterpay'
         #panel-products.tab-pane role='tabpanel'
           .faq.faq-wrap
