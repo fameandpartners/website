@@ -139,6 +139,7 @@ PATH
       slim
     afterpay (0.0.1)
       rails (~> 3.2.22.4)
+      spree
     bergen (0.0.1)
       aasm (~> 4.10.0)
       admin_ui
