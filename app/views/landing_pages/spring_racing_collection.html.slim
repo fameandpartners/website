@@ -1,0 +1,449 @@
+= render partial: 'landing_pages/common'
+
+.page-content.lookbook-v2-page.portrait-template.relative.js-smooth-scroll
+
+  .container-fluid
+
+    // On-page navigation
+    .row.local-navigation-row
+      .local-navigation-wrapper.col-md-2
+        .local-navigation-vertical.js-float-vertical-menu-on-scroll
+          .nav-wrapper
+            h4.hidden-sm.hidden-xs Spring Racing Collection
+
+            ul.nav.arrow-when-active
+              li.link
+                = link_to "#intro"
+                  | Introducing Spring Racing
+                  i.icon.icon-arrow-right
+
+              li.link
+                = link_to "#the-front-runner"
+                  | The Front Runner
+                  i.icon.icon-arrow-right
+
+              li.link
+                = link_to "#going-all-out"
+                  | Going All Out
+                  i.icon.icon-arrow-right
+
+              li.link
+                = link_to "#a-day-at-the-derby"
+                  | A Day at the Derby
+                  i.icon.icon-arrow-right
+
+              li.link
+                = link_to "#high-stakes-high-split"
+                  | High Stakes, High Split
+                  i.icon.icon-arrow-right
+
+              li.link
+                = link_to "#calling-all-rule-breakers"
+                  | Calling All Rule Breakers
+                  i.icon.icon-arrow-right
+
+              li.link
+                = link_to "#girls-day-out"
+                  | Girls' Day Out
+                  i.icon.icon-arrow-right
+
+              li.link = link_to "#for-the-win"
+                  | For The Win
+                  i.icon.icon-arrow-right
+
+    // Section #1 - Intro area
+    - current_dress_name = "Golden Era Two Piece Dress"
+    - current_dress_link = "#{dresses_path}/dress-golden-era-two-piece-1124?color=black"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-01.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-01-mob.jpg'
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$349"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$279"
+
+    .row
+      section.section-box.intro.vertical-align-copy#intro
+        .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
+          = link_to current_dress_link
+            picture
+              source media="(max-width: 991px)" srcset="#{image_path("#{current_image_mobile}")}"
+              source media="(min-width: 992px)" srcset="#{image_path("#{current_image_desktop}")}"
+              = image_tag "#{current_image_desktop}",
+                  srcset: "#{image_path("#{current_image_mobile}")} 991w,
+                          #{image_path("#{current_image_desktop}")} 992w",
+                  class: "img-responsive",
+                  alt: "#{current_dress_name}"
+
+        .col-md-5.vertical-align
+          .content-copy
+            h1.no-margin-md ...And we're off to the races.
+
+            p There's no experience more luxurious than slipping into a gorgeous, flowing gown and feeling the fabric slide over your skin. The dress hugs your body; the color and style are just right–and why? Because it's a true original, custom-made for you.
+
+            p Let's design your dream dress.
+
+            p.double-line-height
+
+            .cta-product-caption.copy-highlight
+              | Pictured
+              span.hidden-md.hidden-lg  above:
+              span.hidden-xs.hidden-sm  left:
+              .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+
+            .cta-wrapper
+              = link_to "#the-front-runner"
+                span.btn-md.btn-featured.no-margin
+                 | Explore
+
+    // Section #2
+    - current_dress_name = "Darlo Dress"
+    - current_dress_link = "#{dresses_path}/dress-darlo-1139?color=silver"
+    - current_edit_link = "#{dresses_path}/spring-racing"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-02.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-02-mob.jpg'
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$419"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$329"
+    .row
+      section.section-box#the-front-runner
+        .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
+          = link_to current_dress_link
+            picture
+              source media="(max-width: 991px)" srcset="#{image_path("#{current_image_mobile}")}"
+              source media="(min-width: 992px)" srcset="#{image_path("#{current_image_desktop}")}"
+              = image_tag "#{current_image_desktop}",
+                  srcset: "#{image_path("#{current_image_mobile}")} 991w,
+                          #{image_path("#{current_image_desktop}")} 992w",
+                  class: "img-responsive",
+                  alt: "#{current_dress_name}"
+
+        .col-md-5
+          .content-copy
+            .row
+              .col-md-12
+                  h2.h1.no-margin-md = link_to "The Front Runner", current_edit_link
+
+                  p Her style is refined elegance at its best. While The Front Runner doesn't hesitate try new trends, she prefers a timeless approach–so those Instagram photos will still look of-the-moment years from now, of course.
+
+                  .cta-product-caption.copy-highlight
+                    | Pictured
+                    span.hidden-md.hidden-lg  above:
+                    span.hidden-xs.hidden-sm  left:
+                    .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+
+            .row
+              .products-grid.products-collections.no-margin.no-fixed-height
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-4 col-xs-6'}
+
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_edit_link
+                  span.btn-md.btn-featured.no-margin
+                   | Shop & Customize
+
+    // Section #3
+    - current_dress_name = "Cici Jumpsuit"
+    - current_dress_link = "#{dresses_path}/dress-cici-jumpsuit-1111?color=black"
+    - current_edit_link = "#{dresses_path}/spring-racing"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-03.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-03-mob.jpg'
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$379"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$299"
+    .row
+      section.section-box#going-all-out
+        .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
+          = link_to current_dress_link
+            picture
+              source media="(max-width: 991px)" srcset="#{image_path("#{current_image_mobile}")}"
+              source media="(min-width: 992px)" srcset="#{image_path("#{current_image_desktop}")}"
+              = image_tag "#{current_image_desktop}",
+                  srcset: "#{image_path("#{current_image_mobile}")} 991w,
+                          #{image_path("#{current_image_desktop}")} 992w",
+                  class: "img-responsive",
+                  alt: "#{current_dress_name}"
+
+        .col-md-5
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1.no-margin-md = link_to "Going All Out", current_edit_link
+
+                p Going All Out is no damsel in distress–she can create her own fairytale, thank you very much. Her story starts with the dress: sweet and feminine, with just the right amount of attitude.
+
+                .cta-product-caption.copy-highlight
+                  | Pictured
+                  span.hidden-md.hidden-lg  above:
+                  span.hidden-xs.hidden-sm  left:
+                  .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+
+            .row
+              .products-grid.products-collections.no-margin.no-fixed-height
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 4, rangeTo: 7, customWrapper: 'col-md-4 col-xs-6'}
+
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_edit_link
+                  span.btn-md.btn-featured.no-margin
+                   | Shop & Customize
+
+    // Section #4
+    - current_dress_name = "Alto Dress"
+    // TODO: Add real dress link (it doesn't exist yet)
+    - current_dress_link = "#"
+    - current_edit_link = "#{dresses_path}/spring-racing"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-04.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-04-mob.jpg'
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$379"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$299"
+    .row
+      section.section-box#a-day-at-the-derby
+        .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
+          = link_to current_dress_link
+            picture
+              source media="(max-width: 991px)" srcset="#{image_path("#{current_image_mobile}")}"
+              source media="(min-width: 992px)" srcset="#{image_path("#{current_image_desktop}")}"
+              = image_tag "#{current_image_desktop}",
+                  srcset: "#{image_path("#{current_image_mobile}")} 991w,
+                          #{image_path("#{current_image_desktop}")} 992w",
+                  class: "img-responsive",
+                  alt: "#{current_dress_name}"
+
+        .col-md-5
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1.no-margin-md = link_to "A Day at the Derby", current_edit_link
+
+                p She's got a flair for the theatrical. A Day at the Derby is no stranger to full, sweeping skirts and dangerously plunging necklines–but don't even think about calling her dramatic. It's all style, darling.
+
+                .cta-product-caption.copy-highlight
+                  | Pictured
+                  span.hidden-md.hidden-lg  above:
+                  span.hidden-xs.hidden-sm  left:
+                  .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+
+            .row
+              .products-grid.products-collections.no-margin.no-fixed-height
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 11, customWrapper: 'col-md-4 col-xs-6'}
+
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_edit_link
+                  span.btn-md.btn-featured.no-margin
+                   | Shop & Customize
+
+    // Section #5
+    - current_dress_name = "Tate Dress"
+    - current_dress_link = "#{dresses_path}/dress-tate-1120?color=dusk"
+    - current_edit_link = "#{dresses_path}/spring-racing"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-05.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-05-mob.jpg'
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$349"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$279"
+    .row
+      section.section-box#high-stakes-high-split
+        .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
+          = link_to current_dress_link
+            picture
+              source media="(max-width: 991px)" srcset="#{image_path("#{current_image_mobile}")}"
+              source media="(min-width: 992px)" srcset="#{image_path("#{current_image_desktop}")}"
+              = image_tag "#{current_image_desktop}",
+                  srcset: "#{image_path("#{current_image_mobile}")} 991w,
+                          #{image_path("#{current_image_desktop}")} 992w",
+                  class: "img-responsive",
+                  alt: "#{current_dress_name}"
+
+        .col-md-5
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1.no-margin-md = link_to "High Stakes, High Split", current_edit_link
+
+                p High Stakes, High Split is a no-fuss kind of woman. She knows what works and keeps it simple. Her motto is “Less is more,” and she's got the pared-down closet to prove it.
+
+                .cta-product-caption.copy-highlight
+                  | Pictured
+                  span.hidden-md.hidden-lg  above:
+                  span.hidden-xs.hidden-sm  left:
+                  .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+
+            .row
+              .products-grid.products-collections.no-margin.no-fixed-height
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 12, rangeTo: 15, customWrapper: 'col-md-4 col-xs-6'}
+
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_edit_link
+                  span.btn-md.btn-featured.no-margin
+                   | Shop & Customize
+
+    // Section #6
+    - current_dress_name = "Harbourside Dress"
+    - current_dress_link = "#{dresses_path}/dress-harbourside-1123?color=navy"
+    - current_edit_link = "#{dresses_path}/spring-racing"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-06.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-06-mob.jpg'
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$319"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$249"
+    .row
+      section.section-box#calling-all-rule-breakers
+        .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
+          = link_to current_dress_link
+            picture
+              source media="(max-width: 991px)" srcset="#{image_path("#{current_image_mobile}")}"
+              source media="(min-width: 992px)" srcset="#{image_path("#{current_image_desktop}")}"
+              = image_tag "#{current_image_desktop}",
+                  srcset: "#{image_path("#{current_image_mobile}")} 991w,
+                          #{image_path("#{current_image_desktop}")} 992w",
+                  class: "img-responsive",
+                  alt: "#{current_dress_name}"
+
+        .col-md-5
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1.no-margin-md = link_to "Calling All Rule Breakers", current_edit_link
+
+                p The free-spirited Bohemian is a woman that can't be tamed. She has a romantic side a mile wide, and wears her wild heart on her ruffled sleeve.
+
+                .cta-product-caption.copy-highlight
+                  | Pictured
+                  span.hidden-md.hidden-lg  above:
+                  span.hidden-xs.hidden-sm  left:
+                  .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+
+            .row
+              .products-grid.products-collections.no-margin.no-fixed-height
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 16, rangeTo: 19, customWrapper: 'col-md-4 col-xs-6'}
+
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_edit_link
+                  span.btn-md.btn-featured.no-margin
+                   | Shop & Customize
+
+    // Section #7
+    - current_dress_name = "Eclectic Love Dress"
+    - current_dress_link = "#{dresses_path}/dress-eclectic-love-1114?color=rosewater-floral"
+    - current_edit_link = "#{dresses_path}/spring-racing"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-07.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-07-mob.jpg'
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$349"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$279"
+    .row
+      section.section-box#girls-day-out
+        .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
+          = link_to current_dress_link
+            picture
+              source media="(max-width: 991px)" srcset="#{image_path("#{current_image_mobile}")}"
+              source media="(min-width: 992px)" srcset="#{image_path("#{current_image_desktop}")}"
+              = image_tag "#{current_image_desktop}",
+                  srcset: "#{image_path("#{current_image_mobile}")} 991w,
+                          #{image_path("#{current_image_desktop}")} 992w",
+                  class: "img-responsive",
+                  alt: "#{current_dress_name}"
+
+        .col-md-5
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1.no-margin-md = link_to "Girls' Day Out", current_edit_link
+
+                p She's not afraid to raise a few eyebrows–in fact, she prefers it. Girls' Day Out doesn't play favorites–she'll don a head-turning outfit no matter where she goes: the supermarket, the office, or the formal event of the season.
+
+                .cta-product-caption.copy-highlight
+                  | Pictured
+                  span.hidden-md.hidden-lg  above:
+                  span.hidden-xs.hidden-sm  left:
+                  .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+
+            .row
+              .products-grid.products-collections.no-margin.no-fixed-height
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 20, rangeTo: 23, customWrapper: 'col-md-4 col-xs-6'}
+
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_edit_link
+                  span.btn-md.btn-featured.no-margin
+                   | Shop & Customize
+
+    // Section #8
+    - current_dress_name = "Cole Dress"
+    - current_dress_link = "#{dresses_path}/dress-cole-1018?color=black"
+    - current_edit_link = "#{dresses_path}/spring-racing"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-08.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-08-mob.jpg'
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$299"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$269"
+    .row
+      section.section-box#for-the-win
+        .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
+          = link_to current_dress_link
+            picture
+              source media="(max-width: 991px)" srcset="#{image_path("#{current_image_mobile}")}"
+              source media="(min-width: 992px)" srcset="#{image_path("#{current_image_desktop}")}"
+              = image_tag "#{current_image_desktop}",
+                  srcset: "#{image_path("#{current_image_mobile}")} 991w,
+                          #{image_path("#{current_image_desktop}")} 992w",
+                  class: "img-responsive",
+                  alt: "#{current_dress_name}"
+
+        .col-md-5
+          .content-copy
+            .row
+              .col-md-12
+                h2.h1.no-margin-md = link_to "For The Win", current_edit_link
+
+                p Her fashion icons include Audrey Hepburn, Sofia Coppola, and Caroline Bessette-Kennedy; and though For The Win may be inspired by vintage style, she always adds just the right amount of modern.
+
+                .cta-product-caption.copy-highlight
+                  | Pictured
+                  span.hidden-md.hidden-lg  above:
+                  span.hidden-xs.hidden-sm  left:
+                  .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+
+            .row
+              .products-grid.products-collections.no-margin.no-fixed-height
+                .products-set
+                  = render partial: 'pick_products_without_content', locals: {rangeFrom: 24, rangeTo: 27, customWrapper: 'col-md-4 col-xs-6'}
+
+            .row
+              .cta-wrapper.col-md-12
+                = link_to current_edit_link
+                  span.btn-md.btn-featured.no-margin
+                   | Shop & Customize
