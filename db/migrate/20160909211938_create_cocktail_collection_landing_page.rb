@@ -7,8 +7,8 @@ class CreateCocktailCollectionLandingPage < ActiveRecord::Migration
       # pids:             %w([TODO] Awaiting real pids).join(','),
       limit:            '99',
       heading:          'Cocktail Collection',
-      title:            '[TODO] Add real meta title',
-      meta_description: '[TODO] Add real meta description here.',
+      title:            'Cocktail dresses, bodycon dresses, lace dresses',
+      meta_description: 'May we freshen your cocktail dress? Upgrade your evening wardrobe with customizable, unique cocktail dresses and jumpsuits, including luxe lace, bodycon silhouettes, floral prints, and off-the-shoulder details.',
     }
   end
 
