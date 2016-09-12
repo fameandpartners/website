@@ -12,3 +12,10 @@ Feature: Afterpay on Australian Website
     Then I should see "or 4 easy payments of $79.75 with"
     And I select "USA" site version
     Then I should not see "or 4 easy payments of $79.75 with"
+
+  Scenario: See Afterpay FAQ on Australian website
+    When I visit the "/faqs" path
+    And I select "Australia" site version
+    Then I should see "What is Afterpay?"
+    And I select "USA" site version
+    Then I should not see "What is Afterpay?"

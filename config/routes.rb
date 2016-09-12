@@ -181,6 +181,9 @@ FameAndPartners::Application.routes.draw do
     # IT Girl - Landing page
     get '/it-girl' => 'products/collections#show', :permalink => 'it-girl', :as => :it_girl_landing_page
 
+    # Gown Collection - Landing page
+    get '/gown-collection' => 'products/collections#show', :permalink => 'gown-collection', :as => :gown_collection_landing_page
+
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page

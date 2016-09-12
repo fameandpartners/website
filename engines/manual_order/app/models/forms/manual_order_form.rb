@@ -22,6 +22,8 @@ module Forms
     property :zipcode, virtual: true
     property :phone, virtual: true
     property :existing_customer, virtual: true
+    property :adj_amount, virtual: true
+    property :adj_description, virtual: true
 
     def products
       Spree::Product.active
@@ -32,20 +34,10 @@ module Forms
       @countries ||= Spree::Country.select([:id, :name]).order(order_cond).map {|c| [c.id, c.name]}
     end
 
-    def states
-      @states ||= Spree::Country.where(iso: 'US').first.states
-    end
-
-    def states_us
-      @states_us ||= states.map {|s| {id: s.id, name: s.name}}
-    end
-
-    def states_ca
-      @states_ca ||= Spree::Country.where(iso: 'CA').first.states.map {|s| {id: s.id, name: s.name}}
-    end
-
-    def states_au
-      @states_au ||= Spree::Country.where(iso: 'AU').first.states.map {|s| {id: s.id, name: s.name}}
+    def countries_with_states
+      country_ids = Spree::State.uniq(:country_id).pluck(:country_id)
+      Spree::Country.where(id: country_ids).includes(:states)
+        .to_json(include:{states: {only: [:id,:name]}}, only: [:id, :name])
     end
 
     def customers

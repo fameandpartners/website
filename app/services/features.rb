@@ -3,7 +3,7 @@ module Features
   # Document the purpose of a feature flag here, this documentation is displayed to admin users in the web UI.
   # { feature_name: "Description or documentation." }
   DEFINED_FEATURES = {
-    bergen_usa_returns:            'Enable Bergen return process (background workers and emails) whenever an user creates an order return in the USA',
+    bergen_usa_returns:            '[DEPRECATED] Enable Bergen return process (background workers and emails) whenever an user creates an order return in the USA',
     checkout_fb_login:             "Facebook login on Checkout",
     delivery_date_messaging:       nil,
     enhanced_moodboards:           "[DEPRECATED] Sharing & Comments",

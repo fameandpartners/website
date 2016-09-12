@@ -15,8 +15,8 @@ class StaticsController < ApplicationController
   end
 
   def faqs
-    @title = "FAQs " + default_seo_title
-    @description = "FAQs"
+    @title       = ['FAQs ', default_seo_title].join
+    @description = 'FAQs'
   end
 
   def size_guide

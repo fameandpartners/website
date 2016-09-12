@@ -41,11 +41,11 @@ module Bergen
       end
 
       def create_style_master
-        bergen.style_master_product_add_by_return_request_items(return_request_items: [return_request_item])
+        bergen.style_master_product_add(return_request_items: [return_request_item])
       end
 
       def style_master_status
-        result = bergen.get_style_master_product_add_status_by_return_request_item(return_request_item: return_request_item)
+        result = bergen.get_style_master_product_add_status(return_request_item: return_request_item)
         result[:severity]
       end
 

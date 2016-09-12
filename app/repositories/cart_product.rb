@@ -45,8 +45,6 @@ class Repositories::CartProduct
 
       result
     end
-  #rescue
-  #  OpenStruct.new({})
   end
   cache_results :read
 
@@ -81,13 +79,19 @@ class Repositories::CartProduct
     end
 
     def product_customizations
-      return [] if !customized_product?
-      line_item.personalization.customization_values.to_a
+      if customized_product?
+        line_item.personalization.customization_values.to_a
+      else
+        []
+      end
     end
 
     def height
-      return LineItemPersonalization::DEFAULT_HEIGHT.titleize unless line_item.personalization
-      line_item.personalization.height.presence.to_s.titleize
+      if customized_product?
+        line_item.personalization.height.presence.to_s.titleize
+      else
+        LineItemPersonalization::DEFAULT_HEIGHT.titleize
+      end
     end
 
     def product_making_options
@@ -102,12 +106,7 @@ class Repositories::CartProduct
     end
 
     def line_item_description
-      description = product.description
-      if description.present?
-        description
-      else
-        I18n.t(:product_has_no_description)
-      end
+      product.description.presence || I18n.t(:product_has_no_description)
     end
 
     def line_item_price
