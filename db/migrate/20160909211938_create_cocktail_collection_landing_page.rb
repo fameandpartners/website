@@ -4,7 +4,7 @@ class CreateCocktailCollectionLandingPage < ActiveRecord::Migration
     {
       path:             '/cocktail-collection',
       template_path:    '/landing_pages/cocktail_collection',
-      # pids:             %w([TODO] Awaiting real pids).join(','),
+      pids:             %w(1041-warm-grey 1043-navy 1039-pale-grey 1139-silver 720-white 1104-pale-pink 646-black 1111-black 1055-ivory 1050-ivory 1048-ivory 1069-white 1028-light-khaki 931-black 956-black 1120-dusk 11099-pale-pink 1128-blush 942-black 1123-navy 1052-black 1092-pale-pink 656-white 1114-rosewater-floral 1054-black 766-black 1047-black 1018-black).join(','),
       limit:            '99',
       heading:          'Cocktail Collection',
       title:            'Cocktail dresses, bodycon dresses, lace dresses',
