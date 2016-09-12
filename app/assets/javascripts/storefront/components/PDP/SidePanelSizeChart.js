@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Tabs from 'react-simpletabs';
 import Modal from 'react-modal';
+import {MODAL_STYLE} from './utils';
 
 class SidePanelSizeChart extends React.Component {
   constructor(props, context) {
@@ -47,26 +48,6 @@ class SidePanelSizeChart extends React.Component {
     const CM_IS_ACTIVE = this.state.cmIsActive ? 'is-active' : '';
     const SIZE_CHART_TITLE = this.props.sizeChartVersion === '2016' ? 'Legacy Size Guide' : 'Size Guide';
     const SIZE_CHART_VIEW_TEXT = this.props.sizeChartVersion === '2016' ? 'View legacy size guide' : 'View new size guide';
-
-    // this is just reset, proper styling will be applied through SASS
-    const MODAL_STYLE = {
-      overlay: {
-        backgroundColor: null
-      },
-      content: {
-        position: null,
-        top: null,
-        left: null,
-        right: null,
-        bottom: null,
-        border: null,
-        background: null,
-        overflow: null,
-        WebkitOverflowScrolling: null,
-        borderRadius: null,
-        padding: null
-      }
-    };
 
     return (
       <div className="chart-wrap">

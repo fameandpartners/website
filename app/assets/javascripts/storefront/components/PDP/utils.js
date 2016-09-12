@@ -1,3 +1,23 @@
+// this is just reset, proper styling will be applied through SASS
+export const MODAL_STYLE = {
+  overlay: {
+    backgroundColor: null
+  },
+  content: {
+    position: null,
+    top: null,
+    left: null,
+    right: null,
+    bottom: null,
+    border: null,
+    background: null,
+    overflow: null,
+    WebkitOverflowScrolling: null,
+    borderRadius: null,
+    padding: null
+  }
+};
+
 // This will attempt to find a variant ID
 // It will succeed only for the default colors
 export const GetDressVariantId = (vars, color, size) => {
@@ -9,7 +29,7 @@ export const GetDressVariantId = (vars, color, size) => {
       id = val.table.id;
     }
   });
-  
+
   return id;
 };
 
