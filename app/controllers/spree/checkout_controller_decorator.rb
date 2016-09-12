@@ -304,6 +304,11 @@ Spree::CheckoutController.class_eval do
     @pay_pal_method = @order.available_payment_methods.detect do |method|
       method.method_type.eql?('paypalexpress') || method.type == 'Spree::Gateway::PayPalExpress'
     end
+
+    # TODO: Real Afterpay implementation
+    # @afterpay_method = @order.available_payment_methods.detect do |method|
+    #   method.method_type == 'afterpay' && current_site_version.currency == 'AUD'
+    # end
   end
 
   helper_method :completion_route
