@@ -1,0 +1,40 @@
+/ TODO: this partial will live inside the Afterpay engine
+
+- if Features.active?(:afterpay) && current_site_version.is_australia?
+  ruby:
+    single_installment   = @order.total / 4
+    one_afterpay_payment = Spree::Money.new(single_installment, currency: 'AUD').to_s
+
+  .panel.panel-afterpay
+    .panel-heading
+      h4.panel-title
+        'Afterpay
+        .pull-right
+          = image_tag '_afterpay/logo-sml.png', height: '22px'
+    .panel-collapse.in
+      .panel-body.text-center
+        h4 Four fortnightly interest free payments totalling <em>$xxx</em>
+        .payments.hidden-xs.hidden-sm
+          .payment
+            .to-pay = one_afterpay_payment
+            .time-period First payment
+          .separator +
+          .payment
+            .to-pay = one_afterpay_payment
+            .time-period In 2 weeks
+          .separator +
+          .payment
+            .to-pay = one_afterpay_payment
+            .time-period In 4 weeks
+          .separator +
+          .payment
+            .to-pay = one_afterpay_payment
+            .time-period In 6 weeks
+        .payments.hidden-md.hidden-lg
+          .payment
+            .to-pay = one_afterpay_payment
+            .time-period Fortnightly
+        h6 You will temporarily be redirected to the Afterpay website via a popup to complete your purchase
+        a.btn.btn-black.btn-md href='javascript:;' Continue with afterpay
+        div
+          = link_to 'Terms and conditions', 'https://www.afterpay.com.au/terms/', target: '_blank'

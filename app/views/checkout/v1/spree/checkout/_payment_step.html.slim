@@ -7,8 +7,7 @@
 
   - content_for :inline_javascript do
     | Pin.setPublishableKey('#{@credit_card_gateway.options[:publishable_key]}');
-    
-- one_afterpay_payment = '$' + (@order.total / 4).to_s
+
 
 h2.checkout-section-title 3. Choose your payment method
 / TODO - Rewrite as react component with new button layout and behaviour
@@ -37,42 +36,9 @@ p All transactions are secure and encrypted. Credit card information is never st
 
             = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
             = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
-  
-  - if current_site_version.is_australia? && @order.total <= 1000 && Features.active?(:afterpay)
-    .panel.panel-afterpay
-      .panel-heading
-        h4.panel-title
-          'Afterpay
-          .pull-right
-            = image_tag '_afterpay/logo-sml.png', height: '22px'
-      .panel-collapse.in
-        .panel-body.text-center
-          h4 Four fortnightly interest free payments totalling <em>$xxx</em>
-          .payments.hidden-xs.hidden-sm
-            .payment
-              .to-pay = one_afterpay_payment
-              .time-period First payment
-            .separator +
-            .payment
-              .to-pay = one_afterpay_payment
-              .time-period In 2 weeks
-            .separator +
-            .payment
-              .to-pay = one_afterpay_payment
-              .time-period In 4 weeks
-            .separator +
-            .payment
-              .to-pay = one_afterpay_payment
-              .time-period In 6 weeks
-          .payments.hidden-md.hidden-lg
-            .payment
-              .to-pay = one_afterpay_payment
-              .time-period Fortnightly
-          h6 You will temporarily be redirected to the Afterpay website via a popup to complete your purchase
-          a.btn.btn-black.btn-md href='javascript:;' Continue with afterpay
-          div
-            = link_to 'Terms and conditions', 'https://www.afterpay.com.au/terms/'
-        
+
+  = render 'checkout/v1/spree/checkout/payment/afterpay'
+
   - if @pay_pal_method
     #paypal_choice.panel
       .panel-heading
