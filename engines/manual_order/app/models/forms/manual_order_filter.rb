@@ -92,11 +92,8 @@ module Forms
       product_options[:colors][:default_extra_price][:amount]
     end
 
-    def product_images
-      Repositories::ProductImages.new(product: product).read_all
-    end
-
     def product_image
+      product_images = Repositories::ProductImages.new(product: product).read_all
       product_images.find{ |i| i[:color_id] == params[:color_id].to_i }
     end
 
