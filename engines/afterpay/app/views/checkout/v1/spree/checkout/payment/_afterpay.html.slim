@@ -1,5 +1,3 @@
-/ TODO: this partial will live inside the Afterpay engine
-
 - if Features.active?(:afterpay) && current_site_version.is_australia?
   ruby:
     single_installment   = @order.total / 4
@@ -41,3 +39,30 @@
         a.btn.btn-black.btn-md href='javascript:;' Continue With Afterpay
         div
           = link_to 'Terms and conditions', 'https://www.afterpay.com.au/terms/', target: '_blank'
+
+/ TODO: Real Afterpay implementation
+/- if @afterpay_method
+/  h4 Afterpay
+/
+/  = flash[:error]
+/
+/  = form_for @order, url: update_checkout_path(@order.state) do |f|
+/    - param_prefix = "payment_source[#{@afterpay_method.id}]"
+/    = hidden_field_tag 'order[payments_attributes][][payment_method_id]', @afterpay_method.id
+/
+/    ' Number
+/    = text_field_tag "#{param_prefix}[number]", '5520000000000000'
+/
+/    ' Month
+/    = text_field_tag "#{param_prefix}[month]", '11'
+/
+/    ' Year
+/    = text_field_tag "#{param_prefix}[year]", '2016'
+/
+/    ' CVV
+/    = text_field_tag "#{param_prefix}[verification_value]", '123'
+/
+/    ' Full Name
+/    = text_field_tag "#{param_prefix}[full_name]", [@order.billing_firstname, @order.billing_lastname].join(' ')
+/
+/    = f.submit 'WOOT Afterpay WOOT'
