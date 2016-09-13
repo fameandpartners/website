@@ -38,7 +38,7 @@ $ ->
     optCustomColors.html('')
     sizeSelect.html('<option></option>')
     customisationSelect.html('<option></option>')
-    imageTag.html('Please select style, size and color to see image')
+    imageTag.html('Please select style and color to see image')
     priceTag.html('Please select product details')
     adjustButtonPanel.hide()
     adjustPanel.hide()
