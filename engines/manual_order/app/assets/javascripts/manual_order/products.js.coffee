@@ -64,7 +64,6 @@ $ ->
       $.getJSON url, (data) =>
         $.each data['manual_orders'], (index, el) =>
           sizeSelect.append $('<option>').attr('value', el.id).text(el.name)
-        sizeSelect.append $('<option>').attr('value', 'custom').text('Custom')
         sizeSelect.trigger("chosen:updated")
     else
       sizeSelect.trigger("chosen:updated")
@@ -84,7 +83,6 @@ $ ->
       $.getJSON url, (data) =>
         $.each data['manual_orders'], (index, el) =>
           customisationSelect.append option = $('<option>').attr('value', el.id).text(el.name)
-        customisationSelect.append $('<option>').attr('value', 'custom').text('Custom')
         customisationSelect.trigger("chosen:updated")
     else
       customisationSelect.trigger("chosen:updated")
