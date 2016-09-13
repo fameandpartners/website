@@ -147,12 +147,21 @@
   @media (max-width: $bootstrap-md-width - 1px) {
 
     .heading {
-      margin-top: 50px;
+      margin-top: 15px;
+      font-size: 1.125em;
 
       > span:first-child {
-        font-size: 3.8rem;
+        display: none;
       }
 
+    }
+
+    .sub-heading span {
+      text-decoration: underline;
+    }
+
+    .cta-wrapper {
+      display: none;
     }
 
   }

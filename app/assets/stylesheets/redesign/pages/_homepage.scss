@@ -150,8 +150,9 @@
       margin-top: $section-spacing-margin-top;
     }
 
-    .hero-wrap .copy-wrap {
-      padding-top: 30px;
+    .hero-wrap .sub-heading {
+      padding-top: 0;
+      font-size: inherit;
     }
 
   }
