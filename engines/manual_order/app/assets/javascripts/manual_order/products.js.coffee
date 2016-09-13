@@ -19,7 +19,7 @@ $ ->
   imageUrl = '/fame_admin/manual_orders/images/:product_id/:color_id'
   imageTag = $('h4.product_image')
 
-  priceUrl = '/fame_admin/manual_orders/prices/:product_id/:color_id/:currency'
+  priceUrl = '/fame_admin/manual_orders/prices/:product_id/:currency'
   priceTag = $('h4.price')
 
   adjustButtonPanel = $('.adjust-btn-panel')
@@ -71,7 +71,6 @@ $ ->
 
   updatePrice = ->
     url = priceUrl.replace(/:product_id/, styleSelect.val())
-    .replace(/:color_id/, colorSelect.val())
     .replace(/:currency/, currencySelect.val())
     $.getJSON url, (data) =>
       priceTag.html("$#{data.price} #{data.currency}")
