@@ -5,63 +5,63 @@
   .container-fluid
 
     // On-page navigation
-    .row
+    .row.local-navigation-row
       .local-navigation-wrapper.col-md-2
         .local-navigation-vertical.js-float-vertical-menu-on-scroll
           .nav-wrapper
-            h4.hidden-sm.hidden-xs The Gown Collection
+            h4.hidden-sm.hidden-xs Spring Racing Collection
 
             ul.nav.arrow-when-active
               li.link
                 = link_to "#intro"
-                  | Introducing Gowns
+                  | Introducing
                   i.icon.icon-arrow-right
 
               li.link
-                = link_to "#the-sophisticate"
-                  | The Sophisticate
+                = link_to "#the-front-runner"
+                  | The Front Runner
                   i.icon.icon-arrow-right
 
               li.link
-                = link_to "#the-true-romantic"
-                  | The True Romantic
+                = link_to "#going-all-out"
+                  | Going All Out
                   i.icon.icon-arrow-right
 
               li.link
-                = link_to "#the-glamouri"
-                  | The Glamouri
+                = link_to "#a-day-at-the-derby"
+                  | A Day at the Derby
                   i.icon.icon-arrow-right
 
               li.link
-                = link_to "#the-minimalist"
-                  | The Minimalist
+                = link_to "#high-stakes-high-split"
+                  | High Stakes, High Split
                   i.icon.icon-arrow-right
 
               li.link
-                = link_to "#the-bohemian"
-                  | The Bohemian
+                = link_to "#calling-all-rule-breakers"
+                  | Calling All Rule Breakers
                   i.icon.icon-arrow-right
 
               li.link
-                = link_to "#the-provocateur"
-                  | The Provocateur
+                = link_to "#girls-day-out"
+                  | Girls' Day Out
                   i.icon.icon-arrow-right
 
-              li.link = link_to "#the-classically-inclined"
-                  | The Classically Inclined
+              li.link = link_to "#for-the-win"
+                  | For The Win
                   i.icon.icon-arrow-right
 
     // Section #1 - Intro area
-    - current_dress_name = "Dragon Eyes Lace dress"
-    - current_dress_link = "#{dresses_path}/dress-dragon-eyes-lace-1135?color=black"
-    - current_image_desktop = 'landingpages/gown-collection/section-01.jpg'
-    - current_image_mobile = 'landingpages/gown-collection/section-01-mob.jpg'
+    - current_dress_name = "Golden Era Two Piece Dress"
+    - current_dress_link = "#{dresses_path}/dress-golden-era-two-piece-1124?color=black"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-01.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-01-mob.jpg'
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
-      - current_dress_price = "$379"
+      - current_dress_price = "$349"
     - else
       // USA - PRICE
-      - current_dress_price = "$299"
+      - current_dress_price = "$279"
 
     .row
       section.section-box.intro.vertical-align-copy#intro
@@ -78,13 +78,13 @@
 
         .col-md-5.vertical-align
           .content-copy
-            h1.no-margin-md Introducing the latest <br class="hidden-md hidden-lg">- <br class="hidden-sm hidden-xs">The Gown Collection
+            h1.no-margin-md ...And we're off to the races.
 
-            p There's no experience more luxurious than slipping into a gorgeous, flowing gown and feeling the fabric slide over your skin. The dress hugs your body; the color and style are just right–and why? Because it's a true original, custom-made for you.
+            p Nadia Fairfax, Sydney style icon and the blogger behind Fairfax Journal, knows a thing or two about getting all dolled up–which is why we’re looking to her for Spring Racing wardrobe inspiration. One thing she’s taught us is that old-school glamour doesn’t have to follow old rules.
 
-            p Let's design your dream dress.
+            p Here’s Nadia’s fresh take on Spring Racing style; what will yours look like?
 
-            p.double-line-height
+            p.double-line-height.hidden-sm.hidden-xs
 
             .cta-product-caption.copy-highlight
               | Pictured
@@ -93,16 +93,16 @@
               .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
 
             .cta-wrapper
-              = link_to "#the-sophisticate"
+              = link_to "#the-front-runner"
                 span.btn-md.btn-featured.no-margin
                  | Explore
 
     // Section #2
-    - current_dress_name = "Laced Victoria dress"
-    - current_dress_link = "#{dresses_path}/dress-laced-victoria-1127?color=ivory"
-    - current_edit_link = "/mystyle?lpi=sophisticate&lpt=The%20Sophisticate&limit=16&pids[]=1127-ivory&pids[]=1135-black&pids[]=1119-navy&pids[]=918-black&pids[]=283-black&pids[]=413-black-and-navy&pids[]=852-white&pids[]=932-black&pids[]=620-white&pids[]=995-blush&pids[]=709-black&pids[]=968-burgundy&pids[]=1137-black&pids[]=914-cherry-red&pids[]=482-navy&pids[]=185-white"
-    - current_image_desktop = 'landingpages/gown-collection/section-02.jpg'
-    - current_image_mobile = 'landingpages/gown-collection/section-02-mob.jpg'
+    - current_dress_name = "Darlo Dress"
+    - current_dress_link = "#{dresses_path}/dress-darlo-1139?color=silver"
+    - current_edit_link = "#{dresses_path}/spring-racing"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-02.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-02-mob.jpg'
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
       - current_dress_price = "$419"
@@ -110,7 +110,7 @@
       // USA - PRICE
       - current_dress_price = "$329"
     .row
-      section.section-box#the-sophisticate
+      section.section-box#the-front-runner
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
           = link_to current_dress_link
             picture
@@ -126,23 +126,15 @@
           .content-copy
             .row
               .col-md-12
-                  h2.h1.no-margin-md = link_to "The Sophisticate", current_edit_link
+                  h2.h1.no-margin-md = link_to "The Front Runner", current_edit_link
 
-                  p Her style is refined elegance at its best. While the Sophisticate doesn't hesitate try new trends, she prefers a timeless approach–so those Instagram photos will still look of-the-moment years from now, of course.
+                  p You can’t go wrong with a metallic slip dress; its versatility alone makes it a fashion-forward front runner. Customize it your way: shorten the hemline, change the color, add a belt. The options are nearly endless.
 
                   .cta-product-caption.copy-highlight
                     | Pictured
                     span.hidden-md.hidden-lg  above:
                     span.hidden-xs.hidden-sm  left:
                     .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
-
-            .row.product-heading-wrap
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Evening:
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Showstopper:
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Wallet Friendly:
 
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
@@ -156,11 +148,11 @@
                    | Shop & Customize
 
     // Section #3
-    - current_dress_name = "Serpentina dress"
-    - current_dress_link = "#{dresses_path}/dress-serpentina-1130?color=black"
-    - current_edit_link = "/mystyle?lpi=romantic&lpt=The%20True%20Romantic&limit=16&pids[]=802-pale-grey&pids[]=1125-rosewater-floral&pids[]=907-light-pink&pids[]=1130-black&pids[]=1011-peach&pids[]=1134-champagne&pids[]=1071-pale-blue&pids[]=809-blue-fallen-leaves&pids[]=859-black&pids[]=971-red&pids[]=1099-pale-pink&pids[]=909-icing-pink-and-red&pids[]=1128-blush&pids[]=693-black&pids[]=963-palermo-floral&pids[]=365-hot-pink"
-    - current_image_desktop = 'landingpages/gown-collection/section-03.jpg'
-    - current_image_mobile = 'landingpages/gown-collection/section-03-mob.jpg'
+    - current_dress_name = "Cici Jumpsuit"
+    - current_dress_link = "#{dresses_path}/dress-cici-jumpsuit-1111?color=black"
+    - current_edit_link = "#{dresses_path}/spring-racing"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-03.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-03-mob.jpg'
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
       - current_dress_price = "$379"
@@ -168,7 +160,7 @@
       // USA - PRICE
       - current_dress_price = "$299"
     .row
-      section.section-box#the-true-romantic
+      section.section-box#going-all-out
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
           = link_to current_dress_link
             picture
@@ -184,23 +176,15 @@
           .content-copy
             .row
               .col-md-12
-                h2.h1.no-margin-md = link_to "The True Romantic", current_edit_link
+                h2.h1.no-margin-md = link_to "Going All Out", current_edit_link
 
-                p The True Romantic is no damsel in distress–she can create her own fairytale, thank you very much. Her story starts with the dress: sweet and feminine, with just the right amount of attitude.
+                p Skirt the rules of ladylike style with the Cici Jumpsuit, a cheeky nod to menswear. Nadia’s version includes a feminine bow (to add charm) and a sheer blouse layered underneath (for modern flair).
 
                 .cta-product-caption.copy-highlight
                   | Pictured
                   span.hidden-md.hidden-lg  above:
                   span.hidden-xs.hidden-sm  left:
                   .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
-
-            .row.product-heading-wrap
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Evening:
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Showstopper:
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Wallet Friendly:
 
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
@@ -214,19 +198,21 @@
                    | Shop & Customize
 
     // Section #4
-    - current_dress_name = "Escala dress"
-    - current_dress_link = "#{dresses_path}/dress-escala-944?color=dark-tan"
-    - current_edit_link = "/mystyle?lpi=glamouri&lpt=The%20Glamouri&limit=16&pids[]=944-black&pids[]=944-dark-tan&pids[]=942-ivory&pids[]=249-black&pids[]=848-navy&pids[]=994-black&pids[]=1005-gunmetal&pids[]=931-black&pids[]=632-dark-gold&pids[]=485-black&pids[]=703-black&pids[]=1136-navy&pids[]=524-black&pids[]=999-silver&pids[]=647-navy&pids[]=641-navy"
-    - current_image_desktop = 'landingpages/gown-collection/section-04.jpg'
-    - current_image_mobile = 'landingpages/gown-collection/section-04-mob.jpg'
+    // NOTE: keeping this line here as the real dress will be added soon to the website.
+    - current_dress_name = "Alto Dress"
+    // TODO: once the Alto Dress is published, edit this link
+    - current_dress_link = "#{dresses_path}/spring-racing"
+    - current_edit_link = "#{dresses_path}/spring-racing"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-04.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-04-mob.jpg'
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
-      - current_dress_price = "$329"
+      - current_dress_price = "$379"
     - else
       // USA - PRICE
-      - current_dress_price = "$279"
+      - current_dress_price = "$299"
     .row
-      section.section-box#the-glamouri
+      section.section-box#a-day-at-the-derby
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
           = link_to current_dress_link
             picture
@@ -242,23 +228,9 @@
           .content-copy
             .row
               .col-md-12
-                h2.h1.no-margin-md = link_to "The Glamouri", current_edit_link
+                h2.h1.no-margin-md = link_to "A Day at the Derby", current_edit_link
 
-                p She's got a flair for the theatrical. The Glamouri is no stranger to full, sweeping skirts and dangerously plunging necklines–but don't even think about calling her dramatic. It's all style, darling.
-
-                .cta-product-caption.copy-highlight
-                  | Pictured
-                  span.hidden-md.hidden-lg  above:
-                  span.hidden-xs.hidden-sm  left:
-                  .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
-
-            .row.product-heading-wrap
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Evening:
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Showstopper:
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Wallet Friendly:
+                p You’ll be the one to beat in a sweet, pleated number. The details are all up to you.
 
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
@@ -272,19 +244,19 @@
                    | Shop & Customize
 
     // Section #5
-    - current_dress_name = "Cici jumpsuit"
-    - current_dress_link = "#{dresses_path}/dress-cici-jumpsuit-1111?color=black"
-    - current_edit_link = "/mystyle?lpi=minimalist&lpt=The%20Minimalist&limit=16&pids[]=1102-mushroom&pids[]=1111-black&pids[]=923-dark-burgundy&pids[]=924-ivory&pids[]=1030-dark-burgundy&pids[]=1104-pale-pink&pids[]=909-black&pids[]=1115-black&pids[]=919-black&pids[]=954-navy&pids[]=1096-light-nude&pids[]=973-ivory&pids[]=987-grey&pids[]=1105-black&pids[]=1000-black&pids[]=910-indigo"
-    - current_image_desktop = 'landingpages/gown-collection/section-05.jpg'
-    - current_image_mobile = 'landingpages/gown-collection/section-05-mob.jpg'
+    - current_dress_name = "Tate Dress"
+    - current_dress_link = "#{dresses_path}/dress-tate-1120?color=dusk"
+    - current_edit_link = "#{dresses_path}/spring-racing"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-05.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-05-mob.jpg'
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
-      - current_dress_price = "$379"
+      - current_dress_price = "$349"
     - else
       // USA - PRICE
-      - current_dress_price = "$299"
+      - current_dress_price = "$279"
     .row
-      section.section-box#the-minimalist
+      section.section-box#high-stakes-high-split
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
           = link_to current_dress_link
             picture
@@ -300,23 +272,15 @@
           .content-copy
             .row
               .col-md-12
-                h2.h1.no-margin-md = link_to "The Minimalist", current_edit_link
+                h2.h1.no-margin-md = link_to "High Stakes, High Split", current_edit_link
 
-                p The Minimalist is a no-fuss kind of woman. She knows what works and keeps it simple. Her motto is “Less is more,” and she's got the pared-down closet to prove it.
+                p Daring accents (like a thigh-high split) embody the drama of the races. The Tate has over 30 color options–but the soft, dusty pink tone Nadia chose balances a leggy look quite nicely, don’t you think?
 
                 .cta-product-caption.copy-highlight
                   | Pictured
                   span.hidden-md.hidden-lg  above:
                   span.hidden-xs.hidden-sm  left:
                   .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
-
-            .row.product-heading-wrap
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Evening:
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Showstopper:
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Wallet Friendly:
 
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
@@ -330,11 +294,11 @@
                    | Shop & Customize
 
     // Section #6
-    - current_dress_name = "Rio dress"
-    - current_dress_link = "#{dresses_path}/dress-rio-1131?color=champagne"
-    - current_edit_link = "/mystyle?lpi=bohemian&lpt=The Bohemian&limit=16&pids[]=1064-pale-blue&pids[]=1131-champagne&pids[]=1121-navy&pids[]=1110-rosewater-floral&pids[]=573-black&pids[]=623-light-pink&pids[]=614-black&pids[]=686-black&pids[]=684-black&pids[]=693-black&pids[]=592-coral&pids[]=845-black&pids[]=1002-black&pids[]=860-white&pids[]=1103-ornate-midnight-floral&pids[]=902-ivory"
-    - current_image_desktop = 'landingpages/gown-collection/section-06.jpg'
-    - current_image_mobile = 'landingpages/gown-collection/section-06-mob.jpg'
+    - current_dress_name = "Harbourside Dress"
+    - current_dress_link = "#{dresses_path}/dress-harbourside-1123?color=navy"
+    - current_edit_link = "#{dresses_path}/spring-racing"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-06.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-06-mob.jpg'
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
       - current_dress_price = "$319"
@@ -342,7 +306,7 @@
       // USA - PRICE
       - current_dress_price = "$249"
     .row
-      section.section-box#the-bohemian
+      section.section-box#calling-all-rule-breakers
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
           = link_to current_dress_link
             picture
@@ -358,23 +322,15 @@
           .content-copy
             .row
               .col-md-12
-                h2.h1.no-margin-md = link_to "The Bohemian", current_edit_link
+                h2.h1.no-margin-md = link_to "Calling All Rule Breakers", current_edit_link
 
-                p The free-spirited Bohemian is a woman that can't be tamed. She has a romantic side a mile wide, and wears her wild heart on her ruffled sleeve.
+                p The dress code may call for something more modest – but if you’ve got a rebellious streak a mile wide, then side cutouts are just the thing. <em>(Don’t worry–you can customize the Harbourside Dress to come sans cutouts, too.)</em>
 
                 .cta-product-caption.copy-highlight
                   | Pictured
                   span.hidden-md.hidden-lg  above:
                   span.hidden-xs.hidden-sm  left:
                   .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
-
-            .row.product-heading-wrap
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Evening:
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Showstopper:
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Wallet Friendly:
 
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
@@ -388,19 +344,19 @@
                    | Shop & Customize
 
     // Section #7
-    - current_dress_name = "Jacquie dress"
-    - current_dress_link = "#{dresses_path}/dress-jacquie-1012?color=white"
-    - current_edit_link = "/mystyle?lpi=provocateur&lpt=The%20Provocateur&limit=16&pids[]=988-black&pids[]=915-pale-grey&pids[]=1012-white&pids[]=900-midnight-reptile&pids[]=630-ivory&pids[]=1120-dusk&pids[]=905-navy&pids[]=680-pale-grey&pids[]=1133-navy&pids[]=706-black&pids[]=916-black&pids[]=958-blush&pids[]=938-pink-shimmer&pids[]=705-black&pids[]=484-navy&pids[]=930-black"
-    - current_image_desktop = 'landingpages/gown-collection/section-07.jpg'
-    - current_image_mobile = 'landingpages/gown-collection/section-07-mob.jpg'
+    - current_dress_name = "Eclectic Love Dress"
+    - current_dress_link = "#{dresses_path}/dress-eclectic-love-1114?color=rosewater-floral"
+    - current_edit_link = "#{dresses_path}/spring-racing"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-07.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-07-mob.jpg'
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
-      - current_dress_price = "$339"
+      - current_dress_price = "$349"
     - else
       // USA - PRICE
-      - current_dress_price = "$269"
+      - current_dress_price = "$279"
     .row
-      section.section-box#the-provocateur
+      section.section-box#girls-day-out
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
           = link_to current_dress_link
             picture
@@ -416,23 +372,15 @@
           .content-copy
             .row
               .col-md-12
-                h2.h1.no-margin-md = link_to "The Provocateur", current_edit_link
+                h2.h1.no-margin-md = link_to "Girls' Day Out", current_edit_link
 
-                p She's not afraid to raise a few eyebrows–in fact, she prefers it. The Provocateur doesn't play favorites–she'll don a head-turning outfit no matter where she goes: the supermarket, the office, or the formal event of the season.
+                p Let florals take the field for Girls’ Day Out and, like Nadia, you’ll be on the fast track to fashion icon status.
 
                 .cta-product-caption.copy-highlight
                   | Pictured
                   span.hidden-md.hidden-lg  above:
                   span.hidden-xs.hidden-sm  left:
                   .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
-
-            .row.product-heading-wrap
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Evening:
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Showstopper:
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Wallet Friendly:
 
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
@@ -446,19 +394,19 @@
                    | Shop & Customize
 
     // Section #8
-    - current_dress_name = "Westside dress"
-    - current_dress_link = "#{dresses_path}/dress-westside-1118?color=black"
-    - current_edit_link = "/mystyle?lpi=classic&lpt=The Classically Inclined&limit=16&pids[]=371-pale-pink&pids[]=1118-black&pids[]=635-blush&pids[]=817-white&pids[]=424-black&pids[]=1006-pale-pink&pids[]=360-white&pids[]=979-pale-pink&pids[]=537-lilac&pids[]=897-ivory&pids[]=466-pale-pink&pids[]=411-ivory-and-pink&pids[]=1129-winter-grey&pids[]=922-navy&pids[]=917-black&pids[]=997-pale-blue"
-    - current_image_desktop = 'landingpages/gown-collection/section-08.jpg'
-    - current_image_mobile = 'landingpages/gown-collection/section-08-mob.jpg'
+    - current_dress_name = "Cole Dress"
+    - current_dress_link = "#{dresses_path}/dress-cole-1018?color=black"
+    - current_edit_link = "#{dresses_path}/spring-racing"
+    - current_image_desktop = 'landingpages/spring-racing-collection/section-08.jpg'
+    - current_image_mobile = 'landingpages/spring-racing-collection/section-08-mob.jpg'
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
-      - current_dress_price = "$439"
+      - current_dress_price = "$299"
     - else
       // USA - PRICE
-      - current_dress_price = "$349"
+      - current_dress_price = "$269"
     .row
-      section.section-box#the-classically-inclined
+      section.section-box#for-the-win
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
           = link_to current_dress_link
             picture
@@ -474,23 +422,15 @@
           .content-copy
             .row
               .col-md-12
-                h2.h1.no-margin-md = link_to "The Classically Inclined", current_edit_link
+                h2.h1.no-margin-md = link_to "For The Win", current_edit_link
 
-                p Her fashion icons include Audrey Hepburn, Sofia Coppola, and Caroline Bessette-Kennedy; and though the Classically Inclined may be inspired by vintage style, she always adds just the right amount of modern.
+                p We’re betting you’ll be the odds-on style favorite in the simple, strapless Cole Dress. Let’s call it “Melbourne Cup Classic.”
 
                 .cta-product-caption.copy-highlight
                   | Pictured
                   span.hidden-md.hidden-lg  above:
                   span.hidden-xs.hidden-sm  left:
                   .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
-
-            .row.product-heading-wrap
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Evening:
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Showstopper:
-              .product-heading.col-md-4.col-xs-6
-                h4.title The Wallet Friendly:
 
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
