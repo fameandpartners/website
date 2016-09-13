@@ -71,15 +71,30 @@ ruby:
 
       .row
         .col-md-12.cta-item-huge
-          = link_to high_summer_collection_path
+          - if current_site_version.is_australia?
+            // AUSTRALIA
+            - current_edit_image = "homepage/fp-style-icon/sep-15-tile-1-au.jpg"
+            - current_edit_mob_image = "homepage/fp-style-icon/sep-15-tile-1-au-mob.jpg"
+            - current_edit_cta_1 = "Shop"
+            - current_edit_cta_2 = "Nadia Fairfax's Edit"
+            - current_edit_link = spring_racing_collection_landing_page_path
+          - else
+            // USA
+            - current_edit_image = "homepage/fp-style-icon/sep-15-tile-1.jpg"
+            - current_edit_mob_image = "homepage/fp-style-icon/sep-15-tile-1-mob.jpg"
+            - current_edit_cta_1 = "Georgia Fowler's"
+            - current_edit_cta_2 = "IT Girl Edit"
+            - current_edit_link = it_girl_landing_page_path
+
+          = link_to current_edit_link
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/aug-29-tile-1-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/aug-29-tile-1.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/aug-29-tile-1.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/aug-29-tile-1-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/aug-29-tile-1.jpg")} 1024w'
+                  source media="(max-width: 1023px)" srcset="#{image_path(current_edit_mob_image)}"
+                  source media="(min-width: 1024px)" srcset="#{image_path(current_edit_image)}"
+                  img src="#{image_path(current_edit_image)}" srcset="
+                    #{image_path(current_edit_mob_image)} 1023w,
+                    #{image_path(current_edit_image)} 1024w"
 
               .content-wrap
                 .container-cta
@@ -87,8 +102,8 @@ ruby:
                     .col-md-12
                       .copy-wrap.text-center
                         span.cta-link-white-bg
-                          span.cta-link Brittany Xavier Styles
-                          span.copy-highlight  Day to Night
+                          span.cta-link #{current_edit_cta_1}
+                          span.copy-highlight  #{current_edit_cta_2}
 
     .tag-info-section
       .tag-info-wrapper.visible-lg-block
@@ -102,11 +117,11 @@ ruby:
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/aug-29-tile-2-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/aug-29-tile-2.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/aug-29-tile-2.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/aug-29-tile-2-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/aug-29-tile-2.jpg")} 1024w'
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-2-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-2.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/sep-15-tile-2.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-2-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-2.jpg")} 1024w'
 
               .content-wrap
                 .container-cta
@@ -115,18 +130,18 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  Maxi Dresses
+                          span.copy-highlight  Ruffles
 
         .col-md-6.cta-item
           = link_to dresses_path + '/off-shoulder'
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/aug-29-tile-3-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/aug-29-tile-3.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/aug-29-tile-3.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/aug-29-tile-3-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/aug-29-tile-3.jpg")} 1024w'
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-3-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-3.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/sep-15-tile-3.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-3-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-3.jpg")} 1024w'
 
               .content-wrap
                 .container-cta
@@ -135,7 +150,7 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  The Cold Shoulder
+                          span.copy-highlight  Party Looks
 
       .row
         .col-md-6.cta-item
@@ -143,11 +158,11 @@ ruby:
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/aug-29-tile-4-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/aug-29-tile-4.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/aug-29-tile-4.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/aug-29-tile-4-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/aug-29-tile-4.jpg")} 1024w'
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-4-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-4.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/sep-15-tile-4.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-4-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-4.jpg")} 1024w'
 
               .content-wrap
                 .container-cta
@@ -156,18 +171,18 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  Party Dresses
+                          span.copy-highlight  Bridesmaids Dresses
 
         .col-md-6.cta-item
           = link_to dresses_path + '/embellishment'
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/aug-29-tile-5-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/aug-29-tile-5.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/aug-29-tile-5.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/aug-29-tile-5-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/aug-29-tile-5.jpg")} 1024w'
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-5-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-5.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/sep-15-tile-5.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-5-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-5.jpg")} 1024w'
 
               .content-wrap
                 .container-cta
@@ -176,7 +191,7 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  Embellishments
+                          span.copy-highlight  Backless Dresses
 
   // Section: Styling
   section.section-box.container.section-styling
