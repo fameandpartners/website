@@ -23,7 +23,8 @@ module Features
     send_promotion_email_reminder: nil,
     shipping_message:              nil,
     style_quiz:                    nil,
-    test_analytics:                "Force the rendering of JS Marketing Trackers, usually for testing."
+    test_analytics:                "Force the rendering of JS Marketing Trackers, usually for testing.",
+    afterpay:                      'Enables AfterPay payment method and its notifications on PDP'
   }
 
   class << self
