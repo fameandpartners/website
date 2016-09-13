@@ -19,7 +19,7 @@ $(document).ready ->
           required: true
         'forms_manual_order[size]':
           required: true
-        'forms_manual_order[length]':
+        'forms_manual_order[height]':
           required: true
         'forms_manual_order[color]':
           required: true
