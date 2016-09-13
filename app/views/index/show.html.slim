@@ -307,38 +307,40 @@ ruby:
   // Section: Social networks
   section.section-box.container.section-social.same-height-cols
     .row
+      - current_social_network_link = "https://www.instagram.com/fameandpartners/"
+      .col-md-6.copy-img-side-by-side
+        .item.bordered.item-alt.section-tumblr
+          .row
+            .col-sm-5.copy-side
+              .content-wrapper
+                p Fame inspo, <br class="hidden-xs hidden-sm">Fame mantras, <br class="hidden-xs hidden-sm">#FameMoments. <br class="hidden-xs hidden-sm">Get it all on our #{link_to "Instagram", current_social_network_link, target:"_blank"}.
+
+                .link-align-bottom
+                  = link_to current_social_network_link, target: "_blank"
+                    span.cta-link-arrow-right
+                      span.cta-link Give us a
+                      span.copy-highlight  Follow
+                      i.icon.icon-arrow-right
+
+            .col-sm-7.img-side
+              = link_to current_social_network_link, target: "_blank"
+                = image_tag "homepage/social-cards/tumblr.jpg", :class => "img-responsive"
+
+      - current_social_network_link = "https://www.facebook.com/FameandPartners"
       .col-md-6.copy-img-side-by-side
         .item.bordered.item-alt.section-facebook
           .row
             .col-sm-5.copy-side
               .content-wrapper
-                p Like us on #{link_to "facebook", "https://www.facebook.com/FameandPartners", target:"_blank"} and be the first to hear about exclusive sales and events.
+                p Like us on #{link_to "Facebook", current_social_network_link, target:"_blank"} to keep up with our latest lookbooks, trend reports, and IRL events.
 
                 .link-align-bottom
-                  = link_to 'https://www.facebook.com/FameandPartners', target: '_blank'
+                  = link_to current_social_network_link, target: "_blank"
                     span.cta-link-arrow-right
                       span.cta-link Explore
                       span.copy-highlight  Facebook
                       i.icon.icon-arrow-right
 
             .col-sm-7.img-side
-              = link_to 'https://www.facebook.com/FameandPartners', target: '_blank'
-                = image_tag 'homepage/social-cards/facebook.jpg', :class => 'img-responsive'
-
-      .col-md-6.copy-img-side-by-side
-        .item.bordered.item-alt.section-tumblr
-          .row
-            .col-sm-5.copy-side
-              .content-wrapper
-                p Check out #{link_to "tumblr", "https://fameandpartners.tumblr.com/", target:"_blank"} to see what’s inspiring us and our dress collections.
-
-                .link-align-bottom
-                  = link_to 'http://fameandpartners.tumblr.com/', target: '_blank'
-                    span.cta-link-arrow-right
-                      span.cta-link Explore
-                      span.copy-highlight  Tumblr
-                      i.icon.icon-arrow-right
-
-            .col-sm-7.img-side
-              = link_to 'http://fameandpartners.tumblr.com/', target: '_blank'
-                = image_tag 'homepage/social-cards/tumblr.jpg', :class => 'img-responsive'
+              = link_to current_social_network_link, target: "_blank"
+                = image_tag "homepage/social-cards/facebook.jpg", :class => "img-responsive"
