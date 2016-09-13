@@ -37,7 +37,8 @@ p All transactions are secure and encrypted. Credit card information is never st
             = hidden_field_tag "order[payments_attributes][][payment_method_id]", @credit_card_gateway.id
             = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
 
-  = render 'checkout/v1/spree/checkout/payment/afterpay'
+  - if @afterpay_method
+    = render 'checkout/v1/spree/checkout/payment/afterpay'
 
   - if @pay_pal_method
     #paypal_choice.panel
