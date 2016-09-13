@@ -197,15 +197,19 @@
     &.portrait-template {
 
       section {
-        padding-bottom: 55px;
+        padding-bottom: 30px;
       }
 
       .cta-product-caption {
-        margin: 45px 0;
+        margin: 55px 0 45px;
       }
 
       .cta-wrapper {
         margin-top: 25px;
+      }
+
+      .content-copy {
+        padding-top: 32px;
       }
 
     }
