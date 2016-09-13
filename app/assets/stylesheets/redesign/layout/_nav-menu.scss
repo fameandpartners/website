@@ -272,6 +272,49 @@
 
 }
 
+// My account nav menu
+.local-navigation-horizontal {
+  width: 100%;
+  display: inline-block;
+  padding: 5px 15px;
+
+  ul {
+    text-align: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    @include display-flex;
+  }
+
+  li {
+    padding: 0;
+    margin: 0 -2px;
+    display: inline-block;
+    flex-basis: 100%;
+  }
+
+  a {
+    color: $c-neutral-8;
+    border-bottom: 1px solid $c-neutral-8;
+    padding: 18px 35px;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .nav li {
+
+    &.active a,
+    a:hover,
+    a:focus {
+      background: none;
+      color: $c-neutral-black;
+      font-weight: 500;
+    }
+
+  }
+
+}
+
 .local-navigation-vertical {
 
   .nav li {
