@@ -105,6 +105,14 @@
       font-size: 1.5rem;
     }
 
+    section.intro {
+      margin-top: 0;
+    }
+
+    .local-navigation-row {
+      position: absolute;
+    }
+
   }
 
   @media (min-width: $bootstrap-md-width) {
@@ -130,7 +138,6 @@
     &.portrait-template {
 
       section.intro {
-        margin-top: 0;
 
         .content-copy {
           margin-top: -25%;
@@ -140,10 +147,6 @@
 
       section {
         margin-top: 15px;
-      }
-
-      .local-navigation-row {
-        position: absolute;
       }
 
       .content-img img {
@@ -187,6 +190,22 @@
       h3 {
         margin-top: 40px;
         font-size: 3rem;
+      }
+
+    }
+
+    &.portrait-template {
+
+      section {
+        padding-bottom: 55px;
+      }
+
+      .cta-product-caption {
+        margin: 45px 0;
+      }
+
+      .cta-wrapper {
+        margin-top: 25px;
       }
 
     }
