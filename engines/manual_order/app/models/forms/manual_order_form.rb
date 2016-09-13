@@ -25,11 +25,8 @@ module Forms
     property :adj_amount, virtual: true
     property :adj_description, virtual: true
 
-    def product_ids
-      Spree::Variant.where('deleted_at is NULL').uniq(:product_id).pluck(:product_id)
-    end
-
     def products
+      product_ids = Spree::Variant.where('deleted_at is NULL').uniq(:product_id).pluck(:product_id)
       Spree::Product.where(id: product_ids)
     end
 
