@@ -1,0 +1,91 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://apikey:<MAILCHIMP_API_KEY>@us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/customers/1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - application/problem+json; charset=utf-8
+      X-Request-Id:
+      - f01af7b6-23eb-45d9-a26f-cb0585f32c0a
+      Link:
+      - <https://us7.api.mailchimp.com/schema/3.0/ProblemDetailDocument.json>; rel="describedBy"
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '198'
+      Date:
+      - Thu, 01 Sep 2016 11:09:26 GMT
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - _AVESTA_ENVIRONMENT=prod; path=/
+    body:
+      encoding: UTF-8
+      string: '{"type":"http://developer.mailchimp.com/documentation/mailchimp/guides/error-glossary/","title":"Resource
+        Not Found","status":404,"detail":"The requested resource could not be found.","instance":""}'
+    http_version: 
+  recorded_at: Thu, 01 Sep 2016 11:09:26 GMT
+- request:
+    method: post
+    uri: https://apikey:<MAILCHIMP_API_KEY>@us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/customers
+    body:
+      encoding: UTF-8
+      string: '{"id":"1","email_address":"user1@gmail.com","first_name":"first_name_1","last_name":"last_name_1","opt_in_status":false}'
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Request-Id:
+      - 373212ae-3b51-4b0b-bd41-fd954fb7b170
+      Link:
+      - <https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Customers/Instance.json>;
+        rel="describedBy"
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1412'
+      Date:
+      - Thu, 01 Sep 2016 11:09:26 GMT
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - _AVESTA_ENVIRONMENT=prod; path=/
+    body:
+      encoding: UTF-8
+      string: '{"id":"1","email_address":"user1@gmail.com","opt_in_status":false,"company":"","first_name":"first_name_1","last_name":"last_name_1","orders_count":0,"total_spent":0,"address":{"address1":"","address2":"","city":"","province":"","province_code":"","postal_code":"","country":"","country_code":""},"created_at":"2016-09-01T11:09:26+00:00","updated_at":"2016-09-01T11:09:26+00:00","_links":[{"rel":"self","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/customers/1","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Customers/Instance.json"},{"rel":"parent","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/customers","method":"GET","targetSchema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Customers/Collection.json"},{"rel":"update","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/customers/1","method":"PATCH","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Customers/Instance.json"},{"rel":"upsert","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/customers/1","method":"PUT","schema":"https://us7.api.mailchimp.com/schema/3.0/Ecommerce/Stores/Customers/Instance.json"},{"rel":"delete","href":"https://us7.api.mailchimp.com/3.0/ecommerce/stores/<MAILCHIMP_STORE_ID>/customers/1","method":"DELETE"}]}'
+    http_version: 
+  recorded_at: Thu, 01 Sep 2016 11:09:27 GMT
+recorded_with: VCR 2.9.3
