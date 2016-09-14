@@ -57,7 +57,7 @@ module Acceptance
     end
 
     step 'I should have black dress image' do
-      expect(page).to have_selector('h4.product_image img[src*=black-front-crop]')
+      expect(page).to have_selector('h4.product_image img[src*=large]')
     end
 
     step 'I fill adjustment fields' do

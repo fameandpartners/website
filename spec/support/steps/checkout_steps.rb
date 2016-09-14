@@ -50,6 +50,15 @@ module Acceptance
       expect(page).to have_content(dress_price)
       expect(page).to have_content(dress_size_without_spaces)
     end
+
+    step 'I select :dress_name dress on :site_version, with :dress_size, :skirt_length and proceed to checkout' do |dress_name, site_version, dress_size, skirt_length|
+      send 'I am on :dress_name dress page', dress_name
+      send 'I select :site_version site version', site_version
+      send 'I select :dress_size size', dress_size
+      send 'I select :skirt_length skirt length', skirt_length
+      send 'I should see add to cart link enabled'
+      send 'I click on :link_text link', 'ADD TO BAG'
+    end
   end
 end
 

@@ -1,4 +1,4 @@
-Feature: Afterpay on Australian Website
+Feature: Afterpay on Australian's Website Storefront
 
   Background:
     Given A sample database with valid data
