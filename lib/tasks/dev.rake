@@ -21,11 +21,11 @@ namespace :dev do
           return
         end
 
-        test_gateway_names = ['PIN Payments TEST']
+        test_gateway_names = ['PIN Payments TEST', 'Afterpay Australia TEST']
 
         logger.info "Disabling Production Gateways"
         Spree::PaymentMethod.all.map do |gw|
-          logger.info "Disabling #{gw.name.ljust(22)} (#{gw.provider.class.name})"
+          logger.info "Disabling #{gw.name.ljust(30)} (#{gw.provider_class})"
           gw.active = false
           gw.save
         end
@@ -33,7 +33,7 @@ namespace :dev do
         logger.info "Enabling Test Gateways"
 
         Spree::PaymentMethod.where(:name => test_gateway_names).map do |gw|
-          logger.info "Enabling #{gw.name.ljust(22)} (#{gw.provider.class.name})"
+          logger.info "Enabling #{gw.name.ljust(30)} (#{gw.provider_class})"
           gw.active      = true
           gw.environment = target_env
           gw.save

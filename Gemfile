@@ -38,6 +38,7 @@ path 'engines' do
   gem 'bergen'
   gem 'manual_order'
   gem 'mailchimp_client'
+  gem 'afterpay'
 end
 
 # TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it,
