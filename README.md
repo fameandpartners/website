@@ -8,6 +8,7 @@
 * Redis
 * memcached
 * `imagemagick` 6.9.1
+* [git-lfs](https://git-lfs.github.com/)
 
 > Libraries versions can vary. Versions used above are suggestions.
 
@@ -67,6 +68,16 @@ This file loads environment variables required to run the application. You can u
 ## Vendored Gems
 
 All gems are vendored (downloaded and stored at `vendor/cache`). Because of this `bundle/config` file is now versioned. Be careful to **NOT** change it.
+
+## Git LFS
+
+If you cloned the project, but didn't have `git-lfs` installed, execute the following steps:
+
+* Install `git-lfs`
+  * For more details on installation steps, go to [https://git-lfs.github.com/](https://git-lfs.github.com/)
+* Execute `git lfs pull`
+
+This will pull all files stored on LFS for the current branch
 
 ### Creating an Admin User
 
