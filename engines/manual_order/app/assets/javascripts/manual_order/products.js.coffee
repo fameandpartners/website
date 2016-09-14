@@ -38,7 +38,7 @@ $ ->
     optCustomColors.html('')
     sizeSelect.html('<option></option>')
     customisationSelect.html('<option></option>')
-    imageTag.html('Please select style, size and color to see image')
+    imageTag.html('Please select style and color to see image')
     priceTag.html('Please select product details')
     adjustButtonPanel.hide()
     adjustPanel.hide()
@@ -64,7 +64,6 @@ $ ->
       $.getJSON url, (data) =>
         $.each data['manual_orders'], (index, el) =>
           sizeSelect.append $('<option>').attr('value', el.id).text(el.name)
-        sizeSelect.append $('<option>').attr('value', 'custom').text('Custom')
         sizeSelect.trigger("chosen:updated")
     else
       sizeSelect.trigger("chosen:updated")
@@ -82,7 +81,6 @@ $ ->
       $.getJSON url, (data) =>
         $.each data['manual_orders'], (index, el) =>
           customisationSelect.append option = $('<option>').attr('value', el.id).text(el.name)
-        customisationSelect.append $('<option>').attr('value', 'custom').text('Custom')
         customisationSelect.trigger("chosen:updated")
     else
       customisationSelect.trigger("chosen:updated")
