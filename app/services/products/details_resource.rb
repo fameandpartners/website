@@ -96,28 +96,24 @@ class Products::DetailsResource
     end
 
     # properties part
-    def product_properties
-      @product_properties ||= Repositories::ProductProperties.new(product: product)
-    end
-
     def product_short_description
       product.meta_description.blank? ? product.description : product.meta_description
     end
 
     def product_fabric
-      product_properties['fabric']
+      Rails.cache.fetch([product, 'product-property', 'fabric']) { product.property('fabric') }
     end
 
     def product_fit
-      product_properties['fit']
+      Rails.cache.fetch([product, 'product-property', 'fit']) { product.property('fit') }
     end
 
     def product_size
-      product_properties['size']
+      Rails.cache.fetch([product, 'product-property', 'size']) { product.property('size') }
     end
 
     def product_style_notes
-      product_properties['style_notes']
+      Rails.cache.fetch([product, 'product-property', 'style-notes']) { product.property('style_notes') }
     end
 
     def product_price
