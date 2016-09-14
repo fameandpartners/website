@@ -1,13 +1,16 @@
 // HOMEPAGE HERO CAROUSEL
 
 // Carousel Item 1
-= link_to gown_collection_landing_page_path, class: 'main-hero-wrap hero-wrap copy-left white-text', data: { description: 'The Gown Collection' }
+- current_tile_image = "homepage/hero-featured/sept-8-featured-1.jpg"
+- current_tile_image_mob = "homepage/hero-featured/sept-8-featured-1-mob.jpg"
+
+= link_to gown_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left white-text", data: { description: "The Gown Collection" }
   picture.media-wrap
-    source media='(max-width: 1023px)' srcset='#{image_path('homepage/hero-featured/sept-8-featured-1-mob.jpg')}'
-    source media='(min-width: 1024px)' srcset='#{image_path('homepage/hero-featured/sept-8-featured-1.jpg')}'
-    img src='#{image_path('homepage/hero-featured/sept-8-featured-1.jpg')}' srcset='
-      #{image_path("homepage/hero-featured/sept-8-featured-1-mob.jpg")} 1023w,
-      #{image_path("homepage/hero-featured/sept-8-featured-1.jpg")} 1024w'
+    source media="(max-width: 1023px)" srcset="#{image_path(current_tile_image_mob)}"
+    source media="(min-width: 1024px)" srcset="#{image_path(current_tile_image)}"
+    img src="#{image_path(current_tile_image)}" srcset="
+      #{image_path(current_tile_image_mob)} 1023w,
+      #{image_path(current_tile_image)} 1024w"
 
   .content-wrap
     .container
@@ -23,13 +26,69 @@
                 | Design <span class="copy-highlight">YOUR DRESS</span>
 
 // Carousel Item 2
-= link_to it_girl_landing_page_path, class: 'main-hero-wrap hero-wrap copy-left', data: { description: 'The It Girl Collection' }
+- if current_site_version.is_australia?
+  // AUSTRALIA
+  - current_tile_image = "homepage/hero-featured/sep-15-featured-2-au.jpg"
+  - current_tile_image_mob = "homepage/hero-featured/sep-15-featured-2-au-mob.jpg"
+
+  = link_to spring_racing_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Spring Racing Collection" }
+    picture.media-wrap
+      source media="(max-width: 1023px)" srcset="#{image_path(current_tile_image_mob)}"
+      source media="(min-width: 1024px)" srcset="#{image_path(current_tile_image)}"
+      img src="#{image_path(current_tile_image)}" srcset="
+        #{image_path(current_tile_image_mob)} 1023w,
+        #{image_path(current_tile_image)} 1024w"
+
+    .content-wrap
+      .container
+        .row
+          .col-md-4.col-md-offset-7
+            .copy-wrap
+              h2.heading.no-margin-md
+                span Are you ready for the Races?
+                span.sub-heading
+                  | Let Nadia Fairfax show you how to do Spring Racing in style.
+              .cta-wrapper
+                span.btn-md.btn-featured
+                  | Pick a <span class="copy-highlight">Winner</span>
+
+- else
+  // USA
+  - current_tile_image = "homepage/hero-featured/sep-15-featured-2.jpg"
+  - current_tile_image_mob = "homepage/hero-featured/sep-15-featured-2-mob.jpg"
+
+  = link_to cocktail_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Cocktail Collection" }
+    picture.media-wrap
+      source media="(max-width: 1023px)" srcset="#{image_path(current_tile_image_mob)}"
+      source media="(min-width: 1024px)" srcset="#{image_path(current_tile_image)}"
+      img src="#{image_path(current_tile_image)}" srcset="
+        #{image_path(current_tile_image_mob)} 1023w,
+        #{image_path(current_tile_image)} 1024w"
+
+    .content-wrap
+      .container
+        .row
+          .col-md-5
+            .copy-wrap
+              h2.heading.no-margin-md
+                span You deserve <br class="hidden-xs hidden-sm">an upgrade.
+                span.sub-heading
+                  | Ladies, it's time to freshen your cocktail attire. <br class="hidden-sm hidden-xs">May we suggest something made-to-order?
+              .cta-wrapper
+                span.btn-md.btn-featured
+                  | Make Mine <span class="copy-highlight">Custom</span>
+
+// Carousel Item 3
+- current_tile_image = "homepage/hero-featured/sep-15-featured-3.jpg"
+- current_tile_image_mob = "homepage/hero-featured/sep-15-featured-3-mob.jpg"
+
+= link_to dress_for_wedding_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "Floralux" }
   picture.media-wrap
-    source media='(max-width: 1023px)' srcset='#{image_path('homepage/hero-featured/aug-29-featured-1-mob.jpg')}'
-    source media='(min-width: 1024px)' srcset='#{image_path('homepage/hero-featured/aug-29-featured-1.jpg')}'
-    img src='#{image_path('homepage/hero-featured/aug-29-featured-1.jpg')}' srcset='
-      #{image_path("homepage/hero-featured/aug-29-featured-1-mob.jpg")} 1023w,
-      #{image_path("homepage/hero-featured/aug-29-featured-1.jpg")} 1024w'
+    source media="(max-width: 1023px)" srcset="#{image_path(current_tile_image_mob)}"
+    source media="(min-width: 1024px)" srcset="#{image_path(current_tile_image)}"
+    img src="#{image_path(current_tile_image)}" srcset="
+      #{image_path(current_tile_image_mob)} 1023w,
+      #{image_path(current_tile_image)} 1024w"
 
   .content-wrap
     .container
@@ -37,31 +96,9 @@
         .col-md-3.col-md-offset-9
           .copy-wrap
             h2.heading.no-margin-md
-              span Modern Classics
+              span The Look <br class="hidden-xs hidden-sm">of LOVE.
               span.sub-heading
-                | The silhouettes you love. The freedom to create a look that's all your own.
+                | Brides, bridesmaids, wedding guests–we've got you covered.
             .cta-wrapper
               span.btn-md.btn-featured
-                | Start <span class="copy-highlight">Customizing</span>
-
-// Carousel Item 3
-= link_to dress_for_wedding_page_path, class: 'main-hero-wrap hero-wrap copy-left', data: { description: 'Love Blooms Eternal' }
-  picture.media-wrap
-    source media='(max-width: 1023px)' srcset='#{image_path('homepage/hero-featured/aug-29-featured-2-mob.jpg')}'
-    source media='(min-width: 1024px)' srcset='#{image_path('homepage/hero-featured/aug-29-featured-2.jpg')}'
-    img src='#{image_path('homepage/hero-featured/aug-29-featured-2.jpg')}' srcset='
-      #{image_path("homepage/hero-featured/aug-29-featured-2-mob.jpg")} 1023w,
-      #{image_path("homepage/hero-featured/aug-29-featured-2.jpg")} 1024w'
-
-  .content-wrap
-    .container
-      .row
-        .col-md-4
-          .copy-wrap
-            h2.heading.no-margin-md
-              span Love Blooms Eternal.
-              span.sub-heading
-                | Don't blame us if it's love at first sight. <br>Shop the Weddings Collection.
-            .cta-wrapper
-              span.btn-md.btn-featured
-                | Say <span class="copy-highlight">I do</span>
+                | Design your <span class="copy-highlight">Dream Dress</span>
