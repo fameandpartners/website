@@ -10,4 +10,6 @@
   li.normal-item = link_to 'It Girl Collection',                it_girl_landing_page_path,       class: 'text'
   li.normal-item = link_to 'The Freshly Picked Collection',     the_freshly_picked_collection_path,       class: 'text'
   li.normal-item = link_to 'The Ruffled Up Collection',         the_ruffled_up_collection_path,           class: 'text'
-  li.normal-item.no-border = link_to 'View all lookbooks',      lookbook_path,                            class: 'text'
+  // Just an empty row to add more spacing here (only for Desktop)
+  li.double-line-height.hidden-sm.hidden-xs
+  li.normal-item.no-border.title.text-uppercase = link_to 'View all lookbooks',      lookbook_path,                            class: 'text'
