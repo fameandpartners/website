@@ -16,7 +16,7 @@ module Acceptance
       end
 
       step 'I am on :dress_name dress page' do |dress_name|
-        dress = Spree::Product.find_by_name(dress_name)
+        dress = Spree::Product.where(name: dress_name).first
         visit collection_product_path(dress)
       end
 

@@ -16,10 +16,10 @@ $ ->
   customisationUrl = '/fame_admin/manual_orders/customisations/:product_id'
   customisationSelect = $('#forms_manual_order_customisations')
 
-  imageUrl = '/fame_admin/manual_orders/images/:product_id/:size_id/:color_id'
+  imageUrl = '/fame_admin/manual_orders/images/:product_id/:color_id'
   imageTag = $('h4.product_image')
 
-  priceUrl = '/fame_admin/manual_orders/prices/:product_id/:size_id/:color_id/:currency'
+  priceUrl = '/fame_admin/manual_orders/prices/:product_id/:currency'
   priceTag = $('h4.price')
 
   adjustButtonPanel = $('.adjust-btn-panel')
@@ -71,8 +71,6 @@ $ ->
 
   updatePrice = ->
     url = priceUrl.replace(/:product_id/, styleSelect.val())
-    .replace(/:size_id/, sizeSelect.val())
-    .replace(/:color_id/, colorSelect.val())
     .replace(/:currency/, currencySelect.val())
     $.getJSON url, (data) =>
       priceTag.html("$#{data.price} #{data.currency}")
@@ -91,7 +89,6 @@ $ ->
 
   updateImage = ->
     url = imageUrl.replace(/:product_id/, styleSelect.val())
-    .replace(/:size_id/, sizeSelect.val())
     .replace(/:color_id/, colorSelect.val())
     $.getJSON url, (data) =>
       if data.url isnt 'null'
@@ -105,12 +102,12 @@ $ ->
     updateCustomisations()
 
   colorSelect.on 'change', =>
-    if sizeSelect.val() and colorSelect.val()
+    if colorSelect.val()
       updateImage()
       updatePrice()
 
   currencySelect.on 'change', =>
-    if sizeSelect.val() and colorSelect.val()
+    if colorSelect.val()
       updatePrice()
 
   adjustButton.on 'click', =>
