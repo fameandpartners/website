@@ -150,10 +150,17 @@ ruby:
                 i.fa.fa-chevron-left
                 .back BACK
             li.manu-content
-              = link_to gown_collection_landing_page_path
-                .panel-highlight.media-wrap
-                  = image_tag 'lookbook/Gown-MegaMenu-2016-09-08.jpg'
-                  .copy-wrap Gowns Collection <em><span>View this collection</span></em>
+              - if current_site_version.is_australia?
+                = link_to spring_racing_collection_landing_page_path
+                  .panel-highlight.media-wrap
+                    = image_tag 'lookbook/spring-racing-collection-megamenu-2016-09-15.jpg', alt: ""
+                    .copy-wrap Spring Racing Collection <em><span>View this collection</span></em>
+              - else
+                = link_to cocktail_collection_landing_page_path
+                  .panel-highlight.media-wrap
+                    = image_tag 'lookbook/cocktail-collection-megamenu-2016-09-15.jpg', alt: ""
+                    .copy-wrap Cocktail Collection <em><span>View this collection</span></em>
+
             = render partial: 'layouts/redesign/mega_menu/lookbook'
 
         div#moodboards-menu
