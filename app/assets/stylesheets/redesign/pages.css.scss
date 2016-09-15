@@ -1,5 +1,13 @@
 .pages  {
 
+  &.page-letter-from-ceo {
+
+    p a {
+      text-decoration: underline;
+    }
+
+  }
+
   h3 {
     font-family: inherit;
     font-size: 1.8rem;
