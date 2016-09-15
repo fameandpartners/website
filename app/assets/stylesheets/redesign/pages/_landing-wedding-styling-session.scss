@@ -1,0 +1,251 @@
+/* [Landing Page - Wedding Styling Session]
+-------------------------------------------------------*/
+
+.landing-page-wedding-styling-session {
+  font-family: $font-heading;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-transform: none;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  p {
+    font-weight: 300;
+    font-family: $font-heading;
+  }
+
+  .chosen-container-single .chosen-single {
+    background: $c-neutral-white;
+  }
+
+  .page-title {
+    background-color: $c-neutral-white;
+
+    h1 {
+      margin: 0;
+      padding-top: 60px;
+      font-size: 5.4rem;
+      line-height: 5rem;
+    }
+
+    p {
+      margin: 10px 0 30px;
+      font-size: 2.7rem;
+      line-height: 100%;
+    }
+
+    .header-image-right {
+      padding: 0;
+    }
+
+  }
+
+  .side-content,
+  .question-boxes .item {
+    background: $gray-light-bg;
+  }
+
+  .meet-stylist,
+  .content-area {
+    padding-top: 60px;
+  }
+
+  .side-wrapper {
+    padding: 0;
+  }
+
+  .side-content {
+    padding: 30px;
+
+    .meet-stylist {
+      h4 {
+        margin: 45px 0 0;
+        font-size: 4.5rem;
+        line-height: 3.5rem;
+      }
+
+      span {
+        font-weight: 300;
+        font-style: italic;
+        font-size: 2rem;
+      }
+
+    }
+
+    .form-area {
+      h3 {
+        margin-top: 35px;
+        padding-top: 35px;
+        border-top: 1px solid;
+        font-size: 4.3rem;
+      }
+
+      p {
+        color: $c-neutral-12;
+        font-size: 2rem;
+        line-height: 2.6rem;
+      }
+
+      .confirmation {
+        display: none;
+      }
+
+      .form-global,
+      .submit {
+        margin-top: 25px;
+      }
+
+      .chosen-container {
+        max-width: 100%;
+      }
+
+    }
+
+  }
+
+  .content-area {
+    padding-right: 50px;
+    padding-left: 50px;
+
+    .intro-txt {
+      padding-bottom: 35px;
+      text-align: center;
+
+      h3 {
+        margin-bottom: 0;
+        font-size: 4.7rem;
+      }
+
+      .title-note {
+        font-style: italic;
+        font-size: 3rem;
+      }
+
+      p {
+        margin-bottom: 30px;
+        font-size: 2rem;
+      }
+
+    }
+
+    .question-boxes {
+
+      .item {
+        position: relative;
+        padding: 20px;
+
+        &:after {
+          position: absolute;
+          top: 20%;
+          right: 100%;
+          margin-top: -15px;
+          width: 0;
+          height: 0;
+          border: solid transparent;
+          border-width: 15px;
+          border-color: transparent;
+          border-right-color: $gray-light-bg;
+          content: " ";
+          pointer-events: none;
+        }
+
+      }
+
+      .item,
+      .item-img {
+        margin-bottom: 15px;
+      }
+
+      p.question {
+        font-size: 2.2rem;
+        line-height: 3rem;
+      }
+
+      .author {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 1.3rem;
+        font-family: $font-family-secondary;
+      }
+
+      .highlight {
+        font-style: italic;
+      }
+
+    }
+
+  }
+
+}
+
+@media (max-width: $bootstrap-md-width - 1px) {
+
+  .landing-page-styling-session {
+
+    .page-title {
+      text-align: center;
+    }
+
+    .side-content {
+
+      &.meet {
+        background-color: $c-neutral-white;
+      }
+
+      .meet-stylist {
+
+        h4 {
+          margin-top: 15px;
+          font-size: 3rem;
+        }
+
+      }
+
+      .form-area {
+
+        h3 {
+          margin-top: 15px;
+          padding-top: 0;
+          border-top: none;
+        }
+
+        p {
+          font-size: 1.9rem;
+        }
+
+      }
+
+    }
+
+    .content-area {
+      padding-right: 15px;
+      padding-left: 15px;
+
+      .question-boxes {
+        p.question {
+          font-size: 2rem;
+          line-height: 2.5rem;
+        }
+
+      }
+
+    }
+
+    .meet-stylist,
+    .content-area {
+      padding-top: 30px;
+    }
+
+  }
+
+}

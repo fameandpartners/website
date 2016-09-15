@@ -7,15 +7,13 @@ class StyleSession
     :session_type,
     :email,
     :phone,
-    :birthday,
     :skype_id,
     :preference1,
-    :preference2,
-    :preference3,
-    :timezone
+    :timezone,
+    :contactme
 
-  validates_presence_of :email, :full_name, :phone, :preference1, :timezone
-  validates_format_of :email, with: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
+  validates_presence_of :full_name, :contactme
+  validates_format_of :email, with: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i, :allow_blank => true
 
   def initialize(attributes = {})
     attributes.each do |name, value|

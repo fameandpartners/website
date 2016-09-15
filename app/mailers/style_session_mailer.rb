@@ -7,7 +7,7 @@ class StyleSessionMailer < ActionMailer::Base
 
     mail(
       to:      'mystylist@fameandpartners.com',
-      from:    @style_session.email,
+      from:    'team@fameandpartners.com',
       subject: '[Style Session Booking]',
       layout:  false
     )
