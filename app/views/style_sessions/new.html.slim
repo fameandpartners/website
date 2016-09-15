@@ -83,12 +83,13 @@ javascript:
   $(document).ready(function(){
     $('.js-en-field-contactme').on('change', function () {
       var contactme = $(this).val().toLowerCase();
-      if (contactme == "email") {
+      
+      if (contactme === "email") {
         $('.js-en-field-email').parent().parent().show();
         $('.js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time-1').parent().parent().hide();
         $('.js-en-field-email').attr('required', 'required');
         $('.js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time-1').removeAttr('required');
-      } else if (contactme == "text") {
+      } else if (contactme === "text") {
         $('.js-en-field-phone').parent().parent().show();
         $('.js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time-1').parent().parent().hide();
         $('.js-en-field-phone').attr('required', 'required');
