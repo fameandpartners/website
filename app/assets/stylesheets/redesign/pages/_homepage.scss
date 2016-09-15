@@ -168,10 +168,19 @@
           border: none;
         }
 
+        a {
+          pointer-events: none;
+          cursor: default;
+        }
+
       }
 
       .item-copy a {
         display: none;
+      }
+
+      .btn-wrap {
+        margin-bottom: 50px;
       }
 
     }
