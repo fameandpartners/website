@@ -1,11 +1,17 @@
 dependencies:
   pre:
+    # PhantomJS
     - sudo curl --output /usr/local/bin/phantomjs https://s3.amazonaws.com/circle-downloads/phantomjs-2.1.1
-
-  post:
+    # Elasticsearch
     - wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.5.tar.gz
     - tar -xvf elasticsearch-1.7.5.tar.gz
     - elasticsearch-1.7.5/bin/elasticsearch: {background: true}
+    # git-lfs
+    - sudo mkdir -p /usr/etc/ && sudo touch /usr/etc/gitconfig
+    - curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+    - sudo apt-get install git-lfs=1.4.1
+    - ssh git@github.com git-lfs-authenticate fameandpartners/website.git download
+    - git lfs pull
 
 machine:
   ruby:

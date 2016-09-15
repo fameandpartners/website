@@ -4,52 +4,6 @@
 
   .container-fluid
 
-    // Section #1 - Intro area
-    - current_dress_name = "Dragon Eyes Lace dress"
-    - current_dress_link = "#{dresses_path}/dress-dragon-eyes-lace-1135?color=black"
-    - current_image_desktop = 'landingpages/gown-collection/section-01.jpg'
-    - current_image_mobile = 'landingpages/gown-collection/section-01-mob.jpg'
-    - if current_site_version.is_australia?
-      // AUSTRALIA - PRICE
-      - current_dress_price = "$379"
-    - else
-      // USA - PRICE
-      - current_dress_price = "$299"
-
-    .row
-      section.section-box.intro.vertical-align-copy#intro
-        .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
-          = link_to current_dress_link
-            picture
-              source media="(max-width: 991px)" srcset="#{image_path("#{current_image_mobile}")}"
-              source media="(min-width: 992px)" srcset="#{image_path("#{current_image_desktop}")}"
-              = image_tag "#{current_image_desktop}",
-                  srcset: "#{image_path("#{current_image_mobile}")} 991w,
-                          #{image_path("#{current_image_desktop}")} 992w",
-                  class: "img-responsive",
-                  alt: "#{current_dress_name}"
-
-        .col-md-5.vertical-align
-          .content-copy
-            h1.no-margin-md Introducing the latest <br class="hidden-md hidden-lg">- <br class="hidden-sm hidden-xs">The Gown Collection
-
-            p There's no experience more luxurious than slipping into a gorgeous, flowing gown and feeling the fabric slide over your skin. The dress hugs your body; the color and style are just right–and why? Because it's a true original, custom-made for you.
-
-            p Let's design your dream dress.
-
-            p.double-line-height
-
-            .cta-product-caption.copy-highlight
-              | Pictured
-              span.hidden-md.hidden-lg  above:
-              span.hidden-xs.hidden-sm  left:
-              .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
-
-            .cta-wrapper
-              = link_to "#the-sophisticate"
-                span.btn-md.btn-featured.no-margin
-                 | Explore
-
     // On-page navigation
     .row
       .local-navigation-wrapper.col-md-2
@@ -96,6 +50,52 @@
               li.link = link_to "#the-classically-inclined"
                   | The Classically Inclined
                   i.icon.icon-arrow-right
+
+    // Section #1 - Intro area
+    - current_dress_name = "Dragon Eyes Lace dress"
+    - current_dress_link = "#{dresses_path}/dress-dragon-eyes-lace-1135?color=black"
+    - current_image_desktop = 'landingpages/gown-collection/section-01.jpg'
+    - current_image_mobile = 'landingpages/gown-collection/section-01-mob.jpg'
+    - if current_site_version.is_australia?
+      // AUSTRALIA - PRICE
+      - current_dress_price = "$379"
+    - else
+      // USA - PRICE
+      - current_dress_price = "$299"
+
+    .row
+      section.section-box.intro.vertical-align-copy#intro
+        .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
+          = link_to current_dress_link
+            picture
+              source media="(max-width: 991px)" srcset="#{image_path("#{current_image_mobile}")}"
+              source media="(min-width: 992px)" srcset="#{image_path("#{current_image_desktop}")}"
+              = image_tag "#{current_image_desktop}",
+                  srcset: "#{image_path("#{current_image_mobile}")} 991w,
+                          #{image_path("#{current_image_desktop}")} 992w",
+                  class: "img-responsive",
+                  alt: "#{current_dress_name}"
+
+        .col-md-5.vertical-align
+          .content-copy
+            h1.no-margin-md Introducing the latest <br class="hidden-md hidden-lg">- <br class="hidden-sm hidden-xs">The Gown Collection
+
+            p There's no experience more luxurious than slipping into a gorgeous, flowing gown and feeling the fabric slide over your skin. The dress hugs your body; the color and style are just right–and why? Because it's a true original, custom-made for you.
+
+            p Let's design your dream dress.
+
+            p.double-line-height
+
+            .cta-product-caption.copy-highlight
+              | Pictured
+              span.hidden-md.hidden-lg  above:
+              span.hidden-xs.hidden-sm  left:
+              .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+
+            .cta-wrapper
+              = link_to "#the-sophisticate"
+                span.btn-md.btn-featured.no-margin
+                 | Explore
 
     // Section #2
     - current_dress_name = "Laced Victoria dress"
