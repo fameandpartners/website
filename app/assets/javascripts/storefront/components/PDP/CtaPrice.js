@@ -124,16 +124,22 @@ class CtaPrice extends React.Component {
               </div>
               <div className="col-md-12">
                 <div className="content-wrap">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                    voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                    voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                  <h4>How it works.</h4>
+                  <ol>
+                    <li>Select Afterpay as your payment method when you check out.
+                      <span>Use your existing debit or credit card.</span></li>
+                    <li>Completed your check.
+                      <span>No long forms, instant approval online.</span></li>
+                    <li>Pay over 4 equal instalments.
+                      <span>Pay fortnightly, enjoy your purchase straight away!</span></li>
+                  </ol>
+                  <h4>You simply need:</h4>
+                  <ul>
+                    <li>A debit card or credit card</li>
+                    <li>To be over 18 years of age</li>
+                    <li>To live in Australia</li>
+                  </ul>
+                  <p>To see Afterpay’s complete terms, visit <a href="https://www.afterpay.com.au/terms" target="_blank">www.afterpay.com.au/terms</a></p>
                 </div>
               </div>
             </div>

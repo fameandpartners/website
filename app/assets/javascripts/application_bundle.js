@@ -273,14 +273,77 @@ var CtaPrice = function (_React$Component) {
                   'div',
                   { className: 'content-wrap' },
                   _react2.default.createElement(
-                    'p',
+                    'h4',
                     null,
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                    'How it works.'
+                  ),
+                  _react2.default.createElement(
+                    'ol',
+                    null,
+                    _react2.default.createElement(
+                      'li',
+                      null,
+                      'Select Afterpay as your payment method when you check out.',
+                      _react2.default.createElement(
+                        'span',
+                        null,
+                        'Use your existing debit or credit card.'
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'li',
+                      null,
+                      'Completed your check.',
+                      _react2.default.createElement(
+                        'span',
+                        null,
+                        'No long forms, instant approval online.'
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'li',
+                      null,
+                      'Pay over 4 equal instalments.',
+                      _react2.default.createElement(
+                        'span',
+                        null,
+                        'Pay fortnightly, enjoy your purchase straight away!'
+                      )
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'h4',
+                    null,
+                    'You simply need:'
+                  ),
+                  _react2.default.createElement(
+                    'ul',
+                    null,
+                    _react2.default.createElement(
+                      'li',
+                      null,
+                      'A debit card or credit card'
+                    ),
+                    _react2.default.createElement(
+                      'li',
+                      null,
+                      'To be over 18 years of age'
+                    ),
+                    _react2.default.createElement(
+                      'li',
+                      null,
+                      'To live in Australia'
+                    )
                   ),
                   _react2.default.createElement(
                     'p',
                     null,
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                    'To see Afterpay’s complete terms, visit ',
+                    _react2.default.createElement(
+                      'a',
+                      { href: 'https://www.afterpay.com.au/terms', target: '_blank' },
+                      'www.afterpay.com.au/terms'
+                    )
                   )
                 )
               )
