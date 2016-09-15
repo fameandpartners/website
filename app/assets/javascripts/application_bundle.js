@@ -245,13 +245,13 @@ var CtaPrice = function (_React$Component) {
                   _react2.default.createElement(
                     'h4',
                     { className: 'h2 title' },
-                    'Buy Now.',
+                    'Buy Now. ',
                     _react2.default.createElement(
                       'em',
                       null,
                       'Pay Later.'
                     ),
-                    'No Interest'
+                    ' No Interest'
                   ),
                   _react2.default.createElement(
                     'h5',

@@ -118,7 +118,7 @@ class CtaPrice extends React.Component {
               <div className="col-md-12">
                 <div className="header-wrap">
                   <img src="/assets/_afterpay/logo-sml.png" alt="afterpay logo" />
-                  <h4 className="h2 title">Buy Now.<em>Pay Later.</em>No Interest</h4>
+                  <h4 className="h2 title">Buy Now. <em>Pay Later.</em> No Interest</h4>
                   <h5 className="h6 title">Just select <strong>Afterpay</strong> at checkout.</h5>
                 </div>
               </div>
