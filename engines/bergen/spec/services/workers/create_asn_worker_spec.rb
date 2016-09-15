@@ -21,6 +21,12 @@ module Bergen
         let!(:shipment) { create :simple_shipment }
         let!(:inventory_unit) { create :inventory_unit, variant: variant, order: order, shipment: shipment }
 
+        before do
+          allow(return_request_item.item_return).to receive(:shippo_tracking_number).and_return('9205590164917300760642')
+          allow(return_request_item.item_return).to receive(:shippo_label_url).and_return('https://shippo-delivery-east.s3.amazonaws.com/some_url')
+          return_item_process.tracking_number_was_updated!
+        end
+
         it 'creates ASN, triggers item returns event sourcing and trigger next step' do
           shipment.order = order
           shipment.save
@@ -28,8 +34,7 @@ module Bergen
           worker.perform(return_item_process.id)
           asn_event = return_request_item.item_return.events.bergen_asn_created.first
 
-          expect(shipment.reload.tracking).to eq('9205590164917300760642')
-          expect(asn_event.data['asn_number']).to eq('WHRTN1044724')
+          expect(asn_event.data['asn_number']).to eq('WHRTN1110619')
           expect(return_item_process).to have_state(:asn_created)
         end
 

@@ -9,10 +9,17 @@ namespace :bergen do
       end
     end
 
+    desc 'Update tracking numbers'
+    task update_tracking_numbers: :environment do
+      Bergen::Operations::ReturnItemProcess.not_failed.style_master_created.find_each do |return_item_process|
+        return_item_process.update_tracking_number
+      end
+    end
+
     # each 30 minutes
     desc 'Create ASNs for processes with valid style masters'
     task create_asns: :environment do
-      Bergen::Operations::ReturnItemProcess.not_failed.style_master_created.find_each do |return_item_process|
+      Bergen::Operations::ReturnItemProcess.not_failed.tracking_number_updated.find_each do |return_item_process|
         return_item_process.create_asn
       end
     end

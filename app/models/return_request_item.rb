@@ -58,6 +58,7 @@ class ReturnRequestItem < ActiveRecord::Base
   has_one :item_return, foreign_key: :request_id
 
   delegate :image_url, :style_name, :country_size, :colour_name, :display_price, :to => :line_item_presenter
+  delegate :order, to: :line_item
 
   validates :line_item, :action, :presence => true
   validates :action, :inclusion => { :in => ACTIONS }
