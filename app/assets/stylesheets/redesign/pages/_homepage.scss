@@ -161,7 +161,7 @@
       }
 
       .item {
-        padding: 0 30px;
+        padding: 0;
         margin-bottom: 30px;
 
         &.bordered {
@@ -185,8 +185,18 @@
 
     }
 
+    .styling-session {
+      text-align: center;
+    }
+
     .section-styling .styling-session {
       margin-top: $section-spacing-margin-top;
+
+      p,
+      .item-copy {
+        padding-right: 0;
+      }
+
     }
 
   }
