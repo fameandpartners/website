@@ -1,14 +1,17 @@
 /* [Links]
 -------------------------------------------------------*/
 a {
+  color: $c-neutral-black;
 
   &:hover {
     text-decoration: none;
+    color: $c-neutral-black;
   }
 
   &:focus {
     text-decoration: none;
     outline: none;
+    color: $c-neutral-black;
   }
 
 }

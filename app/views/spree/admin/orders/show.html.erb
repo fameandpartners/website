@@ -3,9 +3,18 @@
   <li>
     <%= button_link_to t(:cancel_order), fire_admin_order_url(@order.number, { :e => 'cancel' }), :icon => 'icon-trash', :data => { :confirm => t(:are_you_sure) } if @order.can_cancel? %>
   </li>
-  <li>
-    <%= button_link_to 'Return Order', new_user_returns_url(:order_number => @order.number), :icon => 'icon-refresh', :target => 'blank' %>
-  </li>
+  <% if @order.returnable? %>
+    <li>
+      <%= button_link_to 'Return Order', new_user_returns_url(:order_number => @order.number), :icon => 'icon-refresh', :target => 'blank' %>
+    </li>
+  <% elsif @order.order_return_requested? %>
+    <li>
+      <button class="ui-state-disabled" disabled>
+        <i class="icon-check"></i>
+        Order Return Requested
+      </button>
+    </li>
+  <% end %>
   <li>
     <%= button_link_to t(:edit), edit_admin_order_url(@order.number), :icon => 'icon-edit' %>
   </li>
