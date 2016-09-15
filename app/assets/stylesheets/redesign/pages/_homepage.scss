@@ -146,13 +146,38 @@
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
-    .section-styling .styling-session {
-      margin-top: $section-spacing-margin-top;
-    }
-
     .hero-wrap .sub-heading {
       padding-top: 0;
       font-size: inherit;
+    }
+
+    .section-fame-story {
+      margin-top: 15px;
+
+      .same-height-cols {
+        padding-top: 30px;
+        text-align: center;
+        border: solid $c-neutral-6 1px;
+      }
+
+      .item {
+        padding: 0 30px;
+        margin-bottom: 30px;
+
+        &.bordered {
+          border: none;
+        }
+
+      }
+
+      .item-copy a {
+        display: none;
+      }
+
+    }
+
+    .section-styling .styling-session {
+      margin-top: $section-spacing-margin-top;
     }
 
   }
