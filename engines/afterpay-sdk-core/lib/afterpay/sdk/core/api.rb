@@ -9,6 +9,10 @@ module Afterpay::SDK::Core
 
     attr_accessor :http, :uri, :service_name
 
+    DEFAULT_HTTP_HEADER = {
+      'Content-Type' => 'application/json'
+    }
+
     DEFAULT_END_POINTS = {
       :live => 'https://api.secure-afterpay.com.au',
       :sandbox => 'https://api-sandbox.secure-afterpay.com.au/v1/'⋅
@@ -167,7 +171,7 @@ module Afterpay::SDK::Core
 
     def format_request(payload)
       payload[:uri].path = url_join(payload[:uri].path, payload[:action])
-      payload[:header] = 
+      payload[:header] =
         { 'Authorization' => "#{token_type} #{token}"}
           .merge(DEFAULT_HTTP_HEADER)
 
