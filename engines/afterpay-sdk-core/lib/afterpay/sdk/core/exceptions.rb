@@ -1,7 +1,7 @@
 require 'json'
 
 module Afterpay::SDK::Core
-  class Exceptions
+  module Exceptions
 
     class ConnectionError < StandardError # :nodoc:
       attr_reader :response
@@ -14,10 +14,10 @@ module Afterpay::SDK::Core
       def to_s
         begin
           response_body = JSON.parse(response.body)
-          debug_id = response_body["debug_id"]
+          debug_id = response_body['debug_id']
         rescue
         end
-        message = "Failed."
+        message = 'Failed.'
         message << "  Response code = #{response.code}." if response.respond_to?(:code)
         message << "  Response message = #{response.message}." if response.respond_to?(:message)
         message << "  Response debug ID = #{debug_id}." if debug_id

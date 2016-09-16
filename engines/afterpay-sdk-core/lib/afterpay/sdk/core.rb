@@ -6,7 +6,7 @@ module Afterpay
       autoload :VERSION,        'afterpay/sdk/core/version'
       autoload :Config,         'afterpay/sdk/core/config'
       autoload :Configuration,  'afterpay/sdk/core/config'
-      autoload :Logging,        "afterpay-sdk/core/logging"
+      autoload :Logging,        "afterpay/sdk/core/logging"
       autoload :BaseDataType,   'afterpay/sdk/core/base_data_type'
       autoload :Exceptions,     'afterpay/sdk/core/exceptions'
       autoload :API,            'afterpay/sdk/core/api'

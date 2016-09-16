@@ -5,17 +5,17 @@ require 'cgi'
 
 module Afterpay::SDK::Core
   class API
-    include Util::HTTPHelper
-
     attr_accessor :http, :uri, :service_name
+
+    include Configuration
 
     DEFAULT_HTTP_HEADER = {
       'Content-Type' => 'application/json'
     }.freeze
 
     DEFAULT_END_POINTS = {
-      :live => 'https://api.secure-afterpay.com.au',
-      :sandbox => 'https://api-sandbox.secure-afterpay.com.au/v1/'⋅
+      live: 'https://api.secure-afterpay.com.au',
+      sandbox: 'https://api-sandbox.secure-afterpay.com.au/v1/'
     }.freeze
 
     DEFAULT_API_MODE = :sandbox.freeze
@@ -23,7 +23,7 @@ module Afterpay::SDK::Core
 
     def initialize(service_name = '', environment = nil, options = {})
       unless service_name.is_a? String
-        environment, options, service_name = service_name, environment || {}, ""
+        environment, options, service_name = service_name, environment || {}, ''
       end
       @service_name = service_name
       set_config(environment, options)
@@ -52,7 +52,6 @@ module Afterpay::SDK::Core
 
     def set_config(*args)
       @http = @uri = nil
-      super
     end
 
     def api_mode
@@ -124,7 +123,7 @@ module Afterpay::SDK::Core
 
     # Get access token type
     def token_type
-      "Bearer"
+      'Bearer'
     end
 
     def handle_response(response)
@@ -172,21 +171,21 @@ module Afterpay::SDK::Core
     def format_response(payload)
       response = payload[:response]
       payload[:data] =
-        if response.code >= "200" and response.code <= "299"
-          response.body && response.content_type == "application/json" ? MultiJson.load(response.body) : {}
-        elsif response.content_type == "application/json"
-          { "error" => MultiJson.load(response.body) }
+        if response.code >= '200' && response.code <= '299'
+          response.body && response.content_type == 'application/json' ? MultiJson.load(response.body) : {}
+        elsif response.content_type == 'application/json'
+          { 'error' => MultiJson.load(response.body) }
         else
-          { "error" => { "name" => response.code, "message" => response.message,
-            "developer_msg" => response } }
+          { 'error' => { 'name' => response.code, 'message' => response.message,
+            'developer_msg' => response } }
         end
       payload
     end
 
     # Log Afterpay-Request-Id header
     def log_http_call(payload)
-      if payload[:header] and payload[:header]["Afterpay-Request-Id"]
-        logger.info "Afterpay-Request-Id: #{payload[:header]["Afterpay-Request-Id"]}"
+      if payload[:header] && payload[:header]['Afterpay-Request-Id']
+        logger.info "Afterpay-Request-Id: #{payload[:header]['Afterpay-Request-Id']}"
       end
     end
 

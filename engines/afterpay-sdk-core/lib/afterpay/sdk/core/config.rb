@@ -72,7 +72,7 @@ module Afterpay::SDK::Core
     attr_accessor :username, :password,
         :token, :token_secret, :subject,
         :device_ipaddress, :sandbox_email_address,
-        :merchant_endpoint,
+        :merchant_endpoint
 
     alias_method :merchant_end_point=, :merchant_endpoint=
     alias_method :merchant_end_point, :merchant_endpoint
@@ -210,7 +210,7 @@ module Afterpay::SDK::Core
       def read_configurations(file_name = 'config/afterpay.yml')
         erb = ERB.new(File.read(file_name))
         erb.filename = file_name
-        YAML.load(erb.result)
+        YAML.load(erb.result) || {}
       end
 
     end
