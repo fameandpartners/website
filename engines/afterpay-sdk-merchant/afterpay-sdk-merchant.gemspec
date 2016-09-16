@@ -17,5 +17,5 @@ Gem::Specification.new do |spec|
   spec.test_files = Dir['spec/**/*']
   spec.require_paths = ['lib']
 
-  spec.add_dependency('afterpay-sdk-core', '~> 0.3.0')
+  spec.add_dependency('afterpay-sdk-core', '~> 0.0.1')
 end

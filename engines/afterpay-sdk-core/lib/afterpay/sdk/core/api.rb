@@ -11,7 +11,7 @@ module Afterpay::SDK::Core
 
     DEFAULT_HTTP_HEADER = {
       'Content-Type' => 'application/json'
-    }
+    }.freeze
 
     DEFAULT_END_POINTS = {
       :live => 'https://api.secure-afterpay.com.au',
@@ -27,6 +27,10 @@ module Afterpay::SDK::Core
       end
       @service_name = service_name
       set_config(environment, options)
+    end
+
+    def service_endpoint
+      config.endpoint || DEFAULT_END_POINTS[api_mode]
     end
 
     def uri
@@ -114,20 +118,6 @@ module Afterpay::SDK::Core
       raise exception
     end
 
-    class << self
-      def sdk_library_details
-        @library_details ||= "afterpay-sdk-core #{VERSION}; ruby #{RUBY_VERSION}p#{RUBY_PATCHLEVEL}-#{RUBY_PLATFORM}"
-      end
-
-      def user_agent
-        @user_agent ||= "AfterpaySDK/sdk-core-ruby #{VERSION} (#{sdk_library_details})"
-      end
-    end
-
-    def service_endpoint
-      config.endpoint || DEFAULT_END_POINTS[api_mode]
-    end
-
     def token
       Base64.urlsafe_encode64("#{config.username}:#{config.password}")
     end
@@ -197,6 +187,16 @@ module Afterpay::SDK::Core
     def log_http_call(payload)
       if payload[:header] and payload[:header]["Afterpay-Request-Id"]
         logger.info "Afterpay-Request-Id: #{payload[:header]["Afterpay-Request-Id"]}"
+      end
+    end
+
+    class << self
+      def sdk_library_details
+        @library_details ||= "afterpay-sdk-core #{VERSION}; ruby #{RUBY_VERSION}p#{RUBY_PATCHLEVEL}-#{RUBY_PLATFORM}"
+      end
+
+      def user_agent
+        @user_agent ||= "AfterpaySDK/sdk-core-ruby #{VERSION} (#{sdk_library_details})"
       end
     end
 
