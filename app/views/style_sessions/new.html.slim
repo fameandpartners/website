@@ -86,7 +86,7 @@ javascript:
 
       // Setup: hide everything and mark as remove required
       $('.js-en-field-email, .js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').closest('.row').hide();
-      $('.js-en-field-email, .js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').removeAttr('required');
+      $('.js-en-field-email, .js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').prop('required', false);
 
       switch (sessionType) {
         case "email":
