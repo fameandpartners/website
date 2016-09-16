@@ -85,29 +85,29 @@ javascript:
       var sessionType = $(this).val().toLowerCase();
 
       // Setup: hide everything and mark as remove required
-      $('.js-en-field-email, .js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').parent().parent().hide();
+      $('.js-en-field-email, .js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').closest('.row').hide();
       $('.js-en-field-email, .js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').removeAttr('required');
 
       switch (sessionType) {
         case "email":
-          $('.js-en-field-email').parent().parent().show();
-          $('.js-en-field-email').attr('required', 'required');
+          $('.js-en-field-email').closest('.row').show();
+          $('.js-en-field-email').prop('required', true);
           break;
         case "text":
-          $('.js-en-field-phone').parent().parent().show();
-          $('.js-en-field-phone').attr('required', 'required');
+          $('.js-en-field-phone').closest('.row').show();
+          $('.js-en-field-phone').prop('required', true);
           break;
         case "video chat":
-          $('.js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time').parent().parent().show();
-          $('.js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time').attr('required', 'required');
+          $('.js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time').closest('.row').show();
+          $('.js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time').prop('required', true);
           break;
         case "phone":
-          $('.js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').parent().parent().show();
-          $('.js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').attr('required', 'required');
+          $('.js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').closest('.row').show();
+          $('.js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').prop('required', true);
           break;
         case "at home":
-          $('.js-en-field-phone, .js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time').parent().parent().show();
-          $('.js-en-field-phone, .js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time').attr('required', 'required');
+          $('.js-en-field-phone, .js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time').closest('.row').show();
+          $('.js-en-field-phone, .js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time').prop('required', true);
           break;
         default:
           break;
