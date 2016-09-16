@@ -133,7 +133,7 @@ PATH
       manual_order
       money
       rails (~> 3.2.21)
-      reform (~> 2.0.5)
+      reform
       sidekiq
       simple_form
       slim
@@ -159,8 +159,8 @@ PATH
       gibbon (~> 2.2.4)
       sidekiq
     manual_order (0.0.1)
-      chosen-rails
-      datagrid
+      chosen-rails (~> 1.5.1)
+      datagrid (~> 1.4.0)
       kaminari
       rails (~> 3.2.22)
       reform
@@ -928,6 +928,7 @@ DEPENDENCIES
   rails (~> 3.2.22.2)
   react-rails (~> 1.6)
   redcarpet (~> 2.3.0)
+  reform (~> 2.0.5)
   revolution!
   rmagick
   rollout
@@ -973,4 +974,4 @@ RUBY VERSION
    ruby 2.1.6p336
 
 BUNDLED WITH
-   1.12.5
+   1.13.1
