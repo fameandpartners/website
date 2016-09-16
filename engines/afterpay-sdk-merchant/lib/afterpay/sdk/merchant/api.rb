@@ -1,5 +1,3 @@
-require 'afterpay-sdk-core'
-
 module Afterpay
   module SDK
     module Merchant

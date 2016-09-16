@@ -1,7 +1,6 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'afterpay/sdk/core/version'
+$:.push File.expand_path('../lib', __FILE__)
+require 'afterpay/sdk/core'
 
 Gem::Specification.new do |spec|
   spec.name          = 'afterpay-sdk-core'
