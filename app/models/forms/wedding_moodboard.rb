@@ -1,5 +1,3 @@
-require 'reform'
-
 module Forms
   class WeddingMoodboard < Reform::Form
 
