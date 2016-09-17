@@ -41,22 +41,22 @@
                   label for='style_contactme' class='label-contactme'
                     | How should we do this?
                   = f.select :contactme, options_for_select(["Email", "Text", "Video Chat", "Phone", "At Home"]), {include_blank: false},  :class => 'form-control form-control-md js-en-field-contactme'
-              .row#email-field-wrapper
+              .row.email-field-wrapper
                 .col-md-12.form-group
                   label for='style_session_email' class='label-email'
                     | Email Address
                   = f.text_field :email , type: 'email', :class => 'form-control form-control-md js-en-field-email', required: 'true'
-              .row#phone-field-wrapper
+              .row.phone-field-wrapper
                 .col-md-12.form-group
                   label for='style_session_phone' class='label-phone'
                     | Phone <span class="hint">(include country code)</span>
                   = f.text_field :phone, :class => 'form-control form-control-md js-en-field-phone'
-              .row#timezone-field-wrapper
+              .row.timezone-field-wrapper
                 .col-md-12.form-group
                   label for='style_session_timezone' class='label-timezone'
                     | Select your timezone
                   = f.select :timezone, options_for_select(ActiveSupport::TimeZone.all), { include_blank: true }, :class => 'form-control form-control-md js-en-field-timezone'
-              .row#preference1-field-wrapper
+              .row.preference1-field-wrapper
                 .col-md-12.form-group
                   label for='style_session_preference1' class='label-preference1'
                     | Preferred time #1
@@ -83,7 +83,7 @@ javascript:
   $(document).ready(function(){
     $('.js-en-field-contactme').on('change', function () {
       var contactme = $(this).val().toLowerCase();
-      
+
       if (contactme === "email") {
         $('.js-en-field-email').parent().parent().show();
         $('.js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time-1').parent().parent().hide();
