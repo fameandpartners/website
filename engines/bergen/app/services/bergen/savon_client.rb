@@ -53,19 +53,11 @@ module Bergen
 
       # Temporary solution while we don't follow 12 factor 100%
       def self.config
-        if Rails.env.production?
-          {
-            account_id: ENV.fetch('BERGEN_ACCOUNT_ID', 'www.fame&partnersinc.com'),
-            username:   ENV.fetch('BERGEN_USERNAME', 'fameandpartners'),
-            password:   ENV.fetch('BERGEN_PASSWORD', 'pr0jectpr0m')
-          }
-        else
-          {
-            account_id: ENV.fetch('BERGEN_ACCOUNT_ID', 'www.fame&partnersinc.com'),
-            username:   ENV.fetch('BERGEN_USERNAME', 'fameandpartners'),
-            password:   ENV.fetch('BERGEN_PASSWORD', 'not_set')
-          }
-        end
+        {
+          account_id: ENV['BERGEN_ACCOUNT_ID'],
+          username:   ENV['BERGEN_USERNAME'],
+          password:   ENV['BERGEN_PASSWORD']
+        }
       end
     end
   end
