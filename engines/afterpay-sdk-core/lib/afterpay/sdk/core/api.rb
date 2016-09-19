@@ -8,6 +8,8 @@ module Afterpay::SDK::Core
     attr_accessor :http, :uri, :service_name
 
     include Configuration
+    include Exceptions
+    include Logging
 
     DEFAULT_HTTP_HEADER = {
       'Content-Type' => 'application/json'
@@ -15,7 +17,7 @@ module Afterpay::SDK::Core
 
     DEFAULT_END_POINTS = {
       live: 'https://api.secure-afterpay.com.au',
-      sandbox: 'https://api-sandbox.secure-afterpay.com.au/v1/'
+      sandbox: 'https://api-sandbox.secure-afterpay.com.au/v1'
     }.freeze
 
     DEFAULT_API_MODE = :sandbox.freeze
@@ -34,20 +36,17 @@ module Afterpay::SDK::Core
     end
 
     def uri
-      @uri ||=
-        begin
-          uri = URI.parse("#{service_endpoint}/#{service_name}")
-          uri.path = uri.path.gsub(/\/+/, "/")
-          uri
-        end
+      @uri ||= URI.parse(url_join(service_endpoint, service_name))
     end
 
-    def create_http_connection
-      Net::HTTP.new(uri.host, uri.port)
+    def create_http_connection(connection_uri = uri)
+      Net::HTTP.new(connection_uri.host, connection_uri.port).tap do |connection|
+        connection.use_ssl = true
+      end
     end
 
     def http
-      @http ||= create_http_connection(uri)
+      @http ||= create_http_connection
     end
 
     def set_config(*args)
@@ -77,9 +76,47 @@ module Afterpay::SDK::Core
       payload[:data]
     end
 
+    def http_call(payload)
+      if config.verbose_logging
+        logger.info payload.inspect
+      end
+
+      response =
+        log_http_call(payload) do
+          http = payload[:http] || create_http_connection(payload[:uri])
+          http.start do |session|
+            if [ :get, :delete, :head ].include? payload[:method]
+              session.send(payload[:method], payload[:uri].request_uri, payload[:header])
+            else
+              session.send(payload[:method], payload[:uri].request_uri, payload[:body], payload[:header])
+            end
+          end
+        end
+
+      if config.verbose_logging
+        if response.code.to_i == 200
+          logger.info(response.body)
+        else
+          logger.warn(response.body)
+        end
+      end
+      binding.pry
+
+      handle_response(response)
+    end
+
+    def log_http_call(payload)
+      logger.info "Request[#{payload[:method]}]: #{payload[:uri].to_s}"
+      start_time = Time.now
+      response = yield
+      logger.info sprintf("Response[%s]: %s, Duration: %.3fs", response.code,
+        response.message, Time.now - start_time)
+      response
+    end
+
     def request(action, type, params = {}, header = {}, query = nil)
-      action, params, header = "", action, params if action.is_a? Hash
-      api_call(:method => :post, :action => action, :params => params, :header => header)
+      action, params, header = "", action, params if action.is_a?(Hash)
+      api_call(method: type, action: action, params: params, header: header)
     end
 
     def post(action, params = {}, header = {})
@@ -102,26 +139,10 @@ module Afterpay::SDK::Core
       request(action, :delete, params, header)
     end
 
-    def format_request(payload)
-      payload[:uri].path = url_join(payload[:uri].path, payload[:action])
-      payload[:body] = payload[:params].to_s
-      payload
-    end
-
-    def format_response(payload)
-      payload[:data] = payload[:response].body
-      payload
-    end
-
-    def format_error(exception, message)
-      raise exception
-    end
-
     def token
       Base64.urlsafe_encode64("#{config.username}:#{config.password}")
     end
 
-    # Get access token type
     def token_type
       'Bearer'
     end
@@ -160,11 +181,11 @@ module Afterpay::SDK::Core
 
     def format_request(payload)
       payload[:uri].path = url_join(payload[:uri].path, payload[:action])
-      payload[:header] =
-        { 'Authorization' => "#{token_type} #{token}"}
-          .merge(DEFAULT_HTTP_HEADER)
+      payload[:body] = JSON.dump(payload[:params])
+      payload[:header] = payload[:header]
+        .merge({ 'Authorization' => "#{token_type} #{token}" })
+        .merge(DEFAULT_HTTP_HEADER)
 
-      payload[:body] = MultiJson.dump(payload[:params])
       payload
     end
 
@@ -172,9 +193,9 @@ module Afterpay::SDK::Core
       response = payload[:response]
       payload[:data] =
         if response.code >= '200' && response.code <= '299'
-          response.body && response.content_type == 'application/json' ? MultiJson.load(response.body) : {}
+          response.body && response.content_type == 'application/json' ? JSON.load(response.body) : {}
         elsif response.content_type == 'application/json'
-          { 'error' => MultiJson.load(response.body) }
+          { 'error' => JSON.load(response.body) }
         else
           { 'error' => { 'name' => response.code, 'message' => response.message,
             'developer_msg' => response } }
@@ -182,11 +203,13 @@ module Afterpay::SDK::Core
       payload
     end
 
-    # Log Afterpay-Request-Id header
-    def log_http_call(payload)
-      if payload[:header] && payload[:header]['Afterpay-Request-Id']
-        logger.info "Afterpay-Request-Id: #{payload[:header]['Afterpay-Request-Id']}"
-      end
+    def url_join(path, action)
+      uri_path = [path, action].join('/')
+      uri_path.gsub(/([^:])\/\//, '\1/')
+    end
+
+    def format_error(exception, message)
+      raise exception
     end
 
     class << self

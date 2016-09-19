@@ -4,8 +4,8 @@ module Afterpay
       module Urls
 
         REDIRECT_ENDPOINTS = {
-          :live => 'https://api.secure-afterpay.com.au',
-          :sandbox => 'https://api-sandbox.secure-afterpay.com.au/v1/' 
+          live: 'https://api.secure-afterpay.com.au',
+          sandbox: 'https://api-sandbox.secure-afterpay.com.au/v1' 
         }.freeze
 
         def redirect_url(params = {})

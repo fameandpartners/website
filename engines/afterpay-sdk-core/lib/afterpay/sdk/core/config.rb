@@ -22,10 +22,10 @@ module Afterpay::SDK::Core
     end
 
     # To change the configuration to given environment or configuration
-    # 
+    #
     # @param env [Symbol] Environment
     # @param override_configurations [Hash] To override the default configuration.
-    # 
+    #
     # @example
     #   obj.set_config(api.config)
     #   obj.set_config(:http_timeout => 30)
@@ -71,11 +71,9 @@ module Afterpay::SDK::Core
 
     attr_accessor :username, :password,
         :token, :token_secret, :subject,
-        :device_ipaddress, :sandbox_email_address,
-        :merchant_endpoint
-
-    alias_method :merchant_end_point=, :merchant_endpoint=
-    alias_method :merchant_end_point, :merchant_endpoint
+        :mode, :device_ipaddress,
+        :sandbox_email_address, :endpoint,
+        :verbose_logging
 
     # Create Config object
     #
@@ -117,7 +115,7 @@ module Afterpay::SDK::Core
       @@config_cache = {}
 
       # Load configurations from file
-      # 
+      #
       # @param file_name [String] Configuration file path
       # @param default_environment [String] Default environment configuration to load
       #
