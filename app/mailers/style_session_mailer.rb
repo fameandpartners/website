@@ -2,8 +2,8 @@ class StyleSessionMailer < ActionMailer::Base
 
   default from: configatron.noreply
 
-  def email(style_session)
-    @style_session = style_session
+  def email(style_session_form)
+    @style_session_form = style_session_form
 
     mail(
       to:      'mystylist@fameandpartners.com',
