@@ -51,7 +51,6 @@ module Bergen
         )
       end
 
-      # Temporary solution while we don't follow 12 factor 100%
       def self.config
         {
           account_id: ENV['BERGEN_ACCOUNT_ID'],
