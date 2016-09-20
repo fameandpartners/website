@@ -5,9 +5,8 @@ class Spree::Gateway
     subject(:payment_method) { described_class.new }
 
     describe 'preferences default values' do
-      it { expect(payment_method.preferred_merchant_id).to eq('') }
-      it { expect(payment_method.preferred_merchant_key).to eq('') }
-      it { expect(payment_method.preferred_server).to eq('sandbox') }
+      it { expect(payment_method.preferred_username).to eq('') }
+      it { expect(payment_method.preferred_password).to eq('') }
     end
 
     describe 'Spree Gateway methods' do
