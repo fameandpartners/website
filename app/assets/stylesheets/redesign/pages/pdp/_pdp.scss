@@ -404,6 +404,35 @@
 
   }
 
+  .section-box .item {
+    margin-bottom: 30px;
+
+    .summary {
+      font-size: 0.875em;
+    }
+
+    .summary,
+    .cta-link-arrow-right {
+      display: block;
+      margin-bottom: 15px;
+    }
+
+  }
+
+  .section-instagram {
+    margin-top: 15px;
+    padding-bottom: 35px;
+
+    .instagram-widget .item {
+      padding: 5px;
+    }
+
+    .btn-featured {
+      margin-top: 0;
+    }
+
+  }
+
   @media (max-width: $bootstrap-md-width - 1px) {
 
     padding-top: 0;
