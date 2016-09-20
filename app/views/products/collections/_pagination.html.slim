@@ -5,9 +5,8 @@
     .status.loading style="display: none;"
       = image_tag('fame-spinner.gif')
     .status.inactive style="display: none;"
-    - if !current_page?(dresses_path)
-      = link_to 'More Dresses', dresses_path, class: 'btn btn-featured'
-- else
-  - if !current_page?(dresses_path)
-    .row.relative.more-products
-      = link_to 'More Dresses', dresses_path, class: 'btn btn-featured'
+    // nothing
+
+- if !current_page?(dresses_path)
+  .row.relative.more-products
+    = link_to 'More Dresses', dresses_path, class: 'btn btn-featured'
