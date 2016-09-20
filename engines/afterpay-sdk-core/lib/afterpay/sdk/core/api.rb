@@ -2,6 +2,7 @@ require 'base64'
 require 'net/https'
 require 'uri'
 require 'cgi'
+require 'faraday'
 
 module Afterpay::SDK::Core
   class API
@@ -23,6 +24,11 @@ module Afterpay::SDK::Core
     DEFAULT_API_MODE = :sandbox.freeze
     API_MODES        = DEFAULT_END_POINTS.keys.freeze
 
+    DEFAULT_TIMEOUTS = {
+      open: 10,
+      read: 20
+    }.freeze
+
     def initialize(service_name = '', environment = nil, options = {})
       unless service_name.is_a? String
         environment, options, service_name = service_name, environment || {}, ''
@@ -40,8 +46,9 @@ module Afterpay::SDK::Core
     end
 
     def create_http_connection(connection_uri = uri)
-      Net::HTTP.new(connection_uri.host, connection_uri.port).tap do |connection|
-        connection.use_ssl = true
+      Faraday.new(connection_uri).tap do |connection|
+        connection.basic_auth(config.username, config.password)
+        connection.adapter Faraday.default_adapter
       end
     end
 
@@ -84,23 +91,27 @@ module Afterpay::SDK::Core
       response =
         log_http_call(payload) do
           http = payload[:http] || create_http_connection(payload[:uri])
-          http.start do |session|
-            if [ :get, :delete, :head ].include? payload[:method]
-              session.send(payload[:method], payload[:uri].request_uri, payload[:header])
-            else
-              session.send(payload[:method], payload[:uri].request_uri, payload[:body], payload[:header])
+
+          http.send(payload[:method]) do |req|
+            req.url payload[:uri].request_uri
+            req.headers = req.headers.merge(payload[:header])
+            if payload[:method] == :post
+              req.body = payload[:body]
             end
+
+            req.options.timeout = DEFAULT_TIMEOUTS[:read]
+            req.options.open_timeout = DEFAULT_TIMEOUTS[:open]
           end
+
         end
 
       if config.verbose_logging
-        if response.code.to_i == 200
+        if response.status.to_i == 200
           logger.info(response.body)
         else
           logger.warn(response.body)
         end
       end
-      binding.pry
 
       handle_response(response)
     end
@@ -109,8 +120,8 @@ module Afterpay::SDK::Core
       logger.info "Request[#{payload[:method]}]: #{payload[:uri].to_s}"
       start_time = Time.now
       response = yield
-      logger.info sprintf("Response[%s]: %s, Duration: %.3fs", response.code,
-        response.message, Time.now - start_time)
+      logger.info sprintf("Response[%s]: %s, Duration: %.3fs", response.status,
+        response_message(response), Time.now - start_time)
       response
     end
 
@@ -148,7 +159,7 @@ module Afterpay::SDK::Core
     end
 
     def handle_response(response)
-      case response.code.to_i
+      case response.status.to_i
       when 301, 302, 303, 307
         raise(Redirection.new(response))
       when 200...400
@@ -175,7 +186,7 @@ module Afterpay::SDK::Core
       when 500...600
         raise(ServerError.new(response))
       else
-        raise(ConnectionError.new(response, "Unknown response code: #{response.code}"))
+        raise(ConnectionError.new(response, "Unknown response code: #{response.status}"))
       end
     end
 
@@ -183,7 +194,6 @@ module Afterpay::SDK::Core
       payload[:uri].path = url_join(payload[:uri].path, payload[:action])
       payload[:body] = JSON.dump(payload[:params])
       payload[:header] = payload[:header]
-        .merge({ 'Authorization' => "#{token_type} #{token}" })
         .merge(DEFAULT_HTTP_HEADER)
 
       payload
@@ -191,16 +201,24 @@ module Afterpay::SDK::Core
 
     def format_response(payload)
       response = payload[:response]
+      code = response.status.to_i
       payload[:data] =
-        if response.code >= '200' && response.code <= '299'
-          response.body && response.content_type == 'application/json' ? JSON.load(response.body) : {}
+        if code >= 200 && code <= 299
+          response.body ? JSON.load(response.body) : {}
         elsif response.content_type == 'application/json'
           { 'error' => JSON.load(response.body) }
         else
-          { 'error' => { 'name' => response.code, 'message' => response.message,
+          { 'error' => { 'name' => response.status, 'message' => response_message(response),
             'developer_msg' => response } }
         end
       payload
+    end
+
+    def response_message(res)
+      response_object = JSON.load(res.body)
+      if response_object.is_a?(Hash)
+        response_object.fetch('message', '')
+      end
     end
 
     def url_join(path, action)

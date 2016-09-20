@@ -16,6 +16,5 @@ Gem::Specification.new do |spec|
   spec.test_files = Dir['spec/**/*']
   spec.require_paths = ['lib']
 
-  spec.add_dependency('xml-simple')
-  spec.add_dependency('multi_json', '~> 1.0')
+  spec.add_dependency('faraday')
 end
