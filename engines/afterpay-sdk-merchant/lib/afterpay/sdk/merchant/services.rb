@@ -1,5 +1,4 @@
 module Afterpay::SDK::Merchant
-  include DataType
 
   module Services
     def ping(options = {}, http_header = {})
