@@ -82,6 +82,10 @@ module Afterpay::SDK::Core
     class ResourceGone < ClientError # :nodoc:
     end
 
+    # 422 Invalid
+    class ResourceInvalid < ClientError # :nodoc:
+    end
+
     # 5xx Server Error
     class ServerError < ConnectionError # :nodoc:
     end
