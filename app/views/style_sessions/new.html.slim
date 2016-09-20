@@ -56,7 +56,7 @@
                   label for='style_session_timezone' class='label-timezone'
                     | Select your timezone
                   = f.select :timezone, options_for_select(ActiveSupport::TimeZone.all), { include_blank: true }, :class => 'form-control form-control-md js-en-field-timezone'
-              .row#preference-field-wrapper
+              .row.preference-field-wrapper
                 .col-md-12.form-group
                   label for='style_session_preference' class='label-preference'
                     | Preferred time
