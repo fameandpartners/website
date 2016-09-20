@@ -1,13 +1,11 @@
 module Spree
   class Gateway
     class AfterpayPayment < Gateway
-      preference :merchant_id, :string, default: ''
-      preference :merchant_key, :string, default: ''
-      preference :server, :string, default: 'sandbox'
+      preference :username, :string, default: ''
+      preference :password, :string, default: ''
 
-      attr_accessible :preferred_merchant_id,
-                      :preferred_merchant_key,
-                      :preferred_server
+      attr_accessible :preferred_username,
+                      :preferred_password
 
       # Spree Gateway methods
 
