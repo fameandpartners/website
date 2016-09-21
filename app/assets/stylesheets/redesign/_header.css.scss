@@ -690,18 +690,8 @@ ul.secondary.pull-right {
       font-weight: 400;
     }
 
-    .highlight {
-
-      &:after {
-        content: "NEW";
-        color: #fff;
-        background-color: #000;
-        vertical-align: 3px;
-        padding: 2px 5px;
-        margin-left: 8px;
-        font-size: 1.0rem;
-      }
-
+    .label-default {
+      font-size: 0.7em;
     }
 
     .arrow {

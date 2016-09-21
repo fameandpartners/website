@@ -9,4 +9,4 @@
   li.normal-item = link_to 'Maxi Dresses'      , build_taxon_path('Maxi'), class: 'text'
   li.normal-item = link_to 'Midi Dresses'      , build_taxon_path('Midi'), class: 'text'
   li.normal-item = link_to 'Mini Dresses'      , build_taxon_path('Mini'), class: 'text'
-  li.normal-item.no-border = link_to 'Skirts'  , skirts_collection_path, class: 'text highlight'
+  li.normal-item.no-border = link_to 'Skirts <span class="label label-default">NEW</span>'.html_safe, skirts_collection_path, class: 'text cta-highlight'
