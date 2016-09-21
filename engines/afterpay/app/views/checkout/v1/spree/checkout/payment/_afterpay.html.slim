@@ -1,9 +1,23 @@
-- if Features.active?(:afterpay) && current_site_version.is_australia?
+ruby:
+  presenter = Afterpay::Presenters::Token.new(spree_order: spree_order, spree_payment_method: afterpay_method, rails_request: request)
+
+- if Features.active?(:afterpay) && current_site_version.is_australia? && presenter.order_eligible?
   ruby:
-    afterpay_token       = afterpay.create_order(spree_order)
     single_installment   = spree_order.total / 4
-    order_total_text     = Spree::Money.new(spree_order.total, currency: 'AUD').to_s
-    one_installment_text = Spree::Money.new(single_installment, currency: 'AUD').to_s
+    order_total_text     = Spree::Money.new(spree_order.total, currency: 'AUD')
+    one_installment_text = Spree::Money.new(single_installment, currency: 'AUD')
+
+  - content_for :head
+    - if afterpay_method.preferred_test_mode
+      script src="https://www-sandbox.secure-afterpay.com.au/afterpay.js" async=true
+    - else
+      script src="https://www.secure-afterpay.com.au/afterpay.js" async=true
+
+    javascript:
+      function buyWithAfterpay() {
+        AfterPay.init();
+        AfterPay.display({token: "#{presenter.get_token}"});
+      }
 
   .panel.panel-afterpay
     .panel-heading
@@ -40,14 +54,3 @@
         a.btn.btn-black.btn-md href='javascript:buyWithAfterpay();' Continue With Afterpay
         div
           = link_to 'Terms and conditions', 'https://www.afterpay.com.au/terms/', target: '_blank'
-
-    - if afterpay.preferred_test_mode
-      script src="https://www-sandbox.secure-afterpay.com.au/afterpay.js" async=true
-    - else
-      script src="https://www.secure-afterpay.com.au/afterpay.js" async=true
-
-  javascript:
-    function buyWithAfterpay() {
-      AfterPay.init();
-      AfterPay.display({token: "#{afterpay_token}"});
-    }
