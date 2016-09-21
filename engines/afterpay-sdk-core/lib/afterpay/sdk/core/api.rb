@@ -150,10 +150,6 @@ module Afterpay::SDK::Core
       request(action, :delete, params, header)
     end
 
-    def token
-      Base64.urlsafe_encode64("#{config.username}:#{config.password}")
-    end
-
     def handle_response(response)
       case response.status.to_i
       when 301, 302, 303, 307

@@ -1,7 +1,6 @@
 module Afterpay::SDK::Merchant
   class API < Afterpay::SDK::Core::API
     include Services
-    include Urls
 
     MERCHANT_HTTP_HEADER = { 'X-AFTERPAY-REQUEST-SOURCE' => "merchant-ruby-sdk-#{VERSION}" }.freeze
 
