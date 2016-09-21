@@ -12,7 +12,8 @@ class Spree::Gateway
     describe 'Spree Gateway methods' do
       it { expect(payment_method.auto_capture?).to eq(true) }
       it { expect(payment_method.supports?({})).to eq(true) }
-      it { expect(payment_method.provider_class).to eq(Spree::Gateway::Bogus) }
+      it { expect(payment_method.provider_class).to eq(::Afterpay::SDK::Merchant) }
+      it { expect(payment_method.provider).to be_an_instance_of(::Afterpay::SDK::Merchant::API) }
       it { expect(payment_method.currency).to eq('AUD') }
       it { expect(payment_method.method_type).to eq('afterpay') }
     end

@@ -18,9 +18,16 @@ module Spree
       end
 
       def provider_class
-        # TODO: Actual API wrapper here
-        # More information: https://github.com/spree/spree/blob/1-3-stable/core/app/models/spree/gateway.rb#L27
-        Spree::Gateway::Bogus
+        ::Afterpay::SDK::Merchant
+      end
+
+      def provider
+        ::Afterpay::SDK.configure(
+          mode: (preferred_server.presence || :sandbox).to_sym,
+          username: preferred_username,
+          password: preferred_password
+        )
+        provider_class.new
       end
 
       def currency
