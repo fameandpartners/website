@@ -38,7 +38,7 @@ p All transactions are secure and encrypted. Credit card information is never st
             = render :partial => "spree/checkout/payment/#{@credit_card_gateway.method_type}", :locals => { :payment_method => @credit_card_gateway }
 
   - if @afterpay_method
-    = render 'checkout/v1/spree/checkout/payment/afterpay'
+    = render 'checkout/v1/spree/checkout/payment/afterpay', spree_order: @order, afterpay: @afterpay_method
 
   - if @pay_pal_method
     #paypal_choice.panel

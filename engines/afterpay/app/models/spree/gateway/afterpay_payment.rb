@@ -50,6 +50,35 @@ module Spree
       def refund(payment, amount)
         # TODO
       end
+
+      # Checkout Helpers
+
+      # Returns token or false if it fails
+      def create_order(spree_order)
+        result = provider.create_order(
+          {
+            totalAmount:       {
+              amount:   spree_order.total,
+              currency: spree_order.currency
+            },
+            consumer:          {
+              phoneNumber: spree_order.bill_address.phone,
+              givenNames:  spree_order.bill_address.firstname,
+              surname:     spree_order.bill_address.lastname,
+              email:       spree_order.email
+            },
+            merchant:          {
+              redirectConfirmUrl: 'http://au.lvh.me:3000/afterpay/confirm',
+              redirectCancelUrl:  'http://au.lvh.me:3000/checkout'
+            },
+            merchantReference: preferred_username
+          }
+        )
+        result['token']
+      rescue StandardError => e
+        Raven.capture_exception(e)
+        false
+      end
     end
   end
 end

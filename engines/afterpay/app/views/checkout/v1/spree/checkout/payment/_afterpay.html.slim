@@ -1,7 +1,8 @@
 - if Features.active?(:afterpay) && current_site_version.is_australia?
   ruby:
-    single_installment   = @order.total / 4
-    order_total_text     = Spree::Money.new(@order.total, currency: 'AUD').to_s
+    afterpay_token       = afterpay.create_order(spree_order)
+    single_installment   = spree_order.total / 4
+    order_total_text     = Spree::Money.new(spree_order.total, currency: 'AUD').to_s
     one_installment_text = Spree::Money.new(single_installment, currency: 'AUD').to_s
 
   .panel.panel-afterpay
@@ -36,33 +37,17 @@
             .to-pay = one_installment_text
             .time-period Fortnightly
         h6 You will temporarily be redirected to the Afterpay website via a popup to complete your purchase
-        a.btn.btn-black.btn-md href='javascript:;' Continue With Afterpay
+        a.btn.btn-black.btn-md href='javascript:buyWithAfterpay();' Continue With Afterpay
         div
           = link_to 'Terms and conditions', 'https://www.afterpay.com.au/terms/', target: '_blank'
 
-/ TODO: Real Afterpay implementation
-/- if @afterpay_method
-/  h4 Afterpay
-/
-/  = flash[:error]
-/
-/  = form_for @order, url: update_checkout_path(@order.state) do |f|
-/    - param_prefix = "payment_source[#{@afterpay_method.id}]"
-/    = hidden_field_tag 'order[payments_attributes][][payment_method_id]', @afterpay_method.id
-/
-/    ' Number
-/    = text_field_tag "#{param_prefix}[number]", '5520000000000000'
-/
-/    ' Month
-/    = text_field_tag "#{param_prefix}[month]", '11'
-/
-/    ' Year
-/    = text_field_tag "#{param_prefix}[year]", '2016'
-/
-/    ' CVV
-/    = text_field_tag "#{param_prefix}[verification_value]", '123'
-/
-/    ' Full Name
-/    = text_field_tag "#{param_prefix}[full_name]", [@order.billing_firstname, @order.billing_lastname].join(' ')
-/
-/    = f.submit 'WOOT Afterpay WOOT'
+    - if afterpay.preferred_test_mode
+      script src="https://www-sandbox.secure-afterpay.com.au/afterpay.js" async=true
+    - else
+      script src="https://www.secure-afterpay.com.au/afterpay.js" async=true
+
+  javascript:
+    function buyWithAfterpay() {
+      AfterPay.init();
+      AfterPay.display({token: "#{afterpay_token}"});
+    }
