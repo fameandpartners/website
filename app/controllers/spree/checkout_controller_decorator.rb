@@ -306,7 +306,7 @@ Spree::CheckoutController.class_eval do
     end
 
     @afterpay_method = @order.available_payment_methods.detect do |method|
-      method.method_type == 'afterpay' && current_site_version.currency == 'AUD'
+      method.method_type == 'afterpay' && current_site_version.currency == method.currency
     end
   end
 
