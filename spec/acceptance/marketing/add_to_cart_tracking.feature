@@ -7,7 +7,7 @@ Feature: Add to Cart Tracking
     And The "test_analytics" feature is disabled
     And The "google_tag_manager" feature is enabled
 
-  @javascript @selenium
+  @javascript
   Scenario: Buy a Dress
     When I am on Connie dress page
     And I select "US 2" size

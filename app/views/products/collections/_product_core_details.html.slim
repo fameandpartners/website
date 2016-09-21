@@ -16,9 +16,7 @@ ruby:
     .dropdown
       a.js-trigger-add-to-moodboard href='javascript:;' data-toggle='dropdown'
         sup +
-        | moodboard
-        span.arrow-down
-          i.fa.fa-caret-down
+        span.link-underline Moodboard
       .dropdown-menu
         - user_moodboards.moodboards.each do |m|
           a href='javascript:;' data-moodboard-id="#{m.id}" data-product-id="#{product.id}" data-color-id="#{product.color.id}" onclick="clickAddMoodboard(this, event);"

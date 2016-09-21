@@ -137,28 +137,6 @@ Spree::Product.class_eval do
     end
   end
 
-  def colors
-    if option_type = option_types.find_by_name('dress-color')
-      option_type.
-        option_values.
-        joins(:variants).
-        where(spree_variants: {id: variant_ids}).uniq.map(&:name)
-    else
-      []
-    end
-  end
-
-  def color_ids
-    if option_type = option_types.find_by_name('dress-color')
-      option_type.
-        option_values.
-        joins(:variants).
-        where(spree_variants: {id: variant_ids}).uniq.map(&:id)
-    else
-      []
-    end
-  end
-
   def viewable_color_ids
     product_color_values.joins(:images).map(&:option_value_id)
   end
@@ -171,36 +149,33 @@ Spree::Product.class_eval do
     0.00
   end
 
+  def basic_color_ids
+    product_color_values
+      .active
+      .recommended
+      .pluck(:option_value_id)
+  end
+  alias_method :color_ids, :basic_color_ids
+
   def basic_colors
-    if option_type = option_types.find_by_name('dress-color')
-      option_type.
-        option_values.
-        joins(:variants).
-        where(spree_variants: {id: variant_ids}).uniq
-    else
-      Spree::OptionValue.none
-    end
+    Spree::OptionValue.where(id: basic_color_ids)
   end
 
+  def color_names
+    basic_colors.pluck(:name)
+  end
+  alias_method :colors, :color_names
+
   def custom_colors
-    if option_type = option_types.find_by_name('dress-color')
-      option_type.
-        option_values.
-        where('spree_option_values.id NOT IN (?)', basic_colors.map(&:id)).uniq
-    else
-      Spree::OptionValue.none
-    end
+    option_types
+      .color_scope
+      .option_values
+        .where('spree_option_values.id NOT IN (?)', basic_color_ids)
+        .uniq
   end
 
   def customisation_colors
-    if option_type = option_types.find_by_name('dress-color')
-      option_type.
-        option_values.
-        where(use_in_customisation: true).
-        where('spree_option_values.id NOT IN (?)', basic_colors.map(&:id)).uniq
-    else
-      Spree::OptionValue.none
-    end
+    custom_colors.where(use_in_customisation: true)
   end
 
   def description

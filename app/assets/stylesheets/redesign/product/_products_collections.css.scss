@@ -133,20 +133,11 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
     margin-top: 7px;
   }
 
-  .name {
-    text-transform: uppercase;
-  }
-
-  .price {
-    font-weight: 600;
-  }
-
   .skirt-alert {
     font-weight: normal;
     text-transform: none;
     font-style: italic;
   }
-
 
   .sale-price {
     color: #eb6ffa;
@@ -165,9 +156,9 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
     display: block;
     cursor: pointer;
 
-  sup {
-    top: 1px;
-  }
+    sup {
+      top: 1px;
+    }
 
   }
 
@@ -227,10 +218,6 @@ $product-cheetah-image-url: image-url("product-color-images/Cheetah.png");
   border-width: 45px;
   border-color: red;
   width: 10px;
-}
-
-.details {
-  margin-top: 30px;
 }
 
 .select2-results__option {

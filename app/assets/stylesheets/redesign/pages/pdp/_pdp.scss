@@ -388,6 +388,22 @@
 
   }
 
+  .afterpay-message {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 0.75em;
+
+    img {
+      width: 65px;
+      margin: 0 2px;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+
+  }
+
   @media (max-width: $bootstrap-md-width - 1px) {
 
     padding-top: 0;
@@ -512,3 +528,4 @@
 @import 'side-panels';
 @import 'side-menu';
 @import 'size-guide';
+@import 'afterpay-modal';

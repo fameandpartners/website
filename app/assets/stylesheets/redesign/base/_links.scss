@@ -1,14 +1,17 @@
 /* [Links]
 -------------------------------------------------------*/
 a {
+  color: $c-neutral-black;
 
   &:hover {
     text-decoration: none;
+    color: $c-neutral-black;
   }
 
   &:focus {
     text-decoration: none;
     outline: none;
+    color: $c-neutral-black;
   }
 
 }
@@ -20,6 +23,7 @@ a {
 .cta-link {
   font-family: $font-heading;
   font-style: italic;
+  font-size: 1.3rem;
   border-bottom: 1px solid $c-neutral-6;
 }
 

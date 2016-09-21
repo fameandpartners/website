@@ -4,8 +4,8 @@ module Acceptance
       within('.details') do
         expect(page).to have_text(dress_name.upcase)
 
-        expect(page).to have_text('moodboard')
-        click_link 'moodboard'
+        expect(page).to have_text('+Moodboard')
+        click_link '+Moodboard'
 
         expect(page).to have_text('Wishlist')
         click_link 'Wishlist'

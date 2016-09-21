@@ -4,8 +4,8 @@
   background: $c-neutral-white url('ajax-loader.gif') center center no-repeat;
 }
 
-.slick-slider .item-wrap:focus {
-  outline: 0;
+.slick-slide:focus {
+  outline: none;
 }
 
 .slick-arrow {

@@ -1,14 +1,12 @@
 - cache ['views/layouts/redesign/mega_menu/_color'] do
-  ul
-    li = link_to 'Black', colour_path('black')
-    li = link_to 'White/Ivory', colour_path('white-ivory')
-    li = link_to 'Nude/Tan', colour_path('nude-tan')
-    li = link_to 'Grey', colour_path('grey')
-    li = link_to 'Blue/Purple', colour_path('blue-purple')
-    li = link_to 'Green', colour_path('green')
-  ul
-    li = link_to 'Pink', colour_path('pink')
-    li = link_to 'Red', colour_path('red')
-    li = link_to 'Pastel', colour_path('pastel')
-    li = link_to 'Metallic', colour_path('metallic')
-    li = link_to 'Prints', colour_path('print')
+  li.normal-item = link_to 'Black', colour_path('black'),             class: 'text'
+  li.normal-item = link_to 'White/Ivory', colour_path('white-ivory'), class: 'text'
+  li.normal-item = link_to 'Nude/Tan', colour_path('nude-tan'),       class: 'text'
+  li.normal-item = link_to 'Grey', colour_path('grey'),               class: 'text'
+  li.normal-item = link_to 'Blue/Purple', colour_path('blue-purple'), class: 'text'
+  li.normal-item = link_to 'Green', colour_path('green'),             class: 'text'
+  li.normal-item = link_to 'Pink', colour_path('pink'),               class: 'text'
+  li.normal-item = link_to 'Red', colour_path('red'),                 class: 'text'
+  li.normal-item = link_to 'Pastel', colour_path('pastel'),           class: 'text'
+  li.normal-item = link_to 'Metallic', colour_path('metallic'),       class: 'text'
+  li.normal-item.no-border = link_to 'Prints', colour_path('print'),  class: 'text'

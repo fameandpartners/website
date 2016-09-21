@@ -106,6 +106,12 @@
   width: 100%; // Fix for IE
 }
 
+.double-line-height:before {
+  line-height: 2rem;
+  content: " ";
+  padding: 1px;
+}
+
 // Align content vericaly
 .h-v-align {
   display: flex;
@@ -151,6 +157,15 @@
       flex: auto;
     }
 
+  }
+
+}
+
+@media (max-width: $bootstrap-md-width - 1px) {
+
+  .no-spacing-cols-mobile {
+    margin: 0 -15px;
+    padding: 0;
   }
 
 }

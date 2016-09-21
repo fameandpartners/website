@@ -1,14 +1,14 @@
 # Please, Review the Following
 
-- PR name must have a clear description
-- Issue/Card Number
-- Description
-  - Explain the changes you made here.
-  - You can add screenshots, notes or whatever you want to explain the changes you are making
+- branch's name **MUST HAVE** JIRA's ticket reference (e.g `feat/awesome-feature-WEBSITE-123`)
+- PR name **MUST HAVE** a clear description and JIRA ticket reference (e.g. `[Fix][WEBSITE-123] Sitemap bug finally solved`
+- You **MUST** add reviewers to your PR
+- **Explain** the changes you made here.
+  - You can add screenshots or notes to explain the changes you are making
 
-## Checklist
+For more information, refer to https://github.com/fameandpartners/website/#contributing
 
-- [ ] Code compiles correctly
-- [ ] Created tests, if possible
-- [ ] CI is green
-- [ ] Extended the README / documentation, if necessary
+## Reviewers List
+
+- [ ] @ reviewer 1
+- [ ] @ reviewer 2

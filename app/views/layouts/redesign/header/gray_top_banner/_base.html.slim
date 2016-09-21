@@ -40,6 +40,9 @@ ruby:
         span.wedding.js-open-nav-menu FAME WEDDINGS
       span.lookbook.js-open-nav-menu LOOKBOOKS
 
+      span.blog
+        a href='http://blog.fameandpartners.com' target='_blank' BLOG
+
     .col-md-3.nav-icons.text-right
       span.search-wrapper#search
         a.icon.icon-search.js-search-trigger href="javascript:;"
@@ -71,7 +74,7 @@ ruby:
     .rect#rect-dresses.nav-menu-wrap.menu-dresses
       .row
 
-        .col-md-2.dresses-shop-by
+        .col-md-2.col-md-offset-1.dresses-shop-by
           ul
             li.title Shop by
             = render partial: 'layouts/redesign/mega_menu/shop_by'
@@ -81,9 +84,9 @@ ruby:
             li.title Style
             = render partial: 'layouts/redesign/mega_menu/style'
 
-        .col-md-3.dresses-color
-          .two-cols
-            .title Color
+        .col-md-2.dresses-color
+          ul
+            li.title Color
             = render partial: 'layouts/redesign/mega_menu/color'
 
         .col-md-4.dresses-events
@@ -92,23 +95,9 @@ ruby:
             = render partial: 'layouts/redesign/mega_menu/dress_code'
 
 
-    .rect#rect-wedding.nav-menu-wrap.menu-wedding
+    .rect#rect-wedding.nav-menu-wrap.menu-wedding.grid-img-cta-nav
       .row
-
-        .col-md-2.wedding-collections
-          ul
-            li.title VIEW THE COLLECTIONS
-            = render partial: 'layouts/redesign/mega_menu/wedding_collections'
-
-        .col-md-3.wedding-planner
-          ul
-            li.title WEDDING PLANNER
-            li = link_to 'Register for Wedding Planner', bridesmaid_landing_page_path
-
-        .col-md-7.wedding-bridesmaid
-          = link_to bridesmaid_landing_page_path, class: 'panel-highlight media-wrap'
-            = image_tag "lookbook/brides.jpg"
-            .copy-wrap MADE <span class='text-lowercase'>with</span> LOVE <em><span>SIGN UP AND START PLANNING YOUR DREAM DRESSES</span></em>
+        = render partial: 'layouts/redesign/mega_menu/fame_weddings'
 
     .rect#rect-lookbook.nav-menu-wrap.menu-lookbook
       .row
@@ -119,6 +108,11 @@ ruby:
             = render partial: 'layouts/redesign/mega_menu/lookbook'
 
         .col-md-7.lookbook-banner
-          = link_to the_freshly_picked_collection_path, class: 'panel-highlight media-wrap'
-            = image_tag 'lookbook/Cotton2016-MegaMenu-2016-07-01.jpg'
-            .copy-wrap The Freshly Picked Collection <em><span>View this collection</span></em>
+          - if current_site_version.is_australia?
+            = link_to spring_racing_collection_landing_page_path, class: 'panel-highlight media-wrap'
+              = image_tag 'lookbook/spring-racing-collection-megamenu-2016-09-15.jpg'
+              .copy-wrap Spring Racing Collection <em><span>View this collection</span></em>
+          - else
+            = link_to cocktail_collection_landing_page_path, class: 'panel-highlight media-wrap'
+              = image_tag 'lookbook/cocktail-collection-megamenu-2016-09-15.jpg'
+              .copy-wrap Cocktail Collection <em><span>View this collection</span></em>

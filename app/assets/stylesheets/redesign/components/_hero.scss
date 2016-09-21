@@ -1,9 +1,14 @@
 /* [Hero]
 -------------------------------------------------------*/
 .hero-wrap {
+  display: block;
 
   .media-wrap {
     min-height: 100px;
+  }
+
+  .heading {
+    margin: 0;
   }
 
   // versions
@@ -23,7 +28,6 @@
     }
 
     .heading {
-      margin: 50px 0 0;
       text-transform: none;
       color: $c-neutral-black;
 
@@ -130,6 +134,11 @@
         color: $c-neutral-white;
       }
 
+      .btn-featured {
+        color: $c-neutral-white;
+        border-color: $c-neutral-white;
+      }
+
     }
 
   }
@@ -137,8 +146,13 @@
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
-    .heading > span:first-child {
-      font-size: 3.8rem;
+    .heading {
+      margin-top: 50px;
+
+      > span:first-child {
+        font-size: 3.8rem;
+      }
+
     }
 
   }

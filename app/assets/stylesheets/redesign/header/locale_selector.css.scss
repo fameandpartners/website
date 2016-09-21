@@ -139,13 +139,12 @@
     padding: 0;
     position: absolute;
     z-index: 102;
-    width: 73px;
 
     li {
       float: none;
 
       a {
-        padding: 7px 0 7px 15px;
+        padding: 7px 15px;
         color: $c-neutral-white;
       }
 

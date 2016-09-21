@@ -61,7 +61,7 @@ class UserCart::ProductsController < UserCart::BaseController
                              attrs: result.attrs)
       respond_with({}) do |format|
         format.json   {
-          render json: { error: true, message: result.message, attrs: result.attrs }, status: 404
+          render json: { error: true, message: result.message, attrs: result.attrs }, status: 422
         }
       end
     end
