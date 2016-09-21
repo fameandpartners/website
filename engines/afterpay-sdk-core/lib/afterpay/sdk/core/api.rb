@@ -46,7 +46,7 @@ module Afterpay::SDK::Core
     end
 
     def create_http_connection(connection_uri = uri)
-      Faraday.new(connection_uri).tap do |connection|
+      Faraday.new(connection_uri)|connection|
         connection.basic_auth(config.username, config.password)
         connection.adapter Faraday.default_adapter
       end
@@ -184,10 +184,8 @@ module Afterpay::SDK::Core
 
     def format_request(payload)
       payload[:uri].path = url_join(payload[:uri].path, payload[:action])
-      payload[:body] = JSON.dump(payload[:params])
-      payload[:header] = payload[:header]
-        .merge(DEFAULT_HTTP_HEADER)
-
+      payload[:body]     = JSON.dump(payload[:params])
+      payload[:header]   = payload[:header].merge(DEFAULT_HTTP_HEADER)
       payload
     end
 
