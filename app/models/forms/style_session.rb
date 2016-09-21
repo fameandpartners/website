@@ -4,8 +4,8 @@ module Forms
     SESSION_TYPES                 = ['Email', 'Text', 'Video Chat', 'Phone', 'At Home']
     TYPES_REQUIRES_EMAIL          = ['At Home', 'Email', 'Video Chat']
     TYPES_REQUIRES_PHONE          = ['At Home', 'Phone', 'Text']
-    TYPES_REQUIRES_TIMEZONE       = ['Phone', 'Video Chat']
-    TYPES_REQUIRES_PREFERRED_TIME = ['Phone', 'Video Chat']
+    TYPES_REQUIRES_TIMEZONE       = ['At Home', 'Phone', 'Video Chat']
+    TYPES_REQUIRES_PREFERRED_TIME = ['At Home', 'Phone', 'Video Chat']
 
     property :full_name, virtual: true
     property :session_type, virtual: true

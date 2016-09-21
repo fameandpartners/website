@@ -33,33 +33,33 @@
             = form_for @style_session, url: style_session_path, html: { class: 'form js-en-styling-session-form' } do |f|
               .row
                 .col-md-12.form-group
-                  label for='style_session_full_name' class='label-name'
-                    | Name
+                  label for='style_session_full_name' class='label-full_name'
+                    | Name <span class="required">*</span>
                   = f.text_field :full_name, :class => 'form-control form-control-md js-en-field-full-name', required: 'true'
               .row
                 .col-md-12.form-group
                   label for='style_session_type' class='label-session_type'
-                    | How should we do this?
+                    | How should we do this? <span class="required">*</span>
                   = f.select :session_type, options_for_select(f.object.session_types), {include_blank: false},  :class => 'form-control form-control-md js-en-field-session-type'
               .row.email-field-wrapper
                 .col-md-12.form-group
                   label for='style_session_email' class='label-email'
-                    | Email Address
+                    | Email Address <span class="required">*</span>
                   = f.text_field :email , type: 'email', :class => 'form-control form-control-md js-en-field-email', required: 'true'
               .row.phone-field-wrapper
                 .col-md-12.form-group
                   label for='style_session_phone' class='label-phone'
-                    | Phone <span class="hint">(include country code)</span>
+                    | Phone <span class="hint">(include country code)</span> <span class="required">*</span>
                   = f.text_field :phone, :class => 'form-control form-control-md js-en-field-phone'
               .row.timezone-field-wrapper
                 .col-md-12.form-group
                   label for='style_session_timezone' class='label-timezone'
-                    | Select your timezone
+                    | Select your timezone <span class="required">*</span>
                   = f.select :timezone, options_for_select(ActiveSupport::TimeZone.all), { include_blank: true }, :class => 'form-control form-control-md js-en-field-timezone'
               .row.preference-field-wrapper
                 .col-md-12.form-group
-                  label for='style_session_preference' class='label-preference'
-                    | Preferred time
+                  label for='style_session_preference' class='label-preferred_time'
+                    | Preferred time <span class="required">*</span>
                   = f.select :preferred_time, options_for_select(f.object.available_times), {include_blank: true}, :class => 'form-control form-control-md js-en-field-preferred-time'
               .row
                 .col-md-6.form-group
@@ -85,28 +85,35 @@ javascript:
       var sessionType = $(this).val().toLowerCase();
 
       // Setup: hide everything and mark as remove required
+      $('.js-en-styling-session-form .error').remove();
       $('.js-en-field-email, .js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').closest('.row').hide();
+      $('.js-en-field-email, .js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').closest('.row').find('.required').hide();
       $('.js-en-field-email, .js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').prop('required', false);
 
       switch (sessionType) {
         case "email":
           $('.js-en-field-email').closest('.row').show();
+          $('.js-en-field-email').closest('.row').find('.required').show();
           $('.js-en-field-email').prop('required', true);
           break;
         case "text":
-          $('.js-en-field-phone').closest('.row').show();
+          $('.js-en-field-phone, .js-en-field-email').closest('.row').show();
+          $('.js-en-field-phone').closest('.row').find('.required').show();
           $('.js-en-field-phone').prop('required', true);
           break;
         case "video chat":
           $('.js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time').closest('.row').show();
+          $('.js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time').closest('.row').find('.required').show();
           $('.js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time').prop('required', true);
           break;
         case "phone":
-          $('.js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').closest('.row').show();
+          $('.js-en-field-phone, .js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time').closest('.row').show();
+          $('.js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').closest('.row').find('.required').show();
           $('.js-en-field-phone, .js-en-field-timezone, .js-en-field-preferred-time').prop('required', true);
           break;
         case "at home":
           $('.js-en-field-phone, .js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time').closest('.row').show();
+          $('.js-en-field-phone, .js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time').closest('.row').find('.required').show();
           $('.js-en-field-phone, .js-en-field-email, .js-en-field-timezone, .js-en-field-preferred-time').prop('required', true);
           break;
         default:

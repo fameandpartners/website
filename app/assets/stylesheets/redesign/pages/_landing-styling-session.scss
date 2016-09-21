@@ -30,6 +30,12 @@
 
   .form-group {
     margin: 15px 0;
+
+    .error {
+      color: $c-brand-red;
+      display: block;
+    }
+
   }
 
   .confirmation,
