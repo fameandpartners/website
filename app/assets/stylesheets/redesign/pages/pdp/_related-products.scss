@@ -1,5 +1,13 @@
 /* [PDP - related products]
 -------------------------------------------------------*/
-.products-collections .name {
-  color: $c-neutral-black;
+.products-collections {
+
+  .category--item {
+    min-height: initial;
+  }
+
+  .name {
+    color: $c-neutral-black;
+  }
+
 }
