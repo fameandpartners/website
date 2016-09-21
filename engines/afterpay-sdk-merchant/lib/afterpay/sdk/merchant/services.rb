@@ -1,10 +1,6 @@
 module Afterpay::SDK::Merchant
 
   module Services
-    def ping(options = {}, http_header = {})
-      get('ping', options, http_header)
-    end
-
     def configuration(options = {}, http_header = {})
       get('configuration', options, http_header)
     end
