@@ -1,5 +1,7 @@
 development:
   mode: 'sandbox'
+test:
+  mode: 'sandbox'
 staging:
   mode: 'sandbox'
 production:
