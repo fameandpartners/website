@@ -46,7 +46,7 @@ module Afterpay::SDK::Core
     end
 
     def create_http_connection(connection_uri = uri)
-      Faraday.new(connection_uri)|connection|
+      Faraday.new(connection_uri) do |connection|
         connection.basic_auth(config.username, config.password)
         connection.adapter Faraday.default_adapter
       end
