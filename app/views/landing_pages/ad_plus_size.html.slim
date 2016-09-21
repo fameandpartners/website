@@ -28,7 +28,7 @@
               .content-wrap
                 h2.title
                   span.no-border All sizes for<br>Plus Size Babes
-                em 
+                em
                   h3.sub-title We make every dress up to size 22
                 p.align-top.serif-text You can even customise your dress to your exact<br>measurements to ensure you get that perfect fit!
                 = link_to 'Shop all dresses', dresses_path, class: 'btn btn-black align-top'
@@ -43,7 +43,7 @@
               .content-wrap.customise
                 h2.title
                   span.no-border Make your dress<br>Uniquely You
-                em 
+                em
                   h3.sub-title Every dress is customisable
                 p.align-top.serif-text Pick your dress, choose your colour,<br>skirt length and add a customisation
                 = link_to 'Shop all dresses', dresses_path, class: 'btn btn-black align-top'
@@ -55,4 +55,4 @@
       = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 99, customWrapper: 'col-md-3 col-xs-6'}
 
     .row.more-products
-      = link_to 'Shop all dresses', dresses_path, class: 'btn btn-black'
+      = link_to 'Shop all dresses', dresses_path, class: 'btn btn-featured'
