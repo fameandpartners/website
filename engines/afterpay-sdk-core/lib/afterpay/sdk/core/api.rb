@@ -17,7 +17,7 @@ module Afterpay::SDK::Core
     }.freeze
 
     DEFAULT_END_POINTS = {
-      live: 'https://api.secure-afterpay.com.au',
+      live:    'https://api.secure-afterpay.com.au/v1',
       sandbox: 'https://api-sandbox.secure-afterpay.com.au/v1'
     }.freeze
 
@@ -117,7 +117,7 @@ module Afterpay::SDK::Core
     end
 
     def log_http_call(payload)
-      logger.info "Request[#{payload[:method]}]: #{payload[:uri].to_s}"
+      logger.info "Request[#{payload[:method]}]: #{payload[:uri]}"
       start_time = Time.now
       response = yield
       logger.info sprintf("Response[%s]: %s, Duration: %.3fs", response.status,
