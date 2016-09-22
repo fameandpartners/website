@@ -63,12 +63,12 @@ module Afterpay
       end
 
       def single_installment_text
-        Spree::Money.new(order.total, currency: 'AUD').to_s
+        single_installment = order.total / 4
+        Spree::Money.new(single_installment, currency: 'AUD').to_s
       end
 
       def order_total_text
-        single_installment = order.total / 4
-        Spree::Money.new(single_installment, currency: 'AUD').to_s
+        Spree::Money.new(order.total, currency: 'AUD').to_s
       end
     end
   end
