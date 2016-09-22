@@ -1,0 +1,6 @@
+development:
+  mode: 'sandbox'
+staging:
+  mode: 'sandbox'
+production:
+  mode: 'live'
