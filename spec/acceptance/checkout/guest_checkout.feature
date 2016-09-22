@@ -117,14 +117,14 @@ Feature: Complete Guest Checkout
     And I click on "ADD TO BAG" link
     Then I select "<Country>" country and "<State>" state
     And I fill in form fields with:
-      | Email                   | test@email.com |
-      | First Name              | Roger          |
-      | Last Name               | That           |
-      | Street Address          | Street X       |
-      | Street Address (cont'd) | House Y        |
-      | City                    | Melbourne      |
-      | Phone Number            | 2255-4422      |
-      | <Zipcode Label>         | 12345          |
+      | Email                   | firefox_user@fameandpartners.com |
+      | First Name              | Roger                            |
+      | Last Name               | That                             |
+      | Street Address          | Street X                         |
+      | Street Address (cont'd) | House Y                          |
+      | City                    | Melbourne                        |
+      | Phone Number            | 2255-4422                        |
+      | <Zipcode Label>         | 12345                            |
     And I click on "Pay Securely" button
     And I click on "Continue With Afterpay" link
     Then I fill in Afterpay data within its iframe:
