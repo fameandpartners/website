@@ -106,7 +106,7 @@ Feature: Complete Guest Checkout
       | Australia    | New Zealand   | Whanganui  | Postcode      | AU 14      | Petite       | 319.00      |
 
   # VCR is disabled on full checkout acceptance specs since we can detect Afterpay breaking changes!
-  @javascript @no_vcr @skip @selenium
+  @javascript @no_vcr @selenium
   Scenario Outline: Successfully Buy a Dress (with Afterpay Payment)
     Given The "afterpay" feature is enabled
     When I am on Connie dress page
@@ -128,17 +128,17 @@ Feature: Complete Guest Checkout
     And I click on "Pay Securely" button
     And I click on "Continue With Afterpay" link
     Then I fill in Afterpay data within its iframe:
-      | email      | afterpay@mailinator.com |
-      | password   | afterpay1               |
-      | name       | Roger That              |
-      | address1   | Street X                |
-      | suburb     | Suburb                  |
-      | state      | State                   |
-      | postcode   | 1234                    |
-      | cardName   | Roger That              |
-      | cardNumber | 5520000000000000        |
-      | expiryDate | 0250                    |
-      | cardCVC    | 123                     |
+      | email      | firefox_user@fameandpartners.com |
+      | password   | firefox1                         |
+      | name       | Roger That                       |
+      | address1   | Street X                         |
+      | suburb     | Suburb                           |
+      | state      | State                            |
+      | postcode   | 1234                             |
+      | cardName   | Roger That                       |
+      | cardNumber | 5520000000000000                 |
+      | expiryDate | 0230                             |
+      | cardCVC    | 123                              |
     Then I should see my order placed, with "Connie" dress, "<Dress Size>" size and "<Dress Price>" price
 
     Examples:
