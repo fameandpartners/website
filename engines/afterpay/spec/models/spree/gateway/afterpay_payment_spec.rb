@@ -20,11 +20,12 @@ class Spree::Gateway
 
     describe 'Payment Actions' do
       describe 'completes a purchase' do
-        it 'calls active merchant billing method' do
-          # For now, this is purely bogus
-          expect(ActiveMerchant::Billing::Response).to receive(:new).with(true, 'Bogus Gateway: Forced success', {}, test: true, authorization: '12345', avs_result: { code: 'A' })
+        let(:spree_credit_card) { Spree::CreditCard.new(gateway_payment_profile_id: 'Magical Number!') }
 
-          payment_method.purchase('amount', 'transaction_details')
+        it 'calls active merchant billing method' do
+          expect(ActiveMerchant::Billing::Response).to receive(:new).with(true, 'AfterPay Gateway: Success', {}, authorization: 'Magical Number!')
+
+          payment_method.purchase('amount', spree_credit_card)
         end
       end
 
