@@ -49,7 +49,7 @@ module Afterpay
               redirectConfirmUrl: confirmation_url(order_number: order.number),
               redirectCancelUrl:  checkout_url
             },
-            merchantReference: payment_method.preferred_username
+            merchantReference: order.number
           }
         )
 
