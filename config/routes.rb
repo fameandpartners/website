@@ -316,6 +316,7 @@ FameAndPartners::Application.routes.draw do
     get '/fashionista2014-winners'   => 'statics#fashionista_winner', :as => :fashionista_winner
     get '/compterms' => 'statics#comp_terms', :as => :competition_terms
     get '/plus-size',  to: redirect('/dresses/plus-size')
+    get '/modern-classics' => 'statics#modern_classics'
 
     namespace 'campaigns' do
       resource :email_capture, only: [:create], controller: :email_capture do

@@ -37,7 +37,41 @@ $font-family-secondary: 'brandon-grotesque', sans-serif;
 // Freight - available weight and styles:
 // 300, 300 italic, 500, 500 italic
 $font-heading: 'freight-display-pro', sans-serif;
+
+@font-face {
+  font-family: Freight;
+  src: url(/assets/ufonts.com_freight-big-light-opentype.otf);
+}
+
+@font-face {
+  font-family: Freight-Italic;
+  src: url(/assets/ufonts.com_freight-disp-book-italic-opentype.otf);
+}
+
+$Gilda: 'Freight', serif; //modern-classic
+$GildaItalic: 'Freight-Italic', serif; //modern-classic
+
 // @end Fonts
+
+//font-size for modern-classic
+$h2-size: 6.4rem;
+$p-description: 2.8rem;
+$p-above: 1.8rem;
+$p-collection: 2.1rem;
+$model-name-size: 1.6rem;
+$model-h3: 1.9rem;
+$model-add: 1.6rem;
+$model-price: 1.8rem;
+$intro: 1.6rem;
+//@end font-size modern-classic
+
+//margins for modern-classic
+$part-margin: 100px;
+$h2-margin-part-right: 95px;
+$p-part-text: 45px;
+$p-part-text-collection: 35px;
+//
+
 
 // Form
 $form-control-height-md: 45px;

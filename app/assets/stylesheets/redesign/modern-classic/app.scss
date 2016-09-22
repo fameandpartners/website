@@ -1,0 +1,741 @@
+$max-width: 1920px;
+
+.main-content{
+  max-width: $max-width;
+  padding: 0;
+}
+
+.part-2,
+.part-3,
+.part-4,
+.part-5,
+.part-6,
+.part-7,
+.part-8,
+.part-9,
+.part-10,
+.part-text,
+.part-four-dresses {
+  width: 100%;
+  clear: both;
+  display: table;
+}
+
+.part-left {
+  position: relative;
+  width: 50%;
+  float: left;
+
+  img {
+    width: 100%;
+  }
+}
+
+.part-right {
+  float: right;
+  width: 50%;
+
+  img {
+    width: 100%;
+  }
+}
+
+.part-7,
+.part-9 {
+  position: relative;
+
+  img{
+    width: 100%;
+  }
+}
+
+.black-intro {
+  font-size: $intro;
+  color: #fff;
+  position: relative;
+  top: 17px;
+  display: table;
+  text-transform: uppercase;
+  background-color: #000;
+  padding: 7px 20px;
+  left: 5.2%;
+  top: 20px;
+  letter-spacing: 1.5px;
+  z-index: 10;
+}
+
+h2.part-text-title {
+  text-align: center;
+  font-size: $h2-size;
+  font-family: $Gilda;
+  margin-top: $h2-margin-part-right;
+  transition: all 0.3s;
+  text-transform: none;
+}
+
+p.part-text-description,
+p.part-text-above,
+p.part-text-collection {
+  font-family: $Gilda;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.part-text{
+
+  p.part-text-description {
+    width: 79.5%;
+  }
+}
+
+p.part-text-description {
+  margin: 0 auto;
+  font-size: $p-description;
+  margin-top: $p-part-text;
+}
+
+p.part-text-above {
+  margin-top: $p-part-text;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: $p-above;
+  letter-spacing: 1.2px;
+}
+
+p.part-text-collection {
+  margin-top: $p-part-text-collection;
+  font-family: $GildaItalic;
+  text-decoration: underline;
+  font-size: $p-collection;
+  letter-spacing: 1.1px;
+}
+
+.part-text + .part-four-dresses {
+  margin-top: 47px;
+}
+
+.part-right-text {
+  width: 32.5%;
+  float: left;
+  padding-left: 50px;
+
+  h2 {
+    font-family: $Gilda;
+    text-align: left;
+    transition: all .3s;
+  }
+
+  p.part-text-description {
+    line-height: 1.5;
+  }
+
+  p.part-text-above {
+    margin-top: 45px;
+  }
+
+  p.part-text-collection {
+    margin-top: 35px;
+  }
+
+  p {
+    text-align: left;
+    transition: all .3s;
+  }
+}
+
+
+.part-four-dresses {
+
+  .part-dress {
+    margin-left: 5.2%;
+    float: left;
+  }
+}
+
+.part-three-dresses,
+.part-5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+}
+
+.part-four-dresses {
+  margin-top: $part-margin;
+}
+
+.part-dress {
+  width: 18.5%;
+
+  img {
+    width: 100%;
+  }
+  h3,
+  p {
+    text-align: center;
+  }
+
+  h3{
+    text-transform: capitalize;
+  }
+
+  .part-dress-description {
+    margin-top: 33px;
+  }
+
+  h3 {
+    font-size: $model-h3;
+    letter-spacing: 1px;
+  }
+
+  .model-name {
+    font-weight: bold;
+    font-size: $model-name-size;
+    letter-spacing: 1.5px;
+  }
+
+  .model-add {
+    text-decoration: underline;
+    letter-spacing: 1px;
+    font-size: $model-add;
+  }
+
+  .model-price {
+    font-size: $model-price;
+  }
+}
+
+.part-2 {
+  margin-top: $part-margin;
+
+  .part-left {
+    width: 55%;
+  }
+
+  .part-right {
+    width: 45%;
+  }
+}
+
+.part-3 {
+  margin-top: $part-margin;
+
+  .part-left {
+    width: 65%;
+  }
+}
+
+.part-4 {
+
+  .part-left {
+    width: 49.95%;
+  }
+
+  .part-right {
+    width: 50.05%;
+  }
+  margin-top: $part-margin;
+}
+
+.part-5 {
+  margin-top: 60px;
+  -webkit-justify-content: center;
+  justify-content: center;
+
+  .part-left {
+    width: 45%
+  }
+
+  .part-right {
+    width: 45.5%;
+  }
+}
+
+.part-6,
+.part-8 {
+  margin-top: $part-margin;
+
+  .part-left {
+    width: 70.9%;
+  }
+
+  .part-right-text {
+    width: 42%;
+    padding-left: 0;
+    position: absolute;
+    right: -34%;
+    top: 30px;
+  }
+}
+
+.part-7,
+.part-9 {
+  margin-top: $part-margin;
+}
+
+.part-text {
+
+  h2+h2 {
+    margin-top: 0px;
+  }
+}
+
+.part-9 + .part-text {
+
+  p.part-text-description {
+    width: 79%;
+  }
+}
+
+.part-three-dresses {
+  margin-top: 60px;
+  justify-content:initial;
+
+  .part-dress:first-child {
+    margin-left: 5.1%;
+  }
+
+  .part-dress {
+    width: 30%;
+    padding-right: 5px;
+
+  &:first-child{
+    width: 30.15%;
+  }
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.part-10 {
+
+  .part-left {
+    width: 49.95%;
+  }
+
+  .part-right {
+    width: 50.05%;
+  }
+}
+
+.last {
+  margin-bottom: $part-margin;
+}
+
+@media only screen and (max-width: 1799px) {
+
+  .part-right-text {
+    right: -32%;
+
+    h2 {
+      margin-top: $h2-margin-part-right - 45px;
+    }
+  }
+}
+@media only screen and (max-width: 1699px) {
+
+  h2.part-text-title {
+    margin-top: $h2-margin-part-right - 90px;
+  }
+
+  p.part-text-description {
+    font-size: $p-description - 0.6;
+  }
+
+  .part-6,
+  .part-8 {
+
+    .part-right-text {
+      width: 60%;
+      right: -37%;
+    }
+
+    h2 {
+      margin-top: $h2-margin-part-right - 60px;
+    }
+  }
+
+  .part-text {
+
+    h2 {
+      margin-top: $h2-margin-part-right - 40px;
+    }
+  }
+
+  .part-dress {
+
+    h3 {
+      font-size: $model-h3 - 0.1;
+    }
+
+    .model-name {
+      font-size: $model-name-size - 0.1;
+    }
+
+    .model-add {
+      font-size: $model-add - 0.1;
+    }
+
+    .model-price {
+      font-size: $model-price - 0.1;
+    }
+  }
+
+  .black-intro {
+    padding: 6px 20px;
+  }
+}
+@media only screen and (max-width: 1499px) {
+
+  h2.part-text-title {
+    margin-top: $h2-margin-part-right - 40px;
+    font-size: $h2-size - 0.5;
+  }
+
+  p.part-text-description {
+    margin-top: $p-part-text - 10px;
+    font-size: $p-description - 0.3;
+  }
+
+  p.part-text-above {
+    margin-top: $p-part-text - 10px;
+    font-size: $p-above - 0.3;
+  }
+
+  p.part-text-collection {
+    margin-top: $p-part-text-collection - 10px;
+    font-size: $p-collection - 0.1;
+  }
+
+  .part-right-text {
+
+    h2.part-text-title {
+      margin-top: $h2-margin-part-right - 60px;
+    }
+
+    p.part-text-above {
+      margin-top: $p-part-text - 10px;
+    }
+
+    p.part-text-collection {
+      margin-top: $p-part-text-collection - 10px;
+    }
+  }
+
+  .part-dress {
+
+    h3 {
+      font-size: $model-h3 - 0.2;
+    }
+
+    .model-name {
+      font-size: $model-name-size - 0.2;
+    }
+
+    .model-add {
+      font-size: $model-add - 0.2;
+    }
+
+    .model-price {
+      font-size: $model-price - 0.2;
+    }
+  }
+
+  .black-intro {
+    padding: 5px 20px;
+  }
+}
+
+@media only screen and (max-width: 1299px) {
+
+  .part-2,
+  .part-3,
+  .part-4,
+  .part-5,
+  .part-6,
+  .part-7,
+  .part-8,
+  .part-9,
+  .part-10,
+  .part-four-dresses {
+    margin-top: $part-margin - 30px;
+  }
+
+  h2.part-text-title {
+    margin-top: $h2-margin-part-right - 50px;
+    font-size: $h2-size - 2.4;
+  }
+
+  p.part-text-description {
+    margin-top: $p-part-text - 35px;
+    font-size: $p-description - 0.9;
+  }
+
+  p.part-text-above {
+    margin-top: $p-part-text - 20px;
+  }
+
+  p.part-text-collection {
+    margin-top: $p-part-text-collection - 15px;
+    font-size: $p-collection - 0.3;
+  }
+
+  .part-right-text {
+    padding-left: 20px;
+
+    h2.part-text-title {
+      margin-top: $h2-margin-part-right - 95px;
+    }
+
+    p.part-text-above {
+      margin-top: $p-part-text - 20px;
+      font-size: $p-above - 0.5;
+    }
+
+    p.part-text-collection {
+      margin-top: $p-part-text-collection - 15px;
+    }
+  }
+
+  .part-6 .part-right-text,
+  .part-8 .part-right-text {
+    width: 60%;
+    padding-left: 0;
+
+    h2{
+      font-size: $h2-size - 2.4;
+    }
+
+    p.part-text-description {
+      margin-top: $p-part-text - 30px;
+      font-size: $p-description - 1;
+    }
+  }
+  .part-dress {
+
+    h3 {
+      font-size: $model-h3 - 0.6;
+    }
+
+    .model-name {
+      font-size: $model-name-size - 0.3;
+    }
+
+    .model-add {
+      font-size: $model-add - 0.3;
+    }
+
+    .model-price {
+      font-size: $model-price - 0.4;
+    }
+  }
+
+  .black-intro {
+    font-size: $intro - 0.1;
+    padding: 5px 12px;
+  }
+}
+
+@media only screen and (max-width: 999px) {
+
+  .part-2,
+  .part-3,
+  .part-4,
+  .part-5,
+  .part-6,
+  .part-7,
+  .part-8,
+  .part-9,
+  .part-10,
+  .part-four-dresses {
+    margin-top: $part-margin - 40px;
+  }
+
+  h2.part-text-title {
+    font-size: $h2-size - 1.8;
+  }
+
+  .part-6 .part-right-text,
+  .part-8 .part-right-text {
+
+    h2{
+      font-size: $h2-size - 1.8;
+    }
+  }
+
+  .part-3,
+  .part-6,
+  .part-8{
+
+    .part-left{
+      width: 100%;
+    }
+
+    .part-right-text{
+      position: relative;
+      width: 90%;
+      right: auto;
+      left: 5%;
+      top: 30px;
+    }
+  }
+}
+
+@media only screen and (max-width: 799px) {
+
+.clear-799{
+  clear: both;
+}
+
+.top30-799{
+  margin-top: 30px;
+}
+
+  .part-2,
+  .part-3,
+  .part-4,
+  .part-5,
+  .part-6,
+  .part-7,
+  .part-8,
+  .part-9,
+  .part-10,
+  .part-four-dresses {
+    margin-top: $part-margin - 50px;
+  }
+
+  .part-right-text {
+    padding-left: 0px;
+  }
+
+  .part-3,
+  .part-6,
+  .part-8{
+
+    .part-right-text{
+      width: 80%;
+      left: 10%;
+    }
+  }
+
+  .part-four-dresses .part-dress{
+    margin-left: 10%;
+    width: 35%
+  }
+
+  .black-intro{
+    font-size: $intro - 0.3;
+    top: 16px;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+
+  .part-2,
+  .part-3,
+  .part-4,
+  .part-5,
+  .part-6,
+  .part-7,
+  .part-8,
+  .part-9,
+  .part-10,
+  .part-four-dresses {
+    margin-top: $part-margin - 50px;
+  }
+  .part-2,
+  .part-4,
+  .part-10{
+    .part-left{
+      width: 100%;
+      transition: all .3s;
+    }
+    .part-right{
+      display: none;
+    }
+  }
+  .part-text{
+    padding: 0 30px;
+      p.part-text-description {
+        width: 100%;
+     }
+  }
+  .black-intro{
+    margin: 0 auto;
+    left: auto;
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+
+  .part-2,
+  .part-3,
+  .part-4,
+  .part-5,
+  .part-6,
+  .part-7,
+  .part-8,
+  .part-9,
+  .part-10,
+  .part-four-dresses {
+    margin-top: $part-margin - 65px;
+  }
+
+  .part-dress {
+    h3 {
+      font-size: $model-h3 - 0.7;
+    }
+
+    .model-name {
+      font-size: $model-name-size - 0.4;
+    }
+
+    .model-add {
+      font-size: $model-add - 0.4;
+      text-decoration: none;
+    }
+
+    .model-price {
+      font-size: $model-price - 0.5;
+    }
+  }
+
+  .part-four-dresses .part-dress{
+    margin-left: 0%;
+    width: 49.5%;
+
+    &:nth-child(even){
+      margin-left: 1%;
+    }
+  }
+
+}
+
+@media only screen and (max-width: 399px) {
+
+  .part-dress {
+
+    h3 {
+      font-size: $model-h3 - 0.8;
+    }
+
+    .model-name {
+      font-size: $model-name-size - 0.5;
+    }
+
+    .model-add {
+      font-size: $model-add - 0.5;
+    }
+
+    .model-price {
+      font-size: $model-price - 0.6;
+    }
+  }
+}
