@@ -1,6 +1,6 @@
 module Afterpay
   module Presenters
-    class Token
+    class Payment
       def initialize(spree_order:, spree_payment_method:, rails_request:)
         @rails_request        = rails_request
         @spree_order          = spree_order
@@ -56,6 +56,19 @@ module Afterpay
       rescue StandardError => e
         Raven.capture_exception(e)
         false
+      end
+
+      def test_mode?
+        payment_method.preferred_test_mode
+      end
+
+      def single_installment_text
+        Spree::Money.new(order.total, currency: 'AUD').to_s
+      end
+
+      def order_total_text
+        single_installment = order.total / 4
+        Spree::Money.new(single_installment, currency: 'AUD').to_s
       end
     end
   end

@@ -5,7 +5,8 @@ module Afterpay
 
       attr_reader :spree_payment_method
       def_delegators :spree_payment_method,
-                     :preferred_username
+                     :preferred_username,
+                     :preferred_test_mode
 
       def_delegators :provider,
                      :create_order,
