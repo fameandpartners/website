@@ -14,7 +14,7 @@ describe GuestCheckoutAssociation, type: :service do
       end
 
       it 'associates user with order' do
-        result = GuestCheckoutAssociation.associate_user_for_guest_checkout(spree_order: order, spree_current_user: nil)
+        result = GuestCheckoutAssociation.call(spree_order: order)
         expect(result).to be true
         expect(order.reload.user).to eq(user)
       end
@@ -22,7 +22,7 @@ describe GuestCheckoutAssociation, type: :service do
 
     context 'bill address information does not match any user' do
       it 'should not associate user with correct email and incorrect first/last name' do
-        result = GuestCheckoutAssociation.associate_user_for_guest_checkout(spree_order: order, spree_current_user: nil)
+        result = GuestCheckoutAssociation.call(spree_order: order)
         expect(result).to be false
         expect(order.reload.user).to be_nil
       end

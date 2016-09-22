@@ -83,7 +83,7 @@ Spree::CheckoutController.class_eval do
       end
 
       if @order.state == 'complete' || @order.completed?
-        GuestCheckoutAssociation.associate_user_for_guest_checkout(spree_order: @order, spree_current_user: spree_current_user)
+        GuestCheckoutAssociation.call(spree_order: @order)
         flash.notice = t(:order_processed_successfully)
         flash[:commerce_tracking] = 'nothing special'
 
