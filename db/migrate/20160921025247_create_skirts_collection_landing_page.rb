@@ -4,14 +4,11 @@ class CreateSkirtsCollectionLandingPage < ActiveRecord::Migration
     {
       path:             '/skirts-collection',
       template_path:    '/landing_pages/skirts_collection',
-      # TODO: Add real PIDs
-      # pids:             %w(123-black).join(','),
+      pids:             %w("").join(','),
       limit:            '99',
       heading:          'Skirts Collection',
-      # TODO: Add real page title
-      # title:            '[TODO: add meta-title]',
-      # TODO: Add real page description
-      # meta_description: '[TODO: add meta-description]',
+      title:            'Skirts Collection. [TODO: add real title]',
+      meta_description: 'Skirts Collection description. [TODO: add real meta-description]',
     }
   end
 
