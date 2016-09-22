@@ -51,7 +51,7 @@ module Afterpay
       end
 
       def order_eligible?
-        max_allowed_amount = payment_method.configuration[0]['maximumAmount']['amount']
+        max_allowed_amount = Rails.cache.fetch('afterpay-maxamount-configuration') { payment_method.configuration[0]['maximumAmount']['amount'] }
         order.total <= max_allowed_amount.to_f
       rescue StandardError => e
         Raven.capture_exception(e)
