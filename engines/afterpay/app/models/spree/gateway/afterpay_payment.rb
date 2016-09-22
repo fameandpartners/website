@@ -40,9 +40,8 @@ module Spree
 
       # Payment Actions
 
-      def purchase(amount, transaction_details, options = {})
-        # Not used, since Afterpay flow is on their side + API
-        # ActiveMerchant::Billing::Response.new(true, 'Bogus Gateway: Forced success', {}, test: true, authorization: '12345', avs_result: { code: 'A' })
+      def purchase(amount, payment_source, options = {})
+        ActiveMerchant::Billing::Response.new(true, 'AfterPay Gateway: Success', {}, authorization: payment_source.gateway_payment_profile_id)
       end
 
       def refund(payment, amount)
