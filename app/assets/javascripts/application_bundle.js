@@ -30,10 +30,11 @@ if (typeof window.PdpDataFull !== 'undefined') {
   var store = (0, _configureStore2.default)(window.PdpDataFull);
 
   //  JUST FOR DEV!!!
-  //  store.subscribe(() => {
-  //    console.log('Store changed: ', store.getState());
-  //  });
-
+  /*
+  store.subscribe(() => {
+    console.log('Store changed: ', store.getState());
+  });
+  */
   (0, _reactDom.render)(_react2.default.createElement(
     _reactRedux.Provider,
     { store: store },
@@ -252,6 +253,10 @@ var PdpGallery = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PdpGallery).call(this));
 
+    _this.state = {
+      slickEnabled: false
+    };
+
     _this.handleLoad = _this.handleLoad.bind(_this);
     _this.handleResize = _this.handleResize.bind(_this);
     _this.calculateOffset = _this.calculateOffset.bind(_this);
@@ -274,6 +279,19 @@ var PdpGallery = function (_React$Component) {
     value: function handleLoad(image) {
       image.target.style.marginLeft = this.calculateOffset(image.target) + 'px';
       image.target.parentNode.className += ' is-loaded';
+      $(image.target.parentNode).zoom({
+        url: $(image.target).attr('src'),
+        touch: true,
+        on: 'click',
+        duration: 50,
+        magnify: 1.3,
+        onZoomIn: function onZoomIn() {
+          $(this).parent().addClass('zoomed-in');
+        },
+        onZoomOut: function onZoomOut() {
+          $(this).parent().removeClass('zoomed-in');
+        }
+      });
     }
   }, {
     key: 'handleResize',
@@ -310,6 +328,8 @@ var PdpGallery = function (_React$Component) {
       var foundImage = false;
       var thumbIds = [];
 
+      var SLICK_ENABLED = this.state.slickEnabled;
+
       var SETTINGS = {
         infinite: true,
         arrows: false,
@@ -323,7 +343,13 @@ var PdpGallery = function (_React$Component) {
         }, {
           breakpoint: 9999,
           settings: 'unslick'
-        }]
+        }],
+        beforeChange: function beforeChange(e) {
+          console.log(e);
+          if (!SLICK_ENABLED) {
+            e.preventDefault();
+          }
+        }
       };
 
       // check if selected color ID matches any available images
@@ -343,11 +369,16 @@ var PdpGallery = function (_React$Component) {
           thumbIds.push(id);
           return _react2.default.createElement(
             'div',
-            { className: 'media-wrap', key: index },
-            _react2.default.createElement('span', { id: id, className: 'scrollspy-trigger' }),
-            _react2.default.createElement('img', { src: image.url, alt: image.alt,
-              className: 'js-gallery-image', onLoad: _this3.handleLoad }),
-            _react2.default.createElement('span', { className: 'loader' })
+            { className: 'media-wrap-outer', key: index },
+            _react2.default.createElement(
+              'div',
+              { className: 'media-wrap' },
+              _react2.default.createElement('span', { id: id, className: 'scrollspy-trigger' }),
+              _react2.default.createElement('img', { src: image.url, alt: image.alt,
+                className: 'js-gallery-image', onLoad: _this3.handleLoad }),
+              _react2.default.createElement('span', { className: 'loader' }),
+              _react2.default.createElement('span', { className: 'btn-close expande lg' })
+            )
           );
         }
       });

@@ -7,6 +7,10 @@ class PdpGallery extends React.Component {
   constructor() {
     super();
 
+    this.state = {
+      slickEnabled: false
+    };
+
     this.handleLoad = this.handleLoad.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.calculateOffset = this.calculateOffset.bind(this);
@@ -24,6 +28,19 @@ class PdpGallery extends React.Component {
   handleLoad(image) {
     image.target.style.marginLeft = this.calculateOffset(image.target) + 'px';
     image.target.parentNode.className += ' is-loaded';
+    $(image.target.parentNode).zoom({
+      url: $(image.target).attr('src'),
+      touch: true,
+      on: 'click',
+      duration: 50,
+      magnify: 1.3,
+      onZoomIn: function() {
+        $(this).parent().addClass('zoomed-in');
+      },
+      onZoomOut: function() {
+        $(this).parent().removeClass('zoomed-in');
+      }
+    });
   }
 
   handleResize() {
@@ -51,6 +68,8 @@ class PdpGallery extends React.Component {
     let foundImage = false;
     let thumbIds = [];
 
+    const SLICK_ENABLED = this.state.slickEnabled;
+
     const SETTINGS = {
       infinite: true,
       arrows: false,
@@ -67,7 +86,13 @@ class PdpGallery extends React.Component {
           breakpoint: 9999,
           settings: 'unslick'
         }
-      ]
+      ],
+      beforeChange: function(e) {
+        console.log(e);
+        if(!SLICK_ENABLED){
+          e.preventDefault();
+        }
+      }
     };
 
     // check if selected color ID matches any available images
@@ -88,11 +113,14 @@ class PdpGallery extends React.Component {
         let id = "gallery-image-" + index;
         thumbIds.push(id);
         return (
-          <div className="media-wrap" key={index}>
-            <span id={id} className="scrollspy-trigger"></span>
-            <img src={image.url} alt={image.alt}
-              className="js-gallery-image" onLoad={this.handleLoad} />
-            <span className="loader"></span>
+          <div className="media-wrap-outer" key={index}>
+            <div className="media-wrap">
+              <span id={id} className="scrollspy-trigger"></span>
+              <img src={image.url} alt={image.alt}
+                className="js-gallery-image" onLoad={this.handleLoad} />
+              <span className="loader"></span>
+              <span className="btn-close expande lg"></span>
+            </div>
           </div>
         );
       }

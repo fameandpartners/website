@@ -15,6 +15,7 @@
 //= require libs/jquery.mlens.min
 //= require libs/bootstrap-tabcollapse
 //= require libs/jquery.sticky
+//= require libs/jquery.zoom.min
 
 //= require modernizr-custom
 

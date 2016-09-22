@@ -148,6 +148,18 @@
     opacity: .6;
   }
 
+  &.expande {
+
+    &:before {
+      transform: rotate(0deg);
+    }
+
+    &:after {
+      transform: rotate(-90deg);
+    }
+
+  }
+
   &.sml {
     width: 14px;
     height: 14px;
