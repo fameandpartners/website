@@ -9,10 +9,11 @@ ruby:
       script src="https://www.secure-afterpay.com.au/afterpay.js" async=true
 
     javascript:
-      function buyWithAfterpay() {
+      $(document).on('click', 'a.open-afterpay-modal', function (e) {
+        e.preventDefault();
         AfterPay.init();
         AfterPay.display({token: "#{afterpay_token}"});
-      }
+      });
 
   .panel.panel-afterpay
     .panel-heading
@@ -46,6 +47,6 @@ ruby:
             .to-pay = afterpay.single_installment_text
             .time-period Fortnightly
         h6 You will temporarily be redirected to the Afterpay website via a popup to complete your purchase
-        a.btn.btn-black.btn-md href='javascript:buyWithAfterpay();' Continue With Afterpay
+        a.btn.btn-black.btn-md.open-afterpay-modal href='javascript:void(0);' Continue With Afterpay
         div
           = link_to 'Terms and conditions', 'https://www.afterpay.com.au/terms/', target: '_blank'
