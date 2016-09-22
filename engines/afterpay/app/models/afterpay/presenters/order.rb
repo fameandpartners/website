@@ -7,7 +7,8 @@ module Afterpay
       def_delegators :spree_order,
                      :total,
                      :currency,
-                     :email
+                     :email,
+                     :number
 
       def_delegators :bill_address,
                      :phone,

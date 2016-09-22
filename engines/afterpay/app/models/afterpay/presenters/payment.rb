@@ -23,6 +23,15 @@ module Afterpay
         )
       end
 
+      private def confirmation_url(order_number:)
+        Rails.application.routes.url_helpers.afterpay_confirm_url(
+          host:         @rails_request.host,
+          port:         @rails_request.port,
+          protocol:     @rails_request.protocol,
+          order_number: order_number
+        )
+      end
+
       def get_token
         result = payment_method.create_order(
           {
@@ -37,7 +46,7 @@ module Afterpay
               email:       order.email
             },
             merchant:          {
-              redirectConfirmUrl: 'http://au.lvh.me:3000/afterpay/confirm',
+              redirectConfirmUrl: confirmation_url(order_number: order.number),
               redirectCancelUrl:  checkout_url
             },
             merchantReference: payment_method.preferred_username
@@ -47,7 +56,7 @@ module Afterpay
         result['token']
       rescue StandardError => e
         Raven.capture_exception(e)
-        false
+        nil
       end
 
       def order_eligible?
