@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails'                 # Version specified on main app Gemfile
   s.add_dependency 'spree'                 # Version specified on main app Gemfile
-  s.add_dependency 'spree'                 # Version specified on main app Gemfile
   s.add_dependency 'afterpay-sdk-merchant' # Version specified on main app Gemfile
 
   # s.add_development_dependency 'sqlite3'
