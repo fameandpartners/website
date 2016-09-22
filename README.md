@@ -241,14 +241,38 @@ For more information, please refer to the [deployment docs](doc/ops/deployment.m
 
 Access `/admin/payment_methods/1/edit`
 
- * `Active => Yes`
- * `Environment => Development`
- * `Test Mode => Checked`
- * `Server => test`
+#### PIN
 
-Test CC is `5520000000000000`
+- `Provider => Spree::Gateway::Pin`
+- `Active => Yes`
+- `Environment => Development`
+- `Test Mode => Checked`
+- `Server => test`
+
+Test CC is `5520000000000000`, with any valid expiration date and three digits CVV.
 
 You can use any other details.
+
+#### Afterpay
+
+- Provider: `Spree::Gateway::AfterpayPayment`
+- Active: `Yes`
+- Environment: `Development`
+- Test Mode: `Checked`
+- Server: `sandbox`
+
+Use your own email, with a valid Australian phone and `111111` as the SMS verification token.
+
+> Note: Your email will be used to access the sandbox environment. You WILL receive real emails.
+
+Example:
+
+- Email: `johndoe@gmail.com`
+- Australian Phone: `+61481070625`
+- SMS verification token: `111111`
+- Credit card details:
+  - Number: `5520000000000000`
+  - Just fill in the rest with valid information, and it'll work
 
 ## Testing
 
