@@ -35,6 +35,7 @@ module Afterpay
       end
 
       if current_order.complete?
+        GuestCheckoutAssociation.call(spree_order: current_order)
         flash.notice              = t(:order_processed_successfully)
         flash[:commerce_tracking] = 'nothing special'
         session[:order_id]        = nil
