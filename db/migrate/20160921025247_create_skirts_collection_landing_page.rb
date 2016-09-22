@@ -4,11 +4,11 @@ class CreateSkirtsCollectionLandingPage < ActiveRecord::Migration
     {
       path:             '/skirts-collection',
       template_path:    '/landing_pages/skirts_collection',
-      pids:             %w("").join(','),
+      pids:             %w().join(','),
       limit:            '99',
       heading:          'Skirts Collection',
-      title:            'Skirts Collection. [TODO: add real title]',
-      meta_description: 'Skirts Collection description. [TODO: add real meta-description]',
+      title:            'Skirts, mini skirts, and maxi skirts',
+      meta_description: 'Introducing The Skirts Collection. It’s never been easier to find the perfect skirt–from pencil skirts to midi skirts, from office-appropriate skirts to sequined party skirts; each piece in the collection is uniquely customizable and made-to-order, just for you.',
     }
   end
 
