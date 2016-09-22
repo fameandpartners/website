@@ -1,0 +1,185 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://32935:249c235938f36015bb32571721ba2dc80257d2fe985799c30a0e5877408991b596b117d998e0528a7872103f8fc80e07d71163c801b22153149ac6a0919b588a@api-sandbox.secure-afterpay.com.au/v1/configuration
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - AfterpaySDK/sdk-core-ruby 0.0.1 (afterpay-sdk-core 0.0.1; ruby 2.1.6p336-x86_64-linux)
+      X-Afterpay-Request-Source:
+      - merchant-ruby-sdk-0.0.1
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 23 Sep 2016 13:06:58 GMT
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Cache-Control:
+      - private, no-transform, max-age=1800
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json
+      Http-Correlation-Id:
+      - 9efb6ba3-3c7e-4870-8a4f-88878f1ef762
+      Content-Length:
+      - '150'
+    body:
+      encoding: UTF-8
+      string: |-
+        [ {
+          "type" : "PAY_BY_INSTALLMENT",
+          "description" : "Pay over time",
+          "maximumAmount" : {
+            "amount" : "1200.00",
+            "currency" : "AUD"
+          }
+        } ]
+    http_version: 
+  recorded_at: Fri, 23 Sep 2016 13:06:58 GMT
+- request:
+    method: post
+    uri: https://32935:249c235938f36015bb32571721ba2dc80257d2fe985799c30a0e5877408991b596b117d998e0528a7872103f8fc80e07d71163c801b22153149ac6a0919b588a@api-sandbox.secure-afterpay.com.au/v1/orders
+    body:
+      encoding: UTF-8
+      string: '{"totalAmount":{"amount":951,"currency":"AUD"},"consumer":{"givenNames":"Fame","surname":"Partners","email":"dev@<BERGEN_USERNAME>.com"},"merchant":{"redirectConfirmUrl":"https://localhost:3000/dresses","redirectCancelUrl":"https://localhost:3000/dresses"}}'
+    headers:
+      User-Agent:
+      - AfterpaySDK/sdk-core-ruby 0.0.1 (afterpay-sdk-core 0.0.1; ruby 2.1.6p336-x86_64-linux)
+      X-Afterpay-Request-Source:
+      - merchant-ruby-sdk-0.0.1
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Fri, 23 Sep 2016 13:06:59 GMT
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json
+      Http-Correlation-Id:
+      - 181dbc2f-3fa1-42b1-8a03-b04b0ac9c427
+      Content-Length:
+      - '112'
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "token" : "v7l03hubr18odt62edis6t6if12gtbv8a8d76mcjei2ujaq776qh",
+          "expires" : "2016-09-23T13:37:00.198Z"
+        }
+    http_version: 
+  recorded_at: Fri, 23 Sep 2016 13:07:00 GMT
+- request:
+    method: get
+    uri: https://32935:249c235938f36015bb32571721ba2dc80257d2fe985799c30a0e5877408991b596b117d998e0528a7872103f8fc80e07d71163c801b22153149ac6a0919b588a@api-sandbox.secure-afterpay.com.au/v1/orders/v7l03hubr18odt62edis6t6if12gtbv8a8d76mcjei2ujaq776qh
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - AfterpaySDK/sdk-core-ruby 0.0.1 (afterpay-sdk-core 0.0.1; ruby 2.1.6p336-x86_64-linux)
+      X-Afterpay-Request-Source:
+      - merchant-ruby-sdk-0.0.1
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 23 Sep 2016 13:07:01 GMT
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Cache-Control:
+      - private, no-cache, no-store, no-transform, must-revalidate, max-age=0
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json
+      Http-Correlation-Id:
+      - 41ca4803-f20c-4e84-9c4d-91d715dd2f53
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '334'
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "expires" : "2016-09-23T13:37:00.198Z",
+          "token" : "v7l03hubr18odt62edis6t6if12gtbv8a8d76mcjei2ujaq776qh",
+          "totalAmount" : {
+            "amount" : "951.00",
+            "currency" : "AUD"
+          },
+          "consumer" : {
+            "givenNames" : "Fame",
+            "surname" : "Partners",
+            "email" : "dev@<BERGEN_USERNAME>.com"
+          },
+          "courier" : { },
+          "merchant" : {
+            "redirectConfirmUrl" : "https://localhost:3000/dresses",
+            "redirectCancelUrl" : "https://localhost:3000/dresses"
+          },
+          "paymentType" : "PAY_BY_INSTALLMENT",
+          "items" : [ ],
+          "discounts" : [ ]
+        }
+    http_version: 
+  recorded_at: Fri, 23 Sep 2016 13:07:02 GMT
+recorded_with: VCR 2.9.3
