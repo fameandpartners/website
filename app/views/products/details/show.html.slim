@@ -148,7 +148,11 @@ form.hide-fully#pdpDataForWishlist
                       i.icon.icon-arrow-right
                 .col-md-7
                   = link_to styling_session_path
-                    = image_tag '_pdp/tile-styling-advice.jpg', :class => 'img-responsive'
+                    picture.media-wrap
+                      source media='(max-width: 991px)' srcset='#{image_path("_pdp/tile-styling-advice-mob.jpg")}'
+                      source media='(min-width: 992px)' srcset='#{image_path("_pdp/tile-styling-advice.jpg")}'
+                      img src='#{image_path("_pdp/tile-styling-advice.jpg")}' srcset='
+                        #{image_path("_pdp/tile-styling-advice-mob.jpg")} 991w, #{image_path("_pdp/tile-styling-advice.jpg")} 992w'
                       
           .col-md-6
             .item.bordered
@@ -157,7 +161,11 @@ form.hide-fully#pdpDataForWishlist
                   h3 Create a look that’s <em>all your own</em>.
                   p.summary Each Fame and Partners piece is completely customizable to suit your style. Start with a design you love, then use our customization menu to change the color, modify the details, and alter the fit to create a look that’s unique to you.
                 .col-md-7
-                  = image_tag '_pdp/tile-modify.jpg', :class => 'img-responsive'
+                  picture.media-wrap
+                    source media='(max-width: 991px)' srcset='#{image_path("_pdp/tile-modify-mob.jpg")}'
+                    source media='(min-width: 992px)' srcset='#{image_path("_pdp/tile-modify.jpg")}'
+                    img src='#{image_path("_pdp/tile-modify.jpg")}' srcset='
+                      #{image_path("_pdp/tile-modify-mob.jpg")} 991w, #{image_path("_pdp/tile-modify.jpg")} 992w'
 
       = render partial: 'related_products', locals: { product: @product }
       
