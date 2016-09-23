@@ -181,6 +181,21 @@ module Reports
           end
         end
 
+        class AfterpayPayment < PaymentReportPresenter
+          def payment_type
+            'AfterPay'
+          end
+
+          def payer_id
+            return 'Missing Payer' if source.nil?
+            source.gateway_payment_profile_id
+          end
+
+          def transaction_id
+            token
+          end
+        end
+
         class NabTransactGateway < PaymentReportPresenter
           def payment_type
             'NABTransact'
