@@ -754,10 +754,12 @@ var SidePanelColor = function (_SidePanel) {
       var triggerState = props.customize.color.id ? "c-card-customize__content is-selected" : "c-card-customize__content";
 
       var previewColor = "color-preview color-" + props.customize.color.name;
+      var currentColor = "item-preview color-" + props.customize.color.name;
 
       var defaultColors = props.defaultColors.map(function (color, index) {
         var itemState = props.customize.color.id == color.option_value.id ? "selector-color is-selected" : "selector-color";
         var swatch = "swatch color-" + color.option_value.name;
+
         return _react2.default.createElement(
           'a',
           { href: 'javascript:;', className: itemState,
@@ -805,7 +807,8 @@ var SidePanelColor = function (_SidePanel) {
           _react2.default.createElement(
             'div',
             { className: 'c-card-customize__content__left' },
-            'Color'
+            _react2.default.createElement('span', { className: currentColor }),
+            ' Color'
           ),
           _react2.default.createElement(
             'div',
