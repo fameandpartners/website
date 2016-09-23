@@ -128,8 +128,6 @@ Feature: Complete Guest Checkout
     And I click on "Pay Securely" button
     And I click on "Continue With Afterpay" link
     Then I fill in Afterpay data within its iframe:
-      | email      | firefox_user@fameandpartners.com |
-      | password   | firefox1                         |
       | name       | Roger That                       |
       | address1   | Street X                         |
       | suburb     | Suburb                           |
