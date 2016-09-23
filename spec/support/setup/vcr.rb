@@ -7,6 +7,12 @@ VCR.configure do |c|
   c.ignore_localhost = true
   c.allow_http_connections_when_no_cassette = true
 
+  # Afterpay
+  ## Ignores its creation token call ()
+  c.ignore_request do |request|
+    request.uri.include?('api-sandbox.secure-afterpay.com.au/v1/orders')
+  end
+
   # VCR Filters
   ## MailChimp
   c.filter_sensitive_data('<MAILCHIMP_API_KEY>') { ENV['MAILCHIMP_API_KEY'] }
@@ -24,5 +30,10 @@ RSpec.configure do |config|
     WebMock.allow_net_connect!
     VCR.turned_off { example.run }
     WebMock.disable_net_connect!
+  end
+
+  config.around(:each, shorter_cassette_names: true) do |example|
+    example.metadata[:vcr] = { cassette_name: example.description[0..50] }
+    example.run
   end
 end

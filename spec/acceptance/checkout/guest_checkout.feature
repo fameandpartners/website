@@ -105,8 +105,8 @@ Feature: Complete Guest Checkout
       | USA          | United States | California | Zipcode       | US 10      | Petite       | 289.00      |
       | Australia    | New Zealand   | Whanganui  | Postcode      | AU 14      | Petite       | 319.00      |
 
-  # VCR is disabled on full checkout acceptance specs since we can detect Afterpay breaking changes!
-  @javascript @no_vcr @selenium
+  # Note: VCR is recording Afterpay interaction!
+  @javascript @vcr @shorter_cassette_names @selenium
   Scenario Outline: Successfully Buy a Dress (with Afterpay Payment)
     Given The "afterpay" feature is enabled
     When I am on Connie dress page
@@ -128,6 +128,8 @@ Feature: Complete Guest Checkout
     And I click on "Pay Securely" button
     And I click on "Continue With Afterpay" link
     Then I fill in Afterpay data within its iframe:
+      | email      | firefox_user@fameandpartners.com |
+      | password   | firefox1                         |
       | name       | Roger That                       |
       | address1   | Street X                         |
       | suburb     | Suburb                           |
