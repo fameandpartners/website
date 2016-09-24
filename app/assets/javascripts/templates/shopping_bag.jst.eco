@@ -1,17 +1,27 @@
 <div class="cart--top text-center">
-  <div class="pull-left close-cart">
-    <img alt="Submit" class="line-arrow arrow-bag" src="/assets/line-arrow.svg">
+  <div class="pull-left close-cart text-uppercase cta-checkout">
+    <i class="icon icon-arrow-left"></i>
+    Back
   </div>
-  <div class="pull-right close-cart">
-    <span class="cart"><span class="icon icon-bag">
-      <span class="cart-amount">(<%= @cart.item_count %>)</span>
-    </span>
+  <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
+    <div class="pull-right">
+      <span class="cart-checkout">
+        <button type="submit" class="cta-checkout btn-black btn-default">CHECKOUT <i class="icon icon-arrow-right"></i></button>
+      </span>
+    </div>
+  </form>
+  <div class="cart-title">
+    <h2>Your Bag</h2>
+    <span class="amount"><%= @cart.display_total %></span>
   </div>
-  <div>
-    <h2 class="cart-title">
-      Your Cart
-    </h2>
-  </div>
+</div>
+<div class="free-shipping-disclaimer">
+  <p>
+    <span class="highlight">Free shipping</span> to USA, Canada and the UK within 7 - 10 days
+  </p>
+  <p>
+    <span class="highlight">Easy returns</span> within 30 days
+  </p>
 </div>
 <ul class="cart-items">
   <% for product in @cart.products: %>

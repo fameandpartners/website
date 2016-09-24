@@ -1,3 +1,60 @@
-#cart .cart {
-  font-size: 2rem;
+#cart {
+
+  .cart--top {
+    padding: 20px 10px;
+
+    .cart-title {
+      text-align: center;
+      display: inline-block;
+
+      h2 {
+        margin: 0;
+        font-size: 2.8rem;
+        color: $c-neutral-black;
+      }
+
+    }
+
+    .cta-checkout {
+      font-size: 1.3rem;
+      font-weight: 600;
+      padding: 5px 8px;
+      margin-top: 8px;
+    }
+
+    .icon {
+      position: relative;
+      top: 1px;
+      font-weight: 600;
+    }
+
+    .amount {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: $c-neutral-8;
+    }
+
+  }
+
+  .free-shipping-disclaimer {
+    text-align: center;
+    font-size: 1.8rem;
+    line-height: 1.5rem;
+    margin: 25px;
+
+    p {
+      font-family: $font-heading;
+      font-weight: 300;
+    }
+
+    .highlight {
+      border-bottom: 1px solid $c-neutral-4;
+    }
+
+  }
+
+}
+
+.close-cart {
+  cursor: pointer;
 }
