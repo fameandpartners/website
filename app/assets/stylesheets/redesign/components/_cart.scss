@@ -40,7 +40,8 @@
     text-align: center;
     font-size: 1.8rem;
     line-height: 1.5rem;
-    margin: 25px;
+    padding: 25px 25px 10px;
+    border-top: 1px solid $beage-bg;
 
     p {
       font-family: $font-heading;
@@ -49,6 +50,30 @@
 
     .highlight {
       border-bottom: 1px solid $c-neutral-4;
+    }
+
+  }
+
+  .cart-items {
+    padding: 0;
+
+    .remove-product {
+      color: $c-neutral-10;
+    }
+
+    li {
+      list-style: none;
+      position: relative;
+      padding: 1em;
+      overflow: hidden;
+    }
+
+    li:not(:first-child) {
+      border-top: 1px solid $beage-bg;
+    }
+
+    li:last-child {
+      border-bottom: 1px solid $beage-bg;
     }
 
   }
