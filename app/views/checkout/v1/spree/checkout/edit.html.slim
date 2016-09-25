@@ -5,14 +5,23 @@
 = render 'marketing/trackers/zopim'
 - cart = UserCart::UserCartResource.new(order: current_order).read
 
+- if current_step.eql?('payment')
+  - header_return_link = checkout_state_path('address')
+  - header_return_cta = "Back"
+  - breadcrumb_step2_active = "active"
+- else
+  - header_return_link = dresses_path
+  - header_return_cta = "Continue shopping"
+  - breadcrumb_step1_active = "active"
+
 .checkout.page-checkout.page-content
   .container-fluid
     .row.checkout-header.no-spacing-fluid-cols-mobile
       .col-xs-3
-        = link_to dresses_path, class: "cta-icon-text text-uppercase"
+        = link_to header_return_link, class: "cta-icon-text text-uppercase"
           .hidden-xs.hidden-sm
             span.icon.icon-arrow-left
-            | Continue shopping
+            |  #{header_return_cta}
           .hidden-md.hidden-lg
             span.icon.icon-arrow-left
             | Back
@@ -33,8 +42,10 @@
             - if current_step.eql?('masterpass')
               li class='active' MasterPass Confirmation
             - else
-              li class=('active' if current_step.eql?('address')) Step 1<span class="hidden-xs hidden-sm">: Delivery details</span>
-              li class=('active' if current_step.eql?('payment')) Step 2<span class="hidden-xs hidden-sm">: Payment details</span>
+              li class="#{breadcrumb_step1_active}"
+                | Step 1<span class="hidden-xs hidden-sm">: Delivery details</span>
+              li class="#{breadcrumb_step2_active}"
+                | Step 2<span class="hidden-xs hidden-sm">: Payment details</span>
 
         .col-xs-2.text-right.secure-checkout
           i.fa.fa-lock
