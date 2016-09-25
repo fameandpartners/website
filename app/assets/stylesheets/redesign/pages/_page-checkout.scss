@@ -24,6 +24,10 @@
     .breadcrumb {
       padding: 0;
 
+      li {
+        color: $c-neutral-8;
+      }
+
       li + li:before {
         content: '> ';
         color: $c-neutral-8;
