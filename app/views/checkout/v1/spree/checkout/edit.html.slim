@@ -5,31 +5,48 @@
 = render 'marketing/trackers/zopim'
 - cart = UserCart::UserCartResource.new(order: current_order).read
 
-.checkout.page-content
-  .container
-    .row
-      .col-md-8
-        .checkout-masthead
+.checkout.page-checkout.page-content
+  .container-fluid
+    .row.checkout-header.no-spacing-fluid-cols-mobile
+      .col-xs-3
+        = link_to dresses_path, class: "cta-icon-text text-uppercase"
+          .hidden-xs.hidden-sm
+            span.icon.icon-arrow-left
+            | Continue shopping
+          .hidden-md.hidden-lg
+            span.icon.icon-arrow-left
+            | Back
+      .col-xs-6
+        .logo.text-center
           h1
             = link_to root_path
-              = image_tag 'logo/logo-mobile.svg', alt: 'Fame & Partners', width: '78', height: '59'
-            ' Secure checkout
-          = react_component('SupportOptions', { support_telephone: support_telephone }, prerender: true, class: 'support-options')
+              = image_tag "logo/new-logo.svg", alt: "Fame & Partners", class: "img-responsive"
+      .col-xs-3.text-right.live-chat
+        // TODO: add new chat icon
+        = react_component('SupportOptions', { support_telephone: support_telephone }, prerender: true, class: 'support-options cta-icon-text')
 
-        .comodo.hidden-xs.pull-right
-          = image_tag "comodo-ssl.png", alt: "SSL", height: '35px', width: '112px'
-
-        .checkout-breadcrumbs
+  .checkout-breadcrumbs
+    .container
+      .row
+        .col-xs-10
           ol.breadcrumb
             - if current_step.eql?('masterpass')
               li class='active' MasterPass Confirmation
             - else
-              li class=('active' if current_step.eql?('address')) Your information
-              li class=('active' if current_step.eql?('payment')) Payment Method
+              li class=('active' if current_step.eql?('address')) Step 1<span class="hidden-xs hidden-sm">: Delivery details</span>
+              li class=('active' if current_step.eql?('payment')) Step 2<span class="hidden-xs hidden-sm">: Payment details</span>
 
-        .col-md-4.col-sm-12.product-form.product-form-top.visible-xs.visible-sm
-          = render 'spree/checkout/order_summary', cart: cart, run_setup_script: true
+        .col-xs-2.text-right.secure-checkout
+          i.fa.fa-lock
+          span.hidden-xs.hidden-sm  Secure checkout
 
+  .container
+    .row
+      .col-md-4.col-sm-12.product-form.product-form-top.visible-xs.visible-sm
+        = render 'spree/checkout/order_summary', cart: cart, run_setup_script: true
+
+    .row
+      .col-md-6
         - if current_step.eql?('address')
           .checkout-step data-name="address"
             = render 'address_step', current_step: current_step
@@ -45,8 +62,5 @@
           .checkout-step data-name="masterpass"
             = render 'masterpass_step', current_step: current_step
 
-        .row : .comodo.visible-xs.text-center : p
-          = image_tag "comodo-ssl.png", alt: "SSL", height: '35px', width: '112px', style: 'margin-top:25px;margin-bottom:25px'
-
-      .col-md-4.col-sm-12.product-form.product-form-side.hidden-xs.hidden-sm
+      .col-md-5.col-md-offset-1.col-sm-12.product-form.product-form-side.hidden-xs.hidden-sm
         = render 'spree/checkout/order_summary', cart: cart, run_setup_script: false
