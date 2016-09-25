@@ -1,5 +1,5 @@
 <div class="row row-no-gutter no-spacing-fluid-cols-mobile">
-  <div class="col-md-7 col-lg-8 hidden-xs hidden-sm"></div>
+  <div class="close-cart-layer close-cart col-md-7 col-lg-8 hidden-xs hidden-sm"></div>
   <div class="cart-wrapper col-lg-4 col-md-5 col-xs-12">
     <div class="row">
       <div class="cart--top text-center col-xs-12">
@@ -18,86 +18,91 @@
           <h2>Your Bag</h2>
           <span class="amount"><%= @cart.display_total %></span>
         </div>
-        <div class="free-shipping-disclaimer">
-          <p>
-            <span class="link-underline-lighter">Free shipping</span> to USA, Canada and the UK within 7 - 10 days
-          </p>
-          <p>
-            <span class="link-underline-lighter">Easy returns</span> within 30 days
-          </p>
-        </div>
+      </div>
+    </div>
+
+    <div class="row free-shipping-disclaimer">
+      <div class="col-xs-12">
+        <p>
+          <span class="link-underline-lighter">Free shipping</span> to USA, Canada and the UK within 7 - 10 days
+        </p>
+        <p>
+          <span class="link-underline-lighter">Easy returns</span> within 30 days
+        </p>
       </div>
     </div>
 
     <% if @cart.products.length: %>
-      <div class="cart-items">
-        <% for product in @cart.products: %>
-        <div class="row cart-item" data-id="<%= product.line_item_id %>">
-          <div class="cart-item-image-holder col-md-5">
-            <a href="<%= product.path %>">
-              <% if product.name != "Gift" : %>
-              <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
-              <% end %>
-            </a>
-          </div>
-          <div class="cart-item-info col-md-7">
-            <a class="pull-right remove-product" href="javascript:;">
-              <span class="icon btn-close"></span>
-            </a>
-            <div class="heading txt-truncate-1">
-              <% if product.name != "Gift" : %>
-              <a class="cart-item-title" href="<%= product.path %>"><%= product.name %></a>
-              <% else :%>
-              <a class="cart-item-title" href="#"><%= product.name %></a>
-              <% end %>
-            </div>
-            <div class="cart-item-price"><%= product.price.display_price %></div>
-            <dl class="cart-item-description">
-              <% if product.size != null : %>
-              <dd>Size: <span><%= product.size.presentation %>, </span></dd>
-              <% end %>
-              <dd>Color: <span class="color"><%= product.color.name %></span></dd>
-              <dd>Skirt Length: <span><%= product.height %></span></dd>
-              <% for making_option in product.making_options: %>
-              <dd><%= making_option.name %> <%= making_option.display_price %></dd>
-              <% end %>
-              <% for customization in product.customizations: %>
-              <dd><%= customization.name %> <%= customization.display_price %></dd>
-              <% end %>
-            </dl>
-          </div>
+    <div class="cart-items">
+      <% for product in @cart.products: %>
+      <div class="row cart-item" data-id="<%= product.line_item_id %>">
+        <div class="cart-item-image-holder col-md-5">
+          <a href="<%= product.path %>">
+            <% if product.name != "Gift" : %>
+            <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
+            <% end %>
+          </a>
         </div>
-        <% end %>
+        <div class="cart-item-info col-md-7">
+          <a class="pull-right remove-product" href="javascript:;">
+            <span class="icon btn-close"></span>
+          </a>
+          <div class="heading txt-truncate-1">
+            <% if product.name != "Gift" : %>
+            <a class="cart-item-title" href="<%= product.path %>"><%= product.name %></a>
+            <% else :%>
+            <a class="cart-item-title" href="#"><%= product.name %></a>
+            <% end %>
+          </div>
+          <div class="cart-item-price"><%= product.price.display_price %></div>
+          <dl class="cart-item-description">
+            <% if product.size != null : %>
+            <dd>Size: <span><%= product.size.presentation %>, </span></dd>
+            <% end %>
+            <dd>Color: <span class="color"><%= product.color.name %></span></dd>
+            <dd>Skirt Length: <span><%= product.height %></span></dd>
+            <% for making_option in product.making_options: %>
+            <dd><%= making_option.name %> <%= making_option.display_price %></dd>
+            <% end %>
+            <% for customization in product.customizations: %>
+            <dd><%= customization.name %> <%= customization.display_price %></dd>
+            <% end %>
+          </dl>
+        </div>
       </div>
+      <% end %>
+    </div>
     <% else: %>
-      <div class="row cart-is-empty">
-        <div class="col-xs-12">
-          <h3 class="heading">Your bag is empty</h3>
-          <a href="<%= urlWithSitePrefix('/dresses/new-this-week') %>" class="link-underline-lighter cta-when-empty">Find some inspiration with what’s new this week</a>
-        </div>
+    <div class="row cart-is-empty">
+      <div class="col-xs-12">
+        <h3 class="heading">Your bag is empty</h3>
+        <a href="<%= urlWithSitePrefix('/dresses/new-this-week') %>" class="link-underline-lighter cta-when-empty">Find some inspiration with what’s new this week</a>
       </div>
+    </div>
     <% end %>
 
-    <div class="cart-total">
-      <p>
-        Shipping <span><%= @cart.display_shipment_total %></span>
-      </p>
-      <p>
-        <% if @cart.promocode: %>
-        Promotion (<%= @cart.promocode.substring(0,10) %>)<span><%= @cart.display_promotion_total %></span>
-        <% end %>
-      </p>
-      <p class="order-total">
-        Order Total <span><%= @cart.display_total %></span>
-      </p>
-    </div>
-    <div class="cart--call-to-actions">
-      <div class="col-lg-12">
-        <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
-          <div>
-            <input type="submit" value="Continue to payment" class="text-uppercase btn btn-black btn-block">
-          </div>
-        </form>
+    <div class="row cart-footer">
+      <div class="col-xs-12">
+        <div class="cart-total">
+          <p>
+            Shipping <span><%= @cart.display_shipment_total %></span>
+          </p>
+          <p>
+            <% if @cart.promocode: %>
+            Promotion (<%= @cart.promocode.substring(0,10) %>)<span><%= @cart.display_promotion_total %></span>
+            <% end %>
+          </p>
+          <p class="order-total">
+            Order Total <span><%= @cart.display_total %></span>
+          </p>
+        </div>
+        <div class="cart--call-to-actions">
+          <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
+            <div>
+              <input type="submit" value="Continue to payment" class="text-uppercase btn btn-black btn-block">
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

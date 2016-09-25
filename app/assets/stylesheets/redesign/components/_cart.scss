@@ -60,7 +60,6 @@
     font-size: 1.8rem;
     line-height: 1.5rem;
     padding: 25px 25px 10px;
-    margin-top: 20px;
     border-top: 1px solid $beage-bg;
 
     p {
@@ -80,10 +79,6 @@
     .cart-item {
       padding: 15px 15px 15px 0;
       overflow: hidden;
-    }
-
-    .cart-item:last-child {
-      border-bottom: 1px solid $beage-bg;
     }
 
     .cart-item-image-holder {
@@ -117,6 +112,13 @@
       text-transform: capitalize;
     }
 
+  }
+
+  .cart-footer {
+    border-bottom: 1px solid $beage-bg;
+    border-top: 1px solid $beage-bg;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .order-total {
