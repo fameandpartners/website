@@ -170,8 +170,11 @@ z-index levels
 @import 'redesign/tables';
 @import 'redesign/pages';
 
+// TODO: remove these legacy stylesheets
 @import 'redesign/checkout';
 @import 'redesign/cart';
+
+@import 'redesign/pages/page-checkout';
 
 // Time specific content
 @import 'transient_content';
