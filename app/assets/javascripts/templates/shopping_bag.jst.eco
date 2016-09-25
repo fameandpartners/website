@@ -1,6 +1,6 @@
-<div class="row row-no-gutter">
-  <div class="col-md-8 close-cart-layer close-cart"></div>
-  <div class="cart-wrapper col-md-4">
+<div class="row row-no-gutter no-spacing-fluid-cols-mobile">
+  <div class="col-md-7 col-lg-8 hidden-xs hidden-sm"></div>
+  <div class="cart-wrapper col-lg-4 col-md-5 col-xs-12">
     <div class="row">
       <div class="cart--top text-center col-xs-12">
         <div class="pull-left close-cart text-uppercase cta-checkout">
