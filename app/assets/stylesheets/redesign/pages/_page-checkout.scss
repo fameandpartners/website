@@ -42,6 +42,7 @@
   .live-chat a {
     border-bottom: 1px solid $c-neutral-4;
     text-transform: uppercase;
+    cursor: pointer;
   }
 
 }
@@ -59,7 +60,6 @@
 
   .support-options {
     margin-top: 0;
-    cursor: pointer;
   }
 
   .checkout-breadcrumbs {
