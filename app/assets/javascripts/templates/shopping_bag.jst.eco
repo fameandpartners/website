@@ -3,14 +3,14 @@
   <div class="cart-wrapper col-lg-4 col-md-5 col-xs-12">
     <div class="row">
       <div class="cart--top text-center col-xs-12">
-        <div class="pull-left close-cart text-uppercase cta-checkout">
+        <div class="pull-left close-cart text-uppercase cta-icon-text">
           <span class="icon icon-arrow-left"></span>
           Back
         </div>
         <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
           <div class="pull-right">
             <span class="cart-checkout">
-              <button type="submit" class="cta-checkout btn-black btn-block btn">CHECKOUT <i class="icon icon-arrow-right"></i></button>
+              <button type="submit" class="cta-icon-text btn-black btn-block btn">CHECKOUT <i class="icon icon-arrow-right"></i></button>
             </span>
           </div>
         </form>
