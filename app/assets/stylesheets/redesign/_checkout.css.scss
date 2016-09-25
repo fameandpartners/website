@@ -110,21 +110,6 @@ $order-summary-bg: #f7f7f9;
     }
   }
 
-  // Breadcrumbs
-  .checkout-breadcrumbs {
-    .breadcrumb {
-      padding: 0;
-      background-color: transparent;
-      li + li:before {
-        content: '> '; // Override
-        color: $checkout-breadcrumbs-color-inactive;
-      }
-      li.active {
-        color: $checkout-info-peach;
-      }
-    }
-  }
-
   // Auth messaging
   .auth-alert {
     padding: 15px 35px 15px 15px;

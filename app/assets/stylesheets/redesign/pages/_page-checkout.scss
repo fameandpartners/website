@@ -1,0 +1,69 @@
+.page-checkout {
+
+  .logo img {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .checkout-header {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    h1 {
+      margin: 0;
+    }
+
+  }
+
+  // Breadcrumbs
+  .checkout-breadcrumbs {
+    background-color: $c-neutral-2;
+    padding: 10px;
+    font-size: 1.5rem;
+
+    .breadcrumb {
+      padding: 0;
+
+      li + li:before {
+        content: '> ';
+        color: $c-neutral-8;
+        padding: 0 10px;
+      }
+
+      li.active {
+        color: $c-neutral-black;
+        font-weight: 600;
+      }
+
+    }
+
+  }
+
+  .live-chat a {
+    border-bottom: 1px solid $c-neutral-4;
+    text-transform: uppercase;
+  }
+
+}
+
+@media (max-width: $bootstrap-md-width - 1px) {
+
+  .logo {
+    padding: 2px;
+  }
+
+  .secure-checkout {
+    font-size: 2.3rem;
+    margin-top: -5px;
+  }
+
+  .support-options {
+    margin-top: 0;
+    cursor: pointer;
+  }
+
+  .checkout-breadcrumbs {
+    font-size: 1.7rem;
+  }
+
+}
