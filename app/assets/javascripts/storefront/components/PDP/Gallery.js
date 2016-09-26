@@ -7,10 +7,6 @@ class PdpGallery extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      slickEnabled: false
-    };
-
     this.handleLoad = this.handleLoad.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.calculateOffset = this.calculateOffset.bind(this);
@@ -67,8 +63,6 @@ class PdpGallery extends React.Component {
   render() {
     let foundImage = false;
     let thumbIds = [];
-
-    const SLICK_ENABLED = this.state.slickEnabled;
 
     const SETTINGS = {
       infinite: true,
