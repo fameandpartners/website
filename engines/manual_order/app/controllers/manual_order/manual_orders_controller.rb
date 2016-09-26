@@ -3,10 +3,21 @@ module ManualOrder
 
     layout 'admin_ui'
 
-    helper_method :manual_order_form
+    helper_method :manual_order_form, :manual_order_filter
 
     def index
-
+      @collection = ManualOrdersGrid.new(params[:manual_orders_grid])
+      respond_to do |f|
+        f.html do
+          @collection.scope { |scope| scope.page(params[:page]) }
+        end
+        f.csv do
+          send_data @collection.to_csv,
+                    type: "text/csv",
+                    disposition: 'inline',
+                    filename: "manual_orders-#{DateTime.now.to_s(:file_timestamp)}.csv"
+        end
+      end
     end
 
     def new
@@ -15,44 +26,51 @@ module ManualOrder
 
     def create
      if manual_order_form.validate(params[:forms_manual_order])
-       manual_order_form.save { |hash| manual_order_form.save_order(hash) }
+       order = manual_order_form.save { |hash| manual_order_form.save_order(hash) }
 
-       redirect_to manual_orders_path, flash: { success: 'Order has been created successfully' }
+       flash[:success] = "Order " \
+                          "#{view_context.link_to order.number, spree.admin_order_path(order.number)} " \
+                          "has been created successfully".html_safe
+       redirect_to manual_orders_path
      end
     end
 
     def sizes_options
-      render json: manual_order_form.get_size_options(params[:product_id])
+      render json: manual_order_filter.size_options
     end
 
     def colors_options
-      render json: manual_order_form.get_color_options(params[:product_id]) | manual_order_form.get_custom_colors(params[:product_id])
+      render json: manual_order_filter.color_options | manual_order_filter.custom_colors
     end
 
     def customisations_options
-      render json: manual_order_form.get_customisations_options(params[:product_id])
+      render json: manual_order_filter.customisations_options
     end
 
     def image
-      render json: manual_order_form.get_image(params[:product_id], params[:size_id], params[:color_id])
+      render json: manual_order_filter.image
     end
 
     def price
-      render json: manual_order_form.get_price(params[:product_id], params[:size_id], params[:color_id], params[:currency])
+      render json: manual_order_filter.price
     end
 
     def autocomplete_customers
-      render json: manual_order_form.get_users_searched(params[:term])
+      render json: manual_order_filter.users_searched
     end
 
     def user_data
-      render json: manual_order_form.get_user_data(params[:user_id])
+      render json: manual_order_filter.user_data
     end
 
     private
 
     def manual_order_form
       @manual_order_form ||= Forms::ManualOrderForm.new(Spree::Order.new)
+    end
+
+    def manual_order_filter
+      @manual_order_filter ||= Forms::ManualOrderFilter.new(params)
     end
 
   end

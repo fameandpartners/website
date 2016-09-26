@@ -8,6 +8,7 @@
 * Redis
 * memcached
 * `imagemagick` 6.9.1
+* [git-lfs](https://git-lfs.github.com/)
 
 > Libraries versions can vary. Versions used above are suggestions.
 
@@ -20,6 +21,19 @@ For more details on installing each library, check [doc/dev/libraries-setup.md](
 * Front-end:
   * CSS guidelines: https://github.com/fameandpartners/website/blob/master/doc/dev/css-guidelines.md
   * JS guidelines: https://github.com/fameandpartners/website/wiki/JS-Guidelines
+
+### Contributing
+
+* To provide any new changes - create new branch and then pull request (PR)
+* All changes goes through JIRA tasks (https://fameandpartners.atlassian.net)
+* New PR name should start with JIRA's task summary name (e.g. `WEBSITE-123123`)
+* New branch name should have:
+  - prefix `feature/` or `fix/` depending on it's type
+  - suffix with JIRA's task sumary name (`-WEBSITE-number`)
+  - examples: `feature/new-order-types-WEBSITE-9999`, `fix/homepage-issues-WEBSITE-9998`
+  - please refer to [fameandpartners#rules](https://github.com/fameandpartners/website/wiki/The-Rules) for more information
+* Commits should follow [fameandpartners#commit-style-guide](https://github.com/fameandpartners/website/wiki/Commit-Style-Guide)
+* For review process please follow [cody#usage](https://github.com/aergonaut/cody#usage) documentation
 
 ### Frameworks
 
@@ -54,6 +68,16 @@ This file loads environment variables required to run the application. You can u
 ## Vendored Gems
 
 All gems are vendored (downloaded and stored at `vendor/cache`). Because of this `bundle/config` file is now versioned. Be careful to **NOT** change it.
+
+## Git LFS
+
+If you cloned the project, but didn't have `git-lfs` installed, execute the following steps:
+
+* Install `git-lfs`
+  * For more details on installation steps, go to [https://git-lfs.github.com/](https://git-lfs.github.com/)
+* Execute `git lfs pull`
+
+This will pull all files stored on LFS for the current branch
 
 ### Creating an Admin User
 
@@ -217,14 +241,38 @@ For more information, please refer to the [deployment docs](doc/ops/deployment.m
 
 Access `/admin/payment_methods/1/edit`
 
- * `Active => Yes`
- * `Environment => Development`
- * `Test Mode => Checked`
- * `Server => test`
+#### PIN
 
-Test CC is `5520000000000000`
+- `Provider => Spree::Gateway::Pin`
+- `Active => Yes`
+- `Environment => Development`
+- `Test Mode => Checked`
+- `Server => test`
+
+Test CC is `5520000000000000`, with any valid expiration date and three digits CVV.
 
 You can use any other details.
+
+#### Afterpay
+
+- Provider: `Spree::Gateway::AfterpayPayment`
+- Active: `Yes`
+- Environment: `Development`
+- Test Mode: `Checked`
+- Server: `sandbox`
+
+Use your own email, with a valid Australian phone and `111111` as the SMS verification token.
+
+> Note: Your email will be used to access the sandbox environment. You WILL receive real emails.
+
+Example:
+
+- Email: `johndoe@gmail.com`
+- Australian Phone: `+61481070625`
+- SMS verification token: `111111`
+- Credit card details:
+  - Number: `5520000000000000`
+  - Just fill in the rest with valid information, and it'll work
 
 ## Testing
 

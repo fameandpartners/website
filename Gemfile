@@ -38,6 +38,7 @@ path 'engines' do
   gem 'bergen'
   gem 'manual_order'
   gem 'mailchimp_client'
+  gem 'afterpay'
 end
 
 # TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it,
@@ -121,25 +122,22 @@ group :assets do
   gem 'bootstrap-sass', '3.3.4.1'
 end
 
-group :development, :test do
+group :development do
+  gem 'foreman', require: false
+  gem 'puma'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'zeus'
   gem 'pry-rails'
   gem 'byebug'
   gem 'awesome_print'
-  gem 'launchy', '2.2.0'
   gem 'letter_opener', '~> 1.4.1'
-  gem 'net-ssh', '~> 2.7.0'
-  gem 'oink'
   gem 'quiet_assets'
-  gem 'rspec-rails', '~> 3.2'
-  gem 'puma'
-  gem 'meta_request'
-  gem 'foreman', require: false
+  gem 'bullet'
 end
 
 group :test do
+  gem 'rspec-rails', '~> 3.2'
   gem 'capybara', '~> 2.5.0'
   gem 'capybara-screenshot', '~> 1.0.11'
   gem 'poltergeist', '~> 1.9.0'
@@ -150,7 +148,7 @@ group :test do
   gem 'rspec-activemodel-mocks'
   gem 'rspec-collection_matchers'
   gem 'rspec-retry'
-  gem 'database_cleaner', require: false
+  gem 'database_cleaner'
   gem 'shoulda-matchers'
   gem 'timecop'
   gem 'vcr', '~> 2.9.3'

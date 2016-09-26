@@ -80,6 +80,12 @@ var _PdpActions = require('../../actions/PdpActions');
 
 var pdpActions = _interopRequireWildcard(_PdpActions);
 
+var _utils = require('./utils');
+
+var _reactModal = require('react-modal');
+
+var _reactModal2 = _interopRequireDefault(_reactModal);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -99,14 +105,27 @@ var CtaPrice = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CtaPrice).call(this, props, context));
 
     _this.state = {
-      sending: false
+      sending: false,
+      modalIsOpen: false
     };
 
+    _this.openModal = _this.openModal.bind(_this);
+    _this.closeModal = _this.closeModal.bind(_this);
     _this.addToBag = _this.addToBag.bind(_this);
     return _this;
   }
 
   _createClass(CtaPrice, [{
+    key: 'openModal',
+    value: function openModal() {
+      this.setState({ modalIsOpen: true });
+    }
+  }, {
+    key: 'closeModal',
+    value: function closeModal() {
+      this.setState({ modalIsOpen: false });
+    }
+  }, {
     key: 'addToBag',
     value: function addToBag() {
       // TODO: redo this
@@ -146,7 +165,8 @@ var CtaPrice = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var price = parseFloat(this.props.price) + parseFloat(this.props.customize.color.price) + parseFloat(this.props.customize.customization.price) - parseFloat(this.props.discount);
+      var PRICE = parseFloat(this.props.price) + parseFloat(this.props.customize.color.price) + parseFloat(this.props.customize.customization.price) - parseFloat(this.props.discount);
+
       return _react2.default.createElement(
         'div',
         { className: 'btn-wrap' },
@@ -154,8 +174,29 @@ var CtaPrice = function (_React$Component) {
           'div',
           { className: 'price' },
           '$',
-          price
+          PRICE
         ),
+        function () {
+          if (_this2.props.siteVersion === "Australia" && _this2.props.flags.afterpay) {
+            return _react2.default.createElement(
+              'div',
+              { className: 'afterpay-message' },
+              _react2.default.createElement(
+                'span',
+                null,
+                'or 4 easy payments of $',
+                PRICE / 4,
+                ' with'
+              ),
+              _react2.default.createElement('img', { src: '/assets/_afterpay/logo-sml.png', alt: 'afterpay logo' }),
+              _react2.default.createElement(
+                'a',
+                { href: 'javascript:;', onClick: _this2.openModal },
+                'info'
+              )
+            );
+          }
+        }(),
         function () {
           if (_this2.props.customize.size.id && _this2.props.customize.color.id && _this2.props.customize.length.id && !_this2.state.sending) {
             return _react2.default.createElement(
@@ -181,6 +222,143 @@ var CtaPrice = function (_React$Component) {
           'div',
           { className: 'est-delivery' },
           'Estimated delivery 1-2 weeks'
+        ),
+        _react2.default.createElement(
+          _reactModal2.default,
+          {
+            style: _utils.MODAL_STYLE,
+            className: 'md',
+            isOpen: this.state.modalIsOpen,
+            onRequestClose: this.closeModal },
+          _react2.default.createElement(
+            'div',
+            { className: 'afterpay-modal' },
+            _react2.default.createElement(
+              'div',
+              { className: 'row' },
+              _react2.default.createElement(
+                'div',
+                { className: 'col-md-12' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'header-wrap' },
+                  _react2.default.createElement('img', { src: '/assets/_afterpay/logo-sml.png', alt: 'afterpay logo' }),
+                  _react2.default.createElement(
+                    'h4',
+                    { className: 'h2 title' },
+                    'Buy Now. ',
+                    _react2.default.createElement(
+                      'em',
+                      null,
+                      'Pay Later.'
+                    ),
+                    ' No Interest'
+                  ),
+                  _react2.default.createElement(
+                    'h5',
+                    { className: 'h6 title' },
+                    'Just select ',
+                    _react2.default.createElement(
+                      'strong',
+                      null,
+                      'Afterpay'
+                    ),
+                    ' at checkout.'
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'col-md-12' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'content-wrap' },
+                  _react2.default.createElement(
+                    'h4',
+                    null,
+                    'How it works.'
+                  ),
+                  _react2.default.createElement(
+                    'ol',
+                    null,
+                    _react2.default.createElement(
+                      'li',
+                      null,
+                      'Select Afterpay as your payment method when you check out.',
+                      _react2.default.createElement(
+                        'span',
+                        null,
+                        'Use your existing debit or credit card.'
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'li',
+                      null,
+                      'Completed your check.',
+                      _react2.default.createElement(
+                        'span',
+                        null,
+                        'No long forms, instant approval online.'
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'li',
+                      null,
+                      'Pay over 4 equal instalments.',
+                      _react2.default.createElement(
+                        'span',
+                        null,
+                        'Pay fortnightly, enjoy your purchase straight away!'
+                      )
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'h4',
+                    null,
+                    'You simply need:'
+                  ),
+                  _react2.default.createElement(
+                    'ul',
+                    null,
+                    _react2.default.createElement(
+                      'li',
+                      null,
+                      'A debit card or credit card'
+                    ),
+                    _react2.default.createElement(
+                      'li',
+                      null,
+                      'To be over 18 years of age'
+                    ),
+                    _react2.default.createElement(
+                      'li',
+                      null,
+                      'To live in Australia'
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    null,
+                    'To see Afterpay’s complete terms, visit ',
+                    _react2.default.createElement(
+                      'a',
+                      { href: 'https://www.afterpay.com.au/terms', target: '_blank' },
+                      'www.afterpay.com.au/terms'
+                    )
+                  )
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'a',
+            { href: 'javascript:;', className: 'btn-close', onClick: this.closeModal },
+            _react2.default.createElement(
+              'span',
+              { className: 'hide-visually' },
+              'Close Menu'
+            )
+          )
         )
       );
     }
@@ -194,6 +372,8 @@ CtaPrice.propTypes = {
   price: _react.PropTypes.string,
   discount: _react.PropTypes.number,
   product: _react.PropTypes.object,
+  siteVersion: _react.PropTypes.string,
+  flags: _react.PropTypes.object,
   actions: _react.PropTypes.object.isRequired
 };
 
@@ -202,7 +382,9 @@ function mapStateToProps(state, ownProps) {
     customize: state.customize,
     price: state.product.price.price.amount,
     discount: state.discount,
-    product: state.product
+    siteVersion: state.siteVersion,
+    product: state.product,
+    flags: state.flags
   };
 }
 
@@ -214,7 +396,7 @@ function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(CtaPrice);
 
-},{"../../actions/PdpActions":2,"react":552,"react-redux":388,"redux":561}],4:[function(require,module,exports){
+},{"../../actions/PdpActions":2,"./utils":13,"react":552,"react-modal":385,"react-redux":388,"redux":561}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1751,6 +1933,8 @@ var _reactModal = require('react-modal');
 
 var _reactModal2 = _interopRequireDefault(_reactModal);
 
+var _utils = require('./utils');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1815,26 +1999,6 @@ var SidePanelSizeChart = function (_React$Component) {
       var SIZE_CHART_TITLE = this.props.sizeChartVersion === '2016' ? 'Legacy Size Guide' : 'Size Guide';
       var SIZE_CHART_VIEW_TEXT = this.props.sizeChartVersion === '2016' ? 'View legacy size guide' : 'View new size guide';
 
-      // this is just reset, proper styling will be applied through SASS
-      var MODAL_STYLE = {
-        overlay: {
-          backgroundColor: null
-        },
-        content: {
-          position: null,
-          top: null,
-          left: null,
-          right: null,
-          bottom: null,
-          border: null,
-          background: null,
-          overflow: null,
-          WebkitOverflowScrolling: null,
-          borderRadius: null,
-          padding: null
-        }
-      };
-
       return _react2.default.createElement(
         'div',
         { className: 'chart-wrap' },
@@ -1846,7 +2010,7 @@ var SidePanelSizeChart = function (_React$Component) {
         _react2.default.createElement(
           _reactModal2.default,
           {
-            style: MODAL_STYLE,
+            style: _utils.MODAL_STYLE,
             isOpen: this.state.modalIsOpen,
             onRequestClose: this.closeModal },
           _react2.default.createElement(
@@ -2174,12 +2338,32 @@ function mapStateToProps(state, ownProps) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(SidePanelSizeChart);
 
-},{"react":552,"react-modal":385,"react-redux":388,"react-simpletabs":395}],13:[function(require,module,exports){
+},{"./utils":13,"react":552,"react-modal":385,"react-redux":388,"react-simpletabs":395}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+// this is just reset, proper styling will be applied through SASS
+var MODAL_STYLE = exports.MODAL_STYLE = {
+  overlay: {
+    backgroundColor: null
+  },
+  content: {
+    position: null,
+    top: null,
+    left: null,
+    right: null,
+    bottom: null,
+    border: null,
+    background: null,
+    overflow: null,
+    WebkitOverflowScrolling: null,
+    borderRadius: null,
+    padding: null
+  }
+};
+
 // This will attempt to find a variant ID
 // It will succeed only for the default colors
 var GetDressVariantId = exports.GetDressVariantId = function GetDressVariantId(vars, color, size) {
@@ -2228,7 +2412,9 @@ var rootReducer = (0, _redux.combineReducers)({
   paths: _pdpReducers.productPathsReducer,
   lengths: _pdpReducers.lengthReducer,
   skirts: _pdpReducers.skirtChartReducer,
-  customize: _pdpReducers.customizeReducer
+  customize: _pdpReducers.customizeReducer,
+  siteVersion: _pdpReducers.siteVersionReducer,
+  flags: _pdpReducers.flagsReducer
 });
 
 exports.default = rootReducer;
@@ -2250,6 +2436,8 @@ exports.discountReducer = discountReducer;
 exports.productPathsReducer = productPathsReducer;
 exports.lengthReducer = lengthReducer;
 exports.skirtChartReducer = skirtChartReducer;
+exports.siteVersionReducer = siteVersionReducer;
+exports.flagsReducer = flagsReducer;
 function customizeReducer() {
   var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   var action = arguments[1];
@@ -2305,6 +2493,20 @@ function lengthReducer() {
 }
 
 function skirtChartReducer() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  var action = arguments[1];
+
+  return state;
+}
+
+function siteVersionReducer() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  var action = arguments[1];
+
+  return state;
+}
+
+function flagsReducer() {
   var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   var action = arguments[1];
 

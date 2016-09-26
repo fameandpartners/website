@@ -3,7 +3,7 @@ module Features
   # Document the purpose of a feature flag here, this documentation is displayed to admin users in the web UI.
   # { feature_name: "Description or documentation." }
   DEFINED_FEATURES = {
-    bergen_usa_returns:            'Enable Bergen return process (background workers and emails) whenever an user creates an order return in the USA',
+    bergen_usa_returns:            '[DEPRECATED] Enable Bergen return process (background workers and emails) whenever an user creates an order return in the USA',
     checkout_fb_login:             "Facebook login on Checkout",
     delivery_date_messaging:       nil,
     enhanced_moodboards:           "[DEPRECATED] Sharing & Comments",
@@ -18,12 +18,13 @@ module Features
     masterpass:                    "MasterCard MasterPass digital wallet on Checkout.",
     moodboard:                     "Moodboards",
     redirect_to_com_au_domain:     "Redirect '/au/' URLs to .com.au",
-    redirect_to_www_and_https:     'Guarantee https://www redirection on Rails routing. Needs to restart server on feature toggle.',
+    redirect_to_www_and_https:     '[DEPRECATED] Guarantee https://www redirection on Rails routing. Needs to restart server on feature toggle.',
     sales:                         nil,
     send_promotion_email_reminder: nil,
     shipping_message:              nil,
     style_quiz:                    nil,
-    test_analytics:                "Force the rendering of JS Marketing Trackers, usually for testing."
+    test_analytics:                "Force the rendering of JS Marketing Trackers, usually for testing.",
+    afterpay:                      'Enables AfterPay payment method and its notifications on PDP'
   }
 
   class << self

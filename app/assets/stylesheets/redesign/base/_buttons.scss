@@ -314,10 +314,17 @@
   padding: 10px 22px;
   display: inline-block;
   border-radius: 0;
+  white-space: nowrap;
+  word-wrap: break-word;
+  word-break: normal;
 
   &.white-txt-border {
     color: $c-neutral-white;
     border: 1px solid $c-neutral-white;
+  }
+
+  .copy-highlight {
+    display: inline-block;
   }
 
 }

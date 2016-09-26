@@ -50,7 +50,7 @@ module Bergen
                 receiving_ticket.CreatedDate(Date.today.strftime('%m/%d/%Y')) # Format is mm/dd/yyyy
 
                 receiving_ticket.Shipmentitemslist do |shipment|
-                  shipment.Style(global_sku.style_number, WMS_NAMESPACES[:receiving_ticket_items])
+                  shipment.Style(global_sku.upc, WMS_NAMESPACES[:receiving_ticket_items]) # UPCs are being sent in place of Style: https://fameandpartners.atlassian.net/browse/WEBSITE-839
                   shipment.Color(global_sku.color_name, WMS_NAMESPACES[:receiving_ticket_items])
                   shipment.UPC(global_sku.upc, WMS_NAMESPACES[:receiving_ticket_items])
                   shipment.Size(global_sku.size, WMS_NAMESPACES[:receiving_ticket_items])
@@ -76,17 +76,15 @@ module Bergen
                 # receiving_ticket.ExpectedDate('02-16-2012')
 
                 receiving_ticket.SupplierDetails do |supplier|
-                  supplier.CompanyName('Fame & Partners', WMS_NAMESPACES[:custom_order])
-                  # supplier.Address1('123 Main Street', WMS_NAMESPACES[:custom_order])
-                  # supplier.Address2('', WMS_NAMESPACES[:custom_order])
-                  # supplier.City('New York', WMS_NAMESPACES[:custom_order])
-                  supplier.State('NY', WMS_NAMESPACES[:custom_order])
-                  # supplier.Zip('10001', WMS_NAMESPACES[:custom_order])
-                  supplier.Country('USA', WMS_NAMESPACES[:custom_order])
-                  # supplier.Non_US_Region('', WMS_NAMESPACES[:custom_order])
-                  # supplier.Phone('212-555-1212', WMS_NAMESPACES[:custom_order])
-                  # supplier.Fax('212-555-1212', WMS_NAMESPACES[:custom_order])
-                  # supplier.Email('', WMS_NAMESPACES[:custom_order])
+                  supplier.CompanyName(user_name, WMS_NAMESPACES[:custom_order])
+                  supplier.Email(order.email, WMS_NAMESPACES[:custom_order])
+                  supplier.Address1(bill_address.address1, WMS_NAMESPACES[:custom_order])
+                  supplier.Address2(bill_address.address2, WMS_NAMESPACES[:custom_order])
+                  supplier.City(bill_address.city, WMS_NAMESPACES[:custom_order])
+                  supplier.Zip(bill_address.zipcode, WMS_NAMESPACES[:custom_order])
+                  supplier.Phone(bill_address.phone, WMS_NAMESPACES[:custom_order])
+                  supplier.State(state, WMS_NAMESPACES[:custom_order])
+                  supplier.Country(bill_address.country.try(:name), WMS_NAMESPACES[:custom_order])
                 end
 
                 receiving_ticket.Carrier('Truck')
@@ -106,6 +104,18 @@ module Bergen
 
       def global_sku
         line_item_presenter.global_sku
+      end
+
+      def bill_address
+        @bill_address ||= return_request_item.order.bill_address
+      end
+
+      def state
+        bill_address.country.iso == 'US' ? bill_address.state.abbr : 'NA'
+      end
+
+      def user_name
+        "#{order.first_name} #{order.last_name}"
       end
     end
   end

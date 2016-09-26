@@ -21,23 +21,39 @@ namespace :dev do
           return
         end
 
-        test_gateway_names = ['PIN Payments TEST']
-
-        logger.info "Disabling Production Gateways"
+        logger.info 'Disabling Production Gateways'
         Spree::PaymentMethod.all.map do |gw|
-          logger.info "Disabling #{gw.name.ljust(22)} (#{gw.provider.class.name})"
+          logger.info "Disabling #{gw.name.ljust(30)} (#{gw.provider_class})"
           gw.active = false
           gw.save
         end
 
-        logger.info "Enabling Test Gateways"
+        logger.info 'Deleting current Test Gateways'
+        Spree::PaymentMethod.where("name ILIKE '%TEST%'").destroy_all
 
-        Spree::PaymentMethod.where(:name => test_gateway_names).map do |gw|
-          logger.info "Enabling #{gw.name.ljust(22)} (#{gw.provider.class.name})"
-          gw.active      = true
-          gw.environment = target_env
-          gw.save
-        end
+        # PIN
+        logger.info 'Creating Test PIN Payment'
+
+        pin_payment                           = Spree::Gateway::Pin.new
+        pin_payment.name                      = 'PIN Payments TEST'
+        pin_payment.preferred_api_key         = 'LElcjB_z4BItXJQPYlw43g' # Sandbox API keys
+        pin_payment.preferred_publishable_key = 'pk_iaPOLVAQMh7nTJ0WhECpUA' # Sandbox API keys
+        pin_payment.preferred_server          = 'test'
+        pin_payment.environment               = target_env
+        pin_payment.active                    = true
+        pin_payment.save
+
+        # Afterpay
+        logger.info 'Creating Test Afterpay Payment'
+
+        afterpay_payment                    = Spree::Gateway::AfterpayPayment.new
+        afterpay_payment.name               = 'Afterpay Australia TEST'
+        afterpay_payment.preferred_username = '32935' # Sandbox API Keys
+        afterpay_payment.preferred_password = '249c235938f36015bb32571721ba2dc80257d2fe985799c30a0e5877408991b596b117d998e0528a7872103f8fc80e07d71163c801b22153149ac6a0919b588a' # Sandbox API Keys
+        afterpay_payment.preferred_server   = 'sandbox'
+        afterpay_payment.environment        = target_env
+        afterpay_payment.active             = true
+        afterpay_payment.save
       end
     end
 

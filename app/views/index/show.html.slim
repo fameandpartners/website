@@ -71,15 +71,30 @@ ruby:
 
       .row
         .col-md-12.cta-item-huge
-          = link_to high_summer_collection_path
+          - if current_site_version.is_australia?
+            // AUSTRALIA
+            - current_edit_image = "homepage/fp-style-icon/sep-15-tile-1-au.jpg"
+            - current_edit_mob_image = "homepage/fp-style-icon/sep-15-tile-1-au-mob.jpg"
+            - current_edit_cta_1 = "Shop"
+            - current_edit_cta_2 = "Nadia Fairfax's Edit"
+            - current_edit_link = spring_racing_collection_landing_page_path
+          - else
+            // USA
+            - current_edit_image = "homepage/fp-style-icon/sep-15-tile-1.jpg"
+            - current_edit_mob_image = "homepage/fp-style-icon/sep-15-tile-1-mob.jpg"
+            - current_edit_cta_1 = "Georgia Fowler's"
+            - current_edit_cta_2 = "Guide To Formal"
+            - current_edit_link = "http://blog.fameandpartners.com/what-would-georgia-fowler-wear-to-formal/"
+
+          = link_to current_edit_link
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile1-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile1.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/Aug-17-tile1.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/Aug-17-tile1-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/Aug-17-tile1.jpg")} 1024w' alt="Image tile"
+                  source media="(max-width: 1023px)" srcset="#{image_path(current_edit_mob_image)}"
+                  source media="(min-width: 1024px)" srcset="#{image_path(current_edit_image)}"
+                  img src="#{image_path(current_edit_image)}" srcset="
+                    #{image_path(current_edit_mob_image)} 1023w,
+                    #{image_path(current_edit_image)} 1024w"
 
               .content-wrap
                 .container-cta
@@ -87,8 +102,8 @@ ruby:
                     .col-md-12
                       .copy-wrap.text-center
                         span.cta-link-white-bg
-                          span.cta-link Brittany Xavier Styles
-                          span.copy-highlight  Day to Night
+                          span.cta-link #{current_edit_cta_1}
+                          span.copy-highlight  #{current_edit_cta_2}
 
     .tag-info-section
       .tag-info-wrapper.visible-lg-block
@@ -98,15 +113,15 @@ ruby:
 
       .row
         .col-md-6.cta-item
-          = link_to dresses_path + '/maxi'
+          = link_to dresses_path + '/ruffle'
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile2-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile2.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/Aug-17-tile2.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/Aug-17-tile2-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/Aug-17-tile2.jpg")} 1024w' alt="Image tile"
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-2-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-2.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/sep-15-tile-2.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-2-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-2.jpg")} 1024w'
 
               .content-wrap
                 .container-cta
@@ -115,18 +130,18 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  Maxi Dresses
+                          span.copy-highlight  Ruffles
 
         .col-md-6.cta-item
-          = link_to dresses_path + '/wedding'
+          = link_to dress_for_parties_page_path
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile3-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile3.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/Aug-17-tile3.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/Aug-17-tile3-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/Aug-17-tile3.jpg")} 1024w' alt="Image tile"
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-3-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-3.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/sep-15-tile-3.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-3-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-3.jpg")} 1024w'
 
               .content-wrap
                 .container-cta
@@ -135,19 +150,19 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  Wedding Whites
+                          span.copy-highlight  Party Looks
 
       .row
         .col-md-6.cta-item
-          = link_to dresses_path + '/party'
+          = link_to bridesmaid_collection_path
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile4-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile4.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/Aug-17-tile4.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/Aug-17-tile4-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/Aug-17-tile4.jpg")} 1024w' alt="Image tile"
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-4-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-4.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/sep-15-tile-4.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-4-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-4.jpg")} 1024w'
 
               .content-wrap
                 .container-cta
@@ -156,18 +171,18 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  Party Dresses
+                          span.copy-highlight  Bridesmaids Dresses
 
         .col-md-6.cta-item
-          = link_to dresses_path + '/off-shoulder'
+          = link_to dresses_path + '/backless'
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile5-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/Aug-17-tile5.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/Aug-17-tile5.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/Aug-17-tile5-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/Aug-17-tile5.jpg")} 1024w' alt="Image tile"
+                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-5-mob.jpg")}'
+                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-5.jpg")}'
+                  img src='#{image_path("homepage/fp-style-icon/sep-15-tile-5.jpg")}' srcset='
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-5-mob.jpg")} 1023w,
+                    #{image_path("homepage/fp-style-icon/sep-15-tile-5.jpg")} 1024w'
 
               .content-wrap
                 .container-cta
@@ -176,7 +191,7 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  Off The Shoulder
+                          span.copy-highlight  Backless Dresses
 
   // Section: Styling
   section.section-box.container.section-styling
@@ -239,62 +254,62 @@ ruby:
 
             // Instagram Item
             .item.col-md-5ths.col-xs-6
-              = link_to '/dresses/dress-kai-1042?color=pale-pink', class: 'item-wrap'
+              = link_to "#{dresses_path}/dress-kennedy-grace-1039?color=ivory", class: "item-wrap"
                 .media-wrap
-                  = image_tag 'homepage/get-social/Aug-17-instagram-1.jpg', :class => 'img-responsive'
+                  = image_tag "homepage/get-social/sep-15-instagram-1.jpg", :class => "img-responsive"
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @rocky_barnes
+                          span.user @caitlinmiyako
                           span.cta-link shop
 
             // Instagram Item
             .item.col-md-5ths.col-xs-6
-              = link_to '/dresses/dress-cici-jumpsuit-1111?color=black', class: 'item-wrap'
+              = link_to "#{dresses_path}/dress-everett-lace-968?color=burgundy", class: "item-wrap"
                 .media-wrap
-                  = image_tag 'homepage/get-social/Aug-17-instagram-2.jpg', :class => 'img-responsive'
+                  = image_tag "homepage/get-social/sep-15-instagram-2.jpg", :class => "img-responsive"
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @georgiafowler
+                          span.user @keilihvictoria
                           span.cta-link shop
 
             // Instagram Item
             .item.col-md-5ths.col-xs-6
-              = link_to '/dresses/dress-cenit-two-piece-1081?color=pale-blue-cotton-stripe', class: 'item-wrap'
+              = link_to "#{dresses_path}/dress-azzedine-1103?color=ornate-midnight-floral", class: "item-wrap"
                 .media-wrap
-                  = image_tag 'homepage/get-social/Aug-17-instagram-3.jpg', :class => 'img-responsive'
+                  = image_tag "homepage/get-social/sep-15-instagram-3.jpg", :class => "img-responsive"
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @fancytreehouse
+                          span.user @johombsch
                           span.cta-link shop
 
             // Instagram Item
             .item.col-md-5ths.col-xs-6
-              = link_to '/dresses/dress-storm-802?color=pale-grey', class: 'item-wrap'
+              = link_to "#{dresses_path}/dress-sorrento-766?color=white", class: "item-wrap"
                 .media-wrap
-                  = image_tag 'homepage/get-social/Aug-17-instagram-4.jpg', :class => 'img-responsive'
+                  = image_tag "homepage/get-social/sep-15-instagram-4.jpg", :class => "img-responsive"
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @carodaur
+                          span.user @haileybaldwin
                           span.cta-link shop
 
             // Instagram Item
             .item.col-md-5ths.hidden-sm.hidden-xs
-              = link_to '/dresses/dress-analise-956?color=black', class: 'item-wrap'
+              = link_to "#{dresses_path}/dress-megan-915?color=olive", class: "item-wrap"
                 .media-wrap
-                  = image_tag 'homepage/get-social/Aug-17-instagram-5.jpg', :class => 'img-responsive'
+                  = image_tag "homepage/get-social/sep-15-instagram-5.jpg", :class => "img-responsive"
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @tsangtastic
+                          span.user @inkawilliams
                           span.cta-link shop
 
         .row
@@ -307,38 +322,40 @@ ruby:
   // Section: Social networks
   section.section-box.container.section-social.same-height-cols
     .row
+      - current_social_network_link = "https://www.instagram.com/fameandpartners/"
+      .col-md-6.copy-img-side-by-side
+        .item.bordered.item-alt.section-tumblr
+          .row
+            .col-sm-5.copy-side
+              .content-wrapper
+                p Fame inspo, <br class="hidden-xs hidden-sm">Fame mantras, <br class="hidden-xs hidden-sm">#FameMoments. <br class="hidden-xs hidden-sm">Get it all on our #{link_to "Instagram", current_social_network_link, target:"_blank"}.
+
+                .link-align-bottom
+                  = link_to current_social_network_link, target: "_blank"
+                    span.cta-link-arrow-right
+                      span.cta-link Give us a
+                      span.copy-highlight  Follow
+                      i.icon.icon-arrow-right
+
+            .col-sm-7.img-side
+              = link_to current_social_network_link, target: "_blank"
+                = image_tag "homepage/social-cards/instagram.jpg", :class => "img-responsive"
+
+      - current_social_network_link = "https://www.facebook.com/FameandPartners"
       .col-md-6.copy-img-side-by-side
         .item.bordered.item-alt.section-facebook
           .row
             .col-sm-5.copy-side
               .content-wrapper
-                p Like us on #{link_to "facebook", "https://www.facebook.com/FameandPartners", target:"_blank"} and be the first to hear about exclusive sales and events.
+                p Like us on #{link_to "Facebook", current_social_network_link, target:"_blank"} to keep up with our latest lookbooks, trend reports, and IRL events.
 
                 .link-align-bottom
-                  = link_to 'https://www.facebook.com/FameandPartners', target: '_blank'
+                  = link_to current_social_network_link, target: "_blank"
                     span.cta-link-arrow-right
                       span.cta-link Explore
                       span.copy-highlight  Facebook
                       i.icon.icon-arrow-right
 
             .col-sm-7.img-side
-              = link_to 'https://www.facebook.com/FameandPartners', target: '_blank'
-                = image_tag 'homepage/social-cards/facebook.jpg', :class => 'img-responsive'
-
-      .col-md-6.copy-img-side-by-side
-        .item.bordered.item-alt.section-tumblr
-          .row
-            .col-sm-5.copy-side
-              .content-wrapper
-                p Check out #{link_to "tumblr", "https://fameandpartners.tumblr.com/", target:"_blank"} to see what’s inspiring us and our dress collections.
-
-                .link-align-bottom
-                  = link_to 'http://fameandpartners.tumblr.com/', target: '_blank'
-                    span.cta-link-arrow-right
-                      span.cta-link Explore
-                      span.copy-highlight  Tumblr
-                      i.icon.icon-arrow-right
-
-            .col-sm-7.img-side
-              = link_to 'http://fameandpartners.tumblr.com/', target: '_blank'
-                = image_tag 'homepage/social-cards/tumblr.jpg', :class => 'img-responsive'
+              = link_to current_social_network_link, target: "_blank"
+                = image_tag "homepage/social-cards/facebook.jpg", :class => "img-responsive"

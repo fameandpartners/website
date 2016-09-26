@@ -15,6 +15,8 @@ Spree::CheckoutController.class_eval do
     prepend_view_path Rails.root.join('app/views/checkout/v1')
   end
 
+  after_filter :update_adjustments, only: [:update]
+
   layout 'redesign/checkout'
 
   # update - address/payment
@@ -81,7 +83,7 @@ Spree::CheckoutController.class_eval do
       end
 
       if @order.state == 'complete' || @order.completed?
-        GuestCheckoutAssociation.associate_user_for_guest_checkout(spree_order: @order, spree_current_user: spree_current_user)
+        GuestCheckoutAssociation.call(spree_order: @order)
         flash.notice = t(:order_processed_successfully)
         flash[:commerce_tracking] = 'nothing special'
 
@@ -302,6 +304,10 @@ Spree::CheckoutController.class_eval do
     @pay_pal_method = @order.available_payment_methods.detect do |method|
       method.method_type.eql?('paypalexpress') || method.type == 'Spree::Gateway::PayPalExpress'
     end
+
+    @afterpay_method = @order.available_payment_methods.detect do |method|
+      method.method_type == 'afterpay' && current_site_version.currency == method.currency
+    end
   end
 
   helper_method :completion_route
@@ -320,6 +326,10 @@ Spree::CheckoutController.class_eval do
     @current_step
   end
   helper_method :current_step
+
+  def update_adjustments
+    current_order.updater.update_adjustments
+  end
 
   # Marketing + GTM
 

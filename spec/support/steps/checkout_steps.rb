@@ -1,10 +1,5 @@
 module Acceptance
   module CheckoutSteps
-    step 'I should see the cart sidebar with the checkout button' do
-      expect(page).to have_text('SHOPPING BAG')
-      expect(page).to have_button('CHECKOUT')
-    end
-
     step 'I select :state_name state' do |state_name|
       find('#order_bill_address_attributes_state_id_chosen').click
       find('li.active-result', text: state_name).click
@@ -27,6 +22,15 @@ module Acceptance
       end
     end
 
+    step 'I should see shipping to :country_name warning' do |country_name|
+      expect(page).to have_text("#{country_name} Orders")
+      expect(page).to have_text('Additional custom duty fees apply to your selected country.')
+    end
+
+    step 'I agree with shipping fee' do
+      find('#international_shipping_fee').click
+    end
+
     step 'I fill in credit card information:' do |cc_info|
       cc_info = cc_info.to_h
 
@@ -45,6 +49,15 @@ module Acceptance
       expect(page).to have_content(dress_name.upcase)
       expect(page).to have_content(dress_price)
       expect(page).to have_content(dress_size_without_spaces)
+    end
+
+    step 'I select :dress_name dress on :site_version, with :dress_size, :skirt_length and proceed to checkout' do |dress_name, site_version, dress_size, skirt_length|
+      send 'I am on :dress_name dress page', dress_name
+      send 'I select :site_version site version', site_version
+      send 'I select :dress_size size', dress_size
+      send 'I select :skirt_length skirt length', skirt_length
+      send 'I should see add to cart link enabled'
+      send 'I click on :link_text link', 'ADD TO BAG'
     end
   end
 end

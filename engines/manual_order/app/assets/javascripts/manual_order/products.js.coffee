@@ -6,6 +6,7 @@ $ ->
 
   colorUrl = '/fame_admin/manual_orders/colors/:product_id'
   colorSelect = $('#forms_manual_order_color')
+
   optColors = $('<optgroup>').attr('label', "Colors")
   optCustomColors = $('<optgroup>').attr('label', "Custom Colors + $16.00")
 
@@ -15,11 +16,19 @@ $ ->
   customisationUrl = '/fame_admin/manual_orders/customisations/:product_id'
   customisationSelect = $('#forms_manual_order_customisations')
 
-  imageUrl = '/fame_admin/manual_orders/images/:product_id/:size_id/:color_id'
+  imageUrl = '/fame_admin/manual_orders/images/:product_id/:color_id'
   imageTag = $('h4.product_image')
 
-  priceUrl = '/fame_admin/manual_orders/prices/:product_id/:size_id/:color_id/:currency'
+  priceUrl = '/fame_admin/manual_orders/prices/:product_id/:currency'
   priceTag = $('h4.price')
+
+  adjustButtonPanel = $('.adjust-btn-panel')
+  adjustButton = $('.adjust-btn', adjustButtonPanel)
+  adjustPanel = $('.adjust-panel')
+  adjustPanelAmount = $('.amount', adjustPanel)
+  adjustPanelDescription = $('.description', adjustPanel)
+  adjustPanelOKButton = $('.ok-button', adjustPanel)
+  submitButton = $('.submit_btn')
 
   currencySelect = $('#forms_manual_order_currency')
 
@@ -29,8 +38,12 @@ $ ->
     optCustomColors.html('')
     sizeSelect.html('<option></option>')
     customisationSelect.html('<option></option>')
-    imageTag.html('Please select style, size and color to see image')
+    imageTag.html('Please select style and color to see image')
     priceTag.html('Please select product details')
+    adjustButtonPanel.hide()
+    adjustPanel.hide()
+    adjustPanelAmount.val('')
+    adjustPanelDescription.val('')
 
   updateColors = ->
     url = colorUrl.replace(/:product_id/, styleSelect.val()) if styleSelect.val()
@@ -51,18 +64,16 @@ $ ->
       $.getJSON url, (data) =>
         $.each data['manual_orders'], (index, el) =>
           sizeSelect.append $('<option>').attr('value', el.id).text(el.name)
-        sizeSelect.append $('<option>').attr('value', 'custom').text('Custom')
         sizeSelect.trigger("chosen:updated")
     else
       sizeSelect.trigger("chosen:updated")
 
   updatePrice = ->
     url = priceUrl.replace(/:product_id/, styleSelect.val())
-    .replace(/:size_id/, sizeSelect.val())
-    .replace(/:color_id/, colorSelect.val())
     .replace(/:currency/, currencySelect.val())
     $.getJSON url, (data) =>
       priceTag.html("$#{data.price} #{data.currency}")
+      adjustButtonPanel.show()
 
   updateCustomisations = ->
     url = customisationUrl.replace(/:product_id/, styleSelect.val()) if styleSelect.val()
@@ -70,14 +81,12 @@ $ ->
       $.getJSON url, (data) =>
         $.each data['manual_orders'], (index, el) =>
           customisationSelect.append option = $('<option>').attr('value', el.id).text(el.name)
-        customisationSelect.append $('<option>').attr('value', 'custom').text('Custom')
         customisationSelect.trigger("chosen:updated")
     else
       customisationSelect.trigger("chosen:updated")
 
   updateImage = ->
     url = imageUrl.replace(/:product_id/, styleSelect.val())
-    .replace(/:size_id/, sizeSelect.val())
     .replace(/:color_id/, colorSelect.val())
     $.getJSON url, (data) =>
       if data.url isnt 'null'
@@ -91,10 +100,35 @@ $ ->
     updateCustomisations()
 
   colorSelect.on 'change', =>
-    if sizeSelect.val() and colorSelect.val()
+    if colorSelect.val()
       updateImage()
       updatePrice()
 
   currencySelect.on 'change', =>
-    if sizeSelect.val() and colorSelect.val()
+    if colorSelect.val()
       updatePrice()
+
+  adjustButton.on 'click', =>
+    adjustPanel.show()
+    adjustPanelAmount.prop('readonly', false);
+    adjustPanelDescription.prop('readonly', false);
+    adjustPanelOKButton.show()
+    adjustButton.hide()
+    submitButton.prop('disabled', true)
+
+  adjustPanelOKButton.on 'click', =>
+    if !$.trim(adjustPanelAmount.val()).length && !$.trim(adjustPanelDescription.val()).length
+      adjustButton.show()
+      adjustPanelOKButton.hide()
+      adjustPanel.hide()
+      submitButton.prop('disabled', false)
+    else if !$.isNumeric( adjustPanelAmount.val() ) || !$.trim(adjustPanelDescription.val()).length
+      alert('Please input correct amount value and description')
+      return false
+    else
+      adjustButton.show()
+      adjustPanelOKButton.hide()
+      adjustPanelAmount.prop('readonly', true);
+      adjustPanelDescription.prop('readonly', true);
+      submitButton.prop('disabled', false)
+

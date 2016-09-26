@@ -34,3 +34,11 @@ export function lengthReducer(state = {}, action) {
 export function skirtChartReducer(state = {}, action) {
   return state;
 }
+
+export function siteVersionReducer(state = {}, action) {
+  return state;
+}
+
+export function flagsReducer(state = {}, action) {
+  return state;
+}

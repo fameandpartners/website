@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :spree_order, class: Spree::Order do
+    association(:shipping_address, factory: :address)
+
     factory :complete_order do
       completed_at { DateTime.now }
     end

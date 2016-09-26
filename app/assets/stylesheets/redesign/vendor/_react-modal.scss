@@ -16,6 +16,7 @@
     position: relative;
     width: 100%;
     background: $c-neutral-white;
+    outline: none;
 
     .btn-close {
       display: block;
@@ -31,6 +32,11 @@
     &__Content {
       width: $bootstrap-md-width;
       margin: 30px auto;
+
+      &.md {
+        width: 800px;
+      }
+
     }
 
   }

@@ -57,7 +57,12 @@ module Acceptance
     end
 
     step 'I should have black dress image' do
-      expect(page).to have_selector('h4.product_image img[src*=black-front-crop]')
+      expect(page).to have_selector('h4.product_image img[src*=large]')
+    end
+
+    step 'I fill adjustment fields' do
+      find('.adjust-panel .amount').set('-10')
+      find('.adjust-panel .description').set('PROMO')
     end
 
     step 'I select "Roger That" from chosen customers select box' do
@@ -86,6 +91,15 @@ module Acceptance
       expect(created_order.state).to eq('complete')
       expect(created_order.completed_at).to be_an_instance_of(ActiveSupport::TimeWithZone)
       expect(created_order.projected_delivery_date).to be_an_instance_of(ActiveSupport::TimeWithZone)
+      expect(created_order.number[0]).to eq('M')
+      expect(created_order.state).to eq('complete')
+      expect(created_order.item_total).to eq(319.00)
+      expect(created_order.total).to eq(309.00)
+      expect(created_order.adjustment_total).to eq(-10)
+      expect(created_order.adjustments.last.amount).to eq(-10.0)
+      expect(created_order.adjustments.last.label).to eq('PROMO')
+
+      expect(page).to have_content(created_order.number)
     end
 
     private
