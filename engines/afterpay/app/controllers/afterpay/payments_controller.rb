@@ -32,6 +32,8 @@ module Afterpay
                                        without_protection: true)
 
         current_order.next
+      else
+        flash[:error] = t('afterpay.payment_processing.error')
       end
 
       if current_order.complete?
