@@ -81,20 +81,16 @@ form.hide-fully#pdpDataForWishlist
                     a href='#collapse-description' data-toggle='collapse' data-parent='#accordion' Description
                     #collapse-description.collapse.in role='tabpanel'
                       p = raw @product.description
+                      p SKU: #{@product.sku}
                   .panel
                     a href='#collapse-fabric' data-toggle='collapse' data-parent='#accordion' Fabric Information
-                    #collapse-fabric.l-tab-fabric-information.collapse role='tabpanel'
+                    #collapse-fabric.collapse role='tabpanel'
                       - if @product.fabric.present?
-                        h3.h4 Fabric & Trims
+                        h3.h5 Fabric
                         = simple_format(@product.fabric)
-                        p Product may have variations in dying hues so product may look slightly different from image.
-                      h3.h4 Garment Care
-                      = image_tag src='_icons/professional-dryclean.svg', class:'icon'
-                      p
-                        | Professional dry-clean only.
-                        br
-                        | See garment care label for further details on how to care for your garment.
-                      p.sku SKU: #{@product.sku}
+                        p Due to dying process, product hue may look slightly different from image.
+                      h3.h5 Garment Care
+                      p Professional dry-clean only. See label for further details.
                   .panel
                     a href='#collapse-about' data-toggle='collapse' data-parent='#accordion' About our model
                     #collapse-about.collapse role='tabpanel'
