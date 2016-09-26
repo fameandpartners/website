@@ -23,7 +23,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 23 Sep 2016 13:52:34 GMT
+      - Mon, 26 Sep 2016 13:18:43 GMT
       X-Content-Type-Options:
       - nosniff
       X-Xss-Protection:
@@ -41,7 +41,7 @@ http_interactions:
       Content-Type:
       - application/json
       Http-Correlation-Id:
-      - f2e1016b-ac71-4446-a355-8e20f1eb5570
+      - 844900c1-3e8c-40d0-873f-e964084ab08e
       Content-Length:
       - '150'
     body:
@@ -56,13 +56,13 @@ http_interactions:
           }
         } ]
     http_version: 
-  recorded_at: Fri, 23 Sep 2016 13:52:35 GMT
+  recorded_at: Mon, 26 Sep 2016 13:00:20 GMT
 - request:
     method: post
     uri: https://32935:249c235938f36015bb32571721ba2dc80257d2fe985799c30a0e5877408991b596b117d998e0528a7872103f8fc80e07d71163c801b22153149ac6a0919b588a@api-sandbox.secure-afterpay.com.au/v1/orders
     body:
       encoding: UTF-8
-      string: '{"totalAmount":{"amount":320,"currency":"AUD"},"consumer":{"givenNames":"Fame","surname":"Partners","email":"dev@fameandpartners.com"},"merchant":{"redirectConfirmUrl":"https://localhost:3000/dresses","redirectCancelUrl":"https://localhost:3000/dresses"}}'
+      string: '{"totalAmount":{"amount":319,"currency":"AUD"},"consumer":{"givenNames":"Fame","surname":"Partners","email":"dev@fameandpartners.com"},"merchant":{"redirectConfirmUrl":"https://localhost:3000/dresses","redirectCancelUrl":"https://localhost:3000/dresses"}}'
     headers:
       User-Agent:
       - AfterpaySDK/sdk-core-ruby 0.0.1 (afterpay-sdk-core 0.0.1; ruby 2.1.6p336-x86_64-linux)
@@ -74,13 +74,15 @@ http_interactions:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      Use-Vcr:
+      - true
   response:
     status:
       code: 201
       message: Created
     headers:
       Date:
-      - Fri, 23 Sep 2016 13:52:36 GMT
+      - Fri, 23 Sep 2016 13:05:02 GMT
       X-Content-Type-Options:
       - nosniff
       X-Xss-Protection:
@@ -98,21 +100,21 @@ http_interactions:
       Content-Type:
       - application/json
       Http-Correlation-Id:
-      - 5996803a-c216-4157-98a0-427417991444
+      - 6d3c22d1-e989-412f-b737-a7ab7847d196
       Content-Length:
       - '112'
     body:
       encoding: UTF-8
       string: |-
         {
-          "token" : "8ldf1bob835nqmad8j8jgdceerjjag5r1q32ppf27onkvl6tgrn0",
-          "expires" : "2016-09-23T14:22:37.226Z"
+          "token" : "u6om1cso7ojiqfgdq1usvnvvea5630b6tb8acq0tis5tae0jvh9d",
+          "expires" : "2016-09-23T13:35:03.063Z"
         }
     http_version: 
-  recorded_at: Fri, 23 Sep 2016 13:52:37 GMT
+  recorded_at: Fri, 23 Sep 2016 13:05:03 GMT
 - request:
     method: get
-    uri: https://32935:249c235938f36015bb32571721ba2dc80257d2fe985799c30a0e5877408991b596b117d998e0528a7872103f8fc80e07d71163c801b22153149ac6a0919b588a@api-sandbox.secure-afterpay.com.au/v1/orders/8ldf1bob835nqmad8j8jgdceerjjag5r1q32ppf27onkvl6tgrn0
+    uri: https://32935:249c235938f36015bb32571721ba2dc80257d2fe985799c30a0e5877408991b596b117d998e0528a7872103f8fc80e07d71163c801b22153149ac6a0919b588a@api-sandbox.secure-afterpay.com.au/v1/orders/u6om1cso7ojiqfgdq1usvnvvea5630b6tb8acq0tis5tae0jvh9d
     body:
       encoding: US-ASCII
       string: ''
@@ -127,6 +129,8 @@ http_interactions:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      Use-Vcr:
+      - true
   response:
     status:
       code: 200
@@ -161,7 +165,7 @@ http_interactions:
       string: |-
         {
           "expires" : "2016-09-23T13:35:03.063Z",
-          "token" : "8ldf1bob835nqmad8j8jgdceerjjag5r1q32ppf27onkvl6tgrn0",
+          "token" : "u6om1cso7ojiqfgdq1usvnvvea5630b6tb8acq0tis5tae0jvh9d",
           "totalAmount" : {
             "amount" : "319.00",
             "currency" : "AUD"
@@ -269,4 +273,110 @@ http_interactions:
         }
     http_version: 
   recorded_at: Fri, 23 Sep 2016 13:52:39 GMT
+- request:
+    method: post
+    uri: https://32935:249c235938f36015bb32571721ba2dc80257d2fe985799c30a0e5877408991b596b117d998e0528a7872103f8fc80e07d71163c801b22153149ac6a0919b588a@api-sandbox.secure-afterpay.com.au/v1/payments/23843388/capture
+    body:
+      encoding: UTF-8
+      string: '{}'
+    headers:
+      User-Agent:
+      - AfterpaySDK/sdk-core-ruby 0.0.1 (afterpay-sdk-core 0.0.1; ruby 2.1.6p336-x86_64-linux)
+      X-Afterpay-Request-Source:
+      - merchant-ruby-sdk-0.0.1
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 23 Sep 2016 13:07:08 GMT
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json
+      Http-Correlation-Id:
+      - ace0fbc9-55bb-4804-8eab-fbfbeb72bea2
+      Content-Length:
+      - '879'
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "id": "12345678",
+          "token": "8ldf1bob835nqmad8j8jgdceerjjag5r1q32ppf27onkvl6tgrn0",
+          "status": "APPROVED",
+          "created": "2015-07-14T10:08:14.123Z",
+          "totalAmount": {
+            "amount": "319.00",
+            "currency": "AUD"
+          },
+          "merchantReference": "merchantOrder-1234",
+          "events": [{
+            "created": "2016-06-21T10:00:11Z",
+            "id": "2136442160",
+            "type": "AUTHORISE"
+          }, {
+            "created": "2016-06-22T12:00:01Z",
+            "id": "6558959651",
+            "type": "CAPTURE"
+          } ],
+          "orderDetails": {
+            "consumer": {
+              "phoneNumber": "0422042042",
+              "givenNames": "Fame",
+              "surname": "Partners",
+              "email": "dev@fameandpartners.com"
+            },
+            "billing": {
+              "name": "Fame Partners",
+              "line1": "Unit 1 16 Floor",
+              "line2": "380 LaTrobe Street",
+              "suburb": "Melbourne",
+              "state": "VIC",
+              "postcode": "3000",
+              "countryCode": "AU",
+              "phoneNumber": "0400892011"
+            },
+            "shipping": {
+              "name": "Joe Consumer",
+              "line1": "Unit 1 16 Floor",
+              "line2": "380 LaTrobe Street",
+              "suburb": "Melbourne",
+              "state": "VIC",
+              "postcode": "3000",
+              "countryCode": "AU",
+              "phoneNumber": "0400892011"
+            },
+            "items": [{
+              "name": "widget",
+              "sku": "123412234",
+              "quantity": 1,
+              "price": {
+                "amount": "319.00",
+                "currency": "AUD"
+              }
+            }]
+          }
+        }
+    http_version: 
+  recorded_at: Fri, 23 Sep 2016 13:07:08 GMT
 recorded_with: VCR 2.9.3

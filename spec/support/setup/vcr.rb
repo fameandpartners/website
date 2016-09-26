@@ -10,7 +10,8 @@ VCR.configure do |c|
   # Afterpay
   ## Ignores its creation token call ()
   c.ignore_request do |request|
-    request.uri.include?('api-sandbox.secure-afterpay.com.au/v1/orders')
+    request.headers['Use-Vcr'].nil? && \
+      request.uri.include?('api-sandbox.secure-afterpay.com.au/v1/orders')
   end
 
   # VCR Filters

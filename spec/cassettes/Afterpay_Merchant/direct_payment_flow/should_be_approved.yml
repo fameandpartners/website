@@ -23,7 +23,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 23 Sep 2016 13:06:49 GMT
+      - Mon, 26 Sep 2016 14:30:15 GMT
       X-Content-Type-Options:
       - nosniff
       X-Xss-Protection:
@@ -41,7 +41,7 @@ http_interactions:
       Content-Type:
       - application/json
       Http-Correlation-Id:
-      - 0211f515-1214-4892-a9b8-dff6a950501c
+      - 0af05600-cf81-425a-8617-7fcbfb88bb1a
       Content-Length:
       - '150'
     body:
@@ -56,7 +56,7 @@ http_interactions:
           }
         } ]
     http_version: 
-  recorded_at: Fri, 23 Sep 2016 13:06:50 GMT
+  recorded_at: Mon, 26 Sep 2016 14:11:53 GMT
 - request:
     method: post
     uri: https://32935:249c235938f36015bb32571721ba2dc80257d2fe985799c30a0e5877408991b596b117d998e0528a7872103f8fc80e07d71163c801b22153149ac6a0919b588a@api-sandbox.secure-afterpay.com.au/v1/orders
@@ -74,6 +74,8 @@ http_interactions:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      Use-Vcr:
+      - true
   response:
     status:
       code: 201
@@ -105,14 +107,14 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "token" : "o52rcotj291vr31u0ir1l5jin6su704k5uclrgrvdk1fsgc86haq",
+          "token" : "en80kcgj051hrsuhsu03sa7t1624gn8nug7858k3ic9supucehe7",
           "expires" : "2016-09-23T13:36:51.793Z"
         }
     http_version: 
   recorded_at: Fri, 23 Sep 2016 13:06:51 GMT
 - request:
     method: get
-    uri: https://32935:249c235938f36015bb32571721ba2dc80257d2fe985799c30a0e5877408991b596b117d998e0528a7872103f8fc80e07d71163c801b22153149ac6a0919b588a@api-sandbox.secure-afterpay.com.au/v1/orders/o52rcotj291vr31u0ir1l5jin6su704k5uclrgrvdk1fsgc86haq
+    uri: https://32935:249c235938f36015bb32571721ba2dc80257d2fe985799c30a0e5877408991b596b117d998e0528a7872103f8fc80e07d71163c801b22153149ac6a0919b588a@api-sandbox.secure-afterpay.com.au/v1/orders/en80kcgj051hrsuhsu03sa7t1624gn8nug7858k3ic9supucehe7
     body:
       encoding: US-ASCII
       string: ''
@@ -127,6 +129,8 @@ http_interactions:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      Use-Vcr:
+      - true
   response:
     status:
       code: 200
@@ -161,7 +165,7 @@ http_interactions:
       string: |-
         {
           "expires" : "2016-09-23T13:35:03.063Z",
-          "token" : "o52rcotj291vr31u0ir1l5jin6su704k5uclrgrvdk1fsgc86haq",
+          "token" : "en80kcgj051hrsuhsu03sa7t1624gn8nug7858k3ic9supucehe7",
           "totalAmount" : {
             "amount" : "319.00",
             "currency" : "AUD"
@@ -187,7 +191,7 @@ http_interactions:
     uri: https://32935:249c235938f36015bb32571721ba2dc80257d2fe985799c30a0e5877408991b596b117d998e0528a7872103f8fc80e07d71163c801b22153149ac6a0919b588a@api-sandbox.secure-afterpay.com.au/v1/payments/capture
     body:
       encoding: UTF-8
-      string: '{"token":"o52rcotj291vr31u0ir1l5jin6su704k5uclrgrvdk1fsgc86haq"}'
+      string: '{"token":"en80kcgj051hrsuhsu03sa7t1624gn8nug7858k3ic9supucehe7"}'
     headers:
       User-Agent:
       - AfterpaySDK/sdk-core-ruby 0.0.1 (afterpay-sdk-core 0.0.1; ruby 2.1.6p336-x86_64-linux)
@@ -205,7 +209,7 @@ http_interactions:
       message: Created
     headers:
       Date:
-      - Fri, 23 Sep 2016 13:06:54 GMT
+      - Mon, 26 Sep 2016 14:30:21 GMT
       X-Content-Type-Options:
       - nosniff
       X-Xss-Protection:
@@ -223,7 +227,7 @@ http_interactions:
       Content-Type:
       - application/json
       Http-Correlation-Id:
-      - a2e3fb1a-74e1-4211-af08-12d75b892b9e
+      - b003d29a-335f-4114-ba36-93cea4da3d60
       Content-Length:
       - '879'
     body:
@@ -231,7 +235,7 @@ http_interactions:
       string: |-
         {
           "id" : "23843388",
-          "token" : "o52rcotj291vr31u0ir1l5jin6su704k5uclrgrvdk1fsgc86haq",
+          "token" : "en80kcgj051hrsuhsu03sa7t1624gn8nug7858k3ic9supucehe7",
           "status" : "APPROVED",
           "created" : "2016-09-23T10:44:25.759Z",
           "totalAmount" : {
@@ -268,5 +272,5 @@ http_interactions:
           "events" : [ ]
         }
     http_version: 
-  recorded_at: Fri, 23 Sep 2016 13:06:55 GMT
+  recorded_at: Mon, 26 Sep 2016 14:11:59 GMT
 recorded_with: VCR 2.9.3
