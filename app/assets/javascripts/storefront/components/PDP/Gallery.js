@@ -31,7 +31,7 @@ class PdpGallery extends React.Component {
     $(image.target.parentNode).zoom({
       url: $(image.target).attr('src'),
       touch: true,
-      on: 'click',
+      on: 'grab',
       duration: 50,
       magnify: 1.3,
       onZoomIn: function() {
