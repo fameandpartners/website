@@ -74,6 +74,7 @@ class PdpGallery extends React.Component {
       infinite: true,
       arrows: false,
       dots: true,
+      swipe: false,
       responsive: [
         {
           breakpoint: 992,
@@ -86,13 +87,7 @@ class PdpGallery extends React.Component {
           breakpoint: 9999,
           settings: 'unslick'
         }
-      ],
-      beforeChange: function(e) {
-        console.log(e);
-        if(!SLICK_ENABLED){
-          e.preventDefault();
-        }
-      }
+      ]
     };
 
     // check if selected color ID matches any available images
@@ -119,7 +114,10 @@ class PdpGallery extends React.Component {
               <img src={image.url} alt={image.alt}
                 className="js-gallery-image" onLoad={this.handleLoad} />
               <span className="loader"></span>
-              <span className="btn-close expande lg"></span>
+              <span className="btn-close expande lg">
+                <span className="hide-visually">tap to zoom</span>
+              </span>
+              <span className="btn-zoom">tap to zoom</span>
             </div>
           </div>
         );

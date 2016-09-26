@@ -334,6 +334,7 @@ var PdpGallery = function (_React$Component) {
         infinite: true,
         arrows: false,
         dots: true,
+        swipe: false,
         responsive: [{
           breakpoint: 992,
           settings: {
@@ -343,13 +344,7 @@ var PdpGallery = function (_React$Component) {
         }, {
           breakpoint: 9999,
           settings: 'unslick'
-        }],
-        beforeChange: function beforeChange(e) {
-          console.log(e);
-          if (!SLICK_ENABLED) {
-            e.preventDefault();
-          }
-        }
+        }]
       };
 
       // check if selected color ID matches any available images
@@ -377,7 +372,20 @@ var PdpGallery = function (_React$Component) {
               _react2.default.createElement('img', { src: image.url, alt: image.alt,
                 className: 'js-gallery-image', onLoad: _this3.handleLoad }),
               _react2.default.createElement('span', { className: 'loader' }),
-              _react2.default.createElement('span', { className: 'btn-close expande lg' })
+              _react2.default.createElement(
+                'span',
+                { className: 'btn-close expande lg' },
+                _react2.default.createElement(
+                  'span',
+                  { className: 'hide-visually' },
+                  'tap to zoom'
+                )
+              ),
+              _react2.default.createElement(
+                'span',
+                { className: 'btn-zoom' },
+                'tap to zoom'
+              )
             )
           );
         }

@@ -22,15 +22,27 @@
 .panel-media-inner-wrap {
   margin-bottom: -$mega-menu-desktop-height;
 
-  .expande {
+  .expande,
+  .btn-zoom {
     position: absolute;
-    left: 50px;
-    top: 50%;
-    margin-top: -25px;
     z-index: 1;
   }
 
-  .zoomed-in .expande:before {
+  .expande {
+    left: 50px;
+    top: 50%;
+    margin-top: -25px;
+  }
+
+  .btn-zoom {
+    display: none;
+    visibility: hidden;
+    left: 15px;
+    bottom: 12px;
+  }
+
+  .zoomed-in .expande:before,
+  .zoomed-in .btn-zoom {
     display: none;
   }
 
@@ -106,10 +118,13 @@
     margin-bottom: 0;
 
     .expande {
-      left: 15px;
-      top: auto;
-      bottom: 15px;
-      margin-top: 0;
+      display: none;
+      visibility: hidden;
+    }
+
+    .btn-zoom {
+      display: block;
+      visibility: visible;
     }
 
   }
