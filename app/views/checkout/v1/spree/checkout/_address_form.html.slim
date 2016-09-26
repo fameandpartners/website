@@ -45,9 +45,9 @@ ruby:
   / Temporary location for heading.
 h2.checkout-section-title
   - if address_type == 'billing'
-    | 2. Address Details
+    | Billing Address Details
   - elsif address_type == 'shipping'
-    | 2.1 Shipping Address Details
+    | Delivery Address
 
 - if Features.active?(:shipping_message)
   p

@@ -1,5 +1,5 @@
 - if current_step.eql?('address')
-  h2.checkout-section-title 1. Your information
+  h2.checkout-section-title Your Details
   / TODO - Temporarily turned off - CRO Optimisation
   /= render partial: 'email_login'
   = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global checkout-form'}, remote: false do |form|
@@ -40,7 +40,6 @@
       = react_component('Delivery')
 
     .row
-      .col-md-6.col-md-push-6.form-group style='margin-bottom:0'
-        button.btn.btn-block.btn-md.btn-black name='pay_securely' data-loading='Saving...'
-          i.icon.icon-lock
-          ' Pay Securely
+      .col-xs-12.form-group
+        button.btn.btn-block.btn-md.btn-black.text-uppercase name='pay_securely' data-loading='Saving...'
+          ' Continue to payment
