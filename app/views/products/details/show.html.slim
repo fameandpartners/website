@@ -202,6 +202,15 @@ javascript:
       $('.js-panel-side-left').unstick();
       $('.js-panel-side-right').unstick();
     }
+    
+    function updateSticky() {
+      if(window.innerWidth >= 992) {
+        unstickSticky();
+        initSticky();
+      } else {
+        unstickSticky();
+      }
+    }
 
     // sticky side panel
     if(window.innerWidth >= 992) {
@@ -210,12 +219,12 @@ javascript:
 
     // update on resize
     $(window).resize(function() {
-      if(window.innerWidth >= 992) {
-        unstickSticky();
-        initSticky();
-      } else {
-        unstickSticky();
-      }
+      updateSticky();
     });
+    
+    // update on accordion change
+    $('#accordion').on('shown.bs.collapse', function(e) {
+      updateSticky();
+    })
 
   });
