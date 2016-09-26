@@ -22,16 +22,21 @@ describe "Afterpay Merchant", :vcr do
       }
     }
   }
-
-  context 'direct payment flow' do
-    it 'should be approved' do
+  
+  context 'configuration' do
+    it 'should be readable' do
       get_configuration_response = @api.configuration
-      create_order_response = @api.create_order(new_order_data, { 'Use-VCR' => 'true' })
-      get_order_response = @api.get_order({ token: create_order_response.fetch('token') }, { 'Use-VCR' => 'true' })
-      new_payment_response = @api.direct_capture_payment(token: create_order_response.fetch('token'))
 
       expect(get_configuration_response).to be_a_kind_of(Array)
       expect(get_configuration_response[0].keys).to contain_exactly('type', 'description', 'maximumAmount')
+    end
+  end
+
+  context 'direct payment flow' do
+    it 'should be approved' do
+      create_order_response = @api.create_order(new_order_data, { 'Use-VCR' => 'true' })
+      get_order_response = @api.get_order({ token: create_order_response.fetch('token') }, { 'Use-VCR' => 'true' })
+      new_payment_response = @api.direct_capture_payment(token: create_order_response.fetch('token'))
 
       expect(create_order_response).to be_a_kind_of(Hash)
       expect(create_order_response.keys).to contain_exactly('token', 'expires')
@@ -50,14 +55,10 @@ describe "Afterpay Merchant", :vcr do
 
   context 'authorization and capture payment flow' do
     it 'should be authorized and approved' do
-      get_configuration_response = @api.configuration
       create_order_response = @api.create_order(new_order_data, { 'Use-VCR' => 'true' })
       get_order_response = @api.get_order({ token: create_order_response.fetch('token') }, { 'Use-VCR' => 'true' })
       authorize_payment_response = @api.authorize_payment(token: create_order_response.fetch('token'))
       capture_payment_response = @api.capture_payment(payment_id: authorize_payment_response.fetch('id'))
-
-      expect(get_configuration_response).to be_a_kind_of(Array)
-      expect(get_configuration_response[0].keys).to contain_exactly('type', 'description', 'maximumAmount')
 
       expect(create_order_response).to be_a_kind_of(Hash)
       expect(create_order_response.keys).to contain_exactly('token', 'expires')
