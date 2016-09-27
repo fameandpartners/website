@@ -1,9 +1,10 @@
 - if current_step.eql?('address')
+  = render :partial => 'shared/error_messages', locals: { target: @order }
+
   h2.checkout-section-title Your Details
   / TODO - Temporarily turned off - CRO Optimisation
   /= render partial: 'email_login'
   = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global checkout-form'}, remote: false do |form|
-    = render :partial => 'shared/error_messages', locals: { target: @order }
 
     = hidden_field_tag :create_account, :value => true
 

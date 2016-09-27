@@ -65,8 +65,8 @@ h2.checkout-section-title
 .row
   .col-md-12.form-group
     = form.label :address1, with_required_mark(t(:street_address))
+    p.help-block.pull-right this must be a physical address, not a P.O. Box
     = form.text_field :address1, class: 'required form-control form-control-md', required: 'required'
-    p.help-block Must be a physical address, not a P.O. Box
 
 .row
   .col-md-12.form-group
@@ -104,6 +104,7 @@ h2.checkout-section-title
   .col-md-6.form-group
     = form.label :phone, with_required_mark(t(:phone_number))
     = form.phone_field :phone, class: 'required form-control form-control-md', required: 'required'
+    p.help-block in case we need to contact you about your order
 
   .col-md-6.form-group
     = form.label :zipcode, with_required_mark(t(:zip))
