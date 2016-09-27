@@ -6,7 +6,16 @@ module Afterpay
     # => We now have to call `/v1/payments/capture`
     # => Sample parameters {"status"=>"SUCCESS", "orderToken"=>"664ku47hgk8nv5cplhd1k52noce2pjs9asjkq5cnr4hnfd18qeko", "order_number"=>"R884754500"}
     # Note: Afterpay payment ID is used to refund, so it's necessary saving it on the payment transaction as a response_code
-    # TODO: handle failure case and notifications
+    # ----------
+    # TODO: this controller method is quite bloated with responsibility. This should be refactored.
+    # - Capture Payment
+    # - Create Afterpay payment source (Afterpay Payment ID as Credit Card with gateway payment profile ID)
+    # - Attach payment to current order
+    # - Move order to next step
+    # - => If order is completed
+    # - Show order details
+    # - => Else
+    # - Redirect to order checkout state path
     def new
       payment_status, payment_id = begin
         payment_details = provider.direct_capture_payment(token: params[:orderToken])
