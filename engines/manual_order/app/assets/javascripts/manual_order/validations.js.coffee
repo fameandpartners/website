@@ -2,7 +2,7 @@ $(document).ready ->
 
   if $('#new_forms_manual_order').length
 
-    countriesWithStatesArr = countriesWithStates.map((value, _) ->
+    countriesWithStatesArr = _.map(countriesWithStates, (value) ->
       value.country.name
     )
 
