@@ -21,14 +21,16 @@
       </div>
     </div>
 
-    <div class="row free-shipping-disclaimer">
-      <div class="col-xs-12">
-        <p>
-          <span class="link-underline-lighter">Free shipping</span> to USA, Canada and the UK within 7 - 10 days
-        </p>
-        <p>
-          <span class="link-underline-lighter">Easy returns</span> within 30 days
-        </p>
+    <div class="free-shipping-disclaimer">
+      <div class="row">
+        <div class="col-xs-12">
+          <p>
+            <span class="link-underline-lighter">Free shipping</span> to USA, Canada and the UK within 7 - 10 days
+          </p>
+          <p>
+            <span class="link-underline-lighter">Easy returns</span> within 30 days
+          </p>
+        </div>
       </div>
     </div>
 
@@ -81,27 +83,29 @@
     </div>
     <% end %>
 
-    <div class="row cart-footer">
-      <div class="col-xs-12">
-        <div class="cart-total">
-          <p>
-            Shipping <span><%= @cart.display_shipment_total %></span>
-          </p>
-          <p>
-            <% if @cart.promocode: %>
-            Promotion (<%= @cart.promocode.substring(0,10) %>)<span><%= @cart.display_promotion_total %></span>
-            <% end %>
-          </p>
-          <p class="order-total">
-            Order Total <span><%= @cart.display_total %></span>
-          </p>
-        </div>
-        <div class="cart--call-to-actions">
-          <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
-            <div>
-              <input type="submit" value="Continue to payment" class="text-uppercase btn btn-black btn-block">
-            </div>
-          </form>
+    <div class="cart-footer">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="cart-total">
+            <p>
+              Shipping <span><%= @cart.display_shipment_total %></span>
+            </p>
+            <p>
+              <% if @cart.promocode: %>
+              Promotion (<%= @cart.promocode.substring(0,10) %>)<span><%= @cart.display_promotion_total %></span>
+              <% end %>
+            </p>
+            <p class="order-total">
+              Order Total <span><%= @cart.display_total %></span>
+            </p>
+          </div>
+          <div class="cart--call-to-actions">
+            <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
+              <div>
+                <input type="submit" value="Continue to payment" class="text-uppercase btn btn-black btn-block">
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
