@@ -31,7 +31,7 @@ module Afterpay::SDK::Merchant
 
     def capture_payment(options = {}, http_header = {})
       payment_id = options.fetch(:payment_id) { raise ArgumentError, 'Payment ID (:payment_id) is required' }
-      post("payments/#{payment_id}/void", options, http_header)
+      post("payments/#{payment_id}/capture", options, http_header)
     end
 
     def update_shipping_courier(options = {}, http_header = {})

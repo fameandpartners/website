@@ -87,7 +87,7 @@ describe Marketing::Subscriber do
       expect(Marketing::Subscriber.new.details['referrer']).to be_nil
 
       subject = Marketing::Subscriber.new
-      subject.stub(:marketing_user_visit){ user_visit }
+      allow(subject).to receive(:marketing_user_visit).and_return(user_visit)
 
       expect(subject.details['source']).to eq(user_visit.referrer)
     end
@@ -97,7 +97,8 @@ describe Marketing::Subscriber do
       expect(Marketing::Subscriber.new(campaign: 'test').details['campaign']).to eq('test')
 
       subject = Marketing::Subscriber.new
-      subject.stub(:marketing_user_visit){ user_visit }
+      allow(subject).to receive(:marketing_user_visit).and_return(user_visit)
+
       expect(subject.details['campaign']).to eq(user_visit.utm_campaign)
     end
   end
