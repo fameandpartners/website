@@ -54,6 +54,7 @@
         elem = document.getElementById(id),
         hashlink = '<div id='+id+' class="hashlink js-hashlink"></div>';
 
+    console.log(id);
     elem.removeAttribute('id');
     elem.insertAdjacentHTML('beforebegin', hashlink);
 
