@@ -476,6 +476,23 @@
 
   }
 
+  @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
+
+    ul.btn-wrap {
+
+      li {
+
+        &:not(:first-child) {
+          margin-left: 6px;
+          padding-left: 6px;
+        }
+
+      }
+
+    }
+
+  }
+
   @media (min-width: $bootstrap-sm-width) and (max-width: $bootstrap-lg-width - 1px) {
 
     .container {
