@@ -1,18 +1,6 @@
 // Style Resets
 // TODO - Remove upstream broken CSS
 .checkout.page-content {
-  p {
-    font-weight: normal; // RESET
-  }
-
-  h1, h2, h3 {
-    font-family: $font-family-secondary;
-    text-transform: none; // RESET
-  }
-
-  label {
-    text-transform: none; // RESET
-  }
 
   .form-control {
     // Reset our crazy `styleguide` form defaults
@@ -50,66 +38,6 @@ $order-summary-bg: #f7f7f9;
     margin-bottom: 30px;
   }
 
-  // Masthead ( Logo, Heading, Support Options )
-  .checkout-masthead {
-    margin: $checkout-masthead-top-margin 0;
-    vertical-align: middle;
-    line-height: 60px;
-
-    h1 {
-      line-height: 60px;
-      margin: 0;
-      padding: 0;
-
-      display: inline-block;
-      font-size: 30px;
-      font-family:$font-family-secondary;
-
-      img {
-        display: inline-block;
-        line-height: 60px;
-        margin-right: 30px;
-      }
-    }
-
-    .support-options {
-      @include mobile {
-        // TODO - Put on bottom on screen as in design.
-        display: none;
-      }
-      margin:0;
-      float:right !important;
-      line-height: 60px;
-
-      li {
-        line-height: 1em;
-        padding-left: 15px;
-        padding-right: 15px;
-        a { color: #000000;  }
-        &.live-chat {
-          a { font-weight:bold; }
-        }
-
-        .icon-live-chat, .icon-support-telephone {
-          @extend .icon;
-          font-size: 35px;
-          vertical-align: middle;
-        }
-
-        .icon-support-telephone {
-          @extend .icon-phone-chat;
-        }
-        .icon-live-chat {
-          @extend .icon-chat-bubbles;
-        }
-
-      }
-      li + li {
-        border-left: 1px solid #000000;
-      }
-    }
-  }
-
   // Auth messaging
   .auth-alert {
     padding: 15px 35px 15px 15px;
@@ -125,34 +53,6 @@ $order-summary-bg: #f7f7f9;
 
   label {
     color: #000;
-  }
-
-  // Generic Step sections, i.e. address, payment.
-  .checkout-step {
-
-    .help-block {
-      color: $checkout-info-peach;
-    }
-
-    .checkout-section-title {
-      font-family: $font-family-secondary;
-      font-size:   30px;
-      font-weight: normal;
-    }
-
-    .form-control {
-      font-weight: 300;
-      font-size:   15px;
-      border:      1px solid $checkout-form-border-color-inactive;
-
-      &:focus {
-        border-color: $checkout-form-border-color-active;
-      }
-    }
-
-    .errorExplanation, .has-warning label {
-      color: $checkout-form-error-color;
-    }
   }
 
   // Address Step
