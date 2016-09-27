@@ -374,7 +374,7 @@ page.initCheckoutEditPage = () ->
       window.checkout_page.changeButtonStatus()
 
     showShippingFeeAlert: (country) ->
-      $('#country_name').html(country)
+      $('.country_name').html(country)
       $('#shipping_fee_alert').show()
 
     hideShippingFeeAlert: () ->
