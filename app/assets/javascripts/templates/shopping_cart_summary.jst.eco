@@ -63,13 +63,6 @@
               Order Total <span><%= @cart.display_total %></span>
             </p>
           </div>
-          <div class="cart--call-to-actions">
-            <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
-              <div>
-                <input type="submit" value="Continue to payment" class="text-uppercase btn btn-black btn-block">
-              </div>
-            </form>
-          </div>
         </div>
       </div>
     </div>
