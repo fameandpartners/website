@@ -458,16 +458,16 @@ var PdpGallery = function (_React$Component) {
       image.target.style.marginLeft = this.calculateOffset(image.target) + 'px';
       image.target.parentNode.className += ' is-loaded';
       $(image.target.parentNode).zoom({
-        url: $(image.target).attr('src'),
+        url: image.target.getAttribute('src'),
         touch: true,
         on: 'grab',
         duration: 50,
         magnify: 1.3,
         onZoomIn: function onZoomIn() {
-          $(this).parent().addClass('zoomed-in');
+          this.parentNode.classList.add('zoomed-in');
         },
         onZoomOut: function onZoomOut() {
-          $(this).parent().removeClass('zoomed-in');
+          this.parentNode.classList.remove('zoomed-in');
         }
       });
     }
