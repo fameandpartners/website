@@ -48,9 +48,10 @@ ruby:
                 ' Size:
                 span
                   ' #{ product.size.presentation },
-              ' Color:
-              span.color
-                ' #{ product.color.presentation }
+              - if product.color.try(:presentation).present?
+                ' Color:
+                span.color
+                  ' #{ product.color.presentation }
               br
               ' Skirt Length:
               span
