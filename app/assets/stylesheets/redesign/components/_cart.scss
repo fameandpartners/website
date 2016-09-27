@@ -1,7 +1,11 @@
-.cart-wrapper {
+.cart-container {
   overflow-x: hidden;
   padding: 0;
   width: 100%;
+
+  p {
+    font-weight: 400;
+  }
 
   .row-no-gutter {
     margin: 0;
@@ -38,6 +42,20 @@
       font-size: 1.5rem;
       font-weight: 600;
       color: $c-neutral-8;
+    }
+
+  }
+
+  .cart-checkout {
+
+    button {
+      padding: 5px 10px;
+      border: 0;
+      border-radius: 0;
+    }
+
+    .icon {
+      padding: 0;
     }
 
   }
@@ -106,6 +124,10 @@
     border-top: 1px solid $beage-bg;
     padding-top: 10px;
     padding-bottom: 10px;
+  }
+
+  .cart-total span {
+    float: right;
   }
 
   .order-total {
