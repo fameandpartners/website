@@ -33,7 +33,7 @@ RSpec.configure do |config|
   end
 
   config.around(:each, shorter_cassette_names: true) do |example|
-    example.metadata[:vcr] = { cassette_name: example.description[0..50] }
+    example.metadata[:vcr] = { cassette_name: example.full_description[0..100] }
     example.run
   end
 end
