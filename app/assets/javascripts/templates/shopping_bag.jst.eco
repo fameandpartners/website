@@ -10,7 +10,7 @@
         <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
           <div class="pull-right">
             <span class="cart-checkout">
-              <button type="submit" class="cta-icon-text btn-black btn-block btn">CHECKOUT <i class="icon icon-arrow-right"></i></button>
+              <button type="submit" class="cta-icon-text btn-black">CHECKOUT <i class="icon icon-arrow-right"></i></button>
             </span>
           </div>
         </form>
