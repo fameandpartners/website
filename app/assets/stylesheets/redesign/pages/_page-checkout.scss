@@ -19,6 +19,7 @@
   .checkout-breadcrumbs {
     background-color: $c-neutral-2;
     padding: 10px;
+    margin-bottom: 25px;
     font-size: 1.5rem;
 
     .breadcrumb {
@@ -47,6 +48,29 @@
     border-bottom: 1px solid $c-neutral-4;
     text-transform: uppercase;
     cursor: pointer;
+  }
+
+  .cart-wrapper {
+    border-top: 1px solid $beage-bg;
+  }
+
+  .promo-code {
+    padding: 1px 5px 0;
+    margin: 15px 0;
+    border: 1px solid $beage-bg;
+
+    .promo-code-value {
+      box-shadow: none;
+      border: 0;
+    }
+
+    .promo-code-apply {
+      font-size: 1.3rem;
+      padding: 5px 25px;
+      color: $c-neutral-white;
+      background-color: $c-neutral-black;
+    }
+
   }
 
 }

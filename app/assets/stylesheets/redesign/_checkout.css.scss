@@ -325,11 +325,6 @@ $order-summary-bg: #f7f7f9;
       margin-top:20px;
     }
 
-    $order-summary-border-color: #cccccc;
-    background-color: $gray-light-bg;
-    border:           0;
-    padding:          40px 20px;
-
     h3 {
       padding-top: 0;
       margin-top:  0;
@@ -345,43 +340,15 @@ $order-summary-bg: #f7f7f9;
     .price-express-making {
       margin-top: 5px;
     }
-    .cart-items li {
-      background-color: transparent;
-      border-top-color: $order-summary-border-color;
-      font-size:        14px;
-      padding:          0;
-      padding-top:      1em;
-    }
-    .cart-item-image {
-      width: 80px;
-    }
 
     form.promo-code {
       $order-summary-form-inactive: #bababa;
       $order-summary-form-active: #000000;
 
-      margin-bottom: 2rem;
-
-      .promo-code-value {
-        background-color: $c-neutral-white;
-        border: 1px solid $order-summary-form-inactive;
-        &:focus {
-          border-color: $order-summary-form-active;
-        }
-      }
-
-      .promo-code-apply {
-        padding: 0 1rem;
-        @include transition(background-color 0.15s);
-        background-color: $order-summary-form-inactive;
-        // Firefox seems to require specific widths,
-        // or shrinks the button to very narrow.
-        width:     5em; // Firefox
-        min-width: 5em; // Firefox
-      }
       input.promo-code-value:focus + span > .promo-code-apply {
         background: $order-summary-form-active;
       }
+
       @include iphone5 {
         span.input-group-btn{
           width: 100px;
@@ -428,7 +395,6 @@ $order-summary-bg: #f7f7f9;
     // TODO convert to list or table.
     p:first-of-type, p:last-of-type {
       padding-top: 5px;
-      border-top:  1px solid $order-summary-border-color;
     }
     .order-number {
       text-align: center;
