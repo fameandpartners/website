@@ -55,3 +55,6 @@ p
 .row
   .col-md-12
     = link_to '< Return to your information', checkout_state_path('address'), :remote => false, class: 'edit'
+p.text-center
+    ' By making this purchase you are agreeing to the
+    = link_to 'Term & Conditions.', terms_path, class: "link-underline-lighter"
