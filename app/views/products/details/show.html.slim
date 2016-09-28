@@ -98,8 +98,7 @@ form.hide-fully#pdpDataForWishlist
                           = react_component('AddProductToAnyMoodboard', moodboards: user_moodboards, product_id: @product.id, color_id: @product.color_id)
                     - else
                       // this will redirect not loged-in users to login page
-                      a.js-add-to-moodboard href='javascript:;' data-user-present='#{current_spree_user.present?}' Add to Moodboard
-                      #moodboard-options
+                      a#moodboard-options.js-add-to-moodboard href='javascript:;' data-user-present='#{current_spree_user.present?}' Add to Moodboard
 
               ul.btn-wrap
                 li Guaranteed Fit
