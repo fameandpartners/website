@@ -47,14 +47,8 @@ p All transactions are secure and encrypted. Credit card information is never st
       .panel-collapse.in
         .panel-body
           = paypal_express_button
-          p.paypal-amex Use AMEX? Checkout through PayPal.
-p
-    ' By making this purchase you are agreeing to the Fame & Partners
-    = link_to 'Term & Conditions.', terms_path
+          p Place your order and you will complete your purchase via the Paypal.
 
-.row
-  .col-md-12
-    = link_to '< Return to your information', checkout_state_path('address'), :remote => false, class: 'edit'
 p.text-center
     ' By making this purchase you are agreeing to the
     = link_to 'Term & Conditions.', terms_path, class: "link-underline-lighter"
