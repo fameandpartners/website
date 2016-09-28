@@ -14,8 +14,8 @@ ruby:
         $.get(getTokenUrl).done(function (response) {
           var afterpayButton = document.querySelector("a.open-afterpay-modal");
 
-          afterpayButton.classList.remove('disabled');
-          afterpayButton.addEventListener('click', function () {
+          afterpayButton.textContent = "Continue With Afterpay";
+          afterpayButton.addEventListener("click", function () {
             AfterPay.init();
             AfterPay.display({token: response.token});
           });
@@ -54,6 +54,7 @@ ruby:
             .to-pay = afterpay.single_installment_text
             .time-period Fortnightly
         h6 You will temporarily be redirected to the Afterpay website via a popup to complete your purchase
-        a.btn.btn-black.btn-md.disabled.open-afterpay-modal href='javascript:void(0);' Continue With Afterpay
+        a.btn.btn-black.btn-md.open-afterpay-modal href='javascript:void(0);'
+          = image_tag 'loader-bg-black.gif'
         div
           = link_to 'Terms and conditions', 'https://www.afterpay.com.au/terms/', target: '_blank'
