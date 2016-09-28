@@ -31,7 +31,7 @@ module Afterpay::SDK::Merchant
 
     def capture_payment(options = {}, http_header = {})
       payment_id = options.fetch(:payment_id) { raise ArgumentError, 'Payment ID (:payment_id) is required' }
-      post("payments/#{payment_id}/void", options, http_header)
+      post("payments/#{payment_id}/capture", options, http_header)
     end
 
     def update_shipping_courier(options = {}, http_header = {})
@@ -51,11 +51,10 @@ module Afterpay::SDK::Merchant
       get('payments', options, http_header)
     end
 
-    def creat_refund(options = {}, http_header = {})
+    def create_refund(options = {}, http_header = {})
       amount = options.fetch(:amount) { raise ArgumentError, 'Refund amount (:amount) is required' }
       payment_id = options.fetch(:payment_id) { raise ArgumentError, 'Payment ID (:payment_id) is required' }
       post("payments/#{payment_id}/refund", options, http_header)
     end
-
   end
 end

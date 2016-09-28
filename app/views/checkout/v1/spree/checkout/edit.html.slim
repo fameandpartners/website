@@ -15,6 +15,11 @@
   - breadcrumb_step1_active = "active"
 
 .checkout.page-checkout.page-content
+  .container
+    .row
+      .col-md-12
+        = render 'shared/redesign/flash_messages', flash: flash
+
   .container-fluid
     .row.checkout-header.no-spacing-fluid-cols-mobile
       .col-xs-3

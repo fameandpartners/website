@@ -1,6 +1,7 @@
 module Acceptance
   module DebugSteps
     step 'pry' do
+      require 'pry'
       binding.pry
     end
 

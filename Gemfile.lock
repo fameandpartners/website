@@ -138,8 +138,13 @@ PATH
       simple_form
       slim
     afterpay (0.0.1)
+      afterpay-sdk-merchant
       rails
       spree
+    afterpay-sdk-core (0.0.1)
+      faraday
+    afterpay-sdk-merchant (0.0.1)
+      afterpay-sdk-core (~> 0.0.1)
     bergen (0.0.1)
       aasm (~> 4.10.0)
       admin_ui
@@ -973,4 +978,4 @@ RUBY VERSION
    ruby 2.1.6p336
 
 BUNDLED WITH
-   1.12.5
+   1.13.1
