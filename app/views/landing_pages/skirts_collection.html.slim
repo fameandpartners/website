@@ -64,30 +64,21 @@
                   i.icon.icon-arrow-right
 
     // Section #1 - Intro area
-    // TODO: add real dresses info
-    - current_dress_name = "Palais Dress"
-    - current_dress_link = "#{dresses_path}/dress-palais-1053?color=white"
+    - current_edit_link = skirts_collection_path
     - current_image_desktop = "landingpages/skirts-collection/section-01.jpg"
     - current_image_mobile = "landingpages/skirts-collection/section-01-mob.jpg"
-    - if current_site_version.is_australia?
-      // AUSTRALIA - PRICE
-      - current_dress_price = "$399"
-    - else
-      // USA - PRICE
-      - current_dress_price = "$319"
 
     .row
       section.section-box.intro.vertical-align-copy#intro
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
-          = link_to current_dress_link
-            picture
-              source media="(max-width: 991px)" srcset="#{image_path("#{current_image_mobile}")}"
-              source media="(min-width: 992px)" srcset="#{image_path("#{current_image_desktop}")}"
-              = image_tag "#{current_image_desktop}",
-                  srcset: "#{image_path("#{current_image_mobile}")} 991w,
-                          #{image_path("#{current_image_desktop}")} 992w",
-                  class: "img-responsive",
-                  alt: "#{current_dress_name}"
+          picture
+            source media="(max-width: 991px)" srcset="#{image_path("#{current_image_mobile}")}"
+            source media="(min-width: 992px)" srcset="#{image_path("#{current_image_desktop}")}"
+            = image_tag "#{current_image_desktop}",
+                srcset: "#{image_path("#{current_image_mobile}")} 991w,
+                        #{image_path("#{current_image_desktop}")} 992w",
+                class: "img-responsive",
+                alt: ""
 
         .col-md-5.vertical-align
           .content-copy
@@ -105,22 +96,26 @@
                  | Discover your <span class="copy-highlight">Perfect Skirt</span>
 
     // Section #2
-    // TODO: add real dresses info
-    - current_dress_name = "Darlo Dress"
-    - current_dress_link = "#{dresses_path}/dress-darlo-1139?color=silver"
-    - current_edit_link = "#{dresses_path}/slip-dress"
+    - current_dress_1_name = "Millie Skirt"
+    - current_dress_1_link = "#{dresses_path}/dress-millie-skirt-1164?color=olive"
+    - current_dress_2_name = "Rocha Skirt"
+    - current_dress_2_link = "#{dresses_path}/dress-rocha-skirt-1160?color=sand"
+    - current_edit_link = skirts_collection_path
     - current_image_desktop = "landingpages/skirts-collection/section-02.jpg"
     - current_image_mobile = "landingpages/skirts-collection/section-02-mob.jpg"
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
-      - current_dress_price = "$249"
+      - current_dress_1_price = "$289"
+      - current_dress_2_price = "$289"
     - else
       // USA - PRICE
-      - current_dress_price = "$199"
+      - current_dress_1_price = "$229"
+      - current_dress_2_price = "$229"
+
     .row
       section.section-box#its-a-wrap
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
-          = link_to current_dress_link
+          = link_to current_edit_link
             picture
               source media="(max-width: 991px)" srcset="#{image_path("#{current_image_mobile}")}"
               source media="(min-width: 992px)" srcset="#{image_path("#{current_image_desktop}")}"
@@ -128,7 +123,7 @@
                   srcset: "#{image_path("#{current_image_mobile}")} 991w,
                           #{image_path("#{current_image_desktop}")} 992w",
                   class: "img-responsive",
-                  alt: "#{current_dress_name}"
+                  alt: ""
 
         .col-md-5
           .content-copy
@@ -142,7 +137,8 @@
                     | Pictured
                     span.hidden-md.hidden-lg  above:
                     span.hidden-xs.hidden-sm  left:
-                    .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+                    .product-info = link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link
+                    .product-info = link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link
 
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
@@ -156,18 +152,19 @@
                    | Shop & Customize
 
     // Section #3
-    // TODO: add real dresses info
-    - current_dress_name = "Cici Jumpsuit"
-    - current_dress_link = "#{dresses_path}/dress-cici-jumpsuit-1111?color=black"
-    - current_edit_link = "#{dresses_path}/jumpsuit"
+    - current_dress_name = "Elliot Skirt"
+    - current_dress_link = "#{dresses_path}/dress-elliot-skirt-1182?color=black"
+    - current_edit_link = skirts_collection_path
     - current_image_desktop = "landingpages/skirts-collection/section-03.jpg"
     - current_image_mobile = "landingpages/skirts-collection/section-03-mob.jpg"
+
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
-      - current_dress_price = "$379"
+      - current_dress_price = "$319"
     - else
       // USA - PRICE
-      - current_dress_price = "$299"
+      - current_dress_price = "$249"
+
     .row
       section.section-box#the-girl-in-the-pearl-maxi
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
@@ -179,7 +176,7 @@
                   srcset: "#{image_path("#{current_image_mobile}")} 991w,
                           #{image_path("#{current_image_desktop}")} 992w",
                   class: "img-responsive",
-                  alt: "#{current_dress_name}"
+                  alt: ""
 
         .col-md-5
           .content-copy
@@ -207,24 +204,27 @@
                    | Shop & Customize
 
     // Section #4
-    // NOTE: keeping this line here as the real dress will be added soon to the website.
-    // TODO: add real dresses info
-    - current_dress_name = "Alto Dress"
-    // TODO: once the Alto Dress is published, edit this link
-    - current_dress_link = "#{dresses_path}/spring-racing"
-    - current_edit_link = "#{dresses_path}/spring-racing"
+    - current_dress_1_name = "Geena Skirt"
+    - current_dress_1_link = "#{dresses_path}/dress-geena-skirt-1145?color=ochre"
+    - current_dress_2_name = "Fitz Skirt"
+    - current_dress_2_link = "#{dresses_path}/dress-fitz-skirt-1174?color=black"
+    - current_edit_link = skirts_collection_path
     - current_image_desktop = "landingpages/skirts-collection/section-04.jpg"
     - current_image_mobile = "landingpages/skirts-collection/section-04-mob.jpg"
+
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
-      - current_dress_price = "$379"
+      - current_dress_1_price = "$239"
+      - current_dress_2_price = "$249"
     - else
       // USA - PRICE
-      - current_dress_price = "$299"
+      - current_dress_1_price = "$189"
+      - current_dress_2_price = "$199"
+
     .row
       section.section-box#remaking-a-classic
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
-          = link_to current_dress_link
+          = link_to current_edit_link
             picture
               source media="(max-width: 991px)" srcset="#{image_path("#{current_image_mobile}")}"
               source media="(min-width: 992px)" srcset="#{image_path("#{current_image_desktop}")}"
@@ -232,7 +232,7 @@
                   srcset: "#{image_path("#{current_image_mobile}")} 991w,
                           #{image_path("#{current_image_desktop}")} 992w",
                   class: "img-responsive",
-                  alt: "#{current_dress_name}"
+                  alt: ""
 
         .col-md-5
           .content-copy
@@ -241,6 +241,13 @@
                 h2.h1.no-margin-md = link_to "Remaking a classic.", current_edit_link
 
                 p The button-front skirt spans decades–from turn-of-the-century styles to 1970s-hippie-chic versions all the way up to today’s take from Fame and Partners: fitted in the hips with a flirty little kick.
+
+                .cta-product-caption.copy-highlight
+                  | Pictured
+                  span.hidden-md.hidden-lg  above:
+                  span.hidden-xs.hidden-sm  left:
+                  .product-info = link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link
+                  .product-info = link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link
 
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
@@ -254,18 +261,19 @@
                    | Shop & Customize
 
     // Section #5
-    // TODO: add real dresses info
-    - current_dress_name = "Tate Dress"
-    - current_dress_link = "#{dresses_path}/dress-tate-1120?color=dusk"
-    - current_edit_link = "#{dresses_path}/cocktail"
+    - current_dress_name = "Pretoria Skirt"
+    - current_dress_link = "#{dresses_path}/dress-pretoria-skirt-1167?color=black"
+    - current_edit_link = skirts_collection_path
     - current_image_desktop = "landingpages/skirts-collection/section-05.jpg"
     - current_image_mobile = "landingpages/skirts-collection/section-05-mob.jpg"
+
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
-      - current_dress_price = "$349"
+      - current_dress_price = "$319"
     - else
       // USA - PRICE
-      - current_dress_price = "$279"
+      - current_dress_price = "$249"
+
     .row
       section.section-box#femme-fatale-feels
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
@@ -277,7 +285,7 @@
                   srcset: "#{image_path("#{current_image_mobile}")} 991w,
                           #{image_path("#{current_image_desktop}")} 992w",
                   class: "img-responsive",
-                  alt: "#{current_dress_name}"
+                  alt: ""
 
         .col-md-5
           .content-copy
@@ -305,18 +313,19 @@
                    | Shop & Customize
 
     // Section #6
-    // TODO: add real dresses info
-    - current_dress_name = "Harbourside Dress"
-    - current_dress_link = "#{dresses_path}/dress-harbourside-1123?color=navy"
-    - current_edit_link = "#{dresses_path}/off-shoulder"
+    - current_dress_name = "Perrotta Skirt"
+    - current_dress_link = "#{dresses_path}/dress-perrotta-skirt-1165?color=black"
+    - current_edit_link = skirts_collection_path
     - current_image_desktop = "landingpages/skirts-collection/section-06.jpg"
     - current_image_mobile = "landingpages/skirts-collection/section-06-mob.jpg"
+
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
-      - current_dress_price = "$319"
+      - current_dress_price = "$239"
     - else
       // USA - PRICE
-      - current_dress_price = "$249"
+      - current_dress_price = "$189"
+
     .row
       section.section-box#ready-for-my-close-up
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
@@ -328,7 +337,7 @@
                   srcset: "#{image_path("#{current_image_mobile}")} 991w,
                           #{image_path("#{current_image_desktop}")} 992w",
                   class: "img-responsive",
-                  alt: "#{current_dress_name}"
+                  alt: ""
 
         .col-md-5
           .content-copy
@@ -336,7 +345,7 @@
               .col-md-12
                 h2.h1.no-margin-md = link_to "Ready for my close up.", current_edit_link
 
-                p The Croix is a true chameleon. With just a little rearranging, this satin stunner goes from short and sweet to knee-length and back again.
+                p The Perrotta is a true chameleon. With just a little rearranging, this satin stunner goes from short and sweet to knee-length and back again.
 
                 .cta-product-caption.copy-highlight
                   | Pictured
@@ -356,18 +365,19 @@
                    | Shop & Customize
 
     // Section #7
-    // TODO: add real dresses info
-    - current_dress_name = "Eclectic Love Dress"
-    - current_dress_link = "#{dresses_path}/dress-eclectic-love-1114?color=rosewater-floral"
-    - current_edit_link = "#{dresses_path}/bodycon"
+    - current_dress_name = "Aki Skirt"
+    - current_dress_link = "#{dresses_path}/dress-aki-skirt-1159?color=black"
+    - current_edit_link = skirts_collection_path
     - current_image_desktop = "landingpages/skirts-collection/section-07.jpg"
     - current_image_mobile = "landingpages/skirts-collection/section-07-mob.jpg"
+
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
-      - current_dress_price = "$349"
+      - current_dress_price = "$319"
     - else
       // USA - PRICE
-      - current_dress_price = "$279"
+      - current_dress_price = "$249"
+
     .row
       section.section-box#curtains-up
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
@@ -379,7 +389,7 @@
                   srcset: "#{image_path("#{current_image_mobile}")} 991w,
                           #{image_path("#{current_image_desktop}")} 992w",
                   class: "img-responsive",
-                  alt: "#{current_dress_name}"
+                  alt: ""
 
         .col-md-5
           .content-copy
@@ -407,18 +417,19 @@
                    | Shop & Customize
 
     // Section #8
-    // TODO: add real dresses info
-    - current_dress_name = "Cole Dress"
-    - current_dress_link = "#{dresses_path}/dress-cole-1018?color=black"
-    - current_edit_link = "#{dresses_path}/black"
+    - current_dress_name = "Marin Skirt"
+    - current_dress_link = "#{dresses_path}/dress-marin-skirt-1179?color=black"
+    - current_edit_link = skirts_collection_path
     - current_image_desktop = "landingpages/skirts-collection/section-08.jpg"
     - current_image_mobile = "landingpages/skirts-collection/section-08-mob.jpg"
+
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
-      - current_dress_price = "$299"
+      - current_dress_price = "$239"
     - else
       // USA - PRICE
-      - current_dress_price = "$269"
+      - current_dress_price = "$189"
+
     .row
       section.section-box#your-wardrobe-hero
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
@@ -430,7 +441,7 @@
                   srcset: "#{image_path("#{current_image_mobile}")} 991w,
                           #{image_path("#{current_image_desktop}")} 992w",
                   class: "img-responsive",
-                  alt: "#{current_dress_name}"
+                  alt: ""
 
         .col-md-5
           .content-copy
@@ -458,22 +469,27 @@
                    | Shop & Customize
 
     // Section #9
-    // TODO: add real dresses info
-    - current_dress_name = "Cole Dress"
-    - current_dress_link = "#{dresses_path}/dress-cole-1018?color=black"
-    - current_edit_link = "#{dresses_path}/black"
+    - current_dress_1_name = "Quinn Skirt"
+    - current_dress_1_link = "#{dresses_path}/dress-quinn-skirt-1157?color=pale-grey"
+    - current_dress_2_name = "Catania Skirt"
+    - current_dress_2_link = "#{dresses_path}/dress-catania-skirt-1180?color=pale-grey"
+    - current_edit_link = skirts_collection_path
     - current_image_desktop = "landingpages/skirts-collection/section-01.jpg"
     - current_image_mobile = "landingpages/skirts-collection/section-01-mob.jpg"
+
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
-      - current_dress_price = "$299"
+      - current_dress_1_price = "$299"
+      - current_dress_2_price = "$289"
     - else
       // USA - PRICE
-      - current_dress_price = "$269"
+      - current_dress_1_price = "$249"
+      - current_dress_2_price = "$229"
+
     .row
       section.section-box#drama-drama-drama
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
-          = link_to current_dress_link
+          = link_to current_edit_link
             picture
               source media="(max-width: 991px)" srcset="#{image_path("#{current_image_mobile}")}"
               source media="(min-width: 992px)" srcset="#{image_path("#{current_image_desktop}")}"
@@ -481,7 +497,7 @@
                   srcset: "#{image_path("#{current_image_mobile}")} 991w,
                           #{image_path("#{current_image_desktop}")} 992w",
                   class: "img-responsive",
-                  alt: "#{current_dress_name}"
+                  alt: ""
 
         .col-md-5
           .content-copy
@@ -489,13 +505,14 @@
               .col-md-12
                 h2.h1.no-margin-md = link_to "Drama, drama, drama.", current_edit_link
 
-                p WARNING: Wearing the Quinn or the Zuma may cause those around you to experience major style envy.
+                p WARNING: Wearing the Quinn or the Catania may cause those around you to experience major style envy.
 
                 .cta-product-caption.copy-highlight
                   | Pictured
                   span.hidden-md.hidden-lg  above:
                   span.hidden-xs.hidden-sm  left:
-                  .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
+                  .product-info = link_to "1. The #{current_dress_1_name} #{current_dress_1_price}", current_dress_1_link
+                  .product-info = link_to "2. The #{current_dress_2_name} #{current_dress_2_price}", current_dress_2_link
 
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
@@ -509,18 +526,18 @@
                    | Shop & Customize
 
     // Section #10
-    // TODO: add real dresses info
-    - current_dress_name = "Cole Dress"
-    - current_dress_link = "#{dresses_path}/dress-cole-1018?color=black"
-    - current_edit_link = "#{dresses_path}/black"
+    - current_dress_name = "Ryn Skirt"
+    - current_dress_link = "#{dresses_path}/dress-ryn-skirt-1151?color=pale-grey"
+    - current_edit_link = skirts_collection_path
     - current_image_desktop = "landingpages/skirts-collection/section-09.jpg"
     - current_image_mobile = "landingpages/skirts-collection/section-09-mob.jpg"
+
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
-      - current_dress_price = "$299"
+      - current_dress_price = "$249"
     - else
       // USA - PRICE
-      - current_dress_price = "$269"
+      - current_dress_price = "$199"
     .row
       section.section-box#in-the-business
         .col-md-5.col-md-offset-2.content-img.no-spacing-cols-mobile
@@ -532,7 +549,7 @@
                   srcset: "#{image_path("#{current_image_mobile}")} 991w,
                           #{image_path("#{current_image_desktop}")} 992w",
                   class: "img-responsive",
-                  alt: "#{current_dress_name}"
+                  alt: ""
 
         .col-md-5
           .content-copy
@@ -560,18 +577,18 @@
                    | Shop & Customize
 
     // Section #11
-    // TODO: add real dresses info
-    - current_dress_name = "Cole Dress"
-    - current_dress_link = "#{dresses_path}/dress-cole-1018?color=black"
-    - current_edit_link = "#{dresses_path}/black"
+    - current_dress_name = "Seville Skirt"
+    - current_dress_link = "#{dresses_path}/dress-seville-skirt-1172?color=olive"
+    - current_edit_link = skirts_collection_path
     - current_image_desktop = "landingpages/skirts-collection/section-10.jpg"
     - current_image_mobile = "landingpages/skirts-collection/section-10-mob.jpg"
+
     - if current_site_version.is_australia?
       // AUSTRALIA - PRICE
-      - current_dress_price = "$299"
+      - current_dress_price = "$239"
     - else
       // USA - PRICE
-      - current_dress_price = "$269"
+      - current_dress_price = "$189"
     .row
       section.section-box.landscape-view#at-long-last
         .col-md-10.col-md-offset-2.content-img.no-spacing-cols-mobile
@@ -583,7 +600,7 @@
                   srcset: "#{image_path("#{current_image_mobile}")} 991w,
                           #{image_path("#{current_image_desktop}")} 992w",
                   class: "img-responsive",
-                  alt: "#{current_dress_name}"
+                  alt: ""
 
           .content-copy
             .row
