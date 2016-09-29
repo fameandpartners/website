@@ -10,14 +10,20 @@ ruby:
 
     javascript:
       (function ($) {
-        var getTokenUrl = "#{afterpay_token_path(payment_method_id: afterpay_method.id, order_number: spree_order.number)}";
-        $.get(getTokenUrl).done(function (response) {
-          var afterpayButton = document.querySelector("a.open-afterpay-modal");
+        $(document).ready(function () {
+          var getTokenUrl           = "#{afterpay_token_path(payment_method_id: afterpay_method.id, order_number: spree_order.number)}";
+          var $afterpayButton       = $("a.open-afterpay-modal");
+          var $afterpayErrorMessage = $("p.afterpay-error");
 
-          afterpayButton.textContent = "Continue With Afterpay";
-          afterpayButton.addEventListener("click", function () {
-            AfterPay.init();
-            AfterPay.display({token: response.token});
+          $.get(getTokenUrl, function (response) {
+            $afterpayButton.text('Continue With Afterpay');
+            $afterpayButton.on('click', function () {
+              AfterPay.init();
+              AfterPay.display({token: response.token});
+            });
+          }).fail(function () {
+            $afterpayButton.hide();
+            $afterpayErrorMessage.removeClass("hidden");
           });
         });
       })(jQuery);
@@ -56,5 +62,6 @@ ruby:
         h6 You will temporarily be redirected to the Afterpay website via a popup to complete your purchase
         a.btn.btn-black.btn-md.open-afterpay-modal href='javascript:void(0);'
           = image_tag 'loader-bg-black.gif'
+        p.text-danger.hidden.afterpay-error Afterpay is not available at the moment. Please, try another payment method.
         div
           = link_to 'Terms and conditions', 'https://www.afterpay.com.au/terms/', target: '_blank'
