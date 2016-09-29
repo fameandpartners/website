@@ -1,6 +1,6 @@
 - cache ['views/layouts/redesign/mega_menu/_lookbook'] do
 
-  li.normal-item = link_to 'The Skirt Collection',         skirts_collection_path,           class: 'text'
+  li.normal-item = link_to 'The Skirt Collection',         skirts_collection_landing_page_path,           class: 'text'
   - if current_site_version.is_australia?
     li.normal-item = link_to 'Spring Racing Collection',                   spring_racing_collection_landing_page_path,        class: 'text'
   - else
