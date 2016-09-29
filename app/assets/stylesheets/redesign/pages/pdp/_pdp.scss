@@ -404,6 +404,14 @@
 
   }
 
+  @media (min-width: 1400px) {
+
+    .container {
+      width: 1370px;
+    }
+
+  }
+
   @media (max-width: $bootstrap-md-width - 1px) {
 
     padding-top: 0;
