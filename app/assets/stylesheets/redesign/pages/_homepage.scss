@@ -158,6 +158,11 @@
         padding-top: 30px;
         text-align: center;
         border: solid $c-neutral-6 1px;
+
+        > .row {
+          margin: 0;
+        }
+
       }
 
       .item {
