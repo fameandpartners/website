@@ -20,47 +20,46 @@ ruby:
           .diagonal-line
 
       .same-height-cols
-        .row
-          .col-md-4
-            .item.bordered.mobile-change-order
-              .item-copy.position-2
-                h3 Your <em>personal</em> atelier.
-                p.summary Timeless appeal. Contemporary edge. Completely customizable to suit your style.
-                = link_to '/dresses/new-this-week'
-                  span.cta-link-arrow-right
-                    span.copy-highlight Explore
-                    i.icon.icon-arrow-right
-              = link_to '/dresses/new-this-week', :class => 'position-1'
-                = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive', alt: 'Your personal atelier'
+        .col-md-4
+          .item.bordered.mobile-change-order
+            .item-copy.position-2
+              h3 Your <em>personal</em> atelier.
+              p.summary Timeless appeal. Contemporary edge. Completely customizable to suit your style.
+              = link_to '/dresses/new-this-week'
+                span.cta-link-arrow-right
+                  span.copy-highlight Explore
+                  i.icon.icon-arrow-right
+            = link_to '/dresses/new-this-week', :class => 'position-1'
+              = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive', alt: 'Your personal atelier'
 
-          .col-md-4
-            .item.bordered
-              .item-copy
-                h3 <em>Made</em>-to-order.
-                p.summary Each piece is handmade just for you. <br class="visible-lg-block">No mass production, less waste.
-                = link_to about_us_path
-                  span.cta-link-arrow-right
-                    span.copy-highlight Learn more
-                    i.icon.icon-arrow-right
-              = link_to about_us_path, :class => 'hidden-sm hidden-xs'
-                = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive', alt: 'Made-to-order'
+        .col-md-4
+          .item.bordered
+            .item-copy
+              h3 <em>Made</em>-to-order.
+              p.summary Each piece is handmade just for you. <br class="visible-lg-block">No mass production, less waste.
+              = link_to about_us_path
+                span.cta-link-arrow-right
+                  span.copy-highlight Learn more
+                  i.icon.icon-arrow-right
+            = link_to about_us_path, :class => 'hidden-sm hidden-xs'
+              = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive', alt: 'Made-to-order'
 
-          .col-md-4
-            .item.bordered
-              .item-copy
-                h3 Tailored for <em>you</em>.
-                p.summary Our signature size model means never<br class="visible-lg-block"> having to say, "It doesn't fit."
-                = link_to size_guide_path
-                  span.cta-link-arrow-right
-                    span.copy-highlight The Fit Guide
-                    i.icon.icon-arrow-right
-              = link_to size_guide_path, :class => 'hidden-sm hidden-xs'
-                = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive', alt: 'Tailored for you'
-                
-          .col-md-12.hidden-md.hidden-lg.btn-wrap
-            = link_to about_us_path
-                span.btn-md.btn-featured
-                  | Explore <span class="copy-highlight">MORE FAME</span>
+        .col-md-4
+          .item.bordered
+            .item-copy
+              h3 Tailored for <em>you</em>.
+              p.summary Our signature size model means never<br class="visible-lg-block"> having to say, "It doesn't fit."
+              = link_to size_guide_path
+                span.cta-link-arrow-right
+                  span.copy-highlight The Fit Guide
+                  i.icon.icon-arrow-right
+            = link_to size_guide_path, :class => 'hidden-sm hidden-xs'
+              = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive', alt: 'Tailored for you'
+              
+        .col-md-12.hidden-md.hidden-lg.btn-wrap
+          = link_to about_us_path
+              span.btn-md.btn-featured
+                | Explore <span class="copy-highlight">MORE FAME</span>
 
   // Section: Style icon
   section.section-box.container.section-style-icon
