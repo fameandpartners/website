@@ -76,6 +76,7 @@
 
   }
 
+  // Checkout step
   .checkout-step {
 
     .help-block {
@@ -128,6 +129,49 @@
 
     .help-block {
       font-size: 1.3rem;
+    }
+
+  }
+
+  // Payment page
+  .payment-option-grid {
+    text-align: center;
+    margin-bottom: 30px;
+
+    .payment-option {
+      padding: 20px 10px;
+      border: 1px solid $c-neutral-5;
+      cursor: pointer;
+
+      &.current {
+        border-bottom: 5px solid $c-neutral-black;
+        padding-bottom: 15px;
+      }
+
+    }
+
+    .payment-option:first-child {
+      border-right: 0;
+    }
+
+    .payment-option:last-child {
+      border-left: 0;
+    }
+
+    .credit-card-input {
+      border: 1px solid $c-neutral-5;
+
+      .credit-card-flags {
+        float: right;
+        width: 15%;
+        padding: 12px 10px;
+      }
+
+      input {
+       width: 85%;
+       border: 0 !important;
+      }
+
     }
 
   }
