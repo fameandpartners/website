@@ -198,10 +198,8 @@
                    | Shop & Customize
 
     // Section #4
-    // NOTE: keeping this line here as the real dress will be added soon to the website.
     - current_dress_name = "Alto Dress"
-    // TODO: once the Alto Dress is published, edit this link
-    - current_dress_link = "#{dresses_path}/spring-racing"
+    - current_dress_link = "#{dresses_path}/dress-alto-1141?color=white"
     - current_edit_link = "#{dresses_path}/spring-racing"
     - current_image_desktop = 'landingpages/spring-racing-collection/section-04.jpg'
     - current_image_mobile = 'landingpages/spring-racing-collection/section-04-mob.jpg'
@@ -231,6 +229,12 @@
                 h2.h1.no-margin-md = link_to "A Day at the Derby", current_edit_link
 
                 p You’ll be the one to beat in a sweet, pleated number. The details are all up to you.
+
+                .cta-product-caption.copy-highlight
+                  | Pictured
+                  span.hidden-md.hidden-lg  above:
+                  span.hidden-xs.hidden-sm  left:
+                  .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
 
             .row
               .products-grid.products-collections.no-margin.no-fixed-height
