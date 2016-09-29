@@ -410,6 +410,14 @@
       width: 1370px;
     }
 
+    .pdp-panel-side-left {
+      padding-right: 30px;
+    }
+
+    .pdp-panel-side-right {
+      padding-left: 30px;
+    }
+
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
