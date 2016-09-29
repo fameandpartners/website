@@ -133,6 +133,15 @@
   position: relative !important;
 }
 
+.row-equal-width {
+  @include display-flex;
+
+  > .equal-width {
+    flex-basis: 100%;
+  }
+
+}
+
 @media (min-width: $bootstrap-md-width) {
 
   .no-margin-md {
