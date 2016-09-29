@@ -1,4 +1,6 @@
 - cache ['views/layouts/redesign/mega_menu/_lookbook'] do
+
+  li.normal-item = link_to 'The Skirt Collection',         skirts_collection_path,           class: 'text'
   - if current_site_version.is_australia?
     li.normal-item = link_to 'Spring Racing Collection',                   spring_racing_collection_landing_page_path,        class: 'text'
   - else
@@ -9,7 +11,6 @@
   li.normal-item = link_to 'Parties Collection',                dress_for_parties_page_path,       class: 'text'
   li.normal-item = link_to 'It Girl Collection',                it_girl_landing_page_path,       class: 'text'
   li.normal-item = link_to 'The Freshly Picked Collection',     the_freshly_picked_collection_path,       class: 'text'
-  li.normal-item = link_to 'The Ruffled Up Collection',         the_ruffled_up_collection_path,           class: 'text'
   // Just an empty row to add more spacing here (only for Desktop)
   li.double-line-height.hidden-sm.hidden-xs
   li.normal-item.no-border.title.text-uppercase = link_to 'View all lookbooks',      lookbook_path,                            class: 'text'
