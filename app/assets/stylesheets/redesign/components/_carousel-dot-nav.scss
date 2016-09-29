@@ -19,6 +19,7 @@
   a {
     display: block;
     padding: 4px;
+    background: $c-neutral-white;
     border: solid $c-neutral-8 1px;
   }
 
@@ -29,7 +30,7 @@
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
-    bottom: -68px;
+    bottom: 0;
 
     li {
       padding: 10px;

@@ -146,12 +146,57 @@
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
-    .section-styling .styling-session {
-      margin-top: $section-spacing-margin-top;
+    .hero-wrap .sub-heading {
+      padding-top: 0;
+      font-size: inherit;
     }
 
-    .hero-wrap .copy-wrap {
-      padding-top: 30px;
+    .section-fame-story {
+      margin-top: 15px;
+
+      .same-height-cols {
+        padding-top: 30px;
+        text-align: center;
+        border: solid $c-neutral-6 1px;
+      }
+
+      .item {
+        padding: 0;
+        margin-bottom: 30px;
+
+        &.bordered {
+          border: none;
+        }
+
+        a {
+          pointer-events: none;
+          cursor: default;
+        }
+
+      }
+
+      .item-copy a {
+        display: none;
+      }
+
+      .btn-wrap {
+        margin-bottom: 50px;
+      }
+
+    }
+
+    .styling-session {
+      text-align: center;
+    }
+
+    .section-styling .styling-session {
+      margin-top: $section-spacing-margin-top;
+
+      p,
+      .item-copy {
+        padding-right: 0;
+      }
+
     }
 
   }
