@@ -602,9 +602,8 @@
                   class: "img-responsive",
                   alt: ""
 
-          .content-copy
             .row
-              .col-md-6
+              .col-md-5.content-copy
                 h2.h1.no-margin-md = link_to "At long last.", current_edit_link
 
                 p Finally, a maxi with modern edge. Say buh-bye to flower-child styles and step into the Seville Skirt: sleek, chic, and tailor-made for you.
@@ -613,8 +612,13 @@
                   | Pictured above:
                   .product-info = link_to "The #{current_dress_name} #{current_dress_price}", current_dress_link
 
-            .row
-              .cta-wrapper.col-md-6
-                = link_to current_edit_link
-                  span.btn-md.btn-featured.no-margin
-                   | Shop & Customize
+                .cta-wrapper
+                  = link_to current_edit_link
+                    span.btn-md.btn-featured.no-margin
+                     | Shop & Customize
+
+              .col-md-6.col-md-offset-1
+                .row
+                  .products-grid.products-collections.no-margin.no-fixed-height
+                    .products-set
+                      = render partial: 'pick_products_without_content', locals: {rangeFrom: 24, rangeTo: 27, customWrapper: 'col-md-4 col-xs-6'}
