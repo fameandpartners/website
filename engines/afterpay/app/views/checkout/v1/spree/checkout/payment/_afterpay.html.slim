@@ -1,8 +1,19 @@
-- if Features.active?(:afterpay) && current_site_version.is_australia?
-  ruby:
-    single_installment   = @order.total / 4
-    order_total_text     = Spree::Money.new(@order.total, currency: 'AUD').to_s
-    one_installment_text = Spree::Money.new(single_installment, currency: 'AUD').to_s
+ruby:
+  afterpay = Afterpay::Presenters::Payment.new(spree_order: spree_order, spree_payment_method: afterpay_method, rails_request: request)
+
+- if Features.active?(:afterpay) && current_site_version.is_australia? && afterpay.order_eligible? && (afterpay_token = afterpay.get_token)
+  - content_for :head
+    - if afterpay.test_mode?
+      script src="https://www-sandbox.secure-afterpay.com.au/afterpay.js" async=true
+    - else
+      script src="https://www.secure-afterpay.com.au/afterpay.js" async=true
+
+    javascript:
+      $(document).on('click', 'a.open-afterpay-modal', function (e) {
+        e.preventDefault();
+        AfterPay.init();
+        AfterPay.display({token: "#{afterpay_token}"});
+      });
 
   .panel.panel-afterpay
     .panel-heading
@@ -14,55 +25,28 @@
       .panel-body.text-center
         h4
           | Four fortnightly interest free payments totalling
-          em =<> order_total_text
+          em =<> afterpay.order_total_text
         .payments.hidden-xs.hidden-sm
           .payment
-            .to-pay = one_installment_text
+            .to-pay = afterpay.single_installment_text
             .time-period First payment
           .separator +
           .payment
-            .to-pay = one_installment_text
+            .to-pay = afterpay.single_installment_text
             .time-period In 2 weeks
           .separator +
           .payment
-            .to-pay = one_installment_text
+            .to-pay = afterpay.single_installment_text
             .time-period In 4 weeks
           .separator +
           .payment
-            .to-pay = one_installment_text
+            .to-pay = afterpay.single_installment_text
             .time-period In 6 weeks
         .payments.hidden-md.hidden-lg
           .payment
-            .to-pay = one_installment_text
+            .to-pay = afterpay.single_installment_text
             .time-period Fortnightly
         h6 You will temporarily be redirected to the Afterpay website via a popup to complete your purchase
-        a.btn.btn-black.btn-md href='javascript:;' Continue With Afterpay
+        a.btn.btn-black.btn-md.open-afterpay-modal href='javascript:void(0);' Continue With Afterpay
         div
           = link_to 'Terms and conditions', 'https://www.afterpay.com.au/terms/', target: '_blank'
-
-/ TODO: Real Afterpay implementation
-/- if @afterpay_method
-/  h4 Afterpay
-/
-/  = flash[:error]
-/
-/  = form_for @order, url: update_checkout_path(@order.state) do |f|
-/    - param_prefix = "payment_source[#{@afterpay_method.id}]"
-/    = hidden_field_tag 'order[payments_attributes][][payment_method_id]', @afterpay_method.id
-/
-/    ' Number
-/    = text_field_tag "#{param_prefix}[number]", '5520000000000000'
-/
-/    ' Month
-/    = text_field_tag "#{param_prefix}[month]", '11'
-/
-/    ' Year
-/    = text_field_tag "#{param_prefix}[year]", '2016'
-/
-/    ' CVV
-/    = text_field_tag "#{param_prefix}[verification_value]", '123'
-/
-/    ' Full Name
-/    = text_field_tag "#{param_prefix}[full_name]", [@order.billing_firstname, @order.billing_lastname].join(' ')
-/
-/    = f.submit 'WOOT Afterpay WOOT'
