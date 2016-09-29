@@ -8,7 +8,7 @@ gem 'slim'
 gem 'slim-rails'
 gem 'configatron'
 gem 'paperclip'
-gem 'sidekiq', '4.1.2'
+gem 'sidekiq', '4.2.2'
 gem 'timers', '1.1.0'
 gem 'whenever'
 gem 'psych', '~> 2.0.13'
@@ -107,8 +107,6 @@ gem 'spree_masterpass', :path => './spree_masterpass'
 # Command line tools
 gem 'term-ansicolor',   :require => false
 gem 'ruby-progressbar', :require => false
-
-gem 'sinatra',          :require => false
 
 gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
 
