@@ -54,9 +54,6 @@ module Afterpay
         )
 
         result['token']
-      rescue StandardError => e
-        Raven.capture_exception(e)
-        nil
       end
 
       def order_eligible?
