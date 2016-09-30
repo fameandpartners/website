@@ -3,6 +3,9 @@
 / If and when we provide a nice UI for adding and removing products
 / from the Page this whole file can be deleted.
 - begin
+  / TODO: products is a helper method. It's better making it explicit here than assuming it's a local variable
+  - products_collection = products
+
   - if products_collection.present?
     .ibox
       .ibox-title
@@ -39,6 +42,8 @@
                   td = e.message
                   td = product.inspect
 - rescue StandardError => e
-  p
-    ' Product PIDs Error
-    = e.message
+  .ibox
+    .ibox-title
+      | PIDs / Colors aren't properly formatted. Please, check <b>pids</b> variable value and try again.
+    .ibox-content
+      small = e.message
