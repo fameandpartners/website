@@ -108,11 +108,6 @@ ruby:
             = render partial: 'layouts/redesign/mega_menu/lookbook'
 
         .col-md-7.lookbook-banner
-          - if current_site_version.is_australia?
-            = link_to spring_racing_collection_landing_page_path, class: 'panel-highlight media-wrap'
-              = image_tag 'lookbook/spring-racing-collection-megamenu-2016-09-15.jpg'
-              .copy-wrap Spring Racing Collection <em><span>View this collection</span></em>
-          - else
-            = link_to cocktail_collection_landing_page_path, class: 'panel-highlight media-wrap'
-              = image_tag 'lookbook/cocktail-collection-megamenu-2016-09-15.jpg'
-              .copy-wrap Cocktail Collection <em><span>View this collection</span></em>
+          = link_to skirts_collection_landing_page_path, class: 'panel-highlight media-wrap'
+            = image_tag 'lookbook/skirts-collection-megamenu-2016-09-28.jpg'
+            .copy-wrap The Skirts Collection <em><span>View this collection</span></em>
