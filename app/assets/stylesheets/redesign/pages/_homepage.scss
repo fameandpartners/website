@@ -163,6 +163,10 @@
           margin: 0;
         }
 
+        img {
+          @include filter(grayscale(100%));
+        }
+
       }
 
       .item {
@@ -194,12 +198,17 @@
       text-align: center;
     }
 
-    .section-styling .styling-session {
-      margin-top: $section-spacing-margin-top;
+    .section-styling {
+      margin-top: 0;
 
-      p,
-      .item-copy {
-        padding-right: 0;
+      .styling-session {
+        margin-top: $section-spacing-margin-top;
+
+        p,
+        .item-copy {
+          padding-right: 0;
+        }
+
       }
 
     }
