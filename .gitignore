@@ -7,6 +7,10 @@
 # Do not ignore bundler config, since gems are vendored for deploys
 #/.bundle
 
+# Ignore local Gemfile
+Gemfile.local
+Gemfile.local.lock
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 

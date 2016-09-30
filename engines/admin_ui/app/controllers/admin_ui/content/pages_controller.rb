@@ -73,6 +73,8 @@ module AdminUi
         @page ||= Revolution::Page.find(params[:id])
       end
 
+      # TODO: this helper method is being used on the Revolution page edit. Is it being used anywhere? This should go away
+      # TODO: Should be the time to move the pids/colors and kill the `Revolution::ProductService` hack?
       def products
         if pids = page.variables.fetch('pids', nil)
           service = Revolution::ProductService.new(pids.split(','), SiteVersion.default)
