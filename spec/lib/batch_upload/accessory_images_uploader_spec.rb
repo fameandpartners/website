@@ -1,5 +1,4 @@
 require 'active_support/core_ext'
-require 'pry'
 
 require_relative '../../../lib/batch_upload/accessory_images_uploader'
 
