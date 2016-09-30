@@ -19,13 +19,13 @@ ruby:
           .section-name.vertical-text The Fame Story
           .diagonal-line
 
-      .same-height-cols
+      .same-height-cols    
         .row
           .col-md-4
             .item.bordered.mobile-change-order
               .item-copy.position-2
                 h3 Your <em>personal</em> atelier.
-                p.summary Timeless appeal. Contemporary edge. Completely customizable to suit your style.
+                p.summary Timeless appeal. Contemporary edge. <br class='visible-xs visible-sm'>Completely customizable to suit your style.
                 = link_to '/dresses/new-this-week'
                   span.cta-link-arrow-right
                     span.copy-highlight Explore
@@ -37,7 +37,7 @@ ruby:
             .item.bordered
               .item-copy
                 h3 <em>Made</em>-to-order.
-                p.summary Each piece is handmade just for you. <br class="visible-lg-block">No mass production, less waste.
+                p.summary Each piece is handmade just for you. <br class="visible-xs visible-sm visible-lg-block">No mass production, less waste.
                 = link_to about_us_path
                   span.cta-link-arrow-right
                     span.copy-highlight Learn more
@@ -49,7 +49,7 @@ ruby:
             .item.bordered
               .item-copy
                 h3 Tailored for <em>you</em>.
-                p.summary Our signature size model means never<br class="visible-lg-block"> having to say, "It doesn't fit."
+                p.summary Our signature size model means never<br class="visible-xs visible-sm visible-lg-block"> having to say, "It doesn't fit."
                 = link_to size_guide_path
                   span.cta-link-arrow-right
                     span.copy-highlight The Fit Guide
@@ -78,28 +78,28 @@ ruby:
         .col-md-12.cta-item-huge
           - if current_site_version.is_australia?
             // AUSTRALIA
-            - current_edit_image = "homepage/fp-style-icon/sep-15-tile-1-au.jpg"
-            - current_edit_mob_image = "homepage/fp-style-icon/sep-15-tile-1-au-mob.jpg"
-            - current_edit_cta_1 = "Shop"
-            - current_edit_cta_2 = "Nadia Fairfax's Edit"
+            - current_edit_image = "homepage/fp-style-icon/sept-29-tile-1.jpg"
+            - current_edit_mob_image = "homepage/fp-style-icon/sept-29-tile-1-mob.jpg"
+            - current_edit_cta_1 = ""
+            - current_edit_cta_2 = "WHAT WOULD NADIA WEAR?"
             - current_edit_link = spring_racing_collection_landing_page_path
           - else
             // USA
-            - current_edit_image = "homepage/fp-style-icon/sep-15-tile-1.jpg"
-            - current_edit_mob_image = "homepage/fp-style-icon/sep-15-tile-1-mob.jpg"
-            - current_edit_cta_1 = "Georgia Fowler's"
-            - current_edit_cta_2 = "Guide To Formal"
-            - current_edit_link = "http://blog.fameandpartners.com/what-would-georgia-fowler-wear-to-formal/"
+            - current_edit_image = "homepage/fp-style-icon/sept-29-tile-1.jpg"
+            - current_edit_mob_image = "homepage/fp-style-icon/sept-29-tile-1-mob.jpg"
+            - current_edit_cta_1 = ""
+            - current_edit_cta_2 = "WHAT WOULD NADIA WEAR?"
+            - current_edit_link = cocktail_collection_landing_page_path
 
           = link_to current_edit_link
             .section-img-wrap.copy-center
               picture
                 .img-wrap
-                  source media="(max-width: 1023px)" srcset="#{image_path(current_edit_mob_image)}"
-                  source media="(min-width: 1024px)" srcset="#{image_path(current_edit_image)}"
+                  source media="(max-width: 991px)" srcset="#{image_path(current_edit_mob_image)}"
+                  source media="(min-width: 992px)" srcset="#{image_path(current_edit_image)}"
                   img src="#{image_path(current_edit_image)}" srcset="
-                    #{image_path(current_edit_mob_image)} 1023w,
-                    #{image_path(current_edit_image)} 1024w"
+                    #{image_path(current_edit_mob_image)} 991w,
+                    #{image_path(current_edit_image)} 992w"
 
               .content-wrap
                 .container-cta
@@ -118,35 +118,10 @@ ruby:
 
       .row
         .col-md-6.cta-item
-          = link_to dresses_path + '/ruffle'
-            .section-img-wrap.copy-center
-              picture
-                .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-2-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-2.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/sep-15-tile-2.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/sep-15-tile-2-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/sep-15-tile-2.jpg")} 1024w'
-
-              .content-wrap
-                .container-cta
-                  .row-cta
-                    .col-md-12
-                      .copy-wrap.text-center
-                        span.cta-link-white-bg
-                          span.cta-link Shop
-                          span.copy-highlight  Ruffles
-
-        .col-md-6.cta-item
           = link_to dress_for_parties_page_path
             .section-img-wrap.copy-center
-              picture
-                .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-3-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-3.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/sep-15-tile-3.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/sep-15-tile-3-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/sep-15-tile-3.jpg")} 1024w'
+              .img-wrap
+                img src='#{image_path("homepage/fp-style-icon/sept-29-tile-2.jpg")}'
 
               .content-wrap
                 .container-cta
@@ -157,17 +132,11 @@ ruby:
                           span.cta-link Shop
                           span.copy-highlight  Party Looks
 
-      .row
         .col-md-6.cta-item
-          = link_to bridesmaid_collection_path
+          = link_to dresses_path + '/ruffle'
             .section-img-wrap.copy-center
-              picture
-                .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-4-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-4.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/sep-15-tile-4.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/sep-15-tile-4-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/sep-15-tile-4.jpg")} 1024w'
+              .img-wrap
+                img src='#{image_path("homepage/fp-style-icon/sept-29-tile-3.jpg")}'
 
               .content-wrap
                 .container-cta
@@ -176,18 +145,14 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  Bridesmaids Dresses
+                          span.copy-highlight Ruffles
 
+      .row
         .col-md-6.cta-item
           = link_to dresses_path + '/backless'
             .section-img-wrap.copy-center
-              picture
-                .img-wrap
-                  source media='(max-width: 1023px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-5-mob.jpg")}'
-                  source media='(min-width: 1024px)' srcset='#{image_path("homepage/fp-style-icon/sep-15-tile-5.jpg")}'
-                  img src='#{image_path("homepage/fp-style-icon/sep-15-tile-5.jpg")}' srcset='
-                    #{image_path("homepage/fp-style-icon/sep-15-tile-5-mob.jpg")} 1023w,
-                    #{image_path("homepage/fp-style-icon/sep-15-tile-5.jpg")} 1024w'
+              .img-wrap
+                img src='#{image_path("homepage/fp-style-icon/sept-29-tile-4.jpg")}'
 
               .content-wrap
                 .container-cta
@@ -197,6 +162,21 @@ ruby:
                         span.cta-link-white-bg
                           span.cta-link Shop
                           span.copy-highlight  Backless Dresses
+
+        .col-md-6.cta-item
+          = link_to bridesmaid_collection_path
+            .section-img-wrap.copy-center
+              .img-wrap
+                img src='#{image_path("homepage/fp-style-icon/sept-29-tile-5.jpg")}'
+
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                      .copy-wrap.text-center
+                        span.cta-link-white-bg
+                          span.cta-link Shop
+                          span.copy-highlight  Bridesmaids Dresses
 
   // Section: Styling
   section.section-box.container.section-styling
@@ -259,62 +239,62 @@ ruby:
 
             // Instagram Item
             .item.col-md-5ths.col-xs-6
-              = link_to "#{dresses_path}/dress-kennedy-grace-1039?color=ivory", class: "item-wrap"
+              = link_to "#{dresses_path}/dress-queen-of-peace-632?color=black", class: "item-wrap"
                 .media-wrap
-                  = image_tag "homepage/get-social/sep-15-instagram-1.jpg", :class => "img-responsive"
+                  = image_tag "homepage/get-social/Instagram-1.jpg", :class => "img-responsive"
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @caitlinmiyako
+                          span.user @whiteandcapsule
                           span.cta-link shop
 
             // Instagram Item
             .item.col-md-5ths.col-xs-6
-              = link_to "#{dresses_path}/dress-everett-lace-968?color=burgundy", class: "item-wrap"
+              = link_to the_freshly_picked_collection_path, class: "item-wrap"
                 .media-wrap
-                  = image_tag "homepage/get-social/sep-15-instagram-2.jpg", :class => "img-responsive"
+                  = image_tag "homepage/get-social/Instagram-2.jpg", :class => "img-responsive"
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @keilihvictoria
+                          span.user @mimosasmanhattan
                           span.cta-link shop
 
             // Instagram Item
             .item.col-md-5ths.col-xs-6
-              = link_to "#{dresses_path}/dress-azzedine-1103?color=ornate-midnight-floral", class: "item-wrap"
+              = link_to "#{dresses_path}/dress-catalina-997?color=pale-blue", class: "item-wrap"
                 .media-wrap
-                  = image_tag "homepage/get-social/sep-15-instagram-3.jpg", :class => "img-responsive"
+                  = image_tag "homepage/get-social/Instagram-3.jpg", :class => "img-responsive"
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @johombsch
+                          span.user @nadiafairfax
                           span.cta-link shop
 
             // Instagram Item
             .item.col-md-5ths.col-xs-6
-              = link_to "#{dresses_path}/dress-sorrento-766?color=white", class: "item-wrap"
+              = link_to "#{dresses_path}/dress-kelis-1067?color=pale-blue", class: "item-wrap"
                 .media-wrap
-                  = image_tag "homepage/get-social/sep-15-instagram-4.jpg", :class => "img-responsive"
+                  = image_tag "homepage/get-social/Instagram-4.jpg", :class => "img-responsive"
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @haileybaldwin
+                          span.user @afashionerd
                           span.cta-link shop
 
             // Instagram Item
             .item.col-md-5ths.hidden-sm.hidden-xs
-              = link_to "#{dresses_path}/dress-megan-915?color=olive", class: "item-wrap"
+              = link_to "#{dresses_path}/dress-merille-two-piece-1080?color=navy", class: "item-wrap"
                 .media-wrap
-                  = image_tag "homepage/get-social/sep-15-instagram-5.jpg", :class => "img-responsive"
+                  = image_tag "homepage/get-social/Instagram-5.jpg", :class => "img-responsive"
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @inkawilliams
+                          span.user @thegreylayers
                           span.cta-link shop
 
         .row
@@ -346,21 +326,21 @@ ruby:
               = link_to current_social_network_link, target: "_blank"
                 = image_tag "homepage/social-cards/instagram.jpg", :class => "img-responsive"
 
-      - current_social_network_link = "https://www.facebook.com/FameandPartners"
+      - current_social_network_link = "http://blog.fameandpartners.com/quiz-find-gown-personality"
       .col-md-6.copy-img-side-by-side
         .item.bordered.item-alt.section-facebook
           .row
             .col-sm-5.copy-side
               .content-wrapper
-                p Like us on #{link_to "Facebook", current_social_network_link, target:"_blank"} to keep up with our latest lookbooks, trend reports, and IRL events.
+                p What's your gown style? #{link_to "Take the quiz to find out!", current_social_network_link, target:"_blank"}
 
                 .link-align-bottom
                   = link_to current_social_network_link, target: "_blank"
                     span.cta-link-arrow-right
                       span.cta-link Explore
-                      span.copy-highlight  Facebook
+                      span.copy-highlight  THE BLOG
                       i.icon.icon-arrow-right
 
             .col-sm-7.img-side
               = link_to current_social_network_link, target: "_blank"
-                = image_tag "homepage/social-cards/facebook.jpg", :class => "img-responsive"
+                = image_tag "homepage/social-cards/blog.jpg", :class => "img-responsive"
