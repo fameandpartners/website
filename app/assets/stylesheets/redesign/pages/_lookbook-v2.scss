@@ -166,10 +166,7 @@
 
       section {
         margin-top: 15px;
-      }
-
-      .content-img img {
-        padding: 0 0 0 10%;
+        padding-left: 75px
       }
 
       .content-copy {
@@ -183,6 +180,16 @@
       .local-navigation-vertical {
         top: $fixed-header-with-locale-warn;
         position: fixed;
+      }
+
+      .landscape-view {
+
+        .content-copy {
+          padding-top: 35px;
+          padding-left: 40px;
+          padding-right: 40px;
+        }
+
       }
 
     }
@@ -229,6 +236,10 @@
 
       .content-copy {
         padding-top: 32px;
+      }
+
+      .landscape-view .content-copy {
+        padding-bottom: 52px;
       }
 
     }

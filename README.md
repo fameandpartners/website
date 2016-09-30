@@ -69,6 +69,18 @@ This file loads environment variables required to run the application. You can u
 
 All gems are vendored (downloaded and stored at `vendor/cache`). Because of this `bundle/config` file is now versioned. Be careful to **NOT** change it.
 
+## Local Gemfile
+
+If you want to use gems on your development environment without adding them to this project, you can use the following approach:
+
+- Copy the `Gemfile.local.example` and rename it to `Gemfile.local`
+- You can now run bundler commands with the `BUNDLE_GEMFILE=Gemfile.local` env variable set
+- Examples:
+    - `BUNDLE_GEMFILE=Gemfile.local bundle install`
+    - `BUNDLE_GEMFILE=Gemfile.local bundle exec rails c`
+
+Note: as you read above, gems are vendored. Do **NOT** commit/push your development gems!
+
 ## Git LFS
 
 If you cloned the project, but didn't have `git-lfs` installed, execute the following steps:
