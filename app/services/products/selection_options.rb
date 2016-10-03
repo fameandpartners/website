@@ -82,15 +82,15 @@ class SelectionOptions
     end
 
     def default_product_colors
-      @default_product_colors ||= product.product_color_values.active.recommended
-        .map(&:option_value).sort_by(&:presentation)
+      @default_product_colors ||= product.basic_colors.sort_by(&:presentation)
     end
 
     def extra_product_colors
-      return [] unless extra_colors_available?
-
-
-      @extra_product_colors ||= (defined_custom_colors.presence || legacy_fallback_custom_colors)
+      if extra_colors_available?
+        @extra_product_colors ||= (defined_custom_colors.presence || legacy_fallback_custom_colors)
+      else
+        []
+      end
     end
 
     private def defined_custom_colors
@@ -98,18 +98,21 @@ class SelectionOptions
     end
 
     private def legacy_fallback_custom_colors
-      basic_product_color_ids = product_variants.map{|variant| variant.color_id}.uniq
+      basic_product_color_ids = product_variants.map(&:color_id).uniq
 
       Repositories::ProductColors.read_all.select do |color|
         color.use_in_customisation && !basic_product_color_ids.include?(color.id)
-      end.compact.sort_by{|color| color.presentation }
+      end.compact.sort_by(&:presentation)
     end
     # eo colors part
 
     # customizations
     def product_customisation_values
-      return [] unless customisations_available?
-      @product_customisation_values ||= product.customisation_values.includes(:incompatibilities)
+      if customisations_available?
+        @product_customisation_values ||= product.customisation_values.includes(:incompatibilities)
+      else
+        []
+      end
     end
 
     def available_product_customisations
@@ -125,16 +128,16 @@ class SelectionOptions
     end
 
     def customisations_incompatibility_map
-      result = {}
-      product_customisation_values.each do |value|
-        result[value.id] = value.incompatibilities.map(&:incompatible_id)
+      product_customisation_values.inject({}) do |hash, value|
+        hash[value.id] = value.incompatibilities.map(&:incompatible_id)
+        hash
       end
-      result
     end
 
     # making options
     def product_making_options
       product.making_options.to_a
     end
-end
+
+  end
 end

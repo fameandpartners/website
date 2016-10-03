@@ -168,7 +168,7 @@ Spree::Product.class_eval do
 
   def custom_colors
     option_types
-      .color_scope
+      .color
       .option_values
         .where('spree_option_values.id NOT IN (?)', basic_color_ids)
         .uniq
