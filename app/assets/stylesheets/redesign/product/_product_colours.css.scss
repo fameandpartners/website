@@ -68,6 +68,7 @@ $product-color-bronze:          #dd905b;
 $product-color-burgundy:        #77202f;
 $product-color-burnt-orange:    #ce4f36;
 $product-color-candy-pink:      #f998cb;
+$product-color-chambray:        #7c90b5;
 $product-color-champagne:       #efe4dc;
 $product-color-charcoal:        #4d4d4d;
 $product-color-chartreuse:      #96943c;
@@ -86,7 +87,7 @@ $product-color-dark-chocolate:  #4c1f0b;
 $product-color-dark-forest:     #06230a;
 $product-color-dark-lavender:   #7b6dbf;
 $product-color-dark-mint:       #91cec2;
-$product-color-dark-nude:       #ccac9d;
+$product-color-dark-nude:       #cbac9e;
 $product-color-dark-purple:     #330066;
 $product-color-dark-tan:        #8c7362;
 $product-color-dark-teal:       #064a51;
@@ -132,6 +133,7 @@ $product-color-navy:            #0e0e47;
 $product-color-neon-mint:       #33ffc6;
 $product-color-nude:            #fdd5b1;
 $product-color-ocean:           #0493aa;
+$product-color-ochre:           #8a5e3f;
 $product-color-off-white:       #fffef6;
 $product-color-olive:           #34351f;
 $product-color-orange:          #ea5d32;
@@ -168,6 +170,7 @@ $product-color-teal:            #085966;
 $product-color-turquoise:       #1bb2aa;
 $product-color-vibrant-purple:  #9f6ba9;
 $product-color-warm-grey:       #b0a5a5;
+$product-color-warm-olive:      #343520;
 $product-color-watermelon:      #ef525e;
 $product-color-white:           #ffffff;
 $product-color-wine:            #831c2e;
@@ -204,6 +207,7 @@ $product-color-wine:            #831c2e;
 .color-burgundy                { background-color: $product-color-burgundy; }
 .color-burnt-orange            { background-color: $product-color-burnt-orange; }
 .color-candy-pink              { background-color: $product-color-candy-pink; }
+.color-chambray                { background-color: $product-color-chambray; }
 .color-champagne               { background-color: $product-color-champagne; }
 .color-charcoal                { background-color: $product-color-charcoal; }
 .color-chartreuse              { background-color: $product-color-chartreuse; }
@@ -220,6 +224,7 @@ $product-color-wine:            #831c2e;
 .color-cotton-candy            { background-color: $product-color-cotton-candy; }
 .color-cranberry               { background-color: $product-color-cranberry; }
 .color-cream                   { background-color: $product-color-cream; }
+.color-crosswalk               { @include image-color-selector('Crosswalk.png'); }
 .color-dark-burgundy           { background-color: $product-color-dark-burgundy; }
 .color-dark-chocolate          { background-color: $product-color-dark-chocolate; }
 .color-dark-forest             { background-color: $product-color-dark-forest; }
@@ -275,6 +280,7 @@ $product-color-wine:            #831c2e;
 .color-light-teal              { background-color: $product-color-light-teal; }
 .color-lilac                   { background-color: $product-color-lilac; }
 .color-lipstick-red            { background-color: $product-color-lipstick-red; }
+.color-looking-glass           { @include image-color-selector('LookingGlass.png'); }
 .color-magenta                 { background-color: $product-color-magenta; }
 .color-marine-blue             { background-color: $product-color-marine-blue; }
 .color-mauve                   { background-color: $product-color-mauve; }
@@ -296,11 +302,13 @@ $product-color-wine:            #831c2e;
 .color-nude                    { background-color: $product-color-nude; }
 .color-nude-and-black          { @include split-color-selector($product-color-nude, $product-color-black);  }
 .color-ocean                   { background-color: $product-color-ocean; }
+.color-ochre                   { background-color: $product-color-ochre; }
 .color-off-white               { background-color: $product-color-off-white; }
 .color-olive                   { background-color: $product-color-olive; }
 .color-olive-shimmer           { @include image-color-selector('OliveShimmer.png'); }
 .color-orange                  { background-color: $product-color-orange; }
 .color-orange-and-hot-pink     { @include split-color-selector($product-color-orange, $product-color-hot-pink); }
+.color-ornate-midnight-floral  { @include image-color-selector('OrnateMidinightFloral.png'); }
 .color-pale-blue               { background-color: $product-color-pale-blue; }
 .color-pale-blue-cotton-stripe { @include image-color-selector('PaleBlueCottonStripe.png') }
 .color-pale-green              { background-color: $product-color-pale-green; }
@@ -329,6 +337,7 @@ $product-color-wine:            #831c2e;
 .color-rose                    { background-color: $product-color-rose; }
 .color-rose-gold               { background-color: $product-color-rose-gold; }
 .color-rosebud                 { @include image-color-selector('Rosebud.png'); }
+.color-rosewater-floral        { @include image-color-selector('RosewaterFloral.png'); }
 .color-royal-blue              { background-color: $product-color-royal-blue; }
 .color-royal-purple            { background-color: $product-color-royal-purple; }
 .color-sage                    { background-color: $product-color-sage; }
@@ -341,6 +350,7 @@ $product-color-wine:            #831c2e;
 .color-silver                  { background-color: $product-color-silver; }
 .color-silver-and-pale-pink    { @include split-color-selector($product-color-silver, $product-color-pale-pink); }
 .color-sky-blue                { background-color: $product-color-sky-blue; }
+.color-spot                    { @include image-color-selector('Spot.png'); }
 .color-sunset-orange { background-color: $product-color-sunset-orange; }
 .color-surreal-floral-black    { @include image-color-selector('SurrealFloralBlack.png'); }
 .color-surreal-floral-white    { @include image-color-selector('SurrealFloralWhite.png'); }
@@ -352,16 +362,12 @@ $product-color-wine:            #831c2e;
 .color-turquoise               { background-color: $product-color-turquoise; }
 .color-vibrant-purple          { background-color: $product-color-vibrant-purple; }
 .color-warm-grey               { background-color: $product-color-warm-grey; }
+.color-warm-olive              { background-color: $product-color-warm-olive; }
 .color-watercolour             { @include image-color-selector('Watercolour.png'); }
 .color-watercolour-camo        { @include image-color-selector('WatercolourCamo.png'); }
 .color-watermelon              { background-color: $product-color-watermelon; }
 .color-white-and-mint          { @include split-color-selector($product-color-white, $product-color-mint); }
 .color-wine                    { background-color: $product-color-wine; }
-.color-spot                    { @include image-color-selector('Spot.png'); }
-.color-rosewater-floral        { @include image-color-selector('RosewaterFloral.png'); }
-.color-crosswalk               { @include image-color-selector('Crosswalk.png'); }
-.color-looking-glass           { @include image-color-selector('LookingGlass.png'); }
-.color-ornate-midnight-floral  { @include image-color-selector('OrnateMidinightFloral.png'); }
 
 .color-white, .color-optic-white {
   background-color: $product-color-white;

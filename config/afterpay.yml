@@ -1,0 +1,13 @@
+sandbox_data: &sandbox_data
+  username: '32935'
+  password: '249c235938f36015bb32571721ba2dc80257d2fe985799c30a0e5877408991b596b117d998e0528a7872103f8fc80e07d71163c801b22153149ac6a0919b588a'
+  mode: 'sandbox'
+
+development:
+  <<: *sandbox_data
+test:
+  <<: *sandbox_data
+staging:
+  <<: *sandbox_data
+production:
+  mode: 'live'

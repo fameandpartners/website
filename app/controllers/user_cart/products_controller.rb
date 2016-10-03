@@ -46,7 +46,7 @@ class UserCart::ProductsController < UserCart::BaseController
 
       data = add_analytics_labels(@user_cart.serialize)
 
-      flash[:variant_id_added_to_cart] = params[:dress_variant_id]
+      flash[:variant_id_added_to_cart] = params[:dress_variant_id].presence
 
       respond_with(@user_cart) do |format|
         format.json   {
