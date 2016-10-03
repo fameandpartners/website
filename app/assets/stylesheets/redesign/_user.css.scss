@@ -42,7 +42,7 @@
     }
 
   }
-  
+
 }
 // @end Account
 // ---------------
@@ -90,34 +90,33 @@ h2.order-number {
 }
 
 .table.orders-table {
+  font-family: $font-family-secondary;
   margin-top: 4rem;
 
-  thead tr th {
-    text-transform: uppercase;
+  td {
+    border: none;
+    vertical-align: middle;
     text-align: left;
-    font-size: 12px;
-    background-color: #f9f9f9;
   }
 
-  thead tr th.returns-column, > tbody > tr > td.returns-column, {
-    background-color: white !important;
+  th.returns-column,
+  td.returns-column {
     border-bottom: none;
-    padding-left: 6rem;
-    padding-right: 0;
+    text-align: center;
+    padding: 20px 60px;
   }
+
+  a {
+    color: $c-neutral-black;
+    text-decoration: underline;
+  }
+
 }
 
-.table.order-items, .table.orders-table > tbody > tr > td {
+.table.order-items {
   border: none;
   vertical-align: middle;
   text-align: left;
-}
-
-.table > tbody > tr > td {
-
-  a.order-details:hover {
-    color: #355e6d
-  }
 }
 
 .support > a:hover {

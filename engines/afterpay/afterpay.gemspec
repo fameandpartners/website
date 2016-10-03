@@ -16,8 +16,9 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*'] + ['Rakefile', 'README.rdoc']
   s.test_files = Dir['spec/**/*']
 
-  s.add_dependency 'rails' # Version specified on main app Gemfile
-  s.add_dependency 'spree' # Version specified on main app Gemfile
+  s.add_dependency 'rails'                 # Version specified on main app Gemfile
+  s.add_dependency 'spree'                 # Version specified on main app Gemfile
+  s.add_dependency 'afterpay-sdk-merchant' # Version specified on main app Gemfile
 
   # s.add_development_dependency 'sqlite3'
 end
