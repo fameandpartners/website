@@ -13,7 +13,6 @@
 
 //= require libs/jquery.dotdotdot.min
 //= require libs/jquery.mlens.min
-//= require libs/bootstrap-tabcollapse
 //= require libs/jquery.sticky
 
 //= require modernizr-custom

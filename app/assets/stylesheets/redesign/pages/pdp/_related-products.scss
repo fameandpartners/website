@@ -1,9 +1,13 @@
 /* [PDP - related products]
 -------------------------------------------------------*/
-.related-products {
+.products-collections {
 
-  .media-wrap {
-    margin-bottom: 30px;
+  .category--item {
+    min-height: initial;
+  }
+
+  .name {
+    color: $c-neutral-black;
   }
 
 }
