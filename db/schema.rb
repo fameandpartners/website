@@ -802,9 +802,8 @@ ActiveRecord::Schema.define(:version => 20160921025247) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
-    t.integer  "spree_product_id"
-    t.integer  "customisation_value_id"
     t.integer  "product_color_value_id"
+    t.integer  "customisation_value_id"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end
