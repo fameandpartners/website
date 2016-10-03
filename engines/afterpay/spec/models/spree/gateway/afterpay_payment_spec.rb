@@ -12,18 +12,20 @@ class Spree::Gateway
     describe 'Spree Gateway methods' do
       it { expect(payment_method.auto_capture?).to eq(true) }
       it { expect(payment_method.supports?({})).to eq(true) }
-      it { expect(payment_method.provider_class).to eq(Spree::Gateway::Bogus) }
+      it { expect(payment_method.provider_class).to eq(::Afterpay::SDK::Merchant) }
+      it { expect(payment_method.provider).to be_an_instance_of(::Afterpay::SDK::Merchant::API) }
       it { expect(payment_method.currency).to eq('AUD') }
       it { expect(payment_method.method_type).to eq('afterpay') }
     end
 
     describe 'Payment Actions' do
       describe 'completes a purchase' do
-        it 'calls active merchant billing method' do
-          # For now, this is purely bogus
-          expect(ActiveMerchant::Billing::Response).to receive(:new).with(true, 'Bogus Gateway: Forced success', {}, test: true, authorization: '12345', avs_result: { code: 'A' })
+        let(:spree_credit_card) { Spree::CreditCard.new(gateway_payment_profile_id: 'Magical Number!') }
 
-          payment_method.purchase('amount', 'transaction_details')
+        it 'calls active merchant billing method' do
+          expect(ActiveMerchant::Billing::Response).to receive(:new).with(true, 'AfterPay Gateway: Success', {}, authorization: 'Magical Number!')
+
+          payment_method.purchase('amount', spree_credit_card)
         end
       end
 

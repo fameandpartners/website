@@ -516,7 +516,7 @@ var PdpGallery = function (_React$Component) {
       });
 
       // if no match found, use default dress color
-      var COLOR_ID = foundImage ? this.props.customize.color.id : this.props.product.color_id;
+      var COLOR_ID = foundImage ? this.props.customize.color.id : this.props.product.featured_image.table.color_id;
 
       // match color id with images
       var images = this.props.images.map(function (image, index) {

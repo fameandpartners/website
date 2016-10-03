@@ -24,7 +24,7 @@ AdminUi::Engine.routes.draw do
 
     resource :sidekiq, only: :show do
       require 'sidekiq/web'
-      mount Sidekiq::Web => 'd0ec826a2968a7079f0bdd8f1116811f'
+      mount Sidekiq::Web => 'd0ec826a2968a7079f0bdd8f1116811f', as: :web_backend
     end
 
     resources :features, only: [:index] do

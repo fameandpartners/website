@@ -54,8 +54,10 @@
         elem = document.getElementById(id),
         hashlink = '<div id='+id+' class="hashlink js-hashlink"></div>';
 
-    elem.removeAttribute('id');
-    elem.insertAdjacentHTML('beforebegin', hashlink);
+    if(elem !== null) {
+      elem.removeAttribute('id');
+      elem.insertAdjacentHTML('beforebegin', hashlink);
+    }
 
     // If the URL contains an anchor and a local navigation
     if ($(".local-navigation-vertical .nav").length) {

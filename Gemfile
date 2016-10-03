@@ -8,7 +8,7 @@ gem 'slim'
 gem 'slim-rails'
 gem 'configatron'
 gem 'paperclip'
-gem 'sidekiq', '4.1.2'
+gem 'sidekiq', '4.2.2'
 gem 'timers', '1.1.0'
 gem 'whenever'
 gem 'psych', '~> 2.0.13'
@@ -108,8 +108,6 @@ gem 'spree_masterpass', :path => './spree_masterpass'
 gem 'term-ansicolor',   :require => false
 gem 'ruby-progressbar', :require => false
 
-gem 'sinatra',          :require => false
-
 gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
 
 group :assets do
@@ -127,9 +125,6 @@ group :development do
   gem 'puma'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'zeus'
-  gem 'pry-rails'
-  gem 'byebug'
   gem 'awesome_print'
   gem 'letter_opener', '~> 1.4.1'
   gem 'quiet_assets'

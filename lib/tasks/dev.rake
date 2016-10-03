@@ -46,13 +46,13 @@ namespace :dev do
         # Afterpay
         logger.info 'Creating Test Afterpay Payment'
 
-        afterpay_payment                        = Spree::Gateway::AfterpayPayment.new
-        afterpay_payment.name                   = 'Afterpay Australia TEST'
-        afterpay_payment.preferred_merchant_id  = 'something'
-        afterpay_payment.preferred_merchant_key = 'something'
-        afterpay_payment.preferred_server       = 'sandbox'
-        afterpay_payment.environment            = target_env
-        afterpay_payment.active                 = true
+        afterpay_payment                    = Spree::Gateway::AfterpayPayment.new
+        afterpay_payment.name               = 'Afterpay Australia TEST'
+        afterpay_payment.preferred_username = '32935' # Sandbox API Keys
+        afterpay_payment.preferred_password = '249c235938f36015bb32571721ba2dc80257d2fe985799c30a0e5877408991b596b117d998e0528a7872103f8fc80e07d71163c801b22153149ac6a0919b588a' # Sandbox API Keys
+        afterpay_payment.preferred_server   = 'sandbox'
+        afterpay_payment.environment        = target_env
+        afterpay_payment.active             = true
         afterpay_payment.save
       end
     end
