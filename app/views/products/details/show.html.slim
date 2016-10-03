@@ -218,13 +218,8 @@ javascript:
     }
 
     // update on resize
-    $(window).resize(function() {
-      updateSticky();
-    });
-    
-    // update on accordion change
-    $('#accordion').on('shown.bs.collapse', function(e) {
-      updateSticky();
-    })
+    $(window).resize(updateSticky);
 
+    // update on accordion change
+    $('#accordion').on('shown.bs.collapse', updateSticky);
   });
