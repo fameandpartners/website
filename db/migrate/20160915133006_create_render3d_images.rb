@@ -5,8 +5,9 @@ class CreateRender3dImages < ActiveRecord::Migration
       t.has_attached_file :attachment
 
       # Relationships
-      t.references :product_color_value
+      t.references :spree_product
       t.references :customisation_value
+      t.references :product_color_value
 
       # ActiveRecord
       t.timestamps
