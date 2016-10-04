@@ -22,6 +22,30 @@
 .panel-media-inner-wrap {
   margin-bottom: -$mega-menu-desktop-height;
 
+  .expande,
+  .btn-zoom {
+    position: absolute;
+    z-index: 1;
+  }
+
+  .expande {
+    left: 50px;
+    top: 50%;
+    margin-top: -25px;
+  }
+
+  .btn-zoom {
+    display: none;
+    visibility: hidden;
+    left: 15px;
+    bottom: 12px;
+  }
+
+  .zoomed-in .expande:before,
+  .zoomed-in .btn-zoom {
+    display: none;
+  }
+
   .loader {
     position: absolute;
     display: block;
@@ -38,14 +62,16 @@
   .media-wrap {
     position: relative;
 
-    img {
+    img,
+    .expande {
       opacity: 0;
       transition: opacity 200ms linear;
     }
 
     &.is-loaded {
 
-      img {
+      img,
+      .expande {
         opacity: 1;
       }
 
@@ -59,23 +85,23 @@
 
 }
 
-.panel-media .media-wrap {
+.panel-media .media-wrap-outer {
   position: relative;
   height: 100vh;
   max-height: 850px; // NOTE: this will need to be change when we get new product images
-  overflow: hidden;
-  padding-top: 30px;
-  background: transparent;
+  padding-bottom: 30px;
+}
 
-  &:not(:first-child) {
-    margin-top: -30px;
-  }
+.panel-media .media-wrap {
+  position: relative;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
 
   img {
     display: block;
     width: auto;
     height: 100%;
-    margin-top: -30px;
   }
 
   .scrollspy-trigger {
@@ -90,17 +116,26 @@
 
   .panel-media-inner-wrap {
     margin-bottom: 0;
+
+    .expande {
+      display: none;
+      visibility: hidden;
+    }
+
+    .btn-zoom {
+      display: block;
+      visibility: visible;
+    }
+
+  }
+
+  .panel-media .media-wrap-outer {
+    width: 100%;
+    height: auto;
+    padding-bottom: 0;
   }
 
   .panel-media .media-wrap {
-    display: block;
-    width: 100%;
-    height: auto;
-    padding-top: 0;
-
-    &:not(:first-child) {
-      margin-top: 0;
-    }
 
     img {
       width: 100%;
@@ -114,6 +149,7 @@
 
 .slick-dots {
   position: relative;
+  float: right;
   margin-top: -32px;
   padding: 0 15px;
   text-align: right;
