@@ -166,6 +166,10 @@ Spree::Product.class_eval do
   end
   alias_method :colors, :color_names
 
+  # TODO: Alexey Bobyrev - 04/Oct/2016
+  # This method is unused.
+  # We need to remove it or rewrite to use as `#active#custom` scope for
+  # option_values from color_values
   def custom_colors
     option_types
       .color
