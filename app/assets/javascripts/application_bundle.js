@@ -223,7 +223,7 @@ var CtaPrice = function (_React$Component) {
           _react2.default.createElement(
             'li',
             null,
-            'Free Sheeping'
+            'Free Shipping'
           ),
           _react2.default.createElement(
             'li',
