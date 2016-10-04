@@ -18,7 +18,7 @@ module Bergen
         context 'successfully creates' do
           it do
             expect(soap_method.result).to eq({
-                                               receiving_ticket_id: 'WHRTN1110555'
+                                               receiving_ticket_id: 'WHRTN1110575'
                                              })
           end
         end

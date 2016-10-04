@@ -83,7 +83,7 @@ Spree::CheckoutController.class_eval do
       end
 
       if @order.state == 'complete' || @order.completed?
-        GuestCheckoutAssociation.associate_user_for_guest_checkout(spree_order: @order, spree_current_user: spree_current_user)
+        GuestCheckoutAssociation.call(spree_order: @order)
         flash.notice = t(:order_processed_successfully)
         flash[:commerce_tracking] = 'nothing special'
 
@@ -306,7 +306,7 @@ Spree::CheckoutController.class_eval do
     end
 
     @afterpay_method = @order.available_payment_methods.detect do |method|
-      method.method_type == 'afterpay' && current_site_version.currency == 'AUD'
+      method.method_type == 'afterpay' && current_site_version.currency == method.currency
     end
   end
 
@@ -335,9 +335,6 @@ Spree::CheckoutController.class_eval do
 
   def data_layer_add_to_cart_event
     if (variant_id = flash[:variant_id_added_to_cart])
-      # TODO: this conditional should never exist! This should be handled on the PDP page, and send a null value if there's no variant_id (or ever associate a variant_id_dress)
-      return if variant_id == 'NaN'
-
       variant           = Spree::Variant.find(variant_id)
       product_presenter = variant.product.presenter_as_details_resource(current_site_version)
 

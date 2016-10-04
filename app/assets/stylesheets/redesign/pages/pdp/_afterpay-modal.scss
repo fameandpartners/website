@@ -9,11 +9,41 @@
 
   .content-wrap {
     padding: 30px;
-    font-weight: normal;
+
+    h4 {
+      font-weight: 400;
+    }
+
   }
 
   .title {
     margin: 0;
+  }
+
+  li,
+  p {
+    font-family: $font-heading;
+    font-weight: 400;
+  }
+
+  a {
+    text-decoration: underline;
+    color: inherit;
+  }
+
+  li {
+    line-height: 1;
+
+    &:not(:first-child) {
+      margin-top: 5px;
+    }
+
+    span {
+      display: block;
+      font-size: 0.875em;
+      font-weight: 300;
+    }
+
   }
 
 }

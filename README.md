@@ -8,6 +8,7 @@
 * Redis
 * memcached
 * `imagemagick` 6.9.1
+* [git-lfs](https://git-lfs.github.com/)
 
 > Libraries versions can vary. Versions used above are suggestions.
 
@@ -67,6 +68,28 @@ This file loads environment variables required to run the application. You can u
 ## Vendored Gems
 
 All gems are vendored (downloaded and stored at `vendor/cache`). Because of this `bundle/config` file is now versioned. Be careful to **NOT** change it.
+
+## Local Gemfile
+
+If you want to use gems on your development environment without adding them to this project, you can use the following approach:
+
+- Copy the `Gemfile.local.example` and rename it to `Gemfile.local`
+- You can now run bundler commands with the `BUNDLE_GEMFILE=Gemfile.local` env variable set
+- Examples:
+    - `BUNDLE_GEMFILE=Gemfile.local bundle install`
+    - `BUNDLE_GEMFILE=Gemfile.local bundle exec rails c`
+
+Note: as you read above, gems are vendored. Do **NOT** commit/push your development gems!
+
+## Git LFS
+
+If you cloned the project, but didn't have `git-lfs` installed, execute the following steps:
+
+* Install `git-lfs`
+  * For more details on installation steps, go to [https://git-lfs.github.com/](https://git-lfs.github.com/)
+* Execute `git lfs pull`
+
+This will pull all files stored on LFS for the current branch
 
 ### Creating an Admin User
 
@@ -230,14 +253,38 @@ For more information, please refer to the [deployment docs](doc/ops/deployment.m
 
 Access `/admin/payment_methods/1/edit`
 
- * `Active => Yes`
- * `Environment => Development`
- * `Test Mode => Checked`
- * `Server => test`
+#### PIN
 
-Test CC is `5520000000000000`
+- `Provider => Spree::Gateway::Pin`
+- `Active => Yes`
+- `Environment => Development`
+- `Test Mode => Checked`
+- `Server => test`
+
+Test CC is `5520000000000000`, with any valid expiration date and three digits CVV.
 
 You can use any other details.
+
+#### Afterpay
+
+- Provider: `Spree::Gateway::AfterpayPayment`
+- Active: `Yes`
+- Environment: `Development`
+- Test Mode: `Checked`
+- Server: `sandbox`
+
+Use your own email, with a valid Australian phone and `111111` as the SMS verification token.
+
+> Note: Your email will be used to access the sandbox environment. You WILL receive real emails.
+
+Example:
+
+- Email: `johndoe@gmail.com`
+- Australian Phone: `+61481070625`
+- SMS verification token: `111111`
+- Credit card details:
+  - Number: `5520000000000000`
+  - Just fill in the rest with valid information, and it'll work
 
 ## Testing
 

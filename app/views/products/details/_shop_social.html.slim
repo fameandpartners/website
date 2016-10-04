@@ -1,0 +1,46 @@
+// Section: Instagram
+section.container
+  .row
+    .col-md-12.heading-overlay-wrapper
+      h2.heading-overlay #FAMEMOMENTS
+
+.section-wrapper
+  .section-box.section-instagram
+    .container
+      .instagram-widget
+
+        // Instagram Item
+        .item.col-md-5ths.col-xs-6
+          .item-wrap
+            .media-wrap
+              = image_tag "_pdp/tile-seen-on-1.jpg", :class => "img-responsive"
+
+        // Instagram Item
+        .item.col-md-5ths.col-xs-6
+          .item-wrap
+            .media-wrap
+              = image_tag "_pdp/tile-seen-on-2.jpg", :class => "img-responsive"
+
+        // Instagram Item
+        .item.col-md-5ths.col-xs-6
+          .item-wrap
+            .media-wrap
+              = image_tag "_pdp/tile-seen-on-3.jpg", :class => "img-responsive"
+
+        // Instagram Item
+        .item.col-md-5ths.col-xs-6
+          .item-wrap
+            .media-wrap
+              = image_tag "_pdp/tile-seen-on-4.jpg", :class => "img-responsive"
+
+        // Instagram Item
+        .item.col-md-5ths.hidden-sm.hidden-xs
+          .item-wrap
+            .media-wrap
+              = image_tag "_pdp/tile-seen-on-5.jpg", :class => "img-responsive"
+                        
+      .row
+        .col-md-12.text-center
+          = link_to shop_social_path
+              span.btn-xs.btn-featured
+                | Shop <span class="copy-highlight">Instagram</span>

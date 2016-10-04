@@ -138,8 +138,13 @@ PATH
       simple_form
       slim
     afterpay (0.0.1)
+      afterpay-sdk-merchant
       rails
       spree
+    afterpay-sdk-core (0.0.1)
+      faraday
+    afterpay-sdk-merchant (0.0.1)
+      afterpay-sdk-core (~> 0.0.1)
     bergen (0.0.1)
       aasm (~> 4.10.0)
       admin_ui
@@ -267,8 +272,6 @@ GEM
     business_time (0.7.4)
       activesupport (>= 3.1.0)
       tzinfo
-    byebug (4.0.5)
-      columnize (= 0.9.0)
     cancan (1.6.8)
     capybara (2.5.0)
       mime-types (>= 1.16)
@@ -305,7 +308,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
-    columnize (0.9.0)
     compass (1.0.3)
       chunky_png (~> 1.2)
       compass-core (~> 1.0.2)
@@ -547,7 +549,6 @@ GEM
       json (>= 1.7.7)
     mastercard_api (0.0.1)
     mastercard_masterpass_api (0.0.1)
-    method_source (0.8.2)
     mime-types (1.25.1)
     money (5.1.1)
       i18n (~> 0.6.0)
@@ -560,7 +561,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
     netrc (0.10.3)
-    newrelic_rpm (3.12.0.288)
+    newrelic_rpm (3.16.3.323)
     nokogiri (1.5.11)
     nori (1.1.5)
     oa-core (0.3.2)
@@ -613,12 +614,6 @@ GEM
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.5)
-    pry (0.10.1)
-      coderay (~> 1.1.0)
-      method_source (~> 0.8.1)
-      slop (~> 3.4)
-    pry-rails (0.3.4)
-      pry (>= 0.9.10)
     psych (2.0.13)
     puma (3.4.0)
     quiet_assets (1.1.0)
@@ -751,9 +746,10 @@ GEM
       activesupport (>= 3.0.0)
     show_me_the_cookies (3.1.0)
       capybara (~> 2.0)
-    sidekiq (4.1.2)
+    sidekiq (4.2.2)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
+      rack-protection (~> 1.5)
       redis (~> 3.2, >= 3.2.1)
     signet (0.6.0)
       addressable (~> 2.3)
@@ -764,10 +760,6 @@ GEM
     simple_form (2.1.3)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    sinatra (1.4.6)
-      rack (~> 1.4)
-      rack-protection (~> 1.4)
-      tilt (>= 1.3, < 3)
     sitemap_generator (5.0.5)
       builder
     skylight (0.10.3)
@@ -781,7 +773,6 @@ GEM
       activesupport (>= 3.1, < 5.0)
       railties (>= 3.1, < 5.0)
       slim (~> 3.0)
-    slop (3.6.0)
     spreadsheet (1.0.3)
       ruby-ole (>= 1.0)
     spree_banner (1.3.0)
@@ -855,8 +846,6 @@ GEM
     xml-simple (1.1.5)
     xpath (2.0.0)
       nokogiri (~> 1.3)
-    zeus (0.15.4)
-      method_source (>= 0.6.7)
 
 PLATFORMS
   ruby
@@ -879,7 +868,6 @@ DEPENDENCIES
   bower-rails (~> 0.10.0)
   bullet
   business_time
-  byebug
   canonical-rails!
   capybara (~> 2.5.0)
   capybara-screenshot (~> 1.0.11)
@@ -920,7 +908,6 @@ DEPENDENCIES
   pg
   pin_payment
   poltergeist (~> 1.9.0)
-  pry-rails
   psych (~> 2.0.13)
   puma
   quiet_assets
@@ -944,9 +931,8 @@ DEPENDENCIES
   sentry-raven
   shoulda-matchers
   show_me_the_cookies (~> 3.1.0)
-  sidekiq (= 4.1.2)
+  sidekiq (= 4.2.2)
   simple_form
-  sinatra
   sitemap_generator
   slim
   slim-rails
@@ -968,7 +954,6 @@ DEPENDENCIES
   vcr (~> 2.9.3)
   webmock (~> 1.21.0)
   whenever
-  zeus
 
 RUBY VERSION
    ruby 2.1.6p336

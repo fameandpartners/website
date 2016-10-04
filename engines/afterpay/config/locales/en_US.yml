@@ -1,0 +1,4 @@
+en-US:
+  afterpay:
+    payment_processing:
+      error: 'Afterpay payment failed, please try again later.'

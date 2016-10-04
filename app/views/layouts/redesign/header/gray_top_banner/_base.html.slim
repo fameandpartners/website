@@ -40,6 +40,9 @@ ruby:
         span.wedding.js-open-nav-menu FAME WEDDINGS
       span.lookbook.js-open-nav-menu LOOKBOOKS
 
+      span.blog
+        a href='http://blog.fameandpartners.com' target='_blank' BLOG
+
     .col-md-3.nav-icons.text-right
       span.search-wrapper#search
         a.icon.icon-search.js-search-trigger href="javascript:;"
@@ -68,7 +71,7 @@ ruby:
           .btn-wrap
             = link_to 'SHOP ALL NEW THIS WEEK', build_taxon_path('New This Week'), class: "btn btn-black btn-md"
 
-    .rect#rect-dresses.nav-menu-wrap.menu-dresses
+    .rect#rect-dresses.nav-menu-wrap.menu-dresses.grid-img-cta-nav
       .row
 
         .col-md-2.dresses-shop-by
@@ -81,16 +84,27 @@ ruby:
             li.title Style
             = render partial: 'layouts/redesign/mega_menu/style'
 
-        .col-md-3.dresses-color
-          .two-cols
-            .title Color
+        .col-md-2.dresses-color
+          ul
+            li.title Color
             = render partial: 'layouts/redesign/mega_menu/color'
 
-        .col-md-4.dresses-events
+        .col-md-3.dresses-events
           .two-cols
             .title Dress Code
             = render partial: 'layouts/redesign/mega_menu/dress_code'
 
+        .col-md-3
+          .skirts-collection.nav-item
+            = link_to skirts_collection_landing_page_path
+              = image_tag 'mega-menu/shop-by/skirts.jpg', class: 'img-responsive', alt: ''
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .cta-wrap
+                      span.cta-copy.cta-link-white-bg
+                        span.cta-link Introducing
+                        span.copy-highlight  SKIRTS
 
     .rect#rect-wedding.nav-menu-wrap.menu-wedding.grid-img-cta-nav
       .row
@@ -105,6 +119,6 @@ ruby:
             = render partial: 'layouts/redesign/mega_menu/lookbook'
 
         .col-md-7.lookbook-banner
-          = link_to gown_collection_landing_page_path, class: 'panel-highlight media-wrap'
-            = image_tag 'lookbook/Gown-MegaMenu-2016-09-08.jpg'
-            .copy-wrap Gowns Collection <em><span>View this collection</span></em>
+          = link_to skirts_collection_landing_page_path, class: 'panel-highlight media-wrap'
+            = image_tag 'lookbook/skirts-collection-megamenu-2016-09-28.jpg'
+            .copy-wrap The Skirts Collection <em><span>View this collection</span></em>

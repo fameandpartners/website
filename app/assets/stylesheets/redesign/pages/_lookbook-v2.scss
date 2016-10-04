@@ -57,6 +57,25 @@
 
   }
 
+  .section-steps-customize {
+    background: $c-neutral-3;
+    margin: 30px 0;
+    text-align: center;
+
+    ul {
+      margin: 0;
+
+      li {
+        font-size: 2rem;
+        font-family: $font-heading;
+        display: inline-block;
+        padding: 30px 40px 30px 0;
+      }
+
+    }
+
+  }
+
   .content-copy:not(.vertical-align) {
 
     h3 {
@@ -147,10 +166,7 @@
 
       section {
         margin-top: 15px;
-      }
-
-      .content-img img {
-        padding: 0 0 0 10%;
+        padding-left: 75px
       }
 
       .content-copy {
@@ -164,6 +180,16 @@
       .local-navigation-vertical {
         top: $fixed-header-with-locale-warn;
         position: fixed;
+      }
+
+      .landscape-view {
+
+        .content-copy {
+          padding-top: 35px;
+          padding-left: 40px;
+          padding-right: 40px;
+        }
+
       }
 
     }
@@ -212,6 +238,10 @@
         padding-top: 32px;
       }
 
+      .landscape-view .content-copy {
+        padding-bottom: 52px;
+      }
+
     }
 
     .cta-wrapper,
@@ -228,6 +258,20 @@
     // To make the grid look better let's hide the last product only if it's an odd item.
     .products-collections .category--item:last-child:nth-child(odd) {
       display: none;
+    }
+
+    .section-steps-customize {
+
+      ul {
+        padding: 25px 0;
+
+        li {
+          display: block;
+          padding: 5px 0;
+        }
+
+      }
+
     }
 
   }

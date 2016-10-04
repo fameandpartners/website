@@ -1,67 +1,104 @@
 // HOMEPAGE HERO CAROUSEL
 
 // Carousel Item 1
-= link_to gown_collection_landing_page_path, class: 'main-hero-wrap hero-wrap copy-left white-text', data: { description: 'The Gown Collection' }
+- current_tile_image = "homepage/hero-featured/sept-29-featured-1.jpg"
+- current_tile_image_mob = "homepage/hero-featured/sept-29-featured-1-mob.jpg"
+
+= link_to skirts_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Skirts Collection" }
   picture.media-wrap
-    source media='(max-width: 1023px)' srcset='#{image_path('homepage/hero-featured/sept-8-featured-1-mob.jpg')}'
-    source media='(min-width: 1024px)' srcset='#{image_path('homepage/hero-featured/sept-8-featured-1.jpg')}'
-    img src='#{image_path('homepage/hero-featured/sept-8-featured-1.jpg')}' srcset='
-      #{image_path("homepage/hero-featured/sept-8-featured-1-mob.jpg")} 1023w,
-      #{image_path("homepage/hero-featured/sept-8-featured-1.jpg")} 1024w'
+    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+    img src="#{image_path(current_tile_image)}" srcset="
+      #{image_path(current_tile_image_mob)} 991w,
+      #{image_path(current_tile_image)} 992w"
 
   .content-wrap
-    .container
-      .row
-        .col-md-4.col-lg-3
-          .copy-wrap
-            h2.heading.no-margin-md
-              span The Gown Collection.
-              span.sub-heading
-                | The only place where you can co-design the perfect gown. What does yours look like?
-            .cta-wrapper
-              span.btn-md.btn-featured
-                | Design <span class="copy-highlight">YOUR DRESS</span>
-
-// Carousel Item 2
-= link_to it_girl_landing_page_path, class: 'main-hero-wrap hero-wrap copy-left', data: { description: 'The It Girl Collection' }
-  picture.media-wrap
-    source media='(max-width: 1023px)' srcset='#{image_path('homepage/hero-featured/aug-29-featured-1-mob.jpg')}'
-    source media='(min-width: 1024px)' srcset='#{image_path('homepage/hero-featured/aug-29-featured-1.jpg')}'
-    img src='#{image_path('homepage/hero-featured/aug-29-featured-1.jpg')}' srcset='
-      #{image_path("homepage/hero-featured/aug-29-featured-1-mob.jpg")} 1023w,
-      #{image_path("homepage/hero-featured/aug-29-featured-1.jpg")} 1024w'
-
-  .content-wrap
-    .container
+    .container-fluid
       .row
         .col-md-3.col-md-offset-9
           .copy-wrap
             h2.heading.no-margin-md
-              span Modern Classics
+              span <em>Skirts!</em><br class="hidden-xs hidden-sm"> The debut.
               span.sub-heading
-                | The silhouettes you love. The freedom to create a look that's all your own.
+                | The search for the perfect skirt is over. <br class="visible-xs visible-sm">Introducing Fame's first-ever (<em>customizable</em>) <span>Skirts Collection</span>.
             .cta-wrapper
               span.btn-md.btn-featured
-                | Start <span class="copy-highlight">Customizing</span>
+                | Shop <span class="copy-highlight">SKIRTS</span>
 
-// Carousel Item 3
-= link_to dress_for_wedding_page_path, class: 'main-hero-wrap hero-wrap copy-left', data: { description: 'Love Blooms Eternal' }
+// Carousel Item 2
+- current_tile_image = "homepage/hero-featured/sept-29-featured-2.jpg"
+- current_tile_image_mob = "homepage/hero-featured/sept-29-featured-2-mob.jpg"
+
+= link_to gown_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left white-text", data: { description: "The Gown Collection" }
   picture.media-wrap
-    source media='(max-width: 1023px)' srcset='#{image_path('homepage/hero-featured/aug-29-featured-2-mob.jpg')}'
-    source media='(min-width: 1024px)' srcset='#{image_path('homepage/hero-featured/aug-29-featured-2.jpg')}'
-    img src='#{image_path('homepage/hero-featured/aug-29-featured-2.jpg')}' srcset='
-      #{image_path("homepage/hero-featured/aug-29-featured-2-mob.jpg")} 1023w,
-      #{image_path("homepage/hero-featured/aug-29-featured-2.jpg")} 1024w'
+    source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+    source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+    img src="#{image_path(current_tile_image)}" srcset="
+      #{image_path(current_tile_image_mob)} 991w,
+      #{image_path(current_tile_image)} 992w"
 
   .content-wrap
     .container
       .row
-        .col-md-4
+        .col-md-4.col-md-offset-8
           .copy-wrap
             h2.heading.no-margin-md
-              span Love Blooms Eternal.
+              span What's your gown style?
               span.sub-heading
-                | Don't blame us if it's love at first sight. <br>Shop the Weddings Collection.
+                | Discover your look and design <br class="hidden-md hidden-sm hidden-xs">a dress that screams your name.
             .cta-wrapper
               span.btn-md.btn-featured
-                | Say <span class="copy-highlight">I do</span>
+                | Find <span class="copy-highlight">MY GOWN</span>
+
+// Carousel Item 3
+- if current_site_version.is_australia?
+  // AUSTRALIA
+  - current_tile_image = "homepage/hero-featured/sept-29-featured-3-au.jpg"
+  - current_tile_image_mob = "homepage/hero-featured/sept-29-featured-3-au-mob.jpg"
+
+  = link_to spring_racing_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Spring Racing Collection" }
+    picture.media-wrap
+      source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+      source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+      img src="#{image_path(current_tile_image)}" srcset="
+        #{image_path(current_tile_image_mob)} 991w,
+        #{image_path(current_tile_image)} 992w"
+
+    .content-wrap
+      .container
+        .row
+          .col-md-4.col-md-offset-7
+            .copy-wrap
+              h2.heading.no-margin-md
+                span Nadia Fairfax <br class="hidden-md hidden-sm hidden-xs">for the win.
+                span.sub-heading
+                  | Get inspired by Nadia's Spring Racing <br class="hidden-md hidden-sm hidden-xs">edit, then customize your own look.
+              .cta-wrapper
+                span.btn-md.btn-featured
+                  | Pick <span class="copy-highlight">A Winner</span>
+
+- else
+  // USA
+  - current_tile_image = "homepage/hero-featured/sept-29-featured-3.jpg"
+  - current_tile_image_mob = "homepage/hero-featured/sept-29-featured-3-mob.jpg"
+
+  = link_to cocktail_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Cocktail Collection" }
+    picture.media-wrap
+      source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+      source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+      img src="#{image_path(current_tile_image)}" srcset="
+        #{image_path(current_tile_image_mob)} 991w,
+        #{image_path(current_tile_image)} 992w"
+
+    .content-wrap
+      .container
+        .row
+          .col-md-5.col-lg-4
+            .copy-wrap
+              h2.heading.no-margin-md
+                span Your signature cocktail dress.
+                span.sub-heading
+                  | Update your collection of cocktail attire with a look made just for you.
+              .cta-wrapper
+                span.btn-md.btn-featured
+                  | Start <span class="copy-highlight">Customizing</span>

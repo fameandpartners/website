@@ -123,6 +123,10 @@ ruby:
               = render partial: 'layouts/redesign/mega_menu/style'
 
               li.grey-item
+                .text COLOR
+              = render partial: 'layouts/redesign/mega_menu/color'
+
+              li.grey-item
                 .text DRESS CODE
               = render partial: 'layouts/redesign/mega_menu/dress_code'
 
@@ -150,10 +154,11 @@ ruby:
                 i.fa.fa-chevron-left
                 .back BACK
             li.manu-content
-              = link_to gown_collection_landing_page_path
+              = link_to skirts_collection_landing_page_path
                 .panel-highlight.media-wrap
-                  = image_tag 'lookbook/Gown-MegaMenu-2016-09-08.jpg'
-                  .copy-wrap Gowns Collection <em><span>View this collection</span></em>
+                  = image_tag 'lookbook/skirts-collection-megamenu-2016-09-28.jpg', alt: ""
+                  .copy-wrap The Skirts Collection <em><span>View this collection</span></em>
+
             = render partial: 'layouts/redesign/mega_menu/lookbook'
 
         div#moodboards-menu
@@ -195,6 +200,8 @@ ruby:
             .text LOOKBOOKS
             .arrow
               i.fa.fa-chevron-right
+          li.normal-item
+            a.text href='http://blog.fameandpartners.com' target='_blank' BLOG
           li.normal-item
             div
               = link_to 'ACCOUNT LOGIN', profile_path, class: 'text'

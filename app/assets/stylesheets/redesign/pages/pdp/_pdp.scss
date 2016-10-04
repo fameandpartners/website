@@ -8,10 +8,14 @@
     margin-top: 0;
   }
 
+  .h4 {
+    font-size: 2.2rem;
+  }
+
   p,
   li {
     font-family: $font-heading;
-    font-size: 1.125em;
+    font-size: 0.875em;
     font-weight: 300;
   }
 
@@ -127,134 +131,9 @@
     }
 
   }
-
-  .l-tab-your-way {
-
-    .keep-ratio {
-      margin-bottom: 30px;
-      padding-bottom: 127%;
-      background: $c-neutral-white;
-    }
-
-    .icon {
-      width: 25px;
-      height: auto;
-    }
-
-    p:last-child {
-      margin-bottom: 0;
-    }
-
-  }
-
-  .l-tab-fabric-information {
-
-    .icon {
-      display: block;
-      width: 50px;
-      height: auto;
-      margin-bottom: 10px;
-    }
-
-  }
-
-  .l-tab-inspiration {
-
-    .media-wrap {
-      margin-bottom: 30px;
-    }
-
-  }
   // END tabs
 
-  // START styling advice
-  .c-styling-advice {
-    padding: 30px 20px;
-    text-align: center;
-    background: $c-neutral-2;
-
-    .row {
-      margin-left: -5px;
-      margin-right: -5px;
-    }
-
-    [class^="col-"] {
-      padding-left: 5px;
-      padding-right: 5px;
-    }
-
-    h2 {
-      margin-bottom: 30px;
-    }
-
-    p {
-      margin-bottom: 30px;
-      font-size: 1em;
-      line-height: 1.2;
-    }
-
-    .media-wrap {
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      padding: 10px;
-      font-size: 0.625em
-    }
-
-    .icon {
-      display: inline-block;
-      width: 20px;
-      height: auto;
-    }
-
-  }
-
-  .dress-more .heading {
-    padding: 10px 0;
-  }
-
-  .c-product {
-    position: relative;
-    display: block;
-    margin-bottom: 30px;
-    text-align: center;
-
-    .details-wrap {
-      padding: 0 10%;
-    }
-
-    .product-name {
-      font-size: 1.125em;
-      font-weight: 500;
-    }
-
-    @media (min-width: $bootstrap-md-width) {
-
-      .details-wrap {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba($c-neutral-white, 0.75);
-        opacity: 0;
-        transition: opacity 200ms linear;
-      }
-
-      &:hover .details-wrap,
-      &:focus .details-wrap,
-      &:active .details-wrap {
-        opacity: 1;
-      }
-
-    }
-
-  }
-  // END styling advice
-
   // START side panels
-
   .heading-secondary {
     margin: 40px 0 30px;
     padding-bottom: 2px;
@@ -404,6 +283,51 @@
 
   }
 
+  @media (min-width: 1400px) {
+
+    .container {
+      width: 1370px;
+    }
+
+    .pdp-panel-side-left {
+      padding-right: 30px;
+    }
+
+    .pdp-panel-side-right {
+      padding-left: 30px;
+    }
+
+  }
+
+  .section-box .item {
+    margin-bottom: 30px;
+
+    .summary {
+      font-size: 0.875em;
+    }
+
+    .summary,
+    .cta-link-arrow-right {
+      display: block;
+      margin-bottom: 15px;
+    }
+
+  }
+
+  .section-instagram {
+    margin-top: 15px;
+    padding-bottom: 35px;
+
+    .instagram-widget .item {
+      padding: 5px;
+    }
+
+    .btn-featured {
+      margin-top: 0;
+    }
+
+  }
+
   @media (max-width: $bootstrap-md-width - 1px) {
 
     padding-top: 0;
@@ -423,10 +347,6 @@
         margin-bottom: 30px;
       }
 
-      .est-delivery {
-        margin-bottom: 40px;
-      }
-
       .price {
         margin-bottom: 15px;
         text-align: center;
@@ -440,12 +360,16 @@
 
     }
 
+    .section-box .item h3 {
+      margin-top: 0;
+    }
+
   }
 
   @media (min-width: $bootstrap-md-width) {
 
     .panel-side-container {
-      padding-top: $mega-menu-desktop-height;
+      padding-top: 40px;
     }
 
     .panel-side-wrap {

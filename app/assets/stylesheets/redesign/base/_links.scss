@@ -1,14 +1,17 @@
 /* [Links]
 -------------------------------------------------------*/
 a {
+  color: $c-neutral-black;
 
   &:hover {
     text-decoration: none;
+    color: $c-neutral-black;
   }
 
   &:focus {
     text-decoration: none;
     outline: none;
+    color: $c-neutral-black;
   }
 
 }
@@ -51,5 +54,17 @@ a {
       padding-left: 3px;
       font-size: 1rem;
     }
+
+}
+
+.cta-highlight {
+
+  .label-default {
+    background-color: $c-neutral-black;
+    padding: 1px 5px;
+    font-size: 1rem;
+    vertical-align: 2px;
+    border-radius: 0;
+  }
 
 }

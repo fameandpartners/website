@@ -146,15 +146,12 @@
   // Same-height columns
   .same-height-cols {
 
+    > .row {
+      @include display-flex;
+    }
+
     > .row > div[class*='col-'] {
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-flex: auto;
-      -ms-flex: auto;
-      flex: auto;
+      @include display-flex;
     }
 
   }

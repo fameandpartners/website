@@ -105,12 +105,12 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     if state == 'loading'
       row.find('.loading').show()
     else if state == 'inactive'
-      row.find('.inactive').show()
+      row.hide()
     else # active
       if @products_on_page < @total
         row.find('.active').show()
       else
-        row.find('.inactive').show()
+        row.hide()
 
   update: () =>
     @source_path = '/dresses' if @reset_source
