@@ -20,8 +20,7 @@ module Afterpay
       payment_status, payment_id = begin
         payment_details = provider.direct_capture_payment(token: params[:orderToken])
         payment_details.values_at('status', 'id')
-      rescue Afterpay::SDK::Core::Exceptions::ClientError => e
-        Raven.capture_exception(e)
+      rescue Afterpay::SDK::Core::Exceptions::ClientError => _
         nil
       end
 
