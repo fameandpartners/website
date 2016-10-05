@@ -134,6 +134,16 @@
   }
 
   // Payment page
+  .terms-note {
+    text-align: center;
+    color: $c-neutral-8;
+
+    a {
+      color: inherit;
+    }
+
+  }
+
   .payment-option-grid {
     text-align: center;
     margin-bottom: 30px;
