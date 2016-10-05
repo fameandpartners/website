@@ -160,12 +160,17 @@
 
   }
 
-  .credit-card-flags img.card-flags {
-    position: absolute;
-    right: 0;
-    margin-right: 30px;
-    bottom: 12px;
-    height: 20px;
+  .credit-card-flags {
+    display: block;
+
+    img.card-flags {
+      position: absolute;
+      right: 0;
+      margin-right: 30px;
+      bottom: 12px;
+      height: 20px;
+    }
+
   }
 
 }
