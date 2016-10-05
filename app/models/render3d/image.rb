@@ -1,18 +1,17 @@
 module Render3d
   class Image < ActiveRecord::Base
-    belongs_to :spree_product, class_name: 'Spree::Product'
+    belongs_to :product, class_name: 'Spree::Product'
     belongs_to :customisation_value
     belongs_to :product_color_value
 
     validates :customisation_value,
               :product_color_value,
-              :spree_product,
+              :product,
               presence: true
 
     validates_attachment_presence :attachment
-    validate :no_attachment_errors
 
-    attr_accessible :alt, :attachment, :position, :viewable_type, :viewable_id
+    attr_accessible :attachment
 
     has_attached_file :attachment,
                       :styles => { :mini => '48x48>', :small => '100x100>', :product => '240x240>', :large => '600x600>' },
