@@ -17,12 +17,12 @@ module Afterpay
     # - => Else
     # - Redirect to order checkout state path
     def new
-      payment_status, payment_id = begin
-        payment_details = provider.direct_capture_payment(token: params[:orderToken])
-        payment_details.values_at('status', 'id')
+      payment_details = begin
+        provider.direct_capture_payment(token: params[:orderToken])
       rescue Afterpay::SDK::Core::Exceptions::ClientError => _
-        nil
+        {}
       end
+      payment_status, payment_id = payment_details.values_at('status', 'id')
 
       if payment_status == AFTERPAY_APPROVED_PAYMENT
         afterpay_source = Spree::CreditCard.create(
