@@ -24,15 +24,15 @@ ruby:
     .credit-card-input
 
       .credit-card-flags
-        = image_tag 'checkout/visa_mc_logos.png', class: "img-responsive"
+        = image_tag 'checkout/visa_mc_logos.png', class: "card-flags"
 
       - if is_masterpass
         = text_field_tag "#{param_prefix}[filtered_number]", accountNumber,
-                         id: 'number', readonly: true, tabindex: '1', type: 'number',
+                         id: 'number', readonly: true, tabindex: '1',
                          class: "#{options_hash[:class]} no-post"
         = hidden_field_tag "#{param_prefix}[number]", realAccountNumber
       - else
-        = text_field_tag "#{param_prefix}[number]", '', options_hash.merge(id: 'number', type: 'number', tabindex: '1')
+        = text_field_tag "#{param_prefix}[number]", '', options_hash.merge(id: 'number', tabindex: '1', minlength: '12', maxlength: '19')
 
 .row
   .col-md-12.form-group
@@ -41,7 +41,7 @@ ruby:
         label for=""  Expiry Date
         = text_field_tag "#{param_prefix}[month]",
                          is_masterpass ? @masterpass_data[:card][:expiryMonth] : '',
-                         id: 'month', placeholder: 'MM', tabindex: '2', min: '1', max: '12', type: 'number',
+                         id: 'month', placeholder: 'MM', tabindex: '2', min: '1', max: '12',
                          maxlength: 2, class: "month #{ options_hash[:class]}",
                          readonly: is_masterpass
       .slash
@@ -50,14 +50,14 @@ ruby:
         label &nbsp;
         = text_field_tag "#{param_prefix}[year]",
                          is_masterpass ? @masterpass_data[:card][:expiryYear] : '',
-                         id: 'year', placeholder: 'YYYY', tabindex: '3', type: 'number',
+                         id: 'year', placeholder: 'YYYY', tabindex: '3',
                          maxlength: 4, class: "year #{ options_hash[:class]}",
                          readonly: is_masterpass
       - if !is_masterpass
         .col-xs-4.col-md-4.form-group.card_code
           label CVC
           = text_field_tag "#{param_prefix}[verification_value]", '',
-                           id: 'card_code', class: "cvv #{ options_hash[:class]}", :size => 5, maxlength: 3, type: 'number', tabindex: '4'
+                           id: 'card_code', class: "cvv #{ options_hash[:class]}", :size => 5, maxlength: 3, tabindex: '4'
 
 .row
   .col-xs-12.form-group.place-order

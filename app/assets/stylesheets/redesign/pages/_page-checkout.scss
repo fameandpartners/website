@@ -158,22 +158,14 @@
       border-left: 0;
     }
 
-    .credit-card-input {
-      border: 1px solid $c-neutral-5;
+  }
 
-      .credit-card-flags {
-        float: right;
-        width: 15%;
-        padding: 12px 10px;
-      }
-
-      input {
-       width: 85%;
-       border: 0 !important;
-      }
-
-    }
-
+  .credit-card-flags img.card-flags {
+    position: absolute;
+    right: 0;
+    margin-right: 30px;
+    bottom: 12px;
+    height: 20px;
   }
 
 }

@@ -72,12 +72,6 @@ $order-summary-bg: #f7f7f9;
       margin-right: -5px;
     }
 
-    .card_code {
-      @media(max-width: 480px){
-        clear: both;
-      }
-    }
-
     // Style the default bootstrap panel classes.
     // TODO - use semantic classes and extend the bootstrap ones.
     .payment-selection {
