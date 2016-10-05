@@ -41,8 +41,8 @@
     font-size: 0.75em;
 
     &:not(:first-child) {
-      margin-left: 4px;
-      padding: 0 0 0 4px;
+      margin-left: 10px;
+      padding: 0 0 0 10px;
       border-left: solid $c-neutral-8 1px;
     }
 
@@ -62,7 +62,6 @@
     text-align: center;
     font-family: $font-heading;
     font-weight: 300;
-    font-size: 0.75em;
     font-style: italic;
   }
 

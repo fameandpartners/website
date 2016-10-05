@@ -107,7 +107,10 @@ class CtaPrice extends React.Component {
               );
             }
           })()}
-        <div className="est-delivery">Estimated delivery 1-2 weeks</div>
+        <ul className="est-delivery">
+          <li>Free Shipping</li>
+          <li>Estimated delivery 1-2 weeks</li>
+        </ul>
         <Modal
           style={MODAL_STYLE}
           className="md"
