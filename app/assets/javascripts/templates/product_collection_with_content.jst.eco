@@ -63,6 +63,6 @@
 
 <% if @collection.total_products > @collection.products.length:  %>
   <div class="row relative more-products">
-    <a href="#" class="btn btn-black" data-action='show-more-collection-products'>More Dresses<a>
+    <a href="#" class="btn btn-featured" data-action='show-more-collection-products'>More Dresses<a>
   </div>
 <% end %>

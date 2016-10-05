@@ -19,7 +19,8 @@
   a {
     display: block;
     padding: 4px;
-    border: solid $c-neutral-8 1px;
+    background: $c-neutral-white;
+    border: solid $c-neutral-4 1px;
   }
 
   .current a {
@@ -29,7 +30,7 @@
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
-    bottom: -68px;
+    bottom: 0;
 
     li {
       padding: 10px;
