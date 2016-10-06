@@ -20,16 +20,8 @@ class Products::DetailsResource
     @product      = find_product!(options[:slug], options[:permalink], options[:product])
   end
 
-  def cache_key
-    "product-details-#{ site_version.try(:permalink) }-#{ product.permalink }"
-  end
-
-  def cache_expiration_time
-    configatron.cache.expire.long
-  end
-
   def read
-    Rails.cache.fetch(cache_key, expires_in: cache_expiration_time, force: Rails.env.development?) do
+    Rails.cache.fetch([site_version, product]) do
       Products::Presenter.new({
         id:                                  product.id,
         master_id:                           product.master.try(:id),
