@@ -40,10 +40,6 @@ class SelectionOptions
         is_free: Spree::Config[:free_customisations]
       }),
 
-      render3d_images: OpenStruct.new({
-        all: available_product_render3d_images
-      }),
-
       making_options: product_making_options
     })
   end
@@ -141,26 +137,6 @@ class SelectionOptions
     # making options
     def product_making_options
       product.making_options.to_a
-    end
-
-    def available_product_render3d_images
-      if product.property('render3d')
-        render3d_images = Render3d::Images.where(product_id: product.id)
-
-        render3d_images.each_with_object({}) do |image, hash|
-          hash[image.product_color_value_id] ||= {}
-          hash[image.product_color_value_id][image.customisation_value_id] = {
-            id: image.id,
-            original: image.attachment.url(:original),
-            product: image.attachment.url(:product),
-            large: image.attachment.url(:large),
-            xlarge: image.attachment.url(:xlarge),
-            small: image.attachment.url(:small)
-          }
-        end
-      else
-        {}
-      end
     end
 
   end
