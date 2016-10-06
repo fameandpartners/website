@@ -19,8 +19,5 @@ module Render3d
                       :url => '/spree/products/:id/render3d/:style/:basename.:extension',
                       :path => ':rails_root/public/spree/products/render3d/:id/:style/:basename.:extension',
                       :convert_options => { :all => '-strip -auto-orient' }
-
-    include Spree::Core::S3Support
-    supports_s3 :attachment
   end
 end
