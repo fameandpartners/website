@@ -16,7 +16,7 @@ ruby:
           var $afterpayErrorMessage = $("p.afterpay-error");
 
           $.get(getTokenUrl, function (response) {
-            $afterpayButton.text('Continue With Afterpay');
+            $afterpayButton.html('Pay with #{image_tag("checkout/logo/afterpay-logo-no-icon-white.png")}');
             $afterpayButton.on('click', function () {
               AfterPay.init();
               AfterPay.display({token: response.token});
@@ -28,40 +28,29 @@ ruby:
         });
       })(jQuery);
 
-  .panel.panel-afterpay
-    .panel-heading
-      h4.panel-title
-        'Afterpay
-        .pull-right
-          = image_tag '_afterpay/logo-sml.png', height: '22px'
-    .panel-collapse.in
-      .panel-body.text-center
-        h4
-          | Four fortnightly interest free payments totalling
-          em =<> afterpay.order_total_text
-        .payments.hidden-xs.hidden-sm
-          .payment
-            .to-pay = afterpay.single_installment_text
-            .time-period First payment
-          .separator +
-          .payment
-            .to-pay = afterpay.single_installment_text
-            .time-period In 2 weeks
-          .separator +
-          .payment
-            .to-pay = afterpay.single_installment_text
-            .time-period In 4 weeks
-          .separator +
-          .payment
-            .to-pay = afterpay.single_installment_text
-            .time-period In 6 weeks
-        .payments.hidden-md.hidden-lg
-          .payment
-            .to-pay = afterpay.single_installment_text
-            .time-period Fortnightly
-        h6 You will temporarily be redirected to the Afterpay website via a popup to complete your purchase
-        a.btn.btn-black.btn-md.open-afterpay-modal href='javascript:void(0);'
-          = image_tag 'loader-bg-black.gif'
-        p.text-danger.hidden.afterpay-error Afterpay is not available at the moment. Please, try another payment method.
-        div
-          = link_to 'Terms and conditions', 'https://www.afterpay.com.au/terms/', target: '_blank'
+h4
+  | Four fortnightly interest free payments totalling #{afterpay.order_total_text}
+.payments.hidden-xs.hidden-sm
+  .payment
+    .to-pay = afterpay.single_installment_text
+    .time-period First payment
+  .separator +
+  .payment
+    .to-pay = afterpay.single_installment_text
+    .time-period In 2 weeks
+  .separator +
+  .payment
+    .to-pay = afterpay.single_installment_text
+    .time-period In 4 weeks
+  .separator +
+  .payment
+    .to-pay = afterpay.single_installment_text
+    .time-period In 6 weeks
+.payments.row.hidden-md.hidden-lg
+  .payment.col-xs-12
+    .to-pay = afterpay.single_installment_text
+    .time-period Fortnightly
+p.hint Place your order and you will complete your purchase via the Afterpay pop-up.
+a.btn.btn-black.btn-md.btn-block.open-afterpay-modal.payment-cta href='javascript:void(0);'
+  = image_tag 'loader-bg-black.gif'
+p.text-danger.hidden.afterpay-error Afterpay is not available at the moment. Please, try another payment method.
