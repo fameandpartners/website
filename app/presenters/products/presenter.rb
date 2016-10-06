@@ -10,7 +10,7 @@ module Products
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
                   :size_chart, :making_option_id, :fit, :size, :standard_days_for_making, :customised_days_for_making,
                   :default_standard_days_for_making, :default_customised_days_for_making,
-                  :height_customisable, :fast_delivery
+                  :height_customisable, :fast_delivery, :render3d_images
 
     attr_writer :fast_making
 
@@ -123,8 +123,17 @@ module Products
     end
 
     def all_images
-      featured_images.collect do |img |
+      collected_featured_images + collected_render3d_images
+    end
+
+    def collected_featured_images
+      featured_images.collect do |img|
         { id: img.id, url: img.original, url_product: img.product, color_id: img.color_id, alt: name }
+      end
+
+    def collected_render3d_images
+      render3d_images.collect do |img|
+        { id: img.id, url: img.original, url_product: img.product, color_id: img.product_color_value_id, customization_id: img.customisation_value_id, alt: name }
       end
     end
 
