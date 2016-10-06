@@ -29,7 +29,7 @@
   .col-xs-12
     .payment-selection
     - if @credit_card_gateway
-      #credit_card_choice
+      #credit_card_choice.payment-selected
         = form_for @order, :url => update_checkout_path(@order.state), :remote => true, :html => { :class => ['payment_details form-global checkout-form', 'credit_card', @credit_card_gateway.class.name.demodulize.underscore] } do |form|
           - payment_failure = payment_failed_messages(@order.errors.full_messages.first.to_s)
           - if payment_failure
@@ -45,13 +45,9 @@
       = render 'checkout/v1/spree/checkout/payment/afterpay', spree_order: @order, afterpay_method: @afterpay_method
 
     - if @pay_pal_method
-      #paypal_choice.panel
-        .panel-heading
-          h4.panel-title PayPal
-        .panel-collapse.in
-          .panel-body
-            = paypal_express_button
-            p Place your order and you will complete your purchase via the Paypal.
+      #paypal_choice.text-center.payment-selected
+        p.hint Place your order and you will complete your purchase via the Paypal.
+        = paypal_express_button
 
     p.terms-note.text-center
         ' By making this purchase you are agreeing to the

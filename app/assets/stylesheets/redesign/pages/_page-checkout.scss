@@ -134,9 +134,11 @@
   }
 
   // Payment page
-  .terms-note {
+  .terms-note,
+  .hint {
     text-align: center;
     color: $c-neutral-8;
+    padding: 15px 0;
 
     a {
       color: inherit;
@@ -181,6 +183,12 @@
       height: 20px;
     }
 
+  }
+
+  .payment-cta.btn img {
+    height: 20px;
+    display: inline-block;
+    margin-top: -3px;
   }
 
 }
