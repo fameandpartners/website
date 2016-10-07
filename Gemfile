@@ -60,6 +60,7 @@ gem 'asset_sync', '~> 1.1.0'
 # Data
 gem 'event_sourced_record'
 gem 'coercible'
+gem 'reform', '~> 2.0.5'
 
 gem 'ipaddress'
 gem 'geoip', require: false
