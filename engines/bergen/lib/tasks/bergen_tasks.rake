@@ -9,6 +9,7 @@ namespace :bergen do
       end
     end
 
+    # each 30 minutes
     desc 'Update tracking numbers'
     task update_tracking_numbers: :environment do
       Bergen::Operations::ReturnItemProcess.not_failed.style_master_created.find_each do |return_item_process|

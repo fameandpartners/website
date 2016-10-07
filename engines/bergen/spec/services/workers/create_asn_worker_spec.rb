@@ -14,18 +14,13 @@ module Bergen
 
       before(:each) do
         return_item_process.style_master_was_created!
+        return_item_process.tracking_number_was_updated!
         allow(Date).to receive(:today).and_return(asn_date)
       end
 
       context 'given a return item process id' do
         let!(:shipment) { create :simple_shipment }
         let!(:inventory_unit) { create :inventory_unit, variant: variant, order: order, shipment: shipment }
-
-        before do
-          allow(return_request_item.item_return).to receive(:shippo_tracking_number).and_return('9205590164917300760642')
-          allow(return_request_item.item_return).to receive(:shippo_label_url).and_return('https://shippo-delivery-east.s3.amazonaws.com/some_url')
-          return_item_process.tracking_number_was_updated!
-        end
 
         it 'creates ASN, triggers item returns event sourcing and trigger next step' do
           shipment.order = order

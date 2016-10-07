@@ -24,8 +24,7 @@ module Bergen
 
       def create_asn_retrieval_event(asn_number)
         return_request_item.item_return.events.bergen_asn_created.create(
-          asn_number: asn_number,
-          shippo_label: return_request_item.item_return.shippo_label_url
+          asn_number: asn_number
         )
       end
 
