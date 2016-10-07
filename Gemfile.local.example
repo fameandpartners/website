@@ -1,0 +1,7 @@
+eval_gemfile File.expand_path('./Gemfile')
+
+# Add any gems and groups that you don't want to keep local
+group :development do
+  # gem 'zeus'
+  # gem 'byebug'
+end

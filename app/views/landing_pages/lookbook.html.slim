@@ -7,14 +7,18 @@
         .media-wrap-outer
           .media-wrap.keep-ratio
             .inner-wrap
-              = link_to gown_collection_landing_page_path
+              = link_to skirts_collection_landing_page_path
                 = image_tag "lookbook/featured-lookbook.jpg"
         .content-wrap
           .outer-wrap
             .inner-wrap
-              h1.heading.skin-light Gowns Collection
-              = link_to 'View this collection', gown_collection_landing_page_path, class: 'btn btn-md btn-black'
+              h1.heading.skin-light The Skirts Collection
+              = link_to 'View this collection', skirts_collection_landing_page_path, class: 'btn btn-md btn-black'
 
+    .col-md-6
+      = link_to gown_collection_landing_page_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/gown-collection.jpg"
+        .copy-wrap Gowns Collection <em><span>View this collection</span></em>
     .col-md-6
       = link_to dress_for_wedding_page_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/weddings-collection.jpg"
@@ -35,10 +39,6 @@
       = link_to the_ruffled_up_collection_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/Summer2016-MegaMenu-option2.jpg"
         .copy-wrap The Ruffled Up Collection <em><span>View this collection</span></em>
-    .col-md-6
-      = link_to partners_in_crime_collection_path, class: 'panel-highlight media-wrap'
-        = image_tag "lookbook/PartnersInCrime-MegaMenu-NewSize.jpg"
-        .copy-wrap Partners In Crime <em><span>View this collection</span></em>
 
     .col-md-12
       h2.title-line-on-sides
@@ -51,6 +51,12 @@
             = image_tag "lookbook/modern-romance-pc.jpg"
         .copy-wrap This Modern Romance
     .col-md-3.col-xs-6
+      = link_to partners_in_crime_collection_path, class: 'panel-compact'
+        .media-wrap.keep-ratio
+          .inner-wrap
+            = image_tag "lookbook/partnersincrime-pc.jpg"
+        .copy-wrap Partners In Crime
+    .col-md-3.col-xs-6
       = link_to photo_finish_collection_path, class: 'panel-compact'
         .media-wrap.keep-ratio
           .inner-wrap
@@ -62,9 +68,3 @@
           .inner-wrap
             = image_tag "lookbook/make-statement-pc.jpg"
         .copy-wrap Make A Statement
-    .col-md-3.col-xs-6
-      = link_to dance_hall_days_collection_path, class: 'panel-compact'
-        .media-wrap.keep-ratio
-          .inner-wrap
-            = image_tag "lookbook/dance-hall-pc.jpg"
-        .copy-wrap Dance Hall Days

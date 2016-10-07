@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160917100817) do
+ActiveRecord::Schema.define(:version => 20160921025247) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -795,6 +795,18 @@ ActiveRecord::Schema.define(:version => 20160917100817) do
     t.string   "public_key"
     t.string   "secret_key"
     t.string   "api_url"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  create_table "render3d_images", :force => true do |t|
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.integer  "spree_product_id"
+    t.integer  "customisation_value_id"
+    t.integer  "product_color_value_id"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end

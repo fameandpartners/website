@@ -1,13 +1,11 @@
 module Spree
   class Gateway
     class AfterpayPayment < Gateway
-      preference :merchant_id, :string, default: ''
-      preference :merchant_key, :string, default: ''
-      preference :server, :string, default: 'sandbox'
+      preference :username, :string, default: ''
+      preference :password, :string, default: ''
 
-      attr_accessible :preferred_merchant_id,
-                      :preferred_merchant_key,
-                      :preferred_server
+      attr_accessible :preferred_username,
+                      :preferred_password
 
       # Spree Gateway methods
 
@@ -20,9 +18,16 @@ module Spree
       end
 
       def provider_class
-        # TODO: Actual API wrapper here
-        # More information: https://github.com/spree/spree/blob/1-3-stable/core/app/models/spree/gateway.rb#L27
-        Spree::Gateway::Bogus
+        ::Afterpay::SDK::Merchant
+      end
+
+      def provider
+        ::Afterpay::SDK.configure(
+          mode: (preferred_server.presence || :sandbox).to_sym,
+          username: preferred_username,
+          password: preferred_password
+        )
+        provider_class.new
       end
 
       def currency
@@ -35,11 +40,8 @@ module Spree
 
       # Payment Actions
 
-      def purchase(amount, transaction_details, options = {})
-        # ActiveMerchant::Billing::Response.new(true, 'success', {}, {})
-        # TODO: here is where the magic happens
-
-        ActiveMerchant::Billing::Response.new(true, 'Bogus Gateway: Forced success', {}, test: true, authorization: '12345', avs_result: { code: 'A' })
+      def purchase(amount, payment_source, options = {})
+        ActiveMerchant::Billing::Response.new(true, 'AfterPay Gateway: Success', {}, authorization: payment_source.gateway_payment_profile_id)
       end
 
       def refund(payment, amount)

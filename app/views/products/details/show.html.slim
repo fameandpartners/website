@@ -81,6 +81,16 @@ form.hide-fully#pdpDataForWishlist
                     a href='#collapse-description' data-toggle='collapse' data-parent='#accordion' Description
                     #collapse-description.collapse.in role='tabpanel'
                       p = raw @product.description
+                      p SKU: #{@product.sku}
+                  .panel
+                    a href='#collapse-fabric' data-toggle='collapse' data-parent='#accordion' Fabric Information
+                    #collapse-fabric.collapse role='tabpanel'
+                      - if @product.fabric.present?
+                        h3.h5 Fabric
+                        = simple_format(@product.fabric)
+                        p Due to dying process, product hue may look slightly different from image.
+                      h3.h5 Garment Care
+                      p Professional dry-clean only. See label for further details.
                   .panel
                     a href='#collapse-about' data-toggle='collapse' data-parent='#accordion' About our model
                     #collapse-about.collapse role='tabpanel'
@@ -102,131 +112,60 @@ form.hide-fully#pdpDataForWishlist
 
               ul.btn-wrap
                 li Guaranteed Fit
-                li Free Shipping
                 li Easy Returns
 
       .col-md-6.panel-media
         #PdpGallery
         a.trigger-details.visible-xs.visible-sm.js-panel-side-left-toggle href='javascript:;' + DETAILS
 
-      .col-md-3
+      .col-md-3.pdp-panel-side-right
         .panel-side-wrap.js-panel-side-right
           // to enable affix data-spy='affix' to this container
           .panel-side
             #PdpSidePanelRight
 
-    // content bottom wrap START
-    // js class is used to get bottom offset for sticky side panel
-    .js-bottom-content
+  // content bottom wrap START
+  // js class is used to get bottom offset for sticky side panel
+  .js-bottom-content
+    .container
+      .section-box.same-height-cols
+        .row
+          .col-md-6
+            .item.bordered
+              .row
+                .col-md-5.item-copy
+                  h3 Styled by Fame – <em>for free</em>.
+                  p.summary Meet Amber Bond, Fame’s resident fashion guru. She’s here for whatever you need (personal shopping, wardrobe styling, fashion advice), however you need it (chat, phone, video, or even in person). Basically, she’s your closet’s new BFF.
+                  = link_to styling_session_path
+                    span.cta-link-arrow-right
+                      span.cta-link Book
+                      span.copy-highlight NOW
+                      i.icon.icon-arrow-right
+                .col-md-7
+                  = link_to styling_session_path
+                    picture.media-wrap
+                      source media='(max-width: 991px)' srcset='#{image_path("_pdp/tile-styling-advice-mob.jpg")}'
+                      source media='(min-width: 992px)' srcset='#{image_path("_pdp/tile-styling-advice.jpg")}'
+                      img src='#{image_path("_pdp/tile-styling-advice.jpg")}' srcset='
+                        #{image_path("_pdp/tile-styling-advice-mob.jpg")} 991w, #{image_path("_pdp/tile-styling-advice.jpg")} 992w'
+                      
+          .col-md-6
+            .item.bordered
+              .row
+                .col-md-5.item-copy
+                  h3 Create a look that’s <em>all your own</em>.
+                  p.summary Each Fame and Partners piece is completely customizable to suit your style. Start with a design you love, then use our customization menu to change the color, modify the details, and alter the fit to create a look that’s unique to you.
+                .col-md-7
+                  picture.media-wrap
+                    source media='(max-width: 991px)' srcset='#{image_path("_pdp/tile-modify-mob.jpg")}'
+                    source media='(min-width: 992px)' srcset='#{image_path("_pdp/tile-modify.jpg")}'
+                    img src='#{image_path("_pdp/tile-modify.jpg")}' srcset='
+                      #{image_path("_pdp/tile-modify-mob.jpg")} 991w, #{image_path("_pdp/tile-modify.jpg")} 992w'
 
-      // content tabs START
-      // these controls needs to be hidden for mobile
-      #content-tab-controls.row.hidden-xs.hidden-sm
-        .col-md-6.col-md-offset-3
-          ul.row.l-tab-controls.tab-content
-            li.col-md-4.active
-              a href='#tab-your-way' data-toggle='tab' Your Dress, Your Way
-            li.col-md-4
-              a href='#tab-fabric-information' data-toggle='tab' Fabric Information
-            li.col-md-4
-              a.js-tab-trigger-inspiration href='#dress-inspiration' data-toggle='tab' Dress Inspiration
-
-      #content-tabs.content-tabs.tab-content
-        #tab-your-way.row.tab-pane.in.active
-          .l-tab-your-way
-            .col-xs-6.col-md-2
-              .media-wrap.keep-ratio
-                .inner-wrap
-                  = image_tag src='_pdp/tile-style.jpg'
-            .col-xs-6.col-md-2
-              .media-wrap.keep-ratio
-                .inner-wrap
-                  .v-center
-                    .justify-content
-                      = image_tag src='_icons/dress.svg', class:'icon'
-                      h3.h4 Select your style
-                      p Sort by style, occasion, or collection to find the perfect piece
-            .col-xs-6.col-md-2
-              .media-wrap.keep-ratio
-                .inner-wrap
-                  = image_tag src='_pdp/tile-fabric.jpg'
-            .col-xs-6.col-md-2
-              .media-wrap.keep-ratio
-                .inner-wrap
-                  .v-center
-                    .justify-content
-                      = image_tag src='_icons/fabric.svg', class:'icon'
-                      h3.h4 Pick your fabric
-                      p Choose the color and composition that suit you best
-            .col-xs-6.col-md-2
-              .media-wrap.keep-ratio
-                .inner-wrap
-                  = image_tag src='_pdp/tile-modify.jpg'
-            .col-xs-6.col-md-2
-              .media-wrap.keep-ratio
-                .inner-wrap
-                  .v-center
-                    .justify-content
-                      = image_tag src='_icons/scissors.svg', class:'icon'
-                      h3.h4 Modify your dress
-                      p You design the details with our customization menu
-
-        #tab-fabric-information.row.tab-pane
-          .l-tab-fabric-information
-            .col-md-3.col-md-offset-3
-              - if @product.fabric.present?
-                h3.h4 Fabric & Trims
-                = simple_format(@product.fabric)
-                p Product may have variations in dying hues so product may look slightly different from image.
-            .col-md-3
-              h3.h4 Garment Care
-              = image_tag src='_icons/professional-dryclean.svg', class:'icon'
-              p
-                | Professional dry-clean only.
-                br
-                | See garment care label for further details on how to care for your garment.
-              p.sku SKU: #{@product.sku}
-
-        #dress-inspiration.row.tab-pane
-          .l-tab-inspiration
-            - if @product.song
-              .col-xs-6.col-sm-6.col-md-2
-                .media-wrap
-                  = image_tag @product.song.image_url
-            - if @product.celebrity && @product.celebrity.image_url
-              .col-xs-6.col-sm-6.col-md-2
-                .media-wrap
-                  = image_tag @product.celebrity.image_url
-            - @product.inspiration.each do |item|
-              .col-xs-6.col-sm-6.col-md-2
-                .media-wrap
-                  = image_tag item.image_url
-      // content tabs END
-
-      // content styling advice START
-      .row
-        .col-md-4
-          .c-styling-advice
-            h2 Get Free Styling Advice
-            p Let us help you to style your perfect outfit for any occasion. Meet Amber, one of the most influential stylists working today.
-            .media-wrap
-              = image_tag '_pdp/tile-styling-advice.jpg'
-            .row
-              .col-xs-6.col-sm-6.col-md-6
-                = image_tag '_icons/dress.svg', class:'icon'
-                h3.h5 Latest Trend Analysis
-                p Inside information on what’s happening now + the next big thing
-              .col-xs-6.col-sm-6.col-md-6
-                = image_tag '_icons/color-tailoring.svg', class:'icon'
-                h3.h5 Color & Tailoring Expertise
-                p Collaborate on a look that fits, flatters and celebrates you
-            = link_to 'Book your free styling session', styling_session_path, class:'btn btn-black'
-        .col-md-8
-          = render partial: 'related_products', locals: { product: @product }
-
-      // content styling advice END
-
-    // content bottom wrap END
+      = render partial: 'related_products', locals: { product: @product }
+      
+    = render partial: 'shop_social'
+  // content bottom wrap END
 
 = render partial: 'micro_data'
 
@@ -237,13 +176,6 @@ javascript:
     $('.js-panel-side-left-toggle').on('click', function() {
       $('.js-panel-side-left-details-trigger').toggleClass('is-active');
       $('body').toggleClass('no-scroll');
-    });
-
-    // bootstrap tab extension, will switch between tabs for desktop and
-    // accordion for mobile
-    $('#content-tab-controls').tabCollapse({
-      tabsClass: 'hidden-sm hidden-xs',
-      accordionClass: 'visible-sm visible-xs'
     });
 
     function initSticky() {
@@ -269,6 +201,15 @@ javascript:
       $('.js-panel-side-left').unstick();
       $('.js-panel-side-right').unstick();
     }
+    
+    function updateSticky() {
+      if(window.innerWidth >= 992) {
+        unstickSticky();
+        initSticky();
+      } else {
+        unstickSticky();
+      }
+    }
 
     // sticky side panel
     if(window.innerWidth >= 992) {
@@ -276,13 +217,8 @@ javascript:
     }
 
     // update on resize
-    $(window).resize(function() {
-      if(window.innerWidth >= 992) {
-        unstickSticky();
-        initSticky();
-      } else {
-        unstickSticky();
-      }
-    });
+    $(window).resize(updateSticky);
 
+    // update on accordion change
+    $('#accordion').on('shown.bs.collapse', updateSticky);
   });
