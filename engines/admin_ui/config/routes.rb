@@ -61,6 +61,10 @@ AdminUi::Engine.routes.draw do
     resources :pages
   end
 
+  namespace :logistics do
+    resources :bergen, only: [:index]
+  end
+
   root to: 'dashboard#index'
 
   mount ManualOrder::Engine, at: '/'
