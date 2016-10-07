@@ -46,7 +46,7 @@ module Bergen
         end
       end
 
-      describe('#update_tracking_number', :vcr) do
+      describe '#update_tracking_number', :vcr  do
         include_context 'return item ready to process'
 
         let(:shippo_tracking_number) { '9205590164917321211369' }
@@ -54,12 +54,12 @@ module Bergen
 
         before do
           return_item_process.style_master_was_created!
-          return_item_process.update_tracking_number
         end
 
-        it('should get shippo tracking number and label URL') do
-          expect(return_item_process.return_request_item.item_return.reload.shippo_tracking_number).to eql(shippo_tracking_number)
-          expect(return_item_process.return_request_item.item_return.reload.shippo_label_url).to eql(shippo_label_url)
+        it 'should get shippo tracking number and label URL'  do
+          return_item_process.update_tracking_number
+          expect(item_return.reload.shippo_tracking_number).to eql(shippo_tracking_number)
+          expect(item_return.reload.shippo_label_url).to eql(shippo_label_url)
         end
       end
     end
