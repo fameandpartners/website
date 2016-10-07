@@ -158,21 +158,29 @@
         border: 1px solid $c-neutral-5;
         border-radius: 0;
         background: none;
+        color: $c-neutral-black;
       }
 
-      &.active a {
+      // Only first element / Elements in the middle
+      &:first-child a,
+      &:nth-child(n+2):nth-last-child(n+1) a {
+        border-right-color: transparent;
+      }
+
+      // Single element / Last element if more than 2 elements are shown
+      &:only-child a,
+      &:nth-last-child(n+1) ~ .payment-option:last-child a {
+        border-right-color: $c-neutral-5;
+      }
+
+      // Active element / Single element
+      &.active a,
+      &:only-child a {
         border-bottom: 5px solid $c-neutral-black;
         padding-bottom: 15px;
+        color: $c-neutral-black;
       }
 
-    }
-
-    .payment-option:first-child a {
-      border-right: 0;
-    }
-
-    .payment-option:last-child a {
-      border-left: 0;
     }
 
   }

@@ -18,15 +18,18 @@
       = react_component('Delivery')
 
     ul.payment-option-grid.nav.nav-tabs.nav-justified role="tablist"
-      li.payment-option.active
-        a data-toggle="tab" href="#creditcard" aria-controls="creditcard" role="tab"
-          | Credit Card
-      li.payment-option
-        a data-toggle="tab" href="#afterpay" aria-controls="afterpay" role="tab"
-          | Afterpay
-      li.payment-option
-        a data-toggle="tab" href="#paypal" aria-controls="paypal" role="tab"
-          | Paypal
+      - if @credit_card_gateway
+        li.payment-option.active
+          a data-toggle="tab" href="#creditcard" aria-controls="creditcard" role="tab"
+            | Credit Card
+      - if @afterpay_method
+        li.payment-option
+          a data-toggle="tab" href="#afterpay" aria-controls="afterpay" role="tab"
+            | Afterpay
+      - if @pay_pal_method
+        li.payment-option
+          a data-toggle="tab" href="#paypal" aria-controls="paypal" role="tab"
+            | Paypal
 
 .row
   .col-xs-12
