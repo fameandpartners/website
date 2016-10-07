@@ -18,12 +18,11 @@ module Bergen
       }.freeze
 
 
-      attr_reader :client, :return_request_item, :tracking_number
+      attr_reader :client, :return_request_item
 
-      def initialize(savon_client:, return_request_item:, tracking_number:)
+      def initialize(savon_client:, return_request_item:)
         @client              = savon_client
         @return_request_item = return_request_item
-        @tracking_number     = tracking_number
       end
 
       def response
@@ -72,7 +71,7 @@ module Bergen
                 receiving_ticket.CustomerPO(order.number)
                 # receiving_ticket.LicensePlate('LP12')
                 # receiving_ticket.DriverName('Tom')
-                receiving_ticket.TrackingNumbers(tracking_number)
+                receiving_ticket.TrackingNumbers(return_request_item.item_return.shippo_tracking_number)
                 # receiving_ticket.ExpectedDate('02-16-2012')
 
                 receiving_ticket.SupplierDetails do |supplier|

@@ -112,6 +112,15 @@ class ItemReturnEvent < ActiveRecord::Base
     validates :factory_fault, presence: true
   end
 
+  attr_accessible :shippo_tracking_number, :shippo_label_url
+
+  event_type :tracking_number_updated do
+    attributes :shippo_tracking_number, :shippo_label_url
+
+    validates :shippo_tracking_number, presence: true
+    validates :shippo_label_url, presence: true
+  end
+
   # Bergen Processes
 
   BERGEN_ASN_ATTRIBUTES = [

@@ -121,4 +121,9 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
       @item_return.send("#{k}=", v)
     end
   end
+
+  def advance_tracking_number_updated(event)
+    @item_return.shippo_tracking_number = event.shippo_tracking_number
+    @item_return.shippo_label_url       = event.shippo_label_url
+  end
 end

@@ -14,6 +14,7 @@ module Bergen
 
       before(:each) do
         return_item_process.style_master_was_created!
+        return_item_process.tracking_number_was_updated!
         allow(Date).to receive(:today).and_return(asn_date)
       end
 
@@ -28,8 +29,7 @@ module Bergen
           worker.perform(return_item_process.id)
           asn_event = return_request_item.item_return.events.bergen_asn_created.first
 
-          expect(shipment.reload.tracking).to eq('9205590164917300760642')
-          expect(asn_event.data['asn_number']).to eq('WHRTN1044724')
+          expect(asn_event.data['asn_number']).to eq('WHRTN1110619')
           expect(return_item_process).to have_state(:asn_created)
         end
 
