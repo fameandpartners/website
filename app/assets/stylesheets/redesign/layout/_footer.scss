@@ -170,3 +170,51 @@ footer.main {
   // END - desktop
 
 }
+
+footer.footer-alt {
+  background: $gray-light-bg;
+  padding: 10px;
+  color: $c-neutral-black;
+  font-size: 0.9em;
+
+  .copyright {
+    font-family: $font-heading;
+    display: inline-block;
+  }
+
+  .links {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+
+    li {
+      display: inline-block;
+      padding: 0 20px;
+
+      a {
+        text-decoration: underline;
+        font-size: 1.3rem;
+        color: $c-neutral-12;
+      }
+
+    }
+
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    .links {
+      padding-left: 20px;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .links {
+      clear: both;
+    }
+
+  }
+
+}
