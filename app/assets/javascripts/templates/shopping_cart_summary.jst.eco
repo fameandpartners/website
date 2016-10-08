@@ -44,7 +44,26 @@
     <h3 class="heading">Your bag is empty</h3>
     <a href="<%= urlWithSitePrefix('/dresses/new-this-week') %>" class="link-underline-lighter cta-when-empty">Find some inspiration with what's new this week</a>
   </div>
+
+  <!-- Modal -->
+  <div class="modal fade js-trigger-empty-cart-modal" id="emptyCart" tabindex="-1" role="dialog" aria-labelledby="emptyCartLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h2 class="heading">Opps, looks like your bag is empty.</h2>
+          <a href="<%= urlWithSitePrefix('/dresses') %>" class="btn btn-black">Continue Shopping</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
+<script type="text/javascript">
+$('.js-trigger-empty-cart-modal').modal({
+  keyboard: false,
+  backdrop: 'static'
+});
+</script>
 <% end %>
 
 <div class="cart-footer">
