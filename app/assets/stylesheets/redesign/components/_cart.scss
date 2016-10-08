@@ -135,6 +135,13 @@
     font-family: $font-heading;
   }
 
+  .shopping-bag-order-number {
+    padding: 10px;
+    color: $c-neutral-6;
+    font-size: 0.75em;
+    text-align: center;
+  }
+
   .cart-is-empty {
     font-family: $font-heading;
     text-align: center;

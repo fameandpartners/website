@@ -109,5 +109,12 @@
         </div>
       </div>
     </div>
+    <div class="shopping-bag-order-number">
+      <div class="row">
+        <div class="col-xs-12">
+          Your Order Number: <%= @cart.order_number %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
