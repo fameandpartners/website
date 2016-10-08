@@ -7,13 +7,17 @@
           <span class="icon icon-arrow-left"></span>
           Back
         </div>
-        <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
-          <div class="pull-right">
-            <span class="cart-checkout">
-              <button type="submit" class="cta-icon-text btn-black">CHECKOUT <i class="icon icon-arrow-right"></i></button>
-            </span>
-          </div>
-        </form>
+          <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
+            <div class="pull-right">
+              <span class="cart-checkout">
+              <% if @cart.products.length: %>
+                <button type="submit" class="cta-icon-text btn btn-black">CHECKOUT <i class="icon icon-arrow-right"></i></button>
+              <% else: %>
+                <button type="submit" class="cta-icon-text btn btn-black" disabled="disabled">CHECKOUT <i class="icon icon-arrow-right"></i></button>
+              <% end %>
+              </span>
+            </div>
+          </form>
         <div class="cart-title">
           <h2>Your Bag</h2>
           <span class="amount"><%= @cart.display_total %></span>
@@ -107,13 +111,18 @@
           <div class="cart--call-to-actions">
             <form method="get" action="<%= urlWithSitePrefix('/checkout') %>">
               <div>
-                <input type="submit" value="Continue to payment" class="text-uppercase btn btn-black btn-block">
+                <% if @cart.products.length: %>
+                  <input type="submit" value="Continue to payment" class="text-uppercase btn btn-black btn-block">
+                <% else: %>
+                  <input type="submit" value="Continue to payment" class="text-uppercase btn btn-black btn-block"  disabled="disabled">
+                <% end %>
               </div>
             </form>
           </div>
         </div>
       </div>
     </div>
+
     <div class="shopping-bag-order-number">
       <div class="row">
         <div class="col-xs-12">
