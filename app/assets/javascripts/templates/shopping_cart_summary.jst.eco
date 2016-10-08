@@ -67,8 +67,9 @@
           Shipping <span><%= @cart.display_shipment_total %></span>
         </p>
         <p>
-          <% if @cart.promocode: %>
-          Promotion (<%= @cart.promocode.substring(0,10) %>)<span><%= @cart.display_promotion_total %></span>
+          <% #TODO: this is just a workaround due to Spree's limitations. We should compare numbers, not strings. %>
+          <% if @cart.display_promotion_total != "$0.00": %>
+            Promotion (<%= @cart.promocode.substring(0,10) %>)<span><%= @cart.display_promotion_total %></span>
           <% end %>
         </p>
         <p class="order-total">
