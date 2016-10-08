@@ -109,7 +109,10 @@ ruby:
           p
             span.link-underline-lighter
               | Free shipping
-            |  to USA, Canada and the UK within 7 - 10 days
+            - if current_site_version.is_australia?
+              |  to Australia within 7 - 10 days
+            - else
+              |  to USA, Canada and the UK within 7 - 10 days
           p
             span.link-underline-lighter
               | Easy returns
