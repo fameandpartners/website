@@ -17,18 +17,21 @@
     - if delivery_date_messaging_enabled?
       = react_component('Delivery')
 
-    ul.payment-option-grid.nav.nav-tabs.nav-justified role="tablist"
+    ul.payment-option-grid.nav.nav-tabs.nav-justified.no-stack-mobile role="tablist"
       - if @credit_card_gateway
         li.payment-option.active
           a data-toggle="tab" href="#creditcard" aria-controls="creditcard" role="tab"
+            i.fa.fa-credit-card
             | Credit Card
       - if @afterpay_method
         li.payment-option
           a data-toggle="tab" href="#afterpay" aria-controls="afterpay" role="tab"
+            i.icon.icon-afterpay-symbol
             | Afterpay
       - if @pay_pal_method
         li.payment-option
           a data-toggle="tab" href="#paypal" aria-controls="paypal" role="tab"
+            i.fa.fa-paypal
             | Paypal
 
 .row
