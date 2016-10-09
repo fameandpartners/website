@@ -86,8 +86,7 @@ form.hide-fully#pdpDataForWishlist
                     a href='#collapse-fabric' data-toggle='collapse' data-parent='#accordion' Fabric Information
                     #collapse-fabric.collapse role='tabpanel'
                       - if @product.fabric.present?
-                        h3.h5 Fabric
-                        = simple_format(@product.fabric)
+                        p = simple_format(@product.fabric)
                         p Due to dying process, product hue may look slightly different from image.
                       h3.h5 Garment Care
                       p Professional dry-clean only. See label for further details.
