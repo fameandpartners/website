@@ -62,10 +62,6 @@
 
   }
 
-  .cart-wrapper {
-    border-top: 1px solid $beage-bg;
-  }
-
   .promo-code {
     padding: 1px 5px 0;
     margin: 15px 0;
@@ -85,18 +81,52 @@
 
   }
 
+  .checkout-section-title {
+    font-family: $font-heading;
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 30px;
+  }
+
+  .toggle-shopping-bag {
+    cursor: pointer;
+
+    h2 {
+      display: inline-block;
+    }
+
+    .btn-toggle {
+      @extend .icon-arrow-right;
+      @include transform(rotate(-90deg));
+      float: right;
+      top: 25px;
+      position: relative;
+      right: 10px;
+    }
+
+    &.collapsed .btn-toggle {
+      @include transform(rotate(90deg));
+    }
+
+  }
+
+  .mobile-shopping-bag-heading {
+    margin-bottom: 20px;
+    border: 1px solid $c-neutral-4;
+    border-left: 0;
+    border-right: 0;
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+  }
+
   // Checkout step
   .checkout-step {
 
     .help-block {
       color: $c-neutral-8;
-    }
-
-    .checkout-section-title {
-      font-family: $font-heading;
-      font-size: 2.5rem;
-      font-weight: 300;
-      margin-bottom: 30px;
     }
 
     .checkout-section-title:not(:first-child) {
@@ -258,6 +288,14 @@
       color: $c-neutral-black;
     }
 
+  }
+
+}
+
+@media (min-width: $bootstrap-md-width) {
+
+  .cart-wrapper, {
+    border-top: 1px solid $beage-bg;
   }
 
 }

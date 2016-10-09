@@ -57,8 +57,14 @@
           span.hidden-xs.hidden-sm  Secure checkout
 
   .container
-    .row
-      .col-md-4.col-sm-12.product-form.product-form-top.visible-xs.visible-sm
+    .mobile-shopping-bag-heading.visible-xs.visible-sm
+      .row
+        .col-xs-12
+          .toggle-shopping-bag.collapsed data-toggle="collapse" data-target="#collapse-shopping-bag" aria-expanded="false" aria-controls="collapse-shopping-bag"
+            h2.checkout-section-title
+              | Your bag
+            span.icon.btn-toggle
+      #collapse-shopping-bag.collapse
         = render 'spree/checkout/order_summary', cart: cart, run_setup_script: true
 
     .row
