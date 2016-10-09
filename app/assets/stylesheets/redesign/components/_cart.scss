@@ -19,6 +19,9 @@
 
   .cart-wrapper {
     background-color: $c-neutral-white;
+  }
+
+  &.cart-sitewide .cart-wrapper {
     height: 100%;
     display: table;
   }
