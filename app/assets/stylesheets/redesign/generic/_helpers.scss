@@ -112,6 +112,12 @@
   padding: 1px;
 }
 
+// Keep .nav-justified items side-by-side (even on mobile, no stacking)
+.nav-justified.no-stack-mobile > li {
+  display: table-cell;
+  width: 1%;
+}
+
 // Align content vericaly
 .h-v-align {
   display: flex;
