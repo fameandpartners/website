@@ -11,9 +11,12 @@ page.initCheckoutEditPage = () ->
       $('.selectbox').outerWidth("100%")
 
       @ship_to_same_address = $("input[name='ship_to_address']").prop("checked")
-      $("input[name='ship_to_address']").click =>
+      $("input[name='ship_to_address']").change =>
         @ship_to_same_address = $("input[name='ship_to_address']").prop("checked")
-        $('#order_bill_address_attributes_country_id').trigger('change')
+        if @ship_to_same_address == true
+          $('#order_bill_address_attributes_country_id').trigger('change')
+        else
+          $('#order_ship_address_attributes_country_id').trigger('change')
         page.updateShippingFormVisibility()
 
       $(document).on('change',  '#create_account', page.updatePasswordFieldsVisibility)
@@ -349,7 +352,7 @@ page.initCheckoutEditPage = () ->
     # `@uncheckInternationalShippingFeeCheckbox`, `@changeButtonStatus`, `@internationalShippingFeeCheckboxClicked`, `@selectedCountry`
     countryChanged: () ->
       element = $(this)
-      useBillingAddressToShip = $('#ship_to_address_Ship_to_this_address')
+      useBillingAddressToShip = $("input[name='ship_to_address']")
       countryHasShippingFee = window.checkout_page.countries[element.val()]
       isBillAddressCountry = element.attr('id') == 'order_bill_address_attributes_country_id'
       isShipAddressCountry = element.attr('id') == 'order_ship_address_attributes_country_id'
@@ -374,7 +377,7 @@ page.initCheckoutEditPage = () ->
       $('#shipping_fee_alert').hide()
 
     shippingFeeHasToBeApplied: () ->
-      if $('#ship_to_address_Ship_to_this_address').is(':checked')
+      if $("input[name='ship_to_address']").is(':checked')
         element = $('#order_bill_address_attributes_country_id')
       else
         element = $('#order_ship_address_attributes_country_id')
