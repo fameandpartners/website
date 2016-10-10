@@ -38,9 +38,10 @@ ruby:
     .col-md-12.form-group
       = form.label :email, with_required_mark(t(:email))
       = form.text_field :email, class: 'required form-control form-control-md', value: form.object.email, required: 'required'
-
-- if Features.active?(:checkout_fb_login) && !signed_in?
-  = link_to 'Sign in with Facebook', fb_auth_path(spree_user_return_to: checkout_path), class: 'btn btn-facebook btn-black btn-md'
+  .row
+    .col-xs-12
+      - if Features.active?(:checkout_fb_login) && !signed_in?
+        = link_to 'Sign in with Facebook', fb_auth_path(spree_user_return_to: checkout_path), class: 'btn btn-facebook btn-black btn-md'
 
   / Temporary location for heading.
 h2.checkout-section-title
