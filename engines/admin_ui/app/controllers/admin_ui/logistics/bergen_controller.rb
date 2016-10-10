@@ -15,6 +15,15 @@ module AdminUi
           end
         end
       end
+
+      def retry
+        @return_item_process = Bergen::Operations::ReturnItemProcess.find(params[:id])
+
+        @return_item_process.failed = false
+        @return_item_process.save!
+
+        redirect_to admin_ui.logistics_bergen_index_path, notice: t('bergen.retrying_message', id: @return_item_process.id)
+      end
     end
   end
 end

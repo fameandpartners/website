@@ -69,9 +69,10 @@ class BergenProcessGrid
     end
   end
 
-  # TODO: retry if failed!
-  # column :retry, html: true do
-  #   RETRY
-  # end
+  column :retry, html: true do |process|
+    if process.failed
+      link_to 'Retry', admin_ui.retry_logistics_bergen_path(process), class: 'btn btn-xs btn-success', data: { confirm: t('bergen.retry_message') }
+    end
+  end
 end
 

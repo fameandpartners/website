@@ -62,7 +62,11 @@ AdminUi::Engine.routes.draw do
   end
 
   namespace :logistics do
-    resources :bergen, only: [:index]
+    resources :bergen, only: [:index] do
+      member do
+        get 'retry'
+      end
+    end
   end
 
   root to: 'dashboard#index'
