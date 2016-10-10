@@ -3,6 +3,8 @@ require 'datagrid'
 class BergenProcessGrid
   include Datagrid
 
+  self.default_column_options = { order: false }
+
   scope do
     Bergen::Operations::ReturnItemProcess
       .includes(
@@ -23,9 +25,23 @@ class BergenProcessGrid
 
   # Filters
 
-  # TODO
-  # filter(:order_number) do |order_number|
+  filter(:id)
+  filter(:order_number) do |order_number|
+    self.where('spree_orders.number LIKE ?', "#{order_number}%")
+  end
+  filter(:asn) do |asn|
+    self.where('item_returns.bergen_asn_number LIKE ?', "#{asn}%")
+  end
+  # TODO: UPC is not a relationship, but a concept! How to implement this?
+  # filter(:upc) do |upc|
   # end
+  filter(:step, :enum, select: Bergen::Operations::ReturnItemProcess.aasm.states_for_select) do |step|
+    self.where('bergen_return_item_processes.aasm_state = ?', step)
+  end
+  filter(:processed, :xboolean) do |processed|
+    self.where('bergen_return_item_processes.failed = ?', !processed)
+  end
+  filter(:created_at, :datetime, range: true)
 
   # Columns
 
@@ -34,6 +50,8 @@ class BergenProcessGrid
       link_to 'manage', admin_ui.item_return_path(item_return), class: 'btn btn-xs btn-info'
     end
   end
+
+  column :id
 
   column :order_number do |process|
     process.return_request_item.order.number
@@ -52,18 +70,18 @@ class BergenProcessGrid
     global_sku.upc
   end
 
-  column :aasm_state, header: 'Step', order: false do |process|
+  column :aasm_state, header: 'Step' do |process|
     process.aasm_state.titleize
   end
 
-  column :failed, header: 'Processed', order: false do |process|
+  column :failed, header: 'Processed' do |process|
     format(!process.failed) do |processed|
       class_name = processed ? 'check text-success': 'times text-danger'
       content_tag(:i, '', class: "fa fa-#{class_name}  fa-lg")
     end
   end
 
-  column :created_at do |process|
+  column :created_at, order: true do |process|
     format(process.created_at) do |created_at|
       I18n.l(created_at, format: :long)
     end
