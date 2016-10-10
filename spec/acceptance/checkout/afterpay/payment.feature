@@ -25,7 +25,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | City                    | Melbourne                        |
       | Phone Number            | 2255-4422                        |
       | Postcode                | 12345                            |
-    And I click on "Pay Securely" button
+    And I click on "Continue to payment" button
     And I click on "Continue With Afterpay" link
     Then I fill in Afterpay data within its iframe:
       | email      | firefox_user@fameandpartners.com |
@@ -59,7 +59,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | City                    | Melbourne                        |
       | Phone Number            | 2255-4422                        |
       | Postcode                | 12345                            |
-    And I click on "Pay Securely" button
+    And I click on "Continue to payment" button
     And I click on "Continue With Afterpay" link
     Then I fill in Afterpay data within its iframe:
       | email      | firefox_user@fameandpartners.com |
@@ -94,5 +94,5 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | City                    | Melbourne                        |
       | Phone Number            | 2255-4422                        |
       | Postcode                | 12345                            |
-    And I click on "Pay Securely" button
+    And I click on "Continue to payment" button
     Then I should see "Afterpay is not available at the moment. Please, try another payment method."

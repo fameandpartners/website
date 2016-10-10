@@ -19,7 +19,7 @@ Feature: Afterpay on Australian's Website Checkout
       | City                    | Melbourne      |
       | Phone Number            | 2255-4422      |
       | Postcode                | 12345          |
-    And I click on "Pay Securely" button
+    And I click on "Continue to payment" button
     Then I should see "Afterpay"
 
     # Do not see on USA site version
@@ -34,5 +34,5 @@ Feature: Afterpay on Australian's Website Checkout
       | City                    | Melbourne      |
       | Phone Number            | 2255-4422      |
       | Zipcode                 | 12345          |
-    And I click on "Pay Securely" button
+    And I click on "Continue to payment" button
     Then I should not see "Afterpay"

@@ -25,7 +25,7 @@ Feature: Complete Guest Checkout
       | <Zipcode Label>         | 12345         |
     And I select "<State>" state
     And I select "<Country>" country
-    And I click on "Pay Securely" button
+    And I click on "Continue to payment" button
     Then I should see "Customer E-Mail is invalid"
     Then I should see "First name can't be blank"
     Then I should see "Last name can't be blank"
@@ -54,7 +54,7 @@ Feature: Complete Guest Checkout
       | Phone Number            | 2255-4422      |
       | <Zipcode Label>         | 12345          |
     And I agree with shipping fee
-    And I click on "Pay Securely" button
+    And I click on "Continue to payment" button
     And I should see "Shipping$30.0"
     And I fill in credit card information:
       | Card number      | 5520000000000000  |
@@ -62,7 +62,7 @@ Feature: Complete Guest Checkout
       | CVC              | 123               |
       | Expiration Month | 10                |
       | Expiration Year  | 2050              |
-    And I click on "Place My Order" button
+    And I click on "Place your order now" button
     Then I should see my order placed, with "Connie" dress, "<Dress Size>" size and "<Dress Price>" price
 
     Examples:
@@ -88,14 +88,14 @@ Feature: Complete Guest Checkout
       | City                    | Melbourne      |
       | Phone Number            | 2255-4422      |
       | <Zipcode Label>         | 12345          |
-    And I click on "Pay Securely" button
+    And I click on "Continue to payment" button
     And I fill in credit card information:
       | Card number      | 5520000000000000  |
       | Name on card     | Zaphod Beeblebrox |
       | CVC              | 123               |
       | Expiration Month | 10                |
       | Expiration Year  | 2050              |
-    And I click on "Place My Order" button
+    And I click on "Place your order now" button
     Then I should see my order placed, with "Connie" dress, "<Dress Size>" size and "<Dress Price>" price
 
     Examples:
