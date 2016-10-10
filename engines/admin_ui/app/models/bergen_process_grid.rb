@@ -7,30 +7,25 @@ class BergenProcessGrid
 
   scope do
     Bergen::Operations::ReturnItemProcess
-      .includes(
-        return_request_item: [
-                               :item_return,
-                               order_return_request: [:order],
-                               line_item:            [
-                                                       :order,
-                                                       :variant,
-                                                       personalization: [
-                                                                          :color,
-                                                                          :size
-                                                                        ]
-                                                     ]
-                             ]
-      )
+      .includes(return_request_item: [
+        :item_return,
+        order_return_request: [:order],
+        line_item: [
+          :order,
+          :variant,
+          personalization: [:color, :size]
+        ]
+      ])
   end
 
   # Filters
 
   filter(:id)
   filter(:order_number) do |order_number|
-    self.where('spree_orders.number LIKE ?', "#{order_number}%")
+    self.where('spree_orders.number = ?', order_number)
   end
   filter(:asn) do |asn|
-    self.where('item_returns.bergen_asn_number LIKE ?', "#{asn}%")
+    self.where('item_returns.bergen_asn_number = ?', asn)
   end
   # TODO: UPC is not a relationship, but a concept! How to implement this?
   # filter(:upc) do |upc|
@@ -76,7 +71,7 @@ class BergenProcessGrid
 
   column :failed, header: 'Processed' do |process|
     format(!process.failed) do |processed|
-      class_name = processed ? 'check text-success': 'times text-danger'
+      class_name = processed ? 'check text-success' : 'times text-danger'
       content_tag(:i, '', class: "fa fa-#{class_name}  fa-lg")
     end
   end
