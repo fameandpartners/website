@@ -55,14 +55,6 @@ $order-summary-bg: #f7f7f9;
     color: #000;
   }
 
-  // Address Step
-  .checkout-step {
-    .shipAddress{
-      input { margin: 0 10px; }
-      font-size: 12px;
-    }
-  }
-
   // Payment Step
   .checkout-step {
     .slash {

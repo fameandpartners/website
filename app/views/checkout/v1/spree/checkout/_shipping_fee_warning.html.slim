@@ -12,9 +12,8 @@
         p
           'Additional #{link_to "custom duty fees", faqs_path(anchor: "collapse-delivery-international"), class: "link-underline-lighter"} apply to your country.
         p There is also a <span class="shipping-fee-amount">$30 shipping fee</span> for orders to <span class="country_name">Abu Dhabi</span>.
-        .checkbox
-          label
+        .checkbox.custom-form-element-thin.checkbox-black-bg.checkbox-inline
             = check_box_tag :international_shipping_fee
-            'I understand that there may be a custom duty fee
+            label for="international_shipping_fee" I understand that there may be a custom duty fee
   = content_for :inline_javascript do
     | $('#international_shipping_fee').click(window.checkout_page.internationalShippingFeeCheckboxClicked);

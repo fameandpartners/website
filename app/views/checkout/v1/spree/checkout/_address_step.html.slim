@@ -19,12 +19,11 @@
         = form.text_field :customer_notes, class: 'required form-control form-control-md'
 
     .row
-      .col-md-6
-        .form-group
+      .col-xs-12
+        .form-group.custom-form-element-thin.checkbox-black-bg.checkbox-inline
           - ship_to_billing_address = ((@order.bill_address.empty? && @order.ship_address.empty?) || @order.bill_address.same_as?(@order.ship_address))
-          label.shipAddress
-            = check_box_tag 'ship_to_address', 'Ship to this address', ship_to_billing_address
-            | This is also my delivery address
+          = check_box_tag 'ship_to_address', 'Ship to this address', ship_to_billing_address
+          label for="ship_to_address" This is also my delivery address
           = form.hidden_field :use_billing
 
     .form-wrapper data-hook='shipping_inner'
