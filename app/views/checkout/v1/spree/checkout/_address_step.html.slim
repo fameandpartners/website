@@ -23,12 +23,8 @@
         .form-group
           - ship_to_billing_address = ((@order.bill_address.empty? && @order.ship_address.empty?) || @order.bill_address.same_as?(@order.ship_address))
           label.shipAddress
-            = radio_button_tag 'ship_to_address', 'Ship to this address', ship_to_billing_address
-            | Ship to this address
-          .clearfix
-          label.shipAddress
-            = radio_button_tag 'ship_to_address', 'Ship to a different address', !ship_to_billing_address
-            | Ship to different address
+            = check_box_tag 'ship_to_address', 'Ship to this address', ship_to_billing_address
+            | This is also my delivery address
           = form.hidden_field :use_billing
 
     .form-wrapper data-hook='shipping_inner'

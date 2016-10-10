@@ -10,18 +10,11 @@ page.initCheckoutEditPage = () ->
 
       $('.selectbox').outerWidth("100%")
 
-      @ship_to_different_address = $("input[name='ship_to_address']:first").prop("checked") == false
-      $("input[name='ship_to_address']:first").click =>
-        @ship_to_different_address = false
+      @ship_to_same_address = $("input[name='ship_to_address']").prop("checked")
+      $("input[name='ship_to_address']").click =>
+        @ship_to_same_address = $("input[name='ship_to_address']").prop("checked")
         $('#order_bill_address_attributes_country_id').trigger('change')
         page.updateShippingFormVisibility()
-
-
-      $("input[name='ship_to_address']:last").click =>
-        @ship_to_different_address = true
-        $('#order_ship_address_attributes_country_id').trigger('change')
-        page.updateShippingFormVisibility()
-
 
       $(document).on('change',  '#create_account', page.updatePasswordFieldsVisibility)
       $(document).on('click',   'form.checkout-form input[type=submit]', page.onAjaxLoadingHandler)
@@ -141,7 +134,7 @@ page.initCheckoutEditPage = () ->
       #$('.selectbox').not('.chosen-container').chosen()
 
     updateShippingFormVisibility: () ->
-      if @ship_to_different_address == false
+      if @ship_to_same_address == true
         $('[data-hook="shipping_inner"]').hide()
         $('[data-hook="shipping_inner"]').find(':input').prop('disabled', true)
         $('#order_use_billing').val(1)
