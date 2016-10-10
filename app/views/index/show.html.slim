@@ -76,19 +76,16 @@ ruby:
 
       .row
         .col-md-12.cta-item-huge
+          - current_edit_image = "homepage/fp-style-icon/oct-11-tile-1.jpg"
+          - current_edit_mob_image = "homepage/fp-style-icon/oct-11-tile-1-mob.jpg"
+          - current_edit_cta_1 = ""
           - if current_site_version.is_australia?
             // AUSTRALIA
-            - current_edit_image = "homepage/fp-style-icon/sept-29-tile-1.jpg"
-            - current_edit_mob_image = "homepage/fp-style-icon/sept-29-tile-1-mob.jpg"
-            - current_edit_cta_1 = ""
-            - current_edit_cta_2 = "WHAT WOULD NADIA WEAR?"
+            - current_edit_cta_2 = "The Edit: Spring Racing by Nadia Fairfax"
             - current_edit_link = spring_racing_collection_landing_page_path
           - else
             // USA
-            - current_edit_image = "homepage/fp-style-icon/sept-29-tile-1.jpg"
-            - current_edit_mob_image = "homepage/fp-style-icon/sept-29-tile-1-mob.jpg"
-            - current_edit_cta_1 = ""
-            - current_edit_cta_2 = "WHAT WOULD NADIA WEAR?"
+            - current_edit_cta_2 = "Nadia Fairfax's Cocktail Favorites"
             - current_edit_link = cocktail_collection_landing_page_path
 
           = link_to current_edit_link
@@ -118,10 +115,10 @@ ruby:
 
       .row
         .col-md-6.cta-item
-          = link_to dress_for_parties_page_path
+          = link_to dresses_path + '/black'
             .section-img-wrap.copy-center
               .img-wrap
-                img src='#{image_path("homepage/fp-style-icon/sept-29-tile-2.jpg")}'
+                img src='#{image_path("homepage/fp-style-icon/oct-11-tile-2.jpg")}'
 
               .content-wrap
                 .container-cta
@@ -130,29 +127,13 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  Party Looks
+                          span.copy-highlight ALL BLACK
 
-        .col-md-6.cta-item
-          = link_to dresses_path + '/ruffle'
-            .section-img-wrap.copy-center
-              .img-wrap
-                img src='#{image_path("homepage/fp-style-icon/sept-29-tile-3.jpg")}'
-
-              .content-wrap
-                .container-cta
-                  .row-cta
-                    .col-md-12
-                      .copy-wrap.text-center
-                        span.cta-link-white-bg
-                          span.cta-link Shop
-                          span.copy-highlight Ruffles
-
-      .row
         .col-md-6.cta-item
           = link_to dresses_path + '/backless'
             .section-img-wrap.copy-center
               .img-wrap
-                img src='#{image_path("homepage/fp-style-icon/sept-29-tile-4.jpg")}'
+                img src='#{image_path("homepage/fp-style-icon/oct-11-tile-3.jpg")}'
 
               .content-wrap
                 .container-cta
@@ -161,13 +142,14 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  Backless Dresses
+                          span.copy-highlight BACKLESS DRESSES
 
+      .row
         .col-md-6.cta-item
-          = link_to bridesmaid_collection_path
+          = link_to dress_for_parties_page_path
             .section-img-wrap.copy-center
               .img-wrap
-                img src='#{image_path("homepage/fp-style-icon/sept-29-tile-5.jpg")}'
+                img src='#{image_path("homepage/fp-style-icon/oct-11-tile-4.jpg")}'
 
               .content-wrap
                 .container-cta
@@ -176,7 +158,22 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight  Bridesmaids Dresses
+                          span.copy-highlight PARTY LOOKS
+
+        .col-md-6.cta-item
+          = link_to dress_for_parties_page_path
+            .section-img-wrap.copy-center
+              .img-wrap
+                img src='#{image_path("homepage/fp-style-icon/oct-11-tile-5.jpg")}'
+
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                      .copy-wrap.text-center
+                        span.cta-link-white-bg
+                          span.cta-link Bare
+                          span.copy-highlight YOUR SHOULDERS
 
   // Section: Styling
   section.section-box.container.section-styling
