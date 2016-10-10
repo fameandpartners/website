@@ -1,250 +1,95 @@
 /* [Landing Page - Styling Session]
 -------------------------------------------------------*/
 
-.landing-page-styling-session,
-.landing-page-wedding-styling-session {
-  font-family: $font-heading;
+.landing-page-styling-session {
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    text-transform: none;
+  .page {
+    margin: 60px auto;
   }
 
-  img {
-    display: block;
-    max-width: 100%;
-    height: auto;
+  h1 {
+    margin: 0 0 40px;
+  }
+
+  h2 {
+    margin: 40px 0 20px;
+  }
+
+  h3 {
+    margin-bottom: 20px;
+  }
+
+  a {
+    color: $c-neutral-black;
   }
 
   p {
-    font-weight: 300;
     font-family: $font-heading;
+    font-weight: 300;
   }
 
-  .chosen-container-single .chosen-single {
-    background: $c-neutral-white;
-  }
+  .form-group {
+    margin: 15px 0;
 
-  .page-title {
-    background-color: $c-neutral-white;
-
-    h1 {
-      margin: 0;
-      padding-top: 60px;
-      font-size: 5.4rem;
-      line-height: 5rem;
-    }
-
-    p {
-      margin: 10px 0 30px;
-      font-size: 2.7rem;
-      line-height: 100%;
-    }
-
-    .header-image-right {
-      padding: 0;
+    .error {
+      color: $c-brand-red;
+      display: block;
     }
 
   }
 
-  .side-content,
-  .question-boxes .item {
-    background: $gray-light-bg;
+  .confirmation,
+  .phone-field-wrapper,
+  .timezone-field-wrapper,
+  .preference-field-wrapper {
+    display: none;
   }
 
-  .meet-stylist,
-  .content-area {
-    padding-top: 60px;
+  .submit {
+    margin-top: 40px;
   }
 
-  .side-wrapper {
-    padding: 0;
+  aside {
+    padding: 18px;
+    border: 1px solid $c-neutral-6;
+    margin-bottom: 40px;
   }
 
-  .side-content {
-    padding: 30px;
+  @media (min-width: $bootstrap-sm-width) and (max-width: $bootstrap-md-width - 1px) {
 
-    .meet-stylist {
-      h4 {
-        margin: 45px 0 0;
-        font-size: 4.5rem;
-        line-height: 3.5rem;
-      }
-
-      span {
-        font-weight: 300;
-        font-style: italic;
-        font-size: 2rem;
-      }
-
-    }
-
-    .form-area {
-      h3 {
-        margin-top: 35px;
-        padding-top: 35px;
-        border-top: 1px solid;
-        font-size: 4.3rem;
-      }
-
-      p {
-        color: $c-neutral-12;
-        font-size: 2rem;
-        line-height: 2.6rem;
-      }
-
-      .confirmation {
-        display: none;
-      }
-
-      .form-global,
-      .submit {
-        margin-top: 25px;
-      }
-
-      .chosen-container {
-        max-width: 100%;
-      }
-
-    }
-
-  }
-
-  .content-area {
-    padding-right: 50px;
-    padding-left: 50px;
-
-    .intro-txt {
-      padding-bottom: 35px;
-      text-align: center;
+    aside {
 
       h3 {
-        margin-bottom: 0;
-        font-size: 4.7rem;
-      }
-
-      .title-note {
-        font-style: italic;
-        font-size: 3rem;
-      }
-
-      p {
-        margin-bottom: 30px;
-        font-size: 2rem;
-      }
-
-    }
-
-    .question-boxes {
-
-      .item {
-        position: relative;
-        padding: 20px;
-
-        &:after {
-          position: absolute;
-          top: 20%;
-          right: 100%;
-          margin-top: -15px;
-          width: 0;
-          height: 0;
-          border: solid transparent;
-          border-width: 15px;
-          border-color: transparent;
-          border-right-color: $gray-light-bg;
-          content: " ";
-          pointer-events: none;
-        }
-
-      }
-
-      .item,
-      .item-img {
-        margin-bottom: 15px;
-      }
-
-      p.question {
-        font-size: 2.2rem;
-        line-height: 3rem;
-      }
-
-      .author {
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 1.3rem;
-        font-family: $font-family-secondary;
-      }
-
-      .highlight {
-        font-style: italic;
+        font-size: 3.8rem;
+        margin: 0;
       }
 
     }
 
   }
 
-}
+  @media (min-width: $iphone6p-width) and (max-width: $bootstrap-sm-width - 1px) {
 
-@media (max-width: $bootstrap-md-width - 1px) {
+    aside {
 
-  .landing-page-styling-session {
-
-    .page-title {
-      text-align: center;
-    }
-
-    .side-content {
-
-      &.meet {
-        background-color: $c-neutral-white;
-      }
-
-      .meet-stylist {
-
-        h4 {
-          margin-top: 15px;
-          font-size: 3rem;
-        }
-
-      }
-
-      .form-area {
-
-        h3 {
-          margin-top: 15px;
-          padding-top: 0;
-          border-top: none;
-        }
-
-        p {
-          font-size: 1.9rem;
-        }
-
+      h3 {
+        font-size: 2.8rem;
+        margin: 0;
       }
 
     }
 
-    .content-area {
-      padding-right: 15px;
-      padding-left: 15px;
+  }
 
-      .question-boxes {
-        p.question {
-          font-size: 2rem;
-          line-height: 2.5rem;
-        }
+  @media (max-width: $iphone6p-width - 1px) {
 
+    aside {
+
+      h3 {
+        font-size: 1.8rem;
+        margin: 0;
       }
 
-    }
-
-    .meet-stylist,
-    .content-area {
-      padding-top: 30px;
     }
 
   }

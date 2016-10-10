@@ -12,11 +12,10 @@ module Bergen
       ).result
     end
 
-    def receiving_ticket_add(return_request_item:, tracking_number:)
+    def receiving_ticket_add(return_request_item:)
       SoapMethods::ReceivingTicketAdd.new(
         savon_client:        client,
-        return_request_item: return_request_item,
-        tracking_number: tracking_number
+        return_request_item: return_request_item
       ).result
     end
 
