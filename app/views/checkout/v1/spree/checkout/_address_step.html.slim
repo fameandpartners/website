@@ -9,15 +9,15 @@
 
     .form-wrapper data-hook='shipping_inner'
       = form.fields_for :ship_address do |ship_form|
-        = render partial: 'address_form', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
+        = render partial: 'checkout/v1/spree/checkout/address_form', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
 
     .row
       .col-xs-12
         .form-group.custom-form-element-thin.checkbox-black-bg.checkbox-inline
-          - ship_to_delivery_address = ((@order.bill_address.empty? && @order.ship_address.empty?) || @order.ship_address.same_as?(@order.billing_address))
-          = check_box_tag 'ship_to_address', 'Ship to this address', ship_to_delivery_address
+          - ship_to_billing_address = ((@order.bill_address.empty? && @order.ship_address.empty?) || @order.ship_address.same_as?(@order.billing_address))
+          = check_box_tag 'ship_to_address', 'Bill to this address', ship_to_billing_address
           label for="ship_to_address" This is also my billing address
-          = form.hidden_field :use_billing
+          = form.hidden_field :use_shipping
 
     = render partial: 'shipping_fee_warning'
 
@@ -31,7 +31,7 @@
 
     .form-wrapper data-hook='billing_inner'
       = form.fields_for :bill_address do |bill_form|
-        = render partial: 'spree/checkout/address_form', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
+        = render partial: 'checkout/v1/spree/checkout/address_form', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
 
     .row
       .col-xs-12.form-group
