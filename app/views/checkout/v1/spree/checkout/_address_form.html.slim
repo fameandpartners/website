@@ -43,24 +43,24 @@ ruby:
 
 .row
   .col-md-6.form-group
-    = form.label :firstname, with_required_mark(t(:first_name))
+    = form.label :firstname
     = form.text_field :firstname, class: 'required form-control form-control-md', value: first_name, required: 'required'
 
   .col-md-6.form-group
-    = form.label :lastname, with_required_mark(t(:last_name))
+    = form.label :lastname
     = form.text_field :lastname, class: 'required form-control form-control-md', value: last_name, required: 'required'
 
 - if address_type == 'shipping'
   .row
     .col-md-12.form-group
-      = form.label :email, with_required_mark(t(:email))
+      = form.label :email
       = form.text_field :email, class: 'required form-control form-control-md js-checkout-email-shipping', value: form.object.email, required: 'required'
 - elsif address_type == 'billing'
       = form.hidden_field :email, class: 'required form-control form-control-md js-checkout-email-billing', value: form.object.email
 
 .row
   .col-xs-12.form-group
-    = form.label :phone, with_required_mark(t(:phone_number))
+    = form.label :phone
     p.help-block.pull-right in case we need to contact you about your order
     = form.phone_field :phone, class: 'required form-control form-control-md', required: 'required'
 
@@ -83,7 +83,7 @@ ruby:
 
 .row
   .col-xs-12.form-group
-    = form.label :country_id, with_required_mark(t(:country))
+    = form.label :country_id
     select id=(country_field_id) name="#{form.object_name}[country_id]" class="form-control form-control-md selectbox"
       - countries.each do |country|
         - select_country = (address.country_id == country.id ? true : false )
@@ -92,7 +92,7 @@ ruby:
 
 .row
   .col-md-12.form-group
-    = form.label :address1, with_required_mark(t(:street_address))
+    = form.label :address1
     p.help-block.pull-right this must be a physical address, not a P.O. Box
     = form.text_field :address1, class: 'required form-control form-control-md', required: 'required'
 
@@ -103,16 +103,16 @@ ruby:
 
 .row
   .col-xs-12.form-group
-    = form.label :city, with_required_mark(t(:city))
+    = form.label :city
     = form.text_field :city, class: 'required form-control form-control-md', required: 'required'
 
 .row
   .col-md-6.form-group
-    = form.label :zipcode, with_required_mark(t(:zip))
+    = form.label :zipcode
     = form.text_field :zipcode, class: 'required form-control form-control-md', required: 'required'
 
   .col-md-6.form-group class=(address.country.states_required ? '' : 'hidden')
-    = form.label :state, with_required_mark(t(:state))
+    = form.label :state
     span.states_selector_container  class=(have_states ? 'required' : 'hidden')
       select id=(field_id) name="#{form.object_name}[state_id]" class="form-control form-control-md selectbox" disabled=(!have_states)
         option value='' data-country=''
