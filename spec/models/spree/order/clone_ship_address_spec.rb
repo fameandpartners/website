@@ -1,67 +1,50 @@
 require 'spec_helper'
 
+# Based on https://github.com/spree/spree/blob/1-3-stable/core/spec/models/order/address_spec.rb
 describe Spree::Order::CloneShipAddress, type: :model do
-  subject(:order) { Spree::Order.new }
+  let(:order) { Spree::Order.new }
 
-  it { is_expected.to allow_mass_assignment_of(:use_shipping) }
-
-  describe '#use_shipping?' do
-    it 'returns true for truthy values' do
-      truthy_values = [true, 'true', '1']
-      truthy_values.each do |value|
-        order.use_shipping = value
-        expect(order.use_shipping?).to eq(true)
+  context 'validation' do
+    context 'when @use_shipping is populated' do
+      before do
+        order.ship_address = stub_model(Spree::Address)
+        order.bill_address = nil
       end
-    end
 
-    it 'returns false for falsey values' do
-      falsey_values = [nil, false]
-      falsey_values.each do |value|
-        order.use_shipping = value
-        expect(order.use_shipping?).to eq(false)
+      context 'with true' do
+        before { order.use_shipping = true }
+
+        it 'clones the ship address to the bill address' do
+          order.valid?
+          expect(order.bill_address).to eq(order.ship_address)
+        end
       end
-    end
-  end
 
-  describe '#clone_shipping_address' do
-    let(:address) { Spree::Address.new({ id:         123,
-                                         address1:   'Rua da Silva Sauro',
-                                         city:       'Lugar Nenhum',
-                                         email:      'super@email.com',
-                                         firstname:  'Loroteiro',
-                                         lastname:   'Silvestre',
-                                         phone:      '1234-1234',
-                                         zipcode:    '1234-567',
-                                         updated_at: '10/10/10',
-                                         created_at: '10/10/10',
-                                       }, without_protection: true)
-    }
+      context "with 'true'" do
+        before { order.use_shipping = 'true' }
 
-    before(:each) { order.ship_address = address }
-
-    context 'when using shipping address' do
-      before(:each) { order.use_shipping = true }
-
-      it 'copies all ship address attributes to the bill address' do
-        order.valid?
-
-        bill_address_attributes = order.bill_address.attributes
-        expect(bill_address_attributes).to include({ 'address1'  => 'Rua da Silva Sauro',
-                                                     'city'      => 'Lugar Nenhum',
-                                                     'email'     => 'super@email.com',
-                                                     'firstname' => 'Loroteiro',
-                                                     'lastname'  => 'Silvestre',
-                                                     'phone'     => '1234-1234',
-                                                     'zipcode'   => '1234-567' })
-        expect(bill_address_attributes.keys).not_to include(%w(id updated_at created_at))
+        it 'clones the ship address to the bill' do
+          order.valid?
+          expect(order.bill_address).to eq(order.ship_address)
+        end
       end
-    end
 
-    context 'when not using shipping address' do
-      before(:each) { order.use_shipping = false }
+      context "with '1'" do
+        before { order.use_shipping = '1' }
 
-      it 'keeps bill address as it is' do
-        expect(order.bill_address).to be_nil
+        it 'clones the ship address to the billing' do
+          order.valid?
+          expect(order.bill_address).to eq(order.ship_address)
+        end
+      end
+
+      context "with something other than a 'truthful' value" do
+        before { order.use_shipping = '0' }
+
+        it 'does not clone the ship address to the billing' do
+          order.valid?
+          expect(order.bill_address).to be_nil
+        end
       end
     end
   end
