@@ -77,7 +77,7 @@ window.helpers.ShoppingCart = class ShoppingCart
   #   color_id
   #   customizations_ids
   addProduct: (product_data = {}) ->
-    @showModal()
+    # @showModal()
 
     $.ajax(
       url: "/user_cart/products"
