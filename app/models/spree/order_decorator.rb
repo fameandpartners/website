@@ -1,6 +1,7 @@
 Spree::Order.class_eval do
-
+  include Spree::Order::CloneShipAddress
   extend Spree::Order::Scopes
+
   attr_accessible :required_to, :email, :customer_notes, :projected_delivery_date, :user_id
   self.include_root_in_json = false
 
