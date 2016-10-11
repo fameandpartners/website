@@ -144,11 +144,11 @@ page.initCheckoutEditPage = () ->
       if @ship_to_same_address == true
         $('[data-hook="billing_inner"]').hide()
         $('[data-hook="billing_inner"]').find(':input').prop('disabled', true)
-        $('#order_use_billing').val(1)
+        $('#order_use_shipping').val(1)
       else
         $('[data-hook="billing_inner"]').show()
         $('[data-hook="billing_inner"]').find(':input').prop('disabled', false)
-        $('#order_use_billing').val("")
+        $('#order_use_shipping').val("")
 
     updatePasswordFieldsVisibility: () ->
       container = $('.checkout-content.line.form-global.passwords')

@@ -1,7 +1,7 @@
 ruby:
   address_id = address_type.chars.first
-  first_name = form.object.firstname.present? ? form.object.firstname : (@order.try(:first_name) || @user.try(:first_name))
-  last_name = form.object.lastname.present? ? form.object.lastname : (@order.try(:last_name) || @user.try(:last_name))
+  first_name = form.object.firstname.presence || @order.try(:first_name) || @user.try(:first_name)
+  last_name = form.object.lastname.presence || @order.try(:last_name) || @user.try(:last_name)
   shopping_bag_texts = Preferences::ShoppingBag.new(current_site_version)
   countries = available_countries_for_current_zone
   countries_with_fees = Hash[countries.map { |country| [country.id, country.zone_member.has_international_shipping_fee] }]
@@ -56,7 +56,7 @@ ruby:
       = form.label :email, with_required_mark(t(:email))
       = form.text_field :email, class: 'required form-control form-control-md js-checkout-email-shipping', value: form.object.email, required: 'required'
 - elsif address_type == 'billing'
-      = form.hidden_field :email, class: 'required form-control form-control-md js-checkout-email-billing', value: form.object.email, required: 'required'
+      = form.hidden_field :email, class: 'required form-control form-control-md js-checkout-email-billing', value: form.object.email
 
 .row
   .col-xs-12.form-group
