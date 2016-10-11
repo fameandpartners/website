@@ -56,7 +56,7 @@ describe Forms::ManualOrderForm do
 
     describe 'creates an order with valid params' do
 
-      let(:created_order) { manual_order.save_order(correct_params) }
+      let!(:created_order) { manual_order.save_order(correct_params) }
 
       it 'creates new order successfully' do
         expect(created_order).to be_truthy
@@ -106,6 +106,17 @@ describe Forms::ManualOrderForm do
         expect(created_order.ship_address.phone).to eq('+38094659031')
         expect(created_order.ship_address.country).to eq(country)
         expect(created_order.ship_address.state).to eq(state)
+      end
+
+      it 'creates Global SKUs for order line items' do
+        product_sku    = 'PRODUCT-SKU'
+        product_size   = 'US10AU14'
+        product_height = 'XHP'
+        global_sku     = GlobalSku.last
+
+        expect(global_sku.sku).to include(product_sku)
+        expect(global_sku.sku).to include(product_size)
+        expect(global_sku.sku).to include(product_height)
       end
     end
 

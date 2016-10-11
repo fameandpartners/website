@@ -35,7 +35,7 @@ Feature: Complete Guest Checkout
       | USA          | United States | California | Zipcode       | US 10      | Petite       |
 
   @javascript @no_vcr
-  Scenario Outline: Successfully Buy a Dress and ship to UK
+  Scenario Outline: Successfully Buy a Dress and Ship To a Country With Custom Duty Feeds
     When I am on Connie dress page
     Then I select "<Site Version>" site version
     And I select "<Dress Size>" size
@@ -66,9 +66,8 @@ Feature: Complete Guest Checkout
     Then I should see my order placed, with "Connie" dress, "<Dress Size>" size and "<Dress Price>" price
 
     Examples:
-      | Site Version | Country        | State             | Zipcode Label | Dress Size | Skirt Length | Dress Price |
-      | USA          | United Kingdom | Avon              | Zipcode       | US 10      | Petite       | 289.00      |
-      | USA          | Germany        | Baden-Württemberg | Zipcode       | US 10      | Petite       | 289.00      |
+      | Site Version | Country | State             | Zipcode Label | Dress Size | Skirt Length | Dress Price |
+      | USA          | Germany | Baden-Württemberg | Zipcode       | US 10      | Petite       | 289.00      |
 
   # VCR is disabled on full checkout acceptance specs since we can detect PIN payments breaking changes!
   @javascript @no_vcr

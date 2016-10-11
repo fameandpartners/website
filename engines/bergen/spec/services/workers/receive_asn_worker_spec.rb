@@ -13,6 +13,7 @@ module Bergen
 
       before(:each) do
         return_item_process.style_master_was_created!
+        return_item_process.tracking_number_was_updated!
         return_item_process.asn_was_created!
       end
 

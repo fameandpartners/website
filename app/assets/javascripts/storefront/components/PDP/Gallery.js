@@ -24,6 +24,19 @@ class PdpGallery extends React.Component {
   handleLoad(image) {
     image.target.style.marginLeft = this.calculateOffset(image.target) + 'px';
     image.target.parentNode.className += ' is-loaded';
+    $(image.target.parentNode).zoom({
+      url: image.target.getAttribute('src'),
+      touch: true,
+      on: 'grab',
+      duration: 50,
+      magnify: 1.3,
+      onZoomIn: function() {
+        this.parentNode.classList.add('zoomed-in');
+      },
+      onZoomOut: function() {
+        this.parentNode.classList.remove('zoomed-in');
+      }
+    });
   }
 
   handleResize() {
@@ -55,6 +68,7 @@ class PdpGallery extends React.Component {
       infinite: true,
       arrows: false,
       dots: true,
+      swipe: false,
       responsive: [
         {
           breakpoint: 992,
@@ -88,11 +102,17 @@ class PdpGallery extends React.Component {
         let id = "gallery-image-" + index;
         thumbIds.push(id);
         return (
-          <div className="media-wrap" key={index}>
-            <span id={id} className="scrollspy-trigger"></span>
-            <img src={image.url} alt={image.alt}
-              className="js-gallery-image" onLoad={this.handleLoad} />
-            <span className="loader"></span>
+          <div className="media-wrap-outer" key={index}>
+            <div className="media-wrap">
+              <span id={id} className="scrollspy-trigger"></span>
+              <img src={image.url} alt={image.alt}
+                className="js-gallery-image" onLoad={this.handleLoad} />
+              <span className="loader"></span>
+              <span className="btn-close expande lg">
+                <span className="hide-visually">tap to zoom</span>
+              </span>
+              <span className="btn-zoom">tap to zoom</span>
+            </div>
           </div>
         );
       }

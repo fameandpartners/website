@@ -39,6 +39,7 @@ path 'engines' do
   gem 'manual_order'
   gem 'mailchimp_client'
   gem 'afterpay'
+  gem 'next_logistics'
 end
 
 # TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it,
@@ -59,6 +60,7 @@ gem 'asset_sync', '~> 1.1.0'
 # Data
 gem 'event_sourced_record'
 gem 'coercible'
+gem 'reform', '~> 2.0.5'
 
 gem 'ipaddress'
 gem 'geoip', require: false

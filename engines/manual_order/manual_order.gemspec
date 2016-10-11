@@ -20,11 +20,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '~> 3.2.22'
 
   # UI
-  s.add_dependency 'slim'
-  s.add_dependency 'simple_form'
-  s.add_dependency 'reform'
-  s.add_dependency 'chosen-rails'
-  s.add_dependency 'kaminari'
-  s.add_dependency 'datagrid'
+  s.add_dependency 'slim'            # Version specified on main app Gemfile
+  s.add_dependency 'simple_form'     # Version specified on main app Gemfile
+  s.add_dependency 'reform'          # Version specified on main app Gemfile
+  s.add_dependency 'kaminari'        # Version specified on main app Gemfile (spree_core)
+  s.add_dependency 'chosen-rails', '~> 1.5.1'
+  s.add_dependency 'datagrid', '~> 1.4.0'
 
 end

@@ -22,6 +22,7 @@ module Operations
       finalize_order
       create_inventory_units
       adjust_price
+      create_global_skus
 
       order
     end
@@ -84,6 +85,13 @@ module Operations
     def adjust_price
       if params[:adj_amount].present? && params[:adj_description].present?
         order.adjustments.create({ amount: params[:adj_amount], label: params[:adj_description] })
+      end
+    end
+
+    def create_global_skus
+      order.line_items.each do |line_item|
+        line_item_presenter = Orders::LineItemPresenter.new(line_item, order)
+        GlobalSku.find_or_create_by_line_item(line_item_presenter: line_item_presenter)
       end
     end
 

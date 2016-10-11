@@ -133,7 +133,7 @@ PATH
       manual_order
       money
       rails (~> 3.2.21)
-      reform (~> 2.0.5)
+      reform
       sidekiq
       simple_form
       slim
@@ -164,13 +164,15 @@ PATH
       gibbon (~> 2.2.4)
       sidekiq
     manual_order (0.0.1)
-      chosen-rails
-      datagrid
+      chosen-rails (~> 1.5.1)
+      datagrid (~> 1.4.0)
       kaminari
       rails (~> 3.2.22)
       reform
       simple_form
       slim
+    next_logistics (0.0.1)
+      rails
     revolution (0.0.1)
       awesome_nested_set
       rails (~> 3.2.21)
@@ -376,7 +378,7 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
-    faraday (0.9.1)
+    faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     ffaker (1.15.0)
     ffi (1.9.10)
@@ -561,7 +563,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
     netrc (0.10.3)
-    newrelic_rpm (3.12.0.288)
+    newrelic_rpm (3.16.3.323)
     nokogiri (1.5.11)
     nori (1.1.5)
     oa-core (0.3.2)
@@ -736,8 +738,8 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
-    sentry-raven (0.15.6)
-      faraday (>= 0.7.6)
+    sentry-raven (2.0.2)
+      faraday (>= 0.7.6, < 0.10.x)
     shippo (1.0.4)
       json (~> 1.8.1)
       mime-types (>= 1.25, < 3.0)
@@ -903,6 +905,7 @@ DEPENDENCIES
   mailchimp_client!
   manual_order!
   newrelic_rpm
+  next_logistics!
   ops_care!
   paperclip
   pg
@@ -915,6 +918,7 @@ DEPENDENCIES
   rails (~> 3.2.22.2)
   react-rails (~> 1.6)
   redcarpet (~> 2.3.0)
+  reform (~> 2.0.5)
   revolution!
   rmagick
   rollout
