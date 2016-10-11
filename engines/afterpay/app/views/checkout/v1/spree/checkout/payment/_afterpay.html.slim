@@ -16,7 +16,7 @@ ruby:
           var $afterpayErrorMessage = $("p.afterpay-error");
 
           $.get(getTokenUrl, function (response) {
-            $afterpayButton.html('Pay with #{image_tag("checkout/logo/afterpay-logo-no-icon-white.png")}');
+            $afterpayButton.html('Pay with #{image_tag("checkout/logo/afterpay-logo-no-icon-white.png", alt: "Afterpay")}');
             $afterpayButton.on('click', function () {
               AfterPay.init();
               AfterPay.display({token: response.token});
