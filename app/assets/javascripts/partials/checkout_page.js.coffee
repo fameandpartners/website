@@ -19,6 +19,10 @@ page.initCheckoutEditPage = () ->
           $('#order_ship_address_attributes_country_id').trigger('change')
         page.updateShippingFormVisibility()
 
+      $('.js-checkout-email-shipping').keyup ->
+        $('.js-checkout-email-billing').val $(this).val()
+        return
+
       $(document).on('change',  '#create_account', page.updatePasswordFieldsVisibility)
       $(document).on('click',   'form.checkout-form input[type=submit]', page.onAjaxLoadingHandler)
 
@@ -138,12 +142,12 @@ page.initCheckoutEditPage = () ->
 
     updateShippingFormVisibility: () ->
       if @ship_to_same_address == true
-        $('[data-hook="shipping_inner"]').hide()
-        $('[data-hook="shipping_inner"]').find(':input').prop('disabled', true)
+        $('[data-hook="billing_inner"]').hide()
+        $('[data-hook="billing_inner"]').find(':input').prop('disabled', true)
         $('#order_use_billing').val(1)
       else
-        $('[data-hook="shipping_inner"]').show()
-        $('[data-hook="shipping_inner"]').find(':input').prop('disabled', false)
+        $('[data-hook="billing_inner"]').show()
+        $('[data-hook="billing_inner"]').find(':input').prop('disabled', false)
         $('#order_use_billing').val("")
 
     updatePasswordFieldsVisibility: () ->
