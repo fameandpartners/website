@@ -7,6 +7,11 @@
 
     = hidden_field_tag :create_account, :value => true
 
+    .row
+      .col-xs-12
+        - if Features.active?(:checkout_fb_login) && !signed_in?
+          = link_to 'Sign in with Facebook', fb_auth_path(spree_user_return_to: checkout_path), class: 'btn btn-facebook btn-black btn-md'
+
     .form-wrapper data-hook='shipping_inner'
       = form.fields_for :ship_address do |ship_form|
         = render partial: 'checkout/v1/spree/checkout/address_form', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}

@@ -64,11 +64,6 @@ ruby:
     p.help-block.pull-right in case we need to contact you about your order
     = form.phone_field :phone, class: 'required form-control form-control-md', required: 'required'
 
-.row
-  .col-xs-12
-    - if Features.active?(:checkout_fb_login) && !signed_in?
-      = link_to 'Sign in with Facebook', fb_auth_path(spree_user_return_to: checkout_path), class: 'btn btn-facebook btn-black btn-md'
-
 - if address_type == 'shipping'
   .row
     .col-xs-12
