@@ -246,15 +246,19 @@ form.hide-fully#pdpDataForWishlist
 = render partial: 'micro_data'
 
 javascript:
-
+  var addthis_config;
+  var addthis_share;
   $(document).ready(function() {
-
-    // AddThis async call
-    var addthis_config = {
+    addthis_config = {
       "ui_use_css": false,
-      "pubid": 'ra-57c0c134e80f9415'
+      "pubid": 'ra-57c0c134e80f9415',
+      "data_track_clickback": false,
+      "data_track_addressbar": false
     };
-
+    addthis_share = {
+      url: window.location.href
+    };
+    // AddThis async call
     addthis.init();
 
     // controls for details container, mobile only
