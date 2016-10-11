@@ -10,7 +10,6 @@ class CtaPrice extends React.Component {
     super(props, context);
 
     this.state = {
-      sending: false,
       modalIsOpen: false
     };
 
@@ -33,8 +32,6 @@ class CtaPrice extends React.Component {
     if(this.props.customize.size.id
       && this.props.customize.color.id
       && this.props.customize.length.id) {
-      // disable "ADD TO BAG" button and show spinner
-      this.setState({sending:true});
       document.getElementById('pdpCartSizeId').value = this.props.customize.size.id;
       document.getElementById('pdpCartColorId').value = this.props.customize.color.id;
       document.getElementById('pdpCartCustomId').value = this.props.customize.customization.id;
@@ -88,17 +85,10 @@ class CtaPrice extends React.Component {
           {(() => {
             if(this.props.customize.size.id
               && this.props.customize.color.id
-              && this.props.customize.length.id
-              && !this.state.sending) {
+              && this.props.customize.length.id) {
               return (
                 <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">
                   ADD TO BAG
-                </a>
-              );
-            } else if(this.state.sending) {
-              return (
-                <a href="javascript:;" className="btn btn-black btn-loading btn-lrg">
-                  <img src="/assets/loader-bg-black.gif" alt="Adding to bag" />
                 </a>
               );
             } else {
