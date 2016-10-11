@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160921025247) do
+ActiveRecord::Schema.define(:version => 20160915133006) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -804,7 +804,7 @@ ActiveRecord::Schema.define(:version => 20160921025247) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
-    t.integer  "spree_product_id"
+    t.integer  "product_id"
     t.integer  "customisation_value_id"
     t.integer  "product_color_value_id"
     t.datetime "created_at",              :null => false
