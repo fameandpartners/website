@@ -15,19 +15,20 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
     And I select "Petite" skirt length
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
+    Then I click on "Continue to payment" button
     Then I select "Australia" country and "Queensland" state
     And I fill in form fields with:
       | Email                   | firefox_user@fameandpartners.com |
       | First Name              | Roger                            |
       | Last Name               | That                             |
-      | Street Address          | Street X                         |
+      | Address                 | Street X                         |
       | Street Address (cont'd) | House Y                          |
       | City                    | Melbourne                        |
-      | Phone Number            | 2255-4422                        |
+      | Phone                   | 2255-4422                        |
       | Postcode                | 12345                            |
     And I click on "Continue to payment" button
     And I click on "Afterpay" link
-    And I click on "Pay with Afterpay" link
+    And I click on "Pay with" link
     Then I fill in Afterpay data within its iframe:
       | email      | firefox_user@fameandpartners.com |
       | password   | firefox1                         |
@@ -50,19 +51,20 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
     And I select "Petite" skirt length
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
+    Then I click on "Continue to payment" button
     Then I select "Australia" country and "Queensland" state
     And I fill in form fields with:
       | Email                   | firefox_user@fameandpartners.com |
       | First Name              | Roger                            |
       | Last Name               | That                             |
-      | Street Address          | Street X                         |
+      | Address                 | Street X                         |
       | Street Address (cont'd) | House Y                          |
       | City                    | Melbourne                        |
-      | Phone Number            | 2255-4422                        |
+      | Phone                   | 2255-4422                        |
       | Postcode                | 12345                            |
     And I click on "Continue to payment" button
     And I click on "Afterpay" link
-    And I click on "Pay with Afterpay" link
+    And I click on "Pay with" link
     Then I fill in Afterpay data within its iframe:
       | email      | firefox_user@fameandpartners.com |
       | password   | firefox1                         |
@@ -86,15 +88,16 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
     And I select "Petite" skirt length
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
+    Then I click on "Continue to payment" button
     Then I select "Australia" country and "Queensland" state
     And I fill in form fields with:
       | Email                   | firefox_user@fameandpartners.com |
       | First Name              | Roger                            |
       | Last Name               | That                             |
-      | Street Address          | Street X                         |
+      | Address                 | Street X                         |
       | Street Address (cont'd) | House Y                          |
       | City                    | Melbourne                        |
-      | Phone Number            | 2255-4422                        |
+      | Phone                   | 2255-4422                        |
       | Postcode                | 12345                            |
     And I click on "Continue to payment" button
     And I click on "Afterpay" link
