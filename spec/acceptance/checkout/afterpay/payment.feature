@@ -26,7 +26,8 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | Phone Number            | 2255-4422                        |
       | Postcode                | 12345                            |
     And I click on "Continue to payment" button
-    And I click on "Continue With Afterpay" link
+    And I click on "Afterpay" link
+    And I click on "Pay with Afterpay" link
     Then I fill in Afterpay data within its iframe:
       | email      | firefox_user@fameandpartners.com |
       | password   | firefox1                         |
@@ -60,7 +61,8 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | Phone Number            | 2255-4422                        |
       | Postcode                | 12345                            |
     And I click on "Continue to payment" button
-    And I click on "Continue With Afterpay" link
+    And I click on "Afterpay" link
+    And I click on "Pay with Afterpay" link
     Then I fill in Afterpay data within its iframe:
       | email      | firefox_user@fameandpartners.com |
       | password   | firefox1                         |
@@ -95,4 +97,5 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | Phone Number            | 2255-4422                        |
       | Postcode                | 12345                            |
     And I click on "Continue to payment" button
+    And I click on "Afterpay" link
     Then I should see "Afterpay is not available at the moment. Please, try another payment method."
