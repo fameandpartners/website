@@ -56,6 +56,7 @@ Feature: Complete Guest Checkout
     And I agree with shipping fee
     And I click on "Continue to payment" button
     And I should see "Shipping$30.0"
+    And I click on "Credit Card" link
     And I fill in credit card information:
       | Card number      | 5520000000000000  |
       | Name on card     | Zaphod Beeblebrox |
@@ -89,6 +90,7 @@ Feature: Complete Guest Checkout
       | Phone Number            | 2255-4422      |
       | <Zipcode Label>         | 12345          |
     And I click on "Continue to payment" button
+    And I click on "Credit Card" link
     And I fill in credit card information:
       | Card number      | 5520000000000000  |
       | Name on card     | Zaphod Beeblebrox |
