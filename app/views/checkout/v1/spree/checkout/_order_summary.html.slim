@@ -84,22 +84,22 @@ ruby:
           .cart-total
             p
               | Sub Total
-              span.pull-right = cart.display_item_total.to_s
+              span.value = cart.display_item_total.to_s
             p
               | Shipping
-              span.pull-right = cart.display_shipment_total.present? ? cart.display_shipment_total.to_s : 'Free Shipping'
+              span.value = cart.display_shipment_total.present? ? cart.display_shipment_total.to_s : 'Free Shipping'
             p
               - if cart.display_promotion_total.to_s != "$0.00"
                 - if cart.promocode.present?
                   | Promotion (#{ truncate(cart.promocode, length: 10) })
-                  span.pull-right = cart.display_promotion_total.to_s
+                  span.value = cart.display_promotion_total.to_s
                 - else
                   | Promotion
-                  span.pull-right = cart.display_promotion_total.to_s
+                  span.value = cart.display_promotion_total.to_s
 
             p.order-total
               | Order Total
-              span.pull-right = cart.display_total.to_s
+              span.value = cart.display_total.to_s
               - if current_site_version.is_australia?
                 .taxes Including GST
 
