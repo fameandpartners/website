@@ -13,15 +13,16 @@ Feature: Complete Guest Checkout
     And I select "<Skirt Length>" skirt length
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
+    Then I click on "Continue to payment" button
     Then I fill in form fields with blank spaces:
       | First Name |
       | Last Name  |
     And I fill in form fields with:
       | Email                   | invalid-email |
-      | Street Address          | Street X      |
+      | Address                 | Street X      |
       | Street Address (cont'd) | House Y       |
       | City                    | Melbourne     |
-      | Phone Number            | 2255-4422     |
+      | Phone                   | 2255-4422     |
       | <Zipcode Label>         | 12345         |
     And I select "<State>" state
     And I select "<Country>" country
@@ -42,27 +43,28 @@ Feature: Complete Guest Checkout
     And I select "<Skirt Length>" skirt length
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
+    Then I click on "Continue to payment" button
     Then I select "<Country>" country and "<State>" state
     And I should see shipping to "<Country>" warning
     And I fill in form fields with:
       | Email                   | test@email.com |
       | First Name              | Roger          |
       | Last Name               | That           |
-      | Street Address          | Street X       |
+      | Address                 | Street X       |
       | Street Address (cont'd) | House Y        |
       | City                    | Melbourne      |
-      | Phone Number            | 2255-4422      |
+      | Phone                   | 2255-4422      |
       | <Zipcode Label>         | 12345          |
-    And I agree with shipping fee
+    Then I agree with shipping fee
     And I click on "Continue to payment" button
-    And I should see "Shipping$30.0"
+    And I should see "Shipping$30.00"
     And I click on "Credit Card" link
-    And I fill in credit card information:
-      | Card number      | 5520000000000000  |
-      | Name on card     | Zaphod Beeblebrox |
-      | CVC              | 123               |
-      | Expiration Month | 10                |
-      | Expiration Year  | 2050              |
+    And I fill in form fields with:
+      | Name on your card | Zaphod Beeblebrox |
+      | Card number       | 5520000000000000  |
+      | month             | 10                |
+      | year              | 2050              |
+      | card_code         | 123               |
     And I click on "Place your order now" button
     Then I should see my order placed, with "Connie" dress, "<Dress Size>" size and "<Dress Price>" price
 
@@ -79,24 +81,25 @@ Feature: Complete Guest Checkout
     And I select "<Skirt Length>" skirt length
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
+    Then I click on "Continue to payment" button
     Then I select "<Country>" country and "<State>" state
     And I fill in form fields with:
       | Email                   | test@email.com |
       | First Name              | Roger          |
       | Last Name               | That           |
-      | Street Address          | Street X       |
+      | Address                 | Street X       |
       | Street Address (cont'd) | House Y        |
       | City                    | Melbourne      |
-      | Phone Number            | 2255-4422      |
+      | Phone                   | 2255-4422      |
       | <Zipcode Label>         | 12345          |
     And I click on "Continue to payment" button
     And I click on "Credit Card" link
-    And I fill in credit card information:
-      | Card number      | 5520000000000000  |
-      | Name on card     | Zaphod Beeblebrox |
-      | CVC              | 123               |
-      | Expiration Month | 10                |
-      | Expiration Year  | 2050              |
+    And I fill in form fields with:
+      | Name on your card | Zaphod Beeblebrox |
+      | Card number       | 5520000000000000  |
+      | month             | 10                |
+      | year              | 2050              |
+      | card_code         | 123               |
     And I click on "Place your order now" button
     Then I should see my order placed, with "Connie" dress, "<Dress Size>" size and "<Dress Price>" price
 

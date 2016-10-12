@@ -28,17 +28,7 @@ module Acceptance
     end
 
     step 'I agree with shipping fee' do
-      find('#international_shipping_fee').click
-    end
-
-    step 'I fill in credit card information:' do |cc_info|
-      cc_info = cc_info.to_h
-
-      fill_in 'Name on card', with: cc_info['Name on card']
-      fill_in 'Card number', with: cc_info['Card number']
-      fill_in 'month', with: cc_info['Expiration Month']
-      fill_in 'year', with: cc_info['Expiration Year']
-      fill_in 'card_code', with: cc_info['CVC']
+      find("label[for='international_shipping_fee']").click
     end
 
     step 'I should see my order placed, with :dress_name dress, :size_number size and :dress_price price' do |dress_name, dress_size, dress_price|
