@@ -1,13 +1,14 @@
 /* [SHIPPING FEE ALERT]
 -------------------------------------------------------*/
 .alert-fee {
-  width: 100%;
-  padding: 15px;
+  padding: 15px 0;
   border-top: 1px solid $beage-bg;
 
   .media-wrap {
-    width: 60px;
-    margin-top: 10px;
+    width: 30px;
+    margin-top: 5px;
+    margin-right: 10px;
+    background: none;
   }
 
   .title {
