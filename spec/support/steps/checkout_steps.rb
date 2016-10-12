@@ -48,6 +48,7 @@ module Acceptance
       send 'I select :skirt_length skirt length', skirt_length
       send 'I should see add to cart link enabled'
       send 'I click on :link_text link', 'ADD TO BAG'
+      send 'I click on :button_text button', 'Continue to payment'
     end
   end
 end
