@@ -13,7 +13,8 @@ module Render3d
     attr_accessible :attachment
 
     has_attached_file :attachment,
-      path: 'spree/products/render3d/:id/:style/:basename.:extension',
+      url: '/spree/products/render3d/:id/:style/:basename.:extension',
+      path: ':rails_root/public/spree/products/render3d/:id/:style/:basename.:extension',
       styles: { product: '240x240>', large: '600x600>' },
       default_style: :product,
       convert_options: { :all => '-strip -auto-orient' }
