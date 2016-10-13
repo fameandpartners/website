@@ -1,9 +1,4 @@
 Spree::CheckoutController.class_eval do
-  include Marketing::Gtm::Controller::Order
-  include Marketing::Gtm::Controller::Product
-  include Marketing::Gtm::Controller::Variant
-  include Marketing::Gtm::Controller::Event
-
   before_filter :prepare_order, only: :edit
   before_filter :set_order_site_version, :only => :update
   before_filter :find_payment_methods, only: [:edit, :update]
