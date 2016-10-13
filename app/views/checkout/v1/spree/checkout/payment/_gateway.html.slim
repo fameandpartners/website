@@ -1,8 +1,6 @@
 ruby:
   param_prefix = "payment_source[#{payment_method.id}]"
-  options_hash = { class: 'form-control form-control-md' }
-  options_hash_select = { class: 'form-control form-control-md selectbox' }
-  options_hash[:autocomplete] = 'off' if Rails.env.production?
+  options_hash = { class: 'form-control form-control-md', autocomplete: 'off' }
   is_masterpass = current_step.eql?('masterpass')
   if is_masterpass
     realAccountNumber = @masterpass_data[:card][:accountNumber]
