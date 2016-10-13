@@ -17,7 +17,5 @@ module Render3d
       styles: { product: '240x240>', large: '600x600>' },
       default_style: :product,
       convert_options: { :all => '-strip -auto-orient' }
-
-    self.attachment_definitions[:attachment] = Paperclip::Attachment.default_options
   end
 end
