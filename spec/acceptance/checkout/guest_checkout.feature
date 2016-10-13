@@ -13,7 +13,7 @@ Feature: Complete Guest Checkout
     And I select "<Skirt Length>" skirt length
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
-    Then I click on "Continue to payment" button
+    #Then I click on "Continue to payment" button
     Then I fill in form fields with blank spaces:
       | First Name |
       | Last Name  |
@@ -43,7 +43,7 @@ Feature: Complete Guest Checkout
     And I select "<Skirt Length>" skirt length
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
-    Then I click on "Continue to payment" button
+    #Then I click on "Continue to payment" button
     Then I select "<Country>" country and "<State>" state
     And I should see shipping to "<Country>" warning
     And I fill in form fields with:
@@ -81,7 +81,7 @@ Feature: Complete Guest Checkout
     And I select "<Skirt Length>" skirt length
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
-    Then I click on "Continue to payment" button
+    #Then I click on "Continue to payment" button
     Then I select "<Country>" country and "<State>" state
     And I fill in form fields with:
       | Email                   | test@email.com |

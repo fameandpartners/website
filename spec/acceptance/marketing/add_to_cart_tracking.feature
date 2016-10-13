@@ -14,7 +14,7 @@ Feature: Add to Cart Tracking
     And I select "Petite" skirt length
     Then I should see add to cart link enabled
     And I click on "ADD TO BAG" link
-    Then I click on "Continue to payment" button
+    #Then I click on "Continue to payment" button
     And I should see "Secure checkout"
     Then Page should have dataLayer "addToCart" event
     Then Page should have dataLayer "Connie" product
