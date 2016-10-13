@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {Scrollbars} from 'react-custom-scrollbars';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
-import {GetDressVariantId, UpdateUrl} from './utils';
+import {UpdateUrl} from './utils';
 
 class SidePanelColor extends SidePanel {
   constructor(props, context) {
@@ -34,13 +34,6 @@ class SidePanelColor extends SidePanel {
     customize.color.name = event.currentTarget.dataset.name;
     customize.color.presentation = event.currentTarget.dataset.presentation;
     customize.color.price = event.currentTarget.dataset.price;
-    // search for dress variant id, this will work only for default color dresses
-    // NOTE: we should check if this is even needed, since length
-    // selection is required.
-    customize.dressVariantId = GetDressVariantId(
-      this.props.variants,
-      customize.color.id,
-      this.props.customize.size.id);
 
     this.props.actions.customizeDress(customize);
 

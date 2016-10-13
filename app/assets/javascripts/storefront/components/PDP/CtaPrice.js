@@ -35,7 +35,6 @@ class CtaPrice extends React.Component {
       document.getElementById('pdpCartSizeId').value = this.props.customize.size.id;
       document.getElementById('pdpCartColorId').value = this.props.customize.color.id;
       document.getElementById('pdpCartCustomId').value = this.props.customize.customization.id;
-      document.getElementById('pdpCartDressVariantId').value = this.props.customize.dressVariantId;
       document.getElementById('pdpCartLength').value = this.props.customize.length.id;
       document.getElementById('pdpCartVariantId').value = this.props.product.master_id;
       // TODO: build express making functionality

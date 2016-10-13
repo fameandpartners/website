@@ -5,7 +5,6 @@ import {Scrollbars} from 'react-custom-scrollbars';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
 import SidePanelSizeChart from './SidePanelSizeChart';
-import {GetDressVariantId} from './utils';
 
 class SidePanelSize extends SidePanel {
   constructor(props, context) {
@@ -19,13 +18,7 @@ class SidePanelSize extends SidePanel {
     customize.size = {};
     customize.size.id = event.currentTarget.dataset.id;
     customize.size.presentation = event.currentTarget.dataset.presentation;
-    // search for dress variant id, this will work only for default color dresses
-    // NOTE: we should check if this is even needed, since length
-    // selection is required.
-    customize.dressVariantId = GetDressVariantId(
-      this.props.variants,
-      this.props.customize.color.id,
-      customize.size.id);
+
     this.props.actions.customizeDress(customize);
 
     this.closeMenu();
