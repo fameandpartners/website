@@ -24,11 +24,6 @@
           label for="ship_to_address" This is also my billing address
           = form.hidden_field :use_shipping
 
-    = render partial: 'shipping_fee_warning'
-
-    - if delivery_date_messaging_enabled?
-      = react_component('Delivery')
-
     .row.hidden
       .col-md-12.form-group
         = form.label :customer_notes, 'Comments or special instructions'
@@ -37,6 +32,11 @@
     .form-wrapper data-hook='billing_inner'
       = form.fields_for :bill_address do |bill_form|
         = render partial: 'checkout/v1/spree/checkout/address_form', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
+
+    = render partial: 'shipping_fee_warning'
+
+    - if delivery_date_messaging_enabled?
+      = react_component('Delivery')
 
     .row
       .col-xs-12.form-group
