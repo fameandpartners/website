@@ -133,12 +133,12 @@ module Products
     end
 
     def collected_render3d_images
-      render3d_images.collect do |img|
+      (render3d_images || []).collect do |img|
         {
           id: img.id,
           url: img.attachment.url(:original),
           url_product: img.attachment.url(:product),
-          color_id: img.product_color_value_id,
+          color_id: img.product_color_value.option_value_id,
           customization_id: img.customisation_value_id,
           alt: name
         }
