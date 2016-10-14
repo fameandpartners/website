@@ -104,8 +104,14 @@
               Promotion (<span class="promocode-name"><%= @cart.promocode %></span>)<span class="value"><%= @cart.display_promotion_total %></span>
               <% end %>
             </p>
-            <p class="order-total">
-              Order Total <span class="value"><%= @cart.display_total %></span>
+  <% if @cart.taxes: %>
+    <% for tax in @cart.taxes: %>
+      <p>
+        <%= tax.label %>
+        <span class="pull-right"><%= tax.display_tax_total %></span>
+      </p>
+    <% end %>
+  <% end %>
             </p>
           </div>
           <div class="cart--call-to-actions">

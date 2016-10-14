@@ -16,12 +16,22 @@ class  UserCart::UserCartResource
       display_shipment_total: order_display_shipment_total,
       display_promotion_total: order.display_promotion_total,
       display_total: order.display_total,
+      taxes: serialize_taxes,
       site_version: site_version,
       order_number: order.number
     )
   end
 
   private
+
+    def serialize_taxes
+      order.adjustments.tax.map do |tax|
+        {
+          label:             tax.label,
+          display_tax_total: Spree::Money.new(tax.amount, { currency: order.currency }).to_s
+        }
+      end
+    end
 
     def order_display_shipment_total
       if order.shipment && order.shipment.display_amount && order.shipment.display_amount.money.cents > 0

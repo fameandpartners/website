@@ -91,8 +91,12 @@ $('.js-trigger-empty-cart-modal').modal({
             Promotion (<%= @cart.promocode %>)<span class="value"><%= @cart.display_promotion_total %></span>
           <% end %>
         </p>
-        <p class="order-total">
-          Order Total <span class="value"><%= @cart.display_total %></span>
+<% for tax in @cart.taxes: %>
+  <p>
+    <%= tax.label %>
+    <span class="pull-right"><%= tax.display_tax_total %></span>
+  </p>
+<% end %>
         </p>
       </div>
     </div>
