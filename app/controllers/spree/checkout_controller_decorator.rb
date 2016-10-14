@@ -7,6 +7,7 @@ Spree::CheckoutController.class_eval do
   before_filter :prepare_order, only: :edit
   before_filter :set_order_site_version, :only => :update
   before_filter :find_payment_methods, only: [:edit, :update]
+  before_filter :update_tax_charges, only: [:edit]
   before_filter :before_masterpass
   before_filter :data_layer_add_to_cart_event, only: [:edit]
   skip_before_filter :check_registration
@@ -308,6 +309,10 @@ Spree::CheckoutController.class_eval do
     @afterpay_method = @order.available_payment_methods.detect do |method|
       method.method_type == 'afterpay' && current_site_version.currency == method.currency
     end
+  end
+
+  def update_tax_charges
+    @order.create_tax_charge!
   end
 
   helper_method :completion_route
