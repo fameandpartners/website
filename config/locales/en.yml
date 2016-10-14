@@ -74,7 +74,7 @@ en:
         event_date: 'Event date'
       spree/address:
         address1: Street Address
-        address2: "Street Address (contd.)"
+        address2: "Street Address line 2"
         city: City / Suburb
         phone: Phone number
         email: Email address
