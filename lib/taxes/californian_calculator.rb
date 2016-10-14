@@ -24,8 +24,9 @@ module Taxes
     end
 
     def shipping_to_california?(order)
-      ship_address = order.ship_address
-      ship_address.country.iso3 == 'USA' && ship_address.state.name == 'California'
+      country_name = order.ship_address.try(:country).try(:iso3)
+      state_name   = order.ship_address.try(:state).try(:name)
+      country_name == 'USA' && state_name == 'California'
     end
 
     def compute_order(order)
