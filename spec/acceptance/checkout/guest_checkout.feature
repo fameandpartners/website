@@ -20,7 +20,7 @@ Feature: Complete Guest Checkout
     And I fill in form fields with:
       | Email                   | invalid-email |
       | Address                 | Street X      |
-      | Street Address (cont'd) | House Y       |
+      | Street address line 2   | House Y       |
       | City                    | Melbourne     |
       | Phone                   | 2255-4422     |
       | <Zipcode Label>         | 12345         |
@@ -51,7 +51,7 @@ Feature: Complete Guest Checkout
       | First Name              | Roger          |
       | Last Name               | That           |
       | Address                 | Street X       |
-      | Street Address (cont'd) | House Y        |
+      | Street address line 2   | House Y        |
       | City                    | Melbourne      |
       | Phone                   | 2255-4422      |
       | <Zipcode Label>         | 12345          |
@@ -88,7 +88,7 @@ Feature: Complete Guest Checkout
       | First Name              | Roger          |
       | Last Name               | That           |
       | Address                 | Street X       |
-      | Street Address (cont'd) | House Y        |
+      | Street address line 2   | House Y        |
       | City                    | Melbourne      |
       | Phone                   | 2255-4422      |
       | <Zipcode Label>         | 12345          |

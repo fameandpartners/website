@@ -15,7 +15,7 @@ Feature: Afterpay on Australian's Website Checkout
       | First Name              | Roger          |
       | Last Name               | That           |
       | Address                 | Street X       |
-      | Street Address (cont'd) | House Y        |
+      | Street address line 2   | House Y        |
       | City                    | Melbourne      |
       | Phone                   | 2255-4422      |
       | Postcode                | 12345          |
@@ -30,7 +30,7 @@ Feature: Afterpay on Australian's Website Checkout
       | First Name              | Roger          |
       | Last Name               | That           |
       | Address                 | Street X       |
-      | Street Address (cont'd) | House Y        |
+      | Street address line 2   | House Y        |
       | City                    | Melbourne      |
       | Phone                   | 2255-4422      |
       | Zipcode                 | 12345          |
