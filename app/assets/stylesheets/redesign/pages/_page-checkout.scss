@@ -170,8 +170,14 @@
       font-size: 2rem;
     }
 
-    .has-warning ~ .required {
-      border-color: $c-brand-red;
+    .has-warning {
+
+      .required,
+      ~ .required,
+      ~ .required .chosen-single {
+        border-color: $c-brand-red;
+      }
+
     }
 
     // TODO: should it be in .form-global?
