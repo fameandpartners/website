@@ -54,14 +54,14 @@ class PdpGallery extends React.Component {
       let offset = ((image.clientWidth / 2) - (image.parentNode.clientWidth / 2)) * -1;
 
       // If image is old (e.g. Skirts), move images only 30% to the left
-      if(image.naturalWidth > 1600) { offset = offset * MOVE_LEFT_PERCENT; }
+      if(image.naturalWidth > 1700) { offset = offset * MOVE_LEFT_PERCENT; }
 
       return offset;
     }
   }
 
   render() {
-    let foundImage = false;
+    let filteredImages = [];
     let thumbIds = [];
 
     const SETTINGS = {
@@ -84,21 +84,37 @@ class PdpGallery extends React.Component {
       ]
     };
 
-    // check if selected color ID matches any available images
-    this.props.images.map((image, index) => {
-      if(image.color_id === this.props.customize.color.id) {
-        foundImage = true;
-      }
+    // Step 1 - match color and customization
+    filteredImages = this.props.images.filter((image) => {
+      return image.color_id === this.props.customize.color.id
+        && image.customization_id === this.props.customize.customization.id;
     });
 
-    // if no match found, use default dress color
-    const COLOR_ID = foundImage
-      ? this.props.customize.color.id
-      : this.props.product.featured_image.table.color_id;
+    // Step 2 - if step 1 failed try to match just color
+    if(filteredImages.length === 0) {
+      filteredImages = this.props.images.filter((image) => {
+        return image.color_id === this.props.customize.color.id;
+      });
+    }
 
-    // match color id with images
-    let images = this.props.images.map((image, index) => {
-      if(image.color_id === COLOR_ID) {
+    // Step 3 - if step 2 failed try to match default color with customization
+    if(filteredImages.length === 0) {
+      filteredImages = this.props.images.filter((image) => {
+        return image.color_id === this.props.product.featured_image.table.color_id
+          && image.customization_id === this.props.customize.customization.id;
+      });
+    }
+
+    // Step 4 - if step 3 failed try to match just the default color
+    if(filteredImages.length === 0) {
+      filteredImages = this.props.images.filter((image) => {
+        return image.color_id === this.props.product.featured_image.table.color_id
+          && image.customization_id === undefined;
+      });
+    }
+
+    let images = filteredImages.map((image, index) => {
+      if(image) {
         let id = "gallery-image-" + index;
         thumbIds.push(id);
         return (

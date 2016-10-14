@@ -17,11 +17,11 @@ class SidePanelCustom extends SidePanel {
     customize.customization = {};
 
     if(this.props.customize.customization.id === event.currentTarget.dataset.id) {
-      customize.customization.id = "";
+      customize.customization.id = undefined;
       customize.customization.presentation = "";
       customize.customization.price = 0;
     } else {
-      customize.customization.id = event.currentTarget.dataset.id;
+      customize.customization.id = parseInt(event.currentTarget.dataset.id);
       customize.customization.presentation = event.currentTarget.dataset.presentation;
       customize.customization.price = parseFloat(event.currentTarget.dataset.price);
     }
