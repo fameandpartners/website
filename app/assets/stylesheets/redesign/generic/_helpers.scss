@@ -26,6 +26,10 @@
   clip: rect(1px, 1px, 1px, 1px);
 }
 
+.most-front {
+  z-index: 10000 !important;
+}
+
 // truncates single line of text
 .txt-truncate-1 {
   white-space: nowrap;
