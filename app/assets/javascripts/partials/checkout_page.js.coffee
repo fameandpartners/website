@@ -13,10 +13,6 @@ page.initCheckoutEditPage = () ->
       @ship_to_same_address = $("input[name='ship_to_address']").prop("checked")
       $("input[name='ship_to_address']").change =>
         @ship_to_same_address = $("input[name='ship_to_address']").prop("checked")
-        if @ship_to_same_address == true
-          $('#order_bill_address_attributes_country_id').trigger('change')
-        else
-          $('#order_ship_address_attributes_country_id').trigger('change')
         page.updateShippingFormVisibility()
 
       $('.js-checkout-email-shipping').keyup ->
