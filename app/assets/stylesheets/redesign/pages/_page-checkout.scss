@@ -74,6 +74,7 @@
 
     .promo-code-apply {
       font-size: 1.3rem;
+      margin: 0;
       padding: 5px 25px;
       color: $c-neutral-white;
       background-color: $c-neutral-black;
@@ -136,6 +137,28 @@
 
   }
 
+  // product-form
+  .product-form {
+    margin-bottom: 30px;
+  }
+
+  // Auth messaging
+  .auth-alert {
+    padding: 15px 35px 15px 15px;
+    margin-bottom: 25px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    display: none;
+  }
+
+  .alert-danger {
+    margin-top: 12.5px;
+  }
+
+  .btn {
+    margin-top: 20px;
+  }
+
   // Checkout step
   .checkout-step {
 
@@ -150,6 +173,8 @@
 
     .form-control {
       font-weight: 300;
+      background: none;
+      color: $black-checkout-input;
       border: 1px solid $c-neutral-4;
       box-shadow: none;
 
@@ -186,6 +211,13 @@
       font-weight: 400;
       font-size: 1.7rem;
       padding-bottom: 5px;
+    }
+
+    .slash {
+      line-height: 105px;
+      float: left;
+      margin-left: -5px;
+      margin-right: -5px;
     }
 
   }
