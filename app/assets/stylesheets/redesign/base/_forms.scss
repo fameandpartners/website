@@ -16,6 +16,7 @@ input[type="checkbox"] {
   font-size: 1em;
   border-radius: 0;
   border-color: rgba($c-neutral-black, .55);
+  -webkit-appearance: none;
 }
 
 .alert {
