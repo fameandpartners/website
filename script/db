@@ -294,6 +294,8 @@ function create_test_fixture_dump
   bundle exec rake dev:enable_payment_gateways TARGET_ENV=test
   echo "$(magenta)>> $(white)Adding Test User$(normal)"
   bundle exec rake dev:add_test_fixture_user
+  echo "$(magenta)>> $(white)Adding Fixture Tax Rates$(normal)"
+  bundle exec rake dev:enable_fixture_tax_rates
   reset_pg_pk_sequences
 
   echo "$(magenta)>> $(white)Vacumming DEV DB$(normal)"
