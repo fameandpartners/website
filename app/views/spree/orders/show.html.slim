@@ -58,6 +58,11 @@ section.order-details
                     / TODO: If price is integer remove decimals
                     .amount.col-md-6 #{order.display_promotion_total}
 
+                  - order.taxes.each do |tax|
+                    .row.tax-info
+                      .label.col-md-6 = tax.label
+                      .amount.col-md-6 = tax.display_tax_total
+
                   .row.total-info
                     .label.col-md-6 Total
                     / TODO: If price is integer remove decimals

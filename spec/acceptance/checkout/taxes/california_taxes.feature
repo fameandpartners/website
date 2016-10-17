@@ -30,3 +30,4 @@ Feature: Californian Taxes
       | Expiration Year  | 2050              |
     And I click on "Place My Order" button
     Then I should see my order placed, with "Connie" dress, "US 10" size and "289.00" price
+    Then I should see "CALIFORNIA TAX $21.68"
