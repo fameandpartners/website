@@ -22,7 +22,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | First Name              | Roger                            |
       | Last Name               | That                             |
       | Address                 | Street X                         |
-      | Street Address line 2   | House Y                          |
+      | Street Address (line 2) | House Y                          |
       | City                    | Melbourne                        |
       | Phone                   | 2255-4422                        |
       | Postcode                | 12345                            |
@@ -58,7 +58,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | First Name              | Roger                            |
       | Last Name               | That                             |
       | Address                 | Street X                         |
-      | Street Address line 2   | House Y                          |
+      | Street Address (line 2) | House Y                          |
       | City                    | Melbourne                        |
       | Phone                   | 2255-4422                        |
       | Postcode                | 12345                            |
@@ -95,7 +95,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | First Name              | Roger                            |
       | Last Name               | That                             |
       | Address                 | Street X                         |
-      | Street Address line 2   | House Y                          |
+      | Street Address (line 2) | House Y                          |
       | City                    | Melbourne                        |
       | Phone                   | 2255-4422                        |
       | Postcode                | 12345                            |
