@@ -25,11 +25,10 @@ class  UserCart::UserCartResource
   private
 
     def serialize_taxes
-      order.adjustments.tax.map do |tax|
-        {
-          label:             tax.label,
-          display_tax_total: Spree::Money.new(tax.amount, { currency: order.currency }).to_s
-        }
+      display_tax_total = ->(amount) { Spree::Money.new(amount, { currency: order.currency }).to_s }
+
+      order.adjustments.tax.select('label,amount').map do |tax|
+        { label: tax.label, display_tax_total: display_tax_total.(tax.amount) }
       end
     end
 
