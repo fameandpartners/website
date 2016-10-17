@@ -1,15 +1,24 @@
 .cart-container {
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  right: -100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  z-index: 999;
-  -webkit-overflow-scrolling: touch;
-  @include transition (right 0.3s);
+
+  &.cart-sitewide {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 999;
+    -webkit-overflow-scrolling: touch;
+    @include transition (right 0.3s);
+
+    .cart-wrapper {
+      height: 100%;
+      display: table;
+    }
+
+  }
 
   &.speed-in {
     right: 0;
@@ -31,11 +40,6 @@
 
   .cart-wrapper {
     background-color: $c-neutral-white;
-  }
-
-  &.cart-sitewide .cart-wrapper {
-    height: 100%;
-    display: table;
   }
 
   .cart--top {
