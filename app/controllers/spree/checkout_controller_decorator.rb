@@ -4,17 +4,11 @@ Spree::CheckoutController.class_eval do
   include Marketing::Gtm::Controller::Variant
   include Marketing::Gtm::Controller::Event
 
-  before_filter :prepare_order,
-                :find_payment_methods,
-                :update_tax_charges,
-                :data_layer_add_to_cart_event,
-                only: :edit
-
-  before_filter :set_order_site_version,
-                :find_payment_methods,
-                only: :update
-
+  before_filter :prepare_order, only: :edit
+  before_filter :set_order_site_version, :only => :update
+  before_filter :find_payment_methods, only: [:edit, :update]
   before_filter :before_masterpass
+  before_filter :data_layer_add_to_cart_event, only: [:edit]
   skip_before_filter :check_registration
 
   before_filter def switch_views_version
