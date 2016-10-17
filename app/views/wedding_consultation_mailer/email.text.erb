@@ -1,14 +1,11 @@
-
-Name: <%= @wedding_consultation.full_name %>
-Email: <%= @wedding_consultation.email %>
-Phone: <%= @wedding_consultation.phone %>
-Date of Birth: <%= @wedding_consultation.birthday %>
+Name: <%= @wedding_consultation_form.full_name %>
+Contact by: <%= @wedding_consultation_form.session_type %>
+Email: <%= @wedding_consultation_form.email %>
+Phone: <%= @wedding_consultation_form.phone %>
 
 --------------------------------------------
 
-Time Zone: <%= @wedding_consultation.timezone %>
-First Preference: <%= @wedding_consultation.preference1 %>
-Second Preference: <%= @wedding_consultation.preference2 %>
-Third Preference: <%= @wedding_consultation.preference3 %>
+Time Zone: <%= @wedding_consultation_form.timezone %>
+First Preference: <%= @wedding_consultation_form.preferred_time %>
 
 --------------------------------------------
