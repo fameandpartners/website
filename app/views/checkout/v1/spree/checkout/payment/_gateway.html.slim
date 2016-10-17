@@ -26,7 +26,7 @@ ruby:
 
       - if is_masterpass
         = text_field_tag "#{param_prefix}[filtered_number]", accountNumber,
-                         id: 'number', readonly: true, tabindex: '2',
+                         id: 'number', readonly: true, tabindex: '2', autocomplete: 'off',
                          class: "#{options_hash[:class]} no-post"
         = hidden_field_tag "#{param_prefix}[number]", realAccountNumber
       - else
@@ -39,7 +39,7 @@ ruby:
         label for=""  Expiry Date
         = text_field_tag "#{param_prefix}[month]",
                          is_masterpass ? @masterpass_data[:card][:expiryMonth] : '',
-                         id: 'month', placeholder: 'MM', tabindex: '3', min: '1', max: '12',
+                         id: 'month', placeholder: 'MM', tabindex: '3', min: '1', max: '12', autocomplete: 'off',
                          maxlength: 2, class: "month #{ options_hash[:class]}",
                          readonly: is_masterpass
       .slash
@@ -49,13 +49,14 @@ ruby:
         = text_field_tag "#{param_prefix}[year]",
                          is_masterpass ? @masterpass_data[:card][:expiryYear] : '',
                          id: 'year', placeholder: 'YYYY', tabindex: '4',
-                         maxlength: 4, class: "year #{ options_hash[:class]}",
+                         maxlength: 4, class: "year #{ options_hash[:class]}", autocomplete: 'off',
                          readonly: is_masterpass
       - if !is_masterpass
         .col-xs-4.col-md-4.form-group.card_code
           label CVC
           = text_field_tag "#{param_prefix}[verification_value]", '',
-                           id: 'card_code', class: "cvv #{ options_hash[:class]}", :size => 5, maxlength: 3, tabindex: '5'
+                           id: 'card_code', class: "cvv #{ options_hash[:class]}",
+                           size: 5, maxlength: 3, tabindex: '5', autocomplete: 'off'
 
 .row
   .col-xs-12.form-group.place-order
