@@ -67,6 +67,10 @@ module Orders
       }
     end
 
+    def taxes
+      order.adjustments.eligible.tax.map { |tax| TaxPresenter.new(spree_adjustment: tax, spree_order: order) }
+    end
+
     def fast_making_promo?
       promo_codes.any?{ |code| code.downcase.include?('birthdaygirl') }
     end
