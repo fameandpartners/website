@@ -1,0 +1,4 @@
+en:
+  bergen:
+    retry_message: 'This could request new ASNs to Bergen or trigger emails. Do you want to retry?'
+    retrying_message: 'Process %{id} was marked for retry.'

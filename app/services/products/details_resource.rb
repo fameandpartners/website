@@ -48,7 +48,7 @@ class Products::DetailsResource
         fit:                                 product_fit,
         size:                                product_size,
         style_notes:                         product_style_notes,
-        render_3d:                           product_render_3d,
+        render3d_images:                     product_render3d_images,
         size_chart:                          product.size_chart,
         fast_making:                         product.fast_making,
         standard_days_for_making:            product.standard_days_for_making,
@@ -88,6 +88,15 @@ class Products::DetailsResource
       @product_images ||= Repositories::ProductImages.new(product: product)
     end
 
+    def product_render3d_images
+      @product_render3d_images ||= \
+        if product_render_3d?
+          Render3d::Image.where(product_id: product.id)
+        else
+          []
+        end
+    end
+
     # properties part
     def product_short_description
       product.meta_description.blank? ? product.description : product.meta_description
@@ -109,7 +118,7 @@ class Products::DetailsResource
       Rails.cache.fetch([product, 'product-property', 'style-notes']) { product.property('style_notes') }
     end
 
-    def product_render_3d
+    def product_render_3d?
       Rails.cache.fetch([product, 'product-property', 'render-3d']) { product.property('render-3d') == 'true' }
     end
 

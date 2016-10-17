@@ -61,6 +61,14 @@ AdminUi::Engine.routes.draw do
     resources :pages
   end
 
+  namespace :logistics do
+    resources :bergen, only: [:index] do
+      member do
+        get 'retry'
+      end
+    end
+  end
+
   root to: 'dashboard#index'
 
   mount ManualOrder::Engine, at: '/'
