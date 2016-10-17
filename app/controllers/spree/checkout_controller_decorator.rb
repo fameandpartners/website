@@ -310,10 +310,6 @@ Spree::CheckoutController.class_eval do
     end
   end
 
-  def update_tax_charges
-    @order.create_tax_charge!
-  end
-
   helper_method :completion_route
 
   def set_order_site_version
@@ -332,7 +328,8 @@ Spree::CheckoutController.class_eval do
   helper_method :current_step
 
   def update_adjustments
-    current_order.updater.update_adjustments
+    @order.create_tax_charge!
+    @order.updater.update_adjustments
   end
 
   # Marketing + GTM
