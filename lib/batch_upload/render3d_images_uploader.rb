@@ -2,12 +2,6 @@ require 'batch_upload/images_uploader'
 
 module BatchUpload
   class Render3dImagesUploader < ImagesUploader
-    MAPPED_COLORS = {
-        'hot-pink-and-red' => 'pink-red',
-        'blue-azalea-front' => 'blue-azalea-floral',
-        'palepink' => 'pale-pink',
-        'paleblue' => 'pale-blue'
-    }.freeze
 
     def process!
       each_product do |product, path|
@@ -38,7 +32,6 @@ module BatchUpload
             if color_name.present?
               debug "Search color by name"
 
-              color_name = munge_color_name(color_name)
               color_value = color_for_name(color_name)
 
               if color_value.blank?
@@ -110,13 +103,5 @@ module BatchUpload
       product.customisation_values.where(position: position).first
     end
 
-    def munge_color_name(color_name)
-      new_color_name = MAPPED_COLORS.fetch(color_name, color_name)
-
-      if color_name != new_color_name
-        warn "Color name (#{color_name}) converted to (#{new_color_name})"
-      end
-      new_color_name
-    end
   end
 end
