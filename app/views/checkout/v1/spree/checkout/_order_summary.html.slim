@@ -92,17 +92,19 @@ ruby:
               - if cart.display_promotion_total.to_s != "$0.00"
                 - if cart.promocode.present?
                   | Promotion (#{ truncate(cart.promocode, length: 10) })
-                  span.pull-right = cart.display_promotion_total
+                  span.value = cart.display_promotion_total
                 - else
                   | Promotion
-                  span.pull-right = cart.display_promotion_total
+                  span.value = cart.display_promotion_total
 
-  - cart.taxes.each do |tax|
-    p
-      = tax[:label]
-      span.pull-right = tax[:display_tax_total]
+            - cart.taxes.each do |tax|
+              p
+                = tax[:label]
+                span.value = tax[:display_tax_total]
 
-            span.pull-right = cart.display_total
+            p.order-total
+              | Order Total
+              span.value = cart.display_total
               - if current_site_version.is_australia?
                 .taxes Including GST
 
