@@ -22,7 +22,7 @@ module BatchUpload
             # 4B141-SAGE-GREEN-C2.jpg
 
             match_data = \
-              file_name.match(/(?<sku>\w+)[-_](?<color>\w+([-_]\w+)?)[-_](?<customisation>\w+).\w+$/)
+              file_name.match(/(?<sku>\w+)[-,_](?<color>\S+)[-,_](?<customisation>\w+).\w+$/)
 
             if match_data.nil?
               errors.push({
@@ -32,7 +32,6 @@ module BatchUpload
               match_data = {}
             end
 
-            sku = match_data[:sku].to_s.downcase
             color_name = match_data[:color].to_s.downcase
             customisation_name = match_data[:customisation].to_s.downcase
 
