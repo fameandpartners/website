@@ -15,6 +15,7 @@ class UserCart::CartPresenter < OpenStruct
       display_shipment_total: (display_shipment_total.present? ? display_shipment_total.to_s : 'Free Shipping'),
       display_promotion_total: display_promotion_total.to_s,
       display_total: display_total.to_s,
+      taxes: taxes,
       masterpass_available: masterpass_available?,
       masterpass_is_production: masterpass_is_production?
     }

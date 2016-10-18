@@ -16,12 +16,18 @@ class  UserCart::UserCartResource
       display_shipment_total: order_display_shipment_total,
       display_promotion_total: order.display_promotion_total,
       display_total: order.display_total,
+      taxes: serialize_taxes,
       site_version: site_version,
       order_number: order.number
     )
   end
 
   private
+
+    def serialize_taxes
+      order_presenter = Orders::OrderPresenter.new(order)
+      order_presenter.taxes.map(&:to_h)
+    end
 
     def order_display_shipment_total
       if order.shipment && order.shipment.display_amount && order.shipment.display_amount.money.cents > 0
