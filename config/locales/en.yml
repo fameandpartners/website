@@ -72,8 +72,12 @@ en:
         photo: 'Photo'
         tags: 'Tags'
         event_date: 'Event date'
-      # rename zip to postcode
       spree/address:
+        address1: Street Address
+        address2: "Street Address (line 2)"
+        city: City / Suburb
+        phone: Phone number
+        email: Email address
         zipcode: "Postcode"
       spree/order/bill_address:
         zipcode: "Billing address postcode"

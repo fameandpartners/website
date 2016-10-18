@@ -13319,17 +13319,20 @@ var Modal = React.createClass({
       content: React.PropTypes.object,
       overlay: React.PropTypes.object
     }),
+    portalClassName: React.PropTypes.string,
     appElement: React.PropTypes.instanceOf(SafeHTMLElement),
     onAfterOpen: React.PropTypes.func,
     onRequestClose: React.PropTypes.func,
     closeTimeoutMS: React.PropTypes.number,
     ariaHideApp: React.PropTypes.bool,
-    shouldCloseOnOverlayClick: React.PropTypes.bool
+    shouldCloseOnOverlayClick: React.PropTypes.bool,
+    role: React.PropTypes.string
   },
 
   getDefaultProps: function () {
     return {
       isOpen: false,
+      portalClassName: 'ReactModalPortal',
       ariaHideApp: true,
       closeTimeoutMS: 0,
       shouldCloseOnOverlayClick: true
@@ -13338,7 +13341,7 @@ var Modal = React.createClass({
 
   componentDidMount: function() {
     this.node = document.createElement('div');
-    this.node.className = 'ReactModalPortal';
+    this.node.className = this.props.portalClassName;
     document.body.appendChild(this.node);
     this.renderPortal(this.props);
   },
@@ -13424,6 +13427,7 @@ var CLASS_NAMES = {
 var ModalPortal = module.exports = React.createClass({
 
   displayName: 'ModalPortal',
+  shouldClose: null,
 
   getDefaultProps: function() {
     return {
@@ -13501,7 +13505,10 @@ var ModalPortal = module.exports = React.createClass({
   },
 
   focusContent: function() {
-    this.refs.content.focus();
+    // Don't steal focus from inner elements
+    if (!this.contentHasFocus()) {
+      this.refs.content.focus();
+    }
   },
 
   closeWithTimeout: function() {
@@ -13531,20 +13538,28 @@ var ModalPortal = module.exports = React.createClass({
     }
   },
 
-  handleOverlayClick: function(event) {
-    var node = event.target
-
-    while (node) {
-      if (node === this.refs.content) return
-      node = node.parentNode
+  handleOverlayMouseDown: function(event) {
+    if (this.shouldClose === null) {
+      this.shouldClose = true;
     }
+  },
 
-    if (this.props.shouldCloseOnOverlayClick) {
+  handleOverlayMouseUp: function(event) {
+    if (this.shouldClose && this.props.shouldCloseOnOverlayClick) {
       if (this.ownerHandlesClose())
         this.requestClose(event);
       else
         this.focusContent();
     }
+    this.shouldClose = null;
+  },
+
+  handleContentMouseDown: function(event) {
+    this.shouldClose = false;
+  },
+
+  handleContentMouseUp: function(event) {
+    this.shouldClose = false;
   },
 
   requestClose: function(event) {
@@ -13558,6 +13573,10 @@ var ModalPortal = module.exports = React.createClass({
 
   shouldBeClosed: function() {
     return !this.props.isOpen && !this.state.beforeClose;
+  },
+
+  contentHasFocus: function() {
+    return document.activeElement === this.refs.content || this.refs.content.contains(document.activeElement);
   },
 
   buildClassName: function(which, additional) {
@@ -13578,14 +13597,18 @@ var ModalPortal = module.exports = React.createClass({
         ref: "overlay",
         className: this.buildClassName('overlay', this.props.overlayClassName),
         style: Assign({}, overlayStyles, this.props.style.overlay || {}),
-        onClick: this.handleOverlayClick
+        onMouseDown: this.handleOverlayMouseDown,
+        onMouseUp: this.handleOverlayMouseUp
       },
         div({
           ref: "content",
           style: Assign({}, contentStyles, this.props.style.content || {}),
           className: this.buildClassName('content', this.props.className),
           tabIndex: "-1",
-          onKeyDown: this.handleKeyDown
+          onKeyDown: this.handleKeyDown,
+          onMouseDown: this.handleContentMouseDown,
+          onMouseUp: this.handleContentMouseUp,
+          role: this.props.role
         },
           this.props.children
         )
@@ -36979,7 +37002,7 @@ module.exports = require('./lib/index');
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _ponyfill = require('./ponyfill');
@@ -36988,12 +37011,17 @@ var _ponyfill2 = _interopRequireDefault(_ponyfill);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var root = undefined; /* global window */
+var root = module; /* global window */
 
-if (typeof global !== 'undefined') {
-	root = global;
+
+if (typeof self !== 'undefined') {
+  root = self;
 } else if (typeof window !== 'undefined') {
-	root = window;
+  root = window;
+} else if (typeof global !== 'undefined') {
+  root = global;
+} else {
+  root = Function('return this')();
 }
 
 var result = (0, _ponyfill2['default'])(root);

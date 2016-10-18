@@ -5,7 +5,7 @@ Feature: Afterpay on Australian's Website Checkout
     And Data is setup correctly
     And The "afterpay" feature is enabled
 
-  @javascript
+  @javascript @vcr @shorter_cassette_names
   Scenario: I see Afterpay payment method on Australian Site Version
     # See on Australia site version
     When I select "Connie" dress on "Australia", with "AU 14", "Petite" and proceed to checkout
@@ -14,12 +14,12 @@ Feature: Afterpay on Australian's Website Checkout
       | Email                   | test@email.com |
       | First Name              | Roger          |
       | Last Name               | That           |
-      | Street Address          | Street X       |
-      | Street Address (cont'd) | House Y        |
+      | Address                 | Street X       |
+      | Street Address (line 2) | House Y        |
       | City                    | Melbourne      |
-      | Phone Number            | 2255-4422      |
+      | Phone                   | 2255-4422      |
       | Postcode                | 12345          |
-    And I click on "Pay Securely" button
+    And I click on "Continue to payment" button
     Then I should see "Afterpay"
 
     # Do not see on USA site version
@@ -29,10 +29,10 @@ Feature: Afterpay on Australian's Website Checkout
       | Email                   | test@email.com |
       | First Name              | Roger          |
       | Last Name               | That           |
-      | Street Address          | Street X       |
-      | Street Address (cont'd) | House Y        |
+      | Address                 | Street X       |
+      | Street Address (line 2) | House Y        |
       | City                    | Melbourne      |
-      | Phone Number            | 2255-4422      |
+      | Phone                   | 2255-4422      |
       | Zipcode                 | 12345          |
-    And I click on "Pay Securely" button
+    And I click on "Continue to payment" button
     Then I should not see "Afterpay"

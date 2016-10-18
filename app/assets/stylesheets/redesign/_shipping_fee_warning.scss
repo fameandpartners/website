@@ -1,34 +1,43 @@
 /* [SHIPPING FEE ALERT]
 -------------------------------------------------------*/
 .alert-fee {
-  width: 100%;
-  padding: 15px;
-  border: 1px solid $c-neutral-8;
+  padding: 15px 0;
+  border-top: 1px solid $beage-bg;
 
   .media-wrap {
-    width: 60px;
-    margin-top: 10px;
+    width: 30px;
+    margin-top: 5px;
+    margin-right: 10px;
+    background: none;
   }
 
   .title {
+    font-family: $font-family-secondary;
     font-weight: 500;
+    font-size: 2rem;
     text-transform: none;
     color: $c-neutral-black;
   }
 
   p,
   label {
-    font-size: 0.875em;
+    font-size: 1.6rem;
+  }
+
+  .shipping-fee-amount {
+    font-weight: 500;
   }
 
   a {
-    font-weight: bold;
-    text-decoration: underline;
     color: inherit;
   }
 
   input {
-    margin-top: 3px;
+    margin-top: 5px;
+  }
+
+  label {
+    font-weight: 500;
   }
 
   @media (max-width: $bootstrap-sm-width - 1px) {

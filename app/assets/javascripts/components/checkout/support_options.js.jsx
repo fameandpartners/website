@@ -11,10 +11,10 @@ var SupportOptions = React.createClass({
         <ul className="list-inline">
           <li className="live-chat">
             <a onClick={this.launchChatWindow}>
-              <i className="icon-live-chat" />
-              Live Chat
+              <i className="icon icon-livechat" />
+              <span>Live Chat</span>
             </a>
-          </li>          
+          </li>
         </ul>
     );
   }

@@ -1,38 +1,37 @@
 - if current_step.eql?('address')
-  h2.checkout-section-title 1. Your information
+  = render :partial => 'shared/error_messages', locals: { target: @order }
+
   / TODO - Temporarily turned off - CRO Optimisation
   /= render partial: 'email_login'
   = form_for @order, url: update_checkout_path(current_step), html: {class: 'form-global checkout-form'}, remote: false do |form|
-    = render :partial => 'shared/error_messages', locals: { target: @order }
 
     = hidden_field_tag :create_account, :value => true
 
-    p Where should we send your receipt and tracking details?
-    .form-wrapper data-hook='billing_inner'
-      = form.fields_for :bill_address do |bill_form|
-        = render partial: 'spree/checkout/address_form', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
+    .row
+      .col-xs-12
+        - if Features.active?(:checkout_fb_login) && !signed_in?
+          = link_to 'Sign in with Facebook', fb_auth_path(spree_user_return_to: checkout_path), class: 'btn btn-facebook btn-black btn-md'
+
+    .form-wrapper data-hook='shipping_inner'
+      = form.fields_for :ship_address do |ship_form|
+        = render partial: 'checkout/v1/spree/checkout/address_form', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
+
+    .row
+      .col-xs-12
+        .form-group.custom-form-element-thin.checkbox-black-bg.checkbox-inline
+          - ship_to_billing_address = ((@order.bill_address.empty? && @order.ship_address.empty?) || @order.ship_address.same_as?(@order.billing_address))
+          = check_box_tag 'ship_to_address', 'Bill to this address', ship_to_billing_address
+          label for="ship_to_address" This is also my billing address
+          = form.hidden_field :use_shipping
 
     .row.hidden
       .col-md-12.form-group
         = form.label :customer_notes, 'Comments or special instructions'
         = form.text_field :customer_notes, class: 'required form-control form-control-md'
 
-    .row
-      .col-md-6
-        .form-group
-          - ship_to_billing_address = ((@order.bill_address.empty? && @order.ship_address.empty?) || @order.bill_address.same_as?(@order.ship_address))
-          label.shipAddress
-            = radio_button_tag 'ship_to_address', 'Ship to this address', ship_to_billing_address
-            | Ship to this address
-          .clearfix
-          label.shipAddress
-            = radio_button_tag 'ship_to_address', 'Ship to a different address', !ship_to_billing_address
-            | Ship to different address
-          = form.hidden_field :use_billing
-
-    .form-wrapper data-hook='shipping_inner'
-      = form.fields_for :ship_address do |ship_form|
-        = render partial: 'address_form', locals: {form: ship_form, address_type: 'shipping', address: @order.ship_address}
+    .form-wrapper data-hook='billing_inner'
+      = form.fields_for :bill_address do |bill_form|
+        = render partial: 'checkout/v1/spree/checkout/address_form', locals: {form: bill_form, address_type: 'billing', address: @order.bill_address}
 
     = render partial: 'shipping_fee_warning'
 
@@ -40,7 +39,6 @@
       = react_component('Delivery')
 
     .row
-      .col-md-6.col-md-push-6.form-group style='margin-bottom:0'
-        button.btn.btn-block.btn-md.btn-black name='pay_securely' data-loading='Saving...'
-          i.icon.icon-lock
-          ' Pay Securely
+      .col-xs-12.form-group
+        button.btn.btn-block.btn-md.btn-black.text-uppercase name='pay_securely' data-loading='Saving...'
+          ' Continue to payment

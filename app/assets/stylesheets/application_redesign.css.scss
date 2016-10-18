@@ -170,8 +170,8 @@ z-index levels
 @import 'redesign/tables';
 @import 'redesign/pages';
 
-@import 'redesign/checkout';
-@import 'redesign/cart';
+// Checkout
+@import 'redesign/pages/page-checkout';
 
 // Time specific content
 @import 'transient_content';
