@@ -13,21 +13,21 @@ Feature: Californian Taxes
       | First Name              | Roger          |
       | Last Name               | That           |
       | Street Address          | Street X       |
-      | Street Address (cont'd) | House Y        |
+      | Street Address (line 2) | House Y        |
       | City                    | Melbourne      |
-      | Phone Number            | 2255-4422      |
+      | Phone                   | 2255-4422      |
       | Zipcode                 | 12345          |
     And I select "United States" country
     And I select "California" state
-    And I click on "Pay Securely" button
+    And I click on "Continue to payment" button
     And I should see "California Tax $21.68"
     And I should see "Total$310.68"
-    And I fill in credit card information:
-      | Card number      | 5520000000000000  |
-      | Name on card     | Zaphod Beeblebrox |
-      | CVC              | 123               |
-      | Expiration Month | 10                |
-      | Expiration Year  | 2050              |
-    And I click on "Place My Order" button
+    And I fill in form fields with:
+      | Name on your card | Zaphod Beeblebrox |
+      | Card number       | 5520000000000000  |
+      | month             | 10                |
+      | year              | 2050              |
+      | card_code         | 123               |
+    And I click on "Place your order now" button
     Then I should see my order placed, with "Connie" dress, "US 10" size and "289.00" price
     Then I should see "CALIFORNIA TAX $21.68"
