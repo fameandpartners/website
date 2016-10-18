@@ -4,14 +4,14 @@
 
   .main-hero-wrap.js-hero-tile-carousel
     = render 'shared/redesign/collection_hero_carousel'
-    
+
   .container.products-collections
 
     .row
       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 1, customWrapper: 'col-md-3 col-xs-6'}
       .col-md-6.col-xs-12.panel-image
         .media-wrap
-          = image_tag 'edits/bridesmaids/tile-1.jpg', alt: 'Bride and Bridesmaid'
+          = image_tag 'landingpages/holiday-collection/holiday_collection.gif', alt: 'Bride and Bridesmaid'
 
     .row
       = render partial: 'pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 5, customWrapper: 'col-md-3 col-xs-6'}
