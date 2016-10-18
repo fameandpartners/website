@@ -1,0 +1,45 @@
+= render :partial => 'landing_pages/common'
+
+.page-content.landing-page-v2.relative
+
+  .main-hero-wrap
+    = link_to skirts_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "The Skirts Collection" }
+      picture.media-wrap
+        source media="(max-width: 991px)" srcset="#{image_path("homepage/hero-featured/oct-11-featured-1-mob.jpg")}"
+        source media="(min-width: 992px)" srcset="#{image_path("homepage/hero-featured/oct-11-featured-1.jpg")}"
+        img src="#{image_path("homepage/hero-featured/oct-11-featured-1.jpg")}" srcset="
+          #{image_path("homepage/hero-featured/oct-11-featured-1-mob.jpg")} 991w,
+          #{image_path("homepage/hero-featured/oct-11-featured-1.jpg")} 992w"
+
+      .content-wrap
+        .container-fluid
+          .row
+            .col-md-3.col-md-offset-9
+              .copy-wrap
+                h2.heading.no-margin-md
+                  span <em>Stop</em><br class="hidden-xs hidden-sm"> searching.
+                  span.sub-heading
+                    | Our first-ever Skirt Collection <br>has just the thing you're looking for.
+                .cta-wrapper
+                  span.btn-md.btn-featured
+                    | Shop <span class="copy-highlight">BESPOKE SKIRTS</span>
+
+  .container.products-collections
+
+    .row
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 1, customWrapper: 'col-md-3 col-xs-6'}
+      .col-md-6.col-xs-12.panel-image
+        .media-wrap
+          = image_tag 'edits/bridesmaids/tile-1.jpg', alt: 'Bride and Bridesmaid'
+
+    .row
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 2, rangeTo: 5, customWrapper: 'col-md-3 col-xs-6'}
+
+    .row
+      .col-md-6.col-xs-12.panel-image
+        .media-wrap
+          = image_tag 'edits/bridesmaids/tile-1.jpg', alt: 'Bride and Bridesmaid'
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 6, rangeTo: 7, customWrapper: 'col-md-3 col-xs-6'}
+
+    .row
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 8, rangeTo: 11, customWrapper: 'col-md-3 col-xs-6'}
