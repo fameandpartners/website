@@ -207,9 +207,9 @@ FameAndPartners::Application.routes.draw do
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
-      get '/getitquick' => 'hacky_messages#getitquick_unavailable', :as => :fast_making_dresses
+      get '/getitquick' => 'statics#getitquick_unavailable', as: :fast_making_dresses
     else
-      get '/getitquick' => 'products/collections#show', defaults: { fast_making: true }, as: 'fast_making_dresses'
+      get '/getitquick' => 'products/collections#show', defaults: { fast_making: true }, as: :fast_making_dresses
     end
 
     post '/shared/facebook' => 'competition/events#share'
