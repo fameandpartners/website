@@ -44,7 +44,4 @@
   <% if @product.fast_making: %>
     <img src="/assets/express_making.png" class="express-delivery" alt="Express Making">
   <% end %>
-  <% if @product.fast_delivery: %>
-    <img src="/assets/express_delivery.png" class="express-delivery" alt="Express Delivery">
-  <% end %>
 </div>
