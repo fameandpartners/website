@@ -4,9 +4,9 @@ module Render3d
     belongs_to :customisation_value
     belongs_to :color_value, class_name: 'Spree::OptionValue'
 
-    validates :customisation_value,
-              :color_value,
+    validates :color_value,
               :product,
+              :customisation_value_id,
               presence: true
 
     validates_attachment_presence :attachment

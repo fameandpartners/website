@@ -45,10 +45,19 @@ module BatchUpload
             if customisation_name.present?
               debug "Search customisation by position"
 
-              position = customisation_name.gsub(/\D+/, '')
-              customisation_value = customisation_for_position(product, position)
+              marker, position = \
+                customisation_name.match(/^(?<marker>\w)(?<position>\d)?$/).captures
 
-              if customisation_value.blank?
+              # C - image for customisation
+              # D - (default) image for color
+              customisation_value_id = \
+                if marker == 'C'
+                  customisation_id_for_position(product, position)
+                elsif marker == 'D'
+                  0
+                end
+
+              if customisation_value_id.nil?
                 errors.push({
                   kind: :warn,
                   message: "Customisation not found (#{customisation_name}) #{file_name}"
@@ -70,8 +79,8 @@ module BatchUpload
 
             image = Render3d::Image.new.tap do |img|
               img.product = product
-              img.customisation_value = customisation_value
               img.color_value = color_value
+              img.customisation_value_id = customisation_value_id
 
               img.attachment = File.open(file_path)
 
@@ -99,8 +108,8 @@ module BatchUpload
       Spree::OptionValue.colors.where('LOWER(name) = ?', color_name).first
     end
 
-    def customisation_for_position(product, position)
-      product.customisation_values.where(position: position).first
+    def customisation_id_for_position(product, position)
+      product.customisation_values.where(position: position).select('id').first
     end
 
   end
