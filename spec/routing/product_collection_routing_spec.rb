@@ -11,7 +11,7 @@ describe 'Product Collection Routes', type: :routing do
 
       it "shows an excellent demurment message" do
         expect(get: fast_making_dresses_path).to route_to(
-          "controller"   => "hacky_messages",
+          "controller"   => "statics",
           "action"       => "getitquick_unavailable"
         )
       end
