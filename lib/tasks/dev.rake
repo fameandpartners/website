@@ -63,7 +63,7 @@ namespace :dev do
   end
 
   desc 'Add Test Fixtures User'
-  task :add_test_fixture_user => :environment do
+  task add_test_fixture_user: :environment do
     Spree::User.new.tap do |user|
       user.first_name                 = 'Example'
       user.last_name                  = 'User'
@@ -88,7 +88,35 @@ namespace :dev do
   end
 
   desc 'Disable all feature flags'
-  task :disable_feature_flags => :environment do
+  task disable_feature_flags: :environment do
     Features.available_features.each { |feature| Features.deactivate(feature) }
+  end
+
+  desc 'Add Fixture Tax Rates'
+  task enable_fixture_tax_rates: :environment do
+    require 'term/ansicolor'
+    include Term::ANSIColor
+
+    usa_zone     = Spree::Zone.where(name: 'usa').first
+    tax_category = Spree::TaxCategory.where(
+      name:        'USA Taxes',
+      description: 'USA Taxes'
+    ).first_or_create
+
+    raise red('[WARNING] USA Zone does not exist. Aborting Rake') if usa_zone.nil?
+
+    # Destroying existent taxes
+    Spree::TaxRate.destroy_all
+
+    # Californian Tax
+    Spree::TaxRate.create({
+      zone_id:            usa_zone.id,
+      tax_category_id:    tax_category.id,
+      name:               'California Tax',
+      amount:             0.075,
+      included_in_price:  false,
+      show_rate_in_label: false,
+      calculator:         Taxes::CalifornianCalculator.new
+    })
   end
 end

@@ -19,6 +19,7 @@ window.ShoppingBag = class ShoppingBag
     @freeStyling     = options.free_styling
     @freeDelivery    = options.free_delivery
     @customerService = options.customer_service
+    # TODO: Check if we still need the following 2 items
     @value_proposition  = options.value_proposition
     @shipping_message  = options.shipping_message
 

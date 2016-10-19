@@ -21,101 +21,109 @@ ruby:
     = raw preload_cart_data
     = raw shopping_cart_summary_init
 
-.checkout-items
-  h3
-    i.icon.icon-shopping-bag-check
-    ' Order summary
-  ul.cart-items
-    - (cart.products || []).each do |product|
-      li.cart-item data-id=(product.line_item_id)
-        a.remove-product.fa.fa-close.pull-right href="#0"
-        - if product.name != "Gift"
-          .cart-item-image-holder.pull-left
-            = link_to collection_product_path(product) do
-              = image_tag product.image.large, class: 'cart-item-image', alt: product.name
-        .cart-item-info
-          .heading
-            span.qty
-              => "#{product.quantity}"
-              ' &times;
-            - if product.name != "Gift"
-              = link_to product.name, collection_product_path(product), class: 'cart-item-title'
+.checkout-items.cart-container
+  .cart-wrapper
+    .row
+      .col-xs-12
+
+        - if cart.products
+          .cart-items
+            - (cart.products || []).each do |product|
+              .row.cart-item data-id=(product.line_item_id)
+                .cart-item-image-holder.col-xs-5
+                  - if product.name != "Gift"
+                    = link_to collection_product_path(product) do
+                      = image_tag product.image.large, class: 'cart-item-image img-responsive', alt: product.name
+                .cart-item-info.col-xs-7
+                  a.pull-right.remove-product[href="javascript:;"]
+                    span.icon.btn-close
+                  .heading.txt-truncate-1
+                    - if product.name != "Gift"
+                      = link_to product.name, collection_product_path(product), class: 'cart-item-title'
+                    - else
+                      = link_to product.name, "javascript:;", class: 'cart-item-title'
+                  .cart-item-price
+                    = product.price.display_price
+                  dl.cart-item-description
+                    - if product.size.present?
+                      dd Size: #{product.size.presentation},
+                      dd Color: #{product.color.name}
+                      dd Skirt Length: #{product.height}
+                      - if product.making_options.present?
+                        - product.making_options.each do |option|
+                          dd #{ option.name.to_s } #{ option.display_price.to_s }
+                      - if product.customizations.present?
+                        - product.customizations.each do |customization|
+                          dd #{ customization.name } #{ customization.display_price }
+
+        - else
+          .row.cart-is-empty
+            .col-xs-12
+              h3.heading Your bag is empty
+              = link_to "#{dresses_path}/new-this-week", class: "link-underline-lighter cta-when-empty"
+                | Find some inspiration with what's new this week
+
+    .cart-footer
+      .row
+        .col-xs-12
+          form.promo-code action="#"
+            .input-group
+              input.form-control.form-control-md.promo-code-value type="text" placeholder="Discount code"
+              span.input-group-btn
+                button.btn.btn-block.btn-black.promo-code-apply Apply
+
+            - if sale_active?
+              - if current_sale.try(:sale_promo)
+                p style="font-size:0.8em;"
+                  = current_sale.sitewide_message
+                  br
+                  = "Use discount code: #{current_sale.try(:sale_promo)}"
+
+      .row
+        .col-xs-12
+          .cart-total
+            p
+              | Sub Total
+              span.value = cart.display_item_total.to_s
+            p
+              | Shipping
+              span.value = cart.display_shipment_total.present? ? cart.display_shipment_total.to_s : 'Free Shipping'
+            p
+              - if cart.display_promotion_total.to_s != "$0.00"
+                - if cart.promocode.present?
+                  | Promotion (#{ truncate(cart.promocode, length: 10) })
+                  span.value = cart.display_promotion_total
+                - else
+                  | Promotion
+                  span.value = cart.display_promotion_total
+
+            - cart.taxes.each do |tax|
+              p
+                = tax[:label]
+                span.value = tax[:display_tax_total]
+
+            p.order-total
+              | Order Total
+              span.value = cart.display_total
+              - if current_site_version.is_australia?
+                .taxes Including GST
+
+    .free-shipping-disclaimer
+      .row
+        .col-xs-12
+          p
+            span.link-underline-lighter
+              | Free shipping
+            - if current_site_version.is_australia?
+              |  to Australia within 7 - 10 days
             - else
-              = link_to product.name, "#", class: 'cart-item-title'
-          .clearfix
-            .pull-left.small
-              - if product.size.present?
-                ' Size:
-                span
-                  ' #{ product.size.presentation },
-              ' Color:
-              span.color
-                ' #{ product.color.presentation }
-              br
-              ' Skirt Length:
-              span
-                ' #{ product.height.to_s.titleize }
+              |  to USA, Canada and the UK within 7 - 10 days
+          p
+            span.link-underline-lighter
+              | Easy returns
+            |  within 30 days
 
-
-            .pull-right.text-muted = product.price.display_price
-            - if product.discount.present?
-              .pull-right.text-muted.sale-percentage = "#{product.discount}% off"
-          .cart-prices
-
-            - if product.making_options.present?
-              - product.making_options.each do |option|
-                .small
-                  = "#{ option.name } + #{ option.display_price.to_s }"
-            - if product.customizations.present?
-              - product.customizations.each do |customization|
-                .small.text-pink
-                  = "#{ customization.name } + #{ customization.display_price.to_s }"
-  form.promo-code action="#"
-    .input-group
-      input.form-control.form-control-md.promo-code-value type="text" placeholder="Discount code"
-      span.input-group-btn
-        button.btn.btn-block.btn-black.btn-md.promo-code-apply Apply
-
-    - if sale_active?
-      - if current_sale.try(:sale_promo)
-        p style="font-size:0.8em;"
-          = current_sale.sitewide_message
-          br
-          = "Use discount code: #{current_sale.try(:sale_promo)}"
-  p
-    | Sub Total
-    span.pull-right = cart.display_item_total.to_s
-  p
-    | Shipping
-    span.pull-right = cart.display_shipment_total.present? ? cart.display_shipment_total.to_s : 'Free Shipping'
-  p
-    - if cart.promocode.present?
-      => "Promotion (#{ truncate(cart.promocode, length: 10) })"
-      span.pull-right = cart.display_promotion_total.to_s
-    - else
-      | Promotion
-      span.pull-right = cart.display_promotion_total.to_s
-  p
-    strong
-      | Total
-      span.pull-right = cart.display_total.to_s
-      - if current_site_version.is_australia?
-        .taxes Including GST
-
-  p.order-number
-    = @order.try(:number)
-
-  .shopping-bag-text-wrapper
-    - if !shopping_bag_texts.shipping_message.blank?
-      .row.shopping-bag-text
-        = raw shopping_bag_texts.shipping_message
-    .row.shopping-bag-text
-      = raw shopping_bag_texts.value_proposition
-
-  .row.shopping-bag-payment-methods
-    img src="/assets/checkout/visa-mastercard-paypal-masterpass.jpg"
-    img src="/assets/comodo-ssl.png"
-
-  .row
-    .col-md-12
-      = link_to 'Continue Shopping', dresses_path, :class => 'btn btn-block btn-checkout'
+    .shopping-bag-order-number
+      .row
+        .col-xs-12
+          |  Your Order Number: #{cart.order_number}

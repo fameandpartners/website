@@ -1,90 +1,131 @@
-<h3><i class="icon icon-shopping-bag-check"></i>Order summary</h3>
-<ul class="cart-items">
+<% if @cart.products.length: %>
+<div class="cart-items">
   <% for product in @cart.products: %>
-    <li class="cart-item" data-id="<%= product.line_item_id %>">
-      <a class="remove-product fa fa-close pull-right" href="#0"></a>
-      <% if product.name != "Gift" : %>
-        <div class="cart-item-image-holder pull-left">
-          <a href="<%= product.path %>">
-            <img alt="<%= product.name %>" class="cart-item-image" src="<%= product.image.large %>">
-          </a>
-        </div>
-      <% end %>
-      <div class="cart-item-info">
-        <div class="heading">
-          <span class="qty"><%= product.quantity %> &times; </span>
-          <% if product.name != "Gift" :%>
-            <a href="<%= product.path %>" class="cart-item-title"><%= product.name %></a>
-          <% else :%>
-            <a href="#" class="cart-item-title"><%= product.name %></a>
-          <% end %>
-        </div>
-        <div class="clearfix">
-          <div class="pull-left small">
-            <% if product.size != null :%>
-              Size: <span><%= product.size.presentation %>,</span>
-            <% end %>
-            Color: <span class="color"><%= product.color.presentation %></span>
-            <br>
-            Skirt Length: <span><%= product.height %></span>
-          </div>
-          <div class="pull-right text-muted"><%= product.price.display_price %></div>
-          <% if (product.discount != null) : %>
-            <div class="pull-right text-muted sale-percentage"><%= product.discount %>% off</div>
-          <% end %>
-        </div>
-        <div class="cart-prices">
-          <% for making_option in product.making_options: %>
-            <div class="small">
-              <%= making_option.name %> + <%= making_option.display_price %>
-            </div>
-          <% end %>
-          <% for customization in product.customizations: %>
-            <div class="small text-pink">
-              <%= customization.name %> + <%= customization.display_price %>
-              <!-- <a href="#" class="fa fa-close customization-remove" data-id="<%= customization.id %>"></a> -->
-            </div>
-          <% end %>
+  <div class="row cart-item" data-id="<%= product.line_item_id %>">
+    <div class="cart-item-image-holder col-md-5">
+      <a href="<%= product.path %>">
+        <% if product.name != "Gift" : %>
+        <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
+        <% end %>
+      </a>
+    </div>
+    <div class="cart-item-info col-md-7">
+      <a class="pull-right remove-product" href="javascript:;">
+        <span class="icon btn-close"></span>
+      </a>
+      <div class="heading txt-truncate-1">
+        <% if product.name != "Gift" : %>
+        <a class="cart-item-title" href="<%= product.path %>"><%= product.name %></a>
+        <% else :%>
+        <a class="cart-item-title" href="#"><%= product.name %></a>
+        <% end %>
+      </div>
+      <div class="cart-item-price"><%= product.price.display_price %></div>
+      <dl class="cart-item-description">
+        <% if product.size != null : %>
+        <dd>Size: <span><%= product.size.presentation %>, </span></dd>
+        <% end %>
+        <dd>Color: <span class="color"><%= product.color.name %></span></dd>
+        <dd>Skirt Length: <span><%= product.height %></span></dd>
+        <% for making_option in product.making_options: %>
+        <dd><%= making_option.name %> <%= making_option.display_price %></dd>
+        <% end %>
+        <% for customization in product.customizations: %>
+        <dd><%= customization.name %> <%= customization.display_price %></dd>
+        <% end %>
+      </dl>
+    </div>
+  </div>
+  <% end %>
+</div>
+<% else: %>
+<div class="row cart-is-empty">
+  <div class="col-xs-12">
+    <h3 class="heading">Your bag is empty</h3>
+    <a href="<%= urlWithSitePrefix('/dresses/new-this-week') %>" class="link-underline-lighter cta-when-empty">Find some inspiration with what's new this week</a>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade js-trigger-empty-cart-modal" id="emptyCart" tabindex="-1" role="dialog" aria-labelledby="emptyCartLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h2 class="heading">Opps, looks like your bag is empty.</h2>
+          <a href="<%= urlWithSitePrefix('/dresses') %>" class="btn btn-black">Continue Shopping</a>
         </div>
       </div>
-    </li>
-  <% end %>
-</ul>
-
-<form class="promo-code" action="#">
-  <label for=".promo-code-value" class="invisible">Promo Code</label>
-  <div class="input-group">
-    <input class="form-control form-control-md promo-code-value" type="text" placeholder="Discount code"><span class="input-group-btn"><button class="btn btn-block btn-black btn-md promo-code-apply">Apply</button></span>
-  </div>
-</form>
-
-<p>
-  Sub Total<span class="pull-right"><%= @cart.display_item_total %></span>
-</p>
-<p>
-  Shipping<span class="pull-right"><%= @cart.display_shipment_total %></span>
-</p>
-<p>
-  <% if @cart.promocode: %>
-    Promotion (<%= @cart.promocode.substring(0,10) %>)<span class="pull-right"><%= @cart.display_promotion_total %></span>
-  <% end %>
-</p>
-<p>
-  <strong>Total<span class="pull-right"><%= @cart.display_total %></span></strong>
-</p>
-
-<div class='shopping-bag-text-wrapper'>
-  <% if @shipping_message != "" :%>
-    <div class="row shopping-bag-text" >
-      <%- @shipping_message %>
     </div>
-  <% end %>
-  <div class="row shopping-bag-text" >
-    <%- @value_proposition %>
+  </div>
+
+</div>
+<script type="text/javascript">
+$('.js-trigger-empty-cart-modal').modal({
+  keyboard: false,
+  backdrop: 'static'
+});
+</script>
+<% end %>
+
+<div class="cart-footer">
+<div class="row">
+  <div class="col-xs-12">
+    <form class="promo-code" action="#">
+      <div class="input-group">
+        <input class="form-control form-control-md promo-code-value" type="text" placeholder="Discount code"><span class="input-group-btn"><button class="btn btn-block btn-black promo-code-apply">Apply</button></span>
+      </div>
+    </form>
+  </div>
+</div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="cart-total">
+        <p>
+          Sub Total<span class="pull-right"><%= @cart.display_item_total %></span>
+        </p>
+        <p>
+          Shipping <span class="value"><%= @cart.display_shipment_total %></span>
+        </p>
+        <p>
+          <% #TODO: this is just a workaround due to Spree's limitations. We should compare numbers, not strings. %>
+          <% if @cart.display_promotion_total != "$0.00": %>
+            Promotion (<%= @cart.promocode %>)<span class="value"><%= @cart.display_promotion_total %></span>
+          <% end %>
+        </p>
+        <% for tax in @cart.taxes: %>
+          <p>
+            <%= tax.label %>
+            <span class="value"><%= tax.display_tax_total %></span>
+          </p>
+        <% end %>
+        <p class="order-total">
+          Order Total <span class="value"><%= @cart.display_total %></span>
+        </p>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="row shopping-bag-payment-methods" >
-  <img src="/assets/checkout/visa-mastercard-paypal-masterpass.jpg" >
-  <img src="/assets/comodo-ssl.png" >
+<div class="free-shipping-disclaimer">
+  <div class="row">
+    <div class="col-xs-12">
+      <p>
+        <% if getSiteVersionPrefix() == '/au': %>
+          <span class="link-underline-lighter">Free shipping</span> to Australia within 7 - 10 days
+        <% else: %>
+          <span class="link-underline-lighter">Free shipping</span> to USA, Canada and the UK within 7 - 10 days
+        <% end %>
+      </p>
+      <p>
+        <span class="link-underline-lighter">Easy returns</span> within 30 days
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="shopping-bag-order-number">
+  <div class="row">
+    <div class="col-xs-12">
+      Your Order Number: <%= @cart.order_number %>
+    </div>
+  </div>
 </div>

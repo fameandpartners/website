@@ -109,6 +109,21 @@ form.hide-fully#pdpDataForWishlist
                       // this will redirect not loged-in users to login page
                       a.js-add-to-moodboard href='javascript:;' data-user-present='#{current_spree_user.present?}' Add to Moodboard
 
+                  .panel
+                    .addthis_toolbox
+                      a.share-cta.js-panel-side-share-toggle href='#share-options' Share
+
+                      ul.share-btn-wrap.custom_images
+                        li
+                          a.addthis_button_facebook title='Share to Facebook'
+                            .icon-facebook2
+                        li
+                          a.addthis_button_twitter title='Share to Twitter'
+                            .icon-twitter
+                        li
+                          a.addthis_button_pinterest_share title='Share to Pinterest'
+                            .icon-pinterest
+
               ul.btn-wrap
                 li Guaranteed Fit
                 li Easy Returns
@@ -147,7 +162,7 @@ form.hide-fully#pdpDataForWishlist
                       source media='(min-width: 992px)' srcset='#{image_path("_pdp/tile-styling-advice.jpg")}'
                       img src='#{image_path("_pdp/tile-styling-advice.jpg")}' srcset='
                         #{image_path("_pdp/tile-styling-advice-mob.jpg")} 991w, #{image_path("_pdp/tile-styling-advice.jpg")} 992w'
-                      
+
           .col-md-6
             .item.bordered
               .row
@@ -162,19 +177,37 @@ form.hide-fully#pdpDataForWishlist
                       #{image_path("_pdp/tile-modify-mob.jpg")} 991w, #{image_path("_pdp/tile-modify.jpg")} 992w'
 
       = render partial: 'related_products', locals: { product: @product }
-      
+
     = render partial: 'shop_social'
   // content bottom wrap END
 
 = render partial: 'micro_data'
 
 javascript:
+  var addthis_config;
+  var addthis_share;
   $(document).ready(function() {
+    addthis_config = {
+      "ui_use_css": false,
+      "pubid": 'ra-57c0c134e80f9415',
+      "data_track_clickback": false,
+      "data_track_addressbar": false
+    };
+    addthis_share = {
+      url: window.location.href
+    };
+    // AddThis async call
+    addthis.init();
 
     // controls for details container, mobile only
     $('.js-panel-side-left-toggle').on('click', function() {
       $('.js-panel-side-left-details-trigger').toggleClass('is-active');
       $('body').toggleClass('no-scroll');
+    });
+
+    $('.js-panel-side-share-toggle').on('click', function () {
+      $('.share-btn-wrap').toggleClass('is-active');
+      return false;
     });
 
     function initSticky() {
@@ -200,7 +233,7 @@ javascript:
       $('.js-panel-side-left').unstick();
       $('.js-panel-side-right').unstick();
     }
-    
+
     function updateSticky() {
       if(window.innerWidth >= 992) {
         unstickSticky();
@@ -221,3 +254,6 @@ javascript:
     // update on accordion change
     $('#accordion').on('shown.bs.collapse', updateSticky);
   });
+
+// Load AddThis asynchronously
+script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#async=1"
