@@ -123,6 +123,12 @@ class StaticsController < ApplicationController
     render :template => 'statics/unidays_lp', :layout => 'redesign/application'
   end
 
+  def getitquick_unavailable
+    title('Get it Quick', default_seo_title)
+
+    render 'getitquick_unavailable', status: :not_found
+  end
+
 # =======================================================================
 # OLD PAGES
 # =======================================================================
