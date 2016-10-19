@@ -56,9 +56,9 @@ module BatchUpload
                 # C - image for customisation
                 # D - (default) image for color
                 customisation_value_id = \
-                  if marker == 'C'
+                  if marker == 'c'
                     customisation_id_for_position(product, position)
-                  elsif marker == 'D'
+                  elsif marker == 'd'
                     0
                   end
 
@@ -115,7 +115,7 @@ module BatchUpload
     end
 
     def customisation_id_for_position(product, position)
-      product.customisation_values.where(position: position).select('id').first
+      product.customisation_values.where(position: position).pluck('id').first
     end
 
   end

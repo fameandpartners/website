@@ -540,7 +540,10 @@ var PdpGallery = function (_React$Component) {
       // Step 2 - if step 1 failed try to match just color
       if (filteredImages.length === 0) {
         filteredImages = this.props.images.filter(function (image) {
-          return image.color_id === _this3.props.customize.color.id;
+          // 1. color is custom
+          // 2. color has render3d image
+          // 3. image is default for custom color
+          return image.color_id != _this3.props.product.featured_image.table.color_id && image.color_id === _this3.props.customize.color.id && image.customization_id === 0;
         });
       }
 
