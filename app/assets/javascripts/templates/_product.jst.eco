@@ -5,7 +5,7 @@
     <% if @product.fast_making: %>
       <div class="ribbon-wrapper express-making">
         <div class="ribbon-txt">
-          Get it in 6 to 9 days
+          Make it express
         </div>
       </div>
     <% end %>
