@@ -36,9 +36,10 @@ module Spree
 
         if @product_making_option.update_attributes(params[:product_making_option])
           flash[:success] = 'Product Making Option was successfully updated'
+          redirect_to action: :index
+        else
+          render :edit
         end
-
-        render action: :edit
       end
 
       private
