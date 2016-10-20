@@ -21,7 +21,7 @@ module Bergen
 
           it do
             expect(soap_method.result).to eq({
-                                               receiving_ticket_id: 'WHRTN1110685'
+                                               receiving_ticket_id: 'WHRTN1110686'
                                              })
           end
         end
