@@ -7,6 +7,10 @@
 
 .category--item {
 
+  a {
+    overflow: hidden;
+  }
+
   .name {
     text-transform: uppercase;
     letter-spacing: 0.1rem;
@@ -28,6 +32,31 @@
   .price,
   .details {
     font-size: 1.2rem;
+  }
+
+}
+
+.ribbon-wrapper {
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+
+  .ribbon-txt {
+    font-size: 0.7em;
+    word-spacing: 0.1em;
+    background-color: rgba($c-neutral-black, 0.4);
+    color: $c-neutral-white;
+    @include transform(rotate(-45deg));
+  }
+
+  &.express-making {
+    left: -60px;
+    top: 40px;
+
+    .ribbon-txt {
+      padding: 3px 50px;
+    }
+
   }
 
 }
