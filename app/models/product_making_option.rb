@@ -5,6 +5,7 @@ class ProductMakingOption < ActiveRecord::Base
   OPTION_TYPES         = ['fast_making']
   DEFAULT_OPTION_TYPE  = 'fast_making'
   DEFAULT_OPTION_PRICE = BigDecimal.new(30)
+  DEFAULT_CURRENCY     = 'USD'
   ALL_CURRENCIES       = ::Money::Currency.table.keys.map(&:to_s).map(&:upcase)
 
   # NOTE: `#option_type` is not related to Spree::OptionType at all!
@@ -26,7 +27,7 @@ class ProductMakingOption < ActiveRecord::Base
     self.active     = true
     self.variant_id ||= product.try(:master).try(:id)
     self.price      ||= DEFAULT_OPTION_PRICE
-    self.currency   ||= SiteVersion.default.currency
+    self.currency   ||= DEFAULT_CURRENCY
     self
   end
 
