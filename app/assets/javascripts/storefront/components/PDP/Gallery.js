@@ -119,24 +119,22 @@ class PdpGallery extends React.Component {
     }
 
     let images = filteredImages.map((image, index) => {
-      if(image) {
-        let id = "gallery-image-" + index;
-        thumbIds.push(id);
-        return (
-          <div className="media-wrap-outer" key={index}>
-            <div className="media-wrap">
-              <span id={id} className="scrollspy-trigger"></span>
-              <img src={image.url} alt={image.alt}
-                className="js-gallery-image" onLoad={this.handleLoad} />
-              <span className="loader"></span>
-              <span className="btn-close expande lg">
-                <span className="hide-visually">tap to zoom</span>
-              </span>
-              <span className="btn-zoom">tap to zoom</span>
-            </div>
+      let id = "gallery-image-" + index;
+      thumbIds.push(id);
+      return (
+        <div className="media-wrap-outer" key={index}>
+          <div className="media-wrap">
+            <span id={id} className="scrollspy-trigger"></span>
+            <img src={image.url} alt={image.alt}
+              className="js-gallery-image" onLoad={this.handleLoad} />
+            <span className="loader"></span>
+            <span className="btn-close expande lg">
+              <span className="hide-visually">tap to zoom</span>
+            </span>
+            <span className="btn-zoom">tap to zoom</span>
           </div>
-        );
-      }
+        </div>
+      );
     });
 
     images = images.filter((n) => {
