@@ -75,6 +75,8 @@ AdminUi::Engine.routes.draw do
     end
   end
 
+  resources :render3d_images
+
   root to: 'dashboard#index'
 
   mount ManualOrder::Engine, at: '/'
