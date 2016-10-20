@@ -18,11 +18,17 @@
   .no-objects-found = t(:no_results)
 - else
   table.index#product_making_options
+    colgroup
+      col style="width: 35%"
+      col style="width: 30%"
+      col style="width: 20%"
+
     thead
       tr
         th Name
         th Price
         th Active
+        th.actions
 
     tbody
       - @making_options.each do |making_option|
@@ -31,4 +37,5 @@
           td = making_option.display_price
           td = making_option.active?
           td.actions
-            = link_to_with_icon('icon-edit', t(:edit), edit_admin_product_making_option_path(@product, making_option), no_text: true)
+            =<> link_to_with_icon('icon-edit', t(:edit), edit_admin_product_making_option_path(@product, making_option), no_text: true)
+            =<> link_to_with_icon('icon-refresh', t(:toggle), toggle_admin_product_making_option_path(@product, making_option), no_text: true, method: :put)

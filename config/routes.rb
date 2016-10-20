@@ -544,7 +544,11 @@ FameAndPartners::Application.routes.draw do
           end
         end
 
-        resources :making_options, controller: 'product_making_options', except: [:destroy]
+        resources :making_options, controller: 'product_making_options', except: [:destroy] do
+          member do
+            put :toggle
+          end
+        end
 
         resources :accessories, controller: 'product_accessories' do
           post :update_positions, on: :collection
