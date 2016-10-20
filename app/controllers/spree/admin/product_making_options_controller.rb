@@ -42,6 +42,15 @@ module Spree
         end
       end
 
+      def toggle
+        load_product_making_option
+
+        @product_making_option.active = !@product_making_option.active
+        @product_making_option.save
+
+        redirect_to action: :index
+      end
+
       private
 
       def model_class
