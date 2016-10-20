@@ -7,6 +7,8 @@ describe ProductMakingOption, type: :model do
 
   it { is_expected.to validate_numericality_of(:price).is_greater_than_or_equal_to(0) }
 
+  it { is_expected.to validate_inclusion_of(:currency).in_array(described_class::ALL_CURRENCIES) }
+
   context '#assign_default_attributes' do
     let(:subject) { described_class.new }
 
