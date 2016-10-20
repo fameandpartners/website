@@ -12,6 +12,8 @@ class ProductMakingOption < ActiveRecord::Base
   validates :option_type, inclusion: OPTION_TYPES, presence: true
   validates :option_type, uniqueness: { scope: :product_id }
 
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
+
   scope :fast_making, -> { where(option_type: 'fast_making') }
   scope :active, -> { where(active: true) }
 
