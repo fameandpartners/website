@@ -49,7 +49,7 @@ module Bergen
                 receiving_ticket.CreatedDate(Date.today.strftime('%m/%d/%Y')) # Format is mm/dd/yyyy
 
                 receiving_ticket.Shipmentitemslist do |shipment|
-                  shipment.Style(global_sku.upc, WMS_NAMESPACES[:receiving_ticket_items]) # UPCs are being sent in place of Style: https://fameandpartners.atlassian.net/browse/WEBSITE-839
+                  shipment.Style(line_item_style, WMS_NAMESPACES[:receiving_ticket_items]) # UPCs are being sent in place of Style: https://fameandpartners.atlassian.net/browse/WEBSITE-839
                   shipment.Color(global_sku.color_name, WMS_NAMESPACES[:receiving_ticket_items])
                   shipment.UPC(global_sku.upc, WMS_NAMESPACES[:receiving_ticket_items])
                   shipment.Size(global_sku.size, WMS_NAMESPACES[:receiving_ticket_items])
@@ -91,6 +91,10 @@ module Bergen
             end
           end
         end
+      end
+
+      def line_item_style
+        [global_sku.upc, global_sku.sku].join('-')
       end
 
       def line_item_presenter
