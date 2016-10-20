@@ -5,14 +5,19 @@ class ProductMakingOption < ActiveRecord::Base
   OPTION_TYPES         = ['fast_making']
   DEFAULT_OPTION_TYPE  = 'fast_making'
   DEFAULT_OPTION_PRICE = BigDecimal.new(30)
+  ALL_CURRENCIES       = ::Money::Currency.table.keys.map(&:to_s).map(&:upcase)
 
   # NOTE: `#option_type` is not related to Spree::OptionType at all!
   attr_accessible :option_type, :currency, :price, :active
 
-  validates :option_type, inclusion: OPTION_TYPES, presence: true
-  validates :option_type, uniqueness: { scope: :product_id }
+  validates :option_type,
+            inclusion:  OPTION_TYPES,
+            presence:   true,
+            uniqueness: { scope: :product_id }
 
   validates :price, numericality: { greater_than_or_equal_to: 0 }
+
+  validates :currency, inclusion: ALL_CURRENCIES
 
   scope :fast_making, -> { where(option_type: 'fast_making') }
   scope :active, -> { where(active: true) }
