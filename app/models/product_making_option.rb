@@ -1,11 +1,12 @@
 class ProductMakingOption < ActiveRecord::Base
-  belongs_to :product, class_name: 'Spree::Product' 
+  belongs_to :product, class_name: 'Spree::Product'
   belongs_to :variant, class_name: 'Spree::Variant'
 
-  OPTION_TYPES = ['fast_making']
-  DEFAULT_OPTION_TYPE = 'fast_making'
-  DEFAULT_OPTION_PRICE = BigDecimal.new(29)
+  OPTION_TYPES         = ['fast_making']
+  DEFAULT_OPTION_TYPE  = 'fast_making'
+  DEFAULT_OPTION_PRICE = BigDecimal.new(30)
 
+  # NOTE: `#option_type` is not related to Spree::OptionType at all!
   attr_accessible :option_type, :currency, :price, :active
 
   validates :option_type, inclusion: OPTION_TYPES, presence: true
@@ -15,10 +16,10 @@ class ProductMakingOption < ActiveRecord::Base
   scope :active, -> { where(active: true) }
 
   def assign_default_attributes
-    self.active      = true
-    self.variant_id  ||= (product.present? ? product.master.id : nil)
-    self.price       ||= DEFAULT_OPTION_PRICE
-    self.currency    ||= SiteVersion.default.currency
+    self.active     = true
+    self.variant_id ||= product.try(:master).try(:id)
+    self.price      ||= DEFAULT_OPTION_PRICE
+    self.currency   ||= SiteVersion.default.currency
     self
   end
 
