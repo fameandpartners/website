@@ -544,7 +544,7 @@ FameAndPartners::Application.routes.draw do
           end
         end
 
-        resources :making_options, controller: 'product_making_options'
+        resources :making_options, controller: 'product_making_options', except: [:destroy]
 
         resources :accessories, controller: 'product_accessories' do
           post :update_positions, on: :collection
