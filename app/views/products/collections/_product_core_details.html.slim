@@ -3,6 +3,9 @@ ruby:
 
 = link_to product_link.call(product), :class => 'media-wrap' do
   = image_tag product.images.first, :alt => product.name, :class => "img-product", 'data-hover' => product.images.last, 'data-original' => product.images.first
+  - if product.fast_making
+      = render 'shared/redesign/ribbon_fast_making'
+
 .details.text-center
   = link_to product_link.call(product), :class => 'media-wrap product-name' do
     span.name
@@ -25,7 +28,3 @@ ruby:
             - else
               i.fa.fa-plus
             = m.name
-
-  /.message-box 24 hours only
-- if product.fast_making
- = image_tag src='express_making.png', class: 'express-delivery', alt: "Express Making"
