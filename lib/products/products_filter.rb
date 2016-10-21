@@ -10,7 +10,7 @@ module Products
           ['price_high', 'Price High'],
           ['price_low', 'Price Low'],
           ['newest', "What's new"],
-          ['fast_delivery', 'Next day delivery']
+          # ['fast_delivery', 'Next day delivery']
         ]
       end
 
