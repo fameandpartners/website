@@ -45,8 +45,7 @@ module Spree
       def toggle
         load_product_making_option
 
-        @product_making_option.active = !@product_making_option.active
-        @product_making_option.save
+        @product_making_option.update_attribute(:active, !@product_making_option.active)
 
         redirect_to action: :index
       end
