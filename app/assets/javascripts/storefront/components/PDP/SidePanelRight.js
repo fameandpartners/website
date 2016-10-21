@@ -4,6 +4,7 @@ import SidePanelSize from './SidePanelSize';
 import SidePanelLength from './SidePanelLength';
 import SidePanelColor from './SidePanelColor';
 import SidePanelCustom from './SidePanelCustom';
+import SidePanelFastMaking from './SidePanelFastMaking';
 import CtaPrice from './CtaPrice';
 
 class PdpSidePanelRight extends React.Component {
@@ -70,6 +71,7 @@ class PdpSidePanelRight extends React.Component {
                 })()}
             </div>
           </div>
+          <SidePanelFastMaking />
           <CtaPrice />
         </div>
       );
