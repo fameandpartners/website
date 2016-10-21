@@ -151,7 +151,6 @@
         .panel-body
           .custom-form-element.filter-radio-option.selector-fast_making name='fast_making'
             label
-              / TODO: [WIP] confirm the parameters below
-              = check_box_tag true, true, params[:fast_making] ? true : false, 'data-all' => 'false'
+              = check_box_tag :fast_making, true, params[:fast_making].present?, { 'data-all' => 'false' }
               span.icon
               span EXPRESS MAKING (5 - 7 Days)
