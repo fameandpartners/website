@@ -1,4 +1,4 @@
-require_relative '../../../lib/products/products_filter'
+require 'spec_helper'
 
 describe Products::ProductsFilter do
   describe 'class methods' do
