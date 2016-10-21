@@ -57,11 +57,11 @@ module Spree
       end
 
       def load_product
-        @product = Product.find_by_permalink(params[:product_id])
+        @product = Spree::Product.find_by_permalink(params[:product_id])
       end
 
       def load_product_making_option
-        @product_making_option = ProductMakingOption.find(params[:id])
+        @product_making_option = model_class.find(params[:id])
       end
     end
   end
