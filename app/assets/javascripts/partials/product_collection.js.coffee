@@ -166,6 +166,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     bodyshapeArray = []
     colorArray = []
     styleArray = []
+    fastmakingArray = []
 
     if $("#collapse-color .js-filter-all input:not(:checked)")
       colorInputs = $("#collapse-color input:not(.js-filter-all):checked")
@@ -185,10 +186,15 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       for styleInput in styleInputs
         styleArray.push($(styleInput).attr("name"))
 
+    if $("#collapse-delivery-date .js-filter-all input:not(:checked)")
+      fastmakingInput = $("#collapse-delivery-date input:not(.js-filter-all):checked")
+      fastmakingArray.push($(fastmakingInput).attr("name"))
+
     filter =  {
       bodyshape: bodyshapeArray,
       color: colorArray,
       style: styleArray,
+      fast_making: fastmakingArray,
       order: @productOrderInput.val()
       q:         getUrlParameter("q")?.replace(/\+/g," ")
     }
