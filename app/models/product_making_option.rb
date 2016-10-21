@@ -2,11 +2,11 @@ class ProductMakingOption < ActiveRecord::Base
   belongs_to :product, class_name: 'Spree::Product'
   belongs_to :variant, class_name: 'Spree::Variant'
 
-  OPTION_TYPES         = ['fast_making']
-  DEFAULT_OPTION_TYPE  = 'fast_making'
-  DEFAULT_OPTION_PRICE = BigDecimal.new(30)
-  DEFAULT_CURRENCY     = 'USD'
-  ALL_CURRENCIES       = ::Money::Currency.table.keys.map(&:to_s).map(&:upcase)
+  DEFAULT_OPTION_TYPE  = 'fast_making'.freeze
+  DEFAULT_OPTION_PRICE = 30
+  DEFAULT_CURRENCY     = 'USD'.freeze
+  ALL_CURRENCIES       = ::Money::Currency.table.keys.map(&:to_s).map(&:upcase).freeze
+  OPTION_TYPES         = [DEFAULT_OPTION_TYPE].freeze
 
   # NOTE: `#option_type` is not related to Spree::OptionType at all!
   attr_accessible :option_type, :currency, :price, :active
