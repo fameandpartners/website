@@ -103,7 +103,6 @@
     clear: both;
 
     label {
-      cursor: pointer;
       font-size: 0.8em;
       font-weight: 500;
     }
@@ -388,6 +387,15 @@
 
     .section-box .item h3 {
       margin-top: 0;
+    }
+
+    .pdp-side-container-fast-making {
+      margin-left: 10px;
+
+      .c-card-customize__content__right {
+        margin-left: -10px;
+      }
+
     }
 
   }
