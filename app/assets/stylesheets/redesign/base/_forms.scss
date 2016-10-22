@@ -103,6 +103,8 @@ input[type="checkbox"] {
     position: relative;
     padding-left: 10px;
     width: 100%;
+    font-size: inherit;
+    cursor: pointer;
 
     &::before {
       content: "";
@@ -112,7 +114,7 @@ input[type="checkbox"] {
       left: 0;
       top: 3px;
       margin-left: -20px;
-      border: 1px solid $c-neutral-6;
+      border: 1px solid $c-neutral-5;
       background-color: $c-neutral-white;
     }
 
@@ -129,16 +131,29 @@ input[type="checkbox"] {
 
   }
 
-  &.form-small label {
+  @media (min-width: $bootstrap-md-width) {
 
-    &::before {
-      padding: 5px;
+    &.form-small label {
+
+      &::before {
+        padding: 5px;
+      }
+
+      &::after {
+        padding: 6px 3px;
+        font-size: 0.5rem;
+        font-weight: 600;
+      }
+
     }
 
-    &::after {
-      padding: 6px 3px;
-      font-size: 0.5rem;
-      font-weight: 600;
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    label:before {
+      padding: 8px;
+      top: 1px;
     }
 
   }
