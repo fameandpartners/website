@@ -49,7 +49,17 @@
         <div class="cart-item-image-holder col-md-5">
           <a href="<%= product.path %>">
             <% if product.name != "Gift" : %>
-            <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
+              <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
+
+
+                <% #TODO: [WIP] This is just a markup. Valid logic is needed here. %>
+                <div class="ribbon-wrapper express-making">
+                  <div class="ribbon-txt">
+                    Make it express
+                  </div>
+                </div>
+
+
             <% end %>
           </a>
         </div>
@@ -77,6 +87,15 @@
             <% for customization in product.customizations: %>
             <dd><%= customization.name %> <%= customization.display_price %></dd>
             <% end %>
+
+            <% #TODO: [WIP] This is just a markup. Valid logic is needed here. %>
+            <dd class="fast-making checkbox-inline custom-form-element-thin form-small checkbox-black-bg">
+              <input id="cart_item_fast_making_<%= product.id %>" type="checkbox">
+              <label for="cart_item_fast_making_<%= product.id %>">
+                Express Making $30
+              </label>
+            </dd>
+
           </dl>
         </div>
       </div>
