@@ -140,9 +140,9 @@ form.hide-fully#pdpDataForWishlist
 
   // content bottom wrap START
   // js class is used to get bottom offset for sticky side panel
-  .js-bottom-content
+  .js-bottom-wrapper
     .container
-      .section-box.same-height-cols
+      .section-box.same-height-cols.js-bottom-content
         .row
           .col-md-6
             .item.bordered
@@ -211,21 +211,19 @@ javascript:
     });
 
     function initSticky() {
+
+      var safePdpBottomDistance = parseInt($('.js-bottom-wrapper .js-bottom-content').css('margin-top')) * 0.25;
+      var safeStickyBottomSpacing = $('.js-bottom-wrapper').outerHeight() + $('.js-footer').outerHeight() - $('.js-fixed-header').outerHeight() - (safePdpBottomDistance);
+
       $('.js-panel-side-left').sticky({
         responsiveWidth: true,
         topSpacing: $('.js-fixed-header').outerHeight(),
-        bottomSpacing:
-          $('.js-bottom-content').outerHeight()
-          + $('.js-footer').outerHeight() + $('.js-fixed-header').outerHeight()
-          + 80
+        bottomSpacing: safeStickyBottomSpacing
       });
       $('.js-panel-side-right').sticky({
         responsiveWidth: true,
         topSpacing: $('.js-fixed-header').outerHeight(),
-        bottomSpacing:
-          $('.js-bottom-content').outerHeight()
-          + $('.js-footer').outerHeight() + $('.js-fixed-header').outerHeight()
-          + 80
+        bottomSpacing: safeStickyBottomSpacing
       });
       $('.js-panel-side-left').sticky('update');
       $('.js-panel-side-right').sticky('update');
