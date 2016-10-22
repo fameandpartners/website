@@ -248,8 +248,10 @@ javascript:
       initSticky();
     }
 
-    // update on resize
-    $(window).resize(updateSticky);
+    // update on window load and resize
+    $(window).on("load resize",function(e){
+      updateSticky();
+    });
 
     // update on accordion change
     $('#accordion').on('shown.bs.collapse', updateSticky);
