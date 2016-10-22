@@ -61,6 +61,10 @@ form.hide-fully#pdpDataForWishlist
 
 .pdp
   .container
+    .row.text-center.hidden-md.hidden-lg
+      h1.heading = @product.name
+        - if @product.name.downcase.include?('skirt')
+          p (Skirt Only)
     .row.main-content-area
       // to enable affix data-spy='affix' to this container
       .col-md-3.pdp-panel-side-left.js-panel-side-left-details-trigger
