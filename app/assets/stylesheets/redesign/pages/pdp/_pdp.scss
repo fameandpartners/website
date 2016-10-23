@@ -3,7 +3,6 @@
 .pdp {
   position: relative;
 
-  h1, .h1,
   h2, .h2 {
     margin-top: 0;
   }
@@ -328,8 +327,11 @@
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
-
     padding-top: 0;
+
+    h1 {
+      text-align: center;
+    }
 
     .main-content-area {
       min-height: initial;
@@ -366,6 +368,11 @@
   }
 
   @media (min-width: $bootstrap-md-width) {
+
+    h1 {
+      margin-bottom: -40px;
+      margin-top: 40px;
+    }
 
     .panel-side-container {
       padding-top: 40px;
