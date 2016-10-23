@@ -1,0 +1,40 @@
+= render partial: 'landing_pages/common'
+
+.page-content.lookbook-v2-page.portrait-template.relative.js-smooth-scroll
+
+  .container-fluid
+    .row.hidden-md.hidden-lg
+      .col-sm-12.text-center
+        .copy-wrap.alternative-header
+          h2.heading
+            span.h1.show <em>Empowering women,</em> <br>one dress at a time.
+            span.sub-heading
+              | We’re passionate about empowering women. <br>Here’s how we’re doing it.
+
+
+  .main-hero-wrap.hero-wrap.copy-left.white-text
+    // TODO: add real images
+    - current_tile_image = "http://fakeimg.pl/1522x460/000000/?text=desktop"
+    - current_tile_image_mob = "http://fakeimg.pl/640x460/000000/?text=mobile"
+    picture.media-wrap
+      source media="(max-width: 991px)" srcset="#{current_tile_image_mob}"
+      source media="(min-width: 992px)" srcset="#{current_tile_image}"
+      img src="#{current_tile_image}" srcset="
+        #{current_tile_image_mob} 991w,
+        #{current_tile_image} 992w"
+
+    .content-wrap.hidden-sm.hidden-xs
+      .container-fluid
+        .row
+          .col-md-5.col-lg-4.col-md-offset-1
+            .copy-wrap
+              h1.heading.no-margin-md
+                span <em>Empowering women,</em> <br class="hidden-xs hidden-sm">one dress at a time.
+                span.sub-heading
+                  | We’re passionate about empowering women. <br class="visible-lg">Here’s how we’re doing it.
+
+              // TODO: add real link
+              = link_to '#'
+                .cta-wrapper
+                  span.btn-md.btn-featured
+                    | Dress up and <span class="copy-highlight">GIVE BACK</span>
