@@ -1,6 +1,6 @@
 = render partial: 'landing_pages/common'
 
-.page-content.lookbook-v2-page.portrait-template.relative.js-smooth-scroll
+.page-content.relative
 
   .container-fluid
     .row.hidden-md.hidden-lg
@@ -19,9 +19,11 @@
     picture.media-wrap
       source media="(max-width: 991px)" srcset="#{current_tile_image_mob}"
       source media="(min-width: 992px)" srcset="#{current_tile_image}"
-      img src="#{current_tile_image}" srcset="
-        #{current_tile_image_mob} 991w,
-        #{current_tile_image} 992w"
+      = image_tag "#{current_tile_image}",
+                  srcset: "#{"#{current_tile_image_mob}"} 991w,
+                          #{"#{current_tile_image}"} 992w",
+                  class: "img-responsive",
+                  alt: ""
 
     .content-wrap.hidden-sm.hidden-xs
       .container-fluid
@@ -38,3 +40,109 @@
                 .cta-wrapper
                   span.btn-md.btn-featured
                     | Dress up and <span class="copy-highlight">GIVE BACK</span>
+
+  .container
+    .row
+      .col-md-8.col-md-offset-2.col-lg-6.col-lg-offset-3
+        .intro.text-center
+          h3.no-margin $5 of every sale will go towards nurturing <em>independence</em> <br class="hidden-xs hidden-sm">and <em>empowerment</em> in women all over the world
+          p.h3.no-margin –
+          p.h4.no-margin Just select which project you’d like to fund at checkout.
+
+    section.section-box.copy-img-side-by-side.copy-img-side-by-side-alt
+      .row
+        .col-md-12.heading-overlay-wrapper.is-bordered
+          .heading-overlay Our Partner Charities
+
+      .row
+        .col-md-10.col-md-offset-1
+          .item.bordered.has-heading-overlay
+            .row.vertical-align-row
+              .col-md-6.vertical-align.hidden-xs.hidden-sm
+                // TODO: add real desktop image
+                img.img-responsive src="http://fakeimg.pl/537x467/eeeeee/?text=desktop"
+              .col-md-6.vertical-align
+                .item-copy
+                  h2.title.no-margin End <em>violence</em> against women
+                  p.summary In Papua New Guinea, 100% of women experience violence and sexual harassment, affecting their ability to do business and weakening their communities.
+
+                  // TODO: add real mobile image
+                  img.img-responsive.hidden-lg.hidden-md src="http://fakeimg.pl/537x467/eeeeee/?text=mobile"
+
+                  .featured-info
+                    .row.vertical-align-row
+                      .col-xs-2.col-xs-offset-1.col-md-offset-0.vertical-align
+                        .amount $1
+                      .col-xs-8.col-md-9.vertical-align
+                        span.caption Gives support for women to rebuild their lives and live free of violence
+
+                  = link_to '#'
+                    span.cta-link-arrow-right
+                      span.copy-highlight.link-underline Dress up and give back
+                      i.icon.icon-arrow-right
+
+    section.section-box.copy-img-side-by-side.copy-img-side-by-side-alt
+      .row
+        .col-md-10.col-md-offset-1
+          .item.bordered
+            .row.vertical-align-row
+              .col-md-6.vertical-align
+                .item-copy
+                  h2.title.no-margin Build a woman’s <em>future</em>
+                  p.summary Supporting women is the most effective investment a developing country can make. Akilah delivers a unique model of market-relevant education that helps young women achieve economic independence.
+
+                  // TODO: add real mobile image
+                  img.img-responsive.hidden-lg.hidden-md src="http://fakeimg.pl/537x467/eeeeee/?text=mobile"
+
+                  .featured-info
+                    .row.vertical-align-row
+                      .col-xs-2.col-xs-offset-1.col-md-offset-0.vertical-align
+                        .amount $9
+                      .col-xs-8.col-md-9.vertical-align
+                        span.caption Provides another day of education
+
+                  = link_to '#'
+                    span.cta-link-arrow-right
+                      span.copy-highlight.link-underline Dress up and give back
+                      i.icon.icon-arrow-right
+
+              .col-md-6.vertical-align.hidden-xs.hidden-sm
+                // TODO: add real desktop image
+                img.img-responsive src="http://fakeimg.pl/537x467/eeeeee/?text=desktop"
+
+    section.section-box.copy-img-side-by-side.copy-img-side-by-side-alt
+      .row
+        .col-md-10.col-md-offset-1
+          .item.bordered
+            .row.vertical-align-row
+              .col-md-6.vertical-align.hidden-xs.hidden-sm
+                // TODO: add real desktop image
+                img.img-responsive src="http://fakeimg.pl/537x467/eeeeee/?text=desktop"
+              .col-md-6.vertical-align
+                .item-copy
+                  h2.title.no-margin Keep girls in <em>school</em>
+                  p.summary Millions of girls in Uganda miss up to 20% of the school year, or drop out completely, simply because they can’t afford menstrual products and want to avoid accidents and embarrassment.
+
+                  // TODO: add real mobile image
+                  img.img-responsive.hidden-lg.hidden-md src="http://fakeimg.pl/537x467/eeeeee/?text=mobile"
+
+                  .featured-info
+                    .row.vertical-align-row
+                      .col-xs-2.col-xs-offset-1.col-md-offset-0.vertical-align
+                        .amount $5
+                      .col-xs-8.col-md-9.vertical-align
+                        span.caption Gives enough hygienic, reusable sanitary supplies for one year
+
+                  = link_to '#'
+                    span.cta-link-arrow-right
+                      span.copy-highlight.link-underline Dress up and give back
+                      i.icon.icon-arrow-right
+
+    section.section-bottom
+      .row
+        .col-md-8.col-md-offset-2.col-xs-10.col-xs-offset-1
+          .text-center
+            p.h4
+              | <strong>i=Change<sup class="small">©</sup></strong> is the cause marketing platform that allows Fame and Partners to give back with every sale and track the impact of each donation in real time.
+            p.h2.no-margin –
+            p.h4 Let’s make fashion stand for something and change the world together.
