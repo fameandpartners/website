@@ -61,76 +61,73 @@ form.hide-fully#pdpDataForWishlist
 
 .pdp
   .container
-    .row.text-center.hidden-md.hidden-lg
-      h1.heading = @product.name
-      - if @product.name.downcase.include?('skirt')
-        p (Skirt Only)
     .row.main-content-area
       // to enable affix data-spy='affix' to this container
-      .col-md-3.pdp-panel-side-left.js-panel-side-left-details-trigger
+      .col-md-3
         .panel-side-wrap.js-panel-side-left
-          .text-right.visible-xs.visible-sm
-            a.btn-close.lg.js-panel-side-left-toggle href='javascript:;'
-              .hide-visually Close Menu
-          .panel-side
-            .panel-side-container
+          h1.heading = @product.name
+            - if @product.name.downcase.include?('skirt')
+              p (Skirt Only)
+          .pdp-panel-side-left.js-panel-side-left-details-trigger
+            .text-right.visible-xs.visible-sm
+              a.btn-close.lg.js-panel-side-left-toggle href='javascript:;'
+                .hide-visually Close Menu
+            .panel-side
+              .panel-side-container
 
-              div
-                h1.heading = @product.name
-                - if @product.name.downcase.include?('skirt')
-                  p (Skirt Only)
+                div
 
-                #accordion role='tablist'
-                  .panel
-                    a href='#collapse-description' data-toggle='collapse' data-parent='#accordion' Description
-                    #collapse-description.collapse.in role='tabpanel'
-                      p = raw @product.description
-                      p SKU: #{@product.sku}
-                  .panel
-                    a href='#collapse-fabric' data-toggle='collapse' data-parent='#accordion' Fabric Information
-                    #collapse-fabric.collapse role='tabpanel'
-                      - if @product.fabric.present?
-                        p = simple_format(@product.fabric)
-                        p Due to dying process, product hue may look slightly different from image.
-                      h3.h5 Garment Care
-                      p Professional dry-clean only. See label for further details.
-                  .panel
-                    a href='#collapse-about' data-toggle='collapse' data-parent='#accordion' About our model
-                    #collapse-about.collapse role='tabpanel'
-                      - if @product.fit.present?
-                        p = simple_format(@product.fit)
-                      - if @product.size.present?
-                        p = simple_format(@product.size)
-                  - if Features.active?(:moodboard)
-                    - if current_spree_user.present?
-                      .panel
-                        a href='#moodboard-options' data-user-present='#{current_spree_user.present?}' data-toggle='collapse' data-parent='#accordion'
-                          'Add to Moodboard
-                        #moodboard-options.moodboard-options.collapse role='tabpanel'
-                          / TODO - Support for dynamic colours.
-                          = react_component('AddProductToAnyMoodboard', moodboards: user_moodboards, product_id: @product.id, color_id: @product.color_id)
-                    - else
-                      // this will redirect not loged-in users to login page
-                      a.js-add-to-moodboard href='javascript:;' data-user-present='#{current_spree_user.present?}' Add to Moodboard
+                  #accordion role='tablist'
+                    .panel
+                      a href='#collapse-description' data-toggle='collapse' data-parent='#accordion' Description
+                      #collapse-description.collapse.in role='tabpanel'
+                        p = raw @product.description
+                        p SKU: #{@product.sku}
+                    .panel
+                      a href='#collapse-fabric' data-toggle='collapse' data-parent='#accordion' Fabric Information
+                      #collapse-fabric.collapse role='tabpanel'
+                        - if @product.fabric.present?
+                          p = simple_format(@product.fabric)
+                          p Due to dying process, product hue may look slightly different from image.
+                        h3.h5 Garment Care
+                        p Professional dry-clean only. See label for further details.
+                    .panel
+                      a href='#collapse-about' data-toggle='collapse' data-parent='#accordion' About our model
+                      #collapse-about.collapse role='tabpanel'
+                        - if @product.fit.present?
+                          p = simple_format(@product.fit)
+                        - if @product.size.present?
+                          p = simple_format(@product.size)
+                    - if Features.active?(:moodboard)
+                      - if current_spree_user.present?
+                        .panel
+                          a href='#moodboard-options' data-user-present='#{current_spree_user.present?}' data-toggle='collapse' data-parent='#accordion'
+                            'Add to Moodboard
+                          #moodboard-options.moodboard-options.collapse role='tabpanel'
+                            / TODO - Support for dynamic colours.
+                            = react_component('AddProductToAnyMoodboard', moodboards: user_moodboards, product_id: @product.id, color_id: @product.color_id)
+                      - else
+                        // this will redirect not loged-in users to login page
+                        a.js-add-to-moodboard href='javascript:;' data-user-present='#{current_spree_user.present?}' Add to Moodboard
 
-                  .panel
-                    .addthis_toolbox
-                      a.share-cta.js-panel-side-share-toggle href='#share-options' Share
+                    .panel
+                      .addthis_toolbox
+                        a.share-cta.js-panel-side-share-toggle href='#share-options' Share
 
-                      ul.share-btn-wrap.custom_images
-                        li
-                          a.addthis_button_facebook title='Share to Facebook'
-                            .icon-facebook2
-                        li
-                          a.addthis_button_twitter title='Share to Twitter'
-                            .icon-twitter
-                        li
-                          a.addthis_button_pinterest_share title='Share to Pinterest'
-                            .icon-pinterest
+                        ul.share-btn-wrap.custom_images
+                          li
+                            a.addthis_button_facebook title='Share to Facebook'
+                              .icon-facebook2
+                          li
+                            a.addthis_button_twitter title='Share to Twitter'
+                              .icon-twitter
+                          li
+                            a.addthis_button_pinterest_share title='Share to Pinterest'
+                              .icon-pinterest
 
-              ul.btn-wrap
-                li Guaranteed Fit
-                li Easy Returns
+                ul.btn-wrap
+                  li Guaranteed Fit
+                  li Easy Returns
 
       .col-md-6.panel-media
         #PdpGallery
