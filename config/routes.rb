@@ -92,6 +92,9 @@ FameAndPartners::Application.routes.draw do
     # Partners In Crime Sweepstakes Official Rules March 2016
     get '/partners-in-crime-terms' => 'statics#prom_competition_terms', as: :partners_in_crime_terms
 
+    # i=change landing page
+    get '/iequalchange' => 'statics#iequalchange', :permalink => 'iequalchange', :as => :iequalchange_landing_page
+
     ###########
     # Lookbooks
     ###########
