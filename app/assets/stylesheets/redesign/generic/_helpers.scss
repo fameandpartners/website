@@ -138,6 +138,10 @@
 
 }
 
+.vertical-align-row {
+  @include column-vertical-align();
+}
+
 // TODO: check if this hack is even needed
 .relative {
   position: relative !important;
