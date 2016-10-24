@@ -167,10 +167,6 @@ module Products
       end
     end
 
-    def price_with_currency
-      "#{price.display_price} #{price.currency}"
-    end
-
     def price_amount
       display_price = price.apply(discount) || price
       display_price.amount
@@ -202,6 +198,8 @@ module Products
     end
 
     def meta_description
+      price_with_currency = [price.display_price, price.currency].join(' ')
+
       [
           meta_title,
           price_with_currency,
