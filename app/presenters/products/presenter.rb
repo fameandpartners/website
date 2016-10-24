@@ -6,7 +6,7 @@ module Products
 
     attr_accessor :id, :master_id, :sku, :variant_skus, :name, :short_description, :description,
                   :permalink, :is_active, :is_deleted, :images, :default_image, :price,
-                  :discount, :recommended_products, :related_outerwear, :available_options, :preorder, :taxons, :variants,
+                  :discount, :recommended_products, :related_outerwear, :available_options, :taxons, :variants,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
                   :size_chart, :making_option_id, :fit, :size, :standard_days_for_making, :customised_days_for_making,
                   :default_standard_days_for_making, :default_customised_days_for_making,
@@ -59,36 +59,8 @@ module Products
       colors.present?  || colors.extra.any?
     end
 
-    def one_color?
-      default_color_options.length == 1
-    end
-
-    def custom_colors?
-      customisation_allowed? && colors.extra.any?
-    end
-
     def colors
       @colors = available_options.colors
-    end
-
-    def color_title
-      color_name.to_s.titleize
-    end
-
-    def default_sizes
-      sizes.default
-    end
-
-    def default_sizes?
-      default_sizes.any?
-    end
-
-    def custom_sizes
-      sizes.extra
-    end
-
-    def custom_sizes?
-      sizes.extra.any?
     end
 
     def custom_size_price
@@ -164,10 +136,6 @@ module Products
       moodboard.items
     end
 
-    def preorder?
-      preorder.present? && preorder.downcase == "yes"
-    end
-
     def customizable?
       customisation_allowed? && customizations.present? && customizations.all.any?
     end
@@ -226,7 +194,11 @@ module Products
     end
 
     def meta_title
-      "#{color_title} #{name} #{type}"
+      [
+        color_name.to_s.titleize,
+        name,
+        type
+      ].join(' ')
     end
 
     def meta_description

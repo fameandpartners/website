@@ -23,11 +23,6 @@ module Products
         it('disallows customisation') do
           expect(product.customizable?).to be_falsy
         end
-
-        it('disallows custom colours') do
-          expect(product.custom_colors?).to be_falsy
-        end
-
       end
 
       context 'when discounted by sales with allowed customisations discount' do
@@ -36,11 +31,6 @@ module Products
         it('allows customisation') do
           expect(product.customizable?).to be_truthy
         end
-
-        it('allows custom colours') do
-          expect(product.custom_colors?).to be_truthy
-        end
-
       end
 
       context 'at full price' do
@@ -48,10 +38,6 @@ module Products
 
         it('allows customisation') do
           expect(product.customizable?).to be_truthy
-        end
-
-        it('allows custom colours') do
-          expect(product.custom_colors?).to be_truthy
         end
 
         it 'displays price with currency' do
