@@ -27,7 +27,6 @@ class Products::DetailsResource
         master_id:                           product.master.try(:id),
         sku:                                 product.sku,
         name:                                product.name,
-        short_description:                   product_short_description,
         description:                         product.description,
         permalink:                           product.permalink,
         is_active:                           product.is_active?,
@@ -98,10 +97,6 @@ class Products::DetailsResource
     end
 
     # properties part
-    def product_short_description
-      product.meta_description.blank? ? product.description : product.meta_description
-    end
-
     def product_fabric
       Rails.cache.fetch([product, 'product-property', 'fabric']) { product.property('fabric') }
     end
