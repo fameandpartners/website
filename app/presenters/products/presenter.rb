@@ -12,7 +12,7 @@ module Products
                   :default_standard_days_for_making, :default_customised_days_for_making,
                   :height_customisable, :fast_delivery, :render3d_images
 
-    attr_writer :fast_making
+    attr_writer :fast_making, :meta_description
 
     def initialize(opts)
       opts.each do |k, v|
@@ -198,13 +198,7 @@ module Products
     end
 
     def meta_description
-      price_with_currency = [price.display_price, price.currency].join(' ')
-
-      [
-          meta_title,
-          price_with_currency,
-          fabric.to_s.squish
-      ].join('. ').truncate(META_DESCRIPTION_MAX_SIZE)
+      (@meta_description.presence || fallback_meta_description).truncate(META_DESCRIPTION_MAX_SIZE)
     end
 
     def delivery_date
@@ -231,5 +225,15 @@ module Products
       @policy ||= Policy::Product.new(self)
     end
 
+    def fallback_meta_description
+      price_with_currency = [price.display_price, price.currency].join(' ')
+      fabric_text         = fabric.to_s.squish
+
+      [
+        meta_title,
+        price_with_currency,
+        fabric_text
+      ].join('. ')
+    end
   end
 end

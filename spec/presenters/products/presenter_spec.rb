@@ -39,10 +39,6 @@ module Products
         it('allows customisation') do
           expect(product.customizable?).to be_truthy
         end
-
-        it 'displays price with currency' do
-          expect(product.price_with_currency).to include('$99.00 USD')
-        end
       end
     end
 
@@ -63,10 +59,22 @@ module Products
         described_class.new price: spree_price, color_name: 'Golden', name: 'Devan', fabric: '100% polyester light georgette. With Super long description'*10
       end
 
-      it 'returns truncated version of its meta title, price with currency and fabric description' do
-        result = product.meta_description
-        expect(result).to eq('Golden Devan Dress. $12.34 AUD. 100% polyester light georgette. With Super long description100% polyester light georgette. With Super long description100% po...')
-        expect(result.size).to eq(Products::Presenter::META_DESCRIPTION_MAX_SIZE)
+      context 'when product meta description is not present' do
+        it 'returns truncated version of its meta title, price with currency and fabric description' do
+          result = product.meta_description
+          expect(result).to eq('Golden Devan Dress. $12.34 AUD. 100% polyester light georgette. With Super long description100% polyester light georgette. With Super long description100% po...')
+          expect(result.size).to eq(described_class::META_DESCRIPTION_MAX_SIZE)
+        end
+      end
+
+      context 'when product meta description is present' do
+        before(:each) { product.meta_description = 'My Super Meta Description Which is Truncated '*10 }
+
+        it 'usees its truncated meta description field' do
+          result = product.meta_description
+          expect(result).to eq('My Super Meta Description Which is Truncated My Super Meta Description Which is Truncated My Super Meta Description Which is Truncated My Super Meta Descript...')
+          expect(result.size).to eq(described_class::META_DESCRIPTION_MAX_SIZE)
+        end
       end
     end
 

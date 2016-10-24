@@ -28,6 +28,7 @@ class Products::DetailsResource
         sku:                                 product.sku,
         name:                                product.name,
         description:                         product.description,
+        meta_description:                    product.meta_description,
         permalink:                           product.permalink,
         is_active:                           product.is_active?,
         is_deleted:                          product.deleted?,
