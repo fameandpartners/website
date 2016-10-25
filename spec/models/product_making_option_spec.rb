@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe ProductMakingOption, type: :model do
+  it { is_expected.to belong_to(:product).class_name('Spree::Product').touch(true) }
+  it { is_expected.to belong_to(:variant).class_name('Spree::Variant') }
+
   it { is_expected.to validate_presence_of(:option_type) }
   it { is_expected.to validate_inclusion_of(:option_type).in_array(described_class::OPTION_TYPES) }
   it { is_expected.to validate_uniqueness_of(:option_type).scoped_to(:product_id) }
