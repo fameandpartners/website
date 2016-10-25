@@ -4,15 +4,15 @@ module Products
     SCHEMA_ORG_DISCONTINUED   = 'http://schema.org/Discontinued'
     META_DESCRIPTION_MAX_SIZE = 160
 
-    attr_accessor :id, :master_id, :sku, :variant_skus, :name, :short_description, :description,
+    attr_accessor :id, :master_id, :sku, :variant_skus, :name, :description,
                   :permalink, :is_active, :is_deleted, :images, :default_image, :price,
-                  :discount, :recommended_products, :related_outerwear, :available_options, :preorder, :taxons, :variants,
+                  :discount, :recommended_products, :related_outerwear, :available_options, :taxons, :variants,
                   :moodboard, :fabric, :style_notes, :color_id, :color_name, :color,
                   :size_chart, :making_option_id, :fit, :size, :standard_days_for_making, :customised_days_for_making,
                   :default_standard_days_for_making, :default_customised_days_for_making,
                   :height_customisable, :fast_delivery, :render3d_images
 
-    attr_writer :fast_making
+    attr_writer :fast_making, :meta_description
 
     def initialize(opts)
       opts.each do |k, v|
@@ -59,36 +59,8 @@ module Products
       colors.present?  || colors.extra.any?
     end
 
-    def one_color?
-      default_color_options.length == 1
-    end
-
-    def custom_colors?
-      customisation_allowed? && colors.extra.any?
-    end
-
     def colors
       @colors = available_options.colors
-    end
-
-    def color_title
-      color_name.to_s.titleize
-    end
-
-    def default_sizes
-      sizes.default
-    end
-
-    def default_sizes?
-      default_sizes.any?
-    end
-
-    def custom_sizes
-      sizes.extra
-    end
-
-    def custom_sizes?
-      sizes.extra.any?
     end
 
     def custom_size_price
@@ -97,17 +69,6 @@ module Products
 
     def sizes
       @sizes ||= available_options.sizes
-    end
-
-    def size_chart_explanation
-      case size_chart
-        when '2014'
-          'This dress follows our old measurements.'
-        when '2015'
-          'We have updated our sizing! This dress follows our new size chart.'
-        else
-          ''
-      end
     end
 
     def size_chart_data
@@ -175,10 +136,6 @@ module Products
       moodboard.items
     end
 
-    def preorder?
-      preorder.present? && preorder.downcase == "yes"
-    end
-
     def customizable?
       customisation_allowed? && customizations.present? && customizations.all.any?
     end
@@ -210,10 +167,6 @@ module Products
       end
     end
 
-    def price_with_currency
-      "#{price.display_price} #{price.currency}"
-    end
-
     def price_amount
       display_price = price.apply(discount) || price
       display_price.amount
@@ -237,15 +190,15 @@ module Products
     end
 
     def meta_title
-      "#{color_title} #{name} #{type}"
+      [
+        color_name.to_s.titleize,
+        name,
+        type
+      ].join(' ')
     end
 
     def meta_description
-      [
-          meta_title,
-          price_with_currency,
-          fabric.to_s.squish
-      ].join('. ').truncate(META_DESCRIPTION_MAX_SIZE)
+      (@meta_description.presence || fallback_meta_description).truncate(META_DESCRIPTION_MAX_SIZE)
     end
 
     def delivery_date
@@ -272,5 +225,15 @@ module Products
       @policy ||= Policy::Product.new(self)
     end
 
+    def fallback_meta_description
+      price_with_currency = [price.display_price, price.currency].join(' ')
+      fabric_text         = fabric.to_s.squish
+
+      [
+        meta_title,
+        price_with_currency,
+        fabric_text
+      ].join('. ')
+    end
   end
 end

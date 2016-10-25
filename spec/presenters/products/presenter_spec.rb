@@ -23,11 +23,6 @@ module Products
         it('disallows customisation') do
           expect(product.customizable?).to be_falsy
         end
-
-        it('disallows custom colours') do
-          expect(product.custom_colors?).to be_falsy
-        end
-
       end
 
       context 'when discounted by sales with allowed customisations discount' do
@@ -36,11 +31,6 @@ module Products
         it('allows customisation') do
           expect(product.customizable?).to be_truthy
         end
-
-        it('allows custom colours') do
-          expect(product.custom_colors?).to be_truthy
-        end
-
       end
 
       context 'at full price' do
@@ -48,14 +38,6 @@ module Products
 
         it('allows customisation') do
           expect(product.customizable?).to be_truthy
-        end
-
-        it('allows custom colours') do
-          expect(product.custom_colors?).to be_truthy
-        end
-
-        it 'displays price with currency' do
-          expect(product.price_with_currency).to include('$99.00 USD')
         end
       end
     end
@@ -68,38 +50,6 @@ module Products
 
         it { expect(product.size_chart).to eq(size_chart) }
       end
-
-      describe '#size_chart_explanation' do
-
-        describe 'old (2014) chart' do
-          let(:size_chart) { '2014' }
-
-          it do
-            expect(product.size_chart_explanation).to eq(
-              'This dress follows our old measurements.'
-            )
-          end
-
-          it { expect(product.size_chart_data).to eq SizeChart::SIZE_CHART_2014 }
-        end
-
-        describe 'new (2015) chart' do
-          let(:size_chart) { '2015' }
-
-          it do
-            expect(product.size_chart_explanation).to eq(
-                'We have updated our sizing! This dress follows our new size chart.'
-            )
-          end
-          it { expect(product.size_chart_data).to eq SizeChart::SIZE_CHART_2015 }
-        end
-
-        describe 'unknown' do
-          let(:size_chart) { '2016' }
-          it { expect(product.size_chart_explanation).to eq '' }
-          it { expect(product.size_chart_data).to eq SizeChart::DEFAULT_CHART }
-        end
-      end
     end
 
     describe '#meta_description' do
@@ -109,10 +59,22 @@ module Products
         described_class.new price: spree_price, color_name: 'Golden', name: 'Devan', fabric: '100% polyester light georgette. With Super long description'*10
       end
 
-      it 'returns truncated version of its meta title, price with currency and fabric description' do
-        result = product.meta_description
-        expect(result).to eq('Golden Devan Dress. $12.34 AUD. 100% polyester light georgette. With Super long description100% polyester light georgette. With Super long description100% po...')
-        expect(result.size).to eq(Products::Presenter::META_DESCRIPTION_MAX_SIZE)
+      context 'when product meta description is not present' do
+        it 'returns truncated version of its meta title, price with currency and fabric description' do
+          result = product.meta_description
+          expect(result).to eq('Golden Devan Dress. $12.34 AUD. 100% polyester light georgette. With Super long description100% polyester light georgette. With Super long description100% po...')
+          expect(result.size).to eq(described_class::META_DESCRIPTION_MAX_SIZE)
+        end
+      end
+
+      context 'when product meta description is present' do
+        before(:each) { product.meta_description = 'My Super Meta Description Which is Truncated '*10 }
+
+        it 'usees its truncated meta description field' do
+          result = product.meta_description
+          expect(result).to eq('My Super Meta Description Which is Truncated My Super Meta Description Which is Truncated My Super Meta Description Which is Truncated My Super Meta Descript...')
+          expect(result.size).to eq(described_class::META_DESCRIPTION_MAX_SIZE)
+        end
       end
     end
 

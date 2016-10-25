@@ -54,16 +54,6 @@ module ProductsHelper
     seo_taxonomy.present? ? seo_taxonomy.root.children : []
   end
 
-  def product_short_description(product)
-    description_text = product.property('short_description') || product.description
-    description_text = description_text.to_s.gsub(/(prom|formal)(\s)/i, '')
-
-    escaped_text = ActionView::Base.full_sanitizer.sanitize(description_text)
-    truncate(escaped_text, length: 80, separator: ' ')
-  rescue
-    I18n.t('product_has_no_description')
-  end
-
   def hoverable_image_tag(sources = [], options = {})
     blank   = 'assets/noimage/product.png'
     sources = Array(sources)
