@@ -1,3 +1,5 @@
+require 'aasm'
+
 module NextLogistics
   class ReturnRequestProcess < ActiveRecord::Base
     include AASM
@@ -34,8 +36,8 @@ module NextLogistics
       save! if from_australia?
     end
 
-    def upload_to_next
-      # Upload File to Next FTP
+    def upload_to_ftp
+      Workers::UploadToFtpWorker.perform_async(self.id)
       # Email customer with instructions (customer.io?)
     end
 
