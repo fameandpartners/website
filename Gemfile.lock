@@ -171,7 +171,9 @@ PATH
       simple_form
       slim
     next_logistics (0.0.1)
+      aasm (~> 4.10.0)
       rails
+      sidekiq
     revolution (0.0.1)
       awesome_nested_set
       rails (~> 3.2.21)
