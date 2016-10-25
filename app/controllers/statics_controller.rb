@@ -16,12 +16,17 @@ class StaticsController < ApplicationController
 
   def faqs
     @title       = ['FAQs ', default_seo_title].join
-    @description = 'FAQs'
+    @description = "Answers to all of Fame and Partners' Frequently Asked Questions. Find out about our returns process, size chart, and more."
+  end
+
+  def growth_plan
+    @title       = ['Our Growth Plan ', default_seo_title].join
+    @description = "Fame and Partners has successfully navigated the path from Australian start-up to US-based early stage growth company. Find out how we plan to keep expanding our business."
   end
 
   def size_guide
     @title = "New Size Guide " + default_seo_title
-    @description = "Size Guides"
+    @description = "Fame and Partners guarantees a perfect fit for bodies of all shapes and sizes. Use our size chart to determine which size will fit and flatter your body."
   end
 
   def ecom_terms
@@ -31,17 +36,17 @@ class StaticsController < ApplicationController
 
   def from_our_ceo
     @title = "From our CEO " + default_seo_title
-    @description = "From our CEO"
+    @description = "A monthly update from Fame and Partners' CEO, Nyree Corby, on what's new in the world of Fame."
   end
 
   def why_us
     @title = "Why Us " + default_seo_title
-    @description = "Why Us"
+    @description = "Why shop with Fame and Partners? Our clothing is customizable, made-to-order, ethically produced, and guaranteed to fit and flatter. Find out more."
   end
 
   def ecom_privacy
     @title = "Privacy " + default_seo_title
-    @description = "Privacy"
+    @description = "Everything you want to know about Fame and Partners' privacy policy."
   end
 
   def fashionista_winner

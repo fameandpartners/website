@@ -5,7 +5,7 @@ class WeddingConsultationsController < ApplicationController
   def new
     @wedding_consultation = Forms::WeddingConsultation.new(WeddingConsultation.new)
     title('Wedding Consultation', default_seo_title)
-    description('We can help you create the perfect wedding look.')
+    description('Fame and Partners offers FREE one-on-one wedding consultations for the bride and entire bridal partyvia phone call, text, online chat, video message, and even in-person. Book your styling appointment with our wardrobe stylist today!')
   end
 
   def create
