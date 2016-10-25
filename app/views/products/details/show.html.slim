@@ -212,8 +212,9 @@ javascript:
 
     function initSticky() {
 
-      var safePdpBottomDistance = parseInt($('.js-bottom-wrapper .js-bottom-content').css('margin-top')) * 0.25;
-      var safeStickyBottomSpacing = $('.js-bottom-wrapper').outerHeight() + $('.js-footer').outerHeight() - $('.js-fixed-header').outerHeight() - (safePdpBottomDistance);
+      var bottomContentSpacing = parseInt($('.js-bottom-wrapper .js-bottom-content').css('margin-top'));
+      var safeDistancePdpBottom = 0.25;
+      var safeStickyBottomSpacing = $('.js-bottom-wrapper').outerHeight() + $('.js-footer').outerHeight() - $('.js-fixed-header').outerHeight() - (bottomContentSpacing * safeDistancePdpBottom);
 
       $('.js-panel-side-left').sticky({
         responsiveWidth: true,
