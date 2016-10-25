@@ -8,24 +8,35 @@ module NextLogistics
     # => send FTP file
 
     aasm do
-      state :return_request_created, initial: true
+      state :created, initial: true
       state :asn_file_uploaded
+      state :asn_received
+
+      event :asn_file_was_uploaded do
+        transitions from: :created, to: :asn_file_uploaded
+      end
+
+      event :asn_was_received do
+        transitions from: :asn_file_uploaded, to: :asn_received
+      end
     end
 
     belongs_to :order_return_request
 
-    validates :order_return_request, presence: true
+    scope :not_failed, -> { where(failed: false) }
+    scope :months_old, -> (months) { where(updated_at: months.to_i.months.ago..Time.zone.now) }
 
     attr_accessible :order_return_request
 
-    def start_process(order_return_request:)
-      if from_australia?
-        save!
-      end
+    validates :order_return_request, presence: true
+
+    def start_process
+      save! if from_australia?
     end
 
     def upload_to_next
-
+      # Upload File to Next FTP
+      # Email customer with instructions (customer.io?)
     end
 
     private

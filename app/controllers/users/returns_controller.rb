@@ -62,6 +62,6 @@ class Users::ReturnsController < Users::BaseController
   end
 
   def start_next_logistics_process(order_return)
-    NextLogistics::ReturnRequest::Create.(order_return_request: order_return)
+    NextLogistics::ReturnRequestProcess.new(order_return_request: order_return).start_process
   end
 end
