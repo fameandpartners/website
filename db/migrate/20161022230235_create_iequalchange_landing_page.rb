@@ -5,8 +5,8 @@ class CreateIequalchangeLandingPage < ActiveRecord::Migration
       path:             '/iequalchange',
       template_path:    '/statics/iequalchange',
       heading:          'i=Change',
-      title:            'i=Change [TODO]',
-      meta_description: '[TODO]',
+      title:            'Fame and Partners x i=Change',
+      meta_description: 'Join Fame and Partners in empowering women through fashion. $5 of every sale helps support initiatives from UN Women, Akilah, and Plan. Dress up and give back!',
     }
   end
 
