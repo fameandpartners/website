@@ -3,8 +3,8 @@ require 'aasm/rspec'
 
 module NextLogistics
   RSpec.describe ReturnRequestProcess do
-    let(:order_return_request) { build_stubbed(:order_return_request) }
-    let(:return_request_process) { described_class.create(order_return_request: order_return_request) }
+    let(:order_return_request) { build(:order_return_request) }
+    let(:return_request_process) { described_class.new(order_return_request: order_return_request) }
 
     it 'obeys state machines flow' do
       expect(return_request_process).to have_state(:created)
@@ -13,34 +13,47 @@ module NextLogistics
     end
 
     describe '#start_process' do
-      # TODO: based on Bergen?
-      # let(:shipping_address) { build_stubbed(:address, country: country) }
-      #
-      # before do
-      #   allow(return_request_item).to receive_message_chain(:order, :shipping_address).and_return(shipping_address)
-      # end
-      #
-      # context 'return is from the USA and for return' do
-      #   let(:country) { build_stubbed(:country, :united_states) }
-      #   let(:return_request_item) { build_stubbed(:return_request_item, :return) }
-      #
-      #   it 'saves and call verification worker' do
-      #     expect(return_request_process).to receive(:save!)
-      #
-      #     return_request_process.start_process
-      #   end
-      # end
-      #
-      # context 'return is not from the USA' do
-      #   let(:country) { build_stubbed(:country, :australia) }
-      #   let(:return_request_item) { build_stubbed(:return_request_item) }
-      #
-      #   it 'does not save' do
-      #     expect(return_request_process).not_to receive(:save!)
-      #
-      #     return_request_process.start_process
-      #   end
-      # end
+      context 'does not have items to return' do
+        before(:each) do
+          order_return_request.return_request_items = build_stubbed_list(:return_request_item, 2, :keep)
+        end
+
+        it 'does not persist process' do
+          expect(return_request_process).not_to receive(:save!)
+          return_request_process.start_process
+        end
+      end
+
+      context 'has items to return' do
+        before(:each) do
+          order_return_request.return_request_items = [
+            build_stubbed(:return_request_item, :keep),
+            build_stubbed(:return_request_item, :return)
+          ]
+        end
+
+        context 'in Australia' do
+          before(:each) do
+            order_return_request.order.ship_address.country.iso3 = 'AUS'
+          end
+
+          it 'persists process' do
+            expect(return_request_process).to receive(:save!)
+            return_request_process.start_process
+          end
+        end
+
+        context 'outside of Australia' do
+          before(:each) do
+            order_return_request.order.ship_address.country.iso3 = 'BRA'
+          end
+
+          it 'does not save' do
+            expect(return_request_process).not_to receive(:save!)
+            return_request_process.start_process
+          end
+        end
+      end
     end
   end
 end

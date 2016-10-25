@@ -33,7 +33,7 @@ module NextLogistics
     validates :order_return_request, presence: true
 
     def start_process
-      save! if from_australia?
+      save! if from_australia? && has_item_for_return?
     end
 
     def upload_to_ftp
@@ -45,6 +45,10 @@ module NextLogistics
 
     def from_australia?
       order_return_request.order.ship_address.country.iso3 == 'AUS'
+    end
+
+    def has_item_for_return?
+      order_return_request.return_request_items.any?(&:return_or_exchange?)
     end
   end
 end
