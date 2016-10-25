@@ -62,6 +62,8 @@ class Users::ReturnsController < Users::BaseController
   end
 
   def start_next_logistics_process(order_return)
-    NextLogistics::ReturnRequestProcess.new(order_return_request: order_return).start_process
+    if Features.active?(:next_logistics)
+      NextLogistics::ReturnRequestProcess.new(order_return_request: order_return).start_process
+    end
   end
 end
