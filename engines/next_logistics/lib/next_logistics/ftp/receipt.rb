@@ -14,7 +14,8 @@ module NextLogistics
       end
 
       def tempfile
-        CSV.open(buffer, 'w', headers: RECEIPT_HEADERS) do |csv|
+        CSV.open(buffer, 'w', headers: :first_row) do |csv|
+          csv << RECEIPT_HEADERS
           items_for_return.each do |rri|
             formatter = RowFormatter.new(return_request_item: rri)
             csv << formatter.to_row
@@ -30,38 +31,55 @@ module NextLogistics
       end
 
       class RowFormatter
+        attr_reader :return_request_item
+
         def initialize(return_request_item:)
-          # TODO
+          @return_request_item = return_request_item
+        end
+
+        private def order
+          return_request_item.order
+        end
+
+        private def line_item_presenter
+          Orders::LineItemPresenter.new(return_request_item.line_item, order)
+        end
+
+        private def global_sku
+          GlobalSku.find_or_create_by_line_item(line_item_presenter: line_item_presenter)
         end
 
         # UPC
         def product_code
-          '12345'
+          global_sku.upc
         end
 
         # Spree Order Number
         def po_reference
-          'R123123123'
+          order.number
         end
 
         # [product_name, size, color_name].join(' - ')
         def description
-          'Super Dress - US10/AU14 - Red'
+          [
+            line_item_presenter.style_name,
+            line_item_presenter.size,
+            line_item_presenter.colour_name
+          ].join(' - ')
         end
 
         # Style Number, AKA, SKU
         def other_description
-          'BE1123'
+          global_sku.style_number
         end
 
         # Customer Full name
         def reference2
-          'Loroteiro Silvestre'
+          order.full_name
         end
 
-        # For now, it's always one
         def quantity
-          1
+          line_item_presenter.quantity
         end
 
         def to_row
