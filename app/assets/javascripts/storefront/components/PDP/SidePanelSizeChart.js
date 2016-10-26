@@ -124,8 +124,8 @@ class SidePanelSizeChart extends React.Component {
                       }
                       return (
                         <tr key={index} className={INCHES_IS_ACTIVE}>
-                          <td>{dataArray[1]}</td>
-                          <td className="divider">{dataArray[0]}</td>
+                          <SizeChartCell value={dataArray[1]} />
+                          <SizeChartCell className="divider" value={dataArray[0]} />
                           <SizeChartCell value={dataArray[3]} />
                           <SizeChartCell value={dataArray[5]} />
                           <SizeChartCell value={dataArray[7]} />
@@ -140,8 +140,8 @@ class SidePanelSizeChart extends React.Component {
                       }
                       return (
                         <tr key={index} className={CM_IS_ACTIVE}>
-                          <td>{dataArray[1]}</td>
-                          <td className="divider">{dataArray[0]}</td>
+                          <SizeChartCell value={dataArray[1]} />
+                          <SizeChartCell className="divider" value={dataArray[0]} />
                           <SizeChartCell value={dataArray[2]} />
                           <SizeChartCell value={dataArray[4]} />
                           <SizeChartCell value={dataArray[6]} />
