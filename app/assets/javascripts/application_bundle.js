@@ -1224,15 +1224,9 @@ var _reactRedux = require('react-redux');
 
 var _redux = require('redux');
 
-var _reactCustomScrollbars = require('react-custom-scrollbars');
-
 var _PdpActions = require('../../actions/PdpActions');
 
 var pdpActions = _interopRequireWildcard(_PdpActions);
-
-var _SidePanel2 = require('./SidePanel');
-
-var _SidePanel3 = _interopRequireDefault(_SidePanel2);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -1246,8 +1240,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // TODO: [WIP] This is just a placeholder. Valid logic for displaying the "express making" row properly is needed here.
 
-var SidePanelFastMaking = function (_SidePanel) {
-  _inherits(SidePanelFastMaking, _SidePanel);
+var SidePanelFastMaking = function (_React$Component) {
+  _inherits(SidePanelFastMaking, _React$Component);
 
   function SidePanelFastMaking(props, context) {
     _classCallCheck(this, SidePanelFastMaking);
@@ -1292,7 +1286,7 @@ var SidePanelFastMaking = function (_SidePanel) {
   }]);
 
   return SidePanelFastMaking;
-}(_SidePanel3.default);
+}(_react2.default.Component);
 
 SidePanelFastMaking.propTypes = {
   customize: _react.PropTypes.object.isRequired
@@ -1310,7 +1304,7 @@ function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SidePanelFastMaking);
 
-},{"../../actions/PdpActions":2,"./SidePanel":5,"react":557,"react-custom-scrollbars":378,"react-redux":394,"redux":566}],9:[function(require,module,exports){
+},{"../../actions/PdpActions":2,"react":557,"react-redux":394,"redux":566}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
