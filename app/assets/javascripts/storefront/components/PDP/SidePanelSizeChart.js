@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Tabs from 'react-simpletabs';
 import Modal from 'react-modal';
 import {MODAL_STYLE} from './utils';
+import SizeChartCell from './SizeChartCell';
 
 class SidePanelSizeChart extends React.Component {
   constructor(props, context) {
@@ -123,12 +124,12 @@ class SidePanelSizeChart extends React.Component {
                       }
                       return (
                         <tr key={index} className={INCHES_IS_ACTIVE}>
-                          <td>{dataArray[1]}</td>
-                          <td className="divider">{dataArray[0]}</td>
-                          <td>{dataArray[3]}</td>
-                          <td>{dataArray[5]}</td>
-                          <td>{dataArray[7]}</td>
-                          <td>{dataArray[9]}</td>
+                          <SizeChartCell value={dataArray[1]} />
+                          <SizeChartCell className="divider" value={dataArray[0]} />
+                          <SizeChartCell value={dataArray[3]} />
+                          <SizeChartCell value={dataArray[5]} />
+                          <SizeChartCell value={dataArray[7]} />
+                          <SizeChartCell value={dataArray[9]} />
                         </tr>
                       );
                     })}
@@ -139,12 +140,12 @@ class SidePanelSizeChart extends React.Component {
                       }
                       return (
                         <tr key={index} className={CM_IS_ACTIVE}>
-                          <td>{dataArray[1]}</td>
-                          <td className="divider">{dataArray[0]}</td>
-                          <td>{dataArray[2]}</td>
-                          <td>{dataArray[4]}</td>
-                          <td>{dataArray[6]}</td>
-                          <td>{dataArray[8]}</td>
+                          <SizeChartCell value={dataArray[1]} />
+                          <SizeChartCell className="divider" value={dataArray[0]} />
+                          <SizeChartCell value={dataArray[2]} />
+                          <SizeChartCell value={dataArray[4]} />
+                          <SizeChartCell value={dataArray[6]} />
+                          <SizeChartCell value={dataArray[8]} />
                         </tr>
                       );
                     })}
