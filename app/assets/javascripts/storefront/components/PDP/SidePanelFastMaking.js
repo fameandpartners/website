@@ -1,13 +1,11 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Scrollbars} from 'react-custom-scrollbars';
 import * as pdpActions from '../../actions/PdpActions';
-import SidePanel from './SidePanel';
 
 // TODO: [WIP] This is just a placeholder. Valid logic for displaying the "express making" row properly is needed here.
 
-class SidePanelFastMaking extends SidePanel {
+class SidePanelFastMaking extends React.Component {
   constructor(props, context) {
     super(props, context);
 
