@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 describe NextLogistics::FTP::Interface do
-  pending 'TODO'
+  # This is a simple wrapper between Ruby's Net::FTP and Next credentials
 end
