@@ -9,39 +9,44 @@ class StaticsController < ApplicationController
 
 
   def about
-    @title = "About Us " + default_seo_title
-    @description = "We design beautiful dresses for prom and many other occasions. We are a passionate team of fashionista's based in Sydney and NYC"
+    title('About Us', default_seo_title)
+    description('We design beautiful dresses for prom and many other occasions. We are a passionate team of fashionista\'s based in Sydney and NYC')
     @contact = Contact.new(site_version: current_site_version.code)
   end
 
   def faqs
-    @title       = ['FAQs ', default_seo_title].join
-    @description = 'FAQs'
+    title('FAQs', default_seo_title)
+    description('Answers to all of Fame and Partners\' Frequently Asked Questions. Find out about our returns process, size chart, and more.')
+  end
+
+  def growth_plan
+    title('Our Growth Plan', default_seo_title)
+    description('Fame and Partners has successfully navigated the path from Australian start-up to US-based early stage growth company. Find out how we plan to keep expanding our business.')
   end
 
   def size_guide
-    @title = "New Size Guide " + default_seo_title
-    @description = "Size Guides"
+    title('New Size Guide', default_seo_title)
+    description('Fame and Partners guarantees a perfect fit for bodies of all shapes and sizes. Use our size chart to determine which size will fit and flatter your body.')
   end
 
   def ecom_terms
-    @title = "Terms & Conditions " + default_seo_title
-    @description = "Terms & Conditions"
+    title('Terms & Conditions', default_seo_title)
+    description('Terms & Conditions')
   end
 
   def from_our_ceo
-    @title = "From our CEO " + default_seo_title
-    @description = "From our CEO"
+    title('From our CEO', default_seo_title)
+    description('A monthly update from Fame and Partners\' CEO, Nyree Corby, on what\'s new in the world of Fame.')
   end
 
   def why_us
-    @title = "Why Us " + default_seo_title
-    @description = "Why Us"
+    title('Why Us', default_seo_title)
+    description('Why shop with Fame and Partners? Our clothing is customizable, made-to-order, ethically produced, and guaranteed to fit and flatter. Find out more.')
   end
 
   def ecom_privacy
-    @title = "Privacy " + default_seo_title
-    @description = "Privacy"
+    title('Privacy', default_seo_title)
+    description('Everything you want to know about Fame and Partners\' privacy policy.')
   end
 
   def fashionista_winner
