@@ -66,8 +66,6 @@ form.hide-fully#pdpDataForWishlist
       .col-md-3
         .panel-side-wrap.js-panel-side-left
           h1.heading = @product.name
-            - if @product.name.downcase.include?('skirt')
-              p (Skirt Only)
           .pdp-panel-side-left.js-panel-side-left-details-trigger
             .text-right.visible-xs.visible-sm
               a.btn-close.lg.js-panel-side-left-toggle href='javascript:;'
@@ -76,7 +74,7 @@ form.hide-fully#pdpDataForWishlist
               .panel-side-container
 
                 div
-
+                  h2.hidden-md.hidden-lg = @product.name
                   #accordion role='tablist'
                     .panel
                       a href='#collapse-description' data-toggle='collapse' data-parent='#accordion' Description
