@@ -7,8 +7,8 @@ class CreateHolidayCollectionLandingPage < ActiveRecord::Migration
       pids:             %w('').join(','),
       limit:            '99',
       heading:          'Holiday Collection',
-      title:            'Holiday Collection',
-      meta_description: 'Holiday Collection',
+      title:            'Easy, Effortless Cocktail Dresses',
+      meta_description: 'Our cocktail collection is perfect for holiday parties: effortlessly chic minis, wraps, and slip dresses–all individually customizable & made-to-order.',
     }
   end
 
