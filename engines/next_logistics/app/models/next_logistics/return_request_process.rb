@@ -21,7 +21,6 @@ module NextLogistics
     belongs_to :order_return_request
 
     scope :not_failed, -> { where(failed: false) }
-    scope :months_old, -> (months) { where(updated_at: months.to_i.months.ago..Time.zone.now) }
 
     attr_accessible :order_return_request
 
