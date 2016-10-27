@@ -4,11 +4,6 @@ module NextLogistics
   class ReturnRequestProcess < ActiveRecord::Base
     include AASM
 
-    # Persist the process for future reference
-    # Invoke worker which will:
-    # => prepare excel spreadsheet (just receive it from a presenter)
-    # => send FTP file
-
     aasm do
       state :created, initial: true
       state :asn_file_uploaded
