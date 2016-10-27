@@ -148,24 +148,27 @@ $top-overlay-margin-top: 37px;
     p.summary {
       margin: 25px 0;
       font-size: 1.2em;
+      line-height: 125%;
     }
 
     .featured-info {
-      background-color: $c-neutral-black;
-      color: $c-neutral-white;
       padding: 5px;
       margin: 30px 0;
+
+      .black-box {
+        background-color: $c-neutral-black;
+        color: $c-neutral-white;
+      }
 
       .amount {
         font-size: 2.6em;
         font-weight: 600;
-        padding: 0 15px;
       }
 
       .caption {
         font-size: 1.7rem;
-        line-height: 100%;
-        padding: 15px;
+        line-height: 125%;
+        padding: 15px 0;
         text-align: left;
       }
 
