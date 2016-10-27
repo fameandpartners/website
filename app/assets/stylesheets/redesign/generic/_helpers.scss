@@ -106,8 +106,13 @@
   margin-bottom: 0 !important;
 }
 
+// Fix for IE
 .img-responsive {
-  width: 100%; // Fix for IE
+  width: 100%;
+}
+
+.font-style-normal {
+  font-style: normal !important;
 }
 
 .double-line-height:before {
