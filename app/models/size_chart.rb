@@ -116,4 +116,8 @@ module SizeChart
     '2016' => SIZE_CHART_2016,
     '2016_v2' => SIZE_CHART_2016_v2,
   }
+
+  def self.default_chart_name
+    self::CHARTS.keys.last
+  end
 end

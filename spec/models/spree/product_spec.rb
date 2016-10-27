@@ -152,4 +152,12 @@ describe Spree::Product, :type => :model do
       expect(product.variant_skus).to match_array(['SKU123', 'SKU456'])
     end
   end
+
+  describe 'set_default_values' do
+    it 'sets latest size_chart' do
+      subject.send(:set_default_values)
+
+      expect(subject.size_chart).to eq(SizeChart::CHARTS.keys.last)
+    end
+  end
 end
