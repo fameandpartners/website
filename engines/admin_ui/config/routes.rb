@@ -1,6 +1,5 @@
 AdminUi::Engine.routes.draw do
-  resources :item_returns do
-    get ':event_type/new', :controller => 'item_returns/events', action: :new, as: :build_event
+  resources :item_returns do get ':event_type/new', :controller => 'item_returns/events', action: :new, as: :build_event
     resources :events, :controller => 'item_returns/events', except: [:update, :delete]
   end
 
@@ -50,13 +49,6 @@ AdminUi::Engine.routes.draw do
     resource :refunds                      , only: [:show]
   end
 
-  resources :variants
-  resources :product_colors do
-    collection do
-      get 'colors_options/:product_id' => 'product_colors#colors_options_json'
-    end
-  end
-
   namespace :content do
     resources :pages
   end
@@ -75,7 +67,19 @@ AdminUi::Engine.routes.draw do
     end
   end
 
-  resources :render3d_images
+  namespace :customisation do
+    resources :variants
+
+    resources :render3d_images, only: [:index, :create, :edit] do
+      get :collection, on: :collection
+    end
+
+    resources :product_colors do
+      collection do
+        get 'colors_options/:product_id' => 'product_colors#colors_options_json'
+      end
+    end
+  end
 
   root to: 'dashboard#index'
 

@@ -19,26 +19,22 @@ class Render3dImagesGrid
     where("customisation_value.id = ?", value)
   end
 
-  column :id, html: true do |x|
-    link_to x.id, admin_ui.render3d_image_path(x)
+  column :id, html: true do |image|
+    link_to image.id, admin_ui.edit_customisation_render3d_image_path(image)
   end
-  column :product, html: true  do |x|
-    link_to x.product.name, spree.admin_product_path(x.product)
+  column :product, html: true  do |image|
+    link_to image.product.name, spree.admin_product_path(image.product)
   end
-  column :dress_color do |x|
-    x.color_value.try(:name)
+  column :dress_color do |image|
+    image.color_value.try(:name)
   end
-  column :dress_customisation do |x|
-    x.customisation_value.try(:name) || 'Default'
+  column :dress_customisation do |image|
+    image.customisation_value.try(:name) || 'Default'
   end
-  column :product_sku, label: 'Product SKU' do |x|
-    x.product.sku
+  column :product_sku, label: 'Product SKU' do |image|
+    image.product.sku
   end
-  column :actions, html: true do |x|
-    content_tag(:p, class: 'action-links') do
-      concat link_to 'edit', admin_ui.edit_render3d_image_path(x), class: 'btn btn-xs btn-info'
-      concat ' '
-      concat link_to 'delete', admin_ui.render3d_image_path(x), class: 'btn btn-xs btn-info'
-    end
+  column :remove?, html: true do |image|
+    button_to('Remove', admin_ui.customisation_render3d_image_path(image), action: 'destroy', method: 'delete', class: 'btn btn-danger', data: { confirm: 'Are you sure?' })
   end
 end

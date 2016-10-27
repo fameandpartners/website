@@ -23,13 +23,13 @@
           .col-md-9 : span.label #{@product_color_value.option_value.name}
         .row
           .col-md-3 : p : b Visual
-          .col-md-9 = render 'admin_ui/product_colors/colour_preview', color_name: @product_color_value.option_value.name
+          .col-md-9 = render 'admin_ui/customisation/product_colors/colour_preview', color_name: @product_color_value.option_value.name
   .col-lg-6
     .ibox
       .ibox-title
         h5 Enable / Disable
       .ibox-content.colors
-        = form_for(@product_color_value, url: product_color_path(@product_color_value)) do |f|
+        = form_for(@product_color_value, url: customisation_product_color_path(@product_color_value)) do |f|
           .form-group
             = f.check_box :active, class: 'form-control'
             = f.label :active

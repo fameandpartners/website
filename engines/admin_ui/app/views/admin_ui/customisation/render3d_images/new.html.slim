@@ -1,0 +1,53 @@
+.pages.wrapper.wrapper-content
+  = form_for @render3d_image, :url => {:action => "create"}, method: :post, :html => {:class => 'form-horizontal'} do |f|
+    .ibox.float-e-margins
+      .ibox-title
+        h5 Add new render3d image to the product
+      .ibox-content
+        .form-group
+          label.col-sm-2.control-label Product
+          .col-sm-10 = f.hidden_field :product_id, class: 'remote-select'
+        .form-group
+          label.col-sm-2.control-label Color Value
+          .col-sm-10 = f.hidden_field :color_value_id, class: 'remote-select'
+        .form-group
+          label.col-sm-2.control-label Customisation Value
+          .col-sm-10 = f.hidden_field :customisation_value_id, class: 'remote-select'
+        .form-group
+          label.col-sm-2.control-label Attachment
+          .col-sm-10 = f.file_field :attachment
+        .form-group
+          .col-sm-2
+          .col-sm-10
+            = f.submit 'Create', class: 'btn btn-primary'
+
+javascript:
+  (function($) { 'use strict';
+    $('.remote-select').select2({
+      ajax: {
+        url: 'collection.json',
+        dataType: 'json',
+        delay: 250,
+        cache: true,
+        data: function(term, page) {
+          return {
+            q: term,
+            id: $(this).attr('id'),
+            page: page
+          };
+        },
+        processResults: function(data, page) {
+          perPage = 30;
+          page = page || 1;
+
+          shouldLoadMore = (page * perPage) < data.total_count
+
+          return {
+            results: data.items,
+            pagination: { more: shouldLoadMore }
+          };
+        }
+
+      }
+    });
+  })(jQuery);
