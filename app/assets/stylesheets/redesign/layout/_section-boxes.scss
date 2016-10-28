@@ -197,6 +197,33 @@ $top-overlay-margin-top: 37px;
 
 }
 
+.section-box-alt {
+  margin: 0;
+
+  .item {
+
+    &.bordered {
+      padding: 10px 10px 20px;
+      border-color: $c-neutral-4;
+    }
+
+    .item-copy {
+      padding: 0;
+    }
+
+    .heading {
+      padding: 10px 0 5px;
+    }
+
+    .copy-highlight,
+    .icon {
+      font-size: 1rem;
+    }
+
+  }
+
+}
+
 .heading-overlay-wrapper {
   text-align: center;
   z-index: 1;
