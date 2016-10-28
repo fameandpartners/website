@@ -9,15 +9,26 @@
 - description = page.try(:description)
 
 - if sub_heading.blank? && description.blank?
-  - sub_heading = 'MADE FOR YOU.'
 
-.col-xs-6.col-xxs-6.col-md-4.category--item
-  .panel-seo
-    .outer-wrap.txt-truncate-block
-      .inner-wrap
-        .content-wrap.js-sub-heading
-          .title
-            span= raw(sub_heading)
+.section-box.section-box-alt.col-xs-6.col-xxs-6.col-md-4.category--item
+  .item.bordered
+    .item-copy
+      = link_to iequalchange_landing_page_path, :class => 'hidden-sm hidden-xs'
+        / Show one of the 3 tiles randomly
+        / TODO: get real copy
+        - random_tile = Random.rand(3)
+        - if random_tile == 0
+          = image_tag 'marketing/iequalchange/tile-akilah.jpg', :class => 'img-responsive', alt: 'i=Change - Akillah'
+          h4.heading <em>Protect</em> women and girls. <br>Make a <em>difference</em>.
+        - elsif random_tile == 1
+          = image_tag 'marketing/iequalchange/tile-plan.jpg', :class => 'img-responsive', alt: 'i=Change - Plan'
+          h4.heading Give back with <em>every</em> purchase.
+        - else random_tile == 2
+          = image_tag 'marketing/iequalchange/tile-unwomen.jpg', :class => 'img-responsive', alt: 'i=Change - UN Women'
+          h4.heading Lorem ipsum dolor sit amet, consectetur.
+
+        span.copy-highlight.link-underline Discover i=Change for Fame
+        i.icon.icon-arrow-right
 
 - @collection.products.drop(2).each_slice(col) do |products|
   /! [][][]
