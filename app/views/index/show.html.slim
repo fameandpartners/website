@@ -44,7 +44,14 @@ ruby:
                     span.copy-highlight Discover more
                     i.icon.icon-arrow-right
               = link_to iequalchange_landing_page_path, :class => 'hidden-sm hidden-xs'
-                = image_tag 'marketing/iequalchange/tile-unwomen.jpg', :class => 'img-responsive', alt: 'i=Change - UN Women'
+                / Show one of the 3 tiles randomly
+                - random_tile = Random.rand(3)
+                - if random_tile == 0
+                  = image_tag 'marketing/iequalchange/tile-akilah.jpg', :class => 'img-responsive', alt: 'i=Change - Akillah'
+                - elsif random_tile == 1
+                  = image_tag 'marketing/iequalchange/tile-plan.jpg', :class => 'img-responsive', alt: 'i=Change - Plan'
+                - else random_tile == 2
+                  = image_tag 'marketing/iequalchange/tile-unwomen.jpg', :class => 'img-responsive', alt: 'i=Change - UN Women'
 
           .col-md-4
             .item.bordered
