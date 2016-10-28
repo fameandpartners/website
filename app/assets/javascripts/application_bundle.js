@@ -1258,30 +1258,33 @@ var SidePanelFastMaking = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'pdp-side-container pdp-side-container-fast-making checkbox-inline custom-form-element-thin form-small' },
-        _react2.default.createElement(
-          'a',
-          { href: 'javascript:;' },
-          _react2.default.createElement('input', { type: 'checkbox', id: 'fast-making' }),
+      if (this.props.product.fast_making) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'pdp-side-container pdp-side-container-fast-making checkbox-inline custom-form-element-thin form-small' },
           _react2.default.createElement(
-            'label',
-            { htmlFor: 'fast-making' },
+            'a',
+            { href: 'javascript:;' },
+            _react2.default.createElement('input', { type: 'checkbox', id: 'fast-making' }),
             _react2.default.createElement(
-              'div',
-              { className: 'c-card-customize__content__left' },
-              'EXPRESS MAKING (6-9 days)'
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'c-card-customize__content__right' },
-              '$30'
+              'label',
+              { htmlFor: 'fast-making' },
+              _react2.default.createElement(
+                'div',
+                { className: 'c-card-customize__content__left' },
+                'EXPRESS MAKING (6-9 days)'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'c-card-customize__content__right' },
+                '$30'
+              )
             )
           )
-        )
-      );
+        );
+      } else {
+        return _react2.default.createElement('span', null);
+      }
     }
   }]);
 
@@ -1289,11 +1292,15 @@ var SidePanelFastMaking = function (_React$Component) {
 }(_react2.default.Component);
 
 SidePanelFastMaking.propTypes = {
-  customize: _react.PropTypes.object.isRequired
+  customize: _react.PropTypes.object.isRequired,
+  product: _react.PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
-  return {};
+  return {
+    customize: state.customize,
+    product: state.product
+  };
 }
 
 function mapDispatchToProps(dispatch) {
