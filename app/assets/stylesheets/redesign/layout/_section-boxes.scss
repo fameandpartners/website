@@ -213,11 +213,18 @@ $top-overlay-margin-top: 37px;
 
     .heading {
       padding: 10px 0 5px;
+      font-size: 1.4em;
+    }
+
+    p.summary {
+      font-size: 1em;
+      line-height: 125%;
+      margin-bottom: 10px;
     }
 
     .copy-highlight,
     .icon {
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
 
   }
