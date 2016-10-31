@@ -34,7 +34,7 @@ describe StaticsController, type: :controller do
           [us_site_version, us_translation],
           [br_site_version, br_translation]
         ].each do |site_version, translation|
-          allow(SiteVersion).to receive(:default).and_return(site_version)
+          allow_any_instance_of(described_class).to receive(:current_site_version).and_return(site_version)
 
           get :super_page
           expect(controller.instance_variable_get(:@title)).to eq(translation.title)
