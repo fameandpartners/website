@@ -63,6 +63,7 @@ class PdpGallery extends React.Component {
   render() {
     let filteredImages = [];
     let thumbIds = [];
+    let defaultColors = this.props.product.available_options.table.colors.table.default
 
     const SETTINGS = {
       infinite: true,
@@ -96,7 +97,9 @@ class PdpGallery extends React.Component {
         // 1. color is custom
         // 2. color has render3d image
         // 3. image is default for custom color
-        return image.color_id != this.props.product.featured_image.table.color_id
+        let defaultColorIds = defaultColors.map(color => color.option_value.id)
+
+        return !defaultColorIds.includes(image.color_id)
           && image.color_id === this.props.customize.color.id
           && image.customization_id === 0;
       });

@@ -514,6 +514,7 @@ var PdpGallery = function (_React$Component) {
 
       var filteredImages = [];
       var thumbIds = [];
+      var defaultColors = this.props.product.available_options.table.colors.table.default;
 
       var SETTINGS = {
         infinite: true,
@@ -543,7 +544,11 @@ var PdpGallery = function (_React$Component) {
           // 1. color is custom
           // 2. color has render3d image
           // 3. image is default for custom color
-          return image.color_id != _this3.props.product.featured_image.table.color_id && image.color_id === _this3.props.customize.color.id && image.customization_id === 0;
+          var defaultColorIds = defaultColors.map(function (color) {
+            return color.option_value.id;
+          });
+
+          return !defaultColorIds.includes(image.color_id) && image.color_id === _this3.props.customize.color.id && image.customization_id === 0;
         });
       }
 
