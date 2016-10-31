@@ -262,10 +262,11 @@ class StaticsController < ApplicationController
 
   def assign_revolution_page
     if (page = Revolution::Page.find_for(request.path))
-      page.locale = current_site_version.locale
+      @page        = page
+      @page.locale = current_site_version.locale
 
-      title(page.title, default_seo_title)
-      description(page.meta_description)
+      title(@page.title, default_seo_title)
+      description(@page.meta_description)
     end
   end
 end

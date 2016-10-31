@@ -39,6 +39,7 @@ describe StaticsController, type: :controller do
           get :super_page
           expect(controller.instance_variable_get(:@title)).to eq(translation.title)
           expect(controller.instance_variable_get(:@description)).to eq(translation.meta_description)
+          expect(controller.instance_variable_get(:@page)).to eq(page)
         end
       end
     end
