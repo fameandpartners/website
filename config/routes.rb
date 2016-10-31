@@ -193,8 +193,8 @@ FameAndPartners::Application.routes.draw do
     # Skirts Collection - Landing page
     get '/skirts-collection' => 'products/collections#show', :permalink => 'skirts-collection', :as => :skirts_collection_landing_page
 
-    # Holiday Collection - Landing page
-    get '/holiday-collection' => 'products/collections#show', :permalink => 'holiday-collection', :as => :holiday_collection_landing_page
+    # The Evening Hours Collection - Landing page
+    get '/the-evening-hours-collection' => 'products/collections#show', :permalink => 'evening-hours-collection', :as => :evening_hours_collection_landing_page
 
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
