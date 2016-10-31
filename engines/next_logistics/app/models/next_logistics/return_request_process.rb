@@ -32,7 +32,7 @@ module NextLogistics
 
     def upload_to_ftp
       Workers::UploadToFtpWorker.perform_async(self.id)
-      # Email customer with instructions (customer.io?)
+      # TODO: Email customer with instructions (customer.io?)
     end
 
     private

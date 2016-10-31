@@ -25,9 +25,7 @@ module NextLogistics
       end
 
       private def items_for_return
-        process.order_return_request.return_request_items.select { |rri|
-          rri.return_or_exchange?
-        }
+        process.order_return_request.return_request_items.select(&:return_or_exchange?)
       end
 
       class RowFormatter
