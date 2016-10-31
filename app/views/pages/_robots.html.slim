@@ -1,2 +1,2 @@
 = content_for :head do
-  meta name="robots" content="#{page.robots}"
+  meta name="robots" content=(@page.try(:robots) || 'index, follow')
