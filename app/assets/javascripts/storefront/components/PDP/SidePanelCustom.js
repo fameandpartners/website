@@ -38,23 +38,23 @@ class SidePanelCustom extends SidePanel {
     const triggerState = this.props.customize.customization.id
       ? "c-card-customize__content is-selected" : "c-card-customize__content";
     const customs = this.props.customOptions.map((option, index) => {
-      const itemState = this.props.customize.customization.id == option.table.id
+      const itemState = this.props.customize.customization.id == option.id
         ? "selector-custom is-selected" : "selector-custom";
       const price =
-        parseFloat(option.table.display_price.money.fractional
-        / option.table.display_price.money.currency.subunit_to_unit);
+        parseFloat(option.display_price.money.fractional
+        / option.display_price.money.currency.subunit_to_unit);
       return (
         <a href="javascript:;" className={itemState}
           onClick={this.onChange} key={index}
-          data-id={option.table.id}
-          data-presentation={option.table.name}
+          data-id={option.id}
+          data-presentation={option.name}
           data-price={price}>
           <div className="item-name">
-            {option.table.name}
+            {option.name}
             <div className="item-price">+${price}</div>
           </div>
           <div className="media-wrap">
-            <img src={option.table.image} />
+            <img src={option.image} />
           </div>
         </a>
       );
@@ -96,7 +96,7 @@ SidePanelCustom.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
-    customOptions: state.product.available_options.table.customizations.table.all
+    customOptions: state.product.available_options.customizations.all
   };
 }
 

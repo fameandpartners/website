@@ -43,13 +43,13 @@ class SidePanelSize extends SidePanel {
     const SIZE_CHART_VERSION_TEXT = this.props.sizeChartVersion === "2016" ? 'legacy' : 'new';
 
     const SIZES = this.props.defaultSizes.map((size, index) => {
-      const ITEM_STATE = this.props.customize.size.id == size.table.id
+      const ITEM_STATE = this.props.customize.size.id == size.id
         ? "selector-size is-selected" : "selector-size";
       return (
         <a href="javascript:;" className={ITEM_STATE}
           onClick={this.onChange} key={index}
-          data-id={size.table.id} data-presentation={size.table.presentation}>
-          {size.table.presentation}
+          data-id={size.id} data-presentation={size.presentation}>
+          {size.presentation}
         </a>
       );
     });
@@ -95,8 +95,8 @@ SidePanelSize.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
-    defaultSizes: state.product.available_options.table.sizes.table.default,
-    variants: state.product.available_options.table.variants,
+    defaultSizes: state.product.available_options.sizes.default,
+    variants: state.product.available_options.variants,
     sizeChartVersion: state.product.size_chart
   };
 }

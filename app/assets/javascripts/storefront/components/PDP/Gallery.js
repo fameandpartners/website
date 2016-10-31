@@ -94,7 +94,7 @@ class PdpGallery extends React.Component {
     // if no match found, use default dress color
     const COLOR_ID = foundImage
       ? this.props.customize.color.id
-      : this.props.product.featured_image.table.color_id;
+      : this.props.product.featured_image.color_id;
 
     // match color id with images
     let images = this.props.images.map((image, index) => {

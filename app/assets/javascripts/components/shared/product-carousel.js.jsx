@@ -10,7 +10,7 @@ var ProductsCarouselElement = React.createClass({
       price = <span>
               <span className='original-price'>{this.props.product.price} </span>
               <span className='sale-price'>{this.props.product.sale_price} </span>
-              <span className='discount'>SAVE {this.props.product.discount.table.amount}% </span>
+              <span className='discount'>SAVE {this.props.product.discount.amount}% </span>
               </span>;
     } else {
       price = <span>{this.props.product.price}</span>;

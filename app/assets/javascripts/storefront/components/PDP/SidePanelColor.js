@@ -151,12 +151,12 @@ SidePanelColor.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
-    defaultColors: state.product.available_options.table.colors.table.default,
-    customColors: state.product.available_options.table.colors.table.extra,
-    customColorPrice: state.product.available_options.table.colors.table.default_extra_price.price.amount,
+    defaultColors: state.product.available_options.colors.default,
+    customColors: state.product.available_options.colors.extra,
+    customColorPrice: state.product.available_options.colors.default_extra_price.price.amount,
     preselectedColorId: state.product.color_id,
     preselectedColorName: state.product.color_name,
-    variants: state.product.available_options.table.variants,
+    variants: state.product.available_options.variants,
     paths: state.paths
   };
 }
