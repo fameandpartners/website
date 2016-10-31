@@ -56,7 +56,7 @@ ruby:
                     i.icon.icon-arrow-right
               = link_to about_us_path, :class => 'hidden-sm hidden-xs'
                 = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive', alt: 'Made-to-order'
-                
+
           .col-md-12.hidden-md.hidden-lg.btn-wrap
             = link_to about_us_path
                 span.btn-md.btn-featured
@@ -76,17 +76,10 @@ ruby:
 
       .row
         .col-md-12.cta-item-huge
-          - current_edit_image = "homepage/fp-style-icon/oct-11-tile-1.jpg"
-          - current_edit_mob_image = "homepage/fp-style-icon/oct-11-tile-1-mob.jpg"
-          - current_edit_cta_1 = ""
-          - if current_site_version.is_australia?
-            // AUSTRALIA
-            - current_edit_cta_2 = "The Edit: Spring Racing by Nadia Fairfax"
-            - current_edit_link = spring_racing_collection_landing_page_path
-          - else
-            // USA
-            - current_edit_cta_2 = "Nadia Fairfax's Cocktail Favorites"
-            - current_edit_link = cocktail_collection_landing_page_path
+          - current_edit_image = "homepage/fp-style-icon/oct-31-tile-1.jpg"
+          - current_edit_mob_image = "homepage/fp-style-icon/oct-31-tile-1-mob.jpg"
+          - current_edit_cta = "Gown Inspiration: Inka Williams"
+          - current_edit_link = gown_collection_landing_page_path
 
           = link_to current_edit_link
             .section-img-wrap.copy-center
@@ -104,8 +97,7 @@ ruby:
                     .col-md-12
                       .copy-wrap.text-center
                         span.cta-link-white-bg
-                          span.cta-link #{current_edit_cta_1}
-                          span.copy-highlight  #{current_edit_cta_2}
+                          span.copy-highlight  #{current_edit_cta}
 
     .tag-info-section
       .tag-info-wrapper.visible-lg-block
@@ -115,10 +107,10 @@ ruby:
 
       .row
         .col-md-6.cta-item
-          = link_to dresses_path + '/black'
+          = link_to dress_for_parties_page_path
             .section-img-wrap.copy-center
               .img-wrap
-                img src='#{image_path("homepage/fp-style-icon/oct-11-tile-2.jpg")}'
+                img src='#{image_path("homepage/fp-style-icon/oct-31-tile-2.jpg")}'
 
               .content-wrap
                 .container-cta
@@ -127,13 +119,29 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight ALL BLACK
+                          span.copy-highlight Party Dresses
 
+        .col-md-6.cta-item
+          = link_to dresses_path + '/midi'
+            .section-img-wrap.copy-center
+              .img-wrap
+                img src='#{image_path("homepage/fp-style-icon/oct-31-tile-3.jpg")}'
+
+              .content-wrap
+                .container-cta
+                  .row-cta
+                    .col-md-12
+                      .copy-wrap.text-center
+                        span.cta-link-white-bg
+                          span.cta-link Shop
+                          span.copy-highlight Midi Dresses
+
+      .row
         .col-md-6.cta-item
           = link_to dresses_path + '/backless'
             .section-img-wrap.copy-center
               .img-wrap
-                img src='#{image_path("homepage/fp-style-icon/oct-11-tile-3.jpg")}'
+                img src='#{image_path("homepage/fp-style-icon/oct-31-tile-4.jpg")}'
 
               .content-wrap
                 .container-cta
@@ -142,14 +150,13 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight BACKLESS DRESSES
+                          span.copy-highlight Backless Dresses
 
-      .row
         .col-md-6.cta-item
-          = link_to dress_for_parties_page_path
+          = link_to dresses_path + '/wrap'
             .section-img-wrap.copy-center
               .img-wrap
-                img src='#{image_path("homepage/fp-style-icon/oct-11-tile-4.jpg")}'
+                img src='#{image_path("homepage/fp-style-icon/oct-31-tile-5.jpg")}'
 
               .content-wrap
                 .container-cta
@@ -158,22 +165,7 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight PARTY LOOKS
-
-        .col-md-6.cta-item
-          = link_to dresses_path + '/off-shoulder'
-            .section-img-wrap.copy-center
-              .img-wrap
-                img src='#{image_path("homepage/fp-style-icon/oct-11-tile-5.jpg")}'
-
-              .content-wrap
-                .container-cta
-                  .row-cta
-                    .col-md-12
-                      .copy-wrap.text-center
-                        span.cta-link-white-bg
-                          span.cta-link Bare
-                          span.copy-highlight YOUR SHOULDERS
+                          span.copy-highlight Wrap dresses
 
   // Section: Styling
   section.section-box.container.section-styling
@@ -334,7 +326,7 @@ ruby:
                 .link-align-bottom
                   = link_to current_social_network_link, target: "_blank"
                     span.cta-link-arrow-right
-                      span.cta-link Get on 
+                      span.cta-link Get on
                       span.copy-highlight the list
                       i.icon.icon-arrow-right
 
