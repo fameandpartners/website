@@ -1,12 +1,12 @@
-class CreateHolidayCollectionLandingPage < ActiveRecord::Migration
+class CreateEveningHoursCollectionLandingPage < ActiveRecord::Migration
   # All values MUST be Strings!
   private def landing_page_properties
     {
-      path:             '/holiday-collection',
-      template_path:    '/landing_pages/holiday_collection',
+      path:             '/the-evening-hours-collection',
+      template_path:    '/landing_pages/evening_hours_collection',
       pids:             %w('').join(','),
       limit:            '99',
-      heading:          'Holiday Collection',
+      heading:          'The Evening Hours Collection',
       title:            'Easy, Effortless Cocktail Dresses',
       meta_description: 'Our cocktail collection is perfect for holiday parties: effortlessly chic minis, wraps, and slip dresses–all individually customizable & made-to-order.',
     }
