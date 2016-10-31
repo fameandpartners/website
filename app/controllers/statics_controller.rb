@@ -5,8 +5,8 @@ class StaticsController < ApplicationController
   layout 'redesign/application'
 
   # enable showing of display banner
-  before_filter :display_marketing_banner
-
+  before_filter :display_marketing_banner,
+                :assign_revolution_page
 
   def about
     title('About Us', default_seo_title)
@@ -258,4 +258,14 @@ class StaticsController < ApplicationController
     @description = "Hashtag #fame2015 to win"
   end
 
+  private
+
+  def assign_revolution_page
+    if (page = Revolution::Page.find_for(request.path))
+      page.locale = current_site_version.locale
+
+      title(page.title, default_seo_title)
+      description(page.meta_description)
+    end
+  end
 end
