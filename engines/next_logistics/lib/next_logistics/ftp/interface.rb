@@ -3,11 +3,11 @@ require 'net/ftp'
 module NextLogistics
   module FTP
     class Interface
-      ORDERS_FOLDER = '/incoming/orders'.freeze
+      ORDERS_FOLDER = '/incoming/receipts'.freeze
 
       # NOTE: Upload must be set to binary! From Next Docs: "please ensure you use BINARY mode for transfers"
       # Upload information from Roger Oliveira:
-      # => Folder to upload: `/incoming/orders`
+      # => Folder to upload: `/incoming/receipts`
       # => File name does not have restrictions. Will upload timestamp + receipt.csv pattern
 
       attr_reader :ftp
