@@ -4,7 +4,7 @@ class CreateEveningHoursCollectionLandingPage < ActiveRecord::Migration
     {
       path:             '/the-evening-hours-collection',
       template_path:    '/landing_pages/evening_hours_collection',
-      pids:             %w('').join(','),
+      pids:             %w().join(','),
       limit:            '99',
       heading:          'The Evening Hours Collection',
       title:            'Easy, Effortless Cocktail Dresses',
