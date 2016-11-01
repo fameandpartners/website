@@ -12,7 +12,7 @@
           #{image_path("landingpages/evening-hours-collection/campaign01-mobile.jpg")} 991w,
           #{image_path("landingpages/evening-hours-collection/campaign01-desktop.jpg")} 992w"
 
-      .content-wrap
+      .content-wrap.hidden-sm.hidden-xs
         .container-fluid
           .row
             .col-md-4.col-md-offset-1
@@ -39,6 +39,17 @@
           #{image_path("landingpages/evening-hours-collection/campaign03-desktop.jpg")} 992w"
 
   .container.products-collections
+
+    .main-hero-wrap.hero-wrap.hidden-md.hidden-lg
+      .content-wrap.text-center
+        .container-fluid
+          .row
+            .col-md-4.col-md-offset-1
+              .copy-wrap
+                h2.heading.no-margin-md
+                  span The Evening <br class="hidden-xs hidden-sm"> Hours Collection
+                  span.sub-heading
+                    | Turn down the lights, turn up the style with cocktail dresses that look even better after dark.
 
     .row
       = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 1, customWrapper: 'col-md-3 col-xs-6'}
