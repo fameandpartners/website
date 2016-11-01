@@ -1,5 +1,6 @@
 class ProductMakingOption < ActiveRecord::Base
-  belongs_to :product, class_name: 'Spree::Product'
+  belongs_to :product, class_name: 'Spree::Product', touch: true
+  # Note: Spree::Variant relationship doesn't seems necessary for making options
   belongs_to :variant, class_name: 'Spree::Variant'
 
   DEFAULT_OPTION_TYPE  = 'fast_making'.freeze

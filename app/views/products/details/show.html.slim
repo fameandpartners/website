@@ -140,9 +140,9 @@ form.hide-fully#pdpDataForWishlist
 
   // content bottom wrap START
   // js class is used to get bottom offset for sticky side panel
-  .js-bottom-content
+  .js-bottom-wrapper
     .container
-      .section-box.same-height-cols
+      .section-box.same-height-cols.js-bottom-content
         .row
           .col-md-6
             .item.bordered
@@ -211,19 +211,20 @@ javascript:
     });
 
     function initSticky() {
+
+      var bottomContentSpacing = parseInt($('.js-bottom-wrapper .js-bottom-content').css('margin-top'));
+      var safeDistancePdpBottom = 0.25;
+      var safeStickyBottomSpacing = $('.js-bottom-wrapper').outerHeight() + $('.js-footer').outerHeight() - $('.js-fixed-header').outerHeight() - (bottomContentSpacing * safeDistancePdpBottom);
+
       $('.js-panel-side-left').sticky({
         responsiveWidth: true,
         topSpacing: $('.js-fixed-header').outerHeight(),
-        bottomSpacing:
-          $('.js-bottom-content').outerHeight()
-          + $('.js-footer').outerHeight() + $('.js-fixed-header').outerHeight()
+        bottomSpacing: safeStickyBottomSpacing
       });
       $('.js-panel-side-right').sticky({
         responsiveWidth: true,
         topSpacing: $('.js-fixed-header').outerHeight(),
-        bottomSpacing:
-          $('.js-bottom-content').outerHeight()
-          + $('.js-footer').outerHeight() + $('.js-fixed-header').outerHeight()
+        bottomSpacing: safeStickyBottomSpacing
       });
       $('.js-panel-side-left').sticky('update');
       $('.js-panel-side-right').sticky('update');
@@ -248,8 +249,10 @@ javascript:
       initSticky();
     }
 
-    // update on resize
-    $(window).resize(updateSticky);
+    // update on window load and resize
+    $(window).on("load resize",function(e){
+      updateSticky();
+    });
 
     // update on accordion change
     $('#accordion').on('shown.bs.collapse', updateSticky);

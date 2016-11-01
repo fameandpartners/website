@@ -5,7 +5,7 @@ class StyleSessionsController < ApplicationController
   def new
     @style_session = Forms::StyleSession.new(StyleSession.new)
     title('Style Session', default_seo_title)
-    description('Free one-on-one style advice')
+    description('Fame and Partners offers FREE one-on-one styling sessions with a wardrobe stylist via phone call, text, online chat, video message, and even in-person. Book your styling appointment today!')
   end
 
   def create

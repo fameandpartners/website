@@ -4,26 +4,6 @@ describe Products::DetailsResource do
   describe 'private methods' do
     let(:resource) { described_class.new(product: product) }
 
-    describe '#product_short_description' do
-      context 'given a product with a meta description' do
-        let(:product) { create(:dress, meta_description: 'My Meta Description') }
-
-        it 'uses its meta description field' do
-          result = resource.send(:product_short_description)
-          expect(result).to eq('My Meta Description')
-        end
-      end
-
-      context 'given a product with a blank meta description' do
-        let(:product) { create(:dress, description: '<b>Description</b>') }
-
-        it 'uses its description field' do
-          result = resource.send(:product_short_description)
-          expect(result).to eq('<b>Description</b>')
-        end
-      end
-    end
-
     describe '#get_product_id_from_slug' do
       let(:product) { create(:dress) }
 
