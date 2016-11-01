@@ -94,4 +94,5 @@
         video.item-video(autoplay="true" loop="true" name="Evening Hours Colleciton" src="https://player.vimeo.com/external/189077081.sd.mp4?s=d10647e91c30e73d845a6cb7e6acedbc7c30107b&profile_id=164" data-slick-index="0" aria-hidden="false")
 
     .row
-      = render partial: 'pick_products_without_content', locals: {rangeFrom: 38, rangeTo: 41, customWrapper: 'col-md-3 col-xs-6'}
+      - upper_limit = (@page.get(:limit) || 42).to_i - 1
+      = render partial: 'pick_products_without_content', locals: {rangeFrom: 38, rangeTo: upper_limit, customWrapper: 'col-md-3 col-xs-6'}
