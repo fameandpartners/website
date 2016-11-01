@@ -4,14 +4,18 @@ module Products
     attr_accessor :current_user
     attr_accessor :current_currency
 
+    FILTERS = {
+      'price_high'    => 'Price High',
+      'price_low'     => 'Price Low',
+      'newest'        => "What's new",
+      'fast_delivery' => 'Next day delivery'
+    }.freeze
+
+    DISABLED_FILTERS = ['fast_delivery'].freeze
+
     class << self
       def available_sort_orders
-        [
-          ['price_high', 'Price High'],
-          ['price_low', 'Price Low'],
-          ['newest', "What's new"],
-          ['fast_delivery', 'Next day delivery']
-        ]
+        FILTERS.except(*DISABLED_FILTERS).to_a
       end
 
       def available_body_shapes

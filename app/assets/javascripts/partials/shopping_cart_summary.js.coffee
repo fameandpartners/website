@@ -39,7 +39,6 @@ window.ShoppingCartSummary = class ShoppingCartSummary
 
   couponFormSubmitHandler: (e) ->
     e.preventDefault() if e
-    $input = $('.product-form-top .promo-code-value')
-    $input = $('.product-form-side .promo-code-value') if $input.val() == ''
+    $input = $('form .promo-code-value:visible')
     @cart.one('complete', (event, result) -> $input.val(''))
     @cart.applyPromotionCode($input.val())

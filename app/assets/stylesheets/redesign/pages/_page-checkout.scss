@@ -1,0 +1,375 @@
+.page-checkout {
+  p {
+    font-weight: 400;
+  }
+
+  .logo img {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .checkout-header {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    h1 {
+      margin: 0;
+    }
+
+  }
+
+  // Breadcrumbs
+  .checkout-breadcrumbs {
+    background-color: $c-neutral-2;
+    padding: 10px;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+
+    .breadcrumb {
+      padding: 0;
+
+      li {
+        color: $c-neutral-8;
+      }
+
+      li + li:before {
+        content: '> ';
+        color: $c-neutral-8;
+        padding: 0 10px;
+      }
+
+      li.active {
+        color: $c-neutral-black;
+        font-weight: 600;
+      }
+
+    }
+
+  }
+
+  .live-chat {
+    cursor: pointer;
+
+    span {
+      border-bottom: 1px solid $c-neutral-4;
+      text-transform: uppercase;
+    }
+
+    .icon {
+      font-size: 1.5rem;
+      margin-right: 10px;
+    }
+
+  }
+
+  .promo-code {
+    padding: 1px 5px 0;
+    margin: 15px 0;
+    border: 1px solid $beage-bg;
+
+    .promo-code-value {
+      box-shadow: none;
+      border: 0;
+    }
+
+    .promo-code-apply {
+      font-size: 1.3rem;
+      margin: 0;
+      padding: 5px 25px;
+      color: $c-neutral-white;
+      background-color: $c-neutral-black;
+    }
+
+  }
+
+  .promocode-name {
+    width: 25%;
+    display: inline-block;
+    position: relative;
+    top: 7px;
+    margin-right: -4px;
+    padding-right: 0;
+  }
+
+  .billing-heading {
+    margin-top: 30px;
+    display: block;
+  }
+
+  .checkout-section-title {
+    font-family: $font-heading;
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 30px;
+  }
+
+  .toggle-shopping-bag {
+    cursor: pointer;
+
+    h2 {
+      display: inline-block;
+    }
+
+    .btn-toggle {
+      @extend .icon-arrow-right;
+      @include transform(rotate(-90deg));
+      float: right;
+      top: 25px;
+      position: relative;
+      right: 10px;
+    }
+
+    &.collapsed .btn-toggle {
+      @include transform(rotate(90deg));
+    }
+
+  }
+
+  .mobile-shopping-bag-heading {
+    margin-bottom: 20px;
+    border: 1px solid $c-neutral-4;
+    border-left: 0;
+    border-right: 0;
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+  }
+
+  // product-form
+  .product-form {
+    margin-bottom: 30px;
+  }
+
+  // Auth messaging
+  .auth-alert {
+    padding: 15px 35px 15px 15px;
+    margin-bottom: 25px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    display: none;
+  }
+
+  .alert-danger {
+    margin-top: 12.5px;
+  }
+
+  .btn {
+    margin-top: 20px;
+  }
+
+  // Checkout step
+  .checkout-step {
+
+    .help-block {
+      font-size: 1.3rem;
+      color: $c-neutral-8;
+    }
+
+    .checkout-section-title:not(:first-child) {
+      margin-top: 50px;
+    }
+
+    .form-control {
+      font-weight: 300;
+      background: none;
+      color: $black-checkout-input;
+      border: 1px solid $c-neutral-4;
+      box-shadow: none;
+
+      &:focus {
+        border-color: $c-neutral-black;
+      }
+
+    }
+
+    .errorExplanation,
+    .has-warning label {
+      color: $c-brand-red;
+    }
+
+    .errorExplanation h3 {
+      font-family: $font-family-secondary;
+      font-weight: 400;
+      font-size: 2rem;
+    }
+
+    .has-warning {
+
+      .required,
+      ~ .required,
+      ~ .required .chosen-single {
+        border-color: $c-brand-red;
+      }
+
+    }
+
+    // TODO: should it be in .form-global?
+    label {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1.7rem;
+      padding-bottom: 5px;
+    }
+
+    .slash {
+      line-height: 105px;
+      float: left;
+      margin-left: -5px;
+      margin-right: -5px;
+    }
+
+  }
+
+  // Payment page
+  .terms-note,
+  .hint {
+    text-align: center;
+    color: $c-neutral-8;
+    padding: 15px 0;
+
+    a {
+      color: inherit;
+    }
+
+  }
+
+  .payment-option-grid {
+    text-align: center;
+    margin-bottom: 30px;
+
+    .payment-option {
+
+      a {
+        padding: 20px 10px;
+        border: 1px solid $c-neutral-5;
+        border-radius: 0;
+        background: none;
+        color: $c-neutral-black;
+      }
+
+      // Only first element / Elements in the middle
+      &:first-child a,
+      &:nth-child(n+2):nth-last-child(n+1) a {
+        border-right-color: transparent;
+      }
+
+      // Single element / Last element if more than 2 elements are shown
+      &:only-child a,
+      &:nth-last-child(n+1) ~ .payment-option:last-child a {
+        border-right-color: $c-neutral-5;
+      }
+
+      // Active element / Single element
+      &.active a,
+      &:only-child a {
+        border-bottom: 5px solid $c-neutral-black;
+        padding-bottom: 15px;
+        color: $c-neutral-black;
+      }
+
+      .fa {
+        font-size: 1.7rem;
+      }
+
+      i {
+        display: block;
+        padding-bottom: 5px;
+      }
+
+    }
+
+  }
+
+  .credit-card-flags {
+    display: block;
+
+    img.card-flags {
+      position: absolute;
+      right: 0;
+      margin-right: 30px;
+      bottom: 12px;
+      height: 20px;
+    }
+
+  }
+
+  .payment-cta.btn img {
+    height: 20px;
+    display: inline-block;
+    margin-top: -3px;
+  }
+
+  .panel-afterpay {
+
+    a:not(.btn) {
+      text-decoration: underline;
+      color: inherit;
+    }
+
+    .payments {
+      margin: 30px 0;
+    }
+
+    .payment,
+    .separator {
+      display: inline-block;
+      padding: 0 8px;
+      line-height: 1;
+    }
+
+    .separator {
+      vertical-align: top;
+      line-height: 50px;
+      color: $c-neutral-8;
+    }
+
+    .to-pay {
+      margin-bottom: 5px;
+      font-size: 1.7em;
+      color: $c-blue;
+    }
+
+    .time-period {
+      font-size: 0.875em;
+      font-weight: 500;
+      color: $c-neutral-black;
+    }
+
+  }
+
+}
+
+@media (min-width: $bootstrap-md-width) {
+
+  .cart-wrapper, {
+    border-top: 1px solid $beage-bg;
+  }
+
+}
+
+@media (max-width: $bootstrap-md-width - 1px) {
+
+  .logo {
+    padding: 2px;
+  }
+
+  .live-chat .icon {
+    display: none;
+  }
+
+  .secure-checkout {
+    font-size: 2.3rem;
+    margin-top: -5px;
+  }
+
+  .support-options {
+    margin-top: 0;
+  }
+
+  .checkout-breadcrumbs {
+    font-size: 1.7rem;
+  }
+
+}

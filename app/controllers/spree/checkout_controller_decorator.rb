@@ -4,11 +4,7 @@ Spree::CheckoutController.class_eval do
   include Marketing::Gtm::Controller::Variant
   include Marketing::Gtm::Controller::Event
 
-  before_filter :prepare_order, only: :edit
-  before_filter :set_order_site_version, :only => :update
-  before_filter :find_payment_methods, only: [:edit, :update]
   before_filter :before_masterpass
-  before_filter :data_layer_add_to_cart_event, only: [:edit]
   skip_before_filter :check_registration
 
   before_filter def switch_views_version
@@ -19,8 +15,30 @@ Spree::CheckoutController.class_eval do
 
   layout 'redesign/checkout'
 
+  def edit
+    prepare_order
+    find_payment_methods
+    data_layer_add_to_cart_event
+
+    unless signed_in?
+      @user = Spree::User.new(
+        email:      @order.email,
+        first_name: @order.user_first_name,
+        last_name:  @order.user_last_name
+      )
+    end
+
+    respond_with(@order) do |format|
+      format.js { render 'spree/checkout/update/success' }
+      format.html { render 'edit' }
+    end
+  end
+
   # update - address/payment
   def update
+    set_order_site_version
+    find_payment_methods
+
     move_order_from_cart_state(@order)
 
     if @order.state == 'address' || @order.state == 'masterpass'
@@ -174,22 +192,6 @@ Spree::CheckoutController.class_eval do
     authorize!(:edit, current_order, session[:access_token])
   end
 
-  def edit
-    unless signed_in?
-      @user = Spree::User.new(
-        email: @order.email,
-        first_name: @order.user_first_name,
-        last_name: @order.user_last_name
-      )
-    end
-
-    respond_with(@order) do |format|
-      format.js { render 'spree/checkout/update/success' }
-      format.html{ render 'edit' }
-      #format.html{ render 'markup_edit' }
-    end
-  end
-
   def before_address
     @order.bill_address ||= build_default_address
     @order.ship_address ||= build_default_address
@@ -328,7 +330,8 @@ Spree::CheckoutController.class_eval do
   helper_method :current_step
 
   def update_adjustments
-    current_order.updater.update_adjustments
+    @order.create_tax_charge!
+    @order.updater.update_adjustments
   end
 
   # Marketing + GTM

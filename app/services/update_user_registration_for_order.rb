@@ -89,13 +89,13 @@ class Services::UpdateUserRegistrationForOrder
   end
 
   def get_order_params
-    if (address_params = @params[:order][:bill_address_attributes]).present?
+    if (address_params = @params[:order][:ship_address_attributes]).present?
       {
         user_first_name: address_params[:firstname],
         user_last_name: address_params[:lastname],
         email: address_params[:email]
       }
-    elsif (address_params = @params[:order][:ship_address_attributes]).present?
+    elsif (address_params = @params[:order][:bill_address_attributes]).present?
       {
         user_first_name: address_params[:firstname],
         user_last_name: address_params[:lastname],

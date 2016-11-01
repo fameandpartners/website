@@ -10,18 +10,14 @@ page.initCheckoutEditPage = () ->
 
       $('.selectbox').outerWidth("100%")
 
-      @ship_to_different_address = $("input[name='ship_to_address']:first").prop("checked") == false
-      $("input[name='ship_to_address']:first").click =>
-        @ship_to_different_address = false
-        $('#order_bill_address_attributes_country_id').trigger('change')
+      @ship_to_same_address = $("input[name='ship_to_address']").prop("checked")
+      $("input[name='ship_to_address']").change =>
+        @ship_to_same_address = $("input[name='ship_to_address']").prop("checked")
         page.updateShippingFormVisibility()
 
-
-      $("input[name='ship_to_address']:last").click =>
-        @ship_to_different_address = true
-        $('#order_ship_address_attributes_country_id').trigger('change')
-        page.updateShippingFormVisibility()
-
+      $('.js-checkout-email-shipping').keyup ->
+        $('.js-checkout-email-billing').val $(this).val()
+        return
 
       $(document).on('change',  '#create_account', page.updatePasswordFieldsVisibility)
       $(document).on('click',   'form.checkout-form input[type=submit]', page.onAjaxLoadingHandler)
@@ -141,14 +137,14 @@ page.initCheckoutEditPage = () ->
       #$('.selectbox').not('.chosen-container').chosen()
 
     updateShippingFormVisibility: () ->
-      if @ship_to_different_address == false
-        $('[data-hook="shipping_inner"]').hide()
-        $('[data-hook="shipping_inner"]').find(':input').prop('disabled', true)
-        $('#order_use_billing').val(1)
+      if @ship_to_same_address == true
+        $('[data-hook="billing_inner"]').hide()
+        $('[data-hook="billing_inner"]').find(':input').prop('disabled', true)
+        $('#order_use_shipping').val(1)
       else
-        $('[data-hook="shipping_inner"]').show()
-        $('[data-hook="shipping_inner"]').find(':input').prop('disabled', false)
-        $('#order_use_billing').val("")
+        $('[data-hook="billing_inner"]').show()
+        $('[data-hook="billing_inner"]').find(':input').prop('disabled', false)
+        $('#order_use_shipping').val("")
 
     updatePasswordFieldsVisibility: () ->
       container = $('.checkout-content.line.form-global.passwords')
@@ -356,7 +352,7 @@ page.initCheckoutEditPage = () ->
     # `@uncheckInternationalShippingFeeCheckbox`, `@changeButtonStatus`, `@internationalShippingFeeCheckboxClicked`, `@selectedCountry`
     countryChanged: () ->
       element = $(this)
-      useBillingAddressToShip = $('#ship_to_address_Ship_to_this_address')
+      useBillingAddressToShip = $("input[name='ship_to_address']")
       countryHasShippingFee = window.checkout_page.countries[element.val()]
       isBillAddressCountry = element.attr('id') == 'order_bill_address_attributes_country_id'
       isShipAddressCountry = element.attr('id') == 'order_ship_address_attributes_country_id'
@@ -374,14 +370,14 @@ page.initCheckoutEditPage = () ->
       window.checkout_page.changeButtonStatus()
 
     showShippingFeeAlert: (country) ->
-      $('#country_name').html(country)
+      $('.country_name').html(country)
       $('#shipping_fee_alert').show()
 
     hideShippingFeeAlert: () ->
       $('#shipping_fee_alert').hide()
 
     shippingFeeHasToBeApplied: () ->
-      if $('#ship_to_address_Ship_to_this_address').is(':checked')
+      if $("input[name='ship_to_address']").is(':checked')
         element = $('#order_bill_address_attributes_country_id')
       else
         element = $('#order_ship_address_attributes_country_id')

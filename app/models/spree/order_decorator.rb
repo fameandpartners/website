@@ -1,6 +1,7 @@
 Spree::Order.class_eval do
-
+  include Spree::Order::CloneShipAddress
   extend Spree::Order::Scopes
+
   attr_accessible :required_to, :email, :customer_notes, :projected_delivery_date, :user_id
   self.include_root_in_json = false
 
@@ -108,16 +109,9 @@ Spree::Order.class_eval do
     end
   end
 
-  def promotion_total
-    if self.shipment.blank?
-      self.adjustment_total
-    else
-      self.adjustments.where("originator_type != 'Spree::ShippingMethod'").eligible.map(&:amount).sum
-    end
-  end
-
   def display_promotion_total
-    Spree::Money.new(promotion_total, { :currency => currency })
+    promotion_total = self.adjustments.credit.eligible.sum(:amount)
+    Spree::Money.new(promotion_total, { currency: currency })
   end
 
   def promotions

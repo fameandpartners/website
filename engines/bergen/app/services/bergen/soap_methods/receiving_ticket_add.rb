@@ -57,7 +57,7 @@ module Bergen
                   shipment.ActualQuantity('1', WMS_NAMESPACES[:receiving_ticket_items]) # Required, but field is ignored
                   shipment.DamagedQuantity('0', WMS_NAMESPACES[:receiving_ticket_items]) # Required, but field is ignored
                   # shipment.UnitCost('1', WMS_NAMESPACES[:receiving_ticket_items])
-                  # shipment.ProductDescription('Shoes', WMS_NAMESPACES[:receiving_ticket_items])
+                  shipment.ProductDescription(bergen_item_description, WMS_NAMESPACES[:receiving_ticket_items])
                   shipment.ProductMSRP(line_item_presenter.price, WMS_NAMESPACES[:receiving_ticket_items])
                   # shipment.Comments('This is a test', WMS_NAMESPACES[:receiving_ticket_items])
                   shipment.ShipmentType('OPENTOHANG', WMS_NAMESPACES[:receiving_ticket_items])
@@ -91,6 +91,14 @@ module Bergen
             end
           end
         end
+      end
+
+      def bergen_item_description
+        [
+          global_sku.upc,
+          global_sku.sku,
+          line_item_presenter.style_name
+        ].join('-')
       end
 
       def line_item_presenter

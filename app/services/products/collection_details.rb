@@ -41,7 +41,7 @@ class Products::CollectionDetails
   def read
     fast_making_taxon if fast_making.present?
     colorize_taxon if color.present?
-    deliverize_taxon if fast_delivery?
+    deliverize_taxon if fast_delivery.present?
     taxon
   end
 
@@ -142,9 +142,5 @@ class Products::CollectionDetails
         },
       },
     }
-  end
-
-  def fast_delivery?
-    fast_delivery == true
   end
 end

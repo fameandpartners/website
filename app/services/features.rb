@@ -10,7 +10,7 @@ module Features
     express_making:                nil,
     fameweddings:                  'Weddings "Shop"',
     force_sitewide_ssl:            "Force users to use HTTPS version of the website. Needs to restart server on feature toggle.",
-    getitquick_unavailable:        "Turn off 'getitquick/' pages & Product Express Making",
+    getitquick_unavailable:        "Turn off 'getitquick/' pages & Product Express Making. Requires server restart",
     google_tag_manager:            "Google Tag Manager - Analytics, Trackers & Marketing managed front-end site additions.",
     height_customisation:          "Skirt Length Customisation",
     maintenance:                   "Maintennance Mode - Puts site offline",

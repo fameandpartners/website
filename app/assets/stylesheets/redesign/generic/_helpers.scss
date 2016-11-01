@@ -26,6 +26,10 @@
   clip: rect(1px, 1px, 1px, 1px);
 }
 
+.most-front {
+  z-index: 10000 !important;
+}
+
 // truncates single line of text
 .txt-truncate-1 {
   white-space: nowrap;
@@ -112,6 +116,12 @@
   padding: 1px;
 }
 
+// Keep .nav-justified items side-by-side (even on mobile, no stacking)
+.nav-justified.no-stack-mobile > li {
+  display: table-cell;
+  width: 1%;
+}
+
 // Align content vericaly
 .h-v-align {
   display: flex;
@@ -131,6 +141,15 @@
 // TODO: check if this hack is even needed
 .relative {
   position: relative !important;
+}
+
+.row-equal-width {
+  @include display-flex;
+
+  > .equal-width {
+    flex-basis: 100%;
+  }
+
 }
 
 @media (min-width: $bootstrap-md-width) {
@@ -162,6 +181,11 @@
 
   .no-spacing-cols-mobile {
     margin: 0 -15px;
+    padding: 0;
+  }
+
+  .no-spacing-fluid-cols-mobile {
+    margin: 0 -30px;
     padding: 0;
   }
 
@@ -201,6 +225,20 @@
   .col-lg-5ths {
       width: 20%;
       float: left;
+  }
+
+}
+
+/* --------------------------------
+keyframes
+-------------------------------- */
+@include keyframes(cd-fade-in) {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 
 }
