@@ -24,8 +24,8 @@ describe NextLogistics::FTP::Receipt do
 
         tempfile.rewind
         expect(tempfile.read).to eq <<-STRING
-ProductCode,PO_Reference,Description,OtherDescription,Reference2,Quantity
-10001,R987654321,Stylight - US10/AU14 - Yellow,ABC123,Mariah Silvester,1
+Reference1,Reference2,Reference3,ProductCode,Quantity,Description,ProductType,ImageLink,SupplierCode
+R987654321,Mariah Silvester,"",10001,1,Stylight - US10/AU14 - Yellow,"","",ABC123
         STRING
       end
     end

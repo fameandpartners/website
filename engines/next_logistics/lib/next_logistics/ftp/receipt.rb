@@ -4,7 +4,7 @@ require 'csv'
 module NextLogistics
   module FTP
     class Receipt
-      RECEIPT_HEADERS = %w(ProductCode PO_Reference Description OtherDescription Reference2 Quantity)
+      RECEIPT_HEADERS = %w(Reference1 Reference2 Reference3 ProductCode Quantity Description ProductType ImageLink SupplierCode)
 
       attr_reader :process, :buffer
 
@@ -53,7 +53,7 @@ module NextLogistics
         end
 
         # Spree Order Number
-        def po_reference
+        def reference1
           order.number
         end
 
@@ -67,7 +67,7 @@ module NextLogistics
         end
 
         # Style Number, AKA, SKU
-        def other_description
+        def supplier_code
           global_sku.style_number
         end
 
@@ -82,12 +82,15 @@ module NextLogistics
 
         def to_row
           [
-            product_code,
-            po_reference,
-            description,
-            other_description,
-            reference2,
-            quantity
+            reference1,   # Reference 1
+            reference2,   # Reference 2
+            '',           # Reference 3
+            product_code, # ProductCode
+            quantity,     # Quantity
+            description,  # Description
+            '',           # ProductType
+            '',           # ImageLink
+            supplier_code # SupplierCode
           ]
         end
       end
