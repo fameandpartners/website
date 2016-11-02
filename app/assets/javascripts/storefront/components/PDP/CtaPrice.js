@@ -35,14 +35,13 @@ class CtaPrice extends React.Component {
       && this.props.customize.length.id) {
       // disable "ADD TO BAG" button and show spinner
       this.setState({sending:true});
-      document.getElementById('pdpCartSizeId').value = this.props.customize.size.id;
-      document.getElementById('pdpCartColorId').value = this.props.customize.color.id;
+      document.getElementById('pdpCartSizeId').value   = this.props.customize.size.id;
+      document.getElementById('pdpCartColorId').value  = this.props.customize.color.id;
       document.getElementById('pdpCartCustomId').value = this.props.customize.customization.id;
       document.getElementById('pdpCartDressVariantId').value = this.props.customize.dressVariantId;
-      document.getElementById('pdpCartLength').value = this.props.customize.length.id;
+      document.getElementById('pdpCartLength').value    = this.props.customize.length.id;
       document.getElementById('pdpCartVariantId').value = this.props.product.master_id;
-      // TODO: build express making functionality
-      document.getElementById('pdpCartMakingId').value = null;
+      document.getElementById('pdpCartMakingId').value  = this.props.customize.makingOptionId;
       $('#pdpDataForCheckout').submit();
     } else {
       // set errors

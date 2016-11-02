@@ -8,12 +8,13 @@
         <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
         <% end %>
 
-        <% #TODO: [WIP] This is just a markup. Valid logic is needed here. %>
-        <div class="ribbon-wrapper express-making">
-          <div class="ribbon-txt">
-            Make it express
+        <% if product.making_options.length: %>
+          <div class="ribbon-wrapper express-making">
+            <div class="ribbon-txt">
+              Make it express
+            </div>
           </div>
-        </div>
+        <% end %>
 
       </a>
     </div>
@@ -42,13 +43,14 @@
         <dd><%= customization.name %> <%= customization.display_price %></dd>
         <% end %>
 
-        <% #TODO: [WIP] This is just a markup. Valid logic is needed here. %>
-        <dd class="fast-making checkbox-inline custom-form-element-thin form-small checkbox-black-bg">
-          <input id="cart_item_fast_making_<%= product.id %>" type="checkbox">
-          <label for="cart_item_fast_making_<%= product.id %>">
-            Express Making $30
-          </label>
-        </dd>
+        <% if product.making_options.length: %>
+          <dd class="fast-making checkbox-inline custom-form-element-thin form-small checkbox-black-bg">
+            <input id="cart_item_fast_making_<%= product.id %>" type="checkbox">
+            <label for="cart_item_fast_making_<%= product.id %>">
+              Express Making $30
+            </label>
+          </dd>
+        <% end %>
 
       </dl>
     </div>

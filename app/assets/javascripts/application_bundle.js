@@ -139,8 +139,7 @@ var CtaPrice = function (_React$Component) {
         document.getElementById('pdpCartDressVariantId').value = this.props.customize.dressVariantId;
         document.getElementById('pdpCartLength').value = this.props.customize.length.id;
         document.getElementById('pdpCartVariantId').value = this.props.product.master_id;
-        // TODO: build express making functionality
-        document.getElementById('pdpCartMakingId').value = null;
+        document.getElementById('pdpCartMakingId').value = this.props.customize.makingOptionId;
         $('#pdpDataForCheckout').submit();
       } else {
         // set errors
@@ -1254,7 +1253,18 @@ var SidePanelFastMaking = function (_React$Component) {
 
   _createClass(SidePanelFastMaking, [{
     key: 'onChange',
-    value: function onChange(event) {}
+    value: function onChange(event) {
+      var customize = {};
+      var makingOptionId = null;
+      var makingOptions = this.props.product.available_options.table.making_options;
+
+      if (event.target.checked && makingOptions.length) {
+        makingOptionId = makingOptions[0].product_making_option.id;
+      }
+
+      customize.makingOptionId = makingOptionId;
+      this.props.actions.customizeDress(customize);
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -1265,7 +1275,7 @@ var SidePanelFastMaking = function (_React$Component) {
           _react2.default.createElement(
             'a',
             { href: 'javascript:;' },
-            _react2.default.createElement('input', { type: 'checkbox', id: 'fast-making' }),
+            _react2.default.createElement('input', { type: 'checkbox', id: 'fast-making', onChange: this.onChange }),
             _react2.default.createElement(
               'label',
               { htmlFor: 'fast-making' },
@@ -1292,13 +1302,11 @@ var SidePanelFastMaking = function (_React$Component) {
 }(_react2.default.Component);
 
 SidePanelFastMaking.propTypes = {
-  customize: _react.PropTypes.object.isRequired,
   product: _react.PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    customize: state.customize,
     product: state.product
   };
 }
@@ -1872,7 +1880,7 @@ var PdpSidePanelRight = function (_React$Component) {
               null,
               _react2.default.createElement(
                 'a',
-                { href: 'http://www.fameandpartners.com/dresses', className: 'link' },
+                { href: '/dresses', className: 'link' },
                 'Search similar dresses'
               )
             )
@@ -2780,7 +2788,8 @@ function configureStore(initialState) {
         presentation: '',
         price: 0
       },
-      dressVariantId: null
+      dressVariantId: null,
+      makingOptionId: null
     }
   });
 

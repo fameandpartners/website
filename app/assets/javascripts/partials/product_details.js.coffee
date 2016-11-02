@@ -13,7 +13,7 @@ page.initProductDetailsPage = (options = {}) ->
       size_id:            parseNumber($this.find('#pdpCartSizeId').val()),
       color_id:           parseNumber($this.find('#pdpCartColorId').val()),
       variant_id:         parseNumber($this.find('#pdpCartVariantId').val()),
-      making_options_ids: $this.find('#pdpCartMakingId').val(),
+      making_options_ids: parseNumber($this.find('#pdpCartMakingId').val()),
       height:             $this.find('#pdpCartLength').val(),
       customizations_ids: parseNumber($this.find('#pdpCartCustomId').val()),
       dress_variant_id:   parseNumber($this.find('#pdpCartDressVariantId').val())

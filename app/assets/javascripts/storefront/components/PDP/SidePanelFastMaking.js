@@ -13,7 +13,16 @@ class SidePanelFastMaking extends React.Component {
   }
 
   onChange(event) {
+    let customize = {};
+    let makingOptionId = null;
+    let makingOptions = this.props.product.available_options.table.making_options;
 
+    if (event.target.checked && makingOptions.length) {
+      makingOptionId = makingOptions[0].product_making_option.id;
+    }
+
+    customize.makingOptionId = makingOptionId;
+    this.props.actions.customizeDress(customize);
   }
 
   render() {
@@ -21,7 +30,7 @@ class SidePanelFastMaking extends React.Component {
       return (
         <div className="pdp-side-container pdp-side-container-fast-making checkbox-inline custom-form-element-thin form-small">
           <a href="javascript:;">
-            <input type="checkbox" id="fast-making" />
+            <input type="checkbox" id="fast-making" onChange={this.onChange} />
             <label htmlFor="fast-making">
             <div className="c-card-customize__content__left">EXPRESS MAKING (6-9 days)</div>
             <div className="c-card-customize__content__right">$30</div>
@@ -38,13 +47,11 @@ class SidePanelFastMaking extends React.Component {
 }
 
 SidePanelFastMaking.propTypes = {
-  customize: PropTypes.object.isRequired,
   product: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    customize: state.customize,
     product: state.product
   };
 }
