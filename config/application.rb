@@ -11,11 +11,8 @@ end
 
 module FameAndPartners
   class Application < Rails::Application
-
     config.skylight.environments += ['staging']
     config.skylight.alert_log_file = true
-
-    require "#{Rails.root}/config/initializers/bower_rails.rb"
 
     # [HACK] Replacement for the dotenv-rails gem, was not compatible with spree 1.3
     # [TODO] Remove this and config/envvar.rb when no longer needed

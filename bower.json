@@ -4,7 +4,6 @@
   "homepage": "https://github.com/fameandpartners/website",
   "license": "MIT",
   "dependencies": {
-    "slick-carousel": "~1.5.8",
-    "es5-shim": "~4.3.1"
+    "slick-carousel": "~1.5.8"
   }
 }
