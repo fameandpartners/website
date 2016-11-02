@@ -197,12 +197,9 @@ class Populator
     end
 
     def product_making_options
-      @product_making_options ||= \
-        product.making_options.map do |name, is_checked|
-          if is_checked == true && ProductMakingOption::OPTION_TYPES.include?(name)
-            product.making_options.send(name)
-          end
-        end.compact
+      @product_making_options ||= begin
+        product.making_options.where(id: Array.wrap(product_attributes[:making_options_ids])).to_a
+      end
     end
 
     def product_quantity
