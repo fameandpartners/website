@@ -42,7 +42,6 @@
 // Styleguide code
 //----------------
 //= require "styleguide/js/functions.js"
-//  require js/jquery.skippr.min.js # copied non-min version, to debug&patch
 // require js/main.js
 
 //  require js/superslides.js # copied to libs/superslides for easier monkey-patching
