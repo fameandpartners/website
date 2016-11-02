@@ -495,12 +495,14 @@ var PdpGallery = function (_React$Component) {
     value: function calculateOffset(image) {
       // calculate image offset
       var MOVE_LEFT_PERCENT = 0.3;
+      var desktopMinWidth = 992;
+      var oldImageWidth = 1700;
 
-      if (image.clientWidth > image.parentNode.clientWidth && window.outerWidth >= 992) {
+      if (image.clientWidth > image.parentNode.clientWidth && window.outerWidth >= desktopMinWidth) {
         var offset = (image.clientWidth / 2 - image.parentNode.clientWidth / 2) * -1;
 
         // If image is old (e.g. Skirts), move images only 30% to the left
-        if (image.naturalWidth > 1700) {
+        if (image.naturalWidth > oldImageWidth) {
           offset = offset * MOVE_LEFT_PERCENT;
         }
 
