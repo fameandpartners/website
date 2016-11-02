@@ -265,7 +265,6 @@ GEM
     bourbon (4.2.2)
       sass (~> 3.4)
       thor
-    bower-rails (0.10.0)
     bugsnag (5.0.1)
     builder (3.0.4)
     bullet (5.3.0)
@@ -860,7 +859,6 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass (= 3.3.4.1)
   bourbon
-  bower-rails (~> 0.10.0)
   bullet
   business_time
   canonical-rails!
