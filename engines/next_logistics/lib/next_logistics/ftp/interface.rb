@@ -1,4 +1,5 @@
 require 'net/ftp'
+require 'securerandom'
 
 module NextLogistics
   module FTP
@@ -23,8 +24,10 @@ module NextLogistics
       end
 
       def upload(file:)
+        remote_filename = [SecureRandom.uuid, '.csv'].join
+
         ftp.chdir(ORDERS_FOLDER)
-        ftp.putbinaryfile(file)
+        ftp.putbinaryfile(file, remote_filename)
       end
     end
   end
