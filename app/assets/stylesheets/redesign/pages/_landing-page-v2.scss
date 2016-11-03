@@ -102,4 +102,12 @@
     font-family: $font-heading;
   }
 
+  .middle-wrapper {
+
+    > div {
+      margin: 0 auto;
+    }
+
+  }
+
 }

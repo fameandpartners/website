@@ -1,0 +1,30 @@
+= render partial: 'pages/robots'
+
+javascript:
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//woobox.com/js/plugins/woo.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+  (document, 'script', 'woobox-sdk'));
+
+.page-content.landing-page-v2.relative
+
+  .main-hero-wrap.hero-wrap.copy-left.white-text
+    - current_tile_image = "//fakeimg.pl/1522x460/000000/?text=desktop"
+    - current_tile_image_mob = "//fakeimg.pl/640x460/000000/?text=mobile"
+    picture.media-wrap
+      source media="(max-width: 991px)" srcset=image_path(current_tile_image_mob)
+      source media="(min-width: 992px)" srcset=image_path(current_tile_image)
+      = image_tag image_path(current_tile_image),
+            srcset: "#{image_path(current_tile_image_mob)} 991w,
+                    #{image_path(current_tile_image)} 992w",
+                    class: "img-responsive",
+                    alt: ""
+
+  .container
+    .row.middle-wrapper
+      .woobox-offer data-offer="cf83mj"
