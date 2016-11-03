@@ -28,6 +28,8 @@ Spree::CheckoutController.class_eval do
       )
     end
 
+    current_order.updater.update_totals
+
     respond_with(@order) do |format|
       format.js { render 'spree/checkout/update/success' }
       format.html { render 'edit' }
@@ -190,23 +192,6 @@ Spree::CheckoutController.class_eval do
   # Spree::Ability.new(user).authorize!(:edit, order, token)
   def check_authorization
     authorize!(:edit, current_order, session[:access_token])
-  end
-
-  def edit
-    unless signed_in?
-      @user = Spree::User.new(
-        email: @order.email,
-        first_name: @order.user_first_name,
-        last_name: @order.user_last_name
-      )
-    end
-
-    current_order.updater.update_totals
-
-    respond_with(@order) do |format|
-      format.js { render 'spree/checkout/update/success' }
-      format.html{ render 'edit' }
-    end
   end
 
   def before_address
