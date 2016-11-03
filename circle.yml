@@ -25,4 +25,4 @@ general:
 
 test:
   override:
-    - bundle exec rspec spec engines
+    - bundle exec rspec spec engines --tag $RSPEC_EXCLUDE_FLAGS
