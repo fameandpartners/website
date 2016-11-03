@@ -46,11 +46,13 @@ section.order-details
                               li
                                 | Quantity: <span class="value">#{line_item.quantity}</span>
 
-                            / TODO: [WIP] This is just a markup. Valid logic is needed here.
-                            .fast-making.checkbox-inline.custom-form-element-thin.form-small.checkbox-black-bg
-                              input id="fast_making_#{line_item.id}" type="checkbox" disabled="disabled" checked="checked"
-                              label
-                                | Get it in 6 to 9 days just add $30
+                            - if line_item.fast_making?
+                              - fast_making = line_item.making_options.first
+                              .fast-making.checkbox-inline.custom-form-element-thin.form-small.checkbox-black-bg
+                                input id="fast_making_#{line_item.id}" type="checkbox" disabled="disabled" checked="checked"
+                                label
+                                  | Get it in 6 to 9 days just add
+                                  =<> fast_making.display_price
 
               .row
                 .order-total.col-md-7.col-md-offset-5
