@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as pdpActions from '../../actions/PdpActions';
 
-// TODO: [WIP] This is just a placeholder. Valid logic for displaying the "express making" row properly is needed here.
-
 class SidePanelFastMaking extends React.Component {
   constructor(props, context) {
     super(props, context);
