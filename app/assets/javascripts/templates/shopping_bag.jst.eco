@@ -80,22 +80,19 @@
             <% end %>
             <dd>Color: <span class="color"><%= product.color.name %></span></dd>
             <dd>Skirt Length: <span><%= product.height %></span></dd>
-            <% for making_option in product.making_options: %>
-            <dd><%= making_option.name %> <%= making_option.display_price %></dd>
-            <% end %>
             <% for customization in product.customizations: %>
             <dd><%= customization.name %> <%= customization.display_price %></dd>
             <% end %>
 
-            <% if product.making_options.length: %>
+            <%# Making options stands for Fast Making %>
+            <% for making_option in product.making_options: %>
               <dd class="fast-making checkbox-inline custom-form-element-thin form-small checkbox-black-bg">
                 <input id="cart_item_fast_making_<%= product.id %>" type="checkbox">
                 <label for="cart_item_fast_making_<%= product.id %>">
-                  Express Making $30
+                  <%= making_option.name %> <%= making_option.display_price %>
                 </label>
               </dd>
             <% end %>
-
           </dl>
         </div>
       </div>
