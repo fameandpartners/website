@@ -23,8 +23,13 @@ $top-overlay-margin-top: 37px;
 
   }
 
-  .item, .item-alt {
+  .item,
+  .item-alt {
     padding: 18px;
+
+    &.has-heading-overlay {
+      padding-top: 30px;
+    }
 
     &.bordered {
       border: 1px solid $c-neutral-6;
@@ -138,12 +143,55 @@ $top-overlay-margin-top: 37px;
 
   }
 
+  &.copy-img-side-by-side-alt {
+
+    p.summary {
+      margin: 25px 0;
+      font-size: 1.2em;
+      line-height: 125%;
+    }
+
+    .featured-info {
+      padding: 5px;
+      margin: 30px 0;
+
+      .black-box {
+        background-color: $c-neutral-black;
+        color: $c-neutral-white;
+      }
+
+      .amount {
+        font-size: 2.6em;
+        font-weight: 600;
+      }
+
+      .caption {
+        font-size: 1.7rem;
+        line-height: 125%;
+        padding: 15px 0;
+        text-align: left;
+      }
+
+    }
+
+    @media (max-width: $bootstrap-md-width - 1px) {
+      text-align: center;
+
+      .item-copy {
+        padding: 15px;
+      }
+
+    }
+
+  }
+
   .cta-product-caption {
     margin: 25px 0;
     font-weight: 400;
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
+    margin-top: ($section-spacing-margin-top / 2);
 
     &.heading-has-copy.top-overlay {
       margin-top: $top-overlay-margin-top;
@@ -231,6 +279,10 @@ $top-overlay-margin-top: 37px;
 
 }
 
+.section-bottom {
+  margin-top: 60px;
+}
+
 .heading-overlay-wrapper {
   text-align: center;
   z-index: 1;
@@ -239,7 +291,7 @@ $top-overlay-margin-top: 37px;
     display: inline-block;
     position: relative;
     bottom: -22px;
-    padding: 8px 20px 6px;
+    padding: 6px 20px 4px;
     margin-top: 0;
     font-family: $font-family-secondary;
     font-size: 1.2rem;
@@ -247,6 +299,10 @@ $top-overlay-margin-top: 37px;
     text-transform: uppercase;
     background: $c-neutral-black;
     color: $c-neutral-white;
+  }
+
+  &.is-bordered .heading-overlay {
+    bottom: -14px;
   }
 
   @media (min-width: $bootstrap-md-width) {
