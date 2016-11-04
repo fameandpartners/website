@@ -106,8 +106,13 @@
   margin-bottom: 0 !important;
 }
 
+// Fix for IE
 .img-responsive {
-  width: 100%; // Fix for IE
+  width: 100%;
+}
+
+.font-style-normal {
+  font-style: normal !important;
 }
 
 .double-line-height:before {
@@ -136,6 +141,10 @@
     align-self: flex-end;
   }
 
+}
+
+.vertical-align-row {
+  @include column-vertical-align();
 }
 
 // TODO: check if this hack is even needed

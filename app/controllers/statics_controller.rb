@@ -43,7 +43,6 @@ class StaticsController < ApplicationController
     render :template => 'landing_pages/here_comes_the_sun', :layout => 'redesign/application'
   end
 
-
   def bohemian_summer
     @title = "Bohemian Summer | Beautiful Dresses - Fame & Partners"
     @description = "Discover beautiful summer dresses here at Fame & Partners"
@@ -84,6 +83,11 @@ class StaticsController < ApplicationController
     @title = "Facebook | Beautiful Dresses - Fame & Partners"
     @description = "Discover beautiful dresses that don't break the bank at Fame & Partners"
     render :template => 'landing_pages/facebook_lp', :layout => 'redesign/application'
+  end
+
+  def iequalchange
+    title('Fame and Partners x i=Change')
+    description('Join Fame and Partners in empowering women through fashion. $5 of every sale helps support initiatives from UN Women, Akilah, and Plan. Dress up and give back!')
   end
 
   # Monday March 23 2015 TTL: 6 months
