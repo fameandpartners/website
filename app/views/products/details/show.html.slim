@@ -82,7 +82,10 @@ form.hide-fully#pdpDataForWishlist
                     #collapse-description.collapse.in role='tabpanel'
                       p = raw @product.description
                       p SKU: #{@product.sku}
-                      p $5 of each sale funds a women's empowerment charity.
+
+                      - if Features.active?(:i_equal_change)
+                        p $5 of each sale funds a women's empowerment charity.
+
                   .panel
                     a href='#collapse-fabric' data-toggle='collapse' data-parent='#accordion' Fabric Information
                     #collapse-fabric.collapse role='tabpanel'
