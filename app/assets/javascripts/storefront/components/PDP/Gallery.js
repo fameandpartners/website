@@ -65,9 +65,31 @@ class PdpGallery extends React.Component {
   }
 
   render() {
-    let filteredImages = [];
+    let galleryImages = [];
     let thumbIds = [];
     let defaultColors = this.props.product.available_options.table.colors.table.default
+    let defaultColorIds = defaultColors.map(color => color.option_value.id)
+
+    let [ render3dImages, photos ] = this.props.images.reduce((acc, image) => {
+      if (image.customization_id !== undefined) {
+        acc[0].push(image)
+      } else {
+        acc[1].push(image)
+      }
+
+      return acc;
+    }, [[], []]);
+
+    if (defaultColorIds.includes(this.props.customize.color.id) || !render3dImages.length) {
+      galleryImages = photos.filter((image) => {
+        return image.color_id === this.props.customize.color.id
+      });
+    } else {
+      galleryImages = render3dImages.filter((image) => {
+        return image.color_id === this.props.customize.color.id
+          && image.customization_id === (this.props.customize.customization.id || 0);
+      });
+    }
 
     const SETTINGS = {
       infinite: true,
@@ -89,43 +111,8 @@ class PdpGallery extends React.Component {
       ]
     };
 
-    // Step 1 - match color and customization
-    filteredImages = this.props.images.filter((image) => {
-      return image.color_id === this.props.customize.color.id
-        && image.customization_id === this.props.customize.customization.id;
-    });
 
-    // Step 2 - if step 1 failed try to match just color
-    if(filteredImages.length === 0) {
-      filteredImages = this.props.images.filter((image) => {
-        // 1. color is custom
-        // 2. color has render3d image
-        // 3. image is default for custom color
-        let defaultColorIds = defaultColors.map(color => color.option_value.id)
-
-        return !defaultColorIds.includes(image.color_id)
-          && image.color_id === this.props.customize.color.id
-          && image.customization_id === 0;
-      });
-    }
-
-    // Step 3 - if step 2 failed try to match default color with customization
-    if(filteredImages.length === 0) {
-      filteredImages = this.props.images.filter((image) => {
-        return image.color_id === this.props.product.featured_image.table.color_id
-          && image.customization_id === this.props.customize.customization.id;
-      });
-    }
-
-    // Step 4 - if step 3 failed try to match just the default color
-    if(filteredImages.length === 0) {
-      filteredImages = this.props.images.filter((image) => {
-        return image.color_id === this.props.product.featured_image.table.color_id
-          && image.customization_id === undefined;
-      });
-    }
-
-    let images = filteredImages.map((image, index) => {
+    let images = galleryImages.map((image, index) => {
       let id = "gallery-image-" + index;
       thumbIds.push(id);
       return (

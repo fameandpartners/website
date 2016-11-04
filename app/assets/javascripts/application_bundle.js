@@ -165,7 +165,15 @@ var CtaPrice = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var PRICE = parseFloat(this.props.price) + parseFloat(this.props.customize.color.price) + parseFloat(this.props.customize.customization.price) - parseFloat(this.props.discount);
+      var discount = 0;
+
+      if (this.props.discount.hasOwnProperty('table')) {
+        discount = this.props.discount.table.amount;
+      } else {
+        discount = this.props.discount;
+      }
+
+      var PRICE = parseFloat(this.props.price) + parseFloat(this.props.customize.color.price) + parseFloat(this.props.customize.customization.price) - parseFloat(discount);
 
       return _react2.default.createElement(
         'div',
@@ -412,6 +420,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -514,9 +524,38 @@ var PdpGallery = function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      var filteredImages = [];
+      var galleryImages = [];
       var thumbIds = [];
       var defaultColors = this.props.product.available_options.table.colors.table.default;
+      var defaultColorIds = defaultColors.map(function (color) {
+        return color.option_value.id;
+      });
+
+      var _props$images$reduce = this.props.images.reduce(function (acc, image) {
+        if (image.customization_id !== undefined) {
+          acc[0].push(image);
+        } else {
+          acc[1].push(image);
+        }
+
+        return acc;
+      }, [[], []]);
+
+      var _props$images$reduce2 = _slicedToArray(_props$images$reduce, 2);
+
+      var render3dImages = _props$images$reduce2[0];
+      var photos = _props$images$reduce2[1];
+
+
+      if (defaultColorIds.includes(this.props.customize.color.id) || !render3dImages.length) {
+        galleryImages = photos.filter(function (image) {
+          return image.color_id === _this3.props.customize.color.id;
+        });
+      } else {
+        galleryImages = render3dImages.filter(function (image) {
+          return image.color_id === _this3.props.customize.color.id && image.customization_id === (_this3.props.customize.customization.id || 0);
+        });
+      }
 
       var SETTINGS = {
         infinite: true,
@@ -535,40 +574,7 @@ var PdpGallery = function (_React$Component) {
         }]
       };
 
-      // Step 1 - match color and customization
-      filteredImages = this.props.images.filter(function (image) {
-        return image.color_id === _this3.props.customize.color.id && image.customization_id === _this3.props.customize.customization.id;
-      });
-
-      // Step 2 - if step 1 failed try to match just color
-      if (filteredImages.length === 0) {
-        filteredImages = this.props.images.filter(function (image) {
-          // 1. color is custom
-          // 2. color has render3d image
-          // 3. image is default for custom color
-          var defaultColorIds = defaultColors.map(function (color) {
-            return color.option_value.id;
-          });
-
-          return !defaultColorIds.includes(image.color_id) && image.color_id === _this3.props.customize.color.id && image.customization_id === 0;
-        });
-      }
-
-      // Step 3 - if step 2 failed try to match default color with customization
-      if (filteredImages.length === 0) {
-        filteredImages = this.props.images.filter(function (image) {
-          return image.color_id === _this3.props.product.featured_image.table.color_id && image.customization_id === _this3.props.customize.customization.id;
-        });
-      }
-
-      // Step 4 - if step 3 failed try to match just the default color
-      if (filteredImages.length === 0) {
-        filteredImages = this.props.images.filter(function (image) {
-          return image.color_id === _this3.props.product.featured_image.table.color_id && image.customization_id === undefined;
-        });
-      }
-
-      var images = filteredImages.map(function (image, index) {
+      var images = galleryImages.map(function (image, index) {
         var id = "gallery-image-" + index;
         thumbIds.push(id);
         return _react2.default.createElement(
