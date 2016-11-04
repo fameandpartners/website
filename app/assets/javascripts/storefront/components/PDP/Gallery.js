@@ -67,14 +67,14 @@ class PdpGallery extends React.Component {
   render() {
     let galleryImages = [];
     let thumbIds = [];
-    let defaultColors = this.props.product.available_options.table.colors.table.default
-    let defaultColorIds = defaultColors.map(color => color.option_value.id)
+    let defaultColors = this.props.product.available_options.table.colors.table.default;
+    let defaultColorIds = defaultColors.map(color => color.option_value.id);
 
     let [ render3dImages, photos ] = this.props.images.reduce((acc, image) => {
       if (image.customization_id !== undefined) {
-        acc[0].push(image)
+        acc[0].push(image);
       } else {
-        acc[1].push(image)
+        acc[1].push(image);
       }
 
       return acc;
@@ -82,7 +82,7 @@ class PdpGallery extends React.Component {
 
     if (defaultColorIds.includes(this.props.customize.color.id) || !render3dImages.length) {
       galleryImages = photos.filter((image) => {
-        return image.color_id === this.props.customize.color.id
+        return image.color_id === this.props.customize.color.id;
       });
     } else {
       galleryImages = render3dImages.filter((image) => {
