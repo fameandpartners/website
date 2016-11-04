@@ -7,7 +7,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
     And Setup default feature flags
     And The "afterpay" feature is enabled
 
-  @javascript @vcr @shorter_cassette_names @selenium
+  @javascript @vcr @shorter_cassette_names @selenium @afterpay
   Scenario: Successfully Buy a Dress
     When I am on Connie dress page
     Then I select "Australia" site version
@@ -43,7 +43,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | cardCVC    | 123                              |
     Then I should see my order placed, with "Connie" dress, "AU 14" size and "319.00" price
 
-  @javascript @vcr @shorter_cassette_names @selenium
+  @javascript @vcr @shorter_cassette_names @selenium @afterpay
   Scenario: Afterpay cannot process user payment, user sees an error
     When I am on Connie dress page
     Then I select "Australia" site version

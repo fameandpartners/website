@@ -4,7 +4,7 @@ module Features
   # { feature_name: "Description or documentation." }
   DEFINED_FEATURES = {
     afterpay:                      'Enables AfterPay payment method and its notifications on PDP',
-    bergen_usa_returns:            '[DEPRECATED] Enable Bergen return process (background workers and emails) whenever an user creates an order return in the USA',
+    bergen_usa_returns:            '[DEPRECATED] Enable Bergen 3PL return process (background workers and emails) whenever an user creates an order return in the USA',
     checkout_fb_login:             "Facebook login on Checkout",
     delivery_date_messaging:       nil,
     enhanced_moodboards:           "[DEPRECATED] Sharing & Comments",
@@ -19,6 +19,7 @@ module Features
     marketing_modals:              "Onsite Marketing Popups & Modals",
     masterpass:                    "MasterCard MasterPass digital wallet on Checkout.",
     moodboard:                     "Moodboards",
+    next_logistics:                'Enable Next Logistics 3PL return process, whenever an user creates an order return in Australia',
     redirect_to_com_au_domain:     "Redirect '/au/' URLs to .com.au",
     redirect_to_www_and_https:     '[DEPRECATED] Guarantee https://www redirection on Rails routing. Needs to restart server on feature toggle.',
     sales:                         nil,

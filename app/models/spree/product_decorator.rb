@@ -355,7 +355,7 @@ Spree::Product.class_eval do
   def set_default_values
     if self.new_record?
       self.on_demand = true
-      self.size_chart = '2016'
+      self.size_chart = SizeChart.default_chart_name
     end
   end
 

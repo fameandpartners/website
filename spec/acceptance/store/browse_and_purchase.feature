@@ -18,18 +18,18 @@ Feature: Browse and Purchase
   Scenario: List All Lookbooks
     When I visit the "/lookbook" path
     # Current Lookbooks
+    Then I should see "The Evening Hours Collection"
     Then I should see "The Skirts Collection"
     Then I should see "Gowns Collection"
     Then I should see "Weddings Collection"
     Then I should see "Parties Collection"
     Then I should see "It Girl Collection"
     Then I should see "Fresh Collection"
-    Then I should see "The Ruffled Up Collection"
     # Previous Lookbooks
-    Then I should see "This Modern Romance"
+    Then I should see "The Ruffled Up Collection"
+    Then I should see "The Slip Dress Collection"
     Then I should see "Partners In Crime"
-    Then I should see "Photo Finish"
-    Then I should see "Make A Statement"
+    Then I should see "This Modern Romance"
 
   Scenario: Show Filters on Dresses List
     When I visit the dresses page
