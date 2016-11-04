@@ -6,13 +6,13 @@
       .ibox-content
         .form-group
           label.col-sm-2.control-label Product
-          .col-sm-10 = f.hidden_field :product_id, class: 'remote-select'
+          .col-sm-10 = f.hidden_field :product_id, class: 'remote-select', id: :product, data: { minimum_input_length: 1 }
         .form-group
           label.col-sm-2.control-label Color Value
-          .col-sm-10 = f.hidden_field :color_value_id, class: 'remote-select'
+          .col-sm-10 = f.hidden_field :color_value_id, class: 'remote-select', id: :color_value
         .form-group
           label.col-sm-2.control-label Customisation Value
-          .col-sm-10 = f.hidden_field :customisation_value_id, class: 'remote-select'
+          .col-sm-10 = f.hidden_field :customisation_value_id, class: 'remote-select', id: :customisation_value
         .form-group
           label.col-sm-2.control-label Attachment
           .col-sm-10 = f.file_field :attachment
@@ -23,31 +23,77 @@
 
 javascript:
   (function($) { 'use strict';
-    $('.remote-select').select2({
-      ajax: {
-        url: 'collection.json',
-        dataType: 'json',
-        delay: 250,
-        cache: true,
-        data: function(term, page) {
-          return {
-            q: term,
-            id: $(this).attr('id'),
-            page: page
-          };
-        },
-        processResults: function(data, page) {
-          perPage = 30;
-          page = page || 1;
+    var processResults = function(data, page) {
+      return {
+        results: data.collection
+      };
+    };
 
-          shouldLoadMore = (page * perPage) < data.total_count
+    var remoteSelectAttrs = function() {
+      return {
+        width: '100%',
+        allowClear: true,
+        placeholder: 'type to search...',
+        minimumInputLength: function() { 
+          return $(this).data('minimum-input-length') || 0;
+        }.call(this),
+        ajax: {
+          url: '#{collection_customisation_render3d_images_path(:json)}',
+          dataType: 'json',
+          delay: 250,
+          cache: true,
+          results: processResults,
+          data: function(term, page) {
+            var $select = $(this);
 
-          return {
-            results: data.items,
-            pagination: { more: shouldLoadMore }
-          };
+            return {
+              q: term,
+              type: $select.attr('id'),
+              product_id: $select.data('product_id'),
+              page: page
+            };
+          }.bind(this)
         }
+      };
+    };
 
-      }
+    var enableCustomDropdowns = function() {
+      $('#color_value,#customisation_value')
+        .prop('disabled', false)
+        .data('product_id', $('#product').val())
+        .each(function() {
+          $(this).select2(remoteSelectAttrs.call(this));
+        });
+    };
+
+    var disableCustomDropdowns = function() {
+      $('#color_value,#customisation_value')
+        .prop('disabled', true)
+        .data('product_id', '')
+        .val('')
+        .each(function() {
+          $(this).select2(remoteSelectAttrs.call(this));
+        });
+    };
+
+    disableCustomDropdowns();
+
+    $(document).ready(function() {
+      $('#color_value,#customisation_value')
+        .prop('disabled', true)
+        .data('product_id', '')
+        .val('')
+
+      $('.remote-select#product')
+        .each(function() {
+          $(this).select2(remoteSelectAttrs.call(this));
+        })
+        .on('change', function(e) {
+          if (e.val) {
+            enableCustomDropdowns();
+          } else {
+            disableCustomDropdowns();
+          }
+        });
     });
   })(jQuery);

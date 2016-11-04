@@ -69,8 +69,7 @@ AdminUi::Engine.routes.draw do
 
   namespace :customisation do
     resources :variants
-
-    resources :render3d_images, only: [:index, :create, :edit] do
+    resources :render3d_images do
       get :collection, on: :collection
     end
 

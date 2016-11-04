@@ -29,25 +29,34 @@ module AdminUi
       end
 
       def create
-        @render3d_image = Render3d::Image.new
+        render3d_params = params.fetch(:render3d_image, {})
 
-        @render3d_image.tap do |img|
-          img.product_id = params.fetch(:product_id)
-          img.color_value_id = params.fetch(:color_value_id)
-          img.customisation_value = params.fetch(:customisation_value_id, 0)
-          img.attachment = params.fetch(:attachment)
+        product_id = render3d_params.fetch(:product_id, nil)
+        color_value_id = render3d_params.fetch(:color_value_id, nil)
+        customisation_value_id = render3d_params.fetch(:customisation_value_id, 0)
+
+        if Render3d::Image.exists?(product_id: product_id, customisation_value_id: customisation_value_id, color_value_id: color_value_id)
+          redirect_to new_customisation_render3d_image_path, flash: { error: 'Render3d::Image already exist for such values' }
         end
+
+        @render3d_image = \
+          Render3d::Image.new.tap do |img|
+            img.product_id = product_id
+            img.color_value_id = color_value_id
+            img.customisation_value_id = customisation_value_id
+            img.attachment = render3d_params.fetch(:attachment, nil)
+          end
 
         if @render3d_image.save
           message = { success: <<-EOS }
             Render3d Image was successfully created for:
-              [*] product:\t\t<name: #{@render3d_image.product.name}> - <sku: #{@render3d_image.product.sku}>
+              [*] product:\t\t<name (sku): #{@render3d_image.product.name_with_sku}>
               [*] color:\t\t<name: #{@render3d_image.color_value.name}>
               [*] customisation:\t<name: #{@render3d_image.customisation_value.try(:name) || 'Default'}>
             EOS
           redirect_to customisation_render3d_images_path, flash: message
         else
-          render :new
+          redirect_to new_customisation_render3d_image_path, flash: { error: @render3d_image.errors.full_messages.to_sentence }
         end
       end
 
@@ -86,16 +95,44 @@ module AdminUi
       end
 
       def collection
-        @data = {
-          collection: [],
-          type: params[:id]
-        }
+        limit = 30
+        type = params.fetch(:type)
+        term = params.fetch(:q).downcase
 
-        if params[:id] == ''
-        end
+        collection = \
+          case type
+            when 'product'
+              Spree::Product.joins(:master)
+                .where('LOWER(spree_products.name) LIKE :term OR LOWER(spree_variants.sku) LIKE :term', term: "%#{term}%")
+                .limit(limit)
+                .map do |p|
+                  { id: p.id, text: p.name_with_sku }
+                end
+            when 'color_value'
+              Spree::OptionValue.joins(:product_color_values).colors
+                .where('product_color_values.product_id = ?', params.fetch(:product_id))
+                .where('LOWER(name) LIKE ?', "%#{term}%")
+                .limit(limit)
+                .map do |ov|
+                  { id: ov.id, text: ov.name }
+                end
+            when 'customisation_value'
+              CustomisationValue
+                .where(product_id: params.fetch(:product_id))
+                .where('LOWER(name) LIKE ?', "%#{term}%")
+                .limit(limit)
+                .map do |cv|
+                  { id: cv.id, text: cv.name }
+                end
+            else
+              []
+          end
 
         respond_to do |format|
-          format.json { render json: @data }
+          format.json { render json: {
+            collection: collection,
+            type: type
+          } }
         end
       end
 

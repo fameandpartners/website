@@ -11,8 +11,11 @@
  *= require 'inspinia-rails'
  *= require 'jquery-ui'
  *= require 'chosen'
+ *= require 'select2'
+
  *= require_self
  *= require_tree .
+
  * Loaded from the main application styles
  *= require 'redesign/product/_product_colours'
  *
