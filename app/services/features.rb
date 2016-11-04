@@ -24,7 +24,8 @@ module Features
     shipping_message:              nil,
     style_quiz:                    nil,
     test_analytics:                "Force the rendering of JS Marketing Trackers, usually for testing.",
-    afterpay:                      'Enables AfterPay payment method and its notifications on PDP'
+    afterpay:                      'Enables AfterPay payment method and its notifications on PDP',
+    i_equal_change:                'Enables i=Change promotion along the site ("/iequalchange" landing page, category/search pages, PDP and Checkout). Requires server restart to display the landing page.'
   }
 
   class << self
