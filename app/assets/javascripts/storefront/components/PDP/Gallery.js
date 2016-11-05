@@ -10,6 +10,7 @@ class PdpGallery extends React.Component {
     this.handleLoad = this.handleLoad.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.calculateOffset = this.calculateOffset.bind(this);
+    this.state = { loaded: {} }
   }
 
   componentDidMount() {
@@ -21,11 +22,17 @@ class PdpGallery extends React.Component {
     window.removeEventListener('resize', this.handleResize);
   }
 
-  handleLoad(image) {
-    image.target.style.marginLeft = this.calculateOffset(image.target) + 'px';
-    image.target.parentNode.className += ' is-loaded';
-    $(image.target.parentNode).zoom({
-      url: image.target.getAttribute('src'),
+  handleLoad(event) {
+    let loadedObj = this.state.loaded;
+    loadedObj[event.target.id] = true;
+
+    this.setState({ loaded: loadedObj });
+    // event.target.parentNode.className += ' is-loaded';
+
+    event.target.style.marginLeft = this.calculateOffset(event.target) + 'px';
+
+    $(event.target.parentNode).zoom({
+      url: event.target.getAttribute('src'),
       touch: true,
       on: 'grab',
       duration: 50,
@@ -114,12 +121,14 @@ class PdpGallery extends React.Component {
 
     let images = galleryImages.map((image, index) => {
       let id = "gallery-image-" + index;
+      let stateId = `image-${image.id}`;
+      let loadedClass = this.state.loaded[stateId] ? 'is-loaded' : ''
       thumbIds.push(id);
       return (
         <div className="media-wrap-outer" key={index}>
-          <div className="media-wrap">
+          <div className={`media-wrap ${loadedClass}`}>
             <span id={id} className="scrollspy-trigger"></span>
-            <img src={image.url} alt={image.alt}
+            <img src={image.url} alt={image.alt} id={stateId}
               className="js-gallery-image" onLoad={this.handleLoad} />
             <span className="loader"></span>
             <span className="btn-close expande lg">
