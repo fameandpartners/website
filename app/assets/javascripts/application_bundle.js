@@ -457,7 +457,8 @@ var PdpGallery = function (_React$Component) {
     _this.handleLoad = _this.handleLoad.bind(_this);
     _this.handleResize = _this.handleResize.bind(_this);
     _this.calculateOffset = _this.calculateOffset.bind(_this);
-    _this.state = { loaded: {}, margin: {} };
+
+    _this.state = { loaded: {}, margin: {}, zoom: {} };
     return _this;
   }
 
@@ -473,13 +474,22 @@ var PdpGallery = function (_React$Component) {
       window.removeEventListener('resize', this.handleResize);
     }
   }, {
+    key: 'zoomImage',
+    value: function zoomImage(stateId, shouldZoom) {
+      var zoomObj = this.state.zoom;
+      zoomObj[stateId] = shouldZoom;
+      this.setState({ zoom: zoomObj });
+    }
+  }, {
     key: 'handleLoad',
     value: function handleLoad(event) {
       var loadedObj = this.state.loaded;
       var marginObj = this.state.margin;
 
-      loadedObj[event.target.id] = true;
-      marginObj[event.target.id] = this.calculateOffset(event.target);
+      var imageId = event.target.id;
+
+      loadedObj[imageId] = true;
+      marginObj[imageId] = this.calculateOffset(event.target);
 
       this.setState({ loaded: loadedObj, margin: marginObj });
 
@@ -489,12 +499,8 @@ var PdpGallery = function (_React$Component) {
         on: 'grab',
         duration: 50,
         magnify: 1.3,
-        onZoomIn: function onZoomIn() {
-          this.parentNode.classList.add('zoomed-in');
-        },
-        onZoomOut: function onZoomOut() {
-          this.parentNode.classList.remove('zoomed-in');
-        }
+        onZoomIn: this.zoomImage.bind(this, imageId, true),
+        onZoomOut: this.zoomImage.bind(this, imageId, false)
       });
     }
   }, {
@@ -585,6 +591,7 @@ var PdpGallery = function (_React$Component) {
         var id = 'gallery-image-' + index;
         var stateId = 'image-' + image.id;
         var loadedClass = _this3.state.loaded[stateId] ? 'is-loaded' : '';
+        var zoomClass = _this3.state.zoom[stateId] ? 'zoom-in' : '';
         var style = { marginLeft: _this3.state.margin[stateId] + 'px' };
 
         thumbIds.push(id);
@@ -594,7 +601,7 @@ var PdpGallery = function (_React$Component) {
           { className: 'media-wrap-outer', key: index },
           _react2.default.createElement(
             'div',
-            { className: 'media-wrap ' + loadedClass },
+            { className: 'media-wrap ' + loadedClass + ' ' + zoomClass },
             _react2.default.createElement('span', { id: id, className: 'scrollspy-trigger' }),
             _react2.default.createElement('img', { src: image.url, alt: image.alt, id: stateId,
               style: style,

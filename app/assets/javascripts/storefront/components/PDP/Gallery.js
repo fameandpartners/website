@@ -10,7 +10,8 @@ class PdpGallery extends React.Component {
     this.handleLoad = this.handleLoad.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.calculateOffset = this.calculateOffset.bind(this);
-    this.state = { loaded: {}, margin: {} }
+
+    this.state = { loaded: {}, margin: {}, zoom: {} }
   }
 
   componentDidMount() {
@@ -22,12 +23,20 @@ class PdpGallery extends React.Component {
     window.removeEventListener('resize', this.handleResize);
   }
 
+  zoomImage(stateId, shouldZoom) {
+    let zoomObj = this.state.zoom;
+    zoomObj[stateId] = shouldZoom;
+    this.setState({ zoom: zoomObj });
+  }
+
   handleLoad(event) {
     let loadedObj = this.state.loaded;
     let marginObj = this.state.margin;
 
-    loadedObj[event.target.id] = true;
-    marginObj[event.target.id] = this.calculateOffset(event.target);
+    let imageId = event.target.id
+
+    loadedObj[imageId] = true;
+    marginObj[imageId] = this.calculateOffset(event.target);
 
     this.setState({ loaded: loadedObj, margin: marginObj });
 
@@ -37,12 +46,8 @@ class PdpGallery extends React.Component {
       on: 'grab',
       duration: 50,
       magnify: 1.3,
-      onZoomIn: function() {
-        this.parentNode.classList.add('zoomed-in');
-      },
-      onZoomOut: function() {
-        this.parentNode.classList.remove('zoomed-in');
-      }
+      onZoomIn: this.zoomImage.bind(this, imageId, true),
+      onZoomOut: this.zoomImage.bind(this, imageId, false)
     });
   }
 
@@ -123,13 +128,14 @@ class PdpGallery extends React.Component {
       let id = `gallery-image-${index}`;
       let stateId = `image-${image.id}`;
       let loadedClass = this.state.loaded[stateId] ? 'is-loaded' : '';
+      let zoomClass = this.state.zoom[stateId] ? 'zoom-in' : '';
       let style = { marginLeft: `${this.state.margin[stateId]}px` };
 
       thumbIds.push(id);
 
       return (
         <div className="media-wrap-outer" key={index}>
-          <div className={`media-wrap ${loadedClass}`}>
+          <div className={`media-wrap ${loadedClass} ${zoomClass}`}>
             <span id={id} className="scrollspy-trigger"></span>
             <img src={image.url} alt={image.alt} id={stateId}
               style={style}
