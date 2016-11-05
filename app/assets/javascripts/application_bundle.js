@@ -457,7 +457,7 @@ var PdpGallery = function (_React$Component) {
     _this.handleLoad = _this.handleLoad.bind(_this);
     _this.handleResize = _this.handleResize.bind(_this);
     _this.calculateOffset = _this.calculateOffset.bind(_this);
-    _this.state = { loaded: {} };
+    _this.state = { loaded: {}, margin: {} };
     return _this;
   }
 
@@ -476,12 +476,12 @@ var PdpGallery = function (_React$Component) {
     key: 'handleLoad',
     value: function handleLoad(event) {
       var loadedObj = this.state.loaded;
+      var marginObj = this.state.margin;
+
       loadedObj[event.target.id] = true;
+      marginObj[event.target.id] = this.calculateOffset(event.target);
 
-      this.setState({ loaded: loadedObj });
-      // event.target.parentNode.className += ' is-loaded';
-
-      event.target.style.marginLeft = this.calculateOffset(event.target) + 'px';
+      this.setState({ loaded: loadedObj, margin: marginObj });
 
       $(event.target.parentNode).zoom({
         url: event.target.getAttribute('src'),
@@ -582,10 +582,13 @@ var PdpGallery = function (_React$Component) {
       };
 
       var images = galleryImages.map(function (image, index) {
-        var id = "gallery-image-" + index;
+        var id = 'gallery-image-' + index;
         var stateId = 'image-' + image.id;
         var loadedClass = _this3.state.loaded[stateId] ? 'is-loaded' : '';
+        var style = { marginLeft: _this3.state.margin[stateId] + 'px' };
+
         thumbIds.push(id);
+
         return _react2.default.createElement(
           'div',
           { className: 'media-wrap-outer', key: index },
@@ -594,6 +597,7 @@ var PdpGallery = function (_React$Component) {
             { className: 'media-wrap ' + loadedClass },
             _react2.default.createElement('span', { id: id, className: 'scrollspy-trigger' }),
             _react2.default.createElement('img', { src: image.url, alt: image.alt, id: stateId,
+              style: style,
               className: 'js-gallery-image', onLoad: _this3.handleLoad }),
             _react2.default.createElement('span', { className: 'loader' }),
             _react2.default.createElement(
