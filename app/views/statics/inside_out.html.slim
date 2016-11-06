@@ -1,5 +1,90 @@
 = render partial: 'pages/robots'
 
+.inside-out
+
+  .page-title.default
+    .page-title--details
+      h1
+        | INSIDE / OUT
+
+  .container.padding-container
+    section.section-box
+      .row.text-center
+        .col-md-offset-2.col-md-8
+          h2
+            | Enter to win the INSIDE\OUT grand prize: the ultimate celebration of you, inside and out, worth $30,000.
+
+    section.section-box
+      .row.middle-wrapper
+        .woobox-offer data-offer="cf83mj"
+
+      .row.text-center
+        span.text-grey
+          | <em>By clicking Enter, you agree to the Rules and Regulations.</em>
+
+    section.section-box.section-border.section-grand-prize
+      .row
+        .col-xs-12.col-md-5.col-md-offset-1
+          h2
+            | GRAND PRIZE INCLUDES:
+
+        .col-xs-12.col-md-5
+          ul
+            li
+              | An artwork from Dina Broadhurst
+            li
+              | 2 round-trip tickets to TK
+            li
+              | A 2-night stay at TK
+            li
+              | An artwork from Dina Broadhurst
+            li
+              | 2 round-trip tickets to TK
+
+    section.section-box.section-border.section-facebook-share
+      .row
+        .col-xs-12.col-md-5.col-md-offset-1
+          img.img-responsive src='#{image_path("inside-out/facebook-giveaways.jpg")}' alt='Facebook Giveaways'
+
+        .col-xs-12.col-md-5
+          h2
+            | Don’t miss our weekly INSIDE\OUT giveaways on Facebook:
+          ul.text-inside-out
+            li
+              | Every Friday of the holiday season, we’ll be giving away a Fame and Partners dress inspired by a woman that we admire inside and out
+            li
+              | Simply tag a friend in the comments of the post for a chance to
+            li
+              | Like us on Facebook so you don't miss out!
+
+      .row.text-center
+        p.text-grey
+          | <em>Please read the Rules & Regulations for the INSIDE\OUT Sweepstakes</em>
+
+      .row.text-center
+        = link_to shop_social_path
+          span.btn-xs.btn-featured
+            | Shop <span class="copy-highlight">THE COLLECTION</span>
+
+    section.section-box.section-border
+      .row
+        .col-md-8.heading-overlay-wrapper
+          h2.heading-overlay
+            | Giving Back
+      .row
+        .col-md-offset-1.col-md-10.copy-img-side-by-side
+          .item.bordered.item-alt.section-blog
+            .row
+              .col-sm-5.col-sm-offset-1.copy-side
+                .content-wrapper
+                  p.text-inside-out.space-paragraph
+                    | Through dressing up and giving back, we empower ourselves and pay it forward.
+                  p.text-inside-out.space-paragraph
+                    | We’re asking women all over the world to join the movement and <strong>#SLAYITFORWARD</strong>
+
+              .col-sm-6.img-side
+                = image_tag "inside-out/giving-back.jpg", :class => "img-responsive"
+
 javascript:
   (function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -10,21 +95,3 @@ javascript:
     fjs.parentNode.insertBefore(js, fjs);
   }
   (document, 'script', 'woobox-sdk'));
-
-.page-content.landing-page-v2.relative
-
-  .main-hero-wrap.hero-wrap.copy-left.white-text
-    - current_tile_image = "//fakeimg.pl/1522x460/000000/?text=desktop"
-    - current_tile_image_mob = "//fakeimg.pl/640x460/000000/?text=mobile"
-    picture.media-wrap
-      source media="(max-width: 991px)" srcset=image_path(current_tile_image_mob)
-      source media="(min-width: 992px)" srcset=image_path(current_tile_image)
-      = image_tag image_path(current_tile_image),
-            srcset: "#{image_path(current_tile_image_mob)} 991w,
-                    #{image_path(current_tile_image)} 992w",
-                    class: "img-responsive",
-                    alt: ""
-
-  .container
-    .row.middle-wrapper
-      .woobox-offer data-offer="cf83mj"
