@@ -101,7 +101,10 @@ export default function configureStore(initialState) {
           price: 0
         },
         dressVariantId : null,
-        makingOptionId : null
+        makingOption: {
+          id: null,
+          price: 0
+        }
       }
     }
   );

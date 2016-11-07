@@ -41,7 +41,7 @@ class CtaPrice extends React.Component {
       document.getElementById('pdpCartDressVariantId').value = this.props.customize.dressVariantId;
       document.getElementById('pdpCartLength').value    = this.props.customize.length.id;
       document.getElementById('pdpCartVariantId').value = this.props.product.master_id;
-      document.getElementById('pdpCartMakingId').value  = this.props.customize.makingOptionId;
+      document.getElementById('pdpCartMakingId').value  = this.props.customize.makingOption.id;
       $('#pdpDataForCheckout').submit();
     } else {
       // set errors
@@ -75,6 +75,7 @@ class CtaPrice extends React.Component {
       parseFloat(this.props.price)
       + parseFloat(this.props.customize.color.price)
       + parseFloat(this.props.customize.customization.price)
+      + parseFloat(this.props.customize.makingOption.price)
       - parseFloat(discount);
 
     return (

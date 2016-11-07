@@ -12,14 +12,14 @@ class SidePanelFastMaking extends React.Component {
 
   onChange(event) {
     let customize = {};
-    let makingOptionId = null;
+    let makingOption = { price: 0 };
     let makingOptions = this.props.product.available_options.table.making_options;
 
     if (event.target.checked && makingOptions.length) {
-      makingOptionId = makingOptions[0].product_making_option.id;
+      makingOption = makingOptions[0].product_making_option;
     }
 
-    customize.makingOptionId = makingOptionId;
+    customize.makingOption = makingOption;
     this.props.actions.customizeDress(customize);
   }
 

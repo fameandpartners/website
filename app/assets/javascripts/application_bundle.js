@@ -139,7 +139,7 @@ var CtaPrice = function (_React$Component) {
         document.getElementById('pdpCartDressVariantId').value = this.props.customize.dressVariantId;
         document.getElementById('pdpCartLength').value = this.props.customize.length.id;
         document.getElementById('pdpCartVariantId').value = this.props.product.master_id;
-        document.getElementById('pdpCartMakingId').value = this.props.customize.makingOptionId;
+        document.getElementById('pdpCartMakingId').value = this.props.customize.makingOption.id;
         $('#pdpDataForCheckout').submit();
       } else {
         // set errors
@@ -172,7 +172,7 @@ var CtaPrice = function (_React$Component) {
         discount = this.props.discount;
       }
 
-      var PRICE = parseFloat(this.props.price) + parseFloat(this.props.customize.color.price) + parseFloat(this.props.customize.customization.price) - parseFloat(discount);
+      var PRICE = parseFloat(this.props.price) + parseFloat(this.props.customize.color.price) + parseFloat(this.props.customize.customization.price) + parseFloat(this.props.customize.makingOption.price) - parseFloat(discount);
 
       return _react2.default.createElement(
         'div',
@@ -1237,8 +1237,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// TODO: [WIP] This is just a placeholder. Valid logic for displaying the "express making" row properly is needed here.
-
 var SidePanelFastMaking = function (_React$Component) {
   _inherits(SidePanelFastMaking, _React$Component);
 
@@ -1255,14 +1253,14 @@ var SidePanelFastMaking = function (_React$Component) {
     key: 'onChange',
     value: function onChange(event) {
       var customize = {};
-      var makingOptionId = null;
+      var makingOption = { price: 0 };
       var makingOptions = this.props.product.available_options.table.making_options;
 
       if (event.target.checked && makingOptions.length) {
-        makingOptionId = makingOptions[0].product_making_option.id;
+        makingOption = makingOptions[0].product_making_option;
       }
 
-      customize.makingOptionId = makingOptionId;
+      customize.makingOption = makingOption;
       this.props.actions.customizeDress(customize);
     }
   }, {
@@ -1282,7 +1280,12 @@ var SidePanelFastMaking = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'c-card-customize__content__left' },
-                'EXPRESS MAKING (6-9 days)'
+                'EXPRESS MAKING (6-9 days)',
+                _react2.default.createElement(
+                  'div',
+                  { className: 'pdp-side-note' },
+                  'Only available for Recommended Colours'
+                )
               ),
               _react2.default.createElement(
                 'div',
@@ -2789,7 +2792,10 @@ function configureStore(initialState) {
         price: 0
       },
       dressVariantId: null,
-      makingOptionId: null
+      makingOption: {
+        id: null,
+        price: 0
+      }
     }
   });
 
