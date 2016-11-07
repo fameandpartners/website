@@ -281,12 +281,14 @@ Spree::Product.class_eval do
     end
   end
 
+  # TODO: this should be presenter logic, not model
   # at least single size-color can be fast delivered
   def fast_delivery
     @fast_delivery ||= self.variants.any?{|variant| variant.fast_delivery}
   end
   alias_method :fast_delivery?, :fast_delivery
 
+  # TODO: this should be presenter logic, not model
   def fast_making
     @fast_making ||= self.making_options.fast_making.active.exists?
   end

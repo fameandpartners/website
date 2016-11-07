@@ -50,7 +50,6 @@ class Products::DetailsResource
         style_notes:                         product_style_notes,
         render3d_images:                     product_render3d_images,
         size_chart:                          product.size_chart,
-        fast_making:                         product.fast_making,
         standard_days_for_making:            product.standard_days_for_making,
         customised_days_for_making:          product.customised_days_for_making,
         default_standard_days_for_making:    product.default_standard_days_for_making,
