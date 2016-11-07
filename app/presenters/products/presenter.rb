@@ -12,7 +12,7 @@ module Products
                   :default_standard_days_for_making, :default_customised_days_for_making,
                   :height_customisable, :fast_delivery, :render3d_images
 
-    attr_writer :meta_description
+    attr_writer :fast_making, :meta_description
 
     def initialize(opts)
       opts.each do |k, v|
@@ -158,9 +158,7 @@ module Products
 
     def fast_making
       return false if fast_making_disabled?
-
-      spree_product = Spree::Product.find(id)
-      Rails.cache.fetch(['product-presenter', 'fast-making', spree_product]) { spree_product.fast_making? }
+      @fast_making
     end
 
     def default_color
