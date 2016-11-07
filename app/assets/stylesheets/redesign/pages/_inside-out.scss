@@ -2,6 +2,10 @@
 -------------------------------------------------------*/
 .inside-out {
 
+  .page-title {
+    background-color: $c-neutral-black;
+  }
+
   h2 {
     font-size: 4rem;
     line-height: 1.3;
@@ -9,6 +13,7 @@
 
   ul {
     padding-left: 20px;
+    margin-bottom: 30px;
   }
 
   .section-border {
@@ -68,6 +73,27 @@
 
   }
 
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    .section-box {
+      text-align: center;
+    }
+
+    .section-giving-back {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    ul {
+      list-style-position: inside;
+    }
+
+    .img-fb-gv {
+      margin-top: 40px;
+    }
+
+  }
+
   // START - desktop
   @media (min-width: $bootstrap-md-width) {
     background-color: $c-neutral-black;
@@ -89,7 +115,7 @@
     }
 
     .padding-container {
-      padding: 0 100px;
+      padding: 0 100px 60px;
     }
 
   }

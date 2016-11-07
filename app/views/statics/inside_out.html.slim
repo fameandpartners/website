@@ -1,5 +1,15 @@
 = render partial: 'pages/robots'
 
+javascript:
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
 .inside-out
 
   .page-title.default
@@ -41,10 +51,13 @@
             li
               | 2 round-trip tickets to TK
 
+        .hidden-md.hidden-lg
+          img.img-responsive src='#{image_path("inside-out/grand-prize-mobile.jpg")}' alt='Grand Prize'
+
     section.section-box.section-border.section-facebook-share
       .row
-        .col-xs-12.col-md-5.col-md-offset-1
-          img.img-responsive src='#{image_path("inside-out/facebook-giveaways.jpg")}' alt='Facebook Giveaways'
+        .col-md-5.col-md-offset-1.hidden-xs.hidden-sm
+          img.img-responsive src='#{image_path("inside-out/fb-giveaways.jpg")}' alt='Facebook Giveaways'
 
         .col-xs-12.col-md-5
           h2
@@ -57,16 +70,22 @@
             li
               | Like us on Facebook so you don't miss out!
 
+          .fb-like data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="large" data-show-faces="true" data-share="false" data-width="700"
+
+      .row.hidden-md.hidden-lg
+        img.img-responsive.img-fb-gv src='#{image_path("inside-out/fb-giveaways-mobile.jpg")}' alt='Facebook Giveaways'
+
       .row.text-center
-        p.text-grey
-          | <em>Please read the Rules & Regulations for the INSIDE\OUT Sweepstakes</em>
+        .col-xs-10.col-xs-offset-1
+          p.text-grey
+            | <em>Please read the Rules & Regulations for the INSIDE\OUT Sweepstakes</em>
 
       .row.text-center
         = link_to shop_social_path
           span.btn-xs.btn-featured
             | Shop <span class="copy-highlight">THE COLLECTION</span>
 
-    section.section-box.section-border
+    section.section-box.section-border.section-giving-back
       .row
         .col-md-8.heading-overlay-wrapper
           h2.heading-overlay
@@ -83,7 +102,7 @@
                     | We’re asking women all over the world to join the movement and <strong>#SLAYITFORWARD</strong>
 
               .col-sm-6.img-side
-                = image_tag "inside-out/giving-back.jpg", :class => "img-responsive"
+                = image_tag "inside-out/giving-back-dk.jpg", :class => "img-responsive"
 
 javascript:
   (function (d, s, id) {
