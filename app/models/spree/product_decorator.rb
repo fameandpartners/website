@@ -283,14 +283,12 @@ Spree::Product.class_eval do
 
   # at least single size-color can be fast delivered
   def fast_delivery
-    return @fast_delivery if instance_variable_defined?('@fast_delivery')
-    @fast_delivery = self.variants.any?{|variant| variant.fast_delivery}
+    @fast_delivery ||= self.variants.any?{|variant| variant.fast_delivery}
   end
   alias_method :fast_delivery?, :fast_delivery
 
   def fast_making
-    return @fast_making if instance_variable_defined?('@fast_making')
-    @fast_making = self.making_options.fast_making.active.exists?
+    @fast_making ||= self.making_options.fast_making.active.exists?
   end
   alias_method :fast_making?, :fast_making
 
