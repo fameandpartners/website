@@ -100,6 +100,24 @@ class PdpGallery extends React.Component {
       galleryImages = photos.filter((image) => {
         return image.color_id === this.props.customize.color.id;
       });
+
+      // TODO: Alexey Bobyrev 08/11/16
+      // Rewrite filtering logic to avoid empty gallery!
+
+      // NOTE: Alexey Bobyrev 08/11/16
+      // Fallback to non-render3d product w/o images for custom colors
+      if (!galleryImages.length) {
+        galleryImages = photos.filter(image => {
+          return this.props.default_image.table.color_id === image.color_id
+        });
+      } 
+
+      // NOTE: Alexey Bobyrev 08/11/16
+      // If there is no images to default product color then we apply all available photo images
+      if (!galleryImages.length) {
+        galleryImages = photos;
+      }
+
     } else {
       galleryImages = render3dImages.filter((image) => {
         return image.color_id === this.props.customize.color.id
