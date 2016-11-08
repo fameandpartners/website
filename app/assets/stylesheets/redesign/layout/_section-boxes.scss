@@ -245,6 +245,40 @@ $top-overlay-margin-top: 37px;
 
 }
 
+.section-box-alt {
+  margin: 0;
+
+  .item {
+
+    &.bordered {
+      padding: 15px;
+      border-color: $c-neutral-4;
+    }
+
+    .item-copy {
+      padding: 0;
+    }
+
+    .heading {
+      padding: 10px 0 5px;
+      font-size: 1.4em;
+    }
+
+    p.summary {
+      font-size: 1em;
+      line-height: 125%;
+      margin-bottom: 10px;
+    }
+
+    .copy-highlight,
+    .icon {
+      font-size: 0.9rem;
+    }
+
+  }
+
+}
+
 .section-bottom {
   margin-top: 60px;
 }
