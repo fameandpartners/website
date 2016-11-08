@@ -73,6 +73,8 @@ form.hide-fully#pdpDataForWishlist
 
               div
                 h1.heading = @product.name
+                - if @product.product_type.present?
+                  h2.heading = @product.product_type
                 - if @product.name.downcase.include?('skirt')
                   p (Skirt Only)
 
