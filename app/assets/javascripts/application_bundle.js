@@ -570,6 +570,23 @@ var PdpGallery = function (_React$Component) {
         });
       }
 
+      // TODO: Alexey Bobyrev 08/11/16
+      // Rewrite filtering logic to avoid empty gallery!
+
+      // NOTE: Alexey Bobyrev 08/11/16
+      // Fallback to non-render3d product w/o images for custom colors
+      if (!galleryImages.length) {
+        galleryImages = photos.filter(function (image) {
+          return _this3.props.product.default_image.table.color_id === image.color_id;
+        });
+      }
+
+      // NOTE: Alexey Bobyrev 08/11/16
+      // If there is no images to default product color then we apply all available photo images
+      if (!galleryImages.length) {
+        galleryImages = photos;
+      }
+
       var SETTINGS = {
         infinite: true,
         arrows: false,
