@@ -577,7 +577,7 @@ var PdpGallery = function (_React$Component) {
       // Fallback to non-render3d product w/o images for custom colors
       if (!galleryImages.length) {
         galleryImages = photos.filter(function (image) {
-          return _this3.props.default_image.table.color_id === image.color_id;
+          return _this3.props.product.default_image.table.color_id === image.color_id;
         });
       }
 
