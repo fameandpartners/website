@@ -4,9 +4,9 @@ class CreateInsideOutPage < ActiveRecord::Migration
     {
       path:             '/inside-out',
       template_path:    '/statics/inside_out',
-      heading:          'Inside Out [TODO]',
-      title:            'Inside Out [TODO]',
-      meta_description: 'Inside Out [TODO]',
+      heading:          'Inside Out',
+      title:            'The INSIDE\OUT Sweepstakes',
+      meta_description: 'Enter to win our holiday giveaway: the ultimate celebration of you, inside and out, worth $30,000.',
     }
   end
 
