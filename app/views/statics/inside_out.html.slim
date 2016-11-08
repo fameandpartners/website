@@ -14,7 +14,7 @@ javascript:
 
   .page-title.default
     .page-title--details
-      h1
+      h1.white-text
         | INSIDE / OUT
 
   .container.padding-container
@@ -52,12 +52,12 @@ javascript:
               | 2 round-trip tickets to TK
 
         .hidden-md.hidden-lg
-          img.img-responsive src='#{image_path("inside-out/grand-prize-mobile.jpg")}' alt='Grand Prize'
+          = image_tag "inside-out/grand-prize-mobile.jpg", :class => "img-responsive"
 
     section.section-box.section-border.section-facebook-share
       .row
         .col-md-5.col-md-offset-1.hidden-xs.hidden-sm
-          img.img-responsive src='#{image_path("inside-out/fb-giveaways.jpg")}' alt='Facebook Giveaways'
+          = image_tag "inside-out/fb-giveaways.jpg", :class => "img-responsive"
 
         .col-xs-12.col-md-5
           h2
@@ -70,10 +70,12 @@ javascript:
             li
               | Like us on Facebook so you don't miss out!
 
-          .fb-like data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="large" data-show-faces="true" data-share="false" data-width="700"
+          .hidden-xs.hidden-sm
+            .fb-like data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false" data-width="700"
 
-      .row.hidden-md.hidden-lg
-        img.img-responsive.img-fb-gv src='#{image_path("inside-out/fb-giveaways-mobile.jpg")}' alt='Facebook Giveaways'
+      .row.hidden-md.hidden-lg.mobile-fb-share
+        .fb-like data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false" data-width="700"
+        = image_tag "inside-out/fb-giveaways-mobile.jpg", :class => "img-responsive img-fb-gv"
 
       .row.text-center
         .col-xs-10.col-xs-offset-1
