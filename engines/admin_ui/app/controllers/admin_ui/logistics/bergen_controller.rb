@@ -2,7 +2,7 @@ module AdminUi
   module Logistics
     class BergenController < ::AdminUi::ApplicationController
       def index
-        @collection = BergenProcessGrid.new(params[:bergen_process_grid])
+        @collection = ::Logistics::BergenProcessGrid.new(params[:logistics_bergen_process_grid])
         respond_to do |f|
           f.html do
             @collection.scope { |scope| scope.page(params[:page]) }
