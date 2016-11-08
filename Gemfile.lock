@@ -707,6 +707,9 @@ GEM
     rspec-retry (0.4.5)
       rspec-core
     rspec-support (3.2.2)
+    rspec_junit_formatter (0.2.2)
+      builder (< 4)
+      rspec-core (>= 2, < 4, != 2.12.0)
     ruby-ole (1.2.11.8)
     ruby-progressbar (1.7.5)
     rubyzip (1.1.7)
@@ -918,6 +921,7 @@ DEPENDENCIES
   rspec-collection_matchers
   rspec-rails (~> 3.2)
   rspec-retry
+  rspec_junit_formatter (= 0.2.2)
   ruby-progressbar
   rubyzip (~> 1.1.7)
   sass-rails (~> 3.2.3)
