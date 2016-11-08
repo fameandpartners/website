@@ -32,7 +32,7 @@ class SidePanelFastMaking extends React.Component {
             <label htmlFor="fast-making">
             <div className="c-card-customize__content__left">
               EXPRESS MAKING (6-9 days)
-              <div className="pdp-side-note">Only available for Recommended Colours</div>
+              <div className="pdp-side-note">Only available for Recommended Colors</div>
             </div>
             <div className="c-card-customize__content__right">$30</div>
             </label>
