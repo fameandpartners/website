@@ -57,6 +57,13 @@ module BatchUpload
         it { expect(error).to be_present }
         it { expect(error[:message]).to eq "File name is invalid and can't be parsed: 'this-is_test'" }
       end
+
+      # NOTE: Alexey Bobyrev 08/11/16
+      # Yes, this name is incorrect. It contains cyrillic letter here - С1
+      context 'C161009-PEACH-С1.jpg' do
+        it { expect(error).to be_present }
+        it { expect(error[:message]).to eq "File cannot be parsed due to cyrrilic symbols on it - 'C161009-PEACH-С1.jpg':14" }
+      end
     end
 
   end

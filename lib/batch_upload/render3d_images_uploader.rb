@@ -104,24 +104,40 @@ module BatchUpload
       end
     end
 
+    def check_for_cyrillic_symbols(file_name)
+      file_name.index(/\p{Cyrillic}+/)
+    end
+
     def parse_filename(file_name)
-      pattern = /(?<sku>\w+)[-,_](?<color>[\S\s]+)[-,_](?<customisation>\S+)\.\w+$/
-      data = file_name.match(pattern)
+      cyrillic_index = check_for_cyrillic_symbols(file_name)
 
-      if data.nil?
-        error = {
-          kind: :error,
-          message: "File name is invalid and can't be parsed: '#{file_name}'"
-        }
+      data_hash = \
+        if cyrillic_index.present?
+          error = {
+            kind: :error,
+            message: "File cannot be parsed due to cyrrilic symbols on it - '#{file_name}':#{cyrillic_index}"
+          }
 
-        data = {}
-      end
+          {}
+        else
+          pattern = /(?<sku>\w+)[-,_](?<color>[\S\s]+)[-,_](?<customisation>\S+)\.\w+$/
+          data = file_name.match(pattern)
 
-      data_hash = {
-        sku: data[:sku].to_s.parameterize,
-        color: data[:color].to_s.parameterize,
-        customisation: data[:customisation].to_s.parameterize
-      }
+          if data.nil?
+            error = {
+              kind: :error,
+              message: "File name is invalid and can't be parsed: '#{file_name}'"
+            }
+
+            data = {}
+          end
+
+          {
+            sku: data[:sku].to_s.parameterize,
+            color: data[:color].to_s.parameterize,
+            customisation: data[:customisation].to_s.parameterize
+          }
+        end
 
       [data_hash, error]
     end
