@@ -115,7 +115,7 @@ class PdpGallery extends React.Component {
     // Fallback to non-render3d product w/o images for custom colors
     if (!galleryImages.length) {
       galleryImages = photos.filter(image => {
-        return this.props.default_image.table.color_id === image.color_id
+        return this.props.product.default_image.table.color_id === image.color_id
       });
     } 
 
