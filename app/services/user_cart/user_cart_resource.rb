@@ -15,7 +15,7 @@ class  UserCart::UserCartResource
       display_item_total: order.display_item_total,
       display_shipment_total: order_display_shipment_total,
       display_promotion_total: order.display_promotion_total,
-      display_total: order_display_total,
+      display_total: order.display_total,
       taxes: serialize_taxes,
       site_version: site_version,
       order_number: order.number
@@ -37,12 +37,6 @@ class  UserCart::UserCartResource
 
     def order_shipment_amount
       order.try(:shipment).try(:amount).to_f
-    end
-
-    def order_display_total
-      total = order.total + order_shipment_amount
-
-      Spree::Money.new(total, { currency: order.currency })
     end
 
     def cart_products
