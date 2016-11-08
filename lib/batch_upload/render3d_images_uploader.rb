@@ -15,24 +15,18 @@ module BatchUpload
               errors = []
               file_name = File.basename(file_path)
 
-              # 4B141-PLUM-C1.jpg
-              # 4B141_PLUM-C3.jpg
-              # 4B141-RED-D.jpg
-              # 4B141-SAGE-GREEN-C2.jpg
+              # NOTE: Alexey Bobyrev 08/11/16
+              # For name examples - take a look on
+              # "spec/lib/batch_upload/render3d_images_uploader_spec.rb"
 
-              match_data = \
-                file_name.match(/(?<sku>\w+)[-,_](?<color>\S+)[-,_](?<customisation>\w+).\w+$/)
+              match_data, parse_error = parse_filename(file_name)
 
-              if match_data.nil?
-                errors.push({
-                  kind: :error,
-                  message: "File name is invalid: #{file_name}"
-                })
-                match_data = {}
+              if parse_error.present?
+                errors.push(parse_error)
               end
 
-              color_name = match_data[:color].to_s.downcase
-              customisation_name = match_data[:customisation].to_s.downcase
+              color_name = match_data[:color]
+              customisation_name = match_data[:customisation]
 
               if color_name.present?
                 debug "Search color by name"
@@ -42,7 +36,7 @@ module BatchUpload
                 if color_value.blank?
                   errors.push({
                     kind: :error,
-                    message: "Color not found (#{color_name}) #{file_name}"
+                    message: "Color not found (#{color_name}) '#{file_name}'"
                   })
                 end
               end
@@ -65,7 +59,7 @@ module BatchUpload
                 if customisation_value_id.nil?
                   errors.push({
                     kind: :warn,
-                    message: "Customisation not found (#{customisation_name}) #{file_name}"
+                    message: "Customisation not found (#{customisation_name}) '#{file_name}'"
                   })
                 end
               end
@@ -108,6 +102,28 @@ module BatchUpload
         end
 
       end
+    end
+
+    def parse_filename(file_name)
+      pattern = /(?<sku>\w+)[-,_](?<color>[\S\s]+)[-,_](?<customisation>\S+)\.\w+$/
+      data = file_name.match(pattern)
+
+      if data.nil?
+        error = {
+          kind: :error,
+          message: "File name is invalid and can't be parsed: '#{file_name}'"
+        }
+
+        data = {}
+      end
+
+      data_hash = {
+        sku: data[:sku].to_s.parameterize,
+        color: data[:color].to_s.parameterize,
+        customisation: data[:customisation].to_s.parameterize
+      }
+
+      [data_hash, error]
     end
 
     def color_for_name(color_name)
