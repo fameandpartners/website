@@ -1,3 +1,4 @@
+# @deprecated Shippo has been deprecated (WEBSITE-617). 8th November 2016
 module Shippo
   class Label
 
