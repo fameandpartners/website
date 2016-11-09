@@ -2,9 +2,7 @@ require 'spec_helper'
 
 module BatchUpload
   describe Render3dImagesUploader do
-    let(:uploader) { described_class.new '' }
-
-    let(:parts)    { uploader.parse_filename(file_name) }
+    let(:parts)    { described_class::FileParser.new(file_name: file_name).values }
     let(:data)     { parts.first }
     let(:error)    { parts.last }
 

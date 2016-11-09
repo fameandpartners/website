@@ -19,7 +19,7 @@ module BatchUpload
               # For name examples - take a look on
               # "spec/lib/batch_upload/render3d_images_uploader_spec.rb"
 
-              match_data, parse_error = parse_filename(file_name)
+              match_data, parse_error = self.class::FileParser.new(file_name: file_name).values
 
               if parse_error.present?
                 errors.push(parse_error)
@@ -76,8 +76,10 @@ module BatchUpload
                 next
               end
 
-              image = Render3d::Image.new.tap do |img|
+              options = { product_id: product.id, color_value_id: color_value.id, customisation_value_id: customisation_value_id }
+              image = find_or_initialize_render3d_image(options) do |img|
                 img.product = product
+
                 img.color_value = color_value
                 img.customisation_value_id = customisation_value_id
 
@@ -104,42 +106,64 @@ module BatchUpload
       end
     end
 
-    def check_for_cyrillic_symbols(file_name)
-      file_name.index(/\p{Cyrillic}+/)
-    end
+    class FileParser
+      attr_reader :file_name, :data, :error
 
-    def parse_filename(file_name)
-      cyrillic_index = check_for_cyrillic_symbols(file_name)
+      def initialize(file_name: file_name)
+        @file_name = file_name
+        parse
+      end
 
-      data_hash = \
+      def values
+        [data, error]
+      end
+
+      private def parse
+        cyrillic_index = check_for_cyrillic_symbols
+
         if cyrillic_index.present?
-          error = {
+          @error = {
             kind: :error,
             message: "File cannot be parsed due to cyrrilic symbols on it - '#{file_name}':#{cyrillic_index}"
           }
 
-          {}
+          @data = {}
         else
           pattern = /(?<sku>\w+)[-,_](?<color>[\S\s]+)[-,_](?<customisation>\S+)\.\w+$/
           data = file_name.match(pattern)
 
           if data.nil?
-            error = {
+            @error = {
               kind: :error,
               message: "File name is invalid and can't be parsed: '#{file_name}'"
             }
 
-            data = {}
+            @data = {}
+          else
+            @data = {
+              sku: data[:sku].to_s.parameterize,
+              color: data[:color].to_s.parameterize,
+              customisation: data[:customisation].to_s.parameterize
+            }
           end
-
-          {
-            sku: data[:sku].to_s.parameterize,
-            color: data[:color].to_s.parameterize,
-            customisation: data[:customisation].to_s.parameterize
-          }
         end
+      end
 
-      [data_hash, error]
+      private def check_for_cyrillic_symbols
+        file_name.index(/\p{Cyrillic}+/)
+      end
+
+    end
+
+    def find_or_initialize_render3d_image(options, &block)
+      image_class = Render3d::Image
+      image = image_class.where(options).first || image_class.new
+
+      if block_given?
+        image.tap(&block)
+      else
+        image
+      end
     end
 
     def color_for_name(color_name)
