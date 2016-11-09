@@ -1,0 +1,37 @@
+- content_for :page_title do
+  | Next Logistics 3PL Processes (Australia Only)
+
+= render 'admin_ui/grid/grid_collection_filters', collection_url: logistics_next_index_path
+
+.ibox.collapsed
+  .ibox-title
+    a.collapse-link
+      h5 How it works?
+      .ibox-tools
+        i.fa.fa-chevron-up
+  .ibox-content
+    h2 Proccess
+    p
+      ' Next Logistics processes are executed in batches and steps. Each time an Australian return request is created, the process will be automatically triggered.
+      ' The following steps will be executed from time to time:
+      ul
+        li Each 30 minutes: upload pending requests to their FTP
+        li Each 3 hours: verify order receival
+
+      ' If anything fails, the proccess will be marked as "not processed" (represented as:
+      i.fa.fa-times.fa-lg.text-danger
+      ' ) and it won't be executed again, unless it's retried.
+    small
+      ' Remember, failed processes are not executed! They <b>MUST</b> be retried!
+
+    h2 Retrying
+    p
+      ' If a process fails, you can retry by clicking at the
+      span.btn.btn-xs.btn-success Retry
+      '  button
+
+    p
+      span.text-info Keep in mind:
+      '  retrying a failed process can generate multiple file uploads or emails!
+
+= render 'admin_ui/grid/paginated_collection_grid'

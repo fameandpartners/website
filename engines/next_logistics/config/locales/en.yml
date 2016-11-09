@@ -1,0 +1,4 @@
+en:
+  next_logistics:
+    retry_message: 'This could register new returns for Next Logistics or trigger emails. Do you want to retry?'
+    retrying_message: 'Process %{id} was marked for retry.'
