@@ -165,11 +165,19 @@ var CtaPrice = function (_React$Component) {
       var _this2 = this;
 
       var discount = 0;
+      var variantFastMakingDisabled = false;
 
       if (this.props.discount.hasOwnProperty('table')) {
         discount = this.props.discount.table.amount;
       } else {
         discount = this.props.discount;
+      }
+
+      // Disable FastMaking if this variant is a custom color
+      if (!this.props.flags.getitquick_unavailable && this.props.product.fast_making && this.props.customize.color.price > 0) {
+
+        variantFastMakingDisabled = true;
+        document.getElementById('fast-making').checked = false;
       }
 
       var PRICE = parseFloat(this.props.price) + parseFloat(this.props.customize.color.price) + parseFloat(this.props.customize.customization.price) + parseFloat(this.props.customize.makingOption.price) - parseFloat(discount);
@@ -205,7 +213,7 @@ var CtaPrice = function (_React$Component) {
           }
         }(),
         function () {
-          if (_this2.props.customize.size.id && _this2.props.customize.color.id && _this2.props.customize.length.id && !_this2.state.sending) {
+          if (_this2.props.customize.size.id && _this2.props.customize.color.id && _this2.props.customize.length.id && !variantFastMakingDisabled && !_this2.state.sending) {
             return _react2.default.createElement(
               'a',
               { href: 'javascript:;', onClick: _this2.addToBag, className: 'btn btn-black btn-lrg' },
@@ -1284,7 +1292,7 @@ var SidePanelFastMaking = function (_React$Component) {
                 _react2.default.createElement(
                   'div',
                   { className: 'pdp-side-note' },
-                  'Only available for Recommended Colours'
+                  'Only available for Recommended Colors'
                 )
               ),
               _react2.default.createElement(
