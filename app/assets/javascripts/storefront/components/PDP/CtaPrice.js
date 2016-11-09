@@ -78,7 +78,8 @@ class CtaPrice extends React.Component {
         && this.props.customize.color.price > 0) {
 
       variantFastMakingEnabled = false;
-      document.getElementById('fast-making').checked = variantFastMakingEnabled;
+      this.props.actions.changeFastMakingState({ isChecked: variantFastMakingEnabled });
+      // document.getElementById('fast-making').checked = variantFastMakingEnabled;
     }
 
     const PRICE =

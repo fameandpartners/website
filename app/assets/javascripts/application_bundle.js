@@ -55,8 +55,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.customizeDress = customizeDress;
+exports.changeFastMakingState = changeFastMakingState;
 function customizeDress(customize) {
   return { type: 'CUSTOMIZE_DRESS', customize: customize };
+}
+function changeFastMakingState(isChecked) {
+  return { type: 'CHANGE_FAST_MAKING_STATE', isChecked: isChecked };
 }
 
 },{}],3:[function(require,module,exports){
@@ -177,7 +181,8 @@ var CtaPrice = function (_React$Component) {
       if (this.props.flags.fastMaking && this.props.product.fast_making && this.props.customize.color.price > 0) {
 
         variantFastMakingEnabled = false;
-        document.getElementById('fast-making').checked = variantFastMakingEnabled;
+        this.props.actions.changeFastMakingState({ isChecked: variantFastMakingEnabled });
+        // document.getElementById('fast-making').checked = variantFastMakingEnabled;
       }
 
       var PRICE = parseFloat(this.props.price) + parseFloat(this.props.customize.color.price) + parseFloat(this.props.customize.customization.price) + parseFloat(this.props.customize.makingOption.price) - parseFloat(discount);
@@ -1257,6 +1262,7 @@ var SidePanelFastMaking = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (SidePanelFastMaking.__proto__ || Object.getPrototypeOf(SidePanelFastMaking)).call(this, props, context));
 
     _this.onChange = _this.onChange.bind(_this);
+    _this.onClick = _this.onClick.bind(_this);
     return _this;
   }
 
@@ -1268,11 +1274,18 @@ var SidePanelFastMaking = function (_React$Component) {
       var makingOptions = this.props.product.available_options.table.making_options;
 
       if (event.target.checked && makingOptions.length) {
-        makingOption = makingOptions[0].product_making_option;
+        makingOption = { price: 21.0 } || makingOptions[0].product_making_option;
       }
 
       customize.makingOption = makingOption;
       this.props.actions.customizeDress(customize);
+    }
+  }, {
+    key: 'onClick',
+    value: function onClick(event) {
+      var fastMakingState = {};
+      fastMakingState.isChecked = !this.props.fastMakingState.isChecked;
+      this.props.actions.changeFastMakingState(fastMakingState);
     }
   }, {
     key: 'render',
@@ -1284,7 +1297,7 @@ var SidePanelFastMaking = function (_React$Component) {
           _react2.default.createElement(
             'a',
             { href: 'javascript:;' },
-            _react2.default.createElement('input', { type: 'checkbox', id: 'fast-making', onChange: this.onChange }),
+            _react2.default.createElement('input', { type: 'checkbox', id: 'fast-making', onChange: this.onChange, onClick: this.onClick, checked: this.props.fastMakingState.isChecked, defaultChecked: this.props.fastMakingState.isChecked }),
             _react2.default.createElement(
               'label',
               { htmlFor: 'fast-making' },
@@ -1322,7 +1335,8 @@ SidePanelFastMaking.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     product: state.product,
-    flags: state.flags
+    flags: state.flags,
+    fastMakingState: state.fastMakingState
   };
 }
 
@@ -2621,7 +2635,8 @@ var rootReducer = (0, _redux.combineReducers)({
   skirts: _pdpReducers.skirtChartReducer,
   customize: _pdpReducers.customizeReducer,
   siteVersion: _pdpReducers.siteVersionReducer,
-  flags: _pdpReducers.flagsReducer
+  flags: _pdpReducers.flagsReducer,
+  fastMakingState: _pdpReducers.changeFastMakingStateReducer
 });
 
 exports.default = rootReducer;
@@ -2636,6 +2651,7 @@ Object.defineProperty(exports, "__esModule", {
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 exports.customizeReducer = customizeReducer;
+exports.changeFastMakingStateReducer = changeFastMakingStateReducer;
 exports.productReducer = productReducer;
 exports.imagesReducer = imagesReducer;
 exports.sizeChartReducer = sizeChartReducer;
@@ -2652,6 +2668,18 @@ function customizeReducer() {
   switch (action.type) {
     case 'CUSTOMIZE_DRESS':
       return _extends({}, state, action.customize);
+    default:
+      return state;
+  }
+}
+
+function changeFastMakingStateReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  switch (action.type) {
+    case 'CHANGE_FAST_MAKING_STATE':
+      return _extends({}, state, action.isChecked);
     default:
       return state;
   }
