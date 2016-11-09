@@ -17,6 +17,7 @@ module Logistics
                                                                  personalization: [:color, :size]
                                                                ]
                                        ])
+        .order('created_at DESC')
     end
 
     # Filters
