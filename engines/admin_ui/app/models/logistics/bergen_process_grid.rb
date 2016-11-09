@@ -9,14 +9,14 @@ module Logistics
     scope do
       Bergen::Operations::ReturnItemProcess
         .includes(return_request_item: [
-                                         :item_return,
-                                         order_return_request: [:order],
-                                         line_item:            [
-                                                                 :order,
-                                                                 :variant,
-                                                                 personalization: [:color, :size]
-                                                               ]
-                                       ])
+          :item_return,
+          order_return_request: [:order],
+          line_item: [
+            :order,
+            :variant,
+            personalization: [:color, :size]
+          ]
+        ])
         .order('created_at DESC')
     end
 
