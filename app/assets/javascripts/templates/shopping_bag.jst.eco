@@ -32,7 +32,7 @@
             <% if getSiteVersionPrefix() == '/au': %>
               <span class="link-underline-lighter">Free shipping</span> to Australia within 7 - 10 days
             <% else: %>
-              <span class="link-underline-lighter">Free shipping</span> to USA, Canada and the UK within 7 - 10 days
+              <span class="link-underline-lighter">Free shipping</span> to USA, Canada and the UK within 7 - 10 business days
             <% end %>
           </p>
           <p>
