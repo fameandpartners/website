@@ -165,7 +165,7 @@ var CtaPrice = function (_React$Component) {
       var _this2 = this;
 
       var discount = 0;
-      var variantFastMakingDisabled = false;
+      var variantFastMakingEnabled = true;
 
       if (this.props.discount.hasOwnProperty('table')) {
         discount = this.props.discount.table.amount;
@@ -174,10 +174,10 @@ var CtaPrice = function (_React$Component) {
       }
 
       // Disable FastMaking if this variant is a custom color
-      if (!this.props.flags.getitquick_unavailable && this.props.product.fast_making && this.props.customize.color.price > 0) {
+      if (this.props.flags.fastMaking && this.props.product.fast_making && this.props.customize.color.price > 0) {
 
-        variantFastMakingDisabled = true;
-        document.getElementById('fast-making').checked = false;
+        variantFastMakingEnabled = false;
+        document.getElementById('fast-making').checked = variantFastMakingEnabled;
       }
 
       var PRICE = parseFloat(this.props.price) + parseFloat(this.props.customize.color.price) + parseFloat(this.props.customize.customization.price) + parseFloat(this.props.customize.makingOption.price) - parseFloat(discount);
@@ -213,7 +213,7 @@ var CtaPrice = function (_React$Component) {
           }
         }(),
         function () {
-          if (_this2.props.customize.size.id && _this2.props.customize.color.id && _this2.props.customize.length.id && !variantFastMakingDisabled && !_this2.state.sending) {
+          if (_this2.props.customize.size.id && _this2.props.customize.color.id && _this2.props.customize.length.id && variantFastMakingEnabled && !_this2.state.sending) {
             return _react2.default.createElement(
               'a',
               { href: 'javascript:;', onClick: _this2.addToBag, className: 'btn btn-black btn-lrg' },

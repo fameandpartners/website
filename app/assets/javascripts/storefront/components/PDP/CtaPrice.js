@@ -64,7 +64,7 @@ class CtaPrice extends React.Component {
 
   render() {
     let discount = 0;
-    let variantFastMakingDisabled = false;
+    let variantFastMakingEnabled = true;
 
     if (this.props.discount.hasOwnProperty('table')) {
       discount = this.props.discount.table.amount;
@@ -73,12 +73,12 @@ class CtaPrice extends React.Component {
     }
 
     // Disable FastMaking if this variant is a custom color
-    if (!this.props.flags.getitquick_unavailable
+    if (this.props.flags.fastMaking
         && this.props.product.fast_making
         && this.props.customize.color.price > 0) {
 
-      variantFastMakingDisabled = true;
-      document.getElementById('fast-making').checked = false;
+      variantFastMakingEnabled = false;
+      document.getElementById('fast-making').checked = variantFastMakingEnabled;
     }
 
     const PRICE =
@@ -106,7 +106,7 @@ class CtaPrice extends React.Component {
             if(this.props.customize.size.id
               && this.props.customize.color.id
               && this.props.customize.length.id
-              && !variantFastMakingDisabled
+              && variantFastMakingEnabled
               && !this.state.sending) {
               return (
                 <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">

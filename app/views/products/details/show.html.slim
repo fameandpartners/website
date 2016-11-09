@@ -21,7 +21,7 @@ ruby:
       images: #{ @product.all_images.to_json },
       sizeChart: #{ @product.size_chart_data.to_json },
       siteVersion: #{ @current_site_version.name.to_json },
-      flags: {afterpay: #{ Features.active?(:afterpay) }, getitquick_unavailable: #{ Features.active?(:getitquick_unavailable) } }
+      flags: {afterpay: #{ Features.active?(:afterpay) }, fastMaking: #{ !Features.active?(:getitquick_unavailable) } }
     };"
 
   init_product_details_page = "page.initProductDetailsPage();"
