@@ -1274,7 +1274,7 @@ var SidePanelFastMaking = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      if (this.props.product.fast_making) {
+      if (this.props.flags.fastMaking && this.props.product.fast_making) {
         return _react2.default.createElement(
           'div',
           { className: 'pdp-side-container pdp-side-container-fast-making checkbox-inline custom-form-element-thin form-small' },
@@ -1318,7 +1318,8 @@ SidePanelFastMaking.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    product: state.product
+    product: state.product,
+    flags: state.flags
   };
 }
 

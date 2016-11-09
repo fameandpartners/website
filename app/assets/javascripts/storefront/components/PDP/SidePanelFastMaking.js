@@ -24,7 +24,8 @@ class SidePanelFastMaking extends React.Component {
   }
 
   render() {
-    if (this.props.product.fast_making) {
+    if (this.props.flags.fastMaking
+        && this.props.product.fast_making) {
       return (
         <div className="pdp-side-container pdp-side-container-fast-making checkbox-inline custom-form-element-thin form-small">
           <a href="javascript:;">
@@ -53,7 +54,8 @@ SidePanelFastMaking.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    product: state.product
+    product: state.product,
+    flags: state.flags
   };
 }
 
