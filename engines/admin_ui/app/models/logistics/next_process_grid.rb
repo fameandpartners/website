@@ -6,21 +6,60 @@ module Logistics
 
     self.default_column_options = { order: false }
 
-    class GridItems
+    class GridProcess
+      extend Forwardable
+
       attr_reader :process
+      def_delegators :process,
+                     :aasm_state,
+                     :failed,
+                     :id,
+                     :record_number,
+                     :created_at
 
       def initialize(return_request_process)
         @process = return_request_process
       end
+
+      def order_number
+        process.order_return_request.order.number
+      end
+
+      def item_returns
+        process.order_return_request
+          .return_request_items
+          .map(&:item_return)
+          .compact
+      end
+
+      def global_skus
+        item_returns
+          .map(&:line_item)
+          .map { |li| Orders::LineItemPresenter.new(li, li.order) }
+          .map { |presenter| GlobalSku.find_or_create_by_line_item(line_item_presenter: presenter) }
+      end
     end
 
     scope do
-      NextLogistics::ReturnRequestProcess.order('created_at DESC')
+      NextLogistics::ReturnRequestProcess
+        .includes(order_return_request: [
+          :order,
+          return_request_items: [
+            item_return:          [:line_item],
+            order_return_request: [:order],
+              line_item: [
+                :order,
+                :variant,
+                personalization: [:color, :size]
+              ]
+            ]
+        ])
+        .order('created_at DESC')
     end
 
-    # decorate do
-    #   GridItems
-    # end
+    decorate do
+      GridProcess
+    end
 
     # Filters
 
@@ -28,12 +67,7 @@ module Logistics
     filter(:order_number) do |order_number|
       self.where('spree_orders.number = ?', order_number)
     end
-    # filter(:asn) do |asn|
-    #   self.where('item_returns.bergen_asn_number = ?', asn)
-    # end
-    # # TODO: UPC is not a relationship, but a concept! How to implement this?
-    # # filter(:upc) do |upc|
-    # # end
+
     filter(:step, :enum, select: NextLogistics::ReturnRequestProcess.aasm.states_for_select) do |step|
       self.where('next_logistics_return_request_processes.aasm_state = ?', step)
     end
@@ -44,45 +78,38 @@ module Logistics
 
     # Columns
 
-    # TODO: this is different from bergen, since Next process orders, not items
-    # column :manage_return, header: '', html: true do |process|
-    #   if (item_return = process.return_request_item.item_return)
-    #     link_to 'manage', admin_ui.item_return_path(item_return), class: 'btn btn-xs btn-info'
-    #   end
-    # end
+    # DataGrid caveat: HTML columns don't use the defined decorator
+    column :manage_return, header: '', html: true do |process|
+      grid_process = GridProcess.new(process)
+
+      grid_process.item_returns.map do |item_return|
+        link_to "manage #{item_return.id}", admin_ui.item_return_path(item_return), class: 'btn btn-xs btn-info'
+      end.join(content_tag(:br)).html_safe
+    end
 
     column :id
 
-    column :order_number do |process|
-      process.order_return_request.order.number
+    column :order_number do |grid_process|
+      grid_process.order_number
     end
 
-    # column :asn, header: 'ASN' do |process|
-    #   if (item_return = process.return_request_item.item_return)
-    #     item_return.bergen_asn_number
-    #   end
-    # end
-    #
-    # column :upc, header: 'UPC' do |process|
-    #   line_item           = process.return_request_item.line_item
-    #   line_item_presenter = Orders::LineItemPresenter.new(line_item, line_item.order)
-    #   global_sku          = GlobalSku.find_or_create_by_line_item(line_item_presenter: line_item_presenter)
-    #   global_sku.upc
-    # end
-    #
-    column :aasm_state, header: 'Step' do |process|
-      process.aasm_state.titleize
+    column :upcs, header: 'UPCs' do |grid_process|
+      grid_process.global_skus.map(&:upc).join(', ')
     end
 
-    column :failed, header: 'Processed' do |process|
-      format(!process.failed) do |processed|
+    column :aasm_state, header: 'Step' do |grid_process|
+      grid_process.aasm_state.titleize
+    end
+
+    column :failed, header: 'Processed' do |grid_process|
+      format(!grid_process.failed) do |processed|
         class_name = processed ? 'check text-success' : 'times text-danger'
         content_tag(:i, '', class: "fa fa-#{class_name}  fa-lg")
       end
     end
 
-    column :created_at, order: true do |process|
-      format(process.created_at) do |created_at|
+    column :created_at, order: true do |grid_process|
+      format(grid_process.created_at) do |created_at|
         I18n.l(created_at, format: :long)
       end
     end
