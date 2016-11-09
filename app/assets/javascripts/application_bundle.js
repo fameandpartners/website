@@ -182,6 +182,9 @@ var CtaPrice = function (_React$Component) {
 
       var PRICE = parseFloat(this.props.price) + parseFloat(this.props.customize.color.price) + parseFloat(this.props.customize.customization.price) + parseFloat(this.props.customize.makingOption.price) - parseFloat(discount);
 
+      var isAfterpayEnabled = this.props.siteVersion === "Australia" && this.props.flags.afterpay;
+      var isAddToBagAvailable = this.props.customize.size.id && this.props.customize.color.id && this.props.customize.length.id && variantFastMakingEnabled;
+
       return _react2.default.createElement(
         'div',
         { className: 'btn-wrap' },
@@ -192,7 +195,7 @@ var CtaPrice = function (_React$Component) {
           PRICE
         ),
         function () {
-          if (_this2.props.siteVersion === "Australia" && _this2.props.flags.afterpay) {
+          if (isAfterpayEnabled) {
             return _react2.default.createElement(
               'div',
               { className: 'afterpay-message' },
@@ -213,7 +216,7 @@ var CtaPrice = function (_React$Component) {
           }
         }(),
         function () {
-          if (_this2.props.customize.size.id && _this2.props.customize.color.id && _this2.props.customize.length.id && variantFastMakingEnabled && !_this2.state.sending) {
+          if (isAddToBagAvailable && !_this2.state.sending) {
             return _react2.default.createElement(
               'a',
               { href: 'javascript:;', onClick: _this2.addToBag, className: 'btn btn-black btn-lrg' },

@@ -88,11 +88,19 @@ class CtaPrice extends React.Component {
       + parseFloat(this.props.customize.makingOption.price)
       - parseFloat(discount);
 
+    let isAfterpayEnabled = this.props.siteVersion === "Australia" && this.props.flags.afterpay;
+    let isAddToBagAvailable = (
+      this.props.customize.size.id
+        && this.props.customize.color.id
+        && this.props.customize.length.id
+        && variantFastMakingEnabled
+    );
+
     return (
       <div className="btn-wrap">
         <div className="price">${PRICE}</div>
           {(() => {
-            if(this.props.siteVersion === "Australia" && this.props.flags.afterpay) {
+            if(isAfterpayEnabled) {
               return (
                 <div className="afterpay-message">
                   <span>or 4 easy payments of ${PRICE / 4} with</span>
@@ -103,11 +111,7 @@ class CtaPrice extends React.Component {
             }
           })()}
           {(() => {
-            if(this.props.customize.size.id
-              && this.props.customize.color.id
-              && this.props.customize.length.id
-              && variantFastMakingEnabled
-              && !this.state.sending) {
+            if(isAddToBagAvailable && !this.state.sending) {
               return (
                 <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">
                   ADD TO BAG
