@@ -237,7 +237,7 @@ var CtaPrice = function (_React$Component) {
           _react2.default.createElement(
             'li',
             null,
-            'Estimated delivery -10 business days'
+            'Estimated delivery - 10 business days'
           )
         ),
         _react2.default.createElement(
