@@ -13,21 +13,28 @@ module NextLogistics
       # => Folder to upload: `/incoming/receipts`
       # => File name does not have restrictions. Will upload timestamp + receipt.csv pattern
 
-      attr_reader :ftp
+      attr_reader :ftp, :credentials
 
       def initialize
-        credentials = [
-          ENV['NEXT_FTP_HOST'],
-          ENV['NEXT_FTP_USERNAME'],
-          ENV['NEXT_FTP_PASSWORD']
-        ]
+        @credentials = {
+          host:     ENV['NEXT_FTP_HOST'],
+          user:     ENV['NEXT_FTP_USERNAME'],
+          password: ENV['NEXT_FTP_PASSWORD']
+        }
 
-        @ftp = Net::FTP.open(*credentials)
+        @ftp              = Net::FTP.new
         @ftp.read_timeout = FTP_TIMEOUT_SECONDS
         @ftp.open_timeout = FTP_TIMEOUT_SECONDS
       end
 
+      def authenticate
+        ftp.connect(credentials[:host])
+        ftp.login(credentials[:user], credentials[:password])
+      end
+
       def upload(file:)
+        authenticate
+
         remote_filename = [SecureRandom.uuid, '.csv'].join
 
         ftp.chdir(ORDERS_FOLDER)

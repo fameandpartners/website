@@ -1,35 +1,49 @@
 require 'spec_helper'
 
 describe NextLogistics::FTP::Interface do
-  let(:ftp_double) { instance_double(Net::FTP) }
+  subject(:interface) { described_class.new }
 
   before(:each) do
-    allow(Net::FTP).to receive(:open).and_return(ftp_double)
-    allow(ftp_double).to receive(:read_timeout=)
-    allow(ftp_double).to receive(:open_timeout=)
+    ENV.update({
+      'NEXT_FTP_HOST'     => 'next-host',
+      'NEXT_FTP_USERNAME' => 'next-username',
+      'NEXT_FTP_PASSWORD' => 'next-password'
+    })
   end
 
   describe '.initialize' do
-    it 'opens a FTP connection with Next' do
-      ENV.update({
-                   'NEXT_FTP_HOST'     => 'next-host',
-                   'NEXT_FTP_USERNAME' => 'next-username',
-                   'NEXT_FTP_PASSWORD' => 'next-password'
-                 })
+    it 'initializes an FTP with timeout and Next credentials' do
+      expect(interface.credentials).to eq({
+        host:     'next-host',
+        user:     'next-username',
+        password: 'next-password'
+      })
+      expect(interface.ftp.read_timeout).to eq(described_class::FTP_TIMEOUT_SECONDS)
+      expect(interface.ftp.open_timeout).to eq(described_class::FTP_TIMEOUT_SECONDS)
+    end
+  end
 
-      expect(Net::FTP).to receive(:open).with('next-host', 'next-username', 'next-password')
-      expect(ftp_double).to receive(:read_timeout=).with(described_class::FTP_TIMEOUT_SECONDS)
-      expect(ftp_double).to receive(:open_timeout=).with(described_class::FTP_TIMEOUT_SECONDS)
+  describe '#authenticate' do
+    let(:ftp_double) { instance_double(Net::FTP) }
 
-      described_class.new
+    it 'connects and login with Next FTP server' do
+      allow(interface).to receive(:ftp).and_return(ftp_double)
+      expect(ftp_double).to receive(:connect).with('next-host')
+      expect(ftp_double).to receive(:login).with('next-username', 'next-password')
+
+      interface.authenticate
     end
   end
 
   describe '#upload' do
-    before(:each) { allow(SecureRandom).to receive(:uuid).and_return('a401a8ac-0374-42bf-b576-c9d470fb3022') }
+    let(:ftp_double) { instance_double(Net::FTP) }
+
+    before(:each) do
+      allow(SecureRandom).to receive(:uuid).and_return('a401a8ac-0374-42bf-b576-c9d470fb3022')
+      allow(interface).to receive_messages(authenticate: 'ok', ftp: ftp_double)
+    end
 
     it 'uploads a file with UUID + CSV file extension' do
-      interface   = described_class.new
       file_double = Tempfile.new('file-double')
 
       expect(ftp_double).to receive(:chdir).with(described_class::ORDERS_FOLDER)
