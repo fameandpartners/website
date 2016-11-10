@@ -25,6 +25,7 @@ module NextLogistics
         @ftp              = Net::FTP.new
         @ftp.read_timeout = FTP_TIMEOUT_SECONDS
         @ftp.open_timeout = FTP_TIMEOUT_SECONDS
+        @ftp.passive      = true
       end
 
       def authenticate
