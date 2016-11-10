@@ -3,7 +3,11 @@ require 'spec_helper'
 describe NextLogistics::FTP::Interface do
   let(:ftp_double) { instance_double(Net::FTP) }
 
-  before(:each) { allow(Net::FTP).to receive(:open).and_return(ftp_double) }
+  before(:each) do
+    allow(Net::FTP).to receive(:open).and_return(ftp_double)
+    allow(ftp_double).to receive(:read_timeout=)
+    allow(ftp_double).to receive(:open_timeout=)
+  end
 
   describe '.initialize' do
     it 'opens a FTP connection with Next' do
@@ -14,6 +18,8 @@ describe NextLogistics::FTP::Interface do
                  })
 
       expect(Net::FTP).to receive(:open).with('next-host', 'next-username', 'next-password')
+      expect(ftp_double).to receive(:read_timeout=).with(described_class::FTP_TIMEOUT_SECONDS)
+      expect(ftp_double).to receive(:open_timeout=).with(described_class::FTP_TIMEOUT_SECONDS)
 
       described_class.new
     end

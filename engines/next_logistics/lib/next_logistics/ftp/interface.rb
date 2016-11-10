@@ -4,6 +4,8 @@ require 'securerandom'
 module NextLogistics
   module FTP
     class Interface
+      FTP_TIMEOUT_SECONDS = 20
+
       ORDERS_FOLDER = '/incoming/receipts'.freeze
 
       # NOTE: Upload must be set to binary! From Next Docs: "please ensure you use BINARY mode for transfers"
@@ -21,6 +23,8 @@ module NextLogistics
         ]
 
         @ftp = Net::FTP.open(*credentials)
+        @ftp.read_timeout = FTP_TIMEOUT_SECONDS
+        @ftp.open_timeout = FTP_TIMEOUT_SECONDS
       end
 
       def upload(file:)
