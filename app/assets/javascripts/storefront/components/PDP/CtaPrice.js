@@ -64,12 +64,19 @@ class CtaPrice extends React.Component {
   }
 
   render() {
+    let discount = 0;
+
+    if (this.props.discount.hasOwnProperty('table')) {
+      discount = this.props.discount.table.amount;
+    } else {
+      discount = this.props.discount;
+    }
 
     const PRICE =
       parseFloat(this.props.price)
       + parseFloat(this.props.customize.color.price)
       + parseFloat(this.props.customize.customization.price)
-      - parseFloat(this.props.discount);
+      - parseFloat(discount);
 
     return (
       <div className="btn-wrap">

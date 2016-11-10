@@ -15,7 +15,9 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*'] + ['Rakefile', 'README.rdoc']
 
-  s.add_dependency 'rails' # Version specified on main app Gemfile
+  s.add_dependency 'rails'   # Version specified on main app Gemfile
+  s.add_dependency 'sidekiq' # Version specified on main app Gemfile
+  s.add_dependency 'aasm', '~> 4.10.0'
 
   s.add_development_dependency 'rspec' # Version specified on main app Gemfile
 end

@@ -92,6 +92,11 @@ FameAndPartners::Application.routes.draw do
     # Partners In Crime Sweepstakes Official Rules March 2016
     get '/partners-in-crime-terms' => 'statics#prom_competition_terms', as: :partners_in_crime_terms
 
+    # i=change landing page
+    if Features.active?(:i_equal_change)
+      get '/iequalchange' => 'statics#iequalchange', :permalink => 'iequalchange', :as => :iequalchange_landing_page
+    end
+
     ###########
     # Lookbooks
     ###########
@@ -192,6 +197,9 @@ FameAndPartners::Application.routes.draw do
 
     # Skirts Collection - Landing page
     get '/skirts-collection' => 'products/collections#show', :permalink => 'skirts-collection', :as => :skirts_collection_landing_page
+
+    # The Evening Hours Collection - Landing page
+    get '/the-evening-hours-collection' => 'products/collections#show', :permalink => 'evening-hours-collection', :as => :evening_hours_collection_landing_page
 
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
@@ -544,7 +552,11 @@ FameAndPartners::Application.routes.draw do
           end
         end
 
-        resources :making_options, controller: 'product_making_options'
+        resources :making_options, controller: 'product_making_options', except: [:destroy] do
+          member do
+            put :toggle
+          end
+        end
 
         resources :accessories, controller: 'product_accessories' do
           post :update_positions, on: :collection

@@ -20,6 +20,7 @@ module Bergen
           transitions from: :operation_created, to: :style_master_created
         end
 
+        # @deprecated Shippo has been deprecated (WEBSITE-617). 8th November 2016
         event :tracking_number_was_updated do
           transitions from: :style_master_created, to: :tracking_number_updated
         end
@@ -53,22 +54,6 @@ module Bergen
       end
 
       def update_tracking_number
-        label = Shippo::Label.new(return_request_item).create
-
-        order = return_request_item.order
-        shipments = order.shipments.select do |shipment|
-          shipment.line_items.any? {|line_item| line_item.id == return_request_item.line_item.id}
-        end
-
-        shipments.each do |shipment|
-          shipment.tracking = label[:tracking_number]
-          shipment.save
-        end
-
-        return_request_item.item_return.events.tracking_number_updated.create(
-          shippo_tracking_number: label[:tracking_number],
-          shippo_label_url:       label[:label_url]
-        )
         self.tracking_number_was_updated
         self.save
       end

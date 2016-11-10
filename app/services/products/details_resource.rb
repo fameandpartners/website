@@ -21,42 +21,49 @@ class Products::DetailsResource
   end
 
   def read
-    Rails.cache.fetch([site_version, product]) do
-      Products::Presenter.new({
-        id:                                  product.id,
-        master_id:                           product.master.try(:id),
-        sku:                                 product.sku,
-        name:                                product.name,
-        short_description:                   product_short_description,
-        description:                         product.description,
-        permalink:                           product.permalink,
-        is_active:                           product.is_active?,
-        is_deleted:                          product.deleted?,
-        height_customisable:                 product.height_customisable?,
-        images:                              product_images.read_all,
-        default_image:                       product_images.default,
-        price:                               product_price,
-        discount:                            product_discount,
-        taxons:                              product_taxons,
+    primitive_options = Rails.cache.fetch(['details-resource', 'primitives', site_version, product]) do
+      {
+        id:                                 product.id,
+        master_id:                          product.master.try(:id),
+        sku:                                product.sku,
+        name:                               product.name,
+        description:                        product.description,
+        meta_description:                   product.meta_description,
+        permalink:                          product.permalink,
+        is_active:                          product.is_active?,
+        is_deleted:                         product.deleted?,
+        height_customisable:                product.height_customisable?,
         # page#show specific details
-        recommended_products:                recommended_products,
-        variants:                            product.variants,
-        related_outerwear:                   related_outerwear,
-        available_options:                   product_selection_options,
-        moodboard:                           product_moodboard,
-        fabric:                              product_fabric,
-        fit:                                 product_fit,
-        size:                                product_size,
-        style_notes:                         product_style_notes,
-        render3d_images:                     product_render3d_images,
-        size_chart:                          product.size_chart,
-        fast_making:                         product.fast_making,
-        standard_days_for_making:            product.standard_days_for_making,
-        customised_days_for_making:          product.customised_days_for_making,
-        default_standard_days_for_making:    product.default_standard_days_for_making,
-        default_customised_days_for_making:  product.default_customised_days_for_making
-      })
+        fabric:                             product.property('fabric'),
+        fit:                                product.property('fit'),
+        size:                               product.property('size'),
+        style_notes:                        product.property('style_notes'),
+        size_chart:                         product.size_chart,
+        fast_making:                        product.fast_making?,
+        standard_days_for_making:           product.standard_days_for_making,
+        customised_days_for_making:         product.customised_days_for_making,
+        default_standard_days_for_making:   product.default_standard_days_for_making,
+        default_customised_days_for_making: product.default_customised_days_for_making,
+        product_type:                       product.property('product_type')
+      }
     end
+
+    non_primitive_options = {
+      images:               product_images.read_all,
+      default_image:        product_images.default,
+      price:                product_price,
+      discount:             product_discount,
+      taxons:               product_taxons,
+      # page#show specific details
+      recommended_products: recommended_products,
+      variants:             product.variants,
+      related_outerwear:    related_outerwear,
+      available_options:    product_selection_options,
+      moodboard:            product_moodboard,
+      render3d_images:      product_render3d_images,
+    }
+
+    Products::Presenter.new(non_primitive_options.merge(primitive_options))
   end
 
   private
@@ -98,26 +105,6 @@ class Products::DetailsResource
     end
 
     # properties part
-    def product_short_description
-      product.meta_description.blank? ? product.description : product.meta_description
-    end
-
-    def product_fabric
-      Rails.cache.fetch([product, 'product-property', 'fabric']) { product.property('fabric') }
-    end
-
-    def product_fit
-      Rails.cache.fetch([product, 'product-property', 'fit']) { product.property('fit') }
-    end
-
-    def product_size
-      Rails.cache.fetch([product, 'product-property', 'size']) { product.property('size') }
-    end
-
-    def product_style_notes
-      Rails.cache.fetch([product, 'product-property', 'style-notes']) { product.property('style_notes') }
-    end
-
     def product_render_3d?
       Rails.cache.fetch([product, 'product-property', 'render-3d']) { product.property('render-3d') == 'true' }
     end

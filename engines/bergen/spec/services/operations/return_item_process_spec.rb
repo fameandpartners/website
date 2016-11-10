@@ -46,7 +46,8 @@ module Bergen
         end
       end
 
-      describe '#update_tracking_number', :vcr  do
+      # @deprecated Shippo has been deprecated (WEBSITE-617). 8th November 2016
+      xdescribe '#update_tracking_number', :vcr  do
         include_context 'return item ready to process'
 
         let(:shippo_tracking_number) { '9205590164917321211369' }

@@ -65,22 +65,3 @@
           = link_to styling_session_path
             span.btn-xs.btn-featured
               | Book Your Session
-
-  .modal.fade.js-modal-new-sizes-alert
-    .modal-dialog
-      .modal-content
-        .outer-wrap
-          .inner-wrap
-            a.btn-close.md href='javascript:;' data-dismiss='modal' aria-label='Close'
-              .hide-visually Close Menu
-            = image_tag '_icons/alert.svg'
-            h4.h2.title Our signature size guide is getting an upgrade.
-            p While we roll this out across all of our 1000+ styles, you'll see two separate size charts on the site.
-            p Some pieces follow our brand new size guide, and some follow our legacy size guide. Don't worry, there's a note on every single product page that lets you know which size chart to reference.
-            p If you've shopped with us before, your size may have changed, so make sure to check before clicking 'Add to cart'.
-
-  javascript:
-    //Show modal immediately after page load
-    $(document).ready(function() {
-      $('.js-modal-new-sizes-alert').modal('show')
-    });

@@ -8,5 +8,9 @@ FactoryGirl.define do
       reason_category 'Size and fit'
       reason 'Dress was too big around the bust'
     end
+
+    trait :keep do
+      action 'keep'
+    end
   end
 end

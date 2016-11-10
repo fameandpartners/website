@@ -44,7 +44,8 @@ class Users::ReturnsController < Users::BaseController
     end
 
     if @order_return.save
-      open_bergen_return_process(@order_return)
+      start_bergen_return_process(@order_return)
+      start_next_logistics_process(@order_return)
       OrderReturnRequestMailer.email(@order_return, user).deliver
       render 'success'
     else
@@ -54,9 +55,15 @@ class Users::ReturnsController < Users::BaseController
 
   private
 
-  def open_bergen_return_process(order_return)
+  def start_bergen_return_process(order_return)
     order_return.return_request_items.each do |rri|
       Bergen::Operations::ReturnItemProcess.new(return_request_item: rri).start_process
+    end
+  end
+
+  def start_next_logistics_process(order_return)
+    if Features.active?(:next_logistics)
+      NextLogistics::ReturnRequestProcess.new(order_return_request: order_return).start_process
     end
   end
 end

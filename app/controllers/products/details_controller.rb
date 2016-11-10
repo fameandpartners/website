@@ -25,7 +25,6 @@ class Products::DetailsController < Products::BaseController
 
     @product.color_id   = color.try(:id)
     @product.color_name = color.try(:name)
-    # @product.color = color
 
     # make express delivery as default option
     @product.making_option_id = @product.making_options.first.try(:id)
@@ -34,10 +33,17 @@ class Products::DetailsController < Products::BaseController
 
     # Set SEO properties
     # Drop anything after the first period(.) and newline
-    @title       = "#{@product.meta_title} #{default_seo_title}".strip
-    @description = @product.meta_description
+    title(@product.meta_title, default_seo_title)
+    description(@product.meta_description)
+
     append_gtm_product(product_presenter: @product)
 
     Activity.log_product_viewed(@product, temporary_user_key, try_spree_current_user)
+
+    render :show, status: pdp_status
+  end
+
+  private def pdp_status
+    @product.is_active ? :ok : :not_found
   end
 end

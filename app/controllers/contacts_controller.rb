@@ -5,7 +5,7 @@ class ContactsController < ApplicationController
   def new
     @contact = Contact.new(site_version: current_site_version.code)
     title('Contact', default_seo_title)
-    @description = ""
+    description('Contact the Fame and Partners customer service department or find the answers to our Frequently Asked Questions.');
   end
 
   def create

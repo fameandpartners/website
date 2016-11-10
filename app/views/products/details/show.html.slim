@@ -66,6 +66,10 @@ form.hide-fully#pdpDataForWishlist
       .col-md-3
         .panel-side-wrap.js-panel-side-left
           h1.heading = @product.name
+          - if @product.product_type.present?
+            h2.heading = @product.product_type
+          - if @product.name.downcase.include?('skirt')
+            p (Skirt Only)
           .pdp-panel-side-left.js-panel-side-left-details-trigger
             .text-right.visible-xs.visible-sm
               a.btn-close.lg.js-panel-side-left-toggle href='javascript:;'
@@ -81,6 +85,10 @@ form.hide-fully#pdpDataForWishlist
                       #collapse-description.collapse.in role='tabpanel'
                         p = raw @product.description
                         p SKU: #{@product.sku}
+
+                        - if Features.active?(:i_equal_change)
+                          p $5 of each sale funds a women's empowerment charity.
+
                     .panel
                       a href='#collapse-fabric' data-toggle='collapse' data-parent='#accordion' Fabric Information
                       #collapse-fabric.collapse role='tabpanel'
@@ -139,9 +147,9 @@ form.hide-fully#pdpDataForWishlist
 
   // content bottom wrap START
   // js class is used to get bottom offset for sticky side panel
-  .js-bottom-content
+  .js-bottom-wrapper
     .container
-      .section-box.same-height-cols
+      .section-box.same-height-cols.js-bottom-content
         .row
           .col-md-6
             .item.bordered
@@ -210,19 +218,20 @@ javascript:
     });
 
     function initSticky() {
+
+      var bottomContentSpacing = parseInt($('.js-bottom-wrapper .js-bottom-content').css('margin-top'));
+      var safeDistancePdpBottom = 0.25;
+      var safeStickyBottomSpacing = $('.js-bottom-wrapper').outerHeight() + $('.js-footer').outerHeight() - $('.js-fixed-header').outerHeight() - (bottomContentSpacing * safeDistancePdpBottom);
+
       $('.js-panel-side-left').sticky({
         responsiveWidth: true,
         topSpacing: $('.js-fixed-header').outerHeight(),
-        bottomSpacing:
-          $('.js-bottom-content').outerHeight()
-          + $('.js-footer').outerHeight() + $('.js-fixed-header').outerHeight()
+        bottomSpacing: safeStickyBottomSpacing
       });
       $('.js-panel-side-right').sticky({
         responsiveWidth: true,
         topSpacing: $('.js-fixed-header').outerHeight(),
-        bottomSpacing:
-          $('.js-bottom-content').outerHeight()
-          + $('.js-footer').outerHeight() + $('.js-fixed-header').outerHeight()
+        bottomSpacing: safeStickyBottomSpacing
       });
       $('.js-panel-side-left').sticky('update');
       $('.js-panel-side-right').sticky('update');
@@ -247,8 +256,10 @@ javascript:
       initSticky();
     }
 
-    // update on resize
-    $(window).resize(updateSticky);
+    // update on window load and resize
+    $(window).on("load resize",function(e){
+      updateSticky();
+    });
 
     // update on accordion change
     $('#accordion').on('shown.bs.collapse', updateSticky);

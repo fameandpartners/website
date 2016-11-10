@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.1.6'
 
-gem 'rails', '~> 3.2.22.2'
+gem 'rails', '~> 3.2.22.5'
 gem 'pg'
 gem 'slim'
 gem 'slim-rails'
@@ -21,7 +21,6 @@ gem 'default_value_for'
 gem 'tire'
 gem 'dalli'
 gem 'autoprefixer-rails'
-gem 'bower-rails', '~> 0.10.0'
 gem 'redcarpet', '~> 2.3.0'
 
 # Monitoring & Events
@@ -150,6 +149,7 @@ group :test do
   gem 'timecop'
   gem 'vcr', '~> 2.9.3'
   gem 'webmock', '~> 1.21.0'
+  gem 'rspec_junit_formatter', '0.2.2'
 end
 
 group :production do

@@ -24,6 +24,8 @@
         #panel-popular.tab-pane.active role='tabpanel'
           .faq.faq-wrap
             .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
+              - unless Features.active?(:getitquick_unavailable)
+                = render 'shared/redesign/faqs/what_express_making'
               = render 'shared/redesign/faqs/returns_policy'
               = render 'shared/redesign/faqs/returns_steps'
               = render 'shared/redesign/faqs/exchange_item'
@@ -55,10 +57,14 @@
         #panel-order.tab-pane role='tabpanel'
           .faq.faq-wrap
             .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
+              - unless Features.active?(:getitquick_unavailable)
+                = render 'shared/redesign/faqs/what_express_making'
               = render 'shared/redesign/faqs/cancel_order'
         #panel-delivery.tab-pane role='tabpanel'
           .faq.faq-wrap
             .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
+              - unless Features.active?(:getitquick_unavailable)
+                = render 'shared/redesign/faqs/what_express_making'
               = render 'shared/redesign/faqs/delivery_how_long'
               = render 'shared/redesign/faqs/delivery_track'
               = render 'shared/redesign/faqs/delivery_international'
