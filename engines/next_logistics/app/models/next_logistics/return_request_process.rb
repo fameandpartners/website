@@ -31,8 +31,10 @@ module NextLogistics
     end
 
     def upload_to_ftp
-      Workers::UploadToFtpWorker.perform_async(self.id)
-      # TODO: Email customer with instructions (customer.io?)
+      if self.created?
+        Workers::UploadToFtpWorker.perform_async(self.id)
+        # TODO: Email customer with instructions (customer.io?)
+      end
     end
 
     private

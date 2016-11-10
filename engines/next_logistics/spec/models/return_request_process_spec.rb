@@ -4,12 +4,12 @@ require 'aasm/rspec'
 module NextLogistics
   RSpec.describe ReturnRequestProcess do
     let(:order_return_request) { build(:order_return_request) }
-    let(:return_request_process) { described_class.new(order_return_request: order_return_request) }
+    subject(:return_request_process) { described_class.new(order_return_request: order_return_request) }
 
     it 'obeys state machines flow' do
-      expect(return_request_process).to have_state(:created)
-      expect(return_request_process).to transition_from(:created).to(:asn_file_uploaded).on_event(:asn_file_was_uploaded)
-      expect(return_request_process).to transition_from(:asn_file_uploaded).to(:asn_received).on_event(:asn_was_received)
+      is_expected.to have_state(:created)
+      is_expected.to transition_from(:created).to(:asn_file_uploaded).on_event(:asn_file_was_uploaded)
+      is_expected.to transition_from(:asn_file_uploaded).to(:asn_received).on_event(:asn_was_received)
     end
 
     describe '#start_process' do
@@ -52,6 +52,30 @@ module NextLogistics
             expect(return_request_process).not_to receive(:save!)
             return_request_process.start_process
           end
+        end
+      end
+    end
+
+    describe '#upload_to_ftp' do
+      before(:each) { return_request_process.id = 101 }
+
+      context 'when process is at the "created" state' do
+        before(:each) { return_request_process.aasm_state = 'created' }
+
+        it 'calls upload to FTP worker' do
+          expect(Workers::UploadToFtpWorker).to receive(:perform_async).with(101)
+
+          return_request_process.upload_to_ftp
+        end
+      end
+
+      context 'when process is not at the "created" state' do
+        before(:each) { return_request_process.aasm_state = 'asn_file_uploaded' }
+
+        it 'does not call upload to FTP worker' do
+          expect(Workers::UploadToFtpWorker).not_to receive(:perform_async)
+
+          return_request_process.upload_to_ftp
         end
       end
     end
