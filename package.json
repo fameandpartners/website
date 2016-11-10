@@ -17,7 +17,8 @@
     "gulp-clean": "^0.3.2",
     "gulp-connect": "^4.1.0",
     "gulp-eslint": "^3.0.1",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
   },
   "dependencies": {
     "babel-plugin-transform-object-assign": "^6.8.0",

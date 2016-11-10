@@ -4,6 +4,7 @@ const gulp = require('gulp');
 const clean = require('gulp-clean');
 const eslint = require('gulp-eslint');
 const browserify = require('browserify');
+const watchify = require('watchify');
 const vinyl = require('vinyl-source-stream');
 const babelify = require('babelify'); // transforms ES6 to ES5
 
@@ -40,8 +41,27 @@ gulp.task('lint', () => {
     .pipe(eslint.failAfterError());
 });
 
-gulp.task('watch', () => {
-  gulp.watch(config.paths.js, ['apply-node-env', 'js']);
+gulp.task('watch', ['apply-node-env'], () => {
+  let b = browserify({
+    entries:      [config.paths.mainJS],
+    cache:        {},
+    packageCache: {},
+    plugin:       [watchify]
+  });
+
+  function bundle() {
+    b.transform(babelify, {presets: ['es2015', 'react']})
+      .bundle()
+      .on('error', console.error.bind(console))
+      .pipe(vinyl('application_bundle.js'))
+      .pipe(gulp.dest(config.paths.dist));
+  }
+
+  b.on("update", bundle);
+  b.on("log", function (msg) {
+    console.log(msg);
+  });
+  bundle();
 });
 
-gulp.task('default', ['apply-node-env', 'js', 'watch']);
+gulp.task('default', ['watch']);
