@@ -352,36 +352,53 @@ page.initCheckoutEditPage = () ->
     # `@uncheckInternationalShippingFeeCheckbox`, `@changeButtonStatus`, `@internationalShippingFeeCheckboxClicked`, `@selectedCountry`
     countryChanged: () ->
       element = $(this)
-      useBillingAddressToShip = $("input[name='ship_to_address']")
-      countryHasShippingFee = window.checkout_page.countries[element.val()]
-      isBillAddressCountry = element.attr('id') == 'order_bill_address_attributes_country_id'
-      isShipAddressCountry = element.attr('id') == 'order_ship_address_attributes_country_id'
-      useBillingAddressToShipChecked = useBillingAddressToShip.is(':checked')
-      selectedCountry = window.checkout_page.selectedCountry(element)
-      if isBillAddressCountry and useBillingAddressToShipChecked and countryHasShippingFee
-        window.checkout_page.showShippingFeeAlert(selectedCountry)
-      else if isBillAddressCountry and useBillingAddressToShipChecked
-        window.checkout_page.hideShippingFeeAlert()
-      else if isShipAddressCountry and countryHasShippingFee
-        window.checkout_page.showShippingFeeAlert(selectedCountry)
-      else if isShipAddressCountry
-        window.checkout_page.hideShippingFeeAlert()
+
+      if window.checkout_page.isBillAddressCountry(element)
+        countryHasShippingFee = window.checkout_page.countries[element.val()]['shipping_fee']
+        countryHasDutyFee = window.checkout_page.countries[element.val()]['duty_fee']
+        selectedCountry = window.checkout_page.selectedCountry(element)
+
+        extra_fee_block = $('#extra_fee_alert')
+        shipping_fee_block = extra_fee_block.find('.shipping_fee_alert')
+        duty_fee_block = extra_fee_block.find('.duty_fee_alert')
+        country_name_block = extra_fee_block.find('.country_name')
+
+        country_name_block.html(selectedCountry)
+
+        if countryHasShippingFee
+          shipping_fee_block.show()
+        else
+          shipping_fee_block.hide()
+
+        if countryHasDutyFee
+          duty_fee_block.show()
+        else
+          duty_fee_block.hide()
+
+        if countryHasShippingFee || countryHasDutyFee
+          extra_fee_block.show()
+        else
+          extra_fee_block.hide()
+
       window.checkout_page.uncheckInternationalShippingFeeCheckbox()
       window.checkout_page.changeButtonStatus()
 
-    showShippingFeeAlert: (country) ->
-      $('.country_name').html(country)
-      $('#shipping_fee_alert').show()
+    isBillAddressCountry: (element) ->
+      bill_address_select_id = 'order_bill_address_attributes_country_id'
+      ship_address_select_id = 'order_ship_address_attributes_country_id'
 
-    hideShippingFeeAlert: () ->
-      $('#shipping_fee_alert').hide()
+      if element.attr('id') == bill_address_select_id 
+        return true
+      else
+        useBillingAddressToShip = $("input[name='ship_to_address']").is(':checked')
+        return element.attr('id')  == ship_address_select_id && useBillingAddressToShip
 
     shippingFeeHasToBeApplied: () ->
       if $("input[name='ship_to_address']").is(':checked')
         element = $('#order_bill_address_attributes_country_id')
       else
         element = $('#order_ship_address_attributes_country_id')
-      window.checkout_page.countries[element.val()]
+      window.checkout_page.countries[element.val()]['shipping_fee']
 
     internationalShippingFeeCheckboxIsVisible: () ->
       $('#international_shipping_fee').is(':visible')
