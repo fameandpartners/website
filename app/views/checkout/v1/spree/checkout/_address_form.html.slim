@@ -8,8 +8,8 @@ ruby:
     [
       country.id,
       {
-        shipping_fee: true, # country.zone_member.has_international_shipping_fee,
-        duty_fee: true #country.zone_member.has_duty_fee
+        shipping_fee: country.zone_member.has_international_shipping_fee,
+        duty_fee: country.zone_member.has_duty_fee
       }
     ]
   end]
