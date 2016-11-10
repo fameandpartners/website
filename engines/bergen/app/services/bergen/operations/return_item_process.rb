@@ -50,20 +50,28 @@ module Bergen
       end
 
       def verify_style_master
-        Workers::VerifyStyleMasterWorker.perform_async(self.id)
+        if self.operation_created?
+          Workers::VerifyStyleMasterWorker.perform_async(self.id)
+        end
       end
 
       def update_tracking_number
-        self.tracking_number_was_updated
-        self.save
+        if self.style_master_created?
+          self.tracking_number_was_updated
+          self.save
+        end
       end
 
       def create_asn
-        Workers::CreateAsnWorker.perform_async(self.id)
+        if self.tracking_number_updated?
+          Workers::CreateAsnWorker.perform_async(self.id)
+        end
       end
 
       def receive_asn
-        Workers::ReceiveAsnWorker.perform_async(self.id)
+        if self.asn_created?
+          Workers::ReceiveAsnWorker.perform_async(self.id)
+        end
       end
 
       private
