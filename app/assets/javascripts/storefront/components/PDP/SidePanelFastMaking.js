@@ -8,7 +8,6 @@ class SidePanelFastMaking extends React.Component {
     super(props, context);
 
     this.onChange = this.onChange.bind(this);
-    this.onClick = this.onClick.bind(this);
   }
 
   onChange(event) {
@@ -17,26 +16,19 @@ class SidePanelFastMaking extends React.Component {
     let makingOptions = this.props.product.available_options.table.making_options;
 
     if (event.target.checked && makingOptions.length) {
-      makingOption = { price: 21.0 } || makingOptions[0].product_making_option;
+      makingOption = makingOptions[0].product_making_option;
     }
 
     customize.makingOption = makingOption;
     this.props.actions.customizeDress(customize);
   }
 
-  onClick(event) {
-    let fastMakingState = {};
-    fastMakingState.isChecked = !this.props.fastMakingState.isChecked;
-    this.props.actions.changeFastMakingState(fastMakingState);
-  }
-
   render() {
-    if (this.props.flags.fastMaking
-        && this.props.product.fast_making) {
+    if (this.props.flags.fastMaking && this.props.product.fast_making) {
       return (
         <div className="pdp-side-container pdp-side-container-fast-making checkbox-inline custom-form-element-thin form-small">
           <a href="javascript:;">
-            <input type="checkbox" id="fast-making" onChange={this.onChange} onClick={this.onClick} checked={this.props.fastMakingState.isChecked} defaultChecked={this.props.fastMakingState.isChecked} />
+            <input type="checkbox" id="fast-making" onChange={this.onChange} />
             <label htmlFor="fast-making">
             <div className="c-card-customize__content__left">
               EXPRESS MAKING (6-9 days)
@@ -62,8 +54,7 @@ SidePanelFastMaking.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     product: state.product,
-    flags: state.flags,
-    fastMakingState: state.fastMakingState
+    flags: state.flags
   };
 }
 

@@ -7,15 +7,6 @@ export function customizeReducer(state = {}, action) {
   }
 }
 
-export function changeFastMakingStateReducer(state = {}, action) {
-  switch(action.type) {
-    case 'CHANGE_FAST_MAKING_STATE':
-      return Object.assign({}, state, action.isChecked);
-    default:
-      return state;
-  }
-}
-
 export function productReducer(state = {}, action) {
   return state;
 }

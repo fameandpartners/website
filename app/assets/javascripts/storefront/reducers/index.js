@@ -8,8 +8,7 @@ import {productReducer,
         skirtChartReducer,
         customizeReducer,
         siteVersionReducer,
-        flagsReducer,
-        changeFastMakingStateReducer} from './pdpReducers';
+        flagsReducer} from './pdpReducers';
 
 const rootReducer = combineReducers({
   product: productReducer,
@@ -21,8 +20,7 @@ const rootReducer = combineReducers({
   skirts: skirtChartReducer,
   customize: customizeReducer,
   siteVersion: siteVersionReducer,
-  flags: flagsReducer,
-  fastMakingState: changeFastMakingStateReducer
+  flags: flagsReducer
 });
 
 export default rootReducer;
