@@ -1,6 +1,7 @@
 const argv = require('yargs').argv;
 const babelify = require('babelify'); // transforms ES6 to ES5
 const browserify = require('browserify');
+const buffer = require('vinyl-buffer');
 const chalk = require('chalk');
 const clean = require('gulp-clean');
 const config = require('../config').browserify;
@@ -9,6 +10,7 @@ const gulp = require('gulp');
 const gulpIf = require('gulp-if');
 const gutil = require('gulp-util');
 const source = require('vinyl-source-stream');
+const uglify = require('gulp-uglify');
 const watchify = require('watchify');
 
 // Initializations
@@ -22,7 +24,6 @@ const isWatch = argv.watch;
 gutil.log('Is build using watchify?', isWatch ? _true : _false );
 gutil.log('Is build prod?', isProd ? _true : _false);
 gutil.log('Is this dev?', isDevelopment ? _true : _false);
-
 
 /**
  * Checks if a file's eslint flag is fixed
@@ -48,7 +49,16 @@ function bundle(bundler) {
     const startTime = new Date().getTime();
 
     if (isProd){
-        // TODO: buffer, uglify, minify
+      return bundler.bundle()
+          .on('error', crashProcess)
+          .pipe(source('application_bundle.js'))
+          .pipe(buffer())
+          .pipe(uglify())
+          .pipe(gulp.dest(config.dest))
+          .on('end', function () {
+              const time = (new Date().getTime() - startTime) / 1000;
+              gutil.log(`Finshed. Took: ${time}s`);
+          });
     } else { // development build should not be minified and compressed
       return bundler.bundle()
         .on('error', function (err) {
@@ -56,7 +66,7 @@ function bundle(bundler) {
           crashProcess(err);
         })
         .pipe(source('application_bundle.js'))
-        .pipe(gulp.dest(config.paths.dist))
+        .pipe(gulp.dest(config.dest))
         .on('end', function () {
           const time = (new Date().getTime() - startTime) / 1000;
           gutil.log('Finished. Took:', chalk.magenta(time, 's') );

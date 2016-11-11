@@ -22,8 +22,10 @@
     "gulp-connect": "^4.1.0",
     "gulp-eslint": "^3.0.1",
     "gulp-if": "^2.0.2",
+    "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
     "require-dir": "^0.3.1",
+    "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0",
     "yargs": "^6.3.0"
@@ -42,6 +44,7 @@
     "redux-immutable-state-invariant": "^1.2.3"
   },
   "scripts": {
-    "start": "gulp build --watch true"
+    "start": "gulp build --watch true",
+    "production": "NODE_ENV=production gulp build --prod true"
   }
 }

@@ -1,8 +1,5 @@
-var dest = './public/assets-v2';
-var src = './assets';
-var gutil = require('gulp-util');
-var path = require('path');
-
+const baseDir = './app/assets/javascripts';
+const gutil = require('gulp-util');
 
 module.exports = {
   browserify: {
@@ -14,6 +11,8 @@ module.exports = {
       dist: './app/assets/javascripts/',
       mainJS: './app/assets/javascripts/storefront/App.js'
     },
+    src: baseDir + '/*.jsx',
+    dest: baseDir,
     debug: gutil.env.type === 'dev'
   }
 };
