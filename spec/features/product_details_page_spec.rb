@@ -12,7 +12,7 @@ describe 'product details page', type: :feature do
       expect(page).to have_content(product.name)
     end
 
-    within('h2.heading') do
+    within('h4.subheading') do
       expect(page).to have_content("the awesome prop")
     end
 
