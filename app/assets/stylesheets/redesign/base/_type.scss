@@ -64,6 +64,15 @@ blockquote {
 
 }
 
+// [NOTE] This is just a quick fix for hero copy in /why-us
+// Once the new layout is implemented there, this styling will probably be obsolete and should be removed.
+h1 .sub-heading {
+  font-size: 2rem;
+  display: block;
+  line-height: 100%;
+  margin-top: 10px;
+}
+
 .title-line-on-sides {
   position: relative;
   text-align: center;
