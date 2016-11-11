@@ -7,9 +7,8 @@
     margin-bottom: 5px;
   }
 
-  h2, .h2 {
+  .subheading {
     margin-top: 0;
-    font-size: 2.4rem;
   }
 
   .h4 {
@@ -335,7 +334,7 @@
     padding-top: 0;
 
     h1,
-    h2 {
+    .subheading {
       text-align: center;
     }
 

@@ -67,7 +67,7 @@ form.hide-fully#pdpDataForWishlist
         .panel-side-wrap.js-panel-side-left
           h1.heading = @product.name
           - if @product.product_type.present?
-            h2.heading = @product.product_type
+            h4.subheading = @product.product_type
           .pdp-panel-side-left.js-panel-side-left-details-trigger
             .text-right.visible-xs.visible-sm
               a.btn-close.lg.js-panel-side-left-toggle href='javascript:;'
@@ -78,7 +78,7 @@ form.hide-fully#pdpDataForWishlist
                 div
                   h2.hidden-md.hidden-lg = @product.name
                   - if @product.product_type.present?
-                    h3.hidden-md.hidden-lg = @product.product_type
+                    h4.hidden-md.hidden-lg = @product.product_type
                   #accordion role='tablist'
                     .panel
                       a href='#collapse-description' data-toggle='collapse' data-parent='#accordion' Description
