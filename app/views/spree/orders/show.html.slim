@@ -161,3 +161,6 @@ section.order-details
 - if successfully_ordered || params[:force_tracking]
   = render 'shared/sales_conversion_pixels', locals: { order: @order }
   = render 'shared/tracking/masterpass_analytics'
+
+  - if Feature.active?(:i_equal_change)
+    = render 'iequalchange/post_message', spree_order: @order
