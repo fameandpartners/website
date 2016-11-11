@@ -50,33 +50,34 @@ function bundle(bundler) {
     if (isProd){
         // TODO: buffer, uglify, minify
     } else { // development build should not be minified and compressed
-        return bundler.bundle()
-            .on('error', function (err) {
-                crashProcess(err);
-            })
-            .pipe(source('application_bundle.js'))
-            .pipe(gulp.dest(config.paths.dist))
-            .on('end', function () {
-                const time = (new Date().getTime() - startTime) / 1000;
-                gutil.log('Finished. Took:', chalk.magenta(time, 's') );
-            });
+      return bundler.bundle()
+        .on('error', function (err) {
+          if (isDevelopment) { return gutil.log(chalk.red(err.message)); }
+          crashProcess(err);
+        })
+        .pipe(source('application_bundle.js'))
+        .pipe(gulp.dest(config.paths.dist))
+        .on('end', function () {
+          const time = (new Date().getTime() - startTime) / 1000;
+          gutil.log('Finished. Took:', chalk.magenta(time, 's') );
+        });
     }
 }
 
 function attachBundleUpdate(bundler){
   bundler = watchify(bundler);
   bundler.on('update', function (updatedFile) {
-      const lint = gulp.src(updatedFile)
-          .pipe(eslint({
-              fix: true
-          }))
-          .pipe(eslint.format())
-          .pipe(gulpIf(
-              isFixed,
-              gulp.dest(config.paths.dist)
-          ));
+    const lint = gulp.src(updatedFile)
+      .pipe(eslint({
+        fix: true
+      }))
+      .pipe(eslint.format())
+      .pipe(gulpIf(
+        isFixed,
+        gulp.dest(config.paths.dist)
+      ));
 
-      bundle(bundler);
+    bundle(bundler);
   });
 }
 
