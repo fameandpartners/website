@@ -358,27 +358,27 @@ page.initCheckoutEditPage = () ->
         countryHasDutyFee = window.checkout_page.countries[element.val()]['duty_fee']
         selectedCountry = window.checkout_page.selectedCountry(element)
 
-        extra_fee_block = $('#extra_fee_alert')
-        shipping_fee_block = extra_fee_block.find('.shipping_fee_alert')
-        duty_fee_block = extra_fee_block.find('.duty_fee_alert')
-        country_name_block = extra_fee_block.find('.country_name')
+        $extraFeeBlock = $('#extra_fee_alert')
+        $shippingFeeBlock = $extraFeeBlock.find('.shipping_fee_alert')
+        $dutyFeeBlock = $extraFeeBlock.find('.duty_fee_alert')
+        $countryNameBlock = $extraFeeBlock.find('.country_name')
 
-        country_name_block.html(selectedCountry)
+        $countryNameBlock.text(selectedCountry)
 
         if countryHasShippingFee
-          shipping_fee_block.show()
+          $shippingFeeBlock.show()
         else
-          shipping_fee_block.hide()
+          $shippingFeeBlock.hide()
 
         if countryHasDutyFee
-          duty_fee_block.show()
+          $dutyFeeBlock.show()
         else
-          duty_fee_block.hide()
+          $dutyFeeBlock.hide()
 
         if countryHasShippingFee || countryHasDutyFee
-          extra_fee_block.show()
+          $extraFeeBlock.show()
         else
-          extra_fee_block.hide()
+          $extraFeeBlock.hide()
 
       window.checkout_page.uncheckInternationalShippingFeeCheckbox()
       window.checkout_page.changeButtonStatus()
