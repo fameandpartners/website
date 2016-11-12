@@ -64,6 +64,20 @@ blockquote {
 
 }
 
+.featured-blockquote {
+  margin: 75px 0;
+  font-family: $font-heading;
+  font-size: 2.8rem;
+  font-weight: 300;
+  line-height: 130%;
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+    font-size: 3rem;
+    margin: 40px 0;
+  }
+
+}
+
 // [NOTE] This is just a quick fix for hero copy in /why-us
 // Once the new layout is implemented there, this styling will probably be obsolete and should be removed.
 h1 .sub-heading {
