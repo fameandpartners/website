@@ -23,7 +23,6 @@
 //= require bootstrap/tab
 //= require bootstrap/affix
 //= require bootstrap/scrollspy
-//= require bootstrap/tooltip
 
 //= require libs/jquery.dotdotdot.min
 //= require libs/jquery.mlens.min
