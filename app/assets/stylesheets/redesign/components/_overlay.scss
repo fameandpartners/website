@@ -1,0 +1,94 @@
+// Overlay items on hover
+
+.overlay-alt {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: $c-neutral-white;
+  @include transition(background-color 0.2s linear);
+
+  .overlay-outer-wrap {
+    display: table;
+    width: 100%;
+    height: 100%;
+  }
+
+  .overlay-inner-wrap {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0 40px;
+  }
+
+  .cta-hover {
+    font-family: $font-heading;
+    font-weight: 300;
+    font-size: 1.8em;
+    line-height: 120%;
+  }
+
+  .cta-default {
+    font-weight: 600;
+    font-size: 1.2em;
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    .cta-hover {
+      display: none;
+    }
+
+    .cta-default {
+      display: block;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    background: rgba($c-neutral-13, 0.5);
+
+    .cta-hover,
+    .cta-default {
+      display: block;
+    }
+
+    .cta-hover {
+      font-size: 2.6rem;
+    }
+
+    .cta-default {
+      font-size: 2.3rem;
+    }
+
+  }
+
+}
+
+@media (min-width: $bootstrap-md-width) {
+
+  .cta-hover {
+    display: none;
+  }
+
+  .cta-default {
+    display: block;
+  }
+
+  .item-wrap:hover .overlay-alt {
+    background: rgba($c-neutral-13, 0.5);
+
+    .cta-hover {
+      display: block;
+    }
+
+    .cta-default {
+      display: none;
+    }
+
+  }
+
+}
