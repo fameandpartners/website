@@ -103,3 +103,14 @@
   }
 
 }
+
+
+// Used when we need to force the container to touch the right edge of the screen
+@media (min-width: $bootstrap-md-width) {
+
+  .container-no-padding-right {
+    padding-right: 0;
+    overflow-x: hidden;
+  }
+
+}
