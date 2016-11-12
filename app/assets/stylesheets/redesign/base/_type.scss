@@ -132,6 +132,12 @@ h1 .sub-heading {
 
 }
 
+.double-line-height:before {
+  line-height: 2rem;
+  content: " ";
+  padding: 1px;
+}
+
 // TODO: redo this legacy title
 .page-title--details {
   padding: 60px 0 55px 0;

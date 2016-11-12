@@ -115,12 +115,6 @@
   font-style: normal !important;
 }
 
-.double-line-height:before {
-  line-height: 2rem;
-  content: " ";
-  padding: 1px;
-}
-
 // Keep .nav-justified items side-by-side (even on mobile, no stacking)
 .nav-justified.no-stack-mobile > li {
   display: table-cell;
@@ -186,6 +180,7 @@
 
 }
 
+// Remove padding + margin from Boostrap grid according to screen size
 @media (max-width: $bootstrap-md-width - 1px) {
 
   .no-spacing-cols-mobile {
@@ -196,6 +191,15 @@
   .no-spacing-fluid-cols-mobile {
     margin: 0 -30px;
     padding: 0;
+  }
+
+}
+
+@media (min-width: $bootstrap-md-width) {
+
+  .no-spacing-cols-desktop {
+    padding: 0;
+    overflow-x: hidden;
   }
 
 }
