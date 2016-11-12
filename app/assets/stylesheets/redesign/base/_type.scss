@@ -38,9 +38,10 @@ h6, .h6 {
 }
 
 p {
-  font-family: $font-family-secondary;
-  font-weight: 500;
-  color: $c-neutral-black;
+  font-family: $font-heading;
+  font-weight: 300;
+  margin-bottom: 30px;
+  line-height: 150%;
 }
 
 sup {
