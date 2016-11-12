@@ -24,7 +24,6 @@
 //= require bootstrap/affix
 //= require bootstrap/scrollspy
 //= require bootstrap/tooltip
-//= require bootstrap/popover
 
 //= require libs/jquery.dotdotdot.min
 //= require libs/jquery.mlens.min
