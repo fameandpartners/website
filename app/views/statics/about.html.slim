@@ -1,172 +1,84 @@
 .about
 
-  // hero section
-  .main-hero-wrap.hero-wrap.copy-right
-    picture.media-wrap.keep-ratio
-      .inner-wrap
-        source media='(max-width: 1023px)' srcset='#{image_path("_about/hero-mob.jpg")}'
-        source media='(min-width: 1024px)' srcset='#{image_path("_about/hero-full.jpg")}'
-        img src='#{image_path("_about/hero-full.jpg")}' srcset='
-          #{image_path("_about/hero-mob.jpg")} 1023w,
-          #{image_path("_about/hero-full.jpg")} 1024w' alt='Inspired by heritage, powered by technology'
+  .container-fluid.container-no-padding-right
+    .row
+      .col-md-4.col-md-offset-1
+        .heading-thin-line-top
+          .row
+            .col-xs-12
+              h1.title Your <em>personal</em> atelier.
+              h3.subheading Custom clothing, made-to-order. <br class="visible-lg">No mass production. Less waste.
 
-    .content-wrap
-      .container
-        .row
-          .col-xs-10.col-md-12
-            .copy-wrap
-              h1.heading
-                span.title-heading Inspired by heritage dressmakers, powered by modern technology
-                span.sub-heading Our technology powered, fashion-to-order, anti wastage business model is unique to us. We&lsquo;re proud to be the only company globally making bespoke dresses in as little as 48 hours.
-              .icon-container.clearfix
-                .icon-graphic
-                  .icon-circle.icon.icon-made-to-order
-                  .icon-heading <strong>MADE TO ORDER</strong>
-                .icon-graphic
-                  .icon-circle.icon.icon-sewing-machine
-                  .icon-heading <strong>MADE IN 2 - 5 DAYS</strong>
-  section.our-time
-    .container
-      .row
-        .col-xs-12.col-md-6.col-md-push-6.no-padding
-          .about-slick
-            div
-              .media-wrap.keep-ratio
-                .inner-wrap
-                  = link_to partners_in_crime_competition_path
-                    span.slick-title PARTNERS IN CRIME
-                    span.slick-date March 2016
-                  img src='#{image_path("_about/our-time-tile-full.jpg")}' alt='Partners in crime'
+          .row.no-spacing-fluid-cols-mobile.hidden-md.hidden-lg
+            .col-xs-12
+            = image_tag '_about/hero-mob.jpg', class: "img-responsive"
 
-            div
-              .media-wrap.keep-ratio
-                .inner-wrap
-                  = link_to just_the_girls_collection_path
-                    span.slick-title JUST THE GIRLS
-                    span.slick-date February 2016
-                  img src='#{image_path("_about/our-time-1-tile-full.jpg")}' alt='Just the girls'
+          .row
+            .col-xs-12
+              .intro
+                p We're the modern woman's personal atelier; meaning we create custom, bespoke clothing that suits your personal style and fits your body.
+                p Fame and Partners speaks to women with substance, creativity, talent, vulnerability & ideas. We celebrate the individuality of the modern woman by empowering her to express her unique point of view sartorially.
 
-            div
-              .media-wrap.keep-ratio
-                .inner-wrap
-                  = link_to love_lace_collection_path
-                    span.slick-title LOVE LACE COLLECTION
-                    span.slick-date January 2016
-                  img src='#{image_path("_about/our-time-2-tile-full.jpg")}' srcset='#{image_path("_about/our-time-2-tile-mob.jpg")} 1023w, #{image_path("_about/our-time-2-tile-full.jpg")} 1024w' alt='Love lace collection'
+      .col-md-6.col-md-offset-1.no-padding-right.hidden-xs.hidden-sm
+        = image_tag '_about/hero.jpg', class: "img-responsive hidden-xs hidden-sm"
 
-        .col-xs-12.col-md-6.col-md-pull-6
-          .copy-wrap
-            .content-wrap
-              h3 We design dresses<br>of our time
-              p Our designs are culturally inspired and capture current trends.
+  .container-fluid
+    .row
+      .col-md-5.col-md-offset-1.no-spacing-cols-mobile
+        - current_tile_image = "_about/blockquote-overlap.jpg"
+        - current_tile_image_mob = "_about/blockquote-overlap-mob.jpg"
+        picture
+          source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+          source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+          img.img-responsive.section-overlap alt="'No two women are alike - so why should your blothing be?' - Nyree Corby, CEO" src="#{image_path(current_tile_image)}" srcset="
+            #{image_path(current_tile_image_mob)} 991w,
+            #{image_path(current_tile_image)} 992w"
 
-  section.bespoke
-    .container
-      .row
-        .col-md-6.col-xs-12.no-padding
-          picture.media-wrap.keep-ratio
-            .inner-wrap
-              source media='(max-width: 1023px)' srcset='#{image_path("_about/bespoke-tile-mob.jpg")}'
-              source media='(min-width: 1024px)' srcset='#{image_path("_about/bespoke-tile-full.jpg")}'
-              img src='#{image_path("_about/bespoke-tile-full.jpg")}' srcset='#{image_path("_about/bespoke-tile-mob.jpg")} 1023w, #{image_path("_about/bespoke-tile-full.jpg")} 1024w' alt='Bespoke tailoring'
+      .col-md-5.col-md-offset-1.col-lg-3
+        .content-copy
+          h3.title Each Fame and Partners <br class="hidden-xs hidden-sm">piece is <em>customizable.</em>
+          p Not about a plunging neckline? Change it! Wish it came in black? We can make that happen. We are here deliver fashion that inspires you, as well as give you optionality to suit your individual preferences.
 
-        .col-md-6.col-xs-12
-          .copy-wrap
-            .content-wrap
-              h3 A platform for custom bespoke tailoring
-              p Each of our dresses can be customised in 50 different ways, giving you the power of creative direction.
-              h4 CUSTOMIZED STYLES
-              p Dresses have up to four style customizations, each a new take on the original design.
-              h4 BESPOKE COLORS AND PRINTS
-              p Choose from more than 20 different color variations for many dresses.
-              h4 DRESS LENGTH
-              p The chosen style can be altered to fit your height.
+          p We bring the heritage techniques and quality craftsmanship of an atelier service to the modern, fast-moving fashion world. Your Fame and Partners piece will be handmade by an artisan seamstress, just for you.
 
-  section.dressmaking
-    .container
-      .row
-        .col-md-6.col-xs-12.no-padding.col-md-push-6
-          picture.media-wrap.keep-ratio
-            .inner-wrap
-              source media='(max-width: 1023px)' srcset='#{image_path("_about/dressmaking-tile-mob.jpg")}'
-              source media='(min-width: 1024px)' srcset='#{image_path("_about/dressmaking-tile-full.jpg")}'
-              img src='#{image_path("_about/dressmaking-tile-full.jpg")}' srcset='
-                #{image_path("_about/dressmaking-tile-mob.jpg")} 1023w,
-                #{image_path("_about/dressmaking-tile-full.jpg")} 1024w' alt='Hand made dresses'
+    .row
+      .col-xs-12.col-md-8.col-md-offset-2
+        .featured-blockquote.text-center
+          | Our made-to-order model <em>reduces fashion’s impact</em> on the environment with ethical production methods that <em>generate less waste</em>.
 
-        .col-md-6.col-xs-12.col-md-pull-6
-          .copy-wrap
-            .content-wrap
-              h3 Each dress is handmade<br>by a seamstress
-              p Our dresses are crafted with care and meticulously hand inspected.
+  .container
+    .row.tiles
+      .col-md-4.tile
+        .item-wrap
+          .media-wrap
+            = image_tag "_about/tile-no-mass-production.jpg", :class => "img-responsive", alt: ""
+            .overlay-alt
+              .overlay-outer-wrap
+                .overlay-inner-wrap
+                  span.cta-default NO MASS PRODUCTION
+                  span.cta-hover Your garment is <br class="hidden-sm hidden-xs"><em>made-to-order</em><br class="hidden-sm hidden-xs"> just for you.
 
-  /! section.expansion
-  /!   .container
-  /!     .row
-  /!       .col-md-6.col-xs-12
-  /!         .copy-wrap
-  /!           h3 Expansion and Growth
-  /!           p &ldquo;Our latest funding round empowers us to introduce more ground&ndash;breaking designs to the world of fashion and give you more control than ever over the design of your dress&rdquo;.
-  /!       .col-md-6.col-xs-12
-  /!         .copy-wrap.clearfix
-  /!           p.expansion-number
-  /!             | <span class="number-title">DRESSES SOLD</span><span class="number">108,000</span>
-  /!           p.expansion-number
-  /!             | <span class="number-title">ESTABLISHED FOR</span><span class="number">751 days</span>
+      .col-md-4.tile
+        .item-wrap
+          .media-wrap
+            = image_tag "_about/tile-no-storage.jpg", :class => "img-responsive", alt: ""
+            .overlay-alt
+              .overlay-outer-wrap
+                .overlay-inner-wrap
+                  span.cta-default NO STORAGE
+                  span.cta-hover The finished product is delivered <em>straight to you</em>, without the need to be stored in air conditioned warehouses.
 
-  = render 'shared/redesign/join_team_fame', locals: { contact: @contact }
+      .col-md-4.tile
+        .item-wrap
+          .media-wrap
+            = image_tag "_about/tile-no-excess.jpg", :class => "img-responsive", alt: ""
+            .overlay-alt
+              .overlay-outer-wrap
+                .overlay-inner-wrap
+                  span.cta-default NO EXCESS
+                  span.cta-hover We <em>don't carry stock</em> which means no surplus items each season that would be cleared at discount or thrown away.
 
-  section.our-offices
-    .container
-      .row
-        .col-xs-12
-          h3 Our Offices
-      .row
-        .col-xs-12.col-md-4
-          .office-image.sydney
-            p SYDNEY
-        .col-xs-12.col-md-4
-          .office-image.los-angeles
-            p LOS ANGELES
-        .col-xs-12.col-md-4
-          .office-image.new-york
-            p NEW YORK CITY
-
-  section.modern-atelier
-    .container
-      .row
-        .col-xs-12.col-md-5.col-md-push-7
-          picture.media-wrap
-            .inner-wrap
-              source media='(max-width: 1023px)' srcset='#{image_path("_about/modern-atelier.jpg")}'
-              source media='(min-width: 1024px)' srcset='#{image_path("_about/modern-atelier.jpg")}'
-              img src='#{image_path("_about/modern-atelier.jpg")}' srcset='
-                #{image_path("_about/modern-atelier.jpg")} 1023w,
-              #{image_path("_about/modern-atelier.jpg")} 1024w' alt=''
-        .col-xs-12.col-md-4.col-md-pull-5
-          .copy-wrap
-            h3 The Modern Atelier
-            p Contemporary dresses customized by you, fashioned by Fame and Partners.
-            = link_to "SEE WHY WE'RE DIFFERENT", why_us_path
-
-  ruby:
-    raw init_about_page = "
-      'use strict';
-      (function ($) {
-
-        $('.about-slick').slick({
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 3200,
-          dots: true,
-          arrows: false,
-          useTransform: true,
-          cssEase: 'cubic-bezier(0.770, 0.000, 0.175, 1.000)'
-        });
-
-      }(jQuery));
-    "
-
-  = content_for :inline_javascript do
-    = raw init_about_page
+    .row
+      .col-xs-10.col-xs-offset-1
+        .featured-blockquote.text-center
+          | We're <em>more</em> than just a pretty dress.
