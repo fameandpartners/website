@@ -1,19 +1,19 @@
 require 'spec_helper'
 require 'aasm/rspec'
-require_relative '../../support/return_item_ready_to_process_context'
 
 module Bergen
   module Operations
     RSpec.describe ReturnItemProcess do
       let(:return_request_item) { build_stubbed(:return_request_item) }
-      let(:return_item_process) { described_class.create(return_request_item: return_request_item) }
+      subject(:return_item_process) { described_class.create(return_request_item: return_request_item) }
+      let(:process_id) { return_item_process.id }
 
       it 'obeys state machines flow' do
-        expect(return_item_process).to have_state(:operation_created)
-        expect(return_item_process).to transition_from(:operation_created).to(:style_master_created).on_event(:style_master_was_created)
-        expect(return_item_process).to transition_from(:style_master_created).to(:tracking_number_updated).on_event(:tracking_number_was_updated)
-        expect(return_item_process).to transition_from(:tracking_number_updated).to(:asn_created).on_event(:asn_was_created)
-        expect(return_item_process).to transition_from(:asn_created).to(:asn_received).on_event(:asn_was_received)
+        is_expected.to have_state(:operation_created)
+        is_expected.to transition_from(:operation_created).to(:style_master_created).on_event(:style_master_was_created)
+        is_expected.to transition_from(:style_master_created).to(:tracking_number_updated).on_event(:tracking_number_was_updated)
+        is_expected.to transition_from(:tracking_number_updated).to(:asn_created).on_event(:asn_was_created)
+        is_expected.to transition_from(:asn_created).to(:asn_received).on_event(:asn_was_received)
       end
 
       describe '#start_process' do
@@ -46,20 +46,91 @@ module Bergen
         end
       end
 
-      describe '#update_tracking_number', :vcr  do
-        include_context 'return item ready to process'
+      describe '#verify_style_master' do
+        context 'when process is at the "operation_created" state' do
+          before(:each) { return_item_process.update_attribute(:aasm_state, 'operation_created') }
 
-        let(:shippo_tracking_number) { '9205590164917321211369' }
-        let(:shippo_label_url) { 'https://shippo-delivery-east.s3.amazonaws.com/fcdee5879ad540e993cd8b4a49d36add.pdf?Signature=b02Ci0NtViZgmAFx2YqTY9rMHpA%3D&Expires=1505651292&AWSAccessKeyId=AKIAJGLCC5MYLLWIG42A' }
+          it 'calls upload to FTP worker' do
+            expect(Workers::VerifyStyleMasterWorker).to receive(:perform_async).with(process_id)
 
-        before do
-          return_item_process.style_master_was_created!
+            return_item_process.verify_style_master
+          end
         end
 
-        it 'should get shippo tracking number and label URL'  do
-          return_item_process.update_tracking_number
-          expect(item_return.reload.shippo_tracking_number).to eql(shippo_tracking_number)
-          expect(item_return.reload.shippo_label_url).to eql(shippo_label_url)
+        context 'when process is not at the "operation_created" state' do
+          before(:each) { return_item_process.update_attribute(:aasm_state, 'style_master_created') }
+
+          it 'does not call upload to FTP worker' do
+            expect(Workers::VerifyStyleMasterWorker).not_to receive(:perform_async)
+
+            return_item_process.verify_style_master
+          end
+        end
+      end
+
+      describe '#update_tracking_number' do
+        context 'when process is at the "style_master_created" state' do
+          before(:each) { return_item_process.update_attribute(:aasm_state, 'style_master_created') }
+
+          it 'proceeds to next state' do
+            return_item_process.update_tracking_number
+            return_item_process.reload
+            expect(return_item_process.aasm_state).to eq('tracking_number_updated')
+          end
+        end
+
+        context 'when process is not at the "style_master_created" state' do
+          before(:each) { return_item_process.update_attribute(:aasm_state, 'tracking_number_updated') }
+
+          it 'does nothing to the process state' do
+            return_item_process.update_tracking_number
+            return_item_process.reload
+            expect(return_item_process.aasm_state).to eq('tracking_number_updated')
+          end
+        end
+      end
+
+      describe '#create_asn' do
+        context 'when process is at the "tracking_number_updated" state' do
+          before(:each) { return_item_process.update_attribute(:aasm_state, 'tracking_number_updated') }
+
+          it 'calls upload to FTP worker' do
+            expect(Workers::CreateAsnWorker).to receive(:perform_async).with(process_id)
+
+            return_item_process.create_asn
+          end
+        end
+
+        context 'when process is not at the "tracking_number_updated" state' do
+          before(:each) { return_item_process.update_attribute(:aasm_state, 'asn_created') }
+
+          it 'does not call upload to FTP worker' do
+            expect(Workers::CreateAsnWorker).not_to receive(:perform_async)
+
+            return_item_process.create_asn
+          end
+        end
+      end
+
+      describe '#receive_asn' do
+        context 'when process is at the "asn_created" state' do
+          before(:each) { return_item_process.update_attribute(:aasm_state, 'asn_created') }
+
+          it 'calls upload to FTP worker' do
+            expect(Workers::ReceiveAsnWorker).to receive(:perform_async).with(process_id)
+
+            return_item_process.receive_asn
+          end
+        end
+
+        context 'when process is not at the "asn_created" state' do
+          before(:each) { return_item_process.update_attribute(:aasm_state, 'asn_received') }
+
+          it 'does not call upload to FTP worker' do
+            expect(Workers::ReceiveAsnWorker).not_to receive(:perform_async)
+
+            return_item_process.receive_asn
+          end
         end
       end
     end

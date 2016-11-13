@@ -67,6 +67,12 @@ AdminUi::Engine.routes.draw do
         get 'retry'
       end
     end
+
+    resources :next, only: [:index] do
+      member do
+        get 'retry'
+      end
+    end
   end
 
   root to: 'dashboard#index'

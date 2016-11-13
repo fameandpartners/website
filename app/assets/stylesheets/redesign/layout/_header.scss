@@ -282,45 +282,6 @@ header.main {
       margin-top: 45px;
     }
 
-    .shopping-bag-wrapper {
-
-      span {
-        display: inline-block;
-      }
-
-      .icon-bag {
-        font-size: 1.7rem;
-      }
-
-    }
-
-    .count,
-    .copy {
-      display: block;
-      line-height: 25px;
-      margin-left: 4px;
-      font-size: 1.5rem;
-    }
-
-    .copy {
-      text-decoration: underline;
-      text-transform: none;
-      font-style: italic;
-      font-weight: 300;
-    }
-
-   .count {
-
-      &:before {
-        content: '(';
-      }
-
-      &:after {
-        content: ')';
-      }
-
-    }
-
   }
 
 }

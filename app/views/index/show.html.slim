@@ -33,17 +33,30 @@ ruby:
               = link_to '/dresses/new-this-week', :class => 'position-1'
                 = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive', alt: 'Your personal atelier'
 
-          .col-md-4
-            .item.bordered
-              .item-copy
-                h3 Tailored for <em>you</em>.
-                p.summary Our signature size model means never<br class="visible-xs visible-sm visible-lg-block"> having to say, "It doesn't fit."
-                = link_to size_guide_path
-                  span.cta-link-arrow-right
-                    span.copy-highlight The Fit Guide
-                    i.icon.icon-arrow-right
-              = link_to size_guide_path, :class => 'hidden-sm hidden-xs'
-                = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive', alt: 'Tailored for you'
+          - if Features.active?(:i_equal_change)
+            .col-md-4
+              .item.bordered
+                .item-copy
+                  h3 Dress up, <em>give back.</em>
+                  p.summary $5 of every sale funds women's empowerment charities around the world.
+                  = link_to iequalchange_landing_page_path
+                    span.cta-link-arrow-right
+                      span.copy-highlight Discover more
+                      i.icon.icon-arrow-right
+                = link_to iequalchange_landing_page_path, :class => 'hidden-sm hidden-xs'
+                  = image_tag 'marketing/iequalchange/tile-unwomen.jpg', :class => 'img-responsive', alt: 'i=Change - UN Women'
+          - else
+            .col-md-4
+              .item.bordered
+                .item-copy
+                  h3 Tailored for <em>you</em>.
+                  p.summary Our signature size model means never<br class="visible-xs visible-sm visible-lg-block"> having to say, "It doesn't fit."
+                  = link_to size_guide_path
+                    span.cta-link-arrow-right
+                      span.copy-highlight The Fit Guide
+                      i.icon.icon-arrow-right
+                = link_to size_guide_path, :class => 'hidden-sm hidden-xs'
+                  = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive', alt: 'Tailored for you'
 
           .col-md-4
             .item.bordered

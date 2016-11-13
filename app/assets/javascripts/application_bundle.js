@@ -165,7 +165,15 @@ var CtaPrice = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var PRICE = parseFloat(this.props.price) + parseFloat(this.props.customize.color.price) + parseFloat(this.props.customize.customization.price) - parseFloat(this.props.discount);
+      var discount = 0;
+
+      if (this.props.discount.hasOwnProperty('table')) {
+        discount = this.props.discount.table.amount;
+      } else {
+        discount = this.props.discount;
+      }
+
+      var PRICE = parseFloat(this.props.price) + parseFloat(this.props.customize.color.price) + parseFloat(this.props.customize.customization.price) - parseFloat(discount);
 
       return _react2.default.createElement(
         'div',
@@ -229,7 +237,7 @@ var CtaPrice = function (_React$Component) {
           _react2.default.createElement(
             'li',
             null,
-            'Estimated delivery 1-2 weeks'
+            'Estimated delivery - 10 business days'
           )
         ),
         _react2.default.createElement(
@@ -412,6 +420,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -447,6 +457,8 @@ var PdpGallery = function (_React$Component) {
     _this.handleLoad = _this.handleLoad.bind(_this);
     _this.handleResize = _this.handleResize.bind(_this);
     _this.calculateOffset = _this.calculateOffset.bind(_this);
+
+    _this.state = { loaded: {}, margin: {}, zoom: {} };
     return _this;
   }
 
@@ -462,22 +474,33 @@ var PdpGallery = function (_React$Component) {
       window.removeEventListener('resize', this.handleResize);
     }
   }, {
+    key: 'zoomImage',
+    value: function zoomImage(stateId, shouldZoom) {
+      var zoomObj = this.state.zoom;
+      zoomObj[stateId] = shouldZoom;
+      this.setState({ zoom: zoomObj });
+    }
+  }, {
     key: 'handleLoad',
-    value: function handleLoad(image) {
-      image.target.style.marginLeft = this.calculateOffset(image.target) + 'px';
-      image.target.parentNode.className += ' is-loaded';
-      $(image.target.parentNode).zoom({
-        url: image.target.getAttribute('src'),
+    value: function handleLoad(event) {
+      var loadedObj = this.state.loaded;
+      var marginObj = this.state.margin;
+
+      var imageId = event.target.id;
+
+      loadedObj[imageId] = true;
+      marginObj[imageId] = this.calculateOffset(event.target);
+
+      this.setState({ loaded: loadedObj, margin: marginObj });
+
+      $(event.target.parentNode).zoom({
+        url: event.target.getAttribute('src'),
         touch: true,
         on: 'grab',
         duration: 50,
         magnify: 1.3,
-        onZoomIn: function onZoomIn() {
-          this.parentNode.classList.add('zoomed-in');
-        },
-        onZoomOut: function onZoomOut() {
-          this.parentNode.classList.remove('zoomed-in');
-        }
+        onZoomIn: this.zoomImage.bind(this, imageId, true),
+        onZoomOut: this.zoomImage.bind(this, imageId, false)
       });
     }
   }, {
@@ -495,12 +518,14 @@ var PdpGallery = function (_React$Component) {
     value: function calculateOffset(image) {
       // calculate image offset
       var MOVE_LEFT_PERCENT = 0.3;
+      var desktopMinWidth = 992;
+      var oldImageWidth = 1700;
 
-      if (image.clientWidth > image.parentNode.clientWidth && window.outerWidth >= 992) {
+      if (image.clientWidth > image.parentNode.clientWidth && window.outerWidth >= desktopMinWidth) {
         var offset = (image.clientWidth / 2 - image.parentNode.clientWidth / 2) * -1;
 
         // If image is old (e.g. Skirts), move images only 30% to the left
-        if (image.naturalWidth > 1600) {
+        if (image.naturalWidth > oldImageWidth) {
           offset = offset * MOVE_LEFT_PERCENT;
         }
 
@@ -512,8 +537,55 @@ var PdpGallery = function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      var foundImage = false;
+      var galleryImages = [];
       var thumbIds = [];
+      var defaultColors = this.props.product.available_options.table.colors.table.default;
+      var defaultColorIds = defaultColors.map(function (color) {
+        return color.option_value.id;
+      });
+
+      var _props$images$reduce = this.props.images.reduce(function (acc, image) {
+        if (image.customization_id !== undefined) {
+          acc[0].push(image);
+        } else {
+          acc[1].push(image);
+        }
+
+        return acc;
+      }, [[], []]);
+
+      var _props$images$reduce2 = _slicedToArray(_props$images$reduce, 2);
+
+      var render3dImages = _props$images$reduce2[0];
+      var photos = _props$images$reduce2[1];
+
+
+      if (defaultColorIds.includes(this.props.customize.color.id) && this.props.customize.customization.id === null || !render3dImages.length) {
+        galleryImages = photos.filter(function (image) {
+          return image.color_id === _this3.props.customize.color.id;
+        });
+      } else {
+        galleryImages = render3dImages.filter(function (image) {
+          return image.color_id === _this3.props.customize.color.id && image.customization_id === (_this3.props.customize.customization.id || 0);
+        });
+      }
+
+      // TODO: Alexey Bobyrev 08/11/16
+      // Rewrite filtering logic to avoid empty gallery!
+
+      // NOTE: Alexey Bobyrev 08/11/16
+      // Fallback to non-render3d product w/o images for custom colors
+      if (!galleryImages.length) {
+        galleryImages = photos.filter(function (image) {
+          return _this3.props.product.default_image.table.color_id === image.color_id;
+        });
+      }
+
+      // NOTE: Alexey Bobyrev 08/11/16
+      // If there is no images to default product color then we apply all available photo images
+      if (!galleryImages.length) {
+        galleryImages = photos;
+      }
 
       var SETTINGS = {
         infinite: true,
@@ -532,48 +604,42 @@ var PdpGallery = function (_React$Component) {
         }]
       };
 
-      // check if selected color ID matches any available images
-      this.props.images.map(function (image, index) {
-        if (image.color_id === _this3.props.customize.color.id) {
-          foundImage = true;
-        }
-      });
+      var images = galleryImages.map(function (image, index) {
+        var id = 'gallery-image-' + index;
+        var stateId = 'image-' + image.id;
+        var loadedClass = _this3.state.loaded[stateId] ? 'is-loaded' : '';
+        var zoomClass = _this3.state.zoom[stateId] ? 'zoom-in' : '';
+        var style = { marginLeft: _this3.state.margin[stateId] + 'px' };
 
-      // if no match found, use default dress color
-      var COLOR_ID = foundImage ? this.props.customize.color.id : this.props.product.featured_image.table.color_id;
+        thumbIds.push(id);
 
-      // match color id with images
-      var images = this.props.images.map(function (image, index) {
-        if (image.color_id === COLOR_ID) {
-          var id = "gallery-image-" + index;
-          thumbIds.push(id);
-          return _react2.default.createElement(
+        return _react2.default.createElement(
+          'div',
+          { className: 'media-wrap-outer', key: index },
+          _react2.default.createElement(
             'div',
-            { className: 'media-wrap-outer', key: index },
+            { className: 'media-wrap ' + loadedClass + ' ' + zoomClass },
+            _react2.default.createElement('span', { id: id, className: 'scrollspy-trigger' }),
+            _react2.default.createElement('img', { src: image.url, alt: image.alt, id: stateId,
+              style: style,
+              className: 'js-gallery-image', onLoad: _this3.handleLoad }),
+            _react2.default.createElement('span', { className: 'loader' }),
             _react2.default.createElement(
-              'div',
-              { className: 'media-wrap' },
-              _react2.default.createElement('span', { id: id, className: 'scrollspy-trigger' }),
-              _react2.default.createElement('img', { src: image.url, alt: image.alt,
-                className: 'js-gallery-image', onLoad: _this3.handleLoad }),
-              _react2.default.createElement('span', { className: 'loader' }),
+              'span',
+              { className: 'btn-close expande lg' },
               _react2.default.createElement(
                 'span',
-                { className: 'btn-close expande lg' },
-                _react2.default.createElement(
-                  'span',
-                  { className: 'hide-visually' },
-                  'tap to zoom'
-                )
-              ),
-              _react2.default.createElement(
-                'span',
-                { className: 'btn-zoom' },
+                { className: 'hide-visually' },
                 'tap to zoom'
               )
+            ),
+            _react2.default.createElement(
+              'span',
+              { className: 'btn-zoom' },
+              'tap to zoom'
             )
-          );
-        }
+          )
+        );
       });
 
       images = images.filter(function (n) {
@@ -1011,11 +1077,11 @@ var SidePanelCustom = function (_SidePanel) {
       customize.customization = {};
 
       if (this.props.customize.customization.id === event.currentTarget.dataset.id) {
-        customize.customization.id = "";
+        customize.customization.id = undefined;
         customize.customization.presentation = "";
         customize.customization.price = 0;
       } else {
-        customize.customization.id = event.currentTarget.dataset.id;
+        customize.customization.id = parseInt(event.currentTarget.dataset.id);
         customize.customization.presentation = event.currentTarget.dataset.presentation;
         customize.customization.price = parseFloat(event.currentTarget.dataset.price);
       }
@@ -13322,20 +13388,17 @@ var Modal = React.createClass({
       content: React.PropTypes.object,
       overlay: React.PropTypes.object
     }),
-    portalClassName: React.PropTypes.string,
     appElement: React.PropTypes.instanceOf(SafeHTMLElement),
     onAfterOpen: React.PropTypes.func,
     onRequestClose: React.PropTypes.func,
     closeTimeoutMS: React.PropTypes.number,
     ariaHideApp: React.PropTypes.bool,
-    shouldCloseOnOverlayClick: React.PropTypes.bool,
-    role: React.PropTypes.string
+    shouldCloseOnOverlayClick: React.PropTypes.bool
   },
 
   getDefaultProps: function () {
     return {
       isOpen: false,
-      portalClassName: 'ReactModalPortal',
       ariaHideApp: true,
       closeTimeoutMS: 0,
       shouldCloseOnOverlayClick: true
@@ -13344,7 +13407,7 @@ var Modal = React.createClass({
 
   componentDidMount: function() {
     this.node = document.createElement('div');
-    this.node.className = this.props.portalClassName;
+    this.node.className = 'ReactModalPortal';
     document.body.appendChild(this.node);
     this.renderPortal(this.props);
   },
@@ -13430,7 +13493,6 @@ var CLASS_NAMES = {
 var ModalPortal = module.exports = React.createClass({
 
   displayName: 'ModalPortal',
-  shouldClose: null,
 
   getDefaultProps: function() {
     return {
@@ -13508,10 +13570,7 @@ var ModalPortal = module.exports = React.createClass({
   },
 
   focusContent: function() {
-    // Don't steal focus from inner elements
-    if (!this.contentHasFocus()) {
-      this.refs.content.focus();
-    }
+    this.refs.content.focus();
   },
 
   closeWithTimeout: function() {
@@ -13541,28 +13600,20 @@ var ModalPortal = module.exports = React.createClass({
     }
   },
 
-  handleOverlayMouseDown: function(event) {
-    if (this.shouldClose === null) {
-      this.shouldClose = true;
-    }
-  },
+  handleOverlayClick: function(event) {
+    var node = event.target
 
-  handleOverlayMouseUp: function(event) {
-    if (this.shouldClose && this.props.shouldCloseOnOverlayClick) {
+    while (node) {
+      if (node === this.refs.content) return
+      node = node.parentNode
+    }
+
+    if (this.props.shouldCloseOnOverlayClick) {
       if (this.ownerHandlesClose())
         this.requestClose(event);
       else
         this.focusContent();
     }
-    this.shouldClose = null;
-  },
-
-  handleContentMouseDown: function(event) {
-    this.shouldClose = false;
-  },
-
-  handleContentMouseUp: function(event) {
-    this.shouldClose = false;
   },
 
   requestClose: function(event) {
@@ -13576,10 +13627,6 @@ var ModalPortal = module.exports = React.createClass({
 
   shouldBeClosed: function() {
     return !this.props.isOpen && !this.state.beforeClose;
-  },
-
-  contentHasFocus: function() {
-    return document.activeElement === this.refs.content || this.refs.content.contains(document.activeElement);
   },
 
   buildClassName: function(which, additional) {
@@ -13600,18 +13647,14 @@ var ModalPortal = module.exports = React.createClass({
         ref: "overlay",
         className: this.buildClassName('overlay', this.props.overlayClassName),
         style: Assign({}, overlayStyles, this.props.style.overlay || {}),
-        onMouseDown: this.handleOverlayMouseDown,
-        onMouseUp: this.handleOverlayMouseUp
+        onClick: this.handleOverlayClick
       },
         div({
           ref: "content",
           style: Assign({}, contentStyles, this.props.style.content || {}),
           className: this.buildClassName('content', this.props.className),
           tabIndex: "-1",
-          onKeyDown: this.handleKeyDown,
-          onMouseDown: this.handleContentMouseDown,
-          onMouseUp: this.handleContentMouseUp,
-          role: this.props.role
+          onKeyDown: this.handleKeyDown
         },
           this.props.children
         )
@@ -37005,7 +37048,7 @@ module.exports = require('./lib/index');
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 
 var _ponyfill = require('./ponyfill');
@@ -37014,19 +37057,12 @@ var _ponyfill2 = _interopRequireDefault(_ponyfill);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var root; /* global window */
+var root = undefined; /* global window */
 
-
-if (typeof self !== 'undefined') {
-  root = self;
+if (typeof global !== 'undefined') {
+	root = global;
 } else if (typeof window !== 'undefined') {
-  root = window;
-} else if (typeof global !== 'undefined') {
-  root = global;
-} else if (typeof module !== 'undefined') {
-  root = module;
-} else {
-  root = Function('return this')();
+	root = window;
 }
 
 var result = (0, _ponyfill2['default'])(root);

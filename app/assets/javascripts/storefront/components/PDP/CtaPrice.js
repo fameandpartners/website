@@ -64,12 +64,19 @@ class CtaPrice extends React.Component {
   }
 
   render() {
+    let discount = 0;
+
+    if (this.props.discount.hasOwnProperty('table')) {
+      discount = this.props.discount.table.amount;
+    } else {
+      discount = this.props.discount;
+    }
 
     const PRICE =
       parseFloat(this.props.price)
       + parseFloat(this.props.customize.color.price)
       + parseFloat(this.props.customize.customization.price)
-      - parseFloat(this.props.discount);
+      - parseFloat(discount);
 
     return (
       <div className="btn-wrap">
@@ -109,7 +116,7 @@ class CtaPrice extends React.Component {
           })()}
         <ul className="est-delivery">
           <li>Free Shipping</li>
-          <li>Estimated delivery 1-2 weeks</li>
+          <li>Estimated delivery - 10 business days</li>
         </ul>
         <Modal
           style={MODAL_STYLE}
