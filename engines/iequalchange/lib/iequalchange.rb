@@ -4,7 +4,7 @@ module Iequalchange
   autoload :VERSION,       'iequalchange/version'
   autoload :Config,        'iequalchange/config'
   autoload :Configuration, 'iequalchange/config'
-  autoload :Encrypt,       'iequalchange/encrypt'
+  autoload :Cypher,        'iequalchange/cypher'
 
   class << self
     include Configuration

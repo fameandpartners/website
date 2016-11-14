@@ -1,28 +1,29 @@
 - if ::Iequalchange.config.enabled
-  - iec_hash = ::Iequalchange::Encrypt.process(current_order)
+  - iec_hash = ::Iequalchange::Cypher.new(spree_order).encode
 
   javascript:
     (function($) { 'use strict';
       var iecData = {
         url: '#{iec_hash[:url]}',
-        src: '#{iec_hash[:site]}',
-        id: '#{iec_hash[:id]}',
-        payload: '#{iec_hash[:data]}'
+        src: '#{iec_hash[:src]}',
+        id:  '#{iec_hash[:id]}',
+        payload: '#{iec_hash[:payload]}'
       };
 
       var callback = function() {
         iec(iecData.url, iecData.id, iecData.payload);
       };
 
-      var head = document.getElementsByTagName('head')[0];
+      var head   = document.getElementsByTagName('head')[0];
       var script = document.createElement('script');
-      script.type='text/javascript';
-      script.src=iecData.src;
-      script.setAttribute('data-iec-location', 'https://'+iecData.url);
+
+      script.type = 'text/javascript';
+      script.src  = iecData.src;
+      script.setAttribute('data-iec-location', iecData.url);
       script.setAttribute('data-site-id', iecData.id);
       script.setAttribute('data-payload', iecData.payload);
 
-      script.onload=callback;
+      script.onload = callback;
       head.appendChild(script);
     })(jQuery);
 - else
