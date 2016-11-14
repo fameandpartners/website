@@ -1,12 +1,12 @@
-li.country_member data-hook="country_member"
+li.container data-hook="country_member"
   = f.hidden_field :zoneable_type, :value => 'Spree::Country'
   = f.collection_select(:zoneable_id, @countries, :id, :name, {:include_blank => true}, {:class => 'select2 fullwidth'})
-  .checkboxes_container
-    .checkboxes
+  .row{style='margin: 0'}
+    .column.eleven
       div
         = f.label :has_international_shipping_fee
-        = f.check_box :has_international_shipping_fee
+        = f.check_box :has_international_shipping_fee, style: 'margin-left: 10px'
       div
         = f.label :show_duty_fee_notification
-        = f.check_box :show_duty_fee_notification
-    .remove= remove_nested f
+        = f.check_box :show_duty_fee_notification, style: 'margin-left: 10px'
+    .column{style='float: right'}= remove_nested f

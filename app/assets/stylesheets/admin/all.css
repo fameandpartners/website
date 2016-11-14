@@ -17,16 +17,3 @@
 *= require jquery-ui/tabs
   *= require admin/spree_masterpass
 */
-
-.country_member .checkboxes_container {
-  overflow: hidden;
-}
-.country_member .checkboxes {
-  float: left;
-}
-.country_member .remove {
-  float: right;
-}
-.country_member label {
-  margin-right: 10px;
-}
