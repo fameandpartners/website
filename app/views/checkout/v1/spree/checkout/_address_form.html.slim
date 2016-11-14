@@ -26,6 +26,9 @@ ruby:
     country_field_id = "#{ sanitized_object_name }_country_id"
 
   = content_for :inline_javascript do
+    | page.initExtraFeesAlert();
+    | $('#international_shipping_fee').click(window.checkout_page.extraFeesAlert.internationalShippingFeeCheckboxClicked);
+
     | $('##{ field_id }').val('#{ address.state_id }');
     | checkout_page.updateStatesVisibility('##{ country_field_id }', '##{ field_id }', '##{state_text_field_id}');
 
@@ -33,7 +36,7 @@ ruby:
     |   checkout_page.updateStatesVisibility('##{ country_field_id }', '##{ field_id }', '##{state_text_field_id}');
     | });
 
-    | $('##{ country_field_id }').change(checkout_page.countryChanged);
+    | $('##{ country_field_id }').change(checkout_page.extraFeesAlert.countryChanged);
 
     | checkout_page.countries = #{raw countries_with_fees.to_json};
     | $('##{ country_field_id }').trigger('change');

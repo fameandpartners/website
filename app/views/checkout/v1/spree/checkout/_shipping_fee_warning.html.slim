@@ -20,5 +20,3 @@
         .checkbox.custom-form-element-thin.checkbox-black-bg.checkbox-inline.duty_fee_alert
             = check_box_tag :international_shipping_fee
             label for="international_shipping_fee" I understand that there may be a custom duty fee
-  = content_for :inline_javascript do
-    | $('#international_shipping_fee').click(window.checkout_page.internationalShippingFeeCheckboxClicked);

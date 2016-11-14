@@ -28,6 +28,7 @@ module Acceptance
     end
 
     step 'I agree with shipping fee' do
+      expect(page).to have_text('Additional custom duty fees apply to your country.')
       find("label[for='international_shipping_fee']").click
     end
 
