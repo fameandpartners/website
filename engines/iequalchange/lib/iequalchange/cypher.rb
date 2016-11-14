@@ -8,18 +8,12 @@ module Iequalchange
     PREFIX  = 'iEC'.freeze
     VERSION = 2.chr.freeze
 
-    SCRIPT_SRC_PATH = 'static/js/load'.freeze
-
-    attr_reader :order, :cipher
+    attr_reader :order, :cipher, :config
 
     def initialize(order)
       @order  = order
       @cipher = OpenSSL::Cipher::Cipher.new(ALGORITHM)
-
-      ::Iequalchange.configure(
-        iec_id:  ENV.fetch('IEC_ID',  ::Iequalchange.config.iec_id),
-        iec_key: ENV.fetch('IEC_KEY', ::Iequalchange.config.iec_key)
-      )
+      @config = ::Iequalchange::Config.new.config
     end
 
     def encode
@@ -29,11 +23,11 @@ module Iequalchange
       final_payload = [PREFIX, VERSION, cipher.random_iv, encrypted].join
 
       payload = Base64.strict_encode64(final_payload)
-      script_src = [::Iequalchange.config.iec_url, SCRIPT_SRC_PATH].join
+      script_src = [config[:url], config[:script_src_path]].join
 
       {
-        id:  ::Iequalchange.config.iec_id,
-        url: URI.escape(::Iequalchange.config.iec_url),
+        id:  config[:id],
+        url: URI.escape(config[:url]),
         src: URI.escape(script_src),
         payload: payload
       }
@@ -57,7 +51,7 @@ module Iequalchange
     private
 
     def encrypt(json)
-      key = ::Iequalchange.config.iec_key
+      key = config[:key]
 
       cipher.encrypt
       cipher.key = Digest::SHA256.new.digest(key)
@@ -66,7 +60,7 @@ module Iequalchange
     end
 
     def decrypt(encoded_str)
-      key = ::Iequalchange.config.iec_key
+      key = config[:key]
 
       cipher.decrypt
       cipher.key = Digest::SHA256.new.digest(key)
