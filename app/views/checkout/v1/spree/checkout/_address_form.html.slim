@@ -9,7 +9,7 @@ ruby:
       country.id,
       {
         shipping_fee: country.zone_member.has_international_shipping_fee,
-        duty_fee: country.zone_member.has_duty_fee
+        duty_fee: country.zone_member.show_duty_fee_notification || country.zone_member.has_international_shipping_fee
       }
     ]
   end]
