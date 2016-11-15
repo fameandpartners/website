@@ -4,10 +4,10 @@ ruby:
 
   @product.default_color_options.each do |color|
     product_paths[color.id] = collection_product_path(@product, url_params.merge(color: color.name))
-
-    @current_site_version = current_site_version
-    @product_discount     = @product.discount.to_json == 'null' ? 0 : @product.discount.to_json
   end
+
+  @current_site_version = current_site_version
+  @productDiscount = @product.discount.to_json == 'null' ? 0 : @product.discount.to_json;
 
   init_product_details_page = "page.initProductDetailsPage();"
 

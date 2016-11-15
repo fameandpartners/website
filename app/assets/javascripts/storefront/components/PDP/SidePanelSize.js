@@ -40,7 +40,6 @@ class SidePanelSize extends SidePanel {
     const MENU_STATE = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
     const TRIGGER_STATE = this.props.customize.size.id
       ? "c-card-customize__content is-selected" : "c-card-customize__content";
-    const SIZE_CHART_VERSION_TEXT = this.props.sizeChartVersion === "2016" ? 'legacy' : 'new';
 
     const SIZES = this.props.defaultSizes.map((size, index) => {
       const ITEM_STATE = this.props.customize.size.id == size.table.id
