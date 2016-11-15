@@ -17,4 +17,4 @@ fi
 slack_endpoint='https://hooks.slack.com/services'
 curl ${slack_endpoint}/T026PUF20/B046TP83D/${SLACK_API_KEY} \
 -X POST \
---data-urlencode "payload={\"channel\":\"#dev-robots\",\"username\":\"FameBot\",\"icon_emoji\":\":dancer:\",\"text\":\"Deploying to *${SERVER_ROLE} ${FRAMEWORK_ENV}* - ${git_branch} (${remote_sha:0:6})\"}"
+--data-urlencode "payload={\"channel\":\"#dev-robots\",\"username\":\"FameBot\",\"icon_emoji\":\":dancer:\",\"text\":\"Successfully deployed to *${SERVER_ROLE} ${FRAMEWORK_ENV}* - ${git_branch} (${remote_sha:0:6})\"}"
