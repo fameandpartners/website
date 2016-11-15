@@ -3,7 +3,7 @@
 .inside-out {
 
   .page-title {
-    background-color: $c-neutral-black;
+    background-color: transparent;
   }
 
   h1 {
@@ -36,7 +36,7 @@
   .section-border {
     margin-top: 60px;
     padding-top: 60px;
-    border-top: 2px solid $c-neutral-black;
+    border-top: 3px solid $c-neutral-black;
   }
 
   .section-grand-prize {
@@ -85,7 +85,8 @@
   }
 
   .btn-xs {
-    font-size: 2rem;
+    font-size: 2.6rem;
+    padding: 20px 40px;
   }
 
   .mobile-fb-share {
@@ -102,13 +103,26 @@
 
   @media (max-width: $bootstrap-md-width - 1px) {
 
-    .section-box {
-      text-align: center;
+    .page-title {
+      background-image: url('/assets/inside-out/banner-mobile.jpg');
+      background-position: top center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin-bottom: 30px;
+
+      .page-title--details {
+        padding: 100px 0;
+
+        h1 {
+          font-size: 7rem;
+        }
+
+      }
+
     }
 
-    .section-border {
-      margin-top: 30px;
-      padding-top: 30px;
+    .section-box {
+      text-align: center;
     }
 
     .section-giving-back {
@@ -123,7 +137,10 @@
 
   // START - desktop
   @media (min-width: $bootstrap-md-width) {
-    background-color: $c-neutral-black;
+    background-image: url('/assets/inside-out/banner-desktop.jpg');
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
 
     h1 {
       font-size: 12rem;
