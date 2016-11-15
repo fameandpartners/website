@@ -57,7 +57,7 @@ function bundle(bundler) {
           .pipe(gulp.dest(config.dest))
           .on('end', function () {
               const time = (new Date().getTime() - startTime) / 1000;
-              gutil.log(`Finshed. Took: ${time}s`);
+              gutil.log(`Finished. Took: ${time}s`);
           });
     } else { // development build should not be minified and compressed
       return bundler.bundle()
