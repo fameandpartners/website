@@ -1,10 +1,11 @@
 class CopyProductsPropertiesWithNewValues < ActiveRecord::Migration
   def up
-    patterns_collection = [
+    patterns_collections = [
       { name: 'fabric', pattern: 'Trim:' },
       { name: 'fit', pattern: 'These measurement are taken from size' }
     ]
 
+    
     patterns_collections.each do |hash|
       Spree::Property.find_by_name(hash[:name]).product_properties.where('value LIKE ?', "%#{hash[:pattern]}%").find_each do |property|
         product = property.product
@@ -27,5 +28,5 @@ class CopyProductsPropertiesWithNewValues < ActiveRecord::Migration
       end
     end
   end
-  
+
 end
