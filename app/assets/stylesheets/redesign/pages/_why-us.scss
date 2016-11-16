@@ -6,11 +6,15 @@
     font-size: 3.2rem;
   }
 
-  p {
-    line-height: 150%;
-    font-family: $font-heading;
-    font-weight: 300;
-    font-size: 2rem;
+  .section-box {
+
+    p {
+      line-height: 150%;
+      font-family: $font-heading;
+      font-weight: 300;
+      font-size: 2rem;
+    }
+    
   }
 
   .icon {
