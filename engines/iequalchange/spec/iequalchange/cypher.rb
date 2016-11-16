@@ -14,28 +14,25 @@ RSpec.describe Iequalchange::Cypher do
     end
 
     it 'should decode payload w/ customer data' do
-      payload = "aUVDAmAujHWvAxkjmbcrFUvgfcWKAXG2kILhei+pDcR6IHXmr4E6QvaI4fauXMuaTTBoNv3dbIL8XcwRMv4fvAux96ZJFz54/IQhQVlsWuw+yfgM0BDgHKTS6Xze2ZAbxj+goL2i3aNEAmQMwxsu8bpRQDiYghIU9/Dn5Vuunkj8LjxhIozZI9gQ+dYZ5HAzawfxheR7xSewd2+fsWk5GzKqttXLmkUevQDWZGGe+/dTQth2xrZZpZcXP8i88Bb5nuSuhVj4CQEbfIBSccDOsLJpxN71mwdw6wvQAbiasDWEZbYtI5AL/XXYjalWo6JN1nh5JwteKFpCmROAyL8lOUW831gj6FCp6W1VrOKj+ze4msNxg5XU8aUWX9ZP+F/ar8+mFHh5sMNCKR4v166gxsqapxk="
+      payload = "aUVDAtt/hTZ+b08MlIU6cFtMByzA/UxMYRMFrfVb6607l6dt2DxD/niCiMEHkAGnFj//FFcDQ43D5g6OIlmZCZf/JC0FhpbqQyBLGe+wSMqctpdcJv1RMXRJkXOOFoZBCEjZtSdzu3yKZIYsGZiZCg9KNv0URg4tPFjOsfU/s85NeW31+B0SEMIHkOLNbAVVZXv0c1wcohstILPnvHneWImdW8P0sOzGWwnkkSDdIA4EFPWqJ3Brobq5XjXuLNnrCyuj+klp9ewATzSgtBN4AsJTSFr2n3yq6eO6r8sJQw0XwyBxwLk9jzluaKnMffY8Xbi52w=="
 
       order_hash = described_class.decode(payload)
       
       expect(order_hash).to include({
-        "orderid" => "R103182841",
-        "totalamount" => "0.0",
-        "customer_email" => "elton.stewart+71@gmail.com",
-        "first_name" => "Elton",
-        "surname" => "Stewart",
-        "customer_id" => 18,
-        "postcode" => "2010",
-        "state" => "NSW",
-        "country" => "AUSTRALIA",
-        "firstname" => "Elton",
-        "state_text" => "NSW",
-        "country_iso_name" => "AUSTRALIA"
+        "orderid"        => "R655600874",
+        "totalamount"    => "299.0",
+        "customer_email" => "anonymous_user@fameandpartners.com",
+        "first_name"     => "Lorem",
+        "surname"        => "Ipsum",
+        "customer_id"    => 71716,
+        "postcode"       => "12345",
+        "state"          => "WA",
+        "country"        => "UNITED STATES"
       })
     end
 
     it 'should decode payload w/o customer data' do
-      payload = "aUVDAgPscCdRuNIodZgMjxnsNJ1CcWKT4fxMGl7mA/E5qJ5a7VGd8szLAoXJXtZchR1g4Xt1I+fPTTVfnHbjnPoBQ3njywrb14qb7v0ug3ncD18lUjYiBGO1VP2/nPPvRtK27GsCmesb+LVd0BhyV47evytklt0g1epZc6l8PqN99CxvokW7bezsl4h5NAS2fnNt7kaGoFlPVCX9cEiYsC1Dk1AWKNm4rhAoNltAu0n/LHQubLbp1lV/QzRBvFc7+i7Edg=="
+      payload = "aUVDAtEaqeQenJ4Yh6H0QH6GAbjzMZVT7gZqGaumrDqppCky/uXd0p3PfAqDv49oApxrdrw2fRN2aTnfWwg42DJmETVb+mHExBcIdxitRn1fXWvurWmMfU861FU+aS9yUpuOVJ58n3OxZ7P6co0ED1LJKhZO349Znv7sJaf8+GsEPGjMAjg5/llzRRezxcKXi1TB4C3JjSvgCRcnY7CGho/AyqjY2sOUJe1MeV8wUDLjGdW8g1mnxcJkhxTmQiY6kiX2iQ=="
 
       order_hash = described_class.decode(payload)
       

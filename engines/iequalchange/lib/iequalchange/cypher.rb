@@ -18,9 +18,11 @@ module Iequalchange
 
     def encode
       json_data = order_to_json(order)
+      iv = cipher.random_iv
 
       encrypted = encrypt(json_data)
-      final_payload = [PREFIX, VERSION, cipher.random_iv, encrypted].join
+
+      final_payload = PREFIX + VERSION + iv + encrypted
 
       payload = Base64.strict_encode64(final_payload)
       script_src = [config[:url], config[:script_src_path]].join
@@ -36,13 +38,15 @@ module Iequalchange
     def self.decode(payload)
       str = Base64.decode64(payload)
       instance = self.new(nil)
+      iv_length = instance.cipher.iv_len
 
-      match_data = str.match(/#{PREFIX}#{VERSION}(?<iv>.{#{instance.cipher.iv_len}})(?<data>[\S\s]+)/)
+      match_data = str.match(/#{PREFIX}#{VERSION}(?<iv>.{#{iv_length}})(?<data>[\S\s]+)/)
 
-      if instance.cipher.iv_len == match_data['iv'].length
-        JSON.parse(
-          instance.send(:decrypt, match_data['data'])
-        )
+      if iv_length == match_data['iv'].length
+        decrypted = instance.send(:decrypt, match_data['iv']+match_data['data'])
+        decrypted.gsub!(/^.{#{iv_length}}/, '') if decrypted[0] != '{'
+
+        JSON.parse(decrypted)
       else
         raise StandardError, 'incorrect iv for payload'
       end
@@ -51,12 +55,10 @@ module Iequalchange
     private
 
     def encrypt(json)
-      key = config[:key]
-
       cipher.encrypt
-      cipher.key = Digest::SHA256.new.digest(key)
+      cipher.key = Digest::SHA256.new.digest(config[:key])
 
-      [cipher.update(json), cipher.final].join
+      cipher.update(json) + cipher.final
     end
 
     def decrypt(encoded_str)
@@ -65,7 +67,7 @@ module Iequalchange
       cipher.decrypt
       cipher.key = Digest::SHA256.new.digest(key)
 
-      [cipher.update(encoded_str), cipher.final].join
+      cipher.update(encoded_str) + cipher.final
     end
 
     def order_to_json(order)
@@ -75,8 +77,8 @@ module Iequalchange
         if billing_adress.present?
           {
             firstname:  billing_adress.firstname,
-            surname:    billing_adress.lastname,
-            postcode:   billing_adress.zipcode,
+            lastname:   billing_adress.lastname,
+            zipcode:    billing_adress.zipcode,
             state_text: billing_adress.state_text,
             country_iso_name: billing_adress.country.iso_name
           }
@@ -96,7 +98,7 @@ module Iequalchange
         :country        => address_info.fetch(:country_iso_name, nil),
       }
 
-      order_data.merge(address_info).to_json
+      order_data.merge(order_data).to_json
     end
   end
 end
