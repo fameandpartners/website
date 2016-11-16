@@ -1,7 +1,7 @@
 namespace :assets do
   desc 'Bundles production JS executing `npm install` and `npm run production` commands'
   task :bundle_js do
-    %x(npm install --only=prod && npm run production)
+    %x(npm install && npm run production)
   end
 end
 
