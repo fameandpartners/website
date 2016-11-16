@@ -22,6 +22,9 @@
   }
 
   ul {
+    font-family: $font-heading;
+    font-size: 1.3em;
+    font-weight: 300;
     padding-left: 0;
     margin-bottom: 30px;
     list-style-position: inside;
@@ -42,16 +45,11 @@
   }
 
   .section-grand-prize {
-    font-weight: bold;
 
     h2 {
       font-size: 5rem;
       font-weight: bold;
       font-family: $font-family-secondary;
-    }
-
-    ul {
-      font-size: 2rem;
     }
 
   }
@@ -81,12 +79,6 @@
       text-decoration: underline;
     }
 
-  }
-
-  .text-inside-out {
-    font-family: $font-heading;
-    font-size: 1.3em;
-    font-weight: 300;
   }
 
   .space-paragraph {
