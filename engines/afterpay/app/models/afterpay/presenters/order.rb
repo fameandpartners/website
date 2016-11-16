@@ -13,10 +13,22 @@ module Afterpay
       def_delegators :bill_address,
                      :phone,
                      :firstname,
-                     :lastname
+                     :lastname,
+                     :address1,
+                     :address2,
+                     :city,
+                     :state_name,
+                     :zipcode,
+                     :country
+
+      def_delegators :country, :iso3
 
       def initialize(spree_order:)
         @spree_order = spree_order
+      end
+
+      def name
+        "#{first_name} #{last_name}"
       end
 
       private

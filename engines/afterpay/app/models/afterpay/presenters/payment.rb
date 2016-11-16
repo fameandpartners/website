@@ -45,6 +45,16 @@ module Afterpay
               surname:     order.lastname,
               email:       order.email
             },
+            billing:           {
+              name:        order.name,
+              line1:       order.address1,
+              line2:       order.address2,
+              suburb:      order.city,
+              state:       order.state_name,
+              postcode:    order.zipcode,
+              countryCode: order.iso3,
+              phoneNumber: order.phone
+            },
             merchant:          {
               redirectConfirmUrl: confirmation_url(order_number: order.number),
               redirectCancelUrl:  checkout_url
