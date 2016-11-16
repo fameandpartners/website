@@ -7,7 +7,8 @@ ruby:
   end
 
   @current_site_version = current_site_version
-  @productDiscount = @product.discount.to_json == 'null' ? 0 : @product.discount.to_json;
+  discount  = @product.discount || {table: { amount: 0 }}
+  @productDiscount = discount.to_json
 
   init_product_details_page = "page.initProductDetailsPage();"
 
