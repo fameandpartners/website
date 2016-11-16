@@ -8,6 +8,19 @@ module Reports
 
     def to_sql
       <<-SQL
+        WITH order_taxes AS (
+            SELECT ord.id order_id, adj.amount amount
+            FROM spree_adjustments adj
+              LEFT JOIN spree_orders ord ON adj.adjustable_id = ord.id
+            WHERE
+              adj.adjustable_type = 'Spree::Order'
+              AND adj.originator_type = 'Spree::TaxRate'
+        ), order_items AS (
+            SELECT order_id, count(*) AS items
+            FROM spree_line_items
+            GROUP BY order_id
+        )
+
         SELECT
           number,
           o.id,
@@ -15,6 +28,7 @@ module Reports
           lic.items,
           total,
           payment_total,
+          tax.amount tax_total,
           o.email,
           completed_at :: DATE,
           m.utm_medium,
@@ -40,11 +54,10 @@ module Reports
           billing_address.phone AS "billing_address_phone",
           billing_address_state.name AS "billing_address_state",
           billing_address_country.name AS "billing_address_country"
-        FROM spree_orders o LEFT JOIN (SELECT
-                                         order_id,
-                                         count(*) AS items
-                                       FROM spree_line_items
-                                       GROUP BY order_id) lic ON lic.order_id = o.id
+
+        FROM spree_orders o
+          LEFT JOIN order_items lic ON lic.order_id = o.id
+          LEFT JOIN order_taxes tax ON tax.order_id = o.id
           LEFT JOIN marketing_order_traffic_parameters m ON m.order_id = o.id
           LEFT JOIN spree_addresses shipping_address ON shipping_address.id = o.ship_address_id
           LEFT JOIN spree_addresses billing_address ON billing_address.id = o.bill_address_id
@@ -56,6 +69,5 @@ module Reports
         ORDER BY completed_at;
       SQL
     end
-
   end
 end
