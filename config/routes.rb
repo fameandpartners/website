@@ -321,7 +321,7 @@ FameAndPartners::Application.routes.draw do
     get '/how-it-works', to: redirect("/why-us")
     get '/size-guide'  => 'statics#size_guide', :as => :size_guide
     get '/growth-plan'  => 'statics#growth_plan', :as => :growth_plan
-    get '/inside-out'   => 'statics#inside_out', :permalink => 'inside_out', :as => :inside_out
+    get '/inside-out-competition'   => 'statics#inside_out_competition', :permalink => 'inside_out_competition', :as => :inside_out_competition
 
     get '/fashionista2014', to: redirect("/")
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
