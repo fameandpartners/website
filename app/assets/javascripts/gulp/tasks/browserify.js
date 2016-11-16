@@ -108,22 +108,6 @@ gulp.task('clean-scripts', () => {
     .pipe(clean());
 });
 
-// gulp.task('js', ['apply-node-env', 'clean-scripts'], () => {
-// 	browserify(config.paths.mainJS)
-// 		.transform(babelify, {presets: ['es2015', 'react']})
-// 		.bundle()
-// 		.on('error', (err) => gutil.log(chalk.red(err)))
-// 		.pipe(vinyl('application_bundle.js'))
-// 		.pipe(gulp.dest(config.paths.dist));
-// });
-
-// gulp.task('lint', () => {
-//   return gulp.src(config.paths.js)
-//     .pipe(eslint())
-//     .pipe(eslint.format())
-//     .pipe(eslint.failAfterError());
-// });
-
 gulp.task('browserify', () => {
   const startTime = new Date().getTime();
   const bundle = createBundle();
