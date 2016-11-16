@@ -1,3 +1,4 @@
+set :job_template, "bash -l -c '[[ ! -f /tmp/STOP_CRONS ]] && . /etc/app_description && . $APP_LOCATION/shared/envvars && :job'"
 set :environment, ENV['RAILS_ENV']
 
 every 4.hours do
@@ -36,3 +37,5 @@ every(3.hours)    { rake 'bergen:workers:receive_asns' }
 # Next Logistics scheduled tasks
 
 every(30.minutes) { rake 'next:workers:asn_file_upload' }
+
+
