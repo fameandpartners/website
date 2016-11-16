@@ -45,6 +45,11 @@ section.order-details
                                 | Size: <span class="value">#{line_item.size_name}</span>
                               li
                                 | Quantity: <span class="value">#{line_item.quantity}</span>
+
+                              - if line_item.fast_making?
+                                - fast_making = line_item.making_options.first
+                                li
+                                  | Express making: <span class="value text-transform-none">You'll get it in 6 to 9 days!</span>
               .row
                 .order-total.col-md-7.col-md-offset-5
 

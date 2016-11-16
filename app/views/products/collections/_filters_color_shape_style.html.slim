@@ -141,3 +141,17 @@
                 = check_box_tag shape, shape, preSelected, 'data-all' => 'false'
                 span.icon
                 span = shape.gsub '_', ' '
+
+    - if !Features.active?(:getitquick_unavailable)
+      .panel.content-collapse-expand.panel-default
+        .panel-heading#heading-collapse-delivery-date role='tab'
+          a.panel-title.collapsed role='button' data-toggle='collapse' data-target='#collapse-delivery-date' aria-expanded='false' aria-controls='collapse-delivery-date'
+            | DELIVERY DATE
+            span.btn-open-close
+        .panel-collapse.collapse#collapse-delivery-date role='tabpanel' aria-labelledby='heading-collapse-delivery-date'
+          .panel-body
+            .custom-form-element.filter-radio-option.selector-fast_making name='fast_making'
+              label
+                = check_box_tag :fast_making, true, params[:fast_making].present?, { 'data-all' => 'false' }
+                span.icon
+                span EXPRESS MAKING (6 - 9 Days)
