@@ -1,10 +1,10 @@
 = render partial: 'pages/robots'
 
-.inside-out
+.inside-out.landing-page-v2
 
-  .container
+  .container-fluid.container-no-padding-right
     .row
-      .col-md-6.hidden-md.hidden-lg
+      .col-md-6.hidden-md.hidden-lg.no-spacing-cols-mobile
         = image_tag "landingpages/inside-out/top-image.jpg", :class => "img-responsive hidden-md hidden-lg"
 
       .col-md-5.section-intro
@@ -16,11 +16,12 @@
       .col-md-6.col-md-offset-1.no-padding.hidden-xs.hidden-sm
         = image_tag "landingpages/inside-out/top-image.jpg", :class => "img-responsive hidden-xs hidden-sm"
 
-    .col-md-12.heading-overlay-wrapper.hidden-md.hidden-lg
+  .container-fluid.container-no-padding-right.hidden-sm.hidden-md.hidden-lg
+    .col-md-12.heading-overlay-wrapper
       h2.heading-overlay
         | THE SERIES
 
-    .main-hero-wrap.js-hero-tile-carousel.hidden-md.hidden-lg
+    .main-hero-wrap.js-hero-tile-carousel.no-spacing-cols-mobile
       .main-hero-wrap.hero-wrap
         picture.media-wrap
           img src="#{image_path("landingpages/inside-out/collage-image-1.jpg")}"
@@ -46,26 +47,24 @@
         picture.media-wrap
           img src="#{image_path("landingpages/inside-out/collage-image-8.jpg")}"
 
-    section.section-box.hidden-xs.hidden-sm
-      .row
-        .col-md-3
+  .container
+    section.section-box.hidden-xs
+      .row.collage-gallery
+        .col-md-3.col-sm-6
           = image_tag "landingpages/inside-out/collage-image-1.jpg", :class => "img-responsive"
-        .col-md-3
+        .col-md-3.col-sm-6
           = image_tag "landingpages/inside-out/collage-image-2.jpg", :class => "img-responsive"
-        .col-md-3
+        .col-md-3.col-sm-6
           = image_tag "landingpages/inside-out/collage-image-3.jpg", :class => "img-responsive"
-        .col-md-3
+        .col-md-3.col-sm-6
           = image_tag "landingpages/inside-out/collage-image-4.jpg", :class => "img-responsive"
-
-    section.section-box.hidden-xs.hidden-sm
-      .row
-        .col-md-3
+        .col-md-3.col-sm-6
           = image_tag "landingpages/inside-out/collage-image-5.jpg", :class => "img-responsive"
-        .col-md-3
+        .col-md-3.col-sm-6
           = image_tag "landingpages/inside-out/collage-image-6.jpg", :class => "img-responsive"
-        .col-md-3
+        .col-md-3.col-sm-6
           = image_tag "landingpages/inside-out/collage-image-7.jpg", :class => "img-responsive"
-        .col-md-3
+        .col-md-3.col-sm-6
           = image_tag "landingpages/inside-out/collage-image-8.jpg", :class => "img-responsive"
 
     .row.text-center
@@ -152,7 +151,7 @@
           h2
             | All our Partners.
 
-    section.section-box.section-competition
+    section.section-box
       .row
         .col-md-3.col-xs-12.col-sm-6
           .image-wrap

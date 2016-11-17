@@ -53,6 +53,14 @@
     max-height: 450px;
   }
 
+  .collage-gallery {
+
+    > div {
+      margin-top:20px;
+    }
+
+  }
+
   .donation-label {
     font-weight: bold;
     letter-spacing: 3px;
@@ -77,7 +85,11 @@
 
       .heading-overlay-wrapper {
         text-align: center;
-        bottom: -22px;
+
+        .heading-overlay {
+          bottom: -22px;
+        }
+
       }
 
     }
