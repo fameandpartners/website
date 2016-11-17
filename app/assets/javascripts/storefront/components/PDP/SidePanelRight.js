@@ -39,6 +39,8 @@ class PdpSidePanelRight extends React.Component {
       }
     })();
 
+    // TODO: Do we want to check makingOption here if fast making is enabled? and thus remove color option
+    // Maybe, maybe not depending on whatever is best for UX, this.props.customize.makingOption or this.props.customize.customization
     if(this.props.product.is_active) {
       return (
         <div className="panel-side-container">

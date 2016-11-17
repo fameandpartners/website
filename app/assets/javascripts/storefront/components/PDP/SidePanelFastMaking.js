@@ -35,11 +35,15 @@ class SidePanelFastMaking extends React.Component {
   }
 
   onChange(event) {
+    // TODO: potentially the default, let customize = {color: {price: 0}}
     let customize = {};
 
     if (event.target.checked) {
       customize.makingOption = this.fastMakingOption;
     } else {
+      // else, unchecking fast making
+      // TODO: We need to maintain current color price because of above default
+      // customize.color.price = this.props.customize.color.price
       customize.makingOption = this.defaultMakingOption;
     }
 
@@ -47,6 +51,8 @@ class SidePanelFastMaking extends React.Component {
   }
 
   render() {
+    // TODO: Check color price here and thus infer if fast making is possible
+    // console.log('customize color props', this.props.customize.color);
     if (this.props.flags.fastMaking && this.props.product.fast_making) {
       return (
         <div className="pdp-side-container pdp-side-container-fast-making checkbox-inline custom-form-element-thin form-small">
@@ -79,7 +85,8 @@ SidePanelFastMaking.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     product: state.product,
-    flags: state.flags
+    flags: state.flags,
+    customize: state.customize
   };
 }
 
