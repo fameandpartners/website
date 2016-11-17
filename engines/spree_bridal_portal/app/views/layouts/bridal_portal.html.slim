@@ -29,7 +29,7 @@ doctype html
     = yield :head
     = render 'marketing/trackers/google_analytics'
 
-  body data-action=(action_name.titleize) data-controller=(controller.controller_name.titleize)
+  body.bridal-portal data-action=(action_name.titleize) data-controller=(controller.controller_name.titleize)
     #fb-root
 
     - if spree_user_signed_in?
@@ -37,8 +37,8 @@ doctype html
         window.current_user = #{raw serialized_current_user.to_json}
 
     #wrap
-      = render('spree/bridal_portal/shared/header')
+      = render 'spree/bridal_portal/shared/header' unless controller_name == 'registrations'
       #content
         = yield
       #push
-    = render 'spree/bridal_portal/shared/footer'
+    = render 'spree/bridal_portal/shared/footer' unless controller_name == 'registrations'
