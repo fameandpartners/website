@@ -1,14 +1,14 @@
-class CreateTheRelaxedEveningCollectionPage < ActiveRecord::Migration
+class CreateInsideOutPage < ActiveRecord::Migration
   # All values MUST be Strings!
   private def landing_page_properties
     {
-      path:             '/the-relaxed-evening-collection',
-      template_path:    '/landing_pages/the_relaxed_evening_collection',
+      path:             '/inside-out',
+      template_path:    '/landing_pages/inside_out',
       pids:             %w().join(','),
       limit:            '5',
-      heading:          'The Relaxed Evening Collection',
-      title:            'The Relaxed Evening Collection',
-      meta_description: 'Easy, effortless evening wear including velvet suits, silk kimonos, corset belts, cocktail dresses, embroidery, and beading.',
+      heading:          'Inside Out',
+      title:            '[TODO]',
+      meta_description: '[TODO]',
     }
   end
 
