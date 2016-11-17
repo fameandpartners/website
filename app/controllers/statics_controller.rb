@@ -227,6 +227,12 @@ class StaticsController < ApplicationController
     @description = "Hashtag #fame2015 to win"
   end
 
+  def iequalchange
+    if Features.inactive?(:i_equal_change)
+      redirect_to about_us_path, status: 302
+    end
+  end
+
   private
 
   def assign_revolution_page

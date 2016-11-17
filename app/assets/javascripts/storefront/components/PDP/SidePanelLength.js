@@ -54,7 +54,7 @@ class SidePanelLength extends SidePanel {
         <a href="javascript:;"
           className={TRIGGER_STATE}
           onClick={this.openMenu}>
-          <div className={ERROR}>Skirt Length</div>
+          <div className={ERROR}>Height & Hemline</div>
           <div className="c-card-customize__content__right">{this.props.customize.length.presentation}</div>
         </a>
 
@@ -68,9 +68,8 @@ class SidePanelLength extends SidePanel {
                     <span className="hide-visually">Close Menu</span>
                 </a>
               </div>
-              <h2 className="h4 c-card-customize__header">Choose your skirt length</h2>
-              <p>Tell us your height category and we can adjust your
-                skirt length for free!</p>
+              <h2 className="h4 c-card-customize__header">Choose your height</h2>
+              <p>Tell us your height category and we can adjust the length of the hemline and sleeves on your garment for free!</p>
               {LENGTHS}
               <SidePanelLengthChart />
             </div>
