@@ -1,0 +1,113 @@
+.pages.wrapper.wrapper-content
+  = form_for render3d_image, :url => {:action => action}, method: method, html: {class: 'form-horizontal'} do |f|
+    .ibox.float-e-margins
+      .ibox-title
+        h5 Add new render3d image to the product
+      .ibox-content
+        .form-group
+          label.col-sm-2.control-label Product
+          .col-sm-10 = f.hidden_field :product_id, class: 'remote-select', id: :product, data: { minimum_input_length: 1 }
+        .form-group
+          label.col-sm-2.control-label Color Value
+          .col-sm-10 = f.hidden_field :color_value_id, class: 'remote-select', id: :color_value
+        .form-group
+          label.col-sm-2.control-label Customisation Value
+          .col-sm-10 = f.hidden_field :customisation_value_id, class: 'remote-select', id: :customisation_value
+        .form-group
+          label.col-sm-2.control-label Attachment
+          .col-sm-10 = f.file_field :attachment
+        .form-group
+          .col-sm-2
+          .col-sm-10
+            = f.submit 'Create', class: 'btn btn-primary'
+
+javascript:
+  (function($) { 'use strict';
+    var initialAttrs = #{raw initial_attrs.to_json};
+
+    var processResults = function(data, page) {
+      return {
+        results: data.collection
+      };
+    };
+
+    var remoteSelectAttrs = function() {
+      var path = '#{collection_customisation_render3d_images_path(:json)}';
+
+      var minimumInputLength = function() { 
+        return $(this).data('minimum-input-length') || 0;
+      }.call(this);
+
+      return {
+        width: '100%',
+        allowClear: true,
+        placeholder: 'type to search...',
+        minimumInputLength: minimumInputLength,
+        ajax: {
+          url: path,
+          dataType: 'json',
+          delay: 250,
+          cache: true,
+          results: processResults,
+          data: function(term, page) {
+            var $select = $(this);
+
+            return {
+              q: term,
+              type: $select.attr('id'),
+              product_id: $select.data('product_id'),
+              page: page
+            };
+          }.bind(this)
+        }
+      };
+    };
+
+    var enableCustomDropdowns = function() {
+      $('#color_value,#customisation_value')
+        .prop('disabled', false)
+        .data('product_id', $('#product').val())
+        .each(function() {
+          $(this).select2(remoteSelectAttrs.call(this));
+        });
+    };
+
+    var disableCustomDropdowns = function() {
+      $('#color_value,#customisation_value')
+        .prop('disabled', true)
+        .data('product_id', '')
+        .val('')
+        .each(function() {
+          $(this).select2(remoteSelectAttrs.call(this));
+        });
+    };
+
+    $(document).ready(function() {
+      $('.remote-select#product')
+        .each(function() {
+          $(this).select2(remoteSelectAttrs.call(this));
+        })
+        .on('change', function(e) {
+          if (e.val) {
+            enableCustomDropdowns();
+          } else {
+            disableCustomDropdowns();
+          }
+        });
+
+
+      if ($.isEmptyObject(initialAttrs)) {
+        disableCustomDropdowns();
+      } else {
+        enableCustomDropdowns();
+
+        $('.select2-container.remote-select').each(function() {
+          var $select = $(this),
+              id = $select.attr('id').replace(/s2id_/, ''),
+              data = initialAttrs[id];
+
+          $select.select2('data', data);
+        });
+      }
+    });
+  })(jQuery);

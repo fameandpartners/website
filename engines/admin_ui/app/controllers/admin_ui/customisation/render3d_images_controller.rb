@@ -21,6 +21,11 @@ module AdminUi
 
       def edit
         @render3d_image = Render3d::Image.find(params[:id])
+        @initial_attrs  = {
+          product: { id: @render3d_image.product_id, text: @render3d_image.product.name_with_sku },
+          color_value: { id: @render3d_image.color_value_id, text: @render3d_image.color_value.name },
+          customisation_value: { id: @render3d_image.customisation_value_id, text: @render3d_image.customisation_value.try(:name) || '' }
+        }
         @page_title = "Render3d::Image - #{@render3d_image.product_id} - #{@render3d_image.color_value_id} - #{@render3d_image.customisation_value_id}"
       end
 
@@ -77,12 +82,12 @@ module AdminUi
           if @render3d_image.save
             { success: <<-EOS }
               Render3d Image was successfully updated with:
-                [*] product:\t\t<name: #{@render3d_image.product.name}> - <sku: #{@render3d_image.product.sku}>
+                [*] product:\t\t<name (sku): #{@render3d_image.product.name_with_sku}>
                 [*] color:\t\t<name: #{@render3d_image.color_value.name}>
                 [*] customisation:\t<name: #{@render3d_image.customisation_value.try(:name) || 'Default'}>
               EOS
           else
-            { error: @render3d_image.errors.to_json }
+            { error: @render3d_image.errors.full_messages.to_sentence }
           end
 
         redirect_to customisation_render3d_images_path, flash: message
