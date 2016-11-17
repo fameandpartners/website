@@ -1,0 +1,193 @@
+= render partial: 'pages/robots'
+
+.inside-out.landing-page-v2
+
+  .container-fluid.container-no-padding-right
+    .row
+      .col-md-6.hidden-md.hidden-lg.no-spacing-cols-mobile
+        = image_tag "landingpages/inside-out/top-image.jpg", :class => "img-responsive hidden-md hidden-lg"
+
+      .col-md-5.section-intro
+        .row
+          h1 INSIDE \ OUT
+          p Fashion is so much more than how you look. It’s how you feel; it’s how you move; it’s how you tell the world, “This is who I am.”  Fashion should empower you from the inside out, so $5 of every sale now goes towards supporting women’s empowerment charities across the world.
+          p Let’s empower each other, one dress at a time. Let’s dress up and give back.
+
+      .col-md-6.col-md-offset-1.no-padding.hidden-xs.hidden-sm
+        = image_tag "landingpages/inside-out/top-image.jpg", :class => "img-responsive hidden-xs hidden-sm"
+
+  .container-fluid.container-no-padding-right.hidden-sm.hidden-md.hidden-lg
+    .col-md-12.heading-overlay-wrapper
+      h2.heading-overlay
+        | THE SERIES
+
+    .main-hero-wrap.js-hero-tile-carousel.no-spacing-cols-mobile
+      .main-hero-wrap.hero-wrap
+        picture.media-wrap
+          img src="#{image_path("landingpages/inside-out/collage-image-1.jpg")}"
+      .main-hero-wrap.hero-wrap
+        picture.media-wrap
+          img src="#{image_path("landingpages/inside-out/collage-image-2.jpg")}"
+      .main-hero-wrap.hero-wrap
+        picture.media-wrap
+          img src="#{image_path("landingpages/inside-out/collage-image-3.jpg")}"
+      .main-hero-wrap.hero-wrap
+        picture.media-wrap
+          img src="#{image_path("landingpages/inside-out/collage-image-4.jpg")}"
+      .main-hero-wrap.hero-wrap
+        picture.media-wrap
+          img src="#{image_path("landingpages/inside-out/collage-image-5.jpg")}"
+      .main-hero-wrap.hero-wrap
+        picture.media-wrap
+          img src="#{image_path("landingpages/inside-out/collage-image-6.jpg")}"
+      .main-hero-wrap.hero-wrap
+        picture.media-wrap
+          img src="#{image_path("landingpages/inside-out/collage-image-7.jpg")}"
+      .main-hero-wrap.hero-wrap
+        picture.media-wrap
+          img src="#{image_path("landingpages/inside-out/collage-image-8.jpg")}"
+
+  .container
+    section.section-box.hidden-xs
+      .row.collage-gallery
+        .col-md-3.col-sm-6
+          = image_tag "landingpages/inside-out/collage-image-1.jpg", :class => "img-responsive"
+        .col-md-3.col-sm-6
+          = image_tag "landingpages/inside-out/collage-image-2.jpg", :class => "img-responsive"
+        .col-md-3.col-sm-6
+          = image_tag "landingpages/inside-out/collage-image-3.jpg", :class => "img-responsive"
+        .col-md-3.col-sm-6
+          = image_tag "landingpages/inside-out/collage-image-4.jpg", :class => "img-responsive"
+        .col-md-3.col-sm-6
+          = image_tag "landingpages/inside-out/collage-image-5.jpg", :class => "img-responsive"
+        .col-md-3.col-sm-6
+          = image_tag "landingpages/inside-out/collage-image-6.jpg", :class => "img-responsive"
+        .col-md-3.col-sm-6
+          = image_tag "landingpages/inside-out/collage-image-7.jpg", :class => "img-responsive"
+        .col-md-3.col-sm-6
+          = image_tag "landingpages/inside-out/collage-image-8.jpg", :class => "img-responsive"
+
+    .row.text-center
+      = link_to '/the-relaxed-evening-collection'
+        span.btn-xs.btn-featured
+          | Shop <span class="copy-highlight">THE COLLECTION</span>
+
+    section.section-box.section-competition
+      .row
+        .col-md-6.hidden-md.hidden-lg
+          .heading-overlay-wrapper
+            h2.heading-overlay
+              | THE GIVEAWAY
+          = image_tag "landingpages/inside-out/collage-image-middle.jpg", :class => "img-responsive hidden-md hidden-lg"
+        .col-md-5
+          .heading-overlay-wrapper.hidden-xs.hidden-sm
+            h2.heading-overlay
+              | THE GIVEAWAY
+          h2 Introducing INSIDE\OUT Fridays.
+          p Every Friday of the holiday season, we'll be giving away a dress on our Facebook page inspired by a woman we admire inside and out. To enter, simply tag a friend who'd look fab in Fame & Partners in the comments of the giveaway post.
+          p Each comment also enters you to win the grand prize: a celebration of you, inside and out, worth $30,000.
+          p The Major Prize contains 8 framed artworks by Dina Broadhurst , a Fame and Partners wardrobe valued at $5,000.00, 1 Flight Voucher valued at $1,000.00, 1 Hotel Voucher valued at $1,000.00, a $500 gift set from Murchinson Hume, 2 EVO packs, 1 pair of Heidi Abrhamson earrings, a $1000 Revolve voucher, a  jewelry set from Iconiery valued at $500, Voucher from Daily Look for $500.
+          p #{link_to '\'Like\' our Facebook page', 'https://www.facebook.com/FameandPartners'} so you don't miss out.
+
+        .col-md-6.col-md-offset-1.hidden-xs.hidden-sm
+          = image_tag "landingpages/inside-out/collage-image-middle.jpg", :class => "img-responsive hidden-xs hidden-sm"
+          .text-center
+            = link_to '/inside-out-sweepstakes'
+              span.btn-xs.btn-featured
+                | <span class="copy-highlight">ENTER THE COMPETITION</span>
+
+      .row.hidden-md.hidden-lg
+        = link_to '/inside-out-sweepstakes'
+          span.btn-xs.btn-featured
+            | <span class="copy-highlight">ENTER THE COMPETITION</span>
+
+    section.section-box
+      .col-md-12
+        .heading-overlay-wrapper
+          h2.heading-overlay
+            | THE COLLECTION
+      .row
+        = render partial: 'pick_products_without_content', locals: {rangeFrom: 0, rangeTo: 3, customWrapper: 'col-md-3 col-xs-6'}
+
+    .row.text-center
+      = link_to '/the-relaxed-evening-collection'
+        span.btn-xs.btn-featured
+          | Shop <span class="copy-highlight">THE COLLECTION</span>
+
+    section.section-box.section-competition
+      .row.hidden-md.hidden-lg
+        .heading-overlay-wrapper
+          h2.heading-overlay
+            | Our Partners
+        h2 Dina Broadhurst.
+
+      .row
+        .col-md-6.hidden-md.hidden-lg
+          video.item-video(name="Inside Out" controls="true" src="https://player.vimeo.com/external/191900824.sd.mp4?s=1706a6e0a8c5e0f025aa12b8edf94ec7723ed449&profile_id=165")
+        .col-md-6
+          .heading-overlay-wrapper.hidden-xs.hidden-sm
+            h2.heading-overlay
+              | Our Partners
+          h2.hidden-xs.hidden-sm Dina Broadhurst.
+          p Australian artist Dina Broadhurst creates feminine, sensual, sexual work that poses the question, “What is beautiful?” The answer almost always points to the chaotic beauty of a woman’s inner world and, for this reason, we knew Dina would be the ultimate partner for the INSIDE\OUT Collection. The results of ourcollaboration, a stunning mix of photography and collage, explore the idea that what’s happening on the inside is equally fascinating, beautiful, and inspiring as what we see on the outside.
+        .col-md-6.hidden-xs.hidden-sm
+          video.item-video(name="Inside Out" controls="true" src="https://player.vimeo.com/external/191900824.sd.mp4?s=1706a6e0a8c5e0f025aa12b8edf94ec7723ed449&profile_id=165")
+
+    section.section-box
+      .row
+        .col-md-6.hidden-md.hidden-lg
+          = image_tag "landingpages/inside-out/i-change.jpg", :class => "img-responsive hidden-md hidden-lg"
+        .col-md-6
+          h2
+            | I=Change.
+          p
+            | i=Change is the cause marketing platform that allows Fame and Partners to give back with every sale and track the impact of each donation in real time. Founded by Jeremy Meltzer, the platform believes that investing in women and girls will be the greatest driver of growth and stability this century–and we agree. Fame and Partners has partnered with i=Change to donate <span class="donation-label">$5 of every sale at fame and partners</span> to UN Women and Plan International, in the hopes of nurturing independence and empowerment in women all over the world and making fashion that stands for something.
+        .col-md-6.hidden-xs.hidden-sm
+          = image_tag "landingpages/inside-out/i-change.jpg", :class => "img-responsive hidden-xs hidden-sm"
+
+    section.section-box
+      .row
+        .col-md-12
+          h2
+            | All our Partners.
+
+    section.section-box
+      .row
+        .col-md-3.col-xs-12.col-sm-6
+          .image-wrap
+            = image_tag "landingpages/inside-out/iconery.jpg"
+          p
+            | Iconery scours the globe for exclusive, customizable, and conflict-free jewels, then tailors the fine jewelry shopping experience to you.
+        .col-md-3.col-xs-12.col-sm-6
+          .image-wrap
+            = image_tag "landingpages/inside-out/murchison.jpg"
+          p
+            | Muchinson-Hume makes effective cleaning products that you won’t want to stash under the sink. As they say, “Sure, we’re pretty, but it’s what’s inside that counts.”
+        .col-md-3.col-xs-12.col-sm-6
+          .image-wrap
+            = image_tag "landingpages/inside-out/evo.jpg"
+          p
+            | evo hair is “saving ordinary humans from themselves” by creating eco-friendly hair products that actually work.
+        .col-md-3.col-xs-12.col-sm-6
+          .image-wrap
+            = image_tag "landingpages/inside-out/revolver.jpg"
+          p
+            | Revolve is an online shopping mecca for women’s, men’s, and kids’ wear, featuring fashions heavy hitters + under-the-radar labels.
+
+    section.section-box
+      .row
+        .col-md-3.col-xs-12.col-sm-6
+          .image-wrap
+            = image_tag "landingpages/inside-out/dailylook.jpg"
+          p
+            | Daily Look makes shopping simple by curating looks, just for you, based on your body and budget.
+        .col-md-3.col-xs-12.col-sm-6
+          .image-wrap
+            = image_tag "landingpages/inside-out/heidi.jpg"
+          p
+            | Heidi Abrahamson is a jewelry designer whose sculptural designs are considered "modern architecture for the body.
+
+    .row.text-center.last-cta
+      = link_to '/the-relaxed-evening-collection'
+        span.btn-xs.btn-featured
+          | Shop <span class="copy-highlight">THE COLLECTION</span>

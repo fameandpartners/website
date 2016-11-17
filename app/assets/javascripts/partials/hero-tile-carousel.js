@@ -17,7 +17,7 @@
     // Create slider navigation wrapper
     $('<ul />', {'class': 'hero-carousel-nav'}).appendTo(slickSelector + ' .hero-wrap:nth-of-type('+current_div+') picture');
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < total_slides; i++) {
 
       //Create navigation links
       $('<li />', {'class': 'item-nav'}).appendTo(slickSelector + ' .hero-wrap:nth-of-type('+current_div+') picture ul');
