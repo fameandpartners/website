@@ -28,7 +28,7 @@ module Afterpay
       end
 
       def name
-        "#{first_name} #{last_name}"
+        "#{firstname} #{lastname}"
       end
 
       private
