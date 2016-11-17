@@ -23,12 +23,12 @@ class SidePanelLengthChart extends React.Component {
 
   render() {
     const triggerState = this.state.active ? 'chart-wrap-trigger is-active' : 'chart-wrap-trigger';
-    const triggerCopy = this.state.active ? 'Skirt Length Size Chart' : 'View the Skirt Length Size Chart';
+    const triggerCopy = this.state.active ? 'Height & Hemline Size Chart' : 'View the Height & Hemline Size Chart';
     return (
       <div className="chart-wrap">
         <a href="javascript:;" className={triggerState} onClick={this.toggleMenu}>{triggerCopy}</a>
         <div className="inner-wrap">
-          <p>Skirt length is measured straight, from waist to hem and is based on wearing 5cm heels.</p>
+          <p>Skirt height is measured straight, from waist to hem and is based on wearing 5cm heels.</p>
           <Tabs>
             <Tabs.Panel title="inches">
               <table className="table table-desktop text-center">

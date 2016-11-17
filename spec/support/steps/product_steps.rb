@@ -9,7 +9,7 @@ module Acceptance
     end
 
     step 'I select :skirt_length skirt length' do |skirt_length|
-      click_link 'Skirt Length'
+      click_link 'Height & Hemline'
       sleep 0.2 # User interacting with sidebar + animation
       click_link skirt_length.downcase
       sleep 0.2 # User interacting with sidebar + animation
