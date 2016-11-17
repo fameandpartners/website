@@ -100,7 +100,11 @@ export default function configureStore(initialState) {
           presentation: '',
           price: 0
         },
-        dressVariantId : null
+        dressVariantId : null,
+        makingOption: {
+          id: null,
+          price: 0
+        }
       }
     }
   );

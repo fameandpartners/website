@@ -20,7 +20,7 @@ ruby:
   end
 
 .product-info itemprop="offerDetails" itemscope='' itemtype="http://data-vocabulary.org/Offer"
-  
+
   meta itemprop="priceCurrency" content="#{currency_code}" /
   meta itemprop="condition" content="new" /
   meta itemprop="availability" content="in_stock" /
@@ -34,24 +34,24 @@ ruby:
   - unless product.short_description.empty?
     h1.product_short_description = product.translated_short_description(I18n.locale)
   .price itemprop="price" = price_for_product(product)
-  .section  
+  .section
     - options = color_options_for_select(colors, selected_color)
     = select_tag :colour, options, class: 'selectbox', include_blank: true, prompt: 'Select colour'
   .section
     h6.info
-      ' SELECT A SIZE 
+      ' SELECT A SIZE
       = link_to '(whats my size?)', '#what-size', class: 'toggle-sizes '
       .size-info = size_info_label
     .sizebox
       - sizes.take(6).each do |size|
-        .button data-size="#{size}" data-plussize=(is_plus_size?(product).to_s) title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) ) 
+        .button data-size="#{size}" data-plussize=(is_plus_size?(product).to_s) title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) )
           span = size
           - if (attributes = locale_size_attributes(size)).present?
             = render 'spree/products/size_popup', attributes: attributes, link: true, locale_code: locale_code, unit_code: locale_unit_code, unit_symbol: locale_unit_symbol
       - if dropdown_sizes(product, sizes).present?
         .dropdown-button data-open="-" data-close="+" +
         - dropdown_sizes(product, sizes).each do |size|
-          .button.dropdown-size data-size="#{size}" title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) ) 
+          .button.dropdown-size data-size="#{size}" title=( extra_size_title if size.to_i >= size_charge_start && !is_plus_size?(product) )
             span = size
             - if (attributes = locale_size_attributes(size)).present?
               = render 'spree/products/size_popup', attributes: attributes, link: true, locale_code: locale_code, unit_code: locale_unit_code, unit_symbol: locale_unit_symbol
@@ -63,9 +63,9 @@ ruby:
     = cached_add_to_wishlist_link(product, class: 'wish-list-link btn empty border', title: '+ TO MOODBOARD', :'title-remove' => 'REMOVE FROM MOODBOARD')
   .section
     ul.slider
-      li.opened 
+      li.opened
         .title DESCRIPTION
-        .text 
+        .text
           - if product.property('preorder').present? && product.property('preorder').downcase == "yes"
             .pre-order
               strong Pre-order
@@ -75,29 +75,29 @@ ruby:
               = description
           - else
             p = t('product_has_no_description')
-      li 
+      li
         .title details
         .text
           p SKU: #{@product.sku}
           - if @product.property('fabric').present?
             p Material: #{@product.property('fabric')}
           - if product.property('product_details').present?
-            p = raw product.property('product_details') 
+            p = raw product.property('product_details')
       - if @product.property('style_notes').present?
-        li 
+        li
           .title styling notes
           .text
             p = product.property('style_notes')
-            p= link_to "Click for more styling tips", personalization_style_product_path(permalink: @product.permalink) 
+            p= link_to "Click for more styling tips", personalization_style_product_path(permalink: @product.permalink)
       li
         .title color and material
         .text
           p
-            span itemprop="brand" Fame & Partners 
-            ' makes custom, on-demand dresses and as part of our bespoke customised process we often use small runs of special materials and dip dye some fabrics to ensure every dress is unique to every customer! 
+            span itemprop="brand" Fame & Partners
+            ' makes custom, on-demand dresses and as part of our bespoke customised process we often use small runs of special materials and dip dye some fabrics to ensure every dress is unique to every customer!
           p We understand you want to know what your special dress should look like when it arrives at your door, so we sometimes use digital colour replication on our Web site to show all the different colour variations you can select from. Therefore, while we're doing our best to show colours and material variations digitally across all different computer and mobile screens our customers use, we want you to understand that the digital colours and materials as they appear and are described on this Web site may not perfectly match the colours and materials of our actual garments and some slight variations may occur.
       - unless product.property('preorder').present? && product.property('preorder').downcase == "yes"
-        li 
+        li
           .title delivery
           .text
             p = @product.delivery_time_as_string(:long) + "*"
@@ -105,7 +105,7 @@ ruby:
             i &#42 Business days
             p
               ' * Dresses with a "Next Day Delivery" mark have at least some size and color combinations ready to ship immediately. Available sizes and colors may be limited due to demand. Our customer service team will inform you of any shipping delays.
-      li 
+      li
         .title returns
         .text
           p What is your returns policy?
@@ -118,11 +118,11 @@ ruby:
             li Sale Items 40%+ off: No Returns
       li
         .title Second Opinion
-        .text 
+        .text
           p Send this dress to a friend for their opinion
           p = send_to_a_friend_link(product)
       - if defined?(products) && products.present?
-        li.opened.recommended 
+        li.opened.recommended
           .title more killer dresses
           .text
             .category-catalog
@@ -131,6 +131,3 @@ ruby:
                   .grid-4
                     = link_to collection_product_path(product) do
                       = product_image_tag(product)
-  - if product.fast_delivery
-    .fast-delivery-icon-right title="Next day delivery*"
-      = product.delivery_time_as_string(:long)

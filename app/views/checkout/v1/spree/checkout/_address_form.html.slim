@@ -4,7 +4,15 @@ ruby:
   last_name = form.object.lastname.presence || @order.try(:last_name) || @user.try(:last_name)
   shopping_bag_texts = Preferences::ShoppingBag.new(current_site_version)
   countries = available_countries_for_current_zone
-  countries_with_fees = Hash[countries.map { |country| [country.id, country.zone_member.has_international_shipping_fee] }]
+  countries_with_fees = Hash[countries.map do |country|
+    [
+      country.id,
+      {
+        shipping_fee: country.zone_member.has_international_shipping_fee,
+        duty_fee: country.zone_member.show_duty_fee_notification || country.zone_member.has_international_shipping_fee
+      }
+    ]
+  end]
 
 - if Spree::Config[:address_requires_state]
   ruby:
@@ -18,6 +26,9 @@ ruby:
     country_field_id = "#{ sanitized_object_name }_country_id"
 
   = content_for :inline_javascript do
+    | page.initExtraFeesAlert();
+    | $('#international_shipping_fee').click(window.checkout_page.extraFeesAlert.internationalShippingFeeCheckboxClicked);
+
     | $('##{ field_id }').val('#{ address.state_id }');
     | checkout_page.updateStatesVisibility('##{ country_field_id }', '##{ field_id }', '##{state_text_field_id}');
 
@@ -25,7 +36,7 @@ ruby:
     |   checkout_page.updateStatesVisibility('##{ country_field_id }', '##{ field_id }', '##{state_text_field_id}');
     | });
 
-    | $('##{ country_field_id }').change(checkout_page.countryChanged);
+    | $('##{ country_field_id }').change(checkout_page.extraFeesAlert.countryChanged);
 
     | checkout_page.countries = #{raw countries_with_fees.to_json};
     | $('##{ country_field_id }').trigger('change');

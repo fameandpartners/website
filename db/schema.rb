@@ -1670,6 +1670,7 @@ ActiveRecord::Schema.define(:version => 20161117012806) do
     t.datetime "created_at",                                        :null => false
     t.datetime "updated_at",                                        :null => false
     t.boolean  "has_international_shipping_fee", :default => false
+    t.boolean  "show_duty_fee_notification",     :default => false
   end
 
   create_table "spree_zones", :force => true do |t|
