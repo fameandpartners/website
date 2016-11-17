@@ -1,0 +1,20 @@
+.container-fluid
+  .row
+    .left-side.col-md-6
+      .join-form
+        p Welcome back to our Wedding Atelier App
+        = form_for :user do |f|
+          = f.label :email, 'Email Address'
+          = f.text_field :email, class: 'form-control'
+          = f.label :password, 'Password'
+          = f.text_field :password, class: 'form-control'
+          = f.submit 'Next'
+          = link_to 'Forgot Password', '#'
+        p or
+        = link_to 'Sign in with facebook', fb_auth_path
+        p
+          | Don't have an account?
+          = link_to 'Sign up here', '#'
+
+    .right-side.col-md-6
+      h1 Fame and partners
