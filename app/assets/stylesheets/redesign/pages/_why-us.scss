@@ -4,6 +4,7 @@
 
   h3 {
     font-size: 3.6rem;
+    margin-top: 0;
   }
 
   .main-hero-wrap {
@@ -13,17 +14,14 @@
   .section-box {
     margin-top: 70px;
 
-    h3 {
-      margin-top: 0;
-    }
-
     p {
       line-height: 150%;
       font-family: $font-heading;
       font-weight: 300;
       font-size: 2rem;
+      margin-top: 10px;
       margin-bottom: 0;
-      padding-right: 30px;
+      padding-right: 60px;
     }
 
   }
@@ -50,14 +48,22 @@
       margin-bottom: 0;
     }
 
-    .section-box {
+    .middle-wrapper {
+
+      .section-box {
+        margin-top: 0px;
+      }
+
+      .copy-wrap {
+        margin-top: 40px;
+      }
 
       p {
         padding-right: 0;
       }
 
     }
-
+    
   }
 
 }
