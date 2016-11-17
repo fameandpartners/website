@@ -15,7 +15,7 @@ function select(state) {
 const SlayItForward = (props) => {
   // const { dispatch, $$templateStore } = props;
   const { dispatch } = props;
-  const actions = bindActionCreators(templateActionCreators, dispatch);
+  // const actions = bindActionCreators(templateActionCreators, dispatch);
   // const { updateName } = actions;
   // const name = $$templateStore.get('name');
 
@@ -42,4 +42,4 @@ const SlayItForward = (props) => {
 // Don't forget to actually use connect!
 // Note that we don't export SlayItForward, but the redux "connected" version of it.
 // See https://github.com/reactjs/react-redux/blob/master/docs/api.md#examples
-export default connect(select)(Template);
+export default connect(select)(SlayItForward);

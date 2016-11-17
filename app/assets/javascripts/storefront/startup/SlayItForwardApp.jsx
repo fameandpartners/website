@@ -1,4 +1,5 @@
 import React from 'react';
+import RD from 'react-dom';
 import { Provider } from 'react-redux';
 
 import createStore from '../store/configureStore';
@@ -18,3 +19,6 @@ const SlayItForwardApp = (props, _railsContext) => {
   );
   return reactComponent;
 };
+
+const elm = document.getElementById('slay-it-forward-app');
+if (elm){ RD.render(SlayItForwardApp(), elm); }
