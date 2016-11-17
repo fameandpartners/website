@@ -12,6 +12,9 @@ dependencies:
     - sudo apt-get install git-lfs=1.4.1
     - ssh git@github.com git-lfs-authenticate fameandpartners/website.git download
     - git lfs pull
+    # npm and bundle JS
+    - npm install
+    - npm run production
 
 machine:
   ruby:
