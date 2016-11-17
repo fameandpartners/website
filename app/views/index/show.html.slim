@@ -30,8 +30,8 @@ ruby:
                   span.cta-link-arrow-right
                     span.copy-highlight Explore
                     i.icon.icon-arrow-right
-              = link_to '/dresses/new-this-week', :class => 'position-1'
-                = image_tag 'homepage/fame-story/fame-story-1.jpg', :class => 'img-responsive', alt: 'Your personal atelier'
+              = link_to '/dresses/new-this-week', class: 'position-1'
+                = image_tag 'homepage/fame-story/fame-story-1.jpg', class: 'img-responsive', alt: 'Your personal atelier'
 
           - if Features.active?(:i_equal_change)
             .col-md-4
@@ -43,8 +43,8 @@ ruby:
                     span.cta-link-arrow-right
                       span.copy-highlight Discover more
                       i.icon.icon-arrow-right
-                = link_to iequalchange_landing_page_path, :class => 'hidden-sm hidden-xs'
-                  = image_tag 'marketing/iequalchange/tile-unwomen.jpg', :class => 'img-responsive', alt: 'i=Change - UN Women'
+                = link_to iequalchange_landing_page_path, class: 'hidden-sm hidden-xs'
+                  = image_tag 'marketing/iequalchange/tile-unwomen.jpg', class: 'img-responsive', alt: 'i=Change - UN Women'
           - else
             .col-md-4
               .item.bordered
@@ -55,8 +55,8 @@ ruby:
                     span.cta-link-arrow-right
                       span.copy-highlight The Fit Guide
                       i.icon.icon-arrow-right
-                = link_to size_guide_path, :class => 'hidden-sm hidden-xs'
-                  = image_tag 'homepage/fame-story/fame-story-3.jpg', :class => 'img-responsive', alt: 'Tailored for you'
+                = link_to size_guide_path, class: 'hidden-sm hidden-xs'
+                  = image_tag 'homepage/fame-story/fame-story-3.jpg', class: 'img-responsive', alt: 'Tailored for you'
 
           .col-md-4
             .item.bordered
@@ -67,8 +67,8 @@ ruby:
                   span.cta-link-arrow-right
                     span.copy-highlight Learn more
                     i.icon.icon-arrow-right
-              = link_to about_us_path, :class => 'hidden-sm hidden-xs'
-                = image_tag 'homepage/fame-story/fame-story-2.jpg', :class => 'img-responsive', alt: 'Made-to-order'
+              = link_to about_us_path, class: 'hidden-sm hidden-xs'
+                = image_tag 'homepage/fame-story/fame-story-2.jpg', class: 'img-responsive', alt: 'Made-to-order'
 
           .col-md-12.hidden-md.hidden-lg.btn-wrap
             = link_to about_us_path
@@ -204,7 +204,7 @@ ruby:
             .row
               .col-lg-6.col-md-5
                 = link_to styling_session_path
-                  = image_tag 'homepage/styling/styling-session.jpg', :class => 'img-responsive hidden-xs hidden-sm'
+                  = image_tag 'homepage/styling/styling-session.jpg', class: 'img-responsive hidden-xs hidden-sm'
 
               .col-lg-6.col-md-7
                 .item-copy
@@ -218,7 +218,7 @@ ruby:
                       i.icon.icon-arrow-right
 
                 = link_to styling_session_path
-                  = image_tag 'homepage/styling/styling-session.jpg', :class => 'img-responsive hidden-md hidden-lg'
+                  = image_tag 'homepage/styling/styling-session.jpg', class: 'img-responsive hidden-md hidden-lg'
 
   // Section: Instagram
   section.container
@@ -243,7 +243,7 @@ ruby:
             .item.col-md-5ths.col-xs-6
               = link_to "#{dresses_path}/dress-delaney-three-piece-1088?color=navy", class: "item-wrap"
                 .media-wrap
-                  = image_tag "homepage/get-social/Instagram-1.jpg", :class => "img-responsive"
+                  = image_tag "homepage/get-social/Instagram-1.jpg", class: "img-responsive"
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
@@ -255,7 +255,7 @@ ruby:
             .item.col-md-5ths.col-xs-6
               = link_to "#{dresses_path}/dress-rie-1092?color=pale-pink", class: "item-wrap"
                 .media-wrap
-                  = image_tag "homepage/get-social/Instagram-2.jpg", :class => "img-responsive"
+                  = image_tag "homepage/get-social/Instagram-2.jpg", class: "img-responsive"
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
@@ -267,7 +267,7 @@ ruby:
             .item.col-md-5ths.col-xs-6
               = link_to "#{dresses_path}/dress-cici-jumpsuit-1111?color=black", class: "item-wrap"
                 .media-wrap
-                  = image_tag "homepage/get-social/Instagram-3.jpg", :class => "img-responsive"
+                  = image_tag "homepage/get-social/Instagram-3.jpg", class: "img-responsive"
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
@@ -279,7 +279,7 @@ ruby:
             .item.col-md-5ths.col-xs-6
               = link_to "#{dresses_path}/dress-remy-1119?color=navy", class: "item-wrap"
                 .media-wrap
-                  = image_tag "homepage/get-social/Instagram-4.jpg", :class => "img-responsive"
+                  = image_tag "homepage/get-social/Instagram-4.jpg", class: "img-responsive"
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
@@ -291,7 +291,7 @@ ruby:
             .item.col-md-5ths.hidden-sm.hidden-xs
               = link_to "#{dresses_path}/dress-santina-979?color=pale-pink", class: "item-wrap"
                 .media-wrap
-                  = image_tag "homepage/get-social/Instagram-5.jpg", :class => "img-responsive"
+                  = image_tag "homepage/get-social/Instagram-5.jpg", class: "img-responsive"
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
