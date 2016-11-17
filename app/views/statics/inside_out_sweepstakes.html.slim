@@ -10,7 +10,7 @@ javascript:
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
-.inside-out
+.inside-out-sweepstakes
 
   .page-title.default
     .page-title--details
@@ -22,7 +22,11 @@ javascript:
       .row.text-center
         .col-md-offset-2.col-md-8
           h2
-            | Enter to win the INSIDE\OUT grand prize: the ultimate celebration of you, inside and out, worth $30,000.
+            | Enter to win the INSIDE\OUT grand prize: the ultimate celebration of you, inside and out, worth 
+            - if current_site_version.is_australia?
+              span $40,000.
+            - else
+              span $30,000.
 
     section.section-box
       .row.middle-wrapper
@@ -78,12 +82,12 @@ javascript:
               | A jewelry set from Iconiery
 
         .hidden-md.hidden-lg
-          = image_tag "inside-out/grand-prize-mobile.jpg", :class => "img-responsive"
+          = image_tag "landingpages/inside-out-sweepstakes/grand-prize-mobile.jpg", :class => "img-responsive"
 
     section.section-box.section-border.section-facebook-share
       .row
         .col-md-5.col-md-offset-1.hidden-xs.hidden-sm
-          = image_tag "inside-out/fb-giveaways.jpg", :class => "img-responsive"
+          = image_tag "landingpages/inside-out-sweepstakes/fb-giveaways.jpg", :class => "img-responsive"
 
         .col-xs-12.col-md-5
           h2
@@ -101,7 +105,7 @@ javascript:
 
       .row.hidden-md.hidden-lg.mobile-fb-share
           .fb-like data-href="http://facebook.com/FameandPartners" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false" data-width="700"
-          = image_tag "inside-out/fb-giveaways-mobile.jpg", :class => "img-responsive img-fb-gv"
+          = image_tag "landingpages/inside-out-sweepstakes/fb-giveaways-mobile.jpg", :class => "img-responsive img-fb-gv"
 
       .row.text-center
         .col-xs-10.col-xs-offset-1
@@ -109,7 +113,8 @@ javascript:
             | <em>Please read the #{link_to "Rules & Regulations", '/terms#collapse-inside-out-sweepstakes', target: '_blank'} for the INSIDE\OUT Sweepstakes</em>
 
       .row.text-center
-        = link_to shop_social_path
+        //[TODO] Need to change to relaxed evening collection path
+        = link_to '/relaxed-evening-collection'
           span.btn-xs.btn-featured
             | Shop <span class="copy-highlight">THE COLLECTION</span>
 
@@ -130,7 +135,7 @@ javascript:
                     | Dress up, give back, and empower women the world over.
 
               .col-sm-6.img-side
-                = image_tag "inside-out/giving-back-dk.jpg", :class => "img-responsive"
+                = image_tag "landingpages/inside-out-sweepstakes/giving-back-dk.jpg", :class => "img-responsive"
 
 javascript:
   (function (d, s, id) {
