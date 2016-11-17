@@ -41,23 +41,39 @@ javascript:
         .col-xs-12.col-md-5
           ul
             li
-              | All 8 campaign artworks by Dina Broadhurt
+              | 8 campaign artworks by Dina Broadhurt
             li
               | A Fame and Partners wardrobe
-            li
-              | A $1000 flight voucher
-            li
-              | A $1000 hotel voucher
+            - if current_site_version.is_australia?
+              li
+                | A $1400 flight voucher
+            - else
+              li
+                | A $1000 flight voucher
+            - if current_site_version.is_australia?
+              li
+                | A $1400 hotel voucher
+            - else
+              li
+                | A $1000 hotel voucher
             li
               | A gift set from Murchinson-Hume
             li
               | 2 packs from EVO Hair
             li
               | A pair of Heidi Abrahamson earrings
-            li
-              | A $1000 voucher from Revolve Clothing
-            li
-              | A $500 voucher from Daily Look
+            - if current_site_version.is_australia?
+              li
+                | A $1400 voucher from Revolve Clothing
+            - else
+              li
+                | A $1000 voucher from Revolve Clothing
+            - if current_site_version.is_australia?
+              li
+                | A $700 voucher from Daily Look
+            - else
+              li
+                | A $500 voucher from Daily Look
             li
               | A jewelry set from Iconiery
 
@@ -90,7 +106,7 @@ javascript:
       .row.text-center
         .col-xs-10.col-xs-offset-1
           p.text-grey
-            | <em>Please read the #{link_to "Rules & Regulations", '#'} for the INSIDE\OUT Sweepstakes</em>
+            | <em>Please read the #{link_to "Rules & Regulations", '/terms#collapse-inside-out-sweepstakes', target: '_blank'} for the INSIDE\OUT Sweepstakes</em>
 
       .row.text-center
         = link_to shop_social_path
