@@ -178,6 +178,7 @@ PATH
       awesome_nested_set
       rails (~> 3.2.21)
     spree_bridal_portal (0.0.1)
+      bootstrap-sass (~> 3.3.4.1)
       kaminari
       react-rails
       slim
@@ -958,6 +959,9 @@ DEPENDENCIES
   vcr (~> 2.9.3)
   webmock (~> 1.21.0)
   whenever
+
+RUBY VERSION
+   ruby 2.1.6p336
 
 BUNDLED WITH
    1.13.6
