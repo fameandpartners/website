@@ -43,14 +43,53 @@
 
   }
 
+  .last-cta {
+    margin-bottom: 50px;
+  }
+
+  .item-video {
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+  }
+
   .donation-label {
     font-weight: bold;
     letter-spacing: 3px;
     text-transform: uppercase;
   }
 
+  .image-wrap {
+    height: 71px;
+    position: relative;
+
+    img {
+      position: absolute;
+      bottom: 0;
+    }
+
+  }
+
   @media (max-width: $bootstrap-md-width - 1px) {
     text-align: center;
+
+    .section-competition {
+
+      .heading-overlay-wrapper {
+        text-align: center;
+        bottom: -22px;
+      }
+
+    }
+
+    .image-wrap {
+
+      img {
+        position: relative;
+      }
+
+    }
+
   }
 
 }
