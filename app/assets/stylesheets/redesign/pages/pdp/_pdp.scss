@@ -100,8 +100,39 @@
     margin-bottom: 70px;
   }
 
-  .price {
-    font-weight: bold;
+  .pdp-side-note {
+    font-weight: 300;
+    font-size: 0.9em;
+  }
+
+  .pdp-side-container-fast-making {
+    margin-bottom: 45px;
+    width: 100%;
+    clear: both;
+
+    label {
+      font-size: 0.8em;
+      font-weight: 500;
+    }
+
+    .c-card-customize {
+
+      &__content__left {
+        width: 85%;
+        text-decoration: none;
+      }
+
+      &__content__right {
+        width: 15%;
+        font-weight: 500;
+      }
+
+    }
+
+  }
+
+  .btn-wrap .price {
+    font-weight: 600;
   }
 
   // START tabs
@@ -377,6 +408,15 @@
 
     .section-box .item h3 {
       margin-top: 0;
+    }
+
+    .pdp-side-container-fast-making {
+      margin-left: 10px;
+
+      .c-card-customize__content__right {
+        margin-left: -10px;
+      }
+
     }
 
   }
