@@ -5,18 +5,13 @@ class Render3dImagesGrid
 
   scope do
     Render3d::Image
-      .includes(:product, :color_value, :customisation_value)
+      .joins(:product, :color_value, :customisation_value)
+      .joins("INNER JOIN spree_variants ON spree_products.id = spree_variants.product_id AND spree_variants.is_master = 't'")
       .where(product_id: Spree::Product.active)
   end
 
   filter :product do |value|
-    where("spree_products.name ilike ?", "%#{value}%")
-  end
-  filter(:dress_color, :enum, select: ->{ Spree::OptionType.color.option_values.map {|c| ["#{c.presentation} (#{c.name})", c.id] } }) do |value|
-    where("spree_option_values.id = ?", value)
-  end
-  filter(:dress_customisation, :enum, select: ->{ CustomisationValue.all.map {|c| ["#{c.presentation} (#{c.name})", c.id] } }) do |value|
-    where("customisation_value.id = ?", value)
+    where('LOWER(spree_products.name) LIKE :term OR LOWER(spree_variants.sku) LIKE :term', term: "%#{value}%")
   end
 
   column :id, html: true do |image|
