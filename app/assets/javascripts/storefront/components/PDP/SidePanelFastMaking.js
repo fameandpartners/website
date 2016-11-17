@@ -3,23 +3,46 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as pdpActions from '../../actions/PdpActions';
 
+class MakingOption {
+  constructor(id = null, price = 0) {
+    this.price = price;
+    this.id    = id;
+  }
+
+  get displayPrice() {
+    let price = parseFloat(this.price) || 0;
+    return price.toFixed(0);
+  }
+}
+
 class SidePanelFastMaking extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+    this.defaultMakingOption = new MakingOption();
+
     this.onChange = this.onChange.bind(this);
+  }
+
+  get fastMakingOption() {
+    let makingOptions = this.props.product.available_options.table.making_options;
+    if (makingOptions.length) {
+      let fastMakingOption = makingOptions[0].product_making_option;
+      return new MakingOption(fastMakingOption.id, fastMakingOption.price);
+    } else {
+      return this.defaultMakingOption;
+    }
   }
 
   onChange(event) {
     let customize = {};
-    let makingOption = { price: 0 };
-    let makingOptions = this.props.product.available_options.table.making_options;
 
-    if (event.target.checked && makingOptions.length) {
-      makingOption = makingOptions[0].product_making_option;
+    if (event.target.checked) {
+      customize.makingOption = this.fastMakingOption;
+    } else {
+      customize.makingOption = this.defaultMakingOption;
     }
 
-    customize.makingOption = makingOption;
     this.props.actions.customizeDress(customize);
   }
 
@@ -34,7 +57,7 @@ class SidePanelFastMaking extends React.Component {
               EXPRESS MAKING (6-9 days)
               <div className="pdp-side-note">Only available for Recommended Colors</div>
             </div>
-            <div className="c-card-customize__content__right">$30</div>
+            <div className="c-card-customize__content__right">${this.fastMakingOption.displayPrice}</div>
             </label>
           </a>
         </div>
@@ -48,6 +71,8 @@ class SidePanelFastMaking extends React.Component {
 }
 
 SidePanelFastMaking.propTypes = {
+  actions: PropTypes.object.isRequired,
+  flags: PropTypes.object.isRequired,
   product: PropTypes.object.isRequired
 };
 
