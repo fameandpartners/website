@@ -168,4 +168,6 @@ section.order-details
   = render 'shared/tracking/masterpass_analytics'
 
   - if Features.active?(:i_equal_change)
-    = render 'iequalchange/post_message', spree_order: @order
+    / NOTE: 17/11/16 - Alexey Bobyrev
+    / @order - is presenter (Orders::OrderPresenter)
+    = render 'iequalchange/post_message', spree_order: @order.order
