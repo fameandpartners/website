@@ -15,53 +15,53 @@ function select(state) {
 const SlayItForward = (props) => {
   const { dispatch, SlayItForwardState } = props;
   return (
-    <div className='slay-it-forward'>
+    <div className="slay-it-forward">
       <MarketingPage>
-        <MarketingSection className='MarketingSection-slay slay-banner-hero'>
+        <MarketingSection className="MarketingSection-slay slay-banner-hero">
           <div>
-            <div className='strong-woman'></div>
-            <div className='strong-woman'></div>
-            <div className='strong-woman'></div>
-            <div className='strong-woman'></div>
-            <div className='hashtag-banner inner-buffer'>#SLAYITFORWARD</div>
-            <div className='strong-woman'></div>
-            <div className='strong-woman'></div>
-            <div className='strong-woman'></div>
-            <div className='strong-woman'></div>
+            <div className="strong-woman"></div>
+            <div className="strong-woman"></div>
+            <div className="strong-woman"></div>
+            <div className="strong-woman"></div>
+            <div className="hashtag-banner inner-buffer">#SLAYITFORWARD</div>
+            <div className="strong-woman"></div>
+            <div className="strong-woman"></div>
+            <div className="strong-woman"></div>
+            <div className="strong-woman"></div>
           </div>
         </MarketingSection>
 
-        <MarketingSection className='MarketingSection-slay slay-reasoning inner-buffer'>
-          <div>
-            This is a section
-          </div>
-        </MarketingSection>
-
-        <MarketingSection className='MarketingSection-slay slay-dynamic-trends'>
+        <MarketingSection className="MarketingSection-slay slay-reasoning inner-buffer">
           <div>
             This is a section
           </div>
         </MarketingSection>
 
-        <MarketingSection className='MarketingSection-slay slay-aside'>
+        <MarketingSection className="MarketingSection-slay slay-dynamic-trends">
+          <div>
+            This is a section
+          </div>
+        </MarketingSection>
+
+        <MarketingSection className="MarketingSection-slay slay-aside">
           <div>
             Together, we’ve pledged $10,000 to remind women how amazing they are.
           </div>
         </MarketingSection>
 
-        <MarketingSection className='MarketingSection-slay slay-organizations'>
+        <MarketingSection className="MarketingSection-slay slay-organizations">
           <div>
             Organizations go here
           </div>
         </MarketingSection>
 
-        <MarketingSection className='MarketingSection-slay slay-carousel'>
+        <MarketingSection className="MarketingSection-slay slay-carousel">
           <div>
             Carousel stuff goes here
           </div>
         </MarketingSection>
 
-        <MarketingSection className='MarketingSection-slay slay-ceo-letter'>
+        <MarketingSection className="MarketingSection-slay slay-ceo-letter">
           <div>
             From our CEO
           </div>

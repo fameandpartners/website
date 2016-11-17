@@ -1,5 +1,27 @@
 /* [SLAYITFORWARD Campaign]
 -------------------------------------------------------*/
 .slay-it-forward {
-  background: blue;
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  .inner-buffer {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .MarketingSection-slay {
+    width: 100%;
+
+    .strong-woman {
+      width: 25%;
+      background: blue;
+      height: 100px;
+    }
+
+    .hashtag-banner {
+      background: black;
+      color: white;
+    }
+  }
 }
