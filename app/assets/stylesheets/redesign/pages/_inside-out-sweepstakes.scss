@@ -1,6 +1,6 @@
 /* [Inside Out]
 -------------------------------------------------------*/
-.inside-out {
+.inside-out-sweepstakes {
 
   .page-title {
     background-color: transparent;
@@ -100,7 +100,7 @@
   @media (max-width: $bootstrap-md-width - 1px) {
 
     .page-title {
-      background-image: url('/assets/inside-out/banner-mobile.jpg');
+      background-image: url('/assets/landingpages/inside-out-sweepstakes/banner-mobile.jpg');
       background-position: top center;
       background-size: cover;
       background-repeat: no-repeat;
@@ -134,7 +134,7 @@
 
   // START - desktop
   @media (min-width: $bootstrap-md-width) {
-    background-image: url('/assets/inside-out/banner-desktop.jpg');
+    background-image: url('/assets/landingpages/inside-out-sweepstakes/banner-desktop.jpg');
     background-position: top center;
     background-size: cover;
     background-repeat: no-repeat;
