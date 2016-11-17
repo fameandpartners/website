@@ -1,9 +1,9 @@
-class CreateInsideOutCompetitionPage < ActiveRecord::Migration
+class CreateInsideOutSweepstakesPage < ActiveRecord::Migration
   # All values MUST be Strings!
   private def landing_page_properties
     {
-      path:             '/inside-out-competition',
-      template_path:    '/statics/inside_out_competition',
+      path:             '/inside-out-sweepstakes',
+      template_path:    '/statics/inside_out_sweepstakes',
       heading:          'Inside Out',
       title:            'The INSIDE\OUT Sweepstakes',
       meta_description: 'Enter to win our holiday giveaway: the ultimate celebration of you, inside and out, worth $30,000.',
