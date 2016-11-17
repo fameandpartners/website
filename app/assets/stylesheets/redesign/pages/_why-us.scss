@@ -6,13 +6,24 @@
     font-size: 3.6rem;
   }
 
+  .main-hero-wrap {
+    margin-bottom: 0;
+  }
+
   .section-box {
+    margin-top: 70px;
+
+    h3 {
+      margin-top: 0;
+    }
 
     p {
       line-height: 150%;
       font-family: $font-heading;
       font-weight: 300;
       font-size: 2rem;
+      margin-bottom: 0;
+      padding-right: 30px;
     }
 
   }
@@ -33,19 +44,20 @@
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
+    text-align: center;
 
     .heading-thin-line-bottom::after {
       margin-bottom: 0;
     }
 
-    .middle-wrapper {
-      text-align: center;
+    .section-box {
 
-      .copy-wrap {
-        margin-bottom: 30px;
+      p {
+        padding-right: 0;
       }
 
     }
+
   }
 
 }
