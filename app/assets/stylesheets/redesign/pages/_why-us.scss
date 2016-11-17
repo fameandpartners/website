@@ -3,7 +3,7 @@
 .why-us {
 
   h3 {
-    font-size: 3.2rem;
+    font-size: 3.6rem;
   }
 
   .section-box {
@@ -14,11 +14,7 @@
       font-weight: 300;
       font-size: 2rem;
     }
-    
-  }
 
-  .icon {
-    font-size: 2.4rem;
   }
 
   .header-mobile-wrapper {
@@ -27,7 +23,20 @@
     text-align: center;
   }
 
+  .heading-thin-line-bottom::after {
+    content: "";
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid $c-neutral-black;
+    width: 90px;
+    display: block;
+  }
+
   @media (max-width: $bootstrap-md-width - 1px) {
+
+    .heading-thin-line-bottom::after {
+      margin-bottom: 0;
+    }
 
     .middle-wrapper {
       text-align: center;
