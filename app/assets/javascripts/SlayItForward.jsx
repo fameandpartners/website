@@ -81,7 +81,7 @@ const SlayItForward = (props) => {
           </div>
         </MarketingSection>
 
-        <MarketingSection className='MarketingSection-slay slay-dynamic-trends'>
+        <MarketingSection className="MarketingSection-slay slay-dynamic-trends">
           <div>
             <p>
               Watch us #SLAYITFORWARDin real time.<br />
@@ -106,7 +106,7 @@ const SlayItForward = (props) => {
         </MarketingSection>
 
         <MarketingSection className="MarketingSection-slay slay-organizations inner-buffer">
-          <div className='slay-organizations-container'>
+          <div className="slay-organizations-container">
             Organizations go here
           </div>
         </MarketingSection>

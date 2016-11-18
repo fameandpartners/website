@@ -1,6 +1,7 @@
 /* [SLAYITFORWARD Campaign]
 -------------------------------------------------------*/
 .slay-it-forward {
+
   // Generic style can be moved to generic
   .clearfix:after {
      visibility: hidden;
@@ -26,9 +27,11 @@
   *, *:before, *:after {
     box-sizing: inherit;
   }
-
   .font-medium {
     font-size: 3rem;
+  }
+  .font--secondary {
+    font-family: $font-family-secondary;
   }
 
   .inner-buffer {
@@ -74,8 +77,25 @@
     float: left;
     min-height: 130px;
     background-size: cover;
+    border: 2px solid #fff;
   }
   .slay-carousel-container .empowered-woman-img:nth-child(2n-1){
     display: none;
+  }
+
+  // MAIN MARKETINGSECTION
+  // *********************
+  .slay-aside {
+    background: black;
+    color: white;
+  }
+
+  // MAIN MARKETINGSECTION
+  // *********************
+  .slay-organizations {
+    padding: 40px;
+  }
+  .slay-organizations .slay-organizations-container {
+    background: $c-neutral-2;
   }
 }
