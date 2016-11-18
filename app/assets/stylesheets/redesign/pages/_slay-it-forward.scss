@@ -50,14 +50,6 @@
   .MarketingSection-slay {
     width: 100%;
 
-    .strong-woman {
-      border: 1px solid black;
-      float: left;
-      width: 25%;
-      background: blue;
-      height: 100px;
-    }
-
     .hashtag-banner {
       text-align: center;
       font-size: 3.2rem;
@@ -65,6 +57,15 @@
       color: white;
       width: 100%;
     }
+  }
+
+  // MAIN MARKETINGSECTION
+  // *********************
+  .slay-banner-hero .empowered-woman-img{
+    width: 25%;
+    float: left;
+    min-height: 100px;
+    background-size: cover;
   }
 
   // MAIN MARKETINGSECTION

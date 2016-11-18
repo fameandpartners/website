@@ -16,10 +16,20 @@ function select(state) {
   return state;
 }
 
-function getTileImages(){
+function getImages(key){
   // Antipattern. This should be injected into props on startup
-  return (typeof window === 'object' && window.SLAY_IT_FORWARD && window.SLAY_IT_FORWARD.tileImages) ?
-    window.SLAY_IT_FORWARD.tileImages : [];
+  return (typeof window === 'object' && window.SLAY_IT_FORWARD && window.SLAY_IT_FORWARD[key]) ?
+    window.SLAY_IT_FORWARD[key] : [];
+}
+
+function splitArray(arr){
+  if (arr.length){
+    const half = Math.ceil(arr.length / 2);
+    const leftSide = arr.slice(0, half);
+    const rightSide = arr.slice(half, arr.length);
+    return [leftSide, rightSide];
+  }
+  return [[],[]];
 }
 
 function renderBackgroundImg(path){
@@ -32,26 +42,36 @@ function renderBackgroundImg(path){
 class SlayItForward extends Component {
   constructor(props) {
     super(props);
+    this.renderBannerImage = this.renderBannerImage.bind(this);
+  }
+
+  renderBannerImage(path){
+    const {breakpoint} = this.props;
+    const style = { backgroundImage: `url(${path})` };
+    return (
+      <div className="empowered-woman-img" style={style}></div>
+    );
   }
 
   render(){
     const { dispatch, SlayItForwardState } = this.props;
-    const tileImages = getTileImages();
+    const tileImages = getImages('tileImages');
+    const bannerImages = (this.props.breakpoint === 'mobile') ?
+      splitArray(getImages('heroImagesMobile')) :
+      splitArray(getImages('heroImagesBig'));
 
     return (
       <div className="slay-it-forward">
         <MarketingPage>
           <MarketingSection className="MarketingSection-slay slay-banner-hero">
             <div className="clearfix">
-              <div className="strong-woman"></div>
-              <div className="strong-woman"></div>
-              <div className="strong-woman"></div>
-              <div className="strong-woman"></div>
+              {bannerImages[0].map((imgPath)=>{
+                return this.renderBannerImage(imgPath);
+              })}
               <div className="hashtag-banner u-float--left inner-buffer u-textAlign--center">#SLAYITFORWARD</div>
-              <div className="strong-woman"></div>
-              <div className="strong-woman"></div>
-              <div className="strong-woman"></div>
-              <div className="strong-woman"></div>
+              {bannerImages[1].map((imgPath)=>{
+                return this.renderBannerImage(imgPath);
+              })}
             </div>
           </MarketingSection>
 
@@ -102,8 +122,8 @@ class SlayItForward extends Component {
 
       <MarketingSection className="MarketingSection-slay slay-carousel">
         <div className="slay-carousel-container clearfix">
-          {tileImages.map((path)=>{
-            return renderBackgroundImg(path);
+          {tileImages.map((imgPath)=>{
+            return renderBackgroundImg(imgPath);
           })}
         </div>
       </MarketingSection>
