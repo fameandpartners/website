@@ -106,20 +106,60 @@ const SlayItForward = (props) => {
         </MarketingSection>
 
         <MarketingSection className="MarketingSection-slay slay-organizations inner-buffer">
-          <div className='slay-organizations-container'>
-            Organizations go here
+          <div className="slay-organizations-container u-textAlign--center inner-buffer">
+            <p className="font-medium">The organizations<br /><em>you're</em> supporting</p>
+
+            <p className="font--secondary u-textTransform--uppercase title">American Civil Liberties Union (ACLU).</p>
+            <p>They defend the individual rights and liberties guaranteed by the Constitution.</p>
+
+            <p className="font--secondary u-textTransform--uppercase title">Future Project.</p>
+            <p>They help young people fulfill their potential and teach them skills they need for the future.</p>
+
+            <p className="font--secondary u-textTransform--uppercase title">Naral Pro-choice America</p>
+            <p>They advocate for women’s reproductive rights and freedom.</p>
+
+            <p className="font--secondary u-textTransform--uppercase title">National Immigration Law Center.</p>
+            <p>They fight for the rights of low-income immigrants with litigation, policy analysis, and advocacy.</p>
+
+            <p className="font--secondary u-textTransform--uppercase title">National Organization for Women (NOW).</p>
+            <p>They advocate for equal rights for women.</p>
+
+            <p className="font--secondary u-textTransform--uppercase title">Showing Up For Racial Justice.</p>
+            <p>They are a national network of groups and individuals organizing white people for racial justice.</p>
+
+            <p className="font--secondary u-textTransform--uppercase title">Planned Parenthood</p>
+            <p>They are the nation’s leading sexual and reproductive healthcare provider.</p>
+
+            <p className="font--secondary u-textTransform--uppercase title">Rape, Abuse & Incest Network (RAINN).</p>
+            <p>They are the largest anti-sexual violence organization in the country.</p>
+
+            <p className="font--secondary u-textTransform--uppercase title">Running Start.</p>
+            <p>They educate young women about the importance of politics through the Young Women’s Political Leadership Program.</p>
+
+            <p className="font--secondary u-textTransform--uppercase title">She Should Run.</p>
+            <p>They aim to get more women into elected positions of power.</p>
+
+            <p className="font--secondary u-textTransform--uppercase title">Sylvia Rivera Law Project.</p>
+            <p>They provide legal service to low-income people and people of color who are transgender, intersexor otherwise gender non-conforming.</p>
+
+            <p className="font--secondary u-textTransform--uppercase title">Young Center for Immigrant Children’s Rights.</p>
+            <p>They fight for the best interests of children who come to the U.S. on their own.</p>
           </div>
         </MarketingSection>
 
         <MarketingSection className="MarketingSection-slay slay-carousel clearfix">
           <div>
-            Carousel stuff goes here
+            <p className='u-textAlign--center font-medium'>Post, empower<br />and <em>give back</em>.</p>
+            <div className="insta-carousel"></div>
           </div>
         </MarketingSection>
 
         <MarketingSection className="MarketingSection-slay slay-ceo-letter">
-          <div>
-            From our CEO
+          <div className="u-textAlign--center">
+            <p className="font-medium">From our CEO.</p>
+            <div>This is an image of Nyree</div>
+            <p>A message from Nyree Corby, a female founder and CEO, to women everywhere.</p>
+            <p className="font--secondary">READ NOW <span>></span></p>
           </div>
         </MarketingSection>
 

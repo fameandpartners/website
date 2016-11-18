@@ -24,6 +24,9 @@
   .u-textAlign--center {
     text-align: center;
   }
+  .u-textTransform--uppercase {
+    text-transform: uppercase;
+  }
   *, *:before, *:after {
     box-sizing: inherit;
   }
@@ -95,7 +98,14 @@
   .slay-organizations {
     padding: 40px;
   }
+  .slay-organizations p:last-child {
+    margin-bottom: 0;
+  }
   .slay-organizations .slay-organizations-container {
     background: $c-neutral-2;
+  }
+  .slay-organizations .title {
+    font-weight: bold;
+    margin-bottom: 0;
   }
 }
