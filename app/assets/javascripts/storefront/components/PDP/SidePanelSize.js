@@ -40,7 +40,6 @@ class SidePanelSize extends SidePanel {
     const MENU_STATE = this.state.active ? 'pdp-side-menu is-active' : 'pdp-side-menu';
     const TRIGGER_STATE = this.props.customize.size.id
       ? "c-card-customize__content is-selected" : "c-card-customize__content";
-    const SIZE_CHART_VERSION_TEXT = this.props.sizeChartVersion === "2016" ? 'legacy' : 'new';
 
     const SIZES = this.props.defaultSizes.map((size, index) => {
       const ITEM_STATE = this.props.customize.size.id == size.table.id
@@ -74,10 +73,6 @@ class SidePanelSize extends SidePanel {
                 </a>
               </div>
               <h2 className="h4 c-card-customize__header">Choose your size</h2>
-              <p className="error text-center">
-                <strong>Before you select a size: </strong>
-                Refer to the {SIZE_CHART_VERSION_TEXT} size guide to ensure the best possible fit.
-              </p>
               <div className="row">{SIZES}</div>
               <SidePanelSizeChart />
             </div>
