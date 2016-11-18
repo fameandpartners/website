@@ -124,7 +124,6 @@ ruby:
             = render partial: 'layouts/redesign/mega_menu/lookbook'
 
         .col-md-7.lookbook-banner
-          // TODO: add pretty url path
-          = link_to '/inside-out-collection', class: 'panel-highlight media-wrap'
+          = link_to inside_out_collection_landing_page_path, class: 'panel-highlight media-wrap'
             = image_tag 'lookbook/insideout-collection.jpg', alt: ""
             .copy-wrap The INSIDE\OUT Collection <em><span>View this collection</span></em>
