@@ -5,7 +5,7 @@ module Orders
 
     extend Forwardable
 
-    def_delegators :@order,
+    def_delegators :spree_order,
                    :products,
                    :display_total,
                    :currency,
@@ -27,10 +27,10 @@ module Orders
                    :shipment,
                    :completed?
 
-    attr_reader :order, :items
+    attr_reader :spree_order, :items
 
     def initialize(order, items = nil)
-      @order = order
+      @spree_order = order
       @items = items || order.line_items
     end
 
@@ -45,16 +45,20 @@ module Orders
     end
 
     def total_items
-      items.sum &:quantity
+      items.sum(&:quantity)
     end
 
     def country_code
-      order.shipping_address.country.iso
+      spree_order.shipping_address.country.iso
     end
 
     def projected_delivery_date
-      return unless order.completed?
-      order.projected_delivery_date.try(:to_date) || Policies::OrderProjectedDeliveryDatePolicy.new(order).delivery_date.try(:to_date)
+      if spree_order.completed?
+        date = spree_order.projected_delivery_date || \
+          Policies::OrderProjectedDeliveryDatePolicy.new(spree_order).delivery_date
+
+        date.try(:to_date)
+      end
     end
 
     def expected_delivery_date
@@ -62,13 +66,14 @@ module Orders
     end
 
     def promo_codes
-      @promo_codes ||= order.adjustments.where("originator_type = 'Spree::PromotionAction'").collect { |adj|
-        "[#{adj.originator.promotion.code}] #{adj.originator.promotion.name}"
-      }
+      @promo_codes ||= \
+        spree_order.adjustments.where("originator_type = 'Spree::PromotionAction'").collect do |adj|
+          "[#{adj.originator.promotion.code}] #{adj.originator.promotion.name}"
+        end
     end
 
     def taxes
-      order.adjustments.eligible.tax.map { |tax| TaxPresenter.new(spree_adjustment: tax, spree_order: order) }
+      spree_order.adjustments.eligible.tax.map { |tax| TaxPresenter.new(spree_adjustment: tax, spree_order: spree_order) }
     end
 
     def fast_making_promo?
@@ -80,17 +85,15 @@ module Orders
     end
 
     def phone_number
-      order.try(:billing_address).try(:phone) || 'No Phone'
+      spree_order.try(:billing_address).try(:phone).presence || 'No Phone'
     end
 
     def shipping_address
-      order.try(:shipping_address) || 'No Shipping Address'
+      spree_order.try(:shipping_address).presence || 'No Shipping Address'
     end
 
     def tracking_number
-      if order.shipments.any?
-        order.shipments.first.tracking
-      end
+      spree_order.shipments.first.try(:tracking)
     end
 
     def return_requested?
@@ -98,7 +101,7 @@ module Orders
     end
 
     def return_request
-      @return_request ||= OrderReturnRequest.where(:order_id => order.id).first
+      @return_request ||= OrderReturnRequest.where(:order_id => spree_order.id).first
     end
 
     def extract_line_items
