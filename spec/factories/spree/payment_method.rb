@@ -1,6 +1,1 @@
-FactoryGirl.define do
-  factory :simple_payment_method, :class => Spree::PaymentMethod::Check do
-    name 'Check'
-    environment 'test'
-  end
-end
+require 'spree/core/testing_support/factories/payment_factory'
