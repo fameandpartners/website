@@ -12,26 +12,41 @@ function select(state) {
   return state;
 }
 
+function getTileImages(){
+  // Antipattern. This should be injected into props on startup
+  return (typeof window === 'object' && window.SLAY_IT_FORWARD && window.SLAY_IT_FORWARD.tileImages) ?
+    window.SLAY_IT_FORWARD.tileImages : [];
+}
+
+function renderBackgroundImg(path){
+  const style = { backgroundImage: `url(${path})` };
+  return (
+    <div className="empowered-woman-img" style={style}></div>
+  );
+}
+
 const SlayItForward = (props) => {
   const { dispatch, SlayItForwardState } = props;
+  const tileImages = getTileImages();
+
   return (
-    <div className='slay-it-forward'>
+    <div className="slay-it-forward">
       <MarketingPage>
-        <MarketingSection className='MarketingSection-slay slay-banner-hero'>
-          <div className='clearfix'>
-            <div className='strong-woman'></div>
-            <div className='strong-woman'></div>
-            <div className='strong-woman'></div>
-            <div className='strong-woman'></div>
-            <div className='hashtag-banner u-float--left inner-buffer u-textAlign--center'>#SLAYITFORWARD</div>
-            <div className='strong-woman'></div>
-            <div className='strong-woman'></div>
-            <div className='strong-woman'></div>
-            <div className='strong-woman'></div>
+        <MarketingSection className="MarketingSection-slay slay-banner-hero">
+          <div className="clearfix">
+            <div className="strong-woman"></div>
+            <div className="strong-woman"></div>
+            <div className="strong-woman"></div>
+            <div className="strong-woman"></div>
+            <div className="hashtag-banner u-float--left inner-buffer u-textAlign--center">#SLAYITFORWARD</div>
+            <div className="strong-woman"></div>
+            <div className="strong-woman"></div>
+            <div className="strong-woman"></div>
+            <div className="strong-woman"></div>
           </div>
         </MarketingSection>
 
-        <MarketingSection className='MarketingSection-slay slay-reasoning inner-buffer'>
+        <MarketingSection className="MarketingSection-slay slay-reasoning inner-buffer">
           <div>
             <p className="u-textAlign--center">
               The comments that have been made about women by America’s President-elect
@@ -76,31 +91,33 @@ const SlayItForward = (props) => {
           </div>
         </MarketingSection>
 
-        <MarketingSection className='MarketingSection-slay slay-carousel'>
-          <div>
-            Carousel stuff goes here
+        <MarketingSection className="MarketingSection-slay slay-carousel">
+          <div className="slay-carousel-container">
+            {tileImages.map((path)=>{
+              return renderBackgroundImg(path);
+            })}
           </div>
         </MarketingSection>
 
-        <MarketingSection className='MarketingSection-slay slay-aside'>
+        <MarketingSection className="MarketingSection-slay slay-aside">
           <div>
             Together, we’ve pledged $10,000 to remind women how amazing they are.
           </div>
         </MarketingSection>
 
-        <MarketingSection className='MarketingSection-slay slay-organizations'>
+        <MarketingSection className="MarketingSection-slay slay-organizations">
           <div>
             Organizations go here
           </div>
         </MarketingSection>
 
-        <MarketingSection className='MarketingSection-slay slay-carousel'>
+        <MarketingSection className="MarketingSection-slay slay-carousel">
           <div>
             Carousel stuff goes here
           </div>
         </MarketingSection>
 
-        <MarketingSection className='MarketingSection-slay slay-ceo-letter'>
+        <MarketingSection className="MarketingSection-slay slay-ceo-letter">
           <div>
             From our CEO
           </div>
