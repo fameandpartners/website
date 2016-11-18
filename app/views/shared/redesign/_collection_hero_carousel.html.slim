@@ -3,8 +3,7 @@
 // Carousel Item 1
 - current_tile_image = "homepage/hero-featured/nov-18-featured-1.jpg"
 - current_tile_image_mob = "homepage/hero-featured/nov-18-featured-1-mob.jpg"
-// TODO: add pretty url path
-= link_to "/inside-out-collection", class: "main-hero-wrap hero-wrap copy-left", data: { description: "The INSIDE/OUT Collection" }
+= link_to inside_out_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "The INSIDE/OUT Collection" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -28,7 +27,8 @@
 // Carousel Item 2
 - current_tile_image = "homepage/hero-featured/nov-18-featured-2.jpg"
 - current_tile_image_mob = "homepage/hero-featured/nov-18-featured-2-mob.jpg"
-= link_to inside_out_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "No-stress dressing" }
+// TODO: add pretty url path
+= link_to "/inside-out-collection", class: "main-hero-wrap hero-wrap copy-left", data: { description: "No-stress dressing" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
