@@ -91,8 +91,7 @@ ruby:
         .col-md-12.cta-item-huge
           - current_edit_image = "homepage/fp-style-icon/nov-18-tile-1.jpg"
           - current_edit_mob_image = "homepage/fp-style-icon/nov-18-tile-1-mob.jpg"
-          - current_edit_cta = "Gown Inspiration: Inka Williams"
-          - current_edit_link = gown_collection_landing_page_path
+          - current_edit_link = inside_out_page_path
 
           = link_to current_edit_link
             .section-img-wrap.copy-center
@@ -104,14 +103,6 @@ ruby:
                     #{image_path(current_edit_mob_image)} 991w,
                     #{image_path(current_edit_image)} 992w"
 
-              .content-wrap
-                .container-cta
-                  .row-cta
-                    .col-md-12
-                      .copy-wrap.text-center
-                        span.cta-link-white-bg
-                          span.copy-highlight  #{current_edit_cta}
-
     .tag-info-section
       .tag-info-wrapper.visible-lg-block
         .tag-info
@@ -120,7 +111,7 @@ ruby:
 
       .row
         .col-md-6.cta-item
-          = link_to dress_for_parties_page_path
+          = link_to dresses_path + '/wrap'
             .section-img-wrap.copy-center
               .img-wrap
                 img src='#{image_path("homepage/fp-style-icon/nov-18-tile-2.jpg")}'
@@ -132,10 +123,10 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight Party Dresses
+                          span.copy-highlight Wrap Dresses
 
         .col-md-6.cta-item
-          = link_to dresses_path + '/midi'
+          = link_to dresses_path + '/jumpsuit'
             .section-img-wrap.copy-center
               .img-wrap
                 img src='#{image_path("homepage/fp-style-icon/nov-18-tile-3.jpg")}'
@@ -147,11 +138,11 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight Midi Dresses
+                          span.copy-highlight Jumpsuits
 
       .row
         .col-md-6.cta-item
-          = link_to dresses_path + '/backless'
+          = link_to dresses_path + '/midi'
             .section-img-wrap.copy-center
               .img-wrap
                 img src='#{image_path("homepage/fp-style-icon/nov-18-tile-4.jpg")}'
@@ -163,10 +154,10 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight Backless Dresses
+                          span.copy-highlight Midi Dresses
 
         .col-md-6.cta-item
-          = link_to dresses_path + '/wrap'
+          = link_to dresses_path + '/cocktail'
             .section-img-wrap.copy-center
               .img-wrap
                 img src='#{image_path("homepage/fp-style-icon/nov-18-tile-5.jpg")}'
@@ -178,7 +169,7 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight Wrap dresses
+                          span.copy-highlight Party dresses
 
   // Section: Styling
   section.section-box.container.section-styling
