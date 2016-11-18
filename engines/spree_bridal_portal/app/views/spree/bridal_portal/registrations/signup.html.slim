@@ -2,20 +2,22 @@
   .row
     .left-side.col-md-6
       .fabeook-signup
-        p or
-        = link_to 'Sign in with facebook', fb_auth_path
-        p
-          | Don't have an account?
-          = link_to 'Sign up here', '#'
+        = link_to 'Sign up with facebook', fb_auth_path
+      p or
       .email-signup
         p Welcome back to our Wedding Atelier App
-        = form_for :user, action:  do |f|
+        = form_for :user, url: bridal_portal_signup_size_url do |f|
           = f.label :email, 'Email Address'
           = f.text_field :email, class: 'form-control'
           = f.label :password, 'Password'
           = f.text_field :password, class: 'form-control'
           = f.submit 'Next'
           = link_to 'Forgot Password', '#'
+      .steps
+        span 01
+        span 02
+        span 03
+        span 04
 
     .right-side.col-md-6
       h1 Fame and partners
