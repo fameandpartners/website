@@ -2,35 +2,11 @@ require 'spec_helper'
 
 describe 'show order', type: :feature do
   before(:each) do
-    FactoryGirl.create(:payment_method)
-    FactoryGirl.create(:simple_shipping_method)
-
-    @order = Spree::Order.create!(email: 'test@fameandpartners.com')
     @user  = FactoryGirl.create(:spree_user)
+    @order = FactoryGirl.create(:complete_order_with_items, id: 66, user_id: @user.id)
 
-    line_item = FactoryGirl.create(:dress_item)
-    @order.line_items << line_item
-    @order.save
-    @order.next!
-
-    @order.bill_address = FactoryGirl.create(:address)
-    @order.ship_address = FactoryGirl.create(:address)
-    @order.next!
-
-    @order.shipping_method = Spree::ShippingMethod.first
-
-    @order.payments.create!({ payment_method: Spree::PaymentMethod.first, amount: @order.total }, without_protection: true)
-    @order.payment_state = 'paid'
-    @order.next!
-
-    @order.update_attribute(:user_id, @user.id)
-    @order.shipments.destroy_all
-
-    shipment = FactoryGirl.create(:simple_shipment)
-    FactoryGirl.create(:inventory_unit, variant: line_item.product.master, order: @order, shipment: shipment)
-
-    shipment.order = @order
-    shipment.save!
+    shipment = FactoryGirl.build(:simple_shipment, order: @order)
+    FactoryGirl.create(:inventory_unit, variant: @order.line_items.last.product.master, order: @order, shipment: shipment)
 
     allow_any_instance_of(Spree::OrdersController).to receive(:current_user).and_return(@user)
     allow_any_instance_of(Spree::OrdersController).to receive(:authorize!).and_return(true)
