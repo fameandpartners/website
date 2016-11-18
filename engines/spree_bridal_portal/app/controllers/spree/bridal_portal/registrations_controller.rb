@@ -17,6 +17,10 @@ module Spree
       end
 
       def details
+        @roles = [
+          [ 1, "Bride"],
+          [ 2, "Brides Maid"]
+        ]
       end
 
       def invite
