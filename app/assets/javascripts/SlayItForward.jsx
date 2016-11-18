@@ -18,12 +18,12 @@ const SlayItForward = (props) => {
     <div className="slay-it-forward">
       <MarketingPage>
         <MarketingSection className="MarketingSection-slay slay-banner-hero">
-          <div>
+          <div className="clearfix">
             <div className="strong-woman"></div>
             <div className="strong-woman"></div>
             <div className="strong-woman"></div>
             <div className="strong-woman"></div>
-            <div className="hashtag-banner inner-buffer">#SLAYITFORWARD</div>
+            <div className="hashtag-banner u-float--left inner-buffer u-textAlign--center">#SLAYITFORWARD</div>
             <div className="strong-woman"></div>
             <div className="strong-woman"></div>
             <div className="strong-woman"></div>
@@ -33,13 +33,52 @@ const SlayItForward = (props) => {
 
         <MarketingSection className="MarketingSection-slay slay-reasoning inner-buffer">
           <div>
-            This is a section
+            <p className="u-textAlign--center">
+              The comments that have been made about women by America’s President-elect
+              are not OK. The treatment of women by America’s President-Elect is not OK. <br />
+              We cannot and will not stand by while women are derogated and assaulted and disregarded
+            </p>
+            <p className="u-textAlign--center">
+              We feel it is our obligation and duty to remind women how amazing and powerful and independent we are.
+            </p>
+            <p className="u-textAlign--center">
+              So, women everywhere, listen up:
+            </p>
+            <p className="u-textAlign--center font-medium">
+              We are <em>capable</em>. We are <em>worthy</em>. We are more than our <em>bodies</em>,
+              our <em>looks</em>, our <em>sex</em>. <br />We slay.
+            </p>
+            <p className="u-textAlign--center">
+              Let’s #SLAYITFORWARD.
+            </p>
+            <p className="u-textAlign--center">
+              Use the hashtag on Instagram to shout out a woman in your life who
+              inspires you–or who needs some inspiration right now–and tell her how
+              she slays. Now it’s her turn to #SLAYITFORWARD.<br />For every hashtag used,
+              Fame and Partners will donate $1 to the charities below–ones that support
+              our most vulnerable, marginalized communities.
+            </p>
+            <p className="u-textAlign--center">
+              Join us in creating an unstoppable chain of women empowering women..
+              Join us in donating to the people who need it most right now. Join us and
+              <br />#SLAYITFORWARD.
+            </p>
           </div>
         </MarketingSection>
 
         <MarketingSection className="MarketingSection-slay slay-dynamic-trends">
           <div>
-            This is a section
+            <p>
+              Watch us #SLAYITFORWARDin real time.<br />
+              –--<br />
+              The movement is756 people strong.
+            </p>
+          </div>
+        </MarketingSection>
+
+        <MarketingSection className="MarketingSection-slay slay-carousel">
+          <div>
+            Carousel stuff goes here
           </div>
         </MarketingSection>
 

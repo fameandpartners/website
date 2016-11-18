@@ -1,27 +1,63 @@
 /* [SLAYITFORWARD Campaign]
 -------------------------------------------------------*/
 .slay-it-forward {
+  // Generic style can be moved to generic
+  .clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+   }
+  .clearfix { display: inline-block; }
+  * html .clearfix { height: 1%; }
+  .clearfix { display: block; }
+
+  .u-display--block {
+    display: block;
+  }
+  .u-float--left {
+    float: left;
+  }
+  .u-textAlign--center {
+    text-align: center;
+  }
   *, *:before, *:after {
     box-sizing: inherit;
   }
 
-  .inner-buffer {
-    padding-left: 40px;
-    padding-right: 40px;
+  .font-medium {
+    font-size: 3rem;
   }
 
+  .inner-buffer {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /**
+   * MarketingSections for slay campaign
+   */
   .MarketingSection-slay {
     width: 100%;
 
     .strong-woman {
+      border: 1px solid black;
+      float: left;
       width: 25%;
       background: blue;
       height: 100px;
     }
 
     .hashtag-banner {
+      text-align: center;
+      font-size: 3.2rem;
       background: black;
       color: white;
+      width: 100%;
     }
   }
 }
