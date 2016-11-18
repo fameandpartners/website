@@ -46,7 +46,10 @@ describe 'show order', type: :feature do
     expect(page.status_code).to eq(200)
   end
 
-  it 'With enabled I=C feature page should be available to visit' do
+
+  # NOTE: 18/11/16 - Alexey Bobyrev
+  # Regression test for PR #2169
+  it 'with enabled I=C feature page should be available to visit' do
     Features.activate(:i_equal_change)
     expect { visit spree.order_path(@order, force_tracking: true) }.not_to raise_error
     expect(page.status_code).to eq(200)
