@@ -1,7 +1,7 @@
 .why-us.landing-page-v2
-  .row.header-mobile-wrapper.hidden-md.hidden-lg
+  .header-mobile-wrapper.hidden-md.hidden-lg
     h1 Made to order, <em>meant to disrupt.</em>
-    h2.heading-thin-line-bottom We're changing the way women shopfor clothing by giving you the freedom to create a personalized look that's tailored to your needs–because you deserve it.
+    h2.heading-thin-line-bottom We're changing the way women shop for clothing by giving you the freedom to create a personalized look that's tailored to your needs–because you deserve it.
 
   // hero section
   .main-hero-wrap.hero-wrap.copy-left
@@ -68,23 +68,22 @@
             h3 <em>Free</em> shipping <br class="hidden-xs hidden-sm">and returns
             p Always.
 
-  section.section-box
-    .row.header-mobile-wrapper.hidden-md.hidden-lg
-      h2.h1 Consider us your <br><em>personal atelier</em>
-    .main-hero-wrap.hero-wrap.copy-left
-      picture.media-wrap
-        source media="(max-width: 991px)" srcset="#{image_path("why-us/personal-atelier-mobile.jpg")}"
-        source media="(min-width: 992px)" srcset="#{image_path("why-us/personal-atelier.jpg")}"
-        img src="#{image_path("why-us/personal-atelier.jpg")}" srcset="
-          #{image_path("why-us/personal-atelier-mobile.jpg")} 991w,
-          #{image_path("why-us/personal-atelier.jpg")} 992w"
+  .container-fluid.no-padding.no-margin
+    .section.section-box
+      .row.header-mobile-wrapper.hidden-md.hidden-lg
+        h2.h1 Consider us your <br><em>personal atelier</em>
+      .main-hero-wrap.hero-wrap.copy-left
+        picture.media-wrap
+          source media="(max-width: 991px)" srcset="#{image_path("why-us/personal-atelier-mobile.jpg")}"
+          source media="(min-width: 992px)" srcset="#{image_path("why-us/personal-atelier.jpg")}"
+          img src="#{image_path("why-us/personal-atelier.jpg")}" srcset="
+            #{image_path("why-us/personal-atelier-mobile.jpg")} 991w,
+            #{image_path("why-us/personal-atelier.jpg")} 992w"
 
-      .content-wrap.hidden-sm.hidden-xs
-        .container-fluid
-          .row
-            .col-md-7.col-md-offset-5
-              .copy-wrap
-                h2.heading
-                  span Consider us your <em>personal atelier</em>
-
-
+        .content-wrap.hidden-sm.hidden-xs
+          .container-fluid
+            .row
+              .col-md-7.col-md-offset-5
+                .copy-wrap
+                  h2.heading
+                    span Consider us your <em>personal atelier</em>
