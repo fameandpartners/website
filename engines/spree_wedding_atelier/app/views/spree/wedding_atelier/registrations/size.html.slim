@@ -13,7 +13,7 @@
             .dress-sizes
               - @dress_sizes.each do |size|
                 = radio_button_tag('size', size)
-            = submit_tag('next')
+            = submit_tag 'next'
       .steps
         span 01
         span 02
