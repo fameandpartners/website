@@ -178,6 +178,10 @@ FameAndPartners::Application.routes.draw do
     get '/amfam-dresses' => redirect('/wicked-game-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
 
+    get '/tops'    => 'products/collections#show', :permalink => 'tops-collection', :as => :tops_collection
+    get '/outerwear'    => 'products/collections#show', :permalink => 'outerwear-collection', :as => :outerwear_collection
+    get '/pants'    => 'products/collections#show', :permalink => 'pants-collection', :as => :pants_collection
+
     # Lookbook v2.0 landing pages
     get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
 
