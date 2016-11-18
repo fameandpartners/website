@@ -9,8 +9,9 @@ dependencies:
     - ssh git@github.com git-lfs-authenticate fameandpartners/website.git download
     - git lfs pull
     # npm and bundle JS
-    - npm install
-    - npm run production
+    - npm install -g yarn
+    - yarn install
+    - yarn run prod
     # Bundler is missing for non-pre-installed Ruby versions https://discuss.circleci.com/t/trusty-container-update-16-02-01/1914/6
     - type bundle &>/dev/null || gem install bundler
 

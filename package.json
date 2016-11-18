@@ -1,7 +1,7 @@
 {
   "name": "fame-and-partners",
   "version": "1.0.0",
-  "description": "",
+  "description": "Fame & Partners JS bundle",
   "author": "F&P Dev Team",
   "devDependencies": {
     "chalk": "^1.1.3",
@@ -44,6 +44,9 @@
   },
   "scripts": {
     "start": "gulp build --watch true",
-    "production": "NODE_ENV=production gulp build --prod true"
-  }
+    "prod": "NODE_ENV=production gulp build --prod true"
+  },
+  "main": "index.js",
+  "repository": "git@github.com:fameandpartners/website.git",
+  "license": "Proprietary"
 }
