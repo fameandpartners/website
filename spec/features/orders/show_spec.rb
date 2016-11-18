@@ -2,13 +2,8 @@ require 'spec_helper'
 
 describe 'show order', type: :feature do
   before(:each) do
-    unless Spree::PaymentMethod.exists?
-      FactoryGirl.create(:simple_payment_method)
-    end
-
-    unless Spree::ShippingMethod.exists?
-      FactoryGirl.create(:simple_shipping_method)
-    end
+    FactoryGirl.create(:payment_method)
+    FactoryGirl.create(:simple_shipping_method)
 
     @order = Spree::Order.create!(email: 'test@fameandpartners.com')
     @user  = FactoryGirl.create(:spree_user)
