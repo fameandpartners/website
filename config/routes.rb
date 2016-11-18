@@ -199,9 +199,6 @@ FameAndPartners::Application.routes.draw do
     # The Evening Hours Collection - Landing page
     get '/the-evening-hours-collection' => 'products/collections#show', :permalink => 'evening-hours-collection', :as => :evening_hours_collection_landing_page
 
-    # The Relaxed Evening Collection - Landing page
-    get '/the-relaxed-evening-collection'    => 'products/collections#show', :permalink => 'the-relaxed-evening-collection', :as => :the_relaxed_evening_collection_page
-
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
@@ -213,6 +210,7 @@ FameAndPartners::Application.routes.draw do
     get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
     get '/dress-for-wedding'    => 'products/collections#show', :permalink => 'dress-for-wedding', :as => :dress_for_wedding_page
     get '/dress-for-parties'    => 'products/collections#show', :permalink => 'dress-for-parties', :as => :dress_for_parties_page
+    get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
