@@ -1,0 +1,36 @@
+.container-fluid
+  .row
+    .left-side.col-md-6
+      p Janine, invite the bridal party
+      = link_to 'invite with facebook', '#'
+      .form
+        = form_tag(wedding_atelier_signup_invite_path, method: :get) do
+          .form-group
+            = label_tag 'email', "email address"
+            = text_field_tag 'email', '', class: 'form-control'
+          .section.invitations
+            .invitation
+              p janine@gmail.com
+              span invite pending |
+              = link_to ' remove', '#'
+            .invitation
+              p janine@gmail.com
+              span invite pending |
+              = link_to ' remove', '#'
+            .invitation
+              p janine@gmail.com
+              span invite pending |
+              = link_to ' remove', '#'
+
+
+
+          = button_tag 'do this later'
+          = submit_tag 'next'
+      .steps
+        span 01
+        span 02
+        span 03
+        span 04
+
+    .right-side.col-md-6
+      h1 Fame and partners
