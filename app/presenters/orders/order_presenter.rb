@@ -53,11 +53,9 @@ module Orders
     end
 
     def projected_delivery_date
-      if spree_order.completed?
-        date = spree_order.projected_delivery_date || \
-          Policies::OrderProjectedDeliveryDatePolicy.new(spree_order).delivery_date
-
-        date.try(:to_date)
+      if  spree_order.completed?
+        spree_order.projected_delivery_date.try(:to_date) || \
+          Policies::OrderProjectedDeliveryDatePolicy.new(spree_order).delivery_date.try(:to_date)
       end
     end
 
