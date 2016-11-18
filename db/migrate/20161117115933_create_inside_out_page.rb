@@ -7,8 +7,8 @@ class CreateInsideOutPage < ActiveRecord::Migration
       pids:             %w().join(','),
       limit:            '5',
       heading:          'Inside Out',
-      title:            '[TODO]',
-      meta_description: '[TODO]',
+      title:            'Inside Out',
+      meta_description: 'We believe fashion should empower you from the inside out. The INSIDE\OUT Collection celebrates this idea by donating $5 of each sale to UN Women and Plan International, and through the artwork of Dina Broadhurst.',
     }
   end
 
