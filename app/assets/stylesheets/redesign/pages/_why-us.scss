@@ -1,228 +1,69 @@
 /* [Why Shop With Us]
 -------------------------------------------------------*/
 .why-us {
-  font-family: $font-heading;
 
-  h1,
-  h2 {
-    text-transform: none;
+  h3 {
+    font-size: 3.6rem;
+    margin-top: 0;
   }
 
-  p {
-    line-height: 1.1;
-    font-family: $font-heading;
-    font-weight: 300;
+  .main-hero-wrap {
+    margin-bottom: 0;
   }
 
-  .add-separator {
-    position: relative;
-
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 50%;
-      margin-right: -40px;
-      width: 80px;
-      height: 1px;
-      background: $c-neutral-black;
-    }
-
-  }
-
-  .panel-compact {
-    margin-bottom: 50px;
-    padding-top: 20px;
-
-    .copy-wrap {
-      margin-top: 0;
-    }
-
-  }
-
-  .progress-wrap {
-    min-width: 130px;
-    margin-top: 25px;
-    padding: 5px 10px;
-    font-size: 1.125em;
-    color: $c-neutral-6;
-
-    span {
-      font-family: $font-family-secondary;
-      color: $c-neutral-white;
-    }
-
-    &.prograss-fame {
-      width: 24%;
-      background: $c-brand-blue;
-    }
-
-    &.prograss-standard {
-      width: 100%;
-      background: $c-neutral-11;
-    }
-
-  }
-
-  .section-title {
-    margin-bottom: 30px;
-
-    .section-heading {
-      margin: 0 0 20px;
-    }
+  .section-box {
+    margin-top: 70px;
 
     p {
-      font-size: 1.25em;
-    }
-
-    .btn {
-      font-weight: 500;
-    }
-
-    p,
-    .btn {
-      margin-bottom: 20px;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
+      line-height: 150%;
+      font-family: $font-heading;
+      font-weight: 300;
+      font-size: 2rem;
+      margin-top: 10px;
+      margin-bottom: 0;
+      padding-right: 60px;
     }
 
   }
 
-  .section-personal-style {
+  .header-mobile-wrapper {
+    background-color: $c-neutral-2;
+    padding: 40px;
+    text-align: center;
+  }
 
-    .section-title {
-      margin-bottom: 50px;
-    }
+  .heading-thin-line-bottom::after {
+    content: "";
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid $c-neutral-black;
+    width: 90px;
+    display: block;
+  }
 
-    .panel-compact {
-      margin-top: 40px;
+  @media (max-width: $bootstrap-md-width - 1px) {
+    text-align: center;
+
+    .heading-thin-line-bottom::after {
       margin-bottom: 0;
     }
 
-  }
+    .middle-wrapper {
 
-  .section-production-model {
-    text-align: center;
-
-    .step {
-      display: inline-block;
-      min-width: 85px;
-      margin: 0 3px;
-    }
-
-    .heading {
-      padding-bottom: 5px;
-      font-style: italic;
-    }
-
-    .copy-wrap {
-      width: 100%;
-      padding-top: 5px;
-      border-top: solid $c-neutral-black 1px;
-    }
-
-  }
-
-  .section-collections {
-
-    .heading {
-      font-size: 1.125em;
-    }
-
-    .progress-label {
-      margin: 5px 0 0 0;
-      text-transform: uppercase;
-      font-family: $font-family-secondary;
-      font-size: 0.75em;
-      font-weight: 500;
-    }
-
-  }
-
-  section {
-    margin-bottom: 70px;
-
-    &.alt {
-      padding: 70px 0;
-      background: $c-neutral-3;
-    }
-
-  }
-
-  // START - mobile only
-  @media (max-width: $bootstrap-md-width - 1px) {
-
-    .section-title {
-      text-align: center;
-    }
-
-    .section-collections {
-
-      [class^='col-'] {
-        padding-bottom: 30px;
-        border-bottom: solid $c-neutral-2 1px;
-
-        &:first-child {
-          margin-bottom: 30px;
-        }
-
+      .section-box {
+        margin-top: 0px;
       }
 
-      .section-title {
-        margin-bottom: 0;
+      .copy-wrap {
+        margin-top: 40px;
+      }
+
+      p {
+        padding-right: 0;
       }
 
     }
-
+    
   }
-  // END - mobile only
-
-  // START - desktop
-  @media (min-width: $bootstrap-md-width) {
-
-    .main-hero-wrap {
-
-      .keep-ratio {
-        padding-bottom: 39%;
-      }
-
-      .main-heading {
-        max-width: 360px;
-      }
-
-    }
-
-    .add-separator {
-
-      &:after {
-        right: 0;
-        width: 1px;
-        height: 100%;
-        margin-right: 0;
-        background: $c-neutral-5;
-      }
-
-      &:last-child:after {
-        background: transparent;
-      }
-
-    }
-
-    .panel-compact {
-      margin-bottom: 30px;
-      padding-top: 0;
-      padding-bottom: 20px;
-    }
-
-    .section-production-model .step {
-      margin: 0 50px;
-    }
-
-  }
-  // END - desktop
 
 }
