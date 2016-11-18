@@ -50,9 +50,9 @@ module Afterpay
               line1:       order.address1,
               line2:       order.address2,
               suburb:      order.city,
-              state:       order.state_name,
+              state:       order.state.abbr,
               postcode:    order.zipcode,
-              countryCode: order.iso3,
+              countryCode: order.country.iso,
               phoneNumber: order.phone
             },
             merchant:          {

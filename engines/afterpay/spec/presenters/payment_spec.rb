@@ -17,9 +17,9 @@ describe Afterpay::Presenters::Payment do
                      address1: 'address1',
                      address2: 'address2',
                      city: 'Houston',
-                     state_name: 'TX',
+                     state: double(:state, abbr: 'TX'),
                      zipcode: '12345',
-                     iso3: 'US',
+                     country: double(:country, iso: 'US'),
                      number: 731
                      )
     end

@@ -17,11 +17,9 @@ module Afterpay
                      :address1,
                      :address2,
                      :city,
-                     :state_name,
+                     :state,
                      :zipcode,
                      :country
-
-      def_delegators :country, :iso3
 
       def initialize(spree_order:)
         @spree_order = spree_order

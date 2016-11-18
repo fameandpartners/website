@@ -15,13 +15,9 @@ describe Afterpay::Presenters::Order do
     end
 
     it "wraps bill address" do
-      %i(phone firstname lastname address1 address2 city state_name zipcode country).each do |method|
+      %i(phone firstname lastname address1 address2 city state zipcode country).each do |method|
         subject_should_delegate(method: method, object: bill_address)
       end
-    end
-
-    it "wraps bill address country" do
-      subject_should_delegate(method: :iso3, object: bill_country)
     end
 
     def subject_should_delegate(method:, object:)
