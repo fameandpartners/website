@@ -91,8 +91,9 @@ ruby:
         .col-md-12.cta-item-huge
           - current_edit_image = "homepage/fp-style-icon/nov-18-tile-1.jpg"
           - current_edit_mob_image = "homepage/fp-style-icon/nov-18-tile-1-mob.jpg"
-          - current_edit_cta = "Gown Inspiration: Inka Williams"
-          - current_edit_link = gown_collection_landing_page_path
+          // TODO: add pretty url path
+          - current_edit_link = '/slayitforward'
+
 
           = link_to current_edit_link
             .section-img-wrap.copy-center
@@ -104,14 +105,6 @@ ruby:
                     #{image_path(current_edit_mob_image)} 991w,
                     #{image_path(current_edit_image)} 992w"
 
-              .content-wrap
-                .container-cta
-                  .row-cta
-                    .col-md-12
-                      .copy-wrap.text-center
-                        span.cta-link-white-bg
-                          span.copy-highlight  #{current_edit_cta}
-
     .tag-info-section
       .tag-info-wrapper.visible-lg-block
         .tag-info
@@ -120,7 +113,7 @@ ruby:
 
       .row
         .col-md-6.cta-item
-          = link_to dress_for_parties_page_path
+          = link_to dresses_path + '/wrap'
             .section-img-wrap.copy-center
               .img-wrap
                 img src='#{image_path("homepage/fp-style-icon/nov-18-tile-2.jpg")}'
@@ -132,10 +125,10 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight Party Dresses
+                          span.copy-highlight Wrap Dresses
 
         .col-md-6.cta-item
-          = link_to dresses_path + '/midi'
+          = link_to dresses_path + '/jumpsuit'
             .section-img-wrap.copy-center
               .img-wrap
                 img src='#{image_path("homepage/fp-style-icon/nov-18-tile-3.jpg")}'
@@ -147,11 +140,11 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight Midi Dresses
+                          span.copy-highlight Jumpsuits
 
       .row
         .col-md-6.cta-item
-          = link_to dresses_path + '/backless'
+          = link_to dresses_path + '/midi'
             .section-img-wrap.copy-center
               .img-wrap
                 img src='#{image_path("homepage/fp-style-icon/nov-18-tile-4.jpg")}'
@@ -163,10 +156,10 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight Backless Dresses
+                          span.copy-highlight Midi Dresses
 
         .col-md-6.cta-item
-          = link_to dresses_path + '/wrap'
+          = link_to dresses_path + '/cocktail'
             .section-img-wrap.copy-center
               .img-wrap
                 img src='#{image_path("homepage/fp-style-icon/nov-18-tile-5.jpg")}'
@@ -178,7 +171,7 @@ ruby:
                       .copy-wrap.text-center
                         span.cta-link-white-bg
                           span.cta-link Shop
-                          span.copy-highlight Wrap dresses
+                          span.copy-highlight Party dresses
 
   // Section: Styling
   section.section-box.container.section-styling
@@ -277,14 +270,14 @@ ruby:
 
             // Instagram Item
             .item.col-md-5ths.col-xs-6
-              = link_to  dresses_path + "/dress-rocha-skirt-1160?color=navy", class: "item-wrap"
+              = link_to  dresses_path + "/dress-palais-1053?color=black", class: "item-wrap"
                 .media-wrap
                   = image_tag "homepage/get-social/Instagram-4.jpg", class: "img-responsive", alt: ""
                   .overlay
                     .overlay-outer-wrap
                       .overlay-inner-wrap
                         span.cta-instagram
-                          span.user @heidiabrahmsonjewelry
+                          span.user @biancamelb
                           span.cta-link shop
 
             // Instagram Item
@@ -309,38 +302,38 @@ ruby:
   // Section: Social networks
   section.section-box.container.section-social.same-height-cols
     .row
-      - current_social_network_link = "https://www.facebook.com/fameandpartners/"
+      - current_social_network_link = "http://blog.fameandpartners.com"
       .col-md-6.copy-img-side-by-side
         .item.bordered.item-alt.section-facebook
           .row
             .col-sm-5.copy-side
               .content-wrapper
-                p An endless scroll of style-savvy social stars rocking Fame and Partners. See them all on our #{link_to "Facebook", current_social_network_link, target: "_blank"}.
+                p Interviews with the strong, powerful, and creative women who inspire us + the female-led businesses  you need to know about. Get your daily dose of women's empowerment from #{link_to "The Fame Files", current_social_network_link, target: "_blank"}.
 
                 .link-align-bottom
                   = link_to current_social_network_link, target: "_blank"
                     span.cta-link-arrow-right
                       span.cta-link Explore
-                      span.copy-highlight Facebook
+                      span.copy-highlight Blog
                       i.icon.icon-arrow-right
 
             .col-sm-7.img-side
               = link_to current_social_network_link, target: "_blank"
                 = image_tag "homepage/social-media/social-media-1.jpg", class: "img-responsive"
 
-      - current_social_network_link = "http://blog.fameandpartners.com"
+      - current_social_network_link = "https://www.facebook.com/fameandpartners/"
       .col-md-6.copy-img-side-by-side
         .item.bordered.item-alt.section-blog
           .row
             .col-sm-5.copy-side
               .content-wrapper
-                p Styling tips from those in the know: find out how to mix-and-match separates to perfection on #{link_to "the blog", current_social_network_link, target: "_blank"}.
+                p Want to win a celebration of you, inside & out, worth $30,000? Of course you do. Like our #{link_to "Facebook", current_social_network_link, target: "_blank"} page and enter our Friday giveaways.
 
                 .link-align-bottom
                   = link_to current_social_network_link, target: "_blank"
                     span.cta-link-arrow-right
                       span.cta-link Explore
-                      span.copy-highlight the blog
+                      span.copy-highlight Facebook
                       i.icon.icon-arrow-right
 
             .col-sm-7.img-side
