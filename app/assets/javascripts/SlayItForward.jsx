@@ -70,8 +70,8 @@ class SlayItForward extends Component {
 
           <MarketingSection className="MarketingSection-slay slay-reasoning inner-buffer">
             <div>
-              { this.props.breakpoint === 'mobile' ? null :
-                <h3 className='main-slay-text u-textAlign--center font--secondary'>#SLAYITFORWARD</h3>
+              {this.props.breakpoint === 'mobile' ? null :
+                <h3 className="main-slay-text u-textAlign--center font--secondary">#SLAYITFORWARD</h3>
               }
               <p className="u-textAlign--center">
                 The comments that have been made about women by America’s President-elect
@@ -106,7 +106,7 @@ class SlayItForward extends Component {
             </div>
           </MarketingSection>
 
-          <MarketingSection className='MarketingSection-slay slay-dynamic-trends'>
+          <MarketingSection className="MarketingSection-slay slay-dynamic-trends">
             <div>
               <p>
                 Watch us #SLAYITFORWARDin real time.<br />
@@ -174,7 +174,7 @@ class SlayItForward extends Component {
 
         <MarketingSection className="MarketingSection-slay slay-carousel clearfix">
           <div>
-            <p className='u-textAlign--center font-medium'>Post, empower<br />and <em>give back</em>.</p>
+            <p className="u-textAlign--center font-medium">Post, empower<br />and <em>give back</em>.</p>
             <div className="insta-carousel"></div>
           </div>
         </MarketingSection>
@@ -193,7 +193,7 @@ class SlayItForward extends Component {
   );
 
   }
-};
+}
 
 SlayItForward.propTypes = {
   breakpoint: PropTypes.string,

@@ -21,6 +21,9 @@
   .u-float--left {
     float: left;
   }
+  .u-position--relative {
+    position: relative;
+  }
   .u-textAlign--center {
     text-align: center;
   }
@@ -49,13 +52,30 @@
    ************************************/
   .MarketingSection-slay {
     width: 100%;
+    @include min-tablet {
+      font-size: 2rem;
+    }
+
+    .main-slay-text {
+      font-weight: bold;
+      font-size: 3.2rem;
+      letter-spacing: .4rem;
+    }
+    @include min-tablet {
+      .main-slay-text {
+        font-size: 6.2rem;
+        margin-bottom: 40px;
+      }
+    }
 
     .hashtag-banner {
       text-align: center;
-      font-size: 3.2rem;
       background: black;
       color: white;
       width: 100%;
+    }
+    @include min-tablet {
+      .hashtag-banner {display: none;}
     }
   }
 
@@ -67,11 +87,33 @@
     min-height: 100px;
     background-size: cover;
   }
+  @include min-tablet {
+    .slay-banner-hero .empowered-woman-img {
+      width: 12.5%;
+      min-height: 380px;
+    }
+  }
 
   // MAIN MARKETINGSECTION
   // *********************
   .slay-dynamic-trends {
     background: black;
+  }
+
+  // MAIN MARKETINGSECTION
+  // *********************
+  @include min-tablet {
+    .slay-reasoning {
+      background: black;
+      color: white;
+      max-width: 900px;
+      margin: -100px auto 140px;
+      position: relative;
+    }
+
+    .slay-reasoning .inner-buffer {
+      padding: 60px 40px;
+    }
   }
 
   // MAIN MARKETINGSECTION
@@ -98,7 +140,14 @@
   // *********************
   .slay-organizations {
     padding: 40px;
+    margin: 0 auto;
   }
+  @include min-tablet {
+    .slay-organizations {
+      max-width: 900px;
+    }
+  }
+
   .slay-organizations p:last-child {
     margin-bottom: 0;
   }
