@@ -1,165 +1,89 @@
-.why-us
+.why-us.landing-page-v2
+  .header-mobile-wrapper.hidden-md.hidden-lg
+    h1 Made to order, <em>meant to disrupt.</em>
+    h2.heading-thin-line-bottom We're changing the way women shop for clothing by giving you the freedom to create a personalized look that's tailored to your needs–because you deserve it.
 
   // hero section
-  .main-hero-wrap.hero-wrap.copy-right
-    picture.media-wrap.keep-ratio
-      .inner-wrap
-        source media='(max-width: 1023px)' srcset='#{image_path("_why-us/hero-mob.jpg")}'
-        source media='(min-width: 1024px)' srcset='#{image_path("_why-us/hero-full.jpg")}'
-        img src='#{image_path("_why-us/hero-full.jpg")}' srcset='
-          #{image_path("_why-us/hero-mob.jpg")} 1023w,
-          #{image_path("_why-us/hero-full.jpg")} 1024w' alt='background image'
-    .content-wrap
-      .container
+  .main-hero-wrap.hero-wrap.copy-left
+    picture.media-wrap
+      source media="(max-width: 991px)" srcset="#{image_path("why-us/why-us-banner-mobile.jpg")}"
+      source media="(min-width: 992px)" srcset="#{image_path("why-us/why-us-banner.jpg")}"
+      img src="#{image_path("why-us/why-us-banner.jpg")}" srcset="
+        #{image_path("why-us/why-us-banner-mobile.jpg")} 991w,
+        #{image_path("why-us/why-us-banner.jpg")} 992w"
+
+    .content-wrap.hidden-sm.hidden-xs
+      .container-fluid
         .row
-          .col-md-12
-            h1.heading.main-heading
-              span The Modern Atelier
-              span.sub-heading Contemporary dresses customized by you fashioned by Fame and Partners
+          .col-md-4.col-md-offset-1
+            .copy-wrap
+              h2.heading.no-margin-md
+                span Made to order,<br> <em>meant to disrupt.</em>
+                span.sub-heading.heading-thin-line-bottom
+                  | We're changing the way women shop for clothing by giving you the freedom to create a personalized look that's tailored to your needs–because you deserve it.
 
-  .container
-    .row
-      .col-md-4.panel-compact.alt.add-separator
-        .copy-wrap
-          .heading YOUR PERSONAL COUTURIER
-          p Express yourself through bespoke designs and we’ll help create your personal piece of fashion.
-      .col-md-4.panel-compact.alt.add-separator
-        .copy-wrap
-          .heading ARTISAN QUALITY
-          p Elegant dresses made to order by highly trained ateliers using contemporary designs and fabrications.
-      .col-md-4.panel-compact.alt.add-separator
-        .copy-wrap
-          .heading INSPIRED COLLECTIONS
-          p Designers drawing inspiration from the world around them; new and novel trends, art and culture, countries and their cultural nuances, plus inspiring influencers.
-
-  // START - section-personal-style
-  section.alt.section-personal-style
-    .container
+  .container.middle-wrapper
+    section.section-box
       .row
-        .col-md-10.col-md-offset-1.section-title.text-center
-          h2.section-heading Personalised style
-          p
-            em Fashion design is now at your fingertips
-          p We give you the power to customize dresses in your own unique style, from current season silhouettes, edgy cocktail frocks, color-popping ball gowns and all white everything for the modern bride.
-          p Choose a dress and tell us what would make it perfect for you:
+        .col-md-4
+          .copy-wrap
+            h3 Style <em>customizations</em>
+            p Each Fame and Partners piece has up to 3 style customizations and comes in up to 30 colors.
+        .col-md-4
+          .copy-wrap
+            h3 Ethical <em>made-to-order</em> <br class="hidden-xs hidden-sm">model
+            p Made-to- order means less waste, since we don’t carry and store excess stock.
+        .col-md-4
+          .copy-wrap
+            h3 <em>Free</em> wedding <br class="hidden-xs hidden-sm">concierge
+            p We’ll help you plan your entire wedding look–for free.
 
+    section.section-box
       .row
-        .col-md-12
-          picture.media-wrap
-            source media='(max-width: 1023px)' srcset='#{image_path("_why-us/tile-1-mob.jpg")}'
-            source media='(min-width: 1024px)' srcset='#{image_path("_why-us/tile-1.jpg")}'
-            img src='#{image_path("_why-us/tile-1.jpg")}' srcset='
-              #{image_path("_why-us/tile-1-mob.jpg")} 1023w,
-              #{image_path("_why-us/tile-1.jpg")} 1024w' alt=''
+        .col-md-4
+          .copy-wrap
+            h3 Length <br class="hidden-xs hidden-sm"><em>customizations</em>
+            p Alter the hemline of any dress or skirt to suit your exact height.
+        .col-md-4
+          .copy-wrap
+            h3 Artisan <em>quality</em>
+            p Our clothing is handmade by artisan seamstresses using time-honored techniques.
+        .col-md-4
+          .copy-wrap
+            h3 Group shopping <br class="hidden-xs hidden-sm"><em>for bridal parties</em>
+            p Your bridal party can shop as a group and create your custom dresses together.
 
+    section.section-box
       .row
-        .col-md-3.col-sm-10.col-xs-10.col-md-offset-0.col-sm-offset-1.col-xs-offset-1.panel-compact.alt
-          em 1
-          .heading Pick your favorite dress from our collection
-          p We know it’s tough to decide, which is why you can browse by occasion to make searching a little more simple.
-        .col-md-3.col-sm-10.col-xs-10.col-md-offset-0.col-sm-offset-1.col-xs-offset-1.panel-compact.alt
-          em 2
-          .heading Choose from three customizable features
-          p This is where your personal style comes to in play. Tweak straps, add or remove skirt slits, adjust the neckline and more. Craft the dress to flatter your form.
-        .col-md-3.col-sm-10.col-xs-10.col-md-offset-0.col-sm-offset-1.col-xs-offset-1.panel-compact.alt
-          em 3
-          .heading Modify the length to suit your height
-          p The customization option we get the biggest ‘thank you’ for, no more tripping on hemlines or tugging down mini skirts.
-        .col-md-3.col-sm-10.col-xs-10.col-md-offset-0.col-sm-offset-1.col-xs-offset-1.panel-compact.alt
-          em 4
-          .heading Add to cart<br><br>
-          p It’s that easy to get a custom-made dress delivered to your door. Give us 10 days if there’s no rush, or 48 hours if it’s an outfit emergency.
-  // END - section-personal-style
+        .col-md-4
+          .copy-wrap
+            h3 Size + Fit <em>guarantee</em>
+            p A perfect fit at every size. Our clothing is made for all shapes and sizes–from 0 to 22–and is guaranteed to fit your body perfectly.
+        .col-md-4
+          .copy-wrap
+            h3 <em>Free</em> wardrobe <br class="hidden-xs hidden-sm">styling
+            p Our complimentary personal stylist is here to answer questions, give fashion advice, and help you shop.
+        .col-md-4
+          .copy-wrap
+            h3 <em>Free</em> shipping <br class="hidden-xs hidden-sm">and returns
+            p Always.
 
-  .container
-    section.row
-      .col-md-12
-        .panel-split.alt
-          .content-wrap-outer
-            .content-wrap-inner
-              .content-wrap
-                h2.section-heading Fit guarantee
-                p
-                  em We offer a superior fit
-                p Just like a luxury tailor we take size, shape and height in to account so that every dress is cut to your body type. This year we’re launching fully personalized sizing too.
-                = link_to 'SEE OUR SIZE GUIDE', size_guide_url, class:'btn btn-lowlight btn-sm'
-          .media-wrap
-            = image_tag "_why-us/tile-2.jpg"
+  .container-fluid.no-padding.no-margin
+    .section.section-box
+      .row.header-mobile-wrapper.hidden-md.hidden-lg
+        h2.h1 Consider us your <br><em>personal atelier</em>
+      .main-hero-wrap.hero-wrap.copy-left
+        picture.media-wrap
+          source media="(max-width: 991px)" srcset="#{image_path("why-us/personal-atelier-mobile.jpg")}"
+          source media="(min-width: 992px)" srcset="#{image_path("why-us/personal-atelier.jpg")}"
+          img src="#{image_path("why-us/personal-atelier.jpg")}" srcset="
+            #{image_path("why-us/personal-atelier-mobile.jpg")} 991w,
+            #{image_path("why-us/personal-atelier.jpg")} 992w"
 
-  section.alt
-    .container
-      .row
-        .col-md-10.col-md-offset-1.section-title.text-center
-          h2.section-heading Environmentally conscience production model
-          p
-            em Our production model in 3 steps
-        .col-md-12
-          .section-production-model
-            .inner-wrap
-              .step
-                .heading Step 1
-                .copy-wrap Order
-              .step
-                .heading Step 2
-                .copy-wrap Manufacture
-              .step
-                .heading Step 3
-                .copy-wrap Delivery
-
-  .container
-
-    section.row
-      .col-md-4.panel-compact.alt.add-separator
-        .copy-wrap
-          .icon.icon-made-to-order
-          .heading FASHION TO ORDER
-          p Our dresses are made to order rather than sitting on a rail waiting to be bought. This reduces wasteful manufacturing and thwarts consumerism.
-      .col-md-4.panel-compact.alt.add-separator
-        .copy-wrap
-          .icon.icon-truck
-          .heading DIRECT DELIVERY
-          p The finished dresses are delivered straight to you, with no need to be stored in air-conditioned warehouses.
-      .col-md-4.panel-compact.alt.add-separator
-        .copy-wrap
-          .icon.icon-earth
-          .heading REDUCED WASTE
-          p We don’t carry stock, which means no surplus items each season that would be cleared at discount or even thrown away.
-
-    section.section-collections.row
-      .col-md-6
-        .section-title
-          h2.section-heading Quick fire collections
-          p
-            em Our designers are a savvy set
-          p They can produce new collections within weeks, unlike standard retail brands that take two months or more to refresh their ranges. Which means if we scout a trend or get inspired by a colorful trip overseas, you’ll see it all in our collections within a few weeks. In the modern world, fashion waits for no one.
-      .col-md-5.col-md-offset-1
-        em.heading Speed to market
-        .progress-wrap.prograss-fame
-          ' Two
-          span  WEEKS
-        .progress-label Fame and Partners
-        .progress-wrap.prograss-standard
-          ' Two
-          span  MONTHS
-        .progress-label Standard Retail
-      .col-md-12
-        /! Recent Collections Carousel
-        .featured-collections-carousel.js-hero-tile-carousel
-          = render 'shared/redesign/collection_hero_carousel'
-
-    section.row
-      .col-md-10.col-md-offset-1.section-title.text-center
-        h2.section-heading Personalised shopping experience
-      .col-md-12
-        .panel-split.alt
-          .content-wrap-outer
-            .content-wrap-inner
-              .content-wrap
-                h2.section-heading Wedding planner
-                p
-                  em Curate your bridal party style for the big day
-                p Register your wedding, create a bridal mood board, and invite your bridesmaids to comment and vote on the dresses they love. The perfect tool for bridal parties spread across the country or the globe. Each bride who uses the Fame and Partners wed ding planner receives a honeymoon dress with our compliments.
-                = link_to 'EXPLORE THE WEDDING PLANNER', bridesmaid_landing_page_path, class:'btn btn-lowlight btn-sm'
-                .icon.icon-style-quiz
-          .media-wrap
-            = image_tag "_why-us/tile-3.jpg"
+        .content-wrap.hidden-sm.hidden-xs
+          .container-fluid
+            .row
+              .col-md-7.col-md-offset-5
+                .copy-wrap
+                  h2.heading
+                    span Consider us your <em>personal atelier</em>
