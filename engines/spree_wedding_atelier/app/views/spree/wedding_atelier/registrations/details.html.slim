@@ -3,7 +3,7 @@
     .left-side.col-md-6
       p Janine, let's start with your size profile
       .form
-        = form_tag(wedding_atelier_signup_details_path, method: :get) do
+        = form_tag(wedding_atelier_signup_invite_path, method: :get) do
           .form-group
             = label_tag 'role_id', "What's your role in the wedding?"
             = select_tag('role_id', options_for_select(@roles), class: 'form-control')
@@ -14,7 +14,7 @@
             = label_tag 'wedding_date', "What is the date of the wedding?"
             input.form-control(type="date" name="wedding_date")
 
-            = submit_tag('next')
+            = submit_tag 'next'
       .steps
         span 01
         span 02
