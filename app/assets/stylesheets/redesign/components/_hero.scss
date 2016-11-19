@@ -42,6 +42,11 @@
       font-size: 4.4rem;
     }
 
+    // NOTE: this is just a workaround for a Design request.
+    .extra-padding-left {
+      padding-left: 45px;
+    }
+
     &.copy-right, &.copy-left {
     position: relative;
 
