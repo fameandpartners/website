@@ -155,6 +155,9 @@ PATH
       sidekiq
     fame_favicon (0.0.1)
       rails
+    iequalchange (0.0.1)
+      rails
+      spree
     inspinia-rails (2.1.0)
       bootstrap-sass
       font-awesome-rails (~> 4.3.0.0)
@@ -888,6 +891,7 @@ DEPENDENCIES
   foreman
   geoip
   google_drive (= 1.0.0)
+  iequalchange!
   inspinia-rails!
   ipaddress
   jquery-fileupload-rails (= 0.4.1)

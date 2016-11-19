@@ -8,7 +8,7 @@ module Features
     checkout_fb_login:             "Facebook login on Checkout",
     delivery_date_messaging:       nil,
     enhanced_moodboards:           "[DEPRECATED] Sharing & Comments",
-    express_making:                nil,
+    express_making:                '[DEPRECATED] same as the "getitquick_unavailable" flag. Not used anywhere.',
     fameweddings:                  'Weddings "Shop"',
     force_sitewide_ssl:            "Force users to use HTTPS version of the website. Needs to restart server on feature toggle.",
     getitquick_unavailable:        "Turn off 'getitquick/' pages & Product Express Making. Requires server restart",

@@ -155,6 +155,10 @@
 
 }
 
+.text-transform-none {
+  text-transform: none !important;
+}
+
 @media (min-width: $bootstrap-md-width) {
 
   .no-margin-md {

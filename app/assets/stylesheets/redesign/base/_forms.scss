@@ -102,30 +102,58 @@ input[type="checkbox"] {
     display: inline-block;
     position: relative;
     padding-left: 10px;
+    width: 100%;
+    font-size: inherit;
+    cursor: pointer;
 
     &::before {
       content: "";
       display: inline-block;
       position: absolute;
-      width: 20px;
-      height: 20px;
+      padding: 7px;
       left: 0;
-      top: 2px;
+      top: 3px;
       margin-left: -20px;
-      border: 1px solid $c-neutral-6;
+      border: 1px solid $c-neutral-5;
       background-color: $c-neutral-white;
     }
 
     &::after {
       display: inline-block;
       position: absolute;
-      width: 20px;
-      height: 20px;
-      left: 5px;
-      top: 7px;
+      padding: 6px 4px;
+      left: 0;
+      top: 0;
       margin-left: -20px;
-      font-size: 0.55em;
+      font-size: 0.7rem;
       color: $c-neutral-black;
+    }
+
+  }
+
+  @media (min-width: $bootstrap-md-width) {
+
+    &.form-small label {
+
+      &::before {
+        padding: 5px;
+      }
+
+      &::after {
+        padding: 6px 3px;
+        font-size: 0.5rem;
+        font-weight: 600;
+      }
+
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    label:before {
+      padding: 8px;
+      top: 1px;
     }
 
   }

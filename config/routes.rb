@@ -93,9 +93,7 @@ FameAndPartners::Application.routes.draw do
     get '/partners-in-crime-terms' => 'statics#prom_competition_terms', as: :partners_in_crime_terms
 
     # i=change landing page
-    if Features.active?(:i_equal_change)
-      get '/iequalchange' => 'statics#iequalchange', :permalink => 'iequalchange', :as => :iequalchange_landing_page
-    end
+    get '/iequalchange' => 'statics#iequalchange', :permalink => 'iequalchange', :as => :iequalchange_landing_page
 
     ###########
     # Lookbooks
@@ -180,6 +178,10 @@ FameAndPartners::Application.routes.draw do
     get '/amfam-dresses' => redirect('/wicked-game-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
 
+    get '/tops'    => 'products/collections#show', :permalink => 'tops-collection', :as => :tops_collection
+    get '/outerwear'    => 'products/collections#show', :permalink => 'outerwear-collection', :as => :outerwear_collection
+    get '/pants'    => 'products/collections#show', :permalink => 'pants-collection', :as => :pants_collection
+
     # Lookbook v2.0 landing pages
     get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
 
@@ -200,6 +202,9 @@ FameAndPartners::Application.routes.draw do
 
     # The Evening Hours Collection - Landing page
     get '/the-evening-hours-collection' => 'products/collections#show', :permalink => 'evening-hours-collection', :as => :evening_hours_collection_landing_page
+
+    # Relaxed Evening Collection page (Inside/Out)- Landing page
+    get '/inside-out-collection' => 'products/collections#show', :permalink => 'inside-out-collection', :as => :inside_out_collection_landing_page
 
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
@@ -322,6 +327,7 @@ FameAndPartners::Application.routes.draw do
     get '/how-it-works', to: redirect("/why-us")
     get '/size-guide'  => 'statics#size_guide', :as => :size_guide
     get '/growth-plan'  => 'statics#growth_plan', :as => :growth_plan
+    get '/inside-out-sweepstakes'   => 'statics#inside_out_sweepstakes', :permalink => 'inside_out_sweepstakes', :as => :inside_out_sweepstakes
 
     get '/fashionista2014', to: redirect("/")
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info

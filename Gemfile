@@ -39,6 +39,7 @@ path 'engines' do
   gem 'mailchimp_client'
   gem 'afterpay'
   gem 'next_logistics'
+  gem 'iequalchange'
 end
 
 # TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it,

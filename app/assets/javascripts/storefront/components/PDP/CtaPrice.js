@@ -35,14 +35,13 @@ class CtaPrice extends React.Component {
       && this.props.customize.length.id) {
       // disable "ADD TO BAG" button and show spinner
       this.setState({sending:true});
-      document.getElementById('pdpCartSizeId').value = this.props.customize.size.id;
-      document.getElementById('pdpCartColorId').value = this.props.customize.color.id;
+      document.getElementById('pdpCartSizeId').value   = this.props.customize.size.id;
+      document.getElementById('pdpCartColorId').value  = this.props.customize.color.id;
       document.getElementById('pdpCartCustomId').value = this.props.customize.customization.id;
       document.getElementById('pdpCartDressVariantId').value = this.props.customize.dressVariantId;
-      document.getElementById('pdpCartLength').value = this.props.customize.length.id;
+      document.getElementById('pdpCartLength').value    = this.props.customize.length.id;
       document.getElementById('pdpCartVariantId').value = this.props.product.master_id;
-      // TODO: build express making functionality
-      document.getElementById('pdpCartMakingId').value = null;
+      document.getElementById('pdpCartMakingId').value  = this.props.customize.makingOption.id;
       $('#pdpDataForCheckout').submit();
     } else {
       // set errors
@@ -76,13 +75,21 @@ class CtaPrice extends React.Component {
       parseFloat(this.props.price)
       + parseFloat(this.props.customize.color.price)
       + parseFloat(this.props.customize.customization.price)
+      + parseFloat(this.props.customize.makingOption.price)
       - parseFloat(discount);
+
+    let isAfterpayEnabled = this.props.siteVersion === "Australia" && this.props.flags.afterpay;
+    let isAddToBagAvailable = (
+      this.props.customize.size.id
+        && this.props.customize.color.id
+        && this.props.customize.length.id
+    );
 
     return (
       <div className="btn-wrap">
         <div className="price">${PRICE}</div>
           {(() => {
-            if(this.props.siteVersion === "Australia" && this.props.flags.afterpay) {
+            if(isAfterpayEnabled) {
               return (
                 <div className="afterpay-message">
                   <span>or 4 easy payments of ${PRICE / 4} with</span>
@@ -93,10 +100,7 @@ class CtaPrice extends React.Component {
             }
           })()}
           {(() => {
-            if(this.props.customize.size.id
-              && this.props.customize.color.id
-              && this.props.customize.length.id
-              && !this.state.sending) {
+            if(isAddToBagAvailable && !this.state.sending) {
               return (
                 <a href="javascript:;" onClick={this.addToBag} className="btn btn-black btn-lrg">
                   ADD TO BAG

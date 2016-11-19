@@ -12,6 +12,3 @@ h6 = product.name
   - if (product.can_be_customized? and !product.in_sale?)
     .custom-button
       = link_to t('words.customize'), personalization_product_path(permalink: product.permalink, :cf => 'collection'), class: 'btn empty border small', title: "#{t('words.customize').titleize} this dress"
-- if product.fast_delivery
-  .fast-delivery-icon title="Next day delivery*"
-    = product.delivery_time_as_string(:long)

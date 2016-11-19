@@ -7,14 +7,18 @@
         .media-wrap-outer
           .media-wrap.keep-ratio
             .inner-wrap
-              = link_to evening_hours_collection_landing_page_path
-                = image_tag "lookbook/featured-lookbook.jpg"
+              = link_to inside_out_collection_landing_page_path
+                = image_tag "lookbook/insideout-collection.jpg"
         .content-wrap
           .outer-wrap
             .inner-wrap
-              h1.heading.skin-light The Evening Hours Collection
-              = link_to 'View this collection', evening_hours_collection_landing_page_path, class: 'btn btn-md btn-black'
+              h1.heading.skin-light The INSIDE\OUT Collection
+              = link_to 'View this collection', inside_out_collection_landing_page_path, class: 'btn btn-md btn-black'
 
+    .col-md-6
+      = link_to evening_hours_collection_landing_page_path, class: 'panel-highlight media-wrap'
+        = image_tag "lookbook/evening-hours-collection.jpg"
+        .copy-wrap Evening Hours Collection <em><span>View this collection</span></em>
     .col-md-6
       = link_to skirts_collection_landing_page_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/skirts-collection.jpg"
@@ -35,10 +39,6 @@
       = link_to it_girl_landing_page_path, class: 'panel-highlight media-wrap'
         = image_tag "lookbook/it-girl-collection.jpg"
         .copy-wrap It Girl Collection <em><span>View this collection</span></em>
-    .col-md-6
-      = link_to the_freshly_picked_collection_path, class: 'panel-highlight media-wrap'
-        = image_tag "lookbook/fresh-collection-lookbook.jpg"
-        .copy-wrap Fresh Collection <em><span>View this collection</span></em>
 
     .col-md-12
       h2.title-line-on-sides
