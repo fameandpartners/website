@@ -9,7 +9,10 @@ module.exports = {
     paths: {
       js: './app/assets/javascripts/storefront/**/*.js',
       dist: './app/assets/javascripts/',
-      mainJS: './app/assets/javascripts/storefront/App.js'
+      mainJS: [
+        './app/assets/javascripts/storefront/App.js',
+        './app/assets/javascripts/storefront/startup/SlayItForwardApp.jsx'
+      ]
     },
     src: baseDir + '/*.jsx',
     dest: baseDir,

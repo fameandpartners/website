@@ -22,6 +22,7 @@
     "mocha": true
   },
   "rules": {
+    "comma-dangle": ["error", "never"],
     "quotes": 0,
     "no-console": 1,
     "no-debugger": 1,

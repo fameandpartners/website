@@ -93,7 +93,7 @@ function attachBundleUpdate(bundler){
 
 function createBundle() {
   const bundler = browserify({
-    entries: [config.paths.mainJS],
+    entries: config.paths.mainJS,
     cache: {},
     packageCache: {},
     transform: config.settings.transform
