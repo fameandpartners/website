@@ -90,8 +90,8 @@ class SlayItForward extends Component {
 
           <MarketingSection className="MarketingSection-slay slay-reasoning inner-buffer">
             <div>
-              { this.props.breakpoint === 'mobile' ? null :
-                <h3 className='main-slay-text text-center font--secondary'>#SLAYITFORWARD</h3>
+              {this.props.breakpoint === 'mobile' ? null :
+                <h3 className="main-slay-text text-center font--secondary">#SLAYITFORWARD</h3>
               }
               <p className="text-center">
                 The comments that have been made about women by America’s President-elect
@@ -185,12 +185,12 @@ class SlayItForward extends Component {
 
           <MarketingSection className="MarketingSection-slay slay-carousel clearfix">
             <div>
-              <p className='text-center font-medium'>Post, empower and <em>give back</em>.</p>
+              <p className="text-center font-medium">Post, empower and <em>give back</em>.</p>
               <div className="insta-carousel clearfix">
-                { this.props.breakpoint === 'mobile' ?
+                {this.props.breakpoint === 'mobile' ?
                   this.renderShareImgs(shareTileImages[0]) :
                   shareTileImages.map((imgPath)=>{
-                    return this.renderShareImgs(imgPath)
+                    return this.renderShareImgs(imgPath);
                   })
                 }
               </div>
@@ -200,9 +200,9 @@ class SlayItForward extends Component {
           <MarketingSection className="MarketingSection-slay slay-ceo-letter inner-buffer">
             <div className="text-center">
               <p className="font-medium">From our CEO.</p>
-              <img className='nyree-img' src={getImages('nyree')}></img>
+              <img className="nyree-img" src={getImages('nyree')}></img>
               <p>A message from Nyree Corby, a female founder and CEO, to women everywhere.</p>
-              <p className="font--secondary"><a href="/from-our-ceo"><span className='read-ceo-link u-textDecoration--underline'><b>READ NOW</b></span></a>&nbsp;&nbsp;<b>></b></p>
+              <p className="font--secondary"><a href="/from-our-ceo"><span className="read-ceo-link u-textDecoration--underline"><b>READ NOW</b></span></a>&nbsp;&nbsp;<b>></b></p>
             </div>
           </MarketingSection>
 
@@ -211,7 +211,7 @@ class SlayItForward extends Component {
   );
 
   }
-};
+}
 
 SlayItForward.propTypes = {
   breakpoint: PropTypes.string,
