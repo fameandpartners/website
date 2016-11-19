@@ -7,7 +7,6 @@ import * as slayActions from '../actions/SlayItForwardActions';
 // Components
 import MarketingPage from '../components/Marketing/MarketingPage.jsx';
 import MarketingSection from '../components/Marketing/MarketingSection.jsx';
-import MarketingSection from '../components/Marketing/MarketingSection.jsx';
 
 //Libraries
 import Resize from '../decorators/Resize.jsx';
