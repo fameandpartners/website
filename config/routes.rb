@@ -80,7 +80,7 @@ FameAndPartners::Application.routes.draw do
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/fame2015', to: redirect('/')
-    get '/slay-it-forward'   => 'statics#slay_it_forward', :as => :slay_it_forward
+    get '/slayitforward'   => 'statics#slay_it_forward', :as => :slay_it_forward
 
     # Redirecting collections (08/06/2015)
     get '/collection(/*anything)', to: redirect { |params, _| params[:site_version] ? "/#{params[:site_version]}/dresses" : '/dresses' }

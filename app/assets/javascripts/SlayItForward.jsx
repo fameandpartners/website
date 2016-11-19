@@ -46,12 +46,21 @@ class SlayItForward extends Component {
     );
   }
 
+  renderShareImgs(path){
+    const {breakpoint} = this.props;
+    const style = { backgroundImage: `url(${path})` };
+    return (
+      <div className="share-tiles" style={style}></div>
+    );
+  }
+
   render(){
     const { dispatch, SlayItForwardState } = this.props;
     const tileImages = getImages('tileImages');
     const bannerImages = (this.props.breakpoint === 'mobile') ?
       splitArray(getImages('heroImagesMobile')) :
       splitArray(getImages('heroImagesBig'));
+    const shareTileImages = getImages('shareTileImages');
 
     return (
       <div className="slay-it-forward">
@@ -61,7 +70,7 @@ class SlayItForward extends Component {
               {bannerImages[0].map((imgPath)=>{
                 return this.renderBackgroundImg(imgPath);
               })}
-              <h3 className="main-slay-text hashtag-banner u-float--left inner-buffer u-textAlign--center">#SLAYITFORWARD</h3>
+              <div className="main-slay-text hashtag-banner u-float--left inner-buffer u-textAlign--center">#SLAYITFORWARD</div>
               {bannerImages[1].map((imgPath)=>{
                 return this.renderBackgroundImg(imgPath);
               })}
@@ -86,7 +95,7 @@ class SlayItForward extends Component {
             </p>
             <p className="u-textAlign--center font-medium">
               We are <em>capable</em>. We are <em>worthy</em>.<br /> We are more than our <em>bodies</em>,
-              our <em>looks</em>, our <em>sex</em>. <br />We slay.
+              our <em>looks</em>, our <em>sex</em>. <br />We <em>slay</em>.
             </p>
             <p className="u-textAlign--center">
               Let’s #SLAYITFORWARD.
@@ -106,87 +115,84 @@ class SlayItForward extends Component {
             </div>
           </MarketingSection>
 
-          <MarketingSection className="MarketingSection-slay slay-dynamic-trends">
+        <MarketingSection className="MarketingSection-slay slay-carousel">
+          <div className="slay-carousel-container clearfix">
+            {tileImages.map((imgPath)=>{
+              return this.renderBackgroundImg(imgPath);
+            })}
+          </div>
+        </MarketingSection>
+
+        <MarketingSection className="MarketingSection-slay slay-aside">
+          <p className="font-medium u-textAlign--center inner-buffer">
+            <em>Together</em>, we’ve pledged <b className="font--secondary">$10,000</b> to remind women how amazing they are.
+            </p>
+          </MarketingSection>
+
+          <MarketingSection className="MarketingSection-slay slay-organizations inner-buffer">
+            <div className="slay-organizations-container u-textAlign--center inner-buffer">
+              <p className="font-medium">The organizations <em>you're</em> supporting</p>
+
+              <p className="font--secondary u-textTransform--uppercase title">American Civil Liberties Union (ACLU).</p>
+              <p>They defend the individual rights and liberties guaranteed by the Constitution.</p>
+
+              <p className="font--secondary u-textTransform--uppercase title">Future Project.</p>
+              <p>They help young people fulfill their potential and teach them skills they need for the future.</p>
+
+              <p className="font--secondary u-textTransform--uppercase title">Naral Pro-choice America</p>
+              <p>They advocate for women’s reproductive rights and freedom.</p>
+
+              <p className="font--secondary u-textTransform--uppercase title">National Immigration Law Center.</p>
+              <p>They fight for the rights of low-income immigrants with litigation, policy analysis, and advocacy.</p>
+
+              <p className="font--secondary u-textTransform--uppercase title">National Organization for Women (NOW).</p>
+              <p>They advocate for equal rights for women.</p>
+
+              <p className="font--secondary u-textTransform--uppercase title">Showing Up For Racial Justice.</p>
+              <p>They are a national network of groups and individuals organizing white people for racial justice.</p>
+
+              <p className="font--secondary u-textTransform--uppercase title">Planned Parenthood</p>
+              <p>They are the nation’s leading sexual and reproductive healthcare provider.</p>
+
+              <p className="font--secondary u-textTransform--uppercase title">Rape, Abuse & Incest Network (RAINN).</p>
+              <p>They are the largest anti-sexual violence organization in the country.</p>
+
+              <p className="font--secondary u-textTransform--uppercase title">Running Start.</p>
+              <p>They educate young women about the importance of politics through the Young Women’s Political Leadership Program.</p>
+
+              <p className="font--secondary u-textTransform--uppercase title">She Should Run.</p>
+              <p>They aim to get more women into elected positions of power.</p>
+
+              <p className="font--secondary u-textTransform--uppercase title">Sylvia Rivera Law Project.</p>
+              <p>They provide legal service to low-income people and people of color who are transgender, intersexor otherwise gender non-conforming.</p>
+
+              <p className="font--secondary u-textTransform--uppercase title">Young Center for Immigrant Children’s Rights.</p>
+              <p>They fight for the best interests of children who come to the U.S. on their own.</p>
+            </div>
+          </MarketingSection>
+
+          <MarketingSection className="MarketingSection-slay slay-carousel clearfix">
             <div>
-              <p>
-                Watch us #SLAYITFORWARDin real time.<br />
-              –--<br />
-            The movement is756 people strong.
-          </p>
-        </div>
-      </MarketingSection>
+              <p className="u-textAlign--center font-medium">Post, empower and <em>give back</em>.</p>
+              <div className="insta-carousel clearfix">
+                {this.props.breakpoint === 'mobile' ?
+                  this.renderShareImgs(shareTileImages[0]) :
+                  shareTileImages.map((imgPath)=>{
+                    return this.renderShareImgs(imgPath);
+                  })
+                }
+              </div>
+            </div>
+          </MarketingSection>
 
-      <MarketingSection className="MarketingSection-slay slay-carousel">
-        <div className="slay-carousel-container clearfix">
-          {tileImages.map((imgPath)=>{
-            return this.renderBackgroundImg(imgPath);
-          })}
-        </div>
-      </MarketingSection>
-
-      <MarketingSection className="MarketingSection-slay slay-aside">
-        <p className="font-medium u-textAlign--center inner-buffer">
-          <em>Together</em>, we’ve pledged <b className="font--secondary">$10,000</b> to remind women how amazing they are.
-          </p>
-        </MarketingSection>
-
-        <MarketingSection className="MarketingSection-slay slay-organizations inner-buffer">
-          <div className="slay-organizations-container u-textAlign--center inner-buffer">
-            <p className="font-medium">The organizations <em>you're</em> supporting</p>
-
-            <p className="font--secondary u-textTransform--uppercase title">American Civil Liberties Union (ACLU).</p>
-            <p>They defend the individual rights and liberties guaranteed by the Constitution.</p>
-
-            <p className="font--secondary u-textTransform--uppercase title">Future Project.</p>
-            <p>They help young people fulfill their potential and teach them skills they need for the future.</p>
-
-            <p className="font--secondary u-textTransform--uppercase title">Naral Pro-choice America</p>
-            <p>They advocate for women’s reproductive rights and freedom.</p>
-
-            <p className="font--secondary u-textTransform--uppercase title">National Immigration Law Center.</p>
-            <p>They fight for the rights of low-income immigrants with litigation, policy analysis, and advocacy.</p>
-
-            <p className="font--secondary u-textTransform--uppercase title">National Organization for Women (NOW).</p>
-            <p>They advocate for equal rights for women.</p>
-
-            <p className="font--secondary u-textTransform--uppercase title">Showing Up For Racial Justice.</p>
-            <p>They are a national network of groups and individuals organizing white people for racial justice.</p>
-
-            <p className="font--secondary u-textTransform--uppercase title">Planned Parenthood</p>
-            <p>They are the nation’s leading sexual and reproductive healthcare provider.</p>
-
-            <p className="font--secondary u-textTransform--uppercase title">Rape, Abuse & Incest Network (RAINN).</p>
-            <p>They are the largest anti-sexual violence organization in the country.</p>
-
-            <p className="font--secondary u-textTransform--uppercase title">Running Start.</p>
-            <p>They educate young women about the importance of politics through the Young Women’s Political Leadership Program.</p>
-
-            <p className="font--secondary u-textTransform--uppercase title">She Should Run.</p>
-            <p>They aim to get more women into elected positions of power.</p>
-
-            <p className="font--secondary u-textTransform--uppercase title">Sylvia Rivera Law Project.</p>
-            <p>They provide legal service to low-income people and people of color who are transgender, intersexor otherwise gender non-conforming.</p>
-
-            <p className="font--secondary u-textTransform--uppercase title">Young Center for Immigrant Children’s Rights.</p>
-            <p>They fight for the best interests of children who come to the U.S. on their own.</p>
-          </div>
-        </MarketingSection>
-
-        <MarketingSection className="MarketingSection-slay slay-carousel clearfix">
-          <div>
-            <p className="u-textAlign--center font-medium">Post, empower<br />and <em>give back</em>.</p>
-            <div className="insta-carousel"></div>
-          </div>
-        </MarketingSection>
-
-        <MarketingSection className="MarketingSection-slay slay-ceo-letter">
-          <div className="u-textAlign--center">
-            <p className="font-medium">From our CEO.</p>
-            <div>This is an image of Nyree</div>
-            <p>A message from Nyree Corby, a female founder and CEO, to women everywhere.</p>
-            <p className="font--secondary">READ NOW <span>></span></p>
-          </div>
-        </MarketingSection>
+          <MarketingSection className="MarketingSection-slay slay-ceo-letter">
+            <div className="u-textAlign--center">
+              <p className="font-medium">From our CEO.</p>
+              <div>This is an image of Nyree</div>
+              <p>A message from Nyree Corby, a female founder and CEO, to women everywhere.</p>
+              <p className="font--secondary">READ NOW <span>></span></p>
+            </div>
+          </MarketingSection>
 
       </MarketingPage>
     </div>
