@@ -38,11 +38,11 @@ class SlayItForward extends Component {
     this.renderBackgroundImg = this.renderBackgroundImg.bind(this);
   }
 
-  renderBackgroundImg(path){
+  renderBackgroundImg(path, className='empowered-woman-img'){
     const {breakpoint} = this.props;
     const style = { backgroundImage: `url(${path})` };
     return (
-      <div className="empowered-woman-img" style={style}></div>
+      <div className={className} style={style}></div>
     );
   }
 
@@ -124,8 +124,9 @@ class SlayItForward extends Component {
         </MarketingSection>
 
         <MarketingSection className="MarketingSection-slay slay-aside">
-          <p className="font-medium u-textAlign--center inner-buffer">
-            <em>Together</em>, we’ve pledged <b className="font--secondary">$10,000</b> to remind women how amazing they are.
+          <p className="pledge font-medium u-textAlign--center inner-buffer">
+            <em>Together</em>, we’ve pledged <b className="font--secondary">$10,000</b>
+            {this.props.breakpoint !== 'mobile' ? <br /> : null} to remind women how amazing they are.
             </p>
           </MarketingSection>
 
@@ -133,40 +134,40 @@ class SlayItForward extends Component {
             <div className="slay-organizations-container u-textAlign--center inner-buffer">
               <p className="font-medium">The organizations <em>you're</em> supporting</p>
 
-              <p className="font--secondary u-textTransform--uppercase title">American Civil Liberties Union (ACLU).</p>
+              <p className="font--secondary text-uppercase title">American Civil Liberties Union (ACLU).</p>
               <p>They defend the individual rights and liberties guaranteed by the Constitution.</p>
 
-              <p className="font--secondary u-textTransform--uppercase title">Future Project.</p>
+              <p className="font--secondary text-uppercase title">Future Project.</p>
               <p>They help young people fulfill their potential and teach them skills they need for the future.</p>
 
-              <p className="font--secondary u-textTransform--uppercase title">Naral Pro-choice America</p>
+              <p className="font--secondary text-uppercase title">Naral Pro-choice America</p>
               <p>They advocate for women’s reproductive rights and freedom.</p>
 
-              <p className="font--secondary u-textTransform--uppercase title">National Immigration Law Center.</p>
+              <p className="font--secondary text-uppercase title">National Immigration Law Center.</p>
               <p>They fight for the rights of low-income immigrants with litigation, policy analysis, and advocacy.</p>
 
-              <p className="font--secondary u-textTransform--uppercase title">National Organization for Women (NOW).</p>
+              <p className="font--secondary text-uppercase title">National Organization for Women (NOW).</p>
               <p>They advocate for equal rights for women.</p>
 
-              <p className="font--secondary u-textTransform--uppercase title">Showing Up For Racial Justice.</p>
+              <p className="font--secondary text-uppercase title">Showing Up For Racial Justice.</p>
               <p>They are a national network of groups and individuals organizing white people for racial justice.</p>
 
-              <p className="font--secondary u-textTransform--uppercase title">Planned Parenthood</p>
+              <p className="font--secondary text-uppercase title">Planned Parenthood</p>
               <p>They are the nation’s leading sexual and reproductive healthcare provider.</p>
 
-              <p className="font--secondary u-textTransform--uppercase title">Rape, Abuse & Incest Network (RAINN).</p>
+              <p className="font--secondary text-uppercase title">Rape, Abuse & Incest Network (RAINN).</p>
               <p>They are the largest anti-sexual violence organization in the country.</p>
 
-              <p className="font--secondary u-textTransform--uppercase title">Running Start.</p>
+              <p className="font--secondary text-uppercase title">Running Start.</p>
               <p>They educate young women about the importance of politics through the Young Women’s Political Leadership Program.</p>
 
-              <p className="font--secondary u-textTransform--uppercase title">She Should Run.</p>
+              <p className="font--secondary text-uppercase title">She Should Run.</p>
               <p>They aim to get more women into elected positions of power.</p>
 
-              <p className="font--secondary u-textTransform--uppercase title">Sylvia Rivera Law Project.</p>
+              <p className="font--secondary text-uppercase title">Sylvia Rivera Law Project.</p>
               <p>They provide legal service to low-income people and people of color who are transgender, intersexor otherwise gender non-conforming.</p>
 
-              <p className="font--secondary u-textTransform--uppercase title">Young Center for Immigrant Children’s Rights.</p>
+              <p className="font--secondary text-uppercase title">Young Center for Immigrant Children’s Rights.</p>
               <p>They fight for the best interests of children who come to the U.S. on their own.</p>
             </div>
           </MarketingSection>
@@ -185,12 +186,12 @@ class SlayItForward extends Component {
             </div>
           </MarketingSection>
 
-          <MarketingSection className="MarketingSection-slay slay-ceo-letter">
+          <MarketingSection className="MarketingSection-slay slay-ceo-letter inner-buffer">
             <div className="u-textAlign--center">
               <p className="font-medium">From our CEO.</p>
-              <div>This is an image of Nyree</div>
+              <img className='nyree-img' src={getImages('nyree')}></img>
               <p>A message from Nyree Corby, a female founder and CEO, to women everywhere.</p>
-              <p className="font--secondary">READ NOW <span>></span></p>
+              <p className="font--secondary"><a href="/from-our-ceo"><span className='read-ceo-link u-textDecoration--underline'><b>READ NOW</b></span></a>&nbsp;&nbsp;<b>></b></p>
             </div>
           </MarketingSection>
 

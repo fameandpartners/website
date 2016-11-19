@@ -4,18 +4,6 @@
   min-height: 1200px;
 
   // Generic style can be moved to generic
-  .clearfix:after {
-     visibility: hidden;
-     display: block;
-     font-size: 0;
-     content: " ";
-     clear: both;
-     height: 0;
-   }
-  .clearfix { display: inline-block; }
-  * html .clearfix { height: 1%; }
-  .clearfix { display: block; }
-
   .u-display--block {
     display: block;
   }
@@ -28,8 +16,8 @@
   .u-textAlign--center {
     text-align: center;
   }
-  .u-textTransform--uppercase {
-    text-transform: uppercase;
+  .u-textDecoration--underline {
+    text-decoration: underline;
   }
   *, *:before, *:after {
     box-sizing: inherit;
@@ -81,8 +69,8 @@
 
     .hashtag-banner {
       text-align: center;
-      background: black;
-      color: white;
+      background: $c-neutral-black;
+      color: $c-neutral-white;
       width: 100%;
     }
     @include min-tablet {
@@ -92,7 +80,7 @@
 
   // MAIN MARKETINGSECTION
   // *********************
-  .slay-banner-hero .empowered-woman-img{
+  .slay-banner-hero .empowered-woman-img {
     width: 25%;
     float: left;
     min-height: 100px;
@@ -108,16 +96,17 @@
   // MAIN MARKETINGSECTION
   // *********************
   .slay-dynamic-trends {
-    background: black;
+    background: $c-neutral-black;
   }
 
   // MAIN MARKETINGSECTION
   // *********************
   @include min-tablet {
     .slay-reasoning {
-      background: black;
-      color: white;
+      background: $c-neutral-black;
+      color: $c-neutral-white;
       max-width: 900px;
+      padding: 40px;
       margin: -100px auto 140px;
       position: relative;
     }
@@ -129,56 +118,75 @@
 
   // MAIN MARKETINGSECTION
   // *********************
-  .slay-carousel .share-tiles{
+  .slay-carousel .share-tiles {
     background-size: cover;
     display: block;
     float: left;
   }
-  .slay-carousel .insta-carousel{
+  .slay-carousel .insta-carousel {
     display: block;
     margin: 0 auto;
     max-width: 700px;
   }
-  .slay-carousel .insta-carousel a{
-    height: 400px;
-    width: 400px;
+  .slay-carousel .share-tiles {
+    height: 320px;
+    width: 320px;
     float: none;
     display: block;
     margin: 0 auto;
   }
-  .slay-carousel .insta-carousel a .share-tiles{
-    width: 100%;
-    height: 100%;
-  }
   @include min-tablet {
-    .slay-carousel .insta-carousel a{
+    .slay-carousel .share-tiles {
       width: 170px;
       height: 170px;
       margin-right: 5px;
       float: left;
       box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
     }
-    .slay-carousel .insta-carousel {
-      height: 220px;
-    }
   }
 
-  .slay-carousel .empowered-woman-img{
+  .slay-carousel .empowered-woman-img {
     width: 33%;
     float: left;
     min-height: 130px;
     background-size: cover;
-    border: 2px solid #fff;
+    border: 2px solid $c-neutral-white;
   }
-  .slay-carousel-container .empowered-woman-img:nth-child(2n-1){
+  .slay-carousel-container .empowered-woman-img:nth-child(2n-1) {
     display: none;
+  }
+  @include min-tablet {
+    .slay-carousel .empowered-woman-img {
+      width: 16.666666667%;
+      float: left;
+      min-height: 190px;
+      background-size: cover;
+      border: 2px solid $c-neutral-white;
+      border-bottom: none;
+    }
+
+    .slay-carousel-container .empowered-woman-img:nth-child(2n-1) {
+      display: block;
+    }
   }
 
   // MAIN MARKETINGSECTION
   // *********************
   .slay-aside {
-    background: black;
-    color: white;
+    background: $c-neutral-black;
+    color: $c-neutral-white;
+
+    .pledge {
+      margin: 0;
+    }
+  }
+  @include min-tablet {
+    .slay-aside {
+      background: $c-neutral-white;
+      color: $c-neutral-black;
+      border-top: 1px solid $c-neutral-black;
+      border-bottom: 1px solid $c-neutral-black;
+    }
   }
 
   // MAIN MARKETINGSECTION
@@ -203,4 +211,14 @@
     font-weight: bold;
     margin-bottom: 0;
   }
+
+  .slay-ceo-letter .nyree-img {
+    max-width: 320px;
+    margin-bottom: 40px;
+  }
+
+  .slay-ceo-letter .read-ceo-link {
+    letter-spacing: .1rem;
+  }
+
 }
