@@ -93,9 +93,8 @@ class SlayItForward extends Component {
                 <h3 className='main-slay-text text-center font--secondary'>#SLAYITFORWARD</h3>
               }
               <p className="text-center">
-                The comments that have been made about women by America’s President-elect
-                are not OK. The treatment of women by America’s President-Elect is not OK. <br />
-              We cannot and will not stand by while women are derogated and assaulted and disregarded
+                It’s a movement. <br/>
+                In light of recent events, we feel it is our obligation and duty to remind women everywhere:
             </p>
             <p className="text-center">
               We feel it is our obligation and duty to remind women how amazing and powerful and independent we are.
@@ -132,13 +131,6 @@ class SlayItForward extends Component {
             })}
           </div>
         </MarketingSection>
-
-        <MarketingSection className="MarketingSection-slay slay-aside">
-          <p className="pledge font-medium text-center inner-buffer">
-            <em>Together</em>, we’ve pledged <b className="font--secondary">$10,000</b>
-            {this.props.breakpoint !== 'mobile' ? <br /> : null} to remind women how amazing they are.
-            </p>
-          </MarketingSection>
 
           <MarketingSection className="MarketingSection-slay slay-organizations inner-buffer">
             <div className="slay-organizations-container text-center inner-buffer">
