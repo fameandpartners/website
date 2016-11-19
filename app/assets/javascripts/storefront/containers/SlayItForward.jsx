@@ -133,10 +133,10 @@ class SlayItForward extends Component {
         </MarketingSection>
 
         <MarketingSection className="MarketingSection-slay slay-aside">
-          <p className="pledge font-medium text-center inner-buffer">
-            <em>Together</em>, we’ve pledged <b className="font--secondary">$10,000</b>
-            {this.props.breakpoint !== 'mobile' ? <br /> : null} to remind women how amazing they are.
-            </p>
+          {/*<p className="pledge font-medium text-center inner-buffer">*/}
+            {/*<em>Together</em>, we’ve pledged <b className="font--secondary">$10,000</b>*/}
+            {/*{this.props.breakpoint !== 'mobile' ? <br /> : null} to remind women how amazing they are.*/}
+            {/*</p>*/}
           </MarketingSection>
 
           <MarketingSection className="MarketingSection-slay slay-organizations inner-buffer">
