@@ -96,12 +96,6 @@ class SlayItForward extends Component {
                 It’s a movement. <br/>
                 In light of recent events, we feel it is our obligation and duty to remind women everywhere:
             </p>
-            <p className="text-center">
-              We feel it is our obligation and duty to remind women how amazing and powerful and independent we are.
-            </p>
-            <p className="text-center">
-              So, women everywhere, listen up:
-            </p>
             <p className="text-center font-medium">
               We are <em>capable</em>. We are <em>worthy</em>.<br /> We are more than our <em>bodies</em>,
               our <em>looks</em>, our <em>sex</em>. <br />We <em>slay</em>.
@@ -124,13 +118,7 @@ class SlayItForward extends Component {
             </div>
           </MarketingSection>
 
-        <MarketingSection className="MarketingSection-slay slay-carousel">
-          <div className="slay-carousel-container clearfix">
-            {tileImages.map((imgPath)=>{
-              return this.renderBackgroundImg(imgPath);
-            })}
-          </div>
-        </MarketingSection>
+          <hr/>
 
           <MarketingSection className="MarketingSection-slay slay-organizations inner-buffer">
             <div className="slay-organizations-container text-center inner-buffer">
