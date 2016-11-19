@@ -4,11 +4,14 @@
   min-height: 1200px;
 
   // Generic style can be moved to generic
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  .font--secondary {
+    font-family: $font-family-secondary;
+  }
   .u-display--block {
     display: block;
-  }
-  .u-float--left {
-    float: left;
   }
   .u-position--relative {
     position: relative;
@@ -19,21 +22,11 @@
   .u-textDecoration--underline {
     text-decoration: underline;
   }
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
   .font-medium {
     font-size: 3rem;
   }
-  .font--secondary {
-    font-family: $font-family-secondary;
-  }
-
   .inner-buffer {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 40px 20px;
   }
 
   /************************************
@@ -52,11 +45,13 @@
       letter-spacing: .4rem;
       display: inline-block;
     }
+
     @media (min-width: 500px) {
       .main-slay-text {
         font-size: 4.2rem;
       }
     }
+
     @include min-tablet {
       .main-slay-text {
         display: inline-block;
@@ -73,6 +68,7 @@
       color: $c-neutral-white;
       width: 100%;
     }
+
     @include min-tablet {
       .hashtag-banner {display: none;}
     }
@@ -86,6 +82,7 @@
     min-height: 100px;
     background-size: cover;
   }
+
   @include min-tablet {
     .slay-banner-hero .empowered-woman-img {
       width: 12.5%;
@@ -123,11 +120,13 @@
     display: block;
     float: left;
   }
+
   .slay-carousel .insta-carousel {
     display: block;
     margin: 0 auto;
     max-width: 700px;
   }
+
   .slay-carousel .share-tiles {
     height: 320px;
     width: 320px;
@@ -135,6 +134,7 @@
     display: block;
     margin: 0 auto;
   }
+
   @include min-tablet {
     .slay-carousel .share-tiles {
       width: 170px;
@@ -152,9 +152,11 @@
     background-size: cover;
     border: 2px solid $c-neutral-white;
   }
+
   .slay-carousel-container .empowered-woman-img:nth-child(2n-1) {
     display: none;
   }
+
   @include min-tablet {
     .slay-carousel .empowered-woman-img {
       width: 16.666666667%;
@@ -220,5 +222,4 @@
   .slay-ceo-letter .read-ceo-link {
     letter-spacing: .1rem;
   }
-
 }

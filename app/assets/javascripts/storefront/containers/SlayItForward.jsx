@@ -70,7 +70,7 @@ class SlayItForward extends Component {
               {bannerImages[0].map((imgPath)=>{
                 return this.renderBackgroundImg(imgPath);
               })}
-              <div className="main-slay-text hashtag-banner u-float--left inner-buffer u-textAlign--center">#SLAYITFORWARD</div>
+              <div className="main-slay-text hashtag-banner pull-left inner-buffer u-textAlign--center">#SLAYITFORWARD</div>
               {bannerImages[1].map((imgPath)=>{
                 return this.renderBackgroundImg(imgPath);
               })}
