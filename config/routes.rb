@@ -179,6 +179,10 @@ FameAndPartners::Application.routes.draw do
     get '/amfam-dresses' => redirect('/wicked-game-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
 
+    get '/tops'    => 'products/collections#show', :permalink => 'tops-collection', :as => :tops_collection
+    get '/outerwear'    => 'products/collections#show', :permalink => 'outerwear-collection', :as => :outerwear_collection
+    get '/pants'    => 'products/collections#show', :permalink => 'pants-collection', :as => :pants_collection
+
     # Lookbook v2.0 landing pages
     get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
 
@@ -214,6 +218,7 @@ FameAndPartners::Application.routes.draw do
     get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
     get '/dress-for-wedding'    => 'products/collections#show', :permalink => 'dress-for-wedding', :as => :dress_for_wedding_page
     get '/dress-for-parties'    => 'products/collections#show', :permalink => 'dress-for-parties', :as => :dress_for_parties_page
+    get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
