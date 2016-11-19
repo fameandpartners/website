@@ -233,11 +233,6 @@ class StaticsController < ApplicationController
     end
   end
 
-  def slay_it_forward
-    @title = title('Slay it Forward', default_seo_title)
-    @description = "It's our duty to #SLAYITFORWARD"
-  end
-
   private
 
   def assign_revolution_page
