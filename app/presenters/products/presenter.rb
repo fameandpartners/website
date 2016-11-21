@@ -162,6 +162,7 @@ module Products
       return false if fast_making_disabled?
       @fast_making
     end
+    alias_method :fast_making?, :fast_making
 
     def default_color
       if color = available_options.colors.default.first

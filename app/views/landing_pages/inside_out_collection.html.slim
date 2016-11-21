@@ -1,0 +1,24 @@
+/ 18th November 2016 NOTE: this is a hardcoded version of the `lookbook/show.html.slim` template
+/ Cloudfront banner images couldn't be used in time, so this template is being used instead
+
+= render :partial => '/pages/robots'
+
+= render :partial => '/products/collections/javascript', :locals => { :page_size => 99 }
+
+.page-content
+
+  ul.rslides
+    - (1..7).each do |tile_index|
+      li
+        = image_tag "https://s3.amazonaws.com/fandp-web-production-marketing/inside-out-collection/#{tile_index}.jpg", alt: "#{page.heading} #{tile_index}", class: 'img-responsive portrait-img'
+
+  .page-content.products-collections.category
+    = render :partial => 'filters_sort', :locals => { :hidden => true }
+
+    .container.relative.products-collection
+      = render partial: 'products_without_content'
+
+  .row
+    .container
+      .col-md-12
+        = render partial: 'shared/redesign/more_dresses'

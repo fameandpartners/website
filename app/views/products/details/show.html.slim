@@ -5,29 +5,28 @@ ruby:
   @product.default_color_options.each do |color|
     product_paths[color.id] = collection_product_path(@product, url_params.merge(color: color.name))
 
-  @current_site_version = current_site_version
-  @productDiscount = @product.discount.to_json == 'null' ? 0 : @product.discount.to_json;
+    @current_site_version = current_site_version
+    @product_discount     = @product.discount.to_json == 'null' ? 0 : @product.discount.to_json
   end
-
-  # NOTE: this JS block is loaded into the head, this should contain page data only
-  # TODO: @product source will need to be cleaned, we have way too many duplicated there
-  #       also images are mess, have to load all_images separately because images inside
-  #       of @pruduct.images include mix of images in defferent ratios.
-  product_details_page_data = "
-    window.PdpDataFull = {
-      paths: #{ product_paths.to_json },
-      product: #{ @product.to_json },
-      discount: #{ @productDiscount},
-      images: #{ @product.all_images.to_json },
-      sizeChart: #{ @product.size_chart_data.to_json },
-      siteVersion: #{ @current_site_version.name.to_json },
-      flags: {afterpay: #{ Features.active?(:afterpay) }}
-    };"
 
   init_product_details_page = "page.initProductDetailsPage();"
 
-= content_for :inline_javascript_top do
-  = raw product_details_page_data
+/ NOTE: this JS block is loaded into the head, this should contain page data only
+/ TODO: @product source will need to be cleaned, we have way too many duplicated there
+/       also images are mess, have to load all_images separately because images inside
+/       of @pruduct.images include mix of images in defferent ratios.
+/ TODO: every attribute has a `#to_json` or `raw` helper processing them. This means those could be extracted to their own structure and call a single `#to_json`
+= content_for :head do
+  javascript:
+    window.PdpDataFull = {
+      paths: #{raw product_paths.to_json},
+      product: #{raw @product.to_json},
+      discount: #{raw @product_discount},
+      images: #{raw @product.all_images.to_json},
+      sizeChart: #{raw @product.size_chart_data.to_json},
+      siteVersion: #{raw @current_site_version.name.to_json},
+      flags: { afterpay: #{raw Features.active?(:afterpay)}, fastMaking: #{raw !Features.active?(:getitquick_unavailable)} }
+    };
 
 = content_for :inline_javascript do
   = raw init_product_details_page
@@ -49,7 +48,7 @@ form.hide-fully#pdpDataForCheckout
   input id='pdpCartSizeId' type='hidden' value=''
   input id='pdpCartColorId' type='hidden' value='#{raw @product.color_id}'
   input id='pdpCartCustomId' type='hidden' value=''
-  input id='pdpCartMakingId' type='hidden' value='#{ raw @product.making_option_id }'
+  input id='pdpCartMakingId' type='hidden' value=''
   input id='pdpCartVariantId' type='hidden' value=''
   input id='pdpCartDressVariantId' type='hidden' value=''
   input id='pdpCartLength' type='hidden' value=''
