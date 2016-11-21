@@ -25,7 +25,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | Street Address (line 2) | House Y                          |
       | City                    | Melbourne                        |
       | Phone                   | 2255-4422                        |
-      | Postcode                | 12345                            |
+      | Postcode                | 0872                             |
     And I click on "Continue to payment" button
     And I click on "Afterpay" link
     And I click on "Pay with" link
@@ -61,7 +61,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | Street Address (line 2) | House Y                          |
       | City                    | Melbourne                        |
       | Phone                   | 2255-4422                        |
-      | Postcode                | 12345                            |
+      | Postcode                | 0872                             |
     And I click on "Continue to payment" button
     And I click on "Afterpay" link
     And I click on "Pay with" link
@@ -72,7 +72,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | address1   | Street X                         |
       | suburb     | Suburb                           |
       | state      | State                            |
-      | postcode   | 1234                             |
+      | postcode   | 0872                             |
       | cardName   | Roger That                       |
       | cardNumber | 5520000000000000                 |
       | expiryDate | 0230                             |
@@ -98,7 +98,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | Street Address (line 2) | House Y                          |
       | City                    | Melbourne                        |
       | Phone                   | 2255-4422                        |
-      | Postcode                | 12345                            |
+      | Postcode                | 0872                             |
     And I click on "Continue to payment" button
     And I click on "Afterpay" link
     Then I should see "Afterpay is not available at the moment. Please, try another payment method."
