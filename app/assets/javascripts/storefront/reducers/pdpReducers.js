@@ -2,6 +2,8 @@ export function customizeReducer(state = {}, action) {
   switch(action.type) {
     case 'CUSTOMIZE_DRESS':
       return Object.assign({}, state, action.customize);
+    case 'CUSTOMIZE_MAKING_OPTION':
+      return Object.assign({}, state, action.customize);
     default:
       return state;
   }
