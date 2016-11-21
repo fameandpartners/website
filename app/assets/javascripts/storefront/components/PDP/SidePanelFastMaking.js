@@ -8,9 +8,27 @@ class SidePanelFastMaking extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { checked: false };
-
     this.onChange = this.onChange.bind(this);
+  }
+
+  get sidePanelClass() {
+    let classes = [
+      "pdp-side-container",
+      "pdp-side-container-fast-making",
+      "checkbox-inline",
+      "custom-form-element-thin",
+      "form-small"
+    ];
+
+    if (!this.canFastMake) {
+      classes.push("disabled");
+    }
+
+    if (this.props.customize.makingOption.error) {
+      classes.push("validation-error");
+    }
+
+    return classes.join(" ");
   }
 
   get fastMakingOption() {
@@ -30,7 +48,8 @@ class SidePanelFastMaking extends React.Component {
   }
 
   get isFastMaking() {
-    return this.state.checked && this.canFastMake;
+    let isFastMaking = this.props.customize.makingOption.id && this.canFastMake;
+    return !!isFastMaking;
   }
 
   onChange(event) {
@@ -38,20 +57,20 @@ class SidePanelFastMaking extends React.Component {
 
     let makingOption = enableFastMaking ? this.fastMakingOption : defaultMakingOption;
     this.props.actions.customizeMakingOption({makingOption: makingOption});
-
-    this.setState({checked: enableFastMaking});
   }
 
   render() {
     if (this.props.flags.fastMaking && this.props.product.fast_making) {
       return (
-        <div className="pdp-side-container pdp-side-container-fast-making checkbox-inline custom-form-element-thin form-small">
+        <div className={this.sidePanelClass}>
           <a href="javascript:;">
-            <input type="checkbox" id="fast-making" checked={this.isFastMaking} onChange={this.onChange} />
+            <input type="checkbox" id="fast-making" className="" checked={this.isFastMaking} onChange={this.onChange} />
             <label htmlFor="fast-making">
             <div className="c-card-customize__content__left">
               EXPRESS MAKING (6-9 days)
-              <div className="pdp-side-note">Only available for Recommended Colors</div>
+              <div className="pdp-side-note">
+                <i className="fa fa-info-circle" /> Only available for Recommended Colors
+              </div>
             </div>
             <div className="c-card-customize__content__right">${this.fastMakingOption.displayPrice}</div>
             </label>
