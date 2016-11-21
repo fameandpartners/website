@@ -15,22 +15,13 @@ describe Afterpay::Presenters::Order do
     end
 
     it "wraps bill address" do
-      %i(phone firstname lastname address1 address2 city state zipcode country).each do |method|
+      %i(phone firstname lastname).each do |method|
         subject_should_delegate(method: method, object: bill_address)
       end
     end
 
     def subject_should_delegate(method:, object:)
       expect(subject.send(method)).to eq(object.send(method))
-    end
-  end
-
-  describe "#name" do
-    it "concatenates #firstname and #lastname from bill_address" do
-      allow(bill_address).to receive(:firstname).and_return('John')
-      allow(bill_address).to receive(:lastname).and_return('Doe')
-
-      expect(subject.name).to eq('John Doe')
     end
   end
 end

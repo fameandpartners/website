@@ -16,6 +16,10 @@ Spree::Address.class_eval do
     new({:country => country}, :without_protection => true)
   end
 
+  def name
+    "#{firstname} #{lastname}"
+  end
+
   def to_s
     [
       [address1, address2].reject(&:blank?).join(' '),

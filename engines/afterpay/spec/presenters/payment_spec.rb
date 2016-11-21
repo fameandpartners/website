@@ -4,7 +4,6 @@ describe Afterpay::Presenters::Payment do
   describe '#get_token' do
     let(:payment_method) { double(:payment_method) }
     let(:response) { { 'token' => 'payment_token' } }
-    #let(:rails_request) { double(:rails_request) }
 
     let(:order) do
       double(:order, total: 10,
@@ -12,16 +11,25 @@ describe Afterpay::Presenters::Payment do
                      phone: '123456',
                      firstname: 'John',
                      lastname: 'Doe',
-                     name: 'John Doe',
                      email: 'jdoe@mail.com',
-                     address1: 'address1',
-                     address2: 'address2',
-                     city: 'Houston',
-                     state: double(:state, abbr: 'TX'),
-                     zipcode: '12345',
-                     country: double(:country, iso: 'US'),
-                     number: 731
+                     number: 731,
+                     bill_address: address,
+                     ship_address: address
                      )
+    end
+
+    let(:address) do
+      double(:address, phone: '123456',
+                       firstname: 'John',
+                       lastname: 'Doe',
+                       name: 'John Doe',
+                       address1: 'address1',
+                       address2: 'address2',
+                       city: 'Houston',
+                       state: double(:state, abbr: 'TX'),
+                       zipcode: '12345',
+                       country: double(:country, iso: 'US'),
+            )
     end
 
     let(:create_order_params) do
@@ -40,7 +48,16 @@ describe Afterpay::Presenters::Payment do
          postcode: "12345",
          countryCode: "US",
          phoneNumber: "123456"},
-         merchant: 
+       shipping:
+        {name: "John Doe",
+         line1: "address1",
+         line2: "address2",
+         suburb: "Houston",
+         state: "TX",
+         postcode: "12345",
+         countryCode: "US",
+         phoneNumber: "123456"},
+         merchant:
          {redirectConfirmUrl: "confirmation_url",
           redirectCancelUrl: "checkout_url"},
           merchantReference: 731}
