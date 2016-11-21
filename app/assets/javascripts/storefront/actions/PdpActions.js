@@ -9,7 +9,8 @@ export function customizeMakingOption(customize) {
   let isCustomColor = customize.color && customize.color.price > 0;
 
   if (isCustomColor) {
-    customize.makingOption = defaultMakingOption;
+    let makingOption = Object.assign({}, defaultMakingOption, {error: true});
+    customize.makingOption = makingOption;
   }
 
   return { type: 'CUSTOMIZE_MAKING_OPTION', customize };
