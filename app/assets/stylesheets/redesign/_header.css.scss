@@ -441,6 +441,21 @@ ul.secondary.pull-right {
     height: auto;
   }
 
+  @media(max-width: 320px){
+    width: 130px;
+    margin-left: -65px;
+  }
+
+  @media(min-width: 321px)and(max-width:400px){
+    width: 160px;
+    margin-left: -80px;
+  }
+
+  @media(min-width: 400px)and(max-width:599px){
+    width: 190px;
+    margin-left: -85px;
+  }
+
 }
 
 /////////// side menu (hamburger) //////////
