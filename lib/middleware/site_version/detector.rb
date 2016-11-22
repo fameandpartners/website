@@ -15,6 +15,8 @@ module Middleware
         env['site_version_code'] = detector.detect_site_version(request)
 
         @app.call(env)
+      rescue => exception
+        render_exception(env, exception)
       end
 
       private

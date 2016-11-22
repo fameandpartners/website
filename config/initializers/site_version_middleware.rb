@@ -1,5 +1,9 @@
 require 'middleware/site_version/detector'
 
 FameAndPartners::Application.configure do |config|
-  config.middleware.insert 0, Middleware::SiteVersion::Detector
+  if defined? ActionDispatch::DebugExceptions
+    config.middleware.insert_after ActionDispatch::DebugExceptions, Middleware::SiteVersion::Detector
+  else
+    config.middleware.use Middleware::SiteVersion::Detector
+  end
 end
