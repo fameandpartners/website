@@ -79,7 +79,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | cardCVC    | 123                              |
     Then I should see "Afterpay payment failed, please try again later."
 
-  @javascript @vcr @shorter_cassette_names @selenium @afterpay
+  @javascript @vcr @shorter_cassette_names @afterpay
   Scenario: Afterpay cannot create order
     Given Afterpay API is not available
     When I am on Connie dress page
