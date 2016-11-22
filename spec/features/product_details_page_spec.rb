@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'product details page', type: :feature do
+describe 'product details page', type: :feature, js: true do
 
   let(:product) { FactoryGirl.create(:dress_with_variants) }
 
@@ -19,6 +19,8 @@ describe 'product details page', type: :feature do
     text = 'the awesome prop'
     meta = "meta[itemprop=\"category\"][content=\"#{text}\"]"
     expect(page).to have_css(meta, visible: false)
+
+    expect(page).to have_content('stimated delivery, 7 - 10 business days')
   end
 
   it "doesn't display type and displays default meta" do
