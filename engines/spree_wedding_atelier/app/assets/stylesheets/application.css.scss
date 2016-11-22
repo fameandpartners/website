@@ -1,0 +1,10 @@
+html,
+body {
+  height: 100%;
+}
+
+.wedding-atelier {
+
+  @import 'base/*';
+  @import 'wedding_atelier/**/*';
+}
