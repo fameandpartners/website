@@ -4,10 +4,19 @@ linters:
   BorderZero:
     enabled: false
 
+  Comment:
+    enabled: false
+
+  IdSelector:
+    enabled: false
+
   Indentation:
     severity: warning
     character: space
     width: 2
+
+  NestingDepth:
+    max_depth: 2
 
   StringQuotes:
     style: single_quotes
