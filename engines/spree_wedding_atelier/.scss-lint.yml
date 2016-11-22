@@ -1,0 +1,19 @@
+scss_files: 'app/assets/stylesheets/**/*.css.scss'
+
+linters:
+  BorderZero:
+    enabled: false
+
+  Indentation:
+    severity: warning
+    character: space
+    width: 2
+
+  StringQuotes:
+    style: single_quotes
+
+  PropertySortOrder:
+    enabled: false
+
+  ColorVariable:
+    enabled: false

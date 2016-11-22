@@ -39,7 +39,7 @@ doctype html
     #wrap
       = render('spree/wedding_atelier/shared/header') unless controller_name == 'registrations'
       #content
-        = yield
+          = yield
       #push
     = render 'spree/wedding_atelier/shared/footer' unless controller_name == 'registrations'
 
