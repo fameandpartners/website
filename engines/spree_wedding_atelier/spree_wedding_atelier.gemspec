@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'spree_core', '~> 1.3.0'
   s.add_dependency 'bootstrap-sass', '~> 3.3.4.1'
+  s.add_dependency 'rolify'
   s.add_dependency 'kaminari'        # Version specified on main app Gemfile (spree_core)
   s.add_dependency 'react-rails'
   s.add_dependency 'slim'            # Version specified on main app Gemfile
