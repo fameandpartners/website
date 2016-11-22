@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161118175132) do
+ActiveRecord::Schema.define(:version => 20161122172949) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -183,6 +183,32 @@ ActiveRecord::Schema.define(:version => 20161118175132) do
   end
 
   add_index "email_notifications", ["spree_user_id", "code"], :name => "index_email_notifications_on_spree_user_id_and_code"
+
+  create_table "event_roles", :force => true do |t|
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "event_roles", ["name", "resource_type", "resource_id"], :name => "index_event_roles_on_name_and_resource_type_and_resource_id"
+  add_index "event_roles", ["name"], :name => "index_event_roles_on_name"
+
+  create_table "events", :force => true do |t|
+    t.string   "event_type"
+    t.integer  "number_of_assistants"
+    t.date     "date"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "events_users", :id => false, :force => true do |t|
+    t.integer "event_id"
+    t.integer "user_id"
+  end
+
+  add_index "events_users", ["event_id", "user_id"], :name => "index_events_users_on_event_id_and_user_id"
 
   create_table "fabric_card_colours", :force => true do |t|
     t.text     "position"
@@ -1603,8 +1629,8 @@ ActiveRecord::Schema.define(:version => 20161118175132) do
     t.string   "persistence_token"
     t.string   "reset_password_token"
     t.string   "perishable_token"
-    t.integer  "sign_in_count",                                           :default => 0,     :null => false
-    t.integer  "failed_attempts",                                         :default => 0,     :null => false
+    t.integer  "sign_in_count",                                           :default => 0,      :null => false
+    t.integer  "failed_attempts",                                         :default => 0,      :null => false
     t.datetime "last_request_at"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -1617,8 +1643,8 @@ ActiveRecord::Schema.define(:version => 20161118175132) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "reset_password_sent_at"
-    t.datetime "created_at",                                                                 :null => false
-    t.datetime "updated_at",                                                                 :null => false
+    t.datetime "created_at",                                                                  :null => false
+    t.datetime "updated_at",                                                                  :null => false
     t.string   "spree_api_key",                            :limit => 48
     t.datetime "remember_created_at"
     t.string   "first_name"
@@ -1642,9 +1668,17 @@ ActiveRecord::Schema.define(:version => 20161118175132) do
     t.integer  "active_moodboard_id"
     t.string   "height"
     t.string   "dress_size"
+    t.string   "wedding_atelier_signup_step",                             :default => "size"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
+
+  create_table "spree_users_event_roles", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "event_role_id"
+  end
+
+  add_index "spree_users_event_roles", ["user_id", "event_role_id"], :name => "index_spree_users_event_roles_on_user_id_and_event_role_id"
 
   create_table "spree_variants", :force => true do |t|
     t.string   "sku",                                         :default => "",    :null => false
