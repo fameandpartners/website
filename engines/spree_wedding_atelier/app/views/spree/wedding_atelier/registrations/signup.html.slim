@@ -13,15 +13,20 @@
         p.text-center
           span.or or
 
-        .email-signup.center-block
-          = form_for :user do |f|
+        .form.email-signup.center-block
+          p Welcome back to our Wedding Atelier App
+          = form_for :spree_user, url: wedding_atelier_signup_path(@spree_user, @signup_params) do |f|
+            = f.label :first_name
+            = f.text_field :first_name, class: 'form-control'
+            = f.label :last_name
+            = f.text_field :last_name, class: 'form-control'
             = f.label :email, 'Email Address'
             = f.text_field :email, class: 'form-control'
             = f.label :password, 'Password'
-            = f.text_field :password, class: 'form-control'
-
+            = f.password_field :password, class: 'form-control'
             p.text-center
               = f.submit 'Next', class: 'button-black'
+
         .steps.text-center
           span.pagination.current 01
           span.separator.current —
@@ -31,4 +36,5 @@
           span.separator —
           span.pagination 04
     .right-side.col-md-6
-      .right-side-container
+      .left-side-container
+        h1 Fame and partners
