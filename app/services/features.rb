@@ -14,7 +14,7 @@ module Features
     getitquick_unavailable:        "Turn off 'getitquick/' pages & Product Express Making. Requires server restart",
     google_tag_manager:            "Google Tag Manager - Analytics, Trackers & Marketing managed front-end site additions.",
     height_customisation:          "Skirt Length Customisation",
-    i_equal_change:                'Toggles i=Change promotion along the site ("/iequalchange" landing page, category/search pages, PDP and Checkout). Requires server restart to display the landing page.',
+    i_equal_change:                'Toggles i=Change promotion along the site ("/iequalchange" landing page, category/search pages, PDP and Checkout).',
     maintenance:                   "Maintennance Mode - Puts site offline",
     marketing_modals:              "Onsite Marketing Popups & Modals",
     masterpass:                    "MasterCard MasterPass digital wallet on Checkout.",
