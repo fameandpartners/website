@@ -441,17 +441,17 @@ ul.secondary.pull-right {
     height: auto;
   }
 
-  @media(max-width: 320px){
+  @include iphone5 {
     width: 130px;
     margin-left: -65px;
   }
 
-  @media(min-width: 321px)and(max-width:400px){
+  @media(min-width: $iphone5-width + 1)and(max-width: $iphone6p-width){
     width: 160px;
     margin-left: -80px;
   }
 
-  @media(min-width: 400px)and(max-width:599px){
+  @media(min-width: $iphone6p-width + 1)and(max-width:599px){
     width: 190px;
     margin-left: -85px;
   }
