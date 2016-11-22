@@ -8,10 +8,14 @@ class SidePanelFastMaking extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+    this.canFastMake = this.canFastMake.bind(this);
+    this.fastMakingOption = this.fastMakingOption.bind(this);
+    this.isFastMaking = this.isFastMaking.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.sidePanelClass = this.sidePanelClass.bind(this);
   }
 
-  get sidePanelClass() {
+  sidePanelClass() {
     let classes = [
       "pdp-side-container",
       "pdp-side-container-fast-making",
@@ -20,7 +24,7 @@ class SidePanelFastMaking extends React.Component {
       "form-small"
     ];
 
-    if (!this.canFastMake) {
+    if (!this.canFastMake()) {
       classes.push("disabled");
     }
 
@@ -31,7 +35,7 @@ class SidePanelFastMaking extends React.Component {
     return classes.join(" ");
   }
 
-  get fastMakingOption() {
+  fastMakingOption() {
     let makingOptions = this.props.product.available_options.table.making_options;
     if (makingOptions.length) {
       let fastMakingOption = makingOptions[0].product_making_option;
@@ -42,29 +46,29 @@ class SidePanelFastMaking extends React.Component {
   }
 
   // Custom colors always have prices bigger than 0
-  get canFastMake() {
+  canFastMake() {
     let isCustomColorSelected = this.props.customize.color.price > 0;
     return !isCustomColorSelected;
   }
 
-  get isFastMaking() {
-    let isFastMaking = this.props.customize.makingOption.id && this.canFastMake;
+  isFastMaking() {
+    let isFastMaking = this.props.customize.makingOption.id && this.canFastMake();
     return !!isFastMaking;
   }
 
   onChange(event) {
-    let enableFastMaking = event.target.checked && this.canFastMake;
+    let enableFastMaking = event.target.checked && this.canFastMake();
 
-    let makingOption = enableFastMaking ? this.fastMakingOption : defaultMakingOption;
+    let makingOption = enableFastMaking ? this.fastMakingOption() : defaultMakingOption;
     this.props.actions.customizeMakingOption({makingOption: makingOption});
   }
 
   render() {
     if (this.props.flags.fastMaking && this.props.product.fast_making) {
       return (
-        <div className={this.sidePanelClass}>
+        <div className={this.sidePanelClass()}>
           <a href="javascript:;">
-            <input type="checkbox" id="fast-making" checked={this.isFastMaking} onChange={this.onChange} />
+            <input type="checkbox" id="fast-making" checked={this.isFastMaking()} onChange={this.onChange} />
             <label htmlFor="fast-making">
             <div className="c-card-customize__content__left">
               EXPRESS MAKING (6-9 days)
@@ -72,7 +76,7 @@ class SidePanelFastMaking extends React.Component {
                 <i className="fa fa-info-circle" /> Only available for Recommended Colors
               </div>
             </div>
-            <div className="c-card-customize__content__right">${this.fastMakingOption.displayPrice}</div>
+            <div className="c-card-customize__content__right">${this.fastMakingOption().displayPrice}</div>
             </label>
           </a>
         </div>
