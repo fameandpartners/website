@@ -3,17 +3,19 @@
     .left-side.col-md-6
       p Janine, let's start with your size profile
       .form
-        = form_tag(wedding_atelier_signup_details_path, method: :get) do
+        = form_for current_spree_user, as: :spree_user, url: wedding_atelier_signup_path, method: :put do |f|
           .form-group
-            = label_tag 'height', 'What\'s your height?'
-            = select_tag('height', options_for_select(@heights), class: 'form-control')
+            = f.label :height, "What's your height?"
+            = f.select :height, options_for_select(@heights, current_spree_user.height), class: 'form-control'
           .form-group
-            = label_tag 'dress_size', "What's your dress size? "
+            = f.label :dress_size, "What's your dress size?"
             = link_to 'view size guide', '#'
             .dress-sizes
-              - @dress_sizes.each do |size|
-                = radio_button_tag('size', size)
-            = submit_tag 'next'
+              - @dress_sizes.each do |dress_size|
+                = f.label :dress_size, dress_size.presentation
+                = f.radio_button(:dress_size, dress_size.presentation)
+            = f.hidden_field :wedding_atelier_signup_step, value: 'details'
+            = f.submit 'next'
       .steps
         span 01
         span 02
