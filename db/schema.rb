@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161101111038) do
+ActiveRecord::Schema.define(:version => 20161118175132) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1640,6 +1640,8 @@ ActiveRecord::Schema.define(:version => 20161101111038) do
     t.date     "birthday"
     t.boolean  "automagically_registered",                                :default => false
     t.integer  "active_moodboard_id"
+    t.string   "height"
+    t.string   "dress_size"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
@@ -1670,6 +1672,7 @@ ActiveRecord::Schema.define(:version => 20161101111038) do
     t.datetime "created_at",                                        :null => false
     t.datetime "updated_at",                                        :null => false
     t.boolean  "has_international_shipping_fee", :default => false
+    t.boolean  "show_duty_fee_notification",     :default => false
   end
 
   create_table "spree_zones", :force => true do |t|
