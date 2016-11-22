@@ -1,7 +1,26 @@
+#imagelightbox {
+  position: fixed;
+  z-index: 9999;
+  -ms-touch-action: none;
+  touch-action: none;
+}
+
+/* OVERLAY */
+
+#imagelightbox-overlay {
+	background-color: #fff;
+	background-color: rgba( 255, 255, 255, .9 );
+	position: fixed;
+	z-index: 9998;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
 /* [Inside Out]
 -------------------------------------------------------*/
 .inside-out {
-
   h1 {
     font-size: 6rem;
     font-weight: bold;
@@ -42,6 +61,16 @@
     }
 
   }
+
+  .inside-lb {
+    @include transition(300ms opacity);
+    cursor: pointer;
+    display: block;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
 
   .last-cta {
     margin-bottom: 50px;
