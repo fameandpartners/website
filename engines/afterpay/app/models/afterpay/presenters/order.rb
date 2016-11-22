@@ -8,7 +8,9 @@ module Afterpay
                      :total,
                      :currency,
                      :email,
-                     :number
+                     :number,
+                     :bill_address,
+                     :ship_address
 
       def_delegators :bill_address,
                      :phone,
@@ -17,12 +19,6 @@ module Afterpay
 
       def initialize(spree_order:)
         @spree_order = spree_order
-      end
-
-      private
-
-      def bill_address
-        spree_order.bill_address
       end
     end
   end
