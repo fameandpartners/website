@@ -2,6 +2,29 @@ require 'spec_helper'
 
 RSpec.describe Iequalchange::Cypher do
   let(:order) { FactoryGirl.create(:spree_order) }
+  
+  context '#without order' do
+    let!(:cipher) { described_class.new(nil) }
+    let(:regex) { /^(http(s?):)?\/\/(?<domain>.+)(?<split>\/)(?<path>static\/js\/load)$/ }
+
+    it 'should compose proper src path for script' do
+
+      expect(described_class.private_method_defined?(:script_src)).to be(true)
+      expect(cipher.send(:script_src)).to match(regex)
+    end
+
+    context 'with force removed trailing slash from url' do
+      before do 
+        config = cipher.config
+        config[:url] = config[:url].chomp('/')
+        cipher.instance_variable_set(:@config, config)
+      end
+
+      it 'should compose proper src path for script' do
+        expect(cipher.send(:script_src)).to match(regex)
+      end
+    end
+  end
 
   context '#with order' do
     it 'should encode and decode payload' do

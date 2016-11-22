@@ -1,6 +1,6 @@
-require "base64"
-require "digest"
-require "openssl"
+require 'base64'
+require 'digest'
+require 'openssl'
 
 module Iequalchange
   class Cypher
@@ -25,7 +25,6 @@ module Iequalchange
       final_payload = PREFIX + VERSION + iv + encrypted
 
       payload = Base64.strict_encode64(final_payload)
-      script_src = [config[:url], config[:script_src_path]].join
 
       {
         id:  config[:id],
@@ -53,6 +52,10 @@ module Iequalchange
     end
 
     private
+
+    def script_src
+      File.join(config[:url], config[:script_src_path])
+    end
 
     def encrypt(json)
       cipher.encrypt
