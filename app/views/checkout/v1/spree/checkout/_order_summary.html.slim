@@ -58,11 +58,9 @@ ruby:
                           dd #{ customization.name } #{ customization.display_price }
                       - if product.making_options.present?
                         - product.making_options.each do |option|
-                          dd.fast-making.checkbox-inline.custom-form-element-thin.form-small.checkbox-black-bg
-                            input id="cart_item_fast_making_#{product.id}" type="checkbox"
-                            label for="cart_item_fast_making_#{product.id}"
-                              = option.name
-                              =<> option.display_price
+                          dd
+                            = option.name
+                            =<> option.display_price
 
         - else
           .row.cart-is-empty
