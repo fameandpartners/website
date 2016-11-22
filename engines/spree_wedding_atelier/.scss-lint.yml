@@ -6,7 +6,11 @@ linters:
 
   Indentation:
     severity: warning
+    character: space
     width: 2
+
+  StringQuotes:
+    style: single_quotes
 
   PropertySortOrder:
     enabled: false
