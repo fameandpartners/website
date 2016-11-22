@@ -32,14 +32,6 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
     Then I fill in Afterpay data within its iframe:
       | email      | firefox_user@fameandpartners.com |
       | password   | firefox1                         |
-      | name       | Roger That                       |
-      | address1   | Street X                         |
-      | suburb     | Suburb                           |
-      | state      | State                            |
-      | postcode   | 1234                             |
-      | cardName   | Roger That                       |
-      | cardNumber | 5520000000000000                 |
-      | expiryDate | 0230                             |
       | cardCVC    | 123                              |
     Then I should see my order placed, with "Connie" dress, "AU 14" size and "319.00" price
 
@@ -68,14 +60,6 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
     Then I fill in Afterpay data within its iframe:
       | email      | firefox_user@fameandpartners.com |
       | password   | firefox1                         |
-      | name       | Roger That                       |
-      | address1   | Street X                         |
-      | suburb     | Suburb                           |
-      | state      | State                            |
-      | postcode   | 0872                             |
-      | cardName   | Roger That                       |
-      | cardNumber | 5520000000000000                 |
-      | expiryDate | 0230                             |
       | cardCVC    | 123                              |
     Then I should see "Afterpay payment failed, please try again later."
 
