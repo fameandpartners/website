@@ -1,0 +1,30 @@
+/* [Pagination]
+-------------------------------------------------------*/
+.steps {
+  width: 200px;
+  left: calc(50% - 100px);
+  position: absolute;
+  bottom: 0;
+}
+
+.pagination {
+  padding: 0 4px;
+  font-family: NeuzeitGro-Bol;
+  font-size: 16px;
+  color: #aaa9a9;
+
+  &.current {
+    color: #000;
+    font-weight: bold;
+  }
+}
+
+.separator {
+  display: none;
+  font-size: 22px;
+  color: #000;
+
+  &.current {
+    display: inline;
+  }
+}
