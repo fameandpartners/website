@@ -8,19 +8,8 @@
 //= require jquery-fileupload/jquery.fileupload
 
 //= require libs/underscore-min
+//= require bootstrap
 //= require libs/validator.min
-
-//--------------
-// Bootstrap JS
-//--------------
-//= require bootstrap/transition
-//= require bootstrap/alert
-//= require bootstrap/collapse
-//= require bootstrap/dropdown
-//= require bootstrap/modal
-//= require bootstrap/tab
-//= require bootstrap/affix
-//= require bootstrap/scrollspy
 
 //= require libs/jquery.dotdotdot.min
 //= require libs/jquery.mlens.min
