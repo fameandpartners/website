@@ -1,14 +1,13 @@
-.container-fluid
+.signup-new
   .row
-    .left-side.col-md-6
+    .left-side
       .left-side-container
-        h1.title.center-block.title
-          | Welcome to the App. <span class="text1">Create</span> your account to get started...
+        h1
+          | Welcome to the App. <em>Create</em> your account to get started...
 
-        p.text-center
-          = link_to fb_auth_path do
-            span.facebook-signup.center-block Sign up with facebook
-          end
+
+        = link_to fb_auth_path, class: 'facebook-signup-button' do
+           | Sign up with facebook
 
         p.or.text-center
           span or
@@ -39,4 +38,4 @@
           span.pagination 03
           span.separator —
           span.pagination 04
-    .right-side.col-md-6
+    .right-side
