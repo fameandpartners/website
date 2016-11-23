@@ -78,3 +78,19 @@
 
   }
 }
+
+.or {
+  margin: 0;
+  padding: 0;
+  height: 15px;
+
+  span {
+    display: inline-block;
+    background-image: image-url('o-r.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    text-indent: -9999px;
+    height: 36px;
+    width: 36px;
+  }
+}
