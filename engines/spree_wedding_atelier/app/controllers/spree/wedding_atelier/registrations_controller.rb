@@ -31,7 +31,7 @@ module Spree
           set_flash_message(:notice, :signed_up)
           session[:spree_user_signup] = true
           associate_user
-          resource.create_wedding
+          @user.create_wedding
 
           # Marketing pixel
           flash[:signed_up_just_now] = true
