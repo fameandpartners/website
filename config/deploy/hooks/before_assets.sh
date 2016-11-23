@@ -7,3 +7,7 @@ shared_modules_path="${shared_app_path}/node_modules"
 mkdir -p ${shared_modules_path}
 # symlink to current app
 ln -s ${shared_modules_path} ${this_release_dir}/node_modules
+
+# install npm modules
+cd ${this_release_dir}
+npm install && npm run production
