@@ -60,7 +60,7 @@ module Orders
             line.return_details,
             line.price,
             line.currency,
-            line.upc
+            line.product_number
           ]
         end
       end
