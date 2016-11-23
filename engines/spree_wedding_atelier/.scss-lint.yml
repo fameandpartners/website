@@ -18,6 +18,9 @@ linters:
   NestingDepth:
     max_depth: 2
 
+  PlaceholderInExtend:
+    enabled: false
+
   StringQuotes:
     style: single_quotes
 
