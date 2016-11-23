@@ -5,8 +5,11 @@
         h1
           | Welcome to the App. <em>Create</em> your account to get started ...
 
-        = link_to fb_auth_path, class: 'facebook-signup-button' do
+        = link_to fb_auth_path, class: 'btn-facebook-blue btn-block hidden-sm hidden-md hidden-lg' do
            | Sign up with facebook
+
+        .text-center.hidden-xs
+          = link_to '', fb_auth_path, class: 'btn-facebook-fancy'
 
         p.or.text-center
           span or
@@ -27,8 +30,8 @@
             = f.label :password, 'Password'
             = f.password_field :password, class: 'form-control'
 
-            = f.submit 'Create Account', class: 'button-black hidden-sm hidden-md hidden-lg'
-            = f.submit 'Next', class: 'button-black hidden-xs'
+            = f.submit 'Create Account', class: 'btn-black btn-block hidden-sm hidden-md hidden-lg'
+            = f.submit 'Next', class: 'btn-black btn-block hidden-xs'
 
         .steps.text-center
           span.pagination.current 01
