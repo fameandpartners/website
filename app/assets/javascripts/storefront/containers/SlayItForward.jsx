@@ -1,3 +1,4 @@
+/* global Modernizr */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -41,6 +42,12 @@ class SlayItForward extends Component {
     this.renderBackgroundImg = this.renderBackgroundImg.bind(this);
   }
 
+  componentDidMount(){
+    setTimeout(()=>{
+      this.setState({mounted: true});
+    }, 200);
+  }
+
   renderBackgroundImg(path, className='empowered-woman-img'){
     const {breakpoint} = this.props;
     const style = { backgroundImage: `url(${path})` };
@@ -51,16 +58,19 @@ class SlayItForward extends Component {
 
   renderShareImgs(path){
     const {breakpoint} = this.props;
-    const style = { backgroundImage: `url(${path})` };
-    return (
-      <div className="share-tiles" style={style}></div>
-    );
-  }
-
-  componentDidMount(){
-    setTimeout(()=>{
-      this.setState({mounted: true});
-    }, 200);
+    if (typeof Modernizr === 'object' && Modernizr.adownload){
+      return (
+        <a className='link' href={path} download='slayitforward.jpg'>
+          <img className="share-tiles" src={path} />
+        </a>
+      );
+    } else {
+        return (
+          <a className='link' href={path} target='_blank'>
+            <img className="share-tiles" src={path} />
+          </a>
+        );
+    }
   }
 
   render(){
