@@ -1,12 +1,7 @@
-html,
-body {
-  height: 100%;
-}
-
 @import 'bootstrap-and-overrides';
+@import 'base/base';
 
 .wedding-atelier {
-
-  @import 'base/*';
+  @import 'components/*';
   @import 'wedding_atelier/**/*';
 }
