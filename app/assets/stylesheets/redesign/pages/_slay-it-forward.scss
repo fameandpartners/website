@@ -136,20 +136,26 @@
     background-size: cover;
     display: block;
     float: left;
+    height: 320px;
+    width: 320px;
+    display: block;
+    margin: 0 auto;
   }
 
   .slay-carousel .insta-carousel {
     display: block;
     margin: 0 auto;
-    max-width: 700px;
+    max-width: 350px;
   }
 
-  .slay-carousel .share-tiles {
-    height: 320px;
-    width: 320px;
-    float: none;
-    display: block;
-    margin: 0 auto;
+  .slay-carousel .insta-carousel .link{
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .slay-carousel .insta-carousel .share-tile-img{
+    width: 100%;
+    height: 100%;
   }
 
   @include min-tablet {
