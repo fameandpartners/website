@@ -6,7 +6,7 @@
         = form_for current_spree_user, as: :spree_user, url: wedding_atelier_signup_path, method: :put do |f|
           .form-group
             = f.label :height, "What's your height?"
-            = f.select :height, options_for_select(@heights, current_spree_user.height), class: 'form-control'
+            = f.select :height, options_for_select(@heights, current_spree_user.height), {}, class: 'form-control'
           .form-group
             = f.label :dress_size, "What's your dress size?"
             = link_to 'view size guide', '#'

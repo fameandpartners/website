@@ -3,7 +3,7 @@ module Spree
     class RegistrationsController < Spree::UserRegistrationsController
       layout 'wedding_atelier'
       def new
-        @spree_user = Spree::User.new
+        @user = Spree::User.new
         @signup_params = {
           site_version: current_site_version.code,
           portal: 'wedding-atelier'
@@ -31,8 +31,6 @@ module Spree
           set_flash_message(:notice, :signed_up)
           session[:spree_user_signup] = true
           associate_user
-          # create wedding unless it comes from a shareable link
-          @user.create_wedding
 
           # Marketing pixel
           flash[:signed_up_just_now] = true
@@ -43,10 +41,12 @@ module Spree
       end
 
       def update
-        if current_spree_user.update_attributes(params[:spree_user])
-          redirect_to action: current_spree_user.wedding_atelier_signup_step
+        @user = current_spree_user
+        if @user.update_attributes(params[:spree_user])
+          @user.add_role(@user.event_role, @user.events.last) if @user.event_role
+          redirect_to action: @user.wedding_atelier_signup_step
         else
-          render current_spree_user.wedding_atelier_signup_step
+          render @user.wedding_atelier_signup_step
         end
       end
 
@@ -61,10 +61,17 @@ module Spree
       end
 
       def details
-        @roles = ['bride', 'bridesmaid']
+        @roles = ['bride', 'bridesmaid', 'maid of honor', 'mother of bride']
+        @event = current_spree_user.events.new
       end
 
       def invite
+      end
+
+      private
+
+      def set_user_role
+
       end
 
     end

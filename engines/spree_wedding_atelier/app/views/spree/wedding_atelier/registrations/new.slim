@@ -15,7 +15,7 @@
           span or
 
         .form.email-signup.center-block
-          = form_for :spree_user, url: wedding_atelier_signup_path(@spree_user, @signup_params) do |f|
+          = form_for @user, as: :spree_user, url: wedding_atelier_signup_path(@user, @signup_params) do |f|
 
             .row
               .col-md-6
