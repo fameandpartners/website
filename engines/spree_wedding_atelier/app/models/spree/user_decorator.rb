@@ -4,7 +4,7 @@ Spree::User.class_eval do
                   :wedding_atelier_signup_step
 
   has_and_belongs_to_many :events
-  rolify role_cname: 'EventRole'
+  rolify role_cname: 'Spree::WeddingAtelier::EventRole'
 
   def create_wedding
     events.create(event_type: 'wedding')
