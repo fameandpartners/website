@@ -38,7 +38,7 @@ doctype html
         window.current_user = #{raw serialized_current_user.to_json}
 
     #wrap
-      = render('spree/wedding_atelier/shared/header') unless controller_name == 'registrations'
+      = render('spree/wedding_atelier/shared/header')
       #content
           = yield
       #push

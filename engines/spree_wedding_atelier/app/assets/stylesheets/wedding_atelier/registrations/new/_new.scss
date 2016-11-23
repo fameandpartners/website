@@ -38,7 +38,6 @@
     }
 
     .left-side {
-      background-color: #ddd;
       background-image: image-url('spree_wedding_atelier/marbel.png');
       padding: 50px 60px;
     }
@@ -50,26 +49,13 @@
     }
 
     .left-side-container {
-      background-color: #fff;
+      background-color: $white-two;
       height: 100%;
       padding: 40px 80px;
     }
 
     .right-side-container {
       padding: 10px;
-    }
-
-    .title {
-      font-family: FreightDispPro;
-      width: 386px;
-      font-size: 42px;
-      font-weight: 300;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: 1;
-      text-align: center;
-      color: #000;
-      padding: 18px 0;
     }
 
     .email-signup {
