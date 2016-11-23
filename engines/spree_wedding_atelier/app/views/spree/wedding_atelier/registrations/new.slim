@@ -3,8 +3,7 @@
     .left-side
       .left-side-container
         h1
-          | Welcome to the App. <em>Create</em> your account to get started...
-
+          | Welcome to the App. <em>Create</em> your account to get started ...
 
         = link_to fb_auth_path, class: 'facebook-signup-button' do
            | Sign up with facebook
@@ -27,8 +26,9 @@
             = f.text_field :email, class: 'form-control'
             = f.label :password, 'Password'
             = f.password_field :password, class: 'form-control'
-            p.text-center
-              = f.submit 'Next', class: 'button-black'
+
+            = f.submit 'Create Account', class: 'button-black hidden-sm'
+            = f.submit 'Next', class: 'button-black hidden-xs'
 
         .steps.text-center
           span.pagination.current 01
