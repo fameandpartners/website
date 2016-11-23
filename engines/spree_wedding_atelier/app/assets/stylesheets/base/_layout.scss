@@ -1,13 +1,7 @@
-html,
-body {
-  height: 100%;
+html {
+  font-size: 16px;
 }
 
-#wrap {
-  height: 100%;
-}
-
-#content {
-  height: 100%;
-  margin-top: 0;
+:root {
+  color: $black;
 }
