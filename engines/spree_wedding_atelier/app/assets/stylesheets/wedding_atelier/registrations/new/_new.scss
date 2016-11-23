@@ -1,0 +1,7 @@
+.signup-new {
+  @extend .container-fluid;
+
+  @media screen and (min-width: $screen-md-min) {
+    @import 'desktop';
+  }
+}
