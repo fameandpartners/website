@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161122234959) do
+ActiveRecord::Schema.define(:version => 20161123012601) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -183,13 +183,6 @@ ActiveRecord::Schema.define(:version => 20161122234959) do
   end
 
   add_index "email_notifications", ["spree_user_id", "code"], :name => "index_email_notifications_on_spree_user_id_and_code"
-
-  create_table "events_users", :id => false, :force => true do |t|
-    t.integer "event_id"
-    t.integer "user_id"
-  end
-
-  add_index "events_users", ["event_id", "user_id"], :name => "index_events_users_on_event_id_and_user_id"
 
   create_table "fabric_card_colours", :force => true do |t|
     t.text     "position"
@@ -1679,6 +1672,13 @@ ActiveRecord::Schema.define(:version => 20161122234959) do
   end
 
   add_index "spree_variants", ["product_id"], :name => "index_spree_variants_on_product_id"
+
+  create_table "spree_wedding_atelier_event_assistants", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "spree_wedding_atelier_event_roles", :force => true do |t|
     t.string   "name"
