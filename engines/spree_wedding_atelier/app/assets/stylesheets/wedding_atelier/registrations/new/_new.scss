@@ -11,42 +11,52 @@
   }
 
   .left-side {
-    @extend .col-md-12;
+    @extend .col-xs-12;
+    @extend .col-sm-6;
   }
 
   [type='submit'] {
     margin-top: 10px;
   }
 
+  .right-side {
+    @extend .col-sm-6;
+  }
+
   .right-side,
   .steps {
-    display: none;
+    @extend .hidden-xs;
   }
 
   @media screen and (min-width: $screen-md-min) {
+    margin: 0;
+    padding: 0;
+
+    .left-side,
+    .right-side {
+      height: 100vh;
+    }
+
     .left-side {
       background-color: #ddd;
       background-image: image-url('spree_wedding_atelier/marbel.png');
-      height: 100%;
       padding: 50px 60px;
-    }
-
-    .left-side-container {
-      height: 100%;
-      padding: 10px;
-      background-color: #fff;
-    }
-
-    .right-side-container {
-      height: 100%;
-      padding: 10px;
     }
 
     .right-side {
       background-size: cover;
       background-repeat: no-repeat;
-      height: 100%;
       background-image: image-url('spree_wedding_atelier/bitmap.png');
+    }
+
+    .left-side-container {
+      background-color: #fff;
+      height: 100%;
+      padding: 40px 80px;
+    }
+
+    .right-side-container {
+      padding: 10px;
     }
 
     .title {
@@ -60,12 +70,6 @@
       text-align: center;
       color: #000;
       padding: 18px 0;
-
-      .text1 {
-        font-family: FreightDispPro;
-        font-weight: normal;
-        font-style: italic;
-      }
     }
 
     .email-signup {

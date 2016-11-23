@@ -12,15 +12,21 @@
   margin: 15px 0;
 
   @media screen and(min-width: $screen-md-min) {
-    background-image: image-url('facebook-button.png');
+    background: no-repeat center image-url('facebook-button.png');
+    background-color: transparent;
+    color: transparent;
+    border: 0;
+    margin-bottom: 10px;
+    padding: 10px;
     width: 100%;
     height: 35px;
-    margin-bottom: 10px;
-    text-align: center;
-    padding: 10px;
-    display: inline-block;
-    text-indent: -9999px;
     outline: none;
+
+    &:hover {
+      background-color: transparent;
+      color: transparent;
+    }
+
   }
 }
 
@@ -31,8 +37,14 @@
   @extend .text-uppercase;
   background-color: $black;
   color: $white-two;
+  margin-top: 15px;
   min-height: 35px;
   line-height: 25px;
+
+  &:focus {
+    background-color: $black-two;
+    color: $white-three;
+  }
 }
 
 .or {
