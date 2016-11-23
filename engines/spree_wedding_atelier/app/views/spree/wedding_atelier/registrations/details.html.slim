@@ -5,8 +5,8 @@
       .form
         = form_tag(invite_wedding_atelier_signup_path, method: :get) do
           .form-group
-            = label_tag 'role_id', "What's your role in the wedding?"
-            = select_tag('role_id', options_from_collection_for_select(@roles, 'id', 'name'), class: 'form-control')
+            = label_tag 'role', "What's your role in the wedding?"
+            = select_tag('role', options_for_select(@roles), class: 'form-control')
           .form-group
             = label_tag 'brides_number', "How many bridesmaids at the wedding"
             = number_field_tag 'brides_number', 0 , min: 0, class: 'form-control'

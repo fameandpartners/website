@@ -1,7 +1,8 @@
 module Spree
   module WeddingAtelier
     class Event < ActiveRecord::Base
-      has_and_belongs_to_many :assistants, class_name: Spree.user_class.name
+      has_many :event_assistants, class_name: 'Spree::WeddingAtelier::EventAssistant'
+      has_many :assistants, through: :event_assistants, source: :user
       resourcify :event_roles, role_cname: 'Spree::WeddingAtelier::EventRole'
 
       attr_accessible :event_type,

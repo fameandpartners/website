@@ -31,6 +31,7 @@ module Spree
           set_flash_message(:notice, :signed_up)
           session[:spree_user_signup] = true
           associate_user
+          # create wedding unless it comes from a shareable link
           @user.create_wedding
 
           # Marketing pixel
@@ -60,7 +61,7 @@ module Spree
       end
 
       def details
-        @roles = Spree::Role.where(name: ['bride', 'bridesmaid'])
+        @roles = ['bride', 'bridesmaid']
       end
 
       def invite
