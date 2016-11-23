@@ -47,12 +47,10 @@ class SidePanelSizeChart extends React.Component {
   render() {
     const INCHES_IS_ACTIVE = this.state.imchesIsActive ? 'is-active' : '';
     const CM_IS_ACTIVE = this.state.cmIsActive ? 'is-active' : '';
-    const SIZE_CHART_TITLE = this.props.sizeChartVersion === '2016' ? 'Legacy Size Guide' : 'Size Guide';
-    const SIZE_CHART_VIEW_TEXT = this.props.sizeChartVersion === '2016' ? 'View legacy size guide' : 'View new size guide';
 
     return (
       <div className="chart-wrap">
-        <a href="javascript:;" className="chart-wrap-trigger" onClick={this.openModal}>{SIZE_CHART_VIEW_TEXT}</a>
+        <a href="javascript:;" className="chart-wrap-trigger" onClick={this.openModal}>View size guide</a>
 
         <Modal
           style={MODAL_STYLE}
@@ -61,7 +59,7 @@ class SidePanelSizeChart extends React.Component {
           <div className="pdp-sizeguide">
             <div className="row">
               <div className="col-md-12">
-                <h4 className="h2 title text-center">{SIZE_CHART_TITLE}</h4>
+                <h4 className="h2 title text-center">Size Guide</h4>
               </div>
               <div className="col-md-6">
                 <Tabs>

@@ -111,7 +111,7 @@ class SlayItForward extends Component {
               our most vulnerable, marginalized communities.
             </p>
             <p className="text-center">
-              Join us in creating an unstoppable chain of women empowering women..
+              Join us in creating an unstoppable chain of women empowering women.
               Join us in donating to the people who need it most right now. Join us and
               <br />#SLAYITFORWARD.
               </p>
@@ -122,7 +122,7 @@ class SlayItForward extends Component {
 
           <MarketingSection className="MarketingSection-slay slay-organizations inner-buffer">
             <div className="slay-organizations-container text-center inner-buffer">
-              <p className="font-medium">The organizations <em>you're</em> supporting</p>
+              <p className="font-medium">The organizations <em>you're</em> supporting:</p>
 
               <p className="font--secondary text-uppercase title">American Civil Liberties Union (ACLU).</p>
               <p>They defend the individual rights and liberties guaranteed by the Constitution.</p>
@@ -130,7 +130,7 @@ class SlayItForward extends Component {
               <p className="font--secondary text-uppercase title">Future Project.</p>
               <p>They help young people fulfill their potential and teach them skills they need for the future.</p>
 
-              <p className="font--secondary text-uppercase title">Naral Pro-choice America</p>
+              <p className="font--secondary text-uppercase title">Naral Pro-choice America.</p>
               <p>They advocate for women’s reproductive rights and freedom.</p>
 
               <p className="font--secondary text-uppercase title">National Immigration Law Center.</p>
@@ -142,7 +142,7 @@ class SlayItForward extends Component {
               <p className="font--secondary text-uppercase title">Showing Up For Racial Justice.</p>
               <p>They are a national network of groups and individuals organizing white people for racial justice.</p>
 
-              <p className="font--secondary text-uppercase title">Planned Parenthood</p>
+              <p className="font--secondary text-uppercase title">Planned Parenthood.</p>
               <p>They are the nation’s leading sexual and reproductive healthcare provider.</p>
 
               <p className="font--secondary text-uppercase title">Rape, Abuse & Incest Network (RAINN).</p>
