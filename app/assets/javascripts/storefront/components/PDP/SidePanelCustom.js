@@ -16,7 +16,7 @@ class SidePanelCustom extends SidePanel {
     let customize = {};
     customize.customization = {};
 
-    if(this.props.customize.customization.id === event.currentTarget.dataset.id) {
+    if(this.props.customize.customization.id == event.currentTarget.dataset.id) {
       customize.customization.id = undefined;
       customize.customization.presentation = "";
       customize.customization.price = 0;
