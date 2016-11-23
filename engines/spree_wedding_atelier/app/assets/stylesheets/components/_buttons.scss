@@ -1,22 +1,38 @@
-.facebook-signup {
-  background-image: image-url('facebook-button.png');
-  width: 340px;
-  height: 48px;
-  margin-bottom: 10px;
-  text-align: center;
-  padding: 10px;
-  display: inline-block;
-  text-indent: -9999px;
-  outline: none;
+.facebook-signup-button {
+  @extend .btn;
+  @extend .btn-block;
+  @extend .btn-primary;
+  @extend .text-uppercase;
+  color: $white-two;
+  background-color: $facebook-blue;
+  letter-spacing: 1.5px;
+  line-height: 25px;
+  font-size: .7rem;
+  min-height: 35px;
+  margin: 15px 0;
+
+  @media screen and(min-width: $screen-md-min) {
+    background-image: image-url('facebook-button.png');
+    width: 100%;
+    height: 35px;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 10px;
+    display: inline-block;
+    text-indent: -9999px;
+    outline: none;
+  }
 }
 
 .button-black {
+  @extend .btn;
+  @extend .btn-primary;
+  @extend .btn-block;
+  @extend .text-uppercase;
   background-color: $black;
-  color: $white;
-  border: 0;
-  width: 170px;
-  height: 44px;
-  margin: 16px 0;
+  color: $white-two;
+  min-height: 35px;
+  line-height: 25px;
 }
 
 .or {
