@@ -1,28 +1,33 @@
 @font-face {
   font-family: FreightDispPro;
-  font-weight: lighter;
-  font-style: italic;
-  src: font-url('Freight/FreightDispProLightItalic.woff2') format('woff2'), font-url('Freight/FreightDispProLightItalic.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+  src: font-url('Freight/FreightDispPro_Light.otf') format('otf'),
+  font-url('Freight/FreightDispPro_Light.woff') format('woff');
 }
 
 @font-face {
   font-family: FreightDispPro;
-  font-weight: lighter;
+  font-weight: normal;
+  font-style: italic;
+  src: font-url('Freight/FreightDispPro_Light_Italic.otf') format('otf'),
+  font-url('Freight/FreightDispPro_Light_Italic.woff') format('woff');
+}
+
+@font-face {
+  font-family: NeuzeitGro;
+  font-weight: normal;
   font-style: normal;
-  src: font-url('Freight/FreightDispPro-Regular.woff2') format('woff2'),
-  font-url('Freight/FreightDispProLight.otf') format('otf');
+  src: font-url('Neuzeit/NeuzeitGro_Reg.ttf') format('ttf'),
+  font-url('Neuzeit/NeuzeitGro_Reg.otf') format('otf'),
+  font-url('Neuzeit/NeuzeitGro_Reg.woff') format('woff');
 }
 
 @font-face {
   font-family: NeuzeitGro;
-  src: font-url('Neuzeit/NeuzeitGro.ttf') format('ttf'),
-  font-url('Neuzeit/NeuzeitGro-Reg.otf') format('otf');
-}
-
-@font-face {
-  font-family: NeuzeitGro;
-  font-weight: bolder;
-  src: font-url('Neuzeit/NeuzeitGro-Bol.otf') format('otf'),
-  font-url('Neuzeit/NeuzeitGro-Bol.woff2') format('woff2'),
-  font-url('Neuzeit/NeuzeitGroBold.ttf') format('ttf');
+  font-weight: bold;
+  font-style: normal;
+  src: font-url('Neuzeit/NeuzeitGro_Bold.otf') format('otf'),
+  font-url('Neuzeit/NeuzeitGro_Bold.ttf') format('ttf'),
+  font-url('Neuzeit/NeuzeitGro_Bold.woff') format('woff');
 }
