@@ -7,7 +7,8 @@ module Spree
 
       attr_accessible :event_type,
                       :number_of_assistants,
-                      :date
+                      :date,
+                      :events_attributes
     end
   end
 end
