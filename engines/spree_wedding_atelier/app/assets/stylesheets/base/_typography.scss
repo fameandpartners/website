@@ -1,8 +1,15 @@
-h1 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: FreightDispPro;
+}
+
+h1 {
   font-size: 1.8rem;
   margin: 0 0 10px;
-  color: $black;
 
   @media screen and (min-width: $screen-md-min) {
 
