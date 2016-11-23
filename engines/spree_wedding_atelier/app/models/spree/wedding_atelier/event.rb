@@ -9,6 +9,14 @@ module Spree
                       :number_of_assistants,
                       :date,
                       :events_attributes
+
+      after_create :add_token
+
+      private
+
+      def add_token
+        update_attribute(:token, SecureRandom.base64(10))
+      end
     end
   end
 end
