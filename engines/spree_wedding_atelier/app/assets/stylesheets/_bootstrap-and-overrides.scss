@@ -1,8 +1,5 @@
 @import 'bootstrap-sprockets';
-
-// Bootstrap variables overrides should be before importing it
-$screen-md-min: 992px;
-
+@import 'bootstrap/variables';
 @import 'bootstrap';
 
 .btn,
