@@ -1,64 +1,50 @@
-.facebook-signup-button {
+.btn {
   @extend .btn;
-  @extend .btn-block;
-  @extend .btn-primary;
   @extend .text-uppercase;
-  color: $white-two;
-  background-color: $facebook-blue;
-  letter-spacing: 1.5px;
+  border: solid 1px $black;
+  color: $black;
   line-height: 25px;
-  font-size: .7rem;
   min-height: 35px;
-  margin: 15px 0;
-
-  @media screen and(min-width: $screen-md-min) {
-    background: no-repeat center image-url('facebook-button.png');
-    background-color: transparent;
-    color: transparent;
-    border: 0;
-    margin-bottom: 10px;
-    padding: 10px;
-    width: 100%;
-    height: 35px;
-    outline: none;
-
-    &:hover {
-      background-color: transparent;
-      color: transparent;
-    }
-
-  }
 }
 
-.button-black {
+.btn-black {
   @extend .btn;
-  @extend .btn-primary;
-  @extend .btn-block;
-  @extend .text-uppercase;
   background-color: $black;
   color: $white-two;
-  margin-top: 15px;
-  min-height: 35px;
-  line-height: 25px;
 
-  &:focus {
-    background-color: $black-two;
-    color: $white-three;
+  &:hover {
+    color: $white;
   }
 }
 
-.or {
-  margin: 0;
-  padding: 0;
-  height: 15px;
+.btn-white {
+  @extend .btn;
+  background-color: $white-three;
+}
 
-  span {
-    display: inline-block;
-    background-image: image-url('o-r.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    text-indent: -9999px;
-    height: 36px;
-    width: 36px;
+.btn-transparent {
+  @extend .btn-white;
+  background-color: transparent;
+}
+
+.btn-facebook-blue {
+  @extend .btn;
+  background-color: $facebook-blue;
+  border-color: $facebook-blue;
+  color: $white-two;
+  font-size: .7rem;
+
+  &:hover {
+    background-color: $facebook-blue-dark;
+    border-color: $facebook-blue-dark;
+    color: $white;
   }
+}
+
+.btn-facebook-fancy {
+  @extend .btn;
+  background: no-repeat center image-url('facebook-button.png');
+  background-color: transparent;
+  border: 0;
+  min-width: 210px;
 }
