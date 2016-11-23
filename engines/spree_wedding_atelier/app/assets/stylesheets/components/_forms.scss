@@ -1,7 +1,10 @@
-form {
+label {
+  @extend .text-uppercase;
+  margin: 10px 0 0;
+  font-size: .85rem;
+  font-weight: bold;
+}
 
-  label {
-    color: #000;
-  }
-
+[type="text"] {
+  letter-spacing: 1px;
 }
