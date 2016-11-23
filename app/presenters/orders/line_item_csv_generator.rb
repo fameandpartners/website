@@ -59,7 +59,8 @@ module Orders
             line.return_action,
             line.return_details,
             line.price,
-            line.currency
+            line.currency,
+            line.upc
           ]
         end
       end
@@ -97,7 +98,8 @@ module Orders
         :return_action,
         :return_details,
         :price,
-        :currency
+        :currency,
+        :upc
       ]
     end
 

@@ -115,6 +115,10 @@ module Orders
         end
       end
 
+      def upc
+        global_sku.upc
+      end
+
       private
 
       def shipping_address_line
