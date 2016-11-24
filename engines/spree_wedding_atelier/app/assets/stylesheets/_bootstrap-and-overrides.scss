@@ -2,14 +2,10 @@
 @import 'bootstrap/variables';
 @import 'bootstrap';
 
-.btn,
-.form-control {
-  border-radius: 0;
-}
-
 .form-control {
   @extend .form-control;
   border-color: rgb(204, 204, 204);
+  border-radius: 0;
   box-shadow: none;
 
   &:focus {

@@ -2,6 +2,7 @@
   @extend .btn;
   @extend .text-uppercase;
   border: solid 1px $black;
+  border-radius: 0;
   color: $black;
   line-height: 25px;
   min-height: 35px;
