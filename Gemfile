@@ -114,7 +114,6 @@ group :assets do
   gem 'uglifier', '1.3.0'
   gem 'execjs', '~> 2'
   gem 'eco'
-  gem 'bootstrap-sass', '3.3.4.1'
 end
 
 group :development do
