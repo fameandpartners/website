@@ -8,6 +8,7 @@
 }
 
 .form-control {
+  @extend .form-control;
   border-color: rgb(204, 204, 204);
   box-shadow: none;
 

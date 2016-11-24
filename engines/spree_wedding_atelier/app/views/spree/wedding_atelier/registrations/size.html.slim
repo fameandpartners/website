@@ -1,26 +1,30 @@
-.container-fluid
+.size
   .row
-    .left-side.col-md-6
-      p Janine, let's start with your size profile
-      .form
-        = form_for current_spree_user, as: :spree_user, url: wedding_atelier_signup_path, method: :put do |f|
-          .form-group
-            = f.label :height, "What's your height?"
-            = f.select :height, options_for_select(@heights, current_spree_user.height), {}, class: 'form-control'
-          .form-group
-            = f.label :dress_size, "What's your dress size?"
-            = link_to 'view size guide', '#'
-            .dress-sizes
-              - @dress_sizes.each do |dress_size|
-                = f.label :dress_size, dress_size.presentation, value: dress_size.presentation
-                = f.radio_button(:dress_size, dress_size.presentation)
-            = f.hidden_field :wedding_atelier_signup_step, value: 'details'
-            = f.submit 'next'
-      .steps
-        span 01
-        span 02
-        span 03
-        span 04
+    .left-side
+      .left-side-container
+        h1 <i>Janine</i>, let's start with your size profile
+        .form
+          = form_for current_spree_user, as: :spree_user, url: wedding_atelier_signup_path, method: :put do |f|
+            .form-group
+              = f.label :height, "What's your height?"
+              = f.select :height, options_for_select(@heights, current_spree_user.height), class: 'form-control'
+            .form-group
+              = f.label :dress_size, "What's your dress size?"
+              = link_to 'view size guide', '#'
 
-    .right-side.col-md-6
+              .sizes-container
+                ul
+                  - @dress_sizes.each do |dress_size|
+                    li
+                      = f.label :dress_size, dress_size.presentation, value: dress_size.presentation
+                      = f.radio_button(:dress_size, dress_size.presentation)
+                br
+              = f.hidden_field :wedding_atelier_signup_step, value: 'details'
+              = f.submit 'next'
+        .steps
+          span 01
+          span 02
+          span 03
+          span 04
+    .right-side
       h1 Fame and partners
