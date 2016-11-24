@@ -15,7 +15,7 @@ module Spree
       private
 
       def add_token
-        update_attribute(:token, SecureRandom.base64(10))
+        update_attribute(:token, SecureRandom.hex(10))
       end
     end
   end

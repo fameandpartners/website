@@ -4,27 +4,16 @@
       p Janine, invite the bridal party
       = link_to 'invite with facebook', '#'
       .form
-        = form_tag( invite_wedding_atelier_signup_path, method: :get) do
+        = form_tag(send_invites_wedding_atelier_signup_path, method: :post) do
           .form-group
-            = label_tag 'email', "email address"
-            = text_field_tag 'email', '', class: 'form-control'
           .section.invitations
-            .invitation
-              p janine@gmail.com
-              span invite pending |
-              = link_to ' remove', '#'
-            .invitation
-              p janine@gmail.com
-              span invite pending |
-              = link_to ' remove', '#'
-            .invitation
-              p janine@gmail.com
-              span invite pending |
-              = link_to ' remove', '#'
+            - @event.number_of_assistants.times do
+              .invitation
+                = label_tag 'email', "email address"
+                = text_field_tag 'email_addresses[]', '', class: 'form-control'
 
-
-
-          = button_tag 'do this later'
+            a.add-another(href="#") Add another
+          = link_to 'do this later', wedding_atelier_root_path
           = submit_tag 'next'
       .steps
         span 01

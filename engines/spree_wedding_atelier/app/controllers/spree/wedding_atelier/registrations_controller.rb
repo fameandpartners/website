@@ -23,15 +23,11 @@ module Spree
                                                         utm_params:   session[:utm_params],
                                                         site_version: current_site_version.name,
                                                         form_name:    'Register')
-
           session.delete(:sign_up_reason)
-
           sign_in :spree_user, resource
-
           set_flash_message(:notice, :signed_up)
           session[:spree_user_signup] = true
           associate_user
-
           # Marketing pixel
           flash[:signed_up_just_now] = true
           redirect_to size_wedding_atelier_signup_path
@@ -66,6 +62,14 @@ module Spree
       end
 
       def invite
+        @event = current_spree_user.events.last
+      end
+
+      def send_invites
+        event = current_spree_user.events.last
+        addresses = params[:email_addresses].reject(&:empty?)
+        InvitationsMailer.invite(event, addresses).deliver! if addresses.any?
+        redirect_to new_wedding_atelier_signup_path(event_token: event.token)
       end
 
       private
