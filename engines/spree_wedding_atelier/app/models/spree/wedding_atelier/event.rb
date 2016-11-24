@@ -7,7 +7,16 @@ module Spree
 
       attr_accessible :event_type,
                       :number_of_assistants,
-                      :date
+                      :date,
+                      :events_attributes
+
+      after_create :add_token
+
+      private
+
+      def add_token
+        update_attribute(:token, SecureRandom.base64(10))
+      end
     end
   end
 end

@@ -4,7 +4,7 @@
       p Janine, invite the bridal party
       = link_to 'invite with facebook', '#'
       .form
-        = form_tag(wedding_atelier_signup_invite_path, method: :get) do
+        = form_tag( invite_wedding_atelier_signup_path, method: :get) do
           .form-group
             = label_tag 'email', "email address"
             = text_field_tag 'email', '', class: 'form-control'

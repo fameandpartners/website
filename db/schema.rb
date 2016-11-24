@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161123012601) do
+ActiveRecord::Schema.define(:version => 20161123231045) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1697,6 +1697,7 @@ ActiveRecord::Schema.define(:version => 20161123012601) do
     t.date     "date"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.string   "token"
   end
 
   create_table "spree_zone_members", :force => true do |t|
