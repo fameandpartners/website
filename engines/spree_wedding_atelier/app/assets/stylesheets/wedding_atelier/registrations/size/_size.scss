@@ -1,0 +1,47 @@
+.size {
+  .guide-link {
+    color: $black;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+
+  .sizes-container {
+    br {
+      clear: both;
+    }
+
+    [type=radio]:checked ~ label {
+      outline: 2px solid $black;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      float: left;
+      margin: 4px;
+
+      input[type=radio] {
+        position: absolute;
+        visibility: hidden;
+      }
+
+      label {
+        cursor: pointer;
+        display: block;
+        position: relative;
+        text-align: center;
+        background-color: $white-three;
+        z-index: 9;
+        line-height: 1.5em;
+        padding: 5px;
+      }
+
+      &:hover label {
+        outline: 1px solid $white-three;
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+.step-container {
+  @extend .container-fluid;
+  background-color: $white-two;
+  margin: 50px 10px 20px;
+  padding: 15px;
+
+  h1 {
+    @extend .text-center;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: .98;
+  }
+
+  .left-side {
+    @extend .col-xs-12;
+    @extend .col-sm-6;
+  }
+
+  .right-side {
+    @extend .col-sm-6;
+  }
+
+  .right-side,
+  .steps {
+    @extend .hidden-xs;
+  }
+
+  @media screen and (min-width: $screen-sm-min) {
+    margin: 0;
+    padding: 0;
+
+    .left-side,
+    .right-side {
+      height: 100vh;
+    }
+
+    .left-side {
+      background-color: #ddd;
+      background-image: image-url('spree_wedding_atelier/marbel.png');
+      padding: 50px 60px;
+    }
+
+    .right-side {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-image: image-url('spree_wedding_atelier/bitmap.png');
+    }
+
+    .left-side-container {
+      background-color: #fff;
+      height: 100%;
+      padding: 40px 80px;
+    }
+
+    .right-side-container {
+      padding: 10px;
+    }
+  }
+}
