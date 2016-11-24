@@ -69,6 +69,7 @@ module Spree
         event = current_spree_user.events.last
         addresses = params[:email_addresses].reject(&:empty?)
         InvitationsMailer.invite(event, addresses).deliver! if addresses.any?
+        current_spree_user.update_attribute(:wedding_atelier_signup_step, 'complete')
         redirect_to new_wedding_atelier_signup_path(event_id: event.slug)
       end
 
