@@ -1,0 +1,65 @@
+.size {
+  @extend .step-container;
+
+  h1 {
+    @extend .center-block;
+    object-fit: contain;
+    font-family: FreightDispPro;
+    font-size: 28px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 0.98;
+    text-align: center;
+    color: #000000;
+    color: var(--black);
+    width: 216px;
+  }
+
+  .sizes-container {
+    br {
+      clear: both;
+    }
+
+    input[type=radio]:checked + label {
+      outline: 2px solid #000;
+    }
+
+    ul {
+      & {
+          list-style: none;
+          padding: 0;
+      }
+
+      & li{
+        float: left;
+        margin: 4px;
+      }
+
+      & li input[type=radio]{
+        position: absolute;
+        visibility: hidden;
+      }
+
+      & li label{
+        cursor: pointer;
+        display: block;
+        position: relative;
+        text-align: center;
+        background-color: #f2f2f2;
+        z-index: 9;
+        line-height: 1.5em;
+        padding: 5px;
+      }
+
+      & li:hover label{
+        outline: 1px solid #f2f2f2;
+      }
+    }
+  }
+}
+
+
+
+
+
