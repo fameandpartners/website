@@ -159,7 +159,6 @@ PATH
       rails
       spree
     inspinia-rails (2.1.0)
-      bootstrap-sass
       font-awesome-rails (~> 4.3.0.0)
       rails
     mailchimp_client (0.0.1)
@@ -262,9 +261,6 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.4.1)
-      autoprefixer-rails (>= 5.0.0.1)
-      sass (>= 3.2.19)
     bourbon (4.2.2)
       sass (~> 3.4)
       thor
@@ -860,7 +856,6 @@ DEPENDENCIES
   bergen!
   better_errors
   binding_of_caller
-  bootstrap-sass (= 3.3.4.1)
   bourbon
   bullet
   business_time
