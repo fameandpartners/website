@@ -11,7 +11,7 @@ Spree::User.class_eval do
   has_many :event_assistants, class_name: 'Spree::WeddingAtelier::EventAssistant'
   has_many :events, through: :event_assistants, source: :event
   accepts_nested_attributes_for :events
-  rolify role_cname: 'Spree::WeddingAtelier::EventRole'
+  rolify role_cname: 'Spree::WeddingAtelier::EventRole', role_join_table_name: 'spree_wedding_atelier_users_event_roles'
 
   def create_wedding
     events.create(event_type: 'wedding')

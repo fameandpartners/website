@@ -4,6 +4,10 @@
       p Janine, let's start with your size profile
       .form
         = form_for current_spree_user, as: :spree_user, url: wedding_atelier_signup_path, method: :put do |f|
+          = f.fields_for :events, @event do |ff|
+            .form-group
+              = ff.label :name, 'Please name your wedding board'
+              = ff.text_field :name, class: 'form-control'
           .form-group
             = f.label :event_role, "What's your role in the wedding?"
             = f.select :event_role, options_for_select(@roles), {}, class: 'form-control'
