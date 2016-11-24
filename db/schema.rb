@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161123231045) do
+ActiveRecord::Schema.define(:version => 20161123005430) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1647,13 +1647,6 @@ ActiveRecord::Schema.define(:version => 20161123231045) do
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
 
-  create_table "spree_users_spree_wedding_atelier_event_roles", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "event_role_id"
-  end
-
-  add_index "spree_users_spree_wedding_atelier_event_roles", ["user_id", "event_role_id"], :name => "index_spree_users_event_roles_on_user_id_and_event_role_id"
-
   create_table "spree_variants", :force => true do |t|
     t.string   "sku",                                         :default => "",    :null => false
     t.decimal  "weight",        :precision => 8, :scale => 2
@@ -1688,16 +1681,19 @@ ActiveRecord::Schema.define(:version => 20161123231045) do
     t.datetime "updated_at",    :null => false
   end
 
-  add_index "spree_wedding_atelier_event_roles", ["name", "resource_type", "resource_id"], :name => "index_event_roles_on_name_and_resource_type_and_resource_id"
-  add_index "spree_wedding_atelier_event_roles", ["name"], :name => "index_event_roles_on_name"
-
   create_table "spree_wedding_atelier_events", :force => true do |t|
     t.string   "event_type"
     t.integer  "number_of_assistants"
     t.date     "date"
+    t.string   "name"
+    t.string   "slug"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
-    t.string   "token"
+  end
+
+  create_table "spree_wedding_atelier_users_event_roles", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "event_role_id"
   end
 
   create_table "spree_zone_members", :force => true do |t|
