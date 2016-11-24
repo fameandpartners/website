@@ -16,4 +16,8 @@ Spree::User.class_eval do
   def create_wedding
     events.create(event_type: 'wedding')
   end
+
+  def wedding_atelier_signup_complete?
+    wedding_atelier_signup_step == 'completed'
+  end
 end

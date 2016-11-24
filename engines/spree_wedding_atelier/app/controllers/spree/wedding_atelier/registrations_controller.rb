@@ -2,6 +2,8 @@ module Spree
   module WeddingAtelier
     class RegistrationsController < Spree::UserRegistrationsController
       layout 'wedding_atelier'
+      before_filter :check_signup_completeness
+
       def new
         @user = Spree::User.new
         @signup_params = {
@@ -69,14 +71,16 @@ module Spree
         event = current_spree_user.events.last
         addresses = params[:email_addresses].reject(&:empty?)
         InvitationsMailer.invite(event, addresses).deliver! if addresses.any?
-        current_spree_user.update_attribute(:wedding_atelier_signup_step, 'complete')
+        current_spree_user.update_attribute(:wedding_atelier_signup_step, 'completed')
         redirect_to new_wedding_atelier_signup_path(event_id: event.slug)
       end
 
       private
 
-      def set_user_role
-
+      def check_signup_completeness
+        if current_spree_user.try(:wedding_atelier_signup_complete?)
+          redirect_to wedding_atelier_root_path
+        end
       end
 
     end
