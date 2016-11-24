@@ -1,11 +1,13 @@
 .signup-new {
-  @extend .step-container;
 
   h1 {
     @extend .text-center;
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 0.98;
   }
 
   [type='submit'] {
