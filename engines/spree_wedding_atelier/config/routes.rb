@@ -6,6 +6,7 @@ Spree::Core::Engine.routes.draw do
         get '/size', to: 'registrations#size'
         get '/details', to: 'registrations#details'
         get '/invite', to: 'registrations#invite'
+        post '/send_invites', to: 'registrations#send_invites'
       end
     end
   end
