@@ -97,6 +97,22 @@
 
   }
 
+  @media (max-width: $bootstrap-sm-width) {
+
+    h1 {
+      font-size: 4rem;
+    }
+
+  }
+
+  @media (min-width: $bootstrap-sm-width) and (max-width: $bootstrap-md-width - 1px) {
+
+    h1 {
+      font-size: 7rem;
+    }
+
+  }
+
   @media (max-width: $bootstrap-md-width - 1px) {
 
     .page-title {
@@ -108,11 +124,6 @@
 
       .page-title--details {
         padding: 100px 0;
-
-        h1 {
-          font-size: 7rem;
-        }
-
       }
 
     }
