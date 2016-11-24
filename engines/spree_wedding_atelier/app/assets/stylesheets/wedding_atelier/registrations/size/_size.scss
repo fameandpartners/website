@@ -1,22 +1,6 @@
 .size {
-  @extend .step-container;
-
-  h1 {
-    @extend .text-center;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 10px;
-    font-size: 28px;
-    font-weight: 300;
-    line-height: 0.98;
-  }
-
-  h1 {
-    @extend .center-block;
-  }
-
-  .guide_link {
-    color: #000;
+  .guide-link {
+    color: $black;
     text-decoration: underline;
     font-weight: bold;
   }
@@ -26,39 +10,37 @@
       clear: both;
     }
 
-    input[type=radio]:checked ~ label {
-      outline: 2px solid #000;
+    [type=radio]:checked ~ label {
+      outline: 2px solid $black;
     }
 
     ul {
-      & {
-          list-style: none;
-          padding: 0;
-      }
+      list-style: none;
+      padding: 0;
+    }
 
-      & li{
-        float: left;
-        margin: 4px;
-      }
+    li {
+      float: left;
+      margin: 4px;
 
-      & li input[type=radio]{
+      input[type=radio] {
         position: absolute;
         visibility: hidden;
       }
 
-      & li label{
+      label {
         cursor: pointer;
         display: block;
         position: relative;
         text-align: center;
-        background-color: #f2f2f2;
+        background-color: $white-three;
         z-index: 9;
         line-height: 1.5em;
         padding: 5px;
       }
 
-      & li:hover label{
-        outline: 1px solid #f2f2f2;
+      &:hover label {
+        outline: 1px solid $white-three;
       }
     }
   }
