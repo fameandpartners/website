@@ -8,6 +8,7 @@
     @extend .text-center;
     margin-left: 20px;
     margin-right: 20px;
+    margin-bottom: 10px;
   }
 
   .left-side {
@@ -28,7 +29,18 @@
     @extend .hidden-xs;
   }
 
-  @media screen and (min-width: $screen-md-min) {
+  .btn-block {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .or {
+    background: image-url('or.svg') no-repeat center;
+    background-size: 30px;
+    height: 30px;
+  }
+
+  @media screen and (min-width: $screen-sm-min) {
     margin: 0;
     padding: 0;
 
@@ -62,21 +74,5 @@
       width: 340px;
     }
 
-  }
-}
-
-.or {
-  margin: 0;
-  padding: 0;
-  height: 15px;
-
-  span {
-    display: inline-block;
-    background-image: image-url('o-r.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    text-indent: -9999px;
-    height: 36px;
-    width: 36px;
   }
 }
