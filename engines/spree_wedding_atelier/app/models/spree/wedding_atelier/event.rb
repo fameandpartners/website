@@ -8,14 +8,17 @@ module Spree
       attr_accessible :event_type,
                       :number_of_assistants,
                       :date,
-                      :events_attributes
+                      :events_attributes,
+                      :name
 
-      after_create :add_token
+      after_create :sluggify
+
+      validates_uniqueness_of :name
 
       private
 
-      def add_token
-        update_attribute(:token, SecureRandom.hex(10))
+      def sluggify
+        update_attribute(:slug, name.parameterize) if slug.nil?
       end
     end
   end
