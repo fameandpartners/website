@@ -1,3 +1,4 @@
+# TODO: this controller was the beginning of bulk importing products, which ended up being a shell script + rake task
 module Spree
   module Admin
     class ProductUploadsController < BaseController
