@@ -11,7 +11,7 @@
         .text-center.hidden-xs
           = link_to '', fb_auth_path, class: 'btn-facebook-fancy'
 
-        .or
+        p.or - or -
 
         = form_for @user, as: :spree_user, url: wedding_atelier_signup_path(@user, @signup_params) do |f|
 
