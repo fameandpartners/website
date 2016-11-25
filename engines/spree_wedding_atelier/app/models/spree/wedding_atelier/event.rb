@@ -15,6 +15,10 @@ module Spree
 
       validates_uniqueness_of :name
 
+      def to_param
+        slug
+      end
+
       private
 
       def sluggify
