@@ -5,7 +5,8 @@ label {
   font-weight: 700;
 }
 
-[type='text'], [type='submit'] {
+[type='text'],
+[type='submit'] {
   letter-spacing: 1.7px;
 }
 
@@ -15,9 +16,5 @@ label {
     color: $pinkish-grey-two;
     font-weight: 300;
     font-size: .7rem;
-  }
-
-  [type='checkbox'] {
-
   }
 }
