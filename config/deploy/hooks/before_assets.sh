@@ -1,5 +1,9 @@
 #!/bin/bash
 
+##################################################
+# NOTE: JS bundling at the `assets.rake` rake file
+##################################################
+
 # Persist npm modules acros deploys.
 # installation actually happens in a rake task after assets:precompile
 shared_modules_path="${shared_app_path}/node_modules"
