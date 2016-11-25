@@ -44,7 +44,8 @@
   },
   "scripts": {
     "start": "gulp build --watch true",
-    "prod": "NODE_ENV=production gulp build --prod true"
+    "prod": "NODE_ENV=production gulp build --prod true",
+    "production": "NODE_ENV=production gulp build --prod true"
   },
   "main": "index.js",
   "repository": "git@github.com:fameandpartners/website.git",
