@@ -1,33 +1,7 @@
-@font-face {
-  font-family: FreightDispPro;
-  font-weight: normal;
-  font-style: normal;
-  src: font-url('Freight/FreightDispPro_Light.otf') format('otf'),
-  font-url('Freight/FreightDispPro_Light.woff') format('woff');
-}
+@include font-face('FreightDispPro', 'FreightDispProLight-Regular', 300);
+@include font-face('FreightDispPro', 'FreightDispProBook-Italic', 400, italic);
+@include font-face('NeuzeGro', 'NeuzeGroTReg', 400);
+@include font-face('NeuzeGro', 'NeuzeGroTBol', 700);
 
-@font-face {
-  font-family: FreightDispPro;
-  font-weight: normal;
-  font-style: italic;
-  src: font-url('Freight/FreightDispPro_Light_Italic.otf') format('otf'),
-  font-url('Freight/FreightDispPro_Light_Italic.woff') format('woff');
-}
-
-@font-face {
-  font-family: NeuzeitGro;
-  font-weight: normal;
-  font-style: normal;
-  src: font-url('Neuzeit/NeuzeitGro_Reg.ttf') format('ttf'),
-  font-url('Neuzeit/NeuzeitGro_Reg.otf') format('otf'),
-  font-url('Neuzeit/NeuzeitGro_Reg.woff') format('woff');
-}
-
-@font-face {
-  font-family: NeuzeitGro;
-  font-weight: bold;
-  font-style: normal;
-  src: font-url('Neuzeit/NeuzeitGro_Bold.otf') format('otf'),
-  font-url('Neuzeit/NeuzeitGro_Bold.ttf') format('ttf'),
-  font-url('Neuzeit/NeuzeitGro_Bold.woff') format('woff');
-}
+$primary-font: 'FreightDispPro', serif;
+$secondary-font: 'NeuzeGro', sans-serif;
