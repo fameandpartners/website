@@ -6,6 +6,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
     And Data is setup correctly
     And Setup default feature flags
     And The "afterpay" feature is enabled
+    And The "getitquick_unavailable" feature is enabled
 
   @javascript @vcr @shorter_cassette_names @selenium @afterpay
   Scenario: Successfully Buy a Dress
