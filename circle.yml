@@ -21,6 +21,8 @@ machine:
     version: 6.3.0
   services:
     - elasticsearch
+    - redis
+    - memcached
 
 general:
   artifacts:
