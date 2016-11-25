@@ -10,18 +10,18 @@
 .pagination {
   padding: 0 4px;
   font-size: 16px;
-  color: #aaa9a9;
+  color: $greyish;
 
   &.current {
-    color: #000;
-    font-weight: bold;
+    color: $black;
+    font-weight: 700;
   }
 }
 
 .separator {
   display: none;
-  font-size: 22px;
-  color: #000;
+  font-size: .7rem;
+  color: $black;
 
   &.current {
     display: inline;
