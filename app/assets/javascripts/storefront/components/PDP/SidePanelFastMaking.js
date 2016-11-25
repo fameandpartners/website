@@ -71,7 +71,7 @@ class SidePanelFastMaking extends React.Component {
             <input type="checkbox" id="fast-making" checked={this.isFastMaking()} onChange={this.onChange} />
             <label htmlFor="fast-making">
             <div className="c-card-customize__content__left">
-              EXPRESS MAKING (6-9 days)
+              EXPRESS MAKING (4-6 business days)
               <div className="pdp-side-note">
                 <i className="fa fa-info-circle" /> Only available for Recommended Colors
               </div>
