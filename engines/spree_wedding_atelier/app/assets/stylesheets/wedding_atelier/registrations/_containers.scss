@@ -47,7 +47,7 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-image: image-url('spree_wedding_atelier/bitmap.png');
-
+      display: table;
     }
 
     .left-side-container {
@@ -57,7 +57,10 @@
     }
 
     .right-side-container {
+      display: table-cell;
+      vertical-align: middle;
       padding: 10px;
     }
+
   }
 }
