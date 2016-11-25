@@ -1,8 +1,12 @@
-@import 'bootstrap-and-overrides';
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/fonts';
+@import 'base/bootstrap-and-overrides';
 @import 'base/layout';
 
 .wedding-atelier {
-  @import 'base/base';
-  @import 'components/*';
+  @import 'base/typography';
+  @import 'base/forms';
+  @import 'base/buttons';
   @import 'wedding_atelier/**/*';
 }

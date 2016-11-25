@@ -36,7 +36,9 @@
             = f.submit 'Create Account', class: 'btn-black btn-block hidden-sm hidden-md hidden-lg'
             = f.submit 'Next', class: 'btn-black btn-block hidden-xs'
 
-            p Already a member? <%= link_to  %>
+            p
+              | Already a member? 
+              = link_to 'login here', wedding_atelier_root_path
 
         .steps.text-center
           span.pagination.current 01

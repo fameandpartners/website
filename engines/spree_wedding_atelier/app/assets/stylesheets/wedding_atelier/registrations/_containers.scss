@@ -38,7 +38,7 @@
     }
 
     .left-side {
-      background-color: #ddd;
+      background-color: $white-three;
       background-image: image-url('spree_wedding_atelier/marbel.png');
       padding: 50px 60px;
     }
@@ -47,10 +47,11 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-image: image-url('spree_wedding_atelier/bitmap.png');
+
     }
 
     .left-side-container {
-      background-color: #fff;
+      background-color: $white-two;
       height: 100%;
       padding: 40px 80px;
     }
