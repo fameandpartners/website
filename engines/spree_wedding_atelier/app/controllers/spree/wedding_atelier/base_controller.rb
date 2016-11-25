@@ -7,7 +7,7 @@ module Spree
 
       def check_signup_completeness
         if current_spree_user && !current_spree_user.wedding_atelier_signup_complete?
-          redirect_to action: current_spree_user.wedding_atelier_signup_step
+          redirect_to controller: :registrations, action: current_spree_user.wedding_atelier_signup_step
         end
       end
     end
