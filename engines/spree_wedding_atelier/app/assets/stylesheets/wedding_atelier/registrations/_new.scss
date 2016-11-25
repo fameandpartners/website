@@ -9,9 +9,11 @@
   }
 
   .or {
-    background: image-url('or.svg') no-repeat center;
-    background-size: 30px;
-    height: 30px;
+    @extend .text-uppercase;
+    @extend .text-center;
+    font-family: $primary-font;
+    font-style: italic;
+    margin: 15px;
   }
 
   .already-member {
