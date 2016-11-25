@@ -8,21 +8,21 @@
 }
 
 .pagination {
-  padding: 0 4px;
-  font-family: NeuzeitGro;
+  color: $greyish;
   font-size: 16px;
-  color: #aaa9a9;
+  margin-bottom: 5px;
+  padding: 0 4px;
 
   &.current {
-    color: #000;
-    font-weight: bold;
+    color: $black;
+    font-weight: 700;
   }
 }
 
 .separator {
   display: none;
-  font-size: 22px;
-  color: #000;
+  font-size: .7rem;
+  color: $black;
 
   &.current {
     display: inline;

@@ -1,6 +1,7 @@
 .onboarding-container {
   @extend .container-fluid;
   background-color: $white-two;
+  height: 100vh;
   margin: 50px 10px 20px;
   padding: 15px;
 
@@ -16,11 +17,13 @@
 
   .left-side {
     @extend .col-xs-12;
-    @extend .col-sm-6;
+    @extend .col-sm-12;
+    @extend .col-md-6;
   }
 
   .right-side {
-    @extend .col-sm-6;
+    @extend .col-sm-12;
+    @extend .col-md-6;
   }
 
   .right-side,
@@ -33,16 +36,17 @@
   }
 
   @media screen and (min-width: $screen-sm-min) {
+
     margin: 0;
     padding: 0;
 
     .left-side,
     .right-side {
-      height: 100vh;
+      height: 100%;
     }
 
     .left-side {
-      background-color: #ddd;
+      background-color: $white-three;
       background-image: image-url('spree_wedding_atelier/marbel.png');
       padding: 50px 60px;
     }
@@ -55,24 +59,17 @@
     }
 
     .left-side-container {
-      background-color: #fff;
+      background-color: $white-two;
+      display: table;
       height: 100%;
-      padding: 40px 80px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 20px 40px;
     }
 
-    .right-side-container {
-      display: table-cell;
-      vertical-align: middle;
-      padding: 10px;
+    .fp-logo-float {
+      background: image-url('fp-logo-white.svg') no-repeat center;
+      background-size: 70%;
     }
-
-    .right-side-container h1 {
-      background-image: image-url('spree_wedding_atelier/logo.png');
-      background-repeat: no-repeat;
-      width: 487px;
-      height: 38px;
-      text-indent: -9999px;
-    }
-
   }
 }
