@@ -1,0 +1,20 @@
+.registrations__detals-form
+  h1 Janine, let's start with your size profile
+  .form
+    = form_for current_spree_user, as: :spree_user, url: wedding_atelier_signup_path, method: :put do |f|
+      = f.fields_for :events, @event do |ff|
+        .form-group
+          = ff.label :name, 'Please name your wedding board'
+          = ff.text_field :name, class: 'form-control'
+        .form-group
+          = f.label :event_role, "What's your role in the wedding?"
+          = f.select :event_role, options_for_select(@roles), {}, class: 'form-control'
+          = f.hidden_field :wedding_atelier_signup_step, value: 'invite'
+        .form-group
+          = ff.label :number_of_assistants, "How many bridesmaids at the wedding"
+          = ff.number_field :number_of_assistants, { min: 0, class: 'form-control' }
+        .form-group
+          = ff.label :date, "What is the date of the wedding?"
+          = ff.text_field :date, { class: 'form-control', type: 'date' }
+          = ff.hidden_field :event_type, value: 'wedding'
+        = submit_tag 'next', class: 'btn-black btn-block hidden-xs'

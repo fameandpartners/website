@@ -1,0 +1,15 @@
+.onboarding-container
+  .left-side
+    .left-side-container
+      .table-cell-middle
+        = render partial: nested_partial, locals: {user: user, signup_params: signup_params}
+    .steps.text-center
+      span.pagination.current 01
+      span.separator.current –
+      span.pagination 02
+      span.separator —
+      span.pagination 03
+      span.separator —
+      span.pagination 04
+  .right-side
+    .fp-logo-float.table-cell-middle
