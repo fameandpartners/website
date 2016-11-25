@@ -3,7 +3,7 @@
     .left-side
       .left-side-container
         h1
-          | Welcome to the App. <em>Create</em> your account to get started ...
+          | Welcome to the App. <em>Create</em> your account to get started...
 
         = link_to fb_auth_path, class: 'btn-facebook-blue btn-block hidden-sm hidden-md hidden-lg' do
            | Sign up with facebook
@@ -35,7 +35,7 @@
           = f.submit 'Create Account', class: 'btn-black btn-block hidden-sm hidden-md hidden-lg'
           = f.submit 'Next', class: 'btn-black btn-block hidden-xs'
 
-          p
+          p.already-member
             | Already a member?
             = link_to 'login here', wedding_atelier_root_path
 

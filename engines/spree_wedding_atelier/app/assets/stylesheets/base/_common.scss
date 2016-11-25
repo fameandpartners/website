@@ -1,0 +1,5 @@
+a {
+  @extend .text-uppercase;
+  color: $black;
+  text-decoration: underline;
+}
