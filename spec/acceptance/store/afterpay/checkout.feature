@@ -4,6 +4,7 @@ Feature: Afterpay on Australian's Website Checkout
     Given A sample database with valid data
     And Data is setup correctly
     And The "afterpay" feature is enabled
+    And The "getitquick_unavailable" feature is enabled
 
   @javascript @vcr @shorter_cassette_names
   Scenario: I see Afterpay payment method on Australian Site Version
