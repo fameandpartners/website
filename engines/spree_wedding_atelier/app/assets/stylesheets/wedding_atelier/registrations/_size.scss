@@ -44,13 +44,4 @@
       }
     }
   }
-
-  .right-side-container h1 {
-      @extend .center-block;
-      background-image: image-url('spree_wedding_atelier/logo.png');
-      background-repeat: no-repeat;
-      width: 487px;
-      height: 38px;
-      text-indent: -9999px;
-  }
 }
