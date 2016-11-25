@@ -1,4 +1,4 @@
-.step-container.size
+.onboarding-container.size
   .row
     .left-side
       .left-side-container
@@ -10,7 +10,7 @@
               = f.select :height, options_for_select(@heights, current_spree_user.height), {}, class: 'form-control'
             .form-group
               = f.label :dress_size, "What's your dress size? &nbsp;".html_safe
-              = link_to 'view size guide', '#', class: 'guide_link'
+              = link_to 'view size guide', '#', class: 'guide-link'
 
               .sizes-container
                 ul
@@ -22,12 +22,13 @@
               = f.hidden_field :wedding_atelier_signup_step, value: 'details'
             = f.submit 'next', class: 'btn-black btn-block'
         .steps.text-center
-          span.pagination.current 01
-          span.separator.current —
-          span.pagination 02
+          span.pagination 01
           span.separator —
+          span.pagination.current 02
+          span.separator.current —
           span.pagination 03
           span.separator —
           span.pagination 04
     .right-side
-      h1 Fame and partners
+      .right-side-container
+        h1 Fame and partners

@@ -1,4 +1,4 @@
-.step-container {
+.onboarding-container {
   @extend .container-fluid;
   background-color: $white-two;
   margin: 50px 10px 20px;
@@ -28,6 +28,10 @@
     @extend .hidden-xs;
   }
 
+  .right-side-container h1 {
+    @extend .center-block;
+  }
+
   @media screen and (min-width: $screen-sm-min) {
     margin: 0;
     padding: 0;
@@ -47,6 +51,7 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-image: image-url('spree_wedding_atelier/bitmap.png');
+      display: table;
     }
 
     .left-side-container {
@@ -56,7 +61,18 @@
     }
 
     .right-side-container {
+      display: table-cell;
+      vertical-align: middle;
       padding: 10px;
     }
+
+    .right-side-container h1 {
+      background-image: image-url('spree_wedding_atelier/logo.png');
+      background-repeat: no-repeat;
+      width: 487px;
+      height: 38px;
+      text-indent: -9999px;
+    }
+
   }
 }

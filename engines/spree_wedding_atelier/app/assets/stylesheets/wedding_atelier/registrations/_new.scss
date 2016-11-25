@@ -1,0 +1,39 @@
+.signup-new {
+  [type='submit'] {
+    margin-top: 10px;
+  }
+
+  .btn-block {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .or {
+    background: image-url('or.svg') no-repeat center;
+    background-size: 30px;
+    height: 30px;
+  }
+
+  .email-signup {
+    width: 340px;
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  input[type="checkbox"] ~ label span {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: -2px 2px 0 0;
+    vertical-align: middle;
+    background: image-url('spree_wedding_atelier/sprite_check.png') -61px -9px no-repeat;
+    cursor: pointer;
+  }
+
+  input[type="checkbox"]:checked + label span {
+    background: image-url('spree_wedding_atelier/sprite_check.png') -12px -9px no-repeat;
+  }
+
+}
