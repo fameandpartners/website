@@ -1,4 +1,4 @@
-.step-container.signup-new
+.onboarding-container.signup-new
   .row
     .left-side
       .left-side-container
@@ -27,10 +27,11 @@
           = f.text_field :email, class: 'form-control'
           = f.label :password, 'Password'
           = f.password_field :password, class: 'form-control'
+
           .checkbox
-            label
-              = f.check_box :newsletter
-              | Sign up to get the latest trend updates
+            = f.check_box :newsletter
+            = f.label :newsletter
+              | <span></span> Sign up to get the latest trend updates
 
           = f.submit 'Create Account', class: 'btn-black btn-block hidden-sm hidden-md hidden-lg'
           = f.submit 'Next', class: 'btn-black btn-block hidden-xs'
@@ -48,3 +49,5 @@
           span.separator —
           span.pagination 04
     .right-side
+      .right-side-container
+        h1 Fame and partners
