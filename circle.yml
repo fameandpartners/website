@@ -11,6 +11,8 @@ dependencies:
     # npm and bundle JS
     - npm install
     - npm run production
+    # Bundler is missing for non-pre-installed Ruby versions https://discuss.circleci.com/t/trusty-container-update-16-02-01/1914/6
+    - type bundle &>/dev/null || gem install bundler
 
 machine:
   ruby:
