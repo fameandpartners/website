@@ -2,8 +2,8 @@ module Spree
   module WeddingAtelier
     class RegistrationsController < Spree::UserRegistrationsController
       layout 'wedding_atelier'
+      before_filter :check_spree_user_signed_in, except: [:new, :create]
       before_filter :redirect_if_completed, except: :new
-      skip_before_filter :authenticate_spree_user!, only: :new
 
       def new
         if current_spree_user
@@ -14,10 +14,6 @@ module Spree
           end
         end
         @user = Spree::User.new
-        @signup_params = {
-          site_version: current_site_version.code,
-          portal: 'wedding-atelier'
-         }
       end
 
       def create
@@ -85,8 +81,12 @@ module Spree
 
       private
 
+      def check_spree_user_signed_in
+        redirect_to(wedding_atelier_signup_path) unless spree_user_signed_in?
+      end
+
       def redirect_if_completed
-        redirect_to(wedding_atelier_events_path) if current_spree_user.wedding_atelier_signup_complete?
+        redirect_to(wedding_atelier_events_path) if current_spree_user.try(:wedding_atelier_signup_complete?)
       end
     end
   end
