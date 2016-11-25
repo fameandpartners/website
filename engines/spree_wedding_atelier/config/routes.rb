@@ -3,7 +3,7 @@ Spree::Core::Engine.routes.draw do
     root to: 'home#index'
 
     devise_scope :spree_user do
-      resource :signup, controller: :registrations, only: [:update] do
+      resource :signup, controller: :registrations, only: [:update, :create] do
         get '/', to: 'registrations#new'
         get '/size', to: 'registrations#size'
         get '/details', to: 'registrations#details'

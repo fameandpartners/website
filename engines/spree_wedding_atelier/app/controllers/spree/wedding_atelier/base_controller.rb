@@ -3,7 +3,6 @@ module Spree
     class BaseController < ApplicationController
       layout 'wedding_atelier'
       before_filter :authenticate_spree_user!
-
       before_filter :check_signup_completeness
 
       def check_signup_completeness
