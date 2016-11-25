@@ -2,7 +2,17 @@ module Spree
   module WeddingAtelier
     class RegistrationsController < Spree::UserRegistrationsController
       layout 'wedding_atelier'
+      before_filter :redirect_if_completed, except: :new
+      skip_before_filter :authenticate_spree_user!, only: :new
+
       def new
+        if current_spree_user
+          if current_spree_user.wedding_atelier_signup_complete?
+            redirect_to wedding_atelier_events_path
+          else
+            redirect_to current_spree_user.wedding_atelier_signup_step
+          end
+        end
         @user = Spree::User.new
         @signup_params = {
           site_version: current_site_version.code,
@@ -58,7 +68,7 @@ module Spree
 
       def details
         @roles = ['bride', 'bridesmaid', 'maid of honor', 'mother of bride']
-        @event = current_spree_user.events.new
+        @event = current_spree_user.events.last || current_spree_user.events.new
       end
 
       def invite
@@ -69,15 +79,15 @@ module Spree
         event = current_spree_user.events.last
         addresses = params[:email_addresses].reject(&:empty?)
         InvitationsMailer.invite(event, addresses).deliver! if addresses.any?
-        redirect_to new_wedding_atelier_signup_path(event_id: event.slug)
+        current_spree_user.update_attribute(:wedding_atelier_signup_step, 'completed')
+        redirect_to wedding_atelier_event_path(event)
       end
 
       private
 
-      def set_user_role
-
+      def redirect_if_completed
+        redirect_to(wedding_atelier_events_path) if current_spree_user.wedding_atelier_signup_complete?
       end
-
     end
   end
 end

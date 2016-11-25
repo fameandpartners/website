@@ -1,7 +1,6 @@
 module Spree
   module WeddingAtelier
-    class HomeController < ApplicationController
-      layout 'wedding_atelier'
+    class HomeController < Spree::WeddingAtelier::BaseController
       def index
       end
     end
