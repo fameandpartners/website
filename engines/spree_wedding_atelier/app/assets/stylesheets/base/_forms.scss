@@ -2,9 +2,22 @@ label {
   @extend .text-uppercase;
   margin: 10px 0 0;
   font-size: .85rem;
-  font-weight: bold;
+  font-weight: 700;
 }
 
-[type="text"] {
-  letter-spacing: 1px;
+[type='text'], [type='submit'] {
+  letter-spacing: 1.7px;
+}
+
+.checkbox {
+
+  label {
+    color: $pinkish-grey-two;
+    font-weight: 300;
+    font-size: .7rem;
+  }
+
+  [type='checkbox'] {
+
+  }
 }
