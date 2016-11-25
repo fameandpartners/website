@@ -42,4 +42,4 @@ doctype html
       #content
           = yield
       #push
-    = render 'spree/wedding_atelier/shared/footer' unless controller_name == 'registrations'
+    = render 'spree/wedding_atelier/shared/footer' unless ['registrations', 'sessions'].include?(controller_name)
