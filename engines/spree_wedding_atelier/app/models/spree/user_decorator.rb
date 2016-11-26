@@ -7,7 +7,6 @@ Spree::User.class_eval do
                   :events_attributes,
                   :event_role
 
-
   has_many :event_assistants, class_name: 'Spree::WeddingAtelier::EventAssistant'
   has_many :events, through: :event_assistants, source: :event
   accepts_nested_attributes_for :events
