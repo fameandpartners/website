@@ -4,7 +4,7 @@
       p Janine, invite the bridal party
       = link_to 'invite with facebook', '#'
       .form
-        = form_tag(send_invites_wedding_atelier_signup_path, method: :post) do
+        = form_tag(wedding_atelier_event_invitations_path(@event), method: :post) do
           .form-group
           .section.invitations
             - @event.number_of_assistants.times do
