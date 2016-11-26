@@ -1,30 +1,24 @@
-/* [Pagination]
--------------------------------------------------------*/
 .steps {
-  width: 200px;
-  left: calc(50% - 100px);
-  position: absolute;
-  bottom: 0;
-}
-
-.pagination {
+  @extend .text-center;
   color: $greyish;
-  font-size: 16px;
-  margin-bottom: 5px;
-  padding: 0 4px;
+  font-weight: 700;
+  padding: 0;
 
-  &.current {
-    color: $black;
-    font-weight: 700;
-  }
-}
+  li {
+    display: inline-block;
+    list-style: none;
 
-.separator {
-  display: none;
-  font-size: .7rem;
-  color: $black;
+    &.current {
+      color: $black;
+    }
 
-  &.current {
-    display: inline;
+    &.current::after {
+      content: ' --- ';
+    }
+
+    &.current:last-child::after {
+      content: '';
+    }
+
   }
 }
