@@ -43,6 +43,7 @@ class SidePanelColor extends SidePanel {
       this.props.customize.size.id);
 
     this.props.actions.customizeDress(customize);
+    this.props.actions.customizeMakingOption(customize);
 
     // update url
     UpdateUrl(customize.color.id, this.props.paths);

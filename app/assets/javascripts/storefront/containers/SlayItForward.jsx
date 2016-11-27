@@ -1,3 +1,4 @@
+/* global Modernizr */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -41,6 +42,12 @@ class SlayItForward extends Component {
     this.renderBackgroundImg = this.renderBackgroundImg.bind(this);
   }
 
+  componentDidMount(){
+    setTimeout(()=>{
+      this.setState({mounted: true});
+    }, 200);
+  }
+
   renderBackgroundImg(path, className='empowered-woman-img'){
     const {breakpoint} = this.props;
     const style = { backgroundImage: `url(${path})` };
@@ -51,16 +58,19 @@ class SlayItForward extends Component {
 
   renderShareImgs(path){
     const {breakpoint} = this.props;
-    const style = { backgroundImage: `url(${path})` };
-    return (
-      <div className="share-tiles" style={style}></div>
-    );
-  }
-
-  componentDidMount(){
-    setTimeout(()=>{
-      this.setState({mounted: true});
-    }, 200);
+    if (typeof Modernizr === 'object' && Modernizr.adownload){
+      return (
+        <a className='link' href={path} download='slayitforward.jpg'>
+          <img className="share-tiles" src={path} />
+        </a>
+      );
+    } else {
+        return (
+          <a className='link' href={path} target='_blank'>
+            <img className="share-tiles" src={path} />
+          </a>
+        );
+    }
   }
 
   render(){
@@ -118,11 +128,9 @@ class SlayItForward extends Component {
             </div>
           </MarketingSection>
 
-          <hr/>
-
           <MarketingSection className="MarketingSection-slay slay-organizations inner-buffer">
             <div className="slay-organizations-container text-center inner-buffer">
-              <p className="font-medium">The organizations <em>you're</em> supporting:</p>
+              <p className="font-large">The organizations <em>you're</em>&nbsp;supporting:</p>
 
               <p className="font--secondary text-uppercase title">American Civil Liberties Union (ACLU).</p>
               <p>They defend the individual rights and liberties guaranteed by the Constitution.</p>
@@ -164,7 +172,7 @@ class SlayItForward extends Component {
 
           <MarketingSection className="MarketingSection-slay slay-carousel clearfix">
             <div>
-              <p className='text-center font-medium'>Post, empower and <em>give back</em>.</p>
+              <p className='text-center font-large'>Post, empower and <em>give back</em>.</p>
               <div className="insta-carousel clearfix">
                 { this.props.breakpoint === 'mobile' ?
                   this.renderShareImgs(shareTileImages[0]) :
@@ -178,7 +186,7 @@ class SlayItForward extends Component {
 
           <MarketingSection className="MarketingSection-slay slay-ceo-letter inner-buffer">
             <div className="text-center">
-              <p className="font-medium">From our CEO.</p>
+              <p className="font-large">From our CEO.</p>
               <img className='nyree-img' src={getImages('nyree')}></img>
               <p>A message from Nyree Corby, a female founder and CEO, to women everywhere.</p>
               <p className="font--secondary"><a href="/from-our-ceo"><span className='read-ceo-link u-textDecoration--underline'><b>READ NOW</b></span></a>&nbsp;&nbsp;<b>></b></p>

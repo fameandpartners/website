@@ -1,3 +1,4 @@
+# NOTE: JS bundling at the `before_assets.sh` deployment hook
 namespace :assets do
   desc 'Bundles production JS executing `npm install` and `npm run production` commands'
   task :bundle_js do

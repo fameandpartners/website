@@ -2,7 +2,7 @@
 
 module Orders
   class LineItemPresenter < Orders::Shared::LineItemPresenter
-  class NoShipment
+    class NoShipment
       def shipped?
         false
       end

@@ -4,6 +4,7 @@ app/assets/javascripts/templates/shopping_cart.jst.eco
 app/services/products/product_details_resource.rb
 app/controllers/personalization/*
 app/controllers/boutique_controller.rb & Views etc.
+app/controllers/spree/admin/product_uploads_controller.rb & Routing & Views, etc.
 ProductAccessory
 lib/products/batch_uploader_tania_version.rb
 app/assets/javascripts/partials/helpers/site_version.js.coffee
