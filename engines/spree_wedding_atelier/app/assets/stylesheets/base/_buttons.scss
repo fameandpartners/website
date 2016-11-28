@@ -6,6 +6,7 @@
   color: $black;
   line-height: 25px;
   min-height: 35px;
+  text-decoration: none;
 }
 
 .btn-black {
@@ -22,6 +23,7 @@
 .btn-white {
   @extend .btn;
   background-color: $white-three;
+  border-color: $white-three;
 }
 
 .btn-transparent {
