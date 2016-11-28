@@ -2,7 +2,7 @@
   @extend .container-fluid;
   background-color: $white-two;
   height: 100vh;
-  margin: 50px 10px 20px;
+  margin: 50px 0 20px;
   padding: 15px;
 
   h1 {
@@ -48,7 +48,7 @@
     .left-side {
       background-color: $white-three;
       background-image: image-url('spree_wedding_atelier/marbel.png');
-      padding: 50px 60px;
+      padding: 40px;
     }
 
     .right-side {
@@ -70,6 +70,10 @@
     .fp-logo-float {
       background: image-url('fp-logo-white.svg') no-repeat center;
       background-size: 70%;
+    }
+
+    .table-cell-middle {
+      max-width: 300px;
     }
   }
 }
