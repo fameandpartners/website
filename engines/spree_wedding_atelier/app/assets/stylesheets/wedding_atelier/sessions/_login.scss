@@ -3,10 +3,16 @@
     margin-top: 10px;
   }
 
-  .btn-black {
-    display: block;
-    margin: 15px auto;
-    min-width: 150px;
+  .sign-password {
+    @extend .text-center;
+
+    [type='submit'] {
+      margin: 30px 0 10px;
+    }
+
+    a {
+      margin: 10px 0;
+    }
   }
 
   .or {
@@ -23,4 +29,5 @@
     font-size: .8rem;
     margin-top: 20px;
   }
+
 }
