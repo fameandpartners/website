@@ -1,8 +1,14 @@
 .steps {
   @extend .text-center;
+  bottom: 0;
   color: $greyish;
   font-weight: 700;
+  left: 0;
+  margin-left: 0;
+  margin-right: 0;
   padding: 0;
+  position: absolute;
+  right: 0;
 
   li {
     display: inline-block;
