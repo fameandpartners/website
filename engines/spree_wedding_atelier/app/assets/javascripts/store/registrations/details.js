@@ -22,7 +22,8 @@ $.fn.incrementButton = function(){
     var oldValue = parseInt($input.val(), 10);
     var newVal = --oldValue;
 
-    if (oldValue < 0) {
+    if (oldValue < 0 || isNaN(newVal)) {
+      $input.val(0);
       return;
     }
 
@@ -32,6 +33,11 @@ $.fn.incrementButton = function(){
   $incButton.on("click", function() {
     var oldValue = parseInt($input.val(), 10);
     var newVal = ++oldValue;
+
+    if (isNaN(newVal)) {
+      $input.val(0);
+      return;
+    }
 
     $input.val(newVal);
   })
