@@ -21,6 +21,9 @@ linters:
   PlaceholderInExtend:
     enabled: false
 
+  SelectorFormat:
+    convention: hyphenated_BEM
+
   StringQuotes:
     style: single_quotes
 

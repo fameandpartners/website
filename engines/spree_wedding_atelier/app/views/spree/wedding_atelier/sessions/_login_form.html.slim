@@ -1,0 +1,25 @@
+.sessions__login-form
+  h1
+    | Welcome back to the Wedding Atelier.
+
+  .form.email-signup
+    = form_for :spree_user, url: wedding_atelier_sign_in_path, method: :post do |f|
+      = f.label :email, 'Email Address'
+      = f.text_field :email, class: 'form-control'
+      = f.label :password, 'Password'
+      = f.password_field :password, class: 'form-control'
+      = f.submit 'Sign in', class: 'btn-black btn-block'
+      p.text-center
+        = link_to 'forgot password?', '#'
+
+  p.or - or -
+
+  = link_to fb_auth_path, class: 'btn-facebook-blue btn-block hidden-sm hidden-md hidden-lg' do
+     | Log in with facebook
+
+  .text-center.hidden-xs
+    = link_to '', fb_auth_path, class: 'btn-facebook-fancy'
+
+  p.already-member
+    | Don't have an account?
+    = link_to(' sign up here', wedding_atelier_signup_path)

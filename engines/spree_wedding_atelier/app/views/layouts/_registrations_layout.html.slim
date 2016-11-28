@@ -6,10 +6,11 @@
     .left-side-container
       .table-cell-middle
         = render partial: nested_partial, locals: {user: user, signup_params: signup_params}
-    ul.steps
-      - (1..4).each do |step|
-          li class=('current' if step_number == step)
-            = step
+    - if defined? step_number
+      ul.steps
+        - (1..4).each do |step|
+            li class=('current' if step_number == step)
+              = step
 
   .right-side
     .fp-logo-float.table-cell-middle
