@@ -16,6 +16,6 @@
                 = f.radio_button(:dress_size, dress_size.presentation)
                 = f.label :dress_size, dress_size.presentation, value: dress_size.presentation
           br
-        = f.hidden_field :wedding_atelier_signup_step, value: 'details'
+        = f.hidden_field :wedding_atelier_signup_step, value: @next_signup_step_value
         = link_to 'back', :back, class: 'btn-white'
         = f.submit 'next', class: 'btn-black'

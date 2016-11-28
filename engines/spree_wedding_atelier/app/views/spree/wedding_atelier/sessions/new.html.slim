@@ -6,7 +6,7 @@
           | Welcome back to your wedding atelier App
 
         .form.email-signup.center-block
-          = form_for :spree_user, url: wedding_atelier_sign_in_path, method: :post do |f|
+          = form_for @user, as: :spree_user, url: wedding_atelier_sign_in_path(@signup_params), method: :post do |f|
             = f.label :email, 'Email Address'
             = f.text_field :email, class: 'form-control'
             = f.label :password, 'Password'
