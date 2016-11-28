@@ -13,11 +13,16 @@ module Spree
             redirect_to current_spree_user.wedding_atelier_signup_step
           end
         end
-        @user = Spree::User.new
+        if params[:invitation_id]
+          invitation = Invitation.find(params[:invitation_id])
+          @signup_params = { invitation_id: invitation.id }
+        end
+
+        @user = Spree::User.new(email: invitation.try(:user_email))
       end
 
       def create
-        @user = build_resource(params[:spree_user])
+        @user = build_resource(spree_user_params)
         if resource.new_record?
           resource.sign_up_via    = Spree::User::SIGN_UP_VIA.index('Email')
           resource.sign_up_reason = session[:sign_up_reason]
@@ -36,6 +41,10 @@ module Spree
           associate_user
           # Marketing pixel
           flash[:signed_up_just_now] = true
+          if params[:invitation_id]
+            invitation = Invitation.find(params[:invitation_id]).accept
+            session[:accepted_invitation] = true
+          end
           redirect_to size_wedding_atelier_signup_path
         else
           render :new
@@ -44,9 +53,14 @@ module Spree
 
       def update
         @user = current_spree_user
-        if @user.update_attributes(params[:spree_user])
+        if @user.update_attributes(spree_user_params)
           @user.add_role(@user.event_role, @user.events.last) if @user.event_role
-          redirect_to action: @user.wedding_atelier_signup_step
+          if @user.wedding_atelier_signup_step == 'completed'
+            redirect_to wedding_atelier_event_path(@user.events.last)
+          else
+            redirect_to action: @user.wedding_atelier_signup_step
+          end
+
         else
           render @user.wedding_atelier_signup_step
         end
@@ -54,6 +68,8 @@ module Spree
 
       def size
         @dress_sizes = Spree::OptionType.find_by_name('dress-size').option_values
+        @next_signup_step_value = session[:accepted_invitation] ? 'completed' : 'details'
+
         @heights = [
             "5'19 / 177cm ",
             "5'19 / 180cm ",
@@ -71,14 +87,20 @@ module Spree
         @event = current_spree_user.events.last
       end
 
-      def send_invites
-        event = current_spree_user.events.last
-        InvitationsMailer.invite(event, addresses).deliver! if addresses.any?
-        current_spree_user.update_attribute(:wedding_atelier_signup_step, 'completed')
-        redirect_to wedding_atelier_event_path(event)
-      end
 
       private
+
+      def spree_user_params
+        # email input is disabled in new form, to guarantee
+        # invited user uses that email.
+        # Since disabled inputs are not sent, here we set
+        # the user email in the params from the invitation.
+        if !params[:spree_user][:email] && params[:invitation_id]
+          invitation = Invitation.find(params[:invitation_id])
+          params[:spree_user][:email] = invitation.user_email
+        end
+        params[:spree_user]
+      end
 
       def check_spree_user_signed_in
         redirect_to(wedding_atelier_signup_path) unless spree_user_signed_in?
