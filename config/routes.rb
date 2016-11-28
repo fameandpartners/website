@@ -80,6 +80,7 @@ FameAndPartners::Application.routes.draw do
     get '/feb_2015_lp' => 'statics#facebook_lp', :as => :feb_2015_lp
     get '/facebook-lp' => 'statics#facebook_lp', :as => :facebook_lp
     get '/fame2015', to: redirect('/')
+    get '/slayitforward'   => 'statics#slay_it_forward', :as => :slay_it_forward
 
     # Redirecting collections (08/06/2015)
     get '/collection(/*anything)', to: redirect { |params, _| params[:site_version] ? "/#{params[:site_version]}/dresses" : '/dresses' }
@@ -91,6 +92,9 @@ FameAndPartners::Application.routes.draw do
 
     # Partners In Crime Sweepstakes Official Rules March 2016
     get '/partners-in-crime-terms' => 'statics#prom_competition_terms', as: :partners_in_crime_terms
+
+    # i=change landing page
+    get '/iequalchange' => 'statics#iequalchange', :permalink => 'iequalchange', :as => :iequalchange_landing_page
 
     ###########
     # Lookbooks
@@ -175,6 +179,10 @@ FameAndPartners::Application.routes.draw do
     get '/amfam-dresses' => redirect('/wicked-game-collection')
     get '/wicked-game-collection' => 'statics#wicked_game', :as => :wicked_game_collection
 
+    get '/tops'    => 'products/collections#show', :permalink => 'tops', :as => :tops_collection
+    get '/outerwear'    => 'products/collections#show', :permalink => 'outerwear', :as => :outerwear_collection
+    get '/pants'    => 'products/collections#show', :permalink => 'pants', :as => :pants_collection
+
     # Lookbook v2.0 landing pages
     get '/brittany-xavier-high-summer-collection' => 'products/collections#show', :permalink => 'brittany-xavier-high-summer-collection', :as => :high_summer_collection
 
@@ -196,6 +204,9 @@ FameAndPartners::Application.routes.draw do
     # The Evening Hours Collection - Landing page
     get '/the-evening-hours-collection' => 'products/collections#show', :permalink => 'evening-hours-collection', :as => :evening_hours_collection_landing_page
 
+    # Relaxed Evening Collection page (Inside/Out)- Landing page
+    get '/inside-out-collection' => 'products/collections#show', :permalink => 'inside-out-collection', :as => :inside_out_collection_landing_page
+
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
     get '/fameweddings/bride' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :brides_landing_page
@@ -207,6 +218,7 @@ FameAndPartners::Application.routes.draw do
     get '/weddings-and-parties' => 'products/collections#show', :permalink => 'weddings-and-parties', :as => :weddings_parties_page
     get '/dress-for-wedding'    => 'products/collections#show', :permalink => 'dress-for-wedding', :as => :dress_for_wedding_page
     get '/dress-for-parties'    => 'products/collections#show', :permalink => 'dress-for-parties', :as => :dress_for_parties_page
+    get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
@@ -316,6 +328,7 @@ FameAndPartners::Application.routes.draw do
     get '/how-it-works', to: redirect("/why-us")
     get '/size-guide'  => 'statics#size_guide', :as => :size_guide
     get '/growth-plan'  => 'statics#growth_plan', :as => :growth_plan
+    get '/inside-out-sweepstakes'   => 'statics#inside_out_sweepstakes', :permalink => 'inside_out_sweepstakes', :as => :inside_out_sweepstakes
 
     get '/fashionista2014', to: redirect("/")
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info

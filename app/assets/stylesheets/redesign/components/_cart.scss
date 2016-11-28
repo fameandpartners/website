@@ -90,6 +90,7 @@
     p {
       font-family: $font-heading;
       font-weight: 300;
+      line-height: 1.375em;
     }
 
   }
@@ -102,7 +103,7 @@
     }
 
     .cart-item {
-      padding: 15px 15px 15px 0;
+      margin: 15px 15px 15px 0;
       overflow: hidden;
     }
 
@@ -189,6 +190,26 @@
 
       .heading {
         padding-bottom: 50px;
+      }
+
+    }
+
+  }
+
+  .custom-form-element-thin {
+    margin: 10px 0;
+
+    label {
+      padding-left: 0;
+      font-weight: 400;
+      font-size: 1.4rem;
+
+      &:before {
+        top: 4px;
+      }
+
+      &:after {
+        top: 1px;
       }
 
     }

@@ -39,6 +39,7 @@ path 'engines' do
   gem 'mailchimp_client'
   gem 'afterpay'
   gem 'next_logistics'
+  gem 'iequalchange'
 end
 
 # TODO : I shouldn't actually need this here as `admin_ui` explicitly requires it,
@@ -137,7 +138,7 @@ group :test do
   gem 'capybara', '~> 2.5.0'
   gem 'capybara-screenshot', '~> 1.0.11'
   gem 'poltergeist', '~> 1.9.0'
-  gem 'selenium-webdriver', '~> 2.53.0'
+  gem 'selenium-webdriver', '~> 2.53.4'
   gem 'show_me_the_cookies', '~> 3.1.0'
   gem 'turnip', '~> 1.3.1'
   gem 'factory_girl_rails', '4.2.1'
@@ -149,6 +150,7 @@ group :test do
   gem 'timecop'
   gem 'vcr', '~> 2.9.3'
   gem 'webmock', '~> 1.21.0'
+  gem 'rspec_junit_formatter', '0.2.2'
 end
 
 group :production do

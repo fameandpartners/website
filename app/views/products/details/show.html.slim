@@ -4,30 +4,30 @@ ruby:
 
   @product.default_color_options.each do |color|
     product_paths[color.id] = collection_product_path(@product, url_params.merge(color: color.name))
-
-  @current_site_version = current_site_version
-  @productDiscount = @product.discount.to_json == 'null' ? 0 : @product.discount.to_json;
   end
 
-  # NOTE: this JS block is loaded into the head, this should contain page data only
-  # TODO: @product source will need to be cleaned, we have way too many duplicated there
-  #       also images are mess, have to load all_images separately because images inside
-  #       of @pruduct.images include mix of images in defferent ratios.
-  product_details_page_data = "
-    window.PdpDataFull = {
-      paths: #{ product_paths.to_json },
-      product: #{ @product.to_json },
-      discount: #{ @productDiscount},
-      images: #{ @product.all_images.to_json },
-      sizeChart: #{ @product.size_chart_data.to_json },
-      siteVersion: #{ @current_site_version.name.to_json },
-      flags: {afterpay: #{ Features.active?(:afterpay) }}
-    };"
+  @current_site_version = current_site_version
+  discount  = @product.discount || { table: { amount: 0 } }
+  @product_discount = discount.to_json
 
   init_product_details_page = "page.initProductDetailsPage();"
 
-= content_for :inline_javascript_top do
-  = raw product_details_page_data
+/ NOTE: this JS block is loaded into the head, this should contain page data only
+/ TODO: @product source will need to be cleaned, we have way too many duplicated there
+/       also images are mess, have to load all_images separately because images inside
+/       of @pruduct.images include mix of images in defferent ratios.
+/ TODO: every attribute has a `#to_json` or `raw` helper processing them. This means those could be extracted to their own structure and call a single `#to_json`
+= content_for :head do
+  javascript:
+    window.PdpDataFull = {
+      paths: #{raw product_paths.to_json},
+      product: #{raw @product.to_json},
+      discount: #{raw @product_discount},
+      images: #{raw @product.all_images.to_json},
+      sizeChart: #{raw @product.size_chart_data.to_json},
+      siteVersion: #{raw @current_site_version.name.to_json},
+      flags: { afterpay: #{raw Features.active?(:afterpay)}, fastMaking: #{raw !Features.active?(:getitquick_unavailable)} }
+    };
 
 = content_for :inline_javascript do
   = raw init_product_details_page
@@ -49,7 +49,7 @@ form.hide-fully#pdpDataForCheckout
   input id='pdpCartSizeId' type='hidden' value=''
   input id='pdpCartColorId' type='hidden' value='#{raw @product.color_id}'
   input id='pdpCartCustomId' type='hidden' value=''
-  input id='pdpCartMakingId' type='hidden' value='#{ raw @product.making_option_id }'
+  input id='pdpCartMakingId' type='hidden' value=''
   input id='pdpCartVariantId' type='hidden' value=''
   input id='pdpCartDressVariantId' type='hidden' value=''
   input id='pdpCartLength' type='hidden' value=''
@@ -63,70 +63,77 @@ form.hide-fully#pdpDataForWishlist
   .container
     .row.main-content-area
       // to enable affix data-spy='affix' to this container
-      .col-md-3.pdp-panel-side-left.js-panel-side-left-details-trigger
+      .col-md-3
         .panel-side-wrap.js-panel-side-left
-          .text-right.visible-xs.visible-sm
-            a.btn-close.lg.js-panel-side-left-toggle href='javascript:;'
-              .hide-visually Close Menu
-          .panel-side
-            .panel-side-container
+          h1.heading = @product.name
+          - if @product.product_type.present?
+            h4.subheading = @product.product_type
+          .pdp-panel-side-left.js-panel-side-left-details-trigger
+            .text-right.visible-xs.visible-sm
+              a.btn-close.lg.js-panel-side-left-toggle href='javascript:;'
+                .hide-visually Close Menu
+            .panel-side
+              .panel-side-container
 
-              div
-                h1.heading = @product.name
-                - if @product.name.downcase.include?('skirt')
-                  p (Skirt Only)
+                div
+                  h2.hidden-md.hidden-lg = @product.name
+                  - if @product.product_type.present?
+                    h4.hidden-md.hidden-lg = @product.product_type
+                  #accordion role='tablist'
+                    .panel
+                      a href='#collapse-description' data-toggle='collapse' data-parent='#accordion' Description
+                      #collapse-description.collapse.in role='tabpanel'
+                        p = raw @product.description
+                        p SKU: #{@product.sku}
 
-                #accordion role='tablist'
-                  .panel
-                    a href='#collapse-description' data-toggle='collapse' data-parent='#accordion' Description
-                    #collapse-description.collapse.in role='tabpanel'
-                      p = raw @product.description
-                      p SKU: #{@product.sku}
-                  .panel
-                    a href='#collapse-fabric' data-toggle='collapse' data-parent='#accordion' Fabric Information
-                    #collapse-fabric.collapse role='tabpanel'
-                      - if @product.fabric.present?
-                        p = simple_format(@product.fabric)
-                        p Due to dying process, product hue may look slightly different from image.
-                      h3.h5 Garment Care
-                      p Professional dry-clean only. See label for further details.
-                  .panel
-                    a href='#collapse-about' data-toggle='collapse' data-parent='#accordion' About our model
-                    #collapse-about.collapse role='tabpanel'
-                      - if @product.fit.present?
-                        p = simple_format(@product.fit)
-                      - if @product.size.present?
-                        p = simple_format(@product.size)
-                  - if Features.active?(:moodboard)
-                    - if current_spree_user.present?
-                      .panel
-                        a href='#moodboard-options' data-user-present='#{current_spree_user.present?}' data-toggle='collapse' data-parent='#accordion'
-                          'Add to Moodboard
-                        #moodboard-options.moodboard-options.collapse role='tabpanel'
-                          / TODO - Support for dynamic colours.
-                          = react_component('AddProductToAnyMoodboard', moodboards: user_moodboards, product_id: @product.id, color_id: @product.color_id)
-                    - else
-                      // this will redirect not loged-in users to login page
-                      a.js-add-to-moodboard href='javascript:;' data-user-present='#{current_spree_user.present?}' Add to Moodboard
+                        - if Features.active?(:i_equal_change)
+                          p $5 of each sale funds a women's empowerment charity.
 
-                  .panel
-                    .addthis_toolbox
-                      a.share-cta.js-panel-side-share-toggle href='#share-options' Share
+                    .panel
+                      a href='#collapse-fabric' data-toggle='collapse' data-parent='#accordion' Fabric Information
+                      #collapse-fabric.collapse role='tabpanel'
+                        - if @product.fabric.present?
+                          p = simple_format(@product.fabric)
+                          p Due to dying process, product hue may look slightly different from image.
+                        h3.h5 Garment Care
+                        p Professional dry-clean only. See label for further details.
+                    .panel
+                      a href='#collapse-about' data-toggle='collapse' data-parent='#accordion' About our model
+                      #collapse-about.collapse role='tabpanel'
+                        - if @product.fit.present?
+                          p = simple_format(@product.fit)
+                        - if @product.size.present?
+                          p = simple_format(@product.size)
+                    - if Features.active?(:moodboard)
+                      - if current_spree_user.present?
+                        .panel
+                          a href='#moodboard-options' data-user-present='#{current_spree_user.present?}' data-toggle='collapse' data-parent='#accordion'
+                            'Add to Moodboard
+                          #moodboard-options.moodboard-options.collapse role='tabpanel'
+                            / TODO - Support for dynamic colours.
+                            = react_component('AddProductToAnyMoodboard', moodboards: user_moodboards, product_id: @product.id, color_id: @product.color_id)
+                      - else
+                        // this will redirect not loged-in users to login page
+                        a.js-add-to-moodboard href='javascript:;' data-user-present='#{current_spree_user.present?}' Add to Moodboard
 
-                      ul.share-btn-wrap.custom_images
-                        li
-                          a.addthis_button_facebook title='Share to Facebook'
-                            .icon-facebook2
-                        li
-                          a.addthis_button_twitter title='Share to Twitter'
-                            .icon-twitter
-                        li
-                          a.addthis_button_pinterest_share title='Share to Pinterest'
-                            .icon-pinterest
+                    .panel
+                      .addthis_toolbox
+                        a.share-cta.js-panel-side-share-toggle href='#share-options' Share
 
-              ul.btn-wrap
-                li Guaranteed Fit
-                li Easy Returns
+                        ul.share-btn-wrap.custom_images
+                          li
+                            a.addthis_button_facebook title='Share to Facebook'
+                              .icon-facebook2
+                          li
+                            a.addthis_button_twitter title='Share to Twitter'
+                              .icon-twitter
+                          li
+                            a.addthis_button_pinterest_share title='Share to Pinterest'
+                              .icon-pinterest
+
+                ul.btn-wrap
+                  li Guaranteed Fit
+                  li Easy Returns
 
       .col-md-6.panel-media
         #PdpGallery

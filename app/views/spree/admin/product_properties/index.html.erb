@@ -12,7 +12,7 @@
     <li>
       <span id="new_ptype_link">
         <%= link_to t(:select_from_prototype), available_admin_prototypes_url, :remote => true, 'data-update' => 'prototypes', :class => 'button icon-copy' %>
-      </span>  
+      </span>
     </li>
   </ul>
 <% end %>
@@ -20,10 +20,10 @@
 <%= form_for @product, :url => admin_product_url(@product), :method => :put do |f| %>
   <fieldset class="no-border-top">
     <div class="add_product_properties" data-hook="add_product_properties"></div>
-    
+
     <div id="prototypes" data-hook></div>
     <%= image_tag 'spinner.gif', :plugin => 'spree', :style => 'display:none;', :id => 'busy_indicator' %>
-    
+
     <table class="index sortable" data-hook data-sortable-link="<%= update_positions_admin_product_product_properties_url %>">
       <thead>
         <tr data-hook="product_properties_header">
@@ -57,3 +57,112 @@
   });
 <% end -%>
 
+<hr>
+
+<div class="row">
+  <div class="twelve columns">
+    <h2>Product Properties</h2>
+
+    <div class="twelve columns">
+      <p>Product properties allows configuring content and behavior of a product.</p>
+      <ul>
+        <li>
+          Properties flagged with <b>[DEPRECATED]</b> in its value are not used anymore, but are still
+          referenced on some places of the system
+        </li>
+        <li>
+          Properties <b>NOT</b> listed here are <b>NOT</b> used anywhere, and can safely be removed
+        </li>
+      </ul>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>bitly</td>
+        <td><b>[DEPRECATED]</b> Used on old Girlfriend X Fame campaign LPs</td>
+      </tr>
+      <tr>
+        <td>care_instructions</td>
+        <td><b>[DEPRECATED]</b> Used for fabrics care instructions</td>
+      </tr>
+      <tr>
+        <td>color_customization</td>
+        <td>Allows product to have custom colors. Possible values: "yes", "no"</td>
+      </tr>
+      <tr>
+        <td>customised_days_for_making</td>
+        <td>Days for making a dress which has customizations. Will affect delivery dates. Possible values: integers. Default: 10</td>
+      </tr>
+      <tr>
+        <td>designer_note</td>
+        <td><b>[DEPRECATED]</b></td>
+      </tr>
+      <tr>
+        <td>fabric</td>
+        <td>Fabric details displayed at the Product Details Page</td>
+      </tr>
+      <tr>
+        <td>factory_id</td>
+        <td><b>[DEPRECATED]</b> ID of the factory which product was made</td>
+      </tr>
+      <tr>
+        <td>factory_name</td>
+        <td>Name of the product factory</td>
+      </tr>
+      <tr>
+        <td>fit</td>
+        <td>Fit content displayed at the Product Details Page</td>
+      </tr>
+      <tr>
+        <td>preorder</td>
+        <td><b>[DEPRECATED]</b> Displays at the Product Details Page if a product is going to ship within 4 weeks. Possible values: "yes", "no"</td>
+      </tr>
+      <tr>
+        <td>product_coding</td>
+        <td><b>[DEPRECATED] (UNCERTAIN)</b> Numbers varying from "2.0" to "9.0"</td>
+      </tr>
+      <tr>
+        <td>product_details</td>
+        <td>Extra details displayed at the Product Details Page</td>
+      </tr>
+      <tr>
+        <td>product_type</td>
+        <td>Product type to be displayed at the Product Details Page as a subheading, right below the Product name</td>
+      </tr>
+      <tr>
+        <td>render-3d</td>
+        <td>Toggle 3D rendered images from a product. Possible values: "true", "false"</td>
+      </tr>
+      <tr>
+        <td>revenue</td>
+        <td><b>[DEPRECATED]</b> (UNCERTAIN) Numbers varying from "2.0" to "9.0"</td>
+      </tr>
+      <tr>
+        <td>short_description</td>
+        <td><b>[DEPRECATED]</b> Short description given to a product. Also was added to the meta title. Default: ""</td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>Size information displayed at the Product Details Page</td>
+      </tr>
+      <tr>
+        <td>special_description</td>
+        <td><b>[DEPRECATED]</b> Description used on old LPs (Girlfriend X Fame and Plus size)</td>
+      </tr>
+      <tr>
+        <td>standard_days_for_making</td>
+        <td>Days for making a dress with <b>NO</b> customizations. Will affect delivery dates. Possible values: integers. Default: 10</td>
+      </tr>
+      <tr>
+        <td>style_notes</td>
+        <td>Style notes displayed at the Product Details Page</td>
+      </tr>
+    </table>
+  </div>
+</div>

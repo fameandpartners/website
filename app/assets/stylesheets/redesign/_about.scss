@@ -1,0 +1,51 @@
+// About us
+
+.about {
+
+  p {
+    font-size: 2.1rem;
+  }
+
+  @media (min-width: $bootstrap-lg-width) {
+
+    .section-overlap {
+      margin-top: -60px;
+    }
+
+    .intro {
+      margin-top: 1.875em;
+      margin-bottom: 1.875em;
+    }
+
+    .content-copy {
+      padding-top: 100px;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+    text-align: center;
+
+    .intro {
+      padding-top: 50px;
+      padding-bottom: 25px;
+      margin-bottom: 0;
+    }
+
+    .content-copy {
+      padding-top: 30px;
+      margin-bottom: -30px;
+
+      .title {
+        font-size: 3.5rem;
+      }
+
+    }
+
+    .tiles .tile:not(:last-of-type) {
+      padding-bottom: 30px;
+    }
+
+  }
+
+}

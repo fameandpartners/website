@@ -1,5 +1,5 @@
 - if @collection.total_products > @collection.products.size
-  .row.relative.more-products
+  .relative.more-products
     .status.active
       = link_to 'More Dresses', '#', class: 'btn btn-featured', data: { action: 'show-more-collection-products' }
     .status.loading style="display: none;"
@@ -8,5 +8,5 @@
     // nothing
 
 - if !current_page?(dresses_path)
-  .row.relative.more-products
+  .relative.more-products
     = link_to 'More Dresses', dresses_path, class: 'btn btn-featured'

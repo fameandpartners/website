@@ -69,7 +69,7 @@ module Marketing
               available_options: fake_available_options,
               fabric:            'Product Fabric',
               fit:               'Eloise wears a size AU10/US6',
-              size:              'Top length: 40.5cm Skirt Length: 50cm',
+              size:              'Top length: 40.5cm Height & Hemline: 50cm',
               style_notes:       'Product Style Notes',
               size_chart:        '2015',
               fast_making:       true,

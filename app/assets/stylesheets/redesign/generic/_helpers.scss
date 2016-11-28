@@ -106,14 +106,13 @@
   margin-bottom: 0 !important;
 }
 
+// Fix for IE
 .img-responsive {
-  width: 100%; // Fix for IE
+  width: 100%;
 }
 
-.double-line-height:before {
-  line-height: 2rem;
-  content: " ";
-  padding: 1px;
+.font-style-normal {
+  font-style: normal !important;
 }
 
 // Keep .nav-justified items side-by-side (even on mobile, no stacking)
@@ -138,6 +137,10 @@
 
 }
 
+.vertical-align-row {
+  @include column-vertical-align();
+}
+
 // TODO: check if this hack is even needed
 .relative {
   position: relative !important;
@@ -148,6 +151,23 @@
 
   > .equal-width {
     flex-basis: 100%;
+  }
+
+}
+
+.text-transform-none {
+  text-transform: none !important;
+}
+
+.custom-ordered-list {
+
+  .step-counter {
+    counter-increment: step-counter;
+  }
+
+  .step-title::before {
+    content: counter(step-counter)'.';
+    padding-right: 5px;
   }
 
 }
@@ -177,6 +197,7 @@
 
 }
 
+// Remove padding + margin from Boostrap grid according to screen size
 @media (max-width: $bootstrap-md-width - 1px) {
 
   .no-spacing-cols-mobile {
@@ -187,6 +208,15 @@
   .no-spacing-fluid-cols-mobile {
     margin: 0 -30px;
     padding: 0;
+  }
+
+}
+
+@media (min-width: $bootstrap-md-width) {
+
+  .no-spacing-cols-desktop {
+    padding: 0;
+    overflow-x: hidden;
   }
 
 }

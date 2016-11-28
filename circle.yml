@@ -1,23 +1,29 @@
 dependencies:
   pre:
-    # PhantomJS
-    - sudo curl --output /usr/local/bin/phantomjs https://s3.amazonaws.com/circle-downloads/phantomjs-2.1.1
-    # Elasticsearch
-    - wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.5.tar.gz
-    - tar -xvf elasticsearch-1.7.5.tar.gz
-    - elasticsearch-1.7.5/bin/elasticsearch: {background: true}
+    # PhantomJS 2.1.1 by default on CircleCI Ubuntu 14.04, https://circleci.com/docs/build-image-trusty/#phantomjs
+    # Elasticsearch 1.7.2 by default on CircleCI Ubuntu 14.04, https://circleci.com/docs/build-image-trusty/#elasticsearch
     # git-lfs
     - sudo mkdir -p /usr/etc/ && sudo touch /usr/etc/gitconfig
     - curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
     - sudo apt-get install git-lfs=1.4.1
     - ssh git@github.com git-lfs-authenticate fameandpartners/website.git download
     - git lfs pull
+    # npm and bundle JS
+    - npm install -g yarn
+    - yarn install
+    - yarn run prod
+    # Bundler is missing for non-pre-installed Ruby versions https://discuss.circleci.com/t/trusty-container-update-16-02-01/1914/6
+    - type bundle &>/dev/null || gem install bundler
 
 machine:
   ruby:
     version: 2.1.6
   node:
     version: 6.3.0
+  services:
+    - elasticsearch
+    - redis
+    - memcached
 
 general:
   artifacts:
@@ -25,4 +31,4 @@ general:
 
 test:
   override:
-    - bundle exec rspec spec engines
+    - bundle exec rspec spec engines --tag $RSPEC_EXCLUDE_FLAGS -r rspec_junit_formatter --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml

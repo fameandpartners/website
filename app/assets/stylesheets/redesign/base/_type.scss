@@ -38,9 +38,10 @@ h6, .h6 {
 }
 
 p {
-  font-family: $font-family-secondary;
-  font-weight: 500;
-  color: $c-neutral-black;
+  font-family: $font-heading;
+  font-weight: 300;
+  margin-bottom: 30px;
+  line-height: 150%;
 }
 
 sup {
@@ -62,6 +63,29 @@ blockquote {
     margin-left: 2px;
   }
 
+}
+
+.featured-blockquote {
+  margin: 75px 0;
+  font-family: $font-heading;
+  font-size: 2.8rem;
+  font-weight: 300;
+  line-height: 130%;
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+    font-size: 3rem;
+    margin: 40px 0;
+  }
+
+}
+
+// [NOTE] This is just a quick fix for hero copy in /why-us
+// Once the new layout is implemented there, this styling will probably be obsolete and should be removed.
+h1 .sub-heading {
+  font-size: 2rem;
+  display: block;
+  line-height: 100%;
+  margin-top: 10px;
 }
 
 .title-line-on-sides {
@@ -109,6 +133,12 @@ blockquote {
 
 }
 
+.double-line-height:before {
+  line-height: 2rem;
+  content: " ";
+  padding: 1px;
+}
+
 // TODO: redo this legacy title
 .page-title--details {
   padding: 60px 0 55px 0;
@@ -132,4 +162,38 @@ blockquote {
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   padding-left: 3px;
+}
+
+// This is aimed to be used in headings, like in the "About Us" page
+.heading-thin-line-top {
+
+  @media (min-width: $bootstrap-md-width) {
+    padding-top: 30px;
+
+    .title {
+      font-size: 3.5em;
+      margin-bottom: 0;
+      padding-bottom: 10px;
+    }
+
+    .title::before {
+      content: "";
+      padding-top: 50px;
+      border-top: 1px solid $c-neutral-black;
+      width: 90px;
+      display: block;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+    text-align: center;
+
+    .subheading {
+      margin: 30px 0 60px;
+      font-size: 2.5rem;
+    }
+
+  }
+
 }

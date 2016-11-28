@@ -32,7 +32,7 @@
             <% if getSiteVersionPrefix() == '/au': %>
               <span class="link-underline-lighter">Free shipping</span> to Australia within 7 - 10 days
             <% else: %>
-              <span class="link-underline-lighter">Free shipping</span> to USA, Canada and the UK within 7 - 10 days
+              <span class="link-underline-lighter">Free shipping</span> to USA, Canada and the UK within 7 - 10 business days
             <% end %>
           </p>
           <p>
@@ -49,7 +49,16 @@
         <div class="cart-item-image-holder col-md-5">
           <a href="<%= product.path %>">
             <% if product.name != "Gift" : %>
-            <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
+              <img class="img-responsive cart-item-image" src="<%= product.image.large %>" />
+
+                <% if product.making_options.length: %>
+                  <div class="ribbon-wrapper express-making">
+                    <div class="ribbon-txt">
+                      Make it express
+                    </div>
+                  </div>
+                <% end %>
+
             <% end %>
           </a>
         </div>
@@ -71,11 +80,13 @@
             <% end %>
             <dd>Color: <span class="color"><%= product.color.name %></span></dd>
             <dd>Skirt Length: <span><%= product.height %></span></dd>
-            <% for making_option in product.making_options: %>
-            <dd><%= making_option.name %> <%= making_option.display_price %></dd>
-            <% end %>
             <% for customization in product.customizations: %>
             <dd><%= customization.name %> <%= customization.display_price %></dd>
+            <% end %>
+
+            <%# Making options stands for Fast Making %>
+            <% for making_option in product.making_options: %>
+              <dd><%= making_option.name %> <%= making_option.display_price %></dd>
             <% end %>
           </dl>
         </div>

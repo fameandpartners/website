@@ -3,8 +3,11 @@
 .pdp {
   position: relative;
 
-  h1, .h1,
-  h2, .h2 {
+  h1 {
+    margin-bottom: 5px;
+  }
+
+  .subheading {
     margin-top: 0;
   }
 
@@ -97,8 +100,39 @@
     margin-bottom: 70px;
   }
 
-  .price {
-    font-weight: bold;
+  .pdp-side-note {
+    font-weight: 300;
+    font-size: 0.9em;
+  }
+
+  .pdp-side-container-fast-making {
+    margin-bottom: 45px;
+    width: 100%;
+    clear: both;
+
+    label {
+      font-size: 0.8em;
+      font-weight: 500;
+    }
+
+    .c-card-customize {
+
+      &__content__left {
+        width: 85%;
+        text-decoration: none;
+      }
+
+      &__content__right {
+        width: 15%;
+        font-weight: 500;
+      }
+
+    }
+
+  }
+
+  .btn-wrap .price {
+    font-weight: 600;
   }
 
   // START tabs
@@ -328,8 +362,16 @@
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
-
     padding-top: 0;
+
+    h1,
+    .subheading {
+      text-align: center;
+    }
+
+    .panel-media {
+      margin-top: 20px;
+    }
 
     .main-content-area {
       min-height: initial;
@@ -341,6 +383,11 @@
 
     .panel-side-container {
       padding-top: 0;
+
+      h2 {
+        text-align: left;
+        font-size: 3.4rem;
+      }
 
       .c-card-customize {
         margin-bottom: 30px;
@@ -363,12 +410,29 @@
       margin-top: 0;
     }
 
+    .pdp-side-container-fast-making {
+      margin-left: 10px;
+
+      .c-card-customize__content__right {
+        margin-left: -10px;
+      }
+
+    }
+
   }
 
   @media (min-width: $bootstrap-md-width) {
 
-    .panel-side-container {
-      padding-top: 40px;
+    h1 {
+      margin-top: 40px;
+    }
+
+    .pdp-panel-side-right {
+
+      .panel-side-container {
+        padding-top: 40px;
+      }
+
     }
 
     .panel-side-wrap {
@@ -449,6 +513,7 @@
 
 // load all other PDP components here
 @import 'side-panels';
+@import 'fast-making-side-panel';
 @import 'side-menu';
 @import 'size-guide';
 @import 'afterpay-modal';

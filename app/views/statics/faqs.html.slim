@@ -24,6 +24,8 @@
         #panel-popular.tab-pane.active role='tabpanel'
           .faq.faq-wrap
             .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
+              - unless Features.active?(:getitquick_unavailable)
+                = render 'shared/redesign/faqs/what_express_making'
               = render 'shared/redesign/faqs/returns_policy'
               = render 'shared/redesign/faqs/returns_steps'
               = render 'shared/redesign/faqs/exchange_item'
@@ -47,8 +49,6 @@
               - if current_site_version.is_australia? && Features.active?(:afterpay)
                 = render 'shared/redesign/faqs/afterpay'
               = render 'shared/redesign/faqs/free_shipping'
-              - unless Features.active?(:getitquick_unavailable)
-                = render 'shared/redesign/faqs/what_express_making'
         #panel-products.tab-pane role='tabpanel'
           .faq.faq-wrap
             .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
@@ -57,20 +57,20 @@
         #panel-order.tab-pane role='tabpanel'
           .faq.faq-wrap
             .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
-              = render 'shared/redesign/faqs/cancel_order'
               - unless Features.active?(:getitquick_unavailable)
                 = render 'shared/redesign/faqs/what_express_making'
+              = render 'shared/redesign/faqs/cancel_order'
         #panel-delivery.tab-pane role='tabpanel'
           .faq.faq-wrap
             .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'
+              - unless Features.active?(:getitquick_unavailable)
+                = render 'shared/redesign/faqs/what_express_making'
               = render 'shared/redesign/faqs/delivery_how_long'
               = render 'shared/redesign/faqs/delivery_track'
               = render 'shared/redesign/faqs/delivery_international'
               = render 'shared/redesign/faqs/delivery_sign'
               = render 'shared/redesign/faqs/delivery_POBOX'
               = render 'shared/redesign/faqs/free_shipping'
-              - unless Features.active?(:getitquick_unavailable)
-                = render 'shared/redesign/faqs/what_express_making'
         #panel-returns.tab-pane role='tabpanel'
           .faq.faq-wrap
             .panel-group.content-collapse-expand roll='tablist' aria-multiselectable='true'

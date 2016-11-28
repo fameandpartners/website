@@ -210,13 +210,13 @@ z-index levels
 @import 'redesign/components/panels/panels';
 @import 'redesign/components/product/custom_heights_table';
 @import 'redesign/components/search-filters';
-@import 'redesign/components/strips/shop-by-category';
 @import 'redesign/components/panels/content-collapse-expand';
 @import 'redesign/components/related-nav';
 @import 'redesign/components/cart';
 @import 'redesign/components/carousel-dot-nav';
 @import 'redesign/components/cards/cards';
 @import 'redesign/components/legacy/legacy-carousel';
+@import 'redesign/components/overlay';
 
 // Modals
 @import 'redesign/modals/vex';
@@ -241,6 +241,12 @@ z-index levels
 @import 'redesign/pages/shop-social';
 @import 'redesign/pages/homepage';
 @import 'redesign/pages/lookbook-v2';
+@import 'redesign/pages/inside-out';
+@import 'redesign/pages/inside-out-sweepstakes';
+@import 'redesign/pages/slay-it-forward';
+
+// React Components
+@import 'redesign/react_components/_MarketingPage';
 
 //Orders
 @import 'redesign/orders/order-details';

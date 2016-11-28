@@ -12,6 +12,8 @@ module Products
                   :default_standard_days_for_making, :default_customised_days_for_making,
                   :height_customisable, :fast_delivery, :render3d_images
 
+    attr_reader   :product_type
+
     attr_writer :fast_making, :meta_description
 
     def initialize(opts)
@@ -160,6 +162,7 @@ module Products
       return false if fast_making_disabled?
       @fast_making
     end
+    alias_method :fast_making?, :fast_making
 
     def default_color
       if color = available_options.colors.default.first
@@ -213,6 +216,10 @@ module Products
       text_customize_standard                 = Policies::ProjectDeliveryDatePolicy.delivery_date_text(delivery_date_obj_customize_standard)
       text_customize_express                  = Policies::ProjectDeliveryDatePolicy.delivery_date_text(delivery_date_obj_customize_express)
       {text_default: text_default,text_no_customize_standard: text_no_customize_standard, text_no_customize_express: text_no_customize_express, text_customize_standard: text_customize_standard, text_customize_express: text_customize_express}
+    end
+
+    def product_category
+      @product_type.presence || 'Apparel & Accessories > Clothing > Dresses'
     end
 
     private

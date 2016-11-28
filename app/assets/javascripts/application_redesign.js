@@ -100,6 +100,7 @@
 //= require partials/user_order_returner
 
 //= require partials/checkout_page
+//= require partials/extra_fees_alert
 
 // Profile/Account Settings
 //= require partials/account_settings_page

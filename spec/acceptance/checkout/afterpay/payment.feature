@@ -6,8 +6,9 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
     And Data is setup correctly
     And Setup default feature flags
     And The "afterpay" feature is enabled
+    And The "getitquick_unavailable" feature is enabled
 
-  @javascript @vcr @shorter_cassette_names @selenium
+  @javascript @vcr @shorter_cassette_names @selenium @afterpay
   Scenario: Successfully Buy a Dress
     When I am on Connie dress page
     Then I select "Australia" site version
@@ -25,25 +26,17 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | Street Address (line 2) | House Y                          |
       | City                    | Melbourne                        |
       | Phone                   | 2255-4422                        |
-      | Postcode                | 12345                            |
+      | Postcode                | 0872                             |
     And I click on "Continue to payment" button
     And I click on "Afterpay" link
     And I click on "Pay with" link
     Then I fill in Afterpay data within its iframe:
       | email      | firefox_user@fameandpartners.com |
       | password   | firefox1                         |
-      | name       | Roger That                       |
-      | address1   | Street X                         |
-      | suburb     | Suburb                           |
-      | state      | State                            |
-      | postcode   | 1234                             |
-      | cardName   | Roger That                       |
-      | cardNumber | 5520000000000000                 |
-      | expiryDate | 0230                             |
       | cardCVC    | 123                              |
     Then I should see my order placed, with "Connie" dress, "AU 14" size and "319.00" price
 
-  @javascript @vcr @shorter_cassette_names @selenium
+  @javascript @vcr @shorter_cassette_names @selenium @afterpay
   Scenario: Afterpay cannot process user payment, user sees an error
     When I am on Connie dress page
     Then I select "Australia" site version
@@ -61,25 +54,17 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | Street Address (line 2) | House Y                          |
       | City                    | Melbourne                        |
       | Phone                   | 2255-4422                        |
-      | Postcode                | 12345                            |
+      | Postcode                | 0872                             |
     And I click on "Continue to payment" button
     And I click on "Afterpay" link
     And I click on "Pay with" link
     Then I fill in Afterpay data within its iframe:
       | email      | firefox_user@fameandpartners.com |
       | password   | firefox1                         |
-      | name       | Roger That                       |
-      | address1   | Street X                         |
-      | suburb     | Suburb                           |
-      | state      | State                            |
-      | postcode   | 1234                             |
-      | cardName   | Roger That                       |
-      | cardNumber | 5520000000000000                 |
-      | expiryDate | 0230                             |
       | cardCVC    | 123                              |
     Then I should see "Afterpay payment failed, please try again later."
 
-  @javascript @vcr @shorter_cassette_names
+  @javascript @vcr @shorter_cassette_names @afterpay
   Scenario: Afterpay cannot create order
     Given Afterpay API is not available
     When I am on Connie dress page
@@ -98,7 +83,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | Street Address (line 2) | House Y                          |
       | City                    | Melbourne                        |
       | Phone                   | 2255-4422                        |
-      | Postcode                | 12345                            |
+      | Postcode                | 0872                             |
     And I click on "Continue to payment" button
     And I click on "Afterpay" link
     Then I should see "Afterpay is not available at the moment. Please, try another payment method."

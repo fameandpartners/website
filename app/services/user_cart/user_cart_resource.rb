@@ -30,11 +30,13 @@ class  UserCart::UserCartResource
     end
 
     def order_display_shipment_total
-      if order.shipment && order.shipment.display_amount && order.shipment.display_amount.money.cents > 0
+      if order_shipment_amount > 0
         order.shipment.display_amount
-      else
-        nil
       end
+    end
+
+    def order_shipment_amount
+      order.try(:shipment).try(:amount).to_f
     end
 
     def cart_products

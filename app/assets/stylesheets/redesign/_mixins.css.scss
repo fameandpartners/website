@@ -72,15 +72,11 @@
 }
 
 @mixin column-vertical-align($v-align: center) {
+  display: flex;
 
-  @media (min-width: $bootstrap-md-width) {
-      display: flex;
-
-      .vertical-align {
-        display: flex;
-        align-items: $v-align;;
-      }
-
+  .vertical-align {
+    display: flex;
+    align-items: $v-align;
   }
 
 }

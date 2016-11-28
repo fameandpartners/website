@@ -11,13 +11,6 @@ module Afterpay
           fill_in 'password', with: afterpay_fields['password']
           click_button 'Sign in'
 
-          fill_in 'name', with: afterpay_fields['name']
-          fill_in 'address1', with: afterpay_fields['address1']
-          fill_in 'suburb', with: afterpay_fields['suburb']
-          fill_in 'state', with: afterpay_fields['state']
-          fill_in 'postcode', with: afterpay_fields['postcode']
-          click_button 'CONFIRM'
-
           click_button '✓ OK, GOT IT.'
 
           unless has_text?('**0000') # Card comes pre-filled
