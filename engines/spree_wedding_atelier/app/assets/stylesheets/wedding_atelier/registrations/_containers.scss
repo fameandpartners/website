@@ -2,8 +2,8 @@
   @extend .container-fluid;
   background-color: $white-two;
   height: 100vh;
-  margin: 50px 10px 20px;
-  padding: 15px;
+  margin-top: 55px;
+  padding-top: 15px;
 
   h1 {
     @extend .text-center;
@@ -31,10 +31,6 @@
     @extend .hidden-xs;
   }
 
-  .right-side-container h1 {
-    @extend .center-block;
-  }
-
   @media screen and (min-width: $screen-sm-min) {
 
     margin: 0;
@@ -48,7 +44,7 @@
     .left-side {
       background-color: $white-three;
       background-image: image-url('spree_wedding_atelier/marbel.png');
-      padding: 50px 60px;
+      padding: 40px;
     }
 
     .right-side {
@@ -64,12 +60,25 @@
       height: 100%;
       margin-left: auto;
       margin-right: auto;
-      padding: 20px 60px;
+      padding-left: 15%;
+      padding-right: 15%;
     }
 
     .fp-logo-float {
       background: image-url('fp-logo-white.svg') no-repeat center;
       background-size: 70%;
+    }
+  }
+
+  @media screen and (min-width: $screen-lg-min) {
+
+    .left-side {
+      padding: 80px;
+    }
+
+    .left-side-container {
+      padding-left: 20%;
+      padding-right: 20%;
     }
   }
 }

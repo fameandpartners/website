@@ -1,5 +1,5 @@
 .registrations__detals-form
-  h1 Janine, let's start with your size profile
+  h1 <em>#{current_spree_user.first_name}</em>, let's start with your size profile
   .form
     = form_for current_spree_user, as: :spree_user, url: wedding_atelier_signup_path, method: :put do |f|
       = f.fields_for :events, @event do |ff|

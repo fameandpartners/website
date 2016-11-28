@@ -1,5 +1,5 @@
 .registrations__size-form
-  h1 <i>Janine</i>, let's start with your size profile
+  h1 <em>#{current_spree_user.first_name}</em>, let's start with your size profile
   .form
     = form_for current_spree_user, as: :spree_user, url: wedding_atelier_signup_path, method: :put do |f|
       .form-group
@@ -17,4 +17,5 @@
                 = f.label :dress_size, dress_size.presentation, value: dress_size.presentation
           br
         = f.hidden_field :wedding_atelier_signup_step, value: @next_signup_step_value
-      = f.submit 'next', class: 'btn-black btn-block'
+        = link_to 'back', :back, class: 'btn-white'
+        = f.submit 'next', class: 'btn-black'

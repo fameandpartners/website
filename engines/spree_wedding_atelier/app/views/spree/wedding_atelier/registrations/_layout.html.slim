@@ -1,15 +1,15 @@
+.header-mobile.hidden-sm.hidden-md.hidden-lg
+  = link_to '', :back, class: 'arrow'
+  = link_to '', wedding_atelier_root_path, class: 'logo'
 .onboarding-container
   .left-side
     .left-side-container
       .table-cell-middle
         = render partial: nested_partial, locals: {user: user, signup_params: signup_params}
-    .steps.text-center
-      span.pagination.current 01
-      span.separator.current –
-      span.pagination 02
-      span.separator —
-      span.pagination 03
-      span.separator —
-      span.pagination 04
+    ul.steps
+      - (1..4).each do |step|
+          li class=('current' if step_number == step)
+            = step
+
   .right-side
     .fp-logo-float.table-cell-middle
