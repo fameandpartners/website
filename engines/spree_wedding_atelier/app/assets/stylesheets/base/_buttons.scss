@@ -13,7 +13,8 @@
   background-color: $black;
   color: $white-two;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: $white;
   }
 }
