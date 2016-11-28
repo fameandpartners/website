@@ -1,22 +1,43 @@
 $.fn.incrementButton = function(){
+  var $input = $(this);
 
-  if (!this.is('input[type="number"]')) {
+  if (!$input.is('input[type="number"]')) {
     console.warn('[incrementButton] <input> type must equal number');
     return;
   }
 
-  debugger;
-
-  this
+  $input
     .wrap( "<div class='number-field'></div>" )
-    .before('<span class="number-field-button">-</span>')
-    .after('<span class="number-field-button">+</span>')
-    .css('outline', '2px solid red')
-    .css('width', '80%');
+    .before('<span class="number-field-button dec">-</span>')
+    .after('<span class="number-field-button inc">+</span>');
+
+  if (parseInt($input.val(), 10) !== parseInt($input.val(), 10)) {
+    $input.val(0);
+  }
+
+  var $decButton = $input.siblings('.dec');
+  var $incButton = $input.siblings('.inc');
+
+  $decButton.on("click", function() {
+    var oldValue = parseInt($input.val(), 10);
+    var newVal = --oldValue;
+
+    if (oldValue < 0) {
+      return;
+    }
+
+    $input.val(newVal);
+  })
+
+  $incButton.on("click", function() {
+    var oldValue = parseInt($input.val(), 10);
+    var newVal = ++oldValue;
+
+    $input.val(newVal);
+  })
+
 };
 
 $(document).ready(function() {
-
-$('.number_field').incrementButton();
-
+  $('.number_field').incrementButton();
 });
