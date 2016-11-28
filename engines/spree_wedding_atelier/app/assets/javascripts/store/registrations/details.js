@@ -41,5 +41,7 @@ $.fn.incrementButton = function(){
 $(document).ready(function() {
   $('.number_field').incrementButton();
 
-  $('#spree_user_event_role').select2();
+  $('#spree_user_event_role').select2({
+    minimumResultsForSearch: Infinity
+  });
 });
