@@ -17,4 +17,5 @@
                 = f.label :dress_size, dress_size.presentation, value: dress_size.presentation
           br
         = f.hidden_field :wedding_atelier_signup_step, value: 'details'
-      = f.submit 'next', class: 'btn-black btn-block'
+        = link_to 'back', :back, class: 'btn-white'
+        = f.submit 'next', class: 'btn-black'
