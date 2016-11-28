@@ -2,8 +2,8 @@
   @extend .container-fluid;
   background-color: $white-two;
   height: 100vh;
-  margin: 50px 0 20px;
-  padding: 15px;
+  margin-top: 55px;
+  padding-top: 15px;
 
   h1 {
     @extend .text-center;
@@ -29,10 +29,6 @@
   .right-side,
   .steps {
     @extend .hidden-xs;
-  }
-
-  .right-side-container h1 {
-    @extend .center-block;
   }
 
   @media screen and (min-width: $screen-sm-min) {
@@ -64,16 +60,25 @@
       height: 100%;
       margin-left: auto;
       margin-right: auto;
-      padding: 20px 60px;
+      padding-left: 15%;
+      padding-right: 15%;
     }
 
     .fp-logo-float {
       background: image-url('fp-logo-white.svg') no-repeat center;
       background-size: 70%;
     }
+  }
 
-    .table-cell-middle {
-      max-width: 300px;
+  @media screen and (min-width: $screen-lg-min) {
+
+    .left-side {
+      padding: 80px;
+    }
+
+    .left-side-container {
+      padding-left: 20%;
+      padding-right: 20%;
     }
   }
 }
