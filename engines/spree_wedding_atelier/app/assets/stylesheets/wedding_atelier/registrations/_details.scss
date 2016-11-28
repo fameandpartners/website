@@ -1,3 +1,20 @@
-.details {
+.registrations__details-form {
+
+  .number-field {
+    outline:1px dashed blue;
+  }
+
+  .number-field-button {
+    background-color: $white-three;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 44px;
+    height: 37px;
+    cursor: pointer;
+    width: 20%;
+
+    outline: 1px solid green;
+  }
 
 }
