@@ -19,6 +19,10 @@ module Spree
         slug
       end
 
+      def assistant_permitted?(user)
+        assistants.include? user
+      end
+
       private
 
       def sluggify

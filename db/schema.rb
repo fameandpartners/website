@@ -1694,6 +1694,7 @@ ActiveRecord::Schema.define(:version => 20161125233314) do
   create_table "spree_wedding_atelier_invitations", :force => true do |t|
     t.string "user_email"
     t.string "event_slug"
+    t.string "state",      :default => "pending"
   end
 
   create_table "spree_wedding_atelier_users_event_roles", :id => false, :force => true do |t|

@@ -15,7 +15,9 @@ Spree::Core::Engine.routes.draw do
     end
 
     resources :events do
-      resources :invitations, only: :create
+      resources :invitations, only: :create do
+        get '/accept', to: 'invitations#accept'
+      end
     end
 
   end
