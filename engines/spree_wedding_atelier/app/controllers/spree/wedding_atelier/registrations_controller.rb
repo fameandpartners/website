@@ -4,6 +4,7 @@ module Spree
       layout 'wedding_atelier'
       before_filter :check_spree_user_signed_in, except: [:new, :create]
       before_filter :redirect_if_completed, except: :new
+      helper SpreeWeddingAtelier::Engine.helpers
 
       def new
         if current_spree_user
