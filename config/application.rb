@@ -112,7 +112,6 @@ module FameAndPartners
     # Component Style Modal Content
     config.assets.paths << Rails.root.join("app", "assets", 'transient_content')
     config.assets.paths << Rails.root.join("app", "assets", "vendor", "bower_components")
-    config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
     config.cache_store = :dalli_store, ENV['MEMCACHE_SERVERS'], { namespace: "fandp-#{Rails.env}", expires_in: 1.day, compress: true }
 
