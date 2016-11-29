@@ -2,11 +2,11 @@
   h1
     | Welcome to the App. <em>Create</em> your account to get started...
 
-  = link_to fb_auth_path, class: 'btn-facebook-blue btn-block hidden-sm hidden-md hidden-lg' do
+  = link_to fb_auth_path({ return_to: wedding_atelier_events_path}), class: 'btn-facebook-blue btn-block hidden-sm hidden-md hidden-lg' do
      | Sign up with facebook
 
   .text-center.hidden-xs
-    = link_to '', fb_auth_path, class: 'btn-facebook-fancy'
+    = link_to '', fb_auth_path({ return_to: wedding_atelier_events_path}), class: 'btn-facebook-fancy'
 
   p.or - or -
 
