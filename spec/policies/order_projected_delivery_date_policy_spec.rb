@@ -7,13 +7,13 @@ describe Policies::OrderProjectedDeliveryDatePolicy do
 
   context '#delivery_date' do
     it 'calculates 10 business days for standard delivey' do
-      service =  Policies::OrderProjectedDeliveryDatePolicy.new(standard_order)
+      service =  described_class.new(standard_order)
       expected_date = DateTime.parse('Friday April 15 2015')
       expect(service.delivery_date).to eq expected_date
     end
 
     it 'calculates 4 business days for express delivery' do
-      service =  Policies::OrderProjectedDeliveryDatePolicy.new(express_delivery_order)
+      service =  described_class.new(express_delivery_order)
       expected_date = DateTime.parse('Friday April 7 2015')
       expect(service.delivery_date).to eq expected_date
     end
