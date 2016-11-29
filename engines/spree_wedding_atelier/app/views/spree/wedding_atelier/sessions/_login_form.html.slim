@@ -17,8 +17,7 @@
   = link_to fb_auth_path({ return_to: wedding_atelier_events_path}), class: 'btn-facebook-blue btn-block hidden-sm hidden-md hidden-lg' do
      | Sign in with Facebook
 
-  .text-center.hidden-xs
-    = link_to '', fb_auth_path({ return_to: wedding_atelier_events_path}), class: 'btn-facebook-fancy'
+  = fancy_facebook_button
 
   p.already-member
     | Don't have an account?
