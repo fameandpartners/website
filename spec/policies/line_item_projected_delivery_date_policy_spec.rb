@@ -1,24 +1,28 @@
 require 'spec_helper'
 
-describe Policies::LineItemProjectedDeliveryDatePolicy do
-  let(:completed_at)  { DateTime.parse('Wed April 1 2015') }
-  let(:order)         { double(Spree::Order, :completed_at => completed_at) }
+describe Policies::LineItemProjectedDeliveryDatePolicy, type: :policy do
+  let(:completed_at) { DateTime.parse('Wed April 1 2015') }
+  let(:order) { double(Spree::Order, completed_at: completed_at) }
+
+  subject(:policy) { described_class.new(order.completed_at, line_item.fast_making?) }
 
   context '#delivery_date' do
-    it 'calculates 10 business days for standard delivey' do
-      line_item = double(Spree::LineItem, :fast_making? => false)
-      service =  described_class.new(order.completed_at, line_item.fast_making?)
+    context 'line item is for standard delivery' do
+      let(:line_item) { double(Spree::LineItem, fast_making?: false) }
 
-      expected_date = DateTime.parse('Friday April 15 2015')
-      expect(service.delivery_date).to eq expected_date
+      it 'calculates 10 business days' do
+        expected_date = DateTime.parse('Friday April 15 2015')
+        expect(policy.delivery_date).to eq expected_date
+      end
     end
 
-    it 'calculates 4 business days for express delivery' do
-      line_item = double(Spree::LineItem, :fast_making? => true)
-      service =  described_class.new(order.completed_at, line_item.fast_making?)
+    context 'line item is for express delivery' do
+      let(:line_item) { double(Spree::LineItem, fast_making?: true) }
 
-      expected_date = DateTime.parse('Friday April 7 2015')
-      expect(service.delivery_date).to eq expected_date
+      it 'calculates 4 business days' do
+        expected_date = DateTime.parse('Friday April 7 2015')
+        expect(policy.delivery_date).to eq expected_date
+      end
     end
   end
 end
