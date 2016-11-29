@@ -40,10 +40,6 @@ module AdminUi
         color_value_id = render3d_params.fetch(:color_value_id, nil)
         customisation_value_id = render3d_params.fetch(:customisation_value_id, 0)
 
-        if Render3d::Image.exists?(product_id: product_id, customisation_value_id: customisation_value_id, color_value_id: color_value_id)
-          redirect_to new_customisation_render3d_image_path, flash: { error: 'Render3d::Image already exist for such values' }
-        end
-
         @render3d_image = \
           Render3d::Image.new.tap do |img|
             img.product_id = product_id
