@@ -1,0 +1,12 @@
+.registrations_invite-form {
+
+  .add-another {
+    @extend .text-center;
+    margin: 10px;
+  }
+
+  .btn-white,
+  .btn-black {
+    margin: 10px 0;
+  }
+}
