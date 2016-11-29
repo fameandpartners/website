@@ -50,4 +50,10 @@ $(document).ready(function() {
   $('#spree_user_event_role').select2({
     minimumResultsForSearch: Infinity
   });
+
+  $('.input-group.date').datepicker({
+    format: "mm/dd/yyyy",
+    todayBtn: "linked",
+    autoclose: true
+  });
 });
