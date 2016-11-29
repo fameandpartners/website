@@ -2,6 +2,7 @@ module Spree
   module WeddingAtelier
     class SessionsController < Spree::UserSessionsController
       layout 'wedding_atelier'
+      helper SpreeWeddingAtelier::Engine.helpers
 
       def new
         @user = Spree::User.new
