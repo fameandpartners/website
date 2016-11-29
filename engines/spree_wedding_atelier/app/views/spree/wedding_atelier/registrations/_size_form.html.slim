@@ -9,7 +9,7 @@
         = f.label :dress_size, "What's your dress size? &nbsp;".html_safe
         = link_to 'view size guide', '#', class: 'guide-link'
 
-        .sizes-container
+        .dress-sizes
           ul
             - @dress_sizes.each do |dress_size|
               li
