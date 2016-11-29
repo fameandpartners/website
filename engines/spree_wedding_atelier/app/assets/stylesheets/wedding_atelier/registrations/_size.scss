@@ -42,7 +42,10 @@
         background-color: $white-three;
         z-index: 9;
         line-height: 1.5em;
-        padding: 5px;
+        padding: 9px 12px;
+        margin: 6px;
+        font-weight: 400;
+        min-width: 40px;
       }
 
       &:hover label {
