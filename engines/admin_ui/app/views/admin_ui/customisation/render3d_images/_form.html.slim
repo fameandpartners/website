@@ -6,108 +6,76 @@
       .ibox-content
         .form-group
           label.col-sm-2.control-label Product
-          .col-sm-10 = f.hidden_field :product_id, class: 'remote-select', id: :product, data: { minimum_input_length: 1 }
+          .col-sm-10 = f.collection_select :product_id, products, :id, :name_with_sku, { include_blank: true }, { class: 'remote-select', id: 'product' }
         .form-group
           label.col-sm-2.control-label Color Value
-          .col-sm-10 = f.hidden_field :color_value_id, class: 'remote-select', id: :color_value
+          .col-sm-10 = f.collection_select :color_value_id, [], :id, :name, { include_blank: true }, { class: 'remote-select', id: 'color_value' }
         .form-group
           label.col-sm-2.control-label Customisation Value
-          .col-sm-10 = f.hidden_field :customisation_value_id, class: 'remote-select', id: :customisation_value
+          .col-sm-10 = f.collection_select :customisation_value_id, [], :id, :name, { include_blank: true }, { class: 'remote-select', id: 'customisation_value' }
         .form-group
           label.col-sm-2.control-label Attachment
           .col-sm-10 = f.file_field :attachment
+        - unless render3d_image.new_record?
+          .form-group
+            label.col-sm-2.control-label Preview
+            .col-sm-10 = image_tag render3d_image.attachment.url
         .form-group
           .col-sm-2
           .col-sm-10
-            = f.submit 'Create', class: 'btn btn-primary'
+            = f.submit (render3d_image.new_record? ? 'Create' : 'Update'), class: 'btn btn-primary'
 
 javascript:
   (function($) { 'use strict';
     var initialAttrs = #{raw initial_attrs.to_json};
+    var optionValuesPath = '#{option_values_customisation_render3d_images_path('')}';
 
-    var processResults = function(data, page) {
-      return {
-        results: data.collection
-      };
-    };
+    var makeSelectChosen = function($select, data, isDisabled, initialValue) {
+      if (data) {
+        $select
+          .chosen('destroy')
+          .html($('<option>'));
 
-    var remoteSelectAttrs = function() {
-      var path = '#{collection_customisation_render3d_images_path(:json)}';
-
-      var minimumInputLength = function() { 
-        return $(this).data('minimum-input-length') || 0;
-      }.call(this);
-
-      return {
-        width: '100%',
-        allowClear: true,
-        placeholder: 'type to search...',
-        minimumInputLength: minimumInputLength,
-        ajax: {
-          url: path,
-          dataType: 'json',
-          delay: 250,
-          cache: true,
-          results: processResults,
-          data: function(term, page) {
-            var $select = $(this);
-
-            return {
-              q: term,
-              type: $select.attr('id'),
-              product_id: $select.data('product_id'),
-              page: page
-            };
-          }.bind(this)
-        }
-      };
-    };
-
-    var enableCustomDropdowns = function() {
-      $('#color_value,#customisation_value')
-        .prop('disabled', false)
-        .data('product_id', $('#product').val())
-        .each(function() {
-          $(this).select2(remoteSelectAttrs.call(this));
-        });
-    };
-
-    var disableCustomDropdowns = function() {
-      $('#color_value,#customisation_value')
-        .prop('disabled', true)
-        .data('product_id', '')
-        .val('')
-        .each(function() {
-          $(this).select2(remoteSelectAttrs.call(this));
-        });
-    };
-
-    $(document).ready(function() {
-      $('.remote-select#product')
-        .each(function() {
-          $(this).select2(remoteSelectAttrs.call(this));
-        })
-        .on('change', function(e) {
-          if (e.val) {
-            enableCustomDropdowns();
-          } else {
-            disableCustomDropdowns();
-          }
-        });
-
-
-      if ($.isEmptyObject(initialAttrs)) {
-        disableCustomDropdowns();
-      } else {
-        enableCustomDropdowns();
-
-        $('.select2-container.remote-select').each(function() {
-          var $select = $(this),
-              id = $select.attr('id').replace(/s2id_/, ''),
-              data = initialAttrs[id];
-
-          $select.select2('data', data);
+        $.each(data, function(i, option) {
+          $select.append($('<option/>', {
+            value: option.id,
+            text:  option.text
+          }));
         });
       }
-    });
+
+      if (initialValue != undefined) {
+        $select.val(initialValue.id);
+      }
+
+      $select
+        .prop('disabled', !!isDisabled)
+        .chosen({ width: '100%' });
+    };
+
+    var populateChosenSelect = function(i, select) {
+      var $select = $(select),
+          id = $select.attr('id'),
+          productId = $('#product').val(),
+          initialValue = this[id];
+
+      $.get(`${optionValuesPath}${productId}.json`)
+        .then(function(data) {
+          makeSelectChosen($select, data[id], false, initialValue);
+        });
+    };
+
+    makeSelectChosen($('.remote-select#product'));
+
+    $('.remote-select#product')
+      .on('change', function() {
+        $('#color_value,#customisation_value').each(populateChosenSelect);
+      });
+
+
+    if ($.isEmptyObject(initialAttrs)) {
+      makeSelectChosen($('#color_value,#customisation_value'), null, true);
+    } else {
+      $('#color_value,#customisation_value').each(populateChosenSelect.bind(initialAttrs));
+    }
   })(jQuery);

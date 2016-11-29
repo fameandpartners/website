@@ -99,46 +99,31 @@ module AdminUi
         redirect_to customisation_render3d_images_path, flash: { success: 'Render3d Image was successfully removed' }
       end
 
-      def collection
-        limit = 30
-        type = params.fetch(:type)
-        term = params.fetch(:q).downcase
+      def option_values
+        colors = Spree::OptionValue.joins(:product_color_values).colors
+          .where('product_color_values.product_id = ?', params.fetch(:product_id))
+          .map do |ov|
+            { id: ov.id, text: ov.name }
+          end
 
-        collection = \
-          case type
-            when 'product'
-              Spree::Product.joins(:master)
-                .where('LOWER(spree_products.name) LIKE :term OR LOWER(spree_variants.sku) LIKE :term', term: "%#{term}%")
-                .limit(limit)
-                .map do |p|
-                  { id: p.id, text: p.name_with_sku }
-                end
-            when 'color_value'
-              Spree::OptionValue.joins(:product_color_values).colors
-                .where('product_color_values.product_id = ?', params.fetch(:product_id))
-                .where('LOWER(name) LIKE ?', "%#{term}%")
-                .limit(limit)
-                .map do |ov|
-                  { id: ov.id, text: ov.name }
-                end
-            when 'customisation_value'
-              CustomisationValue
-                .where(product_id: params.fetch(:product_id))
-                .where('LOWER(name) LIKE ?', "%#{term}%")
-                .limit(limit)
-                .map do |cv|
-                  { id: cv.id, text: cv.name }
-                end
-            else
-              []
+        customisations = CustomisationValue
+          .where(product_id: params.fetch(:product_id))
+          .map do |cv|
+            { id: cv.id, text: cv.name }
           end
 
         respond_to do |format|
           format.json { render json: {
-            collection: collection,
-            type: type
+            color_value: colors,
+            customisation_value: customisations
           } }
         end
+      end
+
+      helper_method :products
+
+      private def products
+        Spree::Product.active
       end
 
     end

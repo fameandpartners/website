@@ -71,7 +71,9 @@ AdminUi::Engine.routes.draw do
   namespace :customisation do
     resources :variants
     resources :render3d_images do
-      get :collection, on: :collection
+      collection do
+        get 'option_values/:product_id' => 'render3d_images#option_values', as: 'option_values'
+      end
     end
 
     resources :product_colors do

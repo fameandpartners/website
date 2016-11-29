@@ -29,6 +29,9 @@ class Render3dImagesGrid
   column :product_sku, label: 'Product SKU' do |image|
     image.product.sku
   end
+  column :preview, html: true do |image|
+    image_tag image.attachment.url
+  end
   column :remove?, html: true do |image|
     button_to('Remove', admin_ui.customisation_render3d_image_path(image), action: 'destroy', method: 'delete', class: 'btn btn-danger', data: { confirm: 'Are you sure?' })
   end
