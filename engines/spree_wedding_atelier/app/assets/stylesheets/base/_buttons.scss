@@ -13,6 +13,7 @@
   @extend .btn;
   background-color: $black;
   color: $white-two;
+  font-weight: 700;
 
   &:hover,
   &:focus {
@@ -24,6 +25,7 @@
   @extend .btn;
   background-color: $white-three;
   border-color: $white-three;
+  font-weight: 700;
 }
 
 .btn-transparent {
