@@ -13,6 +13,7 @@
   @extend .btn;
   background-color: $black;
   color: $white-two;
+  font-weight: 700;
 
   &:hover,
   &:focus {
@@ -24,6 +25,7 @@
   @extend .btn;
   background-color: $white-three;
   border-color: $white-three;
+  font-weight: 700;
 }
 
 .btn-transparent {
@@ -48,8 +50,26 @@
 
 .btn-facebook-fancy {
   @extend .btn;
-  background: no-repeat center image-url('facebook-button.png');
+  @extend .btn-block;
+  background: no-repeat center image-url('spree_wedding_atelier/marbel.png');
   background-color: transparent;
   border: 0;
   min-width: 210px;
+
+  .pre-text {
+    font-family: $primary-font;
+    font-style: italic;
+    text-decoration: underline;
+    text-transform: none;
+  }
+
+  img {
+    max-height: 16px;
+  }
+
+  .facebook-text {
+    @extend .text-uppercase;
+    font-family: $secondary-font;
+    font-weight: 700;
+  }
 }
