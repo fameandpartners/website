@@ -9,12 +9,14 @@
         = f.label :dress_size, "What's your dress size? &nbsp;".html_safe
         = link_to 'view size guide', '#', class: 'guide-link'
 
-        .dress-sizes
-          ul
-            - @dress_sizes.each do |dress_size|
-              li
-                = f.radio_button(:dress_size, "#{@site_version}/#{dress_size}")
-                = f.label :dress_size, dress_size, value: "#{@site_version}/#{dress_size}"
+        / .dress-sizes
+        /   ul
+        /     - @dress_sizes.each do |dress_size|
+        /       li
+        /         = f.radio_button(:dress_size, "#{@site_version}/#{dress_size}")
+        /         = f.label :dress_size, dress_size, value: "#{@site_version}/#{dress_size}"
+
+        = dress_size_grid f, @dress_sizes
           br
         = f.hidden_field :wedding_atelier_signup_step, value: @next_signup_step_value
         = link_to 'back', :back, class: 'btn-white'

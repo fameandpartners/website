@@ -18,6 +18,24 @@ module Spree
         end
       end
 
+      def dress_size_grid(form, dress_sizes)
+        content_tag :div, class: 'dress-sizes' do
+          content_tag :ul do
+            items = []
+            dress_sizes.each do |size|
+              item = content_tag :li do
+                [
+                  form.radio_button(:dress_size, "#{@site_version}/#{size}"),
+                  form.label(:dress_size, size, value: "#{@site_version}/#{size}")
+                ].join("\n").html_safe
+              end
+              items.push item
+            end
+            items.join("\n").html_safe
+          end
+        end
+      end
+
     end
   end
 end
