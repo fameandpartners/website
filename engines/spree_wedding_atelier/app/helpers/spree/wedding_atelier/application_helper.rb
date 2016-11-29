@@ -8,7 +8,7 @@ module Spree
 
       def fancy_facebook_button
         content_tag :div, class: ['text-center','hidden-xs'] do
-          link_to fb_auth_path, class: 'btn-facebook-fancy' do
+          link_to fb_auth_path({ return_to: wedding_atelier_events_path}), class: 'btn-facebook-fancy' do
             [
               image_tag('facebook-letter-logo.svg'),
               content_tag(:span, 'Sign up with ', class: 'pre-text'),
