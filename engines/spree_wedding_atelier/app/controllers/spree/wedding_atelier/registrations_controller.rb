@@ -67,9 +67,12 @@ module Spree
       end
 
       def size
-        @dress_sizes = Spree::OptionType.find_by_name('dress-size').option_values
         @next_signup_step_value = session[:accepted_invitation] ? 'completed' : 'details'
-
+        @site_version = env['site_version_code'] || 'us'
+        @dress_sizes = {
+          us: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22],
+          au: [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
+        }[@site_version.to_sym]
         @heights = [
             "5'19 / 177cm ",
             "5'19 / 180cm ",
