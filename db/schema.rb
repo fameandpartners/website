@@ -1642,6 +1642,7 @@ ActiveRecord::Schema.define(:version => 20161125233314) do
     t.integer  "active_moodboard_id"
     t.string   "height"
     t.string   "dress_size"
+    t.string   "trend_updates"
     t.string   "wedding_atelier_signup_step",                             :default => "size"
   end
 

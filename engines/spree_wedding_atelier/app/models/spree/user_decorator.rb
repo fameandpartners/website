@@ -5,7 +5,8 @@ Spree::User.class_eval do
                   :dress_size,
                   :wedding_atelier_signup_step,
                   :events_attributes,
-                  :event_role
+                  :event_role,
+                  :trend_updates
 
   has_many :event_assistants, class_name: 'Spree::WeddingAtelier::EventAssistant'
   has_many :events, through: :event_assistants, source: :event
