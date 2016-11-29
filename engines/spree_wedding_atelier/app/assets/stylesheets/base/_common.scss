@@ -26,6 +26,7 @@ a {
   }
 
   li {
+    @extend .text-uppercase;
     display: inline-block;
     margin: 4px;
 
