@@ -5,12 +5,13 @@ module WeddingAtelier
       controller_name == 'registrations'
     end
 
-    def fancy_facebook_button
+    def fancy_facebook_button(pre_text = 'Log in')
       content_tag :div, class: ['text-center','hidden-xs'] do
         link_to fb_auth_path({ return_to: wedding_atelier.events_path}), class: 'btn-facebook-fancy' do
           [
             image_tag('facebook-letter-logo.svg'),
-            content_tag(:span, 'Sign up with ', class: 'pre-text'),
+            content_tag(:span, pre_text, class: 'pre-text'),
+            ' ',
             content_tag(:span, 'Facebook', class: 'facebook-text')
           ].join("\n").html_safe
         end
