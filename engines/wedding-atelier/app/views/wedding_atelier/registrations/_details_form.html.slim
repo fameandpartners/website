@@ -15,6 +15,13 @@
           = ff.number_field :number_of_assistants, { min: 0, class: 'form-control number_field' }
         .form-group
           = ff.label :date, "What is the date of the wedding?"
-          = ff.text_field :date, { class: 'form-control', type: 'date' }
+          .input-group.date
+            = ff.text_field :date, { class: 'form-control', placeholder: 'mm/dd/yyyy' }
+            | <span class="input-group-addon">
+            | <i class="calendar-icon"></i>
+            | </span>
           = ff.hidden_field :event_type, value: 'wedding'
-        = submit_tag 'next', class: 'btn-black btn-block hidden-xs'
+        .button-area
+          = link_to 'back', :back, class: 'btn-white'
+        .button-area
+          = f.submit 'next', class: 'btn-black'

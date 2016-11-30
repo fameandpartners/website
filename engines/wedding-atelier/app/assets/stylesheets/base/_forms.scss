@@ -15,6 +15,8 @@ label {
   letter-spacing: 1px;
 }
 
+/* [Checkbox]
+-------------------------------------------------------*/
 .checkbox {
 
   label {
@@ -33,12 +35,39 @@ label {
       height: 24px;
       margin: -2px 2px 0 0;
       vertical-align: middle;
-      background: image-url('wedding-atelier/sprite_check.png') -61px -9px no-repeat;
+      background: image-url('spree_wedding_atelier/sprite_check.png') -61px -9px no-repeat;
       cursor: pointer;
     }
 
     &:checked + label span {
-      background: image-url('wedding-atelier/sprite_check.png') -12px -9px no-repeat;
+      background: image-url('spree_wedding_atelier/sprite_check.png') -12px -9px no-repeat;
     }
+  }
+}
+
+/* [Number field with side buttons]
+-------------------------------------------------------*/
+.number-field {
+  display: table;
+  max-width: 150px;
+
+  .number-field {
+    @extend .text-center;
+  }
+
+  .number-field-button {
+    background-color: $white-three;
+    cursor: pointer;
+    display: table-cell;
+    height: 34px;
+    text-align: center;
+    user-select: none;
+    vertical-align: middle;
+    width: 20%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
   }
 }
