@@ -3,6 +3,7 @@ module WeddingAtelier
   class EventsController < ApplicationController
 
     def index
+      @events = current_spree_user.events
     end
 
     def show
