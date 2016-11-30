@@ -1,0 +1,24 @@
+.registrations__details-form {
+
+  .number-field {
+    display: table;
+  }
+
+  .number-field-button {
+    display: table-cell;
+    background-color: $white-three;
+    vertical-align: middle;
+    text-align: center;
+    width: 44px;
+    height: 37px;
+    cursor: pointer;
+    width: 20%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+}

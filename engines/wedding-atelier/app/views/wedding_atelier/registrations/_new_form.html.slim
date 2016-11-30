@@ -1,0 +1,39 @@
+
+.registrations__new-form
+  h1
+    | Welcome to the App. <em>Create</em> your account to get started...
+
+  = link_to fb_auth_path({ return_to: wedding_atelier.events_path}), class: 'btn-facebook-blue btn-block hidden-sm hidden-md hidden-lg' do
+     | Sign up with facebook
+
+  = fancy_facebook_button
+
+  p.or - or -
+
+  = form_for @user, as: :spree_user, url: wedding_atelier.signup_path(@user, @signup_params) do |f|
+
+    .row
+      .col-xs-12.col-sm-6
+        = f.label :first_name
+        = f.text_field :first_name, class: 'form-control'
+      .col-xs-12.col-sm-6
+        = f.label :last_name
+        = f.text_field :last_name, class: 'form-control'
+
+    = f.label :email, 'Email Address'
+    = f.text_field :email, class: 'form-control', disabled: @user.email.present?
+    = f.label :password, 'Password'
+    = f.password_field :password, class: 'form-control'
+
+    .checkbox
+      = f.fields_for :user_profile, @user.build_user_profile do |ff|
+        = ff.check_box :trend_updates
+        = ff.label :trend_updates
+          | <span></span> Sign up to get the latest trend updates
+
+    = f.submit 'Create Account', class: 'btn-black hidden-sm hidden-md hidden-lg'
+    = f.submit 'Next', class: 'btn-black hidden-xs'
+
+    p.already-member
+      | Already a member?
+      = link_to 'login here', wedding_atelier.sign_in_path
