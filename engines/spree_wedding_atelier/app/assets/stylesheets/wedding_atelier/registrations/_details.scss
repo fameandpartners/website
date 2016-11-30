@@ -4,11 +4,22 @@
     width: 100%;
   }
 
+  #spree_user_events_attributes_0_date {
+    border-right: 0;
+  }
+
+  .input-group-addon {
+    border-left: 0;
+    background-color: transparent;
+    border-radius: 0;
+  }
+
   .calendar-icon {
-    border: 1px dashed black;
-    margin: 1px;
-    width: 30px;
-    height: 30px;
+    width: 19px;
+    height: 19px;
+    display: block;
+    background-image: image-url('spree_wedding_atelier/1476418446-calendar.png');
+    background-repeat: no-repeat;
   }
 
 }
