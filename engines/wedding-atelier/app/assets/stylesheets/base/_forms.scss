@@ -35,12 +35,12 @@ label {
       height: 24px;
       margin: -2px 2px 0 0;
       vertical-align: middle;
-      background: image-url('spree_wedding_atelier/sprite_check.png') -61px -9px no-repeat;
+      background: image-url('wedding-atelier/sprite_check.png') -61px -9px no-repeat;
       cursor: pointer;
     }
 
     &:checked + label span {
-      background: image-url('spree_wedding_atelier/sprite_check.png') -12px -9px no-repeat;
+      background: image-url('wedding-atelier/sprite_check.png') -12px -9px no-repeat;
     }
   }
 }
