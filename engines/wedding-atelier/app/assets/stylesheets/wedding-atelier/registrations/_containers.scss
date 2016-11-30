@@ -1,0 +1,84 @@
+.onboarding-container {
+  @extend .container-fluid;
+  background-color: $white-two;
+  height: 100vh;
+  margin-top: 55px;
+  padding-top: 15px;
+
+  h1 {
+    @extend .text-center;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: .98;
+  }
+
+  .left-side {
+    @extend .col-xs-12;
+    @extend .col-sm-12;
+    @extend .col-md-6;
+  }
+
+  .right-side {
+    @extend .col-sm-12;
+    @extend .col-md-6;
+  }
+
+  .right-side,
+  .steps {
+    @extend .hidden-xs;
+  }
+
+  @media screen and (min-width: $screen-sm-min) {
+
+    margin: 0;
+    padding: 0;
+
+    .left-side,
+    .right-side {
+      height: 100%;
+    }
+
+    .left-side {
+      background-color: $white-three;
+      background-image: image-url('wedding-atelier/marbel.png');
+      padding: 40px;
+    }
+
+    .right-side {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-image: image-url('wedding-atelier/bitmap.png');
+      display: table;
+    }
+
+    .left-side-container {
+      background-color: $white-two;
+      display: table;
+      height: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 15%;
+      padding-right: 15%;
+    }
+
+    .fp-logo-float {
+      background: image-url('fp-logo-white.svg') no-repeat center;
+      background-size: 70%;
+    }
+  }
+
+  @media screen and (min-width: $screen-lg-min) {
+
+    .left-side {
+      padding: 80px;
+    }
+
+    .left-side-container {
+      padding-left: 20%;
+      padding-right: 20%;
+    }
+  }
+}
