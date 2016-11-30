@@ -76,7 +76,7 @@
 
     a {
       color:  $c-neutral-10;
-      text-decoration: underline;
+      @extend .link-underline;
     }
 
   }
@@ -106,7 +106,7 @@
     }
 
     .weekly-winners {
-      text-decoration: underline;
+      @extend .link-underline;
     }
 
   }
