@@ -21,5 +21,7 @@
             | <i class="calendar-icon"></i>
             | </span>
           = ff.hidden_field :event_type, value: 'wedding'
-        = link_to 'back', :back, class: 'btn-white'
-        = f.submit 'next', class: 'btn-black'
+        .button-area
+          = link_to 'back', :back, class: 'btn-white'
+        .button-area
+          = f.submit 'next', class: 'btn-black'
