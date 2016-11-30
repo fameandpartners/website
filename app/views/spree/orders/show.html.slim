@@ -37,7 +37,10 @@ section.order-details
                               li
                                 | Skirt Length: <span class="value">#{line_item.height}</span>
                               li
-                                | Custom color: <span class="value">#{line_item.colour_name}</span>
+                                - if line_item.personalization.basic_color?
+                                  | Color: <span class="value">#{line_item.colour_name}</span>
+                                - else
+                                  | Customized color: <span class="value">#{line_item.colour_name}</span>
                               - if line_item.customisation_text.present?
                                 li
                                   | Customized cut: <span class="value">#{line_item.customisation_text}</span>
