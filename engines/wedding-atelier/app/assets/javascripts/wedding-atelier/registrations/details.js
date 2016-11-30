@@ -28,7 +28,7 @@ $.fn.incrementButton = function(){
     }
 
     $input.val(newVal);
-  })
+  });
 
   $incButton.on("click", function() {
     var oldValue = parseInt($input.val(), 10);
@@ -40,12 +40,12 @@ $.fn.incrementButton = function(){
     }
 
     $input.val(newVal);
-  })
+  });
 
 };
 
 $(document).ready(function() {
-  $('.number-field').incrementButton();
+  $('.js-number-field').incrementButton();
 
   $('#spree_user_event_role').select2({
     minimumResultsForSearch: Infinity
