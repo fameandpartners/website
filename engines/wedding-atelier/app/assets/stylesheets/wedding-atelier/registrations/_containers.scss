@@ -5,6 +5,17 @@
   margin-top: 55px;
   padding-top: 15px;
 
+  .button-area {
+    @extend .col-xs-12;
+    @extend .col-sm-6;
+    margin-top: 10px;
+  }
+
+  .btn-white,
+  .btn-black {
+    @extend .btn-block;
+  }
+
   h1 {
     @extend .text-center;
     margin-left: 20px;
@@ -36,6 +47,10 @@
     margin: 0;
     padding: 0;
 
+    .btn-white + .btn-black {
+      margin-top: 10px;
+    }
+
     .left-side,
     .right-side {
       height: 100%;
@@ -43,14 +58,14 @@
 
     .left-side {
       background-color: $white-three;
-      background-image: image-url('wedding-atelier/marbel.png');
+      background-image: image-url('spree_wedding_atelier/marbel.png');
       padding: 40px;
     }
 
     .right-side {
       background-size: cover;
       background-repeat: no-repeat;
-      background-image: image-url('wedding-atelier/bitmap.png');
+      background-image: image-url('spree_wedding_atelier/bitmap.png');
       display: table;
     }
 

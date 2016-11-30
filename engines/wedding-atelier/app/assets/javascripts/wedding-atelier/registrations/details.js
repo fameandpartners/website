@@ -45,9 +45,15 @@ $.fn.incrementButton = function(){
 };
 
 $(document).ready(function() {
-  $('.number_field').incrementButton();
+  $('.number-field').incrementButton();
 
   $('#spree_user_event_role').select2({
     minimumResultsForSearch: Infinity
+  });
+
+  $('.input-group.date').datepicker({
+    format: "mm/dd/yyyy",
+    todayBtn: "linked",
+    autoclose: true
   });
 });
