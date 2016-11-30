@@ -28,6 +28,14 @@
   }
 }
 
+@mixin block-center($margin-y: 0) {
+  display: block;
+  margin-bottom: $margin-y;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: $margin-y;
+}
+
 .table-cell-middle {
   display: table-cell;
   vertical-align: middle;
