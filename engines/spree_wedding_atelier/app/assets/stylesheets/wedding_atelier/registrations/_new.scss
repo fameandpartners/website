@@ -15,12 +15,6 @@
     @extend .text-center;
     color: $boulder;
     font-size: .8rem;
-  .email-signup {
-    width: 340px;
-  }
-
-  input[type="checkbox"] {
-    display: none;
   }
 
   @media screen and (min-width: $screen-sm-min) {
