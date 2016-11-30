@@ -68,14 +68,8 @@ module AdminUi
 
         @render3d_image = Render3d::Image.find(params[:id])
 
-        params[:render3d_image].each do |key, value|
-          if @render3d_image.respond_to?(key)
-            @render3d_image.send(key, value)
-          end
-        end
-
         message = \
-          if @render3d_image.save
+          if @render3d_image.update_attributes(params[:render3d_image], without_protection: true)
             { success: <<-EOS }
               Render3d Image was successfully updated with:
                 [*] product:\t\t<name (sku): #{@render3d_image.product.name_with_sku}>
