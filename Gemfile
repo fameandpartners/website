@@ -50,9 +50,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-fileupload-rails', '0.4.1'
 gem 'sass-rails',   '~> 3.2.3'
-gem 'compass-rails', '~> 2.0.5'
 gem 'react-rails', '~> 1.6'
-gem 'droidcss', '~> 2.0.4'
 gem 'asset_sync', '~> 1.1.0'
 
 # Data
@@ -111,7 +109,6 @@ gem 'ruby-progressbar', :require => false
 gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
 
 group :assets do
-  gem 'bourbon'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'coffee-script-source', '~> 1.8.0'
   gem 'uglifier', '1.3.0'
