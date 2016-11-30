@@ -5,6 +5,17 @@
   margin-top: 55px;
   padding-top: 15px;
 
+  .button-area {
+    @extend .col-xs-12;
+    @extend .col-sm-6;
+    margin-top: 10px;
+  }
+
+  .btn-white,
+  .btn-black {
+    @extend .btn-block;
+  }
+
   h1 {
     @extend .text-center;
     margin-left: 20px;
@@ -35,6 +46,10 @@
 
     margin: 0;
     padding: 0;
+
+    .btn-white + .btn-black {
+      margin-top: 10px;
+    }
 
     .left-side,
     .right-side {

@@ -8,5 +8,7 @@
           = text_field_tag 'email_addresses[]', '', class: 'form-control'
     .add-another.js-add-another
       a(href="#") Add another
-    = link_to 'do this later', wedding_atelier_root_path, class: 'btn-white col-xs-12 col-sm-6'
-    = submit_tag 'next', class: 'btn-black col-xs-12 col-sm-6'
+    .button-area
+      = link_to 'do this later', wedding_atelier_root_path, class: 'btn-white'
+    .button-area
+      = submit_tag 'next', class: 'btn-black'
