@@ -22,23 +22,29 @@ After you have a valid Sentinel token, create a new copy of the `OpsCare.yml.exa
 
 ## Staging
 
-Run `sentinel deploy staging`
+PRs can be merged on staging branch and deployed to Staging environemtn prior to being merged on master. This is helpful to speed up the approvals/QA process.
 
-### Deploying a specific branch
+### Example flow:
 
-To deploy a specific branch, use the `--branch-name` option: `sentinel deploy staging --branch-name feat/my-awesome-branch`
+- Working on my branch `feat/super-branch`
+- `git checkout staging`
+- `git merge feat/super-branch`
+- `git push origin staging`
 
-### Faster deploys on staging
-
-On staging environment, you don't need to follow all steps which `Sentinel` tool introduces to the deployment process (real zero downtime deployments, snapshots, etc.).
-
-To achieve that:
+**Doing faster deployments:**
 
 1. SSH into the staging machine: `sentinel ssh staging --role web`
-2. Go to the app folder: `cdapp`
-3. Use the deploy command with the desired branch name: `deploy --branch=feature/super-new-one`
+1. Go to the app folder: `cdapp`
+1. Use the deploy command: `deploy --branch=staging`
 
-This will execute the deployment process straight into the staging machine, only copying new code from the repository and executing it against the existent isntance.
+**Doing slower deployments (zero downtime, snapshots etc.):**
+
+Run `sentinel deploy staging --branch-name staging`
+
+*_Notes_*
+
+- `staging` branch *will* become polluted. At the end of sprints, we'll simply revert it and force push on it to current stable/master or whatever. It'll act as an *ephemeral* branch.
+- Git history will become uglier. It's never pretty with more than 2 people working on the same codebase. Diffs matter, visual history, not so much.
 
 ## Production
 
