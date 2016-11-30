@@ -13,6 +13,8 @@ WeddingAtelier::Engine.routes.draw do
     post '/sign_in', to: 'sessions#create'
   end
 
+  resources :dresses
+
   resources :events do
     resources :invitations, only: :create do
       get '/accept', to: 'invitations#accept'
