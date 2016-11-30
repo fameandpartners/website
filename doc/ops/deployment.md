@@ -9,6 +9,7 @@
 
 # Process
 
+- `staging` branch represents code that's still pending approvals/QA
 - `master` branch represents merged and accepted pull requests
 - `stable` branch represents code that's ready to go to production
 - Git tags are used to tag code releases to **production**
@@ -22,24 +23,24 @@ After you have a valid Sentinel token, create a new copy of the `OpsCare.yml.exa
 
 ## Staging
 
-PRs can be merged on staging branch and deployed to Staging environemtn prior to being merged on master. This is helpful to speed up the approvals/QA process.
+PRs can be merged on staging branch and deployed to Staging enviroment prior to being merged on master. This is helpful to speed up the approvals/QA process.
 
 ### Example flow:
 
-- Working on my branch `feat/super-branch`
-- `git checkout staging`
-- `git merge feat/super-branch`
-- `git push origin staging`
+> - Working on my branch `feat/super-branch`
+> - `git checkout staging`
+> - `git merge feat/super-branch`
+> - `git push origin staging`
 
 **Doing faster deployments:**
 
-1. SSH into the staging machine: `sentinel ssh staging --role web`
-1. Go to the app folder: `cdapp`
-1. Use the deploy command: `deploy --branch=staging`
+> - SSH into the staging machine: `sentinel ssh staging --role web`
+> - Go to the app folder: `cdapp`
+> - Use the deploy command: `deploy --branch=staging`
 
 **Doing slower deployments (zero downtime, snapshots etc.):**
 
-Run `sentinel deploy staging --branch-name staging`
+> Just run `sentinel deploy staging --branch-name staging`
 
 *_Notes_*
 
