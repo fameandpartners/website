@@ -1,12 +1,12 @@
 .registrations_invite-form
   h1 <em>#{current_spree_user.first_name}</em>, invite the bridal party
   = form_tag wedding_atelier_event_invitations_path(@event), class: 'invitation-form', method: :post do
-    .form-group.invitations
+    .form-group.invitations.js-invitations
       - @event.number_of_assistants.times do
-        .invitation
+        .invitation.js-invitation
           = label_tag 'email', "email address"
           = text_field_tag 'email_addresses[]', '', class: 'form-control'
-      .add-another
-        a(href="#") Add another
+    .add-another.js-add-another
+      a(href="#") Add another
     = link_to 'do this later', wedding_atelier_root_path, class: 'btn-white col-xs-12 col-sm-6'
     = submit_tag 'next', class: 'btn-black col-xs-12 col-sm-6'

@@ -11,6 +11,12 @@
   }
 
   .invitations {
-    min-height: 250px;
+    min-height: 100px;
+    max-height: 250px;
+    overflow-y: scroll;
+  }
+
+  .invitation :not(first) {
+    margin-top: 5px;
   }
 }
