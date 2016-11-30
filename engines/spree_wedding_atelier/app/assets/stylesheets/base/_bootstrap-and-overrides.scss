@@ -44,3 +44,22 @@
   }
 
 }
+
+/* [Datepicker Overrides]
+-------------------------------------------------------*/
+.datepicker table tr td.active:active,
+.datepicker table tr td.active.highlighted:active,
+.datepicker table tr td.active.active,
+.datepicker table tr td.active.highlighted.active {
+    color: $black;
+    background-color: $white-three;
+    border-color: $black;
+}
+
+.datepicker table thead tr:nth-child(2) {
+  background-color: $white-three;
+}
+.datepicker table thead tr td,
+.datepicker table thead tr th {
+  border-radius: 0;
+}
