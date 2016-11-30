@@ -17,4 +17,10 @@
     font-size: .8rem;
   }
 
+  @media screen and (min-width: $screen-sm-min) {
+    .btn-black {
+      @include block-center(10px);
+    }
+  }
+
 }
