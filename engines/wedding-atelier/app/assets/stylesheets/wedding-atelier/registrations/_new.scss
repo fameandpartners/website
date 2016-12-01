@@ -18,6 +18,12 @@
     @extend .text-center;
     color: $boulder;
     font-size: .8rem;
+    @include screen-sm {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+    }
   }
 
   @media screen and (min-width: $screen-sm-min) {
