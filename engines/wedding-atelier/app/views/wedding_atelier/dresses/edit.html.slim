@@ -1,0 +1,24 @@
+.customization-experience
+  .customization-experience-mobile.hidden-sm.hidden-md.hidden-lg
+    h1 You are designing #{"the Wonderland"}
+    .dress-preview
+    button.btn-transparent.btn-block
+      | customize dress
+    button.btn-transparent.btn-block
+      | select size
+    .customization-panel
+    .results
+      .view-customizations
+        span.left-results = link_to 'View customizations', '#'
+        span.right-results $16
+      .sub-total
+        span.left-results Sub-total
+        span.right-results $320
+    p.estimated-delivery
+        | Estimated delivery 7 days
+    .actions
+      button.btn-gray save to board
+      button.btn-black add to cart
+
+  .customization-experience-desktop.hidden-xs
+    h1 Desktop
