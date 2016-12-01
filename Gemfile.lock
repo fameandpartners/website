@@ -865,7 +865,7 @@ DEPENDENCIES
   device_detector (~> 0.8.1)
   eco
   event_sourced_record
-  execjs (~> 2.4.0)
+  execjs (~> 2)
   factory_girl_rails (= 4.2.1)
   fame_favicon!
   fog
