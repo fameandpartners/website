@@ -12,16 +12,28 @@
   bottom: 0;
   display: flex;
   left: 0;
-  height: 55px;
+  height: 61px;
   padding: 8px;
   position: absolute;
   width: 100%;
+}
+
+.favorites {
+
+  img {
+    width: 20px;
+    margin-right: 10px;
+  }
 }
 
 .results {
 
   span {
     display: inline-block;
+  }
+
+  .sub-total {
+    font-weight: 700px;
   }
 
   .left-result {
@@ -35,4 +47,10 @@
     width: 30%;
   }
 
+}
+
+.actions {
+  .btn-transparent {
+    margin-right: 10px;
+  }
 }

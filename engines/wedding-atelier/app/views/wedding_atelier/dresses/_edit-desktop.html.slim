@@ -50,7 +50,9 @@
 
 .footer
   .favorites.col-sm-6
-    | :heart:
+    = image_tag asset_path('wedding-atelier/heart.svg')
+    span
+      | (3)
   .results.col-sm-3
     .view-customizations
       span.left-result = link_to 'View customizations', '#'
@@ -59,5 +61,5 @@
       span.left-result Sub-Total
       span.right-result $320
   .actions.col-sm-3
-    button.btn-transparent save this dress
-    button.btn-black add to cart
+    .btn-transparent save this dress
+    .btn-black add to cart
