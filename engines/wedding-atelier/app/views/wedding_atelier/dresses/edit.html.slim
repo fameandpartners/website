@@ -2,15 +2,19 @@
   .customization-experience-mobile.hidden-sm.hidden-md.hidden-lg
     h1 You are designing #{"the Wonderland"}
     .dress-preview
+    button.btn-transparent.btn-block
+      | customize dress
+    button.btn-transparent.btn-block
+      | select size
     .customization-panel
     .results
       .view-customizations
-        = link_to 'View customizations', '#'
-        span $16
+        span.left-results = link_to 'View customizations', '#'
+        span.right-results $16
       .sub-total
-        span Sub-total
-        span $320
-      p.estimated-delivery
+        span.left-results Sub-total
+        span.right-results $320
+    p.estimated-delivery
         | Estimated delivery 7 days
     .actions
       button.btn-gray save to board
