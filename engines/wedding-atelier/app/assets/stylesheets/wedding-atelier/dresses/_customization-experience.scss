@@ -1,12 +1,11 @@
 .customization-experience {
   @extend .container-fluid;
   @extend .text-center;
-  height: 100%;
-  margin-top: 50px;
+  height: 100vh;
+  padding-top: 50px;
 
-  &-mobile {
-    margin-bottom: 34px;
-    padding-bottom: 20px;
+  &--mobile {
+    padding-bottom: 54px;
 
     h1 {
       font-size: 1.5rem;
@@ -75,9 +74,7 @@
     }
   }
 
-  @media screen and (min-width: $screen-sm-min) {
-    &--desktop {
-      @import 'desktop/customization-experience-desktop';
-    }
+  &--desktop {
+    @import 'desktop/customization-experience-desktop';
   }
 }
