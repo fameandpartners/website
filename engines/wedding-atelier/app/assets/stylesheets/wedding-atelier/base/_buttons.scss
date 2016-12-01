@@ -63,6 +63,7 @@
 .btn-transparent {
   @extend .btn;
   background-color: transparent;
+  border: 2px solid;
   font-weight: 700;
 
   &:hover,
