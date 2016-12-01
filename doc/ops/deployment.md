@@ -9,6 +9,7 @@
 
 # Process
 
+- `staging` branch represents code that's still pending approvals/QA
 - `master` branch represents merged and accepted pull requests
 - `stable` branch represents code that's ready to go to production
 - Git tags are used to tag code releases to **production**
@@ -22,23 +23,29 @@ After you have a valid Sentinel token, create a new copy of the `OpsCare.yml.exa
 
 ## Staging
 
-Run `sentinel deploy staging`
+PRs can be merged on staging branch and deployed to Staging enviroment prior to being merged on master. This is helpful to speed up the approvals/QA process.
 
-### Deploying a specific branch
+### Example flow:
 
-To deploy a specific branch, use the `--branch-name` option: `sentinel deploy staging --branch-name feat/my-awesome-branch`
+> - Working on my branch `feat/super-branch`
+> - `git checkout staging`
+> - `git merge feat/super-branch`
+> - `git push origin staging`
 
-### Faster deploys on staging
+**Doing faster deployments:**
 
-On staging environment, you don't need to follow all steps which `Sentinel` tool introduces to the deployment process (real zero downtime deployments, snapshots, etc.).
+> - SSH into the staging machine: `sentinel ssh staging --role web`
+> - Go to the app folder: `cdapp`
+> - Use the deploy command: `deploy --branch=staging`
 
-To achieve that:
+**Doing slower deployments (zero downtime, snapshots etc.):**
 
-1. SSH into the staging machine: `sentinel ssh staging --role web`
-2. Go to the app folder: `cdapp`
-3. Use the deploy command with the desired branch name: `deploy --branch=feature/super-new-one`
+> Just run `sentinel deploy staging --branch-name staging`
 
-This will execute the deployment process straight into the staging machine, only copying new code from the repository and executing it against the existent isntance.
+*_Notes_*
+
+- `staging` branch *will* become polluted. At the end of sprints, we'll simply revert it and force push on it to current stable/master or whatever. It'll act as an *ephemeral* branch.
+- Git history will become uglier. It's never pretty with more than 2 people working on the same codebase. Diffs matter, visual history, not so much.
 
 ## Production
 
