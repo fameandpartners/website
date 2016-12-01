@@ -6,12 +6,33 @@
 
 }
 
-.results {
+.footer {
   background-image: image-url('wedding-atelier/marbel.png');
+  align-items: center;
   bottom: 0;
+  display: flex;
   left: 0;
   height: 55px;
   padding: 8px;
   position: absolute;
   width: 100%;
+}
+
+.results {
+
+  span {
+    display: inline-block;
+  }
+
+  .left-result {
+    text-align: left;
+    padding-left: 50px;
+    width: 70%;
+  }
+
+  .right-result {
+    text-align: right;
+    width: 30%;
+  }
+
 }

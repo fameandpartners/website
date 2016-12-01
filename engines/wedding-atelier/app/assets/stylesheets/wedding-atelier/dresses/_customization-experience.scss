@@ -1,8 +1,7 @@
 .customization-experience {
-  @extend .container-fluid;
-  @extend .text-center;
   height: 100vh;
   padding-top: 50px;
+  text-align: center;
 
   &--mobile {
     padding-bottom: 54px;
@@ -37,12 +36,12 @@
         width: 50%;
       }
 
-      .left-results {
+      .left-result {
         padding-left: 25px;
         text-align: left;
       }
 
-      .right-results {
+      .right-result {
         padding-right: 30px;
         text-align: right;
       }

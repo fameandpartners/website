@@ -48,16 +48,16 @@
 .dress-preview.col-sm-6
   .controls
 
-.results
+.footer
   .favorites.col-sm-6
-    | Heart
-  .totals.col-sm-3.text-right
+    | :heart:
+  .results.col-sm-3
     .view-customizations
-      span = link_to 'View customizations', '#'
-      span $16
+      span.left-result = link_to 'View customizations', '#'
+      span.right-result $16
     .sub-total
-      span Sub-Total
-      span $320
+      span.left-result Sub-Total
+      span.right-result $320
   .actions.col-sm-3
     button.btn-transparent save this dress
     button.btn-black add to cart
