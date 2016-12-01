@@ -1,0 +1,44 @@
+.customization-experience {
+  @extend .container-fluid;
+  @extend .text-center;
+  height: 100%;
+  padding-top: 50px;
+
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  .btn {
+    font-weight: 400; //TODO: Check if this is module-specific
+  }
+
+  .dress-preview {
+    background-color: $pinkish-grey;
+    min-height: 350px;
+    height: 55vh;
+  }
+
+  .view-customizations {
+    a {
+      text-transform: none;
+    }
+  }
+
+  .actions {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+
+    .btn-black,
+    .btn-white {
+      width: 50%;
+    }
+  }
+
+  @media screen and (min-width: $screen-sm-min) {
+    &--desktop {
+      @import 'desktop/customization-experience-desktop';
+    }
+  }
+}

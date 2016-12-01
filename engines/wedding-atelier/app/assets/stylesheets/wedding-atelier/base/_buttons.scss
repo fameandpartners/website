@@ -22,6 +22,12 @@
   }
 }
 
+.btn-gray {
+  @extend .btn-black;
+  background-color: $pumice;
+  border-color: $pumice;
+}
+
 .btn-white {
   @extend .btn;
   background-color: $white-three;

@@ -1,1 +1,20 @@
-p Edit dress
+.customization-experience
+  .customization-experience-mobile.hidden-sm.hidden-md.hidden-lg
+    h1 You are designing #{"the Wonderland"}
+    .dress-preview
+    .customization-panel
+    .results
+      .view-customizations
+        = link_to 'View customizations', '#'
+        span $16
+      .sub-total
+        span Sub-total
+        span $320
+      p.estimated-delivery
+        | Estimated delivery 7 days
+    .actions
+      button.btn-gray save to board
+      button.btn-black add to cart
+
+  .customization-experience-desktop.hidden-xs
+    h1 Desktop
