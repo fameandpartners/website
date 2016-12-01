@@ -1,1 +1,15 @@
-= link_to 'Sign out', spree.destroy_user_session_path if current_spree_user
+.shared__header
+  .left-nav.col-md-4.text-left
+    ul.links-list
+      li
+        = profile_image_url
+      li
+        = @event.name
+      li BRIDE
+      li
+        = link_to 'MY ACCOUNT'
+
+  .center-nav.col-md-4.center-block
+    span class="logo"
+
+  .right-nav.col-md-4

@@ -1,0 +1,60 @@
+.shared__header {
+  background-image: image-url('wedding-atelier/marbel.png');
+  height: 68px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  .left-nav {
+
+    ul {
+      padding: 13px;
+    }
+
+    li {
+      display: inline-block;
+      margin-left: 5px;
+      border-right: 1px solid $black;
+      line-height: 8px;
+      padding-right: 8px;
+    }
+
+    li:last-child,
+    li:first-child {
+      border-right: 0;
+    }
+
+    img.profile-image {
+      height: 30px;
+      width: 30px;
+    }
+
+  }
+
+  .center-nav {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span.logo {
+      display: inline-block;
+      background-image: image-url('wedding-atelier/logo-black.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 300px;
+      height: 28px;
+    }
+  }
+
+}
+
