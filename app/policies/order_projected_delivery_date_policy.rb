@@ -4,8 +4,8 @@ module Policies
 
   class OrderProjectedDeliveryDatePolicy
 
-    DELIVERY_DAYS = 7
-    FAST_DELIVERY_DAYS = 2
+    DELIVERY_DAYS = 10
+    FAST_DELIVERY_DAYS = 4
 
     attr_reader :order
 

@@ -28,6 +28,9 @@ machine:
 general:
   artifacts:
     - "tmp/capybara"
+  branches:
+    ignore:
+      - staging
 
 test:
   override:
