@@ -1,0 +1,30 @@
+// FILTER: PRICE
+- selectPriceAll = params[:price_min] || params[:price_max] ? false : true
+
+.panel.content-collapse-expand.panel-default
+  .panel-heading#heading-collapse-price role='tab'
+    a.panel-title.collapsed role='button' data-toggle='collapse' data-target='#collapse-price' aria-expanded='false' aria-controls='collapse-price'
+      | PRICE
+      span.btn-open-close
+  .panel-collapse.collapse#collapse-price role='tabpanel' aria-labelledby='heading-collapse-price'
+    .panel-body
+      .custom-form-element.filter-radio-option.selector-price name='price'
+        label
+          = check_box_tag 'price', 'all', selectPriceAll ? true : false, 'data-all' => 'true', class: 'js-filter-all'
+          span.icon
+          span All prices
+      .custom-form-element.filter-radio-option.selector-price name='price'
+        label
+          = check_box_tag 'price', '0', params[:price_max] == '199' ? true : false, 'data-all' => 'false', 'data-pricemin' => '0', 'data-pricemax' => '199'
+          span.icon
+          span $0 - $199
+      .custom-form-element.filter-radio-option.selector-price name='price'
+        label
+          = check_box_tag 'price', '200', params[:price_max] == '299' ? true : false, 'data-all' => 'false', 'data-pricemin' => '200', 'data-pricemax' => '299'
+          span.icon
+          span $200 - $299
+      .custom-form-element.filter-radio-option.selector-price name='price'
+        label
+          = check_box_tag 'price', '300', params[:price_max] == '399' ? true : false, 'data-all' => 'false', 'data-pricemin' => '300', 'data-pricemax' => '399'
+          span.icon
+          span $300 - $399
