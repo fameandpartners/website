@@ -7,7 +7,7 @@
       .ibox-tools
         i.fa.fa-chevron-up
   .ibox-content
-    = datagrid_form_for @collection, :method => :get, url: variants_path
+    = datagrid_form_for @collection, :method => :get, url: customisation_variants_path
   .ibox-footer
     = link_to "Download CSV", url_for(format: 'csv')
 

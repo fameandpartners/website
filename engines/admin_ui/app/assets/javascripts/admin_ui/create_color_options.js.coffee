@@ -1,5 +1,5 @@
 $ ->
-  urlTemplate = '/fame_admin/product_colors/colors_options/:product_id'
+  urlTemplate = '/fame_admin/customisation/product_colors/colors_options/:product_id'
   productSelect = $('#product_color_value_product_id')
   colorSelect = $('#product_color_value_option_value_id')
 
