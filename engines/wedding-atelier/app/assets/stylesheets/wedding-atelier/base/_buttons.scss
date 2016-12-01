@@ -38,6 +38,8 @@
 .btn-transparent {
   @extend .btn-white;
   background-color: transparent;
+  border: 2px solid;
+  font-weight: 700;
 }
 
 .btn-facebook-blue {

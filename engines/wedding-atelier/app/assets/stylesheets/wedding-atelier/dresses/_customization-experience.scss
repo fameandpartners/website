@@ -2,14 +2,22 @@
   @extend .container-fluid;
   @extend .text-center;
   height: 100%;
-  padding-top: 50px;
+  margin-bottom: 34px;
+  margin-top: 50px;
 
   h1 {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 
-  .btn {
-    font-weight: 400; //TODO: Check if this is module-specific
+  .btn-black,
+  .btn-gray {
+    font-weight: 400; //TODO: Check if this is module-specific or it's wrongfully set for all the buttons
+  }
+
+  .btn-transparent {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    letter-spacing: 1.5px;
   }
 
   .dress-preview {
@@ -18,10 +26,35 @@
     height: 55vh;
   }
 
+  .results {
+
+    span {
+      display: inline-block;
+      width: 50%;
+    }
+
+    .left-results {
+      padding-left: 25px;
+      text-align: left;
+    }
+
+    .right-results {
+      padding-right: 30px;
+      text-align: right;
+    }
+
+  }
+
   .view-customizations {
     a {
+      font-size: .85rem;
       text-transform: none;
     }
+  }
+
+  .estimated-delivery {
+    font-family: $primary-font;
+    font-style: italic;
   }
 
   .actions {
