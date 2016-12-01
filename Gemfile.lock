@@ -353,7 +353,7 @@ GEM
       activemodel
       activerecord-immutable (~> 0.0.3)
     excon (0.45.3)
-    execjs (2.7.0)
+    execjs (2.4.0)
     extlib (0.9.16)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
@@ -859,7 +859,7 @@ DEPENDENCIES
   device_detector (~> 0.8.1)
   eco
   event_sourced_record
-  execjs (~> 2)
+  execjs (~> 2.4.0)
   factory_girl_rails (= 4.2.1)
   fame_favicon!
   fog
