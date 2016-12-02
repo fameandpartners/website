@@ -3,43 +3,55 @@
 - selectColors = @filter.colors
 - selectColorsAll = params[:colour] ? false : true
 
-.panel.content-collapse-expand.panel-default
-  .panel-heading#heading-collapse-color role='tab'
-    a.panel-title.collapsed role='button' data-toggle='collapse' data-target='#collapse-color' aria-expanded='false' aria-controls='collapse-color'
-      | COLORS
-      span.btn-open-close
-  .panel-collapse.collapse#collapse-color role='tabpanel' aria-labelledby='heading-collapse-color'
-    .panel-body
-      .color-checkboxes
-        .custom-form-element.filter-option.selector-color
-          label
-            = check_box_tag 'View all colors', 'all', selectColorsAll ? true : false, 'data-all' => 'true', class: 'js-filter-all'
-            span.icon
-            span View all colors
-        - for color in colors
-          .custom-form-element.filter-option.selector-color name='#{color.name}'
-            label class=('swatch-color-' + color.name)
-              - preSelected = false
-              - if params[:colour]
-                - for param in params[:colour]
-                  - if param == color.name
-                    - preSelected = true
-              = check_box_tag color.name, color.name, preSelected, 'data-all' => 'false'
-              span.icon
-              span = color.name
-        .custom-form-element.filter-option.selector-color name='Cheetah'
-          label class='swatch-color-Cheetah'
-            = check_box_tag 'Cheetah', 'Cheetah', params[:colour] == 'Cheetah' ? true : false, 'data-all' => 'false'
-            span.icon
-            span cheetah
-        .custom-form-element.filter-option.selector-color name='Rosebud'
-          label class='swatch-color-Rosebud'
-            = check_box_tag 'Rosebud', 'Rosebud', params[:colour] == 'Rosebud' ? true : false, 'data-all' => 'false'
-            span.icon
-            span rosebud
-      .form-group.select-color
-        label for='other-colors' Other colors
-        select.form-control#other-colors
-          option name='none' value='none' selected='selected' Please select one
-          - for color in selectColors
-            option name='#{color.name}' value='#{color.name}' #{color.name}
+.ExpandablePanel__item.ExpandablePanel__item--is-active
+
+  .ExpandablePanel__name
+    | Color
+
+  .ExpandablePanel__selectedOptions
+    span.ExpandablePanel__selectedItem
+      | Black
+    span.ExpandablePanel__selectedItem
+      | White
+    span.ExpandablePanel__selectedItem
+      | Red
+    span.ExpandablePanel__selectedItem
+      | Silver
+    span.ExpandablePanel__selectedItem
+      | Grey
+    span.ExpandablePanel__selectedItem
+      | Green
+
+  .ExpandablePanel__listOptions.ExpandablePanel__listOptions--twoColumns
+    - for color in colors
+      - preSelected = false
+      = check_box_tag "color-#{color.name}", color.name, preSelected, 'data-all' => 'false'
+      label.ExpandablePanel__option name='#{color.name}' for="color-#{color.name}"
+        - if params[:colour]
+          - for param in params[:colour]
+            - if param == color.name
+              - preSelected = true
+        span.ExpandablePanel__optionCheck--rounded.ExpandablePanel__optionCheck--tick class=('color-' + color.name)
+        span.ExpandablePanel__optionName = color.name
+
+    = check_box_tag 'color-Cheetah', 'Cheetah', params[:colour] == 'Cheetah' ? true : false, 'data-all' => 'false'
+    label.ExpandablePanel__option name='Cheetah' for="color-Cheetah"
+      span.ExpandablePanel__optionCheck--rounded.ExpandablePanel__optionCheck--tick class="color-cheetah"
+      span.ExpandablePanel__optionName Cheetah
+
+    = check_box_tag 'color-Rosebud', 'Rosebud', params[:colour] == 'Rosebud' ? true : false, 'data-all' => 'false'
+    label.ExpandablePanel__option name='Rosebud' for="color-Rosebud"
+      span.ExpandablePanel__optionCheck--rounded.ExpandablePanel__optionCheck--tick class="color-rosebud"
+      span.ExpandablePanel__optionName Rosebud
+
+    .ExpandablePanel__moreOptions
+      a.js-trigger-see-more href="javascript:;"
+        | More Colors & Patterns
+
+  .ExpandablePanel__moreOptionsList
+    .ExpandablePanel__listOptions.ExpandablePanel__listOptions--twoColumns
+      - for color in selectColors
+        label.ExpandablePanel__option name='#{color.name}' for="color-#{color.name}"
+          span.ExpandablePanel__optionCheck--rounded.ExpandablePanel__optionCheck--tick class=('color-' + color.name)
+          span.ExpandablePanel__optionName = color.name
+
