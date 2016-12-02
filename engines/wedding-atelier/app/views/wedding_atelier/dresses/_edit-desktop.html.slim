@@ -1,49 +1,50 @@
 .customization-panel.col-sm-6
-  .title.row
-    .col-sm-6.text-left
-      h1
-        em Customize
-        |  it how you want.
-    .col-sm-6.start-over
-      = link_to 'Start Over', '#', class: 'btn-transparent btn-italic'
-  .customizations
-    ul
-      li.row
-        .col-sm-6
-          span Image |
-          span silhouettes
-        .col-sm-6
-          span Strapless Column
-      li.row
-        .col-sm-6
-          span Image |
-          span fabric + colour
-        .col-sm-6
-          span Heavy Georgette | Navy + $12
-      li.row
-        .col-sm-6
-          span Image |
-          span length
-        .col-sm-6
-          span
-      li.row
-        .col-sm-6
-          span Image |
-          span style
-        .col-sm-6
-          span
-      li.row
-        .col-sm-6
-          span Image |
-          span fit
-        .col-sm-6
-          span
-      li.row
-        .col-sm-6
-          span Image |
-          span size
-        .col-sm-6
-          span
+  .customization-panel-container
+    .title.row
+      .col-sm-6.text-left
+        h1
+          em Customize
+          |  it how you want.
+      .col-sm-6.start-over
+        = link_to 'Start Over', '#', class: 'btn-transparent btn-italic'
+    .customizations
+      ul
+        li.row
+          .col-sm-6
+            span.icon-silhouettes
+            span silhouettes
+          .col-sm-6
+            span Strapless Column
+        li.row
+          .col-sm-6
+            span.icon-fabric-color
+            span fabric + colour
+          .col-sm-6
+            span Heavy Georgette | Navy + $12
+        li.row
+          .col-sm-6
+            span.icon-length
+            span length
+          .col-sm-6
+            span
+        li.row
+          .col-sm-6
+            span.icon-style
+            span style
+          .col-sm-6
+            span
+        li.row
+          .col-sm-6
+            span.icon-fit
+            span fit
+          .col-sm-6
+            span
+        li.row
+          .col-sm-6
+            span.icon-size
+            span size
+          .col-sm-6
+            span
 
 .dress-preview.col-sm-6
   .controls
@@ -60,6 +61,6 @@
     .sub-total
       span.left-result Sub-Total
       span.right-result $320
-  .actions.col-sm-3
+  .actions.col-sm-3.row
     .btn-transparent save this dress
     .btn-black add to cart

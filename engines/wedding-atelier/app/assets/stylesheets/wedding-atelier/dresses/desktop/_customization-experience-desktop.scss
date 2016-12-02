@@ -1,16 +1,19 @@
 .customization-panel {
-  padding-left: 79px;
-  padding-right: 66px;
   padding-top: 45px;
+
+  &-container {
+    max-width: 575px;
+    margin: 0 auto;
+  }
 }
 
 .title {
   align-items: center;
   display: flex;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
 
   h1 {
-    width: 240px;
+    max-width: 240px;
   }
 
   .start-over {
@@ -23,9 +26,12 @@
 
   ul {
     list-style: none;
+    padding-left: 0;
   }
 
   li {
+    height: 48px;
+    margin: 25px auto;
 
     >:first-child {
       text-align: left;
@@ -90,4 +96,22 @@
   .btn-transparent {
     margin-right: 10px;
   }
+}
+
+@media screen and (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+
+  .results {
+
+    .left-result {
+      text-align: left;
+      padding-left: 0;
+    }
+  }
+
+  .actions {
+    .btn-transparent {
+      margin-right: 10px;
+    }
+  }
+
 }
