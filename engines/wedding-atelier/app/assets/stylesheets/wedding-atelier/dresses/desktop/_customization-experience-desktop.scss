@@ -1,5 +1,40 @@
 .customization-panel {
+  padding-left: 79px;
+  padding-right: 66px;
+  padding-top: 45px;
+}
 
+.title {
+  align-items: center;
+  display: flex;
+  margin-bottom: 50px;
+
+  h1 {
+    width: 240px;
+  }
+
+  .start-over {
+    text-align: right;
+  }
+
+}
+
+.customizations {
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+
+    >:first-child {
+      text-align: left;
+    }
+
+    >:last-child {
+      text-align: right;
+    }
+  }
 }
 
 .dress-preview {
