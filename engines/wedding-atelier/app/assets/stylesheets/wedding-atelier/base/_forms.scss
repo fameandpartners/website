@@ -50,9 +50,11 @@ label {
 .number-field {
   display: table;
   max-width: 150px;
+  border: 1px solid #cccccc;
 
   .number-field {
     @extend .text-center;
+    border: none;
   }
 
   .number-field-button {

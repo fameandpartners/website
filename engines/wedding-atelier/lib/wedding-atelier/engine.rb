@@ -7,6 +7,7 @@ module WeddingAtelier
       g.test_framework :rspec
     end
 
+
     config.to_prepare do
      Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')).each do |c|
        require_dependency(c)

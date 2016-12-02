@@ -3,6 +3,12 @@ html {
   font-size: 14px;
 }
 
+body {
+  @include screen-sm{
+    overflow: hidden;
+  }
+}
+
 .wedding-atelier {
   color: $black;
   font-family: $secondary-font;

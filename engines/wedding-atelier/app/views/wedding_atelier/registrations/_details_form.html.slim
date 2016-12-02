@@ -1,4 +1,4 @@
-.registrations__details-form
+.registrations__details-form.left-side-centered-container
   h1 <em>#{current_spree_user.first_name}</em>, let's start with your size profile
   .form
     = form_for current_spree_user, as: :spree_user, url: wedding_atelier.signup_path, method: :put do |f|
@@ -21,7 +21,8 @@
             | <i class="calendar-icon"></i>
             | </span>
           = ff.hidden_field :event_type, value: 'wedding'
-        .button-area
-          = link_to 'back', :back, class: 'btn-white'
-        .button-area
-          = f.submit 'next', class: 'btn-black'
+        .row
+          .col-xs-12.col-sm-6
+            = link_to 'back', :back, class: 'btn btn-white full-width'
+          .col-xs-12.col-sm-6
+            = f.submit 'next', class: 'btn btn-black full-width'

@@ -8,6 +8,15 @@
   line-height: 25px;
   min-height: 35px;
   text-decoration: none;
+
+  &.full-width {
+    width: 100%;
+  }
+
+  @include screen-xs {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
 }
 
 .btn-black {
