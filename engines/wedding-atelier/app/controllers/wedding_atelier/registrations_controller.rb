@@ -110,7 +110,7 @@ module WeddingAtelier
     end
 
     def redirect_if_completed
-      redirect_to(wedding_atelier.events_path) if current_spree_user.try(:wedding_atelier_signup_complete?)
+      redirect_to(wedding_atelier.events_path) if current_spree_user.try(:wedding_atelier_signup_complete?) && action_name != 'invite'
     end
   end
 end

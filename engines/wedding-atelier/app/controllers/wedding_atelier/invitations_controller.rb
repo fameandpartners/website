@@ -16,23 +16,18 @@ module WeddingAtelier
 
     def accept
       @invitation = Invitation.find(params[:invitation_id])
-      check_invitation_state(@invitation)
-      if spree_user_signed_in? && @invitation.accept
-        redirect_to wedding_atelier.event_path(@invitation.event_slug)
-      elsif Spree::User.find_by_email(@invitation.user_email)
-        @invitation.accept
-        redirect_to wedding_atelier.sign_in_path({invitation_id: @invitation.id})
-      else
-        redirect_to wedding_atelier.signup_path({invitation_id: @invitation.id})
-      end
-    end
-
-    private
-
-    def check_invitation_state(invitation)
-      if invitation.state == 'accepted'
+      if @invitation.state == 'accepted'
         flash[:notice] = 'This is invitation has already been accepted.'
         redirect_to wedding_atelier.signup_path
+      else
+        if spree_user_signed_in? && @invitation.accept
+          redirect_to wedding_atelier.event_path(@invitation.event_slug)
+        elsif Spree::User.find_by_email(@invitation.user_email)
+          @invitation.accept
+          redirect_to wedding_atelier.sign_in_path({invitation_id: @invitation.id})
+        else
+          redirect_to wedding_atelier.signup_path({invitation_id: @invitation.id})
+        end
       end
     end
   end

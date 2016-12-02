@@ -20,7 +20,7 @@
         = f.text_field :last_name, class: 'form-control'
 
     = f.label :email, 'Email Address'
-    = f.text_field :email, class: 'form-control', disabled: @user.email.present?
+    = f.text_field :email, class: 'form-control', disabled: @user.email.present? && !@user.errors.any?
     = f.label :password, 'Password'
     = f.password_field :password, class: 'form-control'
 
