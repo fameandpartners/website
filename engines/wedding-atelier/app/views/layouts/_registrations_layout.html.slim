@@ -6,6 +6,6 @@
     .left-side-container
       .table-cell-middle
         = render partial: nested_partial, locals: {user: user, signup_params: signup_params}
-    = signup_progress_marker
+    = signup_progress_marker if controller_name == 'registrations'
   .right-side
     .fp-logo-float.table-cell-middle
