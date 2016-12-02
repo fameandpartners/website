@@ -1,10 +1,14 @@
 .customization-experience {
   height: 100vh;
   padding-top: 50px;
+  padding-left: 0;
+  padding-right: 0;
   text-align: center;
 
   &--mobile {
     padding-bottom: 54px;
+    padding-left: 15px;
+    padding-right: 15px;
 
     h1 {
       font-size: 1.5rem;
@@ -74,6 +78,7 @@
   }
 
   &--desktop {
+    height: 100%;
     @import 'desktop/customization-experience-desktop';
   }
 }
