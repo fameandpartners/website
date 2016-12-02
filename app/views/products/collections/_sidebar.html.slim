@@ -1,15 +1,18 @@
 - cache [:layout, :filter_menu, @filter.cache_key], expires_in: configatron.cache.expire.long do
   - prerender = true
 
-  .panel-group.search-filters#filter-accordion role='tablist' aria-multiselectable='true'
+  .FilterSort
 
-    .panel.panel-default
-      .panel-heading.title-wrap
-        span Filters
-        a.js-trigger-clear-all-filters href='javascript:;' Clear All
+    .ExpandablePanel
 
-    = render partial: 'products/collections/filters/colour'
+      .ExpandablePanel__heading
+        span.ExpandablePanel__mainTitle Filter & sort by
+        a.ExpandablePanel__clearAll.js-trigger-clear-all-filters href='javascript:;' Clear All
 
-    = render partial: 'products/collections/filters/price'
+      = render partial: 'products/collections/filters/sort'
 
-    = render partial: 'products/collections/filters/express_making'
+      = render partial: 'products/collections/filters/colour'
+
+      = render partial: 'products/collections/filters/price'
+
+      = render partial: 'products/collections/filters/delivery_date'
