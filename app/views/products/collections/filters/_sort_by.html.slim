@@ -1,0 +1,23 @@
+.ExpandablePanel__item
+
+  .ExpandablePanel__name.ExpandablePanel__name
+    | Sort
+
+  .ExpandablePanel__selectedOptions
+    span.ExpandablePanel__selectedItem
+      | What's new
+
+  .ExpandablePanel__listOptions.checkboxBlackBg
+
+    // NOTE: Although it's a checkbox this should behave like a radio button (allow only one option checked)
+    = check_box_tag "sort-whats-new", true, true
+    label.ExpandablePanel__option name='sort-whats-new' for="sort-whats-new"
+      span.ExpandablePanel__optionName What's new
+
+    = check_box_tag "sort-price-high", true
+    label.ExpandablePanel__option name='sort-price-high' for="sort-price-high"
+      span.ExpandablePanel__optionName Price High
+
+    = check_box_tag "sort-price-low", true
+    label.ExpandablePanel__option name='sort-price-low' for="sort-price-low"
+      span.ExpandablePanel__optionName Price Low
