@@ -1,6 +1,6 @@
 .steps {
   @extend .text-center;
-  bottom: 0;
+  bottom: 15px;
   color: $greyish;
   font-weight: 700;
   left: 0;
@@ -9,6 +9,8 @@
   padding: 0;
   position: absolute;
   right: 0;
+  font-family: $secondary-font;
+  font-size: 14px;
 
   li {
     display: inline-block;
@@ -18,13 +20,13 @@
       color: $black;
     }
 
-    &.current::after {
-      content: ' --- ';
-    }
+  }
 
-    &.current:last-child::after {
-      content: '';
-    }
-
+  .dash {
+    background: $black;
+    width: 31px;
+    height: 2px;
+    display: inline-block;
+    vertical-align: middle;
   }
 }
