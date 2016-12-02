@@ -1,14 +1,21 @@
+javascript:
+  window.CollectionFilterSortApp = {
+    colors: #{raw Repositories::ProductColors.color_groups.to_json}
+  };
+  
+- colors  = Repositories::ProductColors.color_groups
+- selectColors = @filter.colors
 - cache [:layout, :filter_menu, @filter.cache_key], expires_in: configatron.cache.expire.long do
   - prerender = true
 
   .FilterSort
 
     .ExpandablePanel
-
       .ExpandablePanel__heading
         span.ExpandablePanel__mainTitle Filter & sort by
         a.ExpandablePanel__clearAll.js-trigger-clear-all-filters href='javascript:;' Clear All
 
+      #CollectionFilterSortApp
       = render partial: 'products/collections/filters/sort_by'
 
       = render partial: 'products/collections/filters/colour'
