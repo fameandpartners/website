@@ -1,0 +1,15 @@
+- if !Features.active?(:getitquick_unavailable)
+  .ExpandablePanel__item.ExpandablePanel__item--is-active
+
+    .ExpandablePanel__name
+      | Delivery Date
+
+    .ExpandablePanel__selectedOptions
+      span.ExpandablePanel__selectedItem
+        | Express Making
+
+    .ExpandablePanel__listOptions.checkboxBlackBg
+
+      = check_box_tag :fast_making, true, params[:fast_making].present?, { 'data-all' => 'false' }
+      label.ExpandablePanel__option name='fast-making' for="fast_making"
+        span.ExpandablePanel__optionName Express Making
