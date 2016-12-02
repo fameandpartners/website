@@ -1,18 +1,16 @@
-.registrations__size-form
+.registrations__size-form.left-side-centered-container
   h1 <em>#{current_spree_user.first_name}</em>, let's start with your size profile
   .form
     = form_for current_spree_user, as: :spree_user, url: wedding_atelier.signup_path, method: :put do |f|
       = f.fields_for :user_profile, current_spree_user.user_profile do |ff|
         .form-group
           = ff.label :height, "What's your height?"
-          = ff.select :height, options_for_select(@heights, current_spree_user.user_profile.height), {}, class: 'form-control'
+          div
+            = ff.select :height, options_for_select(@heights, current_spree_user.user_profile.height), {}, class: 'form-control'
         .form-group
           = ff.label :dress_size, "What's your dress size? &nbsp;".html_safe
           = link_to 'view size guide', '#', class: 'guide-link'
           = dress_size_grid ff, @dress_sizes
             br
       = f.hidden_field :wedding_atelier_signup_step, value: @next_signup_step_value
-      .button-area
-        = link_to 'back', :back, class: 'btn-white'
-      .button-area
-        = f.submit 'next', class: 'btn-black'
+      = f.submit 'next', class: 'btn btn-black full-width'

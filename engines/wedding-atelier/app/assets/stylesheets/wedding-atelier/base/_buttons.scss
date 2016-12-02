@@ -8,6 +8,10 @@
   line-height: 25px;
   min-height: 35px;
   text-decoration: none;
+
+  &.full-width {
+    width: 100%;
+  }
 }
 
 .btn-black {
