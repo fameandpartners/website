@@ -122,6 +122,10 @@
     padding: 15px 0 15px 30px;
     display: none;
 
+    &--panelColors {
+      padding-left: 15px;
+    }
+
     // TODO: if this is needed elsewhere then it should become a global helper
     input[type="checkbox"]:checked + label {
 
@@ -169,6 +173,18 @@
     }
 
   }
+
+  &__optionColorFallback {
+    border-radius: 100%;
+    background: $c-neutral-4;
+    display: inline-block;
+    position: relative;
+    height: 15px;
+    width: 15px;
+    top: 2px;
+    left: 15px;
+  }
+
 
   // Option name
   &__optionName {
