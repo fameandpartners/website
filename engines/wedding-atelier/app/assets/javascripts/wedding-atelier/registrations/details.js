@@ -54,6 +54,11 @@ $(document).ready(function() {
   $('.input-group.date').datepicker({
     format: "mm/dd/yyyy",
     todayBtn: "linked",
-    autoclose: true
+    autoclose: true,
+    showOnFocus: true
+  }).on('show', function(e){
+    $(this).addClass('active');
+  }).on('hide', function(e){
+    $(this).removeClass('active');
   });
 });

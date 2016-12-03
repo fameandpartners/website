@@ -2,7 +2,7 @@ module WeddingAtelier
   class RegistrationsController < Spree::UserRegistrationsController
     layout 'wedding_atelier/application'
     before_filter :check_spree_user_signed_in, except: [:new, :create]
-    before_filter :redirect_if_completed, except: :new
+    # before_filter :redirect_if_completed, except: :new
     helper WeddingAtelier::Engine.helpers
 
     def new
@@ -110,7 +110,7 @@ module WeddingAtelier
     end
 
     def redirect_if_completed
-      redirect_to(wedding_atelier.events_path) if current_spree_user.try(:wedding_atelier_signup_complete?)
+      redirect_to(wedding_atelier.events_path) if current_spree_user.try(:wedding_atelier_signup_complete?) && action_name != 'invite'
     end
   end
 end

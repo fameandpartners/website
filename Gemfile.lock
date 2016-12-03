@@ -922,7 +922,7 @@ DEPENDENCIES
   spree_paypal_express!
   spree_social!
   term-ansicolor
-  test-unit
+  test-unit (~> 3.0)
   timecop
   tire
   turnip (~> 1.3.1)
