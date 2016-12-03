@@ -54,6 +54,7 @@
   .ExpandablePanel__moreOptionsList
     .ExpandablePanel__listOptions.ExpandablePanel__listOptions--twoColumns.ExpandablePanel__listOptions--panelColors
       - for color in selectColors
+        = check_box_tag "color-#{color.name}", color.name, preSelected, 'data-all' => 'false'
         label.ExpandablePanel__option name='#{color.name}' for="color-#{color.name}"
           span.ExpandablePanel__optionColorFallback
           span.ExpandablePanel__optionCheck--rounded.ExpandablePanel__optionCheck--tick class=('color-' + color.name)
