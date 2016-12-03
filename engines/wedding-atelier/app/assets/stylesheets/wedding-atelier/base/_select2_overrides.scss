@@ -1,5 +1,26 @@
 .select2-container--default {
-  width: 100% !important;
+  width: 340px !important;
+  border: 1px solid transparent;
+  @include screen-xs {
+    width: 260px !important;
+  };
+
+  &.select2-container--focus {
+    border: 1px solid $black;
+  }
+
+  &:focus, &.select2-container--open.select2-container--focus {
+    border-top: 1px solid $black;
+    border-left: 1px solid $black;
+    border-right: 1px solid $black;
+    border-bottom: none;
+  }
+
+  .select2-results {
+    border: 1px solid $black;
+    border-top: none;
+  }
+
   .select2-selection--single {
     outline: none !important;
 
@@ -11,4 +32,31 @@
       line-height: 31px;
     }
   }
+}
+
+.select2-selection {
+  &.select2-selection--single {
+    border: 1px solid $pinkish-grey-two;
+    border-radius: 0;
+    height: 34px;
+  }
+}
+
+.select2-dropdown {
+  border: 1px solid $pinkish-grey-two;
+  border-radius: 0;
+}
+
+.select2-container--default {
+
+  .select2-results__option--highlighted[aria-selected] {
+    background-color: $white-three;
+    color: $black;
+  }
+
+  .select2-results__option[aria-selected=true] {
+    background-color: $white-three;
+    color: $black;
+  }
+
 }

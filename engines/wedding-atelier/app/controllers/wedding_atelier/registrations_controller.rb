@@ -2,7 +2,7 @@ module WeddingAtelier
   class RegistrationsController < Spree::UserRegistrationsController
     layout 'wedding_atelier/application'
     before_filter :check_spree_user_signed_in, except: [:new, :create]
-    before_filter :redirect_if_completed, except: :new
+    # before_filter :redirect_if_completed, except: :new
     helper WeddingAtelier::Engine.helpers
 
     def new
