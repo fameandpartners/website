@@ -1,0 +1,24 @@
+// FILTER: BODY SHAPE
+- shapes = @filter.shapes
+- selectBodyShapesAll = params[:bodyshape] ? false : true
+
+.ExpandablePanel__item.ExpandablePanel__item--is-active
+
+  .ExpandablePanel__name
+    | Bodyshape
+
+  .ExpandablePanel__listOptions.checkboxBlackBg
+    = check_box_tag 'shapes-all', 'all', selectBodyShapesAll ? true : false, 'data-all' => 'true', class: 'js-filter-all'
+    label.ExpandablePanel__option name='bodyshape' for="bodyshape-all"
+      span.ExpandablePanel__optionName All shapes
+
+    - for shape in shapes
+      - preSelected = false
+      - if params[:bodyshape]
+        - for param in params[:bodyshape]
+          - if param == shape
+            - preSelected = true
+
+      = check_box_tag "shape-#{shape}", shape, preSelected, 'data-all' => 'false'
+      label.ExpandablePanel__option name='shape' for="shape-#{shape}"
+        span.ExpandablePanel__optionName = shape.gsub '_', ' '
