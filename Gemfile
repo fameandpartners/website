@@ -3,8 +3,7 @@ source 'https://rubygems.org'
 ruby '2.3.3'
 
 gem 'rails', '~> 3.2.22.5'
-gem 'test-unit' #
-unit is required by Rails 3, and Ruby 2.3 is harsher on dependency requirements
+gem 'test-unit' # test-unit is required by Rails 3, and Ruby 2.3 is harsher on dependency requirements
 gem 'pg'
 gem 'slim'
 gem 'slim-rails'
