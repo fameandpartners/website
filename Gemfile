@@ -127,7 +127,6 @@ group :development do
   gem 'letter_opener', '~> 1.4.1'
   gem 'quiet_assets'
   gem 'bullet'
-  gem 'test-unit', '~> 3.0'
 end
 
 group :test do
