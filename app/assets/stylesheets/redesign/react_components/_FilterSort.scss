@@ -122,7 +122,9 @@
     padding: 15px 0 15px 30px;
     display: none;
 
-    &--panelColors {
+    // Color panels need a different left padding
+    &--panelColors,
+    &--panelColors .ExpandablePanel__moreOptions {
       padding-left: 15px;
     }
 
