@@ -48,12 +48,14 @@
     border-top: 1px solid $c-neutral-4;
     padding: 6px 0 8px;
 
+    // When a filter is expanded...
     &--is-active .ExpandablePanel__name:before {
       @include transform(rotate(90deg));
       top: 4px;
       left: -4px;
     }
 
+    // Filter is expanded => Show its options
     &--is-active .ExpandablePanel__listOptions {
       display: block;
 
@@ -176,6 +178,7 @@
 
   }
 
+  // Fallback for colors with no background defined
   &__optionColorFallback {
     border-radius: 100%;
     background: $c-neutral-4;
@@ -199,6 +202,7 @@
     margin-top: 15px;
   }
 
+  // List of additional options
   &__moreOptionsList {
     display: none;
 
