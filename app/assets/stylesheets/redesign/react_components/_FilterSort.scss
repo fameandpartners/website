@@ -131,21 +131,26 @@
     }
 
     // TODO: if this is needed elsewhere then it should become a global helper
-    input[type="checkbox"]:checked + label {
+    input[type="checkbox"]:checked {
 
-      .ExpandablePanel__optionCheck--tick {
-        background: $c-neutral-black;
-      }
+      ~ .ExpandablePanel__optionCheck--tick {
 
-      .ExpandablePanel__optionCheck--tick::after {
-        color: $c-neutral-white;
-        font-family: 'icomoon_fame_2015';
-        font-size: 0.6em;
-        content: "\e90f";
-        display: inline-block;
-        position: relative;
-        left: 3px;
-        top: -5px;
+        &::after {
+          color: $c-neutral-white;
+          font-family: 'icomoon_fame_2015';
+          font-size: 0.6em;
+          content: "\e90f";
+          display: inline-block;
+          position: relative;
+          left: 3px;
+          top: -5px;
+        }
+
+        // Black font-color for very light bg colors
+        &.color-white::after {
+          color: $c-neutral-black;
+        }
+
       }
 
     }
