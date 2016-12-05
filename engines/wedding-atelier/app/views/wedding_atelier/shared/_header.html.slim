@@ -3,8 +3,9 @@
     ul.links-list
       li
         = profile_image_url
-      li
-        = @event.name
+      - if defined? @event
+        li
+          = @event.name
       li BRIDE
       li
         = link_to 'MY ACCOUNT'
