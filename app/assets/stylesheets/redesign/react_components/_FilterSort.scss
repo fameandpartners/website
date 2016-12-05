@@ -170,6 +170,25 @@
       display: block;
     }
 
+    // Secondary filters
+    &--secondary {
+      padding: 6px 0 0;
+      border-top: 0;
+
+      .ExpandablePanel__name {
+        font-size: 1.5rem;
+        text-transform: none;
+        font-weight: 400;
+      }
+
+    }
+
+  }
+
+  // Wrapper for secondary Filters
+  &__secondaryFiltersWrapper {
+    border-top: 1px solid $c-neutral-4;
+    padding-top: 10px;
   }
 
   // Two-column layout
