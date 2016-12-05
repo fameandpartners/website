@@ -33,12 +33,23 @@
     height: 48px;
     margin: 25px auto;
 
-    >:first-child {
+    .customization-column:first-child {
       text-align: left;
     }
 
-    >:last-child {
+    .customization-column:last-child {
       text-align: right;
+    }
+  }
+
+  .customization-column {
+    display: table;
+    height: 100%;
+
+    i,
+    span {
+      display: table-cell;
+      vertical-align: middle;
     }
   }
 }
