@@ -2,7 +2,7 @@ module WeddingAtelier
   class RegistrationsController < Spree::UserRegistrationsController
     layout 'wedding_atelier/application'
     before_filter :check_spree_user_signed_in, except: [:new, :create]
-    # before_filter :redirect_if_completed, except: :new
+    before_filter :redirect_if_completed, except: :new
     helper WeddingAtelier::Engine.helpers
 
     def new
@@ -27,7 +27,6 @@ module WeddingAtelier
         resource.sign_up_via    = Spree::User::SIGN_UP_VIA.index('Email')
         resource.sign_up_reason = session[:sign_up_reason]
       end
-
       if resource.save
         EmailCaptureWorker.perform_async(resource.id, remote_ip:    request.remote_ip,
                                                       landing_page: session[:landing_page],
@@ -52,7 +51,7 @@ module WeddingAtelier
     end
 
     def update
-      @user = current_spree_user
+      prepare_form_default_values
       if @user.update_attributes(spree_user_params)
         @user.add_role(@user.event_role, @user.events.last) if @user.event_role
         if @user.wedding_atelier_signup_step == 'completed'
@@ -62,36 +61,55 @@ module WeddingAtelier
         end
 
       else
-        render @user.wedding_atelier_signup_step
+        # reload user to update step if validation fails
+        @event = @user.events.last
+        render @user.reload.wedding_atelier_signup_step
       end
     end
 
     def size
+      prepare_form_default_values
+    end
+
+    def details
+      prepare_form_default_values
+      @event = current_spree_user.events.last || current_spree_user.events.new
+    end
+
+    def invite
+      @event = current_spree_user.events.last
+      if @event.number_of_assistants == 0
+        current_spree_user.update_attribute(:wedding_atelier_signup_step, 'completed')
+        redirect_to wedding_atelier.event_path(current_spree_user.events.last)
+      end
+    end
+
+
+    private
+
+    def prepare_form_default_values
+      @user = current_spree_user
+
+      @roles = ['bride', 'bridesmaid', 'maid of honor', 'mother of bride']
+      # if current_spree_user.wedding_atelier_signup_step != 'size'
+      #   @event = current_spree_user.events.last || current_spree_user.events.new
+      # end
+
       @next_signup_step_value = session[:accepted_invitation] ? 'completed' : 'details'
-      @site_version = env['site_version_code'] || 'us'
-      @dress_sizes = {
-        us: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22],
-        au: [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
-      }[@site_version.to_sym]
+
       @heights = [
           "5'19 / 177cm ",
           "5'19 / 180cm ",
           "5'19 / 190cm ",
           "5'19 / 200cm "
       ]
+
+      @site_version = env['site_version_code'] || 'us'
+      @dress_sizes = {
+        us: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22],
+        au: [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
+      }[@site_version.to_sym]
     end
-
-    def details
-      @roles = ['bride', 'bridesmaid', 'maid of honor', 'mother of bride']
-      @event = current_spree_user.events.last || current_spree_user.events.new
-    end
-
-    def invite
-      @event = current_spree_user.events.last
-    end
-
-
-    private
 
     def spree_user_params
       # email input is disabled in new form, to guarantee
