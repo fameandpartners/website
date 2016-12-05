@@ -37,16 +37,27 @@ module Orders
     alias_method :customer_notes?, :customer_notes
 
     def line_items
-      (fast_making_line_items + standard_making_line_items).map { |i| LineItemPresenter.new(i, self) }
+      items.map(&decorate)
     end
 
-    # TODO: these methods cause big amounts of queries to DB.
     def fast_making_line_items
-      @fast_making_line_items ||= items.fast_making
+      fast_making_items.map(&decorate)
     end
 
     def standard_making_line_items
-      @standard_making_line_items ||= items - fast_making_line_items
+      standard_making_items.map(&decorate)
+    end
+
+    def decorate
+      -> (line_item) { LineItemPresenter.new(line_item, self) }
+    end
+
+    def fast_making_items
+      @fast_making_items ||= items.fast_making
+    end
+
+    def standard_making_items
+      @standard_making_items ||= items - fast_making_items
     end
 
     def one_item?

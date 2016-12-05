@@ -20,8 +20,14 @@ section.order-details
             .order-content
               .row
                 .order-items
-                  - order.line_items.each do |line_item|
-                    = render 'spree/orders/order_item', line_item: line_item
+                  - if order.fast_making_items.any?
+                    | Express making
+                    - order.fast_making_line_items.each do |line_item|
+                      = render 'spree/orders/order_item', line_item: line_item
+                  - if order.standard_making_items.any?
+                    | Free making
+                    - order.standard_making_line_items.each do |line_item|
+                      = render 'spree/orders/order_item', line_item: line_item
               .row
                 .order-total.col-md-7.col-md-offset-5
 
