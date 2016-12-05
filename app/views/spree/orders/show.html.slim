@@ -21,39 +21,7 @@ section.order-details
               .row
                 .order-items
                   - order.line_items.each do |line_item|
-                    .item
-                      .item-img.col-md-5
-                        = image_tag line_item.image_url, alt: line_item.style_name, class: 'img-responsive ordered-item-image'
-                      .details.col-md-7
-                        .row
-                          .name.col-md-8
-                            = line_item.style_name
-                          .price.col-md-4
-                            / TODO: If price is integer remove decimals
-                            = line_item.display_price
-                        .row
-                          .item-details.col-md-12
-                            ul
-                              li
-                                | Skirt Length: <span class="value">#{line_item.height}</span>
-                              li
-                                - if line_item.personalization.try(:basic_color?)
-                                  | Color:
-                                - else
-                                  | Customized color:
-                                span.value= line_item.colour_name
-                              - if line_item.customisation_text.present?
-                                li
-                                  | Customized cut: <span class="value">#{line_item.customisation_text}</span>
-                              li
-                                | Size: <span class="value">#{line_item.size_name}</span>
-                              li
-                                | Quantity: <span class="value">#{line_item.quantity}</span>
-
-                              - if line_item.fast_making?
-                                - fast_making = line_item.making_options.first
-                                li
-                                  | Express making: <span class="value text-transform-none">You'll get it in 6 to 9 days!</span>
+                    = render 'spree/orders/order_item', line_item: line_item
               .row
                 .order-total.col-md-7.col-md-offset-5
 
