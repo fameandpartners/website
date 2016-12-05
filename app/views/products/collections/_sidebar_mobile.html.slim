@@ -1,0 +1,42 @@
+- cache [:layout, :filter_menu, @filter.cache_key], expires_in: configatron.cache.expire.long do
+  - prerender = true
+
+  .FilterSort
+
+    .ExpandablePanel.ExpandablePanel--mobile
+
+      .ExpandablePanel__heading
+        span.ExpandablePanel__mainTitle Filter & sort by
+        .ExpandablePanel__clearAllWrapper
+          a.ExpandablePanel__clearAll.js-trigger-clear-all-filters href='javascript:;' Clear All
+
+      = render partial: 'products/collections/filters/sort_by'
+
+      = render partial: 'products/collections/filters/colour'
+
+      = render partial: 'products/collections/filters/price'
+
+      = render partial: 'products/collections/filters/bodyshape'
+
+      = render partial: 'products/collections/filters/delivery_date'
+
+      .ExpandablePanel__action
+
+        // Cancel & Close
+        .ExpandablePanel__filterTriggers--cancel-close
+          a.ExpandablePanel__btn.ExpandablePanel__btn--secondary href="javascript:;"
+            | Cancel
+          a.ExpandablePanel__btn href="javascript:;"
+            | Close
+
+        // Cancel & Apply
+        .ExpandablePanel__filterTriggers--cancel-apply
+          a.ExpandablePanel__btn.ExpandablePanel__btn--secondary href="javascript:;"
+            | Cancel
+          a.ExpandablePanel__btn href="javascript:;"
+            | Apply
+
+        // Apply
+        .ExpandablePanel__filterTriggers--apply
+          a.ExpandablePanel__btn.ExpandablePanel__btn--fullWidth href="javascript:;"
+            | Apply
