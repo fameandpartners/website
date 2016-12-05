@@ -10,6 +10,8 @@ Spree::LineItem.class_eval do
 
   has_many :making_options, foreign_key: :line_item_id, class_name: '::LineItemMakingOption', dependent: :destroy
 
+  scope :fast_making, -> { joins(making_options: :product_making_option).where(product_making_options: {option_type: 'fast_making' }) }
+
   after_save do
     order.clean_cache!
   end
