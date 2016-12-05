@@ -26,7 +26,7 @@
     .ExpandablePanel__listTwoColumns
       - for color in colors
         - preSelected = false
-        label.ExpandablePanel__option.ExpandablePanel__listColumn name='#{color.name}' for="color-#{color.name}"
+        label.ExpandablePanel__option.ExpandablePanel__listColumn name='#{color.name}'
           = check_box_tag "color-#{color.name}", color.name, preSelected, 'data-all' => 'false'
           - if params[:colour]
             - for param in params[:colour]
@@ -36,13 +36,13 @@
           span.ExpandablePanel__optionCheck--rounded.ExpandablePanel__optionCheck--tick class=('color-' + color.name)
           span.ExpandablePanel__optionName = color.name
 
-      label.ExpandablePanel__option.ExpandablePanel__listColumn name='Cheetah' for="color-Cheetah"
+      label.ExpandablePanel__option.ExpandablePanel__listColumn name='Cheetah'
         = check_box_tag 'color-Cheetah', 'Cheetah', params[:colour] == 'Cheetah' ? true : false, 'data-all' => 'false'
         span.ExpandablePanel__optionColorFallback
         span.ExpandablePanel__optionCheck--rounded.ExpandablePanel__optionCheck--tick class="color-cheetah"
         span.ExpandablePanel__optionName Cheetah
 
-      label.ExpandablePanel__option.ExpandablePanel__listColumn name='Rosebud' for="color-Rosebud"
+      label.ExpandablePanel__option.ExpandablePanel__listColumn name='Rosebud'
         = check_box_tag 'color-Rosebud', 'Rosebud', params[:colour] == 'Rosebud' ? true : false, 'data-all' => 'false'
         span.ExpandablePanel__optionColorFallback
         span.ExpandablePanel__optionCheck--rounded.ExpandablePanel__optionCheck--tick class="color-rosebud"
@@ -55,7 +55,7 @@
   .ExpandablePanel__moreOptionsList
     .ExpandablePanel__listOptions.ExpandablePanel__listOptions--twoColumns.ExpandablePanel__listOptions--panelColors
       - for color in selectColors
-        label.ExpandablePanel__option.ExpandablePanel__listColumn name='#{color.name}' for="color-#{color.name}"
+        label.ExpandablePanel__option.ExpandablePanel__listColumn name='#{color.name}'
           = check_box_tag "color-#{color.name}", color.name, preSelected, 'data-all' => 'false'
           span.ExpandablePanel__optionColorFallback
           span.ExpandablePanel__optionCheck--rounded.ExpandablePanel__optionCheck--tick class=('color-' + color.name)

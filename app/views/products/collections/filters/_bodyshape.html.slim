@@ -8,9 +8,10 @@
     | Bodyshape
 
   .ExpandablePanel__listOptions.checkboxBlackBg
-    = check_box_tag 'shapes-all', 'all', selectBodyShapesAll ? true : false, 'data-all' => 'true', class: 'js-filter-all'
-    label.ExpandablePanel__option name='bodyshape' for="bodyshape-all"
-      span.ExpandablePanel__optionName All shapes
+    label.ExpandablePanel__option name='bodyshape'
+      = check_box_tag 'shapes-all', 'all', selectBodyShapesAll ? true : false, 'data-all' => 'true', class: 'js-filter-all'
+      span.checkboxBlackBg__check
+        span.ExpandablePanel__optionName All shapes
 
     - for shape in shapes
       - preSelected = false
@@ -19,6 +20,7 @@
           - if param == shape
             - preSelected = true
 
-      = check_box_tag "shape-#{shape}", shape, preSelected, 'data-all' => 'false'
-      label.ExpandablePanel__option name='shape' for="shape-#{shape}"
-        span.ExpandablePanel__optionName = shape.gsub '_', ' '
+      label.ExpandablePanel__option name='shape'
+        = check_box_tag "shape-#{shape}", shape, preSelected, 'data-all' => 'false'
+        span.checkboxBlackBg__check
+          span.ExpandablePanel__optionName = shape.gsub '_', ' '

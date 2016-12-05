@@ -10,6 +10,7 @@
 
     .ExpandablePanel__listOptions.checkboxBlackBg
 
-      = check_box_tag :fast_making, true, params[:fast_making].present?, { 'data-all' => 'false' }
-      label.ExpandablePanel__option name='fast-making' for="fast_making"
-        span.ExpandablePanel__optionName Express Making
+      label.ExpandablePanel__option name='fast-making'
+        = check_box_tag :fast_making, true, params[:fast_making].present?, { 'data-all' => 'false' }
+        span.checkboxBlackBg__check
+          span.ExpandablePanel__optionName Express Making
