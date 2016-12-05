@@ -13,18 +13,22 @@
       | $200 - $299
 
   .ExpandablePanel__listOptions.checkboxBlackBg
-    = check_box_tag 'price-all', 'all', selectPriceAll ? true : false, 'data-all' => 'true', class: 'js-filter-all'
-    label.ExpandablePanel__option name='price' for="price-all"
-      span.ExpandablePanel__optionName All prices
+    label.ExpandablePanel__option name='price'
+      = check_box_tag 'price-all', 'all', selectPriceAll ? true : false, 'data-all' => 'true', class: 'js-filter-all'
+      span.checkboxBlackBg__check
+        span.ExpandablePanel__optionName All prices
 
-    = check_box_tag 'price-0-199', '0', params[:price_max] == '199' ? true : false, 'data-all' => 'false', 'data-pricemin' => '0', 'data-pricemax' => '199', name: "price"
-    label.ExpandablePanel__option name='price' for="price-0-199"
-      span.ExpandablePanel__optionName $0 - $199
+    label.ExpandablePanel__option name='price'
+      = check_box_tag 'price-0-199', '0', params[:price_max] == '199' ? true : false, 'data-all' => 'false', 'data-pricemin' => '0', 'data-pricemax' => '199', name: "price"
+      span.checkboxBlackBg__check
+        span.ExpandablePanel__optionName $0 - $199
 
-    = check_box_tag 'price-200-299', '200', params[:price_max] == '299' ? true : false, 'data-all' => 'false', 'data-pricemin' => '200', 'data-pricemax' => '299', name: "price"
-    label.ExpandablePanel__option name='price' for="price-200-299"
-      span.ExpandablePanel__optionName $200 - $299
+    label.ExpandablePanel__option name='price'
+      = check_box_tag 'price-200-299', '200', params[:price_max] == '299' ? true : false, 'data-all' => 'false', 'data-pricemin' => '200', 'data-pricemax' => '299', name: "price"
+      span.checkboxBlackBg__check
+        span.ExpandablePanel__optionName $200 - $299
 
-    = check_box_tag 'price-300-399', '300', params[:price_max] == '399' ? true : false, 'data-all' => 'false', 'data-pricemin' => '300', 'data-pricemax' => '399', name: "price"
-    label.ExpandablePanel__option name='price' for="price-300-399"
-      span.ExpandablePanel__optionName $300 - $399
+    label.ExpandablePanel__option name='price'
+      = check_box_tag 'price-300-399', '300', params[:price_max] == '399' ? true : false, 'data-all' => 'false', 'data-pricemin' => '300', 'data-pricemax' => '399', name: "price"
+      span.checkboxBlackBg__check
+        span.ExpandablePanel__optionName $300 - $399
