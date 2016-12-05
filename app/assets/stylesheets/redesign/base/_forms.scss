@@ -222,6 +222,10 @@ select {
 .checkboxBlackBg {
 
   label {
+    display: block;
+  }
+
+  .checkboxBlackBg__check {
     display: inline-block;
     position: relative;
     width: 100%;
@@ -234,7 +238,7 @@ select {
       position: absolute;
       padding: 4px;
       left: 0;
-      top: 8px;
+      top: 6px;
       border: 1px solid $c-neutral-black;
       background-color: $c-neutral-white;
     }
@@ -244,7 +248,7 @@ select {
   input[type="checkbox"] {
     opacity: 0;
 
-    &:disabled + label {
+    &:disabled ~ .checkboxBlackBg__check {
       opacity: 0.65;
 
       &::before {
@@ -254,7 +258,7 @@ select {
 
     }
 
-    &:checked + label::before {
+    &:checked ~ .checkboxBlackBg__check::before {
       background-color: $c-neutral-black;
     }
 
