@@ -45,6 +45,5 @@ module WeddingAtelier
         image_tag 'profile-placeholder.jpg', class: 'profile-image'
       end
     end
-
   end
 end
