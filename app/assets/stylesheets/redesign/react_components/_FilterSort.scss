@@ -3,7 +3,85 @@
 
 .FilterSort {
 
-  .ExpandablePanel {
+  &__mobileTriggerBtn {
+    background: $c-neutral-black;
+    color: $c-neutral-white;
+    text-transform: uppercase;
+    padding: 10px 15px;
+    margin: 10px 0;
+    display: block;
+    width: 100%;
+
+    .arrow {
+      float: right;
+    }
+
+  }
+
+  &__summary {
+    text-transform: uppercase;
+    text-align: center;
+    margin: 30px 0;
+    font-size: 0.8em;
+  }
+
+  &__summaryHighlight {
+    font-weight: 600;
+  }
+
+  .ExpandablePanel--mobile {
+    display: block;
+    position: fixed;
+    overflow-y: scroll;
+    padding-bottom: 70px;
+    background: $c-neutral-white;
+    z-index: 999;
+    height: 100%;
+    top: 0;
+
+    .ExpandablePanel {
+
+      //Heading
+      &__heading {
+        text-align: center;
+        margin-top: 5px;
+      }
+
+      // Add background to the filter-reset trigger
+      &__clearAllWrapper {
+        margin-top: 10px;
+        margin-bottom: 20px;
+        background: $c-neutral-2;
+        padding: 3px 0 8px;
+      }
+
+      // Trigger to reset all filters
+      &__clearAll {
+        color: $c-neutral-8;
+        float: none;
+        position: initial;
+        text-align: center;
+        font-weight: 600;
+      }
+
+      // Add extra padding on the right, so filter are not too close to the edge of screen
+      &__item {
+        padding-right: 15px;
+      }
+
+      // Hide top border from first filter
+      &__item:nth-child(2) {
+        border-top: 0;
+      }
+
+      // Attach the action buttons to the bottom of screen
+      &__action {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+      }
+
+    }
 
   }
 
@@ -15,10 +93,39 @@
     display: none;
   }
 
-  a {
-    color: $c-neutral-8;
+  // Action buttons
+  &__btn {
+    display: inline-block;
+    background: $c-neutral-black;
+    color: $c-neutral-white;
+    border: 1px solid $c-neutral-black;
     text-transform: uppercase;
-    @extend .link-underline;
+    text-align: center;
+    padding: 10px;
+    width: 50%;
+
+    &--fullWidth {
+      width: 100%;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $c-neutral-white;
+    }
+
+    &--secondary {
+      background: $c-neutral-white;
+      color: $c-neutral-black;
+
+      &:hover,
+      &:focus,
+      &:active {
+        color: $c-neutral-black;
+      }
+
+    }
+
   }
 
   //Heading
@@ -35,12 +142,15 @@
     display: inline-block;
   }
 
-  // Reset all filters
+  // Trigger to reset all filters
   &__clearAll {
-    float: right;
+    color: $c-neutral-8;
     font-size: 0.75em;
-    top: 18px;
+    text-transform: uppercase;
+    float: right;
     position: relative;
+    top: 18px;
+    @extend .link-underline;
   }
 
   // Container of each item / filter
@@ -58,24 +168,22 @@
     // Filter is expanded => Show its options
     &--is-active .ExpandablePanel__listOptions {
       display: block;
-
-      // Variation for a two-column layout
-      &--twoColumns {
-        display: flex;
-        flex-wrap: wrap;
-
-        // Fill half of the container
-        label {
-          flex: 1 0 50%;
-          box-sizing: border-box;
-          padding-right: 15px;
-          @extend .txt-truncate-1;
-        }
-
-      }
-
     }
 
+  }
+
+  // Two-column layout
+  &__listTwoColumns {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  // Fill half of the container
+  &__listColumn {
+    flex: 1 0 50%;
+    box-sizing: border-box;
+    padding-right: 15px;
+    @extend .txt-truncate-1;
   }
 
   // Filter name
@@ -123,6 +231,12 @@
   &__listOptions {
     padding: 15px 0 15px 30px;
     display: none;
+
+    a {
+      color: $c-neutral-8;
+      text-transform: uppercase;
+      @extend .link-underline;
+    }
 
     // Color panels need a different left padding
     &--panelColors,
