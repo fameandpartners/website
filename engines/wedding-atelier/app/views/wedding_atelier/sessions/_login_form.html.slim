@@ -1,6 +1,8 @@
 .sessions__login-form
   h1
-    | Welcome back to the Wedding Atelier.
+    | Welcome back to your
+    span.italic  Wedding Atelier
+    |  App.
 
   .form.email-signup
     = form_for :spree_user, url: wedding_atelier.sign_in_path, method: :post do |f|
@@ -11,7 +13,7 @@
       .button-area
         = f.submit 'Sign in', class: 'btn-black'
       .button-area
-        = link_to 'forgot password?', '#', class: 'forgot-password'
+        = link_to 'forgot password?', new_spree_user_password_path, class: 'forgot-password'
 
   p.or - or -
 
@@ -21,5 +23,5 @@
   = fancy_facebook_button 'Sign in with'
 
   p.already-member
-    | Don't have an account?
-    = link_to(' sign up here', wedding_atelier.signup_path)
+    | Don't have an account?&nbsp;
+    = link_to('sign up here', wedding_atelier.signup_path, class: 'bold')

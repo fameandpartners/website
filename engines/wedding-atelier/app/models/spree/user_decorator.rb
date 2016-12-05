@@ -20,6 +20,6 @@ Spree::User.class_eval do
   end
 
   def wedding_atelier_signup_complete?
-    wedding_atelier_signup_step == 'completed'
+    ['completed', 'invite'].include? wedding_atelier_signup_step
   end
 end
