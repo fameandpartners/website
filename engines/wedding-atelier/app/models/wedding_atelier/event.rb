@@ -13,6 +13,7 @@ module WeddingAtelier
     after_create :sluggify
 
     validates_uniqueness_of :name
+    validates_presence_of :name, :date
 
     def to_param
       slug
@@ -25,7 +26,7 @@ module WeddingAtelier
     private
 
     def sluggify
-      update_attribute(:slug, name.parameterize) if slug.nil?
+      update_attribute(:slug, name.parameterize)
     end
   end
 end
