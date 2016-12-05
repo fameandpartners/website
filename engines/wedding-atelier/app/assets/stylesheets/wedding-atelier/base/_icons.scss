@@ -1,0 +1,30 @@
+.icon {
+  background-position: center center;
+  height: 24px;
+  line-height: 24px;
+  width: 24px;
+
+  &-silhouettes {
+    background-image: image-url('wedding-atelier/icons/silhouettes.png');
+  }
+
+  &-fabric-colour {
+    background-image: image-url('wedding-atelier/icons/fabric-colour.png');
+  }
+
+  &-length {
+    background-image: image-url('wedding-atelier/icons/length.png');
+  }
+
+  &-style {
+    background-image: image-url('wedding-atelier/icons/style.png');
+  }
+
+  &-fit {
+    background-image: image-url('wedding-atelier/icons/fit.png');
+  }
+
+  &-size {
+    background-image: image-url('wedding-atelier/icons/size.png');
+  }
+}
