@@ -70,6 +70,17 @@
       text-align: right;
     }
   }
+
+  .customization-column {
+    display: table;
+    height: 100%;
+
+    i,
+    span {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
 }
 
 .dress-preview {
