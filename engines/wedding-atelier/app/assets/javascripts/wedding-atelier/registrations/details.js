@@ -52,7 +52,7 @@ $(document).ready(function() {
   });
 
   $('.input-group.date').datepicker({
-    format: "mm/dd/yyyy",
+    format: "dd/mm/yyyy",
     todayBtn: "linked",
     autoclose: true,
     showOnFocus: true
