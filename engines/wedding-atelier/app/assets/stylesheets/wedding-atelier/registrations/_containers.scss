@@ -65,8 +65,23 @@
     .right-side {
       background-size: cover;
       background-repeat: no-repeat;
-      background-image: image-url('wedding-atelier/bitmap.png');
       display: table;
+
+      &.signup {
+        background-image: image-url('wedding-atelier/onboarding/signup.jpg');
+      }
+
+      &.size {
+        background-image: image-url('wedding-atelier/onboarding/size.jpg');
+      }
+
+      &.details {
+        background-image: image-url('wedding-atelier/onboarding/details.jpg');
+      }
+
+      &.invite {
+        background-image: image-url('wedding-atelier/onboarding/invite.jpg');
+      }
     }
 
     .left-side-container {
