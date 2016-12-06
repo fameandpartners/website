@@ -45,18 +45,24 @@
     }
 
     .msg-data {
+
+      img.photo {
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+      }
+
       .profile {
-        img {
-          width: 30px;
-          height: 30px;
-        }
+        color: $greyish;
       }
 
     }
 
     .msg-text {
-      margin-left: 30px;
+      margin-left: 35px;
       background-color: $white-three;
+      border-radius: 7px;
+      padding: 7px;
     }
 
 
@@ -67,6 +73,14 @@
       width: 100%;
       display: flex;
       background-color: $white-three;
+    }
+
+    button.upload-image {
+      background-image: image-url('wedding-atelier/icon-upload-iamge.png');
+      border: 0;
+      width: 32px;
+      height: 34px;
+      margin: 8px;
     }
 
     .message-input {
