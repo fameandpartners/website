@@ -38,7 +38,7 @@ doctype html
         window.current_user = #{raw serialized_current_user.to_json}
 
     #wrap
-      / = render('wedding_atelier/shared/header')  unless ['registrations', 'sessions'].include?(controller_name)
+      = render('wedding_atelier/shared/header')  unless ['registrations', 'sessions', 'dresses'].include?(controller_name)
       #content
           = yield
       #push
