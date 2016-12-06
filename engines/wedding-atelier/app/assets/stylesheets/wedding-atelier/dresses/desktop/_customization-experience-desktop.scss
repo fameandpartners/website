@@ -76,12 +76,33 @@
     display: table;
     height: 100%;
 
+    a {
+      letter-spacing: 2px;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+
+    span {
+      padding-left: 8px;
+    }
+
     i,
     span {
       display: table-cell;
       vertical-align: middle;
     }
+
+    &:first-child {
+      text-align: left;
+    }
+
+    &:last-child {
+      color: $boulder-two;
+      font-size: .85rem;
+      text-align: right;
+    }
   }
+
 }
 
 .dress-preview {
