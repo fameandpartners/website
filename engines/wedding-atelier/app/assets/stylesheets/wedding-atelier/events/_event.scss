@@ -103,12 +103,32 @@
         height: 100%;
       }
     }
-
-
-
   }
 
   #atelier.right-content--desktop {
     height: 100%;
+
+    h1.moodboard-title {
+      margin: 23px 0;
+    }
+
+    .moodboard-tabs {
+      .nav-tabs > li.active > a,
+      .nav-tabs > li.active > a:hover,
+      .nav-tabs > li.active > a:focus {
+        border: 0;
+        border-bottom: 2px solid $black;
+      }
+
+      .nav-tabs > li > a:hover {
+        border: 0;
+        background-color: transparent;
+      }
+
+      .nav-tabs > li.active {
+        border: 0;
+      }
+    }
+
   }
 }
