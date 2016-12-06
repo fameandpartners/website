@@ -14,7 +14,7 @@
           .profile
             img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
             span.name Amber@fame
-          .created today, 2:22pm
+            span.created.pull-right today, 2:22pm
         .msg-text
           | Hey lovely, welcome to your amazing new weddings board. Here
           | you're going to be able to chat with me, your bridesmadis and
@@ -24,7 +24,7 @@
           .profile
             img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
             span.name Amber@fame
-          .created today, 2:22pm
+            span.created.pull-right today, 2:22pm
         .msg-text
           | Why don't you start by creating your first dress, just select
           | "<strong>ADD YOUR FIRST DRESS</strong>" to the right.
@@ -33,7 +33,23 @@
           .profile
             img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
             span.name Amber@fame
-          .created today, 2:22pm
+            span.created.pull-right today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+            span.created.pull-right today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+            span.created.pull-right today, 2:22pm
         .msg-text
           | Test...
       .msg-simple
@@ -49,7 +65,7 @@
           .profile
             img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
             span.name Amber@fame
-          .created today, 2:22pm
+            span.created.pull-right today, 2:22pm
         .msg-text
           | Test...
       .msg-simple
@@ -57,7 +73,7 @@
           .profile
             img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
             span.name Amber@fame
-          .created today, 2:22pm
+            span.created.pull-right today, 2:22pm
         .msg-text
           | Test...
       .msg-simple
@@ -65,7 +81,7 @@
           .profile
             img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
             span.name Amber@fame
-          .created today, 2:22pm
+            span.created.pull-right today, 2:22pm
         .msg-text
           | Test...
       .msg-simple
@@ -73,7 +89,7 @@
           .profile
             img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
             span.name Amber@fame
-          .created today, 2:22pm
+            span.created.pull-right today, 2:22pm
         .msg-text
           | Test...
       .msg-simple
@@ -81,7 +97,7 @@
           .profile
             img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
             span.name Amber@fame
-          .created today, 2:22pm
+            span.created.pull-right today, 2:22pm
         .msg-text
           | Test...
       .msg-simple
@@ -89,7 +105,7 @@
           .profile
             img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
             span.name Amber@fame
-          .created today, 2:22pm
+            span.created.pull-right today, 2:22pm
         .msg-text
           | Test...
       .msg-simple
@@ -97,23 +113,7 @@
           .profile
             img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
             span.name Amber@fame
-          .created today, 2:22pm
-        .msg-text
-          | Test...
-      .msg-simple
-        .msg-data
-          .profile
-            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
-            span.name Amber@fame
-          .created today, 2:22pm
-        .msg-text
-          | Test...
-      .msg-simple
-        .msg-data
-          .profile
-            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
-            span.name Amber@fame
-          .created today, 2:22pm
+            span.created.pull-right today, 2:22pm
         .msg-text
           | This is what it looks like..
       .msg-image
@@ -121,12 +121,11 @@
           .profile
             img.photo  src="http://localhost:3000/assets/profile-placeholder.jpg"
             span.name Amber@fame
-          .created today, 2:22pm
+            span.created.pull-right today, 2:22pm
         .attachment <img src="uploadedimagsource">
     .chat-actions
       = link_to '#'
-        .btn.upload-image
-          | [icon here...]
+        button.btn.upload-image
       .message-input
         | <input type="text" value="">
       .btn-send-container
