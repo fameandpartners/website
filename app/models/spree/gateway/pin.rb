@@ -5,7 +5,10 @@ class Spree::Gateway::Pin < Spree::Gateway
   attr_accessible :preferred_api_key
   attr_accessible :preferred_publishable_key
 
-  USD_GATEWAYS = configatron.pin_payments.usd_gateways
+  USD_GATEWAYS = [
+    ENV['PINS_USD_GATEWAY_1'],
+    ENV['PINS_USD_GATEWAY_2']
+  ]
 
   def purchase(money, creditcard, gateway_options)
     if token = creditcard.gateway_payment_profile_id

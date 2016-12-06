@@ -74,11 +74,6 @@ configatron.bergen do |bergen|
   bergen.password   = ENV['BERGEN_PASSWORD']
 end
 
-configatron.pin_payments.usd_gateways = [
-  ENV['PINS_USD_GATEWAY_1'],
-  ENV['PINS_USD_GATEWAY_2']
-]
-
 configatron.site_version_detector_strategy = :path
 
 configatron.aws.s3 do |s3|
