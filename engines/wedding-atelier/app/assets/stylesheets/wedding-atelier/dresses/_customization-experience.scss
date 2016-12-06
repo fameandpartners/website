@@ -5,6 +5,11 @@
   padding-right: 0;
   text-align: center;
 
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
   &--mobile {
     padding-bottom: 54px;
     padding-left: 15px;
@@ -31,6 +36,50 @@
       height: 55vh;
     }
 
+    .customization-panel {
+      height: 300px;
+      margin-top: 10px;
+      overflow-x: scroll;
+      width: 100%;
+
+      a {
+        display: table;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      ul {
+        height: 200px;
+        margin-top: 20px;
+        overflow-y: hidden;
+        overflow-x: scroll;
+        white-space: nowrap;
+      }
+
+      li {
+        display: inline-block;
+
+      }
+
+      .customization-item-box {
+        background-color: $wild-sand;
+        height: 100px;
+        margin-right: 7px;
+        width: 125px;
+      }
+
+      .customization-label {
+        margin-top: 6px;
+      }
+
+      .customization-value {
+        margin-top: 7px;
+        font-size: .7rem;
+      }
+    }
+
     .results {
       margin-bottom: 10px;
       margin-top: 10px;
@@ -49,7 +98,6 @@
         padding-right: 30px;
         text-align: right;
       }
-
     }
 
     .view-customizations {
@@ -73,6 +121,7 @@
       .btn-black,
       .btn-white {
         width: 50%;
+        margin: 0;
       }
     }
   }

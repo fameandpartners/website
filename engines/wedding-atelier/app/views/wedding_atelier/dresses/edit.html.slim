@@ -2,11 +2,22 @@
   .customization-experience--mobile.hidden-sm.hidden-md.hidden-lg
     h1 You are designing #{"the Wonderland"}
     .dress-preview
-    button.btn-transparent.btn-block
+    .customization-panel.hidden
+      h1
+        em Customize
+        |  it how you want.
+      ul
+        li
+          = link_to '#' do
+            .customization-item-box.table-cell-middle
+              = image_tag asset_path('wedding-atelier/icons/silhouettes.png')
+              p.customization-label silhouette
+          .customization-value Strapless Column
+
+    button.btn-transparent.btn-block.js-customize-dress
       | customize dress
     button.btn-transparent.btn-block
       | select size
-    .customization-panel
     .results
       .view-customizations
         span.left-result = link_to 'View customizations', '#'
