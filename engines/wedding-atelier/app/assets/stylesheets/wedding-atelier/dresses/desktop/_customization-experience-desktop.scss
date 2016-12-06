@@ -64,6 +64,12 @@
       font-size: .85rem;
       text-align: right;
     }
+
+    &:hover,
+    &:focus,
+    &.selected {
+      background-color: $white-three;
+    }
   }
 
   .customization-column {
