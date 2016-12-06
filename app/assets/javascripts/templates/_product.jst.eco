@@ -13,9 +13,6 @@
   <div class="details text-center">
     <a href="<%= @product.collection_path %>" class="media-wrap product-name">
       <span class="name"><%= @product.name %></span>
-      <% if @product.name.toLowerCase().indexOf("skirt") > -1 : %>
-        <span class="skirt-alert"> (skirt only)</span>
-      <% end %>
     </a>
     <span class="price">
       <% if @product.sale_price: %>
