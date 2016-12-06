@@ -187,6 +187,7 @@ PATH
       react-rails
       rolify
       slim
+      twilio-ruby
 
 GEM
   remote: https://rubygems.org/
@@ -821,6 +822,10 @@ GEM
     turnip (1.3.1)
       gherkin (>= 2.5)
       rspec (>= 2.14.0, < 4.0)
+    twilio-ruby (4.13.0)
+      builder (>= 2.1.2)
+      jwt (~> 1.0)
+      multi_json (>= 1.3.0)
     tzinfo (0.3.52)
     uber (0.0.15)
     uglifier (1.3.0)
