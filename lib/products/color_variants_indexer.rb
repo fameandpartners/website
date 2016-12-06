@@ -6,7 +6,6 @@ module Products
     end
 
     include ColorVariantImageDetector
-    include ProductActivityReport
 
     def self.index!
       new.call
