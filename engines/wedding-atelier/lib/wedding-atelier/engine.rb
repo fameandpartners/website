@@ -3,6 +3,7 @@ module WeddingAtelier
     require 'rolify/railtie'
     isolate_namespace WeddingAtelier
     config.autoload_paths += %W(#{config.root}/lib)
+
     config.generators do |g|
       g.test_framework :rspec
     end
