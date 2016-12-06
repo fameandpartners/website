@@ -1,33 +1,136 @@
 #events__moodboard
   #chat.left-content--desktop.col-sm-6
     .chat-general-info
-      .chat-header-left-side
+      .chat-header-left-side.pull-left
         | <strong>Who's online</strong>:
         | Janine, Tania, <s class="text-muted">Nyreee</s>, <s class="text-muted">Kate</s>
-      .chat-header-right-side
-        | <strong>Fame stylist online:</strong>
-        | <span class="stylist-name">Amber</span>
+      .chat-header-right-side.pull-right
+        | <strong>Fame stylist online: </strong>
+        | <span class="stylist-name">Amber: </span>
         | <img src="profilesrc" class="stylist-photo">
     .chat-log
       .msg-simple
-        | Hey lovely, welcome to your amazing new weddings board. Here
-        | you're going to be able to chat with me, your bridesmadis and
-        | create some stunning bridal looks.
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+          .created today, 2:22pm
+        .msg-text
+          | Hey lovely, welcome to your amazing new weddings board. Here
+          | you're going to be able to chat with me, your bridesmadis and
+          | create some stunning bridal looks.
       .msg-simple
-        | Why don't you start by creating your first dress, just select
-        | "<strong>ADD YOUR FIRST DRESS</strong>" to the right.
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+          .created today, 2:22pm
+        .msg-text
+          | Why don't you start by creating your first dress, just select
+          | "<strong>ADD YOUR FIRST DRESS</strong>" to the right.
       .msg-simple
-        | This is what it looks like..
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+          .created today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+          .created today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+          .created today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+          .created today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+          .created today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+          .created today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+          .created today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+          .created today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+          .created today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+          .created today, 2:22pm
+        .msg-text
+          | Test...
+      .msg-simple
+        .msg-data
+          .profile
+            img.photo src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+          .created today, 2:22pm
+        .msg-text
+          | This is what it looks like..
       .msg-image
-        | <img src="imagesrc">
+        .msg-data
+          .profile
+            img.photo  src="http://localhost:3000/assets/profile-placeholder.jpg"
+            span.name Amber@fame
+          .created today, 2:22pm
+        .attachment <img src="uploadedimagsource">
     .chat-actions
       = link_to '#'
         .btn.upload-image
           | [icon here...]
       .message-input
         | <input type="text" value="">
-      .btn-send
-        | <button>send</button>
+      .btn-send-container
+        | <button class="btn btn-black btn-send-to-chat">send</button>
 
   #atelier.right-content--desktop.col-sm-6
     .right-container
