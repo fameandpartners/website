@@ -59,7 +59,7 @@
 
       li {
         display: inline-block;
-
+        vertical-align: top;
       }
 
       .customization-item-box {
@@ -76,6 +76,8 @@
       .customization-value {
         margin-top: 7px;
         font-size: .7rem;
+        max-width: 125px;
+        white-space: normal;
       }
     }
 
