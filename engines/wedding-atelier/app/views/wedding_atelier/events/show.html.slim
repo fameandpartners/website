@@ -1,5 +1,135 @@
-h1 events
+#events__moodboard
+  #chat.left-content--desktop.col-sm-6
+    .chat-general-info
+      .chat-header-left-side
+        | <strong>Who's online</strong>:
+        | Janine, Tania, <s class="text-muted">Nyreee</s>, <s class="text-muted">Kate</s>
+      .chat-header-right-side
+        | <strong>Fame stylist online:</strong>
+        | <span class="stylist-name">Amber</span>
+        | <img src="profilesrc" class="stylist-photo">
+    .chat-log
+      .msg-simple
+        | Hey lovely, welcome to your amazing new weddings board. Here
+        | you're going to be able to chat with me, your bridesmadis and
+        | create some stunning bridal looks.
+      .msg-simple
+        | Why don't you start by creating your first dress, just select
+        | "<strong>ADD YOUR FIRST DRESS</strong>" to the right.
+      .msg-simple
+        | This is what it looks like..
+      .msg-image
+        | <img src="imagesrc">
+    .chat-actions
+      = link_to '#'
+        .btn.upload-image
+          | [icon here...]
+      .message-input
+        | <input type="text" value="">
+      .btn-send
+        | <button>send</button>
 
-name
+  #atelier.right-content--desktop.col-sm-6
+    .right-container
+      h1 Janine's wedding - in 150 days
 
-= @event.name
+      .moodboard-tabs
+        /! Nav tabs
+        ul.nav.nav-tabs role="tablist"
+          li.active role="presentation"
+            a aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab"  Bridesmaid dresses
+          li role="presentation"
+            a aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab"  Wedding details
+          li role="presentation"
+            a aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab"  Manage bridal party
+          li role="presentation"
+            a aria-controls="bridal-gowns" data-toggle="tab" href="#bridal-gowns" role="tab"  Bridal Gowns
+        /! Tab panes
+        .tab-content
+          #bridesmaid-dresses.tab-pane.active role="tabpanel"
+            /! IF there's not dresses ...
+            .add-dress-box
+              | <button class="add">Add your first dress</button>
+
+            /! IF there are dresses ...
+            .dresses-list
+              .dresses-actions
+                | <button><i>Create</i> a Dress</button>
+
+              .dress-boxes
+                .dress-box
+                  .top-info
+                    |<span>Added by Nyree</span>
+                  .dress-box-header
+                    .likes (2)
+                    = link_to '#', class: 'icon-close'
+                  .dress-box-body
+                    | <img src="imagesource">
+                    .dress-info
+                      | <strong>Vanessa Dress</strong>
+                      | $319
+                  .dress-box-footer
+                    | <button class="btn-send-to-chat">Send to chat</button>
+                    | <button class="btn-add-to-cart">Add to cart</button>
+                .dress-box
+                  .top-info
+                    |<span>Added by Jemma</span>
+                  .dress-box-header
+                    .likes (2)
+                    = link_to '#', class: 'icon-close'
+                  .dress-box-body
+                    | <img src="imagesource">
+                    .dress-info
+                      | <strong>Katey Dress</strong>
+                      | $200
+                  .dress-box-footer
+                    | <button class="btn-send-to-chat">Send to chat</button>
+                    | <button class="btn-add-to-cart">Add to cart</button>
+
+          #wedding-details.tab-pane role="tabpanel"
+            form
+              label Name the wedding board, for="input_wedding_board_name"
+              input id="input_wedding_board_name"
+
+              form
+                .form-group
+                  label for="input_wedding_board_name"  Name the wedding board
+                  input#input_wedding_board_name.form-control placeholder="" type="text" /
+                .form-group
+                  label for="input_role" What is your role in the wedding?
+                  select#input_role.form-control
+                    option select-2
+                    option select-2
+                    option select-2
+                .form-group
+                  label for="input_1" How many bridesmaids at the wedding?
+                  | increment/decrement plugin here
+                .form-group
+                  label for="input_1" What is the date of the wedding?
+                  | calendar here
+
+                button.btn.btn-default type="submit"  Update
+
+          #manage-bridal-party.tab-pane role="tabpanel"
+            h1 <strong>Janine</strong>, intive the bridal party.
+            | <button>Facebook button</button>
+
+            form
+              .form-group
+                label for="input_email_address" Email address
+                input#input_email_address placeholder="mail@mail.com" type="text" /
+
+            .invited-people
+              .person
+                .person-name Candy May
+                .person-role Bride
+              .person
+                .person-name Michelle Jones
+                .person-role Bridesmaid
+                  = link_to '#'
+                    | Remove from board
+              .person
+                .person-name Janinecprib@gmail.com
+                .person-role Pending
+
+          #bridal-gowns.tab-pane role="tabpanel"  ...
