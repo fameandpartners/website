@@ -1,7 +1,7 @@
 {
   "name": "fame-and-partners",
   "version": "1.0.0",
-  "description": "",
+  "description": "Fame & Partners JS bundle",
   "author": "F&P Dev Team",
   "devDependencies": {
     "chalk": "^1.1.3",
@@ -43,12 +43,11 @@
     "yargs": "^6.3.0"
   },
   "scripts": {
-<<<<<<< 913eece79cef2097b0331b4e9f797e9ba69ab9e2
-    "start": "NODE_ENV=development gulp build --watch true",
-    "prod": "NODE_ENV=production gulp build --prod true",
-=======
     "start": "gulp build --watch true",
->>>>>>> Revert "Merge branch 'master' into feature/customization-ui-markup"
+    "prod": "NODE_ENV=production gulp build --prod true",
     "production": "NODE_ENV=production gulp build --prod true"
-  }
+  },
+  "main": "index.js",
+  "repository": "git@github.com:fameandpartners/website.git",
+  "license": "Proprietary"
 }

@@ -1,7 +1,10 @@
+# TODO: 28th November 2016, marked for deletion
+# This policy conflicts with `OrderProjectedDeliveryDatePolicy` and `LineItemProjectedDeliveryDatePolicy`
+# Being unused, unreadable and unmaintainable
+
 require 'business_time'
 
 module Policies
-
   class ProjectDeliveryDatePolicy
 
     DAYS_FOR_DELIVERY = 4

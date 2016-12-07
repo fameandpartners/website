@@ -43,7 +43,7 @@
 
   }
 
-  .last-cta {
+  .shop-collection-cta {
     margin-bottom: 50px;
   }
 
@@ -76,17 +76,6 @@
     text-transform: uppercase;
   }
 
-  .image-wrap {
-    height: 71px;
-    position: relative;
-
-    img {
-      position: absolute;
-      bottom: 0;
-    }
-
-  }
-
   @media (max-width: $bootstrap-md-width - 1px) {
     text-align: center;
 
@@ -99,14 +88,6 @@
           bottom: -22px;
         }
 
-      }
-
-    }
-
-    .image-wrap {
-
-      img {
-        position: relative;
       }
 
     }
