@@ -8,6 +8,8 @@
     display: flex;
     flex-direction: column;
 
+    box-shadow: 1px 2px 5px #888888;
+
     /* chat header */
 
     .chat-general-info {
@@ -113,6 +115,9 @@
     }
 
     .moodboard-tabs {
+      width: 90%;
+      min-width: 560px;
+
       .nav-tabs > li.active > a,
       .nav-tabs > li.active > a:hover,
       .nav-tabs > li.active > a:focus {
@@ -127,6 +132,21 @@
 
       .nav-tabs > li.active {
         border: 0;
+      }
+    }
+
+    .add-dress-box {
+      margin-top: 30px;
+
+      button {
+        border: 2px dashed $white-four;
+        height: 307px;
+        width: 242px;
+        background-image: image-url('wedding-atelier/add-dress.png');
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-position: 36px 109px;
+        text-indent: -9999px
       }
     }
 
