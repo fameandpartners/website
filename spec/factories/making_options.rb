@@ -7,6 +7,6 @@ FactoryGirl.define do
   end
 
   factory :line_item_making_option, class: LineItemMakingOption do
-    association :product_making_option
+    product_making_option FactoryGirl.build(:product_making_option)
   end
 end
