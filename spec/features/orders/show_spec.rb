@@ -17,7 +17,6 @@ describe 'show order', type: :feature do
     expect(page.status_code).to eq(200)
   end
 
-
   # NOTE: 18/11/16 - Alexey Bobyrev
   # Regression test for PR #2169
   it 'with enabled I=C feature page should be available to visit' do
@@ -57,4 +56,27 @@ describe 'show order', type: :feature do
     end
   end
 
+  describe "line items" do
+    let(:order) { FactoryGirl.create(:complete_order_with_items) }
+
+    it "splits line items by delivery" do
+      order.line_items << FactoryGirl.create(:dress_item, :fast_making)
+
+      visit spree.order_path(order)
+
+      within('.fast-making-items') do
+        expect(page).to have_content('Express making, get in 5 to 7 days')
+        expect(page).to have_content(product_name(order.line_items.last))
+      end
+
+      within('.standard-making-items') do
+        expect(page).to have_content('Free shipping to USA, Canada and the UK within 7 – 10 days')
+        expect(page).to have_content(product_name(order.line_items.first))
+      end
+    end
+
+    def product_name(line_item)
+      line_item.variant.product.name
+    end
+  end
 end
