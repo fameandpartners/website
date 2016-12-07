@@ -150,43 +150,141 @@
         .tab-content
           #bridesmaid-dresses.tab-pane.active role="tabpanel"
             /! IF there's not dresses ...
-            .add-dress-box
+            .add-dress-box.hidden
               | <button class="add">Add your first dress</button>
 
             /! IF there are dresses ...
-            .dresses-list.hidden
-              .dresses-actions
-                | <button><i>Create</i> a Dress</button>
+            .dresses-list
+              .dresses-actions.text-center
+                = link_to '#', class: 'btn-transparent btn-create-a-dress'
+                  em Create
+                  |  a dress
 
               .dress-boxes
                 .dress-box
                   .top-info
                     |<span>Added by Nyree</span>
                   .dress-box-header
-                    .likes (2)
-                    = link_to '#', class: 'icon-close'
-                  .dress-box-body
-                    | <img src="imagesource">
-                    .dress-info
+                    .likes
+                      span.icon-liked
+                      |  (2)
+                    = link_to '#1', '#2', class: 'icon-close pull-right'
+                  .dress-box-body.text-center
+                    | <img class="center-block" src="imagesource">
+                    .dress-info.center-block
                       | <strong>Vanessa Dress</strong>
-                      | $319
-                  .dress-box-footer
+                      | <span>|</span>
+                      | <span>$319</span>
+                  .dress-box-footer.center-block
                     | <button class="btn-send-to-chat">Send to chat</button>
                     | <button class="btn-add-to-cart">Add to cart</button>
                 .dress-box
                   .top-info
-                    |<span>Added by Jemma</span>
+                    |<span>Added by Nyree</span>
                   .dress-box-header
-                    .likes (2)
-                    = link_to '#', class: 'icon-close'
-                  .dress-box-body
-                    | <img src="imagesource">
-                    .dress-info
-                      | <strong>Katey Dress</strong>
-                      | $200
-                  .dress-box-footer
+                    .likes
+                      span.icon-liked
+                      |  (2)
+                    = link_to '#1', '#2', class: 'icon-close pull-right'
+                  .dress-box-body.text-center
+                    | <img class="center-block" src="imagesource">
+                    .dress-info.center-block
+                      | <strong>Vanessa Dress</strong>
+                      | <span>|</span>
+                      | <span>$319</span>
+                  .dress-box-footer.center-block
                     | <button class="btn-send-to-chat">Send to chat</button>
                     | <button class="btn-add-to-cart">Add to cart</button>
+                .dress-box
+                  .top-info
+                    |<span>Added by Nyree</span>
+                  .dress-box-header
+                    .likes
+                      span.icon-liked
+                      |  (2)
+                    = link_to '#1', '#2', class: 'icon-close pull-right'
+                  .dress-box-body.text-center
+                    | <img class="center-block" src="imagesource">
+                    .dress-info.center-block
+                      | <strong>Vanessa Dress</strong>
+                      | <span>|</span>
+                      | <span>$319</span>
+                  .dress-box-footer.center-block
+                    | <button class="btn-send-to-chat">Send to chat</button>
+                    | <button class="btn-add-to-cart">Add to cart</button>
+                .dress-box
+                  .top-info
+                    |<span>Added by Nyree</span>
+                  .dress-box-header
+                    .likes
+                      span.icon-liked
+                      |  (2)
+                    = link_to '#1', '#2', class: 'icon-close pull-right'
+                  .dress-box-body.text-center
+                    | <img class="center-block" src="imagesource">
+                    .dress-info.center-block
+                      | <strong>Vanessa Dress</strong>
+                      | <span>|</span>
+                      | <span>$319</span>
+                  .dress-box-footer.center-block
+                    | <button class="btn-send-to-chat">Send to chat</button>
+                    | <button class="btn-add-to-cart">Add to cart</button>
+                .dress-box
+                  .top-info
+                    |<span>Added by Nyree</span>
+                  .dress-box-header
+                    .likes
+                      span.icon-liked
+                      |  (2)
+                    = link_to '#1', '#2', class: 'icon-close pull-right'
+                  .dress-box-body.text-center
+                    | <img class="center-block" src="imagesource">
+                    .dress-info.center-block
+                      | <strong>Vanessa Dress</strong>
+                      | <span>|</span>
+                      | <span>$319</span>
+                  .dress-box-footer.center-block
+                    | <button class="btn-send-to-chat">Send to chat</button>
+                    | <button class="btn-add-to-cart">Add to cart</button>
+                .dress-box
+                  .top-info
+                    |<span>Added by Nyree</span>
+                  .dress-box-header
+                    .likes
+                      span.icon-liked
+                      |  (2)
+                    = link_to '#1', '#2', class: 'icon-close pull-right'
+                  .dress-box-body.text-center
+                    | <img class="center-block" src="imagesource">
+                    .dress-info.center-block
+                      | <strong>Vanessa Dress</strong>
+                      | <span>|</span>
+                      | <span>$319</span>
+                  .dress-box-footer.center-block
+                    | <button class="btn-send-to-chat">Send to chat</button>
+                    | <button class="btn-add-to-cart">Add to cart</button>
+                .dress-box
+                  .top-info
+                    |<span>Added by Nyree</span>
+                  .dress-box-header
+                    .likes
+                      span.icon-liked
+                      |  (2)
+                    = link_to '#1', '#2', class: 'icon-close pull-right'
+                  .dress-box-body.text-center
+                    | <img class="center-block" src="imagesource">
+                    .dress-info.center-block
+                      | <strong>Vanessa Dress</strong>
+                      | <span>|</span>
+                      | <span>$319</span>
+                  .dress-box-footer.center-block
+                    | <button class="btn-send-to-chat">Send to chat</button>
+                    | <button class="btn-add-to-cart">Add to cart</button>
+
+
+
+
+
 
           #wedding-details.tab-pane role="tabpanel"
             form
