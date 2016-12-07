@@ -179,6 +179,13 @@ PATH
     revolution (0.0.1)
       awesome_nested_set
       rails (~> 3.2.21)
+    wedding-atelier (0.0.1)
+      bootstrap-sass (~> 3.3.4.1)
+      kaminari
+      rails (~> 3.2.22.5)
+      react-rails
+      rolify
+      slim
 
 GEM
   remote: https://rubygems.org/
@@ -261,6 +268,9 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.3.4.1)
+      autoprefixer-rails (>= 5.0.0.1)
+      sass (>= 3.2.19)
     bugsnag (5.0.1)
     builder (3.0.4)
     bullet (5.3.0)
@@ -645,6 +655,7 @@ GEM
       netrc (~> 0.7)
     retriable (2.0.2)
     rmagick (2.15.4)
+    rolify (5.1.0)
     rollout (2.1.0)
     roo (1.13.2)
       nokogiri
@@ -920,6 +931,7 @@ DEPENDENCIES
   unicorn
   vcr (~> 2.9.3)
   webmock (~> 1.21.0)
+  wedding-atelier!
   whenever
 
 RUBY VERSION

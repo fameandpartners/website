@@ -1,0 +1,24 @@
+/* ...
+*= require select2-4.0.3
+*= require 'select2-4.0.3-bootstrap'
+*= require bootstrap-datepicker3-1.6.4
+*/
+
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/fonts';
+@import 'base/bootstrap-and-overrides';
+@import 'base/breakpoints';
+@import 'base/layout';
+
+.wedding-atelier {
+  @import 'base/typography';
+  @import 'base/common';
+  @import 'base/forms';
+  @import 'base/buttons';
+  @import 'base/select2_overrides';
+  @import 'components/**';
+  @import 'registrations/**';
+  @import 'sessions/**';
+  @import 'shared/**';
+}
