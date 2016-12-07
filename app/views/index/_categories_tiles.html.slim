@@ -1,0 +1,97 @@
+// Section: Categories tiles
+section.section-box.container.section-style-icon
+  .row
+    .col-md-12.heading-overlay-wrapper
+      h2.heading-overlay F&P Style icon
+
+  .tag-info-section
+    .tag-info-wrapper.visible-lg-block
+      .tag-info
+        .section-name.vertical-text F&P Style icon
+        .diagonal-line
+
+    .row
+      .col-md-12.cta-item-huge
+        - current_edit_image = "homepage/fp-style-icon/nov-18-tile-1.jpg"
+        - current_edit_mob_image = "homepage/fp-style-icon/nov-18-tile-1-mob.jpg"
+        // TODO: add pretty url path
+        - current_edit_link = '/slayitforward'
+
+
+        = link_to current_edit_link
+          .section-img-wrap.copy-center
+            picture
+              .img-wrap
+                source media="(max-width: 991px)" srcset="#{image_path(current_edit_mob_image)}"
+                source media="(min-width: 992px)" srcset="#{image_path(current_edit_image)}"
+                img src="#{image_path(current_edit_image)}" srcset="
+                  #{image_path(current_edit_mob_image)} 991w,
+                  #{image_path(current_edit_image)} 992w"
+
+  .tag-info-section
+    .tag-info-wrapper.visible-lg-block
+      .tag-info
+        .section-name.vertical-text Our Edits
+        .diagonal-line
+
+    .row
+      .col-md-6.cta-item
+        = link_to dresses_path + '/wrap'
+          .section-img-wrap.copy-center
+            .img-wrap
+              img src='#{image_path("homepage/fp-style-icon/nov-18-tile-2.jpg")}'
+
+            .content-wrap
+              .container-cta
+                .row-cta
+                  .col-md-12
+                    .copy-wrap.text-center
+                      span.cta-link-white-bg
+                        span.cta-link Shop
+                        span.copy-highlight Wrap Details
+
+      .col-md-6.cta-item
+        = link_to dresses_path + '/jumpsuit'
+          .section-img-wrap.copy-center
+            .img-wrap
+              img src='#{image_path("homepage/fp-style-icon/nov-18-tile-3.jpg")}'
+
+            .content-wrap
+              .container-cta
+                .row-cta
+                  .col-md-12
+                    .copy-wrap.text-center
+                      span.cta-link-white-bg
+                        span.cta-link Shop
+                        span.copy-highlight Jumpsuits
+
+    .row
+      .col-md-6.cta-item
+        = link_to dresses_path + '/midi'
+          .section-img-wrap.copy-center
+            .img-wrap
+              img src='#{image_path("homepage/fp-style-icon/nov-18-tile-4.jpg")}'
+
+            .content-wrap
+              .container-cta
+                .row-cta
+                  .col-md-12
+                    .copy-wrap.text-center
+                      span.cta-link-white-bg
+                        span.cta-link Shop
+                        span.copy-highlight Midi Dresses
+
+      .col-md-6.cta-item
+        = link_to dresses_path + '/cocktail'
+          .section-img-wrap.copy-center
+            .img-wrap
+              img src='#{image_path("homepage/fp-style-icon/nov-18-tile-5.jpg")}'
+
+            .content-wrap
+              .container-cta
+                .row-cta
+                  .col-md-12
+                    .copy-wrap.text-center
+                      span.cta-link-white-bg
+                        span.cta-link Shop
+                        span.copy-highlight Party dresses

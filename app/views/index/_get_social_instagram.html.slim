@@ -1,0 +1,84 @@
+// Section: Instagram
+section.container
+  .row
+    .col-md-12.heading-overlay-wrapper
+      h2.heading-overlay Get Social
+
+.section-wrapper
+  .section-box.section-instagram
+    .container
+      .row
+
+      .tag-info-section
+        .tag-info-wrapper.visible-lg-block
+          .tag-info
+            .section-name.vertical-text Get Social
+            .diagonal-line
+
+        .instagram-widget
+
+          // Instagram Item
+          .item.col-md-5ths.col-xs-6
+            = link_to dresses_path + "/dress-rosewater-1112?color=rosewater-floral", class: "item-wrap"
+              .media-wrap
+                = image_tag "homepage/get-social/Instagram-1.jpg", class: "img-responsive", alt: ""
+                .overlay
+                  .overlay-outer-wrap
+                    .overlay-inner-wrap
+                      span.cta-instagram
+                        span.user @Weworewhat
+                        span.cta-link shop
+
+          // Instagram Item
+          .item.col-md-5ths.col-xs-6
+            = link_to  dresses_path + "/dress-lucy-two-piece-1161?color=black", class: "item-wrap"
+              .media-wrap
+                = image_tag "homepage/get-social/Instagram-2.jpg", class: "img-responsive", alt: ""
+                .overlay
+                  .overlay-outer-wrap
+                    .overlay-inner-wrap
+                      span.cta-instagram
+                        span.user @officiallyquigley3
+                        span.cta-link shop
+
+          // Instagram Item
+          .item.col-md-5ths.col-xs-6
+            = link_to  dresses_path + "/dress-perrotta-skirt-1165?color=black", class: "item-wrap"
+              .media-wrap
+                = image_tag "homepage/get-social/Instagram-3.jpg", class: "img-responsive", alt: ""
+                .overlay
+                  .overlay-outer-wrap
+                    .overlay-inner-wrap
+                      span.cta-instagram
+                        span.user @cuppajyo
+                        span.cta-link shop
+
+          // Instagram Item
+          .item.col-md-5ths.col-xs-6
+            = link_to  dresses_path + "/dress-palais-1053?color=black", class: "item-wrap"
+              .media-wrap
+                = image_tag "homepage/get-social/Instagram-4.jpg", class: "img-responsive", alt: ""
+                .overlay
+                  .overlay-outer-wrap
+                    .overlay-inner-wrap
+                      span.cta-instagram
+                        span.user @biancamelb
+                        span.cta-link shop
+
+          // Instagram Item
+          .item.col-md-5ths.hidden-sm.hidden-xs
+            = link_to  dresses_path + "/dress-escala-944?color=burgundy", class: "item-wrap"
+              .media-wrap
+                = image_tag "homepage/get-social/Instagram-5.jpg", class: "img-responsive", alt: ""
+                .overlay
+                  .overlay-outer-wrap
+                    .overlay-inner-wrap
+                      span.cta-instagram
+                        span.user @makalakatherine
+                        span.cta-link shop
+
+      .row
+        .col-md-12.text-center
+          = link_to shop_social_path
+              span.btn-xs.btn-featured
+                | Shop <span class="copy-highlight">Instagram</span>
