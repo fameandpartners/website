@@ -70,7 +70,7 @@
 
     a {
       color:  $c-neutral-10;
-      text-decoration: underline;
+      @extend .link-underline;
     }
 
   }
@@ -91,6 +91,20 @@
       top: 50%;
       left: 50%;
       margin-left: -30px;
+    }
+
+  }
+
+  .section-weekly-winners {
+    padding-top: 40px;
+    margin-bottom: 60px;
+
+    .text-grey {
+      font-size: 2.2rem;
+    }
+
+    .weekly-winners {
+      @extend .link-underline;
     }
 
   }

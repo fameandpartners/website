@@ -8,11 +8,7 @@
     position: absolute;
     bottom: 0;
   }
-
-  .img-stretch {
-    width: 100%;
-  }
-
+  
   @media (max-width: $bootstrap-md-width - 1px) {
 
     img {
