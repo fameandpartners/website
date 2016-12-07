@@ -10,6 +10,10 @@
   border: 0;
   border-radius: 0;
   box-shadow: none;
+  height: inherit;
+  margin: 0 auto;
+  pointer-events: all;
+  width: inherit;
 }
 
 .modal-body {
@@ -21,6 +25,20 @@
   cursor: pointer;
   height: 30px;
   width: 30px;
+}
+
+.modal-vertical-align-helper {
+  display: table;
+  height: 100%;
+  width: 100%;
+  pointer-events: none; /* This makes sure that we can still click outside of the modal to close it */
+}
+
+.modal-vertical-align {
+  /* To center vertically */
+  display: table-cell;
+  vertical-align: middle;
+  pointer-events: none;
 }
 
 /* [Wedding Atelier - Confirmation Dialog]
