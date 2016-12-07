@@ -20,21 +20,21 @@ section.section-box.container.section-social.same-height-cols
             = link_to current_social_network_link, target: "_blank"
               = image_tag "homepage/social-media/social-media-1.jpg", class: "img-responsive"
 
-    - current_social_network_link = "https://www.facebook.com/fameandpartners/"
+    - current_social_network_link = slay_it_forward_path
     .col-md-6.copy-img-side-by-side
       .item.bordered.item-alt.section-blog
         .row
           .col-sm-5.copy-side
             .content-wrapper
-              p Want to win a celebration of you, inside & out, worth $30,000? Of course you do. Like our #{link_to "Facebook", current_social_network_link, target: "_blank"} page and enter our Friday giveaways.
+              p We'll donate $1 to Planned Parenthood, RAINN, the ACLU & more every time you #{link_to "#slayitforward", current_social_network_link}.
 
               .link-align-bottom
                 = link_to current_social_network_link, target: "_blank"
                   span.cta-link-arrow-right
-                    span.cta-link Explore
-                    span.copy-highlight Facebook
+                    span.cta-link More
+                    span.copy-highlight Details
                     i.icon.icon-arrow-right
 
           .col-sm-7.img-side
-            = link_to current_social_network_link, target: "_blank"
+            = link_to current_social_network_link
               = image_tag "homepage/social-media/social-media-2.jpg", class: "img-responsive"
