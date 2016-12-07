@@ -1,0 +1,79 @@
+/* [Bootstrap modal customizations]
+-------------------------------------------------------*/
+.modal-backdrop {
+  background-color: $black;
+  opacity: .75;
+}
+
+.modal-content {
+  background-color: $white-two;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.modal-body {
+  padding: 13px;
+}
+
+.close-modal {
+  background: image-url('wedding-atelier/close.svg') no-repeat center center;
+  height: 30px;
+  width: 30px;
+}
+
+/* [Wedding Atelier - Confirmation Dialog]
+-------------------------------------------------------*/
+
+.modal-confirm {
+
+  &::before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    margin-right: -4px;
+    vertical-align: middle;
+  }
+
+  .modal-dialog {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  @include screen-sm {
+
+    .modal-body {
+      height: 344px;
+    }
+
+    .modal-dialog {
+      width: 624px;
+    }
+  }
+
+}
+
+//.modal-confirm {
+//
+//  h1 {
+//    font-size: 2.3rem;
+//    margin-left: auto;
+//    margin-right: auto;
+//
+//  }
+//
+//  .modal-body {
+//    display: table;
+//    height: 344px;
+//    text-align: center;
+//    width: 624px;
+//  }
+//
+//  .modal-body-save-dress {
+//    display: table-cell;
+//    max-width: 450px;
+//    margin: 0 auto;
+//    vertical-align: middle;
+//  }
+//
+//}
