@@ -4,7 +4,7 @@
 # NOTE: JS bundling at the `assets.rake` rake file
 ##################################################
 
-# Persist npm modules across deploys.
+# Persist npm modules acros deploys.
 # installation actually happens in a rake task after assets:precompile
 shared_modules_path="${shared_app_path}/node_modules"
 # ensure shared modules dir exists
@@ -14,4 +14,4 @@ ln -s ${shared_modules_path} ${this_release_dir}/node_modules
 
 # install npm modules
 cd ${this_release_dir}
-yarn install && yarn run prod
+npm install && npm run production

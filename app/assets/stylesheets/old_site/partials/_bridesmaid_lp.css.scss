@@ -1,0 +1,183 @@
+
+.bridesmaid_lp {
+  margin-top: -8px;
+
+  .inner{
+    width: 1140px;
+    margin: 0 auto;
+
+    .right{
+      float: right;
+    }
+    .left{
+      float: left;
+    }
+
+    .catalog{
+      .catalog-item{
+        width: 25%;
+        padding-left:0;
+        padding-right: 10px;
+        padding-bottom:15px;
+        margin-right:0px;
+        margin-bottom:10px;
+      }
+      img {
+        max-height:395px;
+      }
+      .catalog-item:nth-child(4) {
+        padding-right:0;        
+      }      
+    }
+
+    .sb2 {
+      @include clearfix;
+      .left{
+        .textimg{
+          display: block;
+          padding: 45px 0;
+          margin: 0 auto;
+        }
+        
+      }
+      .right{
+        position: relative;
+        a{
+          position: absolute;
+          display: block;
+          bottom: 40px;
+          width: 100%;
+          .banner {
+            display: block;
+            padding: 10px 0;
+            margin: 0 auto;
+          }  
+        }
+      }
+    }
+    .sb3 {
+      @include clearfix;
+      .image {
+        float: left;
+        margin-right: 30px;
+      }
+    }
+    .sb4{
+      @include clearfix;
+      .right{
+        height: 520px;
+        overflow: hidden;
+      }
+      .image {
+        float: right;
+        margin-left: 30px;
+      }
+    }
+
+    .more {
+      margin-top: 40px;
+      h2 {
+        width: 66.666666%;
+        margin-bottom: 40px;
+        background-color: #FFFFFF;
+        color:#000000;
+        border-bottom:1px solid #CCCCCC;
+        padding-bottom:20px;
+        font-weight:bold;
+
+      }
+    }
+  }
+}
+
+.bridesmaid_lp {
+    .sb3 {
+      @include clearfix;
+      .right {
+        .image {
+          float: right;
+          margin: 0px;
+        }
+      }
+      .left {
+        .image {
+          float: left;
+          margin: 0px;
+        }
+      }
+      h1, h2 {
+        font-family: "Didot", serif;
+        font-size:30px;
+        margin-top:20px;
+        margin-left:20px;
+        margin-right:20px;        
+        font-style: normal;
+        font-weight:bold;    
+        text-align:center;
+        border-bottom:1px solid #CCCCCC;
+        padding-bottom:11px;
+      }
+      p {
+      text-align:center;
+        font-family: "Didot", serif;
+        font-size:14px;
+        margin-top:20px;
+        margin-left:20px;
+        margin-right:20px;        
+        font-style: italic;
+        font-weight:normal; 
+      }
+    }
+
+    .title {
+      font-weight: bold;
+      color:#555559;
+      font-size:11pt;
+    }
+}
+
+
+
+@media only screen and (max-width: 1000px), only screen and (max-device-width: 1000px) {
+  #bridesmaid_lp, #amfam_lp {
+    #content{
+      width: 1140px;
+      margin: 0 auto 0 auto;
+      -webkit-text-size-adjust: 100%;
+    }
+    .nav-container{
+      display: none;
+    }
+    .holder{
+      display: none;
+    } 
+  }
+}
+
+
+
+@media only screen and (max-width: 680px), only screen and (max-device-width: 680px) {
+  #content, .inner{
+    width: 100% !important;
+    min-width: 320px;
+  }
+
+  .sb1, .sb2 .image1 {
+    display: none;
+  }
+  .sb2, .sb3, .sb4{
+    .image{
+      width: 100%;
+    }
+    .image{
+      margin: 0;
+    }
+  }
+  .catalog{
+    width: 100% !important;
+    .catalog-item{
+      width: 100% !important;
+      margin-right: 0;
+    }
+  }
+}

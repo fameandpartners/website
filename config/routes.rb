@@ -219,7 +219,6 @@ FameAndPartners::Application.routes.draw do
     get '/dress-for-wedding'    => 'products/collections#show', :permalink => 'dress-for-wedding', :as => :dress_for_wedding_page
     get '/dress-for-parties'    => 'products/collections#show', :permalink => 'dress-for-parties', :as => :dress_for_parties_page
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
-    get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)

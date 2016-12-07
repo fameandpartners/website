@@ -15,6 +15,7 @@
 //= require_tree ../spree/admin/products
 //= require_tree ../spree/admin/partials
 //= require ../libs/jquery.tagsinput.min
+//= require ckeditor/init
 //= require jquery-fileupload
 //= require admin/spree_social
 //= require admin/spree_paypal_express

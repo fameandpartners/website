@@ -1,0 +1,192 @@
+.footer-global {
+	text-transform: uppercase;
+	padding-top: 15px;
+	max-width: none;
+	background: #000;
+	color: #fff;
+	.container {
+		max-width: 1140px;
+		margin: 0 auto;
+	}
+	@extend .centered-layout;
+
+	.copy {
+		text-align: center;
+		line-height: 67px;
+	}
+	.address {
+		line-height: 20px;
+	}
+	.active {
+		text-align: center;
+		font: $fontFive;
+	}
+	.form-fixed{
+		position: fixed;
+		height: 260px;
+		bottom: -1px;
+		left: 0;
+		z-index: 9999;
+	}
+	.form-normal{
+		position: relative;
+	}
+	.form {
+		width: 100%;
+		height: 240px;
+		background: image_url('_popups/trans.png');
+
+		* {
+			display: inline-block;
+		}
+
+		.holder {
+			padding-top: 40px;
+			text-align: center;
+			font-size: 18px;
+			width: 100%;
+
+			.close {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				color: #fff;
+				font-size: 22px;
+				cursor: pointer;
+			}
+
+
+			.success-holder{
+				position: relative;
+				width: 370px;
+				text-align: center;
+				margin: 0 auto;
+				display: block;
+			}
+
+			#sub-success{
+				position: absolute;
+				height: 142px;
+				margin: 0 auto;
+				padding: 20px;
+				z-index: 1000;
+				top: -30px;
+				left: 0;
+				.heading{
+					font-size: 14px;
+				}
+				.msg{
+					font-size: 10px;
+				}
+			}
+
+			.label {
+				margin: 8px 10px 0 0;
+				font: 22px/1em $fontThree;
+				float: left;
+			}
+
+			form {
+				.title{
+					width: 370px;
+					font: 22px/1em $fontFour;
+					padding: 10px 0;
+					text-align: center;
+					display: block;
+					margin: 0 auto 20px auto;
+					border-top: 2px solid #fff;
+					border-bottom: 2px solid #fff;
+				}
+				.sub{
+					width: 300px;
+					margin: 0 auto 20px auto;
+					font: 15px/1em $fontFive;
+					font-style: italic;
+					display: block;
+					text-transform: none;
+					font-weight: 100;
+				}
+			}
+			#fieldEmail {
+				width: 300px;
+				border: none;
+				padding: 0;
+				text-align: center;
+				height: 34px;
+				display: inline-block;
+				float: left;
+				font: 14px/1em $fontOne;
+			}
+			button {
+				position: relative;
+				height: 34px;
+				display: inline-block;
+				margin: 0;
+				padding: 6px 10px 0 0;
+				border: 0;
+				background: #fff;
+				font-size: 22px;
+
+				.fa-caret-right::before{
+					position: absolute;
+					top: 8px;
+				}
+			}	
+		}	
+	}
+
+}
+.nav-footer {
+	position: relative;
+	min-height: 70px;
+	padding: 13px 0;
+	width: 1000px;
+	margin: 0 auto;
+	text-align: center;
+	@include clearfix;
+	.footer-links {
+		display: inline-block;
+		min-width: 190px;	
+		text-align: left;
+		vertical-align: top;
+
+		.girlfriend{
+			margin: 16px 0;
+			img{
+				margin: 10px 0 10px 0;
+			}
+		}
+	}
+	.footer-label {
+		font-weight: bold;
+		font-size: 12px;
+		span {
+			font-size: 10px;
+			font-weight: normal;
+		}
+	}
+	li {margin-bottom: 10px;}
+	a {
+		text-decoration: none;
+		font-size: 11px;
+		font-family: $fontFive;
+	}
+	.social-links {
+		li {
+			display: inline-block;
+		}
+		i {
+			font-size: 24px;
+			margin: 0 10px;
+		}
+	}
+}
+
+.phone {
+	text-align: center;
+	width: 35%;
+	color: #fff;
+	margin: 0 auto;
+	padding: 5px 10px;
+	font-size: 14px;
+}

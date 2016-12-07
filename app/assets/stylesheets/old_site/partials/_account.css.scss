@@ -1,0 +1,169 @@
+.account-pages {
+	margin-top: 45px;
+	h1 {
+		font: 300 30px/1.1 $fontFive;
+		margin-bottom: 20px;
+	}
+	.tabs-links {
+		margin: 0;
+		padding: 0;
+		font-size: 0;
+		list-style: none;
+		li {
+			font-size: 12px;
+			font-family: $fontFive;
+			display: inline-block;
+			vertical-align: top;
+			padding-bottom: 5px;
+			&.active {
+				background-color: #000;
+				a {
+					background: 0;
+					color: #fff;
+					line-height: 37px;
+				}
+			}
+			+ li { margin-left: 4px;}
+		}
+		a {
+			display: block;
+			text-decoration: none;
+			color: #000;
+			background: url('_nav-bg.png');
+			width: 180px;
+			height: 32px;
+			line-height: 32px;
+			text-align: center;
+		}
+	}
+	.tab-content {
+		margin-top: -1px;
+		border: solid 1px #d7d7d7;
+		padding: 20px;
+		.share {
+			margin: 0 20px 20px 0;
+		}
+	}
+	.devise-forms {
+		@include clearfix;
+		.fields-box {
+			float: left;
+			width: 420px;
+		}
+		.avatar-box {
+			float: right;
+			width: 400px;
+			margin-top: 50px;
+			.avatar-field {
+				@include clearfix;
+				.avatar {
+					width: 100px;
+					height: 100px;
+					border-radius: 100%;
+					float: left;
+					margin-right: 20px;
+					overflow: hidden;
+					&.empty {
+						background: url('_reg/avatar-empty.png') no-repeat center center #e1e1e1;
+					}
+				}
+				.text {
+					float: left;
+					margin-top: 10px;
+				}
+			}
+		}
+		.submit-form {
+			padding-top: 40px;
+			margin-top: 15px;
+			border-top: solid 1px #d7d7d7;
+		}
+	}
+	#wishlist {
+		position: relative;
+
+		.tab-content {
+			padding: 0px;
+		}
+		.products-list {
+			margin-top: 30px;
+			margin-left: -16px;
+		}
+		.share-moodboard{
+			width: 280px;
+			margin: 0 auto 30px;
+			display: block;
+			width: 280px;
+		}
+		.intro{
+			padding: 10px;
+			width: 420px;
+			margin: 0 auto;
+			font: 100 18px/22px $fontTwo;
+			text-align: center;
+			text-transform: none;
+			font-style: italic;
+		}
+
+	}
+	.redo-view {
+		.btn + .btn { margin-left: 5px;}
+	}
+	.order-info {
+		color: #666;
+		text-transform: none;
+		font: 400 14px/1.1 $fontFive;
+		p {
+			margin: 5px 0;
+		}
+		h2 {
+			font-size: 30px;
+			color: #7a656a;
+			font-weight: 400;
+		}
+		h3 {
+			text-transform: uppercase;
+			font-size: 20px;
+			color: #000;
+			margin: 20px 0 5px;
+		}
+		.labeled {
+			display: inline-block;
+			color: #fff;
+			padding: 5px 10px;
+			background-color: #000;
+			text-transform: uppercase;
+		}
+		.back-to-orders {
+			margin-top: 15px;
+		}
+	}
+	.checkout-summary {
+		margin-right: 20px;
+		.item {
+			background-color: #fff;
+			border: solid 1px #e9e9eb;
+			padding: 5px;
+			position: relative;
+		}
+		.description {
+			text-transform: none;
+			color: #666;
+		}
+		.price {
+      color: $pinkColor;
+    }
+    .price-old { 
+      text-decoration: line-through;
+      padding: 0 4px;
+      color: #000;
+    }
+	}
+	.subtitle {
+		font-family: $fontFive;
+		font-weight: 400;
+		text-transform: none;
+		font-size: 14px;
+		margin-bottom: 25px;
+	}
+}

@@ -1,0 +1,135 @@
+.thefamechain {
+	margin-top: 40px;
+	.logo {
+		text-align: center;
+		padding-top: 50px;
+		position: relative;
+		&:before, &:after {
+			content: '';
+			display: block;
+			position: absolute;
+			left: 0;
+			right: 0;
+			height: 8px;
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center center;
+			z-index: 0;
+		}
+		&:before {
+			background-image: url('_famechain/border-logo-top.jpg');
+			top: 0;
+		}
+		&:after {
+			background-image: url('_famechain/border-logo-bottom.jpg');
+			bottom: 10px;
+		}
+		img {
+			position: relative;
+			z-index: 1;
+		}
+	}
+	.the-word {
+		margin-top: -10px;
+		background-color: #fbe3de;
+		text-align: center;
+		font: 400 23px/1.3 $fontTwo;
+		text-transform: none;
+		padding: 25px;
+		.word {
+			margin-bottom: 20px;
+		}
+	}
+	.apply {
+		text-align: center;
+		font: 400 33px/0.8 $fontTwo;
+		margin: 40px 0;
+		.big { font-size: 80px;}
+	}
+	.perks {
+		text-align: center;
+		margin-bottom: 60px;
+	}
+	.arrows-line-horizontal {
+		margin: 20px 0;
+	}
+	.circles {
+		text-align: center;
+		margin: 40px 0;
+	}
+	.benefits {
+		margin: 20px 0;
+		padding: 20px 0;
+		background-color: #000;
+		color: #fff;
+		text-align: center;
+		text-transform: none;
+		font: 15px/1.1 $fontFive;
+		ul { list-style: none;}
+		li { margin: 10px 0;}
+		.title {
+			font: 400 46px/1.1 $fontThree;
+			text-transform: uppercase;
+			margin-bottom: 20px;
+		}
+	}
+	.apply-now {
+		text-align: center;
+		.title {
+			font: 400 80px/1.1 $fontTwo;
+		}
+		.input {
+			margin-top: 20px;
+			&.inline, &.small {
+				display: inline-block;
+				vertical-align: top;
+			}
+			&.small {
+				input[type="text"], input[type="email"], input[type="url"] { width: 253px;}
+			}
+			&.inline {
+				label {
+					font-size: 16px;
+					width: 70px;
+					vertical-align: middle;
+				}
+				input[type="text"], input[type="email"], input[type="url"] { 
+					width: 100px;
+					vertical-align: middle;
+				}
+			}
+			label {
+				display: inline-block;
+				vertical-align: top;
+				width: 200px;
+				text-align: right;
+				font: 400 38px/1 $fontThree;
+				margin-right: 10px;
+			}
+			input[type="text"], input[type="email"], input[type="url"] {
+				width: 435px;
+			}
+		}
+		.submit {
+			text-align: center;
+			margin: 30px 0 0 -93px;
+		}
+	}
+	.how-it-works {
+		padding: 20px;
+		margin: 0;
+		background-color: #fbe3de;
+		text-align: center;
+		.title {
+			font: 400 40px/1.2 $fontThree;
+			margin-bottom: 20px;
+		}
+		ul {
+			font: italic 400 28px/1.2 $fontTwo;
+			text-transform: none;
+			list-style: none;
+			color: #333;
+			li { margin: 18px 0;}
+		}
+	}
+}

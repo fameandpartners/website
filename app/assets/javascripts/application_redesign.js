@@ -8,6 +8,7 @@
 //= require jquery-fileupload/jquery.fileupload
 
 //= require libs/underscore-min
+//= require bootstrap
 //= require libs/validator.min
 
 //= require libs/jquery.mlens.min
@@ -16,21 +17,7 @@
 
 //= require modernizr-custom
 
-//--------------
-// Bootstrap JS
-//--------------
-//= require bootstrap/transition
-//= require bootstrap/alert
-//= require bootstrap/collapse
-//= require bootstrap/dropdown
-//= require bootstrap/modal
-//= require bootstrap/tab
-//= require bootstrap/affix
-//= require bootstrap/scrollspy
-
-//-------
 // React
-//-------
 
 //= require react
 //= require react_ujs

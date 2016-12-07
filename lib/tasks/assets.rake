@@ -1,8 +1,8 @@
 # NOTE: JS bundling at the `before_assets.sh` deployment hook
 namespace :assets do
-  desc 'Bundles production JS executing `yarn install` and `yarn run prod` commands'
+  desc 'Bundles production JS executing `npm install` and `npm run production` commands'
   task :bundle_js do
-    %x(yarn install && yarn run prod)
+    %x(npm install && npm run production)
   end
 end
 

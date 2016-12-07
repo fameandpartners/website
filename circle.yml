@@ -9,15 +9,14 @@ dependencies:
     - ssh git@github.com git-lfs-authenticate fameandpartners/website.git download
     - git lfs pull
     # npm and bundle JS
-    - npm install -g yarn
-    - yarn install
-    - yarn run prod
+    - npm install
+    - npm run production
     # Bundler is missing for non-pre-installed Ruby versions https://discuss.circleci.com/t/trusty-container-update-16-02-01/1914/6
     - type bundle &>/dev/null || gem install bundler
 
 machine:
   ruby:
-    version: 2.3.3
+    version: 2.1.6
   node:
     version: 6.1.0
   services:
@@ -28,9 +27,6 @@ machine:
 general:
   artifacts:
     - "tmp/capybara"
-  branches:
-    ignore:
-      - staging
 
 test:
   override:

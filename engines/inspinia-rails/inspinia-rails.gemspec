@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency 'rails'                            # Version specified on main app Gemfile
+  s.add_dependency 'bootstrap-sass'                   # Version specified on main app Gemfile
   s.add_dependency 'font-awesome-rails', '~> 4.3.0.0' # Version also specified on the admin_ui engine
 
   s.add_development_dependency "sqlite3"

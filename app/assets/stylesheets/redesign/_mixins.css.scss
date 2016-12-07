@@ -56,40 +56,6 @@
   transition-delay:         $delay;
 }
 
-@mixin transition-property($property) {
-  -moz-transition-property:    $property;
-  -o-transition-property:      $property;
-  -webkit-transition-property: $property;
-  transition-property:         $property;
-}
-
-@mixin transition-duration($duration) {
-  -moz-transition-duration:    $duration;
-  -o-transition-duration:      $duration;
-  -webkit-transition-duration: $duration;
-  transition-duration:         $duration;
-}
-
-@mixin keyframes($name) {
-  @-moz-keyframes #{$name} {
-    @content;
-  }
-
-  @-webkit-keyframes #{$name} {
-    @content;
-  }
-
-  @-ms-keyframes #{$name} {
-    @content;
-  }
-
-  @keyframes #{$name} {
-    @content;
-  }
-}
-
-//////// CSS3 Border Radius ////////////
-
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
      -moz-border-radius: $radius;
@@ -97,32 +63,13 @@
           border-radius: $radius;
 }
 
-//////// CSS3 Box Shadow ////////////
-
-@mixin box-shadow($property) {
-  -moz-box-shadow:    $property;
-  -webkit-box-shadow: $property;
-  box-shadow:         $property;
-}
-
-//////// CSS3 Box Filter ////////////
-
-@mixin filter($filters) {
-  -webkit-filter: $filters;
-  filter:         $filters;
-}
-
 @mixin icon($image, $width: $icon-width, $height: $icon-height) {
   width: $width;
   height: $height;
-  background: inline-image($image) no-repeat;
-  -moz-background-size: 100% auto;
-  -o-background-size: 100% auto;
-  -webkit-background-size: 100% auto;
-  background-size: 100% auto;
+  background-image: inline-image($image);
+  background-repeat: no-repeat;
+  @include background-size(100% auto);
 }
-
-//////// CSS3 Flex Box ////////////
 
 @mixin column-vertical-align($v-align: center) {
   display: flex;
@@ -131,9 +78,5 @@
     display: flex;
     align-items: $v-align;
   }
-}
 
-@mixin display-flex($display: flex) {
-  display: -webkit-#{$display};
-  display: $display;
 }
