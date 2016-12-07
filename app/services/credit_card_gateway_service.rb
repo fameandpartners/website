@@ -3,7 +3,7 @@ class CreditCardGatewayService
   attr_reader :order, :currency
 
   def initialize(order, currency)
-    @order = order
+    @order    = order
     @currency = currency
   end
 
@@ -12,6 +12,10 @@ class CreditCardGatewayService
   end
 
   def find_gateway
-    @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') && method.currency == currency } || @order.available_payment_methods.detect{ |method| method.method_type.eql?('gateway') }
+    available_gateways = order.available_payment_methods.select { |pm| pm.method_type == 'gateway' }
+    default_gateway    = available_gateways.first
+    currency_gateway   = available_gateways.find { |gateway| gateway.currency == currency }
+
+    currency_gateway.presence || default_gateway
   end
 end
