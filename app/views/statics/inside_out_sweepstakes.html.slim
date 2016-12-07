@@ -24,9 +24,9 @@ javascript:
           h2
             | Enter to win the INSIDE\OUT grand prize: the ultimate celebration of you, inside and out, worth
             - if current_site_version.is_australia?
-              span $40,000.
+              span  $40,000.
             - else
-              span $30,000.
+              span  $30,000.
 
     section.section-box
       .row.middle-wrapper
@@ -117,7 +117,7 @@ javascript:
           span.btn-xs.btn-featured
             | Shop <span class="copy-highlight">THE COLLECTION</span>
 
-    section.section-box.section-border.section-giving-back
+    section.section-box.section-border
       .row
         .col-md-8.heading-overlay-wrapper
           h2.heading-overlay
@@ -137,6 +137,14 @@ javascript:
                 = image_tag "landingpages/inside-out-sweepstakes/giving-back-dk.jpg", :class => "img-responsive"
 
     = render 'shared/redesign/inside_out_partners'
+
+    section.section-box.section-border.section-weekly-winners.text-center
+      .row.text-grey
+        | <span class="weekly-winners">Weekly Winners</span>:
+      .row.text-grey
+        | E. Gale - Adelaide, South Australia
+      .row.text-grey
+        | C. Gordon - Melbourne, Victoria
 
 javascript:
   (function (d, s, id) {
