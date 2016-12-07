@@ -31,11 +31,10 @@
   display: table;
   height: 100%;
   width: 100%;
-  pointer-events: none; /* This makes sure that we can still click outside of the modal to close it */
+  pointer-events: none;
 }
 
 .modal-vertical-align {
-  /* To center vertically */
   display: table-cell;
   vertical-align: middle;
   pointer-events: none;
@@ -48,6 +47,28 @@
 
   @include screen-sm {
 
+    h1 {
+      font-size: 2.2rem;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 430px;
+    }
+
+    .action-buttons {
+      margin-top: 40px;
+
+      .btn-white,
+      .btn-black {
+        letter-spacing: 1px;
+        font-size: 1rem;
+        font-weight: 400;
+      }
+
+      button + button {
+        margin-left: 20px;
+      }
+    }
+
     .modal-body {
       height: 344px;
     }
@@ -55,31 +76,15 @@
     .modal-dialog {
       width: 624px;
     }
+
+    .modal-body-container {
+      height: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 500px;
+      padding: 60px 0;
+    }
+
   }
 
 }
-
-//.modal-confirm {
-//
-//  h1 {
-//    font-size: 2.3rem;
-//    margin-left: auto;
-//    margin-right: auto;
-//
-//  }
-//
-//  .modal-body {
-//    display: table;
-//    height: 344px;
-//    text-align: center;
-//    width: 624px;
-//  }
-//
-//  .modal-body-save-dress {
-//    display: table-cell;
-//    max-width: 450px;
-//    margin: 0 auto;
-//    vertical-align: middle;
-//  }
-//
-//}
