@@ -2,21 +2,19 @@
 section.section-box.container.section-style-icon
   .row
     .col-md-12.heading-overlay-wrapper
-      h2.heading-overlay F&P Style icon
+      h2.heading-overlay Competition
 
   .tag-info-section
     .tag-info-wrapper.visible-lg-block
       .tag-info
-        .section-name.vertical-text F&P Style icon
+        .section-name.vertical-text Competition
         .diagonal-line
 
     .row
       .col-md-12.cta-item-huge
-        - current_edit_image = "homepage/fp-style-icon/nov-18-tile-1.jpg"
-        - current_edit_mob_image = "homepage/fp-style-icon/nov-18-tile-1-mob.jpg"
-        // TODO: add pretty url path
-        - current_edit_link = '/slayitforward'
-
+        - current_edit_image = "homepage/fp-style-icon/dec-09-tile-1.jpg"
+        - current_edit_mob_image = "homepage/fp-style-icon/dec-09-tile-1-mob.jpg"
+        - current_edit_link = inside_out_sweepstakes_path
 
         = link_to current_edit_link
           .section-img-wrap.copy-center
@@ -36,10 +34,10 @@ section.section-box.container.section-style-icon
 
     .row
       .col-md-6.cta-item
-        = link_to dresses_path + '/wrap'
+        = link_to dresses_path + '/velvet'
           .section-img-wrap.copy-center
             .img-wrap
-              img src='#{image_path("homepage/fp-style-icon/nov-18-tile-2.jpg")}'
+              img src='#{image_path("homepage/fp-style-icon/dec-09-tile-2.jpg")}'
 
             .content-wrap
               .container-cta
@@ -48,13 +46,13 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight Wrap Details
+                        span.copy-highlight Velvet
 
       .col-md-6.cta-item
-        = link_to dresses_path + '/jumpsuit'
+        = link_to dresses_path + '/sequin'
           .section-img-wrap.copy-center
             .img-wrap
-              img src='#{image_path("homepage/fp-style-icon/nov-18-tile-3.jpg")}'
+              img src='#{image_path("homepage/fp-style-icon/dec-09-tile-3.jpg")}'
 
             .content-wrap
               .container-cta
@@ -63,14 +61,14 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight Jumpsuits
+                        span.copy-highlight Sequins
 
     .row
       .col-md-6.cta-item
         = link_to dresses_path + '/midi'
           .section-img-wrap.copy-center
             .img-wrap
-              img src='#{image_path("homepage/fp-style-icon/nov-18-tile-4.jpg")}'
+              img src='#{image_path("homepage/fp-style-icon/dec-09-tile-4.jpg")}'
 
             .content-wrap
               .container-cta
@@ -79,13 +77,13 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight Midi Dresses
+                        span.copy-highlight Midis
 
       .col-md-6.cta-item
-        = link_to dresses_path + '/cocktail'
+        = link_to dresses_path + '/lace'
           .section-img-wrap.copy-center
             .img-wrap
-              img src='#{image_path("homepage/fp-style-icon/nov-18-tile-5.jpg")}'
+              img src='#{image_path("homepage/fp-style-icon/dec-09-tile-5.jpg")}'
 
             .content-wrap
               .container-cta
@@ -94,4 +92,4 @@ section.section-box.container.section-style-icon
                     .copy-wrap.text-center
                       span.cta-link-white-bg
                         span.cta-link Shop
-                        span.copy-highlight Party dresses
+                        span.copy-highlight Lace
