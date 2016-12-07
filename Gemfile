@@ -10,14 +10,12 @@ gem 'slim-rails'
 gem 'configatron'
 gem 'paperclip'
 gem 'sidekiq', '4.2.2'
-gem 'timers', '1.1.0'
 gem 'whenever'
 gem 'psych', '~> 2.0.13'
 gem 'active_model_serializers'
 gem 'rack-cors'
 gem 'business_time'
 gem 'rmagick'
-gem 'ckeditor'
 gem 'default_value_for'
 gem 'tire'
 gem 'dalli'
@@ -54,9 +52,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-fileupload-rails', '0.4.1'
 gem 'sass-rails',   '~> 3.2.3'
-gem 'compass-rails', '~> 2.0.5'
 gem 'react-rails', '~> 1.6'
-gem 'droidcss', '~> 2.0.4'
 gem 'asset_sync', '~> 1.1.0'
 
 # Data
@@ -115,13 +111,11 @@ gem 'ruby-progressbar', :require => false
 gem 'ops_care', :git => 'git@github.com:reinteractive/OpsCare.git', :branch => 'master'
 
 group :assets do
-  gem 'bourbon'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'coffee-script-source', '~> 1.8.0'
   gem 'uglifier', '1.3.0'
   gem 'execjs', '~> 2'
   gem 'eco'
-  gem 'bootstrap-sass', '3.3.4.1'
 end
 
 group :development do

@@ -25,6 +25,17 @@ if Rails.application.config.use_s3
     fog_public:      true,
     path:            'system/:attachment/:id/:style/:basename.:extension'
   )
+
+  if Rails.env.development? && ENV.values_at('AWS_S3_ACCESS_KEY_ID', 'AWS_S3_SECRET_ACCESS_KEY').all?
+    Paperclip::Attachment.default_options.merge!(
+      fog_credentials: {
+        aws_access_key_id:     ENV['AWS_S3_ACCESS_KEY_ID'],
+        aws_secret_access_key: ENV['AWS_S3_SECRET_ACCESS_KEY'],
+        provider:              'AWS',
+        region:                ENV['AWS_S3_REGION']
+      }
+    )
+  end
 else
   Paperclip::Attachment.default_options.merge!(
     storage: :filesystem
