@@ -14,26 +14,29 @@ class SidePanelColor extends SidePanel {
   }
 
   componentWillMount() {
-    let customize = {};
-    customize.color = {};
-    customize.color.id = parseInt(this.props.preselectedColorId);
-    customize.color.name = this.props.preselectedColorName;
-    customize.color.price = 0;
-    customize.color.presentation = this.props.defaultColors.map((color, index) => {
-      if(color.option_value.id === this.props.preselectedColorId) {
-        return color.option_value.presentation;
-      }
+    let customize        = {};
+    let productColors    = this.props.defaultColors.concat(this.props.customColors);
+    let preselectedColor = productColors.find((color) => {
+      return color.option_value.id === this.props.preselectedColorId;
     });
+
+    customize.color = {
+      id:           parseInt(this.props.preselectedColorId),
+      name:         this.props.preselectedColorName,
+      price:        0,
+      presentation: (preselectedColor && preselectedColor.option_value && preselectedColor.option_value.presentation)
+    };
     this.props.actions.customizeDress(customize);
   }
 
   onChange(event) {
     let customize = {};
-    customize.color = {};
-    customize.color.id = parseInt(event.currentTarget.dataset.id);
-    customize.color.name = event.currentTarget.dataset.name;
-    customize.color.presentation = event.currentTarget.dataset.presentation;
-    customize.color.price = event.currentTarget.dataset.price;
+    customize.color = {
+      id:           parseInt(event.currentTarget.dataset.id),
+      name:         event.currentTarget.dataset.name,
+      presentation: event.currentTarget.dataset.presentation,
+      price:        event.currentTarget.dataset.price
+    };
     // search for dress variant id, this will work only for default color dresses
     // NOTE: we should check if this is even needed, since length
     // selection is required.
