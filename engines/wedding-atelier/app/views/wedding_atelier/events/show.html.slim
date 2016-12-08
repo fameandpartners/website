@@ -137,7 +137,7 @@
 
       .moodboard-tabs.center-block
         /! Nav tabs
-        ul.nav.nav-tabs role="tablist"
+        ul.nav.nav-tabs.center-block role="tablist"
           li.active role="presentation"
             a aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab"  Bridesmaid dresses
           li role="presentation"
@@ -154,12 +154,12 @@
               | <button class="add">Add your first dress</button>
 
             /! IF there are dresses ...
-            .dresses-list
-              .dresses-actions.text-center
-                = link_to '#', class: 'btn-transparent btn-create-a-dress'
-                  em Create
-                  |  a dress
+            .dresses-actions.text-center
+              = link_to '#', class: 'btn-transparent btn-create-a-dress'
+                em Create
+                |  a dress
 
+            .dresses-list
               .dress-boxes
                 .dress-box
                   .top-info
