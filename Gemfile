@@ -131,9 +131,9 @@ end
 
 group :test do
   gem 'rspec-rails', '~> 3.2'
-  gem 'capybara', '~> 2.5.0'
+  gem 'capybara', '~> 2.11.0'
   gem 'capybara-screenshot', '~> 1.0.11'
-  gem 'poltergeist', '~> 1.9.0'
+  gem 'poltergeist', '~> 1.12.0'
   gem 'selenium-webdriver', '~> 2.53.4'
   gem 'show_me_the_cookies', '~> 3.1.0'
   gem 'turnip', '~> 1.3.1'
