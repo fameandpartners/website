@@ -2,7 +2,7 @@ module Acceptance
   module ProductColorsSteps
 
     step 'I am on the product colors page' do
-      visit '/fame_admin/product_colors'
+      visit '/fame_admin/customisation/product_colors'
     end
 
     step 'I select "Connie" product from chosen select box' do
