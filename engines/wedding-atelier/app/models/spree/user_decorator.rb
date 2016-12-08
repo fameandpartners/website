@@ -12,7 +12,7 @@ Spree::User.class_eval do
   has_one :user_profile, class_name: 'WeddingAtelier::UserProfile', foreign_key: :spree_user_id, dependent: :destroy
   has_many :event_assistants, class_name: 'WeddingAtelier::EventAssistant'
   has_many :events, through: :event_assistants, source: :event
-  has_many :event_dresses, class_name: 'WeddingAtelier::EventDress'
+  has_many :wedding_atelier_dresses, class_name: 'WeddingAtelier::EventDress'
   accepts_nested_attributes_for :events, :user_profile
   rolify role_cname: 'WeddingAtelier::EventRole', role_join_table_name: 'wedding_atelier_users_event_roles'
 
