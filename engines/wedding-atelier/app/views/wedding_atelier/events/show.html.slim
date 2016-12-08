@@ -281,34 +281,30 @@
                     | <button class="btn-send-to-chat">Send to chat</button>
                     | <button class="btn-add-to-cart">Add to cart</button>
 
-
-
-
-
-
           #wedding-details.tab-pane role="tabpanel"
-            form
-              label Name the wedding board, for="input_wedding_board_name"
-              input id="input_wedding_board_name"
-
-              form
+              form.center-block
                 .form-group
                   label for="input_wedding_board_name"  Name the wedding board
                   input#input_wedding_board_name.form-control placeholder="" type="text" /
                 .form-group
-                  label for="input_role" What is your role in the wedding?
-                  select#input_role.form-control
-                    option select-2
-                    option select-2
-                    option select-2
-                .form-group
-                  label for="input_1" How many bridesmaids at the wedding?
-                  | increment/decrement plugin here
-                .form-group
-                  label for="input_1" What is the date of the wedding?
-                  | calendar here
+                  | <label for="input_wedding_board_name">What is your role in the wedding?</label>
+                  | <select value="option3" id="input_event_role">
+                  |   <option>option1</option><option value="option3">option2</option><option value="option3">option3</option>
+                  | </select>
 
-                button.btn.btn-default type="submit"  Update
+                .form-group
+                  | <label for="input_number_of_assistants">How many bridesmaids at the wedding</label>
+                  | <input type="number" class="form-control number-field js-number-field" min="0" id="input_number_of_assistants"/>
+
+                .form-group
+                  | <label for="input_date">What is the date of the wedding?</label>
+                  .input-group.date.date-picker
+                    | <input type="date" class="form-control" placeholder="dd/mm/yyyy" name="input_date" />
+                    | <span class="input-group-addon">
+                    | <i class="calendar-icon"></i>
+                    | </span>
+
+                button.btn-black.center-block type="submit"  Update
 
           #manage-bridal-party.tab-pane role="tabpanel"
             h1 <strong>Janine</strong>, intive the bridal party.
@@ -333,3 +329,25 @@
                 .person-role Pending
 
           #bridal-gowns.tab-pane role="tabpanel"  ...
+
+javascript:
+  $(document).ready(function() {
+
+    $('.js-number-field').incrementButton();
+
+    $('#input_event_role').select2({
+      minimumResultsForSearch: Infinity
+    });
+
+    $('.input-group.date').datepicker({
+      format: "dd/mm/yyyy",
+      todayBtn: "linked",
+      autoclose: true,
+      showOnFocus: true
+    }).on('show', function(e){
+      $(this).addClass('active');
+    }).on('hide', function(e){
+      $(this).removeClass('active');
+    });
+  });
+
