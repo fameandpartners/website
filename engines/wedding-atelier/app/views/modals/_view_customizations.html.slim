@@ -1,5 +1,3 @@
-button.btn-black[type='button' data-toggle='modal' data-target='#modal-customizations']
-  | Dale
 #modal-customizations.js-save-dress-modal.modal.modal-customizations.fade[tabindex='-1' role='dialog']
   .modal-vertical-align-helper
     .modal-dialog.modal-vertical-align[role='document']
@@ -8,10 +6,29 @@ button.btn-black[type='button' data-toggle='modal' data-target='#modal-customiza
           .close-modal.pull-right[data-dismiss="modal" aria-label="Close"]
           .modal-body-container.text-center
             h1
-              em Your dress
-              |  has been saved to the weddings moodboard.
+              em Your
+              |  customizations.
+            .customization-list
+              ul
+                li
+                  p.customization-list-label silhouette
+                  p.customization-list-value Strapless Column
+                li
+                  p.customization-list-label fabric and color
+                  p.customization-list-value Heavy Georgete | Navy +$12
+                li
+                  p.customization-list-label length
+                  p.customization-list-value Mini
+                li
+                  p.customization-list-label style addons
+                  p.customization-list-value -
+                li
+                  p.customization-list-label fit adjustments
+                  p.customization-list-value -
+                li
+                  p.customization-list-label size profiles
+                  p.customization-list-value Janines
+        .modal-footer
             .action-buttons
-                button.btn-white[type='button']
-                  | go to moodboard
-                button.btn-black[type='button']
-                  | create another dress
+              button.btn-transparent-inverse
+                | edit design
