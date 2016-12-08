@@ -180,6 +180,7 @@ PATH
       awesome_nested_set
       rails (~> 3.2.21)
     wedding-atelier (0.0.1)
+      active_model_serializers
       bootstrap-sass (~> 3.3.4.1)
       kaminari
       rails (~> 3.2.22.5)

@@ -1,8 +1,8 @@
 module WeddingAtelier
   class EventDress < ActiveRecord::Base
-    belongs_to :product
+    belongs_to :product, class_name: 'Spree::Product'
     belongs_to :event
-    belongs_to :user
+    belongs_to :user, class_name: 'Spree::User'
     belongs_to :color,
                class_name: 'Spree::OptionValue'
     belongs_to :fit,
@@ -21,7 +21,9 @@ module WeddingAtelier
                     :color_id,
                     :fabric_id,
                     :size_id,
-                    :length_id
+                    :length_id,
+                    :user_id,
+                    :product_id
 
   end
 end

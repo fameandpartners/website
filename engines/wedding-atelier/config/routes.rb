@@ -19,5 +19,6 @@ WeddingAtelier::Engine.routes.draw do
     resources :invitations, only: :create do
       get '/accept', to: 'invitations#accept'
     end
+    resources :dresses, controller: :event_dresses
   end
 end
