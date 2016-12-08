@@ -6,6 +6,9 @@ import { connect } from 'react-redux';
 import Resize from '../decorators/Resize.jsx';
 import breakpoints from '../libs/breakpoints';
 
+// Components
+
+
 function stateToProps(state) {
   // Which part of the Redux global state does our component want to receive as props?
   if (state.$$collectionFilterSortStore) {
@@ -32,7 +35,7 @@ class CollectionFilterSort extends Component {
                   <span className="ExpandablePanel__mainTitle">Filter & sort by</span><a className="ExpandablePanel__clearAll js-trigger-clear-all-filters" href="javascript:;">Clear All</a>
                 </div>
                 <div className="ExpandablePanel__item">
-                  <div className="ExpandablePanel__name ExpandablePanel__name">
+                  <div className="ExpandablePanel__name">
                     Sort
                   </div>
                   <div className="ExpandablePanel__selectedOptions">
