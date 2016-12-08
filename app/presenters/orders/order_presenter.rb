@@ -57,7 +57,7 @@ module Orders
     end
 
     def standard_making_items
-      @standard_making_items ||= items - fast_making_items
+      @standard_making_items ||= items.standard_making
     end
 
     def one_item?
