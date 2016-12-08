@@ -10,10 +10,10 @@ unless Rails.env.development?
     fog_credentials: {
       use_iam_profile: true,
       provider:        'AWS',
-      region:          configatron.aws.s3.region
+      region:          ENV['AWS_S3_REGION']
     },
-    fog_host:        configatron.aws.host,
-    fog_directory:   configatron.aws.s3.bucket,
+    fog_host:        ENV['RAILS_ASSET_HOST'],
+    fog_directory:   ENV['AWS_S3_BUCKET'],
   )
 end
 
@@ -21,8 +21,7 @@ SitemapGenerator::Interpreter.send :include, PathBuildersHelper
 
 SitemapGenerator::Interpreter.class_eval do
   def site_version_default_host(site_version)
-    url = "#{configatron.host}"
-    detector.site_version_url(url, site_version).chomp('/')
+    detector.site_version_url(ENV['APP_HOST'], site_version).chomp('/')
   end
 
   private def detector
@@ -32,8 +31,8 @@ end
 
 sitemap_options = {
     compress:      Rails.env.production?,
-    default_host:  "#{configatron.host}",
-    sitemaps_host: "#{configatron.aws.host}",
+    default_host:  ENV['APP_HOST'],
+    sitemaps_host: ENV['RAILS_ASSET_HOST'],
     include_root:  false,
     sitemaps_path: 'sitemap'
 }
