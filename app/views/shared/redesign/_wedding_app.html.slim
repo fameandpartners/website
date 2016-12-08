@@ -1,0 +1,20 @@
+section.section-box.container
+  .row
+    .col-md-6
+      = image_tag '//fakeimg.pl/300x200/', class: "img-responsive"
+
+    .col-md-5.col-md-offset-1
+      h2
+        | Can't <em>wait</em> to get started?
+      p
+        | Our wedding concierge, Amber, is here to help plan your look for the big day for free.
+      = link_to '/inside-out-sweepstakes'
+        span.btn-xs.btn-featured
+          | <span class="copy-highlight">BOOK NOW</span>
+
+section.text-center.container
+  .row
+    h2
+      | Craft your customer experience. Be the first to enter the Atelier App.
+
+  = link_to 'PRE - REGISTER', wedding_consultation_path, class: 'btn btn-black'

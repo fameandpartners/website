@@ -62,10 +62,13 @@
 
   // START - desktop
   @media (min-width: $bootstrap-md-width) {
-    
-    .padding-container {
-      padding: 0 100px;
-      background-color: $c-neutral-white;
+
+    .heading-thin-line-top {
+
+      .title {
+        font-size: 2.6rem;
+      }
+
     }
 
   }

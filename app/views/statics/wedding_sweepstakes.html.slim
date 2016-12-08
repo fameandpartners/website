@@ -11,12 +11,12 @@
           h2.heading-overlay
             | FAME BRIDESMAID
 
-      .col-md-5
+      .col-md-offset-1.col-md-4
         .heading-thin-line-top
           .row
             .col-xs-12
-              h3.subheading Launching January 2017.
-              h1.title Custom-created tailor-made looks for the whole bridal party.
+              h3.subheading.title Launching January 2017.
+              h1 Custom-created tailor-made looks for the whole bridal party.
               h3.subheading Introducing the Wedding Atelier App
 
             = link_to '/inside-out-sweepstakes'
@@ -26,46 +26,50 @@
       .col-md-6.col-md-offset-1.no-padding.hidden-xs.hidden-sm
         = image_tag '//fakeimg.pl/660x683/', class: "img-responsive hidden-xs hidden-sm"
 
-  .container.padding-container
-    section.section-box
-      .row
-        = image_tag "//fakeimg.pl/900x683/", :class => "img-responsive"
+  section.section-box.container.padding-container
+    .row
+      .col-md-12.heading-overlay-wrapper
+        h2.heading-overlay FAME BRIDESMAIDS
 
-      .row.text-center
-        .col-md-offset-1.col-md-10
-          h2
-            | WIN - $5,000 of bespoke bridal wear for your wedding party. Pre-register for the Atelier App to enter and get early access to the collection.
+    .row
+      = image_tag "//fakeimg.pl/900x683/", :class => "img-responsive"
 
-          p
-            | In the Atelier App, you can customize nearly everything about your dress: fabric, color, fit, and design details–there are thousands of combinations. The finished product is made-to-order, just for you, and guaranteed to fit your body perfectly. Think this process will take forever and/or be crazy expensive? Think again. Dresses will be delivered in only 2 weeks–and all clock in at under $200.
+    .row.text-center
+      .col-md-offset-1.col-md-10
+        h2
+          | WIN - $5,000 of bespoke bridal wear for your wedding party. Pre-register for the Atelier App to enter and get <em>early access</em> to the collection.
 
-      .row.middle-wrapper
-        .woobox-offer data-offer="5fbtad"
+        p
+          | In the Atelier App, you can customize nearly everything about your dress: fabric, color, fit, and design details–there are <em>thousands</em> of combinations. The finished product is made-to-order, just for you, and guaranteed to fit your body perfectly. Think this process will take forever and/or be crazy expensive? Think again. Dresses will be delivered in only 2 weeks–and all clock in at under $200.
 
-      .row.text-center
-        span.text-grey
-          | <em>By clicking PRE-REGISTER, you agree to the Rules and Regulations.</em>
+    .row.middle-wrapper
+      .woobox-offer data-offer="5fbtad"
 
-  .container
-    section.section-box.section-price
-      .row
-        .col-md-6.hidden-md.hidden-lg
-          .heading-overlay-wrapper
-            h2.heading-overlay
-              | THE PRIZE
+    .row.text-center
+      span.text-grey
+        | <em>By clicking PRE-REGISTER, you agree to the Rules and Regulations.</em>
 
-        .col-md-5.col-md-offset-1
-          .heading-overlay-wrapper.hidden-xs.hidden-sm
-            h2.heading-overlay
-              | THE PRIZE
+  section.section-box.section-price.container
+    .row
+      .col-md-6.hidden-md.hidden-lg
+        .heading-overlay-wrapper
+          h2.heading-overlay
+            | THE PRIZE
 
-          h2
-            | Win custom dresses for the entire bridal party.
-          p
-            | When you pre-register for the Atelier App, you’ll be entered to win our giveaway: $5,000 of bespoke bridal wear. You and your girls will get to craft your own unique looks, designed to both fit & flatter each woman individually and work together cohesively. It’s the ultimate wedding wardrobe.
+      .col-md-5.col-md-offset-1
+        .heading-overlay-wrapper.hidden-xs.hidden-sm
+          h2.heading-overlay
+            | THE PRIZE
 
-        .col-md-6
-          = image_tag "//fakeimg.pl/480x480/", :class => "img-responsive"
+        h2
+          | Win custom dresses for the <em>entire</em> bridal party.
+        p
+          | When you pre-register for the Atelier App, you’ll be entered to win our giveaway: $5,000 of bespoke bridal wear. You and your girls will get to craft your own unique looks, designed to both fit & flatter each woman individually and work together cohesively. It’s the ultimate wedding wardrobe.
+
+      .col-md-6
+        = image_tag "//fakeimg.pl/480x480/", :class => "img-responsive"
+
+  = render 'shared/redesign/wedding_app'
 
 javascript:
   (function (d, s, id) {
