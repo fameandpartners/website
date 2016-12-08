@@ -1,6 +1,6 @@
-section.section-box.container
+section.section-box.container.section-border-grey
   .row
-    .col-md-6
+    .col-md-6.hidden-xs.hidden-sm
       = image_tag '//fakeimg.pl/300x200/', class: "img-responsive"
 
     .col-md-5.col-md-offset-1
@@ -8,6 +8,8 @@ section.section-box.container
         | Can't <em>wait</em> to get started?
       p
         | Our wedding concierge, Amber, is here to help plan your look for the big day for free.
+
+      = image_tag '//fakeimg.pl/300x200/', class: "img-responsive hidden-md hidden-lg"
       = link_to '/inside-out-sweepstakes'
         span.btn-xs.btn-featured
           | <span class="copy-highlight">BOOK NOW</span>
