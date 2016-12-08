@@ -5,6 +5,7 @@ import {Scrollbars} from 'react-custom-scrollbars';
 import * as pdpActions from '../../actions/PdpActions';
 import SidePanel from './SidePanel';
 import {GetDressVariantId, UpdateUrl} from './utils';
+import _get from 'lodash/get';
 
 class SidePanelColor extends SidePanel {
   constructor(props, context) {
@@ -24,7 +25,7 @@ class SidePanelColor extends SidePanel {
       id:           parseInt(this.props.preselectedColorId),
       name:         this.props.preselectedColorName,
       price:        0,
-      presentation: (preselectedColor && preselectedColor.option_value && preselectedColor.option_value.presentation)
+      presentation: _get(preselectedColor, 'option_value.presentation')
     };
     this.props.actions.customizeDress(customize);
   }
