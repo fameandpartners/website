@@ -65,12 +65,13 @@
       }
 
       // Add extra padding on the right, so filter are not too close to the edge of screen
-      &__item {
+      .ExpandablePanelItem {
+        cursor: pointer;
         padding-right: 15px;
       }
 
       // Hide top border from first filter
-      &__item:nth-child(2) {
+      .ExpandablePanelItem:nth-child(2) {
         border-top: 0;
       }
 
@@ -154,9 +155,17 @@
   }
 
   // Container of each item / filter
-  &__item {
+  .ExpandablePanelItem {
     border-top: 1px solid $c-neutral-4;
     padding: 6px 0 8px;
+
+    .ExpandablePanelItem__revealed-content{
+      display: none;
+    }
+
+    &.isOpen .ExpandablePanelItem__revealed-content{
+      display: block;
+    }
 
     // When a filter is expanded...
     &--is-active .ExpandablePanel__name:before {

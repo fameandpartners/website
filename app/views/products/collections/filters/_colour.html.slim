@@ -3,7 +3,7 @@
 - selectColors = @filter.colors
 - selectColorsAll = params[:colour] ? false : true
 
-.ExpandablePanel__item.ExpandablePanel__item--is-active
+.ExpandablePanelItem.ExpandablePanelItem--is-active
 
   .ExpandablePanel__name
     | Color
@@ -60,4 +60,3 @@
           span.ExpandablePanel__optionColorFallback
           span.ExpandablePanel__optionCheck--rounded.ExpandablePanel__optionCheck--tick class=('color-' + color.name)
           span.ExpandablePanel__optionName = color.name
-
