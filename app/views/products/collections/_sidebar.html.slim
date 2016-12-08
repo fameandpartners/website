@@ -8,6 +8,7 @@ javascript:
 - cache [:layout, :filter_menu, @filter.cache_key], expires_in: configatron.cache.expire.long do
   - prerender = true
 
+  #CollectionFilterSortApp
   .FilterSort
 
     .ExpandablePanel
@@ -15,7 +16,6 @@ javascript:
         span.ExpandablePanel__mainTitle Filter & sort by
         a.ExpandablePanel__clearAll.js-trigger-clear-all-filters href='javascript:;' Clear All
 
-      #CollectionFilterSortApp
       = render partial: 'products/collections/filters/sort_by'
 
       = render partial: 'products/collections/filters/colour'
