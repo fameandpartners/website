@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Spree::Gateway::Pin do
+describe Spree::Gateway::PayPalExpress do
   subject(:gateway) { described_class.new }
 
   describe '#currency' do
