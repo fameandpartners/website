@@ -1,9 +1,9 @@
 // HOMEPAGE HERO CAROUSEL
 
 // Carousel Item 1
-- current_tile_image = "homepage/hero-featured/nov-18-featured-1.jpg"
-- current_tile_image_mob = "homepage/hero-featured/nov-18-featured-1-mob.jpg"
-= link_to inside_out_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "The INSIDE/OUT Collection" }
+- current_tile_image = "homepage/hero-featured/dec-09-featured-1.jpg"
+- current_tile_image_mob = "homepage/hero-featured/dec-09-featured-1-mob.jpg"
+= link_to inside_out_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left white-text", data: { description: "The INSIDE/OUT Collection" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -14,21 +14,20 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-3.col-md-offset-1
+        .col-md-4.col-md-offset-7.col-lg-3.col-lg-offset-8
           .copy-wrap
             h2.heading.no-margin-md
-              span The <br class="visible-lg">INSIDE\OUT <br class="visible-lg">Collection
+              span Laid back <br class="visible-lg">is the new <br class="visible-lg">black.
               span.sub-heading
-                | Fashion that stands for something. Fashion to make you feel beautiful from the inside out.
+                | Look fancy, feel fabulous in the INSIDE/OUT Collection.
             .cta-wrapper
               span.btn-md.btn-featured
-                | Dress up and <span class="copy-highlight">give back</span>
+                | Shop and <span class="copy-highlight">Customize</span>
 
 // Carousel Item 2
-- current_tile_image = "homepage/hero-featured/nov-18-featured-2.jpg"
-- current_tile_image_mob = "homepage/hero-featured/nov-18-featured-2-mob.jpg"
-// TODO: add pretty url path
-= link_to "/inside-out-collection", class: "main-hero-wrap hero-wrap copy-left", data: { description: "No-stress dressing" }
+- current_tile_image = "homepage/hero-featured/dec-09-featured-2.jpg"
+- current_tile_image_mob = "homepage/hero-featured/dec-09-featured-2-mob.jpg"
+= link_to inside_out_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "Style meets substance" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -39,19 +38,19 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-3.col-md-offset-8
+        .col-md-3.col-md-offset-2
           .copy-wrap
             h2.heading.no-margin-md
-              span No-stress <br class="visible-lg">dressing.
+              span Style meets <br class="visible-lg">substance.
               span.sub-heading
-                | Low effort, high impact evening wear–so you can relax and enjoy the party.
+                | $5 of every sale goes to women's empowerment charities.
             .cta-wrapper
               span.btn-md.btn-featured
-                | Shop and <span class="copy-highlight">customize</span>
+                | Dress Up, <span class="copy-highlight">Give Back</span>
 
 // Carousel Item 3
-- current_tile_image = "homepage/hero-featured/nov-18-featured-3.jpg"
-- current_tile_image_mob = "homepage/hero-featured/nov-18-featured-3-mob.jpg"
+- current_tile_image = "homepage/hero-featured/dec-09-featured-3.jpg"
+- current_tile_image_mob = "homepage/hero-featured/dec-09-featured-3-mob.jpg"
 
 = link_to evening_hours_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "Time to (cocktail) party" }
   picture.media-wrap
@@ -64,12 +63,12 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-3.extra-padding-left
+        .col-md-3.col-md-offset-3.extra-padding-left
           .copy-wrap
             h2.heading.no-margin-md
-              span Time to (cocktail) party.
+              span Cocktail <br class="visible-lg">hour goes custom.
               span.sub-heading
-                | Create the cocktail outfit you've always wanted to wear.
+                | Find your new go-to party <br class="visible-lg">dress and make it your own.
             .cta-wrapper
               span.btn-md.btn-featured
-                | Get <span class="copy-highlight">started</span>
+                | Shop <span class="copy-highlight">party looks</span>
