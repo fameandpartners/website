@@ -10,12 +10,19 @@ var EventDetails = React.createClass({
   handleUpdate: function(e) {
     $.ajax({
       url: this.props.update_path,
-      type: "PUT",
+      type: 'PUT',
       dataType: 'json',
       data: {event: this.state.event},
       success: function(collection) {
         this.setState({event: collection.event});
-      }.bind(this)
+        $('.has-error').removeClass('has-error');
+      }.bind(this),
+      error: function(data, uno, dos) {
+        parsed = JSON.parse(data.responseText)
+        for(var key in parsed.errors) {
+          $('input[name="' + key +'"').parent().addClass('has-error')
+        };
+      }
     });
     e.preventDefault();
   },

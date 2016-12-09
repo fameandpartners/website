@@ -21,8 +21,11 @@ module WeddingAtelier
 
     def update
       @event = Event.find_by_slug(params[:id])
-      @event.update_attributes(params_event)
-      render json: @event
+      if @event.update_attributes(params_event)
+        render json: @event
+      else
+        render json: {errors: @event.errors}, status: 422
+      end
     end
 
     private
