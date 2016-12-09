@@ -367,7 +367,7 @@
   overflow-x: hidden;
 
   &__heroImg {
-    @etend .no-spacing-cols-mobile;
+    @extend .no-spacing-cols-mobile;
   }
 
 }
