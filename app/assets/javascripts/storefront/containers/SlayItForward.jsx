@@ -189,7 +189,7 @@ class SlayItForward extends Component {
               <p className="font-large">From our CEO.</p>
               <img className='nyree-img' src={getImages('nyree')}></img>
               <p>A message from Nyree Corby, a female founder and CEO, to women everywhere.</p>
-              <p className="font--secondary"><a href="/from-our-ceo"><span className='read-ceo-link u-textDecoration--underline'><b>READ NOW</b></span></a>&nbsp;&nbsp;<b>></b></p>
+              <p className="font--secondary"><a href="/from-our-ceo"><span className='read-ceo-link u-textDecoration--underline'><strong>READ NOW</strong></span></a></p>
             </div>
           </MarketingSection>
 
