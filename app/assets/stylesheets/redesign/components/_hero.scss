@@ -361,3 +361,13 @@
   }
 
 }
+
+.containerHalfScreenHero {
+  @extend .container-no-padding;
+  overflow-x: hidden;
+
+  &__heroImg {
+    @etend .no-spacing-cols-mobile;
+  }
+
+}
