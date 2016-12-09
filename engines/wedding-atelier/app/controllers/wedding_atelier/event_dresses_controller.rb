@@ -5,6 +5,9 @@ module WeddingAtelier
     def new
     end
 
+    def edit
+    end
+
     def create
       dress = event.dresses.create(
         user_id: spree_current_user.id,
@@ -22,8 +25,13 @@ module WeddingAtelier
       end
     end
 
-    # TODO: Implement destroy application
     def destroy
+      dress = event.dresses.find(params[:id])
+      if dress.destroy
+        render json: dress
+      else
+        render json: dress, status: :unprocessable_entity
+      end
     end
 
     private

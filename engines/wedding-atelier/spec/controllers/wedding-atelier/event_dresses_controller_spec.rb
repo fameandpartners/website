@@ -16,6 +16,14 @@ describe WeddingAtelier::EventDressesController, type: :controller do
     end
   end
 
+  describe '#edit' do
+    let(:dress) { create(:wedding_atelier_event_dress, user: user, product: product, event: event) }
+    it 'is successful' do
+      get :edit, { event_id: event.slug, id: dress.id }
+      expect(response.status).to be 200
+    end
+  end
+
   describe '#create' do
     it 'creates an event dress with a base silhoutte' do
       params = {
@@ -30,7 +38,17 @@ describe WeddingAtelier::EventDressesController, type: :controller do
     end
   end
 
-  describe '#edit' do
+  describe '#destroy' do
+    let(:dress) { create(:wedding_atelier_event_dress, user: user, product: product, event: event) }
+    it 'destroy the dress' do
+      params = {
+        event_id: event.slug,
+        id: dress.id
+      }
+      delete :destroy, params
+      expect(response.status).to eq 200
+      expect{dress.reload}.to raise_error(ActiveRecord::RecordNotFound)
+    end
   end
 
   describe '#update' do
