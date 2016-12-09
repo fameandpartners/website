@@ -26,15 +26,15 @@
     .ExpandablePanel__listTwoColumns
       - for color in colors
         - preSelected = false
-        label.ExpandablePanel__option.ExpandablePanel__listColumn name='#{color.name}'
-          = check_box_tag "color-#{color.name}", color.name, preSelected, 'data-all' => 'false'
+        label.ExpandablePanel__option.ExpandablePanel__listColumn name='#{color[:name]}'
+          = check_box_tag "color-#{color[:name]}", color[:name], preSelected, 'data-all' => 'false'
           - if params[:colour]
             - for param in params[:colour]
-              - if param == color.name
+              - if param == color[:name]
                 - preSelected = true
           span.ExpandablePanel__optionColorFallback
-          span.ExpandablePanel__optionCheck--rounded.ExpandablePanel__optionCheck--tick class=('color-' + color.name)
-          span.ExpandablePanel__optionName = color.name
+          span.ExpandablePanel__optionCheck--rounded.ExpandablePanel__optionCheck--tick class=('color-' + color[:name])
+          span.ExpandablePanel__optionName = color[:name]
 
       label.ExpandablePanel__option.ExpandablePanel__listColumn name='Cheetah'
         = check_box_tag 'color-Cheetah', 'Cheetah', params[:colour] == 'Cheetah' ? true : false, 'data-all' => 'false'
@@ -55,8 +55,8 @@
   .ExpandablePanel__moreOptionsList
     .ExpandablePanel__listOptions.ExpandablePanel__listOptions--twoColumns.ExpandablePanel__listOptions--panelColors
       - for color in selectColors
-        label.ExpandablePanel__option.ExpandablePanel__listColumn name='#{color.name}'
-          = check_box_tag "color-#{color.name}", color.name, preSelected, 'data-all' => 'false'
+        label.ExpandablePanel__option.ExpandablePanel__listColumn name='#{color[:name]}'
+          = check_box_tag "color-#{color[:name]}", color[:name], preSelected, 'data-all' => 'false'
           span.ExpandablePanel__optionColorFallback
-          span.ExpandablePanel__optionCheck--rounded.ExpandablePanel__optionCheck--tick class=('color-' + color.name)
-          span.ExpandablePanel__optionName = color.name
+          span.ExpandablePanel__optionCheck--rounded.ExpandablePanel__optionCheck--tick class=('color-' + color[:name])
+          span.ExpandablePanel__optionName = color[:name]
