@@ -25,5 +25,7 @@ module WeddingAtelier
                     :user_id,
                     :product_id
 
+  validates_presence_of :product
+
   end
 end

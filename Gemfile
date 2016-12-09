@@ -149,6 +149,10 @@ group :test do
   gem 'rspec_junit_formatter', '0.2.2'
 end
 
+group :development, :test do
+  gem 'pry'
+end
+
 group :production do
   gem 'unicorn'
   gem 'aws-sdk'

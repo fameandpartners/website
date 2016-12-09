@@ -48,9 +48,25 @@ describe WeddingAtelier::EventDressesController, type: :controller do
           }
         }
         put :update, params
-        json_dress = JSON.parse(response.body)["event_dress"]
-        expect(json_dress["product"]["name"]).to eq other_product.name
-        expect(json_dress["color"]["name"]).to eq color.name
+        json = JSON.parse(response.body)
+        expect(json["event_dress"]["product"]["name"]).to eq other_product.name
+        expect(json["event_dress"]["color"]["name"]).to eq color.name
+      end
+    end
+
+    context 'with errors' do
+      it 'it fails due to errors' do
+        params = {
+          event_id: event.slug,
+          id: dress.id,
+          event_dress: {
+            product_id: 123123,
+            color_id: color.id
+          }
+        }
+        put :update, params
+        json = JSON.parse(response.body)
+        expect(json["errors"][0]).to eq "Product can't be blank"
       end
     end
   end
