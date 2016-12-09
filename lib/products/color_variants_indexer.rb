@@ -6,6 +6,7 @@ module Products
     end
 
     include ColorVariantImageDetector
+    include ProductActivityReport
 
     def self.index!
       new.call
@@ -47,6 +48,10 @@ module Products
         product_price_in_us = product.price_in(us_site_version.currency)
         product_price_in_au = product.price_in(au_site_version.currency)
         total_sales         = total_sales_for_sku(product.sku)
+
+        # NOTE: Alexey Bobyrev 09/12/16
+        # Next methods included from ProductActivityReport module
+        # Consider to remove this totals as ProductActivityReport module is deprecated
         total_views         = total_product_viewed(product.id)
         total_carts         = total_product_added_to_cart(product.id)
         total_wishlists     = total_product_added_to_wishlist(product.id)

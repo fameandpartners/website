@@ -58,7 +58,7 @@ app/views/marketing_mailer/
 order = Spree::Order.joins(:line_items).where("user_id is not null").first
 MarketingMailer.abandoned_cart(order, order.user).deliver
 
-## Added Wishlist (Deprecated)(Requires adapration to MoodboardItem usage)
+## Added Wishlist (Deprecated)(Requires adaptation to MoodboardItem usage)
 
 user = WishlistItem.last.user
 MarketingMailer.added_to_wishlist(user).deliver
@@ -165,11 +165,11 @@ shipment = Spree::Shipment.last
 Spree::ShipmentMailer.shipped_email(shipment).deliver
 
 
-## wishlist item added - after 2 days (Deprecated)(Requires adapration to MoodboardItem usage) 
+## wishlist item added - after 2 days (Deprecated)(Requires adaptation to MoodboardItem usage) 
 item = WishlistItem.last
 MarketingMailer.wishlist_item_added(item.user, item).deliver
 
-## wishlist item added - after 2 weeks (Deprecated)(Requires adapration to MoodboardItem usage)
+## wishlist item added - after 2 weeks (Deprecated)(Requires adaptation to MoodboardItem usage)
 item = WishlistItem.last
 MarketingMailer.wishlist_item_added_reminder(item.user, item).deliver
 
