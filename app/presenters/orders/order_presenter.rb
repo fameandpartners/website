@@ -48,7 +48,7 @@ module Orders
       standard_making_items.map(&decorate)
     end
 
-    def decorate
+    private def decorate
       -> (line_item) { LineItemPresenter.new(line_item, self) }
     end
 
