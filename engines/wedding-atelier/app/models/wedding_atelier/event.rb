@@ -24,6 +24,10 @@ module WeddingAtelier
       assistants.include? user
     end
 
+    def invitations
+      Invitation.where(event_slug: slug)
+    end
+
     private
 
     def sluggify

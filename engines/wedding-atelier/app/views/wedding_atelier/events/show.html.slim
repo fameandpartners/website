@@ -168,35 +168,7 @@
           #manage-bridal-party.tab-pane.center-block role="tabpanel"
             h1.text-center <em>Janine</em>, intive the bridal party.
 
-            = fancy_facebook_button 'invite with'
-
-            form
-              .form-group
-                | <label for="input_email_address">Email address</label>
-                | <input type="number" class="form-control" placeholder="mail@mail.com" id="input_email_addres" />
-
-              .text-center
-                button.btn-black type="submit"  Send invite
-
-            .invited-people
-              .person
-                .person-name Candy May
-                .person-role Bride
-              .person
-                .person-name Michelle Jones
-                .person-role
-                  | Bridesmaid <span>| </span>
-                  = link_to '#'
-                    | Remove from board
-              .person
-                .person-name Janinecprib@gmail.com
-                .person-role Pending
-              .person
-                .person-name Janinecprib@gmail.com
-                .person-role Pending
-              .person
-                .person-name Janinecprib@gmail.com
-                .person-role Pending
+            = react_component 'EventInvitations', invitations: @event.invitations, assistants: @event.assistants
 
           #bridal-gowns.tab-pane role="tabpanel"  ...
 
