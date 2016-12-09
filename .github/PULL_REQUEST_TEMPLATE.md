@@ -7,3 +7,8 @@
   - You can add screenshots or notes to explain the changes you are making
 
 For more information, refer to https://github.com/fameandpartners/website/#contributing
+
+## Reviewers List
+
+- [ ] @ reviewer 1
+- [ ] @ reviewer 2

@@ -22,7 +22,7 @@
         <%= link_to_with_icon 'icon-th-large', t(:variants),  admin_product_variants_url(@product) %>
       </li>
       <li>
-        <%= link_to_with_icon 'icon-picture', t(:product_colors), admin_ui.customisation_product_colors_path(product_color_values_grid: { product_id: @product.id } ) %>
+        <%= link_to_with_icon 'icon-picture', t(:product_colors), admin_ui.product_colors_path(product_color_values_grid: { product_id: @product.id } ) %>
       </li>
       <li<%== ' class="active"' if current == 'Product Properties' %>>
         <%= link_to_with_icon 'icon-tasks', t(:product_properties), admin_product_product_properties_url(@product) %>
