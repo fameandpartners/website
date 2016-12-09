@@ -1,12 +1,12 @@
-require File.expand_path('../../../spec_helper.rb', __FILE__)
+require 'spec_helper'
 
 describe WeddingAtelier::EventDressesController, type: :controller do
   routes { WeddingAtelier::Engine.routes }
   let(:event) { create(:wedding_atelier_event) }
-  let(:product) { create(:product) }
+  let(:product) { create(:spree_product) }
 
   before do
-    sign_in create(:user)
+    sign_in create(:spree_user, first_name: 'foo', last_name: 'bar')
   end
 
   describe '#new' do
@@ -36,7 +36,7 @@ describe WeddingAtelier::EventDressesController, type: :controller do
   describe '#update' do
     let(:dress) { create(:wedding_atelier_event_dress, product: product, event: event) }
     let(:color) { create(:option_value, name: 'updated color') }
-    let(:other_product) { create(:product) }
+    let(:other_product) { create(:spree_product) }
     context 'it assigns or replaces any customization' do
       it 'updates the base silhouette' do
         params = {
@@ -49,8 +49,8 @@ describe WeddingAtelier::EventDressesController, type: :controller do
         }
         put :update, params
         json_dress = JSON.parse(response.body)["event_dress"]
-        expect(json_dress["product"]["id"]).to eq other_product.id
-        expect(json_dress["color"]["id"]).to eq color.id
+        expect(json_dress["product"]["name"]).to eq other_product.name
+        expect(json_dress["color"]["name"]).to eq color.name
       end
     end
   end

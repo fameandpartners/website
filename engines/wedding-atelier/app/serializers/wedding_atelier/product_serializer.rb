@@ -1,6 +1,7 @@
 module WeddingAtelier
   class ProductSerializer < ActiveModel::Serializer
-    attributes :name,
+    attributes :id,
+               :name,
                :description
 
   end
