@@ -7,7 +7,8 @@ export default (props) => {
   const { $$collectionFilterSortState } = initialStates;
   const initialState = {
     $$collectionFilterSortStore: $$collectionFilterSortState.merge({
-      $$colors: props.colors
+      $$colors: props.colors,
+      $$secondaryColors: props.secondaryColors
     })
   };
 

@@ -3,7 +3,8 @@ import Immutable from 'immutable';
 import * as actionTypes from '../constants/CollectionFilterSortConstants';
 
 export const $$initialState = Immutable.fromJS({
-  $$colors: []
+  $$colors: [],
+  $$secondaryColors: []
 });
 
 export default function CollectionFilterSortReducer($$state = $$initialState, action = null) {
