@@ -2,6 +2,7 @@
 *= require select2-4.0.3
 *= require 'select2-4.0.3-bootstrap'
 *= require bootstrap-datepicker3-1.6.4
+*= require animate
 */
 
 @import 'base/variables';
@@ -18,7 +19,7 @@
   @import 'base/forms';
   @import 'base/buttons';
   @import 'base/select2_overrides';
-  @import 'components/**';
+  @import 'components/**/*';
   @import 'dresses/**';
   @import 'registrations/**';
   @import 'sessions/**';
