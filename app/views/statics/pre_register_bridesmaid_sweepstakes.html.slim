@@ -1,0 +1,84 @@
+= render partial: 'pages/robots'
+
+.wedding-sweepstakes.landing-page-v2
+
+  .container-fluid.containerHalfScreenHero
+    .row
+      .col-md-6.hidden-md.hidden-lg.containerHalfScreenHero__heroImg
+        = image_tag '//fakeimg.pl/300x200/', class: "img-responsive"
+      .col-md-6.hidden-md.hidden-lg
+        .heading-overlay-wrapper
+          h2.heading-overlay
+            | FAME BRIDESMAID
+
+      .col-md-offset-1.col-md-4
+        .heading-thin-line-top
+          .row
+            .col-xs-12
+              h3.subheading.title Launching January 2017.
+              h1 Custom-created tailor-made looks for the whole bridal party.
+              h3.subheading Introducing the Wedding Atelier App
+
+            = link_to inside_out_sweepstakes_path
+              span.btn-xs.btn-featured
+                | <span class="copy-highlight">PRE - REGISTER</span>
+
+      .col-md-6.col-md-offset-1.no-padding.hidden-xs.hidden-sm
+        = image_tag '//fakeimg.pl/660x683/', class: "img-responsive hidden-xs hidden-sm"
+
+  .preRegisterSweepstakes__formWrapperBg
+    .container
+      section.section-box.padding-container.preRegisterSweepstakes__formWrapper
+        .row
+          .col-md-12.heading-overlay-wrapper.heading-overlay-on-previous-section
+            h2.heading-overlay FAME BRIDESMAIDS
+
+        .row.text-center
+          .col-md-offset-2.col-md-8
+            = image_tag "//fakeimg.pl/900x683/", class: "img-responsive"
+            h2
+              | WIN - $5,000 of bespoke bridal wear for your wedding party. Pre-register for the Atelier App to enter and get <em>early access</em> to the collection.
+
+            p
+              | In the Atelier App, you can customize nearly everything about your dress: fabric, color, fit, and design details–there are <em>thousands</em> of combinations. The finished product is made-to-order, just for you, and guaranteed to fit your body perfectly. Think this process will take forever and/or be crazy expensive? Think again. Dresses will be delivered in only 2 weeks–and all clock in at under $200.
+
+        .row.middle-wrapper
+          .woobox-offer data-offer="5fbtad"
+
+        .row.text-center
+          span.text-grey
+            | <em>By clicking PRE-REGISTER, you agree to the Rules and Regulations.</em>
+
+  .container
+    section.section-box.section-price
+      .row
+        .col-md-6.hidden-md.hidden-lg
+          .heading-overlay-wrapper
+            h2.heading-overlay
+              | THE PRIZE
+
+        .col-md-5.col-md-offset-1
+          .heading-overlay-wrapper.hidden-xs.hidden-sm
+            h2.heading-overlay
+              | THE PRIZE
+
+          h2
+            | Win custom dresses for the <em>entire</em> bridal party.
+          p
+            | When you pre-register for the Atelier App, you’ll be entered to win our giveaway: $5,000 of bespoke bridal wear. You and your girls will get to craft your own unique looks, designed to both fit & flatter each woman individually and work together cohesively. It’s the ultimate wedding wardrobe.
+
+        .col-md-6
+          = image_tag "//fakeimg.pl/480x480/", class: "img-responsive"
+
+    = render 'shared/redesign/wedding_app'
+
+javascript:
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//woobox.com/js/plugins/woo.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+  (document, 'script', 'woobox-sdk'));

@@ -1,12 +1,12 @@
-class CreateWeddingSweepstakesPage < ActiveRecord::Migration
+class CreatePreRegisterBridesmaidSweepstakesPage < ActiveRecord::Migration
   # All values MUST be Strings!
   private def landing_page_properties
     {
-      path:             '/wedding-sweepstakes',
-      template_path:    '/statics/wedding_sweepstakes',
-      heading:          'Wedding Sweepstakes',
-      title:            '[TODO]',
-      meta_description: '[TODO]',
+      path:             '/pre-register-bridesmaid',
+      template_path:    '/statics/pre_register_bridesmaid_sweepstakes',
+      heading:          'Pre-register Bridesmaid Sweepstakes',
+      title:            'Custom Bridesmaid Dresses',
+      meta_description: 'Pre-register for the Wedding Atelier App and design your own custom, cohesive, beautiful bridesmaid dresses. Enter to win a wedding wardrobe for the entire bridal party!',
     }
   end
 
