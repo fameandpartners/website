@@ -5,6 +5,10 @@ module WeddingAtelier
     isolate_namespace WeddingAtelier
     config.autoload_paths += %W(#{config.root}/lib)
 
+    initializer :assets, :group => :all do |app|
+      app.config.rspec_paths << self.root
+    end
+
     config.generators do |g|
       g.test_framework :rspec, fixture: false
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
