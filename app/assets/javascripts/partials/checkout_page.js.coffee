@@ -215,7 +215,7 @@ page.initCheckoutEditPage = () ->
         $(states_text_field_id).removeClass('required').addClass('hidden').prop('disabled', true)
         # show available states
         $(states_field_id).find("option[data-country]").hide()
-        $(states_field_id).find("option[data-country=#{ country_id }]").show()
+        $(states_field_id).find("option[data-country=#{ country_id }]").css('display', 'block')
         $(states_field_id).addClass('required').prop('disabled', false).closest('span').removeClass('hidden')
 
         # if currently select option not available for selected country, reset

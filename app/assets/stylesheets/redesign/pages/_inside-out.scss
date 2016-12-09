@@ -47,10 +47,18 @@
     margin-bottom: 50px;
   }
 
+  .btn-inside-out {
+    margin-top: 55px;
+  }
+
   .item-video {
     width: 100%;
     height: auto;
     max-height: 450px;
+  }
+
+  .item-border {
+    border: 2px solid $c-neutral-black;
   }
 
   .collage-gallery {

@@ -15,7 +15,11 @@ ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
       html = %(<div class="control-group has-warning">#{e}</div>).html_safe
     elsif form_fields.include? e.node_name
       if instance.error_message.kind_of?(Array)
-        html = %(<div class="control-group has-warning">#{html_tag}<span class="help-inline">&nbsp;#{instance.error_message.uniq.join(', ')}</span></div>).html_safe
+        if e.get_attribute('data-outside-error')
+          html = %(#{html_tag}<div class="control-group has-warning outside-input-error"><span class="help-inline">&nbsp;#{instance.error_message.uniq.join(', ')}</span></div>).html_safe
+        else
+          html = %(<div class="control-group has-warning">#{html_tag}<span class="help-inline">&nbsp;#{instance.error_message.uniq.join(', ')}</span></div>).html_safe
+        end
       else
         html = %(<div class="control-group has-warning">#{html_tag}<span class="help-inline">&nbsp;#{instance.error_message}</span></div>).html_safe
       end
