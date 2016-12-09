@@ -6,6 +6,7 @@ $top-overlay-margin-top: 37px;
 
 .section-box {
   margin-top: $section-spacing-margin-top;
+  background: $c-neutral-white;
 
   &.top-overlay {
     margin-top: -($top-overlay-margin-top);
