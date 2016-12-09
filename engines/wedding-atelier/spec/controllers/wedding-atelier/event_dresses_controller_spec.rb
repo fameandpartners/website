@@ -1,12 +1,13 @@
-require File.expand_path('../../../spec_helper.rb', __FILE__)
+require 'spec_helper'
 
 describe WeddingAtelier::EventDressesController, type: :controller do
   routes { WeddingAtelier::Engine.routes }
   let(:event) { create(:wedding_atelier_event) }
   let(:product) { create(:product) }
+  let(:user) { create(:spree_user) }
 
   before do
-    sign_in create(:user)
+    sign_in user
   end
 
   describe '#new' do
@@ -34,7 +35,7 @@ describe WeddingAtelier::EventDressesController, type: :controller do
   end
 
   describe '#update' do
-    let(:dress) { create(:wedding_atelier_event_dress, product: product, event: event) }
+    let(:dress) { create(:wedding_atelier_event_dress, user: user, product: product, event: event) }
     let(:color) { create(:option_value, name: 'updated color') }
     let(:other_product) { create(:product) }
     context 'it assigns or replaces any customization' do

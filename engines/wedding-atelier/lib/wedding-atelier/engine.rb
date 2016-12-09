@@ -10,6 +10,9 @@ module WeddingAtelier
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
 
+    initializer :assets, :group => :all do |app|
+      app.config.rspec_paths << self.root
+    end
 
     config.to_prepare do
      Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')).each do |c|

@@ -1,4 +1,4 @@
-require File.expand_path('../../../spec_helper.rb', __FILE__)
+require 'spec_helper'
 
 describe WeddingAtelier::TwilioController, type: :controller do
   let(:user) { double(Spree::User, full_name: 'Full Name')}
@@ -13,7 +13,7 @@ describe WeddingAtelier::TwilioController, type: :controller do
       it 'responds with a json structure' do
         allow(Twilio::Util::AccessToken).to receive(:new).and_return(token)
         expect(token).to receive(:add_grant)
-        spree_post :token
+        post :token
         expect(response).to be_ok
         parsed = ActiveSupport::JSON.decode(response.body)
         expect(parsed).to be_present
