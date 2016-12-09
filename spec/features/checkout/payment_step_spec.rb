@@ -17,12 +17,12 @@ describe 'Order Payment Step', type: :feature do
     let!(:paypal_usd) { FactoryGirl.create(:paypal_express, :active, id: 123, preferred_currency: 'USD') }
     let!(:paypal_aud) { FactoryGirl.create(:paypal_express, :active, id: 456, preferred_currency: 'AUD') }
 
-    context 'on the USA site version' do
-      let!(:site_version) { FactoryGirl.create(:site_version, :us) }
+    before(:each) do
+      allow_any_instance_of(Spree::CheckoutController).to receive(:current_site_version).and_return(site_version)
+    end
 
-      before(:each) do
-        allow_any_instance_of(Spree::CheckoutController).to receive(:current_site_version).and_return(site_version)
-      end
+    context 'on the USA site version' do
+      let(:site_version) { FactoryGirl.create(:site_version, :us) }
 
       it 'renders USD button' do
         visit spree.checkout_state_path('payment')
@@ -32,11 +32,7 @@ describe 'Order Payment Step', type: :feature do
     end
 
     context 'on the Australian site version' do
-      let!(:site_version) { FactoryGirl.create(:site_version, :au) }
-
-      before(:each) do
-        allow_any_instance_of(Spree::CheckoutController).to receive(:current_site_version).and_return(site_version)
-      end
+      let(:site_version) { FactoryGirl.create(:site_version, :au) }
 
       it 'renders AUD button' do
         visit spree.checkout_state_path('payment')
