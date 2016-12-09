@@ -4,9 +4,9 @@ describe WeddingAtelier::EventDressesController, type: :controller do
   routes { WeddingAtelier::Engine.routes }
   let(:event) { create(:wedding_atelier_event) }
   let(:product) { create(:spree_product) }
-
+  let(:user) { create(:spree_user, first_name: 'foo', last_name: 'bar') }
   before do
-    sign_in create(:spree_user, first_name: 'foo', last_name: 'bar')
+    custom_sign_in user
   end
 
   describe '#new' do
