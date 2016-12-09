@@ -18,7 +18,7 @@ module WeddingAtelier
       if dress.update_attributes(event_dress_params)
         render json: dress
       else
-        render json: { errors: dress.errors.full_messages }
+        render json: { errors: dress.errors.full_messages }, status: :unprocessable_entity
       end
     end
 

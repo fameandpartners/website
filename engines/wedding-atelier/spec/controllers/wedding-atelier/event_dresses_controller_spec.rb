@@ -67,6 +67,7 @@ describe WeddingAtelier::EventDressesController, type: :controller do
         put :update, params
         json = JSON.parse(response.body)
         expect(json["errors"][0]).to eq "Product can't be blank"
+        expect(response.status).to be 422
       end
     end
   end
