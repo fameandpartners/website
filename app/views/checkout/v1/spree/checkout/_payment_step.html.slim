@@ -55,9 +55,12 @@
           = render 'checkout/v1/spree/checkout/payment/afterpay', spree_order: @order, afterpay_method: @afterpay_method
 
       - if @pay_pal_method
+        - paypal_url = paypal_express_url(payment_method_id: @pay_pal_method.id, protocol: request.protocol)
         #paypal.text-center.payment-selected.tab-pane role="tabpanel"
           p.hint Place your order and you will complete your purchase via the Paypal.
-          = paypal_express_button
+          = link_to paypal_url, method: :post, id: 'paypal_button', alt: 'Paypal', class: 'payment-cta btn btn-black btn-block btn-md' do
+            | Pay with
+            =<> image_tag('checkout/logo/paypal-logo-white.png')
 
     p.terms-note.text-center
         ' By making this purchase you are agreeing to the
