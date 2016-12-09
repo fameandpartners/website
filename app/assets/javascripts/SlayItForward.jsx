@@ -60,13 +60,13 @@ class SlayItForward extends Component {
     const {breakpoint} = this.props;
     if (typeof Modernizr === 'object' && Modernizr.adownload){
       return (
-        <a className='link' href={path} download='slayitforward.jpg'>
+        <a className="link" href={path} download="slayitforward.jpg">
           <img className="share-tiles" src={path} />
         </a>
       );
     } else {
         return (
-          <a className='link' href={path} target='_blank'>
+          <a className="link" href={path} target="_blank">
             <img className="share-tiles" src={path} />
           </a>
         );
@@ -99,8 +99,8 @@ class SlayItForward extends Component {
 
           <MarketingSection className="MarketingSection-slay slay-reasoning inner-buffer">
             <div>
-              { this.props.breakpoint === 'mobile' ? null :
-                <h3 className='main-slay-text text-center font--secondary'>#SLAYITFORWARD</h3>
+              {this.props.breakpoint === 'mobile' ? null :
+                <h3 className="main-slay-text text-center font--secondary">#SLAYITFORWARD</h3>
               }
               <p className="text-center">
                 It’s a movement. <br/>
@@ -172,12 +172,12 @@ class SlayItForward extends Component {
 
           <MarketingSection className="MarketingSection-slay slay-carousel clearfix">
             <div>
-              <p className='text-center font-large'>Post, empower and <em>give back</em>.</p>
+              <p className="text-center font-large">Post, empower and <em>give back</em>.</p>
               <div className="insta-carousel clearfix">
-                { this.props.breakpoint === 'mobile' ?
+                {this.props.breakpoint === 'mobile' ?
                   this.renderShareImgs(shareTileImages[0]) :
                   shareTileImages.map((imgPath)=>{
-                    return this.renderShareImgs(imgPath)
+                    return this.renderShareImgs(imgPath);
                   })
                 }
               </div>
@@ -189,7 +189,7 @@ class SlayItForward extends Component {
               <div className="item bordered col-md-6 col-md-offset-3">
                 <div className="row vertical-align-row">
                   <div className="col-md-5 vertical-align img-side">
-                    <img className='img-responsive' src={getImages('nyree')}></img>
+                    <img className="img-responsive" src={getImages('nyree')}></img>
                   </div>
                   <div className="col-md-7 vertical-align copy-side">
                     <div className="content-wrapper">
@@ -211,9 +211,9 @@ class SlayItForward extends Component {
           <MarketingSection className="MarketingSection-slay slay-ceo-letter inner-buffer hidden-lg hidden-md">
             <div className="text-center">
               <p className="font-large">From our CEO.</p>
-              <img className='nyree-img' src={getImages('nyree')}></img>
+              <img className="nyree-img" src={getImages('nyree')}></img>
               <p>A message from Nyree Corby, a female founder and CEO, to women everywhere.</p>
-              <p className="font--secondary"><a href="/from-our-ceo"><span className='read-ceo-link u-textDecoration--underline'><strong>READ NOW</strong></span></a></p>
+              <p className="font--secondary"><a href="/from-our-ceo"><span className="read-ceo-link u-textDecoration--underline"><strong>READ NOW</strong></span></a></p>
             </div>
           </MarketingSection>
 
@@ -222,7 +222,7 @@ class SlayItForward extends Component {
   );
 
   }
-};
+}
 
 SlayItForward.propTypes = {
   breakpoint: PropTypes.string,
