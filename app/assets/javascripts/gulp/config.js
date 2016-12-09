@@ -11,7 +11,8 @@ module.exports = {
       dist: './app/assets/javascripts/',
       mainJS: [
         './app/assets/javascripts/storefront/App.js',
-        './app/assets/javascripts/storefront/startup/SlayItForwardApp.jsx'
+        './app/assets/javascripts/storefront/startup/SlayItForwardApp.jsx',
+        './app/assets/javascripts/storefront/startup/CollectionFilterSortApp.jsx'
       ]
     },
     src: baseDir + '/*.jsx',
