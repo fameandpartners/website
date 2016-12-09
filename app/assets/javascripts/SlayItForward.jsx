@@ -104,7 +104,7 @@ class SlayItForward extends Component {
               }
               <p className="text-center">
                 It’s a movement. <br/>
-                In light of recent events, we feel it is our obligation and duty to remind women everywhere:
+                In light of recent events, we feel it is our obligation and duty to <br className="hidden-xs hidden-sm" />remind women everywhere:
             </p>
             <p className="text-center font-medium">
               We are <em>capable</em>. We are <em>worthy</em>.<br /> We are more than our <em>bodies</em>,
@@ -115,14 +115,14 @@ class SlayItForward extends Component {
             </p>
             <p className="text-center">
               Use the hashtag on Instagram to shout out a woman in your life who
-              inspires you–or who needs some inspiration right now–and tell her how
+              inspires you–or who needs <br className="hidden-xs hidden-sm" />some inspiration right now–and tell her how
               she slays. Now it’s her turn to #SLAYITFORWARD.<br />For every hashtag used,
               Fame and Partners will donate $1 to the charities below–ones that support
-              our most vulnerable, marginalized communities.
+              <br className="hidden-xs hidden-sm" /> our most vulnerable, marginalized communities.
             </p>
             <p className="text-center">
               Join us in creating an unstoppable chain of women empowering women.
-              Join us in donating to the people who need it most right now. Join us and
+              Join us in donating to the <br className="hidden-xs hidden-sm" />people who need it most right now. Join us and
               <br />#SLAYITFORWARD.
               </p>
             </div>
