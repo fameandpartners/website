@@ -34,7 +34,7 @@ describe WeddingAtelier::EventDressesController, type: :controller do
   end
 
   describe '#update' do
-    let(:dress) { create(:wedding_atelier_event_dress, product: product, event: event) }
+    let(:dress) { create(:wedding_atelier_event_dress, user: user, product: product, event: event) }
     let(:color) { create(:option_value, name: 'updated color') }
     let(:other_product) { create(:spree_product) }
     context 'it assigns or replaces any customization' do

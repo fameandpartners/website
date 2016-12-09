@@ -1,3 +1,7 @@
+require 'spree/core/testing_support/factories/product_factory'
+require 'spree/core/testing_support/factories/shipping_category_factory'
+require 'spree/core/testing_support/factories/user_factory'
+
 module SpreeConfigurationSupport
   def define_spree_config_preference(key, value, type)
     Spree::AppConfiguration.class_eval do

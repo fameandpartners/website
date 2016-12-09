@@ -26,5 +26,6 @@ Selenium::WebDriver::Firefox::Binary.path = ENV.fetch('CAPYBARA_SELENIUM_FIREFOX
 RSpec.configure do |config|
   config.before(:each, selenium: true) do
     Capybara.current_session.current_window.resize_to(1400, 768)
+    # Capybara.page.driver.browser.manage.window.maximize
   end
 end
