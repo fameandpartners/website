@@ -104,7 +104,7 @@ class SlayItForward extends Component {
               }
               <p className="text-center">
                 It’s a movement. <br/>
-                In light of recent events, we feel it is our obligation and duty to <br className="hidden-xs hidden-sm" />remind women everywhere:
+                In light of recent events, we feel it is our obligation and duty <br className="hidden-xs hidden-sm" />to remind women everywhere:
             </p>
             <p className="text-center font-medium">
               We are <em>capable</em>. We are <em>worthy</em>.<br /> We are more than our <em>bodies</em>,
