@@ -57,10 +57,13 @@ describe 'show order', type: :feature do
   end
 
   describe "line items" do
-    let(:order) { FactoryGirl.create(:complete_order_with_items) }
+    let(:order) do
+      FactoryGirl.create(:complete_order_with_items).tap do |o|
+        o.line_items << FactoryGirl.create(:dress_item, :fast_making)
+      end
+    end
 
     it "splits line items by delivery" do
-      order.line_items << FactoryGirl.create(:dress_item, :fast_making)
 
       visit spree.order_path(order)
 
