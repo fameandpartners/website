@@ -162,7 +162,7 @@
     }
   }
 
-  @media screen and (orientation: landscape) {
+  @media screen and (orientation: landscape) and (max-width: $screen-xs-max) {
     .close-modal {
       background: image-url('wedding-atelier/close.svg') no-repeat;
       right: 5px;
