@@ -184,7 +184,31 @@ class SlayItForward extends Component {
             </div>
           </MarketingSection>
 
-          <MarketingSection className="MarketingSection-slay slay-ceo-letter inner-buffer">
+          <MarketingSection className="MarketingSection-slay slay-ceo-letter container hidden-sm hidden-xs">
+            <div className="section-box row">
+              <div className="item bordered col-md-6 col-md-offset-3">
+                <div className="row vertical-align-row">
+                  <div className="col-md-5 vertical-align img-side">
+                    <img className="img-responsive" src={getImages('nyree')}></img>
+                  </div>
+                  <div className="col-md-7 vertical-align copy-side">
+                    <div className="content-wrapper">
+                      <p>
+                        <h4 className="h1 no-margin-bottom">From our CEO.</h4>
+                        A message from Nyree Corby, a female founder and CEO, to women everywhere.
+                      </p>
+                      <a href="/from-our-ceo">
+                        <span className="cta-link-arrow-right"><span className="copy-highlight link-underline h5">Read Now</span><i className="icon icon-arrow-right"></i></span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </MarketingSection>
+
+          <MarketingSection className="MarketingSection-slay slay-ceo-letter inner-buffer hidden-lg hidden-md">
             <div className="text-center">
               <p className="font-large">From our CEO.</p>
               <img className="nyree-img" src={getImages('nyree')}></img>
