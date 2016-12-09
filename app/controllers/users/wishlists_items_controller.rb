@@ -7,6 +7,9 @@ class Users::WishlistsItemsController < Users::BaseController
 
   layout 'redesign/application'
 
+  # NOTE: Alexey Bobyrev 09/12/16
+  # Oh boy! This should be urgent one!
+  # We need to rewrite it ASAP to avoid leaving Whishlist namespace w/o control щ（ﾟДﾟщ）
   # {"color_id"=>"184", "variant_id"=>"19258", "product_id"=>"97"}
   def create
     moodboard_populator = UserMoodboard::Populator.new(
