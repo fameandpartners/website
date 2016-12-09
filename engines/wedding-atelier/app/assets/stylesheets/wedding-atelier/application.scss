@@ -22,3 +22,11 @@
   @import 'sessions/**';
   @import 'shared/**';
 }
+
+.after_append {
+  position: relative;
+}
+
+.modal, .modal-backdrop {
+    position: absolute !important;
+}
