@@ -14,7 +14,8 @@ function stateToProps(state) {
     if (state.$$collectionFilterSortStore) {
         return {
           $$colors: state.$$collectionFilterSortStore.get('$$colors'),
-          $$secondaryColors: state.$$collectionFilterSortStore.get('$$secondaryColors')
+          $$secondaryColors: state.$$collectionFilterSortStore.get('$$secondaryColors'),
+          $$bodyShapes: state.$$collectionFilterSortStore.get('$$bodyShapes')
         };
     }
     return {};
@@ -40,8 +41,30 @@ class CollectionFilterSort extends Component {
       );
     }
 
+    buildCheckboxOption(shape){
+      return (
+        <label className="ExpandablePanel__option" name="shape">
+          <input
+            data-all="false"
+            id={`shape-${shape}`}
+            name={`shape-${shape}`}
+            type="checkbox"
+            value={shape}
+          />
+            <span className="checkboxBlackBg__check">
+                <span className="ExpandablePanel__optionName">{shape}</span>
+            </span>
+        </label>
+      );
+    }
+
     render() {
-        const {dispatch, $$colors, $$secondaryColors} = this.props;
+        const {
+          dispatch,
+          $$bodyShapes,
+          $$colors,
+          $$secondaryColors
+        } = this.props;
 
         return (
             <div className="CollectionFilterSort">
@@ -59,7 +82,7 @@ class CollectionFilterSort extends Component {
                                 Sort
                               </div>
                               <div className="ExpandablePanel__selectedOptions">
-                                <span className="ExpandablePanel__selectedItem">What's new!!</span>
+                                <span className="ExpandablePanel__selectedItem">What's new</span>
                               </div>
                             </div>
                           )}
@@ -96,7 +119,7 @@ class CollectionFilterSort extends Component {
                             </div>
                           )}
                           revealedContent={(
-                            <div>
+                            <div className="ExpandablePanel__listOptions ExpandablePanel__listOptions--panelColors">
                               <div>
                                 <div className="ExpandablePanel__listTwoColumns">
                                     {
@@ -136,7 +159,7 @@ class CollectionFilterSort extends Component {
                             </div>
                           )}
                           revealedContent={(
-                            <div>
+                            <div className="ExpandablePanel__listOptions checkboxBlackBg">
                               <label className="ExpandablePanel__option" name="price"><input checked="checked" className="js-filter-all" data-all="true" id="price-all" name="price-all" type="checkbox" value="all"/>
                                   <span className="checkboxBlackBg__check">
                                       <span className="ExpandablePanel__optionName">All prices</span>
@@ -171,47 +194,15 @@ class CollectionFilterSort extends Component {
                             </div>
                           )}
                           revealedContent={(
-                            <div>
+                            <div className="ExpandablePanel__listOptions checkboxBlackBg">
                               <label className="ExpandablePanel__option" name="bodyshape"><input checked="checked" className="js-filter-all" data-all="true" id="shapes-all" name="shapes-all" type="checkbox" value="all"/>
                                   <span className="checkboxBlackBg__check">
                                       <span className="ExpandablePanel__optionName">All shapes</span>
                                   </span>
                               </label>
-                              <label className="ExpandablePanel__option" name="shape"><input data-all="false" id="shape-apple" name="shape-apple" type="checkbox" value="apple"/>
-                                  <span className="checkboxBlackBg__check">
-                                      <span className="ExpandablePanel__optionName">apple</span>
-                                  </span>
-                              </label>
-                              <label className="ExpandablePanel__option" name="shape"><input data-all="false" id="shape-athletic" name="shape-athletic" type="checkbox" value="athletic"/>
-                                  <span className="checkboxBlackBg__check">
-                                      <span className="ExpandablePanel__optionName">athletic</span>
-                                  </span>
-                              </label>
-                              <label className="ExpandablePanel__option" name="shape"><input data-all="false" id="shape-column" name="shape-column" type="checkbox" value="column"/>
-                                  <span className="checkboxBlackBg__check">
-                                      <span className="ExpandablePanel__optionName">column</span>
-                                  </span>
-                              </label>
-                              <label className="ExpandablePanel__option" name="shape"><input data-all="false" id="shape-hour_glass" name="shape-hour_glass" type="checkbox" value="hour_glass"/>
-                                  <span className="checkboxBlackBg__check">
-                                      <span className="ExpandablePanel__optionName">hour glass</span>
-                                  </span>
-                              </label>
-                              <label className="ExpandablePanel__option" name="shape"><input data-all="false" id="shape-pear" name="shape-pear" type="checkbox" value="pear"/>
-                                  <span className="checkboxBlackBg__check">
-                                      <span className="ExpandablePanel__optionName">pear</span>
-                                  </span>
-                              </label>
-                              <label className="ExpandablePanel__option" name="shape"><input data-all="false" id="shape-petite" name="shape-petite" type="checkbox" value="petite"/>
-                                  <span className="checkboxBlackBg__check">
-                                      <span className="ExpandablePanel__optionName">petite</span>
-                                  </span>
-                              </label>
-                              <label className="ExpandablePanel__option" name="shape"><input data-all="false" id="shape-strawberry" name="shape-strawberry" type="checkbox" value="strawberry"/>
-                                  <span className="checkboxBlackBg__check">
-                                      <span className="ExpandablePanel__optionName">strawberry</span>
-                                  </span>
-                              </label>
+                              {$$bodyShapes.toJS.map((shape)=>{
+                                return this.buildCheckboxOption(shape);
+                              })}
                             </div>
                           )}
                         />
@@ -244,8 +235,9 @@ class CollectionFilterSort extends Component {
 CollectionFilterSort.propTypes = {
     breakpoint: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
-    $$colors: PropTypes.object,
-    $$secondaryColors: PropTypes.object
+    $$colors: PropTypes.array,
+    $$secondaryColors: PropTypes.array,
+    $$bodyShapes: PropTypes.array
 };
 
 export default Resize(breakpoints)(connect(stateToProps)(CollectionFilterSort));

@@ -163,7 +163,7 @@
       display: none;
     }
 
-    &.isOpen .ExpandablePanelItem__revealed-content{
+    &--is-active .ExpandablePanelItem__revealed-content{
       display: block;
     }
 
