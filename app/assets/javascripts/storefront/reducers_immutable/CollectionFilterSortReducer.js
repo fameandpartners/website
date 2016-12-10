@@ -4,7 +4,8 @@ import * as actionTypes from '../constants/CollectionFilterSortConstants';
 
 export const $$initialState = Immutable.fromJS({
   $$colors: [],
-  $$secondaryColors: []
+  $$secondaryColors: [],
+  $$bodyShapes: []
 });
 
 export default function CollectionFilterSortReducer($$state = $$initialState, action = null) {

@@ -4,21 +4,21 @@ class ExpandablePanel extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: false
+            isActive: false
         };
 
         this.openPanel = this.openPanel.bind(this);
     }
 
     openPanel() {
-        this.setState({ isOpen: !this.state.isOpen });
+        this.setState({ isActive: !this.state.isActive });
     }
 
     render() {
       const { itemGroup, revealedContent } = this.props;
-      const { isOpen } = this.state;
+      const { isActive } = this.state;
       return (
-          <div className={`ExpandablePanelItem ${isOpen ? 'isOpen' : ''}`}>
+          <div className={`ExpandablePanelItem ${isActive ? 'ExpandablePanelItem--is-active' : ''}`}>
               <div className="ExpandablePanelItem__item-bar" onClick={this.openPanel}>
                   {itemGroup}
               </div>
