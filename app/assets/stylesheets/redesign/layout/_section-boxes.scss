@@ -244,6 +244,14 @@ $top-overlay-margin-top: 37px;
 
   }
 
+  .iframe-middle-wrapper {
+
+    > div {
+      margin: 0 auto;
+    }
+
+  }
+
 }
 
 .section-box-alt {
@@ -322,8 +330,12 @@ $top-overlay-margin-top: 37px;
 }
 
 .heading-overlay-on-previous-section {
-  margin-top: -75px;
+
   padding-bottom: 30px;
+
+  @media (min-width: $bootstrap-md-width) {
+    margin-top: 0;
+  }
 }
 
 // When we need a 100%-wide section container with background
