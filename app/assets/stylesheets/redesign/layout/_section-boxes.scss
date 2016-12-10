@@ -330,13 +330,15 @@ $top-overlay-margin-top: 37px;
 }
 
 .heading-overlay-on-previous-section {
-
+  margin-top: -75px;
   padding-bottom: 30px;
 
-  @media (min-width: $bootstrap-md-width) {
+  @media (max-width: $bootstrap-md-width - 1px) {
     margin-top: 0;
   }
 }
+
+
 
 // When we need a 100%-wide section container with background
 .section-wrapper {
