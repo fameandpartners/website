@@ -1,5 +1,7 @@
-var SilhouetteSelector = React.createClass({
-  propTypes: {},
+var CustomizationSelector = React.createClass({
+  propTypes: {
+    selectCallback: React.PropTypes.func.isRequired
+  },
 
   close: function(){
     $(this.refs.container).hide();
@@ -10,15 +12,15 @@ var SilhouetteSelector = React.createClass({
   },
 
   render: function(){
-    var dresses = this.props.dresses.map(function(dress){
+    var dresses = this.props.dresses.map(function(dress, index) {
       return (
-        <div key={dress} onClick={this.select.bind(this, dress)} className="dress col-md-4">
-          <p>{dress}</p>
+        <div key= {index } onClick={ this.select.bind(this, dress) } className="dress col-md-4">
+          <p>{ dress }</p>
         </div>
-      )
-    }.bind(this))
+      );
+    }.bind(this));
 
-    return(
+    return (
       <div ref="container" className="customization-selector silhouette animated slideInLeft">
         <div className="inner-header">
           <span className="close" onClick={this.close}>x</span>
@@ -31,6 +33,6 @@ var SilhouetteSelector = React.createClass({
           { dresses }
         </div>
       </div>
-    )
+    );
   }
-})
+});

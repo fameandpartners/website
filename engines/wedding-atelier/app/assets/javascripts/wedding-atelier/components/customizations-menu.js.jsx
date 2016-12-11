@@ -2,13 +2,18 @@ var CustomizationsMenu = React.createClass({
 
   getInitialState: function() {
     return {
-      silhouette: null
-    }
+      silhouette: null,
+      'fabric-colour': null,
+      length: null,
+      style: null,
+      fit: null,
+      size: null
+    };
   },
 
-  renderRow: function (customizationItem) {
+  renderRow: function (customizationItem, index) {
       return (
-        <li className="row" onClick={ this.show.bind(this, customizationItem + 'Selector') }>
+        <li key={ index } className="row" onClick={ this.show.bind(this, customizationItem + 'Selector') }>
           <div className="col-sm-6 customization-column">
             <a href="#" className="">
               <i className={"icon icon-" + customizationItem}></i><span>{ customizationItem.split('-').join(' + ') }</span>
@@ -42,9 +47,17 @@ var CustomizationsMenu = React.createClass({
           </ul>
         </div>
         <div>
-          <SilhouetteSelector ref="silhouetteSelector" selectCallback={this.selectCustomization} dresses={this.props.dresses} />
+          {
+            customizationItems.map(function (customizationItem, index) {
+              return <CustomizationSelector key={ index }
+                ref={ customizationItem + 'Selector' }
+                selectCallback={this.selectCustomization}
+                dresses={this.props.dresses}
+              />
+            }.bind(this))
+          }
         </div>
       </div>
-    )
+    );
   }
 })
