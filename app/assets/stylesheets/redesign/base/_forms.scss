@@ -11,6 +11,27 @@ input[type="checkbox"] {
   margin-top: 6px;
 }
 
+select:not([multiple]) {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  background-position: right 50%;
+  background-repeat: no-repeat;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAMCAYAAAD26jQJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAALNJREFUeNrE1DEKwzAMBVCVkA5ZAoXeKFftBbKkkJClXbKmey/QQ7j6oEGYFosY2YIPwsPXm0xE9ObMnI7yBx13dIYQyCskYGxrJryTDnQ9vNE49syEnzmTdGyc3huN6eXYETjAowbjsQQ6hk+COQQuiY7hYwL+F1wabYVr8B6Da6BT8FaBX5zrr4IaaMxFUBrecG4pcE00CUrDTeDa6BhuAnujT8a/GMhF9oHzsaC95ivAADXsLo6fwCkvAAAAAElFTkSuQmCC);
+  background-size: 23px;
+  padding: 10px 25px 10px 10px;
+
+  &::-ms-expand {
+    display: none;
+  }
+
+}
+
+select {
+  border-radius: 0;
+}
+
 .form-control {
   line-height: normal;
   font-size: 1em;
