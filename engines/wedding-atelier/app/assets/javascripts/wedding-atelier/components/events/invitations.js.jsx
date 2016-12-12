@@ -1,10 +1,6 @@
 var EventInvitations = React.createClass({
   getInitialState: function() {
-    return { invitations: []}
-  },
-
-  componentDidMount: function() {
-    this.setState({invitations: this.props.invitations});
+    return {}
   },
 
   handleSendInvite: function(e){
@@ -16,8 +12,8 @@ var EventInvitations = React.createClass({
       data: {email_addresses: [email]},
       success: function(data) {
         data.invitations.map(function(invite) {
-          this.state.invitations.push(invite);
-          this.setState({invitations: this.state.invitations});
+          this.props.invitations.push(invite);
+          this.setState({invitations: this.props.invitations});
         }.bind(this))
       }.bind(this),
       error: function(error) {
@@ -27,18 +23,18 @@ var EventInvitations = React.createClass({
     e.preventDefault();
   },
 
-  handleRemoveBridesMaid: function(id){
-    debugger;
+  handleRemoveBridesMaid: function(id, index, e){
+    this.props.handleRemoveAssistant(id, index);
     e.preventDefault();
   },
 
   render: function() {
-    var assistants = this.props.assistants.map(function(assistant){
-      var removeFromBoard = assistant.user.id == this.props.current_user_id ? '' : <span> | <a href="#" onClick={this.handleRemoveBridesMaid.bind(this, assistant.user.id)}>Remove from board</a></span>
+    var assistants = this.props.assistants.map(function(assistant, index){
+      var removeFromBoard = assistant.user.id == this.props.current_user_id ? '' : <span> | <a href="#" onClick={this.handleRemoveBridesMaid.bind(this, assistant.user.id, index)}>Remove from board</a></span>
       return (
-        <div className="person">
+        <div className="person" key={assistant.user.id}>
           <div className="person-name">
-            { assistant.user.first_name }
+            { assistant.user.name }
           </div>
           <div className="person-role">
             Bridesmaid
@@ -48,9 +44,9 @@ var EventInvitations = React.createClass({
       )
     }.bind(this))
 
-    var invitations = this.state.invitations.map(function(invitation){
+    var invitations = this.props.invitations.map(function(invitation, index){
       return (
-        <div className="person">
+        <div className="person" key={index + '-' + invitation.user_email}>
           <div className="person-name">
             { invitation.invitation.user_email }
           </div>
@@ -64,7 +60,7 @@ var EventInvitations = React.createClass({
     return(
       <form>
         <div className="form-group">
-          <label for="input_email_address">Email address</label>
+          <label htmlFor="input_email_address">Email address</label>
           <input type="email" className="form-control" placeholder="mail@mail.com" id="input_email_addres" ref="email_address"/>
         </div>
         <div className="text-center">

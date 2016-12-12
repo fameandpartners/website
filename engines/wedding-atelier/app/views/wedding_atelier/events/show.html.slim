@@ -132,43 +132,8 @@
         | <button class="btn btn-black btn-send-to-chat">send</button>
 
   #atelier.right-content--desktop.col-sm-6
-    .right-container
-      h1.moodboard-title.text-center Janine's wedding - in 150 days
-
-      .moodboard-tabs.center-block
-        /! Nav tabs
-        ul.nav.nav-tabs.center-block role="tablist"
-          li.active role="presentation"
-            a aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab"  Bridesmaid dresses
-          li role="presentation"
-            a aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab"  Wedding details
-          li role="presentation"
-            a aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab"  Manage bridal party
-          li role="presentation"
-            a aria-controls="bridal-gowns" data-toggle="tab" href="#bridal-gowns" role="tab"  Bridal Gowns
-        /! Tab panes
-        .tab-content
-          #bridesmaid-dresses.tab-pane.active role="tabpanel"
-            /! IF there's not dresses ...
-            .add-dress-box.hidden
-              | <button class="add">Add your first dress</button>
-
-            /! IF there are dresses ...
-            .dresses-actions.text-center
-              = link_to '#', class: 'btn-transparent btn-create-a-dress'
-                em Create
-                |  a dress
-
-            .dresses-list
-              = react_component 'DressTiles', path: event_path(@event)
-
-          #wedding-details.tab-pane role="tabpanel"
-            = react_component 'EventDetails', @event, update_path: event_path(@event)
-
-          #manage-bridal-party.tab-pane.center-block role="tabpanel"
-            h1.text-center <em>Janine</em>, intive the bridal party.
-
-            = react_component 'EventInvitations', invitations: @event.invitations, assistants: @event.assistants, send_invite_path: event_invitations_path(@event), current_user_id: spree_current_user.id
-
-          #bridal-gowns.tab-pane role="tabpanel"  ...
-
+    = react_component 'MoodBoardEvent',
+                      event_path: event_path(@event),
+                      current_user_id: spree_current_user.id,
+                      send_invite_path: event_invitations_path(@event),
+                      remove_assistant_path: event_assistant_path(event_id: @event, id: 'id')

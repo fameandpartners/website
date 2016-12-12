@@ -10,7 +10,7 @@ var DressTile = React.createClass({
   render: function () {
     var loveClass = 'icon-liked';
     return (
-        <div className="dress-box">
+        <div className="dress-box" key={this.props.dress.id}>
           <div className="top-info">
             <span>{this.props.dress.title}</span>
           </div>
@@ -49,16 +49,7 @@ var DressTiles = React.createClass({
   },
 
   componentDidMount: function(){
-    var path = this.props.path;
-
-    $.ajax({
-      url: path,
-      type: "GET",
-      dataType: 'json',
-      success: function(collection) {
-        this.setState({dresses: collection.event.dresses});
-      }.bind(this)
-    });
+    this.setState({dresses: this.props.dresses})
   },
 
   render: function() {

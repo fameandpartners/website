@@ -15,7 +15,7 @@ module WeddingAtelier
       end
       respond_to do |format|
         format.html
-        format.js { render json: {event: {dresses: [{name: 'Name'}]}} }
+        format.json { render json: @event, serializer: MoodboardEventSerializer}
       end
     end
 
