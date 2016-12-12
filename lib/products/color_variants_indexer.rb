@@ -49,14 +49,6 @@ module Products
         product_price_in_au = product.price_in(au_site_version.currency)
         total_sales         = total_sales_for_sku(product.sku)
 
-        # NOTE: Alexey Bobyrev 09/12/16
-        # Next methods included from ProductActivityReport module
-        # Consider to remove this totals as ProductActivityReport module is deprecated
-        total_views         = total_product_viewed(product.id)
-        total_carts         = total_product_added_to_cart(product.id)
-        total_wishlists     = total_product_added_to_wishlist(product.id)
-        total_purchased     = total_product_purchased(product.id)
-
         color_customizable = product.color_customization
         discount           = product.discount.try(:amount).to_i
         product.product_color_values.recommended.active.each do |product_color_value|
@@ -97,10 +89,6 @@ module Products
               },
               statistics: {
                 total_sales:     total_sales,
-                total_views:     total_views,
-                total_carts:     total_carts,
-                total_wishlists: total_wishlists,
-                total_purchased: total_purchased,
               },
               can_be_customized:  product.can_be_customized?,
               fast_delivery:      product.fast_delivery,
