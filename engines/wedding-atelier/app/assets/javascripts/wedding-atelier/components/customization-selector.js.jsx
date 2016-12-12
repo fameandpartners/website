@@ -64,12 +64,18 @@ var CustomizationSelector = React.createClass({
   },
 
   render: function() {
+    var presentationName = this.props.componentName.split('-').join(' ');
+
     return (
       <div ref="container" className="customization-selector animated slideInLeft">
         <div className="selector-header">
-          <span className="close" onClick={this.close}>x</span>
+          <i className={"icon icon-" + this.props.componentName}></i>
+          <div className="selector-name text-left">{presentationName}</div>
+          <div className="selector-close" onClick={this.close}></div>
         </div>
-        { this.renderCustomizationItem() }
+        <div className="selector-body">
+          {this.renderCustomizationItem()}
+        </div>
       </div>
     );
   }

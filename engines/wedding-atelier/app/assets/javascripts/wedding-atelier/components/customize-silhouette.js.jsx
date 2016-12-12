@@ -22,7 +22,7 @@ var CustomizeSilhouette = React.createClass({
     }.bind(this));
 
     return (
-      <div className="selector-body silhouette">
+      <div className="silhouette">
         <div>
           <p><em>Choose</em> your perfect shape</p>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
