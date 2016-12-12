@@ -11,7 +11,6 @@
     "eslint-watch": "^2.1.11",
     "gulp-clean": "^0.3.2",
     "gulp-eslint": "^3.0.1",
-    "gulp-if": "^2.0.2",
     "watchify": "^3.7.0"
   },
   "dependencies": {

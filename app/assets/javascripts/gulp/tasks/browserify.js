@@ -7,7 +7,6 @@ const clean = require('gulp-clean');
 const config = require('../config').browserify;
 const eslint = require('gulp-eslint');
 const gulp = require('gulp');
-const gulpIf = require('gulp-if');
 const gutil = require('gulp-util');
 const source = require('vinyl-source-stream');
 const uglify = require('gulp-uglify');
@@ -24,15 +23,6 @@ const isWatch = argv.watch;
 gutil.log('Is build using watchify?', isWatch ? _true : _false );
 gutil.log('Is build prod?', isProd ? _true : _false);
 gutil.log('Is this dev?', isDevelopment ? _true : _false);
-
-/**
- * Checks if a file's eslint flag is fixed
- * @param  {Object} file
- * @return {Boolean}
- */
-function isFixed(file) {
-    return file.eslint !== null && file.eslint.fixed;
-}
 
 /**
  * Exits from bundle build
@@ -81,11 +71,7 @@ function attachBundleUpdate(bundler){
       .pipe(eslint({
         fix: true
       }))
-      .pipe(eslint.format())
-      .pipe(gulpIf(
-        isFixed,
-        gulp.dest(config.paths.dist)
-      ));
+      .pipe(eslint.format());
 
     bundle(bundler);
   });
