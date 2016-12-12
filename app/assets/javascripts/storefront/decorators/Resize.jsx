@@ -1,5 +1,5 @@
 const React = require('react');
-const _ = require('underscore');
+const _debounce = require('lodash/debounce');
 const {Component} = React;
 const handlers = [];
 
@@ -20,9 +20,9 @@ module.exports = function resizeThunk(config = {}) {
     return class Resize extends Component {
 
       constructor (...args) {
-        super(...args)
+        super(...args);
         this.state = this.getState();
-        this.onWindowResize = _.debounce(this.onWindowResize.bind(this), debounceTime);
+        this.onWindowResize = _debounce(this.onWindowResize.bind(this), debounceTime);
       }
 
       getState () {
