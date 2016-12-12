@@ -32,7 +32,7 @@ var CustomizationsMenu = React.createClass({
             </a>
           </div>
           <div className="col-sm-6 customization-column">
-            <span>{ this.state[customizationItem] }</span>
+            <span>{ this.state.selectedOptions[customizationItem] }</span>
           </div>
         </li>
       );
