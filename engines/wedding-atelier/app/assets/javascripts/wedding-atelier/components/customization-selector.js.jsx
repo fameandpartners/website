@@ -3,11 +3,13 @@ var CustomizationSelector = React.createClass({
     selectCallback: React.PropTypes.func.isRequired,
     componentName: React.PropTypes.string.isRequired
   },
+
   renderCustomizationItem: function () {
     switch (this.props.componentName) {
       case 'silhouette':
         return (
           <CustomizeSilhouette
+            componentName={this.props.componentName}
             selectCallback={this.props.selectCallback}
             dresses={this.props.dresses}
             />
@@ -15,6 +17,7 @@ var CustomizationSelector = React.createClass({
       case 'fabric-colour':
         return (
           <CustomizeFabricColour
+            componentName={this.props.componentName}
             selectCallback={this.props.selectCallback}
             dresses={this.props.dresses}
             />
@@ -22,6 +25,7 @@ var CustomizationSelector = React.createClass({
       case 'length':
         return (
           <CustomizeLength
+            componentName={this.props.componentName}
             selectCallback={this.props.selectCallback}
             dresses={this.props.dresses}
             />
@@ -29,6 +33,7 @@ var CustomizationSelector = React.createClass({
       case 'style':
         return (
           <CustomizeStyle
+            componentName={this.props.componentName}
             selectCallback={this.props.selectCallback}
             dresses={this.props.dresses}
             />
@@ -36,6 +41,7 @@ var CustomizationSelector = React.createClass({
       case 'fit':
         return (
           <CustomizeFit
+            componentName={this.props.componentName}
             selectCallback={this.props.selectCallback}
             dresses={this.props.dresses}
             />
@@ -43,6 +49,7 @@ var CustomizationSelector = React.createClass({
       case 'size':
         return (
           <CustomizeSize
+            componentName={this.props.componentName}
             selectCallback={this.props.selectCallback}
             dresses={this.props.dresses}
             />
