@@ -6,6 +6,7 @@
   position: fixed;
   top: 0;
   width: 50%;
+  z-index: 1;
 
   .selector-header {
     background-image: image-url('wedding-atelier/marbel.png');
@@ -37,6 +38,9 @@
 
   .selector-body {
     padding: 0 50px;
+    overflow-y: scroll;
+    //62px is footer height
+    height: calc(100% - 62px);
   }
 
   .customization-title {
@@ -53,6 +57,7 @@
 
   .customization-options-item {
     background-color: $white-three;
+    cursor: pointer;
     height: 283px;
     margin-bottom: 30px;
   }

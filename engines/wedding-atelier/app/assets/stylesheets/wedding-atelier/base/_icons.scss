@@ -7,25 +7,43 @@
 
   &-silhouette {
     background-image: image-url('wedding-atelier/icons/silhouette.png');
+    &.selected {
+      background-image: image-url('wedding-atelier/icons/selected-silhouette.png');
+    }
   }
 
   &-fabric-colour {
     background-image: image-url('wedding-atelier/icons/fabric-colour.png');
+    &.selected {
+      background-image: image-url('wedding-atelier/icons/selected-fabric-coulour.png');
+    }
   }
 
   &-length {
     background-image: image-url('wedding-atelier/icons/length.png');
+    &.selected {
+      background-image: image-url('wedding-atelier/icons/selected-length.png');
+    }
   }
 
   &-style {
     background-image: image-url('wedding-atelier/icons/style.png');
+    &.selected {
+      background-image: image-url('wedding-atelier/icons/selected-style.png');
+    }
   }
 
   &-fit {
     background-image: image-url('wedding-atelier/icons/fit.png');
+    &.selected {
+      background-image: image-url('wedding-atelier/icons/selected-fit.png');
+    }
   }
 
   &-size {
     background-image: image-url('wedding-atelier/icons/size.png');
+    &.selected {
+      background-image: image-url('wedding-atelier/icons/selected-size.png');
+    }
   }
 }

@@ -24,11 +24,17 @@ var CustomizationsMenu = React.createClass({
   },
 
   renderRow: function (customizationItem, index) {
+
+      var className = "icon icon-" + customizationItem;
+      if(this.state.selectedOptions[customizationItem]){
+        className += ' selected'
+      }
+
       return (
         <li key={ index } className="row" onClick={ this.show.bind(this, customizationItem) }>
           <div className="col-sm-6 customization-column">
             <a href="#" className="">
-              <i className={"icon icon-" + customizationItem}></i><span>{ customizationItem.split('-').join(' + ') }</span>
+              <i className={className}></i><span>{ customizationItem.split('-').join(' + ') }</span>
             </a>
           </div>
           <div className="col-sm-6 customization-column">
