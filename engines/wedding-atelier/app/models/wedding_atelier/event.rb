@@ -25,7 +25,7 @@ module WeddingAtelier
     end
 
     def invitations
-      Invitation.where(event_slug: slug)
+      Invitation.pending.where(event_slug: slug)
     end
 
     private

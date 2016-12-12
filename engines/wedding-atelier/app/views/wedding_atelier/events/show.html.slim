@@ -168,7 +168,7 @@
           #manage-bridal-party.tab-pane.center-block role="tabpanel"
             h1.text-center <em>Janine</em>, intive the bridal party.
 
-            = react_component 'EventInvitations', invitations: @event.invitations, assistants: @event.assistants
+            = react_component 'EventInvitations', invitations: @event.invitations, assistants: @event.assistants, send_invite_path: event_invitations_path(@event), current_user_id: spree_current_user.id
 
           #bridal-gowns.tab-pane role="tabpanel"  ...
 
