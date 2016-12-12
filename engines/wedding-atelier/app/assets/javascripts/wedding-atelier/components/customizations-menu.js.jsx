@@ -53,6 +53,7 @@ var CustomizationsMenu = React.createClass({
                 ref={ customizationItem + 'Selector' }
                 selectCallback={this.selectCustomization}
                 dresses={this.props.dresses}
+                componentName={customizationItem}
               />
             }.bind(this))
           }

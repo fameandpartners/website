@@ -1,37 +1,68 @@
 var CustomizationSelector = React.createClass({
   propTypes: {
-    selectCallback: React.PropTypes.func.isRequired
+    selectCallback: React.PropTypes.func.isRequired,
+    componentName: React.PropTypes.string.isRequired
+  },
+  renderCustomizationItem: function () {
+    switch (this.props.componentName) {
+      case 'silhouette':
+        return (
+          <CustomizeSilhouette
+            selectCallback={this.props.selectCallback}
+            dresses={this.props.dresses}
+            />
+        );
+      case 'fabric-colour':
+        return (
+          <CustomizeFabricColour
+            selectCallback={this.props.selectCallback}
+            dresses={this.props.dresses}
+            />
+        );
+      case 'length':
+        return (
+          <CustomizeLength
+            selectCallback={this.props.selectCallback}
+            dresses={this.props.dresses}
+            />
+        );
+      case 'style':
+        return (
+          <CustomizeStyle
+            selectCallback={this.props.selectCallback}
+            dresses={this.props.dresses}
+            />
+        );
+      case 'fit':
+        return (
+          <CustomizeFit
+            selectCallback={this.props.selectCallback}
+            dresses={this.props.dresses}
+            />
+        );
+      case 'size':
+        return (
+          <CustomizeSize
+            selectCallback={this.props.selectCallback}
+            dresses={this.props.dresses}
+            />
+        );
+      default:
+        return <h1>Hello</h1>;
+    }
   },
 
-  close: function(){
+  close: function() {
     $(this.refs.container).hide();
   },
 
-  select: function(dress){
-    this.props.selectCallback('silhouette', dress);
-  },
-
-  render: function(){
-    var dresses = this.props.dresses.map(function(dress, index) {
-      return (
-        <div key= {index } onClick={ this.select.bind(this, dress) } className="dress col-md-4">
-          <p>{ dress }</p>
-        </div>
-      );
-    }.bind(this));
-
+  render: function() {
     return (
-      <div ref="container" className="customization-selector silhouette animated slideInLeft">
-        <div className="inner-header">
+      <div ref="container" className="customization-selector animated slideInLeft">
+        <div className="selector-header">
           <span className="close" onClick={this.close}>x</span>
         </div>
-        <div>
-          <p>Choose your perfect shape</p>
-          <p>some more text aposkdapodskaopdsakopd</p>
-        </div>
-        <div className="dress-grid row">
-          { dresses }
-        </div>
+        { this.renderCustomizationItem() }
       </div>
     );
   }
