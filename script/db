@@ -263,6 +263,13 @@ function sanitise_dev_db
   truncate table user_style_profile_taxons;
   truncate table user_style_profiles;
   truncate table wishlist_items;
+  truncate table wedding_atelier_event_assistants;
+  truncate wedding_atelier_event_assistants;
+  truncate wedding_atelier_event_roles;
+  truncate wedding_atelier_events;
+  truncate wedding_atelier_invitations;
+  truncate wedding_atelier_user_profiles;
+  truncate wedding_atelier_users_event_roles;
   "
 
   psql --dbname ${DEV_DB} --echo-queries --command "${SCRIPT_SQL}"

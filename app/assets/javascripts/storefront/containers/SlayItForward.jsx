@@ -104,25 +104,25 @@ class SlayItForward extends Component {
               }
               <p className="text-center">
                 It’s a movement. <br/>
-                In light of recent events, we feel it is our obligation and duty to remind women everywhere:
+                In light of recent events, we feel it is our obligation and duty <br className="hidden-xs hidden-sm" />to remind women everywhere:
             </p>
             <p className="text-center font-medium">
-              We are <em>capable</em>. We are <em>worthy</em>.<br /> We are more than our <em>bodies</em>,
-              our <em>looks</em>, our <em>sex</em>. <br />We <em>slay</em>.
+              We are <em>capable</em>. We are <em>worthy</em>.<br /> We are more than our <em>bodies</em>,
+              our <em>looks</em>, our <em>sex</em>. <br />We <em>slay</em>.
             </p>
             <p className="text-center">
               Let’s #SLAYITFORWARD.
             </p>
             <p className="text-center">
               Use the hashtag on Instagram to shout out a woman in your life who
-              inspires you–or who needs some inspiration right now–and tell her how
+              inspires you–or who needs <br className="hidden-xs hidden-sm" />some inspiration right now–and tell her how
               she slays. Now it’s her turn to #SLAYITFORWARD.<br />For every hashtag used,
               Fame and Partners will donate $1 to the charities below–ones that support
-              our most vulnerable, marginalized communities.
+              <br className="hidden-xs hidden-sm" /> our most vulnerable, marginalized communities.
             </p>
             <p className="text-center">
               Join us in creating an unstoppable chain of women empowering women.
-              Join us in donating to the people who need it most right now. Join us and
+              Join us in donating to the <br className="hidden-xs hidden-sm" />people who need it most right now. Join us and
               <br />#SLAYITFORWARD.
               </p>
             </div>
@@ -147,23 +147,23 @@ class SlayItForward extends Component {
               <p className="font--secondary text-uppercase title">National Organization for Women (NOW).</p>
               <p>They advocate for equal rights for women.</p>
 
-              <p className="font--secondary text-uppercase title">Showing Up For Racial Justice.</p>
+              <p className="font--secondary text-uppercase title">Showing Up For Racial Justice.</p>
               <p>They are a national network of groups and individuals organizing white people for racial justice.</p>
 
               <p className="font--secondary text-uppercase title">Planned Parenthood.</p>
               <p>They are the nation’s leading sexual and reproductive healthcare provider.</p>
 
-              <p className="font--secondary text-uppercase title">Rape, Abuse & Incest Network (RAINN).</p>
+              <p className="font--secondary text-uppercase title">Rape, Abuse & Incest Network (RAINN).</p>
               <p>They are the largest anti-sexual violence organization in the country.</p>
 
               <p className="font--secondary text-uppercase title">Running Start.</p>
-              <p>They educate young women about the importance of politics through the Young Women’s Political Leadership Program.</p>
+              <p>They educate young women about the importance of politics through the Young Women’s Political Leadership Program.</p>
 
               <p className="font--secondary text-uppercase title">She Should Run.</p>
-              <p>They aim to get more women into elected positions of power.</p>
+              <p>They aim to get more women into elected positions of power.</p>
 
               <p className="font--secondary text-uppercase title">Sylvia Rivera Law Project.</p>
-              <p>They provide legal service to low-income people and people of color who are transgender, intersexor otherwise gender non-conforming.</p>
+              <p>They provide legal service to low-income people and people of color who are transgender, intersexor otherwise gender non-conforming.</p>
 
               <p className="font--secondary text-uppercase title">Young Center for Immigrant Children’s Rights.</p>
               <p>They fight for the best interests of children who come to the U.S. on their own.</p>
@@ -184,12 +184,36 @@ class SlayItForward extends Component {
             </div>
           </MarketingSection>
 
-          <MarketingSection className="MarketingSection-slay slay-ceo-letter inner-buffer">
+          <MarketingSection className="MarketingSection-slay slay-ceo-letter container hidden-sm hidden-xs">
+            <div className="section-box row">
+              <div className="item bordered col-md-6 col-md-offset-3">
+                <div className="row vertical-align-row">
+                  <div className="col-md-5 vertical-align img-side">
+                    <img className='img-responsive' src={getImages('nyree')}></img>
+                  </div>
+                  <div className="col-md-7 vertical-align copy-side">
+                    <div className="content-wrapper">
+                      <p>
+                        <h4 className="h1 no-margin-bottom">From our CEO.</h4>
+                        A message from Nyree Corby, a female founder and CEO, to women everywhere.
+                      </p>
+                      <a href="/from-our-ceo">
+                        <span className="cta-link-arrow-right"><span className="copy-highlight link-underline h5">Read Now</span><i className="icon icon-arrow-right"></i></span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </MarketingSection>
+
+          <MarketingSection className="MarketingSection-slay slay-ceo-letter inner-buffer hidden-lg hidden-md">
             <div className="text-center">
               <p className="font-large">From our CEO.</p>
               <img className='nyree-img' src={getImages('nyree')}></img>
               <p>A message from Nyree Corby, a female founder and CEO, to women everywhere.</p>
-              <p className="font--secondary"><a href="/from-our-ceo"><span className='read-ceo-link u-textDecoration--underline'><b>READ NOW</b></span></a>&nbsp;&nbsp;<b>></b></p>
+              <p className="font--secondary"><a href="/from-our-ceo"><span className='read-ceo-link u-textDecoration--underline'><strong>READ NOW</strong></span></a></p>
             </div>
           </MarketingSection>
 
