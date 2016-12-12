@@ -160,9 +160,9 @@ module Products
           AND o.completed_at IS NOT NULL
         GROUP BY sku
       }
-      conn = ActiveRecord::Base.connection.execute(sql)
+      value = ActiveRecord::Base.connection.select_value(sql)
 
-      conn.any? ? conn.first['count'] : 0
+      value.to_i
     end
 
     def push_to_index
