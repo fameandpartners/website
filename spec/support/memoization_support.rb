@@ -19,6 +19,7 @@ RSpec.configure do |config|
 
     # Legacy
     MemoizationSupport.rememoize(Repositories::ProductColors, :@color_groups)
+    MemoizationSupport.rememoize(Repositories::ProductColors, :@colors_map)
     MemoizationSupport.rememoize(Repositories::ProductSize, :@sizes_map)
 
     # TODO: this is redeclaring the `ProductColorValue.belongs_to`, since Rails `conditions` options are cached by class!
