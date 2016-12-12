@@ -27,7 +27,7 @@ describe 'Order Payment Step', type: :feature do
       it 'renders USD button' do
         visit spree.checkout_state_path('payment')
 
-        expect(page).to have_link('paypal_button', href: '/paypal?payment_method_id=123')
+        expect(page).to have_link('paypal_button', href: "/paypal?payment_method_id=#{paypal_usd.id}")
       end
     end
 
@@ -37,7 +37,7 @@ describe 'Order Payment Step', type: :feature do
       it 'renders AUD button' do
         visit spree.checkout_state_path('payment')
 
-        expect(page).to have_link('paypal_button', href: '/paypal?payment_method_id=456')
+        expect(page).to have_link('paypal_button', href: "/paypal?payment_method_id=#{paypal_aud.id}")
       end
     end
   end
