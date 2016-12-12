@@ -34,4 +34,26 @@
       text-transform: uppercase;
     }
   }
+
+  .selector-body {
+    padding: 0 50px;
+  }
+
+  .customization-title {
+    text-align: left;
+
+    h1 {
+      max-width: 240px;
+    }
+
+    p {
+      max-width: 454px;
+    }
+  }
+
+  .customization-options-item {
+    background-color: $white-three;
+    height: 283px;
+    margin-bottom: 30px;
+  }
 }
