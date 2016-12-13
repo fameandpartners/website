@@ -2,64 +2,66 @@
 
 .wedding-sweepstakes.landing-page-v2
 
-  .container-fluid.containerHalfScreenHero
-    .row
-      .col-md-6.hidden-md.hidden-lg.containerHalfScreenHero__heroImg
-        = image_tag 'landingpages/wedding-sweepstakes/bridesmaids-hero-mob.jpg', class: "img-responsive"
-      .col-md-6.hidden-md.hidden-lg
-        .heading-overlay-wrapper
-          h2.heading-overlay
-            | FAME BRIDESMAID
+  .preRegisterSweepstakes__introWrapper
+    .container-fluid.containerHalfScreenHero
+      .row
+        .col-md-6.hidden-md.hidden-lg.containerHalfScreenHero__heroImg
+          = image_tag 'landingpages/wedding-sweepstakes/bridesmaids-hero-mob.jpg', class: "img-responsive"
+        .col-md-6.hidden-md.hidden-lg
+          .heading-overlay-wrapper.preRegisterSweepstakes__heading
+            h2.heading-overlay
+              | FAME BRIDESMAID
 
-      .col-md-offset-1.col-md-4
-        .heading-thin-line-top
-          .row
-            .col-xs-12
-              h3.subheading.title Launching January 2017.
-              h1 Custom-created, <br class="visible-lg"> tailor-made looks for the whole bridal party.
-              h3.subheading Introducing the Wedding Atelier App
+        .col-md-offset-1.col-md-4
+          .heading-thin-line-top.preRegisterSweepstakes__copy
+            .row
+              .col-xs-12
+                h3.subheading.title Launching January 2017.
+                h1.line-mobile-center Custom-created, <br class="visible-lg"> tailor-made looks for the whole bridal party.
+                h3.subheading Introducing the Wedding Atelier App
 
-              = link_to inside_out_sweepstakes_path
-                span.btn-xs.btn-featured
-                  span.copy-highlight PRE - REGISTER
+                = link_to inside_out_sweepstakes_path, class: 'cta-mobile-featured'
+                  span.btn-xs.btn-featured
+                    span.copy-highlight PRE - REGISTER
 
-      .col-md-6.col-md-offset-1.no-padding.hidden-xs.hidden-sm
-        = image_tag 'landingpages/wedding-sweepstakes/bridesmaids-hero.jpg', class: "img-responsive"
+        .col-md-6.col-md-offset-1.no-padding.hidden-xs.hidden-sm
+          = image_tag 'landingpages/wedding-sweepstakes/bridesmaids-hero.jpg', class: "img-responsive"
 
   .preRegisterSweepstakes__formWrapperBg
-    .container
+    .container.preRegisterSweepstakes__formWrapperContent
       section.section-box.padding-container.preRegisterSweepstakes__formWrapper
-        .row
+        .row.hidden-xs.hidden-sm
           .col-md-12.heading-overlay-wrapper.heading-overlay-on-previous-section
             h2.heading-overlay FAME BRIDESMAIDS
 
         .row.text-center
           .col-md-offset-2.col-md-8
             = image_tag "//fakeimg.pl/900x683/", class: "img-responsive"
-            h2
-              | WIN - $5,000 of bespoke bridal wear for your wedding party. Pre-register for the Atelier App to enter and get <em>early access</em> to the collection.
+            .preRegisterSweepstakes__copyPadding
+              h2
+                | WIN - $5,000 of bespoke bridal wear for your wedding party. Pre-register for the Atelier App to enter and get <em>early access</em> to the collection.
 
-            p
-              | In the Atelier App, you can customize nearly everything about your dress: fabric, color, fit, and design details–there are <em>thousands</em> of combinations. The finished product is made-to-order, just for you, and guaranteed to fit your body perfectly. Think this process will take forever and/or be crazy expensive? Think again. Dresses will be delivered in only 2 weeks–and all clock in at under $200.
+              p
+                | In the Atelier App, you can customize nearly everything about your dress: fabric, color, fit, and design details–there are <em>thousands</em> of combinations. The finished product is made-to-order, just for you, and guaranteed to fit your body perfectly. Think this process will take forever and/or be crazy expensive? Think again. Dresses will be delivered in only 2 weeks–and all clock in at under $200.
 
-        .row.iframe-middle-wrapper
-          .woobox-offer data-offer="5fbtad"
+            .iframe-middle-wrapper
+              .woobox-offer data-offer="5fbtad"
 
-        .row.text-center
-          span.text-grey
-            | <em>By clicking PRE-REGISTER, you agree to the #{link_to "Rules and Regulations", '/terms#collapse-pre-register-bridesmaids', target: '_blank'}</em>.
+            .preRegisterSweepstakes__copyPadding.text-center
+              span.text-grey
+                | <em>By clicking PRE-REGISTER, you agree to the #{link_to "Rules and Regulations", '/terms#collapse-pre-register-bridesmaids', target: '_blank'}</em>.
 
   .container
     section.section-box.section-price
       .row
         .col-md-6.hidden-md.hidden-lg
           .heading-overlay-wrapper
-            h2.heading-overlay
+            h2.heading-overlay.preRegisterSweepstakes__heading
               | THE PRIZE
 
-        .col-md-5.col-md-offset-1
+        .col-md-5
           .heading-overlay-wrapper.hidden-xs.hidden-sm
-            h2.heading-overlay
+            h2.heading-overlay.preRegisterSweepstakes__heading
               | THE PRIZE
           .preRegisterSweepstakes__copyPadding
             h2

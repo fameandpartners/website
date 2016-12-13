@@ -28,6 +28,17 @@
 
       .heading-overlay-wrapper {
         text-align: center;
+        margin-top: -55px;
+      }
+
+    }
+
+    .cta-mobile-featured {
+      margin-bottom: 15px;
+      display: block;
+
+      span {
+        font-size: 2rem;
       }
 
     }
@@ -58,6 +69,36 @@
 }
 
 .preRegisterSweepstakes {
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    &__introWrapper {
+      padding-bottom: 40px;
+    }
+
+    &__heading {
+      margin-top: -36px;
+    }
+
+    &__copy .subheading {
+      margin-top: 30px;
+      margin-bottom: 50px;
+    }
+
+    &__formWrapperContent {
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    &__formWrapperBg {
+      padding-top: 30px;
+    }
+
+    &__copyPadding {
+      padding: 0 50px;
+    }
+
+  }
 
   &__formWrapperBg {
     background: url('landingpages/wedding-sweepstakes/marble-texture-bg.jpg');
