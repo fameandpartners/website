@@ -9,7 +9,10 @@ var CustomizationsMenu = React.createClass({
         length: [1,2,3,4,5],
         style: [1,2,3,4,5],
         fit: [1,2,3,4,5],
-        size: [1,2,3,4,5]
+        size: [1,2,3,4,5,6,7,8,9,10,11,12,13,15,16],
+        people: ['Foo', 'Bar', 'Baz', 'John', 'Doe'],
+        heights: [1,2,3,4,5]
+
       },
       selectedOptions: {
         silhouette: null,
@@ -18,7 +21,8 @@ var CustomizationsMenu = React.createClass({
         length: null,
         style: null,
         fit: null,
-        size: null
+        size: null,
+        height: null
       }
     };
   },
@@ -36,8 +40,13 @@ var CustomizationsMenu = React.createClass({
         selectedValue = selectedOptions.fabric + ' | ' + selectedOptions.colour
       }
 
+      if(customizationItem == 'size' && selectedOptions.size && selectedOptions.height){
+        className += ' selected';
+        selectedValue = selectedOptions.height + ' | ' + selectedOptions.size
+      }
+
       return (
-        <li key={ index } className="row" onClick={ this.show.bind(this, customizationItem) }>
+        <li key={ index } className="row customization-type" onClick={ this.show.bind(this, customizationItem) }>
           <div className="col-sm-6 customization-column">
             <a href="#" className="">
               <i className={className}></i><span>{ customizationItem.split('-').join(' + ') }</span>
@@ -88,7 +97,9 @@ var CustomizationsMenu = React.createClass({
           <CustomizationSelector type="style" selectCallback={this.selectCallback} options={this.state.options.style} ref="style"/>
           <CustomizationSelector type="fit" selectCallback={this.selectCallback} options={this.state.options.fit} ref="fit"/>
           <SizeSelector
-            sizes={this.state.options.sizes}
+            sizes={this.state.options.size}
+            people={this.state.options.people}
+            heights={this.state.options.heights}
             selectCallback={this.selectCallback}
             ref="size"/>
         </div>
