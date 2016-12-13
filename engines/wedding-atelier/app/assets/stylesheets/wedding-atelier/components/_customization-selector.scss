@@ -38,9 +38,13 @@
 
   .selector-body {
     padding: 0 50px;
-    overflow-y: scroll;
+    overflow-y: auto;
     //62px is footer height
     height: calc(100% - 62px);
+
+    .description {
+      margin: 21px 0;
+    }
   }
 
   .customization-title {
@@ -60,5 +64,42 @@
     cursor: pointer;
     height: 283px;
     margin-bottom: 30px;
+
+    &-small {
+      background-color: $white;
+      cursor: pointer;
+      height: 138px;
+      width: 138px;
+    }
+
+    &-label {
+      margin-bottom: 26px;
+      margin-top: 14px;
+      text-align: left;
+    }
+  }
+
+  .customization-radio {
+    visibility: hidden;
+    position: absolute;
+
+    &:checked ~ label .box {
+      background: $black;
+    }
+  }
+
+  .customization-radio-label {
+    .box {
+      border: 1px solid $white-two;
+      display: inline-block;
+      height: 20px;
+      outline: 1px solid $black;
+      width: 20px;
+    }
+
+    .real-label {
+      vertical-align: super;
+    }
+
   }
 }

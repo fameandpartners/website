@@ -33,7 +33,7 @@ var CustomizationSelector = React.createClass({
           <div className="customization">
             <div className="customization-title">
               <h1><em>{this.props.keyword}</em> {this.props.title}</h1>
-              <p>{this.props.description}</p>
+              <p className="description">{this.props.description}</p>
             </div>
             <div className="customization-options-grid row">
               { options }

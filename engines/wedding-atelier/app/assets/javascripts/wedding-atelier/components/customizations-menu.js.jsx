@@ -4,7 +4,7 @@ var CustomizationsMenu = React.createClass({
     return {
       options: {
         silhouette: [1,2,3,4,5],
-        fabric: [1,2,3,4,5],
+        fabric: [1,2],
         colour: [1,2,3,4,5],
         length: [1,2,3,4,5],
         style: [1,2,3,4,5],
@@ -72,11 +72,19 @@ var CustomizationsMenu = React.createClass({
             keyword="Choose"
             title="your perfect shape"
             description="a;lskda;oksdakspdoak" />
-          <FabricAndColorSelector type="silhouette"/>
+          <FabricAndColourSelector
+            colours={this.state.options.colour}
+            fabrics={this.state.options.fabric}
+            selectCallback={this.selectCallback}
+            ref="fabric-colour"
+          />
           <CustomizationSelector type="length" selectCallback={this.selectCallback} options={this.state.options.length} ref="length"/>
           <CustomizationSelector type="style" selectCallback={this.selectCallback} options={this.state.options.style} ref="style"/>
           <CustomizationSelector type="fit" selectCallback={this.selectCallback} options={this.state.options.fit} ref="fit"/>
-          <SizeSelector/>
+          <SizeSelector
+            sizes={this.state.options.sizes}
+            selectCallback={this.selectCallback}
+            ref="size"/>
         </div>
       </div>
     );
