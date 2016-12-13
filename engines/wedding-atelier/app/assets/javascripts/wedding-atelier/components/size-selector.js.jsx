@@ -64,7 +64,7 @@ var SizeSelector = React.createClass({
           <div className="selector-close" onClick={this.close}></div>
         </div>
         <div className="selector-body">
-          <div className="customization">
+          <div className="customization customization-size">
             <div className="customization-title">
               <h1><em>Tailor</em> to your body</h1>
               <p className="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>

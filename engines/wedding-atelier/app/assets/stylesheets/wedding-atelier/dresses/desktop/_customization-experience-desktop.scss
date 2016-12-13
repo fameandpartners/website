@@ -106,13 +106,16 @@
 }
 
 .dress-preview {
-  background-color: $pinkish-grey;
+  background-image: image-url('wedding-atelier/customization.jpg');
   padding-bottom: 61px;
   height: 100%;
 }
 
 .footer {
   background-image: image-url('wedding-atelier/marbel.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   align-items: center;
   bottom: 0;
   display: flex;

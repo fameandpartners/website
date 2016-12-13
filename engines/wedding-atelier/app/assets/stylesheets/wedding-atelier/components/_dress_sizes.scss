@@ -17,6 +17,7 @@
     width: 368px;
     margin: 0 -14px;
     text-align: justify;
+
     @include screen-xs {
       width: 320px;
       margin: 0 -30px;
@@ -26,8 +27,6 @@
     &.customization-dress-sizes-ul {
       width: auto;
       @include screen-xs { width: auto; }
-
-      //li { margin: 4px 14px; }
     }
   }
 
@@ -60,6 +59,24 @@
 
     &:hover label {
       outline: 1px solid $black;
+    }
+  }
+}
+
+.people-sizes {
+  label {
+    width: 125px;
+  }
+
+  @include screen-md {
+    label {
+      width: 150px;
+    }
+  }
+
+  @include screen-lg {
+    label {
+      width: 160px;
     }
   }
 }

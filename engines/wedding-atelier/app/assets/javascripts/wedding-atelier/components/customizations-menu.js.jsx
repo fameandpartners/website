@@ -86,16 +86,33 @@ var CustomizationsMenu = React.createClass({
             ref="silhouette"
             keyword="Choose"
             title="your perfect shape"
-            description="a;lskda;oksdakspdoak" />
+            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
           <FabricAndColourSelector
             colours={this.state.options.colour}
             fabrics={this.state.options.fabric}
             selectCallback={this.selectCallback}
-            ref="fabric-colour"
-          />
-          <CustomizationSelector type="length" selectCallback={this.selectCallback} options={this.state.options.length} ref="length"/>
-          <CustomizationSelector type="style" selectCallback={this.selectCallback} options={this.state.options.style} ref="style"/>
-          <CustomizationSelector type="fit" selectCallback={this.selectCallback} options={this.state.options.fit} ref="fit"/>
+            ref="fabric-colour"/>
+          <CustomizationSelector
+            type="length"
+            selectCallback={this.selectCallback} options={this.state.options.length}
+            ref="length"
+            keyword="Choose"
+            title="your length."
+            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+          <CustomizationSelector
+            type="style"
+            selectCallback={this.selectCallback} options={this.state.options.style}
+            ref="style"
+            keyword="Add"
+            title="on extra trimmings."
+            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+          <CustomizationSelector
+            type="fit"
+            selectCallback={this.selectCallback} options={this.state.options.fit}
+            ref="fit"
+            keyword="Finesse"
+            title="the way it fits."
+            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
           <SizeSelector
             sizes={this.state.options.size}
             people={this.state.options.people}
