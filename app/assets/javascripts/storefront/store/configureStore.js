@@ -109,7 +109,7 @@ export default function configureStore(initialState) {
   );
 
   if (process.env.NODE_ENV === 'development') {
-    const reduxImmutableStateInvariant = require('redux-immutable-state-invariant');
+    const reduxImmutableStateInvariant = require('redux-immutable-state-invariant')();
     return createStore(rootReducer, initialState, applyMiddleware(reduxImmutableStateInvariant));
   } else {
     return createStore(rootReducer, initialState);
