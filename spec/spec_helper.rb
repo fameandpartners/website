@@ -23,7 +23,6 @@ Dir[Rails.root.join("engines/admin_ui/spec/support/**/*.rb")].each {|f| require 
 Dir[Rails.root.join("engines/wedding-atelier/spec/factories/**/*.rb")].each {|f| require f}
 Dir[Rails.root.join("engines/wedding-atelier/spec/support/**/*.rb")].each {|f| require f}
 Dir[Rails.root.join("engines/manual_order/spec/support/**/*.rb")].each {|f| require f}
-Dir[Rails.root.join("engines/wedding-atelier/spec/factories/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
   config.alias_it_should_behave_like_to :it_will, 'it will'
