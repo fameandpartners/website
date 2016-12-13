@@ -96,6 +96,8 @@
   }
 
   .customization-radio-label {
+    cursor: pointer;
+
     .box {
       border: 1px solid $white-two;
       display: inline-block;

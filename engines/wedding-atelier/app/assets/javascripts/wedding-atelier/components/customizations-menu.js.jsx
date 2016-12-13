@@ -69,56 +69,81 @@ var CustomizationsMenu = React.createClass({
     this.setState(_state);
   },
 
+  startOver: function () {
+    var _state = this.state;
+    _state.selectedOptions = {
+      silhouette: null,
+      fabric: null,
+      colour: null,
+      length: null,
+      style: null,
+      fit: null,
+      size: null,
+      height: null
+    };
+    this.setState(_state);
+  },
+
   render: function() {
     var customizationItems = ['silhouette', 'fabric-colour', 'length', 'style', 'fit', 'size']
     return(
       <div>
-        <div className="menu">
-          <ul>
-            { customizationItems.map(this.renderRow) }
-          </ul>
+        <div className="title row">
+          <div className="col-sm-6 text-left">
+            <h1><em>Customize</em> it how you want.</h1>
+          </div>
+          <div className="col-sm-6 start-over">
+            <button className="btn-transparent btn-italic" onClick={this.startOver}>Start Over</button>
+          </div>
         </div>
-        <div>
-          <CustomizationSelector
-            type="silhouette"
-            selectCallback={this.selectCallback}
-            options={this.state.options.silhouette}
-            ref="silhouette"
-            keyword="Choose"
-            title="your perfect shape"
-            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
-          <FabricAndColourSelector
-            colours={this.state.options.colour}
-            fabrics={this.state.options.fabric}
-            selectCallback={this.selectCallback}
-            ref="fabric-colour"/>
-          <CustomizationSelector
-            type="length"
-            selectCallback={this.selectCallback} options={this.state.options.length}
-            ref="length"
-            keyword="Choose"
-            title="your length."
-            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
-          <CustomizationSelector
-            type="style"
-            selectCallback={this.selectCallback} options={this.state.options.style}
-            ref="style"
-            keyword="Add"
-            title="on extra trimmings."
-            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
-          <CustomizationSelector
-            type="fit"
-            selectCallback={this.selectCallback} options={this.state.options.fit}
-            ref="fit"
-            keyword="Finesse"
-            title="the way it fits."
-            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
-          <SizeSelector
-            sizes={this.state.options.size}
-            people={this.state.options.people}
-            heights={this.state.options.heights}
-            selectCallback={this.selectCallback}
-            ref="size"/>
+        <div className="customizations">
+          <div className="menu">
+            <ul>
+              { customizationItems.map(this.renderRow) }
+            </ul>
+          </div>
+          <div>
+            <CustomizationSelector
+              type="silhouette"
+              selectCallback={this.selectCallback}
+              options={this.state.options.silhouette}
+              ref="silhouette"
+              keyword="Choose"
+              title="your perfect shape"
+              description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            <FabricAndColourSelector
+              colours={this.state.options.colour}
+              fabrics={this.state.options.fabric}
+              selectCallback={this.selectCallback}
+              ref="fabric-colour"/>
+            <CustomizationSelector
+              type="length"
+              selectCallback={this.selectCallback} options={this.state.options.length}
+              ref="length"
+              keyword="Choose"
+              title="your length."
+              description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            <CustomizationSelector
+              type="style"
+              selectCallback={this.selectCallback} options={this.state.options.style}
+              ref="style"
+              keyword="Add"
+              title="on extra trimmings."
+              description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            <CustomizationSelector
+              type="fit"
+              selectCallback={this.selectCallback} options={this.state.options.fit}
+              ref="fit"
+              keyword="Finesse"
+              title="the way it fits."
+              description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            <SizeSelector
+              sizes={this.state.options.size}
+              people={this.state.options.people}
+              heights={this.state.options.heights}
+              selectCallback={this.selectCallback}
+              ref="size"/>
+          </div>
         </div>
       </div>
     );

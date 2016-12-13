@@ -1,14 +1,6 @@
 .customization-panel.col-sm-6
   .customization-panel-container
-    .title.row
-      .col-sm-6.text-left
-        h1
-          em Customize
-          |  it how you want.
-      .col-sm-6.start-over
-        = link_to 'Start Over', '#', class: 'btn-transparent btn-italic'
-    .customizations
-      = react_component 'CustomizationsMenu', { dresses: [1,2,3,4,5,6,7,8] }
+    = react_component 'CustomizationsMenu', { dresses: [1,2,3,4,5,6,7,8] }
 .dress-preview.col-sm-6
   .controls
 
