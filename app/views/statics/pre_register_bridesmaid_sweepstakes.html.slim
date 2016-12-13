@@ -61,14 +61,21 @@
           .heading-overlay-wrapper.hidden-xs.hidden-sm
             h2.heading-overlay
               | THE PRIZE
+          .preRegisterSweepstakes__copyPadding
+            h2
+              | Win custom dresses for <br class="hidden-md hidden-lg">the <em>entire</em> bridal party.
+            p
+              | When you pre-register for the Atelier App, you’ll be entered to win our giveaway: $5,000 of bespoke bridal wear. You and your girls will get to craft your own unique looks, designed to both fit & flatter each woman individually and work together cohesively. It’s the ultimate wedding wardrobe.
 
-          h2
-            | Win custom dresses for the <em>entire</em> bridal party.
-          p
-            | When you pre-register for the Atelier App, you’ll be entered to win our giveaway: $5,000 of bespoke bridal wear. You and your girls will get to craft your own unique looks, designed to both fit & flatter each woman individually and work together cohesively. It’s the ultimate wedding wardrobe.
-
-        .col-md-6
-          = image_tag "//fakeimg.pl/480x480/", class: "img-responsive"
+        .col-md-6.col-md-offset-1
+          - current_tile_image = "landingpages/wedding-sweepstakes/bridesmaids-testimonial.jpg"
+          - current_tile_image_mob = "landingpages/wedding-sweepstakes/bridesmaids-testimonial-mob.jpg"
+          picture.media-wrap
+            source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+            source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+            img src="#{image_path(current_tile_image)}" srcset="
+              #{image_path(current_tile_image_mob)} 991w,
+              #{image_path(current_tile_image)} 992w"
 
     = render 'shared/redesign/wedding_app'
 
