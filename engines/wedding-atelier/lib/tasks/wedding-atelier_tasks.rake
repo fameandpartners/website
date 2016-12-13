@@ -61,7 +61,6 @@ namespace :wedding_atelier do
       'Change to hi-low hem'
     ]
 
-    # TODO: Ask for the base price
     fit_and_flare_attrs = {
       name: 'Fit and flare dress',
       description: 'FP2213',
