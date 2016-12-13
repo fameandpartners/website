@@ -10,11 +10,11 @@ var FabricAndColourSelector = React.createClass({
   },
 
   render: function() {
-    var fabrics = this.props.fabrics.map(function(fabrics, index) {
+    var fabrics = this.props.fabrics.map(function(fabric, index) {
       return (
-        <div key={index} onClick={ this.props.selectCallback.bind(null, 'fabrics', fabrics) } className="col-sm-4">
-          <input id={fabrics} type="radio" name="fabric" className="customization-radio"/>
-          <label htmlFor={fabrics} className="customization-radio-label">
+        <div key={index} onClick={ this.props.selectCallback.bind(null, 'fabric', fabric) } className="col-sm-4">
+          <input id={fabric} type="radio" name="fabric" className="customization-radio"/>
+          <label htmlFor={fabric} className="customization-radio-label">
             <span className="box"></span>
             <span className="real-label"> Fabric name</span>
           </label>

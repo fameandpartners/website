@@ -24,10 +24,16 @@ var CustomizationsMenu = React.createClass({
   },
 
   renderRow: function (customizationItem, index) {
-
-      var className = "icon icon-" + customizationItem;
-      if(this.state.selectedOptions[customizationItem]){
+      var selectedOptions = this.state.selectedOptions,
+          className = "icon icon-" + customizationItem,
+          selectedValue = selectedOptions[customizationItem];
+      if(selectedOptions[customizationItem]){
         className += ' selected'
+      }
+
+      if(customizationItem == 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour){
+        className += ' selected';
+        selectedValue = selectedOptions.fabric + ' | ' + selectedOptions.colour
       }
 
       return (
@@ -38,7 +44,7 @@ var CustomizationsMenu = React.createClass({
             </a>
           </div>
           <div className="col-sm-6 customization-column">
-            <span>{ this.state.selectedOptions[customizationItem] }</span>
+            <span>{ selectedValue }</span>
           </div>
         </li>
       );
