@@ -5,18 +5,20 @@ section.section-box.section-border-grey
 
     .col-md-5.col-md-offset-1
       h2
-        | Can't <em>wait</em> to get started?
+        | Can't <em>wait</em> <br class="hidden-md hidden-lg">to get started?
       p
         | Our wedding concierge, Amber, is here to help plan your look for the big day for free.
 
       = image_tag 'landingpages/wedding-sweepstakes/stylist-mob.jpg', class: "img-responsive hidden-md hidden-lg"
-      = link_to inside_out_sweepstakes_path
+      = link_to inside_out_sweepstakes_path, class: 'cta-mobile-featured'
         span.btn-xs.btn-featured
           span.copy-highlight BOOK NOW
 
 section.text-center.section-last
   .row
     h2
-      | Craft your customer experience. Be the first to enter the Atelier App.
+      | Craft your customer experience. <br class="hidden-xs">Be the first to enter the Atelier App.
 
-  = link_to 'PRE - REGISTER', wedding_consultation_path, class: 'btn btn-black'
+  = link_to wedding_consultation_path, class: 'cta-mobile-featured'
+    span.btn.btn-black
+      | PRE - REGISTER
