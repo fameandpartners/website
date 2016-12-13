@@ -1,0 +1,112 @@
+/* [Wedding Sweepstakes]
+-------------------------------------------------------*/
+.wedding-sweepstakes {
+
+  h2 {
+    font-size: 4rem;
+    line-height: 1.3;
+    margin: 40px 0;
+  }
+
+  .text-grey {
+    color:  $c-neutral-10;
+    font-style: italic;
+    font-family: $font-heading;
+    font-size:  1.6rem;
+
+    a {
+      color:  $c-neutral-10;
+      text-decoration: underline;
+    }
+
+  }
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+    text-align: center;
+
+    .section-price {
+
+      .heading-overlay-wrapper {
+        text-align: center;
+        margin-top: -55px;
+      }
+
+    }
+
+    .cta-mobile-featured {
+      margin-bottom: 15px;
+      display: block;
+
+      span {
+        font-size: 2rem;
+      }
+
+    }
+
+  }
+
+  // START - desktop
+  @media (min-width: $bootstrap-md-width) {
+
+    .heading-thin-line-top {
+
+      .title {
+        font-size: 2.6rem;
+      }
+
+    }
+
+    .section-price {
+
+      .heading-overlay-wrapper {
+        text-align: left;
+      }
+
+    }
+
+  }
+
+}
+
+.preRegisterSweepstakes {
+
+  @media (max-width: $bootstrap-md-width - 1px) {
+
+    &__introWrapper {
+      padding-bottom: 40px;
+    }
+
+    &__heading {
+      margin-top: -36px;
+    }
+
+    &__copy .subheading {
+      margin-top: 30px;
+      margin-bottom: 50px;
+    }
+
+    &__formWrapperContent {
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    &__formWrapperBg {
+      padding-top: 30px;
+    }
+
+    &__copyPadding {
+      padding: 0 50px;
+    }
+
+  }
+
+  &__formWrapperBg {
+    background: url('landingpages/wedding-sweepstakes/marble-texture-bg.jpg');
+  }
+
+  &__formWrapper {
+    padding-bottom: 30px;
+    margin-bottom: 45px;
+  }
+
+}
