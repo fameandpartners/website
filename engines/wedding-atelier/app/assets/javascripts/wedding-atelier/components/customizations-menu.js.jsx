@@ -27,6 +27,46 @@ var CustomizationsMenu = React.createClass({
     };
   },
 
+  show: function(ref) {
+    var el = $(this.refs[ref].refs.container);
+    el.on('transitionend', function(e){
+
+      $(this).off('transitionend');
+    });
+    el.addClass('animate');
+
+  },
+
+  close: function(ref){
+    var el = $(this.refs[ref].refs.container);
+    // el.on('transitionend', function(e){
+    //   debugger;
+    //   $(this).off('transitionend');
+    // });
+    el.removeClass('animate');
+  },
+
+  selectCallback: function(customization, value){
+    var _state = this.state;
+    _state.selectedOptions[customization] = value;
+    this.setState(_state);
+  },
+
+  startOver: function () {
+    var _state = this.state;
+    _state.selectedOptions = {
+      silhouette: null,
+      fabric: null,
+      colour: null,
+      length: null,
+      style: null,
+      fit: null,
+      size: null,
+      height: null
+    };
+    this.setState(_state);
+  },
+
   renderRow: function (customizationItem, index) {
       var selectedOptions = this.state.selectedOptions,
           className = "icon icon-" + customizationItem,
@@ -59,31 +99,6 @@ var CustomizationsMenu = React.createClass({
       );
   },
 
-  show: function(ref) {
-    $(this.refs[ref].refs.container).show();
-  },
-
-  selectCallback: function(customization, value){
-    var _state = this.state;
-    _state.selectedOptions[customization] = value;
-    this.setState(_state);
-  },
-
-  startOver: function () {
-    var _state = this.state;
-    _state.selectedOptions = {
-      silhouette: null,
-      fabric: null,
-      colour: null,
-      length: null,
-      style: null,
-      fit: null,
-      size: null,
-      height: null
-    };
-    this.setState(_state);
-  },
-
   render: function() {
     var customizationItems = ['silhouette', 'fabric-colour', 'length', 'style', 'fit', 'size']
     return(
@@ -102,10 +117,14 @@ var CustomizationsMenu = React.createClass({
               { customizationItems.map(this.renderRow) }
             </ul>
           </div>
+          <div className="floating-menu">
+
+          </div>
           <div>
             <CustomizationSelector
               type="silhouette"
               selectCallback={this.selectCallback}
+              closeCallback={this.close}
               options={this.state.options.silhouette}
               ref="silhouette"
               keyword="Choose"
@@ -114,11 +133,13 @@ var CustomizationsMenu = React.createClass({
             <FabricAndColourSelector
               colours={this.state.options.colour}
               fabrics={this.state.options.fabric}
+              closeCallback={this.close}
               selectCallback={this.selectCallback}
               ref="fabric-colour"/>
             <CustomizationSelector
               type="length"
               selectCallback={this.selectCallback} options={this.state.options.length}
+              closeCallback={this.close}
               ref="length"
               keyword="Choose"
               title="your length."
@@ -126,6 +147,7 @@ var CustomizationsMenu = React.createClass({
             <CustomizationSelector
               type="style"
               selectCallback={this.selectCallback} options={this.state.options.style}
+              closeCallback={this.close}
               ref="style"
               keyword="Add"
               title="on extra trimmings."
@@ -133,6 +155,7 @@ var CustomizationsMenu = React.createClass({
             <CustomizationSelector
               type="fit"
               selectCallback={this.selectCallback} options={this.state.options.fit}
+              closeCallback={this.close}
               ref="fit"
               keyword="Finesse"
               title="the way it fits."
@@ -141,10 +164,12 @@ var CustomizationsMenu = React.createClass({
               sizes={this.state.options.size}
               people={this.state.options.people}
               heights={this.state.options.heights}
+              closeCallback={this.close}
               selectCallback={this.selectCallback}
               ref="size"/>
           </div>
         </div>
+
       </div>
     );
   }

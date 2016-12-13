@@ -3,7 +3,8 @@ var SizeSelector = React.createClass({
     sizes: React.PropTypes.array,
     heights: React.PropTypes.array,
     people: React.PropTypes.array,
-    selectCallback: React.PropTypes.func.isRequired
+    selectCallback: React.PropTypes.func.isRequired,
+    closeCallback: React.PropTypes.func.isRequired
   },
 
   componentDidMount: function(){
@@ -12,10 +13,6 @@ var SizeSelector = React.createClass({
       .on('change', function(e){
         this.props.selectCallback('height', e.target.value);
       }.bind(this));
-  },
-
-  close: function() {
-    $(this.refs.container).hide();
   },
 
   render: function() {
@@ -57,11 +54,11 @@ var SizeSelector = React.createClass({
     }.bind(this));
 
     return (
-      <div ref="container" className="customization-selector animated slideInLeft">
+      <div ref="container" className="customization-selector">
         <div className="selector-header">
           <i className="icon icon-size"></i>
           <div className="selector-name text-left">Size</div>
-          <div className="selector-close" onClick={this.close}></div>
+          <div className="selector-close" onClick={this.props.closeCallback.bind(null, 'size')}></div>
         </div>
         <div className="selector-body">
           <div className="customization customization-size">

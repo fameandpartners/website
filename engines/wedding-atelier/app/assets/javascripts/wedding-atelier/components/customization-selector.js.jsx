@@ -5,12 +5,8 @@ var CustomizationSelector = React.createClass({
     keyword: React.PropTypes.string,
     title: React.PropTypes.string,
     description: React.PropTypes.string,
-    selectCallback: React.PropTypes.func.isRequired
-  },
-
-
-  close: function() {
-    $(this.refs.container).hide();
+    selectCallback: React.PropTypes.func.isRequired,
+    closeCallback: React.PropTypes.func.isRequired
   },
 
   render: function() {
@@ -23,11 +19,11 @@ var CustomizationSelector = React.createClass({
     }.bind(this));
 
     return (
-      <div ref="container" className="customization-selector animated slideInLeft">
+      <div ref="container" className="customization-selector">
         <div className="selector-header">
           <i className={"icon icon-" + this.props.type}></i>
           <div className="selector-name text-left">{this.props.type}</div>
-          <div className="selector-close" onClick={this.close}></div>
+          <div className="selector-close" onClick={this.props.closeCallback.bind(null, this.props.type)}></div>
         </div>
         <div className="selector-body">
           <div className="customization">
