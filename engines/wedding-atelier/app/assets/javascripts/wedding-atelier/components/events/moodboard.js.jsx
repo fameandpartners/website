@@ -55,6 +55,10 @@ var MoodBoardEvent = React.createClass({
 
           <div className="moodboard-tabs center-block">
             <ul className="nav nav-tabs center-block" role="tablist">
+              <li role="presentation" className="hidden-md hidden-lg">
+                <a aria-controls="chat-mobile" data-toggle="tab" href="#chat-mobile" role="tab">
+                  Chat  <span className="badge">42</span></a>
+              </li>
               <li className="active" role="presentation">
                 <a aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab">
                   Bridesmaid dresses</a>
@@ -72,6 +76,9 @@ var MoodBoardEvent = React.createClass({
               </li>
             </ul>
             <div className="tab-content">
+              <div id="chat-mobile" className="tab-pane" role="tabpanel">
+                <Chat />
+              </div>
               <div id="bridesmaid-dresses" className="tab-pane active" role="tabpanel">
                 <div className="add-dress-box hidden">
                   <button className="add">Add your first dress</button>
