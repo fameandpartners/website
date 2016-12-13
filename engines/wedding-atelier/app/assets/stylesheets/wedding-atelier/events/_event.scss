@@ -2,17 +2,11 @@
   height: 100vh;
   padding-top: 69px;
 
-  .chat-react-container {
+  .react-container {
     height: 100%;
   }
 
-  .chat-container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  #chat.left-content {
+  .chat {
     padding: 0;
     height: 100%;
 
@@ -118,22 +112,6 @@
         height: 100%;
       }
     }
-  }
-
-  @include screen-xs {
-    #chat.left-content { display: none; }
-  }
-
-  @include screen-sm {
-    #chat.left-content { display: none; }
-  }
-
-  @include screen-md {
-    #chat.left-content { display: flex; }
-  }
-
-  @include screen-lg {
-    #chat.left-content { display: flex; }
   }
 
   #atelier {
@@ -411,7 +389,74 @@
     .person-role {
       color: $warm-grey;
     }
+  }
 
+  /* MOBILE STYLING  */
 
+  @include screen-xs {
+
+    /* left side : hidden */
+
+    .chat.left-content { display: none; }
+
+    /* right side - Becoming full layout */
+
+    .moodboard-title { display: none; }
+
+    .moodboard-tabs {
+      min-width: 100% !important;
+      height: 100% !important;
+    }
+
+    .nav.nav-tabs {
+      max-width: 100%;
+      overflow-y: hidden;
+      overflow-x: auto;
+      white-space: nowrap;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .nav-tabs > li {
+      float: initial;
+      display: inline-block;
+      background-color: $white-three;
+    }
+
+    .nav-tabs > li > a {
+      color: $greyish !important;
+    }
+
+    .nav-tabs > li.active > a,
+    .nav-tabs > li.active > a:hover,
+    .nav-tabs > li.active > a:focus,
+    .nav-tabs > li.active > a:active, {
+      border-bottom: 2px solid $black;
+      background-color: transparent;
+    }
+
+    #chat-mobile {
+      height: 100%;
+    }
+
+    #atelier {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+  }
+
+  @include screen-sm {
+    .chat.left-content { display: none; }
+  }
+
+  @include screen-md {
+    .chat.left-content { display: flex; }
+  }
+
+  @include screen-lg {
+    .chat.left-content { display: flex; }
   }
 }

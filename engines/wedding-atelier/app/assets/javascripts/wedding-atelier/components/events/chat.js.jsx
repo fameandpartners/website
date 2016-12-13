@@ -1,7 +1,15 @@
 var Chat = React.createClass({
+
+  componentDidMount: function() {
+
+    // Scrolling to bottom
+    var elem = this.refs.log;
+    elem.scrollTop = elem.scrollHeight;
+  },
+
   render: function() {
     return(
-      <div className="chat-container">
+      <div className="chat">
         <div className="chat-general-info center-block">
           <div className="chat-header-left-side pull-left">
             <strong>Who's online</strong>:Janine, Tania, <s className="text-muted">Nyreee</s>, <s className="text-muted">Kate</s>
@@ -10,7 +18,7 @@ var Chat = React.createClass({
             <strong>Fame stylist online: </strong><span className="stylist-name">Amber: </span><img src="http://localhost:3000/assets/profile-placeholder.jpg" className="stylist-photo" />
           </div>
         </div>
-        <div className="chat-log">
+        <div className="chat-log" ref="log">
           <div className="msg-simple">
             <div className="msg-data">
               <div className="profile">
