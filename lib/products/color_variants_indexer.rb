@@ -142,12 +142,18 @@ module Products
     end
 
     def total_sales_for_sku(sku)
-      sql = "SELECT count(v.sku) as count FROM spree_line_items i
-              INNER JOIN spree_variants v ON i.variant_id = v.id
-              WHERE v.sku = '#{sku}'
-              GROUP BY sku"
-      r = ActiveRecord::Base.connection.execute(sql)
-      r.any? ? r.first["count"] : 0
+      sql = %Q{
+        SELECT count(v.sku) AS count
+        FROM spree_line_items i
+          INNER JOIN spree_variants v ON i.variant_id = v.id
+          INNER JOIN spree_orders o ON i.order_id = o.id
+        WHERE v.sku = '#{sku}'
+          AND o.completed_at IS NOT NULL
+        GROUP BY sku
+      }
+      value = ActiveRecord::Base.connection.select_value(sql)
+
+      value.to_i
     end
 
     def push_to_index
