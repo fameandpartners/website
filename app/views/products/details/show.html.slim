@@ -221,7 +221,7 @@ javascript:
 
       var bottomContentSpacing = parseInt($('.js-bottom-wrapper .js-bottom-content').css('margin-top'));
       var safeDistancePdpBottom = 0.25;
-      var safeStickyBottomSpacing = $('.js-bottom-wrapper').outerHeight() + $('.js-footer').outerHeight() - $('.js-fixed-header').outerHeight() - (bottomContentSpacing * safeDistancePdpBottom);
+      var safeStickyBottomSpacing = $('.js-bottom-wrapper').outerHeight() + $('.js-footer').outerHeight() - $('.js-fixed-header').outerHeight() - (bottomContentSpacing * safeDistancePdpBottom) + 100;
 
       $('.js-panel-side-left').sticky({
         responsiveWidth: true,
@@ -243,11 +243,9 @@ javascript:
     }
 
     function updateSticky() {
+      unstickSticky();
       if(window.innerWidth >= 992) {
-        unstickSticky();
         initSticky();
-      } else {
-        unstickSticky();
       }
     }
 
