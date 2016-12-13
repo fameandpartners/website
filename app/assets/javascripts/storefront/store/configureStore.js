@@ -1,6 +1,5 @@
 import {createStore, applyMiddleware} from 'redux';
 import rootReducer from '../reducers';
-import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 
 export default function configureStore(initialState) {
   initialState = Object.assign({}, initialState,
@@ -109,9 +108,10 @@ export default function configureStore(initialState) {
     }
   );
 
-  return createStore(
-    rootReducer,
-    initialState,
-    applyMiddleware(reduxImmutableStateInvariant())
-  );
+  if (process.env.NODE_ENV === 'development') {
+    const reduxImmutableStateInvariant = require('redux-immutable-state-invariant');
+    return createStore(rootReducer, initialState, applyMiddleware(reduxImmutableStateInvariant));
+  } else {
+    return createStore(rootReducer, initialState);
+  }
 }
