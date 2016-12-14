@@ -35,11 +35,12 @@ var CustomizationsContainer = React.createClass({
   },
 
   render: function(){
+    var title = this.props.currentCustomization ? this.props.currentCustomization.split('-').join(' and ') : '';
     return(
       <div ref="customizationsContainer" className="js-customizations-container customizations-container">
         <div className="selector-header">
           <i className={"icon icon-" + this.props.currentCustomization}></i>
-          <div className="selector-name text-left">{this.props.currentCustomization}</div>
+          <div className="selector-name text-left">{title}</div>
           <div className="selector-close" onClick={this.close}></div>
         </div>
         <div className="selector-body">

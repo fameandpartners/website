@@ -93,6 +93,10 @@
     }
 
     @include screen-md {
+      height: 253px;
+    }
+
+    @include screen-lg {
       height: 283px;
     }
   }

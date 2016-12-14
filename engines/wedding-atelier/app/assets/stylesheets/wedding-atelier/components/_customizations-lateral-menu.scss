@@ -8,4 +8,17 @@
   right: 50%;
   top: 50%;
   z-index: 1;
+
+  p {
+    letter-spacing: 2px;
+    font-size: .7rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-transform: uppercase;
+  }
+
+  .menu-option:not(:last-child) {
+    margin-bottom: 20px;
+    max-width: 120px;
+  }
 }
