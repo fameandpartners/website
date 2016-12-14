@@ -28,7 +28,7 @@ var FabricAndColourSelector = React.createClass({
     }.bind(this));
 
     return (
-      <div ref="container" className="customization-selector">
+      <div ref="container" className="customization-selector animated slideInLeft">
         <div className="customization">
           <div className="customization-title">
             <h1><em>Create</em> the look and feel</h1>

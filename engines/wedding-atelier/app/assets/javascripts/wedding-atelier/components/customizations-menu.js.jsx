@@ -22,12 +22,14 @@ var CustomizationsMenu = React.createClass({
       $('.js-customizations-lateral-menu').addClass('animate')
     });
     el.addClass('animate');
+    this.changeCurrentCustomization(currentCustomization);
+  },
+
+  changeCurrentCustomization: function(currentCustomization){
     var _state = this.state;
     _state.currentCustomization = currentCustomization;
     this.setState(_state);
   },
-
-
 
   selectCallback: function(customization, value){
     var _state = this.state;
@@ -87,12 +89,12 @@ var CustomizationsMenu = React.createClass({
         menuEntries = customizationItems.map(function(entry, index) {
           var img = "/assets/wedding-atelier/icons/" + entry + ".png";
           return (
-            <div className="menu-option" key={index}>
+            <div className="menu-option" key={index} onClick={this.changeCurrentCustomization.bind(this, entry)}>
               <img src={img} />
               <p>{entry.split('-').join(' and ')}</p>
             </div>
           )
-        });
+        }.bind(this));
     return(
       <div>
         <div className="customizations-lateral-menu js-customizations-lateral-menu">

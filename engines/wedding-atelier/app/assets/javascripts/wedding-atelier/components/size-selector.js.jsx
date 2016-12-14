@@ -53,7 +53,7 @@ var SizeSelector = React.createClass({
     }.bind(this));
 
     return (
-      <div ref="container" className="customization-selector">
+      <div ref="container" className="customization-selector animated slideInLeft">
         <div className="customization customization-size">
           <div className="customization-title">
             <h1><em>Tailor</em> to your body</h1>

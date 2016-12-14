@@ -1,13 +1,10 @@
 .customizations-lateral-menu {
+  @include slide-in-left;
   position: fixed;
-      /* margin-left: calc(50% + 40px); */
-      /* top: calc(50% - 231px); */
-      z-index: 1;
-      right: 50%;
-      margin-right: -110px;
-      top: 50%;
-      margin-top: -231px;
-      opacity: 0;
-      @include slide-in-left;
-
+  z-index: 1;
+  right: 50%;
+  margin-right: -110px;
+  top: 50%;
+  margin-top: -231px;
+  opacity: 0;
 }

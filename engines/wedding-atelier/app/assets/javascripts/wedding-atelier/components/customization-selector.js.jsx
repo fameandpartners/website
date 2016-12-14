@@ -18,7 +18,7 @@ var CustomizationSelector = React.createClass({
     }.bind(this));
 
     return (
-      <div ref="container" className="customization-selector">
+      <div ref="container" className="customization-selector animated slideInLeft">
         <div className="customization">
           <div className="customization-title">
             <h1><em>{this.props.keyword}</em> {this.props.title}</h1>
