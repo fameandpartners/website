@@ -1,4 +1,12 @@
 var MobileCustomizations = React.createClass({
+  propTypes: {
+    currentCustomization: React.PropTypes.string,
+    selectedOptions: React.PropTypes.object,
+    changeCurrentCustomizationCallback: React.PropTypes.func,
+    selectCallback: React.PropTypes.func,
+    startOverCallback: React.PropTypes.func
+  },
+
   render: function() {
 
     return(

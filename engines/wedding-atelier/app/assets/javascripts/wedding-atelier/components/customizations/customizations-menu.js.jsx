@@ -1,19 +1,11 @@
 var CustomizationsMenu = React.createClass({
 
-  getInitialState: function() {
-    return {
-      currentCustomization: null,
-      selectedOptions: {
-        silhouette: null,
-        fabric: null,
-        colour: null,
-        length: null,
-        style: null,
-        fit: null,
-        size: null,
-        height: null
-      }
-    };
+  propTypes: {
+    selectedOptions: React.PropTypes.object,
+    currentCustomization: React.PropTypes.string,
+    changeCurrentCustomizationCallback: React.PropTypes.func,
+    selectCallback: React.PropTypes.func,
+    startOverCallback: React.PropTypes.func
   },
 
   show: function(currentCustomization) {
@@ -22,38 +14,12 @@ var CustomizationsMenu = React.createClass({
       $('.js-customizations-lateral-menu').addClass('animate')
     });
     el.addClass('animate');
-    this.changeCurrentCustomization(currentCustomization);
+    this.props.changeCurrentCustomizationCallback(currentCustomization);
   },
 
-  changeCurrentCustomization: function(currentCustomization){
-    var _state = this.state;
-    _state.currentCustomization = currentCustomization;
-    this.setState(_state);
-  },
-
-  selectCallback: function(customization, value){
-    var _state = this.state;
-    _state.selectedOptions[customization] = value;
-    this.setState(_state);
-  },
-
-  startOver: function () {
-    var _state = this.state;
-    _state.selectedOptions = {
-      silhouette: null,
-      fabric: null,
-      colour: null,
-      length: null,
-      style: null,
-      fit: null,
-      size: null,
-      height: null
-    };
-    this.setState(_state);
-  },
 
   renderRow: function (customizationItem, index) {
-      var selectedOptions = this.state.selectedOptions,
+      var selectedOptions = this.props.selectedOptions,
           className = "icon icon-" + customizationItem,
           selectedValue = selectedOptions[customizationItem];
       if(selectedOptions[customizationItem]){
@@ -71,7 +37,7 @@ var CustomizationsMenu = React.createClass({
       }
 
       return (
-        <li key={ index } className="row customization-type" onClick={ this.show.bind(this, customizationItem) }>
+        <li key={ index } className="row customization-type" onClick={this.show.bind(null, customizationItem)}>
           <div className="col-sm-6 customization-column">
             <a href="#" className="">
               <i className={className}></i><span>{ customizationItem.split('-').join(' + ') }</span>
@@ -89,13 +55,21 @@ var CustomizationsMenu = React.createClass({
         menuEntries = customizationItems.map(function(entry, index) {
           var img = "/assets/wedding-atelier/icons/" + entry + ".png";
           return (
-            <div className="menu-option" key={index} onClick={this.changeCurrentCustomization.bind(this, entry)}>
+            <div className="menu-option" key={index} onClick={this.props.changeCurrentCustomizationCallback.bind(null, entry)}>
               <img src={img} />
               <p>{entry.split('-').join(' and ')}</p>
             </div>
           )
         }.bind(this));
-    return(
+
+    var customizationContainerProps = {
+      selectedOptions: this.props.selectedOptions,
+      currentCustomization: this.props.currentCustomization,
+      changeCurrentCustomizationCallback: this.props.changeCurrentCustomizationCallback,
+      selectCallback: this.props.selectCallback
+    };
+
+    return (
       <div className="customization-panel-container">
         <div className="customizations-lateral-menu js-customizations-lateral-menu">
           { menuEntries }
@@ -105,7 +79,7 @@ var CustomizationsMenu = React.createClass({
             <h1><em>Customize</em> it how you want.</h1>
           </div>
           <div className="col-sm-6 start-over">
-            <button className="btn-transparent btn-italic" onClick={this.startOver}>Start Over</button>
+            <button className="btn-transparent btn-italic" onClick={this.props.startOverCallback}>Start Over</button>
           </div>
         </div>
         <div className="customizations">
@@ -115,9 +89,7 @@ var CustomizationsMenu = React.createClass({
             </ul>
           </div>
           <CustomizationsContainer
-            selectedOptions={this.state.selectedOptions}
-            currentCustomization={this.state.currentCustomization}
-            selectCallback={this.selectCallback}
+            {...customizationContainerProps}
             />
         </div>
       </div>

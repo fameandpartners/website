@@ -2,14 +2,13 @@ var CustomizationsContainer = React.createClass({
   propTypes: {
     selectedOptions: React.PropTypes.object,
     currentCustomization: React.PropTypes.string,
-    selectCallback: React.PropTypes.func.isRequired
+    changeCurrentCustomizationCallback: React.PropTypes.func,
+    selectCallback: React.PropTypes.func
   },
 
-  componentWillUpdate: function(nextProps, nextState){
-    if(nextProps.currentCustomization != this.props.currentCustomization){
-      $(ReactDOM.findDOMNode(this.refs[this.props.currentCustomization])).hide()
-      $(ReactDOM.findDOMNode(this.refs[nextProps.currentCustomization])).show()
-    }
+  componentDidUpdate: function(){
+    $('.customization-selector').hide()
+    $(ReactDOM.findDOMNode(this.refs[this.props.currentCustomization])).show()
   },
 
   getInitialState: function(){
@@ -35,11 +34,13 @@ var CustomizationsContainer = React.createClass({
   },
 
   render: function(){
-    var title = this.props.currentCustomization ? this.props.currentCustomization.split('-').join(' and ') : '';
-    return(
+    var currentCustomization = this.props.currentCustomization,
+        title = currentCustomization ? currentCustomization.split('-').join(' and ') : '';
+
+    return (
       <div ref="customizationsContainer" className="js-customizations-container customizations-container">
         <div className="selector-header">
-          <i className={"icon icon-" + this.props.currentCustomization}></i>
+          <i className={"icon icon-" + currentCustomization}></i>
           <div className="selector-name text-left">{title}</div>
           <div className="selector-close" onClick={this.close}></div>
         </div>
