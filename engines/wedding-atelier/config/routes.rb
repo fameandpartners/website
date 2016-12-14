@@ -13,9 +13,12 @@ WeddingAtelier::Engine.routes.draw do
     post '/sign_in', to: 'sessions#create'
   end
 
+  post '/token', to: 'twilio#token'
+
   resources :events do
     resources :invitations, only: :create do
       get '/accept', to: 'invitations#accept'
     end
+    resources :dresses, controller: :event_dresses
   end
 end
