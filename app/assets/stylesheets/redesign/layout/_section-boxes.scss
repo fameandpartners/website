@@ -16,7 +16,6 @@ $top-overlay-margin-top: 37px;
     font-family: $font-heading;
     font-size: 2rem;
     font-weight: 300;
-    line-height: 2.5rem;
 
     &:nth-of-type(1) {
       margin-top: 30px;
@@ -344,6 +343,11 @@ $top-overlay-margin-top: 37px;
 .section-wrapper {
   background: $c-classic-modal-bg;
   padding: $box-padding-top 0 5px;
+
+  .sectionBox--with-bg {
+    background: inherit;
+  }
+
 }
 
 // Side tags

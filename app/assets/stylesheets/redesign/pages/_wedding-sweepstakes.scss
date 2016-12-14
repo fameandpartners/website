@@ -4,7 +4,6 @@
 
   h2 {
     font-size: 4rem;
-    line-height: 1.3;
     margin: 40px 0;
   }
 
@@ -21,16 +20,34 @@
 
   }
 
+  .subheading {
+    margin-top: 23px;
+  }
+
+  .section-price .heading-overlay-wrapper {
+    margin-bottom: 20px;
+  }
+
+  .section-stylist {
+
+    p,
+    p:nth-of-type(1) {
+      margin-bottom: 10px;
+      margin-top: 20px;
+    }
+
+  }
+
+  .section-app-cta {
+    padding: 30px 0;
+  }
+
   @media (max-width: $bootstrap-md-width - 1px) {
     text-align: center;
 
-    .section-price {
-
-      .heading-overlay-wrapper {
-        text-align: center;
-        margin-top: -55px;
-      }
-
+    .section-price .heading-overlay-wrapper {
+      text-align: center;
+      margin-top: -55px;
     }
 
     .cta-mobile-featured {
@@ -100,12 +117,25 @@
 
   }
 
+  &__heroBg {
+    width: 100%;
+    min-height: 480px;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &__formWrapperContent .heading-overlay-on-previous-section {
+    margin-top: -156px;
+  }
+
   &__formWrapperBg {
     background: url('landingpages/wedding-sweepstakes/marble-texture-bg.jpg');
+    background-size: 150%;
+    padding: 20px 0;
   }
 
   &__formWrapper {
-    padding-bottom: 30px;
+    padding: 60px 0;
     margin-bottom: 45px;
   }
 
