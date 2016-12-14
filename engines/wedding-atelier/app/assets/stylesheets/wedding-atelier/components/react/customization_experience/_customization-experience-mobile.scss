@@ -3,13 +3,9 @@
   padding-left: 15px;
   padding-right: 15px;
 
-  h1 {
-    font-size: 1.5rem;
-  }
-
   .btn-black,
   .btn-gray {
-    font-weight: 400; //TODO: Check if this is module-specific or it's wrongfully set for all the buttons
+    font-weight: 400;
   }
 
   .btn-transparent {
@@ -24,10 +20,9 @@
     height: 55vh;
   }
 
-  .customization-panel {
+  .customization-panel-container {
     height: 230px;
     margin-top: 10px;
-    overflow-x: scroll;
     width: 100%;
 
     a {
@@ -35,7 +30,7 @@
     }
 
     h1 {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
     }
 
     ul {
@@ -48,24 +43,39 @@
     li {
       display: inline-block;
       vertical-align: top;
-      margin-right: 10px;
+      margin-right: 7px;
     }
 
-    .customization-item-box {
-      background-color: $wild-sand;
+    .customization-box {
+      display: table;
       height: 100px;
-      margin-right: 7px;
-      width: 125px;
+      padding-right: 0;
     }
 
     .customization-label {
+      background-color: $wild-sand;
+      display: table-cell;
       margin-top: 6px;
+      vertical-align: middle;
+      width: 125px;
+
+      i,
+      span {
+        display: block;
+        margin: 0 auto;
+      }
+
+      span {
+        margin-top: 10px;
+      }
     }
 
     .customization-value {
-      margin-top: 7px;
-      font-size: .7rem;
+      font-size: .8rem;
+      letter-spacing: 1.2px;
+      margin-left: auto;
       max-width: 125px;
+      text-align: center;
       white-space: normal;
     }
   }

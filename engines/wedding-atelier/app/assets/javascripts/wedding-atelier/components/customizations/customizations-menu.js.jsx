@@ -38,13 +38,14 @@ var CustomizationsMenu = React.createClass({
 
       return (
         <li key={ index } className="row customization-type" onClick={this.show.bind(null, customizationItem)}>
-          <div className="col-sm-6 customization-column">
-            <a href="#" className="">
-              <i className={className}></i><span>{ customizationItem.split('-').join(' + ') }</span>
+          <div className="col-sm-6 customization-column customization-box">
+            <a href="#" className="customization-label">
+              <i className={className}></i>
+              <span>{ customizationItem.split('-').join(' + ') }</span>
             </a>
           </div>
-          <div className="col-sm-6 customization-column">
-            <span>{ selectedValue }</span>
+          <div className="col-sm-6 customization-column customization-value">
+            <span>{ selectedValue||'This is my test' }</span>
           </div>
         </li>
       );
@@ -74,6 +75,7 @@ var CustomizationsMenu = React.createClass({
         <div className="customizations-lateral-menu js-customizations-lateral-menu hidden-xs">
           { menuEntries }
         </div>
+
         <div className="title row">
           <div className="col-sm-6 col-xs-12 title-text">
             <h1><em>Customize</em> it how you want.</h1>
@@ -82,6 +84,7 @@ var CustomizationsMenu = React.createClass({
             <button className="btn-transparent btn-italic" onClick={this.props.startOverCallback}>Start Over</button>
           </div>
         </div>
+
         <div className="customizations">
           <div className="menu">
             <ul>
