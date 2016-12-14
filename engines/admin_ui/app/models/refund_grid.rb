@@ -24,7 +24,7 @@ class RefundGrid
     item_return.line_item&.order&.completed_at&.strftime('%Y-%m-%d')
   end
   column(:date_goods_shipped) do |item_return|
-    item_return.line_item&.order&.shipment&.shipped_at&.strftime('%Y-%m-%d')
+    item_return.line_item&.order&.shipments&.first&.shipped_at&.strftime('%Y-%m-%d')
   end
   column(:return_status) do |item_return|
     item_return.acceptance_status == 'received' ? 'Received' : 'Not Received'
