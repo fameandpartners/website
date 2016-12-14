@@ -31,12 +31,6 @@ doctype html
     = render 'marketing/trackers/google_analytics'
 
   body.wedding-atelier data-action=(action_name.titleize) data-controller=(controller.controller_name.titleize)
-    #fb-root
-
-    - if spree_user_signed_in?
-      javascript:
-        window.current_user = #{raw serialized_current_user.to_json}
-
     #wrap
       = render('wedding_atelier/shared/header')  unless ['registrations', 'sessions', 'event_dresses'].include?(controller_name)
       #content

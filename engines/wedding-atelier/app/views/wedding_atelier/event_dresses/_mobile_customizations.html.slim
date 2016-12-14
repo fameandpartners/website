@@ -1,0 +1,60 @@
+h1 You are designing #{"the Wonderland"}
+.dress-preview
+.customization-panel.hidden
+  h1
+    em Customize
+    |  it how you want.
+  ul
+    li
+      = link_to '#' do
+        .customization-item-box.table-cell-middle
+          = image_tag asset_path('wedding-atelier/icons/silhouette.png')
+          p.customization-label silhouette
+      p.customization-value Strapless Column
+    li
+      = link_to '#' do
+        .customization-item-box.table-cell-middle
+          = image_tag asset_path('wedding-atelier/icons/fabric-colour.png')
+          p.customization-label Fabric + Colour
+      p.customization-value Heavy Gerogette | Navy + $12
+    li
+      = link_to '#' do
+        .customization-item-box.table-cell-middle
+          = image_tag asset_path('wedding-atelier/icons/length.png')
+          p.customization-label length
+      p.customization-value
+    li
+      = link_to '#' do
+        .customization-item-box.table-cell-middle
+          = image_tag asset_path('wedding-atelier/icons/style.png')
+          p.customization-label style
+      p.customization-value
+    li
+      = link_to '#' do
+        .customization-item-box.table-cell-middle
+          = image_tag asset_path('wedding-atelier/icons/fit.png')
+          p.customization-label fit
+      p.customization-value
+    li
+      = link_to '#' do
+        .customization-item-box.table-cell-middle
+          = image_tag asset_path('wedding-atelier/icons/size.png')
+          p.customization-label size
+      p.customization-value
+
+button.btn-transparent.btn-block.js-customize-dress
+  | customize dress
+button.btn-transparent.btn-block
+  | select size
+.results
+  .view-customizations
+    span.left-result = link_to 'View customizations', '#'
+    span.right-result $16
+  .sub-total
+    span.left-result Sub-total
+    span.right-result $320
+p.estimated-delivery
+    | Estimated delivery 7 days
+.actions
+  button.btn-gray save to board
+  button.btn-black add to cart
