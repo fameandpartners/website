@@ -200,7 +200,7 @@ class CollectionFilterSort extends Component {
                                       <span className="ExpandablePanel__optionName">All shapes</span>
                                   </span>
                               </label>
-                              {$$bodyShapes.toJS.map((shape)=>{
+                              {$$bodyShapes.toJS().map((shape)=>{
                                 return this.buildCheckboxOption(shape);
                               })}
                             </div>
