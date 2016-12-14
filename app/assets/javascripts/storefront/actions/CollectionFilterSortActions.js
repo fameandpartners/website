@@ -1,7 +1,8 @@
 import CollectionFilterSortConstants from '../constants/CollectionFilterSortConstants';
 
-function collectionFilterSort() {
-  return { type: CollectionFilterSortConstants.COLLECTION_FILTER_SORT_ACTION };
+export function setSelectedColors(selectedColors, dispatch) {
+  return {
+    type: CollectionFilterSortConstants.SET_SELECTED_COLORS,
+    selectedColors
+  };
 }
-
-export { collectionFilterSort };

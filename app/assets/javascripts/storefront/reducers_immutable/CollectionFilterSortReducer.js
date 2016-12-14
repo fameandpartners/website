@@ -1,11 +1,12 @@
 import Immutable from 'immutable';
 
-import * as actionTypes from '../constants/CollectionFilterSortConstants';
+import actionTypes from '../constants/CollectionFilterSortConstants';
 
 export const $$initialState = Immutable.fromJS({
   $$colors: [],
   $$secondaryColors: [],
-  $$bodyShapes: []
+  $$bodyShapes: [],
+  selectedColors: []
 });
 
 export default function CollectionFilterSortReducer($$state = $$initialState, action = null) {
@@ -25,11 +26,12 @@ export default function CollectionFilterSortReducer($$state = $$initialState, ac
     //   ));
     // }
     //
-    // case actionTypes.SET_IS_FETCHING: {
-    //   return $$state.merge({
-    //     isFetching: true
-    //   });
-    // }
+    case actionTypes.SET_SELECTED_COLORS: {
+      console.log('action', action);
+      return $$state.merge({
+        selectedColors: action.selectedColors
+      });
+    }
 
     default: {
       return $$state;

@@ -1,6 +1,8 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
-// import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions'
+import React, {Component, PropTypes,} from 'react';
+import {connect,} from 'react-redux';
+import {bindActionCreators,} from 'redux';
+import autobind from 'auto-bind';
+import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions';
 
 //Libraries
 import Resize from '../decorators/Resize.jsx';
@@ -12,28 +14,48 @@ import ExpandablePanelItem from '../components/ExpandablePanelItem.jsx';
 function stateToProps(state) {
     // Which part of the Redux global state does our component want to receive as props?
     if (state.$$collectionFilterSortStore) {
+        const {$$collectionFilterSortStore,} = state;
+        const collectionFilterSortStore = $$collectionFilterSortStore.toJS();
         return {
-          $$colors: state.$$collectionFilterSortStore.get('$$colors'),
-          $$secondaryColors: state.$$collectionFilterSortStore.get('$$secondaryColors'),
-          $$bodyShapes: state.$$collectionFilterSortStore.get('$$bodyShapes')
+          // Immutable Defaults
+          $$colors: $$collectionFilterSortStore.get('$$colors'),
+          $$secondaryColors: $$collectionFilterSortStore.get('$$secondaryColors'),
+          $$bodyShapes: $$collectionFilterSortStore.get('$$bodyShapes'),
+          // Mutable props
+          selectedColors: collectionFilterSortStore.selectedColors,
         };
     }
     return {};
 }
+function dispatchToProps(dispatch){ return bindActionCreators(CollectionFilterSortActions, dispatch); }
+
 
 class CollectionFilterSort extends Component {
     constructor(props) {
         super(props);
+        autobind(this);
+    }
+
+    handleColorSelection(color){
+      let newSelectedColors = [];
+      const {selectedColors, setSelectedColors,} = this.props;
+      const selectedColorIndex = selectedColors.indexOf(color.id);
+      if (selectedColorIndex > -1){
+        newSelectedColors = [
+          ...selectedColors.slice(0, selectedColorIndex - 1),
+          ...selectedColors.slice(selectedColorIndex),
+        ];
+      } else {
+        newSelectedColors = selectedColors.concat(color.id);
+      }
+      setSelectedColors(newSelectedColors);
     }
 
     buildColorOption(color){
-      const {name} = color;
+      const {name,} = color;
       return (
-        <label className="ExpandablePanel__option ExpandablePanel__listColumn" name={name}>
-          <input
-            data-all="false"
-            id={`color-${name}`}
-            name={`color-${name}`} type="checkbox" value={name}/>
+        <label className="ExpandablePanel__option ExpandablePanel__listColumn">
+          <input id={`color-${name}`} type="checkbox" value={name} onChange={this.handleColorSelection.bind(this, color)} />
             <span className="ExpandablePanel__optionColorFallback"></span>
             <span className={`ExpandablePanel__optionCheck--rounded ExpandablePanel__optionCheck--tick color-${name}`}></span>
             <span className="ExpandablePanel__optionName">{name}</span>
@@ -63,8 +85,10 @@ class CollectionFilterSort extends Component {
           dispatch,
           $$bodyShapes,
           $$colors,
-          $$secondaryColors
+          $$secondaryColors,
+          selectedColors,
         } = this.props;
+        console.log('this.props ever render', this.props);
 
         return (
             <div className="CollectionFilterSort">
@@ -237,7 +261,11 @@ CollectionFilterSort.propTypes = {
     dispatch: PropTypes.func.isRequired,
     $$colors: PropTypes.array,
     $$secondaryColors: PropTypes.array,
-    $$bodyShapes: PropTypes.array
+    $$bodyShapes: PropTypes.array,
+    selectedColors: PropTypes.array,
+
+    // Redux Actions
+    setSelectedColors: PropTypes.func,
 };
 
-export default Resize(breakpoints)(connect(stateToProps)(CollectionFilterSort));
+export default Resize(breakpoints)(connect(stateToProps, dispatchToProps)(CollectionFilterSort));

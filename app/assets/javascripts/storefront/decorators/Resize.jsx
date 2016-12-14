@@ -1,6 +1,6 @@
 const React = require('react');
 const _debounce = require('lodash/debounce');
-const {Component} = React;
+const {Component,} = React;
 const handlers = [];
 
 function deferredHandlerCaller () {
@@ -11,8 +11,8 @@ function deferredHandlerCaller () {
   });
 }
 
-module.exports = function resizeThunk(config = {}) {
-  const {onResize} = config;
+export default function resizeThunk(config = {}) {
+  const {onResize,} = config;
   const debounceTime = config.debounce || 500;
 
 
@@ -37,28 +37,28 @@ module.exports = function resizeThunk(config = {}) {
       }
 
       onWindowResize () {
-        this.setState(this.getState())
+        this.setState(this.getState());
       }
 
       componentDidMount () {
-        this._registeredIndex = handlers.length
+        this._registeredIndex = handlers.length;
         handlers.push(this.onWindowResize);
 
         window.addEventListener('resize', () => {
-          setTimeout(deferredHandlerCaller, 0)
+          setTimeout(deferredHandlerCaller, 0);
         });
       }
 
       componentWillUnmount () {
         // just place null in place to not throw off index
-        handlers.splice(this._registeredIndex, 1, null)
+        handlers.splice(this._registeredIndex, 1, null);
       }
 
       render () {
         return (
-          <DecoratedComponent {...this.props} {...this.state} ref='child' />
-        )
+          <DecoratedComponent {...this.props} {...this.state} ref="child" />
+        );
       }
-    }
-  }
+    };
+  };
 }
