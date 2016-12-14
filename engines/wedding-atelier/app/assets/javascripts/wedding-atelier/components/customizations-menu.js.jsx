@@ -18,9 +18,8 @@ var CustomizationsMenu = React.createClass({
 
   show: function(currentCustomization) {
     var el = $('.js-customizations-container');
-    el.on('transitionend', function(e){
-
-      $(this).off('transitionend');
+    el.one('transitionend', function(){
+      $('.js-customizations-lateral-menu').addClass('animate')
     });
     el.addClass('animate');
     var _state = this.state;
@@ -28,14 +27,7 @@ var CustomizationsMenu = React.createClass({
     this.setState(_state);
   },
 
-  close: function(ref){
-    var el = $(this.refs[ref].refs.container);
-    // el.on('transitionend', function(e){
-    //   debugger;
-    //   $(this).off('transitionend');
-    // });
-    el.removeClass('animate');
-  },
+
 
   selectCallback: function(customization, value){
     var _state = this.state;
@@ -63,7 +55,7 @@ var CustomizationsMenu = React.createClass({
           className = "icon icon-" + customizationItem,
           selectedValue = selectedOptions[customizationItem];
       if(selectedOptions[customizationItem]){
-        className += ' selected'
+        className += ' selected';
       }
 
       if(customizationItem == 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour){
@@ -91,9 +83,21 @@ var CustomizationsMenu = React.createClass({
   },
 
   render: function() {
-    var customizationItems = ['silhouette', 'fabric-colour', 'length', 'style', 'fit', 'size']
+    var customizationItems = ['silhouette', 'fabric-colour', 'length', 'style', 'fit', 'size'],
+        menuEntries = customizationItems.map(function(entry, index) {
+          var img = "/assets/wedding-atelier/icons/" + entry + ".png";
+          return (
+            <div className="menu-option" key={index}>
+              <img src={img} />
+              <p>{entry.split('-').join(' and ')}</p>
+            </div>
+          )
+        });
     return(
       <div>
+        <div className="customizations-lateral-menu js-customizations-lateral-menu">
+          { menuEntries }
+        </div>
         <div className="title row">
           <div className="col-sm-6 text-left">
             <h1><em>Customize</em> it how you want.</h1>
@@ -105,11 +109,8 @@ var CustomizationsMenu = React.createClass({
         <div className="customizations">
           <div className="menu">
             <ul>
-              { customizationItems.map(this.renderRow) }
+              {customizationItems.map(this.renderRow)}
             </ul>
-          </div>
-          <div className="floating-menu">
-
           </div>
           <CustomizationsContainer
             selectedOptions={this.state.selectedOptions}

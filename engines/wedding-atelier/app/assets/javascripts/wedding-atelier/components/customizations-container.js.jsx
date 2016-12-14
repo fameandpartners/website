@@ -26,8 +26,12 @@ var CustomizationsContainer = React.createClass({
     }
   },
 
-  close: function(){
-    $(this.refs.customizationsContainer).removeClass('animate');
+  close: function(ref){
+    var el = $('.js-customizations-lateral-menu')
+    el.one('transitionend', function(){
+      var el = $('.js-customizations-container').removeClass('animate');
+    }.bind(this))
+    el.removeClass('animate')
   },
 
   render: function(){
