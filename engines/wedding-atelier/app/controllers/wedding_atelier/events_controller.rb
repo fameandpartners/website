@@ -12,10 +12,11 @@ module WeddingAtelier
       if @event.nil? || !@event.assistant_permitted?(current_spree_user)
         flash[:notice] = "You don't have permission to access this wedding board"
         redirect_to wedding_atelier.events_path
-      end
-      respond_to do |format|
-        format.html
-        format.json { render json: @event, serializer: MoodboardEventSerializer}
+      else
+        respond_to do |format|
+          format.html
+          format.json { render json: @event, serializer: MoodboardEventSerializer}
+        end
       end
     end
 

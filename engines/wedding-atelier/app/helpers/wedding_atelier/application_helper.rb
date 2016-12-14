@@ -38,12 +38,16 @@ module WeddingAtelier
       end
     end
 
-    def profile_image_url
+    def profile_image_path
       if current_spree_user.profile_image.present?
-        image_tag current_spree_user.profile_image.attachment.url(:mini), class: 'profile-image'
+        image_path current_spree_user.profile_image.attachment.url(:mini)
       else
-        image_tag 'profile-placeholder.jpg', class: 'profile-image'
+        image_path 'profile-placeholder.jpg'
       end
+    end
+
+    def profile_image_tag
+      image_tag profile_image_path, class: 'profile-image'
     end
   end
 end

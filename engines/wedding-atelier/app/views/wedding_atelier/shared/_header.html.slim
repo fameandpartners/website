@@ -21,7 +21,7 @@
     .left-nav.hidden-xs.col-md-4.text-left
       ul.links-list
         li
-          = profile_image_url
+          = profile_image_tag
         - if defined? @event
           li
             = @event.name
