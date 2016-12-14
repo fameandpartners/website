@@ -25,6 +25,7 @@
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
     "immutable": "^3.8.1",
+    "lodash": "^4.17.2",
     "mirror-creator": "^1.1.0",
     "react": "^15.2.1",
     "react-custom-scrollbars": "^4.0.0",
@@ -37,7 +38,6 @@
     "redux": "^3.5.2",
     "redux-immutable-state-invariant": "^1.2.3",
     "require-dir": "^0.3.1",
-    "underscore": "^1.8.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "yargs": "^6.3.0"

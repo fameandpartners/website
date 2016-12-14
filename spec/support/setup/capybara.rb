@@ -3,7 +3,7 @@ Capybara.configure do |config|
   config.match               = :prefer_exact
 end
 
-Capybara.default_host          = ENV.fetch('CAPYBARA_DEFAULT_HOST', 'us.lvh.me')
+Capybara.default_host          = ENV.fetch('CAPYBARA_DEFAULT_HOST', 'http://us.lvh.me')
 Capybara.default_max_wait_time = ENV.fetch('CAPYBARA_DEFAULT_MAX_WAIT_TIME', '30').to_i
 
 # Allow using Chrome
