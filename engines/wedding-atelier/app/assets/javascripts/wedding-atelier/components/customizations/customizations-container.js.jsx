@@ -22,15 +22,19 @@ var CustomizationsContainer = React.createClass({
       sizes: [1,2,3,4,5,6,7,8,9,10,11,12,13,15,16],
       people: ['Foo', 'Bar', 'Baz', 'John', 'Doe'],
       heights: [1,2,3,4,5]
-    }
+    };
   },
 
   close: function(ref){
-    var el = $('.js-customizations-lateral-menu')
-    el.one('transitionend', function(){
-      var el = $('.js-customizations-container').removeClass('animate');
-    }.bind(this))
-    el.removeClass('animate')
+    var el = $('.js-customizations-lateral-menu');
+    if(!el.is(':visible')) {
+      $('.js-customizations-container').removeClass('animate');
+    } else {
+      el.one('transitionend', function() {
+        $('.js-customizations-container').removeClass('animate');
+      }.bind(this));
+      el.removeClass('animate');
+    }
   },
 
   render: function(){

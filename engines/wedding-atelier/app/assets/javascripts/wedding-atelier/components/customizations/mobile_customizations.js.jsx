@@ -8,72 +8,22 @@ var MobileCustomizations = React.createClass({
   },
 
   render: function() {
+    var customizationMenuProps = {
+      selectedOptions: this.props.selectedOptions,
+      currentCustomization: this.props.currentCustomization,
+      changeCurrentCustomizationCallback: this.props.changeCurrentCustomizationCallback,
+      selectCallback: this.props.selectCallback,
+      startOverCallback: this.props.startOverCallback,
+      dresses: [1,3,4,5,65,6]
+    };
 
     return(
       <div className="customization-experience--mobile hidden-sm hidden-md hidden-lg">
         <h1>You are designing #{"the Wonderland"}</h1>
         <div className="dress-preview"></div>
         <div className="customization-panel hidden">
-          <h1>
-            <em>Customize</em> it how you want
-          </h1>
-          <ul>
-            <li>
-              <a href="#">
-                <div className="customization-item-box table-cell-middle">
-                  <img src="/assets/wedding-atelier/icons/silhouette.png" />
-                  <p className="customization-label">silhouette</p>
-                </div>
-              </a>
-              <p className="customization-value">Strapless Column</p>
-            </li>
-            <li>
-              <a href="#">
-                <div className="customization-item-box table-cell-middle">
-                  <img src="/assets/wedding-atelier/icons/fabric-colour.png"/>
-                  <p className="customization-label">Fabric + Colour</p>
-                </div>
-              </a>
-              <p className="customization-value">Heavy Gerogette | Navy + $12</p>
-            </li>
-            <li>
-              <a href="#">
-                <div className="customization-item-box table-cell-middle">
-                  <img src="/assets/wedding-atelier/icons/length.png"/>
-                  <p className="customization-label">length</p>
-                </div>
-              </a>
-              <p className="customization-value"></p>
-            </li>
-            <li>
-              <a href="#">
-                <span className="customization-item-box table-cell-middle">
-                  <img src="/assets/wedding-atelier/icons/style.png"/>
-                  <p className="customization-label">style</p>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span className="customization-item-box table-cell-middle">
-                  <img src="/assets/wedding-atelier/icons/fit.png"/>
-                  <p className="customization-label">fit</p>
-                </span>
-                <p className="customization-value"></p>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span className="customization-item-box table-cell-middle">
-                  <img src="/assets/wedding-atelier/icons/size.png" alt=""/>
-                  <p className="customization-label">size</p>
-                </span>
-                <p className="customization-value"></p>
-              </a>
-            </li>
-          </ul>
+          <CustomizationsMenu {...customizationMenuProps}/>
         </div>
-
         <button className="btn-transparent btn-block js-customize-dress">
           customize dress
         </button>

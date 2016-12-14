@@ -71,14 +71,14 @@ var CustomizationsMenu = React.createClass({
 
     return (
       <div className="customization-panel-container">
-        <div className="customizations-lateral-menu js-customizations-lateral-menu">
+        <div className="customizations-lateral-menu js-customizations-lateral-menu hidden-xs">
           { menuEntries }
         </div>
         <div className="title row">
-          <div className="col-sm-6 text-left">
+          <div className="col-sm-6 col-xs-12 title-text">
             <h1><em>Customize</em> it how you want.</h1>
           </div>
-          <div className="col-sm-6 start-over">
+          <div className="col-sm-6 start-over hidden-xs">
             <button className="btn-transparent btn-italic" onClick={this.props.startOverCallback}>Start Over</button>
           </div>
         </div>
