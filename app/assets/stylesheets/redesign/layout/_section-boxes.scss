@@ -343,6 +343,11 @@ $top-overlay-margin-top: 37px;
 .section-wrapper {
   background: $c-classic-modal-bg;
   padding: $box-padding-top 0 5px;
+
+  .sectionBox--with-bg {
+    background: inherit;
+  }
+
 }
 
 // Side tags
