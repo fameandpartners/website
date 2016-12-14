@@ -1,0 +1,44 @@
+.customization-experience {
+  height: 100vh;
+  padding-top: 62px;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+}
+
+.customization-experience-navbar {
+  background-image: image-url('wedding-atelier/marbel.png');
+  height: 62px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+
+  .arrow,
+  .logo {
+    height: 100%;
+  }
+
+  .arrow {
+    background: image-url('lessthan.svg') no-repeat center;
+    background-size: 35px 25px;
+    float: left;
+    width: 35px;
+  }
+
+  .logo {
+    background: image-url('fp-logo.svg') no-repeat;
+    background-size: 150px 100%;
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+  }
+
+}

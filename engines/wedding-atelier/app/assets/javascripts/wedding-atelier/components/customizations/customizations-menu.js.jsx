@@ -96,7 +96,7 @@ var CustomizationsMenu = React.createClass({
           )
         }.bind(this));
     return(
-      <div>
+      <div className="customization-panel-container">
         <div className="customizations-lateral-menu js-customizations-lateral-menu">
           { menuEntries }
         </div>
