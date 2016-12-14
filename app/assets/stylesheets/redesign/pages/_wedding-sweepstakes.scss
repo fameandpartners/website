@@ -24,16 +24,30 @@
     margin-top: 23px;
   }
 
+  .section-price .heading-overlay-wrapper {
+    margin-bottom: 20px;
+  }
+
+  .section-stylist {
+
+    p,
+    p:nth-of-type(1) {
+      margin-bottom: 10px;
+      margin-top: 20px;
+    }
+
+  }
+
+  .section-app-cta {
+    padding: 30px 0;
+  }
+
   @media (max-width: $bootstrap-md-width - 1px) {
     text-align: center;
 
-    .section-price {
-
-      .heading-overlay-wrapper {
-        text-align: center;
-        margin-top: -55px;
-      }
-
+    .section-price .heading-overlay-wrapper {
+      text-align: center;
+      margin-top: -55px;
     }
 
     .cta-mobile-featured {
