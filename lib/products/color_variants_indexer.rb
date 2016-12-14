@@ -6,7 +6,6 @@ module Products
     end
 
     include ColorVariantImageDetector
-    include ProductActivityReport
 
     def self.index!
       new.call
@@ -48,10 +47,6 @@ module Products
         product_price_in_us = product.price_in(us_site_version.currency)
         product_price_in_au = product.price_in(au_site_version.currency)
         total_sales         = total_sales_for_sku(product.sku)
-        total_views         = total_product_viewed(product.id)
-        total_carts         = total_product_added_to_cart(product.id)
-        total_wishlists     = total_product_added_to_wishlist(product.id)
-        total_purchased     = total_product_purchased(product.id)
 
         color_customizable = product.color_customization
         discount           = product.discount.try(:amount).to_i
@@ -93,10 +88,6 @@ module Products
               },
               statistics: {
                 total_sales:     total_sales,
-                total_views:     total_views,
-                total_carts:     total_carts,
-                total_wishlists: total_wishlists,
-                total_purchased: total_purchased,
               },
               can_be_customized:  product.can_be_customized?,
               fast_delivery:      product.fast_delivery,
@@ -151,12 +142,18 @@ module Products
     end
 
     def total_sales_for_sku(sku)
-      sql = "SELECT count(v.sku) as count FROM spree_line_items i
-              INNER JOIN spree_variants v ON i.variant_id = v.id
-              WHERE v.sku = '#{sku}'
-              GROUP BY sku"
-      r = ActiveRecord::Base.connection.execute(sql)
-      r.any? ? r.first["count"] : 0
+      sql = %Q{
+        SELECT count(v.sku) AS count
+        FROM spree_line_items i
+          INNER JOIN spree_variants v ON i.variant_id = v.id
+          INNER JOIN spree_orders o ON i.order_id = o.id
+        WHERE v.sku = '#{sku}'
+          AND o.completed_at IS NOT NULL
+        GROUP BY sku
+      }
+      value = ActiveRecord::Base.connection.select_value(sql)
+
+      value.to_i
     end
 
     def push_to_index

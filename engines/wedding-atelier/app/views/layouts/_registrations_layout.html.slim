@@ -7,5 +7,5 @@
       .table-cell-middle
         = render partial: nested_partial, locals: {user: user, signup_params: signup_params}
     = signup_progress_marker if controller_name == 'registrations'
-  .right-side
+  div(class="right-side #{registration_background_image_class}")
     .fp-logo-float.table-cell-middle

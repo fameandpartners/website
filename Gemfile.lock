@@ -180,12 +180,14 @@ PATH
       awesome_nested_set
       rails (~> 3.2.21)
     wedding-atelier (0.0.1)
+      active_model_serializers
       bootstrap-sass (~> 3.3.4.1)
       kaminari
       rails (~> 3.2.22.5)
       react-rails
       rolify
       slim
+      twilio-ruby
 
 GEM
   remote: https://rubygems.org/
@@ -279,7 +281,8 @@ GEM
       activesupport (>= 3.1.0)
       tzinfo
     cancan (1.6.8)
-    capybara (2.5.0)
+    capybara (2.11.0)
+      addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
@@ -584,10 +587,9 @@ GEM
       paypal-sdk-core (~> 0.2.3)
     pg (0.18.1)
     pin_payment (0.5.1)
-    poltergeist (1.9.0)
+    poltergeist (1.12.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
-      multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -790,6 +792,10 @@ GEM
     turnip (1.3.1)
       gherkin (>= 2.5)
       rspec (>= 2.14.0, < 4.0)
+    twilio-ruby (4.13.0)
+      builder (>= 2.1.2)
+      jwt (~> 1.0)
+      multi_json (>= 1.3.0)
     tzinfo (0.3.52)
     uber (0.0.15)
     uglifier (1.3.0)
@@ -818,7 +824,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
     websocket (1.2.3)
-    websocket-driver (0.6.3)
+    websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
     whenever (0.9.4)
@@ -846,7 +852,7 @@ DEPENDENCIES
   bullet
   business_time
   canonical-rails!
-  capybara (~> 2.5.0)
+  capybara (~> 2.11.0)
   capybara-screenshot (~> 1.0.11)
   coercible
   coffee-rails (~> 3.2.1)
@@ -883,7 +889,7 @@ DEPENDENCIES
   paperclip
   pg
   pin_payment
-  poltergeist (~> 1.9.0)
+  poltergeist (~> 1.12.0)
   psych (~> 2.0.13)
   puma
   quiet_assets

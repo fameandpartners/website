@@ -1,18 +1,5 @@
 class WishlistItem < ActiveRecord::Base
-  belongs_to :user, class_name: 'Spree::User', foreign_key: :spree_user_id
-  belongs_to :variant, class_name: 'Spree::Variant', foreign_key: :spree_variant_id
-  belongs_to :product, class_name: 'Spree::Product', foreign_key: :spree_product_id
-
-  belongs_to :color, class_name: 'Spree::OptionValue', foreign_key: :product_color_id
-
-  validates :user,    presence: true
-  validates :variant, presence: true
-
-  attr_accessible  :spree_variant_id, :spree_product_id, :product_color_id, :quantity
-
-  validates :quantity, presence: true, numericality: {
-    :allow_blank => false,
-    :only_integer => true,
-    :greater_than_or_equal_to => 1,
-  }
+  # NOTE: Alexey Bobyrev 12/12/16
+  # This model is DEPRECATED - do NOT use it.
+  # After ensuring that we do not need old wishlist item's records - also remove this model!
 end

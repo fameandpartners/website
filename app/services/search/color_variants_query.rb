@@ -217,9 +217,6 @@ module Search
         add('best_sellers',   "Best Sellers",                  ['product.total_sales', 'desc'])
         add('alpha_asc',      "Name: A-Z",                     ['product.name', 'asc'])
         add('alpha_desc',     "Name: Z-A",                     ['product.name', 'desc'])
-        add('most_views',     "Most Viewed First",             ['product.statistics.total_views', 'desc'])
-        add('most_carts',     "Most Added to Cart First",      ['product.statistics.total_carts', 'desc'])
-        add('most_wishlists', "Most Added to Wishlists First", ['product.statistics.total_wishlists', 'desc'])
         add('native',         "Do Not Apply Ordering",         nil)
       end
     end

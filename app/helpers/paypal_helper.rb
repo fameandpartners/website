@@ -1,3 +1,4 @@
+# TODO: 9th December 2016 - DO NOT USE these helpers! Payment Method helpers should not come from view helpers!
 module PaypalHelper
   def paypal_payment_method
     @paypal_payment_method ||= Spree::PaymentMethod.where(

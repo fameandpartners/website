@@ -44,7 +44,7 @@
 
     // NOTE: this is just a workaround for a Design request.
     .extra-padding-left {
-      padding-left: 45px;
+      padding-left: 55px;
     }
 
     &.copy-right, &.copy-left {
@@ -358,6 +358,16 @@
       margin-left: -140px;
     }
 
+  }
+
+}
+
+.containerHalfScreenHero {
+  @extend .container-no-padding;
+  overflow-x: hidden;
+
+  &__heroImg {
+    @extend .no-spacing-cols-mobile;
   }
 
 }

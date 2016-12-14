@@ -191,6 +191,7 @@ form.hide-fully#pdpDataForWishlist
 = render partial: 'micro_data'
 
 javascript:
+  var minDesktopWidth = 992;
   var addthis_config;
   var addthis_share;
   $(document).ready(function() {
@@ -219,9 +220,7 @@ javascript:
 
     function initSticky() {
 
-      var bottomContentSpacing = parseInt($('.js-bottom-wrapper .js-bottom-content').css('margin-top'));
-      var safeDistancePdpBottom = 0.25;
-      var safeStickyBottomSpacing = $('.js-bottom-wrapper').outerHeight() + $('.js-footer').outerHeight() - $('.js-fixed-header').outerHeight() - (bottomContentSpacing * safeDistancePdpBottom);
+      var safeStickyBottomSpacing = $('.pdp').innerHeight() - $('.pdp > .container').outerHeight() + $('.js-footer').outerHeight();
 
       $('.js-panel-side-left').sticky({
         responsiveWidth: true,
@@ -243,16 +242,14 @@ javascript:
     }
 
     function updateSticky() {
-      if(window.innerWidth >= 992) {
-        unstickSticky();
+      unstickSticky();
+      if(window.innerWidth >= minDesktopWidth) {
         initSticky();
-      } else {
-        unstickSticky();
       }
     }
 
     // sticky side panel
-    if(window.innerWidth >= 992) {
+    if(window.innerWidth >= minDesktopWidth) {
       initSticky();
     }
 

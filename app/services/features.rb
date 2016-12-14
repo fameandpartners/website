@@ -27,7 +27,7 @@ module Features
     shipping_message:              nil,
     style_quiz:                    nil,
     test_analytics:                "Force the rendering of JS Marketing Trackers, usually for testing.",
-    wedding_atelier:               'Enables the wedding atelier app, located under the `/wedding_atelier` URL. Needs to restart server on feature toggle.'
+    wedding_atelier:               'Enables the wedding atelier app, located under the `/wedding-atelier` URL. Needs to restart server on feature toggle.'
   }
 
   class << self

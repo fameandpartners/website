@@ -57,7 +57,9 @@
       - if @pay_pal_method
         #paypal.text-center.payment-selected.tab-pane role="tabpanel"
           p.hint Place your order and you will complete your purchase via the Paypal.
-          = paypal_express_button
+          = link_to paypal_express_path(payment_method_id: @pay_pal_method.id), method: :post, id: 'paypal_button', alt: 'Paypal', class: 'payment-cta btn btn-black btn-block btn-md' do
+            | Pay with
+            =<> image_tag('checkout/logo/paypal-logo-white.png')
 
     p.terms-note.text-center
         ' By making this purchase you are agreeing to the

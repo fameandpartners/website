@@ -91,6 +91,13 @@ label {
   }
 }
 
+/* [Errors] ---------------------------------------------------------*/
+
+.outside-input-error {
+  position: absolute;
+  top: 35px;
+}
+
 /* [Date Picker] -----------------------------------------------*/
 
 .date-picker {

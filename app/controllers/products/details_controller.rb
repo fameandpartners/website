@@ -38,8 +38,6 @@ class Products::DetailsController < Products::BaseController
 
     append_gtm_product(product_presenter: @product)
 
-    Activity.log_product_viewed(@product, temporary_user_key, try_spree_current_user)
-
     render :show, status: pdp_status
   end
 

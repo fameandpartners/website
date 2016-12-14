@@ -14,6 +14,10 @@ body {
   font-family: $secondary-font;
   letter-spacing: 1.5px;
 
+  a.hover-link:hover {
+    color: $greyish;
+  }
+
   [type='number'] {
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
