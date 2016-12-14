@@ -24,8 +24,18 @@
     margin-top: 23px;
   }
 
-  .section-price .heading-overlay-wrapper {
-    margin-bottom: 20px;
+  .section-price {
+    overflow: hidden;
+
+    .heading-overlay-wrapper {
+      margin-bottom: 20px;
+    }
+
+    .video-half-display {
+      margin-left: -30%;
+      width: 130%;
+    }
+
   }
 
   .section-stylist {
