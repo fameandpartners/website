@@ -9,6 +9,11 @@ configatron.days_delivery_emergency = 0
 configatron.secret_token            = ENV['RAILS_SECRET_KEY_BASE']
 
 # assets
+configatron.aws.enabled    = false
+configatron.aws.bucket     = ''
+configatron.aws.access_key = ''
+configatron.aws.secret_key = ''
+configatron.aws.host       = ENV['RAILS_ASSET_HOST'] # Production and Marketing Buckets are on the same CloudFront Distribution
 configatron.asset_host     = ENV['RAILS_ASSET_HOST'] # Production and Marketing Buckets are on the same CloudFront Distribution
 
 configatron.typekit_id = ENV['TYPEKIT_ID']
@@ -70,6 +75,11 @@ configatron.bergen do |bergen|
 end
 
 configatron.site_version_detector_strategy = :path
+
+configatron.aws.s3 do |s3|
+  s3.bucket            = ENV['AWS_S3_BUCKET']
+  s3.region            = ENV['AWS_S3_REGION']
+end
 
 case Rails.env.to_sym
 when :development

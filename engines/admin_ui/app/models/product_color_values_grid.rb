@@ -34,7 +34,7 @@ class ProductColorValuesGrid
 
   column :id do |pcv|
     format(pcv.id) do
-      link_to(pcv.id, edit_customisation_product_color_path(pcv))
+      link_to(pcv.id, edit_product_color_path(pcv))
     end
   end
 
@@ -58,7 +58,7 @@ class ProductColorValuesGrid
 
   column :preview do |pcv|
     format(pcv.option_value.name) do |color_name|
-      render 'admin_ui/customisation/product_colors/colour_preview', color_name: color_name
+      render 'admin_ui/product_colors/colour_preview', color_name: color_name
     end
   end
 
@@ -91,7 +91,7 @@ class ProductColorValuesGrid
 
   column :remove? do |pcv|
     format(pcv.id) do
-      button_to('Remove', customisation_product_color_path(pcv), action: 'destroy', method: 'delete', class: 'btn btn-danger', data: { confirm: 'Are you sure?' })
+      button_to('Remove', product_color_path(pcv), action: 'destroy', method: 'delete', class: 'btn btn-danger', data: { confirm: 'Are you sure?' })
     end
   end
 end

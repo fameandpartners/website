@@ -40,5 +40,7 @@ doctype html
     #wrap
       = render('wedding_atelier/shared/header')  unless ['registrations', 'sessions'].include?(controller_name)
       #content
-          = yield
+        = yield
       #push
+        = render partial: 'modals/save_dress'
+        = render partial: 'modals/view_customizations'

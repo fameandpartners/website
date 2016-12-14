@@ -94,7 +94,7 @@ class PdpGallery extends React.Component {
 
     if (
       defaultColorIds.includes(this.props.customize.color.id) 
-        && !$.isNumeric(this.props.customize.customization.id)
+        && this.props.customize.customization.id === null
         || !render3dImages.length
     ) {
       galleryImages = photos.filter((image) => {

@@ -48,6 +48,14 @@
   background-color: transparent;
 }
 
+.btn-transparent-inverse {
+  @extend .btn;
+  background-color: transparent;
+  border-color: $white-two;
+  color: $white-two;
+  font-weight: 700;
+}
+
 .btn-facebook-blue {
   @extend .btn;
   background-color: $facebook-blue;

@@ -21,7 +21,7 @@ Spree::Admin::ImagesController.class_eval do
   end
 
   def set_viewable
-    @image.viewable = viewable_by_id(@product, params[:image].delete(:viewable_id))
+    @image.viewable = viewable_by_id(@product, params[:image][:viewable_id])
   end
 
   def variant_data_for(viewer)

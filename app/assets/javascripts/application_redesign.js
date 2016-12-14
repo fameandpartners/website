@@ -10,6 +10,7 @@
 //= require libs/underscore-min
 //= require libs/validator.min
 
+//= require libs/jquery.dotdotdot.min
 //= require libs/jquery.mlens.min
 //= require libs/jquery.sticky
 //= require libs/jquery.zoom.min
@@ -55,6 +56,7 @@
 // Styleguide code
 //----------------
 //= require "styleguide/js/functions.js"
+//  require js/jquery.skippr.min.js # copied non-min version, to debug&patch
 // require js/main.js
 
 //  require js/superslides.js # copied to libs/superslides for easier monkey-patching
@@ -73,6 +75,7 @@
 //= require partials/helpers/alert
 //= require partials/helpers/product_side_selector_panel
 //= require partials/helpers/modal
+//= require partials/helpers/truncate
 //= require partials/helpers/bs-tabs
 //= require partials/helpers/collapse_toggle
 //= require partials/helpers/form_submit_ajax_validation
