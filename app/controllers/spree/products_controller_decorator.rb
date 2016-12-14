@@ -5,9 +5,6 @@ Spree::ProductsController.class_eval do
 
   respond_to :html, :json
   before_filter :load_product, :only => [:show, :send_to_friend]
-  #before_filter :load_activities, :only => [:show]
-
-  after_filter :log_product_viewed
 
   #caches_action :show,
   #              layout: false,
@@ -196,8 +193,4 @@ Spree::ProductsController.class_eval do
 
   helper_method :featured_products
 
-  def log_product_viewed
-    return unless @product
-    Activity.log_product_viewed(@product, temporary_user_key, try_spree_current_user)
-  end
 end

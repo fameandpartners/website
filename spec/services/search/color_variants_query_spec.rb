@@ -73,9 +73,6 @@ module Search
           ['best_sellers',  {'product.total_sales' => 'desc'}],
           ['alpha_asc',     {'product.name' => 'asc'}],
           ['alpha_desc',    {'product.name' => 'desc'}],
-          ['most_views',    {'product.statistics.total_views' => 'desc'}],
-          ['most_carts',    {'product.statistics.total_carts' => 'desc'}],
-          ['most_wishlists',{'product.statistics.total_wishlists' => 'desc'}],
         ]
 
         it 'defines a known set of rules' do
