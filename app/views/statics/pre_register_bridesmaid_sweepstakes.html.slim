@@ -1,6 +1,6 @@
 = render partial: 'pages/robots'
 
-.wedding-sweepstakes.landing-page-v2
+.wedding-sweepstakes.landing-page-v2.js-smooth-scroll
 
   .preRegisterSweepstakes__introWrapper
     .container-fluid.containerHalfScreenHero
@@ -24,7 +24,7 @@
                 h1.line-mobile-center Custom-created, <br class="visible-lg"> tailor-made looks for the whole bridal party.
                 h3.subheading Introducing the Wedding Atelier App.
 
-                = link_to inside_out_sweepstakes_path, class: 'cta-mobile-featured'
+                = link_to "#formRegister", class: 'cta-mobile-featured'
                   span.btn-xs.btn-featured
                     span.copy-highlight PRE - REGISTER
 
@@ -50,7 +50,7 @@
                 // Mobile video
                 video.item-video.hidden-md.hidden-lg(name="Pre-register Bridesmaid Sweepstakes" autoplay="true" muted="true" loop="true" src="https://player.vimeo.com/external/195553231.sd.mp4?s=925e837722e5dd40c5c935b6628bbcab184b75fc&profile_id=164")
 
-                h2
+                h2#formRegister
                   | WIN $5,000 of bespoke bridal wear for your wedding party. Pre-register for the Atelier App to enter and get <em>early access</em> to the collection.
 
                 p
