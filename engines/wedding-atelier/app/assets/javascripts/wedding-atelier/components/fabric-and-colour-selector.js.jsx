@@ -2,8 +2,7 @@ var FabricAndColourSelector = React.createClass({
   propTypes: {
     colours: React.PropTypes.array,
     fabrics: React.PropTypes.array,
-    selectCallback: React.PropTypes.func.isRequired,
-    closeCallback: React.PropTypes.func.isRequired
+    selectCallback: React.PropTypes.func.isRequired
   },
 
   render: function() {
@@ -30,23 +29,16 @@ var FabricAndColourSelector = React.createClass({
 
     return (
       <div ref="container" className="customization-selector">
-        <div className="selector-header">
-          <i className="icon icon-fabric-colour"></i>
-          <div className="selector-name text-left">fabric + colour</div>
-          <div className="selector-close" onClick={this.props.closeCallback.bind(null, 'fabric-colour')}></div>
-        </div>
-        <div className="selector-body">
-          <div className="customization">
-            <div className="customization-title">
-              <h1><em>Create</em> the look and feel</h1>
-              <div className="row">{ fabrics }</div>
-              <p className="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-            <div className="customization-options-grid row">
-              { colours }
-            </div>
+        <div className="customization">
+          <div className="customization-title">
+            <h1><em>Create</em> the look and feel</h1>
+            <div className="row">{ fabrics }</div>
+            <p className="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+          <div className="customization-options-grid row">
+            { colours }
+          </div>
          </div>
-        </div>
       </div>
     );
   }

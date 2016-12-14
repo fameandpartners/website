@@ -1,4 +1,4 @@
-.customization-selector {
+.customizations-container {
   background: $white-two;
   box-shadow: 1px 0 5px 0 rgba(0, 0, 0, .20);
   height: 100vh;
@@ -50,6 +50,14 @@
       font-weight: 300;
       line-height: 1.4;
       margin: 21px 0;
+    }
+  }
+
+  .customization-selector {
+    display: none;
+
+    &.active {
+      display: block;
     }
   }
 

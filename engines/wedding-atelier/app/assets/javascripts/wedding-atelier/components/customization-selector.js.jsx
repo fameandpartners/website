@@ -5,8 +5,7 @@ var CustomizationSelector = React.createClass({
     keyword: React.PropTypes.string,
     title: React.PropTypes.string,
     description: React.PropTypes.string,
-    selectCallback: React.PropTypes.func.isRequired,
-    closeCallback: React.PropTypes.func.isRequired
+    selectCallback: React.PropTypes.func.isRequired
   },
 
   render: function() {
@@ -20,21 +19,14 @@ var CustomizationSelector = React.createClass({
 
     return (
       <div ref="container" className="customization-selector">
-        <div className="selector-header">
-          <i className={"icon icon-" + this.props.type}></i>
-          <div className="selector-name text-left">{this.props.type}</div>
-          <div className="selector-close" onClick={this.props.closeCallback.bind(null, this.props.type)}></div>
-        </div>
-        <div className="selector-body">
-          <div className="customization">
-            <div className="customization-title">
-              <h1><em>{this.props.keyword}</em> {this.props.title}</h1>
-              <p className="description">{this.props.description}</p>
-            </div>
-            <div className="customization-options-grid row">
-              { options }
-            </div>
-         </div>
+        <div className="customization">
+          <div className="customization-title">
+            <h1><em>{this.props.keyword}</em> {this.props.title}</h1>
+            <p className="description">{this.props.description}</p>
+          </div>
+          <div className="customization-options-grid row">
+            { options }
+          </div>
         </div>
       </div>
     );
