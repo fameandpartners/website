@@ -3,6 +3,7 @@ import {connect,} from 'react-redux';
 import {bindActionCreators,} from 'redux';
 import autobind from 'auto-bind';
 import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions';
+import _ from 'underscore';
 
 //Libraries
 import Resize from '../decorators/Resize.jsx';
@@ -80,6 +81,16 @@ class CollectionFilterSort extends Component {
       );
     }
 
+    generateColorSummary(selectedColorIds){
+      const {$$colors, $$secondaryColors,} = this.props;
+      const selectedColors = selectedColorIds.map( id => _.findWhere($$colors.toJS().concat($$secondaryColors.toJS()), {id,}));
+      return selectedColors.map((color)=>{
+        return (
+          <span key={`color-${color.id}`} className="ExpandablePanel__selectedItem">{color.presentation}</span>
+        );
+      });
+    }
+
     render() {
         const {
           dispatch,
@@ -133,12 +144,7 @@ class CollectionFilterSort extends Component {
                                 Color
                               </div>
                               <div className="ExpandablePanel__selectedOptions">
-                                  <span className="ExpandablePanel__selectedItem">Black</span>
-                                  <span className="ExpandablePanel__selectedItem">White</span>
-                                  <span className="ExpandablePanel__selectedItem">Red</span>
-                                  <span className="ExpandablePanel__selectedItem">Silver</span>
-                                  <span className="ExpandablePanel__selectedItem">Grey</span>
-                                  <span className="ExpandablePanel__selectedItem">Green</span>
+                                  {this.generateColorSummary(selectedColors)}
                               </div>
                             </div>
                           )}
