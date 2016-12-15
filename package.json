@@ -37,6 +37,7 @@
     "react-simpletabs": "0.7.0",
     "react-slick": "^0.12.2",
     "redux": "^3.5.2",
+    "redux-devtools-extension": "^1.0.0",
     "redux-immutable-state-invariant": "^1.2.3",
     "redux-thunk": "^2.1.0",
     "require-dir": "^0.3.1",
