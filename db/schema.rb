@@ -1728,6 +1728,19 @@ ActiveRecord::Schema.define(:version => 20161209210719) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "wedding_atelier_event_dresses", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.integer  "color_id"
+    t.integer  "style_id"
+    t.integer  "fabric_id"
+    t.integer  "size_id"
+    t.integer  "length_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "wedding_atelier_event_roles", :force => true do |t|
     t.string   "name"
     t.integer  "resource_id"
