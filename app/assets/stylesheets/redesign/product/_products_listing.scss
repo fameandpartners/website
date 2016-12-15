@@ -70,3 +70,33 @@
   }
 
 }
+
+.categoryTextBox--blackBg {
+
+  .categoryTextBoxContent {
+    background: $c-neutral-black;
+    color: $c-neutral-white;
+    min-height: 377px;
+    margin-bottom: 0;
+    border: 0;
+  }
+
+  .panel-seo .outer-wrap {
+    margin: 0;
+  }
+
+  .item {
+    padding: 0;
+  }
+
+  .ctaWrapper {
+    color: $c-neutral-white;
+    font-size: 3rem;
+  }
+
+  .summary {
+    padding: 30px 15px;
+    font-size: 1.2em;
+  }
+
+}
