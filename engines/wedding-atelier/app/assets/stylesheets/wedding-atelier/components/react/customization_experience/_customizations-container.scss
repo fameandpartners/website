@@ -75,6 +75,12 @@
     }
   }
 
+  .customization-radio-label {
+    display: inline-block;
+    float: left;
+    padding: 0 15px;
+  }
+
   .customization-options-item {
     background-color: $white-three;
     cursor: pointer;
@@ -93,8 +99,19 @@
     &-small {
       background-color: $white;
       cursor: pointer;
-      height: 138px;
-      width: 138px;
+      width: 100px;
+      height: 100px;
+
+      @include screen-lg {
+        height: 120px;
+        width: 120px;
+      }
+
+      @include screen-xl {
+        height: 140px;
+        width: 140px;
+      }
+
     }
 
     &-label {
@@ -132,6 +149,7 @@
 
     .box {
       border: 1px solid $white-two;
+      margin-right: 5px;
       display: inline-block;
       height: 20px;
       outline: 1px solid $black;

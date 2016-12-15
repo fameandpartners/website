@@ -15,7 +15,7 @@ var FabricAndColourSelector = React.createClass({
       var inputId = fabric.id + "-" + this.props.type;
 
       return (
-        <div key={index} onClick={ this.selectFabric.bind(this, fabric) } className="col-sm-4">
+        <div key={index} onClick={ this.selectFabric.bind(this, fabric) } className="fabric-radio-container">
           <input id={inputId} type="radio" value={fabric} name="fabric" className="customization-radio"/>
           <label htmlFor={inputId} className="customization-radio-label">
             <span className="box"></span>
@@ -27,8 +27,8 @@ var FabricAndColourSelector = React.createClass({
 
     var colours = this.props.colours.map(function(colour, index) {
       return (
-        <div key={index} onClick={ this.props.selectCallback.bind(null, 'colour', colour) } className="col-sm-4 col-md-4">
-          <div className="customization-options-item-small">{ colour.presentation }</div>
+        <div key={index} onClick={ this.props.selectCallback.bind(null, 'colour', colour) } className="col-sm-4 col-md-3">
+          <div className="customization-options-item-small" style={{backgroundColor: colour.value}}></div>
           <p className="customization-options-item-label">{colour.presentation}</p>
         </div>
       );
