@@ -6,6 +6,16 @@
 }
 
 .category--item {
+  position: relative;
+  min-height: 420px;
+
+  &:hover .media-wrap {
+    opacity: 0.8;
+  }
+
+  @media(max-width: 415px){
+    min-height: 380px;
+  }
 
   a {
     overflow: hidden;
