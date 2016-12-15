@@ -11,14 +11,14 @@ var CustomizationsMenu = React.createClass({
   show: function(currentCustomization) {
     var width = $(window).width();
     if(width > 768){
-      $('.customization-selector').addClass('slideInLeft')
+      $('.customization-selector').addClass('slideInLeft');
       var el = $('.js-customizations-container');
       el.one('transitionend', function(){
-        $('.js-customizations-lateral-menu').addClass('animate')
+        $('.js-customizations-lateral-menu').addClass('animate');
       });
       el.addClass('animate');
     }else{
-      $('.customization-selector').removeClass('slideInLeft')
+      $('.customization-selector').removeClass('slideInLeft');
     }
 
     this.props.changeCurrentCustomizationCallback(currentCustomization);
@@ -35,24 +35,24 @@ var CustomizationsMenu = React.createClass({
 
       if(customizationItem == 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour){
         className += ' selected';
-        selectedValue = selectedOptions.fabric + ' | ' + selectedOptions.colour
+        selectedValue = selectedOptions.fabric + ' | ' + selectedOptions.colour;
       }
 
       if(customizationItem == 'size' && selectedOptions.size && selectedOptions.height){
         className += ' selected';
-        selectedValue = selectedOptions.height + ' | ' + selectedOptions.size
+        selectedValue = selectedOptions.height + ' | ' + selectedOptions.size;
       }
 
       return (
-        <li key={ index } className="row customization-type" onClick={this.show.bind(null, customizationItem)}>
+        <li key={index} className="row customization-type" onClick={this.show.bind(null, customizationItem)}>
           <div className="col-sm-6 customization-column customization-box">
             <a href="#" className="customization-label">
               <i className={className}></i>
-              <span>{ customizationItem.split('-').join(' + ') }</span>
+              <span>{customizationItem.split('-').join(' + ')}</span>
             </a>
           </div>
           <div className="col-sm-6 customization-column customization-value">
-            <span>{ selectedValue||'This is my test' }</span>
+            <span>{selectedValue}</span>
           </div>
         </li>
       );
@@ -67,7 +67,7 @@ var CustomizationsMenu = React.createClass({
               <img src={img} />
               <p>{entry.split('-').join(' and ')}</p>
             </div>
-          )
+          );
         }.bind(this));
 
     var customizationContainerProps = {
@@ -80,7 +80,7 @@ var CustomizationsMenu = React.createClass({
     return (
       <div className="customization-panel-container">
         <div className="customizations-lateral-menu js-customizations-lateral-menu hidden-xs">
-          { menuEntries }
+          {menuEntries}
         </div>
 
         <div className="title row">
@@ -102,4 +102,4 @@ var CustomizationsMenu = React.createClass({
       </div>
     );
   }
-})
+});

@@ -8,13 +8,6 @@ var CustomizationsContainer = React.createClass({
     goToSlideCallback: React.PropTypes.func
   },
 
-  componentDidUpdate: function(){
-    var el = $(ReactDOM.findDOMNode(this.refs.customizationsContainer))
-    el.find('.customization-selector').hide();
-    $(ReactDOM.findDOMNode(this.refs[this.props.currentCustomization])).show()
-    this.props.goToSlideCallback(2);
-  },
-
   getInitialState: function(){
     return  {
       silhouettes: [1,2,3,4,5],
@@ -29,6 +22,13 @@ var CustomizationsContainer = React.createClass({
     };
   },
 
+  componentDidUpdate: function(){
+    var el = $(ReactDOM.findDOMNode(this.refs.customizationsContainer));
+    el.find('.customization-selector').hide();
+    $(ReactDOM.findDOMNode(this.refs[this.props.currentCustomization])).show();
+    // this.props.goToSlideCallback(2);
+  },
+
   close: function(ref){
     var el = $('.js-customizations-lateral-menu');
     if(!el.is(':visible')) {
@@ -40,7 +40,6 @@ var CustomizationsContainer = React.createClass({
       el.removeClass('animate');
     }
   },
-
   render: function(){
     var currentCustomization = this.props.currentCustomization,
         title = currentCustomization ? currentCustomization.split('-').join(' and ') : '';
@@ -96,6 +95,6 @@ var CustomizationsContainer = React.createClass({
             ref="size"/>
         </div>
       </div>
-    )
+    );
   }
-})
+});
