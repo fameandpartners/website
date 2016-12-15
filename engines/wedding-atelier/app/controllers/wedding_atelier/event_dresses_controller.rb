@@ -5,11 +5,6 @@ module WeddingAtelier
     def new
     end
 
-    def index
-      @products = Spree::Taxon.find_by_permalink('base-silhouette').products
-      render json: @products, each_serializer: WeddingAtelier::ProductSerializer
-    end
-
     def edit
     end
 

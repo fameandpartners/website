@@ -4,35 +4,21 @@ module WeddingAtelier
                :name,
                :description,
                :image,
-               :colours,
-               :fabrics,
-               :styles,
-               :lengths,
-               :fits,
-               :sizes
+               :presentation
 
-   def colours
-     object.option_values_of('Colour')
-   end
+   has_many :styles, serializer: WeddingAtelier::OptionValueSerializer
+   has_many :fits, serializer: WeddingAtelier::OptionValueSerializer
 
-   def fabrics
-     object.option_values_of('Fabric')
+   def presentation
+     object.name
    end
 
    def styles
      object.option_values_of('Style')
    end
 
-   def lengths
-     object.option_values_of('Length')
-   end
-
    def fits
      object.option_values_of('Fit')
-   end
-
-   def sizes
-     object.option_values_of('Size')
    end
 
    def image
