@@ -9,11 +9,18 @@ var CustomizationsMenu = React.createClass({
   },
 
   show: function(currentCustomization) {
-    var el = $('.js-customizations-container');
-    el.one('transitionend', function(){
-      $('.js-customizations-lateral-menu').addClass('animate')
-    });
-    el.addClass('animate');
+    var width = $(window).width();
+    if(width > 768){
+      $('.customization-selector').addClass('slideInLeft')
+      var el = $('.js-customizations-container');
+      el.one('transitionend', function(){
+        $('.js-customizations-lateral-menu').addClass('animate')
+      });
+      el.addClass('animate');
+    }else{
+      $('.customization-selector').removeClass('slideInLeft')
+    }
+
     this.props.changeCurrentCustomizationCallback(currentCustomization);
   },
 
@@ -91,9 +98,6 @@ var CustomizationsMenu = React.createClass({
               {customizationItems.map(this.renderRow)}
             </ul>
           </div>
-          <CustomizationsContainer
-            {...customizationContainerProps}
-            />
         </div>
       </div>
     );

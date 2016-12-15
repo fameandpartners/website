@@ -25,6 +25,10 @@ var CustomizationExperience = React.createClass({
     var _state = this.state;
     _state.selectedOptions[customization] = value;
     this.setState(_state);
+    var width = $(window).width();
+    if(width < 768){
+      $('.js-slick-hook').slick('slickGoTo', 1);
+    }
   },
 
   startOverCallback: function () {

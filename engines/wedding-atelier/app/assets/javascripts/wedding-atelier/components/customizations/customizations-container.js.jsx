@@ -3,12 +3,16 @@ var CustomizationsContainer = React.createClass({
     selectedOptions: React.PropTypes.object,
     currentCustomization: React.PropTypes.string,
     changeCurrentCustomizationCallback: React.PropTypes.func,
-    selectCallback: React.PropTypes.func
+    selectCallback: React.PropTypes.func,
+    type: React.PropTypes.string,
+    goToSlideCallback: React.PropTypes.func
   },
 
   componentDidUpdate: function(){
-    $('.customization-selector').hide()
+    var el = $(ReactDOM.findDOMNode(this.refs.customizationsContainer))
+    el.find('.customization-selector').hide();
     $(ReactDOM.findDOMNode(this.refs[this.props.currentCustomization])).show()
+    this.props.goToSlideCallback(2);
   },
 
   getInitialState: function(){
@@ -60,6 +64,7 @@ var CustomizationsContainer = React.createClass({
           <FabricAndColourSelector
             colours={this.state.colours}
             fabrics={this.state.fabrics}
+            type={this.props.type}
             selectCallback={this.props.selectCallback}
             ref="fabric-colour"/>
           <CustomizationSelector

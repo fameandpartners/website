@@ -1,15 +1,17 @@
 .customizations-container {
   background: $white-two;
-  box-shadow: 1px 0 5px 0 rgba(0, 0, 0, .20);
-  height: 100vh;
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 50%;
-  z-index: 3;
-  opacity: 0;
 
-  @include slide-in-left();
+  @include screen-md {
+    box-shadow: 1px 0 5px 0 rgba(0, 0, 0, .20);
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 50%;
+    z-index: 3;
+    opacity: 0;
+    @include slide-in-left();
+  }
 
   .selector-header {
     background-image: image-url('wedding-atelier/marbel.png');

@@ -8,19 +8,28 @@ var DesktopCustomizations = React.createClass({
   },
 
   render: function(){
-    var customizationMenuProps = {
+    var defaultProps = {
       selectedOptions: this.props.selectedOptions,
       currentCustomization: this.props.currentCustomization,
       changeCurrentCustomizationCallback: this.props.changeCurrentCustomizationCallback,
-      selectCallback: this.props.selectCallback,
+      selectCallback: this.props.selectCallback
+    };
+
+    var customizationMenuProps = $.extend(defaultProps, {
       startOverCallback: this.props.startOverCallback,
       dresses: [1,3,4,5,65,6]
-    };
+    })
+
+    var customizationsContainerProps = $.extend(defaultProps, {
+      type: 'desktop'
+    })
 
     return(
       <div className="customization-experience--desktop hidden-xs">
+        <NavBar/>
         <div className="customization-panel col-sm-6">
           <CustomizationsMenu {...customizationMenuProps} />
+          <CustomizationsContainer {...customizationsContainerProps} />
         </div>
         <div className="dress-preview col-sm-6">
           <div className="controls">
