@@ -43,8 +43,8 @@ class CollectionFilterSort extends Component {
       const selectedColorIndex = selectedColors.indexOf(color.id);
       if (selectedColorIndex > -1){
         newSelectedColors = [
-          ...selectedColors.slice(0, selectedColorIndex - 1),
-          ...selectedColors.slice(selectedColorIndex),
+          ...selectedColors.slice(0, selectedColorIndex),
+          ...selectedColors.slice(selectedColorIndex + 1),
         ];
       } else {
         newSelectedColors = selectedColors.concat(color.id);
