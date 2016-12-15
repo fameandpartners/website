@@ -81,7 +81,7 @@ class CollectionFilterSort extends Component {
       const {selectedPrices, setSelectedPrices,} = this.props;
       return () => {
         if (id === 'all'){ setSelectedPrices(PRICES.map(p => p.id));}
-        else { setSelectedPrices(this.addOrRemoveFrom(selectedPrices, id));}
+        else { setSelectedPrices(this.addOrRemoveFrom(selectedPrices, id).sort());}
       };
     }
 
@@ -129,13 +129,23 @@ class CollectionFilterSort extends Component {
     }
 
     generatePriceSummary(selectedPriceIds){
+      // All case
+      const selectedPrices = selectedPriceIds.map( id => _.findWhere(PRICES, {id,}));
       if (PRICES.length === selectedPriceIds.length){
         return ( this.generateSelectedItemSpan('all', 'All Prices', 'price') );
       }
-      const selectedPrices = selectedPriceIds.map( id => _.findWhere(PRICES, {id,}));
-      return selectedPrices.map((price)=>{
-        return ( this.generateSelectedItemSpan(price.id, price.presentation) );
-      });
+
+      // Individual Elems
+      if (selectedPrices.length === 1 ||
+         (selectedPrices.length == 2 && selectedPrices.indexOf(PRICES[1]) < 0)){
+        return selectedPrices.map( p => this.generateSelectedItemSpan(p.id, p.presentation));
+      }
+
+      // Combined pricing
+      const combinedSelectedPrices = selectedPrices.reduce((acc, c) => {return acc.concat(c.range);}, []);
+      return selectedPrices.map( p =>
+        this.generateSelectedItemSpan('combined', `$${Math.min(...combinedSelectedPrices)} - $${Math.max(...combinedSelectedPrices)}`)
+      );
     }
 
     render() {
@@ -147,8 +157,6 @@ class CollectionFilterSort extends Component {
           selectedColors,
           selectedPrices,
         } = this.props;
-        console.log('this.props ever render', this.props);
-
         return (
             <div className="CollectionFilterSort">
                 <div className="FilterSort">
@@ -239,6 +247,7 @@ class CollectionFilterSort extends Component {
                             <div className="ExpandablePanel__listOptions checkboxBlackBg">
                               <label className="ExpandablePanel__option" name="price">
                                 <input
+                                  checked={selectedPrices.length === 3}
                                   className="js-filter-all"
                                   data-all="true"
                                   id="price-all"
@@ -251,10 +260,11 @@ class CollectionFilterSort extends Component {
                                       <span className="ExpandablePanel__optionName">All prices</span>
                                   </span>
                               </label>
-                              {PRICES.map( p => {
+                              {PRICES.map( (p, i) => {
                                 return (
                                   <label key={`price-${p.id}`} className="ExpandablePanel__option" name="price">
                                     <input
+                                      checked={selectedPrices.indexOf(PRICES[i].id) > - 1}
                                       data-pricemin={p.range[0]}
                                       data-pricemax={p.range[1]}
                                       id={`price-${p.id}}`}
