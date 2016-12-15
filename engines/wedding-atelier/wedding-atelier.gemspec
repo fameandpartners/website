@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.homepage    = ''
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
-  s.test_files = Dir["test/**/*"]
+  s.test_files = Dir["spec/**/*"]
 
   s.add_dependency 'rails', '~> 3.2.22.5'
   s.add_dependency 'bootstrap-sass', '~> 3.3.4.1'
@@ -22,5 +22,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'kaminari'        # Version specified on main app Gemfile (spree_core)
   s.add_dependency 'react-rails'
   s.add_dependency 'slim'            # Version specified on main app Gemfile
+  s.add_dependency 'twilio-ruby'
+  s.add_dependency 'active_model_serializers'
+  s.add_development_dependency 'rspec-rails', '~> 3.2'
+  s.add_development_dependency 'factory_girl_rails'
   # s.add_dependency "jquery-rails"
 end
