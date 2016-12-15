@@ -26,10 +26,10 @@ Feature: Browse and Purchase
     Then I should see "Parties Collection"
     Then I should see "It Girl Collection"
     # Previous Lookbooks
+    Then I should see "The Freshly Picked Collection"
     Then I should see "The Ruffled Up Collection"
     Then I should see "The Slip Dress Collection"
-    Then I should see "Partners In Crime"
-    Then I should see "This Modern Romance"
+    Then I should see "Partners In Crime Collection"
 
   Scenario: Show Filters on Dresses List
     When I visit the dresses page
