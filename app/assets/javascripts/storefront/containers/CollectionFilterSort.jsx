@@ -12,6 +12,25 @@ import breakpoints from '../libs/breakpoints';
 // Components
 import ExpandablePanelItem from '../components/ExpandablePanelItem.jsx';
 
+// Constants
+const PRICES = [
+  {
+    id: '0-199',
+    range: [0, 199,],
+    presentation: '$0 - $199',
+  },
+  {
+    id: '200-299',
+    range: [200, 299,],
+    presentation: '$200 - $299',
+  },
+  {
+    id: '300-399',
+    range: [300, 399,],
+    presentation: '$300 - $399',
+  },
+];
+
 function stateToProps(state) {
     // Which part of the Redux global state does our component want to receive as props?
     if (state.$$collectionFilterSortStore) {
@@ -24,6 +43,7 @@ function stateToProps(state) {
           $$bodyShapes: $$collectionFilterSortStore.get('$$bodyShapes'),
           // Mutable props
           selectedColors: collectionFilterSortStore.selectedColors,
+          selectedPrices: collectionFilterSortStore.selectedPrices,
         };
     }
     return {};
@@ -37,19 +57,32 @@ class CollectionFilterSort extends Component {
         autobind(this);
     }
 
-    handleColorSelection(color){
-      let newSelectedColors = [];
-      const {selectedColors, setSelectedColors,} = this.props;
-      const selectedColorIndex = selectedColors.indexOf(color.id);
-      if (selectedColorIndex > -1){
-        newSelectedColors = [
-          ...selectedColors.slice(0, selectedColorIndex),
-          ...selectedColors.slice(selectedColorIndex + 1),
+    addOrRemoveFrom(selectedOptions, changeOption){
+      let newSelections = [];
+      const selectedOptionIndex = selectedOptions.indexOf(changeOption);
+      if (selectedOptionIndex > -1){
+        newSelections = [
+          ...selectedOptions.slice(0, selectedOptionIndex),
+          ...selectedOptions.slice(selectedOptionIndex + 1),
         ];
       } else {
-        newSelectedColors = selectedColors.concat(color.id);
+        newSelections = selectedOptions.concat(changeOption);
       }
-      setSelectedColors(newSelectedColors);
+      return newSelections;
+    }
+
+    handleColorSelection({id,}){
+      let newSelectedColors = [];
+      const {selectedColors, setSelectedColors,} = this.props;
+      setSelectedColors(this.addOrRemoveFrom(selectedColors, id));
+    }
+
+    handlePriceSelection(id){
+      const {selectedPrices, setSelectedPrices,} = this.props;
+      return () => {
+        if (id === 'all'){ setSelectedPrices(PRICES.map(p => p.id));}
+        else { setSelectedPrices(this.addOrRemoveFrom(selectedPrices, id));}
+      };
     }
 
     buildColorOption(color){
@@ -81,13 +114,27 @@ class CollectionFilterSort extends Component {
       );
     }
 
+    generateSelectedItemSpan(id, presentation, category){
+      return (
+        <span key={`${category}-${id}`} className="ExpandablePanel__selectedItem">{presentation}</span>
+      );
+    }
+
     generateColorSummary(selectedColorIds){
       const {$$colors, $$secondaryColors,} = this.props;
       const selectedColors = selectedColorIds.map( id => _.findWhere($$colors.toJS().concat($$secondaryColors.toJS()), {id,}));
       return selectedColors.map((color)=>{
-        return (
-          <span key={`color-${color.id}`} className="ExpandablePanel__selectedItem">{color.presentation}</span>
-        );
+        return ( this.generateSelectedItemSpan(color.id, color.presentation, 'color') );
+      });
+    }
+
+    generatePriceSummary(selectedPriceIds){
+      if (PRICES.length === selectedPriceIds.length){
+        return ( this.generateSelectedItemSpan('all', 'All Prices', 'price') );
+      }
+      const selectedPrices = selectedPriceIds.map( id => _.findWhere(PRICES, {id,}));
+      return selectedPrices.map((price)=>{
+        return ( this.generateSelectedItemSpan(price.id, price.presentation) );
       });
     }
 
@@ -98,6 +145,7 @@ class CollectionFilterSort extends Component {
           $$colors,
           $$secondaryColors,
           selectedColors,
+          selectedPrices,
         } = this.props;
         console.log('this.props ever render', this.props);
 
@@ -183,33 +231,44 @@ class CollectionFilterSort extends Component {
                                   Price
                               </div>
                               <div className="ExpandablePanel__selectedOptions">
-                                  <span className="ExpandablePanel__selectedItem">$0 - 199</span>
-                                  <span className="ExpandablePanel__selectedItem">$200 - $299</span>
+                                {this.generatePriceSummary(selectedPrices)}
                               </div>
                             </div>
                           )}
                           revealedContent={(
                             <div className="ExpandablePanel__listOptions checkboxBlackBg">
-                              <label className="ExpandablePanel__option" name="price"><input checked="checked" className="js-filter-all" data-all="true" id="price-all" name="price-all" type="checkbox" value="all"/>
+                              <label className="ExpandablePanel__option" name="price">
+                                <input
+                                  className="js-filter-all"
+                                  data-all="true"
+                                  id="price-all"
+                                  onChange={this.handlePriceSelection('all')}
+                                  name="price-all"
+                                  type="checkbox"
+                                  value="all"
+                                />
                                   <span className="checkboxBlackBg__check">
                                       <span className="ExpandablePanel__optionName">All prices</span>
                                   </span>
                               </label>
-                              <label className="ExpandablePanel__option" name="price"><input data-all="false" data-pricemax="199" data-pricemin="0" id="price-0-199" name="price" type="checkbox" value="0"/>
-                                  <span className="checkboxBlackBg__check">
-                                      <span className="ExpandablePanel__optionName">$0 - $199</span>
-                                  </span>
-                              </label>
-                              <label className="ExpandablePanel__option" name="price"><input data-all="false" data-pricemax="299" data-pricemin="200" id="price-200-299" name="price" type="checkbox" value="200"/>
-                                  <span className="checkboxBlackBg__check">
-                                      <span className="ExpandablePanel__optionName">$200 - $299</span>
-                                  </span>
-                              </label>
-                              <label className="ExpandablePanel__option" name="price"><input data-all="false" data-pricemax="399" data-pricemin="300" id="price-300-399" name="price" type="checkbox" value="300"/>
-                                  <span className="checkboxBlackBg__check">
-                                      <span className="ExpandablePanel__optionName">$300 - $399</span>
-                                  </span>
-                              </label>
+                              {PRICES.map( p => {
+                                return (
+                                  <label key={`price-${p.id}`} className="ExpandablePanel__option" name="price">
+                                    <input
+                                      data-pricemin={p.range[0]}
+                                      data-pricemax={p.range[1]}
+                                      id={`price-${p.id}}`}
+                                      onChange={this.handlePriceSelection(p.id)}
+                                      name="price"
+                                      type="checkbox"
+                                      value={p.range[0]}
+                                    />
+                                      <span className="checkboxBlackBg__check">
+                                          <span className="ExpandablePanel__optionName">{p.presentation}</span>
+                                      </span>
+                                  </label>
+                                );
+                              })}
                             </div>
                           )}
                         />
@@ -269,9 +328,11 @@ CollectionFilterSort.propTypes = {
     $$secondaryColors: PropTypes.array,
     $$bodyShapes: PropTypes.array,
     selectedColors: PropTypes.array,
+    selectedPrices: PropTypes.array,
 
     // Redux Actions
     setSelectedColors: PropTypes.func,
+    setSelectedPrices: PropTypes.func,
 };
 
 export default Resize(breakpoints)(connect(stateToProps, dispatchToProps)(CollectionFilterSort));
