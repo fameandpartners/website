@@ -76,7 +76,7 @@
   .categoryTextBoxContent {
     background: $c-neutral-black;
     color: $c-neutral-white;
-    min-height: 377px;
+    height: 377px;
     margin-bottom: 0;
     border: 0;
   }
@@ -90,6 +90,10 @@
     font-size: 1.1em;
   }
 
+  .itemTitle {
+    line-height: 100%;
+  }
+
   .ctaWrapper {
     color: $c-neutral-white;
   }
@@ -100,6 +104,26 @@
 
   .summary {
     padding: 40px 15px 30px;
+  }
+
+  @media (min-width: $bootstrap-md-width) and (max-width: $bootstrap-lg-width - 1px) {
+
+    .categoryTextBoxContent {
+      height: 267px;
+    }
+
+    .item {
+      font-size: 0.9em;
+    }
+
+    .itemTitle {
+      font-size: 2.1em;
+    }
+
+    .summary {
+      padding: 10px 0 5px;
+    }
+
   }
 
 }
