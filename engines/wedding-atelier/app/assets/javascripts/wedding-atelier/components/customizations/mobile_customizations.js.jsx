@@ -2,6 +2,7 @@ var MobileCustomizations = React.createClass({
   propTypes: {
     currentCustomization: React.PropTypes.string,
     selectedOptions: React.PropTypes.object,
+    customizations: React.PropTypes.object,
     changeCurrentCustomizationCallback: React.PropTypes.func,
     selectCallback: React.PropTypes.func,
     startOverCallback: React.PropTypes.func
@@ -38,7 +39,8 @@ var MobileCustomizations = React.createClass({
 
     var customizationsContainerProps = $.extend(defaultProps, {
       type: 'mobile',
-      goToSlideCallback: this.goToSlide
+      goToSlideCallback: this.goToSlide,
+      customizations: this.props.customizations
     })
 
     return(

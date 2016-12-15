@@ -80,6 +80,15 @@
     cursor: pointer;
     height: 183px;
     margin-bottom: 30px;
+    padding-top: 10px;
+
+    img {
+      height: 150px;
+      margin: 0 auto;
+      display: block;
+    }
+
+
 
     &-small {
       background-color: $white;
@@ -96,10 +105,16 @@
 
     @include screen-md {
       height: 253px;
+      img {
+        height: 190px;
+      }
     }
 
     @include screen-lg {
       height: 283px;
+      img {
+        height: 220px;
+      }
     }
   }
 

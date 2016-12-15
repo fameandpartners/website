@@ -2,6 +2,7 @@ var DesktopCustomizations = React.createClass({
   propTypes: {
     currentCustomization: React.PropTypes.string,
     selectedOptions: React.PropTypes.object,
+    customizations: React.PropTypes.object,
     changeCurrentCustomizationCallback: React.PropTypes.func,
     selectCallback: React.PropTypes.func,
     startOverCallback: React.PropTypes.func
@@ -21,7 +22,8 @@ var DesktopCustomizations = React.createClass({
     })
 
     var customizationsContainerProps = $.extend(defaultProps, {
-      type: 'desktop'
+      type: 'desktop',
+      customizations: this.props.customizations
     })
 
     return(
