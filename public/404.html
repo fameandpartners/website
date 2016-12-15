@@ -5,53 +5,39 @@
   <style type="text/css">
     @import url(//fonts.googleapis.com/css?family=Forum);
 
-    body { background-color: #fff; color: #333; text-align: center; font-family: arial, sans-serif; font-size: 14px; }
-    a{
+    body { font-family: "brandon-grotesque",sans-serif; background-color: #fff; color: #333; text-align: center; font-family: arial, sans-serif; font-size: 20px; }
+    a {
       color: #000;
+      border-bottom: 1px solid #000;
+      text-decoration: none;
+      font-style: italic;
     }
-    .logo{
-      padding: 10px 0 20px;
-    }
-    .logo img{
-      width: 360px;
-    }
-
-    .dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-    }
-    h1 { font-family: 'Forum'; font-size: 33px; line-height: 0.9em; font-weight:600; text-transform: uppercase; color: #000;}
+    h1 { font-family: "freight-display-pro",sans-serif; font-weight: 300; font-size: 3.5em; color: #000; margin-top: 80px;}
+    h2 { font-family: "freight-display-pro",sans-serif; font-size: 2.4rem; font-weight: 300; color: #000; margin: 50px 0;}
+    p {font-family: "freight-display-pro",sans-serif; font-weight: 300; margin-bottom: 30px; line-height: 150%; margin: 0;}
+    .thin-bottom::after {content: "";padding-bottom: 50px;border-bottom: 1px solid #000;width: 90px;display: block;margin: 0 auto;}
   </style>
+  <script src="//use.typekit.net/day0prb.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
 </head>
 
 <body>
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <div class="logo">
-      <img src="https://www.fameandpartners.com/assets/logo/new-logo.svg"/>
-    </div>
-    <h1>So sorry we can't find that page.</h1>
-    <p>In the meantime, here is a $20 voucher to make up for your time - just use this code <strong>@checkout: OOPS20</strong></p>
-    <p>
-      <a href="https://www.fameandpartners.com/?cf=404">Go to the homepage</a>
-    </p>
-    <p>
-      If you would like some further assistance, feel free to email:
-    </p>
-    <p>
-      team@fameandpartners.com
-    </p>
-  </div>
-  <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<!-- This file lives in public/404.html -->
+<div class="dialog">
+  <h1>Looking for something?</h1>
+  <h2><em>Sorry,</em> this page doesn't exist.</h2>
+  <p>Try our <a href="https://www.fameandpartners.com/?cf=404">homepage</a> to see what's new and start customizing.</p>
+  <p class="thin-bottom">Still can't find what you're looking for? <a href="mailto:team@fameandpartners.com">E-mail us</a> at team@fameandpartners.com</p>
+</div>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-41247818-1', 'auto');
-    ga('send', 'pageview');
-    ga('send', 'event', '404', 'not found');
-  </script>
+  ga('create', 'UA-41247818-1', 'auto');
+  ga('send', 'pageview');
+  ga('send', 'event', '404', 'not found');
+</script>
 </body>
 </html>
