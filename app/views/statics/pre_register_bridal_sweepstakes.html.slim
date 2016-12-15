@@ -1,0 +1,128 @@
+= render partial: 'pages/robots'
+
+.wedding-sweepstakes.landing-page-v2.js-smooth-scroll
+
+  .preRegisterSweepstakes__introWrapper
+    .container-fluid.containerHalfScreenHero
+
+      .row.hidden-md.hidden-lg
+        .col-md-12.containerHalfScreenHero__heroImg
+          = image_tag 'landingpages/wedding-sweepstakes/bride-hero-mob.jpg', class: "img-responsive"
+
+      .row
+        .col-md-6.hidden-md.hidden-lg
+          .heading-overlay-wrapper.preRegisterSweepstakes__heading
+            h2.heading-overlay
+              | FAME BRIDES
+
+      .row.vertical-align-row
+        .col-md-6.no-padding.hidden-xs.hidden-sm.vertical-align
+          .preRegisterSweepstakes__heroBg style='background-image: url("#{image_path('landingpages/wedding-sweepstakes/bride-hero.jpg')}")'
+
+        .col-md-offset-1.col-md-4.vertical-align
+          .preRegisterSweepstakes__copy
+            .row
+              .col-xs-12
+                h3.subheading.title.no-margin Launching January 2017.
+                h1.line-mobile-center Bridal gets bespoke.
+                h3.subheading Exclusive designs. Limited-edition fabrics. Elevated, elegant, and eff-ing gorgeous.
+                h3.subheading Coming soon...
+
+                = link_to "#formRegister", class: 'cta-mobile-featured'
+                  span.btn-xs.btn-featured
+                    span.copy-highlight PRE - REGISTER
+
+  .preRegisterSweepstakes__formWrapperBg
+    .container
+      .preRegisterSweepstakes__formWrapperContent
+        section.section-box.padding-container.preRegisterSweepstakes__formWrapper
+          .row.hidden-xs.hidden-sm
+            .col-md-12.heading-overlay-wrapper.heading-overlay-on-previous-section
+              h2.heading-overlay FAME BRIDES
+
+          .row.text-center
+            .col-md-offset-2.col-md-8
+
+              .preRegisterSweepstakes__copyPadding
+                h2#formRegister
+                  | <em>Win</em> $5,000 of custom gowns <br> for the whole wedding party.
+
+                p
+                  | Pre-register to enter and get early access to the collection.
+
+              .iframe-middle-wrapper
+                .woobox-offer data-offer="5fbtad"
+
+              .preRegisterSweepstakes__copyPadding.text-center
+                span.text-grey
+                  | <em>By clicking PRE-REGISTER, you agree to the #{link_to "Rules and Regulations", '/terms#collapse-pre-register-bridesmaids', target: '_blank'}</em>.
+
+  .container
+    section.section-box.section-price.section-extra-margin
+      .row
+        .col-md-6.hidden-md.hidden-lg
+          .heading-overlay-wrapper
+            h2.heading-overlay.preRegisterSweepstakes__heading
+              | THE PRIZE
+
+        .col-md-5
+          .heading-overlay-wrapper.hidden-xs.hidden-sm
+            h2.heading-overlay.preRegisterSweepstakes__heading
+              | THE PRIZE
+          .preRegisterSweepstakes__copyPadding
+            h2.no-margin
+              | Win custom dresses for the <em>entire</em> bridal party.
+            p
+              | When you pre-register, you'll be entered to win our giveaway: $5,000 of bespoke bridal wear. You and your girls will get to craft your own unique looks, designed to both fit & flatter each woman individually and work together cohesively. It’s the ultimate wedding wardrobe.
+
+        .col-md-6.col-md-offset-1
+          - current_tile_image = "landingpages/wedding-sweepstakes/bride-testimonial.jpg"
+          - current_tile_image_mob = "landingpages/wedding-sweepstakes/bride-testimonial-mob.jpg"
+          picture.media-wrap
+            source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+            source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+            img src="#{image_path(current_tile_image)}" srcset="
+              #{image_path(current_tile_image_mob)} 991w,
+              #{image_path(current_tile_image)} 992w"
+
+  .container-fluid.no-spacing-cols-desktop
+    section.section-box.section-price.section-extra-margin
+
+      .row.hidden-lg.hidden-md
+        .col-xs-12
+          .videoWrapper
+            //Mobile Video
+            video.item-video.hidden-md.hidden-lg(name="Pre-register Bridal Sweepstakes" autoplay="true" muted="true" loop="true" src="https://player.vimeo.com/external/195553231.sd.mp4?s=925e837722e5dd40c5c935b6628bbcab184b75fc&profile_id=164")
+
+      .row.vertical-align-row
+        .col-md-6.vertical-align.hidden-xs.hidden-sm
+          .videoWrapper
+            //Desktop Video
+            video.item-video.video-half-display.hidden-xs.hidden-sm(name="Pre-register Bridal Sweepstakes" autoplay="true" muted="true" loop="true" src="https://player.vimeo.com/external/195554023.hd.mp4?s=de2c4aef64394e09d359734f5fe2f29e6a04781b&profile_id=174")
+
+        .col-md-4.vertical-align
+          .copyWrapper
+            h2.no-margin
+              | Give your bridesmaids <br class="visible-lg"> what they want.
+            p
+              | In the soon-to-be-launched Wedding Atelier App, you can customize nearly everything about your bridesmaid dresses: fabric, color, fit, and design details. There are thousands of combinations. Invite the bridal party to group chat, share designs, and vote on the winning looks. Your dresses will be made-to-order to fit and flatter each individual–and they all clock in at under $200.
+            = link_to "#formRegister"
+              span.cta-link-arrow-right
+                span.cta-link-alt
+                  span Pre-Register
+                  span.copy-highlight Now
+                i.icon.icon-arrow-right
+
+  .container
+    = render 'shared/redesign/wedding_app'
+
+javascript:
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//woobox.com/js/plugins/woo.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+  (document, 'script', 'woobox-sdk'));
