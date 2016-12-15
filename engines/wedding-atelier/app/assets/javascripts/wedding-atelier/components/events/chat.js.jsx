@@ -34,7 +34,7 @@ var Chat = React.createClass({
       var accessManager = new Twilio.AccessManager(data.token);
       var messagingClient = new Twilio.IPMessaging.Client(accessManager);
 
-      channelName = 'wedding-channel-' + this.props.event_id;
+      var channelName = 'wedding-channel-' + this.props.event_id;
       messagingClient.getChannelByUniqueName(channelName).then(function(channel) {
         if (channel) {
           this.setupChannel(channel);
@@ -209,7 +209,7 @@ var Chat = React.createClass({
                    onKeyDown={this.attemptToSendMessage}/>
           </div>
           <div className="btn-send-container">
-            <button className="btn btn-black btn-send-to-chat" onClick={this.sendMessage}>send</button>
+            <button className="btn btn-black btn-send-msg-to-chat" onClick={this.sendMessage}>send</button>
           </div>
         </div>
       </div>

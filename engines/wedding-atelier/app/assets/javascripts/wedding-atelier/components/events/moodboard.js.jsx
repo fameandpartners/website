@@ -1,9 +1,9 @@
 var MoodBoardEvent = React.createClass({
-  getInitialState: function () {
+  getInitialState: function (){
     return {event: {dresses: [], invitations: [], assistants: [], send_invite_path: '', current_user_id: '', name: 'Loading...'}}
   },
 
-  componentDidMount: function () {
+  componentDidMount: function (){
     $.ajax({
       url: this.props.event_path,
       type: "GET",
@@ -12,9 +12,26 @@ var MoodBoardEvent = React.createClass({
         this.setState({event: data.moodboard_event});
       }.bind(this)
     });
+
+    this.handleBrowserResizing();
   },
 
-  handleEventDetailUpdate: function(data) {
+  handleBrowserResizing: function(){
+
+    if (window.innerWidth <= 768) {
+      $('.moodboard-tabs a[href="#chat-mobile"]').tab('show');
+    }
+
+    $(window).resize(function(e) {
+      if (e.target.innerWidth > 768 ) {
+        $('.moodboard-tabs a[href="#bridesmaid-dresses"]').tab('show');
+      } else {
+        $('.moodboard-tabs a[href="#chat-mobile"]').tab('show');
+      }
+    });
+  },
+
+  handleEventDetailUpdate: function(data){
     $.ajax({
       url: this.props.event_path,
       type: 'PUT',
@@ -33,7 +50,7 @@ var MoodBoardEvent = React.createClass({
     });
   },
 
-  handleRemoveAssistant: function(id, index) {
+  handleRemoveAssistant: function(id, index){
     $.ajax({
       url: this.props.remove_assistant_path.replace('id', id),
       type: 'DELETE',
@@ -46,7 +63,7 @@ var MoodBoardEvent = React.createClass({
     })
   },
 
-  render: function () {
+  render: function (){
     return (
       <div id="events__moodboard">
         <div className="chat left-content col-sm-6">
@@ -64,9 +81,9 @@ var MoodBoardEvent = React.createClass({
 
             <div className="moodboard-tabs center-block">
               <ul className="nav nav-tabs center-block" role="tablist">
-                <li role="presentation" className="hidden-md hidden-lg">
+                <li role="presentation" className="tab-chat hidden">
                   <a aria-controls="chat-mobile" data-toggle="tab" href="#chat-mobile" role="tab">
-                    Chat  <span className="badge">42</span></a>
+                    Chat  <span className="badge">12</span></a>
                 </li>
                 <li className="active" role="presentation">
                   <a aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab">
@@ -93,13 +110,13 @@ var MoodBoardEvent = React.createClass({
                     username={this.props.username} />
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active" role="tabpanel">
-                  <div className="add-dress-box hidden">
+                  <div className="add-dress-box">
                     <button className="add">Add your first dress</button>
                   </div>
-                  <div className="dresses-actions text-center"><a href="#" className="btn-transparent btn-create-a-dress">
+                  <div className="dresses-actions text-center hidden"><a href="#" className="btn-transparent btn-create-a-dress">
                     <em>Create</em> a dress</a>
                   </div>
-                  <div className="dresses-list">
+                  <div className="dresses-list hidden">
                     <DressTiles dresses={this.state.event.dresses} />
                   </div>
                 </div>

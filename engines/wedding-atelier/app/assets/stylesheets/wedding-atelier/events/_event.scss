@@ -6,6 +6,17 @@
   height: 100vh;
   padding-top: 69px;
 
+  .btn-send-container {
+    margin: 6px;
+
+    .btn-send-msg-to-chat {
+      width: 110px;
+      border-radius: 2px;
+      height: 100%;
+      margin-top: 0;
+    }
+  }
+
   .chat {
     padding: 0;
     height: 100%;
@@ -48,7 +59,7 @@
     }
 
     .msg-simple {
-      width: 500px;
+      width: 100%;
     }
 
     .msg-data {
@@ -68,7 +79,7 @@
     .msg-text {
       margin-left: 35px;
       background-color: $white-three;
-      border-radius: 7px;
+      border-radius: 3px;
       padding: 7px;
     }
 
@@ -102,16 +113,6 @@
         height: 100%;
       }
     }
-
-    .btn-send-container {
-      margin: 6px;
-
-      .btn-send-to-chat {
-        width: 110px;
-        border-radius: 2px;
-        height: 100%;
-      }
-    }
   }
 
   #atelier {
@@ -129,11 +130,11 @@
 
     .moodboard-tabs {
       width: 90%;
-      min-width: 560px;
       height: calc(100% - 43px);
 
       .nav-tabs {
-        width: 678px;
+        min-width: 680px;
+        width: 680px;
       }
 
       .nav-tabs > li > a::after {
@@ -188,7 +189,7 @@
     }
 
     .add-dress-box {
-      margin-top: 30px;
+      margin: 30px;
 
       button {
         border: 2px dashed $white-four;
@@ -393,7 +394,11 @@
 
   /* MOBILE STYLING  */
 
-  @include screen-xs {
+  @include screen-xs-and-sm {
+
+    .tab-chat {
+      display: inline-block !important;
+    }
 
     /* left side : hidden */
 
@@ -409,13 +414,14 @@
     }
 
     .nav.nav-tabs {
-      max-width: 100%;
+      min-width: 100% !important;
+      width: 100% !important;
+
       overflow-y: hidden;
       overflow-x: auto;
       white-space: nowrap;
 
       background-color: $white-three;
-      padding-top: 10px;
 
       &::-webkit-scrollbar {
         display: none;
@@ -440,8 +446,17 @@
       background-color: transparent;
     }
 
+    /* this is just the container when on the tab */
     #chat-mobile {
       height: 100%;
+    }
+
+    .chat-general-info {
+      display: none;
+    }
+
+    .msg-simple {
+      width: 100% !important;
     }
 
     #atelier {
@@ -451,15 +466,30 @@
 
   }
 
-  @include screen-sm {
-    .chat.left-content { display: none; }
-  }
-
   @include screen-md {
+
+    .tab-chat {
+      display: none;
+    }
+
+    .chat-mobile {
+      display: none;
+    }
+
     .chat.left-content { display: flex; }
   }
 
   @include screen-lg {
+
+    .tab-chat {
+      display: none;
+    }
+
+    .chat-mobile {
+      display: none;
+    }
+
     .chat.left-content { display: flex; }
   }
+
 }
