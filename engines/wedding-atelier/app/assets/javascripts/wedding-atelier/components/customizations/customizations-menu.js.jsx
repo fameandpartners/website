@@ -28,19 +28,25 @@ var CustomizationsMenu = React.createClass({
   renderRow: function (customizationItem, index) {
       var selectedOptions = this.props.selectedOptions,
           className = "icon icon-" + customizationItem,
-          selectedValue = selectedOptions[customizationItem];
+          selectedValue = null;
+
+
+      if(selectedOptions[customizationItem]){
+        selectedValue = selectedOptions[customizationItem].presentation;
+      }
+
       if(selectedOptions[customizationItem]){
         className += ' selected';
       }
 
       if(customizationItem == 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour){
         className += ' selected';
-        selectedValue = selectedOptions.fabric + ' | ' + selectedOptions.colour;
+        selectedValue = selectedOptions.fabric.presentation + ' | ' + selectedOptions.colour.presentation;
       }
 
       if(customizationItem == 'size' && selectedOptions.size && selectedOptions.height){
         className += ' selected';
-        selectedValue = selectedOptions.height + ' | ' + selectedOptions.size;
+        selectedValue = selectedOptions.height.presentation + ' | ' + selectedOptions.size.presentation;
       }
 
       return (

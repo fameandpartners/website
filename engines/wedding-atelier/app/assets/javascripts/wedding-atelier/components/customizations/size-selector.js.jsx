@@ -1,8 +1,9 @@
 var SizeSelector = React.createClass({
   propTypes: {
+    siteVersion: React.PropTypes.object,
     sizes: React.PropTypes.array,
     heights: React.PropTypes.array,
-    people: React.PropTypes.array,
+    assistants: React.PropTypes.array,
     selectCallback: React.PropTypes.func.isRequired
   },
 
@@ -12,6 +13,11 @@ var SizeSelector = React.createClass({
       .on('change', function(e){
         this.props.selectCallback('height', e.target.value);
       }.bind(this));
+  },
+
+  parsePresentation: function(size){
+    var regexp = new RegExp(this.props.siteVersion.permalink + '(\\d+)', 'i')
+    return size.name.match(regexp)[1];
   },
 
   render: function() {
@@ -29,25 +35,25 @@ var SizeSelector = React.createClass({
             id={'size-'+index}
             type="radio"
             name="size"
-            value={size}
+            value={size.presentation}
             onClick={this.props.selectCallback.bind(null, 'size', size)}
              />
-          <label htmlFor={'size-'+index}>{size}</label>
+          <label htmlFor={'size-'+index}>{this.parsePresentation(size)}</label>
         </li>
       )
     }.bind(this));
 
-    var peopleSizes = this.props.people.map(function(person, index){
+    var assistantsSizes = this.props.assistants.map(function(assistant, index){
       return (
         <li key={index}>
           <input
             id={'person-'+index}
             type="radio"
             name="size"
-            value={person}
-            onClick={this.props.selectCallback.bind(null, 'size', person)}
+            value={assistant.user_profile.dress_size}
+            onClick={this.props.selectCallback.bind(null, 'size', assistant)}
              />
-          <label htmlFor={'person-'+index}>{person}</label>
+          <label htmlFor={'person-'+index}>{assistant.first_name}</label>
         </li>
       )
     }.bind(this));
@@ -77,9 +83,9 @@ var SizeSelector = React.createClass({
           </div>
           <div className="form-group">
             <label>use one of the bridal parties size profiles</label>
-            <div className="dress-sizes people-sizes">
+            <div className="dress-sizes assistants-sizes">
               <ul className="customization-dress-sizes-ul people">
-                {peopleSizes}
+                {assistantsSizes}
               </ul>
             </div>
           </div>

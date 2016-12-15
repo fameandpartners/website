@@ -11,7 +11,7 @@ var CustomizationSelector = React.createClass({
   render: function() {
     var options = this.props.options.map(function(option, index) {
       return (
-        <div key={index} onClick={ this.props.selectCallback.bind(null, this.props.type, option.name) } className="col-sm-6 col-md-4">
+        <div key={index} onClick={ this.props.selectCallback.bind(null, this.props.type, option) } className="col-sm-6 col-md-4">
           <div className="customization-options-item">
             <img src={option.image} />
             { option.name }

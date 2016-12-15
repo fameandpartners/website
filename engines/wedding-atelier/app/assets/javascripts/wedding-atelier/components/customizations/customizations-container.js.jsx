@@ -4,6 +4,7 @@ var CustomizationsContainer = React.createClass({
     customizations: React.PropTypes.object,
     currentCustomization: React.PropTypes.string,
     changeCurrentCustomizationCallback: React.PropTypes.func,
+    assistants: React.PropTypes.array,
     selectCallback: React.PropTypes.func,
     type: React.PropTypes.string,
     goToSlideCallback: React.PropTypes.func
@@ -76,8 +77,9 @@ var CustomizationsContainer = React.createClass({
             description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
           <SizeSelector
             sizes={this.props.customizations.sizes}
-            people={this.props.customizations.people}
+            assistants={this.props.customizations.assistants}
             heights={this.props.customizations.heights}
+            siteVersion={this.props.customizations.site_version}
             selectCallback={this.props.selectCallback}
             ref="size"/>
         </div>

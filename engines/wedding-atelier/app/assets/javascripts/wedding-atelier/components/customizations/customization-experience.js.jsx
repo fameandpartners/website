@@ -1,6 +1,7 @@
 var CustomizationExperience = React.createClass({
   propTypes: {
-    dressesUrl: React.PropTypes.string
+    customizationsUrl: React.PropTypes.string,
+    siteVersion: React.PropTypes.string
   },
 
   getInitialState: function() {
@@ -8,14 +9,14 @@ var CustomizationExperience = React.createClass({
       currentCustomization: null,
       customizations: {
         silhouettes: [],
-        fabrics: [1,2],
-        colours: [1,2,3,4,5],
-        lengths: [1,2,3,4,5],
-        styles: [1,2,3,4,5],
-        fits: [1,2,3,4,5],
-        sizes: [1,2,3,4,5,6,7,8,9,10,11,12,13,15,16],
-        people: ['Foo', 'Bar', 'Baz', 'John', 'Doe'],
-        heights: [1,2,3,4,5]
+        fabrics: [],
+        colours: [],
+        lengths: [],
+        styles: [],
+        fits: [],
+        sizes: [],
+        assistants: [],
+        heights: []
       },
       selectedOptions: {
         silhouette: null,
@@ -31,9 +32,13 @@ var CustomizationExperience = React.createClass({
   },
 
   componentDidMount: function(){
-    $.get(this.props.dressesUrl, function(data){
-      var _state = this.state;
-      _state.customizations.silhouettes = data.event_dresses;
+    $.get(this.props.customizationsUrl, function(data){
+      var _state = this.state,
+      silhouette = data.customization.silhouettes[0];
+      _state.selectedOptions.silhouette = silhouette
+      _state.customizations = data.customization;
+      _state.customizations.fits = silhouette.fits;
+      _state.customizations.styles = silhouette.styles;
       this.setState(_state);
     }.bind(this))
   },
@@ -47,6 +52,11 @@ var CustomizationExperience = React.createClass({
   selectCallback: function(customization, value){
     var _state = this.state;
     _state.selectedOptions[customization] = value;
+
+    if(customization == 'silhouette'){;
+      _state.customizations.styles = value.styles;
+      _state.customizations.fits = value.fits;
+    }
     this.setState(_state);
     var width = $(window).width();
     if(width < 768){

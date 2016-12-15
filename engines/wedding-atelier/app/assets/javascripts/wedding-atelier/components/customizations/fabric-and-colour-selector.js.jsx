@@ -6,20 +6,20 @@ var FabricAndColourSelector = React.createClass({
     type: React.PropTypes.string
   },
 
-  selectFabric: function(fabric, index) {
+  selectFabric: function(fabric) {
     this.props.selectCallback('fabric', fabric);
   },
 
   render: function() {
     var fabrics = this.props.fabrics.map(function(fabric, index) {
-      var inputId = fabric + "-" + this.props.type;
+      var inputId = fabric.id + "-" + this.props.type;
 
       return (
-        <div key={index} onClick={ this.selectFabric.bind(this, fabric, index) } className="col-sm-4">
+        <div key={index} onClick={ this.selectFabric.bind(this, fabric) } className="col-sm-4">
           <input id={inputId} type="radio" value={fabric} name="fabric" className="customization-radio"/>
           <label htmlFor={inputId} className="customization-radio-label">
             <span className="box"></span>
-            <span className="real-label"> Fabric name</span>
+            <span className="real-label">{fabric.presentation}</span>
           </label>
         </div>
       );
@@ -28,8 +28,8 @@ var FabricAndColourSelector = React.createClass({
     var colours = this.props.colours.map(function(colour, index) {
       return (
         <div key={index} onClick={ this.props.selectCallback.bind(null, 'colour', colour) } className="col-sm-4 col-md-4">
-          <div className="customization-options-item-small">{ colour }</div>
-          <p className="customization-options-item-label">{"label"}</p>
+          <div className="customization-options-item-small">{ colour.presentation }</div>
+          <p className="customization-options-item-label">{colour.presentation}</p>
         </div>
       );
     }.bind(this));
