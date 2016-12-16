@@ -1,20 +1,20 @@
 var DesktopCustomizations = React.createClass({
   propTypes: {
-    siteVersion: React.PropTypes.string,
-    currentCustomization: React.PropTypes.string,
-    selectedOptions: React.PropTypes.object,
-    customizations: React.PropTypes.object,
+    siteVersion: 						React.PropTypes.string,
+    currentCustomization: 				React.PropTypes.string,
+    selectedOptions: 					React.PropTypes.object,
+    customizations: 					React.PropTypes.object,
     changeCurrentCustomizationCallback: React.PropTypes.func,
-    selectCallback: React.PropTypes.func,
-    startOverCallback: React.PropTypes.func
+    selectCallback:                     React.PropTypes.func,
+    startOverCallback:                  React.PropTypes.func
   },
 
   render: function(){
     var defaultProps = {
-      selectedOptions: this.props.selectedOptions,
-      currentCustomization: this.props.currentCustomization,
+      selectedOptions:                    this.props.selectedOptions,
+      currentCustomization:               this.props.currentCustomization,
       changeCurrentCustomizationCallback: this.props.changeCurrentCustomizationCallback,
-      selectCallback: this.props.selectCallback
+      selectCallback:                     this.props.selectCallback
     };
 
     var customizationMenuProps = $.extend(defaultProps, {
@@ -75,6 +75,6 @@ var DesktopCustomizations = React.createClass({
         </div>
       </div>
 
-    )
+    );
   }
-})
+});
