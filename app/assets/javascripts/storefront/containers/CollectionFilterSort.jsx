@@ -75,10 +75,10 @@ class CollectionFilterSort extends Component {
     }
 
     updateExternalProductCollection(update){
-      if (typeof window === 'object' && window.ProductCollectionFilterInstance && window.ProductCollectionFilterInstance.update){
+      if (typeof window === 'object' && window.ProductCollectionFilter__Instance && window.ProductCollectionFilter__Instance.update){
         const filterSorts = assign({}, this.props, update);
         const legacyFilterSorts = this.convertPropsIntoLegacyFilter(filterSorts);
-        window.ProductCollectionFilterInstance.update(legacyFilterSorts);
+        window.ProductCollectionFilter__Instance.update(legacyFilterSorts);
       }
     }
 
