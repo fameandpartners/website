@@ -89,7 +89,7 @@ class CollectionFilterSort extends Component {
     handleShapeSelection(shapeId){
       const {selectedShapes, setSelectedShapes, $$bodyShapes,} = this.props;
       return () => {
-        if (shapeId.toLowerCase() === 'all'){ setSelectedShapes($$bodyShapes.toJS().map(s => s)); }
+        if (shapeId.toLowerCase() === 'all'){ setSelectedShapes($$bodyShapes.toJS()); }
         else { setSelectedShapes(this.addOrRemoveFrom(selectedShapes, shapeId).sort()); }
       };
     }
@@ -320,6 +320,7 @@ class CollectionFilterSort extends Component {
                             <div className="ExpandablePanel__listOptions checkboxBlackBg">
                               <label className="ExpandablePanel__option" name="bodyshape">
                                 <input
+                                  onChange={this.handleShapeSelection('all')}
                                   checked={selectedShapes.length === $$bodyShapes.toJS().length}
                                   className="js-filter-all"
                                   data-all="true"
