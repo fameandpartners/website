@@ -87,11 +87,26 @@
     height: 183px;
     margin-bottom: 30px;
     padding-top: 10px;
+    border: 1px solid transparent;
+
+    p {
+      margin: 14px auto 0;
+      text-align: center;
+      font-family: $secondary-font;
+      font-weight: bold;
+      text-transform: capitalize;
+      max-width: 60%;
+    }
 
     img {
       height: 150px;
       margin: 0 auto;
       display: block;
+    }
+
+    &:hover,
+    &.active {
+      border: 1px solid black;
     }
 
 
@@ -101,6 +116,11 @@
       cursor: pointer;
       width: 100px;
       height: 100px;
+
+      &:hover,
+      &.active {
+        border: 1px solid black;
+      }
 
       @include screen-lg {
         height: 120px;
@@ -120,17 +140,17 @@
       text-align: left;
     }
 
-    @include screen-md {
-      height: 253px;
-      img {
-        height: 190px;
-      }
+    height: 290px;
+    img {
+      height: 175px;
+      margin: 25px auto;
     }
 
-    @include screen-lg {
-      height: 283px;
+    @include screen-xl {
+      height: 340px;
       img {
-        height: 220px;
+        height: 210px;
+        margin: 30px auto;
       }
     }
   }
