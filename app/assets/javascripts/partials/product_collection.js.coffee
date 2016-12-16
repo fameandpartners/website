@@ -16,7 +16,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       page_size: 21,
       mobileBreakpoint: 768,
       showMoreSelector: "*[data-action=show-more-collection-products]"
-		}, options)
+    }, options)
 
     @details_elements = options.details_elements || {}
     @filter = $(options.controls)
@@ -112,9 +112,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       else
         row.hide()
 
-  update: () =>
+  update: (updateRequestParams) =>
     @source_path = '/dresses' if @reset_source
-    updateRequestParams = _.extend({}, @updateParams, @getSelectedValues())
+    updateRequestParams = updateRequestParams || _.extend({}, @updateParams, @getSelectedValues())
     pageUrl = @updatePageLocation(updateRequestParams)
 
     @updatePaginationLink('inactive')

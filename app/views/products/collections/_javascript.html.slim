@@ -4,7 +4,7 @@ ruby:
 javascript:
   jQuery(document).ready(function(){
     // Filters
-    new ProductCollectionFilter({
+    window.ProductCollectionFilterInstance = new ProductCollectionFilter({
       controls: '.js-products-collection-filter',
       content: '.js-products-collection-wrap',
       mobileBreakpoint: 992,

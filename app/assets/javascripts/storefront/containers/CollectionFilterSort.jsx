@@ -5,6 +5,7 @@ import autobind from 'auto-bind';
 import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions';
 import _ from 'underscore';
 import {cleanCapitalizeWord,} from '../helpers/TextFormatting';
+import assign from 'object-assign';
 
 //Libraries
 import Resize from '../decorators/Resize.jsx';
@@ -59,6 +60,28 @@ class CollectionFilterSort extends Component {
         autobind(this);
     }
 
+    convertPropsIntoLegacyFilter({selectedShapes, selectedColors, selectedPrices,}){
+
+      return {
+        bodyshape: selectedShapes,
+        color: selectedColors,
+        price_min: selectedPrices.map(p => _.findWhere(PRICES, {id: p,}).range[0] ),
+        price_max: selectedPrices.map(p => _.findWhere(PRICES, {id: p,}).range[1] ),
+      };
+      //   style: styleArray,
+      //   fast_making: fastmakingArray,
+      //   order: @productOrderInput.val() // price high price low
+      //   q:         getUrlParameter("q")?.replace(/\+/g," ")
+    }
+
+    updateExternalProductCollection(update){
+      if (typeof window === 'object' && window.ProductCollectionFilterInstance && window.ProductCollectionFilterInstance.update){
+        const filterSorts = assign({}, this.props, update);
+        const legacyFilterSorts = this.convertPropsIntoLegacyFilter(filterSorts);
+        window.ProductCollectionFilterInstance.update(legacyFilterSorts);
+      }
+    }
+
     addOrRemoveFrom(selectedOptions, changeOption){
       let newSelections = [];
       const selectedOptionIndex = selectedOptions.indexOf(changeOption);
@@ -74,24 +97,43 @@ class CollectionFilterSort extends Component {
     }
 
     handleColorSelection({id,}){
-      let newSelectedColors = [];
       const {selectedColors, setSelectedColors,} = this.props;
-      setSelectedColors(this.addOrRemoveFrom(selectedColors, id));
+      let newColors = this.addOrRemoveFrom(selectedColors, id);
+      setSelectedColors(newColors);
+
+      this.updateExternalProductCollection({selectedColors: newColors,});
     }
 
     handlePriceSelection(id){
       const {selectedPrices, setSelectedPrices,} = this.props;
+      let newPrices = [];
       return () => {
-        if (id === 'all'){ setSelectedPrices(PRICES.map(p => p.id));}
-        else { setSelectedPrices(this.addOrRemoveFrom(selectedPrices, id).sort());}
+        if (id === 'all'){
+          newPrices = PRICES.map(p => p.id);
+          setSelectedPrices(newPrices);
+        } else {
+          newPrices = this.addOrRemoveFrom(selectedPrices, id).sort();
+          setSelectedPrices(newPrices);
+        }
+
+        this.updateExternalProductCollection({selectedPrices: newPrices,});
       };
     }
 
     handleShapeSelection(shapeId){
       const {selectedShapes, setSelectedShapes, $$bodyShapes,} = this.props;
+      let newShapes = [];
       return () => {
-        if (shapeId.toLowerCase() === 'all'){ setSelectedShapes($$bodyShapes.toJS()); }
-        else { setSelectedShapes(this.addOrRemoveFrom(selectedShapes, shapeId).sort()); }
+        if (shapeId.toLowerCase() === 'all'){
+          newShapes = $$bodyShapes.toJS();
+          setSelectedShapes(newShapes);
+          this.updateExternalProductCollection({selectedShapes: [],});
+        } else {
+          newShapes = this.addOrRemoveFrom(selectedShapes, shapeId).sort();
+          setSelectedShapes(newShapes);
+          this.updateExternalProductCollection({selectedShapes: newShapes,});
+        }
+
       };
     }
 
