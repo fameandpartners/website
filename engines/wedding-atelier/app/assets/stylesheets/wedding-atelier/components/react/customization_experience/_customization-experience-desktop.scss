@@ -2,6 +2,7 @@
   height: 100%;
   .customization-panel {
     padding-top: 45px;
+    height: calc(100% - 122px);
 
     &-container {
       max-width: 90%;
@@ -114,15 +115,6 @@
       }
     }
 
-  }
-
-  .dress-preview {
-    background-image: image-url('wedding-atelier/customization.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-bottom: 61px;
-    height: 100%;
   }
 
   .footer {

@@ -35,9 +35,8 @@ var DesktopCustomizations = React.createClass({
           <CustomizationsMenu {...customizationMenuProps} />
           <CustomizationsContainer {...customizationsContainerProps} />
         </div>
-        <div className="dress-preview col-sm-6">
-          <div className="controls">
-          </div>
+        <div className="customization-panel col-sm-6">
+          <DressPreview selectedOptions={this.props.selectedOptions}/>
         </div>
         <div className="footer">
           <div className="favorites col-md-6">
