@@ -4,6 +4,7 @@ import {bindActionCreators,} from 'redux';
 import autobind from 'auto-bind';
 import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions';
 import _ from 'underscore';
+import {cleanCapitalizeWord,} from '../helpers/TextFormatting';
 
 //Libraries
 import Resize from '../decorators/Resize.jsx';
@@ -98,10 +99,15 @@ class CollectionFilterSort extends Component {
       const {name,} = color;
       return (
         <label className="ExpandablePanel__option ExpandablePanel__listColumn">
-          <input id={`color-${name}`} type="checkbox" value={name} onChange={this.handleColorSelection.bind(this, color)} />
-            <span className="ExpandablePanel__optionColorFallback"></span>
-            <span className={`ExpandablePanel__optionCheck--rounded ExpandablePanel__optionCheck--tick color-${name}`}></span>
-            <span className="ExpandablePanel__optionName">{name}</span>
+          <input
+            id={`color-${name}`}
+            type="checkbox"
+            value={name}
+            onChange={this.handleColorSelection.bind(this, color)}
+          />
+          <span className="ExpandablePanel__optionColorFallback"></span>
+          <span className={`ExpandablePanel__optionCheck--rounded ExpandablePanel__optionCheck--tick color-${name}`}></span>
+          <span className="ExpandablePanel__optionName">{name}</span>
         </label>
       );
     }
@@ -121,7 +127,7 @@ class CollectionFilterSort extends Component {
             value={shape}
           />
             <span className="checkboxBlackBg__check">
-                <span className="ExpandablePanel__optionName">{shape}</span>
+                <span className="ExpandablePanel__optionName">{cleanCapitalizeWord(shape, ['_',])}</span>
             </span>
         </label>
       );
@@ -136,9 +142,13 @@ class CollectionFilterSort extends Component {
     generateColorSummary(selectedColorIds){
       const {$$colors, $$secondaryColors,} = this.props;
       const selectedColors = selectedColorIds.map( id => _.findWhere($$colors.toJS().concat($$secondaryColors.toJS()), {id,}));
-      return selectedColors.map((color)=>{
-        return ( this.generateSelectedItemSpan(color.id, color.presentation, 'color') );
-      });
+      if (selectedColors.length === 0){
+        return ( this.generateSelectedItemSpan('all', 'All Shapes', 'shape') );
+      }
+
+      return selectedColors.map( color =>
+        this.generateSelectedItemSpan(color.id, color.presentation, 'color')
+      );
     }
 
     generatePriceSummary(selectedPriceIds){
@@ -164,9 +174,9 @@ class CollectionFilterSort extends Component {
       if (selectedShapes.length === $$bodyShapes.toJS().length || selectedShapes.length === 0){ // All
         return ( this.generateSelectedItemSpan('all', 'All Shapes', 'shape') );
       }
-      return this.props.selectedShapes.map((shape)=>{ // Individual Elems
-        return ( this.generateSelectedItemSpan(shape, shape, 'shape') );
-      });
+      return this.props.selectedShapes.map( shape => // Individual Elems
+        this.generateSelectedItemSpan(shape, cleanCapitalizeWord(shape, ['_',]), 'shape')
+      );
     }
     render() {
         const {
