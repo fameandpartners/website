@@ -71,7 +71,5 @@ FameAndPartners::Application.configure do
 
   # NOTE: Alexey Bobyrev 15/12/16
   # Better errors for running in container/VM
-  if Rails.env.development?
-    BetterErrors::Middleware.allow_ip! '0.0.0.0/0'
-  end
+  BetterErrors::Middleware.allow_ip! '0.0.0.0/0'
 end
