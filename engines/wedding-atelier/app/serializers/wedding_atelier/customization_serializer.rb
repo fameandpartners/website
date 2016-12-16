@@ -7,6 +7,5 @@ module WeddingAtelier
     has_many :lengths, serializer: WeddingAtelier::OptionValueSerializer
     has_many :assistants, serializer: WeddingAtelier::UserSerializer
     has_many :heights
-    has_one  :site_version, serializer: SiteVersionSerializer
   end
 end
