@@ -44,6 +44,7 @@ function stateToProps(state) {
           // Mutable props
           selectedColors: collectionFilterSortStore.selectedColors,
           selectedPrices: collectionFilterSortStore.selectedPrices,
+          selectedShapes: collectionFilterSortStore.selectedShapes,
         };
     }
     return {};
@@ -85,6 +86,14 @@ class CollectionFilterSort extends Component {
       };
     }
 
+    handleShapeSelection(shapeId){
+      const {selectedShapes, setSelectedShapes, $$bodyShapes,} = this.props;
+      return () => {
+        if (shapeId.toLowerCase() === 'all'){ setSelectedShapes($$bodyShapes.toJS().map(s => s)); }
+        else { setSelectedShapes(this.addOrRemoveFrom(selectedShapes, shapeId).sort()); }
+      };
+    }
+
     buildColorOption(color){
       const {name,} = color;
       return (
@@ -97,10 +106,14 @@ class CollectionFilterSort extends Component {
       );
     }
 
-    buildCheckboxOption(shape){
+    buildShapeOptions(shape, i){
+      const {selectedShapes,} = this.props;
+
       return (
         <label className="ExpandablePanel__option" name="shape">
           <input
+            onChange={this.handleShapeSelection(shape)}
+            checked={selectedShapes.indexOf(shape) > -1 || selectedShapes.indexOf('all') > -1}
             data-all="false"
             id={`shape-${shape}`}
             name={`shape-${shape}`}
@@ -129,15 +142,13 @@ class CollectionFilterSort extends Component {
     }
 
     generatePriceSummary(selectedPriceIds){
-      // All case
       const selectedPrices = selectedPriceIds.map( id => _.findWhere(PRICES, {id,}));
-      if (PRICES.length === selectedPriceIds.length){
+      if (PRICES.length === selectedPriceIds.length || selectedPriceIds.length === 0){ // All
         return ( this.generateSelectedItemSpan('all', 'All Prices', 'price') );
       }
 
-      // Individual Elems
       if (selectedPrices.length === 1 ||
-         (selectedPrices.length == 2 && selectedPrices.indexOf(PRICES[1]) < 0)){
+         (selectedPrices.length == 2 && selectedPrices.indexOf(PRICES[1]) < 0)){ // Individual Elems
         return selectedPrices.map( p => this.generateSelectedItemSpan(p.id, p.presentation));
       }
 
@@ -148,6 +159,15 @@ class CollectionFilterSort extends Component {
       );
     }
 
+    generateShapeSummary(selectedColorIds){
+      const {$$bodyShapes, selectedShapes,} = this.props;
+      if (selectedShapes.length === $$bodyShapes.toJS().length || selectedShapes.length === 0){ // All
+        return ( this.generateSelectedItemSpan('all', 'All Shapes', 'shape') );
+      }
+      return this.props.selectedShapes.map((shape)=>{ // Individual Elems
+        return ( this.generateSelectedItemSpan(shape, shape, 'shape') );
+      });
+    }
     render() {
         const {
           dispatch,
@@ -156,6 +176,7 @@ class CollectionFilterSort extends Component {
           $$secondaryColors,
           selectedColors,
           selectedPrices,
+          selectedShapes,
         } = this.props;
         return (
             <div className="CollectionFilterSort">
@@ -290,18 +311,28 @@ class CollectionFilterSort extends Component {
                               <div className="ExpandablePanel__name">
                                   Bodyshape
                               </div>
+                              <div className="ExpandablePanel__selectedOptions">
+                                  {this.generateShapeSummary(selectedShapes)}
+                              </div>
                             </div>
                           )}
                           revealedContent={(
                             <div className="ExpandablePanel__listOptions checkboxBlackBg">
-                              <label className="ExpandablePanel__option" name="bodyshape"><input checked="checked" className="js-filter-all" data-all="true" id="shapes-all" name="shapes-all" type="checkbox" value="all"/>
+                              <label className="ExpandablePanel__option" name="bodyshape">
+                                <input
+                                  checked={selectedShapes.length === $$bodyShapes.toJS().length}
+                                  className="js-filter-all"
+                                  data-all="true"
+                                  id="shapes-all"
+                                  name="shapes-all"
+                                  type="checkbox"
+                                  value="all"
+                                />
                                   <span className="checkboxBlackBg__check">
                                       <span className="ExpandablePanel__optionName">All shapes</span>
                                   </span>
                               </label>
-                              {$$bodyShapes.toJS().map((shape)=>{
-                                return this.buildCheckboxOption(shape);
-                              })}
+                              {$$bodyShapes.toJS().map(this.buildShapeOptions)}
                             </div>
                           )}
                         />
@@ -339,10 +370,12 @@ CollectionFilterSort.propTypes = {
     $$bodyShapes: PropTypes.array,
     selectedColors: PropTypes.array,
     selectedPrices: PropTypes.array,
+    selectedShapes: PropTypes.array,
 
     // Redux Actions
     setSelectedColors: PropTypes.func,
     setSelectedPrices: PropTypes.func,
+    setSelectedShapes: PropTypes.func,
 };
 
 export default Resize(breakpoints)(connect(stateToProps, dispatchToProps)(CollectionFilterSort));

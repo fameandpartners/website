@@ -8,6 +8,7 @@ export const $$initialState = Immutable.fromJS({
   $$bodyShapes: [],
   selectedColors: [],
   selectedPrices: [],
+  selectedShapes: [],
 });
 
 export default function CollectionFilterSortReducer($$state = $$initialState, action = null) {
@@ -36,6 +37,12 @@ export default function CollectionFilterSortReducer($$state = $$initialState, ac
     case actionTypes.SET_SELECTED_PRICES: {
       return $$state.merge({
         selectedPrices: action.selectedPrices,
+      });
+    }
+
+    case actionTypes.SET_SELECTED_SHAPES: {
+      return $$state.merge({
+        selectedShapes: action.selectedShapes,
       });
     }
 

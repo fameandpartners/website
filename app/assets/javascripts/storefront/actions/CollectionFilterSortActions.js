@@ -12,3 +12,9 @@ export function setSelectedPrices(selectedPrices) {
     selectedPrices,
   };
 }
+export function setSelectedShapes(selectedShapes) {
+  return {
+    type: CollectionFilterSortConstants.SET_SELECTED_SHAPES,
+    selectedShapes,
+  };
+}
