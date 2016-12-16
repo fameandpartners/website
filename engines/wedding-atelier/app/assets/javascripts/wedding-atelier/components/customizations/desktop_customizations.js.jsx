@@ -30,7 +30,7 @@ var DesktopCustomizations = React.createClass({
 
     return(
       <div className="customization-experience--desktop hidden-xs">
-        <NavBar/>
+        <CustomizationsHeader silhouette={this.props.selectedOptions.silhouette}/>
         <div className="customization-panel col-sm-6">
           <CustomizationsMenu {...customizationMenuProps} />
           <CustomizationsContainer {...customizationsContainerProps} />

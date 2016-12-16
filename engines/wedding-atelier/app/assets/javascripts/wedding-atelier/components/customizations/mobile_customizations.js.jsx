@@ -49,7 +49,7 @@ var MobileCustomizations = React.createClass({
       <div className="customization-experience--mobile hidden-sm hidden-md hidden-lg">
         <div ref="slickHook" className="js-slick-hook">
           <div className="customizations-mobile-review">
-            <NavBar/>
+            <CustomizationsHeader/>
             <h1>You are designing #{"the Wonderland"}</h1>
             <DressPreview />
             <button className="btn-transparent btn-block js-customize-dress" onClick={this.goToSlide.bind(this, 1)}>
