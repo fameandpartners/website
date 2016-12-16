@@ -53,7 +53,7 @@ var CustomizationExperience = React.createClass({
     var _state = this.state;
     _state.selectedOptions[customization] = value;
 
-    if(customization == 'silhouette'){;
+    if(customization == 'silhouette' && value){
       _state.customizations.styles = value.styles;
       _state.customizations.fits = value.fits;
     }

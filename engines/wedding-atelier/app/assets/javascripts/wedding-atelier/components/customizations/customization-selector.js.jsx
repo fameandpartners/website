@@ -14,16 +14,23 @@ var CustomizationSelector = React.createClass({
     return selectedOption && selectedOption.id == option.id;
   },
 
+  removeCustomization: function(e){
+    e.stopPropagation();
+    this.props.selectCallback(this.props.type, null);
+  },
+
   render: function() {
     var options = this.props.options.map(function(option, index) {
-      var classes = classNames({
+      var optionItemClasses = classNames({
         'customization-options-item': true,
         active: this.isOptionSelected(option)
       })
+
       var customizationClass = 'customization-options-item';
       return (
         <div key={index} onClick={ this.props.selectCallback.bind(null, this.props.type, option) } className="col-sm-6 col-md-6 col-lg-4">
-          <div className={classes}>
+          <div className={optionItemClasses}>
+            <RemoveButton clickCallback={this.removeCustomization} active={this.isOptionSelected(option)}/>
             <img src={option.image} />
             <p>{option.name}</p>
           </div>
