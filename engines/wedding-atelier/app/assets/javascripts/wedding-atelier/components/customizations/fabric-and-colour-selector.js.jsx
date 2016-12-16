@@ -2,6 +2,7 @@ var FabricAndColourSelector = React.createClass({
   propTypes: {
     colours: React.PropTypes.array,
     fabrics: React.PropTypes.array,
+    selectedOption: React.PropTypes.object,
     selectCallback: React.PropTypes.func.isRequired,
     type: React.PropTypes.string
   },
@@ -26,9 +27,13 @@ var FabricAndColourSelector = React.createClass({
     }.bind(this));
 
     var colours = this.props.colours.map(function(colour, index) {
+      var classes = classNames({
+        'customization-options-item-small': true,
+        'active': this.props.selectedOption && this.props.selectedOption.id == colour.id
+      })
       return (
         <div key={index} onClick={ this.props.selectCallback.bind(null, 'colour', colour) } className="col-sm-4 col-md-3">
-          <div className="customization-options-item-small" style={{backgroundColor: colour.value}}></div>
+          <div className={classes} style={{backgroundColor: colour.value}}></div>
           <p className="customization-options-item-label">{colour.presentation}</p>
         </div>
       );

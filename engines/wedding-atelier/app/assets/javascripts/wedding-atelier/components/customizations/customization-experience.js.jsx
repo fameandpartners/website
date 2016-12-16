@@ -88,7 +88,8 @@ var CustomizationExperience = React.createClass({
       customizations: this.state.customizations,
       changeCurrentCustomizationCallback: this.changeCurrentCustomizationCallback,
       selectCallback: this.selectCallback,
-      startOverCallback: this.startOverCallback
+      startOverCallback: this.startOverCallback,
+      siteVersion: this.props.siteVersion
     };
 
     return(

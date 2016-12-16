@@ -1,10 +1,15 @@
 var SizeSelector = React.createClass({
   propTypes: {
-    siteVersion: React.PropTypes.object,
+    siteVersion: React.PropTypes.string,
     sizes: React.PropTypes.array,
     heights: React.PropTypes.array,
     assistants: React.PropTypes.array,
-    selectCallback: React.PropTypes.func.isRequired
+    selectCallback: React.PropTypes.func.isRequired,
+    type: React.PropTypes.string
+  },
+
+  getInitialState: function(){
+    return { assistantSelected: false }
   },
 
   componentDidMount: function(){
@@ -12,12 +17,32 @@ var SizeSelector = React.createClass({
       .select2({ minimumResultsForSearch: Infinity })
       .on('change', function(e){
         this.props.selectCallback('height', e.target.value);
+        if(this.state.assistantSelected){
+          $('input[name="assistant"]').removeProp('checked');
+          // this following line is in order to reset if the menu shows the user name
+          // or a size no
+          this.props.selectCallback('size', { name: $('input[name="size"]:checked').val() });
+          this.setState({assistantSelected: false});
+        }
       }.bind(this));
   },
 
   parsePresentation: function(size){
-    var regexp = new RegExp(this.props.siteVersion.permalink + '(\\d+)', 'i')
+    var regexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i')
     return size.name.match(regexp)[1];
+  },
+
+  setSizeWithProfile: function(assistant){
+    $(this.refs.container).find('input[value="' + assistant.user_profile.dress_size + '"]').prop('checked', true)
+    $(this.refs.heightSelect).select2().val(assistant.user_profile.height).change();
+    this.props.selectCallback('size', assistant);
+    this.setState({assistantSelected: true});
+  },
+
+  changeSize: function(size){
+    $('input[name="assistant"]').removeProp('checked');
+    $(this.refs.heightSelect).select2()
+    this.props.selectCallback('size', size);
   },
 
   render: function() {
@@ -29,31 +54,34 @@ var SizeSelector = React.createClass({
     });
 
     var dressSizes = this.props.sizes.map(function(size, index){
+      var id = this.props.type + '-size-' + index;
       return (
         <li key={index}>
           <input
-            id={'size-'+index}
+            id={id}
             type="radio"
             name="size"
-            value={size.presentation}
-            onClick={this.props.selectCallback.bind(null, 'size', size)}
+            value={size.name}
+            onClick={this.changeSize.bind(null, size)}
              />
-          <label htmlFor={'size-'+index}>{this.parsePresentation(size)}</label>
+          <label htmlFor={id}>{this.parsePresentation(size)}</label>
         </li>
       )
     }.bind(this));
 
     var assistantsSizes = this.props.assistants.map(function(assistant, index){
+      var id = this.props.type + '-assistant-' + index;
+
       return (
         <li key={index}>
           <input
-            id={'person-'+index}
+            id={id}
             type="radio"
-            name="size"
+            name="assistant"
             value={assistant.user_profile.dress_size}
-            onClick={this.props.selectCallback.bind(null, 'size', assistant)}
+            onClick={this.setSizeWithProfile.bind(this, assistant)}
              />
-          <label htmlFor={'person-'+index}>{assistant.first_name}</label>
+          <label htmlFor={id}>{assistant.first_name}</label>
         </li>
       )
     }.bind(this));

@@ -1,5 +1,6 @@
 var DesktopCustomizations = React.createClass({
   propTypes: {
+    siteVersion: React.PropTypes.string,
     currentCustomization: React.PropTypes.string,
     selectedOptions: React.PropTypes.object,
     customizations: React.PropTypes.object,
@@ -18,12 +19,13 @@ var DesktopCustomizations = React.createClass({
 
     var customizationMenuProps = $.extend(defaultProps, {
       startOverCallback: this.props.startOverCallback,
-      dresses: [1,3,4,5,65,6]
+      siteVersion: this.props.siteVersion
     })
 
     var customizationsContainerProps = $.extend(defaultProps, {
       type: 'desktop',
-      customizations: this.props.customizations
+      customizations: this.props.customizations,
+      selectedOptions: this.props.selectedOptions
     })
 
     return(

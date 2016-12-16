@@ -44,6 +44,7 @@ var CustomizationsContainer = React.createClass({
             type="silhouette"
             selectCallback={this.props.selectCallback}
             options={this.props.customizations.silhouettes}
+            selectedOption={this.props.selectedOptions.silhouette}
             ref="silhouette"
             keyword="Choose"
             title="your perfect shape"
@@ -53,24 +54,31 @@ var CustomizationsContainer = React.createClass({
             fabrics={this.props.customizations.fabrics}
             type={this.props.type}
             selectCallback={this.props.selectCallback}
+            selectedOption={this.props.selectedOptions.colour}
             ref="fabric-colour"/>
           <CustomizationSelector
             type="length"
-            selectCallback={this.props.selectCallback} options={this.props.customizations.lengths}
+            selectCallback={this.props.selectCallback}
+            options={this.props.customizations.lengths}
+            selectedOption={this.props.selectedOptions.length}
             ref="length"
             keyword="Choose"
             title="your length."
             description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
           <CustomizationSelector
             type="style"
-            selectCallback={this.props.selectCallback} options={this.props.customizations.styles}
+            selectCallback={this.props.selectCallback}
+            options={this.props.customizations.styles}
+            selectedOption={this.props.selectedOptions.style}
             ref="style"
             keyword="Add"
             title="on extra trimmings."
             description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
           <CustomizationSelector
             type="fit"
-            selectCallback={this.props.selectCallback} options={this.props.customizations.fits}
+            selectCallback={this.props.selectCallback}
+            options={this.props.customizations.fits}
+            selectedOption={this.props.selectedOptions.fit}
             ref="fit"
             keyword="Finesse"
             title="the way it fits."
@@ -79,8 +87,9 @@ var CustomizationsContainer = React.createClass({
             sizes={this.props.customizations.sizes}
             assistants={this.props.customizations.assistants}
             heights={this.props.customizations.heights}
-            siteVersion={this.props.customizations.site_version}
+            siteVersion={this.props.siteVersion}
             selectCallback={this.props.selectCallback}
+            type={this.props.type}
             ref="size"/>
         </div>
       </div>
