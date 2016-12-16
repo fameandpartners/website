@@ -96,6 +96,15 @@ class CollectionFilterSort extends Component {
       return newSelections;
     }
 
+    handleClearAll(){
+      this.props.clearAllCollectionFilterSorts();
+      this.updateExternalProductCollection({
+        selectedColors: [],
+        selectedPrices: [],
+        selectedShapes: [],
+      });
+    }
+
     handleColorSelection({id,}){
       const {selectedColors, setSelectedColors,} = this.props;
       let newColors = this.addOrRemoveFrom(selectedColors, id);
@@ -222,7 +231,6 @@ class CollectionFilterSort extends Component {
     }
     render() {
         const {
-          clearAllCollectionFilterSorts,
           $$bodyShapes,
           $$colors,
           $$secondaryColors,
@@ -236,7 +244,7 @@ class CollectionFilterSort extends Component {
                     <div className="ExpandablePanel">
                         <div className="ExpandablePanel__heading">
                             <span className="ExpandablePanel__mainTitle">R.Filter & sort by</span>
-                            <a onClick={clearAllCollectionFilterSorts} className="ExpandablePanel__clearAll js-trigger-clear-all-filters" href="javascript:;">Clear All</a>
+                            <a onClick={this.handleClearAll} className="ExpandablePanel__clearAll js-trigger-clear-all-filters" href="javascript:;">Clear All</a>
                         </div>
 
                         <ExpandablePanelItem
