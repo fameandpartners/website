@@ -1,5 +1,10 @@
 import CollectionFilterSortConstants from '../constants/CollectionFilterSortConstants';
 
+export function clearAllCollectionFilterSorts() {
+  return {
+    type: CollectionFilterSortConstants.CLEAR_ALL_COLLECTION_FILTER_SORTS,
+  };
+}
 export function setSelectedColors(selectedColors) {
   return {
     type: CollectionFilterSortConstants.SET_SELECTED_COLORS,

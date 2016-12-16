@@ -143,7 +143,7 @@ class CollectionFilterSort extends Component {
       const {$$colors, $$secondaryColors,} = this.props;
       const selectedColors = selectedColorIds.map( id => _.findWhere($$colors.toJS().concat($$secondaryColors.toJS()), {id,}));
       if (selectedColors.length === 0){
-        return ( this.generateSelectedItemSpan('all', 'All Shapes', 'shape') );
+        return ( this.generateSelectedItemSpan('all', 'All Colors', 'color') );
       }
 
       return selectedColors.map( color =>
@@ -180,7 +180,7 @@ class CollectionFilterSort extends Component {
     }
     render() {
         const {
-          dispatch,
+          clearAllCollectionFilterSorts,
           $$bodyShapes,
           $$colors,
           $$secondaryColors,
@@ -194,7 +194,7 @@ class CollectionFilterSort extends Component {
                     <div className="ExpandablePanel">
                         <div className="ExpandablePanel__heading">
                             <span className="ExpandablePanel__mainTitle">R.Filter & sort by</span>
-                            <a className="ExpandablePanel__clearAll js-trigger-clear-all-filters" href="javascript:;">Clear All</a>
+                            <a onClick={clearAllCollectionFilterSorts} className="ExpandablePanel__clearAll js-trigger-clear-all-filters" href="javascript:;">Clear All</a>
                         </div>
 
                         <ExpandablePanelItem
@@ -387,6 +387,7 @@ CollectionFilterSort.propTypes = {
     setSelectedColors: PropTypes.func,
     setSelectedPrices: PropTypes.func,
     setSelectedShapes: PropTypes.func,
+    clearAllCollectionFilterSorts: PropTypes.func,
 };
 
 export default Resize(breakpoints)(connect(stateToProps, dispatchToProps)(CollectionFilterSort));

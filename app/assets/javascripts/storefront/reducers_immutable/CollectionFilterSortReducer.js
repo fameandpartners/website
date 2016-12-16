@@ -28,6 +28,14 @@ export default function CollectionFilterSortReducer($$state = $$initialState, ac
     //   ));
     // }
     //
+    case actionTypes.CLEAR_ALL_COLLECTION_FILTER_SORTS: {
+      return $$state.merge({
+        selectedColors: [],
+        selectedPrices: [],
+        selectedShapes: [],
+      });
+    }
+
     case actionTypes.SET_SELECTED_COLORS: {
       return $$state.merge({
         selectedColors: action.selectedColors,
