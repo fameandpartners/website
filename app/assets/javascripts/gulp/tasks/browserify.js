@@ -96,10 +96,11 @@ function attachBundleUpdate(bundler){
 }
 
 function createBundle() {
+  console.log('entries', entries.length);
   const bundler = browserify({
     entries: entries,
     cache: {},
-    plugin: shouldLiveReload ? [ lrload, ] : [],
+    plugin: shouldLiveReload && entries.length === 1 ? [ lrload, ] : [],
     packageCache: {},
     transform: config.settings.transform,
   });
