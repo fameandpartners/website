@@ -1,11 +1,11 @@
 var MobileCustomizations = React.createClass({
   propTypes: {
-    currentCustomization: React.PropTypes.string,
-    selectedOptions: React.PropTypes.object,
-    customizations: React.PropTypes.object,
+    currentCustomization:               React.PropTypes.string,
+    selectedOptions:                    React.PropTypes.object,
+    customizations:                     React.PropTypes.object,
     changeCurrentCustomizationCallback: React.PropTypes.func,
-    selectCallback: React.PropTypes.func,
-    startOverCallback: React.PropTypes.func
+    selectCallback:                     React.PropTypes.func,
+    startOverCallback:                  React.PropTypes.func
   },
 
   componentDidMount: function(){
@@ -21,7 +21,7 @@ var MobileCustomizations = React.createClass({
   },
 
   goToSlide: function(index){
-      $(this.refs.slickHook).slick('slickGoTo', index)
+      $(this.refs.slickHook).slick('slickGoTo', index);
   },
 
   render: function() {
@@ -35,13 +35,13 @@ var MobileCustomizations = React.createClass({
     var customizationMenuProps = $.extend(defaultProps, {
       startOverCallback: this.props.startOverCallback,
       dresses: [1,3,4,5,65,6]
-    })
+    });
 
     var customizationsContainerProps = $.extend(defaultProps, {
       type: 'mobile',
       goToSlideCallback: this.goToSlide,
       customizations: this.props.customizations
-    })
+    });
 
     return(
       <div className="customization-experience--mobile hidden-sm hidden-md hidden-lg">
@@ -80,13 +80,13 @@ var MobileCustomizations = React.createClass({
           </div>
           <div className="customization-panel customizations-mobile-menu">
             <DressPreview />
-            <CustomizationsMenu {...customizationMenuProps}/>
+            {/*<CustomizationsMenu {...customizationMenuProps}/>*/}
           </div>
           <div className="customizations-options-mobile">
-          <CustomizationsContainer {...customizationsContainerProps} />
+          {/*<CustomizationsContainer {...customizationsContainerProps} />*/}
         </div>
         </div>
       </div>
-    )
+    );
   }
-})
+});

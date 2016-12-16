@@ -1,33 +1,29 @@
 var CustomizationsContainer = React.createClass({
   propTypes: {
-    selectedOptions: React.PropTypes.object,
-    customizations: React.PropTypes.object,
-    currentCustomization: React.PropTypes.string,
+    selectedOptions:                    React.PropTypes.object,
+    customizations:                     React.PropTypes.object,
+    currentCustomization:               React.PropTypes.string,
     changeCurrentCustomizationCallback: React.PropTypes.func,
-    assistants: React.PropTypes.array,
-    selectCallback: React.PropTypes.func,
-    type: React.PropTypes.string,
-    goToSlideCallback: React.PropTypes.func
+    assistants:                         React.PropTypes.array,
+    selectCallback:                     React.PropTypes.func,
+    goToSlideCallback:                  React.PropTypes.func
   },
 
   componentDidUpdate: function(){
     var el = $(ReactDOM.findDOMNode(this.refs.customizationsContainer));
+
     el.find('.customization-selector').hide();
     $(ReactDOM.findDOMNode(this.refs[this.props.currentCustomization])).show();
-    // this.props.goToSlideCallback(2);
   },
 
   close: function(ref){
     var el = $('.js-customizations-lateral-menu');
-    if(!el.is(':visible')) {
+    el.one('transitionend', function() {
       $('.js-customizations-container').removeClass('animate');
-    } else {
-      el.one('transitionend', function() {
-        $('.js-customizations-container').removeClass('animate');
-      }.bind(this));
-      el.removeClass('animate');
-    }
+    }.bind(this));
+    el.removeClass('animate');
   },
+
   render: function(){
     var currentCustomization = this.props.currentCustomization,
         title = currentCustomization ? currentCustomization.split('-').join(' and ') : '';
@@ -51,7 +47,6 @@ var CustomizationsContainer = React.createClass({
           <FabricAndColourSelector
             colours={this.props.customizations.colours}
             fabrics={this.props.customizations.fabrics}
-            type={this.props.type}
             selectCallback={this.props.selectCallback}
             ref="fabric-colour"/>
           <CustomizationSelector
