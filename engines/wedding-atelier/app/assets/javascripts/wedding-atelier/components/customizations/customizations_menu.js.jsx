@@ -1,26 +1,22 @@
 var CustomizationsMenu = React.createClass({
 
   propTypes: {
-    siteVersion: React.PropTypes.string,
-    selectedOptions: React.PropTypes.object,
-    currentCustomization: React.PropTypes.string,
+	siteVersion: 						React.PropTypes.string,
+    selectedOptions:                    React.PropTypes.object,
+    currentCustomization:               React.PropTypes.string,
     changeCurrentCustomizationCallback: React.PropTypes.func,
-    selectCallback: React.PropTypes.func,
-    startOverCallback: React.PropTypes.func
+    selectCallback:                     React.PropTypes.func,
+    startOverCallback:                  React.PropTypes.func
   },
 
   show: function(currentCustomization) {
-    var width = $(window).width();
-    if(width > 768){
-      $('.customization-selector').addClass('slideInLeft');
-      var el = $('.js-customizations-container');
-      el.one('transitionend', function(){
-        $('.js-customizations-lateral-menu').addClass('animate');
-      });
-      el.addClass('animate');
-    }else{
-      $('.customization-selector').removeClass('slideInLeft');
-    }
+    var el = $('.js-customizations-container');
+
+    $('.customization-selector').addClass('slideInLeft');
+    el.one('transitionend', function() {
+      $('.js-customizations-lateral-menu').addClass('animate');
+    });
+    el.addClass('animate');
 
     this.props.changeCurrentCustomizationCallback(currentCustomization);
   },
@@ -40,20 +36,20 @@ var CustomizationsMenu = React.createClass({
           selectedValue = null;
 
 
-      if(selectedOptions[customizationItem]){
+      if(selectedOptions[customizationItem]) {
         selectedValue = selectedOptions[customizationItem].presentation;
       }
 
-      if(selectedOptions[customizationItem]){
+      if(selectedOptions[customizationItem]) {
         className += ' selected';
       }
 
-      if(customizationItem == 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour){
+      if(customizationItem == 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour) {
         className += ' selected';
         selectedValue = selectedOptions.fabric.presentation + ' | ' + selectedOptions.colour.presentation;
       }
 
-      if(customizationItem == 'size' && selectedOptions.size && selectedOptions.height){
+      if(customizationItem == 'size' && selectedOptions.size && selectedOptions.height) {
         className += ' selected';
         selectedValue = this.parseSizePresentation(selectedOptions.size, selectedOptions.height);
       }
