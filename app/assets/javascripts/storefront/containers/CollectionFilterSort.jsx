@@ -5,6 +5,7 @@ import autobind from 'auto-bind';
 import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions';
 import _ from 'underscore';
 import {cleanCapitalizeWord,} from '../helpers/TextFormatting';
+import {getUrlParameter,} from '../helpers/BOM';
 import assign from 'object-assign';
 
 //Libraries
@@ -61,17 +62,16 @@ class CollectionFilterSort extends Component {
     }
 
     convertPropsIntoLegacyFilter({selectedShapes, selectedColors, selectedPrices,}){
-
       return {
         bodyshape: selectedShapes,
         color: selectedColors,
         price_min: selectedPrices.map(p => _.findWhere(PRICES, {id: p,}).range[0] ),
         price_max: selectedPrices.map(p => _.findWhere(PRICES, {id: p,}).range[1] ),
+        q: getUrlParameter('q').replace(/\+/g," "),
       };
       //   style: styleArray,
       //   fast_making: fastmakingArray,
       //   order: @productOrderInput.val() // price high price low
-      //   q:         getUrlParameter("q")?.replace(/\+/g," ")
     }
 
     updateExternalProductCollection(update){
