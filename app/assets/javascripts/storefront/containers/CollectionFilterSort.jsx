@@ -34,6 +34,13 @@ const PRICES = [
   },
 ];
 
+//TODO: @elgrecode check if this is provided by backend in legacy version
+const ORDERS = {
+  newest: 'What\'s New',
+  price_high: 'Price High to Low',
+  price_low: 'Price Low to High',
+};
+
 function stateToProps(state) {
     // Which part of the Redux global state does our component want to receive as props?
     if (state.$$collectionFilterSortStore) {
@@ -45,6 +52,8 @@ function stateToProps(state) {
           $$secondaryColors: $$collectionFilterSortStore.get('$$secondaryColors'),
           $$bodyShapes: $$collectionFilterSortStore.get('$$bodyShapes'),
           // Mutable props
+          order: collectionFilterSortStore.order,
+          fastMaking: collectionFilterSortStore.fastMaking,
           selectedColors: collectionFilterSortStore.selectedColors,
           selectedPrices: collectionFilterSortStore.selectedPrices,
           selectedShapes: collectionFilterSortStore.selectedShapes,
@@ -61,17 +70,17 @@ class CollectionFilterSort extends Component {
         autobind(this);
     }
 
-    convertPropsIntoLegacyFilter({selectedShapes, selectedColors, selectedPrices,}){
+    convertPropsIntoLegacyFilter({fastMaking, order, selectedShapes, selectedColors, selectedPrices,}){
+      // NOTE: THESE NEED TO BE CONVERTED INTO PREVIOUS FILTER STRUCTURE FOR HANDOFF
       return {
         bodyshape: selectedShapes,
         color: selectedColors,
+        fast_making: fastMaking ? [true,] : undefined,
+        order,
         price_min: selectedPrices.map(p => _.findWhere(PRICES, {id: p,}).range[0] ),
         price_max: selectedPrices.map(p => _.findWhere(PRICES, {id: p,}).range[1] ),
-        q: getUrlParameter('q').replace(/\+/g," "),
+        // q: getUrlParameter('q').replace(/\+/g," "),
       };
-      //   style: styleArray,
-      //   fast_making: fastmakingArray,
-      //   order: @productOrderInput.val() // price high price low
     }
 
     updateExternalProductCollection(update){
@@ -143,6 +152,14 @@ class CollectionFilterSort extends Component {
           this.updateExternalProductCollection({selectedShapes: newShapes,});
         }
 
+      };
+    }
+
+    handleOrderBy(order){
+      const {orderProductsBy,} = this.props;
+      return () => {
+        orderProductsBy(order);
+        this.updateExternalProductCollection({order: order,});
       };
     }
 
@@ -234,6 +251,7 @@ class CollectionFilterSort extends Component {
           $$bodyShapes,
           $$colors,
           $$secondaryColors,
+          order,
           selectedColors,
           selectedPrices,
           selectedShapes,
@@ -254,22 +272,51 @@ class CollectionFilterSort extends Component {
                                 Sort
                               </div>
                               <div className="ExpandablePanel__selectedOptions">
-                                <span className="ExpandablePanel__selectedItem">What's new</span>
+                                <span className="ExpandablePanel__selectedItem">{ORDERS[order]}</span>
                               </div>
                             </div>
                           )}
                           revealedContent={(
-                            <div>
-                              <label className="ExpandablePanel__option" name="sort-price-high"><input id="sort-price-high" name="sort-price-high" type="checkbox" value="true"/>
+                            <div className="ExpandablePanel__listOptions checkboxBlackBg">
+                              <label className="ExpandablePanel__option" name="price_high">
+                                <input
+                                  onChange={this.handleOrderBy('price_high')}
+                                  id="price_high"
+                                  name="price_high"
+                                  type="checkbox"
+                                  value="true"
+                                  checked={order === 'price_high'}
+                                />
                                 <span className="checkboxBlackBg__check">
-                                  <span className="ExpandablePanel__optionName">Price High</span>
+                                  <span className="ExpandablePanel__optionName">Price high to low</span>
                                 </span>
                               </label>
-                              <label className="ExpandablePanel__option" name="sort-price-low"><input id="sort-price-low" name="sort-price-low" type="checkbox" value="true"/>
+                              <label className="ExpandablePanel__option" name="price_low">
+                                <input
+                                  onChange={this.handleOrderBy('price_low')}
+                                  id="price_low"
+                                  name="price_low"
+                                  type="checkbox"
+                                  value="true"
+                                  checked={order === 'price_low'}
+                                />
                                 <span className="checkboxBlackBg__check">
-                                  <span className="ExpandablePanel__optionName">Price Low</span>
+                                  <span className="ExpandablePanel__optionName">Price low to high</span>
                                 </span>
-                            </label>
+                              </label>
+                              <label className="ExpandablePanel__option" name="newest">
+                                <input
+                                  onChange={this.handleOrderBy('newest')}
+                                  id="newest"
+                                  name="newest"
+                                  type="checkbox"
+                                  value="true"
+                                  checked={order === 'newest'}
+                                />
+                                <span className="checkboxBlackBg__check">
+                                  <span className="ExpandablePanel__optionName">What's new</span>
+                                </span>
+                              </label>
                             </div>
                           )}
                         />
@@ -429,15 +476,19 @@ CollectionFilterSort.propTypes = {
     $$colors: PropTypes.array,
     $$secondaryColors: PropTypes.array,
     $$bodyShapes: PropTypes.array,
+    fastMaking: PropTypes.bool,
+    order: PropTypes.string,
     selectedColors: PropTypes.array,
     selectedPrices: PropTypes.array,
     selectedShapes: PropTypes.array,
 
     // Redux Actions
+    clearAllCollectionFilterSorts: PropTypes.func,
+    orderProductsBy: PropTypes.func,
+    setFastMaking: PropTypes.func,
     setSelectedColors: PropTypes.func,
     setSelectedPrices: PropTypes.func,
     setSelectedShapes: PropTypes.func,
-    clearAllCollectionFilterSorts: PropTypes.func,
 };
 
 export default Resize(breakpoints)(connect(stateToProps, dispatchToProps)(CollectionFilterSort));

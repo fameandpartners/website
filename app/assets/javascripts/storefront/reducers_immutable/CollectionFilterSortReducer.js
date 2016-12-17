@@ -6,6 +6,8 @@ export const $$initialState = Immutable.fromJS({
   $$colors: [],
   $$secondaryColors: [],
   $$bodyShapes: [],
+  fastMaking: undefined,
+  order: 'newest',
   selectedColors: [],
   selectedPrices: [],
   selectedShapes: [],
@@ -29,10 +31,25 @@ export default function CollectionFilterSortReducer($$state = $$initialState, ac
     // }
     //
     case actionTypes.CLEAR_ALL_COLLECTION_FILTER_SORTS: {
+      // TODO @elgrecode: Push these defaults to constants
       return $$state.merge({
+        fastMaking: undefined,
+        order: 'newest',
         selectedColors: [],
         selectedPrices: [],
         selectedShapes: [],
+      });
+    }
+
+    case actionTypes.ORDER_PRODUCTS_BY: {
+      return $$state.merge({
+        order: action.order,
+      });
+    }
+
+    case actionTypes.SET_FAST_MAKING: {
+      return $$state.merge({
+        fastMaking: action.fastMaking,
       });
     }
 
