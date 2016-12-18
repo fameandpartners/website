@@ -9,8 +9,7 @@ module WeddingAtelier
                   :lengths,
                   :sizes,
                   :assistants,
-                  :heights,
-                  :site_version
+                  :heights
 
     def initialize(properties = {})
       @silhouettes = properties[:silhouettes]
@@ -20,7 +19,6 @@ module WeddingAtelier
       @sizes = properties[:sizes]
       @assistants = properties[:assistants]
       @heights = properties[:heights]
-      @site_version = properties[:site_version]
     end
   end
 end

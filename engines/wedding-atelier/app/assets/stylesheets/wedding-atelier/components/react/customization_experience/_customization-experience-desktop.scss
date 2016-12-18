@@ -1,11 +1,11 @@
 .customization-experience--desktop {
   height: 100%;
-
   .customization-panel {
     padding-top: 45px;
+    height: calc(100% - 122px);
 
     &-container {
-      max-width: 575px;
+      max-width: 90%;
       margin: 0 auto;
     }
   }
@@ -15,85 +15,106 @@
     display: flex;
     margin-bottom: 25px;
 
-  }
-
-  .title-text {
-    max-width: 240px;
-    text-align: left;
-
-    h1 {
-      font-size: 2.5rem;
-    }
-  }
-
-  .start-over {
-    text-align: right;
-
-    > button {
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
-      z-index: 2;
-      margin-right: 30px;
-    }
-  }
-
-  .customization-type {
-    height: 48px;
-    margin: 25px auto;
-    cursor: pointer;
-
-    &:hover,
-    &:focus {
-      background-color: $white-three;
-    }
-  }
-
-  .customization-column {
-    display: table;
-    height: 100%;
-
-    a {
-      letter-spacing: 2px;
-      font-size: .85rem;
-      font-weight: 700;
-    }
-
-    span {
-      padding-left: 8px;
-    }
-
-    i,
-    span {
-      display: table-cell;
-      vertical-align: middle;
-    }
-
-    &:first-child {
+    .title-text {
       text-align: left;
     }
 
-    &:last-child {
-      color: $boulder-two;
-      font-size: .85rem;
+    .start-over {
       text-align: right;
+
+      > button {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        z-index: 2;
+        margin-right: 30px;
+      }
     }
 
-    &:hover,
-    &:focus,
-    &.selected {
-      background-color: $white-three;
-    }
   }
 
-  .dress-preview {
-    background-image: image-url('wedding-atelier/customization.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-bottom: 61px;
-    height: 100%;
+  .customizations {
+
+    .customization-type {
+      height: 48px;
+      margin: 25px auto;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        background-color: $white-three;
+      }
+    }
+
+    .customization-column {
+      display: table;
+      height: 100%;
+
+      a {
+        letter-spacing: 2px;
+        font-size: .85rem;
+        font-weight: 700;
+      }
+
+      span {
+        padding-left: 8px;
+      }
+
+      i,
+      span {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      &:first-child {
+        text-align: left;
+      }
+
+      &:last-child {
+        color: $boulder-two;
+        font-size: .85rem;
+        text-align: right;
+      }
+
+      &:hover,
+      &:focus,
+      &.selected {
+        background-color: $white-three;
+      }
+    }
+
+    .customization-column {
+      display: table;
+      height: 100%;
+
+      a {
+        letter-spacing: 2px;
+        font-size: .85rem;
+        font-weight: 700;
+      }
+
+      span {
+        padding-left: 8px;
+      }
+
+      i,
+      span {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      &:first-child {
+        text-align: left;
+      }
+
+      &:last-child {
+        color: $boulder-two;
+        font-size: .85rem;
+        text-align: right;
+      }
+    }
+
   }
 
   .footer {
@@ -147,6 +168,22 @@
   }
 
   @media screen and (min-width: $screen-sm-min) and (max-width: $screen-md-max) {
+
+    .footer {
+      justify-content: center;
+    }
+
+    .results {
+
+      .left-result {
+        padding-left: 0;
+      }
+
+    }
+
+  }
+
+  @media screen and (min-width: $screen-md-min) and (max-width: $screen-md-max) {
 
     .footer {
       justify-content: center;

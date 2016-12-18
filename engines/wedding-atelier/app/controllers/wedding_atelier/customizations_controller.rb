@@ -22,8 +22,7 @@ module WeddingAtelier
         lengths: @lengths,
         sizes: @sizes,
         assistants: @assistants,
-        heights: @heights,
-        site_version: current_site_version
+        heights: @heights
       })
       render json: @customization
 

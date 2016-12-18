@@ -1,8 +1,9 @@
 var CustomizationsMenu = React.createClass({
 
   propTypes: {
-    selectedOptions:                    React.PropTypes.object,
-    currentCustomization:               React.PropTypes.string,
+    siteVersion: React.PropTypes.string,
+    selectedOptions: React.PropTypes.object,
+    currentCustomization: React.PropTypes.string,
     changeCurrentCustomizationCallback: React.PropTypes.func,
     selectCallback:                     React.PropTypes.func,
     startOverCallback:                  React.PropTypes.func
@@ -20,6 +21,14 @@ var CustomizationsMenu = React.createClass({
     this.props.changeCurrentCustomizationCallback(currentCustomization);
   },
 
+  parseSizePresentation: function(userOrSize, height){
+    if(userOrSize.name){
+      var regexp = new RegExp(this.props.siteVersion + '/?(\\d+)', 'i')
+      return height + ' | ' + userOrSize.name.match(regexp)[1];
+    }else{
+      return userOrSize.first_name + "'s size profile"
+    }
+  },
 
   renderRow: function (customizationItem, index) {
       var selectedOptions = this.props.selectedOptions,
@@ -42,7 +51,7 @@ var CustomizationsMenu = React.createClass({
 
       if(customizationItem == 'size' && selectedOptions.size && selectedOptions.height) {
         className += ' selected';
-        selectedValue = selectedOptions.height.presentation + ' | ' + selectedOptions.size.presentation;
+        selectedValue = this.parseSizePresentation(selectedOptions.size, selectedOptions.height);
       }
 
       return (

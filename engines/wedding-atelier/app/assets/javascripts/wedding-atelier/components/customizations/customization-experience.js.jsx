@@ -53,7 +53,7 @@ var CustomizationExperience = React.createClass({
     var _state = this.state;
     _state.selectedOptions[customization] = value;
 
-    if(customization == 'silhouette') {
+    if(customization == 'silhouette' && value){
       _state.customizations.styles = value.styles;
       _state.customizations.fits = value.fits;
     }
@@ -83,8 +83,9 @@ var CustomizationExperience = React.createClass({
       currentCustomization:               this.state.currentCustomization,
       customizations:                     this.state.customizations,
       changeCurrentCustomizationCallback: this.changeCurrentCustomizationCallback,
-      selectCallback:                     this.selectCallback,
-      startOverCallback:                  this.startOverCallback
+      selectCallback: this.selectCallback,
+      startOverCallback: this.startOverCallback,
+      siteVersion: this.props.siteVersion
     };
 
     return (

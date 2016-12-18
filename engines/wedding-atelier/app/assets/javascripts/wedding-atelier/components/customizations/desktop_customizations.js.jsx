@@ -1,8 +1,9 @@
 var DesktopCustomizations = React.createClass({
   propTypes: {
-    currentCustomization:               React.PropTypes.string,
-    selectedOptions:                    React.PropTypes.object,
-    customizations:                     React.PropTypes.object,
+    siteVersion: React.PropTypes.string,
+    currentCustomization: React.PropTypes.string,
+    selectedOptions: React.PropTypes.object,
+    customizations: React.PropTypes.object,
     changeCurrentCustomizationCallback: React.PropTypes.func,
     selectCallback:                     React.PropTypes.func,
     startOverCallback:                  React.PropTypes.func
@@ -18,23 +19,23 @@ var DesktopCustomizations = React.createClass({
 
     var customizationMenuProps = $.extend(defaultProps, {
       startOverCallback: this.props.startOverCallback,
-      dresses: [1,3,4,5,65,6]
-    });
+      siteVersion: this.props.siteVersion
+    })
 
     var customizationsContainerProps = $.extend(defaultProps, {
-      customizations: this.props.customizations
-    });
+      customizations: this.props.customizations,
+      selectedOptions: this.props.selectedOptions
+    })
 
     return(
       <div className="customization-experience--desktop hidden-xs">
-        <NavBar/>
+        <CustomizationsHeader silhouette={this.props.selectedOptions.silhouette}/>
         <div className="customization-panel col-sm-6">
           <CustomizationsMenu {...customizationMenuProps} />
           <CustomizationsContainer {...customizationsContainerProps} />
         </div>
-        <div className="dress-preview col-sm-6">
-          <div className="controls">
-          </div>
+        <div className="customization-panel col-sm-6">
+          <DressPreview selectedOptions={this.props.selectedOptions}/>
         </div>
         <div className="footer">
           <div className="favorites col-md-6">

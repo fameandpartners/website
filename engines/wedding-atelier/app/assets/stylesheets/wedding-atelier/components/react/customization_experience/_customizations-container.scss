@@ -75,12 +75,28 @@
     }
   }
 
+  .customization-radio-label {
+    display: inline-block;
+    float: left;
+    padding: 0 15px;
+  }
+
   .customization-options-item {
     background-color: $white-three;
     cursor: pointer;
     height: 183px;
     margin-bottom: 30px;
     padding-top: 10px;
+    border: 1px solid transparent;
+
+    p {
+      margin: 14px auto 0;
+      text-align: center;
+      font-family: $secondary-font;
+      font-weight: bold;
+      text-transform: capitalize;
+      max-width: 60%;
+    }
 
     img {
       height: 150px;
@@ -88,13 +104,34 @@
       display: block;
     }
 
+    &:hover,
+    &.active {
+      border: 1px solid black;
+    }
+
 
 
     &-small {
       background-color: $white;
       cursor: pointer;
-      height: 138px;
-      width: 138px;
+      width: 100px;
+      height: 100px;
+
+      &:hover,
+      &.active {
+        border: 1px solid black;
+      }
+
+      @include screen-lg {
+        height: 120px;
+        width: 120px;
+      }
+
+      @include screen-xl {
+        height: 140px;
+        width: 140px;
+      }
+
     }
 
     &-label {
@@ -103,17 +140,17 @@
       text-align: left;
     }
 
-    @include screen-md {
-      height: 253px;
-      img {
-        height: 190px;
-      }
+    height: 290px;
+    img {
+      height: 175px;
+      margin: 25px auto;
     }
 
-    @include screen-lg {
-      height: 283px;
+    @include screen-xl {
+      height: 340px;
       img {
-        height: 220px;
+        height: 210px;
+        margin: 30px auto;
       }
     }
   }
@@ -132,6 +169,7 @@
 
     .box {
       border: 1px solid $white-two;
+      margin-right: 5px;
       display: inline-block;
       height: 20px;
       outline: 1px solid $black;
