@@ -6,7 +6,7 @@ var CustomizationsReviewMobile = React.createClass({
   render: function() {
     return (
       <div className="customizations-mobile-review">
-        <NavBar/>
+        {/* <NavBar/> */}
         <h1>You are designing {"[DRESS_NAME]"}</h1>
         <DressPreview />
         <button className="btn-transparent btn-block js-customize-dress">
