@@ -23,7 +23,6 @@ var DesktopCustomizations = React.createClass({
     })
 
     var customizationsContainerProps = $.extend(defaultProps, {
-      type: 'desktop',
       customizations: this.props.customizations,
       selectedOptions: this.props.selectedOptions
     })
