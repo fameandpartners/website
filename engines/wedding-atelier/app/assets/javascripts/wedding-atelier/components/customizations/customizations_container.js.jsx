@@ -3,6 +3,7 @@ var CustomizationsContainer = React.createClass({
     selectedOptions:                    React.PropTypes.object,
     customizations:                     React.PropTypes.object,
     currentCustomization:               React.PropTypes.string,
+    siteVersion:                        React.PropTypes.string,
     changeCurrentCustomizationCallback: React.PropTypes.func,
     assistants:                         React.PropTypes.array,
     selectCallback:                     React.PropTypes.func,
@@ -84,7 +85,6 @@ var CustomizationsContainer = React.createClass({
             heights={this.props.customizations.heights}
             siteVersion={this.props.siteVersion}
             selectCallback={this.props.selectCallback}
-            type={this.props.type}
             ref="size"/>
         </div>
       </div>

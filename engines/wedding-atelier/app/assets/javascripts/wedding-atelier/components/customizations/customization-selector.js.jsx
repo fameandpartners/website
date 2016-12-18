@@ -1,12 +1,12 @@
 var CustomizationSelector = React.createClass({
   propTypes: {
-    type: React.PropTypes.string,
-    options: React.PropTypes.array,
-    selectedOption: React.PropTypes.object,
-    keyword: React.PropTypes.string,
-    title: React.PropTypes.string,
-    description: React.PropTypes.string,
-    selectCallback: React.PropTypes.func.isRequired
+    type:             React.PropTypes.string,
+    options:          React.PropTypes.array,
+    selectedOption:   React.PropTypes.object,
+    keyword:          React.PropTypes.string,
+    title:            React.PropTypes.string,
+    description:      React.PropTypes.string,
+    selectCallback:   React.PropTypes.func.isRequired
   },
 
   isOptionSelected: function(option){
@@ -24,11 +24,11 @@ var CustomizationSelector = React.createClass({
       var optionItemClasses = classNames({
         'customization-options-item': true,
         active: this.isOptionSelected(option)
-      })
+      });
 
       var customizationClass = 'customization-options-item';
       return (
-        <div key={index} onClick={ this.props.selectCallback.bind(null, this.props.type, option) } className="col-sm-6 col-md-6 col-lg-4">
+        <div key={index} onClick={this.props.selectCallback.bind(null, this.props.type, option)} className="col-sm-6 col-md-6 col-lg-4">
           <div className={optionItemClasses}>
             <RemoveButton clickCallback={this.removeCustomization} active={this.isOptionSelected(option)}/>
             <img src={option.image} />
@@ -46,7 +46,7 @@ var CustomizationSelector = React.createClass({
             <p className="description">{this.props.description}</p>
           </div>
           <div className="customization-options-grid row">
-            { options }
+            {options}
           </div>
         </div>
       </div>

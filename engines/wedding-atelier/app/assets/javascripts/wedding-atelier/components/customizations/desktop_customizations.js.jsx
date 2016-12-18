@@ -1,15 +1,15 @@
 var DesktopCustomizations = React.createClass({
   propTypes: {
-    siteVersion: 						React.PropTypes.string,
-    currentCustomization: 				React.PropTypes.string,
-    selectedOptions: 					React.PropTypes.object,
-    customizations: 					React.PropTypes.object,
+    siteVersion:                        React.PropTypes.string,
+    currentCustomization:               React.PropTypes.string,
+    selectedOptions:                    React.PropTypes.object,
+    customizations:                     React.PropTypes.object,
     changeCurrentCustomizationCallback: React.PropTypes.func,
     selectCallback:                     React.PropTypes.func,
     startOverCallback:                  React.PropTypes.func
   },
 
-  render: function(){
+  render: function() {
     var defaultProps = {
       selectedOptions:                    this.props.selectedOptions,
       currentCustomization:               this.props.currentCustomization,
@@ -20,14 +20,14 @@ var DesktopCustomizations = React.createClass({
     var customizationMenuProps = $.extend(defaultProps, {
       startOverCallback: this.props.startOverCallback,
       siteVersion: this.props.siteVersion
-    })
+    });
 
     var customizationsContainerProps = $.extend(defaultProps, {
       customizations: this.props.customizations,
       selectedOptions: this.props.selectedOptions
-    })
+    });
 
-    return(
+    return (
       <div className="customization-experience--desktop hidden-xs">
         <CustomizationsHeader silhouette={this.props.selectedOptions.silhouette}/>
         <div className="customization-panel col-sm-6">
@@ -73,7 +73,6 @@ var DesktopCustomizations = React.createClass({
           </div>
         </div>
       </div>
-
     );
   }
 });
