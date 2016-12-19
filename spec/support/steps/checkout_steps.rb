@@ -18,7 +18,7 @@ module Acceptance
       select_country_and_state(country_name, state_name, bill_or_ship)
     end
 
-    def select_country_and_state(country_name, state_name, bill_or_ship)
+    private def select_country_and_state(country_name, state_name, bill_or_ship)
       find("#order_#{bill_or_ship}_address_attributes_country_id_chosen").click
       find('li.active-result', text: country_name).click
 
@@ -46,7 +46,7 @@ module Acceptance
       find("label[for='international_shipping_fee']").click
     end
 
-    step 'I uncheck This is also my billing address' do
+    step "I uncheck 'This is also my billing address' checkbox" do
       find("label[for='ship_to_address']").click
     end
 

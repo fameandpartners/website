@@ -55,7 +55,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | City                    | Melbourne                        |
       | Phone                   | 2255-4422                        |
       | Postcode                | 520311                           |
-    And I uncheck This is also my billing address
+    And I uncheck 'This is also my billing address' checkbox
     Then I select "Australia" country and "Queensland" state for bill
     And I fill in billing form fields with:
       | First Name              | Roger                            |
