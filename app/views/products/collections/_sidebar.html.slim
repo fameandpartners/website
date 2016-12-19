@@ -11,21 +11,3 @@ javascript:
   - prerender = true
 
   #CollectionFilterSortApp
-  .FilterSort
-
-    .ExpandablePanel
-      .ExpandablePanel__heading
-        span.ExpandablePanel__mainTitle Filter & sort by
-        a.ExpandablePanel__clearAll.js-trigger-clear-all-filters href='javascript:;' Clear All
-
-      = render partial: 'products/collections/filters/sort_by'
-
-      = render partial: 'products/collections/filters/colour'
-
-      = render partial: 'products/collections/filters/price'
-
-      = render partial: 'products/collections/filters/bodyshape'
-
-      = render partial: 'products/collections/filters/delivery_date'
-
-      = render partial: 'products/collections/filters/secondary_filters'

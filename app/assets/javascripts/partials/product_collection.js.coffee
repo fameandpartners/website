@@ -41,50 +41,8 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     $(window).on('scroll', @scrollHandler)
 
     @productOrderInput  = new inputs.ProductOrderSelector(container: @filter.find('#product_order'))
-
-    @setUpFilterElements()
     @productOrderInput.on('change', @update)
     @$banner = $(options.banner)
-
-  setUpFilterElements: =>
-    $(".search-filters :input").on 'change', (e) =>
-      @updateFilterElements(e)
-
-    $(".js-trigger-clear-all-filters").on('click', @clearAllOptions)
-
-    # toggle mobile version of filter menu
-    $('.js-trigger-toggle-filters').on 'click', (e) =>
-      $('body').toggleClass('filter-is-active no-scroll');
-      $('.js-side-panel-filters').toggleClass('is-active');
-
-    # enable content scroll for larger tablets if orientation changed
-    $(window).on 'resize', (e) =>
-      if $(window).width() >= @mobileBreakpoint && $('body').hasClass('filter-is-active')
-        $('body').removeClass('no-scroll');
-      if $(window).width() < @mobileBreakpoint && $('body').hasClass('filter-is-active')
-        $('body').addClass('no-scroll');
-
-  updateFilterElements: (e) =>
-    $this = $(e.target)
-    if $this.parents('.panel-collapse').find('input:checked').length == 0
-      $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', true)
-    else
-      if !$this.hasClass('js-filter-all')
-        $this.parents('.panel-collapse').find('.js-filter-all').removeAttr("checked")
-      else
-        $this.parents('.panel-collapse').find('input').prop('checked', false)
-        $this.parents('.panel-collapse').find('.js-filter-all').prop('checked', true)
-        $this.parents('.panel-collapse').find("select option:selected").prop("selected", false)
-        $this.parents('.panel-collapse').find("select option:first").prop("selected", "selected")
-
-    @update()
-
-  clearAllOptions: =>
-    $('#filter-accordion :input').prop('checked', false)
-    $('#filter-accordion .js-filter-all').prop('checked', true)
-    $('#filter-accordion select').val('none')
-    $('#filter-accordion .panel-collapse').collapse('hide')
-    @update()
 
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
@@ -156,12 +114,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       )
 
   # private methods
-
-  addValue: (object, propertyName, elementSelector) ->
-    propertyValue = @filter.find(elementSelector).val()
-    object[propertyName] = propertyValue unless _.isEmpty(propertyValue)
-    object
-
   getSelectedValues: () ->
     bodyshapeArray = []
     colorArray = []

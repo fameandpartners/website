@@ -3,6 +3,7 @@ import {connect,} from 'react-redux';
 import {bindActionCreators,} from 'redux';
 import autobind from 'auto-bind';
 import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions';
+import CollectionFilterSortConstants from '../constants/CollectionFilterSortConstants';
 import _ from 'underscore';
 import {cleanCapitalizeWord,} from '../helpers/TextFormatting';
 import {getUrlParameter,} from '../helpers/BOM';
@@ -70,20 +71,34 @@ class CollectionFilterSort extends Component {
         autobind(this);
     }
 
+    /**
+     * Converts props into legacy filter object
+     * @param  {Object} props
+     * @return {Object}
+     */
     convertPropsIntoLegacyFilter({fastMaking, order, selectedShapes, selectedColors, selectedPrices,}){
-      // NOTE: THESE NEED TO BE CONVERTED INTO PREVIOUS FILTER STRUCTURE FOR HANDOFF
-      // TODO: @Elgrecode put this in helper
-      return {
+      const mainFilters = {
         bodyshape: selectedShapes.length === this.props.$$bodyShapes.toJS().length ? [] : selectedShapes,
-        color: selectedColors,
+        color: selectedColors.length === this.props.$$colors.length ? [] : selectedColors,
         fast_making: fastMaking ? [true,] : undefined,
         order,
-        price_min: selectedPrices.map(p => _.findWhere(PRICES, {id: p,}).range[0] ),
-        price_max: selectedPrices.map(p => _.findWhere(PRICES, {id: p,}).range[1] ),
         q: getUrlParameter('q').replace(/\+/g," "),
       };
+
+      if (selectedPrices.length !== PRICES.length){
+        return assign({}, mainFilters, {
+          price_min: selectedPrices.map(p => _.findWhere(PRICES, {id: p,}).range[0] ),
+          price_max: selectedPrices.map(p => _.findWhere(PRICES, {id: p,}).range[1] ),
+        });
+      } else {
+        return mainFilters;
+      }
     }
 
+    /**
+     * Updates the legacy product collection
+     * @param  {Object} update - param object to be assigned to previous filters
+     */
     updateExternalProductCollection(update){
       if (typeof window === 'object' && window.ProductCollectionFilter__Instance && window.ProductCollectionFilter__Instance.update){
         const filterSorts = assign({}, this.props, update);
@@ -92,6 +107,12 @@ class CollectionFilterSort extends Component {
       }
     }
 
+    /**
+     * IMMUTABLE Removes option in array if present, adds to end if not
+     * @param  {Array} selectedOptions
+     * @param  {String} val
+     * @return {Array} new array of values
+     */
     addOrRemoveFrom(selectedOptions, changeOption){
       let newSelections = [];
       const selectedOptionIndex = selectedOptions.indexOf(changeOption);
@@ -106,15 +127,13 @@ class CollectionFilterSort extends Component {
       return newSelections;
     }
 
+    /**
+     * FILTER/SORT Action Handlers
+     **********************************
+     */
     handleClearAll(){
       this.props.clearAllCollectionFilterSorts();
-      this.updateExternalProductCollection({
-        fastMaking: false,
-        order: undefined,
-        selectedColors: [],
-        selectedPrices: [],
-        selectedShapes: [],
-      });
+      this.updateExternalProductCollection(CollectionFilterSortConstants.DEFAULTS);
     }
 
     handleColorSelection({name,}){
@@ -173,6 +192,11 @@ class CollectionFilterSort extends Component {
       };
     }
 
+
+    /**
+     * RENDERERS, NOTE: Can be moved to separate components
+     * ***************************************************
+     */
     buildColorOption(color){
       const {selectedColors,} = this.props;
       const {name,} = color;
@@ -257,6 +281,8 @@ class CollectionFilterSort extends Component {
         this.generateSelectedItemSpan(shape, cleanCapitalizeWord(shape, ['_',]), 'shape')
       );
     }
+
+
     render() {
         const {
           $$bodyShapes,
@@ -273,7 +299,7 @@ class CollectionFilterSort extends Component {
                 <div className="FilterSort">
                     <div className="ExpandablePanel">
                         <div className="ExpandablePanel__heading">
-                            <span className="ExpandablePanel__mainTitle">R.Filter & sort by</span>
+                            <span className="ExpandablePanel__mainTitle">Filter & Sort by</span>
                             <a onClick={this.handleClearAll} className="ExpandablePanel__clearAll js-trigger-clear-all-filters" href="javascript:;">Clear All</a>
                         </div>
 
