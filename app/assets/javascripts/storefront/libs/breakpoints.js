@@ -2,7 +2,7 @@ export default {
     debounce: 500,
     onResize (win) {
         const {innerWidth: winWidth,} = win;
-        let breakpoint = 'full';
+        let breakpoint = 'desktop';
         if (win.innerWidth >= 768) {
             breakpoint = 'tablet';
         }

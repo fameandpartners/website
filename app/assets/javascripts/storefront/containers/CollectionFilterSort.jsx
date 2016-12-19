@@ -289,6 +289,7 @@ class CollectionFilterSort extends Component {
           $$bodyShapes,
           $$colors,
           $$secondaryColors,
+          breakpoint,
           order,
           fastMaking,
           selectedColors,
@@ -301,7 +302,9 @@ class CollectionFilterSort extends Component {
                     <div className="ExpandablePanel">
                         <div className="ExpandablePanel__heading">
                             <span className="ExpandablePanel__mainTitle">Filter & Sort by</span>
-                            <a onClick={this.handleClearAll} className="ExpandablePanel__clearAll js-trigger-clear-all-filters" href="javascript:;">Clear All</a>
+                            <div className="ExpandablePanel__clearAllWrapper">
+                              <a onClick={this.handleClearAll} className="ExpandablePanel__clearAll js-trigger-clear-all-filters" href="javascript:;">Clear All</a>
+                            </div>
                         </div>
 
                         <ExpandablePanelItem
@@ -499,6 +502,15 @@ class CollectionFilterSort extends Component {
                         />
 
                     </div>
+
+                    {breakpoint === 'mobile' || breakpoint === 'tablet' ?
+                      <div className="ExpandablePanel__action">
+                        <div className="ExpandablePanel__filterTriggers--cancel-apply">
+                          <a className="ExpandablePanel__btn ExpandablePanel__btn--secondary">Cancel</a>
+                          <a className="ExpandablePanel__btn">Apply</a>
+                        </div>
+                      </div> : null
+                    }
                 </div>
             </div>
         );

@@ -1,16 +1,17 @@
 import React from 'react';
 import RD from 'react-dom';
-import { Provider } from 'react-redux';
+import { Provider, } from 'react-redux';
 import AppStore from '../store/AppStore';
 import CollectionFilterSort from '../containers/CollectionFilterSort.jsx';
 
 // GLOBAL INJECTION: Anti pattern to attach props via global scope, but currently necessary
 const props = (typeof window === 'object' && typeof window.CollectionFilterSortApp === 'object') ?
   window.CollectionFilterSortApp : {};
+const store = AppStore(props);
 
-const CollectionFilterSortApp = (props) => {
+const CollectionFilterSortApp = () => {
   const reactComponent = (
-    <Provider store={AppStore(props)}>
+    <Provider store={store}>
       <CollectionFilterSort />
     </Provider>
   );
@@ -18,4 +19,6 @@ const CollectionFilterSortApp = (props) => {
 };
 
 const elm = document.getElementById('CollectionFilterSortApp');
-if (elm){ RD.render(CollectionFilterSortApp(props), elm); }
+const mobileElm = document.getElementById('CollectionFilterSortMobileApp');
+if (elm){ RD.render(CollectionFilterSortApp(), elm); }
+if (mobileElm){ RD.render(CollectionFilterSortApp(), mobileElm); }
