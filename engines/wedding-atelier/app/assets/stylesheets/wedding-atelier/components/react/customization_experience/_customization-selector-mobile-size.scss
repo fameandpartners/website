@@ -1,0 +1,17 @@
+/* [Customization Selector Size Mobile]
+-------------------------------------------------------*/
+.customization-selector-mobile-size {
+  @include slide-in-up();
+
+  background-color: $white-two;
+  left: 0;
+  padding: 15px;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  width: 100vw;
+}
+
+.customization-selector-mobile-size-body {
+  padding: 62px 15px 8vh;
+}
