@@ -27,5 +27,17 @@ module WeddingAtelier
 
   validates_presence_of :product
 
+    def author_name
+      user.full_name
+    end
+
+    def image
+      'profile-placeholder.jpg'
+    end
+
+    def price
+      Money.new(20000, 'USD')
+      #WeddingAtelier::Services::Pricing.new(self).calculate_price
+    end
   end
 end

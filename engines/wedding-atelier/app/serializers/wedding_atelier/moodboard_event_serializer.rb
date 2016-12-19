@@ -1,5 +1,9 @@
 module WeddingAtelier
   class MoodboardEventSerializer < ActiveModel::Serializer
+    include Sprockets::Helpers::RailsHelper
+    include Sprockets::Helpers::IsolatedHelper
+    include ActionView::Helpers::AssetTagHelper
+
     has_many :invitations
 
     attributes :id, :date, :number_of_assistants, :name, :slug, :assistants, :dresses, :remaining_days
@@ -33,7 +37,16 @@ module WeddingAtelier
     end
 
     def dresses
-      []
+      object.dresses.collect do |dress|
+        {
+          id: dress.id,
+          title: [dress.user.first_name, " Dress"].join(' '),
+          love_count: 0, #TODO, real implementation of loving
+          image: image_path(dress.image),
+          author: dress.author_name,
+          price: dress.price.format
+        }
+      end
     end
 
     def remaining_days
