@@ -5,18 +5,31 @@ var CustomizationsReviewMobile = React.createClass({
     customizations:                     React.PropTypes.object,
     changeCurrentCustomizationCallback: React.PropTypes.func,
     selectCallback:                     React.PropTypes.func,
-    startOverCallback:                  React.PropTypes.func
+    startOverCallback:                  React.PropTypes.func,
+    siteVersion:                        React.PropTypes.string
+  },
+
+  showSizing: function () {
+    $(ReactDOM.findDOMNode(this.refs.size)).addClass('animate');
   },
 
   render: function() {
+
     return (
       <div className="customizations-review-mobile">
         <CustomizationsHeader {...this.props.selectedOptions.silhouette}/>
+        <SizeSelectorMobile
+          sizes={this.props.customizations.sizes}
+          assistants={this.props.customizations.assistants}
+          heights={this.props.customizations.heights}
+          siteVersion={this.props.siteVersion}
+          selectCallback={this.props.selectCallback}
+          ref="size" />
         <div className="customizations-review-mobile-container">
           <h1>You are designing the  {this.props.selectedOptions.silhouette? this.props.selectedOptions.silhouette.name : ''}</h1>
           <DressPreviewMobile />
           <button className="btn-transparent">customize dress</button>
-          <button className="btn-transparent">select size</button>
+          <button className="btn-transparent" onClick={this.showSizing}>select size</button>
           <div className="customizations-review-mobile-results">
             <p>
               <span className="view-customizations">View customizations</span>

@@ -87,4 +87,52 @@
     }
   }
 
+  .customization-selector-mobile-header {
+    height: 48px;
+  }
+
+  /* Customization Size Selector */
+  .customization-size-selector-mobile-size {
+    @include slide-in-up();
+
+    background-color: $white-two;
+    left: 0;
+    padding: 10px;
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    width: 100vw;
+  }
+
+  .customization-size-selector-mobile-size-header {
+    background-image: image-url('wedding-atelier/marbel.png');
+    display: table;
+    left: 0;
+    height: 62px;
+    padding: 0 8px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    >i,
+    >div {
+      @extend .table-cell-middle;
+      float: none;
+    }
+
+    .selector-close {
+      background: image-url('wedding-atelier/close.svg') no-repeat center;
+      background-size: 30px;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+    }
+
+    .selector-name {
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+  }
+
 }
