@@ -18,8 +18,6 @@ describe Afterpay::Presenters::Payment do
                      )
     end
 
-    let(:order) { Afterpay::Presenters::Order.new(spree_order: spree_order) }
-
     let(:address) do
       double(:address, phone: '123456',
                        firstname: 'John',
@@ -65,11 +63,10 @@ describe Afterpay::Presenters::Payment do
           merchantReference: 731}
     end
 
-    subject { described_class.new(spree_order: nil, spree_payment_method: nil, rails_request: nil) }
+    subject { described_class.new(spree_order: spree_order, spree_payment_method: nil, rails_request: nil) }
 
     it "creates order and gets token using payment_method" do
       allow(subject).to receive(:payment_method).and_return(payment_method)
-      allow(subject).to receive(:order).and_return(order)
 
       expect(subject).to receive(:confirmation_url).and_return('confirmation_url')
       expect(subject).to receive(:checkout_url).and_return('checkout_url')
