@@ -5,7 +5,7 @@ describe Afterpay::Presenters::Payment do
     let(:payment_method) { double(:payment_method) }
     let(:response) { { 'token' => 'payment_token' } }
 
-    let(:order) do
+    let(:spree_order) do
       double(:order, total: 10,
                      currency: 'USD',
                      phone: '123456',
@@ -17,6 +17,8 @@ describe Afterpay::Presenters::Payment do
                      ship_address: address
                      )
     end
+
+    let(:order) { Afterpay::Presenters::Order.new(spree_order: spree_order) }
 
     let(:address) do
       double(:address, phone: '123456',
