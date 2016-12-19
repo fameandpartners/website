@@ -5,7 +5,8 @@ var DressPreviewMobile = React.createClass({
 
   render: function() {
     return (
-      <h1>Hello</h1>
+      <div className="dress-preview-mobile">
+      </div>
     );
   }
 });
