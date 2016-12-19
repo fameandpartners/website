@@ -1,7 +1,7 @@
 .customization-experience--mobile {
 
   h1 {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
   }
 
   button {
@@ -165,23 +165,51 @@
   }
 
   .customizations-menu-mobile-list {
+    margin-top: 20px;
     overflow-x: auto;
     white-space: nowrap;
   }
 
   .customizations-menu-mobile-list-item {
     display: inline-block;
+    vertical-align: top;
 
     &:not(:last-child) {
       margin-right: 8px;
     }
   }
 
+  .customizations-menu-mobile-list-wrapper {
+    display: table;
+  }
+
   .customizations-menu-mobile-list-box {
     background-color: $wild-sand;
-    display: inline-block;
+    display: table-cell;
+    vertical-align: middle;
     height: 100px;
     width: 124px;
+
+    img {
+      height: 40px;
+      margin: 0 auto 5px;
+      width: 40px;
+    }
+
+    p {
+      font-size: .8rem;
+      letter-spacing: .4px;
+      margin: 0;
+      text-decoration: underline;
+      text-transform: uppercase;
+    }
+  }
+
+  .customizations-menu-mobile-list-label {
+    font-size: .8rem;
+    letter-spacing: 1.2px;
+    max-width: 124px;
+    white-space: normal;
   }
 
 }
