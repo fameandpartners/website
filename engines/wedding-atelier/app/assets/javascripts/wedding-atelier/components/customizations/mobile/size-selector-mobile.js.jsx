@@ -40,12 +40,19 @@ var SizeSelectorMobile = React.createClass({
     $(this.refs.heightSelect).select2().val(assistant.user_profile.height).change();
     this.props.selectCallback('size', assistant);
     this.setState({assistantSelected: true});
+    this.changeHeight();
   },
 
   changeSize: function(size) {
     $('input[name="assistant"]').removeProp('checked');
     $(this.refs.heightSelect).select2();
     this.props.selectCallback('size', size);
+    this.changeHeight();
+  },
+
+  changeHeight: function () {
+    var height = $(ReactDOM.findDOMNode(this.refs.heightSelect)).val();
+    this.props.selectCallback('height', height);
   },
 
   render: function() {
@@ -90,38 +97,44 @@ var SizeSelectorMobile = React.createClass({
     }.bind(this));
 
     return (
-      <div ref="container" className="customization-size-selector-mobile-size js-customization-size-selector-mobile-size">
-        <div className="customization-size-selector-mobile-size-header">
+      <div ref="container" className="customization-selector-mobile-size js-customization-size-selector-mobile-size">
+        <div className="customization-selector-mobile-header">
           <i className="icon icon-size"></i>
           <div className="selector-name text-left">Size</div>
           <div className="selector-close" onClick={this.close}></div>
         </div>
-        <div className="customization-title">
-          <h1><em>Tailor</em> to your body</h1>
-        </div>
-        <div className="form-group">
-          <label htmlFor="heightSelect" className="text-left">Whats your height</label>
-          <div>
-            <select id="heightSelect" ref="heightSelect" className="form-control">
-              {optionsForHeights}
-            </select>
+        <div className="customization-selector-mobile-size-body">
+          <div className="customization-title">
+            <h1><em>Tailor</em> to your body</h1>
+          </div>
+          <div className="form-group">
+            <label htmlFor="heightSelect" className="text-left">Whats your height</label>
+            <div>
+              <select id="heightSelect" ref="heightSelect" className="form-control">
+                {optionsForHeights}
+              </select>
+            </div>
+          </div>
+          <div className="form-group">
+            <label>Whats your dress size &nbsp;</label><a href="#" className="guide-link hover-link">view size guide</a>
+            <div className="dress-sizes">
+              <ul className="customization-dress-sizes-ul">
+                {dressSizes}
+              </ul>
+            </div>
+          </div>
+          <div className="form-group">
+            <label>use one of the bridal parties size profiles</label>
+            <div className="dress-sizes assistants-sizes">
+              <ul className="customization-dress-sizes-ul people">
+                {assistantsSizes}
+              </ul>
+            </div>
           </div>
         </div>
-        <div className="form-group">
-          <label>Whats your dress size &nbsp;</label><a href="#" className="guide-link hover-link">view size guide</a>
-          <div className="dress-sizes">
-            <ul className="customization-dress-sizes-ul">
-              {dressSizes}
-            </ul>
-          </div>
-        </div>
-        <div className="form-group">
-          <label>use one of the bridal parties size profiles</label>
-          <div className="dress-sizes assistants-sizes">
-            <ul className="customization-dress-sizes-ul people">
-              {assistantsSizes}
-            </ul>
-          </div>
+        <div className="customizations-selector-mobile-actions-double">
+          <button className="btn-gray">cancel</button>
+          <button className="btn-black">apply</button>
         </div>
       </div>
     );

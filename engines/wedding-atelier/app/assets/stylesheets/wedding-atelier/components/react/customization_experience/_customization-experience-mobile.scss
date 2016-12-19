@@ -75,7 +75,7 @@
 
   }
 
-  .customizations-review-mobile-actions {
+  .customizations-selector-mobile-actions-double {
     bottom: 0;
     left: 0;
     position: absolute;
@@ -87,12 +87,8 @@
     }
   }
 
-  .customization-selector-mobile-header {
-    height: 48px;
-  }
-
   /* Customization Size Selector */
-  .customization-size-selector-mobile-size {
+  .customization-selector-mobile-size {
     @include slide-in-up();
 
     background-color: $white-two;
@@ -104,7 +100,7 @@
     width: 100vw;
   }
 
-  .customization-size-selector-mobile-size-header {
+  .customization-selector-mobile-header {
     background-image: image-url('wedding-atelier/marbel.png');
     display: table;
     left: 0;
@@ -133,6 +129,10 @@
       letter-spacing: 2px;
       text-transform: uppercase;
     }
+  }
+
+  .customization-selector-mobile-size-body {
+    padding: 62px 15px 8vh;
   }
 
 }
