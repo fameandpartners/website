@@ -1,11 +1,81 @@
 var CustomizationsMenuMobile = React.createClass({
   propTypes: {
+    changeCurrentCustomizationCallback:     React.PropTypes.func,
+    currentCustomization:                   React.PropTypes.string,
+    customizations:                         React.PropTypes.object,
+    selectCallback:                         React.PropTypes.func,
+    selectedOptions:                        React.PropTypes.object,
+    siteVersion:                            React.PropTypes.string,
+    startOverCallback:                      React.PropTypes.func,
+    goToSlide:                              React.PropTypes.func
+  },
 
+  show: function (currentCustomization) {
+    console.log(currentCustomization);
+  },
+
+  parseSizePresentation: function(userOrSize, height) {
+    if(userOrSize.name) {
+      var regexp = new RegExp(this.props.siteVersion + '/?(\\d+)', 'i');
+      return height + ' | ' + userOrSize.name.match(regexp)[1];
+    } else {
+      return userOrSize.first_name + "'s size profile";
+    }
+  },
+
+  renderMenuList: function () {
+    var customizationItems = ['silhouette', 'fabric-colour', 'length', 'style', 'fit'];
+
+    var menuItems = customizationItems.map(function (customizationItem, index) {
+      var selectedOptions = this.props.selectedOptions,
+          iconUrl = "/assets/wedding-atelier/icons/" + customizationItem + ".png",
+          selectedValue = null;
+
+      if(selectedOptions[customizationItem]) {
+        selectedValue = selectedOptions[customizationItem].presentation;
+      }
+
+
+      if(customizationItem == 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour) {
+        selectedValue = selectedOptions.fabric.presentation + ' | ' + selectedOptions.colour.presentation;
+      }
+
+      if(customizationItem == 'size' && selectedOptions.size && selectedOptions.height) {
+        selectedValue = this.parseSizePresentation(selectedOptions.size, selectedOptions.height);
+      }
+
+      return (
+        <li key={index} className="customizations-menu-mobile-list-item" onClick={this.show.bind(null, customizationItem)}>
+          <div className="customizations-menu-mobile-list-box">
+            <img src={"/assets/wedding-atelier/icons/" + customizationItem + ".png"} />
+              <p>{customizationItem.split('-').join(' and ')}</p>
+          </div>
+          <p className="customizations-menu-mobile-list-label">{selectedValue}</p>
+        </li>
+      );
+    }.bind(this));
+
+    return (
+      <ul className="customizations-menu-mobile-list">
+        {menuItems}
+      </ul>
+    );
   },
 
   render: function() {
+
     return (
       <div className="customizations-menu-mobile">
+        <div className="customizations-menu-mobile-body">
+          <DressPreviewMobile />
+          <h1>
+            <em>Customize</em> it how you want
+          </h1>
+          {this.renderMenuList()}
+        </div>
+        <div className="customizations-selector-mobile-actions-single">
+          <button className="btn-black" onClick={this.props.goToSlide.bind(null, 0)}>done</button>
+        </div>
       </div>
     );
   }
