@@ -238,7 +238,7 @@ class CollectionFilterSort extends Component {
       );
     }
 
-    generateSelectedItemSpan(id, presentation, category){
+    generateSelectedItemSpan(id, presentation, category='elem'){
       return (
         <span key={`${category}-${id}`} className="ExpandablePanel__selectedItem">{presentation}</span>
       );
@@ -269,9 +269,8 @@ class CollectionFilterSort extends Component {
 
       // Combined pricing
       const combinedSelectedPrices = selectedPrices.reduce((acc, c) => {return acc.concat(c.range);}, []);
-      return selectedPrices.map( p =>
-        this.generateSelectedItemSpan('combined', `$${Math.min(...combinedSelectedPrices)} - $${Math.max(...combinedSelectedPrices)}`)
-      );
+      return this.generateSelectedItemSpan('combined', `$${Math.min(...combinedSelectedPrices)} - $${Math.max(...combinedSelectedPrices)}`);
+
     }
 
     generateShapeSummary(selectedColorIds){
