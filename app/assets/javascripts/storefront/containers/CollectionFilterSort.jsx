@@ -4,7 +4,7 @@ import {bindActionCreators,} from 'redux';
 import autobind from 'auto-bind';
 import * as CollectionFilterSortActions from '../actions/CollectionFilterSortActions';
 import CollectionFilterSortConstants from '../constants/CollectionFilterSortConstants';
-import _ from 'underscore';
+import _find from 'lodash/find';
 import {cleanCapitalizeWord,} from '../helpers/TextFormatting';
 import {getUrlParameter,} from '../helpers/BOM';
 import assign from 'object-assign';
@@ -86,9 +86,11 @@ class CollectionFilterSort extends Component {
       };
 
       if (selectedPrices.length !== PRICES.length){
+        let getPrice = (price, index) => _find(PRICES, {id: price,}).range[index];
+
         return assign({}, mainFilters, {
-          price_min: selectedPrices.map(p => _.findWhere(PRICES, {id: p,}).range[0] ),
-          price_max: selectedPrices.map(p => _.findWhere(PRICES, {id: p,}).range[1] ),
+          price_min: selectedPrices.map(p => getPrice(p, 0)),
+          price_max: selectedPrices.map(p => getPrice(p, 1)),
         });
       } else {
         return mainFilters;
@@ -244,7 +246,7 @@ class CollectionFilterSort extends Component {
 
     generateColorSummary(selectedColorNames){
       const {$$colors, $$secondaryColors,} = this.props;
-      const selectedColors = selectedColorNames.map( name => _.findWhere($$colors.toJS().concat($$secondaryColors.toJS()), {name,}));
+      const selectedColors = selectedColorNames.map( name => _find($$colors.toJS().concat($$secondaryColors.toJS()), {name: name,}) );
       if (selectedColors.length === 0){
         return ( this.generateSelectedItemSpan('all', 'All Colors', 'color') );
       }
@@ -255,7 +257,7 @@ class CollectionFilterSort extends Component {
     }
 
     generatePriceSummary(selectedPriceIds){
-      const selectedPrices = selectedPriceIds.map( id => _.findWhere(PRICES, {id,}));
+      const selectedPrices = selectedPriceIds.map( id => _find(PRICES, {id: id,}) );
       if (PRICES.length === selectedPriceIds.length || selectedPriceIds.length === 0){ // All
         return ( this.generateSelectedItemSpan('all', 'All Prices', 'price') );
       }
