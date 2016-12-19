@@ -201,9 +201,9 @@ class CollectionFilterSort extends Component {
      */
     buildColorOption(color){
       const {selectedColors,} = this.props;
-      const {name,} = color;
+      const {name,id,} = color;
       return (
-        <label className="ExpandablePanel__option ExpandablePanel__listColumn">
+        <label key={`color-${id}`} className="ExpandablePanel__option ExpandablePanel__listColumn">
           <input
             id={`color-${name}`}
             type="checkbox"
@@ -221,7 +221,7 @@ class CollectionFilterSort extends Component {
     buildShapeOptions(shape, i){
       const {selectedShapes,} = this.props;
       return (
-        <label className="ExpandablePanel__option" name="shape">
+        <label key={`shape-${shape}`} className="ExpandablePanel__option" name="shape">
           <input
             onChange={this.handleShapeSelection(shape)}
             checked={selectedShapes.indexOf(shape) > -1 || selectedShapes.indexOf('all') > -1}
@@ -354,7 +354,7 @@ class CollectionFilterSort extends Component {
                                   checked={order === 'newest'}
                                 />
                                 <span className="checkboxBlackBg__check">
-                                  <span className="ExpandablePanel__optionName">What's new</span>
+                                  <span className="ExpandablePanel__optionName">{`What's new`}</span>
                                 </span>
                               </label>
                             </div>
@@ -508,10 +508,10 @@ class CollectionFilterSort extends Component {
 
 CollectionFilterSort.propTypes = {
     breakpoint: PropTypes.string,
-    dispatch: PropTypes.func.isRequired,
-    $$colors: PropTypes.array,
-    $$secondaryColors: PropTypes.array,
-    $$bodyShapes: PropTypes.array,
+    dispatch: PropTypes.func,
+    $$colors: PropTypes.object,
+    $$secondaryColors: PropTypes.object,
+    $$bodyShapes: PropTypes.object,
     fastMaking: PropTypes.bool,
     order: PropTypes.string,
     selectedColors: PropTypes.array,
