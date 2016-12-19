@@ -79,7 +79,7 @@ class CollectionFilterSort extends Component {
         order,
         price_min: selectedPrices.map(p => _.findWhere(PRICES, {id: p,}).range[0] ),
         price_max: selectedPrices.map(p => _.findWhere(PRICES, {id: p,}).range[1] ),
-        // q: getUrlParameter('q').replace(/\+/g," "),
+        q: getUrlParameter('q').replace(/\+/g," "),
       };
     }
 
