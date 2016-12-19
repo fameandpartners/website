@@ -5,7 +5,7 @@ var CustomizationsContainerMobile = React.createClass({
 
   render: function() {
     return (
-      <div className="customizations-options-mobile">
+      <div className="customizations-container-mobile">
         {/*<CustomizationsContainer {...customizationsContainerProps} />*/}
       </div>
     );

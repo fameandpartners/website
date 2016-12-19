@@ -11,7 +11,7 @@ var CustomizationsMenuMobile = React.createClass({
   },
 
   show: function (currentCustomization) {
-    console.log(currentCustomization);
+    this.props.goToSlide(2);
   },
 
   parseSizePresentation: function(userOrSize, height) {
