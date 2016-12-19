@@ -36,7 +36,7 @@ Feature: Complete Guest Checkout (Paying with Afterpay)
       | cardCVC    | 123                              |
     Then I should see my order placed, with "Connie" dress, "AU 14" size and "319.00" price
 
-  @javascript @vcr @shorter_cassette_names @selenium @afterpay
+  @pending @javascript @vcr @shorter_cassette_names @selenium @afterpay
   Scenario: Successfully Buy a Dress (Ship to Singapore)
     When I am on Connie dress page
     Then I select "Australia" site version
