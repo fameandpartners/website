@@ -1,12 +1,11 @@
 var CustomizationsReviewMobile = React.createClass({
   propTypes: {
-    currentCustomization:               React.PropTypes.string,
-    selectedOptions:                    React.PropTypes.object,
-    customizations:                     React.PropTypes.object,
-    changeCurrentCustomizationCallback: React.PropTypes.func,
-    selectCallback:                     React.PropTypes.func,
-    startOverCallback:                  React.PropTypes.func,
-    siteVersion:                        React.PropTypes.string
+    changeCurrentCustomizationCallback:     React.PropTypes.func,
+    currentCustomization:                   React.PropTypes.string,
+    customizations:                         React.PropTypes.object,
+    selectCallback:                         React.PropTypes.func,
+    selectedOptions:                        React.PropTypes.object,
+    goToSlide:                              React.PropTypes.func
   },
 
   showSizing: function () {
@@ -21,7 +20,7 @@ var CustomizationsReviewMobile = React.createClass({
         <div className="customizations-review-mobile-container">
           <h1>You are designing the  {this.props.selectedOptions.silhouette? this.props.selectedOptions.silhouette.name : ''}</h1>
           <DressPreviewMobile />
-          <button className="btn-transparent">customize dress</button>
+          <button className="btn-transparent" onClick={this.props.goToSlide.bind(null, 1)}>customize dress</button>
           <button className="btn-transparent" onClick={this.showSizing}>select size</button>
           <div className="customizations-review-mobile-results">
             <p>
