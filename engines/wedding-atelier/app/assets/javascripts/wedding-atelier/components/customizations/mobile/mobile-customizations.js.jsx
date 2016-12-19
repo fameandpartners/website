@@ -39,12 +39,16 @@ var MobileCustomizations = React.createClass({
       siteVersion:  this.props.siteVersion
     });
 
+    var customizationsMenuProps = $.extend(defaultProps, {
+      startOverCallback: this.props.startOverCallback
+    });
+
     return (
       <div className="customization-experience--mobile hidden-sm hidden-md hidden-lg">
         <div ref="slickHook" className="js-slick-hook">
           <CustomizationsReviewMobile {...customizationsReviewProps}/>
-          <CustomizationsMenuMobile {...this.props}/>
-          <CustomizationsContainerMobile {...this.props}/>
+          <CustomizationsMenuMobile {...customizationsMenuProps}/>
+          <CustomizationsContainerMobile {...defaultProps}/>
         </div>
       </div>
     );

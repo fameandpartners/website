@@ -17,7 +17,7 @@ var CustomizationsReviewMobile = React.createClass({
     return (
       <div className="customizations-review-mobile">
         <CustomizationsHeader {...this.props.selectedOptions.silhouette}/>
-        <div className="customizations-review-mobile-container">
+        <div className="customizations-review-mobile-body">
           <h1>You are designing the  {this.props.selectedOptions.silhouette? this.props.selectedOptions.silhouette.name : ''}</h1>
           <DressPreviewMobile />
           <button className="btn-transparent" onClick={this.props.goToSlide.bind(null, 1)}>customize dress</button>

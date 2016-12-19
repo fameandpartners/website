@@ -20,7 +20,7 @@
   }
 
   /* [Customization Review] */
-  .customizations-review-mobile-container {
+  .customizations-review-mobile-body {
     height: 90vh;
     overflow-y: auto;
     padding: 22px 22px 8vh;
@@ -87,6 +87,17 @@
     }
   }
 
+  .customizations-selector-mobile-actions-single {
+    bottom: 0;
+    position: absolute;
+    width: 100vw;
+
+    button {
+      margin: 0;
+      width: 100%;
+    }
+  }
+
   /* [Customization Selector Mobile]
   -------------------------------------------------------*/
 
@@ -138,6 +149,39 @@
 
   .customization-selector-mobile-size-body {
     padding: 62px 15px 8vh;
+  }
+
+  /* [Customization Menu Mobile]
+  -------------------------------------------------------*/
+  .customizations-menu-mobile {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .customizations-menu-mobile-body {
+    height: 100vh;
+    overflow-y: auto;
+    padding: 5px 22px 9vh;
+  }
+
+  .customizations-menu-mobile-list {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .customizations-menu-mobile-list-item {
+    display: inline-block;
+
+    &:not(:last-child) {
+      margin-right: 8px;
+    }
+  }
+
+  .customizations-menu-mobile-list-box {
+    background-color: $wild-sand;
+    display: inline-block;
+    height: 100px;
+    width: 124px;
   }
 
 }
