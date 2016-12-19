@@ -36,12 +36,19 @@ var SizeSelector = React.createClass({
     $(this.refs.heightSelect).select2().val(assistant.user_profile.height).change();
     this.props.selectCallback('size', assistant);
     this.setState({assistantSelected: true});
+    this.changeHeight();
   },
 
   changeSize: function(size) {
     $('input[name="assistant"]').removeProp('checked');
     $(this.refs.heightSelect).select2();
     this.props.selectCallback('size', size);
+    this.changeHeight();
+  },
+
+  changeHeight: function () {
+    var height = $(ReactDOM.findDOMNode(this.refs.heightSelect)).val();
+    this.props.selectCallback('height', height);
   },
 
   render: function() {
@@ -77,10 +84,8 @@ var SizeSelector = React.createClass({
             id={id}
             type="radio"
             name="assistant"
-            value={assistant.user_profile.dress_size}
-            onClick={this.setSizeWithProfile.bind(this, assistant)}
-             />
-          <label htmlFor={id}>{assistant.first_name}</label>
+            value={assistant.user_profile.dress_size}/>
+          <label htmlFor={id} onClick={this.setSizeWithProfile.bind(this, assistant)}>{assistant.first_name}</label>
         </li>
       );
     }.bind(this));
@@ -95,7 +100,7 @@ var SizeSelector = React.createClass({
           <div className="form-group">
             <label htmlFor="heightSelect" className="text-left">Whats your height</label>
             <div>
-              <select id="heightSelect" ref="heightSelect" className="form-control">
+              <select id="heightSelect" ref="heightSelect" className="form-control" onChange={this.changeHeight}>
                 {optionsForHeights}
               </select>
             </div>

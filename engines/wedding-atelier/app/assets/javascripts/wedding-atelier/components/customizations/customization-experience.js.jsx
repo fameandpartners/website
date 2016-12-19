@@ -57,6 +57,10 @@ var CustomizationExperience = React.createClass({
       _state.customizations.styles = value.styles;
       _state.customizations.fits = value.fits;
     }
+    if(customization == 'size' && value){
+      _state.customizations.size = value;
+      _state.customizations.height = value.fits;
+    }
     this.setState(_state);
   },
 
