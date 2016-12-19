@@ -1,22 +1,22 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component, PropTypes,} from 'react';
 
 class ExpandablePanel extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isActive: false
+            isActive: false,
         };
 
         this.openPanel = this.openPanel.bind(this);
     }
 
     openPanel() {
-        this.setState({ isActive: !this.state.isActive });
+        this.setState({ isActive: !this.state.isActive, });
     }
 
     render() {
-      const { itemGroup, revealedContent } = this.props;
-      const { isActive } = this.state;
+      const { itemGroup, revealedContent, } = this.props;
+      const { isActive, } = this.state;
       return (
           <div className={`ExpandablePanelItem ${isActive ? 'ExpandablePanelItem--is-active' : ''}`}>
               <div className="ExpandablePanelItem__item-bar" onClick={this.openPanel}>
@@ -32,7 +32,7 @@ class ExpandablePanel extends Component {
 
 ExpandablePanel.propTypes = {
     itemGroup: PropTypes.node,
-    revealedContent: PropTypes.node
+    revealedContent: PropTypes.node,
 };
 
 export default ExpandablePanel;

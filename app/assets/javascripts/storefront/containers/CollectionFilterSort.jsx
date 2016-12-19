@@ -163,6 +163,14 @@ class CollectionFilterSort extends Component {
       };
     }
 
+    handleFastMaking(){
+      const {fastMaking, orderProductsBy, setFastMaking,} = this.props;
+      return () => {
+        setFastMaking(!fastMaking);
+        this.updateExternalProductCollection({fastMaking: !fastMaking,});
+      };
+    }
+
     buildColorOption(color){
       const {name,} = color;
       return (
@@ -445,24 +453,26 @@ class CollectionFilterSort extends Component {
                           )}
                         />
 
+                        <ExpandablePanelItem
+                          itemGroup={(
+                            <div className="checkboxBlackBg">
+                              <label className="ExpandablePanel__option" name="bodyshape">
+                                <input
+                                  onChange={this.handleFastMaking()}
+                                  data-all="false"
+                                  id="fast_making"
+                                  name="fast_making"
+                                  type="checkbox"
+                                  value="true"
+                                />
+                                <span className="checkboxBlackBg__check">
+                                  <span className="ExpandablePanel__optionName">EXPRESS MAKING (6 - 9 Days)</span>
+                                </span>
+                              </label>
+                            </div>
+                          )}
+                        />
 
-                        <div className="ExpandablePanel__secondaryFiltersWrapper">
-                            <div className="ExpandablePanelItem ExpandablePanelItem--secondary">
-                                <div className="ExpandablePanel__name">
-                                    Secondary Filter 1
-                                </div>
-                            </div>
-                            <div className="ExpandablePanelItem ExpandablePanelItem--secondary">
-                                <div className="ExpandablePanel__name">
-                                    Secondary Filter 2
-                                </div>
-                            </div>
-                            <div className="ExpandablePanelItem ExpandablePanelItem--secondary">
-                                <div className="ExpandablePanel__name">
-                                    Secondary Filter 3
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -492,3 +502,21 @@ CollectionFilterSort.propTypes = {
 };
 
 export default Resize(breakpoints)(connect(stateToProps, dispatchToProps)(CollectionFilterSort));
+
+//<div className="ExpandablePanel__secondaryFiltersWrapper">
+//     <div className="ExpandablePanelItem ExpandablePanelItem--secondary">
+//         <div className="ExpandablePanel__name">
+//             Secondary Filter 1
+//         </div>
+//     </div>
+//     <div className="ExpandablePanelItem ExpandablePanelItem--secondary">
+//         <div className="ExpandablePanel__name">
+//             Secondary Filter 2
+//         </div>
+//     </div>
+//     <div className="ExpandablePanelItem ExpandablePanelItem--secondary">
+//         <div className="ExpandablePanel__name">
+//             Secondary Filter 3
+//         </div>
+//     </div>
+// </div>
