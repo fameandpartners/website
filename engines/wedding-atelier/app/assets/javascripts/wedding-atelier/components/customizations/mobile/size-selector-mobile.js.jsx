@@ -8,7 +8,11 @@ var SizeSelectorMobile = React.createClass({
   },
 
   getInitialState: function() {
-    return { assistantSelected: false };
+    return {
+      assistantSelected: false,
+      height: null,
+      size: {}
+    };
   },
 
   componentWillMount: function() {
@@ -27,6 +31,12 @@ var SizeSelectorMobile = React.createClass({
   },
 
   close: function () {
+    this.setState({
+      assistantSelected: false,
+      height: null,
+      size: {}
+    });
+    $(this.refs.container).find(':checked').prop('checked', false);
     $('.js-customization-size-selector-mobile-size').removeClass('animate');
   },
 
@@ -36,23 +46,33 @@ var SizeSelectorMobile = React.createClass({
   },
 
   setSizeWithProfile: function(assistant) {
+    var _state = this.state;
+
     $(this.refs.container).find('input[value="' + assistant.user_profile.dress_size + '"]').prop('checked', true);
     $(this.refs.heightSelect).select2().val(assistant.user_profile.height).change();
-    this.props.selectCallback('size', assistant);
-    this.setState({assistantSelected: true});
+    _state.size = assistant;
+    _state.assistantSelected = true;
+    this.setState(this.state);
     this.changeHeight();
   },
 
   changeSize: function(size) {
+    var _state = this.state;
     $('input[name="assistant"]').removeProp('checked');
     $(this.refs.heightSelect).select2();
-    this.props.selectCallback('size', size);
+    _state.size = size;
+    this.setState(_state);
     this.changeHeight();
   },
 
   changeHeight: function () {
     var height = $(ReactDOM.findDOMNode(this.refs.heightSelect)).val();
-    this.props.selectCallback('height', height);
+    this.setState({height: height});
+  },
+
+  apply: function () {
+    this.props.selectCallback('height', this.state.height);
+    this.props.selectCallback('size', this.state.size);
   },
 
   render: function() {
@@ -124,7 +144,7 @@ var SizeSelectorMobile = React.createClass({
             </div>
           </div>
           <div className="form-group">
-            <label>use one of the bridal parties size profiles</label>
+            <label>use a size profile</label>
             <div className="dress-sizes assistants-sizes">
               <ul className="customization-dress-sizes-ul people">
                 {assistantsSizes}
@@ -133,8 +153,8 @@ var SizeSelectorMobile = React.createClass({
           </div>
         </div>
         <div className="customizations-selector-mobile-actions-double">
-          <button className="btn-gray">cancel</button>
-          <button className="btn-black">apply</button>
+          <button className="btn-gray" onClick={this.close}>cancel</button>
+          <button className="btn-black" onClick={this.apply}>apply</button>
         </div>
       </div>
     );
