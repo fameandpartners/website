@@ -72,8 +72,9 @@ class CollectionFilterSort extends Component {
 
     convertPropsIntoLegacyFilter({fastMaking, order, selectedShapes, selectedColors, selectedPrices,}){
       // NOTE: THESE NEED TO BE CONVERTED INTO PREVIOUS FILTER STRUCTURE FOR HANDOFF
+      // TODO: @Elgrecode put this in helper
       return {
-        bodyshape: selectedShapes,
+        bodyshape: selectedShapes.length === this.props.$$bodyShapes.toJS().length ? [] : selectedShapes,
         color: selectedColors,
         fast_making: fastMaking ? [true,] : undefined,
         order,
@@ -108,15 +109,17 @@ class CollectionFilterSort extends Component {
     handleClearAll(){
       this.props.clearAllCollectionFilterSorts();
       this.updateExternalProductCollection({
+        fastMaking: false,
+        order: undefined,
         selectedColors: [],
         selectedPrices: [],
         selectedShapes: [],
       });
     }
 
-    handleColorSelection({id,}){
+    handleColorSelection({name,}){
       const {selectedColors, setSelectedColors,} = this.props;
-      let newColors = this.addOrRemoveFrom(selectedColors, id);
+      let newColors = this.addOrRemoveFrom(selectedColors, name);
       setSelectedColors(newColors);
 
       this.updateExternalProductCollection({selectedColors: newColors,});
@@ -151,7 +154,6 @@ class CollectionFilterSort extends Component {
           setSelectedShapes(newShapes);
           this.updateExternalProductCollection({selectedShapes: newShapes,});
         }
-
       };
     }
 
@@ -172,6 +174,7 @@ class CollectionFilterSort extends Component {
     }
 
     buildColorOption(color){
+      const {selectedColors,} = this.props;
       const {name,} = color;
       return (
         <label className="ExpandablePanel__option ExpandablePanel__listColumn">
@@ -179,6 +182,7 @@ class CollectionFilterSort extends Component {
             id={`color-${name}`}
             type="checkbox"
             value={name}
+            checked={selectedColors.indexOf(name) > -1}
             onChange={this.handleColorSelection.bind(this, color)}
           />
           <span className="ExpandablePanel__optionColorFallback"></span>
@@ -190,7 +194,6 @@ class CollectionFilterSort extends Component {
 
     buildShapeOptions(shape, i){
       const {selectedShapes,} = this.props;
-
       return (
         <label className="ExpandablePanel__option" name="shape">
           <input
@@ -215,9 +218,9 @@ class CollectionFilterSort extends Component {
       );
     }
 
-    generateColorSummary(selectedColorIds){
+    generateColorSummary(selectedColorNames){
       const {$$colors, $$secondaryColors,} = this.props;
-      const selectedColors = selectedColorIds.map( id => _.findWhere($$colors.toJS().concat($$secondaryColors.toJS()), {id,}));
+      const selectedColors = selectedColorNames.map( name => _.findWhere($$colors.toJS().concat($$secondaryColors.toJS()), {name,}));
       if (selectedColors.length === 0){
         return ( this.generateSelectedItemSpan('all', 'All Colors', 'color') );
       }
@@ -260,6 +263,7 @@ class CollectionFilterSort extends Component {
           $$colors,
           $$secondaryColors,
           order,
+          fastMaking,
           selectedColors,
           selectedPrices,
           selectedShapes,
@@ -350,9 +354,6 @@ class CollectionFilterSort extends Component {
                                       })
                                     }
                                 </div>
-                                <div className="ExpandablePanel__moreOptions">
-                                  <a className="js-trigger-see-more" href="javascript:;">More Colors & Patterns</a>
-                                </div>
                               </div>
                               <div className="ExpandablePanel__moreOptionsList">
                                   <div className="ExpandablePanel__listOptions ExpandablePanel__listOptions--twoColumns ExpandablePanel__listOptions--panelColors">
@@ -437,12 +438,10 @@ class CollectionFilterSort extends Component {
                                 <input
                                   onChange={this.handleShapeSelection('all')}
                                   checked={selectedShapes.length === $$bodyShapes.toJS().length}
-                                  className="js-filter-all"
                                   data-all="true"
                                   id="shapes-all"
                                   name="shapes-all"
                                   type="checkbox"
-                                  value="all"
                                 />
                                   <span className="checkboxBlackBg__check">
                                       <span className="ExpandablePanel__optionName">All shapes</span>
@@ -458,12 +457,11 @@ class CollectionFilterSort extends Component {
                             <div className="checkboxBlackBg">
                               <label className="ExpandablePanel__option" name="bodyshape">
                                 <input
-                                  onChange={this.handleFastMaking()}
-                                  data-all="false"
                                   id="fast_making"
+                                  checked={fastMaking}
+                                  onChange={this.handleFastMaking()}
                                   name="fast_making"
                                   type="checkbox"
-                                  value="true"
                                 />
                                 <span className="checkboxBlackBg__check">
                                   <span className="ExpandablePanel__optionName">EXPRESS MAKING (6 - 9 Days)</span>
