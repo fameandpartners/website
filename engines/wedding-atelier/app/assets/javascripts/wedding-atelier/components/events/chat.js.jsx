@@ -1,12 +1,12 @@
 var Chat = React.createClass({
   getInitialState: function(){
-    return({
+    return {
       generalChannel: null,
       messages: [],
       message: '',
       typing: [],
       channelMembers: []
-    })
+    }
   },
 
   componentWillMount: function(){
@@ -92,7 +92,7 @@ var Chat = React.createClass({
   loadChannelMembers: function(channel) {
     channel.getMembers().then(function(members) {
       var chatMembers = members.map(function(member) {
-        return({id: member.sid, identity: member.identity, online: true})
+        return {id: member.sid, identity: member.identity, online: true}
       });
       var currentState = this.state;
       currentState.channelMembers = chatMembers;
