@@ -12,7 +12,7 @@ var MobileCustomizations = React.createClass({
   componentDidMount: function() {
     $(this.refs.slickHook).slick({
       arrows: false,
-      swipe: true,
+      swipe: false,
       slidesToShow: 1,
       speed: 300,
       adaptiveHeight: true,
