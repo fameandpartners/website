@@ -71,14 +71,11 @@
 
 }
 
-.categoryTextBox--blackBg {
+.categoryTextBox {
 
   .categoryTextBoxContent {
-    background: $c-neutral-black;
-    color: $c-neutral-white;
     height: 377px;
     margin-bottom: 0;
-    border: 0;
   }
 
   .panel-seo .outer-wrap {
@@ -92,10 +89,6 @@
 
   .itemTitle {
     line-height: 100%;
-  }
-
-  .ctaWrapper {
-    color: $c-neutral-white;
   }
 
   .copy-highlight {
@@ -124,6 +117,21 @@
       padding: 10px 0 5px;
     }
 
+  }
+
+}
+
+.categoryTextBox--blackBg {
+
+  .categoryTextBoxContent {
+    background: $c-neutral-black;
+    color: $c-neutral-white;
+    border: 0;
+  }
+
+  .ctaWrapper,
+  a {
+    color: $c-neutral-white;
   }
 
 }
