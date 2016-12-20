@@ -146,16 +146,19 @@ class CollectionFilterSort extends Component {
      **********************************
      */
     handleClearAll(){
-      const {clearAllCollectionFilterSorts, isDrawerLayout,} = this.props;
-      clearAllCollectionFilterSorts();
-      if (!isDrawerLayout) this.updateExternalProductCollection(CollectionFilterSortConstants.DEFAULTS);
+      const {clearAllCollectionFilterSorts, isDrawerLayout, setTemporaryFilters,} = this.props;
+      if (isDrawerLayout){ setTemporaryFilters({}) }
+      } else {
+        clearAllCollectionFilterSorts();
+        this.updateExternalProductCollection(CollectionFilterSortConstants.DEFAULTS);
+      }
     }
 
     handleColorSelection({name,}){
-      const {isDrawerLayout, filters, setSelectedColors, setTemporaryFilters,} = this.props;
+      const {isDrawerLayout, filters, setSelectedColors, setTemporaryFilters, temporaryFilters,} = this.props;
       let newColors = this.addOrRemoveFrom(filters.selectedColors, name);
       if (isDrawerLayout){
-        setTemporaryFilters(assign({}, {selectedColors: newColors,}));
+        setTemporaryFilters(assign({}, temporaryFilters, {selectedColors: newColors,}));
       } else {
         setSelectedColors(newColors);
         this.updateExternalProductCollection({selectedColors: newColors,});
@@ -175,9 +178,9 @@ class CollectionFilterSort extends Component {
     // }
 
     updatePrice(newPrices){
-      const {isDrawerLayout, setSelectedPrices, setTemporaryFilters,} = this.props;
-      if (isDrawerLayout){
-        setTemporaryFilters(assign({}, {selectedPrices: newPrices,}));
+      const {isDrawerLayout, setSelectedPrices, setTemporaryFilters, temporaryFilters,} = this.props;
+      if (isDrawerLayout){ // mobile version
+        setTemporaryFilters(assign({}, temporaryFilters, {selectedPrices: newPrices,}));
       } else {
         setSelectedPrices(newPrices);
         this.updateExternalProductCollection({selectedPrices: newPrices,});
@@ -199,11 +202,11 @@ class CollectionFilterSort extends Component {
     }
 
     handleAllSelectedShapes(){
-      const {$$bodyShapes, isDrawerLayout, setSelectedShapes, setTemporaryFilters,} = this.props;
+      const {$$bodyShapes, isDrawerLayout, setSelectedShapes, setTemporaryFilters, temporaryFilters,} = this.props;
       const newShapes = $$bodyShapes.toJS();
       return () => {
         if (isDrawerLayout){ // mobile version
-          setTemporaryFilters(assign({}, {selectedShapes: newShapes,}));
+          setTemporaryFilters(assign({}, temporaryFilters, {selectedShapes: newShapes,}));
         } else {
           setSelectedShapes(newShapes);
           this.updateExternalProductCollection({selectedShapes: [],});
@@ -212,12 +215,12 @@ class CollectionFilterSort extends Component {
     }
 
     handleShapeSelection(shapeId){
-      const {$$bodyShapes, isDrawerLayout, filters, setSelectedShapes, setTemporaryFilters,} = this.props;
+      const {$$bodyShapes, isDrawerLayout, filters, setSelectedShapes, setTemporaryFilters, temporaryFilters,} = this.props;
       let newShapes = [];
       return () => {
         const newShapes = this.addOrRemoveFrom(filters.selectedShapes, shapeId).sort();
         if (isDrawerLayout){ // mobile version
-          setTemporaryFilters(assign({}, {selectedShapes: newShapes,}));
+          setTemporaryFilters(assign({}, temporaryFilters, {selectedShapes: newShapes,}));
         } else {
           setSelectedShapes(newShapes);
           this.updateExternalProductCollection({selectedShapes: newShapes,});
@@ -226,10 +229,10 @@ class CollectionFilterSort extends Component {
     }
 
     handleOrderBy(order){
-      const {isDrawerLayout, orderProductsBy, setTemporaryFilters,} = this.props;
+      const {isDrawerLayout, orderProductsBy, setTemporaryFilters, temporaryFilters,} = this.props;
       return () => {
         if (isDrawerLayout){
-          setTemporaryFilters(assign({}, {order: order,}));
+          setTemporaryFilters(assign({}, temporaryFilters, {order: order,}));
         } else {
           orderProductsBy(order);
           this.updateExternalProductCollection({order: order,});
@@ -244,11 +247,12 @@ class CollectionFilterSort extends Component {
         orderProductsBy,
         setFastMaking,
         setTemporaryFilters,
+        temporaryFilters,
       } = this.props;
       const {fastMaking,} = filters;
       return () => {
         if (isDrawerLayout){
-          setTemporaryFilters(assign({}, {fastMaking: !fastMaking,}));
+          setTemporaryFilters(assign({}, temporaryFilters, {fastMaking: !fastMaking,}));
         } else {
           setFastMaking(!fastMaking);
           this.updateExternalProductCollection({fastMaking: !fastMaking,});
