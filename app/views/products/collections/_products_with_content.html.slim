@@ -1,22 +1,19 @@
+ruby:
+  force_show_info_box   = page.try(:get, 'show-collection-info-box') == 'true'
+  black_bg_info_box = page.try(:get, 'black-background-info-box') == 'true'
 
 - products = @collection.products.first(2)
 /! [][][content]
 = render partial: '/products/collections/product', collection: products, as: :product, locals: {col: col}
 
-// i=Change flag *IS ENABLED* & the "getitquick-info-box" variable *IS NOT* set as TRUE
+// i=Change flag *IS ENABLED* & the "show-collection-info-box" variable *IS NOT* set as TRUE
 // Result: Show i=Change box
-- if Features.active?(:i_equal_change) && page.try(:get, 'getitquick-info-box') != 'true'
+- if Features.active?(:i_equal_change) && !force_show_info_box
   = render partial: '/marketing/i_equal_change_box'
 
-// i=Change flag *IS DISABLED* & the "getitquick-info-box" variable *IS* set as TRUE
-// Result: Show black bg box (for /getitquick)
-- elsif page.try(:get, 'getitquick-info-box') == 'true'
-  = render partial: '/products/collections/info_box_black_getitquick'
-
-// All other cases...
-// Result: Show default box
+// Show default info box
 - else
-  = render partial: '/products/collections/info_box_subheading'
+  = render partial: '/products/collections/info_box_subheading', locals: {black_bg_info_box: black_bg_info_box}
 
 - @collection.products.drop(2).each_slice(col) do |products|
   /! [][][]
