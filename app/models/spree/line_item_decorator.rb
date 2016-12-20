@@ -10,6 +10,17 @@ Spree::LineItem.class_eval do
 
   has_many :making_options, foreign_key: :line_item_id, class_name: '::LineItemMakingOption', dependent: :destroy
 
+  scope :fast_making, -> do
+    joins(making_options: :product_making_option).
+      where(product_making_options: { option_type: 'fast_making' })
+  end
+
+  scope :standard_making, -> do
+    joins('LEFT JOIN line_item_making_options limo ON limo.line_item_id = spree_line_items.id').
+      joins('LEFT JOIN product_making_options pmo ON limo.making_option_id = pmo.id').
+      where('pmo.id IS NULL')
+  end
+
   after_save do
     order.clean_cache!
   end
