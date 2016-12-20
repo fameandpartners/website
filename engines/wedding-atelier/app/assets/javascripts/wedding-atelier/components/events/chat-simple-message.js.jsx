@@ -28,7 +28,7 @@ var ChatSimpleMessage = React.createClass({
     if (this.props.message.time) {
       var formattedDate = this.formatDate(this.props.message.time);
     } else {
-      formattedDate = '......'
+      formattedDate = ''
     }
 
     return(
