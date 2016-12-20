@@ -55,6 +55,12 @@
 
     .order-items {
 
+      .shipping-title {
+        font-size: 0.9em;
+        font-weight: 300;
+        color: $c-neutral-12;
+      }
+
       .item {
         display: inline-block;
         padding-bottom: 30px;
