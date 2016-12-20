@@ -1,4 +1,4 @@
-var SizeSelector = React.createClass({
+var SizeSelectorMobile = React.createClass({
   propTypes: {
     siteVersion:    React.PropTypes.string,
     sizes:          React.PropTypes.array,
@@ -8,10 +8,14 @@ var SizeSelector = React.createClass({
   },
 
   getInitialState: function() {
-    return { assistantSelected: false };
+    return {
+      assistantSelected: false,
+      height: null,
+      size: {}
+    };
   },
 
-  componentWillMount: function(){
+  componentWillMount: function() {
     $(this.refs.heightSelect)
       .select2({ minimumResultsForSearch: Infinity })
       .on('change', function(e) {
@@ -26,29 +30,49 @@ var SizeSelector = React.createClass({
       }.bind(this));
   },
 
+  close: function () {
+    this.setState({
+      assistantSelected: false,
+      height: null,
+      size: {}
+    });
+    $(this.refs.container).find(':checked').prop('checked', false);
+    $('.js-customization-size-selector-mobile-size').removeClass('animate');
+  },
+
   parsePresentation: function(size) {
     var regexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i');
     return size.name.match(regexp)[1];
   },
 
   setSizeWithProfile: function(assistant) {
+    var _state = this.state;
+
     $(this.refs.container).find('input[value="' + assistant.user_profile.dress_size + '"]').prop('checked', true);
     $(this.refs.heightSelect).select2().val(assistant.user_profile.height).change();
-    this.props.selectCallback('size', assistant);
-    this.setState({assistantSelected: true});
+    _state.size = assistant;
+    _state.assistantSelected = true;
+    this.setState(this.state);
     this.changeHeight();
   },
 
   changeSize: function(size) {
+    var _state = this.state;
     $('input[name="assistant"]').removeProp('checked');
     $(this.refs.heightSelect).select2();
-    this.props.selectCallback('size', size);
+    _state.size = size;
+    this.setState(_state);
     this.changeHeight();
   },
 
   changeHeight: function () {
     var height = $(ReactDOM.findDOMNode(this.refs.heightSelect)).val();
-    this.props.selectCallback('height', height);
+    this.setState({height: height});
+  },
+
+  apply: function () {
+    this.props.selectCallback('height', this.state.height);
+    this.props.selectCallback('size', this.state.size);
   },
 
   render: function() {
@@ -60,7 +84,7 @@ var SizeSelector = React.createClass({
     });
 
     var dressSizes = this.props.sizes.map(function(size, index){
-      var id = 'desktop' + '-size-' + index;
+      var id = 'mobile' + '-size-' + index;
       return (
         <li key={index}>
           <input
@@ -84,23 +108,29 @@ var SizeSelector = React.createClass({
             id={id}
             type="radio"
             name="assistant"
-            value={assistant.user_profile.dress_size}/>
-          <label htmlFor={id} onClick={this.setSizeWithProfile.bind(this, assistant)}>{assistant.first_name}</label>
+            value={assistant.user_profile.dress_size}
+            onClick={this.setSizeWithProfile.bind(this, assistant)}
+             />
+          <label htmlFor={id}>{assistant.first_name}</label>
         </li>
       );
     }.bind(this));
 
     return (
-      <div ref="container" className="customization-selector animated slideInLeft">
-        <div className="customization customization-size">
+      <div ref="container" className="customization-selector-mobile-size js-customization-size-selector-mobile-size">
+        <div className="customization-selector-mobile-header">
+          <i className="icon icon-size"></i>
+          <div className="selector-name text-left">Size</div>
+          <div className="selector-close" onClick={this.close}></div>
+        </div>
+        <div className="customization-selector-mobile-size-body">
           <div className="customization-title">
             <h1><em>Tailor</em> to your body</h1>
-            <p className="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
           </div>
           <div className="form-group">
             <label htmlFor="heightSelect" className="text-left">Whats your height</label>
             <div>
-              <select id="heightSelect" ref="heightSelect" className="form-control" onChange={this.changeHeight}>
+              <select id="heightSelect" ref="heightSelect" className="form-control">
                 {optionsForHeights}
               </select>
             </div>
@@ -114,13 +144,17 @@ var SizeSelector = React.createClass({
             </div>
           </div>
           <div className="form-group">
-            <label>use one of the bridal parties size profiles</label>
+            <label>use a size profile</label>
             <div className="dress-sizes assistants-sizes">
               <ul className="customization-dress-sizes-ul people">
                 {assistantsSizes}
               </ul>
             </div>
           </div>
+        </div>
+        <div className="customizations-selector-mobile-actions-double">
+          <button className="btn-gray" onClick={this.close}>cancel</button>
+          <button className="btn-black" onClick={this.apply}>apply</button>
         </div>
       </div>
     );

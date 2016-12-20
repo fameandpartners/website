@@ -1,11 +1,12 @@
 var MobileCustomizations = React.createClass({
   propTypes: {
-    currentCustomization:               React.PropTypes.string,
-    selectedOptions:                    React.PropTypes.object,
-    customizations:                     React.PropTypes.object,
-    changeCurrentCustomizationCallback: React.PropTypes.func,
-    selectCallback:                     React.PropTypes.func,
-    startOverCallback:                  React.PropTypes.func
+    changeCurrentCustomizationCallback:     React.PropTypes.func,
+    currentCustomization:                   React.PropTypes.string,
+    customizations:                         React.PropTypes.object,
+    selectCallback:                         React.PropTypes.func,
+    selectedOptions:                        React.PropTypes.object,
+    siteVersion:                            React.PropTypes.string,
+    startOverCallback:                      React.PropTypes.func
   },
 
   componentDidMount: function() {
@@ -21,34 +22,37 @@ var MobileCustomizations = React.createClass({
   },
 
   goToSlide: function(index) {
-      $(this.refs.slickHook).slick('slickGoTo', index);
+    $(this.refs.slickHook).slick('slickGoTo', index);
   },
 
   render: function() {
     var defaultProps = {
-      selectedOptions:                      this.props.selectedOptions,
-      currentCustomization:                 this.props.currentCustomization,
-      changeCurrentCustomizationCallback:   this.props.changeCurrentCustomizationCallback,
-      selectCallback:                       this.props.selectCallback
+      customizations: this.props.customizations,
+      currentCustomization: this.props.currentCustomization,
+      selectedOptions: this.props.selectedOptions,
+      changeCurrentCustomizationCallback: this.props.changeCurrentCustomizationCallback,
+      selectCallback: this.props.selectCallback,
+      goToSlide:  this.goToSlide
     };
 
-    var customizationMenuProps = $.extend(defaultProps, {
+    var customizationsReviewProps = $.extend(defaultProps, {
+      siteVersion:  this.props.siteVersion
+    });
+
+    var customizationsMenuProps = $.extend(defaultProps, {
       startOverCallback: this.props.startOverCallback
     });
 
-    var customizationsContainerProps = $.extend(defaultProps, {
-      goToSlideCallback: this.goToSlide,
-      customizations: this.props.customizations
+    var customizationsContainerMobileProps = $.extend(defaultProps, {
+      startOverCallback: this.props.startOverCallback
     });
-
-
 
     return (
       <div className="customization-experience--mobile hidden-sm hidden-md hidden-lg">
         <div ref="slickHook" className="js-slick-hook">
-          <CustomizationsReviewMobile {...this.props}/>
-          <CustomizationsMenuMobile {...this.props}/>
-          <CustomizationsContainerMobile {...this.props}/>
+          <CustomizationsReviewMobile {...customizationsReviewProps}/>
+          <CustomizationsMenuMobile {...customizationsMenuProps}/>
+          <CustomizationsContainerMobile {...customizationsContainerMobileProps}/>
         </div>
       </div>
     );

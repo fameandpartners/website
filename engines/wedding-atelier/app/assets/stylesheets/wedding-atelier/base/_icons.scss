@@ -46,4 +46,10 @@
       background-image: image-url('wedding-atelier/icons/selected-size.png');
     }
   }
+  &-customize-dress {
+    background-image: image-url('wedding-atelier/icons/size.png');
+    &.selected {
+      background-image: image-url('wedding-atelier/icons/selected-size.png');
+    }
+  }
 }
