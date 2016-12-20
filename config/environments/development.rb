@@ -68,4 +68,8 @@ FameAndPartners::Application.configure do
     Bullet.rails_logger  = true
     Bullet.add_footer    = true
   end
+
+  # NOTE: Alexey Bobyrev 15/12/16
+  # Better errors for running in container/VM
+  BetterErrors::Middleware.allow_ip! '0.0.0.0/0'
 end

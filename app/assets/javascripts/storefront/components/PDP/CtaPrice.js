@@ -68,7 +68,7 @@ class CtaPrice extends React.Component {
       + parseFloat(this.props.customize.color.price)
       + parseFloat(this.props.customize.customization.price)
       + parseFloat(this.props.customize.makingOption.price)
-      - parseFloat(this.props.discount.table.amount);
+      - parseFloat(this.props.discount);
 
     let isAfterpayEnabled = this.props.siteVersion === "Australia" && this.props.flags.afterpay;
     let isAddToBagAvailable = (
@@ -173,7 +173,7 @@ function mapStateToProps(state, ownProps) {
   return {
     customize: state.customize,
     price: state.product.price.price.amount,
-    discount: state.discount,
+    discount: state.discount.table.amount,
     siteVersion: state.siteVersion,
     product: state.product,
     flags: state.flags

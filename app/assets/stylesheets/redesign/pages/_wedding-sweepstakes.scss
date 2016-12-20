@@ -55,9 +55,18 @@
   @media (max-width: $bootstrap-md-width - 1px) {
     text-align: center;
 
-    .section-price .heading-overlay-wrapper {
-      text-align: center;
-      margin-top: -55px;
+    .section-price {
+      padding: 10px 0 60px;
+
+      .heading-overlay-wrapper {
+        text-align: center;
+        margin-top: -55px;
+      }
+
+      .videoWrapper {
+        padding-bottom: 45px;
+      }
+
     }
 
     .cta-mobile-featured {
@@ -89,6 +98,10 @@
         text-align: left;
       }
 
+    }
+
+    .section-extra-margin {
+      margin-top: 85px;
     }
 
   }
