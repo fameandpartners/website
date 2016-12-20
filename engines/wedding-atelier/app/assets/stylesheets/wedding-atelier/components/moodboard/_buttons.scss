@@ -1,0 +1,75 @@
+#events__moodboard {
+
+  .btn-send-container {
+    margin: 6px;
+
+    .btn-send-msg-to-chat {
+      width: 110px;
+      border-radius: 2px;
+      height: 100%;
+      margin-top: 0;
+    }
+  }
+
+  .btn-send-to-chat {
+    background: image-url('wedding-atelier/icons/send-to-chat.svg');
+    border: 0;
+    background-color: transparent;
+    font-weight: bold;
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-left: 27px;
+    height: 25px;
+  }
+
+  .btn-add-to-cart {
+    background-color: transparent;
+    border: 0;
+    text-decoration: underline;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .add-dress-box {
+    button {
+      border: 2px dashed $white-four;
+      height: 307px;
+      width: 242px;
+      background-image: image-url('wedding-atelier/add-dress.png');
+      background-color: #fff;
+      background-repeat: no-repeat;
+      background-position: 36px 109px;
+      text-indent: -9999px
+    }
+  }
+
+  .btn-transparent.btn-create-a-dress {
+    border: 1px solid $black;
+    font-family: NeuzeGro;
+    font-weight: 400;
+    font-size: 1.07em;
+
+    em {
+      text-transform: none;
+      text-decoration: underline;
+      font-family: FreightDispPro;
+    }
+  }
+
+  .btn-create-a-dress:hover {
+    background-color: transparent;
+  }
+
+  #wedding-details {
+    .btn-black {
+      padding: 0 35px;
+    }
+  }
+
+  #manage-bridal-party {
+    .btn-facebook-fancy {
+      display: inline-block;
+      width: 100px;
+    }
+  }
+}
