@@ -11,8 +11,6 @@ configatron.secret_token            = ENV['RAILS_SECRET_KEY_BASE']
 # assets
 configatron.asset_host     = ENV['RAILS_ASSET_HOST'] # Production and Marketing Buckets are on the same CloudFront Distribution
 
-configatron.typekit_id = ENV['TYPEKIT_ID']
-
 configatron.links do |links|
   links.twitter   = 'https://twitter.com/fameandpartners'
   links.facebook  = 'http://www.facebook.com/FameandPartners'
