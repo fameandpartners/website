@@ -5,6 +5,8 @@ Spree::Taxon.class_eval do
 
   DELIVERY_PERIODS = %w(7-10 8-12 10-14 14-28)
 
+  attr_accessible :delivery_period
+
   has_one :banner,
     dependent: :destroy,
     class_name: 'Spree::TaxonBanner',
