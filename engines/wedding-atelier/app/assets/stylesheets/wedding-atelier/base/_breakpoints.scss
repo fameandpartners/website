@@ -13,3 +13,7 @@
 @mixin screen-lg {
   @media (min-width: $screen-lg-min) { @content; }
 }
+
+@mixin screen-xl {
+  @media (min-width: $screen-xl-min) { @content; }
+}
