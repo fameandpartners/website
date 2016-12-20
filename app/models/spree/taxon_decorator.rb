@@ -3,10 +3,14 @@ require_dependency 'spree/taxonomy_decorator'
 Spree::Taxon.class_eval do
   include Concerns::Publishable
 
+  DELIVERY_PERIODS = %w(7-10 8-12 10-14 14-28)
+
   has_one :banner,
     dependent: :destroy,
     class_name: 'Spree::TaxonBanner',
     foreign_key: :spree_taxon_id
+
+  validates_inclusion_of :delivery_period, in: DELIVERY_PERIODS
 
   accepts_nested_attributes_for :banner
 

@@ -1546,7 +1546,7 @@ ActiveRecord::Schema.define(:version => 20170106163718) do
   create_table "spree_taxons", :force => true do |t|
     t.integer  "parent_id"
     t.integer  "position",          :default => 0
-    t.string   "name",                             :null => false
+    t.string   "name",                                  :null => false
     t.string   "permalink"
     t.integer  "taxonomy_id"
     t.integer  "lft"
@@ -1556,13 +1556,14 @@ ActiveRecord::Schema.define(:version => 20170106163718) do
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
     t.text     "description"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "meta_title"
     t.string   "meta_description"
     t.string   "meta_keywords"
     t.string   "title"
     t.datetime "published_at"
+    t.string   "delivery_period",   :default => "7-10"
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"
