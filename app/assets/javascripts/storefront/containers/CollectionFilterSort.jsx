@@ -53,12 +53,15 @@ function stateToProps(state, props) {
           $$secondaryColors: $$collectionFilterSortStore.get('$$secondaryColors'),
           $$bodyShapes: $$collectionFilterSortStore.get('$$bodyShapes'),
           // Mutable props
-          order: collectionFilterSortStore.order,
           isDrawerLayout: props.breakpoint === 'mobile' || props.breakpoint === 'tablet',
-          fastMaking: collectionFilterSortStore.fastMaking,
-          selectedColors: collectionFilterSortStore.selectedColors,
-          selectedPrices: collectionFilterSortStore.selectedPrices,
-          selectedShapes: collectionFilterSortStore.selectedShapes,
+          filters: assign({}, {
+            order: collectionFilterSortStore.order,
+            fastMaking: collectionFilterSortStore.fastMaking,
+            selectedColors: collectionFilterSortStore.selectedColors,
+            selectedPrices: collectionFilterSortStore.selectedPrices,
+            selectedShapes: collectionFilterSortStore.selectedShapes,
+          }, collectionFilterSortStore.temporaryFilters),
+          temporaryFilters: collectionFilterSortStore.temporaryFilters,
         };
     }
     return {};
@@ -70,6 +73,13 @@ class CollectionFilterSort extends Component {
     constructor(props) {
         super(props);
         autobind(this);
+    }
+
+    /**
+     * Helper to check if there is a LEGACY instance of product collection js.
+     */
+    hasLegacyInstance(){
+      return typeof window === 'object' && window.ProductCollectionFilter__Instance && window.ProductCollectionFilter__Instance.update;
     }
 
     /**
@@ -98,9 +108,6 @@ class CollectionFilterSort extends Component {
       }
     }
 
-    hasLegacyInstance(){
-      return typeof window === 'object' && window.ProductCollectionFilter__Instance && window.ProductCollectionFilter__Instance.update;
-    }
 
     /**
      * Updates the legacy product collection
@@ -108,7 +115,7 @@ class CollectionFilterSort extends Component {
      */
     updateExternalProductCollection(update){
       if (this.hasLegacyInstance()){
-        const filterSorts = assign({}, this.props, update);
+        const filterSorts = assign({}, this.props.filters, update);
         const legacyFilterSorts = this.convertPropsIntoLegacyFilter(filterSorts);
         window.ProductCollectionFilter__Instance.update(legacyFilterSorts);
       }
@@ -139,63 +146,113 @@ class CollectionFilterSort extends Component {
      **********************************
      */
     handleClearAll(){
-      this.props.clearAllCollectionFilterSorts();
-      this.updateExternalProductCollection(CollectionFilterSortConstants.DEFAULTS);
+      const {clearAllCollectionFilterSorts, isDrawerLayout,} = this.props;
+      clearAllCollectionFilterSorts();
+      if (!isDrawerLayout) this.updateExternalProductCollection(CollectionFilterSortConstants.DEFAULTS);
     }
 
     handleColorSelection({name,}){
-      const {isDrawerLayout, selectedColors, setSelectedColors,} = this.props;
-      let newColors = this.addOrRemoveFrom(selectedColors, name);
-      setSelectedColors(newColors);
+      const {isDrawerLayout, filters, setSelectedColors, setTemporaryFilters,} = this.props;
+      let newColors = this.addOrRemoveFrom(filters.selectedColors, name);
+      if (isDrawerLayout){
+        setTemporaryFilters(assign({}, {selectedColors: newColors,}));
+      } else {
+        setSelectedColors(newColors);
+        this.updateExternalProductCollection({selectedColors: newColors,});
+      }
+    }
 
-      if (!isDrawerLayout) this.updateExternalProductCollection({selectedColors: newColors,});
+
+    // V2
+    // updateFilterSort(newFilterSortVal, filterUpdateAction){
+    //   const {isDrawerLayout, setTemporaryFilters,} = this.props;
+    //   if (isDrawerLayout){
+    //     setTemporaryFilters(assign({}, newFilterSortVal));
+    //   } else {
+    //     filterUpdateAction(newPrices);
+    //     this.updateExternalProductCollection(newFilterSortVal);
+    //   }
+    // }
+
+    updatePrice(newPrices){
+      const {isDrawerLayout, setSelectedPrices, setTemporaryFilters,} = this.props;
+      if (isDrawerLayout){
+        setTemporaryFilters(assign({}, {selectedPrices: newPrices,}));
+      } else {
+        setSelectedPrices(newPrices);
+        this.updateExternalProductCollection({selectedPrices: newPrices,});
+      }
+    }
+
+    handleAllPriceSelection(){
+      const {isDrawerLayout, filters, setSelectedPrices,} = this.props;
+      const newPrices = PRICES.map(p => p.id);
+      this.updatePrice(newPrices);
     }
 
     handlePriceSelection(id){
-      const {isDrawerLayout, selectedPrices, setSelectedPrices,} = this.props;
-      let newPrices = [];
+      const {isDrawerLayout, filters, setSelectedPrices,} = this.props;
       return () => {
-        if (id === 'all'){
-          newPrices = PRICES.map(p => p.id);
-          setSelectedPrices(newPrices);
-        } else {
-          newPrices = this.addOrRemoveFrom(selectedPrices, id).sort();
-          setSelectedPrices(newPrices);
-        }
+        const newPrices = this.addOrRemoveFrom(filters.selectedPrices, id).sort();
+        this.updatePrice(newPrices);
+      };
+    }
 
-        if (!isDrawerLayout) this.updateExternalProductCollection({selectedPrices: newPrices,});
+    handleAllSelectedShapes(){
+      const {$$bodyShapes, isDrawerLayout, setSelectedShapes, setTemporaryFilters,} = this.props;
+      const newShapes = $$bodyShapes.toJS();
+      return () => {
+        if (isDrawerLayout){ // mobile version
+          setTemporaryFilters(assign({}, {selectedShapes: newShapes,}));
+        } else {
+          setSelectedShapes(newShapes);
+          this.updateExternalProductCollection({selectedShapes: [],});
+        }
       };
     }
 
     handleShapeSelection(shapeId){
-      const {isDrawerLayout, selectedShapes, setSelectedShapes, $$bodyShapes,} = this.props;
+      const {$$bodyShapes, isDrawerLayout, filters, setSelectedShapes, setTemporaryFilters,} = this.props;
       let newShapes = [];
       return () => {
-        if (shapeId.toLowerCase() === 'all'){
-          newShapes = $$bodyShapes.toJS();
-          setSelectedShapes(newShapes);
-          this.updateExternalProductCollection({selectedShapes: [],});
+        const newShapes = this.addOrRemoveFrom(filters.selectedShapes, shapeId).sort();
+        if (isDrawerLayout){ // mobile version
+          setTemporaryFilters(assign({}, {selectedShapes: newShapes,}));
         } else {
-          newShapes = this.addOrRemoveFrom(selectedShapes, shapeId).sort();
           setSelectedShapes(newShapes);
-          if (!isDrawerLayout) this.updateExternalProductCollection({selectedShapes: newShapes,});
+          this.updateExternalProductCollection({selectedShapes: newShapes,});
         }
       };
     }
 
     handleOrderBy(order){
-      const {orderProductsBy,} = this.props;
+      const {isDrawerLayout, orderProductsBy, setTemporaryFilters,} = this.props;
       return () => {
-        orderProductsBy(order);
-        this.updateExternalProductCollection({order: order,});
+        if (isDrawerLayout){
+          setTemporaryFilters(assign({}, {order: order,}));
+        } else {
+          orderProductsBy(order);
+          this.updateExternalProductCollection({order: order,});
+        }
       };
     }
 
     handleFastMaking(){
-      const {fastMaking, orderProductsBy, setFastMaking,} = this.props;
+      const {
+        filters,
+        isDrawerLayout,
+        orderProductsBy,
+        setFastMaking,
+        setTemporaryFilters,
+      } = this.props;
+      const {fastMaking,} = filters;
       return () => {
-        setFastMaking(!fastMaking);
-        this.updateExternalProductCollection({fastMaking: !fastMaking,});
+        if (isDrawerLayout){
+          setTemporaryFilters(assign({}, {fastMaking: !fastMaking,}));
+        } else {
+          setFastMaking(!fastMaking);
+          this.updateExternalProductCollection({fastMaking: !fastMaking,});
+        }
       };
     }
 
@@ -203,11 +260,19 @@ class CollectionFilterSort extends Component {
      * Reaches into legacy application to control toggling of mobile filters
      */
     handleFilterCancel(){
-      return () => { if (this.hasLegacyInstance()){ window.ProductCollectionFilter__Instance.toggleFilters(); }};
+      return () => {
+        if (this.hasLegacyInstance()){
+          this.props.setTemporaryFilters({});
+          window.ProductCollectionFilter__Instance.toggleFilters();
+      }};
     }
 
     handleFilterApply(){
-      return () => { this.updateExternalProductCollection(); };
+      const {applyTemporaryFilters, temporaryFilters,} = this.props;
+      return () => {
+        applyTemporaryFilters(temporaryFilters);
+        this.updateExternalProductCollection(temporaryFilters);
+      };
     }
 
 
@@ -216,7 +281,7 @@ class CollectionFilterSort extends Component {
      * ***************************************************
      */
     buildColorOption(color){
-      const {selectedColors,} = this.props;
+      const {selectedColors,} = this.props.filters;
       const {name,id,} = color;
       return (
         <label key={`color-${id}`} className="ExpandablePanel__option ExpandablePanel__listColumn">
@@ -235,7 +300,7 @@ class CollectionFilterSort extends Component {
     }
 
     buildShapeOptions(shape, i){
-      const {selectedShapes,} = this.props;
+      const {selectedShapes,} = this.props.filters;
       return (
         <label key={`shape-${shape}`} className="ExpandablePanel__option" name="shape">
           <input
@@ -290,11 +355,11 @@ class CollectionFilterSort extends Component {
     }
 
     generateShapeSummary(selectedColorIds){
-      const {$$bodyShapes, selectedShapes,} = this.props;
-      if (selectedShapes.length === $$bodyShapes.toJS().length || selectedShapes.length === 0){ // All
+      const {$$bodyShapes, filters,} = this.props;
+      if (filters.selectedShapes.length === $$bodyShapes.toJS().length || filters.selectedShapes.length === 0){ // All
         return ( this.generateSelectedItemSpan('all', 'All Shapes', 'shape') );
       }
-      return this.props.selectedShapes.map( shape => // Individual Elems
+      return filters.selectedShapes.map( shape => // Individual Elems
         this.generateSelectedItemSpan(shape, cleanCapitalizeWord(shape, ['_',]), 'shape')
       );
     }
@@ -306,11 +371,7 @@ class CollectionFilterSort extends Component {
           $$colors,
           $$secondaryColors,
           isDrawerLayout,
-          order,
-          fastMaking,
-          selectedColors,
-          selectedPrices,
-          selectedShapes,
+          filters,
         } = this.props;
         return (
             <div className="CollectionFilterSort">
@@ -330,7 +391,7 @@ class CollectionFilterSort extends Component {
                                 Sort
                               </div>
                               <div className="ExpandablePanel__selectedOptions">
-                                <span className="ExpandablePanel__selectedItem">{ORDERS[order]}</span>
+                                <span className="ExpandablePanel__selectedItem">{ORDERS[filters.order]}</span>
                               </div>
                             </div>
                           )}
@@ -343,7 +404,7 @@ class CollectionFilterSort extends Component {
                                   name="price_high"
                                   type="checkbox"
                                   value="true"
-                                  checked={order === 'price_high'}
+                                  checked={filters.order === 'price_high'}
                                 />
                                 <span className="checkboxBlackBg__check">
                                   <span className="ExpandablePanel__optionName">Price high to low</span>
@@ -356,7 +417,7 @@ class CollectionFilterSort extends Component {
                                   name="price_low"
                                   type="checkbox"
                                   value="true"
-                                  checked={order === 'price_low'}
+                                  checked={filters.order === 'price_low'}
                                 />
                                 <span className="checkboxBlackBg__check">
                                   <span className="ExpandablePanel__optionName">Price low to high</span>
@@ -369,7 +430,7 @@ class CollectionFilterSort extends Component {
                                   name="newest"
                                   type="checkbox"
                                   value="true"
-                                  checked={order === 'newest'}
+                                  checked={filters.order === 'newest'}
                                 />
                                 <span className="checkboxBlackBg__check">
                                   <span className="ExpandablePanel__optionName">{`What's new`}</span>
@@ -386,7 +447,7 @@ class CollectionFilterSort extends Component {
                                 Color
                               </div>
                               <div className="ExpandablePanel__selectedOptions">
-                                  {this.generateColorSummary(selectedColors)}
+                                  {this.generateColorSummary(filters.selectedColors)}
                               </div>
                             </div>
                           )}
@@ -422,7 +483,7 @@ class CollectionFilterSort extends Component {
                                   Price
                               </div>
                               <div className="ExpandablePanel__selectedOptions">
-                                {this.generatePriceSummary(selectedPrices)}
+                                {this.generatePriceSummary(filters.selectedPrices)}
                               </div>
                             </div>
                           )}
@@ -430,11 +491,11 @@ class CollectionFilterSort extends Component {
                             <div className="ExpandablePanel__listOptions checkboxBlackBg">
                               <label className="ExpandablePanel__option" name="price">
                                 <input
-                                  checked={selectedPrices.length === 3}
+                                  checked={filters.selectedPrices.length === 3}
                                   className="js-filter-all"
                                   data-all="true"
                                   id="price-all"
-                                  onChange={this.handlePriceSelection('all')}
+                                  onChange={this.handleAllPriceSelection}
                                   name="price-all"
                                   type="checkbox"
                                   value="all"
@@ -447,7 +508,7 @@ class CollectionFilterSort extends Component {
                                 return (
                                   <label key={`price-${p.id}`} className="ExpandablePanel__option" name="price">
                                     <input
-                                      checked={selectedPrices.indexOf(PRICES[i].id) > - 1}
+                                      checked={filters.selectedPrices.indexOf(PRICES[i].id) > - 1}
                                       data-pricemin={p.range[0]}
                                       data-pricemax={p.range[1]}
                                       id={`price-${p.id}}`}
@@ -474,7 +535,7 @@ class CollectionFilterSort extends Component {
                                   Bodyshape
                               </div>
                               <div className="ExpandablePanel__selectedOptions">
-                                  {this.generateShapeSummary(selectedShapes)}
+                                  {this.generateShapeSummary(filters.selectedShapes)}
                               </div>
                             </div>
                           )}
@@ -482,8 +543,8 @@ class CollectionFilterSort extends Component {
                             <div className="ExpandablePanel__listOptions checkboxBlackBg">
                               <label className="ExpandablePanel__option" name="bodyshape">
                                 <input
-                                  onChange={this.handleShapeSelection('all')}
-                                  checked={selectedShapes.length === $$bodyShapes.toJS().length}
+                                  onChange={this.handleAllSelectedShapes()}
+                                  checked={filters.selectedShapes.length === $$bodyShapes.toJS().length}
                                   data-all="true"
                                   id="shapes-all"
                                   name="shapes-all"
@@ -504,7 +565,7 @@ class CollectionFilterSort extends Component {
                               <label className="ExpandablePanel__option" name="bodyshape">
                                 <input
                                   id="fast_making"
-                                  checked={fastMaking}
+                                  checked={filters.fastMaking}
                                   onChange={this.handleFastMaking()}
                                   name="fast_making"
                                   type="checkbox"
@@ -541,18 +602,18 @@ CollectionFilterSort.propTypes = {
     $$secondaryColors: PropTypes.object,
     $$bodyShapes: PropTypes.object,
     fastMaking: PropTypes.bool,
-    order: PropTypes.string,
-    selectedColors: PropTypes.array,
-    selectedPrices: PropTypes.array,
-    selectedShapes: PropTypes.array,
+    filters: PropTypes.object,
+    temporaryFilters: PropTypes.object,
 
     // Redux Actions
+    applyTemporaryFilters: PropTypes.func,
     clearAllCollectionFilterSorts: PropTypes.func,
     orderProductsBy: PropTypes.func,
     setFastMaking: PropTypes.func,
     setSelectedColors: PropTypes.func,
     setSelectedPrices: PropTypes.func,
     setSelectedShapes: PropTypes.func,
+    setTemporaryFilters: PropTypes.func,
 };
 
 export default Resize(breakpoints)(connect(stateToProps, dispatchToProps)(CollectionFilterSort));

@@ -10,10 +10,16 @@ export const $$initialState = Immutable.fromJS({
   selectedColors: [],
   selectedPrices: [],
   selectedShapes: [],
+  temporaryFilters: {
+    //fastMaking, order, selectedColors, selectedPrices, selectedShapes
+  },
 });
 
 export default function CollectionFilterSortReducer($$state = $$initialState, action = null) {
   switch (action.type) {
+    case FilterSortConstants.APPLY_TEMPORARY_FILTERS: {
+      return $$state.merge(action.temporaryFilters);
+    }
     case FilterSortConstants.CLEAR_ALL_COLLECTION_FILTER_SORTS: {
       return $$state.merge(FilterSortConstants.DEFAULTS);
     }
@@ -40,6 +46,11 @@ export default function CollectionFilterSortReducer($$state = $$initialState, ac
     case FilterSortConstants.SET_SELECTED_SHAPES: {
       return $$state.merge({
         selectedShapes: action.selectedShapes,
+      });
+    }
+    case FilterSortConstants.SET_TEMPORARY_FILTERS: {
+      return $$state.merge({
+        temporaryFilters: action.temporaryFilters,
       });
     }
 

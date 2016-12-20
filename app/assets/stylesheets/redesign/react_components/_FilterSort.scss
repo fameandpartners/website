@@ -4,6 +4,7 @@
 .FilterSort {
 
   &__mobileTriggerBtn {
+    cursor: pointer;
     background: $c-neutral-black;
     color: $c-neutral-white;
     text-transform: uppercase;
