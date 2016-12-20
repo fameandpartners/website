@@ -14,7 +14,8 @@ class CustomisationValue < ActiveRecord::Base
                   :presentation,
                   :image,
                   :price,
-                  :incompatible_ids
+                  :incompatible_ids,
+                  :customisation_type
 
   validates :name,
             presence: true,
@@ -43,6 +44,7 @@ class CustomisationValue < ActiveRecord::Base
             }
 
   scope :ordered, order('position ASC')
+
 
   has_attached_file :image, styles: {
     mini: '48x48>', small: '100x100>', product: '240x240>'#, large: '600x600>'

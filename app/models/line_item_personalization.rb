@@ -11,11 +11,14 @@ class LineItemPersonalization < ActiveRecord::Base
              class_name: 'Spree::OptionValue'
   belongs_to :size,
              class_name: 'Spree::OptionValue'
+  belongs_to :fabric,
+             class_name: 'Spree::OptionValue'
 
   attr_accessible :customization_value_ids,
                   :height,
                   :size_id,
-                  :color_id
+                  :color_id,
+                  :fabric_id
 
   validates :size, :color,  presence: true
 
