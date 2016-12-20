@@ -4,7 +4,6 @@ var MoodBoardEvent = React.createClass({
   },
 
   componentWillMount: function(){
-    debugger;
     $.ajax({
       url: this.props.event_path,
       type: "GET",
