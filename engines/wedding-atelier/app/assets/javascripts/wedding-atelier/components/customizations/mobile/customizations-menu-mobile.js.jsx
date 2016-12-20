@@ -15,15 +15,6 @@ var CustomizationsMenuMobile = React.createClass({
     this.props.goToSlide(2);
   },
 
-  parseSizePresentation: function(userOrSize, height) {
-    if(userOrSize.name) {
-      var regexp = new RegExp(this.props.siteVersion + '/?(\\d+)', 'i');
-      return height + ' | ' + userOrSize.name.match(regexp)[1];
-    } else {
-      return userOrSize.first_name + "'s size profile";
-    }
-  },
-
   renderMenuList: function () {
     var customizationItems = ['silhouette', 'fabric-colour', 'length', 'style', 'fit'];
 
@@ -36,13 +27,8 @@ var CustomizationsMenuMobile = React.createClass({
         selectedValue = selectedOptions[customizationItem].presentation;
       }
 
-
       if(customizationItem == 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour) {
         selectedValue = selectedOptions.fabric.presentation + ' | ' + selectedOptions.colour.presentation;
-      }
-
-      if(customizationItem == 'size' && selectedOptions.size && selectedOptions.height) {
-        selectedValue = this.parseSizePresentation(selectedOptions.size, selectedOptions.height);
       }
 
       return (

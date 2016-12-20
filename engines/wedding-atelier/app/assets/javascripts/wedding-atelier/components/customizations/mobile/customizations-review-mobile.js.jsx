@@ -12,7 +12,21 @@ var CustomizationsReviewMobile = React.createClass({
     $(ReactDOM.findDOMNode(this.refs.size)).addClass('animate');
   },
 
+  parseSizePresentation: function(userOrSize, height) {
+    if(userOrSize.name) {
+      var regexp = new RegExp(this.props.siteVersion + '/?(\\d+)', 'i');
+      return height + ' | ' + userOrSize.name.match(regexp)[1];
+    } else {
+      return userOrSize.first_name + "'s size profile";
+    }
+  },
+
   render: function() {
+    var selectedOptions = this.props.selectedOptions;
+    var selectedValue = 'select size';
+    if(selectedOptions.size && selectedOptions.height) {
+      selectedValue = this.parseSizePresentation(selectedOptions.size, selectedOptions.height);
+    }
 
     return (
       <div className="customizations-review-mobile">
@@ -21,7 +35,7 @@ var CustomizationsReviewMobile = React.createClass({
           <h1>You are designing the  {this.props.selectedOptions.silhouette? this.props.selectedOptions.silhouette.name : ''}</h1>
           <DressPreview selectedOptions={this.props.selectedOptions}/>
           <button className="btn-transparent" onClick={this.props.goToSlide.bind(null, 1)}>customize dress</button>
-          <button className="btn-transparent" onClick={this.showSizing}>select size</button>
+          <button className="btn-transparent" onClick={this.showSizing}>{selectedValue}</button>
           <div className="customizations-review-mobile-results">
             <p>
               <span className="view-customizations">View customizations</span>
