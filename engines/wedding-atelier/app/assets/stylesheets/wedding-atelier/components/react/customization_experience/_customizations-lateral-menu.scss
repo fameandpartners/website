@@ -7,7 +7,11 @@
   position: fixed;
   right: 50%;
   top: 50%;
-  z-index: 1;
+  z-index: 0;
+
+  &.animate {
+    z-index: 1;
+  }
 
   p {
     letter-spacing: 2px;
