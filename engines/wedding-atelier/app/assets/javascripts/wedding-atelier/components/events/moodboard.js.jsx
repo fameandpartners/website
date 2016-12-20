@@ -3,7 +3,8 @@ var MoodBoardEvent = React.createClass({
     return {event: {dresses: [], invitations: [], assistants: [], send_invite_path: '', current_user_id: '', name: 'Loading...'}}
   },
 
-  componentDidMount: function (){
+  componentWillMount: function(){
+    debugger;
     $.ajax({
       url: this.props.event_path,
       type: "GET",
@@ -12,12 +13,13 @@ var MoodBoardEvent = React.createClass({
         this.setState({event: data.moodboard_event});
       }.bind(this)
     });
+  },
 
+  componentDidMount: function (){
     this.handleBrowserResizing();
   },
 
   handleBrowserResizing: function(){
-
     if (window.innerWidth <= 768) {
       $('.moodboard-tabs a[href="#chat-mobile"]').tab('show');
     }
