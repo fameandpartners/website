@@ -158,7 +158,7 @@ var Chat = React.createClass({
 
     var chatMembers = this.state.channelMembers.map(function(member, index) {
       className = member.online ? '' : 'text-muted';
-      return(<s className={className} key={'chat-member-' + index}>{member.identity}, </s>);
+      return(<span className={className} key={'chat-member-' + index}>{member.identity}, </span>);
     });
 
     return(
