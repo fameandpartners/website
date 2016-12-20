@@ -81,3 +81,13 @@ var MoodBoardEvent = React.createClass({
     )
   }
 });
+
+MoodBoardEvent.propTypes = {
+  event_path: React.PropTypes.string,
+  remove_assistant_path: React.PropTypes.string,
+  twilio_token_path: React.PropTypes.string,
+  event_id: React.PropTypes.number,
+  wedding_name: React.PropTypes.string,
+  profile_photo: React.PropTypes.string,
+  username: React.PropTypes.string
+}
