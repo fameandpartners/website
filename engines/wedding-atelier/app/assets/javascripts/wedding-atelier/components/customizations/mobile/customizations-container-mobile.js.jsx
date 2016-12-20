@@ -12,7 +12,12 @@ var CustomizationsContainerMobile = React.createClass({
 
   getInitialState: function () {
     return {
-      currentValue: null
+      silhouette: null,
+      fabric: null,
+      colour: null,
+      length: null,
+      style: null,
+      fit: null
     };
   },
 
@@ -31,12 +36,16 @@ var CustomizationsContainerMobile = React.createClass({
 
   selectOption: function (type, option) {
     var _state = this.state;
-    _state.currentValue = option;
+    _state[type] = option;
     this.setState(_state);
   },
 
   applyChanges: function () {
-    this.props.selectCallback(this.props.currentCustomization, this.state.currentValue);
+    for(var property in this.state) {
+      if(this.state.hasOwnProperty(property) && this.state[property] != null) {
+        this.props.selectCallback(property, this.state[property]);
+      }
+    }
   },
 
   render: function() {

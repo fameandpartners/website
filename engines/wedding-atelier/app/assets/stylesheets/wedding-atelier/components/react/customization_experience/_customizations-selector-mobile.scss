@@ -16,6 +16,11 @@
     font-family: $primary-font;
     font-size: .8rem;
     font-weight: 300;
+
+  }
+
+  .description {
+    margin: 20px auto;
   }
 }
 
@@ -49,8 +54,8 @@
   &-small {
     background-color: $white;
     cursor: pointer;
-    width: 100px;
-    height: 100px;
+    height: 138px;
+    width: 100%;
 
     &:hover,
     &.active {
@@ -60,18 +65,14 @@
   }
 
   &-label {
+    font-size: .8rem;
+    font-weight: 700;
     margin-bottom: 26px;
     margin-top: 14px;
-    text-align: left;
+    text-align: center;
+    text-transform: uppercase;
   }
 
-}
-
-
-.customization-radio-label {
-  display: inline-block;
-  float: left;
-  padding: 0 15px;
 }
 
 .customization-radio {
@@ -85,6 +86,9 @@
 
 .customization-radio-label {
   cursor: pointer;
+  display: inline-block;
+  float: left;
+  padding: 0 15px;
 
   .box {
     border: 1px solid $white-two;
