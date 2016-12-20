@@ -36,7 +36,7 @@
       height: 307px;
       width: 242px;
       background-image: image-url('wedding-atelier/add-dress.png');
-      background-color: #fff;
+      background-color: $white-two;
       background-repeat: no-repeat;
       background-position: 36px 109px;
       text-indent: -9999px
@@ -45,14 +45,14 @@
 
   .btn-transparent.btn-create-a-dress {
     border: 1px solid $black;
-    font-family: NeuzeGro;
+    font-family: $secondary-font;
     font-weight: 400;
     font-size: 1.07em;
 
     em {
       text-transform: none;
       text-decoration: underline;
-      font-family: FreightDispPro;
+      font-family: $primary-font;
     }
   }
 
