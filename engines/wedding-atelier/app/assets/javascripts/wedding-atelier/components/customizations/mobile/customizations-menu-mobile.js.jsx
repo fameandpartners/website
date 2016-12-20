@@ -11,6 +11,7 @@ var CustomizationsMenuMobile = React.createClass({
   },
 
   show: function (currentCustomization) {
+    this.props.changeCurrentCustomizationCallback(currentCustomization);
     this.props.goToSlide(2);
   },
 

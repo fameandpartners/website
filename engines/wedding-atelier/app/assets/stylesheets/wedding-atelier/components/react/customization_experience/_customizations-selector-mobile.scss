@@ -1,0 +1,109 @@
+.customizations-selector-mobile {
+  display: none;
+  height: 90vh;
+  padding: 15px 15px 9vh;
+  overflow-y: auto;
+
+  &.active {
+    display: block;
+  }
+}
+
+.customizations-selector-mobile-title {
+  text-align: left;
+
+  p {
+    font-family: $primary-font;
+    font-size: .8rem;
+    font-weight: 300;
+  }
+}
+
+.customization-radio-label {
+  display: inline-block;
+  float: left;
+  padding: 0 15px;
+}
+
+.customizations-selector-mobile-options-item {
+  background-color: $white-three;
+  cursor: pointer;
+  height: 205px;
+  margin-bottom: 30px;
+  padding-top: 10px;
+  border: 1px solid transparent;
+
+  p {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 5px auto 0;
+    text-transform: uppercase;
+  }
+
+  img {
+    height: 160px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  &:hover,
+  &.active {
+    border: 1px solid $black;
+  }
+
+
+
+  &-small {
+    background-color: $white;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+
+    &:hover,
+    &.active {
+      border: 1px solid $black;
+    }
+
+  }
+
+  &-label {
+    margin-bottom: 26px;
+    margin-top: 14px;
+    text-align: left;
+  }
+
+
+
+}
+
+.customization-radio {
+  visibility: hidden;
+  position: absolute;
+
+  &:checked ~ label .box {
+    background: $black;
+  }
+}
+
+.customization-radio-label {
+  cursor: pointer;
+
+  .box {
+    border: 1px solid $white-two;
+    margin-right: 5px;
+    display: inline-block;
+    height: 20px;
+    outline: 1px solid $black;
+    width: 20px;
+  }
+
+  .real-label {
+    vertical-align: super;
+  }
+
+}
+
+.customization-size {
+  text-align: left;
+}
