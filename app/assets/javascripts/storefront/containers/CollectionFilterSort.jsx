@@ -147,11 +147,9 @@ class CollectionFilterSort extends Component {
      */
     handleClearAll(){
       const {clearAllCollectionFilterSorts, isDrawerLayout, setTemporaryFilters,} = this.props;
-      if (isDrawerLayout){ setTemporaryFilters({}) }
-      } else {
-        clearAllCollectionFilterSorts();
-        this.updateExternalProductCollection(CollectionFilterSortConstants.DEFAULTS);
-      }
+      clearAllCollectionFilterSorts();
+      if (isDrawerLayout){ setTemporaryFilters({}); }
+      else { this.updateExternalProductCollection(CollectionFilterSortConstants.DEFAULTS); }
     }
 
     handleColorSelection({name,}){
