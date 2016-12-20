@@ -395,8 +395,9 @@ $product-color-winter-grey:     #dadadc;
 .color-white,
 .color-optic-white {
   background-color: $product-color-white;
-  border: 1px solid $c-neutral-5;
+  border: 1px solid $product-color-pale-grey;
 }
 .color-white-and-black {
   @include split-color-selector(#FCF8F7, $product-color-black);
-  border: 1px solid $c-neutral-5; }
+  border: 1px solid $product-color-pale-grey;
+}
