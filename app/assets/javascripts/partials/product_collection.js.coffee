@@ -15,13 +15,15 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       reset_source: true,
       page_size: 21,
       mobileBreakpoint: 768,
+      mobileFilterSelector: '.js-trigger-filter-mobile',
       showMoreSelector: "*[data-action=show-more-collection-products]"
     }, options)
 
     @details_elements = options.details_elements || {}
     @filter = $(options.controls)
     @content = $(options.content)
-
+    @mobileFilter = $(options.mobileFilterSelector)
+    @mobileFilter.on('click', @toggleFilters)
     # base
     # if users comes by url with specific params, like /dresses/for/very/special/case
     # then use this path until user selects another collection
@@ -43,6 +45,9 @@ window.ProductCollectionFilter = class ProductCollectionFilter
     @productOrderInput  = new inputs.ProductOrderSelector(container: @filter.find('#product_order'))
     @productOrderInput.on('change', @update)
     @$banner = $(options.banner)
+
+  toggleFilters:(forceToggle) ->
+    $('.ExpandablePanel--mobile').toggleClass('ExpandablePanel--mobile--isOpen', forceToggle)
 
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
@@ -71,6 +76,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         row.hide()
 
   update: (updateRequestParams) =>
+    @toggleFilters(false)
     @source_path = '/dresses' if @reset_source
     updateRequestParams = updateRequestParams || _.extend({}, @updateParams, @getSelectedValues())
     pageUrl = @updatePageLocation(updateRequestParams)

@@ -42,7 +42,7 @@ const ORDERS = {
   price_low: 'Price Low to High',
 };
 
-function stateToProps(state) {
+function stateToProps(state, props) {
     // Which part of the Redux global state does our component want to receive as props?
     if (state.$$collectionFilterSortStore) {
         const {$$collectionFilterSortStore,} = state;
@@ -54,6 +54,7 @@ function stateToProps(state) {
           $$bodyShapes: $$collectionFilterSortStore.get('$$bodyShapes'),
           // Mutable props
           order: collectionFilterSortStore.order,
+          isDrawerLayout: props.breakpoint === 'mobile' || props.breakpoint === 'tablet',
           fastMaking: collectionFilterSortStore.fastMaking,
           selectedColors: collectionFilterSortStore.selectedColors,
           selectedPrices: collectionFilterSortStore.selectedPrices,
@@ -97,12 +98,16 @@ class CollectionFilterSort extends Component {
       }
     }
 
+    hasLegacyInstance(){
+      return typeof window === 'object' && window.ProductCollectionFilter__Instance && window.ProductCollectionFilter__Instance.update;
+    }
+
     /**
      * Updates the legacy product collection
      * @param  {Object} update - param object to be assigned to previous filters
      */
     updateExternalProductCollection(update){
-      if (typeof window === 'object' && window.ProductCollectionFilter__Instance && window.ProductCollectionFilter__Instance.update){
+      if (this.hasLegacyInstance()){
         const filterSorts = assign({}, this.props, update);
         const legacyFilterSorts = this.convertPropsIntoLegacyFilter(filterSorts);
         window.ProductCollectionFilter__Instance.update(legacyFilterSorts);
@@ -139,15 +144,15 @@ class CollectionFilterSort extends Component {
     }
 
     handleColorSelection({name,}){
-      const {selectedColors, setSelectedColors,} = this.props;
+      const {isDrawerLayout, selectedColors, setSelectedColors,} = this.props;
       let newColors = this.addOrRemoveFrom(selectedColors, name);
       setSelectedColors(newColors);
 
-      this.updateExternalProductCollection({selectedColors: newColors,});
+      if (!isDrawerLayout) this.updateExternalProductCollection({selectedColors: newColors,});
     }
 
     handlePriceSelection(id){
-      const {selectedPrices, setSelectedPrices,} = this.props;
+      const {isDrawerLayout, selectedPrices, setSelectedPrices,} = this.props;
       let newPrices = [];
       return () => {
         if (id === 'all'){
@@ -158,12 +163,12 @@ class CollectionFilterSort extends Component {
           setSelectedPrices(newPrices);
         }
 
-        this.updateExternalProductCollection({selectedPrices: newPrices,});
+        if (!isDrawerLayout) this.updateExternalProductCollection({selectedPrices: newPrices,});
       };
     }
 
     handleShapeSelection(shapeId){
-      const {selectedShapes, setSelectedShapes, $$bodyShapes,} = this.props;
+      const {isDrawerLayout, selectedShapes, setSelectedShapes, $$bodyShapes,} = this.props;
       let newShapes = [];
       return () => {
         if (shapeId.toLowerCase() === 'all'){
@@ -173,7 +178,7 @@ class CollectionFilterSort extends Component {
         } else {
           newShapes = this.addOrRemoveFrom(selectedShapes, shapeId).sort();
           setSelectedShapes(newShapes);
-          this.updateExternalProductCollection({selectedShapes: newShapes,});
+          if (!isDrawerLayout) this.updateExternalProductCollection({selectedShapes: newShapes,});
         }
       };
     }
@@ -192,6 +197,17 @@ class CollectionFilterSort extends Component {
         setFastMaking(!fastMaking);
         this.updateExternalProductCollection({fastMaking: !fastMaking,});
       };
+    }
+
+    /**
+     * Reaches into legacy application to control toggling of mobile filters
+     */
+    handleFilterCancel(){
+      return () => { if (this.hasLegacyInstance()){ window.ProductCollectionFilter__Instance.toggleFilters(); }};
+    }
+
+    handleFilterApply(){
+      return () => { this.updateExternalProductCollection(); };
     }
 
 
@@ -289,7 +305,7 @@ class CollectionFilterSort extends Component {
           $$bodyShapes,
           $$colors,
           $$secondaryColors,
-          breakpoint,
+          isDrawerLayout,
           order,
           fastMaking,
           selectedColors,
@@ -503,11 +519,11 @@ class CollectionFilterSort extends Component {
 
                     </div>
 
-                    {breakpoint === 'mobile' || breakpoint === 'tablet' ?
+                    {isDrawerLayout ?
                       <div className="ExpandablePanel__action">
                         <div className="ExpandablePanel__filterTriggers--cancel-apply">
-                          <a className="ExpandablePanel__btn ExpandablePanel__btn--secondary">Cancel</a>
-                          <a className="ExpandablePanel__btn">Apply</a>
+                          <a onClick={this.handleFilterCancel()} className="ExpandablePanel__btn ExpandablePanel__btn--secondary">Cancel</a>
+                          <a onClick={this.handleFilterApply()} className="ExpandablePanel__btn">Apply</a>
                         </div>
                       </div> : null
                     }
@@ -519,6 +535,7 @@ class CollectionFilterSort extends Component {
 
 CollectionFilterSort.propTypes = {
     breakpoint: PropTypes.string,
+    isDrawerLayout: PropTypes.bool,
     dispatch: PropTypes.func,
     $$colors: PropTypes.object,
     $$secondaryColors: PropTypes.object,

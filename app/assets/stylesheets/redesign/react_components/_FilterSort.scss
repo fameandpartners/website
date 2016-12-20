@@ -39,6 +39,12 @@
     height: 100%;
     width: 100%;
     top: 0;
+    @include transition(transform .6s cubic-bezier(0.480, 0.110, 0.250, 1.060));
+    @include transform(translateX(100%));
+
+    &--isOpen {
+      @include transform(translateX(0%));
+    }
 
     .ExpandablePanel {
 
@@ -90,6 +96,9 @@
 }
 
 .ExpandablePanel {
+  .ExpandablePanel__clearAllWrapper {
+    display: inline;
+  }
 
   input[type="checkbox"] {
     display: none;
@@ -97,6 +106,7 @@
 
   // Action buttons
   &__btn {
+    cursor: pointer;
     display: inline-block;
     background: $c-neutral-black;
     color: $c-neutral-white;
