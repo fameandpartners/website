@@ -9,7 +9,7 @@ var Chat = React.createClass({
     })
   },
 
-  componentDidMount: function(){
+  componentWillMount: function(){
     $.post(this.props.twilio_token_path, function(data) {
       username = data.username;
       var accessManager = new Twilio.AccessManager(data.token);
@@ -31,6 +31,9 @@ var Chat = React.createClass({
         }
       }.bind(this));
     }.bind(this));
+  },
+
+  componentDidMount: function(){
     this.scrollToBottom();
   },
 
