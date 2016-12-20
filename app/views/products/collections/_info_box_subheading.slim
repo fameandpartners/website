@@ -2,14 +2,13 @@
 - # Remove by 1st November, talk to TOBY and yell at him
 - sub_heading = (params[:lps] || page.try(:sub_heading))
 - description = page.try(:description)
+- black_bg_info_box = local_assigns[:black_bg_info_box] == true ? 'categoryTextBox--blackBg' : ''
 
 - if sub_heading.blank? && description.blank?
   - sub_heading = 'MADE FOR YOU.'
 
-.col-xs-6.col-xxs-6.col-md-4.category--item
-  .panel-seo
+.section-box.section-box-alt.col-xs-12.col-sm-6.col-md-4.category--item.categoryTextBox class=black_bg_info_box
+  .panel-seo.categoryTextBoxContent
     .outer-wrap.txt-truncate-block
       .inner-wrap
-        .content-wrap.js-sub-heading
-          .title
-            span= raw(sub_heading)
+        .content-wrap = raw(sub_heading)
