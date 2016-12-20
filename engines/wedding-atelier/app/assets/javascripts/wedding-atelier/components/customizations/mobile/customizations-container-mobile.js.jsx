@@ -10,18 +10,33 @@ var CustomizationsContainerMobile = React.createClass({
     goToSlide:                              React.PropTypes.func
   },
 
+  getInitialState: function () {
+    return {
+      currentValue: null
+    };
+  },
+
   componentDidUpdate: function() {
     var el = $(ReactDOM.findDOMNode(this.refs.customizationsContainer));
     el.find('.customizations-selector-mobile').hide();
     $(ReactDOM.findDOMNode(this.refs[this.props.currentCustomization])).show();
   },
 
-  close: function(){
+  close: function() {
+    var _state = this.state;
+    _state.currentValue = null;
+    this.setState(_state);
     this.props.goToSlide(1);
   },
 
-  applyChanges: function() {
+  selectOption: function (type, option) {
+    var _state = this.state;
+    _state.currentValue = option;
+    this.setState(_state);
+  },
 
+  applyChanges: function () {
+    this.props.selectCallback(this.props.currentCustomization, this.state.currentValue);
   },
 
   render: function() {
@@ -38,6 +53,7 @@ var CustomizationsContainerMobile = React.createClass({
         <CustomizationSelectorMobile
           type="silhouette"
           selectCallback={this.props.selectCallback}
+          selectOptionCallback={this.selectOption}
           options={this.props.customizations.silhouettes}
           selectedOption={this.props.selectedOptions.silhouette}
           ref="silhouette"
@@ -47,12 +63,14 @@ var CustomizationsContainerMobile = React.createClass({
         <FabricAndColourSelectorMobile
           colours={this.props.customizations.colours}
           fabrics={this.props.customizations.fabrics}
+          selectOptionCallback={this.selectOption}
           selectCallback={this.props.selectCallback}
           selectedOption={this.props.selectedOptions.colour}
           ref="fabric-colour"/>
         <CustomizationSelectorMobile
           type="length"
           selectCallback={this.props.selectCallback}
+          selectOptionCallback={this.selectOption}
           options={this.props.customizations.lengths}
           selectedOption={this.props.selectedOptions.length}
           ref="length"
@@ -62,6 +80,7 @@ var CustomizationsContainerMobile = React.createClass({
         <CustomizationSelectorMobile
           type="style"
           selectCallback={this.props.selectCallback}
+          selectOptionCallback={this.selectOption}
           options={this.props.customizations.styles}
           selectedOption={this.props.selectedOptions.style}
           ref="style"
@@ -71,6 +90,7 @@ var CustomizationsContainerMobile = React.createClass({
         <CustomizationSelectorMobile
           type="fit"
           selectCallback={this.props.selectCallback}
+          selectOptionCallback={this.selectOption}
           options={this.props.customizations.fits}
           selectedOption={this.props.selectedOptions.fit}
           ref="fit"
