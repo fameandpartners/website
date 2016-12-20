@@ -1,30 +1,36 @@
-.dress-preview{
-  height: calc(100% - 20px);
+.dress-preview {
+  height: 400px;
   position: relative;
-  .preview{
-    width: 450px;
+
+  .preview {
     height: 90%;
     margin: 0 auto;
   }
 
-  .controls{
+  img {
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  .controls {
     position: absolute;
-    top: 0;
     right: 0;
+    top: 0;
 
     .zoom {
-      width: 32px;
+      cursor: pointer;
       height: 32px;
       margin: 0 auto;
-      cursor: pointer;
+      width: 32px;
+    }
+  }
 
-      &.in {
 
-      }
+  @include screen-md {
+    height: calc(100% - 20px);
 
-      &.out{
-
-      }
+    .preview {
+      width: 450px;
     }
   }
 

@@ -70,7 +70,7 @@ var CustomizationsMenuMobile = React.createClass({
     return (
       <div className="customizations-menu-mobile">
         <div className="customizations-menu-mobile-body">
-          <DressPreviewMobile />
+          <DressPreview selectedOptions={this.props.selectedOptions}/>
           <h1>
             <em>Customize</em> it how you want
           </h1>
