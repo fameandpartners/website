@@ -7,7 +7,8 @@ var CustomizationsContainer = React.createClass({
     changeCurrentCustomizationCallback: React.PropTypes.func,
     assistants:                         React.PropTypes.array,
     selectCallback:                     React.PropTypes.func,
-    goToSlideCallback:                  React.PropTypes.func
+    goToSlideCallback:                  React.PropTypes.func,
+    showContainers:                     React.PropTypes.object
   },
 
   componentDidUpdate: function() {
@@ -45,13 +46,15 @@ var CustomizationsContainer = React.createClass({
             ref="silhouette"
             keyword="Choose"
             title="your perfect shape"
-            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            showContainers={this.props.showContainers}/>
           <FabricAndColourSelector
             colours={this.props.customizations.colours}
             fabrics={this.props.customizations.fabrics}
             selectCallback={this.props.selectCallback}
             selectedOption={this.props.selectedOptions.colour}
-            ref="fabric-colour"/>
+            ref="fabric-colour"
+            showContainers={this.props.showContainers}/>
           <CustomizationSelector
             type="length"
             selectCallback={this.props.selectCallback}
@@ -60,7 +63,8 @@ var CustomizationsContainer = React.createClass({
             ref="length"
             keyword="Choose"
             title="your length."
-            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            showContainers={this.props.showContainers}/>
           <CustomizationSelector
             type="style"
             selectCallback={this.props.selectCallback}
@@ -69,7 +73,8 @@ var CustomizationsContainer = React.createClass({
             ref="style"
             keyword="Add"
             title="on extra trimmings."
-            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            showContainers={this.props.showContainers}/>
           <CustomizationSelector
             type="fit"
             selectCallback={this.props.selectCallback}
@@ -78,14 +83,16 @@ var CustomizationsContainer = React.createClass({
             ref="fit"
             keyword="Finesse"
             title="the way it fits."
-            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            showContainers={this.props.showContainers}/>
           <SizeSelector
             sizes={this.props.customizations.sizes}
             assistants={this.props.customizations.assistants}
             heights={this.props.customizations.heights}
             siteVersion={this.props.siteVersion}
             selectCallback={this.props.selectCallback}
-            ref="size"/>
+            ref="size"
+            showContainers={this.props.showContainers}/>
         </div>
       </div>
     );

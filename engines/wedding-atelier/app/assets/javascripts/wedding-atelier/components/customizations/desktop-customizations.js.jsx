@@ -9,17 +9,41 @@ var DesktopCustomizations = React.createClass({
     startOverCallback:                  React.PropTypes.func
   },
 
+  getInitialState: function () {
+    return {
+      showContainer: false,
+      showSelector: false,
+      showLateralMenu: false
+    };
+  },
+
+  show: function(currentCustomization) {
+    debugger;
+    var el = $('.js-customizations-container');
+
+    this.setState({showSelector: true});
+
+    el.one('transitionend', function() {
+      $('.js-customizations-lateral-menu').addClass('animate');
+    }.bind(this));
+    el.addClass('animate');
+
+    this.props.changeCurrentCustomizationCallback(currentCustomization);
+  },
+
   render: function() {
     var defaultProps = {
       selectedOptions:                    this.props.selectedOptions,
       currentCustomization:               this.props.currentCustomization,
       changeCurrentCustomizationCallback: this.props.changeCurrentCustomizationCallback,
-      selectCallback:                     this.props.selectCallback
+      selectCallback:                     this.props.selectCallback,
+      showContainers:                     this.state
     };
 
     var customizationMenuProps = $.extend(defaultProps, {
       startOverCallback: this.props.startOverCallback,
-      siteVersion: this.props.siteVersion
+      siteVersion: this.props.siteVersion,
+      showCallback: this.show
     });
 
     var customizationsContainerProps = $.extend(defaultProps, {

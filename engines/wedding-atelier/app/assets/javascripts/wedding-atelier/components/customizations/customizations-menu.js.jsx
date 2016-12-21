@@ -6,19 +6,8 @@ var CustomizationsMenu = React.createClass({
     currentCustomization:               React.PropTypes.string,
     changeCurrentCustomizationCallback: React.PropTypes.func,
     selectCallback:                     React.PropTypes.func,
-    startOverCallback:                  React.PropTypes.func
-  },
-
-  show: function(currentCustomization) {
-    var el = $(this.refs.panelContainer);
-
-    $('.customization-selector').addClass('slideInLeft');
-    el.one('transitionend', function() {
-      $(this.refs.lateralMenu).addClass('animate');
-    }.bind(this));
-    el.addClass('animate');
-
-    this.props.changeCurrentCustomizationCallback(currentCustomization);
+    startOverCallback:                  React.PropTypes.func,
+    showCallback:                       React.PropTypes.func
   },
 
   parseSizePresentation: function(userOrSize, height) {
@@ -56,7 +45,7 @@ var CustomizationsMenu = React.createClass({
       }
 
       return (
-        <li key={index} className="row customization-type" onClick={this.show.bind(null, customizationItem)}>
+        <li key={index} className="row customization-type" onClick={this.props.showCallback.bind(null, customizationItem)}>
           <div className="col-sm-6 customization-column customization-box">
             <a href="#" className="customization-label">
               <i className={className}></i>

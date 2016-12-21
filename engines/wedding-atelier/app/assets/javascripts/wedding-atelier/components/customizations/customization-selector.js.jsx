@@ -6,7 +6,8 @@ var CustomizationSelector = React.createClass({
     keyword:          React.PropTypes.string,
     title:            React.PropTypes.string,
     description:      React.PropTypes.string,
-    selectCallback:   React.PropTypes.func.isRequired
+    selectCallback:   React.PropTypes.func.isRequired,
+    showContainers:   React.PropTypes.object
   },
 
   isOptionSelected: function(option){
@@ -39,7 +40,7 @@ var CustomizationSelector = React.createClass({
     }.bind(this));
 
     return (
-      <div ref="container" className="customization-selector animated slideInLeft">
+      <div ref="container" className={"customization-selector animated" + this.props.showContainers.showSelector? ' slideInLeft': ''}>
         <div className="customization">
           <div className="customization-title">
             <h1><em>{this.props.keyword}</em> {this.props.title}</h1>
