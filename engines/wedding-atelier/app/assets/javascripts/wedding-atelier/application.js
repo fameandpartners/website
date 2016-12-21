@@ -5,4 +5,5 @@
 //= require components
 //= require select2-4.0.3
 //= require bootstrap-datepicker-1.6.4
+//= require moment-2.17.1.min
 //= require_tree

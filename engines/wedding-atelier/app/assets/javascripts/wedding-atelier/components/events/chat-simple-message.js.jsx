@@ -1,27 +1,11 @@
 var ChatSimpleMessage = React.createClass({
 
   formatDate: function(time) {
+    var m = moment(new Date(time)),
+      fromNow = m.fromNow(),
+      o = fromNow + ', ' + m.format('hh:mm a');
 
-    var leadZero = function(val) {
-      return ('0' + val).slice(-2);
-    }
-
-    if (!time) return;
-
-    var t = new Date(time);
-    var formatted = '';
-
-    day = t.getDate();
-    month = leadZero(t.getMonth() + 1);
-    time = t.getHours() + ':' + leadZero(t.getMinutes()) + 'hrs';
-
-    if (day === (new Date).getDate()) {
-      formatted += 'today, ' + time
-    } else {
-      formatted += day + '/' + month + ', ' + time
-    }
-
-    return formatted;
+    return o;
   },
 
   render: function() {
