@@ -6,19 +6,19 @@ module WeddingAtelier
                :image,
                :presentation
 
-   has_many :styles, serializer: WeddingAtelier::OptionValueSerializer
-   has_many :fits, serializer: WeddingAtelier::OptionValueSerializer
+   has_many :styles, serializer: WeddingAtelier::CustomisationValueSerializer
+   has_many :fits, serializer: WeddingAtelier::CustomisationValueSerializer
 
    def presentation
      object.name
    end
 
    def styles
-     object.option_values_of('Style')
+     object.customisation_values.where(customisation_type: 'style')
    end
 
    def fits
-     object.option_values_of('Fit')
+     object.customisation_values.where(customisation_type: 'fit')
    end
 
    def image
