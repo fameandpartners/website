@@ -26,6 +26,6 @@ RSpec.configure do |config|
     # TODO: this option was removed on Rails 4, and should not be there! That should be a simple validation, or something like that!
     # TODO: check file: /app/models/product_color_value.rb
     ProductColorValue.belongs_to(:option_value, class_name: 'Spree::OptionValue',
-                                 conditions:                ['option_type_id = ?', Spree::OptionType.color_scope])
+                                 conditions:                ['option_type_id in (?)', Spree::OptionType.color_scope])
   end
 end
