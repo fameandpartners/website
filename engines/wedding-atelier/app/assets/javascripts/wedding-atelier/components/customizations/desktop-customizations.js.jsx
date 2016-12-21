@@ -17,18 +17,35 @@ var DesktopCustomizations = React.createClass({
     };
   },
 
+  changeLateralMenuState: function (state) {
+    this.setState({showLateralMenu: state});
+  },
+
+  changeContainerState: function (state) {
+    this.setState({showContainer: state});
+  },
+
   show: function(currentCustomization) {
-    debugger;
     var el = $('.js-customizations-container');
 
-    this.setState({showSelector: true});
+    this.setState({
+      showSelector: true,
+      showContainer: true
+    });
 
     el.one('transitionend', function() {
-      $('.js-customizations-lateral-menu').addClass('animate');
+      this.changeLateralMenuState(true);
     }.bind(this));
-    el.addClass('animate');
 
     this.props.changeCurrentCustomizationCallback(currentCustomization);
+  },
+
+  close: function() {
+    var el = $('.js-customizations-lateral-menu');
+    el.one('transitionend', function() {
+      this.changeContainerState(false);
+    }.bind(this));
+    this.setState({showLateralMenu: false});
   },
 
   render: function() {
@@ -43,12 +60,15 @@ var DesktopCustomizations = React.createClass({
     var customizationMenuProps = $.extend(defaultProps, {
       startOverCallback: this.props.startOverCallback,
       siteVersion: this.props.siteVersion,
+      changeContainerStateCallback: this.changeContainerState,
       showCallback: this.show
     });
 
     var customizationsContainerProps = $.extend(defaultProps, {
       customizations: this.props.customizations,
-      selectedOptions: this.props.selectedOptions
+      selectedOptions: this.props.selectedOptions,
+      showLateralMenuCallback: this.changeLateralMenuState,
+      closeCallback: this.close
     });
 
     return (

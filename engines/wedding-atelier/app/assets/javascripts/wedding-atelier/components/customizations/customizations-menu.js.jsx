@@ -1,13 +1,21 @@
 var CustomizationsMenu = React.createClass({
 
   propTypes: {
-	siteVersion: 						React.PropTypes.string,
+    siteVersion: 						            React.PropTypes.string,
     selectedOptions:                    React.PropTypes.object,
     currentCustomization:               React.PropTypes.string,
     changeCurrentCustomizationCallback: React.PropTypes.func,
     selectCallback:                     React.PropTypes.func,
     startOverCallback:                  React.PropTypes.func,
-    showCallback:                       React.PropTypes.func
+    changeContainerStateCallback:       React.PropTypes.func,
+    showCallback:                       React.PropTypes.func,
+    showContainers:                     React.PropTypes.object
+  },
+
+  componentDidMount: function () {
+    $(this.refs.panelContainer).one('transitionend', function () {
+      this.props.changeContainerStateCallback(false);
+    }.bind(this));
   },
 
   parseSizePresentation: function(userOrSize, height) {
@@ -78,9 +86,16 @@ var CustomizationsMenu = React.createClass({
       selectCallback: this.props.selectCallback
     };
 
+    var lateralMenuClasses = classNames({
+      'customizations-lateral-menu': true,
+      'js-customizations-lateral-menu': true,
+      'hidden-xs': true,
+      'animate': this.props.showContainers.showLateralMenu
+    });
+
     return (
       <div ref="panelContainer" className="customization-panel-container">
-        <div ref="lateralMenu" className="customizations-lateral-menu js-customizations-lateral-menu hidden-xs">
+        <div ref="lateralMenu" className={lateralMenuClasses}>
           {menuEntries}
         </div>
 
