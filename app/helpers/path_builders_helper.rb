@@ -65,10 +65,6 @@ module PathBuildersHelper
       path_parts << "#{product_type}-#{descriptive_url(product)}"
     end
 
-    if options[:color].nil? && product.respond_to?(:color) && product.color.try(:name)
-      options.merge!({ color: product.color.name })
-    end
-
     build_url(path_parts, options)
   end
 

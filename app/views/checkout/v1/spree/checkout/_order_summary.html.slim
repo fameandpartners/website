@@ -51,7 +51,7 @@ ruby:
                   dl.cart-item-description
                     - if product.size.present?
                       dd Size: #{product.size.presentation},
-                      dd Color: #{product.color.name}
+                      dd Color: #{product.color[:name]}
                       dd Skirt Length: #{product.height}
                       - if product.customizations.present?
                         - product.customizations.each do |customization|
