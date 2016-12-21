@@ -33,40 +33,34 @@ var CustomizationExperience = React.createClass({
 
   componentDidMount: function(){
     $.get(this.props.customizationsUrl, function(data){
-      var _state = this.state,
+      var newState = $.extend({}, this.state),
       silhouette = data.customization.silhouettes[0];
-      _state.selectedOptions.silhouette = silhouette
-      _state.customizations = data.customization;
-      _state.customizations.fits = silhouette.fits;
-      _state.customizations.styles = silhouette.styles;
-      this.setState(_state);
+      newState.selectedOptions.silhouette = silhouette
+      newState.customizations = data.customization;
+      newState.customizations.fits = silhouette.fits;
+      newState.customizations.styles = silhouette.styles;
+      this.setState(newState);
     }.bind(this))
   },
 
   changeCurrentCustomizationCallback: function(currentCustomization){
-    var _state = this.state;
-    _state.currentCustomization = currentCustomization;
-    this.setState(_state);
+    this.setState({ currentCustomization: currentCustomization });
   },
 
   selectCallback: function(customization, value){
-    var _state = this.state;
-    _state.selectedOptions[customization] = value;
+    var newState = $.extend({}, this.state);
+    newState.selectedOptions[customization] = value;
 
     if(customization == 'silhouette' && value){
-      _state.customizations.styles = value.styles;
-      _state.customizations.fits = value.fits;
+      newState.customizations.styles = value.styles;
+      newState.customizations.fits = value.fits;
     }
-    this.setState(_state);
-    var width = $(window).width();
-    if(width < 768){
-      $('.js-slick-hook').slick('slickGoTo', 1);
-    }
+    this.setState(newState);
   },
 
   startOverCallback: function () {
-    var _state = this.state;
-    _state.selectedOptions = {
+    var newState = $.exent({}, this.state);
+    newState.selectedOptions = {
       silhouette: null,
       fabric: null,
       colour: null,
@@ -76,7 +70,7 @@ var CustomizationExperience = React.createClass({
       size: null,
       height: null
     };
-    this.setState(_state);
+    this.setState(newState);
   },
 
 
