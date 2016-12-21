@@ -3,7 +3,7 @@ Spree::OptionType.class_eval do
 
   class << self
     def color_scope
-      where(name: 'dress-color')
+      where(name: ['dress-color', 'wedding-atelier-colors'])
     end
 
     def size_scope
