@@ -53,29 +53,28 @@ var Chat = React.createClass({
 
   loadChannelHistory: function(channel) {
     channel.getMessages().then(function(messages) {
-      currentState = this.state;
-      currentState.messages = messages.map(function(message) {
+      var _messages = messages.map(function(message) {
         return JSON.parse(message.body)
       });
-      this.setState(currentState);
+
+      this.setState({messages: _messages});
       this.scrollToBottom();
     }.bind(this));
   },
 
   setupChannel: function (generalChannel){
-    currentState = this.state;
-    currentState.generalChannel = generalChannel;
-    this.setState(currentState);
+    this.setState({generalChannel: generalChannel});
     this.state.generalChannel.join().then(function(channel) {
       console.log('Joined channel as ' + username);
     }.bind(this));
 
     // Listen for new messages sent to the channel
     this.state.generalChannel.on('messageAdded', function (message) {
+      var messages = this.state.messages;
       var parsedBody = JSON.parse(message.body);
-      currentState = this.state;
-      currentState.messages.push(parsedBody);
-      this.setState(currentState);
+
+      messages.push(parsedBody);
+      this.setState({messages: messages});
       this.scrollToBottom();
     }.bind(this));
     this.state.generalChannel.on('memberJoined', function(member) {
@@ -97,9 +96,7 @@ var Chat = React.createClass({
       var chatMembers = members.map(function(member) {
         return {id: member.sid, identity: member.identity, online: true}
       });
-      var currentState = this.state;
-      currentState.channelMembers = chatMembers;
-      this.setState(currentState);
+      this.setState({channelMembers: chatMembers});
     }.bind(this));
   },
 
@@ -108,19 +105,22 @@ var Chat = React.createClass({
     var user = {id: member.sid, identity: member.identity, online: joined}
     var members = currentState.channelMembers.filter(function(onlineMember) { onlineMember.id == user.id});
     members.push(user);
-    currentState.channelMembers = members;
-    this.setState(currentState);
+
+    this.setState({channelMembers: members});
   },
 
   typingIndicator: function(identity, typing){
-    currentState = this.state;
+
+    var typing = this.state.typing;
+
     if (typing) {
-      currentState.typing.push(identity);
+      typing.push(identity);
     } else {
-      index = currentState.typing.indexOf(identity);
-      currentState.typing.splice(index, 1);
+      index = typing.indexOf(identity);
+      typing.splice(index, 1);
     }
-    this.setState(currentState);
+
+    this.setState({typing: typing});
   },
 
   sendMessage: function (){
@@ -138,9 +138,8 @@ var Chat = React.createClass({
 
   updateMessageContent: function(e){
     message = e.target.value;
-    currentState = this.state;
-    currentState.message = message;
-    this.setState(currentState)
+    this.setState({message: message});
+
     this.state.generalChannel.typing();
   },
 
