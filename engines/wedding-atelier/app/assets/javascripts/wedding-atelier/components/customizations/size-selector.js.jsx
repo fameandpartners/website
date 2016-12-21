@@ -1,10 +1,12 @@
 var SizeSelector = React.createClass({
   propTypes: {
-    siteVersion:    React.PropTypes.string,
-    sizes:          React.PropTypes.array,
-    heights:        React.PropTypes.array,
-    assistants:     React.PropTypes.array,
-    selectCallback: React.PropTypes.func.isRequired
+    siteVersion:            React.PropTypes.string,
+    sizes:                  React.PropTypes.array,
+    heights:                React.PropTypes.array,
+    assistants:             React.PropTypes.array,
+    selectCallback:         React.PropTypes.func.isRequired,
+    currentCustomization:   React.PropTypes.string,
+    showContainers:         React.PropTypes.object
   },
 
   getInitialState: function() {
@@ -90,8 +92,15 @@ var SizeSelector = React.createClass({
       );
     }.bind(this));
 
+    var customizationSelectorClasses = classNames({
+      'customization-selector': true,
+      'animated': true,
+      'slideInLeft': this.props.showContainers.showSelector,
+      'active': this.props.currentCustomization === 'size'
+    });
+
     return (
-      <div ref="container" className="customization-selector animated slideInLeft">
+      <div ref="container" className={customizationSelectorClasses}>
         <div className="customization customization-size">
           <div className="customization-title">
             <h1><em>Tailor</em> to your body</h1>

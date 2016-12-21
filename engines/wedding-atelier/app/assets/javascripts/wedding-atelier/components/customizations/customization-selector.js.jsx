@@ -43,11 +43,12 @@ var CustomizationSelector = React.createClass({
     var customizationSelectorClasses = classNames({
       'customization-selector': true,
       'animated': true,
-      'slideInLeft': this.props.showContainers.showSelector
+      'slideInLeft': this.props.showContainers.showSelector,
+      'active': this.props.currentCustomization === this.props.type
     });
 
     return (
-      <div ref="container" className={customizationSelectorClasses} style={{'display': this.props.currentCustomization === this.props.type? 'block':'none'}}>
+      <div ref="container" className={customizationSelectorClasses}>
         <div className="customization">
           <div className="customization-title">
             <h1><em>{this.props.keyword}</em> {this.props.title}</h1>

@@ -3,7 +3,8 @@ var FabricAndColourSelector = React.createClass({
     colours:          React.PropTypes.array,
     fabrics:          React.PropTypes.array,
     selectedOption:   React.PropTypes.object,
-    selectCallback:   React.PropTypes.func.isRequired
+    selectCallback:   React.PropTypes.func.isRequired,
+    showContainers:   React.PropTypes.object
   },
 
   selectFabric: function(fabric) {
@@ -39,8 +40,15 @@ var FabricAndColourSelector = React.createClass({
       );
     }.bind(this));
 
+    var customizationSelectorClasses = classNames({
+      'customization-selector': true,
+      'animated': true,
+      'slideInLeft': this.props.showContainers.showSelector,
+      'active': this.props.currentCustomization === 'fabric-colour'
+    });
+
     return (
-      <div ref="container" className="customization-selector fabric animated slideInLeft">
+      <div ref="container" className={customizationSelectorClasses}>
         <div className="customization">
           <div className="customization-title">
             <h1><em>Create</em> the look and feel</h1>
