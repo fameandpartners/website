@@ -4,7 +4,7 @@ describe Repositories::ProductColors do
   let!(:color_option_type) { create(:option_type, :color) }
 
   describe '.get_group_by_name' do
-    let!(:color_group) { create(:option_values_group, option_type: color_option_type, name: 'Red') }
+    let!(:color_group) { create(:option_values_group, :with_option_value, option_type: color_option_type, name: 'Red') }
 
     it 'finds color group by name' do
       result = described_class.get_group_by_name('ReD')
@@ -25,7 +25,8 @@ describe Repositories::ProductColors do
   end
 
   describe '.get_color_by_name' do
-    let!(:color_group) { create(:option_values_group, option_type: color_option_type, name: 'blue') }
+    let!(:color_group) { create(:option_values_group, :with_option_value, option_type: color_option_type, name: 'blue') }
+
     it 'finds a color by name' do
       name = 'blue'
       result = described_class.get_by_name(name)
