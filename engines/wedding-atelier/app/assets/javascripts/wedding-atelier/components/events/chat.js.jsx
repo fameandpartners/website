@@ -10,27 +10,30 @@ var Chat = React.createClass({
   },
 
   componentWillMount: function(){
-    $.post(this.props.twilio_token_path, function(data) {
+    var that = this;
+
+    $.post(that.props.twilio_token_path, function(data) {
       username = data.username;
       var accessManager = new Twilio.AccessManager(data.token);
       var messagingClient = new Twilio.IPMessaging.Client(accessManager);
+      var channelName = 'wedding-channel-' + that.props.event_id;
 
-      var channelName = 'wedding-channel-' + this.props.event_id;
       messagingClient.getChannelByUniqueName(channelName).then(function(channel) {
         if (channel) {
-          this.setupChannel(channel);
-          this.loadChannelHistory(channel);
-          this.loadChannelMembers(channel);
+          that.setupChannel(channel);
+          that.loadChannelHistory(channel);
+          that.loadChannelMembers(channel);
         } else {
           messagingClient.createChannel({
             uniqueName: channelName,
-            friendlyName: this.props.wedding_name })
-              .then(function(channel) {
-                this.setupChannel(channel);
-              }.bind(this));
+            friendlyName: that.props.wedding_name
+          }).then(function(channel) {
+              that.setupChannel(channel);
+          });
         }
-      }.bind(this));
-    }.bind(this));
+      });
+    });
+
   },
 
   componentDidMount: function(){
