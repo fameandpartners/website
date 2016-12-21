@@ -9,7 +9,7 @@ namespace :wedding_atelier do
                       Bright\ Blush Pale\ Pink Lavender Plum Royal\ Blue Cobalt\ Blue Pale\ Blue
                       Aqua Bright\ Turquoise Mint Pale\ Gray)
 
-    colours = find_or_create_option_type('wedding-atelier-colors', 'Colour', colour_names)
+    colours = find_or_create_option_type('dress-color', 'Color', colour_names, 'Wedding Atelier Colors')
 
     # Common option types
     fabrics = find_or_create_option_type('wedding-atelier-fabrics',
@@ -241,7 +241,7 @@ namespace :wedding_atelier do
                           multi_way_fits, taxon, base_option_types)
   end
 
-  def find_or_create_option_type(name, presentation, option_values)
+  def find_or_create_option_type(name, presentation, option_values, value_group_presentation = nil)
     option_type = Spree::OptionType.find_or_create_by_name(name) do |ot|
       ot.presentation = presentation
     end
@@ -250,6 +250,14 @@ namespace :wedding_atelier do
         o.presentation = ov_name
       end
       option_type.option_values << ov unless option_type.option_values.include? ov
+    end
+    if value_group_presentation
+      ovg = Spree::OptionValuesGroup.new
+      ovg.presentation = value_group_presentation
+      ovg.name = value_group_presentation.parameterize
+      ovg.option_type_id = option_type.id
+      ovg.option_value_ids = option_type.option_values.map(&:id)
+      ovg.save
     end
     option_type
   end
