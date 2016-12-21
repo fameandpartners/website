@@ -245,19 +245,21 @@ namespace :wedding_atelier do
     option_type = Spree::OptionType.find_or_create_by_name(name) do |ot|
       ot.presentation = presentation
     end
-    option_values.each do |ov_name|
-      ov = Spree::OptionValue.find_or_create_by_name(ov_name.parameterize) do |o|
-        o.presentation = ov_name
-      end
-      option_type.option_values << ov unless option_type.option_values.include? ov
-    end
+
     if value_group_presentation
       ovg = Spree::OptionValuesGroup.new
       ovg.presentation = value_group_presentation
       ovg.name = value_group_presentation.parameterize
       ovg.option_type_id = option_type.id
-      ovg.option_value_ids = option_type.option_values.map(&:id)
       ovg.save
+    end
+
+    option_values.each do |ov_name|
+      ov = Spree::OptionValue.find_or_create_by_name(ov_name.parameterize) do |o|
+        o.presentation = ov_name
+      end
+      option_type.option_values << ov unless option_type.option_values.include? ov
+      ovg.option_values << ov if ovg && !ovg.option_values.include?(ov)
     end
     option_type
   end
