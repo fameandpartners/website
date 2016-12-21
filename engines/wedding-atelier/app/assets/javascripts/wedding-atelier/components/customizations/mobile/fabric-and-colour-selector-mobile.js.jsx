@@ -12,7 +12,7 @@ var FabricAndColourSelectorMobile = React.createClass({
       var inputId = fabric.id + "-" + 'mobile';
 
       return (
-        <div key={index} onClick={this.props.selectOptionCallback.bind(null, 'fabric', fabric)} className="fabric-radio-container">
+        <div key={inputId} onClick={this.props.selectOptionCallback.bind(null, 'fabric', fabric)} className="fabric-radio-container">
           <input id={inputId} type="radio" value={fabric} name="fabric" className="customization-radio"/>
           <label htmlFor={inputId} className="customization-radio-label">
             <span className="box"></span>
@@ -27,8 +27,9 @@ var FabricAndColourSelectorMobile = React.createClass({
         'customizations-selector-mobile-options-item-small': true,
         'active': this.props.selectedOption && this.props.selectedOption.id == colour.id
       });
+      var inputId = colour.id + "-" + 'mobile';
       return (
-        <div key={index} onClick={this.props.selectOptionCallback.bind(null, 'colour', colour)} className="col-xs-6">
+        <div key={inputId} onClick={this.props.selectOptionCallback.bind(null, 'colour', colour)} className="col-xs-6">
           <div className={classes} style={{backgroundColor: colour.value}}>
           </div>
           <p className="customizations-selector-mobile-options-item-label">{colour.presentation}</p>
