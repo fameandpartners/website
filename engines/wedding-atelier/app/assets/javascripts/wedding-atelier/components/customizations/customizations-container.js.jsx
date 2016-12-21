@@ -10,14 +10,14 @@ var CustomizationsContainer = React.createClass({
     goToSlideCallback:                  React.PropTypes.func
   },
 
-  componentDidUpdate: function(){
+  componentDidUpdate: function() {
     var el = $(ReactDOM.findDOMNode(this.refs.customizationsContainer));
 
     el.find('.customization-selector').hide();
     $(ReactDOM.findDOMNode(this.refs[this.props.currentCustomization])).show();
   },
 
-  close: function(ref){
+  close: function(ref) {
     var el = $('.js-customizations-lateral-menu');
     el.one('transitionend', function() {
       $('.js-customizations-container').removeClass('animate');

@@ -10,12 +10,12 @@ var CustomizationsMenu = React.createClass({
   },
 
   show: function(currentCustomization) {
-    var el = $('.js-customizations-container');
+    var el = $(this.refs.panelContainer);
 
     $('.customization-selector').addClass('slideInLeft');
     el.one('transitionend', function() {
-      $('.js-customizations-lateral-menu').addClass('animate');
-    });
+      $(this.refs.lateralMenu).addClass('animate');
+    }.bind(this));
     el.addClass('animate');
 
     this.props.changeCurrentCustomizationCallback(currentCustomization);
@@ -23,6 +23,7 @@ var CustomizationsMenu = React.createClass({
 
   parseSizePresentation: function(userOrSize, height) {
     if(userOrSize.name) {
+      // Build a regexp to get the matching size number depeding on the site version: US|AU
       var regexp = new RegExp(this.props.siteVersion + '/?(\\d+)', 'i');
       return height + ' | ' + userOrSize.name.match(regexp)[1];
     } else {
@@ -44,12 +45,12 @@ var CustomizationsMenu = React.createClass({
         className += ' selected';
       }
 
-      if(customizationItem == 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour) {
+      if(customizationItem === 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour) {
         className += ' selected';
         selectedValue = selectedOptions.fabric.presentation + ' | ' + selectedOptions.colour.presentation;
       }
 
-      if(customizationItem == 'size' && selectedOptions.size && selectedOptions.height) {
+      if(customizationItem === 'size' && selectedOptions.size && selectedOptions.height) {
         className += ' selected';
         selectedValue = this.parseSizePresentation(selectedOptions.size, selectedOptions.height);
       }
@@ -89,8 +90,8 @@ var CustomizationsMenu = React.createClass({
     };
 
     return (
-      <div className="customization-panel-container">
-        <div className="customizations-lateral-menu js-customizations-lateral-menu hidden-xs">
+      <div ref="panelContainer" className="customization-panel-container">
+        <div ref="lateralMenu" className="customizations-lateral-menu js-customizations-lateral-menu hidden-xs">
           {menuEntries}
         </div>
 
