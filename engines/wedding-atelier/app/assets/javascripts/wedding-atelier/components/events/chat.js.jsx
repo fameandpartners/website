@@ -119,7 +119,7 @@ var Chat = React.createClass({
   },
 
   typingIndicator: function(identity, typing){
-
+    var index = null;
     var typing = this.state.typing;
 
     if (typing) {
@@ -160,7 +160,7 @@ var Chat = React.createClass({
 
   getMessages() {
     var messages = this.state.messages.map(function(message, index){
-      if(message.type == 'simple') {
+      if(message.type === 'simple') {
         return (<ChatSimpleMessage message={message} key={"simple-message" + index}/>);
       }
     });
