@@ -1,13 +1,19 @@
+ruby:
+  force_show_info_box   = page.try(:get, 'show-collection-info-box') == 'true'
+  black_bg_info_box = page.try(:get, 'black-background-info-box') == 'true'
 
 - products = @collection.products.first(2)
 /! [][][content]
 = render partial: '/products/collections/product', collection: products, as: :product, locals: {col: col}
 
-- if Features.active?(:i_equal_change)
+// i=Change flag *IS ENABLED* & the "show-collection-info-box" variable *IS NOT* set as TRUE
+// Result: Show i=Change box
+- if Features.active?(:i_equal_change) && !force_show_info_box
   = render partial: '/marketing/i_equal_change_box'
 
+// Show default info box
 - else
-  = render partial: '/products/collections/info_box_subheading'
+  = render partial: '/products/collections/info_box_subheading', locals: {black_bg_info_box: black_bg_info_box}
 
 - @collection.products.drop(2).each_slice(col) do |products|
   /! [][][]
