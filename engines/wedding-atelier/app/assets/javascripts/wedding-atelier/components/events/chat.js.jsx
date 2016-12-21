@@ -149,19 +149,27 @@ var Chat = React.createClass({
     }
   },
 
-  render: function(){
+  getMessages() {
     var messages = this.state.messages.map(function(message, index){
       if(message.type == 'simple') {
         return (<ChatSimpleMessage message={message} key={"simple-message" + index}/>);
       }
     });
 
-    var typing = this.state.typing.length > 0 ? 'Now typing...' + this.state.typing.join(", ") : '';
+    return messages;
+  },
 
+  getChatMembers: function() {
     var chatMembers = this.state.channelMembers.map(function(member, index) {
       className = member.online ? '' : 'text-muted';
       return(<span className={className} key={'chat-member-' + index}>{member.identity}, </span>);
     });
+  },
+
+  render: function(){
+    var messages = this.getMessages();
+    var typing = this.state.typing.length > 0 ? 'Now typing...' + this.state.typing.join(", ") : '';
+    var chatMembers = this.getChatMembers();
 
     return(
       <div className="chat">
