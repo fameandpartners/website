@@ -28,16 +28,16 @@ var CustomizationsContainerMobile = React.createClass({
   },
 
   close: function() {
-    var _state = this.state;
-    _state.currentValue = null;
-    this.setState(_state);
+    var newState = {};
+    newState.currentValue = null;
+    this.setState(newState);
     this.props.goToSlide(1);
   },
 
   selectOption: function (type, option) {
-    var _state = this.state;
-    _state[type] = option;
-    this.setState(_state);
+    var newState = {};
+    newState[type] = option;
+    this.setState(newState);
   },
 
   applyChanges: function () {

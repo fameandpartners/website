@@ -46,22 +46,22 @@ var SizeSelectorMobile = React.createClass({
   },
 
   setSizeWithProfile: function(assistant) {
-    var _state = this.state;
+    var newState = {};
 
     $(this.refs.container).find('input[value="' + assistant.user_profile.dress_size + '"]').prop('checked', true);
     $(this.refs.heightSelect).select2().val(assistant.user_profile.height).change();
-    _state.size = assistant;
-    _state.assistantSelected = true;
-    this.setState(this.state);
+    newState.size = assistant;
+    newState.assistantSelected = true;
+    this.setState(newState);
     this.changeHeight();
   },
 
   changeSize: function(size) {
-    var _state = this.state;
+    var newState = {};
     $('input[name="assistant"]').removeProp('checked');
     $(this.refs.heightSelect).select2();
-    _state.size = size;
-    this.setState(_state);
+    newState.size = size;
+    this.setState(newState);
     this.changeHeight();
   },
 
