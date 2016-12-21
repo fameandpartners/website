@@ -1,4 +1,13 @@
 var Chat = React.createClass({
+
+  propTypes: {
+    twilio_token_path: React.PropTypes.string,
+    event_id: React.PropTypes.number,
+    wedding_name: React.PropTypes.string,
+    profile_photo: React.PropTypes.string,
+    username: React.PropTypes.string
+  },
+
   getInitialState: function(){
     return {
       generalChannel: null,
@@ -215,11 +224,3 @@ var Chat = React.createClass({
     )
   }
 });
-
-Chat.propTypes = {
-  twilio_token_path: React.PropTypes.string,
-  event_id: React.PropTypes.number,
-  wedding_name: React.PropTypes.string,
-  profile_photo: React.PropTypes.string,
-  username: React.PropTypes.string
-}
