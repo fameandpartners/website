@@ -1,6 +1,15 @@
 var MoodBoardEvent = React.createClass({
   getInitialState: function (){
-    return {event: {dresses: [], invitations: [], assistants: [], send_invite_path: '', current_user_id: '', name: 'Loading...'}}
+    return {
+      event: {
+        dresses: [],
+        invitations: [],
+        assistants: [],
+        send_invite_path: '',
+        current_user_id: '',
+        name: 'Loading...'
+      }
+    }
   },
 
   componentWillMount: function(){
