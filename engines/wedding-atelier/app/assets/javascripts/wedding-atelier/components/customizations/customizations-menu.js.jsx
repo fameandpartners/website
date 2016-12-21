@@ -1,7 +1,7 @@
 var CustomizationsMenu = React.createClass({
 
   propTypes: {
-    siteVersion: 						            React.PropTypes.string,
+    siteVersion:                        React.PropTypes.string,
     selectedOptions:                    React.PropTypes.object,
     currentCustomization:               React.PropTypes.string,
     changeCurrentCustomizationCallback: React.PropTypes.func,
