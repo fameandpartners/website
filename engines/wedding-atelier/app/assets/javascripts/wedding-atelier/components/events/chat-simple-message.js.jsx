@@ -31,3 +31,7 @@ var ChatSimpleMessage = React.createClass({
     )
   }
 });
+
+ChatSimpleMessage.propTypes = {
+  message: React.PropTypes.object
+};
