@@ -12,5 +12,9 @@ module WeddingAtelier
       end
     end
 
+    def profile_image_tag
+      image_tag profile_image_path, class: 'profile-image'
+    end
+
   end
 end

@@ -1,0 +1,146 @@
+#atelier {
+  height: 100%;
+
+  .right-container {
+    height: 100%;
+  }
+
+  h1.moodboard-title {
+    margin: 23px 0;
+  }
+
+  /* FIRST TAB — BRIDESMAID DRESSES */
+
+  #bridesmaid-dresses {
+    padding: 35px 0;
+  }
+
+  .add-dress-box {
+    margin: 30px;
+  }
+
+  /* container when there are dresses */
+  .dresses-list {
+    padding-top: 25px;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .dress-boxes {
+    display: flex;
+  }
+
+  /* a dress into the list */x
+
+  .dress-box {
+    width: 308px;
+    min-width: 308px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+  }
+
+  .top-info {
+    background-color: $white-two;
+
+    span {
+      color: $greyish;
+      font-family: NeuzeGro;
+      line-height: 1.92em;
+      font-size: 0.8em;
+      margin-left: 8px;
+    }
+  }
+
+  .dress-box-header {
+    background-color: $white-three;
+
+    display: flex;
+    padding: 15px;
+    justify-content: space-between;
+
+    .likes {
+      display: flex;
+    }
+
+  }
+
+  .dress-box-body {
+    flex-grow: 1;
+    background-color: $white-three;
+    img {
+      border: 1px dashed gray;
+      width: 223px;
+      height: 316px;
+    }
+  }
+
+  .dress-info {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    padding: 14px 0;
+
+    strong {
+      text-transform: uppercase;
+    }
+  }
+
+  .dress-box-footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: $white-two;
+    width: 90%;
+    height: 40px;
+    align-items: center;
+  }
+
+/* SECOND TAB — WEDDING DETAILS */
+
+  #wedding-details {
+    padding-top: 60px;
+
+    form {
+      width: 340px;
+    }
+  }
+
+/* THIRD TAB - MANAGE BRIDAL PARTY */
+
+  #manage-bridal-party {
+    padding-top: 60px;
+    width: 340px;
+
+    h1 {
+      font-family: FreightDispPro;
+      margin-bottom: 29px;
+      em {
+        font-weight: 400;
+      }
+    }
+  }
+
+  .invited-people {
+    height: 134px;
+    overflow: auto;
+    border-top: 1px solid $greyish;
+    border-bottom: 1px solid $greyish;
+    margin-top: 21px;
+  }
+
+  .person {
+    font-family: NeuzeGro;
+    letter-spacing: 0.7px;
+    font-size: 0.82em;
+    text-transform: uppercase;
+    margin: 16px 0;
+  }
+
+  .person-name {
+    color: $black;
+  }
+
+  .person-role {
+    color: $warm-grey;
+  }
+}

@@ -95,7 +95,44 @@ var MoodBoardEvent = React.createClass({
                 username={this.props.username} />
         </div>
         <div className="right-content col-sm-6" id="atelier">
+          <div className='right-container'>
+            <h1 className="moodboard-title text-center">
+              {this.state.event.name} - in {this.state.event.remaining_days} days
+            </h1>
 
+            <div className="moodboard-tabs center-block">
+              <ul className="nav nav-tabs center-block" role="tablist">
+                <li role="presentation" className="tab-chat hidden">
+                  <a aria-controls="chat-mobile" data-toggle="tab" href="#chat-mobile" role="tab">
+                    Chat  <span className="badge">12</span></a>
+                </li>
+                <li className="active" role="presentation">
+                  <a aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab">
+                    Bridesmaid dresses</a>
+                </li>
+              </ul>
+              <div className="tab-content">
+                <div id="chat-mobile" className="tab-pane" role="tabpanel">
+                  <Chat twilio_token_path={this.props.twilio_token_path}
+                    event_id={this.props.event_id}
+                    wedding_name={this.props.wedding_name}
+                    profile_photo={this.props.profile_photo}
+                    username={this.props.username} />
+                </div>
+                <div id="bridesmaid-dresses" className="tab-pane active" role="tabpanel">
+                  <div className="add-dress-box">
+                    <button className="add">Add your first dress</button>
+                  </div>
+                  <div className="dresses-actions text-center hidden"><a href="#" className="btn-transparent btn-create-a-dress">
+                    <em>Create</em> a dress</a>
+                  </div>
+                  <div className="dresses-list hidden">
+                    <DressTiles dresses={this.state.event.dresses} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )
