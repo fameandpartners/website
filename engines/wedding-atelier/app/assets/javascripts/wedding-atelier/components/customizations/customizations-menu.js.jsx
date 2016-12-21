@@ -12,7 +12,7 @@ var CustomizationsMenu = React.createClass({
     showContainers:                     React.PropTypes.object
   },
 
-  componentDidMount: function () {
+  componentWillMount: function () {
     $(this.refs.panelContainer).one('transitionend', function () {
       this.props.changeContainerStateCallback(false);
     }.bind(this));

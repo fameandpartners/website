@@ -19,14 +19,7 @@ var CustomizationsContainer = React.createClass({
     }.bind(this));
   },
 
-  componentDidUpdate: function() {
-    var el = $(ReactDOM.findDOMNode(this.refs.customizationsContainer));
-
-    el.find('.customization-selector').hide();
-    $(ReactDOM.findDOMNode(this.refs[this.props.currentCustomization])).show();
-  },
-
-  render: function(){
+  render: function() {
     var currentCustomization = this.props.currentCustomization,
         title = currentCustomization ? currentCustomization.split('-').join(' and ') : '';
 
@@ -50,7 +43,7 @@ var CustomizationsContainer = React.createClass({
             showLateralMenuCallback={this.props.showLateralMenuCallback}
             options={this.props.customizations.silhouettes}
             selectedOption={this.props.selectedOptions.silhouette}
-            ref="silhouette"
+            currentCustomization={this.props.currentCustomization}
             keyword="Choose"
             title="your perfect shape"
             description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -61,7 +54,7 @@ var CustomizationsContainer = React.createClass({
             selectCallback={this.props.selectCallback}
             showLateralMenuCallback={this.props.showLateralMenuCallback}
             selectedOption={this.props.selectedOptions.colour}
-            ref="fabric-colour"
+            currentCustomization={this.props.currentCustomization}
             showContainers={this.props.showContainers}/>
           <CustomizationSelector
             type="length"
@@ -69,7 +62,7 @@ var CustomizationsContainer = React.createClass({
             showLateralMenuCallback={this.props.showLateralMenuCallback}
             options={this.props.customizations.lengths}
             selectedOption={this.props.selectedOptions.length}
-            ref="length"
+            currentCustomization={this.props.currentCustomization}
             keyword="Choose"
             title="your length."
             description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -80,7 +73,7 @@ var CustomizationsContainer = React.createClass({
             showLateralMenuCallback={this.props.showLateralMenuCallback}
             options={this.props.customizations.styles}
             selectedOption={this.props.selectedOptions.style}
-            ref="style"
+            currentCustomization={this.props.currentCustomization}
             keyword="Add"
             title="on extra trimmings."
             description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -91,7 +84,7 @@ var CustomizationsContainer = React.createClass({
             showLateralMenuCallback={this.props.showLateralMenuCallback}
             options={this.props.customizations.fits}
             selectedOption={this.props.selectedOptions.fit}
-            ref="fit"
+            currentCustomization={this.props.currentCustomization}
             keyword="Finesse"
             title="the way it fits."
             description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -103,7 +96,7 @@ var CustomizationsContainer = React.createClass({
             siteVersion={this.props.siteVersion}
             selectCallback={this.props.selectCallback}
             showLateralMenuCallback={this.props.showLateralMenuCallback}
-            ref="size"
+            currentCustomization={this.props.currentCustomization}
             showContainers={this.props.showContainers}/>
         </div>
       </div>
