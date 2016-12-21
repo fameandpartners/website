@@ -1,5 +1,9 @@
 var ChatSimpleMessage = React.createClass({
 
+  propTypes: {
+    message: React.PropTypes.object
+  },
+
   formatDate: function(time) {
     var m = moment(new Date(time)),
       fromNow = m.fromNow(),
@@ -31,7 +35,3 @@ var ChatSimpleMessage = React.createClass({
     )
   }
 });
-
-ChatSimpleMessage.propTypes = {
-  message: React.PropTypes.object
-};
