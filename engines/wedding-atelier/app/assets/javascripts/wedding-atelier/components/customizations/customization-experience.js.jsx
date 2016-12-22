@@ -69,8 +69,7 @@ var CustomizationExperience = React.createClass({
   },
 
   startOverCallback: function () {
-    var _state = this.state;
-    _state.selectedOptions = {
+    this.setState({selectedOptions: {
       silhouette: null,
       fabric: null,
       colour: null,
@@ -79,10 +78,8 @@ var CustomizationExperience = React.createClass({
       fit: null,
       size: null,
       height: null
-    };
-    this.setState(_state);
+    }});
   },
-
 
   render: function() {
 
