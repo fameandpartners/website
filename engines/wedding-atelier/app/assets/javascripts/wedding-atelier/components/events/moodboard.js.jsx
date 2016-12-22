@@ -120,13 +120,13 @@ var MoodBoardEvent = React.createClass({
                     username={this.props.username} />
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active" role="tabpanel">
-                  <div className="add-dress-box">
+                  <div className="add-dress-box hidden">
                     <button className="add">Add your first dress</button>
                   </div>
-                  <div className="dresses-actions text-center hidden"><a href="#" className="btn-transparent btn-create-a-dress">
+                  <div className="dresses-actions text-center"><a href="#" className="btn-transparent btn-create-a-dress">
                     <em>Create</em> a dress</a>
                   </div>
-                  <div className="dresses-list hidden">
+                  <div className="dresses-list">
                     <DressTiles dresses={this.state.event.dresses} />
                   </div>
                 </div>

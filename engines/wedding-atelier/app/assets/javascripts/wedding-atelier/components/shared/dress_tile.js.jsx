@@ -1,8 +1,16 @@
 var DressTile = React.createClass({
 
   propTypes: {
-    dress: React.PropTypes.object
+    dress: React.PropTypes.shape({
+      id: React.PropTypes.number,
+      title: React.PropTypes.string,
+      image: React.PropTypes.string,
+      author: React.PropTypes.string,
+      price: React.PropTypes.string
+    })
   },
+
+
 
   getInitialState: function(){
     return {loveClass: 'icon-unliked'}
@@ -23,7 +31,7 @@ var DressTile = React.createClass({
             <div className="likes">
               <span className={this.state.loveClass} onClick={this.handleLoveIt}></span> {this.props.dress.loveCount}
             </div>
-            <a href="#" className="icon-close pull-right">#</a>
+            <a href="#" className="icon-close pull-right"></a>
           </div>
           <div className="dress-box-body text-center">
             <img className="center-block" src={this.props.dress.image}/>
