@@ -1,15 +1,15 @@
 var CustomizationsMenu = React.createClass({
 
   propTypes: {
-    siteVersion:                        React.PropTypes.string,
-    selectedOptions:                    React.PropTypes.object,
-    currentCustomization:               React.PropTypes.string,
+    siteVersion: React.PropTypes.string,
+    selectedOptions: React.PropTypes.object,
+    currentCustomization: React.PropTypes.string,
     changeCurrentCustomizationCallback: React.PropTypes.func,
-    selectCallback:                     React.PropTypes.func,
-    startOverCallback:                  React.PropTypes.func,
-    changeContainerStateCallback:       React.PropTypes.func,
-    showCallback:                       React.PropTypes.func,
-    showContainers:                     React.PropTypes.object
+    selectCallback: React.PropTypes.func,
+    startOverCallback: React.PropTypes.func,
+    changeContainerStateCallback: React.PropTypes.func,
+    showCallback: React.PropTypes.func,
+    showContainers: React.PropTypes.object
   },
 
   parseSizePresentation: function(userOrSize, height) {

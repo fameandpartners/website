@@ -1,14 +1,14 @@
 var CustomizationSelector = React.createClass({
   propTypes: {
-    type:                     React.PropTypes.string,
-    options:                  React.PropTypes.array,
-    selectedOption:           React.PropTypes.object,
-    keyword:                  React.PropTypes.string,
-    title:                    React.PropTypes.string,
-    description:              React.PropTypes.string,
-    selectCallback:           React.PropTypes.func.isRequired,
-    currentCustomization:     React.PropTypes.string,
-    showContainers:           React.PropTypes.object
+    type: React.PropTypes.string,
+    options: React.PropTypes.array,
+    selectedOption: React.PropTypes.object,
+    keyword: React.PropTypes.string,
+    title: React.PropTypes.string,
+    description: React.PropTypes.string,
+    selectCallback: React.PropTypes.func.isRequired,
+    currentCustomization: React.PropTypes.string,
+    showContainers: React.PropTypes.object
   },
 
   isOptionSelected: function(option){

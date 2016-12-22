@@ -1,12 +1,12 @@
 var SizeSelector = React.createClass({
   propTypes: {
-    siteVersion:            React.PropTypes.string,
-    sizes:                  React.PropTypes.array,
-    heights:                React.PropTypes.array,
-    assistants:             React.PropTypes.array,
-    selectCallback:         React.PropTypes.func.isRequired,
-    currentCustomization:   React.PropTypes.string,
-    showContainers:         React.PropTypes.object
+    siteVersion: React.PropTypes.string,
+    sizes: React.PropTypes.array,
+    heights: React.PropTypes.array,
+    assistants: React.PropTypes.array,
+    selectCallback: React.PropTypes.func.isRequired,
+    currentCustomization: React.PropTypes.string,
+    showContainers: React.PropTypes.object
   },
 
   getInitialState: function() {

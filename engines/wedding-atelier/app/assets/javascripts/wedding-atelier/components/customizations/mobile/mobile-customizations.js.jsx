@@ -1,12 +1,12 @@
 var MobileCustomizations = React.createClass({
   propTypes: {
-    changeCurrentCustomizationCallback:     React.PropTypes.func,
-    currentCustomization:                   React.PropTypes.string,
-    customizations:                         React.PropTypes.object,
-    selectCallback:                         React.PropTypes.func,
-    selectedOptions:                        React.PropTypes.object,
-    siteVersion:                            React.PropTypes.string,
-    startOverCallback:                      React.PropTypes.func
+    changeCurrentCustomizationCallback: React.PropTypes.func,
+    currentCustomization: React.PropTypes.string,
+    customizations: React.PropTypes.object,
+    selectCallback: React.PropTypes.func,
+    selectedOptions: React.PropTypes.object,
+    siteVersion: React.PropTypes.string,
+    startOverCallback: React.PropTypes.func
   },
 
   componentDidMount: function() {

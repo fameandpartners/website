@@ -1,10 +1,10 @@
 var FabricAndColourSelectorMobile = React.createClass({
   propTypes: {
-    colours:                React.PropTypes.array,
-    fabrics:                React.PropTypes.array,
-    selectedOption:         React.PropTypes.object,
-    selectCallback:         React.PropTypes.func.isRequired,
-    selectOptionCallback:   React.PropTypes.func.isRequired
+    colours: React.PropTypes.array,
+    fabrics: React.PropTypes.array,
+    selectedOption: React.PropTypes.object,
+    selectCallback: React.PropTypes.func.isRequired,
+    selectOptionCallback: React.PropTypes.func.isRequired
   },
 
   render: function() {
