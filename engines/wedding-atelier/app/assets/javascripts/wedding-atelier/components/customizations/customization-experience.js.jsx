@@ -61,6 +61,20 @@ var CustomizationExperience = React.createClass({
     return cost;
   },
 
+
+  customizationsCost: function(){
+    var selectedOptions = this.state.selectedOptions,
+        cost = 0;
+
+    for(var key in selectedOptions) {
+      var option = selectedOptions[key];
+      if(key !== 'size' && key !== 'silhouette' && key !== 'height' && option) {
+        cost += parseInt(option.price);
+      }
+    }
+    return cost;
+  },
+
   changeCurrentCustomizationCallback: function(currentCustomization){
     this.setState({ currentCustomization: currentCustomization });
   },
