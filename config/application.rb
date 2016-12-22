@@ -119,6 +119,9 @@ module FameAndPartners
 
     config.skip_mail_delivery = false
 
+    #Use route for error handling
+    config.exceptions_app = self.routes
+
     config.generators do |generator|
       generator.test_framework :rspec
     end
