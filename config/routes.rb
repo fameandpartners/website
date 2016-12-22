@@ -405,6 +405,12 @@ FameAndPartners::Application.routes.draw do
 
     mount Spree::Core::Engine, at: '/'
 
+    ########
+    # 404 Error Pages
+    ########
+
+    get "/404", :to => "errors#not_found", :via => :all
+
     ############################################
     # Storefront (Search, Checkout and Payments)
     ############################################
