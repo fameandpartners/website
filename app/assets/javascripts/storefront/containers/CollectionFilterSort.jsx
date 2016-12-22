@@ -562,9 +562,19 @@ class CollectionFilterSort extends Component {
                         />
 
                         <ExpandablePanelItem
+                          isSecondaryFilter={(true)}
                           itemGroup={(
-                            <div className="checkboxBlackBg">
-                              <label className="ExpandablePanel__option" name="bodyshape">
+                            <div>
+                              <div className="ExpandablePanel__name">
+                                  Delivery Date
+                              </div>
+                              <div className="ExpandablePanel__selectedOptions">
+                              </div>
+                            </div>
+                          )}
+                          revealedContent={(
+                            <div className="ExpandablePanel__listOptions checkboxBlackBg">
+                              <label className="ExpandablePanel__option" name="deliverydate">
                                 <input
                                   id="fast_making"
                                   checked={filters.fastMaking}
@@ -573,7 +583,7 @@ class CollectionFilterSort extends Component {
                                   type="checkbox"
                                 />
                                 <span className="checkboxBlackBg__check">
-                                  <span className="ExpandablePanel__optionName">EXPRESS MAKING (6 - 9 Days)</span>
+                                  <span className="ExpandablePanel__optionName">Express Making (6 - 9 Days)</span>
                                 </span>
                               </label>
                             </div>
