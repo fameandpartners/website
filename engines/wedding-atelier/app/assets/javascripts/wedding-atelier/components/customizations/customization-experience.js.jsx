@@ -107,9 +107,6 @@ var CustomizationExperience = React.createClass({
   render: function() {
 
   render: function(){
-
-    this.customizationsCost();
-
     var props = {
       selectedOptions: this.state.selectedOptions,
       currentCustomization: this.state.currentCustomization,
