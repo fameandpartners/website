@@ -31,7 +31,7 @@ var CustomizationSelector = React.createClass({
       var customizationClass = 'customization-options-item';
       return (
         <div key={index} onClick={this.props.selectCallback.bind(null, this.props.type, option)} className="col-sm-6 col-md-6 col-lg-4">
-          < iv className={optionItemClasses}>
+          <div className={optionItemClasses}>
             <RemoveButton clickCallback={this.removeCustomization} active={this.isOptionSelected(option)}/>
             <img src={option.image} />
             <p>{option.name}</p>
