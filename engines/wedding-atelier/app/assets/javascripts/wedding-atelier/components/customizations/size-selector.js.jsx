@@ -28,6 +28,10 @@ var SizeSelector = React.createClass({
       }.bind(this));
   },
 
+  componentDidMount: function () {
+    $(this.refs.heightSelect).select2();
+  },
+
   parsePresentation: function(size) {
     var regexp = new RegExp(this.props.siteVersion + '(\\d+)', 'i');
     return size.name.match(regexp)[1];
@@ -35,7 +39,7 @@ var SizeSelector = React.createClass({
 
   setSizeWithProfile: function(assistant) {
     $(this.refs.container).find('input[value="' + assistant.user_profile.dress_size + '"]').prop('checked', true);
-    $(this.refs.heightSelect).select2().val(assistant.user_profile.height).change();
+    $(this.refs.heightSelect).val(assistant.user_profile.height).change();
     this.props.selectCallback('size', assistant);
     this.setState({assistantSelected: true});
     this.changeHeight();
