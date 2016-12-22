@@ -65,6 +65,15 @@ module PathBuildersHelper
       path_parts << "#{product_type}-#{descriptive_url(product)}"
     end
 
+    # NOTE: Alexey Bobyrev 21/12/16
+    # color method only present for Tire::Results::Item
+    # But this method also called with ordinar spree product
+    color_name = product.respond_to?(:color) && (product.color || {})[:name]
+
+    if options[:color].nil? && color_name.present?
+      options.merge!({ color: color_name })
+    end
+
     build_url(path_parts, options)
   end
 

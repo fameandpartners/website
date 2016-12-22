@@ -19,7 +19,7 @@ class Products::DetailsController < Products::BaseController
 
     color_hash = \
       if params[:color]
-        Repositories::ProductColors.get_by_name(params[:color])
+        Repositories::ProductColors.get_by_name(params[:color]) || {}
       else
         # select images of one/default color
         color = @product.available_options.colors.default.first
