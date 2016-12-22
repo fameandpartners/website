@@ -47,9 +47,15 @@ var SizeSelector = React.createClass({
 
   render: function() {
 
-    var optionsForHeights = this.props.heights.map(function(height, index){
+    var optionsForHeights = this.props.heights.map(function(group){
+      var heights = group[1].map(function(height, index){
+        return(<option key={index} value={height}>{height}</option>)
+      });
+
       return (
-        <option key={index} value={height}>{height}</option>
+        <optgroup key={group[0]} label={group[0]}>
+          {heights}
+        </optgroup>
       )
     });
 
