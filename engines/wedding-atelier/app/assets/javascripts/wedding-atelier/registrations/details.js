@@ -2,7 +2,6 @@ $.fn.incrementButton = function(){
   var $input = $(this);
 
   if (!$input.is('input[type="number"]')) {
-    console.warn('[incrementButton] <input> type must equal number');
     return;
   }
 

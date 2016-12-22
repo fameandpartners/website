@@ -9,26 +9,69 @@ var DesktopCustomizations = React.createClass({
     startOverCallback: React.PropTypes.func
   },
 
-  render: function(){
+  getInitialState: function () {
+    return {
+      showContainer: false,
+      showSelector: false,
+      showLateralMenu: false
+    };
+  },
+
+  changeLateralMenuState: function (state) {
+    this.setState({showLateralMenu: state});
+  },
+
+  changeContainerState: function (state) {
+    this.setState({showContainer: state});
+  },
+
+  show: function(currentCustomization) {
+    var el = $('.js-customizations-container');
+
+    this.setState({
+      showSelector: true,
+      showContainer: true
+    });
+
+    el.one('transitionend', function() {
+      this.changeLateralMenuState(true);
+    }.bind(this));
+
+    this.props.changeCurrentCustomizationCallback(currentCustomization);
+  },
+
+  close: function() {
+    var el = $('.js-customizations-lateral-menu');
+    el.one('transitionend', function() {
+      this.changeContainerState(false);
+    }.bind(this));
+    this.setState({showLateralMenu: false});
+  },
+
+  render: function() {
     var defaultProps = {
-      selectedOptions: this.props.selectedOptions,
-      currentCustomization: this.props.currentCustomization,
+      selectedOptions:                    this.props.selectedOptions,
+      currentCustomization:               this.props.currentCustomization,
       changeCurrentCustomizationCallback: this.props.changeCurrentCustomizationCallback,
-      selectCallback: this.props.selectCallback
+      selectCallback:                     this.props.selectCallback,
+      showContainers:                     this.state
     };
 
     var customizationMenuProps = $.extend(defaultProps, {
       startOverCallback: this.props.startOverCallback,
-      siteVersion: this.props.siteVersion
-    })
+      siteVersion: this.props.siteVersion,
+      changeContainerStateCallback: this.changeContainerState,
+      showCallback: this.show
+    });
 
     var customizationsContainerProps = $.extend(defaultProps, {
-      type: 'desktop',
       customizations: this.props.customizations,
-      selectedOptions: this.props.selectedOptions
-    })
+      selectedOptions: this.props.selectedOptions,
+      showLateralMenuCallback: this.changeLateralMenuState,
+      closeCallback: this.close
+    });
 
-    return(
+    return (
       <div className="customization-experience--desktop hidden-xs">
         <CustomizationsHeader silhouette={this.props.selectedOptions.silhouette}/>
         <div className="customization-panel col-sm-6">
@@ -74,7 +117,6 @@ var DesktopCustomizations = React.createClass({
           </div>
         </div>
       </div>
-
-    )
+    );
   }
-})
+});

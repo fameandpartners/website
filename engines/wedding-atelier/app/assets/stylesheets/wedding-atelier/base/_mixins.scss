@@ -53,3 +53,15 @@
     opacity: 1;
   }
 }
+
+@mixin slide-in-up {
+  display: block;
+  transform: translateY(100%);
+  transition: transform 600ms, opacity 400ms;
+  transition-timing-function: cubic-bezier(.19, 1, .22, 1);
+
+  &.animate {
+    transform: none;
+    opacity: 1;
+  }
+}

@@ -31,27 +31,33 @@ var CustomizationExperience = React.createClass({
     };
   },
 
-  componentDidMount: function(){
-    $.get(this.props.customizationsUrl, function(data){
-      var newState = $.extend({}, this.state),
-      silhouette = data.customization.silhouettes[0];
-      newState.selectedOptions.silhouette = silhouette
-      newState.customizations = data.customization;
-      newState.customizations.fits = silhouette.fits;
-      newState.customizations.styles = silhouette.styles;
+  componentWillMount: function() {
+    $.get(this.props.customizationsUrl, function(data) {
+      var selectedOptions = {
+        silhouette: data.customization.silhouettes[0]
+      };
+      var customizations = data.customization;
+      customizations.fits = selectedOptions.silhouette.fits;
+      customizations.styles = selectedOptions.silhouette.styles;
+
+      var newState = {
+        selectedOptions: selectedOptions,
+        customizations: customizations
+      };
+
       this.setState(newState);
-    }.bind(this))
+    }.bind(this));
   },
 
-  changeCurrentCustomizationCallback: function(currentCustomization){
-    this.setState({ currentCustomization: currentCustomization });
+  changeCurrentCustomizationCallback: function(currentCustomization) {
+    this.setState({currentCustomization: currentCustomization});
   },
 
   selectCallback: function(customization, value){
     var newState = $.extend({}, this.state);
     newState.selectedOptions[customization] = value;
 
-    if(customization == 'silhouette' && value){
+    if(customization === 'silhouette' && value) {
       newState.customizations.styles = value.styles;
       newState.customizations.fits = value.fits;
     }
@@ -59,8 +65,7 @@ var CustomizationExperience = React.createClass({
   },
 
   startOverCallback: function () {
-    var newState = $.exent({}, this.state);
-    newState.selectedOptions = {
+    this.setState({selectedOptions: {
       silhouette: null,
       fabric: null,
       colour: null,
@@ -69,12 +74,10 @@ var CustomizationExperience = React.createClass({
       fit: null,
       size: null,
       height: null
-    };
-    this.setState(newState);
+    }});
   },
 
-
-  render: function(){
+  render: function() {
 
     var props = {
       selectedOptions: this.state.selectedOptions,
@@ -86,11 +89,11 @@ var CustomizationExperience = React.createClass({
       siteVersion: this.props.siteVersion
     };
 
-    return(
+    return (
       <div className="customization-experience container-fluid">
         <MobileCustomizations {...props} />
         <DesktopCustomizations {...props} />
       </div>
     );
   }
-})
+});

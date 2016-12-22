@@ -6,31 +6,19 @@ var CustomizationsMenu = React.createClass({
     currentCustomization: React.PropTypes.string,
     changeCurrentCustomizationCallback: React.PropTypes.func,
     selectCallback: React.PropTypes.func,
-    startOverCallback: React.PropTypes.func
+    startOverCallback: React.PropTypes.func,
+    changeContainerStateCallback: React.PropTypes.func,
+    showCallback: React.PropTypes.func,
+    showContainers: React.PropTypes.object
   },
 
-  show: function(currentCustomization) {
-    var width = $(window).width();
-    if(width > 768){
-      $('.customization-selector').addClass('slideInLeft');
-      var el = $('.js-customizations-container');
-      el.one('transitionend', function(){
-        $('.js-customizations-lateral-menu').addClass('animate');
-      });
-      el.addClass('animate');
-    }else{
-      $('.customization-selector').removeClass('slideInLeft');
-    }
-
-    this.props.changeCurrentCustomizationCallback(currentCustomization);
-  },
-
-  parseSizePresentation: function(userOrSize, height){
-    if(userOrSize.name){
-      var regexp = new RegExp(this.props.siteVersion + '/?(\\d+)', 'i')
+  parseSizePresentation: function(userOrSize, height) {
+    if(userOrSize.name) {
+      // Build a regexp to get the matching size number depeding on the site version: US|AU
+      var regexp = new RegExp(this.props.siteVersion + '/?(\\d+)', 'i');
       return height + ' | ' + userOrSize.name.match(regexp)[1];
-    }else{
-      return userOrSize.first_name + "'s size profile"
+    } else {
+      return userOrSize.first_name + "'s size profile";
     }
   },
 
@@ -54,17 +42,17 @@ var CustomizationsMenu = React.createClass({
         additionalCost = this.additionalCostFor(customizationItem),
         selectedValue = null;
 
-    if(selectedOptions[customizationItem]){
+    if(selectedOptions[customizationItem]) {
       selectedValue = selectedOptions[customizationItem].presentation;
       className += ' selected';
     }
 
-    if(customizationItem == 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour){
+    if(customizationItem == 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour) {
       className += ' selected';
       selectedValue = selectedOptions.fabric.presentation + ' | ' + selectedOptions.colour.presentation;
     }
 
-    if(customizationItem == 'size' && selectedOptions.size && selectedOptions.height){
+    if(customizationItem == 'size' && selectedOptions.size && selectedOptions.height) {
       className += ' selected';
       selectedValue = this.parseSizePresentation(selectedOptions.size, selectedOptions.height);
     }
@@ -74,7 +62,7 @@ var CustomizationsMenu = React.createClass({
     }
 
     return (
-      <li key={index} className="row customization-type" onClick={this.show.bind(null, customizationItem)}>
+      <li key={index} className="row customization-type" onClick={this.props.showCallback.bind(null, customizationItem)}>
         <div className="col-sm-6 customization-column customization-box">
           <a href="#" className="customization-label">
             <i className={className}></i>
@@ -107,9 +95,16 @@ var CustomizationsMenu = React.createClass({
       selectCallback: this.props.selectCallback
     };
 
+    var lateralMenuClasses = classNames({
+      'customizations-lateral-menu': true,
+      'js-customizations-lateral-menu': true,
+      'hidden-xs': true,
+      'animate': this.props.showContainers.showLateralMenu
+    });
+
     return (
-      <div className="customization-panel-container">
-        <div className="customizations-lateral-menu js-customizations-lateral-menu hidden-xs">
+      <div ref="panelContainer" className="customization-panel-container" onTransitionEnd={this.props.changeContainerStateCallback.bind(null, false)}>
+        <div ref="lateralMenu" className={lateralMenuClasses}>
           {menuEntries}
         </div>
 
