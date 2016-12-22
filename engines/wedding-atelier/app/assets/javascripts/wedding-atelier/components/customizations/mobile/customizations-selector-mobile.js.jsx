@@ -7,7 +7,8 @@ var CustomizationSelectorMobile = React.createClass({
     title: React.PropTypes.string,
     description: React.PropTypes.string,
     selectCallback: React.PropTypes.func.isRequired,
-    selectOptionCallback: React.PropTypes.func.isRequired
+    selectOptionCallback: React.PropTypes.func.isRequired,
+    currentCustomization: React.PropTypes.string
   },
 
   isOptionSelected: function(option) {
@@ -41,8 +42,13 @@ var CustomizationSelectorMobile = React.createClass({
 
     }.bind(this));
 
+    var containerClasses = classNames({
+      'customizations-selector-mobile': true,
+      'active': this.props.currentCustomization === this.props.type
+    });
+
     return (
-      <div ref="container" className="customizations-selector-mobile">
+      <div ref="container" className={containerClasses}>
         <div className="customizations-selector-mobile-title">
           <h1><em>{this.props.keyword}</em> {this.props.title}</h1>
           <p>{this.props.description}</p>

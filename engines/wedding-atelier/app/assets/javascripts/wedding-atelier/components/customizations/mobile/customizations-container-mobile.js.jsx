@@ -21,16 +21,8 @@ var CustomizationsContainerMobile = React.createClass({
     };
   },
 
-  componentDidUpdate: function() {
-    var el = $(ReactDOM.findDOMNode(this.refs.customizationsContainer));
-    el.find('.customizations-selector-mobile').hide();
-    $(ReactDOM.findDOMNode(this.refs[this.props.currentCustomization])).show();
-  },
-
   close: function() {
-    var newState = {};
-    newState.currentValue = null;
-    this.setState(newState);
+    this.setState({currentValue: null});
     this.props.goToSlide(1);
   },
 
@@ -65,6 +57,7 @@ var CustomizationsContainerMobile = React.createClass({
           selectOptionCallback={this.selectOption}
           options={this.props.customizations.silhouettes}
           selectedOption={this.props.selectedOptions.silhouette}
+          currentCustomization={this.props.currentCustomization}
           ref="silhouette"
           keyword="Create"
           title="it how you want"
@@ -75,6 +68,7 @@ var CustomizationsContainerMobile = React.createClass({
           selectOptionCallback={this.selectOption}
           selectCallback={this.props.selectCallback}
           selectedOption={this.props.selectedOptions.colour}
+          currentCustomization={this.props.currentCustomization}
           ref="fabric-colour"/>
         <CustomizationSelectorMobile
           type="length"
@@ -82,6 +76,7 @@ var CustomizationsContainerMobile = React.createClass({
           selectOptionCallback={this.selectOption}
           options={this.props.customizations.lengths}
           selectedOption={this.props.selectedOptions.length}
+          currentCustomization={this.props.currentCustomization}
           ref="length"
           keyword="Choose"
           title="your length."
@@ -92,6 +87,7 @@ var CustomizationsContainerMobile = React.createClass({
           selectOptionCallback={this.selectOption}
           options={this.props.customizations.styles}
           selectedOption={this.props.selectedOptions.style}
+          currentCustomization={this.props.currentCustomization}
           ref="style"
           keyword="Add"
           title="on extra trimmings."
@@ -102,10 +98,12 @@ var CustomizationsContainerMobile = React.createClass({
           selectOptionCallback={this.selectOption}
           options={this.props.customizations.fits}
           selectedOption={this.props.selectedOptions.fit}
+          currentCustomization={this.props.currentCustomization}
           ref="fit"
           keyword="Finesse"
           title="the way it fits."
           description="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+
         <div className="customizations-selector-mobile-actions-double">
           <button className="btn-gray" onClick={this.close}>cancel</button>
           <button className="btn-black" onClick={this.applyChanges}>apply</button>

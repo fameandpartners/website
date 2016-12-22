@@ -4,7 +4,8 @@ var FabricAndColourSelectorMobile = React.createClass({
     fabrics: React.PropTypes.array,
     selectedOption: React.PropTypes.object,
     selectCallback: React.PropTypes.func.isRequired,
-    selectOptionCallback: React.PropTypes.func.isRequired
+    selectOptionCallback: React.PropTypes.func.isRequired,
+    currentCustomization: React.PropTypes.string
   },
 
   render: function() {
@@ -37,8 +38,13 @@ var FabricAndColourSelectorMobile = React.createClass({
       );
     }.bind(this));
 
+    var containerClasses = classNames({
+      'customizations-selector-mobile': true,
+      'active': this.props.currentCustomization === 'fabric-colour'
+    });
+
     return (
-      <div ref="container" className="customizations-selector-mobile">
+      <div ref="container" className={containerClasses}>
         <div className="customizations-selector-mobile-title">
           <h1><em>Create</em> it how you want</h1>
           <div className="row">
