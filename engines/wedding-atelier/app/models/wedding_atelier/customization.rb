@@ -18,12 +18,7 @@ module WeddingAtelier
       @lengths = Spree::OptionType.find_by_name('wedding-atelier-lengths').option_values
       @sizes = Spree::OptionType.find_by_name('dress-size').option_values
       @assistants = event.assistants
-      @heights = [
-          "5'19 / 177cm ",
-          "5'19 / 180cm ",
-          "5'19 / 190cm ",
-          "5'19 / 200cm "
-      ]
+      @heights = WeddingAtelier::Height.definitions
     end
   end
 end
