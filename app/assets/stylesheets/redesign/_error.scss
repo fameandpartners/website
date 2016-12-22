@@ -1,0 +1,35 @@
+// 404 - 500 Pages
+.error-page {
+  margin: 100px auto;
+
+  h1 {
+    font-size: 3.8em;
+    margin-top: 0;
+  }
+
+  h2 {
+    font-size: 3.2rem;
+    margin: 50px 0;
+  }
+
+  p {
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 150%;
+    margin: 0;
+  }
+
+  a {
+    @extend .link-underline;
+  }
+
+  .thin-bottom::after {
+    content: "";
+    padding-bottom: 50px;
+    border-bottom: 1px solid #000;
+    width: 90px;
+    display: block;
+    margin: 0 auto;
+  }
+
+}
