@@ -1,10 +1,10 @@
 var FabricAndColourSelector = React.createClass({
   propTypes: {
-    colours:          React.PropTypes.array,
-    fabrics:          React.PropTypes.array,
-    selectedOption:   React.PropTypes.object,
-    selectCallback:   React.PropTypes.func.isRequired,
-    showContainers:   React.PropTypes.object
+    colours: React.PropTypes.array,
+    fabrics: React.PropTypes.array,
+    selectedOption: React.PropTypes.object,
+    selectCallback: React.PropTypes.func.isRequired,
+    showContainers: React.PropTypes.object
   },
 
   selectFabric: function(fabric) {

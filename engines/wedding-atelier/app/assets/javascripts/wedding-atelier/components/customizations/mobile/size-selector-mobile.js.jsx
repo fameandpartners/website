@@ -1,9 +1,9 @@
 var SizeSelectorMobile = React.createClass({
   propTypes: {
-    siteVersion:    React.PropTypes.string,
-    sizes:          React.PropTypes.array,
-    heights:        React.PropTypes.array,
-    assistants:     React.PropTypes.array,
+    siteVersion: React.PropTypes.string,
+    sizes: React.PropTypes.array,
+    heights: React.PropTypes.array,
+    assistants: React.PropTypes.array,
     selectCallback: React.PropTypes.func.isRequired
   },
 

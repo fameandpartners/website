@@ -1,12 +1,12 @@
 var DesktopCustomizations = React.createClass({
   propTypes: {
-    siteVersion:                        React.PropTypes.string,
-    currentCustomization:               React.PropTypes.string,
-    selectedOptions:                    React.PropTypes.object,
-    customizations:                     React.PropTypes.object,
+    siteVersion: React.PropTypes.string,
+    currentCustomization: React.PropTypes.string,
+    selectedOptions: React.PropTypes.object,
+    customizations: React.PropTypes.object,
     changeCurrentCustomizationCallback: React.PropTypes.func,
-    selectCallback:                     React.PropTypes.func,
-    startOverCallback:                  React.PropTypes.func
+    selectCallback: React.PropTypes.func,
+    startOverCallback: React.PropTypes.func
   },
 
   getInitialState: function () {

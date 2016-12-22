@@ -1,16 +1,16 @@
 var CustomizationsContainer = React.createClass({
   propTypes: {
-    selectedOptions:                    React.PropTypes.object,
-    customizations:                     React.PropTypes.object,
-    currentCustomization:               React.PropTypes.string,
-    siteVersion:                        React.PropTypes.string,
+    selectedOptions: React.PropTypes.object,
+    customizations: React.PropTypes.object,
+    currentCustomization: React.PropTypes.string,
+    siteVersion: React.PropTypes.string,
     changeCurrentCustomizationCallback: React.PropTypes.func,
-    assistants:                         React.PropTypes.array,
-    selectCallback:                     React.PropTypes.func,
-    goToSlideCallback:                  React.PropTypes.func,
-    showContainers:                     React.PropTypes.object,
-    showLateralMenuCallback:            React.PropTypes.func,
-    closeCallback:                      React.PropTypes.func
+    assistants: React.PropTypes.array,
+    selectCallback: React.PropTypes.func,
+    goToSlideCallback: React.PropTypes.func,
+    showContainers: React.PropTypes.object,
+    showLateralMenuCallback: React.PropTypes.func,
+    closeCallback: React.PropTypes.func
   },
 
   render: function() {
