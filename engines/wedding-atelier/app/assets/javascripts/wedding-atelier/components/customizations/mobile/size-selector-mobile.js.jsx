@@ -4,7 +4,9 @@ var SizeSelectorMobile = React.createClass({
     sizes: React.PropTypes.array,
     heights: React.PropTypes.array,
     assistants: React.PropTypes.array,
-    selectCallback: React.PropTypes.func.isRequired
+    selectCallback: React.PropTypes.func.isRequired,
+    showSizing: React.PropTypes.bool.isRequired,
+    showSizingCallback: React.PropTypes.func.isRequired
   },
 
   getInitialState: function() {
@@ -37,7 +39,7 @@ var SizeSelectorMobile = React.createClass({
       size: {}
     });
     $(this.refs.container).find(':checked').prop('checked', false);
-    $('.js-customization-size-selector-mobile-size').removeClass('animate');
+    this.props.showSizingCallback(false);
   },
 
   parsePresentation: function(size) {
@@ -116,8 +118,14 @@ var SizeSelectorMobile = React.createClass({
       );
     }.bind(this));
 
+    var containerClasses = classNames({
+      'customization-selector-mobile-size': true,
+      'js-customization-size-selector-mobile-size': true,
+      'animate': this.props.showSizing
+    });
+
     return (
-      <div ref="container" className="customization-selector-mobile-size js-customization-size-selector-mobile-size">
+      <div ref="container" className={containerClasses}>
         <div className="customization-selector-mobile-header">
           <i className="icon icon-size"></i>
           <div className="selector-name text-left">Size</div>

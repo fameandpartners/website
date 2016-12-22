@@ -5,11 +5,18 @@ var CustomizationsReviewMobile = React.createClass({
     customizations: React.PropTypes.object,
     selectCallback: React.PropTypes.func,
     selectedOptions: React.PropTypes.object,
+    siteVersion: React.PropTypes.string,
     goToSlide: React.PropTypes.func
   },
 
-  showSizing: function () {
-    $(ReactDOM.findDOMNode(this.refs.size)).addClass('animate');
+  getInitialState: function () {
+    return {
+      showSizing: false
+    };
+  },
+
+  showSizing: function (value) {
+    this.setState({showSizing: value});
   },
 
   parseSizePresentation: function(userOrSize, height) {
@@ -35,7 +42,7 @@ var CustomizationsReviewMobile = React.createClass({
           <h1>You are designing the  {this.props.selectedOptions.silhouette? this.props.selectedOptions.silhouette.name : ''}</h1>
           <DressPreview selectedOptions={this.props.selectedOptions}/>
           <button className="btn-transparent" onClick={this.props.goToSlide.bind(null, 1)}>customize dress</button>
-          <button className="btn-transparent" onClick={this.showSizing}>{selectedValue}</button>
+          <button className="btn-transparent" onClick={this.showSizing.bind(null, true)}>{selectedValue}</button>
           <div className="customizations-review-mobile-results">
             <p>
               <span className="view-customizations">View customizations</span>
@@ -60,7 +67,8 @@ var CustomizationsReviewMobile = React.createClass({
           heights={this.props.customizations.heights}
           siteVersion={this.props.siteVersion}
           selectCallback={this.props.selectCallback}
-          ref="size" />
+          showSizing={this.state.showSizing}
+          showSizingCallback={this.showSizing} />
       </div>
     );
   }
