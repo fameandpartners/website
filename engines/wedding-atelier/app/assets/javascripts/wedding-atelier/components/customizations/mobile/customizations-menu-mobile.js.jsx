@@ -27,7 +27,7 @@ var CustomizationsMenuMobile = React.createClass({
         selectedValue = selectedOptions[customizationItem].presentation;
       }
 
-      if(customizationItem == 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour) {
+      if(customizationItem === 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour) {
         selectedValue = selectedOptions.fabric.presentation + ' | ' + selectedOptions.colour.presentation;
       }
 
