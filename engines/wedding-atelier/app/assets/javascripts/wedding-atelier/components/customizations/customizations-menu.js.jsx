@@ -12,12 +12,6 @@ var CustomizationsMenu = React.createClass({
     showContainers:                     React.PropTypes.object
   },
 
-  componentWillMount: function () {
-    $(this.refs.panelContainer).one('transitionend', function () {
-      this.props.changeContainerStateCallback(false);
-    }.bind(this));
-  },
-
   parseSizePresentation: function(userOrSize, height) {
     if(userOrSize.name) {
       // Build a regexp to get the matching size number depeding on the site version: US|AU
@@ -94,7 +88,7 @@ var CustomizationsMenu = React.createClass({
     });
 
     return (
-      <div ref="panelContainer" className="customization-panel-container">
+      <div ref="panelContainer" className="customization-panel-container" onTransitionEnd={this.props.changeContainerStateCallback.bind(null, false)}>
         <div ref="lateralMenu" className={lateralMenuClasses}>
           {menuEntries}
         </div>

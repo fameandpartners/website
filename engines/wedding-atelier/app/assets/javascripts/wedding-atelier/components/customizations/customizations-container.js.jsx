@@ -13,12 +13,6 @@ var CustomizationsContainer = React.createClass({
     closeCallback:                      React.PropTypes.func
   },
 
-  componentDidMount: function () {
-    $(this.refs.customizationsContainer).one('transitionend', function () {
-      this.props.showLateralMenuCallback(true);
-    }.bind(this));
-  },
-
   render: function() {
     var currentCustomization = this.props.currentCustomization,
         title = currentCustomization ? currentCustomization.split('-').join(' and ') : '';
@@ -30,7 +24,7 @@ var CustomizationsContainer = React.createClass({
     });
 
     return (
-      <div ref="customizationsContainer" className={customizationsContainerClasses}>
+      <div ref="customizationsContainer" className={customizationsContainerClasses} onTransitionEnd={this.props.showLateralMenuCallback.bind(null, true)}>
         <div className="selector-header">
           <i className={"icon icon-" + currentCustomization}></i>
           <div className="selector-name text-left">{title}</div>
