@@ -1,93 +1,89 @@
 /* [Filter / Sort]
 -------------------------------------------------------*/
 
-.FilterSort {
+.FilterSort__mobileTriggerBtn {
+  cursor: pointer;
+  background: $c-neutral-black;
+  color: $c-neutral-white;
+  text-transform: uppercase;
+  padding: 10px 15px;
+  margin: 10px 0;
+  display: block;
+  width: 100%;
 
-  .FilterSort__mobileTriggerBtn {
-    cursor: pointer;
-    background: $c-neutral-black;
-    color: $c-neutral-white;
-    text-transform: uppercase;
-    padding: 10px 15px;
-    margin: 10px 0;
-    display: block;
-    width: 100%;
-
-    .arrow {
-      float: right;
-    }
-
+  .arrow {
+    float: right;
   }
 
-  .FilterSort__summary {
-    text-transform: uppercase;
+}
+
+.FilterSort__summary {
+  text-transform: uppercase;
+  text-align: center;
+  margin: 30px 0;
+  font-size: 0.8em;
+}
+
+.FilterSort__summaryHighlight {
+  font-weight: 600;
+}
+
+.ExpandablePanel--mobile {
+  display: block;
+  position: fixed;
+  overflow-y: scroll;
+  padding-bottom: 70px;
+  background: $c-neutral-white;
+  z-index: 999;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  @include transition(transform .6s cubic-bezier(0.480, 0.110, 0.250, 1.060));
+  @include transform(translateX(100%));
+
+  &--isOpen {
+    @include transform(translateX(0%));
+  }
+
+  //Heading
+  .ExpandablePanel__heading {
     text-align: center;
-    margin: 30px 0;
-    font-size: 0.8em;
+    margin-top: 5px;
   }
 
-  .FilterSort__summaryHighlight {
+  // Add background to the filter-reset trigger
+  .ExpandablePanel__clearAllWrapper {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background: $c-neutral-2;
+    padding: 3px 0 8px;
+  }
+
+  // Trigger to reset all filters
+  .ExpandablePanel__clearAll {
+    color: $c-neutral-8;
+    float: none;
+    position: initial;
+    text-align: center;
     font-weight: 600;
   }
 
-  .ExpandablePanel--mobile {
-    display: block;
-    position: fixed;
-    overflow-y: scroll;
-    padding-bottom: 70px;
-    background: $c-neutral-white;
-    z-index: 999;
-    height: 100%;
+  // Add extra padding on the right, so filter are not too close to the edge of screen
+  .ExpandablePanelItem {
+    cursor: pointer;
+    padding-right: 15px;
+  }
+
+  // Hide top border from first filter
+  .ExpandablePanelItem:nth-child(2) {
+    border-top: 0;
+  }
+
+  // Attach the action buttons to the bottom of screen
+  .ExpandablePanel__action {
     width: 100%;
-    top: 0;
-    @include transition(transform .6s cubic-bezier(0.480, 0.110, 0.250, 1.060));
-    @include transform(translateX(100%));
-
-    &--isOpen {
-      @include transform(translateX(0%));
-    }
-
-    //Heading
-    .ExpandablePanel__heading {
-      text-align: center;
-      margin-top: 5px;
-    }
-
-    // Add background to the filter-reset trigger
-    .ExpandablePanel__clearAllWrapper {
-      margin-top: 10px;
-      margin-bottom: 20px;
-      background: $c-neutral-2;
-      padding: 3px 0 8px;
-    }
-
-    // Trigger to reset all filters
-    .ExpandablePanel__clearAll {
-      color: $c-neutral-8;
-      float: none;
-      position: initial;
-      text-align: center;
-      font-weight: 600;
-    }
-
-    // Add extra padding on the right, so filter are not too close to the edge of screen
-    .ExpandablePanelItem {
-      cursor: pointer;
-      padding-right: 15px;
-    }
-
-    // Hide top border from first filter
-    .ExpandablePanelItem:nth-child(2) {
-      border-top: 0;
-    }
-
-    // Attach the action buttons to the bottom of screen
-    .ExpandablePanel__action {
-      width: 100%;
-      position: fixed;
-      bottom: 0;
-    }
-
+    position: fixed;
+    bottom: 0;
   }
 
 }
