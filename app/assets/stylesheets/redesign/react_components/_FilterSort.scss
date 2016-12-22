@@ -68,17 +68,6 @@
     font-weight: 600;
   }
 
-  // Add extra padding on the right, so filter are not too close to the edge of screen
-  .ExpandablePanelItem {
-    cursor: pointer;
-    padding-right: 15px;
-  }
-
-  // Hide top border from first filter
-  .ExpandablePanelItem:nth-child(2) {
-    border-top: 0;
-  }
-
   // Attach the action buttons to the bottom of screen
   .ExpandablePanel__action {
     width: 100%;
@@ -162,18 +151,29 @@
 
 }
 
-
 // Container of each item / filter
 .ExpandablePanelItem {
   border-top: 1px solid $c-neutral-4;
   padding: 6px 0 8px;
+  max-height: 40px;
+  background: $c-neutral-white;
+  position: relative;
+  cursor: pointer;
+  @include transition(max-height 1.5s ease-in-out);
 
   .ExpandablePanelItem__revealed-content{
-    display: none;
+    opacity: 0;
+    @include transition(opacity 0.5s ease-out);
   }
 
-  &--is-active .ExpandablePanelItem__revealed-content{
-    display: block;
+  &--is-active {
+    // Just a very tall value, so we can animate it smoothly
+    max-height: 9999px;
+
+    .ExpandablePanelItem__revealed-content{
+      opacity: 1;
+    }
+
   }
 
   // When a filter is expanded...
@@ -201,6 +201,11 @@
 
   }
 
+}
+
+// Hide top border from first filter
+.ExpandablePanelItem:nth-child(2) {
+  border-top: 0;
 }
 
 // Wrapper for secondary Filters
