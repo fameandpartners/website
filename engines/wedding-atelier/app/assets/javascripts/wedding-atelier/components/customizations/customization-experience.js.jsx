@@ -33,13 +33,19 @@ var CustomizationExperience = React.createClass({
 
   componentWillMount: function() {
     $.get(this.props.customizationsUrl, function(data) {
-      var _state = this.state,
-      silhouette = data.customization.silhouettes[0];
-      _state.selectedOptions.silhouette = silhouette;
-      _state.customizations = data.customization;
-      _state.customizations.fits = silhouette.fits;
-      _state.customizations.styles = silhouette.styles;
-      this.setState(_state);
+      var selectedOptions = {
+        silhouette: data.customization.silhouettes[0]
+      };
+      var customizations = data.customization;
+      customizations.fits = selectedOptions.silhouette.fits;
+      customizations.styles = selectedOptions.silhouette.styles;
+
+      var newState = {
+        selectedOptions: selectedOptions,
+        customizations: customizations
+      };
+
+      this.setState(newState);
     }.bind(this));
   },
 
