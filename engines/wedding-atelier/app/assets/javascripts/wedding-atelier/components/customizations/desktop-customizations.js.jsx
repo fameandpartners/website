@@ -7,8 +7,8 @@ var DesktopCustomizations = React.createClass({
     changeCurrentCustomizationCallback: React.PropTypes.func,
     selectCallback: React.PropTypes.func,
     startOverCallback: React.PropTypes.func,
-    subTotal: React.PropTypes.integer,
-    customizationsCost: React.PropTypes.integer
+    subTotal: React.PropTypes.number,
+    customizationsCost: React.PropTypes.number
   },
 
   getInitialState: function () {
