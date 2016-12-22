@@ -53,17 +53,13 @@ var CustomizationExperience = React.createClass({
     this.setState({currentCustomization: currentCustomization});
   },
 
-  selectCallback: function(customization, value) {
-    var newState = $.extend(this.state, {});
+  selectCallback: function(customization, value){
+    var newState = $.extend({}, this.state);
     newState.selectedOptions[customization] = value;
 
     if(customization === 'silhouette' && value) {
       newState.customizations.styles = value.styles;
       newState.customizations.fits = value.fits;
-    }
-    if(customization === 'size' && value){
-      newState.customizations.size = value;
-      newState.customizations.height = value.fits;
     }
     this.setState(newState);
   },
@@ -84,13 +80,13 @@ var CustomizationExperience = React.createClass({
   render: function() {
 
     var props = {
-      selectedOptions:                    this.state.selectedOptions,
-      currentCustomization:               this.state.currentCustomization,
-      customizations:                     this.state.customizations,
+      selectedOptions: this.state.selectedOptions,
+      currentCustomization: this.state.currentCustomization,
+      customizations: this.state.customizations,
       changeCurrentCustomizationCallback: this.changeCurrentCustomizationCallback,
-      selectCallback:                     this.selectCallback,
-      startOverCallback:                  this.startOverCallback,
-      siteVersion: 						            this.props.siteVersion
+      selectCallback: this.selectCallback,
+      startOverCallback: this.startOverCallback,
+      siteVersion: this.props.siteVersion
     };
 
     return (

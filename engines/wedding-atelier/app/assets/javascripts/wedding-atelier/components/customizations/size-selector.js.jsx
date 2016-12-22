@@ -55,10 +55,16 @@ var SizeSelector = React.createClass({
 
   render: function() {
 
-    var optionsForHeights = this.props.heights.map(function(height, index) {
+    var optionsForHeights = this.props.heights.map(function(group){
+      var heights = group[1].map(function(height, index){
+        return(<option key={index} value={height}>{height}</option>)
+      });
+
       return (
-        <option key={index} value={height}>{height}</option>
-      );
+        <optgroup key={group[0]} label={group[0]}>
+          {heights}
+        </optgroup>
+      )
     });
 
     var dressSizes = this.props.sizes.map(function(size, index){
@@ -86,8 +92,10 @@ var SizeSelector = React.createClass({
             id={id}
             type="radio"
             name="assistant"
-            value={assistant.user_profile.dress_size}/>
-          <label htmlFor={id} onClick={this.setSizeWithProfile.bind(this, assistant)}>{assistant.first_name}</label>
+            value={assistant.user_profile.dress_size}
+            onClick={this.setSizeWithProfile.bind(this, assistant)}
+             />
+          <label htmlFor={id}>{assistant.first_name}</label>
         </li>
       );
     }.bind(this));

@@ -22,43 +22,58 @@ var CustomizationsMenu = React.createClass({
     }
   },
 
+  additionalCostFor: function(customizationItem){
+    var additionalCost = ' + $',
+        selectedOptions = this.props.selectedOptions;
+
+    if(customizationItem === 'size' || customizationItem === 'silhouette'){ return null; }
+    if(customizationItem === 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour){
+      additionalCost += parseInt(selectedOptions.fabric.price) + parseInt(selectedOptions.colour.price);
+    }else if(selectedOptions[customizationItem]){
+      additionalCost += parseInt(selectedOptions[customizationItem].price);
+    }
+    return additionalCost;
+  },
+
   renderRow: function (customizationItem, index) {
-      var selectedOptions = this.props.selectedOptions,
-          className = "icon icon-" + customizationItem,
-          selectedValue = null;
+    // TODO: pending refactor after mobile customizations merge
+    var selectedOptions = this.props.selectedOptions,
+        className = "icon icon-" + customizationItem,
+        additionalCost = this.additionalCostFor(customizationItem),
+        selectedValue = null;
 
+    if(selectedOptions[customizationItem]) {
+      selectedValue = selectedOptions[customizationItem].presentation;
+      className += ' selected';
+    }
 
-      if(selectedOptions[customizationItem]) {
-        selectedValue = selectedOptions[customizationItem].presentation;
-      }
+    if(customizationItem == 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour) {
+      className += ' selected';
+      selectedValue = selectedOptions.fabric.presentation + ' | ' + selectedOptions.colour.presentation;
+    }
 
-      if(selectedOptions[customizationItem]) {
-        className += ' selected';
-      }
+    if(customizationItem == 'size' && selectedOptions.size && selectedOptions.height) {
+      className += ' selected';
+      selectedValue = this.parseSizePresentation(selectedOptions.size, selectedOptions.height);
+    }
 
-      if(customizationItem === 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour) {
-        className += ' selected';
-        selectedValue = selectedOptions.fabric.presentation + ' | ' + selectedOptions.colour.presentation;
-      }
+    if(selectedValue && additionalCost){
+      selectedValue += additionalCost;
+    }
 
-      if(customizationItem === 'size' && selectedOptions.size && selectedOptions.height) {
-        className += ' selected';
-        selectedValue = this.parseSizePresentation(selectedOptions.size, selectedOptions.height);
-      }
-
-      return (
-        <li key={index} className="row customization-type" onClick={this.props.showCallback.bind(null, customizationItem)}>
-          <div className="col-sm-6 customization-column customization-box">
-            <a href="#" className="customization-label">
-              <i className={className}></i>
-              <span>{customizationItem.split('-').join(' + ')}</span>
-            </a>
-          </div>
-          <div className="col-sm-6 customization-column customization-value">
-            <span>{selectedValue}</span>
-          </div>
-        </li>
-      );
+    return (
+      <li key={index} className="row customization-type" onClick={this.props.showCallback.bind(null, customizationItem)}>
+        <div className="col-sm-6 customization-column customization-box">
+          <a href="#" className="customization-label">
+            <i className={className}></i>
+            <span>{customizationItem.split('-').join(' + ')}</span>
+          </a>
+        </div>
+        <div className="col-sm-6 customization-column customization-value">
+          <span>{selectedValue}</span>
+        </div>
+      </li>
+    );
   },
 
   render: function() {

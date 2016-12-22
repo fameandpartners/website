@@ -385,6 +385,7 @@ ActiveRecord::Schema.define(:version => 20161220175111) do
     t.integer  "size_id"
     t.string   "height",                                                :default => "standard"
     t.integer  "fabric_id"
+    t.integer  "length_id"
   end
 
   add_index "line_item_personalizations", ["line_item_id"], :name => "index_line_item_personalizations_on_line_item_id"
