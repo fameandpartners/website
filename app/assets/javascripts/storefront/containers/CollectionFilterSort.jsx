@@ -561,34 +561,37 @@ class CollectionFilterSort extends Component {
                           )}
                         />
 
-                        <ExpandablePanelItem
-                          isSecondaryFilter={(true)}
-                          itemGroup={(
-                            <div>
-                              <div className="ExpandablePanel__name">
-                                  Delivery Date
+
+                        <div className="ExpandablePanel__secondaryFiltersWrapper">
+                          <ExpandablePanelItem
+                            isSecondaryFilter={(true)}
+                            itemGroup={(
+                              <div>
+                                <div className="ExpandablePanel__name">
+                                    Delivery Date
+                                </div>
+                                <div className="ExpandablePanel__selectedOptions">
+                                </div>
                               </div>
-                              <div className="ExpandablePanel__selectedOptions">
+                            )}
+                            revealedContent={(
+                              <div className="ExpandablePanel__listOptions checkboxBlackBg">
+                                <label className="ExpandablePanel__option" name="deliverydate">
+                                  <input
+                                    id="fast_making"
+                                    checked={filters.fastMaking}
+                                    onChange={this.handleFastMaking()}
+                                    name="fast_making"
+                                    type="checkbox"
+                                  />
+                                  <span className="checkboxBlackBg__check">
+                                    <span className="ExpandablePanel__optionName">Express Making (6 - 9 Days)</span>
+                                  </span>
+                                </label>
                               </div>
-                            </div>
-                          )}
-                          revealedContent={(
-                            <div className="ExpandablePanel__listOptions checkboxBlackBg">
-                              <label className="ExpandablePanel__option" name="deliverydate">
-                                <input
-                                  id="fast_making"
-                                  checked={filters.fastMaking}
-                                  onChange={this.handleFastMaking()}
-                                  name="fast_making"
-                                  type="checkbox"
-                                />
-                                <span className="checkboxBlackBg__check">
-                                  <span className="ExpandablePanel__optionName">Express Making (6 - 9 Days)</span>
-                                </span>
-                              </label>
-                            </div>
-                          )}
-                        />
+                            )}
+                          />
+                        </div>
 
                     </div>
 
