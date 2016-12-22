@@ -132,17 +132,21 @@ var Chat = React.createClass({
     this.setState({typing: typing});
   },
 
-  sendMessage: function (){
+  sendMessage: function (message){
     message = {
       profilePhoto: this.props.profile_photo,
       author: this.props.username,
       time: Date.now(),
       type: 'simple',
-      content: this.state.message
+      content: message
     };
-    this.state.generalChannel.sendMessage(JSON.stringify(message)).then(function(resposne) {
-      $('#chat-message').val('');
-    });
+
+    debugger;
+
+    this.state.generalChannel.sendMessage(JSON.stringify(message)).then(function() {
+      debugger;
+      this.refs.chatMessage.value = "";
+    }.bind(this));
   },
 
   updateMessageContent: function(e){
@@ -153,8 +157,11 @@ var Chat = React.createClass({
   },
 
   attemptToSendMessage: function(e){
-    if (e.keyCode == 13) {
-      this.sendMessage();
+    e.preventDefault();
+    var message = this.refs.chatMessage.value;
+
+    if (message) {
+      this.sendMessage(message);
     }
   },
 
@@ -207,19 +214,18 @@ var Chat = React.createClass({
         <div className='chat-typing'>
           {typing}
         </div>
-        <div className="chat-actions">
+        <form onSubmit={this.attemptToSendMessage} className="chat-actions">
           <button className="btn upload-image"></button>
           <div className="message-input">
             <input type="text"
                    value={this.message}
                    id='chat-message'
-                   onChange={this.updateMessageContent}
-                   onKeyDown={this.attemptToSendMessage}/>
+                   ref="chatMessage" />
           </div>
           <div className="btn-send-container">
-            <button className="btn btn-black btn-send-msg-to-chat" onClick={this.sendMessage}>send</button>
+            <input value="send" className="btn btn-black btn-send-msg-to-chat" type="submit"/>
           </div>
-        </div>
+        </form>
       </div>
     )
   }
