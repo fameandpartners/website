@@ -7,6 +7,8 @@ var CustomizationExperience = React.createClass({
   getInitialState: function() {
     return {
       currentCustomization: null,
+      subTotal: 0,
+      customizationsCost: 0,
       customizations: {
         silhouettes: [],
         fabrics: [],
@@ -31,31 +33,42 @@ var CustomizationExperience = React.createClass({
     };
   },
 
-  componentWillMount: function() {
-    $.get(this.props.customizationsUrl, function(data) {
-      var selectedOptions = {
-        silhouette: data.customization.silhouettes[0]
-      };
-      var customizations = data.customization;
-      customizations.fits = selectedOptions.silhouette.fits;
-      customizations.styles = selectedOptions.silhouette.styles;
-
-      var newState = {
-        selectedOptions: selectedOptions,
-        customizations: customizations
-      };
-
+  componentWillMount: function(){
+    $.get(this.props.customizationsUrl, function(data){
+      var newState = $.extend({}, this.state),
+      silhouette = data.customization.silhouettes[0];
+      newState.selectedOptions.silhouette = silhouette
+      newState.customizations = data.customization;
+      newState.customizations.fits = silhouette.fits;
+      newState.customizations.styles = silhouette.styles;
+      newState.subTotal = parseInt(silhouette.price);
+      newState.customizationsCost = this.customizationsCost();
       this.setState(newState);
     }.bind(this));
   },
 
-  changeCurrentCustomizationCallback: function(currentCustomization) {
-    this.setState({currentCustomization: currentCustomization});
+
+  customizationsCost: function(){
+    var selectedOptions = this.state.selectedOptions,
+        cost = 0;
+
+    for(var key in selectedOptions) {
+      var option = selectedOptions[key];
+      if(key !== 'size' && key !== 'silhouette' && key !== 'height' && option) {
+        cost += parseInt(option.price);
+      }
+    }
+    return cost;
+  },
+
+  changeCurrentCustomizationCallback: function(currentCustomization){
+    this.setState({ currentCustomization: currentCustomization });
   },
 
   selectCallback: function(customization, value){
     var newState = $.extend({}, this.state);
     newState.selectedOptions[customization] = value;
+    newState.customizationsCost = this.customizationsCost();
 
     if(customization === 'silhouette' && value) {
       newState.customizations.styles = value.styles;
@@ -79,6 +92,10 @@ var CustomizationExperience = React.createClass({
 
   render: function() {
 
+  render: function(){
+
+    this.customizationsCost();
+
     var props = {
       selectedOptions: this.state.selectedOptions,
       currentCustomization: this.state.currentCustomization,
@@ -86,7 +103,9 @@ var CustomizationExperience = React.createClass({
       changeCurrentCustomizationCallback: this.changeCurrentCustomizationCallback,
       selectCallback: this.selectCallback,
       startOverCallback: this.startOverCallback,
-      siteVersion: this.props.siteVersion
+      siteVersion: this.props.siteVersion,
+      subTotal: this.state.subTotal,
+      customizationsCost: this.state.customizationsCost
     };
 
     return (
