@@ -141,10 +141,7 @@ var Chat = React.createClass({
       content: message
     };
 
-    debugger;
-
     this.state.generalChannel.sendMessage(JSON.stringify(message)).then(function() {
-      debugger;
       this.refs.chatMessage.value = "";
     }.bind(this));
   },
