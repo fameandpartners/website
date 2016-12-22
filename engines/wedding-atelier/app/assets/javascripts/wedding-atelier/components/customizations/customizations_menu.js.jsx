@@ -35,16 +35,16 @@ var CustomizationsMenu = React.createClass({
   },
 
   additionalCostFor: function(customizationItem){
-    var additionalCost = ' + $',
-        selectedOptions = this.props.selectedOptions;
+    var selectedOptions = this.props.selectedOptions;
 
     if(customizationItem === 'size' || customizationItem === 'silhouette'){ return null; }
     if(customizationItem === 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour){
-      additionalCost += parseInt(selectedOptions.fabric.price) + parseInt(selectedOptions.colour.price);
-    }else if(selectedOptions[customizationItem]){
-      additionalCost += parseInt(selectedOptions[customizationItem].price);
+      return parseInt(selectedOptions.fabric.price) + parseInt(selectedOptions.colour.price);
     }
-    return additionalCost;
+
+    if(selectedOptions[customizationItem]){
+      return parseInt(selectedOptions[customizationItem].price);
+    }
   },
 
   renderRow: function (customizationItem, index) {
@@ -70,7 +70,7 @@ var CustomizationsMenu = React.createClass({
     }
 
     if(selectedValue && additionalCost){
-      selectedValue += additionalCost;
+      selectedValue += ' + $' + additionalCost;
     }
 
     return (
