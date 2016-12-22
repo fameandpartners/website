@@ -97,12 +97,7 @@ module WeddingAtelier
 
       @next_signup_step_value = session[:accepted_invitation] ? 'completed' : 'details'
 
-      @heights = [
-          "5'19 / 177cm ",
-          "5'19 / 180cm ",
-          "5'19 / 190cm ",
-          "5'19 / 200cm "
-      ]
+      @heights = WeddingAtelier::Height.definitions
 
       @site_version = env['site_version_code'] || 'us'
       @dress_sizes = Spree::OptionType.find_by_name('dress-size').option_values
