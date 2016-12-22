@@ -3,7 +3,7 @@
 
 .FilterSort {
 
-  &__mobileTriggerBtn {
+  .FilterSort__mobileTriggerBtn {
     cursor: pointer;
     background: $c-neutral-black;
     color: $c-neutral-white;
@@ -19,14 +19,14 @@
 
   }
 
-  &__summary {
+  .FilterSort__summary {
     text-transform: uppercase;
     text-align: center;
     margin: 30px 0;
     font-size: 0.8em;
   }
 
-  &__summaryHighlight {
+  .FilterSort__summaryHighlight {
     font-weight: 600;
   }
 
@@ -47,47 +47,263 @@
       @include transform(translateX(0%));
     }
 
-    .ExpandablePanel {
+    //Heading
+    .ExpandablePanel__heading {
+      text-align: center;
+      margin-top: 5px;
+    }
 
-      //Heading
-      &__heading {
-        text-align: center;
-        margin-top: 5px;
+    // Add background to the filter-reset trigger
+    .ExpandablePanel__clearAllWrapper {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      background: $c-neutral-2;
+      padding: 3px 0 8px;
+    }
+
+    // Trigger to reset all filters
+    .ExpandablePanel__clearAll {
+      color: $c-neutral-8;
+      float: none;
+      position: initial;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    // Add extra padding on the right, so filter are not too close to the edge of screen
+    .ExpandablePanelItem {
+      cursor: pointer;
+      padding-right: 15px;
+    }
+
+    // Hide top border from first filter
+    .ExpandablePanelItem:nth-child(2) {
+      border-top: 0;
+    }
+
+    // Attach the action buttons to the bottom of screen
+    .ExpandablePanel__action {
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+    }
+
+  }
+
+}
+
+// Action buttons
+.ExpandablePanel__btn {
+  cursor: pointer;
+  display: inline-block;
+  background: $c-neutral-black;
+  color: $c-neutral-white;
+  border: 1px solid $c-neutral-black;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 10px;
+  width: 50%;
+
+  &--fullWidth {
+    width: 100%;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $c-neutral-white;
+  }
+
+  &--secondary {
+    background: $c-neutral-white;
+    color: $c-neutral-black;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $c-neutral-black;
+    }
+
+  }
+
+}
+
+//Heading
+.ExpandablePanel__heading {
+  margin-top: 30px;
+  margin-bottom: 5px;
+}
+
+// Panel title
+.ExpandablePanel__mainTitle {
+  font-family: $font-heading;
+  font-size: 1.9em;
+  font-weight: 300;
+  display: inline-block;
+}
+
+// Trigger to reset all filters
+.ExpandablePanel__clearAll {
+  color: $c-neutral-8;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  float: right;
+  position: relative;
+  top: 18px;
+  @extend .link-underline;
+}
+
+.ExpandablePanel__clearAllWrapper {
+  display: inline;
+}
+
+
+.ExpandablePanel {
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+}
+
+
+// Container of each item / filter
+.ExpandablePanelItem {
+  border-top: 1px solid $c-neutral-4;
+  padding: 6px 0 8px;
+
+  .ExpandablePanelItem__revealed-content{
+    display: none;
+  }
+
+  &--is-active .ExpandablePanelItem__revealed-content{
+    display: block;
+  }
+
+  // When a filter is expanded...
+  &--is-active .ExpandablePanel__name:before {
+    @include transform(rotate(90deg));
+    top: 4px;
+    left: -4px;
+  }
+
+  // Filter is expanded => Show its options
+  &--is-active .ExpandablePanel__listOptions {
+    display: block;
+  }
+
+  // Secondary filters
+  &--secondary {
+    padding: 6px 0 0;
+    border-top: 0;
+
+    .ExpandablePanel__name {
+      font-size: 1.5rem;
+      text-transform: none;
+      font-weight: 400;
+    }
+
+  }
+
+}
+
+// Wrapper for secondary Filters
+.ExpandablePanel__secondaryFiltersWrapper {
+  border-top: 1px solid $c-neutral-4;
+  padding-top: 10px;
+}
+
+// Two-column layout
+.ExpandablePanel__listTwoColumns {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// Fill half of the container
+.ExpandablePanel__listColumn {
+  flex: 1 0 50%;
+  box-sizing: border-box;
+  padding-right: 15px;
+  @extend .txt-truncate-1;
+}
+
+// Filter name
+.ExpandablePanel__name {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  display: inline-block;
+  padding-left: 10px;
+  cursor: pointer;
+
+  // Display the arrow icon
+  &:before {
+    font-family: 'icomoon_fame_2015';
+    font-size: 1rem;
+    color: $c-neutral-6;
+    content: "\e624";
+    padding-right: 8px;
+    display: inline-block;
+    position: relative;
+  }
+
+}
+
+// List of selected options
+.ExpandablePanel__selectedOptions {
+  color: $c-neutral-8;
+  float: right;
+  max-width: 160px;
+  @extend .txt-truncate-1;
+}
+
+// Each selected item
+.ExpandablePanel__selectedItem {
+  font-size: 0.75em;
+
+  // Separate each item by comma (except the very last one)
+  &:not(:last-child):after {
+    content: ", ";
+  }
+
+}
+
+// List of available options
+.ExpandablePanel__listOptions {
+  padding: 15px 0 15px 30px;
+  display: none;
+
+  a {
+    color: $c-neutral-8;
+    text-transform: uppercase;
+    @extend .link-underline;
+  }
+
+  // Color panels need a different left padding
+  &--panelColors,
+  &--panelColors .ExpandablePanel__moreOptions {
+    padding-left: 15px;
+  }
+
+  // TODO: if this is needed elsewhere then it should become a global helper
+  input[type="checkbox"]:checked {
+
+    ~ .ExpandablePanel__optionCheck--tick {
+
+      &::after {
+        color: $c-neutral-white;
+        font-family: 'icomoon_fame_2015';
+        font-size: 0.6em;
+        content: "\e90f";
+        display: inline-block;
+        position: relative;
+        left: 3px;
+        top: -5px;
       }
 
-      // Add background to the filter-reset trigger
-      &__clearAllWrapper {
-        margin-top: 10px;
-        margin-bottom: 20px;
-        background: $c-neutral-2;
-        padding: 3px 0 8px;
-      }
-
-      // Trigger to reset all filters
-      &__clearAll {
-        color: $c-neutral-8;
-        float: none;
-        position: initial;
-        text-align: center;
-        font-weight: 600;
-      }
-
-      // Add extra padding on the right, so filter are not too close to the edge of screen
-      .ExpandablePanelItem {
-        cursor: pointer;
-        padding-right: 15px;
-      }
-
-      // Hide top border from first filter
-      .ExpandablePanelItem:nth-child(2) {
-        border-top: 0;
-      }
-
-      // Attach the action buttons to the bottom of screen
-      &__action {
-        width: 100%;
-        position: fixed;
-        bottom: 0;
+      // Black font-color for very light bg colors
+      &.color-white::after {
+        color: $c-neutral-black;
       }
 
     }
@@ -96,279 +312,55 @@
 
 }
 
-.ExpandablePanel {
-  .ExpandablePanel__clearAllWrapper {
-    display: inline;
-  }
+// Option label
+.ExpandablePanel__option {
+  padding: 1px 0;
+  font-weight: 400;
+  font-size: 0.95em;
+  text-transform: capitalize;
+  cursor: pointer;
+}
 
-  input[type="checkbox"] {
-    display: none;
-  }
+// Custom checkbox
+.ExpandablePanel__optionCheck {
 
-  // Action buttons
-  &__btn {
-    cursor: pointer;
-    display: inline-block;
-    background: $c-neutral-black;
-    color: $c-neutral-white;
-    border: 1px solid $c-neutral-black;
-    text-transform: uppercase;
-    text-align: center;
-    padding: 10px;
-    width: 50%;
-
-    &--fullWidth {
-      width: 100%;
-    }
-
-    &:hover,
-    &:focus,
-    &:active {
-      color: $c-neutral-white;
-    }
-
-    &--secondary {
-      background: $c-neutral-white;
-      color: $c-neutral-black;
-
-      &:hover,
-      &:focus,
-      &:active {
-        color: $c-neutral-black;
-      }
-
-    }
-
-  }
-
-  //Heading
-  &__heading {
-    margin-top: 30px;
-    margin-bottom: 5px;
-  }
-
-  // Panel title
-  &__mainTitle {
-    font-family: $font-heading;
-    font-size: 1.9em;
-    font-weight: 300;
-    display: inline-block;
-  }
-
-  // Trigger to reset all filters
-  &__clearAll {
-    color: $c-neutral-8;
-    font-size: 0.75em;
-    text-transform: uppercase;
-    float: right;
-    position: relative;
-    top: 18px;
-    @extend .link-underline;
-  }
-
-  // Container of each item / filter
-  .ExpandablePanelItem {
-    border-top: 1px solid $c-neutral-4;
-    padding: 6px 0 8px;
-
-    .ExpandablePanelItem__revealed-content{
-      display: none;
-    }
-
-    &--is-active .ExpandablePanelItem__revealed-content{
-      display: block;
-    }
-
-    // When a filter is expanded...
-    &--is-active .ExpandablePanel__name:before {
-      @include transform(rotate(90deg));
-      top: 4px;
-      left: -4px;
-    }
-
-    // Filter is expanded => Show its options
-    &--is-active .ExpandablePanel__listOptions {
-      display: block;
-    }
-
-    // Secondary filters
-    &--secondary {
-      padding: 6px 0 0;
-      border-top: 0;
-
-      .ExpandablePanel__name {
-        font-size: 1.5rem;
-        text-transform: none;
-        font-weight: 400;
-      }
-
-    }
-
-  }
-
-  // Wrapper for secondary Filters
-  &__secondaryFiltersWrapper {
-    border-top: 1px solid $c-neutral-4;
-    padding-top: 10px;
-  }
-
-  // Two-column layout
-  &__listTwoColumns {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  // Fill half of the container
-  &__listColumn {
-    flex: 1 0 50%;
-    box-sizing: border-box;
-    padding-right: 15px;
-    @extend .txt-truncate-1;
-  }
-
-  // Filter name
-  &__name {
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.8em;
-    display: inline-block;
-    padding-left: 10px;
-    cursor: pointer;
-
-    // Display the arrow icon
-    &:before {
-      font-family: 'icomoon_fame_2015';
-      font-size: 1rem;
-      color: $c-neutral-6;
-      content: "\e624";
-      padding-right: 8px;
-      display: inline-block;
-      position: relative;
-    }
-
-  }
-
-  // List of selected options
-  &__selectedOptions {
-    color: $c-neutral-8;
-    float: right;
-    max-width: 160px;
-    @extend .txt-truncate-1;
-  }
-
-  // Each selected item
-  &__selectedItem {
-    font-size: 0.75em;
-
-    // Separate each item by comma (except the very last one)
-    &:not(:last-child):after {
-      content: ", ";
-    }
-
-  }
-
-  // List of available options
-  &__listOptions {
-    padding: 15px 0 15px 30px;
-    display: none;
-
-    a {
-      color: $c-neutral-8;
-      text-transform: uppercase;
-      @extend .link-underline;
-    }
-
-    // Color panels need a different left padding
-    &--panelColors,
-    &--panelColors .ExpandablePanel__moreOptions {
-      padding-left: 15px;
-    }
-
-    // TODO: if this is needed elsewhere then it should become a global helper
-    input[type="checkbox"]:checked {
-
-      ~ .ExpandablePanel__optionCheck--tick {
-
-        &::after {
-          color: $c-neutral-white;
-          font-family: 'icomoon_fame_2015';
-          font-size: 0.6em;
-          content: "\e90f";
-          display: inline-block;
-          position: relative;
-          left: 3px;
-          top: -5px;
-        }
-
-        // Black font-color for very light bg colors
-        &.color-white::after {
-          color: $c-neutral-black;
-        }
-
-      }
-
-    }
-
-  }
-
-  // Option label
-  &__option {
-    padding: 1px 0;
-    font-weight: 400;
-    font-size: 0.95em;
-    text-transform: capitalize;
-    cursor: pointer;
-  }
-
-
-  // Custom checkbox
-  &__optionCheck {
-
-    // Rounded checkbox / radio
-    &--rounded {
-      border-radius: 100%;
-      height: 15px;
-      width: 15px;
-      margin-right: 10px;
-      display: inline-block;
-      position: relative;
-      top: 2px;
-    }
-
-  }
-
-  // Fallback for colors with no background defined
-  &__optionColorFallback {
+  // Rounded checkbox / radio
+  &--rounded {
     border-radius: 100%;
-    background: $c-neutral-4;
-    display: inline-block;
-    position: relative;
     height: 15px;
     width: 15px;
+    margin-right: 10px;
+    display: inline-block;
+    position: relative;
     top: 2px;
-    left: 15px;
   }
 
+}
 
-  // Option name
-  &__optionName {
+// Fallback for colors with no background defined
+.ExpandablePanel__optionColorFallback {
+  border-radius: 100%;
+  background: $c-neutral-4;
+  display: inline-block;
+  position: relative;
+  height: 15px;
+  width: 15px;
+  top: 2px;
+  left: 15px;
+}
 
-  }
+// Trigger to load more filter options
+.ExpandablePanel__moreOptions {
+  font-size: 0.65em;
+  margin-top: 15px;
+}
 
-  // Trigger to load more filter options
-  &__moreOptions {
-    font-size: 0.65em;
-    margin-top: 15px;
-  }
+// List of additional options
+.ExpandablePanel__moreOptionsList {
+  display: none;
 
-  // List of additional options
-  &__moreOptionsList {
-    display: none;
-
-    &__is-active {
-      display: block;
-    }
-
+  &--is-active {
+    display: block;
   }
 
 }
