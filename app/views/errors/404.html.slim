@@ -1,0 +1,13 @@
+- @title = "The page you were looking for doesn't exist (404)"
+
+= render 'errors/analytics_javascript', locals: { code: 404, message: 'not found'}
+
+.error-page.text-center
+  h1
+    | Looking for something?
+  h2
+    | <em>Sorry,</em> this page doesn't exist.
+  p
+    | Try our #{link_to "homepage", root_path} to see what's new and start customizing.
+  p.thin-bottom
+    | Still can't find what you're looking for? #{link_to "E-mail us", 'mailto:team@fameandpartners.com'} at team@fameandpartners.com.
