@@ -3,6 +3,7 @@ module WeddingAtelier
     has_many :event_assistants, class_name: 'WeddingAtelier::EventAssistant'
     has_many :assistants, through: :event_assistants, source: :user
     has_many :dresses, class_name: 'WeddingAtelier::EventDress'
+
     resourcify :event_roles, role_cname: 'WeddingAtelier::EventRole'
 
     attr_accessible :event_type,
@@ -14,7 +15,7 @@ module WeddingAtelier
     after_create :sluggify
 
     validates_uniqueness_of :name
-    validates_presence_of :name, :date
+    validates_presence_of :name, :date, :number_of_assistants
 
     def to_param
       slug
@@ -22,6 +23,10 @@ module WeddingAtelier
 
     def assistant_permitted?(user)
       assistants.include? user
+    end
+
+    def invitations
+      Invitation.pending.where(event_slug: slug)
     end
 
     private

@@ -22,7 +22,6 @@ var Chat = React.createClass({
     var that = this;
 
     $.post(that.props.twilio_token_path, function(data) {
-      username = data.username;
       var accessManager = new Twilio.AccessManager(data.token);
       var messagingClient = new Twilio.IPMessaging.Client(accessManager);
       var channelName = 'wedding-channel-' + that.props.event_id;
@@ -74,7 +73,7 @@ var Chat = React.createClass({
   setupChannel: function (generalChannel){
     this.setState({generalChannel: generalChannel});
     this.state.generalChannel.join().then(function(channel) {
-      console.log('Joined channel as ' + username);
+      console.log('Joined channel as ' + this.props.username);
     }.bind(this));
 
     // Listen for new messages sent to the channel
@@ -87,10 +86,10 @@ var Chat = React.createClass({
       this.scrollToBottom();
     }.bind(this));
     this.state.generalChannel.on('memberJoined', function(member) {
-      this.handleMember(member, true)
+      this.handleMember(member, true);
     }.bind(this));
     this.state.generalChannel.on('memberLeft', function(member) {
-      this.handleMember(member, false)
+      this.handleMember(member, false);
     }.bind(this));
     this.state.generalChannel.on('typingStarted', function(member){
       this.typingIndicator(member.identity, true);
@@ -103,7 +102,7 @@ var Chat = React.createClass({
   loadChannelMembers: function(channel) {
     channel.getMembers().then(function(members) {
       var chatMembers = members.map(function(member) {
-        return {id: member.sid, identity: member.identity, online: true}
+        return {id: member.sid, identity: member.identity, online: true};
       });
       this.setState({channelMembers: chatMembers});
     }.bind(this));
@@ -111,7 +110,7 @@ var Chat = React.createClass({
 
   handleMember: function(member, joined) {
     var currentState = this.state;
-    var user = {id: member.sid, identity: member.identity, online: joined}
+    var user = {id: member.sid, identity: member.identity, online: joined};
     var members = currentState.channelMembers.filter(function(onlineMember) { onlineMember.id == user.id});
     members.push(user);
 

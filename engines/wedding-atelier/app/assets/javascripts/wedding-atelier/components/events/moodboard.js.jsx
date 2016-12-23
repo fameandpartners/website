@@ -3,6 +3,7 @@ var MoodBoardEvent = React.createClass({
   propTypes: {
     event_path: React.PropTypes.string,
     remove_assistant_path: React.PropTypes.string,
+    roles_path: React.PropTypes.string,
     twilio_token_path: React.PropTypes.string,
     event_id: React.PropTypes.number,
     wedding_name: React.PropTypes.string,
@@ -18,7 +19,17 @@ var MoodBoardEvent = React.createClass({
         assistants: [],
         send_invite_path: '',
         current_user_id: '',
-        name: 'Loading...'
+        name: 'Loading...',
+        hasError: {}
+      },
+      event_backup: {
+        dresses: [],
+        invitations: [],
+        assistants: [],
+        send_invite_path: '',
+        current_user_id: '',
+        name: 'Loading...',
+        hasError: {}
       }
     }
   },
@@ -29,7 +40,11 @@ var MoodBoardEvent = React.createClass({
       type: "GET",
       dataType: 'json',
       success: function (data) {
-        this.setState({event: data.moodboard_event});
+        var event = $.extend(event, data.moodboard_event);
+        var event_backup = $.extend(event_backup, data.moodboard_event);
+
+        this.setState({event: event});
+        this.setState({event_backup: event_backup});
       }.bind(this)
     });
   },
@@ -58,16 +73,28 @@ var MoodBoardEvent = React.createClass({
       type: 'PUT',
       dataType: 'json',
       data: data,
+
       success: function(collection) {
         this.setState({event: collection.event});
-        $('.has-error').removeClass('has-error');
+        var event = $.extend(event, this.state.event);
+        event.hasError = {};
+        this.setState({event: event});
+        this.setState({event_backup: event});
       }.bind(this),
+
       error: function(data) {
         parsed = JSON.parse(data.responseText)
+        var newEventState = $.extend(event, this.state.event_backup);
+        var hasError = {};
+
         for(var key in parsed.errors) {
-          $('input[name="' + key +'"').parent().addClass('has-error')
+          hasError[key] = true;
+          newEventState[key] = this.state.event_backup[key];
         };
-      }
+
+        newEventState.hasError = hasError;
+        this.setState({event: event});
+      }.bind(this)
     });
   },
 
@@ -110,6 +137,10 @@ var MoodBoardEvent = React.createClass({
                   <a aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab">
                     Bridesmaid dresses</a>
                 </li>
+                <li role="presentation">
+                  <a aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab"> Wedding
+                    details</a>
+                </li>
               </ul>
               <div className="tab-content">
                 <div id="chat-mobile" className="tab-pane" role="tabpanel">
@@ -129,6 +160,12 @@ var MoodBoardEvent = React.createClass({
                   <div className="dresses-list">
                     <DressTiles dresses={this.state.event.dresses} />
                   </div>
+                </div>
+                <div id="wedding-details" className="tab-pane" role="tabpanel">
+                  <EventDetails event={this.state.event}
+                                updater={this.handleEventDetailUpdate}
+                                roles_path={this.props.roles_path}
+                                hasError={this.state.event.hasError} />
                 </div>
               </div>
             </div>

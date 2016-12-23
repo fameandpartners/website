@@ -1,9 +1,20 @@
-$.fn.incrementButton = function(){
+$.fn.incrementButton = function(config){
+
+  if (this.length === 0) {
+    return;
+  }
+
   var $input = $(this);
 
   if (!$input.is('input[type="number"]')) {
     console.warn('[incrementButton] <input> type must equal number');
     return;
+  }
+
+  if (config && config.onChange) {
+    $input.on("change", function() {
+      config.onChange({target: this});
+    });
   }
 
   $input
@@ -27,7 +38,7 @@ $.fn.incrementButton = function(){
       return;
     }
 
-    $input.val(newVal);
+    $input.val(newVal).change();
   });
 
   $incButton.on("click", function() {
@@ -39,26 +50,7 @@ $.fn.incrementButton = function(){
       return;
     }
 
-    $input.val(newVal);
+    $input.val(newVal).change();
   });
 
 };
-
-$(document).ready(function() {
-  $('.registrations__details-form .js-number-field').incrementButton();
-
-  $('.registrations__details-form #spree_user_event_role').select2({
-    minimumResultsForSearch: Infinity
-  });
-
-  $('.registrations__details-form .input-group').datepicker({
-    format: "dd/mm/yyyy",
-    todayBtn: "linked",
-    autoclose: true,
-    showOnFocus: true
-  }).on('show', function(e){
-    $(this).addClass('active');
-  }).on('hide', function(e){
-    $(this).removeClass('active');
-  });
-});
