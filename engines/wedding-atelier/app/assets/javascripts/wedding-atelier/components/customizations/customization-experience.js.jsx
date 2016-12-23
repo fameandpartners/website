@@ -36,7 +36,7 @@ var CustomizationExperience = React.createClass({
   componentWillMount: function(){
     $.get(this.props.customizationsUrl, function(data){
       var newState = $.extend({}, this.state),
-      silhouette = data.customization.silhouettes[0];
+          silhouette = data.customization.silhouettes[0];
       newState.selectedOptions.silhouette = silhouette
       newState.customizations = data.customization;
       newState.customizations.fits = silhouette.fits;
@@ -106,6 +106,9 @@ var CustomizationExperience = React.createClass({
       <div className="customization-experience container-fluid">
         <MobileCustomizations {...props} />
         <DesktopCustomizations {...props} />
+        <CustomizationsModal
+          siteVersion={this.props.siteVersion}
+          selectedOptions={this.state.selectedOptions}/>
       </div>
     );
   }
