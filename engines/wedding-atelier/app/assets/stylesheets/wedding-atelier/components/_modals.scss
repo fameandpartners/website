@@ -61,16 +61,15 @@
       .btn-black {
         letter-spacing: 1px;
         font-size: 1rem;
+      }
+
+      .btn-black {
         font-weight: 400;
       }
 
-      button + button {
+      button + button, a + a {
         margin-left: 20px;
       }
-    }
-
-    .modal-body {
-      height: 344px;
     }
 
     .modal-dialog {

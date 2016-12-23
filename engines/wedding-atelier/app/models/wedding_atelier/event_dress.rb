@@ -23,7 +23,8 @@ module WeddingAtelier
                     :size_id,
                     :length_id,
                     :user_id,
-                    :product_id
+                    :product_id,
+                    :height
 
   validates_presence_of :product
 
