@@ -6,7 +6,9 @@ var DesktopCustomizations = React.createClass({
     customizations: React.PropTypes.object,
     changeCurrentCustomizationCallback: React.PropTypes.func,
     selectCallback: React.PropTypes.func,
-    startOverCallback: React.PropTypes.func
+    startOverCallback: React.PropTypes.func,
+    subTotal: React.PropTypes.number,
+    customizationsCost: React.PropTypes.number
   },
 
   getInitialState: function () {
@@ -93,7 +95,7 @@ var DesktopCustomizations = React.createClass({
                 <a href="#">View customizations</a>
               </span>
               <span className="right-result">
-                $16
+                ${this.props.customizationsCost}
               </span>
             </div>
 
@@ -102,7 +104,7 @@ var DesktopCustomizations = React.createClass({
                 Sub-Total
               </span>
               <span className="right-result">
-                $320
+                ${this.props.subTotal}
               </span>
             </div>
           </div>
