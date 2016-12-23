@@ -3,6 +3,7 @@ var MoodBoardEvent = React.createClass({
   propTypes: {
     event_path: React.PropTypes.string,
     remove_assistant_path: React.PropTypes.string,
+    roles_path: React.PropTypes.string,
     twilio_token_path: React.PropTypes.string,
     event_id: React.PropTypes.number,
     wedding_name: React.PropTypes.string,
@@ -45,7 +46,7 @@ var MoodBoardEvent = React.createClass({
 
     $(window).resize(function(e) {
       if (e.target.innerWidth > 768 ) {
-        $('.moodboard-tabs a[href="#bridesmaid-dresses"]').tab('show');
+        // $('.moodboard-tabs a[href="#bridesmaid-dresses"]').tab('show');
       } else {
         $('.moodboard-tabs a[href="#chat-mobile"]').tab('show');
       }
@@ -110,6 +111,10 @@ var MoodBoardEvent = React.createClass({
                   <a aria-controls="bridesmaid-dresses" data-toggle="tab" href="#bridesmaid-dresses" role="tab">
                     Bridesmaid dresses</a>
                 </li>
+                <li role="presentation">
+                  <a aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab"> Wedding
+                    details</a>
+                </li>
               </ul>
               <div className="tab-content">
                 <div id="chat-mobile" className="tab-pane" role="tabpanel">
@@ -129,6 +134,11 @@ var MoodBoardEvent = React.createClass({
                   <div className="dresses-list">
                     <DressTiles dresses={this.state.event.dresses} />
                   </div>
+                </div>
+                <div id="wedding-details" className="tab-pane" role="tabpanel">
+                  <EventDetails event={this.state.event}
+                                updater={this.handleEventDetailUpdate}
+                                roles_path={this.props.roles_path} />
                 </div>
               </div>
             </div>

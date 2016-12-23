@@ -7,7 +7,8 @@
                     event_id: @event.id,
                     wedding_name: @event.name,
                     profile_photo: profile_image_path,
-                    username: spree_current_user.full_name },
+                    username: spree_current_user.full_name,
+                    roles_path: '' },
                   { class: 'moodboard-react-container' }
 
 - content_for :javascript do
