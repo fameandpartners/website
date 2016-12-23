@@ -94,7 +94,7 @@ var SizeSelectorMobile = React.createClass({
     });
 
     var dressSizes = this.props.sizes.map(function(size, index){
-      var id = 'mobile' + '-size-' + index;
+      var id = 'mobile-size-' + index;
       return (
         <li key={index}>
           <input
@@ -110,7 +110,7 @@ var SizeSelectorMobile = React.createClass({
     }.bind(this));
 
     var assistantsSizes = this.props.assistants.map(function(assistant, index) {
-      var id = 'desktop' + '-assistant-' + index;
+      var id = 'mobile-assistant-' + index;
 
       return (
         <li key={index}>

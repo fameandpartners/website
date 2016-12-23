@@ -47,9 +47,7 @@ var SizeSelector = React.createClass({
 
   changeSize: function(size) {
     $('input[name="assistant"]').removeProp('checked');
-    $(this.refs.heightSelect).select2();
     this.props.selectCallback('size', size);
-    this.changeHeight();
   },
 
   changeHeight: function () {
@@ -72,7 +70,7 @@ var SizeSelector = React.createClass({
     });
 
     var dressSizes = this.props.sizes.map(function(size, index){
-      var id = 'desktop' + '-size-' + index;
+      var id = 'desktop-size-' + index;
       return (
         <li key={index}>
           <input
@@ -84,11 +82,11 @@ var SizeSelector = React.createClass({
              />
           <label htmlFor={id}>{this.parsePresentation(size)}</label>
         </li>
-      );
+      )
     }.bind(this));
 
-    var assistantsSizes = this.props.assistants.map(function(assistant, index) {
-      var id = 'desktop' + '-assistant-' + index;
+    var assistantsSizes = this.props.assistants.map(function(assistant, index){
+      var id = 'desktop-assistant-' + index;
 
       return (
         <li key={index}>
@@ -101,7 +99,7 @@ var SizeSelector = React.createClass({
              />
           <label htmlFor={id}>{assistant.first_name}</label>
         </li>
-      );
+      )
     }.bind(this));
 
     var customizationSelectorClasses = classNames({
