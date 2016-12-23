@@ -48,6 +48,10 @@ var DesktopCustomizations = React.createClass({
     this.setState({showLateralMenu: false});
   },
 
+  viewCustomizations: function(){
+    $('.modal-customizations').modal();
+  },
+
   render: function() {
     var defaultProps = {
       selectedOptions:                    this.props.selectedOptions,
@@ -90,7 +94,7 @@ var DesktopCustomizations = React.createClass({
           <div className="results col-md-2 col-lg-3">
             <div className="view-customizations">
               <span className="left-result">
-                <a href="#">View customizations</a>
+                <a href="#" onClick={this.viewCustomizations}>View customizations</a>
               </span>
               <span className="right-result">
                 $16

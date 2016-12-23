@@ -33,18 +33,13 @@ var CustomizationExperience = React.createClass({
 
   componentWillMount: function() {
     $.get(this.props.customizationsUrl, function(data) {
-      var selectedOptions = {
-        silhouette: data.customization.silhouettes[0]
-      };
-      var customizations = data.customization;
-      customizations.fits = selectedOptions.silhouette.fits;
-      customizations.styles = selectedOptions.silhouette.styles;
+      var newState = $.extend({}, this.state),
+          silhouette = data.customization.silhouettes[0];
 
-      var newState = {
-        selectedOptions: selectedOptions,
-        customizations: customizations
-      };
-
+      newState.selectedOptions.silhouette = silhouette;
+      newState.customizations = data.customization;
+      newState.customizations.fits = silhouette.fits;
+      newState.customizations.styles = silhouette.styles;
       this.setState(newState);
     }.bind(this));
   },
@@ -93,6 +88,9 @@ var CustomizationExperience = React.createClass({
       <div className="customization-experience container-fluid">
         <MobileCustomizations {...props} />
         <DesktopCustomizations {...props} />
+        <CustomizationsModal
+          siteVersion={this.props.siteVersion}
+          selectedOptions={this.state.selectedOptions}/>
       </div>
     );
   }
