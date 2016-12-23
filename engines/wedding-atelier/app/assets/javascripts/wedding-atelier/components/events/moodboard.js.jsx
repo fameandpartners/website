@@ -141,6 +141,13 @@ var MoodBoardEvent = React.createClass({
                   <a aria-controls="wedding-details" data-toggle="tab" href="#wedding-details" role="tab"> Wedding
                     details</a>
                 </li>
+                <li role="presentation">
+                  <a aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab"> Manage
+                    bridal party</a>
+                </li>
+                <li role="presentation">
+                  <a aria-controls="bridal-gowns" data-toggle="tab" href="#bridal-gowns" role="tab"> Bridal Gowns</a>
+                </li>
               </ul>
               <div className="tab-content">
                 <div id="chat-mobile" className="tab-pane" role="tabpanel">
@@ -166,6 +173,19 @@ var MoodBoardEvent = React.createClass({
                                 updater={this.handleEventDetailUpdate}
                                 roles_path={this.props.roles_path}
                                 hasError={this.state.event.hasError} />
+                </div>
+                <div id="manage-bridal-party" className="tab-pane center-block" role="tabpanel">
+                  <h1 className="text-center">
+                    <em>Janine</em>, intive the bridal party.
+                  </h1>
+                  <EventInvitations invitations={this.state.event.invitations}
+                                    assistants={this.state.event.assistants}
+                                    handleRemoveAssistant={this.handleRemoveAssistant}
+                                    send_invite_path={this.props.send_invite_path}
+                                    curret_user_id={this.props.current_user_id} />
+                </div>
+                <div id="bridal-gowns" className="tab-pane" role="tabpanel">
+
                 </div>
               </div>
             </div>
