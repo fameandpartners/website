@@ -35,5 +35,3 @@ var ChatSimpleMessage = React.createClass({
     )
   }
 });
-
-
