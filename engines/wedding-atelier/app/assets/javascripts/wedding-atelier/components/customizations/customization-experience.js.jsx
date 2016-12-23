@@ -1,7 +1,8 @@
 var CustomizationExperience = React.createClass({
   propTypes: {
     customizationsUrl: React.PropTypes.string,
-    siteVersion: React.PropTypes.string
+    siteVersion: React.PropTypes.string,
+    eventSlug: React.PropTypes.string
   },
 
   getInitialState: function() {
@@ -28,7 +29,7 @@ var CustomizationExperience = React.createClass({
         style: null,
         fit: null,
         size: null,
-        height: null
+        height: ''
       }
     };
   },
@@ -85,7 +86,7 @@ var CustomizationExperience = React.createClass({
       style: null,
       fit: null,
       size: null,
-      height: null
+      height: ''
     }});
   },
 
@@ -99,7 +100,8 @@ var CustomizationExperience = React.createClass({
       startOverCallback: this.startOverCallback,
       siteVersion: this.props.siteVersion,
       subTotal: this.state.subTotal,
-      customizationsCost: this.state.customizationsCost
+      customizationsCost: this.state.customizationsCost,
+      eventSlug: this.props.eventSlug
     };
 
     return (
@@ -109,6 +111,9 @@ var CustomizationExperience = React.createClass({
         <CustomizationsModal
           siteVersion={this.props.siteVersion}
           selectedOptions={this.state.selectedOptions}/>
+        <SaveDressModal
+          eventSlug={this.props.eventSlug}
+        />
       </div>
     );
   }
