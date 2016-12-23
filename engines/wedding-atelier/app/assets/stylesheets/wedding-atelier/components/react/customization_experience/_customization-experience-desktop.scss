@@ -1,5 +1,6 @@
 .customization-experience--desktop {
   height: 100%;
+
   .customization-panel {
     padding-top: 45px;
     height: calc(100% - 122px);
@@ -15,103 +16,75 @@
     display: flex;
     margin-bottom: 25px;
 
-    .title-text {
-      text-align: left;
-    }
+  }
 
-    .start-over {
-      text-align: right;
+  .title-text {
+    max-width: 240px;
+    text-align: left;
 
-      > button {
-        position: absolute;
-        top: 50%;
-        right: 0;
-        transform: translateY(-50%);
-        z-index: 2;
-        margin-right: 30px;
-      }
+    h1 {
+      font-size: 2.5rem;
     }
   }
 
-  .customizations {
+  .start-over {
+    text-align: right;
 
-    .customization-type {
-      height: 48px;
-      margin: 25px auto;
-      cursor: pointer;
+    > button {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      z-index: 2;
+      margin-right: 30px;
+    }
+  }
 
-      &:hover,
-      &:focus {
-        background-color: $white-three;
-      }
+  .customization-type {
+    height: 48px;
+    margin: 25px auto;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      background-color: $white-three;
+    }
+  }
+
+  .customization-column {
+    display: table;
+    height: 100%;
+
+    a {
+      letter-spacing: 2px;
+      font-size: .85rem;
+      font-weight: 700;
     }
 
-    .customization-column {
-      display: table;
-      height: 100%;
-
-      a {
-        letter-spacing: 2px;
-        font-size: .85rem;
-        font-weight: 700;
-      }
-
-      span {
-        padding-left: 8px;
-      }
-
-      i,
-      span {
-        display: table-cell;
-        vertical-align: middle;
-      }
-
-      &:first-child {
-        text-align: left;
-      }
-
-      &:last-child {
-        color: $boulder-two;
-        font-size: .85rem;
-        text-align: right;
-      }
-
-      &:hover,
-      &:focus,
-      &.selected {
-        background-color: $white-three;
-      }
+    span {
+      padding-left: 8px;
     }
 
-    .customization-column {
-      display: table;
-      height: 100%;
+    i,
+    span {
+      display: table-cell;
+      vertical-align: middle;
+    }
 
-      a {
-        letter-spacing: 2px;
-        font-size: .85rem;
-        font-weight: 700;
-      }
+    &:first-child {
+      text-align: left;
+    }
 
-      span {
-        padding-left: 8px;
-      }
+    &:last-child {
+      color: $boulder-two;
+      font-size: .85rem;
+      text-align: right;
+    }
 
-      i,
-      span {
-        display: table-cell;
-        vertical-align: middle;
-      }
-
-      &:first-child {
-        text-align: left;
-      }
-
-      &:last-child {
-        color: $boulder-two;
-        font-size: .85rem;
-        text-align: right;
-      }
+    &:hover,
+    &:focus,
+    &.selected {
+      background-color: $white-three;
     }
   }
 

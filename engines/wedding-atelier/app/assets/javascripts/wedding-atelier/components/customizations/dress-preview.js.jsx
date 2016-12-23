@@ -3,21 +3,21 @@ var DressPreview = React.createClass({
     selectedOptions: React.PropTypes.object
   },
 
-  componentDidMount: function(){
+  componentDidMount: function() {
     $(this.refs.panzoom).panzoom({
-      $zoomIn: $(this.refs.zoomin),
-      $zoomOut: $(this.refs.zoomout),
-      $reset: $(this.refs.reset),
-      increment: 0.1,
-      which: 1,
-      minScale: 1,
-      disablePan: false,
-      panOnlyWhenZoomed: true
-    })
+      $zoomIn:            $(this.refs.zoomin),
+      $zoomOut:           $(this.refs.zoomout),
+      $reset:             $(this.refs.reset),
+      increment:          0.1,
+      which:              1,
+      minScale:           1,
+      disablePan:         false,
+      panOnlyWhenZoomed:  true
+    });
   },
 
-  render: function(){
-    return(
+  render: function() {
+    return (
       <div className="dress-preview">
         <div className="preview panzoom-parent">
           <img ref="panzoom"  src="/assets/wedding-atelier/customization_experience/dress_preview.png"/>
@@ -38,6 +38,6 @@ var DressPreview = React.createClass({
 
         </div>
       </div>
-    )
+    );
   }
-})
+});

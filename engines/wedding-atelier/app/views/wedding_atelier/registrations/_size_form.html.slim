@@ -7,7 +7,7 @@
         .form-group
           = ff.label :height, "What's your height?"
           div
-            = ff.select :height, options_for_select(@heights, current_spree_user.user_profile.height), {}, class: 'form-control'
+            = ff.select :height, grouped_options_for_select(@heights, current_spree_user.user_profile.height), {}, class: 'form-control'
         .form-group
           = ff.label :dress_size, "What's your dress size? &nbsp;".html_safe
           = link_to 'view size guide', '#', class: 'guide-link hover-link'
