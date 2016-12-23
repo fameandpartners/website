@@ -1,0 +1,23 @@
+#notifications {
+  //animation: slideDown 5s cubic-bezier(.19, 1, .22, 1) 1;
+  background-color: $black;
+  color: $white-two;
+  height: 62px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  //transform: translateY(-100%);
+  left: 0;
+  width: 100%;
+  z-index: 10;
+
+  p {
+    letter-spacing: 1px;
+    line-height: 62px;
+  }
+}
+
+@keyframes slideDown {
+  0%, 100% { -webkit-transform: translateY(-100%); }
+  10%, 90% { -webkit-transform: translateY(0); }
+}
