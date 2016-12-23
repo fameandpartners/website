@@ -19,7 +19,17 @@ var MoodBoardEvent = React.createClass({
         assistants: [],
         send_invite_path: '',
         current_user_id: '',
-        name: 'Loading...'
+        name: 'Loading...',
+        hasError: {}
+      },
+      event_backup: {
+        dresses: [],
+        invitations: [],
+        assistants: [],
+        send_invite_path: '',
+        current_user_id: '',
+        name: 'Loading...',
+        hasError: {}
       }
     }
   },
@@ -30,7 +40,11 @@ var MoodBoardEvent = React.createClass({
       type: "GET",
       dataType: 'json',
       success: function (data) {
-        this.setState({event: data.moodboard_event});
+        var event = $.extend(event, data.moodboard_event);
+        var event_backup = $.extend(event_backup, data.moodboard_event);
+
+        this.setState({event: event});
+        this.setState({event_backup: event_backup});
       }.bind(this)
     });
   },
@@ -46,7 +60,7 @@ var MoodBoardEvent = React.createClass({
 
     $(window).resize(function(e) {
       if (e.target.innerWidth > 768 ) {
-        // $('.moodboard-tabs a[href="#bridesmaid-dresses"]').tab('show');
+        $('.moodboard-tabs a[href="#bridesmaid-dresses"]').tab('show');
       } else {
         $('.moodboard-tabs a[href="#chat-mobile"]').tab('show');
       }
@@ -59,16 +73,28 @@ var MoodBoardEvent = React.createClass({
       type: 'PUT',
       dataType: 'json',
       data: data,
+
       success: function(collection) {
         this.setState({event: collection.event});
-        $('.has-error').removeClass('has-error');
+        var event = $.extend(event, this.state.event);
+        event.hasError = {};
+        this.setState({event: event});
+        this.setState({event_backup: event});
       }.bind(this),
+
       error: function(data) {
         parsed = JSON.parse(data.responseText)
+        var newEventState = $.extend(event, this.state.event_backup);
+        var hasError = {};
+
         for(var key in parsed.errors) {
-          $('input[name="' + key +'"').parent().addClass('has-error')
+          hasError[key] = true;
+          newEventState[key] = this.state.event_backup[key];
         };
-      }
+
+        newEventState.hasError = hasError;
+        this.setState({event: event});
+      }.bind(this)
     });
   },
 
@@ -138,7 +164,8 @@ var MoodBoardEvent = React.createClass({
                 <div id="wedding-details" className="tab-pane" role="tabpanel">
                   <EventDetails event={this.state.event}
                                 updater={this.handleEventDetailUpdate}
-                                roles_path={this.props.roles_path} />
+                                roles_path={this.props.roles_path}
+                                hasError={this.state.event.hasError} />
                 </div>
               </div>
             </div>

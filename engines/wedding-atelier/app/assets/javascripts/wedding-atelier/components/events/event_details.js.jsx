@@ -7,16 +7,18 @@ var EventDetails = React.createClass({
       name: React.PropTypes.string,
       number_of_assistants: React.PropTypes.number,
       date: React.PropTypes.string,
-      role: React.PropTypes.string
-    })
+      role: React.PropTypes.string,
+      hasError: React.PropTypes.object
+    }),
   },
 
   getInitialState: function() {
-    return { event: this.props.event}
+    return {
+      event: this.props.event
+    }
   },
 
   componentDidMount: function() {
-
     $(this.refs.numberfield).incrementButton({
       onChange: this._onChangeInput
     });
@@ -53,7 +55,7 @@ var EventDetails = React.createClass({
   render: function() {
     return(
         <form className="center-block">
-          <div className="form-group">
+          <div className={this.props.hasError && this.props.hasError.name ? 'form-group has-error' : 'form-group'}>
             <label htmlFor="input_wedding_board_name">
               Name the wedding board
             </label>

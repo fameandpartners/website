@@ -1,10 +1,16 @@
 $.fn.incrementButton = function(config){
+
+  if (this.length === 0) {
+    return;
+  }
+
   var $input = $(this);
 
   if (!$input.is('input[type="number"]')) {
     console.warn('[incrementButton] <input> type must equal number');
     return;
   }
+
   if (config && config.onChange) {
     $input.on("change", function() {
       config.onChange({target: this});
