@@ -1,19 +1,24 @@
 #notifications {
-  //animation: slideDown 5s cubic-bezier(.19, 1, .22, 1) 1;
+  animation: slideDown 5s 1s cubic-bezier(.19, 1, .22, 1) 1;
   background-color: $black;
   color: $white-two;
   height: 62px;
+  letter-spacing: 1px;
+  line-height: 62px;
   position: absolute;
   text-align: center;
   top: 0;
-  //transform: translateY(-100%);
+  transform: translateY(-100%);
   left: 0;
   width: 100%;
   z-index: 10;
 
-  p {
-    letter-spacing: 1px;
-    line-height: 62px;
+  .notification-close {
+    cursor: pointer;
+    font-size: 2rem;
+    position: absolute;
+    right: 1%;
+    top: 0;
   }
 }
 

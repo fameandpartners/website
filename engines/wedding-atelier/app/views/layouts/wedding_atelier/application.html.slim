@@ -31,10 +31,12 @@ doctype html
     = render 'marketing/trackers/google_analytics'
 
   body.wedding-atelier data-action=(action_name.titleize) data-controller=(controller.controller_name.titleize)
-    #notifications
-      - if flash[:error]
-        p.error = flash[:error]
-        a#close [close]
+    - if !flash.empty?
+      #notifications
+        - flash.each do |key, value|
+          = content_tag :p, value, class: "notification-message #{key}"
+
+        .notification-close x
     #fb-root
 
     - if spree_user_signed_in?
