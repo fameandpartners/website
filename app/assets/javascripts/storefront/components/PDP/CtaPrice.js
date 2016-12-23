@@ -112,7 +112,7 @@ class CtaPrice extends React.Component {
           })()}
         <ul className="est-delivery">
           <li>Free Shipping</li>
-          <li>Estimated delivery, 7 - 10 business days</li>
+          <li>Estimated delivery, {this.props.product.delivery_period} business days</li>
         </ul>
         <Modal
           style={MODAL_STYLE}

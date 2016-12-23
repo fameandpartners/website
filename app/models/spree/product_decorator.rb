@@ -331,7 +331,21 @@ Spree::Product.class_eval do
     ).read
   end
 
+  # Max delivery period got from taxons
+  def delivery_period
+    major_period = taxons.inject('0') do |max_period, taxon|
+      current_major_value = major_value_from_period(taxon.delivery_period)
+      max_major_value = major_value_from_period(max_period)
+
+      current_major_value > max_major_value ? taxon.delivery_period : max_period
+    end
+  end
+
   private
+
+  def major_value_from_period(period)
+    period.match(/\d+$/).to_s.to_i
+  end
 
   def build_variants_from_option_values_hash
     ensure_option_types_exist_for_values_hash
