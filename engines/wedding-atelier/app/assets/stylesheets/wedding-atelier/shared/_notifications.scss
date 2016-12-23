@@ -1,5 +1,5 @@
-#notifications {
-  animation: slideDown 5s 1s cubic-bezier(.19, 1, .22, 1) 1;
+#notifications-rails,
+.wedding-atelier-notification {
   background-color: $black;
   color: $white-two;
   height: 62px;
@@ -7,8 +7,8 @@
   line-height: 62px;
   position: absolute;
   text-align: center;
+  overflow-y: auto;
   top: 0;
-  transform: translateY(-100%);
   left: 0;
   width: 100%;
   z-index: 10;
@@ -19,6 +19,24 @@
     position: absolute;
     right: 1%;
     top: 0;
+  }
+
+  li {
+    list-style-type: none;
+  }
+}
+
+#notifications-rails {
+  animation: slideDown 5s 1s cubic-bezier(.19, 1, .22, 1) 1;
+  transform: translateY(-100%);
+}
+
+.wedding-atelier-notification {
+  transform: translateY(-100%);
+  transition: transform 600ms cubic-bezier(.19, 1, .22, 1);
+
+  &.show {
+    transform: translateY(0%);
   }
 }
 
