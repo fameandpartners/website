@@ -4,7 +4,8 @@ module WeddingAtelier
                :name,
                :description,
                :image,
-               :presentation
+               :presentation,
+               :price
 
    has_many :styles, serializer: WeddingAtelier::CustomisationValueSerializer
    has_many :fits, serializer: WeddingAtelier::CustomisationValueSerializer
