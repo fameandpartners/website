@@ -47,7 +47,7 @@ describe Products::CollectionsController, type: :controller do
 
       it 'when querying a inexistent permalink' do
         get :show, permalink: 'nothing'
-        expect(response).to render_template(file: 'public/404', layout: false)
+        expect(response).to render_template(file: 'errors/404', layout: 'redesign/application')
         expect(response).to have_http_status(:not_found)
       end
     end

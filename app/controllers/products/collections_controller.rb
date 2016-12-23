@@ -114,7 +114,7 @@ class Products::CollectionsController < Products::BaseController
     if page.page_is_lookbook? || @collection_options
       page.template_path
     else
-      {file: 'public/404', layout: false, status: :not_found}
+      raise ActiveRecord::RecordNotFound
     end
   end
 

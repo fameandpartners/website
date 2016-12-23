@@ -1,0 +1,13 @@
+- @title = "The change you wanted was rejected (422)"
+
+= render 'errors/analytics_javascript', locals: { code: 422, message: 'unprocessable entity'}
+
+.error-page.text-center
+  h1
+    | The change you wanted was rejected.
+  h2
+    | Maybe you tried to change something you didn't have access to.
+  p.thin-bottom
+    = link_to 'Go to homepage', root_path
+  p.thin-bottom
+    | Still can't find what you're looking for? #{link_to "E-mail us", 'mailto:team@fameandpartners.com'} at team@fameandpartners.com.
