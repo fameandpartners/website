@@ -8,7 +8,8 @@ var DesktopCustomizations = React.createClass({
     selectCallback: React.PropTypes.func,
     startOverCallback: React.PropTypes.func,
     subTotal: React.PropTypes.number,
-    customizationsCost: React.PropTypes.number
+    customizationsCost: React.PropTypes.number,
+    eventSlug: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -114,9 +115,10 @@ var DesktopCustomizations = React.createClass({
           </div>
 
           <div className="actions col-md-4 col-lg-3">
-            <button className="btn-transparent">
-               save this dress
-            </button>
+            <SaveDressButton
+              eventSlug={this.props.eventSlug}
+              selectedOptions={this.props.selectedOptions}
+              />
             <button className="btn-black">
                add to cart
             </button>
