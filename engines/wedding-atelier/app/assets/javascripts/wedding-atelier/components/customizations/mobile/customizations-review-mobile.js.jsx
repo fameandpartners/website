@@ -19,20 +19,11 @@ var CustomizationsReviewMobile = React.createClass({
     this.setState({showSizing: value});
   },
 
-  parseSizePresentation: function(userOrSize, height) {
-    if(userOrSize.name) {
-      var regexp = new RegExp(this.props.siteVersion + '/?(\\d+)', 'i');
-      return height + ' | ' + userOrSize.name.match(regexp)[1];
-    } else {
-      return userOrSize.first_name + "'s size profile";
-    }
-  },
-
   render: function() {
     var selectedOptions = this.props.selectedOptions;
     var selectedValue = 'select size';
     if(selectedOptions.size && selectedOptions.height) {
-      selectedValue = this.parseSizePresentation(selectedOptions.size, selectedOptions.height);
+      selectedValue = PresentationHelper.size(selectedOptions.size, selectedOptions.height, this.props.siteVersion);
     }
 
     return (

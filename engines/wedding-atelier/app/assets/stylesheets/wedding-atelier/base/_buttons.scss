@@ -70,7 +70,13 @@
     border-color: $greyish;
     color: $greyish;
   }
+}
 
+.btn-transparent-inverse {
+  background-color: transparent;
+  border-color: $white-two;
+  color: $white-two;
+  font-weight: 700;
 }
 
 .btn-facebook-blue {

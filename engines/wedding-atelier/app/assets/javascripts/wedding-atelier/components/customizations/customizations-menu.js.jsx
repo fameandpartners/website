@@ -12,53 +12,22 @@ var CustomizationsMenu = React.createClass({
     showContainers: React.PropTypes.object
   },
 
-  parseSizePresentation: function(userOrSize, height) {
-    if(userOrSize.name) {
-      // Build a regexp to get the matching size number depeding on the site version: US|AU
-      var regexp = new RegExp(this.props.siteVersion + '/?(\\d+)', 'i');
-      return height + ' | ' + userOrSize.name.match(regexp)[1];
-    } else {
-      return userOrSize.first_name + "'s size profile";
-    }
-  },
-
-  additionalCostFor: function(customizationItem){
-    var selectedOptions = this.props.selectedOptions;
-
-    if(customizationItem === 'size' || customizationItem === 'silhouette'){ return null; }
-    if(customizationItem === 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour){
-      return parseInt(selectedOptions.fabric.price) + parseInt(selectedOptions.colour.price);
-    }
-
-    if(selectedOptions[customizationItem]){
-      return parseInt(selectedOptions[customizationItem].price);
-    }
-  },
-
   renderRow: function (customizationItem, index) {
     // TODO: pending refactor after mobile customizations merge
     var selectedOptions = this.props.selectedOptions,
         className = "icon icon-" + customizationItem,
-        additionalCost = this.additionalCostFor(customizationItem),
-        selectedValue = null;
+        presentation = PresentationHelper.presentation(selectedOptions, customizationItem, this.props.siteVersion);
 
     if(selectedOptions[customizationItem]) {
-      selectedValue = selectedOptions[customizationItem].presentation;
       className += ' selected';
     }
 
     if(customizationItem == 'fabric-colour' && selectedOptions.fabric && selectedOptions.colour) {
       className += ' selected';
-      selectedValue = selectedOptions.fabric.presentation + ' | ' + selectedOptions.colour.presentation;
     }
 
     if(customizationItem == 'size' && selectedOptions.size && selectedOptions.height) {
       className += ' selected';
-      selectedValue = this.parseSizePresentation(selectedOptions.size, selectedOptions.height);
-    }
-
-    if(selectedValue && additionalCost){
-      selectedValue += ' + $' + additionalCost;
     }
 
     return (
@@ -70,7 +39,7 @@ var CustomizationsMenu = React.createClass({
           </a>
         </div>
         <div className="col-sm-6 customization-column customization-value">
-          <span>{selectedValue}</span>
+          <span>{presentation}</span>
         </div>
       </li>
     );
