@@ -5,6 +5,7 @@ module WeddingAtelier
     include ActionView::Helpers::AssetTagHelper
 
     has_many :invitations
+    has_many :dresses
 
     attributes :id, :date, :number_of_assistants, :name, :slug, :assistants, :dresses, :remaining_days
 
@@ -32,19 +33,6 @@ module WeddingAtelier
             user_email: invitation.user_email,
 
           }
-        }
-      end
-    end
-
-    def dresses
-      object.dresses.collect do |dress|
-        {
-          id: dress.id,
-          title: [dress.user.first_name, " Dress"].join(' '),
-          love_count: 0, #TODO, real implementation of loving
-          image: image_path(dress.image),
-          author: dress.author_name,
-          price: dress.price.format
         }
       end
     end

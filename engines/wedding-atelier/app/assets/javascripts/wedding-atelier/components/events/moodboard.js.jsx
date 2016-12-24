@@ -161,7 +161,7 @@ var MoodBoardEvent = React.createClass({
                   <div className="add-dress-box hidden">
                     <button className="add">Add your first dress</button>
                   </div>
-                  <div className="dresses-actions text-center"><a href="#" className="btn-transparent btn-create-a-dress">
+                  <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress">
                     <em>Create</em> a dress</a>
                   </div>
                   <div className="dresses-list">

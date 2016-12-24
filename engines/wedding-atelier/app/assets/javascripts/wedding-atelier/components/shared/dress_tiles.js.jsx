@@ -4,16 +4,8 @@ var DressTiles = React.createClass({
     dresses: React.PropTypes.array
   },
 
-  getInitialState: function(){
-    return {dresses: []}
-  },
-
-  componentDidMount: function(){
-    this.setState({dresses: this.props.dresses})
-  },
-
   render: function() {
-    var content = this.state.dresses.map(function(dress) {
+    var content = this.props.dresses.map(function(dress) {
       return(<DressTile dress={dress} />)
     });
     return(<div className='dress-boxes'> {content} </div>)
