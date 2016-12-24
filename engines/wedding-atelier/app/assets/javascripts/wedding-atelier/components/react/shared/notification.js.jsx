@@ -5,32 +5,49 @@ var Notification = React.createClass({
 
   getInitialState: function () {
     return {
-      errors: []
+      show: false,
+      timeOut: 8000
     };
   },
 
-  componentWillReceiveProps: function () {
-    if (this.state.errors.length === 0) {
-      this.setState({errors: this.props.errors});
+  componentWillMount: function () {
+    this.setState({show: this.props.errors.length !== 0});
+  },
+
+  componentDidMount: function () {
+    this.showAndHide();
+  },
+
+  componentDidUpdate: function () {
+    this.showAndHide();
+  },
+
+  showAndHide: function () {
+    if(this.state.show) {
+      window.setTimeout(function () {
+        this.setState({show: false});
+      }.bind(this), this.state.timeOut);
     }
   },
 
   close: function () {
-    this.setState({errors: []});
+    this.setState({show: false});
   },
 
   renderErrors: function () {
-    return this.state.errors.map(function (error, index) {
-      <li className="notification-message">
-        <p>{error}</p>
-      </li>
+    return this.props.errors.map(function (error, index) {
+      return (
+        <li key={'error-'+index} className="notification-message">
+          <p>{error}</p>
+        </li>
+      );
     });
   },
 
   render: function () {
     var notificationClasses = classNames({
       'wedding-atelier-notification': true,
-      'hidden': this.state.errors.length === 0
+      'show': this.state.show
     });
 
     return (

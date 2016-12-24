@@ -33,6 +33,7 @@ doctype html
   body.wedding-atelier data-action=(action_name.titleize) data-controller=(controller.controller_name.titleize)
     - if !flash.empty?
       = react_component 'Notification', errors: [flash[:error]]
+    #notification
     #fb-root
 
     - if spree_user_signed_in?

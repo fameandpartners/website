@@ -1,3 +1,13 @@
+
+/*
+ * Notification component.
+ * Usage: You should render this component after a failure and attach it
+ * to the #notification DOM node placed in the layout file.
+ * Example:
+ * React.render(<Notification errors={['error1', 'error2', 'error3']} />,
+ *              document.getElementById('notification'));
+ */
+
 var Notification = React.createClass({
   propTypes: {
     errors: React.PropTypes.array
