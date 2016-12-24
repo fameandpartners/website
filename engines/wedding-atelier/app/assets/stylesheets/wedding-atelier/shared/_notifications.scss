@@ -22,8 +22,12 @@
     cursor: pointer;
     font-size: 2rem;
     position: absolute;
-    right: 1%;
+    right: 10px;
     top: 0;
+  }
+
+  ul {
+    padding-left: 0;
   }
 
   li {
