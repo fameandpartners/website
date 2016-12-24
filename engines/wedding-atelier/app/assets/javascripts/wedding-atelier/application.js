@@ -8,4 +8,5 @@
 //= require bootstrap-datepicker-1.6.4
 //= require classnames
 //= require panzoom
+//= require moment-2.17.1.min
 //= require_tree

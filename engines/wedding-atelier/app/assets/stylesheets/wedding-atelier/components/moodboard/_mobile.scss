@@ -1,0 +1,58 @@
+#events__moodboard {
+  @include screen-xs-and-sm {
+
+    /* left side : hidden */
+
+    .chat.left-content { display: none; }
+
+    /* right side - Becoming full layout */
+
+    .moodboard-title { display: none; }
+
+
+    /* this is just the container when on the tab */
+    #chat-mobile {
+      height: 100%;
+    }
+
+    .chat-general-info {
+      display: none;
+    }
+
+    .msg-simple {
+      width: 100% !important;
+    }
+
+    #atelier {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+  }
+
+  @include screen-md {
+
+    .tab-chat {
+      display: none;
+    }
+
+    .chat-mobile {
+      display: none;
+    }
+
+    .chat.left-content { display: flex; }
+  }
+
+  @include screen-lg {
+
+    .tab-chat {
+      display: none;
+    }
+
+    .chat-mobile {
+      display: none;
+    }
+
+    .chat.left-content { display: flex; }
+  }
+}
