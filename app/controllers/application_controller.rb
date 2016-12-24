@@ -29,7 +29,6 @@ class ApplicationController < ActionController::Base
   before_filter :website_on_maintenance, if: proc { Features.active?(:maintenance) }
   before_filter :set_session_country
   before_filter :add_debugging_information
-  before_filter :try_reveal_guest_activity # note - we should join this with associate_user_by_utm_guest_token
   before_filter :set_locale
   before_filter :set_landing_page
 
@@ -237,21 +236,6 @@ class ApplicationController < ActionController::Base
       else
         { product_id: item.spree_product_id }
       end
-    end
-  end
-
-  def temporary_user_key
-    if spree_user_signed_in?
-      "user_#{try_spree_current_user.try(:id)}"
-    else
-      session[:temporary_user_key] ||= SecureRandom.hex(16)
-    end
-  end
-
-  def try_reveal_guest_activity
-    if spree_user_signed_in? && session[:temporary_user_key].present?
-      Activity.replace_temporary_keys(session[:temporary_user_key], try_spree_current_user)
-      session[:temporary_user_key] = nil
     end
   end
 

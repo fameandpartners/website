@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161119142856) do
+ActiveRecord::Schema.define(:version => 20161213021906) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -1603,8 +1603,8 @@ ActiveRecord::Schema.define(:version => 20161119142856) do
     t.string   "persistence_token"
     t.string   "reset_password_token"
     t.string   "perishable_token"
-    t.integer  "sign_in_count",                                           :default => 0,     :null => false
-    t.integer  "failed_attempts",                                         :default => 0,     :null => false
+    t.integer  "sign_in_count",                                           :default => 0,      :null => false
+    t.integer  "failed_attempts",                                         :default => 0,      :null => false
     t.datetime "last_request_at"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -1617,8 +1617,8 @@ ActiveRecord::Schema.define(:version => 20161119142856) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "reset_password_sent_at"
-    t.datetime "created_at",                                                                 :null => false
-    t.datetime "updated_at",                                                                 :null => false
+    t.datetime "created_at",                                                                  :null => false
+    t.datetime "updated_at",                                                                  :null => false
     t.string   "spree_api_key",                            :limit => 48
     t.datetime "remember_created_at"
     t.string   "first_name"
@@ -1640,6 +1640,7 @@ ActiveRecord::Schema.define(:version => 20161119142856) do
     t.date     "birthday"
     t.boolean  "automagically_registered",                                :default => false
     t.integer  "active_moodboard_id"
+    t.string   "wedding_atelier_signup_step",                             :default => "size"
   end
 
   add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
@@ -1719,6 +1720,62 @@ ActiveRecord::Schema.define(:version => 20161119142856) do
   end
 
   add_index "user_style_profiles", ["user_id"], :name => "index_style_reports_on_spree_user_id"
+
+  create_table "wedding_atelier_event_assistants", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "wedding_atelier_event_dresses", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.integer  "color_id"
+    t.integer  "style_id"
+    t.integer  "fabric_id"
+    t.integer  "size_id"
+    t.integer  "length_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "wedding_atelier_event_roles", :force => true do |t|
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "wedding_atelier_events", :force => true do |t|
+    t.string   "event_type"
+    t.integer  "number_of_assistants"
+    t.date     "date"
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "wedding_atelier_invitations", :force => true do |t|
+    t.string "user_email"
+    t.string "event_slug"
+    t.string "state",      :default => "pending"
+  end
+
+  create_table "wedding_atelier_user_profiles", :force => true do |t|
+    t.integer "spree_user_id"
+    t.string  "height"
+    t.string  "dress_size"
+    t.boolean "trend_updates"
+  end
+
+  create_table "wedding_atelier_users_event_roles", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "event_role_id"
+  end
 
   create_table "wishlist_items", :force => true do |t|
     t.integer  "spree_user_id"

@@ -42,6 +42,10 @@
   .font-medium {
     font-size: 3rem;
   }
+  .font-large {
+    font-size: 4rem;
+    line-height: 120%;
+  }
   .inner-buffer {
     padding: 40px 20px;
   }
@@ -121,7 +125,7 @@
       color: $c-neutral-white;
       max-width: 900px;
       padding: 40px;
-      margin: -100px auto 140px;
+      margin: -100px auto 60px;
       position: relative;
     }
 
@@ -135,21 +139,24 @@
   .slay-carousel .share-tiles {
     background-size: cover;
     display: block;
-    float: left;
+    height: 320px;
+    width: 320px;
+    margin: 0 auto;
   }
 
   .slay-carousel .insta-carousel {
     display: block;
     margin: 0 auto;
-    max-width: 700px;
+    max-width: 350px;
   }
 
-  .slay-carousel .share-tiles {
-    height: 320px;
-    width: 320px;
-    float: none;
-    display: block;
-    margin: 0 auto;
+  .slay-carousel .insta-carousel .link {
+    cursor: pointer;
+  }
+
+  .slay-carousel .insta-carousel .share-tile-img {
+    width: 100%;
+    height: 100%;
   }
 
   @include min-tablet {
@@ -229,6 +236,15 @@
   .slay-organizations .title {
     font-weight: bold;
     margin-bottom: 0;
+  }
+
+  .slay-ceo-letter {
+
+    @include desktop {
+      margin-top: 25px;
+      margin-bottom: 45px;
+    }
+
   }
 
   .slay-ceo-letter .nyree-img {

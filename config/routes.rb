@@ -219,6 +219,7 @@ FameAndPartners::Application.routes.draw do
     get '/dress-for-wedding'    => 'products/collections#show', :permalink => 'dress-for-wedding', :as => :dress_for_wedding_page
     get '/dress-for-parties'    => 'products/collections#show', :permalink => 'dress-for-parties', :as => :dress_for_parties_page
     get '/inside-out'  => 'products/collections#show', :permalink => 'inside-out', :as => :inside_out_page
+    get '/the-holiday-edit' => 'products/collections#show', :permalink => 'holiday', :as => :holiday_edit_page
 
     # A long tradition of hacking shit in.
     if Features.active?(:getitquick_unavailable)
@@ -329,6 +330,8 @@ FameAndPartners::Application.routes.draw do
     get '/size-guide'  => 'statics#size_guide', :as => :size_guide
     get '/growth-plan'  => 'statics#growth_plan', :as => :growth_plan
     get '/inside-out-sweepstakes'   => 'statics#inside_out_sweepstakes', :permalink => 'inside_out_sweepstakes', :as => :inside_out_sweepstakes
+    get '/pre-register-bridal'   => 'statics#pre_register_bridal_sweepstakes', :permalink => 'pre_register_bridal', :as => :pre_register_bridal
+    get '/pre-register-bridesmaid'   => 'statics#pre_register_bridesmaid_sweepstakes', :permalink => 'pre_register_bridesmaid_sweepstakes', :as => :pre_register_bridesmaid_sweepstakes
 
     get '/fashionista2014', to: redirect("/")
     get '/fashionista2014/info'   => 'statics#fashionista', :as => :fashionista_info
@@ -582,6 +585,10 @@ FameAndPartners::Application.routes.draw do
 
   mount AdminUi::Engine, at: '/fame_admin'
   mount Revolution::Engine => '/'
+
+  if Features.active?(:wedding_atelier)
+    mount WeddingAtelier::Engine, at: '/wedding-atelier'
+  end
 
   match '*path', to: 'errors/invalid_format#capture_php', constraints: lambda { |request| request.path[/\.php$/] }
 end

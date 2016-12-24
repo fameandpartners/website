@@ -1,6 +1,7 @@
 /* [Inside Out]
 -------------------------------------------------------*/
 .inside-out {
+
   h1 {
     font-size: 6rem;
     font-weight: bold;
@@ -42,24 +43,22 @@
 
   }
 
-  .inside-lb {
-    @include transition(300ms opacity);
-    cursor: pointer;
-    display: block;
-    &:hover {
-      opacity: 0.8;
-    }
+  .shop-collection-cta {
+    margin-bottom: 50px;
   }
 
-
-  .last-cta {
-    margin-bottom: 50px;
+  .btn-inside-out {
+    margin-top: 55px;
   }
 
   .item-video {
     width: 100%;
     height: auto;
     max-height: 450px;
+  }
+
+  .item-border {
+    border: 2px solid $c-neutral-black;
   }
 
   .collage-gallery {
@@ -75,17 +74,6 @@
     font-family: $font-family-secondary;
     letter-spacing: 3px;
     text-transform: uppercase;
-  }
-
-  .image-wrap {
-    height: 71px;
-    position: relative;
-
-    img {
-      position: absolute;
-      bottom: 0;
-    }
-
   }
 
   @media (max-width: $bootstrap-md-width - 1px) {
@@ -104,20 +92,12 @@
 
     }
 
-    .image-wrap {
-
-      img {
-        position: relative;
-      }
-
-    }
-
   }
+
 
 }
 
-
-// TODO: Depending on how often the lightbox component is used
+// TODO: Depending on how often this custom lightbox styling is used
 //       we should move the lines below to a separate file.
 
 // ######################
@@ -242,5 +222,5 @@
 .imagelightbox-close,
 .imagelightbox-caption,
 .imagelightbox-arrow {
-  @include animation(fade-in .25s linear);
+  animation: fade-in .25s linear;
 }

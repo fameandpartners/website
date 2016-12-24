@@ -1,11 +1,13 @@
 class Spree::Gateway::Pin < Spree::Gateway
   preference :api_key, :string, :description => 'Secret API Key'
   preference :publishable_key, :string, :description => 'Publishable API Key'
+  preference :currency, :string, :description => 'Currency (ISO 4217 - 3 Digits)'
 
   attr_accessible :preferred_api_key
   attr_accessible :preferred_publishable_key
+  attr_accessible :preferred_currency
 
-  USD_GATEWAYS = configatron.pin_payments.usd_gateways
+  DEFAULT_CURRENCY = 'USD'.freeze
 
   def purchase(money, creditcard, gateway_options)
     if token = creditcard.gateway_payment_profile_id
@@ -16,11 +18,7 @@ class Spree::Gateway::Pin < Spree::Gateway
   end
 
   def currency
-    if USD_GATEWAYS.include?(preferred_publishable_key)
-      'USD'
-    else
-      'AUD'
-    end
+    preferred_currency.presence || DEFAULT_CURRENCY
   end
 
   def auto_capture?

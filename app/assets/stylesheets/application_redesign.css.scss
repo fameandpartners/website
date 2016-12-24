@@ -120,7 +120,6 @@ z-index levels
 
 //= require_tree ./libs/vex
 //= require_tree ./redesign/stylesheets
-@import "compass";
 
 @import 'redesign/vars';
 @import 'redesign/mixins';
@@ -205,6 +204,7 @@ z-index levels
 @import 'redesign/components/seo-content';
 @import 'redesign/components/carousel-strap';
 @import 'redesign/components/how-it-works';
+@import 'redesign/components/logo-image-wrap';
 @import 'redesign/components/styling-tips';
 @import 'redesign/components/banners';
 @import 'redesign/components/panels/panels';
@@ -244,6 +244,7 @@ z-index levels
 @import 'redesign/pages/inside-out';
 @import 'redesign/pages/inside-out-sweepstakes';
 @import 'redesign/pages/slay-it-forward';
+@import 'redesign/pages/wedding-sweepstakes';
 
 // React Components
 @import 'redesign/react_components/_MarketingPage';

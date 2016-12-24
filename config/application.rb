@@ -71,7 +71,6 @@ module FameAndPartners
     #        you MUST restart your server, or they won't be loaded.
     config.active_record.observers ||= []
     config.active_record.observers << :fabrication_event_observer
-    config.active_record.observers << :activity_observer
     config.active_record.observers << :item_return_event_observer
     config.active_record.observers << :moodboard_item_event_observer
 

@@ -20,6 +20,8 @@ require 'chosen-rails/rspec'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 Dir[Rails.root.join("engines/admin_ui/spec/support/**/*.rb")].each {|f| require f}
+Dir[Rails.root.join("engines/wedding-atelier/spec/factories/**/*.rb")].each {|f| require f}
+Dir[Rails.root.join("engines/wedding-atelier/spec/support/**/*.rb")].each {|f| require f}
 Dir[Rails.root.join("engines/manual_order/spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
@@ -38,6 +40,7 @@ RSpec.configure do |config|
 
   # Use DatabaseCleaner for transactions
   config.use_transactional_fixtures = false
+  config.include ControllerHelpers, :type => :controller
 end
 
 # TODO: remove this RSpec monkey patching when updating to latest RSpec. See https://github.com/fameandpartners/website/issues/1912

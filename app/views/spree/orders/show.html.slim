@@ -20,36 +20,16 @@ section.order-details
             .order-content
               .row
                 .order-items
-                  - order.line_items.each do |line_item|
-                    .item
-                      .item-img.col-md-5
-                        = image_tag line_item.image_url, alt: line_item.style_name, class: 'img-responsive ordered-item-image'
-                      .details.col-md-7
-                        .row
-                          .name.col-md-8
-                            = line_item.style_name
-                          .price.col-md-4
-                            / TODO: If price is integer remove decimals
-                            = line_item.display_price
-                        .row
-                          .item-details.col-md-12
-                            ul
-                              li
-                                | Skirt Length: <span class="value">#{line_item.height}</span>
-                              li
-                                | Custom color: <span class="value">#{line_item.colour_name}</span>
-                              - if line_item.customisation_text.present?
-                                li
-                                  | Customized cut: <span class="value">#{line_item.customisation_text}</span>
-                              li
-                                | Size: <span class="value">#{line_item.size_name}</span>
-                              li
-                                | Quantity: <span class="value">#{line_item.quantity}</span>
-
-                              - if line_item.fast_making?
-                                - fast_making = line_item.making_options.first
-                                li
-                                  | Express making: <span class="value text-transform-none">You'll get it in 6 to 9 days!</span>
+                  - if order.fast_making_items.any?
+                    .fast-making-items
+                      .shipping-title.item Express making, get in 5 to 7 days
+                      - order.fast_making_line_items.each do |line_item|
+                        = render 'spree/orders/show/order_item', line_item: line_item
+                  - if order.standard_making_items.any?
+                    .standard-making-items
+                      .shipping-title.item Free shipping to USA, Canada and the UK within 7 – 10 days
+                      - order.standard_making_line_items.each do |line_item|
+                        = render 'spree/orders/show/order_item', line_item: line_item
               .row
                 .order-total.col-md-7.col-md-offset-5
 
@@ -137,27 +117,38 @@ section.order-details
 
         .col-md-4.order-sidebar-wrapper
           .order-sidebar
-            .steps-info
+            .steps-info.custom-ordered-list
               h3 What happens next?
-              .item
-                h4 1. Your Dress is Being Custom Cut & Made
+
+              .item.step-counter
+                h4.step-title Your Dress is Being Custom Cut & Made
                 p Our team of artisan seamstresses make your dress from start to finish.
                 = link_to why_us_path, class: 'sidebar-link'
                   | Learn more about our processes
                   i.link-icon.fa.fa-chevron-right
-              .item
-                h4 2. Your dress is shipped
+
+              .item.step-counter
+                h4.step-title Your dress is shipped
                 p Once the finishing touches have been made to your dress and we are good to go, we'll email you a shipping confirmation.
-              .item
-                h4
-                  | 3. Expect delivery date:
-                  p = order.projected_delivery_date.strftime('%d of %b, %Y')
+
+              .item.step-counter
+                h4.step-title Expect Express Making items in 6-9 business days
                 p You'll be able to track your delivery with your shipping confirmation.
                 = link_to faqs_path(anchor: 'collapse-orders-track'), class: 'sidebar-link'
                   | Learn more about Shipping and Delivery
                   i.link-icon.fa.fa-chevron-right
-              .item
-                h4 4. It arrives!
+
+              .item.step-counter
+                h4.step-title
+                  | Expect Standard delivery:
+                  |  #{order.projected_delivery_date.strftime('%d of %b, %Y')}
+                p You'll be able to track your delivery with your shipping confirmation.
+                = link_to faqs_path(anchor: 'collapse-orders-track'), class: 'sidebar-link'
+                  | Learn more about Shipping and Delivery
+                  i.link-icon.fa.fa-chevron-right
+
+              .item.step-counter
+                h4.step-title It arrives!
                 p Make sure you keep all packaging and leave the tags on in case you need to return / exchange.
                 = link_to faqs_path(anchor: 'collapse-returns-policy'), class: 'sidebar-link'
                   | See our Return Policy

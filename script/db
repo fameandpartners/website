@@ -263,6 +263,13 @@ function sanitise_dev_db
   truncate table user_style_profile_taxons;
   truncate table user_style_profiles;
   truncate table wishlist_items;
+  truncate table wedding_atelier_event_assistants;
+  truncate wedding_atelier_event_assistants;
+  truncate wedding_atelier_event_roles;
+  truncate wedding_atelier_events;
+  truncate wedding_atelier_invitations;
+  truncate wedding_atelier_user_profiles;
+  truncate wedding_atelier_users_event_roles;
   "
 
   psql --dbname ${DEV_DB} --echo-queries --command "${SCRIPT_SQL}"
@@ -286,9 +293,16 @@ function create_test_fixture_dump
   UPDATE spree_products AS sp SET hidden = false WHERE sp.id = 681;
   "
 
-  echo "$(magenta)>> $(white)Deleting everything (product_id != 681)$(normal)"
+  ENABLE_FAST_MAKING_SQL="
+  INSERT INTO product_making_options (\"active\", \"currency\", \"option_type\", \"price\", \"product_id\")
+  VALUES (TRUE, 'USD', 'fast_making', 30.00, 681)
+  "
 
+  echo "$(magenta)>> $(white)Deleting everything (product_id != 681)$(normal)"
   psql --dbname ${DEV_DB} --echo-queries --command "${SCRIPT_SQL}"
+
+  echo "$(magenta)>> $(white)Enable Express Making for product 681$(normal)"
+  psql --dbname ${DEV_DB} --echo-queries --command "${ENABLE_FAST_MAKING_SQL}"
 
   echo "$(magenta)>> $(white)Enabling test gateways$(normal)"
   bundle exec rake dev:enable_payment_gateways TARGET_ENV=test

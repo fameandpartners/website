@@ -4,7 +4,6 @@ class QuestionsController < ApplicationController
   ssl_allowed
 
   before_filter :authenticate_spree_user!
-  before_filter :log_activity
 
   skip_before_filter :check_cart
   skip_before_filter :set_locale
@@ -19,9 +18,4 @@ class QuestionsController < ApplicationController
     @questions_by_steps = @quiz.questions.includes(:answers).order('position ASC').group_by(&:step)
   end
 
-  private
-
-  def log_activity
-    Activity.log_quiz_started(Quiz.last, current_spree_user)
-  end
 end

@@ -159,7 +159,6 @@ PATH
       rails
       spree
     inspinia-rails (2.1.0)
-      bootstrap-sass
       font-awesome-rails (~> 4.3.0.0)
       rails
     mailchimp_client (0.0.1)
@@ -180,6 +179,15 @@ PATH
     revolution (0.0.1)
       awesome_nested_set
       rails (~> 3.2.21)
+    wedding-atelier (0.0.1)
+      active_model_serializers
+      bootstrap-sass (~> 3.3.4.1)
+      kaminari
+      rails (~> 3.2.22.5)
+      react-rails
+      rolify
+      slim
+      twilio-ruby
 
 GEM
   remote: https://rubygems.org/
@@ -265,9 +273,6 @@ GEM
     bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
-    bourbon (4.2.2)
-      sass (~> 3.4)
-      thor
     bugsnag (5.0.1)
     builder (3.0.4)
     bullet (5.3.0)
@@ -277,13 +282,14 @@ GEM
       activesupport (>= 3.1.0)
       tzinfo
     cancan (1.6.8)
-    capybara (2.5.0)
+    capybara (2.11.0)
+      addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-screenshot (1.0.11)
+    capybara-screenshot (1.0.14)
       capybara (>= 1.0, < 3)
       launchy
     childprocess (0.5.9)
@@ -293,10 +299,6 @@ GEM
       railties (>= 3.0)
       sass-rails (>= 3.2)
     chronic (0.10.2)
-    chunky_png (1.3.4)
-    ckeditor (4.1.1)
-      cocaine
-      orm_adapter (~> 0.5.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cliver (0.3.2)
@@ -312,22 +314,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
-    compass (1.0.3)
-      chunky_png (~> 1.2)
-      compass-core (~> 1.0.2)
-      compass-import-once (~> 1.0.5)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-      sass (>= 3.3.13, < 3.5)
-    compass-core (1.0.3)
-      multi_json (~> 1.0)
-      sass (>= 3.3.0, < 3.5)
-    compass-import-once (1.0.5)
-      sass (>= 3.2, < 3.5)
-    compass-rails (2.0.5)
-      compass (~> 1.0.0)
-      sass-rails (< 5.1)
-      sprockets (< 2.13)
     concurrent-ruby (1.0.2)
     configatron (4.5.0)
     connection_pool (2.2.0)
@@ -361,8 +347,6 @@ GEM
       uber
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
-    droidcss (2.0.4)
-      sass (>= 3.2.0)
     eco (1.0.0)
       coffee-script
       eco-source
@@ -383,7 +367,7 @@ GEM
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     ffaker (1.15.0)
-    ffi (1.9.10)
+    ffi (1.9.14)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
     fog (1.29.0)
@@ -604,14 +588,14 @@ GEM
       paypal-sdk-core (~> 0.2.3)
     pg (0.18.1)
     pin_payment (0.5.1)
-    poltergeist (1.9.0)
+    poltergeist (1.12.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
-      multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.5)
+    power_assert (0.2.6)
     psych (2.0.13)
     puma (3.4.0)
     quiet_assets (1.1.0)
@@ -650,9 +634,6 @@ GEM
       actionpack (~> 3.0)
       activerecord (~> 3.0)
       polyamorous (~> 0.5.0)
-    rb-fsevent (0.9.4)
-    rb-inotify (0.9.5)
-      ffi (>= 0.5.0)
     rdiscount (1.6.8)
     rdoc (3.12.2)
       json (~> 1.4)
@@ -676,6 +657,7 @@ GEM
       netrc (~> 0.7)
     retriable (2.0.2)
     rmagick (2.15.4)
+    rolify (5.1.0)
     rollout (2.1.0)
     roo (1.13.2)
       nokogiri
@@ -732,7 +714,7 @@ GEM
       wasabi (~> 2.5.0)
     select2-rails (3.2.1)
       thor (~> 0.14)
-    selenium-webdriver (2.53.0)
+    selenium-webdriver (2.53.4)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
@@ -789,11 +771,12 @@ GEM
     temple (0.7.5)
     term-ansicolor (1.3.0)
       tins (~> 1.0)
+    test-unit (3.1.5)
+      power_assert
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
     timecop (0.8.0)
-    timers (1.1.0)
     tins (1.5.1)
     tire (0.6.2)
       activemodel (>= 3.0)
@@ -810,6 +793,10 @@ GEM
     turnip (1.3.1)
       gherkin (>= 2.5)
       rspec (>= 2.14.0, < 4.0)
+    twilio-ruby (4.13.0)
+      builder (>= 2.1.2)
+      jwt (~> 1.0)
+      multi_json (>= 1.3.0)
     tzinfo (0.3.52)
     uber (0.0.15)
     uglifier (1.3.0)
@@ -838,7 +825,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
     websocket (1.2.3)
-    websocket-driver (0.6.3)
+    websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
     whenever (0.9.4)
@@ -863,25 +850,20 @@ DEPENDENCIES
   bergen!
   better_errors
   binding_of_caller
-  bootstrap-sass (= 3.3.4.1)
-  bourbon
   bullet
   business_time
   canonical-rails!
-  capybara (~> 2.5.0)
+  capybara (~> 2.11.0)
   capybara-screenshot (~> 1.0.11)
-  ckeditor
   coercible
   coffee-rails (~> 3.2.1)
   coffee-script-source (~> 1.8.0)
-  compass-rails (~> 2.0.5)
   configatron
   customerio (~> 1.0.0)
   dalli
   database_cleaner
   default_value_for
   device_detector (~> 0.8.1)
-  droidcss (~> 2.0.4)
   eco
   event_sourced_record
   execjs (~> 2)
@@ -908,7 +890,7 @@ DEPENDENCIES
   paperclip
   pg
   pin_payment
-  poltergeist (~> 1.9.0)
+  poltergeist (~> 1.12.0)
   psych (~> 2.0.13)
   puma
   quiet_assets
@@ -929,7 +911,7 @@ DEPENDENCIES
   ruby-progressbar
   rubyzip (~> 1.1.7)
   sass-rails (~> 3.2.3)
-  selenium-webdriver (~> 2.53.0)
+  selenium-webdriver (~> 2.53.4)
   sentry-raven
   shoulda-matchers
   show_me_the_cookies (~> 3.1.0)
@@ -947,18 +929,19 @@ DEPENDENCIES
   spree_paypal_express!
   spree_social!
   term-ansicolor
+  test-unit
   timecop
-  timers (= 1.1.0)
   tire
   turnip (~> 1.3.1)
   uglifier (= 1.3.0)
   unicorn
   vcr (~> 2.9.3)
   webmock (~> 1.21.0)
+  wedding-atelier!
   whenever
 
 RUBY VERSION
-   ruby 2.1.6p336
+   ruby 2.3.3p222
 
 BUNDLED WITH
    1.13.6

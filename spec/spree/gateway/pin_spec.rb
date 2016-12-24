@@ -1,31 +1,23 @@
 require 'spec_helper'
 
 describe Spree::Gateway::Pin do
+  subject(:gateway) { described_class.new }
 
-  let(:gateway) { Spree::Gateway::Pin.new }
+  describe '#currency' do
+    context 'currency preference is setup' do
+      before(:each) { gateway.preferred_currency = 'BRL' }
 
-  context 'US' do
-
-    before do
-      expect(gateway).to receive(:preferred_publishable_key).and_return('obtain-test-gateway-from-mngr')
+      it 'returns setup currency' do
+        expect(gateway.currency).to eq('BRL')
+      end
     end
 
-    it 'USD gateway' do
-      expect(gateway.currency).to eq 'USD'
+    context 'currency preference is not setup' do
+      before(:each) { gateway.preferred_currency = nil }
+
+      it 'returns default USD value' do
+        expect(gateway.currency).to eq('USD')
+      end
     end
   end
-
-  context 'AUD' do
-
-    before do
-      expect(gateway).to receive(:preferred_publishable_key).and_return('anything-else-does-not-matter')
-    end
-
-    it 'USD gateway' do
-      expect(gateway.currency).to eq 'AUD'
-    end
-
-  end
-
-
 end

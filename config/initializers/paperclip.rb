@@ -1,11 +1,11 @@
 if Rails.application.config.use_s3
-  aws_host_without_protocol = configatron.aws.host.to_s.gsub('https://', '').gsub('http://', '')
+  aws_host_without_protocol = ENV['RAILS_ASSET_HOST'].to_s.gsub('https://', '').gsub('http://', '')
 
   # Custom configurations for Spree forceful usage of Paperclip's S3 storage mode
   Paperclip::Attachment.default_options.merge!(
     url:            ':s3_alias_url',
     s3_credentials: {
-      bucket:            configatron.aws.s3.bucket,
+      bucket: ENV['AWS_S3_BUCKET'],
     },
     s3_host_alias:  aws_host_without_protocol,
     s3_permissions: :public_read,
@@ -18,13 +18,24 @@ if Rails.application.config.use_s3
     fog_credentials: {
       use_iam_profile: true,
       provider:        'AWS',
-      region:          configatron.aws.s3.region
+      region:          ENV['AWS_S3_REGION'],
     },
-    fog_host:        configatron.aws.host,
-    fog_directory:   configatron.aws.s3.bucket,
+    fog_host:        ENV['RAILS_ASSET_HOST'],
+    fog_directory:   ENV['AWS_S3_BUCKET'],
     fog_public:      true,
     path:            'system/:attachment/:id/:style/:basename.:extension'
   )
+
+  if Rails.env.development? && ENV.values_at('AWS_S3_ACCESS_KEY_ID', 'AWS_S3_SECRET_ACCESS_KEY').all?
+    Paperclip::Attachment.default_options.merge!(
+      fog_credentials: {
+        aws_access_key_id:     ENV['AWS_S3_ACCESS_KEY_ID'],
+        aws_secret_access_key: ENV['AWS_S3_SECRET_ACCESS_KEY'],
+        provider:              'AWS',
+        region:                ENV['AWS_S3_REGION']
+      }
+    )
+  end
 else
   Paperclip::Attachment.default_options.merge!(
     storage: :filesystem

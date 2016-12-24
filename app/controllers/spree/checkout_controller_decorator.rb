@@ -303,11 +303,9 @@ Spree::CheckoutController.class_eval do
   end
 
   def find_payment_methods
-    @credit_card_gateway = CreditCardGatewayService.new(@order, current_site_version.currency).gateway
+    @credit_card_gateway = Payments::CreditCardLocalizer.new(@order, current_site_version.currency).gateway
 
-    @pay_pal_method = @order.available_payment_methods.detect do |method|
-      method.method_type.eql?('paypalexpress') || method.type == 'Spree::Gateway::PayPalExpress'
-    end
+    @pay_pal_method = Payments::PaypalLocalizer.new(@order, current_site_version.currency).gateway
 
     @afterpay_method = @order.available_payment_methods.detect do |method|
       method.method_type == 'afterpay' && current_site_version.currency == method.currency

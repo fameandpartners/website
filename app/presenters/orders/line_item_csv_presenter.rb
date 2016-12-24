@@ -148,6 +148,7 @@ module Orders
       end
 
       def personalization_sku
+        # TODO: this is duplicated logic from the `CustomItemSku` generator!
         style_number = if (line['variant_master'] == 'TRUE' || line['variant_master'] == 't')
                          line['variant_sku']
                        else

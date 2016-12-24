@@ -1,5 +1,10 @@
 = render partial: 'pages/robots'
 
+// ##########################################################
+// |  When editing this page remember to update this test:  |
+// |  /spec/acceptance/store/browse_and_purchase.feature    |
+// ##########################################################
+
 .container.content-block
   .row
     .col-md-12
@@ -45,26 +50,26 @@
         .inner-wrap PREVIOUS LOOKBOOKS
 
     .col-md-3.col-xs-6
+      = link_to the_freshly_picked_collection_path, class: 'panel-compact'
+        .media-wrap.keep-ratio
+          .inner-wrap
+            = image_tag "lookbook/previous-collections/freshly-picked-collection.jpg"
+        .copy-wrap The Freshly Picked Collection
+    .col-md-3.col-xs-6
       = link_to the_ruffled_up_collection_path, class: 'panel-compact'
         .media-wrap.keep-ratio
           .inner-wrap
-            = image_tag "lookbook/ruffled-collection.jpg"
+            = image_tag "lookbook/previous-collections/ruffled-collection.jpg"
         .copy-wrap The Ruffled Up Collection
     .col-md-3.col-xs-6
       = link_to "#{dresses_path}/slip-dress", class: 'panel-compact'
         .media-wrap.keep-ratio
           .inner-wrap
-            = image_tag "lookbook/slip-dress.jpg"
+            = image_tag "lookbook/previous-collections/slip-dress.jpg"
         .copy-wrap The Slip Dress Collection
     .col-md-3.col-xs-6
       = link_to partners_in_crime_collection_path, class: 'panel-compact'
         .media-wrap.keep-ratio
           .inner-wrap
-            = image_tag "lookbook/partnersincrime-pc.jpg"
-        .copy-wrap Partners In Crime
-    .col-md-3.col-xs-6
-      = link_to this_modern_romance_collection_path, class: 'panel-compact'
-        .media-wrap.keep-ratio
-          .inner-wrap
-            = image_tag "lookbook/modern-romance-pc.jpg"
-        .copy-wrap This Modern Romance
+            = image_tag "lookbook/previous-collections/partnersincrime-pc.jpg"
+        .copy-wrap Partners In Crime Collection
