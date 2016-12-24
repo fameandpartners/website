@@ -1,0 +1,31 @@
+.calendar-icon {
+  width: 19px;
+  height: 19px;
+  display: block;
+  background-image: image-url('wedding-atelier/1476418446-calendar.png');
+  background-repeat: no-repeat;
+}
+
+.icon-unliked {
+  display: inline-block;
+  background: image-url('wedding-atelier/icons/static-heart.svg') no-repeat center;
+  width: 26px;
+  height: 22px;
+  background-size: cover;
+}
+
+.icon-liked {
+  display: inline-block;
+  background: image-url('wedding-atelier/icons/active-heart.svg') no-repeat center;
+  width: 26px;
+  height: 22px;
+  background-size: cover;
+}
+
+.icon-close {
+  display: inline-block;
+  background: image-url('wedding-atelier/icons/close.svg') no-repeat center;
+  width: 16px;
+  height: 16px;
+  margin: 4px;
+}

@@ -21,5 +21,6 @@ WeddingAtelier::Engine.routes.draw do
     end
     resources :customizations, only: :index
     resources :dresses, controller: :event_dresses
+    resources :assistants, only: [:destroy]
   end
 end
