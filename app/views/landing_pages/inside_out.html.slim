@@ -5,7 +5,7 @@
   .container-fluid.container-no-padding-right
     .row
       .col-md-6.hidden-md.hidden-lg.no-spacing-cols-mobile
-        = image_tag "landingpages/inside-out/top-image.jpg", :class => "img-responsive hidden-md hidden-lg"
+        = image_tag "landingpages/inside-out/top-image.jpg", class: "img-responsive hidden-md hidden-lg"
 
       .col-md-4.col-md-offset-1.section-intro
         .row
@@ -14,7 +14,7 @@
           p Let’s empower each other, one dress at a time. Let’s dress up and give back.
 
       .col-md-6.col-md-offset-1.no-padding.hidden-xs.hidden-sm
-        = image_tag "landingpages/inside-out/top-image.jpg", :class => "img-responsive hidden-xs hidden-sm"
+        = image_tag "landingpages/inside-out/top-image.jpg", class: "img-responsive hidden-xs hidden-sm"
 
   .container-fluid.container-no-padding-right.hidden-sm.hidden-md.hidden-lg
     .col-md-12.heading-overlay-wrapper
@@ -23,35 +23,35 @@
 
     .main-hero-wrap.js-hero-tile-carousel.no-spacing-cols-mobile
       .main-hero-wrap.hero-wrap
-        a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-1.jpg")}"
+        a data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-1.jpg")}"
           picture.media-wrap
             img src="#{image_path("landingpages/inside-out/collage-image-1.jpg")}"
       .main-hero-wrap.hero-wrap
-        a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-2.jpg")}"
+        a data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-2.jpg")}" data-ilb2-caption="caption text"
           picture.media-wrap
             img src="#{image_path("landingpages/inside-out/collage-image-2.jpg")}"
       .main-hero-wrap.hero-wrap
-        a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-3.jpg")}"
+        a data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-3.jpg")}" data-ilb2-caption="caption text"
           picture.media-wrap
             img src="#{image_path("landingpages/inside-out/collage-image-3.jpg")}"
       .main-hero-wrap.hero-wrap
-        a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-4.jpg")}"
+        a data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-4.jpg")}" data-ilb2-caption="caption text"
           picture.media-wrap
             img src="#{image_path("landingpages/inside-out/collage-image-4.jpg")}"
       .main-hero-wrap.hero-wrap
-        a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-5.jpg")}"
+        a data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-5.jpg")}"
           picture.media-wrap
             img src="#{image_path("landingpages/inside-out/collage-image-5.jpg")}"
       .main-hero-wrap.hero-wrap
-        a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-6.jpg")}"
+        a data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-6.jpg")}"
           picture.media-wrap
             img src="#{image_path("landingpages/inside-out/collage-image-6.jpg")}"
       .main-hero-wrap.hero-wrap
-        a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-7.jpg")}"
+        a data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-7.jpg")}"
           picture.media-wrap
             img src="#{image_path("landingpages/inside-out/collage-image-7.jpg")}"
       .main-hero-wrap.hero-wrap
-        a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-8.jpg")}"
+        a data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-8.jpg")}"
           picture.media-wrap
             img src="#{image_path("landingpages/inside-out/collage-image-8.jpg")}"
 
@@ -59,29 +59,29 @@
     section.section-box.hidden-xs
       .row.collage-gallery
         .col-md-3.col-sm-6
-          a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-1.jpg")}"
-            = image_tag "landingpages/inside-out/collage-image-1.jpg", :class => "img-responsive"
+          a.inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-1.jpg")}" data-imagelightbox-dressName="Dress 1" data-imagelightbox-dressPrice="100" data-imagelightbox-dressUrl="/example/dress1"
+            = image_tag "landingpages/inside-out/collage-image-1.jpg", class: "img-responsive"
         .col-md-3.col-sm-6
-          a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-2.jpg")}"
-            = image_tag "landingpages/inside-out/collage-image-2.jpg", :class => "img-responsive"
+          a.inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-2.jpg")}" data-imagelightbox-dressName="Dress 2" data-imagelightbox-dressPrice="200" data-imagelightbox-dressUrl="/example/dress2"
+            = image_tag "landingpages/inside-out/collage-image-2.jpg", class: "img-responsive"
         .col-md-3.col-sm-6
-          a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-3.jpg")}"
-            = image_tag "landingpages/inside-out/collage-image-3.jpg", :class => "img-responsive"
+          a.inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-3.jpg")}" data-imagelightbox-dressName="Dress 3" data-imagelightbox-dressPrice="300" data-imagelightbox-dressUrl="/example/dress3"
+            = image_tag "landingpages/inside-out/collage-image-3.jpg", class: "img-responsive"
         .col-md-3.col-sm-6
-          a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-4.jpg")}"
-            = image_tag "landingpages/inside-out/collage-image-4.jpg", :class => "img-responsive"
+          a.inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-4.jpg")}" data-imagelightbox-dressName="Dress 4" data-imagelightbox-dressPrice="400" data-imagelightbox-dressUrl="/example/dress1"
+            = image_tag "landingpages/inside-out/collage-image-4.jpg", class: "img-responsive"
         .col-md-3.col-sm-6
-          a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-5.jpg")}"
-            = image_tag "landingpages/inside-out/collage-image-5.jpg", :class => "img-responsive"
+          a.inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-5.jpg")}" data-imagelightbox-dressName="Dress 5" data-imagelightbox-dressPrice="500" data-imagelightbox-dressUrl="/example/dress1"
+            = image_tag "landingpages/inside-out/collage-image-5.jpg", class: "img-responsive"
         .col-md-3.col-sm-6
-          a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-6.jpg")}"
-            = image_tag "landingpages/inside-out/collage-image-6.jpg", :class => "img-responsive"
+          a.inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-6.jpg")}" data-imagelightbox-dressName="Dress 6" data-imagelightbox-dressPrice="600" data-imagelightbox-dressUrl="/example/dress1"
+            = image_tag "landingpages/inside-out/collage-image-6.jpg", class: "img-responsive"
         .col-md-3.col-sm-6
-          a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-7.jpg")}"
-            = image_tag "landingpages/inside-out/collage-image-7.jpg", :class => "img-responsive"
+          a.inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-7.jpg")}" data-imagelightbox-dressName="Dress 7" data-imagelightbox-dressPrice="700" data-imagelightbox-dressUrl="/example/dress1"
+            = image_tag "landingpages/inside-out/collage-image-7.jpg", class: "img-responsive"
         .col-md-3.col-sm-6
-          a.inside-lb href="#{image_path("landingpages/inside-out/collage-image-8.jpg")}"
-            = image_tag "landingpages/inside-out/collage-image-8.jpg", :class => "img-responsive"
+          a.inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-8.jpg")}" data-imagelightbox-dressName="Dress 8" data-imagelightbox-dressPrice="800" data-imagelightbox-dressUrl="/example/dress1"
+            = image_tag "landingpages/inside-out/collage-image-8.jpg", class: "img-responsive"
 
     .row.text-center
       = link_to '/inside-out-collection'
@@ -113,7 +113,7 @@
             p #{link_to '\'Like\' our Facebook page', 'https://www.facebook.com/FameandPartners', class: 'link-underline'} so you don't miss out.
 
         .col-md-6.col-md-offset-1.hidden-xs.hidden-sm
-          = image_tag "landingpages/inside-out/win.jpg", :class => "img-responsive hidden-xs hidden-sm"
+          = image_tag "landingpages/inside-out/win.jpg", class: "img-responsive hidden-xs hidden-sm"
           .text-center
             = link_to '/inside-out-sweepstakes'
               span.btn-xs.btn-featured
@@ -159,14 +159,14 @@
     section.section-box
       .row
         .col-md-6.hidden-md.hidden-lg
-          = image_tag "landingpages/inside-out/i-change.jpg", :class => "img-responsive hidden-md hidden-lg"
+          = image_tag "landingpages/inside-out/i-change.jpg", class: "img-responsive hidden-md hidden-lg"
         .col-md-6
           h2
             | i=Change.
           p
             | i=Change is the cause marketing platform that allows Fame and Partners to give back with every sale and track the impact of each donation in real time. Founded by Jeremy Meltzer, the platform believes that investing in women and girls will be the greatest driver of growth and stability this century–and we agree. Fame and Partners has partnered with i=Change to donate <span class="donation-label">$5 of every sale at fame and partners</span> to UN Women and Plan International, in the hopes of nurturing independence and empowerment in women all over the world and making fashion that stands for something.
         .col-md-6.hidden-xs.hidden-sm
-          = image_tag "landingpages/inside-out/i-change.jpg", :class => "img-responsive hidden-xs hidden-sm"
+          = image_tag "landingpages/inside-out/i-change.jpg", class: "img-responsive hidden-xs hidden-sm"
 
     section.section-box
       .row
@@ -214,22 +214,38 @@
       = link_to '/inside-out-collection'
         span.btn-xs.btn-featured
           | Shop <span class="copy-highlight">THE COLLECTION</span>
-                    
+
 - content_for :dom_js do
   = javascript_include_tag "libs/jquery.imagelightbox.min.js"
-  javascript:  
-    $(document).ready(function () {
-      // append overlay
-      function overlayOn(){
-  			$( '<div id="imagelightbox-overlay"></div>' ).appendTo( 'body' );
-  		}
-      
-      function overlayOff(){
-				$( '#imagelightbox-overlay' ).remove();
-			}
+  javascript:
 
-      $( 'a.inside-lb' ).imageLightbox({
-        onStart: function(){ overlayOn(); },
-        onEnd: function(){ overlayOff(); }
+    $(document).ready(function () {
+
+      $( function() {
+
+        $('a.inside-lb').each(function(index, elem) {
+          var dressName = $(this).attr('data-imagelightbox-dressName'),
+              dressPrice = $(this).attr('data-imagelightbox-dressPrice'),
+              dressUrl = $(this).attr('data-imagelightbox-dressUrl'),
+              // This is needed since the default behaviour is to make the alt attribute as a plain text caption
+              resetAlt = $(this).find('img').prop('alt','');
+
+
+          if (dressName && dressPrice && dressUrl)
+            $(this).attr('data-ilb2-caption', '<div class="captionTitle">Pictured right:</div><a href="'+dressUrl+'"><span class="dressName">'+dressName+'</span> <span class="dressPrice">$'+dressPrice+'</span></a>');
+
+        });
+
+        $('a.inside-lb').imageLightbox(
+          {
+            arrows: true,
+            button: true,
+            overlay: true,
+            lockBody: true,
+            caption: true,
+          }
+        );
+
       });
+
     });
