@@ -31,13 +31,8 @@ doctype html
     = render 'marketing/trackers/google_analytics'
 
   body.wedding-atelier data-action=(action_name.titleize) data-controller=(controller.controller_name.titleize)
-    / - if !flash.empty?
-    /   #notifications-rails
-    /     - flash.each do |key, value|
-    /       = content_tag :p, value, class: "notification-message #{key}"
-    /
-    /     .notification-close x
-    = react_component 'Notification', errors: [flash[:error],flash[:error],flash[:error]]
+    - if !flash.empty?
+      = react_component 'Notification', errors: [flash[:error]]
     #fb-root
 
     - if spree_user_signed_in?
