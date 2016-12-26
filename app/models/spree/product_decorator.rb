@@ -333,7 +333,7 @@ Spree::Product.class_eval do
 
   # Max delivery period got from taxons
   def delivery_period
-    major_period = taxons.inject('0') do |max_period, taxon|
+    major_period = taxons.inject(Spree::Taxon::DELIVERY_PERIODS.first) do |max_period, taxon|
       current_major_value = major_value_from_period(taxon.delivery_period)
       max_major_value = major_value_from_period(max_period)
 
