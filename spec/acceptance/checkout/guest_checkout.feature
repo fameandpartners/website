@@ -92,6 +92,7 @@ Feature: Complete Guest Checkout
       | City                    | Melbourne      |
       | Phone                   | 2255-4422      |
       | <Zipcode Label>         | 12345          |
+    And I agree with shipping fees if required
     And I click on "Continue to payment" button
     And I click on "Credit Card" link
     And I fill in form fields with:
