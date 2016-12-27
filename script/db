@@ -2,7 +2,8 @@
 
 DIR=$(dirname $0)
 
-DEV_DB=$(ruby -ryaml -e 'puts YAML.load(File.open("config/database.yml"))["development"]["database"]')
+DEV_DB=$(ruby -ryaml -rerb -e 'File.readlines(".env").each { |line| values = line.split("="); ENV[values[0]] = values[1]}; puts YAML.load(ERB.new(File.read("config/database.yml")).result)["development"]["database"]')
+
 BASE_DUMPS_DIR='tmp/database_backups'
 DB_BASE_NAME='fame_and_partners'
 DUMP_EXTENSION='dump'
