@@ -1,4 +1,4 @@
-// 404 - 500 Pages
+// Error Pages (Errors 404, 500 etc)
 .error-page {
   margin: 100px auto;
 
@@ -21,15 +21,6 @@
 
   a {
     @extend .link-underline;
-  }
-
-  .thin-bottom::after {
-    content: "";
-    padding-bottom: 50px;
-    border-bottom: 1px solid #000;
-    width: 90px;
-    display: block;
-    margin: 0 auto;
   }
 
 }
