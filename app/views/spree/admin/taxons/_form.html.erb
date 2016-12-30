@@ -19,7 +19,7 @@
 
     <%= f.field_container :delivery_period do %>
       <%= f.label :delivery_period, t(:delivery_period) %>
-	  <%= f.select :delivery_period, Spree::Taxon::DELIVERY_PERIODS, {}, {class: 'select2 fullwidth'} %>
+      <%= f.select :delivery_period, Spree::Taxon::DELIVERY_PERIODS, {}, {class: 'select2 fullwidth'} %>
     <% end %>
 
     <%= f.field_container :icon do %>
