@@ -47,7 +47,6 @@ var CustomizationsContainer = React.createClass({
             fabrics={this.props.customizations.fabrics}
             selectCallback={this.props.selectCallback}
             showLateralMenuCallback={this.props.showLateralMenuCallback}
-            selectedOption={this.props.selectedOptions.colour}
             currentCustomization={this.props.currentCustomization}
             showContainers={this.props.showContainers}/>
           <CustomizationSelector
