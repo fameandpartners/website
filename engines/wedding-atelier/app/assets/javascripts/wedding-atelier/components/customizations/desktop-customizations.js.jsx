@@ -118,6 +118,7 @@ var DesktopCustomizations = React.createClass({
             <SaveDressButton
               eventSlug={this.props.eventSlug}
               selectedOptions={this.props.selectedOptions}
+              mobile={false}
               />
             <button className="btn-black">
                add to cart

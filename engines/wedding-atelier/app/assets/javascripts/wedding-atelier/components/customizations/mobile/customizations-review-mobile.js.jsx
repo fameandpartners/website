@@ -6,7 +6,10 @@ var CustomizationsReviewMobile = React.createClass({
     selectCallback: React.PropTypes.func,
     selectedOptions: React.PropTypes.object,
     siteVersion: React.PropTypes.string,
-    goToSlide: React.PropTypes.func
+    goToSlide: React.PropTypes.func,
+    subTotal: React.PropTypes.number,
+    customizationsCost: React.PropTypes.number,
+    eventSlug: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -37,11 +40,11 @@ var CustomizationsReviewMobile = React.createClass({
           <div className="customizations-review-mobile-results">
             <p>
               <span className="view-customizations">View customizations</span>
-              <span className="view-customizations-total">$16</span>
+              <span className="view-customizations-total">${this.props.customizationsCost}</span>
             </p>
             <p>
               <span className="sub-total-label">Sub-total</span>
-              <span className="sub-total-value">$320</span>
+              <span className="sub-total-value">${this.props.subTotal}</span>
             </p>
             <p className="estimated-delivery">
               Estimated delivery {7} days
@@ -49,7 +52,11 @@ var CustomizationsReviewMobile = React.createClass({
           </div>
         </div>
         <div className="customizations-selector-mobile-actions-double">
-          <button className="btn-gray">save to board</button>
+          <SaveDressButton
+            eventSlug={this.props.eventSlug}
+            selectedOptions={this.props.selectedOptions}
+            mobile
+            />
           <button className="btn-black">add to cart</button>
         </div>
         <SizeSelectorMobile

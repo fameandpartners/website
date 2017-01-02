@@ -2,7 +2,8 @@ var SaveDressButton = React.createClass({
 
   propTypes: {
     eventSlug: React.PropTypes.string,
-    selectedOptions: React.PropTypes.object
+    selectedOptions: React.PropTypes.object,
+    mobile: React.PropTypes.bool
   },
 
   saveDress: function(){
@@ -50,9 +51,9 @@ var SaveDressButton = React.createClass({
 
   },
 
-  render: function(){
+  render: function() {
     return(
-      <button className="btn-transparent" onClick={this.saveDress}>
+      <button className={this.props.mobile ? 'btn-gray':'btn-transparent'} onClick={this.saveDress}>
        save this dress
        </button>
      )
