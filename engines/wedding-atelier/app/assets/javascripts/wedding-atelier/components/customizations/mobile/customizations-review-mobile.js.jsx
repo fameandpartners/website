@@ -22,6 +22,10 @@ var CustomizationsReviewMobile = React.createClass({
     this.setState({showSizing: value});
   },
 
+  viewCustomizations: function(){
+    $('.modal-customizations').modal();
+  },
+
   render: function() {
     var selectedOptions = this.props.selectedOptions;
     var selectedValue = 'select size';
@@ -39,7 +43,7 @@ var CustomizationsReviewMobile = React.createClass({
           <button className="btn-transparent" onClick={this.showSizing.bind(null, true)}>{selectedValue}</button>
           <div className="customizations-review-mobile-results">
             <p>
-              <span className="view-customizations">View customizations</span>
+              <span className="view-customizations" onClick={this.viewCustomizations}>View customizations</span>
               <span className="view-customizations-total">${this.props.customizationsCost}</span>
             </p>
             <p>
