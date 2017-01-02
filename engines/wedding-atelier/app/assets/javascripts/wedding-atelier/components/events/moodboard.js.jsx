@@ -111,6 +111,10 @@ var MoodBoardEvent = React.createClass({
     })
   },
 
+  sendDressToChatFn: function(dress) {
+    this.refs.Chat.sendMessageTile(dress);
+  },
+
   render: function (){
     return (
       <div id="events__moodboard">
@@ -119,7 +123,8 @@ var MoodBoardEvent = React.createClass({
                 event_id={this.props.event_id}
                 wedding_name={this.props.wedding_name}
                 profile_photo={this.props.profile_photo}
-                username={this.props.username} />
+                username={this.props.username}
+                ref="Chat" />
         </div>
         <div className="right-content col-sm-6" id="atelier">
           <div className='right-container'>
@@ -155,7 +160,9 @@ var MoodBoardEvent = React.createClass({
                     event_id={this.props.event_id}
                     wedding_name={this.props.wedding_name}
                     profile_photo={this.props.profile_photo}
-                    username={this.props.username} />
+                    username={this.props.username}
+                    ref="Chat"
+                    />
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active" role="tabpanel">
                   <div className="add-dress-box hidden">
@@ -165,7 +172,8 @@ var MoodBoardEvent = React.createClass({
                     <em>Create</em> a dress</a>
                   </div>
                   <div className="dresses-list">
-                    <DressTiles dresses={this.state.event.dresses} />
+                    <DressTiles dresses={this.state.event.dresses}
+                      sendDressToChatFn={this.sendDressToChatFn} />
                   </div>
                 </div>
                 <div id="wedding-details" className="tab-pane" role="tabpanel">

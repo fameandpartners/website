@@ -10,7 +10,6 @@ var Chat = React.createClass({
 
   getInitialState: function(){
     return {
-      generalChannel: null,
       messages: [],
       message: '',
       typing: [],
@@ -24,7 +23,7 @@ var Chat = React.createClass({
     $.post(that.props.twilio_token_path, function(data) {
       var accessManager = new Twilio.AccessManager(data.token);
       var messagingClient = new Twilio.IPMessaging.Client(accessManager);
-      var channelName = 'wedding-channel-' + that.props.event_id;
+      var channelName = 'wedding-atelier-channel-' + that.props.event_id;
 
       messagingClient.getChannelByUniqueName(channelName).then(function(channel) {
         if (channel) {
@@ -44,7 +43,7 @@ var Chat = React.createClass({
 
   },
 
-  componentDidMount: function(){
+  componentDidUpdate: function() {
     this.scrollToBottom();
   },
 
@@ -56,7 +55,10 @@ var Chat = React.createClass({
       elem.scrollTop = elem.scrollHeight;
     }.bind(this);
 
-    $(window).resize(function(e) { scroll(); });
+    scroll();
+    $(window).resize(function(e) {
+      scroll();
+    });
   },
 
   loadChannelHistory: function(channel) {
@@ -66,43 +68,56 @@ var Chat = React.createClass({
       });
 
       this.setState({messages: _messages});
-      this.scrollToBottom();
     }.bind(this));
   },
 
   setupChannel: function (generalChannel){
-    this.setState({generalChannel: generalChannel});
-    this.state.generalChannel.join().then(function(channel) {
-      console.log('Joined channel as ' + this.props.username);
-    }.bind(this));
+    var that = this;
+
+    generalChannel.join().then(function(channel) {
+      console.log('Joined channel as ' + that.props.username);
+    });
 
     // Listen for new messages sent to the channel
-    this.state.generalChannel.on('messageAdded', function (message) {
-      var messages = this.state.messages;
-      var parsedBody = JSON.parse(message.body);
+    generalChannel.on('messageAdded', function (message) {
+      var messages = that.state.messages;
+      var parsedMsg = JSON.parse(message.body);
 
-      messages.push(parsedBody);
-      this.setState({messages: messages});
-      this.scrollToBottom();
-    }.bind(this));
-    this.state.generalChannel.on('memberJoined', function(member) {
-      this.handleMember(member, true);
-    }.bind(this));
-    this.state.generalChannel.on('memberLeft', function(member) {
-      this.handleMember(member, false);
-    }.bind(this));
-    this.state.generalChannel.on('typingStarted', function(member){
-      this.typingIndicator(member.identity, true);
-    }.bind(this));
-    this.state.generalChannel.on('typingEnded', function(member){
-      this.typingIndicator(member.identity, false);
-    }.bind(this));
+      if (parsedMsg.type === "simple") {
+        that.refs.chatMessage.value = "";
+      }
+
+      messages.push(parsedMsg);
+      that.setState({messages: messages});
+    });
+
+    generalChannel.on('memberJoined', function(member) {
+      that.handleMember(member, true);
+    });
+
+    generalChannel.on('memberLeft', function(member) {
+      that.handleMember(member, false);
+    });
+
+    generalChannel.on('typingStarted', function(member){
+      that.typingIndicator(member.identity, true);
+    });
+
+    generalChannel.on('typingEnded', function(member){
+      that.typingIndicator(member.identity, false);
+    });
+
+    this.generalChannel = generalChannel;
   },
 
   loadChannelMembers: function(channel) {
     channel.getMembers().then(function(members) {
       var chatMembers = members.map(function(member) {
-        return {id: member.sid, identity: member.identity, online: true};
+        return {
+          id: member.sid,
+          identity: member.identity,
+          online: true
+        };
       });
       this.setState({channelMembers: chatMembers});
     }.bind(this));
@@ -110,7 +125,11 @@ var Chat = React.createClass({
 
   handleMember: function(member, joined) {
     var currentState = this.state;
-    var user = {id: member.sid, identity: member.identity, online: joined};
+    var user = {
+      id: member.sid,
+      identity: member.identity,
+      online: joined
+    };
     var members = currentState.channelMembers.filter(function(onlineMember) { onlineMember.id == user.id});
     members.push(user);
 
@@ -131,25 +150,24 @@ var Chat = React.createClass({
     this.setState({typing: typing});
   },
 
-  sendMessage: function (message){
+  sendMessage: function (message, type){
+    if (type === undefined) {
+      type = "simple";
+    }
+
     message = {
       profilePhoto: this.props.profile_photo,
       author: this.props.username,
       time: Date.now(),
-      type: 'simple',
+      type: type,
       content: message
     };
 
-    this.state.generalChannel.sendMessage(JSON.stringify(message)).then(function() {
-      this.refs.chatMessage.value = "";
-    }.bind(this));
+    this.generalChannel.sendMessage(JSON.stringify(message));
   },
 
-  updateMessageContent: function(e){
-    message = e.target.value;
-    this.setState({message: message});
-
-    this.state.generalChannel.typing();
+  sendMessageTile: function(dress) {
+    this.sendMessage(dress, "dress");
   },
 
   attemptToSendMessage: function(e){
@@ -165,6 +183,8 @@ var Chat = React.createClass({
     var messages = this.state.messages.map(function(message, index){
       if(message.type === 'simple') {
         return (<ChatSimpleMessage message={message} key={"simple-message" + index}/>);
+      } else if (message.type === 'dress') {
+        return (<ChatDressMessage message={message} key={"dress-message" + index}/>);
       }
     });
 
@@ -176,11 +196,17 @@ var Chat = React.createClass({
       className = member.online ? '' : 'text-muted';
       return(<span className={className} key={'chat-member-' + index}>{member.identity}, </span>);
     });
+
+    return chatMembers;
+  },
+
+  getWhoisTyping: function() {
+    return this.state.typing.length > 0 ? 'Now typing...' + this.state.typing.join(", ") : '';
   },
 
   render: function(){
     var messages = this.getMessages();
-    var typing = this.state.typing.length > 0 ? 'Now typing...' + this.state.typing.join(", ") : '';
+    var typing = this.getWhoisTyping();
     var chatMembers = this.getChatMembers();
 
     return(
