@@ -6,6 +6,14 @@
     height: 90%;
     margin: 0 auto;
     width: auto;
+
+    @include screen-md {
+      width: 450px;
+    }
+
+    @include screen-sm {
+      width: 300px;
+    }
   }
 
   img {
@@ -26,12 +34,8 @@
     }
   }
 
-  @include screen-md {
+  @include screen-sm {
     height: calc(100% - 20px);
-
-    .preview {
-      width: 450px;
-    }
   }
 
 }

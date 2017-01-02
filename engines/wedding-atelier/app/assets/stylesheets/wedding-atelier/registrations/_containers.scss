@@ -13,12 +13,17 @@
 
   h1 {
     @extend .text-center;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 30px;
     font-size: 28px;
     font-weight: 300;
-    line-height: .98;
+    line-height: .96;
+    letter-spacing: 0.9px;
+
+    @include screen-lg {
+      font-size: 42px;
+    };
   }
 
   .left-side {
@@ -40,6 +45,10 @@
   .left-side-centered-container {
     max-width: 340px;
     margin: 0 auto;
+
+    @include screen-lg {
+      max-width: 440px;
+    };
   }
 
   @include screen-sm {
@@ -88,7 +97,7 @@
       background-color: $white-two;
       display: table;
       height: 100%;
-      width: 80%;
+      width: 85%;
       margin-left: auto;
       margin-right: auto;
       position: relative;
@@ -102,15 +111,8 @@
   }
 
   @include screen-lg {
-
     .left-side {
-      padding: 80px 0;
-    }
-
-    .left-side-container {
-
-      padding-left: 20%;
-      padding-right: 20%;
+      padding: 60px 0;
     }
   }
 
