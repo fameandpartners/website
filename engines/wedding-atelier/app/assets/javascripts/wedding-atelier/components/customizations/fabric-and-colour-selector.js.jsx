@@ -2,13 +2,36 @@ var FabricAndColourSelector = React.createClass({
   propTypes: {
     colours: React.PropTypes.array,
     fabrics: React.PropTypes.array,
-    selectedOption: React.PropTypes.object,
     selectCallback: React.PropTypes.func.isRequired,
     showContainers: React.PropTypes.object
   },
 
+  getInitialState: function(){
+    return {
+      selectedFabric: null,
+      selectedColour: null
+    }
+  },
+
   selectFabric: function(fabric) {
-    this.props.selectCallback('fabric', fabric);
+    var newState = $.extend({}, this.state);
+    newState.selectedFabric = fabric;
+    this.setState(newState, function(){
+      this.props.selectCallback('fabric', fabric);
+      if(!this.state.selectedColour){
+        this.selectColour(this.props.colours[0]);
+      }
+    }.bind(this));
+  },
+
+  selectColour: function(colour){
+    var newState = $.extend({}, this.state);
+    newState.selectedColour = colour;
+    this.setState(newState, function(){
+      if(this.state.selectedFabric){
+        this.props.selectCallback('colour', colour)
+      }
+    }.bind(this));
   },
 
   render: function() {
@@ -29,11 +52,11 @@ var FabricAndColourSelector = React.createClass({
     var colours = this.props.colours.map(function(colour, index) {
       var classes = classNames({
         'customization-options-item-small': true,
-        'active': this.props.selectedOption && this.props.selectedOption.id == colour.id
+        'active': this.state.selectedColour && this.state.selectedColour.id == colour.id
       });
       var inputId = colour.id + "-" + 'desktop';
       return (
-        <div key={inputId} onClick={this.props.selectCallback.bind(null, 'colour', colour)} className="col-sm-4 col-md-3">
+        <div key={inputId} onClick={this.selectColour.bind(this, colour)} className="col-sm-4 col-md-3">
           <div className={classes} style={{backgroundColor: colour.value}}></div>
           <p className="customization-options-item-label">{colour.presentation}</p>
         </div>
