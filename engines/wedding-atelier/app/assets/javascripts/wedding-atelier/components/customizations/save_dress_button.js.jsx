@@ -15,7 +15,7 @@ var SaveDressButton = React.createClass({
       data: this.dressParams(),
       success: this.successCallback,
       error: this.errorCallback
-    })
+    });
   },
 
   tryIdFor: function(customization){
@@ -25,7 +25,7 @@ var SaveDressButton = React.createClass({
   sizeId: function(){
     var size = this.props.selectedOptions.size;
     if(!size){ return null; }
-    return size.id || size.user_profile.dress_size_id
+    return size.id || size.user_profile.dress_size_id;
   },
 
   dressParams: function(){
@@ -39,12 +39,12 @@ var SaveDressButton = React.createClass({
           fit_id: this.tryIdFor(options.fit),
           size_id: this.sizeId(),
           height: options.height
-        }
+        };
     return { event_dress: params };
   },
 
   successCallback: function(data){
-    $('.modal-confirm').modal()
+    $('.modal-confirm').modal();
   },
 
   errorCallback: function(data){
@@ -52,10 +52,12 @@ var SaveDressButton = React.createClass({
   },
 
   render: function() {
-    return(
-      <button className={this.props.mobile ? 'btn-gray':'btn-transparent'} onClick={this.saveDress}>
+    var buttonClass = this.props.mobile ? 'btn-gray':'btn-transparent';
+
+    return (
+      <button className={buttonClass} onClick={this.saveDress}>
        save this dress
        </button>
-     )
+     );
   }
-})
+});
