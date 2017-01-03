@@ -180,13 +180,27 @@ var Chat = React.createClass({
 
   getMessages() {
     var msgs = this.state.messages.slice();
+    var tempAuthor = null;
+    var showAuthor = true;
 
-    var messages = msgs.map(function(message, index){
-      if(message.type === 'simple') {
-        return (<ChatSimpleMessage showAuthor={true} message={message} key={"simple-message" + index}/>);
-      } else if (message.type === 'dress') {
-        return (<ChatDressMessage showAuthor={true} message={message} key={"dress-message" + index}/>);
+    if (msgs[0]) {
+      tempAuthor = msgs[0].author;
+    }
+
+    var messages = msgs.map(function(message, index) {
+      if (tempAuthor === message.author) {
+        showAuthor = false;
+      } else {
+        tempAuthor = message.author;
+        showAuthor = true;
       }
+
+      if(message.type === 'simple') {
+        return (<ChatSimpleMessage showAuthor={showAuthor} message={message} key={"simple-message" + index}/>);
+      } else if (message.type === 'dress') {
+        return (<ChatDressMessage showAuthor={showAuthor} message={message} key={"dress-message" + index}/>);
+      }
+      tempAuthor = message.author;
     });
 
     return messages;
