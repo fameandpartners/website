@@ -6,7 +6,8 @@ var MobileCustomizations = React.createClass({
     selectCallback: React.PropTypes.func,
     selectedOptions: React.PropTypes.object,
     siteVersion: React.PropTypes.string,
-    startOverCallback: React.PropTypes.func
+    startOverCallback: React.PropTypes.func,
+    currentUser: React.PropTypes.object
   },
 
   componentDidMount: function() {
@@ -36,7 +37,8 @@ var MobileCustomizations = React.createClass({
     };
 
     var customizationsReviewProps = $.extend(defaultProps, {
-      siteVersion:  this.props.siteVersion
+      siteVersion:  this.props.siteVersion,
+      currentUser: this.props.currentUser
     });
 
     var customizationsMenuProps = $.extend(defaultProps, {

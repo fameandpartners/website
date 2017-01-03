@@ -6,7 +6,8 @@ var SizeSelector = React.createClass({
     assistants: React.PropTypes.array,
     selectCallback: React.PropTypes.func.isRequired,
     currentCustomization: React.PropTypes.string,
-    showContainers: React.PropTypes.object
+    showContainers: React.PropTypes.object,
+    currentUser: React.PropTypes.object
   },
 
   getInitialState: function() {
@@ -29,7 +30,7 @@ var SizeSelector = React.createClass({
   },
 
   componentDidMount: function () {
-    $(this.refs.heightSelect).select2();
+    $(this.refs.heightSelect).select2({placeholder: this.props.currentUser.user.user_profile.height});
   },
 
   parsePresentation: function(size) {
@@ -56,10 +57,10 @@ var SizeSelector = React.createClass({
   },
 
   render: function() {
-
+    var that = this;
     var optionsForHeights = this.props.heights.map(function(group){
       var heights = group[1].map(function(height, index){
-        return(<option key={index} value={height}>{height}</option>)
+        return(<option key={index} height={height}>{height}</option>)
       });
 
       return (
@@ -70,37 +71,46 @@ var SizeSelector = React.createClass({
     });
 
     var dressSizes = this.props.sizes.map(function(size, index){
-      var id = 'desktop-size-' + index;
+      var id = 'desktop-size-' + index,
+          inputProps = {
+            id: id,
+            type: 'radio',
+            name: 'size',
+            value: size.name,
+            onClick: that.changeSize.bind(null, size)
+          }
+
+      if(size.id === that.props.currentUser.user.user_profile.dress_size_id){
+        inputProps.defaultChecked = true;
+      }
       return (
         <li key={index}>
-          <input
-            id={id}
-            type="radio"
-            name="size"
-            value={size.name}
-            onClick={this.changeSize.bind(null, size)}
-             />
-          <label htmlFor={id}>{this.parsePresentation(size)}</label>
+          <input {...inputProps} />
+          <label htmlFor={id}>{that.parsePresentation(size)}</label>
         </li>
       )
-    }.bind(this));
+    });
 
     var assistantsSizes = this.props.assistants.map(function(assistant, index){
-      var id = 'desktop-assistant-' + index;
+      var id = 'desktop-assistant-' + index,
+          inputProps = {
+            id: id,
+            type: 'radio',
+            name: 'assistant',
+            value: assistant.user_profile.dress_size,
+            onClick: that.setSizeWithProfile.bind(that,assistant)
+          }
+      if(assistant.id === that.props.currentUser.user.id){
+        inputProps.defaultChecked = true;
+      }
 
       return (
         <li key={index}>
-          <input
-            id={id}
-            type="radio"
-            name="assistant"
-            value={assistant.user_profile.dress_size}
-            onClick={this.setSizeWithProfile.bind(this, assistant)}
-             />
+          <input {...inputProps} />
           <label htmlFor={id}>{assistant.first_name}</label>
         </li>
       )
-    }.bind(this));
+    });
 
     var customizationSelectorClasses = classNames({
       'customization-selector': true,

@@ -6,7 +6,8 @@ var CustomizationsReviewMobile = React.createClass({
     selectCallback: React.PropTypes.func,
     selectedOptions: React.PropTypes.object,
     siteVersion: React.PropTypes.string,
-    goToSlide: React.PropTypes.func
+    goToSlide: React.PropTypes.func,
+    currentUser: React.PropTypes.object
   },
 
   getInitialState: function () {
@@ -59,7 +60,9 @@ var CustomizationsReviewMobile = React.createClass({
           siteVersion={this.props.siteVersion}
           selectCallback={this.props.selectCallback}
           showSizing={this.state.showSizing}
-          showSizingCallback={this.showSizing} />
+          showSizingCallback={this.showSizing}
+          currentUser={this.props.currentUser}
+           />
       </div>
     );
   }

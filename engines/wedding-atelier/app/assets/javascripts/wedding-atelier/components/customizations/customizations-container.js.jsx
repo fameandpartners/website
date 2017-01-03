@@ -10,7 +10,8 @@ var CustomizationsContainer = React.createClass({
     goToSlideCallback: React.PropTypes.func,
     showContainers: React.PropTypes.object,
     showLateralMenuCallback: React.PropTypes.func,
-    closeCallback: React.PropTypes.func
+    closeCallback: React.PropTypes.func,
+    currentUser: React.PropTypes.object
   },
 
   render: function() {
@@ -90,6 +91,7 @@ var CustomizationsContainer = React.createClass({
             selectCallback={this.props.selectCallback}
             showLateralMenuCallback={this.props.showLateralMenuCallback}
             currentCustomization={this.props.currentCustomization}
+            currentUser={this.props.currentUser}
             showContainers={this.props.showContainers}/>
         </div>
       </div>
