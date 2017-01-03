@@ -7,7 +7,8 @@ var CustomizationsContainerMobile = React.createClass({
     selectedOptions: React.PropTypes.object,
     siteVersion: React.PropTypes.string,
     startOverCallback: React.PropTypes.func,
-    goToSlide: React.PropTypes.func
+    goToSlide: React.PropTypes.func,
+    currentUser: React.PropTypes.object
   },
 
   getInitialState: function () {
