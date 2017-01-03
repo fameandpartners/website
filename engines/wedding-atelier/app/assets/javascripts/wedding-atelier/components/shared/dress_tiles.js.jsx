@@ -7,7 +7,7 @@ var DressTiles = React.createClass({
 
   render: function() {
     var content = this.props.dresses.map(function(dress) {
-      return(<DressTile dress={dress} sendDressToChatFn={this.props.sendDressToChatFn} />)
+      return(<DressTile key={'dress-tile-' + dress.id} dress={dress} sendDressToChatFn={this.props.sendDressToChatFn} />)
     }.bind(this));
     return(<div className='dress-boxes'> {content} </div>)
   }

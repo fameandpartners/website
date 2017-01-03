@@ -48,7 +48,6 @@ var Chat = React.createClass({
   },
 
   scrollToBottom: function(){
-
     var scroll = function() {
       // Scrolling to bottom
       var elem = this.refs.chatLog;
@@ -62,7 +61,7 @@ var Chat = React.createClass({
   },
 
   loadChannelHistory: function(channel) {
-    channel.getMessages().then(function(messages) {
+    channel.getMessages(20).then(function(messages) {
       var _messages = messages.map(function(message) {
         return JSON.parse(message.body)
       });
@@ -80,7 +79,7 @@ var Chat = React.createClass({
 
     // Listen for new messages sent to the channel
     generalChannel.on('messageAdded', function (message) {
-      var messages = that.state.messages;
+      var messages = that.state.messages.slice();
       var parsedMsg = JSON.parse(message.body);
 
       if (parsedMsg.type === "simple") {
@@ -180,7 +179,9 @@ var Chat = React.createClass({
   },
 
   getMessages() {
-    var messages = this.state.messages.map(function(message, index){
+    var msgs = this.state.messages.slice();
+
+    var messages = msgs.map(function(message, index){
       if(message.type === 'simple') {
         return (<ChatSimpleMessage message={message} key={"simple-message" + index}/>);
       } else if (message.type === 'dress') {

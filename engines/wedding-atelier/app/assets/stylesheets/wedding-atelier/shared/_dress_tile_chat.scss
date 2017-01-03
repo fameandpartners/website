@@ -1,0 +1,41 @@
+#events__moodboard {
+
+ .chat {
+    /* chat dress message */
+    .msg-dress {
+      height: 416px;
+      margin-top: 15px;
+      text-align: right;
+      .chat-dress-tile-container {
+        height: 100%;
+        max-width: 330px;
+      }
+      .chat-likes-container {
+        display: table;
+        height: 100%;
+      }
+      .likes {
+        height: 100%;
+        display: table-cell;
+        vertical-align: middle;;
+      }
+      .dress-box {
+        width: auto;
+        min-width: 0;
+        margin: 0;
+      }
+      .dress-box-body img {
+        height: 316px;
+        width: 223px;
+      }
+      .icon-unliked {
+        position: relative;
+        top: 6px;
+      }
+      .icon-liked {
+        position: relative;
+        top: 6px;
+      }
+    }
+  }
+}
