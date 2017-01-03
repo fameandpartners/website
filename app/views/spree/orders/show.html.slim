@@ -62,17 +62,17 @@ section.order-details
                 .billing-address
                   h4 Billing Address
                   ul
-                    li = order.billing_address.firstname + " " + order.billing_address.lastname
-                    li = order.billing_address.address1 + " " + order.billing_address.address2
-                    li = order.billing_address.city + ", " + (order.billing_address.state.try(:name) || order.billing_address.state_name)
+                    li = "#{order.billing_address.firstname} #{order.billing_address.lastname}"
+                    li = "#{order.billing_address.address1} #{order.billing_address.address2}"
+                    li = "#{order.billing_address.city} #{(order.billing_address.state.try(:name) || order.billing_address.state_name)}"
                     li = order.billing_address.zipcode
 
                 .shipping-address
                   h4 Shipping Address
                   ul
-                    li = order.shipping_address.firstname + " " + order.shipping_address.lastname
-                    li = order.shipping_address.address1 + " " + order.shipping_address.address2
-                    li = order.shipping_address.city + ", " + (order.shipping_address.state.try(:name) || order.shipping_address.state_name)
+                    li = "#{order.shipping_address.firstname} #{order.shipping_address.lastname}"
+                    li = "#{order.shipping_address.address1} #{order.shipping_address.address2}"
+                    li = "#{order.shipping_address.city}, #{(order.shipping_address.state.try(:name) || order.shipping_address.state_name)}"
                     li = order.shipping_address.zipcode
               .half-column.col-md-6
                 .phone
