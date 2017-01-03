@@ -2,12 +2,14 @@ var ChatSimpleMessage = React.createClass({
 
   propTypes: {
     message: React.PropTypes.object,
-    showAuthor: React.PropTypes.bool
+    showAuthor: React.PropTypes.bool,
+    isOwnerMessage: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
     return {
-      showAuthor: true
+      showAuthor: true,
+      isOwnerMessage: null
     };
   },
 
@@ -40,12 +42,16 @@ var ChatSimpleMessage = React.createClass({
 
   render: function() {
     return(
-        <div className="msg-simple">
-          {this.props.showAuthor || this.props.showAuthor === undefined ? this.getMessageData() : ''}
-          <div className="msg-text">
-            {this.props.message.content}
+      <div className="msg-simple">
+        <div className="row">
+          <div className={this.props.isOwnerMessage ? 'pull-right col-xs-10 col-md-7' : 'pull-left col-xs-10 col-md-7'}>
+            {this.props.showAuthor || this.props.showAuthor === undefined ? this.getMessageData() : ''}
+            <div className="msg-text">
+              {this.props.message.content}
+            </div>
           </div>
         </div>
+      </div>
     )
   }
 });

@@ -5,7 +5,8 @@ var Chat = React.createClass({
     event_id: React.PropTypes.number,
     wedding_name: React.PropTypes.string,
     profile_photo: React.PropTypes.string,
-    username: React.PropTypes.string
+    username: React.PropTypes.string,
+    user_id: React.PropTypes.number
   },
 
   getInitialState: function(){
@@ -157,6 +158,7 @@ var Chat = React.createClass({
     message = {
       profilePhoto: this.props.profile_photo,
       author: this.props.username,
+      user_id: this.props.user_id,
       time: Date.now(),
       type: type,
       content: message
@@ -182,23 +184,27 @@ var Chat = React.createClass({
     var msgs = this.state.messages.slice();
     var tempAuthor = null;
     var showAuthor = true;
+    var isOwnerMessage = true;
+    var userId = this.props.user_id;
 
     if (msgs[0]) {
       tempAuthor = msgs[0].author;
     }
 
     var messages = msgs.map(function(message, index) {
-      if (tempAuthor === message.author) {
+      if (tempAuthor === message.author && index !== 0) {
         showAuthor = false;
       } else {
         tempAuthor = message.author;
         showAuthor = true;
       }
 
+      isOwnerMessage = userId === message.user_id;
+
       if(message.type === 'simple') {
-        return (<ChatSimpleMessage showAuthor={showAuthor} message={message} key={"simple-message" + index}/>);
+        return (<ChatSimpleMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"simple-message" + index}/>);
       } else if (message.type === 'dress') {
-        return (<ChatDressMessage showAuthor={showAuthor} message={message} key={"dress-message" + index}/>);
+        return (<ChatDressMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"dress-message" + index}/>);
       }
       tempAuthor = message.author;
     });

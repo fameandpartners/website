@@ -8,7 +8,8 @@ var MoodBoardEvent = React.createClass({
     event_id: React.PropTypes.number,
     wedding_name: React.PropTypes.string,
     profile_photo: React.PropTypes.string,
-    username: React.PropTypes.string
+    username: React.PropTypes.string,
+    user_id: React.PropTypes.number
   },
 
   getInitialState: function (){
@@ -115,7 +116,7 @@ var MoodBoardEvent = React.createClass({
     this.refs.Chat.sendMessageTile(dress);
   },
 
-  render: function (){
+  render: function () {
     return (
       <div id="events__moodboard">
         <div className="chat left-content col-sm-6">
@@ -124,6 +125,7 @@ var MoodBoardEvent = React.createClass({
                 wedding_name={this.props.wedding_name}
                 profile_photo={this.props.profile_photo}
                 username={this.props.username}
+                user_id={this.props.user_id}
                 ref="Chat" />
         </div>
         <div className="right-content col-sm-6" id="atelier">
@@ -161,6 +163,7 @@ var MoodBoardEvent = React.createClass({
                     wedding_name={this.props.wedding_name}
                     profile_photo={this.props.profile_photo}
                     username={this.props.username}
+                    user_id={this.props.user_id}
                     ref="Chat"
                     />
                 </div>
