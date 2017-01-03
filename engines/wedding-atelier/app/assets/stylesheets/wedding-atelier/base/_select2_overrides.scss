@@ -4,6 +4,9 @@
   // @include screen-md {
   //   width: 100% !important;
   // };
+  .select2-selection__placeholder {
+    color: $black;
+  }
 
   &.select2-container--focus {
     border: 1px solid $black;

@@ -9,7 +9,8 @@ var DesktopCustomizations = React.createClass({
     startOverCallback: React.PropTypes.func,
     subTotal: React.PropTypes.number,
     customizationsCost: React.PropTypes.number,
-    eventSlug: React.PropTypes.string
+    eventSlug: React.PropTypes.string,
+    currentUser: React.PropTypes.object
   },
 
   getInitialState: function () {
@@ -75,7 +76,8 @@ var DesktopCustomizations = React.createClass({
       customizations: this.props.customizations,
       selectedOptions: this.props.selectedOptions,
       showLateralMenuCallback: this.changeLateralMenuState,
-      closeCallback: this.close
+      closeCallback: this.close,
+      currentUser: this.props.currentUser
     });
 
     return (
