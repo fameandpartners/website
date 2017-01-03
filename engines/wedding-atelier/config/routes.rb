@@ -23,4 +23,6 @@ WeddingAtelier::Engine.routes.draw do
     resources :dresses, controller: :event_dresses
     resources :assistants, only: [:destroy]
   end
+
+  get '/my_account', to: 'accounts#show'
 end
