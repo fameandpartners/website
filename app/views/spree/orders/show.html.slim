@@ -62,10 +62,10 @@ section.order-details
                 .billing-address
                   h4 Billing Address
                   ul
-                    li = "#{order.billing_address.firstname} #{order.billing_address.lastname}"
-                    li = "#{order.billing_address.address1} #{order.billing_address.address2}"
-                    li = "#{order.billing_address.city} #{(order.billing_address.state.try(:name) || order.billing_address.state_name)}"
-                    li = order.billing_address.zipcode
+                    li = "#{order.decorated_billing_address.firstname} #{order.decorated_billing_address.lastname}"
+                    li = "#{order.decorated_billing_address.address1} #{order.decorated_billing_address.address2}"
+                    li = "#{order.decorated_billing_address.city} #{(order.decorated_billing_address.state.try(:name) || order.decorated_billing_address.state_name)}"
+                    li = order.decorated_billing_address.zipcode
 
                 .shipping-address
                   h4 Shipping Address
