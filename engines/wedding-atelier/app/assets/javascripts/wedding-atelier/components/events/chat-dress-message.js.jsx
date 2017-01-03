@@ -1,7 +1,14 @@
 var ChatDressMessage = React.createClass({
 
   propTypes: {
-    message: React.PropTypes.object
+    message: React.PropTypes.object,
+    showAuthor: React.PropTypes.bool
+  },
+
+  getDefaultProps: function() {
+    return {
+      showAuthor: true
+    };
   },
 
   getInitialState: function(){
@@ -30,13 +37,29 @@ var ChatDressMessage = React.createClass({
     return formattedDate;
   },
 
-  render: function() {
+  getMessageData: function() {
     var formattedDate = this.getTime();
+
+    return (
+      <div className="msg-data">
+        <div className="profile">
+          <img className="photo" src={this.props.message.profilePhoto} />
+          <span className="name">{this.props.message.author}</span>
+          <span className="created pull-right">{formattedDate}</span>
+        </div>
+      </div>
+    );
+  },
+
+  render: function() {
     var dress = this.props.message.content;
     var loveClass = 'icon-liked';
 
     return (
-      <div className="msg-dress">
+      <div className="msg-dress clearfix">
+
+        {this.props.showAuthor ? this.getMessageData() : ''}
+
         <div className="row chat-dress-tile-container pull-right">
           <div className="col-xs-3 chat-likes-container">
             <div className="likes">

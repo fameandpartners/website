@@ -1,4 +1,4 @@
-var ChatSimpleMessage = React.createClass({
+var ChatImageMessage = React.createClass({
 
   propTypes: {
     message: React.PropTypes.object,
@@ -12,11 +12,6 @@ var ChatSimpleMessage = React.createClass({
   },
 
   formatDate: function(time) {
-
-    if (!time) {
-      return '';
-    }
-
     var m = moment(new Date(time)),
       fromNow = m.fromNow(),
       o = fromNow + ', ' + m.format('hh:mm a');
@@ -24,28 +19,38 @@ var ChatSimpleMessage = React.createClass({
     return o;
   },
 
-  getMessageData: function() {
-    var formattedDate = this.formatDate(this.props.message.time);
+  getTime: function() {
+    var formattedDate = '';
 
+    if (this.props.message.time) {
+      formattedDate = this.formatDate(this.props.message.time);
+    }
+
+    return formattedDate;
+  },
+
+  getMessageData: function() {
     return (
       <div className="msg-data">
         <div className="profile">
           <img className="photo" src={this.props.message.profilePhoto} />
           <span className="name">{this.props.message.author}</span>
-          <span className="created pull-right">{formattedDate}</span>
+          <span className="created pull-right">{this.getTime()}</span>
         </div>
       </div>
     );
   },
 
   render: function() {
-    return(
-        <div className="msg-simple">
-          {this.props.showAuthor || this.props.showAuthor === undefined ? this.getMessageData() : ''}
-          <div className="msg-text">
-            {this.props.message.content}
-          </div>
+    return (
+      <div className="msg-image">
+
+        {this.props.showAuthor ? this.getMessageData() : ''}
+
+        <div className="attachment">
+          <img src="uploadedimagsource" />
         </div>
-    )
+      </div>
+    );
   }
 });

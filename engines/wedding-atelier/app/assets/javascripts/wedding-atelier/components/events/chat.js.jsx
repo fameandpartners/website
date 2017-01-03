@@ -183,9 +183,9 @@ var Chat = React.createClass({
 
     var messages = msgs.map(function(message, index){
       if(message.type === 'simple') {
-        return (<ChatSimpleMessage message={message} key={"simple-message" + index}/>);
+        return (<ChatSimpleMessage showAuthor={true} message={message} key={"simple-message" + index}/>);
       } else if (message.type === 'dress') {
-        return (<ChatDressMessage message={message} key={"dress-message" + index}/>);
+        return (<ChatDressMessage showAuthor={true} message={message} key={"dress-message" + index}/>);
       }
     });
 
@@ -222,16 +222,6 @@ var Chat = React.createClass({
           </div>
         </div>
         <div className="chat-log" ref="chatLog">
-          <div className="msg-image">
-            <div className="msg-data">
-              <div className="profile">
-                <img className="photo" src="http://localhost:3000/assets/profile-placeholder.jpg" /><span className="name">Amber@fame</span><span className="created pull-right">today, 2:22pm</span>
-              </div>
-            </div>
-            <div className="attachment">
-              <img src="uploadedimagsource" />
-            </div>
-          </div>
           {messages}
         </div>
         <div className='chat-typing'>
