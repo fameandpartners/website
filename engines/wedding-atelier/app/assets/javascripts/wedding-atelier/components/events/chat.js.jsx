@@ -52,6 +52,11 @@ var Chat = React.createClass({
     var scroll = function() {
       // Scrolling to bottom
       var elem = this.refs.chatLog;
+
+      if (!elem) {
+        return;
+      }
+
       elem.scrollTop = elem.scrollHeight;
     }.bind(this);
 

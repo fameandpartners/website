@@ -14,6 +14,15 @@ var MoodBoardEvent = React.createClass({
 
   getInitialState: function (){
     return {
+      chat: React.createElement(Chat, {
+        twilio_token_path: this.props.twilio_token_path,
+        event_id: this.props.event_id,
+        wedding_name: this.props.wedding_name,
+        profile_photo: this.props.profile_photo,
+        username: this.props.username,
+        user_id: this.props.user_id,
+        ref: 'Chat'
+      }),
       event: {
         dresses: [],
         invitations: [],
@@ -54,18 +63,32 @@ var MoodBoardEvent = React.createClass({
     this.handleBrowserResizing();
   },
 
-  handleBrowserResizing: function(){
-    if (window.innerWidth <= 768) {
-      $('.moodboard-tabs a[href="#chat-mobile"]').tab('show');
+  renderChat: function(where) {
+    if (!where) {
+      if (window.innerWidth <= 768) {
+        $('.moodboard-tabs a[href="#chat-mobile"]').tab('show');
+        this.renderChat('right-side');
+      } else {
+        this.renderChat('left-side');
+      }
+    } else {
+      this.setState({'left_chat': where === 'left-side' ? this.state.chat : null});
+      this.setState({'right_chat': where === 'right-side' ? this.state.chat : null});
     }
+  },
+
+  handleBrowserResizing: function(){
+    this.renderChat();
 
     $(window).resize(function(e) {
       if (e.target.innerWidth > 768 ) {
         $('.moodboard-tabs a[href="#bridesmaid-dresses"]').tab('show');
+        this.renderChat('left-side');
       } else {
         $('.moodboard-tabs a[href="#chat-mobile"]').tab('show');
+        this.renderChat('right-side');
       }
-    });
+    }.bind(this));
   },
 
   handleEventDetailUpdate: function(data){
@@ -120,13 +143,7 @@ var MoodBoardEvent = React.createClass({
     return (
       <div id="events__moodboard">
         <div className="chat left-content col-sm-6">
-          <Chat twilio_token_path={this.props.twilio_token_path}
-                event_id={this.props.event_id}
-                wedding_name={this.props.wedding_name}
-                profile_photo={this.props.profile_photo}
-                username={this.props.username}
-                user_id={this.props.user_id}
-                ref="Chat" />
+          {this.state.left_chat}
         </div>
         <div className="right-content col-sm-6" id="atelier">
           <div className='right-container'>
@@ -158,14 +175,7 @@ var MoodBoardEvent = React.createClass({
               </ul>
               <div className="tab-content">
                 <div id="chat-mobile" className="tab-pane" role="tabpanel">
-                  <Chat twilio_token_path={this.props.twilio_token_path}
-                    event_id={this.props.event_id}
-                    wedding_name={this.props.wedding_name}
-                    profile_photo={this.props.profile_photo}
-                    username={this.props.username}
-                    user_id={this.props.user_id}
-                    ref="Chat"
-                    />
+                  {this.state.right_chat}
                 </div>
                 <div id="bridesmaid-dresses" className="tab-pane active" role="tabpanel">
                   <div className="add-dress-box hidden">
