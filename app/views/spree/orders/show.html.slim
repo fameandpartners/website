@@ -62,26 +62,26 @@ section.order-details
                 .billing-address
                   h4 Billing Address
                   ul
-                    li = "#{order.decorated_billing_address.firstname} #{order.decorated_billing_address.lastname}"
-                    li = "#{order.decorated_billing_address.address1} #{order.decorated_billing_address.address2}"
-                    li = "#{order.decorated_billing_address.city} #{(order.decorated_billing_address.state.try(:name) || order.decorated_billing_address.state_name)}"
+                    li = order.decorated_billing_address.full_name
+                    li = order.decorated_billing_address.address_lines
+                    li = order.decorated_billing_address.city_with_state
                     li = order.decorated_billing_address.zipcode
 
                 .shipping-address
                   h4 Shipping Address
                   ul
-                    li = "#{order.shipping_address.firstname} #{order.shipping_address.lastname}"
-                    li = "#{order.shipping_address.address1} #{order.shipping_address.address2}"
-                    li = "#{order.shipping_address.city}, #{(order.shipping_address.state.try(:name) || order.shipping_address.state_name)}"
-                    li = order.shipping_address.zipcode
+                    li = order.decorated_shipping_address.full_name
+                    li = order.decorated_shipping_address.address_lines
+                    li = order.decorated_shipping_address.city_with_state
+                    li = order.decorated_shipping_address.zipcode
               .half-column.col-md-6
                 .phone
                   h4 Phone number
-                  span = order.billing_address.phone
+                  span = order.decorated_billing_address.phone
 
                 .email
                   h4 Email
-                  span = order.billing_address.email
+                  span = order.decorated_billing_address.email
 
                 .delivery-date
                   h4 Expected delivery date
