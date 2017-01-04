@@ -1,7 +1,7 @@
 #= require 'templates/_product'
 #= require 'templates/product_collection'
 #= require 'templates/product_collection_append'
-
+#= require 'templates/product_collection_results_meta'
 window.page or= {}
 window.ProductCollectionFilter = class ProductCollectionFilter
   filter: null
@@ -9,6 +9,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
   updateParams: {}
   collectionTemplate: JST['templates/product_collection']
   collectionMoreTemplate: JST['templates/product_collection_append']
+  collectionResultsMetaTemplate: JST['templates/product_collection_results_meta']
 
   constructor: (options = {}) ->
     options = $.extend({
@@ -16,12 +17,18 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       page_size: 21,
       mobileBreakpoint: 768,
       mobileFilterSelector: '.js-trigger-filter-mobile',
-      showMoreSelector: "*[data-action=show-more-collection-products]"
-    }, options)
+      showMoreSelector: "*[data-action=show-more-collection-products]",
+      ORDERS : {
+        newest: 'What\'s New',
+        price_high: 'Price High to Low',
+        price_low: 'Price Low to High',
+      }
 
+    }, options)
     @details_elements = options.details_elements || {}
     @filter = $(options.controls)
     @content = $(options.content)
+    @resultsMetaContent = $(options.resultsMetaContent)
     @mobileFilter = $(options.mobileFilterSelector)
     @mobileFilter.on('click', @toggleFilters)
     # base
@@ -37,6 +44,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
 
     # pagination
     @page_size = options.page_size
+    @ORDERS = options.ORDERS
     @showMoreSelector = options.showMoreSelector
     @resetPagination(options.size, options.total_products)
     @content.on('click', @showMoreSelector, @showMoreProductsClickHandler)
@@ -49,10 +57,42 @@ window.ProductCollectionFilter = class ProductCollectionFilter
   toggleFilters:(forceToggle) ->
     $('.ExpandablePanel--mobile').toggleClass('ExpandablePanel--mobile--isOpen', forceToggle)
 
+  filterSortMetaDescription:(updateRequestParams) ->
+    metaDescription = {
+      sortDescription: @ORDERS['newest'],
+      totalFilters: 0
+    }
+    if updateRequestParams.bodyshape && updateRequestParams.bodyshape.length
+      metaDescription.totalFilters++
+    if updateRequestParams.color && updateRequestParams.color.length
+      metaDescription.totalFilters++
+    if updateRequestParams.fastMaking && updateRequestParams.fastMaking.length
+      metaDescription.totalFilters++
+    if @ORDERS[updateRequestParams.order]
+      metaDescription.sortDescription = @ORDERS[updateRequestParams.order]
+    metaDescription
+
   resetPagination: (items_on_page, total_records) ->
     @products_on_page = items_on_page
     @total            = total_records
     @updatePaginationLink('active')
+
+  updateMetaDescriptionSpan:(totalRecords, metaDescription) ->
+    if metaDescription.totalFilters == 0
+      filtersText = ''
+    else if metaDescription.totalFilters == 1
+      filtersText = '1 Filter'
+    else
+      filtersText = metaDescription.totalFilters + ' Filters'
+
+    if totalRecords == 1
+      countText = '1 Dress'
+    else
+      countText = totalRecords + ' Dresses'
+
+    @resultsMeta = {filtersText: filtersText, countText: countText, sortText: metaDescription.sortDescription}
+    content_html = @collectionResultsMetaTemplate(resultsMeta: @resultsMeta)
+    @resultsMetaContent.html(content_html)
 
   updatePagination: (items_added, total_records) ->
     if items_added == 0
@@ -76,6 +116,7 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         row.hide()
 
   update: (updateRequestParams) =>
+    metaDescription = @filterSortMetaDescription(updateRequestParams)
     @toggleFilters(false)
     @source_path = '/dresses' if @reset_source
     updateRequestParams = updateRequestParams || _.extend({}, @updateParams, @getSelectedValues())
@@ -87,10 +128,11 @@ window.ProductCollectionFilter = class ProductCollectionFilter
       dataType: 'json',
       data: $.param(_.extend(updateRequestParams, { limit: @page_size })),
       success: (collection) =>
+        # Replace content HTML
         content_html = @collectionTemplate(collection: collection)
         @content.html(content_html)
-
         @resetPagination(collection.products.length, collection.total_products)
+        @updateMetaDescriptionSpan(collection.total_products, metaDescription)
         if collection && collection.details
           @updateCollectionDetails(collection.details)
 
@@ -110,7 +152,6 @@ window.ProductCollectionFilter = class ProductCollectionFilter
         success: (collection) =>
           content_html = @collectionMoreTemplate(collection: collection, col: 3)
           @content.find(@showMoreSelector).closest('.more-products').before(content_html)
-          # @updatePagination(collection.products.length, collection.total_products)
           @updatePagination(collection.products.length, collection.total_products)
 
           if collection && collection.details
