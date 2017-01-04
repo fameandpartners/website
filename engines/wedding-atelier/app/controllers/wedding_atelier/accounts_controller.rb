@@ -4,7 +4,7 @@ module WeddingAtelier
 
     def show
       @user = current_spree_user
-      @tabs = ['My Orders', 'Account Details', 'My Size Profile']
+      @size_profile = {sizes: Spree::OptionType.find_by_name('dress-size').option_values, heights: WeddingAtelier::Height.definitions}
     end
 
   end
