@@ -53,7 +53,7 @@ function stateToProps(state, props) {
           $$secondaryColors: $$collectionFilterSortStore.get('$$secondaryColors'),
           $$bodyShapes: $$collectionFilterSortStore.get('$$bodyShapes'),
           // Mutable props
-          isDrawerLayout: props.breakpoint === 'mobile' || props.breakpoint === 'tablet',
+          isDrawerLayout: props.isDrawerLayout,
           filters: assign({}, {
             order: collectionFilterSortStore.order,
             fastMaking: collectionFilterSortStore.fastMaking,
@@ -564,7 +564,7 @@ class CollectionFilterSort extends Component {
 
                         <div className="ExpandablePanel__secondaryFiltersWrapper">
                           <ExpandablePanelItem
-                            isSecondaryFilter={(true)}
+                            isSecondaryFilter
                             itemGroup={(
                               <div>
                                 <div className="ExpandablePanel__name">
