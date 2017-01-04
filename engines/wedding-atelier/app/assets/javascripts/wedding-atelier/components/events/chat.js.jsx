@@ -142,17 +142,17 @@ var Chat = React.createClass({
   },
 
   typingIndicator: function(identity, typing){
-    var index = null;
-    var typing = this.state.typing;
+    var whoIsTyping = this.state.typing.slice();
+    var isAlreadyTyping = whoIsTyping.indexOf(identity) > -1;
 
-    if (typing) {
-      typing.push(identity);
+    if (typing && !isAlreadyTyping) {
+      whoIsTyping.push(identity);
     } else {
-      index = typing.indexOf(identity);
-      typing.splice(index, 1);
+      var index = whoIsTyping.indexOf(identity);
+      whoIsTyping.splice(index, 1);
     }
 
-    this.setState({typing: typing});
+    this.setState({typing: whoIsTyping});
   },
 
   sendMessage: function (message, type){
@@ -230,6 +230,10 @@ var Chat = React.createClass({
     return this.state.typing.length > 0 ? 'Now typing...' + this.state.typing.join(", ") : '';
   },
 
+  startTyping: function() {
+    this.generalChannel.typing();
+  },
+
   render: function(){
     var messages = this.getMessages();
     var typing = this.getWhoisTyping();
@@ -258,6 +262,7 @@ var Chat = React.createClass({
             <input type="text"
                    value={this.message}
                    id='chat-message'
+                   onChange={this.startTyping}
                    ref="chatMessage" />
           </div>
           <div className="btn-send-container">
