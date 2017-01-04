@@ -4,6 +4,7 @@ module WeddingAtelier
 
     def show
       @user = current_spree_user
+      @tabs = ['My Orders', 'Account Details', 'My Size Profile']
     end
 
   end
