@@ -176,6 +176,10 @@ var Chat = React.createClass({
     this.sendMessage(dress, "dress");
   },
 
+  sendMessageImage: function(image) {
+    this.sendMessage(image, "image");
+  },
+
   attemptToSendMessage: function(e){
     e.preventDefault();
     var message = this.refs.chatMessage.value;
@@ -210,6 +214,8 @@ var Chat = React.createClass({
         return (<ChatSimpleMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"simple-message" + index}/>);
       } else if (message.type === 'dress') {
         return (<ChatDressMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"dress-message" + index}/>);
+      } else if (message.type === 'image') {
+        return (<ChatImageMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"image-message" + index}/>);
       }
       tempAuthor = message.author;
     });
@@ -232,6 +238,18 @@ var Chat = React.createClass({
 
   startTyping: function() {
     this.generalChannel.typing();
+  },
+
+  uploadImage: function() {
+    var picker_options = {};
+    filepicker.setKey("AwsXNEkqXSG61itbPhj5nz");
+    filepicker.pick(picker_options,
+      function onSuccess(Blob) {
+        this.sendMessageImage(Blob);
+      }.bind(this),
+      function onError(FPError) {},
+      function onProgress(FPProgress) {}
+    );
   },
 
   render: function(){
@@ -257,7 +275,7 @@ var Chat = React.createClass({
           {typing}
         </div>
         <form onSubmit={this.attemptToSendMessage} className="chat-actions">
-          <button className="btn upload-image"></button>
+          <input className="btn upload-image" onClick={this.uploadImage} value="" />
           <div className="message-input">
             <input type="text"
                    value={this.message}

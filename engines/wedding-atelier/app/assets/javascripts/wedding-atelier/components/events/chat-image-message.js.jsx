@@ -2,13 +2,20 @@ var ChatImageMessage = React.createClass({
 
   propTypes: {
     message: React.PropTypes.object,
-    showAuthor: React.PropTypes.bool
+    showAuthor: React.PropTypes.bool,
+    isOwnerMessage: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
     return {
-      showAuthor: true
+      showAuthor: true,
+      isOwnerMessage: null
     };
+  },
+
+  componentWillMount: function() {
+    var src = "https://process.filestackapi.com/AwsXNEkqXSG61itbPhj5nz/resize=width:200/" + this.props.message.content.url;
+    this.setState({src: src});
   },
 
   formatDate: function(time) {
@@ -43,12 +50,15 @@ var ChatImageMessage = React.createClass({
 
   render: function() {
     return (
-      <div className="msg-image">
+      <div className="msg msg-image">
+        <div className="row">
+          <div className={this.props.isOwnerMessage ? 'pull-right col-xs-10 col-md-7' : 'pull-left col-xs-10 col-md-7'}>
+            {this.props.showAuthor ? this.getMessageData() : ''}
 
-        {this.props.showAuthor ? this.getMessageData() : ''}
-
-        <div className="attachment">
-          <img src="uploadedimagsource" />
+            <div className="attachment">
+              <img src={this.state.src} />
+            </div>
+          </div>
         </div>
       </div>
     );

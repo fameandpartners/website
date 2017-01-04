@@ -2,12 +2,14 @@ var ChatDressMessage = React.createClass({
 
   propTypes: {
     message: React.PropTypes.object,
-    showAuthor: React.PropTypes.bool
+    showAuthor: React.PropTypes.bool,
+    isOwnerMessage: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
     return {
-      showAuthor: true
+      showAuthor: true,
+      isOwnerMessage: null
     };
   },
 
@@ -56,11 +58,12 @@ var ChatDressMessage = React.createClass({
     var loveClass = 'icon-liked';
 
     return (
-      <div className="msg-dress clearfix">
+      <div className="msg msg-dress clearfix">
         <div className="row">
-          <div className={this.props.isOwnerMessage ? 'pull-right' : 'pull-left'}>
+          <div className={this.props.isOwnerMessage ? 'col-xs-12 pull-right' : 'col-xs-12 pull-left'}>
             {this.props.showAuthor ? this.getMessageData() : ''}
-            <div className="row chat-dress-tile-container pull-right">
+
+            <div className="row">
               <div className="col-xs-3 chat-likes-container">
                 <div className="likes">
                   <span className={this.state.loveClass} onClick={this.handleLoveIt}></span>
@@ -88,6 +91,7 @@ var ChatDressMessage = React.createClass({
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
