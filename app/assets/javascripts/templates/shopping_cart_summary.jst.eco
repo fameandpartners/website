@@ -61,7 +61,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-body">
-          <h2 class="heading">Opps, looks like your bag is empty.</h2>
+          <h2 class="heading">Oops, looks like your bag is empty.</h2>
           <a href="<%= urlWithSitePrefix('/dresses') %>" class="btn btn-black">Continue Shopping</a>
         </div>
       </div>

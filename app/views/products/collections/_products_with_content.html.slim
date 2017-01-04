@@ -1,11 +1,16 @@
+ruby:
+  is_info_box_hidden   = page.try(:get, 'show-collection-info-box') != 'true'
 
 - products = @collection.products.first(2)
 /! [][][content]
 = render partial: '/products/collections/product', collection: products, as: :product, locals: {col: col}
 
-- if Features.active?(:i_equal_change)
+// i=Change flag *IS ENABLED* & the "show-collection-info-box" variable *IS NOT* set as TRUE
+// Result: Show i=Change box
+- if Features.active?(:i_equal_change) && is_info_box_hidden
   = render partial: '/marketing/i_equal_change_box'
 
+// Show default info box
 - else
   = render partial: '/products/collections/info_box_subheading'
 
