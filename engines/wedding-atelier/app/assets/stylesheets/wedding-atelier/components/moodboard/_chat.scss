@@ -38,6 +38,13 @@
       overflow: auto;
 
       flex-grow: 1;
+
+      .typing {
+        margin-left: 35px;
+        img {
+          width: 60px;
+        }
+      }
     }
 
     .msg {

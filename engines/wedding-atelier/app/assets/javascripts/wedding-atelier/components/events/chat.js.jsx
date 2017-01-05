@@ -41,39 +41,10 @@ var Chat = React.createClass({
         }
       });
     });
-
   },
 
   componentDidUpdate: function() {
     this.scrollToBottom();
-  },
-
-  scrollToBottom: function(){
-    var scroll = function() {
-      // Scrolling to bottom
-      var elem = this.refs.chatLog;
-
-      if (!elem) {
-        return;
-      }
-
-      elem.scrollTop = elem.scrollHeight;
-    }.bind(this);
-
-    scroll();
-    $(window).resize(function(e) {
-      scroll();
-    });
-  },
-
-  loadChannelHistory: function(channel) {
-    channel.getMessages(20).then(function(messages) {
-      var _messages = messages.map(function(message) {
-        return JSON.parse(message.body)
-      });
-
-      this.setState({messages: _messages});
-    }.bind(this));
   },
 
   setupChannel: function (generalChannel){
@@ -105,26 +76,23 @@ var Chat = React.createClass({
     });
 
     generalChannel.on('typingStarted', function(member){
-      that.typingIndicator(member.identity, true);
+      that.setTypingIndicator(member, true);
     });
 
     generalChannel.on('typingEnded', function(member){
-      that.typingIndicator(member.identity, false);
+      that.setTypingIndicator(member, false);
     });
 
     this.generalChannel = generalChannel;
   },
 
-  loadChannelMembers: function(channel) {
-    channel.getMembers().then(function(members) {
-      var chatMembers = members.map(function(member) {
-        return {
-          id: member.sid,
-          identity: member.identity,
-          online: true
-        };
+  loadChannelHistory: function(channel) {
+    channel.getMessages(20).then(function(messages) {
+      var _messages = messages.map(function(message) {
+        return JSON.parse(message.body)
       });
-      this.setState({channelMembers: chatMembers});
+
+      this.setState({messages: _messages});
     }.bind(this));
   },
 
@@ -141,18 +109,56 @@ var Chat = React.createClass({
     this.setState({channelMembers: members});
   },
 
-  typingIndicator: function(identity, typing){
-    var whoIsTyping = this.state.typing.slice();
-    var isAlreadyTyping = whoIsTyping.indexOf(identity) > -1;
+  getChatMembers: function() {
+    var chatMembers = this.state.channelMembers.map(function(member, index) {
+      className = member.online ? '' : 'text-muted';
+      return(<span className={className} key={'chat-member-' + index}>{member.identity}, </span>);
+    });
 
-    if (typing && !isAlreadyTyping) {
-      whoIsTyping.push(identity);
-    } else {
-      var index = whoIsTyping.indexOf(identity);
-      whoIsTyping.splice(index, 1);
+    return chatMembers;
+  },
+
+  loadChannelMembers: function(channel) {
+    channel.getMembers().then(function(members) {
+      var chatMembers = members.map(function(member) {
+        return {
+          id: member.sid,
+          identity: member.identity,
+          online: true
+        };
+      }.bind(this));
+
+      this.setState({channelMembers: chatMembers.slice(1)});
+    }.bind(this));
+  },
+
+  uploadImage: function() {
+    var picker_options = {};
+    filepicker.setKey("AwsXNEkqXSG61itbPhj5nz");
+    filepicker.pick(picker_options,
+      function onSuccess(Blob) {
+        this.sendMessageImage(Blob);
+      }.bind(this),
+      function onError(FPError) {},
+      function onProgress(FPProgress) {}
+    );
+  },
+
+  attemptToSendMessage: function(e){
+    e.preventDefault();
+    var message = this.refs.chatMessage.value;
+
+    if (message) {
+      this.sendMessage(message);
     }
+  },
 
-    this.setState({typing: whoIsTyping});
+  sendMessageTile: function(dress) {
+    this.sendMessage(dress, "dress");
+  },
+
+  sendMessageImage: function(image) {
+    this.sendMessage(image, "image");
   },
 
   sendMessage: function (message, type){
@@ -170,23 +176,6 @@ var Chat = React.createClass({
     };
 
     this.generalChannel.sendMessage(JSON.stringify(message));
-  },
-
-  sendMessageTile: function(dress) {
-    this.sendMessage(dress, "dress");
-  },
-
-  sendMessageImage: function(image) {
-    this.sendMessage(image, "image");
-  },
-
-  attemptToSendMessage: function(e){
-    e.preventDefault();
-    var message = this.refs.chatMessage.value;
-
-    if (message) {
-      this.sendMessage(message);
-    }
   },
 
   getMessages() {
@@ -223,33 +212,66 @@ var Chat = React.createClass({
     return messages;
   },
 
-  getChatMembers: function() {
-    var chatMembers = this.state.channelMembers.map(function(member, index) {
-      className = member.online ? '' : 'text-muted';
-      return(<span className={className} key={'chat-member-' + index}>{member.identity}, </span>);
-    });
-
-    return chatMembers;
-  },
-
-  getWhoisTyping: function() {
-    return this.state.typing.length > 0 ? 'Now typing...' + this.state.typing.join(", ") : '';
-  },
-
   startTyping: function() {
     this.generalChannel.typing();
   },
 
-  uploadImage: function() {
-    var picker_options = {};
-    filepicker.setKey("AwsXNEkqXSG61itbPhj5nz");
-    filepicker.pick(picker_options,
-      function onSuccess(Blob) {
-        this.sendMessageImage(Blob);
-      }.bind(this),
-      function onError(FPError) {},
-      function onProgress(FPProgress) {}
+  getWhoisTyping: function() {
+    var members = this.state.typing.map(function(member) {
+      return (
+        <div>
+          <div className="typing">
+            <img src="/assets/wedding-atelier/typing.svg" />
+          </div>
+          <div className="msg msg-data">
+            <div className="profile">
+              <img className="photo" src="/assets/profile-placeholder.jpg" />
+              <span className="name">{member}</span>
+            </div>
+          </div>
+        </div>
+      );
+    });
+
+    return (
+      <div className="row">
+        <div className="col-xs-12">
+          {members}
+        </div>
+      </div>
     );
+  },
+
+  setTypingIndicator: function(member, typing){
+    var whoIsTyping = this.state.typing.slice();
+    var isAlreadyTyping = whoIsTyping.indexOf(member.identity) > -1;
+
+    if (typing && !isAlreadyTyping) {
+      whoIsTyping.push(member.identity);
+    } else {
+      var index = whoIsTyping.indexOf(member.identity);
+      whoIsTyping.splice(index, 1);
+    }
+
+    this.setState({typing: whoIsTyping});
+  },
+
+  scrollToBottom: function(){
+    var scroll = function() {
+      // Scrolling to bottom
+      var elem = this.refs.chatLog;
+
+      if (!elem) {
+        return;
+      }
+
+      elem.scrollTop = elem.scrollHeight;
+    }.bind(this);
+
+    scroll();
+    $(window).resize(function(e) {
+      scroll();
+    });
   },
 
   render: function(){
@@ -270,9 +292,10 @@ var Chat = React.createClass({
         </div>
         <div className="chat-log" ref="chatLog">
           {messages}
-        </div>
-        <div className='chat-typing'>
-          {typing}
+
+          <div className='chat-typing'>
+            {typing}
+          </div>
         </div>
         <form onSubmit={this.attemptToSendMessage} className="chat-actions">
           <input className="btn upload-image" onClick={this.uploadImage} value="" />
