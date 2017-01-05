@@ -7,7 +7,7 @@ import CollectionFilterSort from '../containers/CollectionFilterSort.jsx';
 // GLOBAL INJECTION: Anti pattern to attach props via global scope, but currently necessary
 const props = (typeof window === 'object' && typeof window.CollectionFilterSortApp === 'object') ?
   window.CollectionFilterSortApp : {};
-const store = AppStore(props);
+const store = AppStore(props); // shared
 
 // Filter sorts within 2col desktop
 const CollectionFilterSortApp = () => {

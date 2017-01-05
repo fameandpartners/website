@@ -7,7 +7,4 @@ javascript:
   
 - colors  = Repositories::ProductColors.color_groups
 - selectColors = @filter.colors
-- cache [:layout, :filter_menu, @filter.cache_key], expires_in: configatron.cache.expire.long do
-  - prerender = true
-
-  #CollectionFilterSortApp
+#CollectionFilterSortApp
