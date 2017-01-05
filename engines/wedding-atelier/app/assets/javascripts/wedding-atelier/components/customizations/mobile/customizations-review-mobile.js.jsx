@@ -28,10 +28,7 @@ var CustomizationsReviewMobile = React.createClass({
 
   render: function() {
     var selectedOptions = this.props.selectedOptions;
-    var selectedValue = 'select size';
-    if(selectedOptions.size && selectedOptions.height) {
-      selectedValue = PresentationHelper.size(selectedOptions.size, selectedOptions.height, this.props.siteVersion);
-    }
+    var selectedValue = PresentationHelper.presentation(selectedOptions, 'size', this.props.siteVersion);
 
     return (
       <div className="customizations-review-mobile">
@@ -40,7 +37,7 @@ var CustomizationsReviewMobile = React.createClass({
           <h1>You are designing the  {this.props.selectedOptions.silhouette? this.props.selectedOptions.silhouette.name : ''}</h1>
           <DressPreview selectedOptions={this.props.selectedOptions}/>
           <button className="btn-transparent" onClick={this.props.goToSlide.bind(null, 1)}>customize dress</button>
-          <button className="btn-transparent" onClick={this.showSizing.bind(null, true)}>{selectedValue}</button>
+          <button className="btn-transparent" onClick={this.showSizing.bind(null, true)}>{selectedValue || 'Select Size'}</button>
           <div className="customizations-review-mobile-results">
             <p>
               <span className="view-customizations" onClick={this.viewCustomizations}>View customizations</span>
