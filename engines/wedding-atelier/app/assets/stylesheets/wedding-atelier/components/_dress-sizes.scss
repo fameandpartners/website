@@ -104,4 +104,15 @@
       }
      }
   }
+
+  &.centered {
+    .customization-dress-sizes-ul {
+      margin: 0 auto;
+    }
+
+    li {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+  }
 }
