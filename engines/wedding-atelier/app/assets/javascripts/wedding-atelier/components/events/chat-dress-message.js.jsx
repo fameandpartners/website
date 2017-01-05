@@ -56,11 +56,12 @@ var ChatDressMessage = React.createClass({
   render: function() {
     var dress = this.props.message.content;
     var loveClass = 'icon-liked';
+    var dressPositionStyle = 'chat-dress-container col-xs-12 ' + (this.props.isOwnerMessage ? 'pull-right' : 'pull-left');
 
     return (
       <div className="msg msg-dress clearfix">
         <div className="row">
-          <div className={this.props.isOwnerMessage ? 'col-xs-12 pull-right' : 'col-xs-12 pull-left'}>
+          <div className={dressPositionStyle}>
             {this.props.showAuthor ? this.getMessageData() : ''}
 
             <div className="row">

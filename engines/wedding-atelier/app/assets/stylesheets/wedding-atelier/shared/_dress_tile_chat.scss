@@ -5,10 +5,12 @@
     .msg-dress {
       margin-top: 15px;
       text-align: right;
-
+      .chat-dress-container {
+        max-width: 350px;
+      }
       .chat-likes-container {
+        height: 362px;
         display: table;
-        height: 100%;
       }
       .likes {
         height: 100%;
