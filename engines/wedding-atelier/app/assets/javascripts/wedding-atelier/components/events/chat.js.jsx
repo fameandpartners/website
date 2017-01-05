@@ -112,8 +112,13 @@ var Chat = React.createClass({
   getChatMembers: function() {
     var chatMembers = this.state.channelMembers.map(function(member, index) {
       className = member.online ? '' : 'text-muted';
-      return(<span className={className} key={'chat-member-' + index}>{member.identity}, </span>);
-    });
+
+      if (index === this.state.channelMembers.length - 1) {
+        return(<span className={className} key={'chat-member-' + index}>{member.identity}.</span>);
+      } else {
+        return(<span className={className} key={'chat-member-' + index}>{member.identity}, </span>);
+      }
+    }.bind(this));
 
     return chatMembers;
   },
@@ -199,14 +204,18 @@ var Chat = React.createClass({
 
       isOwnerMessage = userId === message.user_id;
 
+      var msgComp = null;
+
       if(message.type === 'simple') {
-        return (<ChatSimpleMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"simple-message" + index}/>);
+        msgComp = (<ChatSimpleMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"simple-message" + index}/>);
       } else if (message.type === 'dress') {
-        return (<ChatDressMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"dress-message" + index}/>);
+        msgComp = (<ChatDressMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"dress-message" + index}/>);
       } else if (message.type === 'image') {
-        return (<ChatImageMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"image-message" + index}/>);
+        msgComp = (<ChatImageMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"image-message" + index}/>);
       }
       tempAuthor = message.author;
+
+      return msgComp;
     });
 
     return messages;
@@ -282,12 +291,18 @@ var Chat = React.createClass({
     return(
       <div className="chat">
         <div className="chat-general-info center-block">
-          <div className="chat-header-left-side pull-left">
-            <strong>Who's online</strong>:
-            {chatMembers}
-          </div>
-          <div className="chat-header-right-side pull-right">
-            <strong>Fame stylist online: </strong><span className="stylist-name">Amber: </span><img src="http://localhost:3000/assets/profile-placeholder.jpg" className="stylist-photo" />
+          <div className="row">
+            <div className="col-xs-7">
+              <div className="chat-header-left-side">
+                <strong>Who's online</strong>:
+                {chatMembers}
+              </div>
+            </div>
+            <div className="col-xs-5">
+              <div className="chat-header-right-side pull-right">
+                <strong>Fame stylist online: </strong><span className="stylist-name">Amber: </span><img src="/assets/profile-placeholder.jpg" className="stylist-photo" />
+              </div>
+            </div>
           </div>
         </div>
         <div className="chat-log" ref="chatLog">

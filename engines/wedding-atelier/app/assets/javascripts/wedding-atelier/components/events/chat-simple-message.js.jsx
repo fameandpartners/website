@@ -32,9 +32,15 @@ var ChatSimpleMessage = React.createClass({
     return (
       <div className="msg-data">
         <div className="profile">
-          <img className="photo" src={this.props.message.profilePhoto} />
-          <span className="name">{this.props.message.author}</span>
-          <span className="created pull-right">{formattedDate}</span>
+          <div className="row">
+            <div className="col-xs-6">
+              <img className="photo" src={this.props.message.profilePhoto} />
+              <span className="name">{this.props.message.author}</span>
+            </div>
+            <div className="col-xs-6">
+              <span className="created text-right">{formattedDate}</span>
+            </div>
+          </div>
         </div>
       </div>
     );

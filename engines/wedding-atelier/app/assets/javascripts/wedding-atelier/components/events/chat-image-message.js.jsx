@@ -14,7 +14,7 @@ var ChatImageMessage = React.createClass({
   },
 
   componentWillMount: function() {
-    var src = "https://process.filestackapi.com/AwsXNEkqXSG61itbPhj5nz/resize=width:200/" + this.props.message.content.url;
+    var src = "https://process.filestackapi.com/AwsXNEkqXSG61itbPhj5nz/resize=width:500/" + this.props.message.content.url;
     this.setState({src: src});
   },
 
@@ -27,22 +27,22 @@ var ChatImageMessage = React.createClass({
   },
 
   getTime: function() {
-    var formattedDate = '';
-
-    if (this.props.message.time) {
-      formattedDate = this.formatDate(this.props.message.time);
-    }
-
-    return formattedDate;
+    return this.props.message.time ? this.formatDate(this.props.message.time) : '';
   },
 
   getMessageData: function() {
     return (
       <div className="msg-data">
         <div className="profile">
-          <img className="photo" src={this.props.message.profilePhoto} />
-          <span className="name">{this.props.message.author}</span>
-          <span className="created pull-right">{this.getTime()}</span>
+          <div className="row">
+            <div className="col-xs-6">
+              <img className="photo" src={this.props.message.profilePhoto} />
+              <span className="name">{this.props.message.author}</span>
+            </div>
+            <div className="col-xs-6">
+              <span className="created pull-right">{this.getTime()}</span>
+            </div>
+          </div>
         </div>
       </div>
     );
