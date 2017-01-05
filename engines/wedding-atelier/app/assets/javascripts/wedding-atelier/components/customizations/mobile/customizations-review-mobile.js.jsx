@@ -23,7 +23,7 @@ var CustomizationsReviewMobile = React.createClass({
   },
 
   viewCustomizations: function(){
-    $('.modal-customizations').modal();
+    $('#modal-customizations').modal();
   },
 
   render: function() {

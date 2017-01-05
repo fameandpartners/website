@@ -91,7 +91,7 @@ var CustomizationExperience = React.createClass({
   },
 
   editDesignCallback: function () {
-    $('.js-slick-hook').slick('slickGoTo', 1);
+    $('.customization-experience--mobile .js-slick-hook').slick('slickGoTo', 1);
   },
 
   render: function(){
