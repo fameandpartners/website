@@ -78,6 +78,17 @@ describe 'show order', type: :feature do
       end
     end
 
+    describe "color" do
+      it "displays customized color" do
+
+        visit spree.order_path(order)
+
+        within('.item .details') do
+          expect(page).to have_content("Customized color:red")
+        end
+      end
+    end
+
     def product_name(line_item)
       line_item.variant.product.name
     end
