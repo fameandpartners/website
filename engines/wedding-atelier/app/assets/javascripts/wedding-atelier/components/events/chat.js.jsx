@@ -268,13 +268,8 @@ var Chat = React.createClass({
 
   scrollToBottom: function(){
     var scroll = function() {
-      // Scrolling to bottom
       var elem = this.refs.chatLog;
-
-      if (!elem) {
-        return;
-      }
-
+      if (!elem) { return; }
       elem.scrollTop = elem.scrollHeight;
     }.bind(this);
 
@@ -282,6 +277,8 @@ var Chat = React.createClass({
     $(window).resize(function(e) {
       scroll();
     });
+
+    $('img', this.refs.chatLog).on('load', scroll);
   },
 
   render: function(){
