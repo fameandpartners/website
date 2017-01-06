@@ -59,12 +59,11 @@ describe 'show order', type: :feature do
   describe "line items" do
     let(:order) do
       FactoryGirl.create(:complete_order_with_items).tap do |o|
-        o.line_items << FactoryGirl.create(:dress_item, :fast_making)
+        o.line_items << FactoryGirl.create(:dress_item, :fast_making, :with_personalization)
       end
     end
 
     it "splits line items by delivery" do
-
       visit spree.order_path(order)
 
       within('.fast-making-items') do
@@ -80,11 +79,23 @@ describe 'show order', type: :feature do
 
     describe "color" do
       it "displays customized color" do
-
         visit spree.order_path(order)
 
         within('.item .details') do
           expect(page).to have_content("Customized color:red")
+        end
+      end
+
+      it "displays default color" do
+        # Add line item color as basic for product
+        line_item = order.line_items.last
+        product = line_item.product
+        product.product_color_values.create(option_value: line_item.personalization.color)
+
+        visit spree.order_path(order)
+
+        within('.item .details') do
+          expect(page).to have_content("Color:red")
         end
       end
     end
