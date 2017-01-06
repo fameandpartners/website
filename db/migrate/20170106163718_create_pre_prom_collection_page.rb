@@ -2,7 +2,7 @@ class CreatePrePromCollectionPage < ActiveRecord::Migration
   # All values MUST be Strings!
   private def landing_page_properties
     {
-      path:             '/pre-prom-collection',
+      path:             '/pre-season-evening-collection',
       template_path:    '/landing_pages/pre_prom_collection',
       pids:             %w().join(','),
       heading:          'The Pre-Prom Collection',
