@@ -1,3 +1,13 @@
 .moodboard-react-container {
   height: 100%;
+
+  .bridal-gowns span {
+    color: #acacac;
+    &.coming-soon {
+      font-size: 9px;
+      left: 25%;
+      position: absolute;
+      top: 0;
+    }
+  }
 }

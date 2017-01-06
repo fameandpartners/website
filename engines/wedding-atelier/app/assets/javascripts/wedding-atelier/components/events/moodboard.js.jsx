@@ -171,8 +171,11 @@ var MoodBoardEvent = React.createClass({
                   <a aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab"> Manage
                     bridal party</a>
                 </li>
-                <li role="presentation">
-                  <a aria-controls="bridal-gowns" data-toggle="tab" href="#bridal-gowns" role="tab"> Bridal Gowns</a>
+                <li role="presentation" className="bridal-gowns">
+                  <a aria-controls="bridal-gowns" href="#bridal-gowns" role="tab">
+                    <span className="coming-soon">Coming Soon</span>
+                    <span>Bridal Gowns</span>
+                  </a>
                 </li>
               </ul>
               <div className="tab-content">
