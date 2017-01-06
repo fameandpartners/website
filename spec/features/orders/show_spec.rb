@@ -100,6 +100,19 @@ describe 'show order', type: :feature do
       end
     end
 
+    describe 'attributes' do
+      it 'displays line item attributes' do
+        visit spree.order_path(order)
+
+        within('.item .details') do
+          expect(page).to have_content('Skirt Length: standard')
+          expect(page).to have_content('Customized color:red')
+          expect(page).to have_content('Size: Unknown Size')
+          expect(page).to have_content('Quantity: 1')
+        end
+      end
+    end
+
     def product_name(line_item)
       line_item.variant.product.name
     end
