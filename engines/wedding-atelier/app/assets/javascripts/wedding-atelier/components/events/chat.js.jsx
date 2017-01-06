@@ -6,7 +6,8 @@ var Chat = React.createClass({
     wedding_name: React.PropTypes.string,
     profile_photo: React.PropTypes.string,
     username: React.PropTypes.string,
-    user_id: React.PropTypes.number
+    user_id: React.PropTypes.number,
+    filestack_key: React.PropTypes.string
   },
 
   getInitialState: function(){
@@ -139,7 +140,7 @@ var Chat = React.createClass({
 
   uploadImage: function() {
     var picker_options = {};
-    filepicker.setKey("AwsXNEkqXSG61itbPhj5nz");
+    filepicker.setKey(this.props.filestack_key);
     filepicker.pick(picker_options,
       function onSuccess(Blob) {
         this.sendMessageImage(Blob);

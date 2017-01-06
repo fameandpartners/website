@@ -4,10 +4,12 @@
     margin: 6px;
 
     .btn-send-msg-to-chat {
-      width: 110px;
       border-radius: 2px;
+      font-size: 14px;
       height: 100%;
       margin-top: 0;
+      width: 110px;
+      background-color: $black-two;
     }
   }
 
@@ -44,10 +46,14 @@
   }
 
   .btn-transparent.btn-create-a-dress {
+    height: 44px;
+    width: 176px;
+    background-color: $wild-sand;
+    color: $black;
     border: 1px solid $black;
     font-family: $secondary-font;
     font-weight: 400;
-    font-size: 1.07em;
+    font-size: 1.4em;
 
     em {
       text-transform: none;

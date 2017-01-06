@@ -13,7 +13,7 @@
     .chat-general-info {
       padding: 10px 5px;
       border-bottom: 1px solid $greyish;
-      width: 98%;
+      width: 96%;
     }
 
     .chat-header-left-side {
@@ -94,11 +94,13 @@
     }
 
     input.upload-image {
-      background-image: image-url('wedding-atelier/icon-upload-image.png');
+      background-image: image-url('wedding-atelier/icons/upload-image.svg');
+      width: 33px;
+      height: 29px;
+      margin: 13px 7px 0 26px;
+      background-size: cover;
+      background-color: transparent;
       border: 0;
-      width: 32px;
-      height: 34px;
-      margin: 8px;
     }
 
     .message-input {

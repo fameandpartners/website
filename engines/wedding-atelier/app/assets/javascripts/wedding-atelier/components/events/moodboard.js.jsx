@@ -9,7 +9,8 @@ var MoodBoardEvent = React.createClass({
     wedding_name: React.PropTypes.string,
     profile_photo: React.PropTypes.string,
     username: React.PropTypes.string,
-    user_id: React.PropTypes.number
+    user_id: React.PropTypes.number,
+    filestack_key: React.PropTypes.string
   },
 
   getInitialState: function (){
@@ -21,6 +22,7 @@ var MoodBoardEvent = React.createClass({
         profile_photo: this.props.profile_photo,
         username: this.props.username,
         user_id: this.props.user_id,
+        filestack_key: this.props.filestack_key,
         ref: 'Chat'
       }),
       event: {
@@ -141,7 +143,7 @@ var MoodBoardEvent = React.createClass({
 
   render: function () {
     return (
-      <div id="events__moodboard">
+      <div id="events__moodboard" className="row">
         <div className="chat left-content col-sm-6">
           {this.state.left_chat}
         </div>
@@ -184,7 +186,7 @@ var MoodBoardEvent = React.createClass({
                   <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress">
                     <em>Create</em> a dress</a>
                   </div>
-                  <div className="dresses-list">
+                  <div className="dresses-list center-block">
                     <DressTiles dresses={this.state.event.dresses}
                       sendDressToChatFn={this.sendDressToChatFn} />
                   </div>
