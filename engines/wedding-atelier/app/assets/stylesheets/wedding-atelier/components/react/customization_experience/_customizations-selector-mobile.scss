@@ -57,9 +57,9 @@
     height: 138px;
     width: 100%;
 
-    &:hover,
     &.active {
-      border: 1px solid $black;
+      border: 2px solid $white-three;
+      outline: $black solid 1px;
     }
 
   }
