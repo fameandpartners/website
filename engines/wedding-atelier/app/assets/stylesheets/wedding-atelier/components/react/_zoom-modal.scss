@@ -1,0 +1,39 @@
+.zoom-modal {
+  background-color: $white-two;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+
+  .close-zoom {
+    right: 10px;
+    position: absolute;
+    top: 10px;
+  }
+
+  .zoom-modal-pagination {
+    bottom: 10px;
+    position: absolute;
+    right: 10px;
+  }
+
+  .zoom-modal-thumbnails {
+    list-style: none;
+    max-width: 45px;
+    padding-left: 0;
+  }
+
+  .zoom-modal-thumbnails-item {
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 25px;
+    padding-left: 0;
+
+    img {
+      height: 65px;
+      width: 45px;
+    }
+  }
+}
