@@ -1,4 +1,4 @@
-function PresentationHelper(){};
+function PresentationHelper(){}
 
 // Formats size option value or user profile to be returned as in
 // 4'10" / 147cm | 6
@@ -12,7 +12,7 @@ PresentationHelper.size = function(userOrSize, height, siteVersion){
   } else {
     return userOrSize.first_name + "'s size profile";
   }
-}
+};
 
 PresentationHelper.fabricColour = function(fabric, colour){
   if(fabric && colour){
@@ -20,7 +20,7 @@ PresentationHelper.fabricColour = function(fabric, colour){
   }else{
     return '';
   }
-}
+};
 
 PresentationHelper.costFor = function(options, customizationItem){
   if(customizationItem === 'size' || customizationItem === 'silhouette'){ return null; }
@@ -30,7 +30,7 @@ PresentationHelper.costFor = function(options, customizationItem){
     return parseInt(options[customizationItem].price);
   }
   return '';
-}
+};
 
 PresentationHelper.additionalCost = function(options, customizationItem){
   var cost = this.costFor(options, customizationItem);
@@ -39,7 +39,7 @@ PresentationHelper.additionalCost = function(options, customizationItem){
   }else{
     return '';
   }
-}
+};
 
 PresentationHelper.customization = function(customization){
   if(customization){
@@ -47,13 +47,13 @@ PresentationHelper.customization = function(customization){
   }else{
     return '';
   }
-}
+};
 
 PresentationHelper.presentation = function(options, customizationItem, siteVersion){
   var presentation = '';
   if(customizationItem === 'fabric-colour'){
     presentation = PresentationHelper.fabricColour(options.fabric, options.colour);
-    additionalCost = PresentationHelper.additionalCost(options, customizationItem);
+    var additionalCost = PresentationHelper.additionalCost(options, customizationItem);
     return presentation + additionalCost;
   }else if(customizationItem === 'size'){
     return PresentationHelper.size(options.size, options.height, siteVersion);
@@ -62,4 +62,4 @@ PresentationHelper.presentation = function(options, customizationItem, siteVersi
     additionalCost = PresentationHelper.additionalCost(options, customizationItem);
     return presentation + additionalCost;
   }
-}
+};
