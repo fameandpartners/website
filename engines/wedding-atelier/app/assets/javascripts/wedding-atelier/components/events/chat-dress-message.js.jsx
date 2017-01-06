@@ -41,8 +41,10 @@ var ChatDressMessage = React.createClass({
         <div className="profile">
           <div className="row">
             <div className="col-xs-6">
-              <img className="photo" src={this.props.message.profilePhoto} />
-              <span className="name">{this.props.message.author}</span>
+              <div className="row">
+                <img className="photo" src={this.props.message.profilePhoto} />
+                <span className="name">{this.props.message.author}</span>
+              </div>
             </div>
             <div className="col-xs-6">
               <span className="created text-right">{formattedDate}</span>
@@ -56,12 +58,13 @@ var ChatDressMessage = React.createClass({
   render: function() {
     var dress = this.props.message.content;
     var loveClass = 'icon-liked';
-    var dressPositionStyle = 'chat-dress-container col-xs-12 ' + (this.props.isOwnerMessage ? 'pull-right' : 'pull-left');
+    var dressPositionStyle = (this.props.isOwnerMessage ? ' pull-right ' : ' pull-left ');
 
     return (
       <div className="msg msg-dress clearfix">
         <div className="row">
-          <div className={dressPositionStyle}>
+          <div className={'chat-dress-container col-xs-12' + dressPositionStyle}>
+
             {this.props.showAuthor ? this.getMessageData() : ''}
 
             <div className="row">

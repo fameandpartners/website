@@ -143,11 +143,11 @@ var MoodBoardEvent = React.createClass({
 
   render: function () {
     return (
-      <div id="events__moodboard" className="row">
+      <div id="events__moodboard">
         <div className="chat left-content col-sm-6">
           {this.state.left_chat}
         </div>
-        <div className="right-content col-sm-6" id="atelier">
+        <div className="right-content col-sm-6">
           <div className='right-container'>
             <h1 className="moodboard-title text-center">
               {this.state.event.name} - in {this.state.event.remaining_days} days

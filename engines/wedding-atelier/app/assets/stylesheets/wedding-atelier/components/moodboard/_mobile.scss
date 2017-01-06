@@ -23,9 +23,15 @@
       width: 100% !important;
     }
 
-    #atelier {
+    .right-content {
+      width: 100%;
       padding-right: 0;
       padding-left: 0;
+    }
+
+    .tab-content {
+      overflow: auto;
+      height: calc(100% - 34px);
     }
 
   }

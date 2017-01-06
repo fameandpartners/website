@@ -47,10 +47,6 @@
     border: 0;
   }
 
-  .tab-content {
-    overflow: auto;
-    height: calc(100% - 34px);
-  }
 }
 
 @include screen-xs-and-sm {
@@ -94,6 +90,7 @@
   .nav-tabs > li.active > a:focus,
   .nav-tabs > li.active > a:active, {
     border-bottom: 2px solid $black;
+    border: 0;
     background-color: transparent;
   }
 
