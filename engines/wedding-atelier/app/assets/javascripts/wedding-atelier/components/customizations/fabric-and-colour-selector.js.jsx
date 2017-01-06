@@ -3,11 +3,10 @@ var FabricAndColourSelector = React.createClass({
     colours: React.PropTypes.array,
     fabrics: React.PropTypes.array,
     selectCallback: React.PropTypes.func.isRequired,
-    showContainers: React.PropTypes.object,
     currentCustomization: React.PropTypes.string
   },
 
-  getInitialState: function(){
+  getInitialState: function() {
     return {
       selectedFabric: null,
       selectedColour: null
