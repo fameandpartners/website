@@ -94,7 +94,6 @@
 
   }
 
-
 }
 
 // TODO: Depending on how often this custom lightbox styling is used
@@ -172,11 +171,6 @@
     color: inherit;
   }
 
-  .dressName {
-    margin-right: 5px;
-    @extend .link-underline;
-  }
-
   .captionTitle {
     padding-bottom: 5px;
   }
@@ -223,4 +217,31 @@
 .imagelightbox-caption,
 .imagelightbox-arrow {
   animation: fade-in .25s linear;
+}
+
+.imagelightbox-caption,
+.mobile-carousel {
+
+  .dressName {
+    margin-right: 5px;
+    @extend .link-underline;
+  }
+
+}
+
+// Carousel (mobile)
+.mobile-carousel {
+
+  .hero-wrap {
+    padding-bottom: 10px;
+  }
+
+  .hero-carousel-nav {
+    margin-bottom: -105px;
+  }
+
+  .caption {
+    padding-top: 25px;
+  }
+
 }

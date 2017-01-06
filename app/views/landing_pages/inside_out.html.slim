@@ -16,72 +16,142 @@
       .col-md-6.col-md-offset-1.no-padding.hidden-xs.hidden-sm
         = image_tag "landingpages/inside-out/top-image.jpg", class: "img-responsive hidden-xs hidden-sm"
 
-  .container-fluid.container-no-padding-right.hidden-sm.hidden-md.hidden-lg
+  .container-fluid.no-padding.overflow-hidden.hidden-md.hidden-lg
     .col-md-12.heading-overlay-wrapper
       h2.heading-overlay
         | THE SERIES
 
-    .main-hero-wrap.js-hero-tile-carousel.no-spacing-cols-mobile
-      .main-hero-wrap.hero-wrap
-        a.js-inside-lb data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-1.jpg")}" data-imagelightbox-dressName="Silence Dress" data-imagelightbox-dressPrice="$299 USD, $379 AUD" data-imagelightbox-dressUrl="/dresses/dress-silence-1208?color=black"
-          picture.media-wrap
-            img src="#{image_path("landingpages/inside-out/collage-image-1.jpg")}"
-      .main-hero-wrap.hero-wrap
-        a.js-inside-lb data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-2.jpg")}" data-imagelightbox-dressName="Penn Shirt" data-imagelightbox-dressPrice="$199 USD, $249 AUD" data-imagelightbox-dressUrl="/dresses/dress-penn-shirt-1258?color=black"
-          picture.media-wrap
-            img src="#{image_path("landingpages/inside-out/collage-image-2.jpg")}"
-      .main-hero-wrap.hero-wrap
-        a.js-inside-lb data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-3.jpg")}" data-imagelightbox-dressName="Escala Dress" data-imagelightbox-dressPrice="$279 USD, $329 AUD" data-imagelightbox-dressUrl="/dresses/dress-escala-944?color=dark-tan"
-          picture.media-wrap
-            img src="#{image_path("landingpages/inside-out/collage-image-3.jpg")}"
-      .main-hero-wrap.hero-wrap
-        a.js-inside-lb data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-4.jpg")}" data-imagelightbox-dressName="York Dress" data-imagelightbox-dressPrice="$249 USD, $319 AUD" data-imagelightbox-dressUrl="/dresses/dress-york-1210?color=black"
-          picture.media-wrap
-            img src="#{image_path("landingpages/inside-out/collage-image-4.jpg")}"
-      .main-hero-wrap.hero-wrap
-        a.js-inside-lb data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-5.jpg")}" data-imagelightbox-dressName="Jojo Corset" data-imagelightbox-dressPrice="$159 USD, $199 AUD" data-imagelightbox-dressUrl="/dresses/dress-jojo-corset-1240?color=black"
-          picture.media-wrap
-            img src="#{image_path("landingpages/inside-out/collage-image-5.jpg")}"
-      .main-hero-wrap.hero-wrap
-        a.js-inside-lb data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-6.jpg")}" data-imagelightbox-dressName="Agata Dress" data-imagelightbox-dressPrice="$299 USD, $379 AUD" data-imagelightbox-dressUrl="/dresses/dress-agata-dress-1186?color=cobalt-blue"
-          picture.media-wrap
-            img src="#{image_path("landingpages/inside-out/collage-image-6.jpg")}"
-      .main-hero-wrap.hero-wrap
-        a.js-inside-lb data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-7.jpg")}" data-imagelightbox-dressName="Atlas Dress" data-imagelightbox-dressPrice="$299 USD, $379 AUD" data-imagelightbox-dressUrl="/dresses/dress-atlas-dress-1249?color=irridescent-green"
-          picture.media-wrap
-            img src="#{image_path("landingpages/inside-out/collage-image-7.jpg")}"
-      .main-hero-wrap.hero-wrap
-        a.js-inside-lb data-imagelightbox="mobile" href="#{image_path("landingpages/inside-out/collage-image-8.jpg")}" data-imagelightbox-dressName="Livinia Dress" data-imagelightbox-dressPrice="$449 USD, $569 AUD" data-imagelightbox-dressUrl="/dresses/dress-livinia-dress-1243?color=black"
-          picture.media-wrap
-            img src="#{image_path("landingpages/inside-out/collage-image-8.jpg")}"
+    // DRESSES INFO
+    // Dress 1
+    - dress_info_name_1 = "Silence Dress"
+    - dress_info_price_1  = "$299 USD, $379 AUD"
+    - dress_info_url_1 = "/dresses/dress-silence-1208?color=black"
+
+    // Dress 2
+    - dress_info_name_2 = "Penn Shirt"
+    - dress_info_price_2  = "$199 USD, $249 AUD"
+    - dress_info_url_2 = "/dresses/dress-penn-shirt-1258?color=black"
+
+    // Dress 3
+    - dress_info_name_3 = "Escala Dress"
+    - dress_info_price_3  = "$279 USD, $329 AUD"
+    - dress_info_url_3 = "/dresses/dress-escala-944?color=dark-tan"
+
+    // Dress 4
+    - dress_info_name_4 = "York Dress"
+    - dress_info_price_4  = "$249 USD, $319 AUD"
+    - dress_info_url_4 = "/dresses/dress-york-1210?color=black"
+
+    // Dress 5
+    - dress_info_name_5 = "Jojo Corset"
+    - dress_info_price_5  = "$159 USD, $199 AUD"
+    - dress_info_url_5 = "/dresses/dress-jojo-corset-1240?color=black"
+
+    // Dress 6
+    - dress_info_name_6 = "Agata Dress"
+    - dress_info_price_6  = "$299 USD, $379 AUD"
+    - dress_info_url_6 = "/dresses/dress-agata-dress-1186?color=cobalt-blue"
+
+    // Dress 7
+    - dress_info_name_7 = "Atlas Dress"
+    - dress_info_price_7  = "$299 USD, $379 AUD"
+    - dress_info_url_7 = "/dresses/dress-atlas-dress-1249?color=irridescent-green"
+
+    // Dress 8
+    - dress_info_name_8 = "Livinia Dress"
+    - dress_info_price_8  = "$449 USD, $569 AUD"
+    - dress_info_url_8 = "/dresses/dress-livinia-dress-1243?color=black"
+
+
+    .main-hero-wrap.mobile-carousel.js-hero-tile-carousel.no-spacing-cols-mobile
+        - for i in (1..8)
+
+          // TODO: Maybe there's a better way with arrays here?
+          - case i
+            - when 1
+              - current_name = dress_info_name_1
+              - current_price = dress_info_price_1
+              - current_url = dress_info_url_1
+            - when 2
+              - current_name = dress_info_name_2
+              - current_price = dress_info_price_2
+              - current_url = dress_info_url_2
+            - when 3
+              - current_name = dress_info_name_3
+              - current_price = dress_info_price_3
+              - current_url = dress_info_url_3
+            - when 4
+              - current_name = dress_info_name_4
+              - current_price = dress_info_price_4
+              - current_url = dress_info_url_4
+            - when 5
+              - current_name = dress_info_name_5
+              - current_price = dress_info_price_5
+              - current_url = dress_info_url_5
+            - when 6
+              - current_name = dress_info_name_6
+              - current_price = dress_info_price_6
+              - current_url = dress_info_url_6
+            - when 7
+              - current_name = dress_info_name_7
+              - current_price = dress_info_price_7
+              - current_url = dress_info_url_7
+            - when 8
+              - current_name = dress_info_name_8
+              - current_price = dress_info_price_8
+              - current_url = dress_info_url_8
+
+          .main-hero-wrap.hero-wrap
+            a.js-inside-mobile href="#{current_url}"
+              picture.media-wrap
+                img src="#{image_path("landingpages/inside-out/collage-image-#{i}.jpg")}"
+              .caption
+                span.dressName #{current_name}
+                span.dressPrice  #{current_price}
 
   .container
-    section.section-box.hidden-xs
+    section.section-box.hidden-xs.hidden-sm
       .row.collage-gallery
-        .col-md-3.col-sm-6
-          a.js-inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-1.jpg")}" data-imagelightbox-dressName="Silence Dress" data-imagelightbox-dressPrice="$299 USD, $379 AUD" data-imagelightbox-dressUrl="/dresses/dress-silence-1208?color=black"
-            = image_tag "landingpages/inside-out/collage-image-1.jpg", class: "img-responsive"
-        .col-md-3.col-sm-6
-          a.js-inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-2.jpg")}" data-imagelightbox-dressName="Penn Shirt" data-imagelightbox-dressPrice="$199 USD, $249 AUD" data-imagelightbox-dressUrl="/dresses/dress-penn-shirt-1258?color=black"
-            = image_tag "landingpages/inside-out/collage-image-2.jpg", class: "img-responsive"
-        .col-md-3.col-sm-6
-          a.js-inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-3.jpg")}" data-imagelightbox-dressName="Escala Dress" data-imagelightbox-dressPrice="$279 USD, $329 AUD" data-imagelightbox-dressUrl="/dresses/dress-escala-944?color=dark-tan"
-            = image_tag "landingpages/inside-out/collage-image-3.jpg", class: "img-responsive"
-        .col-md-3.col-sm-6
-          a.js-inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-4.jpg")}" data-imagelightbox-dressName="York Dress" data-imagelightbox-dressPrice="$249 USD, $319 AUD" data-imagelightbox-dressUrl="/dresses/dress-york-1210?color=black"
-            = image_tag "landingpages/inside-out/collage-image-4.jpg", class: "img-responsive"
-        .col-md-3.col-sm-6
-          a.js-inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-5.jpg")}" data-imagelightbox-dressName="Jojo Corset" data-imagelightbox-dressPrice="$159 USD, $199 AUD" data-imagelightbox-dressUrl="/dresses/dress-jojo-corset-1240?color=black"
-            = image_tag "landingpages/inside-out/collage-image-5.jpg", class: "img-responsive"
-        .col-md-3.col-sm-6
-          a.js-inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-6.jpg")}" data-imagelightbox-dressName="Agata Dress" data-imagelightbox-dressPrice="$299 USD, $379 AUD" data-imagelightbox-dressUrl="/dresses/dress-agata-dress-1186?color=cobalt-blue"
-            = image_tag "landingpages/inside-out/collage-image-6.jpg", class: "img-responsive"
-        .col-md-3.col-sm-6
-          a.js-inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-7.jpg")}" data-imagelightbox-dressName="Atlas Dress" data-imagelightbox-dressPrice="$299 USD, $379 AUD" data-imagelightbox-dressUrl="/dresses/dress-atlas-dress-1249?color=irridescent-green"
-            = image_tag "landingpages/inside-out/collage-image-7.jpg", class: "img-responsive"
-        .col-md-3.col-sm-6
-          a.js-inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/collage-image-8.jpg")}" data-imagelightbox-dressName="Livinia Dress" data-imagelightbox-dressPrice="$449 USD, $569 AUD" data-imagelightbox-dressUrl="/dresses/dress-livinia-dress-1243?color=black"
-            = image_tag "landingpages/inside-out/collage-image-8.jpg", class: "img-responsive"
+        - for i in (1..8)
+
+          // TODO: Maybe there's a better way with arrays here?
+          - case i
+            - when 1
+              - current_name = dress_info_name_1
+              - current_price = dress_info_price_1
+              - current_url = dress_info_url_1
+            - when 2
+              - current_name = dress_info_name_2
+              - current_price = dress_info_price_2
+              - current_url = dress_info_url_2
+            - when 3
+              - current_name = dress_info_name_3
+              - current_price = dress_info_price_3
+              - current_url = dress_info_url_3
+            - when 4
+              - current_name = dress_info_name_4
+              - current_price = dress_info_price_4
+              - current_url = dress_info_url_4
+            - when 5
+              - current_name = dress_info_name_5
+              - current_price = dress_info_price_5
+              - current_url = dress_info_url_5
+            - when 6
+              - current_name = dress_info_name_6
+              - current_price = dress_info_price_6
+              - current_url = dress_info_url_6
+            - when 7
+              - current_name = dress_info_name_7
+              - current_price = dress_info_price_7
+              - current_url = dress_info_url_7
+            - when 8
+              - current_name = dress_info_name_8
+              - current_price = dress_info_price_8
+              - current_url = dress_info_url_8
+
+          .col-md-3.col-sm-6
+            a.js-inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/lightbox/collage-image-#{i}-full.jpg")}" data-imagelightbox-dressName="#{current_name}" data-imagelightbox-dressPrice="#{current_price}" data-imagelightbox-dressUrl="#{current_url}"
+              = image_tag "landingpages/inside-out/collage-image-#{i}.jpg", class: "img-responsive"
 
     .row.text-center
       = link_to '/inside-out-collection'
@@ -198,7 +268,7 @@
             overlay: true,
             lockBody: true,
             caption: true,
-            quitOnDocClick: false,
+            quitOnDocClick: false
           }
         );
 
