@@ -6,12 +6,16 @@ var ZoomModal = React.createClass({
 
   getInitialState: function () {
     return {
-      selectedImageIndex: this.props.images[0]
+      selectedImageIndex: 0
     };
   },
 
   thumbnailSelectedHandle: function (index) {
     this.setState({selectedImageIndex: index});
+  },
+
+  closeHandle: function () {
+    $(this.refs.zoomModal).hide();
   },
 
   renderThumbnails: function () {
@@ -41,9 +45,9 @@ var ZoomModal = React.createClass({
     var image = this.props.images[this.state.selectedImageIndex];
 
     return (
-      <div id="zoom-modal">
+      <div ref="zoomModal" id="zoom-modal" className="zoom-modal" style={{display: 'block', paddingTop: '62px'}}>
         <div className="pagination">
-          <div className="close"></div>
+          <div className="close" onClick={this.closeHandle}></div>
           {this.renderThumbnails()}
         </div>
         <div className="img">
