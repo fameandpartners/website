@@ -18,8 +18,8 @@ var FabricAndColourSelectorMobile = React.createClass({
   fabricSelectedHandle: function (fabric) {
     this.setState({selectedFabric: fabric});
     this.props.selectOptionCallback('fabric', fabric);
-    if(this.props.colours[0]) {
-      this.props.selectOptionCallback('colour', this.props.colours[0]);
+    if(this.props.colours[0] && !this.state.selectedColour) {
+      this.setState({selectedColour: this.props.colours[0]});
     }
   },
 
