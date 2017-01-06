@@ -11,26 +11,22 @@ var SizeSelector = React.createClass({
   },
 
   getInitialState: function() {
-    return { assistantSelected: false };
-  },
-
-  componentWillMount: function(){
-    $(this.refs.heightSelect)
-      .select2({ minimumResultsForSearch: Infinity })
-      .on('change', function(e) {
-        this.props.selectCallback('height', e.target.value);
-        if(this.state.assistantSelected){
-          $('input[name="assistant"]').removeProp('checked');
-          // this following line is in order to reset if the menu shows the user name
-          // or a size no
-          this.props.selectCallback('size', { name: $('input[name="size"]:checked').val() });
-          this.setState({assistantSelected: false});
-        }
-      }.bind(this));
+    var user = $.extend({}, this.props.currentUser.user);
+    return {
+      assistant: user,
+      height: user.user_profile.height,
+      size: {}
+    };
   },
 
   componentDidMount: function () {
-    $(this.refs.heightSelect).select2({placeholder: this.props.currentUser.user.user_profile.height});
+    var that = this;
+    $(this.refs.heightSelect).select2({
+      placeholder: this.props.currentUser.user.user_profile.height,
+      minimumResultsForSearch: Infinity
+    }).on('change', function (e) {
+      that.heightSelectedHandle(e.target.value);
+    }).val(this.state.assistant.user_profile.height);
   },
 
   parsePresentation: function(size) {
@@ -38,36 +34,54 @@ var SizeSelector = React.createClass({
     return size.name.match(regexp)[1];
   },
 
-  setSizeWithProfile: function(assistant) {
-    $(this.refs.container).find('input[value="' + assistant.user_profile.dress_size + '"]').prop('checked', true);
-    $(this.refs.heightSelect).val(assistant.user_profile.height).change();
+  heightSelectedHandle: function (height) {
+    this.setState({
+      assistant: null,
+      height: height
+    });
+    if(this.state.size) {
+      this.props.selectCallback('height', height);
+      this.props.selectCallback('size', this.state.size);
+    }
+  },
+
+  sizeSelectedHandle: function(size) {
+    this.setState({
+      assistant: null,
+      size: size
+    });
+    if(this.state.height) {
+      this.props.selectCallback('height', this.state.height);
+      this.props.selectCallback('size', size);
+    }
+  },
+
+  assistantSelectedHandle: function(assistant) {
+    var size = this.props.sizes.filter(function (size) {
+      return size.id === assistant.user_profile.dress_size_id;
+    });
+    $(this.refs.heightSelect).val(assistant.user_profile.height).trigger('change');
+    this.setState({
+      assistant: assistant,
+      size: size[0],
+      height: assistant.user_profile.height
+    });
     this.props.selectCallback('size', assistant);
-    this.setState({assistantSelected: true});
-    this.changeHeight();
-  },
-
-  changeSize: function(size) {
-    $('input[name="assistant"]').removeProp('checked');
-    this.props.selectCallback('size', size);
-  },
-
-  changeHeight: function () {
-    var height = $(ReactDOM.findDOMNode(this.refs.heightSelect)).val();
-    this.props.selectCallback('height', height);
   },
 
   render: function() {
     var that = this;
-    var optionsForHeights = this.props.heights.map(function(group){
+
+    var optionsForHeights = this.props.heights.map(function(group) {
       var heights = group[1].map(function(height, index){
-        return(<option key={index} height={height}>{height}</option>)
+        return(<option key={index} height={height}>{height}</option>);
       });
 
       return (
         <optgroup key={group[0]} label={group[0]}>
           {heights}
         </optgroup>
-      )
+      );
     });
 
     var dressSizes = this.props.sizes.map(function(size, index){
@@ -75,20 +89,21 @@ var SizeSelector = React.createClass({
           inputProps = {
             id: id,
             type: 'radio',
-            name: 'size',
+            name: 'desktop-size',
             value: size.name,
-            onClick: that.changeSize.bind(null, size)
-          }
+            onChange: that.sizeSelectedHandle.bind(null, size)
+          };
 
-      if(size.id === that.props.currentUser.user.user_profile.dress_size_id){
-        inputProps.defaultChecked = true;
+      if (size.id === that.state.size.id || (that.state.assistant && size.id === that.state.assistant.user_profile.dress_size_id)) {
+        inputProps.checked = true;
       }
+
       return (
         <li key={index}>
           <input {...inputProps} />
           <label htmlFor={id}>{that.parsePresentation(size)}</label>
         </li>
-      )
+      );
     });
 
     var assistantsSizes = this.props.assistants.map(function(assistant, index){
@@ -96,12 +111,13 @@ var SizeSelector = React.createClass({
           inputProps = {
             id: id,
             type: 'radio',
-            name: 'assistant',
+            name: 'desktop-assistant',
             value: assistant.user_profile.dress_size,
-            onClick: that.setSizeWithProfile.bind(that,assistant)
-          }
-      if(assistant.id === that.props.currentUser.user.id){
-        inputProps.defaultChecked = true;
+            onChange: that.assistantSelectedHandle.bind(null, assistant)
+          };
+
+      if (that.state.assistant) {
+        inputProps.checked = assistant.id === that.state.assistant.id;
       }
 
       return (
@@ -109,7 +125,7 @@ var SizeSelector = React.createClass({
           <input {...inputProps} />
           <label htmlFor={id}>{assistant.first_name}</label>
         </li>
-      )
+      );
     });
 
     var customizationSelectorClasses = classNames({
@@ -129,7 +145,7 @@ var SizeSelector = React.createClass({
           <div className="form-group">
             <label htmlFor="heightSelect" className="text-left">Whats your height</label>
             <div>
-              <select id="heightSelect" ref="heightSelect" className="form-control" onChange={this.changeHeight}>
+              <select id="heightSelect" ref="heightSelect" className="form-control">
                 {optionsForHeights}
               </select>
             </div>

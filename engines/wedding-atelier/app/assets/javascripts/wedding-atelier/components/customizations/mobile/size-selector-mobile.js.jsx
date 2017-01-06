@@ -44,6 +44,7 @@ var SizeSelectorMobile = React.createClass({
 
   heightSelectedHandle: function (height) {
     this.setState({
+      assistant: null,
       height: height
     });
   },
@@ -76,7 +77,7 @@ var SizeSelectorMobile = React.createClass({
   render: function() {
     var that = this;
 
-    var optionsForHeights = this.props.heights.map(function(group){
+    var optionsForHeights = this.props.heights.map(function(group) {
       var heights = group[1].map(function(height, index){
         return(<option key={index} value={height}>{height}</option>);
       });
@@ -93,7 +94,7 @@ var SizeSelectorMobile = React.createClass({
           inputProps = {
             id: id,
             type: "radio",
-            name: "size",
+            name: "mobile-size",
             value: size.name,
             onChange: that.sizeSelectedHandle.bind(null, size)
           };
@@ -120,7 +121,7 @@ var SizeSelectorMobile = React.createClass({
         onChange: that.assistantSelectedHandle.bind(null, assistant)
       };
 
-      if (this.state.assistant) {
+      if (that.state.assistant) {
         inputProps.checked = assistant.id === that.state.assistant.id;
       }
 
@@ -130,7 +131,7 @@ var SizeSelectorMobile = React.createClass({
           <label htmlFor={id}>{assistant.first_name}</label>
         </li>
       );
-    }.bind(this));
+    });
 
     var containerClasses = classNames({
       'customization-selector-mobile-size': true,
