@@ -207,8 +207,8 @@ FameAndPartners::Application.routes.draw do
     # Relaxed Evening Collection page (Inside/Out)- Landing page
     get '/inside-out-collection' => 'products/collections#show', :permalink => 'inside-out-collection', :as => :inside_out_collection_landing_page
 
-    # Pre-Prom Collection - Landing page
-    get '/pre-prom-collection' => 'products/collections#show', :permalink => 'pre-prom-collection', :as => :pre_prom_collection_landing_page
+    # Pre-Prom/Pre-Season Evening Collection - Landing page
+    get '/pre-season-evening-collection' => 'products/collections#show', :permalink => 'pre-season-evening-collection', :as => :pre_season_evening_collection_landing_page
 
     # Landing pages
     get '/fameweddings/bridesmaid' => 'products/collections#show', :permalink => 'bridesmaid14', :as => :bridesmaid_landing_page
