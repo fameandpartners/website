@@ -5,7 +5,7 @@ namespace :update do
         next if product.images.blank?
 
         grouped = product.images.group_by(&:viewable)
-        positions = grouped.values.first.map(&:position).sort
+        positions = grouped.values.first.map(&:position).sort_by(&:to_i)
 
         sorted = true
 
