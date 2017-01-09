@@ -9,9 +9,15 @@
 
   .hero-tile-carousel.js-hero-tile-carousel
     - (1..6).each do |tile_index|
+      - current_tile_image = "landingpages/pre-prom-collection/hero-tile-#{tile_index}.jpg"
+      - current_tile_image_mob = "landingpages/pre-prom-collection/hero-tile-#{tile_index}-mob.jpg"
       .main-hero-wrap.hero-wrap
         picture.media-wrap
-          = image_tag "landingpages/pre-prom-collection/hero-tile-#{tile_index}.jpg", alt: "#{page.heading} #{tile_index}", class: 'img-responsive'
+          source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
+          source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
+          img.img-responsive src="#{image_path(current_tile_image)}" alt="#{page.heading} #{tile_index}" srcset="
+                #{image_path(current_tile_image_mob)} 991w,
+                #{image_path(current_tile_image)} 992w"
 
   .row
     .container
