@@ -120,12 +120,37 @@ var DesktopCustomizations = React.createClass({
               selectedOptions={this.props.selectedOptions}
               mobile={false}
               />
-            <button className="btn-black">
-               add to cart
-            </button>
+            <AddToCartButton customizations={this.props.selectedOptions} />
           </div>
         </div>
       </div>
     );
   }
 });
+
+var AddToCartButton = React.createClass({
+  propTypes: {
+    customizations: React.PropTypes.object
+  },
+  handleAddToCart: function () {
+    customizations = this.props.customizations;
+    size_id = customizations.size.id || customizations.size.user_profile.dress_size_id;
+    var attrs = {
+      size_id: size_id,
+      color_id: customizations.colour.id,
+      variant_id: customizations.silhouette.variant_id,
+      height: customizations.height,
+      length_id: customizations.length.id,
+      fabric_id: customizations.fabric.id,
+      customizations_ids: [customizations.fit.id, customizations.style.id]
+      //making_options_ids: ""
+    }
+    shoppingCart = new helpers.ShoppingCart({});
+    shoppingCart.addProduct(attrs);
+  },
+  render: function(){
+    return(
+        <button className="btn-black" onClick={this.handleAddToCart}> add to cart </button>
+    )
+  }
+})
