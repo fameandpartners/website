@@ -17,7 +17,7 @@
     .container
       .page-content.products-collections.category
         .col-xs-12
-          = render :partial => 'filters_sort', :locals => { :hidden => true }
+          = render :partial => 'products/collections/filters_sort', :locals => { :hidden => true }
 
         .relative.products-collection
           = render partial: 'products_without_content'
