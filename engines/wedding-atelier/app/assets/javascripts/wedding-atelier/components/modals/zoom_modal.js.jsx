@@ -1,21 +1,11 @@
 var ZoomModal = React.createClass({
   propTypes: {
       images: React.PropTypes.array.isRequired,
-      defaultImageUrl: React.PropTypes.string
-  },
-
-  getInitialState: function () {
-    return {
-      selectedImageIndex: 0
-    };
-  },
-
-  thumbnailSelectedHandle: function (index) {
-    this.setState({selectedImageIndex: index});
-  },
-
-  closeHandle: function () {
-    $(this.refs.zoomModal).hide();
+      defaultImageUrl: React.PropTypes.string,
+      selectedImageIndex: React.PropTypes.number.isRequired,
+      visible: React.PropTypes.bool.isRequired,
+      zoomClosedHandle: React.PropTypes.func.isRequired,
+      thumbnailSelectedHandle: React.PropTypes.func.isRequired
   },
 
   renderThumbnails: function () {
@@ -23,12 +13,12 @@ var ZoomModal = React.createClass({
     var thumbnails = this.props.images.map(function (image, index) {
       var classes = classNames({
         'zoom-modal-thumbnails-item': true,
-        'selected': index === that.state.selectedImageIndex
+        'selected': index === that.props.selectedImageIndex
       });
       var key = 'zoom-modal-thumb' + index;
 
       return (
-        <li key={key} className={classes} onClick={that.thumbnailSelectedHandle.bind(null, index)}>
+        <li key={key} className={classes} onClick={that.props.thumbnailSelectedHandle.bind(null, index)}>
           <img src={image.thumbnailUrl} />
         </li>
       );
@@ -42,11 +32,11 @@ var ZoomModal = React.createClass({
   },
 
   render: function() {
-    var image = this.props.images[this.state.selectedImageIndex];
+    var image = this.props.images[this.props.selectedImageIndex];
 
     return (
-      <div ref="zoomModal" id="zoom-modal" className="zoom-modal" style={{display: 'none'}}>
-        <div className="close-zoom" onClick={this.closeHandle}></div>
+      <div ref="zoomModal" className="zoom-modal" style={{display: this.props.visible? 'block':'none'}}>
+        <div className="close-zoom" onClick={this.props.zoomClosedHandle}></div>
         <div className="zoom-modal-image">
           <img src={image ? image.url : this.props.defaultImageUrl} />
         </div>

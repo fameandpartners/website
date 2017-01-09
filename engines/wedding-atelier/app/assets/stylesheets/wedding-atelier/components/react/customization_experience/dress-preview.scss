@@ -5,15 +5,7 @@
   .preview {
     height: 90%;
     margin: 0 auto;
-    width: auto;
-
-    @include screen-md {
-      width: 450px;
-    }
-
-    @include screen-sm {
-      width: 300px;
-    }
+    max-width: 100%;
   }
 
   img {
@@ -21,16 +13,44 @@
     margin: 0 auto;
   }
 
-  .controls {
+  .dress-preview-controls {
     position: absolute;
     right: 0;
     top: 0;
+  }
 
-    .zoom {
-      cursor: pointer;
-      height: 32px;
-      margin: 0 auto;
-      width: 32px;
+  .dress-preview-zoom-in {
+    background: transparent image-url('wedding-atelier/plus.svg') center center no-repeat;
+    cursor: pointer;
+    height: 32px;
+    margin-bottom: 35px;
+  }
+
+  .dress-preview-pagination {
+    bottom: 0;
+    position: absolute;
+    right: 0;
+  }
+
+  .dress-preview-thumbnails {
+    list-style: none;
+    max-width: 45px;
+    padding-left: 0;
+  }
+
+  .dress-preview-thumbnails-item {
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 25px;
+    padding-left: 0;
+
+    &.selected {
+      outline: 1px solid $black;
+    }
+
+    img {
+      height: 65px;
+      width: 45px;
     }
   }
 
