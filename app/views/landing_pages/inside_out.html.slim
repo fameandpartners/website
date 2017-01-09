@@ -24,42 +24,50 @@
     // DRESSES INFO
     // Dress 1
     - dress_info_name_1 = "Silence Dress"
-    - dress_info_price_1  = "$299 USD, $379 AUD"
+    - dress_info_price_us_1  = "$299"
+    - dress_info_price_au_1  = "$379"
     - dress_info_url_1 = "/dresses/dress-silence-1208?color=black"
 
     // Dress 2
     - dress_info_name_2 = "Penn Shirt"
-    - dress_info_price_2  = "$199 USD, $249 AUD"
+    - dress_info_price_us_2  = "$199"
+    - dress_info_price_au_2  = "$249"
     - dress_info_url_2 = "/dresses/dress-penn-shirt-1258?color=black"
 
     // Dress 3
     - dress_info_name_3 = "Escala Dress"
-    - dress_info_price_3  = "$279 USD, $329 AUD"
+    - dress_info_price_us_3  = "$279"
+    - dress_info_price_au_3  = "$329"
     - dress_info_url_3 = "/dresses/dress-escala-944?color=dark-tan"
 
     // Dress 4
     - dress_info_name_4 = "York Dress"
-    - dress_info_price_4  = "$249 USD, $319 AUD"
+    - dress_info_price_us_4  = "$249"
+    - dress_info_price_au_4  = "$319"
     - dress_info_url_4 = "/dresses/dress-york-1210?color=black"
 
     // Dress 5
     - dress_info_name_5 = "Jojo Corset"
-    - dress_info_price_5  = "$159 USD, $199 AUD"
+    - dress_info_price_us_5  = "$159"
+    - dress_info_price_au_5  = "$199"
     - dress_info_url_5 = "/dresses/dress-jojo-corset-1240?color=black"
 
     // Dress 6
     - dress_info_name_6 = "Agata Dress"
-    - dress_info_price_6  = "$299 USD, $379 AUD"
+    - dress_info_price_us_6  = "$299"
+    - dress_info_price_au_6  = "$379"
     - dress_info_url_6 = "/dresses/dress-agata-dress-1186?color=cobalt-blue"
 
     // Dress 7
     - dress_info_name_7 = "Atlas Dress"
-    - dress_info_price_7  = "$299 USD, $379 AUD"
+    - dress_info_price_us_7  = "$299"
+    - dress_info_price_au_7  = "$379"
     - dress_info_url_7 = "/dresses/dress-atlas-dress-1249?color=irridescent-green"
 
     // Dress 8
     - dress_info_name_8 = "Livinia Dress"
-    - dress_info_price_8  = "$449 USD, $569 AUD"
+    - dress_info_price_us_8  = "$449"
+    - dress_info_price_au_8  = "$569"
     - dress_info_url_8 = "/dresses/dress-livinia-dress-1243?color=black"
 
 
@@ -70,35 +78,43 @@
           - case i
             - when 1
               - current_name = dress_info_name_1
-              - current_price = dress_info_price_1
+              - current_price_us = dress_info_price_us_1
+              - current_price_au = dress_info_price_au_1
               - current_url = dress_info_url_1
             - when 2
               - current_name = dress_info_name_2
-              - current_price = dress_info_price_2
+              - current_price_us = dress_info_price_us_2
+              - current_price_au = dress_info_price_au_2
               - current_url = dress_info_url_2
             - when 3
               - current_name = dress_info_name_3
-              - current_price = dress_info_price_3
+              - current_price_us = dress_info_price_us_3
+              - current_price_au = dress_info_price_au_3
               - current_url = dress_info_url_3
             - when 4
               - current_name = dress_info_name_4
-              - current_price = dress_info_price_4
+              - current_price_us = dress_info_price_us_4
+              - current_price_au = dress_info_price_au_4
               - current_url = dress_info_url_4
             - when 5
               - current_name = dress_info_name_5
-              - current_price = dress_info_price_5
+              - current_price_us = dress_info_price_us_5
+              - current_price_au = dress_info_price_au_5
               - current_url = dress_info_url_5
             - when 6
               - current_name = dress_info_name_6
-              - current_price = dress_info_price_6
+              - current_price_us = dress_info_price_us_6
+              - current_price_au = dress_info_price_au_6
               - current_url = dress_info_url_6
             - when 7
               - current_name = dress_info_name_7
-              - current_price = dress_info_price_7
+              - current_price_us = dress_info_price_us_7
+              - current_price_au = dress_info_price_au_7
               - current_url = dress_info_url_7
             - when 8
               - current_name = dress_info_name_8
-              - current_price = dress_info_price_8
+              - current_price_us = dress_info_price_us_8
+              - current_price_au = dress_info_price_au_8
               - current_url = dress_info_url_8
 
           .main-hero-wrap.hero-wrap
@@ -107,7 +123,10 @@
                 img src="#{image_path("landingpages/inside-out/collage-image-#{i}.jpg")}"
               .caption
                 span.dressName #{current_name}
-                span.dressPrice  #{current_price}
+                - if current_site_version.is_australia?
+                  span.dressPrice  #{current_price_au}
+                - else
+                  span.dressPrice  #{current_price_us}
 
   .container
     section.section-box.hidden-xs.hidden-sm
@@ -118,39 +137,47 @@
           - case i
             - when 1
               - current_name = dress_info_name_1
-              - current_price = dress_info_price_1
+              - current_price_us = dress_info_price_us_1
+              - current_price_au = dress_info_price_au_1
               - current_url = dress_info_url_1
             - when 2
               - current_name = dress_info_name_2
-              - current_price = dress_info_price_2
+              - current_price_us = dress_info_price_us_2
+              - current_price_au = dress_info_price_au_2
               - current_url = dress_info_url_2
             - when 3
               - current_name = dress_info_name_3
-              - current_price = dress_info_price_3
+              - current_price_us = dress_info_price_us_3
+              - current_price_au = dress_info_price_au_3
               - current_url = dress_info_url_3
             - when 4
               - current_name = dress_info_name_4
-              - current_price = dress_info_price_4
+              - current_price_us = dress_info_price_us_4
+              - current_price_au = dress_info_price_au_4
               - current_url = dress_info_url_4
             - when 5
               - current_name = dress_info_name_5
-              - current_price = dress_info_price_5
+              - current_price_us = dress_info_price_us_5
+              - current_price_au = dress_info_price_au_5
               - current_url = dress_info_url_5
             - when 6
               - current_name = dress_info_name_6
-              - current_price = dress_info_price_6
+              - current_price_us = dress_info_price_us_6
+              - current_price_au = dress_info_price_au_6
               - current_url = dress_info_url_6
             - when 7
               - current_name = dress_info_name_7
-              - current_price = dress_info_price_7
+              - current_price_us = dress_info_price_us_7
+              - current_price_au = dress_info_price_au_7
               - current_url = dress_info_url_7
             - when 8
               - current_name = dress_info_name_8
-              - current_price = dress_info_price_8
+              - current_price_us = dress_info_price_us_8
+              - current_price_au = dress_info_price_au_8
               - current_url = dress_info_url_8
 
           .col-md-3.col-sm-6
-            a.js-inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/lightbox/collage-image-#{i}-full.jpg")}" data-imagelightbox-dressName="#{current_name}" data-imagelightbox-dressPrice="#{current_price}" data-imagelightbox-dressUrl="#{current_url}"
+            a.js-inside-lb data-imagelightbox="desktop" href="#{image_path("landingpages/inside-out/lightbox/collage-image-#{i}-full.jpg")}" data-imagelightbox-dressName="#{current_name}" data-imagelightbox-dressPriceUsa="#{current_price_us}" data-imagelightbox-dressPriceAustralia="#{current_price_au}" data-imagelightbox-dressUrl="#{current_url}"
               = image_tag "landingpages/inside-out/collage-image-#{i}.jpg", class: "img-responsive"
 
     .row.text-center
@@ -247,12 +274,19 @@
     $(document).ready(function () {
 
       $( function() {
+        var site_version = getSiteVersionPrefix();
 
         $('a.js-inside-lb').each(function(index, elem) {
+
+          if (site_version == "/au") {
+            var dressPrice = $(this).attr('data-imagelightbox-dressPriceAustralia');
+          } else {
+            var dressPrice = $(this).attr('data-imagelightbox-dressPriceUsa');
+          }
+
           var dressName = $(this).attr('data-imagelightbox-dressName'),
-              dressPrice = $(this).attr('data-imagelightbox-dressPrice'),
               dressUrl = $(this).attr('data-imagelightbox-dressUrl'),
-              // This is needed since the default behaviour is to make the alt attribute as a plain text caption
+              // This is needed since the default behaviour of imageLightbox lib is to make the alt attribute as a plain text caption
               resetAlt = $(this).find('img').prop('alt','');
 
 
