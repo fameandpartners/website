@@ -56,7 +56,7 @@ var CustomizationsMenuMobile = React.createClass({
     return (
       <div className="customizations-menu-mobile">
         <div className="customizations-menu-mobile-body">
-          <DressPreview selectedOptions={this.props.selectedOptions}/>
+          <DressPreview selectedOptions={this.props.selectedOptions} images={[{ thumbnailUrl: 'http://www.htmlgoodies.com/images/pb1.gif', url: 'http://www.htmlgoodies.com/images/paperboy.gif'},{ thumbnailUrl: 'http://www.yourhtmlsource.com/images/media/banjotooiesmall.jpg', url: 'http://www.yourhtmlsource.com/images/media/banjotooiebig.jpg'}]}/>
           <h1>
             <em>Customize</em> it how you want
           </h1>

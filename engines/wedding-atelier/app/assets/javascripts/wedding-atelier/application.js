@@ -7,7 +7,6 @@
 //= require select2-4.0.3
 //= require bootstrap-datepicker-1.6.4
 //= require classnames
-//= require panzoom
 //= require moment-2.17.1.min
 
 //= require libs/underscore-min

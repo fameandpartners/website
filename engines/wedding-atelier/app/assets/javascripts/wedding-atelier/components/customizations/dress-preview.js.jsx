@@ -1,42 +1,77 @@
 var DressPreview = React.createClass({
   propTypes: {
-    selectedOptions: React.PropTypes.object
+    selectedOptions: React.PropTypes.object,
+    images: React.PropTypes.array.isRequired
   },
 
-  componentDidMount: function() {
-    $(this.refs.panzoom).panzoom({
-      $zoomIn:            $(this.refs.zoomin),
-      $zoomOut:           $(this.refs.zoomout),
-      $reset:             $(this.refs.reset),
-      increment:          0.1,
-      which:              1,
-      minScale:           1,
-      disablePan:         false,
-      panOnlyWhenZoomed:  true
+  getInitialState: function () {
+    return {
+      selectedImageIndex: 0,
+      zoom: false
+    };
+  },
+
+  thumbnailSelectedHandle: function (index) {
+    this.setState({selectedImageIndex: index});
+  },
+
+  zoomClickedHandle: function () {
+    this.setState({zoom: true});
+  },
+
+  zoomClosedHandle: function () {
+    this.setState({zoom: false});
+  },
+
+  renderThumbnails: function () {
+    var that = this;
+    var thumbnails = this.props.images.map(function (image, index) {
+      var classes = classNames({
+        'dress-preview-thumbnails-item': true,
+        'selected': index === that.state.selectedImageIndex
+      });
+      var key = 'dress-preview-thumb' + index;
+
+      return (
+        <li key={key} className={classes} onClick={that.thumbnailSelectedHandle.bind(null, index)}>
+          <img src={image.thumbnailUrl} />
+        </li>
+      );
     });
+
+    return (
+      <ul className="dress-preview-thumbnails">
+        {thumbnails}
+      </ul>
+    );
   },
 
   render: function() {
+    var previewImage = this.props.images[this.state.selectedImageIndex];
+
     return (
       <div className="dress-preview">
-        <div className="preview panzoom-parent">
-          <img ref="panzoom"  src="/assets/wedding-atelier/customization_experience/dress_preview.png"/>
+        <div className="preview">
+          <img src={previewImage.url}/>
         </div>
-        <div className="controls">
-          <div ref="zoomin" className="zoom in">
-            <span>+</span>
+        <div className="dress-preview-controls">
+          <div className="dress-preview-zoom-in" onClick={this.zoomClickedHandle}></div>
+          <div className="dress-preview-reset">
+            <a href="#">Reset</a>
           </div>
-          <div ref="zoomout" className="zoom out">
-            <span>-</span>
-          </div>
-          <div ref="reset" className="zoom reset">
-            <a>Reset</a>
-          </div>
-          <div>
+          <div className="dress-preview-details">
             <a href="#">Details</a>
           </div>
-
         </div>
+        <div className="dress-preview-pagination">
+          {this.renderThumbnails()}
+        </div>
+        <ZoomModal
+          images={this.props.images}
+          selectedImageIndex={this.state.selectedImageIndex}
+          visible={this.state.zoom}
+          zoomClosedHandle={this.zoomClosedHandle}
+          thumbnailSelectedHandle={this.thumbnailSelectedHandle}/>
       </div>
     );
   }

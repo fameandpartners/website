@@ -88,7 +88,7 @@ var DesktopCustomizations = React.createClass({
           <CustomizationsContainer {...customizationsContainerProps} />
         </div>
         <div className="customization-panel col-sm-6">
-          <DressPreview selectedOptions={this.props.selectedOptions}/>
+          <DressPreview selectedOptions={this.props.selectedOptions} images={[{ thumbnailUrl: 'http://www.htmlgoodies.com/images/pb1.gif', url: 'http://www.htmlgoodies.com/images/paperboy.gif'},{ thumbnailUrl: 'http://www.yourhtmlsource.com/images/media/banjotooiesmall.jpg', url: 'http://www.yourhtmlsource.com/images/media/banjotooiebig.jpg'}]}/>
         </div>
         <div className="footer">
           <div className="favorites col-md-6">
