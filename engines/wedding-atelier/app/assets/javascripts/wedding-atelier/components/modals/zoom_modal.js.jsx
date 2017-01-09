@@ -45,9 +45,9 @@ var ZoomModal = React.createClass({
     var image = this.props.images[this.state.selectedImageIndex];
 
     return (
-      <div ref="zoomModal" id="zoom-modal" className="zoom-modal" style={{display: 'block'}}>
-        <div className="close-zoom" onClick={this.closeHandle}>x</div>
-        <div className="img">
+      <div ref="zoomModal" id="zoom-modal" className="zoom-modal" style={{display: 'none'}}>
+        <div className="close-zoom" onClick={this.closeHandle}></div>
+        <div className="zoom-modal-image">
           <img src={image ? image.url : this.props.defaultImageUrl} />
         </div>
         <div className="zoom-modal-pagination">

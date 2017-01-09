@@ -5,18 +5,33 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 2;
 
   .close-zoom {
-    right: 10px;
+    background: transparent image-url('wedding-atelier/close.svg') center center no-repeat;
+    cursor: pointer;
+    height: 50px;
+    right: 25px;
     position: absolute;
-    top: 10px;
+    top: 25px;
+    width: 50px;
+  }
+
+  .zoom-modal-image {
+    max-height: 100%;
+    overflow-y: auto;
+
+    img {
+      display: block;
+      margin: 0 auto;
+      padding: 10px auto;
+    }
   }
 
   .zoom-modal-pagination {
-    bottom: 10px;
+    bottom: 40px;
     position: absolute;
-    right: 10px;
+    right: 30px;
   }
 
   .zoom-modal-thumbnails {
