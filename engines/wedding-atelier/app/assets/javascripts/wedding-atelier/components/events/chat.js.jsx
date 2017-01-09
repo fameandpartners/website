@@ -7,7 +7,9 @@ var Chat = React.createClass({
     profile_photo: React.PropTypes.string,
     username: React.PropTypes.string,
     user_id: React.PropTypes.number,
-    filestack_key: React.PropTypes.string
+    filestack_key: React.PropTypes.string,
+    getDresses: React.PropTypes.func,
+    setDresses: React.PropTypes.func
   },
 
   getInitialState: function(){
@@ -26,7 +28,23 @@ var Chat = React.createClass({
       var accessManager = new Twilio.AccessManager(data.token);
       var messagingClient = new Twilio.IPMessaging.Client(accessManager);
       var channelName = 'wedding-atelier-channel-' + that.props.event_id;
+      var notificationsChannelName = 'wedding-atelier-notifications-' + that.props.event_id;
 
+      // notifications channel
+      messagingClient.getChannelByUniqueName(notificationsChannelName).then(function(notificationChannel) {
+        if (notificationChannel) {
+          that.setupNotificationsChannel(notificationChannel);
+        } else {
+          messagingClient.createChannel({
+            uniqueName: notificationsChannelName,
+            friendlyName: 'Notifications for: ' + that.props.wedding_name
+          }).then(function(notificationChannel) {
+              that.setupNotificationsChannel(notificationChannel);
+          });
+        }
+      });
+
+      // normal messaging client
       messagingClient.getChannelByUniqueName(channelName).then(function(channel) {
         if (channel) {
           that.setupChannel(channel);
@@ -46,6 +64,33 @@ var Chat = React.createClass({
 
   componentDidUpdate: function() {
     this.scrollToBottom();
+  },
+
+  setupNotificationsChannel: function(notificationsChannel) {
+    var that = this;
+
+    notificationsChannel.join().then(function(channel) {
+      console.log('Joined notifications channel as ' + that.props.username);
+    });
+
+    // Listen for new messages sent to the channel
+    notificationsChannel.on('messageAdded', function (message) {
+      // var messages = that.state.messages.slice();
+      var parsedMsg = JSON.parse(message.body);
+
+      if (parsedMsg.type === "dress-like") {
+        dresses = that.props.getDresses();
+
+        var index = dresses.findIndex(function(dress) {
+          return dress.id === parsedMsg.dress.id;
+        });
+
+        dresses[index] = parsedMsg.dress;
+        that.props.setDresses(dresses);
+      }
+    });
+
+    this.notificationsChannel = notificationsChannel;
   },
 
   setupChannel: function (generalChannel){
@@ -184,7 +229,11 @@ var Chat = React.createClass({
     this.generalChannel.sendMessage(JSON.stringify(message));
   },
 
-  getMessages() {
+  sendNotification: function(message) {
+    this.notificationsChannel.sendMessage(JSON.stringify(message));
+  },
+
+  getRenderedMessages() {
     var msgs = this.state.messages.slice();
     var tempAuthor = null;
     var showAuthor = true;
@@ -210,6 +259,16 @@ var Chat = React.createClass({
       if(message.type === 'simple') {
         msgComp = (<ChatSimpleMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"simple-message" + index}/>);
       } else if (message.type === 'dress') {
+
+        dresses = this.props.getDresses();
+        var dress = dresses.find(function(dress) {
+          return dress.id === message.content.id ? dress : null ;
+        });
+        if (dress) {
+          // referencing directly the dress
+          message.content = dress;
+        }
+        // Forming the mssage with the component...
         msgComp = (<ChatDressMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"dress-message" + index}/>);
       } else if (message.type === 'image') {
         msgComp = (<ChatImageMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"image-message" + index}/>);
@@ -217,7 +276,7 @@ var Chat = React.createClass({
       tempAuthor = message.author;
 
       return msgComp;
-    });
+    }.bind(this));
 
     return messages;
   },
@@ -282,7 +341,7 @@ var Chat = React.createClass({
   },
 
   render: function(){
-    var messages = this.getMessages();
+    var messages = this.getRenderedMessages();
     var typing = this.getWhoisTyping();
     var chatMembers = this.getChatMembers();
 

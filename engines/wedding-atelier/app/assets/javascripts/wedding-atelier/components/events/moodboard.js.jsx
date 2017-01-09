@@ -13,9 +13,33 @@ var MoodBoardEvent = React.createClass({
     filestack_key: React.PropTypes.string
   },
 
-  getInitialState: function (){
+  getDresses: function() {
+    return this.state.event.dresses;
+  },
+
+  setDresses: function(dresses) {
+    var event = $.extend({}, this.state.event);
+    event.dresses = dresses;
+    this.setState({event: event});
+    this.refs.Chat.forceUpdate();
+  },
+
+  handleLikeDress: function(i, callback) {
+    var event = _extends({}, this.state.event);
+    event.dresses[i].love_count++;
+
+    this.refs.Chat.sendNotification({
+      type: "dress-like",
+      dress: event.dresses[i]
+    });
+
+    this.setDresses(event.dresses);
+    callback();
+  },
+
+  getInitialState: function () {
     return {
-      chat: React.createElement(Chat, {
+        chat: React.createElement(Chat, {
         twilio_token_path: this.props.twilio_token_path,
         event_id: this.props.event_id,
         wedding_name: this.props.wedding_name,
@@ -23,6 +47,8 @@ var MoodBoardEvent = React.createClass({
         username: this.props.username,
         user_id: this.props.user_id,
         filestack_key: this.props.filestack_key,
+        getDresses: this.getDresses,
+        setDresses: this.setDresses,
         ref: 'Chat'
       }),
       event: {
@@ -57,12 +83,10 @@ var MoodBoardEvent = React.createClass({
 
         this.setState({event: event});
         this.setState({event_backup: event_backup});
+        this.renderChat();
+        this.handleBrowserResizing();
       }.bind(this)
     });
-  },
-
-  componentDidMount: function (){
-    this.handleBrowserResizing();
   },
 
   renderChat: function(where) {
@@ -80,8 +104,6 @@ var MoodBoardEvent = React.createClass({
   },
 
   handleBrowserResizing: function(){
-    this.renderChat();
-
     $(window).resize(function(e) {
       if (e.target.innerWidth > 768 ) {
         $('.moodboard-tabs a[href="#bridesmaid-dresses"]').tab('show');
@@ -182,7 +204,7 @@ var MoodBoardEvent = React.createClass({
                 <div id="chat-mobile" className="tab-pane" role="tabpanel">
                   {this.state.right_chat}
                 </div>
-                <div id="bridesmaid-dresses" className="tab-pane active" role="tabpanel">
+                <div id="bridesmaid-dresses" className="tab-pane active center-block" role="tabpanel">
                   <div className="add-dress-box hidden">
                     <button className="add">Add your first dress</button>
                   </div>
@@ -191,7 +213,8 @@ var MoodBoardEvent = React.createClass({
                   </div>
                   <div className="dresses-list center-block">
                     <DressTiles dresses={this.state.event.dresses}
-                      sendDressToChatFn={this.sendDressToChatFn} />
+                      sendDressToChatFn={this.sendDressToChatFn}
+                      handleLikeDress={this.handleLikeDress} />
                   </div>
                 </div>
                 <div id="wedding-details" className="tab-pane" role="tabpanel">

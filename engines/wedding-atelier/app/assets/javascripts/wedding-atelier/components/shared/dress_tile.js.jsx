@@ -2,13 +2,16 @@ var DressTile = React.createClass({
 
   propTypes: {
     sendDressToChatFn: React.PropTypes.func,
+    handleLikeDress: React.PropTypes.func,
+    index: React.PropTypes.number,
     dress: React.PropTypes.shape({
       id: React.PropTypes.number,
       title: React.PropTypes.string,
       image: React.PropTypes.string,
       author: React.PropTypes.string,
       price: React.PropTypes.number,
-      loveCount: React.PropTypes.number
+      love_count: React.PropTypes.number,
+
     })
   },
 
@@ -17,7 +20,9 @@ var DressTile = React.createClass({
   },
 
   handleLoveIt: function() {
-    this.setState({loveClass: 'icon-liked'})
+    this.props.handleLikeDress(this.props.index, function() {
+      this.setState({loveClass: 'icon-liked'});
+    }.bind(this));
   },
 
   sendToChatHandler: function() {
