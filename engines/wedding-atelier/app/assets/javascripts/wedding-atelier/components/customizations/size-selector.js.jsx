@@ -58,8 +58,6 @@ var SizeSelector = React.createClass({
     this.props.selectCallback('size', size);
   },
 
-
-
   assistantSelectedHandle: function(assistant) {
     var size = this.props.sizes.filter(function (size) {
       return size.id === assistant.user_profile.dress_size_id;
