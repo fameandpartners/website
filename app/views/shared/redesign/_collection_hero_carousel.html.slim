@@ -1,9 +1,9 @@
 // HOMEPAGE HERO CAROUSEL
 
 // Carousel Item 1
-- current_tile_image = "homepage/hero-featured/dec-09-featured-1.jpg"
-- current_tile_image_mob = "homepage/hero-featured/dec-09-featured-1-mob.jpg"
-= link_to inside_out_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left white-text", data: { description: "The INSIDE/OUT Collection" }
+- current_tile_image = "homepage/hero-featured/jan-11-featured-1.jpg"
+- current_tile_image_mob = "homepage/hero-featured/jan-11-featured-1-mob.jpg"
+= link_to "/pre-season-evening-collection", class: "main-hero-wrap hero-wrap copy-left white-text", data: { description: "The Pre-Season Evening Collection" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -14,20 +14,28 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-4.col-md-offset-7.col-lg-3.col-lg-offset-9
-          .copy-wrap
+        .col-md-4.col-md-offset-4
+          .copy-wrap.extra-padding-left
             h2.heading.no-margin-md
-              span Laid back <br class="visible-lg">is the new <br class="visible-lg">black.
+              span The <em>pre-</em><br class="visible-lg">season evening collection.
               span.sub-heading
-                | Look fancy, feel fabulous in the INSIDE/OUT Collection.
+                .text-uppercase.visible-xs.visible-sm The <em>pre-</em>season evening collection.
+                | See it now. Get it first. <span class="visible-lg visibile-md">Customize it the way you want.</span>
             .cta-wrapper
               span.btn-md.btn-featured
-                | Shop and <span class="copy-highlight">Customize</span>
+                | View the <span class="copy-highlight">Collection</span>
 
 // Carousel Item 2
-- current_tile_image = "homepage/hero-featured/dec-09-featured-2.jpg"
-- current_tile_image_mob = "homepage/hero-featured/dec-09-featured-2-mob.jpg"
-= link_to inside_out_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "Style meets substance" }
+- current_tile_image = "homepage/hero-featured/jan-11-featured-2.jpg"
+- current_tile_image_mob = "homepage/hero-featured/jan-11-featured-2-mob.jpg"
+
+- if current_site_version.is_australia?
+  - item_price = "$250"
+- else
+  - item_price = "$200"
+
+// TODO: add real URL
+= link_to "#", class: "main-hero-wrap hero-wrap copy-left", data: { description: "Back magic" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -38,21 +46,20 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-3.col-md-offset-2
+        .col-md-3.col-md-offset-5
           .copy-wrap
             h2.heading.no-margin-md
-              span Style meets <br class="visible-lg">substance.
+              span Back Magic.
               span.sub-heading
-                | $5 of every sale goes to women's empowerment charities.
+                | Introducing the Backless Starlet. Understated elegance for under #{item_price}.
             .cta-wrapper
               span.btn-md.btn-featured
-                | Dress Up, <span class="copy-highlight">Give Back</span>
+                | Shop <span class="copy-highlight">Now</span>
 
 // Carousel Item 3
-- current_tile_image = "homepage/hero-featured/dec-09-featured-3.jpg"
-- current_tile_image_mob = "homepage/hero-featured/dec-09-featured-3-mob.jpg"
-
-= link_to evening_hours_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left", data: { description: "Time to (cocktail) party" }
+- current_tile_image = "homepage/hero-featured/jan-11-featured-3.jpg"
+- current_tile_image_mob = "homepage/hero-featured/jan-11-featured-3-mob.jpg"
+= link_to inside_out_collection_landing_page_path, class: "main-hero-wrap hero-wrap copy-left white-text", data: { description: "Relax, already" }
   picture.media-wrap
     source media="(max-width: 991px)" srcset="#{image_path(current_tile_image_mob)}"
     source media="(min-width: 992px)" srcset="#{image_path(current_tile_image)}"
@@ -63,12 +70,12 @@
   .content-wrap
     .container-fluid
       .row
-        .col-md-3.col-md-offset-3.extra-padding-left
+        .col-md-3.col-md-offset-1
           .copy-wrap
             h2.heading.no-margin-md
-              span Cocktail <br class="visible-lg">hour goes custom.
+              span Relax, already.
               span.sub-heading
-                | Find your new go-to party <br class="visible-lg">dress and make it your own.
+                | Custom and comfortable. <br class="visible-lg">Because when the fit is right, <br class="visible-lg">it's gonna be a good night.
             .cta-wrapper
               span.btn-md.btn-featured
-                | Shop <span class="copy-highlight">party looks</span>
+                | Shop <span class="copy-highlight">Now</span>
