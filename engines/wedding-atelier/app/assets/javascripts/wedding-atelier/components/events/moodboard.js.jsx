@@ -24,13 +24,21 @@ var MoodBoardEvent = React.createClass({
     this.refs.Chat.forceUpdate();
   },
 
-  handleLikeDress: function(i, callback) {
+  handleLikeDress: function(dress, callback) {
     var event = _extends({}, this.state.event);
-    event.dresses[i].love_count++;
+    var dress = _.findWhere(event.dresses, {id: dress.id});
+
+    if (dress.liked) {
+      dress.love_count--;
+    } else {
+      dress.love_count++;
+    }
+
+    dress.liked = !dress.liked;
 
     this.refs.Chat.sendNotification({
       type: "dress-like",
-      dress: event.dresses[i]
+      dress: dress
     });
 
     this.setDresses(event.dresses);
@@ -49,6 +57,7 @@ var MoodBoardEvent = React.createClass({
         filestack_key: this.props.filestack_key,
         getDresses: this.getDresses,
         setDresses: this.setDresses,
+        handleLikeDress: this.handleLikeDress,
         ref: 'Chat'
       }),
       event: {

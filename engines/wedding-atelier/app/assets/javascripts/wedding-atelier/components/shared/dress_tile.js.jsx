@@ -11,7 +11,7 @@ var DressTile = React.createClass({
       author: React.PropTypes.string,
       price: React.PropTypes.number,
       love_count: React.PropTypes.number,
-
+      liked: React.PropTypes.bool
     })
   },
 
@@ -20,9 +20,7 @@ var DressTile = React.createClass({
   },
 
   handleLoveIt: function() {
-    this.props.handleLikeDress(this.props.index, function() {
-      this.setState({loveClass: 'icon-liked'});
-    }.bind(this));
+    this.props.handleLikeDress(this.props.dress);
   },
 
   sendToChatHandler: function() {
@@ -30,7 +28,8 @@ var DressTile = React.createClass({
   },
 
   render: function () {
-    var loveClass = 'icon-liked';
+    var loveClass = this.props.dress.liked ? 'icon-liked' : 'icon-unliked';
+
     return (
         <div className="dress-box" key={this.props.dress.id}>
           <div className="top-info">
@@ -38,7 +37,7 @@ var DressTile = React.createClass({
           </div>
           <div className="dress-box-header">
             <div className="likes">
-              <span className={this.state.loveClass} onClick={this.handleLoveIt}></span> {this.props.dress.love_count}
+              <span className={loveClass} onClick={this.handleLoveIt}></span> {this.props.dress.love_count}
             </div>
             <a href="#" className="icon-close pull-right"></a>
           </div>

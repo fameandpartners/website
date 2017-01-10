@@ -9,4 +9,5 @@
 //= require classnames
 //= require panzoom
 //= require moment-2.17.1.min
+//= require underscore-min
 //= require_tree

@@ -1,9 +1,25 @@
 var ChatDressMessage = React.createClass({
 
   propTypes: {
-    message: React.PropTypes.object,
+    message: React.PropTypes.shape({
+      author: React.PropTypes.string,
+      content: React.PropTypes.shape({
+        author: React.PropTypes.string,
+        color: React.PropTypes.object,
+        id: React.PropTypes.number,
+        love_count: React.PropTypes.number,
+        price: React.PropTypes.number,
+        value: React.PropTypes.string,
+        liked: React.PropTypes.bool
+      }),
+      profilePhoto: React.PropTypes.string,
+      time: React.PropTypes.number,
+      type: React.PropTypes.string,
+      user_id: React.PropTypes.number
+    }),
     showAuthor: React.PropTypes.bool,
-    isOwnerMessage: React.PropTypes.bool
+    isOwnerMessage: React.PropTypes.bool,
+    handleLikeDress: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -18,7 +34,7 @@ var ChatDressMessage = React.createClass({
   },
 
   handleLoveIt: function() {
-    this.setState({loveClass: 'icon-liked'})
+    this.props.handleLikeDress(this.props.message.content);
   },
 
   formatDate: function(time) {
@@ -57,7 +73,7 @@ var ChatDressMessage = React.createClass({
 
   render: function() {
     var dress = this.props.message.content;
-    var loveClass = 'icon-liked';
+    var loveClass = dress.liked ? 'icon-liked' : 'icon-unliked';
     var dressPositionStyle = (this.props.isOwnerMessage ? ' pull-right ' : ' pull-left ');
 
     return (
@@ -70,7 +86,7 @@ var ChatDressMessage = React.createClass({
             <div className="row">
               <div className="col-xs-3 chat-likes-container">
                 <div className="likes">
-                  <span className={this.state.loveClass} onClick={this.handleLoveIt}></span>
+                  <span className={loveClass} onClick={this.handleLoveIt}></span>
                   <span>({dress.love_count})</span>
                 </div>
               </div>

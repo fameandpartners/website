@@ -9,7 +9,8 @@ var Chat = React.createClass({
     user_id: React.PropTypes.number,
     filestack_key: React.PropTypes.string,
     getDresses: React.PropTypes.func,
-    setDresses: React.PropTypes.func
+    setDresses: React.PropTypes.func,
+    handleLikeDress: React.PropTypes.func
   },
 
   getInitialState: function(){
@@ -269,7 +270,7 @@ var Chat = React.createClass({
           message.content = dress;
         }
         // Forming the mssage with the component...
-        msgComp = (<ChatDressMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"dress-message" + index}/>);
+        msgComp = (<ChatDressMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"dress-message" + index} handleLikeDress={this.props.handleLikeDress} />);
       } else if (message.type === 'image') {
         msgComp = (<ChatImageMessage showAuthor={showAuthor} isOwnerMessage={isOwnerMessage} message={message} key={"image-message" + index}/>);
       }
