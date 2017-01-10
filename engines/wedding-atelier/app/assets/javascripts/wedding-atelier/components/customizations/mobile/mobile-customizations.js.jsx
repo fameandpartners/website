@@ -9,8 +9,7 @@ var MobileCustomizations = React.createClass({
     startOverCallback: React.PropTypes.func,
     subTotal: React.PropTypes.number,
     customizationsCost: React.PropTypes.number,
-    eventSlug: React.PropTypes.string,
-    currentUser: React.PropTypes.object
+    eventSlug: React.PropTypes.string
   },
 
   componentDidMount: function() {
@@ -43,8 +42,7 @@ var MobileCustomizations = React.createClass({
       siteVersion:  this.props.siteVersion,
       subTotal: this.props.subTotal,
       customizationsCost: this.props.customizationsCost,
-      eventSlug: this.props.eventSlug,
-      currentUser: this.props.currentUser
+      eventSlug: this.props.eventSlug
     });
 
     var customizationsMenuProps = $.extend(defaultProps, {
