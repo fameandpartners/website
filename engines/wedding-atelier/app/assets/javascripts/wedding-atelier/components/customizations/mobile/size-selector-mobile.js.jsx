@@ -15,7 +15,7 @@ var SizeSelectorMobile = React.createClass({
     return {
       assistant: user,
       height: user.user_profile.height,
-      size: {}
+      size: {id: user.user_profile.dress_size_id}
     };
   },
 
@@ -50,6 +50,7 @@ var SizeSelectorMobile = React.createClass({
   },
 
   sizeSelectedHandle: function(size) {
+    $(this.refs.heightSelect).trigger('change');
     this.setState({
       assistant: null,
       size: size
@@ -79,7 +80,7 @@ var SizeSelectorMobile = React.createClass({
 
     var optionsForHeights = this.props.heights.map(function(group) {
       var heights = group[1].map(function(height, index){
-        return(<option key={index} value={height}>{height}</option>);
+        return(<option key={index} value={group[0]}>{height}</option>);
       });
 
       return (

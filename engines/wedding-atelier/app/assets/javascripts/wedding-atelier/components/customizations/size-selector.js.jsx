@@ -50,11 +50,15 @@ var SizeSelector = React.createClass({
       assistant: null,
       size: size
     });
-    if(this.state.height) {
+    if(this.state.height && this.state.height !== this.props.currentUser.user.user_profile.height) {
       this.props.selectCallback('height', this.state.height);
-      this.props.selectCallback('size', size);
+    } else {
+      $(this.refs.heightSelect).trigger('change');
     }
+    this.props.selectCallback('size', size);
   },
+
+
 
   assistantSelectedHandle: function(assistant) {
     var size = this.props.sizes.filter(function (size) {
@@ -73,7 +77,7 @@ var SizeSelector = React.createClass({
     var that = this;
     var optionsForHeights = this.props.heights.map(function(group) {
       var heights = group[1].map(function(height, index){
-        return(<option key={index} height={height}>{height}</option>);
+        return(<option key={index} value={group[0]}>{height}</option>);
       });
 
       return (
