@@ -1,4 +1,4 @@
-/ 18th November 2016 NOTE: this is a hardcoded version of the `lookbook/show.html.slim` template
+/ January 6th, 2016 NOTE: this is an adapted version of the `lookbook/show.html.slim` template
 / Cloudfront banner images couldn't be used in time, so this template is being used instead
 
 = render :partial => '/pages/robots'
@@ -8,10 +8,16 @@
 .page-lookbook.container-fluid.no-padding.no-scroll
 
   .hero-tile-carousel.js-hero-tile-carousel
-    - (1..7).each do |tile_index|
+    - (1..6).each do |tile_index|
+      - tile_image_path = image_path("landingpages/pre-prom-collection/hero-tile-#{tile_index}.jpg")
+      - tile_image_mob_path = image_path("landingpages/pre-prom-collection/hero-tile-#{tile_index}-mob.jpg")
       .main-hero-wrap.hero-wrap
         picture.media-wrap
-          = image_tag "https://s3.amazonaws.com/fandp-web-production-marketing/inside-out-collection/#{tile_index}.jpg", alt: "#{page.heading} #{tile_index}", class: 'img-responsive'
+          source media="(max-width: 991px)" srcset="#{tile_image_mob_path}"
+          source media="(min-width: 992px)" srcset="#{tile_image_path}"
+          img.img-responsive src="#{tile_image_path}" alt="#{page.heading} #{tile_index}" srcset="
+                #{tile_image_mob_path} 991w,
+                #{tile_image_path} 992w"
 
   .row
     .container
