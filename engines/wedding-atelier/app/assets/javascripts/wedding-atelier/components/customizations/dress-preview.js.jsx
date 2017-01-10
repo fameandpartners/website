@@ -7,12 +7,25 @@ var DressPreview = React.createClass({
   getInitialState: function () {
     return {
       selectedImageIndex: 0,
-      zoom: false
+      zoom: false,
+      loading: true
     };
   },
 
+  componentDidMount: function () {
+    this.isLoading();
+  },
+
+  isLoading: function () {
+    var that = this;
+    $(this.refs.dressPreview).imagesLoaded({background: true}).done(function (instance) {
+        that.setState({loading: false});
+    });
+  },
+
   thumbnailSelectedHandle: function (index) {
-    this.setState({selectedImageIndex: index});
+    this.isLoading();
+    this.setState({selectedImageIndex: index, loading: true});
   },
 
   zoomClickedHandle: function () {
@@ -50,9 +63,10 @@ var DressPreview = React.createClass({
     var previewImage = this.props.images[this.state.selectedImageIndex];
 
     return (
-      <div className="dress-preview">
+      <div ref="dressPreview" className="dress-preview">
         <div className="preview">
-          <img src={previewImage.url}/>
+          <img src={previewImage.url} style={{visibility: this.state.loading? 'hidden' : 'visible'}}/>
+          <ImageLoader loading={this.state.loading} />
         </div>
         <div className="dress-preview-controls">
           <div className="dress-preview-zoom-in" onClick={this.zoomClickedHandle}></div>
