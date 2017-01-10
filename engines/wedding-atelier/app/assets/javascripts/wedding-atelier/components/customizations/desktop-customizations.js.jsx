@@ -9,7 +9,8 @@ var DesktopCustomizations = React.createClass({
     startOverCallback: React.PropTypes.func,
     subTotal: React.PropTypes.number,
     customizationsCost: React.PropTypes.number,
-    eventSlug: React.PropTypes.string
+    eventSlug: React.PropTypes.string,
+    currentUser: React.PropTypes.object
   },
 
   getInitialState: function () {
@@ -75,7 +76,8 @@ var DesktopCustomizations = React.createClass({
       customizations: this.props.customizations,
       selectedOptions: this.props.selectedOptions,
       showLateralMenuCallback: this.changeLateralMenuState,
-      closeCallback: this.close
+      closeCallback: this.close,
+      currentUser: this.props.currentUser
     });
 
     return (
@@ -86,7 +88,7 @@ var DesktopCustomizations = React.createClass({
           <CustomizationsContainer {...customizationsContainerProps} />
         </div>
         <div className="customization-panel col-sm-6">
-          <DressPreview selectedOptions={this.props.selectedOptions}/>
+          <DressPreview selectedOptions={this.props.selectedOptions} images={[{ thumbnailUrl: '/assets/wedding-atelier/customization_experience/default_dress.png', url: '/assets/wedding-atelier/customization_experience/dress_preview.png'}, { thumbnailUrl: '/assets/wedding-atelier/customization_experience/default_dress.png', url: '/assets/wedding-atelier/customization_experience/dress_preview.png'}]}/>
         </div>
         <div className="footer">
           <div className="favorites col-md-6">
@@ -118,39 +120,13 @@ var DesktopCustomizations = React.createClass({
             <SaveDressButton
               eventSlug={this.props.eventSlug}
               selectedOptions={this.props.selectedOptions}
-              mobile={false}
               />
-            <AddToCartButton customizations={this.props.selectedOptions} />
+            <button className="btn-black">
+               add to cart
+            </button>
           </div>
         </div>
       </div>
     );
   }
 });
-
-var AddToCartButton = React.createClass({
-  propTypes: {
-    customizations: React.PropTypes.object
-  },
-  handleAddToCart: function () {
-    customizations = this.props.customizations;
-    size_id = customizations.size.id || customizations.size.user_profile.dress_size_id;
-    var attrs = {
-      size_id: size_id,
-      color_id: customizations.colour.id,
-      variant_id: customizations.silhouette.variant_id,
-      height: customizations.height,
-      length_id: customizations.length.id,
-      fabric_id: customizations.fabric.id,
-      customizations_ids: [customizations.fit.id, customizations.style.id]
-      //making_options_ids: ""
-    }
-    shoppingCart = new helpers.ShoppingCart({});
-    shoppingCart.addProduct(attrs);
-  },
-  render: function(){
-    return(
-        <button className="btn-black" onClick={this.handleAddToCart}> add to cart </button>
-    )
-  }
-})

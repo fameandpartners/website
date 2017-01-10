@@ -1,8 +1,7 @@
 var CustomizationsModal = React.createClass({
   propTypes: {
     selectedOptions: React.PropTypes.object,
-    siteVersion: React.PropTypes.string,
-    editDesignCallback: React.PropTypes.func
+    siteVersion: React.PropTypes.string
   },
 
   presentationFor: function(customization){
@@ -54,7 +53,7 @@ var CustomizationsModal = React.createClass({
               </div>
               <div className="modal-footer">
                 <div className="action-buttons">
-                  <button className="btn btn-transparent-inverse" onClick={this.props.editDesignCallback} data-dismiss="modal" aria-label="Close">Edit Design</button>
+                  <button className="btn btn-transparent-inverse">Edit Design</button>
                 </div>
               </div>
             </div>

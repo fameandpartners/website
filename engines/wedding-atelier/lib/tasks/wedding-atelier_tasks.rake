@@ -45,7 +45,7 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(strapless_attrs, strapless_styles,
-                          strapless_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          strapless_fits, taxon, base_option_types)
 
     # Fit and Flare  -----------------------------------------------------------------------------
     fit_and_flare_styles = [
@@ -72,7 +72,7 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(fit_and_flare_attrs, fit_and_flare_styles,
-                          fit_and_flare_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          fit_and_flare_fits, taxon, base_option_types)
 
     # Shift --------------------------------------------------------------------------------------
     shift_styles = [
@@ -100,7 +100,7 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(shift_attrs, shift_styles,
-                          shift_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          shift_fits, taxon, base_option_types)
 
     # Slip ---------------------------------------------------------------------------------------
     slip_styles = [
@@ -128,7 +128,7 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(slip_attrs, slip_styles,
-                          slip_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          slip_fits, taxon, base_option_types)
 
     # Wrap ---------------------------------------------------------------------------------------
     wrap_styles = [
@@ -156,7 +156,7 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(wrap_attrs, wrap_styles,
-                          wrap_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          wrap_fits, taxon, base_option_types)
 
     # Tri-cup ------------------------------------------------------------------------------------
     tri_cup_styles = [
@@ -184,7 +184,7 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(tri_cup_attrs, tri_cup_styles,
-                          tri_cup_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          tri_cup_fits, taxon, base_option_types)
 
     # Two piece ----------------------------------------------------------------------------------
     two_piece_styles = [
@@ -212,7 +212,7 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(two_piece_attrs, two_piece_styles,
-                          two_piece_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          two_piece_fits, taxon, base_option_types)
 
     # Multi way ----------------------------------------------------------------------------------
     multi_way_styles = [
@@ -238,7 +238,7 @@ namespace :wedding_atelier do
     }
 
     find_or_create_product(multi_way_attrs, multi_way_styles,
-                          multi_way_fits, taxon, base_option_types, {colours: colours, sizes: sizes})
+                          multi_way_fits, taxon, base_option_types)
   end
 
   def find_or_create_option_type(name, presentation, option_values)
@@ -263,7 +263,7 @@ namespace :wedding_atelier do
     end
   end
 
-  def find_or_create_product(attrs, styles, fits, taxon, option_types, options)
+  def find_or_create_product(attrs, styles, fits, taxon, option_types)
     p = Spree::Product.find_or_initialize_by_name(attrs[:name])
     p.update_attributes attrs
     create_customizations(p, styles, 'style')
@@ -271,19 +271,6 @@ namespace :wedding_atelier do
     p.taxons << taxon unless p.taxons.include?(taxon)
     option_types.each do |ot|
       p.option_types << ot unless p.option_types.include?(ot)
-    end
-    options[:colours].option_values.each do |colour|
-      next if p.product_color_values.exists?(option_value_id: colour.id)
-      p.product_color_values.create(option_value: colour, active: true, custom: false)
-    end
-
-    options[:sizes].option_values.each do |size|
-      sku = p.description + size.name.gsub('/', '')
-      v = p.variants.find_or_create_by_sku(sku) do |variant|
-        variant.on_demand = true
-        variant.cost_currency = 'USD'
-      end
-      v.option_values << size unless v.option_values.include?(size)
     end
   end
 end

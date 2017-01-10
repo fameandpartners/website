@@ -2,7 +2,8 @@ var CustomizationExperience = React.createClass({
   propTypes: {
     customizationsUrl: React.PropTypes.string,
     siteVersion: React.PropTypes.string,
-    eventSlug: React.PropTypes.string
+    eventSlug: React.PropTypes.string,
+    currentUser: React.PropTypes.object
   },
 
   getInitialState: function() {
@@ -39,6 +40,7 @@ var CustomizationExperience = React.createClass({
       var newState = $.extend({}, this.state),
           silhouette = data.customization.silhouettes[0];
       newState.selectedOptions.silhouette = silhouette
+      newState.selectedOptions.size = this.props.currentUser.user;
       newState.customizations = data.customization;
       newState.customizations.fits = silhouette.fits;
       newState.customizations.styles = silhouette.styles;
@@ -90,10 +92,6 @@ var CustomizationExperience = React.createClass({
     }});
   },
 
-  editDesignCallback: function () {
-    $('.customization-experience--mobile .js-slick-hook').slick('slickGoTo', 1);
-  },
-
   render: function(){
     var props = {
       selectedOptions: this.state.selectedOptions,
@@ -105,7 +103,8 @@ var CustomizationExperience = React.createClass({
       siteVersion: this.props.siteVersion,
       subTotal: this.state.subTotal,
       customizationsCost: this.state.customizationsCost,
-      eventSlug: this.props.eventSlug
+      eventSlug: this.props.eventSlug,
+      currentUser: this.props.currentUser
     };
 
     return (
@@ -114,8 +113,7 @@ var CustomizationExperience = React.createClass({
         <DesktopCustomizations {...props} />
         <CustomizationsModal
           siteVersion={this.props.siteVersion}
-          selectedOptions={this.state.selectedOptions}
-          editDesignCallback={this.editDesignCallback}/>
+          selectedOptions={this.state.selectedOptions}/>
         <SaveDressModal
           eventSlug={this.props.eventSlug}
         />
