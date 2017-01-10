@@ -8,7 +8,7 @@
 //= require bootstrap-datepicker-1.6.4
 //= require classnames
 //= require moment-2.17.1.min
-
+//= require imagesloaded.min
 //= require libs/underscore-min
 
 //--------------------------
