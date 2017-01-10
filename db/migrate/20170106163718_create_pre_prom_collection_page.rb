@@ -4,7 +4,7 @@ class CreatePrePromCollectionPage < ActiveRecord::Migration
     {
       path:             '/pre-season-evening-collection',
       template_path:    '/landing_pages/pre_prom_collection',
-      pids:             %w().join(','),
+      pids:             '',
       heading:          'The Pre-Prom Collection',
       title:            'Evening Party Dresses',
       limit:            '99',
