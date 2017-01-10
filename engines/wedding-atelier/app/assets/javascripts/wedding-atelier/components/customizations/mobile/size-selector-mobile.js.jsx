@@ -96,12 +96,9 @@ var SizeSelectorMobile = React.createClass({
             type: "radio",
             name: "mobile-size",
             value: size.name,
-            onChange: that.sizeSelectedHandle.bind(null, size)
+            onChange: that.sizeSelectedHandle.bind(null, size),
+            checked: size.id === that.state.size.id || (that.state.assistant && size.id === that.state.assistant.user_profile.dress_size_id)
           };
-
-      if (size.id === that.state.size.id || (that.state.assistant && size.id === that.state.assistant.user_profile.dress_size_id)) {
-        inputProps.checked = true;
-      }
 
       return (
         <li key={index}>
@@ -118,12 +115,9 @@ var SizeSelectorMobile = React.createClass({
         type: 'radio',
         name: 'mobile-assistant',
         value: assistant,
-        onChange: that.assistantSelectedHandle.bind(null, assistant)
+        onChange: that.assistantSelectedHandle.bind(null, assistant),
+        checked: that.state.assistant ? assistant.id === that.state.assistant.id : false
       };
-
-      if (that.state.assistant) {
-        inputProps.checked = assistant.id === that.state.assistant.id;
-      }
 
       return (
         <li key={index}>
