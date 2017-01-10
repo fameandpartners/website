@@ -6,43 +6,33 @@ var SizeSelectorMobile = React.createClass({
     assistants: React.PropTypes.array,
     selectCallback: React.PropTypes.func.isRequired,
     showSizing: React.PropTypes.bool.isRequired,
-    showSizingCallback: React.PropTypes.func.isRequired
+    showSizingCallback: React.PropTypes.func.isRequired,
+    currentUser: React.PropTypes.object.isRequired
   },
 
   getInitialState: function() {
+    var user = $.extend({}, this.props.currentUser.user);
     return {
-      assistantSelected: false,
-      height: null,
-      size: {}
+      assistant: user,
+      height: user.user_profile.height,
+      size: {id: user.user_profile.dress_size_id}
     };
   },
 
-  componentWillMount: function() {
-    $(this.refs.heightSelect)
-      .select2({ minimumResultsForSearch: Infinity })
-      .on('change', function(e) {
-        this.props.selectCallback('height', e.target.value);
-        if(this.state.assistantSelected){
-          $('input[name="assistant"]').removeProp('checked');
-          // this following line is in order to reset if the menu shows the user name
-          // or a size no
-          this.props.selectCallback('size', { name: $('input[name="size"]:checked').val() });
-          this.setState({assistantSelected: false});
-        }
-      }.bind(this));
-  },
-
   componentDidMount: function () {
-    $(this.refs.heightSelect).select2();
+    var that = this;
+    $(this.refs.heightSelect).select2({
+      placeholder: this.props.currentUser.user.user_profile.height,
+      minimumResultsForSearch: Infinity
+    }).on('change', function (e) {
+      that.setState({
+        assistant: null,
+        height: e.target.value
+      });
+    }).val(this.state.assistant.user_profile.height);
   },
 
   close: function () {
-    this.setState({
-      assistantSelected: false,
-      height: null,
-      size: {}
-    });
-    $(this.refs.container).find(':checked').prop('checked', false);
     this.props.showSizingCallback(false);
   },
 
@@ -52,38 +42,45 @@ var SizeSelectorMobile = React.createClass({
     return size.name.match(regexp)[1];
   },
 
-  setSizeWithProfile: function(assistant) {
-    var newState = {};
-
-    $(this.refs.container).find('input[value="' + assistant.user_profile.dress_size + '"]').prop('checked', true);
-    $(this.refs.heightSelect).select2().val(assistant.user_profile.height).change();
-    newState.size = assistant;
-    newState.assistantSelected = true;
-    this.setState(newState);
-    this.changeHeight();
+  heightSelectedHandle: function (height) {
+    this.setState({
+      assistant: null,
+      height: height
+    });
   },
 
-  changeSize: function(size) {
-    $('input[name="assistant"]').removeProp('checked');
-    this.setState({size: size});
-    this.changeHeight();
+  sizeSelectedHandle: function(size) {
+    $(this.refs.heightSelect).trigger('change');
+    this.setState({
+      assistant: null,
+      size: size
+    });
   },
 
-  changeHeight: function () {
-    var height = $(ReactDOM.findDOMNode(this.refs.heightSelect)).val();
-    this.setState({height: height});
+  assistantSelectedHandle: function(assistant) {
+    var size = this.props.sizes.filter(function (size) {
+      return size.id === assistant.user_profile.dress_size_id;
+    });
+    $(this.refs.heightSelect).val(assistant.user_profile.height).trigger('change');
+    this.setState({
+      assistant: assistant,
+      size: size[0],
+      height: assistant.user_profile.height
+    });
   },
 
   apply: function () {
     this.props.selectCallback('height', this.state.height);
-    this.props.selectCallback('size', this.state.size);
+    this.props.selectCallback('size', this.state.assistant || this.state.size);
+    this.close();
   },
 
   render: function() {
+    var that = this;
 
-    var optionsForHeights = this.props.heights.map(function(group){
+    var optionsForHeights = this.props.heights.map(function(group) {
       var heights = group[1].map(function(height, index){
-        return(<option key={index} value={height}>{height}</option>);
+        return(<option key={index} value={group[0]}>{height}</option>);
       });
 
       return (
@@ -94,37 +91,42 @@ var SizeSelectorMobile = React.createClass({
     });
 
     var dressSizes = this.props.sizes.map(function(size, index){
-      var id = 'mobile-size-' + index;
+      var id = 'mobile-size-' + index,
+          inputProps = {
+            id: id,
+            type: "radio",
+            name: "mobile-size",
+            value: size.name,
+            onChange: that.sizeSelectedHandle.bind(null, size),
+            checked: size.id === that.state.size.id || (that.state.assistant && size.id === that.state.assistant.user_profile.dress_size_id)
+          };
+
       return (
         <li key={index}>
-          <input
-            id={id}
-            type="radio"
-            name="size"
-            value={size.name}
-            onClick={this.changeSize.bind(null, size)}
-             />
-          <label htmlFor={id}>{this.parsePresentation(size)}</label>
+          <input {...inputProps}/>
+          <label htmlFor={id}>{that.parsePresentation(size)}</label>
         </li>
       );
-    }.bind(this));
+    });
 
     var assistantsSizes = this.props.assistants.map(function(assistant, index) {
       var id = 'mobile-assistant-' + index;
+      var inputProps = {
+        id: id,
+        type: 'radio',
+        name: 'mobile-assistant',
+        value: assistant,
+        onChange: that.assistantSelectedHandle.bind(null, assistant),
+        checked: that.state.assistant ? assistant.id === that.state.assistant.id : false
+      };
 
       return (
         <li key={index}>
-          <input
-            id={id}
-            type="radio"
-            name="assistant"
-            value={assistant.user_profile.dress_size}
-            onClick={this.setSizeWithProfile.bind(this, assistant)}
-             />
+          <input {...inputProps}/>
           <label htmlFor={id}>{assistant.first_name}</label>
         </li>
       );
-    }.bind(this));
+    });
 
     var containerClasses = classNames({
       'customization-selector-mobile-size': true,
