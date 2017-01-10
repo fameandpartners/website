@@ -1,0 +1,27 @@
+.moodboard-tabs {
+  width: 90%;
+  height: calc(100% - 43px);
+
+  .nav-tabs {
+    min-width: 680px;
+    width: 680px;
+  }
+
+  .tab-content {
+    overflow: auto;
+    height: calc(100% - 34px);
+  }
+}
+
+@include screen-xs-and-sm {
+
+  .tab-chat {
+    display: inline-block !important;
+  }
+
+  .moodboard-tabs {
+    min-width: 100% !important;
+    height: 100% !important;
+  }
+
+}

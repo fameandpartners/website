@@ -1,0 +1,41 @@
+.dress-preview {
+  height: 400px;
+  position: relative;
+
+  .preview {
+    height: 90%;
+    margin: 0 auto;
+    width: auto;
+
+    @include screen-md {
+      width: 450px;
+    }
+
+    @include screen-sm {
+      width: 300px;
+    }
+  }
+
+  img {
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  .controls {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    .zoom {
+      cursor: pointer;
+      height: 32px;
+      margin: 0 auto;
+      width: 32px;
+    }
+  }
+
+  @include screen-sm {
+    height: calc(100% - 20px);
+  }
+
+}

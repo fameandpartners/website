@@ -1,0 +1,25 @@
+.my-account-panel {
+  width: 100%;
+
+  .tab-content {
+    max-width: 300px;
+    margin: 20px auto;
+  }
+
+  @include screen-sm {
+    max-width: 600px;
+    margin: 30px auto;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .tab-content {
+      margin: 60px auto;
+    }
+
+    .nav-tabs li{
+      width: 200px;
+    }
+  }
+}

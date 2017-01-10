@@ -3,6 +3,9 @@ module WeddingAtelier
     after_create :send_invitation_email
     attr_accessible :event_slug, :user_email
 
+    # scope :pending, -> { where(state: 'pending') }
+
+    validates :user_email, presence: true, uniqueness: { scope: :event_slug, allow_blank: false }
 
     def accept
       user = Spree::User.find_by_email(user_email)
@@ -12,6 +15,10 @@ module WeddingAtelier
         update_attribute(:state, 'accepted')
         event.save!
       end
+    end
+
+    def self.pending
+      Invitation.where(state: 'pending')
     end
 
     private

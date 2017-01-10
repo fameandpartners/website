@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161213021906) do
+ActiveRecord::Schema.define(:version => 20161223213100) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(:version => 20161213021906) do
     t.integer  "image_file_size"
     t.decimal  "price",              :precision => 8, :scale => 2
     t.integer  "product_id"
+    t.string   "customisation_type"
   end
 
   add_index "customisation_values", ["product_id"], :name => "index_customisation_values_on_product_id"
@@ -383,6 +384,8 @@ ActiveRecord::Schema.define(:version => 20161213021906) do
     t.decimal  "price",                   :precision => 8, :scale => 2, :default => 0.0
     t.integer  "size_id"
     t.string   "height",                                                :default => "standard"
+    t.integer  "fabric_id"
+    t.integer  "length_id"
   end
 
   add_index "line_item_personalizations", ["line_item_id"], :name => "index_line_item_personalizations_on_line_item_id"
@@ -1739,6 +1742,8 @@ ActiveRecord::Schema.define(:version => 20161213021906) do
     t.integer  "length_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "fit_id"
+    t.string   "height"
   end
 
   create_table "wedding_atelier_event_roles", :force => true do |t|
@@ -1768,8 +1773,8 @@ ActiveRecord::Schema.define(:version => 20161213021906) do
   create_table "wedding_atelier_user_profiles", :force => true do |t|
     t.integer "spree_user_id"
     t.string  "height"
-    t.string  "dress_size"
     t.boolean "trend_updates"
+    t.integer "dress_size_id"
   end
 
   create_table "wedding_atelier_users_event_roles", :id => false, :force => true do |t|

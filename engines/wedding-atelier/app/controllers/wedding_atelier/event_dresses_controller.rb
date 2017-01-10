@@ -9,10 +9,7 @@ module WeddingAtelier
     end
 
     def create
-      dress = event.dresses.create(
-        user_id: spree_current_user.id,
-        product_id: event_dress_params[:product_id]
-      )
+      dress = event.dresses.create(event_dress_params)
       render json: dress
     end
 
@@ -41,7 +38,7 @@ module WeddingAtelier
     end
 
     def event_dress_params
-      params[:event_dress]
+      params[:event_dress].merge(user_id: spree_current_user.id)
     end
 
   end

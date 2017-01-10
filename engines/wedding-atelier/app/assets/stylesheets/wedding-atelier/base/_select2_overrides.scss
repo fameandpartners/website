@@ -1,9 +1,9 @@
 .select2-container--default {
-  width: 340px !important;
+  width: 100% !important;
   border: 1px solid transparent;
-  @include screen-xs {
-    width: 260px !important;
-  };
+  // @include screen-md {
+  //   width: 100% !important;
+  // };
 
   &.select2-container--focus {
     border: 1px solid $black;

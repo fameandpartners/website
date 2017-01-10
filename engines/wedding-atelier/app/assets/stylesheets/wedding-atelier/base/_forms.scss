@@ -1,6 +1,6 @@
 label {
   @extend .text-uppercase;
-  margin: 10px 0 0;
+  margin: 15px 0 0;
   font-size: .85rem;
   font-weight: 700;
 }
@@ -33,8 +33,10 @@ label {
   label {
     color: $pinkish-grey-two;
     font-weight: 300;
-    font-size: .7rem;
+    font-size: .85rem;
     text-transform: none;
+    margin-bottom: 15px;
+    margin-left: 44px;
   }
 
   [type="checkbox"] {

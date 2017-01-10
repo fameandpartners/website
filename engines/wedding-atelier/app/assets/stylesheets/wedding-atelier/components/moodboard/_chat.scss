@@ -1,0 +1,98 @@
+#events__moodboard {
+ .chat {
+    padding: 0;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: 1px 2px 5px #888888;
+
+    /* chat header */
+
+    .chat-general-info {
+      height: 40px;
+      padding: 10px 5px;
+      border-bottom: 1px solid $greyish;
+      width: 98%;
+    }
+
+    .chat-header-left-side {
+      display: inline-block;
+    }
+
+    .chat-header-right-side {
+      display: inline-block;
+
+      .stylist-photo {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    /* chat messages */
+
+    .chat-log {
+      width: 100%;
+      padding: 50px;
+      overflow: auto;
+
+      flex-grow: 1;
+    }
+
+    .msg-simple {
+      width: 100%;
+    }
+
+    .msg-data {
+
+      img.photo {
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+      }
+
+      .profile {
+        color: $greyish;
+      }
+
+    }
+
+    .msg-text {
+      margin-left: 35px;
+      background-color: $white-three;
+      border-radius: 3px;
+      padding: 7px;
+    }
+
+
+    /* Chat actions */
+
+    .chat-actions {
+      height: 65px;
+      min-height: 65px;
+      width: 100%;
+      display: flex;
+      background-color: $white-three;
+    }
+
+    button.upload-image {
+      background-image: image-url('wedding-atelier/icon-upload-image.png');
+      border: 0;
+      width: 32px;
+      height: 34px;
+      margin: 8px;
+    }
+
+    .message-input {
+      flex-grow: 1;
+      margin: 6px 0;
+
+      input {
+        padding: 5px;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
