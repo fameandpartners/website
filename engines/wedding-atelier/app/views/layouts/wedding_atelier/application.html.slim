@@ -34,6 +34,15 @@ doctype html
     = render 'marketing/trackers/google_analytics'
 
   body.wedding-atelier data-action=(action_name.titleize) data-controller=(controller.controller_name.titleize)
+    - if !flash.empty?
+      = react_component 'Notification', errors: [flash[:error]]
+    #notification
+    #fb-root
+
+    - if spree_user_signed_in?
+      javascript:
+        window.current_user = #{raw serialized_current_user.to_json}
+
     #wrap
       = render('wedding_atelier/shared/header') if include_header?
       #content
