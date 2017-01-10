@@ -247,9 +247,8 @@ GEM
       addressable (>= 2.3.1)
       extlib (>= 0.9.15)
       multi_json (>= 1.0.0)
-    autoprefixer-rails (5.1.11)
+    autoprefixer-rails (6.5.3)
       execjs
-      json
     awesome_nested_set (2.1.5)
       activerecord (>= 3.0.0)
     awesome_print (1.6.1)
@@ -357,7 +356,7 @@ GEM
       activemodel
       activerecord-immutable (~> 0.0.3)
     excon (0.45.3)
-    execjs (2.6.0)
+    execjs (2.4.0)
     extlib (0.9.16)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
@@ -699,7 +698,7 @@ GEM
     ruby-progressbar (1.7.5)
     rubyzip (1.1.7)
     safe_yaml (1.0.4)
-    sass (3.4.13)
+    sass (3.4.22)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)

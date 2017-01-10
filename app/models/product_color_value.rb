@@ -7,7 +7,7 @@ class ProductColorValue < ActiveRecord::Base
   # TODO: when removing this `conditions` options, REMEMBER to remove it from the "spec/support/memoization_support.rb" file
   belongs_to :option_value,
              class_name: 'Spree::OptionValue',
-             conditions: ['option_type_id = ?', Spree::OptionType.color_scope ]
+             conditions: ['option_type_id IN (?)', Spree::OptionType.color_scope ]
 
   has_many :images, as: :viewable, order: :position, dependent: :destroy, class_name: "Spree::Image"
 

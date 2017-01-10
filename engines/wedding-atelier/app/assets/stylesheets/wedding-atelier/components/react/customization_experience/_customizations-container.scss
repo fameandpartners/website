@@ -2,6 +2,7 @@
   background: $white-two;
 
   @include screen-sm {
+    @include slide-in-left();
     box-shadow: 1px 0 5px 0 rgba(0, 0, 0, .20);
     height: 100vh;
     left: 0;
@@ -10,7 +11,6 @@
     width: 50%;
     z-index: 3;
     opacity: 0;
-    @include slide-in-left();
   }
 
   .selector-header {
@@ -76,15 +76,29 @@
   }
 
   .customization-radio-label {
+    cursor: pointer;
     display: inline-block;
     float: left;
     padding: 0 15px;
+
+    .box {
+      border: 1px solid $white-two;
+      margin-right: 5px;
+      display: inline-block;
+      height: 20px;
+      outline: 1px solid $black;
+      width: 20px;
+    }
+
+    .real-label {
+      vertical-align: super;
+    }
   }
 
   .customization-options-item {
     background-color: $white-three;
     cursor: pointer;
-    height: 183px;
+    height: 290px;
     margin-bottom: 30px;
     padding-top: 10px;
     border: 1px solid transparent;
@@ -99,14 +113,14 @@
     }
 
     img {
-      height: 150px;
-      margin: 0 auto;
       display: block;
+      height: 175px;
+      margin: 25px auto;
     }
 
     &:hover,
     &.active {
-      border: 1px solid black;
+      border: 1px solid $black;
     }
 
     &-small {
@@ -115,9 +129,14 @@
       width: 100px;
       height: 100px;
 
+      &.disabled {
+        cursor: not-allowed;
+      }
+
       &:hover,
       &.active {
-        border: 1px solid black;
+        border: 2px solid $white-three;
+        outline: $black solid 1px;
       }
 
       @include screen-lg {
@@ -138,19 +157,20 @@
       text-align: left;
     }
 
-    height: 290px;
-    img {
-      height: 175px;
-      margin: 25px auto;
-    }
-
     @include screen-xl {
       height: 340px;
+
       img {
         height: 210px;
         margin: 30px auto;
       }
     }
+  }
+
+  .customization-options-item-label {
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
   }
 
   .customization-radio {
@@ -159,23 +179,6 @@
 
     &:checked ~ label .box {
       background: $black;
-    }
-  }
-
-  .customization-radio-label {
-    cursor: pointer;
-
-    .box {
-      border: 1px solid $white-two;
-      margin-right: 5px;
-      display: inline-block;
-      height: 20px;
-      outline: 1px solid $black;
-      width: 20px;
-    }
-
-    .real-label {
-      vertical-align: super;
     }
   }
 

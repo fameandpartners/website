@@ -3,6 +3,7 @@ module WeddingAtelier
     attr_accessor :skip_validation
     belongs_to :dress_size,
                 class_name: 'Spree::OptionValue'
+
     attr_accessible :spree_user_id,
                     :trend_updates,
                     :height,
