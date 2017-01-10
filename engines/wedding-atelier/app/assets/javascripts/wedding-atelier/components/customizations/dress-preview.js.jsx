@@ -74,9 +74,6 @@ var DressPreview = React.createClass({
         </div>
         <div className="dress-preview-controls">
           <div className="dress-preview-zoom-in" onClick={this.zoomClickedHandle}></div>
-          <div className="dress-preview-reset">
-            <a href="#">Reset</a>
-          </div>
           <div className="dress-preview-details">
             <a href="#">Details</a>
           </div>
