@@ -1,7 +1,9 @@
 var DressPreview = React.createClass({
   propTypes: {
     selectedOptions: React.PropTypes.object,
-    images: React.PropTypes.array.isRequired
+    images: React.PropTypes.array.isRequired,
+    onZoomInCallback: React.PropTypes.func,
+    onZoomOutCallback: React.PropTypes.func
   },
 
   getInitialState: function () {
@@ -29,10 +31,12 @@ var DressPreview = React.createClass({
   },
 
   zoomClickedHandle: function () {
+    if(this.props.onZoomInCallback) { this.props.onZoomInCallback(); }
     this.setState({zoom: true});
   },
 
   zoomClosedHandle: function () {
+    if(this.props.onZoomOutCallback) { this.props.onZoomOutCallback(); }
     this.setState({zoom: false});
   },
 
