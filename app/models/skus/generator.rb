@@ -11,7 +11,7 @@ module Skus
     # @param [String, Integer] color_id. Example: "12", 12
     # @param [String] height. Example: "Standard"
     # @param [Array<Integer>] customization_value_ids
-    def initialize(style_number:, size:, color_id:, height:, customization_value_ids: [])
+    def initialize(style_number:, size:, color_id:, height: '', customization_value_ids: [])
       @style_number            = style_number
       @size                    = size
       @color_id                = color_id
@@ -20,7 +20,13 @@ module Skus
     end
 
     def call
-      [style_number, size, color, custom, height].join.delete(' ').upcase
+      base_sku = [style_number, size, color]
+
+      if has_personalization?
+        base_sku << [custom, height]
+      end
+
+      base_sku.join.delete(' ').upcase
     end
 
     def style_number
@@ -42,6 +48,11 @@ module Skus
 
     def height
       "H#{@height.to_s.first}"
+    end
+
+    # Height is also considered a customization
+    private def has_personalization?
+      !@height.blank? || !@customization_value_ids.blank?
     end
   end
 end
