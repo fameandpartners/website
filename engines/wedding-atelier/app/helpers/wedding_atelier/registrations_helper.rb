@@ -36,10 +36,11 @@ module WeddingAtelier
       content_tag :div, class: 'dress-sizes' do
         content_tag :ul do
           items = dress_sizes.map do |size|
+            parsedSize = size.name.match(/#{@site_version}(\d+)/i)[1]
             content_tag :li do
               [
-                form.radio_button(:dress_size, "#{@site_version}/#{size}"),
-                form.label(:dress_size, size, value: "#{@site_version}/#{size}")
+                form.radio_button(:dress_size, size.name),
+                form.label(:dress_size, parsedSize, value: size.name)
               ].join("\n").html_safe
             end
           end

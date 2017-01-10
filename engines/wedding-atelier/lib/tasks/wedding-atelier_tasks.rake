@@ -4,15 +4,18 @@ namespace :wedding_atelier do
     taxon = taxonomy.taxons.find_or_create_by_name('Base Silhouette')
 
     sizes = Spree::OptionType.where(name: 'dress-size').first
+
+    colour_names = %w(Navy Black Champagne Berry Burgundy Red Watermelon Coral Peach
+                      Bright\ Blush Pale\ Pink Lavender Plum Royal\ Blue Cobalt\ Blue Pale\ Blue
+                      Aqua Bright\ Turquoise Mint Pale\ Gray)
+
+    colours = find_or_create_option_type('wedding-atelier-colors', 'Colour', colour_names)
+
     # Common option types
     fabrics = find_or_create_option_type('wedding-atelier-fabrics',
                                          'Fabric', %w(Heavy\ Georgette Matt\ Satin))
     lengths = find_or_create_option_type('wedding-atelier-lengths',
                                          'Length', %w(Mini Knee Petti Midi Ankle Floor))
-    colour_names = %w(Navy Black Champagne Berry Burgundy Red Watermelon Coral Peach
-                      Bright\ Blush Pale\ Pink Lavender Plum Royal\ Blue Cobalt\ Blue Pale\ Blue
-                      Aqua Bright\ Turquoise Mint Pale\ Gray)
-    colours = find_or_create_option_type('wedding-atelier-colors', 'Colour', colour_names)
 
     base_option_types = [sizes, fabrics, lengths, colours]
 
@@ -41,8 +44,8 @@ namespace :wedding_atelier do
       hidden: true
     }
 
-    create_customization('strapless', strapless_attrs, strapless_styles,
-                          strapless_fits, base_option_types, taxon)
+    find_or_create_product(strapless_attrs, strapless_styles,
+                          strapless_fits, taxon, base_option_types)
 
     # Fit and Flare  -----------------------------------------------------------------------------
     fit_and_flare_styles = [
@@ -68,8 +71,8 @@ namespace :wedding_atelier do
       hidden: true
     }
 
-    create_customization('fit-and-flare', fit_and_flare_attrs, fit_and_flare_styles,
-                          fit_and_flare_fits, base_option_types, taxon)
+    find_or_create_product(fit_and_flare_attrs, fit_and_flare_styles,
+                          fit_and_flare_fits, taxon, base_option_types)
 
     # Shift --------------------------------------------------------------------------------------
     shift_styles = [
@@ -96,8 +99,8 @@ namespace :wedding_atelier do
       hidden: true
     }
 
-    create_customization('shift', shift_attrs, shift_styles,
-                          shift_fits, base_option_types, taxon)
+    find_or_create_product(shift_attrs, shift_styles,
+                          shift_fits, taxon, base_option_types)
 
     # Slip ---------------------------------------------------------------------------------------
     slip_styles = [
@@ -124,8 +127,8 @@ namespace :wedding_atelier do
       hidden: true
     }
 
-    create_customization('slip', slip_attrs, slip_styles,
-                          slip_fits, base_option_types, taxon)
+    find_or_create_product(slip_attrs, slip_styles,
+                          slip_fits, taxon, base_option_types)
 
     # Wrap ---------------------------------------------------------------------------------------
     wrap_styles = [
@@ -152,8 +155,8 @@ namespace :wedding_atelier do
       hidden: true
     }
 
-    create_customization('wrap', wrap_attrs, wrap_styles,
-                          wrap_fits, base_option_types, taxon)
+    find_or_create_product(wrap_attrs, wrap_styles,
+                          wrap_fits, taxon, base_option_types)
 
     # Tri-cup ------------------------------------------------------------------------------------
     tri_cup_styles = [
@@ -180,8 +183,8 @@ namespace :wedding_atelier do
       hidden: true
     }
 
-    create_customization('tri-cup', tri_cup_attrs, tri_cup_styles,
-                          tri_cup_fits, base_option_types, taxon)
+    find_or_create_product(tri_cup_attrs, tri_cup_styles,
+                          tri_cup_fits, taxon, base_option_types)
 
     # Two piece ----------------------------------------------------------------------------------
     two_piece_styles = [
@@ -208,8 +211,8 @@ namespace :wedding_atelier do
       hidden: true
     }
 
-    create_customization('two-piece', two_piece_attrs, two_piece_styles,
-                          two_piece_fits, base_option_types, taxon)
+    find_or_create_product(two_piece_attrs, two_piece_styles,
+                          two_piece_fits, taxon, base_option_types)
 
     # Multi way ----------------------------------------------------------------------------------
     multi_way_styles = [
@@ -234,34 +237,37 @@ namespace :wedding_atelier do
       hidden: true
     }
 
-    create_customization('multi-way', multi_way_attrs, multi_way_styles,
-                          multi_way_fits, base_option_types, taxon)
-  end
-
-  def create_customization(silhouette, attrs, styles, fits, base_option_types, taxon)
-    style_option_type = find_or_create_option_type("wedding-atelier-#{silhouette}-dress-styles",
-                                                  'Style', styles)
-    fit_option_type = find_or_create_option_type("wedding-atelier-#{silhouette}-dress-fit",
-                                                'Fit', fits)
-    option_types = base_option_types + [style_option_type, fit_option_type]
-    find_or_create_product(attrs, option_types, taxon)
+    find_or_create_product(multi_way_attrs, multi_way_styles,
+                          multi_way_fits, taxon, base_option_types)
   end
 
   def find_or_create_option_type(name, presentation, option_values)
-    Spree::OptionType.find_or_create_by_name(name) do |ot|
+    option_type = Spree::OptionType.find_or_create_by_name(name) do |ot|
       ot.presentation = presentation
-      option_values.each do |ov_name|
-        ov = Spree::OptionValue.find_or_create_by_name(ov_name.parameterize) do |o|
-          o.presentation = ov_name
-        end
-        ot.option_values << ov unless ot.option_values.include? ov
+    end
+    option_values.each do |ov_name|
+      ov = Spree::OptionValue.find_or_create_by_name(ov_name.parameterize) do |o|
+        o.presentation = ov_name
       end
+      option_type.option_values << ov unless option_type.option_values.include? ov
+    end
+    option_type
+  end
+
+  def create_customizations(product, customizations, customization_type)
+    customizations.each do |c|
+      product.customisation_values.create(name: c.parameterize,
+                                          presentation: c,
+                                          customisation_type: customization_type,
+                                          price: 10)
     end
   end
 
-  def find_or_create_product(attrs, option_types, taxon)
+  def find_or_create_product(attrs, styles, fits, taxon, option_types)
     p = Spree::Product.find_or_initialize_by_name(attrs[:name])
     p.update_attributes attrs
+    create_customizations(p, styles, 'style')
+    create_customizations(p, fits, 'fit')
     p.taxons << taxon unless p.taxons.include?(taxon)
     option_types.each do |ot|
       p.option_types << ot unless p.option_types.include?(ot)

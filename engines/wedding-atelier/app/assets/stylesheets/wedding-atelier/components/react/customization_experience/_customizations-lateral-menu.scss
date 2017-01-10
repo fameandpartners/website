@@ -1,0 +1,28 @@
+.customizations-lateral-menu {
+  @include slide-in-left;
+  cursor: pointer;
+  margin-right: -110px;
+  margin-top: -231px;
+  opacity: 0;
+  position: fixed;
+  right: 50%;
+  top: 50%;
+  z-index: 0;
+
+  &.animate {
+    z-index: 1;
+  }
+
+  p {
+    letter-spacing: 2px;
+    font-size: .7rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-transform: uppercase;
+  }
+
+  .menu-option:not(:last-child) {
+    margin-bottom: 20px;
+    max-width: 120px;
+  }
+}

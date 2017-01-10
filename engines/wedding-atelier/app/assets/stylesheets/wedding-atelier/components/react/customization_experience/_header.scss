@@ -1,0 +1,38 @@
+.customization-experience-header {
+  background-image: image-url('wedding-atelier/marbel.png');
+  height: 62px;
+  width: 100%;
+
+  > div {
+    height: 100%;
+    line-height: 62px;
+
+  }
+
+  .arrow,
+  .logo {
+    height: 100%;
+  }
+
+  .logo {
+    margin: 0 auto;
+    width: 60%;
+  }
+
+  .arrow {
+    background: image-url('lessthan.svg') no-repeat center;
+    background-size: 35px 25px;
+    background-position: left center;
+    text-align: left;
+  }
+
+  .back-to-moodboard {
+    padding-left: 30px;
+  }
+
+  .design-name {
+    font-family: $primary-font;
+    font-size: 28px;
+    text-transform: capitalize;
+  }
+}
