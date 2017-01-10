@@ -17,7 +17,48 @@
     position: absolute;
     right: 0;
     top: 0;
+    width: 45px;
   }
+
+  .dress-preview-details {
+    background-color: $white-two-transparent;
+    border: 1px solid $pinkish-grey;
+    height: 360px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    width: 225px;
+
+    &-close {
+      background: transparent image-url('wedding-atelier/close.svg') center center no-repeat;
+      cursor: pointer;
+      height: 32px;
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      width: 32px;
+    }
+
+    &-container {
+      max-width: 150px;
+      margin: 70px auto 35px;
+    }
+
+    &-text-long {
+      font-family: $primary-font;
+      font-size: 1.3rem;
+    }
+
+    &-text-short {
+      display: block;
+      font-weight: 700;
+      font-size: .8rem;
+      margin: 0 auto;
+      max-width: 140px;
+      text-transform: uppercase;
+    }
+  }
+
 
   .dress-preview-zoom-in {
     background: transparent image-url('wedding-atelier/plus.svg') center center no-repeat;

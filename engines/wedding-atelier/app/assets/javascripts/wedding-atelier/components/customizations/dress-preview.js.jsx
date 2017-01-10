@@ -10,7 +10,8 @@ var DressPreview = React.createClass({
     return {
       selectedImageIndex: 0,
       zoom: false,
-      loading: true
+      loading: true,
+      showDetails: false
     };
   },
 
@@ -38,6 +39,14 @@ var DressPreview = React.createClass({
   zoomClosedHandle: function () {
     if(this.props.onZoomOutCallback) { this.props.onZoomOutCallback(); }
     this.setState({zoom: false});
+  },
+
+  detailsShownHandle: function () {
+    this.setState({showDetails: true});
+  },
+
+  detailsClosedHandle: function () {
+    this.setState({showDetails: false});
   },
 
   renderThumbnails: function () {
@@ -74,11 +83,28 @@ var DressPreview = React.createClass({
         </div>
         <div className="dress-preview-controls">
           <div className="dress-preview-zoom-in" onClick={this.zoomClickedHandle}></div>
-          <div className="dress-preview-details">
-            <a href="#">Details</a>
+          <div className="hidden-xs">
+            <a href="#"
+              onClick={this.detailsShownHandle}
+              style={{display: this.state.showDetails? 'none':'block'}}>
+              Details
+            </a>
+            <div
+              className="dress-preview-details"
+              style={{display: this.state.showDetails? 'block':'none'}}>
+              <div
+                className="dress-preview-details-close" onClick={this.detailsClosedHandle}>
+              </div>
+              <div className="dress-preview-details-container">
+                <p className="dress-preview-details-text-long">"The hand-draped, corseted bodice prefectly hugs curtves, acres of silk chiffon make a divinely floaty skirt"</p>
+                <p className="dress-preview-details-text-short">For the girl with the free spirit</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="dress-preview-pagination">
+        <div
+          className="dress-preview-pagination"
+          style={{display: this.state.showDetails? 'none':'block'}}>
           {this.renderThumbnails()}
         </div>
         <ZoomModal
