@@ -11,28 +11,14 @@ module Acceptance
     end
 
     step 'I select :country_name country and :state_name state' do |country_name, state_name|
-      select_country_and_state(country_name, state_name, :ship)
-    end
-
-    step 'I select :country_name country and :state_name state for :bill_or_ship' do |country_name, state_name, bill_or_ship|
-      select_country_and_state(country_name, state_name, bill_or_ship)
-    end
-
-    private def select_country_and_state(country_name, state_name, bill_or_ship)
-      find("#order_#{bill_or_ship}_address_attributes_country_id_chosen").click
+      find('#order_ship_address_attributes_country_id_chosen').click
       find('li.active-result', text: country_name).click
 
-      if page.has_css?("#order_#{bill_or_ship}_address_attributes_state_id_chosen")
-        find("#order_#{bill_or_ship}_address_attributes_state_id_chosen").click
-        find('li.active-result', text: state_name).click
+      if country_name == 'New Zealand'
+        find('#order_ship_address_attributes_state_name').set(state_name)
       else
-        find("#order_#{bill_or_ship}_address_attributes_state_name").set(state_name)
-      end
-    end
-
-    step 'I fill in :bill_or_ship form fields with:' do |bill_or_ship, fields|
-      within("div[data-hook='#{bill_or_ship}_inner']") do
-        fields.each { |input_label, value| fill_in input_label, with: value }
+        find('#order_ship_address_attributes_state_id_chosen').click
+        find('li.active-result', text: state_name).click
       end
     end
 
@@ -44,10 +30,6 @@ module Acceptance
     step 'I agree with shipping fee' do
       expect(page).to have_text('Additional custom duty fees apply to your country.')
       find("label[for='international_shipping_fee']").click
-    end
-
-    step "I uncheck 'This is also my billing address' checkbox" do
-      find("label[for='ship_to_address']").click
     end
 
     step 'I should see my order placed, with :dress_name dress, :size_number size and :dress_price price' do |dress_name, dress_size, dress_price|
