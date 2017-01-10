@@ -92,10 +92,6 @@ var CustomizationExperience = React.createClass({
     }});
   },
 
-  editDesignCallback: function () {
-    $('.customization-experience--mobile .js-slick-hook').slick('slickGoTo', 1);
-  },
-
   render: function(){
     var props = {
       selectedOptions: this.state.selectedOptions,
@@ -117,8 +113,7 @@ var CustomizationExperience = React.createClass({
         <DesktopCustomizations {...props} />
         <CustomizationsModal
           siteVersion={this.props.siteVersion}
-          selectedOptions={this.state.selectedOptions}
-          editDesignCallback={this.editDesignCallback}/>
+          selectedOptions={this.state.selectedOptions}/>
         <SaveDressModal
           eventSlug={this.props.eventSlug}
         />

@@ -160,7 +160,7 @@ var SizeSelectorMobile = React.createClass({
           </div>
           <div className="form-group">
             <label>Whats your dress size &nbsp;</label><a href="#" className="guide-link hover-link">view size guide</a>
-            <div className="dress-sizes ungrouped centered">
+            <div className="dress-sizes ungrouped">
               <ul className="customization-dress-sizes-ul">
                 {dressSizes}
               </ul>
