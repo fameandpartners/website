@@ -332,16 +332,16 @@ Spree::Product.class_eval do
   end
 
   def delivery_period
-    maximum_delivery_period
+    minimum_delivery_period
   end
 
-  # Max delivery period got from taxons
-  def maximum_delivery_period
-    taxons.inject(Spree::Taxon::DELIVERY_PERIODS.first) do |max_period, taxon|
+  # Min delivery period got from taxons
+  def minimum_delivery_period
+    taxons.inject(Spree::Taxon::DELIVERY_PERIODS.first) do |min_period, taxon|
       current_major_value = major_value_from_period(taxon.delivery_period)
-      max_major_value = major_value_from_period(max_period)
+      min_major_value = major_value_from_period(min_period)
 
-      current_major_value > max_major_value ? taxon.delivery_period : max_period
+      current_major_value < min_major_value ? taxon.delivery_period : min_period
     end
   end
 
