@@ -13,23 +13,32 @@ describe Afterpay::Presenters::Payment do
                      lastname: 'Doe',
                      email: 'jdoe@mail.com',
                      number: 731,
-                     bill_address: address,
-                     ship_address: address
+                     bill_address: bill_address,
+                     ship_address: ship_address
                      )
     end
 
-    let(:address) do
-      double(:address, phone: '123456',
-                       firstname: 'John',
-                       lastname: 'Doe',
-                       name: 'John Doe',
-                       address1: 'address1',
-                       address2: 'address2',
-                       city: 'Houston',
-                       state: double(:state, abbr: 'TX'),
-                       zipcode: '12345',
-                       country: double(:country, iso: 'US'),
-            )
+    let(:address_params) do
+      {
+        phone: '123456',
+        firstname: 'John',
+        lastname: 'Doe',
+        name: 'John Doe',
+        address1: 'address1',
+        address2: 'address2',
+        city: 'Houston',
+        state: nil,
+        zipcode: '12345',
+        country: double(:country, iso: 'US')
+      }
+    end
+
+    let(:bill_address) do
+      double(:address, address_params.merge(state: double(:state, abbr: 'TX')))
+    end
+
+    let(:ship_address) do
+      double(:address, address_params.merge(state_name: 'RX'))
     end
 
     let(:create_order_params) do
@@ -53,7 +62,7 @@ describe Afterpay::Presenters::Payment do
          line1: "address1",
          line2: "address2",
          suburb: "Houston",
-         state: "TX",
+         state: "RX",
          postcode: "12345",
          countryCode: "US",
          phoneNumber: "123456"},
