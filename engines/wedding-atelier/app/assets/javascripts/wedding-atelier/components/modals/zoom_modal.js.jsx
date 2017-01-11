@@ -32,7 +32,7 @@ var ZoomModal = React.createClass({
 
       return (
         <li key={key} className={classes} onClick={that.props.thumbnailSelectedHandle.bind(null, index)}>
-          <img src={image.thumbnail} onError={this.props.imageNotFoundHandle}/>
+          <img src={image.thumbnail} onError={that.props.imageNotFoundHandle}/>
         </li>
       );
     });
