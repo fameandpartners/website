@@ -110,7 +110,10 @@ var DressPreview = React.createClass({
     return (
       <div ref="dressPreview" className="dress-preview">
         <div className="preview">
-          <img src={images[this.state.selectedImageIndex].normal} style={{visibility: this.state.loading? 'hidden' : 'visible'}} onError={this.imageNotFoundHandle}/>
+          <img src={images[this.state.selectedImageIndex].normal}
+            style={{visibility: this.state.loading? 'hidden' : 'visible'}}
+            onClick={this.zoomClickedHandle}
+            onError={this.imageNotFoundHandle}/>
           <ImageLoader loading={this.state.loading} />
         </div>
         <div className="dress-preview-controls">
