@@ -19,12 +19,13 @@ var DressPreview = React.createClass({
   },
 
   componentWillReceiveProps: function (nextProps) {
+    this.setState({loading: true});
     this.isLoading();
   },
 
   isLoading: function () {
     var that = this;
-    $(this.refs.dressPreview).imagesLoaded({background: true}).done(function (instance) {
+    $(this.refs.dressPreview).imagesLoaded({background: true}).always(function (instance) {
         that.setState({loading: false});
     });
   },
@@ -131,7 +132,7 @@ var DressPreview = React.createClass({
     return (
       <div ref="dressPreview" className="dress-preview">
         <div className="preview">
-          <img src={images[this.state.selectedImageIndex].normal} style={{visibility: this.state.loading? 'hidden' : 'visible'}}/>
+          <img src={images[this.state.selectedImageIndex].normal} style={{visibility: this.state.loading? 'hidden' : 'visible'}} onError={this.imageNotFoundHandle}/>
           <ImageLoader loading={this.state.loading} />
         </div>
         <div className="dress-preview-controls">
@@ -165,7 +166,8 @@ var DressPreview = React.createClass({
           selectedImageIndex={this.state.selectedImageIndex}
           visible={this.state.zoom}
           zoomClosedHandle={this.zoomClosedHandle}
-          thumbnailSelectedHandle={this.thumbnailSelectedHandle}/>
+          thumbnailSelectedHandle={this.thumbnailSelectedHandle}
+          imageNotFoundHandle={this.imageNotFoundHandle}/>
       </div>
     );
   }
