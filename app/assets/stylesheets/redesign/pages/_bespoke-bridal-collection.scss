@@ -1,0 +1,33 @@
+// Bespoke Bridal Collection - Landing Page
+
+.pageBespokeBridalCollection {
+
+  img {
+    @extend .img-responsive;
+  }
+
+  .heroIntro {
+
+    .contentBox__extraPadding {
+      padding: 55px;
+    }
+
+  }
+
+  .heroIntro__title {
+    margin: 0 0 20px 0;
+    font-size: 1.8em;
+    line-height: 100%;
+  }
+
+  .heroIntro__copy {
+    font-style: normal;
+    line-height: 2.5rem;
+  }
+
+  .sectionIntroTag {
+    margin-top: -20px;
+    margin-bottom: 80px;
+  }
+
+}
