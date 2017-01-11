@@ -388,3 +388,54 @@ $top-overlay-margin-top: 37px;
   }
 
 }
+
+// An alternative styling for section boxes
+// Sample usage: landing_pages/bespoke_bridal_collection.html.slim
+
+.contentBox {
+
+  .copyWrapper {
+    @extend .contentBox__extraPadding;
+    border-bottom: 1px solid $c-neutral-black;
+  }
+
+  .itemInfo__ctaCopy {
+    @extend .font-serif;
+    font-style: italic;
+  }
+
+  .itemInfo__ctaWrap--ctaWithSeparator {
+
+    .itemInfo__cta {
+      display: inline-block;
+    }
+
+    .itemInfo__cta:first-child,
+    .itemInfo__cta:last-child::before {
+      padding-right: 20px;
+    }
+
+    .itemInfo__cta:last-child::before {
+      content: "|";
+    }
+
+  }
+
+}
+
+.contentBox__extraPadding {
+  padding: 20px;
+}
+
+.contentBox__imgWithCaption--overlay {
+  margin-top: -50px;
+}
+
+.contentBox__bg--white {
+  background: $c-neutral-white;
+}
+
+.contentBox__bg--marble {
+  background: url('_backgrounds/marble-texture-bg.jpg');
+  background-size: 150%;
+}
