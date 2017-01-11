@@ -59,7 +59,7 @@ var SizeSelector = React.createClass({
 
     var optionsForHeights = this.props.heights.map(function(group){
       var heights = group[1].map(function(height, index){
-        return(<option key={index} value={height}>{height}</option>)
+        return(<option key={index} value={group[0]}>{height}</option>)
       });
 
       return (
@@ -126,17 +126,21 @@ var SizeSelector = React.createClass({
           </div>
           <div className="form-group">
             <label>Whats your dress size &nbsp;</label><a href="#" className="guide-link hover-link">view size guide</a>
-            <div className="dress-sizes">
+            <div className="dress-sizes ungrouped">
               <ul className="customization-dress-sizes-ul">
-                {dressSizes}
+                <div>
+                  {dressSizes}
+                </div>
               </ul>
             </div>
           </div>
           <div className="form-group">
             <label>use one of the bridal parties size profiles</label>
-            <div className="dress-sizes assistants-sizes">
+            <div className="dress-sizes ungrouped large-labels">
               <ul className="customization-dress-sizes-ul people">
-                {assistantsSizes}
+                <div>
+                  {assistantsSizes}
+                </div>
               </ul>
             </div>
           </div>

@@ -3,7 +3,7 @@ module WeddingAtelier
     class << self
       def definitions
         {
-          petit: [
+          petite: [
             "4'10\"/147cm",
             "4'11\"/150cm",
             "5'0\"/152cm",

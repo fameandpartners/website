@@ -19,6 +19,7 @@ WeddingAtelier::Engine.routes.draw do
     resources :invitations, only: :create do
       get '/accept', to: 'invitations#accept'
     end
+
     resources :customizations, only: :index
     resources :dresses, controller: :event_dresses do
       post '/likes', to: 'likes#create'
@@ -26,4 +27,6 @@ WeddingAtelier::Engine.routes.draw do
     end
     resources :assistants, only: [:destroy]
   end
+
+  get '/my_account', to: 'accounts#show'
 end

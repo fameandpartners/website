@@ -45,6 +45,10 @@
 
 .modal-confirm {
 
+  .modal-body-container {
+    padding: 40px 0;
+  }
+
   @include screen-sm {
 
     h1 {
@@ -147,7 +151,7 @@
     margin-left: auto;
     margin-right: auto;
     max-width: 270px;
-    padding: 60px 0;
+    padding: 40px 0;
   }
 
   .modal-footer {
@@ -167,6 +171,7 @@
   @media screen and (orientation: landscape) and (max-width: $screen-xs-max) {
     .close-modal {
       background: image-url('wedding-atelier/close.svg') no-repeat;
+      background-size: contain;
       right: 5px;
       top: 10px;
     }
@@ -174,6 +179,12 @@
     .modal-body-container {
       padding: 20px 0;
       overflow-y: scroll;
+    }
+  }
+
+  @include screen-sm {
+    .modal-body-container {
+      padding: 60px 0;
     }
   }
 }

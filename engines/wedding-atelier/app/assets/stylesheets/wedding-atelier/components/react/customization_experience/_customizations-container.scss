@@ -1,7 +1,7 @@
 .customizations-container {
   background: $white-two;
 
-  @include screen-md {
+  @include screen-sm {
     box-shadow: 1px 0 5px 0 rgba(0, 0, 0, .20);
     height: 100vh;
     left: 0;

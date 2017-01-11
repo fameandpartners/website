@@ -9,5 +9,19 @@
 //= require classnames
 //= require panzoom
 //= require moment-2.17.1.min
-//= require underscore-min
+
+//= require libs/underscore-min
+
+//--------------------------
+// Helpers
+//--------------------------
+//= require helpers
+
+//--------------------------------
+// Shopping cart & bag & moodboard
+//--------------------------------
+//= require partials/helpers/shopping_cart
+//= require helpers
+
 //= require_tree
+
