@@ -3,7 +3,6 @@ module Concerns
     extend ActiveSupport::Concern
 
     included do
-      rescue_from Exception,                           with: -> { render_error(code: 500) }
       rescue_from ActiveRecord::RecordInvalid,         with: -> { render_error(code: 422) }
       rescue_from ActiveRecord::RecordNotFound,        with: -> { render_error(code: 404) }
       rescue_from ActionController::UnknownController, with: -> { render_error(code: 404) }
