@@ -88,7 +88,7 @@ var DesktopCustomizations = React.createClass({
           <CustomizationsContainer {...customizationsContainerProps} />
         </div>
         <div className="customization-panel col-sm-6">
-          <DressPreview selectedOptions={this.props.selectedOptions}/>
+          <DressPreview selectedOptions={this.props.selectedOptions} />
         </div>
         <div className="footer">
           <div className="favorites col-md-6">
@@ -145,7 +145,6 @@ var AddToCartButton = React.createClass({
       length_id: customizations.length.id,
       fabric_id: customizations.fabric.id,
       customizations_ids: [customizations.fit.id, customizations.style.id]
-      //making_options_ids: ""
     }
     shoppingCart = new helpers.ShoppingCart({});
     shoppingCart.addProduct(attrs);

@@ -56,7 +56,9 @@ var CustomizationsMenuMobile = React.createClass({
     return (
       <div className="customizations-menu-mobile">
         <div className="customizations-menu-mobile-body">
-          <DressPreview selectedOptions={this.props.selectedOptions}/>
+          <DressPreview selectedOptions={this.props.selectedOptions}
+            onZoomInCallback={this.props.goToSlide.bind(null, 0)}
+            onZoomOutCallback={this.props.goToSlide.bind(null, 1)}/>
           <h1>
             <em>Customize</em> it how you want
           </h1>

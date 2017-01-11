@@ -5,15 +5,7 @@
   .preview {
     height: 90%;
     margin: 0 auto;
-    width: auto;
-
-    @include screen-md {
-      width: 450px;
-    }
-
-    @include screen-sm {
-      width: 300px;
-    }
+    max-width: 100%;
   }
 
   img {
@@ -21,16 +13,85 @@
     margin: 0 auto;
   }
 
-  .controls {
+  .dress-preview-controls {
     position: absolute;
     right: 0;
     top: 0;
+    width: 45px;
+  }
 
-    .zoom {
+  .dress-preview-details {
+    background-color: $white-two-transparent;
+    border: 1px solid $pinkish-grey;
+    height: 360px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    width: 225px;
+
+    &-close {
+      background: transparent image-url('wedding-atelier/close.svg') center center no-repeat;
       cursor: pointer;
       height: 32px;
-      margin: 0 auto;
+      position: absolute;
+      right: 12px;
+      top: 12px;
       width: 32px;
+    }
+
+    &-container {
+      max-width: 150px;
+      margin: 70px auto 35px;
+    }
+
+    &-text-long {
+      font-family: $primary-font;
+      font-size: 1.3rem;
+    }
+
+    &-text-short {
+      display: block;
+      font-weight: 700;
+      font-size: .8rem;
+      margin: 0 auto;
+      max-width: 140px;
+      text-transform: uppercase;
+    }
+  }
+
+
+  .dress-preview-zoom-in {
+    background: transparent image-url('wedding-atelier/plus.svg') center center no-repeat;
+    cursor: pointer;
+    height: 32px;
+    margin-bottom: 35px;
+  }
+
+  .dress-preview-pagination {
+    bottom: 0;
+    position: absolute;
+    right: 0;
+  }
+
+  .dress-preview-thumbnails {
+    list-style: none;
+    max-width: 45px;
+    padding-left: 0;
+  }
+
+  .dress-preview-thumbnails-item {
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 25px;
+    padding-left: 0;
+
+    &.selected {
+      outline: 1px solid $black;
+    }
+
+    img {
+      height: 65px;
+      width: 45px;
     }
   }
 

@@ -1,0 +1,58 @@
+.zoom-modal {
+  background-color: $white-two;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 2;
+
+  .close-zoom {
+    background: transparent image-url('wedding-atelier/close.svg') center center no-repeat;
+    cursor: pointer;
+    height: 50px;
+    right: 25px;
+    position: absolute;
+    top: 25px;
+    width: 50px;
+  }
+
+  .zoom-modal-image {
+    max-height: 100%;
+    overflow-y: auto;
+
+    img {
+      display: block;
+      margin: 0 auto;
+      padding: 10px auto;
+    }
+  }
+
+  .zoom-modal-pagination {
+    bottom: 40px;
+    position: absolute;
+    right: 30px;
+  }
+
+  .zoom-modal-thumbnails {
+    list-style: none;
+    max-width: 45px;
+    padding-left: 0;
+  }
+
+  .zoom-modal-thumbnails-item {
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 25px;
+    padding-left: 0;
+
+    &.selected {
+      outline: 1px solid $black;
+    }
+
+    img {
+      height: 65px;
+      width: 45px;
+    }
+  }
+}
