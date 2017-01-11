@@ -38,7 +38,7 @@ var DressPreview = React.createClass({
     var colour = customizations.colour ? customizations.colour.name : 'BLACK';
     var style = 'S' + (customizations.style ? customizations.style.id : 0);
     var fit = 'F' + (customizations.fit ? customizations.fit.id : 0);
-    var length = customizations.length ? lengthMap[customizations.length.name] || 'AK' : 'AK';
+    var length = customizations.length && lengthMap[customizations.length.name] ? lengthMap[customizations.length.name] : 'AK';
 
     var basePath = '/assets/wedding-atelier/dresses/';
     var imageName = [silhouette, fabric, colour, style, fit, length].join('-').toUpperCase() + '-';
