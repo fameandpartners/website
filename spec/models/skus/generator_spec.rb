@@ -26,7 +26,7 @@ describe Skus::Generator do
       end
     end
 
-    context 'if height and customizations are empty' do
+    context 'product does not have personalizations' do
       let(:attributes) { { style_number: 'WithoutCustomizations', size: 'US4/AU8', color_id: '525' } }
 
       it 'generates SKUs without X marker' do
