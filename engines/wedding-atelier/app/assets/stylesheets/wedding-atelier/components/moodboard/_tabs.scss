@@ -1,5 +1,4 @@
 .moodboard-tabs {
-  width: 90%;
   height: calc(100% - 43px);
 
   .nav-tabs {
@@ -11,6 +10,45 @@
     overflow: auto;
     height: calc(100% - 34px);
   }
+  .nav-tabs > li > a::after {
+    content: "";
+    background: $black;
+    height: 2px;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    bottom: -1px;
+    transition: all 250ms ease 0s;
+    transform: scale(0);
+  }
+  .nav-tabs > li.active > a::after,
+  .nav-tabs > li:hover > a::after {
+    transform: scale(1);
+  }
+
+  .nav-tabs > li.active > a,
+  .nav-tabs > li.active > a:hover,
+  .nav-tabs > li.active > a:focus {
+    border: 1px solid transparent;
+    border-bottom: 2px solid $black;
+  }
+
+  .nav-tabs > li > a {
+    color: $black-two;
+    font-family: NeuzeGro;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .nav-tabs > li > a:hover {
+    border: 1px solid transparent;
+    background-color: transparent;
+  }
+
+  .nav-tabs > li.active {
+    border: 0;
+  }
+
 }
 
 @include screen-xs-and-sm {
@@ -22,6 +60,40 @@
   .moodboard-tabs {
     min-width: 100% !important;
     height: 100% !important;
+  }
+
+  .nav.nav-tabs {
+    min-width: 100% !important;
+    width: 100% !important;
+
+    overflow-y: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    background-color: $white-three;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .nav-tabs > li {
+    float: initial;
+    display: inline-block;
+    background-color: $white-three;
+  }
+
+  .nav-tabs > li > a {
+    color: $greyish !important;
+  }
+
+  .nav-tabs > li.active > a,
+  .nav-tabs > li.active > a:hover,
+  .nav-tabs > li.active > a:focus,
+  .nav-tabs > li.active > a:active, {
+    border-bottom: 2px solid $black;
+    border: 0;
+    background-color: transparent;
   }
 
 }

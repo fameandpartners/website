@@ -1,27 +1,35 @@
 var DressTile = React.createClass({
 
   propTypes: {
+    sendDressToChatFn: React.PropTypes.func,
+    handleLikeDress: React.PropTypes.func,
+    index: React.PropTypes.number,
     dress: React.PropTypes.shape({
       id: React.PropTypes.number,
       title: React.PropTypes.string,
       image: React.PropTypes.string,
       author: React.PropTypes.string,
-      price: React.PropTypes.string
+      price: React.PropTypes.number,
+      likes_count: React.PropTypes.number,
+      liked: React.PropTypes.bool
     })
   },
-
-
 
   getInitialState: function(){
     return {loveClass: 'icon-unliked'}
   },
 
   handleLoveIt: function() {
-    this.setState({loveClass: 'icon-liked'})
+    this.props.handleLikeDress(this.props.dress);
+  },
+
+  sendToChatHandler: function() {
+    this.props.sendDressToChatFn(this.props.dress);
   },
 
   render: function () {
-    var loveClass = 'icon-liked';
+    var loveClass = this.props.dress.liked ? 'icon-liked' : 'icon-unliked';
+
     return (
         <div className="dress-box" key={this.props.dress.id}>
           <div className="top-info">
@@ -29,7 +37,7 @@ var DressTile = React.createClass({
           </div>
           <div className="dress-box-header">
             <div className="likes">
-              <span className={this.state.loveClass} onClick={this.handleLoveIt}></span> {this.props.dress.loveCount}
+              <span className={loveClass} onClick={this.handleLoveIt}></span> {this.props.dress.likes_count}
             </div>
             <a href="#" className="icon-close pull-right"></a>
           </div>
@@ -43,8 +51,8 @@ var DressTile = React.createClass({
             </div>
           </div>
 
-          <div className="dress-box-footer center-block">
-            <button className="btn-send-to-chat">
+          <div className="dress-box-footer center-block text-center">
+            <button className="btn-send-to-chat" onClick={this.sendToChatHandler}>
               Send to chat
             </button>
             <button className="btn-add-to-cart">

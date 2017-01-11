@@ -8,11 +8,69 @@ var MoodBoardEvent = React.createClass({
     event_id: React.PropTypes.number,
     wedding_name: React.PropTypes.string,
     profile_photo: React.PropTypes.string,
-    username: React.PropTypes.string
+    username: React.PropTypes.string,
+    user_id: React.PropTypes.number,
+    filestack_key: React.PropTypes.string
   },
 
-  getInitialState: function (){
+  getDresses: function() {
+    return this.state.event.dresses;
+  },
+
+  setDresses: function(dresses) {
+    var event = $.extend({}, this.state.event);
+    event.dresses = dresses;
+    this.setState({event: event});
+    this.refs.Chat.forceUpdate();
+  },
+
+  handleLikeDress: function(dress) {
+    var that = this,
+        event = _extends({}, that.state.event),
+        method = dress.liked ? 'DELETE' : 'POST',
+        url = this.props.event_path + '/dresses/' + dress.id + '/likes',
+        dress = _.findWhere(event.dresses, {id: dress.id});
+
+    $.ajax({
+      url: url,
+      method: method,
+      dataType: 'json',
+      success: function(data){
+        if(method === 'POST'){
+          dress.likes_count++;
+          dress.liked = true;
+        }else{
+          dress.likes_count--;
+          dress.liked = false;
+        }
+        that.refs.Chat.sendNotification({
+          type: "dress-like",
+          dress: dress
+        });
+
+        that.setDresses(event.dresses);
+      },
+      error: function(data){
+        // TODO add notification after is merged.
+      }
+    })
+  },
+
+  getInitialState: function () {
     return {
+        chat: React.createElement(Chat, {
+        twilio_token_path: this.props.twilio_token_path,
+        event_id: this.props.event_id,
+        wedding_name: this.props.wedding_name,
+        profile_photo: this.props.profile_photo,
+        username: this.props.username,
+        user_id: this.props.user_id,
+        filestack_key: this.props.filestack_key,
+        getDresses: this.getDresses,
+        setDresses: this.setDresses,
+        handleLikeDress: this.handleLikeDress,
+        ref: 'Chat'
+      }),
       event: {
         dresses: [],
         invitations: [],
@@ -45,26 +103,36 @@ var MoodBoardEvent = React.createClass({
 
         this.setState({event: event});
         this.setState({event_backup: event_backup});
+        this.renderChat();
+        this.handleBrowserResizing();
       }.bind(this)
     });
   },
 
-  componentDidMount: function (){
-    this.handleBrowserResizing();
+  renderChat: function(where) {
+    if (!where) {
+      if (window.innerWidth <= 768) {
+        $('.moodboard-tabs a[href="#chat-mobile"]').tab('show');
+        this.renderChat('right-side');
+      } else {
+        this.renderChat('left-side');
+      }
+    } else {
+      this.setState({'left_chat': where === 'left-side' ? this.state.chat : null});
+      this.setState({'right_chat': where === 'right-side' ? this.state.chat : null});
+    }
   },
 
   handleBrowserResizing: function(){
-    if (window.innerWidth <= 768) {
-      $('.moodboard-tabs a[href="#chat-mobile"]').tab('show');
-    }
-
     $(window).resize(function(e) {
       if (e.target.innerWidth > 768 ) {
         $('.moodboard-tabs a[href="#bridesmaid-dresses"]').tab('show');
+        this.renderChat('left-side');
       } else {
         $('.moodboard-tabs a[href="#chat-mobile"]').tab('show');
+        this.renderChat('right-side');
       }
-    });
+    }.bind(this));
   },
 
   handleEventDetailUpdate: function(data){
@@ -111,17 +179,17 @@ var MoodBoardEvent = React.createClass({
     })
   },
 
-  render: function (){
+  sendDressToChatFn: function(dress) {
+    this.refs.Chat.sendMessageTile(dress);
+  },
+
+  render: function () {
     return (
       <div id="events__moodboard">
         <div className="chat left-content col-sm-6">
-          <Chat twilio_token_path={this.props.twilio_token_path}
-                event_id={this.props.event_id}
-                wedding_name={this.props.wedding_name}
-                profile_photo={this.props.profile_photo}
-                username={this.props.username} />
+          {this.state.left_chat}
         </div>
-        <div className="right-content col-sm-6" id="atelier">
+        <div className="right-content col-sm-6">
           <div className='right-container'>
             <h1 className="moodboard-title text-center">
               {this.state.event.name} - in {this.state.event.remaining_days} days
@@ -145,27 +213,28 @@ var MoodBoardEvent = React.createClass({
                   <a aria-controls="manage-bridal-party" data-toggle="tab" href="#manage-bridal-party" role="tab"> Manage
                     bridal party</a>
                 </li>
-                <li role="presentation">
-                  <a aria-controls="bridal-gowns" data-toggle="tab" href="#bridal-gowns" role="tab"> Bridal Gowns</a>
+                <li role="presentation" className="bridal-gowns">
+                  <a aria-controls="bridal-gowns" href="#bridal-gowns" role="tab">
+                    <span className="coming-soon">Coming Soon</span>
+                    <span>Bridal Gowns</span>
+                  </a>
                 </li>
               </ul>
               <div className="tab-content">
                 <div id="chat-mobile" className="tab-pane" role="tabpanel">
-                  <Chat twilio_token_path={this.props.twilio_token_path}
-                    event_id={this.props.event_id}
-                    wedding_name={this.props.wedding_name}
-                    profile_photo={this.props.profile_photo}
-                    username={this.props.username} />
+                  {this.state.right_chat}
                 </div>
-                <div id="bridesmaid-dresses" className="tab-pane active" role="tabpanel">
+                <div id="bridesmaid-dresses" className="tab-pane active center-block" role="tabpanel">
                   <div className="add-dress-box hidden">
                     <button className="add">Add your first dress</button>
                   </div>
                   <div className="dresses-actions text-center"><a href={this.props.event_path + '/dresses/new'} className="btn-transparent btn-create-a-dress">
                     <em>Create</em> a dress</a>
                   </div>
-                  <div className="dresses-list">
-                    <DressTiles dresses={this.state.event.dresses} />
+                  <div className="dresses-list center-block">
+                    <DressTiles dresses={this.state.event.dresses}
+                      sendDressToChatFn={this.sendDressToChatFn}
+                      handleLikeDress={this.handleLikeDress} />
                   </div>
                 </div>
                 <div id="wedding-details" className="tab-pane" role="tabpanel">
