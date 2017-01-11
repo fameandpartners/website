@@ -1,0 +1,74 @@
+= render partial: 'pages/robots'
+
+.pageBespokeBridalCollection
+
+  / Hero tile
+  .contentBox.heroIntro
+    .main-hero-wrap.hero-wrap.copy-left
+
+      - tile_image_path = image_path("homepage/hero-featured/dec-09-featured-1.jpg")
+      - tile_image_mob_path = image_path("homepage/hero-featured/dec-09-featured-1-mob.jpg")
+
+      picture.media-wrap
+        source media="(max-width: 991px)" srcset="#{tile_image_mob_path}"
+        source media="(min-width: 992px)" srcset="#{tile_image_path}"
+        img src="#{tile_image_path}" srcset="
+          #{tile_image_mob_path} 991w,
+          #{tile_image_path} 992w"
+
+      .content-wrap
+        .container-fluid
+          .row
+            .col-lg-4.col-lg-offset-6
+              .copy-wrap.text-center.contentBox__extraPadding.contentBox__bg--white
+                h2.heading
+                  span.heroIntro__title <em>Bridal</em> <br class="visible-lg">like never before.
+                  span.heroIntro__copy.sub-heading
+                    | Introducing the Bespoke Bridal Collection. Customizable, exclusive designs made for the modern bride: elevated and elegant, with just a touch of irreverence.
+
+  / Section tag
+  .container
+    .row
+      .sectionIntroTag
+        .col-md-12.heading-overlay-wrapper
+          h1.heading-overlay Bridal gets bespoke
+
+    .row
+      .col-md-6
+        .contentBox.contentBox__imgWithCaption--verticalBottom.contentBox__ictaHighlight--horictaPriceht
+
+          .row
+            .col-md-12
+              .imgWrapper
+                img src="http://fakeimg.pl/1447x1930/"
+
+          .row
+            .col-md-9
+              .copyWrapper.contentBox__bg--white.contentBox__imgWithCaption--overlay
+                .itemInfo
+                  h3.itemInfo__title Dress name
+                  p.itemInfo__copy Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia pariatur, laudantium eius provident.
+                  a.itemInfo__ctaWrap.itemInfo__ctaWrap--ctaWithSeparator
+                    .itemInfo__cta.itemInfo__ctaCopy
+                      .link-underline Shop & Customize
+                    .itemInfo__cta.itemInfo__ctaPrice $1.200
+
+      .col-md-6
+        .contentBox.contentBox__bg--marble
+          .copyWrapper
+            .itemInfo
+              h3.title Wedding Atelier App
+              p.itemInfo__copy Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium optio soluta animi sint vel totam delectus.
+              a.itemInfo_ctaWrap.link-underline Enter the App now
+
+    .row
+      .contentBox.contentBox__imgCopyImg.contentBox__imgWithCaption--verticalMiddle
+        .imgWrapper
+        .copyWrapper.contentBox__bg--white
+          .itemInfo
+            h4.itemInfo__title Dress name
+            p.itemInfo__copy Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia pariatur, laudantium eius provident.
+            a.itemInfo__ctaWrap
+              .itemInfo__shopCustomize Shop & Customize
+              .itemInfo__itemPrice $1.200
+        .imgWrapper
