@@ -42,7 +42,8 @@ module Skus
     end
 
     def custom
-      @customization_value_ids
+      Array
+        .wrap(@customization_value_ids)
         .map { |vid| "#{CUSTOM_MARKER}#{vid}" }.join.presence || CUSTOM_MARKER
     end
 

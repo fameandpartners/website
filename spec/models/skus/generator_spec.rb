@@ -26,6 +26,15 @@ describe Skus::Generator do
       end
     end
 
+    context 'given nil attributes' do
+      let(:attributes) { { style_number: nil, size: nil, color_id: nil, height: nil, customization_value_ids: nil } }
+
+      it 'does not raise errors' do
+        generator = described_class.new(attributes)
+        expect { generator.call }.not_to raise_error
+      end
+    end
+
     context 'product does not have personalizations' do
       let(:attributes) { { style_number: 'WithoutCustomizations', size: 'US4/AU8', color_id: '525' } }
 
