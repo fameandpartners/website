@@ -19,10 +19,58 @@ var DressPreview = React.createClass({
     this.isLoading();
   },
 
+  componentWillReceiveProps: function (nextProps) {
+    this.isLoading();
+  },
+
   isLoading: function () {
     var that = this;
     $(this.refs.dressPreview).imagesLoaded({background: true}).done(function (instance) {
         that.setState({loading: false});
+    });
+  },
+
+  getImage: function () {
+    var customizations = this.props.selectedOptions;
+    var silhouette = customizations.silhouette ? customizations.silhouette.description : '';
+    var fabric = customizations.fabric ? customizations.fabric.name.split('-').map(function(word){return word[0];}).join('') : 'HG';
+    var colour = customizations.colour ? customizations.colour.name : 'BLACK';
+    var style = 'S' + (customizations.style ? customizations.style.id : 0);
+    var fit = 'F' + (customizations.fit ? customizations.fit.id : 0);
+    var length = 'AK';
+    if(customizations.length) {
+      switch (customizations.length.name) {
+        case 'ankle':
+          length = 'AK';
+          break;
+        case 'petti':
+          length = 'PT';
+          break;
+        case 'midi':
+          length = 'MD';
+          break;
+        case 'mini':
+          length = 'MN';
+          break;
+        case 'maxi':
+          length = 'MX';
+          break;
+        case 'knee':
+          length = 'KN';
+          break;
+        default:
+      }
+    }
+
+    var basePath = '/assets/wedding-atelier/dresses/';
+    var imageName = [silhouette, fabric, colour, style, fit, length].join('-').toUpperCase() + '-';
+    return ['FRONT', 'BACK'].map(function (type) {
+      return {
+        thumbnail: basePath + '180x260/' + imageName + type + '.png',
+        moodboard: basePath + '280x404/' + imageName + type + '.png',
+        normal: basePath + '900x1300/' + imageName + type + '.jpg',
+        large: basePath + '1800x2600/' + imageName + type + '.jpg'
+      };
     });
   },
 
@@ -49,9 +97,9 @@ var DressPreview = React.createClass({
     this.setState({showDetails: false});
   },
 
-  renderThumbnails: function () {
+  renderThumbnails: function (images) {
     var that = this;
-    var thumbnails = this.props.images.map(function (image, index) {
+    var thumbnails = images.map(function (image, index) {
       var classes = classNames({
         'dress-preview-thumbnails-item': true,
         'selected': index === that.state.selectedImageIndex
@@ -60,7 +108,7 @@ var DressPreview = React.createClass({
 
       return (
         <li key={key} className={classes} onClick={that.thumbnailSelectedHandle.bind(null, index)}>
-          <img src={image.thumbnailUrl} />
+          <img src={image.thumbnail} />
         </li>
       );
     });
@@ -73,12 +121,12 @@ var DressPreview = React.createClass({
   },
 
   render: function() {
-    var previewImage = this.props.images[this.state.selectedImageIndex];
+    var images = this.getImage();
 
     return (
       <div ref="dressPreview" className="dress-preview">
         <div className="preview">
-          <img src={previewImage.url} style={{visibility: this.state.loading? 'hidden' : 'visible'}}/>
+          <img src={images[this.state.selectedImageIndex].normal} style={{visibility: this.state.loading? 'hidden' : 'visible'}}/>
           <ImageLoader loading={this.state.loading} />
         </div>
         <div className="dress-preview-controls">
@@ -105,7 +153,7 @@ var DressPreview = React.createClass({
         <div
           className="dress-preview-pagination"
           style={{display: this.state.showDetails? 'none':'block'}}>
-          {this.renderThumbnails()}
+          {this.renderThumbnails(images)}
         </div>
         <ZoomModal
           images={this.props.images}
