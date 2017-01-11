@@ -113,6 +113,13 @@ class CtaPrice extends React.Component {
         <ul className="est-delivery">
           <li>Free Shipping</li>
           <li>Estimated delivery, {this.props.product.delivery_period} business days</li>
+          {(() => {
+            if (this.props.product.delivery_delay) {
+              return(
+                <li>We're experiencing a high order volume right now, so it's taking longer than usual to handcraft each made-to-order garment. We'll be back to our normal timeline of 7-10 days soon.</li>
+              );
+            }
+          })()}
         </ul>
         <Modal
           style={MODAL_STYLE}
