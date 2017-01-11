@@ -72,6 +72,7 @@ Spree::Product.class_eval do
   attr_accessible :master_attributes
 
   SIZE_CHARTS = SizeChart::CHARTS.keys
+  CNY_DELIVERY_PERIOD = '3 - 4 weeks'
   validates_inclusion_of :size_chart, in: SIZE_CHARTS
 
   def name_with_sku
@@ -332,7 +333,12 @@ Spree::Product.class_eval do
   end
 
   def delivery_period
-    minimum_delivery_period
+    # TODO: probably should be at Policy
+    if Features.active?(:cny_delivery_delays)
+      CNY_DELIVERY_PERIOD
+    else
+      minimum_delivery_period
+    end
   end
 
   # Min delivery period got from taxons
