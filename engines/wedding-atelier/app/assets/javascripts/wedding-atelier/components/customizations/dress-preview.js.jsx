@@ -31,36 +31,14 @@ var DressPreview = React.createClass({
   },
 
   getImage: function () {
+    var lengthMap = { ankle: 'AK', petti: 'PT', midi: 'MD', mini: 'MN', maxi: 'MX', knee: 'KN'};
     var customizations = this.props.selectedOptions;
     var silhouette = customizations.silhouette ? customizations.silhouette.description : '';
     var fabric = customizations.fabric ? customizations.fabric.name.split('-').map(function(word){return word[0];}).join('') : 'HG';
     var colour = customizations.colour ? customizations.colour.name : 'BLACK';
     var style = 'S' + (customizations.style ? customizations.style.id : 0);
     var fit = 'F' + (customizations.fit ? customizations.fit.id : 0);
-    var length = 'AK';
-    if(customizations.length) {
-      switch (customizations.length.name) {
-        case 'ankle':
-          length = 'AK';
-          break;
-        case 'petti':
-          length = 'PT';
-          break;
-        case 'midi':
-          length = 'MD';
-          break;
-        case 'mini':
-          length = 'MN';
-          break;
-        case 'maxi':
-          length = 'MX';
-          break;
-        case 'knee':
-          length = 'KN';
-          break;
-        default:
-      }
-    }
+    var length = customizations.length ? lengthMap[customizations.length.name] || 'AK' : 'AK';
 
     var basePath = '/assets/wedding-atelier/dresses/';
     var imageName = [silhouette, fabric, colour, style, fit, length].join('-').toUpperCase() + '-';
