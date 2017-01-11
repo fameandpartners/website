@@ -57,7 +57,6 @@ var CustomizationsMenuMobile = React.createClass({
       <div className="customizations-menu-mobile">
         <div className="customizations-menu-mobile-body">
           <DressPreview selectedOptions={this.props.selectedOptions}
-            images={[{ thumbnailUrl: '/assets/wedding-atelier/customization_experience/default_dress.png', url: '/assets/wedding-atelier/customization_experience/dress_preview.png'}, { thumbnailUrl: '/assets/wedding-atelier/customization_experience/default_dress.png', url: '/assets/wedding-atelier/customization_experience/dress_preview.png'}]}
             onZoomInCallback={this.props.goToSlide.bind(null, 0)}
             onZoomOutCallback={this.props.goToSlide.bind(null, 1)}/>
           <h1>

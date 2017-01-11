@@ -143,7 +143,6 @@ var AddToCartButton = React.createClass({
       length_id: customizations.length.id,
       fabric_id: customizations.fabric.id,
       customizations_ids: [customizations.fit.id, customizations.style.id]
-      //making_options_ids: ""
     }
     shoppingCart = new helpers.ShoppingCart({});
     shoppingCart.addProduct(attrs);
