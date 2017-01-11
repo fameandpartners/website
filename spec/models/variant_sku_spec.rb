@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+# 11th January 2017: SKU Generation is now handled by the `Skus::Generator`. These tests are somehow duplicated
+
 RSpec.describe VariantSku do
   let(:style_number)     { 'OmGWtFBBq' }
   let(:dress)            { create :dress, sku: style_number }

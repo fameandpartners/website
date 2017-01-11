@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+# 11th January 2017: SKU Generation is now handled by the `Skus::Generator`. These tests are somehow duplicated
+
 RSpec.describe CustomItemSku do
   let(:custom_colour) { create :product_colour, name: 'pink' }
   let(:custom_size)   { create :product_size, size_template: 3 }
