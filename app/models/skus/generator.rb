@@ -4,7 +4,7 @@
 
 module Skus
   class Generator
-    CUSTOM_MARKER = CustomItemSku::CUSTOM_MARKER
+    CUSTOM_MARKER = 'X'.freeze
 
     # @param [String] style_number. Example: "FPS1234"
     # @param [String] size. Example: "US0/AU4"

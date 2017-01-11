@@ -2,8 +2,6 @@
 class CustomItemSku
   attr_reader :line_item
 
-  CUSTOM_MARKER = "X".freeze
-
   def initialize(line_item)
     @line_item = line_item
   end
@@ -22,7 +20,7 @@ class CustomItemSku
     Raven.capture_exception(e)
     NewRelic::Agent.notice_error(e, line_item_id: line_item.id)
 
-    "#{line_item.variant.sku}#{CUSTOM_MARKER}"
+    "#{line_item.variant.sku}#{Skus::Generator::CUSTOM_MARKER}"
   end
 
   def style_number
