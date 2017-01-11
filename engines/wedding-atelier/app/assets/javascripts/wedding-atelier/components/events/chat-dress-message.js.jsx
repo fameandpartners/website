@@ -7,7 +7,7 @@ var ChatDressMessage = React.createClass({
         author: React.PropTypes.string,
         color: React.PropTypes.object,
         id: React.PropTypes.number,
-        love_count: React.PropTypes.number,
+        likes_count: React.PropTypes.number,
         price: React.PropTypes.number,
         value: React.PropTypes.string,
         liked: React.PropTypes.bool
@@ -87,7 +87,7 @@ var ChatDressMessage = React.createClass({
               <div className="col-xs-3 chat-likes-container">
                 <div className="likes">
                   <span className={loveClass} onClick={this.handleLoveIt}></span>
-                  <span>({dress.love_count})</span>
+                  <span>({dress.likes_count})</span>
                 </div>
               </div>
 

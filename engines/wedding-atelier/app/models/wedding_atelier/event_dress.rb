@@ -16,6 +16,8 @@ module WeddingAtelier
     belongs_to :length,
                class_name: 'Spree::OptionValue'
 
+    has_many :likes, class_name: 'WeddingAtelier::Like'
+
     attr_accessible :fit_id,
                     :style_id,
                     :color_id,
@@ -27,6 +29,18 @@ module WeddingAtelier
                     :height
 
   validates_presence_of :product
+
+  def liked_by?(user)
+    likes.find_by_user_id(user.id).present?
+  end
+
+  def like_by(user)
+    likes.create(user_id: user.id)
+  end
+
+  def dislike_by(user)
+    likes.find_by_user_id(user.id).destroy
+  end
 
   end
 end

@@ -1,6 +1,6 @@
 module WeddingAtelier
   class EventDressSerializer < ActiveModel::Serializer
-    attributes :id, :title, :love_count, :author, :price
+    attributes :id, :title, :likes_count, :author, :price, :liked
     has_one :product
     has_one :color, serializer: OptionValueSerializer
 
@@ -16,8 +16,8 @@ module WeddingAtelier
       100
     end
 
-    def love_count
-      1
+    def liked
+      object.liked_by?(scope.current_spree_user)
     end
 
     def image

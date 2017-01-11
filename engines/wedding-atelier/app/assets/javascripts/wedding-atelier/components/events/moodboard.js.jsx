@@ -24,25 +24,36 @@ var MoodBoardEvent = React.createClass({
     this.refs.Chat.forceUpdate();
   },
 
-  handleLikeDress: function(dress, callback) {
-    var event = _extends({}, this.state.event);
-    var dress = _.findWhere(event.dresses, {id: dress.id});
+  handleLikeDress: function(dress) {
+    var that = this,
+        event = _extends({}, that.state.event),
+        method = dress.liked ? 'DELETE' : 'POST',
+        url = this.props.event_path + '/dresses/' + dress.id + '/likes',
+        dress = _.findWhere(event.dresses, {id: dress.id});
 
-    if (dress.liked) {
-      dress.love_count--;
-    } else {
-      dress.love_count++;
-    }
+    $.ajax({
+      url: url,
+      method: method,
+      dataType: 'json',
+      success: function(data){
+        if(method === 'POST'){
+          dress.likes_count++;
+          dress.liked = true;
+        }else{
+          dress.likes_count--;
+          dress.liked = false;
+        }
+        that.refs.Chat.sendNotification({
+          type: "dress-like",
+          dress: dress
+        });
 
-    dress.liked = !dress.liked;
-
-    this.refs.Chat.sendNotification({
-      type: "dress-like",
-      dress: dress
-    });
-
-    this.setDresses(event.dresses);
-    callback();
+        that.setDresses(event.dresses);
+      },
+      error: function(data){
+        // TODO add notification after is merged.
+      }
+    })
   },
 
   getInitialState: function () {

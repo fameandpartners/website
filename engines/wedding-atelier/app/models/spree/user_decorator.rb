@@ -13,6 +13,7 @@ Spree::User.class_eval do
   has_many :event_assistants, class_name: 'WeddingAtelier::EventAssistant'
   has_many :events, through: :event_assistants, source: :event
   has_many :wedding_atelier_dresses, class_name: 'WeddingAtelier::EventDress'
+  has_many :likes, class_name: 'WeddingAtelier::Like'
   accepts_nested_attributes_for :events, :user_profile
   rolify role_cname: 'WeddingAtelier::EventRole', role_join_table_name: 'wedding_atelier_users_event_roles'
 

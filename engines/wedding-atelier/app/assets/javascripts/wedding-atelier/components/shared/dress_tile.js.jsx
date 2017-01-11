@@ -10,7 +10,7 @@ var DressTile = React.createClass({
       image: React.PropTypes.string,
       author: React.PropTypes.string,
       price: React.PropTypes.number,
-      love_count: React.PropTypes.number,
+      likes_count: React.PropTypes.number,
       liked: React.PropTypes.bool
     })
   },
@@ -37,7 +37,7 @@ var DressTile = React.createClass({
           </div>
           <div className="dress-box-header">
             <div className="likes">
-              <span className={loveClass} onClick={this.handleLoveIt}></span> {this.props.dress.love_count}
+              <span className={loveClass} onClick={this.handleLoveIt}></span> {this.props.dress.likes_count}
             </div>
             <a href="#" className="icon-close pull-right"></a>
           </div>
