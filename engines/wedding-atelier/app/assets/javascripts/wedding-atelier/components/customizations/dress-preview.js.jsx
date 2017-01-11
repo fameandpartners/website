@@ -1,7 +1,6 @@
 var DressPreview = React.createClass({
   propTypes: {
     selectedOptions: React.PropTypes.object,
-    images: React.PropTypes.array.isRequired,
     onZoomInCallback: React.PropTypes.func,
     onZoomOutCallback: React.PropTypes.func
   },
@@ -156,7 +155,7 @@ var DressPreview = React.createClass({
           {this.renderThumbnails(images)}
         </div>
         <ZoomModal
-          images={this.props.images}
+          images={images}
           selectedImageIndex={this.state.selectedImageIndex}
           visible={this.state.zoom}
           zoomClosedHandle={this.zoomClosedHandle}

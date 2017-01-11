@@ -1,7 +1,6 @@
 var ZoomModal = React.createClass({
   propTypes: {
       images: React.PropTypes.array.isRequired,
-      defaultImageUrl: React.PropTypes.string,
       selectedImageIndex: React.PropTypes.number.isRequired,
       visible: React.PropTypes.bool.isRequired,
       zoomClosedHandle: React.PropTypes.func.isRequired,
@@ -32,7 +31,7 @@ var ZoomModal = React.createClass({
 
       return (
         <li key={key} className={classes} onClick={that.props.thumbnailSelectedHandle.bind(null, index)}>
-          <img src={image.thumbnailUrl} />
+          <img src={image.thumbnail} />
         </li>
       );
     });
@@ -51,7 +50,7 @@ var ZoomModal = React.createClass({
       <div ref="zoomModal" className="zoom-modal" style={{display: this.props.visible? 'block':'none'}}>
         <div className="close-zoom" onClick={this.props.zoomClosedHandle}></div>
         <div className="zoom-modal-image">
-          <img src={image ? image.url : this.props.defaultImageUrl} style={{visibility: this.state.loading? 'hidden':'visible'}}/>
+          <img src={image.large} style={{visibility: this.state.loading? 'hidden':'visible'}}/>
           <ImageLoader loading={this.state.loading} />
         </div>
         <div className="zoom-modal-pagination">
