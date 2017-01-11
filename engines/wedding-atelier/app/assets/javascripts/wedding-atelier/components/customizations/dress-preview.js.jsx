@@ -96,6 +96,12 @@ var DressPreview = React.createClass({
     this.setState({showDetails: false});
   },
 
+  imageNotFoundHandle: function (e) {
+    var image = e.target;
+    image.src = '/assets/wedding-atelier/dresses/not-found.gif';
+    return true;
+  },
+
   renderThumbnails: function (images) {
     var that = this;
     var thumbnails = images.map(function (image, index) {
@@ -107,7 +113,7 @@ var DressPreview = React.createClass({
 
       return (
         <li key={key} className={classes} onClick={that.thumbnailSelectedHandle.bind(null, index)}>
-          <img src={image.thumbnail} />
+          <img src={image.thumbnail} onError={that.imageNotFoundHandle}/>
         </li>
       );
     });
