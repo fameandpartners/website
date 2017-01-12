@@ -29,6 +29,7 @@ label {
 /* [Checkbox]
 -------------------------------------------------------*/
 .checkbox {
+  text-align: center;
 
   label {
     color: $pinkish-grey-two;
@@ -36,7 +37,7 @@ label {
     font-size: .85rem;
     text-transform: none;
     margin-bottom: 15px;
-    margin-left: 44px;
+    padding-left: 0;
   }
 
   [type="checkbox"] {
@@ -52,8 +53,20 @@ label {
       cursor: pointer;
     }
 
+    ~ label .text {
+      display: inline;
+    }
+
     &:checked + label span {
       background: image-url('wedding-atelier/sprite_check.png') -12px -9px no-repeat;
+    }
+  }
+
+  @include screen-sm {
+    text-align: left;
+
+    label {
+      margin-left: 44px;
     }
   }
 }

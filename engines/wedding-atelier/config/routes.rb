@@ -28,5 +28,5 @@ WeddingAtelier::Engine.routes.draw do
     resources :assistants, only: [:destroy]
   end
 
-  get '/my_account', to: 'accounts#show'
+  get '/my_account', to: 'accounts#show', :as => :my_account
 end
